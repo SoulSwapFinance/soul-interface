@@ -5,7 +5,7 @@
 The SoulSwap SDK is used heavily throughout the Soul Interface. You might like to clone this library and link it for various reasons, such as debugging, extracting, or even further developing the SDK.
 
 ```sh
-git clone https://github.com/soulswap/soulswap-sdk.git && cd soulswap-sdk && git checkout canary && yarn link
+git clone https://github.com/soulswap/soulswap-sdk.git && cd soulswap-sdk && git checkout prod && yarn link
 ```
 
 In the Soul Interface repository you'd link this package by running this command.
