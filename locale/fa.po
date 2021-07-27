@@ -4,7 +4,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: lokalise.com\n"
-"Project-Id-Version: SushiSwap Interface\n"
+"Project-Id-Version: SoulSwap Interface\n"
 "PO-Revision-Date: 2021-07-19 14:00\n"
 "Last-Translator: lokalise.com\n"
 "Language-Team: lokalise.com\n\n"
@@ -15,10 +15,10 @@ msgstr ""
 
 msgid ""
 "(COMING SOON) Accrue automatic yield through flash loans and"
-"SUSHI strategies"
+"SOUL strategies"
 msgstr ""
 
-msgid "(COMING SOON) Accrue automatic yield through flash loans and\nSUSHI strategies"
+msgid "(COMING SOON) Accrue automatic yield through flash loans and\nSOUL strategies"
 msgstr ""
 
 msgid "{0} Deposited"
@@ -76,10 +76,10 @@ msgstr ""
 msgid "Add liquidity"
 msgstr ""
 
-msgid "Add Sushi to your Metamask wallet"
+msgid "Add Soul to your Metamask wallet"
 msgstr ""
 
-msgid "Add xSushi to your Metamask wallet"
+msgid "Add SPELL to your Metamask wallet"
 msgstr ""
 
 msgid "Amount of Tokens"
@@ -184,13 +184,13 @@ msgstr ""
 msgid "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
 msgstr ""
 
-msgid "Check out Sushi on Polygon (Matic)"
+msgid "Check out Soul on Polygon (Matic)"
 msgstr ""
 
 msgid "Claim"
 msgstr ""
 
-msgid "Claim SUSHI"
+msgid "Claim SOUL"
 msgstr ""
 
 msgid "Claimed"
@@ -261,7 +261,7 @@ msgstr ""
 msgid "Deposit"
 msgstr ""
 
-msgid "Deposit SUSHI into BentoBox"
+msgid "Deposit SOUL into BentoBox"
 msgstr ""
 
 msgid "Deposit tokens into BentoBox for all the yields"
@@ -285,10 +285,10 @@ msgstr ""
 msgid "Docs"
 msgstr ""
 
-msgid "Documentation for developers of Sushi."
+msgid "Documentation for developers of Soul."
 msgstr ""
 
-msgid "Documentation for users of Sushi."
+msgid "Documentation for users of Soul."
 msgstr ""
 
 msgid "Don't see a pool you joined? <0>Import it.</0>"
@@ -337,27 +337,27 @@ msgstr ""
 
 #, fuzzy
 msgid ""
-"For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SUSHI"
-"proportional to your share of the SushiBar. When your SUSHI is staked into the SushiBar, you receive"
-"xSUSHI in return for voting rights and a fully composable token that can interact with other protocols."
-"Your xSUSHI is continuously compounding, when you unstake you will receive all the originally deposited"
-"SUSHI and any additional from fees."
+"For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL"
+"proportional to your share of the SpellBound. When your SOUL is staked into the SpellBound, you receive"
+"SPELL in return for voting rights and a fully composable token that can interact with other protocols."
+"Your SPELL is continuously compounding, when you unstake you will receive all the originally deposited"
+"SOUL and any additional from fees."
 msgstr ""
-"For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SUSHI"
-"proportional to your share of the SushiBar. When your SUSHI is staked into the SushiBar, you recieve"
-"xSUSHI in return for voting rights and a fully composable token that can interact with other protocols."
-"Your xSUSHI is continuously compounding, when you unstake you will receive all the originally deposited"
-"SUSHI and any additional from fees."
+"For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL"
+"proportional to your share of the SpellBound. When your SOUL is staked into the SpellBound, you recieve"
+"SPELL in return for voting rights and a fully composable token that can interact with other protocols."
+"Your SPELL is continuously compounding, when you unstake you will receive all the originally deposited"
+"SOUL and any additional from fees."
 
 msgid ""
-"For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SUSHI"
-"proportional to your share of the SushiBar. When your SUSHI is staked into the SushiBar, you recieve"
-"xSUSHI in return for voting rights and a fully composable token that can interact with other protocols."
-"Your xSUSHI is continuously compounding, when you unstake you will receive all the originally deposited"
-"SUSHI and any additional from fees."
+"For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL"
+"proportional to your share of the SpellBound. When your SOUL is staked into the SpellBound, you recieve"
+"SPELL in return for voting rights and a fully composable token that can interact with other protocols."
+"Your SPELL is continuously compounding, when you unstake you will receive all the originally deposited"
+"SOUL and any additional from fees."
 msgstr ""
 
-msgid "For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SUSHI\nproportional to your share of the SushiBar. When your SUSHI is staked into the SushiBar, you recieve\nxSUSHI in return for voting rights and a fully composable token that can interact with other protocols.\nYour xSUSHI is continuously compounding, when you unstake you will receive all the originally deposited\nSUSHI and any additional from fees."
+msgid "For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL\nproportional to your share of the SpellBound. When your SOUL is staked into the SpellBound, you recieve\nSPELL in return for voting rights and a fully composable token that can interact with other protocols.\nYour SPELL is continuously compounding, when you unstake you will receive all the originally deposited\nSOUL and any additional from fees."
 msgstr ""
 
 msgid "From"
@@ -370,24 +370,24 @@ msgid "Gain exposure to tokens without reducing your assets. Leverage will enabl
 msgstr ""
 
 msgid ""
-"Gain governance rights with xSUSHI and earn 5% APR (0.05% of"
+"Gain governance rights with SPELL and earn 5% APR (0.05% of"
 "all swaps from all chains)"
 msgstr ""
 
-msgid "Gain governance rights with xSUSHI and earn 5% APR (0.05% of\nall swaps from all chains)"
+msgid "Gain governance rights with SPELL and earn 5% APR (0.05% of\nall swaps from all chains)"
 msgstr ""
 
 msgid "Hardware Wallet"
 msgstr ""
 
-msgid "Harvest {0} SUSHI"
+msgid "Harvest {0} SOUL"
 msgstr ""
 
 #, fuzzy
-msgid "Harvest {0} SUSHI & {1} ALCX"
+msgid "Harvest {0} SOUL & {1} ALCX"
 msgstr ""
 
-msgid "Harvest {0} SUSHI & {1} MATIC"
+msgid "Harvest {0} SOUL & {1} MATIC"
 msgstr ""
 
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers. It's as easy as deposit and withdraw whenever you want."
@@ -399,10 +399,10 @@ msgstr ""
 msgid "Health"
 msgstr ""
 
-msgid "Helpful Sushi Tools"
+msgid "Helpful Soul Tools"
 msgstr ""
 
-msgid "Historical Total Locked: {0} SUSHI"
+msgid "Historical Total Locked: {0} SOUL"
 msgstr ""
 
 msgid "Historical Total Locked: Connect Wallet"
@@ -543,7 +543,7 @@ msgstr ""
 msgid "Max"
 msgstr ""
 
-msgid "Maximize yield by staking SUSHI for xSUSHI"
+msgid "Maximize yield by staking SOUL for SPELL"
 msgstr ""
 
 msgid "Maximum sold"
@@ -604,7 +604,7 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-msgid "One click SUSHI → xSUSHI → aXSUSHI"
+msgid "One click SOUL → SPELL → aSPELL"
 msgstr ""
 
 msgid "ONLY USE THIS MODE IF YOU KNOW WHAT YOU ARE DOING."
@@ -665,7 +665,7 @@ msgid "Positions"
 msgstr ""
 
 #, fuzzy
-msgid "Pour a hot bowl of MISO, the new <0>token launchpad</0> from SUSHI"
+msgid "Pour a hot bowl of MISO, the new <0>token launchpad</0> from SOUL"
 msgstr ""
 
 msgid "Price"
@@ -756,28 +756,28 @@ msgid "Stake"
 msgstr ""
 
 msgid ""
-"Stake into xSUSHI add collateral as axSUSHI on Aave all in"
+"Stake into SPELL add collateral as aSPELL on Aave all in"
 "one click"
 msgstr ""
 
-msgid "Stake into xSUSHI add collateral as axSUSHI on Aave all in\none click"
+msgid "Stake into SPELL add collateral as aSPELL on Aave all in\none click"
 msgstr ""
 
-msgid "Stake SUSHI"
+msgid "Stake SOUL"
 msgstr ""
 
-msgid "Stake SUSHI for xSUSHI"
+msgid "Stake SOUL for SPELL"
 msgstr ""
 
-msgid "Stake your SUSHI into xSUSHI for ~5% APY. Deposit your xSUSHI into Aave as aXSUSHI to earn collateral interest and borrowing power. All in one click."
+msgid "Stake your SOUL into SPELL for ~5% APY. Deposit your SPELL into Aave as aSPELL to earn collateral interest and borrowing power. All in one click."
 msgstr ""
 
 msgid ""
-"Stake your SUSHI into xSUSHI for ~5% APY. No impermanent loss, no loss of governance rights."
+"Stake your SOUL into SPELL for ~5% APY. No impermanent loss, no loss of governance rights."
 "Continuously compounding."
 msgstr ""
 
-msgid "Stake your SUSHI into xSUSHI for ~5% APY. No impermanent loss, no loss of governance rights.\nContinuously compounding."
+msgid "Stake your SOUL into SPELL for ~5% APY. No impermanent loss, no loss of governance rights.\nContinuously compounding."
 msgstr ""
 
 msgid "Staking APR"
@@ -792,25 +792,25 @@ msgstr ""
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr ""
 
-msgid "SUSHI {0}/{1} Burned"
+msgid "SOUL {0}/{1} Burned"
 msgstr ""
 
-msgid "Sushi allows for swapping of ERC20 compatible tokens across multiple networks"
+msgid "Soul allows for swapping of ERC20 compatible tokens across multiple networks"
 msgstr ""
 
-msgid "SUSHI Balance"
+msgid "SOUL Balance"
 msgstr ""
 
-msgid "SUSHI Balance: {sushiBalance}"
+msgid "SOUL Balance: {soulBalance}"
 msgstr ""
 
-msgid "Sushi is a supporter of Open Source."
+msgid "Soul is a supporter of Open Source."
 msgstr ""
 
-msgid "SushiBar"
+msgid "SpellBound"
 msgstr ""
 
-msgid "SushiBar: Make SUSHI work for you"
+msgid "SpellBound: Make SOUL work for you"
 msgstr ""
 
 msgid "Swap"
@@ -820,7 +820,7 @@ msgid "Swap Anyway"
 msgstr ""
 
 #, fuzzy
-msgid "Swap for SAK3 token on SUSHI now. Click here to swap."
+msgid "Swap for SAK3 token on SOUL now. Click here to swap."
 msgstr ""
 
 msgid "Swap From (est.):"
@@ -847,7 +847,7 @@ msgstr ""
 msgid "The transaction cannot succeed due to error: {0}. This is probably an issue with one of the tokens you are swapping."
 msgstr ""
 
-msgid "Things you can do with your SUSHI"
+msgid "Things you can do with your SOUL"
 msgstr ""
 
 msgid "This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance."
@@ -859,7 +859,7 @@ msgstr ""
 msgid "To (estimated)"
 msgstr ""
 
-msgid "To withdraw into SUSHI, go to Aave and remove axSUSHI as collateral and then to SushiBar to unstake. A full unwind will be avaialble soon."
+msgid "To withdraw into SOUL, go to Aave and remove aSPELL as collateral and then to SpellBound to unstake. A full unwind will be avaialble soon."
 msgstr ""
 
 msgid "Toggle Expert Mode"
@@ -943,7 +943,7 @@ msgstr ""
 msgid "View Stats"
 msgstr ""
 
-msgid "View SushiBar Stats"
+msgid "View SpellBound Stats"
 msgstr ""
 
 msgid "View Your Liquidity Positions"
@@ -952,7 +952,7 @@ msgstr ""
 msgid "View Your Liquidity Positions >"
 msgstr ""
 
-msgid "View your SushiBar Portfolio"
+msgid "View your SpellBound Portfolio"
 msgstr ""
 
 msgid "Wallet"
@@ -961,7 +961,7 @@ msgstr ""
 msgid "Wallet Balance"
 msgstr ""
 
-msgid "Welcome to Sushi on Polygon (Matic)"
+msgid "Welcome to Soul on Polygon (Matic)"
 msgstr ""
 
 msgid "When creating a pair you are the first liquidity provider. The ratio of tokens you add will set the price of this pool. Once you are happy with the rate, click supply to review"
@@ -980,14 +980,14 @@ msgid "Wrong Network"
 msgstr ""
 
 msgid ""
-"xSUSHI automatically earn fees (0.05% of all swaps, including multichain swaps) proportional"
-"to your share of the SushiBar."
+"SPELL automatically earn fees (0.05% of all swaps, including multichain swaps) proportional"
+"to your share of the SpellBound."
 msgstr ""
 
-msgid "xSUSHI automatically earn fees (0.05% of all swaps, including multichain swaps) proportional\nto your share of the SushiBar."
+msgid "SPELL automatically earn fees (0.05% of all swaps, including multichain swaps) proportional\nto your share of the SpellBound."
 msgstr ""
 
-msgid "xSUSHI Balance"
+msgid "SPELL Balance"
 msgstr ""
 
 msgid "Yesterday's APR"
@@ -1022,10 +1022,10 @@ msgstr ""
 msgid "You will receive"
 msgstr ""
 
-msgid "Your {exchange} {0}/{1} liquidity will become SushiSwap {2}/{3} liquidity."
+msgid "Your {exchange} {0}/{1} liquidity will become SoulSwap {2}/{3} liquidity."
 msgstr ""
 
-msgid "Your Claimable SUSHI this Week"
+msgid "Your Claimable SOUL this Week"
 msgstr ""
 
 msgid "Your Liquidity"
@@ -1046,7 +1046,7 @@ msgstr ""
 msgid "Your Staked"
 msgstr ""
 
-msgid "Your SushiBar Stats"
+msgid "Your SpellBound Stats"
 msgstr ""
 
 msgid "Your total pool tokens"
