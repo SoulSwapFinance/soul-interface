@@ -575,7 +575,7 @@ msgstr ""
 msgid "Max"
 msgstr "Максимум"
 
-msgid "Maximize yield by staking SOUL for SPELL"
+msgid "Maximize yield by staking your SOUL for SPELL"
 msgstr ""
 
 msgid "Maximum sent"
