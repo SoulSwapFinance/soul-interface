@@ -3,13 +3,13 @@ import {
   ARGENT_WALLET_DETECTOR_ABI,
   ARGENT_WALLET_DETECTOR_MAINNET_ADDRESS,
 } from '../constants/abis/argent-wallet-detector'
+import { ROUTER_ADDRESS, SPELL_ADDRESS, SOUL_ADDRESS } from '@soulswap/sdk'
 import {
   BAR_ADDRESS,
   ChainId,
   FACTORY_ADDRESS,
   MAKER_ADDRESS,
   MASTERCHEF_ADDRESS as MASTERCHEF_V1_ADDRESS,
-  ROUTER_ADDRESS,
   SUSHI_ADDRESS,
   TIMELOCK_ADDRESS,
   WETH9,
@@ -32,6 +32,7 @@ import ALCX_REWARDER_ABI from '../constants/abis/alcx-rewarder.json'
 import CLONE_REWARDER_ABI from '../constants/abis/clone-rewarder.json'
 import ARCHER_ROUTER_ABI from '../constants/abis/archer-router.json'
 import BAR_ABI from '../constants/abis/bar.json'
+import SPELL_ABI from '../constants/abis/bar.json' // TODO: add and update address
 import BASE_SWAPPER_ABI from '../constants/abis/swapper.json'
 import BENTOBOX_ABI from '../constants/abis/bentobox.json'
 import BORING_HELPER_ABI from '../constants/abis/boring-helper.json'
@@ -50,7 +51,8 @@ import IUniswapV2PairABI from '../constants/abis/uniswap-v2-pair.json'
 import KASHIPAIR_ABI from '../constants/abis/kashipair.json'
 import MAKER_ABI from '../constants/abis/maker.json'
 import MASTERCHEF_V1_ABI from '../constants/abis/masterchef.json'
-import SOUL_SUMMONER_ABI from '../constants/abis/masterchef-v2.json'
+import MASTERCHEF_ABI from '../constants/abis/masterchef-v2.json'
+import SOUL_SUMMONER_ABI from '../constants/abis/masterchef-v2.json' // TODO: UPDATE
 import MEOWSHI_ABI from '../constants/abis/meowshi.json'
 import MERKLE_DISTRIBUTOR_ABI from '../constants/abis/merkle-distributor.json'
 import MINICHEF_ABI from '../constants/abis/minichef-v2.json'
@@ -62,6 +64,7 @@ import SUSHIROLL_ABI from '@sushiswap/core/abi/SushiRoll.json'
 import SUSHISWAP_MULTISWAPPER_ABI from '../constants/abis/sushiswapmultiswapper.json'
 import SUSHISWAP_TWAP_ORACLE_ABI from '../constants/abis/sushiswap-slp-oracle.json'
 import SUSHI_ABI from '../constants/abis/sushi.json'
+import SOUL_ABI from '../constants/abis/sushi.json' // TODO: update
 import TIMELOCK_ABI from '../constants/abis/timelock.json'
 import UNI_FACTORY_ABI from '../constants/abis/uniswap-v2-factory.json'
 import WETH9_ABI from '../constants/abis/weth.json'
@@ -170,14 +173,24 @@ export function useSushiContract(withSignerIfPossible = true): Contract | null {
   return useContract(chainId && SUSHI_ADDRESS[chainId], SUSHI_ABI, withSignerIfPossible)
 }
 
+export function useSoulContract(withSignerIfPossible = true): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOUL_ADDRESS[chainId], SOUL_ABI, withSignerIfPossible)
+}
+
 export function useMasterChefV1Contract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && MASTERCHEF_V1_ADDRESS[chainId], MASTERCHEF_V1_ABI, withSignerIfPossible)
 }
 
+export function useMasterChefContract(withSignerIfPossible?: boolean): Contract | null {
+  return useContract('0xEF0881eC094552b2e128Cf945EF17a6752B4Ec5d', SOUL_SUMMONER_ABI, withSignerIfPossible)
+}
+
 export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
   return useContract('0xEF0881eC094552b2e128Cf945EF17a6752B4Ec5d', SOUL_SUMMONER_ABI, withSignerIfPossible)
 }
+
 export function useMiniChefContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && MINICHEF_ADDRESS[chainId], MINICHEF_ABI, withSignerIfPossible)
@@ -200,6 +213,11 @@ export function useRouterContract(useArcher = false, withSignerIfPossible?: bool
 export function useSushiBarContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && BAR_ADDRESS[chainId], BAR_ABI, withSignerIfPossible)
+}
+
+export function useSpellBoundContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SPELL_ADDRESS[chainId], SPELL_ABI, withSignerIfPossible)
 }
 
 export function useMakerContract(): Contract | null {

@@ -1,4 +1,5 @@
-import { Currency, CurrencyAmount, Percent, ROUTER_ADDRESS, TradeType, Trade as V2Trade } from '@sushiswap/sdk'
+import { ROUTER_ADDRESS } from '@soulswap/sdk'
+import { Currency, CurrencyAmount, Percent, TradeType, Trade as V2Trade } from '@sushiswap/sdk'
 import { useCallback, useMemo } from 'react'
 import { useHasPendingApproval, useTransactionAdder } from '../state/transactions/hooks'
 

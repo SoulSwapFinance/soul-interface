@@ -116,7 +116,7 @@ export default function Farm(): JSX.Element {
 
       const defaultRewards = [defaultReward]
 
-      if (pool.chef === Chef.MASTERCHEF_V2) {
+      if (pool.chef === Chef.SOUL_SUMMONER) {
         // override for mcv2...
         pool.owner.totalAllocPoint = masterChefV1TotalAllocPoint
 
@@ -249,7 +249,7 @@ export default function Farm(): JSX.Element {
     portfolio: (farm) => farm?.amount && !farm.amount.isZero(),
     sushi: (farm) => farm.pair.type === PairType.SWAP && farm.allocPoint !== '0',
     kashi: (farm) => farm.pair.type === PairType.KASHI && farm.allocPoint !== '0',
-    '2x': (farm) => (farm.chef === Chef.MASTERCHEF_V2 || farm.chef === Chef.MINICHEF) && farm.allocPoint !== '0',
+    '2x': (farm) => (farm.chef === Chef.SOUL_SUMMONER || farm.chef === Chef.MINICHEF) && farm.allocPoint !== '0',
   }
 
   const data = farms
@@ -277,8 +277,8 @@ export default function Farm(): JSX.Element {
   return (
     <Container id="farm-page" className="grid h-full grid-cols-4 py-4 mx-auto md:py-8 lg:py-12 gap-9" maxWidth="7xl">
       <Head>
-        <title>Farm | Sushi</title>
-        <meta key="description" name="description" content="Farm SUSHI" />
+        <title>Farm | Soul</title>
+        <meta key="description" name="description" content="Farm SOUL" />
       </Head>
       <div className={classNames('sticky top-0 hidden lg:block md:col-span-1')} style={{ maxHeight: '40rem' }}>
         <Menu positionsLength={positions.length} />

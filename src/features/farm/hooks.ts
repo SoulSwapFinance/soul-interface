@@ -10,7 +10,7 @@ import { Zero } from '@ethersproject/constants'
 import concat from 'lodash/concat'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import zip from 'lodash/zip'
-import { masterChef } from '../../services/graph'
+import { masterChefV1 } from '../../services/graph'
 
 export function useChefContract(chef: Chef) {
   const masterChefV1Contract = useMasterChefV1Contract()
