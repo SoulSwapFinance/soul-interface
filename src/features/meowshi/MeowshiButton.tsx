@@ -1,11 +1,11 @@
 import { ApprovalState, useActiveWeb3React } from '../../hooks'
 import { Field, MeowshiState } from '../../pages/tools/meowshi'
 import React, { FC, useMemo, useState } from 'react'
-import { SUSHI, XSUSHI } from '../../constants'
+import { SOUL, SPELL } from '../../constants'
 import TransactionConfirmationModal, { ConfirmationModalContent } from '../../modals/TransactionConfirmationModal'
 
 import Button from '../../components/Button'
-import { ChainId } from '@sushiswap/sdk'
+import { ChainId } from '@soulswap/sdk'
 import Dots from '../../components/Dots'
 import { ethers } from 'ethers'
 import { t } from '@lingui/macro'
@@ -27,10 +27,10 @@ const MeowshiButton: FC<MeowshiButtonProps> = ({ meowshiState }) => {
     open: false,
   })
   const { account, chainId } = useActiveWeb3React()
-  const sushiBalance = useTokenBalance(account, SUSHI[ChainId.MAINNET])
-  const xSushiBalance = useTokenBalance(account, XSUSHI)
-  const { approvalState, approve, meow, unmeow, meowSushi, unmeowSushi } = useMeowshi(
-    currencies[Field.INPUT] === SUSHI[ChainId.MAINNET]
+  const soulBalance = useTokenBalance(account, SOUL[ChainId.MAINNET])
+  const spellBalance = useTokenBalance(account, SPELL)
+  const { approvalState, approve, meow, unmeow, meowSoul, unmeowSoul } = useMeowshi(
+    currencies[Field.INPUT] === SOUL[ChainId.MAINNET]
   )
   const balance = useTokenBalance(account, currencies[Field.INPUT])
   const parsedInputAmount = tryParseAmount(fields[Field.INPUT], currencies[Field.INPUT])
@@ -52,29 +52,29 @@ const MeowshiButton: FC<MeowshiButtonProps> = ({ meowshiState }) => {
 
     let tx
     if (doMeow) {
-      if (currencies[Field.INPUT]?.symbol === 'SUSHI') {
-        tx = await meowSushi({
-          value: ethers.utils.parseUnits(fields[Field.INPUT], sushiBalance.currency.decimals),
-          decimals: sushiBalance.currency.decimals,
+      if (currencies[Field.INPUT]?.symbol === 'SOUL') {
+        tx = await meowSoul({
+          value: ethers.utils.parseUnits(fields[Field.INPUT], soulBalance.currency.decimals),
+          decimals: soulBalance.currency.decimals,
         })
       }
-      if (currencies[Field.INPUT]?.symbol === 'xSUSHI') {
+      if (currencies[Field.INPUT]?.symbol === 'SPELL') {
         tx = await meow({
-          value: ethers.utils.parseUnits(fields[Field.INPUT], sushiBalance.currency.decimals),
-          decimals: xSushiBalance.currency.decimals,
+          value: ethers.utils.parseUnits(fields[Field.INPUT], soulBalance.currency.decimals),
+          decimals: spellBalance.currency.decimals,
         })
       }
     } else {
-      if (currencies[Field.OUTPUT]?.symbol === 'SUSHI') {
-        tx = await unmeowSushi({
-          value: ethers.utils.parseUnits(fields[Field.INPUT], sushiBalance.currency.decimals),
-          decimals: xSushiBalance.currency.decimals,
+      if (currencies[Field.OUTPUT]?.symbol === 'SOUL') {
+        tx = await unmeowSoul({
+          value: ethers.utils.parseUnits(fields[Field.INPUT], soulBalance.currency.decimals),
+          decimals: spellBalance.currency.decimals,
         })
       }
-      if (currencies[Field.OUTPUT]?.symbol === 'xSUSHI') {
+      if (currencies[Field.OUTPUT]?.symbol === 'SPELL') {
         tx = await unmeow({
-          value: ethers.utils.parseUnits(fields[Field.INPUT], sushiBalance.currency.decimals),
-          decimals: xSushiBalance.currency.decimals,
+          value: ethers.utils.parseUnits(fields[Field.INPUT], soulBalance.currency.decimals),
+          decimals: spellBalance.currency.decimals,
         })
       }
     }

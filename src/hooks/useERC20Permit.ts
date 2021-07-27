@@ -37,30 +37,30 @@ const PERMITTABLE_TOKENS: {
       name: 'Dai Stablecoin',
       version: '1',
     },
-    [SOUL[1].address]: { type: PermitType.AMOUNT, name: 'SushiSwap' },
+    // [SOUL[1].address]: { type: PermitType.AMOUNT, name: 'SoulSwap' },
   },
-  [4]: {
-    ['0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735']: {
-      type: PermitType.ALLOWED,
-      name: 'Dai Stablecoin',
-      version: '1',
-    },
-    [SOUL[4].address]: { type: PermitType.AMOUNT, name: 'SushiSwap' },
-  },
-  [3]: {
-    [SOUL[3].address]: { type: PermitType.AMOUNT, name: 'SushiSwap' },
-    ['0x07865c6E87B9F70255377e024ace6630C1Eaa37F']: {
-      type: PermitType.AMOUNT,
-      name: 'USD Coin',
-      version: '2',
-    },
-  },
-  [5]: {
-    [SOUL[5].address]: { type: PermitType.AMOUNT, name: 'SushiSwap' },
-  },
-  [42]: {
-    [SOUL[42].address]: { type: PermitType.AMOUNT, name: 'SushiSwap' },
-  },
+  // [4]: {
+  //   ['0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735']: {
+  //     type: PermitType.ALLOWED,
+  //     name: 'Dai Stablecoin',
+  //     version: '1',
+  //   },
+  //   // [SOUL[4].address]: { type: PermitType.AMOUNT, name: 'SoulSwap' },
+  // },
+  // [3]: {
+  //   [SOUL[3].address]: { type: PermitType.AMOUNT, name: 'SoulSwap' },
+  //   ['0x07865c6E87B9F70255377e024ace6630C1Eaa37F']: {
+  //     type: PermitType.AMOUNT,
+  //     name: 'USD Coin',
+  //     version: '2',
+  //   },
+  // },
+  // [5]: {
+  //   [SOUL[5].address]: { type: PermitType.AMOUNT, name: 'SoulSwap' },
+  // },
+  // [42]: {
+  //   [SOUL[42].address]: { type: PermitType.AMOUNT, name: 'SoulSwap' },
+  // },
 }
 
 export enum UseERC20PermitState {
@@ -268,7 +268,7 @@ export function useERC20Permit(
 
 const REMOVE_V2_LIQUIDITY_PERMIT_INFO: PermitInfo = {
   version: '1',
-  name: 'SushiSwap LP Token',
+  name: 'SoulSwap LP Token',
   type: PermitType.AMOUNT,
 }
 

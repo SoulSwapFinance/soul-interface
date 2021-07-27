@@ -159,7 +159,7 @@ const useZapperFarms = () => {
             type: farmDetails.type, // KMP or SLP
             depositedLP: deposited,
             depositedUSD: depositedUSD,
-            pendingSushi: pending,
+            pendingSoul: pending,
           }
         })
       setFarms({ farms: sorted, userFarms: userFarms })

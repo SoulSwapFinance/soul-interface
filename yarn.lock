@@ -3090,10 +3090,10 @@
   resolved "https://registry.yarnpkg.com/@solidity-parser/parser/-/parser-0.8.2.tgz#a6a5e93ac8dca6884a99a532f133beba59b87b69"
   integrity sha512-8LySx3qrNXPgB5JiULfG10O3V7QTxI/TLzSw5hFQhXWSkVxZBAv4rZQ0sYgLEbc8g3L2lmnujj1hKul38Eu5NQ==
 
-"@soulswap/sdk@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@soulswap/sdk/-/sdk-0.0.5.tgz#55fe0182877c2ac55fd573d51c58d9c2bdce591a"
-  integrity sha512-qfLK2G28mLkfd6e3kFCErKc/GtrPxLFf6FdToEWVIKmW/LZS+0MWU8LxeTPZErrWgtE94xFt4LKhICgINgDKcA==
+"@soulswap/sdk@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@soulswap/sdk/-/sdk-0.0.6.tgz#2c4e6b4001971c9805a7783782ec7a24ef7d6ce3"
+  integrity sha512-TosiHShBIg6BCMBfX2c25YhM9V7/tRqXvq6YEi6WamCE5QXjN1okNRmCsNAfy5joRoSBU2iYRWfOAfhwnDZZvg==
   dependencies:
     big.js "^5.2.2"
     decimal.js-light "^2.5.0"
@@ -3162,9 +3162,9 @@
   resolved "https://registry.yarnpkg.com/@sushiswap/limit-order-pair-list/-/limit-order-pair-list-0.2.1.tgz#652999e7f5a11bf15e32e0384a7fe6c646fab2fd"
   integrity sha512-Lht7xL+kPEv4zGRZsolpi3lGRScI4a3gl5P7yqAp0lOetXPXlKhwGXX3wSEBjXtOls3H2vTvyKv8FZxr9Bk20Q==
 
-"@sushiswap/sdk@5.0.0-canary.24":
+"@soulswap/sdk@5.0.0-canary.24":
   version "5.0.0-canary.24"
-  resolved "https://registry.yarnpkg.com/@sushiswap/sdk/-/sdk-5.0.0-canary.24.tgz#cf49e506cc223003f0243a31852567f43ae09577"
+  resolved "https://registry.yarnpkg.com/@soulswap/sdk/-/sdk-5.0.0-canary.24.tgz#cf49e506cc223003f0243a31852567f43ae09577"
   integrity sha512-VP0mGKYe7hCTCCrKIhGlgiNEjMTv6+QqlRswDb0YGuu77woZCKVT5KkX1dfR1hCutZduujO+O/iyK4mWovczUA==
   dependencies:
     "@sushiswap/core" "^2.0.0-canary.0"
@@ -3175,9 +3175,9 @@
     tiny-warning "^1.0.3"
     toformat "^2.0.0"
 
-"@sushiswap/sdk@^5.0.0-canary.22":
+"@soulswap/sdk@^5.0.0-canary.22":
   version "5.0.0-canary.23"
-  resolved "https://registry.yarnpkg.com/@sushiswap/sdk/-/sdk-5.0.0-canary.23.tgz#f7b9eae939d160832bfff7ddfd4270f588622da1"
+  resolved "https://registry.yarnpkg.com/@soulswap/sdk/-/sdk-5.0.0-canary.23.tgz#f7b9eae939d160832bfff7ddfd4270f588622da1"
   integrity sha512-SIvrPD+GwCPjmay7ULZU4p8Wm7kA3c5nfKqkGv6YXoXc/4qH1/52nL+TQwvyx0OHMYLG24D6PeTKBBnJWK8QWQ==
   dependencies:
     "@sushiswap/core" "^2.0.0-canary.0"
@@ -13281,7 +13281,7 @@ limitorderv2-sdk@^0.1.57:
   integrity sha512-IEd92w8Xl6QBhNAUvYDmcO5KcT4ayS1nZpdZgAyWMwWipduHPBB/xPxxjIurCe0tN/cogPu9yaSTy42Kuzhrjw==
   dependencies:
     "@ethersproject/experimental" "^5.3.0"
-    "@sushiswap/sdk" "^5.0.0-canary.22"
+    "@soulswap/sdk" "^5.0.0-canary.22"
     axios "^0.21.1"
     big.js "^5.2.2"
     decimal.js-light "^2.5.1"

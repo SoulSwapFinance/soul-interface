@@ -1,4 +1,4 @@
-import { ChainId, Currency, NATIVE, Token, WNATIVE } from '@soulswap/sdk'
+import { ChainId, NATIVE, WNATIVE } from '@soulswap/sdk'
 import React, { createContext, useCallback, useContext, useEffect, useReducer } from 'react'
 import { ZERO, e10, maximum, minimum } from '../../functions/math'
 import {
@@ -50,7 +50,7 @@ interface State {
         ethRate: BigNumber
         sushiRate: BigNumber
         btcRate: BigNumber
-        pendingSushi: BigNumber
+        pendingSoul: BigNumber
         blockTimeStamp: BigNumber
         masterContractApproved: boolean[]
       }
@@ -70,7 +70,7 @@ const initialState: State = {
     ethRate: ZERO,
     sushiRate: ZERO,
     btcRate: ZERO,
-    pendingSushi: ZERO,
+    pendingSoul: ZERO,
     blockTimeStamp: ZERO,
     masterContractApproved: [],
   },

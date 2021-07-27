@@ -40,7 +40,7 @@ const useSushiRoll = (version: 'v1' | 'v2' = 'v2') => {
 
         ReactGA.event({
           category: 'Migrate',
-          action: `${from}->Sushiswap`,
+          action: `${from}->Soulswap`,
           label: 'migrate',
         })
 

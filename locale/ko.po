@@ -414,7 +414,7 @@ msgstr "하드웨어 지갑"
 msgid "Harmony Bridge"
 msgstr ""
 
-msgid "Harvest {0} SUSHI {1}"
+msgid "Harvest {0} SOUL {1}"
 msgstr ""
 
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
@@ -838,6 +838,9 @@ msgstr "허가에 서명하는 동안 문제가 발생했습니다. 이는 Trezo
 msgid "Soul is a supporter of Open Source."
 msgstr ""
 
+msgid "SoulSwap"
+msgstr ""
+
 msgid "Spanish"
 msgstr ""
 
@@ -865,9 +868,6 @@ msgid "Supplying {0} {1} and {2} {3}"
 msgstr "{0} {1} 및 {2} {3} 공급 중"
 
 msgid "Sushi is a supporter of Open Source."
-msgstr ""
-
-msgid "SushiSwap"
 msgstr ""
 
 msgid "Swap"

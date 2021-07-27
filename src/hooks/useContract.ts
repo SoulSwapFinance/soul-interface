@@ -11,41 +11,35 @@ import {
 } from '../constants/abis/argent-wallet-detector'
 import {
   ChainId,
+  MAKER_ADDRESS,
   FACTORY_ADDRESS,
   ROUTER_ADDRESS,
   SPELL_ADDRESS,
   SOUL_ADDRESS,
+  SOUL_GUIDE_ADDRESS,
   // SOULSWAP_MULTISWAPPER_ADDRESS,
   SOULSWAP_SWAPPER_ADDRESS,
+  SOUL_SUMMONER_ADDRESS as MASTERCHEF_V1_ADDRESS,
+  TIMELOCK_ADDRESS,
+  WNATIVE,
 } from '@soulswap/sdk'
 import {
-  BAR_ADDRESS,
-  MAKER_ADDRESS,
-  MASTERCHEF_ADDRESS as MASTERCHEF_V1_ADDRESS,
-  SUSHI_ADDRESS,
-  TIMELOCK_ADDRESS,
-  // WETH9,
-  WNATIVE,
-} from '@sushiswap/sdk'
-import {
-  BENTOBOX_ADDRESS,
-  BORING_HELPER_ADDRESS,
+  COFFIN_BOX_ADDRESS,
   CHAINLINK_ORACLE_ADDRESS,
-  KASHI_ADDRESS,
-  // SUSHISWAP_MULTISWAPPER_ADDRESS,
-  SUSHISWAP_SWAPPER_ADDRESS,
-  SUSHISWAP_TWAP_0_ORACLE_ADDRESS,
-  SUSHISWAP_TWAP_1_ORACLE_ADDRESS,
+  UNDERWORLD_ADDRESS,
+  // SOULSWAP_MULTISWAPPER_ADDRESS,
+  // SOUL_GUIDE_ADDRESS,
+  // SOULSWAP_SWAPPER_ADDRESS,
+  SOULSWAP_TWAP_0_ORACLE_ADDRESS,
+  SOULSWAP_TWAP_1_ORACLE_ADDRESS,
 } from '../constants/kashi'
-import { MERKLE_DISTRIBUTOR_ADDRESS, SUSHI } from '../constants'
+import { MERKLE_DISTRIBUTOR_ADDRESS, SOUL } from '../constants'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from '../constants/multicall'
-
 import ALCX_REWARDER_ABI from '../constants/abis/alcx-rewarder.json'
 import CLONE_REWARDER_ABI from '../constants/abis/clone-rewarder.json'
 import ARCHER_ROUTER_ABI from '../constants/abis/archer-router.json'
 import BASE_SWAPPER_ABI from '../constants/abis/swapper.json'
 import BENTOBOX_ABI from '../constants/abis/bentobox.json'
-import BORING_HELPER_ABI from '../constants/abis/boring-helper.json'
 import CHAINLINK_ORACLE_ABI from '../constants/abis/chainlink-oracle.json'
 import COMPLEX_REWARDER_ABI from '../constants/abis/complex-rewarder.json'
 import { Contract } from '@ethersproject/contracts'
@@ -64,6 +58,7 @@ import MAKER_ABI from '../constants/abis/maker.json'
 import MASTERCHEF_V1_ABI from '../constants/abis/masterchef.json'
 // import MASTERCHEF_ABI from '../constants/abis/masterchef-v2.json'
 import SOUL_SUMMONER_ABI from '../constants/abis/masterchef-v2.json' // TODO: update abi
+import SOUL_GUIDE_ABI from '../constants/abis/soul-guide.json' // TODO: update abi
 import SPELL_ABI from '../constants/abis/bar.json' // TODO: update abi
 import MEOWSHI_ABI from '../constants/abis/meowshi.json'
 import MERKLE_DISTRIBUTOR_ABI from '../constants/abis/merkle-distributor.json'
@@ -73,11 +68,10 @@ import MULTICALL2_ABI from '../constants/abis/multicall2.json'
 import PENDING_ABI from '../constants/abis/pending.json'
 import ROUTER_ABI from '../constants/abis/router.json'
 import SAAVE_ABI from '../constants/abis/saave.json'
-import SOUL_ABI from '../constants/abis/sushi.json' // TODO: update
+import SOUL_ABI from '../constants/abis/soul.json'
 import SUSHIROLL_ABI from '@sushiswap/core/abi/SushiRoll.json'
-// import SUSHISWAP_MULTISWAPPER_ABI from '../constants/abis/sushiswapmultiswapper.json'
-import SUSHISWAP_TWAP_ORACLE_ABI from '../constants/abis/sushiswap-slp-oracle.json'
-import SUSHI_ABI from '../constants/abis/sushi.json'
+// import SOULSWAP_MULTISWAPPER_ABI from '../constants/abis/sushiswapmultiswapper.json'
+import SOULSWAP_TWAP_ORACLE_ABI from '../constants/abis/sushiswap-slp-oracle.json'
 import TIMELOCK_ABI from '../constants/abis/timelock.json'
 import UNI_FACTORY_ABI from '../constants/abis/uniswap-v2-factory.json'
 import WETH9_ABI from '../constants/abis/weth.json'
@@ -87,9 +81,7 @@ import LIMIT_ORDER_HELPER_ABI from '../constants/abis/limit-order-helper.json'
 import { getContract } from '../functions/contract'
 import { useActiveWeb3React } from './useActiveWeb3React'
 import { useMemo } from 'react'
-
 import { getVerifyingContract } from 'limitorderv2-sdk'
-import { ImportToken } from '../modals/SearchModal/ImportToken'
 
 const UNI_FACTORY_ADDRESS = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f'
 
@@ -163,9 +155,9 @@ export function useMerkleDistributorContract(): Contract | null {
   return useContract(chainId ? MERKLE_DISTRIBUTOR_ADDRESS[chainId] : undefined, MERKLE_DISTRIBUTOR_ABI, true)
 }
 
-export function useBoringHelperContract(): Contract | null {
+export function useSoulGuideContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && BORING_HELPER_ADDRESS[chainId], BORING_HELPER_ABI, false)
+  return useContract(chainId && SOUL_GUIDE_ADDRESS[chainId], SOUL_GUIDE_ABI, false)
 }
 
 export function usePendingContract(): Contract | null {
@@ -180,11 +172,6 @@ export function useMulticallContract(): Contract | null {
 export function useMulticall2Contract() {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && MULTICALL2_ADDRESS[chainId], MULTICALL2_ABI, false)
-}
-
-export function useSushiContract(withSignerIfPossible = true): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SUSHI_ADDRESS[chainId], SUSHI_ABI, withSignerIfPossible)
 }
 
 export function useSoulContract(withSignerIfPossible = true): Contract | null {
@@ -245,21 +232,16 @@ export function useTimelockContract(): Contract | null {
 
 export function useBentoBoxContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && BENTOBOX_ADDRESS[chainId], BENTOBOX_ABI, withSignerIfPossible)
+  return useContract(chainId && COFFIN_BOX_ADDRESS[chainId], BENTOBOX_ABI, withSignerIfPossible)
 }
 
 export function useKashiPairContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && KASHI_ADDRESS[chainId], KASHIPAIR_ABI, withSignerIfPossible)
+  return useContract(chainId && UNDERWORLD_ADDRESS[chainId], KASHIPAIR_ABI, withSignerIfPossible)
 }
 
 export function useKashiPairCloneContract(address: string, withSignerIfPossible?: boolean): Contract | null {
   return useContract(address, KASHIPAIR_ABI, withSignerIfPossible)
-}
-
-export function useSushiSwapSwapper(): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SUSHISWAP_SWAPPER_ADDRESS[chainId], BASE_SWAPPER_ABI, false)
 }
 
 export function useSoulSwapSwapper(): Contract | null {
@@ -496,20 +478,20 @@ export function useDashboardContract(): Contract | null {
   return useContract(address, DASHBOARD_ABI, false)
 }
 
-export function useSushiSwapTWAP0Oracle(): Contract | null {
-  return useContract(SUSHISWAP_TWAP_0_ORACLE_ADDRESS, SUSHISWAP_TWAP_ORACLE_ABI)
+export function useSoulSwapTWAP0Oracle(): Contract | null {
+  return useContract(SOULSWAP_TWAP_0_ORACLE_ADDRESS, SOULSWAP_TWAP_ORACLE_ABI)
 }
 
-export function useSushiSwapTWAP1Oracle(): Contract | null {
-  return useContract(SUSHISWAP_TWAP_1_ORACLE_ADDRESS, SUSHISWAP_TWAP_ORACLE_ABI)
+export function useSoulSwapTWAP1Oracle(): Contract | null {
+  return useContract(SOULSWAP_TWAP_1_ORACLE_ADDRESS, SOULSWAP_TWAP_ORACLE_ABI)
 }
 
-export function useSushiSwapTWAPContract(address?: string): Contract | null {
-  const TWAP_0 = useContract(SUSHISWAP_TWAP_0_ORACLE_ADDRESS, SUSHISWAP_TWAP_ORACLE_ABI)
-  const TWAP_1 = useContract(SUSHISWAP_TWAP_1_ORACLE_ADDRESS, SUSHISWAP_TWAP_ORACLE_ABI)
-  if (address === SUSHISWAP_TWAP_0_ORACLE_ADDRESS) {
+export function useSoulSwapTWAPContract(address?: string): Contract | null {
+  const TWAP_0 = useContract(SOULSWAP_TWAP_0_ORACLE_ADDRESS, SOULSWAP_TWAP_ORACLE_ABI)
+  const TWAP_1 = useContract(SOULSWAP_TWAP_1_ORACLE_ADDRESS, SOULSWAP_TWAP_ORACLE_ABI)
+  if (address === SOULSWAP_TWAP_0_ORACLE_ADDRESS) {
     return TWAP_0
-  } else if (address === SUSHISWAP_TWAP_1_ORACLE_ADDRESS) {
+  } else if (address === SOULSWAP_TWAP_1_ORACLE_ADDRESS) {
     return TWAP_1
   }
   return undefined

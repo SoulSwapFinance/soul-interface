@@ -1,6 +1,5 @@
-import { ChainId, CurrencyAmount, JSBI, MASTERCHEF_ADDRESS as MASTERCHEF_V1_ADDRESS } from '@soulswap/sdk'
-// import { MASTERCHEF_ADDRESS as SOUL_SUMMONER_ADDRESS } from '@soulswap/sdk'
-import { Chef, PairType } from './enum'
+import { ChainId, CurrencyAmount, JSBI, SOUL_SUMMONER_ADDRESS as MASTERCHEF_V1_ADDRESS } from '@soulswap/sdk'
+import { Chef } from './enum'
 import { SOUL_SUMMONER_ADDRESS, MINICHEF_ADDRESS, SOUL } from '../../constants'
 import { NEVER_RELOAD, useSingleCallResult, useSingleContractMultipleData } from '../../state/multicall/hooks'
 import { useCallback, useMemo } from 'react'

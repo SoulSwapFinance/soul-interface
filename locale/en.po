@@ -426,8 +426,8 @@ msgstr "Hardware Wallet"
 msgid "Harmony Bridge"
 msgstr "Harmony Bridge"
 
-msgid "Harvest {0} SUSHI {1}"
-msgstr "Harvest {0} SUSHI {1}"
+msgid "Harvest {0} SOUL {1}"
+msgstr "Harvest {0} SOUL {1}"
 
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
 msgstr "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
@@ -854,6 +854,9 @@ msgstr "Something went wrong during signing of the approval. This is expected fo
 msgid "Soul is a supporter of Open Source."
 msgstr "Soul is a supporter of Open Source."
 
+msgid "SoulSwap"
+msgstr "SoulSwap"
+
 msgid "Spanish"
 msgstr "Spanish"
 
@@ -884,9 +887,6 @@ msgstr "Supplying {0} {1} and {2} {3}"
 
 msgid "Sushi is a supporter of Open Source."
 msgstr "Sushi is a supporter of Open Source."
-
-msgid "SushiSwap"
-msgstr "SushiSwap"
 
 msgid "Swap"
 msgstr "Swap"

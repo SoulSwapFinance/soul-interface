@@ -4,14 +4,14 @@
             { "internalType": "address", "name": "who", "type": "address" },
             { "internalType": "uint256[]", "name": "pids", "type": "uint256[]" }
         ],
-        "name": "getPendingSushi",
+        "name": "getPendingSoul",
         "outputs": [
             {
                 "components": [
                     { "internalType": "uint256", "name": "totalAllocPoint", "type": "uint256" },
                     { "internalType": "uint256", "name": "poolLength", "type": "uint256" }
                 ],
-                "internalType": "struct BoringSushiPending.PoolsInfo",
+                "internalType": "struct BoringSoulPending.PoolsInfo",
                 "name": "",
                 "type": "tuple"
             },
@@ -20,9 +20,9 @@
                     { "internalType": "uint256", "name": "pid", "type": "uint256" },
                     { "internalType": "address", "name": "lpToken", "type": "address" },
                     { "internalType": "uint256", "name": "allocPoint", "type": "uint256" },
-                    { "internalType": "uint256", "name": "pendingSushi", "type": "uint256" }
+                    { "internalType": "uint256", "name": "pendingSoul", "type": "uint256" }
                 ],
-                "internalType": "struct BoringSushiPending.PoolInfo[]",
+                "internalType": "struct BoringSoulPending.PoolInfo[]",
                 "name": "",
                 "type": "tuple[]"
             }

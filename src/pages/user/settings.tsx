@@ -5,7 +5,7 @@ export default function Settings() {
     <Container id="settings-page" className="py-4 space-y-3 md:py-8 lg:py-12" maxWidth="2xl">
       <Head>
         <title>Settings | Soul</title>
-        <meta name="description" content="SushiSwap Settings..." />
+        <meta name="description" content="SoulSwap Settings..." />
       </Head>
     </Container>
   )

@@ -1,5 +1,5 @@
-import { ChainId, CurrencyAmount, Token } from '@sushiswap/sdk'
-import { useBoringHelperContract, useDashboardContract, useQuickSwapFactoryContract } from '../hooks/useContract'
+import { ChainId, CurrencyAmount, Token } from '@soulswap/sdk'
+import { useSoulGuideContract, useDashboardContract, useQuickSwapFactoryContract } from '../hooks/useContract'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import LPToken from '../types/LPToken'
@@ -19,7 +19,7 @@ export interface LPTokensState {
 
 const useLPTokensState = () => {
   const { account, chainId } = useActiveWeb3React()
-  const boringHelperContract = useBoringHelperContract()
+  const soulGuideContract = useSoulGuideContract()
   const dashboardContract = useDashboardContract()
   const quickSwapFactoryContract = useQuickSwapFactoryContract()
   const [lpTokens, setLPTokens] = useState<LPToken[]>([])
@@ -38,7 +38,7 @@ const useLPTokensState = () => {
         const pairs = (
           await Promise.all(
             pages.map((page) =>
-              boringHelperContract?.getPairs(
+              soulGuideContract?.getPairs(
                 '0x5757371414417b8C6CAad45bAeF941aBc7d3Ab32', // Factory address
                 page,
                 Math.min(page + LP_TOKENS_LIMIT, length.toNumber())
@@ -50,11 +50,11 @@ const useLPTokensState = () => {
           .filter((pair) => pair.token0 !== '0x1f6c3E047f529f82f743a7378A212a3d62fAA390')
 
         const pairAddresses = pairs.map((pair) => pair[0])
-        const pollPairs = await boringHelperContract?.pollPairs(account, pairAddresses)
+        const pollPairs = await soulGuideContract?.pollPairs(account, pairAddresses)
         const tokenAddresses = Array.from(
           new Set(pairs.reduce((a: any, b: any) => a.push(b.token, b.token0, b.token1) && a, []))
         ).flat()
-        const tokenDetails = (await boringHelperContract?.getTokenInfo(tokenAddresses)).reduce((acc: any, cur: any) => {
+        const tokenDetails = (await soulGuideContract?.getTokenInfo(tokenAddresses)).reduce((acc: any, cur: any) => {
           acc[cur[0]] = cur
           return acc
         }, {})
@@ -183,13 +183,13 @@ const useLPTokensState = () => {
       setLoading(false)
       updatingLPTokens.current = false
     }
-  }, [chainId, account, boringHelperContract, dashboardContract, quickSwapFactoryContract])
+  }, [chainId, account, soulGuideContract, dashboardContract, quickSwapFactoryContract])
 
   useEffect(() => {
-    if (chainId && account && boringHelperContract && !updatingLPTokens.current) {
+    if (chainId && account && soulGuideContract && !updatingLPTokens.current) {
       updateLPTokens()
     }
-  }, [account, chainId, boringHelperContract, updateLPTokens])
+  }, [account, chainId, soulGuideContract, updateLPTokens])
 
   return {
     updateLPTokens,
