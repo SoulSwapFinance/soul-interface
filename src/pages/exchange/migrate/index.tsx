@@ -1,6 +1,6 @@
 import { ApprovalState, useApproveCallback } from '../../../hooks/useApproveCallback'
 import Button, { ButtonConfirmed } from '../../../components/Button'
-import { ChainId, JSBI } from '@sushiswap/sdk'
+import { ChainId, JSBI } from '@soulswap/sdk'
 import { ChevronDownIcon, XIcon } from '@heroicons/react/outline'
 import React, { useCallback, useEffect, useState } from 'react'
 import { formatUnits, parseUnits } from '@ethersproject/units'

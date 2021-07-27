@@ -32,8 +32,8 @@ msgstr "24 Hours"
 msgid "30 Days"
 msgstr "30 Days"
 
-msgid "A portion of each trade (0.05%) goes to SPELL holders as a protocol incentive."
-msgstr "A portion of each trade (0.05%) goes to SPELL holders as a protocol incentive."
+msgid "A portion of each trade (0.05%) goes to xSOUL holders as a protocol incentive."
+msgstr "A portion of each trade (0.05%) goes to xSOUL holders as a protocol incentive."
 
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
 msgstr "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
@@ -408,10 +408,10 @@ msgid "Gain exposure to tokens without reducing your assets. Leverage will enabl
 msgstr "Gain exposure to tokens without reducing your assets. Leverage will enable you to take short positions against assets and earn from downside movements."
 
 msgid ""
-"Gain governance rights with SPELL and earn 5% APR (0.05% of\n"
+"Gain governance rights with xSOUL and earn 5% APR (0.05% of\n"
 "all swaps from all chains)"
 msgstr ""
-"Gain governance rights with SPELL and earn 5% APR (0.05% of\n"
+"Gain governance rights with xSOUL and earn 5% APR (0.05% of\n"
 "all swaps from all chains)"
 
 msgid "German"
@@ -866,14 +866,14 @@ msgstr "Stake"
 msgid "Stake SOUL"
 msgstr "Stake SOUL"
 
-msgid "Stake SOUL for SPELL"
-msgstr "Stake SOUL for SPELL"
+msgid "Stake SOUL for xSOUL"
+msgstr "Stake SOUL for xSOUL"
 
 msgid ""
-"Stake into SPELL add collateral as aSPELL on Aave all in\n"
+"Stake into xSOUL add collateral as axSOUL on Aave all in\n"
 "one click"
 msgstr ""
-"Stake into SPELL add collateral as aSPELL on Aave all in\n"
+"Stake into xSOUL add collateral as axSOUL on Aave all in\n"
 "one click"
 
 msgid "Staking APR"
@@ -1168,8 +1168,8 @@ msgstr "or the transaction will revert."
 msgid "xDai Bridge"
 msgstr "xDai Bridge"
 
-msgid "SPELL Fee"
-msgstr "SPELL Fee"
+msgid "xSOUL Fee"
+msgstr "xSOUL Fee"
 
 #. js-lingui:icu=%7B0%2C+plural%2C+one+%7BToken%7D+many+%7BTokens%7D%7D&pluralize_on=0
 msgid "Token"

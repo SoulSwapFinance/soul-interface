@@ -30,7 +30,7 @@ msgstr ""
 msgid "30 Days"
 msgstr ""
 
-msgid "A portion of each trade (0.05%) goes to SPELL holders as a protocol incentive."
+msgid "A portion of each trade (0.05%) goes to xSOUL holders as a protocol incentive."
 msgstr ""
 
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
@@ -398,7 +398,7 @@ msgid "Gain exposure to tokens without reducing your assets. Leverage will enabl
 msgstr "자산총액 감소 없이 토큰에 노출됩니다. 레버리지를 사용하면 자산에 대해 숏 포지션을 취하고 하락 시 수익을 올릴 수 있습니다."
 
 msgid ""
-"Gain governance rights with SPELL and earn 5% APR (0.05% of\n"
+"Gain governance rights with xSOUL and earn 5% APR (0.05% of\n"
 "all swaps from all chains)"
 msgstr ""
 
@@ -850,11 +850,11 @@ msgstr "스테이킹"
 msgid "Stake SOUL"
 msgstr ""
 
-msgid "Stake SOUL for SPELL"
+msgid "Stake SOUL for xSOUL"
 msgstr ""
 
 msgid ""
-"Stake into SPELL add collateral as aSPELL on Aave all in\n"
+"Stake into xSOUL add collateral as axSOUL on Aave all in\n"
 "one click"
 msgstr ""
 
@@ -1148,7 +1148,7 @@ msgstr ""
 msgid "xDai Bridge"
 msgstr ""
 
-msgid "SPELL Fee"
+msgid "xSOUL Fee"
 msgstr ""
 
 #. js-lingui:icu=%7B0%2C+plural%2C+one+%7BToken%7D+many+%7BTokens%7D%7D&pluralize_on=0

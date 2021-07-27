@@ -1,4 +1,4 @@
-import { ChainId, Currency, NATIVE, Token } from '@sushiswap/sdk'
+import { ChainId, Currency, NATIVE, Token } from '@soulswap/sdk'
 import React, { KeyboardEvent, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Row, { RowFixed } from '../../components/Row'
 import { filterTokens, useSortedTokensByQuery } from '../../functions/filtering'

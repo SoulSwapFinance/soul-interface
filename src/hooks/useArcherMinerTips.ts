@@ -1,4 +1,4 @@
-import { ChainId } from '@sushiswap/sdk'
+import { ChainId } from '@soulswap/sdk'
 import { useEffect, useState } from 'react'
 import { ARCHER_GAS_URI } from '../constants'
 import useActiveWeb3React from './useActiveWeb3React'

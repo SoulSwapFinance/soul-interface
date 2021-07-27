@@ -17,8 +17,6 @@ msgid ""
 "(COMING SOON) Accrue automatic yield through flash loans and\n"
 "SOUL strategies"
 msgstr ""
-"（即將推出）通過閃電貸和\n"
-"SOUL策略累積自動獲取收益"
 
 msgid "1 Hour"
 msgstr ""
@@ -32,7 +30,7 @@ msgstr ""
 msgid "30 Days"
 msgstr ""
 
-msgid "A portion of each trade (0.05%) goes to SPELL holders as a protocol incentive."
+msgid "A portion of each trade (0.05%) goes to xSOUL holders as a protocol incentive."
 msgstr ""
 
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
@@ -198,7 +196,7 @@ msgid "Chinese"
 msgstr ""
 
 msgid "Claim SOUL"
-msgstr "獲取SOUL"
+msgstr ""
 
 msgid "Claimed"
 msgstr "已獲取"
@@ -287,7 +285,7 @@ msgid "Deposit"
 msgstr "存款"
 
 msgid "Deposit SOUL into BentoBox"
-msgstr "將SOUL存入BentoBox"
+msgstr ""
 
 msgid "Deposit tokens into BentoBox for all the yields"
 msgstr "將代幣存入BentoBox，以獲得所有收益。"
@@ -396,9 +394,9 @@ msgid "Gain exposure to tokens without reducing your assets. Leverage will enabl
 msgstr "在不減少資產的情況下獲得代幣的敞口。杠桿將使您能夠對資產做空，並從下跌趨勢中獲利。"
 
 msgid ""
-"Gain governance rights with SPELL and earn 5% APR (0.05% of\n"
+"Gain governance rights with xSOUL and earn 5% APR (0.05% of\n"
 "all swaps from all chains)"
-msgstr "通過SPELL獲得治理權，並獲得5%的年利率（來自所有鏈上交易手續費的0.05%）"
+msgstr ""
 
 msgid "German"
 msgstr ""
@@ -428,7 +426,7 @@ msgid "Historical Total Locked: Fetching Total"
 msgstr "鎖倉的總數：獲取總數"
 
 msgid "Historical Total Locked: {0} SOUL"
-msgstr "锁仓的总数：{0}SOUL"
+msgstr ""
 
 msgid "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
 msgstr ""
@@ -845,15 +843,13 @@ msgstr "質押"
 msgid "Stake SOUL"
 msgstr ""
 
-msgid "Stake SOUL for SPELL"
-msgstr "將SOUL質押成SPELL"
+msgid "Stake SOUL for xSOUL"
+msgstr ""
 
 msgid ""
-"Stake into SPELL add collateral as aSPELL on Aave all in\n"
+"Stake into xSOUL add collateral as axSOUL on Aave all in\n"
 "one click"
 msgstr ""
-"放入SPELL進行抵押，將抵押品作為aSPELL添加到\n"
-"一鍵中"
 
 msgid "Staking APR"
 msgstr "質押APR"
@@ -907,7 +903,7 @@ msgid "The transaction could not be sent because the deadline has passed. Please
 msgstr ""
 
 msgid "Things you can do with your SOUL"
-msgstr "SOUL可以做的事情"
+msgstr ""
 
 msgid "This token doesn't appear on the active token list(s). Make sure this is the token that you want to trade."
 msgstr ""
@@ -1071,7 +1067,7 @@ msgid "Your"
 msgstr ""
 
 msgid "Your Claimable SOUL this Week"
-msgstr "本周您可領取的SOUL"
+msgstr ""
 
 msgid "Your Liquidity"
 msgstr "您的流動性"
@@ -1145,7 +1141,7 @@ msgstr ""
 msgid "xDai Bridge"
 msgstr ""
 
-msgid "SPELL Fee"
+msgid "xSOUL Fee"
 msgstr ""
 
 #. js-lingui:icu=%7B0%2C+plural%2C+one+%7BToken%7D+many+%7BTokens%7D%7D&pluralize_on=0

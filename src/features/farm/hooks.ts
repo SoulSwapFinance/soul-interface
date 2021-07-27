@@ -1,7 +1,7 @@
-import { ChainId, CurrencyAmount, JSBI, MASTERCHEF_ADDRESS as MASTERCHEF_V1_ADDRESS } from '@sushiswap/sdk'
+import { ChainId, CurrencyAmount, JSBI, MASTERCHEF_ADDRESS as MASTERCHEF_V1_ADDRESS } from '@soulswap/sdk'
 // import { MASTERCHEF_ADDRESS as SOUL_SUMMONER_ADDRESS } from '@soulswap/sdk'
 import { Chef, PairType } from './enum'
-import { SOUL_SUMMONER_ADDRESS, MINICHEF_ADDRESS, SUSHI } from '../../constants'
+import { SOUL_SUMMONER_ADDRESS, MINICHEF_ADDRESS, SOUL } from '../../constants'
 import { NEVER_RELOAD, useSingleCallResult, useSingleContractMultipleData } from '../../state/multicall/hooks'
 import { useCallback, useMemo } from 'react'
 import { useMasterChefV1Contract, useSoulSummonerContract, useMiniChefContract } from '../../hooks'
@@ -71,7 +71,7 @@ export function useUserInfo(farm, token) {
   return amount ? CurrencyAmount.fromRawAmount(token, amount) : undefined
 }
 
-export function usePendingSushi(farm) {
+export function usePendingSoul(farm) {
   const { account, chainId } = useActiveWeb3React()
 
   const contract = useChefContract(farm.chef)
@@ -83,13 +83,13 @@ export function usePendingSushi(farm) {
     return [String(farm.id), String(account)]
   }, [farm, account])
 
-  const result = useSingleCallResult(args ? contract : null, 'pendingSushi', args)?.result
+  const result = useSingleCallResult(args ? contract : null, 'pendingSoul', args)?.result
 
   const value = result?.[0]
 
   const amount = value ? JSBI.BigInt(value.toString()) : undefined
 
-  return amount ? CurrencyAmount.fromRawAmount(SUSHI[chainId], amount) : undefined
+  return amount ? CurrencyAmount.fromRawAmount(SOUL[chainId], amount) : undefined
 }
 
 export function usePendingToken(farm, contract) {
@@ -124,7 +124,7 @@ export function useChefPositions(contract?: Contract | null, rewarder?: Contract
     return [...Array(numberOfPools.toNumber()).keys()].map((pid) => [String(pid), String(account)])
   }, [numberOfPools, account])
 
-  const pendingSushi = useSingleContractMultipleData(args ? contract : null, 'pendingSushi', args)
+  const pendingSoul = useSingleContractMultipleData(args ? contract : null, 'pendingSoul', args)
 
   const userInfo = useSingleContractMultipleData(args ? contract : null, 'userInfo', args)
 
@@ -145,21 +145,21 @@ export function useChefPositions(contract?: Contract | null, rewarder?: Contract
   }, [chainId, contract])
 
   return useMemo(() => {
-    if (!pendingSushi || !userInfo) {
+    if (!pendingSoul || !userInfo) {
       return []
     }
-    return zip(pendingSushi, userInfo)
+    return zip(pendingSoul, userInfo)
       .map((data, i) => ({
         id: args[i][0],
-        pendingSushi: data[0].result?.[0] || Zero,
+        pendingSoul: data[0].result?.[0] || Zero,
         amount: data[1].result?.[0] || Zero,
         chef: getChef(),
         // pendingTokens: data?.[2]?.result,
       }))
-      .filter(({ pendingSushi, amount }) => {
-        return (pendingSushi && !pendingSushi.isZero()) || (amount && !amount.isZero())
+      .filter(({ pendingSoul, amount }) => {
+        return (pendingSoul && !pendingSoul.isZero()) || (amount && !amount.isZero())
       })
-  }, [args, getChef, pendingSushi, userInfo])
+  }, [args, getChef, pendingSoul, userInfo])
 }
 
 export function usePositions() {

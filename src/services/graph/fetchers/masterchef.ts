@@ -9,7 +9,7 @@ import {
   poolsV2Query,
 } from '../queries'
 
-import { ChainId } from '@sushiswap/sdk'
+import { ChainId } from '@soulswap/sdk'
 import { GRAPH_HOST } from '../constants'
 import { request } from 'graphql-request'
 

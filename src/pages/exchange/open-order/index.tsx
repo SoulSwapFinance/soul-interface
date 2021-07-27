@@ -2,7 +2,7 @@ import { useActiveWeb3React, useContract } from '../../../hooks'
 
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import { BigNumber } from 'ethers'
-import { ChainId } from '@sushiswap/sdk'
+import { ChainId } from '@soulswap/sdk'
 import CompletedOrders from '../../../features/open-order/CompletedOrders'
 import Container from '../../../components/Container'
 import DoubleGlowShadow from '../../../components/DoubleGlowShadow'

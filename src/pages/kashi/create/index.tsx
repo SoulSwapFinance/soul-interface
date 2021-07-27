@@ -1,4 +1,4 @@
-import { CHAINLINK_ORACLE_ADDRESS, KASHI_ADDRESS } from '../../../constants/kashi'
+import { CHAINLINK_ORACLE_ADDRESS, UNDERWORLD_ADDRESS } from '../../../constants/kashi'
 import React, { useCallback } from 'react'
 import { useCreateActionHandlers, useCreateState, useDerivedCreateInfo } from '../../../state/create/hook'
 
@@ -7,7 +7,7 @@ import { CHAINLINK_MAPPING } from '../../../constants/chainlink'
 import Card from '../../../components/Card'
 import CardHeader from '../../../components/CardHeader'
 import Container from '../../../components/Container'
-import { Currency } from '@sushiswap/sdk'
+import { Currency } from '@soulswap/sdk'
 import CurrencyInputPanel from '../../../components/CurrencyInputPanel'
 import { Field } from '../../../state/create/actions'
 import Head from 'next/head'
@@ -143,7 +143,7 @@ function Create() {
         oracleData,
       ])
 
-      const tx = await bentoBoxContract?.deploy(chainId && KASHI_ADDRESS[chainId], kashiData, true)
+      const tx = await bentoBoxContract?.deploy(chainId && UNDERWORLD_ADDRESS[chainId], kashiData, true)
 
       addTransaction(tx, {
         summary: `Add Kashi market ${currencies[Field.ASSET].symbol}/${currencies[Field.COLLATERAL].symbol} Chainlink`,

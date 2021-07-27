@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react'
 import useSWR, { SWRConfiguration } from 'swr'
 
-import { ChainId } from '@sushiswap/sdk'
+import { ChainId } from '@soulswap/sdk'
 import { getKashiPairs } from '../fetchers/bentobox'
 import { useActiveWeb3React } from '../../../hooks'
 

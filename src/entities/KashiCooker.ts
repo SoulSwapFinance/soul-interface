@@ -1,5 +1,5 @@
 import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
-import { ChainId, WNATIVE } from '@sushiswap/sdk'
+import { ChainId, WNATIVE } from '@soulswap/sdk'
 import { Contract, ethers } from 'ethers'
 import { ZERO, e10, maximum, minimum } from '../functions/math'
 import { getProviderOrSigner, getSigner } from '../functions/contract'

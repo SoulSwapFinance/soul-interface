@@ -1,4 +1,4 @@
-import { ChainId } from '@sushiswap/sdk'
+import { ChainId } from '@soulswap/sdk'
 import LPToken from '../types/LPToken'
 import ReactGA from 'react-ga'
 import { ethers } from 'ethers'

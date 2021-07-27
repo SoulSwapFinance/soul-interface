@@ -1,5 +1,5 @@
-import { ChainId, Currency, CurrencyAmount, JSBI, Token } from '@sushiswap/sdk'
-import { MERKLE_ROOT, SUSHI } from './../../constants/index'
+import { ChainId, Currency, CurrencyAmount, JSBI, Token } from '@soulswap/sdk'
+import { MERKLE_ROOT, SOUL } from './../../constants/index'
 import { getAddress, isAddress } from '@ethersproject/address'
 import { useEffect, useState } from 'react'
 
@@ -86,7 +86,7 @@ export function useUserUnclaimedAmount(account: string | null | undefined): Curr
   const userClaimData = useUserClaimData(account)
   const canClaim = useUserHasAvailableClaim(account)
 
-  const sushi = chainId ? SUSHI[chainId] : undefined
+  const soul = chainId ? SOUL[chainId] : undefined
 
   // console.log('claimStats:', {
   //   canClaim: canClaim,
@@ -94,11 +94,11 @@ export function useUserUnclaimedAmount(account: string | null | undefined): Curr
   //   sushi: sushi
   // })
 
-  if (!sushi) return undefined
+  if (!soul) return undefined
   if (!canClaim || !userClaimData) {
-    return CurrencyAmount.fromRawAmount(sushi, JSBI.BigInt(0))
+    return CurrencyAmount.fromRawAmount(soul, JSBI.BigInt(0))
   }
-  return CurrencyAmount.fromRawAmount(sushi, JSBI.BigInt(userClaimData.amount))
+  return CurrencyAmount.fromRawAmount(soul, JSBI.BigInt(userClaimData.amount))
 }
 
 export function useClaimCallback(account: string | null | undefined): {

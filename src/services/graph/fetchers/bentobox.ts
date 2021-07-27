@@ -1,6 +1,6 @@
 import { getEthPrice, getTokenPrices, getTokenSubset, getTokens } from './exchange'
 
-import { ChainId } from '@sushiswap/sdk'
+import { ChainId } from '@soulswap/sdk'
 import { GRAPH_HOST } from '../constants'
 import { kashiPairsQuery } from '../queries/bentobox'
 import { request } from 'graphql-request'

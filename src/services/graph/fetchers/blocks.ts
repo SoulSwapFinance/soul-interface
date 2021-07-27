@@ -1,6 +1,6 @@
 import { getUnixTime, startOfHour, startOfMinute, startOfSecond, subDays, subHours } from 'date-fns'
 
-import { ChainId } from '@sushiswap/sdk'
+import { ChainId } from '@soulswap/sdk'
 import { GRAPH_HOST } from '../constants'
 import { blocksQuery } from '../queries'
 import { request } from 'graphql-request'

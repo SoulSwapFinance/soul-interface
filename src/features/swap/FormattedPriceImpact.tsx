@@ -1,5 +1,5 @@
 import { ONE_BIPS } from '../../constants'
-import { Percent } from '@sushiswap/sdk'
+import { Percent } from '@soulswap/sdk'
 import React from 'react'
 import { warningSeverity } from '../../functions/prices'
 

@@ -1,10 +1,10 @@
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
 import { BentoBalance, useBentoBalances } from '../../state/bentobox/hooks'
-import { CurrencyAmount, Token, WNATIVE } from '@sushiswap/sdk'
+import { CurrencyAmount, Token, WNATIVE } from '@soulswap/sdk'
 import React, { useState } from 'react'
 import { useFuse, useSortableData } from '../../hooks'
 
-import { BENTOBOX_ADDRESS } from '../../constants/kashi'
+import { COFFIN_BOX_ADDRESS } from '../../constants/kashi'
 import Back from '../../components/Back'
 import Button from '../../components/Button'
 import Card from '../../components/Card'
@@ -170,7 +170,7 @@ export function Deposit({ token }: { token: BentoBalance & WrappedTokenInfo }): 
       new Token(chainId, token.address, token.tokenInfo.decimals, token.tokenInfo.symbol, token.tokenInfo.name),
       value.toBigNumber(token.tokenInfo.decimals).toString()
     ),
-    chainId && BENTOBOX_ADDRESS[chainId]
+    chainId && COFFIN_BOX_ADDRESS[chainId]
   )
 
   const showApprove =
