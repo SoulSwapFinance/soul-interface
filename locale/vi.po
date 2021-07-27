@@ -573,7 +573,7 @@ msgstr ""
 msgid "Max"
 msgstr "Tối đa"
 
-msgid "Maximize yield by staking SOUL for SPELL"
+msgid "Maximize yield by staking your SOUL for SPELL"
 msgstr ""
 
 msgid "Maximum sent"
@@ -864,9 +864,6 @@ msgstr "APR đặt cược"
 
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "Tổng cung {0} {1} và {2} {3}"
-
-msgid "Sushi is a supporter of Open Source."
-msgstr ""
 
 msgid "Swap"
 msgstr "Hoán đổi"

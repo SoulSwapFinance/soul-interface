@@ -575,7 +575,7 @@ msgstr ""
 msgid "Max"
 msgstr "Max"
 
-msgid "Maximize yield by staking SOUL for SPELL"
+msgid "Maximize yield by staking your SOUL for SPELL"
 msgstr ""
 
 msgid "Maximum sent"
@@ -866,9 +866,6 @@ msgstr "Staking APR"
 
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "Lieferung von {0} {1} und {2} {3}"
-
-msgid "Sushi is a supporter of Open Source."
-msgstr ""
 
 msgid "Swap"
 msgstr "Swap"

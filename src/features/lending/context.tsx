@@ -16,7 +16,7 @@ import { BigNumber } from '@ethersproject/bignumber'
 import Fraction from '../../entities/Fraction'
 import { UNDERWORLD_ADDRESS } from '../../constants/kashi'
 import { USDC } from '../../hooks'
-import { bentobox } from '@sushiswap/sushi-data'
+import { bentobox } from '@soulswap/soul-data'
 import { ethers } from 'ethers'
 // import { getCurrency } from '../../functions/currency'
 import { getOracle } from '../../entities/Oracle'
@@ -41,14 +41,14 @@ interface State {
   info:
     | {
         ethBalance: BigNumber
-        sushiBalance: BigNumber
+        soulBalance: BigNumber
         spellBoundBalance: BigNumber
         spellBalance: BigNumber
         spellSupply: BigNumber
         spellBoundAllowance: BigNumber
         factories: any[]
         ethRate: BigNumber
-        sushiRate: BigNumber
+        soulRate: BigNumber
         btcRate: BigNumber
         pendingSoul: BigNumber
         blockTimeStamp: BigNumber
@@ -61,14 +61,14 @@ interface State {
 const initialState: State = {
   info: {
     ethBalance: ZERO,
-    sushiBalance: ZERO,
+    soulBalance: ZERO,
     spellBoundBalance: ZERO,
     spellBalance: ZERO,
     spellSupply: ZERO,
     spellBoundAllowance: ZERO,
     factories: [],
     ethRate: ZERO,
-    sushiRate: ZERO,
+    soulRate: ZERO,
     btcRate: ZERO,
     pendingSoul: ZERO,
     blockTimeStamp: ZERO,

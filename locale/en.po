@@ -589,8 +589,8 @@ msgstr "Matic Bridge"
 msgid "Max"
 msgstr "Max"
 
-msgid "Maximize yield by staking SOUL for SPELL"
-msgstr "Maximize yield by staking SOUL for SPELL"
+msgid "Maximize yield by staking your SOUL for SPELL"
+msgstr "Maximize yield by staking your SOUL for SPELL"
 
 msgid "Maximum sent"
 msgstr "Maximum sent"
@@ -884,9 +884,6 @@ msgstr "Staking APR"
 
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "Supplying {0} {1} and {2} {3}"
-
-msgid "Sushi is a supporter of Open Source."
-msgstr "Sushi is a supporter of Open Source."
 
 msgid "Swap"
 msgstr "Swap"

@@ -568,7 +568,7 @@ msgstr ""
 msgid "Max"
 msgstr "最大数量"
 
-msgid "Maximize yield by staking SOUL for SPELL"
+msgid "Maximize yield by staking your SOUL for SPELL"
 msgstr ""
 
 msgid "Maximum sent"
@@ -859,9 +859,6 @@ msgstr "质押APR"
 
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "提供{0} {1}和{2} {3}"
-
-msgid "Sushi is a supporter of Open Source."
-msgstr ""
 
 msgid "Swap"
 msgstr "兑换"

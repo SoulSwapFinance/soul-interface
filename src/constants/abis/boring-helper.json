@@ -213,7 +213,7 @@
       {
         "components": [
           { "internalType": "uint256", "name": "ethBalance", "type": "uint256" },
-          { "internalType": "uint256", "name": "sushiBalance", "type": "uint256" },
+          { "internalType": "uint256", "name": "soulBalance", "type": "uint256" },
           { "internalType": "uint256", "name": "spellBoundBalance", "type": "uint256" },
           { "internalType": "uint256", "name": "spellBalance", "type": "uint256" },
           { "internalType": "uint256", "name": "spellSupply", "type": "uint256" },

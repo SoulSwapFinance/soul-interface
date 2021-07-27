@@ -25,7 +25,6 @@ export const miniChef = async (query, chainId = ChainId.MAINNET) =>
 export const MASTERCHEF_V2 = {
   [ChainId.MAINNET]: 'sushiswap/master-chefv2',
 }
-
 export const masterChefV2 = async (query, chainId = ChainId.MAINNET) =>
   request(`${GRAPH_HOST[chainId]}/subgraphs/name/${MASTERCHEF_V2[chainId]}`, query)
 

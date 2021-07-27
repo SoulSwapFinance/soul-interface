@@ -5,7 +5,7 @@ import Fraction from '../entities/Fraction'
 import { POOL_DENY } from '../constants'
 import orderBy from 'lodash/orderBy'
 import range from 'lodash/range'
-import sushiData from '@sushiswap/sushi-data'
+import soulData from '@soulswap/soul-data'
 import { useActiveWeb3React } from './useActiveWeb3React'
 import { useSoulGuideContract } from './useContract'
 
@@ -16,18 +16,19 @@ const useZapperFarms = () => {
   const soulGuideContract = useSoulGuideContract()
 
   const fetchAllFarms = useCallback(async () => {
-    let [pools, liquidityPositions, averageBlockTime, sushiPrice, kashiPairs, sushiPairs, masterChef] =
-      await Promise.all([
-        sushiData.masterchef.pools(),
-        sushiData.exchange_v1.userPositions({
+    let [pools, liquidityPositions, averageBlockTime, soulPrice, kashiPairs, soulPairs, masterChef] = await Promise.all(
+      [
+        soulData.masterchef.pools(),
+        soulData.exchange_v1.userPositions({
           user_address: '0xc2edad668740f1aa35e4d8f227fb8e17dca888cd',
         }),
-        sushiData.utils.getAverageBlockTime(), // results[2]
-        sushiData.sushi.priceUSD(), // results[3]
-        sushiData.bentobox.kashiStakedInfo(), // results[4]
-        sushiData.exchange.pairs(), // results[5]
-        sushiData.masterchef.info(), // results[6]
-      ])
+        soulData.utils.getAverageBlockTime(), // results[2]
+        soulData.soul.priceUSD(), // results[3]
+        soulData.bentobox.kashiStakedInfo(), // results[4]
+        soulData.exchange.pairs(), // results[5]
+        soulData.masterchef.info(), // results[6]
+      ]
+    )
 
     const pairAddresses = pools
       .map((pool) => {
@@ -36,7 +37,7 @@ const useZapperFarms = () => {
       .sort()
 
     kashiPairs = kashiPairs.filter((result) => result !== undefined) // filter out undefined (not in onsen) from all kashiPairs
-    sushiPairs = sushiPairs.filter((pair) => pairAddresses.includes(pair.id))
+    soulPairs = soulPairs.filter((pair) => pairAddresses.includes(pair.id))
 
     const KASHI_PAIRS = range(190, 230, 1) // kashiPair pids 189-229
 
@@ -45,7 +46,7 @@ const useZapperFarms = () => {
         // console.log(KASHI_PAIRS.includes(Number(pool.id)), pool, Number(pool.id))
         return (
           !POOL_DENY.includes(pool?.id) &&
-          (sushiPairs.find((pair: any) => pair?.id === pool?.pair) || KASHI_PAIRS.includes(Number(pool?.id)))
+          (soulPairs.find((pair: any) => pair?.id === pool?.pair) || KASHI_PAIRS.includes(Number(pool?.id)))
         )
       })
       .map((pool) => {
@@ -76,7 +77,7 @@ const useZapperFarms = () => {
             tvl: pair?.balanceUSD ? pair?.balanceUSD : 0,
           }
         } else {
-          const pair = sushiPairs.find((pair) => pair.id === pool.pair)
+          const pair = soulPairs.find((pair) => pair.id === pool.pair)
           const liquidityPosition = liquidityPositions.find(
             (liquidityPosition: any) => liquidityPosition.pair.id === pair.id
           )
@@ -85,8 +86,8 @@ const useZapperFarms = () => {
           const totalSupply = pair.totalSupply > 0 ? pair.totalSupply : 0.1
           const reserveUSD = pair.reserveUSD > 0 ? pair.reserveUSD : 0.1
           const balanceUSD = (balance / Number(totalSupply)) * Number(reserveUSD)
-          const rewardPerBlock = ((pool.allocPoint / masterChef.totalAllocPoint) * masterChef.sushiPerBlock) / 1e18
-          const roiPerBlock = (rewardPerBlock * sushiPrice) / balanceUSD
+          const rewardPerBlock = ((pool.allocPoint / masterChef.totalAllocPoint) * masterChef.soulPerBlock) / 1e18
+          const roiPerBlock = (rewardPerBlock * soulPrice) / balanceUSD
           const roiPerHour = roiPerBlock * blocksPerHour
           const roiPerDay = roiPerHour * 24
           const roiPerMonth = roiPerDay * 30
@@ -106,7 +107,7 @@ const useZapperFarms = () => {
             roiPerDay,
             roiPerMonth,
             roiPerYear,
-            rewardPerThousand: 1 * roiPerDay * (1000 / sushiPrice),
+            rewardPerThousand: 1 * roiPerDay * (1000 / soulPrice),
             tvl: liquidityPosition?.liquidityTokenBalance
               ? (pair.reserveUSD / pair.totalSupply) * liquidityPosition.liquidityTokenBalance
               : 0.1,
