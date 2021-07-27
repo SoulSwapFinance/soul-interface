@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { XSUSHI } from '../constants'
 import { BigNumber } from 'ethers'
 
-export default function useMeowshiPerXSushi() {
+export default function useMeowshiPerSpell() {
   const bentoboxContract = useBentoBoxContract()
   const [state, setState] = useState<[BigNumber, BigNumber]>([BigNumber.from('0'), BigNumber.from('0')])
 

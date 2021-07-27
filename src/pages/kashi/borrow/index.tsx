@@ -34,7 +34,7 @@ function Borrow() {
   return (
     <>
       <Head>
-        <title>{i18n._(t`Borrow`)} | Sushi</title>
+        <title>{i18n._(t`Borrow`)} | Soul</title>
         <meta
           key="description"
           name="description"

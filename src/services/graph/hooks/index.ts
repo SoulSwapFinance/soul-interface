@@ -92,13 +92,17 @@ export function useMiniChefFarms(swrConfig: SWRConfiguration = undefined) {
 export function useFarms(swrConfig: SWRConfiguration = undefined) {
   const masterChefV1Farms = useMasterChefV1Farms()
   const masterChefV2Farms = useMasterChefV2Farms()
+  const soulSummonerFarms = useSoulSummonerFarms()
   const miniChefFarms = useMiniChefFarms()
   // useEffect(() => {
   //   console.log('debug', { masterChefV1Farms, masterChefV2Farms, miniChefFarms })
   // }, [masterChefV1Farms, masterChefV2Farms, miniChefFarms])
   return useMemo(
-    () => concat(masterChefV1Farms, masterChefV2Farms, miniChefFarms).filter((pool) => pool && pool.pair),
-    [masterChefV1Farms, masterChefV2Farms, miniChefFarms]
+    () =>
+      concat(masterChefV1Farms, masterChefV2Farms, soulSummonerFarms, miniChefFarms).filter(
+        (pool) => pool && pool.pair
+      ),
+    [masterChefV1Farms, masterChefV2Farms, soulSummonerFarms, miniChefFarms]
   )
 }
 
@@ -126,7 +130,7 @@ export function useMasterChefV2PairAddresses() {
   }, [data])
 }
 
-export function useSummonerPairAddresses() {
+export function useSoulSummonerPairAddresses() {
   const { chainId } = useActiveWeb3React()
   const shouldFetch = chainId && chainId === ChainId.MAINNET
   const { data } = useSWR(shouldFetch ? ['masterChefV2PairAddresses', chainId] : null, (_) =>
@@ -153,9 +157,11 @@ export function useMiniChefPairAddresses() {
 export function useFarmPairAddresses() {
   const masterChefV1PairAddresses = useMasterChefV1PairAddresses()
   const masterChefV2PairAddresses = useMasterChefV2PairAddresses()
+  const getSoulSummonerPairAddreses = useSoulSummonerPairAddresses()
   const miniChefPairAddresses = useMiniChefPairAddresses()
   return useMemo(
-    () => concat(masterChefV1PairAddresses, masterChefV2PairAddresses, miniChefPairAddresses),
-    [masterChefV1PairAddresses, masterChefV2PairAddresses, miniChefPairAddresses]
+    () =>
+      concat(masterChefV1PairAddresses, masterChefV2PairAddresses, getSoulSummonerPairAddreses, miniChefPairAddresses),
+    [masterChefV1PairAddresses, masterChefV2PairAddresses, getSoulSummonerPairAddreses, miniChefPairAddresses]
   )
 }

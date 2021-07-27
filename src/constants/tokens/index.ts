@@ -1,5 +1,5 @@
-import { SOUL_ADDRESS } from '@soulswap/sdk'
-import { ChainId, Ether, SUSHI_ADDRESS, Token, WETH9, WNATIVE } from '@sushiswap/sdk'
+import { SUSHI_ADDRESS, Token } from '@sushiswap/sdk'
+import { ChainId, Ether, SOUL_ADDRESS, WETH9, WNATIVE } from '@soulswap/sdk'
 
 import { SupportedChainId } from '../chains'
 
@@ -26,13 +26,13 @@ export const FANTOM: { [key: string]: Token } = {
   WBTC: new Token(ChainId.FANTOM, '0x321162Cd933E2Be498Cd2267a90534A804051b11', 8, 'WBTC', 'Wrapped Bitcoin'),
   DAI: new Token(ChainId.FANTOM, '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', 18, 'DAI', 'Dai Stablecoin'),
   WETH: new Token(ChainId.FANTOM, '0x74b23882a30290451A17c44f4F05243b6b58C76d', 18, 'WETH', 'Wrapped Ether'),
-  SOUL: new Token(ChainId.FANTOM, '', 18, 'SOUL', 'SoulPower'),
+  // SOUL: new Token(ChainId.FANTOM, '', 18, 'SOUL', 'SoulPower'),
 }
 
 export const FANTOM_TESTNET: { [key: string]: Token } = {
   SOUL: new Token(ChainId.FANTOM_TESTNET, '0x81582F803A17a4a454A80600e9185B42E32e0fcF', 18, 'SOUL', 'SoulPower'), // UPDATE
   SEANCE: new Token(ChainId.FANTOM_TESTNET, '0xf9D9b96F213aCC6434f16fff5D932FA85cD179f3', 18, 'SEANCE', 'SeanceCircle'), // UPDATE
-  SPELL: new Token(ChainId.FANTOM_TESTNET, '', 18, 'SPELL', 'SpellBound'), // UPDATE
+  SPELL: new Token(ChainId.FANTOM_TESTNET, '0xf9D9b96F213aCC6434f16fff5D932FA85cD179f3', 18, 'SPELL', 'SpellBound'), // UPDATE
   FUSD: new Token(ChainId.FANTOM_TESTNET, '0x91ea991bd52EE3C40EdA2509701d905e1Ee54074', 18, 'FUSD', 'Fantom USD'),
   FETH: new Token(
     ChainId.FANTOM_TESTNET,

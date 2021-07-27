@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { useMeowshiContract, useSushiBarContract, useSushiContract } from './useContract'
+import { useMeowshiContract, useSpellBoundContract, useSoulContract } from './useContract'
 
 import { BalanceProps } from './useTokenBalance'
 import Fraction from '../entities/Fraction'
@@ -10,11 +10,11 @@ import { ApprovalState } from './useApproveCallback'
 
 const { BigNumber } = ethers
 
-const useMeowshi = (sushi: boolean) => {
+const useMeowshi = (soul: boolean) => {
   const { account } = useActiveWeb3React()
   const addTransaction = useTransactionAdder()
-  const sushiContract = useSushiContract(true)
-  const barContract = useSushiBarContract(true)
+  const soulContract = useSoulContract(true)
+  const spellContract = useSpellBoundContract(true)
   const meowshiContract = useMeowshiContract(true)
   const [pendingApproval, setPendingApproval] = useState(false)
 
@@ -23,10 +23,10 @@ const useMeowshi = (sushi: boolean) => {
     if (account) {
       try {
         let allowance
-        if (sushi) {
-          allowance = await sushiContract?.allowance(account, meowshiContract?.address)
+        if (soul) {
+          allowance = await soulContract?.allowance(account, meowshiContract?.address)
         } else {
-          allowance = await barContract?.allowance(account, meowshiContract?.address)
+          allowance = await spellContract?.allowance(account, meowshiContract?.address)
         }
 
         const formatted = Fraction.from(BigNumber.from(allowance), BigNumber.from(10).pow(18)).toString()
@@ -35,18 +35,18 @@ const useMeowshi = (sushi: boolean) => {
         setAllowance('0')
       }
     }
-  }, [account, sushi, sushiContract, meowshiContract?.address, barContract])
+  }, [account, soul, soulContract, meowshiContract?.address, spellContract])
 
   useEffect(() => {
     if (account && meowshiContract) {
-      if ((sushi && sushiContract) || (!sushi && barContract)) {
+      if ((soul && soulContract) || (!soul && spellContract)) {
         fetchAllowance()
       }
     }
 
     const refreshInterval = setInterval(fetchAllowance, 10000)
     return () => clearInterval(refreshInterval)
-  }, [account, meowshiContract, fetchAllowance, sushiContract, barContract, sushi])
+  }, [account, meowshiContract, fetchAllowance, soulContract, spellContract, soul])
 
   const approvalState: ApprovalState = useMemo(() => {
     if (!account) return ApprovalState.UNKNOWN
@@ -61,10 +61,10 @@ const useMeowshi = (sushi: boolean) => {
       setPendingApproval(true)
 
       let tx
-      if (sushi) {
-        tx = await sushiContract?.approve(meowshiContract?.address, ethers.constants.MaxUint256.toString())
+      if (soul) {
+        tx = await soulContract?.approve(meowshiContract?.address, ethers.constants.MaxUint256.toString())
       } else {
-        tx = await barContract?.approve(meowshiContract?.address, ethers.constants.MaxUint256.toString())
+        tx = await spellContract?.approve(meowshiContract?.address, ethers.constants.MaxUint256.toString())
       }
 
       addTransaction(tx, { summary: 'Approve' })
@@ -75,7 +75,7 @@ const useMeowshi = (sushi: boolean) => {
     } finally {
       setPendingApproval(false)
     }
-  }, [sushi, addTransaction, sushiContract, meowshiContract?.address, barContract])
+  }, [soul, addTransaction, soulContract, meowshiContract?.address, spellContract])
 
   const meow = useCallback(
     async (amount: BalanceProps | undefined) => {

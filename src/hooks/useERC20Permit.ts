@@ -1,5 +1,5 @@
 import { Currency, CurrencyAmount, JSBI, Percent, Token, TradeType, Trade as V2Trade } from '@sushiswap/sdk'
-import { DAI, SOUL, SUSHI, USDC } from '../constants/tokens'
+import { DAI, SUSHI, USDC } from '../constants/tokens'
 import { useMemo, useState } from 'react'
 
 import { splitSignature } from 'ethers/lib/utils'
@@ -60,12 +60,6 @@ const PERMITTABLE_TOKENS: {
   },
   [42]: {
     [SUSHI[42].address]: { type: PermitType.AMOUNT, name: 'SushiSwap' },
-  },
-  [250]: {
-    [SOUL[250].address]: { type: PermitType.AMOUNT, name: 'SoulSwap' },
-  },
-  [4002]: {
-    [SOUL[4002].address]: { type: PermitType.AMOUNT, name: 'SoulSwap' },
   },
 }
 
@@ -274,7 +268,7 @@ export function useERC20Permit(
 
 const REMOVE_V2_LIQUIDITY_PERMIT_INFO: PermitInfo = {
   version: '1',
-  name: 'SoulSwap LP Token',
+  name: 'SushiSwap LP Token',
   type: PermitType.AMOUNT,
 }
 

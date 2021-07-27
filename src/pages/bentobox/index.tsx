@@ -21,7 +21,7 @@ export default function BenotBox() {
       maxWidth="full"
     >
       <Head>
-        <title>BentoBox | Sushi</title>
+        <title>BentoBox | Soul</title>
         <meta
           key="description"
           name="description"

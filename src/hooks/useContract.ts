@@ -1,7 +1,7 @@
 import {
   ARCHER_ROUTER_ADDRESS,
   MINICHEF_ADDRESS,
-  // MINISUMMONER_ADDRESS,
+  MINISUMMONER_ADDRESS,
   MULTICALL2_ADDRESS,
   ZAPPER_ADDRESS,
 } from '../constants/addresses'
@@ -10,6 +10,7 @@ import {
   ARGENT_WALLET_DETECTOR_MAINNET_ADDRESS,
 } from '../constants/abis/argent-wallet-detector'
 import {
+  ChainId,
   FACTORY_ADDRESS,
   ROUTER_ADDRESS,
   SPELL_ADDRESS,
@@ -19,7 +20,6 @@ import {
 } from '@soulswap/sdk'
 import {
   BAR_ADDRESS,
-  ChainId,
   MAKER_ADDRESS,
   MASTERCHEF_ADDRESS as MASTERCHEF_V1_ADDRESS,
   SUSHI_ADDRESS,
@@ -43,15 +43,13 @@ import { MULTICALL_ABI, MULTICALL_NETWORKS } from '../constants/multicall'
 import ALCX_REWARDER_ABI from '../constants/abis/alcx-rewarder.json'
 import CLONE_REWARDER_ABI from '../constants/abis/clone-rewarder.json'
 import ARCHER_ROUTER_ABI from '../constants/abis/archer-router.json'
-import BAR_ABI from '../constants/abis/bar.json'
-import SPELL_ABI from '../constants/abis/bar.json' // TODO: add and update address
 import BASE_SWAPPER_ABI from '../constants/abis/swapper.json'
 import BENTOBOX_ABI from '../constants/abis/bentobox.json'
 import BORING_HELPER_ABI from '../constants/abis/boring-helper.json'
 import CHAINLINK_ORACLE_ABI from '../constants/abis/chainlink-oracle.json'
 import COMPLEX_REWARDER_ABI from '../constants/abis/complex-rewarder.json'
 import { Contract } from '@ethersproject/contracts'
-import DASHBOARD2_ABI from '../constants/abis/dashboard2.json'
+// import DASHBOARD2_ABI from '../constants/abis/dashboard2.json'
 import DASHBOARD_ABI from '../constants/abis/dashboard.json'
 import EIP_2612_ABI from '../constants/abis/eip-2612.json'
 import ENS_ABI from '../constants/abis/ens-registrar.json'
@@ -65,19 +63,21 @@ import KASHIPAIR_ABI from '../constants/abis/kashipair.json'
 import MAKER_ABI from '../constants/abis/maker.json'
 import MASTERCHEF_V1_ABI from '../constants/abis/masterchef.json'
 // import MASTERCHEF_ABI from '../constants/abis/masterchef-v2.json'
-import SOUL_SUMMONER_ABI from '../constants/abis/masterchef-v2.json' // TODO: UPDATE
+import SOUL_SUMMONER_ABI from '../constants/abis/masterchef-v2.json' // TODO: update abi
+import SPELL_ABI from '../constants/abis/bar.json' // TODO: update abi
 import MEOWSHI_ABI from '../constants/abis/meowshi.json'
 import MERKLE_DISTRIBUTOR_ABI from '../constants/abis/merkle-distributor.json'
 import MINICHEF_ABI from '../constants/abis/minichef-v2.json'
+import MINISUMMONER_ABI from '../constants/abis/minichef-v2.json'
 import MULTICALL2_ABI from '../constants/abis/multicall2.json'
 import PENDING_ABI from '../constants/abis/pending.json'
 import ROUTER_ABI from '../constants/abis/router.json'
 import SAAVE_ABI from '../constants/abis/saave.json'
+import SOUL_ABI from '../constants/abis/sushi.json' // TODO: update
 import SUSHIROLL_ABI from '@sushiswap/core/abi/SushiRoll.json'
 // import SUSHISWAP_MULTISWAPPER_ABI from '../constants/abis/sushiswapmultiswapper.json'
 import SUSHISWAP_TWAP_ORACLE_ABI from '../constants/abis/sushiswap-slp-oracle.json'
 import SUSHI_ABI from '../constants/abis/sushi.json'
-import SOUL_ABI from '../constants/abis/sushi.json' // TODO: update
 import TIMELOCK_ABI from '../constants/abis/timelock.json'
 import UNI_FACTORY_ABI from '../constants/abis/uniswap-v2-factory.json'
 import WETH9_ABI from '../constants/abis/weth.json'
@@ -209,6 +209,10 @@ export function useMiniChefContract(withSignerIfPossible?: boolean): Contract | 
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && MINICHEF_ADDRESS[chainId], MINICHEF_ABI, withSignerIfPossible)
 }
+export function useMiniSummonerContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && MINISUMMONER_ADDRESS[chainId], MINISUMMONER_ABI, withSignerIfPossible)
+}
 
 export function useFactoryContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
@@ -222,11 +226,6 @@ export function useRouterContract(useArcher = false, withSignerIfPossible?: bool
   const abi = useArcher ? ARCHER_ROUTER_ABI : ROUTER_ABI
 
   return useContract(address, abi, withSignerIfPossible)
-}
-
-export function useSushiBarContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && BAR_ADDRESS[chainId], BAR_ABI, withSignerIfPossible)
 }
 
 export function useSpellBoundContract(withSignerIfPossible?: boolean): Contract | null {

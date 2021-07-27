@@ -1,5 +1,5 @@
 export * from './blocks'
-export * from './bound'
+export * from './spell'
 export * from './exchange'
 export * from './masterchef'
 export * from './seconds'

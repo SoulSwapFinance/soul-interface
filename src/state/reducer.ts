@@ -12,17 +12,17 @@ import user from './user/reducer'
 import zap from './zap/reducer'
 
 const reducer = combineReducers({
-    application,
-    user,
-    transactions,
-    swap,
-    mint,
-    burn,
-    multicall,
-    lists,
-    zap,
-    limitOrder,
-    create,
+  application,
+  user,
+  transactions,
+  swap,
+  mint,
+  burn,
+  multicall,
+  lists,
+  zap,
+  limitOrder,
+  create,
 })
 
 export default reducer

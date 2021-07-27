@@ -71,7 +71,7 @@ const PoolList = () => {
   return (
     <>
       <Head>
-        <title>Zap | Sushi</title>
+        <title>Zap | Soul</title>
         <meta name="description" content="Farm SUSHI by staking LP (Liquidity Provider) tokens" />
       </Head>
       <div className="container max-w-2xl px-0 mx-auto sm:px-4">

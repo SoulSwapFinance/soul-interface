@@ -60,7 +60,7 @@ export default function Tokens() {
   return (
     <>
       <Head>
-        <title>SoulSwap Liquidity Pair (SLP) Analytics | Sushi</title>
+        <title>SoulSwap Liquidity Pair (SLP) Analytics | Soul</title>
         <meta name="description" content="SoulSwap Liquidity Pair (SLP) Analytics by Sushi" />
       </Head>
 

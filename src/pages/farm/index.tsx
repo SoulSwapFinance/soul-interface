@@ -13,11 +13,11 @@ import {
   useMasterChefV1TotalAllocPoint,
   useMaticPrice,
   useOnePrice,
-  useStakePrice,
   usePicklePrice,
   useMphPrice,
   useSoulPairs,
   useSoulPrice,
+  useStakePrice,
   useSushiPairs,
   useSushiPrice,
 } from '../../services/graph'
@@ -73,6 +73,8 @@ export default function Farm(): JSX.Element {
 
   const averageBlockTime = useAverageBlockTime()
 
+  const averageBlock = useAverageBlock()
+
   const masterChefV1TotalAllocPoint = useMasterChefV1TotalAllocPoint()
 
   const masterChefV1SushiPerBlock = useMasterChefV1SushiPerBlock()
@@ -91,7 +93,7 @@ export default function Farm(): JSX.Element {
     picklePrice,
     mphPrice,
   ] = [
-    useSoulPrice,
+    useSoulPrice(),
     useSushiPrice(),
     useEthPrice(),
     useMaticPrice(),
@@ -103,7 +105,8 @@ export default function Farm(): JSX.Element {
     useMphPrice(),
   ]
 
-  const blocksPerDay = 86400 / Number(averageBlockTime)
+  const secondsPerDay = 86400
+  const blocksPerDay = secondsPerDay / Number(averageBlockTime)
 
   const map = (pool) => {
     // TODO: Account for fees generated in case of swap pairs, and use standard compounding
@@ -125,20 +128,20 @@ export default function Farm(): JSX.Element {
     const blocksPerHour = 3600 / averageBlockTime
 
     function getRewards() {
-      // TODO: Some subgraphs give sushiPerBlock & sushiPerSecond, and mcv2 gives nothing
-      const sushiPerBlock =
-        pool?.owner?.sushiPerBlock / 1e18 ||
-        (pool?.owner?.sushiPerSecond / 1e18) * averageBlockTime ||
-        masterChefV1SushiPerBlock
+      // TODO: Some subgraphs give soulPerBlock & soulPerSecond, and mcv2 gives nothing
+      const soulPerSecond = pool?.owner?.soulPerSecond / 1e18 || (pool?.owner?.soulPerSecond / 1e18) * averageBlockTime
+      // || masterChefV1SushiPerBlock // todo: update
 
-      const rewardPerBlock = (pool.allocPoint / pool.owner.totalAllocPoint) * sushiPerBlock
+      // const rewardPerBlock = (pool.allocPoint / pool.owner.totalAllocPoint) * soulPerBlock
+      const rewardPerSecond = (pool.allocPoint / pool.owner.totalAllocPoint) * soulPerSecond
 
       const defaultReward = {
-        token: 'SUSHI',
-        icon: 'https://raw.githubusercontent.com/sushiswap/icons/master/token/sushi.jpg',
-        rewardPerBlock,
-        rewardPerDay: rewardPerBlock * blocksPerDay,
-        rewardPrice: sushiPrice,
+        token: 'SOUL',
+        icon: 'https://raw.githubusercontent.com/soulswap/icons/master/token/soul.jpg', // TODO: create
+        rewardPerSecond,
+        // rewardPerDay: rewardPerBlock * blocksPerDay,
+        rewardPerDay: rewardPerSecond * secondsPerDay,
+        rewardPrice: soulPrice,
       }
 
       const defaultRewards = [defaultReward]
@@ -187,9 +190,9 @@ export default function Farm(): JSX.Element {
 
         return [...defaultRewards, REWARDS[pool.id]]
       } else if (pool.chef === Chef.MINICHEF) {
-        const sushiPerSecond = ((pool.allocPoint / pool.miniChef.totalAllocPoint) * pool.miniChef.sushiPerSecond) / 1e18
-        const sushiPerBlock = sushiPerSecond * averageBlockTime
-        const sushiPerDay = sushiPerBlock * blocksPerDay
+        const soulPerSecond = ((pool.allocPoint / pool.miniChef.totalAllocPoint) * pool.miniChef.soulPerSecond) / 1e18
+        const soulPerBlock = soulPerSecond * averageBlockTime
+        const soulPerDay = soulPerSecond * secondsPerDay
         const rewardPerSecond =
           ((pool.allocPoint / pool.miniChef.totalAllocPoint) * pool.rewarder.rewardPerSecond) / 1e18
         const rewardPerBlock = rewardPerSecond * averageBlockTime
@@ -216,8 +219,8 @@ export default function Farm(): JSX.Element {
         return [
           {
             ...defaultReward,
-            rewardPerBlock: sushiPerBlock,
-            rewardPerDay: sushiPerDay,
+            rewardPerSecond: soulPerSecond,
+            rewardPerDay: soulPerDay,
           },
           {
             ...reward[chainId],

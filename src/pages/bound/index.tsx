@@ -232,7 +232,7 @@ export default function Stake() {
                   </div>
                   <div className="flex">
                     <a
-                      href={`https://analytics.soulswap.finance/bound`}
+                      href={`https://analytics.soulswap.finance/spell`}
                       target="_blank"
                       rel="noreferrer noopener"
                       className={`
