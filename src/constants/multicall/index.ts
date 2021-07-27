@@ -1,4 +1,4 @@
-import { ChainId } from '@sushiswap/sdk'
+import { ChainId } from '@soulswap/sdk'
 import MULTICALL_ABI from './abi.json'
 
 const MULTICALL_NETWORKS: { [chainId in ChainId]: string } = {
@@ -7,8 +7,8 @@ const MULTICALL_NETWORKS: { [chainId in ChainId]: string } = {
   [ChainId.KOVAN]: '0x2cc8688C5f75E365aaEEb4ea8D6a480405A48D2A',
   [ChainId.RINKEBY]: '0x42Ad527de7d4e9d9d011aC45B31D8551f8Fe9821',
   [ChainId.GÖRLI]: '0x77dCa2C955b15e9dE4dbBCf1246B4B85b651e50e',
-  [ChainId.FANTOM]: '0x63B8310c5093ac917552931D8b15d5AB6945c0a6',
-  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.FANTOM]: '0x63B8310c5093ac917552931D8b15d5AB6945c0a6', // UPDATE
+  [ChainId.FANTOM_TESTNET]: '0xef9777827a3581b64f5c7CB8954ccaE3cc2c46C0', // 7 JUL
   [ChainId.MATIC]: '0x95028E5B8a734bb7E2071F96De89BABe75be9C8E',
   [ChainId.MATIC_TESTNET]: '0x9Fc8e50Eb08C1F463b45d1AFb9c261B0a1903006',
   [ChainId.XDAI]: '0xb5b692a88BDFc81ca69dcB1d924f59f0413A602a',
