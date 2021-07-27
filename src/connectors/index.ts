@@ -1,7 +1,7 @@
 import { Web3Provider } from '@ethersproject/providers'
 
 import { BscConnector } from '@binance-chain/bsc-connector'
-import { ChainId } from '@sushiswap/sdk'
+import { ChainId } from '@soulswap/sdk'
 import { FortmaticConnector } from './Fortmatic'
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { NetworkConnector } from './NetworkConnector'

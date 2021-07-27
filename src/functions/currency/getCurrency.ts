@@ -1,4 +1,4 @@
-import { ChainId } from '@sushiswap/sdk'
+import { ChainId } from '@soulswap/sdk'
 import { ethers } from 'ethers'
 
 type Currency = { address: string; decimals: number }

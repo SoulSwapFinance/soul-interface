@@ -1,5 +1,5 @@
 import BSC from './bsc'
-import { ChainId } from '@sushiswap/sdk'
+import { ChainId } from '@soulswap/sdk'
 import HECO from './heco'
 import KOVAN from './kovan'
 import MAINNET from './mainnet'

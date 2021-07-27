@@ -1,6 +1,6 @@
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import HistoryLink from 'next/link'
-import { Percent } from '@sushiswap/sdk'
+import { Percent } from '@soulswap/sdk'
 import React from 'react'
 import { RowBetween } from '../Row'
 import SettingsTab from '../Settings'

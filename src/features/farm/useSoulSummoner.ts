@@ -1,4 +1,4 @@
-import { useActiveWeb3React, useSoulContract, useSushiContract } from '../../hooks'
+import { useActiveWeb3React, useSoulContract } from '../../hooks'
 
 import { BigNumber } from '@ethersproject/bignumber'
 import { Chef } from './enum'
@@ -10,7 +10,6 @@ export default function useSoulSummoner(chef: Chef) {
   const { account } = useActiveWeb3React()
 
   const soul = useSoulContract()
-  const sushi = useSushiContract()
 
   const contract = useChefContract(chef)
 
@@ -64,12 +63,12 @@ export default function useSoulSummoner(chef: Chef) {
         if (chef === Chef.MASTERCHEF_V1) {
           tx = await contract?.deposit(pid, Zero)
         } else if (chef === Chef.SOUL_SUMMONER) {
-          const pendingSushi = await contract?.pendingSushi(pid, account)
+          const pendingSoul = await contract?.pendingSoul(pid, account)
 
-          const balanceOf = await sushi?.balanceOf(contract?.address)
+          const balanceOf = await soul?.balanceOf(contract?.address)
 
-          // If SoulSummoner doesn't have enough sushi to harvest, batch in a harvest.
-          if (pendingSushi.gt(balanceOf)) {
+          // If SoulSummoner doesn't have enough soul to harvest, batch in a harvest.
+          if (pendingSoul.gt(balanceOf)) {
             tx = await contract?.batch(
               [
                 contract?.interface?.encodeFunctionData('harvestFromMasterChef'),
@@ -90,7 +89,7 @@ export default function useSoulSummoner(chef: Chef) {
         return e
       }
     },
-    [account, chef, contract, sushi]
+    [account, chef, contract, soul]
   )
 
   return { deposit, withdraw, harvest }

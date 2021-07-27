@@ -1,4 +1,4 @@
-import { Currency } from '@sushiswap/sdk'
+import { Currency } from '@soulswap/sdk'
 import CurrencyLogo from '../CurrencyLogo'
 import React from 'react'
 

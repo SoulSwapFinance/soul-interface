@@ -2,7 +2,7 @@ import { useCloneRewarderContract, useComplexRewarderContract } from '../../hook
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { BigNumber } from '@ethersproject/bignumber'
-import { ChainId } from '@sushiswap/sdk'
+import { ChainId } from '@soulswap/sdk'
 import { Chef } from './enum'
 import Fraction from '../../entities/Fraction'
 // import { getContract } from '../../functions'

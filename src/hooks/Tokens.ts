@@ -1,4 +1,4 @@
-import { ChainId, Currency, NATIVE, Token, WNATIVE, currencyEquals } from '@sushiswap/sdk'
+import { ChainId, Currency, NATIVE, Token, WNATIVE, currencyEquals } from '@soulswap/sdk'
 import { ExtendedEther, WETH9_EXTENDED } from '../constants'
 import { NEVER_RELOAD, useSingleCallResult } from '../state/multicall/hooks'
 import { TokenAddressMap, useAllLists, useInactiveListUrls, useUnsupportedTokenList } from './../state/lists/hooks'

@@ -498,8 +498,8 @@ const MAINNET_CHAINLINK_TOKENS = [
     decimals: 18,
   },
   {
-    symbol: 'xSUSHI',
-    name: 'SushiBar',
+    symbol: 'SPELL',
+    name: 'SpellBound',
     address: '0x8798249c2E607446EfB7Ad49eC89dD1865Ff4272',
     decimals: 18,
   },

@@ -1,5 +1,4 @@
-import { Currency, NATIVE, SUSHI_ADDRESS } from '@sushiswap/sdk'
-import { ChainId, SOUL_ADDRESS } from '@soulswap/sdk'
+import { ChainId, Currency, NATIVE, SOUL_ADDRESS } from '@soulswap/sdk'
 // import React, { useEffect, useState } from 'react'
 import React from 'react'
 
@@ -167,7 +166,7 @@ function AppBar(): JSX.Element {
                               }}
                             >
                               <Image
-                                src="/images/tokens/soul-square.jpg"
+                                src="/images/tokens/lotus-square.jpg"
                                 alt="SPELL"
                                 width="38px"
                                 height="38px"
@@ -179,7 +178,7 @@ function AppBar(): JSX.Element {
                         </>
                       )}
 
-                    {/* {chainId && chainId in SUSHI_ADDRESS && library && library.provider.isMetaMask && ( */}
+                    {/* {chainId && chainId in SOUL_ADDRESS && library && library.provider.isMetaMask && ( */}
                     {chainId && chainId in SOUL_ADDRESS && library && library.provider.isMetaMask && (
                       <>
                         <QuestionHelper text={i18n._(t`Add SOUL to your MetaMask wallet`)}>
@@ -214,7 +213,7 @@ function AppBar(): JSX.Element {
                             }}
                           >
                             <Image
-                              src="/images/tokens/soul-square.jpg"
+                              src="/images/tokens/scarab-square.jpg"
                               alt="SOUL"
                               width="38px"
                               height="38px"

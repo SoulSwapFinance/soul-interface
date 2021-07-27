@@ -1,5 +1,5 @@
-import { JSBI, Percent } from '@sushiswap/sdk'
-import { ChainId } from '@soulswap/sdk'
+import { Percent } from '@soulswap/sdk'
+import { ChainId, JSBI } from '@soulswap/sdk'
 import { binance, fortmatic, injected, portis, torus, walletconnect, walletlink } from '../connectors'
 
 import { AbstractConnector } from '@web3-react/abstract-connector'
@@ -35,7 +35,7 @@ export const RPC = {
 export const POOL_DENY = ['14', '29', '45', '30']
 
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
-export const AVERAGE_BLOCK_TIME_IN_SECS = 13
+export const AVERAGE_BLOCK_TIME_IN_SECS = 1
 
 export const ARCHER_RELAY_URI: { [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: 'https://api.archerdao.io/v1/transaction',
@@ -251,17 +251,17 @@ export const BASE_SWAPPER: { [chainId in ChainId]?: string } = {
   [ChainId.ROPSTEN]: '0xe4E2540D421e56b0B786d40c5F5268891288c6fb',
 }
 
-// Boring Helper
-export const BORING_HELPER_ADDRESS = '0x11Ca5375AdAfd6205E41131A4409f182677996E6'
+// Soul Guide
+export const SOUL_GUIDE_ADDRESS = '0x5A6B3Ce2736E9B731Fba73262884016b50c39184' // JUL 27TH
 
 export const ANALYTICS_URL: { [chainId in ChainId]?: string } = {
-  [ChainId.MAINNET]: 'https://analytics.sushi.com',
-  [ChainId.MATIC]: 'https://analytics-polygon.sushi.com',
+  [ChainId.MAINNET]: 'https://analytics.soulswap.finance',
+  [ChainId.MATIC]: 'https://analytics-polygon.soulswap.finance',
   [ChainId.FANTOM]: 'https://analytics-ftm.soulswap.finance',
   [ChainId.FANTOM_TESTNET]: 'https://analytics-ftm-testnet.soulswap.finance',
-  [ChainId.BSC]: 'https://analytics-bsc.sushi.com',
-  [ChainId.XDAI]: 'https://analytics-xdai.sushi.com',
-  [ChainId.HARMONY]: 'https://analytics-harmony.sushi.com',
+  [ChainId.BSC]: 'https://analytics-bsc.soulswap.finance',
+  [ChainId.XDAI]: 'https://analytics-xdai.soulswap.finance',
+  [ChainId.HARMONY]: 'https://analytics-harmony.soulswap.finance',
   [ChainId.ARBITRUM]: undefined,
 }
 

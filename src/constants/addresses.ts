@@ -1,4 +1,4 @@
-import { ChainId } from '@sushiswap/sdk'
+import { ChainId } from '@soulswap/sdk'
 
 type AddressMap = { [chainId: number]: string }
 
