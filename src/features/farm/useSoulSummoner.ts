@@ -1,4 +1,4 @@
-import { useActiveWeb3React, useSushiContract } from '../../hooks'
+import { useActiveWeb3React, useSoulContract, useSushiContract } from '../../hooks'
 
 import { BigNumber } from '@ethersproject/bignumber'
 import { Chef } from './enum'
@@ -9,6 +9,7 @@ import { useChefContract } from './hooks'
 export default function useSoulSummoner(chef: Chef) {
   const { account } = useActiveWeb3React()
 
+  const soul = useSoulContract()
   const sushi = useSushiContract()
 
   const contract = useChefContract(chef)

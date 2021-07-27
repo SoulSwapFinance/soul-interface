@@ -1,5 +1,5 @@
-import Badge from '../../components/Badge'
-import { ChainId } from '@sushiswap/sdk'
+// import Badge from '../../components/Badge'
+// import { ChainId } from '@sushiswap/sdk'
 import NavLink from '../../components/NavLink'
 import React from 'react'
 import { useActiveWeb3React } from '../../hooks'
@@ -30,7 +30,7 @@ const Menu = ({ positionsLength }) => {
         </a>
       </NavLink>
 
-      {chainId === ChainId.MAINNET && (
+      {/* {chainId === ChainId.MAINNET && (
         <>
           <NavLink
             exact
@@ -51,8 +51,8 @@ const Menu = ({ positionsLength }) => {
             </a>
           </NavLink>
         </>
-      )}
-
+      )} */}
+      {/* 
       {(chainId === ChainId.MAINNET || chainId === ChainId.MATIC) && (
         <NavLink
           exact
@@ -63,7 +63,7 @@ const Menu = ({ positionsLength }) => {
             2x Reward Farms
           </a>
         </NavLink>
-      )}
+      )} */}
     </div>
   )
 }

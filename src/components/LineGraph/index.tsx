@@ -1,5 +1,5 @@
 import AutoSizer from 'react-virtualized-auto-sizer'
-import { data, useMemo } from 'react-dom'
+import { useMemo } from 'react'
 import { scaleLinear } from '@visx/scale'
 import { LinePath } from '@visx/shape'
 

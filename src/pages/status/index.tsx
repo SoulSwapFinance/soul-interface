@@ -1,14 +1,14 @@
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 
 import Container from '../../components/Container'
-import Dots from '../../components/Dots'
+// import Dots from '../../components/Dots'
 import Head from 'next/head'
-import Typography from '../../components/Typography'
-import capitalize from 'lodash/capitalize'
-import { classNames } from '../../functions'
-import { getChainsStatus } from '../../services/covalent/fetchers'
-import { useChainsStatus } from '../../services/covalent/hooks'
-import { useState } from 'react'
+// import Typography from '../../components/Typography'
+// import capitalize from 'lodash/capitalize'
+// import { classNames } from '../../functions'
+// import { getChainsStatus } from '../../services/covalent/fetchers'
+// import { useChainsStatus } from '../../services/covalent/hooks'
+// import { useState } from 'react'
 
 export default function Status({ initialData }) {
   // const res = useChainsStatus({ initialData })
@@ -17,8 +17,8 @@ export default function Status({ initialData }) {
   return (
     <Container id="status-page" className="py-4 md:py-8 lg:py-12" maxWidth="full">
       <Head>
-        <title>Status | Sushi</title>
-        <meta key="description" name="description" content="Sushi Status..." />
+        <title>Status | Soul</title>
+        <meta key="description" name="description" content="Soul Status..." />
       </Head>
       {/* <div className="w-full max-w-6xl mx-auto">
                 <Typography component="h1" variant="h1" className="w-full mb-4">

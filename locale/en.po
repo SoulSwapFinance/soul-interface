@@ -321,11 +321,11 @@ msgstr "Dismiss"
 msgid "Docs"
 msgstr "Docs"
 
-msgid "Documentation for developers of Sushi."
-msgstr "Documentation for developers of Sushi."
+msgid "Documentation for developers of Soul."
+msgstr "Documentation for developers of Soul."
 
-msgid "Documentation for users of Sushi."
-msgstr "Documentation for users of Sushi."
+msgid "Documentation for users of Soul."
+msgstr "Documentation for users of Soul."
 
 msgid "Either return to the {link}, or change to an available network."
 msgstr "Either return to the {link}, or change to an available network."
@@ -387,6 +387,19 @@ msgstr "Filled"
 
 msgid "Find Pool"
 msgstr "Find Pool"
+
+msgid ""
+"For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL\n"
+"proportional to your share of the SpellBound. When your SOUL is staked into the SpellBound, you recieve\n"
+"SPELL in return for voting rights and a fully composable token that can interact with other protocols.\n"
+"Your SPELL is continuously compounding, when you unstake you will receive all the originally deposited\n"
+"SOUL and any additional from fees."
+msgstr ""
+"For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL\n"
+"proportional to your share of the SpellBound. When your SOUL is staked into the SpellBound, you recieve\n"
+"SPELL in return for voting rights and a fully composable token that can interact with other protocols.\n"
+"Your SPELL is continuously compounding, when you unstake you will receive all the originally deposited\n"
+"SOUL and any additional from fees."
 
 msgid ""
 "For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SUSHI\n"
@@ -591,6 +604,9 @@ msgstr "Matic Bridge"
 
 msgid "Max"
 msgstr "Max"
+
+msgid "Maximize yield by staking SOUL for SPELL"
+msgstr "Maximize yield by staking SOUL for SPELL"
 
 msgid "Maximize yield by staking SUSHI for xSUSHI"
 msgstr "Maximize yield by staking SUSHI for xSUSHI"
@@ -857,6 +873,9 @@ msgstr "Slippage tolerance..."
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 
+msgid "Soul is a supporter of Open Source."
+msgstr "Soul is a supporter of Open Source."
+
 msgid "Spanish"
 msgstr "Spanish"
 
@@ -865,6 +884,9 @@ msgstr "Stack Yields with SAAVE"
 
 msgid "Stake"
 msgstr "Stake"
+
+msgid "Stake SOUL"
+msgstr "Stake SOUL"
 
 msgid "Stake SUSHI"
 msgstr "Stake SUSHI"
@@ -1009,14 +1031,14 @@ msgstr "Unsupported Asset"
 msgid "Unwrap"
 msgstr "Unwrap"
 
-msgid "Use SUSHI"
-msgstr "Use SUSHI"
+msgid "Use SOUL"
+msgstr "Use SOUL"
+
+msgid "Use SPELL"
+msgstr "Use SPELL"
 
 msgid "Use this tool to find pairs that don't automatically appear in the interface"
 msgstr "Use this tool to find pairs that don't automatically appear in the interface"
-
-msgid "Use xSUSHI"
-msgstr "Use xSUSHI"
 
 msgid "Used"
 msgstr "Used"
@@ -1101,6 +1123,9 @@ msgstr "Your Claimable SUSHI this Week"
 
 msgid "Your Liquidity"
 msgstr "Your Liquidity"
+
+msgid "Your SpellBound Stats"
+msgstr "Your SpellBound Stats"
 
 msgid "Your Staked"
 msgstr "Your Staked"

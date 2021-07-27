@@ -1,3 +1,4 @@
+import { SOUL_ADDRESS } from '@soulswap/sdk'
 import { ChainId, Ether, SUSHI_ADDRESS, Token, WETH9, WNATIVE } from '@sushiswap/sdk'
 
 import { SupportedChainId } from '../chains'
@@ -25,6 +26,28 @@ export const FANTOM: { [key: string]: Token } = {
   WBTC: new Token(ChainId.FANTOM, '0x321162Cd933E2Be498Cd2267a90534A804051b11', 8, 'WBTC', 'Wrapped Bitcoin'),
   DAI: new Token(ChainId.FANTOM, '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', 18, 'DAI', 'Dai Stablecoin'),
   WETH: new Token(ChainId.FANTOM, '0x74b23882a30290451A17c44f4F05243b6b58C76d', 18, 'WETH', 'Wrapped Ether'),
+  SOUL: new Token(ChainId.FANTOM, '', 18, 'SOUL', 'SoulPower'),
+}
+
+export const FANTOM_TESTNET: { [key: string]: Token } = {
+  SOUL: new Token(ChainId.FANTOM_TESTNET, '0x81582F803A17a4a454A80600e9185B42E32e0fcF', 18, 'SOUL', 'SoulPower'), // UPDATE
+  SEANCE: new Token(ChainId.FANTOM_TESTNET, '0xf9D9b96F213aCC6434f16fff5D932FA85cD179f3', 18, 'SEANCE', 'SeanceCircle'), // UPDATE
+  SPELL: new Token(ChainId.FANTOM_TESTNET, '', 18, 'SPELL', 'SpellBound'), // UPDATE
+  FUSD: new Token(ChainId.FANTOM_TESTNET, '0x91ea991bd52EE3C40EdA2509701d905e1Ee54074', 18, 'FUSD', 'Fantom USD'),
+  FETH: new Token(
+    ChainId.FANTOM_TESTNET,
+    '0x8e5CaC3c48cDe3EFe0a5B01066435cc688F8b8F8',
+    18,
+    'fETH',
+    'Fantom Synthetic ETH'
+  ),
+  WBTC: new Token(
+    ChainId.FANTOM_TESTNET,
+    '0x2Eb4Ee20d9816Bd6810F69166dD046F09C737201',
+    18,
+    'fBTC',
+    'Fantom Synthetic BTC'
+  ),
 }
 
 export const MATIC: { [key: string]: Token } = {
@@ -183,6 +206,42 @@ export const CRV = new Token(ChainId.MAINNET, '0xD533a949740bb3306d119CC777fa900
 
 type ChainTokenMap = {
   readonly [chainId in ChainId]?: Token
+}
+
+// SOUL
+export const SOUL: ChainTokenMap = {
+  // [ChainId.MAINNET]: new Token(ChainId.MAINNET, SOUL_ADDRESS[ChainId.MAINNET], 18, 'SOUL', 'SoulPower'),
+  // [ChainId.ROPSTEN]: new Token(ChainId.ROPSTEN, SOUL_ADDRESS[ChainId.ROPSTEN], 18, 'SOUL', 'SoulPower'),
+  // [ChainId.RINKEBY]: new Token(ChainId.RINKEBY, SOUL_ADDRESS[ChainId.RINKEBY], 18, 'SOUL', 'SoulPower'),
+  // [ChainId.GÖRLI]: new Token(ChainId.GÖRLI, SOUL_ADDRESS[ChainId.GÖRLI], 18, 'SOUL', 'SoulPower'),
+  // [ChainId.KOVAN]: new Token(ChainId.KOVAN, SOUL_ADDRESS[ChainId.KOVAN], 18, 'SOUL', 'SoulPower'),
+  // [ChainId.MATIC]: new Token(ChainId.MATIC, SOUL_ADDRESS[ChainId.MATIC], 18, 'SOUL', 'SoulPower'),
+  // [ChainId.FANTOM]: new Token(ChainId.FANTOM, SOUL_ADDRESS[ChainId.FANTOM], 18, 'SOUL', 'SoulPower'),
+  [ChainId.FANTOM_TESTNET]: new Token(
+    ChainId.FANTOM_TESTNET,
+    SOUL_ADDRESS[ChainId.FANTOM_TESTNET],
+    18,
+    'SOUL',
+    'SoulPower'
+  ),
+  // [ChainId.XDAI]: new Token(ChainId.XDAI, SOUL_ADDRESS[ChainId.XDAI], 18, 'SOUL', 'SoulPower'),
+  // [ChainId.BSC]: new Token(ChainId.BSC, SOUL_ADDRESS[ChainId.BSC], 18, 'SOUL', 'SoulPower'),
+  // // [ChainId.ARBITRUM]: new Token(ChainId.ARBITRUM, SOUL_ADDRESS[ChainId.ARBITRUM], 18, 'SOUL', 'SoulPower'),
+  // [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, SOUL_ADDRESS[ChainId.AVALANCHE], 18, 'SOUL', 'SoulPower'),
+  // [ChainId.OKEX]: new Token(ChainId.OKEX, SOUL_ADDRESS[ChainId.OKEX], 18, 'SOUL', 'SoulPower'),
+  // [ChainId.HARMONY]: new Token(ChainId.HARMONY, SOUL_ADDRESS[ChainId.HARMONY], 18, 'SOUL', 'SoulPower'),
+  // [ChainId.HECO]: new Token(ChainId.HECO, SOUL_ADDRESS[ChainId.HECO], 18, 'SOUL', 'SoulPower'),
+}
+
+export const SPELL: ChainTokenMap = {
+  // [ChainId.FANTOM]: new Token(ChainId.FANTOM, SPELL_ADDRESS[ChainId.FANTOM], 18, 'SPELL', 'SpellBound'), // TODO: update
+  [ChainId.FANTOM_TESTNET]: new Token(
+    ChainId.FANTOM_TESTNET,
+    '0x3E3887680e6E81e4Da8C019Ef56a704297eCE211',
+    18,
+    'SPELL',
+    'SpellBound'
+  ), // TODO: update
 }
 
 // SUSHI

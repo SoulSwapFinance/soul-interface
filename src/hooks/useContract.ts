@@ -1,4 +1,10 @@
-import { ARCHER_ROUTER_ADDRESS, MINICHEF_ADDRESS, MULTICALL2_ADDRESS, ZAPPER_ADDRESS } from '../constants/addresses'
+import {
+  ARCHER_ROUTER_ADDRESS,
+  MINICHEF_ADDRESS,
+  // MINISUMMONER_ADDRESS,
+  MULTICALL2_ADDRESS,
+  ZAPPER_ADDRESS,
+} from '../constants/addresses'
 import {
   ARGENT_WALLET_DETECTOR_ABI,
   ARGENT_WALLET_DETECTOR_MAINNET_ADDRESS,
@@ -18,7 +24,7 @@ import {
   MASTERCHEF_ADDRESS as MASTERCHEF_V1_ADDRESS,
   SUSHI_ADDRESS,
   TIMELOCK_ADDRESS,
-  WETH9,
+  // WETH9,
   WNATIVE,
 } from '@sushiswap/sdk'
 import {
@@ -58,7 +64,7 @@ import IUniswapV2PairABI from '../constants/abis/uniswap-v2-pair.json'
 import KASHIPAIR_ABI from '../constants/abis/kashipair.json'
 import MAKER_ABI from '../constants/abis/maker.json'
 import MASTERCHEF_V1_ABI from '../constants/abis/masterchef.json'
-import MASTERCHEF_ABI from '../constants/abis/masterchef-v2.json'
+// import MASTERCHEF_ABI from '../constants/abis/masterchef-v2.json'
 import SOUL_SUMMONER_ABI from '../constants/abis/masterchef-v2.json' // TODO: UPDATE
 import MEOWSHI_ABI from '../constants/abis/meowshi.json'
 import MERKLE_DISTRIBUTOR_ABI from '../constants/abis/merkle-distributor.json'
@@ -68,7 +74,7 @@ import PENDING_ABI from '../constants/abis/pending.json'
 import ROUTER_ABI from '../constants/abis/router.json'
 import SAAVE_ABI from '../constants/abis/saave.json'
 import SUSHIROLL_ABI from '@sushiswap/core/abi/SushiRoll.json'
-import SUSHISWAP_MULTISWAPPER_ABI from '../constants/abis/sushiswapmultiswapper.json'
+// import SUSHISWAP_MULTISWAPPER_ABI from '../constants/abis/sushiswapmultiswapper.json'
 import SUSHISWAP_TWAP_ORACLE_ABI from '../constants/abis/sushiswap-slp-oracle.json'
 import SUSHI_ABI from '../constants/abis/sushi.json'
 import SOUL_ABI from '../constants/abis/sushi.json' // TODO: update
@@ -192,11 +198,11 @@ export function useMasterChefV1Contract(withSignerIfPossible?: boolean): Contrac
 }
 
 export function useMasterChefContract(withSignerIfPossible?: boolean): Contract | null {
-  return useContract('0xEF0881eC094552b2e128Cf945EF17a6752B4Ec5d', SOUL_SUMMONER_ABI, withSignerIfPossible)
+  return useContract('0x5cED956c0d3dC88B8C3E42494F7b2e052d7CfeBc', SOUL_SUMMONER_ABI, withSignerIfPossible) // prev: 0xEF0881eC094552b2e128Cf945EF17a6752B4Ec5d
 }
 
 export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
-  return useContract('0xEF0881eC094552b2e128Cf945EF17a6752B4Ec5d', SOUL_SUMMONER_ABI, withSignerIfPossible)
+  return useContract('0x5cED956c0d3dC88B8C3E42494F7b2e052d7CfeBc', SOUL_SUMMONER_ABI, withSignerIfPossible) // TODO: update address
 }
 
 export function useMiniChefContract(withSignerIfPossible?: boolean): Contract | null {

@@ -3,18 +3,21 @@ import { useActiveWeb3React, useFuse } from '../../hooks'
 import {
   useAlcxPrice,
   useAverageBlockTime,
+  useAverageBlock,
   useCvxPrice,
   useEthPrice,
   useFarmPairAddresses,
   useFarms,
   useKashiPairs,
-  useSoulSummonerV1SushiPerBlock,
-  useSoulSummonerV1TotalAllocPoint,
+  useMasterChefV1SushiPerBlock,
+  useMasterChefV1TotalAllocPoint,
   useMaticPrice,
   useOnePrice,
   useStakePrice,
   usePicklePrice,
   useMphPrice,
+  useSoulPairs,
+  useSoulPrice,
   useSushiPairs,
   useSushiPrice,
 } from '../../services/graph'
@@ -40,7 +43,19 @@ export default function Farm(): JSX.Element {
 
   const pairAddresses = useFarmPairAddresses()
 
-  const swapPairs = useSushiPairs({
+  const sushiPairs = useSushiPairs({
+    where: {
+      id_in: pairAddresses,
+    },
+  })
+
+  const soulPairs = useSoulPairs({
+    where: {
+      id_in: pairAddresses,
+    },
+  })
+
+  const swapPairs = useSoulPairs({
     where: {
       id_in: pairAddresses,
     },
@@ -58,13 +73,25 @@ export default function Farm(): JSX.Element {
 
   const averageBlockTime = useAverageBlockTime()
 
-  const masterChefV1TotalAllocPoint = useSoulSummonerV1TotalAllocPoint()
+  const masterChefV1TotalAllocPoint = useMasterChefV1TotalAllocPoint()
 
-  const masterChefV1SushiPerBlock = useSoulSummonerV1SushiPerBlock()
+  const masterChefV1SushiPerBlock = useMasterChefV1SushiPerBlock()
 
   // TODO: Obviously need to sort this out but this is fine for time being,
   // prices are only loaded when needed for a specific network
-  const [sushiPrice, ethPrice, maticPrice, alcxPrice, cvxPrice, stakePrice, onePrice, picklePrice, mphPrice] = [
+  const [
+    soulPrice,
+    sushiPrice,
+    ethPrice,
+    maticPrice,
+    alcxPrice,
+    cvxPrice,
+    stakePrice,
+    onePrice,
+    picklePrice,
+    mphPrice,
+  ] = [
+    useSoulPrice,
     useSushiPrice(),
     useEthPrice(),
     useMaticPrice(),

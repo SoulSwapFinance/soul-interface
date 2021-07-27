@@ -107,6 +107,11 @@ export function useSushiPrice(swrConfig: SWRConfiguration = undefined) {
   return data
 }
 
+export function useSoulPrice(swrConfig: SWRConfiguration = undefined) {
+  const { data } = useSWR('sushiPrice', () => getSushiPrice(), swrConfig)
+  return data
+}
+
 export function useBundle(variables = undefined, swrConfig: SWRConfiguration = undefined) {
   const { chainId } = useActiveWeb3React()
   const { data } = useSWR(
@@ -129,6 +134,17 @@ export function useLiquidityPositions(variables = undefined, swrConfig: SWRConfi
 }
 
 export function useSushiPairs(variables = undefined, query = undefined, swrConfig: SWRConfiguration = undefined) {
+  const { chainId } = useActiveWeb3React()
+  const shouldFetch = chainId
+  const { data } = useSWR(
+    shouldFetch ? ['sushiPairs', chainId, JSON.stringify(variables)] : null,
+    (_, chainId) => getPairs(chainId, variables, query),
+    swrConfig
+  )
+  return data
+}
+
+export function useSoulPairs(variables = undefined, query = undefined, swrConfig: SWRConfiguration = undefined) {
   const { chainId } = useActiveWeb3React()
   const shouldFetch = chainId
   const { data } = useSWR(

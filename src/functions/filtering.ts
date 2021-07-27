@@ -1,4 +1,4 @@
-import { Token } from '@sushiswap/sdk'
+import { Token } from '@soulswap/sdk'
 import { TokenInfo } from '@uniswap/token-lists'
 import { isAddress } from './validate'
 import { useMemo } from 'react'

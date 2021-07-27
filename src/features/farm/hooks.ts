@@ -1,4 +1,5 @@
 import { ChainId, CurrencyAmount, JSBI, MASTERCHEF_ADDRESS as MASTERCHEF_V1_ADDRESS } from '@sushiswap/sdk'
+// import { MASTERCHEF_ADDRESS as SOUL_SUMMONER_ADDRESS } from '@soulswap/sdk'
 import { Chef, PairType } from './enum'
 import { SOUL_SUMMONER_ADDRESS, MINICHEF_ADDRESS, SUSHI } from '../../constants'
 import { NEVER_RELOAD, useSingleCallResult, useSingleContractMultipleData } from '../../state/multicall/hooks'
