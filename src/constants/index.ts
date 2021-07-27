@@ -74,7 +74,7 @@ export const MERKLE_ROOT =
 //         [PONT.address]: [PWING, WETH[ChainId.MAINNET]],
 //         [UMA_CALL.address]: [UMA, WETH[ChainId.MAINNET]],
 //         [PLAY.address]: [DOUGH, WETH[ChainId.MAINNET]],
-//         [XSUSHI_CALL.address]: [XSUSHI, WETH[ChainId.MAINNET]],
+//         [SPELL_CALL.address]: [SPELL, WETH[ChainId.MAINNET]],
 //     },
 // }
 

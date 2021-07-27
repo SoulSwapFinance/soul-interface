@@ -1,6 +1,6 @@
 // CONVENTION formatFoo -> string
 
-import { Currency, CurrencyAmount, Fraction, JSBI, Price } from '@sushiswap/sdk'
+import { Currency, CurrencyAmount, Fraction, JSBI, Price } from '@soulswap/sdk'
 
 import { BigNumber } from '@ethersproject/bignumber'
 import Numeral from 'numeral'

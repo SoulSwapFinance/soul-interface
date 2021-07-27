@@ -2,11 +2,11 @@ import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallbac
 import useKashiApproveCallback, { BentoApprovalState } from '../../hooks/useKashiApproveCallback'
 
 import Alert from '../../components/Alert'
-import { BENTOBOX_ADDRESS } from '../../constants/kashi'
+import { COFFIN_BOX_ADDRESS } from '../../constants/kashi'
 import Button from '../../components/Button'
 import Dots from '../../components/Dots'
 import React from 'react'
-import { WNATIVE } from '@sushiswap/sdk'
+import { WNATIVE } from '@soulswap/sdk'
 import { t } from '@lingui/macro'
 import { tryParseAmount } from '../../functions/parse'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
@@ -47,7 +47,7 @@ export function TokenApproveButton({ children, value, token, needed, color }: an
   const { chainId } = useActiveWeb3React()
   const [approvalState, approve] = useApproveCallback(
     tryParseAmount(value, token),
-    chainId && BENTOBOX_ADDRESS[chainId]
+    chainId && COFFIN_BOX_ADDRESS[chainId]
   )
 
   const showApprove =

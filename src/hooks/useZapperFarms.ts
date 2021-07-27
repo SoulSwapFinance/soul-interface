@@ -7,13 +7,13 @@ import orderBy from 'lodash/orderBy'
 import range from 'lodash/range'
 import sushiData from '@sushiswap/sushi-data'
 import { useActiveWeb3React } from './useActiveWeb3React'
-import { useBoringHelperContract } from './useContract'
+import { useSoulGuideContract } from './useContract'
 
 // Todo: Rewrite in terms of web3 as opposed to subgraph
 const useZapperFarms = () => {
   const [farms, setFarms] = useState<any | undefined>()
   const { account } = useActiveWeb3React()
-  const boringHelperContract = useBoringHelperContract()
+  const soulGuideContract = useSoulGuideContract()
 
   const fetchAllFarms = useCallback(async () => {
     let [pools, liquidityPositions, averageBlockTime, sushiPrice, kashiPairs, sushiPairs, masterChef] =
@@ -122,7 +122,7 @@ const useZapperFarms = () => {
     })
 
     if (account) {
-      const userFarmDetails = await boringHelperContract?.pollPools(account, pids)
+      const userFarmDetails = await soulGuideContract?.pollPools(account, pids)
       // console.log('userFarmDetails:', userFarmDetails)
       const userFarms = userFarmDetails
         .filter((farm: any) => {
@@ -167,7 +167,7 @@ const useZapperFarms = () => {
     } else {
       setFarms({ farms: sorted, userFarms: [] })
     }
-  }, [account, boringHelperContract])
+  }, [account, soulGuideContract])
 
   useEffect(() => {
     fetchAllFarms()

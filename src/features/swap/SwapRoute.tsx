@@ -1,7 +1,7 @@
 import React, { Fragment, memo } from 'react'
 
 import { ChevronRightIcon } from '@heroicons/react/outline'
-import { Currency, TradeType, Trade } from '@sushiswap/sdk'
+import { Currency, TradeType, Trade } from '@soulswap/sdk'
 import { unwrappedToken } from '../../functions/currency/wrappedCurrency'
 
 const SwapRoute = memo(({ trade }: { trade: Trade<Currency, Currency, TradeType> }) => {

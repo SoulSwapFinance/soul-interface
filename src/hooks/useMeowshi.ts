@@ -107,11 +107,11 @@ const useMeowshi = (soul: boolean) => {
     [account, addTransaction, meowshiContract]
   )
 
-  const meowSushi = useCallback(
+  const meowSoul = useCallback(
     async (amount: BalanceProps | undefined) => {
       if (amount?.value) {
         try {
-          const tx = await meowshiContract?.meowSushi(account, amount?.value)
+          const tx = await meowshiContract?.meowSoul(account, amount?.value)
           addTransaction(tx, { summary: 'Enter Meowshi' })
           return tx
         } catch (e) {
@@ -122,11 +122,11 @@ const useMeowshi = (soul: boolean) => {
     [account, addTransaction, meowshiContract]
   )
 
-  const unmeowSushi = useCallback(
+  const unmeowSoul = useCallback(
     async (amount: BalanceProps | undefined) => {
       if (amount?.value) {
         try {
-          const tx = await meowshiContract?.unmeowSushi(account, amount?.value)
+          const tx = await meowshiContract?.unmeowSoul(account, amount?.value)
           addTransaction(tx, { summary: 'Leave Meowshi' })
           return tx
         } catch (e) {
@@ -142,8 +142,8 @@ const useMeowshi = (soul: boolean) => {
     approve,
     meow,
     unmeow,
-    meowSushi,
-    unmeowSushi,
+    meowSoul,
+    unmeowSoul,
   }
 }
 

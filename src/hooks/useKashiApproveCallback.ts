@@ -1,7 +1,7 @@
 import KashiCooker, { signMasterContractApproval } from '../entities/KashiCooker'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { KASHI_ADDRESS } from '../constants/kashi'
+import { UNDERWORLD_ADDRESS } from '../constants/kashi'
 import { ethers } from 'ethers'
 import { setKashiApprovalPending } from '../state/application/actions'
 import { useActiveWeb3React } from '../hooks/useActiveWeb3React'
@@ -56,7 +56,7 @@ function useKashiApproveCallback(): [
     setKashiPermit(undefined)
   }, [account, chainId])
 
-  const masterContract = chainId && KASHI_ADDRESS[chainId]
+  const masterContract = chainId && UNDERWORLD_ADDRESS[chainId]
 
   const pendingApproval = useKashiApprovalPending()
   const currentAllowed = useBentoMasterContractAllowed(masterContract, account || ethers.constants.AddressZero)

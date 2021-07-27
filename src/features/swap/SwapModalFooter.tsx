@@ -1,4 +1,4 @@
-import { Currency, TradeType, Trade as V2Trade } from '@sushiswap/sdk'
+import { Currency, TradeType, Trade as V2Trade } from '@soulswap/sdk'
 import React, { ReactNode } from 'react'
 
 import { ButtonError } from '../../components/Button'

@@ -8,7 +8,7 @@ import { useTransactionAdder } from '../state/transactions/hooks'
 
 const { BigNumber } = ethers
 
-const useSushiBar = () => {
+const useSpellBound = () => {
   const { account } = useActiveWeb3React()
   const addTransaction = useTransactionAdder()
   const soulContract = useSoulContract(true) // withSigner
@@ -51,7 +51,7 @@ const useSushiBar = () => {
     async (amount: string) => {
       try {
         const tx = await spellContract?.enter(ethers.utils.parseUnits(amount))
-        return addTransaction(tx, { summary: 'Enter SushiBar' })
+        return addTransaction(tx, { summary: 'Enter SpellBound' })
       } catch (e) {
         return e
       }
@@ -64,7 +64,7 @@ const useSushiBar = () => {
     async (amount: string) => {
       try {
         const tx = await spellContract?.leave(ethers.utils.parseUnits(amount))
-        return addTransaction(tx, { summary: 'Leave SushiBar' })
+        return addTransaction(tx, { summary: 'Leave SpellBound' })
       } catch (e) {
         console.error(e)
         return e
@@ -76,4 +76,4 @@ const useSushiBar = () => {
   return { allowance, approve, enter, leave }
 }
 
-export default useSushiBar
+export default useSpellBound

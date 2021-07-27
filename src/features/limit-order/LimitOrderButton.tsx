@@ -6,8 +6,8 @@ import React, { FC, useCallback, useState } from 'react'
 import useLimitOrderApproveCallback, { BentoApprovalState } from '../../hooks/useLimitOrderApproveCallback'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { ApprovalState, useApproveCallback } from '../../hooks'
-import { BENTOBOX_ADDRESS } from '../../constants/kashi'
-import { ChainId, Currency } from '@sushiswap/sdk'
+import { COFFIN_BOX_ADDRESS } from '../../constants/kashi'
+import { ChainId, Currency } from '@soulswap/sdk'
 import Dots from '../../components/Dots'
 import { useAddPopup, useWalletModalToggle } from '../../state/application/hooks'
 import { useDerivedLimitOrderInfo, useLimitOrderState } from '../../state/limit-order/hooks'
@@ -40,7 +40,7 @@ const LimitOrderButton: FC<LimitOrderButtonProps> = ({ currency, color, ...rest 
 
   const [tokenApprovalState, tokenApprove] = useApproveCallback(
     parsedAmounts[Field.INPUT],
-    chainId && BENTOBOX_ADDRESS[chainId]
+    chainId && COFFIN_BOX_ADDRESS[chainId]
   )
 
   const showLimitApprove =

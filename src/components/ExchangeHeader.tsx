@@ -1,5 +1,5 @@
 // import { ChainId, Currency } from '@soulswap/sdk'
-// import { Percent } from '@sushiswap/sdk'
+// import { Percent } from '@soulswap/sdk'
 // import React, { FC, useState } from 'react'
 
 // import Gas from './Gas'
@@ -105,7 +105,7 @@
 // export default ExchangeHeader
 
 import { ChainId } from '@soulswap/sdk'
-import { Percent } from '@sushiswap/sdk'
+import { Percent } from '@soulswap/sdk'
 import React from 'react'
 import Gas from './Gas'
 import NavLink from './NavLink'

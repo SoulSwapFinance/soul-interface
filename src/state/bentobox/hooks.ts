@@ -1,10 +1,10 @@
-import { Token, WNATIVE } from '@sushiswap/sdk'
-import { useBentoBoxContract, useBoringHelperContract, useContract } from '../../hooks/useContract'
+import { Token, WNATIVE } from '@soulswap/sdk'
+import { useBentoBoxContract, useSoulGuideContract, useContract } from '../../hooks/useContract'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { BigNumber } from '@ethersproject/bignumber'
 import ERC20_ABI from '../../constants/abis/erc20.json'
-import { KASHI_ADDRESS } from '../../constants/kashi'
+import { UNDERWORLD_ADDRESS } from '../../constants/kashi'
 import { USDC } from '../../hooks'
 import { WrappedTokenInfo } from '../lists/wrappedTokenInfo'
 import { Zero } from '@ethersproject/constants'
@@ -31,7 +31,7 @@ export interface BentoBalance {
 export function useBentoBalances(): BentoBalance[] {
   const { chainId, account } = useActiveWeb3React()
 
-  const boringHelperContract = useBoringHelperContract()
+  const soulGuideContract = useSoulGuideContract()
 
   const tokens = useAllTokens()
 
@@ -39,13 +39,13 @@ export function useBentoBalances(): BentoBalance[] {
 
   const tokenAddresses = Object.keys(tokens)
 
-  const balanceData = useSingleCallResult(boringHelperContract, 'getBalances', [account, tokenAddresses])
+  const balanceData = useSingleCallResult(soulGuideContract, 'getBalances', [account, tokenAddresses])
 
-  const uiData = useSingleCallResult(boringHelperContract, 'getUIInfo', [
+  const uiData = useSingleCallResult(soulGuideContract, 'getUIInfo', [
     account,
     [],
     USDC[chainId].address,
-    [KASHI_ADDRESS[chainId]],
+    [UNDERWORLD_ADDRESS[chainId]],
   ])
 
   // IERC20 token = addresses[i];
@@ -115,7 +115,7 @@ export function useBentoBalance(tokenAddress: string): {
 } {
   const { account } = useActiveWeb3React()
 
-  const boringHelperContract = useBoringHelperContract()
+  const soulGuideContract = useSoulGuideContract()
   const bentoBoxContract = useBentoBoxContract()
   const tokenAddressChecksum = getAddress(tokenAddress)
   const tokenContract = useContract(tokenAddressChecksum ? tokenAddressChecksum : undefined, ERC20_ABI)
@@ -124,10 +124,10 @@ export function useBentoBalance(tokenAddress: string): {
 
   const [balance, setBalance] = useState<any>()
 
-  // const balanceData = useSingleCallResult(boringHelperContract, 'getBalances', [account, tokenAddresses])
+  // const balanceData = useSingleCallResult(soulGuideContract, 'getBalances', [account, tokenAddresses])
 
   const fetchBentoBalance = useCallback(async () => {
-    const balances = await boringHelperContract?.getBalances(account, [tokenAddressChecksum])
+    const balances = await soulGuideContract?.getBalances(account, [tokenAddressChecksum])
     const decimals = await tokenContract?.decimals()
 
     const amount = BigNumber.from(balances[0].bentoShare).isZero()
@@ -140,13 +140,13 @@ export function useBentoBalance(tokenAddress: string): {
       value: amount,
       decimals: decimals,
     })
-  }, [account, tokenAddressChecksum, tokenContract, boringHelperContract])
+  }, [account, tokenAddressChecksum, tokenContract, soulGuideContract])
 
   useEffect(() => {
-    if (account && bentoBoxContract && boringHelperContract && tokenContract) {
+    if (account && bentoBoxContract && soulGuideContract && tokenContract) {
       fetchBentoBalance()
     }
-  }, [account, bentoBoxContract, currentTransactionStatus, fetchBentoBalance, tokenContract, boringHelperContract])
+  }, [account, bentoBoxContract, currentTransactionStatus, fetchBentoBalance, tokenContract, soulGuideContract])
 
   return balance
 }

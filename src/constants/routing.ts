@@ -35,7 +35,6 @@ import {
   SOUL,
   SPELL,
   STETH,
-  SUSHI,
   TRIBE,
   UMA,
   USDC,
@@ -44,7 +43,6 @@ import {
   UST,
   WBTC,
   XDAI,
-  XSUSHI,
 } from './tokens'
 // a list of tokens by chain
 import { ChainId, Currency, Token, WNATIVE } from '@soulswap/sdk'
@@ -156,7 +154,7 @@ export const ADDITIONAL_BASES: {
   [ChainId.MAINNET]: {
     ...MIRROR_ADDITIONAL_BASES,
     '0xF16E4d813f4DcfDe4c5b44f305c908742De84eF0': [ETH2X_FLI],
-    '0xe379a60A8FC7C9DD161887fFADF3054790576c8D': [XSUSHI], // XSUSHI 25 Call [30 June 2021]
+    '0xb5083b964a0B6A447564657285AeE1E76524B3Db': [SPELL], // XSUSHI 25 Call [30 June 2021] // JUL 27th
     '0xB46F57e7Ce3a284d74b70447Ef9352B5E5Df8963': [UMA], // UMA 25 Call [30 June 2021]
     [FEI.address]: [TRIBE],
     [TRIBE.address]: [FEI],
@@ -298,7 +296,7 @@ export const PINNED_PAIRS: {
   readonly [chainId in ChainId]?: [Token, Token][]
 } = {
   [ChainId.MAINNET]: [
-    [SUSHI[ChainId.MAINNET] as Token, WNATIVE[ChainId.MAINNET]],
+    [SOUL[ChainId.MAINNET] as Token, WNATIVE[ChainId.MAINNET]],
     [
       new Token(ChainId.MAINNET, '0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643', 8, 'cDAI', 'Compound Dai'),
       new Token(ChainId.MAINNET, '0x39AA39c021dfbaE8faC545936693aC917d5E7563', 8, 'cUSDC', 'Compound USD Coin'),

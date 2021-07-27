@@ -59,7 +59,7 @@ module.exports = withBundleAnalyzer(
       return [
         {
           source: '/stake',
-          destination: '/bound',
+          destination: '/spell',
         },
         {
           source: '/add/:token*',

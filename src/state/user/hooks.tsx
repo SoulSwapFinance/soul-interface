@@ -1,6 +1,7 @@
 import { AppDispatch, AppState } from '..'
 import { BASES_TO_TRACK_LIQUIDITY_FOR, PINNED_PAIRS } from '../../constants'
-import { ChainId, FACTORY_ADDRESS, JSBI, Pair, Percent, Token, computePairAddress } from '@sushiswap/sdk'
+// import { ChainId, FACTORY_ADDRESS, JSBI, Pair, Percent, Token, computePairAddress } from '@soulswap/sdk'
+import { ChainId, FACTORY_ADDRESS, JSBI, Pair, Percent, Token, computePairAddress } from '@soulswap/sdk'
 import {
   SerializedPair,
   SerializedToken,

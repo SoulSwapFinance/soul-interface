@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { useSaaveContract, useSushiContract } from '../hooks/useContract'
+import { useSaaveContract, useSoulContract } from '../hooks/useContract'
 
 import { BalanceProps } from './useTokenBalance'
 import { Fraction } from '../entities'
@@ -13,7 +13,7 @@ const useMaker = () => {
   const { account } = useActiveWeb3React()
 
   const addTransaction = useTransactionAdder()
-  const sushiContract = useSushiContract(true) // withSigner
+  const sushiContract = useSoulContract(true) // withSigner
   const saaveContract = useSaaveContract(true) // withSigner
 
   // Allowance

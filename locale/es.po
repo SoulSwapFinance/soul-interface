@@ -15,7 +15,7 @@ msgstr ""
 
 msgid ""
 "(COMING SOON) Accrue automatic yield through flash loans and\n"
-"SOUL strategies"
+"SUSHI strategies"
 msgstr ""
 
 msgid "1 Hour"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "30 Days"
 msgstr ""
 
-msgid "A portion of each trade (0.05%) goes to xSOUL holders as a protocol incentive."
+msgid "A portion of each trade (0.05%) goes to xSUSHI holders as a protocol incentive."
 msgstr ""
 
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
@@ -195,7 +195,7 @@ msgstr ""
 msgid "Chinese"
 msgstr ""
 
-msgid "Claim SOUL"
+msgid "Claim SUSHI"
 msgstr ""
 
 msgid "Claimed"
@@ -286,7 +286,7 @@ msgstr ""
 msgid "Deposit"
 msgstr "Depositar"
 
-msgid "Deposit SOUL into BentoBox"
+msgid "Deposit SUSHI into BentoBox"
 msgstr ""
 
 msgid "Deposit tokens into BentoBox for all the yields"
@@ -398,7 +398,7 @@ msgid "Gain exposure to tokens without reducing your assets. Leverage will enabl
 msgstr "Obtenga exposición a tokens sin reducir sus activos. El apalancamiento le permitirá tomar posiciones cortas contra activos y ganar dinero con los movimientos a la baja."
 
 msgid ""
-"Gain governance rights with xSOUL and earn 5% APR (0.05% of\n"
+"Gain governance rights with xSUSHI and earn 5% APR (0.05% of\n"
 "all swaps from all chains)"
 msgstr ""
 
@@ -414,7 +414,7 @@ msgstr "Cartera de hardware"
 msgid "Harmony Bridge"
 msgstr ""
 
-msgid "Harvest {0} SOUL {1}"
+msgid "Harvest {0} SUSHI {1}"
 msgstr ""
 
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
@@ -429,7 +429,7 @@ msgstr "Total histórico bloqueado: conectar cartera"
 msgid "Historical Total Locked: Fetching Total"
 msgstr "Total histórico bloqueado: total recuperado"
 
-msgid "Historical Total Locked: {0} SOUL"
+msgid "Historical Total Locked: {0} SUSHI"
 msgstr ""
 
 msgid "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
@@ -608,7 +608,7 @@ msgstr ""
 msgid "My Orders"
 msgstr ""
 
-msgid "My SOUL"
+msgid "My SUSHI"
 msgstr ""
 
 msgid "Network not supported yet"
@@ -850,11 +850,11 @@ msgstr "Apostar"
 msgid "Stake SOUL"
 msgstr ""
 
-msgid "Stake SOUL for xSOUL"
+msgid "Stake SUSHI for xSUSHI"
 msgstr ""
 
 msgid ""
-"Stake into xSOUL add collateral as axSOUL on Aave all in\n"
+"Stake into xSUSHI add collateral as axSUSHI on Aave all in\n"
 "one click"
 msgstr ""
 
@@ -909,7 +909,7 @@ msgstr ""
 msgid "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
 msgstr ""
 
-msgid "Things you can do with your SOUL"
+msgid "Things you can do with your SUSHI"
 msgstr ""
 
 msgid "This token doesn't appear on the active token list(s). Make sure this is the token that you want to trade."
@@ -1073,7 +1073,7 @@ msgstr "Recibirá"
 msgid "Your"
 msgstr ""
 
-msgid "Your Claimable SOUL this Week"
+msgid "Your Claimable SUSHI this Week"
 msgstr ""
 
 msgid "Your Liquidity"
@@ -1148,7 +1148,7 @@ msgstr ""
 msgid "xDai Bridge"
 msgstr ""
 
-msgid "xSOUL Fee"
+msgid "xSUSHI Fee"
 msgstr ""
 
 #. js-lingui:icu=%7B0%2C+plural%2C+one+%7BToken%7D+many+%7BTokens%7D%7D&pluralize_on=0

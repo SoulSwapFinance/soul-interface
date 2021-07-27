@@ -1,4 +1,4 @@
-import { ChainId, Currency, NATIVE, Token, WNATIVE } from '@sushiswap/sdk'
+import { ChainId, Currency, NATIVE, Token, WNATIVE } from '@soulswap/sdk'
 import React, { createContext, useCallback, useContext, useEffect, useReducer } from 'react'
 import { ZERO, e10, maximum, minimum } from '../../functions/math'
 import {
@@ -10,22 +10,22 @@ import {
   takeFee,
 } from '../../functions/kashi'
 import { toAmount, toShare } from '../../functions/bentobox'
-import { useBentoBoxContract, useBoringHelperContract } from '../../hooks/useContract'
+import { useBentoBoxContract, useSoulGuideContract } from '../../hooks/useContract'
 
 import { BigNumber } from '@ethersproject/bignumber'
 import Fraction from '../../entities/Fraction'
-import { KASHI_ADDRESS } from '../../constants/kashi'
+import { UNDERWORLD_ADDRESS } from '../../constants/kashi'
 import { USDC } from '../../hooks'
 import { bentobox } from '@sushiswap/sushi-data'
 import { ethers } from 'ethers'
-import { getCurrency } from '../../functions/currency'
+// import { getCurrency } from '../../functions/currency'
 import { getOracle } from '../../entities/Oracle'
 import { toElastic } from '../../functions/rebase'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useAllTokens } from '../../hooks/Tokens'
 import { useBlockNumber } from '../../state/application/hooks'
 import usePrevious from '../../hooks/usePrevious'
-import { useSingleCallResult } from '../../state/multicall/hooks'
+// import { useSingleCallResult } from '../../state/multicall/hooks'
 
 enum ActionType {
   UPDATE = 'UPDATE',
@@ -42,10 +42,10 @@ interface State {
     | {
         ethBalance: BigNumber
         sushiBalance: BigNumber
-        sushiBarBalance: BigNumber
-        xsushiBalance: BigNumber
-        xsushiSupply: BigNumber
-        sushiBarAllowance: BigNumber
+        spellBoundBalance: BigNumber
+        spellBalance: BigNumber
+        spellSupply: BigNumber
+        spellBoundAllowance: BigNumber
         factories: any[]
         ethRate: BigNumber
         sushiRate: BigNumber
@@ -62,10 +62,10 @@ const initialState: State = {
   info: {
     ethBalance: ZERO,
     sushiBalance: ZERO,
-    sushiBarBalance: ZERO,
-    xsushiBalance: ZERO,
-    xsushiSupply: ZERO,
-    sushiBarAllowance: ZERO,
+    spellBoundBalance: ZERO,
+    spellBalance: ZERO,
+    spellSupply: ZERO,
+    spellBoundAllowance: ZERO,
     factories: [],
     ethRate: ZERO,
     sushiRate: ZERO,
@@ -116,7 +116,7 @@ const reducer: React.Reducer<State, Reducer> = (state: any, action: any) => {
 async function getPairs(bentoBoxContract: any, chainId: ChainId) {
   let logs = []
   let success = false
-  const masterAddress = KASHI_ADDRESS[chainId]
+  const masterAddress = UNDERWORLD_ADDRESS[chainId]
   if (chainId !== ChainId.BSC && chainId !== ChainId.MATIC) {
     logs = await bentoBoxContract.queryFilter(bentoBoxContract.filters.LogDeploy(masterAddress))
     success = true
@@ -191,16 +191,16 @@ export function KashiProvider({ children }) {
 
   const currency = USDC[chainId]
 
-  const boringHelperContract = useBoringHelperContract()
+  const soulGuideContract = useSoulGuideContract()
   const bentoBoxContract = useBentoBoxContract()
 
   const tokens = useAllTokens()
 
-  // const info = useSingleCallResult(boringHelperContract, 'getUIInfo', [
+  // const info = useSingleCallResult(soulGuideContract, 'getUIInfo', [
   //   account,
   //   [],
   //   USDC[chainId].address,
-  //   [KASHI_ADDRESS[chainId]],
+  //   [UNDERWORLD_ADDRESS[chainId]],
   // ])?.result?.[0]
 
   // console.log({ info })
@@ -215,10 +215,10 @@ export function KashiProvider({ children }) {
       return
     }
 
-    if (boringHelperContract && bentoBoxContract) {
+    if (soulGuideContract && bentoBoxContract) {
       // // console.log('READY TO RUMBLE')
       const info = rpcToObj(
-        await boringHelperContract.getUIInfo(account, [], currency.address, [KASHI_ADDRESS[chainId]])
+        await soulGuideContract.getUIInfo(account, [], currency.address, [UNDERWORLD_ADDRESS[chainId]])
       )
 
       // Get the deployed pairs from the logs and decode
@@ -243,7 +243,7 @@ export function KashiProvider({ children }) {
       console.log('invalidOracles', invalidOracles)
 
       // Get full info on all the verified pairs
-      const pairs = rpcToObj(await boringHelperContract.pollKashiPairs(account, allPairAddresses))
+      const pairs = rpcToObj(await soulGuideContract.pollKashiPairs(account, allPairAddresses))
 
       // Get a list of all tokens in the pairs
       const pairTokens = new Tokens()
@@ -258,7 +258,7 @@ export function KashiProvider({ children }) {
 
       // Get balances, bentobox info and allowences for the tokens
       const pairAddresses = Object.values(pairTokens).map((token) => token.address)
-      const balances = rpcToObj(await boringHelperContract.getBalances(account, pairAddresses))
+      const balances = rpcToObj(await soulGuideContract.getBalances(account, pairAddresses))
 
       const missingTokens = []
 
@@ -447,7 +447,7 @@ export function KashiProvider({ children }) {
         },
       })
     }
-  }, [account, chainId, boringHelperContract, bentoBoxContract, currency.address, tokens, weth.address])
+  }, [account, chainId, soulGuideContract, bentoBoxContract, currency.address, tokens, weth.address])
 
   const previousBlockNumber = usePrevious(blockNumber)
 

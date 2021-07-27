@@ -2,7 +2,7 @@ import { ApprovalState, useApproveCallback } from '../../../hooks/useApproveCall
 import { ArrowDown, Plus } from 'react-feather'
 import { AutoRow, RowBetween } from '../../../components/Row'
 import { ButtonConfirmed, ButtonError } from '../../../components/Button'
-import { ChainId, Currency, NATIVE, Percent, WNATIVE } from '@sushiswap/sdk'
+import { ChainId, Currency, NATIVE, Percent, WNATIVE } from '@soulswap/sdk'
 import React, { useCallback, useMemo, useState } from 'react'
 import TransactionConfirmationModal, { ConfirmationModalContent } from '../../../modals/TransactionConfirmationModal'
 import { calculateGasMargin, calculateSlippageAmount } from '../../../functions/trade'

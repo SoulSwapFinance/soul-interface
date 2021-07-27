@@ -3,7 +3,7 @@ import { ApprovalState, useApproveCallbackFromTrade } from '../../../hooks/useAp
 import { ArrowWrapper, BottomGrouping, SwapCallbackError } from '../../../features/swap/styleds'
 import { AutoRow, RowBetween, RowFixed } from '../../../components/Row'
 import { ButtonConfirmed, ButtonError } from '../../../components/Button'
-import { ChainId, Currency, CurrencyAmount, JSBI, Token, TradeType, Trade as V2Trade } from '@sushiswap/sdk'
+import { ChainId, Currency, CurrencyAmount, JSBI, Token, TradeType, Trade as V2Trade } from '@soulswap/sdk'
 import Column, { AutoColumn } from '../../../components/Column'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { UseERC20PermitState, useERC20PermitFromTrade } from '../../../hooks/useERC20Permit'
