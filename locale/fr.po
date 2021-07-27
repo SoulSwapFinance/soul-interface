@@ -48,7 +48,10 @@ msgstr "Ajouter"
 msgid "Add Liquidity"
 msgstr "Ajouter de la liquidité"
 
-msgid "Add SUSHI to your MetaMask wallet"
+msgid "Add SOUL to your MetaMask wallet"
+msgstr ""
+
+msgid "Add SPELL to your MetaMask wallet"
 msgstr ""
 
 msgid "Add collateral in order to borrow assets"
@@ -56,9 +59,6 @@ msgstr "Ajouter des garanties pour emprunter des actifs"
 
 msgid "Add liquidity"
 msgstr "Ajouter de la liquidité"
-
-msgid "Add xSUSHI to your MetaMask wallet"
-msgstr ""
 
 msgid "Add {0} to MetaMask"
 msgstr ""
@@ -391,14 +391,6 @@ msgid ""
 "SOUL and any additional from fees."
 msgstr ""
 
-msgid ""
-"For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SUSHI\n"
-"proportional to your share of the SushiBar. When your SUSHI is staked into the SushiBar, you recieve\n"
-"xSUSHI in return for voting rights and a fully composable token that can interact with other protocols.\n"
-"Your xSUSHI is continuously compounding, when you unstake you will receive all the originally deposited\n"
-"SUSHI and any additional from fees."
-msgstr ""
-
 msgid "French"
 msgstr ""
 
@@ -497,9 +489,6 @@ msgstr ""
 msgid "Learn more about wallets"
 msgstr ""
 
-msgid "Lend"
-msgstr "Prêter"
-
 msgid "Lend assets for interest from borrowers."
 msgstr "Prêtez vos actifs et collectez des intérêts auprès des emprunteurs."
 
@@ -558,7 +547,7 @@ msgid "MAX"
 msgstr "MAX"
 
 msgid ""
-"MEOW tokens wrap xSUSHI into BentoBox for double yields and can be\n"
+"MEOW tokens wrap xSOUL into BentoBox for double yields and can be\n"
 "used to vote in special MEOW governor contracts."
 msgstr ""
 
@@ -589,9 +578,6 @@ msgstr "Max"
 msgid "Maximize yield by staking SOUL for SPELL"
 msgstr ""
 
-msgid "Maximize yield by staking SUSHI for xSUSHI"
-msgstr ""
-
 msgid "Maximum sent"
 msgstr ""
 
@@ -615,9 +601,6 @@ msgstr ""
 
 msgid "Minimum received"
 msgstr "Minimum reçu"
-
-msgid "Miso"
-msgstr ""
 
 msgid "My Liquidity Positions"
 msgstr ""
@@ -867,9 +850,6 @@ msgstr "Staker"
 msgid "Stake SOUL"
 msgstr ""
 
-msgid "Stake SUSHI"
-msgstr ""
-
 msgid "Stake SUSHI for xSUSHI"
 msgstr ""
 
@@ -1104,9 +1084,6 @@ msgstr ""
 
 msgid "Your Staked"
 msgstr "Vos X placés"
-
-msgid "Your SushiBar Stats"
-msgstr ""
 
 msgid "Your Wallet"
 msgstr "Votre portefeuille"

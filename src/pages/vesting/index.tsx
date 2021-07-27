@@ -103,7 +103,7 @@ export default function Vesting() {
   return (
     <Container id="vesting-page" className="py-4 md:py-8 lg:py-12 m-auto w-full max-w-[900px]">
       <Head>
-        <title>Vesting | Sushi</title>
+        <title>Vesting | Soul</title>
         <meta key="description" name="description" content="SushiSwap vesting..." />
       </Head>
       <div className="flex px-0 sm:px-4 md:flex-row md:space-x-10 lg:space-x-20 md:px-10">
@@ -144,7 +144,7 @@ export default function Vesting() {
             <div className="flex flex-col gap-3 p-4">
               <div className="flex flex-row justify-between">
                 <div className="font-bold text-white">{i18n._(t`Your Claimable SUSHI this Week`)}</div>
-                <QuestionHelper text="Your Vested SUSHI will be released each week for the next 6 months. The amount released each week is determined by your historical farming rewards. You do not need to harvest each week as unclaimed amounts from each week will continue to accrue onto the next." />
+                <QuestionHelper text="Your Vested SOUL will be released each week for the next 6 months. The amount released each week is determined by your historical farming rewards. You do not need to harvest each week as unclaimed amounts from each week will continue to accrue onto the next." />
               </div>
               {/* <div style={{ display: 'flex', alignItems: 'baseline' }}> */}
               <div className="flex flex-col items-baseline">

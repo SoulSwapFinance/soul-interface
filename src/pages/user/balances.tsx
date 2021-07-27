@@ -44,7 +44,7 @@ function Balances() {
   return (
     <Container id="balances-page" className="py-4 md:py-8 lg:py-12" maxWidth="2xl">
       <Head>
-        <title>Balances | Sushi</title>
+        <title>Balances | Soul</title>
         <meta key="description" name="description" content="" />
       </Head>
       <Card

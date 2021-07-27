@@ -48,7 +48,10 @@ msgstr "추가"
 msgid "Add Liquidity"
 msgstr "유동성 추가"
 
-msgid "Add SUSHI to your MetaMask wallet"
+msgid "Add SOUL to your MetaMask wallet"
+msgstr ""
+
+msgid "Add SPELL to your MetaMask wallet"
 msgstr ""
 
 msgid "Add collateral in order to borrow assets"
@@ -56,9 +59,6 @@ msgstr "자산을 빌리려면 담보를 추가하세요"
 
 msgid "Add liquidity"
 msgstr "유동성 추가"
-
-msgid "Add xSUSHI to your MetaMask wallet"
-msgstr ""
 
 msgid "Add {0} to MetaMask"
 msgstr ""
@@ -391,14 +391,6 @@ msgid ""
 "SOUL and any additional from fees."
 msgstr ""
 
-msgid ""
-"For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SUSHI\n"
-"proportional to your share of the SushiBar. When your SUSHI is staked into the SushiBar, you recieve\n"
-"xSUSHI in return for voting rights and a fully composable token that can interact with other protocols.\n"
-"Your xSUSHI is continuously compounding, when you unstake you will receive all the originally deposited\n"
-"SUSHI and any additional from fees."
-msgstr ""
-
 msgid "French"
 msgstr ""
 
@@ -497,9 +489,6 @@ msgstr ""
 msgid "Learn more about wallets"
 msgstr ""
 
-msgid "Lend"
-msgstr "대출해주기"
-
 msgid "Lend assets for interest from borrowers."
 msgstr "자산을 대출하고 대출에 대한 이자수익을 벌어보세요."
 
@@ -558,7 +547,7 @@ msgid "MAX"
 msgstr "최대"
 
 msgid ""
-"MEOW tokens wrap xSUSHI into BentoBox for double yields and can be\n"
+"MEOW tokens wrap xSOUL into BentoBox for double yields and can be\n"
 "used to vote in special MEOW governor contracts."
 msgstr ""
 
@@ -589,9 +578,6 @@ msgstr "최대"
 msgid "Maximize yield by staking SOUL for SPELL"
 msgstr ""
 
-msgid "Maximize yield by staking SUSHI for xSUSHI"
-msgstr ""
-
 msgid "Maximum sent"
 msgstr ""
 
@@ -615,9 +601,6 @@ msgstr ""
 
 msgid "Minimum received"
 msgstr "최소 수령"
-
-msgid "Miso"
-msgstr ""
 
 msgid "My Liquidity Positions"
 msgstr ""
@@ -867,9 +850,6 @@ msgstr "스테이킹"
 msgid "Stake SOUL"
 msgstr ""
 
-msgid "Stake SUSHI"
-msgstr ""
-
 msgid "Stake SUSHI for xSUSHI"
 msgstr ""
 
@@ -1104,9 +1084,6 @@ msgstr ""
 
 msgid "Your Staked"
 msgstr "귀하의 지분"
-
-msgid "Your SushiBar Stats"
-msgstr ""
 
 msgid "Your Wallet"
 msgstr "내 지갑"

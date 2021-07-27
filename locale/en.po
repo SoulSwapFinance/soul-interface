@@ -50,17 +50,17 @@ msgstr "Add"
 msgid "Add Liquidity"
 msgstr "Add Liquidity"
 
-msgid "Add SUSHI to your MetaMask wallet"
-msgstr "Add SUSHI to your MetaMask wallet"
+msgid "Add SOUL to your MetaMask wallet"
+msgstr "Add SOUL to your MetaMask wallet"
+
+msgid "Add SPELL to your MetaMask wallet"
+msgstr "Add SPELL to your MetaMask wallet"
 
 msgid "Add collateral in order to borrow assets"
 msgstr "Add collateral in order to borrow assets"
 
 msgid "Add liquidity"
 msgstr "Add liquidity"
-
-msgid "Add xSUSHI to your MetaMask wallet"
-msgstr "Add xSUSHI to your MetaMask wallet"
 
 msgid "Add {0} to MetaMask"
 msgstr "Add {0} to MetaMask"
@@ -401,19 +401,6 @@ msgstr ""
 "Your SPELL is continuously compounding, when you unstake you will receive all the originally deposited\n"
 "SOUL and any additional from fees."
 
-msgid ""
-"For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SUSHI\n"
-"proportional to your share of the SushiBar. When your SUSHI is staked into the SushiBar, you recieve\n"
-"xSUSHI in return for voting rights and a fully composable token that can interact with other protocols.\n"
-"Your xSUSHI is continuously compounding, when you unstake you will receive all the originally deposited\n"
-"SUSHI and any additional from fees."
-msgstr ""
-"For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SUSHI\n"
-"proportional to your share of the SushiBar. When your SUSHI is staked into the SushiBar, you recieve\n"
-"xSUSHI in return for voting rights and a fully composable token that can interact with other protocols.\n"
-"Your xSUSHI is continuously compounding, when you unstake you will receive all the originally deposited\n"
-"SUSHI and any additional from fees."
-
 msgid "French"
 msgstr "French"
 
@@ -514,9 +501,6 @@ msgstr "LTV"
 msgid "Learn more about wallets"
 msgstr "Learn more about wallets"
 
-msgid "Lend"
-msgstr "Lend"
-
 msgid "Lend assets for interest from borrowers."
 msgstr "Lend assets for interest from borrowers."
 
@@ -575,10 +559,10 @@ msgid "MAX"
 msgstr "MAX"
 
 msgid ""
-"MEOW tokens wrap xSUSHI into BentoBox for double yields and can be\n"
+"MEOW tokens wrap xSOUL into BentoBox for double yields and can be\n"
 "used to vote in special MEOW governor contracts."
 msgstr ""
-"MEOW tokens wrap xSUSHI into BentoBox for double yields and can be\n"
+"MEOW tokens wrap xSOUL into BentoBox for double yields and can be\n"
 "used to vote in special MEOW governor contracts."
 
 msgid "MEV Shield by Archer DAO"
@@ -608,9 +592,6 @@ msgstr "Max"
 msgid "Maximize yield by staking SOUL for SPELL"
 msgstr "Maximize yield by staking SOUL for SPELL"
 
-msgid "Maximize yield by staking SUSHI for xSUSHI"
-msgstr "Maximize yield by staking SUSHI for xSUSHI"
-
 msgid "Maximum sent"
 msgstr "Maximum sent"
 
@@ -634,9 +615,6 @@ msgstr "Minimum Received"
 
 msgid "Minimum received"
 msgstr "Minimum received"
-
-msgid "Miso"
-msgstr "Miso"
 
 msgid "My Liquidity Positions"
 msgstr "My Liquidity Positions"
@@ -888,9 +866,6 @@ msgstr "Stake"
 msgid "Stake SOUL"
 msgstr "Stake SOUL"
 
-msgid "Stake SUSHI"
-msgstr "Stake SUSHI"
-
 msgid "Stake SUSHI for xSUSHI"
 msgstr "Stake SUSHI for xSUSHI"
 
@@ -1129,9 +1104,6 @@ msgstr "Your SpellBound Stats"
 
 msgid "Your Staked"
 msgstr "Your Staked"
-
-msgid "Your SushiBar Stats"
-msgstr "Your SushiBar Stats"
 
 msgid "Your Wallet"
 msgstr "Your Wallet"
