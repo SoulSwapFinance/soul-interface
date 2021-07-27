@@ -171,7 +171,7 @@ msgid "Buy"
 msgstr ""
 
 msgid ""
-"By adding liquidity you'll earn 0.25% of all trades on this pair\n"
+"By adding liquidity you'll earn fees from all trades on this pair\n"
 "proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be\n"
 "claimed by withdrawing your liquidity."
 msgstr ""

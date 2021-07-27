@@ -76,7 +76,7 @@ function ImportList({ listURL, list, setModalView, onDismiss }: ImportProps) {
       <PaddedColumn gap="14px" style={{ width: '100%', flex: '1 1' }}>
         <RowBetween>
           <ArrowLeft style={{ cursor: 'pointer' }} onClick={() => setModalView(CurrencyModalView.manage)} />
-          <div>Import List</div>
+          <div>Import</div>
           <CloseIcon onClick={onDismiss} />
         </RowBetween>
       </PaddedColumn>

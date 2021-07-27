@@ -321,7 +321,7 @@ export default function Add() {
         />
       </Head>
 
-      <Container id="add-liquidity-page"  className="py-4 space-y-6 md:py-8 lg:py-12" maxWidth="2xl">
+      <Container id="add-liquidity-page" className="py-4 space-y-6 md:py-8 lg:py-12" maxWidth="2xl">
         <div className="flex items-center justify-between px-4 mb-5">
           <NavLink href="/pool">
             <a className="flex items-center space-x-2 text-base font-medium text-center cursor-pointer text-secondary hover:text-high-emphesis">
@@ -360,7 +360,7 @@ export default function Add() {
               <>
                 <b>{i18n._(t`Tip:`)}</b>{' '}
                 {i18n._(
-                  t`By adding liquidity you'll earn 0.25% of all trades on this pair
+                  t`By adding liquidity you'll earn fees from all trades on this pair
                 proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be
                 claimed by withdrawing your liquidity.`
                 )}

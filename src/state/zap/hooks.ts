@@ -271,8 +271,10 @@ export function useDefaultsFromURLSearch():
     if (!chainId) return
 
     setResult({
-      poolAddress: parsedQs.poolAddress,
-      currencyId: parsedQs.currencyId,
+      // poolAddress: parsedQs.poolAddress,
+      // currencyIds: parsedQs.currencyId,
+      poolAddress: result.poolAddress,
+      currencyId: result.currencyId,
     })
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
