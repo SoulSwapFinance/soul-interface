@@ -1145,6 +1145,9 @@ msgstr "分钟"
 msgid "or the transaction will revert."
 msgstr ""
 
+msgid "xDai Bridge"
+msgstr ""
+
 msgid "xSUSHI Fee"
 msgstr ""
 

@@ -1168,6 +1168,9 @@ msgstr "minutes"
 msgid "or the transaction will revert."
 msgstr "or the transaction will revert."
 
+msgid "xDai Bridge"
+msgstr "xDai Bridge"
+
 msgid "xSUSHI Fee"
 msgstr "xSUSHI Fee"
 

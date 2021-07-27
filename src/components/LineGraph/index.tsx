@@ -1,5 +1,5 @@
 import AutoSizer from 'react-virtualized-auto-sizer'
-import { useMemo } from 'react'
+import { data, useMemo } from 'react-dom'
 import { scaleLinear } from '@visx/scale'
 import { LinePath } from '@visx/shape'
 
@@ -35,7 +35,7 @@ function Graph({ data, stroke, width, height }: GraphProps): JSX.Element {
         domain: [minBy(data, 'x').x, maxBy(data, 'x').x],
         range: [0, width],
       }),
-    [JSON.stringify(data), width]
+    [data, width]
   )
   const yScale = useMemo(
     () =>
@@ -43,7 +43,7 @@ function Graph({ data, stroke, width, height }: GraphProps): JSX.Element {
         domain: [maxBy(data, 'y').y, minBy(data, 'y').y],
         range: [0, height],
       }),
-    [JSON.stringify(data), height]
+    [data, height]
   )
 
   return (

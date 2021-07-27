@@ -1157,6 +1157,9 @@ msgstr "phút"
 msgid "or the transaction will revert."
 msgstr ""
 
+msgid "xDai Bridge"
+msgstr ""
+
 msgid "xSUSHI Fee"
 msgstr ""
 

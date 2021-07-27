@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import Head from 'next/head'
 import Image from 'next/image'
 import { useLingui } from '@lingui/react'
