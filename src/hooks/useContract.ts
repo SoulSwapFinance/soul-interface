@@ -3,11 +3,17 @@ import {
   ARGENT_WALLET_DETECTOR_ABI,
   ARGENT_WALLET_DETECTOR_MAINNET_ADDRESS,
 } from '../constants/abis/argent-wallet-detector'
-import { ROUTER_ADDRESS, SPELL_ADDRESS, SOUL_ADDRESS } from '@soulswap/sdk'
+import {
+  FACTORY_ADDRESS,
+  ROUTER_ADDRESS,
+  SPELL_ADDRESS,
+  SOUL_ADDRESS,
+  // SOULSWAP_MULTISWAPPER_ADDRESS,
+  SOULSWAP_SWAPPER_ADDRESS,
+} from '@soulswap/sdk'
 import {
   BAR_ADDRESS,
   ChainId,
-  FACTORY_ADDRESS,
   MAKER_ADDRESS,
   MASTERCHEF_ADDRESS as MASTERCHEF_V1_ADDRESS,
   SUSHI_ADDRESS,
@@ -20,7 +26,7 @@ import {
   BORING_HELPER_ADDRESS,
   CHAINLINK_ORACLE_ADDRESS,
   KASHI_ADDRESS,
-  SUSHISWAP_MULTISWAPPER_ADDRESS,
+  // SUSHISWAP_MULTISWAPPER_ADDRESS,
   SUSHISWAP_SWAPPER_ADDRESS,
   SUSHISWAP_TWAP_0_ORACLE_ADDRESS,
   SUSHISWAP_TWAP_1_ORACLE_ADDRESS,
@@ -47,6 +53,7 @@ import ENS_PUBLIC_RESOLVER_ABI from '../constants/abis/ens-public-resolver.json'
 import ERC20_ABI from '../constants/abis/erc20.json'
 import { ERC20_BYTES32_ABI } from '../constants/abis/erc20'
 import FACTORY_ABI from '../constants/abis/factory.json'
+// import FACTORY_V1_ABI from '../constants/abis/factoryV1.json'
 import IUniswapV2PairABI from '../constants/abis/uniswap-v2-pair.json'
 import KASHIPAIR_ABI from '../constants/abis/kashipair.json'
 import MAKER_ABI from '../constants/abis/maker.json'
@@ -76,6 +83,7 @@ import { useActiveWeb3React } from './useActiveWeb3React'
 import { useMemo } from 'react'
 
 import { getVerifyingContract } from 'limitorderv2-sdk'
+import { ImportToken } from '../modals/SearchModal/ImportToken'
 
 const UNI_FACTORY_ADDRESS = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f'
 
@@ -247,6 +255,11 @@ export function useKashiPairCloneContract(address: string, withSignerIfPossible?
 export function useSushiSwapSwapper(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SUSHISWAP_SWAPPER_ADDRESS[chainId], BASE_SWAPPER_ABI, false)
+}
+
+export function useSoulSwapSwapper(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOULSWAP_SWAPPER_ADDRESS[chainId], BASE_SWAPPER_ABI, false)
 }
 
 export function useChainlinkOracle(): Contract | null {

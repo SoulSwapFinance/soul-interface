@@ -15,10 +15,8 @@ msgstr ""
 
 msgid ""
 "(COMING SOON) Accrue automatic yield through flash loans and\n"
-"SOUL strategies"
+"SUSHI strategies"
 msgstr ""
-"（即将推出）通过闪电贷和\n"
-"SOUL策略累积自动获取收益"
 
 msgid "1 Hour"
 msgstr ""
@@ -32,7 +30,7 @@ msgstr ""
 msgid "30 Days"
 msgstr ""
 
-msgid "A portion of each trade (0.05%) goes to SPELL holders as a protocol incentive."
+msgid "A portion of each trade (0.05%) goes to xSUSHI holders as a protocol incentive."
 msgstr ""
 
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
@@ -50,7 +48,7 @@ msgstr "添加"
 msgid "Add Liquidity"
 msgstr "添加流动性"
 
-msgid "Add SOUL to your MetaMask wallet"
+msgid "Add SUSHI to your MetaMask wallet"
 msgstr ""
 
 msgid "Add collateral in order to borrow assets"
@@ -59,7 +57,7 @@ msgstr "添加抵押品以借出资产"
 msgid "Add liquidity"
 msgstr "添加流动性"
 
-msgid "Add SPELL to your MetaMask wallet"
+msgid "Add xSUSHI to your MetaMask wallet"
 msgstr ""
 
 msgid "Add {0} to MetaMask"
@@ -197,8 +195,8 @@ msgstr ""
 msgid "Chinese"
 msgstr ""
 
-msgid "Claim SOUL"
-msgstr "获取SOUL"
+msgid "Claim SUSHI"
+msgstr ""
 
 msgid "Claimed"
 msgstr "已获取"
@@ -286,8 +284,8 @@ msgstr ""
 msgid "Deposit"
 msgstr "存款"
 
-msgid "Deposit SOUL into BentoBox"
-msgstr "将SOUL存入BentoBox"
+msgid "Deposit SUSHI into BentoBox"
+msgstr ""
 
 msgid "Deposit tokens into BentoBox for all the yields"
 msgstr "将代币存入BentoBox，以获得所有收益。"
@@ -316,11 +314,11 @@ msgstr "解散"
 msgid "Docs"
 msgstr "文档"
 
-msgid "Documentation for developers of Soul."
-msgstr "Soul开发文档。"
+msgid "Documentation for developers of Sushi."
+msgstr ""
 
-msgid "Documentation for users of Soul."
-msgstr "Soul用户文档。"
+msgid "Documentation for users of Sushi."
+msgstr ""
 
 msgid "Either return to the {link}, or change to an available network."
 msgstr ""
@@ -382,12 +380,12 @@ msgid "Find Pool"
 msgstr "查找池"
 
 msgid ""
-"For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL\n"
-"proportional to your share of the SpellBound. When your SOUL is staked into the SpellBound, you recieve\n"
-"SPELL in return for voting rights and a fully composable token that can interact with other protocols.\n"
-"Your SPELL is continuously compounding, when you unstake you will receive all the originally deposited\n"
-"SOUL and any additional from fees."
-msgstr "每条链上每笔交易手续费的0.05%都分给SpellBound（以SOUL的形式）。当您的SOUL质押在SpellBound的时候，您将会收到SPELL，它有治理权及可以与其它协议交互。SPELL可持续复利，当您解除质押时，您将收到质押时的SOUL及手续费。"
+"For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SUSHI\n"
+"proportional to your share of the SushiBar. When your SUSHI is staked into the SushiBar, you recieve\n"
+"xSUSHI in return for voting rights and a fully composable token that can interact with other protocols.\n"
+"Your xSUSHI is continuously compounding, when you unstake you will receive all the originally deposited\n"
+"SUSHI and any additional from fees."
+msgstr ""
 
 msgid "French"
 msgstr ""
@@ -396,9 +394,9 @@ msgid "Gain exposure to tokens without reducing your assets. Leverage will enabl
 msgstr "在不减少资产的情况下获得代币的敞口。杠杆将使您能够对资产做空，并从下跌趋势中获利。"
 
 msgid ""
-"Gain governance rights with SPELL and earn 5% APR (0.05% of\n"
+"Gain governance rights with xSUSHI and earn 5% APR (0.05% of\n"
 "all swaps from all chains)"
-msgstr "通过SPELL获得治理权，并获得5%的年利率（来自所有链上交易手续费的0.05%）"
+msgstr ""
 
 msgid "German"
 msgstr ""
@@ -412,7 +410,7 @@ msgstr "硬件钱包"
 msgid "Harmony Bridge"
 msgstr ""
 
-msgid "Harvest {0} SOUL {1}"
+msgid "Harvest {0} SUSHI {1}"
 msgstr ""
 
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
@@ -427,8 +425,8 @@ msgstr "锁仓的总数：连接钱包"
 msgid "Historical Total Locked: Fetching Total"
 msgstr "锁仓的总数：获取总数"
 
-msgid "Historical Total Locked: {0} SOUL"
-msgstr "锁仓的总数：{0}SOUL"
+msgid "Historical Total Locked: {0} SUSHI"
+msgstr ""
 
 msgid "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
 msgstr ""
@@ -545,7 +543,7 @@ msgid "MAX"
 msgstr "最大数量"
 
 msgid ""
-"MEOW tokens wrap SPELL into BentoBox for double yields and can be\n"
+"MEOW tokens wrap xSUSHI into BentoBox for double yields and can be\n"
 "used to vote in special MEOW governor contracts."
 msgstr ""
 
@@ -573,8 +571,8 @@ msgstr ""
 msgid "Max"
 msgstr "最大数量"
 
-msgid "Maximize yield by staking SOUL for SPELL"
-msgstr "将SOUL质押成SPELL最大化收益"
+msgid "Maximize yield by staking SUSHI for xSUSHI"
+msgstr ""
 
 msgid "Maximum sent"
 msgstr ""
@@ -609,7 +607,7 @@ msgstr ""
 msgid "My Orders"
 msgstr ""
 
-msgid "My SOUL"
+msgid "My SUSHI"
 msgstr ""
 
 msgid "Network not supported yet"
@@ -845,18 +843,16 @@ msgstr "使用SAAVE叠加收益"
 msgid "Stake"
 msgstr "质押"
 
-msgid "Stake SOUL"
-msgstr "质押SOUL"
+msgid "Stake SUSHI"
+msgstr ""
 
-msgid "Stake SOUL for SPELL"
-msgstr "将SOUL质押成SPELL"
+msgid "Stake SUSHI for xSUSHI"
+msgstr ""
 
 msgid ""
-"Stake into SPELL add collateral as aSPELL on Aave all in\n"
+"Stake into xSUSHI add collateral as axSUSHI on Aave all in\n"
 "one click"
 msgstr ""
-"放入SPELL进行抵押，将抵押品作为aSPELL添加到\n"
-"一键中"
 
 msgid "Staking APR"
 msgstr "质押APR"
@@ -864,10 +860,10 @@ msgstr "质押APR"
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "提供{0} {1}和{2} {3}"
 
-msgid "Soul is a supporter of Open Source."
-msgstr "Soul是开源协议的支持者。"
+msgid "Sushi is a supporter of Open Source."
+msgstr ""
 
-msgid "SoulSwap"
+msgid "SushiSwap"
 msgstr ""
 
 msgid "Swap"
@@ -909,8 +905,8 @@ msgstr ""
 msgid "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
 msgstr ""
 
-msgid "Things you can do with your SOUL"
-msgstr "SOUL可以做的事情"
+msgid "Things you can do with your SUSHI"
+msgstr ""
 
 msgid "This token doesn't appear on the active token list(s). Make sure this is the token that you want to trade."
 msgstr ""
@@ -986,13 +982,13 @@ msgstr "不支持的资产"
 msgid "Unwrap"
 msgstr "解开"
 
-msgid "Use SOUL"
+msgid "Use SUSHI"
 msgstr ""
 
 msgid "Use this tool to find pairs that don't automatically appear in the interface"
 msgstr ""
 
-msgid "Use SPELL"
+msgid "Use xSUSHI"
 msgstr ""
 
 msgid "Used"
@@ -1073,8 +1069,8 @@ msgstr "您将收到"
 msgid "Your"
 msgstr ""
 
-msgid "Your Claimable SOUL this Week"
-msgstr "本周您可领取的SOUL"
+msgid "Your Claimable SUSHI this Week"
+msgstr ""
 
 msgid "Your Liquidity"
 msgstr "您的流动性"
@@ -1082,8 +1078,8 @@ msgstr "您的流动性"
 msgid "Your Staked"
 msgstr "您在流动性池的占比"
 
-msgid "Your SpellBound Stats"
-msgstr "您的SpellBound统计信息"
+msgid "Your SushiBar Stats"
+msgstr ""
 
 msgid "Your Wallet"
 msgstr "您的钱包"
@@ -1148,7 +1144,7 @@ msgstr ""
 msgid "xDai Bridge"
 msgstr ""
 
-msgid "SPELL Fee"
+msgid "xSUSHI Fee"
 msgstr ""
 
 #. js-lingui:icu=%7B0%2C+plural%2C+one+%7BToken%7D+many+%7BTokens%7D%7D&pluralize_on=0

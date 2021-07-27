@@ -264,7 +264,7 @@ export default function Zap() {
         <meta
           key="description"
           name="description"
-          content="SushiSwap allows for swapping of ERC20 compatible tokens across multiple networks"
+          content="SoulSwap allows for swapping of ERC20 compatible tokens across multiple networks"
         />
       </Head>
       {!poolAddress ? (

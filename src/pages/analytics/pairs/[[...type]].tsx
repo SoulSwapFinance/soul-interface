@@ -101,8 +101,8 @@ export default function Pairs() {
   return (
     <>
       <Head>
-        <title>SushiSwap Liquidity Pair (SLP) Analytics | Sushi</title>
-        <meta name="description" content="SushiSwap Liquidity Pair (SLP) Analytics by Sushi" />
+        <title>SoulSwap Liquidity Pair (SLP) Analytics | Soul</title>
+        <meta name="description" content="SoulSwap Liquidity Pair (SLP) Analytics by Soul" />
       </Head>
 
       <Container maxWidth="full" className="grid h-full grid-flow-col grid-cols-5 mx-auto gap-9">

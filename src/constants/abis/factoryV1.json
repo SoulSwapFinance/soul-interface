@@ -4,7 +4,6 @@
       "name": "_feeToSetter",
       "type": "address"
     }],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "constructor"
   },
@@ -39,7 +38,6 @@
     "type": "event"
   },
   {
-    "constant": true,
     "inputs": [{
       "internalType": "uint256",
       "name": "",
@@ -51,12 +49,10 @@
       "name": "",
       "type": "address"
     }],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [],
     "name": "allPairsLength",
     "outputs": [{
@@ -64,12 +60,10 @@
       "name": "",
       "type": "uint256"
     }],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [{
         "internalType": "address",
         "name": "tokenA",
@@ -87,12 +81,10 @@
       "name": "pair",
       "type": "address"
     }],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [],
     "name": "feeTo",
     "outputs": [{
@@ -100,12 +92,10 @@
       "name": "",
       "type": "address"
     }],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [],
     "name": "feeToSetter",
     "outputs": [{
@@ -113,12 +103,10 @@
       "name": "",
       "type": "address"
     }],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [{
         "internalType": "address",
         "name": "",
@@ -136,12 +124,10 @@
       "name": "",
       "type": "address"
     }],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [],
     "name": "migrator",
     "outputs": [{
@@ -149,12 +135,10 @@
       "name": "",
       "type": "address"
     }],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [],
     "name": "pairCodeHash",
     "outputs": [{
@@ -162,12 +146,10 @@
       "name": "",
       "type": "bytes32"
     }],
-    "payable": false,
     "stateMutability": "pure",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [{
       "internalType": "address",
       "name": "_feeTo",
@@ -175,12 +157,10 @@
     }],
     "name": "setFeeTo",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [{
       "internalType": "address",
       "name": "_feeToSetter",
@@ -188,12 +168,10 @@
     }],
     "name": "setFeeToSetter",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [{
       "internalType": "address",
       "name": "_migrator",
@@ -201,7 +179,6 @@
     }],
     "name": "setMigrator",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   }

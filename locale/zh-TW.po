@@ -1112,8 +1112,8 @@ msgstr "如果交易在確認之前出現大的不利價格變動，則交易將
 msgid "Your transactions will appear here..."
 msgstr ""
 
-msgid "Your {exchange} {0}/{1} liquidity will become SushiSwap {2}/{3} liquidity."
-msgstr "您的{exchange} {0} / {1}流動性將變為SushiSwap {2} / {3}的流動性。"
+msgid "Your {exchange} {0}/{1} liquidity will become SoulSwap {2}/{3} liquidity."
+msgstr ""
 
 msgid "Zap"
 msgstr ""
