@@ -6,7 +6,7 @@ import { Zero } from '@ethersproject/constants'
 import { useCallback } from 'react'
 import { useChefContract } from './hooks'
 
-export default function useMasterChef(chef: Chef) {
+export default function useSoulSummoner(chef: Chef) {
   const { account } = useActiveWeb3React()
 
   const sushi = useSushiContract()
@@ -19,7 +19,7 @@ export default function useMasterChef(chef: Chef) {
       try {
         let tx
 
-        if (chef === Chef.MASTERCHEF) {
+        if (chef === Chef.MASTERCHEF_V1) {
           tx = await contract?.deposit(pid, amount)
         } else {
           tx = await contract?.deposit(pid, amount, account)
@@ -40,7 +40,7 @@ export default function useMasterChef(chef: Chef) {
       try {
         let tx
 
-        if (chef === Chef.MASTERCHEF) {
+        if (chef === Chef.MASTERCHEF_V1) {
           tx = await contract?.withdraw(pid, amount)
         } else {
           tx = await contract?.withdraw(pid, amount, account)
@@ -60,14 +60,14 @@ export default function useMasterChef(chef: Chef) {
       try {
         let tx
 
-        if (chef === Chef.MASTERCHEF) {
+        if (chef === Chef.MASTERCHEF_V1) {
           tx = await contract?.deposit(pid, Zero)
-        } else if (chef === Chef.MASTERCHEF_V2) {
+        } else if (chef === Chef.SOUL_SUMMONER) {
           const pendingSushi = await contract?.pendingSushi(pid, account)
 
           const balanceOf = await sushi?.balanceOf(contract?.address)
 
-          // If MasterChefV2 doesn't have enough sushi to harvest, batch in a harvest.
+          // If SoulSummoner doesn't have enough sushi to harvest, batch in a harvest.
           if (pendingSushi.gt(balanceOf)) {
             tx = await contract?.batch(
               [

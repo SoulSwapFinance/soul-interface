@@ -5,7 +5,7 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { ChainId } from '@sushiswap/sdk'
 import { Chef } from './enum'
 import Fraction from '../../entities/Fraction'
-import { getContract } from '../../functions'
+// import { getContract } from '../../functions'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useBlockNumber } from '../../state/application/hooks'
 
@@ -65,7 +65,7 @@ const usePending = (farm) => {
       cloneRewarder &&
       farm &&
       library &&
-      (farm.chef === Chef.MASTERCHEF_V2 || farm.chef === Chef.MINICHEF)
+      (farm.chef === Chef.SOUL_SUMMONER || farm.chef === Chef.MINICHEF)
     ) {
       fetchPendingReward()
     }

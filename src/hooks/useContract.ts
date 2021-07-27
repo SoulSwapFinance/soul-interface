@@ -8,7 +8,7 @@ import {
   ChainId,
   FACTORY_ADDRESS,
   MAKER_ADDRESS,
-  MASTERCHEF_ADDRESS,
+  MASTERCHEF_ADDRESS as MASTERCHEF_V1_ADDRESS,
   ROUTER_ADDRESS,
   SUSHI_ADDRESS,
   TIMELOCK_ADDRESS,
@@ -49,8 +49,8 @@ import FACTORY_ABI from '../constants/abis/factory.json'
 import IUniswapV2PairABI from '../constants/abis/uniswap-v2-pair.json'
 import KASHIPAIR_ABI from '../constants/abis/kashipair.json'
 import MAKER_ABI from '../constants/abis/maker.json'
-import MASTERCHEF_ABI from '../constants/abis/masterchef.json'
-import MASTERCHEF_V2_ABI from '../constants/abis/masterchef-v2.json'
+import MASTERCHEF_V1_ABI from '../constants/abis/masterchef.json'
+import SOUL_SUMMONER_ABI from '../constants/abis/masterchef-v2.json'
 import MEOWSHI_ABI from '../constants/abis/meowshi.json'
 import MERKLE_DISTRIBUTOR_ABI from '../constants/abis/merkle-distributor.json'
 import MINICHEF_ABI from '../constants/abis/minichef-v2.json'
@@ -170,13 +170,13 @@ export function useSushiContract(withSignerIfPossible = true): Contract | null {
   return useContract(chainId && SUSHI_ADDRESS[chainId], SUSHI_ABI, withSignerIfPossible)
 }
 
-export function useMasterChefContract(withSignerIfPossible?: boolean): Contract | null {
+export function useMasterChefV1Contract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && MASTERCHEF_ADDRESS[chainId], MASTERCHEF_ABI, withSignerIfPossible)
+  return useContract(chainId && MASTERCHEF_V1_ADDRESS[chainId], MASTERCHEF_V1_ABI, withSignerIfPossible)
 }
 
-export function useMasterChefV2Contract(withSignerIfPossible?: boolean): Contract | null {
-  return useContract('0xEF0881eC094552b2e128Cf945EF17a6752B4Ec5d', MASTERCHEF_V2_ABI, withSignerIfPossible)
+export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
+  return useContract('0xEF0881eC094552b2e128Cf945EF17a6752B4Ec5d', SOUL_SUMMONER_ABI, withSignerIfPossible)
 }
 export function useMiniChefContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()

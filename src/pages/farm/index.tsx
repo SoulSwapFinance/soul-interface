@@ -8,8 +8,8 @@ import {
   useFarmPairAddresses,
   useFarms,
   useKashiPairs,
-  useMasterChefV1SushiPerBlock,
-  useMasterChefV1TotalAllocPoint,
+  useSoulSummonerV1SushiPerBlock,
+  useSoulSummonerV1TotalAllocPoint,
   useMaticPrice,
   useOnePrice,
   useStakePrice,
@@ -58,9 +58,9 @@ export default function Farm(): JSX.Element {
 
   const averageBlockTime = useAverageBlockTime()
 
-  const masterChefV1TotalAllocPoint = useMasterChefV1TotalAllocPoint()
+  const masterChefV1TotalAllocPoint = useSoulSummonerV1TotalAllocPoint()
 
-  const masterChefV1SushiPerBlock = useMasterChefV1SushiPerBlock()
+  const masterChefV1SushiPerBlock = useSoulSummonerV1SushiPerBlock()
 
   // TODO: Obviously need to sort this out but this is fine for time being,
   // prices are only loaded when needed for a specific network

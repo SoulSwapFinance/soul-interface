@@ -1,5 +1,5 @@
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
-import { ChainId, MASTERCHEF_ADDRESS, Token, ZERO } from '@sushiswap/sdk'
+import { ChainId, MASTERCHEF_ADDRESS as MASTERCHEF_V1_ADDRESS, Token, ZERO } from '@sushiswap/sdk'
 import { Chef, PairType } from './enum'
 import { Disclosure, Transition } from '@headlessui/react'
 import React, { useState } from 'react'
@@ -7,7 +7,7 @@ import { usePendingSushi, useUserInfo } from './hooks'
 
 import Button from '../../components/Button'
 import Dots from '../../components/Dots'
-import { MASTERCHEF_V2_ADDRESS } from '../../constants'
+import { SOUL_SUMMONER_ADDRESS } from '../../constants'
 import { MINICHEF_ADDRESS } from '../../constants/addresses'
 import { Input as NumericalInput } from '../../components/NumericalInput'
 import { formatNumber } from '../../functions'
@@ -16,7 +16,7 @@ import { t } from '@lingui/macro'
 import { tryParseAmount } from '../../functions/parse'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import { useLingui } from '@lingui/react'
-import useMasterChef from './useMasterChef'
+import useSoulSummoner from './useSoulSummoner'
 import usePendingReward from './usePendingReward'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { useTransactionAdder } from '../../state/transactions/hooks'
@@ -50,8 +50,12 @@ const FarmListItem = ({ farm }) => {
   const reward = usePendingReward(farm)
 
   const APPROVAL_ADDRESSES = {
-    [Chef.MASTERCHEF]: { [ChainId.MAINNET]: MASTERCHEF_ADDRESS[ChainId.MAINNET] },
-    [Chef.MASTERCHEF_V2]: { [ChainId.MAINNET]: MASTERCHEF_V2_ADDRESS[ChainId.MAINNET] },
+    [Chef.MASTERCHEF_V1]: { [ChainId.MAINNET]: MASTERCHEF_V1_ADDRESS[ChainId.MAINNET] },
+    [Chef.SOUL_SUMMONER]: { [ChainId.MAINNET]: SOUL_SUMMONER_ADDRESS[ChainId.MAINNET] },
+    [Chef.MASTERCHEF_V1]: { [ChainId.FANTOM]: MASTERCHEF_V1_ADDRESS[ChainId.MAINNET] },
+    [Chef.SOUL_SUMMONER]: { [ChainId.FANTOM]: SOUL_SUMMONER_ADDRESS[ChainId.MAINNET] },
+    [Chef.MASTERCHEF_V1]: { [ChainId.FANTOM_TESTNET]: MASTERCHEF_V1_ADDRESS[ChainId.MAINNET] },
+    [Chef.SOUL_SUMMONER]: { [ChainId.FANTOM_TESTNET]: SOUL_SUMMONER_ADDRESS[ChainId.MAINNET] },
     [Chef.MINICHEF]: {
       [ChainId.MATIC]: MINICHEF_ADDRESS[ChainId.MATIC],
       [ChainId.XDAI]: MINICHEF_ADDRESS[ChainId.XDAI],
@@ -64,7 +68,7 @@ const FarmListItem = ({ farm }) => {
 
   const [approvalState, approve] = useApproveCallback(typedDepositValue, APPROVAL_ADDRESSES[farm.chef][chainId])
 
-  const { deposit, withdraw, harvest } = useMasterChef(farm.chef)
+  const { deposit, withdraw, harvest } = useSoulSummoner(farm.chef)
 
   return (
     <Transition

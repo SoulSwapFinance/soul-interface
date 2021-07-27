@@ -20,7 +20,7 @@ export * from './bentobox'
 export * from './blocks'
 export * from './exchange'
 
-export function useMasterChefV1TotalAllocPoint(swrConfig = undefined) {
+export function useSoulSummonerV1TotalAllocPoint(swrConfig = undefined) {
   const { chainId } = useActiveWeb3React()
   const shouldFetch = chainId && chainId === ChainId.MAINNET
   const { data } = useSWR(
@@ -31,7 +31,7 @@ export function useMasterChefV1TotalAllocPoint(swrConfig = undefined) {
   return data
 }
 
-export function useMasterChefV1SushiPerBlock(swrConfig = undefined) {
+export function useSoulSummonerV1SushiPerBlock(swrConfig = undefined) {
   const { chainId } = useActiveWeb3React()
   const shouldFetch = chainId && chainId === ChainId.MAINNET
   const { data } = useSWR(
@@ -42,23 +42,23 @@ export function useMasterChefV1SushiPerBlock(swrConfig = undefined) {
   return data
 }
 
-export function useMasterChefV1Farms(swrConfig = undefined) {
+export function useSoulSummonerV1Farms(swrConfig = undefined) {
   const { chainId } = useActiveWeb3React()
   const shouldFetch = chainId && chainId === ChainId.MAINNET
   const { data } = useSWR(shouldFetch ? 'masterChefV1Farms' : null, () => getMasterChefV1Farms(), swrConfig)
   return useMemo(() => {
     if (!data) return []
-    return data.map((data) => ({ ...data, chef: Chef.MASTERCHEF }))
+    return data.map((data) => ({ ...data, chef: Chef.MASTERCHEF_V1 }))
   }, [data])
 }
 
-export function useMasterChefV2Farms(swrConfig: SWRConfiguration = undefined) {
+export function useSoulSummonerV2Farms(swrConfig: SWRConfiguration = undefined) {
   const { chainId } = useActiveWeb3React()
   const shouldFetch = chainId && chainId === ChainId.MAINNET
   const { data } = useSWR(shouldFetch ? 'masterChefV2Farms' : null, () => getMasterChefV2Farms(), swrConfig)
   return useMemo(() => {
     if (!data) return []
-    return data.map((data) => ({ ...data, chef: Chef.MASTERCHEF_V2 }))
+    return data.map((data) => ({ ...data, chef: Chef.SOUL_SUMMONER }))
   }, [data])
 }
 
@@ -77,8 +77,8 @@ export function useMiniChefFarms(swrConfig: SWRConfiguration = undefined) {
 }
 
 export function useFarms(swrConfig: SWRConfiguration = undefined) {
-  const masterChefV1Farms = useMasterChefV1Farms()
-  const masterChefV2Farms = useMasterChefV2Farms()
+  const masterChefV1Farms = useSoulSummonerV1Farms()
+  const masterChefV2Farms = useSoulSummonerV2Farms()
   const miniChefFarms = useMiniChefFarms()
   // useEffect(() => {
   //   console.log('debug', { masterChefV1Farms, masterChefV2Farms, miniChefFarms })
@@ -89,7 +89,7 @@ export function useFarms(swrConfig: SWRConfiguration = undefined) {
   )
 }
 
-export function useMasterChefV1PairAddresses() {
+export function useSoulSummonerV1PairAddresses() {
   const { chainId } = useActiveWeb3React()
   const shouldFetch = chainId && chainId === ChainId.MAINNET
   const { data } = useSWR(shouldFetch ? ['masterChefV1PairAddresses', chainId] : null, (_) =>
@@ -101,7 +101,7 @@ export function useMasterChefV1PairAddresses() {
   }, [data])
 }
 
-export function useMasterChefV2PairAddresses() {
+export function useSoulSummonerV2PairAddresses() {
   const { chainId } = useActiveWeb3React()
   const shouldFetch = chainId && chainId === ChainId.MAINNET
   const { data } = useSWR(shouldFetch ? ['masterChefV2PairAddresses', chainId] : null, (_) =>
@@ -126,8 +126,8 @@ export function useMiniChefPairAddresses() {
 }
 
 export function useFarmPairAddresses() {
-  const masterChefV1PairAddresses = useMasterChefV1PairAddresses()
-  const masterChefV2PairAddresses = useMasterChefV2PairAddresses()
+  const masterChefV1PairAddresses = useSoulSummonerV1PairAddresses()
+  const masterChefV2PairAddresses = useSoulSummonerV2PairAddresses()
   const miniChefPairAddresses = useMiniChefPairAddresses()
   return useMemo(
     () => concat(masterChefV1PairAddresses, masterChefV2PairAddresses, miniChefPairAddresses),
