@@ -867,9 +867,6 @@ msgstr "APR 스테이킹"
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "{0} {1} 및 {2} {3} 공급 중"
 
-msgid "Sushi is a supporter of Open Source."
-msgstr ""
-
 msgid "Swap"
 msgstr "스왑"
 

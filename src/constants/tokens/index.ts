@@ -190,7 +190,7 @@ export const XSUSHI_CALL = new Token(
 )
 export const WBTC = new Token(ChainId.MAINNET, '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', 8, 'WBTC', 'Wrapped BTC')
 
-export const SPELL = new Token(ChainId.MAINNET, '0xb5083b964a0B6A447564657285AeE1E76524B3Db', 18, 'SPELL', 'SpellBound') // TODO: UPDATE
+// export const SPELL = new Token(ChainId.MAINNET, '0xb5083b964a0B6A447564657285AeE1E76524B3Db', 18, 'SPELL', 'SpellBound') // TODO: UPDATE
 
 export const LIFT = new Token(ChainId.MAINNET, '0xf9209d900f7ad1DC45376a2caA61c78f6dEA53B6', 18, 'LIFT', 'LiftKitchen')
 export const LFBTC = new Token(
@@ -232,16 +232,16 @@ export const SOUL: ChainTokenMap = {
   // [ChainId.HECO]: new Token(ChainId.HECO, SOUL_ADDRESS[ChainId.HECO], 18, 'SOUL', 'SoulPower'),
 }
 
-// export const SPELL: ChainTokenMap = {
-//   // [ChainId.FANTOM]: new Token(ChainId.FANTOM, SPELL_ADDRESS[ChainId.FANTOM], 18, 'SPELL', 'SpellBound'), // TODO: update
-//   [ChainId.FANTOM_TESTNET]: new Token(
-//     ChainId.FANTOM_TESTNET,
-//     '0x3E3887680e6E81e4Da8C019Ef56a704297eCE211',
-//     18,
-//     'SPELL',
-//     'SpellBound'
-//   ), // TODO: update
-// }
+export const SPELL: ChainTokenMap = {
+  // [ChainId.FANTOM]: new Token(ChainId.FANTOM, SPELL_ADDRESS[ChainId.FANTOM], 18, 'SPELL', 'SpellBound'), // TODO: update
+  [ChainId.FANTOM_TESTNET]: new Token(
+    ChainId.FANTOM_TESTNET,
+    '0x3E3887680e6E81e4Da8C019Ef56a704297eCE211',
+    18,
+    'SPELL',
+    'SpellBound'
+  ), // TODO: update
+}
 
 export const WETH9_EXTENDED: { [chainId: number]: Token } = {
   ...WETH9,

@@ -313,7 +313,8 @@ function AppBar(): JSX.Element {
                   </a>
                 </Link>
 
-                {chainId && [ChainId.MAINNET, ChainId.MATIC, ChainId.HARMONY, ChainId.XDAI].includes(chainId) && (
+                {/* {chainId && [ChainId.MAINNET, ChainId.MATIC, ChainId.HARMONY, ChainId.XDAI].includes(chainId) && ( */}
+                {chainId && [ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <Link href={'/farm'}>
                     <a
                       id={`farm-nav-link`}
@@ -346,7 +347,7 @@ function AppBar(): JSX.Element {
                     </Link>
                   </>
                 )} */}
-                {chainId === ChainId.MAINNET && (
+                {chainId === ChainId.FANTOM_TESTNET && (
                   <Link href={'/stake'}>
                     <a
                       id={`stake-nav-link`}
@@ -361,7 +362,7 @@ function AppBar(): JSX.Element {
                   [ChainId.FANTOM_TESTNET] && (
                     <ExternalLink
                       id={`analytics-nav-link`}
-                      href={ANALYTICS_URL[chainId] || 'https://analytics.sushi.com'}
+                      href={ANALYTICS_URL[chainId] || 'https://analytics.soulswap.finance'}
                       className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                     >
                       {i18n._(t`Analytics`)}

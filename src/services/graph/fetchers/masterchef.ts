@@ -22,12 +22,12 @@ export const MINICHEF = {
 export const miniChef = async (query, chainId = ChainId.MAINNET) =>
   request(`${GRAPH_HOST[chainId]}/subgraphs/name/${MINICHEF[chainId]}`, query)
 
-export const MASTERCHEF_V2 = {
+export const SOUL_SUMMONER = {
   [ChainId.MAINNET]: 'sushiswap/master-chefv2',
 }
 
 export const masterChefV2 = async (query, chainId = ChainId.MAINNET) =>
-  request(`${GRAPH_HOST[chainId]}/subgraphs/name/${MASTERCHEF_V2[chainId]}`, query)
+  request(`${GRAPH_HOST[chainId]}/subgraphs/name/${SOUL_SUMMONER[chainId]}`, query)
 
 export const MASTERCHEF_V1 = {
   [ChainId.MAINNET]: 'sushiswap/master-chef',

@@ -885,9 +885,6 @@ msgstr "Staking APR"
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "Supplying {0} {1} and {2} {3}"
 
-msgid "Sushi is a supporter of Open Source."
-msgstr "Sushi is a supporter of Open Source."
-
 msgid "Swap"
 msgstr "Swap"
 

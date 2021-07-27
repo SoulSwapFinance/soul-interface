@@ -3,7 +3,6 @@ import { Field, MeowshiState } from '../../pages/tools/meowshi'
 import React, { FC, useMemo, useState } from 'react'
 import { SOUL, SPELL } from '../../constants'
 import TransactionConfirmationModal, { ConfirmationModalContent } from '../../modals/TransactionConfirmationModal'
-
 import Button from '../../components/Button'
 import { ChainId } from '@soulswap/sdk'
 import Dots from '../../components/Dots'
@@ -27,10 +26,10 @@ const MeowshiButton: FC<MeowshiButtonProps> = ({ meowshiState }) => {
     open: false,
   })
   const { account, chainId } = useActiveWeb3React()
-  const soulBalance = useTokenBalance(account, SOUL[ChainId.MAINNET])
-  const spellBalance = useTokenBalance(account, SPELL)
+  const soulBalance = useTokenBalance(account, SOUL[ChainId.FANTOM_TESTNET])
+  const spellBalance = useTokenBalance(account, SPELL[ChainId.FANTOM_TESTNET])
   const { approvalState, approve, meow, unmeow, meowSoul, unmeowSoul } = useMeowshi(
-    currencies[Field.INPUT] === SOUL[ChainId.MAINNET]
+    currencies[Field.INPUT] === SOUL[ChainId.FANTOM_TESTNET]
   )
   const balance = useTokenBalance(account, currencies[Field.INPUT])
   const parsedInputAmount = tryParseAmount(fields[Field.INPUT], currencies[Field.INPUT])
@@ -60,7 +59,7 @@ const MeowshiButton: FC<MeowshiButtonProps> = ({ meowshiState }) => {
       }
       if (currencies[Field.INPUT]?.symbol === 'SPELL') {
         tx = await meow({
-          value: ethers.utils.parseUnits(fields[Field.INPUT], soulBalance.currency.decimals),
+          value: ethers.utils.parseUnits(fields[Field.INPUT], spellBalance.currency.decimals),
           decimals: spellBalance.currency.decimals,
         })
       }
@@ -73,7 +72,7 @@ const MeowshiButton: FC<MeowshiButtonProps> = ({ meowshiState }) => {
       }
       if (currencies[Field.OUTPUT]?.symbol === 'SPELL') {
         tx = await unmeow({
-          value: ethers.utils.parseUnits(fields[Field.INPUT], soulBalance.currency.decimals),
+          value: ethers.utils.parseUnits(fields[Field.INPUT], spellBalance.currency.decimals),
           decimals: spellBalance.currency.decimals,
         })
       }

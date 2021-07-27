@@ -867,9 +867,6 @@ msgstr "APR de apuesta"
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "Suministro {0} {1} y {2} {3}"
 
-msgid "Sushi is a supporter of Open Source."
-msgstr ""
-
 msgid "Swap"
 msgstr "Intercambio"
 

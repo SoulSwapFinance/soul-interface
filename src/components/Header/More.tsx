@@ -24,7 +24,7 @@ const items = (i18n: I18n) => [
   },
   {
     name: i18n._(t`Open Source`),
-    description: i18n._(t`Sushi is a supporter of Open Source.`),
+    description: i18n._(t`Soul is a supporter of Open Source.`),
     href: 'https://github.com/soulswapfinance',
     external: true,
   },

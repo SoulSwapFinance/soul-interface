@@ -860,9 +860,6 @@ msgstr "質押APR"
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "提供{0} {1}和{2} {3}"
 
-msgid "Sushi is a supporter of Open Source."
-msgstr "Sushi是開源協議的支持者。"
-
 msgid "Swap"
 msgstr "代幣兌換"
 

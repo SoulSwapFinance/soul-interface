@@ -5,7 +5,7 @@
         "inputs": [
             { "type": "address", "name": "_rewardToken", "internalType": "contract IERC20" },
             { "type": "uint256", "name": "_rewardPerSecond", "internalType": "uint256" },
-            { "type": "address", "name": "_MASTERCHEF_V2", "internalType": "address" }
+            { "type": "address", "name": "_SOUL_SUMMONER", "internalType": "address" }
         ]
     },
     { "type": "event", "name": "LogInit", "inputs": [], "anonymous": false },

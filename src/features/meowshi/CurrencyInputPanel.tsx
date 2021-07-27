@@ -56,7 +56,14 @@ const CurrencyInputPanel: FC<CurrencyInputPanelProps> = ({ field, meowshiState, 
                   <Typography
                     variant="xs"
                     className="underline text-blue cursor-pointer"
-                    onClick={() => setCurrency(currency === SPELL ? SOUL[ChainId.FANTOM_TESTNET] : SPELL, field)} // TODO: fix
+                    onClick={() =>
+                      setCurrency(
+                        currency === SPELL[ChainId.FANTOM_TESTNET]
+                          ? SOUL[ChainId.FANTOM_TESTNET]
+                          : SPELL[ChainId.FANTOM_TESTNET],
+                        field
+                      )
+                    }
                   >
                     {currencies[field] === SOUL[ChainId.FANTOM_TESTNET] ? i18n._(t`Use SPELL`) : i18n._(t`Use SOUL`)}
                   </Typography>

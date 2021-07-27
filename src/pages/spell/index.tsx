@@ -151,12 +151,12 @@ export default function Stake() {
   useEffect(() => {
     const fetchData = async () => {
       const results = await soulData.exchange.dayData()
-      const apr = (((results[1].volumeUSD * 0.05) / data?.bar?.totalSupply) * 365) / (data?.bar?.ratio * soulPrice)
+      const apr = (((results[1].volumeUSD * 0.05) / data?.spell?.totalSupply) * 365) / (data?.spell?.ratio * soulPrice)
 
       setApr(apr)
     }
     fetchData()
-  }, [data?.bar?.ratio, data?.bar?.totalSupply, soulPrice])
+  }, [data?.spell?.ratio, data?.spell?.totalSupply, soulPrice])
 
   return (
     <Container id="bound-page" className="py-4 md:py-8 lg:py-12" maxWidth="full">
@@ -189,7 +189,7 @@ export default function Stake() {
           <div className="flex flex-col w-full max-w-xl mt-auto mb-2">
             <div className="flex max-w-lg">
               <div className="self-end mb-3 text-lg font-bold md:text-2xl text-high-emphesis md:mb-7">
-                {i18n._(t`Maximize yield by staking SOUL for SPELL`)}
+                {i18n._(t`Maximize yield by staking your SOUL for SPELL`)}
               </div>
               {/* <div className="self-start pl-6 pr-3 mb-1 min-w-max md:hidden">
                                 <img src={spellSignSmall} alt="spell sign" />
@@ -436,7 +436,7 @@ export default function Stake() {
                         </div>
                         <div className="flex flex-1 md:flex-initial">
                             <p className="ml-5 text-base text-primary md:ml-0">{`${weightedApr}%`}</p>
-                        </div>
+                        </div>x
                     </div> */}
                   {account && (
                     <a

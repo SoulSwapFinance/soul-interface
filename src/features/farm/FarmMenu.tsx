@@ -1,5 +1,5 @@
 // import Badge from '../../components/Badge'
-// import { ChainId } from '@soulswap/sdk'
+import { ChainId } from '@soulswap/sdk'
 import NavLink from '../../components/NavLink'
 import React from 'react'
 import { useActiveWeb3React } from '../../hooks'
@@ -15,7 +15,7 @@ const Menu = ({ positionsLength }) => {
           activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-pink-dark-900"
         >
           <a className="flex items-center justify-between px-4 py-6 text-base font-bold border border-transparent rounded cursor-pointer bg-dark-900 hover:bg-dark-800">
-            Your Farms
+            YOUR FARMS
           </a>
         </NavLink>
       )}
@@ -26,13 +26,13 @@ const Menu = ({ positionsLength }) => {
         activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-pink-dark-900"
       >
         <a className="flex items-center justify-between px-4 py-6 text-base font-bold border border-transparent rounded cursor-pointer bg-dark-900 hover:bg-dark-800">
-          All Farms
+          ALL FARMS
         </a>
       </NavLink>
 
-      {/* {chainId === ChainId.MAINNET && (
+      {chainId === ChainId.FANTOM_TESTNET && (
         <>
-          <NavLink
+          {/* <NavLink
             exact
             href={`/farm?filter=kashi`}
             activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-pink-dark-900"
@@ -40,18 +40,18 @@ const Menu = ({ positionsLength }) => {
             <a className="flex items-center justify-between px-4 py-6 text-base font-bold border border-transparent rounded cursor-pointer bg-dark-900 hover:bg-dark-800">
               Kashi Farms
             </a>
-          </NavLink>
+          </NavLink> */}
           <NavLink
             exact
-            href={`/farm?filter=sushi`}
+            href={`/farm?filter=soul`}
             activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-pink-dark-900"
           >
             <a className="flex items-center justify-between px-4 py-6 text-base font-bold border border-transparent rounded cursor-pointer bg-dark-900 hover:bg-dark-800">
-              SoulSwap Farms
+              SOUL FARMS
             </a>
           </NavLink>
         </>
-      )} */}
+      )}
       {/* 
       {(chainId === ChainId.MAINNET || chainId === ChainId.MATIC) && (
         <NavLink

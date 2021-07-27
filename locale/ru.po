@@ -867,9 +867,6 @@ msgstr "Ставка годовых"
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "Поставка {0} {1} и {2} {3}"
 
-msgid "Sushi is a supporter of Open Source."
-msgstr ""
-
 msgid "Swap"
 msgstr "Обменять"
 
