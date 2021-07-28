@@ -92,5 +92,85 @@ export default function useSoulSummoner(chef: Chef) {
     [account, chef, contract, soul]
   )
 
-  return { deposit, withdraw, harvest }
+  // Pool length
+  const poolLength = useCallback(async () => {
+    try {
+      const tx = await contract?.poolLength()
+      return tx
+    } catch (e) {
+      console.error(e)
+      return e
+    }
+  }, [account, chef, contract])
+
+  // Pool Info
+  const poolInfo = useCallback(
+    async (pid: number) => {
+      try {
+        const tx = await contract?.poolInfo(pid)
+        const lpToken = tx?.[0].toString()
+        const lastRewardTime = BigNumber.from(tx?.[1])
+        const accSoulPerShare = BigNumber.from(tx?.[2])
+        return [lpToken, lastRewardTime, accSoulPerShare]
+      } catch (e) {
+        console.error(e)
+        return e
+      }
+    },
+    [account, chef, contract]
+  )
+
+  // User Info
+  const userInfo = useCallback(
+    async (pid: number, address: string) => {
+      try {
+        const tx = await contract?.userInfo(pid)
+        const amount = BigNumber.from(tx?.[0])
+        const rewardDebt = BigNumber.from(tx?.[1])
+        return [amount, rewardDebt]
+      } catch (e) {
+        console.error(e)
+        return e
+      }
+    },
+    [account, chef, contract]
+  )
+
+  // Amount of SOUL pending for redemption
+  const pendingSoul = useCallback(
+    async (pid: number, address: string) => {
+      try {
+        const tx = BigNumber.from(await contract?.pendingSoul(pid, address))
+        return tx
+      } catch (e) {
+        console.error(e)
+        return e
+      }
+    },
+    [account, chef, contract]
+  )
+
+  // How much SOUL is emitted per second
+  const soulPerSecond = useCallback(async () => {
+    try {
+      const tx = BigNumber.from(await contract?.soulPerSecond())
+      return tx
+    } catch (e) {
+      console.error(e)
+      return e
+    }
+  }, [account, chef, contract])
+
+  // Total Allocation Point (net amount of all chains combined)
+  const totalAllocPoint = useCallback(async () => {
+    try {
+      const tx = BigNumber.from(await contract?.totalAllocPoint())
+      return tx
+    } catch (e) {
+      console.error(e)
+      return e
+    }
+  }, [account, chef, contract])
+
+  return { deposit, withdraw, harvest, poolLength, poolInfo, userInfo, pendingSoul, soulPerSecond, totalAllocPoint }
 }
