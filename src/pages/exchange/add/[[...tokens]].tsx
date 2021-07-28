@@ -2,22 +2,19 @@ import { ApprovalState, useApproveCallback } from '../../../hooks/useApproveCall
 import { AutoRow, RowBetween } from '../../../components/Row'
 import Button, { ButtonError } from '../../../components/Button'
 import { Currency, CurrencyAmount, Percent, WNATIVE, currencyEquals } from '@soulswap/sdk'
-import { ONE_BIPS, ZERO_PERCENT } from '../../../constants'
+import { ZERO_PERCENT } from '../../../constants'
 import React, { useCallback, useState } from 'react'
 import TransactionConfirmationModal, { ConfirmationModalContent } from '../../../modals/TransactionConfirmationModal'
 import { calculateGasMargin, calculateSlippageAmount } from '../../../functions/trade'
 import { currencyId, maxAmountSpend } from '../../../functions/currency'
 import { useDerivedMintInfo, useMintActionHandlers, useMintState } from '../../../state/mint/hooks'
 import { useExpertModeManager, useUserSlippageToleranceWithDefault } from '../../../state/user/hooks'
-
-import { AddRemoveTabs } from '../../../components/NavigationTabs'
 import Alert from '../../../components/Alert'
 import { AutoColumn } from '../../../components/Column'
 import { BigNumber } from '@ethersproject/bignumber'
 import { ConfirmAddModalBottom } from '../../../features/liquidity/ConfirmAddModalBottom'
 import Container from '../../../components/Container'
 import CurrencyInputPanel from '../../../components/CurrencyInputPanel'
-import CurrencyLogo from '../../../components/CurrencyLogo'
 import Dots from '../../../components/Dots'
 import DoubleCurrencyLogo from '../../../components/DoubleLogo'
 import DoubleGlowShadow from '../../../components/DoubleGlowShadow'
@@ -32,7 +29,6 @@ import { PairState } from '../../../hooks/useV2Pairs'
 import { Plus } from 'react-feather'
 import ReactGA from 'react-ga'
 import { TransactionResponse } from '@ethersproject/providers'
-import Typography from '../../../components/Typography'
 import UnsupportedCurrencyFooter from '../../../features/swap/UnsupportedCurrencyFooter'
 import Web3Connect from '../../../components/Web3Connect'
 import { t } from '@lingui/macro'
@@ -372,7 +368,6 @@ export default function Add() {
 
         <DoubleGlowShadow>
           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
-            {/* <AddRemoveTabs creating={isCreate} adding={true} defaultSlippage={DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE} /> */}
 
             <ExchangeHeader
               input={currencies[Field.CURRENCY_A]}
