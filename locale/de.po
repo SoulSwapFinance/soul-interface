@@ -286,16 +286,16 @@ msgstr ""
 msgid "Deposit"
 msgstr "Einzahlen"
 
-msgid "Deposit SOUL into CoffinBox"
+msgid "Deposit SOUL into BentoBox"
 msgstr ""
 
-msgid "Deposit tokens into CoffinBox for all the yields"
-msgstr "Zahlen Sie Token für alle Erträge in CoffinBox ein"
-
-msgid "Deposit {0} into CoffinBox"
+msgid "Deposit tokens into BentoBox for all the yields"
 msgstr ""
 
-msgid "Depositing {0} into CoffinBox"
+msgid "Deposit {0} into BentoBox"
+msgstr ""
+
+msgid "Depositing {0} into BentoBox"
 msgstr ""
 
 msgid "Dev"

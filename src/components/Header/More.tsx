@@ -10,29 +10,41 @@ import { useLingui } from '@lingui/react'
 import NavLink from '../NavLink'
 
 const items = (i18n: I18n) => [
-  {
-    name: i18n._(t`Docs`),
-    description: i18n._(t`Documentation for users of Soul.`),
-    href: 'https://docs.soulswap.finance',
-    external: true,
-  },
-  {
-    name: i18n._(t`Dev`),
-    description: i18n._(t`Documentation for developers of Soul.`),
-    href: 'https://dev.soulswap.finance',
-    external: true,
-  },
+  // {
+  //   name: i18n._(t`Docs`),
+  //   description: i18n._(t`Documentation for users of Soul.`),
+  //   href: 'https://docs.soulswap.finance',
+  //   external: true,
+  // },
+  // {
+  //   name: i18n._(t`Dev`),
+  //   description: i18n._(t`Documentation for developers of Soul.`),
+  //   href: 'https://dev.soulswap.finance',
+  //   external: true,
+  // },
   {
     name: i18n._(t`Open Source`),
     description: i18n._(t`Soul is a supporter of Open Source.`),
     href: 'https://github.com/soulswapfinance',
     external: true,
   },
+  // {
+  //   name: i18n._(t`Tools`),
+  //   description: i18n._(t`Tools to optimize your workflow.`),
+  //   href: '/tools',
+  //   external: false,
+  // },
   {
-    name: i18n._(t`Tools`),
-    description: i18n._(t`Tools to optimize your workflow.`),
-    href: '/tools',
-    external: false,
+    name: i18n._(t`Twitter`),
+    description: i18n._(t`Follow us on Twitter.`),
+    href: 'https://twitter.com/SoulSwapFinance',
+    external: true,
+  },
+  {
+    name: i18n._(t`Telegram`),
+    description: i18n._(t`Join the conversation on Telegram.`),
+    href: 'https://t.me/SoulSwapDeFi',
+    external: true,
   },
   {
     name: i18n._(t`Discord`),
@@ -40,12 +52,12 @@ const items = (i18n: I18n) => [
     href: 'https://discord.gg/SkHxPyHy',
     external: true,
   },
-  {
-    name: i18n._(t`Vesting`),
-    description: i18n._(t`Weekly unlocks from the vesting period.`),
-    href: '/vesting',
-    external: false,
-  },
+  // {
+  //   name: i18n._(t`Vesting`),
+  //   description: i18n._(t`Weekly unlocks from the vesting period.`),
+  //   href: '/vesting',
+  //   external: false,
+  // },
 ]
 
 export default function Menu() {

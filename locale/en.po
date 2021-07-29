@@ -131,23 +131,23 @@ msgstr "Balance:"
 msgid "Bento Balance: {0}"
 msgstr "Bento Balance: {0}"
 
-msgid "CoffinBox"
-msgstr "CoffinBox"
+msgid "BentoBox"
+msgstr "BentoBox"
 
-msgid "CoffinBox Apps"
-msgstr "CoffinBox Apps"
+msgid "BentoBox Apps"
+msgstr "BentoBox Apps"
 
-msgid "CoffinBox is an innovative way to use dapps gas-efficiently and gain extra yield."
-msgstr "CoffinBox is an innovative way to use dapps gas-efficiently and gain extra yield."
+msgid "BentoBox is an innovative way to use dapps gas-efficiently and gain extra yield."
+msgstr "BentoBox is an innovative way to use dapps gas-efficiently and gain extra yield."
 
-msgid "CoffinBox provides extra yield on deposits with flash lending, strategies, and fixed, low-gas transfers among integrated dapps, like Kashi markets"
-msgstr "CoffinBox provides extra yield on deposits with flash lending, strategies, and fixed, low-gas transfers among integrated dapps, like Kashi markets"
+msgid "BentoBox provides extra yield on deposits with flash lending, strategies, and fixed, low-gas transfers among integrated dapps, like Kashi markets"
+msgstr "BentoBox provides extra yield on deposits with flash lending, strategies, and fixed, low-gas transfers among integrated dapps, like Kashi markets"
 
-msgid "CoffinBox strategies can create yield for your collateral tokens. This token does not yet have a strategy in the CoffinBox."
-msgstr "CoffinBox strategies can create yield for your collateral tokens. This token does not yet have a strategy in the CoffinBox."
+msgid "BentoBox strategies can create yield for your collateral tokens. This token does not yet have a strategy in the BentoBox."
+msgstr "BentoBox strategies can create yield for your collateral tokens. This token does not yet have a strategy in the BentoBox."
 
-msgid "CoffinBox strategies can create yield for your liquidity while it is not lent out. This token does not yet have a strategy in the CoffinBox."
-msgstr "CoffinBox strategies can create yield for your liquidity while it is not lent out. This token does not yet have a strategy in the CoffinBox."
+msgid "BentoBox strategies can create yield for your liquidity while it is not lent out. This token does not yet have a strategy in the BentoBox."
+msgstr "BentoBox strategies can create yield for your liquidity while it is not lent out. This token does not yet have a strategy in the BentoBox."
 
 msgid "Borrow"
 msgstr "Borrow"
