@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { BigNumber } from '@ethersproject/bignumber'
+import { MaxUint256 } from '@ethersproject/constants'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import { useActiveWeb3React } from '../../hooks'
 import { ethers } from 'ethers'
 
-import LpTokenABI from '../../constants/abis/uniswap-v2-pair.json'
-
 import useSoulSummoner from './useSoulSummoner'
-import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
+import useLpToken from './useLpToken'
 
 import {
   FarmContainer,
@@ -40,7 +39,8 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
 
   const [showing, setShowing] = useState(false)
 
-  const { withdraw, deposit, harvest, pendingSoul, poolInfo } = useSoulSummoner()
+  const { withdraw, deposit, pendingSoul, poolInfo } = useSoulSummoner()
+  const { approve, allowance } = useLpToken(lpToken)
 
   const [pending, setPending] = useState(0)
   const [multiplier, setMultiplier] = useState('?')
@@ -66,7 +66,7 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
     } else {
       try {
         const pending = await pendingSoul(pid)
-        const parsed = Number(pending).toFixed(2).toString()
+        const parsed = Number(pending).toFixed().toString()
         setPending(parsed)
       } catch (err) {
         console.log(err)
@@ -89,8 +89,30 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
     }
   }
 
-  const fetchApproval = async (lpAddress) => {
-    // approved
+  const fetchApproval = async () => {
+    if (!walletConnected) {
+      toggleWalletModal()
+    } else {
+      // Checks if SoulSummoner can move tokens
+      const amount = await allowance(account)
+      if (amount > 0) setApproved(true)
+      return amount
+    }
+  }
+
+  const handleApprove = async () => {
+    if (!walletConnected) {
+      toggleWalletModal()
+    } else {
+      try {
+        await approve()
+        await fetchApproval()
+      } catch (e) {
+        alert(e.message)
+        console.log(e)
+        return
+      }
+    }
   }
 
   // Runs on render
@@ -101,6 +123,7 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
 
   // Runs on render + reruns every 3 secs
   useEffect(() => {
+    // TODO: add check for if any amount is staked in PID
     if (account) {
       const timer = setTimeout(() => {
         fetchPending(pid, account)
@@ -110,10 +133,6 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
       return () => clearTimeout(timer)
     }
   })
-
-  // require: `Approve` token for stake, otherwise show `Stake`
-  // earned: `pendingSoul`
-  // }
 
   return (
     <>
@@ -176,12 +195,8 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
                   Stake
                 </SubmitButton>
               ) : (
-                <SubmitButton
-                  primaryColour="#45b7da"
-                  hoverColour="#45b7da"
-                  onClick={() => deposit(pid, parseAmount(BigNumber.from(document.getElementById('stake').value)))}
-                >
-                  Stake
+                <SubmitButton primaryColour="#da9045" hoverColour="#da9045" onClick={() => handleApprove()}>
+                  Approve Stake
                 </SubmitButton>
               )}
             </FunctionBox>
@@ -189,8 +204,8 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
             <FunctionBox>
               <Input name="unstake" id="unstake" type="number" placeholder="0.0" />
               <SubmitButton
-                primaryColour="#e63d27"
-                hoverColour="#e63d27"
+                primaryColour="#b72b18"
+                hoverColour="#b72b18"
                 onClick={() => withdraw(pid, parseAmount(BigNumber.from(document.getElementById('unstake').value)))}
               >
                 Unstake

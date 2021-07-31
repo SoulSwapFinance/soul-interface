@@ -1,8 +1,6 @@
 import { useActiveWeb3React, useSoulContract } from '../../hooks'
 
 import { BigNumber } from '@ethersproject/bignumber'
-import { Chef } from './enum'
-import { Zero } from '@ethersproject/constants'
 import { useCallback } from 'react'
 import { useSoulSummonerContract } from '../../hooks/useContract'
 
@@ -42,36 +40,6 @@ export default function useSoulSummoner() {
     [account, summonerContract]
   )
 
-  const harvest = useCallback(
-    async (pid: number) => {
-      try {
-        let tx
-
-        const pendingSoul = await summonerContract?.pendingSoul(pid, account)
-        const balanceOf = await soul?.balanceOf(summonerContract?.address)
-
-        // if SoulSummoner doesn't have enough soul to harvest, batch in a harvest.
-        if (pendingSoul.gt(balanceOf)) {
-          tx = await summonerContract?.batch(
-            [
-              summonerContract?.interface?.encodeFunctionData('harvestFromMasterChef'),
-              summonerContract?.interface?.encodeFunctionData('harvest', [pid, account]),
-            ],
-            true
-          )
-        } else {
-          tx = await summonerContract?.harvest(pid, account)
-        }
-
-        return tx
-      } catch (e) {
-        console.log(e)
-        return e
-      }
-    },
-    [account, summonerContract, soul]
-  )
-
   // Pool length
   const poolLength = useCallback(async () => {
     try {
@@ -103,9 +71,9 @@ export default function useSoulSummoner() {
 
   // User Info
   const userInfo = useCallback(
-    async (pid: number, address: string) => {
+    async (pid: number) => {
       try {
-        const tx = await summonerContract?.userInfo(pid)
+        const tx = await summonerContract?.userInfo(pid, account)
         const amount = BigNumber.from(tx?.[0])
         const rewardDebt = BigNumber.from(tx?.[1])
         return [amount, rewardDebt]
@@ -119,9 +87,9 @@ export default function useSoulSummoner() {
 
   // Amount of SOUL pending for redemption
   const pendingSoul = useCallback(
-    async (pid: number, address: string) => {
+    async (pid: number) => {
       try {
-        const tx = BigNumber.from(await summonerContract?.pendingSoul(pid, address))
+        const tx = BigNumber.from(await summonerContract?.pendingSoul(pid, account))
         return tx
       } catch (e) {
         console.log(e)
@@ -153,5 +121,5 @@ export default function useSoulSummoner() {
     }
   }, [account, summonerContract])
 
-  return { deposit, withdraw, harvest, poolLength, poolInfo, userInfo, pendingSoul, soulPerSecond, totalAllocPoint }
+  return { deposit, withdraw, poolLength, poolInfo, userInfo, pendingSoul, soulPerSecond, totalAllocPoint }
 }

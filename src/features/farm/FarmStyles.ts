@@ -84,7 +84,7 @@ export const DetailsContainer = styled.div`
 
 export const DetailsWrapper = styled.div`
   display: flex;
-  background-color: HSL(267, 30%, 30%);
+  background-color: HSL(267, 30%, 15%);
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   width: 100%;
