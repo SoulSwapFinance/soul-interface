@@ -24,7 +24,7 @@ import {
 
 import { ChainId } from '@soulswap/sdk'
 import Container from '../../components/Container'
-import FarmList from '../../features/farm/FarmList'
+// import FarmList from '../../features/farm/FarmList'
 import Head from 'next/head'
 import Menu from '../../features/farm/FarmMenu'
 import React from 'react'
@@ -33,6 +33,8 @@ import { classNames } from '../../functions'
 import dynamic from 'next/dynamic'
 import { usePositions } from '../../features/farm/hooks'
 import { useRouter } from 'next/router'
+
+import { FarmList } from '../../features/farm/Farm'
 
 export default function Farm(): JSX.Element {
   const { chainId } = useActiveWeb3React()
@@ -334,7 +336,8 @@ export default function Farm(): JSX.Element {
           <div className="w-full h-0 ml-4 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis md:border-gradient-r-blue-pink-dark-800 opacity-20"></div>
         </div>
 
-        <FarmList farms={result} term={term} />
+        {/* <FarmList farms={result} term={term} /> */}
+        <FarmList />
       </div>
     </Container>
   )
