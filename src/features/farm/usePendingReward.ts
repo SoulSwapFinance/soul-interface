@@ -1,6 +1,5 @@
 import { useCloneRewarderContract, useComplexRewarderContract } from '../../hooks/useContract'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-
 import { BigNumber } from '@ethersproject/bignumber'
 import { ChainId } from '@soulswap/sdk'
 import { Chef } from './enum'
@@ -8,6 +7,7 @@ import Fraction from '../../entities/Fraction'
 // import { getContract } from '../../functions'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useBlockNumber } from '../../state/application/hooks'
+import useCurrentBlockTimestamp from '../../hooks/useCurrentBlockTimestamp'
 
 const REWARDERS = {
   [ChainId.MAINNET]: 'some',
@@ -28,12 +28,10 @@ const REWARDERS = {
 
 const usePending = (farm) => {
   const [balance, setBalance] = useState<string>('0')
-
   const { chainId, account, library } = useActiveWeb3React()
   const currentBlockNumber = useBlockNumber()
-
+  // const currentTime = useCurrentBlockTimestamp()
   const cloneRewarder = useCloneRewarderContract(farm?.rewarder?.id)
-
   const complexRewarder = useComplexRewarderContract(farm?.rewarder?.id)
 
   const contract = useMemo(

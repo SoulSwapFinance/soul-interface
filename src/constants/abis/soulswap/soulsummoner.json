@@ -1,5 +1,29 @@
 [
     {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "dao",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "team",
+                "type": "address"
+            }
+        ],
+        "name": "AccountsUpdated",
+        "type": "event"
+    },
+    {
         "anonymous": false,
         "inputs": [
             {
@@ -36,7 +60,7 @@
             {
                 "indexed": false,
                 "internalType": "address",
-                "name": "dev",
+                "name": "dao",
                 "type": "address"
             },
             {
@@ -54,36 +78,17 @@
             {
                 "indexed": false,
                 "internalType": "uint256",
-                "name": "chainId",
+                "name": "totalAllocPoint",
                 "type": "uint256"
             },
             {
                 "indexed": false,
                 "internalType": "uint256",
-                "name": "power",
+                "name": "weight",
                 "type": "uint256"
             }
         ],
         "name": "Initialized",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": true,
-                "internalType": "address",
-                "name": "operator",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "internalType": "bool",
-                "name": "access",
-                "type": "bool"
-            }
-        ],
-        "name": "OperatorUpdated",
         "type": "event"
     },
     {
@@ -178,6 +183,119 @@
         "anonymous": false,
         "inputs": [
             {
+                "indexed": true,
+                "internalType": "bytes32",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "indexed": true,
+                "internalType": "bytes32",
+                "name": "previousAdminRole",
+                "type": "bytes32"
+            },
+            {
+                "indexed": true,
+                "internalType": "bytes32",
+                "name": "newAdminRole",
+                "type": "bytes32"
+            }
+        ],
+        "name": "RoleAdminChanged",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "bytes32",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "indexed": false,
+                "internalType": "bytes32",
+                "name": "supreme",
+                "type": "bytes32"
+            }
+        ],
+        "name": "RoleDivinated",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "bytes32",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "sender",
+                "type": "address"
+            }
+        ],
+        "name": "RoleGranted",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "bytes32",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "sender",
+                "type": "address"
+            }
+        ],
+        "name": "RoleRevoked",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "soul",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "seance",
+                "type": "address"
+            }
+        ],
+        "name": "TokensUpdated",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
                 "indexed": false,
                 "internalType": "uint256",
                 "name": "weight",
@@ -219,6 +337,19 @@
         "type": "event"
     },
     {
+        "inputs": [],
+        "name": "DEFAULT_ADMIN_ROLE",
+        "outputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [
             {
                 "internalType": "uint256",
@@ -236,20 +367,7 @@
                 "type": "bool"
             }
         ],
-        "name": "add",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "newOperator",
-                "type": "address"
-            }
-        ],
-        "name": "addOperator",
+        "name": "addPool",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -257,19 +375,6 @@
     {
         "inputs": [],
         "name": "bonusMultiplier",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "chainId",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -310,12 +415,12 @@
         "inputs": [
             {
                 "internalType": "uint256",
-                "name": "_pid",
+                "name": "pid",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "_amount",
+                "name": "amount",
                 "type": "uint256"
             }
         ],
@@ -333,19 +438,6 @@
             }
         ],
         "name": "enterStaking",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "_weight",
-                "type": "uint256"
-            }
-        ],
-        "name": "gainWeight",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -377,6 +469,86 @@
     {
         "inputs": [
             {
+                "internalType": "bytes32",
+                "name": "role",
+                "type": "bytes32"
+            }
+        ],
+        "name": "getRoleAdmin",
+        "outputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "grantRole",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "role",
+                "type": "bytes32"
+            }
+        ],
+        "name": "hasDivineRole",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "hasRole",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "address",
                 "name": "_soulAddress",
                 "type": "address"
@@ -388,22 +560,17 @@
             },
             {
                 "internalType": "uint256",
-                "name": "_chainId",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_totalChains",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
                 "name": "_totalWeight",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
                 "name": "_weight",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_stakingAlloc",
                 "type": "uint256"
             }
         ],
@@ -426,10 +593,23 @@
         "type": "function"
     },
     {
+        "inputs": [],
+        "name": "isis",
+        "outputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [
             {
                 "internalType": "uint256",
-                "name": "_amount",
+                "name": "amount",
                 "type": "uint256"
             }
         ],
@@ -439,16 +619,16 @@
         "type": "function"
     },
     {
-        "inputs": [
+        "inputs": [],
+        "name": "maat",
+        "outputs": [
             {
-                "internalType": "uint256",
-                "name": "_weight",
-                "type": "uint256"
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
             }
         ],
-        "name": "loseWeight",
-        "outputs": [],
-        "stateMutability": "nonpayable",
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -462,7 +642,7 @@
         "inputs": [
             {
                 "internalType": "uint256",
-                "name": "_pid",
+                "name": "pid",
                 "type": "uint256"
             }
         ],
@@ -477,96 +657,6 @@
         "outputs": [
             {
                 "internalType": "contract IMigrator",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "_dao",
-                "type": "address"
-            }
-        ],
-        "name": "newDAO",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "contract SeanceCircle",
-                "name": "_seance",
-                "type": "address"
-            }
-        ],
-        "name": "newSeance",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "contract SoulPower",
-                "name": "_soul",
-                "type": "address"
-            }
-        ],
-        "name": "newSoul",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "_team",
-                "type": "address"
-            }
-        ],
-        "name": "newTeam",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "name": "operator",
-        "outputs": [
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "name": "operators",
-        "outputs": [
-            {
-                "internalType": "address",
                 "name": "",
                 "type": "address"
             }
@@ -591,7 +681,7 @@
         "inputs": [
             {
                 "internalType": "uint256",
-                "name": "_pid",
+                "name": "pid",
                 "type": "uint256"
             },
             {
@@ -659,21 +749,44 @@
         "type": "function"
     },
     {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "removingOperator",
-                "type": "address"
-            }
-        ],
-        "name": "removeOperator",
+        "inputs": [],
+        "name": "renounceOwnership",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "renounceOwnership",
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "renounceRole",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "revokeRole",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -695,17 +808,17 @@
         "inputs": [
             {
                 "internalType": "uint256",
-                "name": "_pid",
+                "name": "pid",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "_allocPoint",
+                "name": "allocPoint",
                 "type": "uint256"
             },
             {
                 "internalType": "bool",
-                "name": "_withUpdate",
+                "name": "withUpdate",
                 "type": "bool"
             }
         ],
@@ -767,6 +880,25 @@
         "type": "function"
     },
     {
+        "inputs": [
+            {
+                "internalType": "bytes4",
+                "name": "interfaceId",
+                "type": "bytes4"
+            }
+        ],
+        "name": "supportsInterface",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "team",
         "outputs": [
@@ -782,19 +914,6 @@
     {
         "inputs": [],
         "name": "totalAllocPoint",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "totalChains",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -834,6 +953,24 @@
     {
         "inputs": [
             {
+                "internalType": "address",
+                "name": "_dao",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "_team",
+                "type": "address"
+            }
+        ],
+        "name": "updateAccounts",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "uint256",
                 "name": "_bonusMultiplier",
                 "type": "uint256"
@@ -848,11 +985,42 @@
         "inputs": [
             {
                 "internalType": "uint256",
-                "name": "_pid",
+                "name": "pid",
                 "type": "uint256"
             }
         ],
         "name": "updatePool",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_soul",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "_seance",
+                "type": "address"
+            }
+        ],
+        "name": "updateTokens",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_weight",
+                "type": "uint256"
+            }
+        ],
+        "name": "updateWeight",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -903,12 +1071,12 @@
         "inputs": [
             {
                 "internalType": "uint256",
-                "name": "_pid",
+                "name": "pid",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "_amount",
+                "name": "amount",
                 "type": "uint256"
             }
         ],

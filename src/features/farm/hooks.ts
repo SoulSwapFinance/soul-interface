@@ -54,9 +54,7 @@ export function useUserInfo(farm, token) {
   }, [farm, account])
 
   const result = useSingleCallResult(args ? contract : null, 'userInfo', args)?.result
-
   const value = result?.[0]
-
   const amount = value ? JSBI.BigInt(value.toString()) : undefined
 
   return amount ? CurrencyAmount.fromRawAmount(token, amount) : undefined
@@ -64,9 +62,7 @@ export function useUserInfo(farm, token) {
 
 export function usePendingSoul(farm) {
   const { account, chainId } = useActiveWeb3React()
-
   const contract = useChefContract(farm.chef)
-
   const args = useMemo(() => {
     if (!account) {
       return
@@ -75,9 +71,7 @@ export function usePendingSoul(farm) {
   }, [farm, account])
 
   const result = useSingleCallResult(args ? contract : null, 'pendingSoul', args)?.result
-
   const value = result?.[0]
-
   const amount = value ? JSBI.BigInt(value.toString()) : undefined
 
   return amount ? CurrencyAmount.fromRawAmount(SOUL[chainId], amount) : undefined
