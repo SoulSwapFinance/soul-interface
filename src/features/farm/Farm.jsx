@@ -37,17 +37,16 @@ import {
 const Farm = ({ pid, lpSymbol, lpToken }) => {
   const { account } = useActiveWeb3React()
 
-  const [showing, setShowing] = useState(false)
+  const walletConnected = !!account
+  const toggleWalletModal = useWalletModalToggle()
 
-  const { withdraw, deposit, pendingSoul, poolInfo } = useSoulSummoner()
+  const { withdraw, deposit, pendingSoul, poolInfo, userInfo } = useSoulSummoner()
   const { approve, allowance } = useLpToken(lpToken)
 
   const [pending, setPending] = useState(0)
   const [multiplier, setMultiplier] = useState('?')
   const [approved, setApproved] = useState(false)
-
-  const walletConnected = !!account
-  const toggleWalletModal = useWalletModalToggle()
+  const [showing, setShowing] = useState(false)
 
   const handleShow = () => {
     setShowing(!showing)
@@ -66,7 +65,8 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
     } else {
       try {
         const pending = await pendingSoul(pid)
-        const parsed = Number(pending).toFixed().toString()
+        const formatted = ethers.utils.formatUnits(pending)
+        const parsed = Number(formatted).toFixed().toString()
         setPending(parsed)
       } catch (err) {
         console.log(err)
@@ -123,8 +123,9 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
 
   // Runs on render + reruns every 3 secs
   useEffect(() => {
-    // TODO: add check for if any amount is staked in PID
-    if (account) {
+    // Checks if any amount is staked in PID
+    const staked = userInfo(pid)
+    if (account && staked?.[0] !== 0) {
       const timer = setTimeout(() => {
         fetchPending(pid, account)
       }, 3000)
@@ -185,12 +186,12 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
             </FunctionBox>
 
             <FunctionBox>
-              <Input name="stake" id="stake" type="number" placeholder="0.0" />
+              <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
               {approved ? (
                 <SubmitButton
                   primaryColour="#45b7da"
                   hoverColour="#45b7da"
-                  onClick={() => deposit(pid, parseAmount(BigNumber.from(document.getElementById('stake').value)))}
+                  onClick={() => deposit(pid, parseAmount(document.getElementById('stake').value))}
                 >
                   Stake
                 </SubmitButton>
@@ -202,11 +203,11 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
             </FunctionBox>
 
             <FunctionBox>
-              <Input name="unstake" id="unstake" type="number" placeholder="0.0" />
+              <Input name="unstake" id="unstake" type="number" placeholder="0.0" min="0" />
               <SubmitButton
                 primaryColour="#b72b18"
                 hoverColour="#b72b18"
-                onClick={() => withdraw(pid, parseAmount(BigNumber.from(document.getElementById('unstake').value)))}
+                onClick={() => withdraw(pid, parseAmount(document.getElementById('unstake').value))}
               >
                 Unstake
               </SubmitButton>

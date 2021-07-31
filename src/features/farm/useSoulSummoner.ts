@@ -1,4 +1,4 @@
-import { useActiveWeb3React, useSoulContract } from '../../hooks'
+import { useActiveWeb3React } from '../../hooks'
 
 import { BigNumber } from '@ethersproject/bignumber'
 import { useCallback } from 'react'
@@ -6,15 +6,13 @@ import { useSoulSummonerContract } from '../../hooks/useContract'
 
 export default function useSoulSummoner() {
   const { account } = useActiveWeb3React()
-
-  const soul = useSoulContract()
-
   const summonerContract = useSoulSummonerContract()
 
   // Deposit
   const deposit = useCallback(
     async (pid: number, amount: BigNumber) => {
       try {
+        console.log(amount)
         return await summonerContract?.deposit(pid, amount)
       } catch (e) {
         console.log(e)

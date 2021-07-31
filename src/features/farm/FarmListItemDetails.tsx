@@ -20,6 +20,7 @@ import useSoulSummoner from './useSoulSummoner'
 import usePendingReward from './usePendingReward'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { useTransactionAdder } from '../../state/transactions/hooks'
+import { BigNumber } from 'ethers'
 
 const FarmListItem = ({ farm }) => {
   const { i18n } = useLingui()
@@ -65,7 +66,7 @@ const FarmListItem = ({ farm }) => {
 
   const [approvalState, approve] = useApproveCallback(typedDepositValue, APPROVAL_ADDRESSES[farm.chef][chainId])
 
-  const { deposit, withdraw, harvest } = useSoulSummoner()
+  const { deposit, withdraw } = useSoulSummoner()
 
   return (
     <Transition
@@ -194,7 +195,7 @@ const FarmListItem = ({ farm }) => {
               onClick={async () => {
                 setPendingTx(true)
                 try {
-                  const tx = await harvest(farm.id)
+                  const tx = await withdraw(farm.id, BigNumber.from(0))
                   addTransaction(tx, {
                     summary: `Harvest ${farm.pair.name}`,
                   })

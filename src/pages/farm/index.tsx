@@ -88,7 +88,7 @@ export default function Farm(): JSX.Element {
     pool.balance = pool?.balance || pool?.slpBalance
 
     const swapPair = swapPairs?.find((pair) => pair.id === pool.pair)
-    const kashiPair = kashiPairs?.find((pair) => pair.id === pool.pair)
+    const kashiPair = swapPairs?.find((pair) => pair.id === pool.pair)
 
     const type = swapPair ? PairType.SWAP : PairType.KASHI
 
@@ -252,7 +252,7 @@ export default function Farm(): JSX.Element {
     .filter((farm) => {
       return (
         (swapPairs && swapPairs.find((pair) => pair.id === farm.pair)) ||
-        (kashiPairs && kashiPairs.find((pair) => pair.id === farm.pair))
+        (swapPairs && swapPairs.find((pair) => pair.id === farm.pair))
       )
     })
     .map(map)
