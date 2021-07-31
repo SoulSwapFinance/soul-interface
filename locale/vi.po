@@ -386,9 +386,9 @@ msgstr ""
 
 msgid ""
 "For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL\n"
-"proportional to your share of the SpellBound. When your SOUL is staked into the SpellBound, you recieve\n"
-"SPELL in return for voting rights and a fully composable token that can interact with other protocols.\n"
-"Your SPELL is continuously compounding, when you unstake you will receive all the originally deposited\n"
+"proportional to your share of the SoulBar. When your SOUL is staked into the Circle, you recieve\n"
+"SEANCE in return for voting rights and a fully composable token that can interact with other protocols.\n"
+"Your SEANCE is continuously compounding, when you unstake you will receive all the originally deposited\n"
 "SOUL and any additional from fees."
 msgstr ""
 
@@ -544,9 +544,6 @@ msgstr ""
 msgid "Loading your {exchange} liquidity positions"
 msgstr "Đang tải trạng thái thanh khoản {exchange}"
 
-msgid "Loading..."
-msgstr "Đang tải..."
-
 msgid "MAX"
 msgstr "TỐI ĐA"
 
@@ -579,7 +576,7 @@ msgstr ""
 msgid "Max"
 msgstr "Tối đa"
 
-msgid "Maximize yield by staking your SOUL for SPELL"
+msgid "Maximize yield by staking SOUL for SEANCE"
 msgstr ""
 
 msgid "Maximum sent"
@@ -857,7 +854,10 @@ msgstr "Lợi suất cộng dồn với SAAVE"
 msgid "Stake"
 msgstr "Đặt cược"
 
-msgid "Stake SOUL"
+msgid "Stake Auto Reinvesting SOUL"
+msgstr ""
+
+msgid "Stake Manual SOUL"
 msgstr ""
 
 msgid "Stake SOUL for SPELL"
@@ -867,9 +867,6 @@ msgid ""
 "Stake into SPELL add collateral as aSPELL on Aave all in\n"
 "one click"
 msgstr ""
-
-msgid "Staking APR"
-msgstr "APR đặt cược"
 
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "Tổng cung {0} {1} và {2} {3}"
@@ -987,6 +984,12 @@ msgstr ""
 msgid "Unstake"
 msgstr "Hủy đặt cược"
 
+msgid "Unstake Auto Reinvesting SOUL"
+msgstr ""
+
+msgid "Unstake Manual SOUL"
+msgstr ""
+
 msgid "Unstaked"
 msgstr "Đã hủy đặt cược"
 
@@ -1017,9 +1020,6 @@ msgstr ""
 msgid "View Liquidity Positions"
 msgstr ""
 
-msgid "View Stats"
-msgstr "Xem số liệu thống kê"
-
 msgid "View on explorer"
 msgstr "Xem trên explorer"
 
@@ -1043,9 +1043,6 @@ msgstr "Bọc lại"
 
 msgid "Wrong Network"
 msgstr "Mạng không chính xác"
-
-msgid "Yesterday's APR"
-msgstr "Tỷ suất lợi nhuận hàng năm của ngày hôm qua"
 
 msgid "You Pay:"
 msgstr ""
@@ -1082,9 +1079,6 @@ msgstr ""
 
 msgid "Your Liquidity"
 msgstr "Tính thanh khoản của bạn"
-
-msgid "Your SpellBound Stats"
-msgstr ""
 
 msgid "Your Staked"
 msgstr "Đặt cược của bạn"

@@ -16,6 +16,7 @@ import {
   ROUTER_ADDRESS,
   SPELL_ADDRESS,
   SOUL_ADDRESS,
+  SOULVAULT_ADDRESS,
   SOUL_GUIDE_ADDRESS,
   // SOULSWAP_MULTISWAPPER_ADDRESS,
   SOULSWAP_SWAPPER_ADDRESS,
@@ -56,6 +57,7 @@ import MAKER_ABI from '../constants/abis/maker.json'
 // Soul
 import SOUL_GUIDE_ABI from '../constants/abis/soul-guide.json' // TODO: update abi
 import SOUL_SUMMONER_ABI from '../constants/abis/soulswap/soulsummoner.json' // 28 JUL
+import SOULVAULT_ABI from '../constants/abis/soulswap/soulvault.json' // 31 JUL
 import SPELL_ABI from '../constants/abis/soulswap/spell.json' // 28 JUL
 import SOUL_ABI from '../constants/abis/soulswap/soulpower.json' // 28 JUL
 
@@ -177,14 +179,17 @@ export function useSoulContract(withSignerIfPossible = true): Contract | null {
   return useContract(chainId && SOUL_ADDRESS[chainId], SOUL_ABI, withSignerIfPossible)
 }
 
-// Using `0x5cED956c0d3dC88B8C3E42494F7b2e052d7CfeBc` to try and create farms b/c of poolLength === 2
-// Need to update to `0xd18dEfcd37cD4BbA23287611DC48a116CB127E27`
+export function useSoulVaultContract(withSignerIfPossible = true): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOULVAULT_ADDRESS[chainId], SOULVAULT_ABI, withSignerIfPossible)
+}
+
 export function useMasterChefContract(withSignerIfPossible?: boolean): Contract | null {
-  return useContract('0x5cED956c0d3dC88B8C3E42494F7b2e052d7CfeBc', SOUL_SUMMONER_ABI, withSignerIfPossible)
+  return useContract('0xA65DbEA56E1E202bf03dB5f49ba565fb00Bf9288', SOUL_SUMMONER_ABI, withSignerIfPossible) // 31 JUL (SOUL SUMMONER)
 }
 
 export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
-  return useContract('0xd18dEfcd37cD4BbA23287611DC48a116CB127E27', SOUL_SUMMONER_ABI, withSignerIfPossible) // TODO: update address
+  return useContract('0xA65DbEA56E1E202bf03dB5f49ba565fb00Bf9288', SOUL_SUMMONER_ABI, withSignerIfPossible) // 31 JUL
 }
 
 export function useMiniChefContract(withSignerIfPossible?: boolean): Contract | null {

@@ -216,7 +216,7 @@ export const SOUL: ChainTokenMap = {
   // [ChainId.FANTOM]: new Token(ChainId.FANTOM, SOUL_ADDRESS[ChainId.FANTOM], 18, 'SOUL', 'SoulPower'),
   [ChainId.FANTOM_TESTNET]: new Token(
     ChainId.FANTOM_TESTNET,
-    SOUL_ADDRESS[ChainId.FANTOM_TESTNET],
+    '0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5', // 31 JUL
     18,
     'SOUL',
     'SoulPower'
@@ -230,6 +230,20 @@ export const SOUL: ChainTokenMap = {
   // [ChainId.HECO]: new Token(ChainId.HECO, SOUL_ADDRESS[ChainId.HECO], 18, 'SOUL', 'SoulPower'),
 }
 
+// SEANCE TOKEN
+export const SEANCE: ChainTokenMap = {
+  // [ChainId.MAINNET]: new Token(
+  //   ChainId.MAINNET, SEANCE_ADDRESS[ChainId.MAINNET], 18, 'xSOUL', 'SushiBar'
+  // ),
+  [ChainId.FANTOM_TESTNET]: new Token(
+    ChainId.FANTOM_TESTNET,
+    '0xD54Cf31D5653F4a062f5DA4C83170A5867d04442', // 31 JUL
+    18,
+    'SEANCE',
+    'SeanceCircle'
+  ),
+}
+
 export const SPELL: ChainTokenMap = {
   // [ChainId.FANTOM]: new Token(ChainId.FANTOM, SPELL_ADDRESS[ChainId.FANTOM], 18, 'SPELL', 'SpellBound'), // TODO: update
   [ChainId.FANTOM_TESTNET]: new Token(
@@ -238,17 +252,6 @@ export const SPELL: ChainTokenMap = {
     18,
     'SPELL',
     'SpellBound'
-  ), // TODO: update
-}
-
-export const SEANCE: ChainTokenMap = {
-  // [ChainId.FANTOM]: new Token(ChainId.FANTOM, SPELL_ADDRESS[ChainId.FANTOM], 18, 'SPELL', 'SpellBound'), // TODO: update
-  [ChainId.FANTOM_TESTNET]: new Token(
-    ChainId.FANTOM_TESTNET,
-    '0xD858E1a257Cb595Ba395520daD4c9C9592307734', // 30 JUL
-    18,
-    'SEANCE',
-    'SeanceCircle'
   ), // TODO: update
 }
 

@@ -1,165 +1,123 @@
-import { useActiveWeb3React, useSoulContract } from '../../hooks'
+import { useActiveWeb3React } from '../../hooks'
 
 import { BigNumber } from '@ethersproject/bignumber'
-import { Chef } from './enum'
-import { Zero } from '@ethersproject/constants'
 import { useCallback } from 'react'
-import { useChefContract } from './hooks'
+import { useSoulSummonerContract } from '../../hooks/useContract'
 
-export default function useSoulSummoner(chef: Chef) {
+export default function useSoulSummoner() {
   const { account } = useActiveWeb3React()
-
-  const soul = useSoulContract()
-
-  const contract = useChefContract(chef)
+  const summonerContract = useSoulSummonerContract()
 
   // Deposit
   const deposit = useCallback(
     async (pid: number, amount: BigNumber) => {
       try {
-        let tx
-
-        if (chef === Chef.SOUL_SUMMONER) {
-          tx = await contract?.deposit(pid, amount)
-        } else {
-          tx = await contract?.deposit(pid, amount, account)
-        }
-
-        return tx
+        console.log(amount)
+        return await summonerContract?.deposit(pid, amount)
       } catch (e) {
-        console.error(e)
+        console.log(e)
+        alert(e.message)
         return e
       }
     },
-    [account, chef, contract]
+    [account, summonerContract]
   )
 
   // Withdraw
   const withdraw = useCallback(
     async (pid: number, amount: BigNumber) => {
       try {
-        let tx = contract?.withdraw(pid, amount, account)
+        let tx = await summonerContract?.withdraw(pid, amount)
         return tx
       } catch (e) {
-        console.error(e)
+        alert(e.message)
+        console.log(e)
         return e
       }
     },
-    [account, chef, contract]
-  )
-
-  const harvest = useCallback(
-    async (pid: number) => {
-      try {
-        let tx
-
-        if (chef === Chef.SOUL_SUMMONER) {
-          const pendingSoul = await contract?.pendingSoul(pid, account)
-          const balanceOf = await soul?.balanceOf(contract?.address)
-
-          // if SoulSummoner doesn't have enough soul to harvest, batch in a harvest.
-          if (pendingSoul.gt(balanceOf)) {
-            tx = await contract?.batch(
-              [
-                contract?.interface?.encodeFunctionData('harvestFromMasterChef'),
-                contract?.interface?.encodeFunctionData('harvest', [pid, account]),
-              ],
-              true
-            )
-          } else {
-            tx = await contract?.harvest(pid, account)
-          }
-        } else if (chef === Chef.MINICHEF) {
-          tx = await contract?.harvest(pid, account)
-        }
-        return tx
-      } catch (e) {
-        console.error(e)
-        return e
-      }
-    },
-    [account, chef, contract, soul]
+    [account, summonerContract]
   )
 
   // Pool length
   const poolLength = useCallback(async () => {
     try {
-      const tx = await contract?.poolLength()
+      const tx = await summonerContract?.poolLength()
       return tx
     } catch (e) {
-      console.error(e)
+      console.log(e)
       return e
     }
-  }, [account, chef, contract])
+  }, [account, summonerContract])
 
   // Pool Info
   const poolInfo = useCallback(
     async (pid: number) => {
       try {
-        const tx = await contract?.poolInfo(pid)
+        const tx = await summonerContract?.poolInfo(pid)
         const lpToken = tx?.[0].toString()
-        const lastRewardTime = BigNumber.from(tx?.[1])
-        const accSoulPerShare = BigNumber.from(tx?.[2])
-        return [lpToken, lastRewardTime, accSoulPerShare]
+        const allocPoint = BigNumber.from(tx?.[1])
+        const lastRewardTime = BigNumber.from(tx?.[2])
+        const accSoulPerShare = BigNumber.from(tx?.[3])
+        return [lpToken, allocPoint, lastRewardTime, accSoulPerShare]
       } catch (e) {
-        console.error(e)
+        console.log(e)
         return e
       }
     },
-    [account, chef, contract]
+    [account, summonerContract]
   )
 
   // User Info
   const userInfo = useCallback(
-    async (pid: number, address: string) => {
+    async (pid: number) => {
       try {
-        const tx = await contract?.userInfo(pid)
-        const amount = BigNumber.from(tx?.[0])
-        const rewardDebt = BigNumber.from(tx?.[1])
+        const tx = await summonerContract?.userInfo(pid, account)
+        const amount = tx?.[0]
+        const rewardDebt = tx?.[1]
         return [amount, rewardDebt]
       } catch (e) {
-        console.error(e)
+        console.log(e)
         return e
       }
     },
-    [account, chef, contract]
+    [account, summonerContract]
   )
 
   // Amount of SOUL pending for redemption
   const pendingSoul = useCallback(
-    async (pid: number, address: string) => {
+    async (pid: number) => {
       try {
-        const tx = BigNumber.from(await contract?.pendingSoul(pid, address))
+        const tx = BigNumber.from(await summonerContract?.pendingSoul(pid, account))
         return tx
       } catch (e) {
-        console.error(e)
+        console.log(e)
         return e
       }
     },
-    [account, chef, contract]
+    [account, summonerContract]
   )
 
   // How much SOUL is emitted per second
   const soulPerSecond = useCallback(async () => {
     try {
-      const tx = BigNumber.from(await contract?.soulPerSecond())
+      const tx = BigNumber.from(await summonerContract?.soulPerSecond())
       return tx
     } catch (e) {
-      console.error(e)
+      console.log(e)
       return e
     }
-  }, [account, chef, contract])
+  }, [account, summonerContract])
 
   // Total Allocation Point (net amount of all chains combined)
   const totalAllocPoint = useCallback(async () => {
     try {
-      const tx = BigNumber.from(await contract?.totalAllocPoint())
+      const tx = BigNumber.from(await summonerContract?.totalAllocPoint())
       return tx
     } catch (e) {
-      console.error(e)
+      console.log(e)
       return e
     }
-  }, [account, chef, contract])
+  }, [account, summonerContract])
 
-  return { deposit, withdraw, harvest, poolLength, poolInfo, userInfo, pendingSoul, soulPerSecond, totalAllocPoint }
+  return { deposit, withdraw, poolLength, poolInfo, userInfo, pendingSoul, soulPerSecond, totalAllocPoint }
 }

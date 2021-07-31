@@ -388,9 +388,9 @@ msgstr ""
 
 msgid ""
 "For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL\n"
-"proportional to your share of the SpellBound. When your SOUL is staked into the SpellBound, you recieve\n"
-"SPELL in return for voting rights and a fully composable token that can interact with other protocols.\n"
-"Your SPELL is continuously compounding, when you unstake you will receive all the originally deposited\n"
+"proportional to your share of the SoulBar. When your SOUL is staked into the Circle, you recieve\n"
+"SEANCE in return for voting rights and a fully composable token that can interact with other protocols.\n"
+"Your SEANCE is continuously compounding, when you unstake you will receive all the originally deposited\n"
 "SOUL and any additional from fees."
 msgstr ""
 
@@ -546,9 +546,6 @@ msgstr ""
 msgid "Loading your {exchange} liquidity positions"
 msgstr "{exchange}の流動性ポジションを読み込んでいます"
 
-msgid "Loading..."
-msgstr "読み込んでいます..."
-
 msgid "MAX"
 msgstr "最大"
 
@@ -581,7 +578,7 @@ msgstr ""
 msgid "Max"
 msgstr "最大"
 
-msgid "Maximize yield by staking your SOUL for SPELL"
+msgid "Maximize yield by staking SOUL for SEANCE"
 msgstr ""
 
 msgid "Maximum sent"
@@ -859,7 +856,10 @@ msgstr "SAAVEで利回りを積み上げる"
 msgid "Stake"
 msgstr "出資"
 
-msgid "Stake SOUL"
+msgid "Stake Auto Reinvesting SOUL"
+msgstr ""
+
+msgid "Stake Manual SOUL"
 msgstr ""
 
 msgid "Stake SOUL for SPELL"
@@ -869,9 +869,6 @@ msgid ""
 "Stake into SPELL add collateral as aSPELL on Aave all in\n"
 "one click"
 msgstr ""
-
-msgid "Staking APR"
-msgstr "APRを出資しています"
 
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "{0}{1}および{2}{3}を供給しています"
@@ -989,6 +986,12 @@ msgstr ""
 msgid "Unstake"
 msgstr "出資解除"
 
+msgid "Unstake Auto Reinvesting SOUL"
+msgstr ""
+
+msgid "Unstake Manual SOUL"
+msgstr ""
+
 msgid "Unstaked"
 msgstr "出資解除済み"
 
@@ -1019,9 +1022,6 @@ msgstr ""
 msgid "View Liquidity Positions"
 msgstr ""
 
-msgid "View Stats"
-msgstr "統計を表示"
-
 msgid "View on explorer"
 msgstr "エクスプローラーで表示"
 
@@ -1045,9 +1045,6 @@ msgstr "ラップ"
 
 msgid "Wrong Network"
 msgstr "間違ったネットワーク"
-
-msgid "Yesterday's APR"
-msgstr "昨日のAPR"
 
 msgid "You Pay:"
 msgstr ""
@@ -1084,9 +1081,6 @@ msgstr ""
 
 msgid "Your Liquidity"
 msgstr "あなたの流動性"
-
-msgid "Your SpellBound Stats"
-msgstr ""
 
 msgid "Your Staked"
 msgstr "あなたの出資"

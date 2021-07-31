@@ -1,5 +1,30 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
+import React, { useState, useEffect } from 'react'
+import { BigNumber } from '@ethersproject/bignumber'
+import { MaxUint256 } from '@ethersproject/constants'
+import { useWalletModalToggle } from '../../state/application/hooks'
+import { useActiveWeb3React } from '../../hooks'
+import { ethers } from 'ethers'
+
+import useSoulSummoner from './useSoulSummoner'
+import useLpToken from './useLpToken'
+
+import {
+  FarmContainer,
+  FarmRow,
+  FarmContentWrapper,
+  TokenPairBox,
+  TokenPair,
+  FarmItemBox,
+  FarmItemHeading,
+  FarmItem,
+  ShowBtn,
+  DetailsContainer,
+  DetailsWrapper,
+  FunctionBox,
+  Input,
+  SubmitButton,
+} from './FarmStyles'
+import { set } from 'lodash'
 
 // params to render farm with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)
@@ -10,165 +35,126 @@ import styled from 'styled-components'
 
 // each item will need its own box
 
-// ---------------------
-//  Row Section
-// ---------------------
+const Farm = ({ pid, lpSymbol, lpToken }) => {
+  const { account } = useActiveWeb3React()
 
-const FarmContainer = styled.div`
-  display: grid;
-  grid-template-rows: 1fr;
-`
+  const walletConnected = !!account
+  const toggleWalletModal = useWalletModalToggle()
 
-const FarmRow = styled.div`
-  background-color: HSL(267, 30%, 20%);
-  margin: 4px;
-  border-radius: 8px;
-  padding: 5px 15px;
-`
+  const { withdraw, deposit, pendingSoul, poolInfo, userInfo } = useSoulSummoner()
+  const { approve, allowance } = useLpToken(lpToken)
 
-const FarmContentWrapper = styled.div`
-  display: flex;
-`
+  const [stakedBal, setStakedBal] = useState(0)
+  const [unstakedBal, setUnstakedBal] = useState(0)
 
-const FarmItemBox = styled.div`
-  width: ${({ width }) => (width ? `${width}` : `100px`)};
-  display: grid;
-  justify-content: left;
-  align-items: center;
-  margin-left: ${({ marginLeft }) => (marginLeft ? `${marginLeft}` : `30px`)};
-`
-
-const FarmItemHeading = styled.p`
-  font-weight: normal;
-  font-size: 0.8rem;
-  color: white;
-`
-
-const FarmItem = styled.h2`
-  font-size: 1.5rem;
-  color: white;
-`
-
-const TokenPairBox = styled.div`
-  width: 150px;
-  display: flex;
-  justify-content: left;
-  align-items: center;
-`
-
-const TokenPair = styled.h2`
-  overflow-wrap: break-word;
-  font-size: 1.2rem;
-  color: white;
-`
-
-const ShowBtnWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-const ShowBtn = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  outline: none;
-  border: none;
-  color: white;
-  font-size: 1rem;
-  background-color: transparent;
-
-  &:hover,
-  &:active {
-    text-shadow: 0 0 5px white;
-  }
-`
-
-// ---------------------
-//  Dropdown Section
-// ---------------------
-
-const DetailsContainer = styled.div`
-  margin: 4px;
-`
-
-const DetailsWrapper = styled.div`
-  display: flex;
-  background-color: HSL(267, 30%, 30%);
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  width: 100%;
-`
-
-const FunctionBox = styled.div`
-  padding: 10px;
-  width: ${({ width }) => (width ? `${width}` : `100%`)};
-`
-
-const Input = styled.input`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 0.25rem;
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  padding: 0.5em;
-  border-radius: 0.2em;
-  background-color: #675c6e;
-  color: white;
-
-  &:focus {
-    border-color: white;
-    /* y axis, x axis, blur, spread, colour */
-    /* box-shadow: 0 0 10px 0 white; */
-    outline: 0;
-  }
-`
-
-const SubmitButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 0.5rem 0.25rem 0 0.25rem;
-  outline: 0;
-  border: none;
-  border-radius: 0.25em;
-  font-size: 1rem;
-  padding: 0.5em;
-  transition: all 0.2s ease-in-out;
-  background: ${({ primaryColour }) => (primaryColour ? primaryColour : 'white')};
-  color: black;
-
-  &:hover {
-    border-color: ${({ hoverColour }) => (hoverColour ? hoverColour : 'violet')};
-    box-shadow: ${({ hoverColour }) => (hoverColour ? `0 0 10px 0 ${hoverColour}` : '0 0 10px 0 violet')};
-    background-color: ${({ hoverColour }) => (hoverColour ? hoverColour : 'violet')};
-    cursor: pointer;
-  }
-
-  &:focus {
-    border-color: ${({ hoverColour }) => (hoverColour ? hoverColour : 'violet')};
-  }
-`
-
-const Farm = ({ lpToken }) => {
+  const [pending, setPending] = useState(0)
+  const [multiplier, setMultiplier] = useState('?')
+  const [approved, setApproved] = useState(false)
   const [showing, setShowing] = useState(false)
 
   const handleShow = () => {
+    fetchBals()
     setShowing(!showing)
   }
 
-  const fetchPidData = (pid) => {
-    // use function `poolInfo` & return:
-    // - lpAddress[0] the 2 token addresses from factory call (fetch icon from folder in)
-    // - allocPoint[1]
-    // - accSoulPerShare[3]
-    // require: `Approve` token for stake, otherwise show `Stake`
-    // earned: `pendingSoul`
+  // Used to get non 1e18 numbers and turn them into 1e18
+  const parseAmount = (amount) => {
+    const parsed = ethers.BigNumber.from(amount).mul(ethers.BigNumber.from(10).pow(18)).toString()
+    return parsed
   }
+
+  const fetchBals = async (pid) => {
+    if (!walletConnected) {
+      toggleWalletModal()
+    } else {
+      try {
+        const result = await userInfo(pid)
+        const amount = BigNumber.from(result?.[0])
+        const staked = ethers.utils.formatUnits(amount)
+        setStakedBal(Number(staked).toFixed(0).toString())
+        return [staked]
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  }
+
+  // Fetches connected user pending soul
+  const fetchPending = async (pid) => {
+    if (!walletConnected) {
+      toggleWalletModal()
+    } else {
+      try {
+        const pending = await pendingSoul(pid)
+        const formatted = ethers.utils.formatUnits(pending)
+        const parsed = Number(formatted).toFixed().toString()
+        setPending(parsed)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  }
+
+  // Fetches pool allocation point and divides by 100 to give `mulitplier`
+  const fetchMultiplier = async (pid) => {
+    if (!walletConnected) {
+      toggleWalletModal()
+    } else {
+      try {
+        const poolData = await poolInfo(pid)
+        const poolAlloc = poolData?.[1] / BigNumber.from(100)
+        setMultiplier(poolAlloc.toString())
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  }
+
+  const fetchApproval = async () => {
+    if (!walletConnected) {
+      toggleWalletModal()
+    } else {
+      // Checks if SoulSummoner can move tokens
+      const amount = await allowance(account)
+      if (amount > 0) setApproved(true)
+      return amount
+    }
+  }
+
+  const handleApprove = async () => {
+    if (!walletConnected) {
+      toggleWalletModal()
+    } else {
+      try {
+        await approve()
+        await fetchApproval()
+      } catch (e) {
+        alert(e.message)
+        console.log(e)
+        return
+      }
+    }
+  }
+
+  // Runs on render
+  useEffect(() => {
+    fetchMultiplier(pid)
+    fetchApproval()
+  }, [account])
+
+  // Runs on render + reruns every 3 secs
+  useEffect(() => {
+    // Checks if any amount is staked in PID
+    const staked = userInfo(pid)
+    if (account && staked?.[0] !== 0) {
+      const timer = setTimeout(() => {
+        fetchPending(pid, account)
+      }, 3000)
+
+      // Clear timeout if the component is unmounted
+      return () => clearTimeout(timer)
+    }
+  })
 
   return (
     <>
@@ -177,23 +163,29 @@ const Farm = ({ lpToken }) => {
           <FarmContentWrapper>
             <TokenPairBox>
               {/* 2 token logo combined ? */}
-              <TokenPair>{lpToken}</TokenPair>
+              <TokenPair target="_blank" href={`https://testnet.ftmscan.com/address/${lpToken}/#code`}>
+                {lpSymbol}
+              </TokenPair>
             </TokenPairBox>
+
             <FarmItemBox>
               <FarmItemHeading>Earned</FarmItemHeading>
-              <FarmItem>2500</FarmItem>
+              <FarmItem>{pending}</FarmItem>
             </FarmItemBox>
+
             <FarmItemBox>
               <FarmItemHeading>APR</FarmItemHeading>
-              <FarmItem>150%</FarmItem>
+              <FarmItem>...%</FarmItem>
             </FarmItemBox>
+
             <FarmItemBox>
               <FarmItemHeading>TVL</FarmItemHeading>
-              <FarmItem>$1,413,435</FarmItem>
+              <FarmItem>$...</FarmItem>
             </FarmItemBox>
+
             <FarmItemBox marginLeft={'100px'}>
               <FarmItemHeading>Multiplier</FarmItemHeading>
-              <FarmItem>3x</FarmItem>
+              <FarmItem>{multiplier}x</FarmItem>
             </FarmItemBox>
 
             <FarmItemBox>
@@ -204,23 +196,43 @@ const Farm = ({ lpToken }) => {
           </FarmContentWrapper>
         </FarmRow>
       </FarmContainer>
+
       {showing ? (
         <DetailsContainer>
           <DetailsWrapper>
-            <FunctionBox>
-              <Input name="stake" type="number" placeholder="0.0" />
-              <SubmitButton primaryColour="#45b7da" hoverColour="#45b7da" type="Submit">
-                Stake
-              </SubmitButton>
-            </FunctionBox>
             <FunctionBox width="30%">
-              <SubmitButton primaryColour="#4afd94" hoverColour="#4afd94" type="Submit">
+              <SubmitButton primaryColour="#4afd94" hoverColour="#4afd94" onClick={() => withdraw(pid, 0)}>
                 Harvest
               </SubmitButton>
             </FunctionBox>
+
             <FunctionBox>
-              <Input name="unstake" type="number" placeholder="0.0" />
-              <SubmitButton primaryColour="#e63d27" hoverColour="#e63d27" type="Submit">
+              {/* <button >Max</button> */}
+              <p>Available: {unstakedBal}</p>
+              <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
+              {approved ? (
+                <SubmitButton
+                  primaryColour="#45b7da"
+                  hoverColour="#45b7da"
+                  onClick={() => deposit(pid, parseAmount(document.getElementById('stake').value))}
+                >
+                  Stake
+                </SubmitButton>
+              ) : (
+                <SubmitButton primaryColour="#da9045" hoverColour="#da9045" onClick={() => handleApprove()}>
+                  Approve Stake
+                </SubmitButton>
+              )}
+            </FunctionBox>
+
+            <FunctionBox>
+              <p>Staked: {stakedBal}</p>
+              <Input name="unstake" id="unstake" type="number" placeholder="0.0" min="0" />
+              <SubmitButton
+                primaryColour="#b72b18"
+                hoverColour="#b72b18"
+                onClick={() => withdraw(pid, parseAmount(document.getElementById('unstake').value))}
+              >
                 Unstake
               </SubmitButton>
             </FunctionBox>
@@ -237,9 +249,39 @@ export const FarmList = () => {
   // 2) get lpTokenAddress from calling `poolInfo?.[0]`
   // 3) input into factory to get token1-token2
   // 4) typed out -> [`${token1}`-`${`token2`}`]
-  const farms = ['SOUL-FTM', 'SOUL-FUSD', 'SOUL-PILL']
+  const farms = [
+    {
+      pid: 1,
+      lpSymbol: 'SOUL-FTM',
+      lpAddresses: {
+        4002: '0x10c0AFd7C58916C4025d466E11850c7D79219277',
+      },
+      token1: '0xf1277d1ed8ad466beddf92ef448a132661956621',
+      token2: '0xcf174a6793fa36a73e8ff18a71bd81c985ef5ab5',
+    },
+    // {
+    //   pid: 2,
+    //   lpSymbol: 'SOUL-FUSD',
+    //   lpAddresses: {
+    //     4002: '',
+    //   },
+    //   token1: '',
+    //   token2: '',
+    // },
+    // {
+    //   pid: 3,
+    //   lpSymbol: 'SOUL-PILL',
+    //   lpAddresses: {
+    //     4002: '',
+    //   },
+    //   token1: '',
+    //   token2: '',
+    // },
+  ]
 
-  const farmList = farms.map((farm) => <Farm key={farm} lpToken={farm} />)
+  const farmList = farms.map((farm) => (
+    <Farm key={farm.pid} pid={farm.pid} lpSymbol={farm.lpSymbol} lpToken={farm.lpAddresses[4002]} />
+  ))
   return (
     <>
       {/* Banner */}
