@@ -24,7 +24,7 @@ export const MINISUMMONER_ADDRESS: AddressMap = {
 export const SOUL_SUMMONER_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.FANTOM]: '',
-  [ChainId.FANTOM_TESTNET]: '0xd18dEfcd37cD4BbA23287611DC48a116CB127E27', // 28 JUL
+  [ChainId.FANTOM_TESTNET]: '0xA65DbEA56E1E202bf03dB5f49ba565fb00Bf9288', // 30 JUL
 }
 
 export const ZAPPER_ADDRESS: AddressMap = {
