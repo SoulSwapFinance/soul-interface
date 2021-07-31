@@ -19,7 +19,7 @@ export default function useSoulSummoner(chef: Chef) {
       try {
         let tx
 
-        if (chef === Chef.MASTERCHEF_V1) {
+        if (chef === Chef.SOUL_SUMMONER) {
           tx = await contract?.deposit(pid, amount)
         } else {
           tx = await contract?.deposit(pid, amount, account)
