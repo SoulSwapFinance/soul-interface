@@ -166,6 +166,7 @@ const Farm = ({ lpToken }) => {
     // - lpAddress[0] the 2 token addresses from factory call (fetch icon from folder in)
     // - allocPoint[1]
     // - accSoulPerShare[3]
+    // require: `Approve` token for stake, otherwise show `Stake`
     // earned: `pendingSoul`
   }
 
@@ -213,7 +214,6 @@ const Farm = ({ lpToken }) => {
               </SubmitButton>
             </FunctionBox>
             <FunctionBox width="30%">
-              <Input name="unstake" type="number" placeholder="0.0" />
               <SubmitButton primaryColour="#4afd94" hoverColour="#4afd94" type="Submit">
                 Harvest
               </SubmitButton>
@@ -232,7 +232,13 @@ const Farm = ({ lpToken }) => {
 }
 
 export const FarmList = () => {
+  // Display token pair - TODO:
+  // 1) fetch total farms
+  // 2) get lpTokenAddress from calling `poolInfo?.[0]`
+  // 3) input into factory to get token1-token2
+  // 4) typed out -> [`${token1}`-`${`token2`}`]
   const farms = ['SOUL-FTM', 'SOUL-FUSD', 'SOUL-PILL']
+
   const farmList = farms.map((farm) => <Farm key={farm} lpToken={farm} />)
   return (
     <>
