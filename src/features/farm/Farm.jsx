@@ -63,12 +63,12 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
     return parsed
   }
 
-  const fetchBals = async (pid) => {
+  const fetchBals = async (pid, account) => {
     if (!walletConnected) {
       toggleWalletModal()
     } else {
       try {
-        const result = await userInfo(pid)
+        const result = await userInfo(pid, account)
         const amount = BigNumber.from(result?.[0])
         const staked = ethers.utils.formatUnits(amount)
         setStakedBal(Number(staked).toFixed(0).toString())
@@ -80,12 +80,12 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
   }
 
   // Fetches connected user pending soul
-  const fetchPending = async (pid) => {
+  const fetchPending = async (pid, account) => {
     if (!walletConnected) {
       toggleWalletModal()
     } else {
       try {
-        const pending = await pendingSoul(pid)
+        const pending = await pendingSoul(pid, account)
         const formatted = ethers.utils.formatUnits(pending)
         const parsed = Number(formatted).toFixed().toString()
         setPending(parsed)
@@ -136,20 +136,20 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
     }
   }
 
-  // Runs on render
+  // uns on render
   useEffect(() => {
     fetchMultiplier(pid)
     fetchApproval()
   }, [account])
 
-  // Runs on render + reruns every 3 secs
+  // Runs on render + reruns every second
   useEffect(() => {
     // Checks if any amount is staked in PID
-    const staked = userInfo(pid)
+    const staked = userInfo(pid, account)
     if (account && staked?.[0] !== 0) {
       const timer = setTimeout(() => {
         fetchPending(pid, account)
-      }, 3000)
+      }, 1000)
 
       // Clear timeout if the component is unmounted
       return () => clearTimeout(timer)
@@ -173,18 +173,18 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
               <FarmItem>{pending}</FarmItem>
             </FarmItemBox>
 
-            <FarmItemBox>
+            {/* <FarmItemBox>
               <FarmItemHeading>APR</FarmItemHeading>
               <FarmItem>...%</FarmItem>
-            </FarmItemBox>
+            </FarmItemBox> */}
 
-            <FarmItemBox>
+            {/* <FarmItemBox>
               <FarmItemHeading>TVL</FarmItemHeading>
               <FarmItem>$...</FarmItem>
-            </FarmItemBox>
+            </FarmItemBox> */}
 
             <FarmItemBox marginLeft={'100px'}>
-              <FarmItemHeading>Multiplier</FarmItemHeading>
+              {/* <FarmItemHeading>Multiplier</FarmItemHeading> */}
               <FarmItem>{multiplier}x</FarmItem>
             </FarmItemBox>
 
@@ -208,7 +208,7 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
 
             <FunctionBox>
               {/* <button >Max</button> */}
-              <p>Available: {unstakedBal}</p>
+              {/* <p>Available: {unstakedBal}</p> */}
               <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
               {approved ? (
                 <SubmitButton
@@ -226,7 +226,7 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
             </FunctionBox>
 
             <FunctionBox>
-              <p>Staked: {stakedBal}</p>
+              {/* <p>Staked: {stakedBal}</p> */}
               <Input name="unstake" id="unstake" type="number" placeholder="0.0" min="0" />
               <SubmitButton
                 primaryColour="#b72b18"

@@ -7,7 +7,7 @@ import Fraction from '../../entities/Fraction'
 // import { getContract } from '../../functions'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useBlockNumber } from '../../state/application/hooks'
-import useCurrentBlockTimestamp from '../../hooks/useCurrentBlockTimestamp'
+// import useCurrentBlockTimestamp from '../../hooks/useCurrentBlockTimestamp'
 
 const REWARDERS = {
   [ChainId.MAINNET]: 'some',

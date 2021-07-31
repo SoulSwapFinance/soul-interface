@@ -384,7 +384,7 @@ msgstr ""
 
 msgid ""
 "For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL\n"
-"proportional to your share of the SoulBar. When your SOUL is staked into the Circle, you recieve\n"
+"proportional to your share of the SEANCE. When your SOUL is staked into the Circle, you recieve\n"
 "SEANCE in return for voting rights and a fully composable token that can interact with other protocols.\n"
 "Your SEANCE is continuously compounding, when you unstake you will receive all the originally deposited\n"
 "SOUL and any additional from fees."

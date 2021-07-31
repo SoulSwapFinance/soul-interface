@@ -241,7 +241,7 @@ export default function SoulStake() {
             </div>
             <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
               {i18n._(t`For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL
-                                proportional to your share of the SoulBar. When your SOUL is staked into the Circle, you recieve
+                                proportional to your share of the SEANCE. When your SOUL is staked into the Circle, you recieve
                                 SEANCE in return for voting rights and a fully composable token that can interact with other protocols.
                                 Your SEANCE is continuously compounding, when you unstake you will receive all the originally deposited
                                 SOUL and any additional from fees.`)}

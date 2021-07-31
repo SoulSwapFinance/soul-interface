@@ -1,12 +1,28 @@
 import { useActiveWeb3React } from '../../hooks'
-
 import { BigNumber } from '@ethersproject/bignumber'
 import { useCallback } from 'react'
 import { useSoulSummonerContract } from '../../hooks/useContract'
+import { useTransactionAdder } from '../../state/transactions/hooks'
 
 export default function useSoulSummoner() {
   const { account } = useActiveWeb3React()
   const summonerContract = useSoulSummonerContract()
+  const addTransaction = useTransactionAdder()
+
+  // -----------------------
+  //  Read Functions
+  // -----------------------
+
+  // fetches the user's info of the soul summoner
+  const info = useCallback(async () => {
+    return await summonerContract?.userInfo(account)
+  }, [account, summonerContract])
+
+  // calculates the user's pending rewards
+  const userPendingRewards = useCallback(async (pid: number, amount: BigNumber) => {
+    await calculateTotalPendingSoulRewards()
+    return userPendingRewards
+  }, [])
 
   // Deposit
   const deposit = useCallback(
@@ -20,7 +36,7 @@ export default function useSoulSummoner() {
         return e
       }
     },
-    [account, summonerContract]
+    [summonerContract]
   )
 
   // Withdraw
@@ -35,7 +51,7 @@ export default function useSoulSummoner() {
         return e
       }
     },
-    [account, summonerContract]
+    [summonerContract]
   )
 
   // Pool length
@@ -47,9 +63,9 @@ export default function useSoulSummoner() {
       console.log(e)
       return e
     }
-  }, [account, summonerContract])
+  }, [summonerContract])
 
-  // Pool Info
+  // pool info
   const poolInfo = useCallback(
     async (pid: number) => {
       try {
@@ -64,10 +80,10 @@ export default function useSoulSummoner() {
         return e
       }
     },
-    [account, summonerContract]
+    [summonerContract]
   )
 
-  // User Info
+  // user info
   const userInfo = useCallback(
     async (pid: number) => {
       try {
@@ -83,7 +99,7 @@ export default function useSoulSummoner() {
     [account, summonerContract]
   )
 
-  // Amount of SOUL pending for redemption
+  // amount of soul pending for redemption
   const pendingSoul = useCallback(
     async (pid: number) => {
       try {
@@ -97,7 +113,7 @@ export default function useSoulSummoner() {
     [account, summonerContract]
   )
 
-  // How much SOUL is emitted per second
+  // soul is emitted per second
   const soulPerSecond = useCallback(async () => {
     try {
       const tx = BigNumber.from(await summonerContract?.soulPerSecond())
@@ -106,9 +122,9 @@ export default function useSoulSummoner() {
       console.log(e)
       return e
     }
-  }, [account, summonerContract])
+  }, [summonerContract])
 
-  // Total Allocation Point (net amount of all chains combined)
+  // total allocation point (net amount of all pools combined)
   const totalAllocPoint = useCallback(async () => {
     try {
       const tx = BigNumber.from(await summonerContract?.totalAllocPoint())
@@ -117,7 +133,14 @@ export default function useSoulSummoner() {
       console.log(e)
       return e
     }
-  }, [account, summonerContract])
+  }, [summonerContract])
 
   return { deposit, withdraw, poolLength, poolInfo, userInfo, pendingSoul, soulPerSecond, totalAllocPoint }
+}
+function userSharePercOfTotal() {
+  throw new Error('Function not implemented.')
+}
+
+function calculateTotalPendingSoulRewards() {
+  throw new Error('Function not implemented.')
 }

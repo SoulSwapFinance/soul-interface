@@ -12,14 +12,14 @@ export default function useLpToken(lpTokenAddress, soulSummoner) {
   const approve = useCallback(async () => {
     try {
       // hard-coded soulsummoner for now
-      const result = await pairContract.approve('0xA65DbEA56E1E202bf03dB5f49ba565fb00Bf9288', MaxUint256)
+      const result = await pairContract.approve(lpTokenAddress, MaxUint256) // ('0xA65DbEA56E1E202bf03dB5f49ba565fb00Bf9288', MaxUint256)
       return result
     } catch (e) {
       console.log(e)
       alert(e.message)
       return e
     }
-  }, [account, pairContract])
+  }, [lpTokenAddress, pairContract])
 
   // Allowance
   const allowance = useCallback(
@@ -33,7 +33,7 @@ export default function useLpToken(lpTokenAddress, soulSummoner) {
         return e
       }
     },
-    [account, pairContract]
+    [lpTokenAddress, pairContract]
   )
 
   // Allowance

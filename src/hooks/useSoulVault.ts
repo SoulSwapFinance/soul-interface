@@ -36,7 +36,7 @@ const useSoulVault = () => {
     const contractTotalShares = await totalShares()
 
     return (userShares / contractTotalShares) * 100
-  }, [account, soulVaultContract])
+  }, [totalShares, userInfo])
 
   /**
    *  @dev : fetches the soul pending for harvest
@@ -63,7 +63,7 @@ const useSoulVault = () => {
     const pending = contractPendingSoul * userShare
 
     return pending
-  }, [account, soulVaultContract])
+  }, [calculateTotalPendingSoulRewards, userSharePercOfTotal])
 
   // -----------------------
   //  Write Functions
@@ -83,7 +83,7 @@ const useSoulVault = () => {
         }
       }
     },
-    [addTransaction, account, soulVaultContract]
+    [addTransaction, soulVaultContract]
   )
 
   /**
@@ -100,7 +100,7 @@ const useSoulVault = () => {
         }
       }
     },
-    [addTransaction, account, soulVaultContract]
+    [addTransaction, soulVaultContract]
   )
 
   /**
@@ -113,7 +113,7 @@ const useSoulVault = () => {
     } catch (e) {
       return e
     }
-  }, [addTransaction, account, soulVaultContract])
+  }, [addTransaction, soulVaultContract])
 
   /**
    *  @dev : bounty reward for third-party caller
@@ -125,7 +125,7 @@ const useSoulVault = () => {
     } catch (e) {
       return e
     }
-  }, [addTransaction, account, soulVaultContract])
+  }, [addTransaction, soulVaultContract])
 
   return {
     userInfo,
