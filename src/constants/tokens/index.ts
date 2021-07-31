@@ -232,6 +232,20 @@ export const SOUL: ChainTokenMap = {
   // [ChainId.HECO]: new Token(ChainId.HECO, SOUL_ADDRESS[ChainId.HECO], 18, 'SOUL', 'SoulPower'),
 }
 
+// SEANCE TOKEN
+export const SEANCE: ChainTokenMap = {
+  // [ChainId.MAINNET]: new Token(
+  //   ChainId.MAINNET, SEANCE_ADDRESS[ChainId.MAINNET], 18, 'xSOUL', 'SushiBar'
+  // ),
+  [ChainId.FANTOM_TESTNET]: new Token(
+    ChainId.FANTOM_TESTNET,
+    '0xD858E1a257Cb595Ba395520daD4c9C9592307734',
+    18,
+    'SEANCE',
+    'SeanceCircle'
+  ),
+}
+
 export const SPELL: ChainTokenMap = {
   // [ChainId.FANTOM]: new Token(ChainId.FANTOM, SPELL_ADDRESS[ChainId.FANTOM], 18, 'SPELL', 'SpellBound'), // TODO: update
   [ChainId.FANTOM_TESTNET]: new Token(

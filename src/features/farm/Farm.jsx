@@ -237,7 +237,35 @@ export const FarmList = () => {
   // 2) get lpTokenAddress from calling `poolInfo?.[0]`
   // 3) input into factory to get token1-token2
   // 4) typed out -> [`${token1}`-`${`token2`}`]
-  const farms = ['SOUL-FTM', 'SOUL-FUSD', 'SOUL-PILL']
+  const farms = [
+    {
+      pid: 1,
+      lpSymbol: 'SOUL-FTM',
+      lpAddresses: {
+        4002: '',
+      },
+      token1: '',
+      token2: '',
+    },
+    {
+      pid: 2,
+      lpSymbol: 'SOUL-FUSD',
+      lpAddresses: {
+        4002: '',
+      },
+      token1: '',
+      token2: '',
+    },
+    {
+      pid: 3,
+      lpSymbol: 'SOUL-PILL',
+      lpAddresses: {
+        4002: '',
+      },
+      token1: '',
+      token2: '',
+    },
+  ]
 
   const farmList = farms.map((farm) => <Farm key={farm} lpToken={farm} />)
   return (

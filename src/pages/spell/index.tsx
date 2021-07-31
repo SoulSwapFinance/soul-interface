@@ -1,28 +1,25 @@
+import { SOUL_SUMMONER_ADDRESS, SOULVAULT_ADDRESS, ZERO } from '@soulswap/sdk'
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
-import { SPELL_ADDRESS, ZERO } from '@soulswap/sdk'
 import React, { useEffect, useState } from 'react'
-import { FANTOM_TESTNET, SOUL, SPELL } from '../../constants'
-
+import { SOUL, SEANCE } from '../../constants'
+// import Balance from '../../components/Balance'
 import Button from '../../components/Button'
 import { ChainId } from '@soulswap/sdk'
-import Container from '../../components/Container'
-import Dots from '../../components/Dots'
 import Head from 'next/head'
+import Dots from '../../components/Dots'
 import Image from 'next/image'
 import { Input as NumericalInput } from '../../components/NumericalInput'
 import TransactionFailedModal from '../../components/TransactionFailedModal'
-import { request } from 'graphql-request'
 import styled from 'styled-components'
-import soulData from '@soulswap/soul-data'
 import { t } from '@lingui/macro'
 import { tryParseAmount } from '../../functions/parse'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import { useLingui } from '@lingui/react'
-import useSWR from 'swr'
-import useSpellBound from '../../hooks/useSpellBound'
-import { useSoulPrice } from '../../services/graph'
+import useSoulStakeManual from '../../hooks/useSoulStakeManual'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { useWalletModalToggle } from '../../state/application/hooks'
+import useSoulVault from '../../hooks/useSoulVault'
+import AccountDetails from '../../components/AccountDetails'
 
 const INPUT_CHAR_LIMIT = 18
 
@@ -55,38 +52,104 @@ const buttonStyleInsufficientFunds = `${buttonStyleEnabled} opacity-60`
 const buttonStyleDisabled = `${buttonStyle} text-secondary bg-dark-700`
 const buttonStyleConnectWallet = `${buttonStyle} text-high-emphesis bg-cyan-blue hover:bg-opacity-90`
 
-const fetcher = (query) => request('https://api.thegraph.com/subgraphs/name/matthewlilley/bar', query)
-
-export default function Stake() {
+export default function SoulStake() {
   const { i18n } = useLingui()
   const { account } = useActiveWeb3React()
-  const soulBalance = useTokenBalance(account ?? undefined, SOUL[ChainId.FANTOM_TESTNET]) // todo: make dynamic
-  const spellBalance = useTokenBalance(account ?? undefined, SPELL[ChainId.FANTOM_TESTNET])
 
-  const soulPrice = useSoulPrice()
+  // functions from SoulVault contract we're using
+  const {
+    // userInfo,
+    // totalShares,
+    userSharePercOfTotal,
+    calculateHarvestSoulRewards,
+    userPendingRewards,
+    // deposit,
+    // withdraw,
+    // withdrawAll,
+    harvest,
+  } = useSoulVault()
+  const { enter, leave } = useSoulStakeManual()
 
-  const { enter, leave } = useSpellBound()
+  // ** Require Update: Need to make dynamic by fetching selected chain **
+  const soulBalance = useTokenBalance(account ?? undefined, SOUL[ChainId.FANTOM_TESTNET])
+  const seanceBalance = useTokenBalance(account ?? undefined, SEANCE[ChainId.FANTOM_TESTNET])
 
-  const { data } = useSWR(`{bar(id: "0x8798249c2e607446efb7ad49ec89dd1865ff4272") {ratio, totalSupply}}`, fetcher) // TODO: update
-
-  const spellPerSoul = parseFloat(data?.bar?.ratio)
+  const pendingSoul = userPendingRewards() // amount of soul is pending for user
+  const percOfTotal = userSharePercOfTotal() // user percentage of pool
 
   const walletConnected = !!account
   const toggleWalletModal = useWalletModalToggle()
 
+  const [autoStaking, setAutoStaking] = useState(false)
   const [activeTab, setActiveTab] = useState(0)
   const [modalOpen, setModalOpen] = useState(false)
 
   const [input, setInput] = useState<string>('')
   const [usingBalance, setUsingBalance] = useState(false)
 
-  const balance = activeTab === 0 ? soulBalance : spellBalance
+  const balance = activeTab === 0 ? soulBalance : seanceBalance
 
   const formattedBalance = balance?.toSignificant(4)
 
   const parsedAmount = usingBalance ? balance : tryParseAmount(input, balance?.currency)
 
-  const [approvalState, approve] = useApproveCallback(parsedAmount, SPELL_ADDRESS[ChainId.MAINNET])
+  // Approve masterchef to move funds with `transferFrom`
+  const [approvalStateChef, approveMasterchef] = useApproveCallback(
+    parsedAmount,
+    SOUL_SUMMONER_ADDRESS[ChainId.FANTOM_TESTNET]
+  )
+  const [approvalStateVault, approveVault] = useApproveCallback(parsedAmount, SOULVAULT_ADDRESS[ChainId.FANTOM_TESTNET])
+
+  // ---------------------
+  //      SOUL VAULT
+  // ---------------------
+  const [claiming, setClaiming] = useState(false)
+  const [bounty, setBounty] = useState(0)
+  const [userShare, setUserShare] = useState()
+
+  const userShares = async () => {
+    const shares = await calculateHarvestSoulRewards()
+    setUserShare(shares) // TODO: looking to grab only `shares` out of the array
+  }
+
+  // checks SOUL bounty funds available for harvest
+  const updateBountyStats = async () => {
+    const pending = await calculateHarvestSoulRewards()
+    // const formattedPending = pending // TODO: format to `toSignificant(4)`
+    setBounty(bounty)
+  }
+
+  // will update bounty stats every 5 seconds
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      updateBountyStats() // value
+    }, 3 * 1000) // delay
+
+    // this will clear Timeout
+    // when component unmount like in willComponentUnmount
+    // and show will not change to true
+    return () => {
+      clearTimeout(timer)
+    }
+  })
+
+  /**
+   * @dev Calls `harvest` func of SoulVault
+   */
+  const handleHarvest = async () => {
+    if (!walletConnected) {
+      toggleWalletModal()
+    } else {
+      setClaiming(true)
+      const success = await sendTx(() => harvest())
+      if (!success) {
+        setClaiming(false)
+        return
+      }
+
+      setClaiming(false)
+    }
+  }
 
   const handleInput = (v: string) => {
     if (v.length <= INPUT_CHAR_LIMIT) {
@@ -117,8 +180,9 @@ export default function Stake() {
       setPendingTx(true)
 
       if (activeTab === 0) {
-        if (approvalState === ApprovalState.NOT_APPROVED) {
-          const success = await sendTx(() => approve())
+        const approving = autoStaking ? approvalStateVault : approvalStateChef
+        if (approving === ApprovalState.NOT_APPROVED) {
+          const success = await sendTx(() => approveMasterchef())
           if (!success) {
             setPendingTx(false)
             // setModalOpen(true)
@@ -145,43 +209,26 @@ export default function Stake() {
     }
   }
 
-  const [apr, setApr] = useState<any>()
+  // const [apr, setApr] = useState<any>()
 
   // TODO: DROP AND USE SWR HOOKS INSTEAD
-  useEffect(() => {
-    const fetchData = async () => {
-      const results = await soulData.exchange.dayData()
-      const apr = (((results[1].volumeUSD * 0.05) / data?.spell?.totalSupply) * 365) / (data?.spell?.ratio * soulPrice)
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const results = await sushiData.exchange.dayData()
+  //     const apr = (((results[1].volumeUSD * 0.05) / data?.bar?.totalSupply) * 365) / (data?.bar?.ratio * soulPrice)
 
-      setApr(apr)
-    }
-    fetchData()
-  }, [data?.spell?.ratio, data?.spell?.totalSupply, soulPrice])
+  //     setApr(apr)
+  //   }
+  //   fetchData()
+  // }, [data?.bar?.ratio, data?.bar?.totalSupply, soulPrice])
 
   return (
-    <Container id="bound-page" className="py-4 md:py-8 lg:py-12" maxWidth="full">
+    <>
       <Head>
-        <title key="title">Stake | SOUL</title>
+        <title>Stake | Soul</title>
         <meta
-          key="description"
           name="description"
-          content="Stake SOUL in return for SPELL, an interest bearing and fungible ERC20 token designed to share revenue generated by all SOUL products."
-        />
-        <meta key="twitter:url" name="twitter:url" content="https://app.soulswap.finance/stake" />
-        <meta key="twitter:title" name="twitter:title" content="STAKE SOUL" />
-        <meta
-          key="twitter:description"
-          name="twitter:description"
-          content="Stake SOUL in return for SPELL, an interest bearing and fungible ERC20 token designed to share revenue generated by all SOUL products."
-        />
-        <meta key="twitter:image" name="twitter:image" content="https://app.soulswap.finance/spell-sign.gif" />
-        <meta key="og:title" property="og:title" content="STAKE SOUL" />
-        <meta key="og:url" property="og:url" content="https://app.soulswap.finance/stake" />
-        <meta key="og:image" property="og:image" content="https://app.soulswap.finance/spell-sign.gif" />
-        <meta
-          key="og:description"
-          property="og:description"
-          content="Stake SOUL in return for SPELL, an interest bearing and fungible ERC20 token designed to share revenue generated by all SOUL products."
+          content="Stake SOUL in return for SEANCE, an interest bearing and fungible ERC20 token designed to share revenue generated by all Soul products."
         />
       </Head>
       <div className="flex flex-col w-full min-h-full">
@@ -189,74 +236,80 @@ export default function Stake() {
           <div className="flex flex-col w-full max-w-xl mt-auto mb-2">
             <div className="flex max-w-lg">
               <div className="self-end mb-3 text-lg font-bold md:text-2xl text-high-emphesis md:mb-7">
-                {i18n._(t`Maximize yield by staking your SOUL for SPELL`)}
+                {i18n._(t`Maximize yield by staking SOUL for SEANCE`)}
               </div>
-              {/* <div className="self-start pl-6 pr-3 mb-1 min-w-max md:hidden">
-                                <img src={spellSignSmall} alt="spell sign" />
-                            </div> */}
             </div>
             <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
               {i18n._(t`For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL
-                                proportional to your share of the SpellBound. When your SOUL is staked into the SpellBound, you recieve
-                                SPELL in return for voting rights and a fully composable token that can interact with other protocols.
-                                Your SPELL is continuously compounding, when you unstake you will receive all the originally deposited
+                                proportional to your share of the SoulBar. When your SOUL is staked into the Circle, you recieve
+                                SEANCE in return for voting rights and a fully composable token that can interact with other protocols.
+                                Your SEANCE is continuously compounding, when you unstake you will receive all the originally deposited
                                 SOUL and any additional from fees.`)}
             </div>
-            {/* <div className="flex">
-                            <div className="mr-14 md:mr-9">
-                                <StyledLink className="text-sm text-lg whitespace-nowrap md:text-lg md:leading-5">
-                                    Enter the Kitchen
-                                </StyledLink>
-                            </div>
-                            <div>
-                                <StyledLink className="text-sm text-lg whitespace-nowrap md:text-lg md:leading-5">
-                                    Tips for using SPELL
-                                </StyledLink>
-                            </div>
-                        </div> */}
           </div>
-          <div className="hidden px-8 ml-6 md:block w-72">
-            <Image src="/spell-sign.gif" alt="SPELL sign" width="100%" height="100%" layout="responsive" />
-          </div>
+          {/* SIDE BALANCE BOARD */}
+          {/* <div className="w-full max-w-xl mx-auto md:mx-0 md:ml-6 md:block md:w-72">
+            <div className="flex flex-col w-full px-4 pt-6 pb-5 rounded bg-dark-900 md:px-8 md:pt-7 md:pb-9">
+              <div className="flex flex-wrap">
+                {/* SOUL BOUNTY *}
+                <p className="mb-3 text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
+                  {i18n._(t`Snatch Bounty`)}
+                </p>
+                <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
+                  {i18n._(t`If withdrawing before 72hrs has passed, you will be charged 1% of your stake!`)}
+                </div>
+                <Button
+                  className={`${buttonStyle} text-high-emphesis bg-purple hover:bg-opacity-90`}
+                  disabled={walletConnected === !account}
+                  onClick={handleHarvest}
+                >
+                  {claiming ? <Dots>Snatching {bounty} SOUL </Dots> : 
+                  
+                  <Balance 
+                    value = {bounty / (10**18)} 
+                    decimals = {4}
+                    unit = " SOUL"
+                    />
+                  
+                  }
+                </Button>
+              </div> 
+            </div>
+          </div> */}
         </div>
         <div className="flex flex-col justify-center md:flex-row">
           <div className="flex flex-col w-full max-w-xl mx-auto mb-4 md:m-0">
-            <div className="mb-4">
-              <div className="flex items-center justify-between w-full h-24 max-w-xl p-4 rounded md:pl-5 md:pr-7 bg-light-yellow bg-opacity-40">
-                <div className="flex flex-col">
-                  <div className="flex items-center justify-center mb-4 flex-nowrap md:mb-2">
-                    <p className="text-sm font-bold whitespace-nowrap md:text-lg md:leading-5 text-high-emphesis">
-                      {i18n._(t`Staking APR`)}{' '}
-                    </p>
-                    {/* <img className="ml-3 cursor-pointer" src={MoreInfoSymbol} alt={'more info'} /> */}
-                  </div>
-                  <div className="flex">
-                    <a
-                      href={`https://analytics.soulswap.finance/spell`}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className={`
-                        py-1 px-4 md:py-1.5 md:px-7 rounded
-                        text-xs md:text-sm font-medium md:font-bold text-dark-900
-                        bg-light-yellow hover:bg-opacity-90`}
-                    >
-                      {i18n._(t`View Stats`)}
-                    </a>
-                  </div>
-                </div>
-                <div className="flex flex-col">
-                  <p className="mb-1 text-lg font-bold text-right text-high-emphesis md:text-3xl">
-                    {`${apr ? apr.toFixed(2) + '%' : i18n._(t`Loading...`)}`}
-                  </p>
-                  <p className="w-32 text-sm text-right text-primary md:w-64 md:text-base">
-                    {i18n._(t`Yesterday's APR`)}
-                  </p>
-                </div>
-              </div>
-            </div>
             <div>
               <TransactionFailedModal isOpen={modalOpen} onDismiss={() => setModalOpen(false)} />
               <div className="w-full max-w-xl px-3 pt-2 pb-6 rounded bg-dark-900 md:pb-9 md:pt-4 md:px-8">
+                {/* AUTOMATIC OR MANUAL STAKING */}
+                {/* <div className="flex w-full rounded h-14 bg-dark-800">
+                  <div
+                    className="h-full w-6/12 p-0.5"
+                    onClick={() => {
+                      userShares()
+                      calculateHarvestSoulRewards()
+                      setAutoStaking(false)
+                    }}
+                  >
+                    <div className={!autoStaking ? activeTabStyle : inactiveTabStyle}>
+                      <p>{i18n._(t`Manual Reinvesting`)}</p>
+                    </div>
+                  </div>
+                  <div
+                    className="h-full w-6/12 p-0.5"
+                    onClick={() => {
+                      setAutoStaking(true)
+                    }}
+                  >
+                    <div className={autoStaking ? activeTabStyle : inactiveTabStyle}>
+                      <p>{i18n._(t`Automatic Reinvesting`)}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <br /> */}
+                {/* STAKING OR UNSTAKING */}
                 <div className="flex w-full rounded h-14 bg-dark-800">
                   <div
                     className="h-full w-6/12 p-0.5"
@@ -266,7 +319,7 @@ export default function Stake() {
                     }}
                   >
                     <div className={activeTab === 0 ? activeTabStyle : inactiveTabStyle}>
-                      <p>{i18n._(t`Stake SOUL`)}</p>
+                      <p>{i18n._(t`Stake`)}</p>
                     </div>
                   </div>
                   <div
@@ -284,11 +337,22 @@ export default function Stake() {
 
                 <div className="flex items-center justify-between w-full mt-6">
                   <p className="font-bold text-large md:text-2xl text-high-emphesis">
-                    {activeTab === 0 ? i18n._(t`Stake SOUL`) : i18n._(t`Unstake`)}
+                    {autoStaking
+                      ? activeTab === 0
+                        ? i18n._(t`Stake Auto Reinvesting SOUL`)
+                        : i18n._(t`Unstake Auto Reinvesting SOUL`)
+                      : activeTab === 0
+                      ? i18n._(t`Stake Manual SOUL`)
+                      : i18n._(t`Unstake Manual SOUL`)}
                   </p>
-                  <div className="border-gradient-r-pink-red-light-brown-dark-pink-red border-transparent border-solid border rounded-3xl px-4 md:px-3.5 py-1.5 md:py-0.5 text-high-emphesis text-xs font-medium md:text-base md:font-normal">
-                    {`1 SPELL = ${spellPerSoul.toFixed(4)} SOUL`}
-                  </div>
+                </div>
+                <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
+                  {autoStaking
+                    ? 'When someone snatches the SOUL bounty, your pending SOUL gets re-invested automatically!'
+                    : 'You will need to manually claim and deposit your pending SOUL to re-invest into your stake.'}
+                </div>
+                <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
+                  {autoStaking ? 'When withdrawing before 72hrs has passed, you will be charged 1% of your stake!' : ''}
                 </div>
 
                 <StyledNumericalInput
@@ -322,7 +386,7 @@ export default function Stake() {
                           input ? 'text-high-emphesis' : 'text-secondary'
                         }`}
                       >
-                        {`${input ? input : '0'} ${activeTab === 0 ? '' : 'x'}SOUL`}
+                        {`${input ? input : '0'} ${activeTab === 0 ? 'SOUL' : 'SEANCE'}`}
                       </p>
                     </div>
                     <div className="flex items-center text-sm text-secondary md:text-base">
@@ -339,14 +403,22 @@ export default function Stake() {
                     </div>
                   </div>
                 </div>
-                {(approvalState === ApprovalState.NOT_APPROVED || approvalState === ApprovalState.PENDING) &&
+                {(autoStaking
+                  ? approvalStateVault === ApprovalState.NOT_APPROVED || approvalStateVault === ApprovalState.PENDING
+                  : approvalStateChef === ApprovalState.NOT_APPROVED || approvalStateChef === ApprovalState.PENDING) &&
                 activeTab === 0 ? (
                   <Button
                     className={`${buttonStyle} text-high-emphesis bg-cyan-blue hover:bg-opacity-90`}
-                    disabled={approvalState === ApprovalState.PENDING}
-                    onClick={approve}
+                    disabled={
+                      autoStaking
+                        ? approvalStateVault === ApprovalState.PENDING
+                        : approvalStateChef === ApprovalState.PENDING
+                    }
+                    onClick={autoStaking ? approveVault : approveMasterchef}
                   >
-                    {approvalState === ApprovalState.PENDING ? (
+                    {autoStaking ? (
+                      approvalStateVault === ApprovalState.PENDING
+                    ) : approvalStateChef === ApprovalState.PENDING ? (
                       <Dots>{i18n._(t`Approving`)} </Dots>
                     ) : (
                       i18n._(t`Approve`)
@@ -380,26 +452,27 @@ export default function Stake() {
               </div>
             </div>
           </div>
+          {/* SIDE BALANCE BOARD */}
           <div className="w-full max-w-xl mx-auto md:mx-0 md:ml-6 md:block md:w-72">
             <div className="flex flex-col w-full px-4 pt-6 pb-5 rounded bg-dark-900 md:px-8 md:pt-7 md:pb-9">
               <div className="flex flex-wrap">
                 <div className="flex flex-col flex-grow md:mb-14">
                   <p className="mb-3 text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
-                    {i18n._(t`Balance`)}
+                    {autoStaking ? 'Shares' : i18n._(t`Balance`)}
                   </p>
                   <div className="flex items-center space-x-4">
                     <Image
                       className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
-                      src="/images/tokens/lotus-square.jpg"
-                      alt="SPELL"
+                      src="/images/tokens/soul-square.jpg"
+                      alt="SEANCE"
                       width={64}
                       height={64}
                     />
                     <div className="flex flex-col justify-center">
                       <p className="text-sm font-bold md:text-lg text-high-emphesis">
-                        {spellBalance ? spellBalance.toSignificant(4) : '-'}
+                        {autoStaking ? bounty : seanceBalance ? seanceBalance.toSignificant(4) : '-'}
                       </p>
-                      <p className="text-sm md:text-base text-primary">SPELL</p>
+                      <p className="text-sm md:text-base text-primary">SEANCE</p>
                     </div>
                   </div>
                 </div>
@@ -409,57 +482,28 @@ export default function Stake() {
                     <p className="text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
                       {i18n._(t`Unstaked`)}
                     </p>
-                    {/* <img className="w-4 ml-2 cursor-pointer" src={MoreInfoSymbol} alt={'more info'} /> */}
                   </div>
                   <div className="flex items-center ml-8 space-x-4 md:ml-0">
                     <Image
                       className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
-                      src="/images/tokens/scarab-square.jpg"
+                      src="/images/tokens/soul-square.jpg"
                       alt="SOUL"
                       width={64}
                       height={64}
                     />
                     <div className="flex flex-col justify-center">
                       <p className="text-sm font-bold md:text-lg text-high-emphesis">
-                        {soulBalance ? soulBalance.toSignificant(4) : '-'}
+                        {soulBalance ? soulBalance.toSignificant(5) : '-'}
                       </p>
                       <p className="text-sm md:text-base text-primary">SOUL</p>
                     </div>
                   </div>
-                </div>
-
-                <div className="flex flex-col w-full mb-4 mt-7 md:mb-0">
-                  {/* <div className="flex items-center justify-between">
-                        <div className="flex items-center flex-1 flex-nowrap">
-                            <p className="text-base font-bold md:text-lg text-high-emphesis">Weighted APR</p>
-                            <img className="w-4 ml-2 cursor-pointer" src={MoreInfoSymbol} alt={'more info'} />
-                        </div>
-                        <div className="flex flex-1 md:flex-initial">
-                            <p className="ml-5 text-base text-primary md:ml-0">{`${weightedApr}%`}</p>
-                        </div>x
-                    </div> */}
-                  {account && (
-                    <a
-                      href={`https://analytics.soulswap.finance/users/${account}`}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className={`
-                                flex flex-grow justify-center items-center
-                                h-14 mt-6 rounded
-                                bg-dark-700 text-high-emphesis
-                                focus:outline-none focus:ring hover:bg-opacity-80
-                                text-sm font-bold cursor-pointer
-                            `}
-                    >
-                      {i18n._(t`Your SpellBound Stats`)}
-                    </a>
-                  )}
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </Container>
+    </>
   )
 }

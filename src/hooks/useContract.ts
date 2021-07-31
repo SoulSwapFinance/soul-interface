@@ -16,6 +16,7 @@ import {
   ROUTER_ADDRESS,
   SPELL_ADDRESS,
   SOUL_ADDRESS,
+  SOULVAULT_ADDRESS,
   SOUL_GUIDE_ADDRESS,
   // SOULSWAP_MULTISWAPPER_ADDRESS,
   SOULSWAP_SWAPPER_ADDRESS,
@@ -61,6 +62,7 @@ import MASTERCHEF_V1_ABI from '../constants/abis/masterchef.json'
 // Soul
 import SOUL_GUIDE_ABI from '../constants/abis/soul-guide.json' // TODO: update abi
 import SOUL_SUMMONER_ABI from '../constants/abis/soulswap/soulsummoner.json' // 28 JUL
+import SOULVAULT_ABI from '../constants/abis/soulswap/soulvault.json' // 31 JUL
 import SPELL_ABI from '../constants/abis/soulswap/spell.json' // 28 JUL
 import SOUL_ABI from '../constants/abis/soulswap/soulpower.json' // 28 JUL
 
@@ -180,6 +182,11 @@ export function useMulticall2Contract() {
 export function useSoulContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SOUL_ADDRESS[chainId], SOUL_ABI, withSignerIfPossible)
+}
+
+export function useSoulVaultContract(withSignerIfPossible = true): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOULVAULT_ADDRESS[chainId], SOULVAULT_ABI, withSignerIfPossible)
 }
 
 export function useMasterChefV1Contract(withSignerIfPossible?: boolean): Contract | null {
