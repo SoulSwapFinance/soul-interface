@@ -20,7 +20,7 @@ const FarmContainer = styled.div`
 `
 
 const FarmRow = styled.div`
-  background-color: #38284b;
+  background-color: HSL(267, 30%, 20%);
   margin: 4px;
   border-radius: 8px;
   padding: 5px 15px;
@@ -94,7 +94,7 @@ const DetailsContainer = styled.div`
 
 const DetailsWrapper = styled.div`
   display: flex;
-  background-color: #5c5466;
+  background-color: HSL(267, 30%, 30%);
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   width: 100%;
@@ -102,6 +102,7 @@ const DetailsWrapper = styled.div`
 
 const FunctionBox = styled.div`
   padding: 10px;
+  width: ${({ width }) => (width ? `${width}` : `100%`)};
 `
 
 const Input = styled.input`
@@ -115,13 +116,13 @@ const Input = styled.input`
   font-size: 1rem;
   padding: 0.5em;
   border-radius: 0.2em;
-  background-color: #888888;
+  background-color: #675c6e;
   color: white;
 
   &:focus {
     border-color: white;
     /* y axis, x axis, blur, spread, colour */
-    box-shadow: 0 0 10px 0 white;
+    /* box-shadow: 0 0 10px 0 white; */
     outline: 0;
   }
 `
@@ -199,13 +200,19 @@ const Farm = ({ lpToken }) => {
           <DetailsWrapper>
             <FunctionBox>
               <Input name="stake" type="number" placeholder="0.0" />
-              <SubmitButton primaryColour="#45b7da" type="Submit">
+              <SubmitButton primaryColour="#45b7da" hoverColour="#45b7da" type="Submit">
                 Stake
+              </SubmitButton>
+            </FunctionBox>
+            <FunctionBox width="30%">
+              <Input name="unstake" type="number" placeholder="0.0" />
+              <SubmitButton primaryColour="#4afd94" hoverColour="#4afd94" type="Submit">
+                Harvest
               </SubmitButton>
             </FunctionBox>
             <FunctionBox>
               <Input name="unstake" type="number" placeholder="0.0" />
-              <SubmitButton primaryColour="#e63d27" type="Submit">
+              <SubmitButton primaryColour="#e63d27" hoverColour="#e63d27" type="Submit">
                 Unstake
               </SubmitButton>
             </FunctionBox>
