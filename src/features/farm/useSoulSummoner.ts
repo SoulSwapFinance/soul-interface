@@ -38,14 +38,7 @@ export default function useSoulSummoner(chef: Chef) {
   const withdraw = useCallback(
     async (pid: number, amount: BigNumber) => {
       try {
-        let tx
-
-        if (chef === Chef.MASTERCHEF_V1) {
-          tx = await contract?.withdraw(pid, amount)
-        } else {
-          tx = await contract?.withdraw(pid, amount, account)
-        }
-
+        let tx = contract?.withdraw(pid, amount, account)
         return tx
       } catch (e) {
         console.error(e)
@@ -60,14 +53,11 @@ export default function useSoulSummoner(chef: Chef) {
       try {
         let tx
 
-        if (chef === Chef.MASTERCHEF_V1) {
-          tx = await contract?.deposit(pid, Zero)
-        } else if (chef === Chef.SOUL_SUMMONER) {
+        if (chef === Chef.SOUL_SUMMONER) {
           const pendingSoul = await contract?.pendingSoul(pid, account)
-
           const balanceOf = await soul?.balanceOf(contract?.address)
 
-          // If SoulSummoner doesn't have enough soul to harvest, batch in a harvest.
+          // if SoulSummoner doesn't have enough soul to harvest, batch in a harvest.
           if (pendingSoul.gt(balanceOf)) {
             tx = await contract?.batch(
               [
@@ -82,7 +72,6 @@ export default function useSoulSummoner(chef: Chef) {
         } else if (chef === Chef.MINICHEF) {
           tx = await contract?.harvest(pid, account)
         }
-
         return tx
       } catch (e) {
         console.error(e)

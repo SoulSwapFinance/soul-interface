@@ -20,7 +20,6 @@ import {
   SOUL_GUIDE_ADDRESS,
   // SOULSWAP_MULTISWAPPER_ADDRESS,
   SOULSWAP_SWAPPER_ADDRESS,
-  SOUL_SUMMONER_ADDRESS as MASTERCHEF_V1_ADDRESS,
   TIMELOCK_ADDRESS,
   WNATIVE,
 } from '@soulswap/sdk'
@@ -44,7 +43,6 @@ import BENTOBOX_ABI from '../constants/abis/bentobox.json'
 import CHAINLINK_ORACLE_ABI from '../constants/abis/chainlink-oracle.json'
 import COMPLEX_REWARDER_ABI from '../constants/abis/complex-rewarder.json'
 import { Contract } from '@ethersproject/contracts'
-// import DASHBOARD2_ABI from '../constants/abis/dashboard2.json'
 import DASHBOARD_ABI from '../constants/abis/dashboard.json'
 import EIP_2612_ABI from '../constants/abis/eip-2612.json'
 import ENS_ABI from '../constants/abis/ens-registrar.json'
@@ -52,12 +50,9 @@ import ENS_PUBLIC_RESOLVER_ABI from '../constants/abis/ens-public-resolver.json'
 import ERC20_ABI from '../constants/abis/erc20.json'
 import { ERC20_BYTES32_ABI } from '../constants/abis/erc20'
 import FACTORY_ABI from '../constants/abis/factory.json'
-// import FACTORY_V1_ABI from '../constants/abis/factoryV1.json'
 import IUniswapV2PairABI from '../constants/abis/uniswap-v2-pair.json'
 import KASHIPAIR_ABI from '../constants/abis/kashipair.json'
 import MAKER_ABI from '../constants/abis/maker.json'
-import MASTERCHEF_V1_ABI from '../constants/abis/masterchef.json'
-// import MASTERCHEF_ABI from '../constants/abis/masterchef-v2.json'
 
 // Soul
 import SOUL_GUIDE_ABI from '../constants/abis/soul-guide.json' // TODO: update abi
@@ -189,12 +184,6 @@ export function useSoulVaultContract(withSignerIfPossible = true): Contract | nu
   return useContract(chainId && SOULVAULT_ADDRESS[chainId], SOULVAULT_ABI, withSignerIfPossible)
 }
 
-export function useMasterChefV1Contract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && MASTERCHEF_V1_ADDRESS[chainId], MASTERCHEF_V1_ABI, withSignerIfPossible)
-}
-
-// Using `0x5cED956c0d3dC88B8C3E42494F7b2e052d7CfeBc` to try and create farms b/c of poolLength === 2
 // Need to update to `0xd18dEfcd37cD4BbA23287611DC48a116CB127E27`
 export function useMasterChefContract(withSignerIfPossible?: boolean): Contract | null {
   return useContract('0x5cED956c0d3dC88B8C3E42494F7b2e052d7CfeBc', SOUL_SUMMONER_ABI, withSignerIfPossible)

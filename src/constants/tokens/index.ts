@@ -25,13 +25,13 @@ export const FANTOM: { [key: string]: Token } = {
   WBTC: new Token(ChainId.FANTOM, '0x321162Cd933E2Be498Cd2267a90534A804051b11', 8, 'WBTC', 'Wrapped Bitcoin'),
   DAI: new Token(ChainId.FANTOM, '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', 18, 'DAI', 'Dai Stablecoin'),
   WETH: new Token(ChainId.FANTOM, '0x74b23882a30290451A17c44f4F05243b6b58C76d', 18, 'WETH', 'Wrapped Ether'),
-  SOUL: new Token(ChainId.FANTOM, '0xfF84964E7A446466669da84be6c72Fe10eA786cF', 18, 'SOUL', 'SoulPower'),
+  SOUL: new Token(ChainId.FANTOM, '0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5', 18, 'SOUL', 'SoulPower'),
 }
 
 export const FANTOM_TESTNET: { [key: string]: Token } = {
-  SOUL: new Token(ChainId.FANTOM_TESTNET, '0xfF84964E7A446466669da84be6c72Fe10eA786cF', 18, 'SOUL', 'SoulPower'), // UPDATE
-  SEANCE: new Token(ChainId.FANTOM_TESTNET, '0x3E3887680e6E81e4Da8C019Ef56a704297eCE211', 18, 'SEANCE', 'SeanceCircle'), // UPDATE
-  SPELL: new Token(ChainId.FANTOM_TESTNET, '0xb5083b964a0B6A447564657285AeE1E76524B3Db', 18, 'SPELL', 'SpellBound'), // UPDATE
+  SOUL: new Token(ChainId.FANTOM_TESTNET, '0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5', 18, 'SOUL', 'SoulPower'), // 30 JUL
+  SEANCE: new Token(ChainId.FANTOM_TESTNET, '0xD858E1a257Cb595Ba395520daD4c9C9592307734', 18, 'SEANCE', 'SeanceCircle'), // 30 JUL
+  SPELL: new Token(ChainId.FANTOM_TESTNET, '0xdFDC55e7E7eBA3E7BF2a0E0743f4D3C858FaC37E', 18, 'SPELL', 'SpellBound'), // 30 JUL
   FUSD: new Token(ChainId.FANTOM_TESTNET, '0x91ea991bd52EE3C40EdA2509701d905e1Ee54074', 18, 'FUSD', 'Fantom USD'),
   FETH: new Token(
     ChainId.FANTOM_TESTNET,
@@ -190,8 +190,6 @@ export const XSUSHI_CALL = new Token(
 )
 export const WBTC = new Token(ChainId.MAINNET, '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', 8, 'WBTC', 'Wrapped BTC')
 
-// export const SPELL = new Token(ChainId.MAINNET, '0xb5083b964a0B6A447564657285AeE1E76524B3Db', 18, 'SPELL', 'SpellBound') // TODO: UPDATE
-
 export const LIFT = new Token(ChainId.MAINNET, '0xf9209d900f7ad1DC45376a2caA61c78f6dEA53B6', 18, 'LIFT', 'LiftKitchen')
 export const LFBTC = new Token(
   ChainId.MAINNET,
@@ -250,10 +248,21 @@ export const SPELL: ChainTokenMap = {
   // [ChainId.FANTOM]: new Token(ChainId.FANTOM, SPELL_ADDRESS[ChainId.FANTOM], 18, 'SPELL', 'SpellBound'), // TODO: update
   [ChainId.FANTOM_TESTNET]: new Token(
     ChainId.FANTOM_TESTNET,
-    '0x3E3887680e6E81e4Da8C019Ef56a704297eCE211',
+    '0xdFDC55e7E7eBA3E7BF2a0E0743f4D3C858FaC37E', // 30 JUL
     18,
     'SPELL',
     'SpellBound'
+  ), // TODO: update
+}
+
+export const SEANCE: ChainTokenMap = {
+  // [ChainId.FANTOM]: new Token(ChainId.FANTOM, SPELL_ADDRESS[ChainId.FANTOM], 18, 'SPELL', 'SpellBound'), // TODO: update
+  [ChainId.FANTOM_TESTNET]: new Token(
+    ChainId.FANTOM_TESTNET,
+    '0xD858E1a257Cb595Ba395520daD4c9C9592307734', // 30 JUL
+    18,
+    'SEANCE',
+    'SeanceCircle'
   ), // TODO: update
 }
 
