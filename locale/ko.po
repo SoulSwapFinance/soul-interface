@@ -388,9 +388,9 @@ msgstr ""
 
 msgid ""
 "For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL\n"
-"proportional to your share of the SpellBound. When your SOUL is staked into the SpellBound, you recieve\n"
-"SPELL in return for voting rights and a fully composable token that can interact with other protocols.\n"
-"Your SPELL is continuously compounding, when you unstake you will receive all the originally deposited\n"
+"proportional to your share of the SoulBar. When your SOUL is staked into the Circle, you recieve\n"
+"SEANCE in return for voting rights and a fully composable token that can interact with other protocols.\n"
+"Your SEANCE is continuously compounding, when you unstake you will receive all the originally deposited\n"
 "SOUL and any additional from fees."
 msgstr ""
 
@@ -546,9 +546,6 @@ msgstr ""
 msgid "Loading your {exchange} liquidity positions"
 msgstr "{exchange} 유동성 포지션 로드 중"
 
-msgid "Loading..."
-msgstr "로드 중..."
-
 msgid "MAX"
 msgstr "최대"
 
@@ -581,7 +578,7 @@ msgstr ""
 msgid "Max"
 msgstr "최대"
 
-msgid "Maximize yield by staking your SOUL for SPELL"
+msgid "Maximize yield by staking SOUL for SEANCE"
 msgstr ""
 
 msgid "Maximum sent"
@@ -859,7 +856,10 @@ msgstr "SAAVE로 수익을 쌓으세요"
 msgid "Stake"
 msgstr "스테이킹"
 
-msgid "Stake SOUL"
+msgid "Stake Auto Reinvesting SOUL"
+msgstr ""
+
+msgid "Stake Manual SOUL"
 msgstr ""
 
 msgid "Stake SOUL for SPELL"
@@ -869,9 +869,6 @@ msgid ""
 "Stake into SPELL add collateral as aSPELL on Aave all in\n"
 "one click"
 msgstr ""
-
-msgid "Staking APR"
-msgstr "APR 스테이킹"
 
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "{0} {1} 및 {2} {3} 공급 중"
@@ -989,6 +986,12 @@ msgstr ""
 msgid "Unstake"
 msgstr "언스테이크"
 
+msgid "Unstake Auto Reinvesting SOUL"
+msgstr ""
+
+msgid "Unstake Manual SOUL"
+msgstr ""
+
 msgid "Unstaked"
 msgstr "지분 없음"
 
@@ -1019,9 +1022,6 @@ msgstr ""
 msgid "View Liquidity Positions"
 msgstr ""
 
-msgid "View Stats"
-msgstr "통계 보기"
-
 msgid "View on explorer"
 msgstr "탐색기에서 보기"
 
@@ -1045,9 +1045,6 @@ msgstr "랩"
 
 msgid "Wrong Network"
 msgstr "잘못된 네트워크"
-
-msgid "Yesterday's APR"
-msgstr "어제의 APR"
 
 msgid "You Pay:"
 msgstr ""
@@ -1084,9 +1081,6 @@ msgstr ""
 
 msgid "Your Liquidity"
 msgstr "내 유동성"
-
-msgid "Your SpellBound Stats"
-msgstr ""
 
 msgid "Your Staked"
 msgstr "귀하의 지분"

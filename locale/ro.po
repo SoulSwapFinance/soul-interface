@@ -388,9 +388,9 @@ msgstr ""
 
 msgid ""
 "For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL\n"
-"proportional to your share of the SpellBound. When your SOUL is staked into the SpellBound, you recieve\n"
-"SPELL in return for voting rights and a fully composable token that can interact with other protocols.\n"
-"Your SPELL is continuously compounding, when you unstake you will receive all the originally deposited\n"
+"proportional to your share of the SoulBar. When your SOUL is staked into the Circle, you recieve\n"
+"SEANCE in return for voting rights and a fully composable token that can interact with other protocols.\n"
+"Your SEANCE is continuously compounding, when you unstake you will receive all the originally deposited\n"
 "SOUL and any additional from fees."
 msgstr ""
 
@@ -546,9 +546,6 @@ msgstr ""
 msgid "Loading your {exchange} liquidity positions"
 msgstr "Se încarcă pozițiile lichidităților dvs. {exchange}"
 
-msgid "Loading..."
-msgstr "Se încarcă..."
-
 msgid "MAX"
 msgstr "MAX"
 
@@ -581,7 +578,7 @@ msgstr ""
 msgid "Max"
 msgstr "Max"
 
-msgid "Maximize yield by staking your SOUL for SPELL"
+msgid "Maximize yield by staking SOUL for SEANCE"
 msgstr ""
 
 msgid "Maximum sent"
@@ -859,7 +856,10 @@ msgstr "Cumulați randamentele cu SAAVE"
 msgid "Stake"
 msgstr "Investiți"
 
-msgid "Stake SOUL"
+msgid "Stake Auto Reinvesting SOUL"
+msgstr ""
+
+msgid "Stake Manual SOUL"
 msgstr ""
 
 msgid "Stake SOUL for SPELL"
@@ -869,9 +869,6 @@ msgid ""
 "Stake into SPELL add collateral as aSPELL on Aave all in\n"
 "one click"
 msgstr ""
-
-msgid "Staking APR"
-msgstr "Investire APR"
 
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "Oferire {0} {1} și {2} {3}"
@@ -989,6 +986,12 @@ msgstr ""
 msgid "Unstake"
 msgstr "Retrageți investiția"
 
+msgid "Unstake Auto Reinvesting SOUL"
+msgstr ""
+
+msgid "Unstake Manual SOUL"
+msgstr ""
+
 msgid "Unstaked"
 msgstr "Neinvestit"
 
@@ -1019,9 +1022,6 @@ msgstr ""
 msgid "View Liquidity Positions"
 msgstr ""
 
-msgid "View Stats"
-msgstr "Vizualizați statisticile"
-
 msgid "View on explorer"
 msgstr "Vizualizați în explorator"
 
@@ -1045,9 +1045,6 @@ msgstr "Încheiați"
 
 msgid "Wrong Network"
 msgstr "Rețea greșită"
-
-msgid "Yesterday's APR"
-msgstr "APR de ieri"
 
 msgid "You Pay:"
 msgstr ""
@@ -1084,9 +1081,6 @@ msgstr ""
 
 msgid "Your Liquidity"
 msgstr "Lichiditatea dvs."
-
-msgid "Your SpellBound Stats"
-msgstr ""
 
 msgid "Your Staked"
 msgstr "Sumele dvs. investite"

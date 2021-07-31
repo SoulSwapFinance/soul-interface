@@ -74,8 +74,8 @@ export default function SoulStake() {
   const soulBalance = useTokenBalance(account ?? undefined, SOUL[ChainId.FANTOM_TESTNET])
   const seanceBalance = useTokenBalance(account ?? undefined, SEANCE[ChainId.FANTOM_TESTNET])
 
-  const pendingSoul = userPendingRewards() // amount of soul is pending for user
-  const percOfTotal = userSharePercOfTotal() // user percentage of pool
+  // const pendingSoul = userPendingRewards() // amount of soul is pending for user
+  // const percOfTotal = userSharePercOfTotal() // user percentage of pool
 
   const walletConnected = !!account
   const toggleWalletModal = useWalletModalToggle()
@@ -103,53 +103,53 @@ export default function SoulStake() {
   // ---------------------
   //      SOUL VAULT
   // ---------------------
-  const [claiming, setClaiming] = useState(false)
+  // const [claiming, setClaiming] = useState(false)
   const [bounty, setBounty] = useState(0)
-  const [userShare, setUserShare] = useState()
+  // const [userShare, setUserShare] = useState()
 
-  const userShares = async () => {
-    const shares = await calculateHarvestSoulRewards()
-    setUserShare(shares) // TODO: looking to grab only `shares` out of the array
-  }
+  // const userShares = async () => {
+  //   const shares = await calculateHarvestSoulRewards()
+  //   setUserShare(shares) // TODO: looking to grab only `shares` out of the array
+  // }
 
-  // checks SOUL bounty funds available for harvest
-  const updateBountyStats = async () => {
-    const pending = await calculateHarvestSoulRewards()
-    // const formattedPending = pending // TODO: format to `toSignificant(4)`
-    setBounty(bounty)
-  }
+  // // checks SOUL bounty funds available for harvest
+  // const updateBountyStats = async () => {
+  //   const pending = await calculateHarvestSoulRewards()
+  //   // const formattedPending = pending // TODO: format to `toSignificant(4)`
+  //   setBounty(bounty)
+  // }
 
-  // will update bounty stats every 5 seconds
-  useEffect(() => {
-    let timer = setTimeout(() => {
-      updateBountyStats() // value
-    }, 3 * 1000) // delay
+  // // will update bounty stats every 5 seconds
+  // useEffect(() => {
+  //   let timer = setTimeout(() => {
+  //     updateBountyStats()  // value
+  //   }, 3 * 1000) // delay
 
-    // this will clear Timeout
-    // when component unmount like in willComponentUnmount
-    // and show will not change to true
-    return () => {
-      clearTimeout(timer)
-    }
-  })
+  //   // this will clear Timeout
+  //   // when component unmount like in willComponentUnmount
+  //   // and show will not change to true
+  //   return () => {
+  //     clearTimeout(timer)
+  //   }
+  // })
 
   /**
    * @dev Calls `harvest` func of SoulVault
    */
-  const handleHarvest = async () => {
-    if (!walletConnected) {
-      toggleWalletModal()
-    } else {
-      setClaiming(true)
-      const success = await sendTx(() => harvest())
-      if (!success) {
-        setClaiming(false)
-        return
-      }
+  // const handleHarvest = async () => {
+  //   if (!walletConnected) {
+  //     toggleWalletModal()
+  //   } else {
+  //     setClaiming(true)
+  //     const success = await sendTx(() => harvest())
+  //     if (!success) {
+  //       setClaiming(false)
+  //       return
+  //     }
 
-      setClaiming(false)
-    }
-  }
+  //     setClaiming(false)
+  //   }
+  // }
 
   const handleInput = (v: string) => {
     if (v.length <= INPUT_CHAR_LIMIT) {
@@ -223,7 +223,7 @@ export default function SoulStake() {
   // }, [data?.bar?.ratio, data?.bar?.totalSupply, soulPrice])
 
   return (
-    <>
+    <div>
       <Head>
         <title>Stake | Soul</title>
         <meta
@@ -504,6 +504,6 @@ export default function SoulStake() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }

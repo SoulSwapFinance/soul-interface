@@ -190,7 +190,7 @@ export function useMasterChefContract(withSignerIfPossible?: boolean): Contract 
 }
 
 export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
-  return useContract('0xd18dEfcd37cD4BbA23287611DC48a116CB127E27', SOUL_SUMMONER_ABI, withSignerIfPossible) // TODO: update address
+  return useContract('0xA65DbEA56E1E202bf03dB5f49ba565fb00Bf9288', SOUL_SUMMONER_ABI, withSignerIfPossible) // 31 JUL
 }
 
 export function useMiniChefContract(withSignerIfPossible?: boolean): Contract | null {

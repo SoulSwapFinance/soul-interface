@@ -393,15 +393,15 @@ msgstr "Follow us on Twitter."
 
 msgid ""
 "For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL\n"
-"proportional to your share of the SpellBound. When your SOUL is staked into the SpellBound, you recieve\n"
-"SPELL in return for voting rights and a fully composable token that can interact with other protocols.\n"
-"Your SPELL is continuously compounding, when you unstake you will receive all the originally deposited\n"
+"proportional to your share of the SoulBar. When your SOUL is staked into the Circle, you recieve\n"
+"SEANCE in return for voting rights and a fully composable token that can interact with other protocols.\n"
+"Your SEANCE is continuously compounding, when you unstake you will receive all the originally deposited\n"
 "SOUL and any additional from fees."
 msgstr ""
 "For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL\n"
-"proportional to your share of the SpellBound. When your SOUL is staked into the SpellBound, you recieve\n"
-"SPELL in return for voting rights and a fully composable token that can interact with other protocols.\n"
-"Your SPELL is continuously compounding, when you unstake you will receive all the originally deposited\n"
+"proportional to your share of the SoulBar. When your SOUL is staked into the Circle, you recieve\n"
+"SEANCE in return for voting rights and a fully composable token that can interact with other protocols.\n"
+"Your SEANCE is continuously compounding, when you unstake you will receive all the originally deposited\n"
 "SOUL and any additional from fees."
 
 msgid "French"
@@ -558,9 +558,6 @@ msgstr "Loading balance"
 msgid "Loading your {exchange} liquidity positions"
 msgstr "Loading your {exchange} liquidity positions"
 
-msgid "Loading..."
-msgstr "Loading..."
-
 msgid "MAX"
 msgstr "MAX"
 
@@ -595,8 +592,8 @@ msgstr "Matic Bridge"
 msgid "Max"
 msgstr "Max"
 
-msgid "Maximize yield by staking your SOUL for SPELL"
-msgstr "Maximize yield by staking your SOUL for SPELL"
+msgid "Maximize yield by staking SOUL for SEANCE"
+msgstr "Maximize yield by staking SOUL for SEANCE"
 
 msgid "Maximum sent"
 msgstr "Maximum sent"
@@ -875,8 +872,11 @@ msgstr "Stack Yields with SAAVE"
 msgid "Stake"
 msgstr "Stake"
 
-msgid "Stake SOUL"
-msgstr "Stake SOUL"
+msgid "Stake Auto Reinvesting SOUL"
+msgstr "Stake Auto Reinvesting SOUL"
+
+msgid "Stake Manual SOUL"
+msgstr "Stake Manual SOUL"
 
 msgid "Stake SOUL for SPELL"
 msgstr "Stake SOUL for SPELL"
@@ -887,9 +887,6 @@ msgid ""
 msgstr ""
 "Stake into SPELL add collateral as aSPELL on Aave all in\n"
 "one click"
-
-msgid "Staking APR"
-msgstr "Staking APR"
 
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "Supplying {0} {1} and {2} {3}"
@@ -1009,6 +1006,12 @@ msgstr "Unknown error{0}. Try increasing your slippage tolerance."
 msgid "Unstake"
 msgstr "Unstake"
 
+msgid "Unstake Auto Reinvesting SOUL"
+msgstr "Unstake Auto Reinvesting SOUL"
+
+msgid "Unstake Manual SOUL"
+msgstr "Unstake Manual SOUL"
+
 msgid "Unstaked"
 msgstr "Unstaked"
 
@@ -1039,9 +1042,6 @@ msgstr "Vietnamese"
 msgid "View Liquidity Positions"
 msgstr "View Liquidity Positions"
 
-msgid "View Stats"
-msgstr "View Stats"
-
 msgid "View on explorer"
 msgstr "View on explorer"
 
@@ -1065,9 +1065,6 @@ msgstr "Wrap"
 
 msgid "Wrong Network"
 msgstr "Wrong Network"
-
-msgid "Yesterday's APR"
-msgstr "Yesterday's APR"
 
 msgid "You Pay:"
 msgstr "You Pay:"
@@ -1104,9 +1101,6 @@ msgstr "Your Claimable SUSHI this Week"
 
 msgid "Your Liquidity"
 msgstr "Your Liquidity"
-
-msgid "Your SpellBound Stats"
-msgstr "Your SpellBound Stats"
 
 msgid "Your Staked"
 msgstr "Your Staked"

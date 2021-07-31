@@ -384,9 +384,9 @@ msgstr ""
 
 msgid ""
 "For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL\n"
-"proportional to your share of the SpellBound. When your SOUL is staked into the SpellBound, you recieve\n"
-"SPELL in return for voting rights and a fully composable token that can interact with other protocols.\n"
-"Your SPELL is continuously compounding, when you unstake you will receive all the originally deposited\n"
+"proportional to your share of the SoulBar. When your SOUL is staked into the Circle, you recieve\n"
+"SEANCE in return for voting rights and a fully composable token that can interact with other protocols.\n"
+"Your SEANCE is continuously compounding, when you unstake you will receive all the originally deposited\n"
 "SOUL and any additional from fees."
 msgstr ""
 
@@ -539,9 +539,6 @@ msgstr ""
 msgid "Loading your {exchange} liquidity positions"
 msgstr "正在加载您的{exchange}您的流动性仓位"
 
-msgid "Loading..."
-msgstr "载入中..."
-
 msgid "MAX"
 msgstr "最大数量"
 
@@ -574,7 +571,7 @@ msgstr ""
 msgid "Max"
 msgstr "最大数量"
 
-msgid "Maximize yield by staking your SOUL for SPELL"
+msgid "Maximize yield by staking SOUL for SEANCE"
 msgstr ""
 
 msgid "Maximum sent"
@@ -852,7 +849,10 @@ msgstr "使用SAAVE叠加收益"
 msgid "Stake"
 msgstr "质押"
 
-msgid "Stake SOUL"
+msgid "Stake Auto Reinvesting SOUL"
+msgstr ""
+
+msgid "Stake Manual SOUL"
 msgstr ""
 
 msgid "Stake SOUL for SPELL"
@@ -862,9 +862,6 @@ msgid ""
 "Stake into SPELL add collateral as aSPELL on Aave all in\n"
 "one click"
 msgstr ""
-
-msgid "Staking APR"
-msgstr "质押APR"
 
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "提供{0} {1}和{2} {3}"
@@ -982,6 +979,12 @@ msgstr ""
 msgid "Unstake"
 msgstr "解除抵押"
 
+msgid "Unstake Auto Reinvesting SOUL"
+msgstr ""
+
+msgid "Unstake Manual SOUL"
+msgstr ""
+
 msgid "Unstaked"
 msgstr "解除质押"
 
@@ -1012,9 +1015,6 @@ msgstr ""
 msgid "View Liquidity Positions"
 msgstr ""
 
-msgid "View Stats"
-msgstr "查看数据"
-
 msgid "View on explorer"
 msgstr "在浏览器查看"
 
@@ -1038,9 +1038,6 @@ msgstr "包裹"
 
 msgid "Wrong Network"
 msgstr "错误的网络"
-
-msgid "Yesterday's APR"
-msgstr "昨天的APR"
 
 msgid "You Pay:"
 msgstr ""
@@ -1077,9 +1074,6 @@ msgstr ""
 
 msgid "Your Liquidity"
 msgstr "您的流动性"
-
-msgid "Your SpellBound Stats"
-msgstr ""
 
 msgid "Your Staked"
 msgstr "您在流动性池的占比"
