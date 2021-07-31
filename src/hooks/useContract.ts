@@ -184,9 +184,8 @@ export function useSoulVaultContract(withSignerIfPossible = true): Contract | nu
   return useContract(chainId && SOULVAULT_ADDRESS[chainId], SOULVAULT_ABI, withSignerIfPossible)
 }
 
-// Need to update to `0xd18dEfcd37cD4BbA23287611DC48a116CB127E27`
 export function useMasterChefContract(withSignerIfPossible?: boolean): Contract | null {
-  return useContract('0x5cED956c0d3dC88B8C3E42494F7b2e052d7CfeBc', SOUL_SUMMONER_ABI, withSignerIfPossible)
+  return useContract('0xA65DbEA56E1E202bf03dB5f49ba565fb00Bf9288', SOUL_SUMMONER_ABI, withSignerIfPossible) // 31 JUL (SOUL SUMMONER)
 }
 
 export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {

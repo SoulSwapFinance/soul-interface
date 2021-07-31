@@ -65,7 +65,7 @@ const FarmListItem = ({ farm }) => {
 
   const [approvalState, approve] = useApproveCallback(typedDepositValue, APPROVAL_ADDRESSES[farm.chef][chainId])
 
-  const { deposit, withdraw, harvest } = useSoulSummoner(farm.chef)
+  const { deposit, withdraw, harvest } = useSoulSummoner()
 
   return (
     <Transition

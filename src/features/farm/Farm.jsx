@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import useSoulSummoner from './useSoulSummoner'
+import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
 
 // params to render farm with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)
@@ -154,34 +156,60 @@ const SubmitButton = styled.button`
   }
 `
 
-const Farm = ({ lpToken }) => {
+const Farm = ({ pid, lpSymbol, lpToken }) => {
   const [showing, setShowing] = useState(false)
+
+  const { harvest, withdraw, deposit, pendingSoul } = useSoulSummoner()
+
+  const [pending, setPending] = useState(0)
+  const [amount, setAmount] = useState('')
+  const [usingBalance, setUsingBalance] = useState(false)
+
+  // const formattedBalance = balance?.toSignificant(4)
+  // const parsedAmount = usingBalance ? usingBalance : tryParseAmount(amount, balance?.currency)
+
+  // const [approvalStateLpToken, approveLpToken] = useApproveCallback(parsedAmount, lpToken)
 
   const handleShow = () => {
     setShowing(!showing)
   }
 
-  const fetchPidData = (pid) => {
-    // use function `poolInfo` & return:
-    // - lpAddress[0] the 2 token addresses from factory call (fetch icon from folder in)
-    // - allocPoint[1]
-    // - accSoulPerShare[3]
-    // require: `Approve` token for stake, otherwise show `Stake`
-    // earned: `pendingSoul`
+  const handlePending = async (pid) => {
+    const pending = await pendingSoul(pid)
+    const parsed = Number(pending).toFixed(4).toString()
+    setPending(parsed)
   }
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      handlePending(pid)
+    }, 3000)
+
+    // Clear timeout if the component is unmounted
+    return () => clearTimeout(timer)
+  })
+
+  // const fetchPidData = (props) => {
+  // use function `poolInfo` & return:
+  // - lpAddress[0] the 2 token addresses from factory call (fetch icon from folder in)
+  // - allocPoint[1]
+  // - accSoulPerShare[3]
+  // require: `Approve` token for stake, otherwise show `Stake`
+  // earned: `pendingSoul`
+  // }
 
   return (
     <>
       <FarmContainer>
         <FarmRow>
           <FarmContentWrapper>
-            <TokenPairBox>
+            <TokenPairBox target="_blank" href={`${lpToken}`}>
               {/* 2 token logo combined ? */}
-              <TokenPair>{lpToken}</TokenPair>
+              <TokenPair>{lpSymbol}</TokenPair>
             </TokenPairBox>
             <FarmItemBox>
               <FarmItemHeading>Earned</FarmItemHeading>
-              <FarmItem>2500</FarmItem>
+              <FarmItem>{pending}</FarmItem>
             </FarmItemBox>
             <FarmItemBox>
               <FarmItemHeading>APR</FarmItemHeading>
@@ -214,7 +242,7 @@ const Farm = ({ lpToken }) => {
               </SubmitButton>
             </FunctionBox>
             <FunctionBox width="30%">
-              <SubmitButton primaryColour="#4afd94" hoverColour="#4afd94" type="Submit">
+              <SubmitButton primaryColour="#4afd94" hoverColour="#4afd94" onClick={() => harvest(1)}>
                 Harvest
               </SubmitButton>
             </FunctionBox>
@@ -242,32 +270,34 @@ export const FarmList = () => {
       pid: 1,
       lpSymbol: 'SOUL-FTM',
       lpAddresses: {
-        4002: '',
+        4002: '0x10c0AFd7C58916C4025d466E11850c7D79219277',
       },
-      token1: '',
-      token2: '',
+      token1: '0xf1277d1ed8ad466beddf92ef448a132661956621',
+      token2: '0xcf174a6793fa36a73e8ff18a71bd81c985ef5ab5',
     },
-    {
-      pid: 2,
-      lpSymbol: 'SOUL-FUSD',
-      lpAddresses: {
-        4002: '',
-      },
-      token1: '',
-      token2: '',
-    },
-    {
-      pid: 3,
-      lpSymbol: 'SOUL-PILL',
-      lpAddresses: {
-        4002: '',
-      },
-      token1: '',
-      token2: '',
-    },
+    // {
+    //   pid: 2,
+    //   lpSymbol: 'SOUL-FUSD',
+    //   lpAddresses: {
+    //     4002: '',
+    //   },
+    //   token1: '',
+    //   token2: '',
+    // },
+    // {
+    //   pid: 3,
+    //   lpSymbol: 'SOUL-PILL',
+    //   lpAddresses: {
+    //     4002: '',
+    //   },
+    //   token1: '',
+    //   token2: '',
+    // },
   ]
 
-  const farmList = farms.map((farm) => <Farm key={farm} lpToken={farm} />)
+  const farmList = farms.map((farm) => (
+    <Farm key={farm.pid} pid={farm.pid} lpSymbol={farm.lpSymbol} lpToken={farm.lpSymbol} />
+  ))
   return (
     <>
       {/* Banner */}

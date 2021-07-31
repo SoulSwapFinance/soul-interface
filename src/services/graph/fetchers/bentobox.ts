@@ -12,30 +12,30 @@ export const BENTOBOX = {
   [ChainId.FANTOM]: 'sushiswap/fantom-bentobox',
   [ChainId.BSC]: 'sushiswap/bsc-bentobox',
 }
-export const fetcher = async (chainId = ChainId.MAINNET, query, variables) =>
-  request(`${GRAPH_HOST[chainId]}/subgraphs/name/${BENTOBOX[chainId]}`, query)
+// export const fetcher = async (chainId = ChainId.MAINNET, query, variables) =>
+//   request(`${GRAPH_HOST[chainId]}/subgraphs/name/${BENTOBOX[chainId]}`, query)
 
-export const getKashiPairs = async (chainId = ChainId.MAINNET, variables = undefined) => {
-  const { kashiPairs } = await fetcher(chainId, kashiPairsQuery, variables)
+// export const getKashiPairs = async (chainId = ChainId.MAINNET, variables = undefined) => {
+//   const { kashiPairs } = await fetcher(chainId, kashiPairsQuery, variables)
 
-  const tokens = await getTokenSubset(chainId, {
-    tokenAddresses: Array.from(
-      kashiPairs.reduce(
-        (previousValue, currentValue) => previousValue.add(currentValue.asset.id, currentValue.collateral.id),
-        new Set() // use set to avoid duplicates
-      )
-    ),
-  })
+//   const tokens = await getTokenSubset(chainId, {
+//     tokenAddresses: Array.from(
+//       kashiPairs.reduce(
+//         (previousValue, currentValue) => previousValue.add(currentValue.asset.id, currentValue.collateral.id),
+//         new Set() // use set to avoid duplicates
+//       )
+//     ),
+//   })
 
-  return kashiPairs.map((pair) => ({
-    ...pair,
-    token0: {
-      ...pair.asset,
-      ...tokens.find((token) => token.id === pair.asset.id),
-    },
-    token1: {
-      ...pair.collateral,
-      ...tokens.find((token) => token.id === pair.collateral.id),
-    },
-  }))
-}
+//   return kashiPairs.map((pair) => ({
+//     ...pair,
+//     token0: {
+//       ...pair.asset,
+//       ...tokens.find((token) => token.id === pair.asset.id),
+//     },
+//     token1: {
+//       ...pair.collateral,
+//       ...tokens.find((token) => token.id === pair.collateral.id),
+//     },
+//   }))
+// }
