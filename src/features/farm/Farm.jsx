@@ -24,6 +24,7 @@ import {
   Input,
   SubmitButton,
 } from './FarmStyles'
+import { set } from 'lodash'
 
 // params to render farm with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)
@@ -43,12 +44,16 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
   const { withdraw, deposit, pendingSoul, poolInfo, userInfo } = useSoulSummoner()
   const { approve, allowance } = useLpToken(lpToken)
 
+  const [stakedBal, setStakedBal] = useState(0)
+  const [unstakedBal, setUnstakedBal] = useState(0)
+
   const [pending, setPending] = useState(0)
   const [multiplier, setMultiplier] = useState('?')
   const [approved, setApproved] = useState(false)
   const [showing, setShowing] = useState(false)
 
   const handleShow = () => {
+    fetchBals()
     setShowing(!showing)
   }
 
@@ -56,6 +61,22 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
   const parseAmount = (amount) => {
     const parsed = ethers.BigNumber.from(amount).mul(ethers.BigNumber.from(10).pow(18)).toString()
     return parsed
+  }
+
+  const fetchBals = async (pid) => {
+    if (!walletConnected) {
+      toggleWalletModal()
+    } else {
+      try {
+        const result = await userInfo(pid)
+        const amount = BigNumber.from(result?.[0])
+        const staked = ethers.utils.formatUnits(amount)
+        setStakedBal(Number(staked).toFixed(0).toString())
+        return [staked]
+      } catch (err) {
+        console.log(err)
+      }
+    }
   }
 
   // Fetches connected user pending soul
@@ -186,6 +207,8 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
             </FunctionBox>
 
             <FunctionBox>
+              {/* <button >Max</button> */}
+              <p>Available: {unstakedBal}</p>
               <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
               {approved ? (
                 <SubmitButton
@@ -203,6 +226,7 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
             </FunctionBox>
 
             <FunctionBox>
+              <p>Staked: {stakedBal}</p>
               <Input name="unstake" id="unstake" type="number" placeholder="0.0" min="0" />
               <SubmitButton
                 primaryColour="#b72b18"
