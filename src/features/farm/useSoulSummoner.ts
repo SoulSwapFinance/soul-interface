@@ -1,6 +1,8 @@
 import { useActiveWeb3React, useSoulContract } from '../../hooks'
 
 import { BigNumber } from '@ethersproject/bignumber'
+import { Chef } from './enum'
+import { Zero } from '@ethersproject/constants'
 import { useCallback } from 'react'
 import { useSoulSummonerContract } from '../../hooks/useContract'
 
@@ -41,8 +43,24 @@ export default function useSoulSummoner() {
   const harvest = useCallback(
     async (pid: number) => {
       try {
+        let tx
+
         const pendingSoul = await summonerContract?.pendingSoul(pid, account)
-        const tx = await summonerContract?.harvest(pid, account)
+        const balanceOf = await soul?.balanceOf(summonerContract?.address)
+
+        // if SoulSummoner doesn't have enough soul to harvest, batch in a harvest.
+        if (pendingSoul.gt(balanceOf)) {
+          tx = await summonerContract?.batch(
+            [
+              summonerContract?.interface?.encodeFunctionData('harvestFromMasterChef'),
+              summonerContract?.interface?.encodeFunctionData('harvest', [pid, account]),
+            ],
+            true
+          )
+        } else {
+          tx = await summonerContract?.harvest(pid, account)
+        }
+
         return tx
       } catch (e) {
         console.error(e)
@@ -69,9 +87,10 @@ export default function useSoulSummoner() {
       try {
         const tx = await summonerContract?.poolInfo(pid)
         const lpToken = tx?.[0].toString()
-        const lastRewardTime = BigNumber.from(tx?.[1])
-        const accSoulPerShare = BigNumber.from(tx?.[2])
-        return [lpToken, lastRewardTime, accSoulPerShare]
+        const allocPoint = BigNumber.from(tx?.[1])
+        const lastRewardTime = BigNumber.from(tx?.[2])
+        const accSoulPerShare = BigNumber.from(tx?.[3])
+        return [lpToken, allocPoint, lastRewardTime, accSoulPerShare]
       } catch (e) {
         console.error(e)
         return e
