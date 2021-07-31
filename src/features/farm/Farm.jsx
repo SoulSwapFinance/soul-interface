@@ -161,6 +161,14 @@ const Farm = ({ lpToken }) => {
     setShowing(!showing)
   }
 
+  const fetchPidData = (pid) => {
+    // use function `poolInfo` & return:
+    // - lpAddress[0] the 2 token addresses from factory call (fetch icon from folder in)
+    // - allocPoint[1]
+    // - accSoulPerShare[3]
+    // earned: `pendingSoul`
+  }
+
   return (
     <>
       <FarmContainer>
