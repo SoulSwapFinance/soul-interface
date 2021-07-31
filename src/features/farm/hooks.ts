@@ -1,50 +1,42 @@
-import { ChainId, CurrencyAmount, JSBI, SOUL_SUMMONER_ADDRESS as MASTERCHEF_V1_ADDRESS } from '@soulswap/sdk'
+import { ChainId, CurrencyAmount, JSBI } from '@soulswap/sdk'
 import { Chef } from './enum'
 import { SOUL_SUMMONER_ADDRESS, MINICHEF_ADDRESS, SOUL } from '../../constants'
 import { NEVER_RELOAD, useSingleCallResult, useSingleContractMultipleData } from '../../state/multicall/hooks'
 import { useCallback, useMemo } from 'react'
-import { useMasterChefV1Contract, useSoulSummonerContract, useMiniChefContract } from '../../hooks'
+import { useSoulSummonerContract, useMiniChefContract } from '../../hooks'
 
 import { Contract } from '@ethersproject/contracts'
 import { Zero } from '@ethersproject/constants'
 import concat from 'lodash/concat'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import zip from 'lodash/zip'
-import { masterChefV1 } from '../../services/graph'
 
 export function useChefContract(chef: Chef) {
-  const masterChefV1Contract = useMasterChefV1Contract()
   const soulSummonerContract = useSoulSummonerContract()
   const miniChefContract = useMiniChefContract()
   const contracts = useMemo(
     () => ({
-      [Chef.MASTERCHEF_V1]: masterChefV1Contract,
       [Chef.SOUL_SUMMONER]: soulSummonerContract,
       [Chef.MINICHEF]: miniChefContract,
     }),
-    [masterChefV1Contract, soulSummonerContract, miniChefContract]
+    [soulSummonerContract, miniChefContract]
   )
   return useMemo(() => {
     return contracts[chef]
   }, [contracts, chef])
 }
 
-const CHEFS = {
-  [ChainId.MAINNET]: [Chef.MASTERCHEF_V1, Chef.SOUL_SUMMONER],
-  [ChainId.MATIC]: [Chef.MINICHEF],
-}
+const CHEFS = { [ChainId.FANTOM_TESTNET]: [Chef.SOUL_SUMMONER] }
 
 export function useChefContracts(chefs: Chef[]) {
-  const masterChefV1Contract = useMasterChefV1Contract()
   const soulSummonerContract = useSoulSummonerContract()
   const miniChefContract = useMiniChefContract()
   const contracts = useMemo(
     () => ({
-      [Chef.MASTERCHEF_V1]: masterChefV1Contract,
       [Chef.SOUL_SUMMONER]: soulSummonerContract,
       [Chef.MINICHEF]: miniChefContract,
     }),
-    [masterChefV1Contract, soulSummonerContract, miniChefContract]
+    [soulSummonerContract, miniChefContract]
   )
   return chefs.map((chef) => contracts[chef])
 }
@@ -134,9 +126,7 @@ export function useChefPositions(contract?: Contract | null, rewarder?: Contract
   // )
 
   const getChef = useCallback(() => {
-    if (MASTERCHEF_V1_ADDRESS[chainId] === contract.address) {
-      return Chef.MASTERCHEF_V1
-    } else if (SOUL_SUMMONER_ADDRESS[chainId] === contract.address) {
+    if (SOUL_SUMMONER_ADDRESS[chainId] === contract.address) {
       return Chef.SOUL_SUMMONER
     } else if (MINICHEF_ADDRESS[chainId] === contract.address) {
       return Chef.MINICHEF
@@ -163,7 +153,6 @@ export function useChefPositions(contract?: Contract | null, rewarder?: Contract
 
 export function usePositions() {
   const [masterChefPositions, miniChefPositions] = [
-    useChefPositions(useMasterChefV1Contract()),
     useChefPositions(useSoulSummonerContract()),
     useChefPositions(useMiniChefContract()),
   ]

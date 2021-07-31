@@ -9,8 +9,6 @@ import {
   useFarmPairAddresses,
   useFarms,
   useKashiPairs,
-  useMasterChefV1SushiPerBlock,
-  useMasterChefV1TotalAllocPoint,
   useMaticPrice,
   useOnePrice,
   usePicklePrice,
@@ -45,29 +43,13 @@ export default function Farm(): JSX.Element {
 
   const pairAddresses = useFarmPairAddresses()
 
-  const sushiPairs = useSushiPairs({
-    where: {
-      id_in: pairAddresses,
-    },
-  })
+  const sushiPairs = useSushiPairs({ where: { id_in: pairAddresses } })
 
-  const soulPairs = useSoulPairs({
-    where: {
-      id_in: pairAddresses,
-    },
-  })
+  const soulPairs = useSoulPairs({ where: { id_in: pairAddresses } })
 
-  const swapPairs = useSoulPairs({
-    where: {
-      id_in: pairAddresses,
-    },
-  })
+  const swapPairs = useSoulPairs({ where: { id_in: pairAddresses } })
 
-  const kashiPairs = useKashiPairs({
-    where: {
-      id_in: pairAddresses,
-    },
-  })
+  const kashiPairs = useKashiPairs({ where: { id_in: pairAddresses } })
 
   const farms = useFarms()
 
@@ -77,24 +59,9 @@ export default function Farm(): JSX.Element {
 
   const averageBlock = useAverageBlock()
 
-  const masterChefV1TotalAllocPoint = useMasterChefV1TotalAllocPoint()
-
-  const masterChefV1SushiPerBlock = useMasterChefV1SushiPerBlock()
-
   // TODO: Obviously need to sort this out but this is fine for time being,
   // prices are only loaded when needed for a specific network
-  const [
-    soulPrice,
-    sushiPrice,
-    ethPrice,
-    maticPrice,
-    alcxPrice,
-    cvxPrice,
-    stakePrice,
-    onePrice,
-    picklePrice,
-    mphPrice,
-  ] = [
+  const [soulPrice, ethPrice, maticPrice, alcxPrice, cvxPrice, stakePrice, onePrice, picklePrice, mphPrice] = [
     useSoulPrice(),
     useSushiPrice(),
     useEthPrice(),
@@ -132,9 +99,8 @@ export default function Farm(): JSX.Element {
     function getRewards() {
       // TODO: Some subgraphs give soulPerBlock & soulPerSecond, and mcv2 gives nothing
       const soulPerSecond = pool?.owner?.soulPerSecond / 1e18 || (pool?.owner?.soulPerSecond / 1e18) * averageBlockTime
-      // || masterChefV1SushiPerBlock // todo: update
 
-      // const rewardPerBlock = (pool.allocPoint / pool.owner.totalAllocPoint) * soulPerBlock
+      // const rewardPerBlock = (pool.allocPoint / pool.owner.totalAllocPoint) * soulPerSecond
       const rewardPerSecond = (pool.allocPoint / pool.owner.totalAllocPoint) * soulPerSecond
 
       const defaultReward = {
@@ -150,8 +116,6 @@ export default function Farm(): JSX.Element {
 
       if (pool.chef === Chef.SOUL_SUMMONER) {
         // override for mcv2...
-        pool.owner.totalAllocPoint = masterChefV1TotalAllocPoint
-
         const REWARDS = [
           {
             token: 'ALCX',
@@ -193,7 +157,7 @@ export default function Farm(): JSX.Element {
         return [...defaultRewards, REWARDS[pool.id]]
       } else if (pool.chef === Chef.MINICHEF) {
         const soulPerSecond = ((pool.allocPoint / pool.miniChef.totalAllocPoint) * pool.miniChef.soulPerSecond) / 1e18
-        const soulPerBlock = soulPerSecond * averageBlockTime
+        // const soulPerBlock = soulPerSecond * averageBlockTime
         const soulPerDay = soulPerSecond * secondsPerDay
         const rewardPerSecond =
           ((pool.allocPoint / pool.miniChef.totalAllocPoint) * pool.rewarder.rewardPerSecond) / 1e18
