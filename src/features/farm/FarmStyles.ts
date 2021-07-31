@@ -88,6 +88,7 @@ export const DetailsWrapper = styled.div`
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   width: 100%;
+  padding: 5px 10px;
 `
 
 export const FunctionBox = styled.div`
@@ -141,5 +142,10 @@ export const SubmitButton = styled.button`
 
   &:focus {
     border-color: ${({ hoverColour }) => (hoverColour ? hoverColour : 'violet')};
+  }
+
+  &:disabled {
+    cursor: auto;
+    opacity: 80%;
   }
 `

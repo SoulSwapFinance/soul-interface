@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { BigNumber } from '@ethersproject/bignumber'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import { useActiveWeb3React } from '../../hooks'
+import { ethers } from 'ethers'
 
 import LpTokenABI from '../../constants/abis/uniswap-v2-pair.json'
 
@@ -21,6 +22,7 @@ import {
   DetailsContainer,
   DetailsWrapper,
   FunctionBox,
+  Input,
   SubmitButton,
 } from './FarmStyles'
 
@@ -41,15 +43,20 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
   const { withdraw, deposit, harvest, pendingSoul, poolInfo } = useSoulSummoner()
 
   const [pending, setPending] = useState(0)
-  const [multiplier, setMultiplier] = useState('NA')
-  const [amount, setAmount] = useState('NA')
-  const [usingBalance, setUsingBalance] = useState(false)
+  const [multiplier, setMultiplier] = useState('?')
+  const [approved, setApproved] = useState(false)
 
   const walletConnected = !!account
   const toggleWalletModal = useWalletModalToggle()
 
   const handleShow = () => {
     setShowing(!showing)
+  }
+
+  // Used to get non 1e18 numbers and turn them into 1e18
+  const parseAmount = (amount) => {
+    const parsed = ethers.BigNumber.from(amount).mul(ethers.BigNumber.from(10).pow(18)).toString()
+    return parsed
   }
 
   // Fetches connected user pending soul
@@ -82,9 +89,14 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
     }
   }
 
+  const fetchApproval = async (lpAddress) => {
+    // approved
+  }
+
   // Runs on render
   useEffect(() => {
     fetchMultiplier(pid)
+    fetchApproval()
   }, [account])
 
   // Runs on render + reruns every 3 secs
@@ -114,18 +126,22 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
                 {lpSymbol}
               </TokenPair>
             </TokenPairBox>
+
             <FarmItemBox>
               <FarmItemHeading>Earned</FarmItemHeading>
               <FarmItem>{pending}</FarmItem>
             </FarmItemBox>
+
             <FarmItemBox>
               <FarmItemHeading>APR</FarmItemHeading>
               <FarmItem>...%</FarmItem>
             </FarmItemBox>
+
             <FarmItemBox>
               <FarmItemHeading>TVL</FarmItemHeading>
               <FarmItem>$...</FarmItem>
             </FarmItemBox>
+
             <FarmItemBox marginLeft={'100px'}>
               <FarmItemHeading>Multiplier</FarmItemHeading>
               <FarmItem>{multiplier}x</FarmItem>
@@ -139,23 +155,44 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
           </FarmContentWrapper>
         </FarmRow>
       </FarmContainer>
+
       {showing ? (
         <DetailsContainer>
           <DetailsWrapper>
-            <FunctionBox>
-              <Input name="stake" type="number" placeholder="0.0" />
-              <SubmitButton primaryColour="#45b7da" hoverColour="#45b7da" type="Submit">
-                Stake
-              </SubmitButton>
-            </FunctionBox>
             <FunctionBox width="30%">
-              <SubmitButton primaryColour="#4afd94" hoverColour="#4afd94" onClick={() => harvest(pid)}>
+              <SubmitButton primaryColour="#4afd94" hoverColour="#4afd94" onClick={() => withdraw(pid, 0)}>
                 Harvest
               </SubmitButton>
             </FunctionBox>
+
             <FunctionBox>
-              <Input name="unstake" type="number" placeholder="0.0" />
-              <SubmitButton primaryColour="#e63d27" hoverColour="#e63d27" type="Submit">
+              <Input name="stake" id="stake" type="number" placeholder="0.0" />
+              {approved ? (
+                <SubmitButton
+                  primaryColour="#45b7da"
+                  hoverColour="#45b7da"
+                  onClick={() => deposit(pid, parseAmount(BigNumber.from(document.getElementById('stake').value)))}
+                >
+                  Stake
+                </SubmitButton>
+              ) : (
+                <SubmitButton
+                  primaryColour="#45b7da"
+                  hoverColour="#45b7da"
+                  onClick={() => deposit(pid, parseAmount(BigNumber.from(document.getElementById('stake').value)))}
+                >
+                  Stake
+                </SubmitButton>
+              )}
+            </FunctionBox>
+
+            <FunctionBox>
+              <Input name="unstake" id="unstake" type="number" placeholder="0.0" />
+              <SubmitButton
+                primaryColour="#e63d27"
+                hoverColour="#e63d27"
+                onClick={() => withdraw(pid, parseAmount(BigNumber.from(document.getElementById('unstake').value)))}
+              >
                 Unstake
               </SubmitButton>
             </FunctionBox>

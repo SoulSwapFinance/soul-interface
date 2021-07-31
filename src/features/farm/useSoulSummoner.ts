@@ -19,7 +19,8 @@ export default function useSoulSummoner() {
       try {
         return await summonerContract?.deposit(pid, amount)
       } catch (e) {
-        console.error(e)
+        console.log(e)
+        alert(e.message)
         return e
       }
     },
@@ -30,10 +31,11 @@ export default function useSoulSummoner() {
   const withdraw = useCallback(
     async (pid: number, amount: BigNumber) => {
       try {
-        let tx = summonerContract?.withdraw(pid, amount, account)
+        let tx = await summonerContract?.withdraw(pid, amount)
         return tx
       } catch (e) {
-        console.error(e)
+        alert(e.message)
+        console.log(e)
         return e
       }
     },
@@ -63,7 +65,7 @@ export default function useSoulSummoner() {
 
         return tx
       } catch (e) {
-        console.error(e)
+        console.log(e)
         return e
       }
     },
@@ -76,7 +78,7 @@ export default function useSoulSummoner() {
       const tx = await summonerContract?.poolLength()
       return tx
     } catch (e) {
-      console.error(e)
+      console.log(e)
       return e
     }
   }, [account, summonerContract])
@@ -92,7 +94,7 @@ export default function useSoulSummoner() {
         const accSoulPerShare = BigNumber.from(tx?.[3])
         return [lpToken, allocPoint, lastRewardTime, accSoulPerShare]
       } catch (e) {
-        console.error(e)
+        console.log(e)
         return e
       }
     },
@@ -108,7 +110,7 @@ export default function useSoulSummoner() {
         const rewardDebt = BigNumber.from(tx?.[1])
         return [amount, rewardDebt]
       } catch (e) {
-        console.error(e)
+        console.log(e)
         return e
       }
     },
@@ -122,7 +124,7 @@ export default function useSoulSummoner() {
         const tx = BigNumber.from(await summonerContract?.pendingSoul(pid, address))
         return tx
       } catch (e) {
-        console.error(e)
+        console.log(e)
         return e
       }
     },
@@ -135,7 +137,7 @@ export default function useSoulSummoner() {
       const tx = BigNumber.from(await summonerContract?.soulPerSecond())
       return tx
     } catch (e) {
-      console.error(e)
+      console.log(e)
       return e
     }
   }, [account, summonerContract])
@@ -146,7 +148,7 @@ export default function useSoulSummoner() {
       const tx = BigNumber.from(await summonerContract?.totalAllocPoint())
       return tx
     } catch (e) {
-      console.error(e)
+      console.log(e)
       return e
     }
   }, [account, summonerContract])
