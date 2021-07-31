@@ -1,5 +1,4 @@
 export enum Chef {
-  MASTERCHEF_V1,
   SOUL_SUMMONER,
   MINICHEF,
 }
