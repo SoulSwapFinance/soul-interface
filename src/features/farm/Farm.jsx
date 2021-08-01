@@ -61,8 +61,8 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
 
   // Used to get non 1e18 numbers and turn them into 1e18
   const parseAmount = (amount) => {
-    const bnAmount = ethers.BigNumber.from(amount)
-    const parsed = bnAmount.mul(ethers.BigNumber.from(10).pow(18)).toString()
+    const bnAmount = ethers.BigNumber.from(amount).toString()
+    const parsed = bnAmount.mul(BigNumber.from(10).pow(18)).toString()
     return parsed
   }
 
@@ -92,10 +92,9 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
       toggleWalletModal()
     } else {
       try {
-        const pending = await pendingSoul(pid)
-        const formatted = ethers.utils.formatUnits(pending).toString()
-        const parsed = Number(formatted).toFixed(1).toString()
-        setPending(parsed)
+        const pending = ethers.BigNumber.from(await pendingSoul(pid))
+        const formatted = ethers.utils.formatUnits(pending.toString())
+        setPending(Number(formatted).toFixed(1).toString())
       } catch (err) {
         console.log(err)
       }
@@ -159,8 +158,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
 
   const handleWithdraw = async (amount) => {
     try {
-      const parsedAmount = await parseAmount(amount)
-      const tx = await withdraw(pid, parsedAmount)
+      const tx = await withdraw(pid, amount)
       await tx.wait()
       await fetchBals(pid)
     } catch (e) {
@@ -171,8 +169,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
 
   const handleDeposit = async (amount) => {
     try {
-      const parsedAmount = await parseAmount(amount)
-      const tx = await deposit(pid, parsedAmount)
+      const tx = await deposit(pid, amount)
       await tx.wait()
       await fetchBals(pid)
     } catch (e) {
@@ -260,7 +257,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
                 <SubmitButton
                   primaryColour="#45b7da"
                   hoverColour="#45b7da"
-                  onClick={() => handleDeposit(document.getElementById('stake').value)}
+                  onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
                 >
                   Stake
                 </SubmitButton>
@@ -280,7 +277,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
               <SubmitButton
                 primaryColour="#b72b18"
                 hoverColour="#b72b18"
-                onClick={() => handleWithdraw(document.getElementById('unstake').value)}
+                onClick={() => handleWithdraw(ethers.utils.parseUnits(document.getElementById('unstake').value))}
               >
                 Unstake
               </SubmitButton>
