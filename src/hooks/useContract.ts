@@ -54,7 +54,7 @@ import IUniswapV2PairABI from '../constants/abis/uniswap-v2-pair.json'
 import KASHIPAIR_ABI from '../constants/abis/kashipair.json'
 import MAKER_ABI from '../constants/abis/maker.json'
 
-// Soul
+// soul
 import SOUL_GUIDE_ABI from '../constants/abis/soul-guide.json' // TODO: update abi
 import SOUL_SUMMONER_ABI from '../constants/abis/soulswap/soulsummoner.json' // 28 JUL
 import SOULVAULT_ABI from '../constants/abis/soulswap/soulvault.json' // 31 JUL
@@ -262,169 +262,6 @@ export function useSwaave(withSignerIfPossible?: boolean): Contract | null {
   return useContract('0xA70e346Ca3825b46EB4c8d0d94Ff204DB76BC289', SAAVE_ABI, withSignerIfPossible)
 }
 
-export function useUniV2FactoryContract(): Contract | null {
-  return useContract(UNI_FACTORY_ADDRESS, UNI_FACTORY_ABI, false)
-}
-
-export function usePancakeV1FactoryContract(): Contract | null {
-  return useContract(
-    '0xBCfCcbde45cE874adCB698cC183deBcF17952812',
-    [
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: '_feeToSetter',
-            type: 'address',
-          },
-        ],
-        payable: false,
-        stateMutability: 'nonpayable',
-        type: 'constructor',
-      },
-      {
-        anonymous: false,
-        inputs: [
-          {
-            indexed: true,
-            internalType: 'address',
-            name: 'token0',
-            type: 'address',
-          },
-          {
-            indexed: true,
-            internalType: 'address',
-            name: 'token1',
-            type: 'address',
-          },
-          {
-            indexed: false,
-            internalType: 'address',
-            name: 'pair',
-            type: 'address',
-          },
-          {
-            indexed: false,
-            internalType: 'uint256',
-            name: '',
-            type: 'uint256',
-          },
-        ],
-        name: 'PairCreated',
-        type: 'event',
-      },
-      {
-        constant: true,
-        inputs: [],
-        name: 'INIT_CODE_PAIR_HASH',
-        outputs: [{ internalType: 'bytes32', name: '', type: 'bytes32' }],
-        payable: false,
-        stateMutability: 'view',
-        type: 'function',
-      },
-      {
-        constant: true,
-        inputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-        name: 'allPairs',
-        outputs: [{ internalType: 'address', name: '', type: 'address' }],
-        payable: false,
-        stateMutability: 'view',
-        type: 'function',
-      },
-      {
-        constant: true,
-        inputs: [],
-        name: 'allPairsLength',
-        outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-        payable: false,
-        stateMutability: 'view',
-        type: 'function',
-      },
-      {
-        constant: false,
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'tokenA',
-            type: 'address',
-          },
-          {
-            internalType: 'address',
-            name: 'tokenB',
-            type: 'address',
-          },
-        ],
-        name: 'createPair',
-        outputs: [{ internalType: 'address', name: 'pair', type: 'address' }],
-        payable: false,
-        stateMutability: 'nonpayable',
-        type: 'function',
-      },
-      {
-        constant: true,
-        inputs: [],
-        name: 'feeTo',
-        outputs: [{ internalType: 'address', name: '', type: 'address' }],
-        payable: false,
-        stateMutability: 'view',
-        type: 'function',
-      },
-      {
-        constant: true,
-        inputs: [],
-        name: 'feeToSetter',
-        outputs: [{ internalType: 'address', name: '', type: 'address' }],
-        payable: false,
-        stateMutability: 'view',
-        type: 'function',
-      },
-      {
-        constant: true,
-        inputs: [
-          { internalType: 'address', name: '', type: 'address' },
-          { internalType: 'address', name: '', type: 'address' },
-        ],
-        name: 'getPair',
-        outputs: [{ internalType: 'address', name: '', type: 'address' }],
-        payable: false,
-        stateMutability: 'view',
-        type: 'function',
-      },
-      {
-        constant: false,
-        inputs: [
-          {
-            internalType: 'address',
-            name: '_feeTo',
-            type: 'address',
-          },
-        ],
-        name: 'setFeeTo',
-        outputs: [],
-        payable: false,
-        stateMutability: 'nonpayable',
-        type: 'function',
-      },
-      {
-        constant: false,
-        inputs: [
-          {
-            internalType: 'address',
-            name: '_feeToSetter',
-            type: 'address',
-          },
-        ],
-        name: 'setFeeToSetter',
-        outputs: [],
-        payable: false,
-        stateMutability: 'nonpayable',
-        type: 'function',
-      },
-    ],
-    false
-  )
-}
-
 export function useSushiRollContract(version: 'v1' | 'v2' = 'v2'): Contract | null {
   const { chainId } = useActiveWeb3React()
   let address: string | undefined
@@ -450,14 +287,6 @@ export function useSushiRollContract(version: 'v1' | 'v2' = 'v2'): Contract | nu
   }
   return useContract(address, SUSHIROLL_ABI, true)
 }
-
-// export function usePancakeRollV1Contract(): Contract | null {
-//     return useContract('0x677978dE066b3f5414eeA56644d9fCa3c75482a1', SUSHIROLL_ABI, true)
-// }
-
-// export function usePancakeRollV2Contract(): Contract | null {
-//     return useContract('', SUSHIROLL_ABI, true)
-// }
 
 export function useDashboardContract(): Contract | null {
   const { chainId } = useActiveWeb3React()

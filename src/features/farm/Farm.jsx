@@ -94,7 +94,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
       try {
         const pending = await pendingSoul(pid)
         const formatted = ethers.utils.formatUnits(pending)
-        const parsed = Number(formatted).toFixed().toString()
+        const parsed = Number(formatted).toFixed(1).toString()
         setPending(parsed)
       } catch (err) {
         console.log(err)
@@ -140,6 +140,17 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
         console.log(e)
         return
       }
+    }
+  }
+
+  const handleHarvest = async () => {
+    try {
+      const tx = await withdraw(pid, 0)
+      await tx.wait()
+      await fetchPending(pid)
+    } catch (e) {
+      alert(e.message)
+      console.log(e)
     }
   }
 
@@ -230,7 +241,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
         <DetailsContainer>
           <DetailsWrapper>
             <FunctionBox width="30%">
-              <SubmitButton primaryColour="#4afd94" hoverColour="#4afd94" onClick={() => withdraw(pid, 0)}>
+              <SubmitButton primaryColour="#4afd94" hoverColour="#4afd94" onClick={() => handleHarvest()}>
                 Harvest
               </SubmitButton>
             </FunctionBox>

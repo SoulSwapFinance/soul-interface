@@ -50,11 +50,11 @@ msgstr "Add"
 msgid "Add Liquidity"
 msgstr "Add Liquidity"
 
+msgid "Add SEANCE to your MetaMask wallet"
+msgstr "Add SEANCE to your MetaMask wallet"
+
 msgid "Add SOUL to your MetaMask wallet"
 msgstr "Add SOUL to your MetaMask wallet"
-
-msgid "Add SPELL to your MetaMask wallet"
-msgstr "Add SPELL to your MetaMask wallet"
 
 msgid "Add collateral in order to borrow assets"
 msgstr "Add collateral in order to borrow assets"
