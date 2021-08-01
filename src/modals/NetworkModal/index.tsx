@@ -1,6 +1,5 @@
 import { NETWORK_ICON, NETWORK_LABEL } from '../../constants/networks'
 import { useModalOpen, useNetworkModalToggle } from '../../state/application/hooks'
-
 import { ApplicationModal } from '../../state/application/actions'
 import { ChainId } from '@soulswap/sdk'
 import Image from 'next/image'
@@ -44,6 +43,17 @@ export const SUPPORTED_NETWORKS: {
     },
     rpcUrls: ['https://rpcapi.fantom.network'],
     blockExplorerUrls: ['https://ftmscan.com'],
+  },
+  [ChainId.FANTOM_TESTNET]: {
+    chainId: '0xFA2',
+    chainName: 'Fantom Testnet',
+    nativeCurrency: {
+      name: 'Fantom',
+      symbol: 'FTM',
+      decimals: 18,
+    },
+    rpcUrls: ['https://rpc.testnet.fantom.network'],
+    blockExplorerUrls: ['https://testnet.ftmscan.com'],
   },
   [ChainId.BSC]: {
     chainId: '0x38',

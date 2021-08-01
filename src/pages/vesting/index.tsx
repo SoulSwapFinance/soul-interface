@@ -2,7 +2,6 @@ import { Currency, CurrencyAmount, Token } from '@soulswap/sdk'
 import React, { useEffect, useState } from 'react'
 import { useClaimCallback, useUserUnclaimedAmount } from '../../state/claim/hooks'
 import { useModalOpen, useToggleSelfClaimModal } from '../../state/application/hooks'
-
 import { ApplicationModal } from '../../state/application/actions'
 import { BigNumber } from '@ethersproject/bignumber'
 import Button from '../../components/Button'
@@ -134,7 +133,7 @@ export default function Vesting() {
                 <br />
                 <br />
                 {i18n._(t`Additional records and weekly merkle updates can be found on`)}{' '}
-                <ExternalLink href="https://github.com/sushiswap/sushi-vesting">Github</ExternalLink>
+                <ExternalLink href="https://github.com/soulswap/soul-vesting">Github</ExternalLink>
               </>
             </div>
           </div>
@@ -196,14 +195,14 @@ export default function Vesting() {
           </div>
           <div className="relative w-full overflow-hidden rounded bg-dark-900">
             <div className="flex flex-col gap-3 p-4">
-              <div className="font-bold text-white">{i18n._(t`Things you can do with your SUSHI`)}</div>
+              <div className="font-bold text-white">{i18n._(t`Things you can do with your SOUL`)}</div>
               <div className="p-4 rounded bg-dark-800">
                 <Link href="/stake">
                   <a className="flex items-center justify-between gap-3">
                     <div className="flex flex-col gap-1">
-                      <div className="font-bold text-white">{i18n._(t`Stake SUSHI for xSUSHI`)}</div>
+                      <div className="font-bold text-white">{i18n._(t`Stake SOUL for SPELL`)}</div>
                       <div className="text-sm text-secondary">
-                        {t`Gain governance rights with xSUSHI and earn 5% APR (0.05% of
+                        {t`Gain governance rights with SPELL and earn 5% APR (0.05% of
                                                             all swaps from all chains)`}
                       </div>
                     </div>
@@ -219,7 +218,7 @@ export default function Vesting() {
                     <div className="flex flex-col gap-1">
                       <div className="font-bold text-white">{i18n._(t`Stack Yields with SAAVE`)}</div>
                       <div className="text-sm text-secondary">
-                        {t`Stake into xSUSHI add collateral as axSUSHI on Aave all in
+                        {t`Stake into SPELL add collateral as aSPELL on Aave all in
                                                             one click`}
                       </div>
                     </div>
@@ -231,10 +230,10 @@ export default function Vesting() {
               </div>
               <div className="p-4 rounded bg-dark-800">
                 <div className="flex flex-col gap-1">
-                  <div className="font-bold text-white">{i18n._(t`Deposit SUSHI into BentoBox`)}</div>
+                  <div className="font-bold text-white">{i18n._(t`Deposit SOUL into BentoBox`)}</div>
                   <div className="text-sm text-secondary">
                     {t`(COMING SOON) Accrue automatic yield through flash loans and
-                                                            SUSHI strategies`}
+                                                            SOUL strategies`}
                   </div>
                 </div>
               </div>

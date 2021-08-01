@@ -5,6 +5,7 @@
   "scripts": {
     "analyze": "ANALYZE=true yarn build && serve .next -n",
     "dev": "next dev",
+    "bdev": "next build && next dev",
     "inspect": "NODE_OPTIONS='--inspect' next dev",
     "build": "yarn lingui && next build",
     "start": "next start",
@@ -54,9 +55,9 @@
     "@ramp-network/ramp-instant-sdk": "^2.4.6",
     "@reach/dialog": "^0.15.2",
     "@reduxjs/toolkit": "^1.6.0",
-    "@soulswap/sdk":"^0.0.6",
-    "@soulswap/swap-core":"^0.0.3",
+    "@soulswap/sdk": "^0.0.9",
     "@soulswap/soul-data": "^1.0.0",
+    "@soulswap/swap-core": "^0.0.3",
     "@sushiswap/chainlink-whitelist": "0.2.2",
     "@sushiswap/core": "2.0.0-canary.0",
     "@sushiswap/default-token-list": "11.0.0",
@@ -144,5 +145,6 @@
     "entrypoints": [
       "src/pages"
     ]
-  }
+  },
+  "dependencies": {}
 }

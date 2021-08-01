@@ -15,7 +15,7 @@ msgstr ""
 
 msgid ""
 "(COMING SOON) Accrue automatic yield through flash loans and\n"
-"SUSHI strategies"
+"SOUL strategies"
 msgstr ""
 
 msgid "1 Hour"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "30 Days"
 msgstr ""
 
-msgid "A portion of each trade (0.05%) goes to xSUSHI holders as a protocol incentive."
+msgid "A portion of each trade (0.05%) goes to SPELL holders as a protocol incentive."
 msgstr ""
 
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
@@ -286,7 +286,7 @@ msgstr ""
 msgid "Deposit"
 msgstr "Depositar"
 
-msgid "Deposit SUSHI into BentoBox"
+msgid "Deposit SOUL into BentoBox"
 msgstr ""
 
 msgid "Deposit tokens into BentoBox for all the yields"
@@ -383,11 +383,14 @@ msgstr ""
 msgid "Find Pool"
 msgstr "Buscar piscina"
 
+msgid "Follow us on Twitter."
+msgstr ""
+
 msgid ""
 "For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL\n"
-"proportional to your share of the SpellBound. When your SOUL is staked into the SpellBound, you recieve\n"
-"SPELL in return for voting rights and a fully composable token that can interact with other protocols.\n"
-"Your SPELL is continuously compounding, when you unstake you will receive all the originally deposited\n"
+"proportional to your share of the SEANCE. When your SOUL is staked into the Circle, you recieve\n"
+"SEANCE in return for voting rights and a fully composable token that can interact with other protocols.\n"
+"Your SEANCE is continuously compounding, when you unstake you will receive all the originally deposited\n"
 "SOUL and any additional from fees."
 msgstr ""
 
@@ -398,7 +401,7 @@ msgid "Gain exposure to tokens without reducing your assets. Leverage will enabl
 msgstr "Obtenga exposición a tokens sin reducir sus activos. El apalancamiento le permitirá tomar posiciones cortas contra activos y ganar dinero con los movimientos a la baja."
 
 msgid ""
-"Gain governance rights with xSUSHI and earn 5% APR (0.05% of\n"
+"Gain governance rights with SPELL and earn 5% APR (0.05% of\n"
 "all swaps from all chains)"
 msgstr ""
 
@@ -480,6 +483,9 @@ msgstr ""
 msgid "Join the community on Discord."
 msgstr "Únete a la comunidad en Discord."
 
+msgid "Join the conversation on Telegram."
+msgstr ""
+
 msgid "Korean"
 msgstr ""
 
@@ -540,9 +546,6 @@ msgstr ""
 msgid "Loading your {exchange} liquidity positions"
 msgstr "Cargando sus posiciones de liquidez {exchange}"
 
-msgid "Loading..."
-msgstr "Cargando..."
-
 msgid "MAX"
 msgstr "MAX"
 
@@ -575,7 +578,7 @@ msgstr ""
 msgid "Max"
 msgstr "Max"
 
-msgid "Maximize yield by staking your SOUL for SPELL"
+msgid "Maximize yield by staking SOUL for SEANCE"
 msgstr ""
 
 msgid "Maximum sent"
@@ -608,7 +611,7 @@ msgstr ""
 msgid "My Orders"
 msgstr ""
 
-msgid "My SUSHI"
+msgid "My SOUL"
 msgstr ""
 
 msgid "Network not supported yet"
@@ -793,6 +796,9 @@ msgstr ""
 msgid "SLP"
 msgstr ""
 
+msgid "SPELL Fee"
+msgstr ""
+
 msgid "Search name or paste address"
 msgstr "Buscar nombre o pegar dirección"
 
@@ -850,19 +856,19 @@ msgstr "Apile los rendimientos con SAAVE"
 msgid "Stake"
 msgstr "Apostar"
 
-msgid "Stake SOUL"
+msgid "Stake Auto Reinvesting SOUL"
 msgstr ""
 
-msgid "Stake SUSHI for xSUSHI"
+msgid "Stake Manual SOUL"
+msgstr ""
+
+msgid "Stake SOUL for SPELL"
 msgstr ""
 
 msgid ""
-"Stake into xSUSHI add collateral as axSUSHI on Aave all in\n"
+"Stake into SPELL add collateral as aSPELL on Aave all in\n"
 "one click"
 msgstr ""
-
-msgid "Staking APR"
-msgstr "APR de apuesta"
 
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "Suministro {0} {1} y {2} {3}"
@@ -888,6 +894,9 @@ msgstr "Cambiar a:"
 msgid "TVL"
 msgstr "TVL"
 
+msgid "Telegram"
+msgstr ""
+
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""
 
@@ -906,7 +915,7 @@ msgstr ""
 msgid "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
 msgstr ""
 
-msgid "Things you can do with your SUSHI"
+msgid "Things you can do with your SOUL"
 msgstr ""
 
 msgid "This token doesn't appear on the active token list(s). Make sure this is the token that you want to trade."
@@ -968,11 +977,20 @@ msgstr "Intente habilitar operaciones de varios saltos"
 msgid "Turn On Expert Mode"
 msgstr "Activar el modo experto"
 
+msgid "Twitter"
+msgstr ""
+
 msgid "Unknown error{0}. Try increasing your slippage tolerance."
 msgstr ""
 
 msgid "Unstake"
 msgstr "Desapuntar"
+
+msgid "Unstake Auto Reinvesting SOUL"
+msgstr ""
+
+msgid "Unstake Manual SOUL"
+msgstr ""
 
 msgid "Unstaked"
 msgstr "Sin apuntar"
@@ -995,9 +1013,6 @@ msgstr ""
 msgid "Used"
 msgstr ""
 
-msgid "Vesting"
-msgstr "Conferir"
-
 msgid "Vesting is executed within the guidelines selected by the community in"
 msgstr ""
 
@@ -1006,9 +1021,6 @@ msgstr ""
 
 msgid "View Liquidity Positions"
 msgstr ""
-
-msgid "View Stats"
-msgstr "Ver estadísticas"
 
 msgid "View on explorer"
 msgstr "Ver en el explorador"
@@ -1022,9 +1034,6 @@ msgstr "Cartera"
 msgid "Wallet Balance"
 msgstr "Saldo de Wallet"
 
-msgid "Weekly unlocks from the vesting period."
-msgstr ""
-
 msgid "When creating a pair you are the first liquidity provider. The ratio of tokens you add will set the price of this pool. Once you are happy with the rate, click supply to review"
 msgstr "Al crear un par, eres el primer proveedor de liquidez. La proporción de tokens que agregue establecerá el precio de este grupo. Una vez que esté satisfecho con la tarifa, haga clic en suministrar para revisar"
 
@@ -1036,9 +1045,6 @@ msgstr "Envoltura"
 
 msgid "Wrong Network"
 msgstr "Red incorrecta"
-
-msgid "Yesterday's APR"
-msgstr "APR de ayer"
 
 msgid "You Pay:"
 msgstr ""
@@ -1075,9 +1081,6 @@ msgstr ""
 
 msgid "Your Liquidity"
 msgstr "Tu liquidez"
-
-msgid "Your SpellBound Stats"
-msgstr ""
 
 msgid "Your Staked"
 msgstr "Tu apostado"
@@ -1143,9 +1146,6 @@ msgid "or the transaction will revert."
 msgstr ""
 
 msgid "xDai Bridge"
-msgstr ""
-
-msgid "xSUSHI Fee"
 msgstr ""
 
 #. js-lingui:icu=%7B0%2C+plural%2C+one+%7BToken%7D+many+%7BTokens%7D%7D&pluralize_on=0

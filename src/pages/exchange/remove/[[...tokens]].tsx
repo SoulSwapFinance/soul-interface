@@ -9,7 +9,6 @@ import { calculateGasMargin, calculateSlippageAmount } from '../../../functions/
 import { useBurnActionHandlers, useBurnState, useDerivedBurnInfo } from '../../../state/burn/hooks'
 import { usePairContract, useRouterContract } from '../../../hooks/useContract'
 
-import { AddRemoveTabs } from '../../../components/NavigationTabs'
 import Alert from '../../../components/Alert'
 import { ArrowDownIcon } from '@heroicons/react/solid'
 import { AutoColumn } from '../../../components/Column'
@@ -24,8 +23,7 @@ import { Field } from '../../../state/burn/actions'
 import Head from 'next/head'
 import Header from '../../../components/ExchangeHeader'
 import Link from 'next/link'
-import LiquidityHeader from '../../../features/liquidity/LiquidityHeader'
-import LiquidityPrice from '../../../features/liquidity/LiquidityPrice'
+// import LiquidityHeader sfrom '../../../features/liquidity/LiquidityHeader'
 import { MinimalPositionCard } from '../../../components/PositionCard'
 import NavLink from '../../../components/NavLink'
 import PercentInputPanel from '../../../components/PercentInputPanel'
@@ -733,11 +731,6 @@ export default function Remove() {
 
       <DoubleGlowShadow>
         <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
-          {/* <AddRemoveTabs
-          creating={false}
-          adding={false}
-          defaultSlippage={DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE}
-        /> */}
           <Header input={currencyA} output={currencyB} allowedSlippage={allowedSlippage} />
           <div>
             <TransactionConfirmationModal

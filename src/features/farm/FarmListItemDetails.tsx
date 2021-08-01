@@ -1,5 +1,5 @@
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
-import { ChainId, SOUL_SUMMONER_ADDRESS as MASTERCHEF_V1_ADDRESS, Token, ZERO } from '@soulswap/sdk'
+import { ChainId, Token, ZERO } from '@soulswap/sdk'
 import { Chef, PairType } from './enum'
 import { Disclosure, Transition } from '@headlessui/react'
 import React, { useState } from 'react'
@@ -20,6 +20,7 @@ import useSoulSummoner from './useSoulSummoner'
 import usePendingReward from './usePendingReward'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { useTransactionAdder } from '../../state/transactions/hooks'
+import { BigNumber } from 'ethers'
 
 const FarmListItem = ({ farm }) => {
   const { i18n } = useLingui()
@@ -50,11 +51,8 @@ const FarmListItem = ({ farm }) => {
   const reward = usePendingReward(farm)
 
   const APPROVAL_ADDRESSES = {
-    [Chef.MASTERCHEF_V1]: { [ChainId.MAINNET]: MASTERCHEF_V1_ADDRESS[ChainId.MAINNET] },
     [Chef.SOUL_SUMMONER]: { [ChainId.MAINNET]: SOUL_SUMMONER_ADDRESS[ChainId.MAINNET] },
-    [Chef.MASTERCHEF_V1]: { [ChainId.FANTOM]: MASTERCHEF_V1_ADDRESS[ChainId.FANTOM] },
     [Chef.SOUL_SUMMONER]: { [ChainId.FANTOM]: SOUL_SUMMONER_ADDRESS[ChainId.FANTOM] },
-    [Chef.MASTERCHEF_V1]: { [ChainId.FANTOM_TESTNET]: MASTERCHEF_V1_ADDRESS[ChainId.FANTOM_TESTNET] },
     [Chef.SOUL_SUMMONER]: { [ChainId.FANTOM_TESTNET]: SOUL_SUMMONER_ADDRESS[ChainId.FANTOM_TESTNET] },
     [Chef.MINICHEF]: {
       [ChainId.MATIC]: MINICHEF_ADDRESS[ChainId.MATIC],
@@ -68,7 +66,7 @@ const FarmListItem = ({ farm }) => {
 
   const [approvalState, approve] = useApproveCallback(typedDepositValue, APPROVAL_ADDRESSES[farm.chef][chainId])
 
-  const { deposit, withdraw, harvest } = useSoulSummoner(farm.chef)
+  const { deposit, withdraw } = useSoulSummoner()
 
   return (
     <Transition
@@ -197,7 +195,7 @@ const FarmListItem = ({ farm }) => {
               onClick={async () => {
                 setPendingTx(true)
                 try {
-                  const tx = await harvest(farm.id)
+                  const tx = await withdraw(farm.id, BigNumber.from(0))
                   addTransaction(tx, {
                     summary: `Harvest ${farm.pair.name}`,
                   })

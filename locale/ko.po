@@ -15,7 +15,7 @@ msgstr ""
 
 msgid ""
 "(COMING SOON) Accrue automatic yield through flash loans and\n"
-"SUSHI strategies"
+"SOUL strategies"
 msgstr ""
 
 msgid "1 Hour"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "30 Days"
 msgstr ""
 
-msgid "A portion of each trade (0.05%) goes to xSUSHI holders as a protocol incentive."
+msgid "A portion of each trade (0.05%) goes to SPELL holders as a protocol incentive."
 msgstr ""
 
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
@@ -286,7 +286,7 @@ msgstr ""
 msgid "Deposit"
 msgstr "예금"
 
-msgid "Deposit SUSHI into BentoBox"
+msgid "Deposit SOUL into BentoBox"
 msgstr ""
 
 msgid "Deposit tokens into BentoBox for all the yields"
@@ -383,11 +383,14 @@ msgstr ""
 msgid "Find Pool"
 msgstr "풀 찾기"
 
+msgid "Follow us on Twitter."
+msgstr ""
+
 msgid ""
 "For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL\n"
-"proportional to your share of the SpellBound. When your SOUL is staked into the SpellBound, you recieve\n"
-"SPELL in return for voting rights and a fully composable token that can interact with other protocols.\n"
-"Your SPELL is continuously compounding, when you unstake you will receive all the originally deposited\n"
+"proportional to your share of the SEANCE. When your SOUL is staked into the Circle, you recieve\n"
+"SEANCE in return for voting rights and a fully composable token that can interact with other protocols.\n"
+"Your SEANCE is continuously compounding, when you unstake you will receive all the originally deposited\n"
 "SOUL and any additional from fees."
 msgstr ""
 
@@ -398,7 +401,7 @@ msgid "Gain exposure to tokens without reducing your assets. Leverage will enabl
 msgstr "자산총액 감소 없이 토큰에 노출됩니다. 레버리지를 사용하면 자산에 대해 숏 포지션을 취하고 하락 시 수익을 올릴 수 있습니다."
 
 msgid ""
-"Gain governance rights with xSUSHI and earn 5% APR (0.05% of\n"
+"Gain governance rights with SPELL and earn 5% APR (0.05% of\n"
 "all swaps from all chains)"
 msgstr ""
 
@@ -480,6 +483,9 @@ msgstr ""
 msgid "Join the community on Discord."
 msgstr "Discord 커뮤니티에 가입하세요."
 
+msgid "Join the conversation on Telegram."
+msgstr ""
+
 msgid "Korean"
 msgstr ""
 
@@ -540,9 +546,6 @@ msgstr ""
 msgid "Loading your {exchange} liquidity positions"
 msgstr "{exchange} 유동성 포지션 로드 중"
 
-msgid "Loading..."
-msgstr "로드 중..."
-
 msgid "MAX"
 msgstr "최대"
 
@@ -575,7 +578,7 @@ msgstr ""
 msgid "Max"
 msgstr "최대"
 
-msgid "Maximize yield by staking your SOUL for SPELL"
+msgid "Maximize yield by staking SOUL for SEANCE"
 msgstr ""
 
 msgid "Maximum sent"
@@ -608,7 +611,7 @@ msgstr ""
 msgid "My Orders"
 msgstr ""
 
-msgid "My SUSHI"
+msgid "My SOUL"
 msgstr ""
 
 msgid "Network not supported yet"
@@ -793,6 +796,9 @@ msgstr ""
 msgid "SLP"
 msgstr ""
 
+msgid "SPELL Fee"
+msgstr ""
+
 msgid "Search name or paste address"
 msgstr "이름 검색 또는 주소 붙여넣기"
 
@@ -850,19 +856,19 @@ msgstr "SAAVE로 수익을 쌓으세요"
 msgid "Stake"
 msgstr "스테이킹"
 
-msgid "Stake SOUL"
+msgid "Stake Auto Reinvesting SOUL"
 msgstr ""
 
-msgid "Stake SUSHI for xSUSHI"
+msgid "Stake Manual SOUL"
+msgstr ""
+
+msgid "Stake SOUL for SPELL"
 msgstr ""
 
 msgid ""
-"Stake into xSUSHI add collateral as axSUSHI on Aave all in\n"
+"Stake into SPELL add collateral as aSPELL on Aave all in\n"
 "one click"
 msgstr ""
-
-msgid "Staking APR"
-msgstr "APR 스테이킹"
 
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "{0} {1} 및 {2} {3} 공급 중"
@@ -888,6 +894,9 @@ msgstr "다음으로 스왑:"
 msgid "TVL"
 msgstr "전체 동결 가치"
 
+msgid "Telegram"
+msgstr ""
+
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""
 
@@ -906,7 +915,7 @@ msgstr ""
 msgid "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
 msgstr ""
 
-msgid "Things you can do with your SUSHI"
+msgid "Things you can do with your SOUL"
 msgstr ""
 
 msgid "This token doesn't appear on the active token list(s). Make sure this is the token that you want to trade."
@@ -968,11 +977,20 @@ msgstr "멀티홉 거래 활성화하기"
 msgid "Turn On Expert Mode"
 msgstr "전문가 모드 켜기"
 
+msgid "Twitter"
+msgstr ""
+
 msgid "Unknown error{0}. Try increasing your slippage tolerance."
 msgstr ""
 
 msgid "Unstake"
 msgstr "언스테이크"
+
+msgid "Unstake Auto Reinvesting SOUL"
+msgstr ""
+
+msgid "Unstake Manual SOUL"
+msgstr ""
 
 msgid "Unstaked"
 msgstr "지분 없음"
@@ -995,9 +1013,6 @@ msgstr ""
 msgid "Used"
 msgstr ""
 
-msgid "Vesting"
-msgstr "베스팅"
-
 msgid "Vesting is executed within the guidelines selected by the community in"
 msgstr ""
 
@@ -1006,9 +1021,6 @@ msgstr ""
 
 msgid "View Liquidity Positions"
 msgstr ""
-
-msgid "View Stats"
-msgstr "통계 보기"
 
 msgid "View on explorer"
 msgstr "탐색기에서 보기"
@@ -1022,9 +1034,6 @@ msgstr "지갑"
 msgid "Wallet Balance"
 msgstr "지갑 잔액"
 
-msgid "Weekly unlocks from the vesting period."
-msgstr ""
-
 msgid "When creating a pair you are the first liquidity provider. The ratio of tokens you add will set the price of this pool. Once you are happy with the rate, click supply to review"
 msgstr "쌍을 만들 때 귀하는 최초의 유동성 공급자입니다. 추가하는 토큰의 비율이이 풀의 가격을 설정합니다. 요금에 만족하면 공급을 클릭하여 검토하세요."
 
@@ -1036,9 +1045,6 @@ msgstr "랩"
 
 msgid "Wrong Network"
 msgstr "잘못된 네트워크"
-
-msgid "Yesterday's APR"
-msgstr "어제의 APR"
 
 msgid "You Pay:"
 msgstr ""
@@ -1075,9 +1081,6 @@ msgstr ""
 
 msgid "Your Liquidity"
 msgstr "내 유동성"
-
-msgid "Your SpellBound Stats"
-msgstr ""
 
 msgid "Your Staked"
 msgstr "귀하의 지분"
@@ -1143,9 +1146,6 @@ msgid "or the transaction will revert."
 msgstr ""
 
 msgid "xDai Bridge"
-msgstr ""
-
-msgid "xSUSHI Fee"
 msgstr ""
 
 #. js-lingui:icu=%7B0%2C+plural%2C+one+%7BToken%7D+many+%7BTokens%7D%7D&pluralize_on=0

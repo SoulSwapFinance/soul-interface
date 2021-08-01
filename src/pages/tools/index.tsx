@@ -8,7 +8,7 @@ const tools = [
   {
     id: 1,
     name: 'MEOWSHI',
-    description: 'Redonominate xSUSHI into MEOWSHI',
+    description: 'Redonominate SPELL into MEOWSHI',
     href: '/tools/meowshi',
   },
   // {

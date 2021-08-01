@@ -37,7 +37,7 @@ const PERMITTABLE_TOKENS: {
       name: 'Dai Stablecoin',
       version: '1',
     },
-    // [SOUL[1].address]: { type: PermitType.AMOUNT, name: 'SoulSwap' },
+    // [SOUL[1].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
   },
   // [4]: {
   //   ['0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735']: {
@@ -45,10 +45,10 @@ const PERMITTABLE_TOKENS: {
   //     name: 'Dai Stablecoin',
   //     version: '1',
   //   },
-  //   // [SOUL[4].address]: { type: PermitType.AMOUNT, name: 'SoulSwap' },
+  //   // [SOUL[4].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
   // },
   // [3]: {
-  //   [SOUL[3].address]: { type: PermitType.AMOUNT, name: 'SoulSwap' },
+  //   [SOUL[3].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
   //   ['0x07865c6E87B9F70255377e024ace6630C1Eaa37F']: {
   //     type: PermitType.AMOUNT,
   //     name: 'USD Coin',
@@ -56,11 +56,17 @@ const PERMITTABLE_TOKENS: {
   //   },
   // },
   // [5]: {
-  //   [SOUL[5].address]: { type: PermitType.AMOUNT, name: 'SoulSwap' },
+  //   [SOUL[5].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
   // },
   // [42]: {
-  //   [SOUL[42].address]: { type: PermitType.AMOUNT, name: 'SoulSwap' },
+  //   [SOUL[42].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
   // },
+  // [250]: {
+  //   [SOUL[250].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
+  // },
+  [4002]: {
+    [SOUL[4002].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
+  },
 }
 
 export enum UseERC20PermitState {

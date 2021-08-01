@@ -9,8 +9,6 @@ import {
   useFarmPairAddresses,
   useFarms,
   useKashiPairs,
-  useMasterChefV1SushiPerBlock,
-  useMasterChefV1TotalAllocPoint,
   useMaticPrice,
   useOnePrice,
   usePicklePrice,
@@ -24,7 +22,7 @@ import {
 
 import { ChainId } from '@soulswap/sdk'
 import Container from '../../components/Container'
-import FarmList from '../../features/farm/FarmList'
+// import FarmList from '../../features/farm/FarmList'
 import Head from 'next/head'
 import Menu from '../../features/farm/FarmMenu'
 import React from 'react'
@@ -33,6 +31,8 @@ import { classNames } from '../../functions'
 import dynamic from 'next/dynamic'
 import { usePositions } from '../../features/farm/hooks'
 import { useRouter } from 'next/router'
+
+import { FarmList } from '../../features/farm/Farm'
 
 export default function Farm(): JSX.Element {
   const { chainId } = useActiveWeb3React()
@@ -43,29 +43,13 @@ export default function Farm(): JSX.Element {
 
   const pairAddresses = useFarmPairAddresses()
 
-  const sushiPairs = useSushiPairs({
-    where: {
-      id_in: pairAddresses,
-    },
-  })
+  const sushiPairs = useSushiPairs({ where: { id_in: pairAddresses } })
 
-  const soulPairs = useSoulPairs({
-    where: {
-      id_in: pairAddresses,
-    },
-  })
+  const soulPairs = useSoulPairs({ where: { id_in: pairAddresses } })
 
-  const swapPairs = useSoulPairs({
-    where: {
-      id_in: pairAddresses,
-    },
-  })
+  const swapPairs = useSoulPairs({ where: { id_in: pairAddresses } })
 
-  const kashiPairs = useKashiPairs({
-    where: {
-      id_in: pairAddresses,
-    },
-  })
+  const kashiPairs = useKashiPairs({ where: { id_in: pairAddresses } })
 
   const farms = useFarms()
 
@@ -75,24 +59,9 @@ export default function Farm(): JSX.Element {
 
   const averageBlock = useAverageBlock()
 
-  const masterChefV1TotalAllocPoint = useMasterChefV1TotalAllocPoint()
-
-  const masterChefV1SushiPerBlock = useMasterChefV1SushiPerBlock()
-
   // TODO: Obviously need to sort this out but this is fine for time being,
   // prices are only loaded when needed for a specific network
-  const [
-    soulPrice,
-    sushiPrice,
-    ethPrice,
-    maticPrice,
-    alcxPrice,
-    cvxPrice,
-    stakePrice,
-    onePrice,
-    picklePrice,
-    mphPrice,
-  ] = [
+  const [soulPrice, ethPrice, maticPrice, alcxPrice, cvxPrice, stakePrice, onePrice, picklePrice, mphPrice] = [
     useSoulPrice(),
     useSushiPrice(),
     useEthPrice(),
@@ -119,7 +88,7 @@ export default function Farm(): JSX.Element {
     pool.balance = pool?.balance || pool?.slpBalance
 
     const swapPair = swapPairs?.find((pair) => pair.id === pool.pair)
-    const kashiPair = kashiPairs?.find((pair) => pair.id === pool.pair)
+    const kashiPair = swapPairs?.find((pair) => pair.id === pool.pair)
 
     const type = swapPair ? PairType.SWAP : PairType.KASHI
 
@@ -130,9 +99,8 @@ export default function Farm(): JSX.Element {
     function getRewards() {
       // TODO: Some subgraphs give soulPerBlock & soulPerSecond, and mcv2 gives nothing
       const soulPerSecond = pool?.owner?.soulPerSecond / 1e18 || (pool?.owner?.soulPerSecond / 1e18) * averageBlockTime
-      // || masterChefV1SushiPerBlock // todo: update
 
-      // const rewardPerBlock = (pool.allocPoint / pool.owner.totalAllocPoint) * soulPerBlock
+      // const rewardPerBlock = (pool.allocPoint / pool.owner.totalAllocPoint) * soulPerSecond
       const rewardPerSecond = (pool.allocPoint / pool.owner.totalAllocPoint) * soulPerSecond
 
       const defaultReward = {
@@ -148,8 +116,6 @@ export default function Farm(): JSX.Element {
 
       if (pool.chef === Chef.SOUL_SUMMONER) {
         // override for mcv2...
-        pool.owner.totalAllocPoint = masterChefV1TotalAllocPoint
-
         const REWARDS = [
           {
             token: 'ALCX',
@@ -191,7 +157,7 @@ export default function Farm(): JSX.Element {
         return [...defaultRewards, REWARDS[pool.id]]
       } else if (pool.chef === Chef.MINICHEF) {
         const soulPerSecond = ((pool.allocPoint / pool.miniChef.totalAllocPoint) * pool.miniChef.soulPerSecond) / 1e18
-        const soulPerBlock = soulPerSecond * averageBlockTime
+        // const soulPerBlock = soulPerSecond * averageBlockTime
         const soulPerDay = soulPerSecond * secondsPerDay
         const rewardPerSecond =
           ((pool.allocPoint / pool.miniChef.totalAllocPoint) * pool.rewarder.rewardPerSecond) / 1e18
@@ -286,7 +252,7 @@ export default function Farm(): JSX.Element {
     .filter((farm) => {
       return (
         (swapPairs && swapPairs.find((pair) => pair.id === farm.pair)) ||
-        (kashiPairs && kashiPairs.find((pair) => pair.id === farm.pair))
+        (swapPairs && swapPairs.find((pair) => pair.id === farm.pair))
       )
     })
     .map(map)
@@ -314,27 +280,22 @@ export default function Farm(): JSX.Element {
         <Menu positionsLength={positions.length} />
       </div>
       <div className={classNames('space-y-6 col-span-4 lg:col-span-3')}>
-        <Search
+        {/* <Search
           search={search}
           term={term}
           inputProps={{
             className:
               'relative w-full bg-transparent border border-transparent focus:border-gradient-r-blue-pink-dark-900 rounded placeholder-secondary focus:placeholder-primary font-bold text-base px-6 py-3.5',
           }}
-        />
-
-        {/* <div className="flex items-center text-lg font-bold text-high-emphesis whitespace-nowrap">
-            Ready to Stake{' '}
-            <div className="w-full h-0 ml-4 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis md:border-gradient-r-blue-pink-dark-800 opacity-20"></div>
-          </div>
-          <FarmList farms={filtered} term={term} /> */}
+        /> */}
 
         <div className="flex items-center text-lg font-bold text-high-emphesis whitespace-nowrap">
           Farms{' '}
           <div className="w-full h-0 ml-4 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis md:border-gradient-r-blue-pink-dark-800 opacity-20"></div>
         </div>
 
-        <FarmList farms={result} term={term} />
+        {/* <FarmList farms={result} term={term} /> */}
+        <FarmList />
       </div>
     </Container>
   )

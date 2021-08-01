@@ -15,7 +15,7 @@ msgstr ""
 
 msgid ""
 "(COMING SOON) Accrue automatic yield through flash loans and\n"
-"SUSHI strategies"
+"SOUL strategies"
 msgstr ""
 
 msgid "1 Hour"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "30 Days"
 msgstr ""
 
-msgid "A portion of each trade (0.05%) goes to xSUSHI holders as a protocol incentive."
+msgid "A portion of each trade (0.05%) goes to SPELL holders as a protocol incentive."
 msgstr ""
 
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
@@ -286,11 +286,11 @@ msgstr ""
 msgid "Deposit"
 msgstr "Einzahlen"
 
-msgid "Deposit SUSHI into BentoBox"
+msgid "Deposit SOUL into BentoBox"
 msgstr ""
 
 msgid "Deposit tokens into BentoBox for all the yields"
-msgstr "Zahlen Sie Token für alle Erträge in BentoBox ein"
+msgstr ""
 
 msgid "Deposit {0} into BentoBox"
 msgstr ""
@@ -383,11 +383,14 @@ msgstr ""
 msgid "Find Pool"
 msgstr "Pool finden"
 
+msgid "Follow us on Twitter."
+msgstr ""
+
 msgid ""
 "For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL\n"
-"proportional to your share of the SpellBound. When your SOUL is staked into the SpellBound, you recieve\n"
-"SPELL in return for voting rights and a fully composable token that can interact with other protocols.\n"
-"Your SPELL is continuously compounding, when you unstake you will receive all the originally deposited\n"
+"proportional to your share of the SEANCE. When your SOUL is staked into the Circle, you recieve\n"
+"SEANCE in return for voting rights and a fully composable token that can interact with other protocols.\n"
+"Your SEANCE is continuously compounding, when you unstake you will receive all the originally deposited\n"
 "SOUL and any additional from fees."
 msgstr ""
 
@@ -398,7 +401,7 @@ msgid "Gain exposure to tokens without reducing your assets. Leverage will enabl
 msgstr "Erhalten Sie ein Exposure zu Token, ohne Ihr Vermögen zu reduzieren. Mit Leverage können Sie Short-Positionen gegen Vermögenswerte halten und von Abwärtsbewegungen profitieren."
 
 msgid ""
-"Gain governance rights with xSUSHI and earn 5% APR (0.05% of\n"
+"Gain governance rights with SPELL and earn 5% APR (0.05% of\n"
 "all swaps from all chains)"
 msgstr ""
 
@@ -480,6 +483,9 @@ msgstr ""
 msgid "Join the community on Discord."
 msgstr "Treten Sie der Community auf Discord bei."
 
+msgid "Join the conversation on Telegram."
+msgstr ""
+
 msgid "Korean"
 msgstr ""
 
@@ -540,9 +546,6 @@ msgstr ""
 msgid "Loading your {exchange} liquidity positions"
 msgstr "Laden Ihrer {exchange} Liquiditätspositionen"
 
-msgid "Loading..."
-msgstr "Wird geladen ..."
-
 msgid "MAX"
 msgstr "MAX"
 
@@ -575,7 +578,7 @@ msgstr ""
 msgid "Max"
 msgstr "Max"
 
-msgid "Maximize yield by staking your SOUL for SPELL"
+msgid "Maximize yield by staking SOUL for SEANCE"
 msgstr ""
 
 msgid "Maximum sent"
@@ -608,7 +611,7 @@ msgstr ""
 msgid "My Orders"
 msgstr ""
 
-msgid "My SUSHI"
+msgid "My SOUL"
 msgstr ""
 
 msgid "Network not supported yet"
@@ -793,6 +796,9 @@ msgstr ""
 msgid "SLP"
 msgstr ""
 
+msgid "SPELL Fee"
+msgstr ""
+
 msgid "Search name or paste address"
 msgstr "Suchen Sie den Namen oder fügen Sie die Adresse ein"
 
@@ -850,19 +856,19 @@ msgstr "Stapelerträge mit SAAVE"
 msgid "Stake"
 msgstr "Stake"
 
-msgid "Stake SOUL"
+msgid "Stake Auto Reinvesting SOUL"
 msgstr ""
 
-msgid "Stake SUSHI for xSUSHI"
+msgid "Stake Manual SOUL"
+msgstr ""
+
+msgid "Stake SOUL for SPELL"
 msgstr ""
 
 msgid ""
-"Stake into xSUSHI add collateral as axSUSHI on Aave all in\n"
+"Stake into SPELL add collateral as aSPELL on Aave all in\n"
 "one click"
 msgstr ""
-
-msgid "Staking APR"
-msgstr "Staking APR"
 
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "Lieferung von {0} {1} und {2} {3}"
@@ -888,6 +894,9 @@ msgstr "Swap zu:"
 msgid "TVL"
 msgstr "TVL"
 
+msgid "Telegram"
+msgstr ""
+
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""
 
@@ -906,7 +915,7 @@ msgstr ""
 msgid "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
 msgstr ""
 
-msgid "Things you can do with your SUSHI"
+msgid "Things you can do with your SOUL"
 msgstr ""
 
 msgid "This token doesn't appear on the active token list(s). Make sure this is the token that you want to trade."
@@ -968,11 +977,20 @@ msgstr "Versuchen Sie, Multi-Hop-Trades zu aktivieren."
 msgid "Turn On Expert Mode"
 msgstr "Expertenmodus aktivieren"
 
+msgid "Twitter"
+msgstr ""
+
 msgid "Unknown error{0}. Try increasing your slippage tolerance."
 msgstr ""
 
 msgid "Unstake"
 msgstr "Unstake"
+
+msgid "Unstake Auto Reinvesting SOUL"
+msgstr ""
+
+msgid "Unstake Manual SOUL"
+msgstr ""
 
 msgid "Unstaked"
 msgstr "Unstaked"
@@ -995,9 +1013,6 @@ msgstr ""
 msgid "Used"
 msgstr ""
 
-msgid "Vesting"
-msgstr "Vesting"
-
 msgid "Vesting is executed within the guidelines selected by the community in"
 msgstr ""
 
@@ -1006,9 +1021,6 @@ msgstr ""
 
 msgid "View Liquidity Positions"
 msgstr ""
-
-msgid "View Stats"
-msgstr "Statistiken anzeigen"
 
 msgid "View on explorer"
 msgstr "Ansicht auf Explorer"
@@ -1022,9 +1034,6 @@ msgstr "Wallet"
 msgid "Wallet Balance"
 msgstr "Wallet-Guthaben"
 
-msgid "Weekly unlocks from the vesting period."
-msgstr ""
-
 msgid "When creating a pair you are the first liquidity provider. The ratio of tokens you add will set the price of this pool. Once you are happy with the rate, click supply to review"
 msgstr "Beim Erstellen eines Paares sind Sie der erste Liquiditätsanbieter. Das Verhältnis der von Ihnen hinzugefügten Token bestimmt den Preis für diesen Pool. Wenn Sie mit dem Kurs zufrieden sind, klicken Sie auf „Bereitstellen“, um ihn zu überprüfen."
 
@@ -1036,9 +1045,6 @@ msgstr "Wrap"
 
 msgid "Wrong Network"
 msgstr "Falsches Netzwerk"
-
-msgid "Yesterday's APR"
-msgstr "Der gestrige APR"
 
 msgid "You Pay:"
 msgstr ""
@@ -1075,9 +1081,6 @@ msgstr ""
 
 msgid "Your Liquidity"
 msgstr "Ihre Liquidität"
-
-msgid "Your SpellBound Stats"
-msgstr ""
 
 msgid "Your Staked"
 msgstr "Ihr Stake"
@@ -1143,9 +1146,6 @@ msgid "or the transaction will revert."
 msgstr ""
 
 msgid "xDai Bridge"
-msgstr ""
-
-msgid "xSUSHI Fee"
 msgstr ""
 
 #. js-lingui:icu=%7B0%2C+plural%2C+one+%7BToken%7D+many+%7BTokens%7D%7D&pluralize_on=0

@@ -15,7 +15,7 @@ msgstr ""
 
 msgid ""
 "(COMING SOON) Accrue automatic yield through flash loans and\n"
-"SUSHI strategies"
+"SOUL strategies"
 msgstr ""
 
 msgid "1 Hour"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "30 Days"
 msgstr ""
 
-msgid "A portion of each trade (0.05%) goes to xSUSHI holders as a protocol incentive."
+msgid "A portion of each trade (0.05%) goes to SPELL holders as a protocol incentive."
 msgstr ""
 
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
@@ -284,7 +284,7 @@ msgstr ""
 msgid "Deposit"
 msgstr "存款"
 
-msgid "Deposit SUSHI into BentoBox"
+msgid "Deposit SOUL into BentoBox"
 msgstr ""
 
 msgid "Deposit tokens into BentoBox for all the yields"
@@ -379,11 +379,14 @@ msgstr ""
 msgid "Find Pool"
 msgstr "查找池"
 
+msgid "Follow us on Twitter."
+msgstr ""
+
 msgid ""
 "For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL\n"
-"proportional to your share of the SpellBound. When your SOUL is staked into the SpellBound, you recieve\n"
-"SPELL in return for voting rights and a fully composable token that can interact with other protocols.\n"
-"Your SPELL is continuously compounding, when you unstake you will receive all the originally deposited\n"
+"proportional to your share of the SEANCE. When your SOUL is staked into the Circle, you recieve\n"
+"SEANCE in return for voting rights and a fully composable token that can interact with other protocols.\n"
+"Your SEANCE is continuously compounding, when you unstake you will receive all the originally deposited\n"
 "SOUL and any additional from fees."
 msgstr ""
 
@@ -394,7 +397,7 @@ msgid "Gain exposure to tokens without reducing your assets. Leverage will enabl
 msgstr "在不減少資產的情況下獲得代幣的敞口。杠桿將使您能夠對資產做空，並從下跌趨勢中獲利。"
 
 msgid ""
-"Gain governance rights with xSUSHI and earn 5% APR (0.05% of\n"
+"Gain governance rights with SPELL and earn 5% APR (0.05% of\n"
 "all swaps from all chains)"
 msgstr ""
 
@@ -476,6 +479,9 @@ msgstr ""
 msgid "Join the community on Discord."
 msgstr "加入Discord社區。"
 
+msgid "Join the conversation on Telegram."
+msgstr ""
+
 msgid "Korean"
 msgstr ""
 
@@ -533,9 +539,6 @@ msgstr ""
 msgid "Loading your {exchange} liquidity positions"
 msgstr "正在加載您的{exchange}您的流動性倉位"
 
-msgid "Loading..."
-msgstr "載入中..."
-
 msgid "MAX"
 msgstr "最大數量"
 
@@ -568,7 +571,7 @@ msgstr ""
 msgid "Max"
 msgstr "最大數量"
 
-msgid "Maximize yield by staking your SOUL for SPELL"
+msgid "Maximize yield by staking SOUL for SEANCE"
 msgstr ""
 
 msgid "Maximum sent"
@@ -601,7 +604,7 @@ msgstr ""
 msgid "My Orders"
 msgstr ""
 
-msgid "My SUSHI"
+msgid "My SOUL"
 msgstr ""
 
 msgid "Network not supported yet"
@@ -786,6 +789,9 @@ msgstr ""
 msgid "SLP"
 msgstr ""
 
+msgid "SPELL Fee"
+msgstr ""
+
 msgid "Search name or paste address"
 msgstr "搜索名稱或粘貼地址"
 
@@ -843,19 +849,19 @@ msgstr "使用SAAVE疊加收益"
 msgid "Stake"
 msgstr "質押"
 
-msgid "Stake SOUL"
+msgid "Stake Auto Reinvesting SOUL"
 msgstr ""
 
-msgid "Stake SUSHI for xSUSHI"
+msgid "Stake Manual SOUL"
+msgstr ""
+
+msgid "Stake SOUL for SPELL"
 msgstr ""
 
 msgid ""
-"Stake into xSUSHI add collateral as axSUSHI on Aave all in\n"
+"Stake into SPELL add collateral as aSPELL on Aave all in\n"
 "one click"
 msgstr ""
-
-msgid "Staking APR"
-msgstr "質押APR"
 
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "提供{0} {1}和{2} {3}"
@@ -881,6 +887,9 @@ msgstr "交換至："
 msgid "TVL"
 msgstr "TVL"
 
+msgid "Telegram"
+msgstr ""
+
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""
 
@@ -899,7 +908,7 @@ msgstr ""
 msgid "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
 msgstr ""
 
-msgid "Things you can do with your SUSHI"
+msgid "Things you can do with your SOUL"
 msgstr ""
 
 msgid "This token doesn't appear on the active token list(s). Make sure this is the token that you want to trade."
@@ -961,11 +970,20 @@ msgstr "嘗試啟用多跳交易"
 msgid "Turn On Expert Mode"
 msgstr "開啟專家模式"
 
+msgid "Twitter"
+msgstr ""
+
 msgid "Unknown error{0}. Try increasing your slippage tolerance."
 msgstr ""
 
 msgid "Unstake"
 msgstr "解除抵押"
+
+msgid "Unstake Auto Reinvesting SOUL"
+msgstr ""
+
+msgid "Unstake Manual SOUL"
+msgstr ""
 
 msgid "Unstaked"
 msgstr "解除質押"
@@ -988,9 +1006,6 @@ msgstr ""
 msgid "Used"
 msgstr ""
 
-msgid "Vesting"
-msgstr "鎖倉"
-
 msgid "Vesting is executed within the guidelines selected by the community in"
 msgstr ""
 
@@ -999,9 +1014,6 @@ msgstr ""
 
 msgid "View Liquidity Positions"
 msgstr ""
-
-msgid "View Stats"
-msgstr "查看數據"
 
 msgid "View on explorer"
 msgstr "在瀏覽器查看"
@@ -1015,9 +1027,6 @@ msgstr "錢包"
 msgid "Wallet Balance"
 msgstr "錢包余額"
 
-msgid "Weekly unlocks from the vesting period."
-msgstr ""
-
 msgid "When creating a pair you are the first liquidity provider. The ratio of tokens you add will set the price of this pool. Once you are happy with the rate, click supply to review"
 msgstr "當創建一個交易對時，您是第一個流動性提供者。您添加的代幣比例將決定這個池子的價格。一旦您對該比率滿意，點擊供應進行查看"
 
@@ -1029,9 +1038,6 @@ msgstr "包裹"
 
 msgid "Wrong Network"
 msgstr "錯誤的網絡"
-
-msgid "Yesterday's APR"
-msgstr "昨天的APR"
 
 msgid "You Pay:"
 msgstr ""
@@ -1068,9 +1074,6 @@ msgstr ""
 
 msgid "Your Liquidity"
 msgstr "您的流動性"
-
-msgid "Your SpellBound Stats"
-msgstr ""
 
 msgid "Your Staked"
 msgstr "您在流動性池的占比"
@@ -1136,9 +1139,6 @@ msgid "or the transaction will revert."
 msgstr ""
 
 msgid "xDai Bridge"
-msgstr ""
-
-msgid "xSUSHI Fee"
 msgstr ""
 
 #. js-lingui:icu=%7B0%2C+plural%2C+one+%7BToken%7D+many+%7BTokens%7D%7D&pluralize_on=0

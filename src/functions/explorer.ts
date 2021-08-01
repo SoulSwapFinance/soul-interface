@@ -21,7 +21,15 @@ const builders = {
         return `${prefix}/${type}/${data}`
     }
   },
-
+  fantomTestnet: (chainName: string, data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
+    const prefix = 'https://testnet.ftmscan.com'
+    switch (type) {
+      case 'transaction':
+        return `${prefix}/tx/${data}`
+      default:
+        return `${prefix}/${type}/${data}`
+    }
+  },
   xdai: (chainName: string, data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
     const prefix = `https://blockscout.com/poa/xdai`
     switch (type) {
@@ -209,7 +217,7 @@ const chains: ChainObject = {
   },
   [ChainId.FANTOM_TESTNET]: {
     chainName: 'testnet',
-    builder: builders.fantom,
+    builder: builders.fantomTestnet,
   },
   [ChainId.XDAI]: {
     chainName: 'xdai',

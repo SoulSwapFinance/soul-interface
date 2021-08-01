@@ -15,7 +15,7 @@ msgstr ""
 
 msgid ""
 "(COMING SOON) Accrue automatic yield through flash loans and\n"
-"SUSHI strategies"
+"SOUL strategies"
 msgstr ""
 
 msgid "1 Hour"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "30 Days"
 msgstr ""
 
-msgid "A portion of each trade (0.05%) goes to xSUSHI holders as a protocol incentive."
+msgid "A portion of each trade (0.05%) goes to SPELL holders as a protocol incentive."
 msgstr ""
 
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
@@ -284,7 +284,7 @@ msgstr ""
 msgid "Deposit"
 msgstr "Ký quỹ"
 
-msgid "Deposit SUSHI into BentoBox"
+msgid "Deposit SOUL into BentoBox"
 msgstr ""
 
 msgid "Deposit tokens into BentoBox for all the yields"
@@ -381,11 +381,14 @@ msgstr ""
 msgid "Find Pool"
 msgstr "Tìm mạng lưới"
 
+msgid "Follow us on Twitter."
+msgstr ""
+
 msgid ""
 "For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL\n"
-"proportional to your share of the SpellBound. When your SOUL is staked into the SpellBound, you recieve\n"
-"SPELL in return for voting rights and a fully composable token that can interact with other protocols.\n"
-"Your SPELL is continuously compounding, when you unstake you will receive all the originally deposited\n"
+"proportional to your share of the SEANCE. When your SOUL is staked into the Circle, you recieve\n"
+"SEANCE in return for voting rights and a fully composable token that can interact with other protocols.\n"
+"Your SEANCE is continuously compounding, when you unstake you will receive all the originally deposited\n"
 "SOUL and any additional from fees."
 msgstr ""
 
@@ -396,7 +399,7 @@ msgid "Gain exposure to tokens without reducing your assets. Leverage will enabl
 msgstr "Có cơ hội tiếp cận với các token mà không làm giảm tài sản của bạn. Đòn bẩy sẽ cho phép bạn thực hiện các vị thế bán đối với tài sản và kiếm tiền từ các biến động giảm giá."
 
 msgid ""
-"Gain governance rights with xSUSHI and earn 5% APR (0.05% of\n"
+"Gain governance rights with SPELL and earn 5% APR (0.05% of\n"
 "all swaps from all chains)"
 msgstr ""
 
@@ -478,6 +481,9 @@ msgstr ""
 msgid "Join the community on Discord."
 msgstr "Tham gia cộng đồng trên Discord."
 
+msgid "Join the conversation on Telegram."
+msgstr ""
+
 msgid "Korean"
 msgstr ""
 
@@ -538,9 +544,6 @@ msgstr ""
 msgid "Loading your {exchange} liquidity positions"
 msgstr "Đang tải trạng thái thanh khoản {exchange}"
 
-msgid "Loading..."
-msgstr "Đang tải..."
-
 msgid "MAX"
 msgstr "TỐI ĐA"
 
@@ -573,7 +576,7 @@ msgstr ""
 msgid "Max"
 msgstr "Tối đa"
 
-msgid "Maximize yield by staking your SOUL for SPELL"
+msgid "Maximize yield by staking SOUL for SEANCE"
 msgstr ""
 
 msgid "Maximum sent"
@@ -606,7 +609,7 @@ msgstr ""
 msgid "My Orders"
 msgstr ""
 
-msgid "My SUSHI"
+msgid "My SOUL"
 msgstr ""
 
 msgid "Network not supported yet"
@@ -791,6 +794,9 @@ msgstr ""
 msgid "SLP"
 msgstr ""
 
+msgid "SPELL Fee"
+msgstr ""
+
 msgid "Search name or paste address"
 msgstr "Tìm kiếm tên hoặc dán địa chỉ"
 
@@ -848,19 +854,19 @@ msgstr "Lợi suất cộng dồn với SAAVE"
 msgid "Stake"
 msgstr "Đặt cược"
 
-msgid "Stake SOUL"
+msgid "Stake Auto Reinvesting SOUL"
 msgstr ""
 
-msgid "Stake SUSHI for xSUSHI"
+msgid "Stake Manual SOUL"
+msgstr ""
+
+msgid "Stake SOUL for SPELL"
 msgstr ""
 
 msgid ""
-"Stake into xSUSHI add collateral as axSUSHI on Aave all in\n"
+"Stake into SPELL add collateral as aSPELL on Aave all in\n"
 "one click"
 msgstr ""
-
-msgid "Staking APR"
-msgstr "APR đặt cược"
 
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "Tổng cung {0} {1} và {2} {3}"
@@ -886,6 +892,9 @@ msgstr "Hoán đổi sang:"
 msgid "TVL"
 msgstr "TVL"
 
+msgid "Telegram"
+msgstr ""
+
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""
 
@@ -904,7 +913,7 @@ msgstr ""
 msgid "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
 msgstr ""
 
-msgid "Things you can do with your SUSHI"
+msgid "Things you can do with your SOUL"
 msgstr ""
 
 msgid "This token doesn't appear on the active token list(s). Make sure this is the token that you want to trade."
@@ -966,11 +975,20 @@ msgstr "Thử bật giao dịch nhiều bước"
 msgid "Turn On Expert Mode"
 msgstr "Bật chế độ Chuyên gia"
 
+msgid "Twitter"
+msgstr ""
+
 msgid "Unknown error{0}. Try increasing your slippage tolerance."
 msgstr ""
 
 msgid "Unstake"
 msgstr "Hủy đặt cược"
+
+msgid "Unstake Auto Reinvesting SOUL"
+msgstr ""
+
+msgid "Unstake Manual SOUL"
+msgstr ""
 
 msgid "Unstaked"
 msgstr "Đã hủy đặt cược"
@@ -993,9 +1011,6 @@ msgstr ""
 msgid "Used"
 msgstr ""
 
-msgid "Vesting"
-msgstr "Quyền được hưởng"
-
 msgid "Vesting is executed within the guidelines selected by the community in"
 msgstr ""
 
@@ -1004,9 +1019,6 @@ msgstr ""
 
 msgid "View Liquidity Positions"
 msgstr ""
-
-msgid "View Stats"
-msgstr "Xem số liệu thống kê"
 
 msgid "View on explorer"
 msgstr "Xem trên explorer"
@@ -1020,9 +1032,6 @@ msgstr "Ví tiền"
 msgid "Wallet Balance"
 msgstr "Số dư trên ví"
 
-msgid "Weekly unlocks from the vesting period."
-msgstr ""
-
 msgid "When creating a pair you are the first liquidity provider. The ratio of tokens you add will set the price of this pool. Once you are happy with the rate, click supply to review"
 msgstr "Khi tạo một cặp, bạn là nhà cung cấp thanh khoản đầu tiên. Tỷ lệ token bạn thêm vào sẽ thiết lập giá của mạng lưới này. Khi bạn hài lòng với tỷ lệ, hãy nhấp vào tổng cung để xem xét"
 
@@ -1034,9 +1043,6 @@ msgstr "Bọc lại"
 
 msgid "Wrong Network"
 msgstr "Mạng không chính xác"
-
-msgid "Yesterday's APR"
-msgstr "Tỷ suất lợi nhuận hàng năm của ngày hôm qua"
 
 msgid "You Pay:"
 msgstr ""
@@ -1073,9 +1079,6 @@ msgstr ""
 
 msgid "Your Liquidity"
 msgstr "Tính thanh khoản của bạn"
-
-msgid "Your SpellBound Stats"
-msgstr ""
 
 msgid "Your Staked"
 msgstr "Đặt cược của bạn"
@@ -1141,9 +1144,6 @@ msgid "or the transaction will revert."
 msgstr ""
 
 msgid "xDai Bridge"
-msgstr ""
-
-msgid "xSUSHI Fee"
 msgstr ""
 
 #. js-lingui:icu=%7B0%2C+plural%2C+one+%7BToken%7D+many+%7BTokens%7D%7D&pluralize_on=0
