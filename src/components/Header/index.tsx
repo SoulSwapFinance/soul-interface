@@ -37,7 +37,7 @@ function AppBar(): JSX.Element {
             <div className="px-4 py-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <Image src="/logo.png" alt="Soul" width="32px" height="32px" />
+                  <Image src="/logo.jpg" alt="Soul" width="32px" height="32px" />
                   <div className="hidden sm:block sm:ml-4">
                     <div className="flex space-x-2">
                       {/* <Buy /> */}
@@ -134,7 +134,7 @@ function AppBar(): JSX.Element {
                       library &&
                       library.provider.isMetaMask && ( // TODO: update
                         <>
-                          <QuestionHelper text={i18n._(t`Add SPELL to your MetaMask wallet`)}>
+                          <QuestionHelper text={i18n._(t`Add SEANCE to your MetaMask wallet`)}>
                             <div
                               className="hidden p-0.5 rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800"
                               onClick={() => {
@@ -142,11 +142,11 @@ function AppBar(): JSX.Element {
                                   const params: any = {
                                     type: 'ERC20',
                                     options: {
-                                      address: '0x81582f803a17a4a454a80600e9185b42e32e0fcf',
-                                      symbol: 'SPELL',
+                                      address: '0xD54Cf31D5653F4a062f5DA4C83170A5867d04442',
+                                      symbol: 'SEANCE',
                                       decimals: 18,
                                       image:
-                                        'https://raw.githubusercontent.com/soulswap/assets/master/blockchains/ethereum/assets/0x81582f803a17a4a454a80600e9185b42e32e0fcf/logo.png', // TODO: update
+                                        'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/seance.jpg',
                                     },
                                   }
                                   library.provider
@@ -156,7 +156,7 @@ function AppBar(): JSX.Element {
                                     })
                                     .then((success) => {
                                       if (success) {
-                                        console.log('Successfully added SPELL to MetaMask')
+                                        console.log('Successfully added SEANCE to MetaMask')
                                       } else {
                                         throw new Error('Something went wrong.')
                                       }
@@ -166,8 +166,8 @@ function AppBar(): JSX.Element {
                               }}
                             >
                               <Image
-                                src="/images/tokens/lotus-square.jpg"
-                                alt="SPELL"
+                                src="/images/tokens/seance.jpg"
+                                alt="SEANCE"
                                 width="38px"
                                 height="38px"
                                 objectFit="contain"
@@ -191,8 +191,7 @@ function AppBar(): JSX.Element {
                                   address: SOUL_ADDRESS[chainId],
                                   symbol: 'SOUL',
                                   decimals: 18,
-                                  image:
-                                    'https://raw.githubusercontent.com/soulswap/assets/master/blockchains/ethereum/assets/0x81582f803a17a4a454a80600e9185b42e32e0fcf/logo.png',
+                                  image: 'https://avatars.githubusercontent.com/u/86800113?s=200&v=4',
                                 },
                               }
                               if (library && library.provider.isMetaMask && library.provider.request) {
@@ -213,7 +212,7 @@ function AppBar(): JSX.Element {
                             }}
                           >
                             <Image
-                              src="/images/tokens/scarab-square.jpg"
+                              src="/logo.jpg"
                               alt="SOUL"
                               width="38px"
                               height="38px"

@@ -14,6 +14,7 @@ import {
   DUCK,
   ETH2X_FLI,
   FANTOM,
+  FANTOM_TESTNET,
   FEI,
   FRAX,
   FXS,
