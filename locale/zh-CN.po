@@ -48,10 +48,10 @@ msgstr "添加"
 msgid "Add Liquidity"
 msgstr "添加流动性"
 
-msgid "Add SOUL to your MetaMask wallet"
+msgid "Add SEANCE to your MetaMask wallet"
 msgstr ""
 
-msgid "Add SPELL to your MetaMask wallet"
+msgid "Add SOUL to your MetaMask wallet"
 msgstr ""
 
 msgid "Add collateral in order to borrow assets"
