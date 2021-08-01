@@ -93,7 +93,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
     } else {
       try {
         const pending = await pendingSoul(pid)
-        const formatted = ethers.utils.formatUnits(pending)
+        const formatted = ethers.utils.formatUnits(pending).toString()
         const parsed = Number(formatted).toFixed(1).toString()
         setPending(parsed)
       } catch (err) {
