@@ -115,18 +115,18 @@ export default function Remove() {
     const liquidityAmount = parsedAmounts[Field.LIQUIDITY]
     if (!liquidityAmount) throw new Error('missing liquidity amount')
 
-    if (chainId !== ChainId.HARMONY && gatherPermitSignature) {
-      try {
-        await gatherPermitSignature()
-      } catch (error) {
-        // try to approve if gatherPermitSignature failed for any reason other than the user rejecting it
-        if (error?.code !== 4001) {
-          await approveCallback()
-        }
-      }
-    } else {
-      await approveCallback()
-    }
+    // if (chainId !== ChainId.HARMONY && gatherPermitSignature) {
+    //   try {
+    //     await gatherPermitSignature()
+    //   } catch (error) {
+    //     // try to approve if gatherPermitSignature failed for any reason other than the user rejecting it
+    //     if (error?.code !== 4001) {
+    //       await approveCallback()
+    //     }
+    //   }
+    // } else {
+    await approveCallback()
+    // }
   }
 
   // wrapped onUserInput to clear signatures
@@ -202,42 +202,42 @@ export default function Remove() {
           deadline.toHexString(),
         ]
       }
-    }
-    // we have a signature, use permit versions of remove liquidity
-    else if (signatureData !== null) {
-      // removeLiquidityETHWithPermit
-      if (oneCurrencyIsETH) {
-        methodNames = ['removeLiquidityETHWithPermit', 'removeLiquidityETHWithPermitSupportingFeeOnTransferTokens']
-        args = [
-          currencyBIsETH ? tokenA.address : tokenB.address,
-          liquidityAmount.quotient.toString(),
-          amountsMin[currencyBIsETH ? Field.CURRENCY_A : Field.CURRENCY_B].toString(),
-          amountsMin[currencyBIsETH ? Field.CURRENCY_B : Field.CURRENCY_A].toString(),
-          account,
-          signatureData.deadline,
-          false,
-          signatureData.v,
-          signatureData.r,
-          signatureData.s,
-        ]
-      }
-      // removeLiquidityETHWithPermit
-      else {
-        methodNames = ['removeLiquidityWithPermit']
-        args = [
-          tokenA.address,
-          tokenB.address,
-          liquidityAmount.quotient.toString(),
-          amountsMin[Field.CURRENCY_A].toString(),
-          amountsMin[Field.CURRENCY_B].toString(),
-          account,
-          signatureData.deadline,
-          false,
-          signatureData.v,
-          signatureData.r,
-          signatureData.s,
-        ]
-      }
+      // }
+      // // we have a signature, use permit versions of remove liquidity
+      // else if (signatureData !== null) {
+      //   // removeLiquidityETHWithPermit
+      //   if (oneCurrencyIsETH) {
+      //     methodNames = ['removeLiquidityETHWithPermit', 'removeLiquidityETHWithPermitSupportingFeeOnTransferTokens']
+      //     args = [
+      //       currencyBIsETH ? tokenA.address : tokenB.address,
+      //       liquidityAmount.quotient.toString(),
+      //       amountsMin[currencyBIsETH ? Field.CURRENCY_A : Field.CURRENCY_B].toString(),
+      //       amountsMin[currencyBIsETH ? Field.CURRENCY_B : Field.CURRENCY_A].toString(),
+      //       account,
+      //       signatureData.deadline,
+      //       false,
+      //       signatureData.v,
+      //       signatureData.r,
+      //       signatureData.s,
+      //     ]
+      //   }
+      //   // removeLiquidityETHWithPermit
+      //   else {
+      //     methodNames = ['removeLiquidityWithPermit']
+      //     args = [
+      //       tokenA.address,
+      //       tokenB.address,
+      //       liquidityAmount.quotient.toString(),
+      //       amountsMin[Field.CURRENCY_A].toString(),
+      //       amountsMin[Field.CURRENCY_B].toString(),
+      //       account,
+      //       signatureData.deadline,
+      //       false,
+      //       signatureData.v,
+      //       signatureData.r,
+      //       signatureData.s,
+      //     ]
+      //   }
     } else {
       throw new Error('Attempting to confirm without approval or a signature. Please contact support.')
     }
