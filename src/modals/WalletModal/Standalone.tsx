@@ -7,14 +7,12 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 import AccountDetails from '../../components/AccountDetails'
 import { ApplicationModal } from '../../state/application/actions'
 import ExternalLink from '../../components/ExternalLink'
-// import MetamaskIcon from '../../assets/images/metamask.png'
 import { OVERLAY_READY } from '../../connectors/Fortmatic'
 import Option from './Option'
 import PendingView from './PendingView'
 import ReactGA from 'react-ga'
 import { SUPPORTED_WALLETS } from '../../constants'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
-// import { ReactComponent as Close } from '../../assets/images/x.svg'
 import { XIcon } from '@heroicons/react/outline'
 import { isMobile } from 'react-device-detect'
 import styled from 'styled-components'
@@ -329,8 +327,10 @@ export default function WalletStandalone({
           )}
           {walletView !== WALLET_VIEWS.PENDING && (
             <Blurb>
-              <span>New to Ethereum? &nbsp;</span>{' '}
-              <ExternalLink href="https://ethereum.org/wallets/">Learn more about wallets</ExternalLink>
+              <span>New to Fantom? &nbsp;</span>{' '}
+              <ExternalLink href="https://docs.soulswap.finance/docs/guides/connection-guide">
+                Read Our Docs
+              </ExternalLink>
             </Blurb>
           )}
         </ContentWrapper>
