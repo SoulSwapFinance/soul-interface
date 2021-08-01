@@ -122,8 +122,10 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
       toggleWalletModal()
     } else {
       // Checks if SoulSummoner can move tokens
-      const amount = await allowance(account)
-      if (amount > 0) setApproved(true)
+      const amount = await allowance()
+      if (amount > 0) {
+        setApproved(true)
+      }
       return amount
     }
   }
@@ -133,7 +135,8 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
       toggleWalletModal()
     } else {
       try {
-        await approve()
+        const tx = await approve()
+        await tx.wait()
         await fetchApproval()
       } catch (e) {
         alert(e.message)
