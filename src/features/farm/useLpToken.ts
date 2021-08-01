@@ -23,9 +23,9 @@ export default function useLpToken(lpTokenAddress, soulSummoner) {
 
   // Allowance
   const allowance = useCallback(
-    async (owner: string) => {
+    async (spender: string) => {
       try {
-        const amount = await pairContract?.allowance(owner, lpTokenAddress)
+        const amount = await pairContract?.allowance(account, '0xA65DbEA56E1E202bf03dB5f49ba565fb00Bf9288')
         return amount
       } catch (e) {
         console.log(e)
