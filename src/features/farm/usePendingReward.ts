@@ -14,18 +14,6 @@ const REWARDERS = {
   [ChainId.MATIC]: 'some',
 }
 
-// const useRewarderContract = (farm) => {
-//     const { chainId } = useActiveWeb3React()
-//     const aclxRewarder = useAlcxRewarderContract()
-//     const useComplexRewarderContract = useComplexRewarderContract()
-//     // const rewarderContract = await getContract(
-//     //     rewarderAddress ? rewarderAddress : undefined,
-//     //     ALCX_REWARDER_ABI,
-//     //     library!,
-//     //     undefined
-//     // )
-// }
-
 const usePending = (farm) => {
   const [balance, setBalance] = useState<string>('0')
   const { chainId, account, library } = useActiveWeb3React()
