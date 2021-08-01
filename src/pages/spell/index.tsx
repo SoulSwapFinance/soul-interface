@@ -463,14 +463,14 @@ export default function SoulStake() {
                   <div className="flex items-center space-x-4">
                     <Image
                       className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
-                      src="/images/tokens/soul-square.jpg"
+                      src="/images/tokens/seance.jpg"
                       alt="SEANCE"
                       width={64}
                       height={64}
                     />
                     <div className="flex flex-col justify-center">
                       <p className="text-sm font-bold md:text-lg text-high-emphesis">
-                        {autoStaking ? bounty : seanceBalance ? seanceBalance.toSignificant(4) : '-'}
+                        {seanceBalance ? seanceBalance.toSignificant(4) : '-'}
                       </p>
                       <p className="text-sm md:text-base text-primary">SEANCE</p>
                     </div>
@@ -486,7 +486,7 @@ export default function SoulStake() {
                   <div className="flex items-center ml-8 space-x-4 md:ml-0">
                     <Image
                       className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
-                      src="/images/tokens/soul-square.jpg"
+                      src="/images/tokens/soul.jpg"
                       alt="SOUL"
                       width={64}
                       height={64}
