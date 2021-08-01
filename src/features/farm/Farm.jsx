@@ -36,7 +36,7 @@ import { set } from 'lodash'
 
 // each item will need its own box
 
-const Farm = ({ pid, lpSymbol, lpToken }) => {
+const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
   const { account } = useActiveWeb3React()
 
   const walletConnected = !!account
@@ -192,7 +192,7 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
           <FarmContentWrapper>
             <TokenPairBox>
               {/* 2 token logo combined ? */}
-              <TokenPair target="_blank" href={`https://testnet.ftmscan.com/address/${lpToken}/#code`}>
+              <TokenPair target="_blank" href={`https://exchange.soulswap.xyz/add/${token1}/${token2}`}>
                 {lpSymbol}
               </TokenPair>
             </TokenPairBox>
@@ -287,7 +287,7 @@ export const FarmList = () => {
   const farms = [
     {
       pid: 1,
-      lpSymbol: 'SOUL-FTM',
+      lpSymbol: 'SOUL-WFTM',
       lpAddresses: {
         4002: '0x10c0AFd7C58916C4025d466E11850c7D79219277',
       },
@@ -305,7 +305,7 @@ export const FarmList = () => {
     },
     {
       pid: 3,
-      lpSymbol: 'FTM-FUSD',
+      lpSymbol: 'WFTM-FUSD',
       lpAddresses: {
         4002: '0x675FF12361dD86b45Fde5e7786AfCe4F58510317',
       },
@@ -315,7 +315,14 @@ export const FarmList = () => {
   ]
 
   const farmList = farms.map((farm) => (
-    <Farm key={farm.pid} pid={farm.pid} lpSymbol={farm.lpSymbol} lpToken={farm.lpAddresses[4002]} />
+    <Farm
+      key={farm.pid}
+      pid={farm.pid}
+      lpSymbol={farm.lpSymbol}
+      lpToken={farm.lpAddresses[4002]}
+      token1={farm.token1}
+      token2={farm.token2}
+    />
   ))
   return (
     <>
