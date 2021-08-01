@@ -88,8 +88,8 @@ export default function useSoulSummoner() {
     async (pid: number) => {
       try {
         const tx = await summonerContract?.userInfo(pid, account)
-        const amount = tx?.[0]
-        const rewardDebt = tx?.[1]
+        const amount = tx?.[0].toString()
+        const rewardDebt = tx?.[1].toString()
         return [amount, rewardDebt]
       } catch (e) {
         console.log(e)

@@ -40,7 +40,7 @@ export default function useLpToken(lpTokenAddress, soulSummoner) {
   const balanceOf = useCallback(async () => {
     try {
       const amount = await pairContract?.balanceOf(account)
-      return amount
+      return amount.toString()
     } catch (e) {
       console.log(e)
       alert('allowance error')

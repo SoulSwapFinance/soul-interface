@@ -42,7 +42,7 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
   const toggleWalletModal = useWalletModalToggle()
 
   const { withdraw, deposit, pendingSoul, poolInfo, userInfo } = useSoulSummoner()
-  const { approve, allowance } = useLpToken(lpToken)
+  const { approve, allowance, balanceOf } = useLpToken(lpToken)
 
   const [stakedBal, setStakedBal] = useState(0)
   const [unstakedBal, setUnstakedBal] = useState(0)
@@ -53,26 +53,32 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
   const [showing, setShowing] = useState(false)
 
   const handleShow = () => {
-    fetchBals()
+    // Checks if any amount is staked in PID
+    fetchBals(pid)
     setShowing(!showing)
   }
 
   // Used to get non 1e18 numbers and turn them into 1e18
   const parseAmount = (amount) => {
-    const parsed = ethers.BigNumber.from(amount).mul(ethers.BigNumber.from(10).pow(18)).toString()
+    const bnAmount = ethers.BigNumber.from(amount)
+    const parsed = bnAmount.mul(ethers.BigNumber.from(10).pow(18)).toString()
     return parsed
   }
 
-  const fetchBals = async (pid, account) => {
+  const fetchBals = async (pid) => {
     if (!walletConnected) {
       toggleWalletModal()
     } else {
       try {
-        const result = await userInfo(pid, account)
-        const amount = BigNumber.from(result?.[0])
-        const staked = ethers.utils.formatUnits(amount)
-        setStakedBal(Number(staked).toFixed(0).toString())
-        return [staked]
+        const result1 = await userInfo(pid)
+        const staked = ethers.utils.formatUnits(result1?.[0])
+        setStakedBal(Number(staked).toFixed(3).toString())
+
+        const result2 = await balanceOf(lpToken)
+        const unstaked = ethers.utils.formatUnits(result2)
+        setUnstakedBal(Number(unstaked).toFixed(3).toString())
+
+        return [staked, unstaked]
       } catch (err) {
         console.log(err)
       }
@@ -80,12 +86,12 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
   }
 
   // Fetches connected user pending soul
-  const fetchPending = async (pid, account) => {
+  const fetchPending = async (pid) => {
     if (!walletConnected) {
       toggleWalletModal()
     } else {
       try {
-        const pending = await pendingSoul(pid, account)
+        const pending = await pendingSoul(pid)
         const formatted = ethers.utils.formatUnits(pending)
         const parsed = Number(formatted).toFixed().toString()
         setPending(parsed)
@@ -136,7 +142,31 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
     }
   }
 
-  // uns on render
+  const handleWithdraw = async (amount) => {
+    try {
+      const parsedAmount = await parseAmount(amount)
+      const tx = await withdraw(pid, parsedAmount)
+      await tx.wait()
+      await fetchBals(pid)
+    } catch (e) {
+      alert(e.message)
+      console.log(e)
+    }
+  }
+
+  const handleDeposit = async (amount) => {
+    try {
+      const parsedAmount = await parseAmount(amount)
+      const tx = await deposit(pid, parsedAmount)
+      await tx.wait()
+      await fetchBals(pid)
+    } catch (e) {
+      alert(e.message)
+      console.log(e)
+    }
+  }
+
+  // runs on render
   useEffect(() => {
     fetchMultiplier(pid)
     fetchApproval()
@@ -144,12 +174,10 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
 
   // Runs on render + reruns every second
   useEffect(() => {
-    // Checks if any amount is staked in PID
-    const staked = userInfo(pid, account)
-    if (account && staked?.[0] !== 0) {
+    if (account) {
       const timer = setTimeout(() => {
-        fetchPending(pid, account)
-      }, 1000)
+        fetchPending(pid)
+      }, 3000)
 
       // Clear timeout if the component is unmounted
       return () => clearTimeout(timer)
@@ -184,7 +212,7 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
             </FarmItemBox> */}
 
             <FarmItemBox marginLeft={'100px'}>
-              {/* <FarmItemHeading>Multiplier</FarmItemHeading> */}
+              <FarmItemHeading>Multiplier</FarmItemHeading>
               <FarmItem>{multiplier}x</FarmItem>
             </FarmItemBox>
 
@@ -208,13 +236,13 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
 
             <FunctionBox>
               {/* <button >Max</button> */}
-              {/* <p>Available: {unstakedBal}</p> */}
+              <p>Available: {unstakedBal}</p>
               <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
               {approved ? (
                 <SubmitButton
                   primaryColour="#45b7da"
                   hoverColour="#45b7da"
-                  onClick={() => deposit(pid, parseAmount(document.getElementById('stake').value))}
+                  onClick={() => handleDeposit(document.getElementById('stake').value)}
                 >
                   Stake
                 </SubmitButton>
@@ -226,12 +254,12 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
             </FunctionBox>
 
             <FunctionBox>
-              {/* <p>Staked: {stakedBal}</p> */}
+              <p>Staked: {stakedBal}</p>
               <Input name="unstake" id="unstake" type="number" placeholder="0.0" min="0" />
               <SubmitButton
                 primaryColour="#b72b18"
                 hoverColour="#b72b18"
-                onClick={() => withdraw(pid, parseAmount(document.getElementById('unstake').value))}
+                onClick={() => handleWithdraw(document.getElementById('unstake').value)}
               >
                 Unstake
               </SubmitButton>
@@ -259,24 +287,24 @@ export const FarmList = () => {
       token1: '0xf1277d1ed8ad466beddf92ef448a132661956621',
       token2: '0xcf174a6793fa36a73e8ff18a71bd81c985ef5ab5',
     },
-    // {
-    //   pid: 2,
-    //   lpSymbol: 'SOUL-FUSD',
-    //   lpAddresses: {
-    //     4002: '',
-    //   },
-    //   token1: '',
-    //   token2: '',
-    // },
-    // {
-    //   pid: 3,
-    //   lpSymbol: 'SOUL-PILL',
-    //   lpAddresses: {
-    //     4002: '',
-    //   },
-    //   token1: '',
-    //   token2: '',
-    // },
+    {
+      pid: 2,
+      lpSymbol: 'SOUL-FUSD',
+      lpAddresses: {
+        4002: '0x8AF8D837c524742095de4eBEc56a0B94F644194E',
+      },
+      token1: '0xf1277d1ed8ad466beddf92ef448a132661956621',
+      token2: '0x91ea991bd52EE3C40EdA2509701d905e1Ee54074',
+    },
+    {
+      pid: 3,
+      lpSymbol: 'FTM-FUSD',
+      lpAddresses: {
+        4002: '0x675FF12361dD86b45Fde5e7786AfCe4F58510317',
+      },
+      token1: '0xcf174a6793fa36a73e8ff18a71bd81c985ef5ab5',
+      token2: '0x91ea991bd52EE3C40EdA2509701d905e1Ee54074',
+    },
   ]
 
   const farmList = farms.map((farm) => (
