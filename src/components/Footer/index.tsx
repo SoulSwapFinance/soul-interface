@@ -13,7 +13,7 @@ const Footer = () => {
     // <footer className="absolute bottom-0 flex items-center justify-between w-screen h-20 p-4 mx-auto text-center text-low-emphesis">
     <footer className="flex-shrink-0 w-full">
       <div className="flex items-center justify-between h-20 px-4">
-        {chainId && chainId in ANALYTICS_URL && (
+        {/* {chainId && chainId in ANALYTICS_URL && (
           <ExternalLink
             id={`analytics-nav-link`}
             href={ANALYTICS_URL[chainId] || 'https://analytics.soulswap.finance'}
@@ -32,7 +32,7 @@ const Footer = () => {
               </svg>
             </div>
           </ExternalLink>
-        )}
+        )} */}
         {chainId && chainId === ChainId.MATIC && (
           <ExternalLink
             id={`polygon-bridge-link`}
