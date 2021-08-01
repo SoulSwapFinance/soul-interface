@@ -1,0 +1,55 @@
+{
+    "name": "SoulSwap Default Tokenlist",
+    "timestamp": "2021-07-00T00:00:00.000Z",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0
+    },
+    "tags": {},
+    "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/soul.jpg",
+    "keywords": ["soulswap", "default"],
+    "tokens": [
+       {
+        "name": "Soul Power",
+        "address": "0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5",
+        "symbol": "SOUL",
+        "decimals": 18,
+        "chainId": 4002,
+        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/soul.jpg"
+       },
+      {
+        "name": "Wrapped Fantom",
+        "address": "0xf1277d1ed8ad466beddf92ef448a132661956621",
+        "symbol": "WFTM",
+        "decimals": 18,
+        "chainId": 4002,
+        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/ftm.jpg"
+      },
+      {
+        "name": "Fantom USD",
+        "address": "0x306557358e20aea124b16a548597897858d13cb2",
+        "symbol": "fUSD",
+        "decimals": 18,
+        "chainId": 4002,
+        "logoURI": "https://cdn.worldvectorlogo.com/logos/usd-1.svg"
+      },
+      {
+        "name": "Fantom ETH",
+        "address": "0x910a38ce2a26278c3493a95fe83e092ae821df26",
+        "symbol": "fETH",
+        "decimals": 18,
+        "chainId": 4002,
+        "logoURI": "https://cdn.worldvectorlogo.com/logos/ethereum-eth.svg"
+      },
+      {
+        "name": "Seance Circle",
+        "address": "0xD54Cf31D5653F4a062f5DA4C83170A5867d04442",
+        "symbol": "SEANCE",
+        "decimals": 18,
+        "chainId": 4002,
+        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/seance.jpg"
+      }
+    ]
+}
+  

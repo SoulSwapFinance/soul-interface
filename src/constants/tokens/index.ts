@@ -32,14 +32,14 @@ export const FANTOM_TESTNET: { [key: string]: Token } = {
   SOUL: new Token(ChainId.FANTOM_TESTNET, '0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5', 18, 'SOUL', 'SoulPower'), // 30 JUL
   SEANCE: new Token(ChainId.FANTOM_TESTNET, '0xD858E1a257Cb595Ba395520daD4c9C9592307734', 18, 'SEANCE', 'SeanceCircle'), // 30 JUL
   SPELL: new Token(ChainId.FANTOM_TESTNET, '0xdFDC55e7E7eBA3E7BF2a0E0743f4D3C858FaC37E', 18, 'SPELL', 'SpellBound'), // 30 JUL
-  FUSD: new Token(ChainId.FANTOM_TESTNET, '0x306557358e20aea124b16a548597897858d13cb2', 18, 'FUSD', 'Fantom USD'),
+  FUSD: new Token(ChainId.FANTOM_TESTNET, '0x306557358e20aea124b16a548597897858d13cb2', 18, 'FUSD', 'Fantom USD'), // 31 JUL
   FETH: new Token(
     ChainId.FANTOM_TESTNET,
-    '0x8e5CaC3c48cDe3EFe0a5B01066435cc688F8b8F8',
+    '0x910a38ce2a26278c3493a95fe83e092ae821df26',
     18,
     'fETH',
     'Fantom Synthetic ETH'
-  ),
+  ), // 31 JUL
   WBTC: new Token(
     ChainId.FANTOM_TESTNET,
     '0x2Eb4Ee20d9816Bd6810F69166dD046F09C737201',
