@@ -1,5 +1,10 @@
 import styled from 'styled-components'
 
+export const FlexText = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
 // ---------------------
 //  Row Section
 // ---------------------

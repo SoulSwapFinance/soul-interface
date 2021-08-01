@@ -9,6 +9,7 @@ import useSoulSummoner from './useSoulSummoner'
 import useLpToken from './useLpToken'
 
 import {
+  FlexText,
   FarmContainer,
   FarmRow,
   FarmContentWrapper,
@@ -72,11 +73,11 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
       try {
         const result1 = await userInfo(pid)
         const staked = ethers.utils.formatUnits(result1?.[0])
-        setStakedBal(Number(staked).toFixed(3).toString())
+        setStakedBal(staked.toString())
 
         const result2 = await balanceOf(lpToken)
         const unstaked = ethers.utils.formatUnits(result2)
-        setUnstakedBal(Number(unstaked).toFixed(3).toString())
+        setUnstakedBal(unstaked.toString())
 
         return [staked, unstaked]
       } catch (err) {
@@ -236,7 +237,10 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
 
             <FunctionBox>
               {/* <button >Max</button> */}
-              <p>Available: {unstakedBal}</p>
+              <FlexText>
+                <p>Available: {Number(unstakedBal).toFixed(3)}</p>
+                <button onClick={() => (document.getElementById('stake').value = unstakedBal)}>MAX</button>
+              </FlexText>
               <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
               {approved ? (
                 <SubmitButton
@@ -254,7 +258,10 @@ const Farm = ({ pid, lpSymbol, lpToken }) => {
             </FunctionBox>
 
             <FunctionBox>
-              <p>Staked: {stakedBal}</p>
+              <FlexText>
+                <p>Staked: {Number(stakedBal).toFixed(3)}</p>
+                <button onClick={() => (document.getElementById('unstake').value = stakedBal)}>MAX</button>
+              </FlexText>
               <Input name="unstake" id="unstake" type="number" placeholder="0.0" min="0" />
               <SubmitButton
                 primaryColour="#b72b18"
