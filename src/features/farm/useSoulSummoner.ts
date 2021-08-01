@@ -2,27 +2,14 @@ import { useActiveWeb3React } from '../../hooks'
 import { BigNumber } from '@ethersproject/bignumber'
 import { useCallback } from 'react'
 import { useSoulSummonerContract } from '../../hooks/useContract'
-import { useTransactionAdder } from '../../state/transactions/hooks'
 
 export default function useSoulSummoner() {
   const { account } = useActiveWeb3React()
   const summonerContract = useSoulSummonerContract()
-  const addTransaction = useTransactionAdder()
 
   // -----------------------
   //  Read Functions
   // -----------------------
-
-  // fetches the user's info of the soul summoner
-  const info = useCallback(async () => {
-    return await summonerContract?.userInfo(account)
-  }, [account, summonerContract])
-
-  // calculates the user's pending rewards
-  const userPendingRewards = useCallback(async (pid: number, amount: BigNumber) => {
-    await calculateTotalPendingSoulRewards()
-    return userPendingRewards
-  }, [])
 
   // Deposit
   const deposit = useCallback(
@@ -136,11 +123,4 @@ export default function useSoulSummoner() {
   }, [summonerContract])
 
   return { deposit, withdraw, poolLength, poolInfo, userInfo, pendingSoul, soulPerSecond, totalAllocPoint }
-}
-function userSharePercOfTotal() {
-  throw new Error('Function not implemented.')
-}
-
-function calculateTotalPendingSoulRewards() {
-  throw new Error('Function not implemented.')
 }
