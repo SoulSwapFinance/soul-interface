@@ -206,7 +206,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
           <FarmContentWrapper>
             <TokenPairBox>
               {/* 2 token logo combined ? */}
-              <TokenPair target="_blank" href={`https://exchange.soulswap.xyz/add/${token1}/${token2}`}>
+              <TokenPair target="_blank" href={`https://beta.soulswap.finance/add/${token1}/${token2}`}>
                 {lpSymbol}
               </TokenPair>
             </TokenPairBox>
