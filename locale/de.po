@@ -1097,11 +1097,11 @@ msgstr "Ihre Transaktion könnte ein Front-Run-Handel sein."
 msgid "Your transaction may fail"
 msgstr "Ihre Transaktion kann fehlschlagen"
 
-msgid "Your transaction will revert 23if the price changes unfavorably by more than this percentage."
-msgstr ""
-
 msgid "Your transaction will revert if it is pending for more than this long."
 msgstr "Ihre Transaktion wird rückgängig gemacht, wenn sie länger als diese Zeitspanne in der Schwebe ist."
+
+msgid "Your transaction will revert if the price changes unfavorably by more than this percentage."
+msgstr ""
 
 msgid "Your transaction will revert if there is a large, unfavorable price movement before it is confirmed."
 msgstr "Ihre Transaktion wird bei einer großen, ungünstigen Preisbewegung rückgängig gemacht, bevor sie bestätigt wird."

@@ -96,7 +96,7 @@ export default function TransactionSettings({ placeholderSlippage }: Transaction
 
           <QuestionHelper
             text={i18n._(
-              t`Your transaction will revert 23if the price changes unfavorably by more than this percentage.`
+              t`Your transaction will revert if the price changes unfavorably by more than this percentage.`
             )}
           />
         </div>
@@ -123,6 +123,7 @@ export default function TransactionSettings({ placeholderSlippage }: Transaction
               <input
                 className={classNames(slippageError ? 'text-red' : '', 'bg-transparent placeholder-low-emphesis')}
                 placeholder={placeholderSlippage?.toFixed(2)}
+                type="number"
                 value={
                   slippageInput.length > 0
                     ? slippageInput
@@ -187,6 +188,7 @@ export default function TransactionSettings({ placeholderSlippage }: Transaction
             <input
               className={classNames(deadlineError ? 'text-red' : '', 'bg-transparent placeholder-low-emphesis')}
               placeholder={(DEFAULT_DEADLINE_FROM_NOW / 60).toString()}
+              type="number"
               value={
                 deadlineInput.length > 0
                   ? deadlineInput

@@ -1097,11 +1097,11 @@ msgstr "Su transacción podría ser una inversión ventajista"
 msgid "Your transaction may fail"
 msgstr "Su transacción podría fallar"
 
-msgid "Your transaction will revert 23if the price changes unfavorably by more than this percentage."
-msgstr ""
-
 msgid "Your transaction will revert if it is pending for more than this long."
 msgstr "Su transacción se revertirá si está pendiente por encima de este tiempo."
+
+msgid "Your transaction will revert if the price changes unfavorably by more than this percentage."
+msgstr ""
 
 msgid "Your transaction will revert if there is a large, unfavorable price movement before it is confirmed."
 msgstr "Su transacción se revertirá si hay un movimiento de precios grande y desfavorable antes de que se confirme."

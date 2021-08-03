@@ -1090,11 +1090,11 @@ msgstr "您的交易可能被抢跑。"
 msgid "Your transaction may fail"
 msgstr "您的交易可能失败。"
 
-msgid "Your transaction will revert 23if the price changes unfavorably by more than this percentage."
-msgstr ""
-
 msgid "Your transaction will revert if it is pending for more than this long."
 msgstr "如果您的交易待处理的时间超过此时间，则它将还原。"
+
+msgid "Your transaction will revert if the price changes unfavorably by more than this percentage."
+msgstr ""
 
 msgid "Your transaction will revert if there is a large, unfavorable price movement before it is confirmed."
 msgstr "如果交易在确认之前出现大的不利价格变动，则交易将恢复。"
