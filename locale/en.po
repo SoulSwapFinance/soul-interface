@@ -1117,11 +1117,11 @@ msgstr "Your transaction may be frontrun"
 msgid "Your transaction may fail"
 msgstr "Your transaction may fail"
 
-msgid "Your transaction will revert 23if the price changes unfavorably by more than this percentage."
-msgstr "Your transaction will revert 23if the price changes unfavorably by more than this percentage."
-
 msgid "Your transaction will revert if it is pending for more than this long."
 msgstr "Your transaction will revert if it is pending for more than this long."
+
+msgid "Your transaction will revert if the price changes unfavorably by more than this percentage."
+msgstr "Your transaction will revert if the price changes unfavorably by more than this percentage."
 
 msgid "Your transaction will revert if there is a large, unfavorable price movement before it is confirmed."
 msgstr "Your transaction will revert if there is a large, unfavorable price movement before it is confirmed."

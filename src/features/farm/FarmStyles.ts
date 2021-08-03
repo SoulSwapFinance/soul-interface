@@ -31,6 +31,10 @@ export const FarmItemBox = styled.div`
   justify-content: left;
   align-items: center;
   margin-left: ${({ marginLeft }) => (marginLeft ? `${marginLeft}` : `30px`)};
+
+  @media screen and (max-width: 600px) {
+    display: ${({ desktopOnly }) => (desktopOnly ? `none` : '')};
+  }
 `
 
 export const FarmItemHeading = styled.p`
@@ -94,6 +98,10 @@ export const DetailsWrapper = styled.div`
   border-bottom-right-radius: 8px;
   width: 100%;
   padding: 5px 10px;
+
+  @media screen and (max-width: 600px) {
+    display: block;
+  }
 `
 
 export const FunctionBox = styled.div`

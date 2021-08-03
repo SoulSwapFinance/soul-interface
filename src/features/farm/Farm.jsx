@@ -92,8 +92,10 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
       toggleWalletModal()
     } else {
       try {
-        const pending = ethers.BigNumber.from(await pendingSoul(pid))
+        const pending = ethers.BigNumber.from(await pendingSoul(pid)).toString()
+        console.log(pending)
         const formatted = ethers.utils.formatUnits(pending.toString())
+        console.log(formatted)
         setPending(Number(formatted).toFixed(1).toString())
       } catch (err) {
         console.log(err)
@@ -208,10 +210,10 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
               </TokenPair>
             </TokenPairBox>
 
-            <FarmItemBox>
-              <FarmItemHeading>Earned</FarmItemHeading>
-              <FarmItem>{pending}</FarmItem>
-            </FarmItemBox>
+            {/* <FarmItemBox desktopOnly={true}>
+                <FarmItemHeading>Earned</FarmItemHeading>
+                <FarmItem>{pending}</FarmItem>
+              </FarmItemBox> */}
 
             {/* <FarmItemBox>
               <FarmItemHeading>APR</FarmItemHeading>
@@ -223,10 +225,10 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
               <FarmItem>$...</FarmItem>
             </FarmItemBox> */}
 
-            <FarmItemBox marginLeft={'100px'}>
-              <FarmItemHeading>Multiplier</FarmItemHeading>
-              <FarmItem>{multiplier}x</FarmItem>
-            </FarmItemBox>
+            {/* <FarmItemBox marginLeft={'100px'} desktopOnly={true}>
+                <FarmItemHeading>Multiplier</FarmItemHeading>
+                <FarmItem>{multiplier}x</FarmItem>
+              </FarmItemBox> */}
 
             <FarmItemBox>
               {/* <ShowBtnWrapper> */}
@@ -240,12 +242,6 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
       {showing ? (
         <DetailsContainer>
           <DetailsWrapper>
-            <FunctionBox width="30%">
-              <SubmitButton primaryColour="#4afd94" hoverColour="#4afd94" onClick={() => handleHarvest()}>
-                Harvest
-              </SubmitButton>
-            </FunctionBox>
-
             <FunctionBox>
               {/* <button >Max</button> */}
               <FlexText>
@@ -274,13 +270,18 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
                 <button onClick={() => (document.getElementById('unstake').value = stakedBal)}>MAX</button>
               </FlexText>
               <Input name="unstake" id="unstake" type="number" placeholder="0.0" min="0" />
-              <SubmitButton
-                primaryColour="#b72b18"
-                hoverColour="#b72b18"
-                onClick={() => handleWithdraw(ethers.utils.parseUnits(document.getElementById('unstake').value))}
-              >
-                Unstake
-              </SubmitButton>
+              <div style={{ display: 'flex' }}>
+                <SubmitButton
+                  primaryColour="#b72b18"
+                  hoverColour="#b72b18"
+                  onClick={() => handleWithdraw(ethers.utils.parseUnits(document.getElementById('unstake').value))}
+                >
+                  Unstake
+                </SubmitButton>
+                <SubmitButton primaryColour="#4afd94" hoverColour="#4afd94" onClick={() => handleHarvest()}>
+                  Harvest
+                </SubmitButton>
+              </div>
             </FunctionBox>
           </DetailsWrapper>
         </DetailsContainer>

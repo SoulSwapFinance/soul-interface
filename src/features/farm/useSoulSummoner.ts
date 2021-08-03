@@ -90,7 +90,7 @@ export default function useSoulSummoner() {
   const pendingSoul = useCallback(
     async (pid: number) => {
       try {
-        const tx = BigNumber.from(await summonerContract?.pendingSoul(pid, account))
+        const tx = await summonerContract?.pendingSoul(pid, account)
         return tx
       } catch (e) {
         console.log(e)
