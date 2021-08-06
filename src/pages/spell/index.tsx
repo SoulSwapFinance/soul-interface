@@ -20,6 +20,8 @@ import { useTokenBalance } from '../../state/wallet/hooks'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import useSoulVault from '../../hooks/useSoulVault'
 import AccountDetails from '../../components/AccountDetails'
+import useSoulSummoner from '../../features/farm/useSoulSummoner'
+import { ethers } from 'ethers'
 
 const INPUT_CHAR_LIMIT = 18
 
@@ -66,9 +68,9 @@ export default function SoulStake() {
     // deposit,
     // withdraw,
     // withdrawAll,
-    harvest,
+    // harvest,
   } = useSoulVault()
-  const { enter, leave } = useSoulStakeManual()
+  const { enter, leave, harvest } = useSoulStakeManual()
 
   // ** Require Update: Need to make dynamic by fetching selected chain **
   const soulBalance = useTokenBalance(account ?? undefined, SOUL[ChainId.FANTOM_TESTNET])
@@ -206,6 +208,58 @@ export default function SoulStake() {
 
       handleInput('')
       setPendingTx(false)
+    }
+  }
+
+  const handleHarvest = async () => {
+    if (buttonDisabled) return
+
+    if (!walletConnected) {
+      toggleWalletModal()
+    } else {
+      setPendingTx(true)
+      const success = await sendTx(() => harvest())
+      if (!success) {
+        setPendingTx(false)
+        // setModalOpen(true)
+        return
+      }
+    }
+
+    handleInput('')
+    setPendingTx(false)
+  }
+
+  const { pendingSoul } = useSoulSummoner()
+
+  const [pending, setPending] = useState('')
+
+  // Runs on render + reruns every second
+  useEffect(() => {
+    if (account) {
+      const timer = setTimeout(() => {
+        fetchPending(0)
+      }, 3000)
+
+      // Clear timeout if the component is unmounted
+      return () => clearTimeout(timer)
+    }
+  })
+
+  // Fetches connected user pending soul
+  const fetchPending = async (pid) => {
+    if (!walletConnected) {
+      toggleWalletModal()
+    } else {
+      try {
+        const pending = ethers.BigNumber.from(await pendingSoul(pid)).toString()
+        console.log(pending)
+        const formatted = ethers.utils.formatUnits(pending.toString())
+        console.log(formatted)
+        setPending(Number(formatted).toFixed(1).toString())
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 
@@ -500,6 +554,12 @@ export default function SoulStake() {
                   </div>
                 </div>
               </div>
+              <Button
+                className={`${buttonStyle} text-high-emphesis bg-cyan-blue opacity-100 hover:bg-opacity-80`}
+                onClick={() => harvest()}
+              >
+                Harvest Pending
+              </Button>
             </div>
           </div>
         </div>
