@@ -8,7 +8,7 @@ const useSoulStakeManual = () => {
   const addTransaction = useTransactionAdder()
   const summonerContract = useSoulSummonerContract()
 
-  // Enter staking in MasterChef
+  // Enter staking in SoulSummoner
   const enter = useCallback(
     async (amount: CurrencyAmount<Token> | undefined) => {
       if (amount?.quotient) {
@@ -23,7 +23,7 @@ const useSoulStakeManual = () => {
     [addTransaction, summonerContract]
   )
 
-  // Leave staking in MasterChef
+  // Leave staking in SoulSummoner
   const leave = useCallback(
     async (amount: CurrencyAmount<Token> | undefined) => {
       if (amount?.quotient) {
@@ -38,7 +38,17 @@ const useSoulStakeManual = () => {
     [addTransaction, summonerContract]
   )
 
-  return { enter, leave }
+  // Harvest pending SOUL
+  const harvest = useCallback(async () => {
+    try {
+      const tx = await summonerContract?.leaveStaking('0')
+      return addTransaction(tx, { summary: 'Harvest SOUL' })
+    } catch (e) {
+      return e
+    }
+  }, [addTransaction, summonerContract])
+
+  return { enter, leave, harvest }
 }
 
 export default useSoulStakeManual
