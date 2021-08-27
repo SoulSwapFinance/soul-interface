@@ -28,12 +28,12 @@ const items = (i18n: I18n) => [
     href: 'https://github.com/soulswapfinance',
     external: true,
   },
-  // {
-  //   name: i18n._(t`Tools`),
-  //   description: i18n._(t`Tools to optimize your workflow.`),
-  //   href: '/tools',
-  //   external: false,
-  // },
+  {
+    name: i18n._(t`Vote`),
+    description: i18n._(t`Use SoulPower to Enchant Soul.`),
+    href: 'https://enchant.soulswap.finance',
+    external: false,
+  },
   {
     name: i18n._(t`Twitter`),
     description: i18n._(t`Follow us on Twitter.`),

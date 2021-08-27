@@ -26,10 +26,10 @@ const MeowshiButton: FC<MeowshiButtonProps> = ({ meowshiState }) => {
     open: false,
   })
   const { account, chainId } = useActiveWeb3React()
-  const soulBalance = useTokenBalance(account, SOUL[ChainId.FANTOM_TESTNET])
-  const spellBalance = useTokenBalance(account, SPELL[ChainId.FANTOM_TESTNET])
+  const soulBalance = useTokenBalance(account, SOUL[ChainId.FANTOM])
+  const spellBalance = useTokenBalance(account, SPELL[ChainId.FANTOM])
   const { approvalState, approve, meow, unmeow, meowSoul, unmeowSoul } = useMeowshi(
-    currencies[Field.INPUT] === SOUL[ChainId.FANTOM_TESTNET]
+    currencies[Field.INPUT] === SOUL[ChainId.FANTOM]
   )
   const balance = useTokenBalance(account, currencies[Field.INPUT])
   const parsedInputAmount = tryParseAmount(fields[Field.INPUT], currencies[Field.INPUT])

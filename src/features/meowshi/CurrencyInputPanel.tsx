@@ -36,7 +36,7 @@ const CurrencyInputPanel: FC<CurrencyInputPanelProps> = ({ field, meowshiState, 
             <div className="flex gap-4 items-center">
               <Image
                 src={
-                  currency === SOUL[ChainId.FANTOM_TESTNET]
+                  currency === SOUL[ChainId.FANTOM]
                     ? '/images/tokens/scarab-square.jpg'
                     : currency === SPELL
                     ? '/images/tokens/lotus-square.jpg'
@@ -52,20 +52,20 @@ const CurrencyInputPanel: FC<CurrencyInputPanelProps> = ({ field, meowshiState, 
                 <Typography variant="h3" className="text-high-emphesis leading-6" weight={700}>
                   {currency?.symbol}
                 </Typography>
-                {(currency === SOUL[ChainId.FANTOM_TESTNET] || currency === SPELL) && (
+                {(currency === SOUL[ChainId.FANTOM] || currency === SPELL) && (
                   <Typography
                     variant="xs"
                     className="underline text-blue cursor-pointer"
                     onClick={() =>
                       setCurrency(
-                        currency === SPELL[ChainId.FANTOM_TESTNET]
-                          ? SOUL[ChainId.FANTOM_TESTNET]
-                          : SPELL[ChainId.FANTOM_TESTNET],
+                        currency === SPELL[ChainId.FANTOM]
+                          ? SOUL[ChainId.FANTOM]
+                          : SPELL[ChainId.FANTOM],
                         field
                       )
                     }
                   >
-                    {currencies[field] === SOUL[ChainId.FANTOM_TESTNET] ? i18n._(t`Use SPELL`) : i18n._(t`Use SOUL`)}
+                    {currencies[field] === SOUL[ChainId.FANTOM] ? i18n._(t`Use SPELL`) : i18n._(t`Use SOUL`)}
                   </Typography>
                 )}
               </div>

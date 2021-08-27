@@ -6,7 +6,7 @@ import Menu from '../../../features/analytics/AnalyticsMenu'
 import PairList from '../../../features/analytics/Pairs/PairList'
 import PairTabs from '../../../features/analytics/Pairs/PairTabs'
 import Search from '../../../components/Search'
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 import { useFuse } from '../../../hooks'
 import { useRouter } from 'next/router'
 

@@ -28,7 +28,7 @@ import { Web3ReactProvider } from '@web3-react/core'
 import dynamic from 'next/dynamic'
 import getLibrary from '../functions/getLibrary'
 import { i18n } from '@lingui/core'
-import { persistStore } from 'redux-persist'
+// import { persistStore } from 'redux-persist'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
@@ -105,7 +105,7 @@ function MyApp({
         <meta
           key="description"
           name="description"
-          content="Be a DeFi Chef with Soul. Swap, earn, stack yields, lend, borrow, leverage all on one decentralized, community driven platform. Welcome home to DeFi"
+          content="Be a DeFi Summoner with Soul. Swap, earn, grow yield, lend, borrow, leverage all on one decentralized, community driven platform. Welcome home to DeFi"
         />
 
         <meta name="application-name" content="SOUL DEFI" />
