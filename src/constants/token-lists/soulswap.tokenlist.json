@@ -12,6 +12,14 @@
     "tokens": [
        {
         "name": "Soul Power",
+        "address": "0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07",
+        "symbol": "SOUL",
+        "decimals": 18,
+        "chainId": 250,
+        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/soul.jpg"
+       },
+       {
+        "name": "Soul Power",
         "address": "0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5",
         "symbol": "SOUL",
         "decimals": 18,
@@ -20,7 +28,7 @@
        },
       {
         "name": "Wrapped Fantom",
-        "address": "0xf1277d1ed8ad466beddf92ef448a132661956621",
+        "address": "0xf1277d1Ed8AD466beddF92ef448A132661956621",
         "symbol": "WFTM",
         "decimals": 18,
         "chainId": 4002,
@@ -28,7 +36,7 @@
       },
       {
         "name": "Fantom USD",
-        "address": "0x306557358e20aea124b16a548597897858d13cb2",
+        "address": "0x306557358e20AEa124b16a548597897858D13cb2",
         "symbol": "fUSD",
         "decimals": 18,
         "chainId": 4002,
@@ -36,7 +44,7 @@
       },
       {
         "name": "Fantom ETH",
-        "address": "0x910a38ce2a26278c3493a95fe83e092ae821df26",
+        "address": "0x910a38cE2a26278c3493A95fe83e092aE821dF26",
         "symbol": "fETH",
         "decimals": 18,
         "chainId": 4002,
@@ -52,4 +60,3 @@
       }
     ]
 }
-  

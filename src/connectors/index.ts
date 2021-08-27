@@ -100,7 +100,8 @@ export const portis = new PortisConnector({
 export const walletlink = new WalletLinkConnector({
   url: RPC[ChainId.MAINNET],
   appName: 'SoulSwap',
-  appLogoUrl: 'https://raw.githubusercontent.com/soulswap/art/master/soul/logo-256x256.png',
+  appLogoUrl:
+    'https://github.com/SoulSwapFinance/assets/blob/prod/blockchains/fantom/assets/0xe2fb177009ff39f52c0134e8007fa0e4baacbd07/logo.png?raw=true',
 })
 
 // mainnet only

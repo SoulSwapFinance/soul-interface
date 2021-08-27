@@ -303,17 +303,17 @@ export const FarmList = () => {
       lpAddresses: {
         4002: '0x10c0AFd7C58916C4025d466E11850c7D79219277',
       },
-      token1: '0xf1277d1ed8ad466beddf92ef448a132661956621',
+      token1: '0xf1277d1Ed8AD466beddF92ef448A132661956621',
       token2: '0xcf174a6793fa36a73e8ff18a71bd81c985ef5ab5',
     },
     {
       pid: 5,
       lpSymbol: 'SOUL-FUSD',
       lpAddresses: {
-        4002: '0xaf02fd55f297f2a591367f6e33dc600ff2be472a',
+        4002: '0xaf02fd55F297f2a591367F6E33Dc600Ff2Be472A',
       },
-      token1: '0xf1277d1ed8ad466beddf92ef448a132661956621',
-      token2: '0x306557358e20aea124b16a548597897858d13cb2',
+      token1: '0xf1277d1Ed8AD466beddF92ef448A132661956621',
+      token2: '0x306557358e20AEa124b16a548597897858D13cb2',
     },
     {
       pid: 4,
@@ -321,8 +321,8 @@ export const FarmList = () => {
       lpAddresses: {
         4002: '0x0f179c67E3105e848Daf68f331734069bc1aE697',
       },
-      token1: '0x306557358e20aea124b16a548597897858d13cb2',
-      token2: '0x910a38ce2a26278c3493a95fe83e092ae821df26',
+      token1: '0x306557358e20AEa124b16a548597897858D13cb2',
+      token2: '0x910a38cE2a26278c3493A95fe83e092aE821dF26',
     },
   ]
 
@@ -331,7 +331,7 @@ export const FarmList = () => {
       key={farm.pid}
       pid={farm.pid}
       lpSymbol={farm.lpSymbol}
-      lpToken={farm.lpAddresses[4002]}
+      lpToken={farm.lpAddresses[4002]} // TODO: update to 250
       token1={farm.token1}
       token2={farm.token2}
     />
