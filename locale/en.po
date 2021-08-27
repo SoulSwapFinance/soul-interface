@@ -815,6 +815,9 @@ msgstr "SPELL Fee"
 msgid "Search name or paste address"
 msgstr "Search name or paste address"
 
+msgid "Select Token"
+msgstr "Select Token"
+
 msgid "Select a asset token"
 msgstr "Select a asset token"
 
@@ -823,9 +826,6 @@ msgstr "Select a collateral token"
 
 msgid "Select a rate"
 msgstr "Select a rate"
-
-msgid "Select a token"
-msgstr "Select a token"
 
 msgid "Select a token to find your liquidity"
 msgstr "Select a token to find your liquidity"

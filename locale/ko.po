@@ -799,6 +799,9 @@ msgstr ""
 msgid "Search name or paste address"
 msgstr "이름 검색 또는 주소 붙여넣기"
 
+msgid "Select Token"
+msgstr ""
+
 msgid "Select a asset token"
 msgstr ""
 
@@ -807,9 +810,6 @@ msgstr ""
 
 msgid "Select a rate"
 msgstr ""
-
-msgid "Select a token"
-msgstr "토큰 선택"
 
 msgid "Select a token to find your liquidity"
 msgstr "토큰을 선택하여 유동성 찾기"

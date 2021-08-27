@@ -799,6 +799,9 @@ msgstr ""
 msgid "Search name or paste address"
 msgstr "Rechercher un nom ou coller une adresse"
 
+msgid "Select Token"
+msgstr ""
+
 msgid "Select a asset token"
 msgstr ""
 
@@ -807,9 +810,6 @@ msgstr ""
 
 msgid "Select a rate"
 msgstr ""
-
-msgid "Select a token"
-msgstr "Sélectionnez un token"
 
 msgid "Select a token to find your liquidity"
 msgstr "Sélectionnez un token pour trouver votre liquidité"

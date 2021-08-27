@@ -33,17 +33,17 @@ export const SUPPORTED_NETWORKS: {
   //   rpcUrls: ['https://mainnet.infura.io/v3'],
   //   blockExplorerUrls: ['https://etherscan.com'],
   // },
-  // [ChainId.FANTOM]: {
-  //   chainId: '0xfa',
-  //   chainName: 'Fantom',
-  //   nativeCurrency: {
-  //     name: 'Fantom',
-  //     symbol: 'FTM',
-  //     decimals: 18,
-  //   },
-  //   rpcUrls: ['https://rpcapi.fantom.network'],
-  //   blockExplorerUrls: ['https://ftmscan.com'],
-  // },
+  [ChainId.FANTOM]: {
+    chainId: '0xfa',
+    chainName: 'Fantom',
+    nativeCurrency: {
+      name: 'Fantom',
+      symbol: 'FTM',
+      decimals: 18,
+    },
+    rpcUrls: ['https://rpcapi.fantom.network'],
+    blockExplorerUrls: ['https://ftmscan.com'],
+  },
   [ChainId.FANTOM_TESTNET]: {
     chainId: '0xFA2',
     chainName: 'Fantom Testnet',
@@ -172,15 +172,15 @@ export default function NetworkModal(): JSX.Element | null {
     <Modal isOpen={networkModalOpen} onDismiss={toggleNetworkModal} maxWidth={672}>
       <ModalHeader onClose={toggleNetworkModal} title="Select a Network" />
       <div className="mb-6 text-lg text-primary">
-        You are currently browsing <span className="font-bold text-pink">SOUL</span>
-        <br /> on the <span className="font-bold text-blue">{NETWORK_LABEL[chainId]}</span> network
+        You are browsing <span className="font-bold text-pink">SOUL</span> on <span className="font-bold text-blue">{NETWORK_LABEL[chainId]}</span>.
+        <br /> More chains coming soon!
       </div>
 
       <div className="grid grid-flow-row-dense grid-cols-1 gap-5 overflow-y-auto md:grid-cols-2">
         {[
           // ChainId.MAINNET,
           // ChainId.MATIC,
-          // ChainId.FANTOM,
+          ChainId.FANTOM,
           ChainId.FANTOM_TESTNET,
           // ChainId.ARBITRUM,
           // ChainId.OKEX,
