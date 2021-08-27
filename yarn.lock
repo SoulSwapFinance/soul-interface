@@ -2940,10 +2940,10 @@
   resolved "https://registry.yarnpkg.com/@solidity-parser/parser/-/parser-0.8.2.tgz#a6a5e93ac8dca6884a99a532f133beba59b87b69"
   integrity sha512-8LySx3qrNXPgB5JiULfG10O3V7QTxI/TLzSw5hFQhXWSkVxZBAv4rZQ0sYgLEbc8g3L2lmnujj1hKul38Eu5NQ==
 
-"@soulswap/sdk@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@soulswap/sdk/-/sdk-0.0.9.tgz#afe3b6560b4484253780efaa3e917e8e52985007"
-  integrity sha512-DgBmxVoMDyzM5n29A5737zNMVXyKn5KByve0KSDCMc1HMrCdwPRhKPA99MT/Hxbj9elwXI912sz4J8fWfkScjg==
+"@soulswap/sdk@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@soulswap/sdk/-/sdk-1.0.0.tgz#2a207dee08a5ae6226bdb9b7ed3d0e3b329592ee"
+  integrity sha512-479jy1ym0f2WbA4DBai577VpVfLvspCGFpkPg8B7eIsnL9zANRn0wAoNNEZQwUXqy95uysB5BX8bkOrJWO/iWA==
   dependencies:
     "@ethersproject/solidity" "^5.4.0"
     "@soulswap/swap-core" "^0.0.3"
@@ -9850,7 +9850,7 @@ fastq@^1.6.0:
   dependencies:
     reusify "^1.0.4"
 
-fathom-client@^3.0.0:
+fathom-client@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/fathom-client/-/fathom-client-3.1.0.tgz#077c3ed6b1742fc4ebdf4c477595e2f44260ee7b"
   integrity sha512-HUn4GBC+loLPMxvET4/FxY0nUCczCHXlik3nptQe8UTLnlB89cXHzk4hpNL45BxgePTLNK5bq0Qq/Dk1RFj/og==
