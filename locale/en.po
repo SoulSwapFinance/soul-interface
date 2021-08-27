@@ -631,8 +631,8 @@ msgstr "Network not supported yet"
 msgid "Never"
 msgstr "Never"
 
-msgid "New to Ethereum?"
-msgstr "New to Ethereum?"
+msgid "New to Fantom?"
+msgstr "New to Fantom?"
 
 msgid "No Liquidity found"
 msgstr "No Liquidity found"

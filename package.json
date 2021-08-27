@@ -144,5 +144,8 @@
       "src/pages"
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "react-i18next": "^11.11.4",
+    "react-router-dom": "^5.2.0"
+  }
 }
