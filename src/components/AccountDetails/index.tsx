@@ -169,7 +169,7 @@ const AccountDetails: FC<AccountDetailsProps> = ({
           <Typography weight={700}>{i18n._(t`Recent Transactions`)}</Typography>
           <div>
             <Button variant="outlined" color="gray" size="xs" onClick={clearAllTransactionsCallback}>
-              {i18n._(t`Clear all`)}
+              {i18n._(t`Clear All`)}
             </Button>
           </div>
         </div>

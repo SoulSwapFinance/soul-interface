@@ -18,7 +18,7 @@ const features = {
   [ChainId.KOVAN]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.BENTOBOX, Feature.KASHI],
   [ChainId.BSC]: [Feature.AMM, Feature.BENTOBOX, Feature.KASHI],
   [ChainId.BSC_TESTNET]: [Feature.AMM],
-  [ChainId.FANTOM]: [Feature.AMM],
+  [ChainId.FANTOM]: [Feature.AMM, Feature.LIQUIDITY_MINING],
   [ChainId.FANTOM_TESTNET]: [Feature.AMM, Feature.LIQUIDITY_MINING],
   [ChainId.MATIC]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.BENTOBOX, Feature.KASHI],
   [ChainId.MATIC_TESTNET]: [Feature.AMM],
