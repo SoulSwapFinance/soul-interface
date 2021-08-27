@@ -101,7 +101,7 @@ export const walletlink = new WalletLinkConnector({
   url: RPC[ChainId.MAINNET],
   appName: 'SoulSwap',
   appLogoUrl:
-    'https://github.com/SoulSwapFinance/assets/blob/prod/blockchains/fantom/assets/0xe2fb177009ff39f52c0134e8007fa0e4baacbd07/logo.png?raw=true',
+    'https://raw.github.com/SoulSwapFinance/icons/master/token/soul.jpg',
 })
 
 // mainnet only
