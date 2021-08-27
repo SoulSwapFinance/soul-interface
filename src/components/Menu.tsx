@@ -10,27 +10,27 @@ import { useLingui } from '@lingui/react'
 const items = (i18n: I18n) => [
   {
     name: i18n._(t`Docs`),
-    description: i18n._(t`Documentation for users of Soul.`),
+    description: i18n._(t`Documentation for Summoners.`),
     href: 'https://docs.soulswap.finance',
   },
   {
-    name: i18n._(t`Dev`),
-    description: i18n._(t`Documentation for developers of Soul.`),
-    href: 'https://dev.soulswap.finance',
+    name: i18n._(t`Vote`),
+    description: i18n._(t`Use SoulPower to Enchant Soul.`),
+    href: '/enchant',
   },
   {
     name: i18n._(t`Open Source`),
-    description: i18n._(t`Soul is a supporter of Open Source.`),
+    description: i18n._(t`Soul Supports Open Source.`),
     href: 'https://github.com/soulswapfinance',
   },
-  {
-    name: i18n._(t`Tools`),
-    description: i18n._(t`Tools to optimize your workflow.`),
-    href: '/tools',
-  },
+  // {
+  //   name: i18n._(t`Tools`),
+  //   description: i18n._(t`Optimize Your workflow.`),
+  //   href: '/tools',
+  // },
   {
     name: i18n._(t`Discord`),
-    description: i18n._(t`Join the community on Discord.`),
+    description: i18n._(t`Join Us on Discord.`),
     href: 'https://discord.gg/SkHxPyHy', // jul 26th
   },
 ]

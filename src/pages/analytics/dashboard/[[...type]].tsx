@@ -3,17 +3,17 @@ import { useState, useMemo } from 'react'
 import Head from 'next/head'
 import Container from '../../../components/Container'
 import Search from '../../../components/Search'
-import { useFuse } from '../../../hooks'
+// import { useFuse } from '../../../hooks'
 import DashboardTabs from '../../../features/analytics/Dashboard/DashboardTabs'
 import Menu from '../../../features/analytics/AnalyticsMenu'
 import ChartCard from '../../../features/analytics/Dashboard/ChartCard'
 import {
-  useCustomDayBlock,
-  useDayData,
-  useExchange,
+  // useCustomDayBlock,
+  // useDayData,
+  // useExchange,
   useFarms,
-  useOneDayBlock,
-  useOneWeekBlock,
+  // useOneDayBlock,
+  // useOneWeekBlock,
 } from '../../../services/graph'
 import { useRouter } from 'next/router'
 

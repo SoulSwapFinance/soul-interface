@@ -10,7 +10,6 @@ import { Field, replaceSwapState, selectCurrency, setRecipient, switchCurrencies
 import { isAddress, isZero } from '../../functions/validate'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { useCallback, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { useV2TradeExactIn as useTradeExactIn, useV2TradeExactOut as useTradeExactOut } from '../../hooks/useV2Trades'
 import {
   useUserArcherETHTip,
@@ -18,7 +17,6 @@ import {
   useUserArcherGasPrice,
   useUserArcherTipManualOverride,
   useUserSingleHopOnly,
-  useUserSlippageTolerance,
 } from '../user/hooks'
 
 import { ParsedQs } from 'qs'
@@ -184,7 +182,7 @@ export function useDerivedSwapInfo(doArcher = false): {
   }
 
   if (!currencies[Field.INPUT] || !currencies[Field.OUTPUT]) {
-    inputError = inputError ?? i18n._(t`Select a token`)
+    inputError = inputError ?? i18n._(t`Select Token`)
   }
 
   const formattedTo = isAddress(to)
@@ -290,6 +288,7 @@ export function useDerivedSwapInfo(doArcher = false): {
     if (doArcher && v2Trade && swapCalls && !userTipManualOverride) {
       estimateGas()
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [doArcher, v2Trade, swapCalls, userTipManualOverride, library, setUserGasEstimate])
 
   return {

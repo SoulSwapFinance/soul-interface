@@ -610,7 +610,7 @@ msgstr ""
 msgid "Never"
 msgstr ""
 
-msgid "New to Ethereum?"
+msgid "New to Fantom?"
 msgstr ""
 
 msgid "No Liquidity found"
@@ -792,6 +792,9 @@ msgstr ""
 msgid "Search name or paste address"
 msgstr "搜索名稱或粘貼地址"
 
+msgid "Select Token"
+msgstr ""
+
 msgid "Select a asset token"
 msgstr ""
 
@@ -800,9 +803,6 @@ msgstr ""
 
 msgid "Select a rate"
 msgstr ""
-
-msgid "Select a token"
-msgstr "選擇代幣"
 
 msgid "Select a token to find your liquidity"
 msgstr "选择代币以找到您的流动性"

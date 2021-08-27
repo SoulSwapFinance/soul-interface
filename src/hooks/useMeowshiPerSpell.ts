@@ -12,13 +12,13 @@ export default function useMeowshiPerSpell() {
     if (!bentoboxContract) return
     ;(async () => {
       const toShare = await bentoboxContract.toShare(
-        SPELL[ChainId.FANTOM_TESTNET],
-        '1'.toBigNumber(SPELL[ChainId.FANTOM_TESTNET].decimals),
+        SPELL[ChainId.FANTOM],
+        '1'.toBigNumber(SPELL[ChainId.FANTOM].decimals),
         false
       )
       const toAmount = await bentoboxContract.toAmount(
-        SPELL[ChainId.FANTOM_TESTNET],
-        '1'.toBigNumber(SPELL[ChainId.FANTOM_TESTNET].decimals),
+        SPELL[ChainId.FANTOM],
+        '1'.toBigNumber(SPELL[ChainId.FANTOM].decimals),
         false
       )
       setState([toShare, toAmount])

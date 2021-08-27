@@ -6,7 +6,7 @@ type Currency = { address: string; decimals: number }
 // Pricing currency
 // TODO: Check decimals and finish table
 export const USD_CURRENCY: { [chainId in ChainId]?: Currency } = {
-  [ChainId.MAINNET]: {
+  [ChainId.MAINNET]: { // USDT
     address: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
     decimals: 6,
   },
@@ -26,7 +26,11 @@ export const USD_CURRENCY: { [chainId in ChainId]?: Currency } = {
     address: '0xD87Ba7A50B2E7E660f678A895E4B72E7CB4CCd9C',
     decimals: 6,
   },
-  [ChainId.BSC]: {
+  [ChainId.FANTOM]: { // FUSD
+    address: '0xAd84341756Bf337f5a0164515b1f6F993D194E1f',
+    decimals: 6,
+  },
+  [ChainId.BSC]: { // BUSD
     address: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56',
     decimals: 18,
   },

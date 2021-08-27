@@ -31,8 +31,6 @@
   },
   "devDependencies": {
     "@binance-chain/bsc-connector": "^1.0.0",
-    "@commitlint/cli": "^12.1.4",
-    "@commitlint/config-conventional": "^12.1.4",
     "@ethereumjs/common": "^2.3.0",
     "@ethereumjs/tx": "^3.2.0",
     "@ethersproject/abi": "^5.4.0",
@@ -55,7 +53,7 @@
     "@ramp-network/ramp-instant-sdk": "^2.4.6",
     "@reach/dialog": "^0.15.2",
     "@reduxjs/toolkit": "^1.6.0",
-    "@soulswap/sdk": "^0.0.9",
+    "@soulswap/sdk": "^1.0.0",
     "@soulswap/soul-data": "^1.0.0",
     "@soulswap/swap-core": "^0.0.3",
     "@sushiswap/chainlink-whitelist": "0.2.2",
@@ -89,7 +87,7 @@
     "eslint-config-next": "^11.0.1",
     "eth-permit": "^0.1.10",
     "ethers": "^5.4.1",
-    "fathom-client": "^3.0.0",
+    "fathom-client": "^3.1.0",
     "fuse.js": "^6.4.6",
     "graphql-tag": "^2.12.5",
     "husky": "^7.0.0",
@@ -146,5 +144,10 @@
       "src/pages"
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "react-bootstrap": "^1.6.1",
+    "react-i18next": "^11.11.4",
+    "react-inlinesvg": "^2.3.0",
+    "react-router-dom": "^5.2.0"
+  }
 }

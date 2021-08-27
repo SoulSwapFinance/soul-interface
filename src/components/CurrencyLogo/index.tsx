@@ -10,8 +10,10 @@ export const getTokenLogoURL = (address: string, chainId: ChainId) => {
   let imageURL
   if (chainId === ChainId.MAINNET) {
     imageURL = `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${address}/logo.png`
+  } else if (chainId === ChainId.FANTOM) {
+    imageURL = `https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/${address}/logo.png`
   } else if (chainId === ChainId.FANTOM_TESTNET) {
-    imageURL = `https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/fantom-testnet/assets/${address}/logo.png`
+    imageURL = `https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom-testnet/assets/${address}/logo.png`
   } else if (chainId === ChainId.BSC) {
     imageURL = `https://v1exchange.pancakeswap.finance/images/coins/${address}.png`
   } else if (chainId === ChainId.MATIC) {
@@ -47,12 +49,12 @@ function getCurrencyLogoUrls(currency) {
   urls.push(`https://raw.githubusercontent.com/soulswapfinance/icons/master/token/${getCurrencySymbol(currency)}.jpg`)
   if (currency.chainId in BLOCKCHAIN) {
     urls.push(
-      `https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/${
+      `https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/${
         BLOCKCHAIN[currency.chainId]
       }/assets/${currency.address}/logo.png`
     )
     urls.push(
-      `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/${BLOCKCHAIN[currency.chainId]}/assets/${
+      `https://raw.githubusercontent.com/trustwallet/assets/prod/blockchains/${BLOCKCHAIN[currency.chainId]}/assets/${
         currency.address
       }/logo.png`
     )

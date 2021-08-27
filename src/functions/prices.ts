@@ -6,9 +6,6 @@ import {
 } from '../constants'
 import { ChainId, Currency, CurrencyAmount, Fraction, JSBI, Percent, Trade, TradeType } from '@soulswap/sdk'
 
-import { Field } from '../state/swap/actions'
-import { basisPointsToPercent } from './convert'
-
 const THIRTY_BIPS_FEE = new Percent(JSBI.BigInt(30), JSBI.BigInt(10000))
 const ONE_HUNDRED_PERCENT = new Percent(JSBI.BigInt(10000), JSBI.BigInt(10000))
 const INPUT_FRACTION_AFTER_FEE = ONE_HUNDRED_PERCENT.subtract(THIRTY_BIPS_FEE)
@@ -60,7 +57,6 @@ export function computeRealizedLPFeeAmount(
     // the amount of the input that accrues to LPs
     return CurrencyAmount.fromRawAmount(trade.inputAmount.currency, trade.inputAmount.multiply(realizedLPFee).quotient)
   }
-
   return undefined
 }
 

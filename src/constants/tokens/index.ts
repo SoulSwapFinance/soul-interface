@@ -21,32 +21,21 @@ export const BSC: { [key: string]: Token } = {
 }
 
 export const FANTOM: { [key: string]: Token } = {
+  SOUL: new Token(ChainId.FANTOM, '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', 18, 'SOUL', 'SoulPower'), // 27 AUG
   USDC: new Token(ChainId.FANTOM, '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6, 'USDC', 'USD Coin'),
   WBTC: new Token(ChainId.FANTOM, '0x321162Cd933E2Be498Cd2267a90534A804051b11', 8, 'WBTC', 'Wrapped Bitcoin'),
   DAI: new Token(ChainId.FANTOM, '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', 18, 'DAI', 'Dai Stablecoin'),
+  FUSD: new Token(ChainId.FANTOM, '0xAd84341756Bf337f5a0164515b1f6F993D194E1f', 18, 'FUSD', 'Fantom USD'), // 27 AUG
   WETH: new Token(ChainId.FANTOM, '0x74b23882a30290451A17c44f4F05243b6b58C76d', 18, 'WETH', 'Wrapped Ether'),
-  SOUL: new Token(ChainId.FANTOM, '0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5', 18, 'SOUL', 'SoulPower'),
 }
 
 export const FANTOM_TESTNET: { [key: string]: Token } = {
   SOUL: new Token(ChainId.FANTOM_TESTNET, '0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5', 18, 'SOUL', 'SoulPower'), // 30 JUL
   SEANCE: new Token(ChainId.FANTOM_TESTNET, '0xD858E1a257Cb595Ba395520daD4c9C9592307734', 18, 'SEANCE', 'SeanceCircle'), // 30 JUL
   SPELL: new Token(ChainId.FANTOM_TESTNET, '0xdFDC55e7E7eBA3E7BF2a0E0743f4D3C858FaC37E', 18, 'SPELL', 'SpellBound'), // 30 JUL
-  FUSD: new Token(ChainId.FANTOM_TESTNET, '0x306557358e20aea124b16a548597897858d13cb2', 18, 'FUSD', 'Fantom USD'), // 31 JUL
-  FETH: new Token(
-    ChainId.FANTOM_TESTNET,
-    '0x910a38ce2a26278c3493a95fe83e092ae821df26',
-    18,
-    'fETH',
-    'Fantom Synthetic ETH'
-  ), // 31 JUL
-  WBTC: new Token(
-    ChainId.FANTOM_TESTNET,
-    '0x2Eb4Ee20d9816Bd6810F69166dD046F09C737201',
-    18,
-    'fBTC',
-    'Fantom Synthetic BTC'
-  ),
+  FUSD: new Token(ChainId.FANTOM_TESTNET, '0x306557358e20AEa124b16a548597897858D13cb2', 18, 'FUSD', 'Fantom USD'), // 31 JUL
+  FETH: new Token(ChainId.FANTOM_TESTNET, '0x910a38cE2a26278c3493A95fe83e092aE821dF26', 18, 'fETH', 'Fantom Synthetic ETH'), // 31 JUL
+  WBTC: new Token(ChainId.FANTOM_TESTNET, '0x2Eb4Ee20d9816Bd6810F69166dD046F09C737201', 18, 'fBTC', 'Fantom Synthetic BTC'),
 }
 
 export const MATIC: { [key: string]: Token } = {
@@ -213,14 +202,8 @@ export const SOUL: ChainTokenMap = {
   // [ChainId.GÖRLI]: new Token(ChainId.GÖRLI, SOUL_ADDRESS[ChainId.GÖRLI], 18, 'SOUL', 'SoulPower'),
   // [ChainId.KOVAN]: new Token(ChainId.KOVAN, SOUL_ADDRESS[ChainId.KOVAN], 18, 'SOUL', 'SoulPower'),
   // [ChainId.MATIC]: new Token(ChainId.MATIC, SOUL_ADDRESS[ChainId.MATIC], 18, 'SOUL', 'SoulPower'),
-  // [ChainId.FANTOM]: new Token(ChainId.FANTOM, SOUL_ADDRESS[ChainId.FANTOM], 18, 'SOUL', 'SoulPower'),
-  [ChainId.FANTOM_TESTNET]: new Token(
-    ChainId.FANTOM_TESTNET,
-    '0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5', // 31 JUL
-    18,
-    'SOUL',
-    'SoulPower'
-  ),
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', 18, 'SOUL', 'SoulPower'), // 27 AUG
+  [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5', 18, 'SOUL', 'SoulPower'), // 31 JUL
   // [ChainId.XDAI]: new Token(ChainId.XDAI, SOUL_ADDRESS[ChainId.XDAI], 18, 'SOUL', 'SoulPower'),
   // [ChainId.BSC]: new Token(ChainId.BSC, SOUL_ADDRESS[ChainId.BSC], 18, 'SOUL', 'SoulPower'),
   // // [ChainId.ARBITRUM]: new Token(ChainId.ARBITRUM, SOUL_ADDRESS[ChainId.ARBITRUM], 18, 'SOUL', 'SoulPower'),
@@ -235,13 +218,7 @@ export const SEANCE: ChainTokenMap = {
   // [ChainId.MAINNET]: new Token(
   //   ChainId.MAINNET, SEANCE_ADDRESS[ChainId.MAINNET], 18, 'xSOUL', 'SushiBar'
   // ),
-  [ChainId.FANTOM_TESTNET]: new Token(
-    ChainId.FANTOM_TESTNET,
-    '0xD54Cf31D5653F4a062f5DA4C83170A5867d04442', // 31 JUL
-    18,
-    'SEANCE',
-    'SeanceCircle'
-  ),
+  [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '0xD54Cf31D5653F4a062f5DA4C83170A5867d04442', 18, 'SEANCE', 'SeanceCircle'),  // 31 JUL
 }
 
 export const SPELL: ChainTokenMap = {
@@ -279,14 +256,6 @@ export const WETH9_EXTENDED: { [chainId: number]: Token } = {
     'WFTM',
     'Wrapped Fantom'
   ),
-
-  // [SupportedChainId.CELO]: new Token(
-  //   SupportedChainId.CELO,
-  //   "0x471EcE3750Da237f93B8E339c536989b8978a438",
-  //   18,
-  //   "CELO",
-  //   "Celo"
-  // ),
 }
 
 export class ExtendedEther extends Ether {

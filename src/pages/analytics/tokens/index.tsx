@@ -5,7 +5,7 @@ import Head from 'next/head'
 import Menu from '../../../features/analytics/AnalyticsMenu'
 import Search from '../../../components/Search'
 import TokenList from '../../../features/analytics/Tokens/TokenList'
-import { tokensTimeTravelQuery } from '../../../services/graph/queries'
+// import { tokensTimeTravelQuery } from '../../../services/graph/queries'
 import { useFuse } from '../../../hooks'
 
 export default function Tokens() {

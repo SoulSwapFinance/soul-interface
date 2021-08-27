@@ -73,8 +73,8 @@ export default function SoulStake() {
   const { enter, leave, harvest } = useSoulStakeManual()
 
   // ** Require Update: Need to make dynamic by fetching selected chain **
-  const soulBalance = useTokenBalance(account ?? undefined, SOUL[ChainId.FANTOM_TESTNET])
-  const seanceBalance = useTokenBalance(account ?? undefined, SEANCE[ChainId.FANTOM_TESTNET])
+  const soulBalance = useTokenBalance(account ?? undefined, SOUL[ChainId.FANTOM])
+  const seanceBalance = useTokenBalance(account ?? undefined, SEANCE[ChainId.FANTOM])
 
   // const pendingSoul = userPendingRewards() // amount of soul is pending for user
   // const percOfTotal = userSharePercOfTotal() // user percentage of pool
@@ -98,7 +98,7 @@ export default function SoulStake() {
   // Approve masterchef to move funds with `transferFrom`
   const [approvalStateChef, approveMasterchef] = useApproveCallback(
     parsedAmount,
-    SOUL_SUMMONER_ADDRESS[ChainId.FANTOM_TESTNET]
+    SOUL_SUMMONER_ADDRESS[ChainId.FANTOM]
   )
   const [approvalStateVault, approveVault] = useApproveCallback(parsedAmount, SOULVAULT_ADDRESS[ChainId.FANTOM_TESTNET])
 

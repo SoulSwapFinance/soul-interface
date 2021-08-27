@@ -8,7 +8,7 @@ const Menu = ({ positionsLength }) => {
   const { account, chainId } = useActiveWeb3React()
   return (
     <div className="space-y-4">
-      {/* {account && positionsLength > 0 && (
+      {account && positionsLength > 0 && (
         <NavLink
           exact
           href={`/farm?filter=portfolio`}
@@ -18,7 +18,7 @@ const Menu = ({ positionsLength }) => {
             YOUR FARMS
           </a>
         </NavLink>
-      )} */}
+      )}
 
       <NavLink
         exact

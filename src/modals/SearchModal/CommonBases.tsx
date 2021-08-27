@@ -1,7 +1,4 @@
-import { ChainId, Currency, Token, currencyEquals } from '@soulswap/sdk'
-
-import { AutoColumn } from '../../components/Column'
-import { AutoRow } from '../../components/Row'
+import { Currency } from '@soulswap/sdk'
 import Button from '../../components/Button'
 import { COMMON_BASES } from '../../constants/routing'
 import CurrencyLogo from '../../components/CurrencyLogo'
@@ -24,7 +21,7 @@ export default function CommonBases({
   return (
     <div className="flex flex-col space-y-2">
       <div className="flex flex-row">
-        Common bases
+        Common Bases
         <QuestionHelper text="These tokens are commonly paired with other tokens." />
       </div>
       <div className="flex flex-wrap">

@@ -105,7 +105,7 @@ export default function Farm(): JSX.Element {
 
       const defaultReward = {
         token: 'SOUL',
-        icon: 'https://raw.githubusercontent.com/soulswap/icons/master/token/soul.jpg', // TODO: create
+        icon: 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/soul.jpg',
         rewardPerSecond,
         // rewardPerDay: rewardPerBlock * blocksPerDay,
         rewardPerDay: rewardPerSecond * secondsPerDay,
@@ -126,28 +126,28 @@ export default function Farm(): JSX.Element {
           },
           {
             token: 'CVX',
-            icon: 'https://raw.githubusercontent.com/sushiswap/icons/master/token/unknown.png',
+            icon: 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/unknown.jpg',
             rewardPerBlock: (pool.rewarder.rewardPerSecond / 1e18) * averageBlockTime,
             rewardPerDay: (pool.rewarder.rewardPerSecond / 1e18) * averageBlockTime * blocksPerDay,
             rewardPrice: cvxPrice,
           },
           {
             token: 'CVX',
-            icon: 'https://raw.githubusercontent.com/sushiswap/icons/master/token/unknown.png',
+            icon: 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/unknown.jpg',
             rewardPerBlock: (pool.rewarder.rewardPerSecond / 1e18) * averageBlockTime,
             rewardPerDay: (pool.rewarder.rewardPerSecond / 1e18) * averageBlockTime * blocksPerDay,
             rewardPrice: cvxPrice,
           },
           {
             token: 'PICKLE',
-            icon: 'https://raw.githubusercontent.com/sushiswap/icons/master/token/pickle.jpg',
+            icon: 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/pickle.jpg',
             rewardPerBlock: (pool.rewarder.rewardPerSecond / 1e18) * averageBlockTime,
             rewardPerDay: (pool.rewarder.rewardPerSecond / 1e18) * averageBlockTime * blocksPerDay,
             rewardPrice: picklePrice,
           },
           {
             token: 'MPH',
-            icon: 'https://raw.githubusercontent.com/sushiswap/icons/master/token/88mph.jpg',
+            icon: 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/88mph.jpg',
             rewardPerBlock: (pool.rewarder.rewardPerSecond / 1e18) * averageBlockTime,
             rewardPerDay: (pool.rewarder.rewardPerSecond / 1e18) * averageBlockTime * blocksPerDay,
             rewardPrice: mphPrice,
@@ -167,17 +167,17 @@ export default function Farm(): JSX.Element {
         const reward = {
           [ChainId.MATIC]: {
             token: 'MATIC',
-            icon: 'https://raw.githubusercontent.com/sushiswap/icons/master/token/polygon.jpg',
+            icon: 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/polygon.jpg',
             rewardPrice: maticPrice,
           },
           [ChainId.XDAI]: {
             token: 'STAKE',
-            icon: 'https://raw.githubusercontent.com/sushiswap/icons/master/token/stake.jpg',
+            icon: 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/stake.jpg',
             rewardPrice: stakePrice,
           },
           [ChainId.HARMONY]: {
             token: 'ONE',
-            icon: 'https://raw.githubusercontent.com/sushiswap/icons/master/token/one.jpg',
+            icon: 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/one.jpg',
             rewardPrice: onePrice,
           },
         }

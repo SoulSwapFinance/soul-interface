@@ -297,7 +297,7 @@ export default function WalletModal({
     }
     return (
       <div className="flex flex-col space-y-4">
-        <ModalHeader title="Select a Wallet" onClose={toggleWalletModal} />
+        <ModalHeader title="Select Wallet" onClose={toggleWalletModal} />
         <div className="flex flex-col space-y-6">
           {walletView === WALLET_VIEWS.PENDING ? (
             <PendingView
@@ -311,8 +311,8 @@ export default function WalletModal({
           )}
           {walletView !== WALLET_VIEWS.PENDING && (
             <div className="flex flex-col text-center">
-              <div className="text-secondary">{i18n._(t`New to Ethereum?`)}</div>
-              <ExternalLink href="https://ethereum.org/wallets/" color="blue">
+              <div className="text-secondary">{i18n._(t`New to Fantom?`)}</div>
+              <ExternalLink href="https://fantom.foundation/wallets" color="blue">
                 {i18n._(t`Learn more about wallets`)}
               </ExternalLink>
             </div>

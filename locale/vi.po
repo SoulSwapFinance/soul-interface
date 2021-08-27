@@ -615,7 +615,7 @@ msgstr ""
 msgid "Never"
 msgstr ""
 
-msgid "New to Ethereum?"
+msgid "New to Fantom?"
 msgstr ""
 
 msgid "No Liquidity found"
@@ -797,6 +797,9 @@ msgstr ""
 msgid "Search name or paste address"
 msgstr "Tìm kiếm tên hoặc dán địa chỉ"
 
+msgid "Select Token"
+msgstr ""
+
 msgid "Select a asset token"
 msgstr ""
 
@@ -805,9 +808,6 @@ msgstr ""
 
 msgid "Select a rate"
 msgstr ""
-
-msgid "Select a token"
-msgstr "Chọn một token"
 
 msgid "Select a token to find your liquidity"
 msgstr "Chọn một token để tìm thanh khoản của bạn"
