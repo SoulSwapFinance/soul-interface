@@ -75,7 +75,7 @@ export const useFtmPriceFromPid = (pid) => {
   // return farm && new BigNumber(farm.token.ftmPrice)
 }
 
-export const useLpTokenPrice = (symbol) => {
+// export const useLpTokenPrice = (symbol) => {
   // const farm = useFarmFromLpSymbol(symbol)
   // const farmTokenPriceInUsd = useFtmPriceFromPid(farm.pid)
   // let lpTokenPrice = BIG_ZERO
@@ -91,7 +91,7 @@ export const useLpTokenPrice = (symbol) => {
   // }
 
   // return lpTokenPrice
-}
+// }
 
 // /!\ Deprecated , use the BUSD hook in /hooks
 
@@ -267,6 +267,7 @@ export const usePriceSoulFusd = () => {
     fetchMultiplier(pid)
     fetchFarmApr(pid)
     console.log('apr:', apr)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account])
 
   // Runs on render + reruns every second
