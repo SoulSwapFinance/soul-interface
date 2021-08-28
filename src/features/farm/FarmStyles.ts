@@ -1,3 +1,4 @@
+import { linearGradient } from 'polished'
 import styled from 'styled-components'
 
 export const FlexText = styled.div`
@@ -15,14 +16,20 @@ export const FarmContainer = styled.div`
 `
 
 export const FarmRow = styled.div`
-  background-color: HSL(267, 30%, 20%);
+  background-color: #222;
   margin: 4px;
   border-radius: 8px;
   padding: 5px 15px;
+  border: 1px solid #333;
 `
 
 export const FarmContentWrapper = styled.div`
   display: flex;
+  justify-content: left;
+
+  &:last-child {
+    justify-content: space-between;
+  }
 `
 
 export const FarmItemBox = styled.div`
@@ -41,6 +48,7 @@ export const FarmItemHeading = styled.p`
   font-weight: normal;
   font-size: 0.8rem;
   color: white;
+  align-items: center;
 `
 
 export const FarmItem = styled.h2`
@@ -93,7 +101,7 @@ export const DetailsContainer = styled.div`
 
 export const DetailsWrapper = styled.div`
   display: flex;
-  background-color: HSL(267, 30%, 15%);
+  background-color: #222;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   width: 100%;
@@ -120,7 +128,7 @@ export const Input = styled.input`
   font-size: 1rem;
   padding: 0.5em;
   border-radius: 0.2em;
-  background-color: #675c6e;
+  background-color: #333;
   color: white;
 
   &:focus {

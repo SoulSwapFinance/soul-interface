@@ -25,7 +25,6 @@ import {
   Input,
   SubmitButton,
 } from './FarmStyles'
-import { set } from 'lodash'
 
 // params to render farm with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)
@@ -42,22 +41,73 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
   const walletConnected = !!account
   const toggleWalletModal = useWalletModalToggle()
 
-  const { withdraw, deposit, pendingSoul, poolInfo, userInfo } = useSoulSummoner()
+  const { withdraw, deposit, pendingSoul, poolInfo, userInfo, soulPerSecond, totalAllocPoint } = useSoulSummoner()
   const { approve, allowance, balanceOf } = useLpToken(lpToken)
 
   const [stakedBal, setStakedBal] = useState(0)
   const [unstakedBal, setUnstakedBal] = useState(0)
 
   const [pending, setPending] = useState(0)
+  const [apr, setApr] = useState()
   const [multiplier, setMultiplier] = useState('?')
   const [approved, setApproved] = useState(false)
   const [showing, setShowing] = useState(false)
 
   const handleShow = () => {
-    // Checks if any amount is staked in PID
-    fetchBals(pid)
     setShowing(!showing)
+    if (showing) {
+      // Checks if any amount is staked in PID
+      fetchBals(pid)
+      fetchApproval()
+    }
   }
+
+  const fetchStakingApr = async () => {
+    // const totalRewardPricePerYear = new BigNumber(rewardTokenPrice).times(tokenPerBlock).times(BLOCKS_PER_YEAR)
+    // const totalStakingTokenInPool = new BigNumber(stakingTokenPrice).times(totalStaked)
+    // const apr = totalRewardPricePerYear.div(totalStakingTokenInPool).times(100)
+    // return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
+  }
+
+  const fetchFarmApr = async (pid) => {
+    const poolAllocation = await poolInfo(pid)
+    const totalAllocation = await totalAllocPoint()
+    const poolWeight = poolAllocation?.[1] / totalAllocation
+
+    const soulPerSec = await soulPerSecond()
+    const formattedSPS = ethers.utils.formatUnits(soulPerSec.toString())
+
+    // amount of soul allocated to this pool per year
+    const yearlySoulFarmAlloc = formattedSPS * 31557600 * poolWeight
+    console.log('yearlyAlloc', yearlySoulFarmAlloc)
+
+    // const soulRewardsApr = yearlySoulRewardAlloc.times(soulPriceUsd).div(poolLiquidityUsd).times(100)
+
+    // set to soulRewardsApr
+    setApr(Number(yearlySoulFarmAlloc).toFixed(0))
+    return Number(yearlySoulFarmAlloc).toFixed(0)
+  }
+
+  // Fetches pool allocation point and divides by 100 to give `mulitplier`
+  const fetchMultiplier = async (pid) => {
+    if (!walletConnected) {
+      toggleWalletModal()
+    } else {
+      try {
+        const poolData = await poolInfo(pid)
+        const poolAlloc = poolData?.[1] / BigNumber.from(100)
+        setMultiplier(poolAlloc.toString())
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  }
+
+  //
+  const fetchUserFarmAlloc = async () => {}
+
+  // Checks how much the user is receiving in rewards based on their allocation of the pool
+  const fetchUserFarmApr = async () => {}
 
   // Used to get non 1e18 numbers and turn them into 1e18
   const parseAmount = (amount) => {
@@ -97,21 +147,6 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
         const formatted = ethers.utils.formatUnits(pending.toString())
         console.log(formatted)
         setPending(Number(formatted).toFixed(1).toString())
-      } catch (err) {
-        console.log(err)
-      }
-    }
-  }
-
-  // Fetches pool allocation point and divides by 100 to give `mulitplier`
-  const fetchMultiplier = async (pid) => {
-    if (!walletConnected) {
-      toggleWalletModal()
-    } else {
-      try {
-        const poolData = await poolInfo(pid)
-        const poolAlloc = poolData?.[1] / BigNumber.from(100)
-        setMultiplier(poolAlloc.toString())
       } catch (err) {
         console.log(err)
       }
@@ -183,7 +218,8 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
   // runs on render
   useEffect(() => {
     fetchMultiplier(pid)
-    fetchApproval()
+    fetchFarmApr(pid)
+    console.log('apr:', apr)
   }, [account])
 
   // Runs on render + reruns every second
@@ -191,6 +227,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
     if (account) {
       const timer = setTimeout(() => {
         fetchPending(pid)
+        fetchFarmApr(pid)
       }, 3000)
 
       // Clear timeout if the component is unmounted
@@ -210,25 +247,25 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
               </TokenPair>
             </TokenPairBox>
 
-            {/* <FarmItemBox desktopOnly={true}>
-                <FarmItemHeading>Earned</FarmItemHeading>
-                <FarmItem>{pending}</FarmItem>
-              </FarmItemBox> */}
+            <FarmItemBox desktopOnly={true}>
+              <FarmItemHeading>Earned</FarmItemHeading>
+              <FarmItem>{pending}</FarmItem>
+            </FarmItemBox>
 
-            {/* <FarmItemBox>
+            <FarmItemBox>
               <FarmItemHeading>APR</FarmItemHeading>
-              <FarmItem>...%</FarmItem>
-            </FarmItemBox> */}
+              <FarmItem>{apr}%</FarmItem>
+            </FarmItemBox>
 
-            {/* <FarmItemBox>
+            <FarmItemBox>
               <FarmItemHeading>TVL</FarmItemHeading>
-              <FarmItem>$...</FarmItem>
-            </FarmItemBox> */}
+              <FarmItem>$NA</FarmItem>
+            </FarmItemBox>
 
-            {/* <FarmItemBox marginLeft={'100px'} desktopOnly={true}>
-                <FarmItemHeading>Multiplier</FarmItemHeading>
-                <FarmItem>{multiplier}x</FarmItem>
-              </FarmItemBox> */}
+            <FarmItemBox marginLeft={'100px'} desktopOnly={true}>
+              <FarmItemHeading>Multiplier</FarmItemHeading>
+              <FarmItem>{multiplier}x</FarmItem>
+            </FarmItemBox>
 
             <FarmItemBox>
               {/* <ShowBtnWrapper> */}
@@ -251,7 +288,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
               <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
               {approved ? (
                 <SubmitButton
-                  primaryColour="#45b7da"
+                  primaryColour="linear-gradient(#45b7da 20%, #20befd 80%)"
                   hoverColour="#45b7da"
                   onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
                 >
@@ -272,13 +309,17 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
               <Input name="unstake" id="unstake" type="number" placeholder="0.0" min="0" />
               <div style={{ display: 'flex' }}>
                 <SubmitButton
-                  primaryColour="#b72b18"
-                  hoverColour="#b72b18"
+                  primaryColour="linear-gradient(#c13927 20%, #ef3232 80%)"
+                  hoverColour="#c13927"
                   onClick={() => handleWithdraw(ethers.utils.parseUnits(document.getElementById('unstake').value))}
                 >
                   Unstake
                 </SubmitButton>
-                <SubmitButton primaryColour="#4afd94" hoverColour="#4afd94" onClick={() => handleHarvest()}>
+                <SubmitButton
+                  primaryColour="linear-gradient(#3cd27a 20%, #98de3d 80%)"
+                  hoverColour="#98de3d"
+                  onClick={() => handleHarvest()}
+                >
                   Harvest
                 </SubmitButton>
               </div>
