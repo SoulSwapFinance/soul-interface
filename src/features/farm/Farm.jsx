@@ -62,18 +62,18 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
     }
   }
 
-  const fetchStakingApr = async () => {
+  // const fetchStakingApr = async () => {
     // const totalRewardPricePerYear = new BigNumber(rewardTokenPrice).times(tokenPerBlock).times(BLOCKS_PER_YEAR)
     // const totalStakingTokenInPool = new BigNumber(stakingTokenPrice).times(totalStaked)
     // const apr = totalRewardPricePerYear.div(totalStakingTokenInPool).times(100)
     // return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
-  }
+  // }
 
   // Return the base token price for a farm, from a given pid
-export const useFtmPriceFromPid = (pid) => {
+// export const useFtmPriceFromPid = (pid) => {
   // const farm = useFarmFromPid(pid)
   // return farm && new BigNumber(farm.token.ftmPrice)
-}
+// }
 
 // export const useLpTokenPrice = (symbol) => {
   // const farm = useFarmFromLpSymbol(symbol)
@@ -95,16 +95,16 @@ export const useFtmPriceFromPid = (pid) => {
 
 // /!\ Deprecated , use the BUSD hook in /hooks
 
-export const usePriceFtmFusd = () => {
+// export const usePriceFtmFusd = () => {
+const usePriceFtmFusd = () => {
   const bnbBusdFarm = useFarmFromPid(252)
   return new BigNumber(bnbBusdFarm.quoteToken.busdPrice)
 }
 
-export const usePriceSoulFusd = () => {
+// export const usePriceSoulFusd = () => {
+const usePriceSoulFusd = () => {
   const soulFtmFarm = useFarmFromPid(2)
-
   const soulPriceFusdAsString = soulFtmFarm.token.fusdPrice
-
   const soulPriceFusd = useMemo(() => {
     return new BigNumber(soulPriceFusdAsString)
   }, [soulPriceFusdAsString])
