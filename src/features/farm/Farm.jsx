@@ -69,6 +69,50 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
     // return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
   }
 
+  // Return the base token price for a farm, from a given pid
+export const useFtmPriceFromPid = (pid) => {
+  // const farm = useFarmFromPid(pid)
+  // return farm && new BigNumber(farm.token.ftmPrice)
+}
+
+export const useLpTokenPrice = (symbol) => {
+  // const farm = useFarmFromLpSymbol(symbol)
+  // const farmTokenPriceInUsd = useFtmPriceFromPid(farm.pid)
+  // let lpTokenPrice = BIG_ZERO
+
+  // if (farm.lpTotalSupply && farm.lpTotalInQuoteToken) {
+  //   // Total value of base token in LP
+  //   const valueOfBaseTokenInFarm = farmTokenPriceInUsd.times(farm.tokenAmountTotal)
+  //   // Double it to get overall value in LP
+  //   const overallValueOfAllTokensInFarm = valueOfBaseTokenInFarm.times(2)
+  //   // Divide total value of all tokens, by the number of LP tokens
+  //   const totalLpTokens = getBalanceAmount(new BigNumber(farm.lpTotalSupply))
+  //   lpTokenPrice = overallValueOfAllTokensInFarm.div(totalLpTokens)
+  // }
+
+  // return lpTokenPrice
+}
+
+// /!\ Deprecated , use the BUSD hook in /hooks
+
+export const usePriceFtmFusd = () => {
+  const bnbBusdFarm = useFarmFromPid(252)
+  return new BigNumber(bnbBusdFarm.quoteToken.busdPrice)
+}
+
+export const usePriceSoulFusd = () => {
+  const soulFtmFarm = useFarmFromPid(2)
+
+  const soulPriceFusdAsString = soulFtmFarm.token.fusdPrice
+
+  const soulPriceFusd = useMemo(() => {
+    return new BigNumber(soulPriceFusdAsString)
+  }, [soulPriceFusdAsString])
+
+  return soulPriceFusd
+}
+
+
   const fetchFarmApr = async (pid) => {
     const poolAllocation = await poolInfo(pid)
     const totalAllocation = await totalAllocPoint()
@@ -80,6 +124,9 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
     // amount of soul allocated to this pool per year
     const yearlySoulFarmAlloc = formattedSPS * 31557600 * poolWeight
     console.log('yearlyAlloc', yearlySoulFarmAlloc)
+
+    // get the total liquidity to calc the current available apr
+    // const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(farm.quoteToken.busdPrice)
 
     // const soulRewardsApr = yearlySoulRewardAlloc.times(soulPriceUsd).div(poolLiquidityUsd).times(100)
 
