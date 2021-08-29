@@ -54,13 +54,11 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
   const [pending, setPending] = useState(0)
   const [apr, setApr] = useState()
   const [liquidity, setLiquidity] = useState()
-  const [multiplier, setMultiplier] = useState('?')
   const [approved, setApproved] = useState(false)
   const [showing, setShowing] = useState(false)
 
   // runs on render
   useEffect(() => {
-    fetchMultiplier(pid)
     fetchFarmApr(pid)
     // fetchSummonerTokenBal()
     console.log('apr:', apr)
@@ -166,21 +164,6 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
     // set to soulRewardsApr
     setApr(Number(yearlySoulFarmAlloc).toFixed(0))
     return Number(yearlySoulFarmAlloc).toFixed(0)
-  }
-
-  // Fetches pool allocation point and divides by 100 to give `mulitplier`
-  const fetchMultiplier = async (pid) => {
-    if (!walletConnected) {
-      toggleWalletModal()
-    } else {
-      try {
-        const poolData = await poolInfo(pid)
-        const poolAlloc = poolData?.[1] / BigNumber.from(100)
-        setMultiplier(poolAlloc.toString())
-      } catch (err) {
-        console.log(err)
-      }
-    }
   }
 
   //
@@ -315,12 +298,6 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
             <FarmItemBox>
               <FarmItemHeading>APR</FarmItemHeading>
               <FarmItem>{apr}%</FarmItem>
-            </FarmItemBox>
-
-
-            <FarmItemBox marginLeft={'100px'} desktopOnly={true}>
-              <FarmItemHeading>Multiplier</FarmItemHeading>
-              <FarmItem>{multiplier}x</FarmItem>
             </FarmItemBox>
 
             {/* <FarmItemBox>
