@@ -1,11 +1,27 @@
 import { useActiveWeb3React } from '../../hooks'
 import { BigNumber } from '@ethersproject/bignumber'
 import { useCallback } from 'react'
-import { useSoulSummonerContract } from '../../hooks/useContract'
+import { useSoulSummonerContract, useTokenContract } from '../../hooks/useContract'
 
 export default function useSoulSummoner() {
   const { account } = useActiveWeb3React()
   const summonerContract = useSoulSummonerContract()
+
+  const fetchSummonerLpTokens = useCallback(
+    async (tokenAddress: string) => {
+      try {
+        // fetch lpToken contract
+        const erc20Contract = await useTokenContract(tokenAddress)
+        // return total amount of lp tokens locked in summoner contract
+        return await erc20Contract?.balanceOf(summonerContract)
+      } catch (e) {
+        console.log(e)
+        alert(e.message)
+        return e
+      }
+    },
+    [summonerContract]
+  )
 
   // Deposit
   const deposit = useCallback(
@@ -122,5 +138,5 @@ export default function useSoulSummoner() {
     }
   }, [summonerContract])
 
-  return { deposit, withdraw, poolLength, poolInfo, userInfo, pendingSoul, soulPerSecond, totalAllocPoint }
+  return { fetchSummonerLpTokens, deposit, withdraw, poolLength, poolInfo, userInfo, pendingSoul, soulPerSecond, totalAllocPoint }
 }

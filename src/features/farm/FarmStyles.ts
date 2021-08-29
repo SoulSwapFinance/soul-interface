@@ -151,22 +151,20 @@ export const SubmitButton = styled.button`
   font-size: 1rem;
   padding: 0.5em;
   transition: all 0.2s ease-in-out;
-  background: ${({ primaryColour }) => (primaryColour ? primaryColour : 'white')};
-  color: black;
+  background: ${({ primaryColour }) => (primaryColour ? primaryColour : '#3D81DB')};
+  color: ${({ color }) => (color ? color : 'white')};;
 
   &:hover {
-    border-color: ${({ hoverColour }) => (hoverColour ? hoverColour : 'violet')};
-    box-shadow: ${({ hoverColour }) => (hoverColour ? `0 0 10px 0 ${hoverColour}` : '0 0 10px 0 violet')};
-    background-color: ${({ hoverColour }) => (hoverColour ? hoverColour : 'violet')};
+    opacity: 70%;
     cursor: pointer;
   }
 
   &:focus {
-    border-color: ${({ hoverColour }) => (hoverColour ? hoverColour : 'violet')};
+    border-color: ${({ hoverColour }) => (hoverColour ? hoverColour : '#3D81DB')};
   }
 
-  &:disabled {
-    cursor: auto;
-    opacity: 80%;
+  &:disabled { 
+    cursor: not-allowed;
+    opacity: 50%;
   }
 `
