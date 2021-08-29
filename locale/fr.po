@@ -165,6 +165,9 @@ msgstr "Emprunté"
 msgid "Borrowing allows you to obtain liquidity without selling. Your borrow limit depends on the amount of deposited collateral. You will be able to borrow up to 75% of your collateral and repay at any time with accrued interest."
 msgstr "Emprunter vous permet d'obtenir des liquidités sans vendre. Votre limite d'emprunt dépend du montant de la garantie déposée. Vous pourrez emprunter jusqu'à 75% de votre garantie et rembourser à tout moment avec les intérêts dus."
 
+msgid "Bridge"
+msgstr ""
+
 msgid "Buy"
 msgstr ""
 
@@ -650,14 +653,14 @@ msgstr "N'UTILISEZ CE MODE QUE SI VOUS SAVEZ CE QUE VOUS FAITES."
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 msgstr "Oops! Une erreur inconnue est survenue. Veuillez actualiser la page ou la consulter à partir d'un autre navigateur ou appareil"
 
-msgid "Open Main Menu"
-msgstr ""
-
 msgid "Open Orders"
 msgstr ""
 
 msgid "Open Source"
 msgstr "Open source"
+
+msgid "Open main menu"
+msgstr ""
 
 msgid "Oracle"
 msgstr "Oracle"

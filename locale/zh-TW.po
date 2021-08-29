@@ -165,6 +165,9 @@ msgstr "已借入"
 msgid "Borrowing allows you to obtain liquidity without selling. Your borrow limit depends on the amount of deposited collateral. You will be able to borrow up to 75% of your collateral and repay at any time with accrued interest."
 msgstr "借款讓您在不出售資產的情況下獲得流動性。您的借款上限取決於您抵押物的價值。您可以借出您抵押品價值的75%，隨時可以還款，並附上利息。"
 
+msgid "Bridge"
+msgstr ""
+
 msgid "Buy"
 msgstr ""
 
@@ -643,14 +646,14 @@ msgstr "只有当您知道自己在做什么时，才会使用此模式。"
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 msgstr "糟糕！出現未知錯誤。請刷新頁面，或從其他瀏覽器或設備訪問"
 
-msgid "Open Main Menu"
-msgstr ""
-
 msgid "Open Orders"
 msgstr ""
 
 msgid "Open Source"
 msgstr "開源"
+
+msgid "Open main menu"
+msgstr ""
 
 msgid "Oracle"
 msgstr "預言機"

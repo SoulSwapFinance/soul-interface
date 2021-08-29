@@ -165,6 +165,9 @@ msgstr "借入れ済み"
 msgid "Borrowing allows you to obtain liquidity without selling. Your borrow limit depends on the amount of deposited collateral. You will be able to borrow up to 75% of your collateral and repay at any time with accrued interest."
 msgstr "借り入れることで、売却せずに流動性を得ることができます。借入れ限度額は、預け入れた担保の金額によって異なります。担保の75％まで借入れが可能で、いつでも未払い利息をつけて返済することができます。"
 
+msgid "Bridge"
+msgstr ""
+
 msgid "Buy"
 msgstr ""
 
@@ -650,14 +653,14 @@ msgstr "このモードは、自分が行っている内容を分かっている
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 msgstr "おっと！不明なエラーが発生しました。ページを更新するか、別のブラウザまたはデバイスからアクセスしてください"
 
-msgid "Open Main Menu"
-msgstr ""
-
 msgid "Open Orders"
 msgstr ""
 
 msgid "Open Source"
 msgstr "オープンソース"
+
+msgid "Open main menu"
+msgstr ""
 
 msgid "Oracle"
 msgstr "オラクル"

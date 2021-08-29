@@ -165,6 +165,9 @@ msgstr "차용금액"
 msgid "Borrowing allows you to obtain liquidity without selling. Your borrow limit depends on the amount of deposited collateral. You will be able to borrow up to 75% of your collateral and repay at any time with accrued interest."
 msgstr "대출을 통해 자산 매도 없이 유동성을 얻을 수 있습니다. 대출 한도는 예치된 담보 금액에 따라 다릅니다. 담보의 최대 75%를 빌릴 수 있으며 발생된 이자와 함께 언제든지 상환할 수 있습니다."
 
+msgid "Bridge"
+msgstr ""
+
 msgid "Buy"
 msgstr ""
 
@@ -650,14 +653,14 @@ msgstr "잘 이해한 경우에만 해당 모드를 사용하세요."
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 msgstr "이런! 알 수 없는 오류가 발생했습니다. 페이지를 새로 고침하거나 다른 브라우저 또는 기기에서 방문하세요."
 
-msgid "Open Main Menu"
-msgstr ""
-
 msgid "Open Orders"
 msgstr ""
 
 msgid "Open Source"
 msgstr "오픈 소스"
+
+msgid "Open main menu"
+msgstr ""
 
 msgid "Oracle"
 msgstr "오라클"

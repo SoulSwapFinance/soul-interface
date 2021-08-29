@@ -165,6 +165,9 @@ msgstr "Prestado"
 msgid "Borrowing allows you to obtain liquidity without selling. Your borrow limit depends on the amount of deposited collateral. You will be able to borrow up to 75% of your collateral and repay at any time with accrued interest."
 msgstr "Pedir prestado le permite obtener liquidez sin vender. Su límite de préstamo depende de la cantidad de garantía depositada. Podrá pedir prestado hasta el 75% de su garantía y pagar en cualquier momento con los intereses devengados."
 
+msgid "Bridge"
+msgstr ""
+
 msgid "Buy"
 msgstr ""
 
@@ -650,14 +653,14 @@ msgstr "UTILICE ESTE MODO ÚNICAMENTE SI SABE LO QUE ESTÁ HACIENDO."
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 msgstr "¡UPS! Un error desconocido ocurrió. Actualiza la página o visita desde otro navegador o dispositivo."
 
-msgid "Open Main Menu"
-msgstr ""
-
 msgid "Open Orders"
 msgstr ""
 
 msgid "Open Source"
 msgstr "Fuente abierta"
+
+msgid "Open main menu"
+msgstr ""
 
 msgid "Oracle"
 msgstr "Oráculo"

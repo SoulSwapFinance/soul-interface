@@ -165,6 +165,9 @@ msgstr "Đã vay"
 msgid "Borrowing allows you to obtain liquidity without selling. Your borrow limit depends on the amount of deposited collateral. You will be able to borrow up to 75% of your collateral and repay at any time with accrued interest."
 msgstr "Việc đi vay cho phép bạn có được tính thanh khoản mà không cần bán. Hạn mức vào phụ thuộc vào số tiền thế chấp ký quỹ. Bạn sẽ có thể vay đến 75% tài sản thế chấp của mình và hoàn trả bất kỳ lúc nào với lãi suất cộng dồn."
 
+msgid "Bridge"
+msgstr ""
+
 msgid "Buy"
 msgstr ""
 
@@ -648,14 +651,14 @@ msgstr "CHỈ SỬ DỤNG CHẾ ĐỘ NÀY NẾU BẠN BIẾT BẠN ĐANG LÀM G
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 msgstr "Rất tiếc! Đã xảy ra lỗi không xác định. Vui lòng làm mới trang hoặc truy cập từ trình duyệt hoặc thiết bị khác"
 
-msgid "Open Main Menu"
-msgstr ""
-
 msgid "Open Orders"
 msgstr ""
 
 msgid "Open Source"
 msgstr "Mã nguồn mở"
+
+msgid "Open main menu"
+msgstr ""
 
 msgid "Oracle"
 msgstr "Oracle"

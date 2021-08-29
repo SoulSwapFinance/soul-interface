@@ -165,6 +165,9 @@ msgstr "Взято в кредит"
 msgid "Borrowing allows you to obtain liquidity without selling. Your borrow limit depends on the amount of deposited collateral. You will be able to borrow up to 75% of your collateral and repay at any time with accrued interest."
 msgstr "Займы позволяют получить ликвидность без продажи. Ваш лимит кредита зависит от суммы внесенного залога. Вы сможете занять до 75% залога и погасить его в любое время с начисленными процентами."
 
+msgid "Bridge"
+msgstr ""
+
 msgid "Buy"
 msgstr ""
 
@@ -650,14 +653,14 @@ msgstr "ИСПОЛЬЗУЙТЕ ЭТОТ РЕЖИМ ТОЛЬКО, ЕСЛИ ЗНА
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 msgstr "Ой! Произошла неизвестная ошибка. Обновите страницу или перейдите в другой браузер или устройство"
 
-msgid "Open Main Menu"
-msgstr ""
-
 msgid "Open Orders"
 msgstr ""
 
 msgid "Open Source"
 msgstr "Открытый источник"
+
+msgid "Open main menu"
+msgstr ""
 
 msgid "Oracle"
 msgstr "Оракул"

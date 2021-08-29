@@ -1,5 +1,4 @@
-import styled, { keyframes } from "styled-components";
-import Link from "next/link";
+import styled from "styled-components";
 
 // Lime : #2de273
 
@@ -60,6 +59,13 @@ export const Text = styled.p`
   text-align: ${({ textAlign }) => (textAlign ? `${textAlign}` : `left`)};
 `;
 
+export const ClickableText = styled(Text)`
+  &:hover {
+    opacity: 50%;
+    cursor: pointer;
+  }
+`;
+
 export const ExternalLink = styled.a`
   outline: none;
   text-decoration: none;
@@ -84,7 +90,7 @@ export const ExternalLink = styled.a`
 
 
 export const Button = styled.button`
-  margin: ${({ margin }) => (margin ? `${margin}` : `0 .25rem`)};
+  margin: ${({ margin }) => (margin ? `${margin}` : `0`)};
   width: ${({ width }) => (width ? `${width}` : `8rem`)};
   height: ${({ height }) => (height ? `${height}` : `2.5rem`)};
   font-size: ${({ fontSize }) => (fontSize ? `${fontSize}` : `.9rem`)};

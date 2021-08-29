@@ -1,16 +1,18 @@
 import { ethers, BigNumber } from "ethers";
 
-import { useActiveWeb3React } from '../../hooks'
+import { useActiveWeb3React } from './useActiveWeb3React'
 import { ChainId } from '@soulswap/sdk'
-import { useAnyswapEthOperaBridge } from "../../hooks/useContract";
+import { useAnyswapEthOperaBridge } from "./useContract";
 
 const useBridge = () => {
-  const swapOut = async (amount, account) => {
+  const { account } = useActiveWeb3React()
+
+  const swapOut = async (amount) => {
     const ethToFtm = await useAnyswapEthOperaBridge();
 
     if (ChainId.MAINNET) {
       try {
-        const result = await ethToFtm?.connect(account).Swapout(amount, account);
+        const result = await ethToFtm?.Swapout(amount);
         return result;
       } catch (err) {
         console.log(err);

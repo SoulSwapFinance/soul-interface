@@ -62,7 +62,7 @@ import SPELL_ABI from '../constants/abis/soulswap/spell.json' // 28 JUL
 import SOUL_ABI from '../constants/abis/soulswap/soulpower.json' // 28 JUL
 
 // bridge
-import anyswapEthOperaBridge from '../constants/abis/soulswap/bridge/anyswapEthOperaBridge.json'
+import anyswapEthOperaBridge_ABI from '../constants/abis/soulswap/bridge/anyswapEthOperaBridge.json'
 
 // unused
 import MEOWSHI_ABI from '../constants/abis/meowshi.json'
@@ -514,6 +514,7 @@ export function useLimitOrderHelperContract(withSignerIfPossible?: boolean): Con
 
 
 // ------- Bridge --------
+
 export function useAnyswapEthOperaBridge(withSignerIfPossible?: boolean): Contract | null {
-  return useContract('0x5cbe98480a790554403694b98bff71a525907f5d', anyswapEthOperaBridge, withSignerIfPossible)
+  return useContract('0x5cbe98480a790554403694b98bff71a525907f5d', anyswapEthOperaBridge_ABI, withSignerIfPossible)
 }
