@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { BigNumber } from '@ethersproject/bignumber'
 import { MaxUint256 } from '@ethersproject/constants'
 import { useWalletModalToggle } from '../../state/application/hooks'
-import { useActiveWeb3React } from '../../hooks'
+import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import useApproveContract from '../../hooks/useApprove'
 import { ethers } from 'ethers'
 
 import useSoulSummoner from './useSoulSummoner'
@@ -26,6 +27,8 @@ import {
   SubmitButton,
 } from './FarmStyles'
 
+import { Wrap } from '../../components/ReusableStyles'
+
 // params to render farm with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)
 // 2. totalAlloc / poolAlloc
@@ -41,6 +44,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
   const walletConnected = !!account
   const toggleWalletModal = useWalletModalToggle()
 
+  const { erc20BalanceOf } = useApproveContract()
   const { withdraw, deposit, pendingSoul, poolInfo, userInfo, soulPerSecond, totalAllocPoint } = useSoulSummoner()
   const { approve, allowance, balanceOf } = useLpToken(lpToken)
 
@@ -49,9 +53,30 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
 
   const [pending, setPending] = useState(0)
   const [apr, setApr] = useState()
-  const [multiplier, setMultiplier] = useState('?')
+  const [liquidity, setLiquidity] = useState()
   const [approved, setApproved] = useState(false)
   const [showing, setShowing] = useState(false)
+
+  // runs on render
+  useEffect(() => {
+    fetchFarmApr(pid)
+    // fetchSummonerTokenBal()
+    console.log('apr:', apr)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [account])
+
+  // Runs on render + reruns every second
+  useEffect(() => {
+    if (account) {
+      const timer = setTimeout(() => {
+        fetchPending(pid)
+        fetchFarmApr(pid)
+      }, 3000)
+
+      // Clear timeout if the component is unmounted
+      return () => clearTimeout(timer)
+    }
+  })
 
   const handleShow = () => {
     setShowing(!showing)
@@ -63,19 +88,19 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
   }
 
   // const fetchStakingApr = async () => {
-    // const totalRewardPricePerYear = new BigNumber(rewardTokenPrice).times(tokenPerBlock).times(BLOCKS_PER_YEAR)
-    // const totalStakingTokenInPool = new BigNumber(stakingTokenPrice).times(totalStaked)
-    // const apr = totalRewardPricePerYear.div(totalStakingTokenInPool).times(100)
-    // return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
+  // const totalRewardPricePerYear = new BigNumber(rewardTokenPrice).times(tokenPerBlock).times(BLOCKS_PER_YEAR)
+  // const totalStakingTokenInPool = new BigNumber(stakingTokenPrice).times(totalStaked)
+  // const apr = totalRewardPricePerYear.div(totalStakingTokenInPool).times(100)
+  // return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
   // }
 
   // Return the base token price for a farm, from a given pid
-// export const useFtmPriceFromPid = (pid) => {
+  // export const useFtmPriceFromPid = (pid) => {
   // const farm = useFarmFromPid(pid)
   // return farm && new BigNumber(farm.token.ftmPrice)
-// }
+  // }
 
-// export const useLpTokenPrice = (symbol) => {
+  // export const useLpTokenPrice = (symbol) => {
   // const farm = useFarmFromLpSymbol(symbol)
   // const farmTokenPriceInUsd = useFtmPriceFromPid(farm.pid)
   // let lpTokenPrice = BIG_ZERO
@@ -91,27 +116,33 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
   // }
 
   // return lpTokenPrice
-// }
+  // }
 
-// /!\ Deprecated , use the BUSD hook in /hooks
+  // /!\ Deprecated , use the BUSD hook in /hooks
 
-// export const usePriceFtmFusd = () => {
-const usePriceFtmFusd = () => {
-  const bnbBusdFarm = useFarmFromPid(252)
-  return new BigNumber(bnbBusdFarm.quoteToken.busdPrice)
-}
+  // export const usePriceFtmFusd = () => {
+  const usePriceFtmFusd = () => {
+    const bnbBusdFarm = useFarmFromPid(252)
+    return new BigNumber(bnbBusdFarm.quoteToken.busdPrice)
+  }
 
-// export const usePriceSoulFusd = () => {
-const usePriceSoulFusd = () => {
-  const soulFtmFarm = useFarmFromPid(2)
-  const soulPriceFusdAsString = soulFtmFarm.token.fusdPrice
-  const soulPriceFusd = useMemo(() => {
-    return new BigNumber(soulPriceFusdAsString)
-  }, [soulPriceFusdAsString])
+  // export const usePriceSoulFusd = () => {
+  const usePriceSoulFusd = () => {
+    const soulFtmFarm = useFarmFromPid(2)
+    const soulPriceFusdAsString = soulFtmFarm.token.fusdPrice
+    const soulPriceFusd = useMemo(() => {
+      return new BigNumber(soulPriceFusdAsString)
+    }, [soulPriceFusdAsString])
 
-  return soulPriceFusd
-}
+    return soulPriceFusd
+  }
 
+  const fetchSummonerTokenBal = async () => {
+    const bal = await erc20BalanceOf(lpToken, '0xA65DbEA56E1E202bf03dB5f49ba565fb00Bf9288')
+    const formatted = ethers.utils.formatUnits(bal)
+    console.log(formatted)
+    setLiquidity(Number(formatted).toFixed(0))
+  }
 
   const fetchFarmApr = async (pid) => {
     const poolAllocation = await poolInfo(pid)
@@ -133,21 +164,6 @@ const usePriceSoulFusd = () => {
     // set to soulRewardsApr
     setApr(Number(yearlySoulFarmAlloc).toFixed(0))
     return Number(yearlySoulFarmAlloc).toFixed(0)
-  }
-
-  // Fetches pool allocation point and divides by 100 to give `mulitplier`
-  const fetchMultiplier = async (pid) => {
-    if (!walletConnected) {
-      toggleWalletModal()
-    } else {
-      try {
-        const poolData = await poolInfo(pid)
-        const poolAlloc = poolData?.[1] / BigNumber.from(100)
-        setMultiplier(poolAlloc.toString())
-      } catch (err) {
-        console.log(err)
-      }
-    }
   }
 
   //
@@ -262,31 +278,10 @@ const usePriceSoulFusd = () => {
     }
   }
 
-  // runs on render
-  useEffect(() => {
-    fetchMultiplier(pid)
-    fetchFarmApr(pid)
-    console.log('apr:', apr)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [account])
-
-  // Runs on render + reruns every second
-  useEffect(() => {
-    if (account) {
-      const timer = setTimeout(() => {
-        fetchPending(pid)
-        fetchFarmApr(pid)
-      }, 3000)
-
-      // Clear timeout if the component is unmounted
-      return () => clearTimeout(timer)
-    }
-  })
-
   return (
     <>
       <FarmContainer>
-        <FarmRow>
+        <FarmRow onClick={() => handleShow()}>
           <FarmContentWrapper>
             <TokenPairBox>
               {/* 2 token logo combined ? */}
@@ -305,15 +300,10 @@ const usePriceSoulFusd = () => {
               <FarmItem>{apr}%</FarmItem>
             </FarmItemBox>
 
-            <FarmItemBox>
+            {/* <FarmItemBox>
               <FarmItemHeading>TVL</FarmItemHeading>
-              <FarmItem>$NA</FarmItem>
-            </FarmItemBox>
-
-            <FarmItemBox marginLeft={'100px'} desktopOnly={true}>
-              <FarmItemHeading>Multiplier</FarmItemHeading>
-              <FarmItem>{multiplier}x</FarmItem>
-            </FarmItemBox>
+              <FarmItem>${liquidity}</FarmItem>
+            </FarmItemBox> */}
 
             <FarmItemBox>
               {/* <ShowBtnWrapper> */}
@@ -334,19 +324,17 @@ const usePriceSoulFusd = () => {
                 <button onClick={() => (document.getElementById('stake').value = unstakedBal)}>MAX</button>
               </FlexText>
               <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
-              {approved ? (
-                <SubmitButton
-                  primaryColour="linear-gradient(#45b7da 20%, #20befd 80%)"
-                  hoverColour="#45b7da"
-                  onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
-                >
-                  Stake
-                </SubmitButton>
-              ) : (
-                <SubmitButton primaryColour="#da9045" hoverColour="#da9045" onClick={() => handleApprove()}>
-                  Approve Stake
-                </SubmitButton>
-              )}
+              <Wrap padding="0" margin="0" display="flex">
+                {approved ? (
+                  <SubmitButton
+                    onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
+                  >
+                    Stake
+                  </SubmitButton>
+                ) : (
+                  <SubmitButton onClick={() => handleApprove()}>Approve Stake</SubmitButton>
+                )}
+              </Wrap>
             </FunctionBox>
 
             <FunctionBox>
@@ -355,22 +343,20 @@ const usePriceSoulFusd = () => {
                 <button onClick={() => (document.getElementById('unstake').value = stakedBal)}>MAX</button>
               </FlexText>
               <Input name="unstake" id="unstake" type="number" placeholder="0.0" min="0" />
-              <div style={{ display: 'flex' }}>
+
+              <Wrap padding="0" margin="0" display="flex">
+                <SubmitButton padding="0" margin=".5rem .65rem .5rem 0" onClick={() => handleHarvest()}>
+                  Harvest
+                </SubmitButton>
                 <SubmitButton
-                  primaryColour="linear-gradient(#c13927 20%, #ef3232 80%)"
-                  hoverColour="#c13927"
+                  primaryColour="#bbb"
+                  color="black"
+                  margin=".5rem 0 .5rem .65rem"
                   onClick={() => handleWithdraw(ethers.utils.parseUnits(document.getElementById('unstake').value))}
                 >
                   Unstake
                 </SubmitButton>
-                <SubmitButton
-                  primaryColour="linear-gradient(#3cd27a 20%, #98de3d 80%)"
-                  hoverColour="#98de3d"
-                  onClick={() => handleHarvest()}
-                >
-                  Harvest
-                </SubmitButton>
-              </div>
+              </Wrap>
             </FunctionBox>
           </DetailsWrapper>
         </DetailsContainer>

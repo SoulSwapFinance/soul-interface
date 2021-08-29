@@ -21,6 +21,12 @@ export const FarmRow = styled.div`
   border-radius: 8px;
   padding: 5px 15px;
   border: 1px solid #333;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    opacity: 75%;
+    cursor: pointer;
+  }
 `
 
 export const FarmContentWrapper = styled.div`
@@ -122,7 +128,7 @@ export const Input = styled.input`
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin: 0.25rem;
+  margin: 0.25rem 0 0.25rem;
   border: none;
   outline: none;
   font-size: 1rem;
@@ -144,29 +150,28 @@ export const SubmitButton = styled.button`
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin: 0.5rem 0.25rem 0 0.25rem;
+  padding: ${({ padding }) => (padding ? padding : '0')};
+  margin: ${({ margin }) => (margin ? margin : '0.5rem 0 0.5rem 0')};
   outline: 0;
   border: none;
   border-radius: 0.25em;
   font-size: 1rem;
   padding: 0.5em;
   transition: all 0.2s ease-in-out;
-  background: ${({ primaryColour }) => (primaryColour ? primaryColour : 'white')};
-  color: black;
+  background: ${({ primaryColour }) => (primaryColour ? primaryColour : '#3D81DB')};
+  color: ${({ color }) => (color ? color : 'white')};
 
   &:hover {
-    border-color: ${({ hoverColour }) => (hoverColour ? hoverColour : 'violet')};
-    box-shadow: ${({ hoverColour }) => (hoverColour ? `0 0 10px 0 ${hoverColour}` : '0 0 10px 0 violet')};
-    background-color: ${({ hoverColour }) => (hoverColour ? hoverColour : 'violet')};
+    opacity: 70%;
     cursor: pointer;
   }
 
   &:focus {
-    border-color: ${({ hoverColour }) => (hoverColour ? hoverColour : 'violet')};
+    border-color: ${({ hoverColour }) => (hoverColour ? hoverColour : '#3D81DB')};
   }
 
-  &:disabled {
-    cursor: auto;
-    opacity: 80%;
+  &:disabled { 
+    cursor: not-allowed;
+    opacity: 50%;
   }
 `
