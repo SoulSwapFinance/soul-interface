@@ -7,7 +7,7 @@
       "patch": 0
     },
     "tags": {},
-    "logoURI": "https://app.soulswap.finance/images/tokens/soul.jpg",
+    "logoURI": "https://raw.github.com/SoulSwapFinance/icons/master/token/soulswap.jpg",
     "keywords": ["soulswap", "default"],
     "tokens": [
        {
@@ -16,7 +16,7 @@
         "symbol": "SOUL",
         "decimals": 18,
         "chainId": 250,
-        "logoURI": "https://app.soulswap.finance/images/tokens/soul.jpg"
+        "logoURI": "https://raw.github.com/SoulSwapFinance/icons/master/token/soulswap.jpg"
        },
        {
         "name": "Soul Power",
@@ -24,7 +24,7 @@
         "symbol": "SOUL",
         "decimals": 18,
         "chainId": 4002,
-        "logoURI": "https://app.soulswap.finance/images/tokens/soul.jpg"
+        "logoURI": "https://raw.github.com/SoulSwapFinance/icons/master/token/soulswap.jpg"
        },
       {
         "name": "Wrapped Fantom",
@@ -72,7 +72,7 @@
         "symbol": "SEANCE",
         "decimals": 18,
         "chainId": 250,
-        "logoURI": "https://app.soulswap.finance/images/tokens/seance.jpg"
+        "logoURI": "https://raw.github.com/SoulSwapFinance/icons/master/token/seancecircle.jpg"
       },
       {
         "name": "Seance Circle",
@@ -80,7 +80,7 @@
         "symbol": "SEANCE",
         "decimals": 18,
         "chainId": 4002,
-        "logoURI": "https://app.soulswap.finance/images/tokens/seance.jpg"
+        "logoURI": "https://raw.github.com/SoulSwapFinance/icons/master/token/seancecircle.jpg"
       }
     ]
 }

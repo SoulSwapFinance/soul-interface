@@ -61,9 +61,9 @@ const PERMITTABLE_TOKENS: {
   // [42]: {
   //   [SOUL[42].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
   // },
-  // [250]: {
-  //   [SOUL[250].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
-  // },
+  [250]: {
+    [SOUL[250].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
+  },
   [4002]: {
     [SOUL[4002].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
   },
@@ -274,7 +274,7 @@ export function useERC20Permit(
 
 const REMOVE_V2_LIQUIDITY_PERMIT_INFO: PermitInfo = {
   version: '1',
-  name: 'SoulSwap LP Token',
+  name: 'SoulSwap LP',
   type: PermitType.AMOUNT,
 }
 

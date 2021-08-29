@@ -317,6 +317,9 @@ msgstr "Tài liệu"
 msgid "Documentation for Summoners."
 msgstr ""
 
+msgid "Documentation for users of Soul."
+msgstr ""
+
 msgid "Either return to the {link}, or change to an available network."
 msgstr ""
 
@@ -651,14 +654,14 @@ msgstr "CHỈ SỬ DỤNG CHẾ ĐỘ NÀY NẾU BẠN BIẾT BẠN ĐANG LÀM G
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 msgstr "Rất tiếc! Đã xảy ra lỗi không xác định. Vui lòng làm mới trang hoặc truy cập từ trình duyệt hoặc thiết bị khác"
 
+msgid "Open Main Menu"
+msgstr ""
+
 msgid "Open Orders"
 msgstr ""
 
 msgid "Open Source"
 msgstr "Mã nguồn mở"
-
-msgid "Open main menu"
-msgstr ""
 
 msgid "Oracle"
 msgstr "Oracle"

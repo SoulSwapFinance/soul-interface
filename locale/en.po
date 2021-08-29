@@ -324,6 +324,9 @@ msgstr "Docs"
 msgid "Documentation for Summoners."
 msgstr "Documentation for Summoners."
 
+msgid "Documentation for users of Soul."
+msgstr "Documentation for users of Soul."
+
 msgid "Either return to the {link}, or change to an available network."
 msgstr "Either return to the {link}, or change to an available network."
 
@@ -667,14 +670,14 @@ msgstr "ONLY USE THIS MODE IF YOU KNOW WHAT YOU ARE DOING."
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 msgstr "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 
+msgid "Open Main Menu"
+msgstr "Open Main Menu"
+
 msgid "Open Orders"
 msgstr "Open Orders"
 
 msgid "Open Source"
 msgstr "Open Source"
-
-msgid "Open main menu"
-msgstr "Open main menu"
 
 msgid "Oracle"
 msgstr "Oracle"

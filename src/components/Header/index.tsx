@@ -18,6 +18,7 @@ import { t } from '@lingui/macro'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useETHBalances } from '../../state/wallet/hooks'
 import { useLingui } from '@lingui/react'
+import { ANALYTICS_URL } from '../../constants'
 
 // import { ExternalLink, NavLink } from "./Link";
 // import { ReactComponent as Burger } from "../assets/images/burger.svg";
@@ -41,38 +42,27 @@ function AppBar(): JSX.Element {
                   <div className="hidden sm:block sm:ml-4">
                     <div className="flex space-x-2">
                       {/* <Buy /> */}
-                      {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <>
-                          <NavLink href="/swap">
-                            <a
-                              id={`swap-nav-link`}
-                              className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                            >
-                              {i18n._(t`Swap`)}
-                            </a>
-                          </NavLink>
-                          <NavLink href="/pool">
-                            <a
-                              id={`pool-nav-link`}
-                              className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                            >
-                              {i18n._(t`Pool`)}
-                            </a>
-                          </NavLink>
-                        </>
+                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      <NavLink href="/swap">
+                        <a
+                          id={`swap-nav-link`}
+                          className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                        >
+                          {i18n._(t`Swap`)}
+                        </a>
+                      </NavLink>
                       )}
-                      {/* {chainId && [ChainId.MAINNET, ChainId.MATIC, ChainId.BSC].includes(chainId) && (
-                        <NavLink href={'/migrate'}>
-                          <a
-                            id={`migrate-nav-link`}
-                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                          >
-                            {i18n._(t`Migrate`)}
-                          </a>
-                        </NavLink>
-                      )} */}
-                      {/* {chainId && [ChainId.MAINNET, ChainId.MATIC, ChainId.XDAI, ChainId.HARMONY].includes(chainId) && ( */}
-                      {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      <NavLink href="/pool">
+                        <a
+                          id={`pool-nav-link`}
+                          className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                        >
+                          {i18n._(t`Pool`)}
+                        </a>
+                      </NavLink>
+                      )}
+                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/farm'}>
                           <a
                             id={`farm-nav-link`}
@@ -105,8 +95,7 @@ function AppBar(): JSX.Element {
                             </NavLink>
                           </>
                         )} */}
-                      {/* {chainId === ChainId.MAINNET && ( */}
-                      {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/stake'}>
                           <a
                             id={`stake-nav-link`}
@@ -116,13 +105,23 @@ function AppBar(): JSX.Element {
                           </a>
                         </NavLink>
                       )}
-                      {chainId && [ChainId.MAINNET, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      {chainId && [ChainId.MAINNET].includes(chainId) && (
                         <NavLink href={'/bridge'}>
                           <a
                             id={`bridge-nav-link`}
                             className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                           >
                             {i18n._(t`Bridge`)}
+                          </a>
+                        </NavLink>
+                      )}
+                      {chainId && [ChainId.MAINNET, ChainId.FANTOM].includes(chainId) && (
+                        <NavLink href={'/user'}>
+                          <a
+                            id={`bridge-nav-link`}
+                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                          >
+                            {i18n._(t`History`)}
                           </a>
                         </NavLink>
                       )}
@@ -142,9 +141,7 @@ function AppBar(): JSX.Element {
 
                 <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-4 lg:w-auto bg-dark-1000 lg:relative lg:p-0 lg:bg-transparent">
                   <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
-                    {/* {chainId && [ChainId.MAINNET].includes(chainId) && library && library.provider.isMetaMask && ( */}
-                    {chainId &&
-                      [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) &&
+                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                       library &&
                       library.provider.isMetaMask && ( // TODO: update
                         <>
@@ -190,59 +187,52 @@ function AppBar(): JSX.Element {
                             </div>
                           </QuestionHelper>
                         </>
-                      )}
+                      ))}
 
-                    {/* {chainId && chainId in SOUL_ADDRESS && library && library.provider.isMetaMask && ( */}
-
-                    {chainId &&
-                      [ChainId.FANTOM].includes(chainId) &&
-                      chainId in SOUL_ADDRESS &&
-                      library &&
-                      library.provider.isMetaMask && (
-                        <>
-                          <QuestionHelper text={i18n._(t`Add SOUL to your MetaMask wallet`)}>
-                            <div
-                              className="hidden rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
-                              onClick={() => {
-                                const params: any = {
-                                  type: 'ERC20',
-                                  options: {
-                                    address: SOUL_ADDRESS[chainId],
-                                    symbol: 'SOUL',
-                                    decimals: 18,
-                                    image:
-                                      'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/soul.jpg',
-                                  },
-                                }
-                                if (library && library.provider.isMetaMask && library.provider.request) {
-                                  library.provider
-                                    .request({
-                                      method: 'wallet_watchAsset',
-                                      params,
-                                    })
-                                    .then((success) => {
-                                      if (success) {
-                                        console.log('Successfully added SOUL to MetaMask')
-                                      } else {
-                                        throw new Error('Something went wrong.')
-                                      }
-                                    })
-                                    .catch(console.error)
-                                }
-                              }}
-                            >
-                              <Image
-                                src="/logo.jpg"
-                                alt="SOUL"
-                                width="38px"
-                                height="38px"
-                                objectFit="contain"
-                                className="rounded-md"
-                              />
-                            </div>
-                          </QuestionHelper>
-                        </>
-                      )}
+                    {chainId && chainId in SOUL_ADDRESS && library && library.provider.isMetaMask && (
+                      <>
+                        <QuestionHelper text={i18n._(t`Add SOUL to your MetaMask wallet`)}>
+                          <div
+                            className="hidden rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
+                            onClick={() => {
+                              const params: any = {
+                                type: 'ERC20',
+                                options: {
+                                  address: SOUL_ADDRESS[chainId],
+                                  symbol: 'SOUL',
+                                  decimals: 18,
+                                  image: 'https://app.soulswap.finance/images/tokens/soul.jpg',
+                                },
+                              }
+                              if (library && library.provider.isMetaMask && library.provider.request) {
+                                library.provider
+                                  .request({
+                                    method: 'wallet_watchAsset',
+                                    params,
+                                  })
+                                  .then((success) => {
+                                    if (success) {
+                                      console.log('Successfully added SOUL to MetaMask')
+                                    } else {
+                                      throw new Error('Something went wrong.')
+                                    }
+                                  })
+                                  .catch(console.error)
+                              }
+                            }}
+                          >
+                            <Image
+                              src="/logo.jpg"
+                              alt="SOUL"
+                              width="38px"
+                              height="38px"
+                              objectFit="contain"
+                              className="rounded-md"
+                            />
+                          </div>
+                        </QuestionHelper>
+                      </>
+                    )}
 
                     {library && library.provider.isMetaMask && (
                       <div className="hidden sm:inline-block">
@@ -269,7 +259,7 @@ function AppBar(): JSX.Element {
                 <div className="flex -mr-2 sm:hidden">
                   {/* Mobile menu button */}
                   <Popover.Button className="inline-flex items-center justify-center p-2 rounded-md text-primary hover:text-high-emphesis focus:outline-none">
-                    <span className="sr-only">{i18n._(t`Open main menu`)}</span>
+                    <span className="sr-only">{i18n._(t`Open Main Menu`)}</span>
                     {open ? (
                       <svg
                         className="block w-6 h-6"
@@ -306,6 +296,7 @@ function AppBar(): JSX.Element {
 
             <Popover.Panel className="sm:hidden">
               <div className="flex flex-col px-4 pt-2 pb-3 space-y-1">
+              { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                 <Link href={'/swap'}>
                   <a
                     id={`swap-nav-link`}
@@ -314,6 +305,18 @@ function AppBar(): JSX.Element {
                     {i18n._(t`Swap`)}
                   </a>
                 </Link>
+              )}
+              { chainId && [ChainId.MAINNET].includes(chainId) && (
+                <Link href={'/bridge'}>
+                  <a
+                    id={`swap-nav-link`}
+                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                  >
+                    {i18n._(t`Swap`)}
+                  </a>
+                </Link>
+              )}
+                { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                 <Link href={'/pool'}>
                   <a
                     id={`pool-nav-link`}
@@ -322,18 +325,8 @@ function AppBar(): JSX.Element {
                     {i18n._(t`Pool`)}
                   </a>
                 </Link>
-                {/*
-                 <Link href={'/migrate'}>
-                  <a
-                    id={`migrate-nav-link`}
-                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                  >
-                    {i18n._(t`Migrate`)}
-                  </a>
-                </Link>
-
-                 {chainId && [ChainId.MAINNET, ChainId.MATIC, ChainId.HARMONY, ChainId.XDAI].includes(chainId) && ( */}
-                {chainId && [ChainId.FANTOM].includes(chainId) && (
+                )}
+                { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <Link href={'/farm'}>
                     <a
                       id={`farm-nav-link`}
@@ -366,7 +359,7 @@ function AppBar(): JSX.Element {
                     </Link>
                   </>
                 )} */}
-                {chainId === ChainId.FANTOM && (
+                  { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <Link href={'/stake'}>
                     <a
                       id={`stake-nav-link`}
@@ -376,10 +369,8 @@ function AppBar(): JSX.Element {
                     </a>
                   </Link>
                 )}
-                {/* {chainId &&
-                  // [ChainId.MAINNET, ChainId.BSC, ChainId.XDAI, ChainId.FANTOM, ChainId.MATIC].includes(chainId) && (
-                  [ChainId.FANTOM_TESTNET] && (
-                    <ExternalLink
+                  {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      <ExternalLink
                       id={`analytics-nav-link`}
                       href={ANALYTICS_URL[chainId] || 'https://analytics.soulswap.finance'}
                       className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"

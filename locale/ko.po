@@ -319,6 +319,9 @@ msgstr "문서"
 msgid "Documentation for Summoners."
 msgstr ""
 
+msgid "Documentation for users of Soul."
+msgstr ""
+
 msgid "Either return to the {link}, or change to an available network."
 msgstr ""
 
@@ -653,14 +656,14 @@ msgstr "잘 이해한 경우에만 해당 모드를 사용하세요."
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 msgstr "이런! 알 수 없는 오류가 발생했습니다. 페이지를 새로 고침하거나 다른 브라우저 또는 기기에서 방문하세요."
 
+msgid "Open Main Menu"
+msgstr ""
+
 msgid "Open Orders"
 msgstr ""
 
 msgid "Open Source"
 msgstr "오픈 소스"
-
-msgid "Open main menu"
-msgstr ""
 
 msgid "Oracle"
 msgstr "오라클"

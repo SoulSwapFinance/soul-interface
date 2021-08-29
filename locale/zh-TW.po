@@ -317,6 +317,9 @@ msgstr "文档"
 msgid "Documentation for Summoners."
 msgstr ""
 
+msgid "Documentation for users of Soul."
+msgstr ""
+
 msgid "Either return to the {link}, or change to an available network."
 msgstr ""
 
@@ -646,14 +649,14 @@ msgstr "只有当您知道自己在做什么时，才会使用此模式。"
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 msgstr "糟糕！出現未知錯誤。請刷新頁面，或從其他瀏覽器或設備訪問"
 
+msgid "Open Main Menu"
+msgstr ""
+
 msgid "Open Orders"
 msgstr ""
 
 msgid "Open Source"
 msgstr "開源"
-
-msgid "Open main menu"
-msgstr ""
 
 msgid "Oracle"
 msgstr "預言機"

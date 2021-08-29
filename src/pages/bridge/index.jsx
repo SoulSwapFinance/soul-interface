@@ -1,13 +1,10 @@
 import { useActiveWeb3React } from '../../hooks'
 import { ethers } from 'ethers'
-
+import { useFantomERC20Contract } from '../../hooks/useContract'
 // import { ChainId } from '@soulswap/sdk'
 import Container from '../../components/Container'
 import Head from 'next/head'
-import { useState, useEffect } from 'react'
-
-import useApproveContract from '../../hooks/useApprove'
-import useBridge from '../../hooks/useBridge'
+import { useCallback, useState, useEffect } from 'react'
 import { Heading, Text, ClickableText, Wrap, Button, Input } from '../../components/ReusableStyles'
 
 export default function Bridge() {
@@ -15,39 +12,39 @@ export default function Bridge() {
 
   const AnyswapEthOperaBridgeAddress = '0x5cbe98480a790554403694b98bff71a525907f5d'
   const Ethereum$FTM = '0x4E15361FD6b4BB609Fa63C81A2be19d873717870'
-
-  const { erc20BalanceOf, erc20Approve, erc20Allowance } = useApproveContract()
-  const { swapOut } = useBridge()
-
   const [balance, setBalance] = useState(undefined)
   const [amount, setAmount] = useState('')
-  const [approved, setApproved] = useState(false)
+  // const [approved, setApproved] = useState(false)
   const [tokenSelected, setTokenSelected] = useState(Ethereum$FTM)
 
   useEffect(() => {
-    // fetchBal()
-  }, [account, chainId])
+    fetchBal()
+  }, [account, chainId, fetchBal])
 
-  const handleSwapOutApprove = async () => {
-    const parsedAmount = ethers.utils.parseUnits(amount.toString())
-    const allowance = await erc20Allowance(tokenSelected, account, AnyswapEthOperaBridgeAddress)
+  // const handleSwapOutApprove = async () => {
+  //   const parsedAmount = ethers.utils.parseUnits(amount.toString())
+  //   const allowance = await erc20Allowance(tokenSelected, account, AnyswapEthOperaBridgeAddress)
 
-    if (allowance < parsedAmount) {
-      await erc20Approve(tokenSelected, AnyswapEthOperaBridgeAddress)
-    }
+  //   if (allowance < parsedAmount) {
+  //     await erc20Approve(tokenSelected, AnyswapEthOperaBridgeAddress)
+  //   }
     
-    setApproved(true)
+  //   setApproved(true)
+  // }
+
+  const handleSwapOut = async (amount) => {
+    // const swapping = ethers.utils.parseUnits(amount).toString()
+    // await swapOut(swapping)
+    const transferTx = // await Ethereum$FTM.transfer(AnyswapEthOperaBridgeAddress, amount)
+    await transfer(tokenSelected, AnyswapEthOperaBridgeAddress, amount)
+    await transferTx
   }
 
-  const handleSwapOut = async () => {
-    const swapping = ethers.utils.parseUnits(amount).toString()
-    await swapOut(swapping)
-  }
-
-  const fetchBal = async () => {
+  const fetchBal = useCallback(async () => {
     const bal = await erc20BalanceOf(tokenSelected, account)
     setBalance(bal)
-  }
+  }, [account, tokenSelected])
+
 
   const handleMax = async () => {
     await fetchBal()
@@ -102,8 +99,10 @@ export default function Bridge() {
           </Wrap>
 
           <Wrap padding="0.5rem 0" display="flex">
-            <Button width="100%" onClick={() => (approved ? handleSwapOut() : handleSwapOutApprove())}>
-              {approved ? 'Submit' : 'Approve'}
+            {/* <Button width="100%" onClick={() => (approved ? handleSwapOut() : handleSwapOutApprove())}> */}
+              {/* {approved ? 'Submit' : 'Approve'} */}
+            <Button width="100%" onClick= { () => handleSwapOut() }>
+              {'Submit'}
             </Button>
           </Wrap>
 

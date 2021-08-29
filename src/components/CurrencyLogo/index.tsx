@@ -11,9 +11,9 @@ export const getTokenLogoURL = (address: string, chainId: ChainId) => {
   if (chainId === ChainId.MAINNET) {
     imageURL = `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${address}/logo.png`
   } else if (chainId === ChainId.FANTOM) {
-    imageURL = `https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/fantom/assets/${address}/logo.png`
+    imageURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/${address}/logo.png`
   } else if (chainId === ChainId.FANTOM_TESTNET) {
-    imageURL = `https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/fantom-testnet/assets/${address}/logo.png`
+    imageURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom-testnet/assets/${address}/logo.png`
   } else if (chainId === ChainId.BSC) {
     imageURL = `https://v1exchange.pancakeswap.finance/images/coins/${address}.png`
   } else if (chainId === ChainId.MATIC) {
@@ -46,10 +46,10 @@ function getCurrencySymbol(currency) {
 function getCurrencyLogoUrls(currency) {
   const urls = []
 
-  urls.push(`https://raw.githubusercontent.com/soulswapfinance/icons/master/token/${getCurrencySymbol(currency)}.jpg`)
+  urls.push(`https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/${getCurrencySymbol(currency)}.jpg`)
   if (currency.chainId in BLOCKCHAIN) {
     urls.push(
-      `https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/${
+      `https://raw.githubusercontent.com/SoulSwapFinance/assets/prod/blockchains/${
         BLOCKCHAIN[currency.chainId]
       }/assets/${currency.address}/logo.png`
     )
@@ -63,18 +63,18 @@ function getCurrencyLogoUrls(currency) {
   return urls
 }
 
-const AvalancheLogo = 'https://raw.githubusercontent.com/soulswapfinance/icons/master/token/avax.jpg'
-const BinanceCoinLogo = 'https://raw.githubusercontent.com/soulswapfinance/icons/master/token/bnb.jpg'
-const EthereumLogo = 'https://raw.githubusercontent.com/soulswapfinance/icons/master/token/eth.jpg'
-const FantomLogo = 'https://raw.githubusercontent.com/soulswapfinance/icons/master/token/ftm.jpg'
-const HarmonyLogo = 'https://raw.githubusercontent.com/soulswapfinance/icons/master/token/one.jpg'
-const HecoLogo = 'https://raw.githubusercontent.com/soulswapfinance/icons/master/token/heco.jpg'
-const MaticLogo = 'https://raw.githubusercontent.com/soulswapfinance/icons/master/token/polygon.jpg'
-const MoonbeamLogo = 'https://raw.githubusercontent.com/soulswapfinance/icons/master/token/eth.jpg'
-const OKExLogo = 'https://raw.githubusercontent.com/soulswapfinance/icons/master/token/okt.jpg'
+const AvalancheLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/avax.jpg'
+const BinanceCoinLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/bnb.jpg'
+const EthereumLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/eth.jpg'
+const FantomLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/ftm.jpg'
+const HarmonyLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/one.jpg'
+const HecoLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/heco.jpg'
+const MaticLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/polygon.jpg'
+const MoonbeamLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/eth.jpg'
+const OKExLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/okt.jpg'
 const xDaiLogo =
-  'https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/xdai/assets/0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d/logo.png'
-const CeloLogo = 'https://raw.githubusercontent.com/soulswapfinance/icons/master/token/celo.jpg'
+  'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/xdai/assets/0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d/logo.png'
+const CeloLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/celo.jpg'
 
 const logo: { readonly [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: EthereumLogo,
@@ -107,7 +107,7 @@ interface CurrencyLogoProps {
   squared?: boolean
 }
 
-const unknown = 'https://raw.githubusercontent.com/soulswapfinance/icons/master/token/unknown.png'
+const unknown = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/unknown.png'
 
 const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({
   currency,
