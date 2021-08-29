@@ -298,7 +298,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
   return (
     <>
       <FarmContainer>
-        <FarmRow>
+        <FarmRow onClick={() => handleShow()}>
           <FarmContentWrapper>
             <TokenPairBox>
               {/* 2 token logo combined ? */}

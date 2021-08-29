@@ -21,6 +21,11 @@ export const FarmRow = styled.div`
   border-radius: 8px;
   padding: 5px 15px;
   border: 1px solid #333;
+
+  &:hover {
+    opacity: 75%;
+    cursor: pointer;
+  }
 `
 
 export const FarmContentWrapper = styled.div`
