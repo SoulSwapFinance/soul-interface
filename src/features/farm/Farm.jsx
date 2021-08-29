@@ -367,13 +367,13 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
               <Input name="unstake" id="unstake" type="number" placeholder="0.0" min="0" />
 
               <Wrap padding="0" margin="0" display="flex">
-                <SubmitButton padding="0" margin=".5rem .25rem .5rem 0" onClick={() => handleHarvest()}>
+                <SubmitButton padding="0" margin=".5rem .65rem .5rem 0" onClick={() => handleHarvest()}>
                   Harvest
                 </SubmitButton>
                 <SubmitButton
                   primaryColour="#bbb"
                   color="black"
-                  margin=".5rem 0 .5rem .25rem"
+                  margin=".5rem 0 .5rem .65rem"
                   onClick={() => handleWithdraw(ethers.utils.parseUnits(document.getElementById('unstake').value))}
                 >
                   Unstake
