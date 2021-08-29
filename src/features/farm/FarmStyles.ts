@@ -122,7 +122,7 @@ export const Input = styled.input`
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin: 0.25rem;
+  margin: 0.25rem 0 0.25rem;
   border: none;
   outline: none;
   font-size: 1rem;
@@ -144,7 +144,8 @@ export const SubmitButton = styled.button`
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin: 0.5rem 0.25rem 0 0.25rem;
+  padding: ${({ padding }) => (padding ? padding : '0')};
+  margin: ${({ margin }) => (margin ? margin : '0.5rem 0 0.5rem 0')};
   outline: 0;
   border: none;
   border-radius: 0.25em;
@@ -152,7 +153,7 @@ export const SubmitButton = styled.button`
   padding: 0.5em;
   transition: all 0.2s ease-in-out;
   background: ${({ primaryColour }) => (primaryColour ? primaryColour : '#3D81DB')};
-  color: ${({ color }) => (color ? color : 'white')};;
+  color: ${({ color }) => (color ? color : 'white')};
 
   &:hover {
     opacity: 70%;

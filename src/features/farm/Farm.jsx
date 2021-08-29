@@ -27,7 +27,7 @@ import {
   SubmitButton,
 } from './FarmStyles'
 
-import { Button, RemoveBtn } from '../../components/ReusableStyles'
+import { Wrap } from '../../components/ReusableStyles'
 
 // params to render farm with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)
@@ -346,6 +346,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
                 <button onClick={() => (document.getElementById('stake').value = unstakedBal)}>MAX</button>
               </FlexText>
               <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
+              <Wrap padding="0" margin="0" display="flex">
               {approved ? (
                 <SubmitButton
                   onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
@@ -355,6 +356,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
               ) : (
                 <SubmitButton onClick={() => handleApprove()}>Approve Stake</SubmitButton>
               )}
+              </Wrap>
             </FunctionBox>
 
             <FunctionBox>
@@ -363,8 +365,11 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
                 <button onClick={() => (document.getElementById('unstake').value = stakedBal)}>MAX</button>
               </FlexText>
               <Input name="unstake" id="unstake" type="number" placeholder="0.0" min="0" />
-              <div style={{ display: 'flex' }}>
-                <SubmitButton onClick={() => handleHarvest()}>Harvest</SubmitButton>
+
+              <Wrap padding="0" margin="0" display="flex">
+                <SubmitButton padding="0" onClick={() => handleHarvest()}>
+                  Harvest
+                </SubmitButton>
                 <SubmitButton
                   primaryColour="#bbb"
                   color="black"
@@ -372,7 +377,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
                 >
                   Unstake
                 </SubmitButton>
-              </div>
+              </Wrap>
             </FunctionBox>
           </DetailsWrapper>
         </DetailsContainer>
