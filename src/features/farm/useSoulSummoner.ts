@@ -7,10 +7,6 @@ export default function useSoulSummoner() {
   const { account } = useActiveWeb3React()
   const summonerContract = useSoulSummonerContract()
 
-  // -----------------------
-  //  Read Functions
-  // -----------------------
-
   // Deposit
   const deposit = useCallback(
     async (pid: number, amount: BigNumber) => {
@@ -40,6 +36,10 @@ export default function useSoulSummoner() {
     },
     [summonerContract]
   )
+
+  // -----------------------
+  //  Read Functions
+  // -----------------------
 
   // Pool length
   const poolLength = useCallback(async () => {

@@ -558,7 +558,7 @@ export default function SoulStake() {
                 className={`${buttonStyle} text-high-emphesis bg-cyan-blue opacity-100 hover:bg-opacity-80`}
                 onClick={() => harvest()}
               >
-                Harvest Pending
+                Harvest {pending}
               </Button>
             </div>
           </div>

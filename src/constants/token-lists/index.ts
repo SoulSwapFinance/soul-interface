@@ -5,7 +5,7 @@ const BA_LIST = 'https://raw.githubusercontent.com/The-Blockchain-Association/se
  * @TODO add list from blockchain association
  */
 export const UNSUPPORTED_LIST_URLS: string[] = [BA_LIST]
-
+const DEFAULT_TOKEN_LIST = 'https://raw.githubusercontent.com/soulswapfinance/default-token-list/master/soulswap.tokenlist.json'
 const YEARN_LIST = 'https://yearn.science/static/tokenlist.json'
 const NFTX_LIST_V1 = 'https://nftx.ethereumdb.com/v1/tokenlist/'
 const NFTX_LIST_V2 = 'https://nftx.ethereumdb.com/v2/tokenlist/'
@@ -26,6 +26,7 @@ const WRAPPED_LIST = 'wrapped.tokensoft.eth'
 
 // lower index == higher priority for token import
 export const DEFAULT_LIST_OF_LISTS: string[] = [
+  DEFAULT_TOKEN_LIST,
   COMPOUND_LIST,
   AAVE_LIST,
   CMC_ALL_LIST,
@@ -47,4 +48,4 @@ export const DEFAULT_LIST_OF_LISTS: string[] = [
 ]
 
 // default lists to be 'active' aka searched across
-export const DEFAULT_ACTIVE_LIST_URLS: string[] = [YEARN_LIST, GEMINI_LIST]
+export const DEFAULT_ACTIVE_LIST_URLS: string[] = [DEFAULT_TOKEN_LIST]

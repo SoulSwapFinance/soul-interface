@@ -132,6 +132,10 @@ module.exports = withBundleAnalyzer(
         //   destination: '/onsen/:type*',
         // },
         {
+          source: '/farm',
+          destination: '/farm',
+        },
+        {
           source: '/me',
           destination: '/user',
         },

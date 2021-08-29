@@ -80,6 +80,9 @@ msgstr "Amount of Tokens"
 msgid "An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note fee on transfer and rebase tokens are incompatible with Uniswap V3."
 msgstr "An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note fee on transfer and rebase tokens are incompatible with Uniswap V3."
 
+msgid "Analytics"
+msgstr "Analytics"
+
 msgid "Approve"
 msgstr "Approve"
 
@@ -203,11 +206,11 @@ msgstr "Claim SUSHI"
 msgid "Claimed"
 msgstr "Claimed"
 
+msgid "Clear All"
+msgstr "Clear All"
+
 msgid "Clear History"
 msgstr "Clear History"
-
-msgid "Clear all"
-msgstr "Clear all"
 
 msgid ""
 "Click on a pool below, input the amount you wish to migrate or select max, and click\n"
@@ -300,9 +303,6 @@ msgstr "Deposit {0} into BentoBox"
 msgid "Depositing {0} into BentoBox"
 msgstr "Depositing {0} into BentoBox"
 
-msgid "Dev"
-msgstr "Dev"
-
 msgid "Disable Multihops"
 msgstr "Disable Multihops"
 
@@ -318,11 +318,8 @@ msgstr "Dismiss"
 msgid "Docs"
 msgstr "Docs"
 
-msgid "Documentation for developers of Soul."
-msgstr "Documentation for developers of Soul."
-
-msgid "Documentation for users of Soul."
-msgstr "Documentation for users of Soul."
+msgid "Documentation for Summoners."
+msgstr "Documentation for Summoners."
 
 msgid "Either return to the {link}, or change to an available network."
 msgstr "Either return to the {link}, or change to an available network."
@@ -488,6 +485,9 @@ msgstr "Italian"
 
 msgid "Japanese"
 msgstr "Japanese"
+
+msgid "Join Us on Discord."
+msgstr "Join Us on Discord."
 
 msgid "Join the community on Discord."
 msgstr "Join the community on Discord."
@@ -664,14 +664,14 @@ msgstr "ONLY USE THIS MODE IF YOU KNOW WHAT YOU ARE DOING."
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 msgstr "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 
+msgid "Open Main Menu"
+msgstr "Open Main Menu"
+
 msgid "Open Orders"
 msgstr "Open Orders"
 
 msgid "Open Source"
 msgstr "Open Source"
-
-msgid "Open main menu"
-msgstr "Open main menu"
 
 msgid "Oracle"
 msgstr "Oracle"
@@ -812,8 +812,8 @@ msgstr "SLP"
 msgid "SPELL Fee"
 msgstr "SPELL Fee"
 
-msgid "Search name or paste address"
-msgstr "Search name or paste address"
+msgid "Search Name or Address"
+msgstr "Search Name or Address"
 
 msgid "Select Token"
 msgstr "Select Token"
@@ -853,6 +853,9 @@ msgstr "Slippage tolerance..."
 
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
+
+msgid "Soul Supports Open Source."
+msgstr "Soul Supports Open Source."
 
 msgid "Soul is a supporter of Open Source."
 msgstr "Soul is a supporter of Open Source."
@@ -967,12 +970,6 @@ msgstr ""
 "Tokens from inactive lists. Import specific tokens below or\n"
 "click Manage to activate more lists."
 
-msgid "Tools"
-msgstr "Tools"
-
-msgid "Tools to optimize your workflow."
-msgstr "Tools to optimize your workflow."
-
 msgid "Total"
 msgstr "Total"
 
@@ -1024,6 +1021,9 @@ msgstr "Use SOUL"
 msgid "Use SPELL"
 msgstr "Use SPELL"
 
+msgid "Use SoulPower to Enchant Soul."
+msgstr "Use SoulPower to Enchant Soul."
+
 msgid "Use this tool to find pairs that don't automatically appear in the interface"
 msgstr "Use this tool to find pairs that don't automatically appear in the interface"
 
@@ -1041,6 +1041,9 @@ msgstr "View Liquidity Positions"
 
 msgid "View on explorer"
 msgstr "View on explorer"
+
+msgid "Vote"
+msgstr "Vote"
 
 msgid "Waiting for Confirmation"
 msgstr "Waiting for Confirmation"
