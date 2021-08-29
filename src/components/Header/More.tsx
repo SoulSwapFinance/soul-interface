@@ -10,12 +10,12 @@ import { useLingui } from '@lingui/react'
 import NavLink from '../NavLink'
 
 const items = (i18n: I18n) => [
-  // {
-  //   name: i18n._(t`Docs`),
-  //   description: i18n._(t`Documentation for users of Soul.`),
-  //   href: 'https://docs.soulswap.finance',
-  //   external: true,
-  // },
+  {
+    name: i18n._(t`Docs`),
+    description: i18n._(t`Documentation for users of Soul.`),
+    href: 'https://docs.soulswap.finance',
+    external: true,
+  },
   // {
   //   name: i18n._(t`Dev`),
   //   description: i18n._(t`Documentation for developers of Soul.`),
