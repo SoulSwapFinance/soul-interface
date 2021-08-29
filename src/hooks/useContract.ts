@@ -61,6 +61,10 @@ import SOULVAULT_ABI from '../constants/abis/soulswap/soulvault.json' // 31 JUL
 import SPELL_ABI from '../constants/abis/soulswap/spell.json' // 28 JUL
 import SOUL_ABI from '../constants/abis/soulswap/soulpower.json' // 28 JUL
 
+// bridge
+import anyswapEthOperaBridge from '../constants/abis/soulswap/bridge/anyswapEthOperaBridge.json'
+
+// unused
 import MEOWSHI_ABI from '../constants/abis/meowshi.json'
 import MERKLE_DISTRIBUTOR_ABI from '../constants/abis/merkle-distributor.json'
 import MINICHEF_ABI from '../constants/abis/minichef-v2.json'
@@ -78,6 +82,7 @@ import WETH9_ABI from '../constants/abis/weth.json'
 import ZAPPER_ABI from '../constants/abis/zapper.json'
 import LIMIT_ORDER_ABI from '../constants/abis/limit-order.json'
 import LIMIT_ORDER_HELPER_ABI from '../constants/abis/limit-order-helper.json'
+
 import { getContract } from '../functions/contract'
 import { useActiveWeb3React } from './useActiveWeb3React'
 import { useMemo } from 'react'
@@ -505,4 +510,10 @@ export function useLimitOrderContract(withSignerIfPossibe?: boolean): Contract |
 
 export function useLimitOrderHelperContract(withSignerIfPossible?: boolean): Contract | null {
   return useContract('0xe2f736B7d1f6071124CBb5FC23E93d141CD24E12', LIMIT_ORDER_HELPER_ABI, withSignerIfPossible)
+}
+
+
+// ------- Bridge --------
+export function useAnyswapEthOperaBridge(withSignerIfPossible?: boolean): Contract | null {
+  return useContract('0x5cbe98480a790554403694b98bff71a525907f5d', anyswapEthOperaBridge, withSignerIfPossible)
 }
