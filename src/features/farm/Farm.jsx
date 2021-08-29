@@ -317,15 +317,16 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
               <FarmItem>{apr}%</FarmItem>
             </FarmItemBox>
 
-            <FarmItemBox>
-              <FarmItemHeading>TVL</FarmItemHeading>
-              <FarmItem>${liquidity}</FarmItem>
-            </FarmItemBox>
 
             <FarmItemBox marginLeft={'100px'} desktopOnly={true}>
               <FarmItemHeading>Multiplier</FarmItemHeading>
               <FarmItem>{multiplier}x</FarmItem>
             </FarmItemBox>
+
+            {/* <FarmItemBox>
+              <FarmItemHeading>TVL</FarmItemHeading>
+              <FarmItem>${liquidity}</FarmItem>
+            </FarmItemBox> */}
 
             <FarmItemBox>
               {/* <ShowBtnWrapper> */}

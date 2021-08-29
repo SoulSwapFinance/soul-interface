@@ -20,6 +20,8 @@ import {
   useSushiPrice,
 } from '../../services/graph'
 
+import { Wrap } from '../../components/ReusableStyles'
+
 import { ChainId } from '@soulswap/sdk'
 import Container from '../../components/Container'
 // import FarmList from '../../features/farm/FarmList'
@@ -276,11 +278,11 @@ export default function Farm(): JSX.Element {
         <title>Farm | Soul</title>
         <meta key="description" name="description" content="Farm SOUL" />
       </Head>
-      <div className={classNames('sticky top-0 hidden lg:block md:col-span-1')} style={{ maxHeight: '40rem' }}>
+      {/* <div className={classNames('sticky top-0 hidden lg:block md:col-span-1')} style={{ maxHeight: '40rem' }}>
         <Menu positionsLength={positions.length} />
-      </div>
-      <div className={classNames('space-y-6 col-span-4 lg:col-span-3')}>
-        {/* <Search
+      </div> */}
+        <div className={classNames('space-y-6 col-span-4 lg:col-span-3')}>
+          {/* <Search
           search={search}
           term={term}
           inputProps={{
@@ -289,14 +291,14 @@ export default function Farm(): JSX.Element {
           }}
         /> */}
 
-        <div className="flex items-center text-lg font-bold text-high-emphesis whitespace-nowrap">
-          Farms{' '}
-          <div className="w-full h-0 ml-4 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis md:border-gradient-r-blue-pink-dark-800 opacity-20"></div>
-        </div>
+          <div className="flex items-center text-lg font-bold text-high-emphesis whitespace-nowrap">
+            Farms{' '}
+            <div className="w-full h-0 ml-4 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis md:border-gradient-r-blue-pink-dark-800 opacity-20"></div>
+          </div>
 
-        {/* <FarmList farms={result} term={term} /> */}
-        <FarmList />
-      </div>
+          {/* <FarmList farms={result} term={term} /> */}
+          <FarmList />
+        </div>
     </Container>
   )
 }
