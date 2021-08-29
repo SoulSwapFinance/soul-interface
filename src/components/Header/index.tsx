@@ -68,7 +68,7 @@ function AppBar(): JSX.Element {
                         </NavLink>
                       )} */}
                       {/* {chainId && [ChainId.MAINNET, ChainId.MATIC, ChainId.XDAI, ChainId.HARMONY].includes(chainId) && ( */}
-                      {chainId === ChainId.FANTOM_TESTNET && (
+                      {chainId === ChainId.FANTOM && (
                         <NavLink href={'/farm'}>
                           <a
                             id={`farm-nav-link`}
@@ -102,7 +102,7 @@ function AppBar(): JSX.Element {
                           </>
                         )} */}
                       {/* {chainId === ChainId.MAINNET && ( */}
-                      {chainId === ChainId.FANTOM_TESTNET && (
+                      {chainId === ChainId.FANTOM && (
                         <NavLink href={'/stake'}>
                           <a
                             id={`stake-nav-link`}
@@ -130,7 +130,7 @@ function AppBar(): JSX.Element {
                   <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
                     {/* {chainId && [ChainId.MAINNET].includes(chainId) && library && library.provider.isMetaMask && ( */}
                     {chainId &&
-                      [ChainId.FANTOM_TESTNET].includes(chainId) &&
+                      [ChainId.FANTOM].includes(chainId) &&
                       library &&
                       library.provider.isMetaMask && ( // TODO: update
                         <>
@@ -142,7 +142,7 @@ function AppBar(): JSX.Element {
                                   const params: any = {
                                     type: 'ERC20',
                                     options: {
-                                      address: '0xD54Cf31D5653F4a062f5DA4C83170A5867d04442',
+                                      address: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6',
                                       symbol: 'SEANCE',
                                       decimals: 18,
                                       image:
@@ -191,7 +191,7 @@ function AppBar(): JSX.Element {
                                   address: SOUL_ADDRESS[chainId],
                                   symbol: 'SOUL',
                                   decimals: 18,
-                                  image: 'https://avatars.githubusercontent.com/u/86800113?s=200&v=4',
+                                  image: 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/soul.jpg',
                                 },
                               }
                               if (library && library.provider.isMetaMask && library.provider.request) {
@@ -302,8 +302,8 @@ function AppBar(): JSX.Element {
                     {i18n._(t`Pool`)}
                   </a>
                 </Link>
-
-                <Link href={'/migrate'}>
+                {/*
+                 <Link href={'/migrate'}>
                   <a
                     id={`migrate-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
@@ -312,8 +312,8 @@ function AppBar(): JSX.Element {
                   </a>
                 </Link>
 
-                {/* {chainId && [ChainId.MAINNET, ChainId.MATIC, ChainId.HARMONY, ChainId.XDAI].includes(chainId) && ( */}
-                {chainId && [ChainId.FANTOM_TESTNET].includes(chainId) && (
+                 {chainId && [ChainId.MAINNET, ChainId.MATIC, ChainId.HARMONY, ChainId.XDAI].includes(chainId) && ( */}
+                {chainId && [ChainId.FANTOM].includes(chainId) && (
                   <Link href={'/farm'}>
                     <a
                       id={`farm-nav-link`}
@@ -346,7 +346,7 @@ function AppBar(): JSX.Element {
                     </Link>
                   </>
                 )} */}
-                {chainId === ChainId.FANTOM_TESTNET && (
+                {chainId === ChainId.FANTOM && (
                   <Link href={'/stake'}>
                     <a
                       id={`stake-nav-link`}
