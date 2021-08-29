@@ -78,6 +78,9 @@ msgstr "Număr de token-uri"
 msgid "An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note fee on transfer and rebase tokens are incompatible with Uniswap V3."
 msgstr ""
 
+msgid "Analytics"
+msgstr ""
+
 msgid "Approve"
 msgstr "Aprobați"
 
@@ -198,11 +201,11 @@ msgstr ""
 msgid "Claimed"
 msgstr "Revendicat"
 
+msgid "Clear All"
+msgstr ""
+
 msgid "Clear History"
 msgstr "Ștergeți istoricul"
-
-msgid "Clear all"
-msgstr ""
 
 msgid ""
 "Click on a pool below, input the amount you wish to migrate or select max, and click\n"
@@ -295,9 +298,6 @@ msgstr ""
 msgid "Depositing {0} into BentoBox"
 msgstr ""
 
-msgid "Dev"
-msgstr "Dev"
-
 msgid "Disable Multihops"
 msgstr "Dezactivați Multihops"
 
@@ -313,10 +313,7 @@ msgstr "Renunțare"
 msgid "Docs"
 msgstr "Documente"
 
-msgid "Documentation for developers of Soul."
-msgstr ""
-
-msgid "Documentation for users of Soul."
+msgid "Documentation for Summoners."
 msgstr ""
 
 msgid "Either return to the {link}, or change to an available network."
@@ -475,6 +472,9 @@ msgid "Italian"
 msgstr ""
 
 msgid "Japanese"
+msgstr ""
+
+msgid "Join Us on Discord."
 msgstr ""
 
 msgid "Join the community on Discord."
@@ -650,14 +650,14 @@ msgstr "FOLOSIȚI ACEST MOD DOAR DACĂ SUNTEȚI FAMILIARIZAT CU SITUAȚIA."
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 msgstr "Hopa! O apărut o eroare necunoscută. Vă rugăm să reîmprospătați pagina sau să folosiți un alt browser sau dispozitiv"
 
+msgid "Open Main Menu"
+msgstr ""
+
 msgid "Open Orders"
 msgstr ""
 
 msgid "Open Source"
 msgstr "Open Source"
-
-msgid "Open main menu"
-msgstr "Deschideți meniul principal"
 
 msgid "Oracle"
 msgstr "Oracol"
@@ -796,8 +796,8 @@ msgstr ""
 msgid "SPELL Fee"
 msgstr ""
 
-msgid "Search name or paste address"
-msgstr "Căutați numele sau lipiți adresa"
+msgid "Search Name or Address"
+msgstr ""
 
 msgid "Select Token"
 msgstr ""
@@ -837,6 +837,9 @@ msgstr ""
 
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Ceva nu a funcționat corect în timpul semnării aprobării. Acest lucru este de așteptat pentru portofelele hardware, cum ar fi Trezor și Ledger. Faceți clic din nou și va fi utilizată metoda de rezervă"
+
+msgid "Soul Supports Open Source."
+msgstr ""
 
 msgid "Soul is a supporter of Open Source."
 msgstr ""
@@ -947,12 +950,6 @@ msgid ""
 "click Manage to activate more lists."
 msgstr ""
 
-msgid "Tools"
-msgstr "Instrumente"
-
-msgid "Tools to optimize your workflow."
-msgstr "Instrumente pentru optimizarea fluxului de lucru."
-
 msgid "Total"
 msgstr "Total"
 
@@ -1004,6 +1001,9 @@ msgstr ""
 msgid "Use SPELL"
 msgstr ""
 
+msgid "Use SoulPower to Enchant Soul."
+msgstr ""
+
 msgid "Use this tool to find pairs that don't automatically appear in the interface"
 msgstr ""
 
@@ -1021,6 +1021,9 @@ msgstr ""
 
 msgid "View on explorer"
 msgstr "Vizualizați în explorator"
+
+msgid "Vote"
+msgstr ""
 
 msgid "Waiting for Confirmation"
 msgstr ""

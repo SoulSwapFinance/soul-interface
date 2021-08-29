@@ -78,6 +78,9 @@ msgstr "Quantità di token"
 msgid "An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note fee on transfer and rebase tokens are incompatible with Uniswap V3."
 msgstr ""
 
+msgid "Analytics"
+msgstr ""
+
 msgid "Approve"
 msgstr "Approva"
 
@@ -198,11 +201,11 @@ msgstr ""
 msgid "Claimed"
 msgstr "Riscattati"
 
+msgid "Clear All"
+msgstr ""
+
 msgid "Clear History"
 msgstr "Cancella cronologia"
-
-msgid "Clear all"
-msgstr ""
 
 msgid ""
 "Click on a pool below, input the amount you wish to migrate or select max, and click\n"
@@ -295,9 +298,6 @@ msgstr ""
 msgid "Depositing {0} into BentoBox"
 msgstr ""
 
-msgid "Dev"
-msgstr "Dev"
-
 msgid "Disable Multihops"
 msgstr "Disattiva multihop"
 
@@ -313,10 +313,7 @@ msgstr "Ignora"
 msgid "Docs"
 msgstr "Documenti"
 
-msgid "Documentation for developers of Soul."
-msgstr ""
-
-msgid "Documentation for users of Soul."
+msgid "Documentation for Summoners."
 msgstr ""
 
 msgid "Either return to the {link}, or change to an available network."
@@ -475,6 +472,9 @@ msgid "Italian"
 msgstr ""
 
 msgid "Japanese"
+msgstr ""
+
+msgid "Join Us on Discord."
 msgstr ""
 
 msgid "Join the community on Discord."
@@ -647,14 +647,14 @@ msgstr "USA QUESTA MODALITÀ SOLO SE SAI COSA STAI FACENDO."
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 msgstr "Ops! Si è verificato un Errore imprevisto. Aggiorna la pagina o visita da un altro browser o dispositivo"
 
+msgid "Open Main Menu"
+msgstr ""
+
 msgid "Open Orders"
 msgstr ""
 
 msgid "Open Source"
 msgstr "Open Source"
-
-msgid "Open main menu"
-msgstr "Apri menu principale"
 
 msgid "Oracle"
 msgstr "Oracolo"
@@ -793,8 +793,8 @@ msgstr ""
 msgid "SPELL Fee"
 msgstr ""
 
-msgid "Search name or paste address"
-msgstr "Cerca nome o incolla indirizzo"
+msgid "Search Name or Address"
+msgstr ""
 
 msgid "Select Token"
 msgstr ""
@@ -834,6 +834,9 @@ msgstr ""
 
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Qualcosa è andato storto durante la firma dell'approvazione. Questo è previsto per gli hardware wallet, come Trezor e Ledger. Clicca di nuovo per usare il metodo alternativo"
+
+msgid "Soul Supports Open Source."
+msgstr ""
 
 msgid "Soul is a supporter of Open Source."
 msgstr ""
@@ -944,12 +947,6 @@ msgid ""
 "click Manage to activate more lists."
 msgstr ""
 
-msgid "Tools"
-msgstr "Strumenti"
-
-msgid "Tools to optimize your workflow."
-msgstr "Strumenti per ottimizzare il tuo flusso di lavoro."
-
 msgid "Total"
 msgstr "Totale"
 
@@ -1001,6 +998,9 @@ msgstr ""
 msgid "Use SPELL"
 msgstr ""
 
+msgid "Use SoulPower to Enchant Soul."
+msgstr ""
+
 msgid "Use this tool to find pairs that don't automatically appear in the interface"
 msgstr ""
 
@@ -1018,6 +1018,9 @@ msgstr ""
 
 msgid "View on explorer"
 msgstr "Visualizza sull'explorer"
+
+msgid "Vote"
+msgstr ""
 
 msgid "Waiting for Confirmation"
 msgstr ""
