@@ -1,12 +1,14 @@
 import { ethers } from 'ethers'
-
+import { useCallback } from 'react'
+import { useActiveWeb3React } from './useActiveWeb3React'
 import { useContract } from './useContract'
 
 import IERC20 from '../constants/abis/soulswap/ERCs/IERC20.json'
 
-const useApproveContract = () => {
+export default function useApproveContract() {
+  const { account } = useActiveWeb3React()
 
-  const erc20BalanceOf = async (tokenAddress, address) => {
+  const erc20BalanceOf = useCallback(async (tokenAddress, address) => {
     const contract = await useContract(tokenAddress, IERC20.abi)
 
     try {
@@ -16,9 +18,9 @@ const useApproveContract = () => {
       console.log(e)
       alert(e.message)
     }
-  }
+  })
 
-  const erc20Approve = async (tokenAddress, spender) => {
+  const erc20Approve = useCallback(async (tokenAddress, spender) => {
     const contract = await useContract(tokenAddress, IERC20.abi)
 
     try {
@@ -31,9 +33,9 @@ const useApproveContract = () => {
       console.log(e)
       alert(e.message)
     }
-  }
+  })
 
-  const erc20Allowance = async (tokenAddress, owner, spender) => {
+  const erc20Allowance = useCallback(async (tokenAddress, owner, spender) => {
     const contract = await useContract(tokenAddress, IERC20.abi)
 
     try {
@@ -43,7 +45,7 @@ const useApproveContract = () => {
       console.log(e)
       alert(e.message)
     }
-  }
+  })
 
   return {
     erc20BalanceOf,
@@ -51,5 +53,3 @@ const useApproveContract = () => {
     erc20Allowance,
   }
 }
-
-export default useApproveContract

@@ -30,9 +30,12 @@ export default function Bridge() {
 
   const handleSwapOutApprove = async () => {
     const parsedAmount = ethers.utils.parseUnits(amount.toString())
-    if ((await erc20Allowance(tokenSelected, account, AnyswapEthOperaBridgeAddress)) < parsedAmount) {
+    const allowance = await erc20Allowance(tokenSelected, account, AnyswapEthOperaBridgeAddress)
+
+    if (allowance < parsedAmount) {
       await erc20Approve(tokenSelected, AnyswapEthOperaBridgeAddress)
     }
+    
     setApproved(true)
   }
 
@@ -128,7 +131,7 @@ export default function Bridge() {
             </Wrap>
             <Wrap display="flex" justifyContent="space-between">
               <Text padding="0" color="#aaa">
-                Estimated Arrival
+                Normal Estimated Arrival
               </Text>
               <Text padding="0" color="#aaa">
                 10-30 mins
@@ -136,7 +139,7 @@ export default function Bridge() {
             </Wrap>
             <Wrap display="flex" justifyContent="space-between">
               <Text padding="0" color="#aaa">
-                2+ million FTM
+                2mil+ FTM Estimated Arrival
               </Text>
               <Text padding="0" color="#aaa">
                 Up to 12 hrs

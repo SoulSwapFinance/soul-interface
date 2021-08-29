@@ -1,13 +1,10 @@
-import { ethers, BigNumber } from "ethers";
-
-import { useActiveWeb3React } from './useActiveWeb3React'
+// import { useActiveWeb3React } from './useActiveWeb3React'
 import { ChainId } from '@soulswap/sdk'
 import { useAnyswapEthOperaBridge } from "./useContract";
+import { useCallback } from 'react'
 
 const useBridge = () => {
-  const { account } = useActiveWeb3React()
-
-  const swapOut = async (amount) => {
+  const swapOut = useCallback(async (amount) => {
     const ethToFtm = await useAnyswapEthOperaBridge();
 
     if (ChainId.MAINNET) {
@@ -22,7 +19,7 @@ const useBridge = () => {
       console.warn('not connected to ETHEREUM MAINNET (ChainId: 1)')
       alert('not connected to ETHEREUM MAINNET (ChainId: 1)')
     }
-  };
+  })
 
   return {
     swapOut,
