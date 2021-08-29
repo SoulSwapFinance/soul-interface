@@ -7,7 +7,7 @@
       "patch": 0
     },
     "tags": {},
-    "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/soul.jpg",
+    "logoURI": "https://app.soulswap.finance/images/tokens/soul.jpg",
     "keywords": ["soulswap", "default"],
     "tokens": [
        {
@@ -16,7 +16,7 @@
         "symbol": "SOUL",
         "decimals": 18,
         "chainId": 250,
-        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/soul.jpg"
+        "logoURI": "https://app.soulswap.finance/images/tokens/soul.jpg"
        },
        {
         "name": "Soul Power",
@@ -24,7 +24,7 @@
         "symbol": "SOUL",
         "decimals": 18,
         "chainId": 4002,
-        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/soul.jpg"
+        "logoURI": "https://app.soulswap.finance/images/tokens/soul.jpg"
        },
       {
         "name": "Wrapped Fantom",
@@ -44,6 +44,14 @@
       },
       {
         "name": "Fantom USD",
+        "address": "0xAd84341756Bf337f5a0164515b1f6F993D194E1f",
+        "symbol": "fUSD",
+        "decimals": 18,
+        "chainId": 250,
+        "logoURI": "https://cdn.worldvectorlogo.com/logos/usd-1.svg"
+      },
+      {
+        "name": "Fantom USD",
         "address": "0x306557358e20AEa124b16a548597897858D13cb2",
         "symbol": "fUSD",
         "decimals": 18,
@@ -60,11 +68,19 @@
       },
       {
         "name": "Seance Circle",
+        "address": "0x124B06C5ce47De7A6e9EFDA71a946717130079E6",
+        "symbol": "SEANCE",
+        "decimals": 18,
+        "chainId": 250,
+        "logoURI": "https://app.soulswap.finance/images/tokens/seance.jpg"
+      },
+      {
+        "name": "Seance Circle",
         "address": "0xD54Cf31D5653F4a062f5DA4C83170A5867d04442",
         "symbol": "SEANCE",
         "decimals": 18,
         "chainId": 4002,
-        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/seance.jpg"
+        "logoURI": "https://app.soulswap.finance/images/tokens/seance.jpg"
       }
     ]
 }

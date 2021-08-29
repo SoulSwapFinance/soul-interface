@@ -11,9 +11,9 @@ export const getTokenLogoURL = (address: string, chainId: ChainId) => {
   if (chainId === ChainId.MAINNET) {
     imageURL = `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${address}/logo.png`
   } else if (chainId === ChainId.FANTOM) {
-    imageURL = `https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/${address}/logo.png`
+    imageURL = `https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/fantom/assets/${address}/logo.png`
   } else if (chainId === ChainId.FANTOM_TESTNET) {
-    imageURL = `https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom-testnet/assets/${address}/logo.png`
+    imageURL = `https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/fantom-testnet/assets/${address}/logo.png`
   } else if (chainId === ChainId.BSC) {
     imageURL = `https://v1exchange.pancakeswap.finance/images/coins/${address}.png`
   } else if (chainId === ChainId.MATIC) {
