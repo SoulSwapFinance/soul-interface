@@ -347,15 +347,15 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
               </FlexText>
               <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
               <Wrap padding="0" margin="0" display="flex">
-              {approved ? (
-                <SubmitButton
-                  onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
-                >
-                  Stake
-                </SubmitButton>
-              ) : (
-                <SubmitButton onClick={() => handleApprove()}>Approve Stake</SubmitButton>
-              )}
+                {approved ? (
+                  <SubmitButton
+                    onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
+                  >
+                    Stake
+                  </SubmitButton>
+                ) : (
+                  <SubmitButton onClick={() => handleApprove()}>Approve Stake</SubmitButton>
+                )}
               </Wrap>
             </FunctionBox>
 
@@ -367,12 +367,13 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
               <Input name="unstake" id="unstake" type="number" placeholder="0.0" min="0" />
 
               <Wrap padding="0" margin="0" display="flex">
-                <SubmitButton padding="0" onClick={() => handleHarvest()}>
+                <SubmitButton padding="0" margin=".5rem .25rem .5rem 0" onClick={() => handleHarvest()}>
                   Harvest
                 </SubmitButton>
                 <SubmitButton
                   primaryColour="#bbb"
                   color="black"
+                  margin=".5rem 0 .5rem .25rem"
                   onClick={() => handleWithdraw(ethers.utils.parseUnits(document.getElementById('unstake').value))}
                 >
                   Unstake
