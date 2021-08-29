@@ -364,15 +364,13 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
               </FlexText>
               <Input name="unstake" id="unstake" type="number" placeholder="0.0" min="0" />
               <div style={{ display: 'flex' }}>
+                <SubmitButton onClick={() => handleHarvest()}>Harvest</SubmitButton>
                 <SubmitButton
                   primaryColour="#bbb"
                   color="black"
                   onClick={() => handleWithdraw(ethers.utils.parseUnits(document.getElementById('unstake').value))}
                 >
                   Unstake
-                </SubmitButton>
-                <SubmitButton primaryColour="#3cd27a" color="black" onClick={() => handleHarvest()}>
-                  Harvest
                 </SubmitButton>
               </div>
             </FunctionBox>
