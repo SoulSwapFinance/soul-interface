@@ -68,11 +68,11 @@ export default function Bridge() {
         </Head>
 
         <Wrap padding="2rem 6rem 0 6rem" justifyContent="center">
-          <Wrap padding="2rem 0">
+          <Wrap padding="2rem 0 .5rem 0">
             <Heading fontSize="1.5rem" textAlign="center">
               Bridge $FTM from Ethereum to Fantom
             </Heading>
-            <Text padding="0" color="#aaa" textAlign="center">
+            <Text fontSize=".9rem" padding="0" color="#aaa" textAlign="center">
               Powered By AnySwap Network
             </Text>
           </Wrap>
@@ -102,12 +102,12 @@ export default function Bridge() {
             </Button>
           </Wrap>
 
-          <Text padding=".25rem 0" color="#aaa" textAlign="center" fontSize=".8rem">
-            There is a fee of 0.1%, with a minimum fee of 80 FTM and a maximum fee of 800 FTM. The fee is charged by
+          <Text padding=".25rem 0" color="#aaa" textAlign="center" fontSize=".75rem">
+            There is a fee of 0.1% that covers the gas on the target blockchain, with a minimum fee of 80 FTM and a maximum fee of 800 FTM. The fee is charged by
             AnySwap, SoulSwap charges no additional fees.
           </Text>
 
-          <Wrap padding="1rem 0" justifyContent="center">
+          <Wrap padding=".75rem 0" justifyContent="center">
             <Wrap display="flex" justifyContent="space-between">
               <Text padding="0" color="#aaa">
                 Max Bridge Amount
