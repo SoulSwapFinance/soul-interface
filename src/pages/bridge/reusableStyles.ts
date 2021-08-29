@@ -147,6 +147,7 @@ export const Input = styled.input`
 
   height: ${({ height }) => (height ? `${height}` : `2rem`)};
   width: ${({ width }) => (width ? `${width}` : `10rem`)};
+  text-align: ${({ textAlign }) => (textAlign ? `${textAlign}` : `left`)};
 
   color: ${({ color }) => (color ? `${color}` : "white")};
   transition: all 0.2s ease-in-out;

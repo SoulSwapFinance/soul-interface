@@ -178,7 +178,7 @@ export default function NetworkModal(): JSX.Element | null {
 
       <div className="grid grid-flow-row-dense grid-cols-1 gap-5 overflow-y-auto md:grid-cols-2">
         {[
-          // ChainId.MAINNET,
+          ChainId.MAINNET,
           // ChainId.MATIC,
           ChainId.FANTOM,
           ChainId.FANTOM_TESTNET,

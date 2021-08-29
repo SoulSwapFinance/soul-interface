@@ -5,8 +5,6 @@ import { ChainId } from '@soulswap/sdk'
 import { useAnyswapEthOperaBridge } from "../../hooks/useContract";
 
 const useBridge = () => {
-  const { account } = useActiveWeb3React()
-
   const swapOut = async (amount, account) => {
     const ethToFtm = await useAnyswapEthOperaBridge();
 

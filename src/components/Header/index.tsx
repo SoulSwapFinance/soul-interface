@@ -41,22 +41,26 @@ function AppBar(): JSX.Element {
                   <div className="hidden sm:block sm:ml-4">
                     <div className="flex space-x-2">
                       {/* <Buy /> */}
-                      <NavLink href="/swap">
-                        <a
-                          id={`swap-nav-link`}
-                          className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                        >
-                          {i18n._(t`Swap`)}
-                        </a>
-                      </NavLink>
-                      <NavLink href="/pool">
-                        <a
-                          id={`pool-nav-link`}
-                          className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                        >
-                          {i18n._(t`Pool`)}
-                        </a>
-                      </NavLink>
+                      {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <>
+                          <NavLink href="/swap">
+                            <a
+                              id={`swap-nav-link`}
+                              className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                            >
+                              {i18n._(t`Swap`)}
+                            </a>
+                          </NavLink>
+                          <NavLink href="/pool">
+                            <a
+                              id={`pool-nav-link`}
+                              className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                            >
+                              {i18n._(t`Pool`)}
+                            </a>
+                          </NavLink>
+                        </>
+                      )}
                       {/* {chainId && [ChainId.MAINNET, ChainId.MATIC, ChainId.BSC].includes(chainId) && (
                         <NavLink href={'/migrate'}>
                           <a
@@ -68,7 +72,7 @@ function AppBar(): JSX.Element {
                         </NavLink>
                       )} */}
                       {/* {chainId && [ChainId.MAINNET, ChainId.MATIC, ChainId.XDAI, ChainId.HARMONY].includes(chainId) && ( */}
-                      {chainId === ChainId.FANTOM && (
+                      {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/farm'}>
                           <a
                             id={`farm-nav-link`}
@@ -102,7 +106,7 @@ function AppBar(): JSX.Element {
                           </>
                         )} */}
                       {/* {chainId === ChainId.MAINNET && ( */}
-                      {chainId === ChainId.FANTOM && (
+                      {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/stake'}>
                           <a
                             id={`stake-nav-link`}
@@ -140,7 +144,7 @@ function AppBar(): JSX.Element {
                   <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
                     {/* {chainId && [ChainId.MAINNET].includes(chainId) && library && library.provider.isMetaMask && ( */}
                     {chainId &&
-                      [ChainId.FANTOM].includes(chainId) &&
+                      [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) &&
                       library &&
                       library.provider.isMetaMask && ( // TODO: update
                         <>
@@ -189,50 +193,56 @@ function AppBar(): JSX.Element {
                       )}
 
                     {/* {chainId && chainId in SOUL_ADDRESS && library && library.provider.isMetaMask && ( */}
-                    {chainId && chainId in SOUL_ADDRESS && library && library.provider.isMetaMask && (
-                      <>
-                        <QuestionHelper text={i18n._(t`Add SOUL to your MetaMask wallet`)}>
-                          <div
-                            className="hidden rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
-                            onClick={() => {
-                              const params: any = {
-                                type: 'ERC20',
-                                options: {
-                                  address: SOUL_ADDRESS[chainId],
-                                  symbol: 'SOUL',
-                                  decimals: 18,
-                                  image: 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/soul.jpg',
-                                },
-                              }
-                              if (library && library.provider.isMetaMask && library.provider.request) {
-                                library.provider
-                                  .request({
-                                    method: 'wallet_watchAsset',
-                                    params,
-                                  })
-                                  .then((success) => {
-                                    if (success) {
-                                      console.log('Successfully added SOUL to MetaMask')
-                                    } else {
-                                      throw new Error('Something went wrong.')
-                                    }
-                                  })
-                                  .catch(console.error)
-                              }
-                            }}
-                          >
-                            <Image
-                              src="/logo.jpg"
-                              alt="SOUL"
-                              width="38px"
-                              height="38px"
-                              objectFit="contain"
-                              className="rounded-md"
-                            />
-                          </div>
-                        </QuestionHelper>
-                      </>
-                    )}
+
+                    {chainId &&
+                      [ChainId.FANTOM].includes(chainId) &&
+                      chainId in SOUL_ADDRESS &&
+                      library &&
+                      library.provider.isMetaMask && (
+                        <>
+                          <QuestionHelper text={i18n._(t`Add SOUL to your MetaMask wallet`)}>
+                            <div
+                              className="hidden rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
+                              onClick={() => {
+                                const params: any = {
+                                  type: 'ERC20',
+                                  options: {
+                                    address: SOUL_ADDRESS[chainId],
+                                    symbol: 'SOUL',
+                                    decimals: 18,
+                                    image:
+                                      'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/soul.jpg',
+                                  },
+                                }
+                                if (library && library.provider.isMetaMask && library.provider.request) {
+                                  library.provider
+                                    .request({
+                                      method: 'wallet_watchAsset',
+                                      params,
+                                    })
+                                    .then((success) => {
+                                      if (success) {
+                                        console.log('Successfully added SOUL to MetaMask')
+                                      } else {
+                                        throw new Error('Something went wrong.')
+                                      }
+                                    })
+                                    .catch(console.error)
+                                }
+                              }}
+                            >
+                              <Image
+                                src="/logo.jpg"
+                                alt="SOUL"
+                                width="38px"
+                                height="38px"
+                                objectFit="contain"
+                                className="rounded-md"
+                              />
+                            </div>
+                          </QuestionHelper>
+                        </>
+                      )}
 
                     {library && library.provider.isMetaMask && (
                       <div className="hidden sm:inline-block">
