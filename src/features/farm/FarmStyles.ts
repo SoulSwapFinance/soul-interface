@@ -21,6 +21,7 @@ export const FarmRow = styled.div`
   border-radius: 8px;
   padding: 5px 15px;
   border: 1px solid #333;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
     opacity: 75%;
