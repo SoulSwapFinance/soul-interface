@@ -53,8 +53,9 @@ export default function Bridge() {
   }
 
   const handleChange = async () => {
-    const parsed = ethers.utils.parseUnits(document.getElementById('amount').value)
-    setAmount(parsed)
+    const value = document.getElementById('amount').value
+    if (value === null || value === undefined || value === "") setAmount("")
+    else setAmount(ethers.utils.parseUnits(value))
   }
 
   //   const calculateFee = async () => {}
@@ -87,6 +88,7 @@ export default function Bridge() {
               </ClickableText>
             </Wrap>
             <Input
+              textAlign="center"
               id="amount"
               width="100%"
               placeholder="0"
@@ -103,8 +105,8 @@ export default function Bridge() {
           </Wrap>
 
           <Text padding=".25rem 0" color="#aaa" textAlign="center" fontSize=".75rem">
-            There is a fee of 0.1% that covers the gas on the target blockchain, with a minimum fee of 80 FTM and a maximum fee of 800 FTM. The fee is charged by
-            AnySwap, SoulSwap charges no additional fees.
+            There is a fee of 0.1% that covers the gas on the target blockchain, with a minimum fee of 80 FTM and a
+            maximum fee of 800 FTM. The fee is charged by AnySwap, SoulSwap charges no additional fees.
           </Text>
 
           <Wrap padding=".75rem 0" justifyContent="center">
