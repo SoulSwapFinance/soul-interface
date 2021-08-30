@@ -518,7 +518,3 @@ export function useLimitOrderHelperContract(withSignerIfPossible?: boolean): Con
 export function useAnyswapEthOperaBridge(withSignerIfPossible?: boolean): Contract | null {
   return useContract('0x5cbe98480a790554403694b98bff71a525907f5d', anyswapEthOperaBridge_ABI, withSignerIfPossible)
 }
-
-export function useFantomERC20Contract(withSignerIfPossible?: boolean): Contract | null {
-  return useContract('0x4E15361FD6b4BB609Fa63C81A2be19d873717870', ERC20_ABI, withSignerIfPossible)
-}
