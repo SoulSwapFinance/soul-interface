@@ -12,12 +12,12 @@ function useApproveContract(tokenAddress) {
     } catch (e) {
       console.log(e)
       alert(e.message)
+      return e
     }
   })
 
   const erc20Approve = useCallback(async (spender) => {
     try {
-      const contract = await useTokenContract(tokenAddress)
       const result = await contract.approve(
         spender,
         ethers.BigNumber.from(2).pow(ethers.BigNumber.from(256)).sub(ethers.BigNumber.from(1))
@@ -26,17 +26,18 @@ function useApproveContract(tokenAddress) {
     } catch (e) {
       console.log(e)
       alert(e.message)
+      return e
     }
   })
 
   const erc20Allowance = useCallback(async (owner, spender) => {
     try {
-      const contract = await useTokenContract(tokenAddress)
       const result = await contract.allowance(owner, spender)
       return result
     } catch (e) {
       console.log(e)
       alert(e.message)
+      return e
     }
   })
 

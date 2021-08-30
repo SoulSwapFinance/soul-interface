@@ -4,10 +4,11 @@ import { useAnyswapEthOperaBridge } from '../../hooks/useContract'
 import { useCallback } from 'react'
 
 function useBridge() {
+  const ethToFtm = useAnyswapEthOperaBridge()
+  
   const swapOut = useCallback(async (amount) => {
     if (ChainId.MAINNET) {
       try {
-        const ethToFtm = useAnyswapEthOperaBridge()
         const result = await ethToFtm?.Swapout(amount)
         return result
       } catch (err) {

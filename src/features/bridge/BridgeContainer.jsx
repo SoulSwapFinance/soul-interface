@@ -18,7 +18,7 @@ export default function BridgeContainer() {
   const [amount, setAmount] = useState('')
   const [approved, setApproved] = useState(false)
   const [tokenSelected, setTokenSelected] = useState(Ethereum$FTM)
-  
+
   const { swapOut } = useBridge()
   const { erc20BalanceOf, erc20Approve, erc20Allowance } = useApproveContract(tokenSelected)
 
@@ -30,40 +30,40 @@ export default function BridgeContainer() {
    *  Approve tokens for transfer
    */
   const handleSwapOutApprove = async () => {
-    const parsedAmount = ethers.utils.parseUnits(amount.toString())
-
-    if (parsedAmount === 0 || parsedAmount === '') {
+    if (amount === undefined || amount === null || amount === '') {
       alert('Must enter a number')
       console.warn('Must enter a number')
       return
     }
 
+    const parsedAmount = ethers.utils.parseUnits(amount.toString())
     const allowance = await erc20Allowance(account, AnyswapEthOperaBridgeAddress)
 
-    if (allowance < parsedAmount) {
-      await erc20Approve(AnyswapEthOperaBridgeAddress)
+    if (allowance.toString() < parsedAmount) {
+      const result = await erc20Approve(AnyswapEthOperaBridgeAddress)
+      // if Tx is not denied
+      if (result.code !== 4001) {
+        setApproved(true)
+      }
+    } else {
+      setApproved(true)
     }
-
-    setApproved(true)
   }
-
 
   /**
    *  Bridge tokens to target blockchain
    */
   const handleSwapOut = async () => {
-    const swapping = ethers.utils.parseUnits(amount).toString()
-
-    if (swapping === 0 || swapping === '') {
+    if (amount === undefined || amount === null || amount === '') {
       alert('Must enter a number')
       console.warn('Must enter a number')
       return
     }
 
+    const swapping = ethers.utils.parseUnits(amount.toString())
     await swapOut(swapping)
     setApproved(false)
   }
-
 
   /**
    *  Fetch how many tokens the user owns
@@ -73,7 +73,6 @@ export default function BridgeContainer() {
     console.log(bal.toString())
     setBalance(bal.toString())
   }
-
 
   /**
    *  Set the input to the total tokens user owns
@@ -87,7 +86,6 @@ export default function BridgeContainer() {
       document.getElementById('amount').value = Number(ethers.utils.formatUnits(balance)).toFixed(4)
     }
   }
-
 
   /**
    *  Update state to the input
