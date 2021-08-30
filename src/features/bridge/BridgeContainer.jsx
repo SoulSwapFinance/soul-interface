@@ -61,8 +61,13 @@ export default function BridgeContainer() {
     }
 
     const swapping = ethers.utils.parseUnits(amount.toString())
-    await swapOut(swapping)
-    setApproved(false)
+    const result = await swapOut(swapping)
+
+    if (result.code !== 4001) {
+      setApproved(false)
+    } else {
+      return
+    }
   }
 
   /**
