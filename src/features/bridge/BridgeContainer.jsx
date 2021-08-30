@@ -14,18 +14,21 @@ export default function BridgeContainer() {
   const AnyswapEthOperaBridgeAddress = '0x5cbe98480a790554403694b98bff71a525907f5d'
   const Ethereum$FTM = '0x4E15361FD6b4BB609Fa63C81A2be19d873717870'
 
-  const { erc20BalanceOf, erc20Approve, erc20Allowance } = useApproveContract()
-  const { swapOut } = useBridge()
-
   const [balance, setBalance] = useState(undefined)
   const [amount, setAmount] = useState('')
   const [approved, setApproved] = useState(false)
   const [tokenSelected, setTokenSelected] = useState(Ethereum$FTM)
+  
+  const { swapOut } = useBridge()
+  const { erc20BalanceOf, erc20Approve, erc20Allowance } = useApproveContract(tokenSelected)
 
   useEffect(() => {
-    // fetchBal()
+    fetchBal()
   }, [account, chainId])
 
+  /**
+   *  Approve tokens for transfer
+   */
   const handleSwapOutApprove = async () => {
     const parsedAmount = ethers.utils.parseUnits(amount.toString())
 
@@ -35,15 +38,19 @@ export default function BridgeContainer() {
       return
     }
 
-    const allowance = await erc20Allowance(tokenSelected, account, AnyswapEthOperaBridgeAddress)
+    const allowance = await erc20Allowance(account, AnyswapEthOperaBridgeAddress)
 
     if (allowance < parsedAmount) {
-      await erc20Approve(tokenSelected, AnyswapEthOperaBridgeAddress)
+      await erc20Approve(AnyswapEthOperaBridgeAddress)
     }
 
     setApproved(true)
   }
 
+
+  /**
+   *  Bridge tokens to target blockchain
+   */
   const handleSwapOut = async () => {
     const swapping = ethers.utils.parseUnits(amount).toString()
 
@@ -57,17 +64,34 @@ export default function BridgeContainer() {
     setApproved(false)
   }
 
+
+  /**
+   *  Fetch how many tokens the user owns
+   */
   const fetchBal = async () => {
-    const bal = await erc20BalanceOf(tokenSelected, account)
-    setBalance(bal)
+    const bal = await erc20BalanceOf(account)
+    console.log(bal.toString())
+    setBalance(bal.toString())
   }
 
+
+  /**
+   *  Set the input to the total tokens user owns
+   */
   const handleMax = async () => {
     await fetchBal()
     setAmount(balance)
-    document.getElementById('amount').value = Number(ethers.utils.formatUnits(balance)).toFixed(4)
+    if (balance === null || balance === undefined || balance === '') {
+      document.getElementById('amount').value = 0
+    } else {
+      document.getElementById('amount').value = Number(ethers.utils.formatUnits(balance)).toFixed(4)
+    }
   }
 
+
+  /**
+   *  Update state to the input
+   */
   const handleChange = async () => {
     const value = document.getElementById('amount').value
     if (value === null || value === undefined || value === '') setAmount('')

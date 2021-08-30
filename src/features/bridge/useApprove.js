@@ -1,13 +1,12 @@
 import { useCallback } from 'react'
 import { ethers } from 'ethers'
-import { useContract } from '../../hooks/useContract'
+import { useTokenContract } from '../../hooks/useContract'
 
-import IERC20 from '../../constants/abis/soulswap/ERCs/IERC20.json'
+function useApproveContract(tokenAddress) {
+  const contract = useTokenContract(tokenAddress)
 
-function useApproveContract() {
-  const erc20BalanceOf = useCallback(async (tokenAddress, address) => {
+  const erc20BalanceOf = useCallback(async (address) => {
     try {
-      const contract = await useContract(tokenAddress, IERC20.abi)
       const result = await contract.balanceOf(address)
       return result
     } catch (e) {
@@ -16,9 +15,9 @@ function useApproveContract() {
     }
   })
 
-  const erc20Approve = useCallback(async (tokenAddress, spender) => {
+  const erc20Approve = useCallback(async (spender) => {
     try {
-      const contract = await useContract(tokenAddress, IERC20.abi)
+      const contract = await useTokenContract(tokenAddress)
       const result = await contract.approve(
         spender,
         ethers.BigNumber.from(2).pow(ethers.BigNumber.from(256)).sub(ethers.BigNumber.from(1))
@@ -30,9 +29,9 @@ function useApproveContract() {
     }
   })
 
-  const erc20Allowance = useCallback(async (tokenAddress, owner, spender) => {
+  const erc20Allowance = useCallback(async (owner, spender) => {
     try {
-      const contract = await useContract(tokenAddress, IERC20.abi)
+      const contract = await useTokenContract(tokenAddress)
       const result = await contract.allowance(owner, spender)
       return result
     } catch (e) {

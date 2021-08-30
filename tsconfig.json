@@ -22,7 +22,7 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx", "src/hooks/useApprove.js"],
+    "**/*.tsx"],
   "exclude": [
     "node_modules"
   ]
