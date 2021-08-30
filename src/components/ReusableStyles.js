@@ -52,7 +52,7 @@ export const Heading = styled.h3`
 
 export const Text = styled.p`
   padding: ${({ padding }) => (padding ? `${padding}` : "0 0.5rem")};
-  margin: ${({ margin }) => (margin ? `${margin}` : "0 0")};
+  margin: ${({ margin }) => (margin ? `${margin}` : "0")};
   color: ${({ color }) => (color ? `${color}` : `white`)};
   font-size: ${({ fontSize }) => (fontSize ? `${fontSize}` : `1rem`)};
   font-weight: ${({ fontWeight }) => (fontWeight ? `${fontWeight}` : ``)};
@@ -87,7 +87,6 @@ export const ExternalLink = styled.a`
     border-bottom: 3px solid violet;
   }
 `;
-
 
 export const Button = styled.button`
   margin: ${({ margin }) => (margin ? `${margin}` : `0`)};

@@ -20,7 +20,7 @@ import {
   useSushiPrice,
 } from '../../services/graph'
 
-import { Wrap } from '../../components/ReusableStyles'
+import { Wrap, Heading, Text } from '../../components/ReusableStyles'
 
 import { ChainId } from '@soulswap/sdk'
 import Container from '../../components/Container'
@@ -282,8 +282,7 @@ export default function Farm(): JSX.Element {
         {/* <div className={classNames('sticky top-0 hidden lg:block md:col-span-1')} style={{ maxHeight: '40rem' }}>
         <Menu positionsLength={positions.length} />
       </div> */}
-        <div className={classNames('space-y-6 col-span-4 lg:col-span-3')}>
-          {/* <Search
+        {/* <Search
           search={search}
           term={term}
           inputProps={{
@@ -291,15 +290,22 @@ export default function Farm(): JSX.Element {
               'relative w-full bg-transparent border border-transparent focus:border-gradient-r-blue-pink-dark-900 rounded placeholder-secondary focus:placeholder-primary font-bold text-base px-6 py-3.5',
           }}
         /> */}
+        <Wrap padding="0">
+          <Heading fontSize="1.5rem" textAlign="center">
+            Farms
+          </Heading>
+        </Wrap>
 
-          <div className="flex items-center text-lg font-bold text-high-emphesis whitespace-nowrap">
-            Farms{' '}
-            <div className="w-full h-0 ml-4 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis md:border-gradient-r-blue-pink-dark-800 opacity-20"></div>
-          </div>
+        <Wrap padding="0" margin="1rem 0">
+          <Heading padding="0" margin="0" textAlign="center" color="#aaa">
+            Approve and Stake your SOUL Liquidity Pool (LP) tokens to passively earn SOUL.
+          </Heading>
+          <Text padding="0" margin="0" textAlign="center" color="#aaa">
+            Click on the token pair to go directly to Add Liquidity page.
+          </Text>
+        </Wrap>
 
-          {/* <FarmList farms={result} term={term} /> */}
-          <FarmList />
-        </div>
+        <FarmList />
       </Container>
     </Wrap>
   )

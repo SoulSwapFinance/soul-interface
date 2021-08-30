@@ -73,6 +73,14 @@ export const TokenPair = styled.a`
   overflow-wrap: break-word;
   font-size: 1.2rem;
   color: white;
+
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    color: #3D81DB;
+    opacity: 75%;
+    cursor: pointer;
+  }
 `
 
 export const ShowBtnWrapper = styled.div`
@@ -91,9 +99,10 @@ export const ShowBtn = styled.button`
   font-size: 1rem;
   background-color: transparent;
 
-  &:hover,
-  &:active {
-    text-shadow: 0 0 5px white;
+  &:hover, &:active {
+    color: #3D81DB;
+    opacity: 75%;
+    cursor: pointer;
   }
 `
 

@@ -27,7 +27,7 @@ import {
   SubmitButton,
 } from './FarmStyles'
 
-import { Wrap } from '../../components/ReusableStyles'
+import { Wrap, ClickableText } from '../../components/ReusableStyles'
 
 // params to render farm with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)
@@ -285,7 +285,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
           <FarmContentWrapper>
             <TokenPairBox>
               {/* 2 token logo combined ? */}
-              <TokenPair target="_blank" href={`https://beta.soulswap.finance/add/${token1}/${token2}`}>
+              <TokenPair target="_blank" href={`https://app.soulswap.finance/add/${token1}/${token2}`}>
                 {lpSymbol}
               </TokenPair>
             </TokenPairBox>
@@ -321,7 +321,13 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
               {/* <button >Max</button> */}
               <FlexText>
                 <p>Available: {Number(unstakedBal).toFixed(3)}</p>
-                <button onClick={() => (document.getElementById('stake').value = unstakedBal)}>MAX</button>
+                <ClickableText
+                  padding="0"
+                  color="#aaa"
+                  onClick={() => (document.getElementById('stake').value = unstakedBal)}
+                >
+                  MAX
+                </ClickableText>
               </FlexText>
               <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
               <Wrap padding="0" margin="0" display="flex">
@@ -340,18 +346,24 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
             <FunctionBox>
               <FlexText>
                 <p>Staked: {Number(stakedBal).toFixed(3)}</p>
-                <button onClick={() => (document.getElementById('unstake').value = stakedBal)}>MAX</button>
+                <ClickableText
+                  padding="0"
+                  color="#aaa"
+                  onClick={() => (document.getElementById('unstake').value = stakedBal)}
+                >
+                  MAX
+                </ClickableText>
               </FlexText>
               <Input name="unstake" id="unstake" type="number" placeholder="0.0" min="0" />
 
               <Wrap padding="0" margin="0" display="flex">
-                <SubmitButton padding="0" margin=".5rem .65rem .5rem 0" onClick={() => handleHarvest()}>
+                <SubmitButton padding="0" margin=".5rem .6rem .5rem 0" onClick={() => handleHarvest()}>
                   Harvest
                 </SubmitButton>
                 <SubmitButton
                   primaryColour="#bbb"
                   color="black"
-                  margin=".5rem 0 .5rem .65rem"
+                  margin=".5rem 0 .5rem .6rem"
                   onClick={() => handleWithdraw(ethers.utils.parseUnits(document.getElementById('unstake').value))}
                 >
                   Unstake
