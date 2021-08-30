@@ -6,7 +6,7 @@ import { ButtonConfirmed, ButtonError } from '../../../components/Button'
 import { ChainId, Currency, CurrencyAmount, JSBI, Token, TradeType, Trade as V2Trade } from '@soulswap/sdk'
 import Column, { AutoColumn } from '../../../components/Column'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { UseERC20PermitState, useERC20PermitFromTrade } from '../../../hooks/useERC20Permit'
+// import { UseERC20PermitState, useERC20PermitFromTrade } from '../../../hooks/useERC20Permit'
 import { useAllTokens, useCurrency } from '../../../hooks/Tokens'
 import {
   useDefaultsFromURLSearch,
@@ -20,7 +20,6 @@ import {
   useUserArcherGasPrice,
   useUserArcherUseRelay,
   useUserSingleHopOnly,
-  useUserSlippageTolerance,
   useUserTransactionTTL,
 } from '../../../state/user/hooks'
 import { useNetworkModalToggle, useToggleSettingsMenu, useWalletModalToggle } from '../../../state/application/hooks'
@@ -29,7 +28,6 @@ import useWrapCallback, { WrapType } from '../../../hooks/useWrapCallback'
 import AddressInputPanel from '../../../components/AddressInputPanel'
 import { AdvancedSwapDetails } from '../../../features/swap/AdvancedSwapDetails'
 import AdvancedSwapDetailsDropdown from '../../../features/swap/AdvancedSwapDetailsDropdown'
-import { ArrowDownIcon } from '@heroicons/react/outline'
 import Button from '../../../components/Button'
 import ConfirmSwapModal from '../../../features/swap/ConfirmSwapModal'
 import Container from '../../../components/Container'
@@ -45,7 +43,6 @@ import ReactGA from 'react-ga'
 import SwapHeader from '../../../components/ExchangeHeader'
 import TokenWarningModal from '../../../modals/TokenWarningModal'
 import TradePrice from '../../../features/swap/TradePrice'
-import Typography from '../../../components/Typography'
 import UnsupportedCurrencyFooter from '../../../features/swap/UnsupportedCurrencyFooter'
 import Web3Connect from '../../../components/Web3Connect'
 import { computeFiatValuePriceImpact } from '../../../functions/trade'
