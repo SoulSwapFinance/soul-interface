@@ -55,7 +55,9 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
   const [approved, setApproved] = useState(false)
   const [showing, setShowing] = useState(false)
 
-  // runs on render
+  /**
+   * Runs only on initial render/mount
+   */
   useEffect(() => {
     fetchFarmApr(pid)
     console.log('apr:', apr)
@@ -63,7 +65,9 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account])
 
-  // Runs on render + reruns every second
+  /**
+   * Runs on initial render/mount and  reruns every second
+   */
   useEffect(() => {
     if (account) {
       const timer = setTimeout(() => {
@@ -89,56 +93,16 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
     }
   }
 
-  // const fetchStakingApr = async () => {
-  // const totalRewardPricePerYear = new BigNumber(rewardTokenPrice).times(tokenPerBlock).times(BLOCKS_PER_YEAR)
-  // const totalStakingTokenInPool = new BigNumber(stakingTokenPrice).times(totalStaked)
-  // const apr = totalRewardPricePerYear.div(totalStakingTokenInPool).times(100)
-  // return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
-  // }
+  /**
+   *  Note; How to create this function
+   *  - fetch the price of FUSD to SOUL
+   *  - use ^ to fetch the price of all other assets w/ SOUL as a pair
+   */
+  const fetchPriceOfToken = (pid) => {}
 
-  // Return the base token price for a farm, from a given pid
-  // export const useFtmPriceFromPid = (pid) => {
-  // const farm = useFarmFromPid(pid)
-  // return farm && new BigNumber(farm.token.ftmPrice)
-  // }
-
-  // export const useLpTokenPrice = (symbol) => {
-  // const farm = useFarmFromLpSymbol(symbol)
-  // const farmTokenPriceInUsd = useFtmPriceFromPid(farm.pid)
-  // let lpTokenPrice = BIG_ZERO
-
-  // if (farm.lpTotalSupply && farm.lpTotalInQuoteToken) {
-  //   // Total value of base token in LP
-  //   const valueOfBaseTokenInFarm = farmTokenPriceInUsd.times(farm.tokenAmountTotal)
-  //   // Double it to get overall value in LP
-  //   const overallValueOfAllTokensInFarm = valueOfBaseTokenInFarm.times(2)
-  //   // Divide total value of all tokens, by the number of LP tokens
-  //   const totalLpTokens = getBalanceAmount(new BigNumber(farm.lpTotalSupply))
-  //   lpTokenPrice = overallValueOfAllTokensInFarm.div(totalLpTokens)
-  // }
-
-  // return lpTokenPrice
-  // }
-
-  // /!\ Deprecated , use the BUSD hook in /hooks
-
-  // export const usePriceFtmFusd = () => {
-  // const usePriceFtmFusd = () => {
-  //   const bnbBusdFarm = useFarmFromPid(252)
-  //   return new BigNumber(bnbBusdFarm.quoteToken.busdPrice)
-  // }
-
-  // // export const usePriceSoulFusd = () => {
-  // const usePriceSoulFusd = () => {
-  //   const soulFtmFarm = useFarmFromPid(2)
-  //   const soulPriceFusdAsString = soulFtmFarm.token.fusdPrice
-  //   const soulPriceFusd = useMemo(() => {
-  //     return new BigNumber(soulPriceFusdAsString)
-  //   }, [soulPriceFusdAsString])
-
-  //   return soulPriceFusd
-  // }
-
+  /**
+   * Fetches the APR percentage for the `pid`
+   */
   const fetchFarmApr = async (pid) => {
     const poolAllocation = await poolInfo(pid)
     const totalAllocation = await totalAllocPoint()
@@ -156,16 +120,17 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
 
     // const soulRewardsApr = yearlySoulRewardAlloc.times(soulPriceUsd).div(poolLiquidityUsd).times(100)
 
+    const farmApr = yearlySoulFarmAlloc / liquidity
+
     // set to soulRewardsApr
-    setApr(Number(yearlySoulFarmAlloc).toFixed(0))
-    return Number(yearlySoulFarmAlloc).toFixed(0)
+    setApr(Number(farmApr).toFixed(0))
+    return Number(farmApr).toFixed(0)
   }
 
-  //
+  /**
+   * Checks the user's alloc of the total staked in the farm
+   */
   // const fetchUserFarmAlloc = async () => {}
-
-  // Checks how much the user is receiving in rewards based on their allocation of the pool
-  // const fetchUserFarmApr = async () => {}
 
   /**
    * Checks the amount of lpTokens the SoulSummoner contract holds
