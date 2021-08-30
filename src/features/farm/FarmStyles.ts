@@ -32,6 +32,7 @@ export const FarmRow = styled.div`
 export const FarmContentWrapper = styled.div`
   display: flex;
   justify-content: left;
+  padding: 0 4rem 0 0;
 
   &:last-child {
     justify-content: space-between;
@@ -43,7 +44,7 @@ export const FarmItemBox = styled.div`
   display: grid;
   justify-content: left;
   align-items: center;
-  margin-left: ${({ marginLeft }) => (marginLeft ? `${marginLeft}` : `30px`)};
+  // margin-left: ${({ marginLeft }) => (marginLeft ? `${marginLeft}` : `30px`)};
 
   @media screen and (max-width: 600px) {
     display: ${({ desktopOnly }) => (desktopOnly ? `none` : '')};

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { BigNumber } from '@ethersproject/bignumber'
-import { MaxUint256 } from '@ethersproject/constants'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
-import useApproveContract from '../../hooks/useApprove'
 import { ethers } from 'ethers'
 
 import useSoulSummoner from './useSoulSummoner'
@@ -44,8 +42,8 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
   const walletConnected = !!account
   const toggleWalletModal = useWalletModalToggle()
 
-  const { erc20BalanceOf } = useApproveContract()
-  const { withdraw, deposit, pendingSoul, poolInfo, userInfo, soulPerSecond, totalAllocPoint } = useSoulSummoner()
+  const { fetchSummonerLpTokens, withdraw, deposit, pendingSoul, poolInfo, userInfo, soulPerSecond, totalAllocPoint } =
+    useSoulSummoner(lpToken)
   const { approve, allowance, balanceOf } = useLpToken(lpToken)
 
   const [stakedBal, setStakedBal] = useState(0)
@@ -60,8 +58,8 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
   // runs on render
   useEffect(() => {
     fetchFarmApr(pid)
-    // fetchSummonerTokenBal()
     console.log('apr:', apr)
+    fetchSummonerTokenBal()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account])
 
@@ -71,6 +69,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
       const timer = setTimeout(() => {
         fetchPending(pid)
         fetchFarmApr(pid)
+        fetchSummonerTokenBal()
       }, 3000)
 
       // Clear timeout if the component is unmounted
@@ -78,6 +77,9 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
     }
   })
 
+  /**
+   * Opens the function panel dropdown
+   */
   const handleShow = () => {
     setShowing(!showing)
     if (showing) {
@@ -121,28 +123,21 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
   // /!\ Deprecated , use the BUSD hook in /hooks
 
   // export const usePriceFtmFusd = () => {
-  const usePriceFtmFusd = () => {
-    const bnbBusdFarm = useFarmFromPid(252)
-    return new BigNumber(bnbBusdFarm.quoteToken.busdPrice)
-  }
+  // const usePriceFtmFusd = () => {
+  //   const bnbBusdFarm = useFarmFromPid(252)
+  //   return new BigNumber(bnbBusdFarm.quoteToken.busdPrice)
+  // }
 
-  // export const usePriceSoulFusd = () => {
-  const usePriceSoulFusd = () => {
-    const soulFtmFarm = useFarmFromPid(2)
-    const soulPriceFusdAsString = soulFtmFarm.token.fusdPrice
-    const soulPriceFusd = useMemo(() => {
-      return new BigNumber(soulPriceFusdAsString)
-    }, [soulPriceFusdAsString])
+  // // export const usePriceSoulFusd = () => {
+  // const usePriceSoulFusd = () => {
+  //   const soulFtmFarm = useFarmFromPid(2)
+  //   const soulPriceFusdAsString = soulFtmFarm.token.fusdPrice
+  //   const soulPriceFusd = useMemo(() => {
+  //     return new BigNumber(soulPriceFusdAsString)
+  //   }, [soulPriceFusdAsString])
 
-    return soulPriceFusd
-  }
-
-  const fetchSummonerTokenBal = async () => {
-    const bal = await erc20BalanceOf(lpToken, '0xA65DbEA56E1E202bf03dB5f49ba565fb00Bf9288')
-    const formatted = ethers.utils.formatUnits(bal)
-    console.log(formatted)
-    setLiquidity(Number(formatted).toFixed(0))
-  }
+  //   return soulPriceFusd
+  // }
 
   const fetchFarmApr = async (pid) => {
     const poolAllocation = await poolInfo(pid)
@@ -167,18 +162,28 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
   }
 
   //
-  const fetchUserFarmAlloc = async () => {}
+  // const fetchUserFarmAlloc = async () => {}
 
   // Checks how much the user is receiving in rewards based on their allocation of the pool
-  const fetchUserFarmApr = async () => {}
+  // const fetchUserFarmApr = async () => {}
 
-  // Used to get non 1e18 numbers and turn them into 1e18
-  const parseAmount = (amount) => {
-    const bnAmount = ethers.BigNumber.from(amount).toString()
-    const parsed = bnAmount.mul(BigNumber.from(10).pow(18)).toString()
-    return parsed
+  /**
+   * Checks the amount of lpTokens the SoulSummoner contract holds
+   */
+  const fetchSummonerTokenBal = async () => {
+    try {
+      const bal = await fetchSummonerLpTokens()
+      console.log('lpTokens', bal.toString())
+      const formatted = ethers.utils.formatUnits(bal.toString())
+      setLiquidity(Number(formatted).toFixed(0))
+    } catch (e) {
+      console.warn(e)
+    }
   }
 
+  /**
+   * Gets the lpToken balance of the user for each pool
+   */
   const fetchBals = async (pid) => {
     if (!walletConnected) {
       toggleWalletModal()
@@ -194,28 +199,31 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
 
         return [staked, unstaked]
       } catch (err) {
-        console.log(err)
+        console.warn(err)
       }
     }
   }
 
-  // Fetches connected user pending soul
+  /**
+   * Fetches connected user pending soul
+   */
   const fetchPending = async (pid) => {
     if (!walletConnected) {
       toggleWalletModal()
     } else {
       try {
         const pending = ethers.BigNumber.from(await pendingSoul(pid)).toString()
-        console.log(pending)
         const formatted = ethers.utils.formatUnits(pending.toString())
-        console.log(formatted)
         setPending(Number(formatted).toFixed(1).toString())
       } catch (err) {
-        console.log(err)
+        console.warn(err)
       }
     }
   }
 
+  /**
+   * Checks if the user has approved SoulSummoner to move lpTokens
+   */
   const fetchApproval = async () => {
     if (!walletConnected) {
       toggleWalletModal()
@@ -229,14 +237,16 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
     }
   }
 
+  /**
+   * Approves SoulSummoner to move lpTokens
+   */
   const handleApprove = async () => {
     if (!walletConnected) {
       toggleWalletModal()
     } else {
       try {
         const tx = await approve()
-        await tx.wait()
-        await fetchApproval()
+        await tx.wait().then(await fetchApproval())
       } catch (e) {
         alert(e.message)
         console.log(e)
@@ -245,33 +255,39 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
     }
   }
 
+  /**
+   * Harvests rewards from SoulSummoner farm
+   */
   const handleHarvest = async () => {
     try {
       const tx = await withdraw(pid, 0)
-      await tx.wait()
-      await fetchPending(pid)
+      await tx.wait().then(await fetchPending(pid))
     } catch (e) {
       alert(e.message)
       console.log(e)
     }
   }
 
+  /**
+   * Withdraws staked lpTokens from SoulSummoner farm
+   */
   const handleWithdraw = async (amount) => {
     try {
       const tx = await withdraw(pid, amount)
-      await tx.wait()
-      await fetchBals(pid)
+      await tx.wait().then(await fetchBals(pid))
     } catch (e) {
       alert(e.message)
       console.log(e)
     }
   }
 
+  /**
+   * Deposits/stakes lpTokens into SoulSummoner farm
+   */
   const handleDeposit = async (amount) => {
     try {
       const tx = await deposit(pid, amount)
-      await tx.wait()
-      await fetchBals(pid)
+      await tx.wait().then(await fetchBals(pid))
     } catch (e) {
       alert(e.message)
       console.log(e)
@@ -285,31 +301,32 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2 }) => {
           <FarmContentWrapper>
             <TokenPairBox>
               {/* 2 token logo combined ? */}
-              <TokenPair target="_blank" href={`https://app.soulswap.finance/add/${token1}/${token2}`}>
-                {lpSymbol}
-              </TokenPair>
+              <Wrap>
+                <FarmItemHeading>Token Pair</FarmItemHeading>
+                <TokenPair target="_blank" href={`https://app.soulswap.finance/add/${token1}/${token2}`}>
+                  {lpSymbol}
+                </TokenPair>
+              </Wrap>
             </TokenPairBox>
-
-            <FarmItemBox desktopOnly={true}>
-              <FarmItemHeading>Earned</FarmItemHeading>
-              <FarmItem>{pending}</FarmItem>
-            </FarmItemBox>
 
             <FarmItemBox>
               <FarmItemHeading>APR</FarmItemHeading>
               <FarmItem>{apr}%</FarmItem>
             </FarmItemBox>
 
-            {/* <FarmItemBox>
-              <FarmItemHeading>TVL</FarmItemHeading>
-              <FarmItem>${liquidity}</FarmItem>
-            </FarmItemBox> */}
-
             <FarmItemBox>
-              {/* <ShowBtnWrapper> */}
-              <ShowBtn onClick={() => handleShow()}>{showing ? `HIDE` : `SHOW`}</ShowBtn>
-              {/* </ShowBtnWrapper> */}
+              <FarmItemHeading>TVL</FarmItemHeading>
+              <FarmItem>{liquidity}</FarmItem>
             </FarmItemBox>
+
+            <FarmItemBox desktopOnly={true}>
+              <FarmItemHeading>Earned</FarmItemHeading>
+              <FarmItem>{pending}</FarmItem>
+            </FarmItemBox>
+
+            {/* <FarmItemBox>
+              <ShowBtn onClick={() => handleShow()}>{showing ? `HIDE` : `SHOW`}</ShowBtn>
+            </FarmItemBox> */}
           </FarmContentWrapper>
         </FarmRow>
       </FarmContainer>

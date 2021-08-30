@@ -305,6 +305,8 @@ export default function Farm(): JSX.Element {
           </Text>
         </Wrap>
 
+        {/* ADD AN APR CALCULATOR BOX */}
+        
         <FarmList />
       </Container>
     </Wrap>

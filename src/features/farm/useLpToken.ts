@@ -1,10 +1,9 @@
 import { useActiveWeb3React } from '../../hooks'
-import { BigNumber } from '@ethersproject/bignumber'
+import { ethers } from 'ethers'
 import { useCallback } from 'react'
 import { usePairContract } from '../../hooks/useContract'
-import { MaxUint256 } from '@ethersproject/constants'
 
-export default function useLpToken(lpTokenAddress, soulSummoner) {
+export default function useLpToken(lpTokenAddress) {
   const { account } = useActiveWeb3React()
   const pairContract = usePairContract(lpTokenAddress)
 
@@ -12,7 +11,10 @@ export default function useLpToken(lpTokenAddress, soulSummoner) {
   const approve = useCallback(async () => {
     try {
       // hard-coded soulsummoner for now (approving summoner to move lp tokens)
-      const result = await pairContract.approve('0xA65DbEA56E1E202bf03dB5f49ba565fb00Bf9288', MaxUint256)
+      const result = await pairContract.approve(
+        '0xA65DbEA56E1E202bf03dB5f49ba565fb00Bf9288',
+        ethers.BigNumber.from(2).pow(ethers.BigNumber.from(256)).sub(ethers.BigNumber.from(1))
+      )
       return result
     } catch (e) {
       console.log(e)
