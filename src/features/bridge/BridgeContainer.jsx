@@ -14,7 +14,7 @@ export default function BridgeContainer() {
   const AnyswapEthOperaBridgeAddress = '0x5cbe98480a790554403694b98bff71a525907f5d'
   const Ethereum$FTM = '0x4E15361FD6b4BB609Fa63C81A2be19d873717870'
 
-  const [balance, setBalance] = useState(undefined)
+  const [balance, setBalance] = useState(0)
   const [amount, setAmount] = useState('')
   const [approved, setApproved] = useState(false)
   const [tokenSelected, setTokenSelected] = useState(Ethereum$FTM)
@@ -23,7 +23,9 @@ export default function BridgeContainer() {
   const { erc20BalanceOf, erc20Approve, erc20Allowance } = useApproveContract(tokenSelected)
 
   useEffect(() => {
-    fetchBal()
+    if (account) {
+      fetchBal()
+    }
   }, [account, chainId])
 
   /**
