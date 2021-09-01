@@ -33,6 +33,11 @@ module.exports = withBundleAnalyzer(
           destination: '/swap',
           permanent: true,
         },
+        {
+          source: '/farm',
+          destination: '/swap',
+          permanent: true,
+        },
         // {
         //   source: '/zap',
         //   destination: '/',
