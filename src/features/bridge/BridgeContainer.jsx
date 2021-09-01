@@ -23,7 +23,7 @@ export default function BridgeContainer() {
   const { erc20BalanceOf, erc20Approve, erc20Allowance } = useApproveContract(tokenSelected)
 
   useEffect(() => {
-    if (account) {
+    if (account && chainId === 1) {
       fetchBal()
     }
   }, [account, chainId])

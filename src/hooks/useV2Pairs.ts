@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, FACTORY_ADDRESS, Pair, computePairAddress } from '@soulswap/sdk'
+import { Currency, CurrencyAmount, FACTORY_ADDRESS, Pair, computePairAddress, INIT_CODE_HASH } from '@soulswap/sdk'
 import ISoulSwapPairABI from '@soulswap/swap-core/build/contracts/ISoulSwapPair.json'
 import { Interface } from '@ethersproject/abi'
 import { useMemo } from 'react'
@@ -31,6 +31,7 @@ export function useV2Pairs(currencies: [Currency | undefined, Currency | undefin
               factoryAddress: FACTORY_ADDRESS[tokenA.chainId],
               tokenA,
               tokenB,
+              codeHash: INIT_CODE_HASH[tokenA.chainId]
             })
           : undefined
       }),
