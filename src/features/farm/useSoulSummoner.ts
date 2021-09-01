@@ -10,7 +10,7 @@ import {
 } from '../../hooks/useContract'
 import { SOUL_ADDRESS } from '@soulswap/sdk'
 
-export default function useSoulSummoner(tokenAddress) {
+export default function useSoulSummoner(tokenAddress?) {
   const { account } = useActiveWeb3React()
   const summonerContract = useSoulSummonerContract()
 
