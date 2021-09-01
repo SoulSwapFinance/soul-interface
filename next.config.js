@@ -57,10 +57,10 @@ module.exports = withBundleAnalyzer(
     },
     async rewrites() {
       return [
-        {
-          source: '/stake',
-          destination: '/spell',
-        },
+        // {
+        //   source: '/stake',
+        //   destination: '/spell',
+        // },
         {
           source: '/add/:token*',
           destination: '/exchange/add/:token*',
@@ -131,10 +131,10 @@ module.exports = withBundleAnalyzer(
         //   source: '/farm/:type*',
         //   destination: '/onsen/:type*',
         // },
-        {
-          source: '/farm',
-          destination: '/farm',
-        },
+        // {
+        //   source: '/farm',
+        //   destination: '/farm',
+        // },
         {
           source: '/me',
           destination: '/user',
