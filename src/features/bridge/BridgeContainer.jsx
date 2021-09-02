@@ -17,6 +17,7 @@ export default function BridgeContainer() {
   const [balance, setBalance] = useState(0)
   const [amount, setAmount] = useState('')
   const [approved, setApproved] = useState(false)
+  const [tx, setTx] = useState(false)
   const [tokenSelected, setTokenSelected] = useState(Ethereum$FTM)
 
   const { swapOut } = useBridge()
@@ -40,10 +41,13 @@ export default function BridgeContainer() {
 
     const allowance = await erc20Allowance(account, AnyswapEthOperaBridgeAddress)
 
-    if (allowance.toString() < amount) {
+    if (allowance < amount) {
       const result = await erc20Approve(AnyswapEthOperaBridgeAddress)
       // if Tx is not denied
       if (result.code !== 4001) {
+        setTx(true)
+        await result.wait()
+        setTx(false)
         setApproved(true)
       }
     } else {
@@ -78,6 +82,9 @@ export default function BridgeContainer() {
     const result = await swapOut(swapping, account)
 
     if (result.code !== 4001) {
+      setTx(true)
+      await result.wait()
+      setTx(false)
       setApproved(false)
     } else {
       return
@@ -154,16 +161,16 @@ export default function BridgeContainer() {
           {amount !== '' ? (
             ethers.utils.formatUnits(amount) <= 10000000 && ethers.utils.formatUnits(amount) >= 200 ? (
               <Button width="100%" onClick={() => (approved ? handleSwapOut() : handleSwapOutApprove())}>
-                {approved ? 'Submit' : 'Approve'}
+                {approved ? (tx ? 'Submitting...' : 'Submit') : (tx ? 'Approving...' : 'Approve')}
               </Button>
             ) : (
               <Button disabled width="100%" onClick={() => (approved ? handleSwapOut() : handleSwapOutApprove())}>
-                {approved ? 'Submit' : 'Approve'}
+                {approved ? (tx ? 'Submitting...' : 'Submit') : (tx ? 'Approving...' : 'Approve')}
               </Button>
             )
           ) : (
             <Button disabled width="100%" onClick={() => (approved ? handleSwapOut() : handleSwapOutApprove())}>
-              {approved ? 'Submit' : 'Approve'}
+                {approved ? (tx ? 'Submitting...' : 'Submit') : (tx ? 'Approving...' : 'Approve')}
             </Button>
           )}
         </Wrap>
