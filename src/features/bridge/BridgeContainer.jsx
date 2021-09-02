@@ -38,10 +38,9 @@ export default function BridgeContainer() {
       return
     }
 
-    const parsedAmount = ethers.utils.parseUnits(amount.toString())
     const allowance = await erc20Allowance(account, AnyswapEthOperaBridgeAddress)
 
-    if (allowance.toString() < parsedAmount) {
+    if (allowance.toString() < amount) {
       const result = await erc20Approve(AnyswapEthOperaBridgeAddress)
       // if Tx is not denied
       if (result.code !== 4001) {
@@ -64,16 +63,16 @@ export default function BridgeContainer() {
 
     const swapping = amount.toString()
 
-    if(swapping <= ethers.parseUnits(200)) {
+    if (ethers.utils.formatUnits(swapping) < 200) {
       alert('must be 200+ FTM')
       console.warn('must be 200+ FTM')
-      return 
-    } 
-    
-    if (swapping >= ethers.parseUnits(10000000)) {
+      return
+    }
+
+    if (ethers.utils.formatUnits(swapping) > 10000000) {
       alert('must be less or equal to 10 mil FTM')
       console.warn('must be less or equal to 10 mil FTM')
-      return 
+      return
     }
 
     const result = await swapOut(swapping, account)
@@ -152,10 +151,45 @@ export default function BridgeContainer() {
         </Wrap>
 
         <Wrap padding="0.5rem 0" display="flex">
-          <Button width="100%" onClick={() => (approved ? handleSwapOut() : handleSwapOutApprove())}>
-            {approved ? 'Submit' : 'Approve'}
-          </Button>
+          {amount !== '' ? (
+            ethers.utils.formatUnits(amount) <= 10000000 && ethers.utils.formatUnits(amount) >= 200 ? (
+              <Button width="100%" onClick={() => (approved ? handleSwapOut() : handleSwapOutApprove())}>
+                {approved ? 'Submit' : 'Approve'}
+              </Button>
+            ) : (
+              <Button disabled width="100%" onClick={() => (approved ? handleSwapOut() : handleSwapOutApprove())}>
+                {approved ? 'Submit' : 'Approve'}
+              </Button>
+            )
+          ) : (
+            <Button disabled width="100%" onClick={() => (approved ? handleSwapOut() : handleSwapOutApprove())}>
+              {approved ? 'Submit' : 'Approve'}
+            </Button>
+          )}
         </Wrap>
+
+        {amount !== undefined || amount !== null ? (
+          <>
+            {amount === '' ? (
+              <Text color="#f13636" textAlign="center" fontSize=".75rem">
+                • Entered amount below minimum bridge amount
+              </Text>
+            ) : (
+              ethers.utils.formatUnits(amount) < 200 && (
+                <Text color="#f13636" textAlign="center" fontSize=".75rem">
+                  • Entered amount below minimum bridge amount
+                </Text>
+              )
+            )}
+            {amount === ''
+              ? null
+              : ethers.utils.formatUnits(amount) > 10000000 && (
+                  <Text color="#f13636" textAlign="center" fontSize=".75rem">
+                    • Entered amount above maximum bridge amount
+                  </Text>
+                )}
+          </>
+        ) : null}
 
         <Text padding=".25rem 0" color="#aaa" textAlign="center" fontSize=".75rem">
           There is a fee of 0.1% that covers the gas on the target blockchain, with a minimum fee of 80 FTM and a
