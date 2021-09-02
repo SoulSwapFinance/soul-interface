@@ -63,6 +63,17 @@ export default function BridgeContainer() {
     }
 
     const swapping = amount.toString()
+
+    if(swapping <= ethers.parseUnits(200)) {
+      alert('must be 200+ FTM')
+      console.warn('must be 200+ FTM')
+      return 
+    } else if (swapping >= ethers.parseUnits(10000000)) {
+      alert('must be less or equal to 10 mil FTM')
+      console.warn('must be less or equal to 10 mil FTM')
+      return 
+    }
+
     const result = await swapOut(swapping, account)
 
     if (result.code !== 4001) {
