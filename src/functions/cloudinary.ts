@@ -3,5 +3,6 @@ const normalize = (src) => {
 }
 
 export const cloudinaryLoader = ({ src }) => {
-  return `https://res.cloudinary.com/dnz2bkszg/image/fetch/f_auto/${normalize(src)}`
+  // return `https://res.cloudinary.com/dnz2bkszg/image/fetch/f_auto/${normalize(src)}`
+  return `${normalize(src)}`
 }
