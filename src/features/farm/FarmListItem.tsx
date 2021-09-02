@@ -35,9 +35,9 @@ const FarmListItem = ({ farm, ...rest }) => {
                   {farm?.pair?.type === PairType.SWAP && (
                     <div className="text-xs md:text-base text-secondary">SoulSwap Farm</div>
                   )}
-                  {farm?.pair?.type === PairType.KASHI && (
+                  {/* {farm?.pair?.type === PairType.KASHI && (
                     <div className="text-xs md:text-base text-secondary">Kashi Farm</div>
-                  )}
+                  )} */}
                 </div>
               </div>
               <div className="flex flex-col justify-center font-bold">{formatNumber(farm.tvl, true)}</div>

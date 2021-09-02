@@ -379,9 +379,6 @@ msgstr "Expiration is the time at which the order will become invalid"
 msgid "Expired"
 msgstr "Expired"
 
-msgid "Farm"
-msgstr "Farm"
-
 msgid "Filled"
 msgstr "Filled"
 
