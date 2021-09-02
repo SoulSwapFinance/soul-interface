@@ -62,8 +62,21 @@ export default function BridgeContainer() {
       return
     }
 
-    const swapping = ethers.utils.parseUnits(amount.toString())
-    const result = await swapOut(swapping)
+    const swapping = amount.toString()
+
+    if(swapping <= ethers.parseUnits(200)) {
+      alert('must be 200+ FTM')
+      console.warn('must be 200+ FTM')
+      return 
+    } 
+    
+    if (swapping >= ethers.parseUnits(10000000)) {
+      alert('must be less or equal to 10 mil FTM')
+      console.warn('must be less or equal to 10 mil FTM')
+      return 
+    }
+
+    const result = await swapOut(swapping, account)
 
     if (result.code !== 4001) {
       setApproved(false)
@@ -121,7 +134,7 @@ export default function BridgeContainer() {
         <Wrap padding="0">
           <Wrap display="flex" justifyContent="space-between" padding="0">
             <Text padding="0" color="#aaa">
-              Balance: {balance}
+              Balance: {ethers.utils.formatUnits(balance)}
             </Text>
             <ClickableText padding="0" color="#aaa" onClick={() => handleMax()}>
               MAX
