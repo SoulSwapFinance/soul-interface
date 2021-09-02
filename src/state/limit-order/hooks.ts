@@ -29,7 +29,7 @@ export function useLimitOrderActionHandlers(): {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency.isToken ? currency.address : currency.isNative ? 'ETH' : '',
+          currencyId: currency.isToken ? currency.address : currency.isNative ? 'FTM' : '',
         })
       )
     },
@@ -221,7 +221,7 @@ function parseCurrencyFromURLParameter(urlParam: any): string {
   if (typeof urlParam === 'string') {
     const valid = isAddress(urlParam)
     if (valid) return valid
-    if (urlParam.toUpperCase() === 'ETH') return 'ETH'
+    if (urlParam.toUpperCase() === 'FTM') return 'FTM'
   }
   return ''
 }

@@ -14,7 +14,7 @@ function TradeSummary() {
           <RowFixed>
             <div className="text-white">
               1.576 →&nbsp;
-              <span className="text-green">1.787 ETH/SUSHI SLP</span>
+              <span className="text-green">1.787 FTM/SOUL SLP</span>
             </div>
           </RowFixed>
         </RowBetween>
@@ -34,7 +34,7 @@ function TradeSummary() {
             <div className="text-secondary">Liquidity Provider Fee</div>
           </RowFixed>
           <RowFixed>
-            <div className="text-white">0.00283 ETH</div>
+            <div className="text-white">0.00283 FTM</div>
           </RowFixed>
         </RowBetween>
         <RowBetween>
@@ -42,7 +42,7 @@ function TradeSummary() {
             <div className="text-secondary">Network Fee</div>
           </RowFixed>
           <RowFixed>
-            <div className="text-white">0.008654 ETH</div>
+            <div className="text-white">0.008654 FTM</div>
           </RowFixed>
         </RowBetween>
       </AutoColumn>

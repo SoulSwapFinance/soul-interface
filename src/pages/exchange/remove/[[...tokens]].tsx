@@ -787,8 +787,8 @@ export default function Remove() {
                               </Link>
                             ) : oneCurrencyIsWETH ? (
                               <Link
-                                href={`/remove/${currencyA?.equals(WNATIVE[chainId]) ? 'ETH' : currencyIdA}/${
-                                  currencyB?.equals(WNATIVE[chainId]) ? 'ETH' : currencyIdB
+                                href={`/remove/${currencyA?.equals(WNATIVE[chainId]) ? 'FTM' : currencyIdA}/${
+                                  currencyB?.equals(WNATIVE[chainId]) ? 'FTM' : currencyIdB
                                 }`}
                               >
                                 <a className="text-baseline text-blue opacity-80 hover:opacity-100 whitespace-nowrap">
