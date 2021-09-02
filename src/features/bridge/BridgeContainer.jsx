@@ -68,7 +68,9 @@ export default function BridgeContainer() {
       alert('must be 200+ FTM')
       console.warn('must be 200+ FTM')
       return 
-    } else if (swapping >= ethers.parseUnits(10000000)) {
+    } 
+    
+    if (swapping >= ethers.parseUnits(10000000)) {
       alert('must be less or equal to 10 mil FTM')
       console.warn('must be less or equal to 10 mil FTM')
       return 
