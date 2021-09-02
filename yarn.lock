@@ -2827,10 +2827,10 @@
   resolved "https://registry.yarnpkg.com/@solidity-parser/parser/-/parser-0.8.2.tgz#a6a5e93ac8dca6884a99a532f133beba59b87b69"
   integrity sha512-8LySx3qrNXPgB5JiULfG10O3V7QTxI/TLzSw5hFQhXWSkVxZBAv4rZQ0sYgLEbc8g3L2lmnujj1hKul38Eu5NQ==
 
-"@soulswap/sdk@^0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@soulswap/sdk/-/sdk-0.1.5.tgz#a52b0f42ea598c9458b55b32ee134a8919a3d38a"
-  integrity sha512-eVOjqjMr4KsLbqyUuCH6WgBUkImXwr5dQrOMrNuIToMl/dxu3H6xpAalyIaEQiDADUxuxJgStjh/y3HNPVp0ig==
+"@soulswap/sdk@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@soulswap/sdk/-/sdk-0.1.6.tgz#99fa14ff80f815091eea5c7825f9dd713cfbe79c"
+  integrity sha512-mDSOpWjNP6sPN47E4/6tGpo2NyZt1Dm0whR8XLX1/oLVuclEMvUpuQnL7Iaq4BXZ62RSwFlSEzuzDkqUm0N3ww==
   dependencies:
     "@ethersproject/solidity" "^5.4.0"
     "@soulswap/swap-core" "^0.0.3"

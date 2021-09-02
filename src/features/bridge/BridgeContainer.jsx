@@ -62,8 +62,8 @@ export default function BridgeContainer() {
       return
     }
 
-    const swapping = ethers.utils.parseUnits(amount.toString())
-    const result = await swapOut(swapping)
+    const swapping = amount.toString()
+    const result = await swapOut(swapping, account)
 
     if (result.code !== 4001) {
       setApproved(false)
@@ -121,7 +121,7 @@ export default function BridgeContainer() {
         <Wrap padding="0">
           <Wrap display="flex" justifyContent="space-between" padding="0">
             <Text padding="0" color="#aaa">
-              Balance: {balance}
+              Balance: {ethers.utils.formatUnits(balance)}
             </Text>
             <ClickableText padding="0" color="#aaa" onClick={() => handleMax()}>
               MAX
