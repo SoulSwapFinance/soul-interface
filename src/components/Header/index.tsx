@@ -312,7 +312,7 @@ function AppBar(): JSX.Element {
                     id={`swap-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                   >
-                    {i18n._(t`Swap`)}
+                    {i18n._(t`Bridge`)}
                   </a>
                 </Link>
               )}
