@@ -140,7 +140,7 @@ export default function BridgeContainer() {
         <Wrap padding="0">
           <Wrap display="flex" justifyContent="space-between" padding="0">
             <Text padding="0" color="#aaa">
-              Balance: {ethers.utils.formatUnits(balance)}
+              Balance: {Number(ethers.utils.formatUnits(balance)).toFixed(4)}
             </Text>
             <ClickableText padding="0" color="#aaa" onClick={() => handleMax()}>
               MAX
@@ -161,16 +161,16 @@ export default function BridgeContainer() {
           {amount !== '' ? (
             ethers.utils.formatUnits(amount) <= 10000000 && ethers.utils.formatUnits(amount) >= 200 ? (
               <Button width="100%" onClick={() => (approved ? handleSwapOut() : handleSwapOutApprove())}>
-                {approved ? (tx ? 'Submitting...' : 'Submit') : (tx ? 'Approving...' : 'Approve')}
+                {approved ? (tx ? 'Submitting...' : 'Submit') : tx ? 'Approving...' : 'Approve'}
               </Button>
             ) : (
               <Button disabled width="100%" onClick={() => (approved ? handleSwapOut() : handleSwapOutApprove())}>
-                {approved ? (tx ? 'Submitting...' : 'Submit') : (tx ? 'Approving...' : 'Approve')}
+                {approved ? (tx ? 'Submitting...' : 'Submit') : tx ? 'Approving...' : 'Approve'}
               </Button>
             )
           ) : (
             <Button disabled width="100%" onClick={() => (approved ? handleSwapOut() : handleSwapOutApprove())}>
-                {approved ? (tx ? 'Submitting...' : 'Submit') : (tx ? 'Approving...' : 'Approve')}
+              {approved ? (tx ? 'Submitting...' : 'Submit') : tx ? 'Approving...' : 'Approve'}
             </Button>
           )}
         </Wrap>
