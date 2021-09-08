@@ -198,12 +198,15 @@ export default function BridgeContainer() {
           </>
         ) : null}
 
-        <Text padding=".25rem 0" color="#aaa" textAlign="center" fontSize=".75rem">
-          There is a fee of 0.1% that covers the gas on the target blockchain, with a minimum fee of 80 FTM and a
-          maximum fee of 800 FTM. The fee is charged by AnySwap, SoulSwap charges no additional fees.
-        </Text>
-
         <Wrap padding=".75rem 0" justifyContent="center">
+        <Wrap display="flex" justifyContent="space-between">
+            <Text padding="0" color="#aaa">
+              Fee
+            </Text>
+            <Text padding="0" color="#aaa">
+              0
+            </Text>
+          </Wrap>
           <Wrap display="flex" justifyContent="space-between">
             <Text padding="0" color="#aaa">
               Max Bridge Amount
