@@ -3,12 +3,11 @@ import styled from "styled-components";
 
 import { ethers, BigNumber } from "ethers";
 
-import { Connection } from "../../components/Web3Connection/Connection";
-import ConenctToView from "../../components/Web3Connection/ConenctToView";
+import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 
-import useSoulSummoner from "../../hooks/useSoulSummoner";
-import useApprove from "../../hooks/useApprove";
-import { SoulSummonerAddress } from "../../constants";
+import useSoulSummoner from "./useSoulSummoner";
+import useApprove from "./useApprove";
+import { SoulSummonerAddress } from "./constants";
 
 import {
   FlexText,
@@ -59,7 +58,7 @@ const TokenPair = styled(ExternalLink)`
 `;
 
 const Farm = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
-  const { address, signer } = Connection.useContainer();
+  const { account } = useActiveWeb3React()
 
   const {
     fetchAprAndLiquidity,
@@ -98,13 +97,13 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     getAprAndLiquidity();
     fetchPending();
     fetchUserFarmAlloc();
-  }, [address]);
+  }, [account]);
 
   /**
    * Runs on initial render/mount and  reruns every second
    */
   useEffect(() => {
-    if (address) {
+    if (account) {
       const timer = setTimeout(() => {
         fetchPending(pid);
         getAprAndLiquidity();
@@ -154,7 +153,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   /**
    * Checks the amount of lpTokens the SoulSummoner contract holds
    * farm <Object> : the farm object
-   * lpToken : the farm lpToken address
+   * lpToken : the farm lpToken account
    */
   const getAprAndLiquidity = async () => {
     try {
@@ -183,7 +182,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    * Gets the lpToken balance of the user for each pool
    */
   const fetchBals = async () => {
-    if (!address) {
+    if (!account) {
       alert("connect wallet");
     } else {
       try {
@@ -191,7 +190,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
         const staked = ethers.utils.formatUnits(result1?.[0]);
         setStakedBal(staked.toString());
 
-        const result2 = await erc20BalanceOf(lpToken, address);
+        const result2 = await erc20BalanceOf(lpToken, account);
         const unstaked = ethers.utils.formatUnits(result2);
         setUnstakedBal(unstaked.toString());
 
@@ -206,11 +205,11 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    * Fetches connected user pending soul
    */
   const fetchPending = async () => {
-    if (!address) {
+    if (!account) {
       alert("connect wallet");
     } else {
       try {
-        const pending = await pendingSoul(pid, address);
+        const pending = await pendingSoul(pid, account);
         const formatted = ethers.utils.formatUnits(pending.toString());
         setPending(Number(formatted).toFixed(1).toString());
       } catch (err) {
@@ -223,13 +222,13 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    * Checks if the user has approved SoulSummoner to move lpTokens
    */
   const fetchApproval = async () => {
-    if (!address) {
+    if (!account) {
       alert("connect wallet");
     } else {
       // Checks if SoulSummoner can move tokens
       const amount = await erc20Allowance(
         lpToken,
-        address,
+        account,
         SoulSummonerAddress
       );
       if (amount > 0) setApproved(true);
@@ -241,7 +240,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    * Approves SoulSummoner to move lpTokens
    */
   const handleApprove = async () => {
-    if (!address) {
+    if (!account) {
       alert("connect wallet");
     } else {
       try {
@@ -523,10 +522,6 @@ export const FarmList = () => {
   ));
 
   return (
-    // <>
-    //   {chainId !== "1" ? (
-    //     <ConenctToView chains={"4002"} />
-    //   ) : (
     <>
       {/* <Wrap padding="0 0 2rem 0">
         <Heading fontSize="1.5rem" textAlign="center">
@@ -538,7 +533,5 @@ export const FarmList = () => {
       </Wrap> */}
       <div>{farmList}</div>
     </>
-    //   )}
-    // </>
   );
 };
