@@ -372,6 +372,9 @@ msgstr ""
 msgid "Expired"
 msgstr ""
 
+msgid "Farm"
+msgstr ""
+
 msgid "Filled"
 msgstr ""
 

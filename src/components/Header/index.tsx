@@ -62,7 +62,7 @@ function AppBar(): JSX.Element {
                         </a>
                       </NavLink>
                       )}
-                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      { chainId && [ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/farm'}>
                           <a
                             id={`farm-nav-link`}
@@ -71,7 +71,7 @@ function AppBar(): JSX.Element {
                             {i18n._(t`Farm`)}
                           </a>
                         </NavLink>
-                      )} */}
+                      )}
                       {/* {chainId &&
                         [ChainId.MAINNET, ChainId.KOVAN, ChainId.BSC, ChainId.MATIC, ChainId.XDAI].includes(
                           chainId
@@ -326,17 +326,16 @@ function AppBar(): JSX.Element {
                   </a>
                 </Link>
                 )}
-                {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                { chainId && [ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <Link href={'/farm'}>
                     <a
                       id={`farm-nav-link`}
                       className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                     >
-                      {' '}
                       {i18n._(t`Farm`)}
                     </a>
                   </Link>
-                )} */}
+                )}
 
                 {/* {chainId && [ChainId.MAINNET, ChainId.KOVAN, ChainId.BSC, ChainId.MATIC].includes(chainId) && (
                   <>
