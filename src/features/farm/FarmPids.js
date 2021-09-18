@@ -5,7 +5,8 @@ import { tokens } from "./tokens";
 // - FUSD
 // - SOUL
 
-export const farms = [
+export const FarmPids
+ = [
   {
     pid: 1,
     token1: "SOUL",

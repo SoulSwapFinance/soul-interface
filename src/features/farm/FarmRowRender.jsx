@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import { ethers, BigNumber } from "ethers";
+import { ethers } from "ethers";
 
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from '../../hooks'
 
 import useSoulSummoner from "./useSoulSummoner";
 import useApprove from "./useApprove";
@@ -57,8 +57,8 @@ const TokenPair = styled(ExternalLink)`
   }
 `;
 
-const Farm = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
-  const { account } = useActiveWeb3React()
+const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
+  const { chainId, account } = useActiveWeb3React()
 
   const {
     fetchAprAndLiquidity,
@@ -153,7 +153,7 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   /**
    * Checks the amount of lpTokens the SoulSummoner contract holds
    * farm <Object> : the farm object
-   * lpToken : the farm lpToken account
+   * lpToken : the farm lpToken address
    */
   const getAprAndLiquidity = async () => {
     try {
@@ -500,4 +500,4 @@ const Farm = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   );
 };
 
-export default Farm
+export default FarmRowRender
