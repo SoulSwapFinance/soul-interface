@@ -429,9 +429,6 @@ msgstr "Hardware Wallet"
 msgid "Harmony Bridge"
 msgstr "Harmony Bridge"
 
-msgid "Harvest {0} SOUL {1}"
-msgstr "Harvest {0} SOUL {1}"
-
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
 msgstr "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
 
@@ -797,9 +794,6 @@ msgstr "Restricts swaps to direct pairs only."
 msgid "Review Limit Order"
 msgstr "Review Limit Order"
 
-msgid "Rewards"
-msgstr "Rewards"
-
 msgid "Roll it back - this feature is not yet supported on {0}."
 msgstr "Roll it back - this feature is not yet supported on {0}."
 
@@ -917,9 +911,6 @@ msgstr "Swap To (est.):"
 
 msgid "Swap To:"
 msgstr "Swap To:"
-
-msgid "TVL"
-msgstr "TVL"
 
 msgid "Telegram"
 msgstr "Telegram"
@@ -1110,9 +1101,6 @@ msgstr "Your Claimable SUSHI this Week"
 
 msgid "Your Liquidity"
 msgstr "Your Liquidity"
-
-msgid "Your Staked"
-msgstr "Your Staked"
 
 msgid "Your Wallet"
 msgstr "Your Wallet"

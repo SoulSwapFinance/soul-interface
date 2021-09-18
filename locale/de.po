@@ -417,9 +417,6 @@ msgstr "Hardware-Wallet"
 msgid "Harmony Bridge"
 msgstr ""
 
-msgid "Harvest {0} SOUL {1}"
-msgstr ""
-
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
 msgstr ""
 
@@ -781,9 +778,6 @@ msgstr "Beschränkt Swaps nur auf direkte Paare."
 msgid "Review Limit Order"
 msgstr ""
 
-msgid "Rewards"
-msgstr ""
-
 msgid "Roll it back - this feature is not yet supported on {0}."
 msgstr ""
 
@@ -899,9 +893,6 @@ msgstr "Swap To (est.):"
 
 msgid "Swap To:"
 msgstr "Swap zu:"
-
-msgid "TVL"
-msgstr "TVL"
 
 msgid "Telegram"
 msgstr ""
@@ -1090,9 +1081,6 @@ msgstr ""
 
 msgid "Your Liquidity"
 msgstr "Ihre Liquidität"
-
-msgid "Your Staked"
-msgstr "Ihr Stake"
 
 msgid "Your Wallet"
 msgstr "Deine Geldbörse"

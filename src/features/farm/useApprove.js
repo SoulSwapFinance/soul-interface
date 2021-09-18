@@ -1,14 +1,14 @@
 import { ethers } from 'ethers'
-
+import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useTokenContract } from '../../hooks/useContract'
 
 const useApproveContract = () => {
-  const { address, signer } = Connection.useContainer()
+  const { account } = useActiveWeb3React()
 
   const erc20BalanceOf = async (tokenAddress, address) => {
     try {
       const contract = await useTokenContract(tokenAddress)
-      const result = await contract.connect(signer).balanceOf(address)
+      const result = await contract.connect(account).balanceOf(address)
       return result
     } catch (e) {
       console.log(e)
@@ -21,7 +21,7 @@ const useApproveContract = () => {
 
     try {
       const result = await contract
-        .connect(signer)
+        .connect(account)
         .approve(spender, ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1)))
       return result
     } catch (e) {
@@ -34,8 +34,8 @@ const useApproveContract = () => {
     const contract = await useTokenContract(tokenAddress)
 
     try {
-      const result = await contract.connect(signer).allowance(owner, spender)
-      console.log('allowance', address, result)
+      const result = await contract.connect(account).allowance(owner, spender)
+      console.log('allowance', account, result)
       return result
     } catch (e) {
       console.log(e)

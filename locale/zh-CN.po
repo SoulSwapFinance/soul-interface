@@ -413,9 +413,6 @@ msgstr "硬件钱包"
 msgid "Harmony Bridge"
 msgstr ""
 
-msgid "Harvest {0} SOUL {1}"
-msgstr ""
-
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
 msgstr ""
 
@@ -774,9 +771,6 @@ msgstr "限制只交易直接交易对。"
 msgid "Review Limit Order"
 msgstr ""
 
-msgid "Rewards"
-msgstr ""
-
 msgid "Roll it back - this feature is not yet supported on {0}."
 msgstr ""
 
@@ -892,9 +886,6 @@ msgstr "交换至（估算）："
 
 msgid "Swap To:"
 msgstr "交换至："
-
-msgid "TVL"
-msgstr "TVL"
 
 msgid "Telegram"
 msgstr ""
@@ -1083,9 +1074,6 @@ msgstr ""
 
 msgid "Your Liquidity"
 msgstr "您的流动性"
-
-msgid "Your Staked"
-msgstr "您在流动性池的占比"
 
 msgid "Your Wallet"
 msgstr "您的钱包"

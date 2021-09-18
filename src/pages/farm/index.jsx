@@ -9,7 +9,7 @@ import FarmList from '../../features/farm/FarmsList'
 
 const Farm = () => {
   return (
-    <Wrap width="50%" justifyContent="center">
+    <Wrap padding='4rem 0 0 0' justifyContent="center">
       <Container id="farm-page">
         <Head>
           <title>Farm | Soul</title>

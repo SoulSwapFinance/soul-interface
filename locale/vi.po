@@ -415,9 +415,6 @@ msgstr "Ví cứng"
 msgid "Harmony Bridge"
 msgstr ""
 
-msgid "Harvest {0} SOUL {1}"
-msgstr ""
-
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
 msgstr ""
 
@@ -779,9 +776,6 @@ msgstr "Chỉ hạn chế hoán đổi đối với các cặp trực tiếp."
 msgid "Review Limit Order"
 msgstr ""
 
-msgid "Rewards"
-msgstr ""
-
 msgid "Roll it back - this feature is not yet supported on {0}."
 msgstr ""
 
@@ -897,9 +891,6 @@ msgstr "Hoán đổi sang (ước tính):"
 
 msgid "Swap To:"
 msgstr "Hoán đổi sang:"
-
-msgid "TVL"
-msgstr "TVL"
 
 msgid "Telegram"
 msgstr ""
@@ -1088,9 +1079,6 @@ msgstr ""
 
 msgid "Your Liquidity"
 msgstr "Tính thanh khoản của bạn"
-
-msgid "Your Staked"
-msgstr "Đặt cược của bạn"
 
 msgid "Your Wallet"
 msgstr "Ví của bạn"

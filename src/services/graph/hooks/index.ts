@@ -10,7 +10,7 @@ import { useEffect, useMemo } from 'react'
 import useSWR, { SWRConfiguration } from 'swr'
 
 import { ChainId } from '@soulswap/sdk'
-import { Chef } from '../../../features/farm/enum'
+// import { Chef } from '../../../features/farm/enum'
 import concat from 'lodash/concat'
 import useActiveWeb3React from '../../../hooks/useActiveWeb3React'
 
@@ -25,7 +25,7 @@ export function useMasterChefV2Farms(swrConfig: SWRConfiguration = undefined) {
   const { data } = useSWR(shouldFetch ? 'masterChefV2Farms' : null, () => getMasterChefV2Farms(), swrConfig)
   return useMemo(() => {
     if (!data) return []
-    return data.map((data) => ({ ...data, chef: Chef.SOUL_SUMMONER }))
+    // return data.map((data) => ({ ...data, chef: Chef.SOUL_SUMMONER }))
   }, [data])
 }
 
@@ -35,7 +35,7 @@ export function useSoulSummonerFarms(swrConfig: SWRConfiguration = undefined) {
   const { data } = useSWR(shouldFetch ? 'masterChefV2Farms' : null, () => getSoulSummonerFarms(), swrConfig) // TODO: update
   return useMemo(() => {
     if (!data) return []
-    return data.map((data) => ({ ...data, chef: Chef.SOUL_SUMMONER }))
+    // return data.map((data) => ({ ...data, chef: Chef.SOUL_SUMMONER }))
   }, [data])
 }
 
@@ -49,7 +49,7 @@ export function useMiniChefFarms(swrConfig: SWRConfiguration = undefined) {
   )
   return useMemo(() => {
     if (!data) return []
-    return data.map((data) => ({ ...data, chef: Chef.MINICHEF }))
+    // return data.map((data) => ({ ...data, chef: Chef.MINICHEF }))
   }, [data])
 }
 

@@ -115,6 +115,19 @@
         "inputs": [
             {
                 "indexed": false,
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "Paused",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
                 "internalType": "uint256",
                 "name": "pid",
                 "type": "uint256"
@@ -297,6 +310,19 @@
         "inputs": [
             {
                 "indexed": false,
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "Unpaused",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
                 "internalType": "uint256",
                 "name": "weight",
                 "type": "uint256"
@@ -329,7 +355,19 @@
             {
                 "indexed": false,
                 "internalType": "uint256",
-                "name": "amount",
+                "name": "received",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "feeAmount",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "timeStamp",
                 "type": "uint256"
             }
         ],
@@ -375,6 +413,19 @@
     {
         "inputs": [],
         "name": "bonusMultiplier",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "dailyDecay",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -433,7 +484,26 @@
         "inputs": [
             {
                 "internalType": "uint256",
-                "name": "_amount",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "enWei",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "amount",
                 "type": "uint256"
             }
         ],
@@ -446,12 +516,36 @@
         "inputs": [
             {
                 "internalType": "uint256",
-                "name": "_from",
+                "name": "pid",
+                "type": "uint256"
+            }
+        ],
+        "name": "getFeePercent",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "fee",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "_to",
+                "name": "discount",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "from",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "to",
                 "type": "uint256"
             }
         ],
@@ -480,6 +574,35 @@
                 "internalType": "bytes32",
                 "name": "",
                 "type": "bytes32"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "pid",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "getWithdrawable",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "_feeAmount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_withdrawable",
+                "type": "uint256"
             }
         ],
         "stateMutability": "view",
@@ -571,6 +694,16 @@
             {
                 "internalType": "uint256",
                 "name": "_stakingAlloc",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_startRate",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_dailyDecay",
                 "type": "uint256"
             }
         ],
@@ -665,6 +798,25 @@
         "type": "function"
     },
     {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "oneHundreth",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "owner",
         "outputs": [
@@ -672,6 +824,19 @@
                 "internalType": "address",
                 "name": "",
                 "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "paused",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
             }
         ],
         "stateMutability": "view",
@@ -694,7 +859,7 @@
         "outputs": [
             {
                 "internalType": "uint256",
-                "name": "",
+                "name": "pendingAmount",
                 "type": "uint256"
             }
         ],
@@ -769,6 +934,29 @@
             }
         ],
         "name": "renounceRole",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_pid",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "_user",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_time",
+                "type": "uint256"
+            }
+        ],
+        "name": "reviseDeposit",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -868,6 +1056,19 @@
     },
     {
         "inputs": [],
+        "name": "startRate",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "startTime",
         "outputs": [
             {
@@ -906,6 +1107,25 @@
                 "internalType": "address",
                 "name": "",
                 "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "pid",
+                "type": "uint256"
+            }
+        ],
+        "name": "timeUntilNextDecrease",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
             }
         ],
         "stateMutability": "view",
@@ -1029,6 +1249,25 @@
         "inputs": [
             {
                 "internalType": "uint256",
+                "name": "_pid",
+                "type": "uint256"
+            }
+        ],
+        "name": "userDelta",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
                 "name": "",
                 "type": "uint256"
             },
@@ -1048,6 +1287,31 @@
             {
                 "internalType": "uint256",
                 "name": "rewardDebt",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "rewardDebtAtTime",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "lastWithdrawTime",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "firstDepositTime",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "timeDelta",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "lastDepositTime",
                 "type": "uint256"
             }
         ],

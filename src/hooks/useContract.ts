@@ -16,6 +16,7 @@ import {
   ROUTER_ADDRESS,
   SPELL_ADDRESS,
   SOUL_ADDRESS,
+  SOUL_SUMMONER_ADDRESS,
   SOULVAULT_ADDRESS,
   SOUL_GUIDE_ADDRESS,
   // SOULSWAP_MULTISWAPPER_ADDRESS,
@@ -194,7 +195,7 @@ export function useMasterChefContract(withSignerIfPossible?: boolean): Contract 
 }
 
 export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
-  return useContract('0xA65DbEA56E1E202bf03dB5f49ba565fb00Bf9288', SOUL_SUMMONER_ABI, withSignerIfPossible) // 31 JUL
+  return useContract(SOUL_SUMMONER_ADDRESS[4002], SOUL_SUMMONER_ABI, withSignerIfPossible)
 }
 
 export function useMiniChefContract(withSignerIfPossible?: boolean): Contract | null {
