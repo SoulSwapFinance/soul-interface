@@ -1,14 +1,15 @@
 import { ethers } from 'ethers'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+
+// import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+
 import { useTokenContract } from '../../hooks/useContract'
 
-const useApproveContract = () => {
-  const { account } = useActiveWeb3React()
+function useApproveContract(tokenAddress) {
+  const contract = useTokenContract(tokenAddress)
 
-  const erc20BalanceOf = async (tokenAddress, address) => {
+  const erc20BalanceOf = async (address) => {
     try {
-      const contract = await useTokenContract(tokenAddress)
-      const result = await contract.connect(account).balanceOf(address)
+      const result = await contract.balanceOf(address)
       return result
     } catch (e) {
       console.log(e)
@@ -16,13 +17,13 @@ const useApproveContract = () => {
     }
   }
 
-  const erc20Approve = async (tokenAddress, spender) => {
-    const contract = await useTokenContract(tokenAddress)
+  const erc20Approve = async (spender) => {
 
     try {
-      const result = await contract
-        .connect(account)
-        .approve(spender, ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1)))
+      const result = await contract.approve(
+        spender,
+        ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
+      )
       return result
     } catch (e) {
       console.log(e)
@@ -30,11 +31,10 @@ const useApproveContract = () => {
     }
   }
 
-  const erc20Allowance = async (tokenAddress, owner, spender) => {
-    const contract = await useTokenContract(tokenAddress)
-
+  const erc20Allowance = async (owner, spender) => {
+    
     try {
-      const result = await contract.connect(account).allowance(owner, spender)
+      const result = await contract.allowance(owner, spender)
       console.log('allowance', account, result)
       return result
     } catch (e) {

@@ -1,7 +1,8 @@
 import { useCallback } from "react";
 import { ethers, BigNumber } from "ethers";
 
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+// import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+
 import {
   useSoulSummonerContract,
   usePairContract,
@@ -12,8 +13,7 @@ import SOUL_SUMMONER_ADDRESS from'@soulswap/sdk'
 
 import FarmPids from "./FarmPids";
 
-const useSoulSummoner = () => {
-  const { account, chainId } = useActiveWeb3React()
+function useSoulSummoner() {
 
   // -----------------------
   //  Interaction Functions
@@ -24,7 +24,7 @@ const useSoulSummoner = () => {
     try {
       const summonerContract = await useSoulSummonerContract();
 
-      const result = await summonerContract?.connect(account).deposit(pid, amount);
+      const result = await summonerContract?.deposit(pid, amount);
       return result;
     } catch (e) {
       console.log(e);
@@ -38,7 +38,7 @@ const useSoulSummoner = () => {
     try {
       const summonerContract = await useSoulSummonerContract();
 
-      let result = await summonerContract?.connect(account).withdraw(pid, amount);
+      let result = await summonerContract?.withdraw(pid, amount);
       return result;
     } catch (e) {
       alert(e.message);
@@ -56,7 +56,7 @@ const useSoulSummoner = () => {
     try {
       const summonerContract = await useSoulSummonerContract();
 
-      const result = await summonerContract?.connect(account).poolLength();
+      const result = await summonerContract?.poolLength();
       return result;
     } catch (e) {
       console.log(e);
@@ -69,7 +69,7 @@ const useSoulSummoner = () => {
     try {
       const summonerContract = await useSoulSummonerContract();
 
-      const result = await summonerContract?.connect(account).poolInfo(pid);
+      const result = await summonerContract?.poolInfo(pid);
       const lpTokenContract = result?.[0].toString();
       const allocPoint = BigNumber.from(result?.[1]);
       const lastRewardTime = BigNumber.from(result?.[2]);
@@ -82,11 +82,11 @@ const useSoulSummoner = () => {
   };
 
   // user info
-  const userInfo = async (pid) => {
+  const userInfo = async (pid, account) => {
     try {
       const summonerContract = await useSoulSummonerContract();
 
-      const result = await summonerContract?.connect(account).userInfo(pid, account);
+      const result = await summonerContract?.userInfo(pid, account);
       const amount = result?.[0].toString();
       const rewardDebt = result?.[1].toString();
       return [amount, rewardDebt];
@@ -101,7 +101,7 @@ const useSoulSummoner = () => {
     try {
       const summonerContract = await useSoulSummonerContract();
 
-      const result = await summonerContract?.connect(account).pendingSoul(pid, user);
+      const result = await summonerContract?.pendingSoul(pid, user);
       return result;
     } catch (e) {
       console.log(e);
@@ -117,7 +117,7 @@ const useSoulSummoner = () => {
     try {
       const summonerContract = await useSoulSummonerContract();
 
-      const result = await summonerContract?.connect(account).dailyDecay();
+      const result = await summonerContract?.dailyDecay();
       return result;
     } catch (e) {
       console.log(e);
@@ -129,7 +129,7 @@ const useSoulSummoner = () => {
     try {
       const summonerContract = await useSoulSummonerContract();
 
-      const result = await summonerContract?.connect(account).getWithdrawable(pid, amount);
+      const result = await summonerContract?.getWithdrawable(pid, amount);
       return result;y
     } catch (e) {
       console.log(e);
@@ -141,7 +141,7 @@ const useSoulSummoner = () => {
     try {
       const summonerContract = await useSoulSummonerContract();
 
-      const result = await summonerContract?.connect(account).getFeePercent(pid);
+      const result = await summonerContract?.getFeePercent(pid);
       return result;
     } catch (e) {
       console.log(e);
@@ -158,12 +158,12 @@ const useSoulSummoner = () => {
    * The amount of tokens the user holds compared to the contract
    * Note : need to make func to calculate how many staked compared to pool
    */
-  const fetchUserLpTokenAlloc = async (lpToken) => {
+  const fetchUserLpTokenAlloc = async (lpToken, account) => {
     try {
       const lpTokenContract = await usePairContract(lpToken);
-      const contractBal = await lpTokenContract?.connect(account).balanceOf(SOUL_SUMMONER_ADDRESS[chainId]);
+      const contractBal = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[chainId]);
 
-      const userBal = await lpTokenContract?.connect(account).balanceOf(account);
+      const userBal = await lpTokenContract?.balanceOf(account);
 
       const alloc = userBal / contractBal;
       const allocPerc = alloc * 100;
@@ -180,16 +180,16 @@ const useSoulSummoner = () => {
    * The amount of tokens the user holds compared to the contract
    * Note : need to make func to calculate how many staked compared to pool
    */
-  const fetchUserLpTokenAllocInFarm = async (lpToken, pid) => {
+  const fetchUserLpTokenAllocInFarm = async (lpToken, pid, account) => {
     try {
       const lpTokenContract = await usePairContract(lpToken);
       
       // get how many lpTokens in contract
-      const totalSupply = await lpTokenContract?.connect(account).totalSupply();
+      const totalSupply = await lpTokenContract?.totalSupply();
       // get how many lpTokens held by Summoner
-      const heldBySummoner = await lpTokenContract?.connect(account).balanceOf(SOUL_SUMMONER_ADDRESS[chainId]);
+      const heldBySummoner = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[chainId]);
       // get how many lpTokens held by user
-      const heldByUser = await lpTokenContract?.connect(account).balanceOf(account);
+      const heldByUser = await lpTokenContract?.balanceOf(account);
 
       // summoner % of total supply
       const summonerPercOfSupply = heldBySummoner / totalSupply * 100
@@ -237,7 +237,7 @@ const useSoulSummoner = () => {
     try {
       const summonerContract = await useSoulSummonerContract();
 
-      const sps = await summonerContract?.connect(account).soulPerSecond();
+      const sps = await summonerContract?.soulPerSecond();
       return sps;
     } catch (e) {
       console.log(e);
@@ -250,7 +250,7 @@ const useSoulSummoner = () => {
     try {
       const summonerContract = await useSoulSummonerContract();
 
-      const totalAlloc = await summonerContract?.connect(account).totalAllocPoint();
+      const totalAlloc = await summonerContract?.totalAllocPoint();
       return totalAlloc;
     } catch (e) {
       console.log(e);
@@ -282,10 +282,10 @@ const useSoulSummoner = () => {
       const soulContract = await useTokenContract(FarmPids[0].token1Address[4002]);
       const fusdContract = await useTokenContract(FarmPids[0].token2Address[4002]);
 
-      const totalSoul = await soulContract.connect(account).balanceOf(
+      const totalSoul = await soulContract.balanceOf(
         FarmPids[0].lpAddresses[4002]
       );
-      const totalFusd = await fusdContract.connect(account).balanceOf(
+      const totalFusd = await fusdContract.balanceOf(
         FarmPids[0].lpAddresses[4002]
       );
 
@@ -313,8 +313,8 @@ const useSoulSummoner = () => {
       const token1Contract = await useTokenContract(token1Address);
       const token2Contract = await useTokenContract(token2Address);
 
-      const token1Bal = await token1Contract.connect(account).balanceOf(lpToken);
-      const token2Bal = await token2Contract.connect(account).balanceOf(lpToken);
+      const token1Bal = await token1Contract.balanceOf(lpToken);
+      const token2Bal = await token2Contract.balanceOf(lpToken);
 
       let totalLpValue;
 
@@ -341,8 +341,8 @@ const useSoulSummoner = () => {
 
       // lp tokens held by summoner
       const lpTokenContract = await usePairContract(lpToken);
-      const totalLpTokens = await lpTokenContract?.connect(account).totalSupply();
-      const summonerLpTokens = await lpTokenContract?.connect(account).balanceOf(SOUL_SUMMONER_ADDRESS[chainId]);
+      const totalLpTokens = await lpTokenContract?.totalSupply();
+      const summonerLpTokens = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[chainId]);
       const supplyHeldBySummoner = summonerLpTokens / totalLpTokens * 100;
       
       // value of lp tokens held by summoner

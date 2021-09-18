@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { ethers } from "ethers";
 
-import { useActiveWeb3React } from '../../hooks'
+import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
 import useSoulSummoner from "./useSoulSummoner";
 import useApprove from "./useApprove";
@@ -71,7 +71,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     getWithdrawable,
     getFeePercent,
   } = useSoulSummoner();
-  const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove();
+  const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken);
 
   const [showing, setShowing] = useState(false);
 
@@ -143,7 +143,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    */
   const fetchUserFarmAlloc = async () => {
     const userStakedPercOfSummoner = (
-      await fetchUserLpTokenAllocInFarm(lpToken, pid)
+      await fetchUserLpTokenAllocInFarm(lpToken, pid, account)
     )?.[4];
     if (userStakedPercOfSummoner)
       setPercOfFarm(Number(userStakedPercOfSummoner).toFixed(2));
@@ -186,11 +186,11 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       alert("connect wallet");
     } else {
       try {
-        const result1 = await userInfo(pid);
+        const result1 = await userInfo(pid, account);
         const staked = ethers.utils.formatUnits(result1?.[0]);
         setStakedBal(staked.toString());
 
-        const result2 = await erc20BalanceOf(lpToken, account);
+        const result2 = await erc20BalanceOf(account);
         const unstaked = ethers.utils.formatUnits(result2);
         setUnstakedBal(unstaked.toString());
 
@@ -227,7 +227,6 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     } else {
       // Checks if SoulSummoner can move tokens
       const amount = await erc20Allowance(
-        lpToken,
         account,
         SoulSummonerAddress
       );
@@ -244,7 +243,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       alert("connect wallet");
     } else {
       try {
-        const tx = await erc20Approve(lpToken, SoulSummonerAddress);
+        const tx = await erc20Approve(SoulSummonerAddress);
         await tx?.wait().then(await fetchApproval());
       } catch (e) {
         alert(e.message);
