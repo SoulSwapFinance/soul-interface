@@ -142,7 +142,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
    */
   const fetchUserLpTokenAlloc = async (account) => {
     try {
-      const contractBal = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[chainId])
+      const contractBal = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[4002])
 
       const userBal = await lpTokenContract?.balanceOf(account)
 
@@ -166,7 +166,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
       // get how many lpTokens in contract
       const totalSupply = await lpTokenContract?.totalSupply()
       // get how many lpTokens held by Summoner
-      const heldBySummoner = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[chainId])
+      const heldBySummoner = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[4002])
       // get how many lpTokens held by user
       const heldByUser = await lpTokenContract?.balanceOf(account)
 

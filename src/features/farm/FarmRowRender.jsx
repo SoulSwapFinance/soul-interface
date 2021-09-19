@@ -209,8 +209,10 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     if (!account) {
       alert('connect wallet')
     } else {
+      console.log(account, 'account')
+      const user = account;
       // Checks if SoulSummoner can move tokens
-      const amount = await erc20Allowance(account, SoulSummonerAddress)
+      const amount = await erc20Allowance(user, SoulSummonerAddress)
       if (amount > 0) setApproved(true)
       return amount
     }
