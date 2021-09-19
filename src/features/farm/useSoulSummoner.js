@@ -178,7 +178,8 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
       const userUnstakedPercOfSummoner = (heldByUser / heldBySummoner) * 100
 
       // user staked only %s
-      const userStakedBal = (await userInfo(pid))?.[0]
+      const userStakedBal = (await userInfo(pid, account))?.[0]
+      console.log("userStakedBal", userStakedBal)
       const userStakedPercOfSupply = (userStakedBal / summonerPercOfSupply) * 100
       const userStakedPercOfSummoner = (userStakedBal / heldBySummoner) * 100
       // console.log('userStakedBal', userStakedBal.toString())

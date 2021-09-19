@@ -137,7 +137,9 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    * Checks the user's alloc of the total staked in the farm
    */
   const fetchUserFarmAlloc = async () => {
-    const userStakedPercOfSummoner = (await fetchUserLpTokenAllocInFarm(pid, account))?.[4]
+    const ownership = await fetchUserLpTokenAllocInFarm(pid, account)
+    const userStakedPercOfSummoner = Number(ownership?.[4])
+    console.log(userStakedPercOfSummoner, 'userStakedPercOfSummoner')
     if (userStakedPercOfSummoner) setPercOfFarm(Number(userStakedPercOfSummoner).toFixed(2))
     else setPercOfFarm(0)
   }
