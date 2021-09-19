@@ -120,9 +120,10 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   }
 
   const fetchWithdrawable = async () => {
-    const amount = ethers.utils.parseUnits(document.getElementById('unstake').value)
+    const rawAmount = document.getElementById('unstake').value
 
-    if (amount !== 0 || amount !== undefined || amount !== '' || amount !== null) {
+    if (rawAmount !== 0 && rawAmount !== undefined && rawAmount !== '' && rawAmount !== null) {
+      const amount = ethers.utils.parseUnits(document.getElementById('unstake').value)
       const fetched = await getWithdrawable(pid, amount)
       setFeeAmount(fetched[0].toString())
       setReceiving(fetched[1].toString())
@@ -210,7 +211,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       alert('connect wallet')
     } else {
       // console.log(account, 'account')
-      const user = account;
+      const user = account
       // Checks if SoulSummoner can move tokens
       const amount = await erc20Allowance(user, SoulSummonerAddress)
       if (amount > 0) setApproved(true)
