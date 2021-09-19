@@ -1,6 +1,8 @@
 import FarmRowRender from './FarmRowRender'
 import { FarmPids } from './FarmPids'
 
+import { Wrap, Heading, Text } from '../../components/ReusableStyles'
+
 const FarmList = () => {
   // Display token pair - TODO:
   // 1) fetch total farms
@@ -22,14 +24,17 @@ const FarmList = () => {
 
   return (
     <>
-      {/* <Wrap padding="0 0 2rem 0">
-        <Heading fontSize="1.5rem" textAlign="center">
+      <Wrap padding="0 0 1rem 0">
+        <Heading fontSize="1.8rem" textAlign="center">
           Farms
         </Heading>
-        <Text fontSize=".9rem" padding="0" color="#aaa" textAlign="center">
+        <Text fontSize="1rem" padding="0" color="#aaa" textAlign="center">
           Stake lp tokens to earn SOUL
         </Text>
-      </Wrap> */}
+        <Text fontSize="1rem" padding="1rem 0 0 0" color="#d1571e" textAlign="center">
+          Withdrawing from a farm before the fee timer is up results in paying a portion of the withdrawed amount to the DAO.
+        </Text>
+      </Wrap>
       <div>{farmList}</div>
     </>
   )
