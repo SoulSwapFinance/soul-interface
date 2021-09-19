@@ -35,7 +35,7 @@ function useApproveContract(tokenAddress) {
     
     try {
       const result = await contract.allowance(owner, spender)
-      console.log('allowance for user', result)
+      // console.log('allowance for user', result)
       return result
     } catch (e) {
       console.log(e)

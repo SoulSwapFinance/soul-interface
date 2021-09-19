@@ -181,9 +181,9 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
       const userStakedBal = (await userInfo(pid))?.[0]
       const userStakedPercOfSupply = (userStakedBal / summonerPercOfSupply) * 100
       const userStakedPercOfSummoner = (userStakedBal / heldBySummoner) * 100
-      console.log('userStakedBal', userStakedBal.toString())
-      console.log('heldBySummoner', heldBySummoner.toString())
-      console.log('userStakedPercOfSummoner', userStakedPercOfSummoner.toString())
+      // console.log('userStakedBal', userStakedBal.toString())
+      // console.log('heldBySummoner', heldBySummoner.toString())
+      // console.log('userStakedPercOfSummoner', userStakedPercOfSummoner.toString())
 
       // user staked + unstaked %s
       const netUserLpTokens = userStakedBal + heldByUser
@@ -308,12 +308,12 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
       // value of lp tokens held by summoner
       const summonerTotalLpValue = supplyHeldBySummoner * totalLpValue
 
-      console.log('totalLpTokens', totalLpTokens.toString())
-      console.log('summonerLpTokens', summonerLpTokens.toString())
-      console.log('supplyHeldBySummoner', supplyHeldBySummoner.toString())
+      // console.log('totalLpTokens', totalLpTokens.toString())
+      // console.log('summonerLpTokens', summonerLpTokens.toString())
+      // console.log('supplyHeldBySummoner', supplyHeldBySummoner.toString())
 
-      console.log('totalLpValue', totalLpValue.toString())
-      console.log('summonerTotalLpValue', summonerTotalLpValue.toString())
+      // console.log('totalLpValue', totalLpValue.toString())
+      // console.log('summonerTotalLpValue', summonerTotalLpValue.toString())
 
       return [totalLpValue, summonerTotalLpValue]
     } catch (e) {

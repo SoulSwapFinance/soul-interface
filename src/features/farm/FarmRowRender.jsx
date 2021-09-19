@@ -209,7 +209,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     if (!account) {
       alert('connect wallet')
     } else {
-      console.log(account, 'account')
+      // console.log(account, 'account')
       const user = account;
       // Checks if SoulSummoner can move tokens
       const amount = await erc20Allowance(user, SoulSummonerAddress)
@@ -254,7 +254,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    */
   const handleWithdraw = async (amount) => {
     try {
-      console.log('withdrawing', amount.toString())
+      // console.log('withdrawing', amount.toString())
       const tx = await withdraw(pid, amount)
       await tx.wait().then(await fetchBals(pid))
     } catch (e) {
@@ -268,7 +268,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    */
   const handleDeposit = async (amount) => {
     try {
-      console.log('depositing', amount.toString())
+      // console.log('depositing', amount.toString())
       const tx = await deposit(pid, amount)
       await tx.wait().then(await fetchBals(pid))
     } catch (e) {
