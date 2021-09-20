@@ -317,6 +317,9 @@ msgstr "文档"
 msgid "Documentation for Summoners."
 msgstr ""
 
+msgid "Documentation for developers of Soul."
+msgstr ""
+
 msgid "Documentation for users of Soul."
 msgstr ""
 
@@ -409,9 +412,6 @@ msgstr ""
 
 msgid "Hardware Wallet"
 msgstr "硬件錢包"
-
-msgid "Harmony Bridge"
-msgstr ""
 
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
 msgstr ""
@@ -512,6 +512,9 @@ msgstr ""
 msgid "Limit order"
 msgstr ""
 
+msgid "Links"
+msgstr ""
+
 msgid "Liquidity"
 msgstr "流動性"
 
@@ -567,9 +570,6 @@ msgstr ""
 
 msgid "Markets"
 msgstr "市場"
-
-msgid "Matic Bridge"
-msgstr ""
 
 msgid "Max"
 msgstr "最大數量"
@@ -716,6 +716,9 @@ msgstr "獎勵池中的代幣"
 
 msgid "Pooled {0}"
 msgstr "汇集{0}"
+
+msgid "Portal"
+msgstr ""
 
 msgid "Positions"
 msgstr "倉位"
@@ -1012,6 +1015,9 @@ msgstr ""
 msgid "View Liquidity Positions"
 msgstr ""
 
+msgid "View all of our links to discover our ecosystem"
+msgstr ""
+
 msgid "View on explorer"
 msgstr "在瀏覽器查看"
 
@@ -1133,9 +1139,6 @@ msgid "minutes"
 msgstr "分鐘"
 
 msgid "or the transaction will revert."
-msgstr ""
-
-msgid "xDai Bridge"
 msgstr ""
 
 #. js-lingui:icu=%7B0%2C+plural%2C+one+%7BToken%7D+many+%7BTokens%7D%7D&pluralize_on=0

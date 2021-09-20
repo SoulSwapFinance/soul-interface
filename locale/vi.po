@@ -317,6 +317,9 @@ msgstr "Tài liệu"
 msgid "Documentation for Summoners."
 msgstr ""
 
+msgid "Documentation for developers of Soul."
+msgstr ""
+
 msgid "Documentation for users of Soul."
 msgstr ""
 
@@ -411,9 +414,6 @@ msgstr ""
 
 msgid "Hardware Wallet"
 msgstr "Ví cứng"
-
-msgid "Harmony Bridge"
-msgstr ""
 
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
 msgstr ""
@@ -514,6 +514,9 @@ msgstr ""
 msgid "Limit order"
 msgstr ""
 
+msgid "Links"
+msgstr ""
+
 msgid "Liquidity"
 msgstr "Tính thanh khoản"
 
@@ -572,9 +575,6 @@ msgstr ""
 
 msgid "Markets"
 msgstr "Thị trường"
-
-msgid "Matic Bridge"
-msgstr ""
 
 msgid "Max"
 msgstr "Tối đa"
@@ -721,6 +721,9 @@ msgstr "Token mạng lưới trong mạng lưới phần thưởng"
 
 msgid "Pooled {0}"
 msgstr "Đã gộp chung {0}"
+
+msgid "Portal"
+msgstr ""
 
 msgid "Positions"
 msgstr "Vị thế"
@@ -1017,6 +1020,9 @@ msgstr ""
 msgid "View Liquidity Positions"
 msgstr ""
 
+msgid "View all of our links to discover our ecosystem"
+msgstr ""
+
 msgid "View on explorer"
 msgstr "Xem trên explorer"
 
@@ -1138,9 +1144,6 @@ msgid "minutes"
 msgstr "phút"
 
 msgid "or the transaction will revert."
-msgstr ""
-
-msgid "xDai Bridge"
 msgstr ""
 
 #. js-lingui:icu=%7B0%2C+plural%2C+one+%7BToken%7D+many+%7BTokens%7D%7D&pluralize_on=0

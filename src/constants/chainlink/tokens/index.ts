@@ -14,8 +14,8 @@ export type ChainlinkToken = {
 
 export const CHAINLINK_TOKENS: { [chainId in ChainId]?: ChainlinkToken[] } = {
   [ChainId.MAINNET]: MAINNET,
-  [ChainId.KOVAN]: KOVAN,
-  [ChainId.BSC]: BSC,
-  [ChainId.HECO]: HECO,
-  [ChainId.MATIC]: MATIC,
+  // [ChainId.KOVAN]: KOVAN,
+  // [ChainId.BSC]: BSC,
+  // [ChainId.HECO]: HECO,
+  // [ChainId.MATIC]: MATIC,
 }

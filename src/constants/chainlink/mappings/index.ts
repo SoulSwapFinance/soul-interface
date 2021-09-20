@@ -1,10 +1,10 @@
-import BSC from './bsc'
 import { ChainId } from '@soulswap/sdk'
-import HECO from './heco'
-import KOVAN from './kovan'
 import MAINNET from './mainnet'
-import MATIC from './matic'
-import XDAI from './xdai'
+// import BSC from './bsc'
+// import HECO from './heco'
+// import KOVAN from './kovan'
+// import MATIC from './matic'
+// import XDAI from './xdai'
 
 export type ChainlinkMappingList = {
   readonly [address: string]: {
@@ -22,9 +22,9 @@ export const CHAINLINK_MAPPING: {
   [chainId in ChainId]?: ChainlinkMappingList
 } = {
   [ChainId.MAINNET]: MAINNET,
-  [ChainId.KOVAN]: KOVAN,
-  [ChainId.BSC]: BSC,
-  [ChainId.HECO]: HECO,
-  [ChainId.MATIC]: MATIC,
-  [ChainId.XDAI]: XDAI,
+  // [ChainId.KOVAN]: KOVAN,
+  // [ChainId.BSC]: BSC,
+  // [ChainId.HECO]: HECO,
+  // [ChainId.MATIC]: MATIC,
+  // [ChainId.XDAI]: XDAI,
 }

@@ -324,6 +324,9 @@ msgstr "Docs"
 msgid "Documentation for Summoners."
 msgstr "Documentation for Summoners."
 
+msgid "Documentation for developers of Soul."
+msgstr "Documentation for developers of Soul."
+
 msgid "Documentation for users of Soul."
 msgstr "Documentation for users of Soul."
 
@@ -426,9 +429,6 @@ msgstr "Go Back"
 msgid "Hardware Wallet"
 msgstr "Hardware Wallet"
 
-msgid "Harmony Bridge"
-msgstr "Harmony Bridge"
-
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
 msgstr "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
 
@@ -528,6 +528,9 @@ msgstr "Limit"
 msgid "Limit order"
 msgstr "Limit order"
 
+msgid "Links"
+msgstr "Links"
+
 msgid "Liquidity"
 msgstr "Liquidity"
 
@@ -588,9 +591,6 @@ msgstr "Market"
 
 msgid "Markets"
 msgstr "Markets"
-
-msgid "Matic Bridge"
-msgstr "Matic Bridge"
 
 msgid "Max"
 msgstr "Max"
@@ -739,6 +739,9 @@ msgstr "Pool tokens in rewards pool"
 
 msgid "Pooled {0}"
 msgstr "Pooled {0}"
+
+msgid "Portal"
+msgstr "Portal"
 
 msgid "Positions"
 msgstr "Positions"
@@ -1039,6 +1042,9 @@ msgstr "Vietnamese"
 msgid "View Liquidity Positions"
 msgstr "View Liquidity Positions"
 
+msgid "View all of our links to discover our ecosystem"
+msgstr "View all of our links to discover our ecosystem"
+
 msgid "View on explorer"
 msgstr "View on explorer"
 
@@ -1161,9 +1167,6 @@ msgstr "minutes"
 
 msgid "or the transaction will revert."
 msgstr "or the transaction will revert."
-
-msgid "xDai Bridge"
-msgstr "xDai Bridge"
 
 #. js-lingui:icu=%7B0%2C+plural%2C+one+%7BToken%7D+many+%7BTokens%7D%7D&pluralize_on=0
 msgid "Token"
