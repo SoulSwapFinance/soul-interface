@@ -55,9 +55,6 @@ msgstr ""
 msgid "<0>Your</0> Positions"
 msgstr ""
 
-msgid "300M+ TVL on Polygon! Optimized routing enabled"
-msgstr ""
-
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
 msgstr ""
 
@@ -184,9 +181,6 @@ msgstr ""
 msgid "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
 msgstr ""
 
-msgid "Check out Soul on Polygon (Matic)"
-msgstr ""
-
 msgid "Claim"
 msgstr ""
 
@@ -197,9 +191,6 @@ msgid "Claimed"
 msgstr ""
 
 msgid "Clear History"
-msgstr ""
-
-msgid "Click here to switch to Polygon using Metamask"
 msgstr ""
 
 msgid ""
@@ -295,9 +286,6 @@ msgid "Don't see a pool you joined? <0>Import it.</0>"
 msgstr ""
 
 msgid "Dont see a pool you joined?"
-msgstr ""
-
-msgid "Enjoy the lowest slippage on Polygon"
 msgstr ""
 
 msgid "Enter"
@@ -959,9 +947,6 @@ msgid "Wallet"
 msgstr ""
 
 msgid "Wallet Balance"
-msgstr ""
-
-msgid "Welcome to Soul on Polygon (Matic)"
 msgstr ""
 
 msgid "When creating a pair you are the first liquidity provider. The ratio of tokens you add will set the price of this pool. Once you are happy with the rate, click supply to review"

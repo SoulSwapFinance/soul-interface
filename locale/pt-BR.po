@@ -55,9 +55,6 @@ msgstr "<0>Dica:</0> ao adicionar liquidez, você receberá tokens de pool que r
 msgid "<0>Your</0> Positions"
 msgstr "<0>Suas</0> posições"
 
-msgid "300M+ TVL on Polygon! Optimized routing enabled"
-msgstr "Mais de 300 M de TVL no Polygon! Rotamento otimizado habilitado"
-
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
 msgstr "Uma parte de cada transação (0,25%) vai para provedores de liquidez como um incentivo de protocolo."
 
@@ -184,9 +181,6 @@ msgstr "Ao adicionar liquidez, você ganhará 0,25% de todas as negociações ne
 msgid "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
 msgstr "Ignora os modais de confirmação e permite negociações com alto índice de deslizamento. Use por sua conta e risco."
 
-msgid "Check out Soul on Polygon (Matic)"
-msgstr "Confira Soul on Polygon (Matic)"
-
 msgid "Claim"
 msgstr "Reivindicar"
 
@@ -198,9 +192,6 @@ msgstr "Reivindicado"
 
 msgid "Clear History"
 msgstr "Limpar histórico"
-
-msgid "Click here to switch to Polygon using Metamask"
-msgstr "Clique aqui para mudar para Polygon usando Metamask"
 
 msgid ""
 "Click on a pool below, input the amount you wish to migrate or select max, and click"
@@ -296,9 +287,6 @@ msgstr "Não vê um pool no qual você entrou? <0>Importar.</0>"
 
 msgid "Dont see a pool you joined?"
 msgstr "Não vê um pool no qual você entrou?"
-
-msgid "Enjoy the lowest slippage on Polygon"
-msgstr "Aproveite o menor deslizamento no Polygon"
 
 msgid "Enter"
 msgstr "Entrar"
@@ -958,9 +946,6 @@ msgstr "Carteira"
 
 msgid "Wallet Balance"
 msgstr "Saldo da carteira"
-
-msgid "Welcome to Soul on Polygon (Matic)"
-msgstr "Bem-vindo ao Soul on Polygon (Matic)"
 
 msgid "When creating a pair you are the first liquidity provider. The ratio of tokens you add will set the price of this pool. Once you are happy with the rate, click supply to review"
 msgstr "Ao criar um par, você é o primeiro provedor de liquidez. A proporção de tokens que você adiciona definirá o preço deste pool. Quando estiver satisfeito com a taxa, clique em \"supply to review\""

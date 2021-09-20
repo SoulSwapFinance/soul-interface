@@ -52,18 +52,18 @@ function getCurrencyLogoUrls(currency) {
   return urls
 }
 
-const AvalancheLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/avax.jpg'
-const BinanceCoinLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/bnb.jpg'
 const EthereumLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/eth.jpg'
 const FantomLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/ftm.jpg'
-const HarmonyLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/one.jpg'
-const HecoLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/heco.jpg'
-const MaticLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/polygon.jpg'
-const MoonbeamLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/eth.jpg'
-const OKExLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/okt.jpg'
-const xDaiLogo =
-  'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/xdai/assets/0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d/logo.png'
-const CeloLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/celo.jpg'
+// const AvalancheLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/avax.jpg'
+// const BinanceCoinLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/bnb.jpg'
+// const HarmonyLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/one.jpg'
+// const HecoLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/heco.jpg'
+// const MaticLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/polygon.jpg'
+// const MoonbeamLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/eth.jpg'
+// const OKExLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/okt.jpg'
+// const xDaiLogo =
+//   'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/xdai/assets/0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d/logo.png'
+// const CeloLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/celo.jpg'
 
 const logo: { readonly [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: EthereumLogo,
