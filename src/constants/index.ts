@@ -253,9 +253,9 @@ export const BASE_SWAPPER: { [chainId in ChainId]?: string } = {
 export const SOUL_GUIDE_ADDRESS = '0x5A6B3Ce2736E9B731Fba73262884016b50c39184' // JUL 27TH
 
 export const ANALYTICS_URL: { [chainId in ChainId]?: string } = {
-  [ChainId.MAINNET]: 'https://analytics.soulswap.finance',
-  [ChainId.FANTOM]: 'https://analytics-ftm.soulswap.finance',
-  [ChainId.FANTOM_TESTNET]: 'https://analytics-ftm-testnet.soulswap.finance',
+  [ChainId.MAINNET]: 'https://defillama.com/protocol/soulswap',
+  [ChainId.FANTOM]: 'https://defillama.com/protocol/soulswap',
+  [ChainId.FANTOM_TESTNET]: 'https://defillama.com/protocol/soulswap',
   // [ChainId.MATIC]: 'https://analytics-polygon.soulswap.finance',
   // [ChainId.BSC]: 'https://analytics-bsc.soulswap.finance',
   // [ChainId.XDAI]: 'https://analytics-xdai.soulswap.finance',

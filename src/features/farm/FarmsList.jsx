@@ -25,19 +25,21 @@ const FarmList = () => {
   return (
     <>
       <Wrap padding="0 0 2rem 0">
-        <Heading fontSize="1.5rem" textAlign="center">
+        {/* <Heading fontSize="1.5rem" textAlign="center">
           Farms
-        </Heading>
-        <Text fontSize=".9rem" padding="0" color="#aaa" textAlign="center">
+        </Heading> */}
+        {/* <Text fontSize=".9rem" padding="0" color="#aaa" textAlign="center">
           Stake lp tokens to earn SOUL
-        </Text>
-        <Text fontSize=".8rem" padding="1rem 0 0 0" color="#d1571e" textAlign="center">
-          Unstaking from a pool before the fee timer is up results in paying a portion of the withdrawn amount to the
+        </Text> */}
+        {/* <Text fontSize=".8rem" padding="1rem 0 0 0" color="#c052ff" textAlign="center">
+          Unstaking before the fee is removed leads to paying a portion of the withdrawn amount to the
           DAO.
-        </Text>
-        <Text fontSize=".85rem" padding="0" color="#d1571e" textAlign="center">
-          When you stake, the withdrawal fee timer sets to 15%. Each day that goes by, 1% is deducted.
-        </Text>
+        </Text> */}
+        {/* <Text fontSize=".85rem" padding="0" color="#c052ff" textAlign="center">
+          Withdrawal Fee: 14%
+          <br />
+          Daily Fee Reduction: 1%.
+        </Text> */}
       </Wrap>
       <div>{farmList}</div>
     </>

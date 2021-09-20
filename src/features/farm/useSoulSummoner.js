@@ -342,17 +342,20 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
    */
   const fetchAprAndLiquidity = async (pid, token1Name, token2Name, token1Address, token2Address, lpToken) => {
     try {
+      
+      const SECONDS_PER_YEAR = 31557600
+
       // pool weight
       const alloc = await poolInfo(pid)
       const totalAlloc = await totalAllocPoint(pid)
       const poolWeight = alloc?.[1] / totalAlloc
-
+      
       // soul per sec (sps)
       const soulPerSec = await soulPerSecond()
       const formattedSps = ethers.utils.formatUnits(soulPerSec.toString())
 
       // amount of soul allocated to this pool per year
-      const yearlySoulFarmAlloc = formattedSps * 31557600 * poolWeight
+      const yearlySoulFarmAlloc = SECONDS_PER_YEAR * formattedSps * poolWeight
 
       // value of lp tokens held by summoner
       const fetchedLiquidity = await fetchLiquidityValue(token1Name, token2Name, token1Address, token2Address, lpToken)

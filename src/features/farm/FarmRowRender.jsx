@@ -446,8 +446,8 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 </Wrap>
 
                 <Wrap padding="0">
-                  <Text fontSize=".9rem" padding="0" color="#d1571e">
-                    Unstaking before the fee timer is up results in paying the fee
+                  <Text fontSize=".9rem" padding="0" color="#c052ff">
+                    Withdrawal Fee: 14%, which reduces by 1% daily.
                   </Text>
                   <Wrap padding="0" display="flex">
                     <Text fontSize=".9rem" padding="0" color="#aaa">
