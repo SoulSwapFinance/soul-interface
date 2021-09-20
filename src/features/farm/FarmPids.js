@@ -14,7 +14,6 @@ export const FarmPids
     lpSymbol: "SOUL-FUSD",
     lpAddresses: {
       4002: "0xaf02fd55F297f2a591367F6E33Dc600Ff2Be472A",
-      250: "",
     },
     token1Address: tokens.SOUL,
     token2Address: tokens.FUSD,
@@ -26,7 +25,6 @@ export const FarmPids
     lpSymbol: "SOUL-FTM",
     lpAddresses: {
       4002: "0x10c0AFd7C58916C4025d466E11850c7D79219277",
-      250: "",
     },
     token1Address: tokens.SOUL,
     token2Address: tokens.WFTM,
@@ -38,7 +36,6 @@ export const FarmPids
     lpSymbol: "FTM-FETH",
     lpAddresses: {
       4002: "0x5215981e81f0636A5f806fd20A0E0E180d9aaa68",
-      250: "",
     },
     token1Address: tokens.WFTM,
     token2Address: tokens.FETH,
@@ -50,7 +47,6 @@ export const FarmPids
     lpSymbol: "FTM-FUSD",
     lpAddresses: {
       4002: "0x306557358e20aea124b16a548597897858d13cb2",
-      250: "",
     },
     token1Address: tokens.WFTM,
     token2Address: tokens.FUSD,

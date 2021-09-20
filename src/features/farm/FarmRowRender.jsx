@@ -64,7 +64,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     dailyDecay,
     getWithdrawable,
     getFeePercent,
-  } = useSoulSummoner(lpToken, farm.token1Address[chainId], farm.token2Address[chainId])
+  } = useSoulSummoner(lpToken, farm.token1Address[4002], farm.token2Address[4002])
   const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
 
   const [showing, setShowing] = useState(false)
@@ -299,7 +299,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                   <TokenPair
                     fontSize="1.2rem"
                     target="_blank"
-                    href={`https://app.soulswap.finance/add/${farm.token1Address[chainId]}/${farm.token2Address[chainId]}`}
+                    href={`https://app.soulswap.finance/add/${farm.token1Address[4002]}/${farm.token2Address[4002]}`}
                   >
                     {lpSymbol}
                   </TokenPair>
