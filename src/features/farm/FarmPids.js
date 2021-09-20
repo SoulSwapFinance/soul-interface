@@ -21,8 +21,8 @@ export const FarmPids
   {
     pid: 2,
     token1: "SOUL",
-    token2: "WFTM",
-    lpSymbol: "SOUL-WFTM",
+    token2: "FTM",
+    lpSymbol: "SOUL-FTM",
     lpAddresses: {
       4002: "0x10c0AFd7C58916C4025d466E11850c7D79219277",
     },
@@ -31,9 +31,9 @@ export const FarmPids
   },
   {
     pid: 3,
-    token1: "WFTM",
+    token1: "FTM",
     token2: "FETH",
-    lpSymbol: "WFTM-FETH",
+    lpSymbol: "FTM-FETH",
     lpAddresses: {
       4002: "0x5215981e81f0636A5f806fd20A0E0E180d9aaa68",
     },
@@ -42,9 +42,9 @@ export const FarmPids
   },
   {
     pid: 4,
-    token1: "WFTM",
+    token1: "FTM",
     token2: "FUSD",
-    lpSymbol: "WFTM-FUSD",
+    lpSymbol: "FTM-FUSD",
     lpAddresses: {
       4002: "0x306557358e20aea124b16a548597897858d13cb2",
     },
@@ -53,9 +53,9 @@ export const FarmPids
   },
   // {
   //   pid: 5,
-  //   token1: "WFTM",
+  //   token1: "FTM",
   //   token2: "FBTC",
-  //   lpSymbol: "WFTM-FBTC",
+  //   lpSymbol: "FTM-FBTC",
   //   lpAddresses: {
   //     4002: "0x69532253792c8ce581D1BE2150aF67994fF324e7",
   //   },
@@ -63,3 +63,5 @@ export const FarmPids
   //   token2Address: tokens.FBTC,
   // },
 ];
+
+export default FarmPids

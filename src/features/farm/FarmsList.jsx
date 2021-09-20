@@ -1,5 +1,5 @@
 import FarmRowRender from './FarmRowRender'
-import { FarmPids } from './FarmPids'
+import FarmPids from './FarmPids'
 
 import { Wrap, Heading, Text } from '../../components/ReusableStyles'
 

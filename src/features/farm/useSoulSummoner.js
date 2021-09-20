@@ -254,7 +254,9 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
    */
   const fusdPerSoul = async () => {
     try {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       const soulContract = await useTokenContract(FarmPids[0].token1Address[4002])
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       const fusdContract = await useTokenContract(FarmPids[0].token2Address[4002])
 
       const totalSoul = await soulContract.balanceOf(FarmPids[0].lpAddresses[4002])
