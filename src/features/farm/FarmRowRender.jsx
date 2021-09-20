@@ -16,7 +16,7 @@ import {
   FarmContentWrapper,
   TokenPairBox,
   FarmItemBox,
-  FarmItemHeading,
+  // FarmItemHeading,
   FarmItem,
   ShowBtn,
   DetailsContainer,

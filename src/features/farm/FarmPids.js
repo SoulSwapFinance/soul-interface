@@ -21,7 +21,7 @@ export const FarmPids
   {
     pid: 2,
     token1: "SOUL",
-    token2: "FTM",
+    token2: "WFTM",
     lpSymbol: "SOUL-FTM",
     lpAddresses: {
       4002: "0x10c0AFd7C58916C4025d466E11850c7D79219277",
@@ -42,7 +42,7 @@ export const FarmPids
   },
   {
     pid: 4,
-    token1: "FTM",
+    token1: "WFTM",
     token2: "FUSD",
     lpSymbol: "FTM-FUSD",
     lpAddresses: {
