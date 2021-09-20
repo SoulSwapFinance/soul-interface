@@ -86,6 +86,17 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
     }
   }
 
+  // userDelta
+  const userDelta = async (pid, account) => {
+    try {
+      const result = await summonerContract?.userDelta(pid, account)
+      return result
+    } catch (e) {
+      console.log(e)
+      return e
+    }
+  }
+
   // amount of soul pending for redemption
   const pendingSoul = async (pid, user) => {
     try {
@@ -111,11 +122,11 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
     }
   }
 
-  const getWithdrawable = async (pid, amount) => {
+  const getWithdrawable = async (pid, amount, account) => {
     try {
-      const result = await summonerContract?.getWithdrawable(pid, amount)
+      const timeDelta = await userDelta(pid, account)
+      const result = await summonerContract?.getWithdrawable(pid, timeDelta, amount)
       return result
-      y
     } catch (e) {
       console.log(e)
       return e
@@ -363,6 +374,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
     poolLength,
     poolInfo,
     userInfo,
+    userDelta,
     pendingSoul,
     soulPerSecond,
     totalAllocPoint,

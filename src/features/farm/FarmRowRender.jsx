@@ -124,7 +124,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
     if (rawAmount !== 0 && rawAmount !== undefined && rawAmount !== '' && rawAmount !== null) {
       const amount = ethers.utils.parseUnits(document.getElementById('unstake').value)
-      const fetched = await getWithdrawable(pid, amount)
+      const fetched = await getWithdrawable(pid, amount, account)
       setFeeAmount(fetched[0].toString())
       setReceiving(fetched[1].toString())
     } else {
@@ -454,7 +454,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                       Fee Amount: {ethers.utils.formatUnits(feeAmount)}
                     </Text>
                     <Text fontSize=".9rem" padding="0 0 0 6.5rem" color="#aaa">
-                      Receiving: {ethers.utils.formatUnits(receiving)}
+                      Withdrawing: {ethers.utils.formatUnits(receiving)}
                     </Text>
                   </Wrap>
                 </Wrap>
