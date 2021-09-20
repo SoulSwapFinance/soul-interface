@@ -32,7 +32,7 @@ const FarmList = () => {
           Stake lp tokens to earn SOUL
         </Text>
         <Text fontSize="1rem" padding="1rem 0 0 0" color="#d1571e" textAlign="center">
-          Withdrawing from a farm before the fee timer is up results in paying a portion of the withdrawed amount to the DAO.
+          Withdrawing from a farm before the fee timer is up results in paying a portion of the withdrawn amount to the DAO.
         </Text>
       </Wrap>
       <div>{farmList}</div>
