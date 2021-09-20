@@ -53,6 +53,7 @@
     "@ramp-network/ramp-instant-sdk": "^2.4.6",
     "@reach/dialog": "^0.15.2",
     "@reduxjs/toolkit": "^1.6.0",
+    "@soulswap/sdk": "^0.3.0",
     "@soulswap/soul-data": "^1.0.0",
     "@soulswap/swap-core": "^0.0.3",
     "@sushiswap/chainlink-whitelist": "0.2.2",
@@ -144,7 +145,6 @@
     ]
   },
   "dependencies": {
-    "@soulswap/sdk": "^0.2.1",
     "react-bootstrap": "^1.6.1",
     "react-i18next": "^11.11.4",
     "react-inlinesvg": "^2.3.0",
