@@ -312,14 +312,8 @@ msgstr "Disable Multihops"
 msgid "Disconnect"
 msgstr "Disconnect"
 
-msgid "Discord"
-msgstr "Discord"
-
 msgid "Dismiss"
 msgstr "Dismiss"
-
-msgid "Docs"
-msgstr "Docs"
 
 msgid "Documentation for Summoners."
 msgstr "Documentation for Summoners."
@@ -327,8 +321,11 @@ msgstr "Documentation for Summoners."
 msgid "Documentation for developers of Soul."
 msgstr "Documentation for developers of Soul."
 
-msgid "Documentation for users of Soul."
-msgstr "Documentation for users of Soul."
+msgid "Earn SOUL with SOUL-LP."
+msgstr "Earn SOUL with SOUL-LP."
+
+msgid "Earn SOUL with SOUL."
+msgstr "Earn SOUL with SOUL."
 
 msgid "Either return to the {link}, or change to an available network."
 msgstr "Either return to the {link}, or change to an available network."
@@ -406,6 +403,9 @@ msgstr ""
 "SEANCE in return for voting rights and a fully composable token that can interact with other protocols.\n"
 "Your SEANCE is continuously compounding, when you unstake you will receive all the originally deposited\n"
 "SOUL and any additional from fees."
+
+msgid "Forum"
+msgstr "Forum"
 
 msgid "French"
 msgstr "French"
@@ -491,15 +491,6 @@ msgstr "Italian"
 
 msgid "Japanese"
 msgstr "Japanese"
-
-msgid "Join Us on Discord."
-msgstr "Join Us on Discord."
-
-msgid "Join the community on Discord."
-msgstr "Join the community on Discord."
-
-msgid "Join the conversation on Telegram."
-msgstr "Join the conversation on Telegram."
 
 msgid "Korean"
 msgstr "Korean"
@@ -675,9 +666,6 @@ msgstr "Open Main Menu"
 
 msgid "Open Orders"
 msgstr "Open Orders"
-
-msgid "Open Source"
-msgstr "Open Source"
 
 msgid "Oracle"
 msgstr "Oracle"
@@ -860,12 +848,6 @@ msgstr "Slippage tolerance..."
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 
-msgid "Soul Supports Open Source."
-msgstr "Soul Supports Open Source."
-
-msgid "Soul is a supporter of Open Source."
-msgstr "Soul is a supporter of Open Source."
-
 msgid "SoulSwap"
 msgstr "SoulSwap"
 
@@ -914,9 +896,6 @@ msgstr "Swap To (est.):"
 
 msgid "Swap To:"
 msgstr "Swap To:"
-
-msgid "Telegram"
-msgstr "Telegram"
 
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."

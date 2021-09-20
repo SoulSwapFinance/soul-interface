@@ -11,20 +11,20 @@ import NavLink from '../NavLink'
 
 const items = (i18n: I18n) => [
   {
-    name: i18n._(t`Portal`),
-    description: i18n._(t`Documentation for developers of Soul.`),
+    name: i18n._(t`Explore`),
+    description: i18n._(t`View our Ecosystem.`),
     href: 'https://port.soul.sh',
     external: true,
   },
   {
     name: i18n._(t`Forum`),
-    description: i18n._(t`Use SoulPower to Enchant Soul.`),
+    description: i18n._(t`Summon an Empire.`),
     href: 'https://forum.soulswap.finance',
     external: true,
   },
   {
     name: i18n._(t`Twitter`),
-    description: i18n._(t`Follow us on Twitter.`),
+    description: i18n._(t`Follow on Twitter.`),
     href: 'https://twitter.com/SoulSwapFinance',
     external: true,
   },
@@ -41,8 +41,8 @@ const items = (i18n: I18n) => [
   //   external: true,
   // },
   {
-    name: i18n._(t`Links`),
-    description: i18n._(t`View all of our links to discover our ecosystem`),
+    name: i18n._(t`Resources`),
+    description: i18n._(t`Explore our Protocol.`),
     href: 'https://links.soul.sh',
     external: true,
   },

@@ -305,14 +305,8 @@ msgstr "Tắt giao dịch nhiều bước"
 msgid "Disconnect"
 msgstr ""
 
-msgid "Discord"
-msgstr "Discord"
-
 msgid "Dismiss"
 msgstr "Bỏ qua"
-
-msgid "Docs"
-msgstr "Tài liệu"
 
 msgid "Documentation for Summoners."
 msgstr ""
@@ -320,7 +314,10 @@ msgstr ""
 msgid "Documentation for developers of Soul."
 msgstr ""
 
-msgid "Documentation for users of Soul."
+msgid "Earn SOUL with SOUL-LP."
+msgstr ""
+
+msgid "Earn SOUL with SOUL."
 msgstr ""
 
 msgid "Either return to the {link}, or change to an available network."
@@ -393,6 +390,9 @@ msgid ""
 "SEANCE in return for voting rights and a fully composable token that can interact with other protocols.\n"
 "Your SEANCE is continuously compounding, when you unstake you will receive all the originally deposited\n"
 "SOUL and any additional from fees."
+msgstr ""
+
+msgid "Forum"
 msgstr ""
 
 msgid "French"
@@ -476,15 +476,6 @@ msgid "Italian"
 msgstr ""
 
 msgid "Japanese"
-msgstr ""
-
-msgid "Join Us on Discord."
-msgstr ""
-
-msgid "Join the community on Discord."
-msgstr "Tham gia cộng đồng trên Discord."
-
-msgid "Join the conversation on Telegram."
 msgstr ""
 
 msgid "Korean"
@@ -659,9 +650,6 @@ msgstr ""
 
 msgid "Open Orders"
 msgstr ""
-
-msgid "Open Source"
-msgstr "Mã nguồn mở"
 
 msgid "Oracle"
 msgstr "Oracle"
@@ -842,12 +830,6 @@ msgstr ""
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Đã xảy ra sự cố khi ký phê duyệt. Điều này được mong đợi đối với các ví cứng, chẳng hạn như Trezor và Ledger. Nhấp lại và phương pháp dự phòng sẽ được sử dụng"
 
-msgid "Soul Supports Open Source."
-msgstr ""
-
-msgid "Soul is a supporter of Open Source."
-msgstr ""
-
 msgid "SoulSwap"
 msgstr ""
 
@@ -894,9 +876,6 @@ msgstr "Hoán đổi sang (ước tính):"
 
 msgid "Swap To:"
 msgstr "Hoán đổi sang:"
-
-msgid "Telegram"
-msgstr ""
 
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""

@@ -17,9 +17,9 @@ import {
   FarmContentWrapper,
   TokenPairBox,
   FarmItemBox,
-  FarmItemHeading,
+  // FarmItemHeading,
   FarmItem,
-  ShowBtn,
+  // ShowBtn,
   DetailsContainer,
   DetailsWrapper,
   FunctionBox,
@@ -280,7 +280,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
-                  Apr
+                  APR
                 </Text>
                 <FarmItem>{apr ? (apr === 'Infinity' ? '∞%' : apr + '%') : '?'}</FarmItem>
               </FarmItemBox>

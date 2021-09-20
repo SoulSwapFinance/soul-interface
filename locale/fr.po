@@ -307,14 +307,8 @@ msgstr "Désactiver le Multihop"
 msgid "Disconnect"
 msgstr ""
 
-msgid "Discord"
-msgstr "Discord"
-
 msgid "Dismiss"
 msgstr "Rejeter"
-
-msgid "Docs"
-msgstr "Docs"
 
 msgid "Documentation for Summoners."
 msgstr ""
@@ -322,7 +316,10 @@ msgstr ""
 msgid "Documentation for developers of Soul."
 msgstr ""
 
-msgid "Documentation for users of Soul."
+msgid "Earn SOUL with SOUL-LP."
+msgstr ""
+
+msgid "Earn SOUL with SOUL."
 msgstr ""
 
 msgid "Either return to the {link}, or change to an available network."
@@ -395,6 +392,9 @@ msgid ""
 "SEANCE in return for voting rights and a fully composable token that can interact with other protocols.\n"
 "Your SEANCE is continuously compounding, when you unstake you will receive all the originally deposited\n"
 "SOUL and any additional from fees."
+msgstr ""
+
+msgid "Forum"
 msgstr ""
 
 msgid "French"
@@ -478,15 +478,6 @@ msgid "Italian"
 msgstr ""
 
 msgid "Japanese"
-msgstr ""
-
-msgid "Join Us on Discord."
-msgstr ""
-
-msgid "Join the community on Discord."
-msgstr "Rejoignez la communauté sur Discord."
-
-msgid "Join the conversation on Telegram."
 msgstr ""
 
 msgid "Korean"
@@ -661,9 +652,6 @@ msgstr ""
 
 msgid "Open Orders"
 msgstr ""
-
-msgid "Open Source"
-msgstr "Open source"
 
 msgid "Oracle"
 msgstr "Oracle"
@@ -844,12 +832,6 @@ msgstr ""
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Une erreur s'est produite lors de la signature de l'approbation. Cela peut arriver lors de l'utilisation de portefeuilles \"hardware\", tels que Trezor et Ledger. Cliquez à nouveau et la méthode de récupération sera utilisée"
 
-msgid "Soul Supports Open Source."
-msgstr ""
-
-msgid "Soul is a supporter of Open Source."
-msgstr ""
-
 msgid "SoulSwap"
 msgstr ""
 
@@ -896,9 +878,6 @@ msgstr "Swap pour (estimé):"
 
 msgid "Swap To:"
 msgstr "Swapper pour:"
-
-msgid "Telegram"
-msgstr ""
 
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""

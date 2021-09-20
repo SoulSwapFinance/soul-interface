@@ -10,7 +10,7 @@ import { useLingui } from '@lingui/react'
 const items = (i18n: I18n) => [
   {
     name: i18n._(t`Portal`),
-    description: i18n._(t`Documentation for Summoners.`),
+    description: i18n._(t`View our Ecosystem.`),
     href: 'https://port.soul.sh',
   },
   {
@@ -30,7 +30,7 @@ const items = (i18n: I18n) => [
   },
   {
     name: i18n._(t`Links`),
-    description: i18n._(t`Earn SOUL with SOUL.`),
+    description: i18n._(t`View our resources.`),
     href: 'https://link.soul.sh',
   },
   // {
