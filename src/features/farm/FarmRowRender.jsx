@@ -51,7 +51,7 @@ const TokenPair = styled(ExternalLink)`
   }
 `
 
-const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm, timeDelta }) => {
+const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   const { chainId, account } = useActiveWeb3React()
 
   const {
@@ -124,9 +124,9 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm, timeDelta
 
     if (rawAmount !== 0 && rawAmount !== undefined && rawAmount !== '' && rawAmount !== null) {
       const amount = ethers.utils.parseUnits(document.getElementById('unstake').value)
-      const fetched = await getWithdrawable(pid, timeDelta, amount) // pid, timeDelta, amount // todo: missing timeDelta
-      setFeeAmount(fetched[0]) // .toString())
-      setReceiving(fetched[1]) // .toString())
+      const fetched = await getWithdrawable(pid, amount)
+      setFeeAmount(fetched[0].toString())
+      setReceiving(fetched[1].toString())
     } else {
       setFeeAmount(0)
       setReceiving(0)
@@ -445,13 +445,18 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm, timeDelta
                   </SubmitButton>
                 </Wrap>
 
-                <Wrap padding="0" display="flex" justifyContent="space-between">
-                  <Text padding="0" color="#f13636">
-                    Fee Amount: {Number(feeAmount).toFixed(4)}
+                <Wrap padding="0">
+                  <Text fontSize=".9rem" padding="0" color="#d1571e">
+                    Unstaking before the fee timer is up results in paying the fee
                   </Text>
-                  <Text padding="0" color="#f13636">
-                    {/* Receiving: {amount - feeAmount} */}
-                  </Text>
+                  <Wrap padding="0" display="flex">
+                    <Text fontSize=".9rem" padding="0" color="#aaa">
+                      Fee Amount: {ethers.utils.formatUnits(feeAmount)}
+                    </Text>
+                    <Text fontSize=".9rem" padding="0 0 0 6.5rem" color="#aaa">
+                      Receiving: {ethers.utils.formatUnits(receiving)}
+                    </Text>
+                  </Wrap>
                 </Wrap>
               </FunctionBox>
             </DetailsWrapper>
