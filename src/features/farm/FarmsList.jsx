@@ -2,8 +2,12 @@ import FarmRowRender from './FarmRowRender'
 import { FarmPids } from './FarmPids'
 
 import { Wrap, Heading, Text } from '../../components/ReusableStyles'
+import useActiveWeb3React from '../../hooks/useActiveWeb3React'
+
 
 const FarmList = () => {
+  const { chainId, account } = useActiveWeb3React()
+
   // Display token pair - TODO:
   // 1) fetch total farms
   // 2) get lpTokenAddress from calling `poolInfo?.[0]`
@@ -15,7 +19,7 @@ const FarmList = () => {
       key={farm.pid}
       pid={farm.pid}
       lpSymbol={farm.lpSymbol}
-      lpToken={farm.lpAddresses[4002]} // TODO: update to 250
+      lpToken={farm.lpAddresses[chainId]} // TODO: update to 250
       token1={farm.token1}
       token2={farm.token2}
       farm={farm}

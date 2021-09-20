@@ -56,7 +56,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   const { chainId, account } = useActiveWeb3React()
 
   const { fetchPid0AprAndLiquidity, fetchUserLpTokenAllocInFarm, enterStaking, leaveStaking, pendingSoul, userInfo } =
-    useSoulSummoner(lpToken, farm.token1Address[4002], farm.token2Address[4002])
+    useSoulSummoner(lpToken, farm.token1Address[chainId], farm.token2Address[chainId])
   const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
 
   const [showing, setShowing] = useState(false)
@@ -89,8 +89,8 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     if (account) {
       const timer = setTimeout(() => {
         fetchPending()
-        getAprAndLiquidity()
-        fetchUserFarmAlloc()
+        // getAprAndLiquidity()
+        // fetchUserFarmAlloc()
 
         if (showing) {
           fetchBals()
@@ -421,6 +421,8 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 import { SummonerPid0 } from './StakePids'
 
 export const StakeList = () => {
+  const { chainId, account } = useActiveWeb3React()
+
   // Display token pair - TODO:
   // 1) fetch total farms
   // 2) get lpTokenAddress from calling `poolInfo?.[0]`
@@ -432,7 +434,7 @@ export const StakeList = () => {
       key={farm.pid}
       pid={farm.pid}
       lpSymbol={farm.lpSymbol}
-      lpToken={farm.lpAddresses[4002]} // TODO: update to 250
+      lpToken={farm.lpAddresses[chainId]} // TODO: update to 250
       token1={farm.token1}
       token2={farm.token2}
       farm={farm}
