@@ -33,7 +33,7 @@ export const FarmPids = [
   {
     pid: 3,
     token1: 'FTM',
-    token2: 'FETH',
+    token2: 'USDC',
     lpSymbol: 'FTM-USDC',
     lpAddresses: {
       4002: '',
@@ -54,6 +54,9 @@ export const FarmPids = [
     token1Address: tokens.WFTM,
     token2Address: tokens.WETH,
   },
+
+
+
   // {
   //   pid: 5,
   //   token1: "FTM",
