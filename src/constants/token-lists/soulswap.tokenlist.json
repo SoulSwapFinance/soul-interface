@@ -1,6 +1,6 @@
 {
   "name": "SoulSwap Token List",
-  "timestamp": "2021-08-30T00:31:47.842Z",
+  "timestamp": "2021-09-19T00:31:47.842Z",
   "version": {
     "major": 1,
     "minor": 1,
@@ -85,8 +85,6 @@
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/stake.jpg"
     },
-
-    
     {
       "address": "0x514910771AF9Ca656af840dff83E8264EcF986CA",
       "chainId": 1,
@@ -103,7 +101,6 @@
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/rune.jpg"
     },
-    
     {
       "address": "0xC011a73ee8576Fb46F5E1c5751cA3B9Fe0af2a6F",
       "chainId": 1,
@@ -129,102 +126,6 @@
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/sushi.jpg"
     },
     {
-      "address": "0x87eDfFDe3E14c7a66c9b9724747a1C5696b742e6",
-      "chainId": 1,
-      "name": "Swag Finance",
-      "symbol": "SWAG",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0x87eDfFDe3E14c7a66c9b9724747a1C5696b742e6/logo.png"
-    },
-    {
-      "address": "0xCC4304A31d09258b0029eA7FE63d032f52e44EFe",
-      "chainId": 1,
-      "name": "Trustswap",
-      "symbol": "SWAP",
-      "decimals": 18,
-      "logoURI": "https://assets.coingecko.com/coins/images/11795/small/Trustswap.png?1594311216"
-    },
-    {
-      "address": "0x99fE3B1391503A1bC1788051347A1324bff41452",
-      "chainId": 1,
-      "name": "SportX",
-      "symbol": "SX",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0x99fE3B1391503A1bC1788051347A1324bff41452/logo.png"
-    },
-    {
-      "address": "0x8CE9137d39326AD0cD6491fb5CC0CbA0e089b6A9",
-      "chainId": 1,
-      "name": "Swipe",
-      "symbol": "SXP",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/sxp.jpg"
-    },
-    {
-      "address": "0xa2B0fDe6D710e201d0d608e924A484d1A5fEd57c",
-      "chainId": 1,
-      "name": "Synth XRP",
-      "symbol": "sXRP",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/xrp.jpg"
-    },
-    {
-      "address": "0x8dAEBADE922dF735c38C80C7eBD708Af50815fAa",
-      "chainId": 1,
-      "name": "tBTC",
-      "symbol": "tBTC",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0x8dAEBADE922dF735c38C80C7eBD708Af50815fAa/logo.png"
-    },
-    {
-      "address": "0x16c52CeeCE2ed57dAd87319D91B5e3637d50aFa4",
-      "chainId": 1,
-      "name": "Total Crypto Market Cap Token",
-      "symbol": "TCAP",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0x16c52CeeCE2ed57dAd87319D91B5e3637d50aFa4/logo.png"
-    },
-    {
-      "address": "0xa1e72267084192Db7387c8CC1328fadE470e4149",
-      "chainId": 1,
-      "name": "TrueFi TrueUSD",
-      "symbol": "tfTUSD",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0xa1e72267084192Db7387c8CC1328fadE470e4149/logo.png"
-    },
-    {
-      "address": "0x00000000441378008EA67F4284A57932B1c000a5",
-      "chainId": 1,
-      "name": "TrueGBP",
-      "symbol": "TGBP",
-      "decimals": 18,
-      "logoURI": "https://assets.coingecko.com/coins/images/12724/large/TGBP.png"
-    },
-    {
-      "address": "0x05D3606d5c81EB9b7B18530995eC9B29da05FaBa",
-      "chainId": 1,
-      "name": "TomoChain",
-      "symbol": "TOMO",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/tomoe.jpg"
-    },
-    {
-      "address": "0x77777FeDdddFfC19Ff86DB637967013e6C6A116C",
-      "chainId": 1,
-      "name": "TORN Token",
-      "symbol": "TORN",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0x77777FeDdddFfC19Ff86DB637967013e6C6A116C/logo.png"
-    },
-    {
-      "address": "0x4C19596f5aAfF459fA38B0f7eD92F11AE6543784",
-      "chainId": 1,
-      "name": "TrueFi",
-      "symbol": "TRU",
-      "decimals": 8,
-      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/tru.jpg"
-    },
-    {
       "address": "0xE1Be5D3f34e89dE342Ee97E6e90D405884dA6c67",
       "chainId": 1,
       "name": "TRON",
@@ -241,69 +142,12 @@
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/try.jpg"
     },
     {
-      "address": "0x0000000000085d4780B73119b644AE5ecd22b376",
-      "chainId": 1,
-      "name": "TrueUSD",
-      "symbol": "TUSD",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/tusd.jpg"
-    },
-    {
-      "address": "0x8eEF5a82E6Aa222a60F009ac18c24EE12dBf4b41",
-      "chainId": 1,
-      "name": "Tixl Token",
-      "symbol": "TXL",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0x8eEF5a82E6Aa222a60F009ac18c24EE12dBf4b41/logo.png"
-    },
-    {
-      "address": "0x04Fa0d235C4abf4BcF4787aF4CF447DE572eF828",
-      "chainId": 1,
-      "name": "UMA Voting Token v1",
-      "symbol": "UMA",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/uma.jpg"
-    },
-    {
-      "address": "0x6fC13EACE26590B80cCCAB1ba5d51890577D83B2",
-      "chainId": 1,
-      "name": "Umbrella",
-      "symbol": "UMB",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0x6fC13EACE26590B80cCCAB1ba5d51890577D83B2/logo.png"
-    },
-    {
       "address": "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
       "chainId": 1,
       "name": "Uniswap",
       "symbol": "UNI",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/uni.jpg"
-    },
-    {
-      "address": "0xE4AE84448DB5CFE1DaF1e6fb172b469c161CB85F",
-      "chainId": 1,
-      "name": "Utopia Genesis Foundation",
-      "symbol": "UOP",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0xE4AE84448DB5CFE1DaF1e6fb172b469c161CB85F/logo.png"
-    },
-    
-    {
-      "address": "0x1c48f86ae57291F7686349F12601910BD8D470bb",
-      "chainId": 1,
-      "name": "USDK",
-      "symbol": "USDK",
-      "decimals": 18,
-      "logoURI": "https://assets.coingecko.com/coins/images/8824/small/usdk.png?1563418517"
-    },
-    {
-      "address": "0x674C6Ad92Fd080e4004b2312b45f796a192D27a0",
-      "chainId": 1,
-      "name": "Neutrino USD",
-      "symbol": "USDN",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0x674C6Ad92Fd080e4004b2312b45f796a192D27a0/logo.png"
     },
     {
       "address": "0x1456688345527bE1f37E9e627DA0837D6f08C925",
@@ -313,7 +157,6 @@
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0x1456688345527bE1f37E9e627DA0837D6f08C925/logo.png"
     },
-    
     {
       "address": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
       "chainId": 1,
@@ -321,14 +164,6 @@
       "symbol": "WBTC",
       "decimals": 8,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/btc.jpg"
-    },
-    {
-      "address": "0x76280AF9D18a868a0aF3dcA95b57DDE816c1aaf2",
-      "chainId": 1,
-      "name": "WaifuEnhancementToken",
-      "symbol": "WET",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0x76280AF9D18a868a0aF3dcA95b57DDE816c1aaf2/logo.png"
     },
     {
       "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
@@ -369,54 +204,6 @@
       "symbol": "YFI",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/yfi.jpg"
-    },
-    {
-      "address": "0x5dbcF33D8c2E976c6b560249878e6F1491Bca25c",
-      "chainId": 1,
-      "name": "yearn Curve",
-      "symbol": "yUSD",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0x5dbcF33D8c2E976c6b560249878e6F1491Bca25c/logo.png"
-    },
-    {
-      "address": "0x9d409a0A012CFbA9B15F6D4B36Ac57A46966Ab9a",
-      "chainId": 1,
-      "name": "Yearn Compounding veCRV yVault",
-      "symbol": "yvBOOST",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0x9d409a0A012CFbA9B15F6D4B36Ac57A46966Ab9a/logo.png"
-    },
-    {
-      "address": "0xc5bDdf9843308380375a611c18B50Fb9341f502A",
-      "chainId": 1,
-      "name": "veCRV-DAO yVault",
-      "symbol": "yveCRV-DAO",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0xc5bDdf9843308380375a611c18B50Fb9341f502A/logo.png"
-    },
-    {
-      "address": "0x837010619aeb2AE24141605aFC8f66577f6fb2e7",
-      "chainId": 1,
-      "name": "zHEGIC",
-      "symbol": "ZHEGIC",
-      "decimals": 18,
-      "logoURI": "https://static.alchemyapi.io/images/assets/7601.png"
-    },
-    {
-      "address": "0x7BeBd226154E865954A87650FAefA8F485d36081",
-      "chainId": 1,
-      "name": "ZigCoin",
-      "symbol": "ZIG",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0x7BeBd226154E865954A87650FAefA8F485d36081/logo.png"
-    },
-    {
-      "address": "0xA8e7AD77C60eE6f30BaC54E2E7c0617Bd7B5A03E",
-      "chainId": 1,
-      "name": "zLot Finance",
-      "symbol": "ZLOT",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0xA8e7AD77C60eE6f30BaC54E2E7c0617Bd7B5A03E/logo.png"
     },
     {
       "address": "0xE41d2489571d322189246DaFA5ebDe1F4699F498",

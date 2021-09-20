@@ -447,7 +447,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
                 <Wrap padding="0">
                   <Text fontSize=".9rem" padding="0" color="#c052ff">
-                    Withdrawal Fee: 14%, which reduces by 1% daily.
+                    Withdrawal fee: 14%, which reduces 1% daily.
                   </Text>
                   <Wrap padding="0" display="flex">
                     <Text fontSize=".9rem" padding="0" color="#aaa">
