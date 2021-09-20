@@ -1,8 +1,6 @@
 import {
   getMasterChefV2Farms,
   getMasterChefV2PairAddreses,
-  getMiniChefFarms,
-  getMiniChefPairAddreses,
   getSoulSummonerFarms,
   getSoulSummonerPairAddreses,
 } from '../fetchers'
@@ -39,30 +37,15 @@ export function useSoulSummonerFarms(swrConfig: SWRConfiguration = undefined) {
   }, [data])
 }
 
-export function useMiniChefFarms(swrConfig: SWRConfiguration = undefined) {
-  const { chainId } = useActiveWeb3React()
-  const shouldFetch = chainId && [ChainId.MATIC, ChainId.XDAI, ChainId.HARMONY].includes(chainId)
-  const { data } = useSWR(
-    shouldFetch ? ['miniChefFarms', chainId] : null,
-    (_, chainId) => getMiniChefFarms(chainId),
-    swrConfig
-  )
-  return useMemo(() => {
-    if (!data) return []
-    // return data.map((data) => ({ ...data, chef: Chef.MINICHEF }))
-  }, [data])
-}
-
 export function useFarms(swrConfig: SWRConfiguration = undefined) {
   const masterChefV2Farms = useMasterChefV2Farms()
   const soulSummonerFarms = useSoulSummonerFarms()
-  const miniChefFarms = useMiniChefFarms()
   // useEffect(() => {
-  //   console.log('debug', { masterChefV2Farms, miniChefFarms })
-  // }, [masterChefV2Farms, miniChefFarms])
+  //   console.log('debug', { masterChefV2Farms })
+  // }, [masterChefV2Farms])
   return useMemo(
-    () => concat(masterChefV2Farms, soulSummonerFarms, miniChefFarms).filter((pool) => pool && pool.pair),
-    [masterChefV2Farms, soulSummonerFarms, miniChefFarms]
+    () => concat(masterChefV2Farms, soulSummonerFarms).filter((pool) => pool && pool.pair),
+    [masterChefV2Farms, soulSummonerFarms]
   )
 }
 
@@ -90,24 +73,11 @@ export function useSoulSummonerPairAddresses() {
   }, [data])
 }
 
-export function useMiniChefPairAddresses() {
-  const { chainId } = useActiveWeb3React()
-  const shouldFetch = chainId && [ChainId.MATIC, ChainId.XDAI, ChainId.HARMONY].includes(chainId)
-  const { data } = useSWR(shouldFetch ? ['miniChefPairAddresses', chainId] : null, (_, chainId) =>
-    getMiniChefPairAddreses(chainId)
-  )
-  return useMemo(() => {
-    if (!data) return []
-    return data.map((data) => data.pair)
-  }, [data])
-}
-
 export function useFarmPairAddresses() {
   const masterChefV2PairAddresses = useMasterChefV2PairAddresses()
   const getSoulSummonerPairAddreses = useSoulSummonerPairAddresses()
-  const miniChefPairAddresses = useMiniChefPairAddresses()
   return useMemo(
-    () => concat(masterChefV2PairAddresses, getSoulSummonerPairAddreses, miniChefPairAddresses),
-    [masterChefV2PairAddresses, getSoulSummonerPairAddreses, miniChefPairAddresses]
+    () => concat(masterChefV2PairAddresses, getSoulSummonerPairAddreses),
+    [masterChefV2PairAddresses, getSoulSummonerPairAddreses]
   )
 }

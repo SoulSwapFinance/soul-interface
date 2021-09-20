@@ -384,9 +384,6 @@ msgstr "Colher {0} SOUL"
 msgid "Harvest {0} SOUL & {1} ALCX"
 msgstr ""
 
-msgid "Harvest {0} SOUL & {1} MATIC"
-msgstr "Colher {0} SOUL e {1} MATIC"
-
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers. It's as easy as deposit and withdraw whenever you want."
 msgstr "Você tem ativos sobre os quais deseja ganhar juros adicionais? Empreste-os em mercados isolados e ganhe juros dos tomadores de empréstimos. É tão fácil quanto depositar e sacar quando quiser."
 

@@ -1,6 +1,5 @@
 import {
   ARCHER_ROUTER_ADDRESS,
-  MINICHEF_ADDRESS,
   MINISUMMONER_ADDRESS,
   MULTICALL2_ADDRESS,
   ZAPPER_ADDRESS,
@@ -68,8 +67,6 @@ import anyswapEthOperaBridge_ABI from '../constants/abis/soulswap/bridge/anyswap
 // unused
 import MEOWSHI_ABI from '../constants/abis/meowshi.json'
 import MERKLE_DISTRIBUTOR_ABI from '../constants/abis/merkle-distributor.json'
-import MINICHEF_ABI from '../constants/abis/minichef-v2.json'
-import MINISUMMONER_ABI from '../constants/abis/minichef-v2.json'
 import MULTICALL2_ABI from '../constants/abis/multicall2.json'
 import PENDING_ABI from '../constants/abis/pending.json'
 import ROUTER_ABI from '../constants/abis/router.json'
@@ -134,9 +131,9 @@ export function useENSRegistrarContract(withSignerIfPossible?: boolean): Contrac
   if (chainId) {
     switch (chainId) {
       case ChainId.MAINNET:
-      case ChainId.GÖRLI:
-      case ChainId.ROPSTEN:
-      case ChainId.RINKEBY:
+      // case ChainId.GÖRLI:
+      // case ChainId.ROPSTEN:
+      // case ChainId.RINKEBY:
         address = '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e'
         break
     }
@@ -196,15 +193,6 @@ export function useMasterChefContract(withSignerIfPossible?: boolean): Contract 
 
 export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
   return useContract(SOUL_SUMMONER_ADDRESS[4002], SOUL_SUMMONER_ABI, withSignerIfPossible)
-}
-
-export function useMiniChefContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && MINICHEF_ADDRESS[chainId], MINICHEF_ABI, withSignerIfPossible)
-}
-export function useMiniSummonerContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && MINISUMMONER_ADDRESS[chainId], MINISUMMONER_ABI, withSignerIfPossible)
 }
 
 export function useFactoryContract(): Contract | null {
@@ -276,19 +264,6 @@ export function useSushiRollContract(version: 'v1' | 'v2' = 'v2'): Contract | nu
       case ChainId.MAINNET:
         address = '0x16E58463eb9792Bc236d8860F5BC69A81E26E32B'
         break
-      case ChainId.ROPSTEN:
-        address = '0xCaAbdD9Cf4b61813D4a52f980d6BC1B713FE66F5'
-        break
-      case ChainId.BSC:
-        if (version === 'v1') {
-          address = '0x677978dE066b3f5414eeA56644d9fCa3c75482a1'
-        } else if (version === 'v2') {
-          address = '0x2DD1aB1956BeD7C2d938d0d7378C22Fd01135a5e'
-        }
-        break
-      case ChainId.MATIC:
-        address = '0x0053957E18A0994D3526Cf879A4cA7Be88e8936A'
-        break
     }
   }
   return useContract(address, SUSHIROLL_ABI, true)
@@ -301,12 +276,6 @@ export function useDashboardContract(): Contract | null {
     switch (chainId) {
       case ChainId.MAINNET:
         address = '0xD132Ce8eA8865348Ac25E416d95ab1Ba84D216AF'
-        break
-      case ChainId.ROPSTEN:
-        address = '0xC95678C10CB8b3305b694FF4bfC14CDB8aD3AB35'
-        break
-      case ChainId.BSC:
-        address = '0xCFbc963f223e39727e7d4075b759E97035457b48'
         break
     }
   }

@@ -3,7 +3,6 @@ import React, { FunctionComponent, useMemo } from 'react'
 
 import Logo from '../Logo'
 import { WrappedTokenInfo } from '../../state/lists/wrappedTokenInfo'
-import { getMaticTokenLogoURL } from '../../constants/maticTokenMapping'
 import useHttpLocations from '../../hooks/useHttpLocations'
 
 export const getTokenLogoURL = (address: string, chainId: ChainId) => {
@@ -14,23 +13,13 @@ export const getTokenLogoURL = (address: string, chainId: ChainId) => {
     imageURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/${address}/logo.png`
   } else if (chainId === ChainId.FANTOM_TESTNET) {
     imageURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom-testnet/assets/${address}/logo.png`
-  } else if (chainId === ChainId.BSC) {
-    imageURL = `https://v1exchange.pancakeswap.finance/images/coins/${address}.png`
-  } else if (chainId === ChainId.MATIC) {
-    imageURL = getMaticTokenLogoURL(address)
-    return imageURL
   }
 }
 
 const BLOCKCHAIN = {
   [ChainId.MAINNET]: 'ethereum',
-  [ChainId.BSC]: 'binanace',
-  [ChainId.CELO]: 'celo',
   [ChainId.FANTOM]: 'fantom',
-  [ChainId.HARMONY]: 'harmony',
-  [ChainId.MATIC]: 'polygon',
-  [ChainId.XDAI]: 'xdai',
-  // [ChainId.OKEX]: 'okex',
+  // [ChainId.FANTOM_TESTNET]: 'fantom testnet'
 }
 
 function getCurrencySymbol(currency) {
@@ -79,24 +68,7 @@ const CeloLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master
 const logo: { readonly [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: EthereumLogo,
   [ChainId.FANTOM]: FantomLogo,
-  [ChainId.FANTOM_TESTNET]: FantomLogo,
-  [ChainId.MATIC]: MaticLogo,
-  [ChainId.MATIC_TESTNET]: MaticLogo,
-  [ChainId.XDAI]: xDaiLogo,
-  [ChainId.BSC]: BinanceCoinLogo,
-  [ChainId.BSC_TESTNET]: BinanceCoinLogo,
-  [ChainId.MOONBEAM_TESTNET]: MoonbeamLogo,
-  [ChainId.AVALANCHE]: AvalancheLogo,
-  [ChainId.AVALANCHE_TESTNET]: AvalancheLogo,
-  [ChainId.HECO]: HecoLogo,
-  [ChainId.HECO_TESTNET]: HecoLogo,
-  [ChainId.HARMONY]: HarmonyLogo,
-  [ChainId.HARMONY_TESTNET]: HarmonyLogo,
-  [ChainId.OKEX]: OKExLogo,
-  [ChainId.OKEX_TESTNET]: OKExLogo,
-  [ChainId.ARBITRUM]: EthereumLogo,
-  [ChainId.ARBITRUM_TESTNET]: EthereumLogo,
-  [ChainId.CELO]: CeloLogo,
+  [ChainId.FANTOM_TESTNET]: FantomLogo
 }
 
 interface CurrencyLogoProps {

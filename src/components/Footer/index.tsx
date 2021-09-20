@@ -33,29 +33,6 @@ const Footer = () => {
             </div>
           </ExternalLink>
         )}
-        {chainId && chainId === ChainId.MATIC && (
-          <ExternalLink
-            id={`polygon-bridge-link`}
-            href="https://wallet.matic.network/bridge/"
-            className="text-low-emphesis"
-          >
-            {i18n._(t`Matic Bridge`)}
-          </ExternalLink>
-        )}
-        {chainId && chainId === ChainId.HARMONY && (
-          <ExternalLink
-            id={`harmony-bridge-link`}
-            href=" https://bridge.harmony.one/tokens"
-            className="text-low-emphesis"
-          >
-            {i18n._(t`Harmony Bridge`)}
-          </ExternalLink>
-        )}
-        {chainId && chainId === ChainId.XDAI && (
-          <ExternalLink id={`xdai-bridge-link`} href=" https://omni.xdaichain.com/" className="text-low-emphesis">
-            {i18n._(t`xDai Bridge`)}
-          </ExternalLink>
-        )}
         <Polling />
       </div>
     </footer>

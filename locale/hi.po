@@ -392,9 +392,6 @@ msgstr "{0} SOUL को हार्वेस्ट करें"
 msgid "Harvest {0} SOUL & {1} ALCX"
 msgstr ""
 
-msgid "Harvest {0} SOUL & {1} MATIC"
-msgstr "{0} SOUL और {1} MATIC को हार्वेस्ट करें"
-
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers. It's as easy as deposit and withdraw whenever you want."
 msgstr "क्या आपके पास ऐसी संपत्ति है जिस पर आप अतिरिक्त ब्याज अर्जित करना चाहते हैं? उन्हें पृथक बाजारों में उधार दें और उधारकर्ताओं से ब्याज अर्जित करें। जब भी आप चाहें जमा करना और निकालना आसान है।"
 

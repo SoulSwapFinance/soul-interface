@@ -7,29 +7,27 @@ import { BigNumber } from 'ethers'
 
 export const RPC = {
   [ChainId.MAINNET]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
-  [ChainId.ROPSTEN]: 'https://eth-ropsten.alchemyapi.io/v2/cidKix2Xr-snU3f6f6Zjq_rYdalKKHmW',
-  [ChainId.RINKEBY]: 'https://eth-rinkeby.alchemyapi.io/v2/XVLwDlhGP6ApBXFz_lfv0aZ6VmurWhYD',
-  [ChainId.GÖRLI]: 'https://eth-goerli.alchemyapi.io/v2/Dkk5d02QjttYEoGmhZnJG37rKt8Yl3Im',
-  [ChainId.KOVAN]: 'https://eth-kovan.alchemyapi.io/v2/6OVAa_B_rypWWl9HqtiYK26IRxXiYqER',
   [ChainId.FANTOM]: 'https://rpcapi.fantom.network',
   [ChainId.FANTOM_TESTNET]: 'https://rpc.testnet.fantom.network',
-  [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com',
-  // [ChainId.MATIC]:
-  //     'https://apis.ankr.com/e22bfa5f5a124b9aa1f911b742f6adfe/c06bb163c3c2a10a4028959f4d82836d/polygon/full/main',
-  [ChainId.MATIC_TESTNET]: 'https://rpc-mumbai.matic.today',
-  [ChainId.XDAI]: 'https://rpc.xdaichain.com',
-  [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
-  [ChainId.BSC_TESTNET]: 'https://data-seed-prebsc-2-s3.binance.org:8545',
-  [ChainId.MOONBEAM_TESTNET]: 'https://rpc.testnet.moonbeam.network',
-  [ChainId.AVALANCHE]: 'https://api.avax.network/ext/bc/C/rpc',
-  [ChainId.AVALANCHE_TESTNET]: 'https://api.avax-test.network/ext/bc/C/rpc',
-  [ChainId.HECO]: 'https://http-mainnet.hecochain.com',
-  [ChainId.HECO_TESTNET]: 'https://http-testnet.hecochain.com',
-  [ChainId.HARMONY]: 'https://api.harmony.one',
-  [ChainId.HARMONY_TESTNET]: 'https://api.s0.b.hmny.io',
-  [ChainId.OKEX]: 'https://exchainrpc.okex.org',
-  [ChainId.OKEX_TESTNET]: 'https://exchaintestrpc.okex.org',
-  [ChainId.ARBITRUM]: 'https://arb1.arbitrum.io/rpc',
+  // [ChainId.ROPSTEN]: 'https://eth-ropsten.alchemyapi.io/v2/cidKix2Xr-snU3f6f6Zjq_rYdalKKHmW',
+  // [ChainId.RINKEBY]: 'https://eth-rinkeby.alchemyapi.io/v2/XVLwDlhGP6ApBXFz_lfv0aZ6VmurWhYD',
+  // [ChainId.GÖRLI]: 'https://eth-goerli.alchemyapi.io/v2/Dkk5d02QjttYEoGmhZnJG37rKt8Yl3Im',
+  // [ChainId.KOVAN]: 'https://eth-kovan.alchemyapi.io/v2/6OVAa_B_rypWWl9HqtiYK26IRxXiYqER',
+  // [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com',
+  // [ChainId.MATIC_TESTNET]: 'https://rpc-mumbai.matic.today',
+  // [ChainId.XDAI]: 'https://rpc.xdaichain.com',
+  // [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
+  // [ChainId.BSC_TESTNET]: 'https://data-seed-prebsc-2-s3.binance.org:8545',
+  // [ChainId.MOONBEAM_TESTNET]: 'https://rpc.testnet.moonbeam.network',
+  // [ChainId.AVALANCHE]: 'https://api.avax.network/ext/bc/C/rpc',
+  // [ChainId.AVALANCHE_TESTNET]: 'https://api.avax-test.network/ext/bc/C/rpc',
+  // [ChainId.HECO]: 'https://http-mainnet.hecochain.com',
+  // [ChainId.HECO_TESTNET]: 'https://http-testnet.hecochain.com',
+  // [ChainId.HARMONY]: 'https://api.harmony.one',
+  // [ChainId.HARMONY_TESTNET]: 'https://api.s0.b.hmny.io',
+  // [ChainId.OKEX]: 'https://exchainrpc.okex.org',
+  // [ChainId.OKEX_TESTNET]: 'https://exchaintestrpc.okex.org',
+  // [ChainId.ARBITRUM]: 'https://arb1.arbitrum.io/rpc',
 }
 
 export const POOL_DENY = ['14', '29', '45', '30']
@@ -248,7 +246,7 @@ export const BLOCKED_ADDRESSES: string[] = [
 // BentoBox Swappers
 export const BASE_SWAPPER: { [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: '0x0',
-  [ChainId.ROPSTEN]: '0xe4E2540D421e56b0B786d40c5F5268891288c6fb',
+  // [ChainId.ROPSTEN]: '0xe4E2540D421e56b0B786d40c5F5268891288c6fb',
 }
 
 // Soul Guide
@@ -256,20 +254,20 @@ export const SOUL_GUIDE_ADDRESS = '0x5A6B3Ce2736E9B731Fba73262884016b50c39184' /
 
 export const ANALYTICS_URL: { [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: 'https://analytics.soulswap.finance',
-  [ChainId.MATIC]: 'https://analytics-polygon.soulswap.finance',
   [ChainId.FANTOM]: 'https://analytics-ftm.soulswap.finance',
   [ChainId.FANTOM_TESTNET]: 'https://analytics-ftm-testnet.soulswap.finance',
-  [ChainId.BSC]: 'https://analytics-bsc.soulswap.finance',
-  [ChainId.XDAI]: 'https://analytics-xdai.soulswap.finance',
-  [ChainId.HARMONY]: 'https://analytics-harmony.soulswap.finance',
-  [ChainId.ARBITRUM]: undefined,
+  // [ChainId.MATIC]: 'https://analytics-polygon.soulswap.finance',
+  // [ChainId.BSC]: 'https://analytics-bsc.soulswap.finance',
+  // [ChainId.XDAI]: 'https://analytics-xdai.soulswap.finance',
+  // [ChainId.HARMONY]: 'https://analytics-harmony.soulswap.finance',
+  // [ChainId.ARBITRUM]: undefined,
 }
 
-export const EIP_1559_ACTIVATION_BLOCK: { [chainId in ChainId]?: number } = {
-  [ChainId.ROPSTEN]: 10499401,
-  [ChainId.GÖRLI]: 5062605,
-  [ChainId.RINKEBY]: 8897988,
-}
+// export const EIP_1559_ACTIVATION_BLOCK: { [chainId in ChainId]?: number } = {
+//   [ChainId.ROPSTEN]: 10499401,
+//   [ChainId.GÖRLI]: 5062605,
+//   [ChainId.RINKEBY]: 8897988,
+// }
 
 export * from './routing'
 export * from './addresses'

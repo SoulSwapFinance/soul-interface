@@ -62,7 +62,7 @@ function AppBar(): JSX.Element {
                         </a>
                       </NavLink>
                       )}
-                      { chainId && [ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/farm'}>
                           <a
                             id={`farm-nav-link`}
@@ -72,10 +72,7 @@ function AppBar(): JSX.Element {
                           </a>
                         </NavLink>
                       )}
-                      {/* {chainId &&
-                        [ChainId.MAINNET, ChainId.KOVAN, ChainId.BSC, ChainId.MATIC, ChainId.XDAI].includes(
-                          chainId
-                        ) && (
+                      {/* {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                           <>
                             <NavLink href={'/lend'}>
                               <a
@@ -95,7 +92,7 @@ function AppBar(): JSX.Element {
                             </NavLink>
                           </>
                         )} */}
-                        {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/stake'}>
                           <a
                             id={`stake-nav-link`}
@@ -104,7 +101,7 @@ function AppBar(): JSX.Element {
                             {i18n._(t`Stake`)}
                           </a>
                         </NavLink>
-                      )} */}
+                      )}
                       {chainId && [ChainId.MAINNET].includes(chainId) && (
                         <NavLink href={'/bridge'}>
                           <a
@@ -115,7 +112,7 @@ function AppBar(): JSX.Element {
                           </a>
                         </NavLink>
                       )}
-                      {chainId && [ChainId.MAINNET, ChainId.FANTOM].includes(chainId) && (
+                      {chainId && [ChainId.MAINNET, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/user'}>
                           <a
                             id={`bridge-nav-link`}
@@ -125,7 +122,7 @@ function AppBar(): JSX.Element {
                           </a>
                         </NavLink>
                       )}
-                      {/* {chainId === ChainId.MAINNET && (
+                      {/* {chainId === [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <Link href={'/miso'}>
                           <a
                             id={`miso-nav-link`}
@@ -201,7 +198,7 @@ function AppBar(): JSX.Element {
                                   address: SOUL_ADDRESS[chainId],
                                   symbol: 'SOUL',
                                   decimals: 18,
-                                  image: 'https://app.soulswap.finance/images/tokens/soul.jpg',
+                                  image: 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/soul.jpg',
                                 },
                               }
                               if (library && library.provider.isMetaMask && library.provider.request) {
@@ -326,7 +323,7 @@ function AppBar(): JSX.Element {
                   </a>
                 </Link>
                 )}
-                { chainId && [ChainId.FANTOM_TESTNET].includes(chainId) && (
+                { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <Link href={'/farm'}>
                     <a
                       id={`farm-nav-link`}
@@ -337,7 +334,7 @@ function AppBar(): JSX.Element {
                   </Link>
                 )}
 
-                {/* {chainId && [ChainId.MAINNET, ChainId.KOVAN, ChainId.BSC, ChainId.MATIC].includes(chainId) && (
+                {/* {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <>
                     <Link href={'/lend'}>
                       <a
@@ -358,7 +355,7 @@ function AppBar(): JSX.Element {
                     </Link>
                   </>
                 )} */}
-                  {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                  { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <Link href={'/stake'}>
                     <a
                       id={`stake-nav-link`}
@@ -367,7 +364,7 @@ function AppBar(): JSX.Element {
                       {i18n._(t`Stake`)}
                     </a>
                   </Link>
-                )} */}
+                )}
                   {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                       <ExternalLink
                       id={`analytics-nav-link`}
@@ -378,7 +375,7 @@ function AppBar(): JSX.Element {
                     </ExternalLink>
                   )} */}
 
-                {/* {chainId === ChainId.MAINNET && (
+                  {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <Link href={'/miso'}>
                     <a
                       id={`stake-nav-link`}
