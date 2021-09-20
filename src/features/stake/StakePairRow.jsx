@@ -85,12 +85,13 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   /**
    * Runs on initial render/mount and  reruns every second
    */
+  // fetchUserFarmAlloc()
   useEffect(() => {
     if (account) {
       const timer = setTimeout(() => {
         fetchPending()
-        // getAprAndLiquidity()
-        // fetchUserFarmAlloc()
+        getAprAndLiquidity()
+        
 
         if (showing) {
           fetchBals()

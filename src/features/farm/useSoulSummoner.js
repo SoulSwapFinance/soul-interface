@@ -12,8 +12,8 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
   const lpTokenContract = usePairContract(lpToken)
   const token1Contract = useTokenContract(token1Address)
   const token2Contract = useTokenContract(token2Address)
-  const soulContract = useTokenContract(FarmPids[0].token1Address[chainId])
-  const fusdContract = useTokenContract(FarmPids[0].token2Address[chainId])
+  const soulContract = useTokenContract(FarmPids[2].token1Address[chainId])
+  const fusdContract = useTokenContract(FarmPids[2].token2Address[chainId])
 
   // -----------------------
   //  Staking Funcs
@@ -293,8 +293,8 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
    */
   const fusdPerSoul = async () => {
     try {
-      const totalSoul = await soulContract.balanceOf(FarmPids[0].lpAddresses[chainId])
-      const totalFusd = await fusdContract.balanceOf(FarmPids[0].lpAddresses[chainId])
+      const totalSoul = await soulContract.balanceOf(FarmPids[2].lpAddresses[chainId])
+      const totalFusd = await fusdContract.balanceOf(FarmPids[2].lpAddresses[chainId])
 
       const fusdPerSoul = totalFusd / totalSoul
 
