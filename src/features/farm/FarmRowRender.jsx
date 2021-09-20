@@ -51,7 +51,7 @@ const TokenPair = styled(ExternalLink)`
   }
 `
 
-const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
+const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm, timeDelta }) => {
   const { chainId, account } = useActiveWeb3React()
 
   const {
@@ -124,9 +124,9 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
     if (rawAmount !== 0 && rawAmount !== undefined && rawAmount !== '' && rawAmount !== null) {
       const amount = ethers.utils.parseUnits(document.getElementById('unstake').value)
-      const fetched = await getWithdrawable(pid, amount)
-      setFeeAmount(fetched[0].toString())
-      setReceiving(fetched[1].toString())
+      const fetched = await getWithdrawable(pid, timeDelta, amount) // pid, timeDelta, amount // todo: missing timeDelta
+      setFeeAmount(fetched[0]) // .toString())
+      setReceiving(fetched[1]) // .toString())
     } else {
       setFeeAmount(0)
       setReceiving(0)
@@ -447,10 +447,10 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
                 <Wrap padding="0" display="flex" justifyContent="space-between">
                   <Text padding="0" color="#f13636">
-                    Fee Amount: {ethers.utils.formatUnits(feeAmount)}
+                    Fee Amount: {Number(feeAmount).toFixed(4)}
                   </Text>
                   <Text padding="0" color="#f13636">
-                    Receiving: {ethers.utils.formatUnits(receiving)}
+                    {/* Receiving: {amount - feeAmount} */}
                   </Text>
                 </Wrap>
               </FunctionBox>
