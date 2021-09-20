@@ -388,14 +388,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     MAX
                   </ClickableText>
                 </FlexText>
-                <Input
-                  name="unstake"
-                  id="unstake"
-                  type="number"
-                  placeholder="0.0"
-                  min="0"
-                  onChange={() => fetchWithdrawable()}
-                />
+                <Input name="unstake" id="unstake" type="number" placeholder="0.0" min="0" />
 
                 <Wrap padding="0" margin="0" display="flex">
                   <SubmitButton
