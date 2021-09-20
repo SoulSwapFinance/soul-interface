@@ -11,27 +11,15 @@ import NavLink from '../NavLink'
 
 const items = (i18n: I18n) => [
   {
-    name: i18n._(t`Docs`),
-    description: i18n._(t`Documentation for users of Soul.`),
-    href: 'https://docs.soulswap.finance',
-    external: true,
-  },
-  {
     name: i18n._(t`Portal`),
     description: i18n._(t`Documentation for developers of Soul.`),
     href: 'https://port.soul.sh',
     external: true,
   },
   {
-    name: i18n._(t`Open Source`),
-    description: i18n._(t`Soul is a supporter of Open Source.`),
-    href: 'https://github.com/soulswapfinance',
-    external: true,
-  },
-  {
-    name: i18n._(t`Vote`),
+    name: i18n._(t`Forum`),
     description: i18n._(t`Use SoulPower to Enchant Soul.`),
-    href: 'https://enchant.soulswap.finance',
+    href: 'https://forum.soulswap.finance',
     external: true,
   },
   {
@@ -40,18 +28,18 @@ const items = (i18n: I18n) => [
     href: 'https://twitter.com/SoulSwapFinance',
     external: true,
   },
-  {
-    name: i18n._(t`Telegram`),
-    description: i18n._(t`Join the conversation on Telegram.`),
-    href: 'https://t.me/SoulSwapDeFi',
-    external: true,
-  },
-  {
-    name: i18n._(t`Discord`),
-    description: i18n._(t`Join the community on Discord.`),
-    href: 'https://discord.gg/DQjChB6Wa6', // 19 SEP
-    external: true,
-  },
+  // {
+  //   name: i18n._(t`Telegram`),
+  //   description: i18n._(t`Join the conversation on Telegram.`),
+  //   href: 'https://t.me/SoulSwapDeFi',
+  //   external: true,
+  // },
+  // {
+  //   name: i18n._(t`Discord`),
+  //   description: i18n._(t`Join the community on Discord.`),
+  //   href: 'https://discord.gg/DQjChB6Wa6', // 19 SEP
+  //   external: true,
+  // },
   {
     name: i18n._(t`Links`),
     description: i18n._(t`View all of our links to discover our ecosystem`),
