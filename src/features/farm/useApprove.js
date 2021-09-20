@@ -18,7 +18,6 @@ function useApproveContract(tokenAddress) {
   }
 
   const erc20Approve = async (spender) => {
-
     try {
       const result = await contract.approve(
         spender,
@@ -32,7 +31,6 @@ function useApproveContract(tokenAddress) {
   }
 
   const erc20Allowance = async (owner, spender) => {
-    
     try {
       const result = await contract.allowance(owner, spender)
       // console.log('allowance for user', result)
