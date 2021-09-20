@@ -1,7 +1,7 @@
-import BSC from './bsc'
+// import BSC from './bsc'
 import { ChainId } from '@soulswap/sdk'
-import HECO from './heco'
-import KOVAN from './kovan'
+// import HECO from './heco'
+// import KOVAN from './kovan'
 import MAINNET from './mainnet'
 import MATIC from './matic'
 

@@ -18,14 +18,14 @@ import { request } from 'graphql-request'
 
 export const EXCHANGE = {
   [ChainId.MAINNET]: 'sushiswap/exchange',
-  [ChainId.XDAI]: 'sushiswap/xdai-exchange',
-  [ChainId.MATIC]: 'sushiswap/matic-exchange',
   [ChainId.FANTOM]: 'sushiswap/fantom-exchange',
-  [ChainId.BSC]: 'sushiswap/bsc-exchange',
-  [ChainId.HARMONY]: 'sushiswap/harmony-exchange',
-  [ChainId.OKEX]: 'sushiswap/okex-exchange',
-  [ChainId.AVALANCHE]: 'sushiswap/avalanche-exchange',
-  [ChainId.CELO]: 'sushiswap/celo-exchange',
+  // [ChainId.XDAI]: 'sushiswap/xdai-exchange',
+  // [ChainId.MATIC]: 'sushiswap/matic-exchange',
+  // [ChainId.BSC]: 'sushiswap/bsc-exchange',
+  // [ChainId.HARMONY]: 'sushiswap/harmony-exchange',
+  // [ChainId.OKEX]: 'sushiswap/okex-exchange',
+  // [ChainId.AVALANCHE]: 'sushiswap/avalanche-exchange',
+  // [ChainId.CELO]: 'sushiswap/celo-exchange',
 }
 
 export const exchange = async (chainId = ChainId.MAINNET, query, variables) =>
@@ -80,12 +80,12 @@ export const getCvxPrice = async () => {
   })
 }
 
-export const getMaticPrice = async () => {
-  // console.log('getMaticPrice')
-  return getTokenPrice(ChainId.MATIC, tokenPriceQuery, {
-    id: '0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270',
-  })
-}
+// export const getMaticPrice = async () => {
+//   // console.log('getMaticPrice')
+//   return getTokenPrice(ChainId.MATIC, tokenPriceQuery, {
+//     id: '0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270',
+//   })
+// }
 
 export const getAlcxPrice = async () => {
   // console.log('getAlcxPrice')
@@ -113,17 +113,17 @@ export const getSushiPrice = async () => {
   })
 }
 
-export const getStakePrice = async () => {
-  return getTokenPrice(ChainId.XDAI, tokenPriceQuery, {
-    id: '0xb7d311e2eb55f2f68a9440da38e7989210b9a05e',
-  })
-}
+// export const getStakePrice = async () => {
+//   return getTokenPrice(ChainId.XDAI, tokenPriceQuery, {
+//     id: '0xb7d311e2eb55f2f68a9440da38e7989210b9a05e',
+//   })
+// }
 
-export const getOnePrice = async () => {
-  return getTokenPrice(ChainId.HARMONY, tokenPriceQuery, {
-    id: '0xcf664087a5bb0237a0bad6742852ec6c8d69a27a',
-  })
-}
+// export const getOnePrice = async () => {
+//   return getTokenPrice(ChainId.HARMONY, tokenPriceQuery, {
+//     id: '0xcf664087a5bb0237a0bad6742852ec6c8d69a27a',
+//   })
+// }
 
 export const getBundle = async (
   chainId = ChainId.MAINNET,

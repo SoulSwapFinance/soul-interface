@@ -4,11 +4,11 @@ import {
   getBundle,
   getCvxPrice,
   getLiquidityPositions,
-  getMaticPrice,
-  getOnePrice,
+  // getMaticPrice,
+  // getOnePrice,
   getPicklePrice,
   getMphPrice,
-  getStakePrice,
+  // getStakePrice,
   getSushiPrice,
   getTokens,
   getDayData,
@@ -54,19 +54,19 @@ export function useEthPrice(variables = undefined, swrConfig: SWRConfiguration =
   return data
 }
 
-export function useStakePrice(swrConfig: SWRConfiguration = undefined) {
-  const { chainId } = useActiveWeb3React()
-  const shouldFetch = chainId && chainId === ChainId.XDAI
-  const { data } = useSWR(shouldFetch ? 'stakePrice' : null, () => getStakePrice(), swrConfig)
-  return data
-}
+// export function useStakePrice(swrConfig: SWRConfiguration = undefined) {
+//   const { chainId } = useActiveWeb3React()
+//   const shouldFetch = chainId && chainId === ChainId.XDAI
+//   const { data } = useSWR(shouldFetch ? 'stakePrice' : null, () => getStakePrice(), swrConfig)
+//   return data
+// }
 
-export function useOnePrice(swrConfig: SWRConfiguration = undefined) {
-  const { chainId } = useActiveWeb3React()
-  const shouldFetch = chainId && chainId === ChainId.HARMONY
-  const { data } = useSWR(shouldFetch ? 'onePrice' : null, () => getOnePrice(), swrConfig)
-  return data
-}
+// export function useOnePrice(swrConfig: SWRConfiguration = undefined) {
+//   const { chainId } = useActiveWeb3React()
+//   const shouldFetch = chainId && chainId === ChainId.HARMONY
+//   const { data } = useSWR(shouldFetch ? 'onePrice' : null, () => getOnePrice(), swrConfig)
+//   return data
+// }
 
 export function useAlcxPrice(swrConfig: SWRConfiguration = undefined) {
   const { chainId } = useActiveWeb3React()
@@ -96,11 +96,11 @@ export function useMphPrice(swrConfig: SWRConfiguration = undefined) {
   return data
 }
 
-export function useMaticPrice(swrConfig: SWRConfiguration = undefined) {
-  const { chainId } = useActiveWeb3React()
-  const { data } = useSWR(chainId && chainId === ChainId.MATIC ? 'maticPrice' : null, () => getMaticPrice(), swrConfig)
-  return data
-}
+// export function useMaticPrice(swrConfig: SWRConfiguration = undefined) {
+//   const { chainId } = useActiveWeb3React()
+//   const { data } = useSWR(chainId && chainId === ChainId.MATIC ? 'maticPrice' : null, () => getMaticPrice(), swrConfig)
+//   return data
+// }
 
 export function useSushiPrice(swrConfig: SWRConfiguration = undefined) {
   const { data } = useSWR('sushiPrice', () => getSushiPrice(), swrConfig)

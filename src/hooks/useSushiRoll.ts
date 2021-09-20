@@ -16,9 +16,10 @@ const useSushiRoll = (version: 'v1' | 'v2' = 'v2') => {
 
   if (chainId === ChainId.MAINNET) {
     from = 'Uniswap'
-  } else if (chainId === ChainId.BSC) {
-    from = 'PancakeSwap'
-  }
+  } 
+  // else if (chainId === ChainId.BSC) {
+  //   from = 'PancakeSwap'
+  // }
 
   const migrate = useCallback(
     async (lpToken: LPToken, amount: ethers.BigNumber) => {

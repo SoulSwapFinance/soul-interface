@@ -1,4 +1,4 @@
-import { ARCHER_RELAY_URI, BIPS_BASE, EIP_1559_ACTIVATION_BLOCK } from '../constants'
+import { ARCHER_RELAY_URI, BIPS_BASE } from '../constants'
 import {
   ChainId,
   Currency,
@@ -225,8 +225,8 @@ export function useSwapCallback(
 
   const blockNumber = useBlockNumber()
 
-  const eip1559 =
-    EIP_1559_ACTIVATION_BLOCK[chainId] == undefined ? false : blockNumber >= EIP_1559_ACTIVATION_BLOCK[chainId]
+  // const eip1559 =
+  //   EIP_1559_ACTIVATION_BLOCK[chainId] == undefined ? false : blockNumber >= EIP_1559_ACTIVATION_BLOCK[chainId]
 
   const useArcher = archerRelayDeadline !== undefined
 
@@ -354,7 +354,8 @@ export function useSwapCallback(
               data: calldata,
               // let the wallet try if we can't estimate the gas
               ...('gasEstimate' in bestCallOption ? { gasLimit: calculateGasMargin(bestCallOption.gasEstimate) } : {}),
-              gasPrice: !eip1559 && chainId === ChainId.HARMONY ? BigNumber.from('2000000000') : undefined,
+              // gasPrice: !eip1559 && chainId === ChainId.HARMONY ? BigNumber.from('2000000000') : undefined,
+              gasPrice: undefined,
               ...(value && !isZero(value) ? { value } : {}),
             })
             .then((response) => {
@@ -430,7 +431,8 @@ export function useSwapCallback(
               // let the wallet try if we can't estimate the gas
               ...('gasEstimate' in bestCallOption ? { gasLimit: calculateGasMargin(bestCallOption.gasEstimate) } : {}),
               ...(value && !isZero(value) ? { value } : {}),
-              ...(archerRelayDeadline && !eip1559 ? { gasPrice: 0 } : {}),
+              // ...(archerRelayDeadline && !eip1559 ? { gasPrice: 0 } : {}),
+              ...(archerRelayDeadline ? { gasPrice: 0 } : {}),
             })
           })
 

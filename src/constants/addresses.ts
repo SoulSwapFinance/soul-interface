@@ -10,8 +10,8 @@ export const ARCHER_ROUTER_ADDRESS: AddressMap = {
 
 export const SOUL_SUMMONER_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
-  [ChainId.FANTOM]: '',
-  [ChainId.FANTOM_TESTNET]: '0xA65DbEA56E1E202bf03dB5f49ba565fb00Bf9288', // 30 JUL
+  [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B', // 20 SEP,
+  [ChainId.FANTOM_TESTNET]: '0x70C6A37244feD0Fa4e4148D5ffe38a209dCEd714', // 20 SEP
 }
 
 export const ZAPPER_ADDRESS: AddressMap = {

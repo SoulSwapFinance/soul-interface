@@ -1,6 +1,5 @@
 import {
   ARCHER_ROUTER_ADDRESS,
-  MINISUMMONER_ADDRESS,
   MULTICALL2_ADDRESS,
   ZAPPER_ADDRESS,
 } from '../constants/addresses'
@@ -33,7 +32,7 @@ import {
   SOULSWAP_TWAP_0_ORACLE_ADDRESS,
   SOULSWAP_TWAP_1_ORACLE_ADDRESS,
 } from '../constants/kashi'
-import { MERKLE_DISTRIBUTOR_ADDRESS, SOUL } from '../constants'
+import { MERKLE_DISTRIBUTOR_ADDRESS } from '../constants'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from '../constants/multicall'
 import ALCX_REWARDER_ABI from '../constants/abis/alcx-rewarder.json'
 import CLONE_REWARDER_ABI from '../constants/abis/clone-rewarder.json'
@@ -188,11 +187,13 @@ export function useSoulVaultContract(withSignerIfPossible = true): Contract | nu
 }
 
 export function useMasterChefContract(withSignerIfPossible?: boolean): Contract | null {
-  return useContract('0xA65DbEA56E1E202bf03dB5f49ba565fb00Bf9288', SOUL_SUMMONER_ABI, withSignerIfPossible) // 31 JUL (SOUL SUMMONER)
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible) // 31 JUL (SOUL SUMMONER)
 }
 
 export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
-  return useContract(SOUL_SUMMONER_ADDRESS[4002], SOUL_SUMMONER_ABI, withSignerIfPossible)
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible)
 }
 
 export function useFactoryContract(): Contract | null {

@@ -123,7 +123,7 @@ export function CurrencySearch({
 
   // const ether = useMemo(() => chainId && ExtendedEther.onChain(chainId), [chainId])
 
-  const ether = useMemo(() => chainId && ![ChainId.CELO].includes(chainId) && NATIVE[chainId], [chainId])
+  const ether = useMemo(() => chainId && ![].includes(chainId) && NATIVE[chainId], [chainId])
 
   const filteredSortedTokensWithETH: Currency[] = useMemo(() => {
     const s = debouncedQuery.toLowerCase().trim()

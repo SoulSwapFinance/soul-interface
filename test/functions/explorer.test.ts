@@ -18,8 +18,8 @@ describe('utils', () => {
     it('ropsten', () => {
       expect(getExplorerLink(3, 'abc', 'address')).toEqual('https://ropsten.etherscan.io/address/abc')
     })
-    it('enum', () => {
-      expect(getExplorerLink(ChainId.RINKEBY, 'abc', 'address')).toEqual('https://rinkeby.etherscan.io/address/abc')
-    })
+    // it('enum', () => {
+    //   expect(getExplorerLink(ChainId.RINKEBY, 'abc', 'address')).toEqual('https://rinkeby.etherscan.io/address/abc')
+    // })
   })
 })

@@ -372,6 +372,7 @@ function OpenOrdersPage() {
   )
 }
 
-OpenOrdersPage.Guard = NetworkGuard([ChainId.MATIC])
+// OpenOrdersPage.Guard = NetworkGuard([ChainId.MATIC])
+OpenOrdersPage.Guard = NetworkGuard([ChainId.FANTOM_TESTNET])
 
 export default OpenOrdersPage

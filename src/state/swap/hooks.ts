@@ -55,7 +55,7 @@ export function useSwapActionHandlers(): {
           field,
           currencyId: currency.isToken
             ? currency.address
-            : currency.isNative && currency.chainId !== ChainId.CELO
+            : currency.isNative
             ? 'FTM'
             : '',
         })
@@ -332,12 +332,12 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId 
   let inputCurrency = parseCurrencyFromURLParameter(parsedQs.inputCurrency)
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
   if (inputCurrency === '' && outputCurrency === '') {
-    if (chainId === ChainId.CELO) {
-      inputCurrency = WNATIVE[chainId].address
-    } else {
+    // if (chainId === ChainId.CELO) {
+    //   inputCurrency = WNATIVE[chainId].address
+    // } else {
       // default to FTM input
       inputCurrency = 'FTM'
-    }
+    // }
   } else if (inputCurrency === outputCurrency) {
     // clear output if identical
     outputCurrency = ''

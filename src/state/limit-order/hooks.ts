@@ -256,7 +256,7 @@ export function queryParametersToSwapState(chainId: ChainId, parsedQs: ParsedQs)
   let inputCurrency = parseCurrencyFromURLParameter(parsedQs.inputCurrency)
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
   if (inputCurrency === '' && outputCurrency === '') {
-    inputCurrency = NATIVE[chainId].address
+    inputCurrency = WNATIVE[chainId].address // from NATIVE (20 SEP)
   } else if (inputCurrency === outputCurrency) {
     outputCurrency = ''
   }

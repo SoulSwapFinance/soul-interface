@@ -117,7 +117,7 @@ async function getPairs(bentoBoxContract: any, chainId: ChainId) {
   let logs = []
   let success = false
   const masterAddress = UNDERWORLD_ADDRESS[chainId]
-  if (chainId !== ChainId.BSC && chainId !== ChainId.MATIC) {
+  if (chainId !== ChainId.MAINNET) {
     logs = await bentoBoxContract.queryFilter(bentoBoxContract.filters.LogDeploy(masterAddress))
     success = true
   }
@@ -210,7 +210,7 @@ export function KashiProvider({ children }) {
     if (
       !account ||
       !chainId ||
-      ![ChainId.MAINNET, ChainId.KOVAN, ChainId.BSC, ChainId.MATIC, ChainId.XDAI].includes(chainId)
+      ![ChainId.MAINNET, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId)
     ) {
       return
     }
