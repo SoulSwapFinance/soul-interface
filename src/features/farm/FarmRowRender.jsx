@@ -64,7 +64,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     dailyDecay,
     getWithdrawable,
     getFeePercent,
-  } = useSoulSummoner(lpToken, farm.token1Address[4002], farm.token2Address[4002])
+  } = useSoulSummoner(lpToken, farm.token1Address[chainId], farm.token2Address[chainId])
   const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
 
   const [showing, setShowing] = useState(false)
@@ -212,10 +212,8 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     if (!account) {
       alert('connect wallet')
     } else {
-      // console.log(account, 'account')
-      const user = account
       // Checks if SoulSummoner can move tokens
-      const amount = await erc20Allowance(user, SoulSummonerAddress)
+      const amount = await erc20Allowance(account, SoulSummonerAddress)
       if (amount > 0) setApproved(true)
       return amount
     }
@@ -259,7 +257,8 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     try {
       // console.log('withdrawing', amount.toString())
       const tx = await withdraw(pid, amount)
-      await tx.wait().then(await fetchBals(pid))
+      await tx.wait()
+      await fetchBals(pid)
     } catch (e) {
       alert(e.message)
       console.log(e)
@@ -273,16 +272,13 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     try {
       // console.log('depositing', amount.toString())
       const tx = await deposit(pid, amount)
-      await tx.wait().then(await fetchBals(pid))
+      await tx.wait()
+      await fetchBals(pid)
     } catch (e) {
       alert(e.message)
       console.log(e)
     }
   }
-
-  const fetchWithdrawalFee = async () => {}
-
-  const calculateWithdrawalFee = async (amount) => {}
 
   return (
     <>
@@ -446,8 +442,8 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 </Wrap>
 
                 <Wrap padding="0">
-                  <Text fontSize=".9rem" padding="0" color="#c052ff">
-                    Withdrawal fee: 14%, which reduces 1% daily.
+                  <Text fontSize=".9rem" padding="0" color="#d1571e">
+                    Unstaking before the fee timer is up results in paying the fee
                   </Text>
                   <Wrap padding="0" display="flex">
                     <Text fontSize=".9rem" padding="0" color="#aaa">
