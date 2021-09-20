@@ -18,6 +18,12 @@
                 "internalType": "address",
                 "name": "team",
                 "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "admin",
+                "type": "address"
             }
         ],
         "name": "AccountsUpdated",
@@ -46,6 +52,31 @@
             }
         ],
         "name": "Deposit",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "_pid",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "_user",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "_time",
+                "type": "uint256"
+            }
+        ],
+        "name": "DepositRevised",
         "type": "event"
     },
     {
@@ -89,25 +120,6 @@
             }
         ],
         "name": "Initialized",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": true,
-                "internalType": "address",
-                "name": "previousOwner",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "internalType": "address",
-                "name": "newOwner",
-                "type": "address"
-            }
-        ],
-        "name": "OwnershipTransferred",
         "type": "event"
     },
     {
@@ -291,6 +303,19 @@
         "inputs": [
             {
                 "indexed": false,
+                "internalType": "uint256",
+                "name": "startRate",
+                "type": "uint256"
+            }
+        ],
+        "name": "StartRateUpdated",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
                 "internalType": "address",
                 "name": "soul",
                 "type": "address"
@@ -355,13 +380,7 @@
             {
                 "indexed": false,
                 "internalType": "uint256",
-                "name": "received",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "feeAmount",
+                "name": "amount",
                 "type": "uint256"
             },
             {
@@ -516,20 +535,39 @@
         "inputs": [
             {
                 "internalType": "uint256",
-                "name": "pid",
+                "name": "amount",
                 "type": "uint256"
             }
         ],
-        "name": "getFeePercent",
+        "name": "fromWei",
         "outputs": [
             {
                 "internalType": "uint256",
-                "name": "fee",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "pid",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "discount",
+                "name": "timeDelta",
+                "type": "uint256"
+            }
+        ],
+        "name": "getFeeRate",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "feeRate",
                 "type": "uint256"
             }
         ],
@@ -588,6 +626,11 @@
             },
             {
                 "internalType": "uint256",
+                "name": "timeDelta",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
                 "name": "amount",
                 "type": "uint256"
             }
@@ -632,25 +675,6 @@
                 "internalType": "bytes32",
                 "name": "role",
                 "type": "bytes32"
-            }
-        ],
-        "name": "hasDivineRole",
-        "outputs": [
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "bytes32",
-                "name": "role",
-                "type": "bytes32"
             },
             {
                 "internalType": "address",
@@ -670,43 +694,7 @@
         "type": "function"
     },
     {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "_soulAddress",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "_seanceAddress",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_totalWeight",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_weight",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_stakingAlloc",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_startRate",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_dailyDecay",
-                "type": "uint256"
-            }
-        ],
+        "inputs": [],
         "name": "initialize",
         "outputs": [],
         "stateMutability": "nonpayable",
@@ -798,38 +786,6 @@
         "type": "function"
     },
     {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-            }
-        ],
-        "name": "oneHundreth",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "pure",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "owner",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
         "inputs": [],
         "name": "paused",
         "outputs": [
@@ -911,13 +867,6 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "renounceOwnership",
-        "outputs": [],
-        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -1101,7 +1050,7 @@
     },
     {
         "inputs": [],
-        "name": "team",
+        "name": "supreme",
         "outputs": [
             {
                 "internalType": "address",
@@ -1113,19 +1062,13 @@
         "type": "function"
     },
     {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "pid",
-                "type": "uint256"
-            }
-        ],
-        "name": "timeUntilNextDecrease",
+        "inputs": [],
+        "name": "team",
         "outputs": [
             {
-                "internalType": "uint256",
+                "internalType": "address",
                 "name": "",
-                "type": "uint256"
+                "type": "address"
             }
         ],
         "stateMutability": "view",
@@ -1161,25 +1104,17 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "newOwner",
-                "type": "address"
-            }
-        ],
-        "name": "transferOwnership",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
                 "name": "_dao",
                 "type": "address"
             },
             {
                 "internalType": "address",
                 "name": "_team",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "_supreme",
                 "type": "address"
             }
         ],
@@ -1217,6 +1152,19 @@
     {
         "inputs": [
             {
+                "internalType": "uint256",
+                "name": "_startRate",
+                "type": "uint256"
+            }
+        ],
+        "name": "updateStartRate",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "address",
                 "name": "_soul",
                 "type": "address"
@@ -1238,9 +1186,14 @@
                 "internalType": "uint256",
                 "name": "_weight",
                 "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_totalWeight",
+                "type": "uint256"
             }
         ],
-        "name": "updateWeight",
+        "name": "updateWeights",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -1251,13 +1204,18 @@
                 "internalType": "uint256",
                 "name": "_pid",
                 "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "_user",
+                "type": "address"
             }
         ],
         "name": "userDelta",
         "outputs": [
             {
                 "internalType": "uint256",
-                "name": "",
+                "name": "delta",
                 "type": "uint256"
             }
         ],
