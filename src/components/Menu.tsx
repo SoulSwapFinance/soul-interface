@@ -9,9 +9,9 @@ import { useLingui } from '@lingui/react'
 
 const items = (i18n: I18n) => [
   {
-    name: i18n._(t`Docs`),
+    name: i18n._(t`Portal`),
     description: i18n._(t`Documentation for Summoners.`),
-    href: 'https://docs.soulswap.finance',
+    href: 'https://port.soul.sh',
   },
   {
     name: i18n._(t`Vote`),
@@ -19,20 +19,25 @@ const items = (i18n: I18n) => [
     href: '/enchant',
   },
   {
-    name: i18n._(t`Open Source`),
-    description: i18n._(t`Soul Supports Open Source.`),
-    href: 'https://github.com/soulswapfinance',
+    name: i18n._(t`Farm`),
+    description: i18n._(t`Earn SOUL with SOUL-LP.`),
+    href: '/farm',
+  },
+  {
+    name: i18n._(t`Stake`),
+    description: i18n._(t`Earn SOUL with SOUL.`),
+    href: '/stake',
+  },
+  {
+    name: i18n._(t`Links`),
+    description: i18n._(t`Earn SOUL with SOUL.`),
+    href: 'https://link.soul.sh',
   },
   // {
-  //   name: i18n._(t`Tools`),
-  //   description: i18n._(t`Optimize Your workflow.`),
-  //   href: '/tools',
+  //   name: i18n._(t`Discord`),
+  //   description: i18n._(t`Join Us on Discord.`),
+  //   href: 'https://discord.gg/DQjChB6Wa6', // 19 SEP
   // },
-  {
-    name: i18n._(t`Discord`),
-    description: i18n._(t`Join Us on Discord.`),
-    href: 'https://discord.gg/DQjChB6Wa6', // 19 SEP
-  },
 ]
 
 export default function Menu() {
