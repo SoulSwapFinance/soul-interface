@@ -12,8 +12,8 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
   const lpTokenContract = usePairContract(lpToken)
   const token1Contract = useTokenContract(token1Address)
   const token2Contract = useTokenContract(token2Address)
-  const soulContract = useTokenContract(FarmPids[2].token1Address[chainId])
-  const fusdContract = useTokenContract(FarmPids[2].token2Address[chainId])
+  const fusdContract = useTokenContract(FarmPids[3].token1Address[chainId]) // update PID and token1
+  const soulContract = useTokenContract(FarmPids[3].token2Address[chainId]) // update PID and token2
 
   // -----------------------
   //  Staking Funcs

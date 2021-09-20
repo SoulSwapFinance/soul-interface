@@ -208,8 +208,8 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       alert('connect wallet')
     } else {
       try {
-        const tx = await erc20Approve(SoulSummonerAddress)
-        await tx?.wait().then(await fetchApproval())
+        await erc20Approve(SoulSummonerAddress)
+        await fetchApproval()
       } catch (e) {
         alert(e.message)
         console.log(e)
