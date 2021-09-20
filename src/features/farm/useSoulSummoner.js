@@ -142,7 +142,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
    */
   const fetchUserLpTokenAlloc = async (account) => {
     try {
-      const contractBal = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[4002])
+      const contractBal = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[chainId])
 
       const userBal = await lpTokenContract?.balanceOf(account)
 
@@ -166,7 +166,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
       // get how many lpTokens in contract
       const totalSupply = await lpTokenContract?.totalSupply()
       // get how many lpTokens held by Summoner
-      const heldBySummoner = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[4002])
+      const heldBySummoner = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[chainId])
       // get how many lpTokens held by user
       const heldByUser = await lpTokenContract?.balanceOf(account)
 
@@ -255,12 +255,12 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
   const fusdPerSoul = async () => {
     try {
       // eslint-disable-next-line react-hooks/rules-of-hooks
-      const soulContract = await useTokenContract(FarmPids[0].token1Address[4002])
+      const soulContract = await useTokenContract(FarmPids[0].token1Address[chainId])
       // eslint-disable-next-line react-hooks/rules-of-hooks
-      const fusdContract = await useTokenContract(FarmPids[0].token2Address[4002])
+      const fusdContract = await useTokenContract(FarmPids[0].token2Address[chainId])
 
-      const totalSoul = await soulContract.balanceOf(FarmPids[0].lpAddresses[4002])
-      const totalFusd = await fusdContract.balanceOf(FarmPids[0].lpAddresses[4002])
+      const totalSoul = await soulContract.balanceOf(FarmPids[0].lpAddresses[chainId])
+      const totalFusd = await fusdContract.balanceOf(FarmPids[0].lpAddresses[chainId])
 
       const fusdPerSoul = totalFusd / totalSoul
 
@@ -305,7 +305,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
 
       // lp tokens held by summoner
       const totalLpTokens = await lpTokenContract?.totalSupply()
-      const summonerLpTokens = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[4002])
+      const summonerLpTokens = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[chainId])
       const supplyHeldBySummoner = (summonerLpTokens / totalLpTokens) * 100
 
       // value of lp tokens held by summoner
