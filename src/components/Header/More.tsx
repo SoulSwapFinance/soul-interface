@@ -16,12 +16,12 @@ const items = (i18n: I18n) => [
     href: 'https://docs.soulswap.finance',
     external: true,
   },
-  // {
-  //   name: i18n._(t`Dev`),
-  //   description: i18n._(t`Documentation for developers of Soul.`),
-  //   href: 'https://dev.soulswap.finance',
-  //   external: true,
-  // },
+  {
+    name: i18n._(t`Portal`),
+    description: i18n._(t`Documentation for developers of Soul.`),
+    href: 'https://port.soul.sh',
+    external: true,
+  },
   {
     name: i18n._(t`Open Source`),
     description: i18n._(t`Soul is a supporter of Open Source.`),
@@ -32,7 +32,7 @@ const items = (i18n: I18n) => [
     name: i18n._(t`Vote`),
     description: i18n._(t`Use SoulPower to Enchant Soul.`),
     href: 'https://enchant.soulswap.finance',
-    external: false,
+    external: true,
   },
   {
     name: i18n._(t`Twitter`),
@@ -49,15 +49,15 @@ const items = (i18n: I18n) => [
   {
     name: i18n._(t`Discord`),
     description: i18n._(t`Join the community on Discord.`),
-    href: 'https://discord.gg/SkHxPyHy',
+    href: 'https://discord.gg/DQjChB6Wa6', // 19 SEP
     external: true,
   },
-  // {
-  //   name: i18n._(t`Vesting`),
-  //   description: i18n._(t`Weekly unlocks from the vesting period.`),
-  //   href: '/vesting',
-  //   external: false,
-  // },
+  {
+    name: i18n._(t`Links`),
+    description: i18n._(t`View all of our links to discover our ecosystem`),
+    href: 'https://links.soul.sh',
+    external: true,
+  },
 ]
 
 export default function Menu() {

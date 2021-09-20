@@ -31,7 +31,7 @@ const items = (i18n: I18n) => [
   {
     name: i18n._(t`Discord`),
     description: i18n._(t`Join Us on Discord.`),
-    href: 'https://discord.gg/SkHxPyHy', // jul 26th
+    href: 'https://discord.gg/DQjChB6Wa6', // 19 SEP
   },
 ]
 
