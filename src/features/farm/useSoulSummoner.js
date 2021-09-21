@@ -8,7 +8,6 @@ import { ChainId } from '@soulswap/sdk'
 import { useSoulSummonerContract, usePairContract, useTokenContract } from '../../hooks/useContract'
 
 import { SOUL_SUMMONER_ADDRESS } from '@soulswap/sdk'
-import { SoulSummonerAddress } from './constants'
 
 import FarmPids from './FarmPids'
 
@@ -186,7 +185,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
    */
   const fetchUserLpTokenAlloc = async (account) => {
     try {
-      const contractBal = await lpTokenContract?.balanceOf(SoulSummonerAddress)
+      const contractBal = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[250])
 
       const userBal = await lpTokenContract?.balanceOf(account)
 
@@ -210,7 +209,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
       // get how many lpTokens in contract
       const totalSupply = await lpTokenContract?.totalSupply()
       // get how many lpTokens held by Summoner
-      const heldBySummoner = await lpTokenContract?.balanceOf(SoulSummonerAddress)
+      const heldBySummoner = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[250])
       // get how many lpTokens held by user
       const heldByUser = await lpTokenContract?.balanceOf(account)
 
@@ -346,7 +345,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
 
       // lp tokens held by summoner
       const totalLpTokens = await lpTokenContract?.totalSupply()
-      const summonerLpTokens = await lpTokenContract?.balanceOf(SoulSummonerAddress)
+      const summonerLpTokens = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[250])
       const supplyHeldBySummoner = (summonerLpTokens / totalLpTokens) * 100
 
       // value of lp tokens held by summoner
@@ -408,7 +407,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
    const fetchPid0LiquidityValue = async (lpToken) => {
     try {
       // SOUL held by summoner
-      const summonerBal = await lpTokenContract?.balanceOf(SoulSummonerAddress);
+      const summonerBal = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[250]);
       console.log('summonerBal', ethers.utils.formatUnits(summonerBal.toString()))
 
       // summonerBal * soulPerFusd = TVL
