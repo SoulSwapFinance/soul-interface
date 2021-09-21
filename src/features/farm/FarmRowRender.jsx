@@ -100,8 +100,13 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     if (account) {
       const timer = setTimeout(() => {
         fetchPending(pid)
-        getAprAndLiquidity()
-      }, 5000)
+        // getAprAndLiquidity()
+      }, 10000)
+
+      if (showing) {
+        fetchBals()
+        fetchApproval()
+      }
 
       // Clear timeout if the component is unmounted
       return () => clearTimeout(timer)

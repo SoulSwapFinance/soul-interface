@@ -89,7 +89,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       const timer = setTimeout(() => {
         fetchPending()
         getAprAndLiquidity()
-        fetchUserFarmAlloc()
+        // fetchUserFarmAlloc()
 
         if (showing) {
           fetchBals()
