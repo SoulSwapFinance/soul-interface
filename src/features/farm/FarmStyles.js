@@ -90,7 +90,7 @@ export const TokenPair = styled.a`
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    color: #3D81DB;
+    color: #211C28;
     opacity: 75%;
     cursor: pointer;
   }
@@ -113,7 +113,7 @@ export const ShowBtn = styled.button`
   background-color: transparent;
 
   &:hover, &:active {
-    color: #3D81DB;
+    color: #white;
     opacity: 75%;
     cursor: pointer;
   }
@@ -196,7 +196,7 @@ export const SubmitButton = styled.button`
   font-size: 1rem;
   padding: 0.5em;
   transition: all 0.2s ease-in-out;
-  background: ${({ primaryColour }) => (primaryColour ? primaryColour : '#3D81DB')};
+  background: ${({ primaryColour }) => (primaryColour ? primaryColour : '#B026FF')};
   color: ${({ color }) => (color ? color : 'white')};
 
   &:hover {
@@ -205,7 +205,7 @@ export const SubmitButton = styled.button`
   }
 
   &:focus {
-    border-color: ${({ hoverColour }) => (hoverColour ? hoverColour : '#3D81DB')};
+    border-color: ${({ hoverColour }) => (hoverColour ? hoverColour : '#B026FF')};
   }
 
   &:disabled { 

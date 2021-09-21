@@ -19,7 +19,7 @@ const FarmList = () => {
       key={farm.pid}
       pid={farm.pid}
       lpSymbol={farm.lpSymbol}
-      lpToken={farm.lpAddresses[chainId]} // TODO: update to 250
+      lpToken={farm.lpAddresses[250]} // TODO: update to 250
       token1={farm.token1}
       token2={farm.token2}
       farm={farm}

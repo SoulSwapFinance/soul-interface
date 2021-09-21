@@ -396,6 +396,9 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     </SubmitButton>
                   )}
                 </Wrap>
+                    <Text fontSize=".9rem" padding="0" color="#FF2695">
+                    LP Withdrawal Fee: starts at 14% and drops by 1% each day.
+                  </Text>
               </FunctionBox>
 
               <FunctionBox>
@@ -442,9 +445,6 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 </Wrap>
 
                 <Wrap padding="0">
-                  <Text fontSize=".9rem" padding="0" color="#ff59bd">
-                    The fee starts at 14% on day one and decreases by 1% daily.
-                  </Text>
                   <Wrap padding="0" display="flex">
                     <Text fontSize=".9rem" padding="0" color="#aaa">
                       Fee Amount: {ethers.utils.formatUnits(feeAmount)}

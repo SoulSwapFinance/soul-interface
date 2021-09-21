@@ -441,12 +441,12 @@ export const StakeList = () => {
   return (
     <>
       <Wrap padding="0 0 2rem 0">
-        <Heading fontSize="1.8rem" textAlign="center">
+        {/* <Heading fontSize="1.8rem" textAlign="center">
           Stake
         </Heading>
         <Text fontSize="1rem" padding="0" color="#aaa" textAlign="center">
           Stake SOUL to earn the corresponding token.
-        </Text>
+        </Text> */}
       </Wrap>
       <div>{summonerPid0}</div>
     </>
