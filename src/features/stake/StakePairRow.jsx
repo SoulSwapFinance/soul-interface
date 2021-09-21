@@ -135,10 +135,10 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       const farmApr = result[0]
       const totalLpValue = result[1]
 
-      setLiquidity(Number(totalLpValue).toFixed(0))
+      setLiquidity(Number(totalLpValue).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
 
       // console.log("apr", farmApr);
-      setApr(Number(farmApr).toFixed(0))
+      setApr(Number(farmApr).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
     } catch (e) {
       console.warn(e)
     }
