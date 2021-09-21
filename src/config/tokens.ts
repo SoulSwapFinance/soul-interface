@@ -9,6 +9,7 @@ export const FANTOM: { [key: string]: Token } = {
   WBTC: new Token(ChainId.FANTOM, '0x321162Cd933E2Be498Cd2267a90534A804051b11', 8, 'WBTC', 'Wrapped Bitcoin'),
   DAI: new Token(ChainId.FANTOM, '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', 18, 'DAI', 'Dai Stablecoin'),
   WETH: new Token(ChainId.FANTOM, '0x74b23882a30290451A17c44f4F05243b6b58C76d', 18, 'WETH', 'Wrapped Ether'),
+  FUSD: new Token(ChainId.FANTOM, '0xad84341756bf337f5a0164515b1f6f993d194e1f', 18, 'FUSD', 'Fantom USD'),
 }
 
 export const MAINNET: { [key: string]: Token } = {

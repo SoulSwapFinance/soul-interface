@@ -45,7 +45,6 @@ const HideOnMobile = styled(FarmItemBox)`
 const TokenPair = styled(ExternalLink)`
   font-size: 1.2rem;
   padding: 0;
-
   @media screen and (max-width: 400px) {
     font-size: 1rem;
     padding-right: 10px;
@@ -56,7 +55,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   const { chainId, account } = useActiveWeb3React()
 
   const { fetchPid0AprAndLiquidity, fetchUserLpTokenAllocInFarm, enterStaking, leaveStaking, pendingSoul, userInfo } =
-    useSoulSummoner(lpToken, farm.token1Address[chainId], farm.token2Address[chainId])
+    useSoulSummoner(lpToken, farm.token1Address[250], farm.token2Address[250])
   const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
 
   const [showing, setShowing] = useState(false)
@@ -85,13 +84,12 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   /**
    * Runs on initial render/mount and  reruns every second
    */
-  // fetchUserFarmAlloc()
   useEffect(() => {
     if (account) {
       const timer = setTimeout(() => {
         fetchPending()
         getAprAndLiquidity()
-        
+        fetchUserFarmAlloc()
 
         if (showing) {
           fetchBals()
@@ -208,8 +206,8 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       alert('connect wallet')
     } else {
       try {
-        await erc20Approve(SoulSummonerAddress)
-        await fetchApproval()
+        const tx = await erc20Approve(SoulSummonerAddress)
+        await tx?.wait().then(await fetchApproval())
       } catch (e) {
         alert(e.message)
         console.log(e)
@@ -272,7 +270,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                   <TokenPair
                     fontSize="1.2rem"
                     target="_blank"
-                    href={`https://app.soulswap.finance/add/${farm.token1Address[4002]}/${farm.token2Address[4002]}`}
+                    href={`https://app.soulswap.finance/add/${farm.token1Address[250]}/${farm.token2Address[250]}`}
                   >
                     {lpSymbol}
                   </TokenPair>
@@ -422,8 +420,6 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 import { SummonerPid0 } from './StakePids'
 
 export const StakeList = () => {
-  const { chainId, account } = useActiveWeb3React()
-
   // Display token pair - TODO:
   // 1) fetch total farms
   // 2) get lpTokenAddress from calling `poolInfo?.[0]`
@@ -435,7 +431,7 @@ export const StakeList = () => {
       key={farm.pid}
       pid={farm.pid}
       lpSymbol={farm.lpSymbol}
-      lpToken={farm.lpAddresses[chainId]} // TODO: update to 250
+      lpToken={farm.lpAddresses[250]} // TODO: update to 250
       token1={farm.token1}
       token2={farm.token2}
       farm={farm}
