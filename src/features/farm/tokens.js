@@ -17,7 +17,7 @@ export const tokens = {
   },
   USDC: {
     4002: "",
-    250: "0xad84341756bf337f5a0164515b1f6f993d194e1f",
+    250: "0x160653F02b6597E7Db00BA8cA826cf43D2f39556",
   },
   WETH: {
     4002: "0x442993b05D170AE47af948FBF507B9972f26cA86", // TODO: deploy WETH
