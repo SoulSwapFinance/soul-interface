@@ -10,16 +10,15 @@ export const BLOCKS = {
   [ChainId.FANTOM]: 'matthewlilley/fantom-blocks',
   // [ChainId.XDAI]: 'matthewlilley/xdai-blocks',
   // [ChainId.MATIC]: 'matthewlilley/polygon-blocks',
-  // [ChainId.BSC]: 'matthewlilley/bsc-blocks',
   // [ChainId.HARMONY]: 'sushiswap/harmony-blocks',
   // [ChainId.AVALANCHE]: 'matthewlilley/avalanche-blocks',
   // [ChainId.CELO]: 'sushiswap/celo-blocks',
 }
 
-export const fetcher = async (chainId = ChainId.MAINNET, query, variables) =>
+export const fetcher = async (chainId = ChainId.FANTOM, query, variables) =>
   request(`${GRAPH_HOST[chainId]}/subgraphs/name/${BLOCKS[chainId]}`, query, variables)
 
-export const getBlocks = async (chainId = ChainId.MAINNET, start, end) => {
+export const getBlocks = async (chainId = ChainId.FANTOM, start, end) => {
   const { blocks } = await fetcher(chainId, blocksQuery, {
     start,
     end,
@@ -27,7 +26,7 @@ export const getBlocks = async (chainId = ChainId.MAINNET, start, end) => {
   return blocks
 }
 
-export const getOneDayBlock = async (chainId = ChainId.MAINNET) => {
+export const getOneDayBlock = async (chainId = ChainId.FANTOM) => {
   const date = startOfHour(subDays(Date.now(), 1))
   const start = Math.floor(Number(date) / 1000)
   const end = Math.floor(Number(date) / 1000) + 600
@@ -35,7 +34,7 @@ export const getOneDayBlock = async (chainId = ChainId.MAINNET) => {
   return blocks?.[0]?.number
 }
 
-export const getOneWeekBlock = async (chainId = ChainId.MAINNET) => {
+export const getOneWeekBlock = async (chainId = ChainId.FANTOM) => {
   const date = startOfHour(subDays(Date.now(), 7))
   const start = Math.floor(Number(date) / 1000)
   const end = Math.floor(Number(date) / 1000) + 600
@@ -43,7 +42,7 @@ export const getOneWeekBlock = async (chainId = ChainId.MAINNET) => {
   return blocks?.[0]?.number
 }
 
-export const getCustomDayBlock = async (chainId = ChainId.MAINNET, days: number) => {
+export const getCustomDayBlock = async (chainId = ChainId.FANTOM, days: number) => {
   const date = startOfHour(subDays(Date.now(), days))
   const start = Math.floor(Number(date) / 1000)
   const end = Math.floor(Number(date) / 1000) + 600
@@ -56,7 +55,7 @@ export const getCustomDayBlock = async (chainId = ChainId.MAINNET, days: number)
 
 // Grabs the last 1000 (a sample statistical) blocks and averages
 // the time difference between them
-export const getAverageBlockTime = async (chainId = ChainId.MAINNET) => {
+export const getAverageBlockTime = async (chainId = ChainId.FANTOM) => {
   // console.log('getAverageBlockTime')
   const now = startOfHour(Date.now())
   const start = getUnixTime(subHours(now, 6))
