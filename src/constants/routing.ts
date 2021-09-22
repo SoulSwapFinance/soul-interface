@@ -87,12 +87,12 @@ const MIRROR_ADDITIONAL_BASES: { [tokenAddress: string]: Token[] } = {
 // TODO: SDK should have two maps, WETH map and WNATIVE map.
 const WRAPPED_NATIVE_ONLY: ChainTokenList = {
   [ChainId.MAINNET]: [WNATIVE[ChainId.MAINNET]],
+  [ChainId.FANTOM]: [WNATIVE[ChainId.FANTOM]],
+  [ChainId.FANTOM_TESTNET]: [WNATIVE[ChainId.FANTOM_TESTNET]],
   // [ChainId.ROPSTEN]: [WNATIVE[ChainId.ROPSTEN]],
   // [ChainId.RINKEBY]: [WNATIVE[ChainId.RINKEBY]],
   // [ChainId.GÖRLI]: [WNATIVE[ChainId.GÖRLI]],
   // [ChainId.KOVAN]: [WNATIVE[ChainId.KOVAN]],
-  [ChainId.FANTOM]: [WNATIVE[ChainId.FANTOM]],
-  [ChainId.FANTOM_TESTNET]: [WNATIVE[ChainId.FANTOM_TESTNET]],
   // [ChainId.MATIC]: [WNATIVE[ChainId.MATIC]],
   // [ChainId.MATIC_TESTNET]: [WNATIVE[ChainId.MATIC_TESTNET]],
   // [ChainId.XDAI]: [WNATIVE[ChainId.XDAI]],
@@ -120,7 +120,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], 
     FANTOM.SOUL,
-    FANTOM.SEANCE,
+    // FANTOM.SEANCE,
     FANTOM.DAI, 
     FANTOM.USDC, 
     FANTOM.WBTC, 
@@ -229,8 +229,6 @@ export const COMMON_BASES: ChainTokenList = {
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], 
     FANTOM.SOUL,
-    FANTOM.SEANCE,
-    FANTOM.DAI, 
     FANTOM.USDC,
     FANTOM.FUSD,
     FANTOM.WBTC, 
