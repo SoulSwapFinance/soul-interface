@@ -251,9 +251,6 @@ msgstr ""
 msgid "Connect Wallet"
 msgstr "Kết nối ví"
 
-msgid "Connect to a wallet"
-msgstr "Kết nối với ví"
-
 msgid "Connect to wallet"
 msgstr ""
 
@@ -307,12 +304,6 @@ msgstr ""
 
 msgid "Dismiss"
 msgstr "Bỏ qua"
-
-msgid "Documentation for Summoners."
-msgstr ""
-
-msgid "Documentation for developers of Soul."
-msgstr ""
 
 msgid "Earn SOUL with SOUL-LP."
 msgstr ""
@@ -372,6 +363,12 @@ msgstr ""
 msgid "Expired"
 msgstr ""
 
+msgid "Explore"
+msgstr ""
+
+msgid "Explore our Protocol."
+msgstr ""
+
 msgid "Farm"
 msgstr ""
 
@@ -381,7 +378,7 @@ msgstr ""
 msgid "Find Pool"
 msgstr "Tìm mạng lưới"
 
-msgid "Follow us on Twitter."
+msgid "Follow on Twitter."
 msgstr ""
 
 msgid ""
@@ -761,6 +758,9 @@ msgstr "Xóa {0} {1} và {2} {3}"
 msgid "Repay"
 msgstr "Hoàn trả"
 
+msgid "Resources"
+msgstr ""
+
 msgid "Restricts swaps to direct pairs only."
 msgstr "Chỉ hạn chế hoán đổi đối với các cặp trực tiếp."
 
@@ -854,6 +854,9 @@ msgstr ""
 msgid ""
 "Stake into SPELL add collateral as aSPELL on Aave all in\n"
 "one click"
+msgstr ""
+
+msgid "Summon an Empire."
 msgstr ""
 
 msgid "Supplying {0} {1} and {2} {3}"
@@ -999,11 +1002,14 @@ msgstr ""
 msgid "View Liquidity Positions"
 msgstr ""
 
-msgid "View all of our links to discover our ecosystem"
-msgstr ""
-
 msgid "View on explorer"
 msgstr "Xem trên explorer"
+
+msgid "View our Ecosystem."
+msgstr ""
+
+msgid "View our resources."
+msgstr ""
 
 msgid "Vote"
 msgstr ""

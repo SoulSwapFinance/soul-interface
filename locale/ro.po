@@ -253,9 +253,6 @@ msgstr ""
 msgid "Connect Wallet"
 msgstr "Conectați portofel"
 
-msgid "Connect to a wallet"
-msgstr "Conectați-vă la un portofel"
-
 msgid "Connect to wallet"
 msgstr ""
 
@@ -309,12 +306,6 @@ msgstr ""
 
 msgid "Dismiss"
 msgstr "Renunțare"
-
-msgid "Documentation for Summoners."
-msgstr ""
-
-msgid "Documentation for developers of Soul."
-msgstr ""
 
 msgid "Earn SOUL with SOUL-LP."
 msgstr ""
@@ -374,6 +365,12 @@ msgstr ""
 msgid "Expired"
 msgstr ""
 
+msgid "Explore"
+msgstr ""
+
+msgid "Explore our Protocol."
+msgstr ""
+
 msgid "Farm"
 msgstr ""
 
@@ -383,7 +380,7 @@ msgstr ""
 msgid "Find Pool"
 msgstr "Găsiți fond comun"
 
-msgid "Follow us on Twitter."
+msgid "Follow on Twitter."
 msgstr ""
 
 msgid ""
@@ -763,6 +760,9 @@ msgstr "Se elimină {0} {1} și {2} {3}"
 msgid "Repay"
 msgstr "Rambursare"
 
+msgid "Resources"
+msgstr ""
+
 msgid "Restricts swaps to direct pairs only."
 msgstr "Restricționează swap-urile doar la perechile directe."
 
@@ -856,6 +856,9 @@ msgstr ""
 msgid ""
 "Stake into SPELL add collateral as aSPELL on Aave all in\n"
 "one click"
+msgstr ""
+
+msgid "Summon an Empire."
 msgstr ""
 
 msgid "Supplying {0} {1} and {2} {3}"
@@ -1001,11 +1004,14 @@ msgstr ""
 msgid "View Liquidity Positions"
 msgstr ""
 
-msgid "View all of our links to discover our ecosystem"
-msgstr ""
-
 msgid "View on explorer"
 msgstr "Vizualizați în explorator"
+
+msgid "View our Ecosystem."
+msgstr ""
+
+msgid "View our resources."
+msgstr ""
 
 msgid "Vote"
 msgstr ""

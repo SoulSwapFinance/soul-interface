@@ -1,8 +1,4 @@
-import { ChainId, Token, WETH9, WNATIVE } from '@soulswap/sdk'
-
-type ChainTokenMap = {
-  readonly [chainId in ChainId]?: Token
-}
+import { ChainId, SPELL_ADDRESS, Token, WETH9, WNATIVE } from '@soulswap/sdk'
 
 export const FANTOM: { [key: string]: Token } = {
   USDC: new Token(ChainId.FANTOM, '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6, 'USDC', 'USD Coin'),
@@ -15,12 +11,15 @@ export const FANTOM: { [key: string]: Token } = {
 export const MAINNET: { [key: string]: Token } = {
   CREAM: new Token(ChainId.MAINNET, '0x2ba592F78dB6436527729929AAf6c908497cB200', 18, 'CREAM', 'Cream'),
   DAI: new Token(ChainId.MAINNET, '0x6B175474E89094C44Da98b954EedeAC495271d0F', 18, 'DAI', 'Dai Stablecoin'),
-  HBTC: new Token(ChainId.MAINNET, '0x0316EB71485b0Ab14103307bf65a021042c6d380', 18, 'HBTC', 'Huobi BTC'),
   MEOW: new Token(ChainId.MAINNET, '0x650F44eD6F1FE0E1417cb4b3115d52494B4D9b6D', 18, 'MEOW', 'Meowshi'),
   USDC: new Token(ChainId.MAINNET, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD Coin'),
   USDT: new Token(ChainId.MAINNET, '0xdAC17F958D2ee523a2206206994597C13D831ec7', 6, 'USDT', 'Tether USD'),
   WBTC: new Token(ChainId.MAINNET, '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', 8, 'WBTC', 'Wrapped BTC'),
   XSUSHI: new Token(ChainId.MAINNET, '0x8798249c2E607446EfB7Ad49eC89dD1865Ff4272', 18, 'xSUSHI', 'SushiBar'),
+}
+
+type ChainTokenMap = {
+  readonly [chainId in ChainId]?: Token
 }
 
 // SOUL
@@ -38,7 +37,7 @@ export const SEANCE: ChainTokenMap = {
 }
 
 export const SPELL: ChainTokenMap = {
-  // [ChainId.FANTOM]: new Token(ChainId.FANTOM, SPELL_ADDRESS[ChainId.FANTOM], 18, 'SPELL', 'SpellBound'), // TODO: update
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, SPELL_ADDRESS[ChainId.FANTOM], 18, 'SPELL', 'SpellBound'), // TODO: update
   [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '0xdFDC55e7E7eBA3E7BF2a0E0743f4D3C858FaC37E', 18, 'SPELL', 'SpellBound'),   // 30 JUL
 }
 

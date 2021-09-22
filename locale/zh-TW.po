@@ -251,9 +251,6 @@ msgstr ""
 msgid "Connect Wallet"
 msgstr "連接錢包"
 
-msgid "Connect to a wallet"
-msgstr "連接錢包"
-
 msgid "Connect to wallet"
 msgstr ""
 
@@ -307,12 +304,6 @@ msgstr ""
 
 msgid "Dismiss"
 msgstr "解散"
-
-msgid "Documentation for Summoners."
-msgstr ""
-
-msgid "Documentation for developers of Soul."
-msgstr ""
 
 msgid "Earn SOUL with SOUL-LP."
 msgstr ""
@@ -370,6 +361,12 @@ msgstr ""
 msgid "Expired"
 msgstr ""
 
+msgid "Explore"
+msgstr ""
+
+msgid "Explore our Protocol."
+msgstr ""
+
 msgid "Farm"
 msgstr ""
 
@@ -379,7 +376,7 @@ msgstr ""
 msgid "Find Pool"
 msgstr "查找池"
 
-msgid "Follow us on Twitter."
+msgid "Follow on Twitter."
 msgstr ""
 
 msgid ""
@@ -756,6 +753,9 @@ msgstr "移除{0}{1}和{2}{3}"
 msgid "Repay"
 msgstr "還款"
 
+msgid "Resources"
+msgstr ""
+
 msgid "Restricts swaps to direct pairs only."
 msgstr "限制只交易直接交易對。"
 
@@ -849,6 +849,9 @@ msgstr ""
 msgid ""
 "Stake into SPELL add collateral as aSPELL on Aave all in\n"
 "one click"
+msgstr ""
+
+msgid "Summon an Empire."
 msgstr ""
 
 msgid "Supplying {0} {1} and {2} {3}"
@@ -994,11 +997,14 @@ msgstr ""
 msgid "View Liquidity Positions"
 msgstr ""
 
-msgid "View all of our links to discover our ecosystem"
-msgstr ""
-
 msgid "View on explorer"
 msgstr "在瀏覽器查看"
+
+msgid "View our Ecosystem."
+msgstr ""
+
+msgid "View our resources."
+msgstr ""
 
 msgid "Vote"
 msgstr ""

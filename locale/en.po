@@ -258,9 +258,6 @@ msgstr "Confirm this transaction in your wallet"
 msgid "Connect Wallet"
 msgstr "Connect Wallet"
 
-msgid "Connect to a wallet"
-msgstr "Connect to a wallet"
-
 msgid "Connect to wallet"
 msgstr "Connect to wallet"
 
@@ -314,12 +311,6 @@ msgstr "Disconnect"
 
 msgid "Dismiss"
 msgstr "Dismiss"
-
-msgid "Documentation for Summoners."
-msgstr "Documentation for Summoners."
-
-msgid "Documentation for developers of Soul."
-msgstr "Documentation for developers of Soul."
 
 msgid "Earn SOUL with SOUL-LP."
 msgstr "Earn SOUL with SOUL-LP."
@@ -379,6 +370,12 @@ msgstr "Expiration is the time at which the order will become invalid"
 msgid "Expired"
 msgstr "Expired"
 
+msgid "Explore"
+msgstr "Explore"
+
+msgid "Explore our Protocol."
+msgstr "Explore our Protocol."
+
 msgid "Farm"
 msgstr "Farm"
 
@@ -388,8 +385,8 @@ msgstr "Filled"
 msgid "Find Pool"
 msgstr "Find Pool"
 
-msgid "Follow us on Twitter."
-msgstr "Follow us on Twitter."
+msgid "Follow on Twitter."
+msgstr "Follow on Twitter."
 
 msgid ""
 "For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL\n"
@@ -779,6 +776,9 @@ msgstr "Removing {0} {1} and {2} {3}"
 msgid "Repay"
 msgstr "Repay"
 
+msgid "Resources"
+msgstr "Resources"
+
 msgid "Restricts swaps to direct pairs only."
 msgstr "Restricts swaps to direct pairs only."
 
@@ -875,6 +875,9 @@ msgid ""
 msgstr ""
 "Stake into SPELL add collateral as aSPELL on Aave all in\n"
 "one click"
+
+msgid "Summon an Empire."
+msgstr "Summon an Empire."
 
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "Supplying {0} {1} and {2} {3}"
@@ -1021,11 +1024,14 @@ msgstr "Vietnamese"
 msgid "View Liquidity Positions"
 msgstr "View Liquidity Positions"
 
-msgid "View all of our links to discover our ecosystem"
-msgstr "View all of our links to discover our ecosystem"
-
 msgid "View on explorer"
 msgstr "View on explorer"
+
+msgid "View our Ecosystem."
+msgstr "View our Ecosystem."
+
+msgid "View our resources."
+msgstr "View our resources."
 
 msgid "Vote"
 msgstr "Vote"
