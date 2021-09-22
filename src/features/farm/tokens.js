@@ -7,7 +7,7 @@ export const tokens = {
     4002: "0xD54Cf31D5653F4a062f5DA4C83170A5867d04442",
     250: "0x124B06C5ce47De7A6e9EFDA71a946717130079E6",
   },
-  WFTM: {
+  FTM: {
     4002: "0xf1277d1ed8ad466beddf92ef448a132661956621",
     250: "0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83",
   },
@@ -27,9 +27,4 @@ export const tokens = {
     4002: "0xd4cBf200850A79D5130c368f9D56592cfbE22179",
     250: "0x321162Cd933E2Be498Cd2267a90534A804051b11",
   },
-
-  //   WFTM: {
-  //     4002: '',
-  //     250: '',
-  //   },
 };

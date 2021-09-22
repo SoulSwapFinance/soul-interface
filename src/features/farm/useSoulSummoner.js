@@ -328,9 +328,9 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
           (token1Name === 'FUSD'
             ? ethers.utils.formatUnits(token1Bal.toString())
             : ethers.utils.formatUnits(token2Bal.toString())) * 2
-      } else if (token1Name === 'WFTM' || token2Name === 'WFTM') {
+      } else if (token1Name === 'FTM' || token2Name === 'FTM') {
         totalLpValue =
-          (token1Name === 'WFTM'
+          (token1Name === 'FTM'
             ? ethers.utils.formatUnits(token1Bal.toString())
             : ethers.utils.formatUnits(token2Bal.toString())) * 2
       } else if (token1Name === 'SOUL' || token2Name === 'SOUL') {
