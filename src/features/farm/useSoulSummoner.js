@@ -336,12 +336,12 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
         totalLpValue =
           (token1Name === 'FUSD'
             ? ethers.utils.formatUnits(token1Bal.toString())
-            : ethers.utils.formatUnits(token2Bal.toString())) * 2
+            : ethers.utils.formatUnits(token2Bal.toString()))
      } else if (token1Name === 'FTM' || token2Name === 'FTM') {
         totalLpValue =
           (token1Name === 'FTM'
             ? ethers.utils.formatUnits(token1Bal.toString())
-            : ethers.utils.formatUnits(token2Bal.toString())) * 2
+            : ethers.utils.formatUnits(token2Bal.toString()) * 2)
       } else if (token1Name === 'SOUL' || token2Name === 'SOUL') {
         const soulPrice = await fusdPerSoul()
         totalLpValue =
@@ -398,7 +398,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
       const fetchedLiquidity = await fetchLiquidityValue(token1Name, token2Name, token1Address, token2Address, lpToken)
 
       // farm apr
-      const farmApr = yearlySoulFarmAlloc / fetchedLiquidity[1] * 2
+      const farmApr = yearlySoulFarmAlloc / fetchedLiquidity[1]
 
       return [farmApr, fetchedLiquidity[0], fetchedLiquidity[1]]
     } catch (e) {
@@ -439,16 +439,9 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
    */
    const fetchSoulPrice = async () => {
     try {
-      // SOUL held by summoner
-      // const summonerBal = await lpTokenContract?.balanceOf(SoulSummonerAddress);
-      // console.log('summonerBal', ethers.utils.formatUnits(summonerBal.toString()))
-
       // summonerBal * soulPrice = TVL
       const soulPrice = await fusdPerSoul();
       console.log('soulPrice', soulPrice)
-      
-      // const totalLpValue = ethers.utils.formatUnits(summonerBal.toString()) * soulPrice;
-      // console.log('totalLpValue', totalLpValue)
       
       return soulPrice;
     } catch (e) {
@@ -473,7 +466,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
       const formattedSps = ethers.utils.formatUnits(soulPerSec.toString());
 
       // amount of soul allocated to this pool per year
-      const yearlySoulFarmAlloc = formattedSps * 31557600 * poolWeight;
+      const yearlySoulFarmAlloc = formattedSps * 31_536_000 * poolWeight;
 
       // value of lp tokens held by summoner
       const fetchedLiquidity = await fetchPid0LiquidityValue(lpToken);
