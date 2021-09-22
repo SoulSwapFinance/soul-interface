@@ -88,20 +88,20 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    * Runs only on initial render/mount
    */
   useEffect(() => {
-    getAprAndLiquidity()
     fetchPending()
-    fetchUserFarmAlloc()
-  }, [account])
+    getAprAndLiquidity()
+    // fetchUserFarmAlloc()
+  }, [account, fetchPending, getAprAndLiquidity])
 
   /**
-   * Runs on initial render/mount and  reruns every second
+   * Runs on initial render/mount and reruns every 2 seconds
    */
   useEffect(() => {
     if (account) {
       const timer = setTimeout(() => {
         fetchPending(pid)
         // getAprAndLiquidity()
-      }, 5000)
+      }, 10000)
 
       // Clear timeout if the component is unmounted
       return () => clearTimeout(timer)
