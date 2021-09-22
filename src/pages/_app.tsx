@@ -136,7 +136,7 @@ function MyApp({
         <meta
           key="og:description"
           property="og:description"
-          content="Be a DeFi Chef with Soul. Swap, earn, stack yields, lend, borrow, leverage all on one decentralized, community driven platform. Welcome home to DeFi"
+          content="Be a DeFi Summoner with Soul. Swap, earn, grow yield, lend, borrow, leverage all on one decentralized, community driven platform. Welcome home to DeFi"
         />
       </Head>
       <I18nProvider i18n={i18n} forceRenderOnLocaleChange={false}>

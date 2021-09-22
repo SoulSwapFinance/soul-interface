@@ -272,7 +272,7 @@ export default function WalletModal({
           </HeaderRow>
           <div>
             {error instanceof UnsupportedChainIdError ? (
-              <h5>{i18n._(t`Please connect to the appropriate Ethereum network.`)}</h5>
+              <h5>{i18n._(t`Please connect to the appropriate network.`)}</h5>
             ) : (
               i18n._(t`Error connecting. Try refreshing the page.`)
             )}
