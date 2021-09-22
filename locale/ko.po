@@ -703,9 +703,6 @@ msgstr "풀을 찾았습니다!"
 msgid "Pool Tokens"
 msgstr "풀 토큰"
 
-msgid "Pool tokens in rewards pool"
-msgstr "보상 풀의 풀 토큰"
-
 msgid "Pooled {0}"
 msgstr "{0} 풀에 추가됨"
 

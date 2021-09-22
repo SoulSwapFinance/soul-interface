@@ -703,9 +703,6 @@ msgstr "Pool gefunden!"
 msgid "Pool Tokens"
 msgstr "Pool-Token"
 
-msgid "Pool tokens in rewards pool"
-msgstr "Pool-Token im Prämienpool"
-
 msgid "Pooled {0}"
 msgstr "{0} gepoolt"
 

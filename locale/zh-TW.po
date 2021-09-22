@@ -696,9 +696,6 @@ msgstr "找到池！"
 msgid "Pool Tokens"
 msgstr "流動性池中的總代幣"
 
-msgid "Pool tokens in rewards pool"
-msgstr "獎勵池中的代幣"
-
 msgid "Pooled {0}"
 msgstr "汇集{0}"
 

@@ -703,9 +703,6 @@ msgstr "¡Fondo encontrado!"
 msgid "Pool Tokens"
 msgstr "Tokens en el fondo"
 
-msgid "Pool tokens in rewards pool"
-msgstr "Tokens del fondo común en el fondo de recompensas"
-
 msgid "Pooled {0}"
 msgstr "{0} agrupado"
 

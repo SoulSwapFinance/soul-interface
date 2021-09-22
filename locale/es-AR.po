@@ -703,9 +703,6 @@ msgstr "¡Piscina encontrada!"
 msgid "Pool Tokens"
 msgstr "Fichas de piscina"
 
-msgid "Pool tokens in rewards pool"
-msgstr "Pool tokens en el grupo de recompensas"
-
 msgid "Pooled {0}"
 msgstr "{0} agrupado"
 

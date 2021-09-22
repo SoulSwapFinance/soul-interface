@@ -701,9 +701,6 @@ msgstr "Đã tìm thấy mạng lưới!"
 msgid "Pool Tokens"
 msgstr "Token mạng lưới"
 
-msgid "Pool tokens in rewards pool"
-msgstr "Token mạng lưới trong mạng lưới phần thưởng"
-
 msgid "Pooled {0}"
 msgstr "Đã gộp chung {0}"
 

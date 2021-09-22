@@ -703,9 +703,6 @@ msgstr "Пул найден!"
 msgid "Pool Tokens"
 msgstr "Токены пула"
 
-msgid "Pool tokens in rewards pool"
-msgstr "Токены пула в пуле вознаграждений"
-
 msgid "Pooled {0}"
 msgstr "Объединено {0}"
 

@@ -703,9 +703,6 @@ msgstr "プールが見つかりました！"
 msgid "Pool Tokens"
 msgstr "トークンをプール"
 
-msgid "Pool tokens in rewards pool"
-msgstr "報酬プールのトークンをプール"
-
 msgid "Pooled {0}"
 msgstr "{0}をプールしました"
 

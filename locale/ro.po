@@ -703,9 +703,6 @@ msgstr "Fond comun găsit!"
 msgid "Pool Tokens"
 msgstr "Token-uri pentru fondul comun"
 
-msgid "Pool tokens in rewards pool"
-msgstr "Token-uri aferente fondului comun în fondul pentru recompense"
-
 msgid "Pooled {0}"
 msgstr "Pus în comun {0}"
 
