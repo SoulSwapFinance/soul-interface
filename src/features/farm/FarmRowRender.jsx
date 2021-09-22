@@ -206,7 +206,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       try {
         const pending = await pendingSoul(pid, account)
         const formatted = ethers.utils.formatUnits(pending.toString())
-        setPending(Number(formatted).toFixed(1).toString())
+        setPending(Number(formatted).toFixed(2).toString())
       } catch (err) {
         console.warn(err)
       }
@@ -218,7 +218,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    */
   const fetchApproval = async () => {
     if (!account) {
-      // alert('connect wallet')
+      alert('Connect Wallet')
     } else {
       // Checks if SoulSummoner can move tokens
       const amount = await erc20Allowance(account, SoulSummonerAddress)
@@ -232,7 +232,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    */
   const handleApprove = async () => {
     if (!account) {
-      // alert('connect wallet')
+      alert('Connect Wallet')
     } else {
       try {
         const tx = await erc20Approve(SoulSummonerAddress)
@@ -404,15 +404,15 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     </SubmitButton>
                   )}
                 </Wrap>
-                    <Text fontSize=".9rem" padding="0" color="#FF2695">
-                    LP Withdrawal Fee: starts at 14% and drops by 1% each day.
+                    <Text fontSize=".9rem" padding="0" color="#ee82ee">
+                    Withdrawal fee: starts at 14%, with 1% less each day.
                   </Text>
               </FunctionBox>
 
               <FunctionBox>
                 <FlexText>
                   <Text padding="0" fontSize=".9rem" color="#bbb">
-                    Staked: {Number(stakedBal).toFixed(3)}
+                    Staked: {Number(stakedBal).toFixed(4)}
                   </Text>
                   <ClickableText
                     padding="0"

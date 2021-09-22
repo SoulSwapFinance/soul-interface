@@ -50,7 +50,7 @@
     "@metamask/jazzicon": "^2.0.0",
     "@next/bundle-analyzer": "^11.1.2",
     "@popperjs/core": "^2.10.1",
-    "@ramp-network/ramp-instant-sdk": "^2.50",
+    "@ramp-network/ramp-instant-sdk": "^2.5.0",
     "@reach/dialog": "^0.16.0",
     "@reduxjs/toolkit": "^1.6.1",
     "@soulswap/sdk": "^0.3.0",

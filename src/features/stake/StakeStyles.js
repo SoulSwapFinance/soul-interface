@@ -9,12 +9,12 @@ export const FlexText = styled.div`
 //  Row Section
 // ---------------------
 
-export const FarmContainer = styled.div`
+export const StakeContainer = styled.div`
   display: grid;
   grid-template-rows: 1fr;
 `
 
-export const FarmRow = styled.div`
+export const StakeRow = styled.div`
   background-color: #222;
   height: 4rem;
   margin: 4px;
@@ -44,7 +44,7 @@ export const FarmRow = styled.div`
   }
 `
 
-export const FarmContentWrapper = styled.div`
+export const StakeContentWrapper = styled.div`
   display: flex;
   justify-content: left;
   align-items: center;
@@ -59,7 +59,7 @@ export const FarmContentWrapper = styled.div`
   }
 `
 
-export const FarmItemBox = styled.div`
+export const StakeItemBox = styled.div`
   width: ${({ width }) => (width ? `${width}` : `100px`)};
   display: grid;
   justify-content: left;
@@ -68,14 +68,14 @@ export const FarmItemBox = styled.div`
 
 `
 
-export const FarmItemHeading = styled.p`
+export const StakeItemHeading = styled.p`
   font-weight: normal;
   font-size: 0.8rem;
   color: white;
   align-items: center;
 `
 
-export const FarmItem = styled.h2`
+export const StakeItem = styled.h2`
   font-size: 1.5rem;
   color: white;
 `

@@ -12,20 +12,20 @@ import { SoulSummonerAddress } from '../farm/constants'
 
 import {
   FlexText,
-  FarmContainer,
-  FarmRow,
-  FarmContentWrapper,
+  StakeContainer,
+  StakeRow,
+  StakeContentWrapper,
   TokenPairBox,
-  FarmItemBox,
-  // FarmItemHeading,
-  FarmItem,
+  StakeItemBox,
+  // StakeItemHeading,
+  StakeItem,
   // ShowBtn,
   DetailsContainer,
   DetailsWrapper,
   FunctionBox,
   Input,
   SubmitButton,
-} from './FarmStyles'
+} from './StakeStyles'
 
 import { Wrap, ClickableText, Heading, Text, ExternalLink } from '../../components/ReusableStyles'
 
@@ -36,7 +36,7 @@ import { Wrap, ClickableText, Heading, Text, ExternalLink } from '../../componen
 //    - amount (in pool)
 //    - rewardDebt (owed)
 
-const HideOnMobile = styled(FarmItemBox)`
+const HideOnMobile = styled(StakeItemBox)`
   @media screen and (max-width: 900px) {
     display: none;
   }
@@ -181,7 +181,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       try {
         const pending = await pendingSoul(0, account)
         const formatted = ethers.utils.formatUnits(pending.toString())
-        setPending(Number(formatted).toFixed(1).toString())
+        setPending(Number(formatted).toFixed(2).toString())
       } catch (err) {
         console.warn(err)
       }
@@ -262,9 +262,9 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   return (
     <>
       <Wrap padding="0" display="flex" justifyContent="center">
-        <FarmContainer>
-          <FarmRow onClick={() => handleShow()}>
-            <FarmContentWrapper>
+        <StakeContainer>
+          <StakeRow onClick={() => handleShow()}>
+            <StakeContentWrapper>
               <TokenPairBox>
                 {/* 2 token logo combined ? */}
                 <Wrap>
@@ -282,12 +282,12 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 </Wrap>
               </TokenPairBox>
 
-              <FarmItemBox>
+              <StakeItemBox>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
                   APR
                 </Text>
-                <FarmItem>{apr ? (apr === 'Infinity' ? '∞%' : apr + '%') : '?'}</FarmItem>
-              </FarmItemBox>
+                <StakeItem>{apr ? (apr === 'Infinity' ? '∞%' : apr + '%') : '?'}</StakeItem>
+              </StakeItemBox>
 
               <HideOnMobile>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
@@ -304,7 +304,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 )}
               </HideOnMobile>
 
-              <FarmItemBox desktopOnly={true}>
+              <StakeItemBox desktopOnly={true}>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
                   Earned
                 </Text>
@@ -317,7 +317,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     {pending}
                   </Text>
                 )}
-              </FarmItemBox>
+              </StakeItemBox>
 
               <HideOnMobile desktopOnly={true}>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
@@ -334,12 +334,12 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 )}
               </HideOnMobile>
 
-              {/* <FarmItemBox>
+              {/* <StakeItemBox>
                 <ShowBtn onClick={() => handleShow()}>{showing ? `HIDE` : `SHOW`}</ShowBtn>
-              </FarmItemBox> */}
-            </FarmContentWrapper>
-          </FarmRow>
-        </FarmContainer>
+              </StakeItemBox> */}
+            </StakeContentWrapper>
+          </StakeRow>
+        </StakeContainer>
       </Wrap>
 
       {showing ? (
