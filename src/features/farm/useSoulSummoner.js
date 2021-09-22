@@ -41,7 +41,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
       let result = await summonerContract?.leaveStaking(amount)
       return result
     } catch (e) {
-      alert(e.message)
+      // alert(e.message)
       console.log(e)
       return e
     }
@@ -58,7 +58,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
       return result
     } catch (e) {
       console.log(e)
-      alert(e.message)
+      // alert(e.message)
       return e
     }
   }
@@ -176,7 +176,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
   }
 
   // -----------------------
-  //  User Lp Allocation
+  //  User LP Allocation
   // -----------------------
 
   /**
@@ -298,7 +298,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
   const fusdPerSoul = async () => {
     try {
       const totalSoul = await soulContract.balanceOf(FarmPids[0].lpAddresses[250])
-      const totalFusd = await fusdContract.balanceOf(FarmPids[0].lpAddresses[250])
+      const totalFusd = await fusdContract.balanceOf(FarmPids[3].lpAddresses[250])
 
       const fusdPerSoul = totalFusd / totalSoul
 
@@ -328,7 +328,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
           (token1Name === 'FUSD'
             ? ethers.utils.formatUnits(token1Bal.toString())
             : ethers.utils.formatUnits(token2Bal.toString())) * 2
-      } else if (token1Name === 'FTM' || token2Name === 'FTM') {
+     } else if (token1Name === 'FTM' || token2Name === 'FTM') {
         totalLpValue =
           (token1Name === 'FTM'
             ? ethers.utils.formatUnits(token1Bal.toString())

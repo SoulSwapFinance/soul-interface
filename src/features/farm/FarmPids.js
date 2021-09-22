@@ -32,15 +32,15 @@ export const FarmPids = [
   },
   { // 800	
     pid: 3,
-    token1: 'SOUL',
-    token2: 'FUSD',
+    token1: 'FUSD',
+    token2: 'SOUL',
     lpSymbol: 'SOUL-FUSD',
     lpAddresses: {
       4002: '0xaf02fd55F297f2a591367F6E33Dc600Ff2Be472A',
       250: '0x9e7711eaeb652d0da577c1748844407f8db44a10',
     },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.FUSD,
+    token1Address: tokens.FUSD,
+    token2Address: tokens.SOUL,
   },
   { // 600
     pid: 4,
