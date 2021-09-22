@@ -6,7 +6,7 @@ import useSWR from 'swr'
 const getChains = (url = 'https://chainid.network/chains.json') => fetch(url).then((res) => res.json())
 
 export default function Status({ initialData }) {
-  const res = useSWR('https://chainid.network/chains.json', getChains, { initialData })
+  const res = useSWR('https://chainid.network/chains.json', getChains, { })
   const { data } = res
   return (
     <Container id="chains-page" className="py-4 space-y-6 md:py-8 lg:py-12" maxWidth="6xl">
