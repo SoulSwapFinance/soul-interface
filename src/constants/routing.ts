@@ -229,6 +229,7 @@ export const COMMON_BASES: ChainTokenList = {
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], 
     FANTOM.SOUL,
+    // FANTOM.DAI, 
     FANTOM.USDC,
     FANTOM.FUSD,
     FANTOM.WBTC, 
