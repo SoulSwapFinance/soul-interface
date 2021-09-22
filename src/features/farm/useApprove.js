@@ -13,7 +13,7 @@ function useApproveContract(tokenAddress) {
       return result
     } catch (e) {
       console.log(e)
-      alert(e.message)
+      // alert(e.message)
     }
   }
 
@@ -24,9 +24,10 @@ function useApproveContract(tokenAddress) {
         ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
       )
       return result
-    } catch (e) {
+    } 
+    catch (e) {
       console.log(e)
-      alert(e.message)
+      // alert(e.message)
     }
   }
 
@@ -37,7 +38,7 @@ function useApproveContract(tokenAddress) {
       return result
     } catch (e) {
       console.log(e)
-      alert(e.message)
+      // alert(e.message)
     }
   }
 

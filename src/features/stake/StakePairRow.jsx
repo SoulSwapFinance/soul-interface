@@ -153,7 +153,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    */
   const fetchBals = async () => {
     if (!account) {
-      alert('connect wallet')
+      // alert('connect wallet')
     } else {
       try {
         const result1 = await userInfo(pid, account)
@@ -176,7 +176,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    */
   const fetchPending = async () => {
     if (!account) {
-      alert('connect wallet')
+      // alert('connect wallet')
     } else {
       try {
         const pending = await pendingSoul(0, account)
@@ -213,7 +213,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
         const tx = await erc20Approve(SoulSummonerAddress)
         await tx?.wait().then(await fetchApproval())
       } catch (e) {
-        alert(e.message)
+        // alert(e.message)
         console.log(e)
         return
       }
@@ -228,7 +228,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       const tx = await leaveStaking(0)
       await tx?.wait().then(await fetchPending())
     } catch (e) {
-      alert(e.message)
+      // alert(e.message)
       console.log(e)
     }
   }
@@ -241,7 +241,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       const tx = await leaveStaking(amount)
       await tx.wait().then(await fetchBals(pid))
     } catch (e) {
-      alert(e.message)
+      // alert(e.message)
       console.log(e)
     }
   }
@@ -254,7 +254,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       const tx = await enterStaking(amount)
       await tx.wait().then(await fetchBals(pid))
     } catch (e) {
-      alert(e.message)
+      // alert(e.message)
       console.log(e)
     }
   }
@@ -274,7 +274,8 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                   <TokenPair
                     fontSize="1.2rem"
                     target="_blank"
-                    href={`https://app.soulswap.finance/add/${farm.token1Address[250]}/${farm.token2Address[250]}`}
+                    color="pink"
+                    href={`https://app.soulswap.finance/add/${farm.token1Address[chainId]}/${farm.token2Address[chainId]}`}
                   >
                     {lpSymbol}
                   </TokenPair>
@@ -290,7 +291,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
               <HideOnMobile>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
-                  Tvl
+                  TVL
                 </Text>
                 {liquidity === '0' ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
@@ -380,7 +381,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
               <FunctionBox>
                 <FlexText>
                   <Text padding="0" fontSize=".9rem" color="#bbb">
-                    Staked: {Number(stakedBal).toFixed(3)}
+                    Staked: {Number(stakedBal).toFixed(4)}
                   </Text>
                   <ClickableText
                     padding="0"
@@ -434,7 +435,7 @@ export const StakeList = () => {
     <StakePairRow
       key={farm.pid}
       pid={farm.pid}
-      lpSymbol={farm.lpSymbol}
+      lpSymbol={farm.lpSymbol[250]}
       lpToken={farm.lpAddresses[250]} // TODO: update to 250
       token1={farm.token1}
       token2={farm.token2}

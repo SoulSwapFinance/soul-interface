@@ -195,7 +195,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
       return [alloc, allocPerc]
     } catch (e) {
       console.log(e)
-      alert(e.message)
+      // alert(e.message)
       return e
     }
   }
@@ -245,7 +245,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
       ]
     } catch (e) {
       console.log(e)
-      alert(e.message)
+      // alert(e.message)
       return e
     }
   }
@@ -305,7 +305,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
       return fusdPerSoul
     } catch (e) {
       console.log(e)
-      alert(e.message)
+      // alert(e.message)
       return e
     }
   }
@@ -361,7 +361,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
       return [totalLpValue, summonerTotalLpValue]
     } catch (e) {
       console.log(e)
-      alert(e.message)
+      // alert(e.message)
       return e
     }
   }
@@ -394,7 +394,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
       return [farmApr, fetchedLiquidity[0], fetchedLiquidity[1]]
     } catch (e) {
       console.log(e)
-      alert(e.message)
+      // alert(e.message)
       return e
     }
   }
@@ -421,7 +421,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
       return totalLpValue;
     } catch (e) {
       console.log(e);
-      alert(e.message);
+      // alert(e.message);
       return e;
     }
   };
@@ -452,7 +452,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
       return [farmApr, fetchedLiquidity];
     } catch (e) {
       console.log(e);
-      alert(e.message);
+      // alert(e.message);
       return e;
     }
   };

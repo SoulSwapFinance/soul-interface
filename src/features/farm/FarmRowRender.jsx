@@ -178,7 +178,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    */
   const fetchBals = async () => {
     if (!account) {
-      alert('connect wallet')
+      // alert('connect wallet')
     } else {
       try {
         const result1 = await userInfo(pid, account)
@@ -201,7 +201,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    */
   const fetchPending = async () => {
     if (!account) {
-      alert('connect wallet')
+      // alert('connect wallet')
     } else {
       try {
         const pending = await pendingSoul(pid, account)
@@ -218,7 +218,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    */
   const fetchApproval = async () => {
     if (!account) {
-      alert('connect wallet')
+      // alert('connect wallet')
     } else {
       // Checks if SoulSummoner can move tokens
       const amount = await erc20Allowance(account, SoulSummonerAddress)
@@ -232,13 +232,13 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    */
   const handleApprove = async () => {
     if (!account) {
-      alert('connect wallet')
+      // alert('connect wallet')
     } else {
       try {
         const tx = await erc20Approve(SoulSummonerAddress)
         await tx?.wait().then(await fetchApproval())
       } catch (e) {
-        alert(e.message)
+        // alert(e.message)
         console.log(e)
         return
       }
@@ -253,7 +253,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       const tx = await withdraw(pid, 0)
       await tx?.wait().then(await fetchPending(pid))
     } catch (e) {
-      alert(e.message)
+      // alert(e.message)
       console.log(e)
     }
   }
@@ -268,7 +268,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       await tx.wait()
       await fetchBals(pid)
     } catch (e) {
-      alert(e.message)
+      // alert(e.message)
       console.log(e)
     }
   }
@@ -283,7 +283,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       await tx.wait()
       await fetchBals(pid)
     } catch (e) {
-      alert(e.message)
+      // alert(e.message)
       console.log(e)
     }
   }
