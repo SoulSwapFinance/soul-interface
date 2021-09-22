@@ -302,9 +302,11 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     Token Pair
                   </Text>
                   <TokenPair
-                    fontSize="1.2rem"
-                    target="_blank"
-                    href={`https://soulswap.finance/add/${farm.token1Address}/${farm.token2Address}`}
+                    fontSize=“1.2rem”
+                    target=“_blank”
+                    color=“pink”
+                    href={`https://app.soulswap.finance/add/${farm.token1Address[chainId]}/${farm.token2Address[chainId]}`}
+                  >
                   >
                     {lpSymbol}
                   </TokenPair>
