@@ -34,6 +34,11 @@ export const FarmRow = styled.div`
     padding: auto;
   }
 
+  @media screen and (max-width: 720px) {
+    width: auto;
+    padding: auto;
+  }
+
   @media screen and (max-width: 400px) {
     width: 20rem;
   }
@@ -49,7 +54,7 @@ export const FarmContentWrapper = styled.div`
     justify-content: space-between;
   }
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 720px) {
     padding: 0;
   }
 `
@@ -127,7 +132,7 @@ export const DetailsContainer = styled.div`
   margin: 4px;
   width: 55rem;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 900px) {
     width: auto;
   }
 `
@@ -145,7 +150,7 @@ export const DetailsWrapper = styled.div`
     width: 28rem
   }
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 720px) {
     display: block;
     width: 24rem
   }
