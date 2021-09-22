@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
@@ -156,10 +157,12 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       const totalLpValue = result[1]
       const summonerTotalLpValue = result[2]
 
-      setLiquidity(Number(summonerTotalLpValue).toFixed(0))
+      setLiquidity(Number(summonerTotalLpValue).toFixed(0
+      ).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
 
       // console.log("apr", farmApr);
-      setApr(Number(farmApr).toFixed(0))
+      setApr(Number(farmApr).toFixed(0
+      ).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
     } catch (e) {
       console.warn(e)
     }
