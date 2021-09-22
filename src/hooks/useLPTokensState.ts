@@ -94,14 +94,6 @@ const useLPTokensState = () => {
               account
             ).toLowerCase()}/stacks/uniswap_v2/balances/?key=ckey_cba3674f2ce5450f9d5dd290589`,
           ],
-          // [ChainId.BSC]: [
-          //   `https://api.covalenthq.com/v1/${ChainId.BSC}/address/${String(
-          //     account
-          //   ).toLowerCase()}/stacks/pancakeswap/balances/?key=ckey_cba3674f2ce5450f9d5dd290589`,
-          //   `https://api.covalenthq.com/v1/${ChainId.BSC}/address/${String(
-          //     account
-          //   ).toLowerCase()}/stacks/pancakeswap_v2/balances/?key=ckey_cba3674f2ce5450f9d5dd290589`,
-          // ],
         }
 
         const responses: any = await Promise.all(requests[chainId].map((request: any) => fetch(request)))
@@ -116,26 +108,7 @@ const useLPTokensState = () => {
               ...balance,
               version: 'v2',
             }))
-        } 
-        // else if (chainId === ChainId.BSC) {
-        //   const { data: dataV1 } = await responses[0].json()
-        //   const { data: dataV2 } = await responses[1].json()
-
-        //   userLP = [
-        //     ...dataV1?.['pancakeswap']?.balances
-        //       ?.filter((balance: any) => balance.pool_token.balance !== '0')
-        //       .map((balance: any) => ({
-        //         ...balance,
-        //         version: 'v1',
-        //       })),
-        //     ...dataV2?.['pancakeswap']?.balances
-        //       ?.filter((balance: any) => balance.pool_token.balance !== '0')
-        //       .map((balance: any) => ({
-        //         ...balance,
-        //         version: 'v2',
-        //       })),
-        //   ]
-        // }
+        }
 
         const tokenDetails = (
           await dashboardContract?.getTokenInfo(
@@ -185,7 +158,7 @@ const useLPTokensState = () => {
       setLoading(false)
       updatingLPTokens.current = false
     }
-  }, [chainId, account, soulGuideContract, dashboardContract, quickSwapFactoryContract])
+  }, [chainId, account, dashboardContract])
 
   useEffect(() => {
     if (chainId && account && soulGuideContract && !updatingLPTokens.current) {

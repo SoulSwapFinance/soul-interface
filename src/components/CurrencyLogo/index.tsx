@@ -35,17 +35,15 @@ function getCurrencySymbol(currency) {
 function getCurrencyLogoUrls(currency) {
   const urls = []
 
-  urls.push(`https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/${getCurrencySymbol(currency)}.jpg`)
+  urls.push(`https://raw.githubusercontent.com/SoulSwapFinance/icons/prod/token/${getCurrencySymbol(currency)}.jpg`)
   if (currency.chainId in BLOCKCHAIN) {
     urls.push(
-      `https://raw.githubusercontent.com/SoulSwapFinance/assets/prod/blockchains/${
-        BLOCKCHAIN[currency.chainId]
-      }/assets/${currency.address}/logo.png`
+      `https://raw.githubusercontent.com/SoulSwapFinance/assets/prod/blockchains/${BLOCKCHAIN[currency.chainId]}/assets/${
+        currency.address}/logo.png`
     )
     urls.push(
-      `https://raw.githubusercontent.com/trustwallet/assets/prod/blockchains/${BLOCKCHAIN[currency.chainId]}/assets/${
-        currency.address
-      }/logo.png`
+      `https://raw.githubusercontent.com/SoulSwapFinance/assets/prod/blockchains/${BLOCKCHAIN[currency.chainId]}/assets/${
+        currency.address}/logo.png`
     )
   }
 
@@ -55,7 +53,6 @@ function getCurrencyLogoUrls(currency) {
 const EthereumLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/eth.jpg'
 const FantomLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/ftm.jpg'
 // const AvalancheLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/avax.jpg'
-// const BinanceCoinLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/bnb.jpg'
 // const HarmonyLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/one.jpg'
 // const HecoLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/heco.jpg'
 // const MaticLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/polygon.jpg'

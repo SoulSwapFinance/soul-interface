@@ -13,8 +13,6 @@ Chainlink price feeds...
 
 https://docs.chain.link/docs/ethereum-addresses/
 
-https://docs.chain.link/docs/binance-smart-chain-addresses/
-
 https://docs.chain.link/docs/matic-addresses/
 
 https://docs.chain.link/docs/xdai-price-feeds/

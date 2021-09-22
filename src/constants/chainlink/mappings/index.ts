@@ -1,6 +1,5 @@
 import { ChainId } from '@soulswap/sdk'
 import MAINNET from './mainnet'
-// import BSC from './bsc'
 // import HECO from './heco'
 // import KOVAN from './kovan'
 // import MATIC from './matic'
@@ -23,7 +22,6 @@ export const CHAINLINK_MAPPING: {
 } = {
   [ChainId.MAINNET]: MAINNET,
   // [ChainId.KOVAN]: KOVAN,
-  // [ChainId.BSC]: BSC,
   // [ChainId.HECO]: HECO,
   // [ChainId.MATIC]: MATIC,
   // [ChainId.XDAI]: XDAI,

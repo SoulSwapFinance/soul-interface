@@ -685,7 +685,7 @@ msgstr "보류 중"
 msgid "Pending Treasury Transfer"
 msgstr "보류 중인 자금 이체"
 
-msgid "Please connect to the appropriate Ethereum network."
+msgid "Please connect to the appropriate network."
 msgstr ""
 
 msgid "Please enter an amount"

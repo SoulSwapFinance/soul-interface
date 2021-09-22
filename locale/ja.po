@@ -685,7 +685,7 @@ msgstr "保留中"
 msgid "Pending Treasury Transfer"
 msgstr "保留中の資金移動"
 
-msgid "Please connect to the appropriate Ethereum network."
+msgid "Please connect to the appropriate network."
 msgstr ""
 
 msgid "Please enter an amount"

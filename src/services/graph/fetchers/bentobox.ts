@@ -10,7 +10,6 @@ export const BENTOBOX = {
   [ChainId.FANTOM]: 'sushiswap/fantom-bentobox',
   // [ChainId.XDAI]: 'sushiswap/xdai-bentobox',
   // [ChainId.MATIC]: 'sushiswap/matic-bentobox',
-  // [ChainId.BSC]: 'sushiswap/bsc-bentobox',
 }
 // export const fetcher = async (chainId = ChainId.MAINNET, query, variables) =>
 //   request(`${GRAPH_HOST[chainId]}/subgraphs/name/${BENTOBOX[chainId]}`, query)

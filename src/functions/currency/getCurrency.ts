@@ -30,14 +30,6 @@ export const USD_CURRENCY: { [chainId in ChainId]?: Currency } = {
   //   address: '0xD87Ba7A50B2E7E660f678A895E4B72E7CB4CCd9C',
   //   decimals: 6,
   // },
-  // [ChainId.BSC]: { // BUSD
-  //   address: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56',
-  //   decimals: 18,
-  // },
-  // [ChainId.BSC_TESTNET]: {
-  //   address: '0x337610d27c682E347C9cD60BD4b3b107C9d34dDd',
-  //   decimals: 18,
-  // },
   // [ChainId.HECO]: {
   //   address: '0x0298c2b32eaE4da002a15f36fdf7615BEa3DA047',
   //   decimals: 8,

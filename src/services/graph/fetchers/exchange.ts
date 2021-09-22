@@ -18,10 +18,9 @@ import { request } from 'graphql-request'
 
 export const EXCHANGE = {
   [ChainId.MAINNET]: 'sushiswap/exchange',
-  [ChainId.FANTOM]: 'sushiswap/fantom-exchange',
+  [ChainId.FANTOM]: 'soulswap/fantom-exchange',
   // [ChainId.XDAI]: 'sushiswap/xdai-exchange',
   // [ChainId.MATIC]: 'sushiswap/matic-exchange',
-  // [ChainId.BSC]: 'sushiswap/bsc-exchange',
   // [ChainId.HARMONY]: 'sushiswap/harmony-exchange',
   // [ChainId.OKEX]: 'sushiswap/okex-exchange',
   // [ChainId.AVALANCHE]: 'sushiswap/avalanche-exchange',

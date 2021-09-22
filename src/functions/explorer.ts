@@ -42,16 +42,6 @@ const builders = {
   //   }
   // },
 
-  // bscscan: (chainName: string, data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
-  //   const prefix = `https://${chainName ? `${chainName}.` : ''}bscscan.com`
-  //   switch (type) {
-  //     case 'transaction':
-  //       return `${prefix}/tx/${data}`
-  //     default:
-  //       return `${prefix}/${type}/${data}`
-  //   }
-  // },
-
   // matic: (chainName: string, data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
   //   // const prefix = `https://explorer-${chainName}.maticvigil.com`
   //   const prefix = 'https://polygonscan.com'
@@ -222,14 +212,6 @@ const chains: ChainObject = {
   // [ChainId.XDAI]: {
   //   chainName: 'xdai',
   //   builder: builders.xdai,
-  // },
-  // [ChainId.BSC]: {
-  //   chainName: '',
-  //   builder: builders.bscscan,
-  // },
-  // [ChainId.BSC_TESTNET]: {
-  //   chainName: 'testnet',
-  //   builder: builders.bscscan,
   // },
   // [ChainId.ARBITRUM]: {
   //   chainName: '',

@@ -11,15 +11,6 @@ import { SupportedChainId } from '../chains'
 //   cBTC: new Token(ChainId.CELO, '0xD629eb00dEced2a080B7EC630eF6aC117e614f1b', 18, 'cBTC', 'Wrapped Bitcoin'),
 // }
 
-// export const BSC: { [key: string]: Token } = {
-//   DAI: new Token(ChainId.BSC, '0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3', 18, 'DAI', 'Dai Stablecoin'),
-//   USD: new Token(ChainId.BSC, '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56', 18, 'BUSD', 'Binance USD'),
-//   USDC: new Token(ChainId.BSC, '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d', 18, 'USDC', 'USD Coin'),
-//   USDT: new Token(ChainId.BSC, '0x55d398326f99059fF775485246999027B3197955', 18, 'USDT', 'Tether USD'),
-//   BTCB: new Token(ChainId.BSC, '0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c', 18, 'BTCB', 'Bitcoin'),
-//   WETH: new Token(ChainId.BSC, '0x2170Ed0880ac9A755fd29B2688956BD959F933F8', 18, 'WETH', 'Wrapped Ether'),
-// }
-
 export const FANTOM: { [key: string]: Token } = {
   SOUL: new Token(ChainId.FANTOM, '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', 18, 'SOUL', 'SoulPower'), // 27 AUG
   SEANCE: new Token(ChainId.FANTOM, '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', 18, 'SEANCE', 'SeanceCircle'), // 27 AUG
@@ -206,7 +197,6 @@ export const SOUL: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', 18, 'SOUL', 'SoulPower'), // 27 AUG
   [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5', 18, 'SOUL', 'SoulPower'), // 31 JUL
   // [ChainId.XDAI]: new Token(ChainId.XDAI, SOUL_ADDRESS[ChainId.XDAI], 18, 'SOUL', 'SoulPower'),
-  // [ChainId.BSC]: new Token(ChainId.BSC, SOUL_ADDRESS[ChainId.BSC], 18, 'SOUL', 'SoulPower'),
   // // [ChainId.ARBITRUM]: new Token(ChainId.ARBITRUM, SOUL_ADDRESS[ChainId.ARBITRUM], 18, 'SOUL', 'SoulPower'),
   // [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, SOUL_ADDRESS[ChainId.AVALANCHE], 18, 'SOUL', 'SoulPower'),
   // [ChainId.OKEX]: new Token(ChainId.OKEX, SOUL_ADDRESS[ChainId.OKEX], 18, 'SOUL', 'SoulPower'),

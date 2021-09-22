@@ -12,7 +12,6 @@ export const SECONDS = {
   [ChainId.FANTOM]: 'matthewlilley/fantom-blocks',
   // [ChainId.XDAI]: 'matthewlilley/xdai-blocks',
   // [ChainId.MATIC]: 'matthewlilley/polygon-blocks',
-  // [ChainId.BSC]: 'matthewlilley/bsc-blocks',
   // [ChainId.HARMONY]: 'sushiswap/harmony-blocks',
   // [ChainId.AVALANCHE]: 'matthewlilley/avalanche-blocks',
   // [ChainId.CELO]: 'sushiswap/celo-blocks',

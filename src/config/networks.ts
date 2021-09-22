@@ -4,7 +4,6 @@ const Mainnet = '/images/networks/mainnet-network.jpg'
 const Fantom = '/images/networks/fantom-network.jpg'
 // const Arbitrum = '/images/networks/arbitrum-network.jpg'
 // const Avalanche = '/images/networks/avalanche-network.jpg'
-// const Bsc = '/images/networks/bsc-network.jpg'
 // const Goerli = '/images/networks/goerli-network.jpg'
 // const Harmony = '/images/networks/harmonyone-network.jpg'
 // const Heco = '/images/networks/heco-network.jpg'
@@ -26,8 +25,6 @@ export const NETWORK_ICON = {
   // [ChainId.RINKEBY]: Rinkeby,
   // [ChainId.GÖRLI]: Goerli,
   // [ChainId.KOVAN]: Kovan,
-  // [ChainId.BSC]: Bsc,
-  // [ChainId.BSC_TESTNET]: Bsc,
   // [ChainId.MATIC]: Polygon,
   // [ChainId.MATIC_TESTNET]: Matic,
   // [ChainId.XDAI]: xDai,
@@ -58,8 +55,6 @@ export const NETWORK_LABEL: { [chainId in ChainId]?: string } = {
   // [ChainId.XDAI]: 'xDai',
   // [ChainId.ARBITRUM]: 'Arbitrum',
   // [ChainId.ARBITRUM_TESTNET]: 'Arbitrum Testnet',
-  // [ChainId.BSC]: 'BSC',
-  // [ChainId.BSC_TESTNET]: 'BSC Testnet',
   // [ChainId.MOONBEAM_TESTNET]: 'Moonbase',
   // [ChainId.AVALANCHE]: 'Avalanche',
   // [ChainId.AVALANCHE_TESTNET]: 'Fuji',
