@@ -41,7 +41,7 @@ export const SUPPORTED_NETWORKS: {
       symbol: 'FTM',
       decimals: 18,
     },
-    rpcUrls: ['https://rpcapi.fantom.network'],
+    rpcUrls: ['https://rpc.fantom.tools'],
     blockExplorerUrls: ['https://ftmscan.com'],
   },
   [ChainId.FANTOM_TESTNET]: {
@@ -55,17 +55,6 @@ export const SUPPORTED_NETWORKS: {
     rpcUrls: ['https://rpc.testnet.fantom.network'],
     blockExplorerUrls: ['https://testnet.ftmscan.com'],
   },
-  // [ChainId.BSC]: {
-  //   chainId: '0x38',
-  //   chainName: 'Binance Smart Chain',
-  //   nativeCurrency: {
-  //     name: 'Binance Coin',
-  //     symbol: 'BNB',
-  //     decimals: 18,
-  //   },
-  //   rpcUrls: ['https://bsc-dataseed.binance.org'],
-  //   blockExplorerUrls: ['https://bscscan.com'],
-  // },
   // [ChainId.MATIC]: {
   //   chainId: '0x89',
   //   chainName: 'Matic',
@@ -185,7 +174,6 @@ export default function NetworkModal(): JSX.Element | null {
           // ChainId.ARBITRUM,
           // ChainId.OKEX,
           // ChainId.HECO,
-          // ChainId.BSC,
           // ChainId.XDAI,
           // ChainId.HARMONY,
           // ChainId.AVALANCHE,

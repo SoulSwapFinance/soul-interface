@@ -1,6 +1,6 @@
 import { Percent } from '@soulswap/sdk'
 import { ChainId, JSBI } from '@soulswap/sdk'
-import { binance, fortmatic, injected, portis, torus, walletconnect, walletlink } from '../connectors'
+import { fortmatic, injected, portis, torus, walletconnect, walletlink } from '../connectors'
 
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { BigNumber } from 'ethers'
@@ -8,7 +8,7 @@ import { BigNumber } from 'ethers'
 export const RPC = {
   // [ChainId.MAINNET]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
   [ChainId.MAINNET]: 'https://eth-mainnet.alchemyapi.io/v2/nj9dkG3QULVVIs_hIMq26wL0ZwV4dJ3x', // 20 SEP
-  [ChainId.FANTOM]: 'https://rpcapi.fantom.network',
+  [ChainId.FANTOM]: 'https://rpc.fantom.tools',
   [ChainId.FANTOM_TESTNET]: 'https://rpc.testnet.fantom.network',
   // [ChainId.ROPSTEN]: 'https://eth-ropsten.alchemyapi.io/v2/cidKix2Xr-snU3f6f6Zjq_rYdalKKHmW',
   // [ChainId.RINKEBY]: 'https://eth-rinkeby.alchemyapi.io/v2/XVLwDlhGP6ApBXFz_lfv0aZ6VmurWhYD',
@@ -17,8 +17,6 @@ export const RPC = {
   // [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com',
   // [ChainId.MATIC_TESTNET]: 'https://rpc-mumbai.matic.today',
   // [ChainId.XDAI]: 'https://rpc.xdaichain.com',
-  // [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
-  // [ChainId.BSC_TESTNET]: 'https://data-seed-prebsc-2-s3.binance.org:8545',
   // [ChainId.MOONBEAM_TESTNET]: 'https://rpc.testnet.moonbeam.network',
   // [ChainId.AVALANCHE]: 'https://api.avax.network/ext/bc/C/rpc',
   // [ChainId.AVALANCHE_TESTNET]: 'https://api.avax-test.network/ext/bc/C/rpc',
@@ -31,10 +29,10 @@ export const RPC = {
   // [ChainId.ARBITRUM]: 'https://arb1.arbitrum.io/rpc',
 }
 
-export const POOL_DENY = ['14', '29', '45', '30']
+export const POOL_DENY = []
 
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
-export const AVERAGE_BLOCK_TIME_IN_SECS = 1
+export const AVERAGE_BLOCK_TIME_IN_SECS = 2
 
 export const ARCHER_RELAY_URI: { [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: 'https://api.archerdao.io/v1/transaction',
@@ -176,15 +174,6 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     color: '#315CF5',
     mobile: true,
   },
-  Binance: {
-    connector: binance,
-    name: 'Binance',
-    iconName: 'bsc.jpg',
-    description: 'Login using Binance hosted wallet',
-    href: null,
-    color: '#F0B90B',
-    mobile: true,
-  },
 }
 
 export const NetworkContextName = 'NETWORK'
@@ -258,7 +247,6 @@ export const ANALYTICS_URL: { [chainId in ChainId]?: string } = {
   [ChainId.FANTOM]: 'https://defillama.com/protocol/soulswap',
   [ChainId.FANTOM_TESTNET]: 'https://defillama.com/protocol/soulswap',
   // [ChainId.MATIC]: 'https://analytics-polygon.soulswap.finance',
-  // [ChainId.BSC]: 'https://analytics-bsc.soulswap.finance',
   // [ChainId.XDAI]: 'https://analytics-xdai.soulswap.finance',
   // [ChainId.HARMONY]: 'https://analytics-harmony.soulswap.finance',
   // [ChainId.ARBITRUM]: undefined,
