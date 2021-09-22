@@ -1,6 +1,6 @@
-
 import { useCallback } from 'react'
 import { ethers, BigNumber } from 'ethers'
+// import { formatNumber } from '../../functions'
 
 import { ChainId } from '@soulswap/sdk'
 // import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
@@ -90,7 +90,11 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
     }
   }
 
-  // pool info
+  // pool info: 
+    // [0] lpTokenUsed, 
+    // [1] allocPoint, 
+    // [2] lastRewardTime, 
+    // [3] accSoulPerShare
   const poolInfo = async (pid) => {
     try {
       const result = await summonerContract?.poolInfo(pid)
@@ -105,7 +109,12 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
     }
   }
 
-  // user info
+  // user info: 
+    // [0] amount, 
+    // [1] rewardDebt,
+    // [3] lastWithdrawTime,
+    // [3] lastDeposiTime,
+    // [4] timeDelta
   const userInfo = async (pid, account) => {
     try {
       const result = await summonerContract?.userInfo(pid, account)
@@ -371,7 +380,7 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
    */
   const fetchAprAndLiquidity = async (pid, token1Name, token2Name, token1Address, token2Address, lpToken) => {
     try {
-      const SECONDS_PER_YEAR = 31557600
+      const SECONDS_PER_YEAR = 31_536_000
 
       // pool weight
       const alloc = await poolInfo(pid)
@@ -382,14 +391,15 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
       const soulPerSec = await soulPerSecond()
       const formattedSps = ethers.utils.formatUnits(soulPerSec.toString())
 
-      // amount of soul allocated to this pool per year
+      // amount of soul allocated && allocated to this pool per year
+      // const yearlySoulFarmAlloc = SECONDS_PER_YEAR * formattedSps
       const yearlySoulFarmAlloc = SECONDS_PER_YEAR * formattedSps * poolWeight
 
       // value of lp tokens held by summoner
       const fetchedLiquidity = await fetchLiquidityValue(token1Name, token2Name, token1Address, token2Address, lpToken)
 
       // farm apr
-      const farmApr = yearlySoulFarmAlloc / fetchedLiquidity[1] * 100
+      const farmApr = yearlySoulFarmAlloc * 100 / fetchedLiquidity[1]
 
       return [farmApr, fetchedLiquidity[0], fetchedLiquidity[1]]
     } catch (e) {
@@ -416,7 +426,6 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
       
       const totalLpValue = ethers.utils.formatUnits(summonerBal.toString()) * soulPerFusd;
       console.log('totalLpValue', totalLpValue)
-
       
       return totalLpValue;
     } catch (e) {

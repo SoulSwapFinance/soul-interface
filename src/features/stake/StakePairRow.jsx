@@ -269,13 +269,13 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 {/* 2 token logo combined ? */}
                 <Wrap>
                   <Text padding="0" fontSize=".7rem" color="#bbb">
-                    Stake/Earn
+                    STAKE YOUR SOUL
                   </Text>
                   <TokenPair
                     fontSize="1.2rem"
                     target="_blank"
                     color="pink"
-                    href={`https://app.soulswap.finance/add/${farm.token1Address[chainId]}/${farm.token2Address[chainId]}`}
+                    href={`https://app.soulswap.finance/add/${farm.token1Address[250]}/${farm.token2Address[250]}`}
                   >
                     {lpSymbol}
                   </TokenPair>
@@ -350,7 +350,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 {/* <button >Max</button> */}
                 <Wrap padding="0" display="flex" justifyContent="space-between">
                   <Text padding="0" fontSize=".9rem" color="#bbb">
-                    Available: {Number(unstakedBal).toFixed(3)}
+                    Available: { Number(unstakedBal).toFixed(2) }
                   </Text>
                   <ClickableText
                     padding="0"
@@ -381,7 +381,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
               <FunctionBox>
                 <FlexText>
                   <Text padding="0" fontSize=".9rem" color="#bbb">
-                    Staked: {Number(stakedBal).toFixed(4)}
+                    Staked: {Number(stakedBal).toFixed(2)}
                   </Text>
                   <ClickableText
                     padding="0"
