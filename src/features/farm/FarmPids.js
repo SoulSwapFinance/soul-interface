@@ -30,7 +30,7 @@ export const FarmPids = [
     token1Address: tokens.FTM,
     token2Address: tokens.USDC,
   },
-  { // 800	
+  { // 400	
     pid: 3,
     token1: 'FUSD',
     token2: 'SOUL',
@@ -54,7 +54,30 @@ export const FarmPids = [
     token1Address: tokens.FTM,
     token2Address: tokens.WETH,
   },
-
+  { // 400
+    pid: 5,
+    token1: 'SOUL',
+    token2: 'SEANCE',
+    lpSymbol: 'SOUL-SEANCE',
+    lpAddresses: {
+      4002: '',
+      250: '0x8f1E15cD3d5a0bb85B8189d5c6B61BB64398E19b',
+    },
+      token1Address: tokens.SOUL,
+      tokens2Address: tokens.SEANCE,
+  },
+  { // 200
+    pid: 6,
+    token1: 'FUSD',
+    token2: 'USDC',
+    lpSymbol: 'FUSD-USDC',
+    lpAddresses: {
+      4002: '',
+      250: '0xD5F5E2638d636A98eD4aAEBfd2045441316e0c08',
+      },
+      token1Address: tokens.FUSD,
+      tokens2Address: tokens.USDC,
+  },
   // {
   //   pid: 5,
   //   token1: "FTM",

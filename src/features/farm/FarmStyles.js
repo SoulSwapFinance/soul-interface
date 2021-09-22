@@ -118,7 +118,7 @@ export const ShowBtn = styled.button`
   background-color: transparent;
 
   &:hover, &:active {
-    color: #white;
+    color: #ffffff;
     opacity: 75%;
     cursor: pointer;
   }

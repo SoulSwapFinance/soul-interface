@@ -65,7 +65,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     dailyDecay,
     getWithdrawable,
     getFeePercent,
-  } = useSoulSummoner(lpToken, farm.token1Address[chainId], farm.token2Address[chainId])
+  } = useSoulSummoner(lpToken, farm.token1Address, farm.token2Address)
   const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
 
   const [showing, setShowing] = useState(false)
@@ -290,6 +290,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
   return (
     <>
+
       <Wrap padding="0" display="flex" justifyContent="center">
         <FarmContainer>
           <FarmRow onClick={() => handleShow()}>
@@ -303,21 +304,21 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                   <TokenPair
                     fontSize="1.2rem"
                     target="_blank"
-                    href={`https://app.soulswap.finance/add/${farm.token1Address[250]}/${farm.token2Address[250]}`}
+                    href={`https://soulswap.finance/add/${farm.token1Address}/${farm.token2Address}`}
                   >
                     {lpSymbol}
                   </TokenPair>
                 </Wrap>
               </TokenPairBox>
 
-              <FarmItemBox>
+              {/* <FarmItemBox>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
                   APR
                 </Text>
                 <FarmItem>{apr ? (apr === 'Infinity' ? '∞%' : apr + '%') : '?'}</FarmItem>
-              </FarmItemBox>
+              </FarmItemBox> */}
 
-              <HideOnMobile>
+              {/* <HideOnMobile>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
                   TVL
                 </Text>
@@ -330,7 +331,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     ${liquidity}
                   </Text>
                 )}
-              </HideOnMobile>
+              </HideOnMobile> */}
 
               <FarmItemBox desktopOnly={true}>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
@@ -378,7 +379,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 {/* <button >Max</button> */}
                 <Wrap padding="0" display="flex" justifyContent="space-between">
                   <Text padding="0" fontSize=".9rem" color="#bbb">
-                    Available: {Number(unstakedBal).toFixed(3)}
+                    Available: {Number(unstakedBal).toFixed(4)}
                   </Text>
                   <ClickableText
                     padding="0"

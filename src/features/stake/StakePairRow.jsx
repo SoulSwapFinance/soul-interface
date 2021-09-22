@@ -76,7 +76,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    * Runs only on initial render/mount
    */
   useEffect(() => {
-    getAprAndLiquidity()
+    // getAprAndLiquidity()
     fetchPending()
     fetchUserFarmAlloc()
   }, [account])
@@ -275,21 +275,21 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     fontSize="1.2rem"
                     target="_blank"
                     color="pink"
-                    href={`https://app.soulswap.finance/add/${farm.token1Address[250]}/${farm.token2Address[250]}`}
+                    href={`https://app.soulswap.finance/add/${farm.token1Address[chainId]}/${farm.token2Address[chainId]}`}
                   >
                     {lpSymbol}
                   </TokenPair>
                 </Wrap>
               </TokenPairBox>
 
-              <StakeItemBox>
+              {/* <StakeItemBox>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
                   APR
                 </Text>
                 <StakeItem>{apr ? (apr === 'Infinity' ? '∞%' : apr + '%') : '?'}</StakeItem>
-              </StakeItemBox>
+              </StakeItemBox> */}
 
-              <HideOnMobile>
+              {/* <HideOnMobile>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
                   TVL
                 </Text>
@@ -302,7 +302,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     ${liquidity}
                   </Text>
                 )}
-              </HideOnMobile>
+              </HideOnMobile> */}
 
               <StakeItemBox desktopOnly={true}>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
