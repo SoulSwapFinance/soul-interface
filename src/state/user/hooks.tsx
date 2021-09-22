@@ -223,8 +223,8 @@ export function useURLWarningToggle(): () => void {
 export function toV2LiquidityToken([tokenA, tokenB]: [Token, Token]): Token {
   if (tokenA.chainId !== tokenB.chainId) throw new Error('Not matching chain IDs')
   if (tokenA.equals(tokenB)) throw new Error('Tokens cannot be equal')
-  if (!FACTORY_ADDRESS[tokenA.chainId]) throw new Error('No V2 factory address on this chain')
-  if (!INIT_CODE_HASH[tokenA.chainId]) throw new Error('No V2 factory init code hash set in sdk on this chain')
+  if (!FACTORY_ADDRESS[tokenA.chainId]) throw new Error('No factory address on this chain')
+  if (!INIT_CODE_HASH[tokenA.chainId]) throw new Error('No factory init code hash set in sdk on this chain')
 
   return new Token(
     tokenA.chainId,

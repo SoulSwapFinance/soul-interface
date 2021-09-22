@@ -2904,7 +2904,7 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@ramp-network/ramp-instant-sdk@^2.50":
+"@ramp-network/ramp-instant-sdk@^2.5.0":
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/@ramp-network/ramp-instant-sdk/-/ramp-instant-sdk-2.5.0.tgz#4d8a746cd5cf2dfd6ffb1451058cfe9126d85c10"
   integrity sha512-KKow1w+G49a/zq4Vv659G+ZVWs6DwWglLJL2H7XxATbCSE+7QknNjId/RIwJ1sDfJv10rV4AqjELXcPsgKlgcw==
