@@ -7,11 +7,11 @@ import { shade } from 'polished'
 import { uriToHttp } from '../functions/convert'
 
 async function getColorFromToken(token: Token): Promise<string | null> {
-  if (token.chainId === ChainId.FANTOM && token.address === '0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e') { // dai
+  if (token.chainId === ChainId.FANTOM && token.address === '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E') { // dai
     return Promise.resolve('#FAAB14')
   }
 
-  const path = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/${token.address}/logo.png`
+  const path = `https://raw.githubusercontent.com/SoulSwapFinance/assets/prod/blockchains/fantom/assets/${token.address}/logo.png`
 
   return Vibrant.from(path)
     .getPalette()
