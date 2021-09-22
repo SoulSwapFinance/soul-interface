@@ -89,10 +89,10 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    * Runs only on initial render/mount
    */
   useEffect(() => {
-    fetchPending()
     getAprAndLiquidity()
-    // fetchUserFarmAlloc()
-  }, [account, fetchPending, getAprAndLiquidity])
+    fetchPending()
+    fetchUserFarmAlloc()
+  }, [account])
 
   /**
    * Runs on initial render/mount and reruns every 2 seconds
@@ -100,10 +100,15 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   useEffect(() => {
     if (account) {
       const timer = setTimeout(() => {
-        fetchPending(pid)
-        // getAprAndLiquidity()
-      }, 10000)
+        fetchPending()
+        getAprAndLiquidity()
+        fetchUserFarmAlloc()
 
+        if (showing) {
+          fetchBals()
+          fetchApproval()
+        }
+      }, 10000)
       // Clear timeout if the component is unmounted
       return () => clearTimeout(timer)
     }
@@ -157,12 +162,12 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       const totalLpValue = result[1]
       const summonerTotalLpValue = result[2]
 
-      setLiquidity(Number(summonerTotalLpValue).toFixed(0
-      ).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
+      setLiquidity(Number(summonerTotalLpValue).toFixed(0)
+      .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
 
       // console.log("apr", farmApr);
-      setApr(Number(farmApr).toFixed(0
-      ).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
+      setApr(Number(farmApr).toFixed(0)
+      .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
     } catch (e) {
       console.warn(e)
     }
