@@ -268,8 +268,8 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
               <TokenPairBox>
                 {/* 2 token logo combined ? */}
                 <Wrap>
-                  <Text padding="0" fontSize=".7rem" color="#bbb">
-                    STAKE YOUR SOUL
+                  <Text padding="0" fontSize="1rem" color="#F36FFE">
+                    STAKE SOUL
                   </Text>
                   <TokenPair
                     fontSize="1.2rem"
@@ -305,7 +305,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
               </HideOnMobile> */}
 
               <StakeItemBox desktopOnly={true}>
-                <Text padding="0" fontSize=".7rem" color="#bbb">
+                <Text padding="0" fontSize=".7rem" color="#F36FFE">
                   Earned
                 </Text>
                 {pending === '0.0' ? (
@@ -320,7 +320,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
               </StakeItemBox>
 
               <HideOnMobile desktopOnly={true}>
-                <Text padding="0" fontSize=".7rem" color="#bbb">
+                <Text padding="0" fontSize=".7rem" color="#F36FFE">
                   Ownership
                 </Text>
                 {percOfFarm === 0 ? (

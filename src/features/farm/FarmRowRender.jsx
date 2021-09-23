@@ -298,13 +298,14 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
               <TokenPairBox>
                 {/* 2 token logo combined ? */}
                 <Wrap>
-                  <Text padding="0" fontSize=".7rem" color="#bbb">
+                  {/* <Text padding="0" fontSize=".7rem" color="#bbb">
                     Token Pair
-                  </Text>
+                  </Text> */}
                   <TokenPair
                     fontSize="1.2rem"
-                    // target="_blank"
-                    // href={`https://app.soulswap.finance/add/${farm.token1Address[chainId]}/${farm.token2Address[chainId]}`}
+                    target="_blank"
+                    color="#F36FFE" // neon purple
+                    href={`https://app.soulswap.finance/add/${farm.token1Address[chainId]}/${farm.token2Address[chainId]}`}
                   >
                     {lpSymbol}
                   </TokenPair>
@@ -334,7 +335,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
               </HideOnMobile> */}
 
               <FarmItemBox desktopOnly={true}>
-                <Text padding="0" fontSize=".7rem" color="#bbb">
+                <Text padding="0" fontSize=".7rem" color="#F36FFE">
                   Earned
                 </Text>
                 {pending === '0.0' ? (
@@ -349,7 +350,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
               </FarmItemBox>
 
               <HideOnMobile desktopOnly={true}>
-                <Text padding="0" fontSize=".7rem" color="#bbb">
+                <Text padding="0" fontSize=".7rem" color="#F36FFE">
                   Ownership
                 </Text>
                 {percOfFarm === 0 ? (
@@ -405,7 +406,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     </SubmitButton>
                   )}
                 </Wrap>
-                    <Text fontSize=".9rem" padding="0" color="#ee82ee">
+                    <Text fontSize=".9rem" padding="0" color="#F36FFE">
                     Withdrawal fee: starts at 14%, with 1% less each day.
                   </Text>
               </FunctionBox>
