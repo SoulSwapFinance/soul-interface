@@ -95,7 +95,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
           fetchBals()
           fetchApproval()
         }
-      }, 10000)
+      }, 8000)
 
       // Clear timeout if the component is unmounted
       return () => clearTimeout(timer)
@@ -135,12 +135,12 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       const farmApr = result[0]
       const totalLpValue = result[1]
 
-      setLiquidity(Number(totalLpValue).toFixed(0)
+      setLiquidity(Number(totalLpValue).toFixed(4)
       .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
       )
 
       // console.log("apr", farmApr);
-      setApr(Number(farmApr).toFixed(0)
+      setApr(Number(farmApr).toFixed(4)
       .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
       )
     } catch (e) {
@@ -193,7 +193,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    */
   const fetchApproval = async () => {
     if (!account) {
-      alert('connect wallet')
+      alert('Connect Wallet')
     } else {
       // Checks if SoulSummoner can move tokens
       const amount = await erc20Allowance(account, SoulSummonerAddress)
@@ -207,7 +207,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    */
   const handleApprove = async () => {
     if (!account) {
-      alert('connect wallet')
+      alert('Connect Wallet')
     } else {
       try {
         const tx = await erc20Approve(SoulSummonerAddress)
@@ -234,7 +234,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   }
 
   /**
-   * Withdraws staked lpTokens from SoulSummoner farm
+   * Withdraws staked tokens from SoulSummoner farm
    */
   const handleWithdraw = async (amount) => {
     try {
@@ -289,7 +289,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 <StakeItem>{apr ? (apr === 'Infinity' ? '∞%' : apr + '%') : '?'}</StakeItem>
               </StakeItemBox> */}
 
-              <HideOnMobile>
+              {/* <HideOnMobile>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
                   TVL
                 </Text>
@@ -302,7 +302,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     ${liquidity}
                   </Text>
                 )}
-              </HideOnMobile>
+              </HideOnMobile> */}
 
               <StakeItemBox desktopOnly={true}>
                 <Text padding="0" fontSize=".7rem" color="#F36FFE">
@@ -350,7 +350,9 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 {/* <button >Max</button> */}
                 <Wrap padding="0" display="flex" justifyContent="space-between">
                   <Text padding="0" fontSize=".9rem" color="#bbb">
-                    Available: { Number(unstakedBal).toFixed(2) }
+                    Available: { Number(unstakedBal).toFixed(3)
+                    .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                    }
                   </Text>
                   <ClickableText
                     padding="0"
@@ -381,7 +383,10 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
               <FunctionBox>
                 <FlexText>
                   <Text padding="0" fontSize=".9rem" color="#bbb">
-                    Staked: {Number(stakedBal).toFixed(2)}
+                    Staked: {Number(stakedBal).toFixed(3)
+                    .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+                    }
                   </Text>
                   <ClickableText
                     padding="0"

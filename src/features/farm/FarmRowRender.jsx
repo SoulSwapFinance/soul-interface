@@ -108,7 +108,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
           fetchBals()
           fetchApproval()
         }
-      }, 10000)
+      }, 8000)
       // Clear timeout if the component is unmounted
       return () => clearTimeout(timer)
     }
