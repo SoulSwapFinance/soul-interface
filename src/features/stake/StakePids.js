@@ -1,4 +1,4 @@
-import { tokens } from '../farm/tokens'
+import { tokens } from '../farm/constants/tokens'
 
 // Base tokens (token1):
 // - FTM
