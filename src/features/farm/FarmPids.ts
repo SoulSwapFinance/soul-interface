@@ -1,4 +1,4 @@
-import { tokens } from './tokens'
+import { tokens } from './constants/tokens'
 
 // Base tokens (token1):
 // - FTM
@@ -77,6 +77,18 @@ export const FarmPids = [
       },
       token1Address: tokens.FUSD,
       token2Address: tokens.USDC,
+  },
+  { // 400
+    pid: 7,
+    token1: 'USDC',
+    token2: 'SEANCE',
+    lpSymbol: 'USDC-SEANCE',
+    lpAddresses: {
+      4002: '',
+      250: '0x98C678d3C7ebeD4a36B84666700d8b5b5Ddc1f79',
+      },
+      token1Address: tokens.USDC,
+      token2Address: tokens.SEANCE,
   },
 ]
 
