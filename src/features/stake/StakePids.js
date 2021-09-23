@@ -1,8 +1,6 @@
 import { tokens } from '../farm/constants/tokens'
 
 // Base tokens (token1):
-// - FTM
-// - FUSD
 // - SOUL
 
 export const SummonerPid0 = [
