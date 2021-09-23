@@ -20,8 +20,9 @@ import { useTokenBalance } from '../../state/wallet/hooks'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import useSoulVault from '../../hooks/useSoulVault'
 import AccountDetails from '../../components/AccountDetails'
-import useSoulSummoner from '../../features/farm/useSoulSummoner'
+import useSoulSummoner from '../../features/farm/hooks/useSoulSummoner'
 import { ethers } from 'ethers'
+import { useSoulSummonerContract } from '../../hooks'
 
 const INPUT_CHAR_LIMIT = 18
 
@@ -229,8 +230,9 @@ export default function SoulStake() {
     handleInput('')
     setPendingTx(false)
   }
+  // const summonerContract = useSoulSummonerContract()
 
-  const { pendingSoul } = useSoulSummoner()
+  const { pendingSoul } = useSoulSummonerContract()
 
   const [pending, setPending] = useState('')
 
@@ -252,7 +254,7 @@ export default function SoulStake() {
       toggleWalletModal()
     } else {
       try {
-        const pending = ethers.BigNumber.from(await pendingSoul(pid)).toString()
+        const pending = ethers.BigNumber.from(await pendingSoul(pid, account)).toString()
         console.log(pending)
         const formatted = ethers.utils.formatUnits(pending.toString())
         console.log(formatted)
