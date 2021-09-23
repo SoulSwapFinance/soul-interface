@@ -25,3 +25,4 @@ Home repository for the SoulSwap Decentralized Finance Application.
 - ### [Vaults](./src/pages/vaults/index.tsx)
 - ### [Vesting](./src/pages/vesting/index.tsx)
 - ### [Zap](./src/pages/zap)
+
