@@ -11,7 +11,7 @@ export const ARCHER_GAS_URI: { [chainId in ChainId]?: string } = {
 }
 
 // default archer gas estimate, 250k wei
-export const DEFAULT_ARCHER_GAS_ESTIMATE: BigNumber = BigNumber.from(250000)
+export const DEFAULT_ARCHER_GAS_ESTIMATE: BigNumber = BigNumber.from(325000) // TODO: manual gas controls
 // default gas prices to use if all other sources unavailable
 export const DEFAULT_ARCHER_GAS_PRICES: BigNumber[] = [
   BigNumber.from(60000000000),
