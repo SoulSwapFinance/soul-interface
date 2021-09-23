@@ -78,17 +78,6 @@ export const FarmPids = [
       token1Address: tokens.FUSD,
       token2Address: tokens.USDC,
   },
-  // {
-  //   pid: 5,
-  //   token1: "FTM",
-  //   token2: "BTC",
-  //   lpSymbol: "FTM-BTC",
-  //   lpAddresses: {
-  //     4002: "0x69532253792c8ce581D1BE2150aF67994fF324e7",
-  //   },
-  //   token1Address: tokens.FTM,
-  //   token2Address: tokens.BTC,
-  // },
 ]
 
 export default FarmPids

@@ -65,7 +65,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     dailyDecay,
     getWithdrawable,
     getFeePercent,
-  } = useSoulSummoner(lpToken, farm.token1Address, farm.token2Address)
+  } = useSoulSummoner(pid, lpToken, farm.token1Address, farm.token2Address)
   const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
 
   const [showing, setShowing] = useState(false)

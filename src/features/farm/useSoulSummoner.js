@@ -11,7 +11,7 @@ import { SoulSummonerAddress } from './constants'
 
 import FarmPids from './FarmPids'
 
-function useSoulSummoner(lpToken, token1Address, token2Address) {
+function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
   const summonerContract = useSoulSummonerContract()
   const lpTokenContract = usePairContract(lpToken)
   const token1Contract = useTokenContract(token1Address)
@@ -481,7 +481,6 @@ function useSoulSummoner(lpToken, token1Address, token2Address) {
       return e;
     }
   };
-
 
   return {
     enterStaking,
