@@ -8,9 +8,9 @@ import { TorusConnector } from '@web3-react/torus-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 
-const RPC = {
-  // [ChainId.MAINNET]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
-  [ChainId.MAINNET]: 'https://eth-mainnet.alchemyapi.io/v2/nj9dkG3QULVVIs_hIMq26wL0ZwV4dJ3x',
+export const RPC = {
+  [ChainId.MAINNET]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
+  // [ChainId.MAINNET]: 'https://eth-mainnet.alchemyapi.io/v2/nj9dkG3QULVVIs_hIMq26wL0ZwV4dJ3x',
   // [ChainId.FANTOM]: 'https://rpcapi.fantom.network',
   [ChainId.FANTOM]: 'https://rpc.fantom.tools',
   [ChainId.FANTOM_TESTNET]: 'https://rpc.testnet.fantom.network',
