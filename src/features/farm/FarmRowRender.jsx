@@ -414,7 +414,9 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
               <FunctionBox>
                 <FlexText>
                   <Text padding="0" fontSize=".9rem" color="#bbb">
-                    Staked: {Number(stakedBal).toFixed(4)}
+                    Staked: {Number(stakedBal).toFixed(3)
+                    .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                  }
                   </Text>
                   <ClickableText
                     padding="0"
