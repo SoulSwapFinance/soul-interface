@@ -5,8 +5,8 @@ import { ethers } from 'ethers'
 
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
-import useSoulSummoner from '../farm/useSoulSummoner'
-import useApprove from '../farm/useApprove'
+import useSoulSummoner from '../farm/hooks/useSoulSummoner'
+import useApprove from '../farm/hooks/useApprove'
 
 import { SoulSummonerAddress } from '../farm/constants'
 

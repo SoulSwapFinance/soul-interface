@@ -1,7 +1,7 @@
 import FarmRowRender from './FarmRowRender'
 import { FarmPids } from './FarmPids'
 
-import { Wrap, Heading, Text } from '../../components/ReusableStyles'
+import { Wrap } from '../../components/ReusableStyles' // Heading, Text 
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
 

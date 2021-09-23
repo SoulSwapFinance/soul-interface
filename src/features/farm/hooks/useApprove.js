@@ -1,8 +1,6 @@
 import { ethers } from 'ethers'
 
-// import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
-
-import { useTokenContract } from '../../hooks/useContract'
+import { useTokenContract } from './useContract'
 
 function useApproveContract(tokenAddress) {
   const contract = useTokenContract(tokenAddress)

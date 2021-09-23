@@ -13,12 +13,14 @@ export const ContractScan = {
 // old: 0x27FCdd0DA2F9328Bd8Eede0e7F74e2E5a50a2e7D
 // new: 0x0d36535b2666959a52c0c73CB940A59b1EbE9FD6
 export const SoulSummonerAddress = '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B'
-export const SoulGuideAddress = '0xEd2Fb478f7fCef33E1E1d980a0135789B295a7F5' // SEP22
+export const MULTICALL_ADDRESS = '0xf682Cc4468608fC4eFbaD6a06D9BC72e7790075a' // SEP22
 
 // export const SoulSummonerAddress = {
 //     250: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B',
 //     4002: '0x70C6A37244feD0Fa4e4148D5ffe38a209dCEd714',
 // }
+
+
 // connected chain -> targeted chain -> address
 export const AnyswapBridge = {
     1: {

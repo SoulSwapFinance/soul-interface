@@ -6,10 +6,10 @@ import { ethers } from 'ethers'
 
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
-import useSoulSummoner from './useSoulSummoner'
-import useApprove from './useApprove'
+import useSoulSummoner from './hooks/useSoulSummoner'
+import useApprove from './hooks/useApprove'
 import { SoulSummonerAddress } from './constants'
-
+import { MulticallAddress } from './constants'
 import {
   FlexText,
   FarmContainer,
