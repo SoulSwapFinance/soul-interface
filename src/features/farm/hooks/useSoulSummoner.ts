@@ -113,9 +113,11 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
   // user info: 
     // [0] amount, 
     // [1] rewardDebt,
+    // [2] rewardDebtAtTime
     // [3] lastWithdrawTime,
-    // [3] lastDeposiTime,
-    // [4] timeDelta
+    // [4] firstDepositTime,
+    // [5] timeDelta,
+    // [6] lastDepositTime
   const userInfo = async (pid, account) => {
     try {
       const result = await summonerContract?.userInfo(pid, account)
@@ -177,7 +179,8 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
 
   const getFeePercent = async (pid) => {
     try {
-      const result = await summonerContract?.getFeePercent(pid)
+    const timeDelta = await userDelta(pid, account)
+      const result = await summonerContract?.getFeeRate(pid, timeDelta)
       return result
     } catch (e) {
       console.log(e)
