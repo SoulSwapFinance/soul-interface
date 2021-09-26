@@ -204,12 +204,9 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       // alert('connect wallet')
     } else {
       try {
-        const result1 = await userInfo(pid, account)
-        
-        const pending = ethers.utils.formatUnits(result1?.[1])
-        
-        const formatted = ethers.utils.formatUnits(pending.toString())
-        setPending(Number(formatted).toFixed(2).toString())
+        const pending = await userInfo(pid, account)?.[1]
+        const formatted = Number(ethers.utils.formatUnits(pending.toString())).toFixed(2)
+        setPending(formatted)
       } catch (err) {
         console.warn(err)
       }
