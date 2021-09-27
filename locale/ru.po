@@ -867,18 +867,6 @@ msgstr "Обменять"
 msgid "Swap Anyway"
 msgstr "Обменять в любом случае"
 
-msgid "Swap From (est.):"
-msgstr "Обменять с (прибл.):"
-
-msgid "Swap From:"
-msgstr "Обменять с:"
-
-msgid "Swap To (est.):"
-msgstr "Обменять на (прибл.):"
-
-msgid "Swap To:"
-msgstr "Обменять на:"
-
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""
 

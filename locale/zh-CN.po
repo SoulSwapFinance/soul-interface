@@ -860,18 +860,6 @@ msgstr "兑换"
 msgid "Swap Anyway"
 msgstr "仍要交换"
 
-msgid "Swap From (est.):"
-msgstr "交换自（估计）："
-
-msgid "Swap From:"
-msgstr "交换自："
-
-msgid "Swap To (est.):"
-msgstr "交换至（估算）："
-
-msgid "Swap To:"
-msgstr "交换至："
-
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""
 

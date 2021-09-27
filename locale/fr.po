@@ -867,18 +867,6 @@ msgstr "Swapper"
 msgid "Swap Anyway"
 msgstr "Swapper quand même"
 
-msgid "Swap From (est.):"
-msgstr "Swapper depuis (montant estimé):"
-
-msgid "Swap From:"
-msgstr "Swapper depuis:"
-
-msgid "Swap To (est.):"
-msgstr "Swap pour (estimé):"
-
-msgid "Swap To:"
-msgstr "Swapper pour:"
-
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""
 

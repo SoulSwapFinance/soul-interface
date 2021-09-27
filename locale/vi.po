@@ -865,18 +865,6 @@ msgstr "Hoán đổi"
 msgid "Swap Anyway"
 msgstr "Vẫn hoán đổi"
 
-msgid "Swap From (est.):"
-msgstr "Hoán đổi từ (ước tính):"
-
-msgid "Swap From:"
-msgstr "Hoán đổi từ:"
-
-msgid "Swap To (est.):"
-msgstr "Hoán đổi sang (ước tính):"
-
-msgid "Swap To:"
-msgstr "Hoán đổi sang:"
-
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""
 
