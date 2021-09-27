@@ -14,6 +14,7 @@ export const ContractScan = {
 // new: 0x0d36535b2666959a52c0c73CB940A59b1EbE9FD6
 export const SoulSummonerAddress = '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B'
 export const MULTICALL_ADDRESS = '0xf682Cc4468608fC4eFbaD6a06D9BC72e7790075a' // SEP22
+export const SUMMONER_HELPER_ADDRESS = '0x39C8a29F06242ce15fB9B5643B4C32AB9548cEe9' // SEP27
 
 // export const SoulSummonerAddress = {
 //     250: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B',

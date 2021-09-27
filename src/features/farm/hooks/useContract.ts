@@ -22,12 +22,13 @@ import FACTORY_ABI from '../constants/abis/factory.json'
 // soul
 import SOUL_GUIDE_ABI from '../constants/abis/multicall.json'
 import SOUL_SUMMONER_ABI from '../constants/abis/soulsummoner.json' 
+import SUMMONER_HELPER_ABI from '../constants/abis/helper.json' 
 import SOULVAULT_ABI from '../constants/abis/soulvault.json'
 import SPELL_ABI from '../constants/abis/spell.json'
 import SOUL_ABI from '../constants/abis/soulpower.json' 
 
 // unused
-import { MULTICALL_ADDRESS } from '../constants/index'
+import { MULTICALL_ADDRESS, SUMMONER_HELPER_ADDRESS } from '../constants/index'
 // import PENDING_ABI from '../constants/abis/pending.json'
 // import ROUTER_ABI from '../constants/abis/router.json'
 // import TIMELOCK_ABI from '../constants/abis/timelock.json'
@@ -96,6 +97,11 @@ export function useSoulVaultContract(withSignerIfPossible = true): Contract | nu
 export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible)
+}
+
+export function useHelperContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SUMMONER_HELPER_ADDRESS[chainId], SUMMONER_HELPER_ABI, withSignerIfPossible)
 }
 
 export function useFactoryContract(): Contract | null {

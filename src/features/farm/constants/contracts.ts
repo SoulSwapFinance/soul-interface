@@ -10,4 +10,9 @@ export const contracts = {
         250: '0xf682Cc4468608fC4eFbaD6a06D9BC72e7790075a'
     },
 
+    SUMMONER_HELPER_ADDRESS: {
+        4002: '',
+        250: '0x39C8a29F06242ce15fB9B5643B4C32AB9548cEe9'
+    },
+
 }

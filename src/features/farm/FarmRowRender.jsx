@@ -8,8 +8,7 @@ import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
 import useSoulSummoner from './hooks/useSoulSummoner'
 import useApprove from './hooks/useApprove'
-import { SoulSummonerAddress } from './constants'
-import { MulticallAddress } from './constants'
+import { MulticallAddress, SoulSummonerAddress, SUMMONER_HELPER_ADDRESS as SummonerHelperAddress} from './constants'
 import {
   FlexText,
   FarmContainer,
@@ -81,6 +80,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
   // const [earningPerDay, setEarningPerDay] = useState();
   const [percOfFarm, setPercOfFarm] = useState()
+  const [poolRate, setPoolRate] = useState()
 
   const [apr, setApr] = useState()
   const [liquidity, setLiquidity] = useState()
@@ -195,6 +195,33 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       }
     }
   }
+
+  /**
+   * Gets the emissions rate for a given pool
+   */
+
+  // const fetchPoolRate = async () => {
+  //   if (!account) {
+  //     // alert('connect wallet')
+  //   } else { 
+  //     try {
+  //       const allocationPoints = await poolInfo(pid)
+  //       const totalAllocation = await totalAllocPoint()
+
+  //       const allocation = ethers.utils.formatUnits(allocationPoints?.[1])
+  //       const totalAllocationPoints = ethers.utils.formatUnits(totalAllocation)
+        
+  //       const poolRate = Number(250000 / totalAllocationPoints / allocationPoints)
+
+  //       setRate(poolRate.toString())
+
+  //       return [poolRate]
+
+  //     } catch (err) {
+  //       console.warn(err)
+  //     }
+  //   }
+  // }
 
   /**
    * Fetches connected user pending soul
@@ -371,6 +398,28 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 )}
               </HideOnMobile>
 
+              {/* <HideOnMobile desktopOnly={true}>
+                <Text padding="0" fontSize=".7rem" color="#F36FFE">
+                  APR
+                </Text>
+                {percOfFarm === 0 ? (
+                  <Text padding="0" fontSize="1.5rem" color="#666">
+                    {
+                      poolRate
+                      // calulate interest rate // i = p*r*t = principle, rate, time
+                      // divide interest rate by principle (amount)
+                      // annualize and convert to %
+                      // interest = staked *  // userInfo(pid, account).result1?.[0]
+                      // 250000 * totalAllocation
+                    }%
+                  </Text>
+                ) : (
+                  <Text padding="0" fontSize="1.5rem">
+                    {poolRate}%
+                  </Text>
+                )}
+              </HideOnMobile> */}
+
               {/* <FarmItemBox>
                 <ShowBtn onClick={() => handleShow()}>{showing ? `HIDE` : `SHOW`}</ShowBtn>
               </FarmItemBox> */}
@@ -387,7 +436,9 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 {/* <button >Max</button> */}
                 <Wrap padding="0" display="flex" justifyContent="space-between">
                   <Text padding="0" fontSize=".9rem" color="#bbb">
-                    Available: {Number(unstakedBal).toFixed(4)}
+                    Available: {Number(unstakedBal).toFixed(3)
+                    .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                  }
                   </Text>
                   <ClickableText
                     padding="0"
@@ -463,16 +514,17 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                   </SubmitButton>
                 </Wrap>
 
-                <Wrap padding="0">
+                {/* <Wrap padding="0">
                   <Wrap padding="0" display="flex">
                     <Text fontSize=".9rem" padding="0" color="#aaa">
-                      {/* Fee Amount: {ethers.utils.formatUnits(feeAmount)} */}
+                    Fee Amount: {ethers.utils.formatUnits(feeAmount)}
                     </Text>
                     <Text fontSize=".9rem" padding="0 0 0 6.5rem" color="#aaa">
-                      {/* Withdrawing: {ethers.utils.formatUnits(receiving)} */}
+                    Withdrawing: {ethers.utils.formatUnits(receiving)}
                     </Text>
                   </Wrap>
-                </Wrap>
+                </Wrap> */}
+
               </FunctionBox>
             </DetailsWrapper>
           </DetailsContainer>
