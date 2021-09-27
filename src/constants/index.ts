@@ -159,8 +159,8 @@ export const INITIAL_ALLOWED_SLIPPAGE = 50
 // 30 minutes, denominated in seconds
 export const DEFAULT_DEADLINE_FROM_NOW = 60 * 30
 
-// default archer gas estimate, 250k wei
-export const DEFAULT_ARCHER_GAS_ESTIMATE: BigNumber = BigNumber.from(250000)
+// default archer gas estimate, 350k wei
+export const DEFAULT_ARCHER_GAS_ESTIMATE: BigNumber = BigNumber.from(350000)
 // default gas prices to use if all other sources unavailable
 export const DEFAULT_ARCHER_GAS_PRICES: BigNumber[] = [
   BigNumber.from(60000000000),
@@ -220,7 +220,7 @@ export const SOUL_GUIDE_ADDRESS = '0x5A6B3Ce2736E9B731Fba73262884016b50c39184' /
 
 export const ANALYTICS_URL: { [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: 'https://defillama.com/protocol/soulswap',
-  [ChainId.FANTOM]: 'https://defillama.com/protocol/soulswap',
+  [ChainId.FANTOM]: 'https://analytics.soulswap.finance',
   [ChainId.FANTOM_TESTNET]: 'https://defillama.com/protocol/soulswap',
   // [ChainId.MATIC]: 'https://analytics-polygon.soulswap.finance',
   // [ChainId.XDAI]: 'https://analytics-xdai.soulswap.finance',

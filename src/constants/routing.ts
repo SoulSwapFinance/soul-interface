@@ -117,7 +117,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], 
     FANTOM.SOUL,
-    // FANTOM.SEANCE,
+    FANTOM.SEANCE,
     FANTOM.DAI, 
     FANTOM.USDC, 
     FANTOM.WBTC, 
@@ -224,11 +224,12 @@ export const COMMON_BASES: ChainTokenList = {
   // [ChainId.MATIC]: [...WRAPPED_NATIVE_ONLY[ChainId.MATIC], MATIC.USDC, MATIC.WBTC, MATIC.DAI, MATIC.WETH, MATIC.USDT],
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], 
-    FANTOM.SOUL,
-    // FANTOM.DAI, 
+    // FANTOM.SOUL,
+    // FANTOM.SEANCE, 
     FANTOM.USDC,
     FANTOM.FUSD,
-    FANTOM.WBTC, 
+    FANTOM.WBTC,
+    FANTOM.USDT,
     FANTOM.WETH
   ],
   [ChainId.FANTOM_TESTNET]: [
@@ -237,23 +238,6 @@ export const COMMON_BASES: ChainTokenList = {
     FANTOM_TESTNET.FUSD,
     FANTOM_TESTNET.FETH,
   ],
-  // [ChainId.HARMONY]: [
-  //   ...WRAPPED_NATIVE_ONLY[ChainId.HARMONY],
-  //   HARMONY.DAI,
-  //   HARMONY.USDC,
-  //   HARMONY.USDT,
-  //   HARMONY.WETH,
-  //   HARMONY.WBTC,
-  // ],
-  // [ChainId.HECO]: [...WRAPPED_NATIVE_ONLY[ChainId.HECO], HECO.DAI, HECO.USDC, HECO.USDT, HECO.WBTC, HECO.WETH],
-  // [ChainId.OKEX]: [...WRAPPED_NATIVE_ONLY[ChainId.OKEX], OKEX.DAI, OKEX.USDC, OKEX.USDT, OKEX.WBTC, OKEX.WETH],
-  // [ChainId.CELO]: [
-  //   ...WRAPPED_NATIVE_ONLY[ChainId.CELO],
-  //   CELO.mCUSD,
-  //   CELO.mCELO,
-  //   CELO.mcEURO,
-  //   CELO.cEUR,
-  // ],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
@@ -261,26 +245,7 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WRAPPED_NATIVE_ONLY,
   [ChainId.MAINNET]: [...WRAPPED_NATIVE_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC],
   [ChainId.FANTOM]: [...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], FANTOM.SOUL, FANTOM.DAI, FANTOM.USDC, FANTOM.FUSD, FANTOM.WBTC, FANTOM.WETH],
-  // [ChainId.MATIC]: [...WRAPPED_NATIVE_ONLY[ChainId.MATIC], MATIC.USDC, MATIC.WBTC, MATIC.DAI, MATIC.WETH, MATIC.USDT],
-  // [ChainId.ARBITRUM]: [...WRAPPED_NATIVE_ONLY[ChainId.ARBITRUM]],
-  // [ChainId.XDAI]: [...WRAPPED_NATIVE_ONLY[ChainId.XDAI], XDAI.USDC, XDAI.USDT, XDAI.WBTC, XDAI.WETH],
-  // [ChainId.AVALANCHE]: [
-  //   ...WRAPPED_NATIVE_ONLY[ChainId.AVALANCHE],
-  //   AVALANCHE.DAI,
-  //   AVALANCHE.USDT,
-  //   AVALANCHE.WBTC,
-  //   AVALANCHE.WETH,
-  // ],
-  // [ChainId.HARMONY]: [
-  //   ...WRAPPED_NATIVE_ONLY[ChainId.HARMONY],
-  //   HARMONY.DAI,
-  //   HARMONY.USDC,
-  //   HARMONY.USDT,
-  //   HARMONY.WBTC,
-  //   HARMONY.WETH,
-  // ],
-  // [ChainId.HECO]: [...WRAPPED_NATIVE_ONLY[ChainId.HECO], HECO.DAI, HECO.USDC, HECO.USDT, HECO.WBTC, HECO.WETH],
-  // [ChainId.OKEX]: [...WRAPPED_NATIVE_ONLY[ChainId.OKEX], OKEX.DAI, OKEX.USDC, OKEX.USDT, OKEX.WBTC, OKEX.WETH],
+  
 }
 
 export const PINNED_PAIRS: {

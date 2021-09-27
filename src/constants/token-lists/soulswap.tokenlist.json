@@ -326,22 +326,6 @@
       "logoURI": "https://repository.fantom.network/logos/bitcoin.svg"
     },
     {
-      "name": "fCHF",
-      "address": "0x81740D647493a61329E1c574A11ee7577659fb14",
-      "symbol": "fCHF",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://repository.fantom.network/logos/chf.svg"
-    },
-    {
-      "name": "fCNY",
-      "address": "0x24d39324CF3697Fd9Fd78714E8cdeB5Df66E3DCd",
-      "symbol": "fCNY",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://repository.fantom.network/logos/cny.svg"
-    },
-    {
       "name": "fETH",
       "address": "0x658b0c7613e890EE50B8C4BC6A3f41ef411208aD",
       "symbol": "fETH",
@@ -358,62 +342,6 @@
       "logoURI": "https://repository.fantom.network/logos/euro.svg"
     },
     {
-      "name": "fGBP",
-      "address": "0xcDE58e4B6c7b78B04da664Edb0a9752CC5FEDBd5",
-      "symbol": "fGBP",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://repository.fantom.network/logos/gbp.svg"
-    },
-    {
-      "name": "fGold",
-      "address": "0x2202C52C9076A49400aaccf159e1956269eaa673",
-      "symbol": "fGOLD",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://repository.fantom.network/logos/gold.svg"
-    },
-    {
-      "name": "fJPY",
-      "address": "0x3B74389bc23057325BaB96523DBec8c445F55799",
-      "symbol": "fJPY",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://repository.fantom.network/logos/jpy.svg"
-    },
-    {
-      "name": "fKRW",
-      "address": "0x2b9C073Ec670b70F417bbaf3BbB052AA563A0a23",
-      "symbol": "fKRW",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://repository.fantom.network/logos/krw.svg"
-    },
-    {
-      "name": "fLINK",
-      "address": "0xA649A19423052dC6b320360B3C760884E095AC57",
-      "symbol": "fLINK",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://repository.fantom.network/logos/link.svg"
-    },
-    {
-      "name": "Frax",
-      "address": "0xaf319E5789945197e365E7f7fbFc56B130523B33",
-      "symbol": "FRAX",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://ftmscan.com/token/images/fraxfinance_32.png"
-    },
-    {
-      "name": "fSilver",
-      "address": "0xf15e88EEf35BF4709A4C3E99c00358F9247D4531",
-      "symbol": "fSILVER",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://repository.fantom.network/logos/silver.svg"
-    },
-    {
       "name": "Fantom USD",
       "address": "0xAd84341756Bf337f5a0164515b1f6F993D194E1f",
       "symbol": "fUSD",
@@ -427,47 +355,7 @@
       "symbol": "fUSDT",
       "decimals": 6,
       "chainId": 250,
-      "logoURI": "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png"
-    },
-    {
-      "name": "fWTI Oil",
-      "address": "0xe297e06761a5489380538A0308B6F9b4A53Bea45",
-      "symbol": "fWTIOIL",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://repository.fantom.network/logos/wti.svg"
-    },
-    {
-      "name": "Hegic",
-      "address": "0x44B26E839eB3572c5E959F994804A5De66600349",
-      "symbol": "HEGIC",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://ftmscan.com/token/images/hegic_32.png"
-    },
-    {
-      "name": "IceToken",
-      "address": "0xf16e81dce15B08F326220742020379B855B87DF9",
-      "symbol": "ICE",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0xf16e81dce15B08F326220742020379B855B87DF9/logo.png"
-    },
-    {
-      "name": "Keep3r",
-      "address": "0x2A5062D22adCFaAfbd5C541d4dA82E4B450d4212",
-      "symbol": "KP3R",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://ftmscan.com/token/images/kp3r_32.png"
-    },
-    {
-      "name": "ChainLink",
-      "address": "0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8",
-      "symbol": "LINK",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://ftmscan.com/token/images/chainlink_32.png"
+      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png"
     },
     {
       "name": "Seance Circle",
@@ -507,7 +395,7 @@
       "symbol": "SOUL",
       "decimals": 18,
       "chainId": 250,
-      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom-testnet/assets/0xe2fb177009ff39f52c0134e8007fa0e4baacbd07/logo.png"
+      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009ff39f52c0134e8007fa0e4baacbd07/logo.png"
     },
     {
       "name": "Synth sUSD",
@@ -539,7 +427,7 @@
       "symbol": "WBTC",
       "decimals": 8,
       "chainId": 250,
-      "logoURI": "https://ftmscan.com/token/images/wBTC_32.png"
+      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x321162Cd933E2Be498Cd2267a90534A804051b11/logo.png"
     },
     {
       "name": "Wrapped Ether",
