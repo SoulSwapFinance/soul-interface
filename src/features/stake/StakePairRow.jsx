@@ -66,7 +66,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   const [unstakedBal, setUnstakedBal] = useState(0)
   const [pending, setPending] = useState(0)
 
-  // const [earningPerDay, setEarningPerDay] = useState();
+  const [earningPerDay, setEarningPerDay] = useState();
   const [percOfFarm, setPercOfFarm] = useState()
 
   const [apr, setApr] = useState()
@@ -88,7 +88,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     if (account) {
       const timer = setTimeout(() => {
         fetchPending()
-        getAprAndLiquidity()
+        // getAprAndLiquidity()
         fetchUserFarmAlloc()
 
         if (showing) {
@@ -129,24 +129,24 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    * farm <Object> : the farm object
    * lpToken : the farm lpToken address
    */
-  const getAprAndLiquidity = async () => {
-    try {
-      const result = await fetchPid0AprAndLiquidity()
-      const farmApr = result[0]
-      const totalLpValue = result[1]
+  // const getAprAndLiquidity = async () => {
+  //   try {
+  //     const result = await fetchPid0AprAndLiquidity()
+  //     // const farmApr = result[0]
+  //     const totalLpValue = result[1]
 
-      setLiquidity(Number(totalLpValue).toFixed(4)
-      .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-      )
+  //     setLiquidity(Number(totalLpValue).toFixed(4)
+  //     .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  //     )
 
-      // console.log("apr", farmApr);
-      setApr(Number(farmApr).toFixed(4)
-      .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-      )
-    } catch (e) {
-      console.warn(e)
-    }
-  }
+  //     // console.log("apr", farmApr);
+  //     // setApr(Number(farmApr).toFixed(4)
+  //     // .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  //     // )
+  //   } catch (e) {
+  //     console.warn(e)
+  //   }
+  // }
 
   /**
    * Gets the lpToken balance of the user for each pool
@@ -440,7 +440,7 @@ export const StakeList = () => {
     <StakePairRow
       key={farm.pid}
       pid={farm.pid}
-      lpSymbol={farm.lpSymbol[250]}
+      lpSymbol={farm.lpSymbol}
       lpToken={farm.lpAddresses[250]} // TODO: update to 250
       token1={farm.token1}
       token2={farm.token2}

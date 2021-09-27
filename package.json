@@ -143,6 +143,7 @@
     ]
   },
   "dependencies": {
+    "autoprefixer": "^10.0.2",
     "ethers": "^5.4.7",
     "react-bootstrap": "^1.6.3",
     "react-i18next": "^11.12.0",

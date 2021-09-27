@@ -89,7 +89,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    * Runs only on initial render/mount
    */
   useEffect(() => {
-    getAprAndLiquidity()
+    // getAprAndLiquidity()
     fetchPending()
     fetchUserFarmAlloc()
   }, [account])
@@ -101,7 +101,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     if (account) {
       const timer = setTimeout(() => {
         fetchPending()
-        getAprAndLiquidity()
+        // getAprAndLiquidity()
         fetchUserFarmAlloc()
 
         if (showing) {
@@ -155,23 +155,23 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    * farm <Object> : the farm object
    * lpToken : the farm lpToken address
    */
-  const getAprAndLiquidity = async () => {
-    try {
-      const result = await fetchAprAndLiquidity(farm.pid, farm.token1, farm.token2)
-      const farmApr = result[0]
-      const totalLpValue = result[1]
-      const summonerTotalLpValue = result[2]
+  // const getAprAndLiquidity = async () => {
+  //   try {
+  //     const result = await fetchAprAndLiquidity(farm.pid, farm.token1, farm.token2)
+  //     const farmApr = result[0]
+  //     const totalLpValue = result[1]
+  //     const summonerTotalLpValue = result[2]
 
-      setLiquidity(Number(summonerTotalLpValue).toFixed(0)
-      .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
+  //     setLiquidity(Number(summonerTotalLpValue).toFixed(0)
+  //     .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
 
-      // console.log("apr", farmApr);
-      setApr(Number(farmApr).toFixed(0)
-      .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
-    } catch (e) {
-      console.warn(e)
-    }
-  }
+  //     // console.log("apr", farmApr);
+  //     setApr(Number(farmApr).toFixed(0)
+  //     .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
+  //   } catch (e) {
+  //     console.warn(e)
+  //   }
+  // }
 
   /**
    * Gets the lpToken balance of the user for each pool
@@ -204,9 +204,16 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       // alert('connect wallet')
     } else {
       try {
-        const pending = await userInfo(pid, account)?.[1]
-        const formatted = Number(ethers.utils.formatUnits(pending.toString())).toFixed(2)
-        setPending(formatted)
+        const result1 = await pendingSoul(pid, account)
+        const pending = Number(ethers.utils.formatUnits(result1)).toFixed(2)
+        setPending(pending.toString())
+
+        // const pending = await userInfo(pid, account)?.[1]
+        // const formatted = Number(ethers.utils.formatUnits(pending.toString())).toFixed(2)
+        // setPending(formatted)
+
+        return [pending]
+
       } catch (err) {
         console.warn(err)
       }
@@ -250,7 +257,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    */
   const handleHarvest = async () => {
     try {
-      const tx = await withdraw(pid, 0)
+      const tx = await deposit(pid, 0)
       await tx?.wait().then(await fetchPending(pid))
     } catch (e) {
       // alert(e.message)
@@ -459,10 +466,10 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 <Wrap padding="0">
                   <Wrap padding="0" display="flex">
                     <Text fontSize=".9rem" padding="0" color="#aaa">
-                      Fee Amount: {ethers.utils.formatUnits(feeAmount)}
+                      {/* Fee Amount: {ethers.utils.formatUnits(feeAmount)} */}
                     </Text>
                     <Text fontSize=".9rem" padding="0 0 0 6.5rem" color="#aaa">
-                      Withdrawing: {ethers.utils.formatUnits(receiving)}
+                      {/* Withdrawing: {ethers.utils.formatUnits(receiving)} */}
                     </Text>
                   </Wrap>
                 </Wrap>

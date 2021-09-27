@@ -90,6 +90,30 @@ export const FarmPids = [
       token1Address: tokens.USDC,
       token2Address: tokens.SEANCE,
   },
+  // { // 600
+  //   pid: 8,
+  //   token1: 'WETH',
+  //   token2: 'WBTC',
+  //   lpSymbol: 'ETH-BTC',
+  //   lpAddresses: {
+  //     4002: '',
+  //     250: '',
+  //     },
+  //     token1Address: tokens.WETH,
+  //     token2Address: tokens.WBTC,
+  // },
+  // { // 200
+  //   pid: 9,
+  //   token1: 'USDC',
+  //   token2: 'DAI',
+  //   lpSymbol: 'USDC-DAI',
+  //   lpAddresses: {
+  //     4002: '',
+  //     250: '',
+  //     },
+  //     token1Address: tokens.USDC,
+  //     token2Address: tokens.SEANCE,
+  // },
 ]
 
 export default FarmPids
