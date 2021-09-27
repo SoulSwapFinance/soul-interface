@@ -254,14 +254,6 @@
       "logoURI": "https://cryptologos.cc/logos/fantom-ftm-logo.svg?v=003"
     },
     {
-      "name": "Band",
-      "address": "0x46E7628E8b4350b2716ab470eE0bA1fa9e76c6C5",
-      "symbol": "BAND",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x46E7628E8b4350b2716ab470eE0bA1fa9e76c6C5/logo.png"
-    },
-    {
       "name": "Dai Stablecoin",
       "address": "0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E",
       "symbol": "DAI",
