@@ -4,11 +4,13 @@ import { ethers, BigNumber } from 'ethers'
 
 import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
 
-import { useSoulSummonerContract, usePairContract, useTokenContract } from './useContract'
+import { useHelperContract, useSoulSummonerContract, usePairContract, useTokenContract } from './useContract'
 
-import { SoulSummonerAddress } from '../constants'
+import { SoulSummonerAddress, SUMMONER_HELPER_ADDRESS as SummonerHelperAddress } from '../constants'
 
 import FarmPids from '../FarmPids'
+
+// const helperContract = useHelperContract()
 
 function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
   const { account, chainId } = useActiveWeb3React()
@@ -196,10 +198,9 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
    * The amount of tokens the user holds compared to the contract
    * Note : need to make func to calculate how many staked compared to pool
    */
-  const fetchUserLpTokenAlloc = async (account) => {
+   const fetchUserLpTokenAlloc = async (account) => {
     try {
       const contractBal = await lpTokenContract?.balanceOf(SoulSummonerAddress)
-
       const userBal = await lpTokenContract?.balanceOf(account)
 
       const alloc = userBal / contractBal
@@ -221,8 +222,10 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
     try {
       // get how many lpTokens in contract
       const totalSupply = await lpTokenContract?.totalSupply()
+      console.log('ttl supply', totalSupply)
       // get how many lpTokens held by Summoner
       const heldBySummoner = await lpTokenContract?.balanceOf(SoulSummonerAddress)
+      console.log('held by summoner', heldBySummoner)
       // get how many lpTokens held by user
       const heldByUser = await lpTokenContract?.balanceOf(account)
 
