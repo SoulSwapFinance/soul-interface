@@ -42,7 +42,7 @@ const SOCK = (
 // eslint-disable-next-line react/prop-types
 function StatusIcon({ connector }: { connector: AbstractConnector }) {
   if (connector === injected) {
-    return <Image src="/pyra-spin.gif" alt="Injected (MetaMask etc...)" width={20} height={20} />
+    return <Image src="/blob.gif" alt="Injected (MetaMask etc...)" width={20} height={20} />
     // return <Identicon />
   } else if (connector === walletconnect) {
     return (
