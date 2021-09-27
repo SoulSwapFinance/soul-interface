@@ -241,7 +241,9 @@ function AppBar(): JSX.Element {
                       {account && chainId && userEthBalance && (
                         <>
                           <div className="px-3 py-2 text-primary text-bold">
-                            {userEthBalance?.toSignificant(4)} {NATIVE[chainId].symbol}
+                            {userEthBalance?.toSignificant(4)
+                            .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                            } {NATIVE[chainId].symbol}
                           </div>
                         </>
                       )}
