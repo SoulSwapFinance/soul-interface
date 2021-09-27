@@ -7,11 +7,12 @@ const Banner: FC = () => (
       <div className="pr-16 sm:text-center sm:px-16">
         <p className="font-medium text-white">
           <span className="md:hidden">We announced a new product!</span>
-          <span className="hidden md:inline">Big news! We&apos;re excited to announce a brand new product.</span>
+          <span className="hidden md:inline">Stake popular pairs for <b>SOUL</b> rewards today!</span>
           <span className="block sm:ml-2 sm:inline-block">
-            <a href="#" className="font-bold text-white underline">
+            <a href="farm" className="font-bold text-white underline">
               {' '}
-              Learn more <span aria-hidden="true">&rarr;</span>
+              <br />
+              Start Earning <span aria-hidden="true">&rarr;</span>
             </a>
           </span>
         </p>

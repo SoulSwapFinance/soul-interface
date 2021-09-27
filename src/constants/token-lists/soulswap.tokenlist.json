@@ -254,44 +254,12 @@
       "logoURI": "https://cryptologos.cc/logos/fantom-ftm-logo.svg?v=003"
     },
     {
-      "name": "Aave",
-      "address": "0x6a07A792ab2965C72a5B8088d3a069A7aC3a993B",
-      "symbol": "AAVE",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://ftmscan.com/token/images/aave_32.png"
-    },
-    {
       "name": "Band",
       "address": "0x46E7628E8b4350b2716ab470eE0bA1fa9e76c6C5",
       "symbol": "BAND",
       "decimals": 18,
       "chainId": 250,
-      "logoURI": "https://ftmscan.com/token/images/bandprotocol_32.png"
-    },
-    {
-      "name": "Cover",
-      "address": "0xB01E8419d842beebf1b70A7b5f7142abbaf7159D",
-      "symbol": "COVER",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://ftmscan.com/token/images/cover_32.png"
-    },
-    {
-      "name": "Cream",
-      "address": "0x657A1861c15A3deD9AF0B6799a195a249ebdCbc6",
-      "symbol": "CREAM",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://ftmscan.com/token/images/CreamFinance_32.png"
-    },
-    {
-      "name": "Curve DAO",
-      "address": "0x1E4F97b9f9F913c46F1632781732927B9019C68b",
-      "symbol": "CRV",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://ftmscan.com/token/images/CurveFi_32.png"
+      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x46E7628E8b4350b2716ab470eE0bA1fa9e76c6C5/logo.png"
     },
     {
       "name": "Dai Stablecoin",
@@ -299,47 +267,7 @@
       "symbol": "DAI",
       "decimals": 18,
       "chainId": 250,
-      "logoURI": "https://ftmscan.com/token/images/MCDDai_32.png"
-    },
-    {
-      "name": "fBAND",
-      "address": "0x078EEF5A2fb533e1a4d487ef64b27DF113d12C32",
-      "symbol": "fBAND",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://repository.fantom.network/logos/band.svg"
-    },
-    {
-      "name": "fBNB",
-      "address": "0x27f26F00e1605903645BbaBC0a73E35027Dccd45",
-      "symbol": "fBNB",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://repository.fantom.network/logos/bnb.svg"
-    },
-    {
-      "name": "fBTC",
-      "address": "0xe1146b9AC456fCbB60644c36Fd3F868A9072fc6E",
-      "symbol": "fBTC",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://repository.fantom.network/logos/bitcoin.svg"
-    },
-    {
-      "name": "fETH",
-      "address": "0x658b0c7613e890EE50B8C4BC6A3f41ef411208aD",
-      "symbol": "fETH",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://repository.fantom.network/logos/eth.svg"
-    },
-    {
-      "name": "fEUR",
-      "address": "0xe105621721D1293c27be7718e041a4Ce0EbB227E",
-      "symbol": "fEUR",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://repository.fantom.network/logos/euro.svg"
+      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E/logo.png"
     },
     {
       "name": "Fantom USD",
@@ -366,30 +294,6 @@
       "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x124B06C5ce47De7A6e9EFDA71a946717130079E6/logo.png"
     },
     {
-      "name": "Spice",
-      "address": "0x924828a9Fb17d47D0eb64b57271D10706699Ff11",
-      "symbol": "SFI",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://ftmscan.com/token/images/saffron_32.png"
-    },
-    {
-      "name": "Staked FTM",
-      "address": "0x69c744D3444202d35a2783929a0F930f2FBB05ad",
-      "symbol": "sFTM",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://repository.fantom.network/logos/sftm.svg"
-    },
-    {
-      "name": "Synthetix Network",
-      "address": "0x56ee926bD8c72B2d5fa1aF4d9E4Cbb515a1E3Adc",
-      "symbol": "SNX",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://ftmscan.com/token/images/Synthetix_SNX_32.png"
-    },
-    {
       "name": "Soul Power",
       "address": "0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07",
       "symbol": "SOUL",
@@ -398,28 +302,12 @@
       "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009ff39f52c0134e8007fa0e4baacbd07/logo.png"
     },
     {
-      "name": "Synth sUSD",
-      "address": "0x0E1694483eBB3b74d3054E383840C6cf011e518e",
-      "symbol": "sUSD",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://ftmscan.com/token/images/sUSD_32.png"
-    },
-    {
-      "name": "Sushi",
-      "address": "0xae75A438b2E0cB8Bb01Ec1E1e376De11D44477CC",
-      "symbol": "SUSHI",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://ftmscan.com/token/images/sushiswap_32.png"
-    },
-    {
       "name": "USD Coin",
       "address": "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75",
       "symbol": "USDC",
       "decimals": 6,
       "chainId": 250,
-      "logoURI": "https://ftmscan.com/token/images/USDC_32.png"
+      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x04068DA6C83AFCFA0e13ba15A6696662335D5B75/logo.png"
     },
     {
       "name": "Wrapped Bitcoin",
@@ -435,7 +323,7 @@
       "symbol": "WETH",
       "decimals": 18,
       "chainId": 250,
-      "logoURI": "https://ftmscan.com/token/images/wETH_32.png"
+      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x74b23882a30290451A17c44f4F05243b6b58C76d/logo.png"
     },
     {
       "name": "Wrapped Fantom",
@@ -443,15 +331,7 @@
       "symbol": "WFTM",
       "decimals": 18,
       "chainId": 250,
-      "logoURI": "https://ftmscan.com/token/images/wFtm_32.png"
-    },
-    {
-      "name": "yearn.finance",
-      "address": "0x29b0Da86e484E1C0029B56e817912d778aC0EC69",
-      "symbol": "YFI",
-      "decimals": 18,
-      "chainId": 250,
-      "logoURI": "https://ftmscan.com/token/images/YFI_32.png"
+      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83/logo.png"
     }
   ]
 }

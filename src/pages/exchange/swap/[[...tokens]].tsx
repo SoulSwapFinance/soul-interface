@@ -462,7 +462,8 @@ export default function Swap() {
             <CurrencyInputPanel
               // priceImpact={priceImpact}
               label={
-                independentField === Field.OUTPUT && !showWrap ? i18n._(t`Swap From (est.):`) : i18n._(t`Swap From:`)
+                // independentField === Field.OUTPUT && !showWrap ? i18n._(t`Swap From (est.):`) : i18n._(t`Swap From:`)
+                independentField === Field.OUTPUT && !showWrap ? i18n._(t``) : i18n._(t``)
               }
               value={formattedAmounts[Field.INPUT]}
               showMaxButton={showMaxButton}
@@ -522,7 +523,8 @@ export default function Swap() {
               <CurrencyInputPanel
                 value={formattedAmounts[Field.OUTPUT]}
                 onUserInput={handleTypeOutput}
-                label={independentField === Field.INPUT && !showWrap ? i18n._(t`Swap To (est.):`) : i18n._(t`Swap To:`)}
+                // label={independentField === Field.INPUT && !showWrap ? i18n._(t`Swap To (est.):`) : i18n._(t`Swap To:`)}
+                label={independentField === Field.INPUT && !showWrap ? i18n._(t``) : i18n._(t``)}
                 showMaxButton={false}
                 hideBalance={false}
                 fiatValue={fiatValueOutput ?? undefined}
