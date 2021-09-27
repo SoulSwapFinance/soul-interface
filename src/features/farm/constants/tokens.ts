@@ -19,6 +19,10 @@ export const tokens = {
     4002: '',
     250: '0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e',
   },
+  fUSDT: {
+    4002: '',
+    250: '0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e',
+  },
   USDC: {
     4002: "",
     250: "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75", // fixed 21 SEP

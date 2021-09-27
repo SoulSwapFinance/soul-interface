@@ -90,30 +90,30 @@ export const FarmPids = [
       token1Address: tokens.USDC,
       token2Address: tokens.SEANCE,
   },
-  // { // 600
-  //   pid: 8,
-  //   token1: 'WETH',
-  //   token2: 'WBTC',
-  //   lpSymbol: 'ETH-BTC',
-  //   lpAddresses: {
-  //     4002: '',
-  //     250: '0x1fc954d3484bc21e0ce53a6648a35bbfc03dc9d0',
-  //     },
-  //     token1Address: tokens.WETH,
-  //     token2Address: tokens.WBTC,
-  // },
-  // { // 200
-  //   pid: 9,
-  //   token1: 'USDC',
-  //   token2: 'fUSDT',
-  //   lpSymbol: 'USDC-fUSDT',
-  //   lpAddresses: {
-  //     4002: '',
-  //     250: '0x298c12d6d9d6746dd0ef0a89421288f52d5566ef',
-  //     },
-  //     token1Address: tokens.USDC,
-  //     token2Address: tokens.fUSDT,
-  // },
+  { // 600
+    pid: 8,
+    token1: 'WETH',
+    token2: 'WBTC',
+    lpSymbol: 'ETH-BTC',
+    lpAddresses: {
+      4002: '',
+      250: '0x1fc954d3484bc21e0ce53a6648a35bbfc03dc9d0',
+      },
+      token1Address: tokens.WETH,
+      token2Address: tokens.WBTC,
+  },
+  { // 200
+    pid: 9,
+    token1: 'USDC',
+    token2: 'fUSDT',
+    lpSymbol: 'USDC-fUSDT',
+    lpAddresses: {
+      4002: '',
+      250: '0x298c12d6d9d6746dd0ef0a89421288f52d5566ef',
+      },
+      token1Address: tokens.USDC,
+      token2Address: tokens.fUSDT,
+  },
 ]
 
 export default FarmPids
