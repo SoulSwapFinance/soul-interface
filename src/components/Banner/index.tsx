@@ -6,7 +6,7 @@ const Banner: FC = () => (
     <div className="px-3 py-3 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div className="pr-16 sm:text-center sm:px-16">
         <p className="font-medium text-white">
-          <span className="md:hidden">We announced a new product!</span>
+          <span className="md:hidden">We announced new pools!</span>
           <span className="hidden md:inline">Stake popular pairs for <b>SOUL</b> rewards today!</span>
           <span className="block sm:ml-2 sm:inline-block">
             <a href="farm" className="font-bold text-white underline">
