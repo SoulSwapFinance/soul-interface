@@ -43,6 +43,11 @@ module.exports = withBundleAnalyzer(
           destination: '/farm',
           permanent: true,
         },
+        {
+          source: '/farms',
+          destination: '/farm',
+          permanent: true,
+        },
         // {
         //   source: '/bento',
         //   destination: '/bentobox',
