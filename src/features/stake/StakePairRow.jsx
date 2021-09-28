@@ -66,7 +66,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   const [unstakedBal, setUnstakedBal] = useState(0)
   const [pending, setPending] = useState(0)
 
-  const [earningPerDay, setEarningPerDay] = useState();
+  const [earningPerDay, setEarningPerDay] = useState()
   const [percOfFarm, setPercOfFarm] = useState()
 
   const [apr, setApr] = useState()
@@ -180,8 +180,8 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     } else {
       try {
         const pending = await pendingSoul(0, account)
-        const formatted = ethers.utils.formatUnits(pending.toString())
-        setPending(Number(formatted).toFixed(2).toString())
+        const formatted = ethers.utils.formatUnits(pending)
+        setPending(formatted)
       } catch (err) {
         console.warn(err)
       }
@@ -308,13 +308,18 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 <Text padding="0" fontSize=".7rem" color="#F36FFE">
                   Earned
                 </Text>
-                {pending === '0.0' ? (
-                  <Text padding="0" fontSize="1.5rem" color="#666">
-                    0
+                {Number(pending) !== 0 ? (
+                  <Text padding="0" fontSize="1.5rem">
+                    {Number(pending).toFixed(2) < 0.01
+                      ? '<0.01'
+                      : Number(pending)
+                          .toFixed(2)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                   </Text>
                 ) : (
-                  <Text padding="0" fontSize="1.5rem">
-                    {pending}
+                  <Text padding="0" fontSize="1.5rem" color="#666">
+                    0
                   </Text>
                 )}
               </StakeItemBox>
@@ -325,11 +330,17 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 </Text>
                 {percOfFarm === 0 ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
-                    {percOfFarm}%
+                    0%
                   </Text>
                 ) : (
                   <Text padding="0" fontSize="1.5rem">
-                    {percOfFarm}%
+                    {Number(percOfFarm).toFixed(2) < 0.01
+                      ? '<0.01'
+                      : Number(percOfFarm)
+                          .toFixed(2)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    %
                   </Text>
                 )}
               </HideOnMobile>
@@ -350,9 +361,15 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 {/* <button >Max</button> */}
                 <Wrap padding="0" display="flex" justifyContent="space-between">
                   <Text padding="0" fontSize=".9rem" color="#bbb">
-                    Available: { Number(unstakedBal).toFixed(3)
-                    .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                    }
+                    Available: &nbsp;
+                    {Number(unstakedBal) === 0
+                      ? '0.000'
+                      : unstakedBal < 0.001
+                      ? '<0.001'
+                      : Number(unstakedBal)
+                          .toFixed(3)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                   </Text>
                   <ClickableText
                     padding="0"
@@ -383,10 +400,15 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
               <FunctionBox>
                 <FlexText>
                   <Text padding="0" fontSize=".9rem" color="#bbb">
-                    Staked: {Number(stakedBal).toFixed(3)
-                    .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-
-                    }
+                    Staked: &nbsp;
+                    {Number(stakedBal) === 0
+                      ? '0.000'
+                      : stakedBal < 0.001
+                      ? '<0.001'
+                      : Number(stakedBal)
+                          .toFixed(3)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                   </Text>
                   <ClickableText
                     padding="0"

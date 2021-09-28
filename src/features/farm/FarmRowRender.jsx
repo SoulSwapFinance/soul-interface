@@ -8,7 +8,7 @@ import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
 import useSoulSummoner from './hooks/useSoulSummoner'
 import useApprove from './hooks/useApprove'
-import { MulticallAddress, SoulSummonerAddress, SUMMONER_HELPER_ADDRESS as SummonerHelperAddress} from './constants'
+import { MulticallAddress, SoulSummonerAddress, SUMMONER_HELPER_ADDRESS as SummonerHelperAddress } from './constants'
 import {
   FlexText,
   FarmContainer,
@@ -203,14 +203,14 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   // const fetchPoolRate = async () => {
   //   if (!account) {
   //     // alert('connect wallet')
-  //   } else { 
+  //   } else {
   //     try {
   //       const allocationPoints = await poolInfo(pid)
   //       const totalAllocation = await totalAllocPoint()
 
   //       const allocation = ethers.utils.formatUnits(allocationPoints?.[1])
   //       const totalAllocationPoints = ethers.utils.formatUnits(totalAllocation)
-        
+
   //       const poolRate = Number(250000 / totalAllocationPoints / allocationPoints)
 
   //       setRate(poolRate.toString())
@@ -232,15 +232,9 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     } else {
       try {
         const result1 = await pendingSoul(pid, account)
-        const pending = Number(ethers.utils.formatUnits(result1)).toFixed(2)
-        setPending(pending.toString())
-
-        // const pending = await userInfo(pid, account)?.[1]
-        // const formatted = Number(ethers.utils.formatUnits(pending.toString())).toFixed(2)
-        // setPending(formatted)
-
+        const pending = ethers.utils.formatUnits(result1)
+        setPending(pending)
         return [pending]
-
       } catch (err) {
         console.warn(err)
       }
@@ -324,7 +318,6 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
   return (
     <>
-
       <Wrap padding="0" display="flex" justifyContent="center">
         <FarmContainer>
           <FarmRow onClick={() => handleShow()}>
@@ -372,13 +365,18 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 <Text padding="0" fontSize=".7rem" color="#F36FFE">
                   Earned
                 </Text>
-                {pending === '0.0' ? (
-                  <Text padding="0" fontSize="1.5rem" color="#666">
-                    0
+                {Number(pending) !== 0 ? (
+                  <Text padding="0" fontSize="1.5rem">
+                    {Number(pending).toFixed(2) < 0.01
+                      ? '<0.01'
+                      : Number(pending)
+                          .toFixed(2)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                   </Text>
                 ) : (
-                  <Text padding="0" fontSize="1.5rem">
-                    {pending}
+                  <Text padding="0" fontSize="1.5rem" color="#666">
+                    0
                   </Text>
                 )}
               </FarmItemBox>
@@ -389,11 +387,17 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 </Text>
                 {percOfFarm === 0 ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
-                    {percOfFarm}%
+                    0%
                   </Text>
                 ) : (
                   <Text padding="0" fontSize="1.5rem">
-                    {percOfFarm}%
+                    {Number(percOfFarm).toFixed(2) < 0.01
+                      ? '<0.01'
+                      : Number(percOfFarm)
+                          .toFixed(2)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    %
                   </Text>
                 )}
               </HideOnMobile>
@@ -436,9 +440,15 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 {/* <button >Max</button> */}
                 <Wrap padding="0" display="flex" justifyContent="space-between">
                   <Text padding="0" fontSize=".9rem" color="#bbb">
-                    Available: {Number(unstakedBal).toFixed(3)
-                    .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                  }
+                    Available: &nbsp;
+                    {Number(unstakedBal) === 0
+                      ? '0.000'
+                      : unstakedBal < 0.001
+                      ? '<0.001'
+                      : Number(unstakedBal)
+                          .toFixed(3)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                   </Text>
                   <ClickableText
                     padding="0"
@@ -464,17 +474,23 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     </SubmitButton>
                   )}
                 </Wrap>
-                    <Text fontSize=".9rem" padding="0" color="#F36FFE">
-                    Withdrawal fee: starts at 14%, with 1% less each day.
-                  </Text>
+                <Text fontSize=".9rem" padding="0" color="#F36FFE">
+                  Withdrawal fee: starts at 14%, with 1% less each day.
+                </Text>
               </FunctionBox>
 
               <FunctionBox>
                 <FlexText>
                   <Text padding="0" fontSize=".9rem" color="#bbb">
-                    Staked: {Number(stakedBal).toFixed(3)
-                    .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                  }
+                    Staked: &nbsp;
+                    {Number(stakedBal) === 0
+                      ? '0.000'
+                      : stakedBal < 0.001
+                      ? '<0.001'
+                      : Number(stakedBal)
+                          .toFixed(3)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                   </Text>
                   <ClickableText
                     padding="0"
@@ -524,7 +540,6 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     </Text>
                   </Wrap>
                 </Wrap> */}
-
               </FunctionBox>
             </DetailsWrapper>
           </DetailsContainer>
