@@ -9,7 +9,7 @@ const Banner: FC = () => (
           <span className="md:hidden">View your returns today!</span>
           <span className="hidden md:inline"> Staking APR on popular pairs for <b>SOUL farms</b>!</span>
           <span className="hidden block sm:ml-2 sm:inline-block">
-            <a href="https://defitools.me/fantom/soulswap" target = "_blank"
+            <a href="https://defitools.me/fantom/soulswap" target = "_blank" rel="noreferrer"
 className="font-bold text-white underline">
               {' '}
               <br />
