@@ -114,6 +114,18 @@ export const FarmPids = [
       token1Address: tokens.USDC,
       token2Address: tokens.fUSDT,
   },
+  { // 600
+    pid: 10,
+    token1: 'SEANCE',
+    token2: 'FTM',
+    lpSymbol: 'SEANCE-FTM',
+    lpAddresses: {
+      4002: '',
+      250: '0x8542bEAC34282aFe5Bb6951Eb6DCE0B3783b7faB',
+      },
+      token1Address: tokens.SEANCE,
+      token2Address: tokens.FTM,
+  },
 ]
 
 export default FarmPids
