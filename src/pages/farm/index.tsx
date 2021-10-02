@@ -66,7 +66,7 @@ export default function Farm(): JSX.Element {
   const farms = useFarms()
   const vaults = useVaults()
 
-  const summonerInfo = useSummonerInfo()
+  const summonerInfo = useDistributorInfo()
 
   const priceData = useContext(PriceContext)
 
@@ -100,7 +100,7 @@ export default function Farm(): JSX.Element {
 
     function getRewards() {
       const rewardPerSecond =
-        ((pool.allocPoint / distributorInfo.totalAllocPoint) * distributorInfo.soulPerSecond) / 1e18
+        ((pool.allocPoint / summonerInfo.totalAllocPoint) * summonerInfo.soulPerSecond) / 1e18
 
       const defaultReward = {
         token: 'SOUL',
