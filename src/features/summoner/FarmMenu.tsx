@@ -30,8 +30,8 @@ const Menu = ({ positionsLength, onSearch, term }) => {
         <MenuItem href="/farm" title={i18n._(t`All Farms`)} />
         {account && positionsLength > 0 && <MenuItem href={`/farm?filter=my`} title={i18n._(t`My Farms`)} />}
 
-        {/* <MenuItem href="/farm?filter=solar" title="SOLAR Farms" />
-        <MenuItem href="/farm?filter=moonriver" title="MOVR Farms" />
+        {/* <MenuItem href="/farm?filter=soul" title="SOUL Farms" />
+        <MenuItem href="/farm?filter=fantom" title="FTM Farms" />
         <MenuItem href="/farm?filter=stables" title="Stables Farms" />
         <MenuItem href="/farm?filter=single" title="Single Asset" /> */}
       </div>

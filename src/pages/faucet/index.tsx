@@ -61,7 +61,7 @@ export default function Faucet(): JSX.Element {
   return (
     <>
       <Head>
-        <title>Faucet | Solarbeam</title>
+        <title>Faucet | Soul</title>
         <meta key="description" name="description" content="Moonriver Faucet" />
       </Head>
 
@@ -82,16 +82,16 @@ export default function Faucet(): JSX.Element {
                 {i18n._(t`Moonriver Faucet`)}
               </Typography>
               <Typography component="h1" variant="base">
-                A Faucet is a tool that provides a small amount of MOVR for users that used the bridge to start using Solarbeam.io without having to
-                buy MOVR somewhere else.
+                A Faucet is a tool that provides a small amount of FTM for users that used the bridge to start using Soul Protocol without having to
+                buy FTM somewhere else.
               </Typography>
             </div>
             <div className="flex flex-1 justify-center text-center items-center mt-8 mb-12">
-              <Image src="/images/faucet/moonriver-faucet.png" alt="Solarbeam" width={150} height={150} />
+              <Image src="/images/faucet/moonriver-faucet.png" alt="Soul" width={150} height={150} />
             </div>
             <div className="p-4 mb-3 space-y-1 text-center">
               <Typography component="h1" variant="base">
-                Faucet balance:{' '}
+                Faucet Balance:{' '}
                 {formatNumberScale(tokenBalance[FAUCET_ADDRESS[chainId]]?.toSignificant(4, undefined, 2) ?? 0, false, 4)} MOVR
               </Typography>
               <Typography component="h1" variant="base">

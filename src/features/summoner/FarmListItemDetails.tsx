@@ -97,7 +97,7 @@ const FarmListItem = ({ farm }) => {
                   disabled={farm?.id === '1'}
                   onClick={() => {
                     if (!balance.equalTo(ZERO)) {
-                      if (liquidityToken?.symbol == 'SOLAR') {
+                      if (liquidityToken?.symbol == 'SOUL') {
                         try {
                           const minValue = 1 / 10 ** (liquidityToken?.decimals - 10)
                           const newValue = parseFloat(balance.toFixed(liquidityToken?.decimals)) - minValue
@@ -244,7 +244,7 @@ const FarmListItem = ({ farm }) => {
                 setPendingTx(false)
               }}
             >
-              {i18n._(t`Harvest ${formatNumber(pendingSoul.toFixed(18))} SOLAR`)}
+              {i18n._(t`Harvest ${formatNumber(pendingSoul.toFixed(18))} SOUL`)}
             </Button>
           </div>
         )}

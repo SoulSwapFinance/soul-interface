@@ -14,7 +14,7 @@
             },
             {
                 "internalType": "contract IMasterChef",
-                "name": "_masterchef",
+                "name": "_summoner",
                 "type": "address"
             }
         ],
@@ -350,7 +350,7 @@
     },
     {
         "inputs": [],
-        "name": "masterchef",
+        "name": "summoner",
         "outputs": [
             {
                 "internalType": "contract IMasterChef",

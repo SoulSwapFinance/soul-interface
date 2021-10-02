@@ -45,7 +45,7 @@ const FarmListItem2 = ({ farm, ...rest }) => {
       decimals = farm.pair.token0?.decimals
     } else if (farm.lpToken.toLowerCase() == WETH9_EXTENDED[chainId].address.toLowerCase()) {
       lpPrice = ftmPrice
-    } else if (farm.lpToken.toLowerCase() == '0x124B06C5ce47De7A6e9EFDA71a946717130079E6'.toLowerCase()) {
+    } else if (farm.lpToken.toLowerCase() == '0x124B06C5ce47De7A6e9EFDA71a946717130079E6'.toLowerCase()) { // SEANCE
       lpPrice = seancePrice
     } else {
       lpPrice = pairPrice

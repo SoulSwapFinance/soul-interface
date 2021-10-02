@@ -14,9 +14,9 @@ import Link from 'next/link'
 import Card from '../../../components/Card'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import DoubleGlowShadow from '../../../components/DoubleGlowShadow'
+import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
 import { LOCKER_ADDRESS } from '../../../constants'
-import SolarbeamLogo from '../../../components/SolarbeamLogo'
+import SoulLogo from '../../../components/SoulLogo'
 import { useTransactionAdder } from '../../../state/transactions/hooks'
 import Button, { ButtonConfirmed, ButtonError } from '../../../components/Button'
 import NumericalInput from '../../../components/NumericalInput'
@@ -127,19 +127,19 @@ export default function CreateLocker(): JSX.Element {
   return (
     <>
       <Head>
-        <title>Locker | Solarbeam</title>
-        <meta key="description" name="description" content="Solarbeam Locker" />
+        <title>Locker | Soul</title>
+        <meta key="description" name="description" content="Soul Locker" />
       </Head>
 
       <div className="container px-0 mx-auto pb-6">
         <div className={`mb-2 pb-4 grid grid-cols-12 gap-4`}>
           <div className="flex justify-center items-center col-span-12 lg:justify">
             <Link href="/farm">
-              <SolarbeamLogo />
+              <SoulLogo />
             </Link>
           </div>
         </div>
-        <DoubleGlowShadow maxWidth={false} opacity={'0.6'}>
+        <DoubleGlowShadowV2 maxWidth={false} opacity={'0.6'}>
           <div className={`grid grid-cols-12 gap-2 min-h-1/2`}>
             <div className={`col-span-12 flex flex-col md:flex-row md:space-x-2`}>
               <NavLink
@@ -360,7 +360,7 @@ export default function CreateLocker(): JSX.Element {
               </Card>
             </div>
           </div>
-        </DoubleGlowShadow>
+        </DoubleGlowShadowV2>
       </div>
     </>
   )

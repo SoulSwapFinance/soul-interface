@@ -72,6 +72,16 @@ function AppBar(): JSX.Element {
                           </a>
                         </NavLink>
                       )}
+                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href={'/locker'}>
+                        <a
+                          id={`farm-nav-link`}
+                          className="p-2 text-base text-primary hover:text-high-emphesis focus:text-high-emphesis whitespace-nowrap"
+                        >
+                          {i18n._(t`Locker`)}
+                        </a>
+                        </NavLink>
+                      )} */}
                       {/* {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                           <>
                             <NavLink href={'/lend'}>
@@ -335,7 +345,27 @@ function AppBar(): JSX.Element {
                     </a>
                   </Link>
                 )}
-
+                {/* <Link href={'/vaults'}>
+                  <a
+                    id={`vaults-nav-link`}
+                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                  >
+                    {i18n._(t`Vaults`)}
+                  </a>
+                </Link>
+                <Link href={'/locker'}>
+                  <a
+                    id={`farm-nav-link`}
+                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                  >
+                    {i18n._(t`Locker`)}
+                  </a>
+                </Link> */}
+                <Link href={'/bridge'}>
+                  <a className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap">
+                    {i18n._(t`Bridge`)}
+                  </a>
+                </Link>
                 {/* {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <>
                     <Link href={'/lend'}>

@@ -4,7 +4,9 @@ import {
   ZAPPER_ADDRESS,
   ETH_USD_PAIR,
   SOUL_SEANCE_PAIR,
+  SOUL_FTM_PAIR,
   SEANCE_USDC_PAIR,
+  FANTOM_USDC_PAIR,
   LOCKER_ADDRESS
 } from '../constants/addresses'
 import {
@@ -53,7 +55,7 @@ import FACTORY_ABI from '../constants/abis/factory.json'
 import IUniswapV2PairABI from '../constants/abis/uniswap-v2-pair.json'
 import KASHIPAIR_ABI from '../constants/abis/kashipair.json'
 import MAKER_ABI from '../constants/abis/maker.json'
-import SOUL_LOCKER_ABI from '../constants/abis/solar-locker.json' // todo
+import SOUL_LOCKER_ABI from '../constants/abis/soul-locker.json' // todo
 
 // soul
 import SOUL_GUIDE_ABI from '../constants/abis/soul-guide.json' // TODO: update abi
@@ -198,9 +200,19 @@ export function useSoulSeanceContract(withSignerIfPossible?: boolean): Contract 
   return useContract(chainId && SOUL_SEANCE_PAIR[chainId], IUniswapV2PairABI, withSignerIfPossible)
 }
 
+export function useSoulFantomContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOUL_FTM_PAIR[chainId], IUniswapV2PairABI, withSignerIfPossible)
+}
+
 export function useSeanceUsdcContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SEANCE_USDC_PAIR[chainId], IUniswapV2PairABI, withSignerIfPossible)
+}
+
+export function useFantomUsdcContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && FANTOM_USDC_PAIR[chainId], IUniswapV2PairABI, withSignerIfPossible)
 }
 
 export function useSoulVaultContract(withSignerIfPossible = true): Contract | null {

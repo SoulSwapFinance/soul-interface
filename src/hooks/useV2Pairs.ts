@@ -4,7 +4,7 @@ import IUniswapV2PairABI from '@sushiswap/core/abi/IUniswapV2Pair.json'
 import { Interface } from '@ethersproject/abi'
 import { useContext, useMemo } from 'react'
 import { useMultipleContractSingleData } from '../state/multicall/hooks'
-import { SOUL, FACTORY_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS } from '../constants'
+import { FACTORY_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS } from '../constants'
 import { useActiveWeb3React } from '../hooks/useActiveWeb3React'
 import { PriceContext } from '../contexts/priceContext'
 import { POOLS, TokenInfo } from '../constants/farms'
@@ -79,9 +79,9 @@ export interface TVLInfo {
 export function useVaultTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
   const priceData = useContext(PriceContext)
-  const solarPrice = priceData?.['solar']
+  const soulPrice = priceData?.['soul']
   const ftmPrice = priceData?.['ftm']
-  const seancePrice = priceData?.['seance']
+  // const seancePrice = priceData?.['seance']
 
   const farmingPools = Object.keys(VAULTS[ChainId.FANTOM]).map((key) => {
     return { ...VAULTS[ChainId.FANTOM][key] }
@@ -107,23 +107,23 @@ export function useVaultTVL(): TVLInfo[] {
         token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
         token.symbol == 'WFTM' ||
         token.symbol == 'FTM' ||
-        token.symbol == 'SEANCE' ||
+        // token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
-        token.symbol == 'BUSD'
+        token.symbol == 'FUSD'
       )
     }
 
     function getPrice(token: TokenInfo) {
       if (token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase()) {
-        return solarPrice
+        return soulPrice
       }
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {
         return ftmPrice
       }
-      if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
-        return seancePrice
-      }
-      if (token.symbol == 'USDC' || token.symbol == 'BUSD') {
+      // if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
+      //   return seancePrice
+      // }
+      if (token.symbol == 'USDC' || token.symbol == 'FUSD') {
         return 1
       }
       return 0
@@ -199,9 +199,9 @@ export function useVaultTVL(): TVLInfo[] {
     results,
     summonerBalanceSingle,
     chainId,
-    solarPrice,
+    soulPrice,
     ftmPrice,
-    seancePrice,
+    // seancePrice,
     totalSupply,
     summonerBalance,
     lpPools,
@@ -212,9 +212,9 @@ export function useVaultTVL(): TVLInfo[] {
 export function useTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
   const priceData = useContext(PriceContext)
-  const solarPrice = priceData?.['solar']
+  const soulPrice = priceData?.['soul']
   const ftmPrice = priceData?.['ftm']
-  const seancePrice = priceData?.['seance']
+  // const seancePrice = priceData?.['seance']
 
   const farmingPools = Object.keys(POOLS[ChainId.FANTOM]).map((key) => {
     return { ...POOLS[ChainId.FANTOM][key], lpToken: key }
@@ -240,23 +240,23 @@ export function useTVL(): TVLInfo[] {
         token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
         token.symbol == 'WFTM' ||
         token.symbol == 'FTM' ||
-        token.symbol == 'SEANCE' ||
+        // token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
-        token.symbol == 'BUSD'
+        token.symbol == 'FUSD'
       )
     }
 
     function getPrice(token: TokenInfo) {
       if (token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase()) {
-        return solarPrice
+        return soulPrice
       }
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {
         return ftmPrice
       }
-      if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
-        return seancePrice
-      }
-      if (token.symbol == 'USDC' || token.symbol == 'BUSD') {
+      // if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
+      //   return seancePrice
+      // }
+      if (token.symbol == 'USDC' || token.symbol == 'FUSD') {
         return 1
       }
       return 0
@@ -330,9 +330,9 @@ export function useTVL(): TVLInfo[] {
     results,
     summonerBalanceSingle,
     chainId,
-    solarPrice,
+    soulPrice,
     ftmPrice,
-    seancePrice,
+    // seancePrice,
     totalSupply,
     summonerBalance,
     lpPools,
@@ -372,9 +372,9 @@ export function useV2PairsWithPrice(
   const totalSupply = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'totalSupply')
 
   const priceData = useContext(PriceContext)
-  const solarPrice = priceData?.['solar']
+  const soulPrice = priceData?.['soul']
   const ftmPrice = priceData?.['ftm']
-  const seancePrice = priceData?.['seance']
+  // const seancePrice = priceData?.['seance']
 
   return useMemo(() => {
     function isKnownToken(token: Token) {
@@ -382,23 +382,23 @@ export function useV2PairsWithPrice(
         token.address.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
         token.symbol == 'WFTM' ||
         token.symbol == 'FTM' ||
-        token.symbol == 'SEANCE' ||
+        // token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
-        token.symbol == 'BUSD'
+        token.symbol == 'FUSD'
       )
     }
 
     function getPrice(token: Token) {
       if (token.address.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase()) {
-        return solarPrice
+        return soulPrice
       }
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {
         return ftmPrice
       }
-      if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
-        return seancePrice
-      }
-      if (token.symbol == 'USDC' || token.symbol == 'BUSD') {
+      // if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
+      //   return seancePrice
+      // }
+      if (token.symbol == 'USDC' || token.symbol == 'FUSD') {
         return 1
       }
       return 0
@@ -442,7 +442,7 @@ export function useV2PairsWithPrice(
         lpPrice,
       ]
     })
-  }, [results, chainId, solarPrice, ftmPrice, seancePrice, tokens, totalSupply])
+  }, [results, chainId, soulPrice, ftmPrice, tokens, totalSupply]) // seancePrice
 }
 
 export function useV2Pair(tokenA?: Currency, tokenB?: Currency): [PairState, Pair | null] {

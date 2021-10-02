@@ -153,7 +153,7 @@ export default function Vesting() {
                 {account ? (
                   <div className="text-sm text-secondary">
                     {totalLocked ? (
-                      i18n._(t`Historical Total Locked: ${formatNumber(totalLocked)} SUSHI`)
+                      i18n._(t`Historical Total Locked: ${formatNumber(totalLocked)} SOUL`)
                     ) : (
                       <Dots>{i18n._(t`Historical Total Locked: Fetching Total`)}</Dots>
                     )}
@@ -179,7 +179,7 @@ export default function Vesting() {
                 {pendingTreasurySignature ? (
                   <Dots>{i18n._(t`Pending Treasury Transfer`)}</Dots>
                 ) : (
-                  <> {claimConfirmed ? i18n._(t`Claimed`) : i18n._(t`Claim SUSHI`)}</>
+                  <> {claimConfirmed ? i18n._(t`Claimed`) : i18n._(t`Claim SOUL`)}</>
                 )}
 
                 {attempting && (
