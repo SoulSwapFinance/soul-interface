@@ -81,7 +81,7 @@ export function useVaultTVL(): TVLInfo[] {
   const priceData = useContext(PriceContext)
   const soulPrice = priceData?.['soul']
   const ftmPrice = priceData?.['ftm']
-  // const seancePrice = priceData?.['seance']
+  const seancePrice = priceData?.['seance']
 
   const farmingPools = Object.keys(VAULTS[ChainId.FANTOM]).map((key) => {
     return { ...VAULTS[ChainId.FANTOM][key] }
@@ -107,7 +107,7 @@ export function useVaultTVL(): TVLInfo[] {
         token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
         token.symbol == 'WFTM' ||
         token.symbol == 'FTM' ||
-        // token.symbol == 'SEANCE' ||
+        token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
         token.symbol == 'FUSD'
       )
@@ -120,9 +120,9 @@ export function useVaultTVL(): TVLInfo[] {
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {
         return ftmPrice
       }
-      // if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
-      //   return seancePrice
-      // }
+      if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
+        return seancePrice
+      }
       if (token.symbol == 'USDC' || token.symbol == 'FUSD') {
         return 1
       }
@@ -201,7 +201,7 @@ export function useVaultTVL(): TVLInfo[] {
     chainId,
     soulPrice,
     ftmPrice,
-    // seancePrice,
+    seancePrice,
     totalSupply,
     summonerBalance,
     lpPools,
@@ -214,7 +214,7 @@ export function useTVL(): TVLInfo[] {
   const priceData = useContext(PriceContext)
   const soulPrice = priceData?.['soul']
   const ftmPrice = priceData?.['ftm']
-  // const seancePrice = priceData?.['seance']
+  const seancePrice = priceData?.['seance']
 
   const farmingPools = Object.keys(POOLS[ChainId.FANTOM]).map((key) => {
     return { ...POOLS[ChainId.FANTOM][key], lpToken: key }
@@ -240,7 +240,7 @@ export function useTVL(): TVLInfo[] {
         token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
         token.symbol == 'WFTM' ||
         token.symbol == 'FTM' ||
-        // token.symbol == 'SEANCE' ||
+        token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
         token.symbol == 'FUSD'
       )
@@ -253,9 +253,9 @@ export function useTVL(): TVLInfo[] {
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {
         return ftmPrice
       }
-      // if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
-      //   return seancePrice
-      // }
+      if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
+        return seancePrice
+      }
       if (token.symbol == 'USDC' || token.symbol == 'FUSD') {
         return 1
       }
@@ -332,7 +332,7 @@ export function useTVL(): TVLInfo[] {
     chainId,
     soulPrice,
     ftmPrice,
-    // seancePrice,
+    seancePrice,
     totalSupply,
     summonerBalance,
     lpPools,
@@ -374,7 +374,7 @@ export function useV2PairsWithPrice(
   const priceData = useContext(PriceContext)
   const soulPrice = priceData?.['soul']
   const ftmPrice = priceData?.['ftm']
-  // const seancePrice = priceData?.['seance']
+  const seancePrice = priceData?.['seance']
 
   return useMemo(() => {
     function isKnownToken(token: Token) {
@@ -395,9 +395,9 @@ export function useV2PairsWithPrice(
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {
         return ftmPrice
       }
-      // if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
-      //   return seancePrice
-      // }
+      if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
+        return seancePrice
+      }
       if (token.symbol == 'USDC' || token.symbol == 'FUSD') {
         return 1
       }
@@ -442,7 +442,7 @@ export function useV2PairsWithPrice(
         lpPrice,
       ]
     })
-  }, [results, chainId, soulPrice, ftmPrice, tokens, totalSupply]) // seancePrice
+  }, [results, chainId, soulPrice, ftmPrice, seancePrice, tokens, totalSupply])
 }
 
 export function useV2Pair(tokenA?: Currency, tokenB?: Currency): [PairState, Pair | null] {
