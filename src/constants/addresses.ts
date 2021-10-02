@@ -25,6 +25,12 @@ export const LOCKER_ADDRESS: AddressMap = {
   [ChainId.FANTOM_TESTNET]: '',
 }
 
+export const FAUCET_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.FANTOM]: '',
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
 export const SOUL_SEANCE_PAIR: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.FANTOM]: '0x8f1E15cD3d5a0bb85B8189d5c6B61BB64398E19b', // 01 OCT
