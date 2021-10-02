@@ -104,8 +104,7 @@
 
 // export default ExchangeHeader
 
-import { ChainId } from '@soulswap/sdk'
-import { Percent } from '@soulswap/sdk'
+import { ChainId, Percent } from '../sdk'
 import React from 'react'
 import Gas from './Gas'
 import NavLink from './NavLink'

@@ -1,4 +1,4 @@
-import { ChainId, Currency, NATIVE, SOUL_ADDRESS } from '@soulswap/sdk'
+import { ChainId, Currency, NATIVE, SOUL_ADDRESS } from '../../sdk'
 // import React, { useEffect, useState } from 'react'
 import React from 'react'
 
