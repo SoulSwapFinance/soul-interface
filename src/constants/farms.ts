@@ -23,6 +23,15 @@ type AddressMap = {
 
 export const POOLS: AddressMap = {
   [ChainId.FANTOM]: {
+     '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07': {
+      id: 0,
+      token0: {
+        id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
+      name: 'SoulPower',
+      symbol: 'SOUL',
+      decimals: 18,
+      },
+    }, 
     '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57': { // SOUL-FTM
     id: 1,
     token0: {

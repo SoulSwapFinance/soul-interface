@@ -66,13 +66,14 @@ export default function Farm(): JSX.Element {
   const farms = useFarms()
   const vaults = useVaults()
 
-  const distributorInfo = useDistributorInfo()
+  const summonerInfo = useSummonerInfo()
 
   const priceData = useContext(PriceContext)
 
   const soulPrice = priceData?.['soul']
   const ftmPrice = priceData?.['ftm']
-
+  const seancePrice = priceData?.['seance']
+  
   const tvlInfo = useTVL()
 
   const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
@@ -87,7 +88,7 @@ export default function Farm(): JSX.Element {
     return previousValue + (currentValue.totalLp / 1e18) * soulPrice
   }, 0)
 
-  const secondsPerDay = 86_400
+  const secondsPerDay = 86400
 
   const map = (pool) => {
     pool.owner = 'Soul'
@@ -95,7 +96,7 @@ export default function Farm(): JSX.Element {
 
     const pair = POOLS[chainId][pool.lpToken]
 
-    const secondsPerHour = 3_600
+    const secondsPerHour = 3600
 
     function getRewards() {
       const rewardPerSecond =

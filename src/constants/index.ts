@@ -8,7 +8,7 @@ import { BigNumber } from 'ethers'
 export const POOL_DENY = []
 
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
-export const AVERAGE_BLOCK_TIME_IN_SECS = 2
+export const AVERAGE_BLOCK_TIME_IN_SECS = 1
 
 export const ARCHER_RELAY_URI: { [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: 'https://api.archerdao.io/v1/transaction',
