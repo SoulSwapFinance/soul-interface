@@ -99,9 +99,6 @@ msgstr ""
 msgid "All Farms"
 msgstr ""
 
-msgid "Allocation"
-msgstr ""
-
 msgid "Amount Locked"
 msgstr ""
 
@@ -338,6 +335,9 @@ msgid "Deposit tokens into BentoBox for all the yields"
 msgstr "Ký quỹ token vào BentoBox để nhận tất cả lợi suất"
 
 msgid "Deposit {0} into BentoBox"
+msgstr ""
+
+msgid "Deposited"
 msgstr ""
 
 msgid "Depositing {0} into BentoBox"
@@ -945,6 +945,9 @@ msgid ""
 "one click"
 msgstr ""
 
+msgid "Summon"
+msgstr ""
+
 msgid "Summon an Empire."
 msgstr ""
 
@@ -956,9 +959,6 @@ msgstr "Hoán đổi"
 
 msgid "Swap Anyway"
 msgstr "Vẫn hoán đổi"
-
-msgid "TVL"
-msgstr ""
 
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""
@@ -1159,9 +1159,6 @@ msgstr ""
 
 msgid "Your Liquidity"
 msgstr "Tính thanh khoản của bạn"
-
-msgid "Your Staked"
-msgstr ""
 
 msgid "Your Wallet"
 msgstr "Ví của bạn"

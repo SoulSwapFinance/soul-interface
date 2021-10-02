@@ -101,9 +101,6 @@ msgstr "Additional records and weekly merkle updates can be found on"
 msgid "All Farms"
 msgstr "All Farms"
 
-msgid "Allocation"
-msgstr "Allocation"
-
 msgid "Amount Locked"
 msgstr "Amount Locked"
 
@@ -348,6 +345,9 @@ msgstr "Deposit tokens into BentoBox for all the yields"
 
 msgid "Deposit {0} into BentoBox"
 msgstr "Deposit {0} into BentoBox"
+
+msgid "Deposited"
+msgstr "Deposited"
 
 msgid "Depositing {0} into BentoBox"
 msgstr "Depositing {0} into BentoBox"
@@ -967,6 +967,9 @@ msgstr ""
 "Stake into SPELL add collateral as aSPELL on Aave all in\n"
 "one click"
 
+msgid "Summon"
+msgstr "Summon"
+
 msgid "Summon an Empire."
 msgstr "Summon an Empire."
 
@@ -978,9 +981,6 @@ msgstr "Swap"
 
 msgid "Swap Anyway"
 msgstr "Swap Anyway"
-
-msgid "TVL"
-msgstr "TVL"
 
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
@@ -1183,9 +1183,6 @@ msgstr "Your Claimable SUSHI this Week"
 
 msgid "Your Liquidity"
 msgstr "Your Liquidity"
-
-msgid "Your Staked"
-msgstr "Your Staked"
 
 msgid "Your Wallet"
 msgstr "Your Wallet"

@@ -99,9 +99,6 @@ msgstr ""
 msgid "All Farms"
 msgstr ""
 
-msgid "Allocation"
-msgstr ""
-
 msgid "Amount Locked"
 msgstr ""
 
@@ -340,6 +337,9 @@ msgid "Deposit tokens into BentoBox for all the yields"
 msgstr "Deposite tokens en BentoBox para todos los rendimientos"
 
 msgid "Deposit {0} into BentoBox"
+msgstr ""
+
+msgid "Deposited"
 msgstr ""
 
 msgid "Depositing {0} into BentoBox"
@@ -947,6 +947,9 @@ msgid ""
 "one click"
 msgstr ""
 
+msgid "Summon"
+msgstr ""
+
 msgid "Summon an Empire."
 msgstr ""
 
@@ -958,9 +961,6 @@ msgstr "Intercambio"
 
 msgid "Swap Anyway"
 msgstr "Cambiar de todos modos"
-
-msgid "TVL"
-msgstr ""
 
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""
@@ -1161,9 +1161,6 @@ msgstr ""
 
 msgid "Your Liquidity"
 msgstr "Tu liquidez"
-
-msgid "Your Staked"
-msgstr ""
 
 msgid "Your Wallet"
 msgstr "Tu billetera"
