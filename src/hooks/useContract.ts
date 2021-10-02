@@ -6,7 +6,7 @@ import {
   SOUL_SEANCE_PAIR,
   SOUL_FTM_PAIR,
   SEANCE_USDC_PAIR,
-  FANTOM_USDC_PAIR,
+  FTM_USDC_PAIR,
   LOCKER_ADDRESS
 } from '../constants/addresses'
 import {
@@ -212,7 +212,7 @@ export function useSeanceUsdcContract(withSignerIfPossible?: boolean): Contract 
 
 export function useFantomUsdcContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && FANTOM_USDC_PAIR[chainId], IUniswapV2PairABI, withSignerIfPossible)
+  return useContract(chainId && FTM_USDC_PAIR[chainId], IUniswapV2PairABI, withSignerIfPossible)
 }
 
 export function useSoulVaultContract(withSignerIfPossible = true): Contract | null {

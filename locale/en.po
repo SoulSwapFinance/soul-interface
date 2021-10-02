@@ -20,6 +20,27 @@ msgstr ""
 "(COMING SOON) Accrue automatic yield through flash loans and\n"
 "SOUL strategies"
 
+msgid "- 0.1 MOVR to lock"
+msgstr "- 0.1 MOVR to lock"
+
+msgid "- Always DYOR"
+msgstr "- Always DYOR"
+
+msgid "- Click on \"Approve\" to allow the contract to transfer your tokens"
+msgstr "- Click on \"Approve\" to allow the contract to transfer your tokens"
+
+msgid "- Click on \"Deposit\" to lock your tokens into locker contract"
+msgstr "- Click on \"Deposit\" to lock your tokens into locker contract"
+
+msgid "- Input your token or liquidity pair address, amount of tokens to lock, withdrawer address and when tokens will become unlocked"
+msgstr "- Input your token or liquidity pair address, amount of tokens to lock, withdrawer address and when tokens will become unlocked"
+
+msgid "- Locker contract address: {0}"
+msgstr "- Locker contract address: {0}"
+
+msgid "- You will not be able to withdraw your tokens before the unlock time"
+msgstr "- You will not be able to withdraw your tokens before the unlock time"
+
 msgid "/ DAY"
 msgstr "/ DAY"
 
@@ -82,6 +103,9 @@ msgstr "All Farms"
 
 msgid "Allocation"
 msgstr "Allocation"
+
+msgid "Amount Locked"
+msgstr "Amount Locked"
 
 msgid "Amount of Tokens"
 msgstr "Amount of Tokens"
@@ -219,8 +243,8 @@ msgstr "Change Recipient"
 msgid "Chinese"
 msgstr "Chinese"
 
-msgid "Claim SUSHI"
-msgstr "Claim SUSHI"
+msgid "Claim SOUL"
+msgstr "Claim SOUL"
 
 msgid "Claimed"
 msgstr "Claimed"
@@ -277,6 +301,9 @@ msgstr "Connect Wallet"
 msgid "Connect to wallet"
 msgstr "Connect to wallet"
 
+msgid "Considerations"
+msgstr "Considerations"
+
 msgid "Convert"
 msgstr "Convert"
 
@@ -297,6 +324,9 @@ msgstr "Create a new Kashi Market"
 
 msgid "Create a pair"
 msgstr "Create a pair"
+
+msgid "Create lock"
+msgstr "Create lock"
 
 msgid "Create pool"
 msgstr "Create pool"
@@ -398,6 +428,9 @@ msgstr "Explore our Protocol."
 msgid "Farm"
 msgstr "Farm"
 
+msgid "Fees"
+msgstr "Fees"
+
 msgid "Filled"
 msgstr "Filled"
 
@@ -439,6 +472,9 @@ msgstr ""
 msgid "German"
 msgstr "German"
 
+msgid "Give me some MOVR"
+msgstr "Give me some MOVR"
+
 msgid "Go Back"
 msgstr "Go Back"
 
@@ -463,11 +499,14 @@ msgstr "Historical Total Locked: Connect Wallet"
 msgid "Historical Total Locked: Fetching Total"
 msgstr "Historical Total Locked: Fetching Total"
 
-msgid "Historical Total Locked: {0} SUSHI"
-msgstr "Historical Total Locked: {0} SUSHI"
+msgid "Historical Total Locked: {0} SOUL"
+msgstr "Historical Total Locked: {0} SOUL"
 
 msgid "History"
 msgstr "History"
+
+msgid "How to use"
+msgstr "How to use"
 
 msgid "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
 msgstr "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
@@ -577,6 +616,12 @@ msgstr "Loading balance"
 msgid "Loading your {exchange} liquidity positions"
 msgstr "Loading your {exchange} liquidity positions"
 
+msgid "Lock"
+msgstr "Lock"
+
+msgid "Locker"
+msgstr "Locker"
+
 msgid "MAX"
 msgstr "MAX"
 
@@ -614,6 +659,9 @@ msgstr "Maximize yield by staking SOUL for SEANCE"
 msgid "Maximum sent"
 msgstr "Maximum sent"
 
+msgid "Me"
+msgstr "Me"
+
 msgid "Migrate"
 msgstr "Migrate"
 
@@ -634,6 +682,9 @@ msgstr "Minimum Received"
 
 msgid "Minimum received"
 msgstr "Minimum received"
+
+msgid "Moonriver Faucet"
+msgstr "Moonriver Faucet"
 
 msgid "My Farms"
 msgstr "My Farms"
@@ -846,6 +897,9 @@ msgstr "SPELL Fee"
 msgid "Search Name or Address"
 msgstr "Search Name or Address"
 
+msgid "Search lockers"
+msgstr "Search lockers"
+
 msgid "Select Token"
 msgstr "Select Token"
 
@@ -1016,6 +1070,9 @@ msgstr "Twitter"
 msgid "Unknown error{0}. Try increasing your slippage tolerance."
 msgstr "Unknown error{0}. Try increasing your slippage tolerance."
 
+msgid "Unlock date"
+msgstr "Unlock date"
+
 msgid "Unstake"
 msgstr "Unstake"
 
@@ -1048,6 +1105,9 @@ msgstr "Use this tool to find pairs that don't automatically appear in the inter
 
 msgid "Used"
 msgstr "Used"
+
+msgid "Vaults"
+msgstr "Vaults"
 
 msgid "Vesting is executed within the guidelines selected by the community in"
 msgstr "Vesting is executed within the guidelines selected by the community in"
@@ -1084,6 +1144,9 @@ msgstr "When creating a pair you are the first liquidity provider. The ratio of 
 
 msgid "Withdraw"
 msgstr "Withdraw"
+
+msgid "Withdraw from locker {id}"
+msgstr "Withdraw from locker {id}"
 
 msgid "Wrap"
 msgstr "Wrap"

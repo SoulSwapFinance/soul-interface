@@ -18,6 +18,27 @@ msgid ""
 "SOUL strategies"
 msgstr ""
 
+msgid "- 0.1 MOVR to lock"
+msgstr ""
+
+msgid "- Always DYOR"
+msgstr ""
+
+msgid "- Click on \"Approve\" to allow the contract to transfer your tokens"
+msgstr ""
+
+msgid "- Click on \"Deposit\" to lock your tokens into locker contract"
+msgstr ""
+
+msgid "- Input your token or liquidity pair address, amount of tokens to lock, withdrawer address and when tokens will become unlocked"
+msgstr ""
+
+msgid "- Locker contract address: {0}"
+msgstr ""
+
+msgid "- You will not be able to withdraw your tokens before the unlock time"
+msgstr ""
+
 msgid "/ DAY"
 msgstr ""
 
@@ -79,6 +100,9 @@ msgid "All Farms"
 msgstr ""
 
 msgid "Allocation"
+msgstr ""
+
+msgid "Amount Locked"
 msgstr ""
 
 msgid "Amount of Tokens"
@@ -212,7 +236,7 @@ msgstr ""
 msgid "Chinese"
 msgstr ""
 
-msgid "Claim SUSHI"
+msgid "Claim SOUL"
 msgstr ""
 
 msgid "Claimed"
@@ -270,6 +294,9 @@ msgstr "Conectar cartera"
 msgid "Connect to wallet"
 msgstr ""
 
+msgid "Considerations"
+msgstr ""
+
 msgid "Convert"
 msgstr ""
 
@@ -290,6 +317,9 @@ msgstr ""
 
 msgid "Create a pair"
 msgstr "Cree un par"
+
+msgid "Create lock"
+msgstr ""
 
 msgid "Create pool"
 msgstr "Crear fondo"
@@ -391,6 +421,9 @@ msgstr ""
 msgid "Farm"
 msgstr ""
 
+msgid "Fees"
+msgstr ""
+
 msgid "Filled"
 msgstr ""
 
@@ -425,6 +458,9 @@ msgstr ""
 msgid "German"
 msgstr ""
 
+msgid "Give me some MOVR"
+msgstr ""
+
 msgid "Go Back"
 msgstr ""
 
@@ -449,10 +485,13 @@ msgstr "Total histórico bloqueado: conectar cartera"
 msgid "Historical Total Locked: Fetching Total"
 msgstr "Total histórico bloqueado: total recuperado"
 
-msgid "Historical Total Locked: {0} SUSHI"
+msgid "Historical Total Locked: {0} SOUL"
 msgstr ""
 
 msgid "History"
+msgstr ""
+
+msgid "How to use"
 msgstr ""
 
 msgid "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
@@ -563,6 +602,12 @@ msgstr ""
 msgid "Loading your {exchange} liquidity positions"
 msgstr "Cargando sus posiciones de liquidez {exchange}"
 
+msgid "Lock"
+msgstr ""
+
+msgid "Locker"
+msgstr ""
+
 msgid "MAX"
 msgstr "MAX"
 
@@ -598,6 +643,9 @@ msgstr ""
 msgid "Maximum sent"
 msgstr ""
 
+msgid "Me"
+msgstr ""
+
 msgid "Migrate"
 msgstr "Migrar"
 
@@ -618,6 +666,9 @@ msgstr ""
 
 msgid "Minimum received"
 msgstr "Mínimo recibido"
+
+msgid "Moonriver Faucet"
+msgstr ""
 
 msgid "My Farms"
 msgstr ""
@@ -828,6 +879,9 @@ msgstr ""
 msgid "Search Name or Address"
 msgstr ""
 
+msgid "Search lockers"
+msgstr ""
+
 msgid "Select Token"
 msgstr ""
 
@@ -994,6 +1048,9 @@ msgstr ""
 msgid "Unknown error{0}. Try increasing your slippage tolerance."
 msgstr ""
 
+msgid "Unlock date"
+msgstr ""
+
 msgid "Unstake"
 msgstr "Retirar apuesta"
 
@@ -1025,6 +1082,9 @@ msgid "Use this tool to find pairs that don't automatically appear in the interf
 msgstr ""
 
 msgid "Used"
+msgstr ""
+
+msgid "Vaults"
 msgstr ""
 
 msgid "Vesting is executed within the guidelines selected by the community in"
@@ -1062,6 +1122,9 @@ msgstr "Al crear un par, es el primer proveedor de liquidez. La proporción de t
 
 msgid "Withdraw"
 msgstr "Retirar"
+
+msgid "Withdraw from locker {id}"
+msgstr ""
 
 msgid "Wrap"
 msgstr "Envolver"

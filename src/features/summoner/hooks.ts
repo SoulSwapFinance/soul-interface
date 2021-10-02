@@ -6,9 +6,10 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   useSoulSummonerContract,
   useETHPairContract,
-  useSoulSeanceContract,
+  useSoulFantomContract,
   useSoulVaultContract,
   useSeanceUsdcContract,
+  useFantomUsdcContract,
   // useSpellSeanceContract,
 } from '../../hooks'
 
@@ -21,7 +22,7 @@ import { useVaultInfo, useVaults } from '../vault/hooks'
 import useSummoner from './useSummoner'
 const { default: axios } = require('axios')
 
-export function useChefContract(chef: Chef) {
+export function useSummonerContract(chef: Chef) {
   const soulSummonerContract = useSoulSummonerContract()
   const contracts = useMemo(
     () => ({
@@ -36,7 +37,7 @@ export function useChefContract(chef: Chef) {
   }, [contracts, chef])
 }
 
-export function useChefContracts(chefs: Chef[]) {
+export function useSummonerContracts(chefs: Chef[]) {
   const soulSummonerContract = useSoulSummonerContract()
   const contracts = useMemo(
     () => ({
@@ -52,7 +53,7 @@ export function useChefContracts(chefs: Chef[]) {
 export function useUserInfo(farm, token) {
   const { account } = useActiveWeb3React()
 
-  const contract = useChefContract(0)
+  const contract = useSummonerContract(0)
 
   const args = useMemo(() => {
     if (!account) {
@@ -78,7 +79,7 @@ export function useUserInfo(farm, token) {
 export function usePendingSoul(farm) {
   const { account, chainId } = useActiveWeb3React()
 
-  const contract = useChefContract(0)
+  const contract = useSummonerContract(0)
 
   const args = useMemo(() => {
     if (!account) {
@@ -115,7 +116,7 @@ export function usePendingToken(farm, contract) {
   return useMemo(() => pendingTokens, [pendingTokens])
 }
 
-export function useSolarPositions(contract?: Contract | null) {
+export function useSoulPositions(contract?: Contract | null) {
   const { account } = useActiveWeb3React()
 
   const numberOfPools = useSingleCallResult(contract ? contract : null, 'poolLength', undefined, NEVER_RELOAD)
@@ -149,10 +150,10 @@ export function useSolarPositions(contract?: Contract | null) {
 }
 
 export function usePositions() {
-  return useSolarPositions(useSoulSummonerContract())
+  return useSoulPositions(useSoulSummonerContract())
 }
 
-export function useSolarFarms(contract?: Contract | null) {
+export function useSoulFarms(contract?: Contract | null) {
   const { account } = useActiveWeb3React()
 
   const numberOfPools = useSingleCallResult(contract ? contract : null, 'poolLength', undefined, NEVER_RELOAD)
@@ -176,7 +177,7 @@ export function useSolarFarms(contract?: Contract | null) {
       lpToken: data[0].result?.['lpToken'] || '',
       allocPoint: data[0].result?.['allocPoint'] || '',
       lastRewardBlock: data[0].result?.['lastRewardBlock'] || '',
-      accSolarPerShare: data[0].result?.['accSolarPerShare'] || '',
+      accSoulPerShare: data[0].result?.['accSoulPerShare'] || '',
       depositFeeBP: data[0].result?.['depositFeeBP'] || '',
       harvestInterval: data[0].result?.['harvestInterval'] || '',
       totalLp: data[0].result?.['totalLp'] || '',
@@ -285,27 +286,32 @@ export function useTokenInfo(tokenContract?: Contract | null) {
 }
 
 export function useFarms() {
-  return useSolarFarms(useSoulSummonerContract())
+  return useSoulFarms(useSoulSummonerContract())
 }
 
 export function usePricesApi() {
-  const seancePrice = useSeancePrice()
+  const ftmPrice = useFantomPrice()
   const soulPrice = useSoulPrice()
-  // const spellPrice = useSpellPrice()
+  const seancePrice = useSeancePrice()
 
   return useMemo(() => {
     return {
-      seance: seancePrice,
-      soul: soulPrice * seancePrice,
-      // spell: spellPrice * seancePrice,
+      ftm: ftmPrice,
+      soul: soulPrice * ftmPrice,
+      seance: seancePrice * ftmPrice,
       usdc: 1,
     }
-  }, [seancePrice, soulPrice]) // spellPrice
+  }, [ftmPrice, seancePrice, soulPrice])
 }
 
 export function useFarmsApi() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return useAsync(usePriceApi, true)
+}
+
+export function useFantomPrice() {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  return usePrice(useFantomUsdcContract(), 12)
 }
 
 export function useSeancePrice() {
@@ -315,7 +321,7 @@ export function useSeancePrice() {
 
 export function useSoulPrice() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  return usePrice(useSoulSeanceContract())
+  return usePrice(useSoulFantomContract())
 }
 
 export function useETHPrice() {
@@ -323,16 +329,16 @@ export function useETHPrice() {
   return usePrice(useETHPairContract())
 }
 
-export function useSolarDistributorInfo(contract) {
-  const solarPerBlock = useSingleCallResult(contract ? contract : null, 'solarPerBlock', undefined, NEVER_RELOAD)
+export function useSoulDistributorInfo(contract) {
+  const soulPerSecond = useSingleCallResult(contract ? contract : null, 'soulPerSecond', undefined, NEVER_RELOAD)
     ?.result?.[0]
 
   const totalAllocPoint = useSingleCallResult(contract ? contract : null, 'totalAllocPoint', undefined, NEVER_RELOAD)
     ?.result?.[0]
 
-  return useMemo(() => ({ solarPerBlock, totalAllocPoint }), [solarPerBlock, totalAllocPoint])
+  return useMemo(() => ({ soulPerSecond, totalAllocPoint }), [soulPerSecond, totalAllocPoint])
 }
 
 export function useDistributorInfo() {
-  return useSolarDistributorInfo(useSoulSummonerContract())
+  return useSoulDistributorInfo(useSoulSummonerContract())
 }

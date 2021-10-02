@@ -15,7 +15,7 @@ export const FACTORY_ADDRESS = {
 
 export const SOUL_VAULT_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
-  [ChainId.FANTOM]: '',
+  [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B', // TODO: UPDATE?
   [ChainId.FANTOM_TESTNET]: '',
 }
 
@@ -37,21 +37,27 @@ export const SOUL_SEANCE_PAIR: AddressMap = {
   [ChainId.FANTOM_TESTNET]: '',
 }
 
+export const SOUL_FTM_PAIR: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.FANTOM]: '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57', // 01 OCT
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
 export const SEANCE_USDC_PAIR: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.FANTOM]: '0x98c678d3c7ebed4a36b84666700d8b5b5ddc1f79', // 01 OCT
   [ChainId.FANTOM_TESTNET]: '',
 }
 
-export const ETH_USD_PAIR: AddressMap = {
+export const FTM_USDC_PAIR: AddressMap = {
   [ChainId.MAINNET]: '',
-  [ChainId.FANTOM]: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556', // FTM-USDC
+  [ChainId.FANTOM]: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556', // 01 OCT
   [ChainId.FANTOM_TESTNET]: '',
 }
 
-export const SOUL_USDC_PAIR: AddressMap = {
+export const ETH_USD_PAIR: AddressMap = {
   [ChainId.MAINNET]: '',
-  [ChainId.FANTOM]: '', // FTM-USDC
+  [ChainId.FANTOM]: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556', // FTM-USDC
   [ChainId.FANTOM_TESTNET]: '',
 }
 
@@ -77,4 +83,11 @@ export const MULTICALL2_ADDRESS: AddressMap = {
   // [ChainId.FANTOM]: '0xEd2Fb478f7fCef33E1E1d980a0135789B295a7F5', // 29 AUG
   [ChainId.FANTOM]: '0xf682Cc4468608fC4eFbaD6a06D9BC72e7790075a', // 29 AUG
   [ChainId.FANTOM_TESTNET]: '0x1ACB479bB9D1F73009F85ef5F495E942Bb57f15A', // 7 JUL
+}
+
+export const WNATIVE: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.FANTOM]: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83', // WFTM
+  [ChainId.FANTOM_TESTNET]: '',
+ 
 }

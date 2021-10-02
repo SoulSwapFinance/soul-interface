@@ -148,7 +148,7 @@ export function useSoulVaults(contract?: Contract | null) {
       allocPoint: data[0].result?.['allocPoint'] || '',
       lastRewardBlock: data[0].result?.['lastRewardBlock'] || '',
       accSoulPerShare: data[0].result?.['accSoulPerShare'] || '',
-      withdrawFeeBP: data[0].result?.['withdrawFeeBP'] || '',
+      depositFeeBP: data[0].result?.['depositFeeBP'] || '',
       harvestInterval: data[0].result?.['harvestInterval'] || '',
       totalLp: data[0].result?.['totalLp'] || '',
       lockupDuration: data[0].result?.['lockupDuration'] || 0,

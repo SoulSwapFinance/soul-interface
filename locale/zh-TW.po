@@ -18,6 +18,27 @@ msgid ""
 "SOUL strategies"
 msgstr ""
 
+msgid "- 0.1 MOVR to lock"
+msgstr ""
+
+msgid "- Always DYOR"
+msgstr ""
+
+msgid "- Click on \"Approve\" to allow the contract to transfer your tokens"
+msgstr ""
+
+msgid "- Click on \"Deposit\" to lock your tokens into locker contract"
+msgstr ""
+
+msgid "- Input your token or liquidity pair address, amount of tokens to lock, withdrawer address and when tokens will become unlocked"
+msgstr ""
+
+msgid "- Locker contract address: {0}"
+msgstr ""
+
+msgid "- You will not be able to withdraw your tokens before the unlock time"
+msgstr ""
+
 msgid "/ DAY"
 msgstr ""
 
@@ -79,6 +100,9 @@ msgid "All Farms"
 msgstr ""
 
 msgid "Allocation"
+msgstr ""
+
+msgid "Amount Locked"
 msgstr ""
 
 msgid "Amount of Tokens"
@@ -212,7 +236,7 @@ msgstr ""
 msgid "Chinese"
 msgstr ""
 
-msgid "Claim SUSHI"
+msgid "Claim SOUL"
 msgstr ""
 
 msgid "Claimed"
@@ -268,6 +292,9 @@ msgstr "連接錢包"
 msgid "Connect to wallet"
 msgstr ""
 
+msgid "Considerations"
+msgstr ""
+
 msgid "Convert"
 msgstr ""
 
@@ -288,6 +315,9 @@ msgstr ""
 
 msgid "Create a pair"
 msgstr "創建交易對"
+
+msgid "Create lock"
+msgstr ""
 
 msgid "Create pool"
 msgstr "創建池"
@@ -387,6 +417,9 @@ msgstr ""
 msgid "Farm"
 msgstr ""
 
+msgid "Fees"
+msgstr ""
+
 msgid "Filled"
 msgstr ""
 
@@ -421,6 +454,9 @@ msgstr ""
 msgid "German"
 msgstr ""
 
+msgid "Give me some MOVR"
+msgstr ""
+
 msgid "Go Back"
 msgstr ""
 
@@ -445,10 +481,13 @@ msgstr "鎖倉的總數：連接錢包"
 msgid "Historical Total Locked: Fetching Total"
 msgstr "鎖倉的總數：獲取總數"
 
-msgid "Historical Total Locked: {0} SUSHI"
+msgid "Historical Total Locked: {0} SOUL"
 msgstr ""
 
 msgid "History"
+msgstr ""
+
+msgid "How to use"
 msgstr ""
 
 msgid "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
@@ -556,6 +595,12 @@ msgstr ""
 msgid "Loading your {exchange} liquidity positions"
 msgstr "正在加載您的{exchange}您的流動性倉位"
 
+msgid "Lock"
+msgstr ""
+
+msgid "Locker"
+msgstr ""
+
 msgid "MAX"
 msgstr "最大數量"
 
@@ -591,6 +636,9 @@ msgstr ""
 msgid "Maximum sent"
 msgstr ""
 
+msgid "Me"
+msgstr ""
+
 msgid "Migrate"
 msgstr "遷移"
 
@@ -611,6 +659,9 @@ msgstr ""
 
 msgid "Minimum received"
 msgstr "最少可獲得的數量"
+
+msgid "Moonriver Faucet"
+msgstr ""
 
 msgid "My Farms"
 msgstr ""
@@ -821,6 +872,9 @@ msgstr ""
 msgid "Search Name or Address"
 msgstr ""
 
+msgid "Search lockers"
+msgstr ""
+
 msgid "Select Token"
 msgstr ""
 
@@ -987,6 +1041,9 @@ msgstr ""
 msgid "Unknown error{0}. Try increasing your slippage tolerance."
 msgstr ""
 
+msgid "Unlock date"
+msgstr ""
+
 msgid "Unstake"
 msgstr "解除抵押"
 
@@ -1018,6 +1075,9 @@ msgid "Use this tool to find pairs that don't automatically appear in the interf
 msgstr ""
 
 msgid "Used"
+msgstr ""
+
+msgid "Vaults"
 msgstr ""
 
 msgid "Vesting is executed within the guidelines selected by the community in"
@@ -1055,6 +1115,9 @@ msgstr "當創建一個交易對時，您是第一個流動性提供者。您添
 
 msgid "Withdraw"
 msgstr "提取"
+
+msgid "Withdraw from locker {id}"
+msgstr ""
 
 msgid "Wrap"
 msgstr "包裹"

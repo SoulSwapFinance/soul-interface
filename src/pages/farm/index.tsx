@@ -1,3 +1,29 @@
+// import { Wrap } from '../../components/ReusableStyles'
+
+// import { ChainId } from '@soulswap/sdk'
+// import Container from '../../components/Container'
+// import Head from 'next/head'
+// import React from 'react'
+
+// import FarmList from '../../features/farm/FarmsList'
+
+// const Farm = () => {
+//   return (
+//     <Wrap padding='4rem 0 0 0' justifyContent="center">
+//       <Container id="farm-page">
+//         <Head>
+//           <title>Farm | Soul</title>
+//           <meta key="description" name="description" content="Farm SOUL" />
+//         </Head>
+
+//         <FarmList />
+//       </Container>
+//     </Wrap>
+//   )
+// }
+
+// export default Farm // .jsx
+
 /* eslint-disable @next/next/link-passhref */
 import { useActiveWeb3React, useFuse } from '../../hooks'
 
@@ -14,8 +40,8 @@ import Button from '../../components/Button'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
-import { SOUL, WETH9_EXTENDED } from '../../constants/tokens'
-// import { SOUL, AVERAGE_BLOCK_TIME, WETH9_EXTENDED } from '../../constants'
+import { SOUL } from '../../constants/tokens'
+import { WNATIVE } from '../../constants/addresses'
 import { POOLS } from '../../constants/farms'
 import SoulLogo from '../../components/SoulLogo'
 import { PriceContext } from '../../contexts/priceContext'
@@ -25,9 +51,8 @@ import { useTVL } from '../../hooks/useV2Pairs'
 import { getAddress } from '@ethersproject/address'
 import { useVaults } from '../../features/vault/hooks'
 import Search from '../../components/Search'
-import { AVERAGE_BLOCK_TIME_IN_SECS } from '../../constants'
 
-export default function Summoner(): JSX.Element {
+export default function Farm(): JSX.Element {
   const { i18n } = useLingui()
   const router = useRouter()
   const { chainId } = useActiveWeb3React()
@@ -54,15 +79,15 @@ export default function Summoner(): JSX.Element {
     return { ...POOLS[chainId][key], lpToken: key }
   })
 
-  let summTvl = tvlInfo.reduce((previousValue, currentValue) => {
+  let sumTvl = tvlInfo.reduce((previousValue, currentValue) => {
     return previousValue + currentValue.tvl
   }, 0)
 
-  let summTvlVaults = vaults.reduce((previousValue, currentValue) => {
+  let sumTvlVaults = vaults.reduce((previousValue, currentValue) => {
     return previousValue + (currentValue.totalLp / 1e18) * soulPrice
   }, 0)
 
-  const secondsPerDay = 86_400 // / Number(AVERAGE_BLOCK_TIME_IN_SECS[chainId])
+  const secondsPerDay = 86_400
 
   const map = (pool) => {
     pool.owner = 'Soul'
@@ -70,7 +95,7 @@ export default function Summoner(): JSX.Element {
 
     const pair = POOLS[chainId][pool.lpToken]
 
-    const blocksPerHour = 3600 / AVERAGE_BLOCK_TIME_IN_SECS[chainId]
+    const secondsPerHour = 3_600
 
     function getRewards() {
       const rewardPerSecond =
@@ -89,14 +114,14 @@ export default function Summoner(): JSX.Element {
       return defaultRewards
     }
 
-    //Fix this asap later
+    // Fix this asap later
     function getTvl(pool) {
       let lpPrice = 0
       let decimals = 18
       if (pool.lpToken == SOUL[chainId]) {
         lpPrice = soulPrice
         decimals = pair.token0?.decimals
-      } else if (pool.lpToken.toLowerCase() == WETH9_EXTENDED[chainId].address.toLowerCase()) {
+      } else if (pool.lpToken.toLowerCase() == WNATIVE[chainId].toLowerCase()) {
         lpPrice = ftmPrice
       } else {
         lpPrice = 0
@@ -109,12 +134,12 @@ export default function Summoner(): JSX.Element {
 
     const tvl = getTvl(pool)
 
-    const roiPerBlock =
+    const roiPerSecond =
       rewards.reduce((previousValue, currentValue) => {
         return previousValue + currentValue.rewardPerSecond * currentValue.rewardPrice
       }, 0) / tvl
 
-    const roiPerHour = roiPerBlock * blocksPerHour
+    const roiPerHour = roiPerSecond * secondsPerHour
     const roiPerDay = roiPerHour * 24
     const roiPerMonth = roiPerDay * 30
     const roiPerYear = roiPerDay * 365
@@ -128,14 +153,14 @@ export default function Summoner(): JSX.Element {
         ...pair,
         decimals: 18,
       },
-      roiPerBlock,
+      roiPerSecond,
       roiPerHour,
       roiPerDay,
       roiPerMonth,
       roiPerYear,
       rewards,
       tvl,
-      blocksPerHour,
+      secondsPerHour,
     }
   }
 
@@ -143,16 +168,19 @@ export default function Summoner(): JSX.Element {
     my: (farm) => farm?.amount && !farm.amount.isZero(),
     soul: (farm) => farm.pair.token0?.id == SOUL[chainId] || farm.pair.token1?.id == SOUL[chainId],
     single: (farm) => !farm.pair.token1,
-    moonriver: (farm) => farm.pair.token0?.id == WETH9_EXTENDED[chainId] || farm.pair.token1?.id == WETH9_EXTENDED[chainId],
+    fantom: (farm) => farm.pair.token0?.id == WNATIVE[chainId] || farm.pair.token1?.id == WNATIVE[chainId],
     stables: (farm) =>
       farm.pair.token0?.symbol == 'USDC' ||
       farm.pair.token1?.symbol == 'USDC' ||
-      farm.pair.token0?.symbol == 'DAI' ||
-      farm.pair.token1?.symbol == 'DAI',
+      farm.pair.token0?.symbol == 'USDT' ||
+      farm.pair.token1?.symbol == 'USDT' ||
+      farm.pair.token0?.symbol == 'FUSD' ||
+      farm.pair.token1?.symbol == 'FUSD'
   }
 
   const data = farms.map(map).filter((farm) => {
     return type in FILTER ? FILTER[type](farm) : true
+    // return farm
   })
 
   const options = {
@@ -185,7 +213,7 @@ export default function Summoner(): JSX.Element {
       </Head>
 
       <div className="container px-0 mx-auto pb-6">
-        <div className={`mb-2 pb-4 grid grid-cols-12 gap-4`}>
+        <div className={`mb-2 pb-4 grid grid-cols-12 gap/-4`}>
           <div className="flex justify-center items-center col-span-12 lg:justify">
             <Link href="/farm">
               <SoulLogo />
@@ -209,10 +237,10 @@ export default function Summoner(): JSX.Element {
                     </div>
                     <div className={`flex flex-col items-center justify-between px-6 py-6 `}>
                       <div className="flex items-center text-center justify-between py-2 text-emphasis">
-                        Total Value Locked: {formatNumberScale(summTvl + summTvlVaults, true, 2)}
+                        Total Value Locked: {formatNumberScale(sumTvl + sumTvlVaults, true, 2)}
                       </div>
                       <div className="flex items-center text-center justify-between py-2 text-emphasis">
-                        Farms TVL: {formatNumberScale(summTvl, true, 2)}
+                        Farms TVL: {formatNumberScale(sumTvl, true, 2)}
                       </div>
                       {positions.length > 0 && (
                         <div className="flex items-center justify-between py-2 text-emphasis">
