@@ -18,6 +18,9 @@ msgid ""
 "SOUL strategies"
 msgstr ""
 
+msgid "/ DAY"
+msgstr ""
+
 msgid "1 Hour"
 msgstr ""
 
@@ -70,6 +73,12 @@ msgid "Added"
 msgstr ""
 
 msgid "Additional records and weekly merkle updates can be found on"
+msgstr ""
+
+msgid "All Farms"
+msgstr ""
+
+msgid "Allocation"
 msgstr ""
 
 msgid "Amount of Tokens"
@@ -180,6 +189,11 @@ msgstr ""
 msgid "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
 msgstr "跳过确认、接受交易高滑点。使用时风险自担。"
 
+msgid ""
+"Calculated based on current rates. Rates are estimates provided for your convenience\n"
+"only, and by no means represent guaranteed returns."
+msgstr ""
+
 msgid "Cancel"
 msgstr ""
 
@@ -283,6 +297,9 @@ msgstr ""
 
 msgid "Deposit"
 msgstr "存款"
+
+msgid "Deposit Fee"
+msgstr ""
 
 msgid "Deposit SOUL into BentoBox"
 msgstr ""
@@ -409,6 +426,12 @@ msgstr ""
 
 msgid "Hardware Wallet"
 msgstr "硬件钱包"
+
+msgid "Harvest"
+msgstr ""
+
+msgid "Harvest {0} SOLAR"
+msgstr ""
 
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
 msgstr ""
@@ -589,6 +612,9 @@ msgstr ""
 msgid "Minimum received"
 msgstr "最少可获得的数量"
 
+msgid "My Farms"
+msgstr ""
+
 msgid "My Liquidity Positions"
 msgstr ""
 
@@ -609,6 +635,9 @@ msgstr ""
 
 msgid "No Liquidity found"
 msgstr "没有发现流动性"
+
+msgid "No Results"
+msgstr ""
 
 msgid "No liquidity found to do swap"
 msgstr "该交换没有流动性"
@@ -690,6 +719,9 @@ msgstr ""
 msgid "Pool"
 msgstr "资金池"
 
+msgid "Pool Details"
+msgstr ""
+
 msgid "Pool Found!"
 msgstr "找到池！"
 
@@ -716,6 +748,9 @@ msgstr "价格影响过高"
 
 msgid "Price Updated"
 msgstr "价格更新"
+
+msgid "ROI"
+msgstr ""
 
 msgid "Rate"
 msgstr ""
@@ -777,6 +812,9 @@ msgstr ""
 msgid "SLP"
 msgstr ""
 
+msgid "SOLAR per $1000"
+msgstr ""
+
 msgid "SPELL Fee"
 msgstr ""
 
@@ -822,6 +860,9 @@ msgstr ""
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "在签署批准时出现错误。可能是硬件钱包例如Trezor和Ledger。再次点击，将使用倒退的办法。"
 
+msgid "Soon"
+msgstr ""
+
 msgid "SoulSwap"
 msgstr ""
 
@@ -860,6 +901,9 @@ msgstr "兑换"
 msgid "Swap Anyway"
 msgstr "仍要交换"
 
+msgid "TVL"
+msgstr ""
+
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""
 
@@ -892,6 +936,9 @@ msgstr ""
 
 msgid "This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance."
 msgstr "交易未成功，可能因为价格变动，也可能转账中产生的费用。请提高您可接受的滑点。"
+
+msgid "Timeframe"
+msgstr ""
 
 msgid "Tip to encourage miners to select this transaction."
 msgstr ""
@@ -1051,6 +1098,9 @@ msgstr ""
 msgid "Your Liquidity"
 msgstr "您的流动性"
 
+msgid "Your Staked"
+msgstr ""
+
 msgid "Your Wallet"
 msgstr "您的钱包"
 
@@ -1085,6 +1135,9 @@ msgid "Zap"
 msgstr ""
 
 msgid "above"
+msgstr ""
+
+msgid "annualized"
 msgstr ""
 
 msgid "below"

@@ -18,6 +18,9 @@ msgid ""
 "SOUL strategies"
 msgstr ""
 
+msgid "/ DAY"
+msgstr ""
+
 msgid "1 Hour"
 msgstr ""
 
@@ -70,6 +73,12 @@ msgid "Added"
 msgstr ""
 
 msgid "Additional records and weekly merkle updates can be found on"
+msgstr ""
+
+msgid "All Farms"
+msgstr ""
+
+msgid "Allocation"
 msgstr ""
 
 msgid "Amount of Tokens"
@@ -180,6 +189,11 @@ msgstr ""
 msgid "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
 msgstr "Omite los modales de confirmación y permite operaciones de alto deslizamiento. Úselo bajo su propio riesgo."
 
+msgid ""
+"Calculated based on current rates. Rates are estimates provided for your convenience\n"
+"only, and by no means represent guaranteed returns."
+msgstr ""
+
 msgid "Cancel"
 msgstr ""
 
@@ -285,6 +299,9 @@ msgstr ""
 
 msgid "Deposit"
 msgstr "Depositar"
+
+msgid "Deposit Fee"
+msgstr ""
 
 msgid "Deposit SOUL into BentoBox"
 msgstr ""
@@ -413,6 +430,12 @@ msgstr ""
 
 msgid "Hardware Wallet"
 msgstr "Cartera de hardware"
+
+msgid "Harvest"
+msgstr ""
+
+msgid "Harvest {0} SOLAR"
+msgstr ""
 
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
 msgstr ""
@@ -596,6 +619,9 @@ msgstr ""
 msgid "Minimum received"
 msgstr "Mínimo recibido"
 
+msgid "My Farms"
+msgstr ""
+
 msgid "My Liquidity Positions"
 msgstr ""
 
@@ -616,6 +642,9 @@ msgstr ""
 
 msgid "No Liquidity found"
 msgstr "No se encontró liquidez"
+
+msgid "No Results"
+msgstr ""
 
 msgid "No liquidity found to do swap"
 msgstr "No se encontró liquidez para hacer swap"
@@ -697,6 +726,9 @@ msgstr ""
 msgid "Pool"
 msgstr "Piscina"
 
+msgid "Pool Details"
+msgstr ""
+
 msgid "Pool Found!"
 msgstr "¡Piscina encontrada!"
 
@@ -723,6 +755,9 @@ msgstr "Impacto de precio demasiado alto"
 
 msgid "Price Updated"
 msgstr "Precio actualizado"
+
+msgid "ROI"
+msgstr ""
 
 msgid "Rate"
 msgstr ""
@@ -784,6 +819,9 @@ msgstr ""
 msgid "SLP"
 msgstr ""
 
+msgid "SOLAR per $1000"
+msgstr ""
+
 msgid "SPELL Fee"
 msgstr ""
 
@@ -829,6 +867,9 @@ msgstr ""
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Algo salió mal durante la firma de la aprobación. Esto se espera para carteras de hardware, como Trezor y Ledger. Haga clic de nuevo y se utilizará el método alternativo."
 
+msgid "Soon"
+msgstr ""
+
 msgid "SoulSwap"
 msgstr ""
 
@@ -867,6 +908,9 @@ msgstr "Intercambio"
 msgid "Swap Anyway"
 msgstr "Cambiar de todos modos"
 
+msgid "TVL"
+msgstr ""
+
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""
 
@@ -899,6 +943,9 @@ msgstr ""
 
 msgid "This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance."
 msgstr "Esta transacción no tendrá éxito debido al movimiento del precio o al cargo por transferencia. Intente aumentar su tolerancia al deslizamiento."
+
+msgid "Timeframe"
+msgstr ""
 
 msgid "Tip to encourage miners to select this transaction."
 msgstr ""
@@ -1058,6 +1105,9 @@ msgstr ""
 msgid "Your Liquidity"
 msgstr "Tu liquidez"
 
+msgid "Your Staked"
+msgstr ""
+
 msgid "Your Wallet"
 msgstr "Tu billetera"
 
@@ -1092,6 +1142,9 @@ msgid "Zap"
 msgstr ""
 
 msgid "above"
+msgstr ""
+
+msgid "annualized"
 msgstr ""
 
 msgid "below"

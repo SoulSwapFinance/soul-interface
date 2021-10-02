@@ -103,6 +103,10 @@ module.exports = withBundleAnalyzer(
         //   destination: '/exchange/migrate',
         // },
         {
+          source: '/summoner',
+          destination: '/summoner',
+        },
+        {
           source: '/pool',
           destination: '/exchange/pool',
         },

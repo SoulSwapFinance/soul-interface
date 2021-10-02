@@ -18,6 +18,9 @@ msgid ""
 "SOUL strategies"
 msgstr ""
 
+msgid "/ DAY"
+msgstr ""
+
 msgid "1 Hour"
 msgstr ""
 
@@ -70,6 +73,12 @@ msgid "Added"
 msgstr ""
 
 msgid "Additional records and weekly merkle updates can be found on"
+msgstr ""
+
+msgid "All Farms"
+msgstr ""
+
+msgid "Allocation"
 msgstr ""
 
 msgid "Amount of Tokens"
@@ -180,6 +189,11 @@ msgstr ""
 msgid "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
 msgstr "Bỏ qua các phương thức xác nhận và cho phép các giao dịch có độ trượt giá cao. Bạn phải tự chịu rủi ro khi sử dụng."
 
+msgid ""
+"Calculated based on current rates. Rates are estimates provided for your convenience\n"
+"only, and by no means represent guaranteed returns."
+msgstr ""
+
 msgid "Cancel"
 msgstr ""
 
@@ -283,6 +297,9 @@ msgstr ""
 
 msgid "Deposit"
 msgstr "Ký quỹ"
+
+msgid "Deposit Fee"
+msgstr ""
 
 msgid "Deposit SOUL into BentoBox"
 msgstr ""
@@ -411,6 +428,12 @@ msgstr ""
 
 msgid "Hardware Wallet"
 msgstr "Ví cứng"
+
+msgid "Harvest"
+msgstr ""
+
+msgid "Harvest {0} SOLAR"
+msgstr ""
 
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
 msgstr ""
@@ -594,6 +617,9 @@ msgstr ""
 msgid "Minimum received"
 msgstr "Số tiền nhận được tối thiểu"
 
+msgid "My Farms"
+msgstr ""
+
 msgid "My Liquidity Positions"
 msgstr ""
 
@@ -614,6 +640,9 @@ msgstr ""
 
 msgid "No Liquidity found"
 msgstr "Không tìm thấy thanh khoản"
+
+msgid "No Results"
+msgstr ""
 
 msgid "No liquidity found to do swap"
 msgstr "Không tìm thấy thanh khoản để thực hiện hoán đổi"
@@ -695,6 +724,9 @@ msgstr ""
 msgid "Pool"
 msgstr "Mạng lưới"
 
+msgid "Pool Details"
+msgstr ""
+
 msgid "Pool Found!"
 msgstr "Đã tìm thấy mạng lưới!"
 
@@ -721,6 +753,9 @@ msgstr "Tác động giá quá cao"
 
 msgid "Price Updated"
 msgstr "Đã cập nhật giá"
+
+msgid "ROI"
+msgstr ""
 
 msgid "Rate"
 msgstr ""
@@ -782,6 +817,9 @@ msgstr ""
 msgid "SLP"
 msgstr ""
 
+msgid "SOLAR per $1000"
+msgstr ""
+
 msgid "SPELL Fee"
 msgstr ""
 
@@ -827,6 +865,9 @@ msgstr ""
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Đã xảy ra sự cố khi ký phê duyệt. Điều này được mong đợi đối với các ví cứng, chẳng hạn như Trezor và Ledger. Nhấp lại và phương pháp dự phòng sẽ được sử dụng"
 
+msgid "Soon"
+msgstr ""
+
 msgid "SoulSwap"
 msgstr ""
 
@@ -865,6 +906,9 @@ msgstr "Hoán đổi"
 msgid "Swap Anyway"
 msgstr "Vẫn hoán đổi"
 
+msgid "TVL"
+msgstr ""
+
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""
 
@@ -897,6 +941,9 @@ msgstr ""
 
 msgid "This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance."
 msgstr "Giao dịch này sẽ không thành công do biến động giá hoặc phí chuyển nhượng. Hãy thử tăng khả năng chịu trượt giá của bạn."
+
+msgid "Timeframe"
+msgstr ""
 
 msgid "Tip to encourage miners to select this transaction."
 msgstr ""
@@ -1056,6 +1103,9 @@ msgstr ""
 msgid "Your Liquidity"
 msgstr "Tính thanh khoản của bạn"
 
+msgid "Your Staked"
+msgstr ""
+
 msgid "Your Wallet"
 msgstr "Ví của bạn"
 
@@ -1090,6 +1140,9 @@ msgid "Zap"
 msgstr ""
 
 msgid "above"
+msgstr ""
+
+msgid "annualized"
 msgstr ""
 
 msgid "below"

@@ -13,18 +13,19 @@ import Card from '../../components/Card'
 import Button from '../../components/Button'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import DoubleGlowShadow from '../../components/DoubleGlowShadow'
+import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 import { SOUL, WETH9_EXTENDED } from '../../constants/tokens'
 // import { SOUL, AVERAGE_BLOCK_TIME, WETH9_EXTENDED } from '../../constants'
-import { POOLS } from '../../constants/summoner'
-import SolarbeamLogo from '../../components/SolarbeamLogo'
+import { POOLS } from '../../constants/farms'
+import SoulLogo from '../../components/SoulLogo'
 import { PriceContext } from '../../contexts/priceContext'
-import useMasterChef from '../../features/summoner/useSummoner'
+import useSummoner from '../../features/summoner/useSummoner'
 import { useTransactionAdder } from '../../state/transactions/hooks'
 import { useTVL } from '../../hooks/useV2Pairs'
 import { getAddress } from '@ethersproject/address'
 import { useVaults } from '../../features/vault/hooks'
 import Search from '../../components/Search'
+import { AVERAGE_BLOCK_TIME_IN_SECS } from '../../constants'
 
 export default function Farm(): JSX.Element {
   const { i18n } = useLingui()
@@ -44,8 +45,8 @@ export default function Farm(): JSX.Element {
 
   const priceData = useContext(PriceContext)
 
-  const solarPrice = priceData?.['solar']
-  const movrPrice = priceData?.['movr']
+  const soulPrice = priceData?.['soul']
+  const ftmPrice = priceData?.['ftm']
 
   const tvlInfo = useTVL()
 
@@ -58,29 +59,29 @@ export default function Farm(): JSX.Element {
   }, 0)
 
   let summTvlVaults = vaults.reduce((previousValue, currentValue) => {
-    return previousValue + (currentValue.totalLp / 1e18) * solarPrice
+    return previousValue + (currentValue.totalLp / 1e18) * soulPrice
   }, 0)
 
-  const blocksPerDay = 86400 / Number(AVERAGE_BLOCK_TIME[chainId])
+  const blocksPerDay = 86400 / Number(AVERAGE_BLOCK_TIME_IN_SECS[chainId])
 
   const map = (pool) => {
-    pool.owner = 'Solarbeam'
+    pool.owner = 'Soul'
     pool.balance = 0
 
     const pair = POOLS[chainId][pool.lpToken]
 
-    const blocksPerHour = 3600 / AVERAGE_BLOCK_TIME[chainId]
+    const blocksPerHour = 3600 / AVERAGE_BLOCK_TIME_IN_SECS[chainId]
 
     function getRewards() {
       const rewardPerBlock =
         ((pool.allocPoint / distributorInfo.totalAllocPoint) * distributorInfo.solarPerBlock) / 1e18
 
       const defaultReward = {
-        token: 'SOLAR',
-        icon: '/images/token/solar.png',
+        token: 'SOUL',
+        icon: '/images/token/soul.png',
         rewardPerBlock,
         rewardPerDay: rewardPerBlock * blocksPerDay,
-        rewardPrice: solarPrice,
+        rewardPrice: soulPrice,
       }
 
       const defaultRewards = [defaultReward]
@@ -93,10 +94,10 @@ export default function Farm(): JSX.Element {
       let lpPrice = 0
       let decimals = 18
       if (pool.lpToken == SOUL[chainId]) {
-        lpPrice = solarPrice
+        lpPrice = soulPrice
         decimals = pair.token0?.decimals
-      } else if (pool.lpToken.toLowerCase() == WETH9_EXTENDED[chainId].toLowerCase()) {
-        lpPrice = movrPrice
+      } else if (pool.lpToken.toLowerCase() == WETH9_EXTENDED[chainId].address.toLowerCase()) {
+        lpPrice = ftmPrice
       } else {
         lpPrice = 0
       }
@@ -140,7 +141,7 @@ export default function Farm(): JSX.Element {
 
   const FILTER = {
     my: (farm) => farm?.amount && !farm.amount.isZero(),
-    solar: (farm) => farm.pair.token0?.id == SOUL[chainId] || farm.pair.token1?.id == SOUL[chainId],
+    soul: (farm) => farm.pair.token0?.id == SOUL[chainId] || farm.pair.token1?.id == SOUL[chainId],
     single: (farm) => !farm.pair.token1,
     moonriver: (farm) => farm.pair.token0?.id == WETH9_EXTENDED[chainId] || farm.pair.token1?.id == WETH9_EXTENDED[chainId],
     stables: (farm) =>
@@ -165,7 +166,7 @@ export default function Farm(): JSX.Element {
   })
 
   const allStaked = positions.reduce((previousValue, currentValue) => {
-    return previousValue + (currentValue.pendingSolar / 1e18) * solarPrice
+    return previousValue + (currentValue.pendingSoul / 1e18) * soulPrice
   }, 0)
 
   const valueStaked = positions.reduce((previousValue, currentValue) => {
@@ -174,7 +175,7 @@ export default function Farm(): JSX.Element {
     return previousValue + (currentValue.amount / 1e18) * poolTvl?.lpPrice
   }, 0)
 
-  const { harvest } = useMasterChef()
+  const { harvest } = useSummoner()
 
   return (
     <>
@@ -187,11 +188,11 @@ export default function Farm(): JSX.Element {
         <div className={`mb-2 pb-4 grid grid-cols-12 gap-4`}>
           <div className="flex justify-center items-center col-span-12 lg:justify">
             <Link href="/farm">
-              <SolarbeamLogo />
+              <SoulLogo />
             </Link>
           </div>
         </div>
-        <DoubleGlowShadow maxWidth={false} opacity={'0.4'}>
+        <DoubleGlowShadowV2 maxWidth={false} opacity={'0.4'}>
           <div className={`grid grid-cols-12 gap-2 min-h-1/2`}>
             <div className={`col-span-12`}>
               <Card className="bg-dark-900 z-4">
@@ -272,7 +273,7 @@ export default function Farm(): JSX.Element {
               </Card>
             </div>
           </div>
-        </DoubleGlowShadow>
+        </DoubleGlowShadowV2>
       </div>
     </>
   )

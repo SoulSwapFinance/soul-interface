@@ -20,6 +20,9 @@ msgstr ""
 "(COMING SOON) Accrue automatic yield through flash loans and\n"
 "SOUL strategies"
 
+msgid "/ DAY"
+msgstr "/ DAY"
+
 msgid "1 Hour"
 msgstr "1 Hour"
 
@@ -73,6 +76,12 @@ msgstr "Added"
 
 msgid "Additional records and weekly merkle updates can be found on"
 msgstr "Additional records and weekly merkle updates can be found on"
+
+msgid "All Farms"
+msgstr "All Farms"
+
+msgid "Allocation"
+msgstr "Allocation"
 
 msgid "Amount of Tokens"
 msgstr "Amount of Tokens"
@@ -185,6 +194,13 @@ msgstr ""
 msgid "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
 msgstr "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
 
+msgid ""
+"Calculated based on current rates. Rates are estimates provided for your convenience\n"
+"only, and by no means represent guaranteed returns."
+msgstr ""
+"Calculated based on current rates. Rates are estimates provided for your convenience\n"
+"only, and by no means represent guaranteed returns."
+
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -290,6 +306,9 @@ msgstr "Current"
 
 msgid "Deposit"
 msgstr "Deposit"
+
+msgid "Deposit Fee"
+msgstr "Deposit Fee"
 
 msgid "Deposit SOUL into BentoBox"
 msgstr "Deposit SOUL into BentoBox"
@@ -425,6 +444,12 @@ msgstr "Go Back"
 
 msgid "Hardware Wallet"
 msgstr "Hardware Wallet"
+
+msgid "Harvest"
+msgstr "Harvest"
+
+msgid "Harvest {0} SOLAR"
+msgstr "Harvest {0} SOLAR"
 
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
 msgstr "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
@@ -610,6 +635,9 @@ msgstr "Minimum Received"
 msgid "Minimum received"
 msgstr "Minimum received"
 
+msgid "My Farms"
+msgstr "My Farms"
+
 msgid "My Liquidity Positions"
 msgstr "My Liquidity Positions"
 
@@ -630,6 +658,9 @@ msgstr "New to Fantom?"
 
 msgid "No Liquidity found"
 msgstr "No Liquidity found"
+
+msgid "No Results"
+msgstr "No Results"
 
 msgid "No liquidity found to do swap"
 msgstr "No liquidity found to do swap"
@@ -713,6 +744,9 @@ msgstr "Please refer to the"
 msgid "Pool"
 msgstr "Pool"
 
+msgid "Pool Details"
+msgstr "Pool Details"
+
 msgid "Pool Found!"
 msgstr "Pool Found!"
 
@@ -739,6 +773,9 @@ msgstr "Price Impact Too High"
 
 msgid "Price Updated"
 msgstr "Price Updated"
+
+msgid "ROI"
+msgstr "ROI"
 
 msgid "Rate"
 msgstr "Rate"
@@ -800,6 +837,9 @@ msgstr "Russian"
 msgid "SLP"
 msgstr "SLP"
 
+msgid "SOLAR per $1000"
+msgstr "SOLAR per $1000"
+
 msgid "SPELL Fee"
 msgstr "SPELL Fee"
 
@@ -845,6 +885,9 @@ msgstr "Slippage tolerance..."
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 
+msgid "Soon"
+msgstr "Soon"
+
 msgid "SoulSwap"
 msgstr "SoulSwap"
 
@@ -885,6 +928,9 @@ msgstr "Swap"
 msgid "Swap Anyway"
 msgstr "Swap Anyway"
 
+msgid "TVL"
+msgstr "TVL"
+
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 
@@ -917,6 +963,9 @@ msgstr "This transaction will not succeed due to price movement. Try increasing 
 
 msgid "This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance."
 msgstr "This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance."
+
+msgid "Timeframe"
+msgstr "Timeframe"
 
 msgid "Tip to encourage miners to select this transaction."
 msgstr "Tip to encourage miners to select this transaction."
@@ -1078,6 +1127,9 @@ msgstr "Your Claimable SUSHI this Week"
 msgid "Your Liquidity"
 msgstr "Your Liquidity"
 
+msgid "Your Staked"
+msgstr "Your Staked"
+
 msgid "Your Wallet"
 msgstr "Your Wallet"
 
@@ -1113,6 +1165,9 @@ msgstr "Zap"
 
 msgid "above"
 msgstr "above"
+
+msgid "annualized"
+msgstr "annualized"
 
 msgid "below"
 msgstr "below"
