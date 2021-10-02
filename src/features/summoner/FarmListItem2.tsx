@@ -28,9 +28,9 @@ const FarmListItem2 = ({ farm, ...rest }) => {
 
   const priceData = useContext(PriceContext)
 
-  const solarPrice = priceData?.['solar']
-  const movrPrice = priceData?.['movr']
-  const ribPrice = priceData?.['rib']
+  const soulPrice = priceData?.['soul']
+  const ftmPrice = priceData?.['ftm']
+  const seancePrice = priceData?.['seance']
 
   const [selectedFarm, setSelectedFarm] = useState<string>(null)
 
@@ -40,19 +40,19 @@ const FarmListItem2 = ({ farm, ...rest }) => {
   function getTvl() {
     let lpPrice = 0
     let decimals = 18
-    if (farm.lpToken.toLowerCase() == SOUL[chainId].toLowerCase()) {
-      lpPrice = solarPrice
+    if (farm.lpToken.toLowerCase() == SOUL[chainId].address.toLowerCase()) {
+      lpPrice = soulPrice
       decimals = farm.pair.token0?.decimals
-    } else if (farm.lpToken.toLowerCase() == WETH9_EXTENDED[chainId].toLowerCase()) {
-      lpPrice = movrPrice
-    } else if (farm.lpToken.toLowerCase() == '0xbD90A6125a84E5C512129D622a75CDDE176aDE5E'.toLowerCase()) {
-      lpPrice = ribPrice
+    } else if (farm.lpToken.toLowerCase() == WETH9_EXTENDED[chainId].address.toLowerCase()) {
+      lpPrice = ftmPrice
+    } else if (farm.lpToken.toLowerCase() == '0x124B06C5ce47De7A6e9EFDA71a946717130079E6'.toLowerCase()) {
+      lpPrice = seancePrice
     } else {
       lpPrice = pairPrice
     }
 
     farm.lpPrice = lpPrice
-    farm.solarPrice = solarPrice
+    farm.soulPrice = soulPrice
 
     return Number(farm.totalLp / 10 ** decimals) * lpPrice
   }
@@ -96,7 +96,7 @@ const FarmListItem2 = ({ farm, ...rest }) => {
                     <div>
                       <span className="flex font-bold">{farm?.pair?.token0?.symbol}</span>
                       {token1 && <span className="flex font-bold">{farm?.pair?.token1?.symbol}</span>}
-                      {!token1 && token0?.symbol == 'SOLAR' && (
+                      {!token1 && token0?.symbol == 'SOUL' && (
                         <div className="flex flex-col">
                           <span className="text-emphasis underline hover:text-yellow">Unstake</span>
                           <Link href="/vaults">
@@ -113,7 +113,7 @@ const FarmListItem2 = ({ farm, ...rest }) => {
                     {farm?.rewards?.map((reward, i) => (
                       <div key={i} className="flex items-center">
                         <Image
-                          src={`http://solarbeam.io/images/tokens/solar.png`}
+                          src={`https://raw.githubusercontent.com/SoulSwapFinance/assets/prod/logo-128x128.png`}
                           width="50px"
                           height="50px"
                           className="rounded-md"
@@ -165,7 +165,7 @@ const FarmListItem2 = ({ farm, ...rest }) => {
           token0={token0}
           token1={token1}
           lpPrice={farm.lpPrice}
-          solarPrice={solarPrice}
+          soulPrice={soulPrice}
         />
       )}
     </React.Fragment>

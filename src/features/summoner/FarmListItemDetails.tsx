@@ -3,7 +3,7 @@ import { ChainId, SOUL_SUMMONER_ADDRESS, Token, ZERO } from '@soulswap/sdk'
 import { Chef, PairType } from './enum'
 import { Disclosure, Transition } from '@headlessui/react'
 import React, { useState } from 'react'
-import { usePendingSolar, useUserInfo } from './hooks'
+import { usePendingSoul, useUserInfo } from './hooks'
 
 import Button from '../../components/Button'
 import Dots from '../../components/Dots'
@@ -46,7 +46,7 @@ const FarmListItem = ({ farm }) => {
   // TODO: Replace these
   const { amount, nextHarvestUntil } = useUserInfo(farm, liquidityToken)
 
-  const pendingSolar = usePendingSolar(farm)
+  const pendingSoul = usePendingSoul(farm)
 
   const reward = usePendingReward(farm)
 
@@ -220,7 +220,7 @@ const FarmListItem = ({ farm }) => {
             </Button>
           </div>
         </div>
-        {pendingSolar && pendingSolar.greaterThan(ZERO) && (
+        {pendingSoul && pendingSoul.greaterThan(ZERO) && (
           <div className="px-4 pb-4">
             <Button
               color="gradient"
@@ -244,7 +244,7 @@ const FarmListItem = ({ farm }) => {
                 setPendingTx(false)
               }}
             >
-              {i18n._(t`Harvest ${formatNumber(pendingSolar.toFixed(18))} SOLAR`)}
+              {i18n._(t`Harvest ${formatNumber(pendingSoul.toFixed(18))} SOLAR`)}
             </Button>
           </div>
         )}

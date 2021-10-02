@@ -1,6 +1,6 @@
-import { CurrencyAmount, JSBI, SOUL_SUMMONER_ADDRESS } from '@soulswap/sdk'
+import { CurrencyAmount, JSBI } from '@soulswap/sdk'
 import { Chef } from './enum'
-import { SOUL  } from '../../constants'
+import { SOUL } from '../../constants'
 import { NEVER_RELOAD, useSingleCallResult, useSingleContractMultipleData } from '../../state/multicall/hooks'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
@@ -8,8 +8,6 @@ import {
   useETHPairContract,
   useSoulSeanceContract,
   useSoulVaultContract,
-  useSeanceUsdcContract,
-  // useSpellSeanceContract,
 } from '../../hooks'
 
 import { Contract } from '@ethersproject/contracts'
@@ -17,42 +15,12 @@ import { Zero } from '@ethersproject/constants'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import zip from 'lodash/zip'
 import { useToken } from '../../hooks/Tokens'
-import { useVaultInfo, useVaults } from '../vault/hooks'
-import useSummoner from './useSummoner'
 const { default: axios } = require('axios')
-
-export function useChefContract(chef: Chef) {
-  const soulSummonerContract = useSoulSummonerContract()
-  const contracts = useMemo(
-    () => ({
-      [Chef.SUMMONER]: soulSummonerContract,
-      [Chef.SUMMONER_V2]: soulSummonerContract,
-      [Chef.MINICHEF]: soulSummonerContract,
-    }),
-    [soulSummonerContract]
-  )
-  return useMemo(() => {
-    return contracts[chef]
-  }, [contracts, chef])
-}
-
-export function useChefContracts(chefs: Chef[]) {
-  const soulSummonerContract = useSoulSummonerContract()
-  const contracts = useMemo(
-    () => ({
-      [Chef.SUMMONER]: soulSummonerContract,
-      [Chef.SUMMONER_V2]: soulSummonerContract,
-      [Chef.MINICHEF]: soulSummonerContract,
-    }),
-    [soulSummonerContract]
-  )
-  return chefs.map((chef) => contracts[chef])
-}
 
 export function useUserInfo(farm, token) {
   const { account } = useActiveWeb3React()
 
-  const contract = useChefContract(0)
+  const contract = useSoulVaultContract()
 
   const args = useMemo(() => {
     if (!account) {
@@ -62,23 +30,27 @@ export function useUserInfo(farm, token) {
   }, [farm, account])
 
   const result = useSingleCallResult(args ? contract : null, 'userInfo', args)?.result
+  const userLockedUntilResult = useSingleCallResult(args ? contract : null, 'userLockedUntil', args)?.result
 
   const value = result?.[0]
   const harvestValue = result?.[3]
+  const userLockedUntilValue = userLockedUntilResult?.[0]
 
   const amount = value ? JSBI.BigInt(value.toString()) : undefined
   const nextHarvestUntil = harvestValue ? JSBI.BigInt(harvestValue.toString()) : undefined
+  const userLockedUntil = userLockedUntilValue ? JSBI.BigInt(userLockedUntilValue.toString()) : undefined
 
   return {
     amount: amount ? CurrencyAmount.fromRawAmount(token, amount) : undefined,
     nextHarvestUntil: nextHarvestUntil ? JSBI.toNumber(nextHarvestUntil) * 1000 : undefined,
+    userLockedUntil: userLockedUntil ? JSBI.toNumber(userLockedUntil) * 1000 : undefined,
   }
 }
 
 export function usePendingSoul(farm) {
   const { account, chainId } = useActiveWeb3React()
 
-  const contract = useChefContract(0)
+  const contract = useSoulVaultContract()
 
   const args = useMemo(() => {
     if (!account) {
@@ -129,32 +101,31 @@ export function useSolarPositions(contract?: Contract | null) {
   }, [numberOfPools, account])
 
   const pendingSoul = useSingleContractMultipleData(args ? contract : null, 'pendingSoul', args)
-
   const userInfo = useSingleContractMultipleData(args ? contract : null, 'userInfo', args)
+  const userLockedUntil = useSingleContractMultipleData(args ? contract : null, 'userLockedUntil', args)
 
   return useMemo(() => {
-    if (!pendingSoul || !userInfo) {
+    if (!pendingSoul || !userInfo || !userLockedUntil) {
       return []
     }
-    return zip(pendingSoul, userInfo)
+    return zip(pendingSoul, userInfo, userLockedUntil)
       .map((data, i) => ({
         id: args[i][0],
         pendingSoul: data[0].result?.[0] || Zero,
         amount: data[1].result?.[0] || Zero,
+        lockedUntil: data[2].result?.[0] || Zero,
       }))
       .filter(({ pendingSoul, amount }) => {
         return (pendingSoul && !pendingSoul.isZero()) || (amount && !amount.isZero())
       })
-  }, [args, pendingSoul, userInfo])
+  }, [args, pendingSoul, userInfo, userLockedUntil])
 }
 
 export function usePositions() {
-  return useSolarPositions(useSoulSummonerContract())
+  return useSolarPositions(useSoulVaultContract())
 }
 
-export function useSolarFarms(contract?: Contract | null) {
-  const { account } = useActiveWeb3React()
-
+export function useSolarVaults(contract?: Contract | null) {
   const numberOfPools = useSingleCallResult(contract ? contract : null, 'poolLength', undefined, NEVER_RELOAD)
     ?.result?.[0]
 
@@ -180,6 +151,7 @@ export function useSolarFarms(contract?: Contract | null) {
       depositFeeBP: data[0].result?.['depositFeeBP'] || '',
       harvestInterval: data[0].result?.['harvestInterval'] || '',
       totalLp: data[0].result?.['totalLp'] || '',
+      lockupDuration: data[0].result?.['lockupDuration'] || 0,
     }))
   }, [args, poolInfo])
 }
@@ -214,22 +186,20 @@ const useAsync = (asyncFunction, immediate = true) => {
     }
   }, [execute, immediate])
 
-  return useMemo(() => {
-    return value
-  }, [value])
+  return value
 }
 
 export function usePriceApi() {
   return Promise.all([axios.get('/api/prices')])
 }
 
-export function usePrice(pairContract?: Contract | null, pairDecimals?: number | null, invert: boolean = false) {
+export function usePrice(pairContract?: Contract | null, pairDecimals?: number | null) {
   const { account, chainId } = useActiveWeb3React()
 
   const result = useSingleCallResult(pairContract ? pairContract : null, 'getReserves', undefined, NEVER_RELOAD)?.result
 
-  const _reserve1 = invert ? result?.['reserve0'] : result?.['reserve1']
-  const _reserve0 = invert ? result?.['reserve1'] : result?.['reserve0']
+  const _reserve1 = result?.['reserve1']
+  const _reserve0 = result?.['reserve0']
 
   const price = _reserve1 ? (Number(_reserve1) / Number(_reserve0)) * (pairDecimals ? 10 ** pairDecimals : 1) : 0
 
@@ -238,7 +208,6 @@ export function usePrice(pairContract?: Contract | null, pairDecimals?: number |
 
 export function useTokenInfo(tokenContract?: Contract | null) {
   const { account, chainId } = useActiveWeb3React()
-  const vaults = useVaults()
 
   const _totalSupply = useSingleCallResult(tokenContract ? tokenContract : null, 'totalSupply', undefined, NEVER_RELOAD)
     ?.result?.[0]
@@ -250,18 +219,10 @@ export function useTokenInfo(tokenContract?: Contract | null) {
     NEVER_RELOAD
   )?.result?.[0]
 
-  let lockedInVaults = JSBI.BigInt(0)
-
-  vaults
-    .filter((r) => r.lockupDuration > 0)
-    .forEach((r) => {
-      lockedInVaults = JSBI.add(lockedInVaults, JSBI.BigInt(r.totalLp.toString()))
-    })
-
   const totalSupply = _totalSupply ? JSBI.BigInt(_totalSupply.toString()) : JSBI.BigInt(0)
   const burnt = _burnt ? JSBI.BigInt(_burnt.toString()) : JSBI.BigInt(0)
 
-  const circulatingSupply = JSBI.subtract(JSBI.subtract(totalSupply, burnt), lockedInVaults)
+  const circulatingSupply = JSBI.subtract(totalSupply, burnt)
 
   const token = useToken(tokenContract.address)
 
@@ -271,46 +232,29 @@ export function useTokenInfo(tokenContract?: Contract | null) {
         totalSupply: '0',
         burnt: '0',
         circulatingSupply: '0',
-        lockedInVaults: '0',
       }
     }
 
     return {
       totalSupply: CurrencyAmount.fromRawAmount(token, totalSupply).toFixed(0),
       burnt: CurrencyAmount.fromRawAmount(token, burnt).toFixed(0),
-      vaults: CurrencyAmount.fromRawAmount(token, lockedInVaults).toFixed(0),
       circulatingSupply: CurrencyAmount.fromRawAmount(token, circulatingSupply).toFixed(0),
     }
-  }, [totalSupply, burnt, circulatingSupply, token, lockedInVaults])
+  }, [totalSupply, burnt, circulatingSupply, token])
 }
 
-export function useFarms() {
-  return useSolarFarms(useSoulSummonerContract())
+export function useVaults() {
+  return useSolarVaults(useSoulVaultContract())
 }
 
 export function usePricesApi() {
-  const seancePrice = useSeancePrice()
-  const soulPrice = useSoulPrice()
-  // const spellPrice = useSpellPrice()
-
-  return useMemo(() => {
-    return {
-      seance: seancePrice,
-      soul: soulPrice * seancePrice,
-      // spell: spellPrice * seancePrice,
-      usdc: 1,
-    }
-  }, [seancePrice, soulPrice]) // spellPrice
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  return useAsync(usePriceApi, true)
 }
 
 export function useFarmsApi() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return useAsync(usePriceApi, true)
-}
-
-export function useSeancePrice() {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  return usePrice(useSeanceUsdcContract(), 12)
 }
 
 export function useSoulPrice() {
@@ -323,7 +267,7 @@ export function useETHPrice() {
   return usePrice(useETHPairContract())
 }
 
-export function useSolarDistributorInfo(contract) {
+export function useVaultInfo(contract) {
   const solarPerBlock = useSingleCallResult(contract ? contract : null, 'solarPerBlock', undefined, NEVER_RELOAD)
     ?.result?.[0]
 
@@ -333,6 +277,6 @@ export function useSolarDistributorInfo(contract) {
   return useMemo(() => ({ solarPerBlock, totalAllocPoint }), [solarPerBlock, totalAllocPoint])
 }
 
-export function useDistributorInfo() {
-  return useSolarDistributorInfo(useSoulSummonerContract())
+export function useSoulVaultInfo() {
+  return useVaultInfo(useSoulVaultContract())
 }
