@@ -104,10 +104,10 @@ const YieldDetails: React.FC<YieldDetailsProps> = ({
             <div className="flex items-center justify-between uppercase">{i18n._(t`SOUL per $1000`)}</div>
           </div>
         </div>
-        {getRoiEntry('1d', roiPerDay, perDay)}
-        {getRoiEntry('7d', roiPerWeek, perWeek)}
-        {getRoiEntry('30d', roiPerMonth, perMonth)}
-        {getRoiEntry('365d', roiPerYear, perYear)}
+        {getRoiEntry('Daily', roiPerDay, perDay)}
+        {getRoiEntry('Weekly', roiPerWeek, perWeek)}
+        {getRoiEntry('Monthly', roiPerMonth, perMonth)}
+        {getRoiEntry('Annually', roiPerYear, perYear)}
       </div>
       <div className="space-y-2">
         <div className="text-s">

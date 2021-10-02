@@ -7,7 +7,8 @@ import Image from '../../components/Image'
 import React, { useContext, useState } from 'react'
 import { useCurrency } from '../../hooks/Tokens'
 import { useV2PairsWithPrice } from '../../hooks/useV2Pairs'
-import { SOUL } from '../../constants/tokens'
+// import { SOUL } from '../../constants/tokens'
+import { SOUL_ADDRESS } from '../../sdk'
 import { useActiveWeb3React } from '../../hooks'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
@@ -15,7 +16,7 @@ import CurrencyLogo from '../../components/CurrencyLogo'
 import { isMobile } from 'react-device-detect'
 import YieldDetails from '../../components/YieldDetails'
 import IconWrapper from '../../components/IconWrapper'
-import { WETH9_EXTENDED } from '../../constants'
+import { WNATIVE } from '../../constants'
 import { PriceContext } from '../../contexts/priceContext'
 import { Info } from 'react-feather'
 import Link from 'next/link'
@@ -40,10 +41,10 @@ const FarmListItem2 = ({ farm, ...rest }) => {
   function getTvl() {
     let lpPrice = 0
     let decimals = 18
-    if (farm.lpToken.toLowerCase() == SOUL[chainId].address.toLowerCase()) {
+    if (farm.lpToken.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase()) {
       lpPrice = soulPrice
       decimals = farm.pair.token0?.decimals
-    } else if (farm.lpToken.toLowerCase() == WETH9_EXTENDED[chainId].address.toLowerCase()) {
+    } else if (farm.lpToken.toLowerCase() == WNATIVE[chainId].toLowerCase()) {
       lpPrice = ftmPrice
     } else if (farm.lpToken.toLowerCase() == '0x124B06C5ce47De7A6e9EFDA71a946717130079E6'.toLowerCase()) { // SEANCE
       lpPrice = seancePrice
@@ -98,9 +99,10 @@ const FarmListItem2 = ({ farm, ...rest }) => {
                       {token1 && <span className="flex font-bold">{farm?.pair?.token1?.symbol}</span>}
                       {!token1 && token0?.symbol == 'SOUL' && (
                         <div className="flex flex-col">
-                          <span className="text-emphasis underline hover:text-yellow">Unstake</span>
-                          <Link href="/vaults">
-                            <span className="text-emphasis underline hover:text-yellow">Use Vaults</span>
+                          {/* <span className="text-emphasis underline hover:text-yellow">Unstake</span> */}
+                          {/* <Link href="/vaults"> */}
+                          <Link href="/stake">
+                            <span className="text-emphasis underline hover:text-yellow">Stake</span>
                           </Link>
                         </div>
                       )}

@@ -72,6 +72,16 @@ function AppBar(): JSX.Element {
                           </a>
                         </NavLink>
                       )}
+                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href={'/summoner'}>
+                        <a
+                          id={`farm-nav-link`}
+                          className="p-2 text-base text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                        >
+                          {i18n._(t`Summon`)}
+                        </a>
+                        </NavLink>
+                      )}
                       {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/locker'}>
                         <a
@@ -361,11 +371,11 @@ function AppBar(): JSX.Element {
                     {i18n._(t`Locker`)}
                   </a>
                 </Link> */}
-                <Link href={'/bridge'}>
+                {/* <Link href={'/bridge'}>
                   <a className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap">
                     {i18n._(t`Bridge`)}
                   </a>
-                </Link>
+                </Link> */}
                 {/* {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <>
                     <Link href={'/lend'}>
@@ -387,6 +397,16 @@ function AppBar(): JSX.Element {
                     </Link>
                   </>
                 )} */}
+                  { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                  <Link href={'/summoner'}>
+                    <a
+                      id={`farm-nav-link`}
+                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                    >
+                      {i18n._(t`Summon`)}
+                    </a>
+                  </Link>
+                  )}
                   { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <Link href={'/stake'}>
                     <a

@@ -4,6 +4,7 @@ import { fortmatic, injected, portis, torus, walletconnect, walletlink } from '.
 import { RPC } from '../connectors'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { BigNumber } from 'ethers'
+type AddressMap = { [chainId: number]: string }
 
 export const POOL_DENY = []
 
@@ -16,6 +17,18 @@ export const ARCHER_RELAY_URI: { [chainId in ChainId]?: string } = {
 
 export const ARCHER_GAS_URI: { [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: 'https://api.archerdao.io/v1/gas',
+}
+
+export const SOUL_DISTRIBUTOR_ADDRESS: AddressMap = { // SOUL SUMMONER
+  [ChainId.MAINNET]: '',
+  [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B',
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
+export const SOUL_ADDRESS: AddressMap = { // SOUL ADDRESS
+  [ChainId.MAINNET]: '',
+  [ChainId.FANTOM]: '0xe2fb177009ff39f52c0134e8007fa0e4baacbd07',
+  [ChainId.FANTOM_TESTNET]: '',
 }
 
 // export const COMMON_CONTRACT_NAMES: { [address: string]: string } = {

@@ -484,8 +484,8 @@ msgstr "Hardware Wallet"
 msgid "Harvest"
 msgstr "Harvest"
 
-msgid "Harvest {0} SOLAR"
-msgstr "Harvest {0} SOLAR"
+msgid "Harvest {0} SOUL"
+msgstr "Harvest {0} SOUL"
 
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
 msgstr "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
@@ -618,9 +618,6 @@ msgstr "Loading your {exchange} liquidity positions"
 
 msgid "Lock"
 msgstr "Lock"
-
-msgid "Locker"
-msgstr "Locker"
 
 msgid "MAX"
 msgstr "MAX"
@@ -888,8 +885,8 @@ msgstr "Russian"
 msgid "SLP"
 msgstr "SLP"
 
-msgid "SOLAR per $1000"
-msgstr "SOLAR per $1000"
+msgid "SOUL per $1000"
+msgstr "SOUL per $1000"
 
 msgid "SPELL Fee"
 msgstr "SPELL Fee"
@@ -1105,9 +1102,6 @@ msgstr "Use this tool to find pairs that don't automatically appear in the inter
 
 msgid "Used"
 msgstr "Used"
-
-msgid "Vaults"
-msgstr "Vaults"
 
 msgid "Vesting is executed within the guidelines selected by the community in"
 msgstr "Vesting is executed within the guidelines selected by the community in"

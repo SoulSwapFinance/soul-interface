@@ -14,8 +14,7 @@ import Button from '../../components/Button'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
-import { SOUL, WETH9_EXTENDED } from '../../constants/tokens'
-// import { SOUL, AVERAGE_BLOCK_TIME, WETH9_EXTENDED } from '../../constants'
+import { SOUL_ADDRESS, WNATIVE } from '../../constants'
 import { POOLS } from '../../constants/farms'
 import SoulLogo from '../../components/SoulLogo'
 import { PriceContext } from '../../contexts/priceContext'
@@ -25,7 +24,7 @@ import { useTVL } from '../../hooks/useV2Pairs'
 import { getAddress } from '@ethersproject/address'
 import { useVaults } from '../../features/vault/hooks'
 import Search from '../../components/Search'
-import { AVERAGE_BLOCK_TIME_IN_SECS } from '../../constants'
+import { SEANCE_ADDRESS } from '@soulswap/sdk'
 
 export default function Summoner(): JSX.Element {
   const { i18n } = useLingui()
@@ -47,6 +46,7 @@ export default function Summoner(): JSX.Element {
 
   const soulPrice = priceData?.['soul']
   const ftmPrice = priceData?.['ftm']
+  const seancePrice = priceData?.['seance']
 
   const tvlInfo = useTVL()
 
@@ -62,7 +62,8 @@ export default function Summoner(): JSX.Element {
     return previousValue + (currentValue.totalLp / 1e18) * soulPrice
   }, 0)
 
-  const secondsPerDay = 86_400 // / Number(AVERAGE_BLOCK_TIME_IN_SECS[chainId])
+  const secondsPerDay = 86400
+  const secondsPerHour = 3600
 
   const map = (pool) => {
     pool.owner = 'Soul'
@@ -70,7 +71,6 @@ export default function Summoner(): JSX.Element {
 
     const pair = POOLS[chainId][pool.lpToken]
 
-    const blocksPerHour = 3600 / AVERAGE_BLOCK_TIME_IN_SECS[chainId]
 
     function getRewards() {
       const rewardPerSecond =
@@ -93,11 +93,13 @@ export default function Summoner(): JSX.Element {
     function getTvl(pool) {
       let lpPrice = 0
       let decimals = 18
-      if (pool.lpToken == SOUL[chainId]) {
+      if (pool.lpToken == SOUL_ADDRESS[chainId]) {
         lpPrice = soulPrice
         decimals = pair.token0?.decimals
-      } else if (pool.lpToken.toLowerCase() == WETH9_EXTENDED[chainId].address.toLowerCase()) {
+      } else if (pool.lpToken.toLowerCase() == WNATIVE[chainId].toLowerCase()) {
         lpPrice = ftmPrice
+      } else if (pool.lpToken.toLowerCase() == SEANCE_ADDRESS[chainId].toLowerCase()) {
+        lpPrice = seancePrice
       } else {
         lpPrice = 0
       }
@@ -109,12 +111,12 @@ export default function Summoner(): JSX.Element {
 
     const tvl = getTvl(pool)
 
-    const roiPerBlock =
+    const roiPerSecond =
       rewards.reduce((previousValue, currentValue) => {
         return previousValue + currentValue.rewardPerSecond * currentValue.rewardPrice
       }, 0) / tvl
 
-    const roiPerHour = roiPerBlock * blocksPerHour
+    const roiPerHour = roiPerSecond * secondsPerHour
     const roiPerDay = roiPerHour * 24
     const roiPerMonth = roiPerDay * 30
     const roiPerYear = roiPerDay * 365
@@ -128,27 +130,27 @@ export default function Summoner(): JSX.Element {
         ...pair,
         decimals: 18,
       },
-      roiPerBlock,
+      roiPerSecond,
       roiPerHour,
       roiPerDay,
       roiPerMonth,
       roiPerYear,
       rewards,
       tvl,
-      blocksPerHour,
+      secondsPerHour,
     }
   }
 
   const FILTER = {
     my: (farm) => farm?.amount && !farm.amount.isZero(),
-    soul: (farm) => farm.pair.token0?.id == SOUL[chainId] || farm.pair.token1?.id == SOUL[chainId],
+    soul: (farm) => farm.pair.token0?.id == SOUL_ADDRESS[chainId] || farm.pair.token1?.id == SOUL_ADDRESS[chainId],
     single: (farm) => !farm.pair.token1,
-    moonriver: (farm) => farm.pair.token0?.id == WETH9_EXTENDED[chainId] || farm.pair.token1?.id == WETH9_EXTENDED[chainId],
+    fantom: (farm) => farm.pair.token0?.id == WNATIVE[chainId] || farm.pair.token1?.id == WNATIVE[chainId],
     stables: (farm) =>
-      farm.pair.token0?.symbol == 'USDC' ||
-      farm.pair.token1?.symbol == 'USDC' ||
-      farm.pair.token0?.symbol == 'DAI' ||
-      farm.pair.token1?.symbol == 'DAI',
+      farm.pair.token0?.symbol == 'USDC' || farm.pair.token1?.symbol == 'USDC' ||
+      farm.pair.token0?.symbol == 'FUSD' || farm.pair.token1?.symbol == 'FUSD' ||
+      farm.pair.token0?.symbol == 'fUSDT' || farm.pair.token1?.symbol == 'fUSDT' ||
+      farm.pair.token0?.symbol == 'DAI' || farm.pair.token1?.symbol == 'DAI',
   }
 
   const data = farms.map(map).filter((farm) => {
@@ -212,11 +214,11 @@ export default function Summoner(): JSX.Element {
                         Total Value Locked: {formatNumberScale(summTvl + summTvlVaults, true, 2)}
                       </div>
                       <div className="flex items-center text-center justify-between py-2 text-emphasis">
-                        Farms TVL: {formatNumberScale(summTvl, true, 2)}
+                        Summoner TVL: {formatNumberScale(summTvl, true, 2)}
                       </div>
                       {positions.length > 0 && (
                         <div className="flex items-center justify-between py-2 text-emphasis">
-                          My Holdings: {formatNumberScale(valueStaked, true, 2)}
+                        Possessions: {formatNumberScale(valueStaked, true, 2)}
                         </div>
                       )}
                       {positions.length > 0 && (
@@ -241,7 +243,7 @@ export default function Summoner(): JSX.Element {
                             setPendingTx(false)
                           }}
                         >
-                          Harvest All (~ {formatNumberScale(allStaked, true, 2)})
+                          Possess All (~ {formatNumberScale(allStaked, true, 2)})
                         </Button>
                       )}
                     </div>

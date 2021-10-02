@@ -1,16 +1,15 @@
-import { ChainId, Currency, CurrencyAmount, Pair, Token } from '@soulswap/sdk'
-import { computePairAddress } from '../sdk/functions'
+import { ChainId, computePairAddress, Currency, CurrencyAmount, Pair, Token } from '../sdk'
+
 import IUniswapV2PairABI from '@sushiswap/core/abi/IUniswapV2Pair.json'
 import { Interface } from '@ethersproject/abi'
 import { useContext, useMemo } from 'react'
 import { useMultipleContractSingleData } from '../state/multicall/hooks'
-import { FACTORY_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS } from '../constants'
+import { SOUL_ADDRESS, FACTORY_ADDRESS, SOUL_DISTRIBUTOR_ADDRESS, SOUL_VAULT_ADDRESS } from '../constants'
 import { useActiveWeb3React } from '../hooks/useActiveWeb3React'
 import { PriceContext } from '../contexts/priceContext'
 import { POOLS, TokenInfo } from '../constants/farms'
 import { concat } from 'lodash'
 import { VAULTS } from '../constants/vaults'
-import { SOUL_ADDRESS } from '../sdk/constants'
 
 const PAIR_INTERFACE = new Interface(IUniswapV2PairABI)
 
@@ -83,7 +82,7 @@ export function useVaultTVL(): TVLInfo[] {
   const ftmPrice = priceData?.['ftm']
   const seancePrice = priceData?.['seance']
 
-  const farmingPools = Object.keys(VAULTS[ChainId.FANTOM]).map((key) => {
+  const farmingPools = Object.keys(VAULTS[ChainId.FANTOM_TESTNET]).map((key) => {
     return { ...VAULTS[ChainId.FANTOM][key] }
   })
 
@@ -94,10 +93,10 @@ export function useVaultTVL(): TVLInfo[] {
 
   const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
   const totalSupply = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'totalSupply')
-  const summonerBalance = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'balanceOf', [
+  const distributorBalance = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'balanceOf', [
     SOUL_VAULT_ADDRESS[ChainId.FANTOM],
   ])
-  const summonerBalanceSingle = useMultipleContractSingleData(singleAddresses, PAIR_INTERFACE, 'balanceOf', [
+  const distributorBalanceSingle = useMultipleContractSingleData(singleAddresses, PAIR_INTERFACE, 'balanceOf', [
     SOUL_VAULT_ADDRESS[ChainId.FANTOM],
   ])
 
@@ -105,11 +104,9 @@ export function useVaultTVL(): TVLInfo[] {
     function isKnownToken(token: TokenInfo) {
       return (
         token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
-        token.symbol == 'WFTM' ||
-        token.symbol == 'FTM' ||
+        token.symbol == 'WFTM' || token.symbol == 'FTM' ||
         token.symbol == 'SEANCE' ||
-        token.symbol == 'USDC' ||
-        token.symbol == 'FUSD'
+        token.symbol == 'USDC' || token.symbol == 'FUSD' || token.symbol == 'fUSDT'
       )
     }
 
@@ -123,7 +120,7 @@ export function useVaultTVL(): TVLInfo[] {
       if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
         return seancePrice
       }
-      if (token.symbol == 'USDC' || token.symbol == 'FUSD') {
+      if (token.symbol == 'USDC' || token.symbol == 'FUSD' || token.symbol == 'fUSDT') {
         return 1
       }
       return 0
@@ -144,7 +141,7 @@ export function useVaultTVL(): TVLInfo[] {
 
       const lpTotalSupply = totalSupply[i]?.result?.[0]
 
-      const summonerRatio = summonerBalance[i]?.result?.[0] / lpTotalSupply
+      const distributorRatio = distributorBalance[i]?.result?.[0] / lpTotalSupply
 
       const token0price = getPrice(token0)
       const token1price = getPrice(token1)
@@ -161,7 +158,7 @@ export function useVaultTVL(): TVLInfo[] {
       }
 
       const lpPrice = lpTotalPrice / (lpTotalSupply / 10 ** 18)
-      const tvl = lpTotalPrice * summonerRatio
+      const tvl = lpTotalPrice * distributorRatio
 
       return {
         lpToken,
@@ -171,7 +168,7 @@ export function useVaultTVL(): TVLInfo[] {
       }
     })
 
-    const singleTVL = summonerBalanceSingle.map((result, i) => {
+    const singleTVL = distributorBalanceSingle.map((result, i) => {
       const { result: balance, loading } = result
 
       const { token0, lpToken } = singlePools[i]
@@ -197,13 +194,13 @@ export function useVaultTVL(): TVLInfo[] {
     return concat(singleTVL, lpTVL)
   }, [
     results,
-    summonerBalanceSingle,
+    distributorBalanceSingle,
     chainId,
     soulPrice,
     ftmPrice,
     seancePrice,
     totalSupply,
-    summonerBalance,
+    distributorBalance,
     lpPools,
     singlePools,
   ])
@@ -227,11 +224,11 @@ export function useTVL(): TVLInfo[] {
 
   const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
   const totalSupply = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'totalSupply')
-  const summonerBalance = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'balanceOf', [
-    SOUL_SUMMONER_ADDRESS[ChainId.FANTOM],
+  const distributorBalance = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'balanceOf', [
+    SOUL_DISTRIBUTOR_ADDRESS[ChainId.FANTOM],
   ])
-  const summonerBalanceSingle = useMultipleContractSingleData(singleAddresses, PAIR_INTERFACE, 'balanceOf', [
-    SOUL_SUMMONER_ADDRESS[ChainId.FANTOM],
+  const distributorBalanceSingle = useMultipleContractSingleData(singleAddresses, PAIR_INTERFACE, 'balanceOf', [
+    SOUL_DISTRIBUTOR_ADDRESS[ChainId.FANTOM],
   ])
 
   return useMemo(() => {
@@ -256,7 +253,7 @@ export function useTVL(): TVLInfo[] {
       if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
         return seancePrice
       }
-      if (token.symbol == 'USDC' || token.symbol == 'FUSD') {
+      if (token.symbol == 'USDC' || token.symbol == 'FUSD' || token.symbol == 'fUSDT') {
         return 1
       }
       return 0
@@ -277,7 +274,7 @@ export function useTVL(): TVLInfo[] {
 
       const lpTotalSupply = totalSupply[i]?.result?.[0]
 
-      const summonerRatio = summonerBalance[i]?.result?.[0] / lpTotalSupply
+      const distributorRatio = distributorBalance[i]?.result?.[0] / lpTotalSupply
 
       const token0price = getPrice(token0)
       const token1price = getPrice(token1)
@@ -294,7 +291,7 @@ export function useTVL(): TVLInfo[] {
       }
 
       const lpPrice = lpTotalPrice / (lpTotalSupply / 10 ** 18)
-      const tvl = lpTotalPrice * summonerRatio
+      const tvl = lpTotalPrice * distributorRatio
 
       return {
         lpToken,
@@ -303,7 +300,7 @@ export function useTVL(): TVLInfo[] {
       }
     })
 
-    const singleTVL = summonerBalanceSingle.map((result, i) => {
+    const singleTVL = distributorBalanceSingle.map((result, i) => {
       const { result: balance, loading } = result
 
       const { token0, lpToken } = singlePools[i]
@@ -328,13 +325,13 @@ export function useTVL(): TVLInfo[] {
     return concat(singleTVL, lpTVL)
   }, [
     results,
-    summonerBalanceSingle,
+    distributorBalanceSingle,
     chainId,
     soulPrice,
     ftmPrice,
     seancePrice,
     totalSupply,
-    summonerBalance,
+    distributorBalance,
     lpPools,
     singlePools,
   ])
@@ -380,11 +377,9 @@ export function useV2PairsWithPrice(
     function isKnownToken(token: Token) {
       return (
         token.address.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
-        token.symbol == 'WFTM' ||
-        token.symbol == 'FTM' ||
-        // token.symbol == 'SEANCE' ||
-        token.symbol == 'USDC' ||
-        token.symbol == 'FUSD'
+        token.symbol == 'WFTM' || token.symbol == 'FTM' ||
+        token.symbol == 'SEANCE' ||
+        token.symbol == 'USDC' || token.symbol == 'FUSD' || token.symbol == 'fUSDT'
       )
     }
 
@@ -398,7 +393,7 @@ export function useV2PairsWithPrice(
       if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
         return seancePrice
       }
-      if (token.symbol == 'USDC' || token.symbol == 'FUSD') {
+      if (token.symbol == 'USDC' || token.symbol == 'FUSD' || token.symbol == 'fUSDT') {
         return 1
       }
       return 0

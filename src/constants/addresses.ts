@@ -91,3 +91,15 @@ export const WNATIVE: AddressMap = {
   [ChainId.FANTOM_TESTNET]: '',
  
 }
+export const SOUL_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.FANTOM]: '0xe2fb177009ff39f52c0134e8007fa0e4baacbd07', // SOUL
+  [ChainId.FANTOM_TESTNET]: '',
+ 
+}
+export const SEANCE_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.FANTOM]: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
+  [ChainId.FANTOM_TESTNET]: '',
+ 
+}

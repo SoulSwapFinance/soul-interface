@@ -163,7 +163,7 @@ const FarmListItem = ({ farm }) => {
             )}
             {account && (
               <div className="pr-4 mb-2 text-left cursor-pointer text-secondary">
-                {i18n._(t`Your Staked`)}: {formatNumberScale(amount?.toSignificant(6)) ?? 0}
+                {i18n._(t`Deposited`)}: {formatNumberScale(amount?.toSignificant(6)) ?? 0}
                 {farm.lpPrice && amount
                   ? ` (` + formatNumberScale(farm.lpPrice * Number(amount?.toSignificant(18) ?? 0), true, 2) + `)`
                   : ``}
