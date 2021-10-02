@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Currency } from '../../sdk'
+import { Currency } from '@soulswap/sdk'
 import React from 'react'
 import { formatNumberScale, formatPercent } from '../../functions'
 import { useActiveWeb3React } from '../../hooks'
@@ -22,7 +22,7 @@ interface YieldDetailsProps {
   roiPerMonth: number
   roiPerYear: number
   lpPrice: number
-  solarPrice: number
+  soulPrice: number
 }
 
 const YieldDetails: React.FC<YieldDetailsProps> = ({
@@ -34,7 +34,7 @@ const YieldDetails: React.FC<YieldDetailsProps> = ({
   roiPerMonth,
   roiPerYear,
   lpPrice,
-  solarPrice,
+  soulPrice,
 }) => {
   const { chainId } = useActiveWeb3React()
 
@@ -42,10 +42,10 @@ const YieldDetails: React.FC<YieldDetailsProps> = ({
 
   const roiPerWeek: number = roiPerDay * 7
 
-  const perDay: number = Number((1000 * roiPerDay) / solarPrice)
-  const perWeek: number = Number((1000 * roiPerWeek) / solarPrice)
-  const perMonth: number = Number((1000 * roiPerMonth) / solarPrice)
-  const perYear: number = Number((1000 * roiPerYear) / solarPrice)
+  const perDay: number = Number((1000 * roiPerDay) / soulPrice)
+  const perWeek: number = Number((1000 * roiPerWeek) / soulPrice)
+  const perMonth: number = Number((1000 * roiPerMonth) / soulPrice)
+  const perYear: number = Number((1000 * roiPerYear) / soulPrice)
 
   const getRoiEntry = (period: string, percent: number, value: Number) => {
     return (

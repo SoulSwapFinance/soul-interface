@@ -5,6 +5,7 @@ import { classNames } from '../functions'
 export default function Search({
   term,
   search,
+  placeholder,
   className = 'bg-dark-900',
   inputProps = {
     className:
@@ -14,6 +15,7 @@ export default function Search({
 }: {
   term: string
   search: (value: string) => void
+  placeholder?: string
   inputProps?: any
   className?: string
 }) {
@@ -25,7 +27,7 @@ export default function Search({
         )}
         onChange={(e) => search(e.target.value)}
         value={term}
-        placeholder="Search by name, symbol, address"
+        placeholder={placeholder}
         {...inputProps}
       />
       <div className="absolute inset-y-0 right-0 flex items-center pr-6 pointer-events-none">
