@@ -146,7 +146,7 @@ export const SEANCE: ChainTokenMap = {
 }
 
 export const SPELL: ChainTokenMap = {
- [ChainId.FANTOM]: new Token(ChainId.FANTOM, SPELL_ADDRESS[ChainId.FANTOM], 18, 'SPELL', 'SpellBound'), // TODO: update
+// [ChainId.FANTOM]: new Token(ChainId.FANTOM, SPELL_ADDRESS[ChainId.FANTOM], 18, 'SPELL', 'SpellBound'), // TODO: update
   [ChainId.FANTOM_TESTNET]: new Token(
     ChainId.FANTOM_TESTNET,
     '0xdFDC55e7E7eBA3E7BF2a0E0743f4D3C858FaC37E', // 30 JUL
