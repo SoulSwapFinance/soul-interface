@@ -1,4 +1,4 @@
-import { ChainId } from '@soulswap/sdk'
+import { ChainId } from '../sdk'
 
 export type TokenInfo = {
   id: string

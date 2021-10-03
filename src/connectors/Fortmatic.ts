@@ -1,4 +1,4 @@
-import { ChainId } from '@soulswap/sdk'
+import { ChainId } from '../sdk'
 import { FortmaticConnector as FortmaticConnectorCore } from '@web3-react/fortmatic-connector'
 
 export const OVERLAY_READY = 'OVERLAY_READY'
@@ -9,9 +9,6 @@ const CHAIN_ID_NETWORK_ARGUMENT: {
   readonly [chainId in FormaticSupportedChains]: string | undefined
 } = {
   [ChainId.MAINNET]: undefined,
-  // [ChainId.ROPSTEN]: 'ropsten',
-  // [ChainId.RINKEBY]: 'rinkeby',
-  // [ChainId.KOVAN]: 'kovan',
 }
 
 export class FortmaticConnector extends FortmaticConnectorCore {

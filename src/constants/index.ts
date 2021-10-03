@@ -1,5 +1,4 @@
-import { Percent } from '@soulswap/sdk'
-import { ChainId, JSBI } from '@soulswap/sdk'
+import { ChainId, JSBI, Percent } from '../sdk'
 import { fortmatic, injected, portis, torus, walletconnect, walletlink } from '../connectors'
 import { RPC } from '../connectors'
 import { AbstractConnector } from '@web3-react/abstract-connector'
@@ -103,66 +102,75 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     color: '#4196FC',
     mobile: true,
   },
-  LATTICE: {
-    connector: async () => {
-      const LatticeConnector = (await import('@web3-react/lattice-connector')).LatticeConnector
-      return new LatticeConnector({
-        chainId: 1,
-        url: RPC[ChainId.MAINNET],
-        appName: 'SoulSwap',
-      })
-    },
-    name: 'Lattice',
-    iconName: 'lattice.png',
-    description: 'Connect to GridPlus Wallet.',
+  TRUST_WALLET: {
+    connector: injected,
+    name: 'Trust Wallet',
+    iconName: 'trustwallet.svg',
+    description: 'The most trusted & secure crypto wallet.',
     href: null,
-    color: '#40a9ff',
+    color: '#3688EB',
     mobile: true,
   },
-  WALLET_LINK: {
-    connector: walletlink,
-    name: 'Coinbase Wallet',
-    iconName: 'coinbase.svg',
-    description: 'Use Coinbase Wallet app on mobile device',
-    href: null,
-    color: '#315CF5',
-  },
-  COINBASE_LINK: {
-    name: 'Open in Coinbase Wallet',
-    iconName: 'coinbase.svg',
-    description: 'Open in Coinbase Wallet app.',
-    href: 'https://go.cb-w.com',
-    color: '#315CF5',
-    mobile: true,
-    mobileOnly: true,
-  },
-  FORTMATIC: {
-    connector: fortmatic,
-    name: 'Fortmatic',
-    iconName: 'fortmatic.png',
-    description: 'Login using Fortmatic hosted wallet',
-    href: null,
-    color: '#6748FF',
-    mobile: true,
-  },
-  Portis: {
-    connector: portis,
-    name: 'Portis',
-    iconName: 'portis.png',
-    description: 'Login using Portis hosted wallet',
-    href: null,
-    color: '#4A6C9B',
-    mobile: true,
-  },
-  Torus: {
-    connector: torus,
-    name: 'Torus',
-    iconName: 'torus.png',
-    description: 'Login using Torus hosted wallet',
-    href: null,
-    color: '#315CF5',
-    mobile: true,
-  },
+  // LATTICE: {
+  //   connector: async () => {
+  //     const LatticeConnector = (await import('@web3-react/lattice-connector')).LatticeConnector
+  //     return new LatticeConnector({
+  //       chainId: 1,
+  //       url: RPC[ChainId.MAINNET],
+  //       appName: 'SoulSwap',
+  //     })
+  //   },
+  //   name: 'Lattice',
+  //   iconName: 'lattice.png',
+  //   description: 'Connect to GridPlus Wallet.',
+  //   href: null,
+  //   color: '#40a9ff',
+  //   mobile: true,
+  // },
+  // WALLET_LINK: {
+  //   connector: walletlink,
+  //   name: 'Coinbase Wallet',
+  //   iconName: 'coinbase.svg',
+  //   description: 'Use Coinbase Wallet app on mobile device',
+  //   href: null,
+  //   color: '#315CF5',
+  // },
+  // COINBASE_LINK: {
+  //   name: 'Open in Coinbase Wallet',
+  //   iconName: 'coinbase.svg',
+  //   description: 'Open in Coinbase Wallet app.',
+  //   href: 'https://go.cb-w.com',
+  //   color: '#315CF5',
+  //   mobile: true,
+  //   mobileOnly: true,
+  // },
+  // FORTMATIC: {
+  //   connector: fortmatic,
+  //   name: 'Fortmatic',
+  //   iconName: 'fortmatic.png',
+  //   description: 'Login using Fortmatic hosted wallet',
+  //   href: null,
+  //   color: '#6748FF',
+  //   mobile: true,
+  // },
+  // Portis: {
+  //   connector: portis,
+  //   name: 'Portis',
+  //   iconName: 'portis.png',
+  //   description: 'Login using Portis hosted wallet',
+  //   href: null,
+  //   color: '#4A6C9B',
+  //   mobile: true,
+  // },
+  // Torus: {
+  //   connector: torus,
+  //   name: 'Torus',
+  //   iconName: 'torus.png',
+  //   description: 'Login using Torus hosted wallet',
+  //   href: null,
+  //   color: '#315CF5',
+  //   mobile: true,
+  // },
 }
 
 export const NetworkContextName = 'NETWORK'
@@ -234,11 +242,7 @@ export const SOUL_GUIDE_ADDRESS = '0x5A6B3Ce2736E9B731Fba73262884016b50c39184' /
 export const ANALYTICS_URL: { [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: 'https://defillama.com/protocol/soulswap',
   [ChainId.FANTOM]: 'https://analytics.soulswap.finance',
-  [ChainId.FANTOM_TESTNET]: 'https://defillama.com/protocol/soulswap',
-  // [ChainId.MATIC]: 'https://analytics-polygon.soulswap.finance',
-  // [ChainId.XDAI]: 'https://analytics-xdai.soulswap.finance',
-  // [ChainId.HARMONY]: 'https://analytics-harmony.soulswap.finance',
-  // [ChainId.ARBITRUM]: undefined,
+  [ChainId.FANTOM_TESTNET]: 'https://defillama.com/protocol/soulswap'
 }
 
 // export const EIP_1559_ACTIVATION_BLOCK: { [chainId in ChainId]?: number } = {

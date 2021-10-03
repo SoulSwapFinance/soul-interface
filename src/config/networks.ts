@@ -1,4 +1,4 @@
-import { ChainId } from '@soulswap/sdk'
+import { ChainId } from '../sdk'
 
 const Mainnet = '/images/networks/mainnet-network.jpg'
 const Fantom = '/images/networks/fantom-network.jpg'

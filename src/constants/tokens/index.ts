@@ -1,4 +1,4 @@
-import { ChainId, Ether, SOUL_ADDRESS, Token, WETH9, WNATIVE } from '@soulswap/sdk'
+import { ChainId, Ether, SOUL_ADDRESS, Token, WETH9, WNATIVE } from '../../sdk'
 
 import { SupportedChainId } from '../chains'
 
