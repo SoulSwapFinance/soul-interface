@@ -15,12 +15,198 @@ import FarmPids from '../FarmPids'
 function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
   const { account, chainId } = useActiveWeb3React()
 
+  const helperContract = useHelperContract()
   const summonerContract = useSoulSummonerContract()
   const lpTokenContract = usePairContract(lpToken)
   const token1Contract = useTokenContract(token1Address[chainId])
   const token2Contract = useTokenContract(token2Address[chainId])
   const soulContract = useTokenContract(FarmPids[0].token1Address[chainId])
   const fusdContract = useTokenContract(FarmPids[0].token2Address[chainId])
+
+  // ----------------------------------------------
+  //                  Farm Helper
+  // ----------------------------------------------
+
+  const totalPendingRewards = async () => {
+    try {
+      const result = await helperContract?.totalPending()
+      return result
+    } catch (e) {
+      console.log(e)
+      return e
+    }
+  }
+
+  const harvestAllFarms = async () => {
+    try {
+      const totalPools = summonerContract?.poolLength()
+
+      for (let i; i < totalPools; i++) {
+        const pending = await pendingSoul(i, account)
+
+        if (pending !== 0) {
+          if (i === 0) {
+            const tx = await enterStaking(0)
+            await tx.wait()
+          } else {
+            const tx = await deposit(i, 0)
+            await tx.wait()
+          }
+        }
+      }
+    } catch (e) {
+      console.log(e)
+      return e
+    }
+  }
+
+  /**
+   * [0] : pidAlloc
+   * [1] : totalAlloc
+   * [2] : soulPerYear
+   */
+  const fetchYearlyRewards = async () => {
+    try {
+      const result = await helperContract?.fetchYearlyRewards(pid)
+      const poolWeight = result?.[0] / result?.[1]
+      const poolYearlyRewards = poolWeight * result?.[2]
+      return poolYearlyRewards
+    } catch (e) {
+      console.log(e)
+      return e
+    }
+  }
+
+  const fetchStakedBals = async () => {
+    try {
+      const result = await helperContract?.fetchStakedBals(pid)
+      return result
+    } catch (e) {
+      console.log(e)
+      return e
+    }
+  }
+
+  /**
+   * [0] : ftmUsdcTotalFtm
+   * [1] : ftmUsdcTotalUsdc
+   * [2] : soulFtmTotalSoul
+   * [3] : soulFtmTotalFusd
+   * [4] : ethFtmTotalFtm
+   * [5] : ethFtmTotalEth
+   */
+  const fetchTokenRateBals = async () => {
+    try {
+      const result = await helperContract?.fetchTokenRateBals()
+
+      const ftmPrice = result?.[1] / (result?.[0] / 10 ** 12)
+      const soulPrice = result?.[3] / result?.[2]
+      const ethPrice = (result?.[4] / result?.[5]) * ftmPrice
+
+      console.log('usdcPerFtm:', ftmPrice, 'fusdPerSoul:', soulPrice, 'ethPrice:', ethPrice)
+
+      return [ftmPrice, soulPrice, ethPrice]
+    } catch (e) {
+      console.log(e)
+      return e
+    }
+  }
+
+  /**
+   * [0] : summonerLpTokens
+   * [1] : lpTokenSupply
+   * [2] : pidAlloc
+   * [3] : totalAlloc
+   * [4] : soulPerYear
+   * [5] : tvl (token balance)
+   */
+  const fetchFarmStats = async (pid, token1Name, token2Name) => {
+    try {
+      const rates = await fetchTokenRateBals()
+      const ftmPrice = rates?.[0]
+      const soulPrice = rates?.[1]
+      const ethPrice = rates?.[2]
+
+      const result = await helperContract?.fetchPidDetails(pid)
+
+      console.log(token1Name, '/', token2Name, '- result', result)
+
+      // ------ TVL ------
+
+      const summonerPidPercOfSupply = result?.[0] / result?.[1] // i.e. 1/10 = 0.1
+      const rawPidValue = (summonerPidPercOfSupply * result?.[5]) / 10 ** 18 // i.e. 0.1 * 100,000 = 10,000
+
+      let pidTvl = rawPidValue
+
+      if (token1Name === 'USDC' || token2Name === 'USDC') {
+        pidTvl = (summonerPidPercOfSupply * result?.[5]) / 10 ** 6
+      } else if (token1Name === 'FUSD' || token2Name === 'FUSD') {
+      } else if (token1Name === 'FTM' || token2Name === 'FTM') {
+        pidTvl = rawPidValue * ftmPrice
+      } else if (token1Name === 'SOUL' || token2Name === 'SOUL') {
+        pidTvl = rawPidValue * soulPrice
+      } else if (token1Name === 'WETH' || token2Name === 'WETH') {
+        pidTvl = rawPidValue * ethPrice
+      }
+
+      // ------ APR ------
+
+      // weight * soulPerYear
+      const poolWeight = result?.[2] / result?.[3]
+      const yearlySoulRewardAlloc = poolWeight * result?.[4]
+      const apr = (((yearlySoulRewardAlloc * soulPrice) / pidTvl) * 100) / 10 ** 18
+
+      const fixedPidTvl = Number(pidTvl).toFixed(0)
+      const fixedApr = Number(apr).toFixed(0)
+
+      console.log(token1Name, '/', token2Name, '- summonerPidPercOfSupply', summonerPidPercOfSupply)
+      console.log(token1Name, '/', token2Name, '- tokenBal', Number(result?.[5]) / 10 ** 18)
+      console.log(token1Name, '/', token2Name, '- rawPidValue', rawPidValue)
+
+      console.log(token1Name, '/', token2Name, '- pidTvl', pidTvl)
+      console.log(token1Name, '/', token2Name, '- fixedPidTvl', fixedPidTvl)
+      console.log(token1Name, '/', token2Name, '- fixedApr', fixedApr)
+
+      return [fixedPidTvl, fixedApr]
+    } catch (e) {
+      console.log(e)
+      return e
+    }
+  }
+
+  const fetchStakeStats = async () => {
+    try {
+      const rates = await fetchTokenRateBals()
+      const soulPrice = rates?.[1]
+
+      // summonerBal, totalSupply
+      const result = await helperContract?.fetchPercOfSupply(0)
+
+      // ------ TVL ------
+
+      const pidTvl = (result?.[0] * soulPrice) / 10 ** 18
+
+      // ------ APR ------
+
+      const details = await helperContract?.fetchYearlyRewards(pid)
+
+      // weight * soulPerYear
+      const poolWeight = details?.[0] / details?.[1]
+      const yearlySoulRewardAlloc = poolWeight * details?.[2]
+      const apr = (((yearlySoulRewardAlloc * soulPrice) / pidTvl) * 100) / 10 ** 18
+
+      const fixedPidTvl = Number(pidTvl).toFixed(0)
+      const fixedApr = Number(apr).toFixed(0)
+
+      console.log('SOUL', '- fixedPidTvl', fixedPidTvl)
+      console.log('SOUL', '- fixedApr', fixedApr)
+
+      return [fixedPidTvl, fixedApr]
+    } catch (e) {
+      console.log(e)
+      return e
+    }
+  }
 
   // -----------------------
   //  Staking Funcs
@@ -93,11 +279,11 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
     }
   }
 
-  // pool info: 
-    // [0] lpTokenUsed, 
-    // [1] allocPoint, 
-    // [2] lastRewardTime, 
-    // [3] accSoulPerShare
+  // pool info:
+  // [0] lpTokenUsed,
+  // [1] allocPoint,
+  // [2] lastRewardTime,
+  // [3] accSoulPerShare
   const poolInfo = async (pid) => {
     try {
       const result = await summonerContract?.poolInfo(pid)
@@ -112,14 +298,14 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
     }
   }
 
-  // user info: 
-    // [0] amount, 
-    // [1] rewardDebt,
-    // [2] rewardDebtAtTime
-    // [3] lastWithdrawTime,
-    // [4] firstDepositTime,
-    // [5] timeDelta,
-    // [6] lastDepositTime
+  // user info:
+  // [0] amount,
+  // [1] rewardDebt,
+  // [2] rewardDebtAtTime
+  // [3] lastWithdrawTime,
+  // [4] firstDepositTime,
+  // [5] timeDelta,
+  // [6] lastDepositTime
   const userInfo = async (pid, account) => {
     try {
       const result = await summonerContract?.userInfo(pid, account)
@@ -181,7 +367,7 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
 
   const getFeePercent = async (pid) => {
     try {
-    const timeDelta = await userDelta(pid, account)
+      const timeDelta = await userDelta(pid, account)
       const result = await summonerContract?.getFeeRate(pid, timeDelta)
       return result
     } catch (e) {
@@ -198,7 +384,7 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
    * The amount of tokens the user holds compared to the contract
    * Note : need to make func to calculate how many staked compared to pool
    */
-   const fetchUserLpTokenAlloc = async (account) => {
+  const fetchUserLpTokenAlloc = async (account) => {
     try {
       const contractBal = await lpTokenContract?.balanceOf(SoulSummonerAddress)
       const userBal = await lpTokenContract?.balanceOf(account)
@@ -222,10 +408,10 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
     try {
       // get how many lpTokens in contract
       const totalSupply = await lpTokenContract?.totalSupply()
-      console.log('ttl supply', totalSupply)
+
       // get how many lpTokens held by Summoner
       const heldBySummoner = await lpTokenContract?.balanceOf(SoulSummonerAddress)
-      console.log('held by summoner', heldBySummoner)
+
       // get how many lpTokens held by user
       const heldByUser = await lpTokenContract?.balanceOf(account)
 
@@ -238,17 +424,17 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
 
       // user staked only %s
       const userStakedBal = (await userInfo(pid, account))?.[0]
-      console.log('userStakedBal', userStakedBal)
       const userStakedPercOfSupply = (userStakedBal / summonerPercOfSupply) * 100
       const userStakedPercOfSummoner = (userStakedBal / heldBySummoner) * 100
-      // console.log('userStakedBal', userStakedBal.toString())
-      // console.log('heldBySummoner', heldBySummoner.toString())
-      // console.log('userStakedPercOfSummoner', userStakedPercOfSummoner.toString())
 
       // user staked + unstaked %s
       const netUserLpTokens = userStakedBal + heldByUser
       const netUserPercOfSupply = (netUserLpTokens / totalSupply) * 100
       const netUserPercOfSummoner = (netUserLpTokens / heldBySummoner) * 100
+
+      // console.log('userStakedBal', userStakedBal.toString())
+      // console.log('heldBySummoner', heldBySummoner.toString())
+      // console.log('userStakedPercOfSummoner', userStakedPercOfSummoner.toString())
 
       return [
         summonerPercOfSupply,
@@ -340,27 +526,16 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
 
       // check token1 && token2 name for base pair + fetch toatl value
       if (token1Name === 'FUSD' || token2Name === 'FUSD') {
+        totalLpValue = token1Name === 'FUSD' ? ethers.utils.formatUnits(token1Bal) : ethers.utils.formatUnits(token2Bal)
+      } else if (token1Name === 'FTM' || token2Name === 'FTM') {
         totalLpValue =
-          (
-            token1Name === 'FUSD'
-              ? ethers.utils.formatUnits(token1Bal)
-              : ethers.utils.formatUnits(token2Bal)
-          )
-     } else if (token1Name === 'FTM' || token2Name === 'FTM') {
-        totalLpValue =
-          (
-            token1Name === 'FTM'
-              ? ethers.utils.formatUnits(token1Bal)
-              : ethers.utils.formatUnits(token2Bal.mul(2))
-          )
+          token1Name === 'FTM' ? ethers.utils.formatUnits(token1Bal) : ethers.utils.formatUnits(token2Bal.mul(2))
       } else if (token1Name === 'SOUL' || token2Name === 'SOUL') {
         const soulPrice = await fusdPerSoul()
         totalLpValue =
-          (
-            token1Name === 'SOUL'
-              ? ethers.utils.formatUnits(token1Bal)
-              : ethers.utils.formatUnits(token2Bal.mul(soulPrice).mul(2))
-          )
+          token1Name === 'SOUL'
+            ? ethers.utils.formatUnits(token1Bal)
+            : ethers.utils.formatUnits(token2Bal.mul(soulPrice).mul(2))
       }
 
       // lp tokens held by summoner
@@ -391,16 +566,15 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
    */
   const fetchAprAndLiquidity = async (pid, token1Name, token2Name, token1Address, token2Address, lpToken) => {
     try {
-      
       // pool weight
       const alloc = await poolInfo(pid)
       const totalAlloc = await totalAllocPoint()
       const poolWeight = alloc?.[1] / totalAlloc
-      
+
       // soul per sec (sps)
       const soulPerSec = await soulPerSecond()
       const formattedSps = ethers.utils.formatUnits(soulPerSec)
-      
+
       // amount of soul allocated && allocated to this pool per year
       const secPerYear = BigNumber.from(31_536_000)
       const yearlySoul = secPerYear.mul(formattedSps)
@@ -425,7 +599,7 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
   /**
    * Value of liqudity of lpToken
    */
-   const fetchPid0LiquidityValue = async (lpToken) => {
+  const fetchPid0LiquidityValue = async (lpToken) => {
     try {
       // SOUL held by summoner
       const rawSummonerBal = await lpTokenContract?.balanceOf(SoulSummonerAddress)
@@ -437,34 +611,34 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
       const rawSoulPrice = await fusdPerSoul()
       const soulPrice = BigNumber.from(ethers.utils.formatUnits(rawSoulPrice))
       console.log('soulPrice', soulPrice)
-      
+
       const totalLpValue = summonerBalance.mul(soulPrice)
       console.log('totalLpValue', totalLpValue)
-      
-      return totalLpValue;
+
+      return totalLpValue
     } catch (e) {
-      console.log(e);
+      console.log(e)
       // alert(e.message);
-      return e;
+      return e
     }
-  };
+  }
 
   /**
    * Soul Price
    */
-   const fetchSoulPrice = async () => {
+  const fetchSoulPrice = async () => {
     try {
       // summonerBal * soulPrice = TVL
-      const soulPrice = await fusdPerSoul();
+      const soulPrice = await fusdPerSoul()
       console.log('soulPrice', soulPrice)
-      
-      return soulPrice;
+
+      return soulPrice
     } catch (e) {
-      console.log(e);
+      console.log(e)
       // alert(e.message);
-      return e;
+      return e
     }
-  };
+  }
 
   /**
    * Fetches the APR percentage for the `pid`
@@ -492,13 +666,22 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
 
       return [farmApr, fetchedLiquidity]
     } catch (e) {
-      console.log(e);
+      console.log(e)
       // alert(e.message);
-      return e;
+      return e
     }
-  };
+  }
 
   return {
+    // helper contract
+    totalPendingRewards,
+    harvestAllFarms,
+    fetchYearlyRewards,
+    fetchStakedBals,
+    fetchTokenRateBals,
+    fetchFarmStats,
+    fetchStakeStats,
+
     enterStaking,
     leaveStaking,
     fetchPid0LiquidityValue,

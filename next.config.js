@@ -135,10 +135,10 @@ module.exports = withBundleAnalyzer(
           source: '/farm',
           destination: '/farm',
         },
-        {
-          source: '/summoner',
-          destination: '/summoner',
-        },
+        // {
+        // source: '/summoner',
+        //  destination: '/summoner',
+        // },
         {
           source: '/me',
           destination: '/user',
