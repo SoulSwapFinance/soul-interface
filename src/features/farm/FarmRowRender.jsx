@@ -386,7 +386,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 <Text padding="0" fontSize=".7rem" color="#bbb">
                   Earned
                 </Text>
-                {pending === '0' ? (
+                {pending === '0.00' ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
                     0
                   </Text>
