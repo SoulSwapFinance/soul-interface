@@ -56,11 +56,11 @@ msgstr "24 Hours"
 msgid "30 Days"
 msgstr "30 Days"
 
-msgid "A portion of each trade (0.05%) goes to SPELL holders as a protocol incentive."
-msgstr "A portion of each trade (0.05%) goes to SPELL holders as a protocol incentive."
-
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
 msgstr "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
+
+msgid "A portion of each trade (0.25%) goes to the Soul Treasury."
+msgstr "A portion of each trade (0.25%) goes to the Soul Treasury."
 
 msgid "APR"
 msgstr "APR"
@@ -83,9 +83,6 @@ msgstr "Add SOUL to your MetaMask wallet"
 msgid "Add collateral in order to borrow assets"
 msgstr "Add collateral in order to borrow assets"
 
-msgid "Add liquidity"
-msgstr "Add liquidity"
-
 msgid "Add {0} to MetaMask"
 msgstr "Add {0} to MetaMask"
 
@@ -100,6 +97,9 @@ msgstr "Additional records and weekly merkle updates can be found on"
 
 msgid "All Farms"
 msgstr "All Farms"
+
+msgid "Allocation"
+msgstr "Allocation"
 
 msgid "Amount Locked"
 msgstr "Amount Locked"
@@ -283,6 +283,9 @@ msgstr "Confirm convert"
 msgid "Confirm this transaction in your wallet"
 msgstr "Confirm this transaction in your wallet"
 
+msgid "Confirm {0}"
+msgstr "Confirm {0}"
+
 msgid "Connect Wallet"
 msgstr "Connect Wallet"
 
@@ -304,14 +307,14 @@ msgstr "Copied"
 msgid "Copy Address"
 msgstr "Copy Address"
 
+msgid "Create Pair"
+msgstr "Create Pair"
+
 msgid "Create Pool & Supply"
 msgstr "Create Pool & Supply"
 
 msgid "Create a new Kashi Market"
 msgstr "Create a new Kashi Market"
-
-msgid "Create a pair"
-msgstr "Create a pair"
 
 msgid "Create lock"
 msgstr "Create lock"
@@ -370,6 +373,9 @@ msgstr "Enter"
 msgid "Enter Amount"
 msgstr "Enter Amount"
 
+msgid "Enter Recipient"
+msgstr "Enter Recipient"
+
 msgid "Enter a recipient"
 msgstr "Enter a recipient"
 
@@ -387,6 +393,9 @@ msgstr "Error connecting"
 
 msgid "Error connecting. Try refreshing the page."
 msgstr "Error connecting. Try refreshing the page."
+
+msgid "Everytime you stake or claim rewards your lock time renews."
+msgstr "Everytime you stake or claim rewards your lock time renews."
 
 msgid "Exchange Rate"
 msgstr "Exchange Rate"
@@ -532,11 +541,11 @@ msgstr "Insufficient {0} balance"
 msgid "Interface Settings"
 msgstr "Interface Settings"
 
+msgid "Invalid Recipient"
+msgstr "Invalid Recipient"
+
 msgid "Invalid pair"
 msgstr "Invalid pair"
-
-msgid "Invalid recipient"
-msgstr "Invalid recipient"
 
 msgid "Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency."
 msgstr "Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency."
@@ -580,9 +589,6 @@ msgstr "Links"
 msgid "Liquidity"
 msgstr "Liquidity"
 
-msgid "Liquidity Provider Fee"
-msgstr "Liquidity Provider Fee"
-
 msgid "Lists"
 msgstr "Lists"
 
@@ -600,6 +606,9 @@ msgstr "Loading your {exchange} liquidity positions"
 
 msgid "Lock"
 msgstr "Lock"
+
+msgid "Lockup"
+msgstr "Lockup"
 
 msgid "MAX"
 msgstr "MAX"
@@ -768,6 +777,9 @@ msgstr "Please enter an amount"
 msgid "Please refer to the"
 msgstr "Please refer to the"
 
+msgid "Please type the word \"confirm\" to {0} and lock your tokens for {1}."
+msgstr "Please type the word \"confirm\" to {0} and lock your tokens for {1}."
+
 msgid "Pool"
 msgstr "Pool"
 
@@ -791,6 +803,9 @@ msgstr "Portal"
 
 msgid "Positions"
 msgstr "Positions"
+
+msgid "Possess"
+msgstr "Possess"
 
 msgid "Price Impact"
 msgstr "Price Impact"
@@ -873,9 +888,6 @@ msgstr "SLP"
 msgid "SOUL per $1000"
 msgstr "SOUL per $1000"
 
-msgid "SPELL Fee"
-msgstr "SPELL Fee"
-
 msgid "Search Name or Address"
 msgstr "Search Name or Address"
 
@@ -914,9 +926,6 @@ msgstr "Share of Pool:"
 
 msgid "Slippage tolerance"
 msgstr "Slippage tolerance"
-
-msgid "Slippage tolerance..."
-msgstr "Slippage tolerance..."
 
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
@@ -979,6 +988,12 @@ msgstr "Swap To (est.):"
 msgid "Swap To:"
 msgstr "Swap To:"
 
+msgid "Swapping {0} {1} for {2} {3}"
+msgstr "Swapping {0} {1} for {2} {3}"
+
+msgid "TVL"
+msgstr "TVL"
+
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 
@@ -1036,6 +1051,9 @@ msgstr ""
 
 msgid "Total"
 msgstr "Total"
+
+msgid "Trading Fee"
+msgstr "Trading Fee"
 
 msgid "Transaction History {0}"
 msgstr "Transaction History {0}"
@@ -1178,6 +1196,9 @@ msgstr "Your Liquidity"
 msgid "Your Position"
 msgstr "Your Position"
 
+msgid "Your Staked"
+msgstr "Your Staked"
+
 msgid "Your Wallet"
 msgstr "Your Wallet"
 
@@ -1247,11 +1268,17 @@ msgid_plural "Tokens"
 msgstr[0] "Token"
 msgstr[1] "Tokens"
 
+msgid "{0} & Lock for {1}"
+msgstr "{0} & Lock for {1}"
+
 msgid "{0} Deposited"
 msgstr "{0} Deposited"
 
 msgid "{0} Strategy"
 msgstr "{0} Strategy"
+
+msgid "{0} will lock your tokens for {1}."
+msgstr "{0} will lock your tokens for {1}."
 
 msgid "{0} {1} per {2}"
 msgstr "{0} {1} per {2}"

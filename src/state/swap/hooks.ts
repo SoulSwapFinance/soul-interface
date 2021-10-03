@@ -1,5 +1,13 @@
 import { AppDispatch, AppState } from '../index'
-import { ChainId, Currency, CurrencyAmount, JSBI, Percent, TradeType, Trade as V2Trade, WNATIVE } from '../../sdk'
+import {
+  ChainId,
+  Currency,
+  CurrencyAmount,
+  JSBI,
+  Percent,
+  TradeType,
+  Trade as V2Trade,
+} from '../../sdk'
 import { DEFAULT_ARCHER_ETH_TIP, DEFAULT_ARCHER_GAS_ESTIMATE } from '../../constants'
 // import {
 //   EstimatedSwapCall,
@@ -10,6 +18,7 @@ import { Field, replaceSwapState, selectCurrency, setRecipient, switchCurrencies
 import { isAddress, isZero } from '../../functions/validate'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { useCallback, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useV2TradeExactIn as useTradeExactIn, useV2TradeExactOut as useTradeExactOut } from '../../hooks/useV2Trades'
 import {
   useUserArcherETHTip,
@@ -17,6 +26,7 @@ import {
   useUserArcherGasPrice,
   useUserArcherTipManualOverride,
   useUserSingleHopOnly,
+  useUserSlippageTolerance,
 } from '../user/hooks'
 
 import { ParsedQs } from 'qs'
@@ -56,7 +66,7 @@ export function useSwapActionHandlers(): {
           currencyId: currency.isToken
             ? currency.address
             : currency.isNative
-            ? 'FTM'
+            ? 'ETH'
             : '',
         })
       )
@@ -178,7 +188,7 @@ export function useDerivedSwapInfo(doArcher = false): {
   }
 
   if (!parsedAmount) {
-    inputError = inputError ?? i18n._(t`Enter an amount`)
+    inputError = inputError ?? i18n._(t`Enter Amount`)
   }
 
   if (!currencies[Field.INPUT] || !currencies[Field.OUTPUT]) {
@@ -187,14 +197,14 @@ export function useDerivedSwapInfo(doArcher = false): {
 
   const formattedTo = isAddress(to)
   if (!to || !formattedTo) {
-    inputError = inputError ?? i18n._(t`Enter a recipient`)
+    inputError = inputError ?? i18n._(t`Enter Recipient`)
   } else {
     if (
       BAD_RECIPIENT_ADDRESSES?.[chainId]?.[formattedTo] ||
       (bestTradeExactIn && involvesAddress(bestTradeExactIn, formattedTo)) ||
       (bestTradeExactOut && involvesAddress(bestTradeExactOut, formattedTo))
     ) {
-      inputError = inputError ?? i18n._(t`Invalid recipient`)
+      inputError = inputError ?? i18n._(t`Invalid Recipient`)
     }
   }
 
@@ -288,7 +298,6 @@ export function useDerivedSwapInfo(doArcher = false): {
     if (doArcher && v2Trade && swapCalls && !userTipManualOverride) {
       estimateGas()
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [doArcher, v2Trade, swapCalls, userTipManualOverride, library, setUserGasEstimate])
 
   return {
@@ -305,7 +314,7 @@ function parseCurrencyFromURLParameter(urlParam: any): string {
   if (typeof urlParam === 'string') {
     const valid = isAddress(urlParam)
     if (valid) return valid
-    if (urlParam.toUpperCase() === 'FTM') return 'FTM'
+    if (urlParam.toUpperCase() === 'ETH') return 'ETH'
   }
   return ''
 }
@@ -332,12 +341,8 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId 
   let inputCurrency = parseCurrencyFromURLParameter(parsedQs.inputCurrency)
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
   if (inputCurrency === '' && outputCurrency === '') {
-    // if (chainId === ChainId.CELO) {
-    //   inputCurrency = WNATIVE[chainId].address
-    // } else {
-      // default to FTM input
-      inputCurrency = 'FTM'
-    // }
+      // default to ETH input
+      inputCurrency = 'ETH'    
   } else if (inputCurrency === outputCurrency) {
     // clear output if identical
     outputCurrency = ''
