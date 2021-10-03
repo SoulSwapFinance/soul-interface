@@ -72,7 +72,7 @@ function AppBar(): JSX.Element {
                           </a>
                         </NavLink>
                       )}
-                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/summoner'}>
                         <a
                           id={`farm-nav-link`}
@@ -81,7 +81,7 @@ function AppBar(): JSX.Element {
                           {i18n._(t`Summon`)}
                         </a>
                         </NavLink>
-                      )}
+                      )} */}
                       {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/locker'}>
                         <a
@@ -397,7 +397,7 @@ function AppBar(): JSX.Element {
                     </Link>
                   </>
                 )} */}
-                  { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                  {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <Link href={'/summoner'}>
                     <a
                       id={`farm-nav-link`}
@@ -406,7 +406,7 @@ function AppBar(): JSX.Element {
                       {i18n._(t`Summon`)}
                     </a>
                   </Link>
-                  )}
+                  )} */}
                   { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <Link href={'/stake'}>
                     <a
