@@ -11,6 +11,12 @@ import NavLink from '../NavLink'
 
 const items = (i18n: I18n) => [
   {
+    name: i18n._(t`Documentation`),
+    description: i18n._(t`Read the Documentation.`),
+    href: 'https://docs.soulswap.finance',
+    external: true,
+  },
+  {
     name: i18n._(t`Explore`),
     description: i18n._(t`View our Ecosystem.`),
     href: 'https://port.soul.sh',
@@ -28,18 +34,6 @@ const items = (i18n: I18n) => [
     href: 'https://twitter.com/SoulSwapFinance',
     external: true,
   },
-  // {
-  //   name: i18n._(t`Telegram`),
-  //   description: i18n._(t`Join the conversation on Telegram.`),
-  //   href: 'https://t.me/SoulSwapDeFi',
-  //   external: true,
-  // },
-  // {
-  //   name: i18n._(t`Discord`),
-  //   description: i18n._(t`Join the community on Discord.`),
-  //   href: 'https://discord.gg/DQjChB6Wa6', // 19 SEP
-  //   external: true,
-  // },
   {
     name: i18n._(t`Resources`),
     description: i18n._(t`Explore our Protocol.`),
