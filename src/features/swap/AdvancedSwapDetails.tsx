@@ -1,4 +1,12 @@
-import { ChainId, Currency, Ether, Percent, TradeType, Trade as V2Trade, CurrencyAmount } from '../../sdk'
+import {
+  ChainId,
+  Currency,
+  Ether,
+  Percent,
+  TradeType,
+  Trade as V2Trade,
+  CurrencyAmount,
+} from '../../sdk'
 import React, { useMemo } from 'react'
 import { RowBetween, RowFixed } from '../../components/Row'
 
@@ -11,6 +19,7 @@ import { computeRealizedLPFeePercent } from '../../functions/prices'
 import { t } from '@lingui/macro'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useLingui } from '@lingui/react'
+import { formatNumberScale } from '../../functions'
 
 export interface AdvancedSwapDetailsProps {
   trade?: V2Trade<Currency, Currency, TradeType>
@@ -58,51 +67,55 @@ export function AdvancedSwapDetails({ trade, allowedSlippage, minerBribe }: Adva
         <RowFixed>
           <div className="text-sm font-bold text-high-emphesis">
             {trade.tradeType === TradeType.EXACT_INPUT
-              ? `${trade.minimumAmountOut(allowedSlippage).toSignificant(6)} ${trade.outputAmount.currency.symbol}`
-              : `${trade.maximumAmountIn(allowedSlippage).toSignificant(6)} ${trade.inputAmount.currency.symbol}`}
+              ? `${formatNumberScale(trade.minimumAmountOut(allowedSlippage).toSignificant(6))} ${
+                  trade.outputAmount.currency.symbol
+                }`
+              : `${formatNumberScale(trade.maximumAmountIn(allowedSlippage).toSignificant(6))} ${
+                  trade.inputAmount.currency.symbol
+                }`}
           </div>
         </RowFixed>
       </RowBetween>
-      <RowBetween>
-        <RowFixed>
-          <div className="text-sm text-secondary">{i18n._(t`Price Impact`)}</div>
-          <QuestionHelper
-            text={i18n._(t`The difference between the market price and estimated price due to trade size.`)}
-          />
-        </RowFixed>
-        <FormattedPriceImpact priceImpact={priceImpact} />
-      </RowBetween>
+      {/*<RowBetween>*/}
+      {/*  <RowFixed>*/}
+      {/*    <div className="text-sm text-secondary">{i18n._(t`Price Impact`)}</div>*/}
+      {/*    <QuestionHelper*/}
+      {/*      text={i18n._(t`The difference between the market price and estimated price due to trade size.`)}*/}
+      {/*    />*/}
+      {/*  </RowFixed>*/}
+      {/*  <FormattedPriceImpact priceImpact={priceImpact} />*/}
+      {/*</RowBetween>*/}
 
       <RowBetween>
         <RowFixed>
-          <div className="text-sm text-secondary">{i18n._(t`Liquidity Provider Fee`)}</div>
-          <QuestionHelper
-            text={i18n._(t`A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive.`)}
-          />
+          <div className="text-sm text-secondary">{i18n._(t`Trading Fee`)}</div>
+          <QuestionHelper text={i18n._(t`A portion of each trade (0.25%) goes to the Soul Treasury.`)} />
         </RowFixed>
         <div className="text-sm font-bold text-high-emphesis">
           {realizedLPFee
-            ? `${realizedLPFee.divide(6).multiply(5).toSignificant(4)} ${realizedLPFee.currency.symbol}`
+            ? `${formatNumberScale(realizedLPFee.divide(6).multiply(5).toSignificant(4))} ${
+                realizedLPFee.currency.symbol
+              }`
             : '-'}
         </div>
       </RowBetween>
 
-      <RowBetween>
+      {/* <RowBetween>
         <RowFixed>
-          <div className="text-sm text-secondary">{i18n._(t`SPELL Fee`)}</div>
+          <div className="text-sm text-secondary">{i18n._(t`xSUSHI Fee`)}</div>
           <QuestionHelper
-            text={i18n._(t`A portion of each trade (0.05%) goes to SPELL holders as a protocol incentive.`)}
+            text={i18n._(t`A portion of each trade (0.05%) goes to xSUSHI holders as a protocol incentive.`)}
           />
         </RowFixed>
         <div className="text-sm font-bold text-high-emphesis">
           {realizedLPFee ? `${realizedLPFee.divide(6).toSignificant(4)} ${realizedLPFee.currency.symbol}` : '-'}
         </div>
-      </RowBetween>
+      </RowBetween> */}
 
       <RowBetween>
         <RowFixed>
           <div className="text-sm text-secondary">{i18n._(t`Slippage tolerance`)}</div>
-          <QuestionHelper text={i18n._(t`Slippage tolerance...`)} />
+          <QuestionHelper text={i18n._(t`Slippage tolerance`)} />
         </RowFixed>
         <div className="text-sm font-bold text-high-emphesis">{allowedSlippage.toFixed(2)}%</div>
       </RowBetween>

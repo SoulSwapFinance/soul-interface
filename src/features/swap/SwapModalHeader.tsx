@@ -1,20 +1,21 @@
 import { AlertTriangle, ArrowDown } from 'react-feather'
 import { Currency, Percent, TradeType, Trade as V2Trade } from '../../sdk'
 import React, { useState } from 'react'
-import { isAddress, shortenAddress } from '../../functions'
+import { formatNumberScale, isAddress, shortenAddress } from '../../functions'
 
 import { AdvancedSwapDetails } from './AdvancedSwapDetails'
-import Card from '../../components/Card'
 import CurrencyLogo from '../../components/CurrencyLogo'
-import { Field } from '../../state/swap/actions'
-import { RowBetween } from '../../components/Row'
 import TradePrice from './TradePrice'
-import Typography from '../../components/Typography'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useLingui } from '@lingui/react'
 import { useUSDCValue } from '../../hooks/useUSDCPrice'
 import { warningSeverity } from '../../functions'
+
+// import Card from '../../components/Card'
+// import { Field } from '../../state/swap/actions'
+// import { RowBetween } from '../../components/Row'
+// import Typography from '../../components/Typography'
+// import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 
 export default function SwapModalHeader({
   trade,
@@ -35,8 +36,8 @@ export default function SwapModalHeader({
 
   const [showInverted, setShowInverted] = useState<boolean>(false)
 
-  const fiatValueInput = useUSDCValue(trade.inputAmount)
-  const fiatValueOutput = useUSDCValue(trade.outputAmount)
+  // const fiatValueInput = useUSDCValue(trade.inputAmount)
+  // const fiatValueOutput = useUSDCValue(trade.outputAmount)
 
   const priceImpactSeverity = warningSeverity(trade.priceImpact)
 
@@ -47,7 +48,7 @@ export default function SwapModalHeader({
           <div className="flex items-center gap-3">
             <CurrencyLogo currency={trade.inputAmount.currency} size={48} />
             <div className="overflow-ellipsis w-[220px] overflow-hidden font-bold text-2xl text-high-emphesis">
-              {trade.inputAmount.toSignificant(6)}
+              {formatNumberScale(trade.inputAmount.toSignificant(6), false, 4)}
             </div>
           </div>
           <div className="ml-3 text-2xl font-medium text-high-emphesis">{trade.inputAmount.currency.symbol}</div>
@@ -63,7 +64,7 @@ export default function SwapModalHeader({
                 priceImpactSeverity > 2 ? 'text-red' : 'text-high-emphesis'
               }`}
             >
-              {trade.outputAmount.toSignificant(6)}
+              {formatNumberScale(trade.outputAmount.toSignificant(6), false, 4)}
             </div>
           </div>
           <div className="ml-3 text-2xl font-medium text-high-emphesis">{trade.outputAmount.currency.symbol}</div>
@@ -75,19 +76,20 @@ export default function SwapModalHeader({
         showInverted={showInverted}
         setShowInverted={setShowInverted}
         className="px-0"
+        trade={trade}
       />
 
       <AdvancedSwapDetails trade={trade} allowedSlippage={allowedSlippage} minerBribe={minerBribe} />
 
       {showAcceptChanges ? (
-        <div className="flex items-center justify-between p-2 px-3 border border-gray-800 rounded">
+        <div className="flex items-center justify-between p-2 px-3 border border-dark-600 rounded">
           <div className="flex items-center justify-start text-sm font-bold uppercase text-high-emphesis">
             <div className="mr-3 min-w-[24px]">
               <AlertTriangle size={24} />
             </div>
             <span>{i18n._(t`Price Updated`)}</span>
           </div>
-          <span className="text-sm cursor-pointer text-blue" onClick={onAcceptChanges}>
+          <span className="text-sm cursor-pointer text-purple" onClick={onAcceptChanges}>
             {i18n._(t`Accept`)}
           </span>
         </div>

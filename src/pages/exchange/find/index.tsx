@@ -149,7 +149,7 @@ export default function PoolFinder() {
                       {i18n._(t`You don’t have liquidity in this pool yet`)}
                       <Link href={`/exchange/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
                         <a className="text-center text-yellow text-opacity-80 hover:text-opacity-100">
-                          {i18n._(t`Add liquidity`)}
+                          {i18n._(t`Add Liquidity`)}
                         </a>
                       </Link>
                     </AutoColumn>
