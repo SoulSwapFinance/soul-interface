@@ -28,7 +28,7 @@ import { useTokenBalancesWithLoadingIndicator } from '../../../state/wallet/hook
 import { useV2Pairs } from '../../../hooks/useV2Pairs'
 import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
 import { chain } from 'lodash'
-import SoulLogo from '../../../components/SoulLogo'
+// import SoulLogo from '../../../components/SoulLogo'
 
 export default function Pool() {
   const { i18n } = useLingui()
@@ -99,7 +99,8 @@ export default function Pool() {
           content="Soul liquidity pools are markets for trades between the two tokens, you can provide these tokens and become a liquidity provider to earn 0.25% of fees from trades."
         />
       </Head>
-      <SoulLogo />
+      {/* <SoulLogo /> */}
+      <br /> <br />
       <DoubleGlowShadowV2 opacity="0.6">
         <Container maxWidth="2xl" className="space-y-6">
           {/* <Alert
@@ -114,7 +115,8 @@ export default function Pool() {
             <div className="p-4 mb-3 space-y-3">
               <div className="text-center">
                 <Typography component="h1" variant="h2">
-                  {i18n._(t`My Liquidity Positions`)}
+                  {i18n._(t``)}
+                  {/* {i18n._(t`My Liquidity Positions`)} */}
                 </Typography>
               </div>
             </div>
@@ -130,7 +132,7 @@ export default function Pool() {
                 <>
                   {/* <div className="flex items-center justify-center">
                   <ExternalLink
-                    href={"https://analytics.sushi.com/user/" + account}
+                    href={"https://analytics.soulswap.finance/user/" + account}
                   >
                     Account analytics and accrued fees <span> ↗</span>
                   </ExternalLink>
@@ -145,7 +147,7 @@ export default function Pool() {
                 </>
               ) : (
                 <Empty className="flex text-lg text-center text-low-emphesis">
-                  <div className="px-4 py-2">{i18n._(t`No liquidity was found. `)}</div>
+                  <div className="px-4 py-2">{i18n._(t`Add Liquidity & Earn Fees (0.25%)`)}</div>
                 </Empty>
               )}
               {account && (

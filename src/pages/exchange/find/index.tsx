@@ -25,7 +25,7 @@ import { usePairAdder } from '../../../state/user/hooks'
 import { useTokenBalance } from '../../../state/wallet/hooks'
 import Image from 'next/image'
 import DoubleGlowShadow from '../../../components/DoubleGlowShadow'
-import SoulLogo from '../../../components/SoulLogo'
+// import SoulLogo from '../../../components/SoulLogo'
 
 enum Fields {
   TOKEN0 = 0,
@@ -83,8 +83,8 @@ export default function PoolFinder() {
         <title>{i18n._(t`Find Pool`)} | Soul</title>
         <meta key="description" name="description" content="Find pool" />
       </Head>
-
-      <SoulLogo />
+<br /><br />
+      {/* <SoulLogo /> */}
 
       <Container maxWidth="2xl" className="space-y-6">
         <DoubleGlowShadow>
