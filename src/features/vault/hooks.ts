@@ -148,10 +148,10 @@ export function useSoulVaults(contract?: Contract | null) {
       allocPoint: data[0].result?.['allocPoint'] || '',
       lastRewardBlock: data[0].result?.['lastRewardBlock'] || '',
       accSoulPerShare: data[0].result?.['accSoulPerShare'] || '',
-      depositFeeBP: data[0].result?.['depositFeeBP'] || '',
+      // depositFeeBP: data[0].result?.['depositFeeBP'] || '',
       harvestInterval: data[0].result?.['harvestInterval'] || '',
       totalLp: data[0].result?.['totalLp'] || '',
-      lockupDuration: data[0].result?.['lockupDuration'] || 0,
+      // lockupDuration: data[0].result?.['lockupDuration'] || 0,
     }))
   }, [args, poolInfo])
 }
@@ -262,7 +262,7 @@ export function useSoulPrice() {
   return usePrice(useSoulFantomContract())
 }
 
-export function useETHPrice() {
+export function useBNBPrice() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return usePrice(useETHPairContract())
 }

@@ -6,7 +6,7 @@ import { useCallback } from 'react'
 
 export default function useSummoner() {
 
-  const contract = useSoulVaultContract()
+  const contract = useSoulSummonerContract()
 
   // Deposit
   const deposit = useCallback(
@@ -35,6 +35,7 @@ export default function useSummoner() {
     [contract]
   )
 
+  // Harvest
   const harvest = useCallback(
     async (pid: number) => {
       try {
