@@ -4,7 +4,7 @@ import {
   useUserArcherTipManualOverride,
   useUserSlippageTolerance,
 } from '../state/user/hooks'
-import { CurrencyAmount, Ether, ChainId } from '@soulswap/sdk'
+import { CurrencyAmount, Ether, ChainId } from '../sdk'
 import React from 'react'
 import { RowBetween } from './Row'
 import { StyledSlider } from '../features/swap/styleds'

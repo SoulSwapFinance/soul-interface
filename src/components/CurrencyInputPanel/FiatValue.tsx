@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Percent } from '@soulswap/sdk'
+import { Currency, CurrencyAmount, Percent } from '../../sdk'
 import React, { useMemo } from 'react'
 
 import { t } from '@lingui/macro'

@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Currency } from '@soulswap/sdk'
+import { Currency } from '../../sdk'
 import React from 'react'
 import { formatNumberScale, formatPercent } from '../../functions'
 import { useActiveWeb3React } from '../../hooks'
