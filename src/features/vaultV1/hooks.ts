@@ -6,7 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   useSoulSummonerContract,
   useETHPairContract,
-  useSoulFantomContract,
+  useSoulFtmContract,
   useSoulVaultContract,
 } from '../../hooks'
 
@@ -30,19 +30,19 @@ export function useUserInfo(farm, token) {
   }, [farm, account])
 
   const result = useSingleCallResult(args ? contract : null, 'userInfo', args)?.result
-  const userLockedUntilResult = useSingleCallResult(args ? contract : null, 'userLockedUntil', args)?.result
+  // const userLockedUntilResult = useSingleCallResult(args ? contract : null, 'userLockedUntil', args)?.result
 
   const value = result?.[0]
   const harvestValue = result?.[3]
-  const userLockedUntilValue = userLockedUntilResult?.[0]
+  // const userLockedUntilValue = userLockedUntilResult?.[0]
 
   const amount = value ? JSBI.BigInt(value.toString()) : undefined
-  const nextHarvestUntil = harvestValue ? JSBI.BigInt(harvestValue.toString()) : undefined
+  // const nextHarvestUntil = harvestValue ? JSBI.BigInt(harvestValue.toString()) : undefined
   // const userLockedUntil = userLockedUntilValue ? JSBI.BigInt(userLockedUntilValue.toString()) : undefined
 
   return {
     amount: amount ? CurrencyAmount.fromRawAmount(token, amount) : undefined,
-    nextHarvestUntil: nextHarvestUntil ? JSBI.toNumber(nextHarvestUntil) * 1000 : undefined,
+    // nextHarvestUntil: nextHarvestUntil ? JSBI.toNumber(nextHarvestUntil) * 1000 : undefined,
     // userLockedUntil: userLockedUntil ? JSBI.toNumber(userLockedUntil) * 1000 : undefined,
   }
 }
@@ -148,12 +148,10 @@ export function useSoulVaults(contract?: Contract | null) {
       id: args[i][0],
       lpToken: data[0].result?.['lpToken'] || '',
       allocPoint: data[0].result?.['allocPoint'] || '',
-      lastRewardBlock: data[0].result?.['lastRewardBlock'] || '',
+      lastRewardTime: data[0].result?.['lastRewardTime'] || '',
       accSoulPerShare: data[0].result?.['accSoulPerShare'] || '',
-      depositFeeBP: data[0].result?.['depositFeeBP'] || '',
-      harvestInterval: data[0].result?.['harvestInterval'] || '',
-      totalLp: data[0].result?.['totalLp'] || '',
-      lockupDuration: data[0].result?.['lockupDuration'] || 0,
+      // totalLp: data[0].result?.['totalLp'] || '',
+      // lockupDuration: data[0].result?.['lockupDuration'] || 0,
     }))
   }, [args, poolInfo])
 }
@@ -261,7 +259,7 @@ export function useFarmsApi() {
 
 export function useSoulPrice() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  return usePrice(useSoulFantomContract())
+  return usePrice(useSoulFtmContract())
 }
 
 export function useETHPrice() {

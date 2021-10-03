@@ -16,7 +16,7 @@ let farmsResult = null
 
 export async function farms() {
   if (!farmsResult) {
-    let summonerContract = new web3.eth.Contract(summonerAbi, '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B')
+    let summonerContract = new web3.eth.Contract(summonerAbi, '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B') // SUMMONER
     const poolLength = await summonerContract.methods.poolLength().call()
 
     const forHelper = []
@@ -58,7 +58,7 @@ export async function farms() {
           lpContract.methods.totalSupply().call(),
           lpContract.methods.token0().call(),
           lpContract.methods.token1().call(),
-          lpContract.methods.balanceOf('0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B').call(),
+          lpContract.methods.balanceOf('0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B').call(), // SUMMONER
         ]
 
         const [reserves, totalSupply, token0, token1, summonerBalance] = await Promise.all(promisesCall)
@@ -92,9 +92,9 @@ export async function farms() {
               ? token0amount
               : token1info.symbol == 'SOUL' || token1info.symbol == 'WFTM'
               ? token1amount
-              : token0info.symbol == 'USDC'
+              : token0info.symbol == 'USDC' || token0info.symbol == 'FUSD' || token0info.symbol == 'fUSDT'
               ? token0amount
-              : token1info.symbol == 'USDC'
+              : token1info.symbol == 'USDC' || token1info.symbol == 'FUSD' || token1info.symbol == 'fUSDT'
               ? token1amount
               : 0,
           single: false,

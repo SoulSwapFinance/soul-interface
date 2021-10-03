@@ -5,7 +5,7 @@ import {
   Ether,
   Percent,
   TradeType,
-  Trade as V2Trade,
+  Trade,
 } from '../../sdk'
 import React, { useCallback, useMemo } from 'react'
 import TransactionConfirmationModal, {
@@ -23,7 +23,7 @@ import { formatNumberScale } from '../../functions'
  * @param args either a pair of V2 trades or a pair of V3 trades
  */
 function tradeMeaningfullyDiffers(
-  ...args: [V2Trade<Currency, Currency, TradeType>, V2Trade<Currency, Currency, TradeType>]
+  ...args: [Trade<Currency, Currency, TradeType>, Trade<Currency, Currency, TradeType>]
 ): boolean {
   const [tradeA, tradeB] = args
   return (
@@ -50,8 +50,8 @@ export default function ConfirmSwapModal({
   minerBribe,
 }: {
   isOpen: boolean
-  trade: V2Trade<Currency, Currency, TradeType> | undefined
-  originalTrade: V2Trade<Currency, Currency, TradeType> | undefined
+  trade: Trade<Currency, Currency, TradeType> | undefined
+  originalTrade: Trade<Currency, Currency, TradeType> | undefined
   attemptingTxn: boolean
   txHash: string | undefined
   recipient: string | null

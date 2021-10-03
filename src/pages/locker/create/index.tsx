@@ -347,7 +347,7 @@ export default function CreateLocker(): JSX.Element {
                     </div>
                     <div className="mb-2 text-2xl text-emphesis">{i18n._(t`Fees`)}</div>{' '}
                     <div className="mb-4 text-base text-secondary">
-                      <p>{i18n._(t`- 0.1 MOVR to lock`)}</p>
+                      <p>{i18n._(t`- 0.1 FTM to lock`)}</p>
                     </div>
                     <div className="mb-2 text-2xl text-emphesis">{i18n._(t`Considerations`)}</div>{' '}
                     <div className="mb-4 text-base text-secondary">

@@ -4,7 +4,7 @@ import {
   Ether,
   Percent,
   TradeType,
-  Trade as V2Trade,
+  Trade,
   CurrencyAmount,
 } from '../../sdk'
 import React, { useMemo } from 'react'
@@ -22,7 +22,7 @@ import { useLingui } from '@lingui/react'
 import { formatNumberScale } from '../../functions'
 
 export interface AdvancedSwapDetailsProps {
-  trade?: V2Trade<Currency, Currency, TradeType>
+  trade?: Trade<Currency, Currency, TradeType>
   allowedSlippage: Percent
   minerBribe?: string
 }
@@ -120,7 +120,7 @@ export function AdvancedSwapDetails({ trade, allowedSlippage, minerBribe }: Adva
         <div className="text-sm font-bold text-high-emphesis">{allowedSlippage.toFixed(2)}%</div>
       </RowBetween>
 
-      {minerBribe && (
+      {/* {minerBribe && (
         <RowBetween>
           <RowFixed>
             <div className="text-sm text-secondary">{i18n._(t`Miner Tip`)}</div>
@@ -130,7 +130,7 @@ export function AdvancedSwapDetails({ trade, allowedSlippage, minerBribe }: Adva
             {CurrencyAmount.fromRawAmount(Ether.onChain(ChainId.MAINNET), minerBribe).toFixed(4)} FTM
           </div>
         </RowBetween>
-      )}
+      )} */}
     </div>
   )
 }

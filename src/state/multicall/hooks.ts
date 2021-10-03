@@ -69,14 +69,20 @@ function useCallsData(
     const calls = callKeys.map((key) => parseCallKey(key))
     dispatch(
       addMulticallListeners({
-        chainId: chainId,
+        chainId,
         calls,
         options: { blocksPerFetch },
       })
     )
 
     return () => {
-      dispatch(removeMulticallListeners({ chainId: chainId, calls, options: { blocksPerFetch } }))
+      dispatch(
+        removeMulticallListeners({
+          chainId,
+          calls,
+          options: { blocksPerFetch },
+        })
+      )
     }
   }, [chainId, dispatch, blocksPerFetch, serializedCallKeys])
 

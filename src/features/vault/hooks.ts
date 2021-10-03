@@ -6,7 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   useSoulSummonerContract,
   useETHPairContract,
-  useSoulFantomContract,
+  useSoulFtmContract,
   useSoulVaultContract,
 } from '../../hooks'
 
@@ -30,20 +30,20 @@ export function useUserInfo(farm, token) {
   }, [farm, account])
 
   const result = useSingleCallResult(args ? contract : null, 'userInfo', args)?.result
-  const userLockedUntilResult = useSingleCallResult(args ? contract : null, 'userLockedUntil', args)?.result
+  // const userLockedUntilResult = useSingleCallResult(args ? contract : null, 'userLockedUntil', args)?.result
 
   const value = result?.[0]
   const harvestValue = result?.[3]
-  const userLockedUntilValue = userLockedUntilResult?.[0]
+  // const userLockedUntilValue = userLockedUntilResult?.[0]
 
   const amount = value ? JSBI.BigInt(value.toString()) : undefined
-  const nextHarvestUntil = harvestValue ? JSBI.BigInt(harvestValue.toString()) : undefined
-  const userLockedUntil = userLockedUntilValue ? JSBI.BigInt(userLockedUntilValue.toString()) : undefined
+  // const nextHarvestUntil = harvestValue ? JSBI.BigInt(harvestValue.toString()) : undefined
+  // const userLockedUntil = userLockedUntilValue ? JSBI.BigInt(userLockedUntilValue.toString()) : undefined
 
   return {
     amount: amount ? CurrencyAmount.fromRawAmount(token, amount) : undefined,
-    nextHarvestUntil: nextHarvestUntil ? JSBI.toNumber(nextHarvestUntil) * 1000 : undefined,
-    userLockedUntil: userLockedUntil ? JSBI.toNumber(userLockedUntil) * 1000 : undefined,
+    // nextHarvestUntil: nextHarvestUntil ? JSBI.toNumber(nextHarvestUntil) * 1000 : undefined,
+    // userLockedUntil: userLockedUntil ? JSBI.toNumber(userLockedUntil) * 1000 : undefined,
   }
 }
 
@@ -90,8 +90,7 @@ export function usePendingToken(farm, contract) {
 export function useSoulPositions(contract?: Contract | null) {
   const { account } = useActiveWeb3React()
 
-  const numberOfPools = useSingleCallResult(contract ? contract : null, 'poolLength', undefined, NEVER_RELOAD)
-    ?.result?.[0]
+  const numberOfPools = useSingleCallResult(contract, 'poolLength')?.result
 
   const args = useMemo(() => {
     if (!account || !numberOfPools) {
@@ -102,23 +101,23 @@ export function useSoulPositions(contract?: Contract | null) {
 
   const pendingSoul = useSingleContractMultipleData(args ? contract : null, 'pendingSoul', args)
   const userInfo = useSingleContractMultipleData(args ? contract : null, 'userInfo', args)
-  const userLockedUntil = useSingleContractMultipleData(args ? contract : null, 'userLockedUntil', args)
+  // const userLockedUntil = useSingleContractMultipleData(args ? contract : null, 'userLockedUntil', args)
 
   return useMemo(() => {
-    if (!pendingSoul || !userInfo || !userLockedUntil) {
+    if (!pendingSoul || !userInfo) { // !userLockedUntil
       return []
     }
-    return zip(pendingSoul, userInfo, userLockedUntil)
+    return zip(pendingSoul, userInfo) // userLockedUntil
       .map((data, i) => ({
         id: args[i][0],
         pendingSoul: data[0].result?.[0] || Zero,
         amount: data[1].result?.[0] || Zero,
-        lockedUntil: data[2].result?.[0] || Zero,
+        // lockedUntil: data[2].result?.[0] || Zero,
       }))
       .filter(({ pendingSoul, amount }) => {
         return (pendingSoul && !pendingSoul.isZero()) || (amount && !amount.isZero())
       })
-  }, [args, pendingSoul, userInfo, userLockedUntil])
+  }, [args, pendingSoul, userInfo])
 }
 
 export function usePositions() {
@@ -126,8 +125,7 @@ export function usePositions() {
 }
 
 export function useSoulVaults(contract?: Contract | null) {
-  const numberOfPools = useSingleCallResult(contract ? contract : null, 'poolLength', undefined, NEVER_RELOAD)
-    ?.result?.[0]
+  const numberOfPools = useSingleCallResult(contract, 'poolLength')?.result
 
   const args = useMemo(() => {
     if (!numberOfPools) {
@@ -136,7 +134,7 @@ export function useSoulVaults(contract?: Contract | null) {
     return [...Array(numberOfPools.toNumber()).keys()].map((pid) => [String(pid)])
   }, [numberOfPools])
 
-  const poolInfo = useSingleContractMultipleData(args ? contract : null, 'poolInfo', args)
+  const poolInfo = useSingleCallResult(contract, 'poolLength')?.result
 
   return useMemo(() => {
     if (!poolInfo) {
@@ -146,11 +144,10 @@ export function useSoulVaults(contract?: Contract | null) {
       id: args[i][0],
       lpToken: data[0].result?.['lpToken'] || '',
       allocPoint: data[0].result?.['allocPoint'] || '',
-      lastRewardBlock: data[0].result?.['lastRewardBlock'] || '',
+      lastRewardTime: data[0].result?.['lastRewardTime'] || '',
       accSoulPerShare: data[0].result?.['accSoulPerShare'] || '',
       // depositFeeBP: data[0].result?.['depositFeeBP'] || '',
-      harvestInterval: data[0].result?.['harvestInterval'] || '',
-      totalLp: data[0].result?.['totalLp'] || '',
+      // totalLp: data[0].result?.['totalLp'] || '',
       // lockupDuration: data[0].result?.['lockupDuration'] || 0,
     }))
   }, [args, poolInfo])
@@ -259,20 +256,18 @@ export function useFarmsApi() {
 
 export function useSoulPrice() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  return usePrice(useSoulFantomContract())
+  return usePrice(useSoulFtmContract())
 }
 
-export function useBNBPrice() {
+export function useETHrice() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return usePrice(useETHPairContract())
 }
 
 export function useVaultInfo(contract) {
-  const soulPerSecond = useSingleCallResult(contract ? contract : null, 'soulPerSecond', undefined, NEVER_RELOAD)
-    ?.result?.[0]
 
-  const totalAllocPoint = useSingleCallResult(contract ? contract : null, 'totalAllocPoint', undefined, NEVER_RELOAD)
-    ?.result?.[0]
+  const soulPerSecond = useSingleCallResult(contract ? contract : null, 'soulPerSecond')?.result
+  const totalAllocPoint = useSingleCallResult(contract ? contract : null, 'totalAllocPoint')?.result
 
   return useMemo(() => ({ soulPerSecond, totalAllocPoint }), [soulPerSecond, totalAllocPoint])
 }

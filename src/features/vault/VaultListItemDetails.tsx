@@ -30,7 +30,7 @@ const VaultListItem = ({ farm }) => {
   const [pendingTx, setPendingTx] = useState(false)
   const [depositValue, setDepositValue] = useState('')
   const [withdrawValue, setWithdrawValue] = useState('')
-  const [currentAction, setCurrentAction] = useState({ action: null, lockup: null, callback: null })
+  const [currentAction, setCurrentAction] = useState({ action: null, callback: null }) // lockup: null,
   const [showConfirmation, setShowConfirmation] = useState(false)
 
   const addTransaction = useTransactionAdder()
@@ -47,7 +47,7 @@ const VaultListItem = ({ farm }) => {
   const balance = useTokenBalance(account, liquidityToken)
 
   // TODO: Replace these
-  const { amount, nextHarvestUntil, userLockedUntil } = useUserInfo(farm, liquidityToken)
+  const { amount } = useUserInfo(farm, liquidityToken) // nextHarvestUntil, userLockedUntil
 
   const pendingSoul = usePendingSoul(farm)
 
@@ -66,13 +66,13 @@ const VaultListItem = ({ farm }) => {
             title={i18n._(t`Confirm ${currentAction.action == 'deposit' ? 'Staking' : 'Harvesting'}`)}
             onClose={() => setShowConfirmation(false)}
           />
-          <Typography variant="lg" className="font-medium pt-4">
+          {/* <Typography variant="lg" className="font-medium pt-4">
             {i18n._(
               t`${
                 currentAction.action == 'deposit' ? 'Staking on Soul Vault' : 'Harvesting'
               } will lock your tokens for ${currentAction.lockup}.`
             )}
-          </Typography>
+          </Typography> */}
           <Typography variant="sm" className="font-medium mt-2 pb-4">
             {i18n._(t`Everytime you stake or claim rewards your lock time renews.`)}
           </Typography>
@@ -85,7 +85,8 @@ const VaultListItem = ({ farm }) => {
                   i18n._(
                     t`Please type the word "confirm" to ${
                       currentAction.action == 'deposit' ? 'stake' : 'harvest'
-                    } and lock your tokens for ${currentAction.lockup}.`
+                    } and withdraw your tokens after 14 days or incur a fee`
+                    // } and lock your tokens for ${currentAction.lockup}.`
                   )
                 ) === 'confirm'
               ) {
@@ -94,9 +95,9 @@ const VaultListItem = ({ farm }) => {
               }
             }}
           >
-            <Typography variant="lg">
+            {/* <Typography variant="lg">
               {i18n._(t`${currentAction.action == 'deposit' ? 'Stake' : 'Harvest'} & Lock for ${currentAction.lockup}`)}
-            </Typography>
+            </Typography> */}
           </Button>
         </div>
       </Modal>
@@ -112,11 +113,11 @@ const VaultListItem = ({ farm }) => {
         <Disclosure.Panel className="flex flex-col w-full border-t-0 rounded rounded-t-none bg-dark-800" static>
           <div className="grid grid-cols-2 gap-4 p-4">
             <div className="col-span-2 text-center md:col-span-1">
-              {farm.depositFeeBP && (
+              {/* {farm.depositFeeBP && (
                 <div className="pr-4 mb-2 text-left cursor-pointer text-red">{`${i18n._(
                   t`Deposit Fee`
                 )}: ${formatPercent(farm.depositFeeBP / 100)}`}</div>
-              )}
+              )} */}
               {account && (
                 <div className="pr-4 mb-2 text-left cursor-pointer text-secondary">
                   {i18n._(t`Wallet Balance`)}:{' '}
@@ -185,12 +186,13 @@ const VaultListItem = ({ farm }) => {
                       }
                       setPendingTx(false)
                     }
-                    if (farm?.lockupDuration == 0) {
-                      fn()
-                    } else {
+                    // if (farm?.lockupDuration == 0) {
+                    //   fn()
+                    // } else
+                    {
                       setCurrentAction({
                         action: 'deposit',
-                        lockup: `${farm?.lockupDuration / 86400} days`,
+                        // lockup: `${farm?.lockupDuration / 86400} days`,
                         callback: fn,
                       })
                       setShowConfirmation(true)
@@ -202,9 +204,9 @@ const VaultListItem = ({ farm }) => {
               )}
             </div>
             <div className="col-span-2 text-center md:col-span-1">
-              {farm.depositFeeBP && !isMobile && (
+              {/* {farm.depositFeeBP && !isMobile && (
                 <div className="pr-4 mb-2 text-left cursor-pointer text-secondary" style={{ height: '24px' }} />
-              )}
+              )} */}
               {account && (
                 <div className="pr-4 mb-2 text-left cursor-pointer text-secondary">
                   {i18n._(t`Your Staked`)}: {formatNumberScale(amount?.toSignificant(6)) ?? 0}
@@ -244,10 +246,10 @@ const VaultListItem = ({ farm }) => {
                   pendingTx ||
                   !typedWithdrawValue ||
                   amount.lessThan(typedWithdrawValue) ||
-                  (amount && !amount.equalTo(ZERO) &&
-                    farm?.lockupDuration > 0 &&
-                    moment.unix(userLockedUntil / 1000).isAfter(new Date()))
-                }
+                  (amount && !amount.equalTo(ZERO) // &&
+                    // farm?.lockupDuration > 0 &&
+                    // moment.unix(userLockedUntil / 1000).isAfter(new Date())
+                  )}
                 onClick={async () => {
                   setPendingTx(true)
                   try {
@@ -269,12 +271,13 @@ const VaultListItem = ({ farm }) => {
               >
                 {amount &&
                 !amount.equalTo(ZERO) &&
-                farm?.lockupDuration > 0 &&
-                moment.unix(userLockedUntil / 1000).isAfter(new Date())
-                  ? `Unlocks ${moment.unix(userLockedUntil / 1000).fromNow()} (${moment
-                      .unix(userLockedUntil / 1000)
-                      .format()})`
-                  : i18n._(t`Unstake`)}
+                // farm?.lockupDuration > 0 &&
+                // moment.unix(userLockedUntil / 1000).isAfter(new Date())
+                  // ? `Fee Ends ${moment.unix(userLockedUntil / 1000).fromNow()} (${moment
+                      // .unix(userLockedUntil / 1000)
+                      // .format()})`
+                  // : 
+                  i18n._(t`Unstake`)}
               </Button>
             </div>
           </div>
@@ -283,8 +286,8 @@ const VaultListItem = ({ farm }) => {
               <Button
                 color="gradient"
                 className="w-full"
-                variant={!!nextHarvestUntil && nextHarvestUntil > Date.now() ? 'outlined' : 'filled'}
-                disabled={!!nextHarvestUntil && nextHarvestUntil > Date.now()}
+                // variant={!!nextHarvestUntil && nextHarvestUntil > Date.now() ? 'outlined' : 'filled'}
+                // disabled={!!nextHarvestUntil && nextHarvestUntil > Date.now()}
                 onClick={async () => {
                   const fn = async () => {
                     setPendingTx(true)
@@ -308,7 +311,7 @@ const VaultListItem = ({ farm }) => {
                   } else {
                     setCurrentAction({
                       action: 'harvest',
-                      lockup: `${farm?.lockupDuration / 86400} days`,
+                      // lockup: `${farm?.lockupDuration / 86400} days`,
                       callback: fn,
                     })
                     setShowConfirmation(true)

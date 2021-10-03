@@ -346,9 +346,6 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId 
   } else if (inputCurrency === outputCurrency) {
     // clear output if identical
     outputCurrency = ''
-  } else {
-    // default output is SOUL
-    outputCurrency = 'SOUL'
   }
 
   const recipient = validatedRecipient(parsedQs.recipient)

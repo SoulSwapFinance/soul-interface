@@ -20,8 +20,8 @@ msgstr ""
 "(COMING SOON) Accrue automatic yield through flash loans and\n"
 "SOUL strategies"
 
-msgid "- 0.1 MOVR to lock"
-msgstr "- 0.1 MOVR to lock"
+msgid "- 0.1 FTM to lock"
+msgstr "- 0.1 FTM to lock"
 
 msgid "- Always DYOR"
 msgstr "- Always DYOR"
@@ -328,9 +328,6 @@ msgstr "Current"
 msgid "Deposit"
 msgstr "Deposit"
 
-msgid "Deposit Fee"
-msgstr "Deposit Fee"
-
 msgid "Deposit SOUL into BentoBox"
 msgstr "Deposit SOUL into BentoBox"
 
@@ -475,8 +472,8 @@ msgstr ""
 msgid "German"
 msgstr "German"
 
-msgid "Give me some MOVR"
-msgstr "Give me some MOVR"
+msgid "Give me some FTM"
+msgstr "Give me some FTM"
 
 msgid "Go Back"
 msgstr "Go Back"
@@ -586,9 +583,6 @@ msgstr "Limit order"
 msgid "Links"
 msgstr "Links"
 
-msgid "Liquidity"
-msgstr "Liquidity"
-
 msgid "Lists"
 msgstr "Lists"
 
@@ -661,9 +655,6 @@ msgstr "Migrating"
 
 msgid "Migration is done in one-click using your signature (permit)"
 msgstr "Migration is done in one-click using your signature (permit)"
-
-msgid "Miner Tip"
-msgstr "Miner Tip"
 
 msgid "Minimum Received"
 msgstr "Minimum Received"
@@ -777,8 +768,8 @@ msgstr "Please enter an amount"
 msgid "Please refer to the"
 msgstr "Please refer to the"
 
-msgid "Please type the word \"confirm\" to {0} and lock your tokens for {1}."
-msgstr "Please type the word \"confirm\" to {0} and lock your tokens for {1}."
+msgid "Please type the word \"confirm\" to {0} and withdraw your tokens after 14 days or incur a fee"
+msgstr "Please type the word \"confirm\" to {0} and withdraw your tokens after 14 days or incur a fee"
 
 msgid "Pool"
 msgstr "Pool"
@@ -927,14 +918,14 @@ msgstr "Share of Pool:"
 msgid "Slippage tolerance"
 msgstr "Slippage tolerance"
 
+msgid "Solarbeam"
+msgstr "Solarbeam"
+
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 
 msgid "Soon"
 msgstr "Soon"
-
-msgid "SoulSwap"
-msgstr "SoulSwap"
 
 msgid "Spanish"
 msgstr "Spanish"
@@ -1029,9 +1020,6 @@ msgstr "This transaction will not succeed either due to price movement or fee on
 
 msgid "Timeframe"
 msgstr "Timeframe"
-
-msgid "Tip to encourage miners to select this transaction."
-msgstr "Tip to encourage miners to select this transaction."
 
 msgid "Toggle Expert Mode"
 msgstr "Toggle Expert Mode"
@@ -1268,17 +1256,11 @@ msgid_plural "Tokens"
 msgstr[0] "Token"
 msgstr[1] "Tokens"
 
-msgid "{0} & Lock for {1}"
-msgstr "{0} & Lock for {1}"
-
 msgid "{0} Deposited"
 msgstr "{0} Deposited"
 
 msgid "{0} Strategy"
 msgstr "{0} Strategy"
-
-msgid "{0} will lock your tokens for {1}."
-msgstr "{0} will lock your tokens for {1}."
 
 msgid "{0} {1} per {2}"
 msgstr "{0} {1} per {2}"

@@ -20,6 +20,8 @@ import { PriceContext } from '../../contexts/priceContext'
 import { Info } from 'react-feather'
 import moment from 'moment'
 
+const totalLp = 11; // todo: update + make dynamic
+
 const VaultListItem = ({ farm, ...rest }) => {
   const { chainId } = useActiveWeb3React()
 
@@ -54,17 +56,18 @@ const VaultListItem = ({ farm, ...rest }) => {
     farm.lpPrice = lpPrice
     farm.soulPrice = soulPrice
 
-    return Number(farm.totalLp / 10 ** decimals) * lpPrice
+    // return Number(farm.totalLp / 10 ** decimals) * lpPrice
+    return Number(totalLp / 10 ** decimals) * lpPrice
   }
 
   const tvl = getTvl()
 
-  const roiPerBlock =
+  const roiPerSecond =
     farm?.rewards?.reduce((previousValue, currentValue) => {
-      return previousValue + currentValue.rewardPerBlock * currentValue.rewardPrice
+      return previousValue + currentValue.rewardPerSecond * currentValue.rewardPrice
     }, 0) / tvl
 
-  const roiPerHour = roiPerBlock * farm.blocksPerHour
+  const roiPerHour = roiPerSecond * farm.secondsPerHour
   const roiPerDay = roiPerHour * 24
   const roiPerMonth = roiPerDay * 30
   const roiPerYear = roiPerDay * 365
@@ -98,9 +101,9 @@ const VaultListItem = ({ farm, ...rest }) => {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col justify-center font-bold">
+                {/* <div className="flex flex-col justify-center font-bold">
                   {farm?.lockupDuration == 0 ? 'No lockup' : `${farm?.lockupDuration / 86400} days`}
-                </div>
+                </div> */}
                 <div className="flex flex-col justify-center font-bold">{formatNumberScale(tvl, true, 2)}</div>
                 <div className="flex-row items-center hidden space-x-4 lg:flex">
                   <div className="flex items-center space-x-2">

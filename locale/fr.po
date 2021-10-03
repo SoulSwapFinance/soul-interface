@@ -18,7 +18,7 @@ msgid ""
 "SOUL strategies"
 msgstr ""
 
-msgid "- 0.1 MOVR to lock"
+msgid "- 0.1 FTM to lock"
 msgstr ""
 
 msgid "- Always DYOR"
@@ -322,9 +322,6 @@ msgstr ""
 msgid "Deposit"
 msgstr ""
 
-msgid "Deposit Fee"
-msgstr ""
-
 msgid "Deposit SOUL into BentoBox"
 msgstr ""
 
@@ -460,7 +457,7 @@ msgstr ""
 msgid "German"
 msgstr ""
 
-msgid "Give me some MOVR"
+msgid "Give me some FTM"
 msgstr ""
 
 msgid "Go Back"
@@ -571,9 +568,6 @@ msgstr ""
 msgid "Links"
 msgstr ""
 
-msgid "Liquidity"
-msgstr ""
-
 msgid "Lists"
 msgstr ""
 
@@ -643,9 +637,6 @@ msgid "Migrating"
 msgstr ""
 
 msgid "Migration is done in one-click using your signature (permit)"
-msgstr ""
-
-msgid "Miner Tip"
 msgstr ""
 
 msgid "Minimum Received"
@@ -758,7 +749,7 @@ msgstr ""
 msgid "Please refer to the"
 msgstr ""
 
-msgid "Please type the word \"confirm\" to {0} and lock your tokens for {1}."
+msgid "Please type the word \"confirm\" to {0} and withdraw your tokens after 14 days or incur a fee"
 msgstr ""
 
 msgid "Pool"
@@ -908,13 +899,13 @@ msgstr ""
 msgid "Slippage tolerance"
 msgstr ""
 
+msgid "Solarbeam"
+msgstr ""
+
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr ""
 
 msgid "Soon"
-msgstr ""
-
-msgid "SoulSwap"
 msgstr ""
 
 msgid "Spanish"
@@ -1007,9 +998,6 @@ msgid "This transaction will not succeed either due to price movement or fee on 
 msgstr ""
 
 msgid "Timeframe"
-msgstr ""
-
-msgid "Tip to encourage miners to select this transaction."
 msgstr ""
 
 msgid "Toggle Expert Mode"
@@ -1245,16 +1233,10 @@ msgid_plural "Tokens"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "{0} & Lock for {1}"
-msgstr ""
-
 msgid "{0} Deposited"
 msgstr ""
 
 msgid "{0} Strategy"
-msgstr ""
-
-msgid "{0} will lock your tokens for {1}."
 msgstr ""
 
 msgid "{0} {1} per {2}"

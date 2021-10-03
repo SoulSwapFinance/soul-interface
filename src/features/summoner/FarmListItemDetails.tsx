@@ -44,7 +44,7 @@ const FarmListItem = ({ farm }) => {
   const balance = useTokenBalance(account, liquidityToken)
 
   // TODO: Replace these
-  const { amount, nextHarvestUntil } = useUserInfo(farm, liquidityToken)
+  const { amount } = useUserInfo(farm, liquidityToken) // nextHarvestUntil
 
   const pendingSoul = usePendingSoul(farm)
 
@@ -70,11 +70,11 @@ const FarmListItem = ({ farm }) => {
       <Disclosure.Panel className="flex flex-col w-full border-t-0 rounded rounded-t-none bg-dark-800" static>
         <div className="grid grid-cols-2 gap-4 p-4">
           <div className="col-span-2 text-center md:col-span-1">
-            {farm.depositFeeBP && (
+            {/* {farm.depositFeeBP && (
               <div className="pr-4 mb-2 text-left cursor-pointer text-red">{`${i18n._(t`Deposit Fee`)}: ${formatPercent(
                 farm.depositFeeBP / 100
               )}`}</div>
-            )}
+            )} */}
             {account && (
               <div className="pr-4 mb-2 text-left cursor-pointer text-secondary">
                 {i18n._(t`Wallet Balance`)}: {formatNumberScale(balance?.toSignificant(4, undefined, 2) ?? 0, false, 4)}
@@ -158,9 +158,9 @@ const FarmListItem = ({ farm }) => {
             )}
           </div>
           <div className="col-span-2 text-center md:col-span-1">
-            {farm.depositFeeBP && !isMobile && (
+            {/* {farm.depositFeeBP && !isMobile && (
               <div className="pr-4 mb-2 text-left cursor-pointer text-secondary" style={{ height: '24px' }} />
-            )}
+            )} */}
             {account && (
               <div className="pr-4 mb-2 text-left cursor-pointer text-secondary">
                 {i18n._(t`Deposited`)}: {formatNumberScale(amount?.toSignificant(6)) ?? 0}
@@ -225,8 +225,8 @@ const FarmListItem = ({ farm }) => {
             <Button
               color="gradient"
               className="w-full"
-              variant={!!nextHarvestUntil && nextHarvestUntil > Date.now() ? 'outlined' : 'filled'}
-              disabled={!!nextHarvestUntil && nextHarvestUntil > Date.now()}
+              // variant={!!nextHarvestUntil && nextHarvestUntil > Date.now() ? 'outlined' : 'filled'}
+              // disabled={!!nextHarvestUntil && nextHarvestUntil > Date.now()}
               onClick={async () => {
                 setPendingTx(true)
                 try {

@@ -23,8 +23,10 @@ import useSummoner from '../../features/summoner/useSummoner'
 import { useTransactionAdder } from '../../state/transactions/hooks'
 import { useTVL } from '../../hooks/useV2Pairs'
 import { getAddress } from '@ethersproject/address'
-import { useVaults } from '../../features/vault/hooks'
+// import { useVaults } from '../../features/vault/hooks'
 import Search from '../../components/Search'
+
+let totalLp = 11 // todo: fix
 
 export default function Summoner(): JSX.Element {
   const { i18n } = useLingui()
@@ -38,7 +40,7 @@ export default function Summoner(): JSX.Element {
   const positions = usePositions()
 
   const farms = useFarms()
-  const vaults = useVaults()
+  // const vaults = useVaults()
 
   const summonerInfo = useDistributorInfo()
 
@@ -58,9 +60,10 @@ export default function Summoner(): JSX.Element {
     return previousValue + currentValue.tvl
   }, 0)
 
-  let sumTvlVaults = vaults.reduce((previousValue, currentValue) => {
-    return previousValue + (currentValue.totalLp / 1e18) * soulPrice
-  }, 0)
+  // let sumTvlVaults = vaults.reduce((previousValue, currentValue) => {
+  //   return previousValue + (totalLp / 1e18) * soulPrice // todo: fix
+  //   // return previousValue + (currentValue.totalLp / 1e18) * soulPrice // todo: fix
+  // }, 0)
 
   const secondsPerDay = 86400
   const secondsPerHour = 3600
@@ -104,7 +107,8 @@ export default function Summoner(): JSX.Element {
         lpPrice = 0
       }
 
-      return Number(pool.totalLp / 10 ** decimals) * lpPrice
+      return Number(totalLp / 10 ** decimals) * lpPrice // todo: fix
+      // return Number(pool.totalLp / 10 ** decimals) * lpPrice // todo: fix
     }
 
     const rewards = getRewards()

@@ -1,5 +1,5 @@
 import { AlertTriangle, ArrowDown } from 'react-feather'
-import { Currency, Percent, TradeType, Trade as V2Trade } from '../../sdk'
+import { Currency, Percent, TradeType, Trade } from '../../sdk'
 import React, { useState } from 'react'
 import { formatNumberScale, isAddress, shortenAddress } from '../../functions'
 
@@ -25,7 +25,7 @@ export default function SwapModalHeader({
   onAcceptChanges,
   minerBribe,
 }: {
-  trade: V2Trade<Currency, Currency, TradeType>
+  trade: Trade<Currency, Currency, TradeType>
   allowedSlippage: Percent
   recipient: string | null
   showAcceptChanges: boolean

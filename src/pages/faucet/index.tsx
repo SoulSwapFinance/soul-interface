@@ -92,7 +92,7 @@ export default function Faucet(): JSX.Element {
             <div className="p-4 mb-3 space-y-1 text-center">
               <Typography component="h1" variant="base">
                 Faucet Balance:{' '}
-                {formatNumberScale(tokenBalance[FAUCET_ADDRESS[chainId]]?.toSignificant(4, undefined, 2) ?? 0, false, 4)} MOVR
+                {formatNumberScale(tokenBalance[FAUCET_ADDRESS[chainId]]?.toSignificant(4, undefined, 2) ?? 0, false, 4)} FTM
               </Typography>
               <Typography component="h1" variant="base">
                 Faucet Address: {FAUCET_ADDRESS}
@@ -119,7 +119,7 @@ export default function Faucet(): JSX.Element {
                         </AutoRow>
                       </div>
                     ) : (
-                      i18n._(t`Give me some MOVR`)
+                      i18n._(t`Give me some FTM`)
                     )}
                   </ButtonError>
                 )}
