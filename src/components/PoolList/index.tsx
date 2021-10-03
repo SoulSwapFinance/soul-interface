@@ -23,7 +23,7 @@ const TokenBalance = ({ farm }: any) => {
         <Paper className="bg-dark-800">
           <div
             className="grid grid-cols-3 px-4 py-4 text-sm rounded cursor-pointer select-none"
-            onClick={() => Router.push(`zap?poolAddress=${farm.pairAddress}&currencyId=ETH`)}
+            onClick={() => Router.push(`zap?poolAddress=${farm.pairAddress}&currencyId=FTM`)}
           >
             <div className="flex items-center">
               <div className="mr-4">

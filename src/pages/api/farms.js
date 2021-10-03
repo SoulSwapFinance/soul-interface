@@ -1,5 +1,5 @@
 const Web3 = require('web3')
-import distributorAbi from '../../constants/abis/masterchef.json'
+import summonerAbi from '../../constants/abis/soulswap/soulsummoner.json'
 import pairAbi from '../../constants/abis/uniswap-v2-pair.json'
 import { POOLS } from '../../constants/farms'
 import { ChainId } from '../../sdk'
@@ -16,8 +16,8 @@ let farmsResult = null
 
 export async function farms() {
   if (!farmsResult) {
-    let distributorContract = new web3.eth.Contract(distributorAbi, '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B')
-    const poolLength = await distributorContract.methods.poolLength().call()
+    let summonerContract = new web3.eth.Contract(summonerAbi, '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B')
+    const poolLength = await summonerContract.methods.poolLength().call()
 
     const forHelper = []
     for (let index = 0; index < poolLength; index++) {
@@ -28,7 +28,7 @@ export async function farms() {
     const poolsInfoPromises = []
 
     for (const poolIndex of forHelper) {
-      poolsInfoPromises.push(distributorContract.methods.poolInfo(poolIndex).call())
+      poolsInfoPromises.push(summonerContract.methods.poolInfo(poolIndex).call())
     }
 
     const poolInfosResult = await Promise.all(poolsInfoPromises)
@@ -61,8 +61,8 @@ export async function farms() {
           lpContract.methods.balanceOf('0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B').call(),
         ]
 
-        const [reserves, totalSupply, token0, token1, distributorBalance] = await Promise.all(promisesCall)
-        const distributorRatio = distributorBalance / totalSupply
+        const [reserves, totalSupply, token0, token1, summonerBalance] = await Promise.all(promisesCall)
+        const summonerRatio = summonerBalance / totalSupply
 
         const token0info =
           web3.utils.toChecksumAddress(token0) == web3.utils.toChecksumAddress(staticInfo.token0.id)
@@ -74,8 +74,8 @@ export async function farms() {
             : staticInfo.token0
 
         const { reserve0, reserve1 } = reserves
-        const token0amount = Number(Number(Number(reserve0) / 10 ** token0info?.decimals).toString()) * distributorRatio
-        const token1amount = Number(Number(Number(reserve1) / 10 ** token1info?.decimals).toString()) * distributorRatio
+        const token0amount = Number(Number(Number(reserve0) / 10 ** token0info?.decimals).toString()) * summonerRatio
+        const token1amount = Number(Number(Number(reserve1) / 10 ** token1info?.decimals).toString()) * summonerRatio
 
         ret.push({
           address: web3.utils.toChecksumAddress(pool.lpToken),

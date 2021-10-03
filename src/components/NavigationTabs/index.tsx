@@ -24,7 +24,7 @@ export function FindPoolTabs() {
   return (
     <Tabs>
       <RowBetween className="items-center text-xl">
-        <HistoryLink href="/exchange/pool">
+        <HistoryLink href="/pool">
           <a>
             <ArrowLeftIcon width="1em" height="1em" />
           </a>

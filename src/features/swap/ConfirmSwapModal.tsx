@@ -100,7 +100,7 @@ export default function ConfirmSwapModal({
   )
 
   const pendingText2 = minerBribe
-    ? `Plus ${CurrencyAmount.fromRawAmount(Ether.onChain(ChainId.MAINNET), minerBribe).toSignificant(6)} ETH Miner Tip`
+    ? `Plus ${CurrencyAmount.fromRawAmount(Ether.onChain(ChainId.MAINNET), minerBribe).toSignificant(6)} FTM Miner Tip`
     : undefined
 
   const confirmationContent = useCallback(

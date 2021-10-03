@@ -133,7 +133,7 @@ export default function PoolFinder() {
                 gap={'0 3px'}
               >
                 {i18n._(t`Pool Found!`)}
-                <Link href={`/exchange/pool`}>
+                <Link href={`/pool`}>
                   <a className="text-center text-yellow text-bold">{i18n._(t`Manage this pool`)}</a>
                 </Link>
               </AutoRow>

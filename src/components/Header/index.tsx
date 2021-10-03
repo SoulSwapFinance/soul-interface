@@ -53,7 +53,7 @@ function AppBar(): JSX.Element {
                       </NavLink>
                       )}
                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                      <NavLink href="/exchange/pool">
+                      <NavLink href="/pool">
                         <a
                           id={`pool-nav-link`}
                           className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
@@ -316,7 +316,7 @@ function AppBar(): JSX.Element {
             <Popover.Panel className="sm:hidden">
               <div className="flex flex-col px-4 pt-2 pb-3 space-y-1">
               { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                <Link href={'/exchange/swap'}>
+                <Link href={'/swap'}>
                   <a
                     id={`swap-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
@@ -326,7 +326,7 @@ function AppBar(): JSX.Element {
                 </Link>
               )}
                 { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                  <Link href={'/exchange/pool'}>
+                  <Link href={'/pool'}>
                   <a
                     id={`pool-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"

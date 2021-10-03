@@ -127,7 +127,7 @@ export function AdvancedSwapDetails({ trade, allowedSlippage, minerBribe }: Adva
             <QuestionHelper text={i18n._(t`Tip to encourage miners to select this transaction.`)} />
           </RowFixed>
           <div className="text-sm font-bold text-high-emphesis">
-            {CurrencyAmount.fromRawAmount(Ether.onChain(ChainId.MAINNET), minerBribe).toFixed(4)} ETH
+            {CurrencyAmount.fromRawAmount(Ether.onChain(ChainId.MAINNET), minerBribe).toFixed(4)} FTM
           </div>
         </RowBetween>
       )}

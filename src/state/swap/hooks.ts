@@ -66,7 +66,7 @@ export function useSwapActionHandlers(): {
           currencyId: currency.isToken
             ? currency.address
             : currency.isNative
-            ? 'ETH'
+            ? 'FTM'
             : '',
         })
       )
@@ -314,7 +314,7 @@ function parseCurrencyFromURLParameter(urlParam: any): string {
   if (typeof urlParam === 'string') {
     const valid = isAddress(urlParam)
     if (valid) return valid
-    if (urlParam.toUpperCase() === 'ETH') return 'ETH'
+    if (urlParam.toUpperCase() === 'FTM') return 'FTM'
   }
   return ''
 }
@@ -341,11 +341,14 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId 
   let inputCurrency = parseCurrencyFromURLParameter(parsedQs.inputCurrency)
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
   if (inputCurrency === '' && outputCurrency === '') {
-      // default to ETH input
-      inputCurrency = 'ETH'    
+      // default to FTM input
+      inputCurrency = 'FTM'    
   } else if (inputCurrency === outputCurrency) {
     // clear output if identical
     outputCurrency = ''
+  } else {
+    // default output is SOUL
+    outputCurrency = 'SOUL'
   }
 
   const recipient = validatedRecipient(parsedQs.recipient)

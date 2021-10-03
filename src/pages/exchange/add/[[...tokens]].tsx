@@ -318,7 +318,7 @@ export default function Add() {
           router.push(`/exchange/add/${newCurrencyIdB}`)
         }
       } else {
-        router.push(`/exchange/add/${currencyIdA ? currencyIdA : 'ETH'}/${newCurrencyIdB}`)
+        router.push(`/exchange/add/${currencyIdA ? currencyIdA : 'FTM'}/${newCurrencyIdB}`)
       }
     },
     [currencyIdA, router, currencyIdB]
@@ -512,7 +512,7 @@ export default function Add() {
           </div>
         </DoubleGlowShadow>
         <div className="flex items-center px-4">
-          <NavLink href="/exchange/pool">
+          <NavLink href="/pool">
             <a className="flex items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
               <span>{i18n._(t`View Liquidity Positions`)}</span>
             </a>

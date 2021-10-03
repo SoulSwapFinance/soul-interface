@@ -3,22 +3,20 @@ import '../styles/index.css'
 import '@fontsource/dm-sans/index.css'
 import 'react-virtualized/styles.css'
 import 'react-tabs/style/react-tabs.css'
+import 'react-datetime/css/react-datetime.css'
 
 import * as plurals from 'make-plural/plurals'
 
-import { Fragment, FunctionComponent } from 'react'
+import React, { Fragment, FunctionComponent } from 'react'
 import { NextComponentType, NextPageContext } from 'next'
-import store, { persistor } from '../state'
 
 import type { AppProps } from 'next/app'
 import ApplicationUpdater from '../state/application/updater'
 import DefaultLayout from '../layouts/Default'
-import Dots from '../components/Dots'
 import Head from 'next/head'
 import { I18nProvider } from '@lingui/react'
 import ListsUpdater from '../state/lists/updater'
 import MulticallUpdater from '../state/multicall/updater'
-import { PersistGate } from 'redux-persist/integration/react'
 import ReactGA from 'react-ga'
 import { Provider as ReduxProvider } from 'react-redux'
 import TransactionUpdater from '../state/transactions/updater'
@@ -28,11 +26,16 @@ import { Web3ReactProvider } from '@web3-react/core'
 import dynamic from 'next/dynamic'
 import getLibrary from '../functions/getLibrary'
 import { i18n } from '@lingui/core'
-// import { persistStore } from 'redux-persist'
+import store from '../state'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import PriceProvider  from '../contexts/priceContext'
+import FarmContext from '../contexts/farmContext'
+import { usePricesApi } from '../features/summoner/hooks'
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
 const Web3ProviderNetwork = dynamic(() => import('../components/Web3ProviderNetwork'), { ssr: false })
+const Web3ProviderNetworkBridge = dynamic(() => import('../components/Web3ProviderBridge'), { ssr: false })
 
 if (typeof window !== 'undefined' && !!window.ethereum) {
   window.ethereum.autoRefreshOnNetworkChange = false
@@ -74,7 +77,7 @@ function MyApp({
   useEffect(() => {
     async function load(locale) {
       const { messages } = await import(`@lingui/loader!./../../locale/${locale}.po`)
-      i18n.loadLocaleData(locale, { plurals: plurals[locale] })
+      i18n.loadLocaleData(locale, { plurals: plurals[locale.toLowerCase() == 'pt-br' ? 'pt' : 'en'] })
       i18n.load(locale, messages)
       i18n.activate(locale)
     }
@@ -100,18 +103,14 @@ function MyApp({
           name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
         />
-        <title key="title">SOUL</title>
+        <title key="title">Solarbeam</title>
 
-        <meta
-          key="description"
-          name="description"
-          content="Be a DeFi Summoner with Soul. Swap, earn, grow yield, lend, borrow, leverage all on one decentralized, community driven platform. Welcome home to DeFi"
-        />
+        <meta key="description" name="description" content="Solarbeam - AMM on Moonriver." />
 
-        <meta name="application-name" content="SOUL DEFI" />
+        <meta name="application-name" content="Solarbeam App" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="SOUL DEFI" />
+        <meta name="apple-mobile-web-app-title" content="Solarbeam App" />
 
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
@@ -120,48 +119,43 @@ function MyApp({
         <meta name="theme-color" content="#F338C3" />
 
         <meta key="twitter:card" name="twitter:card" content="app" />
-        <meta key="twitter:title" name="twitter:title" content="SOUL DEFI" />
-        <meta key="twitter:url" name="twitter:url" content="https://app.soulswap.finance" />
-        <meta
-          key="twitter:description"
-          name="twitter:description"
-          content="Be a DeFi summoner with Soul. Swap, earn, stack yields, lend, borrow, leverage all on one decentralized, community driven platform. Welcome home to DeFi"
-        />
-        <meta key="twitter:image" name="twitter:image" content="https://app.soulswap.finance/icons/icon-192x192.png" />
-        <meta key="twitter:creator" name="twitter:creator" content="@SoulSwapFinance" />
+        <meta key="twitter:title" name="twitter:title" content="Solarbeam App" />
+        <meta key="twitter:url" name="twitter:url" content="https://solarbeam.io" />
+        <meta key="twitter:description" name="twitter:description" content="Solarbeam - AMM on Moonriver." />
+        <meta key="twitter:image" name="twitter:image" content="https://solarbeam.io/icons/icon.png" />
+        <meta key="twitter:creator" name="twitter:creator" content="@solarbeam.io" />
         <meta key="og:type" property="og:type" content="website" />
-        <meta key="og:site_name" property="og:site_name" content="SOUL DEFI" />
-        <meta key="og:url" property="og:url" content="https://app.soulswap.finance" />
-        <meta key="og:image" property="og:image" content="https://app.soulswap.finance/apple-touch-icon.png" />
-        <meta
-          key="og:description"
-          property="og:description"
-          content="Be a DeFi Summoner with Soul. Swap, earn, grow yield, lend, borrow, leverage all on one decentralized, community driven platform. Welcome home to DeFi"
-        />
+        <meta key="og:site_name" property="og:site_name" content="Solarbeam App" />
+        <meta key="og:url" property="og:url" content="https://solarbeam.io" />
+        <meta key="og:image" property="og:image" content="https://solarbeam.io/icon.png" />
+        <meta key="og:description" property="og:description" content="Solarbeam - AMM on Moonriver." />
       </Head>
+
       <I18nProvider i18n={i18n} forceRenderOnLocaleChange={false}>
         <Web3ReactProvider getLibrary={getLibrary}>
           <Web3ProviderNetwork getLibrary={getLibrary}>
-            <Web3ReactManager>
-              <ReduxProvider store={store}>
-                <PersistGate loading={<Dots>loading</Dots>} persistor={persistor}>
-                  <>
-                    <ListsUpdater />
-                    <UserUpdater />
-                    <ApplicationUpdater />
-                    <TransactionUpdater />
-                    <MulticallUpdater />
-                  </>
-                  <Provider>
-                    <Layout>
-                      <Guard>
-                        <Component {...pageProps} />
-                      </Guard>
-                    </Layout>
-                  </Provider>
-                </PersistGate>
-              </ReduxProvider>
-            </Web3ReactManager>
+            <Web3ProviderNetworkBridge getLibrary={getLibrary}>
+              <Web3ReactManager>
+                <ReduxProvider store={store}>
+                  <PriceProvider>
+                    <>
+                      <ListsUpdater />
+                      <UserUpdater />
+                      <ApplicationUpdater />
+                      <TransactionUpdater />
+                      <MulticallUpdater />
+                    </>
+                    <Provider>
+                      <Layout>
+                        <Guard>
+                          <Component {...pageProps} />
+                        </Guard>
+                      </Layout>
+                    </Provider>
+                  </PriceProvider>
+                </ReduxProvider>
+              </Web3ReactManager>
+            </Web3ProviderNetworkBridge>
           </Web3ProviderNetwork>
         </Web3ReactProvider>
       </I18nProvider>

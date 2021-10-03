@@ -1,14 +1,47 @@
 import { ChainId, JSBI, Percent } from '../sdk'
-import { fortmatic, injected, portis, torus, walletconnect, walletlink } from '../connectors'
-import { RPC } from '../connectors'
+import { fortmatic, injected, portis, torus, walletconnect, walletlink } from '../connectors' // binance
+
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { BigNumber } from 'ethers'
-type AddressMap = { [chainId: number]: string }
 
-export const POOL_DENY = []
+export const RPC = {
+  [ChainId.MAINNET]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
+  // [ChainId.ROPSTEN]: 'https://eth-ropsten.alchemyapi.io/v2/cidKix2Xr-snU3f6f6Zjq_rYdalKKHmW',
+  // [ChainId.RINKEBY]: 'https://eth-rinkeby.alchemyapi.io/v2/XVLwDlhGP6ApBXFz_lfv0aZ6VmurWhYD',
+  // [ChainId.GÖRLI]: 'https://eth-goerli.alchemyapi.io/v2/Dkk5d02QjttYEoGmhZnJG37rKt8Yl3Im',
+  // [ChainId.KOVAN]: 'https://eth-kovan.alchemyapi.io/v2/6OVAa_B_rypWWl9HqtiYK26IRxXiYqER',
+  [ChainId.FANTOM]: 'https://rpc.ftm.tools',
+  [ChainId.FANTOM_TESTNET]: 'https://rpc.testnet.fantom.network',
+  // [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com',
+  // [ChainId.MATIC]:
+  //     'https://apis.ankr.com/e22bfa5f5a124b9aa1f911b742f6adfe/c06bb163c3c2a10a4028959f4d82836d/polygon/full/main',
+  // [ChainId.MATIC_TESTNET]: 'https://rpc-mumbai.matic.today',
+  // [ChainId.XDAI]: 'https://rpc.xdaichain.com',
+  // [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
+  // [ChainId.BSC_TESTNET]: 'https://data-seed-prebsc-2-s3.binance.org:8545',
+  // [ChainId.MOONBEAM_TESTNET]: 'https://rpc.testnet.moonbeam.network',
+  // [ChainId.MOONRIVER]: 'https://moonriver-api.bwarelabs.com/0e63ad82-4f98-46f9-8496-f75657e3a8e', //'https://moonriver.api.onfinality.io/public',
+  // [ChainId.AVALANCHE]: 'https://api.avax.network/ext/bc/C/rpc',
+  // [ChainId.AVALANCHE_TESTNET]: 'https://api.avax-test.network/ext/bc/C/rpc',
+  // [ChainId.HECO]: 'https://http-mainnet.hecochain.com',
+  // [ChainId.HECO_TESTNET]: 'https://http-testnet.hecochain.com',
+  // [ChainId.HARMONY]: 'https://api.harmony.one',
+  // [ChainId.HARMONY_TESTNET]: 'https://api.s0.b.hmny.io',
+  // [ChainId.OKEX]: 'https://exchainrpc.okex.org',
+  // [ChainId.OKEX_TESTNET]: 'https://exchaintestrpc.okex.org',
+  // [ChainId.ARBITRUM]: 'https://arb1.arbitrum.io/rpc',
+}
+
+export const POOL_DENY = ['14', '29', '45', '30']
 
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
-export const AVERAGE_BLOCK_TIME_IN_SECS = 1
+export const AVERAGE_BLOCK_TIME_IN_SECS = 13
+
+export const AVERAGE_BLOCK_TIME = {
+  // [ChainId.ROPSTEN]: AVERAGE_BLOCK_TIME_IN_SECS,
+  // [ChainId.MOONRIVER]: 12,
+  // [ChainId.BSC]: 3,
+}
 
 export const ARCHER_RELAY_URI: { [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: 'https://api.archerdao.io/v1/transaction',
@@ -16,18 +49,6 @@ export const ARCHER_RELAY_URI: { [chainId in ChainId]?: string } = {
 
 export const ARCHER_GAS_URI: { [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: 'https://api.archerdao.io/v1/gas',
-}
-
-export const SOUL_DISTRIBUTOR_ADDRESS: AddressMap = { // SOUL SUMMONER
-  [ChainId.MAINNET]: '',
-  [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B',
-  [ChainId.FANTOM_TESTNET]: '',
-}
-
-export const SOUL_ADDRESS: AddressMap = { // SOUL ADDRESS
-  [ChainId.MAINNET]: '',
-  [ChainId.FANTOM]: '0xe2fb177009ff39f52c0134e8007fa0e4baacbd07',
-  [ChainId.FANTOM_TESTNET]: '',
 }
 
 // export const COMMON_CONTRACT_NAMES: { [address: string]: string } = {
@@ -38,9 +59,7 @@ export const SOUL_ADDRESS: AddressMap = { // SOUL ADDRESS
 // TODO: update weekly with new constant
 export const MERKLE_ROOT =
   //'https://raw.githubusercontent.com/sushiswap/sushi-vesting/master/merkle/week-13/merkle-10959148-11550728.json'
-  //'https://raw.githubusercontent.com/sushiswap/sushi-vesting/master/merkle/week-14/merkle-10959148-11596364.json'
-  //'https://raw.githubusercontent.com/sushiswap/sushi-vesting/master/merkle/week-15/merkle-10959148-11641996.json'
-  'https://raw.githubusercontent.com/sushiswap/sushi-vesting/master/merkle/week-16/merkle-10959148-11687577.json'
+  'https://raw.githubusercontent.com/sushiswap/sushi-vesting/master/merkle/week-14/merkle-10959148-11596364.json'
 
 // /**
 //  * Some tokens can only be swapped via certain pairs, so we override the list of bases that are considered for these
@@ -51,15 +70,7 @@ export const MERKLE_ROOT =
 // } = {
 //     [ChainId.MAINNET]: {
 //         [AMPL.address]: [DAI, WETH[ChainId.MAINNET]],
-//         [DUCK.address]: [USDP, WETH[ChainId.MAINNET]],
-//         [BAB.address]: [BAC, WETH[ChainId.MAINNET]],
-//         [HBTC.address]: [CREAM, WETH[ChainId.MAINNET]],
-//         [FRAX.address]: [FXS, WETH[ChainId.MAINNET]],
-//         [IBETH.address]: [ALPHA, WETH[ChainId.MAINNET]],
-//         [PONT.address]: [PWING, WETH[ChainId.MAINNET]],
-//         [UMA_CALL.address]: [UMA, WETH[ChainId.MAINNET]],
-//         [PLAY.address]: [DOUGH, WETH[ChainId.MAINNET]],
-//         [SPELL_CALL.address]: [SPELL, WETH[ChainId.MAINNET]],
+//         [XSUSHI_CALL.address]: [XSUSHI, WETH[ChainId.MAINNET]],
 //     },
 // }
 
@@ -70,9 +81,9 @@ export interface WalletInfo {
   description: string
   href: string | null
   color: string
-  primary?: true
-  mobile?: true
-  mobileOnly?: true
+  primary?: boolean
+  mobile?: boolean
+  mobileOnly?: boolean
 }
 
 export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
@@ -117,7 +128,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
   //     return new LatticeConnector({
   //       chainId: 1,
   //       url: RPC[ChainId.MAINNET],
-  //       appName: 'SoulSwap',
+  //       appName: 'SushiSwap',
   //     })
   //   },
   //   name: 'Lattice',
@@ -171,17 +182,27 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
   //   color: '#315CF5',
   //   mobile: true,
   // },
+  // Binance: {
+  //   connector: binance,
+  //   name: 'Binance',
+  //   iconName: 'bsc.jpg',
+  //   description: 'Login using Binance hosted wallet',
+  //   href: null,
+  //   color: '#F0B90B',
+  //   mobile: false,
+  // },
 }
 
 export const NetworkContextName = 'NETWORK'
+export const BridgeContextName = 'BRIDGE'
 
 // default allowed slippage, in bips
 export const INITIAL_ALLOWED_SLIPPAGE = 50
 // 30 minutes, denominated in seconds
 export const DEFAULT_DEADLINE_FROM_NOW = 60 * 30
 
-// default archer gas estimate, 350k wei
-export const DEFAULT_ARCHER_GAS_ESTIMATE: BigNumber = BigNumber.from(350000)
+// default archer gas estimate, 250k wei
+export const DEFAULT_ARCHER_GAS_ESTIMATE: BigNumber = BigNumber.from(250000)
 // default gas prices to use if all other sources unavailable
 export const DEFAULT_ARCHER_GAS_PRICES: BigNumber[] = [
   BigNumber.from(60000000000),
@@ -233,23 +254,19 @@ export const BLOCKED_ADDRESSES: string[] = [
 // BentoBox Swappers
 export const BASE_SWAPPER: { [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: '0x0',
-  // [ChainId.ROPSTEN]: '0xe4E2540D421e56b0B786d40c5F5268891288c6fb',
 }
 
-// Soul Guide
-export const SOUL_GUIDE_ADDRESS = '0x5A6B3Ce2736E9B731Fba73262884016b50c39184' // JUL 27TH
+// Boring Helper
+// export const BORING_HELPER_ADDRESS = '0x11Ca5375AdAfd6205E41131A4409f182677996E6'
 
 export const ANALYTICS_URL: { [chainId in ChainId]?: string } = {
-  [ChainId.MAINNET]: 'https://defillama.com/protocol/soulswap',
+  [ChainId.MAINNET]: 'https://analytics.soulswap.finance',
   [ChainId.FANTOM]: 'https://analytics.soulswap.finance',
-  [ChainId.FANTOM_TESTNET]: 'https://defillama.com/protocol/soulswap'
+  [ChainId.FANTOM_TESTNET]: 'https://analytics.soulswap.finance',
 }
 
-// export const EIP_1559_ACTIVATION_BLOCK: { [chainId in ChainId]?: number } = {
-//   [ChainId.ROPSTEN]: 10499401,
-//   [ChainId.GÖRLI]: 5062605,
-//   [ChainId.RINKEBY]: 8897988,
-// }
+export const EIP_1559_ACTIVATION_BLOCK: { [chainId in ChainId]?: number } = {
+}
 
 export * from './routing'
 export * from './addresses'

@@ -774,8 +774,8 @@ export default function Remove() {
                                 </Link>
                               ) : oneCurrencyIsWETH ? (
                                 <Link
-                                  href={`/exchange/remove/${currencyA?.equals(WNATIVE[chainId]) ? 'ETH' : currencyIdA}/${
-                                    currencyB?.equals(WNATIVE[chainId]) ? 'ETH' : currencyIdB
+                                  href={`/exchange/remove/${currencyA?.equals(WNATIVE[chainId]) ? 'FTM' : currencyIdA}/${
+                                    currencyB?.equals(WNATIVE[chainId]) ? 'FTM' : currencyIdB
                                   }`}
                                 >
                                   <a className="text-baseline text-blue opacity-80 hover:opacity-100 whitespace-nowrap">
@@ -845,7 +845,7 @@ export default function Remove() {
           </div>
         </DoubleGlowShadow>
         <div className="flex items-center px-4">
-          <NavLink href="/exchange/pool">
+          <NavLink href="/pool">
             <a className="flex items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
               <span>{i18n._(t`View Liquidity Positions`)}</span>
               {/* <svg

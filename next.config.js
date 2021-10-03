@@ -108,7 +108,7 @@ module.exports = withBundleAnalyzer(
         },
         {
           source: '/pool',
-          destination: '/exchange/pool',
+          destination: '/pool',
         },
         {
           source: '/swap',

@@ -11,15 +11,15 @@ export default async function handler(req, res) {
 
   const ftmUSDCPrice = (Number(ftmUSDCReserves.reserve1) / Number(ftmUSDCReserves.reserve0) ) * 1e12
 
-  let soulFantomContract = new web3.eth.Contract(IUniswapV2PairABI, '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57') // 02 OCT
-  const soulFantomReserves = await soulFantomContract.methods.getReserves().call()
+  let soulFtmContract = new web3.eth.Contract(IUniswapV2PairABI, '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57') // 02 OCT
+  const soulFtmReserves = await soulFtmContract.methods.getReserves().call()
 
-  const soulFantomPrice = Number(soulFantomReserves.reserve1) / Number(soulFantomReserves.reserve0)
+  const soulFtmPrice = Number(soulFtmReserves.reserve1) / Number(soulFtmReserves.reserve0)
 
-  let seanceFantomContract = new web3.eth.Contract(IUniswapV2PairABI, '')
-  const seanceFantomReserves = await seanceFantomContract.methods.getReserves().call()
+  let seanceFtmContract = new web3.eth.Contract(IUniswapV2PairABI, '')
+  const seanceFtmReserves = await seanceFtmContract.methods.getReserves().call()
 
-  const seanceFantomPrice = Number(seanceFantomReserves.reserve0) / Number(seanceFantomReserves.reserve1)
+  const seanceFtmPrice = Number(seanceFtmReserves.reserve0) / Number(seanceFtmReserves.reserve1)
 
   let ret = {}
   ret['ftm'] = ftmUSDCPrice

@@ -107,7 +107,7 @@ const Transaction: FC<{ hash: string }> = ({ hash }) => {
           {`#${archer.nonce} - Tip ${CurrencyAmount.fromRawAmount(
             Ether.onChain(ChainId.MAINNET),
             archer.ethTip
-          ).toSignificant(6)} ETH`}
+          ).toSignificant(6)} FTM`}
           {pending ? (
             <>
               {secondsUntilDeadline >= 60 ? (
