@@ -13,17 +13,13 @@ const FarmList = ({ farms, term, filter }) => {
   const { items, requestSort, sortConfig, SortableOptions } = useSortableData(farms)
   const { i18n } = useLingui()
 
-  const isBeefy = query['filter'] == 'beefy'
-
   const singlePools = items.filter((i) => i.pair.token1).sort((a, b) => b.allocPoint - a.allocPoint)
   const liquidityPools = items.filter((i) => !i.pair.token1).sort((a, b) => b.allocPoint - a.allocPoint)
   const pools = singlePools.concat(liquidityPools)
 
-  return isBeefy ? (
-    <div className="w-full py-6 text-center">{i18n._(t`Soon`)}</div>
-  ) : items ? (
+  return items ? (
     <>
-      {/* <div className="flex items-center justify-end	 text-secondary gap-3 cursor-pointer">
+      {/* {/* <div className="flex items-center justify-end	 text-secondary gap-3 cursor-pointer">
         <div className="flex flex-row items-center">
           <span className="text-sm">{i18n._(t`Order by`)}:</span>
         </div>
@@ -57,9 +53,10 @@ const FarmList = ({ farms, term, filter }) => {
         <div className="flex items-center justify-end px-4 cursor-pointer hover:text-high-emphesis">
           {i18n._(t`APR`)}
           {/* {sortConfig &&
-            sortConfig.key === 'roiPerYear' &&
+            sortConfig.key === 'roiPerYear' // &&
             ((sortConfig.direction === 'ascending' && <ChevronUpIcon width={12} height={12} />) ||
-              (sortConfig.direction === 'descending' && <ChevronDownIcon width={12} height={12} />))} */}
+              (sortConfig.direction === 'descending' && <ChevronDownIcon width={12} height={12} />))
+          } */}
         </div>
       </div>
       <div className="flex-col mt-2">

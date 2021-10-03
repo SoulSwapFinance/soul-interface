@@ -96,7 +96,7 @@ const FarmListItem = ({ farm }) => {
                   size="xs"
                   disabled={farm?.id === '1'}
                   onClick={() => {
-                    if (!balance.equalTo(ZERO)) {
+                    // if (!balance.equalTo(ZERO)) {
                       if (liquidityToken?.symbol == 'SOUL') {
                         try {
                           const minValue = 1 / 10 ** (liquidityToken?.decimals - 10)
@@ -109,7 +109,8 @@ const FarmListItem = ({ farm }) => {
                         setDepositValue(balance.toFixed(liquidityToken?.decimals))
                       }
                     }
-                  }}
+                  }
+                // }
                   className="absolute border-0 right-4 focus:ring focus:ring-light-purple"
                 >
                   {i18n._(t`MAX`)}
@@ -163,9 +164,9 @@ const FarmListItem = ({ farm }) => {
             )} */}
             {account && (
               <div className="pr-4 mb-2 text-left cursor-pointer text-secondary">
-                {i18n._(t`Deposited`)}: {formatNumberScale(amount?.toSignificant(6)) ?? 0}
+                {i18n._(t`Deposited`)}: {formatNumberScale(amount?.toSignificant(6, undefined, 2) ?? 0, false, 4)}
                 {farm.lpPrice && amount
-                  ? ` (` + formatNumberScale(farm.lpPrice * Number(amount?.toSignificant(18) ?? 0), true, 2) + `)`
+                  ? ` (` + formatNumberScale(farm.lpPrice * Number(amount?.divide(1E18).toSignificant(18) ?? 0), true, 2) + `)`
                   : ``}
               </div>
             )}
@@ -225,6 +226,7 @@ const FarmListItem = ({ farm }) => {
             <Button
               color="gradient"
               className="w-full"
+              // variant={'filled'}
               // variant={!!nextHarvestUntil && nextHarvestUntil > Date.now() ? 'outlined' : 'filled'}
               // disabled={!!nextHarvestUntil && nextHarvestUntil > Date.now()}
               onClick={async () => {

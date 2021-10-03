@@ -1,4 +1,4 @@
-import { CurrencyAmount, JSBI, SOUL_SUMMONER_ADDRESS } from '../../sdk'
+import { CurrencyAmount, JSBI, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS } from '../../sdk'
 import { Chef } from './enum'
 import { SOUL  } from '../../constants'
 import { NEVER_RELOAD, useSingleCallResult, useSingleContractMultipleData } from '../../state/multicall/hooks'
@@ -19,10 +19,8 @@ import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import zip from 'lodash/zip'
 import { useToken } from '../../hooks/Tokens'
 import { useVaultInfo, useVaults } from '../vault/hooks'
-import useSummoner from './useSummoner'
+// import useSummoner from './useSummoner'
 const { default: axios } = require('axios')
-
-const totalLp = 11 // todo: fix
 
 export function useSummonerContract(chef: Chef) {
   const soulSummonerContract = useSoulSummonerContract()
@@ -37,22 +35,21 @@ export function useSummonerContract(chef: Chef) {
   }, [contracts, chef])
 }
 
-// export function useSummonerContracts(chefs: Chef[]) {
-//   const soulSummonerContract = useSoulSummonerContract()
-//   const contracts = useMemo(
-//     () => ({
-//       [Chef.SUMMONER]: soulSummonerContract,
-//     }),
-//     [soulSummonerContract]
-//   )
-//   return chefs.map((chef) => contracts[chef])
-// }
+export function useSummonerContracts(chefs: Chef[]) {
+  const soulSummonerContract = useSoulSummonerContract()
+  const contracts = useMemo(
+    () => ({
+      [Chef.SUMMONER]: soulSummonerContract,
+    }),
+    [soulSummonerContract]
+  )
+  return chefs.map((chef) => contracts[chef])
+}
 
 export function useUserInfo(farm, token) {
   const { account } = useActiveWeb3React()
 
-  // const contract = useSummonerContract(0)
-  const contract = useSummoner()
+  const contract = useSummonerContract(0)
 
   const args = useMemo(() => {
     if (!account) {
@@ -61,8 +58,7 @@ export function useUserInfo(farm, token) {
     return [String(farm.id), String(account)]
   }, [farm, account])
 
-  const result = useSingleCallResult(null, 'userInfo', args)?.result
-  // const result = useSingleCallResult(args ? contract : null, 'userInfo', args)?.result
+  const result = useSingleCallResult(args ? contract : null, 'userInfo', args)?.result
 
   const value = result?.[0]
   const harvestValue = result?.[3]
@@ -79,8 +75,7 @@ export function useUserInfo(farm, token) {
 export function usePendingSoul(farm) {
   const { account, chainId } = useActiveWeb3React()
 
-  const contract = useSummoner()
-  // const contract = useSummonerContract(0)
+  const contract = useSummonerContract(0)
 
   const args = useMemo(() => {
     if (!account) {
@@ -89,8 +84,7 @@ export function usePendingSoul(farm) {
     return [String(farm.id), String(account)]
   }, [farm, account])
 
-  const result = useSingleCallResult(null, 'pendingSoul', args)?.result
-  // const result = useSingleCallResult(args ? contract : null, 'pendingSoul', args)?.result
+  const result = useSingleCallResult(args ? contract : null, 'pendingSoul', args)?.result
 
   const value = result?.[0]
 
@@ -121,14 +115,14 @@ export function usePendingToken(farm, contract) {
 export function useSoulPositions(contract?: Contract | null) {
   const { account } = useActiveWeb3React()
 
-  const numberOfPools = useSingleCallResult(null, 'poolLength', undefined, NEVER_RELOAD)    ?.result?.[0]
-  // const numberOfPools = useSingleCallResult(contract ? contract : null, 'poolLength', undefined, NEVER_RELOAD)
+  const numberOfPools = useSingleCallResult(contract ? contract : null, 'poolLength')?.result
 
   const args = useMemo(() => {
     if (!account || !numberOfPools) {
       return
     }
-    return [...Array(numberOfPools.toNumber()).keys()].map((pid) => [String(pid), String(account)])
+    return [...Array(numberOfPools).keys()].map((pid) => [String(pid), String(account)])
+    // return [...Array(numberOfPools.toNumber()).keys()].map((pid) => [String(pid), String(account)])
   }, [numberOfPools, account])
 
   const pendingSoul = useSingleContractMultipleData(args ? contract : null, 'pendingSoul', args)
@@ -158,8 +152,7 @@ export function usePositions() {
 export function useSoulFarms(contract?: Contract | null) {
   const { chainId, account } = useActiveWeb3React()
 
-  const numberOfPools = useSingleCallResult(contract ? contract : null, 'poolLength', undefined, NEVER_RELOAD)
-    ?.result?.[0]
+  const numberOfPools = useSingleCallResult(contract ? contract : null, 'poolLength', undefined, NEVER_RELOAD)?.result?.[0]
 
   const args = useMemo(() => {
     if (!numberOfPools) {
@@ -180,8 +173,8 @@ export function useSoulFarms(contract?: Contract | null) {
       allocPoint: data[0].result?.['allocPoint'] || '',
       lastRewardTime: data[0].result?.['lastRewardTime'] || '',
       accSoulPerShare: data[0].result?.['accSoulPerShare'] || '',
-      // harvestInterval: data[0].result?.['harvestInterval'] || '',
-      // totalLp: data[0].result?.['totalLp'] || '',
+      harvestInterval: data[0].result?.['harvestInterval'] || '',
+      totalLp: data[0].result?.['totalLp'] || '',
     }))
   }, [args, poolInfo])
 }
@@ -240,10 +233,9 @@ export function usePrice(pairContract?: Contract | null, pairDecimals?: number |
 
 export function useTokenInfo(tokenContract?: Contract | null) {
   const { account, chainId } = useActiveWeb3React()
-  const vaults = useVaults()
+  // const vaults = useVaults()
 
-  const _totalSupply = useSingleCallResult(tokenContract ? tokenContract : null, 'totalSupply', undefined, NEVER_RELOAD)
-    ?.result?.[0]
+  const _totalSupply = useSingleCallResult(tokenContract ? tokenContract : null, 'totalSupply')?.result
 
   const _burnt = useSingleCallResult(
     tokenContract ? tokenContract : null,
@@ -254,12 +246,11 @@ export function useTokenInfo(tokenContract?: Contract | null) {
 
   let lockedInVaults = JSBI.BigInt(0)
 
-  vaults
-    // .filter((r) => r.lockupDuration > 0)
-    .forEach((r) => {
-      lockedInVaults = JSBI.add(lockedInVaults, JSBI.BigInt(totalLp)) // placeholder
-      // lockedInVaults = JSBI.add(lockedInVaults, JSBI.BigInt(r.totalLp.toString())) // TODO: fix
-    })
+  // vaults
+  //   .filter((r) => r.lockupDuration > 0)
+  //   .forEach((r) => {
+  //     lockedInVaults = JSBI.add(lockedInVaults, JSBI.BigInt(r.totalLp.toString())) // TODO: fix
+  //   })
 
   const totalSupply = _totalSupply ? JSBI.BigInt(_totalSupply.toString()) : JSBI.BigInt(0)
   const burnt = _burnt ? JSBI.BigInt(_burnt.toString()) : JSBI.BigInt(0)
@@ -331,16 +322,13 @@ export function useETHPrice() {
   return usePrice(useETHPairContract())
 }
 
-export function useSoulDistributorInfo(contract) {
-  const soulPerSecond = useSingleCallResult(contract ? contract : null, 'soulPerSecond', undefined, NEVER_RELOAD)
-    ?.result?.[0]
-
-  const totalAllocPoint = useSingleCallResult(contract ? contract : null, 'totalAllocPoint', undefined, NEVER_RELOAD)
-    ?.result?.[0]
+export function useSoulSummonerInfo(contract) {
+  const soulPerSecond = useSingleCallResult(contract ? contract : null, 'soulPerSecond')?.result
+  const totalAllocPoint = useSingleCallResult(contract ? contract : null, 'totalAllocPoint')?.result
 
   return useMemo(() => ({ soulPerSecond, totalAllocPoint }), [soulPerSecond, totalAllocPoint])
 }
 
-export function useDistributorInfo() {
-  return useSoulDistributorInfo(useSoulSummonerContract())
+export function useSummonerInfo() {
+  return useSoulSummonerInfo(useSoulSummonerContract())
 }

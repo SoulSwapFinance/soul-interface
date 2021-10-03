@@ -103,3 +103,9 @@ export const SEANCE_ADDRESS: AddressMap = {
   [ChainId.FANTOM_TESTNET]: '',
  
 }
+export const USDC_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.FANTOM]: '0x04068da6c83afcfa0e13ba15a6696662335d5b75', // USDC
+  [ChainId.FANTOM_TESTNET]: '',
+ 
+}

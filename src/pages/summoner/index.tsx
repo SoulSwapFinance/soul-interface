@@ -7,7 +7,7 @@ import Head from 'next/head'
 import Menu from '../../features/summoner/FarmMenu'
 import React, { useContext, useState } from 'react'
 import { formatNumberScale } from '../../functions'
-import { usePositions, useFarms, useDistributorInfo } from '../../features/summoner/hooks'
+import { usePositions, useFarms, useSummonerInfo } from '../../features/summoner/hooks'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Card from '../../components/Card'
@@ -26,8 +26,6 @@ import { getAddress } from '@ethersproject/address'
 // import { useVaults } from '../../features/vault/hooks'
 import Search from '../../components/Search'
 
-let totalLp = 11 // todo: fix
-
 export default function Summoner(): JSX.Element {
   const { i18n } = useLingui()
   const router = useRouter()
@@ -42,7 +40,7 @@ export default function Summoner(): JSX.Element {
   const farms = useFarms()
   // const vaults = useVaults()
 
-  const summonerInfo = useDistributorInfo()
+  const summonerInfo = useSummonerInfo()
 
   const priceData = useContext(PriceContext)
 
@@ -56,13 +54,12 @@ export default function Summoner(): JSX.Element {
     return { ...POOLS[chainId][key], lpToken: key }
   })
 
-  let summTvl = tvlInfo.reduce((previousValue, currentValue) => {
+  let sumTvl = tvlInfo.reduce((previousValue, currentValue) => {
     return previousValue + currentValue.tvl
   }, 0)
 
   // let sumTvlVaults = vaults.reduce((previousValue, currentValue) => {
-  //   return previousValue + (totalLp / 1e18) * soulPrice // todo: fix
-  //   // return previousValue + (currentValue.totalLp / 1e18) * soulPrice // todo: fix
+  // return previousValue + (currentValue.totalLp / 1e18) * soulPrice // todo: fix
   // }, 0)
 
   const secondsPerDay = 86400
@@ -77,7 +74,7 @@ export default function Summoner(): JSX.Element {
 
     function getRewards() {
       const rewardPerSecond =
-        ((pool.allocPoint / summonerInfo.totalAllocPoint) * summonerInfo.soulPerSecond) / 1e18
+        ((pool.allocPoint / Number(summonerInfo.totalAllocPoint)) * Number(summonerInfo.soulPerSecond)) / 1E18
 
       const defaultReward = {
         token: 'SOUL',
@@ -119,7 +116,7 @@ export default function Summoner(): JSX.Element {
         return previousValue + currentValue.rewardPerSecond * currentValue.rewardPrice
       }, 0) / tvl
 
-    const roiPerHour = roiPerSecond * secondsPerHour
+    const roiPerHour = roiPerSecond * 3600
     const roiPerDay = roiPerHour * 24
     const roiPerMonth = roiPerDay * 30
     const roiPerYear = roiPerDay * 365
@@ -172,7 +169,7 @@ export default function Summoner(): JSX.Element {
   })
 
   const allStaked = positions.reduce((previousValue, currentValue) => {
-    return previousValue + (currentValue.pendingSoul / 1e18) * soulPrice
+    return previousValue + (currentValue.pendingSoul / 1E18) * soulPrice
   }, 0)
 
   const valueStaked = positions.reduce((previousValue, currentValue) => {
@@ -204,6 +201,7 @@ export default function Summoner(): JSX.Element {
               <Card className="bg-dark-900 z-4">
                 <div className={`grid grid-cols-12 md:space-x-4 space-y-4 md:space-y-0 `}>
                   <div className={`col-span-12 md:col-span-3 space-y-4`}>
+                    {/* <div className={`hidden`}> */}
                     <div className={`hidden md:block`}>
                       <Menu
                         term={term}
@@ -218,8 +216,7 @@ export default function Summoner(): JSX.Element {
                         Total Value Locked: {formatNumberScale(sumTvl + sumTvlVaults, true, 2)}
                       </div> */}
                       <div className="flex items-center text-center justify-between py-2 text-emphasis">
-                        TVL: {Number(summTvl).toFixed(4)}
-                        {/* TVL: {formatNumberScale(summTvl, true, 2)} */}
+                        TVL: {formatNumberScale(sumTvl, true, 2)}
                       </div>
                       {positions.length > 0 && (
                         <div className="flex items-center justify-between py-2 text-emphasis">
@@ -248,7 +245,7 @@ export default function Summoner(): JSX.Element {
                             setPendingTx(false)
                           }}
                         >
-                          Possess All (~ {formatNumberScale(allStaked, true, 2)})
+                          Possess All {formatNumberScale(allStaked, true, 18)})
                         </Button>
                       )}
                     </div>

@@ -7,8 +7,7 @@ import Image from '../../components/Image'
 import React, { useContext, useState } from 'react'
 import { useCurrency } from '../../hooks/Tokens'
 import { useV2PairsWithPrice } from '../../hooks/useV2Pairs'
-// import { SOUL } from '../../constants/tokens'
-import { SOUL_ADDRESS } from '../../sdk'
+import { SEANCE_ADDRESS, SOUL_ADDRESS, WNATIVE } from '../../sdk'
 import { useActiveWeb3React } from '../../hooks'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
@@ -16,7 +15,6 @@ import CurrencyLogo from '../../components/CurrencyLogo'
 import { isMobile } from 'react-device-detect'
 import YieldDetails from '../../components/YieldDetails'
 import IconWrapper from '../../components/IconWrapper'
-import { WNATIVE } from '../../constants'
 import { PriceContext } from '../../contexts/priceContext'
 import { Info } from 'react-feather'
 import Link from 'next/link'
@@ -24,8 +22,8 @@ import Link from 'next/link'
 const FarmListItem2 = ({ farm, ...rest }) => {
   const { chainId } = useActiveWeb3React()
 
-  let token0 = useCurrency(farm.pair.token0?.id)
-  let token1 = useCurrency(farm.pair.token1?.id)
+  let token0 = useCurrency(farm?.pair?.token0?.id)
+  let token1 = useCurrency(farm?.pair?.token1?.id)
 
   const priceData = useContext(PriceContext)
 
@@ -44,9 +42,9 @@ const FarmListItem2 = ({ farm, ...rest }) => {
     if (farm.lpToken.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase()) {
       lpPrice = soulPrice
       decimals = farm.pair.token0?.decimals
-    } else if (farm.lpToken.toLowerCase() == WNATIVE[chainId].toLowerCase()) {
+    } else if (farm.lpToken.toLowerCase() == WNATIVE[chainId]) {
       lpPrice = ftmPrice
-    } else if (farm.lpToken.toLowerCase() == '0x124B06C5ce47De7A6e9EFDA71a946717130079E6'.toLowerCase()) { // SEANCE
+    } else if (farm.lpToken.toLowerCase() == SEANCE_ADDRESS[chainId].toLowerCase()) {
       lpPrice = seancePrice
     } else {
       lpPrice = pairPrice
@@ -65,7 +63,7 @@ const FarmListItem2 = ({ farm, ...rest }) => {
       return previousValue + currentValue.rewardPerSecond * currentValue.rewardPrice
     }, 0) / tvl
 
-  const roiPerHour = roiPerSecond * farm.secondsPerHour
+  const roiPerHour = roiPerSecond * 3600
   const roiPerDay = roiPerHour * 24
   const roiPerMonth = roiPerDay * 30
   const roiPerYear = roiPerDay * 365
@@ -146,7 +144,7 @@ const FarmListItem2 = ({ farm, ...rest }) => {
                       <Info />
                     </IconWrapper>
                     {/* {formatPercent(farm?.roiPerYear || 7508 * 100)} */}
-                    {roiPerYear > 1000000 ? '100000000%+' : formatPercent(roiPerYear * 100)}
+                    {roiPerYear/1E18 > 1000000 ? '1,000%+' : formatPercent(roiPerYear * 100)}
                   </div>
                   <div className="text-xs text-right md:text-base text-secondary">{i18n._(t`annualized`)}</div>
                 </div>

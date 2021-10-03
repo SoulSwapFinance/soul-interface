@@ -406,7 +406,8 @@ export default function Swap() {
           <div>
             <CurrencyInputPanel
               label={
-                independentField === Field.OUTPUT && !showWrap ? i18n._(t`Swap From (est.):`) : i18n._(t`Swap From:`)
+                independentField === Field.OUTPUT && !showWrap ? i18n._(t``) : i18n._(t``)
+                // independentField === Field.OUTPUT && !showWrap ? i18n._(t`Swap From (est.):`) : i18n._(t`Swap From:`)
               }
               value={formattedAmounts[Field.INPUT]}
               showMaxButton={showMaxButton}
@@ -446,7 +447,7 @@ export default function Swap() {
                 {isExpertMode ? (
                   recipient === null && !showWrap ? (
                     <Button variant="link" size="none" id="add-recipient-button" onClick={() => onChangeRecipient('')}>
-                      + Add recipient (optional)
+                      + Add Recipient (optional)
                     </Button>
                   ) : (
                     <Button
@@ -465,7 +466,8 @@ export default function Swap() {
               <CurrencyInputPanel
                 value={formattedAmounts[Field.OUTPUT]}
                 onUserInput={handleTypeOutput}
-                label={independentField === Field.INPUT && !showWrap ? i18n._(t`Swap To (est.):`) : i18n._(t`Swap To:`)}
+                label={independentField === Field.INPUT && !showWrap ? i18n._(t``) : i18n._(t``)}
+                // label={independentField === Field.INPUT && !showWrap ? i18n._(t`Swap To (est.):`) : i18n._(t`Swap To:`)}
                 showMaxButton={false}
                 hideBalance={false}
                 fiatValue={fiatValueOutput ?? undefined}
