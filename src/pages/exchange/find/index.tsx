@@ -80,7 +80,7 @@ export default function PoolFinder() {
   return (
     <>
       <Head>
-        <title>{i18n._(t`Find Pool`)} | Solarbeam</title>
+        <title>{i18n._(t`Find Pool`)} | Soul</title>
         <meta key="description" name="description" content="Find pool" />
       </Head>
 

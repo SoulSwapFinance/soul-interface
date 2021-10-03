@@ -338,11 +338,11 @@ export default function Add() {
   return (
     <>
       <Head>
-        <title>{i18n._(t`Add Liquidity`)} | Solarbeam</title>
+        <title>{i18n._(t`Add Liquidity`)} | Soul</title>
         <meta
           key="description"
           name="description"
-          content="Add liquidity to the Solarbeam AMM to enable gas optimised and low slippage trades across countless networks"
+          content="Add liquidity to the Soul AMM to enable gas optimised and low slippage trades across countless networks"
         />
       </Head>
       <SoulLogo />

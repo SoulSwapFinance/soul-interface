@@ -366,11 +366,11 @@ export default function Swap() {
   return (
     <>
       <Head>
-        <title>{i18n._(t`Solarbeam`)}</title>
+        <title>{i18n._(t`SoulSwap`)}</title>
         <meta
           key="description"
           name="description"
-          content="Solarbeam allows for swapping of compatible tokens on Moonriver."
+          content="Soul allows for swapping of compatible tokens on Fantom."
         />
       </Head>
 

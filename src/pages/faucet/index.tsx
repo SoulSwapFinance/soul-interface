@@ -62,7 +62,7 @@ export default function Faucet(): JSX.Element {
     <>
       <Head>
         <title>Faucet | Soul</title>
-        <meta key="description" name="description" content="Moonriver Faucet" />
+        <meta key="description" name="description" content="Fantom Faucet" />
       </Head>
 
       <SoulLogo />
@@ -79,7 +79,7 @@ export default function Faucet(): JSX.Element {
           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
             <div className="p-4 mb-3 space-y-3 text-center">
               <Typography component="h1" variant="h2">
-                {i18n._(t`Moonriver Faucet`)}
+                {i18n._(t`Fantom Faucet`)}
               </Typography>
               <Typography component="h1" variant="base">
                 A Faucet is a tool that provides a small amount of FTM for users that used the bridge to start using Soul Protocol without having to
