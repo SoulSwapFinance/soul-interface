@@ -9,7 +9,7 @@ import {
   Router,
   TradeType,
   Trade as V2Trade,
-} from '@soulswap/sdk'
+} from '../sdk'
 import { isAddress, isZero } from '../functions/validate'
 import { useFactoryContract, useRouterContract } from './useContract'
 
@@ -383,12 +383,12 @@ export function useSwapCallback(
             .catch((error) => {
               // if the user rejected the tx, pass this along
               if (error?.code === 4001) {
-                throw new Error('Transaction rejected.')
+                throw new Error('Transaction Rejected.')
               } else {
                 // otherwise, the error was unexpected and we need to convey that
-                console.error(`Swap failed`, error, address, calldata, value)
+                console.error(`Swap Failed`, error, address, calldata, value)
 
-                throw new Error(`Swap failed: ${swapErrorToUserReadableMessage(error)}`)
+                throw new Error(`Swap Failed: ${swapErrorToUserReadableMessage(error)}`)
               }
             })
         } else {
@@ -546,7 +546,7 @@ export function useSwapCallback(
             .catch((error: any) => {
               // if the user rejected the tx, pass this along
               if (error?.code === 4001) {
-                throw new Error('Transaction rejected.')
+                throw new Error('Transaction Rejected.')
               } else {
                 // otherwise, the error was unexpected and we need to convey that
                 console.error(`Swap failed`, error)
@@ -560,5 +560,5 @@ export function useSwapCallback(
       },
       error: null,
     }
-  }, [trade, library, account, chainId, recipient, recipientAddressOrName, swapCalls, useArcher, addTransaction])
+  }, [trade, library, account, chainId, recipient, recipientAddressOrName, swapCalls, useArcher, addTransaction, archerRelayDeadline, archerETHTip])
 }

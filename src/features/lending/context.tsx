@@ -1,4 +1,4 @@
-import { ChainId, NATIVE, WNATIVE } from '@soulswap/sdk'
+import { ChainId, NATIVE, WNATIVE } from '../../sdk'
 import React, { createContext, useCallback, useContext, useEffect, useReducer } from 'react'
 import { ZERO, e10, maximum, minimum } from '../../functions/math'
 import {

@@ -29,6 +29,10 @@ export enum ApplicationModal {
   VOTE,
   LANGUAGE,
   NETWORK,
+  CHAIN,
+  SOUL_STATS,
+  FTM_STATS,
+  YIELD_DETAILS,
 }
 
 export const updateBlockNumber = createAction<{

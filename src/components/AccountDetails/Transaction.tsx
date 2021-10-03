@@ -1,4 +1,4 @@
-import { ChainId, CurrencyAmount, Ether } from '@soulswap/sdk'
+import { ChainId, CurrencyAmount, Ether } from '../../sdk'
 import { CheckCircleIcon, ExclamationIcon, XCircleIcon } from '@heroicons/react/outline'
 import React, { FC, useCallback, useMemo } from 'react'
 
@@ -107,7 +107,7 @@ const Transaction: FC<{ hash: string }> = ({ hash }) => {
           {`#${archer.nonce} - Tip ${CurrencyAmount.fromRawAmount(
             Ether.onChain(ChainId.MAINNET),
             archer.ethTip
-          ).toSignificant(6)} ETH`}
+          ).toSignificant(6)} FTM`}
           {pending ? (
             <>
               {secondsUntilDeadline >= 60 ? (

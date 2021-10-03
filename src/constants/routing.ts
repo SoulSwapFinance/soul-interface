@@ -45,7 +45,7 @@ import {
   // XDAI,
 } from './tokens'
 // a list of tokens by chain
-import { ChainId, Currency, Token, WNATIVE } from '@soulswap/sdk'
+import { ChainId, Currency, Token, WNATIVE } from '../sdk'
 
 import { SupportedChainId } from './chains'
 
@@ -221,7 +221,7 @@ export const CUSTOM_BASES: {
  */
 export const COMMON_BASES: ChainTokenList = {
   [ChainId.MAINNET]: [...WRAPPED_NATIVE_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC],
-  // [ChainId.MATIC]: [...WRAPPED_NATIVE_ONLY[ChainId.MATIC], MATIC.USDC, MATIC.WBTC, MATIC.DAI, MATIC.WETH, MATIC.USDT],
+
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], 
     // FANTOM.SOUL,

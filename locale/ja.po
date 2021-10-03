@@ -18,6 +18,30 @@ msgid ""
 "SOUL strategies"
 msgstr ""
 
+msgid "- 0.1 FTM to lock"
+msgstr ""
+
+msgid "- Always DYOR"
+msgstr ""
+
+msgid "- Click on \"Approve\" to allow the contract to transfer your tokens"
+msgstr ""
+
+msgid "- Click on \"Deposit\" to lock your tokens into locker contract"
+msgstr ""
+
+msgid "- Input your token or liquidity pair address, amount of tokens to lock, withdrawer address and when tokens will become unlocked"
+msgstr ""
+
+msgid "- Locker contract address: {0}"
+msgstr ""
+
+msgid "- You will not be able to withdraw your tokens before the unlock time"
+msgstr ""
+
+msgid "/ DAY"
+msgstr ""
+
 msgid "1 Hour"
 msgstr ""
 
@@ -30,23 +54,23 @@ msgstr ""
 msgid "30 Days"
 msgstr ""
 
-msgid "A portion of each trade (0.05%) goes to SPELL holders as a protocol incentive."
+msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
 msgstr ""
 
-msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
-msgstr "各取引の一部 (0.25％) は、プロトコルのインセンティブとして流動性プロバイダーに支払われます。"
+msgid "A portion of each trade (0.25%) goes to the Soul Treasury."
+msgstr ""
 
 msgid "APR"
-msgstr "APR"
+msgstr ""
 
 msgid "Accept"
-msgstr "承認"
+msgstr ""
 
 msgid "Add"
-msgstr "追加"
+msgstr ""
 
 msgid "Add Liquidity"
-msgstr "流動性を追加"
+msgstr ""
 
 msgid "Add SEANCE to your MetaMask wallet"
 msgstr ""
@@ -55,10 +79,7 @@ msgid "Add SOUL to your MetaMask wallet"
 msgstr ""
 
 msgid "Add collateral in order to borrow assets"
-msgstr "資産を借り入れるために担保を追加"
-
-msgid "Add liquidity"
-msgstr "流動性を追加"
+msgstr ""
 
 msgid "Add {0} to MetaMask"
 msgstr ""
@@ -72,8 +93,17 @@ msgstr ""
 msgid "Additional records and weekly merkle updates can be found on"
 msgstr ""
 
+msgid "All Farms"
+msgstr ""
+
+msgid "Allocation"
+msgstr ""
+
+msgid "Amount Locked"
+msgstr ""
+
 msgid "Amount of Tokens"
-msgstr "トークンの量"
+msgstr ""
 
 msgid "An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note fee on transfer and rebase tokens are incompatible with Uniswap V3."
 msgstr ""
@@ -82,37 +112,37 @@ msgid "Analytics"
 msgstr ""
 
 msgid "Approve"
-msgstr "承認"
+msgstr ""
 
 msgid "Approve Kashi"
-msgstr "Kashiを承認"
+msgstr ""
 
 msgid "Approve Limit Order"
 msgstr ""
 
 msgid "Approve {0}"
-msgstr "{0}を承認"
+msgstr ""
 
 msgid "Approved"
-msgstr "承認済み"
+msgstr ""
 
 msgid "Approving"
-msgstr "承認しています"
+msgstr ""
 
 msgid "Approving Limit Order"
 msgstr ""
 
 msgid "Approving {0}"
-msgstr "{0}を承認しています"
+msgstr ""
 
 msgid "Are you sure?"
-msgstr "よろしいですか？"
+msgstr ""
 
 msgid "Auto"
 msgstr ""
 
 msgid "Available"
-msgstr "利用可能"
+msgstr ""
 
 msgid "Available Networks"
 msgstr ""
@@ -121,49 +151,49 @@ msgid "Back to Limit Orders"
 msgstr ""
 
 msgid "Balance"
-msgstr "残高"
+msgstr ""
 
 msgid "Balance:"
 msgstr ""
 
 msgid "Bento Balance: {0}"
-msgstr "Bentoの残高：{0}"
+msgstr ""
 
 msgid "BentoBox"
-msgstr "BentoBox"
+msgstr ""
 
 msgid "BentoBox Apps"
-msgstr "BentoBoxアプリ"
+msgstr ""
 
 msgid "BentoBox is an innovative way to use dapps gas-efficiently and gain extra yield."
-msgstr "BentoBoxは、dAppsをガス効率よく使用し、さらなる利回りを得るための革新的な方法です。"
+msgstr ""
 
 msgid "BentoBox provides extra yield on deposits with flash lending, strategies, and fixed, low-gas transfers among integrated dapps, like Kashi markets"
-msgstr "BentoBoxは、Kashi市場のような統合されたdAppsの間で、フラッシュ貸出し、戦略、固定された低いガスの送金で、預金の追加利回りを生み出します"
+msgstr ""
 
 msgid "BentoBox strategies can create yield for your collateral tokens. This token does not yet have a strategy in the BentoBox."
-msgstr "BentoBox戦略は、担保トークンの利回りを生み出すことができます。このトークンには、BentoBoxにまだ戦略がありません。"
+msgstr ""
 
 msgid "BentoBox strategies can create yield for your liquidity while it is not lent out. This token does not yet have a strategy in the BentoBox."
-msgstr "BentoBox戦略は、流動性が貸し出されていない間に利回りを生み出すことができます。このトークンにはまだBentoBox戦略がありません。"
+msgstr ""
 
 msgid "Borrow"
-msgstr "借入れる"
+msgstr ""
 
 msgid "Borrow assets and leverage up"
-msgstr "資産を借り入れてレバレッジをかける"
+msgstr ""
 
 msgid "Borrow {0}"
-msgstr "{0}を借り入れる"
+msgstr ""
 
 msgid "Borrow {0}-{1}"
-msgstr "{0}～{1}を借り入れる"
+msgstr ""
 
 msgid "Borrowed"
-msgstr "借入れ済み"
+msgstr ""
 
 msgid "Borrowing allows you to obtain liquidity without selling. Your borrow limit depends on the amount of deposited collateral. You will be able to borrow up to 75% of your collateral and repay at any time with accrued interest."
-msgstr "借り入れることで、売却せずに流動性を得ることができます。借入れ限度額は、預け入れた担保の金額によって異なります。担保の75％まで借入れが可能で、いつでも未払い利息をつけて返済することができます。"
+msgstr ""
 
 msgid "Bridge"
 msgstr ""
@@ -171,14 +201,13 @@ msgstr ""
 msgid "Buy"
 msgstr ""
 
-msgid ""
-"By adding liquidity you'll earn fees from all trades on this pair\n"
-"proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be\n"
-"claimed by withdrawing your liquidity."
+msgid "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
 msgstr ""
 
-msgid "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
-msgstr "確認モーダルを無視すると、高スリッページの取引が可能になります。ご自身の責任でご利用ください。"
+msgid ""
+"Calculated based on current rates. Rates are estimates provided for your convenience\n"
+"only, and by no means represent guaranteed returns."
+msgstr ""
 
 msgid "Cancel"
 msgstr ""
@@ -198,51 +227,49 @@ msgstr ""
 msgid "Chinese"
 msgstr ""
 
-msgid "Claim SUSHI"
+msgid "Claim SOUL"
 msgstr ""
 
 msgid "Claimed"
-msgstr "請求済み"
+msgstr ""
 
 msgid "Clear All"
 msgstr ""
 
 msgid "Clear History"
-msgstr "履歴をクリア"
+msgstr ""
 
 msgid ""
 "Click on a pool below, input the amount you wish to migrate or select max, and click\n"
 "migrate"
 msgstr ""
-"下のプールをクリックして移行する量を入力するか、最大を選択して移行を\n"
-"クリックします"
 
 msgid "Collateral"
-msgstr "担保"
+msgstr ""
 
 msgid "Community Approval"
-msgstr "コミュニティの承認"
+msgstr ""
 
 msgid "Confirm"
-msgstr "確認"
+msgstr ""
 
 msgid "Confirm Adding Liquidity"
-msgstr "流動性の追加を確認"
+msgstr ""
 
 msgid "Confirm Limit Order"
 msgstr ""
 
 msgid "Confirm Staking"
-msgstr "出資を確認"
+msgstr ""
 
 msgid "Confirm Supply"
-msgstr "供給を確認する"
+msgstr ""
 
 msgid "Confirm Swap"
-msgstr "スワップを確認"
+msgstr ""
 
 msgid "Confirm Withdrawal"
-msgstr "引き出しを確認"
+msgstr ""
 
 msgid "Confirm convert"
 msgstr ""
@@ -250,10 +277,16 @@ msgstr ""
 msgid "Confirm this transaction in your wallet"
 msgstr ""
 
+msgid "Confirm {0}"
+msgstr ""
+
 msgid "Connect Wallet"
-msgstr "ウォレットを接続"
+msgstr ""
 
 msgid "Connect to wallet"
+msgstr ""
+
+msgid "Considerations"
 msgstr ""
 
 msgid "Convert"
@@ -268,44 +301,50 @@ msgstr ""
 msgid "Copy Address"
 msgstr ""
 
+msgid "Create Pair"
+msgstr ""
+
 msgid "Create Pool & Supply"
-msgstr "プールおよび供給を作成"
+msgstr ""
 
 msgid "Create a new Kashi Market"
 msgstr ""
 
-msgid "Create a pair"
-msgstr "ペアを作成"
+msgid "Create lock"
+msgstr ""
 
 msgid "Create pool"
-msgstr "プールを作成"
+msgstr ""
 
 msgid "Current"
 msgstr ""
 
 msgid "Deposit"
-msgstr "預け入れる"
+msgstr ""
 
 msgid "Deposit SOUL into BentoBox"
 msgstr ""
 
 msgid "Deposit tokens into BentoBox for all the yields"
-msgstr "すべての利回りのためにBentoBoxにトークンを預け入れましょう"
+msgstr ""
 
 msgid "Deposit {0} into BentoBox"
+msgstr ""
+
+msgid "Deposited"
 msgstr ""
 
 msgid "Depositing {0} into BentoBox"
 msgstr ""
 
 msgid "Disable Multihops"
-msgstr "マルチホップを無効にする"
+msgstr ""
 
 msgid "Disconnect"
 msgstr ""
 
 msgid "Dismiss"
-msgstr "破棄"
+msgstr ""
 
 msgid "Earn SOUL with SOUL-LP."
 msgstr ""
@@ -320,27 +359,33 @@ msgid "English"
 msgstr ""
 
 msgid "Enter"
-msgstr "入力"
+msgstr ""
 
 msgid "Enter Amount"
-msgstr "金額を入力"
+msgstr ""
+
+msgid "Enter Recipient"
+msgstr ""
 
 msgid "Enter a recipient"
-msgstr "受領者を入力"
+msgstr ""
 
 msgid "Enter a valid slippage percentage"
-msgstr "有効なスリッページの割合を入力"
+msgstr ""
 
 msgid "Enter an amount"
-msgstr "金額を入力"
+msgstr ""
 
 msgid "Error"
-msgstr "エラー"
+msgstr ""
 
 msgid "Error connecting"
 msgstr ""
 
 msgid "Error connecting. Try refreshing the page."
+msgstr ""
+
+msgid "Everytime you stake or claim rewards your lock time renews."
 msgstr ""
 
 msgid "Exchange Rate"
@@ -356,8 +401,6 @@ msgid ""
 "Expert mode turns off the confirm transaction prompt and allows high slippage trades\n"
 "that often result in bad rates and lost funds."
 msgstr ""
-"エキスパートモードでは、取引確認のプロンプトをオフにすると、結果的にレートが悪くなり、資金を失ってしまうことがよくある\n"
-"高スリッページの取引が可能になります。"
 
 msgid "Expiration is the time at which the order will become invalid"
 msgstr ""
@@ -371,14 +414,20 @@ msgstr ""
 msgid "Explore our Protocol."
 msgstr ""
 
+msgid "Fantom Faucet"
+msgstr ""
+
 msgid "Farm"
+msgstr ""
+
+msgid "Fees"
 msgstr ""
 
 msgid "Filled"
 msgstr ""
 
 msgid "Find Pool"
-msgstr "プールを検索"
+msgstr ""
 
 msgid "Follow on Twitter."
 msgstr ""
@@ -398,7 +447,7 @@ msgid "French"
 msgstr ""
 
 msgid "Gain exposure to tokens without reducing your assets. Leverage will enable you to take short positions against assets and earn from downside movements."
-msgstr "資産を減らすことなくトークンへのエクスポージャーを得ることができます。レバレッジをかけることで、資産に対して売り持ちポジションを取り、下落傾向の動きから収益を得ることができます。"
+msgstr ""
 
 msgid ""
 "Gain governance rights with SPELL and earn 5% APR (0.05% of\n"
@@ -408,28 +457,40 @@ msgstr ""
 msgid "German"
 msgstr ""
 
+msgid "Give me some FTM"
+msgstr ""
+
 msgid "Go Back"
 msgstr ""
 
 msgid "Hardware Wallet"
-msgstr "ハードウェアウォレット"
+msgstr ""
+
+msgid "Harvest"
+msgstr ""
+
+msgid "Harvest {0} SOUL"
+msgstr ""
 
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
 msgstr ""
 
 msgid "Health"
-msgstr "健全性"
+msgstr ""
 
 msgid "Historical Total Locked: Connect Wallet"
-msgstr "過去の合計ロック数：ウォレットを接続"
+msgstr ""
 
 msgid "Historical Total Locked: Fetching Total"
-msgstr "過去の合計ロック数：合計を取得しています"
+msgstr ""
 
-msgid "Historical Total Locked: {0} SUSHI"
+msgid "Historical Total Locked: {0} SOUL"
 msgstr ""
 
 msgid "History"
+msgstr ""
+
+msgid "How to use"
 msgstr ""
 
 msgid "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
@@ -439,7 +500,7 @@ msgid "Import"
 msgstr ""
 
 msgid "Import Pool"
-msgstr "プールをインポート"
+msgstr ""
 
 msgid "In Bento:"
 msgstr ""
@@ -451,25 +512,25 @@ msgid "Input is estimated. You will sell at most"
 msgstr ""
 
 msgid "Insufficient Balance"
-msgstr "残高が不足しています"
+msgstr ""
 
 msgid "Insufficient liquidity for this trade"
-msgstr "この取引の流動性が不足しています"
+msgstr ""
 
 msgid "Insufficient {0} balance"
-msgstr "{0}の残高が不足しています"
+msgstr ""
 
 msgid "Interface Settings"
-msgstr "インターフェース設定"
+msgstr ""
+
+msgid "Invalid Recipient"
+msgstr ""
 
 msgid "Invalid pair"
-msgstr "ペアが無効です"
-
-msgid "Invalid recipient"
-msgstr "受領者が無効です"
+msgstr ""
 
 msgid "Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency."
-msgstr "孤立した貸出し市場では、資産の貸し手としてのリスクが軽減されます。相手が破産した場合に利用できる担保を正確に把握することができます。"
+msgstr ""
 
 msgid "Italian"
 msgstr ""
@@ -487,16 +548,16 @@ msgid "Learn more about wallets"
 msgstr ""
 
 msgid "Lend assets for interest from borrowers."
-msgstr "資産を貸し出して、借り手から利息を得る。"
+msgstr ""
 
 msgid "Lend your assets, earn yield with no impermanent loss"
-msgstr "資産を貸し出し、永続的な損失なしで利回りを得ることができます"
+msgstr ""
 
 msgid "Lending"
-msgstr "貸出し中"
+msgstr ""
 
 msgid "Lent"
-msgstr "貸出し済み"
+msgstr ""
 
 msgid "Limit"
 msgstr ""
@@ -507,29 +568,11 @@ msgstr ""
 msgid "Links"
 msgstr ""
 
-msgid "Liquidity"
-msgstr "流動性"
-
-msgid "Liquidity Provider Fee"
-msgstr "流動性プロバイダーの手数料"
-
-msgid "Liquidity Provider Rewards"
-msgstr "流動性プロバイダーの報酬"
-
-msgid ""
-"Liquidity providers earn a 0.25% fee on all trades proportional to their share of\n"
-"the pool. Fees are added to the pool, accrue in real time and can be claimed by\n"
-"withdrawing your liquidity"
-msgstr ""
-"流動性プロバイダーは、プールのシェアに比例して、すべての取引に対して0.25％の手数料を\n"
-"得ることができます。手数料はプールに追加され、リアルタイムで発生し、流動性を引き出すことで\n"
-"請求することができます"
-
 msgid "Lists"
-msgstr "リスト"
+msgstr ""
 
 msgid "Loading"
-msgstr "読み込んでいます"
+msgstr ""
 
 msgid "Loading Balance"
 msgstr ""
@@ -538,10 +581,16 @@ msgid "Loading balance"
 msgstr ""
 
 msgid "Loading your {exchange} liquidity positions"
-msgstr "{exchange}の流動性ポジションを読み込んでいます"
+msgstr ""
+
+msgid "Lock"
+msgstr ""
+
+msgid "Lockup"
+msgstr ""
 
 msgid "MAX"
-msgstr "最大"
+msgstr ""
 
 msgid ""
 "MEOW tokens wrap xSOUL into BentoBox for double yields and can be\n"
@@ -552,22 +601,22 @@ msgid "MEV Shield by Archer DAO"
 msgstr ""
 
 msgid "Manage"
-msgstr "管理"
+msgstr ""
 
 msgid "Manage Token Lists"
 msgstr ""
 
 msgid "Manage this pool"
-msgstr "このプールを管理"
+msgstr ""
 
 msgid "Market"
 msgstr ""
 
 msgid "Markets"
-msgstr "市場"
+msgstr ""
 
 msgid "Max"
-msgstr "最大"
+msgstr ""
 
 msgid "Maximize yield by staking SOUL for SEANCE"
 msgstr ""
@@ -575,26 +624,29 @@ msgstr ""
 msgid "Maximum sent"
 msgstr ""
 
+msgid "Me"
+msgstr ""
+
 msgid "Migrate"
-msgstr "移行"
+msgstr ""
 
 msgid "Migrate {exchange} Liquidity"
-msgstr "{exchange}の流動性を移行"
+msgstr ""
 
 msgid "Migrating"
-msgstr "移行中"
+msgstr ""
 
 msgid "Migration is done in one-click using your signature (permit)"
-msgstr "移行は、署名 (許可) を使用してワンクリックで完了します"
-
-msgid "Miner Tip"
 msgstr ""
 
 msgid "Minimum Received"
 msgstr ""
 
 msgid "Minimum received"
-msgstr "最小の受け取り"
+msgstr ""
+
+msgid "My Farms"
+msgstr ""
 
 msgid "My Liquidity Positions"
 msgstr ""
@@ -615,10 +667,13 @@ msgid "New to Fantom?"
 msgstr ""
 
 msgid "No Liquidity found"
-msgstr "流動性が見つかりません"
+msgstr ""
+
+msgid "No Results"
+msgstr ""
 
 msgid "No liquidity found to do swap"
-msgstr "スワップを行う流動性は見つかりません"
+msgstr ""
 
 msgid "No liquidity was found."
 msgstr ""
@@ -627,22 +682,22 @@ msgid "No order history"
 msgstr ""
 
 msgid "No pool found"
-msgstr "プールが見つかりません"
+msgstr ""
 
 msgid "No results found"
-msgstr "結果が見つかりません"
+msgstr ""
 
 msgid "Non-hardware Wallet"
-msgstr "非ハードウェアウォレット"
+msgstr ""
 
 msgid "None"
-msgstr "なし"
+msgstr ""
 
 msgid "ONLY USE THIS MODE IF YOU KNOW WHAT YOU ARE DOING."
-msgstr "このモードは、自分が行っている内容を分かっている場合のみ使用してください。"
+msgstr ""
 
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
-msgstr "おっと！不明なエラーが発生しました。ページを更新するか、別のブラウザまたはデバイスからアクセスしてください"
+msgstr ""
 
 msgid "Open Main Menu"
 msgstr ""
@@ -651,7 +706,7 @@ msgid "Open Orders"
 msgstr ""
 
 msgid "Oracle"
-msgstr "オラクル"
+msgstr ""
 
 msgid "Order Expiration"
 msgstr ""
@@ -665,7 +720,7 @@ msgid ""
 msgstr ""
 
 msgid "Output is estimated. If the price changes by more than {0}% your transaction will revert."
-msgstr "出力は推定値です。価格が{0}％を超えて変化した場合、トランザクションは元に戻ります。"
+msgstr ""
 
 msgid "Output is estimated. You will receive at least"
 msgstr ""
@@ -680,10 +735,10 @@ msgid "Pay from:"
 msgstr ""
 
 msgid "Pending"
-msgstr "保留中"
+msgstr ""
 
 msgid "Pending Treasury Transfer"
-msgstr "保留中の資金移動"
+msgstr ""
 
 msgid "Please connect to the appropriate network."
 msgstr ""
@@ -694,41 +749,56 @@ msgstr ""
 msgid "Please refer to the"
 msgstr ""
 
+msgid "Please type the word \"confirm\" to {0} and withdraw your tokens after 14 days or incur a fee"
+msgstr ""
+
 msgid "Pool"
-msgstr "プール"
+msgstr ""
+
+msgid "Pool Details"
+msgstr ""
 
 msgid "Pool Found!"
-msgstr "プールが見つかりました！"
+msgstr ""
 
 msgid "Pool Tokens"
-msgstr "トークンをプール"
+msgstr ""
+
+msgid "Pool tokens in rewards pool"
+msgstr ""
 
 msgid "Pooled {0}"
-msgstr "{0}をプールしました"
+msgstr ""
 
 msgid "Portal"
 msgstr ""
 
 msgid "Positions"
-msgstr "ポジション"
+msgstr ""
+
+msgid "Possess"
+msgstr ""
 
 msgid "Price Impact"
-msgstr "価格への影響"
+msgstr ""
 
 msgid "Price Impact High"
-msgstr "価格への影響が高い"
+msgstr ""
 
 msgid "Price Impact Too High"
-msgstr "価格への影響が高すぎる"
+msgstr ""
 
 msgid "Price Updated"
-msgstr "価格が更新されました"
+msgstr ""
+
+msgid "ROI"
+msgstr ""
 
 msgid "Rate"
 msgstr ""
 
 msgid "Rates"
-msgstr "レート"
+msgstr ""
 
 msgid "Receive"
 msgstr ""
@@ -740,10 +810,13 @@ msgid "Recipient"
 msgstr ""
 
 msgid "Remove"
-msgstr "削除"
+msgstr ""
 
 msgid "Remove Liquidity"
-msgstr "流動性を削除"
+msgstr ""
+
+msgid "Remove liquidity of Soul"
+msgstr ""
 
 msgid "Remove recipient"
 msgstr ""
@@ -752,16 +825,16 @@ msgid "Remove {0} {1} and {2} {3}"
 msgstr ""
 
 msgid "Removing {0} {1} and {2} {3}"
-msgstr "{0}{1}および{2}{3}を削除しています"
+msgstr ""
 
 msgid "Repay"
-msgstr "払い戻す"
+msgstr ""
 
 msgid "Resources"
 msgstr ""
 
 msgid "Restricts swaps to direct pairs only."
-msgstr "スワップを直接ペアのみに制限します。"
+msgstr ""
 
 msgid "Review Limit Order"
 msgstr ""
@@ -773,10 +846,10 @@ msgid "Romanian"
 msgstr ""
 
 msgid "Route"
-msgstr "ルート"
+msgstr ""
 
 msgid "Routing through these tokens resulted in the best price for your trade."
-msgstr "これらのトークンからのルーティングにより、取引に最適な価格が得られました。"
+msgstr ""
 
 msgid "Russian"
 msgstr ""
@@ -784,10 +857,13 @@ msgstr ""
 msgid "SLP"
 msgstr ""
 
-msgid "SPELL Fee"
+msgid "SOUL per $1000"
 msgstr ""
 
 msgid "Search Name or Address"
+msgstr ""
+
+msgid "Search lockers"
 msgstr ""
 
 msgid "Select Token"
@@ -803,7 +879,7 @@ msgid "Select a rate"
 msgstr ""
 
 msgid "Select a token to find your liquidity"
-msgstr "トークンを選択して流動性を検索"
+msgstr ""
 
 msgid "Select an order expiration"
 msgstr ""
@@ -815,31 +891,31 @@ msgid "Send transaction privately to avoid front-running and sandwich attacks. R
 msgstr ""
 
 msgid "Share of Pool"
-msgstr "プールのシェア"
+msgstr ""
 
 msgid "Share of Pool:"
-msgstr "プールのシェア："
+msgstr ""
 
 msgid "Slippage tolerance"
-msgstr "スリッページの許容範囲"
+msgstr ""
 
-msgid "Slippage tolerance..."
+msgid "Solarbeam"
 msgstr ""
 
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
-msgstr "承認の署名中に問題が発生しました。これは、TrezorやLedgerなどのハードウェアウォレットに対して想定されています。もう一度クリックすると、フォールバックメソッドが使用されます"
+msgstr ""
 
-msgid "SoulSwap"
+msgid "Soon"
 msgstr ""
 
 msgid "Spanish"
 msgstr ""
 
 msgid "Stack Yields with SAAVE"
-msgstr "SAAVEで利回りを積み上げる"
+msgstr ""
 
 msgid "Stake"
-msgstr "出資"
+msgstr ""
 
 msgid "Stake Auto Reinvesting SOUL"
 msgstr ""
@@ -855,29 +931,50 @@ msgid ""
 "one click"
 msgstr ""
 
+msgid "Summon"
+msgstr ""
+
 msgid "Summon an Empire."
 msgstr ""
 
 msgid "Supplying {0} {1} and {2} {3}"
-msgstr "{0}{1}および{2}{3}を供給しています"
+msgstr ""
 
 msgid "Swap"
-msgstr "スワップ"
+msgstr ""
 
 msgid "Swap Anyway"
-msgstr "とりあえずスワップ"
+msgstr ""
+
+msgid "Swap From (est.):"
+msgstr ""
+
+msgid "Swap From:"
+msgstr ""
+
+msgid "Swap To (est.):"
+msgstr ""
+
+msgid "Swap To:"
+msgstr ""
+
+msgid "Swapping {0} {1} for {2} {3}"
+msgstr ""
+
+msgid "TVL"
+msgstr ""
 
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""
 
 msgid "The difference between the market price and estimated price due to trade size."
-msgstr "取引規模による市場価格と推定価格の差。"
+msgstr ""
 
 msgid "The input token cannot be transferred. There may be an issue with the input token."
 msgstr ""
 
 msgid "The onchain oracle that tracks the pricing for this pair"
-msgstr "このペアの価格を追跡するオンチェーンオラクル"
+msgstr ""
 
 msgid "The output token cannot be transferred. There may be an issue with the output token."
 msgstr ""
@@ -898,22 +995,19 @@ msgid "This transaction will not succeed due to price movement. Try increasing y
 msgstr ""
 
 msgid "This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance."
-msgstr "この取引は、価格変動または送金時の手数料のいずれかのため、上手くいきません。スリッページの許容範囲を広げてみてください。"
-
-msgid "Tip to encourage miners to select this transaction."
 msgstr ""
 
-msgid "Tip:"
+msgid "Timeframe"
 msgstr ""
 
 msgid "Toggle Expert Mode"
-msgstr "エキスパートモードを切り替える"
+msgstr ""
 
 msgid "Token"
-msgstr "トークン"
+msgstr ""
 
 msgid "Tokens"
-msgstr "トークン"
+msgstr ""
 
 msgid ""
 "Tokens from inactive lists. Import specific tokens below or\n"
@@ -921,25 +1015,28 @@ msgid ""
 msgstr ""
 
 msgid "Total"
-msgstr "合計"
+msgstr ""
+
+msgid "Trading Fee"
+msgstr ""
 
 msgid "Transaction History {0}"
 msgstr ""
 
 msgid "Transaction Settings"
-msgstr "取引設定"
+msgstr ""
 
 msgid "Transaction Submitted"
 msgstr ""
 
 msgid "Transaction deadline"
-msgstr "取引の期限"
+msgstr ""
 
 msgid "Try enabling multi-hop trades"
-msgstr "マルチホップ取引を有効にしてみてください"
+msgstr ""
 
 msgid "Turn On Expert Mode"
-msgstr "エキスパートモードをオンにする"
+msgstr ""
 
 msgid "Twitter"
 msgstr ""
@@ -947,8 +1044,11 @@ msgstr ""
 msgid "Unknown error{0}. Try increasing your slippage tolerance."
 msgstr ""
 
+msgid "Unlock date"
+msgstr ""
+
 msgid "Unstake"
-msgstr "出資解除"
+msgstr ""
 
 msgid "Unstake Auto Reinvesting SOUL"
 msgstr ""
@@ -957,13 +1057,13 @@ msgid "Unstake Manual SOUL"
 msgstr ""
 
 msgid "Unstaked"
-msgstr "出資解除済み"
+msgstr ""
 
 msgid "Unsupported Asset"
-msgstr "未対応の資産"
+msgstr ""
 
 msgid "Unwrap"
-msgstr "アンラップ"
+msgstr ""
 
 msgid "Use SOUL"
 msgstr ""
@@ -972,9 +1072,6 @@ msgid "Use SPELL"
 msgstr ""
 
 msgid "Use SoulPower to Enchant Soul."
-msgstr ""
-
-msgid "Use this tool to find pairs that don't automatically appear in the interface"
 msgstr ""
 
 msgid "Used"
@@ -990,7 +1087,7 @@ msgid "View Liquidity Positions"
 msgstr ""
 
 msgid "View on explorer"
-msgstr "エクスプローラーで表示"
+msgstr ""
 
 msgid "View our Ecosystem."
 msgstr ""
@@ -1005,37 +1102,40 @@ msgid "Waiting for Confirmation"
 msgstr ""
 
 msgid "Wallet"
-msgstr "ウォレット"
+msgstr ""
 
 msgid "Wallet Balance"
-msgstr "ウォレット残高"
-
-msgid "When creating a pair you are the first liquidity provider. The ratio of tokens you add will set the price of this pool. Once you are happy with the rate, click supply to review"
-msgstr "ペアを作成すると、あなたが最初の流動性プロバイダーとなります。追加したトークンの比率によって、このプールの価格が設定されます。レートに問題がなければ、 供給をクリックして確認します"
+msgstr ""
 
 msgid "Withdraw"
-msgstr "引き出す"
+msgstr ""
+
+msgid "Withdraw from locker {id}"
+msgstr ""
 
 msgid "Wrap"
-msgstr "ラップ"
+msgstr ""
 
 msgid "Wrong Network"
-msgstr "間違ったネットワーク"
+msgstr ""
 
 msgid "You Pay:"
 msgstr ""
 
+msgid "You Will Receive"
+msgstr ""
+
 msgid "You are creating a pool"
-msgstr "プールを作成しています"
+msgstr ""
 
 msgid "You are on the wrong network"
-msgstr "間違ったネットワークにいます"
+msgstr ""
 
 msgid "You don’t have liquidity in this pool yet"
-msgstr "このプールにはまだ流動性がありません"
+msgstr ""
 
 msgid "You need to first approve LP tokens and then migrate it"
-msgstr "まずLPトークンを承認してから、移行する必要があります"
+msgstr ""
 
 msgid "You pay"
 msgstr ""
@@ -1047,7 +1147,7 @@ msgid "You receive:"
 msgstr ""
 
 msgid "You will receive"
-msgstr "あなたは以下を受け取ります"
+msgstr ""
 
 msgid "Your"
 msgstr ""
@@ -1056,37 +1156,43 @@ msgid "Your Claimable SUSHI this Week"
 msgstr ""
 
 msgid "Your Liquidity"
-msgstr "あなたの流動性"
+msgstr ""
+
+msgid "Your Position"
+msgstr ""
+
+msgid "Your Staked"
+msgstr ""
 
 msgid "Your Wallet"
-msgstr "あなたのウォレット"
+msgstr ""
 
 msgid "Your pool share"
-msgstr "あなたのプールシェア"
+msgstr ""
 
 msgid "Your total pool tokens"
-msgstr "あなたのプールトークンの合計"
+msgstr ""
 
 msgid "Your transaction may be frontrun"
-msgstr "トランザクションはフロントランニングである可能性があります"
+msgstr ""
 
 msgid "Your transaction may fail"
-msgstr "取引は失敗する可能性があります"
+msgstr ""
 
 msgid "Your transaction will revert if it is pending for more than this long."
-msgstr "この長さを超えて保留になっている場合、取引は元に戻ります。"
+msgstr ""
 
 msgid "Your transaction will revert if the price changes unfavorably by more than this percentage."
 msgstr ""
 
 msgid "Your transaction will revert if there is a large, unfavorable price movement before it is confirmed."
-msgstr "確認前に大きな不利な価格変動があった場合、取引は元に戻ります。"
+msgstr ""
 
 msgid "Your transactions will appear here..."
 msgstr ""
 
 msgid "Your {exchange} {0}/{1} liquidity will become SoulSwap {2}/{3} liquidity."
-msgstr "{exchange}{0}/{1}の流動性は、SoulSwap{2}/{3}の流動性になります。"
+msgstr ""
 
 msgid "Zap"
 msgstr ""
@@ -1094,11 +1200,14 @@ msgstr ""
 msgid "above"
 msgstr ""
 
+msgid "annualized"
+msgstr ""
+
 msgid "below"
 msgstr ""
 
 msgid "failed to load"
-msgstr "読み込みに失敗しました"
+msgstr ""
 
 msgid "for deliberations on additional points."
 msgstr ""
@@ -1110,10 +1219,10 @@ msgid "home page"
 msgstr ""
 
 msgid "loading..."
-msgstr "読み込みんでいます..."
+msgstr ""
 
 msgid "minutes"
-msgstr "分"
+msgstr ""
 
 msgid "or the transaction will revert."
 msgstr ""
@@ -1125,10 +1234,10 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "{0} Deposited"
-msgstr "{0}の預け入れ"
+msgstr ""
 
 msgid "{0} Strategy"
-msgstr "{0}戦略"
+msgstr ""
 
 msgid "{0} {1} per {2}"
 msgstr ""

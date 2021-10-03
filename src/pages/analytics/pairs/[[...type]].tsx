@@ -1,4 +1,4 @@
-import { useCustomDayBlock, useOneDayBlock, useOneWeekBlock, useSushiPairs } from '../../../services/graph'
+import { useCustomDayBlock, useOneDayBlock, useOneWeekBlock, useSoulPairs } from '../../../services/graph'
 
 import Container from '../../../components/Container'
 import Head from 'next/head'
@@ -23,11 +23,11 @@ export default function Pairs() {
   //   console.log('debug', { block1d, block2d, block1w, block2w })
   // }, [block1d, block2d, block1w, block2w])
 
-  const pairs = useSushiPairs()
-  const pairs1d = useSushiPairs({ block: { number: Number(block1d) } })
-  const pairs2d = useSushiPairs(type !== 'all' ? { block: { number: Number(block2d) } } : undefined) // No need to fetch if we don't need the data
-  const pairs1w = useSushiPairs({ block: { number: Number(block1w) } })
-  const pairs2w = useSushiPairs(type !== 'all' ? { block: { number: Number(block2w) } } : undefined)
+  const pairs = useSoulPairs()
+  const pairs1d = useSoulPairs({ block: { number: Number(block1d) } })
+  const pairs2d = useSoulPairs(type !== 'all' ? { block: { number: Number(block2d) } } : undefined) // No need to fetch if we don't need the data
+  const pairs1w = useSoulPairs({ block: { number: Number(block1w) } })
+  const pairs2w = useSoulPairs(type !== 'all' ? { block: { number: Number(block2w) } } : undefined)
 
   const pairsFormatted =
     type === 'all'

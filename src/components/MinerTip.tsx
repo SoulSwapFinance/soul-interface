@@ -4,7 +4,7 @@ import {
   useUserArcherTipManualOverride,
   useUserSlippageTolerance,
 } from '../state/user/hooks'
-import { CurrencyAmount, Ether, ChainId } from '@soulswap/sdk'
+import { CurrencyAmount, Ether, ChainId } from '../sdk'
 import React from 'react'
 import { RowBetween } from './Row'
 import { StyledSlider } from '../features/swap/styleds'
@@ -105,7 +105,7 @@ export default function MinerTip() {
           Miner Tip
         </Typography>
         <Typography variant="sm" className="text-secondary" onClick={toggleSettings}>
-          {CurrencyAmount.fromRawAmount(Ether.onChain(ChainId.MAINNET), userETHTip).toFixed(3)} ETH
+          {CurrencyAmount.fromRawAmount(Ether.onChain(ChainId.MAINNET), userETHTip).toFixed(3)} FTM
         </Typography>
       </RowBetween>
       {!userTipManualOverride && (

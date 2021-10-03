@@ -2,8 +2,8 @@ import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallbac
 import { AutoRow, RowBetween, RowFixed } from '../../components/Row'
 import { BIPS_BASE, INITIAL_ALLOWED_SLIPPAGE } from '../../constants'
 import Button, { ButtonError } from '../../components/Button'
-import { ROUTER_ADDRESS } from '@soulswap/sdk'
-import { ChainId, Currency, Ether, JSBI, NATIVE, Percent, Trade, WNATIVE } from '@soulswap/sdk'
+import { ROUTER_ADDRESS } from '../../sdk'
+import { ChainId, Currency, Ether, JSBI, NATIVE, Percent, Trade, WNATIVE } from '../../sdk'
 import Column, { AutoColumn } from '../../components/Column'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { computeRealizedLPFeePercent, warningSeverity } from '../../functions/prices'
@@ -122,7 +122,7 @@ const CardHeader = () => {
           message={
             <>
               Zaps allow you to LP in any pool with any asset. Please be careful when zapping low liquidity tokens as
-              there may be very high slippage. ETH, WBTC, USDC, DAI and SUSHI are the safest tokens to zap with. If
+              there may be very high slippage. FTM, WBTC, USDC, DAI and SUSHI are the safest tokens to zap with. If
               price impact seems too high, try disabling multihop.
             </>
           }

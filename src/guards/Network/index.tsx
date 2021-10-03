@@ -1,6 +1,6 @@
 import React, { FC, Fragment } from 'react'
 import { useActiveWeb3React } from '../../hooks'
-import { ChainId } from '@soulswap/sdk'
+import { ChainId } from '../../sdk'
 import Typography from '../../components/Typography'
 import Image from 'next/image'
 import { NETWORK_ICON, NETWORK_LABEL } from '../../constants/networks'

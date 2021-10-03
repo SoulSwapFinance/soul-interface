@@ -7,7 +7,7 @@
 //     TokenAmount,
 //     Trade,
 //     TradeType,
-// } from '@soulswap/sdk'
+// } from '../../sdk'
 
 // import { computeTradePriceBreakdown } from '../../src/functions/prices'
 

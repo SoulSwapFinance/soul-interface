@@ -1,9 +1,5 @@
-import { ChainId } from '@soulswap/sdk'
+import { ChainId } from '../../../sdk'
 import MAINNET from './mainnet'
-// import HECO from './heco'
-// import KOVAN from './kovan'
-// import MATIC from './matic'
-// import XDAI from './xdai'
 
 export type ChainlinkMappingList = {
   readonly [address: string]: {

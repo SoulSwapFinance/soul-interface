@@ -7,7 +7,7 @@ import useLimitOrderApproveCallback, { BentoApprovalState } from '../../hooks/us
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { ApprovalState, useApproveCallback } from '../../hooks'
 import { COFFIN_BOX_ADDRESS } from '../../constants/kashi'
-import { ChainId, Currency } from '@soulswap/sdk'
+import { ChainId, Currency } from '../../sdk'
 import Dots from '../../components/Dots'
 import { useAddPopup, useWalletModalToggle } from '../../state/application/hooks'
 import { useDerivedLimitOrderInfo, useLimitOrderState } from '../../state/limit-order/hooks'

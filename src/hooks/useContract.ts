@@ -2,6 +2,12 @@ import {
   ARCHER_ROUTER_ADDRESS,
   MULTICALL2_ADDRESS,
   ZAPPER_ADDRESS,
+  ETH_USD_PAIR,
+  SOUL_SEANCE_PAIR,
+  SOUL_FTM_PAIR,
+  SEANCE_USDC_PAIR,
+  FTM_USDC_PAIR,
+  LOCKER_ADDRESS
 } from '../constants/addresses'
 import {
   ARGENT_WALLET_DETECTOR_ABI,
@@ -9,26 +15,23 @@ import {
 } from '../constants/abis/argent-wallet-detector'
 import {
   ChainId,
-  MAKER_ADDRESS,
+  REAPER_ADDRESS,
   FACTORY_ADDRESS,
   ROUTER_ADDRESS,
-  SPELL_ADDRESS,
+  BOUND_ADDRESS,
   SOUL_ADDRESS,
   SOUL_SUMMONER_ADDRESS,
-  SOULVAULT_ADDRESS,
+  SOUL_VAULT_ADDRESS,
   SOUL_GUIDE_ADDRESS,
-  // SOULSWAP_MULTISWAPPER_ADDRESS,
-  SOULSWAP_SWAPPER_ADDRESS,
+  // SOULSWAP_SWAPPER_ADDRESS,
   TIMELOCK_ADDRESS,
   WNATIVE,
-} from '@soulswap/sdk'
+} from '../sdk'
 import {
   COFFIN_BOX_ADDRESS,
   CHAINLINK_ORACLE_ADDRESS,
   UNDERWORLD_ADDRESS,
-  // SOULSWAP_MULTISWAPPER_ADDRESS,
   // SOUL_GUIDE_ADDRESS,
-  // SOULSWAP_SWAPPER_ADDRESS,
   SOULSWAP_TWAP_0_ORACLE_ADDRESS,
   SOULSWAP_TWAP_1_ORACLE_ADDRESS,
 } from '../constants/kashi'
@@ -52,6 +55,7 @@ import FACTORY_ABI from '../constants/abis/factory.json'
 import IUniswapV2PairABI from '../constants/abis/uniswap-v2-pair.json'
 import KASHIPAIR_ABI from '../constants/abis/kashipair.json'
 import MAKER_ABI from '../constants/abis/maker.json'
+import SOUL_LOCKER_ABI from '../constants/abis/soul-locker.json' // todo
 
 // soul
 import SOUL_GUIDE_ABI from '../constants/abis/soul-guide.json' // TODO: update abi
@@ -130,9 +134,6 @@ export function useENSRegistrarContract(withSignerIfPossible?: boolean): Contrac
   if (chainId) {
     switch (chainId) {
       case ChainId.MAINNET:
-      // case ChainId.GÖRLI:
-      // case ChainId.ROPSTEN:
-      // case ChainId.RINKEBY:
         address = '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e'
         break
     }
@@ -181,9 +182,39 @@ export function useSoulContract(withSignerIfPossible = true): Contract | null {
   return useContract(chainId && SOUL_ADDRESS[chainId], SOUL_ABI, withSignerIfPossible)
 }
 
+export function useETHPairContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && ETH_USD_PAIR[chainId], IUniswapV2PairABI, withSignerIfPossible)
+}
+
+export function useLockerContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && LOCKER_ADDRESS[chainId], SOUL_LOCKER_ABI, withSignerIfPossible)
+}
+
+export function useSoulSeanceContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOUL_SEANCE_PAIR[chainId], IUniswapV2PairABI, withSignerIfPossible)
+}
+
+export function useSoulFtmContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOUL_FTM_PAIR[chainId], IUniswapV2PairABI, withSignerIfPossible)
+}
+
+export function useSeanceUsdcContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SEANCE_USDC_PAIR[chainId], IUniswapV2PairABI, withSignerIfPossible)
+}
+
+export function useFtmUsdcContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && FTM_USDC_PAIR[chainId], IUniswapV2PairABI, withSignerIfPossible)
+}
+
 export function useSoulVaultContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOULVAULT_ADDRESS[chainId], SOULVAULT_ABI, withSignerIfPossible)
+  return useContract(chainId && SOUL_VAULT_ADDRESS[chainId], SOULVAULT_ABI, withSignerIfPossible)
 }
 
 export function useMasterChefContract(withSignerIfPossible?: boolean): Contract | null {
@@ -192,6 +223,11 @@ export function useMasterChefContract(withSignerIfPossible?: boolean): Contract 
 }
 
 export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible)
+}
+
+export function useSummonerContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible)
 }
@@ -212,12 +248,17 @@ export function useRouterContract(useArcher = false, withSignerIfPossible?: bool
 
 export function useSpellBoundContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SPELL_ADDRESS[chainId], SPELL_ABI, withSignerIfPossible)
+  return useContract(chainId && BOUND_ADDRESS[chainId], SPELL_ABI, withSignerIfPossible)
 }
 
 export function useMakerContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && MAKER_ADDRESS[chainId], MAKER_ABI, false)
+  return useContract(chainId && REAPER_ADDRESS[chainId], MAKER_ABI, false)
+}
+
+export function useReaperContract(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && REAPER_ADDRESS[chainId], MAKER_ABI, false)
 }
 
 export function useTimelockContract(): Contract | null {
@@ -239,10 +280,10 @@ export function useKashiPairCloneContract(address: string, withSignerIfPossible?
   return useContract(address, KASHIPAIR_ABI, withSignerIfPossible)
 }
 
-export function useSoulSwapSwapper(): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOULSWAP_SWAPPER_ADDRESS[chainId], BASE_SWAPPER_ABI, false)
-}
+// export function useSoulSwapSwapper(): Contract | null {
+//   const { chainId } = useActiveWeb3React()
+//   return useContract(chainId && SOULSWAP_SWAPPER_ADDRESS[chainId], BASE_SWAPPER_ABI, false)
+// }
 
 export function useChainlinkOracle(): Contract | null {
   return useContract(CHAINLINK_ORACLE_ADDRESS, CHAINLINK_ORACLE_ABI, false)

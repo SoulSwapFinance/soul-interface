@@ -1,6 +1,6 @@
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
 import { BentoBalance, useBentoBalances } from '../../state/bentobox/hooks'
-import { CurrencyAmount, Token, WNATIVE } from '@soulswap/sdk'
+import { CurrencyAmount, Token, WNATIVE } from '../../sdk'
 import React, { useState } from 'react'
 import { useFuse, useSortableData } from '../../hooks'
 

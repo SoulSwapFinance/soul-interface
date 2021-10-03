@@ -18,6 +18,30 @@ msgid ""
 "SOUL strategies"
 msgstr ""
 
+msgid "- 0.1 FTM to lock"
+msgstr ""
+
+msgid "- Always DYOR"
+msgstr ""
+
+msgid "- Click on \"Approve\" to allow the contract to transfer your tokens"
+msgstr ""
+
+msgid "- Click on \"Deposit\" to lock your tokens into locker contract"
+msgstr ""
+
+msgid "- Input your token or liquidity pair address, amount of tokens to lock, withdrawer address and when tokens will become unlocked"
+msgstr ""
+
+msgid "- Locker contract address: {0}"
+msgstr ""
+
+msgid "- You will not be able to withdraw your tokens before the unlock time"
+msgstr ""
+
+msgid "/ DAY"
+msgstr ""
+
 msgid "1 Hour"
 msgstr ""
 
@@ -30,23 +54,23 @@ msgstr ""
 msgid "30 Days"
 msgstr ""
 
-msgid "A portion of each trade (0.05%) goes to SPELL holders as a protocol incentive."
+msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
 msgstr ""
 
-msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
-msgstr "Часть каждой сделки (0,25%) направляется поставщикам ликвидности в качестве стимула протокола."
+msgid "A portion of each trade (0.25%) goes to the Soul Treasury."
+msgstr ""
 
 msgid "APR"
-msgstr "Годовая процентная ставка"
+msgstr ""
 
 msgid "Accept"
-msgstr "Принять"
+msgstr ""
 
 msgid "Add"
-msgstr "Добавить"
+msgstr ""
 
 msgid "Add Liquidity"
-msgstr "Добавить ликвидность"
+msgstr ""
 
 msgid "Add SEANCE to your MetaMask wallet"
 msgstr ""
@@ -55,10 +79,7 @@ msgid "Add SOUL to your MetaMask wallet"
 msgstr ""
 
 msgid "Add collateral in order to borrow assets"
-msgstr "Добавьте залог, чтобы заимствовать активы"
-
-msgid "Add liquidity"
-msgstr "Добавить ликвидность"
+msgstr ""
 
 msgid "Add {0} to MetaMask"
 msgstr ""
@@ -72,8 +93,17 @@ msgstr ""
 msgid "Additional records and weekly merkle updates can be found on"
 msgstr ""
 
+msgid "All Farms"
+msgstr ""
+
+msgid "Allocation"
+msgstr ""
+
+msgid "Amount Locked"
+msgstr ""
+
 msgid "Amount of Tokens"
-msgstr "Количество токенов"
+msgstr ""
 
 msgid "An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note fee on transfer and rebase tokens are incompatible with Uniswap V3."
 msgstr ""
@@ -82,37 +112,37 @@ msgid "Analytics"
 msgstr ""
 
 msgid "Approve"
-msgstr "Утвердить"
+msgstr ""
 
 msgid "Approve Kashi"
-msgstr "Утвердить Kashi"
+msgstr ""
 
 msgid "Approve Limit Order"
 msgstr ""
 
 msgid "Approve {0}"
-msgstr "Утвердить {0}"
+msgstr ""
 
 msgid "Approved"
-msgstr "Утверждено"
+msgstr ""
 
 msgid "Approving"
-msgstr "Утверждение"
+msgstr ""
 
 msgid "Approving Limit Order"
 msgstr ""
 
 msgid "Approving {0}"
-msgstr "Утверждение {0}"
+msgstr ""
 
 msgid "Are you sure?"
-msgstr "Вы уверены?"
+msgstr ""
 
 msgid "Auto"
 msgstr ""
 
 msgid "Available"
-msgstr "Доступно"
+msgstr ""
 
 msgid "Available Networks"
 msgstr ""
@@ -121,49 +151,49 @@ msgid "Back to Limit Orders"
 msgstr ""
 
 msgid "Balance"
-msgstr "Баланс"
+msgstr ""
 
 msgid "Balance:"
 msgstr ""
 
 msgid "Bento Balance: {0}"
-msgstr "Баланс Bento: {0}"
+msgstr ""
 
 msgid "BentoBox"
-msgstr "BentoBox"
+msgstr ""
 
 msgid "BentoBox Apps"
-msgstr "Приложения BentoBox"
+msgstr ""
 
 msgid "BentoBox is an innovative way to use dapps gas-efficiently and gain extra yield."
-msgstr "BentoBox – это инновационный способ экономного использования децентрализованных приложений и получения дополнительной прибыли."
+msgstr ""
 
 msgid "BentoBox provides extra yield on deposits with flash lending, strategies, and fixed, low-gas transfers among integrated dapps, like Kashi markets"
-msgstr "BentoBox обеспечивает дополнительную доходность по депозитам с помощью мгновенного кредитования, стратегий и экономичных фиксированных переводов между такими интегрированными децентрализованными приложениями, как рынки Kashi"
+msgstr ""
 
 msgid "BentoBox strategies can create yield for your collateral tokens. This token does not yet have a strategy in the BentoBox."
-msgstr "Стратегии BentoBox могут повысить доходность ваших залоговых токенов. У этого токена еще нет стратегии в BentoBox."
+msgstr ""
 
 msgid "BentoBox strategies can create yield for your liquidity while it is not lent out. This token does not yet have a strategy in the BentoBox."
-msgstr "Стратегии BentoBox могут повысить доходность вашей ликвидности, пока она не ссужается. У этого токена еще нет стратегии в BentoBox."
+msgstr ""
 
 msgid "Borrow"
-msgstr "Взять в кредит"
+msgstr ""
 
 msgid "Borrow assets and leverage up"
-msgstr "Возьмите активы в кредит и увеличьте кредитное плечо"
+msgstr ""
 
 msgid "Borrow {0}"
-msgstr "Взять в кредит {0}"
+msgstr ""
 
 msgid "Borrow {0}-{1}"
-msgstr "Взять в кредит {0} - {1}"
+msgstr ""
 
 msgid "Borrowed"
-msgstr "Взято в кредит"
+msgstr ""
 
 msgid "Borrowing allows you to obtain liquidity without selling. Your borrow limit depends on the amount of deposited collateral. You will be able to borrow up to 75% of your collateral and repay at any time with accrued interest."
-msgstr "Займы позволяют получить ликвидность без продажи. Ваш лимит кредита зависит от суммы внесенного залога. Вы сможете занять до 75% залога и погасить его в любое время с начисленными процентами."
+msgstr ""
 
 msgid "Bridge"
 msgstr ""
@@ -171,14 +201,13 @@ msgstr ""
 msgid "Buy"
 msgstr ""
 
-msgid ""
-"By adding liquidity you'll earn fees from all trades on this pair\n"
-"proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be\n"
-"claimed by withdrawing your liquidity."
+msgid "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
 msgstr ""
 
-msgid "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
-msgstr "Обходит режимы подтверждения и допускает сделки с высоким проскальзыванием. Используйте на свой риск."
+msgid ""
+"Calculated based on current rates. Rates are estimates provided for your convenience\n"
+"only, and by no means represent guaranteed returns."
+msgstr ""
 
 msgid "Cancel"
 msgstr ""
@@ -198,51 +227,49 @@ msgstr ""
 msgid "Chinese"
 msgstr ""
 
-msgid "Claim SUSHI"
+msgid "Claim SOUL"
 msgstr ""
 
 msgid "Claimed"
-msgstr "Сделан запрос"
+msgstr ""
 
 msgid "Clear All"
 msgstr ""
 
 msgid "Clear History"
-msgstr "Очистить историю"
+msgstr ""
 
 msgid ""
 "Click on a pool below, input the amount you wish to migrate or select max, and click\n"
 "migrate"
 msgstr ""
-"Нажмите на пул ниже, введите сумму, которую вы хотите перенести, или выберите максимум и нажмите\n"
-"перенести"
 
 msgid "Collateral"
-msgstr "Обеспечение"
+msgstr ""
 
 msgid "Community Approval"
-msgstr "Утверждение сообщества"
+msgstr ""
 
 msgid "Confirm"
-msgstr "Подтвердить"
+msgstr ""
 
 msgid "Confirm Adding Liquidity"
-msgstr "Подтвердите добавление ликвидности"
+msgstr ""
 
 msgid "Confirm Limit Order"
 msgstr ""
 
 msgid "Confirm Staking"
-msgstr "Подтвердите стейкинг"
+msgstr ""
 
 msgid "Confirm Supply"
-msgstr "Подтвердите поставку"
+msgstr ""
 
 msgid "Confirm Swap"
-msgstr "Подтвердить обмен"
+msgstr ""
 
 msgid "Confirm Withdrawal"
-msgstr "Подтвердите вывод средств"
+msgstr ""
 
 msgid "Confirm convert"
 msgstr ""
@@ -250,10 +277,16 @@ msgstr ""
 msgid "Confirm this transaction in your wallet"
 msgstr ""
 
+msgid "Confirm {0}"
+msgstr ""
+
 msgid "Connect Wallet"
-msgstr "Подключите кошелек"
+msgstr ""
 
 msgid "Connect to wallet"
+msgstr ""
+
+msgid "Considerations"
 msgstr ""
 
 msgid "Convert"
@@ -268,44 +301,50 @@ msgstr ""
 msgid "Copy Address"
 msgstr ""
 
+msgid "Create Pair"
+msgstr ""
+
 msgid "Create Pool & Supply"
-msgstr "Создать пул и поставку"
+msgstr ""
 
 msgid "Create a new Kashi Market"
 msgstr ""
 
-msgid "Create a pair"
-msgstr "Создать пару"
+msgid "Create lock"
+msgstr ""
 
 msgid "Create pool"
-msgstr "Создать пул"
+msgstr ""
 
 msgid "Current"
 msgstr ""
 
 msgid "Deposit"
-msgstr "Депозит"
+msgstr ""
 
 msgid "Deposit SOUL into BentoBox"
 msgstr ""
 
 msgid "Deposit tokens into BentoBox for all the yields"
-msgstr "Внесите токены в BentoBox для всех доходов"
+msgstr ""
 
 msgid "Deposit {0} into BentoBox"
+msgstr ""
+
+msgid "Deposited"
 msgstr ""
 
 msgid "Depositing {0} into BentoBox"
 msgstr ""
 
 msgid "Disable Multihops"
-msgstr "Отключить Multihops"
+msgstr ""
 
 msgid "Disconnect"
 msgstr ""
 
 msgid "Dismiss"
-msgstr "Отклонить"
+msgstr ""
 
 msgid "Earn SOUL with SOUL-LP."
 msgstr ""
@@ -320,27 +359,33 @@ msgid "English"
 msgstr ""
 
 msgid "Enter"
-msgstr "Ввести"
+msgstr ""
 
 msgid "Enter Amount"
-msgstr "Ввести сумму"
+msgstr ""
+
+msgid "Enter Recipient"
+msgstr ""
 
 msgid "Enter a recipient"
-msgstr "Введите получателя"
+msgstr ""
 
 msgid "Enter a valid slippage percentage"
-msgstr "Введите допустимый процент проскальзывания"
+msgstr ""
 
 msgid "Enter an amount"
-msgstr "Введите сумму"
+msgstr ""
 
 msgid "Error"
-msgstr "Ошибка"
+msgstr ""
 
 msgid "Error connecting"
 msgstr ""
 
 msgid "Error connecting. Try refreshing the page."
+msgstr ""
+
+msgid "Everytime you stake or claim rewards your lock time renews."
 msgstr ""
 
 msgid "Exchange Rate"
@@ -356,8 +401,6 @@ msgid ""
 "Expert mode turns off the confirm transaction prompt and allows high slippage trades\n"
 "that often result in bad rates and lost funds."
 msgstr ""
-"Экспертный режим отключает запрос на подтверждение транзакции и позволяет совершать сделки с высоким\n"
-"проскальзыванием, что часто приводит к плохим курсам и потере средств."
 
 msgid "Expiration is the time at which the order will become invalid"
 msgstr ""
@@ -371,14 +414,20 @@ msgstr ""
 msgid "Explore our Protocol."
 msgstr ""
 
+msgid "Fantom Faucet"
+msgstr ""
+
 msgid "Farm"
+msgstr ""
+
+msgid "Fees"
 msgstr ""
 
 msgid "Filled"
 msgstr ""
 
 msgid "Find Pool"
-msgstr "Найти пул"
+msgstr ""
 
 msgid "Follow on Twitter."
 msgstr ""
@@ -398,7 +447,7 @@ msgid "French"
 msgstr ""
 
 msgid "Gain exposure to tokens without reducing your assets. Leverage will enable you to take short positions against assets and earn from downside movements."
-msgstr "Получите доступ к токенам, не уменьшая свои активы. Кредитное плечо позволит вам открывать короткие позиции по активам и зарабатывать на движении вниз."
+msgstr ""
 
 msgid ""
 "Gain governance rights with SPELL and earn 5% APR (0.05% of\n"
@@ -408,28 +457,40 @@ msgstr ""
 msgid "German"
 msgstr ""
 
+msgid "Give me some FTM"
+msgstr ""
+
 msgid "Go Back"
 msgstr ""
 
 msgid "Hardware Wallet"
-msgstr "Аппаратный кошелек"
+msgstr ""
+
+msgid "Harvest"
+msgstr ""
+
+msgid "Harvest {0} SOUL"
+msgstr ""
 
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
 msgstr ""
 
 msgid "Health"
-msgstr "Здоровье"
+msgstr ""
 
 msgid "Historical Total Locked: Connect Wallet"
-msgstr "Всего заблокировано исторически: подключение кошелька"
+msgstr ""
 
 msgid "Historical Total Locked: Fetching Total"
-msgstr "Всего заблокировано исторически: получение итогов"
+msgstr ""
 
-msgid "Historical Total Locked: {0} SUSHI"
+msgid "Historical Total Locked: {0} SOUL"
 msgstr ""
 
 msgid "History"
+msgstr ""
+
+msgid "How to use"
 msgstr ""
 
 msgid "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
@@ -439,7 +500,7 @@ msgid "Import"
 msgstr ""
 
 msgid "Import Pool"
-msgstr "Импортировать пул"
+msgstr ""
 
 msgid "In Bento:"
 msgstr ""
@@ -451,25 +512,25 @@ msgid "Input is estimated. You will sell at most"
 msgstr ""
 
 msgid "Insufficient Balance"
-msgstr "Недостаточный остаток"
+msgstr ""
 
 msgid "Insufficient liquidity for this trade"
-msgstr "Недостаточная ликвидность для этой сделки"
+msgstr ""
 
 msgid "Insufficient {0} balance"
-msgstr "Недостаточный остаток {0}"
+msgstr ""
 
 msgid "Interface Settings"
-msgstr "Настройки интерфейса"
+msgstr ""
+
+msgid "Invalid Recipient"
+msgstr ""
 
 msgid "Invalid pair"
-msgstr "Недействительная пара"
-
-msgid "Invalid recipient"
-msgstr "Недействительный получатель"
+msgstr ""
 
 msgid "Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency."
-msgstr "Изолированные рынки кредитования снижают ваши риски как кредитора активов. Точно знайте, какое обеспечение доступно вам в случае неплатежеспособности контрагента."
+msgstr ""
 
 msgid "Italian"
 msgstr ""
@@ -487,16 +548,16 @@ msgid "Learn more about wallets"
 msgstr ""
 
 msgid "Lend assets for interest from borrowers."
-msgstr "Давайте активы в кредит под проценты от заемщиков."
+msgstr ""
 
 msgid "Lend your assets, earn yield with no impermanent loss"
-msgstr "Давайте свои активы в долг, получайте доход без временных убытков"
+msgstr ""
 
 msgid "Lending"
-msgstr "Кредитование"
+msgstr ""
 
 msgid "Lent"
-msgstr "Предоставлено в кредит"
+msgstr ""
 
 msgid "Limit"
 msgstr ""
@@ -507,29 +568,11 @@ msgstr ""
 msgid "Links"
 msgstr ""
 
-msgid "Liquidity"
-msgstr "Ликвидность"
-
-msgid "Liquidity Provider Fee"
-msgstr "Комиссия поставщика ликвидности"
-
-msgid "Liquidity Provider Rewards"
-msgstr "Вознаграждения поставщика ликвидности"
-
-msgid ""
-"Liquidity providers earn a 0.25% fee on all trades proportional to their share of\n"
-"the pool. Fees are added to the pool, accrue in real time and can be claimed by\n"
-"withdrawing your liquidity"
-msgstr ""
-"Поставщики ликвидности зарабатывают комиссию 0,25% от всех сделок пропорционально своей доле\n"
-"пула. Комиссии добавляются к пулу, накапливаются в режиме реального времени и могут быть запрошены путем\n"
-"вывода ликвидности"
-
 msgid "Lists"
-msgstr "Списки"
+msgstr ""
 
 msgid "Loading"
-msgstr "Загрузка"
+msgstr ""
 
 msgid "Loading Balance"
 msgstr ""
@@ -538,10 +581,16 @@ msgid "Loading balance"
 msgstr ""
 
 msgid "Loading your {exchange} liquidity positions"
-msgstr "Загрузка ваших позиций ликвидности {exchange}"
+msgstr ""
+
+msgid "Lock"
+msgstr ""
+
+msgid "Lockup"
+msgstr ""
 
 msgid "MAX"
-msgstr "МАКСИМУМ"
+msgstr ""
 
 msgid ""
 "MEOW tokens wrap xSOUL into BentoBox for double yields and can be\n"
@@ -552,22 +601,22 @@ msgid "MEV Shield by Archer DAO"
 msgstr ""
 
 msgid "Manage"
-msgstr "Управлять"
+msgstr ""
 
 msgid "Manage Token Lists"
 msgstr ""
 
 msgid "Manage this pool"
-msgstr "Управлять этим пулом"
+msgstr ""
 
 msgid "Market"
 msgstr ""
 
 msgid "Markets"
-msgstr "Рынки"
+msgstr ""
 
 msgid "Max"
-msgstr "Максимум"
+msgstr ""
 
 msgid "Maximize yield by staking SOUL for SEANCE"
 msgstr ""
@@ -575,26 +624,29 @@ msgstr ""
 msgid "Maximum sent"
 msgstr ""
 
+msgid "Me"
+msgstr ""
+
 msgid "Migrate"
-msgstr "Перенести"
+msgstr ""
 
 msgid "Migrate {exchange} Liquidity"
-msgstr "Перенести ликвидность {exchange}"
+msgstr ""
 
 msgid "Migrating"
-msgstr "Перенос"
+msgstr ""
 
 msgid "Migration is done in one-click using your signature (permit)"
-msgstr "Перенос осуществляется в один клик с помощью вашей подписи (разрешения)"
-
-msgid "Miner Tip"
 msgstr ""
 
 msgid "Minimum Received"
 msgstr ""
 
 msgid "Minimum received"
-msgstr "Полученный минимум"
+msgstr ""
+
+msgid "My Farms"
+msgstr ""
 
 msgid "My Liquidity Positions"
 msgstr ""
@@ -615,10 +667,13 @@ msgid "New to Fantom?"
 msgstr ""
 
 msgid "No Liquidity found"
-msgstr "Ликвидность не найдена"
+msgstr ""
+
+msgid "No Results"
+msgstr ""
 
 msgid "No liquidity found to do swap"
-msgstr "Ликвидность для обмена не обнаружена"
+msgstr ""
 
 msgid "No liquidity was found."
 msgstr ""
@@ -627,22 +682,22 @@ msgid "No order history"
 msgstr ""
 
 msgid "No pool found"
-msgstr "Пул не найден"
+msgstr ""
 
 msgid "No results found"
-msgstr "Результаты не найдены"
+msgstr ""
 
 msgid "Non-hardware Wallet"
-msgstr "Неаппаратный кошелек"
+msgstr ""
 
 msgid "None"
-msgstr "Нет"
+msgstr ""
 
 msgid "ONLY USE THIS MODE IF YOU KNOW WHAT YOU ARE DOING."
-msgstr "ИСПОЛЬЗУЙТЕ ЭТОТ РЕЖИМ ТОЛЬКО, ЕСЛИ ЗНАЕТЕ, ЧТО ВЫ ДЕЛАЕТЕ."
+msgstr ""
 
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
-msgstr "Ой! Произошла неизвестная ошибка. Обновите страницу или перейдите в другой браузер или устройство"
+msgstr ""
 
 msgid "Open Main Menu"
 msgstr ""
@@ -651,7 +706,7 @@ msgid "Open Orders"
 msgstr ""
 
 msgid "Oracle"
-msgstr "Оракул"
+msgstr ""
 
 msgid "Order Expiration"
 msgstr ""
@@ -665,7 +720,7 @@ msgid ""
 msgstr ""
 
 msgid "Output is estimated. If the price changes by more than {0}% your transaction will revert."
-msgstr "Вывод оценен. Если цена изменится более чем на {0}%, транзакция будет отменена."
+msgstr ""
 
 msgid "Output is estimated. You will receive at least"
 msgstr ""
@@ -680,10 +735,10 @@ msgid "Pay from:"
 msgstr ""
 
 msgid "Pending"
-msgstr "В ожидании"
+msgstr ""
 
 msgid "Pending Treasury Transfer"
-msgstr "Перевод казначейства в ожидании"
+msgstr ""
 
 msgid "Please connect to the appropriate network."
 msgstr ""
@@ -694,41 +749,56 @@ msgstr ""
 msgid "Please refer to the"
 msgstr ""
 
+msgid "Please type the word \"confirm\" to {0} and withdraw your tokens after 14 days or incur a fee"
+msgstr ""
+
 msgid "Pool"
-msgstr "Пул"
+msgstr ""
+
+msgid "Pool Details"
+msgstr ""
 
 msgid "Pool Found!"
-msgstr "Пул найден!"
+msgstr ""
 
 msgid "Pool Tokens"
-msgstr "Токены пула"
+msgstr ""
+
+msgid "Pool tokens in rewards pool"
+msgstr ""
 
 msgid "Pooled {0}"
-msgstr "Объединено {0}"
+msgstr ""
 
 msgid "Portal"
 msgstr ""
 
 msgid "Positions"
-msgstr "Позиции"
+msgstr ""
+
+msgid "Possess"
+msgstr ""
 
 msgid "Price Impact"
-msgstr "Влияние на цену"
+msgstr ""
 
 msgid "Price Impact High"
-msgstr "Сильное влияние на цену"
+msgstr ""
 
 msgid "Price Impact Too High"
-msgstr "Слишком сильное влияние на цену"
+msgstr ""
 
 msgid "Price Updated"
-msgstr "Цена обновлена"
+msgstr ""
+
+msgid "ROI"
+msgstr ""
 
 msgid "Rate"
 msgstr ""
 
 msgid "Rates"
-msgstr "Тарифы"
+msgstr ""
 
 msgid "Receive"
 msgstr ""
@@ -740,10 +810,13 @@ msgid "Recipient"
 msgstr ""
 
 msgid "Remove"
-msgstr "Удалить"
+msgstr ""
 
 msgid "Remove Liquidity"
-msgstr "Удалить ликвидность"
+msgstr ""
+
+msgid "Remove liquidity of Soul"
+msgstr ""
 
 msgid "Remove recipient"
 msgstr ""
@@ -752,16 +825,16 @@ msgid "Remove {0} {1} and {2} {3}"
 msgstr ""
 
 msgid "Removing {0} {1} and {2} {3}"
-msgstr "Удаление {0} {1} и {2} {3}"
+msgstr ""
 
 msgid "Repay"
-msgstr "Погасить"
+msgstr ""
 
 msgid "Resources"
 msgstr ""
 
 msgid "Restricts swaps to direct pairs only."
-msgstr "Ограничивает обмены только прямыми парами."
+msgstr ""
 
 msgid "Review Limit Order"
 msgstr ""
@@ -773,10 +846,10 @@ msgid "Romanian"
 msgstr ""
 
 msgid "Route"
-msgstr "Маршрут"
+msgstr ""
 
 msgid "Routing through these tokens resulted in the best price for your trade."
-msgstr "Маршрутизация через эти токены привела к лучшей цене для вашей сделки."
+msgstr ""
 
 msgid "Russian"
 msgstr ""
@@ -784,10 +857,13 @@ msgstr ""
 msgid "SLP"
 msgstr ""
 
-msgid "SPELL Fee"
+msgid "SOUL per $1000"
 msgstr ""
 
 msgid "Search Name or Address"
+msgstr ""
+
+msgid "Search lockers"
 msgstr ""
 
 msgid "Select Token"
@@ -803,7 +879,7 @@ msgid "Select a rate"
 msgstr ""
 
 msgid "Select a token to find your liquidity"
-msgstr "Выберите токен, чтобы узнать свою ликвидность"
+msgstr ""
 
 msgid "Select an order expiration"
 msgstr ""
@@ -815,31 +891,31 @@ msgid "Send transaction privately to avoid front-running and sandwich attacks. R
 msgstr ""
 
 msgid "Share of Pool"
-msgstr "Доля пула"
+msgstr ""
 
 msgid "Share of Pool:"
-msgstr "Доля пула:"
+msgstr ""
 
 msgid "Slippage tolerance"
-msgstr "Допуск по проскальзыванию"
+msgstr ""
 
-msgid "Slippage tolerance..."
+msgid "Solarbeam"
 msgstr ""
 
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
-msgstr "Что-то пошло не так при подписании разрешения. Это ожидается для аппаратных кошельков, таких как Trezor и Ledger. Щелкните еще раз, и будет использован резервный метод"
+msgstr ""
 
-msgid "SoulSwap"
+msgid "Soon"
 msgstr ""
 
 msgid "Spanish"
 msgstr ""
 
 msgid "Stack Yields with SAAVE"
-msgstr "Суммируйте доходность с помощью SAAVE"
+msgstr ""
 
 msgid "Stake"
-msgstr "Сделать ставку"
+msgstr ""
 
 msgid "Stake Auto Reinvesting SOUL"
 msgstr ""
@@ -855,29 +931,50 @@ msgid ""
 "one click"
 msgstr ""
 
+msgid "Summon"
+msgstr ""
+
 msgid "Summon an Empire."
 msgstr ""
 
 msgid "Supplying {0} {1} and {2} {3}"
-msgstr "Поставка {0} {1} и {2} {3}"
+msgstr ""
 
 msgid "Swap"
-msgstr "Обменять"
+msgstr ""
 
 msgid "Swap Anyway"
-msgstr "Обменять в любом случае"
+msgstr ""
+
+msgid "Swap From (est.):"
+msgstr ""
+
+msgid "Swap From:"
+msgstr ""
+
+msgid "Swap To (est.):"
+msgstr ""
+
+msgid "Swap To:"
+msgstr ""
+
+msgid "Swapping {0} {1} for {2} {3}"
+msgstr ""
+
+msgid "TVL"
+msgstr ""
 
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""
 
 msgid "The difference between the market price and estimated price due to trade size."
-msgstr "Разница между рыночной ценой и оценочной ценой из-за размера сделки."
+msgstr ""
 
 msgid "The input token cannot be transferred. There may be an issue with the input token."
 msgstr ""
 
 msgid "The onchain oracle that tracks the pricing for this pair"
-msgstr "Ончейн-оракул, отслеживающий цены на эту пару"
+msgstr ""
 
 msgid "The output token cannot be transferred. There may be an issue with the output token."
 msgstr ""
@@ -898,22 +995,19 @@ msgid "This transaction will not succeed due to price movement. Try increasing y
 msgstr ""
 
 msgid "This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance."
-msgstr "Эта транзакция не будет успешной из-за движения цены или комиссии за перевод. Попробуйте повысить устойчивость к проскальзыванию."
-
-msgid "Tip to encourage miners to select this transaction."
 msgstr ""
 
-msgid "Tip:"
+msgid "Timeframe"
 msgstr ""
 
 msgid "Toggle Expert Mode"
-msgstr "Переключить экспертный режим"
+msgstr ""
 
 msgid "Token"
-msgstr "Токен"
+msgstr ""
 
 msgid "Tokens"
-msgstr "Токены"
+msgstr ""
 
 msgid ""
 "Tokens from inactive lists. Import specific tokens below or\n"
@@ -921,25 +1015,28 @@ msgid ""
 msgstr ""
 
 msgid "Total"
-msgstr "Итого"
+msgstr ""
+
+msgid "Trading Fee"
+msgstr ""
 
 msgid "Transaction History {0}"
 msgstr ""
 
 msgid "Transaction Settings"
-msgstr "Настройки транзакции"
+msgstr ""
 
 msgid "Transaction Submitted"
 msgstr ""
 
 msgid "Transaction deadline"
-msgstr "Крайний срок транзакции"
+msgstr ""
 
 msgid "Try enabling multi-hop trades"
-msgstr "Попробуйте включить многоскачковые сделки"
+msgstr ""
 
 msgid "Turn On Expert Mode"
-msgstr "Включите экспертный режим"
+msgstr ""
 
 msgid "Twitter"
 msgstr ""
@@ -947,8 +1044,11 @@ msgstr ""
 msgid "Unknown error{0}. Try increasing your slippage tolerance."
 msgstr ""
 
+msgid "Unlock date"
+msgstr ""
+
 msgid "Unstake"
-msgstr "Отменить ставку"
+msgstr ""
 
 msgid "Unstake Auto Reinvesting SOUL"
 msgstr ""
@@ -957,13 +1057,13 @@ msgid "Unstake Manual SOUL"
 msgstr ""
 
 msgid "Unstaked"
-msgstr "Без ставки"
+msgstr ""
 
 msgid "Unsupported Asset"
-msgstr "Неподдерживаемый актив"
+msgstr ""
 
 msgid "Unwrap"
-msgstr "Развернуть"
+msgstr ""
 
 msgid "Use SOUL"
 msgstr ""
@@ -972,9 +1072,6 @@ msgid "Use SPELL"
 msgstr ""
 
 msgid "Use SoulPower to Enchant Soul."
-msgstr ""
-
-msgid "Use this tool to find pairs that don't automatically appear in the interface"
 msgstr ""
 
 msgid "Used"
@@ -990,7 +1087,7 @@ msgid "View Liquidity Positions"
 msgstr ""
 
 msgid "View on explorer"
-msgstr "Посмотреть в проводнике"
+msgstr ""
 
 msgid "View our Ecosystem."
 msgstr ""
@@ -1005,37 +1102,40 @@ msgid "Waiting for Confirmation"
 msgstr ""
 
 msgid "Wallet"
-msgstr "Кошелек"
+msgstr ""
 
 msgid "Wallet Balance"
-msgstr "Баланс Кошелька"
-
-msgid "When creating a pair you are the first liquidity provider. The ratio of tokens you add will set the price of this pool. Once you are happy with the rate, click supply to review"
-msgstr "Создавая пару, вы являетесь первым поставщиком ликвидности. Соотношение добавляемых вами токенов будет определять цену этого пула. Как только вы будете довольны ставкой, нажмите «поставка», чтобы просмотреть"
+msgstr ""
 
 msgid "Withdraw"
-msgstr "Снять"
+msgstr ""
+
+msgid "Withdraw from locker {id}"
+msgstr ""
 
 msgid "Wrap"
-msgstr "Завернуть"
+msgstr ""
 
 msgid "Wrong Network"
-msgstr "Неправильная сеть"
+msgstr ""
 
 msgid "You Pay:"
 msgstr ""
 
+msgid "You Will Receive"
+msgstr ""
+
 msgid "You are creating a pool"
-msgstr "Вы создаете пул"
+msgstr ""
 
 msgid "You are on the wrong network"
-msgstr "Вы не в той сети"
+msgstr ""
 
 msgid "You don’t have liquidity in this pool yet"
-msgstr "У вас еще нет ликвидности в этом пуле"
+msgstr ""
 
 msgid "You need to first approve LP tokens and then migrate it"
-msgstr "Вам необходимо сначала утвердить токены LP, а затем перенести их"
+msgstr ""
 
 msgid "You pay"
 msgstr ""
@@ -1047,7 +1147,7 @@ msgid "You receive:"
 msgstr ""
 
 msgid "You will receive"
-msgstr "Вы получите"
+msgstr ""
 
 msgid "Your"
 msgstr ""
@@ -1056,37 +1156,43 @@ msgid "Your Claimable SUSHI this Week"
 msgstr ""
 
 msgid "Your Liquidity"
-msgstr "Ваша ликвидность"
+msgstr ""
+
+msgid "Your Position"
+msgstr ""
+
+msgid "Your Staked"
+msgstr ""
 
 msgid "Your Wallet"
-msgstr "Ваш кошелек"
+msgstr ""
 
 msgid "Your pool share"
-msgstr "Ваша доля в пуле"
+msgstr ""
 
 msgid "Your total pool tokens"
-msgstr "Всего ваших токенов пула"
+msgstr ""
 
 msgid "Your transaction may be frontrun"
-msgstr "Ваша транзакция может быть авансированной"
+msgstr ""
 
 msgid "Your transaction may fail"
-msgstr "Ваша транзакция может завершиться неудачно"
+msgstr ""
 
 msgid "Your transaction will revert if it is pending for more than this long."
-msgstr "Ваша транзакция будет отменена, если она ожидает более этого времени."
+msgstr ""
 
 msgid "Your transaction will revert if the price changes unfavorably by more than this percentage."
 msgstr ""
 
 msgid "Your transaction will revert if there is a large, unfavorable price movement before it is confirmed."
-msgstr "Ваша транзакция будет отменена, если произойдет значительное неблагоприятное изменение цены до ее подтверждения."
+msgstr ""
 
 msgid "Your transactions will appear here..."
 msgstr ""
 
 msgid "Your {exchange} {0}/{1} liquidity will become SoulSwap {2}/{3} liquidity."
-msgstr "Ваша ликвидность {exchange} {0}/{1} станет ликвидностью SoulSwap {2}/{3}."
+msgstr ""
 
 msgid "Zap"
 msgstr ""
@@ -1094,11 +1200,14 @@ msgstr ""
 msgid "above"
 msgstr ""
 
+msgid "annualized"
+msgstr ""
+
 msgid "below"
 msgstr ""
 
 msgid "failed to load"
-msgstr "не удалось загрузить"
+msgstr ""
 
 msgid "for deliberations on additional points."
 msgstr ""
@@ -1110,10 +1219,10 @@ msgid "home page"
 msgstr ""
 
 msgid "loading..."
-msgstr "загрузка..."
+msgstr ""
 
 msgid "minutes"
-msgstr "минут"
+msgstr ""
 
 msgid "or the transaction will revert."
 msgstr ""
@@ -1125,10 +1234,10 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "{0} Deposited"
-msgstr "Внесено {0}"
+msgstr ""
 
 msgid "{0} Strategy"
-msgstr "Стратегия {0}"
+msgstr ""
 
 msgid "{0} {1} per {2}"
 msgstr ""

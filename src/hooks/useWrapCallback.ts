@@ -1,4 +1,4 @@
-import { ChainId, Currency, NATIVE, WNATIVE } from '@soulswap/sdk'
+import { ChainId, Currency, NATIVE, WNATIVE } from '../sdk'
 
 import { WETH9_EXTENDED } from '../constants/tokens'
 import { tryParseAmount } from '../functions/parse'

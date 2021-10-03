@@ -1,10 +1,10 @@
-import { SOUL_SUMMONER_ADDRESS, SOULVAULT_ADDRESS, ZERO } from '@soulswap/sdk'
+import { SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS, ZERO } from '../../sdk'
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
 import React, { useEffect, useState } from 'react'
 import { SOUL, SEANCE } from '../../constants'
 // import Balance from '../../components/Balance'
 import Button from '../../components/Button'
-import { ChainId } from '@soulswap/sdk'
+import { ChainId } from '../../sdk'
 import Head from 'next/head'
 import Dots from '../../components/Dots'
 import Image from 'next/image'
@@ -101,7 +101,7 @@ export default function SoulStake() {
     parsedAmount,
     SOUL_SUMMONER_ADDRESS[ChainId.FANTOM]
   )
-  const [approvalStateVault, approveVault] = useApproveCallback(parsedAmount, SOULVAULT_ADDRESS[ChainId.FANTOM_TESTNET])
+  const [approvalStateVault, approveVault] = useApproveCallback(parsedAmount, SOUL_VAULT_ADDRESS[ChainId.FANTOM_TESTNET])
 
   // ---------------------
   //      SOUL VAULT

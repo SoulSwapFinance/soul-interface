@@ -1,5 +1,5 @@
 import { ArrowDownIcon, InformationCircleIcon } from '@heroicons/react/solid'
-import { ChainId, Currency, Token } from '@soulswap/sdk'
+import { ChainId, Currency, Token } from '../../sdk'
 import { MEOW, SOUL, SPELL } from '../../constants'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 

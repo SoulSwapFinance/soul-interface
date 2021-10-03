@@ -2,6 +2,11 @@ import { useMemo, useState } from 'react'
 
 import { BigNumber } from '@ethersproject/bignumber'
 
+export enum SortableOptions {
+  'tvl' = 'TVL',
+  'roiPerYear' = 'APY',
+}
+
 function getNested(theObject: any, path: string, separator = '.') {
   try {
     return path
@@ -16,7 +21,10 @@ function getNested(theObject: any, path: string, separator = '.') {
   }
 }
 
-const useSortableData = (items: any, config: any = null) => {
+const useSortableData = (
+  items: any,
+  config: any = { key: 'tvl', direction: 'descending', value: SortableOptions.tvl }
+) => {
   const [sortConfig, setSortConfig] = useState(config)
 
   const sortedItems = useMemo(() => {
@@ -49,16 +57,16 @@ const useSortableData = (items: any, config: any = null) => {
     return []
   }, [items, sortConfig])
 
-  const requestSort = (key: any, direction = 'ascending') => {
+  const requestSort = (key: any, direction = 'descending') => {
     if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
       direction = 'descending'
     } else if (sortConfig && sortConfig.key === key && sortConfig.direction === 'descending') {
       direction = 'ascending'
     }
-    setSortConfig({ key, direction })
+    setSortConfig({ key, direction, value: SortableOptions[key] })
   }
 
-  return { items: sortedItems, requestSort, sortConfig }
+  return { items: sortedItems, requestSort, sortConfig, SortableOptions }
 }
 
 export default useSortableData

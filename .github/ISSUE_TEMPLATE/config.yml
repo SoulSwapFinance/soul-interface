@@ -4,5 +4,5 @@ contact_links:
     url: https://discord.gg/DQjChB6Wa6
     about: Please ask and answer questions here
   - name: List a token
-    url: https://github.com/Uniswap/default-token-list#adding-a-token
-    about: Any requests to add a token to Uniswap should go here
+    url: https://github.com/SoulSwapFinance/default-token-list#adding-a-token
+    about: Any requests to add a token to SoulSwap should go here

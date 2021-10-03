@@ -1,6 +1,6 @@
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import HistoryLink from 'next/link'
-import { Percent } from '@soulswap/sdk'
+import { Percent } from '../../sdk'
 import React from 'react'
 import { RowBetween } from '../Row'
 import SettingsTab from '../Settings'
@@ -66,7 +66,7 @@ export function AddRemoveTabs({
           </a>
         </HistoryLink>
         <div className="font-semibold">
-          {creating ? i18n._(t`Create a pair`) : adding ? i18n._(t`Add Liquidity`) : i18n._(t`Remove Liquidity`)}
+          {creating ? i18n._(t`Create Pair`) : adding ? i18n._(t`Add Liquidity`) : i18n._(t`Remove Liquidity`)}
         </div>
         <SettingsTab placeholderSlippage={defaultSlippage} />
       </RowBetween>

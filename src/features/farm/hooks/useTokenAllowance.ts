@@ -1,4 +1,4 @@
-import { CurrencyAmount, Token } from '@soulswap/sdk'
+import { CurrencyAmount, Token } from '../../../sdk'
 
 import { useMemo } from 'react'
 import { useSingleCallResult } from '../../../state/multicall/hooks'

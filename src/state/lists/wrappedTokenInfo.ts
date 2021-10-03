@@ -1,4 +1,4 @@
-import { Currency, Token } from '@soulswap/sdk'
+import { Currency, Token } from '../../sdk'
 import { Tags, TokenInfo } from '@uniswap/token-lists'
 
 import { TokenList } from '@uniswap/token-lists/dist/types'

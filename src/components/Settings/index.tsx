@@ -1,4 +1,4 @@
-import { ChainId, Percent } from '@soulswap/sdk'
+import { ChainId, Percent } from '../../sdk'
 import React, { useRef, useState } from 'react'
 import {
   useExpertModeManager,

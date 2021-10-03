@@ -1,6 +1,4 @@
 import { Wrap } from '../../components/ReusableStyles'
-
-import { ChainId } from '@soulswap/sdk'
 import Container from '../../components/Container'
 import Head from 'next/head'
 import React from 'react'

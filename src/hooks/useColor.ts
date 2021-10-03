@@ -1,4 +1,4 @@
-import { ChainId, Token } from '@soulswap/sdk'
+import { ChainId, Token } from '../sdk'
 import { useLayoutEffect, useState } from 'react'
 
 import Vibrant from 'node-vibrant'

@@ -49,11 +49,6 @@ module.exports = withBundleAnalyzer(
           permanent: true,
         },
         // {
-        //   source: '/bento',
-        //   destination: '/bentobox',
-        //   permanent: true,
-        // },
-        // {
         //   source: '/bento/kashi',
         //   destination: '/lend',
         //   permanent: true,
@@ -80,7 +75,7 @@ module.exports = withBundleAnalyzer(
         },
         {
           source: '/swap',
-          destination: '/exchange/swap',
+          destination: '/swap',
         },
         {
           source: '/swap/:token*',
@@ -139,6 +134,10 @@ module.exports = withBundleAnalyzer(
         {
           source: '/farm',
           destination: '/farm',
+        },
+        {
+          source: '/summoner',
+          destination: '/summoner',
         },
         {
           source: '/me',

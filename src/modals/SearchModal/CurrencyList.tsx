@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Token } from '@soulswap/sdk'
+import { Currency, CurrencyAmount, Token } from '../../sdk'
 import React, { CSSProperties, MutableRefObject, useCallback, useMemo } from 'react'
 import { RowBetween, RowFixed } from '../../components/Row'
 

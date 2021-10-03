@@ -1,5 +1,5 @@
-import { ROUTER_ADDRESS } from '@soulswap/sdk'
-import { Currency, CurrencyAmount, Percent, TradeType, Trade as V2Trade } from '@soulswap/sdk'
+import { ROUTER_ADDRESS } from '../sdk'
+import { Currency, CurrencyAmount, Percent, TradeType, Trade as V2Trade } from '../sdk'
 import { useCallback, useMemo } from 'react'
 import { useHasPendingApproval, useTransactionAdder } from '../state/transactions/hooks'
 

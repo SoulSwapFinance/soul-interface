@@ -2,7 +2,7 @@
 
 import { getUnixTime, startOfHour, startOfMinute, startOfSecond, subDays, subHours } from 'date-fns'
 
-import { ChainId } from '@soulswap/sdk'
+import { ChainId } from '../../../sdk'
 import { GRAPH_HOST } from '../constants'
 import { secondsQuery } from '../queries'
 import { request } from 'graphql-request'

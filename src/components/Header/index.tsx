@@ -1,4 +1,4 @@
-import { ChainId, Currency, NATIVE, SOUL_ADDRESS } from '@soulswap/sdk'
+import { ChainId, Currency, NATIVE, SOUL_ADDRESS } from '../../sdk'
 // import React, { useEffect, useState } from 'react'
 import React from 'react'
 
@@ -43,7 +43,7 @@ function AppBar(): JSX.Element {
                     <div className="flex space-x-2">
                       {/* <Buy /> */}
                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                      <NavLink href="/swap">
+                      <NavLink href="/exchange/swap">
                         <a
                           id={`swap-nav-link`}
                           className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
@@ -72,6 +72,26 @@ function AppBar(): JSX.Element {
                           </a>
                         </NavLink>
                       )}
+                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href={'/summoner'}>
+                        <a
+                          id={`farm-nav-link`}
+                          className="p-2 text-base text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                        >
+                          {i18n._(t`Summon`)}
+                        </a>
+                        </NavLink>
+                      )}
+                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href={'/locker'}>
+                        <a
+                          id={`farm-nav-link`}
+                          className="p-2 text-base text-primary hover:text-high-emphesis focus:text-high-emphesis whitespace-nowrap"
+                        >
+                          {i18n._(t`Locker`)}
+                        </a>
+                        </NavLink>
+                      )} */}
                       {/* {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                           <>
                             <NavLink href={'/lend'}>
@@ -305,25 +325,25 @@ function AppBar(): JSX.Element {
                   </a>
                 </Link>
               )}
-              { chainId && [ChainId.MAINNET].includes(chainId) && (
-                <Link href={'/bridge'}>
-                  <a
-                    id={`swap-nav-link`}
-                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                  >
-                    {i18n._(t`Bridge`)}
-                  </a>
-                </Link>
-              )}
                 { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                <Link href={'/pool'}>
+                  <Link href={'/pool'}>
                   <a
                     id={`pool-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                  >
+                    >
                     {i18n._(t`Pool`)}
                   </a>
                 </Link>
+                )}
+                { chainId && [ChainId.MAINNET].includes(chainId) && (
+                  <Link href={'/bridge'}>
+                    <a
+                      id={`swap-nav-link`}
+                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                    >
+                      {i18n._(t`Bridge`)}
+                    </a>
+                  </Link>
                 )}
                 { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <Link href={'/farm'}>
@@ -335,7 +355,27 @@ function AppBar(): JSX.Element {
                     </a>
                   </Link>
                 )}
-
+                {/* <Link href={'/vaults'}>
+                  <a
+                    id={`vaults-nav-link`}
+                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                  >
+                    {i18n._(t`Vaults`)}
+                  </a>
+                </Link>
+                <Link href={'/locker'}>
+                  <a
+                    id={`farm-nav-link`}
+                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                  >
+                    {i18n._(t`Locker`)}
+                  </a>
+                </Link> */}
+                {/* <Link href={'/bridge'}>
+                  <a className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap">
+                    {i18n._(t`Bridge`)}
+                  </a>
+                </Link> */}
                 {/* {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <>
                     <Link href={'/lend'}>
@@ -357,6 +397,16 @@ function AppBar(): JSX.Element {
                     </Link>
                   </>
                 )} */}
+                  { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                  <Link href={'/summoner'}>
+                    <a
+                      id={`farm-nav-link`}
+                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                    >
+                      {i18n._(t`Summon`)}
+                    </a>
+                  </Link>
+                  )}
                   { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <Link href={'/stake'}>
                     <a

@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Token } from '@soulswap/sdk'
+import { Currency, CurrencyAmount, Token } from '../../../sdk'
 
 import { useCallback } from 'react'
 import { useSoulSummonerContract } from '../hooks/useContract' // Not using `useSushiBarContract` to enter staking

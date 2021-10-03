@@ -55,7 +55,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   const { chainId, account } = useActiveWeb3React()
 
   const { fetchPid0AprAndLiquidity, fetchUserLpTokenAllocInFarm, enterStaking, leaveStaking, pendingSoul, userInfo } =
-    useSoulSummoner(pid, lpToken, farm.token1Address[250], farm.token2Address[250])
+    useSoulSummoner(pid, lpToken, farm.token1Address[chainId], farm.token2Address[chainId])
   const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
 
   const [showing, setShowing] = useState(false)

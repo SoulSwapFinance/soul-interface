@@ -8,7 +8,7 @@ import {
   TradeOptions,
   TradeOptionsDeadline,
   TradeType,
-} from '@soulswap/sdk'
+} from '../sdk'
 
 import { getAddress } from '@ethersproject/address'
 import invariant from 'tiny-invariant'
@@ -57,7 +57,6 @@ export abstract class ArcherRouter {
   /**
    * Cannot be constructed.
    */
-  /* eslint-disable @typescript-eslint/no-empty-function */
   private constructor() {}
   /**
    * Produces the on-chain method name to call and the hex encoded parameters to pass as arguments for a given trade.

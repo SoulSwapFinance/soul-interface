@@ -1,4 +1,4 @@
-import { Currency, Percent, Price } from '@soulswap/sdk'
+import { Currency, Percent, Price } from '../../sdk'
 
 import { Field } from '../../state/mint/actions'
 import { ONE_BIPS } from '../../constants'

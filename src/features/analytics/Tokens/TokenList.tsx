@@ -58,7 +58,7 @@ export default function TokenList({ tokens }: TokenListProps): JSX.Element {
         align: 'right',
       },
       {
-        Header: 'Volume (24h)',
+        Header: 'Volume (24H)',
         accessor: 'volume24h',
         Cell: (props) => formatNumber(props.value, true),
         align: 'right',
@@ -70,7 +70,7 @@ export default function TokenList({ tokens }: TokenListProps): JSX.Element {
         align: 'right',
       },
       {
-        Header: '24h',
+        Header: '24H',
         accessor: 'change1d',
         Cell: (props) => <ColoredNumber number={props.value} percent={true} />,
         align: 'right',

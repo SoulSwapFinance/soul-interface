@@ -1,4 +1,4 @@
-import { ChainId, CurrencyAmount, Token } from '@soulswap/sdk'
+import { ChainId, CurrencyAmount, Token } from '../sdk'
 import { useSoulGuideContract, useDashboardContract, useQuickSwapFactoryContract } from '../hooks/useContract'
 import { useCallback, useEffect, useRef, useState } from 'react'
 

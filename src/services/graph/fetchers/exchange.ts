@@ -12,19 +12,13 @@ import {
   transactionsQuery,
 } from '../queries'
 
-import { ChainId } from '@soulswap/sdk'
+import { ChainId } from '../../../sdk'
 import { GRAPH_HOST } from '../constants'
 import { request } from 'graphql-request'
 
 export const EXCHANGE = {
   [ChainId.MAINNET]: 'sushiswap/exchange',
-  [ChainId.FANTOM]: 'soulswap/fantom-exchange',
-  // [ChainId.XDAI]: 'sushiswap/xdai-exchange',
-  // [ChainId.MATIC]: 'sushiswap/matic-exchange',
-  // [ChainId.HARMONY]: 'sushiswap/harmony-exchange',
-  // [ChainId.OKEX]: 'sushiswap/okex-exchange',
-  // [ChainId.AVALANCHE]: 'sushiswap/avalanche-exchange',
-  // [ChainId.CELO]: 'sushiswap/celo-exchange',
+  [ChainId.FANTOM]: 'soulswap/fantom-exchange'
 }
 
 export const exchange = async (chainId = ChainId.MAINNET, query, variables) =>
@@ -105,10 +99,10 @@ export const getMphPrice = async () => {
   })
 }
 
-export const getSushiPrice = async () => {
+export const getSoulPrice = async () => {
   // console.log('getSushiPrice')
-  return getTokenPrice(ChainId.MAINNET, tokenPriceQuery, {
-    id: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
+  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
+    id: '0xe2fb177009ff39f52c0134e8007fa0e4baacbd07',
   })
 }
 

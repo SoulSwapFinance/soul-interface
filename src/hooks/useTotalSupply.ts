@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Token } from '@soulswap/sdk'
+import { Currency, CurrencyAmount, Token } from '../sdk'
 
 import { BigNumber } from '@ethersproject/bignumber'
 import { useSingleCallResult } from '../state/multicall/hooks'

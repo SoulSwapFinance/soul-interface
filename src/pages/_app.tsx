@@ -3,17 +3,16 @@ import '../styles/index.css'
 import '@fontsource/dm-sans/index.css'
 import 'react-virtualized/styles.css'
 import 'react-tabs/style/react-tabs.css'
+import 'react-datetime/css/react-datetime.css'
 
 import * as plurals from 'make-plural/plurals'
 
-import { Fragment, FunctionComponent } from 'react'
+import React, { Fragment, FunctionComponent } from 'react'
 import { NextComponentType, NextPageContext } from 'next'
-import store, { persistor } from '../state'
 
 import type { AppProps } from 'next/app'
 import ApplicationUpdater from '../state/application/updater'
 import DefaultLayout from '../layouts/Default'
-import Dots from '../components/Dots'
 import Head from 'next/head'
 import { I18nProvider } from '@lingui/react'
 import ListsUpdater from '../state/lists/updater'
@@ -24,15 +23,20 @@ import { Provider as ReduxProvider } from 'react-redux'
 import TransactionUpdater from '../state/transactions/updater'
 import UserUpdater from '../state/user/updater'
 import Web3ReactManager from '../components/Web3ReactManager'
-import { Web3ReactProvider } from '@web3-react/core'
+import { createWeb3ReactRoot, Web3ReactProvider } from '@web3-react/core'
 import dynamic from 'next/dynamic'
 import getLibrary from '../functions/getLibrary'
 import { i18n } from '@lingui/core'
-// import { persistStore } from 'redux-persist'
+import store from '../state'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import PriceProvider  from '../contexts/priceContext'
+import FarmContext from '../contexts/farmContext'
+import { usePricesApi } from '../features/summoner/hooks'
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
 const Web3ProviderNetwork = dynamic(() => import('../components/Web3ProviderNetwork'), { ssr: false })
+const Web3ProviderNetworkBridge = dynamic(() => import('../components/Web3ProviderBridge'), { ssr: false })
 
 if (typeof window !== 'undefined' && !!window.ethereum) {
   window.ethereum.autoRefreshOnNetworkChange = false
@@ -74,7 +78,7 @@ function MyApp({
   useEffect(() => {
     async function load(locale) {
       const { messages } = await import(`@lingui/loader!./../../locale/${locale}.po`)
-      i18n.loadLocaleData(locale, { plurals: plurals[locale] })
+      i18n.loadLocaleData(locale, { plurals: plurals[locale.toLowerCase() == 'pt-br' ? 'pt' : 'en'] })
       i18n.load(locale, messages)
       i18n.activate(locale)
     }
@@ -139,29 +143,32 @@ function MyApp({
           content="Be a DeFi Summoner with Soul. Swap, earn, grow yield, lend, borrow, leverage all on one decentralized, community driven platform. Welcome home to DeFi"
         />
       </Head>
+      
       <I18nProvider i18n={i18n} forceRenderOnLocaleChange={false}>
         <Web3ReactProvider getLibrary={getLibrary}>
           <Web3ProviderNetwork getLibrary={getLibrary}>
-            <Web3ReactManager>
-              <ReduxProvider store={store}>
-                <PersistGate loading={<Dots>loading</Dots>} persistor={persistor}>
-                  <>
-                    <ListsUpdater />
-                    <UserUpdater />
-                    <ApplicationUpdater />
-                    <TransactionUpdater />
-                    <MulticallUpdater />
-                  </>
-                  <Provider>
-                    <Layout>
-                      <Guard>
-                        <Component {...pageProps} />
-                      </Guard>
-                    </Layout>
-                  </Provider>
-                </PersistGate>
-              </ReduxProvider>
-            </Web3ReactManager>
+            <Web3ProviderNetworkBridge getLibrary={getLibrary}>
+              <Web3ReactManager>
+                <ReduxProvider store={store}>
+                  <PriceProvider>
+                    <>
+                      <ListsUpdater />
+                      <UserUpdater />
+                      <ApplicationUpdater />
+                      <TransactionUpdater />
+                      <MulticallUpdater />
+                    </>
+                    <Provider>
+                      <Layout>
+                        <Guard>
+                          <Component {...pageProps} />
+                        </Guard>
+                      </Layout>
+                    </Provider>
+                  </PriceProvider>
+                </ReduxProvider>
+              </Web3ReactManager>
+            </Web3ProviderNetworkBridge>
           </Web3ProviderNetwork>
         </Web3ReactProvider>
       </I18nProvider>

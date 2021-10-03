@@ -1,7 +1,7 @@
 import { BigNumber, ethers } from 'ethers'
 import { ExchangeRateCheckBox, SwapCheckbox } from './Checkbox'
 import { KashiApproveButton, TokenApproveButton } from './Button'
-import { Percent, WNATIVE } from '@soulswap/sdk'
+import { Percent, WNATIVE } from '../../sdk'
 import React, { useMemo, useState } from 'react'
 import { Warning, Warnings } from '../../entities/Warnings'
 import { ZERO, e10, maximum, minimum } from '../../functions/math'
@@ -9,7 +9,7 @@ import { computeRealizedLPFeePercent, warningSeverity } from '../../functions/pr
 import { useExpertModeManager, useUserSlippageToleranceWithDefault } from '../../state/user/hooks'
 
 import Button from '../../components/Button'
-// import { Field } from '../../state/swap/actions'
+import { Field } from '../../state/swap/actions'
 import KashiCooker from '../../entities/KashiCooker'
 import { SOULSWAP_MULTISWAPPER_ADDRESS } from '../../constants/kashi'
 import SmartNumberInput from '../../components/SmartNumberInput'

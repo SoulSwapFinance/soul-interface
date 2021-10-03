@@ -143,11 +143,30 @@
     ]
   },
   "dependencies": {
+    "@types/big.js": "6.1.1",
     "autoprefixer": "^10.0.2",
+    "axios": "^0.21.1",
+    "cids": "^1.1.7",
+    "big.js": "^6.1.1",
+    "decimal.js-light": "^2.5.1",
     "ethers": "^5.4.7",
+    "faunadb": "^4.4.1",
+    "graphql": "^15.5.3",
+    "graphql-request": "^3.5.0",
+    "lightweight-charts": "^3.6.1",
+    "moment": "^2.29.1",
+    "multicodec": "^3.1.0",
+    "multihashes": "^4.0.2",
     "react-bootstrap": "^1.6.3",
+    "react-datetime": "3.1.0",
+    "react-google-recaptcha": "2.1.0",
+    "react-google-recaptcha-v3": "^1.9.5",
     "react-i18next": "^11.12.0",
     "react-inlinesvg": "^2.3.0",
-    "react-router-dom": "^5.3.0"
+    "react-router-dom": "^5.3.0",
+    "tiny-invariant": "^1.1.0",
+    "toformat": "^2.0.0",
+    "web3": "3.0.0-rc.4",
+    "web3-eth-abi": "^1.5.2"
   }
 }

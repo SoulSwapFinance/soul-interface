@@ -1,4 +1,4 @@
-import { Token, WNATIVE } from '@soulswap/sdk'
+import { Token, WNATIVE } from '../../sdk'
 import { useBentoBoxContract, useSoulGuideContract, useContract } from '../../hooks/useContract'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 

@@ -1,5 +1,5 @@
 // import { useActiveWeb3React } from './useActiveWeb3React'
-import { ChainId } from '@soulswap/sdk'
+import { ChainId } from '../../sdk'
 import { useAnyswapEthOperaBridge } from '../../hooks/useContract'
 import { useCallback } from 'react'
 

@@ -23,7 +23,7 @@ const TokenBalance = ({ farm }: any) => {
         <Paper className="bg-dark-800">
           <div
             className="grid grid-cols-3 px-4 py-4 text-sm rounded cursor-pointer select-none"
-            onClick={() => Router.push(`zap?poolAddress=${farm.pairAddress}&currencyId=ETH`)}
+            onClick={() => Router.push(`zap?poolAddress=${farm.pairAddress}&currencyId=FTM`)}
           >
             <div className="flex items-center">
               <div className="mr-4">
@@ -82,7 +82,7 @@ const PoolList = () => {
               <div className="flex flex-col items-center justify-between w-full">
                 <div className="items-center hidden md:flex">
                   {/* <BackButton defaultRoute="/pool" /> */}
-                  <div className="mb-2 mr-2 text-lg whitespace-nowrap">Select a Pool to Zap Into</div>
+                  <div className="mb-2 mr-2 text-lg whitespace-nowrap">Select Pool to Zap Into</div>
                 </div>
                 <Search search={search} term={term} />
               </div>

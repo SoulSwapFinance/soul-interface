@@ -22,7 +22,7 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"],
+    "**/*.tsx", "src/pages/farm/index.jsx"],
   "exclude": [
     "node_modules"
   ]

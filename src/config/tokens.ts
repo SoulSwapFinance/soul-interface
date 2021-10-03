@@ -1,4 +1,4 @@
-import { ChainId, SPELL_ADDRESS, Token, WETH9, WNATIVE } from '@soulswap/sdk'
+import { ChainId, BOUND_ADDRESS, Token, WETH9, WNATIVE } from '../sdk'
 
 export const FANTOM: { [key: string]: Token } = {
   USDC: new Token(ChainId.FANTOM, '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6, 'USDC', 'USD Coin'),
@@ -37,7 +37,7 @@ export const SEANCE: ChainTokenMap = {
 }
 
 export const SPELL: ChainTokenMap = {
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, SPELL_ADDRESS[ChainId.FANTOM], 18, 'SPELL', 'SpellBound'), // TODO: update
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, BOUND_ADDRESS[ChainId.FANTOM], 18, 'SPELL', 'SpellBound'), // TODO: update
   [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '0xdFDC55e7E7eBA3E7BF2a0E0743f4D3C858FaC37E', 18, 'SPELL', 'SpellBound'),   // 30 JUL
 }
 

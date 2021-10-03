@@ -24,7 +24,7 @@ export default function TransactionFailedModal({ isOpen, onDismiss }: Transactio
         </div>
         <div className="flex items-baseline justify-center mt-3 text-3xl flex-nowrap">
           <p className="text-high-emphesis">Uh Oh!&nbsp;</p>
-          <p className="text-pink">Transaction rejected.</p>
+          <p className="text-pink">Transaction Rejected.</p>
         </div>
         <div className="flex justify-center mt-5">
           <button
