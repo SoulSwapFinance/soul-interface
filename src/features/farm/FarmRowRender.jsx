@@ -377,7 +377,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
-                  Apr
+                  APR
                 </Text>
                 <FarmItem>{apr ? (apr === 'Infinity' ? '∞%' : apr + '%') : '?'}</FarmItem>
               </FarmItemBox>
@@ -399,7 +399,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
               <HideOnMobile desktopOnly={true}>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
-                  Daily Rewards
+                  Pool Allocation
                 </Text>
                 {yearlySoulRewards === 0 ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
@@ -429,7 +429,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
               <HideOnMobile>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
-                  Tvl
+                  TVL
                 </Text>
                 {liquidity === '0' ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">

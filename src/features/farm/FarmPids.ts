@@ -126,6 +126,18 @@ export const FarmPids = [
       token1Address: tokens.SEANCE,
       token2Address: tokens.FTM,
   },
+  // { // TEMPLATE
+  //   pid: 11,
+  //   token1: '',
+  //   token2: '',
+  //   lpSymbol: '',
+  //   lpAddresses: {
+  //     4002: '',
+  //     250: '',
+  //     },
+  //     token1Address: tokens.SEANCE,
+  //     token2Address: tokens.FTM,
+  // },
 ]
 
 export default FarmPids
