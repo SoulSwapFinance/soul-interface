@@ -28,7 +28,7 @@
 //     error = t`Connect Wallet`
 //   }
 //   if (!parsedAmount) {
-//     error = error ?? t`Enter an amount`
+//     error = error ?? t`Enter Amount`
 //   }
 
 //   return {
@@ -58,7 +58,7 @@
 //     error = t`Connect Wallet`
 //   }
 //   if (!parsedAmount) {
-//     error = error ?? t`Enter an amount`
+//     error = error ?? t`Enter Amount`
 //   }
 
 //   return {

@@ -165,7 +165,7 @@ export function useDerivedLimitOrderInfo(): {
   }
 
   if (!parsedInputAmount || !parsedOutputAmount) {
-    inputError = inputError ?? i18n._(t`Enter an amount`)
+    inputError = inputError ?? i18n._(t`Enter Amount`)
   }
 
   if (!currencies[Field.INPUT] || !currencies[Field.OUTPUT]) {

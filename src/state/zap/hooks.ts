@@ -221,7 +221,7 @@ export function useDerivedZapInfo(
   }
 
   if (!parsedAmount) {
-    error = error ?? 'Enter an amount'
+    error = error ?? 'Enter Amount'
   }
 
   if (parsedAmount && currencyBalance?.lessThan(parsedAmount)) {
