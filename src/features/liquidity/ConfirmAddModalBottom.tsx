@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Fraction, Percent } from '@soulswap/sdk'
+import { Currency, CurrencyAmount, Fraction, Percent } from '../../sdk'
 
 import Button from '../../components/Button'
 import { Field } from '../../state/mint/actions'

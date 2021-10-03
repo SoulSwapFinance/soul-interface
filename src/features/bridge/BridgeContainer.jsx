@@ -1,7 +1,7 @@
 import { useActiveWeb3React } from '../../hooks'
 import { ethers } from 'ethers'
 
-// import { ChainId } from '@soulswap/sdk'
+// import { ChainId } from '../../sdk'
 import { useState, useEffect } from 'react'
 
 import useApproveContract from './useApprove'

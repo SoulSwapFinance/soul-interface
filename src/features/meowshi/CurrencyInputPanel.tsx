@@ -1,7 +1,7 @@
 import { Field, MeowshiState } from '../../pages/tools/meowshi'
 import React, { FC } from 'react'
 import { SPELL, SOUL } from '../../constants'
-import { ChainId } from '@soulswap/sdk'
+import { ChainId } from '../../sdk'
 import Image from 'next/image'
 import { Input as NumericalInput } from '../../components/NumericalInput'
 import Typography from '../../components/Typography'

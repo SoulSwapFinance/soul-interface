@@ -3,14 +3,15 @@ import {
   // MULTICALL_ADDRESS,
   FACTORY_ADDRESS,
   ROUTER_ADDRESS,
-  SPELL_ADDRESS,
+  // SPELL_ADDRESS,
+  BOUND_ADDRESS,
   SOUL_ADDRESS,
   SOUL_SUMMONER_ADDRESS,
-  SOULVAULT_ADDRESS,
+  SOUL_VAULT_ADDRESS,
   SOUL_GUIDE_ADDRESS,
   TIMELOCK_ADDRESS,
   WNATIVE,
-} from '@soulswap/sdk'
+} from '../../../sdk'
 
 import { Contract } from '@ethersproject/contracts'
 import ERC20_ABI from '../constants/abis/tokens/erc20.json'
@@ -91,7 +92,7 @@ export function useSoulContract(withSignerIfPossible = true): Contract | null {
 
 export function useSoulVaultContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOULVAULT_ADDRESS[chainId], SOULVAULT_ABI, withSignerIfPossible)
+  return useContract(chainId && SOUL_VAULT_ADDRESS[chainId], SOULVAULT_ABI, withSignerIfPossible)
 }
 
 export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
@@ -118,7 +119,7 @@ export function useFactoryContract(): Contract | null {
 
 export function useSpellBoundContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SPELL_ADDRESS[chainId], SPELL_ABI, withSignerIfPossible)
+  return useContract(chainId && BOUND_ADDRESS[chainId], SPELL_ABI, withSignerIfPossible)
 }
 
 // export function useTimelockContract(): Contract | null {

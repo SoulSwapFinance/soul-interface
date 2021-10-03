@@ -1,5 +1,5 @@
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
-import { ChainId, SOUL_SUMMONER_ADDRESS, Token, ZERO } from '@soulswap/sdk'
+import { ChainId, SOUL_SUMMONER_ADDRESS, Token, ZERO } from '../../sdk'
 import { Chef, PairType } from './enum'
 import { Disclosure, Transition } from '@headlessui/react'
 import React, { useState } from 'react'

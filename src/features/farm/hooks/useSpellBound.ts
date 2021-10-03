@@ -1,4 +1,4 @@
-import { CurrencyAmount, Token } from '@soulswap/sdk'
+import { CurrencyAmount, Token } from '../../../sdk'
 
 import { useCallback } from 'react'
 import { useSpellBoundContract } from './useContract'

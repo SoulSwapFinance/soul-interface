@@ -1,6 +1,6 @@
 import { ExchangeRateCheckBox, SwapCheckbox } from './Checkbox'
 import { KashiApproveButton, TokenApproveButton } from './Button'
-import { Percent, WNATIVE } from '@soulswap/sdk'
+import { Percent, WNATIVE } from '../../sdk'
 import React, { useMemo, useState } from 'react'
 import { SOULSWAP_MULTISWAPPER_ADDRESS, SOULSWAP_MULTI_EXACT_SWAPPER_ADDRESS } from '../../constants/kashi'
 import { Warning, Warnings } from '../../entities/Warnings'

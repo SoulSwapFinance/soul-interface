@@ -1,4 +1,4 @@
-import { CurrencyAmount, JSBI, SOUL_SUMMONER_ADDRESS } from '@soulswap/sdk'
+import { CurrencyAmount, JSBI, SOUL_SUMMONER_ADDRESS } from '../../sdk'
 import { Chef } from './enum'
 import { SOUL  } from '../../constants'
 import { NEVER_RELOAD, useSingleCallResult, useSingleContractMultipleData } from '../../state/multicall/hooks'
