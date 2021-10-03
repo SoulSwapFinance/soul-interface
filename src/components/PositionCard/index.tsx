@@ -230,7 +230,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
             </div>
 
             <div className="flex items-center justify-between">
-              <div>{i18n._(t`Your pool share`)}:</div>
+              <div>{i18n._(t`Your Share`)}:</div>
               <div className="font-semibold">
                 {poolTokenPercentage
                   ? (poolTokenPercentage.toFixed(2) === '0.00' ? '<0.01' : poolTokenPercentage.toFixed(2)) + '%'

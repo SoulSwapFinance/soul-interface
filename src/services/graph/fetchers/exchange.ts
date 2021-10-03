@@ -99,10 +99,10 @@ export const getMphPrice = async () => {
   })
 }
 
-export const getSushiPrice = async () => {
+export const getSoulPrice = async () => {
   // console.log('getSushiPrice')
-  return getTokenPrice(ChainId.MAINNET, tokenPriceQuery, {
-    id: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
+  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
+    id: '0xe2fb177009ff39f52c0134e8007fa0e4baacbd07',
   })
 }
 

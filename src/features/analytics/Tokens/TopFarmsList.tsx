@@ -4,7 +4,7 @@ import { formatPercent } from '../../../functions'
 import { pairQuery } from '../../../services/graph/queries'
 import { useCurrency } from '../../../hooks/Tokens'
 import { useMemo } from 'react'
-import { useSushiPairs } from '../../../services/graph'
+import { useSoulPairs } from '../../../services/graph'
 
 interface TopFarmsListProps {
   farms: {

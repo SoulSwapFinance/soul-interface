@@ -4,7 +4,7 @@ import {
   useEthPrice,
   useFarms,
   useOneDayBlock,
-  useSushiPairs,
+  useSoulPairs,
   useToken,
   useTokenPairs,
   useTransactions,
@@ -99,7 +99,7 @@ export default function Token(): JSX.Element {
 
   // For Top Farms
   const farms = useFarms()
-  const farmPairs = useSushiPairs({ where: { id_in: farms.map((farm) => farm.pair) } })
+  const farmPairs = useSoulPairs({ where: { id_in: farms.map((farm) => farm.pair) } })
   const farmsFormatted = farmPairs
     ? farmPairs
         .filter((farm) => farm.token0.id === id || farm.token1.id === id)
