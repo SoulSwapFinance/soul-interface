@@ -1,4 +1,4 @@
-// import { CurrencyAmount, JSBI, Token } from '@soulswap/sdk'
+// import { CurrencyAmount, JSBI, Token } from '../sdk'
 
 // import { t } from '@lingui/macro'
 // import { tryParseAmount } from '../../functions'

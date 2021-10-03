@@ -5,7 +5,7 @@ import { useAddPopup, useBlockNumber } from '../application/hooks'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { useCallback, useEffect, useMemo } from 'react'
 
-import { ChainId } from '@soulswap/sdk'
+import { ChainId } from '../../sdk'
 import { updateBlockNumber } from '../application/actions'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 

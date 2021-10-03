@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, JSBI, Percent, Token, TradeType, Trade as V2Trade } from '@soulswap/sdk'
+import { Currency, CurrencyAmount, JSBI, Percent, Token, TradeType, Trade as V2Trade } from '../sdk'
 import { DAI, SOUL, USDC } from '../constants/tokens'
 import { useMemo, useState } from 'react'
 

@@ -1,7 +1,6 @@
 import { AppDispatch, AppState } from '..'
-import { BASES_TO_TRACK_LIQUIDITY_FOR, PINNED_PAIRS } from '../../constants'
-// import { ChainId, FACTORY_ADDRESS, JSBI, Pair, Percent, Token, computePairAddress } from '@soulswap/sdk'
-import { ChainId, FACTORY_ADDRESS, JSBI, Pair, Percent, Token, computePairAddress, INIT_CODE_HASH } from '@soulswap/sdk'
+import { BASES_TO_TRACK_LIQUIDITY_FOR, FACTORY_ADDRESS } from '../../constants'
+import { ChainId, computePairAddress, JSBI, Pair, Percent, Token } from '../../sdk'
 import {
   SerializedPair,
   SerializedToken,
@@ -84,7 +83,7 @@ export function useExpertModeManager(): [boolean, () => void] {
     dispatch(updateUserExpertMode({ userExpertMode: !expertMode }))
   }, [expertMode, dispatch])
 
-  return [expertMode, toggleSetExpertMode]
+  return [expertMode == true ? true : false, toggleSetExpertMode]
 }
 
 export function useUserSingleHopOnly(): [boolean, (newSingleHopOnly: boolean) => void] {
@@ -221,18 +220,15 @@ export function useURLWarningToggle(): () => void {
  * @param tokenB the other token
  */
 export function toV2LiquidityToken([tokenA, tokenB]: [Token, Token]): Token {
-  if (tokenA.chainId !== tokenB.chainId) throw new Error('Not matching chain IDs')
-  if (tokenA.equals(tokenB)) throw new Error('Tokens cannot be equal')
-  if (!FACTORY_ADDRESS[tokenA.chainId]) throw new Error('No factory address on this chain')
-  if (!INIT_CODE_HASH[tokenA.chainId]) throw new Error('No factory init code hash set in sdk on this chain')
-
-  return new Token(
-    tokenA.chainId,
-    computePairAddress({ factoryAddress: FACTORY_ADDRESS[tokenA.chainId], tokenA, tokenB, codeHash: INIT_CODE_HASH[tokenA.chainId] }),
-    18,
-    'SOUL-LP',
-    'SoulSwap LP'
-  )
+  return tokenA && tokenB && tokenA.chainId === tokenB.chainId && FACTORY_ADDRESS[tokenA.chainId]
+    ? new Token(
+        tokenA.chainId,
+        computePairAddress({ factoryAddress: FACTORY_ADDRESS[tokenA.chainId], tokenA, tokenB }),
+        18,
+        'SOUL-LP',
+        'SoulSwap LP'
+      )
+    : undefined
 }
 
 /**
@@ -241,9 +237,6 @@ export function toV2LiquidityToken([tokenA, tokenB]: [Token, Token]): Token {
 export function useTrackedTokenPairs(): [Token, Token][] {
   const { chainId } = useActiveWeb3React()
   const tokens = useAllTokens()
-
-  // pinned pairs
-  const pinnedPairs = useMemo(() => (chainId ? PINNED_PAIRS[chainId] ?? [] : []), [chainId])
 
   // pairs for every token against every base
   const generatedPairs: [Token, Token][] = useMemo(
@@ -283,10 +276,7 @@ export function useTrackedTokenPairs(): [Token, Token][] {
     })
   }, [savedSerializedPairs, chainId])
 
-  const combinedList = useMemo(
-    () => userPairs.concat(generatedPairs).concat(pinnedPairs),
-    [generatedPairs, pinnedPairs, userPairs]
-  )
+  const combinedList = useMemo(() => userPairs.concat(generatedPairs), [generatedPairs, userPairs])
 
   return useMemo(() => {
     // dedupes pairs of tokens in the combined list

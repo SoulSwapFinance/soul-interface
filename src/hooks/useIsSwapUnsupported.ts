@@ -1,4 +1,4 @@
-import { Currency, Token } from '@soulswap/sdk'
+import { Currency, Token } from '../sdk'
 
 import { useMemo } from 'react'
 import { useUnsupportedTokens } from './Tokens'

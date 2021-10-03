@@ -1,4 +1,4 @@
-import { CurrencyAmount, Token, SOULVAULT_ADDRESS } from '@soulswap/sdk'
+import { CurrencyAmount, Token, SOUL_VAULT_ADDRESS } from '../sdk'
 // import { Fraction } from '../entities'
 import { useActiveWeb3React } from '../hooks'
 import { useCallback } from 'react'

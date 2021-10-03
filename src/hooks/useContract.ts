@@ -15,18 +15,18 @@ import {
 } from '../constants/abis/argent-wallet-detector'
 import {
   ChainId,
-  MAKER_ADDRESS,
+  REAPER_ADDRESS,
   FACTORY_ADDRESS,
   ROUTER_ADDRESS,
-  SPELL_ADDRESS,
+  BOUND_ADDRESS,
   SOUL_ADDRESS,
   SOUL_SUMMONER_ADDRESS,
-  SOULVAULT_ADDRESS,
+  SOUL_VAULT_ADDRESS,
   SOUL_GUIDE_ADDRESS,
-  SOULSWAP_SWAPPER_ADDRESS,
+  // SOULSWAP_SWAPPER_ADDRESS,
   TIMELOCK_ADDRESS,
   WNATIVE,
-} from '@soulswap/sdk'
+} from '../sdk'
 import {
   COFFIN_BOX_ADDRESS,
   CHAINLINK_ORACLE_ADDRESS,
@@ -214,7 +214,7 @@ export function useFantomUsdcContract(withSignerIfPossible?: boolean): Contract 
 
 export function useSoulVaultContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOULVAULT_ADDRESS[chainId], SOULVAULT_ABI, withSignerIfPossible)
+  return useContract(chainId && SOUL_VAULT_ADDRESS[chainId], SOULVAULT_ABI, withSignerIfPossible)
 }
 
 export function useMasterChefContract(withSignerIfPossible?: boolean): Contract | null {
@@ -248,12 +248,17 @@ export function useRouterContract(useArcher = false, withSignerIfPossible?: bool
 
 export function useSpellBoundContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SPELL_ADDRESS[chainId], SPELL_ABI, withSignerIfPossible)
+  return useContract(chainId && BOUND_ADDRESS[chainId], SPELL_ABI, withSignerIfPossible)
 }
 
 export function useMakerContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && MAKER_ADDRESS[chainId], MAKER_ABI, false)
+  return useContract(chainId && REAPER_ADDRESS[chainId], MAKER_ABI, false)
+}
+
+export function useReaperContract(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && REAPER_ADDRESS[chainId], MAKER_ABI, false)
 }
 
 export function useTimelockContract(): Contract | null {
@@ -275,10 +280,10 @@ export function useKashiPairCloneContract(address: string, withSignerIfPossible?
   return useContract(address, KASHIPAIR_ABI, withSignerIfPossible)
 }
 
-export function useSoulSwapSwapper(): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOULSWAP_SWAPPER_ADDRESS[chainId], BASE_SWAPPER_ABI, false)
-}
+// export function useSoulSwapSwapper(): Contract | null {
+//   const { chainId } = useActiveWeb3React()
+//   return useContract(chainId && SOULSWAP_SWAPPER_ADDRESS[chainId], BASE_SWAPPER_ABI, false)
+// }
 
 export function useChainlinkOracle(): Contract | null {
   return useContract(CHAINLINK_ORACLE_ADDRESS, CHAINLINK_ORACLE_ABI, false)

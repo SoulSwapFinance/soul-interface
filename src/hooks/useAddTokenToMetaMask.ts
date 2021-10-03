@@ -1,4 +1,4 @@
-import { Currency, Token } from '@soulswap/sdk'
+import { Currency, Token } from '../sdk'
 import { useCallback, useState } from 'react'
 
 import { getTokenLogoURL } from './../components/CurrencyLogo'

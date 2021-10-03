@@ -7,7 +7,7 @@ import { resolveENSContentHash } from '../functions/ens'
 import { useActiveWeb3React } from './useActiveWeb3React'
 import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import { ChainId } from '@soulswap/sdk'
+import { ChainId } from '../sdk'
 import { getNetworkLibrary } from '../connectors'
 
 export function useFetchListCallback(): (listUrl: string, sendDispatch?: boolean) => Promise<TokenList> {

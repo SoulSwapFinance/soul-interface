@@ -1,4 +1,4 @@
-import { Currency, Percent, Trade, TradeType } from '@soulswap/sdk'
+import { Currency, Percent, Trade, TradeType } from '../sdk'
 
 import { useMemo } from 'react'
 import { useUserSlippageToleranceWithDefault } from '../state/user/hooks'
