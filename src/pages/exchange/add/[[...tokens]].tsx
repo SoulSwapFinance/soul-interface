@@ -434,7 +434,7 @@ export default function Add() {
                 <Web3Connect size="lg" color="gradient" className="w-full" />
               ) : !isValid ? (
                 <Button size="lg" color="gray" className="w-full" disabled>
-                  {i18n._(t`Enter an amount`)}
+                  {i18n._(t`Enter Amount`)}
                 </Button>
               ) : (
                 (approvalA === ApprovalState.NOT_APPROVED ||
