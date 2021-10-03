@@ -59,16 +59,21 @@ const FarmList = () => {
   return (
     <>
       <Wrap padding="0 0 2rem 0">
-        <Heading fontSize="1.5rem" textAlign="center">
+        {/* <Heading fontSize="1.5rem" textAlign="center">
           Farms
-        </Heading>
-        <Text fontSize="1rem" padding="0" color="#aaa" textAlign="center">
+        </Heading> */}
+        {/* <Text fontSize="1rem" padding="0" color="#aaa" textAlign="center">
           Each farm withdraw, no matter how small, resets the fee percentage.
-        </Text>
+        </Text> */}
 
-        <Text ontSize=".9rem" padding="1rem 0 0 0" color="#F36FFE" textAlign="center">
-          Total Pending Rewards: {totalPending}
-        </Text>
+        {/* <Text fontSize=".9rem" padding="1rem 0 0 0" color="#F36FFE" textAlign="center">
+          Total Pending Rewards: { 
+          Number(totalPending)
+          .toFixed(0)
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+          }
+        </Text> */}
         {/* <Wrap display='flex' justifyContent='center'>
           <Button onClick={() => handleHarvest()}>Harvest Rewards</Button>
         </Wrap> */}

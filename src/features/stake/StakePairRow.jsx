@@ -317,7 +317,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
               <StakeItemBox>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
-                  Apr
+                  APR
                 </Text>
                 <StakeItem>{apr ? (apr === 'Infinity' ? '∞%' : apr + '%') : '?'}</StakeItem>
               </StakeItemBox>
@@ -339,7 +339,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
               <HideOnMobile desktopOnly={true}>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
-                  Daily Rewards
+                  Pool Allocation
                 </Text>
                 {yearlySoulRewards === 0 ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
@@ -369,7 +369,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
               <HideOnMobile>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
-                  Tvl
+                  TVL
                 </Text>
                 {liquidity === '0' ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
