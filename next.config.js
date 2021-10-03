@@ -30,7 +30,7 @@ module.exports = withBundleAnalyzer(
       return [
         {
           source: '/',
-          destination: '/exchange/swap',
+          destination: '/swap',
           permanent: true,
         },
         // {
@@ -48,11 +48,6 @@ module.exports = withBundleAnalyzer(
           destination: '/farm',
           permanent: true,
         },
-        // {
-        //   source: '/bento',
-        //   destination: '/bentobox',
-        //   permanent: true,
-        // },
         // {
         //   source: '/bento/kashi',
         //   destination: '/lend',
@@ -80,7 +75,7 @@ module.exports = withBundleAnalyzer(
         },
         {
           source: '/swap',
-          destination: '/exchange/swap',
+          destination: '/swap',
         },
         {
           source: '/swap/:token*',
@@ -103,16 +98,8 @@ module.exports = withBundleAnalyzer(
         //   destination: '/exchange/migrate',
         // },
         {
-          source: '/summoner',
-          destination: '/summoner',
-        },
-        {
           source: '/pool',
-          destination: '/pool',
-        },
-        {
-          source: '/swap',
-          destination: '/exchange/swap',
+          destination: '/exchange/pool',
         },
         {
           source: '/find',
@@ -147,6 +134,10 @@ module.exports = withBundleAnalyzer(
         {
           source: '/farm',
           destination: '/farm',
+        },
+        {
+          source: '/summoner',
+          destination: '/summoner',
         },
         {
           source: '/me',

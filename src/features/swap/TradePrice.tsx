@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react'
 
-import { Currency, Price, Trade as V2Trade, TradeType } from '../../sdk'
+import { Currency, Price, Trade, TradeType } from '../../sdk'
 import Typography from '../../components/Typography'
 import { classNames, computeRealizedLPFeePercent, formatNumberScale } from '../../functions'
 import { t } from '@lingui/macro'
@@ -13,7 +13,7 @@ interface TradePriceProps {
   showInverted: boolean
   setShowInverted: (showInverted: boolean) => void
   className?: string
-  trade?: V2Trade<Currency, Currency, TradeType>
+  trade?: Trade<Currency, Currency, TradeType>
 }
 
 export default function TradePrice({ price, showInverted, setShowInverted, className, trade }: TradePriceProps) {

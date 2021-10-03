@@ -197,7 +197,7 @@ export function useSoulSeanceContract(withSignerIfPossible?: boolean): Contract 
   return useContract(chainId && SOUL_SEANCE_PAIR[chainId], IUniswapV2PairABI, withSignerIfPossible)
 }
 
-export function useSoulFantomContract(withSignerIfPossible?: boolean): Contract | null {
+export function useSoulFtmContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SOUL_FTM_PAIR[chainId], IUniswapV2PairABI, withSignerIfPossible)
 }
@@ -207,7 +207,7 @@ export function useSeanceUsdcContract(withSignerIfPossible?: boolean): Contract 
   return useContract(chainId && SEANCE_USDC_PAIR[chainId], IUniswapV2PairABI, withSignerIfPossible)
 }
 
-export function useFantomUsdcContract(withSignerIfPossible?: boolean): Contract | null {
+export function useFtmUsdcContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && FTM_USDC_PAIR[chainId], IUniswapV2PairABI, withSignerIfPossible)
 }

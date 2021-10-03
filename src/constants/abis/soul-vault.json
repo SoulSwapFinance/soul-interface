@@ -13,7 +13,7 @@
                 "type": "address"
             },
             {
-                "internalType": "contract IMasterChef",
+                "internalType": "contract ISummoner",
                 "name": "_summoner",
                 "type": "address"
             }
@@ -353,7 +353,7 @@
         "name": "summoner",
         "outputs": [
             {
-                "internalType": "contract IMasterChef",
+                "internalType": "contract ISummoner",
                 "name": "",
                 "type": "address"
             }

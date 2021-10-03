@@ -60,12 +60,12 @@ const FarmListItem2 = ({ farm, ...rest }) => {
 
   const tvl = getTvl()
 
-  const roiPerBlock =
+  const roiPerSecond =
     farm?.rewards?.reduce((previousValue, currentValue) => {
-      return previousValue + currentValue.rewardPerBlock * currentValue.rewardPrice
+      return previousValue + currentValue.rewardPerSecond * currentValue.rewardPrice
     }, 0) / tvl
 
-  const roiPerHour = roiPerBlock * farm.blocksPerHour
+  const roiPerHour = roiPerSecond * farm.secondsPerHour
   const roiPerDay = roiPerHour * 24
   const roiPerMonth = roiPerDay * 30
   const roiPerYear = roiPerDay * 365

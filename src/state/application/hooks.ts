@@ -35,6 +35,18 @@ export function useWalletModalToggle(): () => void {
   return useToggleModal(ApplicationModal.WALLET)
 }
 
+export function useTokenStatsModalToggle(token): () => void {
+  return useToggleModal(token.symbol == 'SOUL' ? ApplicationModal.SOUL_STATS : ApplicationModal.FTM_STATS)
+}
+
+export function useYieldDetailsModalToggle(): () => void {
+  return useToggleModal(ApplicationModal.YIELD_DETAILS)
+}
+
+export function useChainModalToggle(): () => void {
+  return useToggleModal(ApplicationModal.CHAIN)
+}
+
 export function useNetworkModalToggle(): () => void {
   return useToggleModal(ApplicationModal.NETWORK)
 }

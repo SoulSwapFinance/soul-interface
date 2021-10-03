@@ -17,12 +17,13 @@ import Head from 'next/head'
 import { I18nProvider } from '@lingui/react'
 import ListsUpdater from '../state/lists/updater'
 import MulticallUpdater from '../state/multicall/updater'
+import { PersistGate } from 'redux-persist/integration/react'
 import ReactGA from 'react-ga'
 import { Provider as ReduxProvider } from 'react-redux'
 import TransactionUpdater from '../state/transactions/updater'
 import UserUpdater from '../state/user/updater'
 import Web3ReactManager from '../components/Web3ReactManager'
-import { Web3ReactProvider } from '@web3-react/core'
+import { createWeb3ReactRoot, Web3ReactProvider } from '@web3-react/core'
 import dynamic from 'next/dynamic'
 import getLibrary from '../functions/getLibrary'
 import { i18n } from '@lingui/core'
@@ -103,14 +104,18 @@ function MyApp({
           name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
         />
-        <title key="title">Solarbeam</title>
+        <title key="title">SOUL</title>
 
-        <meta key="description" name="description" content="Solarbeam - AMM on Moonriver." />
+        <meta
+          key="description"
+          name="description"
+          content="Be a DeFi Summoner with Soul. Swap, earn, grow yield, lend, borrow, leverage all on one decentralized, community driven platform. Welcome home to DeFi"
+        />
 
-        <meta name="application-name" content="Solarbeam App" />
+        <meta name="application-name" content="SOUL DEFI" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="Solarbeam App" />
+        <meta name="apple-mobile-web-app-title" content="SOUL DEFI" />
 
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
@@ -119,18 +124,26 @@ function MyApp({
         <meta name="theme-color" content="#F338C3" />
 
         <meta key="twitter:card" name="twitter:card" content="app" />
-        <meta key="twitter:title" name="twitter:title" content="Solarbeam App" />
-        <meta key="twitter:url" name="twitter:url" content="https://solarbeam.io" />
-        <meta key="twitter:description" name="twitter:description" content="Solarbeam - AMM on Moonriver." />
-        <meta key="twitter:image" name="twitter:image" content="https://solarbeam.io/icons/icon.png" />
-        <meta key="twitter:creator" name="twitter:creator" content="@solarbeam.io" />
+        <meta key="twitter:title" name="twitter:title" content="SOUL DEFI" />
+        <meta key="twitter:url" name="twitter:url" content="https://app.soulswap.finance" />
+        <meta
+          key="twitter:description"
+          name="twitter:description"
+          content="Be a DeFi summoner with Soul. Swap, earn, stack yields, lend, borrow, leverage all on one decentralized, community driven platform. Welcome home to DeFi"
+        />
+        <meta key="twitter:image" name="twitter:image" content="https://app.soulswap.finance/icons/icon-192x192.png" />
+        <meta key="twitter:creator" name="twitter:creator" content="@SoulSwapFinance" />
         <meta key="og:type" property="og:type" content="website" />
-        <meta key="og:site_name" property="og:site_name" content="Solarbeam App" />
-        <meta key="og:url" property="og:url" content="https://solarbeam.io" />
-        <meta key="og:image" property="og:image" content="https://solarbeam.io/icon.png" />
-        <meta key="og:description" property="og:description" content="Solarbeam - AMM on Moonriver." />
+        <meta key="og:site_name" property="og:site_name" content="SOUL DEFI" />
+        <meta key="og:url" property="og:url" content="https://app.soulswap.finance" />
+        <meta key="og:image" property="og:image" content="https://app.soulswap.finance/apple-touch-icon.png" />
+        <meta
+          key="og:description"
+          property="og:description"
+          content="Be a DeFi Summoner with Soul. Swap, earn, grow yield, lend, borrow, leverage all on one decentralized, community driven platform. Welcome home to DeFi"
+        />
       </Head>
-
+      
       <I18nProvider i18n={i18n} forceRenderOnLocaleChange={false}>
         <Web3ReactProvider getLibrary={getLibrary}>
           <Web3ProviderNetwork getLibrary={getLibrary}>

@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, JSBI, Percent, Token, TradeType, Trade as V2Trade } from '../../../sdk'
+import { Currency, CurrencyAmount, JSBI, Percent, Token, TradeType, Trade } from '../../../sdk'
 import { DAI, SOUL, USDC } from '../../../constants/tokens'
 import { useMemo, useState } from 'react'
 
@@ -285,7 +285,7 @@ export function useV2LiquidityTokenPermit(
 }
 
 export function useERC20PermitFromTrade(
-  trade: V2Trade<Currency, Currency, TradeType> | undefined,
+  trade: Trade<Currency, Currency, TradeType> | undefined,
   allowedSlippage: Percent
 ) {
   const { chainId } = useActiveWeb3React()
@@ -298,7 +298,7 @@ export function useERC20PermitFromTrade(
   return useERC20Permit(
     amountToApprove,
     // v2 router does not support
-    trade instanceof V2Trade ? undefined : trade,
+    trade instanceof Trade ? undefined : trade,
     null
   )
 }

@@ -13,8 +13,7 @@ export const RPC = {
   [ChainId.FANTOM]: 'https://rpc.ftm.tools',
   [ChainId.FANTOM_TESTNET]: 'https://rpc.testnet.fantom.network',
   // [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com',
-  // [ChainId.MATIC]:
-  //     'https://apis.ankr.com/e22bfa5f5a124b9aa1f911b742f6adfe/c06bb163c3c2a10a4028959f4d82836d/polygon/full/main',
+  // [ChainId.MATIC]: 'https://apis.ankr.com/e22bfa5f5a124b9aa1f911b742f6adfe/c06bb163c3c2a10a4028959f4d82836d/polygon/full/main',
   // [ChainId.MATIC_TESTNET]: 'https://rpc-mumbai.matic.today',
   // [ChainId.XDAI]: 'https://rpc.xdaichain.com',
   // [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
@@ -23,21 +22,18 @@ export const RPC = {
   // [ChainId.MOONRIVER]: 'https://moonriver-api.bwarelabs.com/0e63ad82-4f98-46f9-8496-f75657e3a8e', //'https://moonriver.api.onfinality.io/public',
   // [ChainId.AVALANCHE]: 'https://api.avax.network/ext/bc/C/rpc',
   // [ChainId.AVALANCHE_TESTNET]: 'https://api.avax-test.network/ext/bc/C/rpc',
-  // [ChainId.HECO]: 'https://http-mainnet.hecochain.com',
-  // [ChainId.HECO_TESTNET]: 'https://http-testnet.hecochain.com',
   // [ChainId.HARMONY]: 'https://api.harmony.one',
   // [ChainId.HARMONY_TESTNET]: 'https://api.s0.b.hmny.io',
-  // [ChainId.OKEX]: 'https://exchainrpc.okex.org',
-  // [ChainId.OKEX_TESTNET]: 'https://exchaintestrpc.okex.org',
   // [ChainId.ARBITRUM]: 'https://arb1.arbitrum.io/rpc',
 }
 
-export const POOL_DENY = ['14', '29', '45', '30']
+export const POOL_DENY = []
 
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
-export const AVERAGE_BLOCK_TIME_IN_SECS = 13
+export const AVERAGE_BLOCK_TIME_IN_SECS = 1
 
 export const AVERAGE_BLOCK_TIME = {
+  [ChainId.FANTOM]: 1
   // [ChainId.ROPSTEN]: AVERAGE_BLOCK_TIME_IN_SECS,
   // [ChainId.MOONRIVER]: 12,
   // [ChainId.BSC]: 3,

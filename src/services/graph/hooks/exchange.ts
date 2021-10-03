@@ -10,6 +10,7 @@ import {
   getMphPrice,
   // getStakePrice,
   getSushiPrice,
+  getSoulPrice,
   getTokens,
   getDayData,
   getFactory,
@@ -108,7 +109,7 @@ export function useSushiPrice(swrConfig: SWRConfiguration = undefined) {
 }
 
 export function useSoulPrice(swrConfig: SWRConfiguration = undefined) {
-  const { data } = useSWR('sushiPrice', () => getSushiPrice(), swrConfig)
+  const { data } = useSWR('soulPrice', () => getSoulPrice(), swrConfig)
   return data
 }
 

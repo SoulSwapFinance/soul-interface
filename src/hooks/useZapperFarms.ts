@@ -16,17 +16,17 @@ const useZapperFarms = () => {
   const soulGuideContract = useSoulGuideContract()
 
   const fetchAllFarms = useCallback(async () => {
-    let [pools, liquidityPositions, averageBlockTime, soulPrice, kashiPairs, soulPairs, masterChef] = await Promise.all(
+    let [pools, liquidityPositions, averageBlockTime, soulPrice, kashiPairs, soulPairs, soulSummoner] = await Promise.all(
       [
-        soulData.masterchef.pools(),
-        soulData.exchange_v1.userPositions({
+        soulData.summoner.pools(), // results[1]
+        soulData.exchange.userPositions({
           user_address: '0xc2edad668740f1aa35e4d8f227fb8e17dca888cd',
-        }),
+        }), // results[1]
         soulData.utils.getAverageBlockTime(), // results[2]
         soulData.soul.priceUSD(), // results[3]
         soulData.bentobox.kashiStakedInfo(), // results[4]
         soulData.exchange.pairs(), // results[5]
-        soulData.masterchef.info(), // results[6]
+        soulData.summoner.info(), // results[6]
       ]
     )
 
@@ -81,14 +81,14 @@ const useZapperFarms = () => {
           const liquidityPosition = liquidityPositions.find(
             (liquidityPosition: any) => liquidityPosition.pair.id === pair.id
           )
-          const blocksPerHour = 3600 / Number(averageBlockTime)
+          const secondsPerHour = 3600
           const balance = Number(pool.slpBalance / 1e18) > 0 ? Number(pool.slpBalance / 1e18) : 0.1
           const totalSupply = pair.totalSupply > 0 ? pair.totalSupply : 0.1
           const reserveUSD = pair.reserveUSD > 0 ? pair.reserveUSD : 0.1
           const balanceUSD = (balance / Number(totalSupply)) * Number(reserveUSD)
-          const rewardPerBlock = ((pool.allocPoint / masterChef.totalAllocPoint) * masterChef.soulPerBlock) / 1e18
-          const roiPerBlock = (rewardPerBlock * soulPrice) / balanceUSD
-          const roiPerHour = roiPerBlock * blocksPerHour
+          const rewardPerSecond = ((pool.allocPoint / soulSummoner.totalAllocPoint) * soulSummoner.soulPerSecond) / 1e18
+          const roiPerSecond = (rewardPerSecond * soulPrice) / balanceUSD
+          const roiPerHour = roiPerSecond * secondsPerHour
           const roiPerDay = roiPerHour * 24
           const roiPerMonth = roiPerDay * 30
           const roiPerYear = roiPerMonth * 12
@@ -102,7 +102,7 @@ const useZapperFarms = () => {
             pairAddress: pair.id,
             slpBalance: pool.slpBalance,
             liquidityPair: pair,
-            roiPerBlock,
+            roiPerSecond,
             roiPerHour,
             roiPerDay,
             roiPerMonth,

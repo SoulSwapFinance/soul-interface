@@ -14,8 +14,7 @@ const SEVERITY = {
 export default function FormattedPriceImpact({ priceImpact }: { priceImpact?: Percent }) {
   return (
     <div className={`text-sm ${SEVERITY[warningSeverity(priceImpact)]}`}>
-      {/* {priceImpact ? `${priceImpact.multiply(-1).toFixed(2)}%` : '-'} */}
-      {priceImpact ? `${priceImpact.multiply(-1).toFixed}%` : '-'}
+      {priceImpact ? `${priceImpact.multiply(-1).toFixed(2)}%` : '-'}
     </div>
   )
 }

@@ -82,7 +82,7 @@ const PoolList = () => {
               <div className="flex flex-col items-center justify-between w-full">
                 <div className="items-center hidden md:flex">
                   {/* <BackButton defaultRoute="/pool" /> */}
-                  <div className="mb-2 mr-2 text-lg whitespace-nowrap">Select a Pool to Zap Into</div>
+                  <div className="mb-2 mr-2 text-lg whitespace-nowrap">Select Pool to Zap Into</div>
                 </div>
                 <Search search={search} term={term} />
               </div>
