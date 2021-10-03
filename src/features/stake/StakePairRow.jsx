@@ -54,8 +54,22 @@ const TokenPair = styled(ExternalLink)`
 const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   const { chainId, account } = useActiveWeb3React()
 
-  const { fetchPid0AprAndLiquidity, fetchUserLpTokenAllocInFarm, enterStaking, leaveStaking, pendingSoul, userInfo } =
-    useSoulSummoner(pid, lpToken, farm.token1Address[chainId], farm.token2Address[chainId])
+  const {
+    // helper contract
+    totalPendingRewards,
+    harvestAllFarms,
+    fetchYearlyRewards,
+    fetchStakedBals,
+    fetchTokenRateBals,
+    fetchStakeStats,
+
+    fetchUserLpTokenAllocInFarm,
+    leaveStaking,
+    enterStaking,
+    pendingSoul,
+    userInfo,
+    getFeePercent,
+  } = useSoulSummoner(pid, lpToken, farm.token1Address[chainId], farm.token2Address[chainId])
   const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
 
   const [showing, setShowing] = useState(false)
@@ -69,6 +83,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   const [earningPerDay, setEarningPerDay] = useState()
   const [percOfFarm, setPercOfFarm] = useState()
 
+  const [yearlySoulRewards, setYearlySoulRewards] = useState()
   const [apr, setApr] = useState()
   const [liquidity, setLiquidity] = useState()
 
@@ -76,7 +91,8 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    * Runs only on initial render/mount
    */
   useEffect(() => {
-    // getAprAndLiquidity()
+    getAprAndLiquidity()
+    getYearlyPoolRewards()
     fetchPending()
     fetchUserFarmAlloc()
   }, [account])
@@ -84,23 +100,23 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   /**
    * Runs on initial render/mount and  reruns every second
    */
-  useEffect(() => {
-    if (account) {
-      const timer = setTimeout(() => {
-        fetchPending()
-        // getAprAndLiquidity()
-        fetchUserFarmAlloc()
+  // useEffect(() => {
+  //   if (account) {
+  //     const timer = setTimeout(() => {
+  //       fetchPending()
+  //       // getAprAndLiquidity()
+  //       fetchUserFarmAlloc()
 
-        if (showing) {
-          fetchBals()
-          fetchApproval()
-        }
-      }, 8000)
+  //       if (showing) {
+  //         fetchBals()
+  //         fetchApproval()
+  //       }
+  //     }, 8000)
 
-      // Clear timeout if the component is unmounted
-      return () => clearTimeout(timer)
-    }
-  })
+  //     // Clear timeout if the component is unmounted
+  //     return () => clearTimeout(timer)
+  //   }
+  // })
 
   /**
    * Opens the function panel dropdown
@@ -119,9 +135,20 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   const fetchUserFarmAlloc = async () => {
     const ownership = await fetchUserLpTokenAllocInFarm(pid, account)
     const userStakedPercOfSummoner = Number(ownership?.[4])
-    // console.log(userStakedPercOfSummoner, 'userStakedPercOfSummoner')
     if (userStakedPercOfSummoner) setPercOfFarm(Number(userStakedPercOfSummoner).toFixed(2))
     else setPercOfFarm(0)
+  }
+
+  const getYearlyPoolRewards = async () => {
+    const pidSoulPerYear = await fetchYearlyRewards(pid)
+    const dailyRewards = pidSoulPerYear / 10 ** 18 / 365
+
+    setYearlySoulRewards(
+      Number(dailyRewards)
+        .toFixed(0)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    )
   }
 
   /**
@@ -129,24 +156,30 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    * farm <Object> : the farm object
    * lpToken : the farm lpToken address
    */
-  // const getAprAndLiquidity = async () => {
-  //   try {
-  //     const result = await fetchPid0AprAndLiquidity()
-  //     // const farmApr = result[0]
-  //     const totalLpValue = result[1]
+  const getAprAndLiquidity = async () => {
+    try {
+      const result = await fetchStakeStats()
+      const tvl = result[0]
+      const apr = result[1]
 
-  //     setLiquidity(Number(totalLpValue).toFixed(4)
-  //     .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-  //     )
+      setLiquidity(
+        Number(tvl)
+          .toFixed(0)
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      )
 
-  //     // console.log("apr", farmApr);
-  //     // setApr(Number(farmApr).toFixed(4)
-  //     // .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-  //     // )
-  //   } catch (e) {
-  //     console.warn(e)
-  //   }
-  // }
+      // console.log("apr", farmApr);
+      setApr(
+        Number(apr)
+          .toFixed(0)
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      )
+    } catch (e) {
+      console.warn(e)
+    }
+  }
 
   /**
    * Gets the lpToken balance of the user for each pool
@@ -179,9 +212,9 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       // alert('connect wallet')
     } else {
       try {
-        const pending = await pendingSoul(0, account)
-        const formatted = ethers.utils.formatUnits(pending)
-        setPending(formatted)
+        const pending = await pendingSoul(pid, account)
+        const formatted = ethers.utils.formatUnits(pending.toString())
+        setPending(Number(formatted).toFixed(2).toString())
       } catch (err) {
         console.warn(err)
       }
@@ -282,16 +315,61 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 </Wrap>
               </TokenPairBox>
 
-              {/* <StakeItemBox>
+              <StakeItemBox>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
-                  APR
+                  Apr
                 </Text>
                 <StakeItem>{apr ? (apr === 'Infinity' ? '∞%' : apr + '%') : '?'}</StakeItem>
-              </StakeItemBox> */}
+              </StakeItemBox>
 
-              {/* <HideOnMobile>
+              <StakeItemBox desktopOnly={true}>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
-                  TVL
+                  Earned
+                </Text>
+                {pending === '0' ? (
+                  <Text padding="0" fontSize="1.5rem" color="#666">
+                    0
+                  </Text>
+                ) : (
+                  <Text padding="0" fontSize="1.5rem" color='#F36FFE'>
+                    {pending}
+                  </Text>
+                )}
+              </StakeItemBox>
+
+              <HideOnMobile desktopOnly={true}>
+                <Text padding="0" fontSize=".7rem" color="#bbb">
+                  Daily Rewards
+                </Text>
+                {yearlySoulRewards === 0 ? (
+                  <Text padding="0" fontSize="1.5rem" color="#666">
+                    {yearlySoulRewards}
+                  </Text>
+                ) : (
+                  <Text padding="0" fontSize="1.5rem">
+                    {yearlySoulRewards}
+                  </Text>
+                )}
+              </HideOnMobile>
+
+              <HideOnMobile desktopOnly={true}>
+                <Text padding="0" fontSize=".7rem" color="#bbb">
+                  Ownership
+                </Text>
+                {percOfFarm === 0 ? (
+                  <Text padding="0" fontSize="1.5rem" color="#666">
+                    {percOfFarm}%
+                  </Text>
+                ) : (
+                  <Text padding="0" fontSize="1.5rem" color='#F36FFE'>
+                    {percOfFarm}%
+                  </Text>
+                )}
+              </HideOnMobile>
+
+              <HideOnMobile>
+                <Text padding="0" fontSize=".7rem" color="#bbb">
+                  Tvl
                 </Text>
                 {liquidity === '0' ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
@@ -300,47 +378,6 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 ) : (
                   <Text padding="0" fontSize="1.5rem">
                     ${liquidity}
-                  </Text>
-                )}
-              </HideOnMobile> */}
-
-              <StakeItemBox desktopOnly={true}>
-                <Text padding="0" fontSize=".7rem" color="#F36FFE">
-                  Earned
-                </Text>
-                {Number(pending) !== 0 ? (
-                  <Text padding="0" fontSize="1.5rem">
-                    {Number(pending).toFixed(2) < 0.01
-                      ? '<0.01'
-                      : Number(pending)
-                          .toFixed(2)
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                  </Text>
-                ) : (
-                  <Text padding="0" fontSize="1.5rem" color="#666">
-                    0
-                  </Text>
-                )}
-              </StakeItemBox>
-
-              <HideOnMobile desktopOnly={true}>
-                <Text padding="0" fontSize=".7rem" color="#F36FFE">
-                  Ownership
-                </Text>
-                {percOfFarm === 0 ? (
-                  <Text padding="0" fontSize="1.5rem" color="#666">
-                    0%
-                  </Text>
-                ) : (
-                  <Text padding="0" fontSize="1.5rem">
-                    {Number(percOfFarm).toFixed(2) < 0.01
-                      ? '<0.01'
-                      : Number(percOfFarm)
-                          .toFixed(2)
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                    %
                   </Text>
                 )}
               </HideOnMobile>

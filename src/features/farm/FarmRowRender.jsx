@@ -55,14 +55,19 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   const { chainId, account } = useActiveWeb3React()
 
   const {
-    fetchAprAndLiquidity,
+    // helper contract
+    totalPendingRewards,
+    harvestAllFarms,
+    fetchYearlyRewards,
+    fetchStakedBals,
+    fetchTokenRateBals,
+    fetchFarmStats,
+
     fetchUserLpTokenAllocInFarm,
     withdraw,
     deposit,
     pendingSoul,
     userInfo,
-    dailyDecay,
-    getWithdrawable,
     getFeePercent,
   } = useSoulSummoner(pid, lpToken, farm.token1Address, farm.token2Address)
   const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
@@ -71,6 +76,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
   const [approved, setApproved] = useState(false)
 
+  const [feePercent, setFeePercent] = useState(0)
   const [feeAmount, setFeeAmount] = useState(0)
   const [receiving, setReceiving] = useState(0)
 
@@ -82,6 +88,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   const [percOfFarm, setPercOfFarm] = useState()
   const [poolRate, setPoolRate] = useState()
 
+  const [yearlySoulRewards, setYearlySoulRewards] = useState()
   const [apr, setApr] = useState()
   const [liquidity, setLiquidity] = useState()
 
@@ -89,7 +96,8 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    * Runs only on initial render/mount
    */
   useEffect(() => {
-    // getAprAndLiquidity()
+    getAprAndLiquidity()
+    getYearlyPoolRewards()
     fetchPending()
     fetchUserFarmAlloc()
   }, [account])
@@ -97,22 +105,22 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   /**
    * Runs on initial render/mount and reruns every 2 seconds
    */
-  useEffect(() => {
-    if (account) {
-      const timer = setTimeout(() => {
-        fetchPending()
-        // getAprAndLiquidity()
-        fetchUserFarmAlloc()
+  // useEffect(() => {
+  //   if (account) {
+  //     const timer = setTimeout(() => {
+  //       fetchPending()
+  //       // getAprAndLiquidity()
+  //       fetchUserFarmAlloc()
 
-        if (showing) {
-          fetchBals()
-          fetchApproval()
-        }
-      }, 8000)
-      // Clear timeout if the component is unmounted
-      return () => clearTimeout(timer)
-    }
-  })
+  //       if (showing) {
+  //         fetchBals()
+  //         fetchApproval()
+  //       }
+  //     }, 8000)
+  //     // Clear timeout if the component is unmounted
+  //     return () => clearTimeout(timer)
+  //   }
+  // })
 
   /**
    * Opens the function panel dropdown
@@ -122,17 +130,28 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     if (!showing) {
       fetchBals()
       fetchApproval()
+      fetchFeePercent()
     }
   }
 
-  const fetchWithdrawable = async () => {
+  const fetchFeePercent = async () => {
+    const percent = await getFeePercent(pid)
+    percent !== 0 ? setFeePercent(percent / 10 ** 18) : setFeePercent(0)
+  }
+
+  const getWithdrawable = async () => {
     const rawAmount = document.getElementById('unstake').value
 
     if (rawAmount !== 0 && rawAmount !== undefined && rawAmount !== '' && rawAmount !== null) {
-      const amount = ethers.utils.parseUnits(document.getElementById('unstake').value)
-      const fetched = await getWithdrawable(pid, amount, account)
-      setFeeAmount(fetched[0].toString())
-      setReceiving(fetched[1].toString())
+      const amount = document.getElementById('unstake').value
+
+      const feePerc = feePercent / 100
+
+      const fee = amount * feePerc
+      const receive = amount - fee
+
+      fee !== 0 ? setFeeAmount(fee) : setFeeAmount(0)
+      receive !== 0 ? setReceiving(receive) : setReceiving(0)
     } else {
       setFeeAmount(0)
       setReceiving(0)
@@ -145,9 +164,20 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   const fetchUserFarmAlloc = async () => {
     const ownership = await fetchUserLpTokenAllocInFarm(pid, account)
     const userStakedPercOfSummoner = Number(ownership?.[4])
-    console.log(userStakedPercOfSummoner, 'userStakedPercOfSummoner')
     if (userStakedPercOfSummoner) setPercOfFarm(Number(userStakedPercOfSummoner).toFixed(2))
     else setPercOfFarm(0)
+  }
+
+  const getYearlyPoolRewards = async () => {
+    const pidSoulPerYear = await fetchYearlyRewards(pid)
+    const dailyRewards = pidSoulPerYear / 10 ** 18 / 365
+
+    setYearlySoulRewards(
+      Number(dailyRewards)
+        .toFixed(0)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    )
   }
 
   /**
@@ -155,23 +185,30 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    * farm <Object> : the farm object
    * lpToken : the farm lpToken address
    */
-  // const getAprAndLiquidity = async () => {
-  //   try {
-  //     const result = await fetchAprAndLiquidity(farm.pid, farm.token1, farm.token2)
-  //     const farmApr = result[0]
-  //     const totalLpValue = result[1]
-  //     const summonerTotalLpValue = result[2]
+  const getAprAndLiquidity = async () => {
+    try {
+      const result = await fetchFarmStats(pid, farm.token1, farm.token2)
+      const tvl = result[0]
+      const apr = result[1]
 
-  //     setLiquidity(Number(summonerTotalLpValue).toFixed(0)
-  //     .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
+      setLiquidity(
+        Number(tvl)
+          .toFixed(0)
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      )
 
-  //     // console.log("apr", farmApr);
-  //     setApr(Number(farmApr).toFixed(0)
-  //     .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
-  //   } catch (e) {
-  //     console.warn(e)
-  //   }
-  // }
+      // console.log("apr", farmApr);
+      setApr(
+        Number(apr)
+          .toFixed(0)
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      )
+    } catch (e) {
+      console.warn(e)
+    }
+  }
 
   /**
    * Gets the lpToken balance of the user for each pool
@@ -231,10 +268,9 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       // alert('connect wallet')
     } else {
       try {
-        const result1 = await pendingSoul(pid, account)
-        const pending = ethers.utils.formatUnits(result1)
-        setPending(pending)
-        return [pending]
+        const pending = await pendingSoul(pid, account)
+        const formatted = ethers.utils.formatUnits(pending.toString())
+        setPending(Number(formatted).toFixed(2).toString())
       } catch (err) {
         console.warn(err)
       }
@@ -339,16 +375,61 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 </Wrap>
               </TokenPairBox>
 
-              {/* <FarmItemBox>
+              <FarmItemBox>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
-                  APR
+                  Apr
                 </Text>
                 <FarmItem>{apr ? (apr === 'Infinity' ? '∞%' : apr + '%') : '?'}</FarmItem>
-              </FarmItemBox> */}
+              </FarmItemBox>
 
-              {/* <HideOnMobile>
+              <FarmItemBox desktopOnly={true}>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
-                  TVL
+                  Earned
+                </Text>
+                {pending === '0' ? (
+                  <Text padding="0" fontSize="1.5rem" color="#666">
+                    0
+                  </Text>
+                ) : (
+                  <Text padding="0" fontSize="1.5rem" color='#F36FFE'>
+                    {pending}
+                  </Text>
+                )}
+              </FarmItemBox>
+
+              <HideOnMobile desktopOnly={true}>
+                <Text padding="0" fontSize=".7rem" color="#bbb">
+                  Daily Rewards
+                </Text>
+                {yearlySoulRewards === 0 ? (
+                  <Text padding="0" fontSize="1.5rem" color="#666">
+                    {yearlySoulRewards}
+                  </Text>
+                ) : (
+                  <Text padding="0" fontSize="1.5rem">
+                    {yearlySoulRewards}
+                  </Text>
+                )}
+              </HideOnMobile>
+
+              <HideOnMobile desktopOnly={true}>
+                <Text padding="0" fontSize=".7rem" color="#bbb">
+                  Ownership
+                </Text>
+                {percOfFarm === 0 ? (
+                  <Text padding="0" fontSize="1.5rem" color="#666">
+                    {percOfFarm}%
+                  </Text>
+                ) : (
+                  <Text padding="0" fontSize="1.5rem" color='#F36FFE'>
+                    {percOfFarm}%
+                  </Text>
+                )}
+              </HideOnMobile>
+
+              <HideOnMobile>
+                <Text padding="0" fontSize=".7rem" color="#bbb">
+                  Tvl
                 </Text>
                 {liquidity === '0' ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
@@ -359,70 +440,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     ${liquidity}
                   </Text>
                 )}
-              </HideOnMobile> */}
-
-              <FarmItemBox desktopOnly={true}>
-                <Text padding="0" fontSize=".7rem" color="#F36FFE">
-                  Earned
-                </Text>
-                {Number(pending) !== 0 ? (
-                  <Text padding="0" fontSize="1.5rem">
-                    {Number(pending).toFixed(2) < 0.01
-                      ? '<0.01'
-                      : Number(pending)
-                          .toFixed(2)
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                  </Text>
-                ) : (
-                  <Text padding="0" fontSize="1.5rem" color="#666">
-                    0
-                  </Text>
-                )}
-              </FarmItemBox>
-
-              <HideOnMobile desktopOnly={true}>
-                <Text padding="0" fontSize=".7rem" color="#F36FFE">
-                  Ownership
-                </Text>
-                {percOfFarm === 0 ? (
-                  <Text padding="0" fontSize="1.5rem" color="#666">
-                    0%
-                  </Text>
-                ) : (
-                  <Text padding="0" fontSize="1.5rem">
-                    {Number(percOfFarm).toFixed(2) < 0.01
-                      ? '<0.01'
-                      : Number(percOfFarm)
-                          .toFixed(2)
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                    %
-                  </Text>
-                )}
               </HideOnMobile>
-
-              {/* <HideOnMobile desktopOnly={true}>
-                <Text padding="0" fontSize=".7rem" color="#F36FFE">
-                  APR
-                </Text>
-                {percOfFarm === 0 ? (
-                  <Text padding="0" fontSize="1.5rem" color="#666">
-                    {
-                      poolRate
-                      // calulate interest rate // i = p*r*t = principle, rate, time
-                      // divide interest rate by principle (amount)
-                      // annualize and convert to %
-                      // interest = staked *  // userInfo(pid, account).result1?.[0]
-                      // 250000 * totalAllocation
-                    }%
-                  </Text>
-                ) : (
-                  <Text padding="0" fontSize="1.5rem">
-                    {poolRate}%
-                  </Text>
-                )}
-              </HideOnMobile> */}
 
               {/* <FarmItemBox>
                 <ShowBtn onClick={() => handleShow()}>{showing ? `HIDE` : `SHOW`}</ShowBtn>
@@ -475,7 +493,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                   )}
                 </Wrap>
                 <Text fontSize=".9rem" padding="0" color="#F36FFE">
-                  Withdrawal fee: starts at 14%, with 1% less each day.
+                  Withdrawal fee: {feePercent}%, decreasing 1% daily until 0%.
                 </Text>
               </FunctionBox>
 
@@ -507,7 +525,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                   type="number"
                   placeholder="0.0"
                   min="0"
-                  onChange={() => fetchWithdrawable()}
+                  onChange={() => getWithdrawable()}
                 />
 
                 <Wrap padding="0" margin="0" display="flex">
@@ -530,16 +548,16 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                   </SubmitButton>
                 </Wrap>
 
-                {/* <Wrap padding="0">
+                <Wrap padding="0">
                   <Wrap padding="0" display="flex">
                     <Text fontSize=".9rem" padding="0" color="#aaa">
-                    Fee Amount: {ethers.utils.formatUnits(feeAmount)}
+                      Fee Amount: {feeAmount}
                     </Text>
                     <Text fontSize=".9rem" padding="0 0 0 6.5rem" color="#aaa">
-                    Withdrawing: {ethers.utils.formatUnits(receiving)}
+                      Receiving: {receiving}
                     </Text>
                   </Wrap>
-                </Wrap> */}
+                </Wrap>
               </FunctionBox>
             </DetailsWrapper>
           </DetailsContainer>
