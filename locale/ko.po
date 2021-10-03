@@ -408,6 +408,9 @@ msgstr ""
 msgid "Explore our Protocol."
 msgstr ""
 
+msgid "Fantom Faucet"
+msgstr ""
+
 msgid "Farm"
 msgstr ""
 
@@ -565,15 +568,6 @@ msgstr ""
 msgid "Liquidity Provider Fee"
 msgstr ""
 
-msgid "Liquidity Provider Rewards"
-msgstr ""
-
-msgid ""
-"Liquidity providers earn a 0.25% fee on all trades proportional to their share of\n"
-"the pool. Fees are added to the pool, accrue in real time and can be claimed by\n"
-"withdrawing your liquidity"
-msgstr ""
-
 msgid "Lists"
 msgstr ""
 
@@ -649,9 +643,6 @@ msgid "Minimum Received"
 msgstr ""
 
 msgid "Minimum received"
-msgstr ""
-
-msgid "Moonriver Faucet"
 msgstr ""
 
 msgid "My Farms"
@@ -818,7 +809,7 @@ msgstr ""
 msgid "Remove Liquidity"
 msgstr ""
 
-msgid "Remove liquidity of Solarbeam"
+msgid "Remove liquidity of Soul"
 msgstr ""
 
 msgid "Remove recipient"
@@ -908,13 +899,13 @@ msgstr ""
 msgid "Slippage tolerance..."
 msgstr ""
 
-msgid "Solarbeam"
-msgstr ""
-
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr ""
 
 msgid "Soon"
+msgstr ""
+
+msgid "SoulSwap"
 msgstr ""
 
 msgid "Spanish"

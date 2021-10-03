@@ -30,7 +30,7 @@ module.exports = withBundleAnalyzer(
       return [
         {
           source: '/',
-          destination: '/swap',
+          destination: '/exchange/swap',
           permanent: true,
         },
         // {
@@ -109,6 +109,10 @@ module.exports = withBundleAnalyzer(
         {
           source: '/pool',
           destination: '/exchange/pool',
+        },
+        {
+          source: '/swap',
+          destination: '/exchange/swap',
         },
         {
           source: '/find',

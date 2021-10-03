@@ -43,7 +43,7 @@ function AppBar(): JSX.Element {
                     <div className="flex space-x-2">
                       {/* <Buy /> */}
                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                      <NavLink href="/swap">
+                      <NavLink href="/exchange/swap">
                         <a
                           id={`swap-nav-link`}
                           className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
@@ -53,7 +53,7 @@ function AppBar(): JSX.Element {
                       </NavLink>
                       )}
                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                      <NavLink href="/pool">
+                      <NavLink href="/exchange/pool">
                         <a
                           id={`pool-nav-link`}
                           className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
@@ -316,7 +316,7 @@ function AppBar(): JSX.Element {
             <Popover.Panel className="sm:hidden">
               <div className="flex flex-col px-4 pt-2 pb-3 space-y-1">
               { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                <Link href={'/swap'}>
+                <Link href={'/exchange/swap'}>
                   <a
                     id={`swap-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
@@ -325,25 +325,25 @@ function AppBar(): JSX.Element {
                   </a>
                 </Link>
               )}
-              { chainId && [ChainId.MAINNET].includes(chainId) && (
-                <Link href={'/bridge'}>
-                  <a
-                    id={`swap-nav-link`}
-                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                  >
-                    {i18n._(t`Bridge`)}
-                  </a>
-                </Link>
-              )}
                 { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                <Link href={'/pool'}>
+                  <Link href={'/exchange/pool'}>
                   <a
                     id={`pool-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                  >
+                    >
                     {i18n._(t`Pool`)}
                   </a>
                 </Link>
+                )}
+                { chainId && [ChainId.MAINNET].includes(chainId) && (
+                  <Link href={'/bridge'}>
+                    <a
+                      id={`swap-nav-link`}
+                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                    >
+                      {i18n._(t`Bridge`)}
+                    </a>
+                  </Link>
                 )}
                 { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <Link href={'/farm'}>

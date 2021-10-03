@@ -24,7 +24,7 @@ export function FindPoolTabs() {
   return (
     <Tabs>
       <RowBetween className="items-center text-xl">
-        <HistoryLink href="/pool">
+        <HistoryLink href="/exchange/pool">
           <a>
             <ArrowLeftIcon width="1em" height="1em" />
           </a>
@@ -66,7 +66,7 @@ export function AddRemoveTabs({
           </a>
         </HistoryLink>
         <div className="font-semibold">
-          {creating ? i18n._(t`Create a pair`) : adding ? i18n._(t`Add Liquidity`) : i18n._(t`Remove Liquidity`)}
+          {creating ? i18n._(t`Create Pair`) : adding ? i18n._(t`Add Liquidity`) : i18n._(t`Remove Liquidity`)}
         </div>
         <SettingsTab placeholderSlippage={defaultSlippage} />
       </RowBetween>
