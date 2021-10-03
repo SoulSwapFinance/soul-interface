@@ -1,4 +1,4 @@
-import { ChainId, Currency, Ether, Percent, TradeType, Trade as V2Trade, CurrencyAmount } from '@soulswap/sdk'
+import { ChainId, Currency, Ether, Percent, TradeType, Trade as V2Trade, CurrencyAmount } from '../../sdk'
 import React, { useMemo } from 'react'
 import { RowBetween, RowFixed } from '../../components/Row'
 

@@ -1,4 +1,4 @@
-import { ChainId } from '@soulswap/sdk'
+import { ChainId } from '../../sdk'
 import { t } from '@lingui/macro'
 import transakSDK from '@transak/transak-sdk'
 import { useActiveWeb3React } from '../../hooks'

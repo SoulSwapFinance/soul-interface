@@ -201,12 +201,6 @@ msgstr ""
 msgid "Buy"
 msgstr ""
 
-msgid ""
-"By adding liquidity you'll earn fees from all trades on this pair\n"
-"proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be\n"
-"claimed by withdrawing your liquidity."
-msgstr ""
-
 msgid "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
 msgstr "Umgeht Bestätigungsmodalitäten und ermöglicht hohe Slippage-Trades. Die Verwendung erfolgt auf eigene Gefahr."
 
@@ -783,6 +777,9 @@ msgstr "Pool gefunden!"
 msgid "Pool Tokens"
 msgstr "Pool-Token"
 
+msgid "Pool tokens in rewards pool"
+msgstr ""
+
 msgid "Pooled {0}"
 msgstr "{0} gepoolt"
 
@@ -827,6 +824,9 @@ msgstr "Entfernen"
 
 msgid "Remove Liquidity"
 msgstr "Liquidität entfernen"
+
+msgid "Remove liquidity of Solarbeam"
+msgstr ""
 
 msgid "Remove recipient"
 msgstr ""
@@ -915,13 +915,13 @@ msgstr "Slippage-Toleranz"
 msgid "Slippage tolerance..."
 msgstr ""
 
+msgid "Solarbeam"
+msgstr ""
+
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Bei der Unterzeichnung der Genehmigung ist ein Fehler aufgetreten. Dies geschieht häufig bei Hardware-Wallets wie z. B. Trezor und Ledger. Klicken Sie erneut und die Fallback-Methode wird verwendet."
 
 msgid "Soon"
-msgstr ""
-
-msgid "SoulSwap"
 msgstr ""
 
 msgid "Spanish"
@@ -962,6 +962,18 @@ msgstr "Swap"
 msgid "Swap Anyway"
 msgstr "Dennoch Swap durchführen"
 
+msgid "Swap From (est.):"
+msgstr ""
+
+msgid "Swap From:"
+msgstr ""
+
+msgid "Swap To (est.):"
+msgstr ""
+
+msgid "Swap To:"
+msgstr ""
+
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""
 
@@ -999,9 +1011,6 @@ msgid "Timeframe"
 msgstr ""
 
 msgid "Tip to encourage miners to select this transaction."
-msgstr ""
-
-msgid "Tip:"
 msgstr ""
 
 msgid "Toggle Expert Mode"
@@ -1075,9 +1084,6 @@ msgstr ""
 msgid "Use SoulPower to Enchant Soul."
 msgstr ""
 
-msgid "Use this tool to find pairs that don't automatically appear in the interface"
-msgstr ""
-
 msgid "Used"
 msgstr ""
 
@@ -1111,9 +1117,6 @@ msgstr "Wallet"
 msgid "Wallet Balance"
 msgstr "Wallet-Guthaben"
 
-msgid "When creating a pair you are the first liquidity provider. The ratio of tokens you add will set the price of this pool. Once you are happy with the rate, click supply to review"
-msgstr "Beim Erstellen eines Paares sind Sie der erste Liquiditätsanbieter. Das Verhältnis der von Ihnen hinzugefügten Token bestimmt den Preis für diesen Pool. Wenn Sie mit dem Kurs zufrieden sind, klicken Sie auf „Bereitstellen“, um ihn zu überprüfen."
-
 msgid "Withdraw"
 msgstr "Abheben"
 
@@ -1127,6 +1130,9 @@ msgid "Wrong Network"
 msgstr "Falsches Netzwerk"
 
 msgid "You Pay:"
+msgstr ""
+
+msgid "You Will Receive"
 msgstr ""
 
 msgid "You are creating a pool"
@@ -1161,6 +1167,9 @@ msgstr ""
 
 msgid "Your Liquidity"
 msgstr "Ihre Liquidität"
+
+msgid "Your Position"
+msgstr ""
 
 msgid "Your Wallet"
 msgstr "Deine Geldbörse"

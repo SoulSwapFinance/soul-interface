@@ -1,5 +1,5 @@
 import { AlertTriangle, ArrowDown } from 'react-feather'
-import { Currency, Percent, TradeType, Trade as V2Trade } from '@soulswap/sdk'
+import { Currency, Percent, TradeType, Trade as V2Trade } from '../../sdk'
 import React, { useState } from 'react'
 import { isAddress, shortenAddress } from '../../functions'
 

@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 
-import { Currency, Price } from '@soulswap/sdk'
+import { Currency, Price } from '../../sdk'
 import Typography from '../../components/Typography'
 import { classNames } from '../../functions'
 import { t } from '@lingui/macro'
