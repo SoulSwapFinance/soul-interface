@@ -1,7 +1,7 @@
 import { ApprovalState, useApproveCallback } from '../../../hooks/useApproveCallback'
 import { AutoRow, RowBetween } from '../../../components/Row'
 import Button, { ButtonError } from '../../../components/Button'
-import { Currency, CurrencyAmount, Percent, WNATIVE, currencyEquals } from '@soulswap/sdk'
+import { Currency, CurrencyAmount, Percent, WNATIVE, currencyEquals } from '../../../sdk'
 import { ZERO_PERCENT } from '../../../constants'
 import React, { useCallback, useState } from 'react'
 import TransactionConfirmationModal, { ConfirmationModalContent } from '../../../modals/TransactionConfirmationModal'
@@ -9,7 +9,7 @@ import { calculateGasMargin, calculateSlippageAmount } from '../../../functions/
 import { currencyId, maxAmountSpend } from '../../../functions/currency'
 import { useDerivedMintInfo, useMintActionHandlers, useMintState } from '../../../state/mint/hooks'
 import { useExpertModeManager, useUserSlippageToleranceWithDefault } from '../../../state/user/hooks'
-import Alert from '../../../components/Alert'
+
 import { AutoColumn } from '../../../components/Column'
 import { BigNumber } from '@ethersproject/bignumber'
 import { ConfirmAddModalBottom } from '../../../features/liquidity/ConfirmAddModalBottom'
@@ -17,11 +17,9 @@ import Container from '../../../components/Container'
 import CurrencyInputPanel from '../../../components/CurrencyInputPanel'
 import Dots from '../../../components/Dots'
 import DoubleCurrencyLogo from '../../../components/DoubleLogo'
-import DoubleGlowShadow from '../../../components/DoubleGlowShadow'
 import ExchangeHeader from '../../../components/ExchangeHeader'
 import { Field } from '../../../state/mint/actions'
 import Head from 'next/head'
-import LiquidityHeader from '../../../features/liquidity/LiquidityHeader'
 import LiquidityPrice from '../../../features/liquidity/LiquidityPrice'
 import { MinimalPositionCard } from '../../../components/PositionCard'
 import NavLink from '../../../components/NavLink'
@@ -41,6 +39,8 @@ import { useRouterContract } from '../../../hooks'
 import { useTransactionAdder } from '../../../state/transactions/hooks'
 import useTransactionDeadline from '../../../hooks/useTransactionDeadline'
 import { useWalletModalToggle } from '../../../state/application/hooks'
+import DoubleGlowShadow from '../../../components/DoubleGlowShadow'
+import SoulLogo from '../../../components/SoulLogo'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
 
@@ -136,6 +136,7 @@ export default function Add() {
     if (!chainId || !library || !account || !routerContract) return
 
     const { [Field.CURRENCY_A]: parsedAmountA, [Field.CURRENCY_B]: parsedAmountB } = parsedAmounts
+
     if (!parsedAmountA || !parsedAmountB || !currencyA || !currencyB || !deadline) {
       return
     }
@@ -180,8 +181,8 @@ export default function Add() {
 
     setAttemptingTxn(true)
     await estimate(...args, value ? { value } : {})
-      .then((estimatedGasLimit) =>
-        method(...args, {
+      .then((estimatedGasLimit) => {
+        return method(...args, {
           ...(value ? { value } : {}),
           gasLimit: calculateGasMargin(estimatedGasLimit),
         }).then((response) => {
@@ -203,9 +204,41 @@ export default function Add() {
             label: [currencies[Field.CURRENCY_A]?.symbol, currencies[Field.CURRENCY_B]?.symbol].join('/'),
           })
         })
-      )
+      })
       .catch((error) => {
-        setAttemptingTxn(false)
+        //fallback
+        method(...args, {
+          ...(value ? { value } : {}),
+          gasLimit: '1000000',
+        })
+          .then((response) => {
+            setAttemptingTxn(false)
+
+            addTransaction(response, {
+              summary: i18n._(
+                t`Add ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${
+                  currencies[Field.CURRENCY_A]?.symbol
+                } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencies[Field.CURRENCY_B]?.symbol}`
+              ),
+            })
+
+            setTxHash(response.hash)
+
+            ReactGA.event({
+              category: 'Liquidity',
+              action: 'Add',
+              label: [currencies[Field.CURRENCY_A]?.symbol, currencies[Field.CURRENCY_B]?.symbol].join('/'),
+            })
+          })
+          .catch((e) => {
+            setAttemptingTxn(false)
+
+            // we only care if the error is something _other_ than the user rejected the tx
+            if (e?.code !== 4001) {
+              console.error(e)
+            }
+          })
+
         // we only care if the error is something _other_ than the user rejected the tx
         if (error?.code !== 4001) {
           console.error(error)
@@ -268,9 +301,9 @@ export default function Add() {
     (currencyA: Currency) => {
       const newCurrencyIdA = currencyId(currencyA)
       if (newCurrencyIdA === currencyIdB) {
-        router.push(`/add/${currencyIdB}/${currencyIdA}`)
+        router.push(`/exchange/add/${currencyIdB}/${currencyIdA}`)
       } else {
-        router.push(`/add/${newCurrencyIdA}/${currencyIdB}`)
+        router.push(`/exchange/add/${newCurrencyIdA}/${currencyIdB}`)
       }
     },
     [currencyIdB, router, currencyIdA]
@@ -280,12 +313,12 @@ export default function Add() {
       const newCurrencyIdB = currencyId(currencyB)
       if (currencyIdA === newCurrencyIdB) {
         if (currencyIdB) {
-          router.push(`/add/${currencyIdB}/${newCurrencyIdB}`)
+          router.push(`/exchange/add/${currencyIdB}/${newCurrencyIdB}`)
         } else {
-          router.push(`/add/${newCurrencyIdB}`)
+          router.push(`/exchange/add/${newCurrencyIdB}`)
         }
       } else {
-        router.push(`/add/${currencyIdA ? currencyIdA : 'FTM'}/${newCurrencyIdB}`)
+        router.push(`/exchange/add/${currencyIdA ? currencyIdA : 'ETH'}/${newCurrencyIdB}`)
       }
     },
     [currencyIdA, router, currencyIdB]
@@ -302,73 +335,20 @@ export default function Add() {
 
   const addIsUnsupported = useIsSwapUnsupported(currencies?.CURRENCY_A, currencies?.CURRENCY_B)
 
-  // console.log(
-  //   { addIsUnsupported, isValid, approvalA, approvalB },
-  //   approvalA === ApprovalState.APPROVED && approvalB === ApprovalState.APPROVED
-  // )
   return (
     <>
       <Head>
-        <title>Add Liquidity | Soul</title>
+        <title>{i18n._(t`Add Liquidity`)} | Solarbeam</title>
         <meta
           key="description"
           name="description"
-          content="Add liquidity to the SoulSwap AMM to enable gas optimised and low slippage trades across countless networks"
+          content="Add liquidity to the Solarbeam AMM to enable gas optimised and low slippage trades across countless networks"
         />
       </Head>
-
-      <Container id="add-liquidity-page" className="py-4 space-y-6 md:py-8 lg:py-12" maxWidth="2xl">
-        <div className="flex items-center justify-between px-4 mb-5">
-          <NavLink href="/pool">
-            <a className="flex items-center space-x-2 text-base font-medium text-center cursor-pointer text-secondary hover:text-high-emphesis">
-              <span>{i18n._(t`View Liquidity Positions`)}</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
-          </NavLink>
-          {/* <button
-            style={{
-              backgroundColor: 'rgba(167, 85, 221, 0.25)',
-              border: '1px solid #A755DD',
-              borderRadius: 20,
-              padding: '5px 40px',
-              fontSize: 14,
-            }}
-          >
-            FARM THE {currencies[Field.CURRENCY_A]?.symbol}-{currencies[Field.CURRENCY_B]?.symbol} POOL
-          </button> */}
-        </div>
-
-        <Alert
-          message={
-            noLiquidity ? (
-              i18n._(
-                t`When creating a pair you are the first liquidity provider. The ratio of tokens you add will set the price of this pool. Once you are happy with the rate, click supply to review`
-              )
-            ) : (
-              <>
-                <b>{i18n._(t`Tip:`)}</b>{' '}
-                {i18n._(
-                  t`By adding liquidity you'll earn fees from all trades on this pair
-                proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be
-                claimed by withdrawing your liquidity.`
-                )}
-              </>
-            )
-          }
-          type="information"
-        />
-
+      <SoulLogo />
+      <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
         <DoubleGlowShadow>
           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
-
             <ExchangeHeader
               input={currencies[Field.CURRENCY_A]}
               output={currencies[Field.CURRENCY_B]}
@@ -391,9 +371,9 @@ export default function Add() {
               pendingText={pendingText}
             />
             <div className="flex flex-col space-y-4">
-              {pair && pairState !== PairState.INVALID && (
+              {/* {pair && pairState !== PairState.INVALID && (
                 <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
-              )}
+              )} */}
 
               <div>
                 <CurrencyInputPanel
@@ -450,7 +430,11 @@ export default function Add() {
                   {i18n._(t`Unsupported Asset`)}
                 </Button>
               ) : !account ? (
-                <Web3Connect size="lg" color="blue" className="w-full" />
+                <Web3Connect size="lg" color="gradient" className="w-full" />
+              ) : !isValid ? (
+                <Button size="lg" color="gray" className="w-full" disabled>
+                  {i18n._(t`Enter an amount`)}
+                </Button>
               ) : (
                 (approvalA === ApprovalState.NOT_APPROVED ||
                   approvalA === ApprovalState.PENDING ||
@@ -527,6 +511,13 @@ export default function Add() {
             )}
           </div>
         </DoubleGlowShadow>
+        <div className="flex items-center px-4">
+          <NavLink href="/exchange/pool">
+            <a className="flex items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
+              <span>{i18n._(t`View Liquidity Positions`)}</span>
+            </a>
+          </NavLink>
+        </div>
       </Container>
     </>
   )

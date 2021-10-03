@@ -1,4 +1,4 @@
-import { ChainId, Currency, CurrencyAmount, JSBI, NATIVE, Pair } from '@soulswap/sdk'
+import { ChainId, Currency, CurrencyAmount, JSBI, NATIVE, Pair } from '../../../sdk'
 import React, { useMemo } from 'react'
 import { classNames, currencyId } from '../../../functions'
 import { toV2LiquidityToken, useTrackedTokenPairs } from '../../../state/user/hooks'

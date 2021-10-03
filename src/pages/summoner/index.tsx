@@ -24,7 +24,7 @@ import { useTVL } from '../../hooks/useV2Pairs'
 import { getAddress } from '@ethersproject/address'
 import { useVaults } from '../../features/vault/hooks'
 import Search from '../../components/Search'
-import { SEANCE_ADDRESS } from '@soulswap/sdk'
+import { SEANCE_ADDRESS } from '../../sdk'
 
 export default function Summoner(): JSX.Element {
   const { i18n } = useLingui()
