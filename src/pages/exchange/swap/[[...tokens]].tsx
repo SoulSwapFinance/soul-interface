@@ -46,7 +46,7 @@ import { useUSDCValue } from '../../../hooks/useUSDCPrice'
 import { warningSeverity } from '../../../functions/prices'
 import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
 import Image from 'next/image'
-import SoulLogo from '../../../components/SoulLogo'
+// import SoulLogo from '../../../components/SoulLogo'
 import Alert from '../../../components/Alert'
 
 export default function Swap() {
@@ -380,8 +380,8 @@ export default function Swap() {
         onConfirm={handleConfirmTokenWarning}
       />
 
-      <SoulLogo />
-
+      {/* <SoulLogo /> */}
+      <br /><br />
       <DoubleGlowShadowV2 opacity="0.6">
         <div id="swap-page" className="w-full max-w-2xl p-4 space-y-4 rounded bg-dark-900 z-1">
           <SwapHeader
@@ -456,7 +456,7 @@ export default function Swap() {
                       id="remove-recipient-button"
                       onClick={() => onChangeRecipient(null)}
                     >
-                      - {i18n._(t`Remove recipient`)}
+                      - {i18n._(t`Remove Recipient`)}
                     </Button>
                   )
                 ) : null}

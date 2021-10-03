@@ -189,11 +189,11 @@ export default function Summoner(): JSX.Element {
 
       <div className="container px-0 mx-auto pb-6">
         <div className={`mb-2 pb-4 grid grid-cols-12 gap/-4`}>
-          <div className="flex justify-center items-center col-span-12 lg:justify">
+          {/* <div className="flex justify-center items-center col-span-12 lg:justify">
             <Link href="/summoner">
               <SoulLogo />
             </Link>
-          </div>
+          </div> */}
         </div>
         <DoubleGlowShadowV2 maxWidth={false} opacity={'0.4'}>
           <div className={`grid grid-cols-12 gap-2 min-h-1/2`}>
@@ -215,9 +215,9 @@ export default function Summoner(): JSX.Element {
                       {/* <div className="flex items-center text-center justify-between py-2 text-emphasis">
                         Total Value Locked: {formatNumberScale(sumTvl + sumTvlVaults, true, 2)}
                       </div> */}
-                      <div className="flex items-center text-center justify-between py-2 text-emphasis">
+                      {/* <div className="flex items-center text-center justify-between py-2 text-emphasis">
                         TVL: {formatNumberScale(sumTvl, true, 2)}
-                      </div>
+                      </div> */}
                       {positions.length > 0 && (
                         <div className="flex items-center justify-between py-2 text-emphasis">
                         Possessions: {formatNumberScale(valueStaked, true, 2)}
