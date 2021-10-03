@@ -54,7 +54,7 @@ export const FarmPids = [
     token1Address: tokens.FTM,
     token2Address: tokens.WETH,
   },
-  { // 400
+  { // 800
     pid: 5,
     token1: 'SOUL',
     token2: 'SEANCE',
