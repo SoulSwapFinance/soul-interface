@@ -56,7 +56,7 @@ export default function Summoner(): JSX.Element {
     return { ...POOLS[chainId][key], lpToken: key }
   })
 
-  let sumTvl = tvlInfo.reduce((previousValue, currentValue) => {
+  let summTvl = tvlInfo.reduce((previousValue, currentValue) => {
     return previousValue + currentValue.tvl
   }, 0)
 
@@ -107,8 +107,7 @@ export default function Summoner(): JSX.Element {
         lpPrice = 0
       }
 
-      return Number(totalLp / 10 ** decimals) * lpPrice // todo: fix
-      // return Number(pool.totalLp / 10 ** decimals) * lpPrice // todo: fix
+      return Number(pool.totalLp / 10 ** decimals) * lpPrice // todo: fix
     }
 
     const rewards = getRewards()
@@ -194,7 +193,7 @@ export default function Summoner(): JSX.Element {
       <div className="container px-0 mx-auto pb-6">
         <div className={`mb-2 pb-4 grid grid-cols-12 gap/-4`}>
           <div className="flex justify-center items-center col-span-12 lg:justify">
-            <Link href="/farm">
+            <Link href="/summoner">
               <SoulLogo />
             </Link>
           </div>
@@ -219,7 +218,8 @@ export default function Summoner(): JSX.Element {
                         Total Value Locked: {formatNumberScale(sumTvl + sumTvlVaults, true, 2)}
                       </div> */}
                       <div className="flex items-center text-center justify-between py-2 text-emphasis">
-                        TVL: {formatNumberScale(sumTvl, true, 2)}
+                        TVL: {Number(summTvl).toFixed(4)}
+                        {/* TVL: {formatNumberScale(summTvl, true, 2)} */}
                       </div>
                       {positions.length > 0 && (
                         <div className="flex items-center justify-between py-2 text-emphasis">

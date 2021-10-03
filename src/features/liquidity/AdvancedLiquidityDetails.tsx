@@ -9,7 +9,7 @@ function TradeSummary() {
       <AutoColumn style={{ padding: '0 16px' }} className="text-sm">
         <RowBetween>
           <RowFixed>
-            <div className="text-secondary">Your Pool Tokens</div>
+            <div className="text-secondary">Pooled Tokens</div>
           </RowFixed>
           <RowFixed>
             <div className="text-white">
@@ -20,7 +20,7 @@ function TradeSummary() {
         </RowBetween>
         <RowBetween>
           <RowFixed>
-            <div className="text-secondary">Your Pool Share</div>
+            <div className="text-secondary">% Share</div>
           </RowFixed>
           <RowFixed>
             <div className="text-white">

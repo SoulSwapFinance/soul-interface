@@ -79,7 +79,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
             </div>
             <div className="flex flex-col w-full p-3 mt-3 space-y-1 text-sm rounded bg-dark-900 text-high-emphesis">
               <RowBetween>
-                <div>{i18n._(t`Your pool share`)}</div>
+                <div>{i18n._(t`Your Share`)}</div>
                 <div className="font-bold">{poolTokenPercentage ? poolTokenPercentage.toFixed(6) + '%' : '-'}</div>
               </RowBetween>
               <RowBetween>
@@ -192,15 +192,15 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
         <div className="p-4 space-y-4">
           <div className="px-4 py-4 space-y-1 text-sm rounded text-high-emphesis bg-dark-900">
             <div className="flex items-center justify-between">
-              <div>{i18n._(t`Your total pool tokens`)}:</div>
+              <div>{i18n._(t`Pooled Tokens`)}:</div>
               <div className="font-semibold">{userPoolBalance ? userPoolBalance.toSignificant(4) : '-'}</div>
             </div>
-            {stakedBalance && (
+            {/* {stakedBalance && (
               <div className="flex items-center justify-between">
                 <div>{i18n._(t`Pool tokens in rewards pool`)}:</div>
                 <div className="font-semibold">{stakedBalance.toSignificant(4)}</div>
               </div>
-            )}
+            )} */}
             <div className="flex items-center justify-between">
               <div>{i18n._(t`Pooled ${currency0?.symbol}`)}:</div>
               {token0Deposited ? (
@@ -230,7 +230,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
             </div>
 
             <div className="flex items-center justify-between">
-              <div>{i18n._(t`Your Share`)}:</div>
+              <div>{i18n._(t`% Share`)}:</div>
               <div className="font-semibold">
                 {poolTokenPercentage
                   ? (poolTokenPercentage.toFixed(2) === '0.00' ? '<0.01' : poolTokenPercentage.toFixed(2)) + '%'
