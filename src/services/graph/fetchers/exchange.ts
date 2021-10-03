@@ -12,19 +12,13 @@ import {
   transactionsQuery,
 } from '../queries'
 
-import { ChainId } from '@soulswap/sdk'
+import { ChainId } from '../../../sdk'
 import { GRAPH_HOST } from '../constants'
 import { request } from 'graphql-request'
 
 export const EXCHANGE = {
   [ChainId.MAINNET]: 'sushiswap/exchange',
-  [ChainId.FANTOM]: 'soulswap/fantom-exchange',
-  // [ChainId.XDAI]: 'sushiswap/xdai-exchange',
-  // [ChainId.MATIC]: 'sushiswap/matic-exchange',
-  // [ChainId.HARMONY]: 'sushiswap/harmony-exchange',
-  // [ChainId.OKEX]: 'sushiswap/okex-exchange',
-  // [ChainId.AVALANCHE]: 'sushiswap/avalanche-exchange',
-  // [ChainId.CELO]: 'sushiswap/celo-exchange',
+  [ChainId.FANTOM]: 'soulswap/fantom-exchange'
 }
 
 export const exchange = async (chainId = ChainId.MAINNET, query, variables) =>
