@@ -399,7 +399,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
               <HideOnMobile desktopOnly={true}>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
-                  Pool Allocation
+                  Pool Rewards
                 </Text>
                 {yearlySoulRewards === 0 ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
