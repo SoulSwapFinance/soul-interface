@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, JSBI } from '@soulswap/sdk'
+import { Currency, CurrencyAmount, JSBI } from '../sdk'
 
 import { parseUnits } from '@ethersproject/units'
 

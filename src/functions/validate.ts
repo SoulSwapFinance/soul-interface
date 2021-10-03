@@ -1,6 +1,6 @@
 // CONVENTION isFoo -> boolean
 
-import { ChainId, Currency, Token } from '@soulswap/sdk'
+import { ChainId, Currency, Token } from '../sdk'
 
 import { BigNumber } from 'ethers'
 import { TokenAddressMap } from '../state/lists/hooks'

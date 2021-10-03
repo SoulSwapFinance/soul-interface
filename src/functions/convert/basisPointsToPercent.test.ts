@@ -1,4 +1,4 @@
-import { JSBI, Percent } from '@soulswap/sdk'
+import { JSBI, Percent } from '../../sdk'
 
 import { basisPointsToPercent } from './basisPointsToPercent'
 

@@ -1,4 +1,4 @@
-import { ChainId } from '@soulswap/sdk'
+import { ChainId } from '../sdk'
 
 // Multichain Explorer
 const builders = {

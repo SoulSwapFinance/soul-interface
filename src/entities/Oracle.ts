@@ -3,7 +3,7 @@ import {
   SOULSWAP_TWAP_0_ORACLE_ADDRESS,
   SOULSWAP_TWAP_1_ORACLE_ADDRESS,
 } from '../constants/kashi'
-import { ChainId, Token } from '@soulswap/sdk'
+import { ChainId, Token } from '../sdk'
 
 import { CHAINLINK_MAPPING } from '../constants/chainlink'
 import { e10 } from '../functions/math'

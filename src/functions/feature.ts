@@ -1,4 +1,4 @@
-import { ChainId } from '@soulswap/sdk'
+import { ChainId } from '../sdk'
 
 export enum Feature {
   AMM = 'AMM',
@@ -13,20 +13,7 @@ export enum Feature {
 const features = {
   [ChainId.MAINNET]: [Feature.AMM],
   [ChainId.FANTOM]: [Feature.AMM, Feature.LIQUIDITY_MINING],
-  [ChainId.FANTOM_TESTNET]: [Feature.AMM, Feature.LIQUIDITY_MINING],
-  // [ChainId.ROPSTEN]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.BENTOBOX, Feature.KASHI],
-  // [ChainId.RINKEBY]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.BENTOBOX, Feature.KASHI],
-  // [ChainId.GÖRLI]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.BENTOBOX, Feature.KASHI],
-  // [ChainId.KOVAN]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.BENTOBOX, Feature.KASHI],
-  // [ChainId.MATIC]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.BENTOBOX, Feature.KASHI],
-  // [ChainId.MATIC_TESTNET]: [Feature.AMM],
-  // [ChainId.HARMONY]: [Feature.AMM],
-  // [ChainId.HARMONY_TESTNET]: [Feature.AMM],
-  // [ChainId.AVALANCHE]: [Feature.AMM],
-  // [ChainId.AVALANCHE_TESTNET]: [Feature.AMM],
-  // [ChainId.OKEX]: [Feature.AMM],
-  // [ChainId.OKEX_TESTNET]: [Feature.AMM],
-  // [ChainId.XDAI]: [Feature.AMM],
+  [ChainId.FANTOM_TESTNET]: [Feature.AMM, Feature.LIQUIDITY_MINING]
 }
 
 export function featureEnabled(feature: Feature, chainId: ChainId): boolean {
