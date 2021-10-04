@@ -7,7 +7,7 @@ import {
   SOUL_FTM_PAIR,
   SEANCE_USDC_PAIR,
   FTM_USDC_PAIR,
-  LOCKER_ADDRESS
+  SCARAB_ADDRESS
 } from '../constants/addresses'
 import {
   ARGENT_WALLET_DETECTOR_ABI,
@@ -55,7 +55,7 @@ import FACTORY_ABI from '../constants/abis/factory.json'
 import IUniswapV2PairABI from '../constants/abis/uniswap-v2-pair.json'
 import KASHIPAIR_ABI from '../constants/abis/kashipair.json'
 import MAKER_ABI from '../constants/abis/maker.json'
-import SOUL_LOCKER_ABI from '../constants/abis/soul-locker.json' // todo
+import SOUL_SCARAB_ABI from '../constants/abis/soulswap/scarab.json' // todo
 
 // soul
 import SOUL_GUIDE_ABI from '../constants/abis/soul-guide.json' // TODO: update abi
@@ -187,9 +187,9 @@ export function useETHPairContract(withSignerIfPossible?: boolean): Contract | n
   return useContract(chainId && ETH_USD_PAIR[chainId], IUniswapV2PairABI, withSignerIfPossible)
 }
 
-export function useLockerContract(withSignerIfPossible?: boolean): Contract | null {
+export function useScarabContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && LOCKER_ADDRESS[chainId], SOUL_LOCKER_ABI, withSignerIfPossible)
+  return useContract(chainId && SCARAB_ADDRESS[chainId], SOUL_SCARAB_ABI, withSignerIfPossible)
 }
 
 export function useSoulSeanceContract(withSignerIfPossible?: boolean): Contract | null {
