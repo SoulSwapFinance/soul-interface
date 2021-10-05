@@ -136,7 +136,14 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
   const fetchFeePercent = async () => {
     const percent = await getFeePercent(pid)
-    percent > 0 ? setFeePercent(percent / 10 ** 18) : setFeePercent(14)
+    const result = await userInfo(pid, account)
+    const staked = await result?.[0]
+
+    // set to 14 when no staked, otherwise uses percent
+    staked > 0
+      ? await setFeePercent(percent / 10 ** 18)
+      : await setFeePercent(14)
+
   }
 
   const getWithdrawable = async () => {
