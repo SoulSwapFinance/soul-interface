@@ -1,17 +1,22 @@
-import { useLockerContract, useTokenContract } from '../../hooks'
+import { useScarabContract, useTokenContract } from '../../hooks'
 import { BigNumber } from '@ethersproject/bignumber'
 import { Zero } from '@ethersproject/constants'
 import { useCallback } from 'react'
 import { useToken } from '../../hooks/Tokens'
+// import { SOUL } from '../../constants'
 
-export default function useLocker() {
-  const contract = useLockerContract()
+export default function useScarab() {
+  const contract = useScarabContract()
   const tokenContract = useTokenContract()
 
   const lockTokens = useCallback(
-    async (token: string, withdrawer: string, amount: BigNumber, unlockTimestamp: string) => {
+    async (
+      withdrawer: string, 
+      amount: BigNumber, 
+      unlockTimestamp: string
+      ) => {
       try {
-        return await contract?.lockTokens(token, withdrawer, amount.toString(), unlockTimestamp, {
+        return await contract?.lockTokens(withdrawer, amount.toString(), unlockTimestamp, {
           value: '100000000000000000',
         })
       } catch (e) {
@@ -34,15 +39,15 @@ export default function useLocker() {
     [contract]
   )
 
-  const getLockersByTokenAddress = useCallback(
+  const getScarabsByTokenAddress = useCallback(
     async (token: string) => {
       try {
-        const lockersIds = await contract?.getDepositsByTokenAddress(token)
+        const scarabsIds = await contract?.getDepositsByTokenAddress(token)
         const result = []
-        if (lockersIds.length > 0) {
-          for (const id of lockersIds) {
-            const lockerInfo = await contract?.lockedToken(id.toString())
-            result.push({ id, ...lockerInfo })
+        if (scarabsIds.length > 0) {
+          for (const id of scarabsIds) {
+            const scarabInfo = await contract?.lockedToken(id.toString())
+            result.push({ id, ...scarabInfo })
           }
         }
         return result
@@ -54,5 +59,5 @@ export default function useLocker() {
     [contract]
   )
 
-  return { lockTokens, getLockersByTokenAddress, withdrawTokens }
+  return { lockTokens, getScarabsByTokenAddress, withdrawTokens }
 }

@@ -10,9 +10,9 @@ import Card from '../../components/Card'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
-import SoulLogo from '../../components/SoulLogo'
+// import SoulLogo from '../../components/SoulLogo'
 import { useTransactionAdder } from '../../state/transactions/hooks'
-import useLocker from '../../features/locker/useLocker'
+import useScarab from '../../features/scarab/useScarab'
 import { Disclosure } from '@headlessui/react'
 import moment from 'moment'
 import { useToken } from '../../hooks/Tokens'
@@ -20,7 +20,7 @@ import { CurrencyAmount } from '../../sdk'
 import Button from '../../components/Button'
 import { getAddress } from '@ethersproject/address'
 
-export default function Locker(): JSX.Element {
+export default function Scarab(): JSX.Element {
   const { i18n } = useLingui()
   const { account } = useActiveWeb3React()
   const [tokenAddress, setTokenAddress] = useState(undefined)
@@ -28,50 +28,50 @@ export default function Locker(): JSX.Element {
   const [pendingTx, setPendingTx] = useState(false)
   const addTransaction = useTransactionAdder()
 
-  const [lockers, setLockers] = useState([])
+  const [scarabs, setScarabs] = useState([])
 
-  const lockerContract = useLocker()
+  const scarabContract = useScarab()
 
   useEffect(() => {
     if (isAddress(tokenAddress)) {
-      lockerContract.getLockersByTokenAddress(tokenAddress).then((r) => {
+      scarabContract.getScarabsByTokenAddress(tokenAddress).then((r) => {
         if (r.length > 0) {
-          setLockers(r.filter((x) => x.withdrawn == false))
+          setScarabs(r.filter((x) => x.withdrawn == false))
         }
       })
     }
-  }, [tokenAddress, lockerContract])
+  }, [tokenAddress, scarabContract])
 
   const handleWithdraw = useCallback(
     async (id) => {
       setPendingTx(true)
 
       try {
-        const tx = await lockerContract.withdrawTokens(id)
+        const tx = await scarabContract.withdrawTokens(id)
         addTransaction(tx, {
-          summary: `${i18n._(t`Withdraw from locker ${id}`)}`,
+          summary: `${i18n._(t`Withdraw from Scarab ${id}`)}`,
         })
       } catch (error) {
         console.error(error)
       }
       setPendingTx(false)
     },
-    [addTransaction, i18n, lockerContract]
+    [addTransaction, i18n, scarabContract]
   )
 
   return (
     <>
       <Head>
-        <title>Locker | Soul</title>
-        <meta key="description" name="description" content="Soul Locker" />
+        <title>Scarab | Soul</title>
+        <meta key="description" name="description" content="Soul Scarab" />
       </Head>
 
       <div className="container px-0 mx-auto pb-6">
         <div className={`mb-2 pb-4 grid grid-cols-12 gap-4`}>
           <div className="flex justify-center items-center col-span-12 lg:justify">
-            <Link href="/farm">
-              <SoulLogo />
-            </Link>
+            {/* <Link href="/farm"> */}
+              {/* <SoulLogo /> */}
+            {/* </Link> */}
           </div>
         </div>
         <DoubleGlowShadowV2 maxWidth={false} opacity={'0.3'}>
@@ -79,20 +79,20 @@ export default function Locker(): JSX.Element {
             <div className={`col-span-12 flex flex-col md:flex-row md:space-x-2`}>
               <NavLink
                 exact
-                href={'/locker'}
+                href={'/scarab'}
                 activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-yellow-dark-900"
               >
                 <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
-                  {i18n._(t`Search lockers`)}
+                  {i18n._(t`Search Scarabs`)}
                 </a>
               </NavLink>
               <NavLink
                 exact
-                href={'/locker/create'}
+                href={'/scarab/create'}
                 activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-yellow-dark-900"
               >
                 <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
-                  {i18n._(t`Create lock`)}
+                  {i18n._(t`Summon Scarabs`)}
                 </a>
               </NavLink>
             </div>
@@ -105,18 +105,18 @@ export default function Locker(): JSX.Element {
                     setTokenAddress(value)
                   }}
                 />
-                {lockers.length == 0 && isAddress(tokenAddress) && (
+                {scarabs.length == 0 && isAddress(tokenAddress) && (
                   <div className="flex justify-center items-center col-span-12 lg:justify mt-20">
                     <span>
-                      No lockers found for this address,{' '}
-                      <Link href="/locker/create">
+                      No scarabs found for this address,{' '}
+                      <Link href="/scarab/create">
                         <a className="hover:underline hover:text-yellow">click here</a>
                       </Link>{' '}
                       to create one.
                     </span>
                   </div>
                 )}
-                {lockers.length > 0 && (
+                {scarabs.length > 0 && (
                   <div className="grid grid-cols-5 text-base font-bold text-primary mt-10 mb-2">
                     <div className="flex items-center col-span-2 px-2">
                       <div className="hover:text-high-emphesis">{i18n._(t`Token`)}</div>
@@ -127,7 +127,7 @@ export default function Locker(): JSX.Element {
                   </div>
                 )}
                 <div className="flex-col">
-                  {lockers.map((locker, index) => {
+                  {scarabs.map((scarab, index) => {
                     return (
                       <Disclosure key={index}>
                         {() => (
@@ -142,11 +142,11 @@ export default function Locker(): JSX.Element {
                                   {token?.name} ({token?.symbol})
                                 </div>
                                 <div className="flex flex-col justify-center">
-                                  {CurrencyAmount.fromRawAmount(token, locker?.amount).toSignificant(6)}
+                                  {CurrencyAmount.fromRawAmount(token, scarab?.amount).toSignificant(6)}
                                 </div>
                                 <div className="flex flex-col items-end justify-center">
                                   <div className="text-xs text-right md:text-base text-secondary">
-                                    {moment.unix(locker?.unlockTimestamp.toString()).fromNow()}
+                                    {moment.unix(scarab?.unlockTimestamp.toString()).fromNow()}
                                   </div>
                                 </div>
                                 <div className="flex flex-col items-end justify-center">
@@ -154,11 +154,11 @@ export default function Locker(): JSX.Element {
                                     <Button
                                       variant="link"
                                       style={{ width: '100%' }}
-                                      onClick={() => handleWithdraw(locker?.id)}
+                                      onClick={() => handleWithdraw(scarab?.id)}
                                       disabled={
-                                        moment.unix(locker?.unlockTimestamp.toString()).isAfter(new Date()) ||
+                                        moment.unix(scarab?.unlockTimestamp.toString()).isAfter(new Date()) ||
                                         !account ||
-                                        (account && getAddress(account) != getAddress(locker?.withdrawer))
+                                        (account && getAddress(account) != getAddress(scarab?.withdrawer))
                                       }
                                     >
                                       Withdraw

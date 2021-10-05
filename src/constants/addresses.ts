@@ -19,9 +19,9 @@ export const SOUL_VAULT_ADDRESS: AddressMap = {
   [ChainId.FANTOM_TESTNET]: '',
 }
 
-export const LOCKER_ADDRESS: AddressMap = {
+export const SCARAB_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
-  [ChainId.FANTOM]: '',
+  [ChainId.FANTOM]: '0x489037544121C5407706a838c36280Cefad8BBce', // 03 OCT
   [ChainId.FANTOM_TESTNET]: '',
 }
 
