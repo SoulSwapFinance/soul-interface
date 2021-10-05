@@ -3,16 +3,20 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { Zero } from '@ethersproject/constants'
 import { useCallback } from 'react'
 import { useToken } from '../../hooks/Tokens'
-import { SOUL } from '../../constants'
+// import { SOUL } from '../../constants'
 
 export default function useScarab() {
   const contract = useScarabContract()
   const tokenContract = useTokenContract()
 
   const lockTokens = useCallback(
-    async (token: string, withdrawer: string, amount: BigNumber, unlockTimestamp: string) => {
+    async (
+      withdrawer: string, 
+      amount: BigNumber, 
+      unlockTimestamp: string
+      ) => {
       try {
-        return await contract?.lockTokens(SOUL, withdrawer, amount.toString(), unlockTimestamp, {
+        return await contract?.lockTokens(withdrawer, amount.toString(), unlockTimestamp, {
           value: '100000000000000000',
         })
       } catch (e) {

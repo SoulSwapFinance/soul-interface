@@ -16,7 +16,7 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
 import { SCARAB_ADDRESS } from '../../../constants'
-import SoulLogo from '../../../components/SoulLogo'
+// import SoulLogo from '../../../components/SoulLogo'
 import { useTransactionAdder } from '../../../state/transactions/hooks'
 import Button, { ButtonConfirmed, ButtonError } from '../../../components/Button'
 import NumericalInput from '../../../components/NumericalInput'
@@ -87,12 +87,10 @@ export default function CreateScarab(): JSX.Element {
 
       try {
         const tx = await scarabContract.lockTokens(
-          soulAddress,
           recipient,
-          value.toBigNumber(assetToken?.decimals),
+          value.toBigNumber(18), // SOUL is 18-decimals
           moment.default(unlockDate).unix().toString()
         )
-
         if (tx.wait) {
           const result = await tx.wait()
 
