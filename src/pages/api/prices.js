@@ -1,7 +1,6 @@
 const Web3 = require('web3')
 const { default: axios } = require('axios')
 import IUniswapV2PairABI from '../../constants/abis/uniswap-v2-pair.json'
-// const NETWORK_URL = 'https://moonriver.api.onfinality.io/public' // todo
 const NETWORK_URL = 'https://rpc.ftm.tools' // todo
 const web3 = new Web3(NETWORK_URL)
 
@@ -26,6 +25,8 @@ export default async function handler(req, res) {
   ret['soul'] = soulFtmPrice * ftmUSDCPrice
   ret['seance'] = seanceFtmPrice * ftmUSDCPrice
   ret['usdc'] = 1
+  ret['fusd'] = 1
+  ret['fusdt'] = 1
 
   res.status(200).json(ret)
 }
