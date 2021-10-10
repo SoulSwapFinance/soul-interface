@@ -126,6 +126,30 @@ export const FarmPids = [
       token1Address: tokens.SEANCE,
       token2Address: tokens.FTM,
   },
+  { // 100
+    pid: 10,
+    token1: 'FTM',
+    token2: 'GRIM',
+    lpSymbol: 'GRIM-FTM',
+    lpAddresses: {
+      4002: '',
+      250: '0x124D8CA33E29D1090a844e4C896DD16A360B1c96',
+      },
+      token1Address: tokens.FTM,
+      token2Address: tokens.GRIM,
+  },
+  { // 100
+    pid: 11,
+    token1: 'FTM',
+    token2: 'REAPER',
+    lpSymbol: 'REAPER-FTM',
+    lpAddresses: {
+      4002: '',
+      250: '0x7D776489372c8AFC0A1941a1335C9e9f90e0116a',
+      },
+      token1Address: tokens.FTM,
+      token2Address: tokens.REAPER,
+  },
   // { // TEMPLATE
   //   pid: 11,
   //   token1: '',
