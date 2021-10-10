@@ -127,7 +127,7 @@ export const FarmPids = [
       token2Address: tokens.FTM,
   },
   { // 100
-    pid: 10,
+    pid: 11,
     token1: 'FTM',
     token2: 'GRIM',
     lpSymbol: 'GRIM-FTM',
@@ -139,7 +139,7 @@ export const FarmPids = [
       token2Address: tokens.GRIM,
   },
   { // 100
-    pid: 11,
+    pid: 12,
     token1: 'FTM',
     token2: 'REAPER',
     lpSymbol: 'REAPER-FTM',
@@ -151,7 +151,7 @@ export const FarmPids = [
       token2Address: tokens.REAPER,
   },
   // { // TEMPLATE
-  //   pid: 11,
+  //   pid: 13,
   //   token1: '',
   //   token2: '',
   //   lpSymbol: '',

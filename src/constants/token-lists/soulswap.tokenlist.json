@@ -1,6 +1,6 @@
 {
   "name": "SoulSwap Token List",
-  "timestamp": "2021-09-19T00:31:47.842Z",
+  "timestamp": "2021-10-10T00:31:47.842Z",
   "version": {
     "major": 1,
     "minor": 1,
@@ -276,6 +276,22 @@
       "decimals": 6,
       "chainId": 250,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png"
+    },
+    {
+      "name": "GrimToken",
+      "address": "0x7eC94C4327dC757601B4273cD67014d7760Be97E",
+      "symbol": "GRIM",
+      "decimals": 18,
+      "chainId": 250,
+      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x7eC94C4327dC757601B4273cD67014d7760Be97E/logo.png"
+    },
+    {
+      "name": "ReaperToken",
+      "address": "0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb",
+      "symbol": "REAPER",
+      "decimals": 18,
+      "chainId": 250,
+      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb/logo.png"
     },
     {
       "name": "Seance Circle",

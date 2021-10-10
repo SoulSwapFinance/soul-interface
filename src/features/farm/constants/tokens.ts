@@ -41,6 +41,6 @@ export const tokens = {
   },
   REAPER: {
     4002: "",
-    250: "0x117db78176c8ede4f12fcd29d85cd96b91a4cbbb",
+    250: "0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb",
   },
 };
