@@ -13,6 +13,9 @@ msgstr ""
 "POT-Creation-Date: \n"
 "Plural-Forms: \n"
 
+msgid "% Share"
+msgstr "% Share"
+
 msgid ""
 "(COMING SOON) Accrue automatic yield through flash loans and\n"
 "SOUL strategies"
@@ -73,6 +76,9 @@ msgstr "Add"
 
 msgid "Add Liquidity"
 msgstr "Add Liquidity"
+
+msgid "Add Liquidity & Earn Fees (0.25%)"
+msgstr "Add Liquidity & Earn Fees (0.25%)"
 
 msgid "Add SEANCE to your MetaMask wallet"
 msgstr "Add SEANCE to your MetaMask wallet"
@@ -379,9 +385,6 @@ msgstr "Enter a recipient"
 msgid "Enter a valid slippage percentage"
 msgstr "Enter a valid slippage percentage"
 
-msgid "Enter an amount"
-msgstr "Enter an amount"
-
 msgid "Error"
 msgstr "Error"
 
@@ -665,9 +668,6 @@ msgstr "Minimum received"
 msgid "My Farms"
 msgstr "My Farms"
 
-msgid "My Liquidity Positions"
-msgstr "My Liquidity Positions"
-
 msgid "My Orders"
 msgstr "My Orders"
 
@@ -691,9 +691,6 @@ msgstr "No Results"
 
 msgid "No liquidity found to do swap"
 msgstr "No liquidity found to do swap"
-
-msgid "No liquidity was found."
-msgstr "No liquidity was found."
 
 msgid "No order history"
 msgstr "No order history"
@@ -783,8 +780,8 @@ msgstr "Pool Found!"
 msgid "Pool Tokens"
 msgstr "Pool Tokens"
 
-msgid "Pool tokens in rewards pool"
-msgstr "Pool tokens in rewards pool"
+msgid "Pooled Tokens"
+msgstr "Pooled Tokens"
 
 msgid "Pooled {0}"
 msgstr "Pooled {0}"
@@ -834,11 +831,11 @@ msgstr "Remove"
 msgid "Remove Liquidity"
 msgstr "Remove Liquidity"
 
+msgid "Remove Recipient"
+msgstr "Remove Recipient"
+
 msgid "Remove liquidity of Soul"
 msgstr "Remove liquidity of Soul"
-
-msgid "Remove recipient"
-msgstr "Remove recipient"
 
 msgid "Remove {0} {1} and {2} {3}"
 msgstr "Remove {0} {1} and {2} {3}"
@@ -918,14 +915,11 @@ msgstr "Share of Pool:"
 msgid "Slippage tolerance"
 msgstr "Slippage tolerance"
 
-msgid "Solarbeam"
-msgstr "Solarbeam"
-
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 
-msgid "Soon"
-msgstr "Soon"
+msgid "SoulSwap"
+msgstr "SoulSwap"
 
 msgid "Spanish"
 msgstr "Spanish"
@@ -952,9 +946,6 @@ msgstr ""
 "Stake into SPELL add collateral as aSPELL on Aave all in\n"
 "one click"
 
-msgid "Summon"
-msgstr "Summon"
-
 msgid "Summon an Empire."
 msgstr "Summon an Empire."
 
@@ -966,18 +957,6 @@ msgstr "Swap"
 
 msgid "Swap Anyway"
 msgstr "Swap Anyway"
-
-msgid "Swap From (est.):"
-msgstr "Swap From (est.):"
-
-msgid "Swap From:"
-msgstr "Swap From:"
-
-msgid "Swap To (est.):"
-msgstr "Swap To (est.):"
-
-msgid "Swap To:"
-msgstr "Swap To:"
 
 msgid "Swapping {0} {1} for {2} {3}"
 msgstr "Swapping {0} {1} for {2} {3}"
@@ -1184,17 +1163,14 @@ msgstr "Your Liquidity"
 msgid "Your Position"
 msgstr "Your Position"
 
+msgid "Your Share"
+msgstr "Your Share"
+
 msgid "Your Staked"
 msgstr "Your Staked"
 
 msgid "Your Wallet"
 msgstr "Your Wallet"
-
-msgid "Your pool share"
-msgstr "Your pool share"
-
-msgid "Your total pool tokens"
-msgstr "Your total pool tokens"
 
 msgid "Your transaction may be frontrun"
 msgstr "Your transaction may be frontrun"

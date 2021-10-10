@@ -13,6 +13,9 @@ msgstr ""
 "POT-Creation-Date: \n"
 "Plural-Forms: \n"
 
+msgid "% Share"
+msgstr ""
+
 msgid ""
 "(COMING SOON) Accrue automatic yield through flash loans and\n"
 "SOUL strategies"
@@ -70,6 +73,9 @@ msgid "Add"
 msgstr ""
 
 msgid "Add Liquidity"
+msgstr ""
+
+msgid "Add Liquidity & Earn Fees (0.25%)"
 msgstr ""
 
 msgid "Add SEANCE to your MetaMask wallet"
@@ -373,9 +379,6 @@ msgstr ""
 msgid "Enter a valid slippage percentage"
 msgstr ""
 
-msgid "Enter an amount"
-msgstr ""
-
 msgid "Error"
 msgstr ""
 
@@ -648,9 +651,6 @@ msgstr ""
 msgid "My Farms"
 msgstr ""
 
-msgid "My Liquidity Positions"
-msgstr ""
-
 msgid "My Orders"
 msgstr ""
 
@@ -673,9 +673,6 @@ msgid "No Results"
 msgstr ""
 
 msgid "No liquidity found to do swap"
-msgstr ""
-
-msgid "No liquidity was found."
 msgstr ""
 
 msgid "No order history"
@@ -764,7 +761,7 @@ msgstr ""
 msgid "Pool Tokens"
 msgstr ""
 
-msgid "Pool tokens in rewards pool"
+msgid "Pooled Tokens"
 msgstr ""
 
 msgid "Pooled {0}"
@@ -815,10 +812,10 @@ msgstr ""
 msgid "Remove Liquidity"
 msgstr ""
 
-msgid "Remove liquidity of Soul"
+msgid "Remove Recipient"
 msgstr ""
 
-msgid "Remove recipient"
+msgid "Remove liquidity of Soul"
 msgstr ""
 
 msgid "Remove {0} {1} and {2} {3}"
@@ -899,13 +896,10 @@ msgstr ""
 msgid "Slippage tolerance"
 msgstr ""
 
-msgid "Solarbeam"
-msgstr ""
-
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr ""
 
-msgid "Soon"
+msgid "SoulSwap"
 msgstr ""
 
 msgid "Spanish"
@@ -931,9 +925,6 @@ msgid ""
 "one click"
 msgstr ""
 
-msgid "Summon"
-msgstr ""
-
 msgid "Summon an Empire."
 msgstr ""
 
@@ -944,18 +935,6 @@ msgid "Swap"
 msgstr ""
 
 msgid "Swap Anyway"
-msgstr ""
-
-msgid "Swap From (est.):"
-msgstr ""
-
-msgid "Swap From:"
-msgstr ""
-
-msgid "Swap To (est.):"
-msgstr ""
-
-msgid "Swap To:"
 msgstr ""
 
 msgid "Swapping {0} {1} for {2} {3}"
@@ -1161,16 +1140,13 @@ msgstr ""
 msgid "Your Position"
 msgstr ""
 
+msgid "Your Share"
+msgstr ""
+
 msgid "Your Staked"
 msgstr ""
 
 msgid "Your Wallet"
-msgstr ""
-
-msgid "Your pool share"
-msgstr ""
-
-msgid "Your total pool tokens"
 msgstr ""
 
 msgid "Your transaction may be frontrun"
