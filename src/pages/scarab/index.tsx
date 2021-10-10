@@ -23,8 +23,8 @@ import { getAddress } from '@ethersproject/address'
 export default function Scarab(): JSX.Element {
   const { i18n } = useLingui()
   const { account } = useActiveWeb3React()
-  const [tokenAddress, setTokenAddress] = useState(undefined)
-  const token = useToken(isAddress(tokenAddress) ? tokenAddress : undefined)
+  const [recipientAddress, setRecipientAddress] = useState(undefined)
+  const recipient = isAddress(recipientAddress) ? recipientAddress : undefined
   const [pendingTx, setPendingTx] = useState(false)
   const addTransaction = useTransactionAdder()
 
@@ -33,14 +33,14 @@ export default function Scarab(): JSX.Element {
   const scarabContract = useScarab()
 
   useEffect(() => {
-    if (isAddress(tokenAddress)) {
-      scarabContract.getScarabsByTokenAddress(tokenAddress).then((r) => {
+    if (isAddress(recipientAddress)) {
+      scarabContract.getDepositsByRecipient(recipientAddress).then((r) => {
         if (r.length > 0) {
           setScarabs(r.filter((x) => x.withdrawn == false))
         }
       })
     }
-  }, [tokenAddress, scarabContract])
+  }, [recipientAddress, scarabContract])
 
   const handleWithdraw = useCallback(
     async (id) => {
@@ -99,16 +99,16 @@ export default function Scarab(): JSX.Element {
             <div className={`col-span-12`} style={{ minHeight: '35rem' }}>
               <Card className="h-full bg-dark-900 z-4">
                 <Search
-                  placeholder={'Search by name, symbol or address'}
-                  term={tokenAddress}
+                  placeholder={'Search by recipient address'}
+                  term={recipientAddress}
                   search={(value: string): void => {
-                    setTokenAddress(value)
+                    setRecipientAddress(value)
                   }}
                 />
-                {scarabs.length == 0 && isAddress(tokenAddress) && (
+                {scarabs.length == 0 && isAddress(recipientAddress) && (
                   <div className="flex justify-center items-center col-span-12 lg:justify mt-20">
                     <span>
-                      No scarabs found for this address,{' '}
+                      No scarabs found for this user address,{' '}
                       <Link href="/scarab/create">
                         <a className="hover:underline hover:text-yellow">click here</a>
                       </Link>{' '}
@@ -139,10 +139,10 @@ export default function Scarab(): JSX.Element {
                             >
                               <div className="grid grid-cols-5">
                                 <div className="flex col-span-2 items-center">
-                                  {token?.name} ({token?.symbol})
+                                  {recipient?.address} ({recipient?.address})
                                 </div>
                                 <div className="flex flex-col justify-center">
-                                  {CurrencyAmount.fromRawAmount(token, scarab?.amount).toSignificant(6)}
+                                  {CurrencyAmount.fromRawAmount(recipient, scarab?.amount).toSignificant(6)}
                                 </div>
                                 <div className="flex flex-col items-end justify-center">
                                   <div className="text-xs text-right md:text-base text-secondary">
@@ -158,7 +158,7 @@ export default function Scarab(): JSX.Element {
                                       disabled={
                                         moment.unix(scarab?.unlockTimestamp.toString()).isAfter(new Date()) ||
                                         !account ||
-                                        (account && getAddress(account) != getAddress(scarab?.withdrawer))
+                                        (account && getAddress(account) != getAddress(scarab?.recipient))
                                       }
                                     >
                                       Withdraw

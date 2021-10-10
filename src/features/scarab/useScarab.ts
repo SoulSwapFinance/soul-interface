@@ -1,23 +1,18 @@
-import { useScarabContract, useTokenContract } from '../../hooks'
+
+import { useScarabContract } from '../../hooks'
 import { BigNumber } from '@ethersproject/bignumber'
 import { Zero } from '@ethersproject/constants'
 import { useCallback } from 'react'
 import { useToken } from '../../hooks/Tokens'
-// import { SOUL } from '../../constants'
 
 export default function useScarab() {
   const contract = useScarabContract()
-  const tokenContract = useTokenContract()
 
-  const lockTokens = useCallback(
-    async (
-      withdrawer: string, 
-      amount: BigNumber, 
-      unlockTimestamp: string
-      ) => {
+  const lockSouls = useCallback(
+    async (recipient: string, amount: BigNumber, unlockTimestamp: string) => {
       try {
-        return await contract?.lockTokens(withdrawer, amount.toString(), unlockTimestamp, {
-          value: '100000000000000000',
+        return await contract?.lockSouls(recipient, amount.toString(), unlockTimestamp, {
+          // value: '100000000000000000',
         })
       } catch (e) {
         console.error(e)
@@ -39,15 +34,15 @@ export default function useScarab() {
     [contract]
   )
 
-  const getScarabsByTokenAddress = useCallback(
-    async (token: string) => {
+  const getDepositsByRecipient = useCallback(
+    async (recipient: string) => {
       try {
-        const scarabsIds = await contract?.getDepositsByTokenAddress(token)
+        const scarabs = await contract?.getDepositsByRecipient(recipient)
         const result = []
-        if (scarabsIds.length > 0) {
-          for (const id of scarabsIds) {
-            const scarabInfo = await contract?.lockedToken(id.toString())
-            result.push({ id, ...scarabInfo })
+        if (scarabs.length > 0) {
+          for (const id of scarabs) {
+            const scarabs = await contract?.depositsByRecipient(recipient, id.toString())
+            result.push({ id, ...scarabs })
           }
         }
         return result
@@ -59,5 +54,5 @@ export default function useScarab() {
     [contract]
   )
 
-  return { lockTokens, getScarabsByTokenAddress, withdrawTokens }
+  return { lockSouls, getDepositsByRecipient, withdrawTokens }
 }

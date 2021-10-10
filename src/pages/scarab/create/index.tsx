@@ -10,7 +10,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { classNames, formatNumberScale, tryParseAmount } from '../../../functions'
 import { useRouter } from 'next/router'
 import NavLink from '../../../components/NavLink'
-import Link from 'next/link'
+// import Link from 'next/link'
 import Card from '../../../components/Card'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
@@ -36,14 +36,14 @@ export default function CreateScarab(): JSX.Element {
   const { i18n } = useLingui()
   const router = useRouter()
   const { chainId, account, library } = useActiveWeb3React()
+  const [tokenAddress, setTokenAddress] = useState('')
   const [recipient, setRecipient] = useState('')
   const [value, setValue] = useState('')
   const [unlockDate, setUnlockDate] = useState(moment.default())
   const [pendingTx, setPendingTx] = useState(false)
   const addTransaction = useTransactionAdder()
-  
-  const soulAddress = '0xe2fb177009ff39f52c0134e8007fa0e4baacbd07'
-  const assetToken = useCurrency(soulAddress) || undefined
+
+  const assetToken = useCurrency(tokenAddress) || undefined
 
   const typedDepositValue = tryParseAmount(value, assetToken)
 
@@ -64,16 +64,15 @@ export default function CreateScarab(): JSX.Element {
   }, [approvalState, approvalSubmitted])
 
   const errorMessage = 
-  // !isAddress(soulAddress)
-  //   ? 'Invalid token'
-    // : 
-    !isAddress(recipient)
-    ? 'Invalid Recipient'
-    : isNaN(parseFloat(value)) || parseFloat(value) == 0
-    ? 'Invalid Amount'
-    : moment.isDate(unlockDate) || moment.default(unlockDate).isBefore(new Date())
-    ? 'Invalid Unlock Date'
-    : ''
+  !isAddress(tokenAddress)
+    ? 'Invalid token'
+    : !isAddress(recipient)
+      ? 'Invalid recipient'
+      : isNaN(parseFloat(value)) || parseFloat(value) == 0
+      ? 'Invalid amount'
+      : moment.isDate(unlockDate) || moment.default(unlockDate).isBefore(new Date())
+      ? 'Invalid unlock date'
+      : ''
 
   const allInfoSubmitted = errorMessage == ''
 
@@ -81,16 +80,18 @@ export default function CreateScarab(): JSX.Element {
     await approve()
   }, [approve])
 
-  const handleLock = useCallback(async () => {
+  const handleScarab = useCallback(async () => {
     if (allInfoSubmitted) {
       setPendingTx(true)
 
       try {
-        const tx = await scarabContract.lockTokens(
+        const tx = await scarabContract.lockSouls(
+          // tokenAddress,
           recipient,
-          value.toBigNumber(18), // SOUL is 18-decimals
+          value.toBigNumber(assetToken?.decimals),
           moment.default(unlockDate).unix().toString()
         )
+
         if (tx.wait) {
           const result = await tx.wait()
 
@@ -103,6 +104,7 @@ export default function CreateScarab(): JSX.Element {
             txn: { hash: result.transactionHash, summary: `Successfully created Scarab [${_id}]`, success: true },
           })
 
+          setTokenAddress('')
           setRecipient('')
           setValue('')
           setUnlockDate(moment.default())
@@ -111,13 +113,13 @@ export default function CreateScarab(): JSX.Element {
         }
       } catch (err) {
         addPopup({
-          txn: { hash: undefined, summary: `Failed to Create Scarab: ${err}`, success: false },
+          txn: { hash: undefined, summary: `Failed to create Scarab: ${err}`, success: false },
         })
       } finally {
         setPendingTx(false)
       }
     }
-  }, [allInfoSubmitted, addPopup, assetToken, recipient, value, unlockDate, scarabContract])
+  }, [allInfoSubmitted, scarabContract, recipient, value, assetToken?.decimals, unlockDate, addPopup])
 
   var valid = function (current) {
     return current.isAfter(moment.default(unlockDate).subtract(1, 'day'))
@@ -164,7 +166,7 @@ export default function CreateScarab(): JSX.Element {
               <Card className="h-full bg-dark-900 z-4">
                 <div className={`grid grid-cols-12 gap-4`}>
                   <div className={`col-span-12 md:col-span-8 bg-dark-800 px-6 py-4 rounded`}>
-                    {/* <div className={'px-4 py-2 rounded bg-dark-800'}>
+                    <div className={'px-4 py-2 rounded bg-dark-800'}>
                       <div className="flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row">
                         <div className={classNames('w-full flex sm:w-72 justify-center')}>
                           <div className="flex flex-1 flex-col items-start mt-2 md:mt-0 md:items-end justify-center mx-3.5">
@@ -180,12 +182,12 @@ export default function CreateScarab(): JSX.Element {
                             autoCapitalize="off"
                             spellCheck="false"
                             pattern="^(0x[a-fA-F0-9]{40})$"
-                            onChange={(e) => setTokenAddress(e.target.value)}
-                            value={tokenAddress}
+                            // onChange={(e) => setTokenAddress(e.target.value)}
+                            value={'0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'}
                           />
                         </div>
                       </div>
-                    </div> */}
+                    </div>
                     <div className={'px-4 py-2 rounded bg-dark-800'}>
                       <div className="flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row">
                         <div className={classNames('w-full flex sm:w-72 justify-center')}>
@@ -198,8 +200,8 @@ export default function CreateScarab(): JSX.Element {
                             className={'p-3 text-base bg-transparent'}
                             id="token-amount-input"
                             value={value}
-                            onUserInput={(val) => {
-                              setValue(val)
+                            onUserInput={(value) => {
+                              setValue(value)
                             }}
                           />
                           {assetToken && selectedCurrencyBalance ? (
@@ -241,7 +243,7 @@ export default function CreateScarab(): JSX.Element {
                                 size="xs"
                                 className="text-xxs font-medium bg-transparent border rounded-full hover:bg-primary border-low-emphesis text-secondary whitespace-nowrap"
                               >
-                                {i18n._(t`Me`)}
+                                {i18n._(t`SELF`)}
                               </Button>
                             )}
                           </>
@@ -310,7 +312,7 @@ export default function CreateScarab(): JSX.Element {
                               {approvalState === ApprovalState.APPROVED && (
                                 <ButtonError
                                   className="font-bold text-light"
-                                  onClick={handleLock}
+                                  onClick={handleScarab}
                                   style={{
                                     width: '100%',
                                   }}

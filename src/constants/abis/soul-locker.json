@@ -1,241 +1,271 @@
 [{
-    "type": "constructor",
-    "stateMutability": "nonpayable",
-    "inputs": []
-}, {
-    "type": "event",
-    "name": "OwnershipTransferred",
+    "anonymous": false,
     "inputs": [{
-        "type": "address",
-        "name": "previousOwner",
+        "indexed": false,
         "internalType": "address",
-        "indexed": true
-    }, {
-        "type": "address",
-        "name": "newOwner",
-        "internalType": "address",
-        "indexed": true
+        "name": "manifestor",
+        "type": "address"
     }],
-    "anonymous": false
+    "name": "ManifestorUpdated",
+    "type": "event"
 }, {
-    "type": "event",
-    "name": "Withdraw",
+    "anonymous": false,
     "inputs": [{
-        "type": "address",
-        "name": "withdrawer",
-        "internalType": "address",
-        "indexed": false
-    }, {
-        "type": "uint256",
-        "name": "amount",
+        "indexed": false,
         "internalType": "uint256",
-        "indexed": false
-    }],
-    "anonymous": false
-}, {
-    "type": "function",
-    "stateMutability": "view",
-    "outputs": [{
-        "type": "uint256",
-        "name": "",
-        "internalType": "uint256"
-    }],
-    "name": "depositsByTokenAddress",
-    "inputs": [{
-        "type": "address",
-        "name": "",
-        "internalType": "address"
-    }, {
-        "type": "uint256",
-        "name": "",
-        "internalType": "uint256"
-    }]
-}, {
-    "type": "function",
-    "stateMutability": "view",
-    "outputs": [{
-        "type": "uint256",
-        "name": "",
-        "internalType": "uint256"
-    }],
-    "name": "depositsCount",
-    "inputs": []
-}, {
-    "type": "function",
-    "stateMutability": "view",
-    "outputs": [{
-        "type": "uint256[]",
-        "name": "",
-        "internalType": "uint256[]"
-    }],
-    "name": "getDepositsByTokenAddress",
-    "inputs": [{
-        "type": "address",
-        "name": "_token",
-        "internalType": "address"
-    }]
-}, {
-    "type": "function",
-    "stateMutability": "view",
-    "outputs": [{
-        "type": "uint256",
-        "name": "",
-        "internalType": "uint256"
-    }],
-    "name": "getTokenTotalLockedBalance",
-    "inputs": [{
-        "type": "address",
-        "name": "_token",
-        "internalType": "address"
-    }]
-}, {
-    "type": "function",
-    "stateMutability": "view",
-    "outputs": [{
-        "type": "uint256",
-        "name": "",
-        "internalType": "uint256"
-    }],
-    "name": "lockFee",
-    "inputs": []
-}, {
-    "type": "function",
-    "stateMutability": "payable",
-    "outputs": [{
-        "type": "uint256",
-        "name": "_id",
-        "internalType": "uint256"
-    }],
-    "name": "lockTokens",
-    "inputs": [{
-        "type": "address",
-        "name": "_token",
-        "internalType": "contract IERC20"
-    }, {
-        "type": "address",
-        "name": "_withdrawer",
-        "internalType": "address"
-    }, {
-        "type": "uint256",
-        "name": "_amount",
-        "internalType": "uint256"
-    }, {
-        "type": "uint256",
-        "name": "_unlockTimestamp",
-        "internalType": "uint256"
-    }]
-}, {
-    "type": "function",
-    "stateMutability": "view",
-    "outputs": [{
-        "type": "address",
-        "name": "token",
-        "internalType": "contract IERC20"
-    }, {
-        "type": "address",
-        "name": "withdrawer",
-        "internalType": "address"
-    }, {
-        "type": "uint256",
         "name": "amount",
-        "internalType": "uint256"
+        "type": "uint256"
     }, {
-        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+    }],
+    "name": "ScarabSummoned",
+    "type": "event"
+}, {
+    "anonymous": false,
+    "inputs": [{
+        "indexed": false,
+        "internalType": "address",
+        "name": "recipient",
+        "type": "address"
+    }, {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+    }],
+    "name": "Withdraw",
+    "type": "event"
+}, {
+    "inputs": [{
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+    }, {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+    }],
+    "name": "depositsByRecipient",
+    "outputs": [{
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "inputs": [],
+    "name": "depositsCount",
+    "outputs": [{
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "inputs": [{
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+    }],
+    "name": "enWei",
+    "outputs": [{
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+    }],
+    "stateMutability": "pure",
+    "type": "function"
+}, {
+    "inputs": [{
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+    }],
+    "name": "fromWei",
+    "outputs": [{
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+    }],
+    "stateMutability": "pure",
+    "type": "function"
+}, {
+    "inputs": [{
+        "internalType": "address",
+        "name": "_recipient",
+        "type": "address"
+    }],
+    "name": "getDepositsByRecipient",
+    "outputs": [{
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "inputs": [],
+    "name": "getTotalLockedBalance",
+    "outputs": [{
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "inputs": [{
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+    }],
+    "name": "getTribute",
+    "outputs": [{
+        "internalType": "uint256",
+        "name": "fee",
+        "type": "uint256"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "inputs": [{
+        "internalType": "address",
+        "name": "_recipient",
+        "type": "address"
+    }, {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+    }, {
+        "internalType": "uint256",
+        "name": "_unlockTimestamp",
+        "type": "uint256"
+    }],
+    "name": "lockSouls",
+    "outputs": [{
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+    }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "inputs": [],
+    "name": "manifestor",
+    "outputs": [{
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "inputs": [],
+    "name": "outcaster",
+    "outputs": [{
+        "internalType": "contract Outcaster",
+        "name": "",
+        "type": "address"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "inputs": [{
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+    }],
+    "name": "scarabs",
+    "outputs": [{
+        "internalType": "address",
+        "name": "recipient",
+        "type": "address"
+    }, {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+    }, {
+        "internalType": "uint256",
+        "name": "tribute",
+        "type": "uint256"
+    }, {
+        "internalType": "uint256",
         "name": "unlockTimestamp",
-        "internalType": "uint256"
+        "type": "uint256"
     }, {
-        "type": "bool",
+        "internalType": "bool",
         "name": "withdrawn",
-        "internalType": "bool"
+        "type": "bool"
     }],
-    "name": "lockedToken",
-    "inputs": [{
-        "type": "uint256",
-        "name": "",
-        "internalType": "uint256"
-    }]
-}, {
-    "type": "function",
     "stateMutability": "view",
-    "outputs": [{
-        "type": "address",
-        "name": "",
-        "internalType": "address"
-    }],
-    "name": "marketingAddress",
-    "inputs": []
+    "type": "function"
 }, {
-    "type": "function",
+    "inputs": [],
+    "name": "seance",
+    "outputs": [{
+        "internalType": "contract SeanceCircle",
+        "name": "",
+        "type": "address"
+    }],
     "stateMutability": "view",
-    "outputs": [{
-        "type": "address",
-        "name": "",
-        "internalType": "address"
+    "type": "function"
+}, {
+    "inputs": [{
+        "internalType": "address",
+        "name": "_manifestor",
+        "type": "address"
     }],
-    "name": "owner",
-    "inputs": []
-}, {
-    "type": "function",
-    "stateMutability": "nonpayable",
+    "name": "setManifestor",
     "outputs": [],
-    "name": "renounceOwnership",
-    "inputs": []
-}, {
-    "type": "function",
     "stateMutability": "nonpayable",
-    "outputs": [],
-    "name": "setLockFee",
-    "inputs": [{
-        "type": "uint256",
-        "name": "_lockFee",
-        "internalType": "uint256"
-    }]
+    "type": "function"
 }, {
-    "type": "function",
-    "stateMutability": "nonpayable",
-    "outputs": [],
-    "name": "setMarketingAddress",
-    "inputs": [{
-        "type": "address",
-        "name": "_marketingAddress",
-        "internalType": "address"
-    }]
-}, {
-    "type": "function",
-    "stateMutability": "nonpayable",
-    "outputs": [],
-    "name": "transferOwnership",
-    "inputs": [{
-        "type": "address",
-        "name": "newOwner",
-        "internalType": "address"
-    }]
-}, {
-    "type": "function",
+    "inputs": [],
+    "name": "soul",
+    "outputs": [{
+        "internalType": "contract SoulPower",
+        "name": "",
+        "type": "address"
+    }],
     "stateMutability": "view",
-    "outputs": [{
-        "type": "uint256",
-        "name": "",
-        "internalType": "uint256"
-    }],
-    "name": "walletTokenBalance",
-    "inputs": [{
-        "type": "address",
-        "name": "",
-        "internalType": "address"
-    }, {
-        "type": "address",
-        "name": "",
-        "internalType": "address"
-    }]
+    "type": "function"
 }, {
-    "type": "function",
-    "stateMutability": "nonpayable",
-    "outputs": [],
+    "inputs": [],
+    "name": "tributeRate",
+    "outputs": [{
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "inputs": [{
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+    }],
+    "name": "walletBalance",
+    "outputs": [{
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "inputs": [{
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+    }],
     "name": "withdrawTokens",
-    "inputs": [{
-        "type": "uint256",
-        "name": "_id",
-        "internalType": "uint256"
-    }]
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
 }]
