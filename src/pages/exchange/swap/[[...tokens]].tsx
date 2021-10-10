@@ -47,6 +47,7 @@ import { warningSeverity } from '../../../functions/prices'
 import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
 import Image from 'next/image'
 // import SoulLogo from '../../../components/SoulLogo'
+import { CenterScreen } from '../../../components/ReusableStyles'
 import Alert from '../../../components/Alert'
 
 export default function Swap() {
