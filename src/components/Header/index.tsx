@@ -93,9 +93,9 @@ function AppBar(): JSX.Element {
                           </NavLink>
                         )}
                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'/scarab'}>
+                        <NavLink href={'/scarab/create'}>
                         <a
-                          id={`farm-nav-link`}
+                          id={`scarab-nav-link`}
                           className="p-2 text-base text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                         >
                           {i18n._(t`Scarab`)}
@@ -122,7 +122,7 @@ function AppBar(): JSX.Element {
                             </NavLink>
                           </>
                         )} */}
-                      {chainId && [ChainId.MAINNET].includes(chainId) && (
+                      {chainId && [ChainId.MAINNET, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/bridge'}>
                           <a
                             id={`bridge-nav-link`}

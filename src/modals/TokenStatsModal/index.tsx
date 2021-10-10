@@ -122,7 +122,7 @@ export default function TokenStatsModal({ token }: { token: any }) {
                 {token?.address && (
                   <ExternalLink
                     href={
-                      'https://blockscout.moonriver.moonbeam.network/tokens/0x6bD193Ee6D2104F14F94E2cA6efefae561A4334B'
+                      'https://ftmscan.com/address/0xe2fb177009ff39f52c0134e8007fa0e4baacbd07'
                     }
                     className="px-3 ring-0 ring-transparent ring-opacity-0"
                     color="light-green"

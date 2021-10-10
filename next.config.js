@@ -47,6 +47,16 @@ module.exports = withBundleAnalyzer(
           source: '/farms',
           destination: '/farm',
           permanent: true,
+        },        
+        {
+          source: '/scarab',
+          destination: '/scarab/create',
+          permanent: true,
+        },
+        {
+          source: '/scarabs',
+          destination: '/scarab/create',
+          permanent: true,
         },
         // {
         //   source: '/bento/kashi',
@@ -134,6 +144,10 @@ module.exports = withBundleAnalyzer(
         {
           source: '/farm',
           destination: '/farm',
+        },
+        {
+          source: '/scarab',
+          destination: '/scarab/create',
         },
         // {
         // source: '/summoner',

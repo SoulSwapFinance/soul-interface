@@ -13,7 +13,7 @@ const supportedTokens = {
     symbol: 'SEANCE',
     icon: '/images/tokens/seance.png',
   },
-  SOLAR: {
+  SOUL: {
     name: 'SoulPower',
     symbol: 'SOUL',
     icon: '/images/tokens/soul.png',

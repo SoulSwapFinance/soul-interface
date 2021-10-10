@@ -64,9 +64,10 @@ export default function CreateScarab(): JSX.Element {
   }, [approvalState, approvalSubmitted])
 
   const errorMessage = 
-  !isAddress(tokenAddress)
-    ? 'Invalid token'
-    : !isAddress(recipient)
+  // !isAddress(tokenAddress)
+  //   ? 'Invalid token'
+    // : 
+    !isAddress(recipient)
       ? 'Invalid recipient'
       : isNaN(parseFloat(value)) || parseFloat(value) == 0
       ? 'Invalid amount'
@@ -143,7 +144,7 @@ export default function CreateScarab(): JSX.Element {
         <DoubleGlowShadowV2 maxWidth={false} opacity={'0.6'}>
           <div className={`grid grid-cols-12 gap-2 min-h-1/2`}>
             <div className={`col-span-12 flex flex-col md:flex-row md:space-x-2`}>
-              <NavLink
+              {/* <NavLink
                 exact
                 href={'/scarab'}
                 activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-yellow-dark-900"
@@ -151,7 +152,7 @@ export default function CreateScarab(): JSX.Element {
                 <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
                   {i18n._(t`Search Scarabs`)}
                 </a>
-              </NavLink>
+              </NavLink> */}
               <NavLink
                 exact
                 href={'/scarab/create'}
@@ -182,8 +183,8 @@ export default function CreateScarab(): JSX.Element {
                             autoCapitalize="off"
                             spellCheck="false"
                             pattern="^(0x[a-fA-F0-9]{40})$"
-                            // onChange={(e) => setTokenAddress(e.target.value)}
-                            value={'0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'}
+                            onChange={(e) => setTokenAddress(e.target.value)}
+                            value={tokenAddress}
                           />
                         </div>
                       </div>
