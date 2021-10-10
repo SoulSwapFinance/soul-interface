@@ -9,23 +9,23 @@ import { useLingui } from '@lingui/react'
 
 const items = (i18n: I18n) => [
   {
-    name: i18n._(t`Portal`),
-    description: i18n._(t`View our Ecosystem.`),
-    href: 'https://port.soul.sh',
+    name: i18n._(t`Scarab`),
+    description: i18n._(t`Perform Rituals with Friends.`),
+    href: '/scarab/create',
   },
   {
     name: i18n._(t`Vote`),
-    description: i18n._(t`Use SoulPower to Enchant Soul.`),
+    description: i18n._(t`Use SoulPower to Enchant Souls.`),
     href: '/enchant',
   },
   {
     name: i18n._(t`Farm`),
-    description: i18n._(t`Earn SOUL with SOUL-LP.`),
+    description: i18n._(t`Summon Souls with Liquidity.`),
     href: '/farm',
   },
   {
     name: i18n._(t`Stake`),
-    description: i18n._(t`Earn SOUL with SOUL.`),
+    description: i18n._(t`Harvest Souls with SOUL.`),
     href: '/stake',
   },
   {
