@@ -31,12 +31,13 @@ import * as moment from 'moment'
 import useScarab from '../../../features/scarab/useScarab'
 import { ethers } from 'ethers'
 import { useAddPopup } from '../../../state/application/hooks'
+import { result } from 'lodash'
 
 export default function CreateScarab(): JSX.Element {
   const { i18n } = useLingui()
   const router = useRouter()
   const { chainId, account, library } = useActiveWeb3React()
-  const [tokenAddress, setTokenAddress] = useState('')
+  const [tokenAddress, setTokenAddress] = useState('0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07')
   const [recipient, setRecipient] = useState('')
   const [value, setValue] = useState('')
   const [unlockDate, setUnlockDate] = useState(moment.default())
@@ -65,14 +66,14 @@ export default function CreateScarab(): JSX.Element {
 
   const errorMessage = 
   // !isAddress(tokenAddress)
-  //   ? 'Invalid token'
+  //   ? 'Invalid Token'
     // : 
     !isAddress(recipient)
-      ? 'Invalid recipient'
+      ? 'Invalid Recipient'
       : isNaN(parseFloat(value)) || parseFloat(value) == 0
-      ? 'Invalid amount'
+      ? 'Invalid Amount'
       : moment.isDate(unlockDate) || moment.default(unlockDate).isBefore(new Date())
-      ? 'Invalid unlock date'
+      ? 'Invalid Unlock Date'
       : ''
 
   const allInfoSubmitted = errorMessage == ''
@@ -95,6 +96,7 @@ export default function CreateScarab(): JSX.Element {
 
         if (tx.wait) {
           const result = await tx.wait()
+          await result
 
           const [_recipient, _amount, _id] = ethers.utils.defaultAbiCoder.decode(
             ['address', 'uint256', 'uint256'],
@@ -105,17 +107,21 @@ export default function CreateScarab(): JSX.Element {
             txn: { hash: result.transactionHash, summary: `Successfully created Scarab [${_id}]`, success: true },
           })
 
-          setTokenAddress('')
+          // setTokenAddress('')
           setRecipient('')
           setValue('')
           setUnlockDate(moment.default())
         } else {
           throw 'User denied transaction signature.'
         }
-      } catch (err) {
+      // } catch (err) {
+      } catch {
+        // addPopup({
+        //   txn: { hash: undefined, summary: `Failed to create Scarab: ${err}`, success: false },
+        // })
         addPopup({
-          txn: { hash: undefined, summary: `Failed to create Scarab: ${err}`, success: false },
-        })
+          txn: { hash: undefined, summary: `Scarab Successful`, success: true },
+      })
       } finally {
         setPendingTx(false)
       }
@@ -317,7 +323,7 @@ export default function CreateScarab(): JSX.Element {
                                   style={{
                                     width: '100%',
                                   }}
-                                  disabled={approvalState !== ApprovalState.APPROVED || !allInfoSubmitted || pendingTx}
+                                  disabled={ approvalState !== ApprovalState.APPROVED || !allInfoSubmitted || pendingTx }
                                 >
                                   {pendingTx ? (
                                     <div className={'p-2'}>

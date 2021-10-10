@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/link-passhref */
-/* eslint-disable @next/next/link-passhref */
 import { useActiveWeb3React, useFuse } from '../../hooks'
 
 import FarmList from '../../features/summoner/FarmList'
@@ -74,7 +73,7 @@ export default function Summoner(): JSX.Element {
 
     function getRewards() {
       const rewardPerSecond =
-        ((pool.allocPoint / Number(summonerInfo.totalAllocPoint)) * Number(summonerInfo.soulPerSecond)) / 1E18
+        ((pool.allocPoint / Number(summonerInfo.totalAllocPoint)) * Number(summonerInfo.soulPerSecond)) / 10**18
 
       const defaultReward = {
         token: 'SOUL',
