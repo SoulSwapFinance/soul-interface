@@ -21,27 +21,6 @@ msgid ""
 "SOUL strategies"
 msgstr ""
 
-msgid "- 0.1 FTM to lock"
-msgstr ""
-
-msgid "- Always DYOR"
-msgstr ""
-
-msgid "- Click on \"Approve\" to allow the contract to transfer your tokens"
-msgstr ""
-
-msgid "- Click on \"Deposit\" to lock your tokens into locker contract"
-msgstr ""
-
-msgid "- Input your token or liquidity pair address, amount of tokens to lock, withdrawer address and when tokens will become unlocked"
-msgstr ""
-
-msgid "- Locker contract address: {0}"
-msgstr ""
-
-msgid "- You will not be able to withdraw your tokens before the unlock time"
-msgstr ""
-
 msgid "/ DAY"
 msgstr ""
 
@@ -233,6 +212,9 @@ msgstr ""
 msgid "Chinese"
 msgstr ""
 
+msgid "Circulating Supply"
+msgstr ""
+
 msgid "Claim SOUL"
 msgstr ""
 
@@ -313,10 +295,10 @@ msgstr ""
 msgid "Create Pool & Supply"
 msgstr ""
 
-msgid "Create a new Kashi Market"
+msgid "Create Scarab"
 msgstr ""
 
-msgid "Create lock"
+msgid "Create a new Kashi Market"
 msgstr ""
 
 msgid "Create pool"
@@ -350,6 +332,9 @@ msgid "Disconnect"
 msgstr ""
 
 msgid "Dismiss"
+msgstr ""
+
+msgid "Documentation"
 msgstr ""
 
 msgid "Earn SOUL with SOUL-LP."
@@ -389,6 +374,9 @@ msgid "Error connecting. Try refreshing the page."
 msgstr ""
 
 msgid "Everytime you stake or claim rewards your lock time renews."
+msgstr ""
+
+msgid "Exchange"
 msgstr ""
 
 msgid "Exchange Rate"
@@ -493,9 +481,6 @@ msgstr ""
 msgid "History"
 msgstr ""
 
-msgid "How to use"
-msgstr ""
-
 msgid "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
 msgstr ""
 
@@ -571,6 +556,9 @@ msgstr ""
 msgid "Links"
 msgstr ""
 
+msgid "Liquidity"
+msgstr ""
+
 msgid "Lists"
 msgstr ""
 
@@ -615,6 +603,9 @@ msgstr ""
 msgid "Market"
 msgstr ""
 
+msgid "Market Cap"
+msgstr ""
+
 msgid "Markets"
 msgstr ""
 
@@ -625,9 +616,6 @@ msgid "Maximize yield by staking SOUL for SEANCE"
 msgstr ""
 
 msgid "Maximum sent"
-msgstr ""
-
-msgid "Me"
 msgstr ""
 
 msgid "Migrate"
@@ -797,6 +785,9 @@ msgstr ""
 msgid "Rates"
 msgstr ""
 
+msgid "Read the Documentation."
+msgstr ""
+
 msgid "Receive"
 msgstr ""
 
@@ -851,16 +842,25 @@ msgstr ""
 msgid "Russian"
 msgstr ""
 
+msgid "SELF"
+msgstr ""
+
 msgid "SLP"
 msgstr ""
 
 msgid "SOUL per $1000"
 msgstr ""
 
+msgid "Scarab"
+msgstr ""
+
+msgid "Scarabs are a neat way to share your SOUL with anyone, so long as they're also willing to perform a ritual and make a small sacrfice..."
+msgstr ""
+
 msgid "Search Name or Address"
 msgstr ""
 
-msgid "Search lockers"
+msgid "Search Scarabs"
 msgstr ""
 
 msgid "Select Token"
@@ -873,6 +873,9 @@ msgid "Select a collateral token"
 msgstr ""
 
 msgid "Select a rate"
+msgstr ""
+
+msgid "Select a token"
 msgstr ""
 
 msgid "Select a token to find your liquidity"
@@ -925,7 +928,13 @@ msgid ""
 "one click"
 msgstr ""
 
+msgid "Summon Scarabs"
+msgstr ""
+
 msgid "Summon an Empire."
+msgstr ""
+
+msgid "Supply & Market Cap"
 msgstr ""
 
 msgid "Supplying {0} {1} and {2} {3}"
@@ -1062,6 +1071,9 @@ msgstr ""
 msgid "Vietnamese"
 msgstr ""
 
+msgid "View Contract"
+msgstr ""
+
 msgid "View Liquidity Positions"
 msgstr ""
 
@@ -1089,7 +1101,7 @@ msgstr ""
 msgid "Withdraw"
 msgstr ""
 
-msgid "Withdraw from locker {id}"
+msgid "Withdraw from Scarab {id}"
 msgstr ""
 
 msgid "Wrap"
@@ -1209,6 +1221,9 @@ msgid_plural "Tokens"
 msgstr[0] ""
 msgstr[1] ""
 
+msgid "{0}"
+msgstr ""
+
 msgid "{0} Deposited"
 msgstr ""
 
@@ -1222,4 +1237,10 @@ msgid "{0} {sign} market rate"
 msgstr ""
 
 msgid "{0}/{1} Burned"
+msgstr ""
+
+msgid "• 10% in Seance"
+msgstr ""
+
+msgid "• Soul is unlockable before the unlock time."
 msgstr ""

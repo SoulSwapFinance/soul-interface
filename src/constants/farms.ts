@@ -182,6 +182,36 @@ export const POOLS: AddressMap = {
         symbol: 'FTM',
         decimals: 18,
       },
+    },
+    '0x124D8CA33E29D1090a844e4C896DD16A360B1c96': {  // GRIM-FTM
+      id: 11,
+      token0: {
+        id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+        name: 'Wrapped Fantom',
+        symbol: 'FTM',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x7eC94C4327dC757601B4273cD67014d7760Be97E', // GRIM
+        name: 'GrimToken',
+        symbol: 'GRIM',
+        decimals: 18,
+      },
+    },
+    '0x7D776489372c8AFC0A1941a1335C9e9f90e0116a': {  // REAPER-FTM
+      id: 12,
+      token0: {
+        id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+        name: 'Wrapped Fantom',
+        symbol: 'FTM',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb', // REAPER
+        name: 'ReaperToken',
+        symbol: 'REAPER',
+        decimals: 18,
+      },
     }
   }
 }

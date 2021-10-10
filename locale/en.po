@@ -23,27 +23,6 @@ msgstr ""
 "(COMING SOON) Accrue automatic yield through flash loans and\n"
 "SOUL strategies"
 
-msgid "- 0.1 FTM to lock"
-msgstr "- 0.1 FTM to lock"
-
-msgid "- Always DYOR"
-msgstr "- Always DYOR"
-
-msgid "- Click on \"Approve\" to allow the contract to transfer your tokens"
-msgstr "- Click on \"Approve\" to allow the contract to transfer your tokens"
-
-msgid "- Click on \"Deposit\" to lock your tokens into locker contract"
-msgstr "- Click on \"Deposit\" to lock your tokens into locker contract"
-
-msgid "- Input your token or liquidity pair address, amount of tokens to lock, withdrawer address and when tokens will become unlocked"
-msgstr "- Input your token or liquidity pair address, amount of tokens to lock, withdrawer address and when tokens will become unlocked"
-
-msgid "- Locker contract address: {0}"
-msgstr "- Locker contract address: {0}"
-
-msgid "- You will not be able to withdraw your tokens before the unlock time"
-msgstr "- You will not be able to withdraw your tokens before the unlock time"
-
 msgid "/ DAY"
 msgstr "/ DAY"
 
@@ -237,6 +216,9 @@ msgstr "Change Recipient"
 msgid "Chinese"
 msgstr "Chinese"
 
+msgid "Circulating Supply"
+msgstr "Circulating Supply"
+
 msgid "Claim SOUL"
 msgstr "Claim SOUL"
 
@@ -319,11 +301,11 @@ msgstr "Create Pair"
 msgid "Create Pool & Supply"
 msgstr "Create Pool & Supply"
 
+msgid "Create Scarab"
+msgstr "Create Scarab"
+
 msgid "Create a new Kashi Market"
 msgstr "Create a new Kashi Market"
-
-msgid "Create lock"
-msgstr "Create lock"
 
 msgid "Create pool"
 msgstr "Create pool"
@@ -357,6 +339,9 @@ msgstr "Disconnect"
 
 msgid "Dismiss"
 msgstr "Dismiss"
+
+msgid "Documentation"
+msgstr "Documentation"
 
 msgid "Earn SOUL with SOUL-LP."
 msgstr "Earn SOUL with SOUL-LP."
@@ -396,6 +381,9 @@ msgstr "Error connecting. Try refreshing the page."
 
 msgid "Everytime you stake or claim rewards your lock time renews."
 msgstr "Everytime you stake or claim rewards your lock time renews."
+
+msgid "Exchange"
+msgstr "Exchange"
 
 msgid "Exchange Rate"
 msgstr "Exchange Rate"
@@ -508,9 +496,6 @@ msgstr "Historical Total Locked: {0} SOUL"
 msgid "History"
 msgstr "History"
 
-msgid "How to use"
-msgstr "How to use"
-
 msgid "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
 msgstr "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
 
@@ -586,6 +571,9 @@ msgstr "Limit order"
 msgid "Links"
 msgstr "Links"
 
+msgid "Liquidity"
+msgstr "Liquidity"
+
 msgid "Lists"
 msgstr "Lists"
 
@@ -632,6 +620,9 @@ msgstr "Manage this pool"
 msgid "Market"
 msgstr "Market"
 
+msgid "Market Cap"
+msgstr "Market Cap"
+
 msgid "Markets"
 msgstr "Markets"
 
@@ -643,9 +634,6 @@ msgstr "Maximize yield by staking SOUL for SEANCE"
 
 msgid "Maximum sent"
 msgstr "Maximum sent"
-
-msgid "Me"
-msgstr "Me"
 
 msgid "Migrate"
 msgstr "Migrate"
@@ -816,6 +804,9 @@ msgstr "Rate"
 msgid "Rates"
 msgstr "Rates"
 
+msgid "Read the Documentation."
+msgstr "Read the Documentation."
+
 msgid "Receive"
 msgstr "Receive"
 
@@ -870,17 +861,26 @@ msgstr "Routing through these tokens resulted in the best price for your trade."
 msgid "Russian"
 msgstr "Russian"
 
+msgid "SELF"
+msgstr "SELF"
+
 msgid "SLP"
 msgstr "SLP"
 
 msgid "SOUL per $1000"
 msgstr "SOUL per $1000"
 
+msgid "Scarab"
+msgstr "Scarab"
+
+msgid "Scarabs are a neat way to share your SOUL with anyone, so long as they're also willing to perform a ritual and make a small sacrfice..."
+msgstr "Scarabs are a neat way to share your SOUL with anyone, so long as they're also willing to perform a ritual and make a small sacrfice..."
+
 msgid "Search Name or Address"
 msgstr "Search Name or Address"
 
-msgid "Search lockers"
-msgstr "Search lockers"
+msgid "Search Scarabs"
+msgstr "Search Scarabs"
 
 msgid "Select Token"
 msgstr "Select Token"
@@ -893,6 +893,9 @@ msgstr "Select a collateral token"
 
 msgid "Select a rate"
 msgstr "Select a rate"
+
+msgid "Select a token"
+msgstr "Select a token"
 
 msgid "Select a token to find your liquidity"
 msgstr "Select a token to find your liquidity"
@@ -946,8 +949,14 @@ msgstr ""
 "Stake into SPELL add collateral as aSPELL on Aave all in\n"
 "one click"
 
+msgid "Summon Scarabs"
+msgstr "Summon Scarabs"
+
 msgid "Summon an Empire."
 msgstr "Summon an Empire."
+
+msgid "Supply & Market Cap"
+msgstr "Supply & Market Cap"
 
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "Supplying {0} {1} and {2} {3}"
@@ -1085,6 +1094,9 @@ msgstr "Vesting is executed within the guidelines selected by the community in"
 msgid "Vietnamese"
 msgstr "Vietnamese"
 
+msgid "View Contract"
+msgstr "View Contract"
+
 msgid "View Liquidity Positions"
 msgstr "View Liquidity Positions"
 
@@ -1112,8 +1124,8 @@ msgstr "Wallet Balance"
 msgid "Withdraw"
 msgstr "Withdraw"
 
-msgid "Withdraw from locker {id}"
-msgstr "Withdraw from locker {id}"
+msgid "Withdraw from Scarab {id}"
+msgstr "Withdraw from Scarab {id}"
 
 msgid "Wrap"
 msgstr "Wrap"
@@ -1232,6 +1244,9 @@ msgid_plural "Tokens"
 msgstr[0] "Token"
 msgstr[1] "Tokens"
 
+msgid "{0}"
+msgstr "{0}"
+
 msgid "{0} Deposited"
 msgstr "{0} Deposited"
 
@@ -1246,3 +1261,9 @@ msgstr "{0} {sign} market rate"
 
 msgid "{0}/{1} Burned"
 msgstr "{0}/{1} Burned"
+
+msgid "• 10% in Seance"
+msgstr "• 10% in Seance"
+
+msgid "• Soul is unlockable before the unlock time."
+msgstr "• Soul is unlockable before the unlock time."

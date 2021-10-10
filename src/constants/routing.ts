@@ -87,26 +87,7 @@ const MIRROR_ADDITIONAL_BASES: { [tokenAddress: string]: Token[] } = {
 const WRAPPED_NATIVE_ONLY: ChainTokenList = {
   [ChainId.MAINNET]: [WNATIVE[ChainId.MAINNET]],
   [ChainId.FANTOM]: [WNATIVE[ChainId.FANTOM]],
-  [ChainId.FANTOM_TESTNET]: [WNATIVE[ChainId.FANTOM_TESTNET]],
-  // [ChainId.ROPSTEN]: [WNATIVE[ChainId.ROPSTEN]],
-  // [ChainId.RINKEBY]: [WNATIVE[ChainId.RINKEBY]],
-  // [ChainId.GÖRLI]: [WNATIVE[ChainId.GÖRLI]],
-  // [ChainId.KOVAN]: [WNATIVE[ChainId.KOVAN]],
-  // [ChainId.MATIC]: [WNATIVE[ChainId.MATIC]],
-  // [ChainId.MATIC_TESTNET]: [WNATIVE[ChainId.MATIC_TESTNET]],
-  // [ChainId.XDAI]: [WNATIVE[ChainId.XDAI]],
-  // [ChainId.ARBITRUM]: [WNATIVE[ChainId.ARBITRUM]],
-  // [ChainId.ARBITRUM_TESTNET]: [WNATIVE[ChainId.ARBITRUM_TESTNET]],
-  // [ChainId.MOONBEAM_TESTNET]: [WNATIVE[ChainId.MOONBEAM_TESTNET]],
-  // [ChainId.AVALANCHE]: [WNATIVE[ChainId.AVALANCHE]],
-  // [ChainId.AVALANCHE_TESTNET]: [WNATIVE[ChainId.AVALANCHE_TESTNET]],
-  // [ChainId.HECO]: [WNATIVE[ChainId.HECO]],
-  // [ChainId.HECO_TESTNET]: [WNATIVE[ChainId.HECO_TESTNET]],
-  // [ChainId.HARMONY]: [WNATIVE[ChainId.HARMONY]],
-  // [ChainId.HARMONY_TESTNET]: [WNATIVE[ChainId.HARMONY_TESTNET]],
-  // [ChainId.OKEX]: [WNATIVE[ChainId.OKEX]],
-  // [ChainId.OKEX_TESTNET]: [WNATIVE[ChainId.OKEX_TESTNET]],
-  // [ChainId.CELO]: [WNATIVE[ChainId.CELO]],
+  [ChainId.FANTOM_TESTNET]: [WNATIVE[ChainId.FANTOM_TESTNET]]
 }
 
 // used to construct intermediary pairs for trading
@@ -121,35 +102,8 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     FANTOM.DAI, 
     FANTOM.USDC, 
     FANTOM.WBTC, 
-    FANTOM.WETH], // 27 AUG
-  // [ChainId.ARBITRUM]: [...WRAPPED_NATIVE_ONLY[ChainId.ARBITRUM]],
-  // [ChainId.XDAI]: [...WRAPPED_NATIVE_ONLY[ChainId.XDAI], XDAI.USDC, XDAI.USDT, XDAI.WBTC, XDAI.WETH],
-  // [ChainId.AVALANCHE]: [
-  //   ...WRAPPED_NATIVE_ONLY[ChainId.AVALANCHE],
-  //   AVALANCHE.DAI,
-  //   AVALANCHE.USDT,
-  //   AVALANCHE.WBTC,
-  //   AVALANCHE.WETH,
-  // ],
-  // [ChainId.HARMONY]: [
-  //   ...WRAPPED_NATIVE_ONLY[ChainId.HARMONY],
-  //   HARMONY.DAI,
-  //   HARMONY.USDC,
-  //   HARMONY.USDT,
-  //   HARMONY.WBTC,
-  //   HARMONY.WETH,
-  // ],
-  // [ChainId.HECO]: [...WRAPPED_NATIVE_ONLY[ChainId.HECO], HECO.DAI, HECO.USDC, HECO.USDT, HECO.WBTC, HECO.WETH],
-  // [ChainId.OKEX]: [...WRAPPED_NATIVE_ONLY[ChainId.OKEX], OKEX.DAI, OKEX.USDC, OKEX.USDT, OKEX.WBTC, OKEX.WETH],
-  // [ChainId.CELO]: [
-  //   ...WRAPPED_NATIVE_ONLY[ChainId.CELO],
-  //   CELO.mCUSD,
-  //   CELO.mCELO,
-  //   CELO.mcEURO,
-  //   CELO.cUSD,
-  //   CELO.cEURO,
-  //   CELO.cBTC,
-  // ],
+    FANTOM.WETH
+  ], // 27 AUG
 }
 
 export const ADDITIONAL_BASES: {
@@ -224,13 +178,13 @@ export const COMMON_BASES: ChainTokenList = {
 
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], 
-    // FANTOM.SOUL,
-    // FANTOM.SEANCE, 
+    FANTOM.SOUL,
+    FANTOM.SEANCE, 
     FANTOM.USDC,
     FANTOM.FUSD,
-    FANTOM.WBTC,
+    // FANTOM.WBTC,
     FANTOM.USDT,
-    FANTOM.WETH
+    // FANTOM.WETH
   ],
   [ChainId.FANTOM_TESTNET]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM_TESTNET],
@@ -244,7 +198,7 @@ export const COMMON_BASES: ChainTokenList = {
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WRAPPED_NATIVE_ONLY,
   [ChainId.MAINNET]: [...WRAPPED_NATIVE_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC],
-  [ChainId.FANTOM]: [...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], FANTOM.SOUL, FANTOM.DAI, FANTOM.USDC, FANTOM.FUSD, FANTOM.WBTC, FANTOM.WETH],
+  [ChainId.FANTOM]: [...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], FANTOM.SOUL, FANTOM.DAI, FANTOM.USDC, FANTOM.FUSD] //FANTOM.WBTC, FANTOM.WETH],
   
 }
 

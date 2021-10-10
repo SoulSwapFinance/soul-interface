@@ -1,4 +1,4 @@
-import { ChainId, Currency, NATIVE, SOUL_ADDRESS } from '../../sdk'
+import { ChainId, NATIVE, SOUL_ADDRESS } from '../../sdk'
 // import React, { useEffect, useState } from 'react'
 import React from 'react'
 
@@ -18,7 +18,6 @@ import { t } from '@lingui/macro'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useETHBalances } from '../../state/wallet/hooks'
 import { useLingui } from '@lingui/react'
-import { ANALYTICS_URL } from '../../constants'
 
 // import { ExternalLink, NavLink } from "./Link";
 // import { ReactComponent as Burger } from "../assets/images/burger.svg";
@@ -30,7 +29,7 @@ function AppBar(): JSX.Element {
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
 
   return (
-    //     // <header className="flex flex-row justify-between w-screen flex-nowrap">
+    // <header className="flex flex-row justify-between w-screen flex-nowrap">
     <header className="flex-shrink-0 w-full">
       <Popover as="nav" className="z-10 w-full bg-transparent header-border-b">
         {({ open }) => (
@@ -48,7 +47,7 @@ function AppBar(): JSX.Element {
                           id={`swap-nav-link`}
                           className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                         >
-                          {i18n._(t`Swap`)}
+                          {i18n._(t`Exchange`)}
                         </a>
                       </NavLink>
                       )}
@@ -58,7 +57,7 @@ function AppBar(): JSX.Element {
                           id={`pool-nav-link`}
                           className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                         >
-                          {i18n._(t`Pool`)}
+                          {i18n._(t`Liquidity`)}
                         </a>
                       </NavLink>
                       )}
@@ -82,16 +81,26 @@ function AppBar(): JSX.Element {
                         </a>
                         </NavLink>
                       )} */}
-                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'/locker'}>
+                          { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                          <NavLink href={'/stake'}>
+                            <a
+                              id={`stake-nav-link`}
+                              className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                            >
+                              {i18n._(t`Stake`)}
+                            </a>
+                          </NavLink>
+                        )}
+                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href={'/scarab/create'}>
                         <a
-                          id={`farm-nav-link`}
-                          className="p-2 text-base text-primary hover:text-high-emphesis focus:text-high-emphesis whitespace-nowrap"
+                          id={`scarab-nav-link`}
+                          className="p-2 text-base text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                         >
-                          {i18n._(t`Locker`)}
+                          {i18n._(t`Scarab`)}
                         </a>
                         </NavLink>
-                      )} */}
+                      )}
                       {/* {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                           <>
                             <NavLink href={'/lend'}>
@@ -112,16 +121,6 @@ function AppBar(): JSX.Element {
                             </NavLink>
                           </>
                         )} */}
-                        { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'/stake'}>
-                          <a
-                            id={`stake-nav-link`}
-                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                          >
-                            {i18n._(t`Stake`)}
-                          </a>
-                        </NavLink>
-                      )}
                       {chainId && [ChainId.MAINNET].includes(chainId) && (
                         <NavLink href={'/bridge'}>
                           <a
@@ -363,12 +362,12 @@ function AppBar(): JSX.Element {
                     {i18n._(t`Vaults`)}
                   </a>
                 </Link>
-                <Link href={'/locker'}>
+                <Link href={'/scarab'}>
                   <a
                     id={`farm-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                   >
-                    {i18n._(t`Locker`)}
+                    {i18n._(t`Scarab`)}
                   </a>
                 </Link> */}
                 {/* <Link href={'/bridge'}>
