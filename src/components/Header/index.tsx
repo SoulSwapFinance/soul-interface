@@ -361,15 +361,17 @@ function AppBar(): JSX.Element {
                   >
                     {i18n._(t`Vaults`)}
                   </a>
-                </Link>
-                <Link href={'/scarab'}>
+                </Link> */}
+         { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                  <Link href={'/scarab/create'}>
                   <a
-                    id={`farm-nav-link`}
+                    id={`scarab-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                   >
                     {i18n._(t`Scarab`)}
                   </a>
-                </Link> */}
+                </Link>
+                )}
                 {/* <Link href={'/bridge'}>
                   <a className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap">
                     {i18n._(t`Bridge`)}
