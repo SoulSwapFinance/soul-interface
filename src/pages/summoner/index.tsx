@@ -141,15 +141,16 @@ export default function Summoner(): JSX.Element {
   }
 
   const FILTER = {
-    my: (farm) => farm?.amount && !farm.amount.isZero(),
-    soul: (farm) => farm.pair.token0?.id == SOUL_ADDRESS[chainId] || farm.pair.token1?.id == SOUL_ADDRESS[chainId],
+    my: (farm) => farm?.amount, // && !farm.amount.isZero(),
+    soul: (farm) => farm.pair.token0?.symbol == 'SOUL' || farm.pair.token1?.symbol == 'SOUL',
     single: (farm) => !farm.pair.token1,
-    fantom: (farm) => farm.pair.token0?.id == WNATIVE[chainId] || farm.pair.token1?.id == WNATIVE[chainId],
+    fantom: (farm) => farm.pair.token0?.id == WNATIVE[chainId] || farm.pair.token1?.id == WNATIVE[chainId]
+            || farm.pair.token0?.symbol == 'FTM' || farm.pair.token1?.symbol == 'FTM',
     stables: (farm) =>
-      farm.pair.token0?.symbol == 'USDC' || farm.pair.token1?.symbol == 'USDC' ||
-      farm.pair.token0?.symbol == 'fUSDT' || farm.pair.token1?.symbol == 'fUSDT' ||
-      farm.pair.token0?.symbol == 'FUSD' || farm.pair.token1?.symbol == 'FUSD' ||
-      farm.pair.token0?.symbol == 'USDT' || farm.pair.token1?.symbol == 'USDT'
+      farm.pair.token0?.symbol == 'USDC' && (farm.pair.token1?.symbol == 'fUSDT' || farm.pair.token1?.symbol == 'FUSD') || farm.pair.token1?.symbol == 'DAI' ||
+      farm.pair.token0?.symbol == 'fUSDT' && (farm.pair.token1?.symbol == 'USDC' || farm.pair.token1?.symbol == 'FUSD') || farm.pair.token1?.symbol == 'DAI' ||
+      farm.pair.token0?.symbol == 'FUSD' && (farm.pair.token1?.symbol == 'USDC' || farm.pair.token1?.symbol == 'fUSDT' || farm.pair.token1?.symbol == 'DAI') ||
+      farm.pair.token0?.symbol == 'DAI' && (farm.pair.token1?.symbol == 'USDC' || farm.pair.token1?.symbol == 'fUSDT' || farm.pair.token1?.symbol === 'FUSD')
   }
 
   const data = farms.map(map).filter((farm) => {
@@ -174,7 +175,7 @@ export default function Summoner(): JSX.Element {
   const valueStaked = positions.reduce((previousValue, currentValue) => {
     const pool = farmingPools.find((r) => parseInt(r.id.toString()) == parseInt(currentValue.id))
     const poolTvl = tvlInfo.find((r) => getAddress(r.lpToken) == getAddress(pool?.lpToken))
-    return previousValue + (currentValue.amount / 1e18) * poolTvl?.lpPrice
+    return previousValue + (currentValue.amount) * poolTvl?.lpPrice
   }, 0)
 
   const { harvest } = useSummoner()
@@ -211,18 +212,21 @@ export default function Summoner(): JSX.Element {
                       />
                     </div>
                     <div className={`flex flex-col items-center justify-between px-6 py-6 `}>
+                      <h2><b>Withdraw Fee: 14% decreasing 1% daily.</b></h2>
                       {/* <div className="flex items-center text-center justify-between py-2 text-emphasis">
                         Total Value Locked: {formatNumberScale(sumTvl + sumTvlVaults, true, 2)}
                       </div> */}
                       {/* <div className="flex items-center text-center justify-between py-2 text-emphasis">
                         TVL: {formatNumberScale(sumTvl, true, 2)}
                       </div> */}
-                      {positions.length > 0 && (
+                      {/* {positions.length > 0 && (
                         <div className="flex items-center justify-between py-2 text-emphasis">
-                        Possessions: {formatNumberScale(valueStaked, true, 2)}
+                        YOU'RE STAKING: { `$` + (valueStaked * 1.3 / 1E43).toFixed(0).toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                        }
                         </div>
-                      )}
-                      {positions.length > 0 && (
+                      )} */}
+                      {/* {positions.length > 0 && (
                         <Button
                           color="gradient"
                           className="text-emphasis"
@@ -244,9 +248,10 @@ export default function Summoner(): JSX.Element {
                             setPendingTx(false)
                           }}
                         >
-                          Possess All {formatNumberScale(allStaked, true, 18)})
-                        </Button>
-                      )}
+                          HARVEST ALL
+                          {/* {formatNumberScale(allStaked, true, 18)} */}
+                        {/* </Button> */}
+                      {/* )} */}
                     </div>
                     <div className={`md:hidden`}>
                       <Menu

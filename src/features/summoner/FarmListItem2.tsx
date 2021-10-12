@@ -7,7 +7,7 @@ import Image from '../../components/Image'
 import React, { useContext, useState } from 'react'
 import { useCurrency } from '../../hooks/Tokens'
 import { useV2PairsWithPrice } from '../../hooks/useV2Pairs'
-import { SEANCE_ADDRESS, SOUL_ADDRESS, WNATIVE } from '../../sdk'
+import { SEANCE_ADDRESS, SOUL_ADDRESS, WNATIVE, WETH9 } from '../../sdk'
 import { useActiveWeb3React } from '../../hooks'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
@@ -42,7 +42,7 @@ const FarmListItem2 = ({ farm, ...rest }) => {
     if (farm.lpToken.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase()) {
       lpPrice = soulPrice
       decimals = farm.pair.token0?.decimals
-    } else if (farm.lpToken.toLowerCase() == WNATIVE[chainId]) {
+    } else if (farm.lpToken.toLowerCase() == WNATIVE[chainId] || farm.lpToken.toLowerCase() == WETH9[chainId]) {
       lpPrice = ftmPrice
     } else if (farm.lpToken.toLowerCase() == SEANCE_ADDRESS[chainId].toLowerCase()) {
       lpPrice = seancePrice
@@ -52,6 +52,8 @@ const FarmListItem2 = ({ farm, ...rest }) => {
 
     farm.lpPrice = lpPrice
     farm.soulPrice = soulPrice
+    farm.ftmPrice = ftmPrice
+    farm.seancePrice = seancePrice
 
     return Number(farm.totalLp / 10 ** decimals) * lpPrice
   }
@@ -79,10 +81,12 @@ const FarmListItem2 = ({ farm, ...rest }) => {
               className={classNames(
                 open && 'rounded-b-none',
                 'w-full px-4 py-6 text-left rounded cursor-pointer select-none bg-dark-700  text-primary text-sm md:text-lg'
-              )}
+                )}
             >
+
               <div className="grid grid-cols-4 ">
                 <div className="flex col-span-2 space-x-4 md:col-span-1">
+                <div className="flex flex-col justify-center font-bold">{}</div>
                   {token1 ? (
                     <DoubleLogo currency0={token0} currency1={token1} size={isMobile ? 24 : 40} />
                   ) : (
@@ -90,24 +94,24 @@ const FarmListItem2 = ({ farm, ...rest }) => {
                       <CurrencyLogo currency={token0} size={isMobile ? 32 : 50} />
                     </div>
                   )}
+                </div>
 
-                  <div className={`flex flex-col justify-center ${token1 ? 'md:flex-row' : ''}`}>
-                    <div>
-                      <span className="flex font-bold">{farm?.pair?.token0?.symbol}</span>
-                      {token1 && <span className="flex font-bold">{farm?.pair?.token1?.symbol}</span>}
+                  <div className={`flex flex-col justify-center ${token1 ? 'md:flex-row' : 'md:flex-row'}`}>
+                    { token1 && <span className="flex items-center font-bold">{farm.pair?.token0?.symbol} - {farm?.pair?.token1?.symbol}</span> }
+                      {/* {token1 && <span className="flex font-bold">{farm?.pair?.token1?.symbol}</span>} */}
                       {!token1 && token0?.symbol == 'SOUL' && (
-                        <div className="flex flex-col">
+                        <div className="flex">
                           {/* <span className="text-emphasis underline hover:text-yellow">Unstake</span> */}
                           {/* <Link href="/vaults"> */}
-                          <Link href="/stake">
-                            <span className="text-emphasis underline hover:text-yellow">Stake</span>
+                          <Link href="/stake" >
+                            <span className="flex flex-col justify-center font-bold hover:text-purple">STAKE SOUL</span>
                           </Link>
                         </div>
                       )}
-                    </div>
+                    {/* </div> */}
                   </div>
-                </div>
-                <div className="flex flex-col justify-center font-bold">{formatNumberScale(tvl, true, 2)}</div>
+                {/* <div className="flex flex-col justify-center font-bold">{formatNumberScale(tvl, true, 2)}</div> */}
+                <div className="flex flex-col justify-center font-bold">{}</div>
                 <div className="flex-row items-center hidden space-x-4 md:flex">
                   <div className="flex items-center space-x-2">
                     {farm?.rewards?.map((reward, i) => (
@@ -126,13 +130,12 @@ const FarmListItem2 = ({ farm, ...rest }) => {
                   <div className="flex flex-col space-y-1">
                     {farm?.rewards?.map((reward, i) => (
                       <div key={i} className="text-xs md:text-sm whitespace-nowrap">
-                        {formatNumber(reward.rewardPerDay)} {reward.token} {i18n._(t`/ DAY`)}
-                        {/* {formatNumber(1728000)} {reward.token} / DAY */}
+                        {formatNumber(reward.rewardPerDay)} {reward.token} {i18n._(t`DAILY`)}
                       </div>
                     ))}
                   </div>
                 </div>
-                <div className="flex flex-col items-end justify-center">
+                {/* <div className="flex flex-col items-end justify-center">
                   <div
                     className="font-bold flex justify items-center text-righttext-high-emphesis"
                     onClick={(e) => {
@@ -143,11 +146,11 @@ const FarmListItem2 = ({ farm, ...rest }) => {
                     <IconWrapper size="16px" marginRight={'10px'}>
                       <Info />
                     </IconWrapper>
-                    {/* {formatPercent(farm?.roiPerYear || 7508 * 100)} */}
-                    {roiPerYear/1E18 > 1000000 ? '1,000%+' : formatPercent(roiPerYear * 100)}
+                    {formatPercent(farm?.roiPerYear * 100)}
+                    {(farm?.roiPerYear * 100)}
                   </div>
                   <div className="text-xs text-right md:text-base text-secondary">{i18n._(t`annualized`)}</div>
-                </div>
+                </div> */}
               </div>
             </Disclosure.Button>
             {open && <FarmListItemDetails farm={farm} />}

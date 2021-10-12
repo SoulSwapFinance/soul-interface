@@ -177,7 +177,7 @@ export default function CreateScarab(): JSX.Element {
                       <div className="flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row">
                         <div className={classNames('w-full flex sm:w-72 justify-center')}>
                           <div className="flex flex-1 flex-col items-start mt-2 md:mt-0 md:items-end justify-center mx-3.5">
-                            <div className="text-base font-medium text-secondary whitespace-nowrap">Token Address</div>
+                            <div className="text-base font-medium text-secondary whitespace-nowrap">Soul Address</div>
                           </div>
                         </div>
                         <div className={'flex items-center w-full space-x-3 rounded bg-dark-900 focus:bg-dark-700 p-3'}>
@@ -261,7 +261,7 @@ export default function CreateScarab(): JSX.Element {
                       <div className="flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row">
                         <div className={classNames('w-full flex sm:w-72 justify-center')}>
                           <div className="flex flex-1 flex-col items-start mt-2 md:mt-0 md:items-end justify-center mx-3.5">
-                            <div className="text-base font-medium text-secondary whitespace-nowrap">Unlock date</div>
+                            <div className="text-base font-medium text-secondary whitespace-nowrap">Unlock Date</div>
                           </div>
                         </div>
                         <div className={'flex items-center w-full space-x-3 rounded bg-dark-900 focus:bg-dark-700 p-3'}>

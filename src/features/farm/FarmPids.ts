@@ -46,7 +46,7 @@ export const FarmPids = [
     pid: 4,
     token1: 'FTM',
     token2: 'WETH',
-    lpSymbol: 'FTM-WETH',
+    lpSymbol: 'FTM-ETH',
     lpAddresses: {
       4002: '',
       250: '0xC615a5fd68265D9Ec6eF60805998fa5Bb71972Cb',
@@ -149,6 +149,42 @@ export const FarmPids = [
       },
       token1Address: tokens.FTM,
       token2Address: tokens.REAPER,
+  },
+  { // 600
+    pid: 13,
+    token1: 'FTM',
+    token2: 'BTC',
+    lpSymbol: 'BTC-FTM',
+    lpAddresses: {
+      4002: '',
+      250: '0xecB41D6B5885E75a149EDA173e92267aa271D895',
+      },
+      token1Address: tokens.FTM,
+      token2Address: tokens.WBTC,
+  },
+  { // 600
+    pid: 14,
+    token1: 'FTM',
+    token2: 'USDT',
+    lpSymbol: 'FTM-USDT',
+    lpAddresses: {
+      4002: '',
+      250: '0xdC24814AD654986928F8E4aec48D37fa30bBC5BB',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.fUSDT,
+  },
+  { // 600
+    pid: 15,
+    token1: 'ETH',
+    token2: 'USDC',
+    lpSymbol: 'ETH-USDC',
+    lpAddresses: {
+      4002: '',
+      250: '0x5b181BBc3Cc18C66B6f36f584866a1ff09865630',
+      },
+      token1Address: tokens.WETH,
+      token2Address: tokens.USDC,
   },
   // { // TEMPLATE
   //   pid: 13,

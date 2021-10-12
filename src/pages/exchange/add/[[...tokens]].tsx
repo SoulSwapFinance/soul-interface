@@ -39,7 +39,7 @@ import { useRouterContract } from '../../../hooks'
 import { useTransactionAdder } from '../../../state/transactions/hooks'
 import useTransactionDeadline from '../../../hooks/useTransactionDeadline'
 import { useWalletModalToggle } from '../../../state/application/hooks'
-import DoubleGlowShadow from '../../../components/DoubleGlowShadow'
+import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
 // import SoulLogo from '../../../components/SoulLogo'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
@@ -348,7 +348,7 @@ export default function Add() {
       {/* <SoulLogo /> */}
       <br /> <br />
       <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
-        <DoubleGlowShadow>
+      <DoubleGlowShadowV2 opacity="0.6">
           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
             <ExchangeHeader
               input={currencies[Field.CURRENCY_A]}
@@ -511,7 +511,7 @@ export default function Add() {
               />
             )}
           </div>
-        </DoubleGlowShadow>
+          <DoubleGlowShadowV2 opacity="0.6">
         <div className="flex items-center px-4">
           <NavLink href="/pool">
             <a className="flex items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
@@ -519,6 +519,8 @@ export default function Add() {
             </a>
           </NavLink>
         </div>
+          </DoubleGlowShadowV2>
+        </DoubleGlowShadowV2>
       </Container>
     </>
   )
