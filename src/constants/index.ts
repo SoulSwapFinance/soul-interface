@@ -35,7 +35,6 @@ export const AVERAGE_BLOCK_TIME_IN_SECS = 1
 export const AVERAGE_BLOCK_TIME = {
   [ChainId.FANTOM]: 1
   // [ChainId.ROPSTEN]: AVERAGE_BLOCK_TIME_IN_SECS,
-  // [ChainId.MOONRIVER]: 12,
   // [ChainId.BSC]: 3,
 }
 

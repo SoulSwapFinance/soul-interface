@@ -12,7 +12,7 @@ export default function TransactionList({ transactions }) {
   const { chainId } = useActiveWeb3React()
   return transactions ? (
     <div className="space-y-3">
-      {transactions.map((transaction) => (
+      {/* {transactions.map((transaction) => (
         <div key={transaction.tx_hash} className="flex items-center justify-between px-3 py-1 rounded bg-dark-800">
           <div className="flex flex-row items-center pr-3 space-x-1">
             <Image src={transaction.token_0.logo_url} alt={transaction.token_0.symbol} width="24px" height="24px" />
@@ -33,7 +33,7 @@ export default function TransactionList({ transactions }) {
             <CheckCircle strokeWidth={2} size={18} className="text-green" />
           </div>
         </div>
-      ))}
+      ))} */}
     </div>
   ) : (
     <div className="px-4 text-center text-gray-500 border border-gray-800 rounded py-14">
