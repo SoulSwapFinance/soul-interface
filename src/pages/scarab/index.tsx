@@ -110,7 +110,7 @@ export default function Scarab(): JSX.Element {
                     <span>
                       No scarabs found for this user address,{' '}
                       <Link href="/scarab/create">
-                        <a className="hover:underline hover:text-yellow">click here</a>
+                        <a className="hover:underline hover:text-purple">click here</a>
                       </Link>{' '}
                       to create one.
                     </span>
@@ -122,7 +122,7 @@ export default function Scarab(): JSX.Element {
                       <div className="hover:text-high-emphesis">{i18n._(t`Token`)}</div>
                     </div>
                     <div className="flex items-center ">{i18n._(t`Amount Locked`)}</div>
-                    <div className="items-center justify-end px-2 flex ">{i18n._(t`Unlock date`)}</div>
+                    <div className="items-center justify-end px-2 flex ">{i18n._(t`Unlock Date`)}</div>
                     <div className="items-center justify-end px-2 flex ">{i18n._(t``)}</div>
                   </div>
                 )}

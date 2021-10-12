@@ -253,7 +253,7 @@ export function useTVL(): TVLInfo[] {
       if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
         return seancePrice
       }
-      if (token.symbol == 'USDC' || token.symbol == 'FUSD' || token.symbol == 'fUSDT') {
+      if (token.symbol == 'USDC' || token.symbol == 'FUSD' || token.symbol == 'fUSDT' || token.symbol == 'USDT') {
         return 1
       }
       return 0
@@ -379,7 +379,7 @@ export function useV2PairsWithPrice(
         token.address.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
         token.symbol == 'WFTM' || token.symbol == 'FTM' ||
         token.symbol == 'SEANCE' ||
-        token.symbol == 'USDC' || token.symbol == 'FUSD' || token.symbol == 'fUSDT'
+        token.symbol == 'USDC' || token.symbol == 'FUSD' || token.symbol == 'fUSDT' || token.symbol == 'USDT'
       )
     }
 
@@ -393,7 +393,7 @@ export function useV2PairsWithPrice(
       if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
         return seancePrice
       }
-      if (token.symbol == 'USDC' || token.symbol == 'FUSD' || token.symbol == 'fUSDT') {
+      if (token.symbol == 'USDC' || token.symbol == 'FUSD' || token.symbol == 'fUSDT' || token.symbol == 'USDT') {
         return 1
       }
       return 0

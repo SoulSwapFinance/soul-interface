@@ -142,7 +142,7 @@ export const POOLS: AddressMap = {
       id: 8,
       token0: { // BTC
         id: '0x321162Cd933E2Be498Cd2267a90534A804051b11', // WBTC
-        name: 'Wrapped BTC',
+        name: 'Wrapped Bitcoin',
         symbol: 'WBTC',
         decimals: 18,
       },
@@ -210,6 +210,51 @@ export const POOLS: AddressMap = {
         id: '0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb', // REAPER
         name: 'ReaperToken',
         symbol: 'REAPER',
+        decimals: 18,
+      },
+    },
+    '0xecB41D6B5885E75a149EDA173e92267aa271D895': {  // FTM-BTC
+      id: 13,
+      token0: {
+        id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+        name: 'Wrapped Fantom',
+        symbol: 'FTM',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x321162Cd933E2Be498Cd2267a90534A804051b11', // WBTC
+        name: 'Wrapped Bitcoin',
+        symbol: 'WBTC',
+        decimals: 18,
+      },
+    },
+    '0xdC24814AD654986928F8E4aec48D37fa30bBC5BB': {  // FTM-USDT
+      id: 14,
+      token0: {
+        id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+        name: 'Wrapped Fantom',
+        symbol: 'FTM',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x049d68029688eabf473097a2fc38ef61633a3c7a', // USDT
+        name: 'Frapped USDT',
+        symbol: 'fUSDT',
+        decimals: 18,
+      },
+    },
+    '0x5b181BBc3Cc18C66B6f36f584866a1ff09865630': {  // ETH-USDC
+      id: 15, // 600
+      token0: {
+        id: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // WETH
+        name: 'Wrapped Ethereum',
+        symbol: 'WETH',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
+        name: 'USD Coin',
+        symbol: 'USDC',
         decimals: 18,
       },
     }

@@ -35,6 +35,7 @@ export default function useSummoner() {
     [contract]
   )
 
+  // Harvest [LP-Only]
   const harvest = useCallback(
     async (pid: number) => {
       try {
@@ -46,6 +47,45 @@ export default function useSummoner() {
     },
     [contract]
   )
+  
+  // Stake
+  const stake = useCallback(
+    async (amount: BigNumber) => {
+      try {
+        return await contract?.enterStaking(amount);
+      } catch (e) {
+        console.error(e)
+        return e
+      }
+    },
+    [contract]
+    )
 
-  return { deposit, withdraw, harvest }
+    // Unstake
+    const unstake = useCallback(
+      async (amount: BigNumber) => {
+        try {
+          return await contract?.leaveStaking(amount);
+        } catch (e) {
+          console.error(e)
+          return e
+        }
+      },
+      [contract]
+    )
+
+  // Claim Staking Rewards
+  const claimStake = useCallback(
+    async (amount: Number) => {
+      try {
+        return await contract?.leaveStaking(Zero);
+      } catch (e) {
+        console.error(e)
+        return e
+      }
+    },
+    [contract]
+  )
+
+  return { deposit, withdraw, harvest, stake, unstake, claimStake }
 }

@@ -55,7 +55,7 @@ const FarmListItem = ({ farm }) => {
 
   const [approvalState, approve] = useApproveCallback(typedDepositValue, SOUL_SUMMONER_ADDRESS[chainId])
 
-  const { deposit, withdraw, harvest } = useMasterChef()
+  const { deposit, withdraw, harvest, stake, unstake, claimStake } = useMasterChef()
 
   return (
     <Transition
@@ -77,10 +77,10 @@ const FarmListItem = ({ farm }) => {
             )} */}
             {account && (
               <div className="pr-4 mb-2 text-left cursor-pointer text-secondary">
-                {i18n._(t`Wallet Balance`)}: {formatNumberScale(balance?.toSignificant(4, undefined, 2) ?? 0, false, 4)}
-                {farm.lpPrice && balance
+                {i18n._(t`Wallet Balance`)}: {balance?.toSignificant(8)}
+                {/* {farm.lpPrice && balance
                   ? ` (` + formatNumberScale(farm.lpPrice * Number(balance?.toFixed(18) ?? 0), true, 2) + `)`
-                  : ``}
+                  : ``} */}
               </div>
             )}
             <div className="relative flex items-center w-full mb-4">
@@ -94,9 +94,9 @@ const FarmListItem = ({ farm }) => {
                   variant="outlined"
                   color="blue"
                   size="xs"
-                  disabled={farm?.id === '1'}
+                  // disabled={farm?.id === '1'}
                   onClick={() => {
-                    // if (!balance.equalTo(ZERO)) {
+                    if (!balance.equalTo(ZERO)) {
                       if (liquidityToken?.symbol == 'SOUL') {
                         try {
                           const minValue = 1 / 10 ** (liquidityToken?.decimals - 10)
@@ -110,14 +110,14 @@ const FarmListItem = ({ farm }) => {
                       }
                     }
                   }
-                // }
+                }
                   className="absolute border-0 right-4 focus:ring focus:ring-light-purple"
                 >
                   {i18n._(t`MAX`)}
                 </Button>
               )}
             </div>
-            {approvalState === ApprovalState.NOT_APPROVED || approvalState === ApprovalState.PENDING ? (
+            { farm.pair.token1 && (approvalState === ApprovalState.NOT_APPROVED || approvalState === ApprovalState.PENDING) ? (
               <Button
                 className="w-full"
                 size="sm"
@@ -134,12 +134,14 @@ const FarmListItem = ({ farm }) => {
                 size="sm"
                 variant="outlined"
                 color="gradient"
-                disabled={pendingTx || !typedDepositValue || balance.lessThan(typedDepositValue) || farm?.id === '1'}
+                disabled={pendingTx || !typedDepositValue || balance.lessThan(typedDepositValue)}
                 onClick={async () => {
                   setPendingTx(true)
                   try {
                     // KMP decimals depend on asset, SLP is always 18
-                    const tx = await deposit(farm?.id, depositValue.toBigNumber(liquidityToken?.decimals))
+                    const tx = farm.pair.token1 ?
+                      await deposit(farm?.id, depositValue.toBigNumber(liquidityToken?.decimals))
+                      : await stake(depositValue.toBigNumber(18))
 
                     addTransaction(tx, {
                       summary: `${i18n._(t`Deposit`)} ${
@@ -157,6 +159,7 @@ const FarmListItem = ({ farm }) => {
                 {i18n._(t`Stake`)}
               </Button>
             )}
+           
           </div>
           <div className="col-span-2 text-center md:col-span-1">
             {/* {farm.depositFeeBP && !isMobile && (
@@ -164,10 +167,10 @@ const FarmListItem = ({ farm }) => {
             )} */}
             {account && (
               <div className="pr-4 mb-2 text-left cursor-pointer text-secondary">
-                {i18n._(t`Deposited`)}: {formatNumberScale(amount?.toSignificant(6, undefined, 2) ?? 0, false, 4)}
-                {farm.lpPrice && amount
+                {i18n._(t`Deposited`)}: {amount?.toSignificant(8)}
+                {/* {farm.lpPrice && amount
                   ? ` (` + formatNumberScale(farm.lpPrice * Number(amount?.divide(1E18).toSignificant(18) ?? 0), true, 2) + `)`
-                  : ``}
+                  : ``} */}
               </div>
             )}
             <div className="relative flex items-center w-full mb-4">
@@ -192,6 +195,8 @@ const FarmListItem = ({ farm }) => {
                 </Button>
               )}
             </div>
+            { farm.pair.token1 && pendingSoul && pendingSoul.greaterThan(ZERO) && (
+
             <Button
               className="w-full"
               size="sm"
@@ -219,9 +224,42 @@ const FarmListItem = ({ farm }) => {
             >
               {i18n._(t`Unstake`)}
             </Button>
+            
+            )}
+            { !farm.pair.token1 && pendingSoul && pendingSoul.greaterThan(ZERO) && (
+
+            <Button
+              className="w-full"
+              size="sm"
+              variant="outlined"
+              color="gradient"
+              disabled={pendingTx || !typedWithdrawValue || amount.lessThan(typedWithdrawValue)}
+              onClick={async () => {
+                setPendingTx(true)
+                try {
+                  // KMP decimals depend on asset, SLP is always 18
+                  const tx = await unstake(withdrawValue.toBigNumber(18))
+                  addTransaction(tx, {
+                    summary: `${i18n._(t`Withdraw`)} ${
+                      farm.pair.token1
+                        ? `${farm.pair.token0.symbol}/${farm.pair.token1.symbol}`
+                        : farm.pair.token0.symbol
+                    }`,
+                  })
+                } catch (error) {
+                  console.error(error)
+                }
+
+                setPendingTx(false)
+              }}
+            >
+              {i18n._(t`Unstake`)}
+            </Button>
+
+            )}
+            </div>
           </div>
-        </div>
-        {pendingSoul && pendingSoul.greaterThan(ZERO) && (
+        {farm.pair.token1 && pendingSoul && pendingSoul.greaterThan(ZERO) && (
           <div className="px-4 pb-4">
             <Button
               color="gradient"
@@ -233,6 +271,35 @@ const FarmListItem = ({ farm }) => {
                 setPendingTx(true)
                 try {
                   const tx = await harvest(farm.id)
+                  addTransaction(tx, {
+                    summary: `${i18n._(t`Harvest`)} ${
+                      farm.pair.token1
+                        ? `${farm.pair.token0.symbol}/${farm.pair.token1.symbol}`
+                        : farm.pair.token0.symbol
+                    }`,
+                  })
+                } catch (error) {
+                  console.error(error)
+                }
+                setPendingTx(false)
+              }}
+            >
+              {i18n._(t`Harvest ${formatNumber(pendingSoul.toFixed(18))} SOUL`)}
+            </Button>
+          </div>
+        )}
+        { !farm.pair.token1 && pendingSoul && pendingSoul.greaterThan(ZERO) && (
+          <div className="px-4 pb-4">
+            <Button
+              color="gradient"
+              className="w-full"
+              // variant={'filled'}
+              // variant={!!nextHarvestUntil && nextHarvestUntil > Date.now() ? 'outlined' : 'filled'}
+              // disabled={!!nextHarvestUntil && nextHarvestUntil > Date.now()}
+              onClick={async () => {
+                setPendingTx(true)
+                try {
+                  const tx = await claimStake(10**18 * 0)
                   addTransaction(tx, {
                     summary: `${i18n._(t`Harvest`)} ${
                       farm.pair.token1

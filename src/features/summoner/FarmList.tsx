@@ -7,6 +7,7 @@ import useSortableData from '../../hooks/useSortableData'
 import { useRouter } from 'next/router'
 import { FixedSizeList } from 'react-window'
 import AutoSizer from 'react-virtualized-auto-sizer'
+import NeonSelect, { NeonSelectItem } from '../../components/Select'
 
 const FarmList = ({ farms, term, filter }) => {
   const { asPath, pathname, route, query, basePath } = useRouter()
@@ -19,9 +20,9 @@ const FarmList = ({ farms, term, filter }) => {
 
   return items ? (
     <>
-      {/* {/* <div className="flex items-center justify-end	 text-secondary gap-3 cursor-pointer">
+      <div className="flex items-center justify-end	 text-secondary gap-3 cursor-pointer">
         <div className="flex flex-row items-center">
-          <span className="text-sm">{i18n._(t`Order by`)}:</span>
+          <span className="text-sm">{i18n._(t`Order By`)}:</span>
         </div>
         <NeonSelect value={sortConfig && sortConfig.value}>
           {Object.entries(SortableOptions).map(([k, v]) => (
@@ -30,34 +31,34 @@ const FarmList = ({ farms, term, filter }) => {
             </NeonSelectItem>
           ))}
         </NeonSelect>
-      </div> */}
+      </div>
 
       <div className="grid grid-cols-4 text-base font-bold text-primary">
         <div className="flex items-center col-span-2 px-4 cursor-pointer md:col-span-1">
-          <div className="hover:text-high-emphesis">{i18n._(t`Stake`)}</div>
+          {/* <div className="hover:text-high-emphesis">{i18n._(t`Stake`)}</div> */}
           {/* {sortConfig &&
             sortConfig.key === 'symbol' &&
             ((sortConfig.direction === 'ascending' && <ChevronUpIcon width={12} height={12} />) ||
               (sortConfig.direction === 'descending' && <ChevronDownIcon width={12} height={12} />))} */}
         </div>
-        <div className="flex items-center px-2 cursor-pointer hover:text-high-emphesis">
-          {i18n._(t`TVL`)}
+        {/* <div className="flex items-center px-2 cursor-pointer hover:text-high-emphesis"> */}
+          {/* {i18n._(t`TVL`)} */}
           {/* {sortConfig &&
             sortConfig.key === 'tvl' &&
             ((sortConfig.direction === 'ascending' && <ChevronUpIcon width={12} height={12} />) ||
               (sortConfig.direction === 'descending' && <ChevronDownIcon width={12} height={12} />))} */}
-        </div>
+        {/* </div> */}
         <div className="items-center justify-start hidden px-2 md:flex hover:text-high-emphesis">
-          {i18n._(t`Allocation`)}
+          {/* {i18n._(t`Allocation`)} */}
         </div>
-        <div className="flex items-center justify-end px-4 cursor-pointer hover:text-high-emphesis">
-          {i18n._(t`APR`)}
+        {/* <div className="flex items-center justify-end px-4 cursor-pointer hover:text-high-emphesis">
+          {i18n._(t`APR`)} */}
           {/* {sortConfig &&
             sortConfig.key === 'roiPerYear' // &&
             ((sortConfig.direction === 'ascending' && <ChevronUpIcon width={12} height={12} />) ||
               (sortConfig.direction === 'descending' && <ChevronDownIcon width={12} height={12} />))
           } */}
-        </div>
+        {/* </div> */}
       </div>
       <div className="flex-col mt-2">
         {pools.map((farm, index) => (

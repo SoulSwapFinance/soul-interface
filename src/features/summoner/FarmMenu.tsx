@@ -27,11 +27,14 @@ const Menu = ({ positionsLength, onSearch, term }) => {
   return (
     <div className={`grid grid-cols-12`}>
       <div className="col-span-12 flex flex-col space-y-4">
-        <MenuItem href="/farm" title={i18n._(t`All Farms`)} />
-        {account && positionsLength > 0 && <MenuItem href={`/farm?filter=my`} title={i18n._(t`My Farms`)} />}
+        <MenuItem href="/summoner" title={i18n._(t`ALL PAIRS`)} />
+        {account && positionsLength > 0 && <MenuItem href={`/summoner?filter=soul`} title={i18n._(t`SOUL PAIRS`)} />}
+        {/* {account && positionsLength > 0 && <MenuItem href={`/summoner?filter=my`} title={i18n._(t`MY PAIRS`)} />} */}
+        {account && positionsLength > 0 && <MenuItem href={`/summoner?filter=fantom`} title={i18n._(t`FANTOM PAIRS`)} />}
+        {account && positionsLength > 0 && <MenuItem href={`/summoner?filter=stables`} title={i18n._(t`STABLE PAIRS`)} />}
+        {account && positionsLength > 0 && <MenuItem href={`/summoner?filter=single`} title={i18n._(t`STAKING ASSETS`)} />}
 
         {/* <MenuItem href="/farm?filter=soul" title="SOUL Farms" />
-        <MenuItem href="/farm?filter=fantom" title="FTM Farms" />
         <MenuItem href="/farm?filter=stables" title="Stables Farms" />
         <MenuItem href="/farm?filter=single" title="Single Asset" /> */}
       </div>

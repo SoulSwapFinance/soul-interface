@@ -3,8 +3,9 @@ import { useMemo, useState } from 'react'
 import { BigNumber } from '@ethersproject/bignumber'
 
 export enum SortableOptions {
-  'tvl' = 'TVL',
-  'roiPerYear' = 'APY',
+  // 'tvl' = 'TVL',
+  // 'roiPerYear' = 'APY',
+  'rewards' = 'SOUL'
 }
 
 function getNested(theObject: any, path: string, separator = '.') {
@@ -23,7 +24,7 @@ function getNested(theObject: any, path: string, separator = '.') {
 
 const useSortableData = (
   items: any,
-  config: any = { key: 'tvl', direction: 'descending', value: SortableOptions.tvl }
+  config: any = { key: 'rewards', direction: 'descending', value: SortableOptions.rewards }
 ) => {
   const [sortConfig, setSortConfig] = useState(config)
 
