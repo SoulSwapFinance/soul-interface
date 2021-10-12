@@ -24,7 +24,7 @@ import { useLingui } from '@lingui/react'
 import { usePairAdder } from '../../../state/user/hooks'
 import { useTokenBalance } from '../../../state/wallet/hooks'
 import Image from 'next/image'
-import DoubleGlowShadow from '../../../components/DoubleGlowShadow'
+import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
 // import SoulLogo from '../../../components/SoulLogo'
 
 enum Fields {
@@ -87,7 +87,7 @@ export default function PoolFinder() {
       {/* <SoulLogo /> */}
 
       <Container maxWidth="2xl" className="space-y-6">
-        <DoubleGlowShadow>
+      <DoubleGlowShadowV2 opacity="0.6">
           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
             <div className="p-4 mb-3 space-y-3 text-center">
               <Typography component="h1" variant="h2">
@@ -177,7 +177,7 @@ export default function PoolFinder() {
               prerequisiteMessage
             )}
           </div>
-        </DoubleGlowShadow>
+        </DoubleGlowShadowV2>
       </Container>
     </>
   )
