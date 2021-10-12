@@ -1,5 +1,6 @@
 import { Wrap } from '../../components/ReusableStyles'
 import Container from '../../components/Container'
+import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 import Head from 'next/head'
 import React from 'react'
 
@@ -8,7 +9,9 @@ import { StakeList } from '../../features/stake/StakePairRow'
 const Farm = () => {
   return (
     <Wrap padding="4rem 0 0 0" justifyContent="center">
-      <Container id="farm-page">
+      <DoubleGlowShadowV2 opacity="0.6">
+
+      <Container id="stake-page">
         <Head>
           <title>Stake | Soul</title>
           <meta key="description" name="description" content="Stake SOUL" />
@@ -16,6 +19,8 @@ const Farm = () => {
 
         <StakeList />
       </Container>
+
+      </DoubleGlowShadowV2>
     </Wrap>
   )
 }

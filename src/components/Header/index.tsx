@@ -67,7 +67,7 @@ function AppBar(): JSX.Element {
                             id={`farm-nav-link`}
                             className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                           >
-                            {i18n._(t`Farm`)}
+                            {i18n._(t`Summon`)}
                           </a>
                         </NavLink>
                       )}
@@ -87,7 +87,7 @@ function AppBar(): JSX.Element {
                               id={`stake-nav-link`}
                               className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                             >
-                              {i18n._(t`Stake`)}
+                              {i18n._(t`Seance`)}
                             </a>
                           </NavLink>
                         )}
@@ -137,7 +137,7 @@ function AppBar(): JSX.Element {
                             id={`bridge-nav-link`}
                             className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                           >
-                            {i18n._(t`History`)}
+                            {i18n._(t`Dashboard`)}
                           </a>
                         </NavLink>
                       )}
@@ -330,7 +330,7 @@ function AppBar(): JSX.Element {
                     id={`pool-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                     >
-                    {i18n._(t`Pool`)}
+                    {i18n._(t`Liquidity`)}
                   </a>
                 </Link>
                 )}
@@ -350,9 +350,39 @@ function AppBar(): JSX.Element {
                       id={`farm-nav-link`}
                       className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                     >
-                      {i18n._(t`Farm`)}
+                      {i18n._(t`Summon`)}
                     </a>
                   </Link>
+                )}
+                    { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      <Link href={'/stake'}>
+                      <a
+                        id={`stake-nav-link`}
+                        className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                        >
+                        {i18n._(t`Seance`)}
+                      </a>
+                    </Link>
+                  )}
+                    { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      <Link href={'/scarab/create'}>
+                  <a
+                    id={`scarab-nav-link`}
+                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                    >
+                    {i18n._(t`Scarab`)}
+                  </a>
+                </Link>
+                )}
+                    { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      <Link href={'/user'}>
+                  <a
+                    id={`history-nav-link`}
+                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                    >
+                    {i18n._(t`Dashboard`)}
+                  </a>
+                </Link>
                 )}
                 {/* <Link href={'/vaults'}>
                   <a
@@ -362,16 +392,6 @@ function AppBar(): JSX.Element {
                     {i18n._(t`Vaults`)}
                   </a>
                 </Link> */}
-         { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                  <Link href={'/scarab/create'}>
-                  <a
-                    id={`scarab-nav-link`}
-                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                  >
-                    {i18n._(t`Scarab`)}
-                  </a>
-                </Link>
-                )}
                 {/* <Link href={'/bridge'}>
                   <a className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap">
                     {i18n._(t`Bridge`)}
@@ -408,16 +428,6 @@ function AppBar(): JSX.Element {
                     </a>
                   </Link>
                   )} */}
-                  { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                  <Link href={'/stake'}>
-                    <a
-                      id={`stake-nav-link`}
-                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                    >
-                      {i18n._(t`Stake`)}
-                    </a>
-                  </Link>
-                )}
                   {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                       <ExternalLink
                       id={`analytics-nav-link`}

@@ -920,7 +920,7 @@ msgstr "Cancelamento"
 msgid "Vesting is executed within the guidelines selected by the community in <0>SIMP3</0>.<1/><2/>Please refer to the <3>forum discussion</3> for deliberations on additional points.<4/><5/>Additional records and weekly merkle updates can be found on <6>Github</6>"
 msgstr "O prazo para o exercício é executado dentro das diretrizes selecionadas pela comunidade no <0>SIMP3</0>.<1/><2/>Consulte o <3>fórum de discussão</3> para deliberações sobre pontos adicionais.<4/><5/>Registros adicionais e atualizações semanais do merkle podem ser encontrados no <6>Github</6>"
 
-msgid "View on explorer"
+msgid "View on Explorer"
 msgstr "Ver no explorer"
 
 msgid "View pair analytics"

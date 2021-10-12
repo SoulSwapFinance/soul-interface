@@ -922,7 +922,7 @@ msgstr ""
 msgid "Vesting is executed within the guidelines selected by the community in <0>SIMP3</0>.<1/><2/>Please refer to the <3>forum discussion</3> for deliberations on additional points.<4/><5/>Additional records and weekly merkle updates can be found on <6>Github</6>"
 msgstr ""
 
-msgid "View on explorer"
+msgid "View on Explorer"
 msgstr ""
 
 msgid "View pair analytics"

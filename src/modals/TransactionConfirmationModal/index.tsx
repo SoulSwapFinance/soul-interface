@@ -76,7 +76,7 @@ export const TransactionSubmittedContent: FC<TransactionSubmittedContentProps> =
         <div className="text-xl font-bold">{i18n._(t`Transaction Submitted`)}</div>
         {chainId && hash && (
           <ExternalLink href={getExplorerLink(chainId, hash, 'transaction')}>
-            <div className="font-bold text-blue">View on explorer</div>
+            <div className="font-bold text-blue">View on Explorer</div>
           </ExternalLink>
         )}
         {currencyToAdd && library?.provider?.isMetaMask && (
