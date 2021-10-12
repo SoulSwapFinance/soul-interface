@@ -21,7 +21,9 @@ export const SOUL_VAULT_ADDRESS: AddressMap = {
 
 export const SCARAB_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
-  [ChainId.FANTOM]: '0xbc06b1115B272F4E217Ab2Ff33ad0efB873Be453', // 12 OCT
+  // [ChainId.FANTOM]: '0xbc06b1115B272F4E217Ab2Ff33ad0efB873Be453', // 12 OCT
+  // [ChainId.FANTOM]: '0x50a544773e2eD7a3Cb332Fe513f961326b620a21', // 12 OCT
+  [ChainId.FANTOM]: '0x99Add9c96C2E547fE6628Fcfc72F346a07638120', // 12 OCT
   [ChainId.FANTOM_TESTNET]: '',
 }
 

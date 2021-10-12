@@ -3,10 +3,30 @@
     "inputs": [{
         "indexed": false,
         "internalType": "address",
-        "name": "manifestor",
+        "name": "recipient",
         "type": "address"
+    }, {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
     }],
-    "name": "ManifestorUpdated",
+    "name": "Repossesed",
+    "type": "event"
+}, {
+    "anonymous": false,
+    "inputs": [{
+        "indexed": false,
+        "internalType": "address",
+        "name": "recipient",
+        "type": "address"
+    }, {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+    }],
+    "name": "Saved",
     "type": "event"
 }, {
     "anonymous": false,
@@ -38,6 +58,26 @@
     }],
     "name": "Withdraw",
     "type": "event"
+}, {
+    "inputs": [{
+        "internalType": "uint256",
+        "name": "count",
+        "type": "uint256"
+    }],
+    "name": "claimScarabs",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "inputs": [{
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+    }],
+    "name": "claimUnclaimed",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
 }, {
     "inputs": [{
         "internalType": "address",
@@ -109,6 +149,30 @@
     "stateMutability": "view",
     "type": "function"
 }, {
+    "inputs": [{
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+    }],
+    "name": "getDepositsByTokenAddress",
+    "outputs": [{
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "inputs": [],
+    "name": "getScarabs",
+    "outputs": [{
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
     "inputs": [],
     "name": "getTotalLockedBalance",
     "outputs": [{
@@ -156,16 +220,6 @@
     "type": "function"
 }, {
     "inputs": [],
-    "name": "manifestor",
-    "outputs": [{
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-    }],
-    "stateMutability": "view",
-    "type": "function"
-}, {
-    "inputs": [],
     "name": "outcaster",
     "outputs": [{
         "internalType": "contract Outcaster",
@@ -177,11 +231,25 @@
 }, {
     "inputs": [{
         "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+    }],
+    "name": "savingGrace",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "inputs": [{
+        "internalType": "uint256",
         "name": "",
         "type": "uint256"
     }],
     "name": "scarabs",
     "outputs": [{
+        "internalType": "contract IERC20",
+        "name": "token",
+        "type": "address"
+    }, {
         "internalType": "address",
         "name": "recipient",
         "type": "address"
@@ -215,16 +283,6 @@
     "stateMutability": "view",
     "type": "function"
 }, {
-    "inputs": [{
-        "internalType": "address",
-        "name": "_manifestor",
-        "type": "address"
-    }],
-    "name": "setManifestor",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-}, {
     "inputs": [],
     "name": "soul",
     "outputs": [{
@@ -251,6 +309,24 @@
         "type": "address"
     }],
     "name": "walletBalance",
+    "outputs": [{
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "inputs": [{
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+    }, {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+    }],
+    "name": "walletTokenBalance",
     "outputs": [{
         "internalType": "uint256",
         "name": "",
