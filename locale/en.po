@@ -1100,8 +1100,8 @@ msgstr "View Contract"
 msgid "View Liquidity Positions"
 msgstr "View Liquidity Positions"
 
-msgid "View on explorer"
-msgstr "View on explorer"
+msgid "View on Explorer"
+msgstr "View on Explorer"
 
 msgid "View our Ecosystem."
 msgstr "View our Ecosystem."

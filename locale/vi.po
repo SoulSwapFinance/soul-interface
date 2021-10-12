@@ -1077,7 +1077,7 @@ msgstr ""
 msgid "View Liquidity Positions"
 msgstr ""
 
-msgid "View on explorer"
+msgid "View on Explorer"
 msgstr ""
 
 msgid "View our Ecosystem."

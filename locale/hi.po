@@ -926,7 +926,7 @@ msgstr "वेस्टिंग"
 msgid "Vesting is executed within the guidelines selected by the community in <0>SIMP3</0>.<1/><2/>Please refer to the <3>forum discussion</3> for deliberations on additional points.<4/><5/>Additional records and weekly merkle updates can be found on <6>Github</6>"
 msgstr "<0>SIMP3</0> में समुदाय द्वारा चयनित दिशानिर्देशों के भीतर वेस्टिंग को निष्पादित किया जाता है। <1/> <2/> अतिरिक्त बिंदुओं पर विचार-विमर्श के लिए कृपया <3>मंच चर्चा</3> को देखें। <4/> <5/> अतिरिक्त रिकॉर्ड और साप्ताहिक मर्कले अपडेट <6>Github</6> पर देखे जा सकते हैं"
 
-msgid "View on explorer"
+msgid "View on Explorer"
 msgstr "एक्सप्लोरर पर देखें"
 
 msgid "View pair analytics"

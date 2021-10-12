@@ -7,9 +7,9 @@ const Banner: FC = () => (
       <div className="pr-16 sm:text-center sm:px-16">
         <p className="font-medium text-white">
           <span className="md:hidden">View your returns today!</span>
-          <span className="hidden md:inline"> Staking APR on popular pairs for <b>SOUL farms</b>!</span>
+          <span className="hidden md:inline"> Staking APR on popular pairs for <b>SOUL SUMMONER</b>!</span>
           <span className="hidden block sm:ml-2 sm:inline-block">
-            <a href="https://defitools.me/fantom/soulswap" target = "_blank" rel="noreferrer"
+            <a href="https://vfat.tools/fantom/soulswap/" target = "_blank" rel="noreferrer"
 className="font-bold text-white underline">
               {' '}
               <br />

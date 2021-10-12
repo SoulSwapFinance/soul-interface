@@ -106,7 +106,7 @@ export default function Me() {
               {/* <div className="ml-1">View on Explorer</div> */}
               {chainId && account && (
                 <a href={getExplorerLink(chainId, account, 'address')}>
-                  <span style={{ marginLeft: '4px' }}>{i18n._(t`View on explorer`)}</span>
+                  <span style={{ marginLeft: '4px' }}>{i18n._(t`View on Explorer`)}</span>
                 </a>
               )}
             </div>
