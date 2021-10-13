@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Ether, JSBI, Token } from '@soulswap/sdk'
+import { Currency, CurrencyAmount, Ether, JSBI, Token } from '../../sdk'
 import { useMultipleContractSingleData, useSingleContractMultipleData } from '../multicall/hooks'
 
 import ERC20_ABI from '../../constants/abis/erc20.json'
@@ -184,10 +184,10 @@ export function useMultichainCurrencyBalance(
   account?: string,
   currency?: Currency
 ): CurrencyAmount<Currency> | undefined {
-  const { chainId: moonriverChainId } = useActiveWeb3React()
-  const moonriverBalance = useCurrencyBalance(
-    chainId == moonriverChainId && account,
-    chainId == moonriverChainId && currency
+  const { chainId: fantomChainId } = useActiveWeb3React()
+  const fantomBalance = useCurrencyBalance(
+    chainId == fantomChainId && account,
+    chainId == fantomChainId && currency
   )
   const [value, setValue] = useState(null)
 
@@ -214,14 +214,14 @@ export function useMultichainCurrencyBalance(
   }, [account, chainId, currency])
 
   useEffect(() => {
-    if (account && chainId && currency && chainId != moonriverChainId) {
+    if (account && chainId && currency && chainId != fantomChainId) {
       getBalance()
     } else {
       setValue(null)
     }
-  }, [account, chainId, currency, getBalance, moonriverChainId])
+  }, [account, chainId, currency, getBalance, fantomChainId])
 
   return useMemo(() => {
-    return chainId == moonriverChainId ? moonriverBalance : value
-  }, [chainId, moonriverBalance, moonriverChainId, value])
+    return chainId == fantomChainId ? fantomBalance : value
+  }, [chainId, fantomBalance, fantomChainId, value])
 }

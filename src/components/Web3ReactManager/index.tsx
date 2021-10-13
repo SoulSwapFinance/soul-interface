@@ -47,7 +47,7 @@ export default function Web3ReactManager({ children }: { children: JSX.Element }
   //     route: router.route
   //   })
 
-  //   if (router.route !== '/bridge' && chainId !== ChainId.MOONRIVER) {
+  //   if (router.route !== '/bridge' && chainId !== ChainId.FANTOM) {
   //     setWrongNetwork(true)
   //   } else {
   //     setWrongNetwork(false)

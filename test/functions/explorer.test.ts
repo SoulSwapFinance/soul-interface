@@ -1,4 +1,4 @@
-import { ChainId } from '@soulswap/sdk'
+import { ChainId } from '../../src/sdk'
 import { getExplorerLink } from '../../src/functions/explorer'
 
 describe('utils', () => {

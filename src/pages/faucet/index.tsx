@@ -87,7 +87,7 @@ export default function Faucet(): JSX.Element {
               </Typography>
             </div>
             <div className="flex flex-1 justify-center text-center items-center mt-8 mb-12">
-              <Image src="/images/faucet/moonriver-faucet.png" alt="Soul" width={150} height={150} />
+              <Image src="/images/faucet/fantom-faucet.png" alt="Soul" width={150} height={150} />
             </div>
             <div className="p-4 mb-3 space-y-1 text-center">
               <Typography component="h1" variant="base">

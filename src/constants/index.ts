@@ -1,22 +1,22 @@
 import { ChainId, JSBI, Percent } from '../sdk'
-import { fortmatic, injected, portis, torus, walletconnect, walletlink } from '../connectors' // binance
+import { binance, fortmatic, injected, portis, torus, walletconnect, walletlink } from '../connectors'
 
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { BigNumber } from 'ethers'
 
 export const RPC = {
   [ChainId.MAINNET]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
+  [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
+  [ChainId.FANTOM]: 'https://rpc.ftm.tools',
+  [ChainId.FANTOM_TESTNET]: 'https://rpc.testnet.fantom.network',
   // [ChainId.ROPSTEN]: 'https://eth-ropsten.alchemyapi.io/v2/cidKix2Xr-snU3f6f6Zjq_rYdalKKHmW',
   // [ChainId.RINKEBY]: 'https://eth-rinkeby.alchemyapi.io/v2/XVLwDlhGP6ApBXFz_lfv0aZ6VmurWhYD',
   // [ChainId.GÖRLI]: 'https://eth-goerli.alchemyapi.io/v2/Dkk5d02QjttYEoGmhZnJG37rKt8Yl3Im',
   // [ChainId.KOVAN]: 'https://eth-kovan.alchemyapi.io/v2/6OVAa_B_rypWWl9HqtiYK26IRxXiYqER',
-  [ChainId.FANTOM]: 'https://rpc.ftm.tools',
-  [ChainId.FANTOM_TESTNET]: 'https://rpc.testnet.fantom.network',
   // [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com',
   // [ChainId.MATIC]: 'https://apis.ankr.com/e22bfa5f5a124b9aa1f911b742f6adfe/c06bb163c3c2a10a4028959f4d82836d/polygon/full/main',
   // [ChainId.MATIC_TESTNET]: 'https://rpc-mumbai.matic.today',
   // [ChainId.XDAI]: 'https://rpc.xdaichain.com',
-  // [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
   // [ChainId.BSC_TESTNET]: 'https://data-seed-prebsc-2-s3.binance.org:8545',
   // [ChainId.MOONBEAM_TESTNET]: 'https://rpc.testnet.moonbeam.network',
   // [ChainId.MOONRIVER]: 'https://moonriver-api.bwarelabs.com/0e63ad82-4f98-46f9-8496-f75657e3a8e', //'https://moonriver.api.onfinality.io/public',
@@ -33,9 +33,9 @@ export const POOL_DENY = []
 export const AVERAGE_BLOCK_TIME_IN_SECS = 1
 
 export const AVERAGE_BLOCK_TIME = {
-  [ChainId.FANTOM]: 1
+  [ChainId.FANTOM]: 1,
+  [ChainId.BSC]: 3
   // [ChainId.ROPSTEN]: AVERAGE_BLOCK_TIME_IN_SECS,
-  // [ChainId.BSC]: 3,
 }
 
 export const ARCHER_RELAY_URI: { [chainId in ChainId]?: string } = {
@@ -117,6 +117,15 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     color: '#3688EB',
     mobile: true,
   },
+  Binance: {
+    connector: binance,
+    name: 'Binance',
+    iconName: 'bsc.jpg',
+    description: 'Login using Binance hosted wallet',
+    href: null,
+    color: '#F0B90B',
+    mobile: false,
+  },
   // LATTICE: {
   //   connector: async () => {
   //     const LatticeConnector = (await import('@web3-react/lattice-connector')).LatticeConnector
@@ -176,15 +185,6 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
   //   href: null,
   //   color: '#315CF5',
   //   mobile: true,
-  // },
-  // Binance: {
-  //   connector: binance,
-  //   name: 'Binance',
-  //   iconName: 'bsc.jpg',
-  //   description: 'Login using Binance hosted wallet',
-  //   href: null,
-  //   color: '#F0B90B',
-  //   mobile: false,
   // },
 }
 
