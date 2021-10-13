@@ -152,12 +152,12 @@ function AppBar(): JSX.Element {
                         </NavLink>
                       )} */}
                       {/* {chainId === [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <Link href={'/miso'}>
+                        <Link href={'/ifo'}>
                           <a
-                            id={`miso-nav-link`}
+                            id={`ifo-nav-link`}
                             className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                           >
-                            {i18n._(t`Miso`)}
+                            {i18n._(t`Ifo`)}
                           </a>
                         </Link>
                       )} */}
@@ -459,12 +459,12 @@ function AppBar(): JSX.Element {
                   )} */}
 
                   {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                  <Link href={'/miso'}>
+                  <Link href={'/ifo'}>
                     <a
                       id={`stake-nav-link`}
                       className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                     >
-                      {i18n._(t`Miso`)}
+                      {i18n._(t`Ifo`)}
                     </a>
                   </Link>
                 )} */}

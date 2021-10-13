@@ -142,7 +142,7 @@ export default function Vesting() {
           <div className="relative w-full overflow-hidden rounded bg-dark-900">
             <div className="flex flex-col gap-3 p-4">
               <div className="flex flex-row justify-between">
-                <div className="font-bold text-white">{i18n._(t`Your Claimable SUSHI this Week`)}</div>
+                <div className="font-bold text-white">{i18n._(t`Your Claimable SOUL this Week`)}</div>
                 <QuestionHelper text="Your Vested SOUL will be released each week for the next 6 months. The amount released each week is determined by your historical farming rewards. You do not need to harvest each week as unclaimed amounts from each week will continue to accrue onto the next." />
               </div>
               {/* <div style={{ display: 'flex', alignItems: 'baseline' }}> */}

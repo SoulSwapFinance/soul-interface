@@ -23,13 +23,13 @@ const usePool = (poolAddress: string | undefined) => {
       token1,
       totalSupply,
     })
-  }, [poolAddress])
+  }, [poolContract])
 
   useEffect(() => {
     if (poolAddress) {
       fetchPoolData()
     }
-  }, [poolAddress])
+  }, [fetchPoolData, poolAddress])
 
   return poolData
 }

@@ -2,9 +2,9 @@ import React from 'react'
 import { usePricesApi } from '../features/summoner/hooks'
 
 export const PriceContext = React.createContext({
-  seance: 0,
+  ftm: 0,
   soul: 0,
-  usdc: 0,
+  seance: 0,
 })
 
 export function PriceProvider({ children }) {

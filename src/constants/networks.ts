@@ -2,6 +2,8 @@ import { ChainId } from '../sdk'
 
 const Fantom = '/images/networks/fantom-network.jpg'
 const Mainnet = '/images/networks/mainnet-network.jpg'
+const Bsc = '/images/networks/bsc.png'
+
 // const Arbitrum = '/images/networks/arbitrum-network.jpg'
 // const Avalanche = '/images/networks/avalanche-network.jpg'
 // const Goerli = '/images/networks/goerli-network.jpg'
@@ -19,6 +21,7 @@ const Mainnet = '/images/networks/mainnet-network.jpg'
 
 export const NETWORK_ICON = {
   [ChainId.MAINNET]: Mainnet,
+  [ChainId.BSC]: Bsc,
   [ChainId.FANTOM]: Fantom,
   [ChainId.FANTOM_TESTNET]: Fantom,
   // [ChainId.ROPSTEN]: Ropsten,
