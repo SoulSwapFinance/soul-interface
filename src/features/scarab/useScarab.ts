@@ -1,5 +1,4 @@
-
-import { useScarabContract } from '../../hooks'
+import { useScarabContract, useTokenContract } from '../../hooks'
 import { BigNumber } from '@ethersproject/bignumber'
 import { Zero } from '@ethersproject/constants'
 import { useCallback } from 'react'
@@ -7,13 +6,12 @@ import { useToken } from '../../hooks/Tokens'
 
 export default function useScarab() {
   const contract = useScarabContract()
+  const tokenContract = useTokenContract()
 
   const lockSouls = useCallback(
     async (recipient: string, amount: BigNumber, unlockTimestamp: string) => {
       try {
-        return await contract?.lockSouls(recipient, amount.toString(), unlockTimestamp, {
-          // value: '100000000000000000',
-        })
+        return await contract?.lockSouls(recipient, amount.toString(), unlockTimestamp)
       } catch (e) {
         console.error(e)
         return e
@@ -34,15 +32,16 @@ export default function useScarab() {
     [contract]
   )
 
-  const getDepositsByRecipient = useCallback(
-    async (recipient: string) => {
+  const getDepositsByTokenAddress = useCallback(
+    async (token: string) => {
       try {
-        const scarabs = await contract?.getDepositsByRecipient(recipient)
+        const scarabs = await contract?.getDepositsByTokenAddress(token)
         const result = []
-        if (scarabs.length > 0) {
+        if (contract?.depositsCount > 0) {
           for (const id of scarabs) {
-            const scarabs = await contract?.depositsByRecipient(recipient, id.toString())
-            result.push({ id, ...scarabs })
+            const scarabInfo = await contract?.scarabs(id.toString())
+            console.log('scarabInfo: ', scarabInfo)
+            result.push({ id, ...scarabInfo })
           }
         }
         return result
@@ -54,5 +53,5 @@ export default function useScarab() {
     [contract]
   )
 
-  return { lockSouls, getDepositsByRecipient, withdrawTokens }
+  return { lockSouls, getDepositsByTokenAddress, withdrawTokens }
 }

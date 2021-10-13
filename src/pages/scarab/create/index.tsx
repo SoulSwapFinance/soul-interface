@@ -65,9 +65,9 @@ export default function CreateScarab(): JSX.Element {
   }, [approvalState, approvalSubmitted])
 
   const errorMessage = 
-  // !isAddress(tokenAddress)
-  //   ? 'Invalid Token'
-    // : 
+  !isAddress(tokenAddress)
+    ? 'Invalid Token'
+    : 
     !isAddress(recipient)
       ? 'Invalid Recipient'
       : isNaN(parseFloat(value)) || parseFloat(value) == 0
@@ -107,7 +107,7 @@ export default function CreateScarab(): JSX.Element {
             txn: { hash: result.transactionHash, summary: `Successfully created Scarab [${_id}]`, success: true },
           })
 
-          // setTokenAddress('')
+          setTokenAddress('')
           setRecipient('')
           setValue('')
           setUnlockDate(moment.default())
