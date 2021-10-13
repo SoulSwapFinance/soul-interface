@@ -12,7 +12,7 @@ Home repository for the SoulSwap Decentralized Finance Application.
 - ### [Chains](./src/pages/chains/index.tsx)
 - ### [Exchange](./src/pages/exchange)
 - ### [Farm](./src/pages/farm)
-- ### [Launchpad](./src/pages/miso/index.tsx)
+- ### [Launchpad](./src/pages/ifo/index.tsx)
 - ### [Spell](./src/pages/spell/index.tsx)
 - ### [Status](./src/pages/status)
 - ### [Tokens](./src/pages/tokens)

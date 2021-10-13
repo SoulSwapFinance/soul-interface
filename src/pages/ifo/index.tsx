@@ -3,22 +3,22 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useLingui } from '@lingui/react'
 // import { t } from '@lingui/macro'
-import MisoArticles from '../../components/Miso/MisoArticles'
-import MisoInfo from './MisoInfo'
-import Layout from '../../layouts/Miso'
+import IfoArticles from '../../components/Ifo/IfoArticles'
+import IfoInfo from './IfoInfo'
+import Layout from '../../layouts/Ifo'
 
-function MISO() {
+function IFO() {
   const { i18n } = useLingui()
   return (
     <>
       <Head>
-        <title>MISO | Soul</title>
-        <meta key="description" name="description" content="MISO by Soul, an initial Soul offering on steroids ..." />
+        <title>IFO | Soul</title>
+        <meta key="description" name="description" content="IFO by Soul, an initial Soul offering on steroids ..." />
       </Head>
       <div
         className="flex flex-col w-full"
         style={{
-          backgroundImage: `url('/images/miso/trident/trident_bg.png')`,
+          backgroundImage: `url('/images/enchant/trident/trident_bg.png')`,
           backgroundColor: 'rgba(27,27,27)',
           backgroundBlendMode: 'overlay',
           backgroundSize: 'cover',
@@ -31,13 +31,13 @@ function MISO() {
                 <div className="mx-auto" style={{ position: 'relative' }}>
                   <div className="flex flex-col" style={{ position: 'absolute', left: '0px', top: '0px' }}>
                     <div className="mb-3">
-                      <Image src="/images/miso/trident/trident_fx1.png" width={156} height={43} />
+                      <Image src="/images/enchant/trident/trident_fx1.png" width={156} height={43} />
                     </div>
                     <div className="mb-3">
-                      <Image src="/images/miso/trident/trident_fx1.png" width={156} height={43} />
+                      <Image src="/images/enchant/trident/trident_fx1.png" width={156} height={43} />
                     </div>
                     <div className="mb-3">
-                      <Image src="/images/miso/trident/trident_fx1.png" width={156} height={43} />
+                      <Image src="/images/enchant/trident/trident_fx1.png" width={156} height={43} />
                     </div>
                   </div>
                 </div>
@@ -54,7 +54,7 @@ function MISO() {
                           <div className="ml-1 text-sm font-bold text-white"> Chew Stoll</div>
                           <div className="ml-1" style={{ width: 12, height: 10 }}>
                             <a href="https://twitter.com/chowzuh" target="_blank" rel="noreferrer noopener">
-                              <Image src="/images/miso/trident/trident_twitter.svg" width={12} height={10} />
+                              <Image src="/images/enchant/trident/trident_twitter.svg" width={12} height={10} />
                             </a>
                           </div>
                           <div className="ml-1" style={{ width: 10, height: 10 }}>
@@ -63,7 +63,7 @@ function MISO() {
                               target="_blank"
                               rel="noreferrer noopener"
                             >
-                              <Image src="/images/miso/trident/trident_instagram.svg" width={10} height={10} />
+                              <Image src="/images/enchant/trident/trident_instagram.svg" width={10} height={10} />
                             </a>
                           </div>
                         </div>
@@ -74,7 +74,7 @@ function MISO() {
                         loop
                         style={{ width: 408, height: 408, zIndex: 100 }}
                       >
-                        <source src="/images/miso/trident/trident_video.mp4" />
+                        <source src="/images/ifo/trident/trident_video.mp4" />
                       </video>
                     </div>
                   </div>
@@ -82,7 +82,7 @@ function MISO() {
               </div>
 
               <div className="col-span-12 lg:col-span-6 max-w-md mx-auto">
-                <MisoInfo />
+                <IfoInfo />
               </div>
             </div>
             <div className="gap-4 grid grid-cols-12 min-h-1/2 mb-6">
@@ -99,7 +99,7 @@ function MISO() {
                   }}
                 ></div>
               </div>
-              <MisoArticles
+              <IfoArticles
                 title={`How does a batch auction work?`}
                 content={`In this auction, 20 of $LSD is on sale. This amount will be divided amongst all
                           the contributors at the end of the auction, weighted according to their contribution to the pool. 
@@ -107,17 +107,17 @@ function MISO() {
                           offer you will receive. The more you invest the more you get.`}
               />
 
-              <MisoArticles
+              <IfoArticles
                 title={`How do I participate?`}
                 content={`The auction receives $SOUL as its payment token currency. Go to auction page, 
                           commit the amount of $SOUL you’d like and claim your purchase after the 
                           auction finishes.`}
               />
 
-              <MisoArticles
-                title={`Learn more about MISO`}
-                content={`MISO is a suite of open-source smart contracts created to ease the process of launching 
-                          a new project on the SoulSwap exchange. MISO aims to drive new capital and trade to the exchange 
+              <IfoArticles
+                title={`Learn more about IFOs`}
+                content={`IFO is a suite of open-source smart contracts created to ease the process of launching 
+                          a new project on the SoulSwap exchange. IFOs aim to drive new capital and trade to the exchange 
                           by increasing the attractiveness of SoulSwap as a place for token creators and communities to launch 
                           new project tokens.`}
               />
@@ -129,9 +129,9 @@ function MISO() {
   )
 }
 
-const MISOLayout = ({ children }) => {
+const IFOLayout = ({ children }) => {
   return <Layout>{children}</Layout>
 }
-MISO.Layout = MISOLayout
+IFO.Layout = IFOLayout
 
-export default MISO
+export default IFO

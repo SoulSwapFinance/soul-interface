@@ -1,6 +1,6 @@
 import React from 'react'
 
-function MisoArticles({ title = '', content = '' }: { title?: any; content: any }) {
+function IfoArticles({ title = '', content = '' }: { title?: any; content: any }) {
   return (
     <div className="col-span-12 md:col-span-6 xl:col-span-4 xl:mx-8">
       <div className="flex">
@@ -11,4 +11,4 @@ function MisoArticles({ title = '', content = '' }: { title?: any; content: any 
   )
 }
 
-export default MisoArticles
+export default IfoArticles

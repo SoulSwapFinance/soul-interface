@@ -6,7 +6,7 @@ export enum Feature {
   LIQUIDITY_MINING = 'Liquidity Mining',
   BENTOBOX = 'BentoBox',
   KASHI = 'Kashi',
-  MISO = 'MISO',
+  IFO = 'IFO',
   ANALYTICS = 'Analytics',
 }
 

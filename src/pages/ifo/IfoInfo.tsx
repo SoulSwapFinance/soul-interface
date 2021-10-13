@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { addMinutes, format } from 'date-fns'
 
-function MisoInfo({
+function IfoInfo({
   name = 'Bad Trip',
   symbol = '$LSD',
   auctionType = 'Batch Auction',
@@ -75,7 +75,7 @@ function MisoInfo({
     <div className="flex flex-col">
       {/* Name and Symbol */}
       <div className="flex flex-row items-end mt-6">
-        <Image src="/images/miso/trident/trident-auction-icon.png" width={85} height={85} />
+        <Image src="/images/ifo/trident/trident-auction-icon.png" width={85} height={85} />
         <div className="flex-1 flex flex-col mx-6 items-center">
           <div>
             <div className="font-bold text-base sm:text-xl">{'Trident NFT'}</div>
@@ -97,13 +97,13 @@ function MisoInfo({
           <div className="text-sm sm:text-lg">{'Auction Type'}</div>
           <div className="text-base md:text-xl font-bold text-white">{auctionType}</div>
           <div>
-            <Image src="/images/miso/trident/trident_auction_type.png" width={25} height={25} />
+            <Image src="/images/ifo/trident/trident_auction_type.png" width={25} height={25} />
           </div>
         </div>
         <div className="col-span-4 flex flex-col">
           <div className="mx-auto">
             <div className="text-sm sm:text-lg">{'MIN Raised'}</div>
-            <div className="text-base md:text-xl font-bold text-white">{`${minRaised} $SUSHI`}</div>
+            <div className="text-base md:text-xl font-bold text-white">{`${minRaised} $SOUL`}</div>
             <div className="text-sm sm:text-base">{`$${minRaisedUsd} USD`}</div>
           </div>
         </div>
@@ -121,18 +121,18 @@ function MisoInfo({
           <div className="text-base md:text-xl font-bold text-white">{formatDate(new Date(auctionEndDate))} GMT</div>
           {remainingTime != '' && (
             <div className="flex flex-row items-center text-base">
-              <Image src="/images/miso/trident/trident_timer.png" width={15} height={15} />
+              <Image src="/images/ifo/trident/trident_timer.png" width={15} height={15} />
               <div className="text-sm sm:text-lg ml-2">{remainingTime}</div>
             </div>
           )}
         </div>
         <div className="ml-5 md:ml-8 cursor-pointer">
           <a
-            href="https://miso.sushi.com/auctions/0x15c5E87Ce788F0dEBcAF70cF1dde69E3Bc3E6Ad1"
+            href="https://ifo.soul.sh/auctions/0x15c5E87Ce788F0dEBcAF70cF1dde69E3Bc3E6Ad1"
             target="_blank"
             rel="noreferrer noopener"
           >
-            <Image src="/images/miso/trident/trident_view_auction.svg" width={91} height={88} />
+            <Image src="/images/ifo/trident/trident_view_auction.svg" width={91} height={88} />
           </a>
         </div>
       </div>
@@ -148,4 +148,4 @@ function MisoInfo({
   )
 }
 
-export default MisoInfo
+export default IfoInfo

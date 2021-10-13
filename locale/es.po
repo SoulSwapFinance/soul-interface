@@ -36,10 +36,16 @@ msgstr ""
 msgid "30 Days"
 msgstr ""
 
+msgid "A portion of each trade (0.05%) goes to Spell holders as a protocol incentive."
+msgstr ""
+
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
 msgstr ""
 
 msgid "A portion of each trade (0.25%) goes to the Soul Treasury."
+msgstr ""
+
+msgid "ALL PAIRS"
 msgstr ""
 
 msgid "APR"
@@ -78,13 +84,7 @@ msgstr ""
 msgid "Additional records and weekly merkle updates can be found on"
 msgstr ""
 
-msgid "All Farms"
-msgstr ""
-
 msgid "Allocation"
-msgstr ""
-
-msgid "Amount Locked"
 msgstr ""
 
 msgid "Amount of Tokens"
@@ -151,9 +151,6 @@ msgid "BentoBox Apps"
 msgstr ""
 
 msgid "BentoBox is an innovative way to use dapps gas-efficiently and gain extra yield."
-msgstr ""
-
-msgid "BentoBox provides extra yield on deposits with flash lending, strategies, and fixed, low-gas transfers among integrated dapps, like Kashi markets"
 msgstr ""
 
 msgid "BentoBox strategies can create yield for your collateral tokens. This token does not yet have a strategy in the BentoBox."
@@ -232,6 +229,9 @@ msgid ""
 "migrate"
 msgstr ""
 
+msgid "Coffinboxes provides extra yield on deposits with flash lending, strategies, and fixed, low-gas transfers among integrated dapps, like markets"
+msgstr ""
+
 msgid "Collateral"
 msgstr ""
 
@@ -307,6 +307,9 @@ msgstr ""
 msgid "Current"
 msgstr ""
 
+msgid "DAILY"
+msgstr ""
+
 msgid "Deposit"
 msgstr ""
 
@@ -335,12 +338,6 @@ msgid "Dismiss"
 msgstr ""
 
 msgid "Documentation"
-msgstr ""
-
-msgid "Earn SOUL with SOUL-LP."
-msgstr ""
-
-msgid "Earn SOUL with SOUL."
 msgstr ""
 
 msgid "Either return to the {link}, or change to an available network."
@@ -403,6 +400,9 @@ msgid "Explore"
 msgstr ""
 
 msgid "Explore our Protocol."
+msgstr ""
+
+msgid "FANTOM PAIRS"
 msgstr ""
 
 msgid "Fantom Faucet"
@@ -476,9 +476,6 @@ msgid "Historical Total Locked: Fetching Total"
 msgstr ""
 
 msgid "Historical Total Locked: {0} SOUL"
-msgstr ""
-
-msgid "History"
 msgstr ""
 
 msgid "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
@@ -618,6 +615,9 @@ msgstr ""
 msgid "Maximum sent"
 msgstr ""
 
+msgid "Maximum slippage tolerance allowed."
+msgstr ""
+
 msgid "Migrate"
 msgstr ""
 
@@ -634,9 +634,6 @@ msgid "Minimum Received"
 msgstr ""
 
 msgid "Minimum received"
-msgstr ""
-
-msgid "My Farms"
 msgstr ""
 
 msgid "My Orders"
@@ -693,10 +690,16 @@ msgstr ""
 msgid "Oracle"
 msgstr ""
 
+msgid "Order By"
+msgstr ""
+
 msgid "Order Expiration"
 msgstr ""
 
 msgid "Order History"
+msgstr ""
+
+msgid "Our Resources."
 msgstr ""
 
 msgid ""
@@ -755,13 +758,10 @@ msgstr ""
 msgid "Pooled {0}"
 msgstr ""
 
-msgid "Portal"
-msgstr ""
-
 msgid "Positions"
 msgstr ""
 
-msgid "Possess"
+msgid "Power to Enchant Souls."
 msgstr ""
 
 msgid "Price Impact"
@@ -827,6 +827,9 @@ msgstr ""
 msgid "Review Limit Order"
 msgstr ""
 
+msgid "Rituals with Friends."
+msgstr ""
+
 msgid "Roll it back - this feature is not yet supported on {0}."
 msgstr ""
 
@@ -848,13 +851,28 @@ msgstr ""
 msgid "SLP"
 msgstr ""
 
+msgid "SOUL PAIRS"
+msgstr ""
+
 msgid "SOUL per $1000"
+msgstr ""
+
+msgid "STABLE PAIRS"
+msgstr ""
+
+msgid "STAKING ASSETS"
 msgstr ""
 
 msgid "Scarab"
 msgstr ""
 
 msgid "Scarabs are a neat way to share your SOUL with anyone, so long as they're also willing to perform a ritual and make a small sacrfice..."
+msgstr ""
+
+msgid "Seance"
+msgstr ""
+
+msgid "Seance for Soul Power."
 msgstr ""
 
 msgid "Search Name or Address"
@@ -896,6 +914,9 @@ msgstr ""
 msgid "Share of Pool:"
 msgstr ""
 
+msgid "Slippage"
+msgstr ""
+
 msgid "Slippage tolerance"
 msgstr ""
 
@@ -905,7 +926,13 @@ msgstr ""
 msgid "SoulSwap"
 msgstr ""
 
+msgid "Souls Locked"
+msgstr ""
+
 msgid "Spanish"
+msgstr ""
+
+msgid "Spell Fee"
 msgstr ""
 
 msgid "Stack Yields with SAAVE"
@@ -928,7 +955,10 @@ msgid ""
 "one click"
 msgstr ""
 
-msgid "Summon Scarabs"
+msgid "Summon"
+msgstr ""
+
+msgid "Summon Souls with Liquidity."
 msgstr ""
 
 msgid "Summon an Empire."
@@ -1032,7 +1062,7 @@ msgstr ""
 msgid "Unknown error{0}. Try increasing your slippage tolerance."
 msgstr ""
 
-msgid "Unlock date"
+msgid "Unlock Date"
 msgstr ""
 
 msgid "Unstake"
@@ -1059,9 +1089,6 @@ msgstr ""
 msgid "Use SPELL"
 msgstr ""
 
-msgid "Use SoulPower to Enchant Soul."
-msgstr ""
-
 msgid "Used"
 msgstr ""
 
@@ -1081,9 +1108,6 @@ msgid "View on Explorer"
 msgstr ""
 
 msgid "View our Ecosystem."
-msgstr ""
-
-msgid "View our resources."
 msgstr ""
 
 msgid "Vote"
@@ -1143,7 +1167,7 @@ msgstr ""
 msgid "Your"
 msgstr ""
 
-msgid "Your Claimable SUSHI this Week"
+msgid "Your Claimable SOUL this Week"
 msgstr ""
 
 msgid "Your Liquidity"
@@ -1237,6 +1261,9 @@ msgid "{0} {sign} market rate"
 msgstr ""
 
 msgid "{0}/{1} Burned"
+msgstr ""
+
+msgid "{v}"
 msgstr ""
 
 msgid "• 10% in Seance"
