@@ -29,6 +29,11 @@ const items = (i18n: I18n) => [
     href: '/scarab/create',
   },
   {
+    name: i18n._(t`Bridge`),
+    description: i18n._(t`Come on Over...`),
+    href: '/bridge',
+  },
+  {
     name: i18n._(t`Links`),
     description: i18n._(t`Our Resources.`),
     href: 'https://link.soul.sh',
