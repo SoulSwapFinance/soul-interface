@@ -82,7 +82,7 @@ function AppBar(): JSX.Element {
                         </NavLink>
                       )}
                       { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'https://bridge.soul.sh'}>
+                        <NavLink href='https://bridge.soul.sh' target="_blank">
                           <a
                             id={`bridge-nav-link`}
                             className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
@@ -141,16 +141,6 @@ function AppBar(): JSX.Element {
                             </NavLink>
                           </>
                         )} */}
-                      {chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'https://bridge.soul.sh'}>
-                          <a
-                            id={`bridge-nav-link`}
-                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                          >
-                            {i18n._(t`Bridge`)}
-                          </a>
-                        </NavLink>
-                      )}
                       {/* {chainId && [ChainId.MAINNET, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/user'}>
                           <a
