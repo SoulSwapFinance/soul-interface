@@ -55,6 +55,7 @@ export function getNetworkLibrary(): Web3Provider {
 export const injected = new InjectedConnector({
   supportedChainIds: [
     1, // mainnet
+    56, // bsc
     250, // fantom
     4002, // fantom testnet
     // 3, // ropsten
@@ -86,7 +87,7 @@ export const bridgeInjected = new InjectedConnector({
     // 5, // goreli
     // 42, // kovan
     250, // fantom
-    // 4002, // fantom testnet
+    4002, // fantom testnet
     // 137, // matic
     // 80001, // matic testnet
     // 100, // xdai

@@ -68,7 +68,7 @@ const FarmListItem = ({ farm, ...rest }) => {
                 </div>
               </div>
               <div className="space-y-1">
-                <div className="text-xs md:text-base text-transparent bg-clip-text bg-gradient-to-r from-yellow to-yellow">
+                <div className="text-xs md:text-base text-transparent bg-clip-text bg-gradient-to-r from-purple to-purple">
                   SOUL
                 </div>
                 <div className="flex items-center justify-between	 col-span-2 space-x-4">
@@ -100,7 +100,7 @@ const FarmListItem = ({ farm, ...rest }) => {
                 </div>
               </div>
               <div className="space-y-1">
-                <div className="text-xs md:text-base text-transparent bg-clip-text bg-gradient-to-r from-yellow to-yellow">
+                <div className="text-xs md:text-base text-transparent bg-clip-text bg-gradient-to-r from-purple to-purple">
                   {farm?.pair?.token0?.symbol}/{farm?.pair?.token1?.symbol} LP Staked
                 </div>
                 <div className="flex items-center justify-between">

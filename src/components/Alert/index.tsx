@@ -25,10 +25,10 @@ const TYPE = {
     ),
   },
   warning: {
-    color: 'bg-yellow bg-opacity-25 text-high-emphesis',
+    color: 'bg-purple bg-opacity-25 text-high-emphesis',
     icon: (
       <svg
-        className="w-5 h-5 text-yellow"
+        className="w-5 h-5 text-purple"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         fill="currentColor"

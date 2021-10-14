@@ -134,7 +134,7 @@ export default function PoolFinder() {
               >
                 {i18n._(t`Pool Found!`)}
                 <Link href={`/pool`}>
-                  <a className="text-center text-yellow text-bold">{i18n._(t`Manage this pool`)}</a>
+                  <a className="text-center text-purple text-bold">{i18n._(t`Manage this pool`)}</a>
                 </Link>
               </AutoRow>
             )}
@@ -148,7 +148,7 @@ export default function PoolFinder() {
                     <AutoColumn gap="sm" justify="center">
                       {i18n._(t`You don’t have liquidity in this pool yet`)}
                       <Link href={`/exchange/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
-                        <a className="text-center text-yellow text-opacity-80 hover:text-opacity-100">
+                        <a className="text-center text-purple text-opacity-80 hover:text-opacity-100">
                           {i18n._(t`Add Liquidity`)}
                         </a>
                       </Link>

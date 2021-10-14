@@ -241,7 +241,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
           {userDefaultPoolBalance && JSBI.greaterThan(userDefaultPoolBalance.quotient, BIG_INT_ZERO) && (
             <div className="grid grid-cols-2 gap-4">
               <Button
-                color="pink"
+                color="purple"
                 variant="link"
                 onClick={() => {
                   router.push(`/exchange/add/${currencyId(currency0)}/${currencyId(currency1)}`)
@@ -250,7 +250,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
                 {i18n._(t`Add`)}
               </Button>
               <Button
-                color="pink"
+                color="purple"
                 variant="link"
                 onClick={() => {
                   router.push(`/exchange/remove/${currencyId(currency0)}/${currencyId(currency1)}`)

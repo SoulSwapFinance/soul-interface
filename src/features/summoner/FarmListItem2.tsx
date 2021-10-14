@@ -101,7 +101,7 @@ const FarmListItem2 = ({ farm, ...rest }) => {
                       {/* {token1 && <span className="flex font-bold">{farm?.pair?.token1?.symbol}</span>} */}
                       {!token1 && token0?.symbol == 'SOUL' && (
                         <div className="flex">
-                          {/* <span className="text-emphasis underline hover:text-yellow">Unstake</span> */}
+                          {/* <span className="text-emphasis underline hover:text-purple">Unstake</span> */}
                           {/* <Link href="/vaults"> */}
                           <Link href="/stake" >
                             <span className="flex flex-col justify-center font-bold hover:text-purple">STAKE SOUL</span>

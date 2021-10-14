@@ -92,7 +92,7 @@ export default function ChainModal({
         {availableChains.map((key: ChainId, i: number) => {
           if (chain.id === key) {
             return (
-              <button key={i} className="w-full col-span-1 p-px rounded bg-gradient-to-r from-yellow to-yellow">
+              <button key={i} className="w-full col-span-1 p-px rounded bg-gradient-to-r from-purple to-purple">
                 <div className="flex items-center w-full h-full p-3 space-x-3 rounded bg-dark-1000">
                   <Image
                     src={NETWORK_ICON[key]}

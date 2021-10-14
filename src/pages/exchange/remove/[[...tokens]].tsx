@@ -768,7 +768,7 @@ export default function Remove() {
                                     currencyB?.isNative ? WNATIVE[chainId].address : currencyIdB
                                   }`}
                                 >
-                                  <a className="text-baseline text-yellow opacity-80 hover:opacity-100 focus:opacity-100 whitespace-nowrap">
+                                  <a className="text-baseline text-purple opacity-80 hover:opacity-100 focus:opacity-100 whitespace-nowrap">
                                     Receive W{NATIVE[chainId].symbol}
                                   </a>
                                 </Link>
