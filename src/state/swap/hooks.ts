@@ -298,7 +298,7 @@ export function useDerivedSwapInfo(doArcher = false): {
     if (doArcher && v2Trade && swapCalls && !userTipManualOverride) {
       estimateGas()
     }
-  }, [doArcher, v2Trade, swapCalls, userTipManualOverride, library, setUserGasEstimate])
+  }, [doArcher, v2Trade, swapCalls, userTipManualOverride, library, setUserGasEstimate, account])
 
   return {
     currencies,

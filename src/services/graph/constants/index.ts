@@ -3,5 +3,6 @@ const THE_GRAPH = 'https://api.thegraph.com'
 
 export const GRAPH_HOST = {
   [ChainId.MAINNET]: THE_GRAPH,
+  [ChainId.BSC]: THE_GRAPH,
   [ChainId.FANTOM]: THE_GRAPH
 }

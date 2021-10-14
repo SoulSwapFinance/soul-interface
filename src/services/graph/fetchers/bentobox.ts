@@ -7,6 +7,7 @@ import { request } from 'graphql-request'
 
 export const BENTOBOX = {
   [ChainId.MAINNET]: 'sushiswap/bentobox',
+  [ChainId.BSC]: 'sushiswap/bsc-bentobox',
   [ChainId.FANTOM]: 'sushiswap/fantom-bentobox',
   // [ChainId.XDAI]: 'sushiswap/xdai-bentobox',
   // [ChainId.MATIC]: 'sushiswap/matic-bentobox',

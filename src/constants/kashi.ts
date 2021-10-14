@@ -67,6 +67,7 @@ export const COFFIN_BOX_ADDRESS: {
   [chainId in ChainId]: string
 } = {
   [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
   [ChainId.FANTOM]: '',
   [ChainId.FANTOM_TESTNET]: ''
 }
@@ -75,6 +76,7 @@ export const UNDERWORLD_ADDRESS: {
   [chainId in ChainId]: string
 } = {
   [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
   [ChainId.FANTOM]: '',
   [ChainId.FANTOM_TESTNET]: '',
 }
@@ -85,6 +87,7 @@ export const SOULSWAP_SWAPPER_ADDRESS: {
   [chainId in ChainId]: string
 } = {
   [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
   [ChainId.FANTOM]: '',
   [ChainId.FANTOM_TESTNET]: '',
 }
@@ -93,12 +96,14 @@ export const SOULSWAP_MULTISWAPPER_ADDRESS: {
   [chainId in ChainId]: string
 } = {
   [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
   [ChainId.FANTOM]: '',
   [ChainId.FANTOM_TESTNET]: '',
 }
 
 export const SOULSWAP_MULTI_EXACT_SWAPPER_ADDRESS = {
   [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
   [ChainId.FANTOM]: '',
   [ChainId.FANTOM_TESTNET]: '',
 }
@@ -113,6 +118,7 @@ export const CHAINLINK_ORACLE_ADDRESS = '0x00632CFe43d8F9f8E6cD0d39Ffa3D4fa7ec73
 
 export const SOUL_GUIDE_ADDRESS = {
   [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
   [ChainId.FANTOM]: '',
   [ChainId.FANTOM_TESTNET]: '0x5A6B3Ce2736E9B731Fba73262884016b50c39184',
 }

@@ -44,8 +44,8 @@ msgstr "A portion of each trade (0.05%) goes to Spell holders as a protocol ince
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
 msgstr "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
 
-msgid "A portion of each trade (0.25%) goes to the Soul Treasury."
-msgstr "A portion of each trade (0.25%) goes to the Soul Treasury."
+msgid "A portion of each trade (0.25%) is charged as a fee to incentivize pooling."
+msgstr "A portion of each trade (0.25%) is charged as a fee to incentivize pooling."
 
 msgid "ALL PAIRS"
 msgstr "ALL PAIRS"
@@ -978,6 +978,9 @@ msgstr ""
 
 msgid "Summon"
 msgstr "Summon"
+
+msgid "Summon Scarabs"
+msgstr "Summon Scarabs"
 
 msgid "Summon Souls with Liquidity."
 msgstr "Summon Souls with Liquidity."
