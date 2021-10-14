@@ -1,20 +1,45 @@
-import Container from '../../components/Container'
+// import Container from '../../components/Container'
 import Head from 'next/head'
-import BridgeContainer from '../../features/bridge/BridgeContainer'
+// import BridgeContainer from '../../features/bridge/BridgeContainer'
 
-function Bridge() {
-  return (
+// function Bridge() {
+//   return (
+//     <>
+//       <Container id="bridge-page">
+//         <Head>
+//           <title>Bridge | Soul</title>
+//           <meta key="description" name="description" content="bridge tokens" />
+//         </Head>
+
+//         <BridgeContainer />
+//       </Container>
+//     </>
+//   )
+// }
+
+// export default Bridge
+
+import Container from "../../components/Container";
+
+const Bridge = () => {
+	return (
+		// <Page title={"Bridge"} networkSensitive={false}> 
     <>
-      <Container id="bridge-page">
+          <Container id="bridge-page">
         <Head>
-          <title>Bridge | Soul</title>
-          <meta key="description" name="description" content="bridge tokens" />
-        </Head>
+           <title>Bridge | Soul</title>
+           <meta key="description" name="description" content="bridge tokens" />
+         </Head>
+    <iframe 
+        frameBorder={"none"}
+    		title={"Bridge"}
+    		src="https://bridge.soul.sh"
+    		height={"1020px"} 
+    		width={"100%"} 
+    />
+       </Container>
+       </>
+);
+};
 
-        <BridgeContainer />
-      </Container>
-    </>
-  )
-}
-
-export default Bridge
+export default Bridge;

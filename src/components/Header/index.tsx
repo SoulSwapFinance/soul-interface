@@ -131,7 +131,7 @@ function AppBar(): JSX.Element {
                             </NavLink>
                           </>
                         )} */}
-                      {chainId && [ChainId.MAINNET].includes(chainId) && (
+                      {chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/bridge'}>
                           <a
                             id={`bridge-nav-link`}
