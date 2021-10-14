@@ -31,7 +31,7 @@ const items = (i18n: I18n) => [
   {
     name: i18n._(t`Bridge`),
     description: i18n._(t`Come on Over...`),
-    href: '/bridge',
+    href: 'https://bridge.soul.sh',
   },
   {
     name: i18n._(t`Links`),

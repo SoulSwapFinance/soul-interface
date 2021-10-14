@@ -34,7 +34,7 @@ const Bridge = () => {
         frameBorder={"none"}
     		title={"Bridge"}
     		src="https://bridge.soul.sh"
-    		height={"1020px"} 
+    		height={"720px"} 
     		width={"100%"} 
     />
        </Container>
