@@ -502,7 +502,13 @@ export default function SoulStake() {
                       <div className="flex items-center text-sm text-secondary md:text-base">
                         <div className={input ? 'hidden md:flex md:items-center' : 'flex items-center'}>
                           <p>{i18n._(t`Balance`)}:&nbsp;</p>
-                          <p className="text-base font-bold">{formattedBalance}</p>
+                          <p className="text-base font-bold">{
+                            Number(formattedBalance)
+                              .toFixed(2)
+                              .toString()
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                              }
+                          </p>
                         </div>
                         <button
                           className="px-2 py-1 ml-3 text-xs font-bold border pointer-events-auto focus:outline-none focus:ring hover:bg-opacity-40 md:bg-purple md:bg-opacity-30 border-secondary md:border-purple rounded-2xl md:py-1 md:px-3 md:ml-4 md:text-sm md:font-normal md:text-purple"
@@ -568,9 +574,9 @@ export default function SoulStake() {
                 <div className="flex flex-wrap">
                   
                   <div className="flex flex-col flex-grow md:mb-6">
-                    <p className="mb-3 text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
-                      {autoStaking ? 'Shares' : i18n._(t`Balance`)}
-                    </p>
+                    {/* <p className="mb-3 text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
+                      {autoStaking ? 'Shares' : i18n._(t`Balances`)}
+                    </p> */}
                     <div className="flex items-center space-x-4">
                       <Image
                         className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
@@ -593,43 +599,12 @@ export default function SoulStake() {
                       </div>
                     </div>
                   </div>
-
-                  <div className="flex flex-col flex-grow md:mb-6">
-                    <div className="flex mb-3 ml-8 flex-nowrap md:ml-0">
-                      <p className="text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
-                        {i18n._(t`Staked`)}
-                      </p>
-                    </div>
-                    <div className="flex items-center ml-8 space-x-4 md:ml-0">
-                      <Image
-                        className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
-                        src="/images/tokens/soul.jpg"
-                        alt="SOUL"
-                        width={64}
-                        height={64}
-                      />
-                      <div className="flex flex-col justify-center">
-                        <p className="text-sm font-bold md:text-lg text-high-emphesis">
-                          {Number(stakedBal) === 0
-                            ? '0.000'
-                            : Number(stakedBal) < 0.001
-                            ? '<0.001'
-                            : Number(stakedBal)
-                                .toFixed(3)
-                                .toString()
-                                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                        </p>
-                        <p className="text-sm md:text-base text-primary">SOUL</p>
-                      </div>
-                    </div>
-                  </div>
-
                   <div className="flex flex-col flex-grow">
-                    <div className="flex mb-3 ml-8 flex-nowrap md:ml-0">
+                    {/* <div className="flex mb-3 ml-8 flex-nowrap md:ml-0">
                       <p className="text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
                         {i18n._(t`Unstaked`)}
-                      </p>
-                    </div>
+                      </p> 
+                    </div> */}
                     <div className="flex items-center ml-8 space-x-4 md:ml-0">
                       <Image
                         className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
@@ -652,7 +627,38 @@ export default function SoulStake() {
                       </div>
                     </div>
                   </div>
+
+                  <div className="flex flex-col flex-grow md:mb-6">
+                    <div className="flex mb-3 ml-8 flex-nowrap md:ml-0">
+                      {/* <p className="text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
+                        {i18n._(t`Staked`)}
+                      </p> */}
+                    </div>
+                    <div className="flex items-center ml-8 space-x-4 md:ml-0">
+                      <Image
+                        className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
+                        src="/images/tokens/seance.jpg"
+                        alt="SEANCE"
+                        width={64}
+                        height={64}
+                        />
+                      <div className="flex flex-col justify-center">
+                        <p className="text-sm font-bold md:text-lg text-high-emphesis">
+                          {Number(stakedBal) === 0
+                            ? '0.000'
+                            : Number(stakedBal) < 0.001
+                            ? '<0.001'
+                            : Number(stakedBal)
+                            .toFixed(3)
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                        </p>
+                        <p className="text-sm md:text-base text-primary">OWED</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
                 <Button
                   className={`${buttonStyle} text-high-emphesis bg-purple opacity-100 hover:bg-opacity-80`}
                   onClick={() => harvest()}
