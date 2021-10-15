@@ -81,26 +81,6 @@ function AppBar(): JSX.Element {
                           </a>
                         </NavLink>
                       )}
-                      { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href='https://bridge.soul.sh' target="_blank">
-                          <a
-                            id={`bridge-nav-link`}
-                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                          >
-                            {i18n._(t`Bridge`)}
-                          </a>
-                        </NavLink>
-                      )}
-                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'/summoner'}>
-                        <a
-                          id={`farm-nav-link`}
-                          className="p-2 text-base text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                        >
-                          {i18n._(t`Summon`)}
-                        </a>
-                        </NavLink>
-                      )} */}
                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                       <NavLink href={'/stake'}>
                         <a
@@ -121,6 +101,25 @@ function AppBar(): JSX.Element {
                         </a>
                         </NavLink>
                       )}
+                      { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href='https://bridge.soul.sh' target="_blank">
+                          <a
+                            id={`bridge-nav-link`}
+                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                          >
+                            {i18n._(t`Bridge`)}
+                          </a>
+                        </NavLink>
+                      )}
+                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href={'/summoner'}>
+                        <a
+                          id={`farm-nav-link`}
+                          className="p-2 text-base text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                        >
+                          {i18n._(t`Summon`)}
+                        </a>
+                        </NavLink>
                       {/* {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                           <>
                             <NavLink href={'/lend'}>
