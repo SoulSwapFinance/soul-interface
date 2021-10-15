@@ -399,13 +399,9 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                   </Text>
                 ) : (
                   <Text padding="0" fontSize="1.5rem" color='#F36FFE'>
-                    {
-                      pending
-                        .toFixed(3)
-                        .toString()
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                    </Text>
-                    )}
+                    {pending}
+                  </Text>
+                )}
               </FarmItemBox>
 
               <HideOnMobile desktopOnly={true}>
