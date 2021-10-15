@@ -104,7 +104,10 @@ export default function SoulStake() {
   } = useSoulVault()
   const { enter, leave, harvest } = useSoulStakeManual()
 
+  const { userInfo } = useSoulSummoner(0, '', '', '')
+
   // ** Require Update: Need to make dynamic by fetching selected chain **
+  const [stakedBal, setStakedBal] = useState('')
   const soulBalance = useTokenBalance(account ?? undefined, SOUL[chainId])
   const seanceBalance = useTokenBalance(account ?? undefined, SEANCE[chainId])
 
@@ -128,11 +131,25 @@ export default function SoulStake() {
   const parsedAmount = usingBalance ? balance : tryParseAmount(input, balance?.currency)
 
   // Approve masterchef to move funds with `transferFrom`
-  const [approvalStateChef, approveMasterchef] = useApproveCallback(
-    parsedAmount,
-    SOUL_SUMMONER_ADDRESS[ChainId.FANTOM]
-  )
+  const [approvalStateChef, approveMasterchef] = useApproveCallback(parsedAmount, SOUL_SUMMONER_ADDRESS[ChainId.FANTOM])
   const [approvalStateVault, approveVault] = useApproveCallback(parsedAmount, SOUL_VAULT_ADDRESS[chainId])
+
+  /**
+   * Gets the lpToken balance of the user for each pool
+   */
+  const fetchBals = async () => {
+    if (!account) {
+      // alert('connect wallet')
+    } else {
+      try {
+        const result1 = await userInfo(0, account)
+        const staked = ethers.utils.formatUnits(result1?.[0])
+        setStakedBal(staked.toString())
+      } catch (err) {
+        console.warn(err)
+      }
+    }
+  }
 
   // ---------------------
   //      SOUL VAULT
@@ -267,6 +284,11 @@ export default function SoulStake() {
 
   const [pending, setPending] = useState('')
 
+  // Runs once (on mount)
+  useEffect(() => {
+    fetchBals()
+  })
+
   // Runs on render + reruns every second
   useEffect(() => {
     if (account) {
@@ -319,22 +341,22 @@ export default function SoulStake() {
         />
       </Head>
       <DoubleGlowShadowV2 maxWidth={false} opacity={'0.3'}>
-      <div className="flex flex-col w-full min-h-full">
-        <div className="flex justify-center mb-6">
-          <div className="flex flex-col w-full max-w-xl mt-auto mb-2">
-            <div className="flex max-w-lg">
-              <div className="self-end mb-3 text-lg font-bold md:text-2xl text-high-emphesis md:mb-7">
-                {i18n._(t`Maximize yield by staking SOUL for SEANCE`)}
+        <div className="flex flex-col w-full min-h-full">
+          <div className="flex justify-center mb-6">
+            <div className="flex flex-col w-full max-w-xl mt-auto mb-2">
+              <div className="flex max-w-lg">
+                <div className="self-end mb-3 text-lg font-bold md:text-2xl text-high-emphesis md:mb-7">
+                  {i18n._(t`Maximize yield by staking SOUL for SEANCE`)}
+                </div>
               </div>
-            </div>
-            <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
-              {i18n._(t`When your SOUL is staked into the Circle, you recieve SEANCE in return for voting rights and a fully composable 
+              <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
+                {i18n._(t`When your SOUL is staked into the Circle, you recieve SEANCE in return for voting rights and a fully composable 
               token that can interact with other protocols. Your SEANCE is continuously compounding, when you unstake you will receive all 
               the originally deposited SOUL, your SOUL harvest rewards, and (soon) fee share.`)}
+              </div>
             </div>
-          </div>
-          {/* SIDE BALANCE BOARD */}
-          {/* <div className="w-full max-w-xl mx-auto md:mx-0 md:ml-6 md:block md:w-72">
+            {/* SIDE BALANCE BOARD */}
+            {/* <div className="w-full max-w-xl mx-auto md:mx-0 md:ml-6 md:block md:w-72">
             <div className="flex flex-col w-full px-4 pt-6 pb-5 rounded bg-dark-900 md:px-8 md:pt-7 md:pb-9">
               <div className="flex flex-wrap">
                 {/* SOUL BOUNTY *}
@@ -362,14 +384,14 @@ export default function SoulStake() {
               </div> 
             </div>
           </div> */}
-        </div>
-        <div className="flex flex-col justify-center md:flex-row">
-          <div className="flex flex-col w-full max-w-xl mx-auto mb-4 md:m-0">
-            <div>
-              <TransactionFailedModal isOpen={modalOpen} onDismiss={() => setModalOpen(false)} />
-              <div className="w-full max-w-xl px-3 pt-2 pb-6 rounded bg-dark-900 md:pb-9 md:pt-4 md:px-8">
-                {/* AUTOMATIC OR MANUAL STAKING */}
-                {/* <div className="flex w-full rounded h-14 bg-dark-800">
+          </div>
+          <div className="flex flex-col justify-center md:flex-row">
+            <div className="flex flex-col w-full max-w-xl mx-auto mb-4 md:m-0">
+              <div>
+                <TransactionFailedModal isOpen={modalOpen} onDismiss={() => setModalOpen(false)} />
+                <div className="w-full max-w-xl px-3 pt-2 pb-6 rounded bg-dark-900 md:pb-9 md:pt-4 md:px-8">
+                  {/* AUTOMATIC OR MANUAL STAKING */}
+                  {/* <div className="flex w-full rounded h-14 bg-dark-800">
                   <div
                     className="h-full w-6/12 p-0.5"
                     onClick={() => {
@@ -395,211 +417,256 @@ export default function SoulStake() {
                 </div>
 
                 <br /> */}
-                {/* STAKING OR UNSTAKING */}
-                <div className="flex w-full rounded h-14 bg-dark-800">
-                  <div
-                    className="h-full w-6/12 p-0.5"
-                    onClick={() => {
-                      setActiveTab(0)
-                      handleInput('')
-                    }}
-                  >
-                    <div className={activeTab === 0 ? activeTabStyle : inactiveTabStyle}>
-                      <p>{i18n._(t`Stake`)}</p>
-                    </div>
-                  </div>
-                  <div
-                    className="h-full w-6/12 p-0.5"
-                    onClick={() => {
-                      setActiveTab(1)
-                      handleInput('')
-                    }}
-                  >
-                    <div className={activeTab === 1 ? activeTabStyle : inactiveTabStyle}>
-                      <p>{i18n._(t`Unstake`)}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between w-full mt-6">
-                  <p className="font-bold text-large md:text-2xl text-high-emphesis">
-                    {autoStaking
-                      ? activeTab === 0
-                        ? i18n._(t`Stake Auto Reinvesting SOUL`)
-                        : i18n._(t`Unstake Auto Reinvesting SOUL`)
-                      : activeTab === 0
-                      ? i18n._(t`Stake SOUL`)
-                      : i18n._(t`Unstake SOUL`)}
-                  </p>
-                </div>
-                <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
-                  {autoStaking
-                    ? 'When someone snatches the SOUL bounty, your pending SOUL gets re-invested automatically!'
-                    : 'You will need to manually claim and deposit your pending SOUL to re-invest into your stake.'}
-                </div>
-                <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
-                  {autoStaking ? 'When withdrawing before 72hrs has passed, you will be charged 1% of your stake!' : ''}
-                </div>
-
-                <StyledNumericalInput
-                  value={input}
-                  onUserInput={handleInput}
-                  className={`w-full h-14 px-3 md:px-5 mt-5 rounded bg-dark-800 text-sm md:text-lg font-bold text-dark-800 whitespace-nowrap${
-                    inputError ? ' pl-9 md:pl-12' : ''
-                  }`}
-                  placeholder=" "
-                />
-
-                {/* input overlay: */}
-                <div className="relative w-full h-0 pointer-events-none bottom-14">
-                  <div
-                    className={`flex justify-between items-center h-14 rounded px-3 md:px-5 ${
-                      inputError ? ' border border-red' : ''
-                    }`}
-                  >
-                    <div className="flex space-x-2 ">
-                      {inputError && (
-                        <Image
-                          className="mr-2 max-w-4 md:max-w-5"
-                          src="/error-triangle.svg"
-                          alt="error"
-                          width="20px"
-                          height="20px"
-                        />
-                      )}
-                      <p
-                        className={`text-sm md:text-lg font-bold whitespace-nowrap ${
-                          input ? 'text-high-emphesis' : 'text-secondary'
-                        }`}
-                      >
-                        {`${input ? input : '0'} ${activeTab === 0 ? 'SOUL' : 'SEANCE'}`}
-                      </p>
-                    </div>
-                    <div className="flex items-center text-sm text-secondary md:text-base">
-                      <div className={input ? 'hidden md:flex md:items-center' : 'flex items-center'}>
-                        <p>{i18n._(t`Balance`)}:&nbsp;</p>
-                        <p className="text-base font-bold">{formattedBalance}</p>
+                  {/* STAKING OR UNSTAKING */}
+                  <div className="flex w-full rounded h-14 bg-dark-800">
+                    <div
+                      className="h-full w-6/12 p-0.5"
+                      onClick={() => {
+                        setActiveTab(0)
+                        handleInput('')
+                      }}
+                    >
+                      <div className={activeTab === 0 ? activeTabStyle : inactiveTabStyle}>
+                        <p>{i18n._(t`Stake`)}</p>
                       </div>
-                      <button
-                        className="px-2 py-1 ml-3 text-xs font-bold border pointer-events-auto focus:outline-none focus:ring hover:bg-opacity-40 md:bg-purple md:bg-opacity-30 border-secondary md:border-purple rounded-2xl md:py-1 md:px-3 md:ml-4 md:text-sm md:font-normal md:text-purple"
-                        onClick={handleClickMax}
-                      >
-                        {i18n._(t`MAX`)}
-                      </button>
+                    </div>
+                    <div
+                      className="h-full w-6/12 p-0.5"
+                      onClick={() => {
+                        setActiveTab(1)
+                        handleInput('')
+                      }}
+                    >
+                      <div className={activeTab === 1 ? activeTabStyle : inactiveTabStyle}>
+                        <p>{i18n._(t`Unstake`)}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                {(autoStaking
-                  ? approvalStateVault === ApprovalState.NOT_APPROVED || approvalStateVault === ApprovalState.PENDING
-                  : approvalStateChef === ApprovalState.NOT_APPROVED || approvalStateChef === ApprovalState.PENDING) &&
-                activeTab === 0 ? (
-                  <Button
-                    className={`${buttonStyle} text-high-emphesis bg-purple hover:bg-opacity-90`}
-                    disabled={
-                      autoStaking
-                        ? approvalStateVault === ApprovalState.PENDING
-                        : approvalStateChef === ApprovalState.PENDING
-                    }
-                    onClick={autoStaking ? approveVault : approveMasterchef}
-                  >
-                    {autoStaking ? (
-                      approvalStateVault === ApprovalState.PENDING
-                    ) : approvalStateChef === ApprovalState.PENDING ? (
-                      <Dots>{i18n._(t`Approving`)} </Dots>
-                    ) : (
-                      i18n._(t`Approve`)
-                    )}
-                  </Button>
-                ) : (
-                  <button
-                    className={
-                      buttonDisabled
-                        ? buttonStyleDisabled
-                        : !walletConnected
-                        ? buttonStyleConnectWallet
-                        : insufficientFunds
-                        ? buttonStyleInsufficientFunds
-                        : buttonStyleEnabled
-                    }
-                    onClick={handleClickButton}
-                    disabled={buttonDisabled || inputError}
-                  >
-                    {!walletConnected
-                      ? i18n._(t`Connect Wallet`)
-                      : !input
-                      ? i18n._(t`Enter Amount`)
-                      : insufficientFunds
-                      ? i18n._(t`Insufficient Balance`)
-                      : activeTab === 0
-                      ? i18n._(t`Confirm Staking`)
-                      : i18n._(t`Confirm Withdrawal`)}
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-          {/* SIDE BALANCE BOARD */}
-          <div className="w-full max-w-xl mx-auto md:mx-0 md:ml-6 md:block md:w-72">
-            <div className="flex flex-col w-full px-4 pt-6 pb-5 rounded bg-dark-900 md:px-8 md:pt-7 md:pb-9">
-              <div className="flex flex-wrap">
-                <div className="flex flex-col flex-grow md:mb-14">
-                  <p className="mb-3 text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
-                    {autoStaking ? 'Shares' : i18n._(t`Balance`)}
-                  </p>
-                  <div className="flex items-center space-x-4">
-                    <Image
-                      className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
-                      src="/images/tokens/seance.jpg"
-                      alt="SEANCE"
-                      width={64}
-                      height={64}
-                    />
-                    <div className="flex 4lex-col justify-center">
-                      <p className="text-sm font-bold md:text-lg text-high-emphesis">
-                      {seanceBalance ? seanceBalance.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                        //.toSignificant(5) 
-                        : '-'}
-                      </p>
-                      <p className="text-sm md:text-base text-primary">SEANCE</p>
-                    </div>
-                  </div>
-                </div>
 
-                <div className="flex flex-col flex-grow">
-                  <div className="flex mb-3 ml-8 flex-nowrap md:ml-0">
-                    <p className="text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
-                      {i18n._(t`Unstaked`)}
+                  <div className="flex items-center justify-between w-full mt-6">
+                    <p className="font-bold text-large md:text-2xl text-high-emphesis">
+                      {autoStaking
+                        ? activeTab === 0
+                          ? i18n._(t`Stake Auto Reinvesting SOUL`)
+                          : i18n._(t`Unstake Auto Reinvesting SOUL`)
+                        : activeTab === 0
+                        ? i18n._(t`Stake SOUL`)
+                        : i18n._(t`Unstake SOUL`)}
                     </p>
                   </div>
-                  <div className="flex items-center ml-8 space-x-4 md:ml-0">
-                    <Image
-                      className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
-                      src="/images/tokens/soul.jpg"
-                      alt="SOUL"
-                      width={64}
-                      height={64}
-                    />
-                    <div className="flex flex-col justify-center">
-                      <p className="text-sm font-bold md:text-lg text-high-emphesis">
-                        {soulBalance ? soulBalance.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                        //.toSignificant(5) 
-                        : '-'}
+                  <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
+                    {autoStaking
+                      ? 'When someone snatches the SOUL bounty, your pending SOUL gets re-invested automatically!'
+                      : 'You will need to manually claim and deposit your pending SOUL to re-invest into your stake.'}
+                  </div>
+                  <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
+                    {autoStaking
+                      ? 'When withdrawing before 72hrs has passed, you will be charged 1% of your stake!'
+                      : ''}
+                  </div>
+
+                  <StyledNumericalInput
+                    value={input}
+                    onUserInput={handleInput}
+                    className={`w-full h-14 px-3 md:px-5 mt-5 rounded bg-dark-800 text-sm md:text-lg font-bold text-dark-800 whitespace-nowrap${
+                      inputError ? ' pl-9 md:pl-12' : ''
+                    }`}
+                    placeholder=" "
+                  />
+
+                  {/* input overlay: */}
+                  <div className="relative w-full h-0 pointer-events-none bottom-14">
+                    <div
+                      className={`flex justify-between items-center h-14 rounded px-3 md:px-5 ${
+                        inputError ? ' border border-red' : ''
+                      }`}
+                    >
+                      <div className="flex space-x-2 ">
+                        {inputError && (
+                          <Image
+                            className="mr-2 max-w-4 md:max-w-5"
+                            src="/error-triangle.svg"
+                            alt="error"
+                            width="20px"
+                            height="20px"
+                          />
+                        )}
+                        <p
+                          className={`text-sm md:text-lg font-bold whitespace-nowrap ${
+                            input ? 'text-high-emphesis' : 'text-secondary'
+                          }`}
+                        >
+                          {`${input ? input : '0'} ${activeTab === 0 ? 'SOUL' : 'SEANCE'}`}
+                        </p>
+                      </div>
+                      <div className="flex items-center text-sm text-secondary md:text-base">
+                        <div className={input ? 'hidden md:flex md:items-center' : 'flex items-center'}>
+                          <p>{i18n._(t`Balance`)}:&nbsp;</p>
+                          <p className="text-base font-bold">{formattedBalance}</p>
+                        </div>
+                        <button
+                          className="px-2 py-1 ml-3 text-xs font-bold border pointer-events-auto focus:outline-none focus:ring hover:bg-opacity-40 md:bg-purple md:bg-opacity-30 border-secondary md:border-purple rounded-2xl md:py-1 md:px-3 md:ml-4 md:text-sm md:font-normal md:text-purple"
+                          onClick={handleClickMax}
+                        >
+                          {i18n._(t`MAX`)}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  {(autoStaking
+                    ? approvalStateVault === ApprovalState.NOT_APPROVED || approvalStateVault === ApprovalState.PENDING
+                    : approvalStateChef === ApprovalState.NOT_APPROVED ||
+                      approvalStateChef === ApprovalState.PENDING) && activeTab === 0 ? (
+                    <Button
+                      className={`${buttonStyle} text-high-emphesis bg-purple hover:bg-opacity-90`}
+                      disabled={
+                        autoStaking
+                          ? approvalStateVault === ApprovalState.PENDING
+                          : approvalStateChef === ApprovalState.PENDING
+                      }
+                      onClick={autoStaking ? approveVault : approveMasterchef}
+                    >
+                      {autoStaking ? (
+                        approvalStateVault === ApprovalState.PENDING
+                      ) : approvalStateChef === ApprovalState.PENDING ? (
+                        <Dots>{i18n._(t`Approving`)} </Dots>
+                      ) : (
+                        i18n._(t`Approve`)
+                      )}
+                    </Button>
+                  ) : (
+                    <button
+                      className={
+                        buttonDisabled
+                          ? buttonStyleDisabled
+                          : !walletConnected
+                          ? buttonStyleConnectWallet
+                          : insufficientFunds
+                          ? buttonStyleInsufficientFunds
+                          : buttonStyleEnabled
+                      }
+                      onClick={handleClickButton}
+                      disabled={buttonDisabled || inputError}
+                    >
+                      {!walletConnected
+                        ? i18n._(t`Connect Wallet`)
+                        : !input
+                        ? i18n._(t`Enter Amount`)
+                        : insufficientFunds
+                        ? i18n._(t`Insufficient Balance`)
+                        : activeTab === 0
+                        ? i18n._(t`Confirm Staking`)
+                        : i18n._(t`Confirm Withdrawal`)}
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+            {/* SIDE BALANCE BOARD */}
+            <div className="w-full max-w-xl mx-auto md:mx-0 md:ml-6 md:block md:w-72">
+              <div className="flex flex-col w-full px-4 pt-6 pb-5 rounded bg-dark-900 md:px-8 md:pt-7 md:pb-9">
+                <div className="flex flex-wrap">
+                  
+                  <div className="flex flex-col flex-grow md:mb-6">
+                    <p className="mb-3 text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
+                      {autoStaking ? 'Shares' : i18n._(t`Balance`)}
+                    </p>
+                    <div className="flex items-center space-x-4">
+                      <Image
+                        className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
+                        src="/images/tokens/seance.jpg"
+                        alt="SEANCE"
+                        width={64}
+                        height={64}
+                      />
+                      <div className="flex flex-col justify-center">
+                        <p className="text-sm font-bold md:text-lg text-high-emphesis">
+                          {seanceBalance
+                            ? seanceBalance
+                                .toFixed(0)
+                                .toString()
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                            : //.toSignificant(5)
+                              '-'}
+                        </p>
+                        <p className="text-sm md:text-base text-primary">SEANCE</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col flex-grow md:mb-6">
+                    <div className="flex mb-3 ml-8 flex-nowrap md:ml-0">
+                      <p className="text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
+                        {i18n._(t`Staked`)}
                       </p>
-                      <p className="text-sm md:text-base text-primary">SOUL</p>
+                    </div>
+                    <div className="flex items-center ml-8 space-x-4 md:ml-0">
+                      <Image
+                        className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
+                        src="/images/tokens/soul.jpg"
+                        alt="SOUL"
+                        width={64}
+                        height={64}
+                      />
+                      <div className="flex flex-col justify-center">
+                        <p className="text-sm font-bold md:text-lg text-high-emphesis">
+                          {Number(stakedBal) === 0
+                            ? '0.000'
+                            : Number(stakedBal) < 0.001
+                            ? '<0.001'
+                            : Number(stakedBal)
+                                .toFixed(3)
+                                .toString()
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                        </p>
+                        <p className="text-sm md:text-base text-primary">SOUL</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col flex-grow">
+                    <div className="flex mb-3 ml-8 flex-nowrap md:ml-0">
+                      <p className="text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
+                        {i18n._(t`Unstaked`)}
+                      </p>
+                    </div>
+                    <div className="flex items-center ml-8 space-x-4 md:ml-0">
+                      <Image
+                        className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
+                        src="/images/tokens/soul.jpg"
+                        alt="SOUL"
+                        width={64}
+                        height={64}
+                      />
+                      <div className="flex flex-col justify-center">
+                        <p className="text-sm font-bold md:text-lg text-high-emphesis">
+                          {soulBalance
+                            ? soulBalance
+                                .toFixed(0)
+                                .toString()
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                            : //.toSignificant(5)
+                              '-'}
+                        </p>
+                        <p className="text-sm md:text-base text-primary">SOUL</p>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <Button
+                  className={`${buttonStyle} text-high-emphesis bg-purple opacity-100 hover:bg-opacity-80`}
+                  onClick={() => harvest()}
+                >
+                  Harvest{' '}
+                  {Number(pending)
+                    .toFixed(2)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                </Button>
               </div>
-              <Button
-                className={`${buttonStyle} text-high-emphesis bg-purple opacity-100 hover:bg-opacity-80`}
-                onClick={() => harvest()}
-              >
-                Harvest {Number(pending).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-              </Button>
             </div>
           </div>
         </div>
-      </div>
       </DoubleGlowShadowV2>
     </div>
   )
