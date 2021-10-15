@@ -165,8 +165,8 @@ export const FarmPids = [
   { // 600
     pid: 14,
     token1: 'FTM',
-    token2: 'USDT',
-    lpSymbol: 'FTM-USDT',
+    token2: 'fUSDT',
+    lpSymbol: 'FTM-fUSDT',
     lpAddresses: {
       4002: '',
       250: '0xdC24814AD654986928F8E4aec48D37fa30bBC5BB',
@@ -189,14 +189,14 @@ export const FarmPids = [
   { // 200
     pid: 16,
     token1: 'DAI',
-    token2: 'gfUSDT',
-    lpSymbol: 'DAI-gfUSDT',
+    token2: 'gFUSDT',
+    lpSymbol: 'DAI-gFUSDT',
     lpAddresses: {
       4002: '',
       250: '0xe637D90A993EDBD75AC09E9fcB16313D193B9451',
       },
       token1Address: tokens.DAI,
-      token2Address: tokens.gfUSDT,
+      token2Address: tokens.gFUSDT,
   },
   { // 400
     pid: 17,

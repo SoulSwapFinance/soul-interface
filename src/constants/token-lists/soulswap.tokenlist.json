@@ -289,7 +289,7 @@
       {
         "name": "Geist fUSDT",
         "address": "0x940F41F0ec9ba1A34CF001cc03347ac092F5F6B5",
-        "symbol": "gfUSDT",
+        "symbol": "gFUSDT",
         "decimals": 6,
         "chainId": 250,
         "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x940F41F0ec9ba1A34CF001cc03347ac092F5F6B5/logo.png"
