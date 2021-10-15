@@ -21,7 +21,7 @@ const items = (i18n: I18n) => [
   {
     name: i18n._(t`Seance`),
     description: i18n._(t`Seance for Soul Power.`),
-    href: '/stake',
+    href: '/seance',
   },
   {
     name: i18n._(t`Scarab`),

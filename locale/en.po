@@ -241,6 +241,9 @@ msgstr "Coffinboxes provides extra yield on deposits with flash lending, strateg
 msgid "Collateral"
 msgstr "Collateral"
 
+msgid "Come on Over..."
+msgstr "Come on Over..."
+
 msgid "Community Approval"
 msgstr "Community Approval"
 
@@ -416,9 +419,6 @@ msgstr "FANTOM PAIRS"
 msgid "Fantom Faucet"
 msgstr "Fantom Faucet"
 
-msgid "Farm"
-msgstr "Farm"
-
 msgid "Fees"
 msgstr "Fees"
 
@@ -430,19 +430,6 @@ msgstr "Find Pool"
 
 msgid "Follow on Twitter."
 msgstr "Follow on Twitter."
-
-msgid ""
-"For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL\n"
-"proportional to your share of the SEANCE. When your SOUL is staked into the Circle, you recieve\n"
-"SEANCE in return for voting rights and a fully composable token that can interact with other protocols.\n"
-"Your SEANCE is continuously compounding, when you unstake you will receive all the originally deposited\n"
-"SOUL and any additional from fees."
-msgstr ""
-"For every swap on the exchange on every chain, 0.05% of the swap fees are distributed as SOUL\n"
-"proportional to your share of the SEANCE. When your SOUL is staked into the Circle, you recieve\n"
-"SEANCE in return for voting rights and a fully composable token that can interact with other protocols.\n"
-"Your SEANCE is continuously compounding, when you unstake you will receive all the originally deposited\n"
-"SOUL and any additional from fees."
 
 msgid "Forum"
 msgstr "Forum"
@@ -963,8 +950,8 @@ msgstr "Stake"
 msgid "Stake Auto Reinvesting SOUL"
 msgstr "Stake Auto Reinvesting SOUL"
 
-msgid "Stake Manual SOUL"
-msgstr "Stake Manual SOUL"
+msgid "Stake SOUL"
+msgstr "Stake SOUL"
 
 msgid "Stake SOUL for SPELL"
 msgstr "Stake SOUL for SPELL"
@@ -1097,8 +1084,8 @@ msgstr "Unstake"
 msgid "Unstake Auto Reinvesting SOUL"
 msgstr "Unstake Auto Reinvesting SOUL"
 
-msgid "Unstake Manual SOUL"
-msgstr "Unstake Manual SOUL"
+msgid "Unstake SOUL"
+msgstr "Unstake SOUL"
 
 msgid "Unstaked"
 msgstr "Unstaked"
@@ -1147,6 +1134,15 @@ msgstr "Wallet"
 
 msgid "Wallet Balance"
 msgstr "Wallet Balance"
+
+msgid ""
+"When your SOUL is staked into the Circle, you recieve SEANCE in return for voting rights and a fully composable \n"
+"token that can interact with other protocols. Your SEANCE is continuously compounding, when you unstake you will receive all \n"
+"the originally deposited SOUL, your SOUL harvest rewards, and (soon) fee share."
+msgstr ""
+"When your SOUL is staked into the Circle, you recieve SEANCE in return for voting rights and a fully composable \n"
+"token that can interact with other protocols. Your SEANCE is continuously compounding, when you unstake you will receive all \n"
+"the originally deposited SOUL, your SOUL harvest rewards, and (soon) fee share."
 
 msgid "Withdraw"
 msgstr "Withdraw"

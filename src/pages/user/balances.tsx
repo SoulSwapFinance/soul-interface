@@ -85,9 +85,9 @@ const BalancesLayout = ({ children }) => {
         <Card
           className="h-full bg-dark-900"
           backgroundImage="bento-illustration.png"
-          title={i18n._(t`Deposit tokens into BentoBox for all the yields`)}
+          title={i18n._(t`Deposit tokens into CoffinBox for all the yields`)}
           description={i18n._(
-            t`Coffinboxes provides extra yield on deposits with flash lending, strategies, and fixed, low-gas transfers among integrated dapps, like markets`
+            t`CoffinBoxes provides extra yield on deposits with flash lending, strategies, and fixed, low-gas transfers among integrated dapps, like markets`
           )}
         />
       }

@@ -103,7 +103,7 @@ const FarmListItem2 = ({ farm, ...rest }) => {
                         <div className="flex">
                           {/* <span className="text-emphasis underline hover:text-purple">Unstake</span> */}
                           {/* <Link href="/vaults"> */}
-                          <Link href="/stake" >
+                          <Link href="/seance" >
                             <span className="flex flex-col justify-center font-bold hover:text-purple">STAKE SOUL</span>
                           </Link>
                         </div>

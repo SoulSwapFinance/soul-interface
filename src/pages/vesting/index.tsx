@@ -197,7 +197,7 @@ export default function Vesting() {
             <div className="flex flex-col gap-3 p-4">
               <div className="font-bold text-white">{i18n._(t`Things you can do with your SOUL`)}</div>
               <div className="p-4 rounded bg-dark-800">
-                <Link href="/stake">
+                <Link href="/seance">
                   <a className="flex items-center justify-between gap-3">
                     <div className="flex flex-col gap-1">
                       <div className="font-bold text-white">{i18n._(t`Stake SOUL for SPELL`)}</div>
