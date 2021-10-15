@@ -186,6 +186,42 @@ export const FarmPids = [
       token1Address: tokens.WETH,
       token2Address: tokens.USDC,
   },
+  { // 200
+    pid: 16,
+    token1: 'DAI',
+    token2: 'gfUSDT',
+    lpSymbol: 'DAI-gfUSDT',
+    lpAddresses: {
+      4002: '',
+      250: '0xe637D90A993EDBD75AC09E9fcB16313D193B9451',
+      },
+      token1Address: tokens.DAI,
+      token2Address: tokens.gfUSDT,
+  },
+  { // 400
+    pid: 17,
+    token1: 'BNB',
+    token2: 'DAI',
+    lpSymbol: 'BNB-DAI',
+    lpAddresses: {
+      4002: '',
+      250: '0xC1EdFbA9811B696bDFd07d31eD5FF702e031364E',
+      },
+      token1Address: tokens.BNB,
+      token2Address: tokens.DAI,
+  },
+  { // 600
+    pid: 18,
+    token1: 'BNB',
+    token2: 'FTM',
+    lpSymbol: 'BNB-FTM',
+    lpAddresses: {
+      4002: '',
+      250: '0x52966a12e3211c92909C28603ca3df8465c06c82',
+      },
+      token1Address: tokens.BNB,
+      token2Address: tokens.FTM,
+  },
   // { // TEMPLATE
   //   pid: 13,
   //   token1: '',

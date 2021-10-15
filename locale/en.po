@@ -235,8 +235,8 @@ msgstr ""
 "Click on a pool below, input the amount you wish to migrate or select max, and click\n"
 "migrate"
 
-msgid "Coffinboxes provides extra yield on deposits with flash lending, strategies, and fixed, low-gas transfers among integrated dapps, like markets"
-msgstr "Coffinboxes provides extra yield on deposits with flash lending, strategies, and fixed, low-gas transfers among integrated dapps, like markets"
+msgid "CoffinBoxes provides extra yield on deposits with flash lending, strategies, and fixed, low-gas transfers among integrated dapps, like markets"
+msgstr "CoffinBoxes provides extra yield on deposits with flash lending, strategies, and fixed, low-gas transfers among integrated dapps, like markets"
 
 msgid "Collateral"
 msgstr "Collateral"
@@ -325,8 +325,8 @@ msgstr "Deposit"
 msgid "Deposit SOUL into BentoBox"
 msgstr "Deposit SOUL into BentoBox"
 
-msgid "Deposit tokens into BentoBox for all the yields"
-msgstr "Deposit tokens into BentoBox for all the yields"
+msgid "Deposit tokens into CoffinBox for all the yields"
+msgstr "Deposit tokens into CoffinBox for all the yields"
 
 msgid "Deposit {0} into BentoBox"
 msgstr "Deposit {0} into BentoBox"
@@ -643,9 +643,6 @@ msgstr "Minimum received"
 msgid "My Orders"
 msgstr "My Orders"
 
-msgid "My SOUL"
-msgstr "My SOUL"
-
 msgid "Network not supported yet"
 msgstr "Network not supported yet"
 
@@ -928,6 +925,9 @@ msgstr "Slippage tolerance"
 
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
+
+msgid "Soul User"
+msgstr "Soul User"
 
 msgid "SoulSwap"
 msgstr "SoulSwap"

@@ -229,7 +229,7 @@ msgid ""
 "migrate"
 msgstr ""
 
-msgid "Coffinboxes provides extra yield on deposits with flash lending, strategies, and fixed, low-gas transfers among integrated dapps, like markets"
+msgid "CoffinBoxes provides extra yield on deposits with flash lending, strategies, and fixed, low-gas transfers among integrated dapps, like markets"
 msgstr ""
 
 msgid "Collateral"
@@ -319,7 +319,7 @@ msgstr ""
 msgid "Deposit SOUL into BentoBox"
 msgstr ""
 
-msgid "Deposit tokens into BentoBox for all the yields"
+msgid "Deposit tokens into CoffinBox for all the yields"
 msgstr ""
 
 msgid "Deposit {0} into BentoBox"
@@ -631,9 +631,6 @@ msgstr ""
 msgid "My Orders"
 msgstr ""
 
-msgid "My SOUL"
-msgstr ""
-
 msgid "Network not supported yet"
 msgstr ""
 
@@ -913,6 +910,9 @@ msgid "Slippage tolerance"
 msgstr ""
 
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
+msgstr ""
+
+msgid "Soul User"
 msgstr ""
 
 msgid "SoulSwap"

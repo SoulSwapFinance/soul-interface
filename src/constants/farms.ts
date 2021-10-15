@@ -257,6 +257,51 @@ export const POOLS: AddressMap = {
         symbol: 'USDC',
         decimals: 18,
       },
+    },
+    '0xe637D90A993EDBD75AC09E9fcB16313D193B9451': {  // DAI-gfUSDT
+      id: 16, // 200
+      token0: {
+        id: '0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e', // DAI
+        name: 'Dai Stablecoin',
+        symbol: 'DAI',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x940F41F0ec9ba1A34CF001cc03347ac092F5F6B5', // gfUSDT
+        name: 'Geist fUSDT',
+        symbol: 'gfUSDT',
+        decimals: 18,
+      },
+    },
+    '0xC1EdFbA9811B696bDFd07d31eD5FF702e031364E': {  // BNB-DAI
+      id: 17, // 400
+      token0: {
+        id: '0xd67de0e0a0fd7b15dc8348bb9be742f3c5850454', // BNB
+        name: 'Binance',
+        symbol: 'BNB',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e', // DAI
+        name: 'Dai Stablecoin',
+        symbol: 'DAI',
+        decimals: 18,
+      },
+    },
+    '0x52966a12e3211c92909C28603ca3df8465c06c82': {  // BNB-FTM
+      id: 18, // 600
+      token0: {
+        id: '0xd67de0e0a0fd7b15dc8348bb9be742f3c5850454', // BNB
+        name: 'Binance',
+        symbol: 'BNB',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83', // WFTM
+        name: 'Wrapped FTM',
+        symbol: 'FTM',
+        decimals: 18,
+      },
     }
   }
 }

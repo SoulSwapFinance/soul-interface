@@ -15,9 +15,17 @@ export const tokens = {
     4002: "0x306557358e20aea124b16a548597897858d13cb2",
     250: "0xad84341756bf337f5a0164515b1f6f993d194e1f",
   },
+  BNB: {
+    4002: "",
+    250: "0xd67de0e0a0fd7b15dc8348bb9be742f3c5850454",
+  },
   DAI: {
     4002: '',
     250: '0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e',
+  },
+  gfUSDT: {
+    4002: '',
+    250: '0x940F41F0ec9ba1A34CF001cc03347ac092F5F6B5',
   },
   fUSDT: {
     4002: '',
