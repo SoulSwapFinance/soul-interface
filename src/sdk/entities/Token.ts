@@ -104,13 +104,6 @@ export const WETH9: { [chainId: number]: Token } = {
 export const WNATIVE: { [chainId: number]: Token } = {
   [ChainId.MAINNET]: WETH9[ChainId.MAINNET],
   
-  [ChainId.BSC]: new Token(
-    ChainId.BSC,
-    '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
-    18,
-    'WBNB',
-    'Wrapped BNB'
-  ),
   
   [ChainId.FANTOM]: new Token(
     ChainId.FANTOM,
@@ -118,13 +111,21 @@ export const WNATIVE: { [chainId: number]: Token } = {
     18,
     'WFTM',
     'Wrapped FTM'
-  ),
+    ),
+
+    [ChainId.BSC]: new Token(
+      ChainId.BSC,
+      '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+      18,
+      'WBNB',
+      'Wrapped BNB'
+    ),
+    
   [ChainId.FANTOM_TESTNET]: new Token(
     ChainId.FANTOM_TESTNET,
-
-'0xf1277d1Ed8AD466beddF92ef448A132661956621',
+    '0xf1277d1Ed8AD466beddF92ef448A132661956621',
     18,
-    'FTM',
+    'WFTM',
     'Wrapped FTM'
   ),
 }
