@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Loader from '../Loader'
@@ -10,10 +9,6 @@ import useEagerConnect from '../../hooks/useEagerConnect'
 import useInactiveListener from '../../hooks/useInactiveListener'
 import { useLingui } from '@lingui/react'
 import { useWeb3React } from '@web3-react/core'
-import { useActiveWeb3React } from '../../hooks'
-import { SUPPORTED_NETWORKS } from '../../modals/NetworkModal'
-import { ChainId } from '../../sdk'
-import { useRouter } from 'next/router'
 
 const MessageWrapper = styled.div`
   display: flex;
@@ -22,7 +17,9 @@ const MessageWrapper = styled.div`
   height: 20rem;
 `
 
-const Message = styled.h2``
+const Message = styled.h2`
+  // color: ${({ theme }) => theme.secondary1};
+`
 
 const GnosisManagerNoSSR = dynamic(() => import('./GnosisManager'), {
   ssr: false,
@@ -31,52 +28,10 @@ const GnosisManagerNoSSR = dynamic(() => import('./GnosisManager'), {
 export default function Web3ReactManager({ children }: { children: JSX.Element }) {
   const { i18n } = useLingui()
   const { active } = useWeb3React()
-  const router = useRouter()
-  const {
-    active: networkActive,
-    error: networkError,
-    activate: activateNetwork,
-    chainId: currentChain,
-  } = useWeb3React(NetworkContextName)
-  const { account, chainId, library } = useActiveWeb3React()
-  const [wrongNetwork, setWrongNetwork] = useState(false)
-
-  // useEffect(() => {
-  //   console.debug({
-  //     chainId,
-  //     route: router.route
-  //   })
-
-  //   if (router.route !== '/bridge' && chainId !== ChainId.FANTOM) {
-  //     setWrongNetwork(true)
-  //   } else {
-  //     setWrongNetwork(false)
-  //   }
-  // }, [active, chainId, router, router.route])
+  const { active: networkActive, error: networkError, activate: activateNetwork } = useWeb3React(NetworkContextName)
 
   // try to eagerly connect to an injected provider, if it exists and has granted access already
   const triedEager = useEagerConnect()
-
-  useEffect(() => {
-    if (window && window.ethereum && router.route !== '/bridge' && router.route !== '/bridge/history') {
-      const provider: any = window.ethereum
-      const params = SUPPORTED_NETWORKS[ChainId.FANTOM]
-
-      if (provider) {
-        try {
-          provider
-            .request({
-              method: 'wallet_addEthereumChain',
-              params: [params],
-            })
-            .then((r) => {})
-        } catch (error) {
-          console.error('Failed to setup the network in Metamask:', error)
-        }
-      }
-    } else {
-    }
-  }, [])
 
   // after eagerly trying injected, if the network connect ever isn't active or in an error state, activate itd
   useEffect(() => {
@@ -123,16 +78,6 @@ export default function Web3ReactManager({ children }: { children: JSX.Element }
         <Loader />
       </MessageWrapper>
     ) : null
-  }
-
-  if (wrongNetwork) {
-    return (
-      <h1 className="text-center">
-        {`Looks like you're using an unsupported network.`}
-        <br />
-        {`Switch to Fantom Network to use SoulSwap.finance.`}
-      </h1>
-    )
   }
 
   return (
