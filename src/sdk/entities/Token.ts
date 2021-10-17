@@ -83,6 +83,15 @@ export const WETH9: { [chainId: number]: Token } = {
     'WETH9',
     'Wrapped Ether'
   ),
+
+  [ChainId.BSC]: new Token(
+    ChainId.BSC,
+    '0x2170Ed0880ac9A755fd29B2688956BD959F933F8',
+    18,
+    'WETH',
+    'Wrapped Ether'
+  ),
+
   [ChainId.FANTOM]: new Token(
     ChainId.FANTOM,
     '0x74b23882a30290451A17c44f4F05243b6b58C76d',
@@ -94,6 +103,15 @@ export const WETH9: { [chainId: number]: Token } = {
 
 export const WNATIVE: { [chainId: number]: Token } = {
   [ChainId.MAINNET]: WETH9[ChainId.MAINNET],
+  
+  [ChainId.BSC]: new Token(
+    ChainId.BSC,
+    '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+    18,
+    'WBNB',
+    'Wrapped BNB'
+  ),
+  
   [ChainId.FANTOM]: new Token(
     ChainId.FANTOM,
     '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
@@ -103,7 +121,8 @@ export const WNATIVE: { [chainId: number]: Token } = {
   ),
   [ChainId.FANTOM_TESTNET]: new Token(
     ChainId.FANTOM_TESTNET,
-    '0xf1277d1Ed8AD466beddF92ef448A132661956621',
+
+'0xf1277d1Ed8AD466beddF92ef448A132661956621',
     18,
     'FTM',
     'Wrapped FTM'
