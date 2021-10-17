@@ -22,7 +22,7 @@ export const SUPPORTED_NETWORKS: {
     blockExplorerUrls: string[]
   }
 } = {
-  [ChainId.MAINNET]: {
+ [ChainId.MAINNET]: {
     chainId: '0x1',
     chainName: 'Ethereum',
     nativeCurrency: {
@@ -32,6 +32,7 @@ export const SUPPORTED_NETWORKS: {
     },
     rpcUrls: ['https://mainnet.infura.io/v3'],
     blockExplorerUrls: ['https://etherscan.com'],
+    },
     
       [ChainId.BSC]: {
     chainId: '0x38',
@@ -45,6 +46,7 @@ export const SUPPORTED_NETWORKS: {
     blockExplorerUrls: ['https://bscscan.com'],
     
   },
+  
   [ChainId.FANTOM]: {
     chainId: '0xfa',
     chainName: 'Fantom',
@@ -180,6 +182,7 @@ export default function NetworkModal(): JSX.Element | null {
       <div className="grid grid-flow-row-dense grid-cols-1 gap-5 overflow-y-auto md:grid-cols-2">
         {[
           ChainId.MAINNET,
+          ChainId.BSC,
           // ChainId.MATIC,
           ChainId.FANTOM,
           ChainId.FANTOM_TESTNET,
