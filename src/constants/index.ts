@@ -126,66 +126,6 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     color: '#F0B90B',
     mobile: false,
   },
-  // LATTICE: {
-  //   connector: async () => {
-  //     const LatticeConnector = (await import('@web3-react/lattice-connector')).LatticeConnector
-  //     return new LatticeConnector({
-  //       chainId: 1,
-  //       url: RPC[ChainId.MAINNET],
-  //       appName: 'SushiSwap',
-  //     })
-  //   },
-  //   name: 'Lattice',
-  //   iconName: 'lattice.png',
-  //   description: 'Connect to GridPlus Wallet.',
-  //   href: null,
-  //   color: '#40a9ff',
-  //   mobile: true,
-  // },
-  // WALLET_LINK: {
-  //   connector: walletlink,
-  //   name: 'Coinbase Wallet',
-  //   iconName: 'coinbase.svg',
-  //   description: 'Use Coinbase Wallet app on mobile device',
-  //   href: null,
-  //   color: '#315CF5',
-  // },
-  // COINBASE_LINK: {
-  //   name: 'Open in Coinbase Wallet',
-  //   iconName: 'coinbase.svg',
-  //   description: 'Open in Coinbase Wallet app.',
-  //   href: 'https://go.cb-w.com',
-  //   color: '#315CF5',
-  //   mobile: true,
-  //   mobileOnly: true,
-  // },
-  // FORTMATIC: {
-  //   connector: fortmatic,
-  //   name: 'Fortmatic',
-  //   iconName: 'fortmatic.png',
-  //   description: 'Login using Fortmatic hosted wallet',
-  //   href: null,
-  //   color: '#6748FF',
-  //   mobile: true,
-  // },
-  // Portis: {
-  //   connector: portis,
-  //   name: 'Portis',
-  //   iconName: 'portis.png',
-  //   description: 'Login using Portis hosted wallet',
-  //   href: null,
-  //   color: '#4A6C9B',
-  //   mobile: true,
-  // },
-  // Torus: {
-  //   connector: torus,
-  //   name: 'Torus',
-  //   iconName: 'torus.png',
-  //   description: 'Login using Torus hosted wallet',
-  //   href: null,
-  //   color: '#315CF5',
-  //   mobile: true,
-  // },
 }
 
 export const NetworkContextName = 'NETWORK'
@@ -197,7 +137,7 @@ export const INITIAL_ALLOWED_SLIPPAGE = 50
 export const DEFAULT_DEADLINE_FROM_NOW = 60 * 30
 
 // default archer gas estimate, 250k wei
-export const DEFAULT_ARCHER_GAS_ESTIMATE: BigNumber = BigNumber.from(250000)
+export const DEFAULT_ARCHER_GAS_ESTIMATE: BigNumber = BigNumber.from(350000)
 // default gas prices to use if all other sources unavailable
 export const DEFAULT_ARCHER_GAS_PRICES: BigNumber[] = [
   BigNumber.from(60000000000),
@@ -256,6 +196,7 @@ export const BASE_SWAPPER: { [chainId in ChainId]?: string } = {
 
 export const ANALYTICS_URL: { [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: 'https://analytics.soulswap.finance',
+  [ChainId.BSC]: 'https://analytics.soulswap.finance',
   [ChainId.FANTOM]: 'https://analytics.soulswap.finance',
   [ChainId.FANTOM_TESTNET]: 'https://analytics.soulswap.finance',
 }

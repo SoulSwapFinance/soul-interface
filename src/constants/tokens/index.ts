@@ -9,7 +9,6 @@ export const BSC: { [key: string]: Token } = {
 
 }
   
-
 export const FANTOM: { [key: string]: Token } = {
 
   SOUL: new Token(ChainId.FANTOM, '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', 18, 'SOUL', 'SoulPower'), // 27 AUG
