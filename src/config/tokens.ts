@@ -1,5 +1,10 @@
 import { ChainId, BOUND_ADDRESS, Token, WETH9, WNATIVE } from '../sdk'
 
+export const BSC: { [key: string]: Token } = {
+  BNB: new Token(ChainId.BSC, '', 18, 'BNB', 'Binance'),
+  DAI: new Token(ChainId.BSC, '', 18, 'DAI', 'Dai Stablecoin'),
+}
+
 export const FANTOM: { [key: string]: Token } = {
   USDC: new Token(ChainId.FANTOM, '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6, 'USDC', 'USD Coin'),
   WBTC: new Token(ChainId.FANTOM, '0x321162Cd933E2Be498Cd2267a90534A804051b11', 8, 'WBTC', 'Wrapped Bitcoin'),

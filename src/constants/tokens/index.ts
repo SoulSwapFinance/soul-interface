@@ -2,7 +2,16 @@ import { ChainId, Ether, SOUL_ADDRESS, Token, WETH9, WNATIVE } from '../../sdk'
 
 import { SupportedChainId } from '../chains'
 
+export const BSC: { [key: string]: Token } = {
+
+  BNB: new Token(ChainId.BSC, '', 18, 'BNB', 'Binance'),
+  DAI: new Token(ChainId.BSC, '', 18, 'DAI', 'Dai Stablecoin'),
+
+}
+  
+
 export const FANTOM: { [key: string]: Token } = {
+
   SOUL: new Token(ChainId.FANTOM, '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', 18, 'SOUL', 'SoulPower'), // 27 AUG
   SEANCE: new Token(ChainId.FANTOM, '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', 18, 'SEANCE', 'SeanceCircle'), // 27 AUG
   USDC: new Token(ChainId.FANTOM, '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6, 'USDC', 'USD Coin'),
@@ -12,6 +21,7 @@ export const FANTOM: { [key: string]: Token } = {
   fUSDT: new Token(ChainId.FANTOM, '0x049d68029688eAbF473097a2fC38ef61633A3C7A', 18, 'fUSDT', 'Frapped USDT'),
   FUSD: new Token(ChainId.FANTOM, '0xAd84341756Bf337f5a0164515b1f6F993D194E1f', 18, 'FUSD', 'Fantom USD'), // 27 AUG
   WETH: new Token(ChainId.FANTOM, '0x74b23882a30290451A17c44f4F05243b6b58C76d', 18, 'WETH', 'Wrapped Ether'),
+  
 }
 
 export const FANTOM_TESTNET: { [key: string]: Token } = {

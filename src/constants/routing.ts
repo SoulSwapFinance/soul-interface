@@ -4,6 +4,7 @@ import {
   // AVALANCHE,
   BAB,
   BAC,
+  BSC,
   // CELO,
   CREAM,
   CRV,
@@ -86,6 +87,7 @@ const MIRROR_ADDITIONAL_BASES: { [tokenAddress: string]: Token[] } = {
 // TODO: SDK should have two maps, WETH map and WNATIVE map.
 const WRAPPED_NATIVE_ONLY: ChainTokenList = {
   [ChainId.MAINNET]: [WNATIVE[ChainId.MAINNET]],
+   [ChainId.BSC]: [WNATIVE[ChainId.BSC]],
   [ChainId.FANTOM]: [WNATIVE[ChainId.FANTOM]],
   [ChainId.FANTOM_TESTNET]: [WNATIVE[ChainId.FANTOM_TESTNET]]
 }

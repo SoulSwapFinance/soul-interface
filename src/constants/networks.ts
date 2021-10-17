@@ -47,6 +47,7 @@ export const NETWORK_ICON = {
 
 export const NETWORK_LABEL: { [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: 'Ethereum',
+  [ChainId.BSC]: 'Binance',
   [ChainId.FANTOM]: 'Fantom',
   [ChainId.FANTOM_TESTNET]: 'Fantom Testnet',
   // [ChainId.RINKEBY]: 'Rinkeby',
