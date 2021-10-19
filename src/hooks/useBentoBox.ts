@@ -21,13 +21,13 @@ function useBentoBox() {
             const tx = await bentoBoxContract?.deposit(ethers.constants.AddressZero, account, account, value, 0, {
               value,
             })
-            return addTransaction(tx, { summary: 'Deposit to Bentobox' })
+            return addTransaction(tx, { summary: 'Deposit to CoffinBox' })
           } else {
             const tx = await bentoBoxContract?.deposit(tokenAddressChecksum, account, account, value, 0)
-            return addTransaction(tx, { summary: 'Deposit to Bentobox' })
+            return addTransaction(tx, { summary: 'Deposit to CoffinBox' })
           }
         } catch (e) {
-          console.error('bentobox deposit error:', e)
+          console.error('coffinbox deposit error:', e)
           return e
         }
       }
@@ -50,9 +50,9 @@ function useBentoBox() {
             value,
             0
           )
-          return addTransaction(tx, { summary: 'Withdraw from Bentobox' })
+          return addTransaction(tx, { summary: 'Withdraw from CoffinBox' })
         } catch (e) {
-          console.error('bentobox withdraw error:', e)
+          console.error('coffinbox withdraw error:', e)
           return e
         }
       }

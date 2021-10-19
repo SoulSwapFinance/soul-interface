@@ -145,7 +145,7 @@ export default function Meowshi() {
         <div className="bg-[rgba(255,255,255,0.04)] p-4 py-2 rounded flex flex-row items-center gap-4 mb-[54px]">
           <InformationCircleIcon width={48} height={48} color="pink" />
           <Typography variant="xs" weight={700}>
-            {i18n._(t`MEOW tokens wrap xSOUL into BentoBox for double yields and can be
+            {i18n._(t`MEOW tokens wrap SEANCE into CoffinBox for double yields and can be
               used to vote in special MEOW governor contracts.`)}
           </Typography>
         </div>

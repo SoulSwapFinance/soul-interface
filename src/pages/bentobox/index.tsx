@@ -20,17 +20,17 @@ export default function BenotBox() {
       maxWidth="full"
     >
       <Head>
-        <title>BentoBox | Soul</title>
+        <title>CoffinBox | Soul</title>
         <meta
           key="description"
           name="description"
-          content="BentoBox is a token vault that generates yield for liquidity providers. BentoBox creates a source of liquidity that any user can access with minimal approvals, minimal gas usage, and maximal capital efficiency."
+          content="CoffinBox is a token vault that generates yield for liquidity providers. CoffinBox creates a source of liquidity that any user can access with minimal approvals, minimal gas usage, and maximal capital efficiency."
         />
       </Head>
       <div className="absolute top-0 left-0 right-0 z-0 w-full h-full" style={{ maxHeight: 500 }}>
         <Image
           src={bentoBoxHero}
-          alt="BentoBox Hero"
+          alt="CoffinBox Hero"
           layout="fill"
           // objectFit="cover"
           objectPosition="top"
@@ -42,7 +42,7 @@ export default function BenotBox() {
       <div className="flex justify-center">
         <Image
           src="/bentobox-logo.png"
-          alt="BentoBox Logo"
+          alt="CoffinBox Logo"
           objectFit="scale-down"
           layout="responsive"
           height={150}
@@ -52,9 +52,9 @@ export default function BenotBox() {
       </div>
 
       <Container className="z-50 mx-auto" maxWidth="5xl">
-        <div className="text-3xl font-bold md:text-5xl text-high-emphesis">{i18n._(t`BentoBox Apps`)}</div>
+        <div className="text-3xl font-bold md:text-5xl text-high-emphesis">{i18n._(t`CoffinBox Apps`)}</div>
         <div className="p-4 mt-0 mb-8 text-base font-medium md:text-lg lg:text-xltext-high-emphesis md:mt-4">
-          {i18n._(t`BentoBox is an innovative way to use dapps gas-efficiently and gain extra yield.`)}
+          {i18n._(t`CoffinBox is an innovative way to use dapps gas-efficiently and gain extra yield.`)}
         </div>
         <div className="grid grid-cols-4 gap-4 sm:gap-12 grid-flow-auto">
           <Card className="flex items-center justify-center w-full col-span-2 space-y-1 rounded cursor-pointer md:col-span-1 bg-dark-800 hover:bg-dark-900 shadow-pink-glow hover:shadow-pink-glow-hovered">

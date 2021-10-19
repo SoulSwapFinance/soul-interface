@@ -131,7 +131,7 @@ export default function Borrow({ pair }: BorrowProps) {
   collateralWarnings.add(
     collateralBalance?.lt(collateralValue.toBigNumber(pair.collateral.tokenInfo.decimals)),
     `Please make sure your ${
-      useBentoCollateral ? 'BentoBox' : 'wallet'
+      useBentoCollateral ? 'CoffinBox' : 'wallet'
     } balance is sufficient to deposit and then try again.`,
     true
   )

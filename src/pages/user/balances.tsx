@@ -53,7 +53,7 @@ function Balances() {
           <CardHeader className="flex items-center justify-between bg-dark-800">
             <div className="flex flex-col items-center justify-between w-full md:flex-row">
               <div className="flex items-baseline">
-                <div className="mr-4 text-3xl text-high-emphesis">{i18n._(t`BentoBox`)}</div>
+                <div className="mr-4 text-3xl text-high-emphesis">{i18n._(t`CoffinBox`)}</div>
               </div>
               <div className="flex justify-end w-2/3 py-4 md:py-0">
                 <Search search={search} term={term} />
@@ -66,7 +66,7 @@ function Balances() {
           <div className="grid grid-cols-3 px-4 text-sm select-none text-secondary">
             <div>{i18n._(t`Token`)}</div>
             <div className="text-right">{i18n._(t`Wallet`)}</div>
-            <div className="text-right">{i18n._(t`BentoBox`)}</div>
+            <div className="text-right">{i18n._(t`CoffinBox`)}</div>
           </div>
           {items &&
             items.length > 0 &&
