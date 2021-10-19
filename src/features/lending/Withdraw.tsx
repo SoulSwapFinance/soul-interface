@@ -35,7 +35,7 @@ export default function LendWithdrawAction({ pair }: any): JSX.Element {
   const warnings = new Warnings()
     .add(
       pair.currentUserAssetAmount.value.lt(value.toBigNumber(pair.asset.tokenInfo.decimals)),
-      `Please make sure your ${useBento ? 'BentoBox' : 'wallet'} balance is sufficient to withdraw and then try again.`,
+      `Please make sure your ${useBento ? 'CoffinBox' : 'wallet'} balance is sufficient to withdraw and then try again.`,
       true
     )
     .add(
