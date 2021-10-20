@@ -20,7 +20,7 @@ const tabs = [
             gradientUnits="userSpaceOnUse"
           >
             <stop stopColor="#0993EC" />
-            <stop offset="1" stopColor="#F338C3" />
+            <stop offset="1" stopColor="#EE82EE" />
           </linearGradient>
         </defs>
       </svg>
@@ -45,7 +45,7 @@ const tabs = [
             gradientUnits="userSpaceOnUse"
           >
             <stop stopColor="#0993EC" />
-            <stop offset="1" stopColor="#F338C3" />
+            <stop offset="1" stopColor="#EE82EE" />
           </linearGradient>
         </defs>
       </svg>
@@ -70,7 +70,7 @@ const tabs = [
             gradientUnits="userSpaceOnUse"
           >
             <stop stopColor="#0993EC" />
-            <stop offset="1" stopColor="#F338C3" />
+            <stop offset="1" stopColor="#EE82EE" />
           </linearGradient>
         </defs>
       </svg>
