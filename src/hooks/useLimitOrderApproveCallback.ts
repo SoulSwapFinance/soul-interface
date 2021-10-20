@@ -70,7 +70,7 @@ const useLimitOrderApproveCallback = () => {
     }
 
     if (!bentoBoxContract) {
-      console.error('no bentobox contract')
+      console.error('no coffinbox contract')
       return { outcome: BentoApproveOutcome.NOT_READY }
     }
 
@@ -88,7 +88,7 @@ const useLimitOrderApproveCallback = () => {
       const nonce = await bentoBoxContract?.nonces(account)
       const { v, r, s } = await getSignatureWithProviderBentobox(
         {
-          warning: 'Give FULL access to funds in (and approved to) BentoBox?',
+          warning: 'Give FULL access to funds in (and approved to) CoffinBox?',
           user: account,
           masterContract,
           approved: true,
@@ -147,7 +147,7 @@ const useLimitOrderApproveCallback = () => {
     // Since the setMasterContractApproval is not payable, we can't batch native deposit and approve
     // For this case, we setup a helper contract
     if (token.isNative && approvalState === BentoApprovalState.NOT_APPROVED && limitOrderPermit && !fromBentoBalance) {
-      summary.push(`Approve Limit Order and Deposit ${token.symbol} into BentoBox`)
+      summary.push(`Approve Limit Order and Deposit ${token.symbol} into CoffinBox`)
       const {
         signature: { v, r, s },
       } = limitOrderPermit
@@ -181,7 +181,7 @@ const useLimitOrderApproveCallback = () => {
     }
 
     if (!fromBentoBalance) {
-      summary.push(`Deposit ${token.symbol} into BentoBox`)
+      summary.push(`Deposit ${token.symbol} into CoffinBox`)
       if (token.isNative) {
         batch.push(
           bentoBoxContract?.interface?.encodeFunctionData('deposit', [

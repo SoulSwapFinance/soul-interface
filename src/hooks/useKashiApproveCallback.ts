@@ -83,7 +83,7 @@ function useKashiApproveCallback(): [
     }
 
     if (!bentoBoxContract) {
-      console.error('no bentobox contract')
+      console.error('no coffinbox contract')
       return { outcome: BentoApproveOutcome.NOT_READY }
     }
 

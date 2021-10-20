@@ -26,7 +26,7 @@ const PayFromToggle: FC = () => {
         <div className="flex items-center">
           <Switch.Label className="mr-2">
             <Typography variant="sm" className={fromBentoBalance ? 'text-primary' : 'text-secondary'}>
-              BentoBox
+              CoffinBox
             </Typography>
           </Switch.Label>
           <Switch
