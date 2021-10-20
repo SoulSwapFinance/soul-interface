@@ -302,6 +302,36 @@ export const POOLS: AddressMap = {
         symbol: 'FTM',
         decimals: 18,
       },
+    },
+    '0x34990FC1e6e3169DCf23624049be29782AFc81bd': {  // MIM-FTM
+      id: 19, // 400
+      token0: {
+        id: '0x82f0B8B456c1A451378467398982d4834b6829c1', // MIM
+        name: 'Magic Internet Money',
+        symbol: 'MIM',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83', // WFTM
+        name: 'Wrapped FTM',
+        symbol: 'FTM',
+        decimals: 18,
+      },
+    },
+    '0xE2d39F7f0c8517Ca2058Fa97eB3D8d4928F7C6D6': {  // BTC-USDC
+      id: 20, // 600
+      token0: {
+        id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
+        name: 'USD Coin',
+        symbol: 'USDC',
+        decimals: 8,
+      },
+      token1: {
+        id: '0x321162Cd933E2Be498Cd2267a90534A804051b11', // WBTC
+        name: 'Wrapped BTC',
+        symbol: 'WBTC',
+        decimals: 8,
+      },
     }
   }
 }

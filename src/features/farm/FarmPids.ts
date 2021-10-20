@@ -18,18 +18,6 @@ export const FarmPids = [
     token1Address: tokens.SOUL,
     token2Address: tokens.FTM,
   },
-  { // 600
-    pid: 2,
-    token1: 'FTM',
-    token2: 'USDC',
-    lpSymbol: 'FTM-USDC',
-    lpAddresses: {
-      4002: '',
-      250: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556',
-    },
-    token1Address: tokens.FTM,
-    token2Address: tokens.USDC,
-  },
   { // 400	
     pid: 3,
     token1: 'FUSD',
@@ -41,18 +29,6 @@ export const FarmPids = [
     },
     token1Address: tokens.FUSD,
     token2Address: tokens.SOUL,
-  },
-  { // 600
-    pid: 4,
-    token1: 'FTM',
-    token2: 'WETH',
-    lpSymbol: 'FTM-ETH',
-    lpAddresses: {
-      4002: '',
-      250: '0xC615a5fd68265D9Ec6eF60805998fa5Bb71972Cb',
-    },
-    token1Address: tokens.FTM,
-    token2Address: tokens.WETH,
   },
   { // 800
     pid: 5,
@@ -66,54 +42,6 @@ export const FarmPids = [
       token1Address: tokens.SOUL,
       token2Address: tokens.SEANCE,
   },
-  { // 200
-    pid: 6,
-    token1: 'FUSD',
-    token2: 'USDC',
-    lpSymbol: 'FUSD-USDC',
-    lpAddresses: {
-      4002: '',
-      250: '0xD5F5E2638d636A98eD4aAEBfd2045441316e0c08',
-      },
-      token1Address: tokens.FUSD,
-      token2Address: tokens.USDC,
-  },
-  { // 400
-    pid: 7,
-    token1: 'USDC',
-    token2: 'SEANCE',
-    lpSymbol: 'USDC-SEANCE',
-    lpAddresses: {
-      4002: '',
-      250: '0x98C678d3C7ebeD4a36B84666700d8b5b5Ddc1f79',
-      },
-      token1Address: tokens.USDC,
-      token2Address: tokens.SEANCE,
-  },
-  { // 600
-    pid: 8,
-    token1: 'WETH',
-    token2: 'WBTC',
-    lpSymbol: 'ETH-BTC',
-    lpAddresses: {
-      4002: '',
-      250: '0x1fc954d3484bc21e0ce53a6648a35bbfc03dc9d0',
-      },
-      token1Address: tokens.WETH,
-      token2Address: tokens.WBTC,
-  },
-  { // 200
-    pid: 9,
-    token1: 'USDC',
-    token2: 'fUSDT',
-    lpSymbol: 'USDC-fUSDT',
-    lpAddresses: {
-      4002: '',
-      250: '0x298c12d6d9d6746dd0ef0a89421288f52d5566ef',
-      },
-      token1Address: tokens.USDC,
-      token2Address: tokens.fUSDT,
-  },
   { // 600
     pid: 10,
     token1: 'SEANCE',
@@ -122,9 +50,21 @@ export const FarmPids = [
     lpAddresses: {
       4002: '',
       250: '0x8542bEAC34282aFe5Bb6951Eb6DCE0B3783b7faB',
+    },
+    token1Address: tokens.SEANCE,
+    token2Address: tokens.FTM,
+  },
+  { // 400
+    pid: 7,
+    token1: 'USDC',
+    token2: 'SEANCE',
+    lpSymbol: 'SEANCE-USDC',
+    lpAddresses: {
+      4002: '',
+      250: '0x98C678d3C7ebeD4a36B84666700d8b5b5Ddc1f79',
       },
-      token1Address: tokens.SEANCE,
-      token2Address: tokens.FTM,
+      token1Address: tokens.USDC,
+      token2Address: tokens.SEANCE,
   },
   { // 100
     pid: 11,
@@ -151,6 +91,90 @@ export const FarmPids = [
       token2Address: tokens.REAPER,
   },
   { // 600
+    pid: 2,
+    token1: 'FTM',
+    token2: 'USDC',
+    lpSymbol: 'USDC-FTM',
+    lpAddresses: {
+      4002: '',
+      250: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.USDC,
+  },
+  { // 400
+    pid: 19,
+    token1: 'FTM',
+    token2: 'MIM',
+    lpSymbol: 'MIM-FTM',
+    lpAddresses: {
+      4002: '',
+      250: '0x34990FC1e6e3169DCf23624049be29782AFc81bd',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.MIM,
+  },
+  { // 400
+    pid: 17,
+    token1: 'BNB',
+    token2: 'DAI',
+    lpSymbol: 'BNB-DAI',
+    lpAddresses: {
+      4002: '',
+      250: '0xC1EdFbA9811B696bDFd07d31eD5FF702e031364E',
+    },
+    token1Address: tokens.BNB,
+    token2Address: tokens.DAI,
+  },
+  { // 600
+    pid: 18,
+    token1: 'BNB',
+    token2: 'FTM',
+    lpSymbol: 'BNB-FTM',
+    lpAddresses: {
+      4002: '',
+      250: '0x52966a12e3211c92909C28603ca3df8465c06c82',
+    },
+    token1Address: tokens.BNB,
+    token2Address: tokens.FTM,
+  },
+  { // 600
+    pid: 4,
+    token1: 'FTM',
+    token2: 'WETH',
+    lpSymbol: 'ETH-FTM',
+    lpAddresses: {
+      4002: '',
+      250: '0xC615a5fd68265D9Ec6eF60805998fa5Bb71972Cb',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.WETH,
+  },
+  { // 600
+    pid: 8,
+    token1: 'WETH',
+    token2: 'WBTC',
+    lpSymbol: 'BTC-ETH',
+    lpAddresses: {
+      4002: '',
+      250: '0x1fc954d3484bc21e0ce53a6648a35bbfc03dc9d0',
+    },
+    token1Address: tokens.WETH,
+    token2Address: tokens.WBTC,
+  },
+  { // 600
+    pid: 20,
+    token1: 'USDC',
+    token2: 'BTC',
+    lpSymbol: 'BTC-USDC',
+    lpAddresses: {
+      4002: '',
+      250: '0xE2d39F7f0c8517Ca2058Fa97eB3D8d4928F7C6D6',
+    },
+    token1Address: tokens.USDC,
+    token2Address: tokens.WBTC,
+  },
+  { // 600
     pid: 13,
     token1: 'FTM',
     token2: 'BTC',
@@ -158,9 +182,9 @@ export const FarmPids = [
     lpAddresses: {
       4002: '',
       250: '0xecB41D6B5885E75a149EDA173e92267aa271D895',
-      },
-      token1Address: tokens.FTM,
-      token2Address: tokens.WBTC,
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.WBTC,
   },
   { // 600
     pid: 14,
@@ -174,7 +198,7 @@ export const FarmPids = [
     token1Address: tokens.FTM,
     token2Address: tokens.fUSDT,
   },
-  { // 600
+  { // 400
     pid: 15,
     token1: 'ETH',
     token2: 'USDC',
@@ -182,9 +206,9 @@ export const FarmPids = [
     lpAddresses: {
       4002: '',
       250: '0x5b181BBc3Cc18C66B6f36f584866a1ff09865630',
-      },
-      token1Address: tokens.WETH,
-      token2Address: tokens.USDC,
+    },
+    token1Address: tokens.WETH,
+    token2Address: tokens.USDC,
   },
   { // 200
     pid: 16,
@@ -194,33 +218,33 @@ export const FarmPids = [
     lpAddresses: {
       4002: '',
       250: '0xe637D90A993EDBD75AC09E9fcB16313D193B9451',
-      },
-      token1Address: tokens.DAI,
-      token2Address: tokens.gFUSDT,
+    },
+    token1Address: tokens.DAI,
+    token2Address: tokens.gFUSDT,
   },
-  { // 400
-    pid: 17,
-    token1: 'BNB',
-    token2: 'DAI',
-    lpSymbol: 'BNB-DAI',
+  { // 200
+    pid: 9,
+    token1: 'USDC',
+    token2: 'fUSDT',
+    lpSymbol: 'USDC-fUSDT',
     lpAddresses: {
       4002: '',
-      250: '0xC1EdFbA9811B696bDFd07d31eD5FF702e031364E',
+      250: '0x298c12d6d9d6746dd0ef0a89421288f52d5566ef',
       },
-      token1Address: tokens.BNB,
-      token2Address: tokens.DAI,
+      token1Address: tokens.USDC,
+      token2Address: tokens.fUSDT,
   },
-  { // 600
-    pid: 18,
-    token1: 'BNB',
-    token2: 'FTM',
-    lpSymbol: 'BNB-FTM',
+  { // 200
+    pid: 6,
+    token1: 'FUSD',
+    token2: 'USDC',
+    lpSymbol: 'FUSD-USDC',
     lpAddresses: {
       4002: '',
-      250: '0x52966a12e3211c92909C28603ca3df8465c06c82',
+      250: '0xD5F5E2638d636A98eD4aAEBfd2045441316e0c08',
       },
-      token1Address: tokens.BNB,
-      token2Address: tokens.FTM,
+      token1Address: tokens.FUSD,
+      token2Address: tokens.USDC,
   },
   // { // TEMPLATE
   //   pid: 13,
@@ -228,12 +252,13 @@ export const FarmPids = [
   //   token2: '',
   //   lpSymbol: '',
   //   lpAddresses: {
-  //     4002: '',
-  //     250: '',
-  //     },
-  //     token1Address: tokens.SEANCE,
-  //     token2Address: tokens.FTM,
-  // },
-]
-
-export default FarmPids
+    //     4002: '',
+    //     250: '',
+    //     },
+    //     token1Address: tokens.SEANCE,
+    //     token2Address: tokens.FTM,
+    // },
+  ]
+  
+  export default FarmPids
+  
