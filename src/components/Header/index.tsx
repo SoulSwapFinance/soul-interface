@@ -92,6 +92,16 @@ function AppBar(): JSX.Element {
                       </NavLink>
                       )}
                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href={'https://info.soul.sh'}>
+                        <a
+                          id={`analytics-nav-link`}
+                          className="p-2 text-base text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                        >
+                          {i18n._(t`Analytics`)}
+                        </a>
+                        </NavLink>
+                      )}
+                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/scarab/create'}>
                         <a
                           id={`scarab-nav-link`}
@@ -100,7 +110,7 @@ function AppBar(): JSX.Element {
                           {i18n._(t`Scarab`)}
                         </a>
                         </NavLink>
-                      )}
+                      )} */}
                       { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href='https://bridge.soul.sh' target="_blank">
                           <a

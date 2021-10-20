@@ -29,9 +29,9 @@ const items = (i18n: I18n) => [
     external: true,
   },
   {
-    name: i18n._(t`Twitter`),
-    description: i18n._(t`Follow on Twitter.`),
-    href: 'https://twitter.com/SoulSwapFinance',
+    name: i18n._(t`Analytics`),
+    description: i18n._(t`View our Data.`),
+    href: 'https://info.soul.sh',
     external: true,
   },
   {
