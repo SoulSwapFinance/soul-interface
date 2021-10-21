@@ -346,13 +346,14 @@ export default function SoulStake() {
             <div className="flex flex-col w-full max-w-xl mt-auto mb-2">
               <div className="flex max-w-lg">
                 <div className="self-end mb-3 text-lg font-bold md:text-2xl text-high-emphesis md:mb-7">
-                  {i18n._(t`Maximize yield by staking SOUL for SEANCE`)}
+                  {i18n._(t`SEANCE = Staked SOUL`)}
                 </div>
               </div>
-              <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
-                {i18n._(t`When your SOUL is staked into the Circle, you recieve SEANCE in return for voting rights and a fully composable 
-              token that can interact with other protocols. Your SEANCE is continuously compounding, when you unstake you will receive all 
-              the originally deposited SOUL, your SOUL harvest rewards, and (soon) fee share.`)}
+                <div className="max-w-lg pr-3 mb-2 text-sm leading-5 md:text-base md:mb-4 md:pr-0">
+                  {i18n._(t`Recieve SEANCE as a reciept for your staked SOUL. Use your SEANCE to reclaim your SOUL -- or
+                  trade your SEANCE and risk locking your SOUL for all eternity... Either way, while you're staked, you earn more SOUL over time. 
+                  Zero withdrawal fees.`
+                  )}
               </div>
             </div>
             {/* SIDE BALANCE BOARD */}
@@ -450,8 +451,8 @@ export default function SoulStake() {
                           ? i18n._(t`Stake Auto Reinvesting SOUL`)
                           : i18n._(t`Unstake Auto Reinvesting SOUL`)
                         : activeTab === 0
-                        ? i18n._(t`Stake SOUL`)
-                        : i18n._(t`Unstake SOUL`)}
+                        ? i18n._(t`Stake`)
+                        : i18n._(t`Unstake`)}
                     </p>
                   </div>
                   <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
