@@ -3,7 +3,6 @@ import { useMultipleContractSingleData, useSingleContractMultipleData } from '..
 
 import ERC20_ABI from '../../constants/abis/erc20.json'
 import { Interface } from '@ethersproject/abi'
-// import { SOUL } from './../../constants'
 import { isAddress } from '../../functions/validate'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useAllTokens } from '../../hooks/Tokens'
@@ -11,6 +10,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useMulticall2Contract } from '../../hooks/useContract'
 import Web3 from 'web3'
 import { RPC } from '../../connectors'
+import ERC20_INTERFACE from '../../constants/abis/erc20'
 
 /**
  * Returns a map of the given addresses to their eventually consistent ETH balances.
@@ -149,35 +149,6 @@ export function useAllTokenBalances(): {
   const balances = useTokenBalances(account ?? undefined, allTokensArray)
   return balances ?? {}
 }
-
-// TODO: Replace
-// get the total owned, unclaimed, and unharvested UNI for account
-// export function useAggregateUniBalance(): CurrencyAmount<Token> | undefined {
-//   const { account, chainId } = useActiveWeb3React();
-
-//   const uni = chainId ? UNI[chainId] : undefined;
-
-//   const uniBalance: CurrencyAmount<Token> | undefined = useTokenBalance(
-//     account ?? undefined,
-//     uni
-//   );
-//   const uniUnclaimed: CurrencyAmount<Token> | undefined =
-//     useUserUnclaimedAmount(account);
-//   const uniUnHarvested: CurrencyAmount<Token> | undefined = useTotalUniEarned();
-
-//   if (!uni) return undefined;
-
-//   return CurrencyAmount.fromRawAmount(
-//     uni,
-//     JSBI.add(
-//       JSBI.add(
-//         uniBalance?.quotient ?? JSBI.BigInt(0),
-//         uniUnclaimed?.quotient ?? JSBI.BigInt(0)
-//       ),
-//       uniUnHarvested?.quotient ?? JSBI.BigInt(0)
-//     )
-//   );
-// }
 
 export function useMultichainCurrencyBalance(
   chainId?: number,

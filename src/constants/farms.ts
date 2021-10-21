@@ -144,7 +144,7 @@ export const POOLS: AddressMap = {
         id: '0x321162Cd933E2Be498Cd2267a90534A804051b11', // WBTC
         name: 'Wrapped Bitcoin',
         symbol: 'WBTC',
-        decimals: 18,
+        decimals: 8,
       },
       token1: { // WETH
         id: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // WETH
@@ -225,7 +225,7 @@ export const POOLS: AddressMap = {
         id: '0x321162Cd933E2Be498Cd2267a90534A804051b11', // WBTC
         name: 'Wrapped Bitcoin',
         symbol: 'WBTC',
-        decimals: 18,
+        decimals: 8,
       },
     },
     '0xdC24814AD654986928F8E4aec48D37fa30bBC5BB': {  // FTM-USDT
@@ -255,7 +255,7 @@ export const POOLS: AddressMap = {
         id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
         name: 'USD Coin',
         symbol: 'USDC',
-        decimals: 18,
+        decimals: 6,
       },
     },
     '0xe637D90A993EDBD75AC09E9fcB16313D193B9451': {  // DAI-gfUSDT
@@ -324,7 +324,7 @@ export const POOLS: AddressMap = {
         id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
         name: 'USD Coin',
         symbol: 'USDC',
-        decimals: 8,
+        decimals: 6,
       },
       token1: {
         id: '0x321162Cd933E2Be498Cd2267a90534A804051b11', // WBTC
@@ -345,7 +345,7 @@ export const POOLS: AddressMap = {
         id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
         name: 'USD Coin',
         symbol: 'USDC',
-        decimals: 8,
+        decimals: 6,
       },
     },
     '0xC0A301f1E5E0Fe37a31657e8F60a41b14d01B0Ef': {  // SOUL-USDC
@@ -360,7 +360,7 @@ export const POOLS: AddressMap = {
         id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
         name: 'USD Coin',
         symbol: 'USDC',
-        decimals: 8,
+        decimals: 6,
       },
     }
   }

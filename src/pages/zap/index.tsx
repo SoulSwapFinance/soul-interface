@@ -53,8 +53,8 @@ const PoolAllocationWrapper = styled.div`
 const PoolBreakDownWrapper = styled.div`
   background-color: ${({ theme }) => theme.bg1};
   border-top: 1px solid rgba(42, 58, 80, 0.4);
-  padding: 1rem
-  border-radius: 0 0 0.625rem 0.625rem;
+  padding: 1rem;
+  border-radius: 0 0 0 0.625rem 0.625rem;
 `
 
 const StyledArrowLeft = styled(ArrowLeft)`

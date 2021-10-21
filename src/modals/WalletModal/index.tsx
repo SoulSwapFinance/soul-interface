@@ -62,10 +62,8 @@ const OptionGrid = styled.div`
   display: grid;
   grid-gap: 10px;
   grid-template-columns: 1fr;
-  // ${({ theme }) => theme.mediaWidth.upToMedium`
     grid-template-columns: 1fr;
     grid-gap: 10px;
-  `};
 `
 
 const HoverText = styled.div`

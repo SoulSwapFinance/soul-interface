@@ -1,6 +1,6 @@
 import { ChainId, computePairAddress, Currency, CurrencyAmount, Pair, Token } from '../sdk'
 
-import IUniswapV2PairABI from '@sushiswap/core/abi/IUniswapV2Pair.json'
+import ISoulSwapPair from '../constants/abis/soulswap/ISoulSwapPair.json'
 import { Interface } from '@ethersproject/abi'
 import { useContext, useMemo } from 'react'
 import { useMultipleContractSingleData } from '../state/multicall/hooks'
@@ -11,7 +11,7 @@ import { POOLS, TokenInfo } from '../constants/farms'
 import { concat } from 'lodash'
 import { VAULTS } from '../constants/vaults'
 
-const PAIR_INTERFACE = new Interface(IUniswapV2PairABI)
+const PAIR_INTERFACE = new Interface(ISoulSwapPair)
 
 export enum PairState {
   LOADING,
@@ -82,7 +82,7 @@ export function useVaultTVL(): TVLInfo[] {
   const ftmPrice = priceData?.['ftm']
   const seancePrice = priceData?.['seance']
 
-  const farmingPools = Object.keys(VAULTS[ChainId.FANTOM_TESTNET]).map((key) => {
+  const farmingPools = Object.keys(VAULTS[ChainId.FANTOM]).map((key) => {
     return { ...VAULTS[ChainId.FANTOM][key] }
   })
 
@@ -106,7 +106,7 @@ export function useVaultTVL(): TVLInfo[] {
         token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
         token.symbol == 'WFTM' || token.symbol == 'FTM' ||
         token.symbol == 'SEANCE' ||
-        token.symbol == 'USDC' || token.symbol == 'FUSD' || token.symbol == 'fUSDT'
+        token.symbol == 'USDC' || token.symbol == 'fUSDT'
       )
     }
 
@@ -120,7 +120,7 @@ export function useVaultTVL(): TVLInfo[] {
       if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
         return seancePrice
       }
-      if (token.symbol == 'USDC' || token.symbol == 'FUSD' || token.symbol == 'fUSDT') {
+      if (token.symbol == 'USDC' || token.symbol == 'fUSDT') {
         return 1
       }
       return 0
@@ -239,7 +239,7 @@ export function useTVL(): TVLInfo[] {
         token.symbol == 'FTM' ||
         token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
-        token.symbol == 'FUSD'
+        token.symbol == 'fUSDT'
       )
     }
 
@@ -253,7 +253,7 @@ export function useTVL(): TVLInfo[] {
       if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
         return seancePrice
       }
-      if (token.symbol == 'USDC' || token.symbol == 'FUSD' || token.symbol == 'fUSDT' || token.symbol == 'USDT') {
+      if (token.symbol == 'USDC' || token.symbol == 'fUSDT') {
         return 1
       }
       return 0
@@ -379,7 +379,7 @@ export function useV2PairsWithPrice(
         token.address.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
         token.symbol == 'WFTM' || token.symbol == 'FTM' ||
         token.symbol == 'SEANCE' ||
-        token.symbol == 'USDC' || token.symbol == 'FUSD' || token.symbol == 'fUSDT' || token.symbol == 'USDT'
+        token.symbol == 'USDC' || token.symbol == 'fUSDT'
       )
     }
 
@@ -393,7 +393,7 @@ export function useV2PairsWithPrice(
       if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
         return seancePrice
       }
-      if (token.symbol == 'USDC' || token.symbol == 'FUSD' || token.symbol == 'fUSDT' || token.symbol == 'USDT') {
+      if (token.symbol == 'USDC' || token.symbol == 'fUSDT') {
         return 1
       }
       return 0

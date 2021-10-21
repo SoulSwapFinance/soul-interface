@@ -21,39 +21,39 @@ export const EXCHANGE = {
   [ChainId.FANTOM]: 'soulswap/fantom-exchange'
 }
 
-export const exchange = async (chainId = ChainId.MAINNET, query, variables) =>
+export const exchange = async (chainId = ChainId.FANTOM, query, variables) =>
   request(`${GRAPH_HOST[chainId]}/subgraphs/name/${EXCHANGE[chainId]}`, query, variables)
 
-export const getPairs = async (chainId = ChainId.MAINNET, variables = undefined, query = pairsQuery) => {
+export const getPairs = async (chainId = ChainId.FANTOM, variables = undefined, query = pairsQuery) => {
   const { pairs } = await exchange(chainId, query, variables)
   return pairs
 }
 
-export const getTokenSubset = async (chainId = ChainId.MAINNET, variables) => {
+export const getTokenSubset = async (chainId = ChainId.FANTOM, variables) => {
   // console.log('getTokenSubset')
   const { tokens } = await exchange(chainId, tokenSubsetQuery, variables)
   return tokens
 }
 
-export const getTokens = async (chainId = ChainId.MAINNET, query = tokensQuery, variables) => {
+export const getTokens = async (chainId = ChainId.FANTOM, query = tokensQuery, variables) => {
   // console.log('getTokens')
   const { tokens } = await exchange(chainId, query, variables)
   return tokens
 }
 
-export const getToken = async (chainId = ChainId.MAINNET, query = tokenQuery, variables) => {
+export const getToken = async (chainId = ChainId.FANTOM, query = tokenQuery, variables) => {
   // console.log('getTokens')
   const { token } = await exchange(chainId, query, variables)
   return token
 }
 
-export const getTokenPrices = async (chainId = ChainId.MAINNET, variables) => {
+export const getTokenPrices = async (chainId = ChainId.FANTOM, variables) => {
   // console.log('getTokenPrice')
   const { tokens } = await exchange(chainId, tokensQuery, variables)
   return tokens.map((token) => token?.derivedETH)
 }
 
-export const getTokenPrice = async (chainId = ChainId.MAINNET, query, variables) => {
+export const getTokenPrice = async (chainId = ChainId.FANTOM, query, variables) => {
   // console.log('getTokenPrice')
   const ethPrice = await getEthPrice(chainId)
 
@@ -119,7 +119,7 @@ export const getSoulPrice = async () => {
 // }
 
 export const getBundle = async (
-  chainId = ChainId.MAINNET,
+  chainId = ChainId.FANTOM,
   query = ethPriceQuery,
   variables = {
     id: 1,
@@ -128,27 +128,27 @@ export const getBundle = async (
   return exchange(chainId, query, variables)
 }
 
-export const getLiquidityPositions = async (chainId = ChainId.MAINNET, variables) => {
+export const getLiquidityPositions = async (chainId = ChainId.FANTOM, variables) => {
   const { liquidityPositions } = await exchange(chainId, liquidityPositionsQuery, variables)
   return liquidityPositions
 }
 
-export const getDayData = async (chainId = ChainId.MAINNET, query = dayDatasQuery, variables = undefined) => {
+export const getDayData = async (chainId = ChainId.FANTOM, query = dayDatasQuery, variables = undefined) => {
   const { dayDatas } = await exchange(chainId, query, variables)
   return dayDatas
 }
 
-export const getFactory = async (chainId = ChainId.MAINNET, variables = undefined) => {
+export const getFactory = async (chainId = ChainId.FANTOM, variables = undefined) => {
   const { factory } = await exchange(chainId, factoryQuery, variables)
   return factory
 }
 
-export const getTransactions = async (chainId = ChainId.MAINNET, query = transactionsQuery, variables = undefined) => {
+export const getTransactions = async (chainId = ChainId.FANTOM, query = transactionsQuery, variables = undefined) => {
   const { swaps } = await exchange(chainId, query, variables)
   return swaps
 }
 
-export const getTokenPairs = async (chainId = ChainId.MAINNET, query = tokenPairsQuery, variables = undefined) => {
+export const getTokenPairs = async (chainId = ChainId.FANTOM, query = tokenPairsQuery, variables = undefined) => {
   const { pairs1, pairs2 } = await exchange(chainId, query, variables)
   return pairs1 || pairs2 ? [...(pairs1 ? pairs1 : []), ...(pairs2 ? pairs2 : [])] : undefined
 }

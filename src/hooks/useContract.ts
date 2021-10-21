@@ -41,6 +41,7 @@ import ALCX_REWARDER_ABI from '../constants/abis/alcx-rewarder.json'
 import CLONE_REWARDER_ABI from '../constants/abis/clone-rewarder.json'
 import ARCHER_ROUTER_ABI from '../constants/abis/archer-router.json'
 import BASE_SWAPPER_ABI from '../constants/abis/swapper.json'
+import ANYSWAP_ERC20_ABI from '../constants/abis/anyswap_erc20.json'
 import BENTOBOX_ABI from '../constants/abis/bentobox.json'
 import CHAINLINK_ORACLE_ABI from '../constants/abis/chainlink-oracle.json'
 import COMPLEX_REWARDER_ABI from '../constants/abis/complex-rewarder.json'
@@ -52,7 +53,8 @@ import ENS_PUBLIC_RESOLVER_ABI from '../constants/abis/ens-public-resolver.json'
 import ERC20_ABI from '../constants/abis/erc20.json'
 import { ERC20_BYTES32_ABI } from '../constants/abis/erc20'
 import FACTORY_ABI from '../constants/abis/factory.json'
-import IUniswapV2PairABI from '../constants/abis/uniswap-v2-pair.json'
+// import IUniswapV2PairABI from '../constants/abis/uniswap-v2-pair.json'
+import ISoulSwapPairABI from '../constants/abis/soulswap/ISoulSwapPair.json'
 import KASHIPAIR_ABI from '../constants/abis/kashipair.json'
 import MAKER_ABI from '../constants/abis/maker.json'
 import SOUL_SCARAB_ABI from '../constants/abis/soulswap/scarab.json' // todo
@@ -114,6 +116,10 @@ export function useTokenContract(tokenAddress?: string, withSignerIfPossible?: b
   return useContract(tokenAddress, ERC20_ABI, withSignerIfPossible)
 }
 
+export function useAnyswapTokenContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {
+  return useContract(tokenAddress, ANYSWAP_ERC20_ABI, withSignerIfPossible)
+}
+
 export function useWETH9Contract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId ? WNATIVE[chainId].address : undefined, WETH9_ABI, withSignerIfPossible)
@@ -150,7 +156,7 @@ export function useBytes32TokenContract(tokenAddress?: string, withSignerIfPossi
 }
 
 export function usePairContract(pairAddress?: string, withSignerIfPossible?: boolean): Contract | null {
-  return useContract(pairAddress, IUniswapV2PairABI, withSignerIfPossible)
+  return useContract(pairAddress, ISoulSwapPairABI, withSignerIfPossible)
 }
 
 export function useMerkleDistributorContract(): Contract | null {
@@ -184,7 +190,7 @@ export function useSoulContract(withSignerIfPossible = true): Contract | null {
 
 export function useETHPairContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && ETH_USD_PAIR[chainId], IUniswapV2PairABI, withSignerIfPossible)
+  return useContract(chainId && ETH_USD_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
 }
 
 export function useScarabContract(withSignerIfPossible?: boolean): Contract | null {
@@ -194,22 +200,22 @@ export function useScarabContract(withSignerIfPossible?: boolean): Contract | nu
 
 export function useSoulSeanceContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_SEANCE_PAIR[chainId], IUniswapV2PairABI, withSignerIfPossible)
+  return useContract(chainId && SOUL_SEANCE_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
 }
 
 export function useSoulFtmContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_FTM_PAIR[chainId], IUniswapV2PairABI, withSignerIfPossible)
+  return useContract(chainId && SOUL_FTM_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
 }
 
 export function useSeanceUsdcContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SEANCE_USDC_PAIR[chainId], IUniswapV2PairABI, withSignerIfPossible)
+  return useContract(chainId && SEANCE_USDC_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
 }
 
 export function useFtmUsdcContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && FTM_USDC_PAIR[chainId], IUniswapV2PairABI, withSignerIfPossible)
+  return useContract(chainId && FTM_USDC_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
 }
 
 export function useSoulVaultContract(withSignerIfPossible = true): Contract | null {

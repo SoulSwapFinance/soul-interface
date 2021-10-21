@@ -360,7 +360,7 @@ export default function CreateScarab(): JSX.Element {
                     <div className="mb-2 text-2xl text-emphesis">{i18n._(t`Considerations`)}</div>{' '}
                     <div className="mb-4 text-base text-secondary">
                       <p>{i18n._(t`• Soul is unlockable before the unlock time.`)}</p>
-                      {/* <p>{i18n._(t`• Scarab contract address: ${SCARAB_ADDRESS[chainId || 1285]}`)}</p> */}
+                      {/* <p>{i18n._(t`• Scarab contract address: ${SCARAB_ADDRESS[chainId || 250]}`)}</p> */}
                       {/* <p>{i18n._(t`• Always DYOR`)}</p> */}
                     </div>
                   </div>
