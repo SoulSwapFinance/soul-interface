@@ -18,6 +18,18 @@ export const FarmPids = [
     token1Address: tokens.SOUL,
     token2Address: tokens.FTM,
   },
+  { // 600
+    pid: 22,
+    token1: 'USDC',
+    token2: 'SOUL',
+    lpSymbol: 'SOUL-USDC',
+    lpAddresses: {
+      4002: '',
+      250: '0xC0A301f1E5E0Fe37a31657e8F60a41b14d01B0Ef',
+    },
+    token1Address: tokens.USDC,
+    token2Address: tokens.SOUL,
+  },
   { // 400	
     pid: 3,
     token1: 'FUSD',
@@ -209,6 +221,18 @@ export const FarmPids = [
     },
     token1Address: tokens.WETH,
     token2Address: tokens.USDC,
+  },
+  { // 200
+    pid: 21,
+    token1: 'USDC',
+    token2: 'DAI',
+    lpSymbol: 'DAI-USDC',
+    lpAddresses: {
+      4002: '',
+      250: '0x406de3a93f6b4179e3b21a3d81226b43e1918fd9',
+      },
+      token1Address: tokens.USDC,
+      token2Address: tokens.DAI,
   },
   { // 200
     pid: 16,
