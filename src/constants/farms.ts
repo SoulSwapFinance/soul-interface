@@ -269,7 +269,7 @@ export const POOLS: AddressMap = {
       token1: {
         id: '0x940F41F0ec9ba1A34CF001cc03347ac092F5F6B5', // gfUSDT
         name: 'Geist fUSDT',
-        symbol: 'gfUSDT',
+        symbol: 'gFUSDT',
         decimals: 18,
       },
     },
@@ -330,6 +330,36 @@ export const POOLS: AddressMap = {
         id: '0x321162Cd933E2Be498Cd2267a90534A804051b11', // WBTC
         name: 'Wrapped BTC',
         symbol: 'WBTC',
+        decimals: 8,
+      },
+    },
+    '0x406de3a93f6b4179e3b21a3d81226b43e1918fd9': {  // DAI-USDC
+      id: 21, // 200
+      token0: {
+        id: '0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e', // DAI
+        name: 'Dai Stablecoin',
+        symbol: 'DAI',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
+        name: 'USD Coin',
+        symbol: 'USDC',
+        decimals: 8,
+      },
+    },
+    '0xC0A301f1E5E0Fe37a31657e8F60a41b14d01B0Ef': {  // SOUL-USDC
+      id: 22, // 600
+        token0: {
+        id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
+        name: 'SoulPower',
+        symbol: 'SOUL',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
+        name: 'USD Coin',
+        symbol: 'USDC',
         decimals: 8,
       },
     }
