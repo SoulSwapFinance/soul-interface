@@ -30,6 +30,15 @@ const builders = {
         return `${prefix}/${type}/${data}`
     }
   },
+  bscscan: (chainName: string, data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
+    const prefix = `https://${chainName ? `${chainName}.` : ''}bscscan.com`
+    switch (type) {
+      case 'transaction':
+        return `${prefix}/tx/${data}`
+      default:
+        return `${prefix}/${type}/${data}`
+    }
+  },
   // xdai: (chainName: string, data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
   //   const prefix = `https://blockscout.com/poa/xdai`
   //   switch (type) {

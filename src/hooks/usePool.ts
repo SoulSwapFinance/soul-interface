@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import ISoulSwapPairABI from '@soulswap/swap-core/build/contracts/ISoulSwapPair.json'
+import ISoulSwapPairABI from '../constants/abis/soulswap/ISoulSwapPair.json'
 import { useContract } from './useContract'
 import { isAddress } from '../functions'
 // import { BigNumber } from '@ethersproject/bignumber'

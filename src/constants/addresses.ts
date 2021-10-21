@@ -82,6 +82,7 @@ export const SOUL_SUMMONER_ADDRESS: AddressMap = {
 export const ZAPPER_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '0xcff6eF0B9916682B37D80c19cFF8949bc1886bC2',
   // [ChainId.ROPSTEN]: '0xcff6eF0B9916682B37D80c19cFF8949bc1886bC2',
+  [ChainId.FANTOM]: '',
 }
 
 // TODO: specify merkle distributor for mainnet

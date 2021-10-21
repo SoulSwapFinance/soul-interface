@@ -1,6 +1,6 @@
 const Web3 = require('web3')
 import summonerAbi from '../../constants/abis/soulswap/soulsummoner.json'
-import pairAbi from '../../constants/abis/uniswap-v2-pair.json'
+import pairAbi from '../../constants/abis/soulswap/ISoulSwapPair.json'
 import { POOLS } from '../../constants/farms'
 import { ChainId } from '../../sdk'
 

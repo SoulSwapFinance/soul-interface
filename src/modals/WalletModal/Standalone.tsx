@@ -36,22 +36,15 @@ const Wrapper = styled.div`
 `
 
 const HeaderRow = styled.div`
-  // ${({ theme }) => theme.flexRowNoWrap};
   padding: 1rem 1rem;
   font-weight: 500;
-  // color: ${(props) => (props.color === 'blue' ? ({ theme }) => theme.primary1 : 'inherit')};
-  // ${({ theme }) => theme.mediaWidth.upToMedium`
     padding: 1rem;
-  `};
 `
 
 const ContentWrapper = styled.div`
-  /*background-color: ${({ theme }) => theme.bg2}; */
-  /*padding: 2rem;*/
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
 
-  // ${({ theme }) => theme.mediaWidth.upToMedium`padding: 1rem`};
 `
 
 const UpperSection = styled.div`
@@ -75,24 +68,19 @@ const UpperSection = styled.div`
 `
 
 const Blurb = styled.div`
-  // ${({ theme }) => theme.flexRowNoWrap}
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 2rem;
-  // ${({ theme }) => theme.mediaWidth.upToMedium`
     margin: 1rem;
     font-size: 12px;
-  `};
 `
 
 const OptionGrid = styled.div`
   display: grid;
   grid-gap: 10px;
-  // ${({ theme }) => theme.mediaWidth.upToMedium`
     grid-template-columns: 1fr;
     grid-gap: 10px;
-  `};
 `
 
 const HoverText = styled.div`

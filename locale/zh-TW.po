@@ -16,9 +16,7 @@ msgstr ""
 msgid "% Share"
 msgstr ""
 
-msgid ""
-"(COMING SOON) Accrue automatic yield through flash loans and\n"
-"SOUL strategies"
+msgid "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies"
 msgstr ""
 
 msgid "/ DAY"
@@ -144,21 +142,6 @@ msgstr ""
 msgid "Bento Balance: {0}"
 msgstr ""
 
-msgid "BentoBox"
-msgstr ""
-
-msgid "BentoBox Apps"
-msgstr ""
-
-msgid "BentoBox is an innovative way to use dapps gas-efficiently and gain extra yield."
-msgstr ""
-
-msgid "BentoBox strategies can create yield for your collateral tokens. This token does not yet have a strategy in the BentoBox."
-msgstr ""
-
-msgid "BentoBox strategies can create yield for your liquidity while it is not lent out. This token does not yet have a strategy in the BentoBox."
-msgstr ""
-
 msgid "Borrow"
 msgstr ""
 
@@ -227,6 +210,21 @@ msgstr ""
 msgid ""
 "Click on a pool below, input the amount you wish to migrate or select max, and click\n"
 "migrate"
+msgstr ""
+
+msgid "CoffinBox"
+msgstr ""
+
+msgid "CoffinBox Apps"
+msgstr ""
+
+msgid "CoffinBox is an innovative way to use dapps gas-efficiently and gain extra yield."
+msgstr ""
+
+msgid "CoffinBox strategies can create yield for your collateral tokens. This token does not yet have a strategy in the CoffinBox."
+msgstr ""
+
+msgid "CoffinBox strategies can create yield for your liquidity while it is not lent out. This token does not yet have a strategy in the CoffinBox."
 msgstr ""
 
 msgid "CoffinBoxes provides extra yield on deposits with flash lending, strategies, and fixed, low-gas transfers among integrated dapps, like markets"
@@ -316,19 +314,19 @@ msgstr ""
 msgid "Deposit"
 msgstr ""
 
-msgid "Deposit SOUL into BentoBox"
+msgid "Deposit SOUL into CoffinBox"
 msgstr ""
 
 msgid "Deposit tokens into CoffinBox for all the yields"
 msgstr ""
 
-msgid "Deposit {0} into BentoBox"
+msgid "Deposit {0} into CoffinBox"
 msgstr ""
 
 msgid "Deposited"
 msgstr ""
 
-msgid "Depositing {0} into BentoBox"
+msgid "Depositing {0} into CoffinBox"
 msgstr ""
 
 msgid "Disable Multihops"
@@ -418,9 +416,6 @@ msgid "Filled"
 msgstr ""
 
 msgid "Find Pool"
-msgstr ""
-
-msgid "Follow on Twitter."
 msgstr ""
 
 msgid "Forum"
@@ -573,7 +568,7 @@ msgid "MAX"
 msgstr ""
 
 msgid ""
-"MEOW tokens wrap xSOUL into BentoBox for double yields and can be\n"
+"MEOW tokens wrap SEANCE into CoffinBox for double yields and can be\n"
 "used to vote in special MEOW governor contracts."
 msgstr ""
 
@@ -1051,9 +1046,6 @@ msgstr ""
 msgid "Turn On Expert Mode"
 msgstr ""
 
-msgid "Twitter"
-msgstr ""
-
 msgid "Unknown error{0}. Try increasing your slippage tolerance."
 msgstr ""
 
@@ -1100,6 +1092,9 @@ msgid "View Liquidity Positions"
 msgstr ""
 
 msgid "View on Explorer"
+msgstr ""
+
+msgid "View our Data."
 msgstr ""
 
 msgid "View our Ecosystem."

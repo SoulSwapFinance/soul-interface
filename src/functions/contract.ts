@@ -7,7 +7,8 @@ import { ARCHER_ROUTER_ADDRESS } from '../constants'
 import { AddressZero } from '@ethersproject/constants'
 import ArcherSwapRouterABI from '../constants/abis/archer-router.json'
 import { Contract } from '@ethersproject/contracts'
-import IUniswapV2Router02ABI from '../constants/abis/uniswap-v2-router-02.json'
+// import IUniswapV2Router02ABI from '../constants/abis/uniswap-v2-router-02.json'
+import ISoulSwapPairABI from '../constants/abis/soulswap/ISoulSwapPair.json'
 import { isAddress } from '../functions/validate'
 
 // account is not optional
@@ -40,7 +41,7 @@ export function getRouterAddress(chainId?: ChainId) {
 export function getRouterContract(chainId: number, library: Web3Provider, account?: string): Contract {
   return getContract(
     getRouterAddress(chainId),
-    IUniswapV2Router02ABI,
+    ISoulSwapPairABI,
     library,
     account
   )

@@ -100,11 +100,15 @@ export function useSwapActionHandlers(): {
   }
 }
 
-// TODO: Swtich for ours...
+// TODO: Switch for ours...
 const BAD_RECIPIENT_ADDRESSES: { [chainId: string]: { [address: string]: true } } = {
   [ChainId.MAINNET]: {
     '0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac': true, // v2 factory
     '0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F': true, // v2 router 02
+  },
+  [ChainId.FANTOM]: {
+    '0x1120e150dA9def6Fe930f4fEDeD18ef57c0CA7eF': true, // v2 factory
+    '0x6b3d631B87FE27aF29efeC61d2ab8CE4d621cCBF': true, // v2 router 02
   },
 }
 

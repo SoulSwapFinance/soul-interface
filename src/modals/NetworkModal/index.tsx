@@ -48,7 +48,7 @@ export const SUPPORTED_NETWORKS: {
   },
   
   [ChainId.FANTOM]: {
-    chainId: '0xfa',
+    chainId: '0xFA',
     chainName: 'Fantom',
     nativeCurrency: {
       name: 'Fantom',
@@ -173,7 +173,7 @@ export default function NetworkModal(): JSX.Element | null {
 
   return (
     <Modal isOpen={networkModalOpen} onDismiss={toggleNetworkModal} maxWidth={672}>
-      <ModalHeader onClose={toggleNetworkModal} title="Select a Network" />
+      <ModalHeader onClose={toggleNetworkModal} title="Select Network" />
       <div className="mb-6 text-lg text-primary">
         You are browsing <span className="font-bold text-pink">SOUL</span> on <span className="font-bold text-blue">{NETWORK_LABEL[chainId]}</span>.
         <br /> More chains coming soon!

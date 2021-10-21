@@ -1,11 +1,9 @@
 import {
   ALPHA,
   AMPL,
-  // AVALANCHE,
   BAB,
   BAC,
   BSC,
-  // CELO,
   CREAM,
   CRV,
   CVXCRV,
@@ -18,16 +16,12 @@ import {
   FEI,
   FRAX,
   FXS,
-  // HARMONY,
   HBTC,
-  // HECO,
   IBETH,
   LFBTC,
   LIFT,
-  // MATIC,
   MIR,
   NFTX,
-  // OKEX,
   PLAY,
   PONT,
   PWING,
@@ -43,12 +37,11 @@ import {
   USDT,
   UST,
   WBTC,
-  // XDAI,
 } from './tokens'
 // a list of tokens by chain
 import { ChainId, Currency, Token, WNATIVE } from '../sdk'
 
-import { SupportedChainId } from './chains'
+// import { SupportedChainId } from './chains'
 
 type ChainTokenList = {
   readonly [chainId: number]: Token[]
@@ -106,6 +99,8 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     FANTOM.WBTC, 
     FANTOM.WETH
   ], // 27 AUG
+  [ChainId.BSC]: [...WRAPPED_NATIVE_ONLY[ChainId.BSC], BSC.DAI, BSC.USD, BSC.USDC, BSC.USDT, BSC.BTCB, BSC.WETH],
+
 }
 
 export const ADDITIONAL_BASES: {
@@ -181,9 +176,7 @@ export const COMMON_BASES: ChainTokenList = {
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], 
     FANTOM.SOUL,
-    // FANTOM.SEANCE, 
     FANTOM.USDC,
-    // FANTOM.FUSD,
     FANTOM.WBTC,
     FANTOM.USDT,
     FANTOM.WETH
@@ -194,14 +187,17 @@ export const COMMON_BASES: ChainTokenList = {
     FANTOM_TESTNET.FUSD,
     FANTOM_TESTNET.FETH,
   ],
+  [ChainId.BSC]: [...WRAPPED_NATIVE_ONLY[ChainId.BSC], BSC.DAI, BSC.USD, BSC.USDC, BSC.USDT, BSC.BTCB, BSC.WETH],
+
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WRAPPED_NATIVE_ONLY,
   [ChainId.MAINNET]: [...WRAPPED_NATIVE_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC],
-  [ChainId.FANTOM]: [...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], FANTOM.SOUL, FANTOM.DAI, FANTOM.USDC, FANTOM.FUSD] //FANTOM.WBTC, FANTOM.WETH],
-  
+  [ChainId.FANTOM]: [...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], FANTOM.SOUL, FANTOM.DAI, FANTOM.USDC, FANTOM.FUSD], //FANTOM.WBTC, FANTOM.WETH],
+  [ChainId.BSC]: [...WRAPPED_NATIVE_ONLY[ChainId.BSC], BSC.DAI, BSC.USD, BSC.USDC, BSC.USDT, BSC.BTCB, BSC.WETH],
+
 }
 
 export const PINNED_PAIRS: {
