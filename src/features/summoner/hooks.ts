@@ -205,7 +205,7 @@ const useAsync = (asyncFunction, immediate = true) => {
     }
 
     return () => {
-      clearInterval(intervalId) //This is important
+      clearInterval(intervalId) // This is important
     }
   }, [execute, immediate])
 

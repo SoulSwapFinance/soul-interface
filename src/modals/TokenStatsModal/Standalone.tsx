@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
-import { fortmatic, injected, portis } from '../../connectors'
+import { injected, portis } from '../../connectors' // fortmatic
 import { useModalOpen, useWalletModalToggle } from '../../state/application/hooks'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import AccountDetails from '../../components/AccountDetails'
 import { ApplicationModal } from '../../state/application/actions'
 import ExternalLink from '../../components/ExternalLink'
-import { OVERLAY_READY } from '../../connectors/Fortmatic'
+// import { OVERLAY_READY } from '../../connectors/Fortmatic'
 import Option from './Option'
 import PendingView from './PendingView'
 import ReactGA from 'react-ga'
@@ -45,18 +45,15 @@ const ContentWrapper = styled.div`
 
 const UpperSection = styled.div`
   position: relative;
-
   h5 {
     margin: 0;
     margin-bottom: 0.5rem;
     font-size: 1rem;
     font-weight: 400;
   }
-
   h5:last-child {
     margin-bottom: 0px;
   }
-
   h4 {
     margin-top: 0;
     font-weight: 500;
@@ -170,11 +167,11 @@ export default function TokenStatsStandalone({
   }
 
   // close wallet modal if fortmatic modal is active
-  useEffect(() => {
-    fortmatic.on(OVERLAY_READY, () => {
-      toggleWalletModal()
-    })
-  }, [toggleWalletModal])
+  // useEffect(() => {
+  //   fortmatic.on(OVERLAY_READY, () => {
+  //     toggleWalletModal()
+  //   })
+  // }, [toggleWalletModal])
 
   // get wallets user can switch too, depending on device/browser
   function getOptions() {
