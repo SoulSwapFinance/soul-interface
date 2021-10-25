@@ -18,7 +18,7 @@ import { request } from 'graphql-request'
 
 export const EXCHANGE = {
   [ChainId.MAINNET]: 'sushiswap/exchange',
-  [ChainId.FANTOM]: 'soulswap/fantom-exchange'
+  [ChainId.FANTOM]: 'soulswapfinance/fantom-exchange'
 }
 
 export const exchange = async (chainId = ChainId.FANTOM, query, variables) =>
@@ -61,7 +61,7 @@ export const getTokenPrice = async (chainId = ChainId.FANTOM, query, variables) 
   return token?.derivedETH * ethPrice
 }
 
-export const getEthPrice = async (chainId = ChainId.MAINNET, variables = undefined) => {
+export const getEthPrice = async (chainId = ChainId.FANTOM, variables = undefined) => {
   // console.log('getEthPrice')
   const data = await getBundle(chainId, undefined, variables)
   return data?.bundles?.[0]?.ethPrice

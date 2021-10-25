@@ -1,5 +1,3 @@
-// TODO: update all
-
 import {
   soulSummonerPairAddressesQuery,
   poolsSummonerQuery,
@@ -10,10 +8,10 @@ import { GRAPH_HOST } from '../constants'
 import { request } from 'graphql-request'
 
 export const SOUL_SUMMONER = {
-  [ChainId.MAINNET]: 'sushiswap/master-chefv2',
+  [ChainId.FANTOM]: 'soulswapfinance/soul-summoner',
 }
 
-export const soulSummoner = async (query, chainId = ChainId.MAINNET) =>
+export const soulSummoner = async (query, chainId = ChainId.FANTOM) =>
   request(`${GRAPH_HOST[chainId]}/subgraphs/name/${SOUL_SUMMONER[chainId]}`, query)
 
 export const getSoulSummonerPairAddreses = async () => {
