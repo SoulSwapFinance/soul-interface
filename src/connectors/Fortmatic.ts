@@ -12,9 +12,9 @@ const CHAIN_ID_NETWORK_ARGUMENT: {
 }
 
 export class FortmaticConnector extends FortmaticConnectorCore {
-  on(OVERLAY_READY: string, arg1: () => void) {
-    throw new Error('Method not implemented.')
-  }
+  // on(OVERLAY_READY: string, arg1: () => void) {
+    // throw new Error('Method not implemented.')
+  // }
   async activate() {
     if (!this.fortmatic) {
       const { default: Fortmatic } = await import('fortmatic')
