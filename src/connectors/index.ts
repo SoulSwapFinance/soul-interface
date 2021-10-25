@@ -1,7 +1,7 @@
 import { Web3Provider } from '@ethersproject/providers'
 import { BscConnector } from '@binance-chain/bsc-connector'
 // import { ChainId } from '../sdk'
-// import { FortmaticConnector } from './Fortmatic'
+import { FortmaticConnector } from './Fortmatic'
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { NetworkConnector } from './NetworkConnector'
 import { PortisConnector } from '@web3-react/portis-connector'
@@ -117,12 +117,12 @@ export const walletconnect = new WalletConnectConnector({
 })
 
 // // mainnet only
-// export const fortmatic = new FortmaticConnector(
-//   {
-//   apiKey: process.env.NEXT_PUBLIC_FORTMATIC_API_KEY ?? '',
-//   chainId: 1, 
-//   }
-// )
+export const fortmatic = new FortmaticConnector(
+  {
+  apiKey: process.env.NEXT_PUBLIC_FORTMATIC_API_KEY ?? '',
+  chainId: 1, 
+  }
+)
 
 // mainnet only
 export const portis = new PortisConnector({
