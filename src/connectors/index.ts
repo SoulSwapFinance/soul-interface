@@ -13,7 +13,7 @@ enum ChainId { // TODO
   MAINNET = 1,
   BSC = 56,
   FANTOM = 250,
-  FANTOM_TESTNET = 4002
+  // FANTOM_TESTNET = 4002
 }
 
 export const RPC = {
@@ -21,7 +21,7 @@ export const RPC = {
   // [ChainId.MAINNET]: 'https://eth-mainnet.alchemyapi.io/v2/nj9dkG3QULVVIs_hIMq26wL0ZwV4dJ3x',
   [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
   [ChainId.FANTOM]: 'https://rpc.ftm.tools',
-  [ChainId.FANTOM_TESTNET]: 'https://rpc.testnet.fantom.network',
+  // [ChainId.FANTOM_TESTNET]: 'https://rpc.testnet.fantom.network',
   // [ChainId.ROPSTEN]: 'https://eth-ropsten.alchemyapi.io/v2/cidKix2Xr-snU3f6f6Zjq_rYdalKKHmW',
   // [ChainId.RINKEBY]: 'https://eth-rinkeby.alchemyapi.io/v2/XVLwDlhGP6ApBXFz_lfv0aZ6VmurWhYD',
   // [ChainId.GÖRLI]: 'https://eth-goerli.alchemyapi.io/v2/Dkk5d02QjttYEoGmhZnJG37rKt8Yl3Im',
@@ -54,10 +54,10 @@ export function getNetworkLibrary(): Web3Provider {
 
 export const injected = new InjectedConnector({
   supportedChainIds: [
-    1, // mainnet
-    56, // bsc
+    // 1, // mainnet
+    // 56, // bsc
     250, // fantom
-    4002, // fantom testnet
+    // 4002, // fantom testnet
     // 3, // ropsten
     // 4, // rinkeby
     // 5, // goreli
@@ -87,7 +87,7 @@ export const bridgeInjected = new InjectedConnector({
     // 5, // goreli
     // 42, // kovan
     250, // fantom
-    4002, // fantom testnet
+    // 4002, // fantom testnet
     // 137, // matic
     // 80001, // matic testnet
     // 100, // xdai
@@ -110,17 +110,19 @@ export const bridgeInjected = new InjectedConnector({
 
 // mainnet only
 export const walletconnect = new WalletConnectConnector({
-  rpc: RPC,
+  rpc: { [ChainId.FANTOM]: RPC[ChainId.FANTOM] },
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   pollingInterval: 15000,
 })
 
-// mainnet only
-export const fortmatic = new FortmaticConnector({
+// // mainnet only
+export const fortmatic = new FortmaticConnector(
+  {
   apiKey: process.env.NEXT_PUBLIC_FORTMATIC_API_KEY ?? '',
-  chainId: 1,
-})
+  chainId: 1, 
+  }
+)
 
 // mainnet only
 export const portis = new PortisConnector({

@@ -336,7 +336,7 @@ export const POOLS: AddressMap = {
     '0x406de3a93f6b4179e3b21a3d81226b43e1918fd9': {  // DAI-USDC
       id: 21, // 200
       token0: {
-        id: '0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e', // DAI
+        id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
         name: 'Dai Stablecoin',
         symbol: 'DAI',
         decimals: 18,

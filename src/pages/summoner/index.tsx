@@ -150,7 +150,7 @@ export default function Summoner(): JSX.Element {
       farm.pair.token0?.symbol == 'USDC' && (farm.pair.token1?.symbol == 'fUSDT' || farm.pair.token1?.symbol == 'FUSD') || farm.pair.token1?.symbol == 'DAI' ||
       farm.pair.token0?.symbol == 'fUSDT' && (farm.pair.token1?.symbol == 'USDC' || farm.pair.token1?.symbol == 'FUSD') || farm.pair.token1?.symbol == 'DAI' ||
       farm.pair.token0?.symbol == 'FUSD' && (farm.pair.token1?.symbol == 'USDC' || farm.pair.token1?.symbol == 'fUSDT' || farm.pair.token1?.symbol == 'DAI') ||
-      farm.pair.token0?.symbol == 'DAI' && (farm.pair.token1?.symbol == 'USDC' || farm.pair.token1?.symbol == 'fUSDT' || farm.pair.token1?.symbol === 'FUSD')
+      farm.pair.token0?.symbol == 'DAI' && (farm.pair.token1?.symbol == 'gFUSDT' || farm.pair.token1?.symbol == 'USDC' || farm.pair.token1?.symbol == 'fUSDT' || farm.pair.token1?.symbol === 'FUSD')
   }
 
   const data = farms.map(map).filter((farm) => {
