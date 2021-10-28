@@ -165,7 +165,7 @@ export const POOLS: AddressMap = {
         id: '0x049d68029688eAbF473097a2fC38ef61633A3C7A', // fUSDT
         name: 'Frapped USDT',
         symbol: 'fUSDT',
-        decimals: 18,
+        decimals: 6,
     },
   },
     '0x8542bEAC34282aFe5Bb6951Eb6DCE0B3783b7faB': {  // SEANCE-FTM
@@ -240,7 +240,7 @@ export const POOLS: AddressMap = {
         id: '0x049d68029688eabf473097a2fc38ef61633a3c7a', // USDT
         name: 'Frapped USDT',
         symbol: 'fUSDT',
-        decimals: 18,
+        decimals: 6,
       },
     },
     '0x5b181BBc3Cc18C66B6f36f584866a1ff09865630': {  // ETH-USDC
@@ -270,7 +270,7 @@ export const POOLS: AddressMap = {
         id: '0x940F41F0ec9ba1A34CF001cc03347ac092F5F6B5', // gfUSDT
         name: 'Geist fUSDT',
         symbol: 'gFUSDT',
-        decimals: 18,
+        decimals: 6,
       },
     },
     '0xC1EdFbA9811B696bDFd07d31eD5FF702e031364E': {  // BNB-DAI
@@ -304,7 +304,7 @@ export const POOLS: AddressMap = {
       },
     },
     '0x34990FC1e6e3169DCf23624049be29782AFc81bd': {  // MIM-FTM
-      id: 19, // 400
+      id: 19, // 600
       token0: {
         id: '0x82f0B8B456c1A451378467398982d4834b6829c1', // MIM
         name: 'Magic Internet Money',
@@ -319,7 +319,7 @@ export const POOLS: AddressMap = {
       },
     },
     '0xE2d39F7f0c8517Ca2058Fa97eB3D8d4928F7C6D6': {  // BTC-USDC
-      id: 20, // 600
+      id: 20, // 400
       token0: {
         id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
         name: 'USD Coin',
@@ -350,7 +350,7 @@ export const POOLS: AddressMap = {
     },
     '0xC0A301f1E5E0Fe37a31657e8F60a41b14d01B0Ef': {  // SOUL-USDC
       id: 22, // 600
-        token0: {
+      token0: {
         id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
         name: 'SoulPower',
         symbol: 'SOUL',
