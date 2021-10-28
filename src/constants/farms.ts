@@ -362,6 +362,21 @@ export const POOLS: AddressMap = {
         symbol: 'USDC',
         decimals: 6,
       },
+    },
+    '0xF3d6E8Ecece8647B456d57375Ce0B51B8F0cD40b': {  // FTM-DAI
+      id: 23, // 600
+      token0: {
+        id: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83', // WFTM
+        name: 'Wrapped FTM',
+        symbol: 'FTM',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
+        name: 'Dai Stablecoin',
+        symbol: 'DAI',
+        decimals: 18,
+      },
     }
   }
 }

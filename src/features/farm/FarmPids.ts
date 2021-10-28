@@ -103,6 +103,18 @@ export const FarmPids = [
       token2Address: tokens.REAPER,
   },
   { // 600
+    pid: 23,
+    token1: 'FTM',
+    token2: 'DAI',
+    lpSymbol: 'DAI-FTM',
+    lpAddresses: {
+      4002: '',
+      250: '0xF3d6E8Ecece8647B456d57375Ce0B51B8F0cD40b',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.DAI,
+  },
+  { // 600
     pid: 2,
     token1: 'FTM',
     token2: 'USDC',
