@@ -12,7 +12,7 @@ export enum Feature {
 
 const features = {
   [ChainId.MAINNET]: [Feature.AMM],
-  [ChainId.FANTOM]: [Feature.AMM, Feature.LIQUIDITY_MINING],
+  [ChainId.FANTOM]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.ANALYTICS],
   [ChainId.FANTOM_TESTNET]: [Feature.AMM, Feature.LIQUIDITY_MINING]
 }
 
