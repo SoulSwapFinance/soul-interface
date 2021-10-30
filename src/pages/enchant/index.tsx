@@ -21,6 +21,8 @@ import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 import useEnchant from '../../hooks/useEnchant'
 import { ethers } from 'ethers'
 
+import useApprove from '../../features/farm/hooks/useApprove'
+
 const INPUT_CHAR_LIMIT = 18
 
 const sendTx = async (txFunc: () => Promise<any>): Promise<boolean> => {
@@ -56,6 +58,8 @@ export default function Enchant() {
   const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
 
+  const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(SEANCE[chainId])
+
   // functions from Enchantment contract we're using
   const { enter, leave } = useSeanceStakeManual()
   const { totalShares, userBalance } = useEnchant()
@@ -65,7 +69,10 @@ export default function Enchant() {
   // const [enchantedSeance, setEnchantedSeance] = useState('')
   const [totalSupply, setTotalSupply] = useState('')
   const seanceContractBalance = useTokenBalance(ENCHANT[chainId].address ?? undefined, SEANCE[chainId])
-  const seanceBalance = useTokenBalance(account ?? undefined, SEANCE[chainId])
+  
+  // gets ECHANT's balance of SEANCE
+  // note: if doesn't work put into a fetcher func in this file
+  const seanceBalance = erc20BalanceOf(ENCHANT[chainId])
   const enchantBalance = useTokenBalance(account ?? undefined, ENCHANT[chainId])
 
 
