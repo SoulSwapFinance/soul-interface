@@ -28,7 +28,7 @@ const useSeanceStakeManual = () => {
     async (amount: CurrencyAmount<Token> | undefined) => {
       if (amount?.quotient) {
         try {
-          const tx = await enchantContract?.exit(amount?.quotient.toString())
+          const tx = await enchantContract?.leave(amount?.quotient.toString())
           return addTransaction(tx, { summary: 'Unstake SEANCE' })
         } catch (e) {
           return e
@@ -41,7 +41,7 @@ const useSeanceStakeManual = () => {
   // harvest pending SEANCE.
   const harvest = useCallback(async () => {
     try {
-      const tx = await enchantContract?.exit('0')
+      const tx = await enchantContract?.leave('0')
       return addTransaction(tx, { summary: 'Harvest SEANCE' })
     } catch (e) {
       return e
