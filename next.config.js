@@ -58,6 +58,11 @@ module.exports = withBundleAnalyzer(
           destination: '/scarab/create',
           permanent: true,
         },
+        {
+          source: '/enchantment',
+          destination: '/enchant',
+          permanent: true,
+        },
         // {
         //   source: '/bento/kashi',
         //   destination: '/lend',
@@ -69,7 +74,7 @@ module.exports = withBundleAnalyzer(
       return [
         // {
         //   source: '/stake',
-        //   destination: '/spell',
+        //   destination: '/seance',
         // },
         {
           source: '/add/:token*',

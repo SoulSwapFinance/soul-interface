@@ -1,4 +1,4 @@
-import { SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS, ZERO } from '../../sdk'
+import { ENCHANT_ADDRESS, ZERO } from '../../sdk'
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
 import React, { useEffect, useState } from 'react'
 import { SOUL, SEANCE } from '../../constants'
@@ -17,8 +17,6 @@ import { useLingui } from '@lingui/react'
 import useSoulStakeManual from '../../hooks/useSoulStakeManual'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { useWalletModalToggle } from '../../state/application/hooks'
-import useSoulVault from '../../hooks/useSoulVault'
-import AccountDetails from '../../components/AccountDetails'
 import useSoulSummoner from '../../features/farm/hooks/useSoulSummoner'
 import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 
@@ -86,8 +84,8 @@ export default function SoulStake() {
   const parsedAmount = usingBalance ? balance : tryParseAmount(input, balance?.currency)
 
   // Approve masterchef to move funds with `transferFrom`
-  const [approvalStateChef, approveMasterchef] = useApproveCallback(parsedAmount, SOUL_SUMMONER_ADDRESS[ChainId.FANTOM])
-  const [approvalStateVault, approveVault] = useApproveCallback(parsedAmount, SOUL_VAULT_ADDRESS[chainId])
+  const [approvalStateEnchant, approveEnchant] = useApproveCallback(parsedAmount, ENCHANT_ADDRESS[ChainId.FANTOM])
+  // const [approvalStateVault, approveVault] = useApproveCallback(parsedAmount[chainId])
 
   /**
    * Gets the lpToken balance of the user for each pool
@@ -141,9 +139,9 @@ export default function SoulStake() {
       setPendingTx(true)
 
       if (activeTab === 0) {
-        const approving = approvalStateChef
+        const approving = approvalStateEnchant
         if (approving === ApprovalState.NOT_APPROVED) {
-          const success = await sendTx(() => approveMasterchef())
+          const success = await sendTx(() => approveEnchant())
           if (!success) {
             setPendingTx(false)
             // setModalOpen(true)
@@ -422,14 +420,14 @@ export default function SoulStake() {
                       </div>
                     </div>
                   </div>
-                  {(approvalStateChef === ApprovalState.NOT_APPROVED ||
-                      approvalStateChef === ApprovalState.PENDING) && activeTab === 0 ? (
+                  {(approvalStateEnchant === ApprovalState.NOT_APPROVED ||
+                      approvalStateEnchant === ApprovalState.PENDING) && activeTab === 0 ? (
                     <Button
                       className={ `${buttonStyle} text-high-emphesis bg-purple hover:bg-opacity-90` }
-                      disabled={ approvalStateChef === ApprovalState.PENDING }
-                      onClick={ approveMasterchef }
+                      disabled={ approvalStateEnchant === ApprovalState.PENDING }
+                      onClick={ approveEnchant }
                     >
-                      { approvalStateChef === ApprovalState.PENDING ? (
+                      { approvalStateEnchant === ApprovalState.PENDING ? (
                         <Dots>{i18n._(t`Approving`)} </Dots>
                       ) : (
                         i18n._(t`Approve`)

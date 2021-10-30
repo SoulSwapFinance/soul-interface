@@ -77,9 +77,19 @@ function AppBar(): JSX.Element {
                             id={`farm-nav-link`}
                             className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                             >
-                            {i18n._(t`SUMMON`)}
+                            {i18n._(t`FARM`)}
                           </a>
                         </NavLink>
+                      )}
+                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      <NavLink href={'/enchant'}>
+                        <a
+                          id={`enchant-nav-link`}
+                          className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                        >
+                          {i18n._(t`ENCHANT`)}
+                        </a>
+                      </NavLink>
                       )}
                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                       <NavLink href={'/seance'}>
@@ -87,7 +97,7 @@ function AppBar(): JSX.Element {
                           id={`stake-nav-link`}
                           className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                         >
-                          {i18n._(t`SEANCE`)}
+                          {i18n._(t`STAKE`)}
                         </a>
                       </NavLink>
                       )}
