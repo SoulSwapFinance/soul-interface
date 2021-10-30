@@ -1,0 +1,15 @@
+[
+    {
+        "inputs": [],
+        "name": "getEnchantedSeance",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "enchantedSeance",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+]

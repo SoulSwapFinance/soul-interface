@@ -5,11 +5,12 @@ import {
   ROUTER_ADDRESS,
   // SPELL_ADDRESS,
   BOUND_ADDRESS,
+  ENCHANT_ADDRESS,
   SOUL_ADDRESS,
   SOUL_SUMMONER_ADDRESS,
   SOUL_VAULT_ADDRESS,
   SOUL_GUIDE_ADDRESS,
-  TIMELOCK_ADDRESS,
+  // TIMELOCK_ADDRESS,
   WNATIVE,
 } from '../../../sdk'
 
@@ -26,6 +27,7 @@ import SOUL_SUMMONER_ABI from '../constants/abis/soulsummoner.json'
 import SUMMONER_HELPER_ABI from '../constants/abis/helper.json' 
 import SOULVAULT_ABI from '../constants/abis/soulvault.json'
 import SPELL_ABI from '../constants/abis/spell.json'
+import ENCHANT_ABI from '../constants/abis/enchant.json'
 import SOUL_ABI from '../constants/abis/soulpower.json' 
 
 // unused
@@ -120,6 +122,11 @@ export function useFactoryContract(): Contract | null {
 export function useSpellBoundContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && BOUND_ADDRESS[chainId], SPELL_ABI, withSignerIfPossible)
+}
+
+export function useEnchantmentContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && ENCHANT_ADDRESS[chainId], ENCHANT_ABI, withSignerIfPossible)
 }
 
 // export function useTimelockContract(): Contract | null {

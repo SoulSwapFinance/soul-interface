@@ -10,9 +10,9 @@ export const USD_CURRENCY: { [chainId in ChainId]?: Currency } = {
     address: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
     decimals: 6,
   },
-  [ChainId.FANTOM]: { // FUSD
-    address: '0xAd84341756Bf337f5a0164515b1f6F993D194E1f',
-    decimals: 6,
+  [ChainId.FANTOM]: { // FUSDT
+    address: '0x049d68029688eAbF473097a2fC38ef61633A3C7A',
+    decimals: 18,
   }
 }
 

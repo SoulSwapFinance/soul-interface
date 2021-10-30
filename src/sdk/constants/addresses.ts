@@ -48,6 +48,7 @@ export const SOUL_SUMMONER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B', // Summoner
   [ChainId.FANTOM_TESTNET]: ''
 }
+
 export const SOUL_VAULT_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
@@ -59,6 +60,27 @@ export const BOUND_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '',
+  [ChainId.FANTOM_TESTNET]: ''
+}
+
+export const ENCHANT_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a',
+  [ChainId.FANTOM_TESTNET]: ''
+}
+
+export const ENCHANT_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x62acBC5E5501374D6e462a095B48003Eaac3593C',
+  [ChainId.FANTOM_TESTNET]: ''
+}
+
+export const AURA_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x1D549636104Cc5cA79773E7D002AfE1FD5A03497',
   [ChainId.FANTOM_TESTNET]: ''
 }
 
