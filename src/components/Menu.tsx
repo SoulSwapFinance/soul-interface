@@ -9,24 +9,19 @@ import { useLingui } from '@lingui/react'
 
 const items = (i18n: I18n) => [
   {
-    name: i18n._(t`Vote`),
-    description: i18n._(t`Power to Enchant Souls.`),
-    href: '/enchant',
-  },
-  {
-    name: i18n._(t`Summon`),
+    name: i18n._(t`Farm`),
     description: i18n._(t`Summon Souls with Liquidity.`),
     href: '/farm',
   },
   {
-    name: i18n._(t`Seance`),
-    description: i18n._(t`Seance for Soul Power.`),
+    name: i18n._(t`Stake`),
+    description: i18n._(t`Stake Sou for Soul.`),
     href: '/seance',
   },
   {
-    name: i18n._(t`Scarab`),
-    description: i18n._(t`Rituals with Friends.`),
-    href: '/scarab/create',
+    name: i18n._(t`Earn`),
+    description: i18n._(t`Earn Fees with Enchantments.`),
+    href: '/enchant',
   },
   {
     name: i18n._(t`Bridge`),

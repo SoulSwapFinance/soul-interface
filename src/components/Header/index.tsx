@@ -61,16 +61,16 @@ function AppBar(): JSX.Element {
                         </a>
                       </NavLink>
                       )}
-                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'/summoner'}>
+                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href={'/enchant'}>
                           <a
-                            id={`summoner-nav-link`}
+                            id={`enchant-nav-link`}
                             className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                           >
-                            {i18n._(t`Summon`)}
+                            {i18n._(t`EARN`)}
                           </a>
                         </NavLink>
-                      )} */}
+                      )}
                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/farm'}>
                           <a
