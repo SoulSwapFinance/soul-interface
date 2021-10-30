@@ -62,16 +62,6 @@ function AppBar(): JSX.Element {
                       </NavLink>
                       )}
                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'/enchant'}>
-                          <a
-                            id={`enchant-nav-link`}
-                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                          >
-                            {i18n._(t`EARN`)}
-                          </a>
-                        </NavLink>
-                      )}
-                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/farm'}>
                           <a
                             id={`farm-nav-link`}
@@ -111,16 +101,6 @@ function AppBar(): JSX.Element {
                         </a>
                         </NavLink>
                       )} */}
-                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'/enchant'}>
-                        <a
-                          id={`enchant-nav-link`}
-                          className="p-2 text-base text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                        >
-                          {i18n._(t`EARN`)}
-                        </a>
-                        </NavLink>
-                      )}
                       { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href='https://bridge.soul.sh' target="_blank">
                           <a
@@ -373,16 +353,16 @@ function AppBar(): JSX.Element {
                     </a>
                   </Link>
                 )}
-                {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                  <Link href={'/summoner'}>
+                { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                  <Link href={'/enchant'}>
                     <a
-                      id={`summoner-nav-link`}
+                      id={`enchant-nav-link`}
                       className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                     >
-                      {i18n._(t`Summon`)}
+                      {i18n._(t`Enchant`)}
                     </a>
                   </Link>
-                )} */}
+                )}
                 { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <Link href={'/farm'}>
                     <a
@@ -399,7 +379,7 @@ function AppBar(): JSX.Element {
                         id={`stake-nav-link`}
                         className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                         >
-                        {i18n._(t`Seance`)}
+                        {i18n._(t`Stake`)}
                       </a>
                     </Link>
                   )}
