@@ -175,7 +175,7 @@ export default function Enchant() {
 
   // gets ECHANT's balance of SEANCE
   const fetchSeanceBal = async () => {
-    const seanceBalance = erc20BalanceOf(ENCHANT[chainId])
+    const seanceBalance = await erc20BalanceOf(ENCHANT[chainId])
     return seanceBalance
   }
 
