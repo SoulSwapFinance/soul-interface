@@ -503,11 +503,11 @@ export default function Enchant() {
 
                     <div className="flex items-center ml-8 space-x-4 md:ml-0">
                         <p className="text-sm font-bold md:text-lg text-high-emphesis">
-                            { Number(enchanted / totalSupply)=== 0
+                            { (Number(enchanted) / Number(totalSupply))=== 0
                               ? '0.000'
-                              :  Number(enchanted / totalSupply) < 0.001
+                              :  (Number(enchanted) / Number(totalSupply)) < 0.001
                               ? '<0.001'
-                              :  Number(enchanted / totalSupply)
+                              :  (Number(enchanted) / Number(totalSupply))
                                 .toFixed(3)
                                 .toString()
                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
