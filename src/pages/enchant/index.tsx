@@ -69,10 +69,7 @@ export default function Enchant() {
   // const [enchantedSeance, setEnchantedSeance] = useState('')
   const [totalSupply, setTotalSupply] = useState('')
   const seanceContractBalance = useTokenBalance(ENCHANT[chainId].address ?? undefined, SEANCE[chainId])
-  
-  // gets ECHANT's balance of SEANCE
-  // note: if doesn't work put into a fetcher func in this file
-  const seanceBalance = erc20BalanceOf(ENCHANT[chainId])
+  const seanceBalance = useTokenBalance(account ?? undefined, SEANCE[chainId])
   const enchantBalance = useTokenBalance(account ?? undefined, ENCHANT[chainId])
 
 
@@ -175,6 +172,12 @@ export default function Enchant() {
       return () => clearTimeout(timer)
     }
   })
+
+  // gets ECHANT's balance of SEANCE
+  const fetchSeanceBal = async () => {
+    const seanceBalance = erc20BalanceOf(ENCHANT[chainId])
+    return seanceBalance
+  }
 
   const fetchStakedBalance = async () => {
     if (!walletConnected) {
