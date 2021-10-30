@@ -29,6 +29,13 @@ const useEnchant = () => {
   }, [enchantContract])
 
   /**
+   *  @dev : fetches the total shares within the enchantment
+   */
+  const enchantedSeanceBalance = useCallback(async () => {
+    return await seanceContract?.balanceOf(enchantContract)
+  }, [seanceContract, enchantContract])
+
+  /**
    *  @dev : calculates the user's percentage of the total pool
    */
   const userSharePercOfTotal = useCallback(async () => {
@@ -49,7 +56,7 @@ const useEnchant = () => {
     const totalMemberShares = await totalShares()
 
     const totalPayableSeance = memberShare * seanceBalance / totalMemberShares 
-    const harvestRewards = memberSharePercent * totalMemberShares - memberShare
+    const harvestRewards = totalPayableSeance - totalMemberShares
 
     return harvestRewards
   }, [enchantContract, seanceContract, totalShares, userBalance, userSharePercOfTotal])
@@ -133,7 +140,9 @@ const useEnchant = () => {
 
   return {
     userBalance,
+    enchantedSeanceBalance,
     totalShares,
+    calculateHarvestRewards,
     userSharePercOfTotal,
     calculateTotalPayableSeance,
     userPendingRewards,
