@@ -130,6 +130,9 @@ msgstr ""
 msgid "Available Networks"
 msgstr ""
 
+msgid "BRIDGE"
+msgstr ""
+
 msgid "Back to Limit Orders"
 msgstr ""
 
@@ -245,6 +248,9 @@ msgstr ""
 msgid "Confirm Adding Liquidity"
 msgstr ""
 
+msgid "Confirm Enchantment"
+msgstr ""
+
 msgid "Confirm Limit Order"
 msgstr ""
 
@@ -341,7 +347,16 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
+msgid "ENCHANT"
+msgstr ""
+
+msgid "EXIT"
+msgstr ""
+
 msgid "Either return to the {link}, or change to an available network."
+msgstr ""
+
+msgid "Enchant your Seance..."
 msgstr ""
 
 msgid "English"
@@ -406,6 +421,9 @@ msgstr ""
 msgid "FANTOM PAIRS"
 msgstr ""
 
+msgid "FARM"
+msgstr ""
+
 msgid "Fantom Faucet"
 msgstr ""
 
@@ -416,6 +434,11 @@ msgid "Filled"
 msgstr ""
 
 msgid "Find Pool"
+msgstr ""
+
+msgid ""
+"For every swap on our exchange, a 0.05% fee is collected to ENCHANT and used to buy back SEANCE. \n"
+"Your ENCHANT is continuously compounding. When you unstake, you receive your deposited SEANCE and fees collected."
 msgstr ""
 
 msgid "Forum"
@@ -700,6 +723,9 @@ msgstr ""
 msgid "Output will be sent to"
 msgstr ""
 
+msgid "POOL"
+msgstr ""
+
 msgid "Pay"
 msgstr ""
 
@@ -778,6 +804,12 @@ msgstr ""
 msgid "Recent Transactions"
 msgstr ""
 
+msgid ""
+"Recieve SEANCE as a reciept for your staked SOUL. Use your SEANCE to reclaim your SOUL, or\n"
+"trade your SEANCE and risk locking your SOUL for all eternity... Either way, while you're staked, you earn more SOUL over time. \n"
+"Zero withdrawal fees."
+msgstr ""
+
 msgid "Recipient"
 msgstr ""
 
@@ -811,6 +843,9 @@ msgstr ""
 msgid "Review Limit Order"
 msgstr ""
 
+msgid "Reward"
+msgstr ""
+
 msgid "Rituals with Friends."
 msgstr ""
 
@@ -829,7 +864,13 @@ msgstr ""
 msgid "Russian"
 msgstr ""
 
+msgid "SEANCE = Staked SOUL"
+msgstr ""
+
 msgid "SELF"
+msgstr ""
+
+msgid "SHARE"
 msgstr ""
 
 msgid "SLP"
@@ -844,7 +885,13 @@ msgstr ""
 msgid "STABLE PAIRS"
 msgstr ""
 
+msgid "STAKE"
+msgstr ""
+
 msgid "STAKING ASSETS"
+msgstr ""
+
+msgid "SWAP"
 msgstr ""
 
 msgid "Scarab"
@@ -896,6 +943,9 @@ msgid "Share of Pool"
 msgstr ""
 
 msgid "Share of Pool:"
+msgstr ""
+
+msgid "Shares"
 msgstr ""
 
 msgid "Slippage"

@@ -19,9 +19,10 @@ import { useTokenBalance } from '../../state/wallet/hooks'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 import useEnchant from '../../hooks/useEnchant'
+// import useEnchantHelper from '../../hooks/useEnchant'
 import { ethers } from 'ethers'
 
-import useApprove from '../../features/farm/hooks/useApprove'
+// import useApprove from '../../features/farm/hooks/useApprove'
 
 const INPUT_CHAR_LIMIT = 18
 
@@ -58,20 +59,16 @@ export default function Enchant() {
   const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
 
-  const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(SEANCE[chainId])
-
   // functions from Enchantment contract we're using
   const { enter, leave } = useSeanceStakeManual()
-  const { totalShares, userBalance } = useEnchant()
+  const { enchantedSeance, totalShares, userBalance } = useEnchant()
   // ** Require Update: Need to make dynamic by fetching selected chain **
   const [stakedBalance, setStakedBal] = useState('')
   // const [pendingRewards, setPendingRewards] = useState('')
-  // const [enchantedSeance, setEnchantedSeance] = useState('')
+  const [enchanted, setEnchantedSeance] = useState('')
   const [totalSupply, setTotalSupply] = useState('')
-  const seanceContractBalance = useTokenBalance(ENCHANT[chainId].address ?? undefined, SEANCE[chainId])
   const seanceBalance = useTokenBalance(account ?? undefined, SEANCE[chainId])
   const enchantBalance = useTokenBalance(account ?? undefined, ENCHANT[chainId])
-
 
   const walletConnected = !!account
   const toggleWalletModal = useWalletModalToggle()
@@ -81,7 +78,7 @@ export default function Enchant() {
 
   const [input, setInput] = useState<string>('')
   const [usingBalance, setUsingBalance] = useState(false)
-  // const [usingSeanceBalance, setUsingSeanceBalance] = useState(false)
+  const [usingSeanceBalance, setUsingSeanceBalance] = useState(false)
 
   const balance = activeTab === 0 ? seanceBalance : enchantBalance
   const formattedBalance = balance?.toSignificant(4)
@@ -158,6 +155,7 @@ export default function Enchant() {
   // Runs once (on mount)
   useEffect(() => {
     fetchStakedBalance()
+    fetchEnchantedSeance()
     fetchTotalSupply()
   })
 
@@ -172,12 +170,6 @@ export default function Enchant() {
       return () => clearTimeout(timer)
     }
   })
-
-  // gets ECHANT's balance of SEANCE
-  const fetchSeanceBal = async () => {
-    const seanceBalance = await erc20BalanceOf(ENCHANT[chainId])
-    return seanceBalance
-  }
 
   const fetchStakedBalance = async () => {
     if (!walletConnected) {
@@ -198,24 +190,28 @@ export default function Enchant() {
     }
   }
 
-  // const fetchPendingRewards = async () => {
-  //   if (!walletConnected) {
-  //     toggleWalletModal()
-  //   } else {
-  //     try {
-  //       const pending = ethers.BigNumber.from(await totalShares()).toString()
-  //       // console.log(pending)
-  //       const pendingRewards = ethers.utils.formatUnits(pending.toString())
-  //       // console.log(pendingRewards)
-  //       setPendingRewards(Number(pendingRewards).toFixed(1).toString())
+  const fetchEnchantedSeance = async () => {
+    if (!walletConnected) {
+      toggleWalletModal()
+    } else {
+      try {
+        const bal = ethers.BigNumber.from(await enchantedSeance()).toString()
+        // console.log(staked)
+        const enchanted = ethers.utils.formatUnits(bal.toString())
+        // console.log(stakedBalance)
+        setEnchantedSeance(Number(enchanted).toFixed(1).toString())
 
-  //       return pendingRewards
-  //     }
-  //     catch (err) {
-  //       console.log(err)
-  //     }
-  //   }
-  // }
+        return enchanted
+      }
+      catch (err) {
+        console.log(err)
+      }
+    }
+  }
+
+  const share = Number(stakedBalance) / Number(totalSupply)
+  const payable = Number(share) * Number(enchanted)
+  const rewards = Number(payable) - Number(stakedBalance)
 
   const fetchTotalSupply = async () => {
     if (!walletConnected) {
@@ -424,7 +420,7 @@ export default function Enchant() {
                   
                   <div className="flex flex-col flex-grow md:mb-6">
                     <p className="mb-3 text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
-                      {i18n._(t`Shares`)}
+                      {i18n._(t`Staked`)}
                     </p>
                     <div className="flex items-center ml-8 space-x-4 md:ml-0">
                       <Image
@@ -445,7 +441,7 @@ export default function Enchant() {
                                 .toString()
                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                         </p>
-                        <p className="text-sm md:text-base text-primary">STAKED</p>
+                        <p className="text-sm md:text-base text-primary">SHARES</p>
                       </div>
                     </div>
                   </div>
@@ -464,11 +460,11 @@ export default function Enchant() {
                       />
                       <div className="flex flex-col justify-center">
                         <p className="text-sm font-bold md:text-lg text-high-emphesis">
-                            { Number(seanceContractBalance)=== 0
+                            { payable === 0
                               ? '0.000'
-                              :  Number(seanceContractBalance) < 0.001
+                              :  Number(payable) < 0.001
                               ? '<0.001'
-                              :  Number(seanceContractBalance)
+                              :  Number(payable)
                                 .toFixed(3)
                                 .toString()
                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
@@ -477,7 +473,7 @@ export default function Enchant() {
                       </div>
                     </div>
                     <br/><br/>
-                    <div className="flex items-center ml-8 space-x-4 md:ml-0">
+                    {/* <div className="flex items-center ml-8 space-x-4 md:ml-0">
                         <p className="text-sm font-bold md:text-lg text-high-emphesis">
                             { Number(totalSupply)=== 0
                               ? '0.000'
@@ -493,25 +489,39 @@ export default function Enchant() {
                     
                     <div className="flex items-center ml-8 space-x-4 md:ml-0">
                         <p className="text-sm font-bold md:text-lg text-high-emphesis">
-                            { Number(seanceContractBalance)=== 0
+                            { Number(enchanted)=== 0
                               ? '0.000'
-                              :  Number(seanceContractBalance) < 0.001
+                              :  Number(enchanted) < 0.001
                               ? '<0.001'
-                              :  Number(seanceContractBalance)
+                              :  Number(enchanted)
                                 .toFixed(3)
                                 .toString()
                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                         </p>
                         <p className="text-sm md:text-base text-primary">SEANCE</p>
+                    </div> */}
+
+                    <div className="flex items-center ml-8 space-x-4 md:ml-0">
+                        <p className="text-sm font-bold md:text-lg text-high-emphesis">
+                            { Number(enchanted / totalSupply)=== 0
+                              ? '0.000'
+                              :  Number(enchanted / totalSupply) < 0.001
+                              ? '<0.001'
+                              :  Number(enchanted / totalSupply)
+                                .toFixed(3)
+                                .toString()
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                        </p>
+                        <p className="text-sm md:text-base text-primary">RATE</p>
                     </div>
                   
                     <div className="flex items-center ml-8 space-x-4 md:ml-0">
                         <p className="text-sm font-bold md:text-lg text-high-emphesis">
-                            { (Number(stakedBalance) / Number(totalSupply)) === 0
+                            { share === 0
                               ? '0.000'
-                              : (Number(stakedBalance) / Number(totalSupply)) < 0.001
+                              : share < 0.001
                               ? '<0.001'
-                              : (Number(stakedBalance) / Number(totalSupply) * 100)
+                              : (share * 100)
                                 .toFixed(2)
                                 .toString()
                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}%

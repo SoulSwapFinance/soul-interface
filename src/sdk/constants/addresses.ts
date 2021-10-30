@@ -70,6 +70,13 @@ export const ENCHANT_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.FANTOM_TESTNET]: ''
 }
 
+export const ENCHANT_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x62acBC5E5501374D6e462a095B48003Eaac3593C',
+  [ChainId.FANTOM_TESTNET]: ''
+}
+
 export const AURA_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',

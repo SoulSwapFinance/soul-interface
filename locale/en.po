@@ -130,6 +130,9 @@ msgstr "Available"
 msgid "Available Networks"
 msgstr "Available Networks"
 
+msgid "BRIDGE"
+msgstr "BRIDGE"
+
 msgid "Back to Limit Orders"
 msgstr "Back to Limit Orders"
 
@@ -249,6 +252,9 @@ msgstr "Confirm"
 msgid "Confirm Adding Liquidity"
 msgstr "Confirm Adding Liquidity"
 
+msgid "Confirm Enchantment"
+msgstr "Confirm Enchantment"
+
 msgid "Confirm Limit Order"
 msgstr "Confirm Limit Order"
 
@@ -345,8 +351,17 @@ msgstr "Dismiss"
 msgid "Documentation"
 msgstr "Documentation"
 
+msgid "ENCHANT"
+msgstr "ENCHANT"
+
+msgid "EXIT"
+msgstr "EXIT"
+
 msgid "Either return to the {link}, or change to an available network."
 msgstr "Either return to the {link}, or change to an available network."
+
+msgid "Enchant your Seance..."
+msgstr "Enchant your Seance..."
 
 msgid "English"
 msgstr "English"
@@ -412,6 +427,9 @@ msgstr "Explore our Protocol."
 msgid "FANTOM PAIRS"
 msgstr "FANTOM PAIRS"
 
+msgid "FARM"
+msgstr "FARM"
+
 msgid "Fantom Faucet"
 msgstr "Fantom Faucet"
 
@@ -423,6 +441,13 @@ msgstr "Filled"
 
 msgid "Find Pool"
 msgstr "Find Pool"
+
+msgid ""
+"For every swap on our exchange, a 0.05% fee is collected to ENCHANT and used to buy back SEANCE. \n"
+"Your ENCHANT is continuously compounding. When you unstake, you receive your deposited SEANCE and fees collected."
+msgstr ""
+"For every swap on our exchange, a 0.05% fee is collected to ENCHANT and used to buy back SEANCE. \n"
+"Your ENCHANT is continuously compounding. When you unstake, you receive your deposited SEANCE and fees collected."
 
 msgid "Forum"
 msgstr "Forum"
@@ -712,6 +737,9 @@ msgstr "Output is estimated. You will receive at least"
 msgid "Output will be sent to"
 msgstr "Output will be sent to"
 
+msgid "POOL"
+msgstr "POOL"
+
 msgid "Pay"
 msgstr "Pay"
 
@@ -790,6 +818,15 @@ msgstr "Receive"
 msgid "Recent Transactions"
 msgstr "Recent Transactions"
 
+msgid ""
+"Recieve SEANCE as a reciept for your staked SOUL. Use your SEANCE to reclaim your SOUL, or\n"
+"trade your SEANCE and risk locking your SOUL for all eternity... Either way, while you're staked, you earn more SOUL over time. \n"
+"Zero withdrawal fees."
+msgstr ""
+"Recieve SEANCE as a reciept for your staked SOUL. Use your SEANCE to reclaim your SOUL, or\n"
+"trade your SEANCE and risk locking your SOUL for all eternity... Either way, while you're staked, you earn more SOUL over time. \n"
+"Zero withdrawal fees."
+
 msgid "Recipient"
 msgstr "Recipient"
 
@@ -823,6 +860,9 @@ msgstr "Restricts swaps to direct pairs only."
 msgid "Review Limit Order"
 msgstr "Review Limit Order"
 
+msgid "Reward"
+msgstr "Reward"
+
 msgid "Rituals with Friends."
 msgstr "Rituals with Friends."
 
@@ -841,8 +881,14 @@ msgstr "Routing through these tokens resulted in the best price for your trade."
 msgid "Russian"
 msgstr "Russian"
 
+msgid "SEANCE = Staked SOUL"
+msgstr "SEANCE = Staked SOUL"
+
 msgid "SELF"
 msgstr "SELF"
+
+msgid "SHARE"
+msgstr "SHARE"
 
 msgid "SLP"
 msgstr "SLP"
@@ -856,8 +902,14 @@ msgstr "SOUL per $1000"
 msgid "STABLE PAIRS"
 msgstr "STABLE PAIRS"
 
+msgid "STAKE"
+msgstr "STAKE"
+
 msgid "STAKING ASSETS"
 msgstr "STAKING ASSETS"
+
+msgid "SWAP"
+msgstr "SWAP"
 
 msgid "Scarab"
 msgstr "Scarab"
@@ -909,6 +961,9 @@ msgstr "Share of Pool"
 
 msgid "Share of Pool:"
 msgstr "Share of Pool:"
+
+msgid "Shares"
+msgstr "Shares"
 
 msgid "Slippage"
 msgstr "Slippage"

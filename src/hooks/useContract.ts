@@ -18,6 +18,7 @@ import {
   REAPER_ADDRESS,
   FACTORY_ADDRESS,
   ENCHANT_ADDRESS,
+  ENCHANT_HELPER_ADDRESS,
   ROUTER_ADDRESS,
   BOUND_ADDRESS,
   SOUL_ADDRESS,
@@ -67,6 +68,7 @@ import SOUL_SUMMONER_ABI from '../constants/abis/soulswap/soulsummoner.json' // 
 import SOULVAULT_ABI from '../constants/abis/soulswap/soulvault.json' // 31 JUL
 import SPELL_ABI from '../constants/abis/soulswap/spell.json' // 28 JUL
 import ENCHANT_ABI from '../constants/abis/soulswap/enchant.json' // 30 OCT
+import ENCHANT_HELPER_ABI from '../constants/abis/soulswap/enchant-helper.json' // 30 OCT
 import SOUL_ABI from '../constants/abis/soulswap/soulpower.json' // 28 JUL
 import SEANCE_ABI from '../constants/abis/soulswap/seance.json' // 28 JUL
 
@@ -235,6 +237,11 @@ export function useSoulVaultContract(withSignerIfPossible = true): Contract | nu
 export function useEnchantContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && ENCHANT_ADDRESS[chainId], ENCHANT_ABI, withSignerIfPossible)
+}
+
+export function useEnchantHelperContract(withSignerIfPossible = true): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && ENCHANT_HELPER_ADDRESS[chainId], ENCHANT_HELPER_ABI, withSignerIfPossible)
 }
 
 export function useMasterChefContract(withSignerIfPossible?: boolean): Contract | null {

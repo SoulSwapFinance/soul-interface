@@ -1,13 +1,14 @@
 import { CurrencyAmount, Token, ENCHANT_ADDRESS } from '../sdk'
 import { useActiveWeb3React } from '.'
 import { useCallback } from 'react'
-import { useEnchantContract, useSeanceContract } from './useContract'
+import { useEnchantContract, useEnchantHelperContract, useSeanceContract } from './useContract'
 import { useTransactionAdder } from '../state/transactions/hooks'
 
 const useEnchant = () => {
   const { account } = useActiveWeb3React()
   const addTransaction = useTransactionAdder()
   const enchantContract = useEnchantContract()
+  const helperContract = useEnchantHelperContract()
   const seanceContract = useSeanceContract()
 
   // -----------------------
@@ -21,19 +22,16 @@ const useEnchant = () => {
     return await enchantContract?.balanceOf(account)
   }, [account, enchantContract])
 
+  const enchantedSeance = useCallback(async () => {
+    return await helperContract?.getEnchantedSeance()
+  }, [helperContract])
+
   /**
    *  @dev : fetches the total shares within the enchantment
    */
   const totalShares = useCallback(async () => {
     return await enchantContract?.totalSupply()
   }, [enchantContract])
-
-  /**
-   *  @dev : fetches the total shares within the enchantment
-   */
-  const enchantedSeanceBalance = useCallback(async () => {
-    return await seanceContract?.balanceOf(enchantContract)
-  }, [seanceContract, enchantContract])
 
   /**
    *  @dev : calculates the user's percentage of the total pool
@@ -140,7 +138,7 @@ const useEnchant = () => {
 
   return {
     userBalance,
-    enchantedSeanceBalance,
+    enchantedSeance,
     totalShares,
     calculateHarvestRewards,
     userSharePercOfTotal,
