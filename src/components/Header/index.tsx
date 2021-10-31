@@ -178,6 +178,53 @@ function AppBar(): JSX.Element {
                                   const params: any = {
                                     type: 'ERC20',
                                     options: {
+                                      address: '0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a',
+                                      symbol: 'ENCHANT',
+                                      decimals: 18,
+                                      image:
+                                        'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/enchant.jpg',
+                                    },
+                                  }
+                                  library.provider
+                                    .request({
+                                      method: 'wallet_watchAsset',
+                                      params,
+                                    })
+                                    .then((success) => {
+                                      if (success) {
+                                        console.log('Successfully added ENCHANT to MetaMask')
+                                      } else {
+                                        throw new Error('Something went wrong.')
+                                      }
+                                    })
+                                    .catch(console.error)
+                                }
+                              }}
+                            >
+                              <Image
+                                src="/images/tokens/enchant.jpg"
+                                alt="ENCHANT"
+                                width="38px"
+                                height="38px"
+                                objectFit="contain"
+                                className="rounded-md"
+                              />
+                            </div>
+                          </QuestionHelper>
+                        </>
+                      ))}
+                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      library &&
+                      library.provider.isMetaMask && ( // TODO: update
+                        <>
+                          <QuestionHelper text={i18n._(t`Add SEANCE to your MetaMask wallet`)}>
+                            <div
+                              className="hidden p-0.5 rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800"
+                              onClick={() => {
+                                if (library && library.provider.isMetaMask && library.provider.request) {
+                                  const params: any = {
+                                    type: 'ERC20',
+                                    options: {
                                       address: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6',
                                       symbol: 'SEANCE',
                                       decimals: 18,
