@@ -419,14 +419,14 @@ export default function Enchant() {
                 <div className="flex flex-wrap">
                   
                   <div className="flex flex-col flex-grow md:mb-6">
-                    <p className="mb-3 text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
+                    {/* <p className="mb-3 text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
                       {i18n._(t`Staked`)}
-                    </p>
+                    </p> */}
                     <div className="flex items-center ml-8 space-x-4 md:ml-0">
                       <Image
                         className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
-                        src="/images/tokens/seance.jpg"
-                        alt="SEANCE"
+                        src="/images/tokens/enchant.png"
+                        alt="ENCHANT"
                         width={64}
                         height={64}
                       />
@@ -447,13 +447,13 @@ export default function Enchant() {
                   </div>
 
                   <div className="flex flex-col flex-grow md:mb-6">
-                    <p className="mb-3 text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
+                    {/* <p className="mb-3 text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
                       {i18n._(t`Reward`)}
-                    </p>
+                    </p> */}
                     <div className="flex items-center ml-8 space-x-4 md:ml-0">
                       <Image
                         className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
-                        src="/images/tokens/seance.jpg"
+                        src="/images/tokens/seance.png"
                         alt="SEANCE"
                         width={64}
                         height={64}
@@ -469,7 +469,7 @@ export default function Enchant() {
                                 .toString()
                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                         </p>
-                        <p className="text-sm md:text-base text-primary">SEANCE</p>
+                        <p className="text-sm md:text-base text-primary">REWARDS</p>
                       </div>
                     </div>
                     <br/><br/>
@@ -500,6 +500,7 @@ export default function Enchant() {
                         </p>
                         <p className="text-sm md:text-base text-primary">SEANCE</p>
                     </div> */}
+                    <div className="flex flex-col flex-grow md:mb-6">
 
                     <div className="flex items-center ml-8 space-x-4 md:ml-0">
                         <p className="text-sm font-bold md:text-lg text-high-emphesis">
@@ -508,25 +509,26 @@ export default function Enchant() {
                               :  (Number(enchanted) / Number(totalSupply)) < 0.001
                               ? '<0.001'
                               :  (Number(enchanted) / Number(totalSupply))
-                                .toFixed(3)
+                                .toFixed(2)
                                 .toString()
                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                         </p>
                         <p className="text-sm md:text-base text-primary">RATE</p>
-                    </div>
-                  
+
                     <div className="flex items-center ml-8 space-x-4 md:ml-0">
                         <p className="text-sm font-bold md:text-lg text-high-emphesis">
                             { share === 0
-                              ? '0.000'
-                              : share < 0.001
-                              ? '<0.001'
+                              ? '0.0'
+                              : share < 0.1
+                              ? '<0.1'
                               : (share * 100)
-                                .toFixed(2)
+                                .toFixed(1)
                                 .toString()
                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}%
                         </p>
-                        <p className="text-sm md:text-base text-primary">SHARE</p>
+                        <p className="text-sm md:text-base text-primary">OWN</p>
+                     </div>
+                     </div>
                     </div>
                   </div>
                 </div>
