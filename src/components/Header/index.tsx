@@ -170,7 +170,7 @@ function AppBar(): JSX.Element {
                       library &&
                       library.provider.isMetaMask && ( // TODO: update
                         <>
-                          <QuestionHelper text={i18n._(t`Add SEANCE to your MetaMask wallet`)}>
+                          <QuestionHelper text={i18n._(t`Add ENCHANT to your MetaMask wallet`)}>
                             <div
                               className="hidden p-0.5 rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800"
                               onClick={() => {
@@ -202,7 +202,7 @@ function AppBar(): JSX.Element {
                               }}
                             >
                               <Image
-                                src="/images/tokens/enchant.jpg"
+                                src="/images/tokens/enchant.png"
                                 alt="ENCHANT"
                                 width="38px"
                                 height="38px"
@@ -249,7 +249,7 @@ function AppBar(): JSX.Element {
                               }}
                             >
                               <Image
-                                src="/images/tokens/seance.jpg"
+                                src="/images/tokens/seance.png"
                                 alt="SEANCE"
                                 width="38px"
                                 height="38px"
@@ -294,12 +294,12 @@ function AppBar(): JSX.Element {
                             }}
                           >
                             <Image
-                              src="/logo.jpg"
-                              alt="SOUL"
-                              width="38px"
-                              height="38px"
-                              objectFit="contain"
-                              className="rounded-md"
+                                src="/images/tokens/soul.png"
+                                alt="SOUL"
+                                width="38px"
+                                height="38px"
+                                objectFit="contain"
+                                className="rounded-md"
                             />
                           </div>
                         </QuestionHelper>
