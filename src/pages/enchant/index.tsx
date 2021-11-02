@@ -180,7 +180,7 @@ export default function Enchant() {
         // console.log(staked)
         const stakedBalance = ethers.utils.formatUnits(staked.toString())
         // console.log(stakedBalance)
-        setStakedBal(Number(stakedBalance).toFixed(1).toString())
+        setStakedBal(Number(stakedBalance).toFixed(2).toString())
 
         return stakedBalance
       }
@@ -433,11 +433,11 @@ export default function Enchant() {
                       <div className="flex flex-col justify-center">
                         <p className="text-sm font-bold md:text-lg text-high-emphesis">
                             { Number(stakedBalance) === 0
-                              ? '0.000'
-                              :  Number(stakedBalance) < 0.001
-                              ? '<0.001'
+                              ? '0.00'
+                              :  Number(stakedBalance) < 0.01
+                              ? '<0.01'
                               :  Number(stakedBalance)
-                                .toFixed(3)
+                                .toFixed(2)
                                 .toString()
                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                         </p>
@@ -461,11 +461,11 @@ export default function Enchant() {
                       <div className="flex flex-col justify-center">
                         <p className="text-sm font-bold md:text-lg text-high-emphesis">
                             { payable === 0
-                              ? '0.000'
-                              :  Number(payable) < 0.001
-                              ? '<0.001'
+                              ? '0.00'
+                              :  Number(payable) < 0.01
+                              ? '<0.01'
                               :  Number(payable)
-                                .toFixed(3)
+                                .toFixed(2)
                                 .toString()
                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                         </p>
