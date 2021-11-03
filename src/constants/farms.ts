@@ -33,7 +33,7 @@ export const POOLS: AddressMap = {
       },
     }, 
     '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57': { // SOUL-FTM
-    id: 1,
+    id: 1, // 1600
     token0: {
       id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
       name: 'Wrapped Fantom',
@@ -93,7 +93,7 @@ export const POOLS: AddressMap = {
       },
     },
     '0x8f1E15cD3d5a0bb85B8189d5c6B61BB64398E19b': { // SEANCE-SOUL
-      id: 5,
+      id: 5, // 600
       token0: {
         id: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', // SEANCE
         name: 'SeanceCircle',
@@ -169,7 +169,7 @@ export const POOLS: AddressMap = {
     },
   },
     '0x8542bEAC34282aFe5Bb6951Eb6DCE0B3783b7faB': {  // SEANCE-FTM
-      id: 10,
+      id: 10, // 1200
       token0: {
         id: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', // SEANCE
         name: 'SeaceCircle',
@@ -375,6 +375,51 @@ export const POOLS: AddressMap = {
         id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
         name: 'Dai Stablecoin',
         symbol: 'DAI',
+        decimals: 18,
+      },
+    },
+    '0xb4d6ff768f409e4d102bad80f9a8ac105453ccdd': {  // ENCHANT-FTM
+      id: 24, // 1200
+      token0: {
+        id: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83', // WFTM
+        name: 'Wrapped FTM',
+        symbol: 'FTM',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a', // ENCHANT
+        name: 'Enchantment',
+        symbol: 'ENCHANT',
+        decimals: 18,
+      },
+    },
+    '0x9acc8f23680b6d7e295166277e2fb9c88a26cce6': {  // ENCHANT-SOUL
+      id: 25, // 600
+      token0: {
+        id: '0xe2fb177009ff39f52c0134e8007fa0e4baacbd07', // SOUL
+        name: 'Soul Power',
+        symbol: 'SOUL',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x6a1a8368d607c7a808f7bba4f7aed1d9ebde147a', // ENCHANT
+        name: 'Enchantment',
+        symbol: 'ENCHANT',
+        decimals: 18,
+      },
+    },
+    '0x5695176d085f8f7320507495066ffec940da244c': {  // SEANCE-ENCHANT
+      id: 26, // 600
+      token0: {
+        id: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
+        name: 'Seance Circle',
+        symbol: 'SEANCE',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x6a1a8368d607c7a808f7bba4f7aed1d9ebde147a', // ENCHANT
+        name: 'Enchantment',
+        symbol: 'ENCHANT',
         decimals: 18,
       },
     }
