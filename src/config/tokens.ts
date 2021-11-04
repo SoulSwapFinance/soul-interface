@@ -1,4 +1,4 @@
-import { ChainId, BOUND_ADDRESS, Token, WETH9, WNATIVE } from '../sdk'
+import { ChainId, ENCHANT_ADDRESS, Token, WETH9, WNATIVE } from '../sdk'
 
 export const BSC: { [key: string]: Token } = {
   BNB: new Token(ChainId.BSC, '', 18, 'BNB', 'Binance'),
@@ -41,9 +41,9 @@ export const SEANCE: ChainTokenMap = {
   [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '0xD54Cf31D5653F4a062f5DA4C83170A5867d04442', 18, 'SEANCE', 'SeanceCircle'),  // 31 JUL
 }
 
-export const SPELL: ChainTokenMap = {
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, BOUND_ADDRESS[ChainId.FANTOM], 18, 'SPELL', 'SpellBound'), // TODO: update
-  [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '0xdFDC55e7E7eBA3E7BF2a0E0743f4D3C858FaC37E', 18, 'SPELL', 'SpellBound'),   // 30 JUL
+export const ENCHANT: ChainTokenMap = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a', 18, 'ENCHANT', 'Enchantment'), // 01 OCT
+  [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '', 18, 'SPELL', 'Enchantment'), // TODO
 }
 
 export const WETH9_EXTENDED: { [chainId: number]: Token } = {

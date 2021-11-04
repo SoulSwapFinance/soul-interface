@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { useMeowshiContract, useSpellBoundContract, useSoulContract } from './useContract'
+import { useMeowshiContract, useEnchantmentContract, useSoulContract } from './useContract'
 
 import { BalanceProps } from './useTokenBalance'
 import Fraction from '../entities/Fraction'
@@ -14,7 +14,7 @@ const useMeowshi = (soul: boolean) => {
   const { account } = useActiveWeb3React()
   const addTransaction = useTransactionAdder()
   const soulContract = useSoulContract(true)
-  const spellContract = useSpellBoundContract(true)
+  const spellContract = useEnchantmentContract(true)
   const meowshiContract = useMeowshiContract(true)
   const [pendingApproval, setPendingApproval] = useState(false)
 

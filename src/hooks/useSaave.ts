@@ -13,7 +13,7 @@ const useMaker = () => {
   const { account } = useActiveWeb3React()
 
   const addTransaction = useTransactionAdder()
-  const sushiContract = useSoulContract(true) // withSigner
+  const soulContract = useSoulContract(true) // withSigner
   const saaveContract = useSaaveContract(true) // withSigner
 
   // Allowance
@@ -21,7 +21,7 @@ const useMaker = () => {
   const fetchAllowance = useCallback(async () => {
     if (account) {
       try {
-        const allowance = await sushiContract?.allowance(account, saaveContract?.address)
+        const allowance = await soulContract?.allowance(account, saaveContract?.address)
         const formatted = Fraction.from(BigNumber.from(allowance), BigNumber.from(10).pow(18)).toString()
         setAllowance(formatted)
       } catch (error) {
@@ -29,24 +29,24 @@ const useMaker = () => {
         throw error
       }
     }
-  }, [account, saaveContract?.address, sushiContract])
+  }, [account, saaveContract?.address, soulContract])
   useEffect(() => {
-    if (account && saaveContract && sushiContract) {
+    if (account && saaveContract && soulContract) {
       fetchAllowance()
     }
     const refreshInterval = setInterval(fetchAllowance, 10000)
     return () => clearInterval(refreshInterval)
-  }, [account, fetchAllowance, saaveContract, sushiContract])
+  }, [account, fetchAllowance, saaveContract, soulContract])
 
   // Approve
   const approve = useCallback(async () => {
     try {
-      const tx = await sushiContract?.approve(saaveContract?.address, ethers.constants.MaxUint256.toString())
+      const tx = await soulContract?.approve(saaveContract?.address, ethers.constants.MaxUint256.toString())
       return addTransaction(tx, { summary: 'Approve' })
     } catch (e) {
       return e
     }
-  }, [addTransaction, saaveContract?.address, sushiContract])
+  }, [addTransaction, saaveContract?.address, soulContract])
 
   // Saave Soul - SPELL - aSPELL
   const saave = useCallback(

@@ -4,7 +4,7 @@ import { useCallback } from 'react'
 import { useEnchantmentContract } from './useContract'
 import { useTransactionAdder } from '../../../state/transactions/hooks'
 
-const useSpellBound = () => {
+const useEnchantment = () => {
   const addTransaction = useTransactionAdder()
   const spellContract = useEnchantmentContract()
 
@@ -39,4 +39,4 @@ const useSpellBound = () => {
   return { enter, leave }
 }
 
-export default useSpellBound
+export default useEnchantment

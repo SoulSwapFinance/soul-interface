@@ -20,7 +20,6 @@ import {
   ENCHANT_ADDRESS,
   ENCHANT_HELPER_ADDRESS,
   ROUTER_ADDRESS,
-  BOUND_ADDRESS,
   SOUL_ADDRESS,
   SEANCE_ADDRESS,
   SOUL_SUMMONER_ADDRESS,
@@ -273,9 +272,9 @@ export function useRouterContract(useArcher = false, withSignerIfPossible?: bool
   return useContract(address, abi, withSignerIfPossible)
 }
 
-export function useSpellBoundContract(withSignerIfPossible?: boolean): Contract | null {
+export function useEnchantmentContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && BOUND_ADDRESS[chainId], SPELL_ABI, withSignerIfPossible)
+  return useContract(chainId && ENCHANT_ADDRESS[chainId], SPELL_ABI, withSignerIfPossible)
 }
 
 export function useMakerContract(): Contract | null {

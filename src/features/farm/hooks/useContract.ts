@@ -4,7 +4,6 @@ import {
   FACTORY_ADDRESS,
   ROUTER_ADDRESS,
   // SPELL_ADDRESS,
-  BOUND_ADDRESS,
   ENCHANT_ADDRESS,
   SOUL_ADDRESS,
   SOUL_SUMMONER_ADDRESS,
@@ -118,11 +117,6 @@ export function useFactoryContract(): Contract | null {
 //   const abi = ROUTER_ABI
 //   return useContract(address, abi, withSignerIfPossible)
 // }
-
-export function useSpellBoundContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && BOUND_ADDRESS[chainId], SPELL_ABI, withSignerIfPossible)
-}
 
 export function useEnchantmentContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
