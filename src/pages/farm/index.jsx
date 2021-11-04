@@ -16,7 +16,6 @@ const Farm = () => {
           <title>Farm | Soul</title>
           <meta key="description" name="description" content="Farm SOUL" />
         </Head>
-
         <FarmList />
       </Container>
       </DoubleGlowShadowV2>

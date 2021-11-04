@@ -71,7 +71,7 @@ function AppBar(): JSX.Element {
                           </a>
                         </NavLink>
                       )}
-                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                       <NavLink href={'/enchant'}>
                         <a
                           id={`enchant-nav-link`}
@@ -102,12 +102,32 @@ function AppBar(): JSX.Element {
                         </NavLink>
                       )} */}
                       { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href='https://bridge.soul.sh' target="_blank">
+                        <NavLink href='/bridge' target="_blank">
                           <a
                             id={`bridge-nav-link`}
                             className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                           >
                             {i18n._(t`BRIDGE`)}
+                          </a>
+                        </NavLink>
+                      )}
+                      { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href='/scarab/create' target="_blank">
+                          <a
+                            id={`bridge-nav-link`}
+                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                          >
+                            {i18n._(t`SHARE`)}
+                          </a>
+                        </NavLink>
+                      )}
+                      { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href='/info' target="_blank">
+                          <a
+                            id={`info-nav-link`}
+                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                          >
+                            {i18n._(t`ANALYTICS`)}
                           </a>
                         </NavLink>
                       )}
@@ -391,7 +411,17 @@ function AppBar(): JSX.Element {
                 </Link>
                 )}
                 { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                  <Link href={'https://bridge.soul.sh'}>
+                  <Link href={'/info'}>
+                    <a
+                      id={`info-nav-link`}
+                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                    >
+                      {i18n._(t`Analytics`)}
+                    </a>
+                  </Link>
+                )}
+                { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                  <Link href={'/bridge'}>
                     <a
                       id={`bridge-nav-link`}
                       className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
