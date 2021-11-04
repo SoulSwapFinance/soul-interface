@@ -1,25 +1,27 @@
 import { useCallback, useEffect, useState } from 'react'
-import { useSpellBoundContract, useSoulContract } from './useContract'
+import { useSaaveContract, useSoulContract } from '../hooks/useContract'
 
-import Fraction from '../entities/Fraction'
+import { BalanceProps } from './useTokenBalance'
+import { Fraction } from '../entities'
 import { ethers } from 'ethers'
-import { useActiveWeb3React } from './useActiveWeb3React'
+import useActiveWeb3React from '../hooks/useActiveWeb3React'
 import { useTransactionAdder } from '../state/transactions/hooks'
 
 const { BigNumber } = ethers
 
-const useSpellBound = () => {
+const useMaker = () => {
   const { account } = useActiveWeb3React()
+
   const addTransaction = useTransactionAdder()
   const soulContract = useSoulContract(true) // withSigner
-  const spellContract = useSpellBoundContract(true) // withSigner
+  const saaveContract = useSaaveContract(true) // withSigner
 
+  // Allowance
   const [allowance, setAllowance] = useState('0')
-
   const fetchAllowance = useCallback(async () => {
     if (account) {
       try {
-        const allowance = await soulContract?.allowance(account, spellContract?.address)
+        const allowance = await soulContract?.allowance(account, saaveContract?.address)
         const formatted = Fraction.from(BigNumber.from(allowance), BigNumber.from(10).pow(18)).toString()
         setAllowance(formatted)
       } catch (error) {
@@ -27,53 +29,41 @@ const useSpellBound = () => {
         throw error
       }
     }
-  }, [account, spellContract, soulContract])
-
+  }, [account, saaveContract?.address, soulContract])
   useEffect(() => {
-    if (account && spellContract && soulContract) {
+    if (account && saaveContract && soulContract) {
       fetchAllowance()
     }
     const refreshInterval = setInterval(fetchAllowance, 10000)
     return () => clearInterval(refreshInterval)
-  }, [account, spellContract, fetchAllowance, soulContract])
+  }, [account, fetchAllowance, saaveContract, soulContract])
 
+  // Approve
   const approve = useCallback(async () => {
     try {
-      const tx = await soulContract?.approve(spellContract?.address, ethers.constants.MaxUint256.toString())
+      const tx = await soulContract?.approve(saaveContract?.address, ethers.constants.MaxUint256.toString())
       return addTransaction(tx, { summary: 'Approve' })
     } catch (e) {
       return e
     }
-  }, [addTransaction, spellContract, soulContract])
+  }, [addTransaction, saaveContract?.address, soulContract])
 
-  const enter = useCallback(
-    // todo: this should be updated with BigNumber as opposed to string
-    async (amount: string) => {
-      try {
-        const tx = await spellContract?.enter(ethers.utils.parseUnits(amount))
-        return addTransaction(tx, { summary: 'Enter SpellBound' })
-      } catch (e) {
-        return e
+  // Saave Soul - SPELL - aSPELL
+  const saave = useCallback(
+    async (amount: BalanceProps | undefined) => {
+      if (amount?.value) {
+        try {
+          const tx = await saaveContract?.saave(amount?.value)
+          return addTransaction(tx, { summary: 'SOUL → SPELL → aSPELL' })
+        } catch (e) {
+          return e
+        }
       }
     },
-    [addTransaction, spellContract]
+    [addTransaction, saaveContract]
   )
 
-  const leave = useCallback(
-    // todo: this should be updated with BigNumber as opposed to string
-    async (amount: string) => {
-      try {
-        const tx = await spellContract?.leave(ethers.utils.parseUnits(amount))
-        return addTransaction(tx, { summary: 'Leave SpellBound' })
-      } catch (e) {
-        console.error(e)
-        return e
-      }
-    },
-    [addTransaction, spellContract]
-  )
-
-  return { allowance, approve, enter, leave }
+  return { allowance, approve, saave }
 }
 
-export default useSpellBound
+export default useMaker
