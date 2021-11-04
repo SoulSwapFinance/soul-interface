@@ -1,7 +1,9 @@
-[{
+[
+    {
         "inputs": [],
         "name": "fetchAllPidsDetails",
-        "outputs": [{
+        "outputs": [
+            {
                 "internalType": "uint256[]",
                 "name": "_summonerLpTokens",
                 "type": "uint256[]"
@@ -36,13 +38,16 @@
         "type": "function"
     },
     {
-        "inputs": [{
-            "internalType": "uint256",
-            "name": "pid",
-            "type": "uint256"
-        }],
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "pid",
+                "type": "uint256"
+            }
+        ],
         "name": "fetchOwnershipRewards",
-        "outputs": [{
+        "outputs": [
+            {
                 "internalType": "uint256",
                 "name": "userBal",
                 "type": "uint256"
@@ -72,13 +77,16 @@
         "type": "function"
     },
     {
-        "inputs": [{
-            "internalType": "uint256",
-            "name": "pid",
-            "type": "uint256"
-        }],
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "pid",
+                "type": "uint256"
+            }
+        ],
         "name": "fetchPercOfSupply",
-        "outputs": [{
+        "outputs": [
+            {
                 "internalType": "uint256",
                 "name": "summonerBal",
                 "type": "uint256"
@@ -93,13 +101,16 @@
         "type": "function"
     },
     {
-        "inputs": [{
-            "internalType": "uint256",
-            "name": "pid",
-            "type": "uint256"
-        }],
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "pid",
+                "type": "uint256"
+            }
+        ],
         "name": "fetchPidDetails",
-        "outputs": [{
+        "outputs": [
+            {
                 "internalType": "uint256",
                 "name": "summonerLpTokens",
                 "type": "uint256"
@@ -134,13 +145,16 @@
         "type": "function"
     },
     {
-        "inputs": [{
-            "internalType": "uint256",
-            "name": "pid",
-            "type": "uint256"
-        }],
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "pid",
+                "type": "uint256"
+            }
+        ],
         "name": "fetchPoolWeight",
-        "outputs": [{
+        "outputs": [
+            {
                 "internalType": "uint256",
                 "name": "_pidAlloc",
                 "type": "uint256"
@@ -155,13 +169,16 @@
         "type": "function"
     },
     {
-        "inputs": [{
-            "internalType": "uint256",
-            "name": "pid",
-            "type": "uint256"
-        }],
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "pid",
+                "type": "uint256"
+            }
+        ],
         "name": "fetchStakedBals",
-        "outputs": [{
+        "outputs": [
+            {
                 "internalType": "uint256",
                 "name": "staked",
                 "type": "uint256"
@@ -178,7 +195,8 @@
     {
         "inputs": [],
         "name": "fetchTokenRateBals",
-        "outputs": [{
+        "outputs": [
+            {
                 "internalType": "uint256",
                 "name": "ftmUsdcTotalFtm",
                 "type": "uint256"
@@ -210,12 +228,12 @@
             },
             {
                 "internalType": "uint256",
-                "name": "bnbDaiTotalBnb",
+                "name": "ftmEnchantTotalFtm",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "bnbDaiTotalDai",
+                "name": "ftmEnchantTotalEnchant",
                 "type": "uint256"
             }
         ],
@@ -223,28 +241,35 @@
         "type": "function"
     },
     {
-        "inputs": [{
-            "internalType": "uint256",
-            "name": "pid",
-            "type": "uint256"
-        }],
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "pid",
+                "type": "uint256"
+            }
+        ],
         "name": "fetchTvl",
-        "outputs": [{
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-        }],
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
         "stateMutability": "view",
         "type": "function"
     },
     {
-        "inputs": [{
-            "internalType": "uint256",
-            "name": "pid",
-            "type": "uint256"
-        }],
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "pid",
+                "type": "uint256"
+            }
+        ],
         "name": "fetchUserOwnershp",
-        "outputs": [{
+        "outputs": [
+            {
                 "internalType": "uint256",
                 "name": "userBal",
                 "type": "uint256"
@@ -259,7 +284,8 @@
         "type": "function"
     },
     {
-        "inputs": [{
+        "inputs": [
+            {
                 "internalType": "uint256",
                 "name": "pid",
                 "type": "uint256"
@@ -271,7 +297,8 @@
             }
         ],
         "name": "fetchWithdrawable",
-        "outputs": [{
+        "outputs": [
+            {
                 "internalType": "uint256",
                 "name": "_feeAmount",
                 "type": "uint256"
@@ -291,13 +318,16 @@
         "type": "function"
     },
     {
-        "inputs": [{
-            "internalType": "uint256",
-            "name": "pid",
-            "type": "uint256"
-        }],
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "pid",
+                "type": "uint256"
+            }
+        ],
         "name": "fetchYearlyRewards",
-        "outputs": [{
+        "outputs": [
+            {
                 "internalType": "uint256",
                 "name": "_pidAlloc",
                 "type": "uint256"
@@ -326,11 +356,13 @@
     {
         "inputs": [],
         "name": "totalPending",
-        "outputs": [{
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-        }],
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
         "stateMutability": "view",
         "type": "function"
     }

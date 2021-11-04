@@ -94,8 +94,8 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
    * [3] : soulFtmTotalFusd
    * [4] : ethFtmTotalFtm
    * [5] : ethFtmTotalEth
-   * [6] : bnbDaiTotalBnb
-   * [7] : bnbDaiTotalDai
+   * [6] : ftmEnchantTotalFtm
+   * [7] : ftmEnchantTotalEnchant
    */
   const fetchTokenRateBals = async () => {
     try {
@@ -104,11 +104,16 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
       const ftmPrice = result?.[1] / (result?.[0] / 10 ** 12)
       const soulPrice = result?.[3] / result?.[2]
       const ethPrice = (result?.[4] / result?.[5]) * ftmPrice
-      const bnbPrice = (result?.[7] / result?.[6])
+      const enchantPrice = (result?.[6] / result?.[7])
 
-      console.log('usdcPerFtm:', ftmPrice, 'fusdPerSoul:', soulPrice, 'ethPrice:', ethPrice, 'bnbPrice:', bnbPrice)
+      console.log(
+        'usdcPerFtm:', ftmPrice, 
+        'fusdPerSoul:', soulPrice, 
+        'ethPrice:', ethPrice, 
+        'enchantPrice:', enchantPrice
+      )
 
-      return [ftmPrice, soulPrice, ethPrice, bnbPrice]
+      return [ftmPrice, soulPrice, ethPrice, enchantPrice]
     } catch (e) {
       console.log(e)
       return e
@@ -129,7 +134,7 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
       const ftmPrice = rates?.[0]
       const soulPrice = rates?.[1]
       const ethPrice = rates?.[2]
-      const bnbPrice = rates?.[3]
+      const enchantPrice = rates?.[3]
 
       const result = await helperContract?.fetchPidDetails(pid)
 
@@ -151,6 +156,8 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
         pidTvl = rawPidValue * soulPrice
       } else if (token1Name === 'WETH' || token2Name === 'WETH') {
         pidTvl = rawPidValue * ethPrice
+      } else if (token1Name === 'ENCHANT' || token2Name === 'ENCHANT') {
+        pidTvl = rawPidValue * enchantPrice
       }
 
       // ------ APR ------
