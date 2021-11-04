@@ -17,12 +17,6 @@ const items = (i18n: I18n) => [
     external: true,
   },
   {
-    name: i18n._(t`Explore`),
-    description: i18n._(t`View our Ecosystem.`),
-    href: 'https://port.soul.sh',
-    external: true,
-  },
-  {
     name: i18n._(t`Forum`),
     description: i18n._(t`Summon an Empire.`),
     href: 'https://forum.soulswap.finance',

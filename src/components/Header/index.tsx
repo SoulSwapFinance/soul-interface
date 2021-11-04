@@ -41,17 +41,17 @@ function AppBar(): JSX.Element {
                   <div className="hidden sm:block sm:ml-4">
                     <div className="flex space-x-2">
                       {/* <Buy /> */}
-                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                      <NavLink href="/exchange/swap">
-                        <a
-                          id={`swap-nav-link`}
-                          className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                        >
+                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                       <NavLink href="/exchange/swap">
+                         <a
+                           id={`swap-nav-link`}
+                           className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                         >
                           {i18n._(t`SWAP`)}
-                        </a>
-                      </NavLink>
-                      )}
-                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                         </a>
+                       </NavLink>
+                       )}
+                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                       <NavLink href="/pool">
                         <a
                           id={`pool-nav-link`}
@@ -100,7 +100,7 @@ function AppBar(): JSX.Element {
                           {i18n._(t`Analytics`)}
                         </a>
                         </NavLink>
-                      )} */}
+                      )}
                       { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href='https://bridge.soul.sh' target="_blank">
                           <a
@@ -376,7 +376,7 @@ function AppBar(): JSX.Element {
                     id={`swap-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                   >
-                    {i18n._(t`Exchange`)}
+                    {/* {i18n._(t`Exchange`)} */}
                   </a>
                 </Link>
               )}
@@ -386,7 +386,7 @@ function AppBar(): JSX.Element {
                     id={`pool-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                     >
-                    {i18n._(t`Liquidity`)}
+                    {/* {i18n._(t`Liquidity`)} */}
                   </a>
                 </Link>
                 )}
@@ -396,7 +396,7 @@ function AppBar(): JSX.Element {
                       id={`bridge-nav-link`}
                       className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                     >
-                      {i18n._(t`Bridge`)}
+                      {/* {i18n._(t`Bridge`)} */}
                     </a>
                   </Link>
                 )}
@@ -406,7 +406,7 @@ function AppBar(): JSX.Element {
                       id={`enchant-nav-link`}
                       className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                     >
-                      {i18n._(t`Enchant`)}
+                      {/* {i18n._(t`Enchant`)} */}
                     </a>
                   </Link>
                 )}
@@ -416,7 +416,7 @@ function AppBar(): JSX.Element {
                       id={`farm-nav-link`}
                       className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                     >
-                      {i18n._(t`Summon`)}
+                      {/* {i18n._(t`Summon`)} */}
                     </a>
                   </Link>
                 )}
@@ -426,7 +426,7 @@ function AppBar(): JSX.Element {
                         id={`stake-nav-link`}
                         className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                         >
-                        {i18n._(t`Stake`)}
+                        {/* {i18n._(t`Stake`)} */}
                       </a>
                     </Link>
                   )}
@@ -436,7 +436,7 @@ function AppBar(): JSX.Element {
                     id={`scarab-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                     >
-                    {i18n._(t`Scarab`)}
+                    {/* {i18n._(t`Scarab`)} */}
                   </a>
                 </Link>
                 )}

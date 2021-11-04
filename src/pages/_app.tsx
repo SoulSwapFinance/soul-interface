@@ -32,7 +32,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import PriceProvider  from '../contexts/priceContext'
 import FarmContext from '../contexts/farmContext'
-import { usePricesApi } from '../features/summoner/hooks'
+// import { usePricesApi } from '../features/summoner/hooks'
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
 const Web3ProviderNetwork = dynamic(() => import('../components/Web3ProviderNetwork'), { ssr: false })
@@ -125,18 +125,18 @@ function MyApp({
 
         <meta key="twitter:card" name="twitter:card" content="app" />
         <meta key="twitter:title" name="twitter:title" content="SOUL DEFI" />
-        <meta key="twitter:url" name="twitter:url" content="https://app.soulswap.finance" />
+        <meta key="twitter:url" name="twitter:url" content="https://exchange.soulswap.finance" />
         <meta
           key="twitter:description"
           name="twitter:description"
           content="Be a DeFi summoner with Soul. Swap, earn, stack yields, lend, borrow, leverage all on one decentralized, community driven platform. Welcome home to DeFi"
         />
-        <meta key="twitter:image" name="twitter:image" content="https://app.soulswap.finance/icons/icon-192x192.png" />
+        <meta key="twitter:image" name="twitter:image" content="https://exchange.soulswap.finance/icons/icon-192x192.png" />
         <meta key="twitter:creator" name="twitter:creator" content="@SoulSwapFinance" />
         <meta key="og:type" property="og:type" content="website" />
         <meta key="og:site_name" property="og:site_name" content="SOUL DEFI" />
-        <meta key="og:url" property="og:url" content="https://app.soulswap.finance" />
-        <meta key="og:image" property="og:image" content="https://app.soulswap.finance/apple-touch-icon.png" />
+        <meta key="og:url" property="og:url" content="https://exchange.soulswap.finance" />
+        <meta key="og:image" property="og:image" content="https://exchange.soulswap.finance/apple-touch-icon.png" />
         <meta
           key="og:description"
           property="og:description"
@@ -150,7 +150,7 @@ function MyApp({
             <Web3ProviderNetworkBridge getLibrary={getLibrary}>
               <Web3ReactManager>
                 <ReduxProvider store={store}>
-                  <PriceProvider>
+                  {/* <PriceProvider> */}
                     <>
                       <ListsUpdater />
                       <UserUpdater />
@@ -165,7 +165,7 @@ function MyApp({
                         </Guard>
                       </Layout>
                     </Provider>
-                  </PriceProvider>
+                  {/* </PriceProvider> */}
                 </ReduxProvider>
               </Web3ReactManager>
             </Web3ProviderNetworkBridge>
