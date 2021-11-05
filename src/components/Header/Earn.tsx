@@ -51,8 +51,9 @@ export default function Menu() {
               )}
           >
             
-            <Image src="https://media.giphy.com/media/Y4DUjvMhT9nHdNoMIj/giphy.gif" alt="earn soul" width={45} height={45} />
-             {/* EARN */}
+            <Image src="https://media.giphy.com/media/Y4DUjvMhT9nHdNoMIj/giphy.gif" alt="earn soul" width={50} height={50} />
+             <br/>
+             SUMMON
           </Popover.Button>
 
           <Transition

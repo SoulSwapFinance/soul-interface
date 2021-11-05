@@ -133,8 +133,9 @@ function AppBar(): JSX.Element {
                             className="w-full relative ml-6 md:m-0"
 
                          >
-                           <Image src="https://media.giphy.com/media/kBGxL0WetxMC0qCcLj/giphy.gif" alt="offering soul" width={45} height={45} />
-                            {/* {i18n._(t` SHARE`)} */}
+                           <Image src="https://media.giphy.com/media/kBGxL0WetxMC0qCcLj/giphy.gif" alt="offering soul" width={50} height={50} />
+                           <br/>
+                            SCARAB
                           </a>
                         </NavLink>
                       )}

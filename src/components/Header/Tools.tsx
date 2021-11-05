@@ -52,8 +52,9 @@ export default function Menu() {
               )}
           >
             
-            <Image src="https://media.giphy.com/media/Y3wYCIhIcnzwB2qXg7/giphy.gif" alt="earn soul" width={45} height={45} />
-             {/* TOOLS */}
+            <Image src="https://media.giphy.com/media/Y3wYCIhIcnzwB2qXg7/giphy.gif" alt="earn soul" width={50} height={50} />
+            <br/>
+             DISCOVER
           </Popover.Button>
 
           <Transition
