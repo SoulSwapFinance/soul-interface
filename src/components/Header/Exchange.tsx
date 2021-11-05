@@ -9,8 +9,6 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import NavLink from '../NavLink'
 import { Link } from 'react-feather'
-import EXCHANGE from '../AppIcons/SUMMON'
-import TOOLS from '../AppIcons/TOOLS'
 
 const items = (i18n: I18n) => [
 
@@ -36,8 +34,7 @@ export default function Menu() {
   const solutions = items(i18n)
 
   return (
-    // <Popover as="nav" className="w-full">
-
+    
   <Popover as="nav" className="w-full relative ml-6 md:m-0">
       {({ open }) => (
         <>
@@ -47,37 +44,7 @@ export default function Menu() {
               'focus:outline-none hover:text-high-emphesis'
               )}
           >
-            {/* <svg
-              width="16px"
-              height="16px"
-              className="inline-flex items-center w-5 h-5 ml-2"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12C18 12.5523 18.4477 13 19 13Z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13Z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-             */}
+            
             <Image src="https://media.giphy.com/media/eKCeRVkj3kO3572OYb/source.gif" alt="offering soul" width={45} height={45} />
              {/* EXCHANGE */}
           </Popover.Button>
@@ -105,8 +72,7 @@ export default function Menu() {
                         <NavLink key={item.name} href={item.href}>
                         <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                           {/* <p className="text-base font-medium text-high-emphesis">{item.name}</p> */}
-                          {/* <p className="mt-1 text-sm text-secondary">{item.description}</p> */}
-                        {/* <EXCHANGE/> */}
+                          
                         EXCHANGE
                         </a>
                       </NavLink>
@@ -115,10 +81,9 @@ export default function Menu() {
                         (
                           <NavLink key={item.name} href={item.href}>
                           <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                            {/* <p className="text-base font-medium text-high-emphesis">{item.name}</p> */}
-                            {/* <p className="mt-1 text-sm text-secondary">{item.description}</p> */}
+                            
                             POOLS
-                          {/* <EXCHANGE/> */}
+                          
                           </a>
                         </NavLink>
                         ) : ''
