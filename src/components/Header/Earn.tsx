@@ -9,8 +9,6 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import NavLink from '../NavLink'
 import { Link } from 'react-feather'
-import EXCHANGE from '../AppIcons/SUMMON'
-import TOOLS from '../AppIcons/TOOLS'
 
 const items = (i18n: I18n) => [
 
@@ -84,8 +82,9 @@ export default function Menu() {
             </svg>
              */}
             
-            <Image src="https://media.giphy.com/media/Y4DUjvMhT9nHdNoMIj/giphy.gif" alt="earn soul" width={45} height={45} />
-             {/* EARN */}
+            <Image src="https://media.giphy.com/media/Y4DUjvMhT9nHdNoMIj/giphy.gif" alt="earn soul" width={50} height={50} />
+             <br/>
+             SUMMON
           </Popover.Button>
 
           <Transition
