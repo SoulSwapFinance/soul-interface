@@ -4,11 +4,14 @@ import React from 'react'
 
 // import { ANALYTICS_URL } from '../../constants'
 // import Buy from '../../features/ramp'
-import ExternalLink from '../ExternalLink'
+// import ExternalLink from '../ExternalLink'
 import Image from 'next/image'
-import LanguageSwitch from '../LanguageSwitch'
+// import LanguageSwitch from '../LanguageSwitch'
 import Link from 'next/link'
 import More from './More'
+import Exchange from './Exchange'
+import Earn from './Earn'
+import Tools from './Tools'
 import NavLink from '../NavLink'
 import { Popover } from '@headlessui/react'
 import QuestionHelper from '../QuestionHelper'
@@ -38,17 +41,19 @@ function AppBar(): JSX.Element {
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                 <NavLink href="/landing">
-                  <Image src="/logo.jpg" alt="Soul" width="32px" height="32px" />
+                  <Image src="/logo.jpg" alt="Soul" width="60" height="60" />
                 </NavLink>
                   <div className="hidden sm:block sm:ml-4">
                     <div className="flex space-x-2">
                       {/* <Buy /> */}
-                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                       <NavLink href="/exchange/swap">
+                      {/* <Farm /> */}
+                      <Exchange />
+                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href="/exchange/swap">
                          <a
                            id={`swap-nav-link`}
                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                         >
+                           >
                           {i18n._(t`SWAP`)}
                          </a>
                        </NavLink>
@@ -59,16 +64,20 @@ function AppBar(): JSX.Element {
                           id={`pool-nav-link`}
                           className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                         >
+                          <Image src="https://media.giphy.com/media/N3NpRukvRmnAI/giphy.gif" alt="offering soul" width="30" height="30" />
                           {i18n._(t`POOL`)}
                         </a>
                       </NavLink>
-                      )}
-                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      )} */}
+                      <Earn />
+
+                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/farm'}>
                           <a
                             id={`farm-nav-link`}
                             className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                             >
+                          <Image src="https://media.giphy.com/media/iH7mGoqPivDybuDc2s/giphy.gif" alt="offering soul" width={30} height={30} />
                             {i18n._(t`FARM`)}
                           </a>
                         </NavLink>
@@ -79,11 +88,12 @@ function AppBar(): JSX.Element {
                           id={`enchant-nav-link`}
                           className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                         >
+                          <Image src="https://media.giphy.com/media/hXGy5FTLBPQ4w/giphy.gif" alt="offering soul" width={30} height={30} />
                           {i18n._(t`ENCHANT`)}
                         </a>
                       </NavLink>
-                      )}
-                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      )} */}
+                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                       <NavLink href={'/seance'}>
                         <a
                           id={`stake-nav-link`}
@@ -92,7 +102,7 @@ function AppBar(): JSX.Element {
                           {i18n._(t`STAKE`)}
                         </a>
                       </NavLink>
-                      )}
+                      )} */}
                       {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'https://info.soul.sh'}>
                         <a
@@ -103,46 +113,55 @@ function AppBar(): JSX.Element {
                         </a>
                         </NavLink>
                       )} */}
-                      { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href='/bridge' target="_blank">
-                          <a
-                            id={`bridge-nav-link`}
-                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                          >
-                            {i18n._(t`BRIDGE`)}
-                          </a>
-                        </NavLink>
-                      )}
-                      { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href='/dashboard' target="_blank">
-                          <a
-                            id={`bridge-nav-link`}
-                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                          >
-                            {i18n._(t`DASH`)}
-                          </a>
-                        </NavLink>
-                      )}
-                      { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href='/scarab/create' target="_blank">
-                          <a
-                            id={`bridge-nav-link`}
-                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                          >
-                            {i18n._(t`SHARE`)}
-                          </a>
-                        </NavLink>
-                      )}
-                      { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href='/info' target="_blank">
                           <a
                             id={`info-nav-link`}
                             className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                           >
+                            <Image src="https://media.giphy.com/media/dAEerRZK72Ah6Qo3IX/giphy.gif" alt="offering soul" width={30} height={30} />
                             {i18n._(t`ANALYTICS`)}
                           </a>
                         </NavLink>
+                      )} */}
+                      <Tools />
+                      { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href='/scarab/create' target="_blank">
+                          <a
+                            id={`scarab-nav-link`}
+                            // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                            className="w-full relative ml-6 md:m-0"
+
+                         >
+                           <Image src="https://media.giphy.com/media/kBGxL0WetxMC0qCcLj/giphy.gif" alt="offering soul" width={45} height={45} />
+                            {/* {i18n._(t` SHARE`)} */}
+                          </a>
+                        </NavLink>
                       )}
+
+                      {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href='/dashboard' target="_blank">
+                          <a
+                            id={`bridge-nav-link`}
+                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                          >
+                            <Image src="https://media.giphy.com/media/W0JfDI1ODcNviBOylg/giphy.gif" alt="offering soul" width={30} height={30} />
+                            {i18n._(t` DASH`)}
+                          </a>
+                        </NavLink>
+                      )} */}
+                      {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href='/bridge' target="_blank">
+
+                          <a
+                            id={`bridge-nav-link`}
+                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                          >
+                          <Image src="https://media.giphy.com/media/9vFujGoURHxI9wyAkh/giphy.gif" alt="offering soul" width={30} height={30} />
+                            {i18n._(t` BRIDGE`)}
+                          </a>
+                        </NavLink>
+                      )} */}
                       {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/summoner'}>
                         <a
@@ -236,8 +255,8 @@ function AppBar(): JSX.Element {
                               <Image
                                 src="/images/tokens/enchant.png"
                                 alt="ENCHANT"
-                                width="38px"
-                                height="38px"
+                                width="45px"
+                                height="45px"
                                 objectFit="contain"
                                 className="rounded-md"
                               />
@@ -283,8 +302,8 @@ function AppBar(): JSX.Element {
                               <Image
                                 src="/images/tokens/seance.png"
                                 alt="SEANCE"
-                                width="38px"
-                                height="38px"
+                                width="45px"
+                                height="45px"
                                 objectFit="contain"
                                 className="rounded-md"
                               />
@@ -328,8 +347,8 @@ function AppBar(): JSX.Element {
                             <Image
                                 src="/images/tokens/soul.png"
                                 alt="SOUL"
-                                width="38px"
-                                height="38px"
+                                width="45px"
+                                height="45px"
                                 objectFit="contain"
                                 className="rounded-md"
                             />
@@ -357,7 +376,7 @@ function AppBar(): JSX.Element {
                       <Web3Status />
                     </div>
                     <div className="hidden md:block">
-                      <LanguageSwitch />
+                      {/* <LanguageSwitch /> */}
                     </div>
                     <More />
                   </div>
