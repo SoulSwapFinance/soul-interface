@@ -17,15 +17,21 @@ const items = (i18n: I18n) => [
     href: '/swap',
     exchange: true,
     pools: false, 
+    analytics: false, 
   },
   {
     name: i18n._(t`Pool`),
     href: '/pool',
     exchange: false,
-    pools: true, 
+    pools: true,
+    analytics: false, 
   },
   {
-
+    name: i18n._(t`Analytics`),
+    href: '/info',
+    exchange: false,
+    pools: false, 
+    analytics: true
   },
 ]
 
@@ -46,7 +52,7 @@ export default function Menu() {
           >
             <Image src="https://media.giphy.com/media/eKCeRVkj3kO3572OYb/source.gif" alt="offering soul" width={50} height={50} />
              <br/>
-             SWAP
+             EXCHANGE
           </Popover.Button>
 
           <Transition
@@ -62,7 +68,8 @@ export default function Menu() {
             <Popover.Panel
               flex-direction="column"
               className="w-screen x-full bottom-12 lg:top-12 left-full sm:px-0"
-            >
+            > 
+          
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                 <div className="relative grid gap-6 px-5 py-6 bg-dark-900 sm:gap-8 sm:p-8">
 
@@ -73,10 +80,11 @@ export default function Menu() {
                         <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                           {/* <p className="text-base font-medium text-high-emphesis">{item.name}</p> */}
                           
-                        EXCHANGE
+                        SWAP
+                        
                         </a>
                       </NavLink>
-                      )) : (
+                      )) :
                         item.pools ?
                         (
                           <NavLink key={item.name} href={item.href}>
@@ -86,9 +94,20 @@ export default function Menu() {
                           
                           </a>
                         </NavLink>
+                        
+                        ) : (
+                          item.analytics ?
+                          (
+                            <NavLink key={item.name} href={item.href}>
+                            <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                              
+                              CHARTS
+                            
+                            </a>
+                            </NavLink>
                         ) : ''
                       )
-                  )}
+                  )}                
                 </div>
               </div>
             </Popover.Panel>

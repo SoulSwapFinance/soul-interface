@@ -332,7 +332,15 @@
         "symbol": "SOUL",
         "decimals": 18,
         "chainId": 250,
-        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009ff39f52c0134e8007fa0e4baacbd07/logo.png"
+        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png"
+      },
+      {
+        "name": "SpiritSwap Token",
+        "address": "0x5Cc61A78F164885776AA610fb0FE1257df78E59B",
+        "symbol": "SPIRIT",
+        "decimals": 18,
+        "chainId": 250,
+        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x5Cc61A78F164885776AA610fb0FE1257df78E59B/logo.png"
       },
       {
         "name": "USD Coin",

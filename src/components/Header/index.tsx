@@ -139,6 +139,20 @@ function AppBar(): JSX.Element {
                           </a>
                         </NavLink>
                       )}
+                      { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href='/bridge' target="_blank">
+                          <a
+                            id={`scarab-nav-link`}
+                            // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                            className="w-full relative ml-6 md:m-0"
+
+                         >
+                           <Image src="https://media.giphy.com/media/Vi6Eo8cmcYtvWqXOhm/giphy.gif" alt="offering soul" width={50} height={50} />
+                           <br/>
+                            BRIDGE
+                          </a>
+                        </NavLink>
+                      )}
 
                       {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href='/dashboard' target="_blank">
@@ -256,8 +270,8 @@ function AppBar(): JSX.Element {
                               <Image
                                 src="/images/tokens/enchant.png"
                                 alt="ENCHANT"
-                                width="45px"
-                                height="45px"
+                                width="50px"
+                                height="50px"
                                 objectFit="contain"
                                 className="rounded-md"
                               />
@@ -303,8 +317,8 @@ function AppBar(): JSX.Element {
                               <Image
                                 src="/images/tokens/seance.png"
                                 alt="SEANCE"
-                                width="45px"
-                                height="45px"
+                                width="50px"
+                                height="50px"
                                 objectFit="contain"
                                 className="rounded-md"
                               />
@@ -348,8 +362,8 @@ function AppBar(): JSX.Element {
                             <Image
                                 src="/images/tokens/soul.png"
                                 alt="SOUL"
-                                width="45px"
-                                height="45px"
+                                width="50px"
+                                height="50px"
                                 objectFit="contain"
                                 className="rounded-md"
                             />
