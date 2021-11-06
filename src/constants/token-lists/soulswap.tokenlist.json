@@ -271,6 +271,14 @@
         "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E/logo.png"
       },
       {
+        "name": "Enchantment",
+        "address": "0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a",
+        "symbol": "ENCHANT",
+        "decimals": 18,
+        "chainId": 250,
+        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/prod/blockchains/fantom/assets/0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a/logo.png"
+      },
+      {
         "name": "Fantom USD",
         "address": "0xAd84341756Bf337f5a0164515b1f6F993D194E1f",
         "symbol": "fUSD",
