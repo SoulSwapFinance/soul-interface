@@ -12,26 +12,26 @@ import { Link } from 'react-feather'
 
 const items = (i18n: I18n) => [
 
-  {
-    name: i18n._(t`Analytics`),
-    href: '/info',
-    analytics: true,
-    dashboard: false, 
-    bridge: false, 
-  },
+  // {
+  //   name: i18n._(t`Analytics`),
+  //   href: '/info',
+  //   analytics: true,
+  //   dashboard: false, 
+  //   links: false, 
+  // },
   {
     name: i18n._(t`Dashboard`),
     href: '/dashboard',
     analytics: false,
     dashboard: true, 
-    bridge: false, 
+    links: false, 
   },
   {
-    name: i18n._(t`Bridge`),
-    href: '/bridge',
+    name: i18n._(t`Links`),
+    href: '/links',
     analytics: false,
     dashboard: false, 
-    bridge: true, 
+    links: true, 
   },
 ]
 
@@ -75,31 +75,32 @@ export default function Menu() {
                 <div className="relative grid gap-6 px-5 py-6 bg-dark-900 sm:gap-8 sm:p-8">
 
                   {solutions.map((item) =>
-                    item.analytics ? (
-                      <NavLink key={item.name} href={item.href}>
-                      <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                    // item.analytics ? (
+                    //   <NavLink key={item.name} href={item.href}>
+                    //   <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                         
-                      ANALYTICS
-                      
-                      </a>
-                    </NavLink>
+                    //   ANALYTICS
+              
+                    //   </a>
+                    // </NavLink>
 
-                    ) : 
+                    // ) : 
                       item.dashboard ?
                       (
                         <NavLink key={item.name} href={item.href}>
                         <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
 
                         DASHBOARD
+                        
                         </a>
                       </NavLink>
                       ) : (
-                        item.bridge ?
+                        item.links ?
                         (
                           <NavLink key={item.name} href={item.href}>
                           <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                             
-                            BRIDGE
+                            LINKS
                           
                           </a>
                         </NavLink>

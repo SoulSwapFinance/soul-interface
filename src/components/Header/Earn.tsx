@@ -27,7 +27,7 @@ const items = (i18n: I18n) => [
     enchant: false, 
   },
   {
-    name: i18n._(t`Stake`),
+    name: i18n._(t`Enchant`),
     href: '/enchant',
     farm: false,
     stake: false, 
