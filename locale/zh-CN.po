@@ -55,6 +55,9 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
+msgid "Add ENCHANT to your MetaMask wallet"
+msgstr ""
+
 msgid "Add Liquidity"
 msgstr ""
 
@@ -128,9 +131,6 @@ msgid "Available"
 msgstr ""
 
 msgid "Available Networks"
-msgstr ""
-
-msgid "BRIDGE"
 msgstr ""
 
 msgid "Back to Limit Orders"
@@ -317,6 +317,9 @@ msgstr ""
 msgid "DAILY"
 msgstr ""
 
+msgid "Dashboard"
+msgstr ""
+
 msgid "Deposit"
 msgstr ""
 
@@ -353,7 +356,16 @@ msgstr ""
 msgid "EXIT"
 msgstr ""
 
+msgid "Earn"
+msgstr ""
+
+msgid "Earn Fees with Enchantments."
+msgstr ""
+
 msgid "Either return to the {link}, or change to an available network."
+msgstr ""
+
+msgid "Enchant"
 msgstr ""
 
 msgid "Enchant your Seance..."
@@ -412,19 +424,16 @@ msgstr ""
 msgid "Expired"
 msgstr ""
 
-msgid "Explore"
-msgstr ""
-
 msgid "Explore our Protocol."
 msgstr ""
 
 msgid "FANTOM PAIRS"
 msgstr ""
 
-msgid "FARM"
+msgid "Fantom Faucet"
 msgstr ""
 
-msgid "Fantom Faucet"
+msgid "Farm"
 msgstr ""
 
 msgid "Fees"
@@ -723,9 +732,6 @@ msgstr ""
 msgid "Output will be sent to"
 msgstr ""
 
-msgid "POOL"
-msgstr ""
-
 msgid "Pay"
 msgstr ""
 
@@ -769,9 +775,6 @@ msgid "Pooled {0}"
 msgstr ""
 
 msgid "Positions"
-msgstr ""
-
-msgid "Power to Enchant Souls."
 msgstr ""
 
 msgid "Price Impact"
@@ -843,12 +846,6 @@ msgstr ""
 msgid "Review Limit Order"
 msgstr ""
 
-msgid "Reward"
-msgstr ""
-
-msgid "Rituals with Friends."
-msgstr ""
-
 msgid "Roll it back - this feature is not yet supported on {0}."
 msgstr ""
 
@@ -870,9 +867,6 @@ msgstr ""
 msgid "SELF"
 msgstr ""
 
-msgid "SHARE"
-msgstr ""
-
 msgid "SLP"
 msgstr ""
 
@@ -885,25 +879,13 @@ msgstr ""
 msgid "STABLE PAIRS"
 msgstr ""
 
-msgid "STAKE"
-msgstr ""
-
 msgid "STAKING ASSETS"
-msgstr ""
-
-msgid "SWAP"
 msgstr ""
 
 msgid "Scarab"
 msgstr ""
 
 msgid "Scarabs are a neat way to share your SOUL with anyone, so long as they're also willing to perform a ritual and make a small sacrfice..."
-msgstr ""
-
-msgid "Seance"
-msgstr ""
-
-msgid "Seance for Soul Power."
 msgstr ""
 
 msgid "Search Name or Address"
@@ -945,9 +927,6 @@ msgstr ""
 msgid "Share of Pool:"
 msgstr ""
 
-msgid "Shares"
-msgstr ""
-
 msgid "Slippage"
 msgstr ""
 
@@ -985,6 +964,9 @@ msgid "Stake SOUL"
 msgstr ""
 
 msgid "Stake SOUL for SPELL"
+msgstr ""
+
+msgid "Stake Sou for Soul."
 msgstr ""
 
 msgid ""
@@ -1147,10 +1129,10 @@ msgstr ""
 msgid "View our Data."
 msgstr ""
 
-msgid "View our Ecosystem."
+msgid "View your Dashboard."
 msgstr ""
 
-msgid "Vote"
+msgid "View your Trades."
 msgstr ""
 
 msgid "Waiting for Confirmation"
