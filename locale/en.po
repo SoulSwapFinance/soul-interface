@@ -55,6 +55,9 @@ msgstr "Accept"
 msgid "Add"
 msgstr "Add"
 
+msgid "Add ENCHANT to your MetaMask wallet"
+msgstr "Add ENCHANT to your MetaMask wallet"
+
 msgid "Add Liquidity"
 msgstr "Add Liquidity"
 
@@ -129,9 +132,6 @@ msgstr "Available"
 
 msgid "Available Networks"
 msgstr "Available Networks"
-
-msgid "BRIDGE"
-msgstr "BRIDGE"
 
 msgid "Back to Limit Orders"
 msgstr "Back to Limit Orders"
@@ -321,6 +321,9 @@ msgstr "Current"
 msgid "DAILY"
 msgstr "DAILY"
 
+msgid "Dashboard"
+msgstr "Dashboard"
+
 msgid "Deposit"
 msgstr "Deposit"
 
@@ -357,8 +360,17 @@ msgstr "ENCHANT"
 msgid "EXIT"
 msgstr "EXIT"
 
+msgid "Earn"
+msgstr "Earn"
+
+msgid "Earn Fees with Enchantments."
+msgstr "Earn Fees with Enchantments."
+
 msgid "Either return to the {link}, or change to an available network."
 msgstr "Either return to the {link}, or change to an available network."
+
+msgid "Enchant"
+msgstr "Enchant"
 
 msgid "Enchant your Seance..."
 msgstr "Enchant your Seance..."
@@ -418,20 +430,17 @@ msgstr "Expiration is the time at which the order will become invalid"
 msgid "Expired"
 msgstr "Expired"
 
-msgid "Explore"
-msgstr "Explore"
-
 msgid "Explore our Protocol."
 msgstr "Explore our Protocol."
 
 msgid "FANTOM PAIRS"
 msgstr "FANTOM PAIRS"
 
-msgid "FARM"
-msgstr "FARM"
-
 msgid "Fantom Faucet"
 msgstr "Fantom Faucet"
+
+msgid "Farm"
+msgstr "Farm"
 
 msgid "Fees"
 msgstr "Fees"
@@ -737,9 +746,6 @@ msgstr "Output is estimated. You will receive at least"
 msgid "Output will be sent to"
 msgstr "Output will be sent to"
 
-msgid "POOL"
-msgstr "POOL"
-
 msgid "Pay"
 msgstr "Pay"
 
@@ -784,9 +790,6 @@ msgstr "Pooled {0}"
 
 msgid "Positions"
 msgstr "Positions"
-
-msgid "Power to Enchant Souls."
-msgstr "Power to Enchant Souls."
 
 msgid "Price Impact"
 msgstr "Price Impact"
@@ -860,12 +863,6 @@ msgstr "Restricts swaps to direct pairs only."
 msgid "Review Limit Order"
 msgstr "Review Limit Order"
 
-msgid "Reward"
-msgstr "Reward"
-
-msgid "Rituals with Friends."
-msgstr "Rituals with Friends."
-
 msgid "Roll it back - this feature is not yet supported on {0}."
 msgstr "Roll it back - this feature is not yet supported on {0}."
 
@@ -887,9 +884,6 @@ msgstr "SEANCE = Staked SOUL"
 msgid "SELF"
 msgstr "SELF"
 
-msgid "SHARE"
-msgstr "SHARE"
-
 msgid "SLP"
 msgstr "SLP"
 
@@ -902,26 +896,14 @@ msgstr "SOUL per $1000"
 msgid "STABLE PAIRS"
 msgstr "STABLE PAIRS"
 
-msgid "STAKE"
-msgstr "STAKE"
-
 msgid "STAKING ASSETS"
 msgstr "STAKING ASSETS"
-
-msgid "SWAP"
-msgstr "SWAP"
 
 msgid "Scarab"
 msgstr "Scarab"
 
 msgid "Scarabs are a neat way to share your SOUL with anyone, so long as they're also willing to perform a ritual and make a small sacrfice..."
 msgstr "Scarabs are a neat way to share your SOUL with anyone, so long as they're also willing to perform a ritual and make a small sacrfice..."
-
-msgid "Seance"
-msgstr "Seance"
-
-msgid "Seance for Soul Power."
-msgstr "Seance for Soul Power."
 
 msgid "Search Name or Address"
 msgstr "Search Name or Address"
@@ -962,9 +944,6 @@ msgstr "Share of Pool"
 msgid "Share of Pool:"
 msgstr "Share of Pool:"
 
-msgid "Shares"
-msgstr "Shares"
-
 msgid "Slippage"
 msgstr "Slippage"
 
@@ -1003,6 +982,9 @@ msgstr "Stake SOUL"
 
 msgid "Stake SOUL for SPELL"
 msgstr "Stake SOUL for SPELL"
+
+msgid "Stake Sou for Soul."
+msgstr "Stake Sou for Soul."
 
 msgid ""
 "Stake into SPELL add collateral as aSPELL on Aave all in\n"
@@ -1168,11 +1150,11 @@ msgstr "View on Explorer"
 msgid "View our Data."
 msgstr "View our Data."
 
-msgid "View our Ecosystem."
-msgstr "View our Ecosystem."
+msgid "View your Dashboard."
+msgstr "View your Dashboard."
 
-msgid "Vote"
-msgstr "Vote"
+msgid "View your Trades."
+msgstr "View your Trades."
 
 msgid "Waiting for Confirmation"
 msgstr "Waiting for Confirmation"
