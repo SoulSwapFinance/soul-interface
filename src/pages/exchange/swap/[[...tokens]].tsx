@@ -380,7 +380,13 @@ export default function Swap() {
         tokens={importTokensNotInDefault}
         onConfirm={handleConfirmTokenWarning}
       />
-
+                {/* <iframe 
+                frameBorder={"none"}
+                  title={"USER"}
+                  src="https://analytics.soulswap.finance/pairs/0xa2527af9dabf3e3b4979d7e0493b5e2c6e63dc57"
+                  height={"420" }
+                  width={"100%"}
+              /> */}
       {/* <SoulLogo /> */}
       <br /><br />
       <DoubleGlowShadowV2 opacity="0.6">
@@ -612,7 +618,15 @@ export default function Swap() {
             <UnsupportedCurrencyFooter show={swapIsUnsupported} currencies={[currencies.INPUT, currencies.OUTPUT]} />
           )}
         </div>
+      {/* <a href="https://analytics.solarbeam.io/pairs/0xe537f70a8b62204832B8Ba91940B77d3f79AEb81" target="_blank" rel="noreferrer" className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2 lg:w-min"> */}
+        {/* <div className="flex items-center space-x-2">
+          <div className="rounded width: 30px; height: 30px;"> */}
+            {/* <div className="overflow-hidden width: 30px; height: 30px;">
+
+              </div>
+            </div> */}
       </DoubleGlowShadowV2>
+
     </>
   )
 }
