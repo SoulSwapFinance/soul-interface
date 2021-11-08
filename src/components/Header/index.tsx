@@ -466,6 +466,7 @@ function AppBar(): JSX.Element {
                     </a>
                   </Link>
                 )}
+                
                 { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <Link href={'/bridge'}>
                     <a
@@ -476,16 +477,7 @@ function AppBar(): JSX.Element {
                     </a>
                   </Link>
                 )}
-                { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                  <Link href={'/dashboard'}>
-                    <a
-                      id={`dashboard-nav-link`}
-                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                    >
-                      {i18n._(t`Dashboard`)}
-                    </a>
-                  </Link>
-                )}
+                
                 { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <Link href={'/enchant'}>
                     <a
