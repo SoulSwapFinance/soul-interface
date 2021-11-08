@@ -436,6 +436,7 @@ function AppBar(): JSX.Element {
 
             <Popover.Panel className="sm:hidden">
               <div className="flex flex-col px-4 pt-2 pb-3 space-y-1">
+                
               { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                 <Link href={'/swap'}>
                   <a
@@ -446,16 +447,62 @@ function AppBar(): JSX.Element {
                   </a>
                 </Link>
               )}
-                { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                  <Link href={'/pool'}>
+
+              { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                <Link href={'/pool'}>
+                <a
+                  id={`pool-nav-link`}
+                  className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                  >
+                  {i18n._(t`Liquidity`)}
+                </a>
+              </Link>
+              )}
+
+              { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                <Link href={'/farm'}>
                   <a
-                    id={`pool-nav-link`}
+                    id={`farm-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                    >
-                    {i18n._(t`Liquidity`)}
+                  >
+                    {i18n._(t`Summon`)}
                   </a>
                 </Link>
-                )}
+              )}
+                
+              { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                <Link href={'/enchant'}>
+                  <a
+                    id={`enchant-nav-link`}
+                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                  >
+                    {i18n._(t`Enchant`)}
+                  </a>
+                </Link>
+              )}
+
+              { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                <Link href={'/seance'}>
+                <a
+                  id={`stake-nav-link`}
+                  className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                  >
+                  {i18n._(t`Stake`)}
+                </a>
+              </Link>
+              )}
+
+                    {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      <Link href={'/scarab/create'}>
+                  <a
+                    id={`scarab-nav-link`}
+                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                    >
+                    {i18n._(t`Scarab`)}
+                  </a>
+                </Link>
+                )} */}
+
                 { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <Link href={'/info'}>
                     <a
@@ -477,47 +524,7 @@ function AppBar(): JSX.Element {
                     </a>
                   </Link>
                 )}
-                
-                { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                  <Link href={'/enchant'}>
-                    <a
-                      id={`enchant-nav-link`}
-                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                    >
-                      {i18n._(t`Enchant`)}
-                    </a>
-                  </Link>
-                )}
-                { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                  <Link href={'/farm'}>
-                    <a
-                      id={`farm-nav-link`}
-                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                    >
-                      {i18n._(t`Summon`)}
-                    </a>
-                  </Link>
-                )}
-                    { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                      <Link href={'/seance'}>
-                      <a
-                        id={`stake-nav-link`}
-                        className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                        >
-                        {i18n._(t`Stake`)}
-                      </a>
-                    </Link>
-                  )}
-                    { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                      <Link href={'/scarab/create'}>
-                  <a
-                    id={`scarab-nav-link`}
-                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                    >
-                    {i18n._(t`Scarab`)}
-                  </a>
-                </Link>
-                )}
+
                     {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                       <Link href={'/user'}>
                   <a
