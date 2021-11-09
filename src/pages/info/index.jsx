@@ -3,7 +3,7 @@ const Info = () => {
       <iframe 
 			frameBorder={"none"}
     		title={"INFO"}
-    		src="https://analytics.soulswap.finance"
+    		src="https://info.soulswap.finance"
     		height={"100%" }
     		width={"100%"}
     />
