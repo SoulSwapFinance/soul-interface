@@ -20,19 +20,19 @@ const items = (i18n: I18n) => [
   //   links: false, 
   // },
   {
-    name: i18n._(t`Dashboard`),
-    href: '/dashboard',
-    analytics: false,
-    dashboard: true, 
-    links: false, 
-  },
-  {
     name: i18n._(t`Links`),
     href: '/links',
     analytics: false,
     dashboard: false, 
     links: true, 
   },
+  // {
+  // name: i18n._(t`Dashboard`),
+  // href: '/links',
+  // analytics: false,
+  // dashboard: true, 
+  // links: false, 
+  // },
 ]
 
 export default function Menu() {
@@ -85,16 +85,16 @@ export default function Menu() {
                     // </NavLink>
 
                     // ) : 
-                      item.dashboard ?
-                      (
-                        <NavLink key={item.name} href={item.href}>
-                        <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                    // item.dashboard ?
+                    // (
+                    //  <NavLink key={item.name} href={item.href}>
+                    // <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
 
-                        DASHBOARD
+                    // DASHBOARD
                         
-                        </a>
-                      </NavLink>
-                      ) : (
+                    // </a>
+                    // </NavLink>
+                    // ) : (
                         item.links ?
                         (
                           <NavLink key={item.name} href={item.href}>
