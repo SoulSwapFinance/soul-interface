@@ -380,8 +380,8 @@ export default function Swap() {
         tokens={importTokensNotInDefault}
         onConfirm={handleConfirmTokenWarning}
       />
-      {/* <SoulLogo /> */}      
-      <br /><br />
+      {/* <SoulLogo />       */}
+      <br />
       <DoubleGlowShadowV2 opacity="0.6">
         <div id="swap-page" className="w-full max-w-2xl p-4 space-y-4 rounded bg-dark-900 z-1">
           <SwapHeader

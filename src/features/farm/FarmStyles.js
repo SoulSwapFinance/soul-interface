@@ -15,11 +15,11 @@ export const FarmContainer = styled.div`
 `
 
 export const Row = styled.div`
-  background-color: #18191A; // original: #222
+  background-color: #18191A;
   padding: ${({ padding }) => (padding ? `${padding}` : `1rem 1rem`)};
   margin: ${({ width }) => (width ? `${width}` : `4px`)};
-  width: 75rem;
-  border-radius: 5px;
+  width: 55rem;
+  border-radius: 8px;
   border: 2px solid #18191A; // original .8px solid #333;
   transition: all 0.2s ease-in-out;
 
@@ -30,14 +30,19 @@ export const Row = styled.div`
   }
 
   @media screen and (max-width: 900px) {
-    width: auto;
-    padding: auto;
-  }
+      width: auto;
+      padding: auto;
+    }
+
+  @media screen and (max-width: 720px) {
+      width: auto;
+      padding: auto;
+    }
 
   @media screen and (max-width: 400px) {
-    width: 20rem;
-  }
-`
+      width: 20rem;
+    }
+  `
 
 export const FarmContentWrapper = styled.div`
   display: flex;
@@ -49,7 +54,7 @@ export const FarmContentWrapper = styled.div`
     justify-content: space-between;
   }
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 720px) {
     padding: 0;
   }
 `
@@ -83,7 +88,7 @@ export const TokenPairBox = styled.div`
 `
 
 export const TokenPair = styled.a`
-  overflow-wrap: break-word;
+  overflow-wrap: break-wordWRA;
   font-size: 1.2rem;
   color: white;
 
@@ -125,9 +130,9 @@ export const ShowBtn = styled.button`
 
 export const DetailsContainer = styled.div`
   margin: 4px;
-  width: 75rem;
+  width: 55rem;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 900px) {
     width: auto;
   }
 `
@@ -137,7 +142,7 @@ export const DetailsWrapper = styled.div`
   background-color: #18191A;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  width: 75rem;
+  width: 55rem;
   padding: 5px 10px;
 
   @media screen and (max-width: 900px) {
@@ -145,7 +150,7 @@ export const DetailsWrapper = styled.div`
     width: 28rem
   }
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 720px) {
     display: block;
     width: 24rem
   }
