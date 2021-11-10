@@ -11,7 +11,8 @@ import Link from 'next/link'
 import More from './More'
 import Exchange from './Exchange'
 import Earn from './Earn'
-import Tools from './Tools'
+// import Tools from './Tools'
+import Seance from './Seance'
 import NavLink from '../NavLink'
 import { Popover } from '@headlessui/react'
 import QuestionHelper from '../QuestionHelper'
@@ -124,7 +125,7 @@ function AppBar(): JSX.Element {
                           </a>
                         </NavLink>
                       )} */}
-                      <Tools />
+                      <Seance />
                       { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href='/scarab/create' target="_blank">
                           <a
