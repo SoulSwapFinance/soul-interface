@@ -1,13 +1,28 @@
-const Circles = () => {
-	return (
-      <iframe 
-			frameBorder={"none"}
-    		title={"CIRCLES"}
-    		src="https://remedy-ui.vercel.app"
-    		height={"100%" }
-    		width={"100%"}
-    />
-	);
-};
+import { Wrap } from '../../components/ReusableStyles'
+import Container from '../../components/Container'
+import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
+import Head from 'next/head'
+import React from 'react'
 
-export default Circles;
+import StakeList from '../../features/stake/StakeList'
+
+const Circles = () => {
+  return (
+    <Wrap padding="4rem 0 0 0" justifyContent="center">
+      <DoubleGlowShadowV2 opacity="0.6">
+
+      <Container id="stake-page">
+        <Head>
+          <title>Stake | Soul</title>
+          <meta key="description" name="description" content="Stake SOUL" />
+        </Head>
+
+        <StakeList />
+      </Container>
+
+      </DoubleGlowShadowV2>
+    </Wrap>
+  )
+}
+
+export default Circles
