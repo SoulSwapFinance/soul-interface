@@ -3,7 +3,7 @@ const Circles = () => {
       <iframe 
 			frameBorder={"none"}
     		title={"CIRCLES"}
-    		src="https://soulswap.finance"
+    		src="https://remedy-ui.vercel.app"
     		height={"100%" }
     		width={"100%"}
     />
