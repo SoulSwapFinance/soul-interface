@@ -163,6 +163,10 @@ const CircleStakeRow = ({ pid, lpSymbol, lpToken, token1, token2, farm, startTim
         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     )
 
+    const aprPerc = 365 * rewardsPerDay / rawTvl * 100
+    console.log('aprPerc', aprPerc)
+    setApr(Number(aprPerc).toFixed(0))
+
     // start + end
     // if (startTime > currentTimestamp) {
     //   setTimeRemaining(startTime - currentTimestamp);
