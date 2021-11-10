@@ -2,7 +2,7 @@ import { ApprovalState, useApproveCallbackFromTrade } from '../../../hooks/useAp
 import { BottomGrouping, SwapCallbackError } from '../../../features/swap/styleds'
 import { AutoRow, RowBetween } from '../../../components/Row'
 import { ButtonConfirmed, ButtonError } from '../../../components/Button'
-import { Currency, CurrencyAmount, JSBI, Token, TradeType, Trade as V2Trade } from '../../../sdk'
+import { Currency, CurrencyAmount, JSBI, Token, TradeType, Trade as V2Trade, SOUL_ADDRESS } from '../../../sdk'
 import Column, { AutoColumn } from '../../../components/Column'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useAllTokens, useCurrency } from '../../../hooks/Tokens'
@@ -380,14 +380,7 @@ export default function Swap() {
         tokens={importTokensNotInDefault}
         onConfirm={handleConfirmTokenWarning}
       />
-                {/* <iframe 
-                frameBorder={"none"}
-                  title={"USER"}
-                  src="https://analytics.soulswap.finance/pairs/0xa2527af9dabf3e3b4979d7e0493b5e2c6e63dc57"
-                  height={"420" }
-                  width={"100%"}
-              /> */}
-      {/* <SoulLogo /> */}
+      {/* <SoulLogo /> */}      
       <br /><br />
       <DoubleGlowShadowV2 opacity="0.6">
         <div id="swap-page" className="w-full max-w-2xl p-4 space-y-4 rounded bg-dark-900 z-1">
@@ -618,13 +611,17 @@ export default function Swap() {
             <UnsupportedCurrencyFooter show={swapIsUnsupported} currencies={[currencies.INPUT, currencies.OUTPUT]} />
           )}
         </div>
-      {/* <a href="https://analytics.solarbeam.io/pairs/0xe537f70a8b62204832B8Ba91940B77d3f79AEb81" target="_blank" rel="noreferrer" className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2 lg:w-min"> */}
-        {/* <div className="flex items-center space-x-2">
-          <div className="rounded width: 30px; height: 30px;"> */}
-            {/* <div className="overflow-hidden width: 30px; height: 30px;">
-
-              </div>
-            </div> */}
+        {/* <br/>
+        <br/> */}
+        <AutoColumn justify="space-between" className="py-3">
+          <iframe 
+                frameBorder={"none"}
+                title={"USER"}
+                src={"https://analytics.soulswap.finance"}
+                height={"480" }
+                width={"100%"}
+            />
+        </AutoColumn>
       </DoubleGlowShadowV2>
 
     </>
