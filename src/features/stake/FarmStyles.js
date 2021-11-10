@@ -9,32 +9,27 @@ export const FlexText = styled.div`
 //  Row Section
 // ---------------------
 
-export const StakeContainer = styled.div`
+export const FarmContainer = styled.div`
   display: grid;
   grid-template-rows: 1fr;
 `
 
-export const StakeRow = styled.div`
-  background-color: #222;
-  height: 4rem;
-  margin: 4px;
-  width: 55rem;
-  border-radius: 8px;
-  padding: 5px 1rem;
-  border: .8px solid #333;
+export const Row = styled.div`
+  background-color: #18191A; // original: #222
+  padding: ${({ padding }) => (padding ? `${padding}` : `1rem 1rem`)};
+  margin: ${({ width }) => (width ? `${width}` : `4px`)};
+  width: 75rem;
+  border-radius: 5px;
+  border: 2px solid #18191A; // original .8px solid #333;
   transition: all 0.2s ease-in-out;
 
   &:hover {
     opacity: 75%;
     cursor: pointer;
+    border: 2px solid #18191A;
   }
 
   @media screen and (max-width: 900px) {
-    width: auto;
-    padding: auto;
-  }
-
-  @media screen and (max-width: 720px) {
     width: auto;
     padding: auto;
   }
@@ -44,7 +39,7 @@ export const StakeRow = styled.div`
   }
 `
 
-export const StakeContentWrapper = styled.div`
+export const FarmContentWrapper = styled.div`
   display: flex;
   justify-content: left;
   align-items: center;
@@ -54,12 +49,12 @@ export const StakeContentWrapper = styled.div`
     justify-content: space-between;
   }
 
-  @media screen and (max-width: 720px) {
+  @media screen and (max-width: 600px) {
     padding: 0;
   }
 `
 
-export const StakeItemBox = styled.div`
+export const FarmItemBox = styled.div`
   width: ${({ width }) => (width ? `${width}` : `100px`)};
   display: grid;
   justify-content: left;
@@ -68,14 +63,14 @@ export const StakeItemBox = styled.div`
 
 `
 
-export const StakeItemHeading = styled.p`
+export const FarmItemHeading = styled.p`
   font-weight: normal;
   font-size: 0.8rem;
   color: white;
   align-items: center;
 `
 
-export const StakeItem = styled.h2`
+export const FarmItem = styled.h2`
   font-size: 1.5rem;
   color: white;
 `
@@ -95,7 +90,7 @@ export const TokenPair = styled.a`
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    color: #B026FF;
+    color: #3D81DB;
     opacity: 75%;
     cursor: pointer;
   }
@@ -118,7 +113,7 @@ export const ShowBtn = styled.button`
   background-color: transparent;
 
   &:hover, &:active {
-    color: #B026FF;
+    color: #3D81DB;
     opacity: 75%;
     cursor: pointer;
   }
@@ -130,19 +125,19 @@ export const ShowBtn = styled.button`
 
 export const DetailsContainer = styled.div`
   margin: 4px;
-  width: 55rem;
+  width: 75rem;
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 600px) {
     width: auto;
   }
 `
 
 export const DetailsWrapper = styled.div`
   display: flex;
-  background-color: #222;
+  background-color: #18191A;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  width: 55rem;
+  width: 75rem;
   padding: 5px 10px;
 
   @media screen and (max-width: 900px) {
@@ -150,7 +145,7 @@ export const DetailsWrapper = styled.div`
     width: 28rem
   }
 
-  @media screen and (max-width: 720px) {
+  @media screen and (max-width: 600px) {
     display: block;
     width: 24rem
   }
@@ -201,7 +196,7 @@ export const SubmitButton = styled.button`
   font-size: 1rem;
   padding: 0.5em;
   transition: all 0.2s ease-in-out;
-  background: ${({ primaryColour }) => (primaryColour ? primaryColour : '#B026FF')};
+  background: ${({ primaryColour }) => (primaryColour ? primaryColour : '#3D81DB')};
   color: ${({ color }) => (color ? color : 'white')};
 
   &:hover {
@@ -210,7 +205,7 @@ export const SubmitButton = styled.button`
   }
 
   &:focus {
-    border-color: ${({ hoverColour }) => (hoverColour ? hoverColour : '#B026FF')};
+    border-color: ${({ hoverColour }) => (hoverColour ? hoverColour : '#3D81DB')};
   }
 
   &:disabled { 

@@ -27,7 +27,7 @@ import {
   SubmitButton,
 } from './StakeStyles'
 
-import { Wrap, ClickableText, Heading, Text, ExternalLink } from '../../components/ReusableStyles'
+import { Wrap, ClickableText, Heading, Text, ExternalLink } from './ReusableStyles'
 
 // params to render farm with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)
@@ -57,7 +57,6 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   const {
     // helper contract
     totalPendingRewards,
-    harvestAllFarms,
     fetchYearlyRewards,
     fetchStakedBals,
     fetchTokenRateBals,
@@ -69,7 +68,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     pendingSoul,
     userInfo,
     getFeePercent,
-  } = useSoulSummoner(pid, lpToken, farm.token1Address[chainId], farm.token2Address[chainId])
+  } = useSoulSummoner(pid, lpToken, farm.token1Address, farm.token2Address)
   const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
 
   const [showing, setShowing] = useState(false)
@@ -486,7 +485,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   )
 }
 
-import { SummonerPid0 } from './StakePids'
+import { SummonerPid0 } from '../../constants/StakePids'
 
 export const StakeList = () => {
   // Display token pair - TODO:

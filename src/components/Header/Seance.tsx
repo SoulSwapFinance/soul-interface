@@ -14,7 +14,7 @@ const items = (i18n: I18n) => [
 
   {
     name: i18n._(t`Circles`),
-    href: '/circles',
+    href: '/stake',
     staking: true,
     dashboard: false, 
     links: false, 

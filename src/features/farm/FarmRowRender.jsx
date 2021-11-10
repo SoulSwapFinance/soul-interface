@@ -12,7 +12,7 @@ import { MulticallAddress, SoulSummonerAddress, SUMMONER_HELPER_ADDRESS as Summo
 import {
   FlexText,
   FarmContainer,
-  FarmRow,
+  Row,
   FarmContentWrapper,
   TokenPairBox,
   FarmItemBox,
@@ -42,7 +42,7 @@ const HideOnMobile = styled(FarmItemBox)`
 `
 
 const TokenPair = styled(ExternalLink)`
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   padding: 0;
 
   @media screen and (max-width: 400px) {
@@ -57,7 +57,6 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   const {
     // helper contract
     totalPendingRewards,
-    harvestAllFarms,
     fetchYearlyRewards,
     fetchStakedBals,
     fetchTokenRateBals,
@@ -363,7 +362,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     <>
       <Wrap padding="0" display="flex" justifyContent="center">
         <FarmContainer>
-          <FarmRow onClick={() => handleShow()}>
+          <Row onClick={() => handleShow()}>
             <FarmContentWrapper>
               <TokenPairBox>
                 {/* 2 token logo combined ? */}
@@ -383,16 +382,10 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
               </TokenPairBox>
 
               <FarmItemBox>
-                <Text padding="0" fontSize=".7rem" color="#bbb">
-                  APR
-                </Text>
                 <FarmItem>{apr ? (apr === 'Infinity' ? '∞%' : apr + '%') : '?'}</FarmItem>
               </FarmItemBox>
 
               <FarmItemBox desktopOnly={true}>
-                <Text padding="0" fontSize=".7rem" color="#bbb">
-                  Earned
-                </Text>
                 {pending === '0.00' ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
                     0
@@ -405,9 +398,6 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
               </FarmItemBox>
 
               <HideOnMobile desktopOnly={true}>
-                <Text padding="0" fontSize=".7rem" color="#bbb">
-                  Pool Rewards
-                </Text>
                 {yearlySoulRewards === 0 ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
                     {yearlySoulRewards}
@@ -420,9 +410,6 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
               </HideOnMobile>
 
               <HideOnMobile desktopOnly={true}>
-                <Text padding="0" fontSize=".7rem" color="#bbb">
-                  Ownership
-                </Text>
                 {percOfFarm === 0 ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
                     {percOfFarm}%
@@ -435,9 +422,6 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
               </HideOnMobile>
 
               <HideOnMobile>
-                <Text padding="0" fontSize=".7rem" color="#bbb">
-                  TVL
-                </Text>
                 {liquidity === '0' ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
                     $0
@@ -453,7 +437,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 <ShowBtn onClick={() => handleShow()}>{showing ? `HIDE` : `SHOW`}</ShowBtn>
               </FarmItemBox> */}
             </FarmContentWrapper>
-          </FarmRow>
+          </Row>
         </FarmContainer>
       </Wrap>
 

@@ -190,7 +190,7 @@ const Summoner = () => {
     <Container id="farm-page" className="grid h-full grid-cols-4 py-4 mx-auto md:py-8 lg:py-12 gap-9" maxWidth="7xl">
       <Head>
         <title>Farm | Soul</title>
-        <meta key="description" name="description" content="Farm SUSHI" />
+        <meta key="description" name="description" content="Farm SOUL" />
       </Head>
       <div className={classNames('sticky top-0 hidden lg:block md:col-span-1')} style={{ maxHeight: '40rem' }}>
         {/* <Menu positionsLength={positions.length} /> */}
@@ -210,14 +210,14 @@ const Summoner = () => {
             Ready to Stake{' '}
             <div className="w-full h-0 ml-4 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis md:border-gradient-r-blue-pink-dark-800 opacity-20"></div>
           </div>
-          <FarmList farms={filtered} term={term} /> */}
+          <FarmList farms={result} term={term} filter={FILTER} /> */}
 
         <div className="flex items-center text-lg font-bold text-high-emphesis whitespace-nowrap">
           Farms{' '}
           <div className="w-full h-0 ml-4 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis md:border-gradient-r-blue-pink-dark-800 opacity-20"></div>
         </div>
 
-        <FarmList farms={result} term={term} filter={'all'} />
+        <FarmList farms={result} term={term} filter={FILTER} />
       </div>
     </Container>
   )

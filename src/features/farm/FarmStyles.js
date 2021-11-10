@@ -14,27 +14,22 @@ export const FarmContainer = styled.div`
   grid-template-rows: 1fr;
 `
 
-export const FarmRow = styled.div`
-  background-color: #222;
-  height: 4rem;
-  margin: 4px;
-  width: 55rem;
-  border-radius: 8px;
-  padding: 5px 1rem;
-  border: .8px solid #333;
+export const Row = styled.div`
+  background-color: #18191A; // original: #222
+  padding: ${({ padding }) => (padding ? `${padding}` : `1rem 1rem`)};
+  margin: ${({ width }) => (width ? `${width}` : `4px`)};
+  width: 75rem;
+  border-radius: 5px;
+  border: 2px solid #18191A; // original .8px solid #333;
   transition: all 0.2s ease-in-out;
 
   &:hover {
     opacity: 75%;
     cursor: pointer;
+    border: 2px solid #F36FFE;
   }
 
   @media screen and (max-width: 900px) {
-    width: auto;
-    padding: auto;
-  }
-
-  @media screen and (max-width: 720px) {
     width: auto;
     padding: auto;
   }
@@ -54,7 +49,7 @@ export const FarmContentWrapper = styled.div`
     justify-content: space-between;
   }
 
-  @media screen and (max-width: 720px) {
+  @media screen and (max-width: 600px) {
     padding: 0;
   }
 `
@@ -95,7 +90,7 @@ export const TokenPair = styled.a`
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    color: #211C28;
+    color: #3D81DB;
     opacity: 75%;
     cursor: pointer;
   }
@@ -118,7 +113,7 @@ export const ShowBtn = styled.button`
   background-color: transparent;
 
   &:hover, &:active {
-    color: #ffffff;
+    color: #3D81DB;
     opacity: 75%;
     cursor: pointer;
   }
@@ -130,19 +125,19 @@ export const ShowBtn = styled.button`
 
 export const DetailsContainer = styled.div`
   margin: 4px;
-  width: 55rem;
+  width: 75rem;
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 600px) {
     width: auto;
   }
 `
 
 export const DetailsWrapper = styled.div`
   display: flex;
-  background-color: #222;
+  background-color: #18191A;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  width: 55rem;
+  width: 75rem;
   padding: 5px 10px;
 
   @media screen and (max-width: 900px) {
@@ -150,7 +145,7 @@ export const DetailsWrapper = styled.div`
     width: 28rem
   }
 
-  @media screen and (max-width: 720px) {
+  @media screen and (max-width: 600px) {
     display: block;
     width: 24rem
   }
@@ -201,7 +196,7 @@ export const SubmitButton = styled.button`
   font-size: 1rem;
   padding: 0.5em;
   transition: all 0.2s ease-in-out;
-  background: ${({ primaryColour }) => (primaryColour ? primaryColour : '#B026FF')};
+  background: ${({ primaryColour }) => (primaryColour ? primaryColour : '#F36FFE')};
   color: ${({ color }) => (color ? color : 'white')};
 
   &:hover {
@@ -210,7 +205,7 @@ export const SubmitButton = styled.button`
   }
 
   &:focus {
-    border-color: ${({ hoverColour }) => (hoverColour ? hoverColour : '#B026FF')};
+    border-color: ${({ hoverColour }) => (hoverColour ? hoverColour : '#F36FFE')};
   }
 
   &:disabled { 
