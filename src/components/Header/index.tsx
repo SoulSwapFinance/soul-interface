@@ -488,10 +488,22 @@ function AppBar(): JSX.Element {
                   id={`stake-nav-link`}
                   className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                   >
+                  {i18n._(t`Seance`)}
+                </a>
+              </Link>
+              )}
+
+ { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                <Link href={'/stake'}>
+                <a
+                  id={`stake-nav-link`}
+                  className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                  >
                   {i18n._(t`Stake`)}
                 </a>
               </Link>
               )}
+
 
                     {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                       <Link href={'/scarab/create'}>
