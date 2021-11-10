@@ -1,41 +1,35 @@
-/* eslint-disable @next/next/link-passhref */
+
+import { Chef, PairType } from '../../features/summoner/enum'
 import { useActiveWeb3React, useFuse } from '../../hooks'
 
+import Container from '../../components/Container'
 import FarmList from '../../features/summoner/FarmList'
 import Head from 'next/head'
 import Menu from '../../features/summoner/FarmMenu'
-import React, { useContext, useState } from 'react'
-import { formatNumberScale } from '../../functions'
-import { usePositions, useFarms, useSummonerInfo } from '../../features/summoner/hooks'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
-import Card from '../../components/Card'
-import Button from '../../components/Button'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
-import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
-import { SEANCE_ADDRESS, SOUL_ADDRESS, WNATIVE } from '../../constants/addresses'
-import { POOLS } from '../../constants/farms'
-import SoulLogo from '../../components/SoulLogo'
-import { PriceContext } from '../../contexts/priceContext'
-import useSummoner from '../../features/summoner/useSummoner'
-import { useTransactionAdder } from '../../state/transactions/hooks'
-import { useTVL } from '../../hooks/useV2Pairs'
-import { getAddress } from '@ethersproject/address'
-// import { useVaults } from '../../features/vault/hooks'
+import React, { useContext } from 'react'
 import Search from '../../components/Search'
+import { classNames } from '../../functions'
+import useFarmRewards from '../../hooks/useFarmRewards'
+import { useFarms, usePositions, useSummonerInfo } from '../../features/summoner/hooks'
+import { useRouter } from 'next/router'
+import { filter } from 'lodash'
+import { SEANCE_ADDRESS, SOUL_ADDRESS, WNATIVE } from '../../sdk'
+import { PriceContext } from '../../contexts/priceContext'
+import { useTVL } from '../../hooks/useV2Pairs'
+import { POOLS } from '../../constants/farms'
+import { getAddress } from 'ethers/lib/utils'
+import useSummoner from '../../features/summoner/useSummoner'
+// import Provider from '../../features/kashi/context'
 
-export default function Summoner(): JSX.Element {
-  const { i18n } = useLingui()
-  const router = useRouter()
+// export default function Summoner(): JSX.Element {
+const Summoner = () => {
   const { chainId } = useActiveWeb3React()
-  const [pendingTx, setPendingTx] = useState(false)
-  const addTransaction = useTransactionAdder()
 
-  const type = router.query.filter as string
+  const WFTM_ADDRESS = '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'
+  const router = useRouter()
+  const type = router.query.filter == null ? 'all' : (router.query.filter as string)
 
   const positions = usePositions()
-
   const farms = useFarms()
   // const vaults = useVaults()
 
@@ -95,7 +89,7 @@ export default function Summoner(): JSX.Element {
       if (pool.lpToken == SOUL_ADDRESS[chainId]) {
         lpPrice = soulPrice
         decimals = pair.token0?.decimals
-      } else if (pool.lpToken.toLowerCase() == WNATIVE[chainId].toLowerCase()) {
+      } else if (pool.lpToken.toLowerCase() == WFTM_ADDRESS.toLowerCase()) {
         lpPrice = ftmPrice
       } else if (pool.lpToken.toLowerCase() == SEANCE_ADDRESS[chainId].toLowerCase()) {
         lpPrice = seancePrice
@@ -140,6 +134,14 @@ export default function Summoner(): JSX.Element {
     }
   }
 
+  // const FILTER = {
+  //   all: (farm) => farm.allocPoint !== '0',
+  //   portfolio: (farm) => farm?.amount && !farm.amount.isZero(),
+  //   sushi: (farm) => farm.pair.type === PairType.SWAP && farm.allocPoint !== '0',
+  //   kashi: (farm) => farm.pair.type === PairType.KASHI && farm.allocPoint !== '0',
+  //   // '2x': (farm) => (farm.chef === Chef.MASTERCHEF_V2 || farm.chef === Chef.MINICHEF) && farm.allocPoint !== '0',
+  // }
+
   const FILTER = {
     my: (farm) => farm?.amount, // && !farm.amount.isZero(),
     soul: (farm) => farm.pair.token0?.symbol == 'SOUL' || farm.pair.token1?.symbol == 'SOUL',
@@ -158,9 +160,13 @@ export default function Summoner(): JSX.Element {
     // return farm
   })
 
+  // const data = useFarmRewards().filter((farm) => {
+  //   return type in FILTER ? FILTER[type](farm) : true
+  // })
+
   const options = {
-    keys: ['pair.id', 'pair.token0.symbol', 'pair.token1.symbol', 'pair.token0.name', 'pair.token1.name'],
-    threshold: 0.4, // [?]
+    keys: ['pair.id', 'pair.token0.symbol', 'pair.token1.symbol'],
+    threshold: 0.4,
   }
 
   const { result, term, search } = useFuse({
@@ -181,108 +187,41 @@ export default function Summoner(): JSX.Element {
   const { harvest } = useSummoner()
 
   return (
-    <>
+    <Container id="farm-page" className="grid h-full grid-cols-4 py-4 mx-auto md:py-8 lg:py-12 gap-9" maxWidth="7xl">
       <Head>
-        <title>Summon | Soul</title>
-        <meta key="description" name="description" content="Summoner SOUL" />
+        <title>Farm | Soul</title>
+        <meta key="description" name="description" content="Farm SUSHI" />
       </Head>
-
-      <div className="container px-0 mx-auto pb-6">
-        <div className={`mb-2 pb-4 grid grid-cols-12 gap/-4`}>
-          {/* <div className="flex justify-center items-center col-span-12 lg:justify">
-            <Link href="/summoner">
-              <SoulLogo />
-            </Link>
-          </div> */}
-        </div>
-        <DoubleGlowShadowV2 maxWidth={false} opacity={'0.4'}>
-          <div className={`grid grid-cols-12 gap-2 min-h-1/2`}>
-            <div className={`col-span-12`}>
-              <Card className="bg-dark-900 z-4">
-                <div className={`grid grid-cols-12 md:space-x-4 space-y-4 md:space-y-0 `}>
-                  <div className={`col-span-12 md:col-span-3 space-y-4`}>
-                    {/* <div className={`hidden`}> */}
-                    <div className={`hidden md:block`}>
-                      <Menu
-                        term={term}
-                        onSearch={(value) => {
-                          search(value)
-                        }}
-                        positionsLength={positions.length}
-                      />
-                    </div>
-                    <div className={`flex flex-col items-center justify-between px-6 py-6 `}>
-                      <h2><b>Withdraw Fee: 14% decreasing 1% daily.</b></h2>
-                      {/* <div className="flex items-center text-center justify-between py-2 text-emphasis">
-                        Total Value Locked: {formatNumberScale(sumTvl + sumTvlVaults, true, 2)}
-                      </div> */}
-                      {/* <div className="flex items-center text-center justify-between py-2 text-emphasis">
-                        TVL: {formatNumberScale(sumTvl, true, 2)}
-                      </div> */}
-                      {/* {positions.length > 0 && (
-                        <div className="flex items-center justify-between py-2 text-emphasis">
-                        YOU'RE STAKING: { `$` + (valueStaked * 1.3 / 1E43).toFixed(0).toString()
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                        }
-                        </div>
-                      )} */}
-                      {/* {positions.length > 0 && (
-                        <Button
-                          color="gradient"
-                          className="text-emphasis"
-                          variant={'flexed'}
-                          size={'nobase'}
-                          disabled={pendingTx}
-                          onClick={async () => {
-                            setPendingTx(true)
-                            for (const pos of positions) {
-                              try {
-                                const tx = await harvest(parseInt(pos.id))
-                                addTransaction(tx, {
-                                  summary: `${i18n._(t`Possess`)} SOUL`,
-                                })
-                              } catch (error) {
-                                console.error(error)
-                              }
-                            }
-                            setPendingTx(false)
-                          }}
-                        >
-                          HARVEST ALL
-                          {/* {formatNumberScale(allStaked, true, 18)} */}
-                        {/* </Button> */}
-                      {/* )} */}
-                    </div>
-                    <div className={`md:hidden`}>
-                      <Menu
-                        term={term}
-                        onSearch={(value) => {
-                          search(value)
-                        }}
-                        positionsLength={positions.length}
-                      />
-                    </div>
-                  </div>
-                  <div className={`col-span-12 md:col-span-9 py-4 md:px-6 md:py-4 rounded`}>
-                    <div className={'mb-8 px-1 md:px-0'}>
-                      <Search
-                        className={'bg-dark-800 rounded border border-dark-800'}
-                        placeholder={'Search name, symbol or address'}
-                        term={term}
-                        search={(value: string): void => {
-                          search(value)
-                        }}
-                      />
-                    </div>
-
-                    <FarmList farms={result} term={term} filter={FILTER} />
-                  </div>
-                </div>
-              </Card>
-            </div>
-          </div>
-        </DoubleGlowShadowV2>
+      <div className={classNames('sticky top-0 hidden lg:block md:col-span-1')} style={{ maxHeight: '40rem' }}>
+        {/* <Menu positionsLength={positions.length} /> */}
+        <Menu positionsLength={positions.length} onSearch={''} term={''} />
       </div>
-    </>
+      <div className={classNames('space-y-6 col-span-4 lg:col-span-3')}>
+        <Search
+          search={search}
+          term={term}
+          inputProps={{
+            className:
+              'relative w-full bg-transparent border border-transparent focus:border-gradient-r-blue-pink-dark-900 rounded placeholder-secondary focus:placeholder-primary font-bold text-base px-6 py-3.5',
+          }}
+        />
+
+        {/* <div className="flex items-center text-lg font-bold text-high-emphesis whitespace-nowrap">
+            Ready to Stake{' '}
+            <div className="w-full h-0 ml-4 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis md:border-gradient-r-blue-pink-dark-800 opacity-20"></div>
+          </div>
+          <FarmList farms={filtered} term={term} /> */}
+
+        <div className="flex items-center text-lg font-bold text-high-emphesis whitespace-nowrap">
+          Farms{' '}
+          <div className="w-full h-0 ml-4 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis md:border-gradient-r-blue-pink-dark-800 opacity-20"></div>
+        </div>
+
+        <FarmList farms={result} term={term} filter={'all'} />
+      </div>
+    </Container>
   )
 }
+
+// Summoner.Provider = Provider
+export default Summoner

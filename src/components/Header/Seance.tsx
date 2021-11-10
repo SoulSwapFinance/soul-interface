@@ -12,13 +12,13 @@ import { Link } from 'react-feather'
 
 const items = (i18n: I18n) => [
 
-  // {
-  //   name: i18n._(t`Analytics`),
-  //   href: '/info',
-  //   analytics: true,
-  //   dashboard: false, 
-  //   links: false, 
-  // },
+  {
+    name: i18n._(t`Circles`),
+    href: '/circles',
+    staking: true,
+    dashboard: false, 
+    links: false, 
+  },
   // {
   //   name: i18n._(t`Links`),
   //   href: '/links',
@@ -54,7 +54,7 @@ export default function Menu() {
             
             <Image src="https://media.giphy.com/media/Y3wYCIhIcnzwB2qXg7/giphy.gif" alt="earn soul" width={50} height={50} />
             <br/>
-             DISCOVER
+             SEANCE
           </Popover.Button>
 
           <Transition
@@ -75,26 +75,26 @@ export default function Menu() {
                 <div className="relative grid gap-6 px-5 py-6 bg-dark-900 sm:gap-8 sm:p-8">
 
                   {solutions.map((item) =>
-                    // item.analytics ? (
-                    //   <NavLink key={item.name} href={item.href}>
-                    //   <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                    item.staking ? (
+                      <NavLink key={item.name} href={item.href}>
+                      <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                         
-                    //   ANALYTICS
+                      STAKING
               
-                    //   </a>
-                    // </NavLink>
+                      </a>
+                    </NavLink>
 
-                    // ) : 
-                    // item.dashboard ?
-                    // (
-                    //  <NavLink key={item.name} href={item.href}>
-                    // <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                    ) : 
+                    item.dashboard ?
+                    (
+                     <NavLink key={item.name} href={item.href}>
+                    <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
 
-                    // DASHBOARD
+                    DASHBOARD
                         
-                    // </a>
-                    // </NavLink>
-                    // ) : (
+                    </a>
+                    </NavLink>
+                    ) : (
                         item.links ?
                         (
                           <NavLink key={item.name} href={item.href}>
@@ -105,7 +105,7 @@ export default function Menu() {
                           </a>
                         </NavLink>
                         ) : ''
-                      // )
+                      )
                   )}
                 </div>
               </div>
