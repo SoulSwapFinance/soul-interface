@@ -7,6 +7,7 @@ import {
   ENCHANT_ADDRESS,
   SOUL_ADDRESS,
   SOUL_SUMMONER_ADDRESS,
+  SOUL_CIRCLE_ADDRESS,
   SOUL_VAULT_ADDRESS,
   SOUL_GUIDE_ADDRESS,
   // TIMELOCK_ADDRESS,
@@ -23,6 +24,7 @@ import FACTORY_ABI from '../constants/abis/factory.json'
 // soul
 import SOUL_GUIDE_ABI from '../constants/abis/multicall.json'
 import SOUL_SUMMONER_ABI from '../constants/abis/soulsummoner.json' 
+import SOUL_CIRCLE_ABI from '../constants/abis/soulcircle.json' 
 import SUMMONER_HELPER_ABI from '../constants/abis/helper.json' 
 import SOULVAULT_ABI from '../constants/abis/soulvault.json'
 import SPELL_ABI from '../constants/abis/spell.json'
@@ -99,6 +101,11 @@ export function useSoulVaultContract(withSignerIfPossible = true): Contract | nu
 export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible)
+}
+
+export function useCircleStakingContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOUL_CIRCLE_ADDRESS[chainId], SOUL_CIRCLE_ABI, withSignerIfPossible)
 }
 
 export function useHelperContract(withSignerIfPossible?: boolean): Contract | null {

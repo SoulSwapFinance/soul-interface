@@ -4,7 +4,7 @@ import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 import Head from 'next/head'
 import React from 'react'
 
-import { StakeList } from '../../features/stake/StakePairRow'
+import StakeList from '../../features/stake/StakeList'
 
 const Stake = () => {
   return (
