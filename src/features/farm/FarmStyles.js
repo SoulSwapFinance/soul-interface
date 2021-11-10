@@ -26,7 +26,7 @@ export const Row = styled.div`
   &:hover {
     opacity: 75%;
     cursor: pointer;
-    border: 2px solid #18191A;
+    border: 2px solid #F36FFE;
   }
 
   @media screen and (max-width: 900px) {
@@ -196,7 +196,7 @@ export const SubmitButton = styled.button`
   font-size: 1rem;
   padding: 0.5em;
   transition: all 0.2s ease-in-out;
-  background: ${({ primaryColour }) => (primaryColour ? primaryColour : '#3D81DB')};
+  background: ${({ primaryColour }) => (primaryColour ? primaryColour : '#F36FFE')};
   color: ${({ color }) => (color ? color : 'white')};
 
   &:hover {
@@ -205,7 +205,7 @@ export const SubmitButton = styled.button`
   }
 
   &:focus {
-    border-color: ${({ hoverColour }) => (hoverColour ? hoverColour : '#3D81DB')};
+    border-color: ${({ hoverColour }) => (hoverColour ? hoverColour : '#F36FFE')};
   }
 
   &:disabled { 
