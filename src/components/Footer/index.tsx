@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     // <footer className="absolute bottom-0 flex items-center justify-between w-screen h-20 p-4 mx-auto text-center text-low-emphesis">
     <footer className="flex-shrink-0 w-full">
-      <div className="flex items-center justify-between h-20 px-4">
+      <div className="flex items-center justify-between h-10 px-4">
         {chainId && chainId in ANALYTICS_URL && (
           <ExternalLink
             id={`analytics-nav-link`}

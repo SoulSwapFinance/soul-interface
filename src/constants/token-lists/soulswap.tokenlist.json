@@ -351,6 +351,14 @@
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x5Cc61A78F164885776AA610fb0FE1257df78E59B/logo.png"
       },
       {
+        "name": "UniDex",
+        "address": "0x2130d2a1e51112D349cCF78D2a1EE65843ba36e0",
+        "symbol": "UNIDX",
+        "decimals": 18,
+        "chainId": 250,
+        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/prod/blockchains/fantom/assets/0x2130d2a1e51112D349cCF78D2a1EE65843ba36e0/logo.png"
+      },
+      {
         "name": "USD Coin",
         "address": "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75",
         "symbol": "USDC",
