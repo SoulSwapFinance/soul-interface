@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react'
+import styled from 'styled-components'
 
-import { ethers } from "ethers";
+import { ethers } from 'ethers'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
-import useSoulCircle from "./useSoulCircle";
+import useSoulCircle from './useSoulCircle'
 // import useMulticall from "../../hooks/useMulticall";
-import useApprove from "../../features/farm/hooks/useApprove";
+import useApprove from '../../features/farm/hooks/useApprove'
 
-import { SoulCircleAddress } from "../farm/constants";
+import { SoulCircleAddress } from '../farm/constants'
 
 import {
   FlexText,
@@ -25,21 +25,15 @@ import {
   FunctionBox,
   Input,
   SubmitButton,
-} from "./FarmStyles";
+} from './FarmStyles'
 
-import {
-  Wrap,
-  ClickableText,
-  Heading,
-  Text,
-  ExternalLink,
-} from "./ReusableStyles";
+import { Wrap, ClickableText, Heading, Text, ExternalLink } from './ReusableStyles'
 
 const HideOnMobile = styled(FarmItemBox)`
   @media screen and (max-width: 900px) {
     display: none;
   }
-`;
+`
 
 const TokenPair = styled(ExternalLink)`
   font-size: 1.2rem;
@@ -49,84 +43,69 @@ const TokenPair = styled(ExternalLink)`
     font-size: 1rem;
     padding-right: 10px;
   }
-`;
+`
 
-const CircleStakeRow = ({
-  pid,
-  lpSymbol,
-  lpToken,
-  token1,
-  token2,
-  farm,
-  startTime,
-  endTime,
-}) => {
+const CircleStakeRow = ({ pid, lpSymbol, lpToken, token1, token2, farm, startTime, endTime }) => {
   const { chainId, account } = useActiveWeb3React()
 
-  const {
-    circlePoolInfo,
-    circleUserInfo,
-    circleDeposit,
-    circleWithdraw,
-    circlePendingRewards,
-    fetchTokenRateBals,
-  } = useSoulCircle();
+  const { circlePoolInfo, circleUserInfo, circleDeposit, circleWithdraw, circlePendingRewards, fetchTokenRateBals } =
+    useSoulCircle()
 
   // const { getTimestamp } = useMulticall();
-  const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken);
+  const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
 
-  const [showing, setShowing] = useState(false);
+  const [showing, setShowing] = useState(false)
 
-  const [approved, setApproved] = useState(false);
+  const [approved, setApproved] = useState(false)
 
-  const [stakedBal, setStakedBal] = useState(0);
-  const [unstakedBal, setUnstakedBal] = useState(0);
-  const [pending, setPending] = useState(0);
+  const [stakedBal, setStakedBal] = useState(0)
+  const [unstakedBal, setUnstakedBal] = useState(0)
+  const [pending, setPending] = useState(0)
 
   // const [earningPerDay, setEarningPerDay] = useState();
-  const [ownership, setOwnership] = useState(0);
-  const [rewardsPerDay, setRewardsPerDay] = useState(0);
-  const [tvl, setTvl] = useState(0);
+  const [ownership, setOwnership] = useState(0)
+  const [rewardsPerDay, setRewardsPerDay] = useState(0)
+  const [tvl, setTvl] = useState(0)
 
   // time remaining
-  const [endingIn, setEndingIn] = useState(false);
-  const [timeRemaining, setTimeRemaining] = useState(undefined);
+  const [endingIn, setEndingIn] = useState(false)
+  const [timeRemaining, setTimeRemaining] = useState(undefined)
 
-  const [yearlySoulRewards, setYearlySoulRewards] = useState();
-  const [apr, setApr] = useState();
+  const [yearlySoulRewards, setYearlySoulRewards] = useState()
+  const [apr, setApr] = useState()
 
   // Runs only on initial render/mount
   useEffect(() => {
-    fetchPending();
-    fetchStats();
-  }, [account]);
+    fetchPending()
+    fetchStats()
+  }, [account])
 
   // Runs on initial render/mount and  reruns every second
   useEffect(() => {
     if (account) {
       const timer = setTimeout(() => {
-        fetchPending();
-        fetchStats();
+        fetchPending()
+        fetchStats()
 
         if (showing) {
-          fetchBals();
-          fetchApproval();
+          fetchBals()
+          fetchApproval()
         }
-      }, 10000);
+      }, 10000)
 
       // Clear timeout if the component is unmounted
-      return () => clearTimeout(timer);
+      return () => clearTimeout(timer)
     }
-  });
+  })
 
   // Opens the function panel dropdown
   const handleShow = () => {
-    setShowing(!showing);
+    setShowing(!showing)
     if (!showing) {
-      fetchBals();
-      fetchApproval();
+      fetchBals()
+      fetchApproval()
     }
-  };
+  }
 
   //   // Counts down time remianing w/o calls
   //   useEffect(() => {
@@ -143,46 +122,46 @@ const CircleStakeRow = ({
 
   // Checks the user's alloc of the total staked in the farm
   const fetchStats = async () => {
-    const poolInfo = await circlePoolInfo(pid);
-    const userInfo = await circleUserInfo(pid);
+    const poolInfo = await circlePoolInfo(pid)
+    const userInfo = await circleUserInfo(pid)
     // const currentTimestamp = await getTimestamp();
     // console.log("poolInfo", poolInfo);
-    console.log("userInfo", userInfo);
+    console.log('userInfo', userInfo)
 
     // ownership
-    const totalStaked = poolInfo?.[3];
-    console.log("totalStaked", totalStaked.toString());
+    const totalStaked = poolInfo?.[3]
+    console.log('totalStaked', totalStaked.toString())
 
-    const userStaked = userInfo?.[0];
-    console.log("userStaked", Number(userStaked));
-    const ownedPerc = (userStaked / totalStaked) * 100;
+    const userStaked = userInfo?.[0]
+    console.log('userStaked', Number(userStaked))
+    const ownedPerc = (userStaked / totalStaked) * 100
     ownedPerc !== NaN
       ? ownedPerc < 0.01 && ownedPerc > 0
-        ? setOwnership("<0.01")
+        ? setOwnership('<0.01')
         : setOwnership(Number(ownedPerc).toFixed(2))
-      : setOwnership(0);
+      : setOwnership(0)
 
     // rewards per day
-    const perSecond = poolInfo?.[1];
-    const perDay = perSecond * 86400;
-    const formatted = ethers.utils.formatUnits(perDay.toString());
+    const perSecond = poolInfo?.[1]
+    const perDay = perSecond * 86400
+    const formatted = ethers.utils.formatUnits(perDay.toString())
     setRewardsPerDay(
       Number(formatted)
         .toFixed(2)
         .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-    );
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    )
 
     // tvl
-    const tokenPrices = await fetchTokenRateBals();
-    const seancePrice = tokenPrices?.[1];
-    const rawTvl = totalStaked * seancePrice / 10 ** 18;
+    const tokenPrices = await fetchTokenRateBals()
+    const seancePrice = tokenPrices?.[1]
+    const rawTvl = (totalStaked * seancePrice) / 10 ** 18
     setTvl(
       Number(rawTvl)
         .toFixed(0)
         .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-    );
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    )
 
     // start + end
     // if (startTime > currentTimestamp) {
@@ -194,99 +173,96 @@ const CircleStakeRow = ({
     // } else {
     //   setTimeRemaining(0);
     // }
-  };
+  }
 
   // Gets the lpToken balance of the user for each pool
   const fetchBals = async () => {
     try {
-      const userInfo = await circleUserInfo(pid);
+      const userInfo = await circleUserInfo(pid)
 
-      const staked = ethers.utils.formatUnits(userInfo?.[0]);
-      console.log("staked", staked);
-      setStakedBal(staked);
+      const staked = ethers.utils.formatUnits(userInfo?.[0])
+      console.log('staked', staked)
+      setStakedBal(staked)
 
-      const unstakedBal = await erc20BalanceOf(account);
-      const unstaked = ethers.utils.formatUnits(unstakedBal);
-      console.log("unstaked", unstaked);
-      setUnstakedBal(unstaked);
+      const unstakedBal = await erc20BalanceOf(account)
+      const unstaked = ethers.utils.formatUnits(unstakedBal)
+      console.log('unstaked', unstaked)
+      setUnstakedBal(unstaked)
 
-      return [staked, unstaked];
+      return [staked, unstaked]
     } catch (err) {
-      console.warn(err);
+      console.warn(err)
     }
-  };
+  }
 
   // Fetches connected user pending rewards
   const fetchPending = async () => {
     try {
-      const pending = await circlePendingRewards(pid);
-      const formatted = ethers.utils.formatUnits(pending.toString());
+      const pending = await circlePendingRewards(pid)
+      const formatted = ethers.utils.formatUnits(pending.toString())
       formatted !== NaN
         ? formatted < 0.01 && formatted > 0
-          ? setPending("<0.01")
+          ? setPending('<0.01')
           : setPending(
               Number(formatted)
                 .toFixed(1)
                 .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             )
-        : setPending(0);
+        : setPending(0)
     } catch (err) {
-      console.warn(err);
+      console.warn(err)
     }
-  };
+  }
 
   // Checks if the user has approved contract to move lpTokens
   const fetchApproval = async () => {
-      // Checks if SoulSummoner can move tokens
-      const amount = await erc20Allowance(
-        account,
-        SoulCircleAddress
-      );
-      if (amount > 0) setApproved(true);
-      return amount;
-  };
+    // Checks if SoulSummoner can move tokens
+    const amount = await erc20Allowance(account, SoulCircleAddress)
+    if (amount > 0) setApproved(true)
+    return amount
+  }
 
   // Approves contract to move lpTokens
   const handleApprove = async () => {
-      try {
-        const tx = await erc20Approve(SoulCircleAddress);
-      } catch (e) {
-        alert(e.message);
-        console.log(e);
-        return;
-      }
-  };
+    try {
+      const tx = await erc20Approve(SoulCircleAddress)
+    } catch (e) {
+      alert(e.message)
+      console.log(e)
+      return
+    }
+  }
 
   // Harvests rewards from contract farm
   const handleHarvest = async () => {
     try {
-      const tx = await circleWithdraw(pid, 0);
+      const tx = await circleWithdraw(pid, 0)
     } catch (e) {
-      alert(e.message);
-      console.log(e);
+      alert(e.message)
+      console.log(e)
     }
-  };
+  }
 
   // Withdraws staked lpTokens from contract farm
   const handleWithdraw = async (amount) => {
     try {
-      const tx = await circleWithdraw(pid, amount);
+      const tx = await circleWithdraw(pid, amount)
     } catch (e) {
-      alert(e.message);
-      console.log(e);
+      alert(e.message)
+      console.log(e)
     }
-  };
+  }
 
   // Deposits/stakes lpTokens into contract farm
   const handleDeposit = async (amount) => {
     try {
-      const tx = await circleDeposit(pid, amount);
+      const tx = await circleDeposit(pid, amount)
     } catch (e) {
-      alert(e.message);
-      console.log(e);
+      alert(e.message)
+      console.log(e)
     }
-  };
+  }
 
   return (
     <>
@@ -297,13 +273,7 @@ const CircleStakeRow = ({
               <TokenPairBox>
                 {/* 2 token logo combined ? */}
                 <Wrap>
-                  <TokenPair
-                    fontSize="1.2rem"
-                    target="_blank"
-                    href={`https://app.soulswap.finance/add/${farm.token1Address[250]}/${farm.token2Address[250]}`}
-                  >
-                    {lpSymbol}
-                  </TokenPair>
+                  <Text padding='0' fontSize="1.15rem">{lpSymbol}</Text>
                 </Wrap>
               </TokenPairBox>
 
@@ -314,7 +284,7 @@ const CircleStakeRow = ({
               </FarmItemBox> */}
 
               <FarmItemBox desktopOnly={true}>
-                {pending === "0.0" ? (
+                {pending === '0.0' ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
                     0
                   </Text>
@@ -362,7 +332,7 @@ const CircleStakeRow = ({
               </HideOnMobile> */}
 
               <HideOnMobile>
-                {tvl === "0" ? (
+                {tvl === '0' ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
                     $0
                   </Text>
@@ -395,39 +365,22 @@ const CircleStakeRow = ({
                     padding="0"
                     fontSize=".9rem"
                     color="#aaa"
-                    onClick={() =>
-                      (document.getElementById("stake").value = unstakedBal)
-                    }
+                    onClick={() => (document.getElementById('stake').value = unstakedBal)}
                   >
                     MAX
                   </ClickableText>
                 </Wrap>
-                <Input
-                  name="stake"
-                  id="stake"
-                  type="number"
-                  placeholder="0.0"
-                  min="0"
-                />
+                <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
                 <Wrap padding="0" margin="0" display="flex">
                   {approved ? (
                     <SubmitButton
                       height="2.5rem"
-                      onClick={() =>
-                        handleDeposit(
-                          ethers.utils.parseUnits(
-                            document.getElementById("stake").value
-                          )
-                        )
-                      }
+                      onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
                     >
                       Stake
                     </SubmitButton>
                   ) : (
-                    <SubmitButton
-                      height="2.5rem"
-                      onClick={() => handleApprove()}
-                    >
+                    <SubmitButton height="2.5rem" onClick={() => handleApprove()}>
                       Approve Stake
                     </SubmitButton>
                   )}
@@ -443,20 +396,12 @@ const CircleStakeRow = ({
                     padding="0"
                     fontSize=".9rem"
                     color="#aaa"
-                    onClick={() =>
-                      (document.getElementById("unstake").value = stakedBal)
-                    }
+                    onClick={() => (document.getElementById('unstake').value = stakedBal)}
                   >
                     MAX
                   </ClickableText>
                 </FlexText>
-                <Input
-                  name="unstake"
-                  id="unstake"
-                  type="number"
-                  placeholder="0.0"
-                  min="0"
-                />
+                <Input name="unstake" id="unstake" type="number" placeholder="0.0" min="0" />
 
                 <Wrap padding="0" margin="0" display="flex">
                   <SubmitButton
@@ -472,13 +417,7 @@ const CircleStakeRow = ({
                     primaryColour="#bbb"
                     color="black"
                     margin=".5rem 0 .5rem .6rem"
-                    onClick={() =>
-                      handleWithdraw(
-                        ethers.utils.parseUnits(
-                          document.getElementById("unstake").value
-                        )
-                      )
-                    }
+                    onClick={() => handleWithdraw(ethers.utils.parseUnits(document.getElementById('unstake').value))}
                   >
                     Unstake
                   </SubmitButton>
@@ -494,7 +433,7 @@ const CircleStakeRow = ({
         </Wrap>
       ) : null}
     </>
-  );
-};
+  )
+}
 
-export default CircleStakeRow;
+export default CircleStakeRow
