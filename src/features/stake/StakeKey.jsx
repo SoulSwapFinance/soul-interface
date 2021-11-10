@@ -40,7 +40,7 @@ export default function StakeKey() {
         alignContent="center"
       >
         <FarmContainer>
-          <Row padding=".25rem 1rem" onClick={() => handleShow()}>
+          <Row padding=".25rem 1rem" >
             <FarmContentWrapper>
               <TokenPairBox>
                 {/* 2 token logo combined ? */}

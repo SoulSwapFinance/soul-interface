@@ -1,24 +1,14 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-import {
-  FarmContainer,
-  Row,
-  FarmContentWrapper,
-  TokenPairBox,
-  FarmItemBox,
-} from "./FarmStyles";
+import { FarmContainer, Row, FarmContentWrapper, TokenPairBox, FarmItemBox } from './FarmStyles'
 
-import {
-  Wrap,
-  Text,
-  ExternalLink,
-} from "./ReusableStyles";
+import { Wrap, Text, ExternalLink } from './ReusableStyles'
 
 const HideOnMobile = styled(FarmItemBox)`
   @media screen and (max-width: 900px) {
     display: none;
   }
-`;
+`
 
 const TokenPair = styled(ExternalLink)`
   font-size: 1.2rem;
@@ -28,19 +18,14 @@ const TokenPair = styled(ExternalLink)`
     font-size: 1rem;
     padding-right: 10px;
   }
-`;
+`
 
 export default function CircleStakeKey() {
   return (
     <>
-      <Wrap
-        padding="0"
-        display="flex"
-        justifyContent="center"
-        alignContent="center"
-      >
+      <Wrap padding="0" display="flex" justifyContent="center" alignContent="center">
         <FarmContainer>
-          <Row padding=".25rem 1rem" onClick={() => handleShow()}>
+          <Row padding=".25rem 1rem">
             <FarmContentWrapper>
               <TokenPairBox>
                 {/* 2 token logo combined ? */}
@@ -85,5 +70,5 @@ export default function CircleStakeKey() {
         </FarmContainer>
       </Wrap>
     </>
-  );
-};
+  )
+}
