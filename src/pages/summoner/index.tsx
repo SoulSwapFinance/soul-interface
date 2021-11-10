@@ -194,7 +194,7 @@ const Summoner = () => {
       </Head>
       <div className={classNames('sticky top-0 hidden lg:block md:col-span-1')} style={{ maxHeight: '40rem' }}>
         {/* <Menu positionsLength={positions.length} /> */}
-        <Menu positionsLength={positions.length} />
+        <Menu positionsLength={positions.length} onSearch={''} term={''} />
       </div>
       <div className={classNames('space-y-6 col-span-4 lg:col-span-3')}>
         <Search
