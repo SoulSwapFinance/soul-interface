@@ -2,7 +2,7 @@ import { getUnixTime, startOfHour, startOfMinute, startOfSecond, subDays, subHou
 
 import { ChainId } from '../../../sdk'
 import { GRAPH_HOST } from '../constants'
-import { blocksQuery } from '../queries'
+import { blockQuery, blocksQuery } from '../queries'
 import { request } from 'graphql-request'
 
 export const BLOCKS = {
@@ -17,6 +17,25 @@ export const BLOCKS = {
 
 export const fetcher = async (chainId = ChainId.FANTOM, query, variables) =>
   request(`${GRAPH_HOST[chainId]}/subgraphs/name/${BLOCKS[chainId]}`, query, variables)
+
+
+export const getBlock = async (chainId = ChainId.MAINNET, timestamp: number) => {
+  const { blocks } = await fetcher(
+    chainId,
+    blockQuery,
+    timestamp
+      ? {
+          where: {
+            timestamp_gt: timestamp - 600,
+            timestamp_lt: timestamp,
+          },
+        }
+      : {}
+  )
+
+  return Number(blocks?.[0]?.number)
+}
+
 
 export const getBlocks = async (chainId = ChainId.FANTOM, start, end) => {
   const { blocks } = await fetcher(chainId, blocksQuery, {

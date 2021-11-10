@@ -77,97 +77,97 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
     },
-    '0xC615a5fd68265D9Ec6eF60805998fa5Bb71972Cb': { // FTM-ETH
-      id: 4,
-      token0: {
-        id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
-        name: 'Wrapped Fantom',
-        symbol: 'FTM',
-        decimals: 18,
+      '0xC615a5fd68265D9Ec6eF60805998fa5Bb71972Cb': { // FTM-ETH
+        id: 4,
+        token0: {
+          id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+          name: 'Wrapped Fantom',
+          symbol: 'FTM',
+          decimals: 18,
+        },
+        token1: {
+          id: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // WETH
+          name: 'Wrapped ETH',
+          symbol: 'WETH',
+          decimals: 18,
+        },  
       },
-      token1: {
-        id: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // WETH
-        name: 'Wrapped ETH',
-        symbol: 'WETH',
-        decimals: 18,
-      },
-    },
-    '0x8f1E15cD3d5a0bb85B8189d5c6B61BB64398E19b': { // SEANCE-SOUL
-      id: 5, // 600
-      token0: {
-        id: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', // SEANCE
-        name: 'SeanceCircle',
-        symbol: 'SEANCE',
-        decimals: 18,
+        '0x8f1E15cD3d5a0bb85B8189d5c6B61BB64398E19b': { // SEANCE-SOUL
+          id: 5, // 600
+          token0: {
+            id: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', // SEANCE
+            name: 'SeanceCircle',
+            symbol: 'SEANCE',
+            decimals: 18,
 
+          },
+          token1: {
+            id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
+            name: 'SoulPower',
+            symbol: 'SOUL',
+            decimals: 18,
+          },
+        },
+        '0xD5F5E2638d636A98eD4aAEBfd2045441316e0c08': {  // USDC-FUSD
+          id: 6,
+          token0: {
+            id: '0x04068da6c83afcfa0e13ba15a6696662335d5b75', // USDC
+            name: 'USDC Coin',
+            symbol: 'USDC',
+            decimals: 6,
+          },
+          token1: {
+            id: '0xAd84341756Bf337f5a0164515b1f6F993D194E1f', // FUSD
+            name: 'Fantom USD',
+            symbol: 'FUSD',
+            decimals: 18,
+          },
+        },
+        '0x98C678d3C7ebeD4a36B84666700d8b5b5Ddc1f79': {  // SEANCE-USDC
+          id: 7,
+          token0: { // USDC
+            id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
+            name: 'USDC Coin',
+            symbol: 'USDC',
+            decimals: 6,
+          },
+          token1: { // SEANCE
+            id: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', // SEANCE
+            name: 'SeaceCircle',
+            symbol: 'SEANCE',
+            decimals: 18,
+        },
       },
-      token1: {
-        id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
-        name: 'SoulPower',
-        symbol: 'SOUL',
-        decimals: 18,
+        '0x1FC954d3484bC21E0Ce53A6648a35BBfc03DC9D0': {  // BTC-ETH
+          id: 8,
+          token0: { // BTC
+            id: '0x321162Cd933E2Be498Cd2267a90534A804051b11', // WBTC
+            name: 'Wrapped Bitcoin',
+            symbol: 'WBTC',
+            decimals: 8,
+          },
+          token1: { // WETH
+            id: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // WETH
+            name: 'Wrapped Ethereum',
+            symbol: 'WETH',
+            decimals: 18,
+        },
+      },
+      '0x298c12D6d9D6746Dd0ef0A89421288F52D5566eF': {  // USDC-USDT
+        id: 9,
+        token0: { // USDC
+          id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
+          name: 'USDC Coin',
+          symbol: 'USDC',
+          decimals: 6,
+        },
+        token1: {
+          id: '0x049d68029688eAbF473097a2fC38ef61633A3C7A', // fUSDT
+          name: 'Frapped USDT',
+          symbol: 'fUSDT',
+          decimals: 6,
       },
     },
-    '0xD5F5E2638d636A98eD4aAEBfd2045441316e0c08': {  // USDC-FUSD
-      id: 6,
-      token0: {
-        id: '0x04068da6c83afcfa0e13ba15a6696662335d5b75', // USDC
-        name: 'USDC Coin',
-        symbol: 'USDC',
-        decimals: 6,
-      },
-      token1: {
-        id: '0xAd84341756Bf337f5a0164515b1f6F993D194E1f', // FUSD
-        name: 'Fantom USD',
-        symbol: 'FUSD',
-        decimals: 18,
-      },
-    },
-    '0x98C678d3C7ebeD4a36B84666700d8b5b5Ddc1f79': {  // SEANCE-USDC
-      id: 7,
-      token0: { // USDC
-        id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
-        name: 'USDC Coin',
-        symbol: 'USDC',
-        decimals: 6,
-      },
-      token1: { // SEANCE
-        id: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', // SEANCE
-        name: 'SeaceCircle',
-        symbol: 'SEANCE',
-        decimals: 18,
-    },
-  },
-    '0x1FC954d3484bC21E0Ce53A6648a35BBfc03DC9D0': {  // BTC-ETH
-      id: 8,
-      token0: { // BTC
-        id: '0x321162Cd933E2Be498Cd2267a90534A804051b11', // WBTC
-        name: 'Wrapped Bitcoin',
-        symbol: 'WBTC',
-        decimals: 8,
-      },
-      token1: { // WETH
-        id: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // WETH
-        name: 'Wrapped Ethereum',
-        symbol: 'WETH',
-        decimals: 18,
-    },
-  },
-    '0x298c12D6d9D6746Dd0ef0A89421288F52D5566eF': {  // USDC-USDT
-      id: 9,
-      token0: { // USDC
-        id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
-        name: 'USDC Coin',
-        symbol: 'USDC',
-        decimals: 6,
-      },
-      token1: {
-        id: '0x049d68029688eAbF473097a2fC38ef61633A3C7A', // fUSDT
-        name: 'Frapped USDT',
-        symbol: 'fUSDT',
-        decimals: 6,
-    },
-  },
     '0x8542bEAC34282aFe5Bb6951Eb6DCE0B3783b7faB': {  // SEANCE-FTM
       id: 10, // 1200
       token0: {
@@ -333,7 +333,7 @@ export const POOLS: AddressMap = {
         decimals: 8,
       },
     },
-    '0x406de3a93f6b4179e3b21a3d81226b43e1918fd9': {  // DAI-USDC
+    '0x406dE3A93f6B4179E3B21a3d81226B43e1918fd9': {  // DAI-USDC
       id: 21, // 200
       token0: {
         id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
@@ -378,7 +378,7 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
     },
-    '0xb4d6ff768f409e4d102bad80f9a8ac105453ccdd': {  // ENCHANT-FTM
+    '0xb4d6Ff768F409e4D102BAD80f9A8ac105453ccdD': {  // ENCHANT-FTM
       id: 24, // 1200
       token0: {
         id: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83', // WFTM
@@ -393,22 +393,22 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
     },
-    '0x9acc8f23680b6d7e295166277e2fb9c88a26cce6': {  // ENCHANT-SOUL
+    '0x9acc8F23680B6d7e295166277e2fb9c88A26cce6': {  // ENCHANT-SOUL
       id: 25, // 600
       token0: {
-        id: '0xe2fb177009ff39f52c0134e8007fa0e4baacbd07', // SOUL
-        name: 'Soul Power',
-        symbol: 'SOUL',
-        decimals: 18,
-      },
-      token1: {
         id: '0x6a1a8368d607c7a808f7bba4f7aed1d9ebde147a', // ENCHANT
         name: 'Enchantment',
         symbol: 'ENCHANT',
         decimals: 18,
       },
+      token1: {
+        id: '0xe2fb177009ff39f52c0134e8007fa0e4baacbd07', // SOUL
+        name: 'Soul Power',
+        symbol: 'SOUL',
+        decimals: 18,
+      },
     },
-    '0x5695176d085f8f7320507495066ffec940da244c': {  // SEANCE-ENCHANT
+    '0x5695176D085F8f7320507495066FFeC940da244C': {  // SEANCE-ENCHANT
       id: 26, // 600
       token0: {
         id: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
@@ -422,6 +422,6 @@ export const POOLS: AddressMap = {
         symbol: 'ENCHANT',
         decimals: 18,
       },
-    }
+    },
   }
 }

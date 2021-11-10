@@ -78,9 +78,9 @@ const FarmListItem = ({ farm }) => {
             {account && (
               <div className="pr-4 mb-2 text-left cursor-pointer text-secondary">
                 {i18n._(t`Wallet Balance`)}: {balance?.toSignificant(8)}
-                {/* {farm.lpPrice && balance
+                {farm.lpPrice && balance
                   ? ` (` + formatNumberScale(farm.lpPrice * Number(balance?.toFixed(18) ?? 0), true, 2) + `)`
-                  : ``} */}
+                  : ``}
               </div>
             )}
             <div className="relative flex items-center w-full mb-4">

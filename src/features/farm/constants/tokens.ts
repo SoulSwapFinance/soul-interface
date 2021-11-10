@@ -13,7 +13,7 @@ export const tokens = {
   },
   ENCHANT: {
     4002: "",
-    250: "0x6a1a8368d607c7a808f7bba4f7aed1d9ebde147a",
+    250: "0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a",
   },
   FUSD: {
     4002: "0x306557358e20aea124b16a548597897858d13cb2",

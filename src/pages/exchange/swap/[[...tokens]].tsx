@@ -611,8 +611,6 @@ export default function Swap() {
             <UnsupportedCurrencyFooter show={swapIsUnsupported} currencies={[currencies.INPUT, currencies.OUTPUT]} />
           )}
         </div>
-        {/* <br/>
-        <br/> */}
         <AutoColumn justify="space-between" className="py-3">
           <iframe 
                 frameBorder={"none"}
