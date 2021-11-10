@@ -42,10 +42,11 @@ function AppBar(): JSX.Element {
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                 <NavLink href="/landing">
-                  <Image src="/logo.jpg" alt="Soul" width="50" height="50" />
+                  <Image src="/logo.jpg" alt="Soul" width="40" height="40" />
                 </NavLink>
                   <div className="hidden sm:block sm:ml-4">
-                    <div className="flex space-x-2">
+                    {/* <div className="flex space-x-2"> */}
+                    <div className="flex space-x-4">
                       {/* <Buy /> */}
                       {/* <Farm /> */}
                       <Exchange />

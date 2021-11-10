@@ -23,7 +23,7 @@ const items = (i18n: I18n) => [
     name: i18n._(t`Stake`),
     href: '/seance',
     farm: false,
-    stake: true, 
+    stake: false, // FORCE FALSE 
     enchant: false, 
   },
   {
@@ -71,7 +71,7 @@ export default function Menu() {
               className="w-screen x-full bottom-12 lg:top-12 left-full sm:px-0"
             >
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                <div className="relative grid gap-6 px-5 py-6 bg-dark-900 sm:gap-8 sm:p-8">
+                <div className="absolute grid gap-6 px-5 py-6 bg-dark-900 sm:gap-8 sm:p-8">
 
                   {solutions.map((item) =>
                     item.farm ? (

@@ -13,19 +13,19 @@ import { Link } from 'react-feather'
 const items = (i18n: I18n) => [
 
   {
-    name: i18n._(t`Circles`),
-    href: '/stake',
-    staking: true,
-    dashboard: false, 
+    name: i18n._(t`Seance`),
+    href: '/seance',
+    seance: true,
+    circles: false, 
     links: false, 
   },
-  // {
-  //   name: i18n._(t`Links`),
-  //   href: '/links',
-  //   analytics: false,
-  //   dashboard: false, 
-  //   links: true, 
-  // },
+  {
+    name: i18n._(t`Circles`),
+    href: '/stake',
+    seance: false,
+    circles: true, 
+    links: false, 
+  },
   // {
   // name: i18n._(t`Dashboard`),
   // href: '/links',
@@ -41,7 +41,7 @@ export default function Menu() {
 
   return (
     
-    <Popover as="nav" className="w-full relative ml-6 md:m-0">
+     <Popover as="nav" className="w-full relative ml-6 md:m-0">
 
       {({ open }) => (
         <>
@@ -72,25 +72,25 @@ export default function Menu() {
               className="w-screen x-full bottom-12 lg:top-12 left-full sm:px-0"
             >
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                <div className="relative grid gap-6 px-5 py-6 bg-dark-900 sm:gap-8 sm:p-8">
+                <div className="absolute grid gap-6 px-5 py-6 bg-dark-900 sm:gap-8 sm:p-8">
 
                   {solutions.map((item) =>
-                    item.staking ? (
+                    item.seance ? (
                       <NavLink key={item.name} href={item.href}>
                       <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                         
-                      STAKING
+                      SEANCE
               
                       </a>
                     </NavLink>
 
                     ) : 
-                    item.dashboard ?
+                    item.circles ?
                     (
                      <NavLink key={item.name} href={item.href}>
                     <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
 
-                    DASHBOARD
+                    CIRCLES
                         
                     </a>
                     </NavLink>
