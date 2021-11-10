@@ -33,8 +33,8 @@ function AppBar(): JSX.Element {
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
 
   return (
-    // <header className="flex flex-row justify-between w-screen flex-nowrap">
-    <header className="flex-shrink-0 w-full">
+    <header className="flex flex-row justify-between w-screen flex-nowrap">
+    {/* <header className="flex-shrink-0 w-full"> */}
       <Popover as="nav" className="z-10 w-full bg-transparent header-border-b">
         {({ open }) => (
           <>
