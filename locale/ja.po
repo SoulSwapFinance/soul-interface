@@ -148,6 +148,9 @@ msgstr ""
 msgid "Borrow"
 msgstr ""
 
+msgid "Borrow SEANCE with SOUL"
+msgstr ""
+
 msgid "Borrow assets and leverage up"
 msgstr ""
 
@@ -320,6 +323,9 @@ msgstr ""
 msgid "DAILY"
 msgstr ""
 
+msgid "DEPOSIT"
+msgstr ""
+
 msgid "Dashboard"
 msgstr ""
 
@@ -365,10 +371,16 @@ msgstr ""
 msgid "Earn Fees with Enchantments."
 msgstr ""
 
+msgid "Earn SOUL rewards by depositing your SoulSwap LP."
+msgstr ""
+
 msgid "Either return to the {link}, or change to an available network."
 msgstr ""
 
 msgid "Enchant"
+msgstr ""
+
+msgid "Enchant Fee"
 msgstr ""
 
 msgid "Enchant your Seance..."
@@ -425,6 +437,9 @@ msgid "Expiration is the time at which the order will become invalid"
 msgstr ""
 
 msgid "Expired"
+msgstr ""
+
+msgid "Explore"
 msgstr ""
 
 msgid "Explore our Protocol."
@@ -652,10 +667,10 @@ msgstr ""
 msgid "Migration is done in one-click using your signature (permit)"
 msgstr ""
 
-msgid "Minimum Received"
+msgid "Min. Received"
 msgstr ""
 
-msgid "Minimum received"
+msgid "More"
 msgstr ""
 
 msgid "My Orders"
@@ -864,9 +879,6 @@ msgstr ""
 msgid "Russian"
 msgstr ""
 
-msgid "SEANCE = Staked SOUL"
-msgstr ""
-
 msgid "SELF"
 msgstr ""
 
@@ -939,6 +951,9 @@ msgstr ""
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr ""
 
+msgid "Soul"
+msgstr ""
+
 msgid "Soul User"
 msgstr ""
 
@@ -949,9 +964,6 @@ msgid "Souls Locked"
 msgstr ""
 
 msgid "Spanish"
-msgstr ""
-
-msgid "Spell Fee"
 msgstr ""
 
 msgid "Stack Yields with SAAVE"
@@ -1136,6 +1148,9 @@ msgid "View your Dashboard."
 msgstr ""
 
 msgid "View your Trades."
+msgstr ""
+
+msgid "WITHDRAW"
 msgstr ""
 
 msgid "Waiting for Confirmation"

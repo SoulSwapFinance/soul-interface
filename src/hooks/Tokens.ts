@@ -1,12 +1,11 @@
-import { ChainId, Currency, NATIVE, Token, WNATIVE, currencyEquals } from '../sdk'
-import { ExtendedEther, WETH9_EXTENDED } from '../constants'
+import { ChainId, Currency, NATIVE, Token, WNATIVE, WNATIVE_ADDRESS, currencyEquals } from '../sdk'
 import { NEVER_RELOAD, useSingleCallResult } from '../state/multicall/hooks'
 import { TokenAddressMap, useAllLists, useInactiveListUrls, useUnsupportedTokenList } from './../state/lists/hooks'
-import { createTokenFilterFunction, filterTokens } from '../functions/filtering'
 import { useBytes32TokenContract, useTokenContract } from './useContract'
 
 import { WrappedTokenInfo } from './../state/lists/wrappedTokenInfo'
-import { arrayify } from 'ethers/lib/utils'
+import { arrayify } from '@ethersproject/bytes'
+import { createTokenFilterFunction } from '../functions/filtering'
 import { isAddress } from '../functions/validate'
 import { parseBytes32String } from '@ethersproject/strings'
 import { useActiveWeb3React } from './useActiveWeb3React'
@@ -182,16 +181,15 @@ export function useToken(tokenAddress?: string): Token | undefined | null {
 export function useCurrency(currencyId: string | undefined): Currency | null | undefined {
   const { chainId } = useActiveWeb3React()
 
-  const isETH = currencyId?.toUpperCase() === 'FTM'
+  const isETH = currencyId?.toUpperCase() === 'ETH'
 
   // const isDual = [ChainId.CELO].includes(chainId)
-  const isDual = [].includes(chainId)
 
-  const useNative = isETH && !isDual
+  const useNative = isETH // && !isDual
 
-  if (isETH && isDual) {
-    currencyId = WNATIVE[chainId].address
-  }
+  // if (isETH && isDual) {
+  //   currencyId = WNATIVE_ADDRESS[chainId]
+  // }
 
   const token = useToken(useNative ? undefined : currencyId)
 

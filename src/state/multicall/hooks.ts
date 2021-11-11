@@ -69,14 +69,20 @@ function useCallsData(
     const calls = callKeys.map((key) => parseCallKey(key))
     dispatch(
       addMulticallListeners({
-        chainId: chainId,
+        chainId,
         calls,
         options: { blocksPerFetch },
       })
     )
 
     return () => {
-      dispatch(removeMulticallListeners({ chainId: chainId, calls, options: { blocksPerFetch } }))
+      dispatch(
+        removeMulticallListeners({
+          chainId,
+          calls,
+          options: { blocksPerFetch },
+        })
+      )
     }
   }, [chainId, dispatch, blocksPerFetch, serializedCallKeys])
 
@@ -97,7 +103,7 @@ function useCallsData(
   )
 }
 
-export interface CallState {
+interface CallState {
   readonly valid: boolean
   // the result, or undefined if loading or errored/no data
   readonly result: Result | undefined

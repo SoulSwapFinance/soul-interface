@@ -148,6 +148,9 @@ msgstr "Bento Balance: {0}"
 msgid "Borrow"
 msgstr "Borrow"
 
+msgid "Borrow SEANCE with SOUL"
+msgstr "Borrow SEANCE with SOUL"
+
 msgid "Borrow assets and leverage up"
 msgstr "Borrow assets and leverage up"
 
@@ -324,6 +327,9 @@ msgstr "Current"
 msgid "DAILY"
 msgstr "DAILY"
 
+msgid "DEPOSIT"
+msgstr "DEPOSIT"
+
 msgid "Dashboard"
 msgstr "Dashboard"
 
@@ -369,11 +375,17 @@ msgstr "Earn"
 msgid "Earn Fees with Enchantments."
 msgstr "Earn Fees with Enchantments."
 
+msgid "Earn SOUL rewards by depositing your SoulSwap LP."
+msgstr "Earn SOUL rewards by depositing your SoulSwap LP."
+
 msgid "Either return to the {link}, or change to an available network."
 msgstr "Either return to the {link}, or change to an available network."
 
 msgid "Enchant"
 msgstr "Enchant"
+
+msgid "Enchant Fee"
+msgstr "Enchant Fee"
 
 msgid "Enchant your Seance..."
 msgstr "Enchant your Seance..."
@@ -432,6 +444,9 @@ msgstr "Expiration is the time at which the order will become invalid"
 
 msgid "Expired"
 msgstr "Expired"
+
+msgid "Explore"
+msgstr "Explore"
 
 msgid "Explore our Protocol."
 msgstr "Explore our Protocol."
@@ -664,11 +679,11 @@ msgstr "Migrating"
 msgid "Migration is done in one-click using your signature (permit)"
 msgstr "Migration is done in one-click using your signature (permit)"
 
-msgid "Minimum Received"
-msgstr "Minimum Received"
+msgid "Min. Received"
+msgstr "Min. Received"
 
-msgid "Minimum received"
-msgstr "Minimum received"
+msgid "More"
+msgstr "More"
 
 msgid "My Orders"
 msgstr "My Orders"
@@ -881,9 +896,6 @@ msgstr "Routing through these tokens resulted in the best price for your trade."
 msgid "Russian"
 msgstr "Russian"
 
-msgid "SEANCE = Staked SOUL"
-msgstr "SEANCE = Staked SOUL"
-
 msgid "SELF"
 msgstr "SELF"
 
@@ -956,6 +968,9 @@ msgstr "Slippage tolerance"
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 
+msgid "Soul"
+msgstr "Soul"
+
 msgid "Soul User"
 msgstr "Soul User"
 
@@ -967,9 +982,6 @@ msgstr "Souls Locked"
 
 msgid "Spanish"
 msgstr "Spanish"
-
-msgid "Spell Fee"
-msgstr "Spell Fee"
 
 msgid "Stack Yields with SAAVE"
 msgstr "Stack Yields with SAAVE"
@@ -1158,6 +1170,9 @@ msgstr "View your Dashboard."
 
 msgid "View your Trades."
 msgstr "View your Trades."
+
+msgid "WITHDRAW"
+msgstr "WITHDRAW"
 
 msgid "Waiting for Confirmation"
 msgstr "Waiting for Confirmation"
