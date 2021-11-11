@@ -346,7 +346,7 @@ export default function SoulStake() {
             <div className="flex flex-col w-full max-w-xl mt-auto mb-2">
               <div className="flex max-w-lg">
                 <div className="self-end mb-3 text-lg font-bold md:text-2xl text-high-emphesis md:mb-7">
-                  {i18n._(t`SEANCE = Staked SOUL`)}
+                  {i18n._(t`Borrow SEANCE with SOUL`)}
                 </div>
               </div>
                 <div className="max-w-lg pr-3 mb-2 text-sm leading-5 md:text-base md:mb-4 md:pr-0">
@@ -428,7 +428,7 @@ export default function SoulStake() {
                       }}
                     >
                       <div className={activeTab === 0 ? activeTabStyle : inactiveTabStyle}>
-                        <p>{i18n._(t`Stake`)}</p>
+                        <p>{i18n._(t`DEPOSIT`)}</p>
                       </div>
                     </div>
                     <div
@@ -439,7 +439,7 @@ export default function SoulStake() {
                       }}
                     >
                       <div className={activeTab === 1 ? activeTabStyle : inactiveTabStyle}>
-                        <p>{i18n._(t`Unstake`)}</p>
+                        <p>{i18n._(t`WITHDRAW`)}</p>
                       </div>
                     </div>
                   </div>
@@ -451,15 +451,16 @@ export default function SoulStake() {
                           ? i18n._(t`Stake Auto Reinvesting SOUL`)
                           : i18n._(t`Unstake Auto Reinvesting SOUL`)
                         : activeTab === 0
-                        ? i18n._(t`Stake`)
-                        : i18n._(t`Unstake`)}
+                        // ? i18n._(t`Stake`)
+                        // : i18n._(t`Unstake`)
+                      }
                     </p>
                   </div>
-                  <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
+                  {/* <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
                     {autoStaking
                       ? 'When someone snatches the SOUL bounty, your pending SOUL gets re-invested automatically!'
                       : 'You will need to manually claim and deposit your pending SOUL to re-invest into your stake.'}
-                  </div>
+                  </div> */}
                   <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
                     {autoStaking
                       ? 'When withdrawing before 72hrs has passed, you will be charged 1% of your stake!'

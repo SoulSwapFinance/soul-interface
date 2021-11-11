@@ -1,39 +1,76 @@
 import { ArrowRightIcon } from '@heroicons/react/outline'
 import Container from '../../components/Container'
 import Head from 'next/head'
+import { I18n } from '@lingui/core'
 import Link from 'next/link'
 import Typography from '../../components/Typography'
+import { t } from '@lingui/macro'
+import { useLingui } from '@lingui/react'
+import { useMemo } from 'react'
 
-const tools = [
-  {
-    id: 1,
-    name: 'MEOWSHI',
-    description: 'Redonominate SPELL into MEOWSHI',
-    href: '/tools/meowshi',
-  },
+const TOOLS = (i18n: I18n) => [
+  // {
+  //   id: 1,
+  //   name: 'MEOWSHI',
+  //   description: i18n._(t`Redenominate ENCHANT into MEOWSHI`),
+  //   href: '/tools/meowshi',
+  // },
   // {
   //   id: 2,
-  //   name: 'SAAVE',
-  //   description: '...',
-  //   href: '/tools/saave',
+  //   name: 'INARI',
+  //   description: 'Deposit SOUL in various strategies & platforms in one click!',
+  //   href: '/inari',
   // },
-  // {
-  //   id: 3,
-  //   name: 'LP ZAP',
-  //   description: 'Zap into an LP position for any pool using any asset',
-  //   href: '/zap',
-  // },
+  {
+    id: 1,
+    name: 'SUMMON SOUL POWER',
+    description: i18n._(t`Earn SOUL rewards by depositing your SoulSwap LP.`),
+    href: '/farm',
+  },
+  {
+    id: 2,
+    name: 'BORROW SEANCE AND EARN SOUL',
+    description: 'Deposit SOUL collatoral to BORROW SEANCE, while earning more SOUL.',
+    href: './seance'
+  },
+  {
+    id: 3,
+    name: 'STAKE SEANCE FOR REWARDS',
+    description: 'Deposit SEANCE to EARN Fantom (WFTM) and UniDex (UNIDX).',
+    href: './circles'
+  },
+  {
+    id: 4,
+    name: 'EARN FEE SHARE WITH ENCHANT',
+    description: 'Deposit SEANCE to EARN fee-shares, deposited to ENCHANT.',
+    href: './enchant'
+  },
+  {
+    id: 5,
+    name: 'SHARE YOUR SOUL WITH FRIENDS',
+    description: 'Use a SCARAB to send SOUL to a friend, for a small sacrifice...',
+    href: './scarab'
+  },
+  {
+    id: 6,
+    name: 'BRIDGE YOUR ASSETS',
+    description: 'Bridge assets from blockchains such as: Binance, Ethereum, and more!',
+    href: './bridge'
+  },
 ]
 
 export default function Tools() {
+  const { i18n } = useLingui()
+  const tools = useMemo(() => TOOLS(i18n), [i18n])
+
   return (
     <Container id="tools-page" className="py-4 space-y-4 md:py-8 lg:py-12" maxWidth="xl">
       <Head>
         <title>Tools | Soul</title>
-        <meta key="description" name="description" content="SushiSwap tools..." />
+        <meta key="description" name="description" content="SoulSwap Tools..." />
       </Head>
       <Typography variant="h1" component="h1">
-        Tools
+        OUR ECOSYSTEM
       </Typography>
       <ul className="space-y-4 divide-y-0">
         {tools.map((tool) => (
