@@ -6,10 +6,7 @@ import JSBI from 'jsbi'
 import { Rounding } from '../enums'
 import invariant from 'tiny-invariant'
 
-export class Price<
-  TBase extends Currency,
-  TQuote extends Currency
-> extends Fraction {
+export class Price<TBase extends Currency, TQuote extends Currency> extends Fraction {
   public readonly baseCurrency: TBase // input i.e. denominator
   public readonly quoteCurrency: TQuote // output i.e. numerator
   public readonly scalar: Fraction // used to adjust the raw fraction w/r/t the decimals of the {base,quote}Token
@@ -28,10 +25,7 @@ export class Price<
           }
         ]
   ) {
-    let baseCurrency: TBase,
-      quoteCurrency: TQuote,
-      denominator: BigintIsh,
-      numerator: BigintIsh
+    let baseCurrency: TBase, quoteCurrency: TQuote, denominator: BigintIsh, numerator: BigintIsh
 
     if (args.length === 4) {
       ;[baseCurrency, quoteCurrency, denominator, numerator] = args
@@ -41,7 +35,7 @@ export class Price<
         args[0].baseAmount.currency,
         args[0].quoteAmount.currency,
         result.denominator,
-        result.numerator,
+        result.numerator
       ]
     }
     super(numerator, denominator)
@@ -58,29 +52,17 @@ export class Price<
    * Flip the price, switching the base and quote currency
    */
   public invert(): Price<TQuote, TBase> {
-    return new Price(
-      this.quoteCurrency,
-      this.baseCurrency,
-      this.numerator,
-      this.denominator
-    )
+    return new Price(this.quoteCurrency, this.baseCurrency, this.numerator, this.denominator)
   }
 
   /**
    * Multiply the price by another price, returning a new price. The other price must have the same base currency as this price's quote currency
    * @param other the other price
    */
-  public multiply<TOtherQuote extends Currency>(
-    other: Price<TQuote, TOtherQuote>
-  ): Price<TBase, TOtherQuote> {
+  public multiply<TOtherQuote extends Currency>(other: Price<TQuote, TOtherQuote>): Price<TBase, TOtherQuote> {
     invariant(this.quoteCurrency.equals(other.baseCurrency), 'TOKEN')
     const fraction = super.multiply(other)
-    return new Price(
-      this.baseCurrency,
-      other.quoteCurrency,
-      fraction.denominator,
-      fraction.numerator
-    )
+    return new Price(this.baseCurrency, other.quoteCurrency, fraction.denominator, fraction.numerator)
   }
 
   /**
@@ -90,11 +72,7 @@ export class Price<
   public quote(currencyAmount: CurrencyAmount<TBase>): CurrencyAmount<TQuote> {
     invariant(currencyAmount.currency.equals(this.baseCurrency), 'TOKEN')
     const result = super.multiply(currencyAmount)
-    return CurrencyAmount.fromFractionalAmount(
-      this.quoteCurrency,
-      result.numerator,
-      result.denominator
-    )
+    return CurrencyAmount.fromFractionalAmount(this.quoteCurrency, result.numerator, result.denominator)
   }
 
   /**
@@ -105,23 +83,11 @@ export class Price<
     return super.multiply(this.scalar)
   }
 
-  public toSignificant(
-    significantDigits: number = 6,
-    format?: object,
-    rounding?: Rounding
-  ): string {
-    return this.adjustedForDecimals.toSignificant(
-      significantDigits,
-      format,
-      rounding
-    )
+  public toSignificant(significantDigits: number = 6, format?: object, rounding?: Rounding): string {
+    return this.adjustedForDecimals.toSignificant(significantDigits, format, rounding)
   }
 
-  public toFixed(
-    decimalPlaces: number = 4,
-    format?: object,
-    rounding?: Rounding
-  ): string {
+  public toFixed(decimalPlaces: number = 4, format?: object, rounding?: Rounding): string {
     return this.adjustedForDecimals.toFixed(decimalPlaces, format, rounding)
   }
 }
