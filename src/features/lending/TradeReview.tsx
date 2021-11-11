@@ -42,7 +42,7 @@ function TradeReview({
         <div className="py-4 mb-4">
           <div className="flex items-center justify-between">
             <div className="text-lg text-secondary">
-              {i18n._(t`Minimum received`)}
+              {i18n._(t`Min. Received`)}
               <QuestionHelper
                 text={i18n._(
                   t`Your transaction will revert if there is a large, unfavorable price movement before it is confirmed.`

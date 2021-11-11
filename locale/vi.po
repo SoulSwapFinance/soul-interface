@@ -195,6 +195,9 @@ msgstr ""
 msgid "Chinese"
 msgstr ""
 
+msgid "Circles"
+msgstr ""
+
 msgid "Circulating Supply"
 msgstr ""
 
@@ -882,10 +885,10 @@ msgstr ""
 msgid "STAKING ASSETS"
 msgstr ""
 
-msgid "Scarab"
+msgid "Scarabs are a neat way to share your SOUL with anyone, so long as they're also willing to perform a ritual and make a small sacrfice..."
 msgstr ""
 
-msgid "Scarabs are a neat way to share your SOUL with anyone, so long as they're also willing to perform a ritual and make a small sacrfice..."
+msgid "Seance"
 msgstr ""
 
 msgid "Search Name or Address"

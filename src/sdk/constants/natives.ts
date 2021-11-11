@@ -2,7 +2,7 @@ import {
   Ether,
   Binance,
   Fantom,
-} from '../entities/natives'
+} from '../entities/Native'
 
 import { ChainId } from '../enums'
 

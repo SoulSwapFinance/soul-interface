@@ -9,9 +9,9 @@ import useSoulSummoner from "../../features/farm/hooks/useSoulSummoner";
 import useApprove from "../../features/farm/hooks/useApprove";
 
 import {
-  SoulSummonerAddress,
-  SeanceTokenAddress,
-  SoulTokenAddress,
+  SOUL_SUMMONER_ADDRESS,
+  // SeanceTokenAddress,
+  // SoulTokenAddress,
 } from "../../constants";
 
 import {
@@ -248,7 +248,7 @@ const StakeRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       const amount = await erc20Allowance(
         lpToken,
         account,
-        SoulSummonerAddress
+        SOUL_SUMMONER_ADDRESS[chainId]
       );
       if (amount > 0) setApproved(true);
       return amount;
@@ -263,7 +263,7 @@ const StakeRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       console.log("connect wallet");
     } else {
       try {
-        const tx = await erc20Approve(lpToken, SoulSummonerAddress);
+        const tx = await erc20Approve(lpToken, SOUL_SUMMONER_ADDRESS[chainId]);
       } catch (e) {
         alert(e.message);
         console.log(e);

@@ -7,10 +7,18 @@ export const TIMELOCK_ADDRESS = '0x1a9C8182C09F50C8318d769245beA52c32BE35BC'
 export const ARCHER_ROUTER_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '0x9917C083FF9FbD29Df1367FBF7F2388A9a202431',
 }
+
 export const FACTORY_ADDRESS = {
   [ChainId.MAINNET]: '',
-  [ChainId.BSC]: '',
+  [ChainId.BSC]: '0xa9EC396a1b709689e98DaB9eAf4f18A913775d39',
   [ChainId.FANTOM]: '0x1120e150dA9def6Fe930f4fEDeD18ef57c0CA7eF',
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
+export const ROUTER_ADDRESS = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '0x1b4df4D7E63B125f3a01fd5598E8E8458e519255',
+  [ChainId.FANTOM]: '0x6b3d631B87FE27aF29efeC61d2ab8CE4d621cCBF',
   [ChainId.FANTOM_TESTNET]: '',
 }
 
@@ -101,7 +109,7 @@ export const MULTICALL2_ADDRESS: AddressMap = {
 
 export const WNATIVE: AddressMap = {
   [ChainId.MAINNET]: '',
-  [ChainId.BSC]: '',
+  [ChainId.BSC]: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
   [ChainId.FANTOM]: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83', // WFTM
   [ChainId.FANTOM_TESTNET]: '',
  
