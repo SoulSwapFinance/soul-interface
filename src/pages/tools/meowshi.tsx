@@ -1,6 +1,6 @@
 import { ArrowDownIcon, InformationCircleIcon } from '@heroicons/react/solid'
 import { ChainId, Currency, Token } from '../../sdk'
-import { MEOW, SOUL, SPELL } from '../../constants'
+import { MEOW, SOUL, ENCHANT } from '../../constants'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import Container from '../../components/Container'
@@ -58,11 +58,11 @@ export default function Meowshi() {
     async (val, field) => {
       setFields((prevState) => {
         const inputRate =
-          currencies[Field.INPUT] === SPELL
+          currencies[Field.INPUT] === ENCHANT
             ? meowshiPerSpell.mul(e10(5))
             : meowshiPerSpell.mul(e10(5)).mulDiv(e10(18), soulPerSpell.toString().toBigNumber(18))
         const outputRate =
-          currencies[Field.OUTPUT] === SPELL
+          currencies[Field.OUTPUT] === ENCHANT
             ? spellPerMeowshi.div(e10(5))
             : spellPerMeowshi.mulDiv(soulPerSpell.toString().toBigNumber(18), e10(18)).div(e10(5))
 

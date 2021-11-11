@@ -11,8 +11,8 @@ import Link from 'next/link'
 import More from './More'
 import Exchange from './Exchange'
 import Earn from './Earn'
-// import Tools from './Tools'
-import Seance from './Seance'
+import Tools from './Tools'
+// import Seance from './Seance'
 import NavLink from '../NavLink'
 import { Popover } from '@headlessui/react'
 import QuestionHelper from '../QuestionHelper'
@@ -126,8 +126,9 @@ function AppBar(): JSX.Element {
                           </a>
                         </NavLink>
                       )} */}
-                      <Seance />
-                      { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      {/* <Seance /> */}
+                      <Tools />
+                      {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href='/scarab/create' target="_blank">
                           <a
                             id={`scarab-nav-link`}
@@ -140,11 +141,11 @@ function AppBar(): JSX.Element {
                             SCARAB
                           </a>
                         </NavLink>
-                      )}
-                      { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      )} */}
+                      {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href='/bridge' target="_blank">
                           <a
-                            id={`scarab-nav-link`}
+                            id={`bridge-nav-link`}
                             // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                             className="w-full relative ml-6 md:m-0"
 
@@ -154,7 +155,7 @@ function AppBar(): JSX.Element {
                             BRIDGE
                           </a>
                         </NavLink>
-                      )}
+                      )} */}
 
                       {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href='/dashboard' target="_blank">

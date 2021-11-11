@@ -13,18 +13,20 @@ import { Link } from 'react-feather'
 const items = (i18n: I18n) => [
 
   {
-    name: i18n._(t`Farm`),
+    name: i18n._(t`Soul`),
     href: '/farm',
     farm: true,
     stake: false, 
     enchant: false, 
+    more: false, 
   },
   {
-    name: i18n._(t`Stake`),
+    name: i18n._(t`Seance`),
     href: '/seance',
     farm: false,
-    stake: false, // FORCE FALSE 
+    stake: true, 
     enchant: false, 
+    more: false, 
   },
   {
     name: i18n._(t`Enchant`),
@@ -32,6 +34,15 @@ const items = (i18n: I18n) => [
     farm: false,
     stake: false, 
     enchant: true, 
+    more: true, 
+  },
+  {
+    name: i18n._(t`More`),
+    href: '/circles',
+    farm: false,
+    stake: false, 
+    enchant: false, 
+    more: true, 
   },
 ]
 
@@ -78,7 +89,7 @@ export default function Menu() {
                       <NavLink key={item.name} href={item.href}>
                       <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                         
-                      FARM
+                      SOUL
                       </a>
                     </NavLink>
 
@@ -89,7 +100,7 @@ export default function Menu() {
                         <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                           {/* <p className="text-base font-medium text-high-emphesis">{item.name}</p> */}
                           
-                        STAKE
+                        SEANCE
                         </a>
                       </NavLink>
                       ) : (
@@ -100,8 +111,17 @@ export default function Menu() {
                             ENCHANT
                           </a>
                         </NavLink>
+                      ) : (
+                        item.more ?
+                        (
+                          <NavLink key={item.name} href={item.href}>
+                          <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                            CIRCLES
+                          </a>
+                        </NavLink>
                         ) : ''
                       )
+                    )
                   )}
                 </div>
               </div>

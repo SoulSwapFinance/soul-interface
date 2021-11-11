@@ -17,21 +17,21 @@ const items = (i18n: I18n) => [
     href: '/swap',
     exchange: true,
     pools: false, 
-    analytics: false, 
+    bridge: false, 
   },
   {
     name: i18n._(t`Pool`),
     href: '/pool',
     exchange: false,
     pools: true,
-    analytics: false, 
+    bridge: false, 
   },
   {
-    name: i18n._(t`Analytics`),
-    href: '/info',
+    name: i18n._(t`Bridge`),
+    href: '/bridge',
     exchange: false,
     pools: false, 
-    analytics: true
+    bridge: true
   },
 ]
 
@@ -96,12 +96,12 @@ export default function Menu() {
                         </NavLink>
                         
                         ) : (
-                          item.analytics ?
+                          item.bridge ?
                           (
                             <NavLink key={item.name} href={item.href}>
                             <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                               
-                              CHARTS
+                              BRIDGE
                             
                             </a>
                             </NavLink>

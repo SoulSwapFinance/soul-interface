@@ -12,27 +12,27 @@ import { Link } from 'react-feather'
 
 const items = (i18n: I18n) => [
 
-  // {
-  //   name: i18n._(t`Analytics`),
-  //   href: '/info',
-  //   analytics: true,
-  //   dashboard: false, 
-  //   links: false, 
-  // },
-  // {
-  //   name: i18n._(t`Links`),
-  //   href: '/links',
-  //   analytics: false,
-  //   dashboard: false, 
-  //   links: true, 
-  // },
-  // {
-  // name: i18n._(t`Dashboard`),
-  // href: '/links',
-  // analytics: false,
-  // dashboard: true, 
-  // links: false, 
-  // },
+  {
+    name: i18n._(t`Explore`),
+    href: '/tools',
+    explore: true,
+    analytics: false, 
+    links: false, 
+  },
+  {
+    name: i18n._(t`Analytics`),
+    href: '/info',
+    explore: false,
+    analytics: true, 
+    links: false, 
+  },
+  {
+  name: i18n._(t`Links`),
+  href: '/links',
+  explore: false,
+  analytics: false, 
+  links: true, 
+  },
 ]
 
 export default function Menu() {
@@ -72,29 +72,29 @@ export default function Menu() {
               className="w-screen x-full bottom-12 lg:top-12 left-full sm:px-0"
             >
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                <div className="relative grid gap-6 px-5 py-6 bg-dark-900 sm:gap-8 sm:p-8">
+                <div className="absolute grid gap-6 px-5 py-6 bg-dark-900 sm:gap-8 sm:p-8">
 
                   {solutions.map((item) =>
-                    // item.analytics ? (
-                    //   <NavLink key={item.name} href={item.href}>
-                    //   <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                    item.explore ? (
+                      <NavLink key={item.name} href={item.href}>
+                      <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                         
-                    //   ANALYTICS
+                      EXPLORE
               
-                    //   </a>
-                    // </NavLink>
+                      </a>
+                    </NavLink>
 
-                    // ) : 
-                    // item.dashboard ?
-                    // (
-                    //  <NavLink key={item.name} href={item.href}>
-                    // <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                    ) : 
+                    item.analytics ?
+                    (
+                     <NavLink key={item.name} href={item.href}>
+                    <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
 
-                    // DASHBOARD
+                    CHARTS
                         
-                    // </a>
-                    // </NavLink>
-                    // ) : (
+                    </a>
+                    </NavLink>
+                    ) : (
                         item.links ?
                         (
                           <NavLink key={item.name} href={item.href}>
@@ -105,7 +105,7 @@ export default function Menu() {
                           </a>
                         </NavLink>
                         ) : ''
-                      // )
+                      )
                   )}
                 </div>
               </div>
