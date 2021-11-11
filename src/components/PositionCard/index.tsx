@@ -205,7 +205,9 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
               <div>{i18n._(t`Pooled ${currency0?.symbol}`)}:</div>
               {token0Deposited ? (
                 <div className="flex items-center space-x-2">
-                  <div className="font-semibold">{token0Deposited?.toSignificant(6)}</div>
+                  <div className="font-semibold">{token0Deposited?.toSignificant(6)}                    {formatNumberScale(token0Deposited?.toSignificant(6), false, 4)}
+                  
+                  </div>
                   <CurrencyLogo size="20px" currency={currency0} />
                 </div>
               ) : (
@@ -218,12 +220,18 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
               {token1Deposited ? (
                 <div className="flex items-center space-x-2">
                   <div className="font-semibold ">{token1Deposited?.toSignificant(6)}</div>
+                       {token1Deposited ? (
+                <div className="flex items-center space-x-2">
+                  <div className="font-semibold" title={token1Deposited.toSignificant(6)}>
+                    {formatNumberScale(token1Deposited?.toSignificant(6), false, 4)}
+                  </div>
                   <CurrencyLogo size="20px" currency={currency1} />
                 </div>
               ) : (
                 '-'
               )}
             </div>
+              
 
             <div className="flex items-center justify-between">
               <div>{i18n._(t`Ownership`)}:</div>
