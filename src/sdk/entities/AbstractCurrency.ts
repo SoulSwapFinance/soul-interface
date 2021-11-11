@@ -39,17 +39,9 @@ export abstract class AbstractCurrency {
    * @param symbol symbol of the currency
    * @param name of the currency
    */
-  protected constructor(
-    chainId: number,
-    decimals: number,
-    symbol?: string,
-    name?: string
-  ) {
+  protected constructor(chainId: number, decimals: number, symbol?: string, name?: string) {
     invariant(Number.isSafeInteger(chainId), 'CHAIN_ID')
-    invariant(
-      decimals >= 0 && decimals < 255 && Number.isInteger(decimals),
-      'DECIMALS'
-    )
+    invariant(decimals >= 0 && decimals < 255 && Number.isInteger(decimals), 'DECIMALS')
 
     this.chainId = chainId
     this.decimals = decimals
@@ -68,4 +60,11 @@ export abstract class AbstractCurrency {
    * implement this to be used in Uniswap
    */
   public abstract get wrapped(): Token
+
+  /**
+   * Returns token address. Useful in cases where a dependency is needed to detect changes (e.g. useEffect).
+   */
+  public serialize(): string {
+    return this.wrapped.address
+  }
 }

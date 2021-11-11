@@ -44,7 +44,7 @@
     "@lingui/cli": "^3.11.1",
     "@lingui/core": "^3.11.1",
     "@lingui/detect-locale": "^3.10.4",
-    "@lingui/loader": "^3.11.1",
+    "@lingui/loader": "^3.12.1",
     "@lingui/macro": "^3.10.2",
     "@lingui/react": "^3.10.2",
     "@metamask/jazzicon": "^2.0.0",

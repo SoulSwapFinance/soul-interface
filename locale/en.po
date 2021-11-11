@@ -197,6 +197,9 @@ msgstr "Change Recipient"
 msgid "Chinese"
 msgstr "Chinese"
 
+msgid "Circles"
+msgstr "Circles"
+
 msgid "Circulating Supply"
 msgstr "Circulating Supply"
 
@@ -899,11 +902,11 @@ msgstr "STABLE PAIRS"
 msgid "STAKING ASSETS"
 msgstr "STAKING ASSETS"
 
-msgid "Scarab"
-msgstr "Scarab"
-
 msgid "Scarabs are a neat way to share your SOUL with anyone, so long as they're also willing to perform a ritual and make a small sacrfice..."
 msgstr "Scarabs are a neat way to share your SOUL with anyone, so long as they're also willing to perform a ritual and make a small sacrfice..."
+
+msgid "Seance"
+msgstr "Seance"
 
 msgid "Search Name or Address"
 msgstr "Search Name or Address"

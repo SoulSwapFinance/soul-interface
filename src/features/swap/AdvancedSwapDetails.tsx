@@ -56,7 +56,7 @@ export function AdvancedSwapDetails({ trade, allowedSlippage, minerBribe }: Adva
       <RowBetween>
         <RowFixed>
           <div className="text-sm text-secondary">
-            {trade.tradeType === TradeType.EXACT_INPUT ? i18n._(t`Minimum received`) : i18n._(t`Maximum sent`)}
+            {trade.tradeType === TradeType.EXACT_INPUT ? i18n._(t`Min. Received`) : i18n._(t`Maximum sent`)}
           </div>
           <QuestionHelper
             text={i18n._(
@@ -101,7 +101,7 @@ export function AdvancedSwapDetails({ trade, allowedSlippage, minerBribe }: Adva
 
       <RowBetween>
         <RowFixed>
-          <div className="text-sm text-secondary">{i18n._(t`Spell Fee`)}</div>
+          <div className="text-sm text-secondary">{i18n._(t`Enchant Fee`)}</div>
           <QuestionHelper
             text={i18n._(t`A portion of each trade (0.05%) goes to Spell holders as a protocol incentive.`)}
           />

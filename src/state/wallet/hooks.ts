@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Ether, JSBI, Token } from '../../sdk'
+import { Currency, CurrencyAmount, JSBI, NATIVE, Token } from '../../sdk'
 import { useMultipleContractSingleData, useSingleContractMultipleData } from '../multicall/hooks'
 
 import ERC20_ABI from '../../constants/abis/erc20.json'
@@ -6,11 +6,9 @@ import { Interface } from '@ethersproject/abi'
 import { isAddress } from '../../functions/validate'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useAllTokens } from '../../hooks/Tokens'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { useMulticall2Contract } from '../../hooks/useContract'
-import Web3 from 'web3'
-import { RPC } from '../../connectors'
-import ERC20_INTERFACE from '../../constants/abis/erc20'
+import { TokenBalancesMap } from './types'
 
 /**
  * Returns a map of the given addresses to their eventually consistent ETH balances.
@@ -43,7 +41,7 @@ export function useETHBalances(uncheckedAddresses?: (string | undefined)[]): {
       addresses.reduce<{ [address: string]: CurrencyAmount<Currency> }>((memo, address, i) => {
         const value = results?.[i]?.result?.[0]
         if (value && chainId)
-          memo[address] = CurrencyAmount.fromRawAmount(Ether.onChain(chainId), JSBI.BigInt(value.toString()))
+          memo[address] = CurrencyAmount.fromRawAmount(NATIVE[chainId], JSBI.BigInt(value.toString()))
         return memo
       }, {}),
     [addresses, chainId, results]
@@ -56,7 +54,7 @@ export function useETHBalances(uncheckedAddresses?: (string | undefined)[]): {
 export function useTokenBalancesWithLoadingIndicator(
   address?: string,
   tokens?: (Token | undefined)[]
-): [{ [tokenAddress: string]: CurrencyAmount<Token> | undefined }, boolean] {
+): [TokenBalancesMap, boolean] {
   const validatedTokens: Token[] = useMemo(
     () => tokens?.filter((t?: Token): t is Token => isAddress(t?.address) !== false) ?? [],
     [tokens]
@@ -79,9 +77,7 @@ export function useTokenBalancesWithLoadingIndicator(
     useMemo(
       () =>
         address && validatedTokens.length > 0
-          ? validatedTokens.reduce<{
-              [tokenAddress: string]: CurrencyAmount<Token> | undefined
-            }>((memo, token, i) => {
+          ? validatedTokens.reduce<TokenBalancesMap>((memo, token, i) => {
               const value = balances?.[i]?.result?.[0]
               const amount = value ? JSBI.BigInt(value.toString()) : undefined
               if (amount) {
@@ -96,11 +92,16 @@ export function useTokenBalancesWithLoadingIndicator(
   ]
 }
 
-export function useTokenBalances(
-  address?: string,
-  tokens?: (Token | undefined)[]
-): { [tokenAddress: string]: CurrencyAmount<Token> | undefined } {
-  return useTokenBalancesWithLoadingIndicator(address, tokens)[0]
+export const serializeBalancesMap = (mapping: Record<string, CurrencyAmount<Token>>): string => {
+  return Object.entries(mapping)
+    .map(([address, currencyAmount]) => currencyAmount.serialize())
+    .join()
+}
+
+export function useTokenBalances(address?: string, tokens?: (Token | undefined)[]): TokenBalancesMap {
+  const balances = useTokenBalancesWithLoadingIndicator(address, tokens)[0]
+  const memoizedBalances = useMemo(() => serializeBalancesMap(balances), [balances])
+  return useMemo(() => balances, [memoizedBalances])
 }
 
 // get the balance for a single token/account combo
@@ -140,59 +141,38 @@ export function useCurrencyBalance(account?: string, currency?: Currency): Curre
 }
 
 // mimics useAllBalances
-export function useAllTokenBalances(): {
-  [tokenAddress: string]: CurrencyAmount<Token> | undefined
-} {
+export function useAllTokenBalances(): TokenBalancesMap {
   const { account } = useActiveWeb3React()
   const allTokens = useAllTokens()
   const allTokensArray = useMemo(() => Object.values(allTokens ?? {}), [allTokens])
-  const balances = useTokenBalances(account ?? undefined, allTokensArray)
-  return balances ?? {}
+  return useTokenBalances(account ?? undefined, allTokensArray)
 }
 
-export function useMultichainCurrencyBalance(
-  chainId?: number,
-  account?: string,
-  currency?: Currency
-): CurrencyAmount<Currency> | undefined {
-  const { chainId: fantomChainId } = useActiveWeb3React()
-  const fantomBalance = useCurrencyBalance(
-    chainId == fantomChainId && account,
-    chainId == fantomChainId && currency
-  )
-  const [value, setValue] = useState(null)
+// TODO: Replace
+// get the total owned, unclaimed, and unharvested UNI for account
+// export function useAggregateUniBalance(): CurrencyAmount<Token> | undefined {
+//   const { account, chainId } = useActiveWeb3React();
 
-  const getBalance = useCallback(() => {
-    const web3 = new Web3(RPC[chainId])
-    if (currency.isNative) {
-      web3.eth.getBalance(account).then((response) => {
-        const amount = CurrencyAmount.fromRawAmount(currency, response || 0)
-        setValue(amount)
-      })
-    } else if (currency.isToken) {
-      let contract = new web3.eth.Contract(ERC20_ABI as any, currency.address)
-      contract.methods
-        .balanceOf(account)
-        .call()
-        .then((response) => {
-          const amount = CurrencyAmount.fromRawAmount(currency, response || 0)
-          setValue(amount)
-        })
-        .catch((ex) => {
-          console.error(ex)
-        })
-    }
-  }, [account, chainId, currency])
+//   const uni = chainId ? UNI[chainId] : undefined;
 
-  useEffect(() => {
-    if (account && chainId && currency && chainId != fantomChainId) {
-      getBalance()
-    } else {
-      setValue(null)
-    }
-  }, [account, chainId, currency, getBalance, fantomChainId])
+//   const uniBalance: CurrencyAmount<Token> | undefined = useTokenBalance(
+//     account ?? undefined,
+//     uni
+//   );
+//   const uniUnclaimed: CurrencyAmount<Token> | undefined =
+//     useUserUnclaimedAmount(account);
+//   const uniUnHarvested: CurrencyAmount<Token> | undefined = useTotalUniEarned();
 
-  return useMemo(() => {
-    return chainId == fantomChainId ? fantomBalance : value
-  }, [chainId, fantomBalance, fantomChainId, value])
-}
+//   if (!uni) return undefined;
+
+//   return CurrencyAmount.fromRawAmount(
+//     uni,
+//     JSBI.add(
+//       JSBI.add(
+//         uniBalance?.quotient ?? JSBI.BigInt(0),
+//         uniUnclaimed?.quotient ?? JSBI.BigInt(0)
+//       ),
+//       uniUnHarvested?.quotient ?? JSBI.BigInt(0)
+//     )
+//   );
+// }
