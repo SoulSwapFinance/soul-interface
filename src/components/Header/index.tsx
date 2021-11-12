@@ -446,7 +446,7 @@ function AppBar(): JSX.Element {
                     id={`swap-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                   >
-                    {i18n._(t`Exchange`)}
+                    {i18n._(t`Swap`)}
                   </a>
                 </Link>
               )}
@@ -457,23 +457,23 @@ function AppBar(): JSX.Element {
                   id={`pool-nav-link`}
                   className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                   >
-                  {i18n._(t`Liquidity`)}
+                  {i18n._(t`Pool`)}
                 </a>
               </Link>
               )}
 
-              { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+             { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                 <Link href={'/farm'}>
                   <a
                     id={`farm-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                   >
-                    {i18n._(t`Summon`)}
+                    {i18n._(t`Farm`)}
                   </a>
                 </Link>
               )}
                 
-              { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+               {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                 <Link href={'/enchant'}>
                   <a
                     id={`enchant-nav-link`}
@@ -495,13 +495,35 @@ function AppBar(): JSX.Element {
               </Link>
               )}
 
- { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+              { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                 <Link href={'/stake'}>
                 <a
                   id={`stake-nav-link`}
                   className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                   >
                   {i18n._(t`Stake`)}
+                </a>
+              </Link>
+              )} */}
+
+              {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                <Link href={'/docs'}>
+                <a
+                  id={`links-nav-link`}
+                  className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                  >
+                  {i18n._(t`Docs`)}
+                </a>
+              </Link>
+              )} */}
+
+              { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                <Link href={'/tools'}>
+                <a
+                  id={`tools-nav-link`}
+                  className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                  >
+                  {i18n._(t`More`)}
                 </a>
               </Link>
               )}
@@ -518,7 +540,7 @@ function AppBar(): JSX.Element {
                 </Link>
                 )} */}
 
-                { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <Link href={'/info'}>
                     <a
                       id={`info-nav-link`}
@@ -538,7 +560,7 @@ function AppBar(): JSX.Element {
                       {i18n._(t`Bridge`)}
                     </a>
                   </Link>
-                )}
+                )} */}
 
                     {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                       <Link href={'/user'}>

@@ -1,4 +1,5 @@
 import { ArrowRightIcon } from '@heroicons/react/outline'
+import { CashIcon, Database } from '@heroicons/react/solid'
 import Container from '../../components/Container'
 import Head from 'next/head'
 import { I18n } from '@lingui/core'
@@ -9,55 +10,46 @@ import { useLingui } from '@lingui/react'
 import { useMemo } from 'react'
 
 const TOOLS = (i18n: I18n) => [
-  // {
-  //   id: 1,
-  //   name: 'MEOWSHI',
-  //   description: i18n._(t`Redenominate ENCHANT into MEOWSHI`),
-  //   href: '/tools/meowshi',
-  // },
-  // {
-  //   id: 2,
-  //   name: 'INARI',
-  //   description: 'Deposit SOUL in various strategies & platforms in one click!',
-  //   href: '/inari',
-  // },
   {
     id: 1,
-    name: 'SUMMON SOUL POWER',
-    description: i18n._(t`Earn SOUL rewards by depositing your SoulSwap LP.`),
+    name: 'SUMMON SOUL',
+    description: i18n._(t`Deposit your SOUL-LP to earn $SOUL rewards.`),
     href: '/farm',
   },
   {
     id: 2,
-    name: 'BORROW SEANCE AND EARN SOUL',
-    description: 'Deposit SOUL collatoral to BORROW SEANCE, while earning more SOUL.',
-    href: './seance'
+    name: 'BORROW & EARN',
+    description: 'Borrow $SEANCE with $SOUL and earn rewards.',
+    href: './seance',
+    cash: true
   },
   {
     id: 3,
-    name: 'STAKE SEANCE FOR REWARDS',
-    description: 'Deposit SEANCE to EARN Fantom (WFTM) and UniDex (UNIDX).',
+    name: 'SEANCE CIRCLES',
+    description: 'Deposit $SEANCE to earn: $WFTM and $UNIDX.',
     href: './circles'
   },
   {
     id: 4,
-    name: 'EARN FEE SHARE WITH ENCHANT',
-    description: 'Deposit SEANCE to EARN fee-shares, deposited to ENCHANT.',
+    name: 'ENCHANTED BUYBACKS',
+    description: 'Deposit $SEANCE and earn protocol fee-shares.',
     href: './enchant'
   },
   {
     id: 5,
-    name: 'SHARE YOUR SOUL WITH FRIENDS',
-    description: 'Use a SCARAB to send SOUL to a friend, for a small sacrifice...',
+    name: 'SHARE SOUL',
+    description: 'Send $SOUL for a small sacrifice of $SEANCE...',
     href: './scarab'
   },
   {
     id: 6,
-    name: 'BRIDGE YOUR ASSETS',
-    description: 'Bridge assets from blockchains such as: Binance, Ethereum, and more!',
-    href: './bridge'
+    name: 'BRIDGE ASSETS',
+    description: 'Bridge from Binance, Ethereum, Huobi, and more.',
+    href: './bridge',
+    database: true
   },
 ]
+
 
 export default function Tools() {
   const { i18n } = useLingui()
@@ -77,16 +69,17 @@ export default function Tools() {
           <li key={tool.id} className="relative w-full p-4 rounded bg-dark-900 hover:bg-dark-800">
             <div className="flex justify-between space-x-4">
               <div className="flex-1 min-w-0">
-                <Link href={tool.href}>
                   <a className="flex items-center justify-between focus:outline-none">
                     <span className="absolute inset-0" aria-hidden="true" />
-                    <div className="space-y-1">
-                      <p className="text-xl font-bold truncate text-primary">{tool.name}</p>
-                      <p className="text-sm truncate text-secondary">{tool.description}</p>
+                {/* { tool.cash ? */}
+                  <CashIcon width={20} height={20} className="h-10 w-10 text-blue-500"/>
+                {/* : ''} */}
+                    <div className="space-y-0">
+                      <p className="text-lg font-bold truncate text-primary">{tool.name}</p>
+                      <p className="text-md truncate text-secondary">{tool.description}</p>
                     </div>
                     <ArrowRightIcon width={24} height={24} className="text-high-emphesis" />
                   </a>
-                </Link>
               </div>
             </div>
           </li>
