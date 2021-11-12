@@ -7,7 +7,7 @@ import useSoulSummoner from './hooks/useSoulSummoner'
 import FarmKey from './FarmKey'
 import FarmRowRender from './FarmRowRender'
 import { FarmPids } from './FarmPids'
-import { Wrap, Heading, Text, Button } from './ReusableStyles' // Heading, Text
+// import { Wrap, Heading, Text, Button } from './ReusableStyles' // Heading, Text
 
 const FarmList = () => {
   const { chainId, account } = useActiveWeb3React()

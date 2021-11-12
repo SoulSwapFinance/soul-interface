@@ -59,4 +59,8 @@ export const tokens = {
     4002: "",
     250: "0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb",
   },
+  UNIDX: {
+    4002: "",
+    250: "0x2130d2a1e51112D349cCF78D2a1EE65843ba36e0",
+  },
 };
