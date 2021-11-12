@@ -201,9 +201,6 @@ msgstr ""
 msgid "Circles"
 msgstr ""
 
-msgid "Circulating Supply"
-msgstr ""
-
 msgid "Claim SOUL"
 msgstr ""
 
@@ -631,9 +628,6 @@ msgstr ""
 msgid "Market"
 msgstr ""
 
-msgid "Market Cap"
-msgstr ""
-
 msgid "Markets"
 msgstr ""
 
@@ -676,7 +670,7 @@ msgstr ""
 msgid "Never"
 msgstr ""
 
-msgid "New to Fantom?"
+msgid "New to Ethereum?"
 msgstr ""
 
 msgid "No Liquidity found"
@@ -756,7 +750,7 @@ msgstr ""
 msgid "Pending Treasury Transfer"
 msgstr ""
 
-msgid "Please connect to the appropriate network."
+msgid "Please connect to the appropriate Ethereum network."
 msgstr ""
 
 msgid "Please enter an amount"
@@ -992,9 +986,6 @@ msgstr ""
 msgid "Summon an Empire."
 msgstr ""
 
-msgid "Supply & Market Cap"
-msgstr ""
-
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr ""
 
@@ -1121,9 +1112,6 @@ msgid "Vesting is executed within the guidelines selected by the community in"
 msgstr ""
 
 msgid "Vietnamese"
-msgstr ""
-
-msgid "View Contract"
 msgstr ""
 
 msgid "View Liquidity Positions"
@@ -1281,9 +1269,6 @@ msgid "Token"
 msgid_plural "Tokens"
 msgstr[0] ""
 msgstr[1] ""
-
-msgid "{0}"
-msgstr ""
 
 msgid "{0} Deposited"
 msgstr ""
