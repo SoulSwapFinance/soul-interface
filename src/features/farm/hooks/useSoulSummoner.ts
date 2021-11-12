@@ -83,15 +83,17 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
       const soulPrice = result?.[3] / result?.[2]
       const ethPrice = (result?.[4] / result?.[5]) * ftmPrice
       const enchantPrice = (result?.[6] / result?.[7])
+      const seancePrice = result?.[3] / result?.[2] // TODO: FIX
 
       console.log(
         'usdcPerFtm:', ftmPrice, 
         'fusdPerSoul:', soulPrice, 
         'ethPrice:', ethPrice, 
-        'enchantPrice:', enchantPrice
+        'enchantPrice:', enchantPrice,
+        'seancePrice:', seancePrice
       )
 
-      return [ftmPrice, soulPrice, ethPrice, enchantPrice]
+      return [ftmPrice, soulPrice, ethPrice, enchantPrice, seancePrice]
     } catch (e) {
       console.log(e)
       return e
@@ -113,6 +115,7 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
       const soulPrice = rates?.[1]
       const ethPrice = rates?.[2]
       const enchantPrice = rates?.[3]
+      const seancePrice = rates?.[1] // TODO: fix
 
       const result = await helperContract?.fetchPidDetails(pid)
 
@@ -132,6 +135,8 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
         pidTvl = rawPidValue * ftmPrice
       } else if (token1Name === 'SOUL' || token2Name === 'SOUL') {
         pidTvl = rawPidValue * soulPrice
+      } else if (token1Name === 'SEANCE' || token2Name === 'SEANCE') {
+        pidTvl = rawPidValue * seancePrice
       } else if (token1Name === 'WETH' || token2Name === 'WETH') {
         pidTvl = rawPidValue * ethPrice
       } else if (token1Name === 'ENCHANT' || token2Name === 'ENCHANT') {
@@ -513,7 +518,7 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
 
       let totalLpValue
 
-      // check token1 && token2 name for base pair + fetch toatl value
+      // check token1 && token2 name for base pair + fetch total value
       if (token1Name === 'FUSD' || token2Name === 'FUSD') {
         totalLpValue = token1Name === 'FUSD' ? ethers.utils.formatUnits(token1Bal) : ethers.utils.formatUnits(token2Bal)
       } else if (token1Name === 'FTM' || token2Name === 'FTM') {
