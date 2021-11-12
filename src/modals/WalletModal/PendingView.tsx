@@ -1,3 +1,5 @@
+// import { injected } from '../../config/wallet'
+// import SUPPORTED_WALLETS from '../../config'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import Dots from '../../components/Dots'
 import Loader from '../../components/Loader'
@@ -46,7 +48,8 @@ const ErrorButton = styled.div`
 
   &:hover {
     cursor: pointer;
-    background-color: ${({ theme }) => darken(0.1, theme.text4)};
+    background-color: ${({ theme }) => theme.darken}
+    /* background-color: ${({ theme }) => darken(0.1, theme.text4)}; */
   }
 `
 
@@ -70,25 +73,25 @@ export default function PendingView({
 
   return (
     <PendingSection>
-      <LoadingMessage error={error}>
-        <LoadingWrapper>
-          {error ? (
-            <ErrorGroup>
-              <div>Error connecting.</div>
-              <ErrorButton
-                onClick={() => {
-                  setPendingError(false)
-                  connector && tryActivation(connector)
-                }}
-              >
-                Try Again
-              </ErrorButton>
-            </ErrorGroup>
-          ) : (
-            <Dots>Initializing</Dots>
-          )}
-        </LoadingWrapper>
-      </LoadingMessage>
+    <LoadingMessage error={error}>
+      <LoadingWrapper>
+        {error ? (
+          <ErrorGroup>
+            <div>Error connecting.</div>
+            <ErrorButton
+              onClick={() => {
+                setPendingError(false)
+                connector && tryActivation(connector)
+              }}
+            >
+              Try Again
+            </ErrorButton>
+          </ErrorGroup>
+        ) : (
+          <Dots>Initializing</Dots>
+        )}
+      </LoadingWrapper>
+    </LoadingMessage>
       {Object.keys(SUPPORTED_WALLETS).map((key) => {
         const option = SUPPORTED_WALLETS[key]
         if (option.connector === connector) {

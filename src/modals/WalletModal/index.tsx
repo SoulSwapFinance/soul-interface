@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
-import { fortmatic, injected, portis } from '../../connectors'
+// import { fortmatic, injected, portis } from '../../connectors'
+import { injected } from '../../config/wallet'
 import { useModalOpen, useWalletModalToggle } from '../../state/application/hooks'
 
 import { AbstractConnector } from '@web3-react/abstract-connector'
@@ -11,7 +12,7 @@ import ExternalLink from '../../components/ExternalLink'
 import Image from 'next/image'
 import Modal from '../../components/Modal'
 import ModalHeader from '../../components/ModalHeader'
-import { OVERLAY_READY } from '../../connectors/Fortmatic'
+import { OVERLAY_READY } from '../../entities/FortmaticConnector'
 import Option from './Option'
 import PendingView from './PendingView'
 import ReactGA from 'react-ga'
@@ -23,6 +24,7 @@ import styled from 'styled-components'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import usePrevious from '../../hooks/usePrevious'
+import { fortmatic, portis } from '../../connectors'
 
 const CloseIcon = styled.div`
   position: absolute;
