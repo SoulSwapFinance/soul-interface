@@ -171,8 +171,8 @@ export default function Remove() {
     const liquidityAmount = parsedAmounts[Field.LIQUIDITY]
     if (!liquidityAmount) throw new Error('missing liquidity amount')
 
-    const currencyBIsETH = currencyB.isNative
-    const oneCurrencyIsETH = currencyA.isNative || currencyBIsETH
+    const currencyBIsETH = currencyB == NATIVE[chainId] // isNative
+    const oneCurrencyIsETH = currencyA == NATIVE[chainId] || currencyBIsETH
 
     if (!tokenA || !tokenB) throw new Error('could not wrap')
 
@@ -666,7 +666,7 @@ export default function Remove() {
     [onUserInput]
   )
 
-  const oneCurrencyIsETH = currencyA?.isNative || currencyB?.isNative
+  const oneCurrencyIsETH = currencyA == NATIVE[chainId]|| currencyB == NATIVE[chainId]
 
   const oneCurrencyIsWETH = Boolean(
     chainId && WNATIVE[chainId] && (currencyA?.equals(WNATIVE[chainId]) || currencyB?.equals(WNATIVE[chainId]))
@@ -736,7 +736,7 @@ export default function Remove() {
                 pendingText={pendingText}
               />
               <AutoColumn gap="md">
-                {/* <LiquidityHeader input={currencyA} output={currencyB} /> */}
+                <LiquidityHeader input={currencyA} output={currencyB} />
 
                 <div>
                   <PercentInputPanel
@@ -764,8 +764,8 @@ export default function Remove() {
                             <RowBetween className="text-sm">
                               {oneCurrencyIsETH ? (
                                 <Link
-                                  href={`/exchange/remove/${currencyA?.isNative ? WNATIVE[chainId].address : currencyIdA}/${
-                                    currencyB?.isNative ? WNATIVE[chainId].address : currencyIdB
+                                  href={`/exchange/remove/${currencyA == NATIVE[chainId] ? WNATIVE[chainId].address : currencyIdA}/${
+                                    currencyB == NATIVE[chainId] ? WNATIVE[chainId].address : currencyIdB
                                   }`}
                                 >
                                   <a className="text-baseline text-purple opacity-80 hover:opacity-100 focus:opacity-100 whitespace-nowrap">
@@ -774,12 +774,12 @@ export default function Remove() {
                                 </Link>
                               ) : oneCurrencyIsWETH ? (
                                 <Link
-                                  href={`/exchange/remove/${currencyA?.equals(WNATIVE[chainId]) ? 'FTM' : currencyIdA}/${
-                                    currencyB?.equals(WNATIVE[chainId]) ? 'FTM' : currencyIdB
+                                  href={`/exchange/remove/${currencyA?.equals(WNATIVE[chainId]) ? 'ETH' : currencyIdA}/${
+                                    currencyB?.equals(WNATIVE[chainId]) ? 'ETH' : currencyIdB
                                   }`}
                                 >
                                   <a className="text-baseline text-blue opacity-80 hover:opacity-100 whitespace-nowrap">
-                                    Receive {NATIVE[chainId].symbol}
+                                    Receive W{NATIVE[chainId].symbol}
                                   </a>
                                 </Link>
                               ) : null}
@@ -848,7 +848,7 @@ export default function Remove() {
           <NavLink href="/pool">
             <a className="flex items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
               <span>{i18n._(t`View Liquidity Positions`)}</span>
-              {/* <svg
+              <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-4 h-4"
                 fill="none"
@@ -856,7 +856,7 @@ export default function Remove() {
                 stroke="currentColor"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-              </svg> */}
+              </svg>
             </a>
           </NavLink>
         </div>

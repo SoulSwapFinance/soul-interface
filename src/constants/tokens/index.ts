@@ -168,23 +168,23 @@ export const SPELL: ChainTokenMap = {
   ), // TODO: update
 }
 
-export const WETH9_EXTENDED: { [chainId: number]: Token } = {
-  ...WETH9,
-  // 
+// export const WETH9_EXTENDED: { [chainId: number]: Token } = {
+//   ...WETH9,
+//   // 
 
-  [SupportedChainId.FANTOM]: new Token(
-    ChainId.FANTOM,
-    '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
-    18,
-    'WFTM',
-    'Wrapped Fantom'
-  ),
-}
+//   [SupportedChainId.FANTOM]: new Token(
+//     ChainId.FANTOM,
+//     '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
+//     18,
+//     'WFTM',
+//     'Wrapped Fantom'
+//   ),
+// }
 
 export class ExtendedEther extends Ether {
   public get wrapped(): Token {
     if (this.chainId in WNATIVE) return WNATIVE[this.chainId]
-    if (this.chainId in WETH9_EXTENDED) return WETH9_EXTENDED[this.chainId]
+    // if (this.chainId in WETH9_EXTENDED) return WETH9_EXTENDED[this.chainId]
 
     throw new Error('Unsupported chain ID')
   }

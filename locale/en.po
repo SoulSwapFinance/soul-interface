@@ -399,14 +399,14 @@ msgstr "Enter"
 msgid "Enter Amount"
 msgstr "Enter Amount"
 
-msgid "Enter Recipient"
-msgstr "Enter Recipient"
-
 msgid "Enter a recipient"
 msgstr "Enter a recipient"
 
 msgid "Enter a valid slippage percentage"
 msgstr "Enter a valid slippage percentage"
+
+msgid "Enter an amount"
+msgstr "Enter an amount"
 
 msgid "Error"
 msgstr "Error"
@@ -555,11 +555,11 @@ msgstr "Insufficient {0} balance"
 msgid "Interface Settings"
 msgstr "Interface Settings"
 
-msgid "Invalid Recipient"
-msgstr "Invalid Recipient"
-
 msgid "Invalid pair"
 msgstr "Invalid pair"
+
+msgid "Invalid recipient"
+msgstr "Invalid recipient"
 
 msgid "Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency."
 msgstr "Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency."
