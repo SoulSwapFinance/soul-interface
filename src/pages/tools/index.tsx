@@ -1,5 +1,97 @@
+// // import { ArrowRightIcon } from '@heroicons/react/outline'
+// // import { CashIcon } from '@heroicons/react/solid'
+// import Container from '../../components/Container'
+// import Head from 'next/head'
+// // import { I18n } from '@lingui/core'
+// import Typography from '../../components/Typography'
+// import { t } from '@lingui/macro'
+// // import { useLingui } from '@lingui/react'
+// import { useMemo } from 'react'
+
+// const BASE_URL = 'https://exchange.soulswap.finance'
+
+// // const TOOLS = (i18n: I18n) => [
+// const TOOLS = (tools) => [
+//   {
+//     id: 1,
+//     name: 'SUMMON SOUL',
+//     description: `Deposit your SOUL-LP to earn $SOUL rewards.`,
+//     // href: BASE_URL + '/farm',
+//     href: './farm'
+//   },
+//   {
+//     id: 2,
+//     name: 'BORROW & EARN',
+//     description: 'Borrow $SEANCE with $SOUL and earn rewards.',
+//     href: '/seance',
+//   },
+//   {
+//     id: 3,
+//     name: 'SEANCE CIRCLES',
+//     description: 'Deposit $SEANCE to earn: $WFTM and $UNIDX.',
+//     to: '/circles',
+//   },
+//   {
+//     id: 4,
+//     name: 'ENCHANTED BUYBACKS',
+//     description: 'Deposit $SEANCE and earn protocol fee-shares.',
+//     href: '/enchant',
+//   },
+//   {
+//     id: 5,
+//     name: 'SHARE SOUL',
+//     description: 'Send $SOUL for a small sacrifice of $SEANCE...',
+//     href: '/scarab',
+//   },
+//   {
+//     id: 6,
+//     name: 'BRIDGE ASSETS',
+//     description: 'Bridge from Binance, Ethereum, Huobi, and more.',
+//     href: '/bridge'
+//   },
+// ]
+
+
+//  const Tools= () => {
+//   // const { i18n } = useLingui()
+//   const tools = useMemo(() => TOOLS(tools), [])
+
+//   return (
+//     <Container id="tools-page" className="py-4 space-y-4 md:py-8 lg:py-12" maxWidth="xl">
+//       <Head>
+//         <title>Tools | Soul</title>
+//         <meta key="description" name="description" content="SoulSwap Tools..." />
+//       </Head>
+//       <Typography variant="h1" component="h1">
+//         OUR ECOSYSTEM
+//       </Typography>
+//       <ul className="space-y-4 divide-y-0">
+//         {tools.map((tool) => (
+//           <li key={tool.id} className="relative w-full p-4 rounded bg-dark-900 hover:bg-dark-800">
+//             <div className="flex justify-between space-x-4">
+//               <div className="flex-1 min-w-0">
+//                   <a className="flex items-center justify-between focus:outline-none">
+//                     <span className="absolute inset-0" aria-hidden="true" />
+//                   {/* <CashIcon width={20} height={20} className="h-10 w-10 text-blue-500"/> */}
+//                     <div className="space-y-2">
+//                       <p className="text-xl font-bold truncate text-primary">{tool.name}</p>
+//                       <p className="text-sm truncate text-secondary">{tool.description}</p>
+//                     </div>
+//                     {/* <ArrowRightIcon width={24} height={24} className="text-high-emphesis" /> */}
+//                   </a>
+//               </div>
+//             </div>
+//           </li>
+//         ))}
+//       </ul>
+//     </Container>
+//   )
+// }
+
+// export default Tools
+
+
 import { ArrowRightIcon } from '@heroicons/react/outline'
-import { CashIcon } from '@heroicons/react/solid'
 import Container from '../../components/Container'
 import Head from 'next/head'
 import { I18n } from '@lingui/core'
@@ -13,43 +105,40 @@ const TOOLS = (i18n: I18n) => [
   {
     id: 1,
     name: 'SUMMON SOUL',
-    description: i18n._(t`Deposit your SOUL-LP to earn $SOUL rewards.`),
+    description: i18n._(t`Earn SOUL rewards by depositing your SoulSwap LP.`),
     href: '/farm',
   },
   {
     id: 2,
     name: 'BORROW & EARN',
     description: 'Borrow $SEANCE with $SOUL and earn rewards.',
-    href: './seance',
-    cash: true
+    href: './seance'
   },
   {
     id: 3,
     name: 'SEANCE CIRCLES',
-    description: 'Deposit $SEANCE to earn: $WFTM and $UNIDX.',
+    description: 'Deposit SEANCE to EARN Fantom (WFTM) and UniDex (UNIDX).',
     href: './circles'
   },
   {
     id: 4,
     name: 'ENCHANTED BUYBACKS',
-    description: 'Deposit $SEANCE and earn protocol fee-shares.',
+    description: 'Deposit SEANCE to EARN fee-shares, deposited to ENCHANT.',
     href: './enchant'
   },
   {
     id: 5,
     name: 'SHARE SOUL',
-    description: 'Send $SOUL for a small sacrifice of $SEANCE...',
-    href: './scarab'
+    description: 'Use a SCARAB to send SOUL to a friend, for a small sacrifice...',
+    href: './scarab/create'
   },
   {
     id: 6,
     name: 'BRIDGE ASSETS',
     description: 'Bridge from Binance, Ethereum, Huobi, and more.',
-    href: './bridge',
-    database: true
+    href: './bridge'
   },
 ]
-
 
 export default function Tools() {
   const { i18n } = useLingui()
@@ -69,17 +158,16 @@ export default function Tools() {
           <li key={tool.id} className="relative w-full p-4 rounded bg-dark-900 hover:bg-dark-800">
             <div className="flex justify-between space-x-4">
               <div className="flex-1 min-w-0">
+                <Link href={tool.href}>
                   <a className="flex items-center justify-between focus:outline-none">
                     <span className="absolute inset-0" aria-hidden="true" />
-                {/* { tool.cash ? */}
-                  <CashIcon width={20} height={20} className="h-10 w-10 text-blue-500"/>
-                {/* : ''} */}
-                    <div className="space-y-0">
-                      <p className="text-lg font-bold truncate text-primary">{tool.name}</p>
-                      <p className="text-md truncate text-secondary">{tool.description}</p>
+                    <div className="space-y-1">
+                      <p className="text-xl font-bold truncate text-primary">{tool.name}</p>
+                      <p className="text-sm truncate text-secondary">{tool.description}</p>
                     </div>
                     <ArrowRightIcon width={24} height={24} className="text-high-emphesis" />
                   </a>
+                </Link>
               </div>
             </div>
           </li>
