@@ -45,17 +45,17 @@ export const FarmPids = [
     token2Address: tokens.SOUL,
   },
 
-  { // 400	
-    pid: 3,
-    token1: 'FUSD',
+  { // 600
+    pid: 28,
+    token1: 'fUSDT',
     token2: 'SOUL',
-    lpSymbol: 'SOUL-FUSD',
+    lpSymbol: 'SOUL-FUSDT',
     lpAddresses: {
-      4002: '0xaf02fd55F297f2a591367F6E33Dc600Ff2Be472A',
-      250: '0x9e7711eaeb652d0da577c1748844407f8db44a10',
+      4002: '',
+      250: '0xE27Cc06a7F34892BC17a5474303b91b2C9F3F21A',
     },
-    token1Address: tokens.FUSD,
-    token2Address: tokens.SOUL,
+      token1Address: tokens.fUSDT,
+      token2Address: tokens.SOUL,
   },
 
   { // 600
@@ -121,18 +121,6 @@ export const FarmPids = [
     },
       token1Address: tokens.SEANCE,
       token2Address: tokens.UNIDX,
-  },
-  { // 600
-    pid: 28,
-    token1: 'FUSDT',
-    token2: 'SOUL',
-    lpSymbol: 'SOUL-FUSDT',
-    lpAddresses: {
-      4002: '',
-      250: '0xE27Cc06a7F34892BC17a5474303b91b2C9F3F21A',
-    },
-      token1Address: tokens.fUSDT,
-      token2Address: tokens.SOUL,
   },
   
 
@@ -364,6 +352,20 @@ export const FarmPids = [
       token1Address: tokens.FUSD,
       token2Address: tokens.USDC,
   },
+
+  { // 400	
+    pid: 3,
+    token1: 'FUSD',
+    token2: 'SOUL',
+    lpSymbol: 'SOUL-FUSD',
+    lpAddresses: {
+      4002: '0xaf02fd55F297f2a591367F6E33Dc600Ff2Be472A',
+      250: '0x9e7711eaeb652d0da577c1748844407f8db44a10',
+    },
+    token1Address: tokens.FUSD,
+    token2Address: tokens.SOUL,
+  },
+  
   // { // TEMPLATE
   //   pid: 13,
   //   token1: '',
