@@ -1,5 +1,5 @@
 import { ChainId, JSBI, Percent } from '../sdk'
-import { binance, fortmatic, injected, portis, torus, walletconnect, walletlink } from '../connectors'
+import { binance, clover, injected, portis, torus, walletconnect, walletlink } from '../connectors'
 
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { BigNumber } from 'ethers'
@@ -117,7 +117,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     color: '#3688EB',
     mobile: true,
   },
-  Binance: {
+    BINANCE_WALLET: {
     connector: binance,
     name: 'Binance',
     iconName: 'bsc.jpg',
@@ -125,6 +125,14 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     href: null,
     color: '#F0B90B',
     mobile: false,
+  },
+  CLOVER_WALLET: {
+    connector: clover,
+    name: 'Clover',
+    iconName: 'clover.svg',
+    description: 'Login using Clover hosted wallet',
+    href: null,
+    color: '#269964',
   },
 }
 
@@ -208,4 +216,5 @@ export const EIP_1559_ACTIVATION_BLOCK: { [chainId in ChainId]?: number } = {
 
 export * from './routing'
 export * from './addresses'
+export * from './networks'
 export * from './tokens'

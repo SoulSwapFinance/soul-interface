@@ -3,18 +3,15 @@ import { FortmaticConnector as FortmaticConnectorCore } from '@web3-react/fortma
 
 export const OVERLAY_READY = 'OVERLAY_READY'
 
-type FormaticSupportedChains = Extract<ChainId, ChainId.MAINNET>
+type FormaticSupportedChains = Extract<ChainId, ChainId.MAINNET >
 
 const CHAIN_ID_NETWORK_ARGUMENT: {
   readonly [chainId in FormaticSupportedChains]: string | undefined
 } = {
-  [ChainId.MAINNET]: undefined,
+  [ChainId.MAINNET]: undefined
 }
 
 export class FortmaticConnector extends FortmaticConnectorCore {
-  // on(OVERLAY_READY: string, arg1: () => void) {
-    // throw new Error('Method not implemented.')
-  // }
   async activate() {
     if (!this.fortmatic) {
       const { default: Fortmatic } = await import('fortmatic')
