@@ -203,9 +203,6 @@ msgstr "Chinese"
 msgid "Circles"
 msgstr "Circles"
 
-msgid "Circulating Supply"
-msgstr "Circulating Supply"
-
 msgid "Claim SOUL"
 msgstr "Claim SOUL"
 
@@ -342,9 +339,6 @@ msgstr "Deposit SOUL into CoffinBox"
 msgid "Deposit tokens into CoffinBox for all the yields"
 msgstr "Deposit tokens into CoffinBox for all the yields"
 
-msgid "Deposit your SOUL-LP to earn $SOUL rewards."
-msgstr "Deposit your SOUL-LP to earn $SOUL rewards."
-
 msgid "Deposit {0} into CoffinBox"
 msgstr "Deposit {0} into CoffinBox"
 
@@ -377,6 +371,9 @@ msgstr "Earn"
 
 msgid "Earn Fees with Enchantments."
 msgstr "Earn Fees with Enchantments."
+
+msgid "Earn SOUL rewards by depositing your SoulSwap LP."
+msgstr "Earn SOUL rewards by depositing your SoulSwap LP."
 
 msgid "Either return to the {link}, or change to an available network."
 msgstr "Either return to the {link}, or change to an available network."
@@ -642,9 +639,6 @@ msgstr "Manage this pool"
 
 msgid "Market"
 msgstr "Market"
-
-msgid "Market Cap"
-msgstr "Market Cap"
 
 msgid "Markets"
 msgstr "Markets"
@@ -1011,9 +1005,6 @@ msgstr "Summon Souls with Liquidity."
 msgid "Summon an Empire."
 msgstr "Summon an Empire."
 
-msgid "Supply & Market Cap"
-msgstr "Supply & Market Cap"
-
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "Supplying {0} {1} and {2} {3}"
 
@@ -1143,9 +1134,6 @@ msgstr "Vesting is executed within the guidelines selected by the community in"
 
 msgid "Vietnamese"
 msgstr "Vietnamese"
-
-msgid "View Contract"
-msgstr "View Contract"
 
 msgid "View Liquidity Positions"
 msgstr "View Liquidity Positions"
@@ -1305,9 +1293,6 @@ msgid "Token"
 msgid_plural "Tokens"
 msgstr[0] "Token"
 msgstr[1] "Tokens"
-
-msgid "{0}"
-msgstr "{0}"
 
 msgid "{0} Deposited"
 msgstr "{0} Deposited"
