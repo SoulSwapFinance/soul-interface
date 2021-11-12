@@ -338,6 +338,9 @@ msgstr ""
 msgid "Deposit tokens into CoffinBox for all the yields"
 msgstr ""
 
+msgid "Deposit your SOUL-LP to earn $SOUL rewards."
+msgstr ""
+
 msgid "Deposit {0} into CoffinBox"
 msgstr ""
 
@@ -369,9 +372,6 @@ msgid "Earn"
 msgstr ""
 
 msgid "Earn Fees with Enchantments."
-msgstr ""
-
-msgid "Earn SOUL rewards by depositing your SoulSwap LP."
 msgstr ""
 
 msgid "Either return to the {link}, or change to an available network."
@@ -414,9 +414,6 @@ msgid "Error connecting. Try refreshing the page."
 msgstr ""
 
 msgid "Everytime you stake or claim rewards your lock time renews."
-msgstr ""
-
-msgid "Exchange"
 msgstr ""
 
 msgid "Exchange Rate"
@@ -588,9 +585,6 @@ msgid "Limit order"
 msgstr ""
 
 msgid "Links"
-msgstr ""
-
-msgid "Liquidity"
 msgstr ""
 
 msgid "Lists"
@@ -987,9 +981,6 @@ msgstr ""
 msgid ""
 "Stake into SPELL add collateral as aSPELL on Aave all in\n"
 "one click"
-msgstr ""
-
-msgid "Summon"
 msgstr ""
 
 msgid "Summon Scarabs"
