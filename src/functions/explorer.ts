@@ -2,8 +2,8 @@ import { ChainId } from '../sdk'
 
 // Multichain Explorer
 const builders = {
-  etherscan: (chainName: string, data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
-    const prefix = `https://${chainName ? `${chainName}.` : ''}etherscan.io`
+  etherscan: (data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
+    const prefix = `https://etherscan.io`
     switch (type) {
       case 'transaction':
         return `${prefix}/tx/${data}`
@@ -12,7 +12,7 @@ const builders = {
     }
   },
 
-  fantom: (chainName: string, data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
+  fantom: (data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
     const prefix = 'https://ftmscan.com'
     switch (type) {
       case 'transaction':
@@ -21,7 +21,7 @@ const builders = {
         return `${prefix}/${type}/${data}`
     }
   },
-  fantomTestnet: (chainName: string, data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
+  fantomTestnet: (data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
     const prefix = 'https://testnet.ftmscan.com'
     switch (type) {
       case 'transaction':
@@ -30,8 +30,8 @@ const builders = {
         return `${prefix}/${type}/${data}`
     }
   },
-  bscscan: (chainName: string, data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
-    const prefix = `https://${chainName ? `${chainName}.` : ''}bscscan.com`
+  bscscan: (data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
+    const prefix = `https://bscscan.com`
     switch (type) {
       case 'transaction':
         return `${prefix}/tx/${data}`
@@ -175,23 +175,30 @@ const builders = {
 }
 
 interface ChainObject {
-  [chainId: number]: {
-    chainName: string
-    builder: (chainName: string, data: string, type: 'transaction' | 'token' | 'address' | 'block') => string
+  [chainId: number]:
+  {
+    // chainName: string
+    builder: (
+      // chainName: string, 
+      data: string, type: 'transaction' | 'token' | 'address' | 'block') => string
   }
 }
 
 const chains: ChainObject = {
   [ChainId.MAINNET]: {
-    chainName: '',
+    // chainName: '',
     builder: builders.etherscan,
   },
+  [ChainId.BSC]: {
+    // chainName: 'testnet',
+    builder: builders.bscscan,
+  },
   [ChainId.FANTOM]: {
-    chainName: '',
+    // chainName: '',
     builder: builders.fantom,
   },
   [ChainId.FANTOM_TESTNET]: {
-    chainName: 'testnet',
+    // chainName: 'testnet',
     builder: builders.fantomTestnet,
   },
   // [ChainId.ROPSTEN]: {
@@ -278,5 +285,8 @@ export function getExplorerLink(
   type: 'transaction' | 'token' | 'address' | 'block'
 ): string {
   const chain = chains[chainId]
-  return chain.builder(chain.chainName, data, type)
+  return chain.builder
+  (
+    // chain.chainName, 
+    data, type)
 }
