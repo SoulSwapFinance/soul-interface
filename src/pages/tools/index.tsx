@@ -15,38 +15,38 @@
 //   {
 //     id: 1,
 //     name: 'SUMMON SOUL',
-//     description: `Deposit your SOUL-LP to earn $SOUL rewards.`,
+//     description: ``,
 //     // href: BASE_URL + '/farm',
 //     href: './farm'
 //   },
 //   {
 //     id: 2,
 //     name: 'BORROW & EARN',
-//     description: 'Borrow $SEANCE with $SOUL and earn rewards.',
+//     description: '',
 //     href: '/seance',
 //   },
 //   {
 //     id: 3,
 //     name: 'SEANCE CIRCLES',
-//     description: 'Deposit $SEANCE to earn: $WFTM and $UNIDX.',
+//     description: '',
 //     to: '/circles',
 //   },
 //   {
 //     id: 4,
 //     name: 'ENCHANTED BUYBACKS',
-//     description: 'Deposit $SEANCE and earn protocol fee-shares.',
+//     description: '',
 //     href: '/enchant',
 //   },
 //   {
 //     id: 5,
 //     name: 'SHARE SOUL',
-//     description: 'Send $SOUL for a small sacrifice of $SEANCE...',
+//     description: '',
 //     href: '/scarab',
 //   },
 //   {
 //     id: 6,
 //     name: 'BRIDGE ASSETS',
-//     description: 'Bridge from Binance, Ethereum, Huobi, and more.',
+//     description: '',
 //     href: '/bridge'
 //   },
 // ]
@@ -105,7 +105,7 @@ const TOOLS = (i18n: I18n) => [
   {
     id: 1,
     name: 'SUMMON SOUL',
-    description: i18n._(t`Earn SOUL rewards by depositing your SoulSwap LP.`),
+    description: i18n._(t`Deposit your SOUL-LP to earn $SOUL rewards.`),
     href: '/farm',
   },
   {
@@ -117,19 +117,19 @@ const TOOLS = (i18n: I18n) => [
   {
     id: 3,
     name: 'SEANCE CIRCLES',
-    description: 'Deposit SEANCE to EARN Fantom (WFTM) and UniDex (UNIDX).',
+    description: 'Deposit $SEANCE to earn $WFTM and $UNIDX.',
     href: './circles'
   },
   {
     id: 4,
     name: 'ENCHANTED BUYBACKS',
-    description: 'Deposit SEANCE to EARN fee-shares, deposited to ENCHANT.',
+    description: 'Deposit $SEANCE and earn protocol fee-shares.',
     href: './enchant'
   },
   {
     id: 5,
-    name: 'SHARE SOUL',
-    description: 'Use a SCARAB to send SOUL to a friend, for a small sacrifice...',
+    name: 'SHARE YOUR SOUL',
+    description: 'Send $SOUL for a small sacrifice of $SEANCE.',
     href: './scarab/create'
   },
   {
