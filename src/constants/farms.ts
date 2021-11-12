@@ -423,5 +423,50 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
     },
+    '0x578c7B9A45D9e55246d3036D48db262b9B3CA48e': {  // SEANCE-UNIDEX
+      id: 27, // 400
+      token0: {
+        id: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
+        name: 'Seance Circle',
+        symbol: 'SEANCE',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x2130d2a1e51112D349cCF78D2a1EE65843ba36e0', // UNIDX
+        name: 'UniDex',
+        symbol: 'UNIDX',
+        decimals: 18,
+      },
+    },
+    '0xE27Cc06a7F34892BC17a5474303b91b2C9F3F21A': {  // SOUL-FUSDT
+      id: 28, // 600
+      token0: {
+        id: '0x049d68029688eAbF473097a2fC38ef61633A3C7A', // FUSDT
+        name: 'Frapped USDT',
+        symbol: 'fUSDT',
+        decimals: 6,
+      },
+      token1: {
+        id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
+        name: 'Soul Power',
+        symbol: 'SOUL',
+        decimals: 18,
+      },
+    },
+    '0x6c6f32008262666CA4acEd0a824c4945AB96e5F3': {  // ENCHANT-USDC
+      id: 29, // 400
+      token0: {
+        id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
+        name: 'USDC Coin',
+        symbol: 'USDC',
+        decimals: 6,
+      },
+      token1: {
+        id: '0x6a1a8368d607c7a808f7bba4f7aed1d9ebde147a', // ENCHANT
+        name: 'Enchantment',
+        symbol: 'ENCHANT',
+        decimals: 18,
+      },
+    },
   }
 }

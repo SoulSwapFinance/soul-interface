@@ -83,11 +83,12 @@ export const FarmPids = [
       token1Address: tokens.SOUL,
       token2Address: tokens.ENCHANT,
   },
+
   { // 600
     pid: 26,
     token1: 'SEANCE',
     token2: 'ENCHANT',
-    lpSymbol: 'SEANCE-ENCHANT',
+    lpSymbol: 'ENCHANT-SEANCE',
     lpAddresses: {
       4002: '',
       250: '0x5695176d085f8f7320507495066ffec940da244c',
@@ -95,6 +96,46 @@ export const FarmPids = [
       token1Address: tokens.SEANCE,
       token2Address: tokens.ENCHANT,
   },
+
+  { // 400
+    pid: 29,
+    token1: 'USDC',
+    token2: 'ENCHANT',
+    lpSymbol: 'ENCHANT-USDC',
+    lpAddresses: {
+      4002: '',
+      250: '0x6c6f32008262666CA4acEd0a824c4945AB96e5F3',
+    },
+      token1Address: tokens.USDC,
+      token2Address: tokens.ENCHANT,
+  },
+  
+  { // 400
+    pid: 27,
+    token1: 'SEANCE',
+    token2: 'UNIDX',
+    lpSymbol: 'SEANCE-UNIDX',
+    lpAddresses: {
+      4002: '',
+      250: '0x578c7B9A45D9e55246d3036D48db262b9B3CA48e',
+    },
+      token1Address: tokens.SEANCE,
+      token2Address: tokens.UNIDX,
+  },
+  { // 600
+    pid: 28,
+    token1: 'FUSDT',
+    token2: 'SOUL',
+    lpSymbol: 'SOUL-FUSDT',
+    lpAddresses: {
+      4002: '',
+      250: '0xE27Cc06a7F34892BC17a5474303b91b2C9F3F21A',
+    },
+      token1Address: tokens.fUSDT,
+      token2Address: tokens.SOUL,
+  },
+  
+
   { // 600
     pid: 10,
     token1: 'SEANCE',
