@@ -1,5 +1,5 @@
 import { ArrowRightIcon } from '@heroicons/react/outline'
-import { CashIcon, Database } from '@heroicons/react/solid'
+import { CashIcon } from '@heroicons/react/solid'
 import Container from '../../components/Container'
 import Head from 'next/head'
 import { I18n } from '@lingui/core'

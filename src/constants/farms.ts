@@ -124,7 +124,7 @@ export const POOLS: AddressMap = {
           },
         },
         '0x98C678d3C7ebeD4a36B84666700d8b5b5Ddc1f79': {  // SEANCE-USDC
-          id: 7,
+          id: 7, // 400
           token0: { // USDC
             id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
             name: 'USDC Coin',
