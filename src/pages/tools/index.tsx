@@ -43,7 +43,7 @@ const TOOLS = (i18n: I18n) => [
     id: 6,
     name: 'BRIDGE ASSETS',
     description: 'Bridge from Binance, Ethereum, Huobi, and more.',
-    href: 'https://bridge.soulswap.finance'
+    href: 'https://bridge.soul.sh'
   },
 ]
 
