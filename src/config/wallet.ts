@@ -193,7 +193,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
       return new LatticeConnector({
         chainId: 1,
         url: RPC[ChainId.MAINNET],
-        appName: 'SushiSwap',
+        appName: 'SoulSwap',
       })
     },
     name: 'Lattice',
@@ -208,8 +208,8 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
       const WalletLinkConnector = (await import('@web3-react/walletlink-connector')).WalletLinkConnector
       return new WalletLinkConnector({
         url: RPC[ChainId.MAINNET],
-        appName: 'SushiSwap',
-        appLogoUrl: 'https://raw.githubusercontent.com/sushiswap/art/master/sushi/logo-256x256.png',
+        appName: 'SoulSwap',
+        appLogoUrl: 'https://raw.githubusercontent.com/soulswapfinance/icons/master/token/soul.jpg',
       })
     },
     name: 'Coinbase Wallet',

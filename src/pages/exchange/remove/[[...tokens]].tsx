@@ -318,7 +318,7 @@ export default function Remove() {
   //       { name: "verifyingContract", type: "address" },
   //     ];
   //     const domain = {
-  //       name: "SushiSwap LP Token",
+  //       name: "SoulSwap LP Token",
   //       version: "1",
   //       chainId: chainId,
   //       verifyingContract: pair.liquidityToken.address,
