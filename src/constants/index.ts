@@ -1,5 +1,5 @@
 import { ChainId, JSBI, Percent } from '../sdk'
-import { binance, clover, injected, portis, torus, walletconnect, walletlink } from '../connectors'
+import { binance, clover, injected, walletconnect } from '../connectors'
 
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { BigNumber } from 'ethers'
@@ -99,6 +99,14 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     href: null,
     color: '#E8831D',
   },
+  Clover: {
+    connector: clover,
+    name: 'Clover Wallet',
+    iconName: 'clover.svg',
+    description: 'Login using Clover hosted wallet',
+    href: null,
+    color: '#269964',
+  },
   WALLET_CONNECT: {
     connector: walletconnect,
     name: 'WalletConnect',
@@ -108,32 +116,62 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     color: '#4196FC',
     mobile: true,
   },
-  TRUST_WALLET: {
-    connector: injected,
-    name: 'Trust Wallet',
-    iconName: 'trustwallet.svg',
-    description: 'The most trusted & secure crypto wallet.',
+  WALLET_LINK: {
+    connector: async () => {
+      const WalletLinkConnector = (await import('@web3-react/walletlink-connector')).WalletLinkConnector
+      return new WalletLinkConnector({
+        url: RPC[ChainId.FANTOM],
+        appName: 'SoulSwap',
+        appLogoUrl: 'https://raw.githubusercontent.com/soulswapfinance/icons/master/token/soul.jpg',
+      })
+    },
+    name: 'Coinbase Wallet',
+    iconName: 'coinbase.svg',
+    description: 'Use Coinbase Wallet app on mobile device',
     href: null,
-    color: '#3688EB',
+    color: '#315CF5',
+  },
+  COINBASE_LINK: {
+    name: 'Open in Coinbase Wallet',
+    iconName: 'coinbase.svg',
+    description: 'Open in Coinbase Wallet app.',
+    href: 'https://go.cb-w.com',
+    color: '#315CF5',
     mobile: true,
+    mobileOnly: true,
   },
-    BINANCE_WALLET: {
-    connector: binance,
-    name: 'Binance',
-    iconName: 'bsc.jpg',
-    description: 'Login using Binance hosted wallet',
-    href: null,
-    color: '#F0B90B',
-    mobile: false,
-  },
-  CLOVER_WALLET: {
-    connector: clover,
-    name: 'Clover',
-    iconName: 'clover.svg',
-    description: 'Login using Clover hosted wallet',
-    href: null,
-    color: '#269964',
-  },
+  // TRUST_WALLET: {
+  //   connector: injected,
+  //   name: 'Trust Wallet',
+  //   iconName: 'trustwallet.svg',
+  //   description: 'The most trusted & secure crypto wallet.',
+  //   href: null,
+  //   color: '#3688EB',
+  //   mobile: true,
+  // },
+  // Binance: {
+  //   connector: binance,
+  //   name: 'Binance',
+  //   iconName: 'bsc.jpg',
+  //   description: 'Login using Binance hosted wallet',
+  //   href: null,
+  //   color: '#F0B90B',
+  //   mobile: false,
+  // },
+  // Torus: {
+  //   connector: async () => {
+  //     const TorusConnector = (await import('@web3-react/torus-connector')).TorusConnector
+  //     return new TorusConnector({
+  //       chainId: 1,
+  //     })
+  //   },
+  //   name: 'Torus',
+  //   iconName: 'torus.png',
+  //   description: 'Login using Torus hosted wallet',
+  //   href: null,
+  //   color: '#315CF5',
+  //   mobile: true,
+  // },
 }
 
 export const NetworkContextName = 'NETWORK'

@@ -335,9 +335,6 @@ msgstr ""
 msgid "Deposit tokens into CoffinBox for all the yields"
 msgstr ""
 
-msgid "Deposit your SOUL-LP to earn $SOUL rewards."
-msgstr ""
-
 msgid "Deposit {0} into CoffinBox"
 msgstr ""
 
@@ -369,6 +366,9 @@ msgid "Earn"
 msgstr ""
 
 msgid "Earn Fees with Enchantments."
+msgstr ""
+
+msgid "Earn SOUL rewards by depositing your SoulSwap LP."
 msgstr ""
 
 msgid "Either return to the {link}, or change to an available network."
@@ -670,7 +670,7 @@ msgstr ""
 msgid "Never"
 msgstr ""
 
-msgid "New to Ethereum?"
+msgid "New to Fantom?"
 msgstr ""
 
 msgid "No Liquidity found"
@@ -750,7 +750,7 @@ msgstr ""
 msgid "Pending Treasury Transfer"
 msgstr ""
 
-msgid "Please connect to the appropriate Ethereum network."
+msgid "Please connect to the appropriate network."
 msgstr ""
 
 msgid "Please enter an amount"

@@ -99,7 +99,7 @@ export const injected = new InjectedConnector({
 
 // mainnet only
 export const walletconnect = new WalletConnectConnector({
-  rpc: { [ChainId.FANTOM]: RPC[ChainId.FANTOM] },
+  rpc: { [ChainId.MAINNET]: RPC[ChainId.MAINNET] },
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   supportedChainIds,
@@ -134,6 +134,4 @@ export const torus = new TorusConnector({
 // binance only
 export const binance = new BscConnector({ supportedChainIds: [56] })
 
-export const clover = new CloverConnector({
-  supportedChainIds: [250]
-})
+export const clover = new CloverConnector({ supportedChainIds: [250] })

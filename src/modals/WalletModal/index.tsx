@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
-// import { fortmatic, injected, portis } from '../../connectors'
-import { injected } from '../../config/wallet'
+import { injected} from '../../connectors'
+// import { injected } from '../../config/wallet'
 import { useModalOpen, useWalletModalToggle } from '../../state/application/hooks'
 
 import { AbstractConnector } from '@web3-react/abstract-connector'

@@ -1,4 +1,4 @@
-import { ChainId, NATIVE, WNATIVE } from '../../sdk'
+import { ChainId, NATIVE, USDC, WNATIVE } from '../../sdk'
 import React, { createContext, useCallback, useContext, useEffect, useReducer } from 'react'
 import { ZERO, e10, maximum, minimum } from '../../functions/math'
 import {
@@ -15,7 +15,7 @@ import { useBentoBoxContract, useSoulGuideContract } from '../../hooks/useContra
 import { BigNumber } from '@ethersproject/bignumber'
 import Fraction from '../../entities/Fraction'
 import { UNDERWORLD_ADDRESS } from '../../constants/kashi'
-import { USDC } from '../../hooks'
+// import { USDC } from '../../hooks'
 import { bentobox } from '@soulswap/soul-data'
 import { ethers } from 'ethers'
 // import { getCurrency } from '../../functions/currency'

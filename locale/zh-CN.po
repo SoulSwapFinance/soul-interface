@@ -201,9 +201,6 @@ msgstr ""
 msgid "Circles"
 msgstr ""
 
-msgid "Circulating Supply"
-msgstr ""
-
 msgid "Claim SOUL"
 msgstr ""
 
@@ -338,9 +335,6 @@ msgstr ""
 msgid "Deposit tokens into CoffinBox for all the yields"
 msgstr ""
 
-msgid "Deposit your SOUL-LP to earn $SOUL rewards."
-msgstr ""
-
 msgid "Deposit {0} into CoffinBox"
 msgstr ""
 
@@ -372,6 +366,9 @@ msgid "Earn"
 msgstr ""
 
 msgid "Earn Fees with Enchantments."
+msgstr ""
+
+msgid "Earn SOUL rewards by depositing your SoulSwap LP."
 msgstr ""
 
 msgid "Either return to the {link}, or change to an available network."
@@ -629,9 +626,6 @@ msgid "Manage this pool"
 msgstr ""
 
 msgid "Market"
-msgstr ""
-
-msgid "Market Cap"
 msgstr ""
 
 msgid "Markets"
@@ -992,9 +986,6 @@ msgstr ""
 msgid "Summon an Empire."
 msgstr ""
 
-msgid "Supply & Market Cap"
-msgstr ""
-
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr ""
 
@@ -1121,9 +1112,6 @@ msgid "Vesting is executed within the guidelines selected by the community in"
 msgstr ""
 
 msgid "Vietnamese"
-msgstr ""
-
-msgid "View Contract"
 msgstr ""
 
 msgid "View Liquidity Positions"
@@ -1281,9 +1269,6 @@ msgid "Token"
 msgid_plural "Tokens"
 msgstr[0] ""
 msgstr[1] ""
-
-msgid "{0}"
-msgstr ""
 
 msgid "{0} Deposited"
 msgstr ""
