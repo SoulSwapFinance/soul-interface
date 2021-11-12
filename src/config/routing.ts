@@ -80,7 +80,7 @@ import {
   // TODO: SDK should have two maps, WETH map and WNATIVE map.
   const WRAPPED_NATIVE_ONLY: ChainTokenList = {
     [ChainId.MAINNET]: [WNATIVE[ChainId.MAINNET]],
-     [ChainId.BSC]: [WNATIVE[ChainId.BSC]],
+    [ChainId.BSC]: [WNATIVE[ChainId.BSC]],
     [ChainId.FANTOM]: [WNATIVE[ChainId.FANTOM]],
     [ChainId.FANTOM_TESTNET]: [WNATIVE[ChainId.FANTOM_TESTNET]]
   }
@@ -175,7 +175,7 @@ import {
   
     [ChainId.FANTOM]: [
       ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], 
-      FANTOM.SOUL,
+      SOUL[ChainId.FANTOM],
       FANTOM.USDC,
       FANTOM.WBTC,
       FANTOM.USDT,
@@ -195,7 +195,7 @@ import {
   export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
     ...WRAPPED_NATIVE_ONLY,
     [ChainId.MAINNET]: [...WRAPPED_NATIVE_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC],
-    [ChainId.FANTOM]: [...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], FANTOM.SOUL, FANTOM.DAI, FANTOM.USDC, FANTOM.FUSD], //FANTOM.WBTC, FANTOM.WETH],
+    [ChainId.FANTOM]: [...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], FANTOM.SOUL, FANTOM.DAI, FANTOM.USDC, FANTOM.WBTC, FANTOM.WETH],
     [ChainId.BSC]: [...WRAPPED_NATIVE_ONLY[ChainId.BSC], BSC.DAI, BSC.USD, BSC.USDC, BSC.USDT, BSC.BTCB, BSC.WETH],
   
   }
