@@ -9,23 +9,11 @@ export const network = new NetworkConnector({
   urls: RPC,
 })
 
-const supportedChainIds = Object.values(ChainId) as number[]
+export const supportedChainIds = Object.values(ChainId) as number[]
 
 export const injected = new InjectedConnector({
   supportedChainIds,
 })
-
-// export interface WalletInfo {
-//   connector?: (() => Promise<AbstractConnector>) | AbstractConnector
-//   name: string
-//   iconName: string
-//   description: string
-//   href: string | null
-//   color: string
-//   primary?: true
-//   mobile?: true
-//   mobileOnly?: true
-// }
 
 export interface WalletInfo {
   connector?: (() => Promise<AbstractConnector>) | AbstractConnector
@@ -34,72 +22,10 @@ export interface WalletInfo {
   description: string
   href: string | null
   color: string
-  primary?: boolean
-  mobile?: boolean
-  mobileOnly?: boolean
+  primary?: true
+  mobile?: true
+  mobileOnly?: true
 }
-
-// export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
-//   INJECTED: {
-//     connector: injected,
-//     name: 'Injected',
-//     iconName: 'injected.svg',
-//     description: 'Injected web3 provider.',
-//     href: null,
-//     color: '#010101',
-//     primary: true,
-//   },
-//   METAMASK: {
-//     connector: injected,
-//     name: 'MetaMask',
-//     iconName: 'metamask.png',
-//     description: 'Easy-to-use browser extension.',
-//     href: null,
-//     color: '#E8831D',
-//   },
-//   WALLET_CONNECT: {
-//     connector: walletconnect,
-//     name: 'WalletConnect',
-//     iconName: 'wallet-connect.svg',
-//     description: 'Connect to Trust Wallet, Rainbow Wallet and more...',
-//     href: null,
-//     color: '#4196FC',
-//     mobile: true,
-//   },
-//   TRUST_WALLET: {
-//     connector: injected,
-//     name: 'Trust Wallet',
-//     iconName: 'trustwallet.svg',
-//     description: 'The most trusted & secure crypto wallet.',
-//     href: null,
-//     color: '#3688EB',
-//     mobile: true,
-//   },
-//   Binance: {
-//     connector: binance,
-//     name: 'Binance',
-//     iconName: 'bsc.jpg',
-//     description: 'Login using Binance hosted wallet',
-//     href: null,
-//     color: '#F0B90B',
-//     mobile: false,
-//   },
-//   Clover: {
-//     connector: clover,
-//     // connector: async () => {
-//     //   const CloverConnector = (await import('@clover-network/clover-connector')).CloverConnector
-//     //   return new CloverConnector({
-//     //     supportedChainIds: [1, 250],
-//     //   })
-//     // },
-//     name: 'Clover',
-//     iconName: 'clover.svg',
-//     description: 'Login using Clover hosted wallet',
-//     href: null,
-//     color: '#269964',
-//     // mobile: true,
-//   },
-// }
 
 export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
   INJECTED: {
@@ -119,15 +45,6 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     href: null,
     color: '#E8831D',
   },
-  // WALLET_CONNECT: {
-  //   connector: walletconnect,
-  //   name: 'WalletConnect',
-  //   iconName: 'wallet-connect.svg',
-  //   description: 'Connect to Trust Wallet, Rainbow Wallet and more...',
-  //   href: null,
-  //   color: '#4196FC',
-  //   mobile: true,
-  // },
   WALLET_CONNECT: {
     connector: async () => {
       const WalletConnectConnector = (await import('@web3-react/walletconnect-connector')).WalletConnectConnector
@@ -140,27 +57,6 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
           56, // binance smart chain
           250, // fantom
           4002, // fantom testnet
-          // 3, // ropsten
-          // 4, // rinkeby
-          // 5, // goreli
-          // 42, // kovan
-          // 137, // matic
-          // 80001, // matic testnet
-          // 100, // xdaiW
-          // 97, // binance smart chain testnet
-          // 1287, // moonbase
-          // 43114, // avalanche
-          // 43113, // fuji
-          // 128, // heco
-          // 256, // heco testnet
-          // 1666600000, // harmony
-          // 1666700000, // harmony testnet
-          // 66, // okex testnet
-          // 65, // okex testnet
-          // 42161, // arbitrum
-          // 42220, // celo
-          // 11297108109, // palm
-          // 1285, // moonriver
         ],
         // pollingInterval: 15000,
       })
@@ -172,21 +68,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     color: '#4196FC',
     mobile: true,
   },
-  KEYSTONE: {
-    connector: async () => {
-      const KeystoneConnector = (await import('@keystonehq/keystone-connector')).KeystoneConnector
-      return new KeystoneConnector({
-        chainId: 1,
-        url: RPC[ChainId.MAINNET],
-      })
-    },
-    name: 'Keystone',
-    iconName: 'keystone.png',
-    description: 'Connect to Keystone hardware wallet.',
-    href: null,
-    color: '#4196FC',
-    mobile: true,
-  },
+
   LATTICE: {
     connector: async () => {
       const LatticeConnector = (await import('@web3-react/lattice-connector')).LatticeConnector
@@ -203,6 +85,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     color: '#40a9ff',
     mobile: true,
   },
+
   WALLET_LINK: {
     connector: async () => {
       const WalletLinkConnector = (await import('@web3-react/walletlink-connector')).WalletLinkConnector
@@ -235,7 +118,8 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     href: null,
     color: '#3688EB',
     mobile: true,
-  },FORTMATIC: {
+  },
+  FORTMATIC: {
     connector: async () => {
       const FortmaticConnector = (await import('@web3-react/fortmatic-connector')).FortmaticConnector
       return new FortmaticConnector({
@@ -293,22 +177,13 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     color: '#F0B90B',
     mobile: true,
   },
-  // BINANCE: {
-  //   connector: binance,
-  //   name: 'Binance',
-  //   iconName: 'bsc.jpg',
-  //   description: 'Login using Binance hosted wallet',
-  //   href: null,
-  //   color: '#F0B90B',
-  //   mobile: false,
-  // },
-  CLOVER: {
+  Clover: {
     connector: clover,
     name: 'Clover',
     iconName: 'clover.svg',
     description: 'Login using Clover hosted wallet',
     href: null,
     color: '#269964',
-    mobile: true // ?
+    mobile: true
   },
 }

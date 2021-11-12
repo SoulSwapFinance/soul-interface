@@ -76,18 +76,19 @@ export default function PendingView({
     <LoadingMessage error={error}>
       <LoadingWrapper>
         {error ? (
-          <ErrorGroup>
-            <div>Error connecting.</div>
-            <ErrorButton
-              onClick={() => {
-                setPendingError(false)
-                connector && tryActivation(connector)
-              }}
-            >
-              Try Again
-            </ErrorButton>
-          </ErrorGroup>
-        ) : (
+          // <ErrorGroup>
+          //   <div>Error Connecting.</div>
+          //   <ErrorButton
+          //     onClick={() => {
+          //       setPendingError(false)
+          //       connector && tryActivation(connector)
+          //     }}
+          //   >
+          //     Try Again
+          //   </ErrorButton>
+          // </ErrorGroup>
+        // ) : (
+        null) : (
           <Dots>Initializing</Dots>
         )}
       </LoadingWrapper>
