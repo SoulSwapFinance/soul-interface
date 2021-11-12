@@ -26,18 +26,6 @@ export const USD: TokenMap = {
 
 export const WETH9: TokenMap = {
   [ChainId.MAINNET]: new Token(ChainId.MAINNET, WETH9_ADDRESS[ChainId.MAINNET], 18, 'WETH', 'Wrapped Ether'),
-//   [ChainId.ROPSTEN]: new Token(ChainId.ROPSTEN, WETH9_ADDRESS[ChainId.ROPSTEN], 18, 'WETH', 'Wrapped Ether'),
-//   [ChainId.RINKEBY]: new Token(ChainId.RINKEBY, WETH9_ADDRESS[ChainId.RINKEBY], 18, 'WETH', 'Wrapped Ether'),
-//   [ChainId.GÖRLI]: new Token(ChainId.GÖRLI, WETH9_ADDRESS[ChainId.GÖRLI], 18, 'WETH', 'Wrapped Ether'),
-//   [ChainId.KOVAN]: new Token(ChainId.KOVAN, WETH9_ADDRESS[ChainId.KOVAN], 18, 'WETH', 'Wrapped Ether'),
-//   [ChainId.ARBITRUM]: new Token(ChainId.ARBITRUM, WETH9_ADDRESS[ChainId.ARBITRUM], 18, 'WETH', 'Wrapped Ether'),
-//   [ChainId.ARBITRUM_TESTNET]: new Token(
-//     ChainId.ARBITRUM_TESTNET,
-//     WETH9_ADDRESS[ChainId.ARBITRUM_TESTNET],
-//     18,
-//     'WETH',
-//     'Wrapped Ether'
-//   ),
   [ChainId.BSC]: new Token(ChainId.BSC, WETH9_ADDRESS[ChainId.BSC], 18, 'WETH', 'Wrapped Ether'),
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, WETH9_ADDRESS[ChainId.FANTOM], 18, 'WETH', 'Wrapped Ether'),
 //   [ChainId.MATIC]: new Token(ChainId.MATIC, WETH9_ADDRESS[ChainId.MATIC], 18, 'WETH', 'Wrapped Ether'),
@@ -50,18 +38,9 @@ export const WETH9: TokenMap = {
 
 export const WNATIVE: TokenMap = {
   [ChainId.MAINNET]: WETH9[ChainId.MAINNET],
-//   [ChainId.ROPSTEN]: WETH9[ChainId.ROPSTEN],
-//   [ChainId.RINKEBY]: WETH9[ChainId.RINKEBY],
-//   [ChainId.GÖRLI]: WETH9[ChainId.GÖRLI],
-//   [ChainId.KOVAN]: WETH9[ChainId.KOVAN],
+  [ChainId.BSC]: new Token(ChainId.BSC, WNATIVE_ADDRESS[ChainId.BSC], 18, 'WBNB', 'Wrapped BNB'),
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, WNATIVE_ADDRESS[ChainId.FANTOM], 18, 'WFTM', 'Wrapped FTM'),
-  [ChainId.FANTOM_TESTNET]: new Token(
-    ChainId.FANTOM_TESTNET,
-    WNATIVE_ADDRESS[ChainId.FANTOM_TESTNET],
-    18,
-    'FTM',
-    'Wrapped FTM'
-  ),
+  [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, WNATIVE_ADDRESS[ChainId.FANTOM_TESTNET], 18, 'WFTM', 'Wrapped FTM'),
 //   [ChainId.MATIC]: new Token(ChainId.MATIC, WNATIVE_ADDRESS[ChainId.MATIC], 18, 'WMATIC', 'Wrapped Matic'),
 //   [ChainId.MATIC_TESTNET]: new Token(
 //     ChainId.MATIC_TESTNET,
@@ -71,7 +50,6 @@ export const WNATIVE: TokenMap = {
 //     'Wrapped Matic'
 //   ),
 //   [ChainId.XDAI]: new Token(ChainId.XDAI, WNATIVE_ADDRESS[ChainId.XDAI], 18, 'WXDAI', 'Wrapped xDai'),
-  [ChainId.BSC]: new Token(ChainId.BSC, WNATIVE_ADDRESS[ChainId.BSC], 18, 'WBNB', 'Wrapped BNB'),
 //   [ChainId.BSC_TESTNET]: new Token(
 //     ChainId.BSC_TESTNET,
 //     WNATIVE_ADDRESS[ChainId.BSC_TESTNET],

@@ -4,7 +4,7 @@ import JSBI from 'jsbi'
 export * from './addresses'
 // export * from './kashi'
 export * from './natives'
-// export * from './numbers'
+export * from './numbers'
 export * from './tokens'
 
 export const MaxUint256 = JSBI.BigInt(
@@ -15,7 +15,7 @@ export const MaxUint256 = JSBI.BigInt(
 //   '0xf3dcc3c6c6e34d3981dd429ac942301b9ebdd05de1be17f646b55476c44dc951' // 1 OCT 
 
 export const INIT_CODE_HASH: { [chainId: number]: string } = {
-  // [ChainId.MAINNET]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
+  [ChainId.MAINNET]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
   // [ChainId.ROPSTEN]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
   // [ChainId.RINKEBY]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
   // [ChainId.GÖRLI]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
@@ -43,17 +43,6 @@ export const INIT_CODE_HASH: { [chainId: number]: string } = {
 }
 
 export const MINIMUM_LIQUIDITY = JSBI.BigInt(1000)
-
-// exports for internal consumption
-export const ZERO = JSBI.BigInt(0)
-export const ONE = JSBI.BigInt(1)
-export const TWO = JSBI.BigInt(2)
-export const THREE = JSBI.BigInt(3)
-export const FIVE = JSBI.BigInt(5)
-export const TEN = JSBI.BigInt(10)
-export const _100 = JSBI.BigInt(100)
-export const _997 = JSBI.BigInt(997)
-export const _1000 = JSBI.BigInt(1000)
 
 export enum SolidityType {
   uint8 = 'uint8',
