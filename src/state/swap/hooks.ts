@@ -5,10 +5,18 @@ import {
   CurrencyAmount,
   JSBI,
   Percent,
+  SOUL_ADDRESS,
   TradeType,
   Trade as V2Trade,
+  WNATIVE_ADDRESS,
 } from '../../sdk'
-import { DEFAULT_ARCHER_ETH_TIP, DEFAULT_ARCHER_GAS_ESTIMATE } from '../../constants'
+import { DEFAULT_ARCHER_ETH_TIP, DEFAULT_ARCHER_GAS_ESTIMATE } from '../../config/archer'
+import {
+  EstimatedSwapCall,
+  SuccessfulCall,
+  swapErrorToUserReadableMessage,
+  useSwapCallArguments,
+} from '../../hooks/useSwapCallback'
 // import {
 //   EstimatedSwapCall,
 //   SuccessfulCall,
@@ -19,8 +27,8 @@ import { isAddress, isZero } from '../../functions/validate'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useV2TradeExactIn as useTradeExactIn, useV2TradeExactOut as useTradeExactOut } from '../../hooks/useV2Trades'
 import {
+  useExpertModeManager,
   useUserArcherETHTip,
   useUserArcherGasEstimate,
   useUserArcherGasPrice,
@@ -28,6 +36,7 @@ import {
   useUserSingleHopOnly,
   useUserSlippageTolerance,
 } from '../user/hooks'
+import { useV2TradeExactIn as useTradeExactIn, useV2TradeExactOut as useTradeExactOut } from '../../hooks/useV2Trades'
 
 import { ParsedQs } from 'qs'
 import { SwapState } from './reducer'
@@ -40,12 +49,6 @@ import useENS from '../../hooks/useENS'
 import { useLingui } from '@lingui/react'
 import useParsedQueryString from '../../hooks/useParsedQueryString'
 import useSwapSlippageTolerance from '../../hooks/useSwapSlippageTollerence'
-import {
-  EstimatedSwapCall,
-  SuccessfulCall,
-  swapErrorToUserReadableMessage,
-  useSwapCallArguments,
-} from '../../hooks/useSwapCallback'
 
 export function useSwapState(): AppState['swap'] {
   return useAppSelector((state) => state.swap)
@@ -65,8 +68,8 @@ export function useSwapActionHandlers(): {
           field,
           currencyId: currency.isToken
             ? currency.address
-            : currency.isNative
-            ? 'FTM'
+            : currency.isNative && currency.chainId  // !== ChainId.CELO
+            ? 'ETH'
             : '',
         })
       )
@@ -100,15 +103,11 @@ export function useSwapActionHandlers(): {
   }
 }
 
-// TODO: Switch for ours...
+// TODO: Swtich for ours...
 const BAD_RECIPIENT_ADDRESSES: { [chainId: string]: { [address: string]: true } } = {
   [ChainId.MAINNET]: {
     '0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac': true, // v2 factory
     '0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F': true, // v2 router 02
-  },
-  [ChainId.FANTOM]: {
-    '0x1120e150dA9def6Fe930f4fEDeD18ef57c0CA7eF': true, // v2 factory
-    '0x6b3d631B87FE27aF29efeC61d2ab8CE4d621cCBF': true, // v2 router 02
   },
 }
 
@@ -192,23 +191,23 @@ export function useDerivedSwapInfo(doArcher = false): {
   }
 
   if (!parsedAmount) {
-    inputError = inputError ?? i18n._(t`Enter Amount`)
+    inputError = inputError ?? i18n._(t`Enter an amount`)
   }
 
   if (!currencies[Field.INPUT] || !currencies[Field.OUTPUT]) {
-    inputError = inputError ?? i18n._(t`Select Token`)
+    inputError = inputError ?? i18n._(t`Select a token`)
   }
 
   const formattedTo = isAddress(to)
   if (!to || !formattedTo) {
-    inputError = inputError ?? i18n._(t`Enter Recipient`)
+    inputError = inputError ?? i18n._(t`Enter a recipient`)
   } else {
     if (
       BAD_RECIPIENT_ADDRESSES?.[chainId]?.[formattedTo] ||
       (bestTradeExactIn && involvesAddress(bestTradeExactIn, formattedTo)) ||
       (bestTradeExactOut && involvesAddress(bestTradeExactOut, formattedTo))
     ) {
-      inputError = inputError ?? i18n._(t`Invalid Recipient`)
+      inputError = inputError ?? i18n._(t`Invalid recipient`)
     }
   }
 
@@ -302,7 +301,7 @@ export function useDerivedSwapInfo(doArcher = false): {
     if (doArcher && v2Trade && swapCalls && !userTipManualOverride) {
       estimateGas()
     }
-  }, [doArcher, v2Trade, swapCalls, userTipManualOverride, library, setUserGasEstimate, account])
+  }, [doArcher, v2Trade, swapCalls, userTipManualOverride, library, setUserGasEstimate])
 
   return {
     currencies,
@@ -318,7 +317,7 @@ function parseCurrencyFromURLParameter(urlParam: any): string {
   if (typeof urlParam === 'string') {
     const valid = isAddress(urlParam)
     if (valid) return valid
-    if (urlParam.toUpperCase() === 'FTM') return 'FTM'
+    if (urlParam.toUpperCase() === 'ETH') return 'ETH'
   }
   return ''
 }
@@ -344,12 +343,17 @@ function validatedRecipient(recipient: any): string | null {
 export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId = ChainId.MAINNET): SwapState {
   let inputCurrency = parseCurrencyFromURLParameter(parsedQs.inputCurrency)
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
+  const eth = 
+    // chainId === ChainId.CELO ? WNATIVE_ADDRESS[chainId] : 
+    'ETH'
+  const soul = SOUL_ADDRESS[chainId]
   if (inputCurrency === '' && outputCurrency === '') {
-      // default to FTM input
-      inputCurrency = 'FTM'    
-  } else if (inputCurrency === outputCurrency) {
-    // clear output if identical
-    outputCurrency = ''
+    inputCurrency = eth
+    outputCurrency = soul
+  } else if (inputCurrency === '') {
+    inputCurrency = outputCurrency === eth ? soul : eth
+  } else if (outputCurrency === '' || inputCurrency === outputCurrency) {
+    outputCurrency = inputCurrency === eth ? soul : eth
   }
 
   const recipient = validatedRecipient(parsedQs.recipient)
@@ -377,6 +381,7 @@ export function useDefaultsFromURLSearch():
   const { chainId } = useActiveWeb3React()
   const dispatch = useAppDispatch()
   const parsedQs = useParsedQueryString()
+  const [expertMode] = useExpertModeManager()
   const [result, setResult] = useState<
     | {
         inputCurrencyId: string | undefined
@@ -395,7 +400,7 @@ export function useDefaultsFromURLSearch():
         field: parsed.independentField,
         inputCurrencyId: parsed[Field.INPUT].currencyId,
         outputCurrencyId: parsed[Field.OUTPUT].currencyId,
-        recipient: parsed.recipient,
+        recipient: expertMode ? parsed.recipient : null,
       })
     )
 
