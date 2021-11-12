@@ -144,6 +144,8 @@
     ]
   },
   "dependencies": {
+    "@clover-network/clover-connector": "^1.0.0",
+    "@keystonehq/keystone-connector": "^0.9.5",
     "@types/big.js": "6.1.1",
     "autoprefixer": "^10.0.2",
     "axios": "^0.21.1",
