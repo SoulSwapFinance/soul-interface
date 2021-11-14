@@ -468,5 +468,50 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
     },
+    '0xE3c700551c0D96202934969Ad219B8693a723d59': {  // SEANCE-SPIRIT
+      id: 30, // 200
+      token0: {
+        id: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
+        name: 'Seance Circle',
+        symbol: 'SEANCE',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x5cc61a78f164885776aa610fb0fe1257df78e59b', // SPIRIT
+        name: 'SpiritSwap Token',
+        symbol: 'SPIRIT',
+        decimals: 18,
+      },
+    },
+    '0x26a30b02A8DFb3f573E3F881D04258461Cae47Db': {  // SEANCE-BOO
+      id: 31, // 200
+      token0: {
+        id: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
+        name: 'Seance Circle',
+        symbol: 'SEANCE',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x841fad6eae12c286d1fd18d1d525dffa75c7effe', // BOO
+        name: 'SpookyToken',
+        symbol: 'BOO',
+        decimals: 18,
+      },
+    },
+    '0xa2cFc18F3A41E158DA173be0e4785F017Ff92a6e': {  // SEANCE-ZOO
+      id: 32, // 200
+      token0: {
+        id: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
+        name: 'Seance Circle',
+        symbol: 'SEANCE',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x09e145A1D53c0045F41aEEf25D8ff982ae74dD56', // ZOO
+        name: 'Zoo Coin',
+        symbol: 'ZOO',
+        decimals: 0,
+      },
+    },
   }
 }

@@ -19,6 +19,10 @@ export const tokens = {
     4002: "0x306557358e20aea124b16a548597897858d13cb2",
     250: "0xad84341756bf337f5a0164515b1f6f993d194e1f",
   },
+  BOO: {
+    4002: "",
+    250: "0x841FAD6EAe12c286d1Fd18d1d525DFfA75C7EFFE",
+  },
   BNB: {
     4002: "",
     250: "0xd67de0e0a0fd7b15dc8348bb9be742f3c5850454",
@@ -59,8 +63,16 @@ export const tokens = {
     4002: "",
     250: "0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb",
   },
+  SPIRIT: {
+    4002: "",
+    250: "0x5Cc61A78F164885776AA610fb0FE1257df78E59B",
+  },
   UNIDX: {
     4002: "",
     250: "0x2130d2a1e51112D349cCF78D2a1EE65843ba36e0",
+  },
+  ZOO: {
+    4002: "",
+    250: "0x09e145A1D53c0045F41aEEf25D8ff982ae74dD56",
   },
 };

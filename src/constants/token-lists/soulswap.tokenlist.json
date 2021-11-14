@@ -343,9 +343,17 @@
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png"
       },
       {
-        "name": "SpiritSwap Token",
+        "name": "SpiritSwap",
         "address": "0x5Cc61A78F164885776AA610fb0FE1257df78E59B",
         "symbol": "SPIRIT",
+        "decimals": 18,
+        "chainId": 250,
+        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x5Cc61A78F164885776AA610fb0FE1257df78E59B/logo.png"
+      },
+      {
+        "name": "SpookyToken",
+        "address": "0x841FAD6EAe12c286d1Fd18d1d525DFfA75C7EFFE",
+        "symbol": "BOO",
         "decimals": 18,
         "chainId": 250,
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x5Cc61A78F164885776AA610fb0FE1257df78E59B/logo.png"
@@ -389,6 +397,14 @@
         "decimals": 18,
         "chainId": 250,
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83/logo.png"
+      },
+      {
+        "name": "Zoo Coin",
+        "address": "0x09e145A1D53c0045F41aEEf25D8ff982ae74dD56",
+        "symbol": "ZOO",
+        "decimals": 0,
+        "chainId": 250,
+        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x09e145A1D53c0045F41aEEf25D8ff982ae74dD56/logo.png"
       }
    ]
 }
