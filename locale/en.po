@@ -448,6 +448,9 @@ msgstr "Explore our Protocol."
 msgid "FANTOM PAIRS"
 msgstr "FANTOM PAIRS"
 
+msgid "Fanties"
+msgstr "Fanties"
+
 msgid "Fantom Faucet"
 msgstr "Fantom Faucet"
 

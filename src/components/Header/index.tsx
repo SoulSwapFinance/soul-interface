@@ -11,7 +11,7 @@ import Link from 'next/link'
 import More from './More'
 import Exchange from './Exchange'
 import Earn from './Earn'
-import Tools from './Tools'
+import Explore from './Explore'
 // import Seance from './Seance'
 import NavLink from '../NavLink'
 import { Popover } from '@headlessui/react'
@@ -42,7 +42,7 @@ function AppBar(): JSX.Element {
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                 <NavLink href="/landing">
-                  <Image src="/logo.jpg" alt="Soul" width="40" height="40" />
+                  <Image src="/logo.jpg" alt="Soul" width="60" height="60" />
                 </NavLink>
                   <div className="hidden sm:block sm:ml-4">
                     {/* <div className="flex space-x-2"> */}
@@ -127,7 +127,7 @@ function AppBar(): JSX.Element {
                         </NavLink>
                       )} */}
                       {/* <Seance /> */}
-                      <Tools />
+                      <Explore />
                       {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href='/scarab/create' target="_blank">
                           <a

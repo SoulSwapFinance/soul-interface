@@ -442,6 +442,9 @@ msgstr ""
 msgid "FANTOM PAIRS"
 msgstr ""
 
+msgid "Fanties"
+msgstr ""
+
 msgid "Fantom Faucet"
 msgstr ""
 

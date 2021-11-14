@@ -4,7 +4,7 @@ import Container from '../../components/Container'
 import Head from 'next/head'
 import React from 'react'
 
-import MateList from '../../features/mate/MatesList'
+import MateList from '../../features/mate/MateList'
 
 const Mate = () => {
   return (

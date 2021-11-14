@@ -17,22 +17,22 @@ const items = (i18n: I18n) => [
     href: '/seance',
     seance: true,
     circles: false, 
-    links: false, 
+    fanties: false
   },
   {
     name: i18n._(t`Circles`),
     href: '/stake',
     seance: false,
     circles: true, 
-    links: false, 
+    fanties: false
   },
-  // {
-  // name: i18n._(t`Dashboard`),
-  // href: '/links',
-  // analytics: false,
-  // dashboard: true, 
-  // links: false, 
-  // },
+  {
+  name: i18n._(t`Fanties`),
+  href: '/fanties',
+  analytics: false,
+  dashboard: true, 
+  fanties: true, 
+  },
 ]
 
 export default function Menu() {
@@ -95,12 +95,12 @@ export default function Menu() {
                     </a>
                     </NavLink>
                     ) : (
-                        item.links ?
+                        item.fanties ?
                         (
                           <NavLink key={item.name} href={item.href}>
                           <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                             
-                            LINKS
+                            FANTIES
                           
                           </a>
                         </NavLink>
