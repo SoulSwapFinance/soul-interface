@@ -36,7 +36,7 @@ const items = (i18n: I18n) => [
   {
     name: i18n._(t`Analytics`),
     description: i18n._(t`View your Trades.`),
-    href: '/info',
+    href: '/charts',
   },
   {
     name: i18n._(t`Links`),

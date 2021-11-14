@@ -116,9 +116,9 @@ function AppBar(): JSX.Element {
                         </NavLink>
                       )} */}
                       {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href='/info' target="_blank">
+                        <NavLink href='/charts' target="_blank">
                           <a
-                            id={`info-nav-link`}
+                            id={`charts-nav-link`}
                             className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                           >
                             <Image src="https://media.giphy.com/media/dAEerRZK72Ah6Qo3IX/giphy.gif" alt="offering soul" width={30} height={30} />
@@ -541,9 +541,9 @@ function AppBar(): JSX.Element {
                 )} */}
 
                 {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                  <Link href={'/info'}>
+                  <Link href={'/charts'}>
                     <a
-                      id={`info-nav-link`}
+                      id={`charts-nav-link`}
                       className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                     >
                       {i18n._(t`Analytics`)}

@@ -21,7 +21,7 @@ const items = (i18n: I18n) => [
   },
   {
     name: i18n._(t`Analytics`),
-    href: '/info',
+    href: '/charts',
     explore: false,
     analytics: true, 
     links: false, 

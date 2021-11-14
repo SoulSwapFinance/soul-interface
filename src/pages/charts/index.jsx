@@ -2,7 +2,7 @@ const Charts = () => {
 	return (
       <iframe 
 			frameBorder={"none"}
-    		title={"INFO"}
+    		title={"CHARTS"}
     		src="https://info.soulswap.finance"
     		height={"100%" }
     		width={"100%"}
