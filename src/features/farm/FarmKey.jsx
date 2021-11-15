@@ -46,7 +46,7 @@ export default function FarmKey() {
                 {/* 2 token logo combined ? */}
                 <Wrap>
                   <Text padding="0" fontSize=".7rem" color="#bbb">
-                    STAKE
+                    PAIR
                   </Text>
                 </Wrap>
               </TokenPairBox>
