@@ -154,7 +154,7 @@ const CircleStakeRow = ({ pid, lpSymbol, lpToken, token1, token2, farm, startTim
 
     // tvl
     const tokenPrices = await fetchTokenRateBals()
-    const seancePrice = tokenPrices?.[1]
+    const seancePrice = tokenPrices?.[3]
     const rawTvl = (totalStaked * seancePrice) / 10 ** 18
     setTvl(
       Number(rawTvl)

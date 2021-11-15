@@ -22,37 +22,42 @@ function useSoulCircle() {
   //                  Farm Helper
   // ----------------------------------------------
 
-  /**
+ /**
    * [0] : ftmUsdcTotalFtm
    * [1] : ftmUsdcTotalUsdc
    * [2] : soulFtmTotalSoul
    * [3] : soulFtmTotalFusd
-   * [4] : ethFtmTotalFtm
-   * [5] : ethFtmTotalEth
+   * [4] : ftmSeanceTotalFtm
+   * [5] : ftmSeanceTotalSeance
    * [6] : ftmEnchantTotalFtm
    * [7] : ftmEnchantTotalEnchant
+   * [8] : ftmEthTotalFtm
+   * [9] : ftmEthTotalEth
    */
-  const fetchTokenRateBals = async () => {
+   const fetchTokenRateBals = async () => {
     try {
       const result = await helperContract?.fetchTokenRateBals()
 
       const ftmPrice = result?.[1] / (result?.[0] / 10 ** 12)
-      const soulPrice = result?.[3] / result?.[2]
-      const ethPrice = (result?.[4] / result?.[5]) * ftmPrice
-      const enchantPrice = result?.[6] / result?.[7]
+      const soulPrice = (result?.[2] / result?.[3]) * ftmPrice
+      const seancePrice = (result?.[4] / result?.[5]) * ftmPrice
+      const enchantPrice = (result?.[6] / result?.[7]) * ftmPrice
+      const ethPrice = (result?.[8] / result?.[9]) * ftmPrice
 
       console.log(
         'usdcPerFtm:',
         ftmPrice,
-        'fusdPerSoul:',
+        'soulPrice:',
         soulPrice,
-        'ethPrice:',
-        ethPrice,
+        'seancePrice:',
+        seancePrice,
         'enchantPrice:',
-        enchantPrice
+        enchantPrice,
+        'ethPrice:',
+        ethPrice
       )
 
-      return [ftmPrice, soulPrice, ethPrice, enchantPrice]
+      return [ftmPrice, soulPrice, seancePrice, enchantPrice, ethPrice]
     } catch (e) {
       console.log(e)
       return e
