@@ -4,7 +4,13 @@ import { ethers, BigNumber } from 'ethers'
 
 import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
 
-import { useHelperContract, useSoulSummonerContract, useCircleStakingContract, usePairContract, useTokenContract } from './useContract'
+import {
+  useHelperContract,
+  useSoulSummonerContract,
+  useCircleStakingContract,
+  usePairContract,
+  useTokenContract,
+} from './useContract'
 
 import { SoulSummonerAddress, SUMMONER_HELPER_ADDRESS as SummonerHelperAddress } from '../constants'
 
@@ -17,7 +23,7 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
 
   const helperContract = useHelperContract()
   const summonerContract = useSoulSummonerContract()
-  const circlesContract = useCircleStakingContract();
+  const circlesContract = useCircleStakingContract()
   const lpTokenContract = usePairContract(lpToken)
   const token1Contract = useTokenContract(token1Address[chainId])
   const token2Contract = useTokenContract(token2Address[chainId])
@@ -70,30 +76,37 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
    * [1] : ftmUsdcTotalUsdc
    * [2] : soulFtmTotalSoul
    * [3] : soulFtmTotalFusd
-   * [4] : ethFtmTotalFtm
-   * [5] : ethFtmTotalEth
+   * [4] : ftmSeanceTotalFtm
+   * [5] : ftmSeanceTotalSeance
    * [6] : ftmEnchantTotalFtm
    * [7] : ftmEnchantTotalEnchant
+   * [8] : ftmEthTotalFtm
+   * [9] : ftmEthTotalEth
    */
   const fetchTokenRateBals = async () => {
     try {
       const result = await helperContract?.fetchTokenRateBals()
 
       const ftmPrice = result?.[1] / (result?.[0] / 10 ** 12)
-      const soulPrice = result?.[3] / result?.[2]
-      const ethPrice = (result?.[4] / result?.[5]) * ftmPrice
-      const enchantPrice = (result?.[6] / result?.[7])
-      const seancePrice = result?.[3] / result?.[2] // TODO: FIX
+      const soulPrice = (result?.[2] / result?.[3]) * ftmPrice
+      const seancePrice = (result?.[4] / result?.[5]) * ftmPrice
+      const enchantPrice = (result?.[6] / result?.[7]) * ftmPrice
+      const ethPrice = (result?.[8] / result?.[9]) * ftmPrice
 
       console.log(
-        'usdcPerFtm:', ftmPrice, 
-        'fusdPerSoul:', soulPrice, 
-        'ethPrice:', ethPrice, 
-        'enchantPrice:', enchantPrice,
-        'seancePrice:', seancePrice
+        'usdcPerFtm:',
+        ftmPrice,
+        'soulPrice:',
+        soulPrice,
+        'seancePrice:',
+        seancePrice,
+        'enchantPrice:',
+        enchantPrice,
+        'ethPrice:',
+        ethPrice
       )
 
-      return [ftmPrice, soulPrice, ethPrice, enchantPrice, seancePrice]
+      return [ftmPrice, soulPrice, seancePrice, enchantPrice, ethPrice]
     } catch (e) {
       console.log(e)
       return e
@@ -113,13 +126,13 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
       const rates = await fetchTokenRateBals()
       const ftmPrice = rates?.[0]
       const soulPrice = rates?.[1]
-      const ethPrice = rates?.[2]
+      const seancePrice = rates?.[2]
       const enchantPrice = rates?.[3]
-      const seancePrice = rates?.[1] // TODO: fix
+      const ethPrice = rates?.[4]
 
       const result = await helperContract?.fetchPidDetails(pid)
 
-      console.log(token1Name, '/', token2Name, '- result', result)
+      // console.log(token1Name, '/', token2Name, '- result', result)
 
       // ------ TVL ------
 
@@ -128,19 +141,28 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
 
       let pidTvl = rawPidValue
 
-      if (token1Name === 'USDC' || token2Name === 'USDC') {
-        pidTvl = (summonerPidPercOfSupply * result?.[5]) / 10 ** 6
-      } else if (token1Name === 'FUSD' || token2Name === 'FUSD') {
+      if (
+        token1Name === 'USDC' ||
+        token2Name === 'USDC' ||
+        token1Name === 'fUSDT' ||
+        token2Name === 'fUSDT' ||
+        token1Name === 'gFUSDT' ||
+        token2Name === 'gFUSDT'
+      ) {
+        if (token1Name !== 'DAI') {
+          pidTvl = (summonerPidPercOfSupply * result?.[5]) / 10 ** 6
+        } else {}
+      } else if (token1Name === 'FUSD' || token2Name === 'FUSD' || token1Name === 'DAI' || token2Name === 'DAI') {
       } else if (token1Name === 'FTM' || token2Name === 'FTM') {
         pidTvl = rawPidValue * ftmPrice
       } else if (token1Name === 'SOUL' || token2Name === 'SOUL') {
         pidTvl = rawPidValue * soulPrice
       } else if (token1Name === 'SEANCE' || token2Name === 'SEANCE') {
         pidTvl = rawPidValue * seancePrice
-      } else if (token1Name === 'WETH' || token2Name === 'WETH') {
-        pidTvl = rawPidValue * ethPrice
       } else if (token1Name === 'ENCHANT' || token2Name === 'ENCHANT') {
         pidTvl = rawPidValue * enchantPrice
+      } else if (token1Name === 'WETH' || token2Name === 'WETH') {
+        pidTvl = rawPidValue * ethPrice
       }
 
       // ------ APR ------
@@ -153,13 +175,13 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
       const fixedPidTvl = Number(pidTvl).toFixed(0)
       const fixedApr = Number(apr).toFixed(0)
 
-      console.log(token1Name, '/', token2Name, '- summonerPidPercOfSupply', summonerPidPercOfSupply)
-      console.log(token1Name, '/', token2Name, '- tokenBal', Number(result?.[5]) / 10 ** 18)
-      console.log(token1Name, '/', token2Name, '- rawPidValue', rawPidValue)
+      // console.log(token1Name, '/', token2Name, '- summonerPidPercOfSupply', summonerPidPercOfSupply)
+      // console.log(token1Name, '/', token2Name, '- tokenBal', Number(result?.[5]) / 10 ** 18)
+      // console.log(token1Name, '/', token2Name, '- rawPidValue', rawPidValue)
 
-      console.log(token1Name, '/', token2Name, '- pidTvl', pidTvl)
-      console.log(token1Name, '/', token2Name, '- fixedPidTvl', fixedPidTvl)
-      console.log(token1Name, '/', token2Name, '- fixedApr', fixedApr)
+      // console.log(token1Name, '/', token2Name, '- pidTvl', pidTvl)
+      // console.log(token1Name, '/', token2Name, '- fixedPidTvl', fixedPidTvl)
+      // console.log(token1Name, '/', token2Name, '- fixedApr', fixedApr)
 
       return [fixedPidTvl, fixedApr]
     } catch (e) {
@@ -666,8 +688,6 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
     }
   }
 
-
-
   // Circle Staking
 
   /**
@@ -682,60 +702,57 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
    * [8] : user limit end time
    * [9] : dao address
    */
-   const circlePoolInfo = async (pid) => {
+  const circlePoolInfo = async (pid) => {
     try {
-      const result = await circlesContract?.poolInfo(pid);
-      return result;
+      const result = await circlesContract?.poolInfo(pid)
+      return result
     } catch (e) {
-      console.error(e);
-      return e;
+      console.error(e)
+      return e
     }
-  };
+  }
 
   // [0] : amount
   // [1] : rewardDebt
   const circleUserInfo = async (pid) => {
     try {
-      const result = await circlesContract?.userInfo(pid, account);
-      return result;
+      const result = await circlesContract?.userInfo(pid, account)
+      return result
     } catch (e) {
-      console.error(e);
-      return e;
+      console.error(e)
+      return e
     }
-  };
-
+  }
 
   const circlePendingRewards = async (pid) => {
     try {
-      const result = await circlesContract?.pendingReward(pid, account);
-      return result;
+      const result = await circlesContract?.pendingReward(pid, account)
+      return result
     } catch (e) {
-      console.error(e);
-      return e;
+      console.error(e)
+      return e
     }
-  };
-
+  }
 
   const circleDeposit = async (pid, amount) => {
     try {
-      const result = await circlesContract?.deposit(pid, amount);
-      return result;
+      const result = await circlesContract?.deposit(pid, amount)
+      return result
     } catch (e) {
-      console.error(e);
-      return e;
+      console.error(e)
+      return e
     }
-  };
+  }
 
   const circleWithdraw = async (pid, amount) => {
     try {
-      let result = await circlesContract?.withdraw(pid, amount);
-      return result;
+      let result = await circlesContract?.withdraw(pid, amount)
+      return result
     } catch (e) {
-      console.error(e);
-      return e;
+      console.error(e)
+      return e
     }
-  };
-
+  }
 
   return {
     // helper contract
@@ -776,7 +793,7 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
     circleUserInfo,
     circleDeposit,
     circleWithdraw,
-    circlePendingRewards
+    circlePendingRewards,
   }
 }
 

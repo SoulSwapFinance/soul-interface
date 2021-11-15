@@ -19,17 +19,17 @@ const items = (i18n: I18n) => [
     stake: false, 
     enchant: false, 
     circles: false, 
-    mates: false, 
+    // mates: false, 
   },
-  {
-    name: i18n._(t`Mates`),
-    href: '/mate',
-    farm: false,
-    stake: false, 
-    enchant: false, 
-    circles: false, 
-    mates: true, 
-  },
+  // {
+  //   name: i18n._(t`Mates`),
+  //   href: '/mate',
+  //   farm: false,
+  //   stake: false, 
+  //   enchant: false, 
+  //   circles: false, 
+  //   mates: true, 
+  // },
   {
     name: i18n._(t`Seance`),
     href: '/seance',
@@ -37,7 +37,7 @@ const items = (i18n: I18n) => [
     stake: true, 
     enchant: false, 
     circles: false,
-    mates: false,
+    // mates: false,
   },
   {
     name: i18n._(t`Circles`),
@@ -46,7 +46,7 @@ const items = (i18n: I18n) => [
     stake: false, 
     enchant: false, 
     circles: true, 
-    mates: false, 
+    // mates: false, 
   },
   {
     name: i18n._(t`Enchant`),
@@ -55,7 +55,7 @@ const items = (i18n: I18n) => [
     stake: false, 
     enchant: true, 
     circles: false, 
-    mates: false,
+    // mates: false,
   },
 ]
 
@@ -107,16 +107,17 @@ export default function Menu() {
                     </NavLink>
 
                     ) : 
-                      item.mates ?
-                      (
-                        <NavLink key={item.name} href={item.href}>
-                        <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                          {/* <p className="text-base font-medium text-high-emphesis">{item.name}</p> */}
+                      // item.mates ?
+                      // (
+                      //   <NavLink key={item.name} href={item.href}>
+                      //   <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                      //     {/* <p className="text-base font-medium text-high-emphesis">{item.name}</p> */}
                           
-                        MATES
-                        </a>
-                      </NavLink>
-                        ) : (
+                      //   MATES
+                      //   </a>
+                      // </NavLink>
+                      //   ) : 
+                        (
                           item.stake ?
                           (
                             <NavLink key={item.name} href={item.href}>

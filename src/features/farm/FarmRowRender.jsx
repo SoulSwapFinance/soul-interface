@@ -57,9 +57,9 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   const {
     // helper contract
     totalPendingRewards,
-    fetchYearlyRewards,
     fetchStakedBals,
     fetchTokenRateBals,
+    fetchYearlyRewards,
     fetchFarmStats,
 
     fetchUserLpTokenAllocInFarm,
