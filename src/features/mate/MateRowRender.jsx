@@ -88,14 +88,14 @@ const MateRowRender = ({ pid, lpSymbol, lpToken, token1, token2, mate }) => {
   const [poolRate, setPoolRate] = useState()
 
   const [yearlySoulRewards, setYearlySoulRewards] = useState()
-  const [apr, setApr] = useState()
-  const [liquidity, setLiquidity] = useState()
+  // const [apr, setApr] = useState()
+  // const [liquidity, setLiquidity] = useState()
 
   /**
    * Runs only on initial render/mount
    */
   useEffect(() => {
-    getAprAndLiquidity()
+    // getAprAndLiquidity()
     getYearlyPoolRewards()
     fetchPending()
     fetchUserMateAlloc()
@@ -191,30 +191,30 @@ const MateRowRender = ({ pid, lpSymbol, lpToken, token1, token2, mate }) => {
    * mate <Object> : the mate object
    * lpToken : the mate lpToken address
    */
-  const getAprAndLiquidity = async () => {
-    try {
-      const result = await fetchMateStats(pid, mate.token1, mate.token2)
-      const tvl = result[0]
-      const apr = result[1]
+  // const getAprAndLiquidity = async () => {
+  //   try {
+  //     const result = await fetchMateStats(pid, mate.token1, mate.token2)
+  //     const tvl = result[0]
+  //     const apr = result[1]
 
-      setLiquidity(
-        Number(tvl)
-          .toFixed(0)
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-      )
+  //     setLiquidity(
+  //       Number(tvl)
+  //         .toFixed(0)
+  //         .toString()
+  //         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  //     )
 
-      // console.log("apr", mateApr);
-      setApr(
-        Number(apr)
-          .toFixed(0)
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-      )
-    } catch (e) {
-      console.warn(e)
-    }
-  }
+  //     // console.log("apr", mateApr);
+  //     setApr(
+  //       Number(apr)
+  //         .toFixed(0)
+  //         .toString()
+  //         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  //     )
+  //   } catch (e) {
+  //     console.warn(e)
+  //   }
+  // }
 
   /**
    * Gets the lpToken balance of the user for each pool
@@ -381,9 +381,9 @@ const MateRowRender = ({ pid, lpSymbol, lpToken, token1, token2, mate }) => {
                 </Wrap>
               </TokenPairBox>
 
-              <MateItemBox>
+              {/* <MateItemBox>
                 <MateItem>{apr ? (apr === 'Infinity' ? '∞%' : apr + '%') : '?'}</MateItem>
-              </MateItemBox>
+              </MateItemBox> */}
 
               <MateItemBox desktopOnly={true}>
                 {pending === '0.00' ? (
@@ -421,7 +421,7 @@ const MateRowRender = ({ pid, lpSymbol, lpToken, token1, token2, mate }) => {
                 )}
               </HideOnMobile>
 
-              <HideOnMobile>
+              {/* <HideOnMobile>
                 {liquidity === '0' ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
                     $0
@@ -431,7 +431,7 @@ const MateRowRender = ({ pid, lpSymbol, lpToken, token1, token2, mate }) => {
                     ${liquidity}
                   </Text>
                 )}
-              </HideOnMobile>
+              </HideOnMobile> */}
 
               {/* <MateItemBox>
                 <ShowBtn onClick={() => handleShow()}>{showing ? `HIDE` : `SHOW`}</ShowBtn>

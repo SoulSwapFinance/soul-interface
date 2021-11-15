@@ -51,11 +51,11 @@ export default function MateKey() {
                 </Wrap>
               </TokenPairBox>
 
-              <MateItemBox>
+              {/* <MateItemBox>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
                   APR
                 </Text>
-              </MateItemBox>
+              </MateItemBox> */}
 
               <MateItemBox desktopOnly={true}>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
@@ -75,11 +75,11 @@ export default function MateKey() {
                 </Text>
               </HideOnMobile>
 
-              <HideOnMobile>
+              {/* <HideOnMobile>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
                   TVL
                 </Text>
-              </HideOnMobile>
+              </HideOnMobile> */}
             </MateContentWrapper>
           </Row>
         </MateContainer>
