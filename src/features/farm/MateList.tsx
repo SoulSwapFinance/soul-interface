@@ -6,15 +6,15 @@ import useSoulSummoner from './hooks/useSoulSummoner'
 
 import FarmKey from './FarmKey'
 import FarmRowRender from './FarmRowRender'
-import { WithdrawPids, FarmPids } from './FarmPids'
+import { MatePids } from './Pids'
 // import { Wrap, Heading, Text, Button } from './ReusableStyles' // Heading, Text
 
-const FarmList = () => {
+const MateList = () => {
   const { chainId, account } = useActiveWeb3React()
 
   const [totalPending, setTotalReward] = useState(0)
 
-  const { totalPendingRewards, harvestAllFarms } = useSoulSummoner(
+  const { totalPendingRewards } = useSoulSummoner(
     0,
     '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57',
     '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57',
@@ -29,21 +29,21 @@ const FarmList = () => {
     try {
       const result = await totalPendingRewards()
       const format = Number(result / 10 ** 18).toFixed(2)
-      setTotalReward(format)
+      setTotalReward(result)
     } catch (e) {
       console.log(e)
       return e
     }
   }
 
-  const handleHarvest = async () => {
-    try {
-      await harvestAllFarms()
-    } catch (e) {
-      console.log(e)
-      return e
-    }
-  }
+  // const handleHarvest = async () => {
+  //   try {
+  //     await harvestAllFarms()
+  //   } catch (e) {
+  //     console.log(e)
+  //     return e
+  //   }
+  // }
 
   // const withdrawList = WithdrawPids.map((farm) => (
   //   <FarmRowRender
@@ -57,7 +57,7 @@ const FarmList = () => {
   //   />
   // ))
 
-  const farmList = FarmPids.map((farm) => (
+  const farmList = MatePids.map((farm) => (
     <FarmRowRender
       key={farm.pid}
       pid={farm.pid}
@@ -80,4 +80,4 @@ const FarmList = () => {
   )
 }
 
-export default FarmList
+export default MateList

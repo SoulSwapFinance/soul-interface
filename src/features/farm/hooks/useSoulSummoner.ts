@@ -14,7 +14,7 @@ import {
 
 import { SoulSummonerAddress, SUMMONER_HELPER_ADDRESS as SummonerHelperAddress } from '../constants'
 
-import FarmPids from '../FarmPids'
+import { AllPids } from '../Pids'
 
 // const helperContract = useHelperContract()
 
@@ -27,8 +27,8 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
   const lpTokenContract = usePairContract(lpToken)
   const token1Contract = useTokenContract(token1Address[chainId])
   const token2Contract = useTokenContract(token2Address[chainId])
-  const soulContract = useTokenContract(FarmPids[0].token1Address[chainId])
-  const fusdContract = useTokenContract(FarmPids[0].token2Address[chainId])
+  const soulContract = useTokenContract(AllPids[0].token1Address[chainId])
+  const fusdContract = useTokenContract(AllPids[0].token2Address[chainId])
 
   // ----------------------------------------------
   //                  Farm Helper
@@ -515,8 +515,8 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
    */
   const fusdPerSoul = async () => {
     try {
-      const totalSoul = await soulContract.balanceOf(FarmPids[0].lpAddresses[chainId])
-      const totalFusd = await fusdContract.balanceOf(FarmPids[3].lpAddresses[chainId])
+      const totalSoul = await soulContract.balanceOf(AllPids[0].lpAddresses[chainId])
+      const totalFusd = await fusdContract.balanceOf(AllPids[3].lpAddresses[chainId])
 
       const fusdPerSoul = totalFusd / totalSoul
 
