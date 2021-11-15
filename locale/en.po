@@ -339,6 +339,9 @@ msgstr "Deposit SOUL into CoffinBox"
 msgid "Deposit tokens into CoffinBox for all the yields"
 msgstr "Deposit tokens into CoffinBox for all the yields"
 
+msgid "Deposit your SOUL-LP to earn $SOUL rewards."
+msgstr "Deposit your SOUL-LP to earn $SOUL rewards."
+
 msgid "Deposit {0} into CoffinBox"
 msgstr "Deposit {0} into CoffinBox"
 
@@ -371,9 +374,6 @@ msgstr "Earn"
 
 msgid "Earn Fees with Enchantments."
 msgstr "Earn Fees with Enchantments."
-
-msgid "Earn SOUL rewards by depositing your SoulSwap LP."
-msgstr "Earn SOUL rewards by depositing your SoulSwap LP."
 
 msgid "Either return to the {link}, or change to an available network."
 msgstr "Either return to the {link}, or change to an available network."
@@ -447,6 +447,9 @@ msgstr "Explore our Protocol."
 
 msgid "FANTOM PAIRS"
 msgstr "FANTOM PAIRS"
+
+msgid "Fanties"
+msgstr "Fanties"
 
 msgid "Fantom Faucet"
 msgstr "Fantom Faucet"

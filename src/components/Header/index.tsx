@@ -11,7 +11,7 @@ import Link from 'next/link'
 import More from './More'
 import Exchange from './Exchange'
 import Earn from './Earn'
-import Tools from './Tools'
+import Explore from './Explore'
 // import Seance from './Seance'
 import NavLink from '../NavLink'
 import { Popover } from '@headlessui/react'
@@ -42,7 +42,7 @@ function AppBar(): JSX.Element {
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                 <NavLink href="/landing">
-                  <Image src="/logo.jpg" alt="Soul" width="40" height="40" />
+                  <Image src="/logo.jpg" alt="Soul" width="60" height="60" />
                 </NavLink>
                   <div className="hidden sm:block sm:ml-4">
                     {/* <div className="flex space-x-2"> */}
@@ -116,9 +116,9 @@ function AppBar(): JSX.Element {
                         </NavLink>
                       )} */}
                       {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href='/info' target="_blank">
+                        <NavLink href='/charts' target="_blank">
                           <a
-                            id={`info-nav-link`}
+                            id={`charts-nav-link`}
                             className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                           >
                             <Image src="https://media.giphy.com/media/dAEerRZK72Ah6Qo3IX/giphy.gif" alt="offering soul" width={30} height={30} />
@@ -127,7 +127,7 @@ function AppBar(): JSX.Element {
                         </NavLink>
                       )} */}
                       {/* <Seance /> */}
-                      <Tools />
+                      <Explore />
                       {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href='/scarab/create' target="_blank">
                           <a
@@ -541,9 +541,9 @@ function AppBar(): JSX.Element {
                 )} */}
 
                 {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                  <Link href={'/info'}>
+                  <Link href={'/charts'}>
                     <a
-                      id={`info-nav-link`}
+                      id={`charts-nav-link`}
                       className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                     >
                       {i18n._(t`Analytics`)}

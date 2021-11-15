@@ -18,7 +18,8 @@ const items = (i18n: I18n) => [
     farm: true,
     stake: false, 
     enchant: false, 
-    more: false, 
+    circles: false, 
+    fanties: false, 
   },
   {
     name: i18n._(t`Seance`),
@@ -26,7 +27,8 @@ const items = (i18n: I18n) => [
     farm: false,
     stake: true, 
     enchant: false, 
-    more: false, 
+    circles: false,
+    fanties: false,
   },
   {
     name: i18n._(t`Enchant`),
@@ -34,15 +36,26 @@ const items = (i18n: I18n) => [
     farm: false,
     stake: false, 
     enchant: true, 
-    more: true, 
+    circles: true, 
+    fanties: false,
   },
   {
-    name: i18n._(t`More`),
+    name: i18n._(t`Circles`),
     href: '/circles',
     farm: false,
     stake: false, 
     enchant: false, 
-    more: true, 
+    circles: true, 
+    fanties: false, 
+  },
+  {
+    name: i18n._(t`Fanties`),
+    href: '/mate',
+    farm: false,
+    stake: false, 
+    enchant: false, 
+    circles: false, 
+    fanties: true, 
   },
 ]
 
@@ -64,7 +77,7 @@ export default function Menu() {
             
             <Image src="https://media.giphy.com/media/Y4DUjvMhT9nHdNoMIj/giphy.gif" alt="earn soul" width={50} height={50} />
              <br/>
-             SUMMON
+             EARN
           </Popover.Button>
 
           <Transition
@@ -112,16 +125,26 @@ export default function Menu() {
                           </a>
                         </NavLink>
                       ) : (
-                        item.more ?
+                        item.circles ?
                         (
                           <NavLink key={item.name} href={item.href}>
                           <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                             CIRCLES
                           </a>
                         </NavLink>
-                        ) : ''
+                        ) : (
+                          item.fanties ?
+                          (
+                            <NavLink key={item.name} href={item.href}>
+                            <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                              
+                              FANTIES
+                            
+                            </a>
+                          </NavLink>
+                          ) : ''                      )
+                        )
                       )
-                    )
                   )}
                 </div>
               </div>

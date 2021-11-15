@@ -21,7 +21,7 @@ const items = (i18n: I18n) => [
   },
   {
     name: i18n._(t`Analytics`),
-    href: '/info',
+    href: '/charts',
     explore: false,
     analytics: true, 
     links: false, 
@@ -54,7 +54,7 @@ export default function Menu() {
             
             <Image src="https://media.giphy.com/media/Y3wYCIhIcnzwB2qXg7/giphy.gif" alt="earn soul" width={50} height={50} />
             <br/>
-             DISCOVER
+             EXPLORE
           </Popover.Button>
 
           <Transition
