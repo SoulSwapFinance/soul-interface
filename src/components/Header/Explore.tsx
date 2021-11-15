@@ -41,8 +41,9 @@ export default function Menu() {
 
   return (
     
-    <Popover as="nav" className="w-full relative ml-6 md:m-0">
-
+    // <Popover as="nav" className="w-full relative ml-6 md:m-0">
+    <Popover as="nav" 
+    className="w-full relative ml-6 md:m-0">
       {({ open }) => (
         <>
           <Popover.Button
@@ -52,8 +53,12 @@ export default function Menu() {
               )}
           >
             
-            <Image src="https://media.giphy.com/media/Y3wYCIhIcnzwB2qXg7/giphy.gif" alt="earn soul" width={50} height={50} />
-            <br/>
+            {/* <Image 
+              src="https://media.giphy.com/media/Y3wYCIhIcnzwB2qXg7/giphy.gif" 
+              alt="earn soul" 
+              width={50} height={50} 
+            /> */}
+            {/* <br/> */}
              EXPLORE
           </Popover.Button>
 
@@ -72,7 +77,7 @@ export default function Menu() {
               className="bottom-12 lg:top-12 left-full sm:px-0"
             >
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                <div className="absolute grid gap-6 px-5 py-6 bg-dark-900 sm:gap-8 sm:p-8">
+              <div className="absolute grid gap-6 px-5 py-6 bg-dark-900 sm:gap-6 sm:p-6">
 
                   {solutions.map((item) =>
                     item.explore ? (
