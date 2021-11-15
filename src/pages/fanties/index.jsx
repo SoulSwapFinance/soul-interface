@@ -4,19 +4,19 @@ import Container from '../../components/Container'
 import Head from 'next/head'
 import React from 'react'
 
-import FarmList from '../../features/farm/FarmList'
+import FantiesList from '../../features/farm/FantiesList'
 
-const Farm = () => {
+const Fanties = () => {
   return (
     <Wrap padding='2rem 0 0 0' justifyContent="center">
       <DoubleGlowShadowV2 opacity="0.6">
 
       <Container id="farm-page">
         <Head>
-          <title>Farm | Soul</title>
+          <title>Farm | Fanties</title>
           <meta key="description" name="description" content="Farm SOUL" />
         </Head>
-        <FarmList />
+        <FantiesList />
       </Container>
       </DoubleGlowShadowV2>
 
@@ -24,4 +24,4 @@ const Farm = () => {
   )
 }
 
-export default Farm
+export default Fanties

@@ -11,6 +11,7 @@ import Link from 'next/link'
 import More from './More'
 import Exchange from './Exchange'
 import Earn from './Earn'
+import Farms from './Farms'
 import Explore from './Explore'
 // import Seance from './Seance'
 import NavLink from '../NavLink'
@@ -48,6 +49,7 @@ function AppBar(): JSX.Element {
                     <div className="flex space-x-2">
                     <div className="flex space-x-4">
                       <Exchange />
+                      <Farms />
                       <Earn />
                       <Explore />
                       {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (

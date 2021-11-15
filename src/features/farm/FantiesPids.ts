@@ -1,4 +1,4 @@
-import { tokens } from '../farm/constants/tokens'
+import { tokens } from './constants/tokens'
 
 // Base tokens (token1):
 // - FTM
@@ -21,7 +21,7 @@ import { tokens } from '../farm/constants/tokens'
 //   },
 // ]
 
-export const MatePids = [
+export const FantiesPids = [
   
   // SEANCE POOLS
   {
@@ -80,4 +80,4 @@ export const MatePids = [
   // },
 ]
 
-export default MatePids
+export default FantiesPids
