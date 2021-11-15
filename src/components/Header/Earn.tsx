@@ -63,7 +63,8 @@ export default function Menu() {
   const solutions = items(i18n)
 
   return (
-    <Popover as="nav" className="w-full relative ml-6 md:m-0">
+    <Popover as="nav" 
+    className="w-full relative ml-6 md:m-0">
       {({ open }) => (
         <>
           <Popover.Button
@@ -72,13 +73,13 @@ export default function Menu() {
               'focus:outline-none hover:text-high-emphesis'
             )}
           >
-            <Image
+            {/* <Image
               src="https://media.giphy.com/media/Y4DUjvMhT9nHdNoMIj/giphy.gif"
               alt="earn soul"
               width={50}
               height={50}
-            />
-            <br />
+            /> */}
+            {/* <br /> */}
             EARN
           </Popover.Button>
 
@@ -94,7 +95,7 @@ export default function Menu() {
           >
             <Popover.Panel flex-direction="column" className="bottom-12 lg:top-12 left-full sm:px-0">
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                <div className="absolute grid gap-6 px-5 py-6 bg-dark-900 sm:gap-8 sm:p-8">
+                <div className="absolute grid gap-6 px-5 py-6 bg-dark-900 sm:gap-6 sm:p-6">
                   {solutions.map((item) =>
                     item.farm ? (
                       <NavLink key={item.name} href={item.href}>

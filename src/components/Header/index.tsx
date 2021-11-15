@@ -38,18 +38,18 @@ function AppBar(): JSX.Element {
       <Popover as="nav" className="z-10 w-full bg-transparent header-border-b">
         {({ open }) => (
           <>
-            <div className="px-4 py-4">
+            <div className="px-4 py-1">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                 <NavLink href="/landing">
-                  <Image src="/logo.jpg" alt="Soul" width="60" height="60" />
+                  <Image src="/logo.png" alt="Soul" width="40" height="40" />
                 </NavLink>
-                  <div className="hidden sm:block sm:ml-4">
-                    {/* <div className="flex space-x-2"> */}
+                  {/* <div className="hidden sm:block lg:ml-4"> */}
+                    <div className="flex space-x-2">
                     <div className="flex space-x-4">
-                      {/* <Buy /> */}
-                      {/* <Farm /> */}
                       <Exchange />
+                      <Earn />
+                      <Explore />
                       {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href="/exchange/swap">
                          <a
@@ -71,8 +71,6 @@ function AppBar(): JSX.Element {
                         </a>
                       </NavLink>
                       )} */}
-                      <Earn />
-
                       {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/farm'}>
                           <a
@@ -127,7 +125,6 @@ function AppBar(): JSX.Element {
                         </NavLink>
                       )} */}
                       {/* <Seance /> */}
-                      <Explore />
                       {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href='/scarab/create' target="_blank">
                           <a
@@ -273,8 +270,8 @@ function AppBar(): JSX.Element {
                               <Image
                                 src="/images/tokens/enchant.png"
                                 alt="ENCHANT"
-                                width="50px"
-                                height="50px"
+                                width="40px"
+                                height="40px"
                                 objectFit="contain"
                                 className="rounded-md"
                               />
@@ -320,8 +317,8 @@ function AppBar(): JSX.Element {
                               <Image
                                 src="/images/tokens/seance.png"
                                 alt="SEANCE"
-                                width="50px"
-                                height="50px"
+                                width="40px"
+                                height="40px"
                                 objectFit="contain"
                                 className="rounded-md"
                               />
@@ -365,8 +362,8 @@ function AppBar(): JSX.Element {
                             <Image
                                 src="/images/tokens/soul.png"
                                 alt="SOUL"
-                                width="50px"
-                                height="50px"
+                                width="40px"
+                                height="40px"
                                 objectFit="contain"
                                 className="rounded-md"
                             />

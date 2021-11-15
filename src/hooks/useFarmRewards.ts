@@ -25,7 +25,7 @@ import { aprToApy } from '../functions/convert'
 export default function useFarmRewards() {
   const { chainId } = useActiveWeb3React()
 
-//   const positions = usePositions(chainId)
+  // const positions = usePositions(chainId)
   const positions = usePositions()
 
   const block1w = useBlock({ daysAgo: 7, chainId })
@@ -43,8 +43,6 @@ export default function useFarmRewards() {
   const kashiPairs = useKashiPairs({ subset: farmAddresses, shouldFetch: !!farmAddresses, chainId })
 
   const averageBlockTime = useAverageBlockTime()
-//   const masterChefV1TotalAllocPoint = useMasterChefV1TotalAllocPoint()
-//   const masterChefV1SushiPerBlock = useMasterChefV1SushiPerBlock()
 
   const [soulPrice, ethPrice] = [
     useSoulPrice(),
@@ -74,7 +72,6 @@ export default function useFarmRewards() {
       const soulPerBlock =
         pool?.owner?.soulPerBlock / 1e18 ||
         (pool?.owner?.soulPerSecond / 1e18) * averageBlockTime
-    //    || masterChefV1SushiPerBlock
 
       const rewardPerBlock = (pool.allocPoint / pool.owner.totalAllocPoint) * soulPerBlock
 
@@ -88,38 +85,7 @@ export default function useFarmRewards() {
 
       let rewards = [defaultReward]
 
-    //   if (pool.chef === Chef.MASTERCHEF_V2) {
-    //     // override for mcv2...
-    //     pool.owner.totalAllocPoint = masterChefV1TotalAllocPoint
-
-    //     const icon = ['0', '3', '4', '8'].includes(pool.id)
-    //       ? `https://raw.githubusercontent.com/sushiswap/icons/master/token/${pool.rewardToken.symbol.toLowerCase()}.jpg`
-    //       : `https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/${getAddress(
-    //           pool.rewarder.rewardToken
-    //         )}/logo.png`
-
-    //     const decimals = 10 ** pool.rewardToken.decimals
-
-    //     const rewardPerBlock =
-    //       pool.rewardToken.symbol === 'ALCX'
-    //         ? pool.rewarder.rewardPerSecond / decimals
-    //         : (pool.rewarder.rewardPerSecond / decimals) * averageBlockTime
-
-    //     const rewardPerDay =
-    //       pool.rewardToken.symbol === 'ALCX'
-    //         ? (pool.rewarder.rewardPerSecond / decimals) * blocksPerDay
-    //         : (pool.rewarder.rewardPerSecond / decimals) * averageBlockTime * blocksPerDay
-
-    //     const reward = {
-    //       token: pool.rewardToken.symbol,
-    //       icon: icon,
-    //       rewardPerBlock: rewardPerBlock,
-    //       rewardPerDay: rewardPerDay,
-    //       rewardPrice: pool.rewardToken.derivedETH * ethPrice,
-    //     }
-
-    //     rewards[1] = reward
-    //   }
+    //   if (pool.cheS
       return rewards
     }
 

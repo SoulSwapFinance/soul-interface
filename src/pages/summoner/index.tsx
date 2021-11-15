@@ -155,14 +155,14 @@ const Summoner = () => {
       farm.pair.token0?.symbol == 'DAI' && (farm.pair.token1?.symbol == 'gFUSDT' || farm.pair.token1?.symbol == 'USDC' || farm.pair.token1?.symbol == 'fUSDT' || farm.pair.token1?.symbol === 'FUSD')
   }
 
-  const data = farms.map(map).filter((farm) => {
-    return type in FILTER ? FILTER[type](farm) : true
-    // return farm
-  })
-
-  // const data = useFarmRewards().filter((farm) => {
+  // const data = farms.map(map).filter((farm) => {
   //   return type in FILTER ? FILTER[type](farm) : true
+    // return farm
   // })
+
+  const data = useFarmRewards().filter((farm) => {
+    return type in FILTER ? FILTER[type](farm) : true
+  })
 
   const options = {
     keys: ['pair.id', 'pair.token0.symbol', 'pair.token1.symbol'],
@@ -223,5 +223,4 @@ const Summoner = () => {
   )
 }
 
-// Summoner.Provider = Provider
 export default Summoner
