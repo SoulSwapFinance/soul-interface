@@ -92,7 +92,7 @@ export default function Menu() {
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
           >
-            <Popover.Panel flex-direction="column" className="w-screen x-full bottom-12 lg:top-12 left-full sm:px-0">
+            <Popover.Panel flex-direction="column" className="bottom-12 lg:top-12 left-full sm:px-0">
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                 <div className="absolute grid gap-6 px-5 py-6 bg-dark-900 sm:gap-8 sm:p-8">
                   {solutions.map((item) =>

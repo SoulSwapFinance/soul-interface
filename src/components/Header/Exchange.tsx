@@ -67,7 +67,7 @@ export default function Menu() {
           >
             <Popover.Panel
               flex-direction="column"
-              className="w-screen x-full bottom-12 lg:top-12 left-full sm:px-0"
+              className="bottom-12 lg:top-12 left-full sm:px-0"
             > 
           
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
