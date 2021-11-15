@@ -6,7 +6,7 @@ import useSoulSummoner from './hooks/useSoulSummoner'
 
 import FarmKey from './FarmKey'
 import FarmRowRender from './FarmRowRender'
-import { FantiesPids } from './FantiesPids'
+import { FantiesPids } from './Pids'
 // import { Wrap, Heading, Text, Button } from './ReusableStyles' // Heading, Text
 
 const FantiesList = () => {

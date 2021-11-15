@@ -13,7 +13,7 @@ const SoulPower = () => {
 
       <Container id="farm-page">
         <Head>
-          <title>Mate | Soul</title>
+          <title>Farm with SoulPower ($SOUL)</title>
           <meta key="description" name="description" content="Farm SOUL" />
         </Head>
         <SoulList />

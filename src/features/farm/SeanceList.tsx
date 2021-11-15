@@ -6,10 +6,10 @@ import useSoulSummoner from './hooks/useSoulSummoner'
 
 import FarmKey from './FarmKey'
 import FarmRowRender from './FarmRowRender'
-import { MatePids } from './Pids'
+import { SeancePids } from './Pids'
 // import { Wrap, Heading, Text, Button } from './ReusableStyles' // Heading, Text
 
-const MateList = () => {
+const SeanceList = () => {
   const { chainId, account } = useActiveWeb3React()
 
   const [totalPending, setTotalReward] = useState(0)
@@ -57,7 +57,7 @@ const MateList = () => {
   //   />
   // ))
 
-  const farmList = MatePids.map((farm) => (
+  const farmList = SeancePids.map((farm) => (
     <FarmRowRender
       key={farm.pid}
       pid={farm.pid}
@@ -80,4 +80,4 @@ const MateList = () => {
   )
 }
 
-export default MateList
+export default SeanceList

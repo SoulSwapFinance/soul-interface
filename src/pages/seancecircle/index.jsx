@@ -4,7 +4,7 @@ import Container from '../../components/Container'
 import Head from 'next/head'
 import React from 'react'
 
-import SoulList from '../../features/farm/SoulList'
+import SeanceList from '../../features/farm/SeanceList'
 
 const SeanceCircle = () => {
   return (
@@ -13,10 +13,10 @@ const SeanceCircle = () => {
 
       <Container id="farm-page">
         <Head>
-          <title>Mate | Soul</title>
+          <title>Farm | SeanceCircle</title>
           <meta key="description" name="description" content="Farm SOUL" />
         </Head>
-        <SoulList />
+        <SeanceList />
       </Container>
       </DoubleGlowShadowV2>
 
