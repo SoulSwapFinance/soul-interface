@@ -22,21 +22,21 @@ const items = (i18n: I18n) => [
     mates: false, 
   },
   {
+    name: i18n._(t`Mates`),
+    href: '/mate',
+    farm: false,
+    stake: false, 
+    enchant: false, 
+    circles: false, 
+    mates: true, 
+  },
+  {
     name: i18n._(t`Seance`),
     href: '/seance',
     farm: false,
     stake: true, 
     enchant: false, 
     circles: false,
-    mates: false,
-  },
-  {
-    name: i18n._(t`Enchant`),
-    href: '/enchant',
-    farm: false,
-    stake: false, 
-    enchant: true, 
-    circles: true, 
     mates: false,
   },
   {
@@ -49,13 +49,13 @@ const items = (i18n: I18n) => [
     mates: false, 
   },
   {
-    name: i18n._(t`Mates`),
-    href: '/mate',
+    name: i18n._(t`Enchant`),
+    href: '/enchant',
     farm: false,
     stake: false, 
-    enchant: false, 
+    enchant: true, 
     circles: false, 
-    mates: true, 
+    mates: false,
   },
 ]
 
@@ -107,23 +107,25 @@ export default function Menu() {
                     </NavLink>
 
                     ) : 
-                      item.stake ?
+                      item.mates ?
                       (
                         <NavLink key={item.name} href={item.href}>
                         <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                           {/* <p className="text-base font-medium text-high-emphesis">{item.name}</p> */}
                           
-                        SEANCE
+                        MATES
                         </a>
                       </NavLink>
-                      ) : (
-                        item.enchant ?
-                        (
-                          <NavLink key={item.name} href={item.href}>
-                          <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                            ENCHANT
-                          </a>
-                        </NavLink>
+                        ) : (
+                          item.stake ?
+                          (
+                            <NavLink key={item.name} href={item.href}>
+                            <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                              
+                              SEANCE
+                            
+                            </a>
+                          </NavLink>
                       ) : (
                         item.circles ?
                         (
@@ -132,16 +134,14 @@ export default function Menu() {
                             CIRCLES
                           </a>
                         </NavLink>
-                        ) : (
-                          item.mates ?
-                          (
-                            <NavLink key={item.name} href={item.href}>
-                            <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                              
-                              MATES
-                            
-                            </a>
-                          </NavLink>
+                      ) : (
+                        item.enchant ?
+                        (
+                          <NavLink key={item.name} href={item.href}>
+                          <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                            ENCHANT
+                          </a>
+                        </NavLink>
                           ) : ''                      )
                         )
                       )
