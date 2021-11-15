@@ -198,42 +198,52 @@
         "outputs": [
             {
                 "internalType": "uint256",
-                "name": "ftmUsdcTotalFtm",
+                "name": "_ftmUsdcTotalFtm",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "ftmUsdcTotalUsdc",
+                "name": "_ftmUsdcTotalUsdc",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "soulFusdTotalSoul",
+                "name": "_ftmSoulTotalSoul",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "soulFtmTotalFusd",
+                "name": "_ftmSoulTotalFusd",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "ethFtmTotalFtm",
+                "name": "_ftmSeanceTotalFtm",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "ethFtmTotalEth",
+                "name": "_ftmSeanceTotalSeance",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "ftmEnchantTotalFtm",
+                "name": "_ftmEnchantTotalFtm",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "ftmEnchantTotalEnchant",
+                "name": "_ftmEnchantTotalEnchant",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_ftmEthTotalFtm",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_ftmEthTotalEth",
                 "type": "uint256"
             }
         ],
@@ -344,13 +354,6 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "harvestAll",
-        "outputs": [],
-        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
