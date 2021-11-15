@@ -19,7 +19,7 @@ const items = (i18n: I18n) => [
     stake: false, 
     enchant: false, 
     circles: false, 
-    fanties: false, 
+    mates: false, 
   },
   {
     name: i18n._(t`Seance`),
@@ -28,7 +28,7 @@ const items = (i18n: I18n) => [
     stake: true, 
     enchant: false, 
     circles: false,
-    fanties: false,
+    mates: false,
   },
   {
     name: i18n._(t`Enchant`),
@@ -37,7 +37,7 @@ const items = (i18n: I18n) => [
     stake: false, 
     enchant: true, 
     circles: true, 
-    fanties: false,
+    mates: false,
   },
   {
     name: i18n._(t`Circles`),
@@ -46,16 +46,16 @@ const items = (i18n: I18n) => [
     stake: false, 
     enchant: false, 
     circles: true, 
-    fanties: false, 
+    mates: false, 
   },
   {
-    name: i18n._(t`Fanties`),
+    name: i18n._(t`Mates`),
     href: '/mate',
     farm: false,
     stake: false, 
     enchant: false, 
     circles: false, 
-    fanties: true, 
+    mates: true, 
   },
 ]
 
@@ -133,12 +133,12 @@ export default function Menu() {
                           </a>
                         </NavLink>
                         ) : (
-                          item.fanties ?
+                          item.mates ?
                           (
                             <NavLink key={item.name} href={item.href}>
                             <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                               
-                              FANTIES
+                              MATES
                             
                             </a>
                           </NavLink>
