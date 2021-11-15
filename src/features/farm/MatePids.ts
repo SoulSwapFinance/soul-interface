@@ -8,7 +8,7 @@ const token1Address = tokens.SEANCE
 export const FarmPids = [
 
   { // 200
-    pid: 31,
+    pid: 30,
     token1,
     token2: 'SPIRIT',
     lpSymbol: 'SEANCE-SPIRIT',
@@ -21,7 +21,7 @@ export const FarmPids = [
   },
 
   { // 200
-    pid: 32,
+    pid: 31,
     token1,
     token2: 'BOO',
     lpSymbol: 'SEANCE-BOO',
@@ -34,7 +34,7 @@ export const FarmPids = [
   },
 
   { // 200
-    pid: 33,
+    pid: 32,
     token1,
     token2: 'ZOO',
     lpSymbol: 'SEANCE-ZOO',
