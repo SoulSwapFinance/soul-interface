@@ -23,7 +23,7 @@ export const CirclePids = [
     pid: 0,
     token1: 'SEANCE',
     token2: 'WFTM',
-    lpSymbol: 'SEANCE-WFTM',
+    lpSymbol: 'FANTOM',
     lpAddresses: {
       4002: '0xD54Cf31D5653F4a062f5DA4C83170A5867d04442',
       250: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6',
@@ -37,7 +37,7 @@ export const CirclePids = [
     pid: 1,
     token1: 'SEANCE',
     token2: 'UNIDX',
-    lpSymbol: 'SEANCE-UNIDX',
+    lpSymbol: 'UNIDEX',
     lpAddresses: {
       4002: '0xD54Cf31D5653F4a062f5DA4C83170A5867d04442',
       250: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6',
