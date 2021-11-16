@@ -6,7 +6,7 @@ import useSoulSummoner from './hooks/useSoulSummoner'
 
 import FarmKey from './FarmKey'
 import FarmRowRender from './FarmRowRender'
-import { FantiesPids } from './Pids'
+import { FantiesPids, WithdrawPids } from './Pids'
 // import { Wrap, Heading, Text, Button } from './ReusableStyles' // Heading, Text
 
 const FantiesList = () => {
@@ -45,17 +45,17 @@ const FantiesList = () => {
   //   }
   // }
 
-  // const withdrawList = WithdrawPids.map((farm) => (
-  //   <FarmRowRender
-  //     key={farm.pid}
-  //     pid={farm.pid}
-  //     lpSymbol={farm.lpSymbol}
-  //     lpToken={farm.lpAddresses[250]}
-  //     token1={farm.token1}
-  //     token2={farm.token2}
-  //     farm={farm}
-  //   />
-  // ))
+  const withdrawList = WithdrawPids.map((farm) => (
+    <FarmRowRender
+      key={farm.pid}
+      pid={farm.pid}
+      lpSymbol={farm.lpSymbol}
+      lpToken={farm.lpAddresses[250]}
+      token1={farm.token1}
+      token2={farm.token2}
+      farm={farm}
+    />
+  ))
 
   const farmList = FantiesPids.map((farm) => (
     <FarmRowRender

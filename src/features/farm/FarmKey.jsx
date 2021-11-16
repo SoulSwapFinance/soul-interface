@@ -30,7 +30,7 @@ const TokenPair = styled(ExternalLink)`
   }
 `;
 
-export default function FarmKey() {
+export default function FarmKey(withdraw) {
   return (
     <>
       <Wrap
