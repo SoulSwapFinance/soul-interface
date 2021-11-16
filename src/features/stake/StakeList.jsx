@@ -34,9 +34,6 @@ export default function StakeList() {
 
   return (
     <>
-      {/* <StakeKey />
-      <>{summonerPool0}</>
-      <br /> */}
       <CircleStakeKey />
       <>{circlePools}</>
     </>

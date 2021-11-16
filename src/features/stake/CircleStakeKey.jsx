@@ -31,7 +31,7 @@ export default function CircleStakeKey() {
                 {/* 2 token logo combined ? */}
                 <Wrap>
                   <Text padding="0" fontSize=".7rem" color="#bbb">
-                    STAKE-EARN
+                    STAKING REWARDS
                   </Text>
                 </Wrap>
               </TokenPairBox>
