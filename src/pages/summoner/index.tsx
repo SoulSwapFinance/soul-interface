@@ -134,14 +134,6 @@ const Summoner = () => {
     }
   }
 
-  // const FILTER = {
-  //   all: (farm) => farm.allocPoint !== '0',
-  //   portfolio: (farm) => farm?.amount && !farm.amount.isZero(),
-  //   sushi: (farm) => farm.pair.type === PairType.SWAP && farm.allocPoint !== '0',
-  //   kashi: (farm) => farm.pair.type === PairType.KASHI && farm.allocPoint !== '0',
-  //   // '2x': (farm) => (farm.chef === Chef.MASTERCHEF_V2 || farm.chef === Chef.MINICHEF) && farm.allocPoint !== '0',
-  // }
-
   const FILTER = {
     my: (farm) => farm?.amount, // && !farm.amount.isZero(),
     soul: (farm) => farm.pair.token0?.symbol == 'SOUL' || farm.pair.token1?.symbol == 'SOUL',
@@ -149,8 +141,8 @@ const Summoner = () => {
     fantom: (farm) => farm.pair.token0?.id == WNATIVE[chainId] || farm.pair.token1?.id == WNATIVE[chainId]
             || farm.pair.token0?.symbol == 'FTM' || farm.pair.token1?.symbol == 'FTM',
     stables: (farm) =>
-      farm.pair.token0?.symbol == 'USDC' && (farm.pair.token1?.symbol == 'fUSDT' || farm.pair.token1?.symbol == 'FUSD') || farm.pair.token1?.symbol == 'DAI' ||
-      farm.pair.token0?.symbol == 'fUSDT' && (farm.pair.token1?.symbol == 'USDC' || farm.pair.token1?.symbol == 'FUSD') || farm.pair.token1?.symbol == 'DAI' ||
+      farm.pair.token0?.symbol == 'USDC' && (farm.pair.token1?.symbol == 'fUSDT' || farm.pair.token1?.symbol == 'FUSD' || farm.pair.token1?.symbol == 'DAI') ||
+      farm.pair.token0?.symbol == 'fUSDT' && (farm.pair.token1?.symbol == 'USDC' || farm.pair.token1?.symbol == 'FUSD' || farm.pair.token1?.symbol == 'DAI') ||
       farm.pair.token0?.symbol == 'FUSD' && (farm.pair.token1?.symbol == 'USDC' || farm.pair.token1?.symbol == 'fUSDT' || farm.pair.token1?.symbol == 'DAI') ||
       farm.pair.token0?.symbol == 'DAI' && (farm.pair.token1?.symbol == 'gFUSDT' || farm.pair.token1?.symbol == 'USDC' || farm.pair.token1?.symbol == 'fUSDT' || farm.pair.token1?.symbol === 'FUSD')
   }
