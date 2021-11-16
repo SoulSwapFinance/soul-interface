@@ -36,11 +36,11 @@ export default function CircleStakeKey() {
                 </Wrap>
               </TokenPairBox>
 
-              {/* <FarmItemBox>
+              <FarmItemBox>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
                   APR
                 </Text>
-              </FarmItemBox> */}
+              </FarmItemBox>
 
               <FarmItemBox desktopOnly={true}>
                 <Text padding="0" fontSize=".7rem" color="#bbb">
