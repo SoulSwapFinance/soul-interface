@@ -140,11 +140,12 @@ const Summoner = () => {
     single: (farm) => !farm.pair.token1,
     fantom: (farm) => farm.pair.token0?.id == WNATIVE[chainId] || farm.pair.token1?.id == WNATIVE[chainId]
             || farm.pair.token0?.symbol == 'FTM' || farm.pair.token1?.symbol == 'FTM',
-    stables: (farm) =>
-      farm.pair.token0?.symbol == 'USDC' && (farm.pair.token1?.symbol == 'fUSDT' || farm.pair.token1?.symbol == 'FUSD' || farm.pair.token1?.symbol == 'DAI') ||
-      farm.pair.token0?.symbol == 'fUSDT' && (farm.pair.token1?.symbol == 'USDC' || farm.pair.token1?.symbol == 'FUSD' || farm.pair.token1?.symbol == 'DAI') ||
-      farm.pair.token0?.symbol == 'FUSD' && (farm.pair.token1?.symbol == 'USDC' || farm.pair.token1?.symbol == 'fUSDT' || farm.pair.token1?.symbol == 'DAI') ||
-      farm.pair.token0?.symbol == 'DAI' && (farm.pair.token1?.symbol == 'gFUSDT' || farm.pair.token1?.symbol == 'USDC' || farm.pair.token1?.symbol == 'fUSDT' || farm.pair.token1?.symbol === 'FUSD')
+            stables: (farm) =>
+            farm.pair.token0?.symbol == 'USDC' && (farm.pair.token1?.symbol == 'fUSDT' || farm.pair.token1?.symbol == 'FUSD' || farm.pair.token1?.symbol == 'DAI') || // MIM, gFUSDT
+            farm.pair.token0?.symbol == 'gFUSDT' && (farm.pair.token1?.symbol == 'USDC' || farm.pair.token1?.symbol == 'fUSDT' || farm.pair.token1?.symbol == 'FUSD' || farm.pair.token1?.symbol == 'DAI') || // MIM
+            farm.pair.token0?.symbol == 'FUSD' && (farm.pair.token1?.symbol == 'USDC' || farm.pair.token1?.symbol == 'fUSDT' || farm.pair.token1?.symbol == 'DAI') || // // MIM, gFUSDT
+            farm.pair.token0?.symbol == 'fUSDT' && (farm.pair.token1?.symbol == 'USDC' || farm.pair.token1?.symbol == 'FUSD' || farm.pair.token1?.symbol == 'DAI') || // MIM, gFUSDT
+            farm.pair.token0?.symbol == 'DAI' && (farm.pair.token1?.symbol == 'USDC' || farm.pair.token1?.symbol == 'fUSDT' || farm.pair.token1?.symbol == 'FUSD') // // MIM, gFUSDT
   }
 
   const data = farms.map(map).filter((farm) => {

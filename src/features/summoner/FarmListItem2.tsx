@@ -52,14 +52,19 @@ const FarmListItem2 = ({ farm, ...rest }) => {
 
     farm.lpPrice = lpPrice
     farm.soulPrice = soulPrice
+    console.log('soul price', soulPrice)
     farm.ftmPrice = ftmPrice
+    console.log('soul price', soulPrice)
     farm.seancePrice = seancePrice
+    console.log('soul price', soulPrice)
 
     return Number(farm.totalLp / 10 ** decimals) * lpPrice
   }
 
   const tvl = getTvl()
 
+  // const rewardsPerSec = 250_000 * 86_400
+  // const roiPerSecond = rewardsPerSec / tvl
   const roiPerSecond =
     farm?.rewards?.reduce((previousValue, currentValue) => {
       return previousValue + currentValue.rewardPerSecond * currentValue.rewardPrice
@@ -88,7 +93,7 @@ const FarmListItem2 = ({ farm, ...rest }) => {
                 <div className="flex col-span-2 space-x-4 md:col-span-1">
                 <div className="flex flex-col justify-center font-bold">{}</div>
                   {token1 ? (
-                    <DoubleLogo currency0={token0} currency1={token1} size={isMobile ? 24 : 40} />
+                    <DoubleLogo currency0={token0} currency1={token1} size={isMobile ? 32 : 50} />
                   ) : (
                     <div className="flex items-center">
                       <CurrencyLogo currency={token0} size={isMobile ? 32 : 50} />
@@ -97,7 +102,7 @@ const FarmListItem2 = ({ farm, ...rest }) => {
                 </div>
 
                   <div className={`flex flex-col justify-center ${token1 ? 'md:flex-row' : 'md:flex-row'}`}>
-                    { token1 && <span className="flex items-center font-bold">{farm.pair?.token0?.symbol} - {farm?.pair?.token1?.symbol}</span> }
+                  { token1 && <span className="flex text-l items-center font-bold">{farm.pair?.token0?.symbol} - {farm?.pair?.token1?.symbol}</span> }
                       {/* {token1 && <span className="flex font-bold">{farm?.pair?.token1?.symbol}</span>} */}
                       {!token1 && token0?.symbol == 'SOUL' && (
                         <div className="flex">
@@ -148,8 +153,8 @@ const FarmListItem2 = ({ farm, ...rest }) => {
                     </IconWrapper>
                     {formatPercent(farm?.roiPerYear * 100)}
                     {(farm?.roiPerYear * 100)}
-                  </div>
-                  <div className="text-xs text-right md:text-base text-secondary">{i18n._(t`annualized`)}</div>
+                    </div>
+                    <div className="text-xs text-right md:text-base text-secondary">{i18n._(t`annualized`)}</div>
                 </div> */}
               </div>
             </Disclosure.Button>

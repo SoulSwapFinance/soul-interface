@@ -163,14 +163,14 @@ const FarmListItem = ({ farm }) => {
           </div>
           <div className="col-span-2 text-center md:col-span-1">
             {/* {farm.depositFeeBP && !isMobile && (
-              <div className="pr-4 mb-2 text-left cursor-pointer text-secondary" style={{ height: '24px' }} />
+              <div className="pr-4 mb-2 text-left cursor-pointer text-secondary" className={{ height: '24px' }} />
             )} */}
             {account && (
               <div className="pr-4 mb-2 text-left cursor-pointer text-secondary">
                 {i18n._(t`Deposited`)}: {amount?.toSignificant(8)}
-                {/* {farm.lpPrice && amount
-                  ? ` (` + formatNumberScale(farm.lpPrice * Number(amount?.divide(1E18).toSignificant(18) ?? 0), true, 2) + `)`
-                  : ``} */}
+                {farm.lpPrice && amount
+                  ? ` (` + formatNumberScale(farm.lpPrice * Number(amount.toSignificant(8) ?? 0), true, 2) + `)`
+                  : ``}
               </div>
             )}
             <div className="relative flex items-center w-full mb-4">
