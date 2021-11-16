@@ -281,11 +281,11 @@ const CircleStakeRow = ({ pid, lpSymbol, lpToken, token1, token2, farm, startTim
                 </Wrap>
               </TokenPairBox>
 
-              {/* <FarmItemBox>
+              <FarmItemBox>
                 <FarmItem>
                   {apr ? (apr === "Infinity" ? "∞%" : apr + "%") : "?"}
                 </FarmItem>
-              </FarmItemBox> */}
+              </FarmItemBox>
 
               <FarmItemBox desktopOnly={true}>
                 {pending === '0.0' ? (
