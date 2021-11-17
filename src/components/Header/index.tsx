@@ -58,7 +58,7 @@ function AppBar(): JSX.Element {
                            className='focus:outline-none hover:text-high-emphesis'
                           //  className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                            >
-                          {i18n._(t`EXCHANGE`)}
+                          {i18n._(t`SWAP`)}
                          </a>
                        </NavLink>
                        )}
