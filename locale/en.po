@@ -43,6 +43,9 @@ msgstr "A portion of each trade (0.25%) goes to liquidity providers as a protoco
 msgid "A portion of each trade (0.25%) is charged as a fee to incentivize pooling."
 msgstr "A portion of each trade (0.25%) is charged as a fee to incentivize pooling."
 
+msgid "ALL"
+msgstr "ALL"
+
 msgid "ALL PAIRS"
 msgstr "ALL PAIRS"
 
@@ -445,8 +448,14 @@ msgstr "Explore"
 msgid "Explore our Protocol."
 msgstr "Explore our Protocol."
 
+msgid "FANTOM"
+msgstr "FANTOM"
+
 msgid "FANTOM PAIRS"
 msgstr "FANTOM PAIRS"
+
+msgid "FARM"
+msgstr "FARM"
 
 msgid "Fantom Faucet"
 msgstr "Fantom Faucet"
@@ -643,9 +652,6 @@ msgstr "Market"
 msgid "Markets"
 msgstr "Markets"
 
-msgid "Mates"
-msgstr "Mates"
-
 msgid "Max"
 msgstr "Max"
 
@@ -754,6 +760,9 @@ msgstr "Output is estimated. You will receive at least"
 
 msgid "Output will be sent to"
 msgstr "Output will be sent to"
+
+msgid "POOL"
+msgstr "POOL"
 
 msgid "Pay"
 msgstr "Pay"
@@ -887,11 +896,17 @@ msgstr "Routing through these tokens resulted in the best price for your trade."
 msgid "Russian"
 msgstr "Russian"
 
+msgid "SEANCE"
+msgstr "SEANCE"
+
 msgid "SELF"
 msgstr "SELF"
 
 msgid "SLP"
 msgstr "SLP"
+
+msgid "SOUL"
+msgstr "SOUL"
 
 msgid "SOUL PAIRS"
 msgstr "SOUL PAIRS"
@@ -902,8 +917,14 @@ msgstr "SOUL per $1000"
 msgid "STABLE PAIRS"
 msgstr "STABLE PAIRS"
 
+msgid "STABLES"
+msgstr "STABLES"
+
 msgid "STAKING ASSETS"
 msgstr "STAKING ASSETS"
+
+msgid "SWAP"
+msgstr "SWAP"
 
 msgid "Scarabs are a neat way to share your SOUL with anyone, so long as they're also willing to perform a ritual and make a small sacrfice..."
 msgstr "Scarabs are a neat way to share your SOUL with anyone, so long as they're also willing to perform a ritual and make a small sacrfice..."
@@ -958,9 +979,6 @@ msgstr "Slippage tolerance"
 
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
-
-msgid "Soul"
-msgstr "Soul"
 
 msgid "Soul User"
 msgstr "Soul User"
@@ -1123,11 +1141,11 @@ msgstr "Unsupported Asset"
 msgid "Unwrap"
 msgstr "Unwrap"
 
+msgid "Use SEANCE"
+msgstr "Use SEANCE"
+
 msgid "Use SOUL"
 msgstr "Use SOUL"
-
-msgid "Use SPELL"
-msgstr "Use SPELL"
 
 msgid "Used"
 msgstr "Used"

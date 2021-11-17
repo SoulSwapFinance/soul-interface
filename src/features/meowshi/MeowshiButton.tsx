@@ -1,7 +1,7 @@
 import { ApprovalState, useActiveWeb3React } from '../../hooks'
 import { Field, MeowshiState } from '../../pages/tools/meowshi'
 import React, { FC, useMemo, useState } from 'react'
-import { SOUL, SPELL } from '../../constants'
+import { SOUL, ENCHANT } from '../../constants'
 import TransactionConfirmationModal, { ConfirmationModalContent } from '../../modals/TransactionConfirmationModal'
 import Button from '../../components/Button'
 import { ChainId } from '../../sdk'
@@ -27,7 +27,7 @@ const MeowshiButton: FC<MeowshiButtonProps> = ({ meowshiState }) => {
   })
   const { account, chainId } = useActiveWeb3React()
   const soulBalance = useTokenBalance(account, SOUL[ChainId.FANTOM])
-  const spellBalance = useTokenBalance(account, SPELL[ChainId.FANTOM])
+  const spellBalance = useTokenBalance(account, ENCHANT[ChainId.FANTOM])
   const { approvalState, approve, meow, unmeow, meowSoul, unmeowSoul } = useMeowshi(
     currencies[Field.INPUT] === SOUL[ChainId.FANTOM]
   )

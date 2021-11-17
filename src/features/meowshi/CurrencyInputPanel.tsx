@@ -1,6 +1,6 @@
 import { Field, MeowshiState } from '../../pages/tools/meowshi'
 import React, { FC } from 'react'
-import { SPELL, SOUL } from '../../constants'
+import { SEANCE, SOUL } from '../../constants'
 import { ChainId } from '../../sdk'
 import Image from 'next/image'
 import { Input as NumericalInput } from '../../components/NumericalInput'
@@ -37,10 +37,10 @@ const CurrencyInputPanel: FC<CurrencyInputPanelProps> = ({ field, meowshiState, 
               <Image
                 src={
                   currency === SOUL[ChainId.FANTOM]
-                    ? '/images/tokens/soul-square.jpg'
-                    : currency === SPELL
-                    ? '/images/tokens/lotus-square.jpg'
-                    : '/images/tokens/anubis-square.jpg'
+                    ? '/images/tokens/soul.jpg'
+                    : currency === SEANCE
+                    ? '/images/tokens/seance.jpg'
+                    : '/images/tokens/seance.jpg'
                 }
                 alt="SOUL"
                 width="62px"
@@ -52,20 +52,20 @@ const CurrencyInputPanel: FC<CurrencyInputPanelProps> = ({ field, meowshiState, 
                 <Typography variant="h3" className="text-high-emphesis leading-6" weight={700}>
                   {currency?.symbol}
                 </Typography>
-                {(currency === SOUL[ChainId.FANTOM] || currency === SPELL) && (
+                {(currency === SOUL[ChainId.FANTOM] || currency === SEANCE) && (
                   <Typography
                     variant="xs"
                     className="underline text-blue cursor-pointer"
                     onClick={() =>
                       setCurrency(
-                        currency === SPELL[ChainId.FANTOM]
+                        currency === SEANCE[ChainId.FANTOM]
                           ? SOUL[ChainId.FANTOM]
-                          : SPELL[ChainId.FANTOM],
+                          : SEANCE[ChainId.FANTOM],
                         field
                       )
                     }
                   >
-                    {currencies[field] === SOUL[ChainId.FANTOM] ? i18n._(t`Use SPELL`) : i18n._(t`Use SOUL`)}
+                    {currencies[field] === SOUL[ChainId.FANTOM] ? i18n._(t`Use SEANCE`) : i18n._(t`Use SOUL`)}
                   </Typography>
                 )}
               </div>

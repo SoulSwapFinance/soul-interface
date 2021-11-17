@@ -43,6 +43,9 @@ msgstr ""
 msgid "A portion of each trade (0.25%) is charged as a fee to incentivize pooling."
 msgstr ""
 
+msgid "ALL"
+msgstr ""
+
 msgid "ALL PAIRS"
 msgstr ""
 
@@ -439,7 +442,13 @@ msgstr ""
 msgid "Explore our Protocol."
 msgstr ""
 
+msgid "FANTOM"
+msgstr ""
+
 msgid "FANTOM PAIRS"
+msgstr ""
+
+msgid "FARM"
 msgstr ""
 
 msgid "Fantom Faucet"
@@ -631,9 +640,6 @@ msgstr ""
 msgid "Markets"
 msgstr ""
 
-msgid "Mates"
-msgstr ""
-
 msgid "Max"
 msgstr ""
 
@@ -739,6 +745,9 @@ msgid "Output is estimated. You will receive at least"
 msgstr ""
 
 msgid "Output will be sent to"
+msgstr ""
+
+msgid "POOL"
 msgstr ""
 
 msgid "Pay"
@@ -870,10 +879,16 @@ msgstr ""
 msgid "Russian"
 msgstr ""
 
+msgid "SEANCE"
+msgstr ""
+
 msgid "SELF"
 msgstr ""
 
 msgid "SLP"
+msgstr ""
+
+msgid "SOUL"
 msgstr ""
 
 msgid "SOUL PAIRS"
@@ -885,7 +900,13 @@ msgstr ""
 msgid "STABLE PAIRS"
 msgstr ""
 
+msgid "STABLES"
+msgstr ""
+
 msgid "STAKING ASSETS"
+msgstr ""
+
+msgid "SWAP"
 msgstr ""
 
 msgid "Scarabs are a neat way to share your SOUL with anyone, so long as they're also willing to perform a ritual and make a small sacrfice..."
@@ -940,9 +961,6 @@ msgid "Slippage tolerance"
 msgstr ""
 
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
-msgstr ""
-
-msgid "Soul"
 msgstr ""
 
 msgid "Soul User"
@@ -1102,10 +1120,10 @@ msgstr ""
 msgid "Unwrap"
 msgstr ""
 
-msgid "Use SOUL"
+msgid "Use SEANCE"
 msgstr ""
 
-msgid "Use SPELL"
+msgid "Use SOUL"
 msgstr ""
 
 msgid "Used"

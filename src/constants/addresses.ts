@@ -110,7 +110,7 @@ export const MULTICALL2_ADDRESS: AddressMap = {
 export const WNATIVE: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
-  [ChainId.FANTOM]: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83', // WFTM
+  [ChainId.FANTOM]: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
   [ChainId.FANTOM_TESTNET]: '',
  
 }

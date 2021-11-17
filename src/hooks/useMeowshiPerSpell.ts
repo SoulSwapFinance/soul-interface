@@ -1,6 +1,6 @@
 import { useBentoBoxContract } from './useContract'
 import { useEffect, useState } from 'react'
-import { SPELL } from '../constants'
+import { ENCHANT } from '../constants'
 import { BigNumber } from 'ethers'
 import { ChainId } from '../sdk'
 
@@ -12,13 +12,13 @@ export default function useMeowshiPerSpell() {
     if (!bentoboxContract) return
     ;(async () => {
       const toShare = await bentoboxContract.toShare(
-        SPELL[ChainId.FANTOM],
-        '1'.toBigNumber(SPELL[ChainId.FANTOM].decimals),
+        ENCHANT[ChainId.FANTOM],
+        '1'.toBigNumber(ENCHANT[ChainId.FANTOM].decimals),
         false
       )
       const toAmount = await bentoboxContract.toAmount(
-        SPELL[ChainId.FANTOM],
-        '1'.toBigNumber(SPELL[ChainId.FANTOM].decimals),
+        ENCHANT[ChainId.FANTOM],
+        '1'.toBigNumber(ENCHANT[ChainId.FANTOM].decimals),
         false
       )
       setState([toShare, toAmount])

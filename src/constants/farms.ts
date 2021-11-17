@@ -237,7 +237,7 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
       token1: {
-        id: '0x049d68029688eabf473097a2fc38ef61633a3c7a', // USDT
+        id: '0x049d68029688eAbF473097a2fC38ef61633A3C7A', // USDT
         name: 'Frapped USDT',
         symbol: 'fUSDT',
         decimals: 6,
@@ -261,7 +261,7 @@ export const POOLS: AddressMap = {
     '0xe637D90A993EDBD75AC09E9fcB16313D193B9451': {  // DAI-gfUSDT
       id: 16, // 200
       token0: {
-        id: '0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e', // DAI
+        id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
         name: 'Dai Stablecoin',
         symbol: 'DAI',
         decimals: 18,
@@ -276,13 +276,13 @@ export const POOLS: AddressMap = {
     '0xC1EdFbA9811B696bDFd07d31eD5FF702e031364E': {  // BNB-DAI
       id: 17, // 400
       token0: {
-        id: '0xd67de0e0a0fd7b15dc8348bb9be742f3c5850454', // BNB
+        id: '0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454', // BNB
         name: 'Binance',
         symbol: 'BNB',
         decimals: 18,
       },
       token1: {
-        id: '0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e', // DAI
+        id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
         name: 'Dai Stablecoin',
         symbol: 'DAI',
         decimals: 18,
@@ -291,13 +291,13 @@ export const POOLS: AddressMap = {
     '0x52966a12e3211c92909C28603ca3df8465c06c82': {  // BNB-FTM
       id: 18, // 600
       token0: {
-        id: '0xd67de0e0a0fd7b15dc8348bb9be742f3c5850454', // BNB
+        id: '0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454', // BNB
         name: 'Binance',
         symbol: 'BNB',
         decimals: 18,
       },
       token1: {
-        id: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83', // WFTM
+        id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
         name: 'Wrapped FTM',
         symbol: 'FTM',
         decimals: 18,
@@ -312,7 +312,7 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
       token1: {
-        id: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83', // WFTM
+        id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
         name: 'Wrapped FTM',
         symbol: 'FTM',
         decimals: 18,
@@ -366,7 +366,7 @@ export const POOLS: AddressMap = {
     '0xF3d6E8Ecece8647B456d57375Ce0B51B8F0cD40b': {  // FTM-DAI
       id: 23, // 600
       token0: {
-        id: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83', // WFTM
+        id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
         name: 'Wrapped FTM',
         symbol: 'FTM',
         decimals: 18,
@@ -381,7 +381,7 @@ export const POOLS: AddressMap = {
     '0xb4d6Ff768F409e4D102BAD80f9A8ac105453ccdD': {  // ENCHANT-FTM
       id: 24, // 1200
       token0: {
-        id: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83', // WFTM
+        id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
         name: 'Wrapped FTM',
         symbol: 'FTM',
         decimals: 18,
@@ -511,6 +511,51 @@ export const POOLS: AddressMap = {
         name: 'Zoo Coin',
         symbol: 'ZOO',
         decimals: 0,
+      },
+    },
+    '0x75aE2E7B4f3a4b5F9048AD6966f6e975e510aD03': {  // SEANCE-TOMB
+      id: 33, // 200
+      token0: {
+        id: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
+        name: 'Seance Circle',
+        symbol: 'SEANCE',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x6c021Ae822BEa943b2E66552bDe1D2696a53fbB7', // TOMB
+        name: 'Tomb Token',
+        symbol: 'TOMB',
+        decimals: 18,
+      },
+    },
+    '0xc0fEd4A6EDef23da7fF766D24F17Ecf454C16D25': {  // SEANCE-ICE
+      id: 34, // 200
+      token0: {
+        id: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
+        name: 'Seance Circle',
+        symbol: 'SEANCE',
+        decimals: 18,
+      },
+      token1: {
+        id: '0xf16e81dce15B08F326220742020379B855B87DF9', // ICE
+        name: 'IceToken',
+        symbol: 'ICE',
+        decimals: 18,
+      },
+    },
+    '0x63A1b4E3f210db7f1d4Ae7d29Bc0BC7F611e713a': {  // SEANCE-SPELL
+      id: 35, // 200
+      token0: {
+        id: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
+        name: 'Seance Circle',
+        symbol: 'SEANCE',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x468003B688943977e6130F4F68F23aad939a1040', // SPELL
+        name: 'Spell Token',
+        symbol: 'SPELL',
+        decimals: 18,
       },
     },
   }

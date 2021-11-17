@@ -16,18 +16,18 @@ export const tokens = {
   },
   FTM: {
     4002: "0xf1277d1ed8ad466beddf92ef448a132661956621",
-    250: "0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83",
+    250: "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
     1: "0x4e15361fd6b4bb609fa63c81a2be19d873717870",
     56: "",
   },
   FUSD: {
     4002: "0x306557358e20aea124b16a548597897858d13cb2",
-    250: "0xad84341756bf337f5a0164515b1f6f993d194e1f",
+    250: "0xAd84341756Bf337f5a0164515b1f6F993D194E1f",
     56: "",
   },
   DAI: {
     4002: "",
-    250: "0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e",
+    250: "0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E",
     1: "0x6b175474e89094c44da98b954eedeac495271d0f", // 18 decimals
     56: "",
   },
@@ -39,7 +39,7 @@ export const tokens = {
   },
   fUSDT: {
     4002: "",
-    250: "0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e",
+    250: "0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E",
     1: "",
     56: "",
   },

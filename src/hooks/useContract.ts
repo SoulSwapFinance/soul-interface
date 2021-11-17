@@ -65,7 +65,7 @@ import SOUL_SCARAB_ABI from '../constants/abis/soulswap/scarab.json' // todo
 import SOUL_GUIDE_ABI from '../constants/abis/soul-guide.json' // TODO: update abi
 import SOUL_SUMMONER_ABI from '../constants/abis/soulswap/soulsummoner.json' // 28 JUL
 import SOULVAULT_ABI from '../constants/abis/soulswap/soulvault.json' // 31 JUL
-import SPELL_ABI from '../constants/abis/soulswap/spell.json' // 28 JUL
+// import SPELL_ABI from '../constants/abis/soulswap/spell.json' // 28 JUL
 import ENCHANT_ABI from '../constants/abis/soulswap/enchant.json' // 30 OCT
 import ENCHANT_HELPER_ABI from '../constants/abis/soulswap/enchant-helper.json' // 30 OCT
 import SOUL_ABI from '../constants/abis/soulswap/soulpower.json' // 28 JUL
@@ -274,7 +274,7 @@ export function useRouterContract(useArcher = false, withSignerIfPossible?: bool
 
 export function useEnchantmentContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && ENCHANT_ADDRESS[chainId], SPELL_ABI, withSignerIfPossible)
+  return useContract(chainId && ENCHANT_ADDRESS[chainId], ENCHANT_ABI, withSignerIfPossible)
 }
 
 export function useMakerContract(): Contract | null {

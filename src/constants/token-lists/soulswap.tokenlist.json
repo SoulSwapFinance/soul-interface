@@ -239,14 +239,6 @@
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom-testnet/assets/0xba6204f47b4db2a22d7c4227569cea3c8ad448dc/logo.png"
       },
       {
-        "name": "Spell Bound",
-        "address": "0x399e4510941E94429bF282BEc540300476B8A8Fb",
-        "symbol": "SPELL",
-        "decimals": 18,
-        "chainId": 4002,
-        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom-testnet/assets/0xba34a07d0282a023e08ceb6098e59dfbebe9f1e1/logo.png"
-      },
-      {
         "name": "Wrapped Fantom",
         "address": "0xf1277d1Ed8AD466beddF92ef448A132661956621",
         "symbol": "WFTM",
@@ -311,6 +303,14 @@
         "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x7eC94C4327dC757601B4273cD67014d7760Be97E/logo.png"
       },
       {
+        "name": "IceToken",
+        "address": "0xf16e81dce15B08F326220742020379B855B87DF9",
+        "symbol": "ICE",
+        "decimals": 18,
+        "chainId": 250,
+        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xf16e81dce15B08F326220742020379B855B87DF9/logo.png"
+      },
+      {
         "name": "Magic Internet Money",
         "address": "0x82f0B8B456c1A451378467398982d4834b6829c1",
         "symbol": "MIM",
@@ -343,6 +343,14 @@
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png"
       },
       {
+        "name": "Spell Token",
+        "address": "0x468003B688943977e6130F4F68F23aad939a1040",
+        "symbol": "SPELL",
+        "decimals": 18,
+        "chainId": 250,
+        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x468003B688943977e6130F4F68F23aad939a1040/logo.png"
+      },
+      {
         "name": "SpiritSwap",
         "address": "0x5Cc61A78F164885776AA610fb0FE1257df78E59B",
         "symbol": "SPIRIT",
@@ -357,6 +365,14 @@
         "decimals": 18,
         "chainId": 250,
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x841FAD6EAe12c286d1Fd18d1d525DFfA75C7EFFE/logo.png"
+      },
+      {
+        "name": "Tomb Token",
+        "address": "0x6c021Ae822BEa943b2E66552bDe1D2696a53fbB7",
+        "symbol": "TOMB",
+        "decimals": 18,
+        "chainId": 250,
+        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x6c021Ae822BEa943b2E66552bDe1D2696a53fbB7/logo.png"
       },
       {
         "name": "UniDex",
