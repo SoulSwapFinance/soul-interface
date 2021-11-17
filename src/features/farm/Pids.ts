@@ -439,7 +439,7 @@ export const AllPids = [
     // NEW //
 
 
-
+{/*
   {
     // 200
     pid: 33,
@@ -492,6 +492,7 @@ export const AllPids = [
   //     token1Address: tokens.SEANCE,
   //     token2Address: tokens.FTM,
   // },
+  */}
 ]
 
 export const MatePids = [
@@ -537,7 +538,7 @@ export const MatePids = [
       token1Address: tokens.SEANCE,
       token2Address: tokens.ZOO,
     },
-
+{/*
     {
       // 200
       pid: 33,
@@ -577,6 +578,7 @@ export const MatePids = [
       token1Address: tokens.SEANCE,
       token2Address: tokens.SPELL,
     },
+    */}
   ]
 
 
@@ -836,6 +838,7 @@ export const SeancePids = [
     token1Address: tokens.SEANCE,
     token2Address: tokens.ZOO,
   },
+  {/*
   {
     // 200
     pid: 33,
@@ -875,6 +878,7 @@ export const SeancePids = [
     token1Address: tokens.SEANCE,
     token2Address: tokens.SPELL,
   },
+  */}
   {
     // 400
     pid: 7,
