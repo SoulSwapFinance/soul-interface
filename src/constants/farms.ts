@@ -513,7 +513,7 @@ export const POOLS: AddressMap = {
         decimals: 0,
       },
     },
-    /* '0x75aE2E7B4f3a4b5F9048AD6966f6e975e510aD03': {  // SEANCE-TOMB
+    '0x75aE2E7B4f3a4b5F9048AD6966f6e975e510aD03': {  // SEANCE-TOMB
       id: 33, // 200
       token0: {
         id: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
@@ -557,7 +557,7 @@ export const POOLS: AddressMap = {
         symbol: 'SPELL',
         decimals: 18,
       },
-    }, */
+    },
   }
   
 }
