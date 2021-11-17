@@ -11,40 +11,39 @@ import { useMemo } from 'react'
 const FARMS = (i18n: I18n) => [
   {
     id: 1,
-    name: 'SOUL PAIRS',
-    description: i18n._(t`Deposit your SOUL-LP to earn $SOUL rewards.`),
-    href: '/farm',
+    name: 'ALL PAIRS',
+    href: '/farms/all',
   },
   {
     id: 2,
-    name: 'SEANCE PAIRS',
-    description: 'Borrow $SEANCE with $SOUL and earn rewards.',
-    href: './seance'
+    name: 'SOUL PAIRS',
+    href: '/farms/soulpower',
   },
   {
     id: 3,
-    name: 'FANTOM PAIRS',
-    description: 'Deposit $SEANCE to earn $WFTM and $UNIDX.',
-    href: './circles'
+    name: 'SEANCE PAIRS',
+    href: './farms/seancecircle'
   },
   {
     id: 4,
-    name: 'STABLE PAIRS',
-    description: 'Deposit $SEANCE and earn protocol fee-shares.',
-    href: './enchant'
+    name: 'FANTOM PAIRS',
+    href: './farms/fanties'
   },
   {
     id: 5,
-    name: 'WETH PAIRS',
-    description: 'Send $SOUL for a small sacrifice of $SEANCE.',
-    href: './scarab/create'
+    name: 'STABLE PAIRS',
+    href: './farms/stables'
   },
-  {
-    id: 6,
-    name: 'BTC PAIRS',
-    description: 'Bridge from Binance, Ethereum, Huobi, and more.',
-    href: 'https://bridge.soul.sh'
-  },
+  // {
+  //   id: 5,
+  //   name: 'WETH PAIRS',
+  //   href: './scarab/create'
+  // },
+  // {
+  //   id: 6,
+  //   name: 'BTC PAIRS',
+  //   href: '/bitcoins'
+  // },
 ]
 
 export default function Tools() {
@@ -54,11 +53,11 @@ export default function Tools() {
   return (
     <Container id="features-page" className="py-4 space-y-4 md:py-8 lg:py-12" maxWidth="xl">
       <Head>
-        <title>Explore | Soul</title>
+        <title>Farms | Soul</title>
         <meta key="description" name="description" content="SoulSwap Tools..." />
       </Head>
       <Typography variant="h1" component="h1">
-        OUR ECOSYSTEM
+        SOUL FARMS
       </Typography>
       <ul className="space-y-4 divide-y-0">
         {features.map((feature) => (
@@ -70,7 +69,7 @@ export default function Tools() {
                     <span className="absolute inset-0" aria-hidden="true" />
                     <div className="space-y-1">
                       <p className="text-xl font-bold truncate text-primary">{feature.name}</p>
-                      <p className="text-sm truncate text-secondary">{feature.description}</p>
+                      {/* <p className="text-sm truncate text-secondary">{feature.description}</p> */}
                     </div>
                     <ArrowRightIcon width={24} height={24} className="text-high-emphesis" />
                   </a>

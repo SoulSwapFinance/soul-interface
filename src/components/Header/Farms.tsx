@@ -13,35 +13,48 @@ import { Link } from 'react-feather'
 const items = (i18n: I18n) => [
   {
     name: i18n._(t`ALL`),
-    href: '/farm',
+    href: '/farms',
     all: true,
     soul: false,
     seance: false,
     fantom: false,
+    stales: false,
   },
   {
     name: i18n._(t`SOUL`),
-    href: '/soulpower',
+    href: '/farms/soulpower',
     all: false,
     soul: true,
     seance: false,
     fantom: false,
+    stables: false,
   },
   {
     name: i18n._(t`SEANCE`),
-    href: '/seancecircle',
+    href: '/farms/seancecircle',
     all: false,
     soul: false,
     seance: true,
     fantom: false,
+    stables: false,
   },
   {
     name: i18n._(t`FANTOM`),
-    href: '/fanties',
+    href: '/farms/fanties',
     all: false,
     soul: false,
     seance: false,
     fantom: true,
+    stables: false,
+  },
+  {
+    name: i18n._(t`STABLES`),
+    href: '/farms/stables',
+    all: false,
+    soul: false,
+    seance: false,
+    fantom: false,
+    stables: true,
   },
 ]
 
@@ -107,6 +120,12 @@ export default function Menu() {
                       <NavLink key={item.name} href={item.href}>
                         <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                           FANTOM
+                        </a>
+                      </NavLink>
+                    ) : item.stables ? (
+                      <NavLink key={item.name} href={item.href}>
+                        <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                          STABLES
                         </a>
                       </NavLink>
                     ) :
