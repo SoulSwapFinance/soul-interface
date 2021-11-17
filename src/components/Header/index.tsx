@@ -9,9 +9,9 @@ import Image from 'next/image'
 // import LanguageSwitch from '../LanguageSwitch'
 import Link from 'next/link'
 import More from './More'
-import Exchange from './Exchange'
+// import Exchange from './Exchange'
 import Earn from './Earn'
-import Farms from './Farms'
+// import Farms from './Farms'
 import Explore from './Explore'
 // import Seance from './Seance'
 import NavLink from '../NavLink'
@@ -48,47 +48,51 @@ function AppBar(): JSX.Element {
                   {/* <div className="hidden sm:block lg:ml-4"> */}
                     <div className="flex space-x-2">
                     <div className="flex space-x-4">
-                      <Exchange />
-                      <Farms />
                       <Earn />
-                      <Explore />
-                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      {/* <Exchange /> */}
+                      {/* <Farms /> */}
+                      { chainId && [ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href="/exchange/swap">
                          <a
                            id={`swap-nav-link`}
-                           className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                           className='focus:outline-none hover:text-high-emphesis'
+                          //  className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                            >
-                          {i18n._(t`SWAP`)}
+                          {i18n._(t`EXCHANGE`)}
                          </a>
                        </NavLink>
                        )}
-                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                       { chainId && [ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                       <NavLink href="/pool">
                         <a
                           id={`pool-nav-link`}
-                          className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                          className='focus:outline-none hover:text-high-emphesis'
+                          // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                         >
-                          <Image src="https://media.giphy.com/media/N3NpRukvRmnAI/giphy.gif" alt="offering soul" width="30" height="30" />
+                          {/* <Image src="https://media.giphy.com/media/N3NpRukvRmnAI/giphy.gif" alt="offering soul" width="30" height="30" /> */}
                           {i18n._(t`POOL`)}
                         </a>
                       </NavLink>
-                      )} */}
-                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'/farm'}>
+                      )}
+                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href={'/farms'}>
                           <a
                             id={`farm-nav-link`}
-                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                            // className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800"
+                            className='focus:outline-none hover:text-high-emphesis'
+                            // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                             >
-                          <Image src="https://media.giphy.com/media/iH7mGoqPivDybuDc2s/giphy.gif" alt="offering soul" width={30} height={30} />
+                          {/* <Image src="https://media.giphy.com/media/iH7mGoqPivDybuDc2s/giphy.gif" alt="offering soul" width={30} height={30} /> */}
                             {i18n._(t`FARM`)}
                           </a>
                         </NavLink>
                       )}
-                      { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      <Explore />
+                      {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                       <NavLink href={'/enchant'}>
                         <a
                           id={`enchant-nav-link`}
-                          className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                          // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                         >
                           <Image src="https://media.giphy.com/media/hXGy5FTLBPQ4w/giphy.gif" alt="offering soul" width={30} height={30} />
                           {i18n._(t`ENCHANT`)}

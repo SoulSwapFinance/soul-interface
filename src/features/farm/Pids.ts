@@ -859,60 +859,58 @@ export const SoulPids = [
 
 
 export const StablePids = [
-
   {
-    // 600
-    pid: 22,
-    token1: 'USDC',
-    token2: 'SOUL',
-    lpSymbol: 'SOUL-USDC',
+    // 200
+    pid: 16,
+    token1: 'DAI',
+    token2: 'gFUSDT',
+    lpSymbol: 'DAI-gFUSDT',
     lpAddresses: {
       4002: '',
-      250: '0xC0A301f1E5E0Fe37a31657e8F60a41b14d01B0Ef',
+      250: '0xe637D90A993EDBD75AC09E9fcB16313D193B9451',
+    },
+    token1Address: tokens.DAI,
+    token2Address: tokens.gFUSDT,
+  },
+  {
+    // 200
+    pid: 9,
+    token1: 'USDC',
+    token2: 'fUSDT',
+    lpSymbol: 'USDC-fUSDT',
+    lpAddresses: {
+      4002: '',
+      250: '0x298c12d6d9d6746dd0ef0a89421288f52d5566ef',
     },
     token1Address: tokens.USDC,
-    token2Address: tokens.SOUL,
+    token2Address: tokens.fUSDT,
+  },
+  {
+    // 200
+    pid: 6,
+    token1: 'FUSD',
+    token2: 'USDC',
+    lpSymbol: 'FUSD-USDC',
+    lpAddresses: {
+      4002: '',
+      250: '0xD5F5E2638d636A98eD4aAEBfd2045441316e0c08',
+    },
+    token1Address: tokens.FUSD,
+    token2Address: tokens.USDC,
   },
 
   {
-    // 600
-    pid: 28,
-    token1: 'fUSDT',
-    token2: 'SOUL',
-    lpSymbol: 'SOUL-FUSDT',
+    // 200
+    pid: 21,
+    token1: 'USDC',
+    token2: 'DAI',
+    lpSymbol: 'DAI-USDC',
     lpAddresses: {
       4002: '',
-      250: '0xE27Cc06a7F34892BC17a5474303b91b2C9F3F21A',
+      250: '0x406de3a93f6b4179e3b21a3d81226b43e1918fd9',
     },
-    token1Address: tokens.fUSDT,
-    token2Address: tokens.SOUL,
+    token1Address: tokens.USDC,
+    token2Address: tokens.DAI,
   },
-
-  {
-    // 600
-    pid: 5,
-    token1: 'SOUL',
-    token2: 'SEANCE',
-    lpSymbol: 'SOUL-SEANCE',
-    lpAddresses: {
-      4002: '',
-      250: '0x8f1E15cD3d5a0bb85B8189d5c6B61BB64398E19b',
-    },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.SEANCE,
-  },
-
-  {
-    // 600
-    pid: 25,
-    token1: 'SOUL',
-    token2: 'ENCHANT',
-    lpSymbol: 'ENCHANT-SOUL',
-    lpAddresses: {
-      4002: '',
-      250: '0x9acc8f23680b6d7e295166277e2fb9c88a26cce6',
-    },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.ENCHANT,
-  },
+  
 ]
