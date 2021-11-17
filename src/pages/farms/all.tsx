@@ -15,7 +15,7 @@ const All = () => {
       <br /> */}
       <Container id="farm-page">
         <Head>
-          <title>Farm | Fanties</title>
+          <title>Farm | All</title>
           <meta key="description" name="description" content="Farm SOUL" />
         </Head>
         <FarmList />
