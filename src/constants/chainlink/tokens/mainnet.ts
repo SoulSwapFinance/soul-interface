@@ -498,12 +498,6 @@ const MAINNET_CHAINLINK_TOKENS = [
     decimals: 18,
   },
   {
-    symbol: 'SPELL',
-    name: 'SpellBound',
-    address: '0x8798249c2E607446EfB7Ad49eC89dD1865Ff4272',
-    decimals: 18,
-  },
-  {
     symbol: 'YFI',
     name: 'yearn.finance',
     address: '0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e',

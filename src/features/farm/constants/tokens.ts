@@ -9,7 +9,7 @@ export const tokens = {
   },
   FTM: {
     4002: "0xf1277d1ed8ad466beddf92ef448a132661956621",
-    250: "0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83",
+    250: "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
   },
   ENCHANT: {
     4002: "",
@@ -17,7 +17,7 @@ export const tokens = {
   },
   FUSD: {
     4002: "0x306557358e20aea124b16a548597897858d13cb2",
-    250: "0xad84341756bf337f5a0164515b1f6f993d194e1f",
+    250: "0xAd84341756Bf337f5a0164515b1f6F993D194E1f",
   },
   BOO: {
     4002: "",
@@ -25,11 +25,15 @@ export const tokens = {
   },
   BNB: {
     4002: "",
-    250: "0xd67de0e0a0fd7b15dc8348bb9be742f3c5850454",
+    250: "0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454",
   },
   DAI: {
     4002: '',
-    250: '0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e',
+    250: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E',
+  },
+  ICE: {
+    4002: '',
+    250: '0xf16e81dce15B08F326220742020379B855B87DF9',
   },
   gFUSDT: {
     4002: '',
@@ -37,7 +41,7 @@ export const tokens = {
   },
   fUSDT: {
     4002: '',
-    250: '0x049d68029688eabf473097a2fc38ef61633a3c7a',
+    250: '0x049d68029688eAbF473097a2fC38ef61633A3C7A',
   },
   MIM: {
     4002: '',
@@ -63,9 +67,17 @@ export const tokens = {
     4002: "",
     250: "0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb",
   },
+  SPELL: {
+    4002: "",
+    250: "0x468003B688943977e6130F4F68F23aad939a1040",
+  },
   SPIRIT: {
     4002: "",
     250: "0x5Cc61A78F164885776AA610fb0FE1257df78E59B",
+  },
+  TOMB: {
+    4002: "",
+    250: "0x6c021Ae822BEa943b2E66552bDe1D2696a53fbB7",
   },
   UNIDX: {
     4002: "",

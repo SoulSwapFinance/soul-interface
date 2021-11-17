@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import Image from 'next/image'
+
 
 import { ethers } from 'ethers'
 
@@ -44,6 +46,14 @@ const HideOnMobile = styled(FarmItemBox)`
 const TokenPair = styled(ExternalLink)`
   font-size: 1.15rem;
   padding: 0;
+
+  @media screen and (max-width: 400px) {
+    font-size: 1rem;
+    padding-right: 10px;
+  }
+`
+
+const TokenLogo = styled(Image)`
 
   @media screen and (max-width: 400px) {
     font-size: 1rem;
@@ -376,8 +386,24 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     color="#F36FFE" // neon purple
                     href={`https://exchange.soulswap.finance/add/${farm.token1Address[chainId]}/${farm.token2Address[chainId]}`}
                   >
-                    {lpSymbol}
-                  </TokenPair>
+                    {/* {lpSymbol} */}
+                  <TokenLogo
+                    src={'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' + farm.token1Address[chainId] + '/logo.png'}
+                    alt="LOGO"
+                    width="50px"
+                    height="50px"
+                    objectFit="contain"
+                    className="rounded-full"
+                    />
+                  <TokenLogo
+                    src={'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' + farm.token2Address[chainId] + '/logo.png'}
+                    alt="LOGO"
+                    width="50px"
+                    height="50px"
+                    objectFit="contain"
+                    className="rounded-full"
+                    />
+                    </TokenPair>
                 </Wrap>
               </TokenPairBox>
 

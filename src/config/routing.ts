@@ -28,7 +28,6 @@ import {
     RENBTC,
     RUNE,
     SOUL,
-    SPELL,
     STETH,
     TRIBE,
     UMA,
@@ -109,7 +108,7 @@ import {
     [ChainId.MAINNET]: {
       ...MIRROR_ADDITIONAL_BASES,
       '0xF16E4d813f4DcfDe4c5b44f305c908742De84eF0': [ETH2X_FLI],
-      '0xb5083b964a0B6A447564657285AeE1E76524B3Db': [SPELL[ChainId.MAINNET]], // XSUSHI 25 Call [30 June 2021] // JUL 27th
+      // '0xb5083b964a0B6A447564657285AeE1E76524B3Db': [SPELL[ChainId.MAINNET]], // XSUSHI 25 Call [30 June 2021] // JUL 27th
       '0xB46F57e7Ce3a284d74b70447Ef9352B5E5Df8963': [UMA], // UMA 25 Call [30 June 2021]
       [FEI.address]: [TRIBE],
       [TRIBE.address]: [FEI],
