@@ -386,23 +386,25 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     color="#F36FFE" // neon purple
                     href={`https://exchange.soulswap.finance/add/${farm.token1Address[chainId]}/${farm.token2Address[chainId]}`}
                   >
-                    {/* {lpSymbol} */}
                   <TokenLogo
                     src={'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' + farm.token1Address[chainId] + '/logo.png'}
                     alt="LOGO"
-                    width="50px"
-                    height="50px"
+                    width="48px"
+                    height="48px"
                     objectFit="contain"
                     className="rounded-full"
                     />
                   <TokenLogo
                     src={'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' + farm.token2Address[chainId] + '/logo.png'}
                     alt="LOGO"
-                    width="50px"
-                    height="50px"
+                    width="48px"
+                    height="48px"
                     objectFit="contain"
                     className="rounded-full"
                     />
+                    <Text fontWeight='bold' textAlign="center" padding="0" fontSize=".8rem" color="#F36FFE">
+                    {lpSymbol}
+                    </Text>
                     </TokenPair>
                 </Wrap>
               </TokenPairBox>
