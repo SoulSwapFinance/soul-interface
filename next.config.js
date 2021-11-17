@@ -42,12 +42,12 @@ module.exports = withBundleAnalyzer(
         // },
         {
           source: '/yield',
-          destination: '/farm',
+          destination: '/farms',
           permanent: true,
         },
         {
           source: '/farm',
-          destination: '/farm',
+          destination: '/farms',
           permanent: true,
         },        
         {
@@ -150,7 +150,7 @@ module.exports = withBundleAnalyzer(
         // },
         {
           source: '/farm',
-          destination: '/farm',
+          destination: '/farms',
         },
         {
           source: '/scarab',
