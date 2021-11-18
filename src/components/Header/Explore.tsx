@@ -21,21 +21,21 @@ const items = (i18n: I18n) => [
     links: false, 
   },
   {
-    name: i18n._(t`Analytics`),
+    name: i18n._(t`Bridge`),
     href: '/bridge',
     explore: false,
     bridge: true,
     analytics: true, 
     links: false, 
   },
-  {
-    name: i18n._(t`Analytics`),
-    href: '/charts',
-    explore: false,
-    bridge: false,
-    analytics: true, 
-    links: false, 
-  },
+//   {
+//     name: i18n._(t`Analytics`),
+//     href: '/charts',
+//     explore: false,
+//     bridge: false,
+//     analytics: true, 
+//     links: false, 
+//   },
   {
   name: i18n._(t`Links`),
   href: '/links',
@@ -107,13 +107,13 @@ export default function Menu() {
                     BRIDGE
                     </a>
                     </NavLink>
-                    ) : item.analytics ?
-                    (
-                     <NavLink key={item.name} href={item.href}>
-                    <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                    CHARTS
-                    </a>
-                    </NavLink>
+//                     ) : item.analytics ?
+//                     (
+//                      <NavLink key={item.name} href={item.href}>
+//                     <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+//                     CHARTS
+//                     </a>
+//                     </NavLink>
                     ) : (
                         item.links ?
                         (
