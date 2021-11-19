@@ -611,7 +611,7 @@ export default function Swap() {
             <UnsupportedCurrencyFooter show={swapIsUnsupported} currencies={[currencies.INPUT, currencies.OUTPUT]} />
           )}
         </div>
-        {/* <AutoColumn justify="space-between" className="py-3">
+        <AutoColumn justify="space-between" className="py-3">
           <iframe 
                 frameBorder={"none"}
                 title={"USER"}
@@ -619,7 +619,7 @@ export default function Swap() {
                 height={"480" }
                 width={"100%"}
             />
-        </AutoColumn> */}
+        </AutoColumn>
       </DoubleGlowShadowV2>
 
     </>
