@@ -11,18 +11,18 @@ import { useMemo } from 'react'
 const FARMS = (i18n: I18n) => [
   {
     id: 1,
-    name: 'ALL PAIRS',
-    href: '/farms/all',
-  },
-  {
-    id: 2,
     name: 'SOUL PAIRS',
     href: '/farms/soulpower',
   },
   {
-    id: 3,
+    id: 2,
     name: 'SEANCE PAIRS',
     href: './farms/seancecircle'
+  },
+  {
+    id: 3,
+    name: 'ENCHANT PAIRS',
+    href: './farms/enchant'
   },
   {
     id: 4,
@@ -34,6 +34,26 @@ const FARMS = (i18n: I18n) => [
     name: 'STABLE PAIRS',
     href: './farms/stables'
   },
+  {
+    id: 6,
+    name: 'ALL FARMS',
+    href: '/farms/all',
+  },
+  // {
+  //   id: 8,
+  //   name: 'EARN SOUL',
+  //   href: '/seance'
+  // },
+  // {
+  //   id: 9,
+  //   name: 'EARN SEANCE',
+  //   href: './enchant'
+  // },
+  // {
+  //   id: 7,
+  //   name: 'EARN WFTM & UNIDX',
+  //   href: './farms/stables'
+  // },
   // {
   //   id: 5,
   //   name: 'WETH PAIRS',

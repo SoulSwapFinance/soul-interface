@@ -389,16 +389,16 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                   <TokenLogo
                     src={'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' + farm.token1Address[chainId] + '/logo.png'}
                     alt="LOGO"
-                    width="48px"
-                    height="48px"
+                    width="44px"
+                    height="44px"
                     objectFit="contain"
                     className="rounded-full"
                     />
                   <TokenLogo
                     src={'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' + farm.token2Address[chainId] + '/logo.png'}
                     alt="LOGO"
-                    width="48px"
-                    height="48px"
+                    width="44px"
+                    height="44px"
                     objectFit="contain"
                     className="rounded-full"
                     />

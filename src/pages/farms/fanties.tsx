@@ -20,12 +20,11 @@ const Fanties = () => {
         </Head>
         <FantiesList />
       </Container>
-      <NavLink href="/farms">
+      {/* <NavLink href="/farms">
             <a className="flex items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
-              {/* <br/> */}
               <span>View All Categories</span>
             </a>
-      </NavLink>
+          </NavLink> */}
       </DoubleGlowShadowV2>
 
     </Wrap>

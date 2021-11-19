@@ -43,21 +43,22 @@ function AppBar(): JSX.Element {
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                 <NavLink href="/landing">
-                  <Image src="/logo.png" alt="Soul" width="40" height="40" />
+                  <Image src="/logo.png" alt="Soul" width="45" height="45" />
                 </NavLink>
                   {/* <div className="hidden sm:block lg:ml-4"> */}
                     <div className="flex space-x-2">
                     <div className="flex space-x-4">
-                      <Earn />
+                      {/* <Earn /> */}
                       {/* <Exchange /> */}
                       {/* <Farms /> */}
                       { chainId && [ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href="/exchange/swap">
                          <a
                            id={`swap-nav-link`}
-                           className='focus:outline-none hover:text-high-emphesis'
-                          //  className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                           >
+                          //  className='focus:outline-none hover:text-high-emphesis'
+                          className="w-full relative ml-6 md:p-2"
+                          >
+                          
                           {i18n._(t`SWAP`)}
                          </a>
                        </NavLink>
@@ -66,8 +67,7 @@ function AppBar(): JSX.Element {
                       <NavLink href="/pool">
                         <a
                           id={`pool-nav-link`}
-                          className='focus:outline-none hover:text-high-emphesis'
-                          // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                          className="w-full relative ml-6 md:p-2"
                         >
                           {/* <Image src="https://media.giphy.com/media/N3NpRukvRmnAI/giphy.gif" alt="offering soul" width="30" height="30" /> */}
                           {i18n._(t`POOL`)}
@@ -79,7 +79,7 @@ function AppBar(): JSX.Element {
                           <a
                             id={`farm-nav-link`}
                             // className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800"
-                            className='focus:outline-none hover:text-high-emphesis'
+                            className="w-full relative ml-6 md:p-2"
                             // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                             >
                           {/* <Image src="https://media.giphy.com/media/iH7mGoqPivDybuDc2s/giphy.gif" alt="offering soul" width={30} height={30} /> */}
@@ -276,8 +276,8 @@ function AppBar(): JSX.Element {
                               <Image
                                 src="/images/tokens/enchant.png"
                                 alt="ENCHANT"
-                                width="40px"
-                                height="40px"
+                                width="45px"
+                                height="45px"
                                 objectFit="contain"
                                 className="rounded-md"
                               />
@@ -323,8 +323,8 @@ function AppBar(): JSX.Element {
                               <Image
                                 src="/images/tokens/seance.png"
                                 alt="SEANCE"
-                                width="40px"
-                                height="40px"
+                                width="45px"
+                                height="45px"
                                 objectFit="contain"
                                 className="rounded-md"
                               />
@@ -368,8 +368,8 @@ function AppBar(): JSX.Element {
                             <Image
                                 src="/images/tokens/soul.png"
                                 alt="SOUL"
-                                width="40px"
-                                height="40px"
+                                width="45px"
+                                height="45px"
                                 objectFit="contain"
                                 className="rounded-md"
                             />

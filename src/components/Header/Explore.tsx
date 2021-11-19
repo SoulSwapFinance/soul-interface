@@ -13,36 +13,81 @@ import { Link } from 'react-feather'
 const items = (i18n: I18n) => [
 
   {
-    name: i18n._(t`Explore`),
-    href: '/tools',
-    explore: true,
+    name: i18n._(t`Borrow`),
+    href: '/seance',
+    borrow: true,
+    enchant: false,
+    stake: false,
     bridge: false,
     analytics: false, 
     links: false, 
-  },
-  {
-    name: i18n._(t`Bridge`),
-    href: '/bridge',
     explore: false,
-    bridge: true,
-    analytics: true, 
-    links: false, 
   },
-//   {
-//     name: i18n._(t`Analytics`),
-//     href: '/charts',
-//     explore: false,
-//     bridge: false,
-//     analytics: true, 
-//     links: false, 
-//   },
   {
-  name: i18n._(t`Links`),
-  href: '/links',
-  explore: false,
+    name: i18n._(t`Enchant`),
+    href: '/enchant',
+    borrow: false,
+    enchant: true,
+    stake: false,
+    bridge: false,
+    analytics: false, 
+    links: false, 
+    explore: false,
+  },
+  {
+    name: i18n._(t`Stake`),
+    href: '/circles',
+    borrow: false,
+    enchant: false,
+    stake: true,
+    bridge: false,
+    analytics: false, 
+    links: false, 
+    explore: false,
+  },
+  // {
+  //   name: i18n._(t`Bridge`),
+  //   href: '/bridge',
+  //   borrow: false,
+  //   enchant: false,
+  //   stake: false,
+  //   bridge: true,
+  //   analytics: true, 
+  //   links: false, 
+  //   explore: false,
+  // },
+  // {
+  //   name: i18n._(t`Analytics`),
+  //   href: '/charts',
+  //   borrow: false,
+  //   enchant: false,
+  //   stake: false,
+  //   bridge: false,
+  //   analytics: true, 
+  //   links: false, 
+  //   explore: false,
+  // },
+  {
+    name: i18n._(t`Links`),
+    href: '/links',
+    borrow: false,
+    enchant: false,
+    stake: false,
+    bridge: false,
+    analytics: false, 
+    links: true, 
+    explore: false,
+  },
+  {
+  name: i18n._(t`More`),
+  href: '/explore',
+  borrow: false,
+  enchant: false,
+  stake: false,
   bridge: false,
   analytics: false, 
-  links: true, 
+  links: false, 
+  explore: true,
   },
 ]
 
@@ -54,7 +99,7 @@ export default function Menu() {
     
     // <Popover as="nav" className="w-full relative ml-6 md:m-0">
     <Popover as="nav" 
-    className="w-full relative ml-6 md:m-0">
+    className="w-full relative ml-6 md:p-2">
       {({ open }) => (
         <>
           <Popover.Button
@@ -91,43 +136,57 @@ export default function Menu() {
               <div className="absolute grid gap-6 px-5 py-6 bg-dark-900 sm:gap-6 sm:p-6">
 
                   {solutions.map((item) =>
-                    item.explore ? (
+                    item.borrow ? (
                       <NavLink key={item.name} href={item.href}>
                       <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                        
-                      EXPLORE
-              
+                      BORROW
                       </a>
                     </NavLink>
-
-                    ) : item.bridge ?
+                    ) : item.enchant ? 
+                    (
+                      <NavLink key={item.name} href={item.href}>
+                      <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                      ENCHANT
+                      </a>
+                    </NavLink>
+                    ) : item.stake ? 
+                    (
+                      <NavLink key={item.name} href={item.href}>
+                      <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                      STAKING
+                      </a>
+                    </NavLink>
+                    // ) : item.bridge ?
+                    // (
+                    //  <NavLink key={item.name} href={item.href}>
+                    // <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                    // BRIDGE
+                    // </a>
+                    // </NavLink>
+                    // ) : item.analytics ?
+                    // (
+                    //  <NavLink key={item.name} href={item.href}>
+                    // <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                    // CHARTS
+                    // </a>
+                    // </NavLink>
+                    ) : item.links ?
                     (
                      <NavLink key={item.name} href={item.href}>
-                    <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                    BRIDGE
+                     <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">        
+                    ECOSYSTEM
                     </a>
                     </NavLink>
-//                     ) : item.analytics ?
-//                     (
-//                      <NavLink key={item.name} href={item.href}>
-//                     <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-//                     CHARTS
-//                     </a>
-//                     </NavLink>
-                    ) : (
-                        item.links ?
-                        (
-                          <NavLink key={item.name} href={item.href}>
-                          <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                            
-                            LINKS
-                          
-                          </a>
-                        </NavLink>
-                        ) : ''
-                      )
-                  )}
-                </div>
+                    ) : item.explore ?
+                    (
+                    <NavLink key={item.name} href={item.href}>
+                    <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                      EXPLORE
+                    </a>
+                   </NavLink>
+                      ) : ''
+                    )}
+                  </div>
               </div>
             </Popover.Panel>
           </Transition>
