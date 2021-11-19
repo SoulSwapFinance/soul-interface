@@ -5,11 +5,11 @@ import Head from 'next/head'
 import React from 'react'
 
 import SeanceList from '../../features/farm/SeanceList'
-import NavLink from '../../components/NavLink'
+// import NavLink from '../../components/NavLink'
 
 const SeanceCircle = () => {
   return (
-    <Wrap padding='2rem 0 0 0' justifyContent="center">
+    <Wrap padding='1rem 0 0 0' justifyContent="center">
       <DoubleGlowShadowV2 opacity="0.6">
       {/* <h1> Farm SEANCE Pairs for SOUL Rewards</h1>
       <br /> */}
