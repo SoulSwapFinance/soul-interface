@@ -904,6 +904,19 @@ export const SoulPids = [
     token1Address: tokens.SOUL,
     token2Address: tokens.SEANCE,
   },
+  {
+    // 600
+    pid: 25,
+    token1: 'SOUL',
+    token2: 'ENCHANT',
+    lpSymbol: 'SOUL-ENCHANT',
+    lpAddresses: {
+      4002: '',
+      250: '0x9acc8f23680b6d7e295166277e2fb9c88a26cce6',
+    },
+    token1Address: tokens.SOUL,
+    token2Address: tokens.ENCHANT,
+  },
 
   {
     // 1600
@@ -944,35 +957,7 @@ export const SoulPids = [
     },
     token1Address: tokens.SOUL,
     token2Address: tokens.fUSDT,
-  },
-
-  {
-    // 600
-    pid: 5,
-    token1: 'SOUL',
-    token2: 'SEANCE',
-    lpSymbol: 'SOUL-SEANCE',
-    lpAddresses: {
-      4002: '',
-      250: '0x8f1E15cD3d5a0bb85B8189d5c6B61BB64398E19b',
-    },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.SEANCE,
-  },
-
-  {
-    // 600
-    pid: 25,
-    token1: 'SOUL',
-    token2: 'ENCHANT',
-    lpSymbol: 'SOUL-ENCHANT',
-    lpAddresses: {
-      4002: '',
-      250: '0x9acc8f23680b6d7e295166277e2fb9c88a26cce6',
-    },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.ENCHANT,
-  },
+  }
 ]
 
 export const EnchantPids = [
@@ -1062,15 +1047,15 @@ export const StablePids = [
   {
     // 200
     pid: 6,
-    token1: 'FUSD',
-    token2: 'USDC',
-    lpSymbol: 'FUSD-USDC',
+    token1: 'USDC',
+    token2: 'FUSD',
+    lpSymbol: 'USDC-FUSD',
     lpAddresses: {
       4002: '',
       250: '0xD5F5E2638d636A98eD4aAEBfd2045441316e0c08',
     },
-    token1Address: tokens.FUSD,
-    token2Address: tokens.USDC,
+    token1Address: tokens.USDC,
+    token2Address: tokens.FUSD,
   },
 
   {
@@ -1078,7 +1063,7 @@ export const StablePids = [
     pid: 21,
     token1: 'USDC',
     token2: 'DAI',
-    lpSymbol: 'DAI-USDC',
+    lpSymbol: 'USDC-DAI',
     lpAddresses: {
       4002: '',
       250: '0x406de3a93f6b4179e3b21a3d81226b43e1918fd9',
