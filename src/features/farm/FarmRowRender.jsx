@@ -10,7 +10,7 @@ import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
 import useSoulSummoner from './hooks/useSoulSummoner'
 import useApprove from './hooks/useApprove'
-import { MulticallAddress, SoulSummonerAddress, SUMMONER_HELPER_ADDRESS as SummonerHelperAddress } from './constants'
+import { SoulSummonerAddress } from './constants'
 import {
   FlexText,
   FarmContainer,
@@ -20,7 +20,7 @@ import {
   FarmItemBox,
   // FarmItemHeading,
   FarmItem,
-  ShowBtn,
+  // ShowBtn,
   DetailsContainer,
   DetailsWrapper,
   FunctionBox,
@@ -66,9 +66,9 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
   const {
     // helper contract
-    totalPendingRewards,
-    fetchStakedBals,
-    fetchTokenRateBals,
+    // totalPendingRewards,
+    // fetchStakedBals,
+    // fetchTokenRateBals,
     fetchYearlyRewards,
     fetchFarmStats,
 

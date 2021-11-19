@@ -45,24 +45,12 @@ const StablesList = () => {
   //   }
   // }
 
-  const withdrawList = WithdrawPids.map((farm) => (
-    <FarmRowRender
-      key={farm.pid}
-      pid={farm.pid}
-      lpSymbol={farm.lpSymbol}
-      lpToken={farm.lpAddresses[250]}
-      token1={farm.token1}
-      token2={farm.token2}
-      farm={farm}
-    />
-  ))
-
   const farmList = StablePids.map((farm) => (
     <FarmRowRender
       key={farm.pid}
       pid={farm.pid}
       lpSymbol={farm.lpSymbol}
-      lpToken={farm.lpAddresses[250]}
+      lpToken={farm.lpAddresses[chainId]}
       token1={farm.token1}
       token2={farm.token2}
       farm={farm}
@@ -71,9 +59,6 @@ const StablesList = () => {
 
   return (
     <>
-      {/* <FarmKey withdraw={true}/> */}
-      {/* <>{withdrawList}</> */}
-      {/* <br /> */}
       <FarmKey />
       <>{farmList}</>
     </>
