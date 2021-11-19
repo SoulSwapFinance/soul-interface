@@ -268,7 +268,7 @@ export const AllPids = [
     // 600
     pid: 4,
     token1: 'FTM',
-    token2: 'ETH',
+    token2: 'WETH',
     lpSymbol: 'FTM-ETH',
     lpAddresses: {
       4002: '',
@@ -280,7 +280,7 @@ export const AllPids = [
   {
     // 600
     pid: 8,
-    token1: 'ETH',
+    token1: 'WETH',
     token2: 'BTC',
     lpSymbol: 'ETH-BTC',
     lpAddresses: {
@@ -332,7 +332,7 @@ export const AllPids = [
   {
     // 400
     pid: 15,
-    token1: 'ETH',
+    token1: 'WETH',
     token2: 'USDC',
     lpSymbol: 'ETH-USDC',
     lpAddresses: {
