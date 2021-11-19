@@ -9,15 +9,15 @@ export const WithdrawPids = [
   {
     // 400
     pid: 3,
-    token1: 'FUSD',
-    token2: 'SOUL',
+    token1: 'SOUL',
+    token2: 'FUSD',
     lpSymbol: 'SOUL-FUSD',
     lpAddresses: {
       4002: '0xaf02fd55F297f2a591367F6E33Dc600Ff2Be472A',
       250: '0x9e7711eaeb652d0da577c1748844407f8db44a10',
     },
-    token1Address: tokens.FUSD,
-    token2Address: tokens.SOUL,
+    token1Address: tokens.SOUL,
+    token2Address: tokens.FUSD,
   },
 ]
 
@@ -40,43 +40,43 @@ export const AllPids = [
   {
     // 1200
     pid: 24,
-    token1: 'FTM',
-    token2: 'ENCHANT',
+    token1: 'ENCHANT',
+    token2: 'FTM',
     lpSymbol: 'ENCHANT-FTM',
     lpAddresses: {
       4002: '',
       250: '0xb4d6ff768f409e4d102bad80f9a8ac105453ccdd',
     },
-    token1Address: tokens.FTM,
-    token2Address: tokens.ENCHANT,
+    token1Address: tokens.ENCHANT,
+    token2Address: tokens.FTM,
   },
 
   {
     // 600
     pid: 22,
-    token1: 'USDC',
-    token2: 'SOUL',
+    token1: 'SOUL',
+    token2: 'USDC',
     lpSymbol: 'SOUL-USDC',
     lpAddresses: {
       4002: '',
       250: '0xC0A301f1E5E0Fe37a31657e8F60a41b14d01B0Ef',
     },
-    token1Address: tokens.USDC,
-    token2Address: tokens.SOUL,
+    token1Address: tokens.SOUL,
+    token2Address: tokens.USDC,
   },
 
   {
     // 600
     pid: 28,
-    token1: 'fUSDT',
-    token2: 'SOUL',
+    token1: 'SOUL',
+    token2: 'fUSDT',
     lpSymbol: 'SOUL-FUSDT',
     lpAddresses: {
       4002: '',
       250: '0xE27Cc06a7F34892BC17a5474303b91b2C9F3F21A',
     },
-    token1Address: tokens.fUSDT,
-    token2Address: tokens.SOUL,
+    token1Address: tokens.SOUL,
+    token2Address: tokens.fUSDT,
   },
 
   {
@@ -98,7 +98,7 @@ export const AllPids = [
     pid: 25,
     token1: 'SOUL',
     token2: 'ENCHANT',
-    lpSymbol: 'ENCHANT-SOUL',
+    lpSymbol: 'SOUL-ENCHANT',
     lpAddresses: {
       4002: '',
       250: '0x9acc8f23680b6d7e295166277e2fb9c88a26cce6',
@@ -112,7 +112,7 @@ export const AllPids = [
     pid: 26,
     token1: 'SEANCE',
     token2: 'ENCHANT',
-    lpSymbol: 'ENCHANT-SEANCE',
+    lpSymbol: 'SEANCE-ENCHANT',
     lpAddresses: {
       4002: '',
       250: '0x5695176d085f8f7320507495066ffec940da244c',
@@ -124,15 +124,15 @@ export const AllPids = [
   {
     // 400
     pid: 29,
-    token1: 'USDC',
-    token2: 'ENCHANT',
+    token1: 'ENCHANT',
+    token2: 'USDC',
     lpSymbol: 'ENCHANT-USDC',
     lpAddresses: {
       4002: '',
       250: '0x6c6f32008262666CA4acEd0a824c4945AB96e5F3',
     },
-    token1Address: tokens.USDC,
-    token2Address: tokens.ENCHANT,
+    token1Address: tokens.ENCHANT,
+    token2Address: tokens.USDC,
   },
   {
     // 400
@@ -163,22 +163,22 @@ export const AllPids = [
   {
     // 400
     pid: 7,
-    token1: 'USDC',
-    token2: 'SEANCE',
+    token1: 'SEANCE',
+    token2: 'USDC',
     lpSymbol: 'SEANCE-USDC',
     lpAddresses: {
       4002: '',
       250: '0x98C678d3C7ebeD4a36B84666700d8b5b5Ddc1f79',
     },
-    token1Address: tokens.USDC,
-    token2Address: tokens.SEANCE,
+    token1Address: tokens.SEANCE,
+    token2Address: tokens.USDC,
   },
   {
     // 100
     pid: 11,
     token1: 'FTM',
     token2: 'GRIM',
-    lpSymbol: 'GRIM-FTM',
+    lpSymbol: 'FTM-GRIM',
     lpAddresses: {
       4002: '',
       250: '0x124D8CA33E29D1090a844e4C896DD16A360B1c96',
@@ -191,7 +191,7 @@ export const AllPids = [
     pid: 12,
     token1: 'FTM',
     token2: 'REAPER',
-    lpSymbol: 'REAPER-FTM',
+    lpSymbol: 'FTM-REAPER',
     lpAddresses: {
       4002: '',
       250: '0x7D776489372c8AFC0A1941a1335C9e9f90e0116a',
@@ -204,7 +204,7 @@ export const AllPids = [
     pid: 23,
     token1: 'FTM',
     token2: 'DAI',
-    lpSymbol: 'DAI-FTM',
+    lpSymbol: 'FTM-DAI',
     lpAddresses: {
       4002: '',
       250: '0xF3d6E8Ecece8647B456d57375Ce0B51B8F0cD40b',
@@ -217,7 +217,7 @@ export const AllPids = [
     pid: 2,
     token1: 'FTM',
     token2: 'USDC',
-    lpSymbol: 'USDC-FTM',
+    lpSymbol: 'FTM-USDC',
     lpAddresses: {
       4002: '',
       250: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556',
@@ -230,7 +230,7 @@ export const AllPids = [
     pid: 19,
     token1: 'FTM',
     token2: 'MIM',
-    lpSymbol: 'MIM-FTM',
+    lpSymbol: 'FTM-MIM',
     lpAddresses: {
       4002: '',
       250: '0x34990FC1e6e3169DCf23624049be29782AFc81bd',
@@ -254,22 +254,22 @@ export const AllPids = [
   {
     // 600
     pid: 18,
-    token1: 'BNB',
-    token2: 'FTM',
-    lpSymbol: 'BNB-FTM',
+    token1: 'FTM',
+    token2: 'BNB',
+    lpSymbol: 'FTM-BNB',
     lpAddresses: {
       4002: '',
       250: '0x52966a12e3211c92909C28603ca3df8465c06c82',
     },
-    token1Address: tokens.BNB,
-    token2Address: tokens.FTM,
+    token1Address: tokens.FTM,
+    token2Address: tokens.BNB,
   },
   {
     // 600
     pid: 4,
     token1: 'FTM',
-    token2: 'WETH',
-    lpSymbol: 'ETH-FTM',
+    token2: 'ETH',
+    lpSymbol: 'FTM-ETH',
     lpAddresses: {
       4002: '',
       250: '0xC615a5fd68265D9Ec6eF60805998fa5Bb71972Cb',
@@ -280,9 +280,9 @@ export const AllPids = [
   {
     // 600
     pid: 8,
-    token1: 'WETH',
-    token2: 'WBTC',
-    lpSymbol: 'BTC-ETH',
+    token1: 'ETH',
+    token2: 'BTC',
+    lpSymbol: 'ETH-BTC',
     lpAddresses: {
       4002: '',
       250: '0x1fc954d3484bc21e0ce53a6648a35bbfc03dc9d0',
@@ -293,22 +293,22 @@ export const AllPids = [
   {
     // 600
     pid: 20,
-    token1: 'USDC',
-    token2: 'BTC',
+    token1: 'BTC',
+    token2: 'USDC',
     lpSymbol: 'BTC-USDC',
     lpAddresses: {
       4002: '',
       250: '0xE2d39F7f0c8517Ca2058Fa97eB3D8d4928F7C6D6',
     },
-    token1Address: tokens.USDC,
-    token2Address: tokens.WBTC,
+    token1Address: tokens.WBTC,
+    token2Address: tokens.USDC,
   },
   {
     // 600
     pid: 13,
     token1: 'FTM',
     token2: 'BTC',
-    lpSymbol: 'BTC-FTM',
+    lpSymbol: 'FTM-BTC',
     lpAddresses: {
       4002: '',
       250: '0xecB41D6B5885E75a149EDA173e92267aa271D895',
@@ -347,7 +347,7 @@ export const AllPids = [
     pid: 21,
     token1: 'USDC',
     token2: 'DAI',
-    lpSymbol: 'DAI-USDC',
+    lpSymbol: 'USDC-DAI',
     lpAddresses: {
       4002: '',
       250: '0x406de3a93f6b4179e3b21a3d81226b43e1918fd9',
@@ -384,15 +384,15 @@ export const AllPids = [
   {
     // 200
     pid: 6,
-    token1: 'FUSD',
-    token2: 'USDC',
-    lpSymbol: 'FUSD-USDC',
+    token1: 'USDC',
+    token2: 'FUSD',
+    lpSymbol: 'USDC-FUSD',
     lpAddresses: {
       4002: '',
       250: '0xD5F5E2638d636A98eD4aAEBfd2045441316e0c08',
     },
-    token1Address: tokens.FUSD,
-    token2Address: tokens.USDC,
+    token1Address: tokens.USDC,
+    token2Address: tokens.FUSD,
   },
   {
     // 200
