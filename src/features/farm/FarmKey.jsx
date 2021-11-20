@@ -40,7 +40,7 @@ export default function FarmKey(withdraw) {
         alignContent="center"
       >
         <FarmContainer>
-          <Row padding=".25rem 1rem">
+          <Row padding=".5rem 1rem">
             <FarmContentWrapper>
               <TokenPairBox>
                 {/* 2 token logo combined ? */}
