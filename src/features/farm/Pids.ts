@@ -36,7 +36,32 @@ export const AllPids = [
     token1Address: tokens.SOUL,
     token2Address: tokens.FTM,
   },
-
+  {
+    // 1200
+    pid: 36,
+    token1: 'SOUL',
+    token2: 'WETH',
+    lpSymbol: 'SOUL-ETH',
+    lpAddresses: {
+      4002: '',
+      250: '0x778F0d5515A3E78D1DD191f30835420c0275bde1',
+    },
+    token1Address: tokens.SOUL,
+    token2Address: tokens.WETH,
+  },
+  {
+    // 1200
+    pid: 37,
+    token1: 'SOUL',
+    token2: 'WBTC',
+    lpSymbol: 'SOUL-BTC',
+    lpAddresses: {
+      4002: '',
+      250: '0xDA9D9CB5482EFD10839A676Fe99f05E41F57D885',
+    },
+    token1Address: tokens.SOUL,
+    token2Address: tokens.WBTC,
+  },
   {
     // 600
     pid: 22,
@@ -736,6 +761,7 @@ export const FantiesPids = [
     token2Address: tokens.MIM,
   },
 
+
 ]
 
 export const SeancePids = [
@@ -936,6 +962,33 @@ export const SoulPids = [
     token1Address: tokens.SOUL,
     token2Address: tokens.FTM,
   },
+  {
+    // 1200
+    pid: 36,
+    token1: 'SOUL',
+    token2: 'WETH',
+    lpSymbol: 'SOUL-ETH',
+    lpAddresses: {
+      4002: '',
+      250: '0x778f0d5515a3e78d1dd191f30835420c0275bde1',
+    },
+    token1Address: tokens.SOUL,
+    token2Address: tokens.WETH,
+  },
+  {
+    // 1200
+    pid: 37,
+    token1: 'SOUL',
+    token2: 'WBTC',
+    lpSymbol: 'SOUL-BTC',
+    lpAddresses: {
+      4002: '',
+      250: '0xda9d9cb5482efd10839a676fe99f05e41f57d885',
+    },
+    token1Address: tokens.SOUL,
+    token2Address: tokens.WBTC,
+  },
+
   {
     // 600
     pid: 22,
