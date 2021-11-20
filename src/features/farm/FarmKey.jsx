@@ -45,7 +45,7 @@ export default function FarmKey(withdraw) {
               <TokenPairBox>
                 {/* 2 token logo combined ? */}
                 <Wrap>
-                  <Text textAlignVertical="center" padding ="0" fontSize=".9rem" color="#bbb">
+                  <Text padding ="0" fontSize=".9rem" color="#bbb">
                   LP TOKEN PAIR
                   </Text>
                 </Wrap>
