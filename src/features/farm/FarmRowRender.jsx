@@ -531,7 +531,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
                 {feePercent !== 0 ? (
                   <Text fontSize=".9rem" padding="0" color="#F36FFE">
-                    Initial withdrawal fee is 14% - You have {feePercent} days until 0%
+                    Withdrawal fee: {feePercent}%, decreasing 1% daily until 0%.
                   </Text>
                 ) : (
                   <Text fontSize=".9rem" padding="0" color="#F36FFE">
