@@ -45,39 +45,39 @@ export default function FarmKey(withdraw) {
               <TokenPairBox>
                 {/* 2 token logo combined ? */}
                 <Wrap>
-                  <Text padding="0" fontSize=".7rem" color="#bbb">
-                    PAIR
+                  <Text textAlignVertical="center" padding ="0" fontSize=".9rem" color="#bbb">
+                  LP TOKEN PAIR
                   </Text>
                 </Wrap>
               </TokenPairBox>
 
               <FarmItemBox>
-                <Text padding="0" fontSize=".7rem" color="#bbb">
-                  APR
+                <Text padding="0" fontSize=".9rem" color="#bbb">
+                % APR
                 </Text>
               </FarmItemBox>
 
               <FarmItemBox desktopOnly={true}>
-                <Text padding="0" fontSize=".7rem" color="#bbb">
-                  EARNED
+                <Text padding="0" fontSize=".9rem" color="#bbb">
+                SOUL EARNED
                 </Text>
               </FarmItemBox>
 
               <HideOnMobile desktopOnly={true}>
-                <Text padding="0" fontSize=".7rem" color="#bbb">
-                  REWARDS P/D
+                <Text padding="0" fontSize=".9rem" color="#bbb">
+                REWARDS P/D
                 </Text>
               </HideOnMobile>
 
               <HideOnMobile desktopOnly={true}>
-                <Text padding="0" fontSize=".7rem" color="#bbb">
-                  OWNERSHIP
+                <Text padding="0" fontSize=".9rem" color="#bbb">
+                OWNERSHIP
                 </Text>
               </HideOnMobile>
 
               <HideOnMobile>
-                <Text padding="0" fontSize=".7rem" color="#bbb">
-                  TVL
+                <Text padding="0" fontSize=".9rem" color="#bbb">
+                  VALUE (TVL)
                 </Text>
               </HideOnMobile>
             </FarmContentWrapper>
