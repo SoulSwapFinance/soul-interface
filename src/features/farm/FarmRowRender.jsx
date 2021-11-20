@@ -166,8 +166,8 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       const fee = amount * feePerc
       const receive = amount - fee
 
-      fee !== 0 ? setFeeAmount(fee) : setFeeAmount(0)
-      receive !== 0 ? setReceiving(receive) : setReceiving(0)
+      fee !== 0 ? setFeeAmount(Number(fee).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) : setFeeAmount(0)
+      receive !== 0 ? setReceiving(Number(receive).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) : setReceiving(0)
     } else {
       setFeeAmount(0)
       setReceiving(0)
@@ -533,7 +533,10 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     padding="0"
                     fontSize=".9rem"
                     color="#aaa"
-                    onClick={() => (document.getElementById('unstake').value = stakedBal)}
+                    onClick={() => {
+                      document.getElementById('unstake').value = stakedBal
+                      getWithdrawable()
+                    }}
                   >
                     MAX
                   </ClickableText>
