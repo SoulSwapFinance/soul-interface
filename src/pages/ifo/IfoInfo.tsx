@@ -139,7 +139,7 @@ function IfoInfo({
       <div className="flex flex-col mt-6">
         <div>About</div>
         <div>
-          The Trident NFT is introduced as a celebratory piece for the announcement and upcoming release of Sushi’s
+          The Trident NFT is introduced as a celebratory piece for the announcement and upcoming release of Soul’s
           Trident AMM. This NFT can be redeemed for a 19cm x 19cm 900 tab piece of blotter paper with this Chewy Stoll
           artwork on the left printed on it.
         </div>

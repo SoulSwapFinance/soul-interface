@@ -270,7 +270,7 @@ export default function SoulStake() {
   // TODO: DROP AND USE SWR HOOKS INSTEAD
   // useEffect(() => {
   //   const fetchData = async () => {
-  //     const results = await sushiData.exchange.dayData()
+  //     const results = await soulData.exchange.dayData()
   //     const apr = (((results[1].volumeUSD * 0.05) / data?.bar?.totalSupply) * 365) / (data?.bar?.ratio * soulPrice)
 
   //     setApr(apr)

@@ -61,7 +61,7 @@ export default function Tokens() {
     <>
       <Head>
         <title>SoulSwap Liquidity Pair (SLP) Analytics | Soul</title>
-        <meta name="description" content="SoulSwap Liquidity Pair (SLP) Analytics by Sushi" />
+        <meta name="description" content="SoulSwap Liquidity Pair (SLP) Analytics by Soul" />
       </Head>
 
       <Container maxWidth="full" className="grid h-full grid-flow-col grid-cols-5 mx-auto gap-9">
