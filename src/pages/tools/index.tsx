@@ -13,7 +13,7 @@ const TOOLS = (i18n: I18n) => [
     id: 1,
     name: 'SUMMON SOUL',
     description: i18n._(t`Deposit your SOUL-LP to earn $SOUL rewards.`),
-    href: '/tools/meowshi',
+    href: './farms',
   },
   {
     id: 2,
