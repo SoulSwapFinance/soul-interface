@@ -59,7 +59,7 @@ export default function FarmKey(withdraw) {
 
               <FarmItemBox desktopOnly={true}>
                 <Text padding="0" fontSize=".9rem" color="#bbb">
-                SOUL EARNED
+                EARNED
                 </Text>
               </FarmItemBox>
 
