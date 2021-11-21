@@ -608,6 +608,19 @@ export const MatePids = [
 export const FantiesPids = [
 
   {
+    // 1600
+    pid: 1,
+    token1: 'FTM',
+    token2: 'SOUL',
+    lpSymbol: 'FTM-SOUL',
+    lpAddresses: {
+      4002: '0x10c0AFd7C58916C4025d466E11850c7D79219277',
+      250: '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.SOUL,
+  },
+  {
     // 600
     pid: 10,
     token1: 'FTM',
@@ -620,7 +633,6 @@ export const FantiesPids = [
     token1Address: tokens.FTM,
     token2Address: tokens.SEANCE,
   },
-
   {
     // 1200
     pid: 24,
