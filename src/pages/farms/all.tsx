@@ -2,6 +2,8 @@ import { Wrap } from '../../components/ReusableStyles'
 import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 import Container from '../../components/Container'
 import Head from 'next/head'
+// import FarmHeader from '../../features/farm/Header'
+
 import React from 'react'
 
 import FarmList from '../../features/farm/FarmList'
@@ -18,6 +20,7 @@ const All = () => {
           <title>Farm | All</title>
           <meta key="description" name="description" content="Farm SOUL" />
         </Head>
+        
         <FarmList />
       </Container>
       {/* <NavLink href="/farms">
