@@ -25,7 +25,8 @@ import Loader from '../../../components/Loader'
 import Lottie from 'lottie-react'
 import ProgressSteps from '../../../components/ProgressSteps'
 import ReactGA from 'react-ga'
-import SwapHeader from '../../../components/ExchangeHeader'
+// import SwapHeader from '../../../components/ExchangeHeader'
+import SwapHeader from '../../../features/trade/Header'
 import TokenWarningModal from '../../../modals/TokenWarningModal'
 import TradePrice from '../../../features/swap/TradePrice'
 import UnsupportedCurrencyFooter from '../../../features/swap/UnsupportedCurrencyFooter'
@@ -611,7 +612,7 @@ export default function Swap() {
             <UnsupportedCurrencyFooter show={swapIsUnsupported} currencies={[currencies.INPUT, currencies.OUTPUT]} />
           )}
         </div>
-        <AutoColumn justify="space-between" className="py-3">
+        <AutoColumn justify="space-between" className="py-5">
           <iframe 
                 frameBorder={"none"}
                 title={"USER"}
