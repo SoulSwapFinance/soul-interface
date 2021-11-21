@@ -36,8 +36,8 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
   const isLimitOrder = router.asPath.startsWith('/limit-order')
 
   return (
-    <div className="flex items-center justify-between mb-4 space-x-3">
-      <div className="grid grid-cols-3 rounded p-3px bg-dark-800 h-[46px]">
+    <div className="flex items-center justify-center mb-6 space-x-3">
+      <div className="grid grid-cols-4 rounded p-3px bg-dark-800 h-[46px]">
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
           href={{
@@ -46,7 +46,7 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
           }}
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
-            {i18n._(t`Exchange`)}
+            {i18n._(t`Swap`)}
           </a>
         </NavLink>
         {/* <NavLink
@@ -67,18 +67,38 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
           }`}
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-            {i18n._(t`Liquidity`)}
+            {i18n._(t`Pool`)}
           </a>
         </NavLink>
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
-          href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
+          href={"/info"}
+          // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
             {i18n._(t`Charts`)}
           </a>
         </NavLink>
+        <NavLink
+          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
+          href={"/bridge"}
+          // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
+        >
+          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
+            {i18n._(t`Bridge`)}
+          </a>
+        </NavLink>
+        {/* <NavLink
+          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
+          href={"/farms"}
+          // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
+        >
+          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
+            {i18n._(t`Farm`)}
+          </a>
+        </NavLink> */}
       </div>
+
       <div className="flex items-center">
         <div className="grid grid-flow-col gap-1">
           {isLimitOrder && (
