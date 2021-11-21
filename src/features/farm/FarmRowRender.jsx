@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
 
-
 import { ethers } from 'ethers'
 
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
@@ -54,7 +53,6 @@ const TokenPair = styled(ExternalLink)`
 `
 
 const TokenLogo = styled(Image)`
-
   @media screen and (max-width: 400px) {
     font-size: 1rem;
     padding-right: 10px;
@@ -149,10 +147,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     const staked = await result?.[0]
 
     // set to 14 when no staked, otherwise uses percent
-    staked > 0
-      ? await setFeePercent(percent / 10 ** 18)
-      : await setFeePercent(14)
-
+    staked > 0 ? await setFeePercent(percent / 10 ** 18) : await setFeePercent(14)
   }
 
   const getWithdrawable = async () => {
@@ -166,8 +161,22 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       const fee = amount * feePerc
       const receive = amount - fee
 
-      fee !== 0 ? setFeeAmount(fee) : setFeeAmount(0)
-      receive !== 0 ? setReceiving(receive) : setReceiving(0)
+      fee !== 0
+        ? setFeeAmount(
+            Number(fee)
+              .toFixed(2)
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+          )
+        : setFeeAmount(0)
+      receive !== 0
+        ? setReceiving(
+            Number(receive)
+              .toFixed(2)
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+          )
+        : setReceiving(0)
     } else {
       setFeeAmount(0)
       setReceiving(0)
@@ -386,26 +395,34 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     color="#F36FFE" // neon purple
                     href={`https://exchange.soulswap.finance/add/${farm.token1Address[chainId]}/${farm.token2Address[chainId]}`}
                   >
-                  <TokenLogo
-                    src={'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' + farm.token1Address[chainId] + '/logo.png'}
-                    alt="LOGO"
-                    width="44px"
-                    height="44px"
-                    objectFit="contain"
-                    className="rounded-full"
+                    <TokenLogo
+                      src={
+                        'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
+                        farm.token1Address[chainId] +
+                        '/logo.png'
+                      }
+                      alt="LOGO"
+                      width="44px"
+                      height="44px"
+                      objectFit="contain"
+                      className="rounded-full"
                     />
-                  <TokenLogo
-                    src={'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' + farm.token2Address[chainId] + '/logo.png'}
-                    alt="LOGO"
-                    width="44px"
-                    height="44px"
-                    objectFit="contain"
-                    className="rounded-full"
+                    <TokenLogo
+                      src={
+                        'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
+                        farm.token2Address[chainId] +
+                        '/logo.png'
+                      }
+                      alt="LOGO"
+                      width="44px"
+                      height="44px"
+                      objectFit="contain"
+                      className="rounded-full"
                     />
-                    <Text fontWeight='bold' textAlign="center" padding="0" fontSize=".8rem" color="#F36FFE">
-                    {lpSymbol}
+                    <Text fontWeight="bold" textAlign="center" padding="0" fontSize=".8rem" color="#F36FFE">
+                      {lpSymbol}
                     </Text>
-                    </TokenPair>
+                  </TokenPair>
                 </Wrap>
               </TokenPairBox>
 
@@ -419,7 +436,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     0
                   </Text>
                 ) : (
-                  <Text padding="0" fontSize="1.5rem" color='#F36FFE'>
+                  <Text padding="0" fontSize="1.5rem" color="#F36FFE">
                     {pending}
                   </Text>
                 )}
@@ -443,7 +460,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     {percOfFarm}%
                   </Text>
                 ) : (
-                  <Text padding="0" fontSize="1.5rem" color='#F36FFE'>
+                  <Text padding="0" fontSize="1.5rem" color="#F36FFE">
                     {percOfFarm}%
                   </Text>
                 )}
@@ -511,9 +528,16 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     </SubmitButton>
                   )}
                 </Wrap>
-                <Text fontSize=".9rem" padding="0" color="#F36FFE">
-                  Withdrawal fee: {feePercent}%, decreasing 1% daily until 0%.
-                </Text>
+
+                {feePercent !== 0 ? (
+                  <Text fontSize=".9rem" padding="0" color="#F36FFE">
+                    Withdrawal fee: {feePercent}%, decreasing 1% daily until 0%.
+                  </Text>
+                ) : (
+                  <Text fontSize=".9rem" padding="0" color="#F36FFE">
+                    Withdrawal fee: {feePercent}%!
+                  </Text>
+                )}
               </FunctionBox>
 
               <FunctionBox>
@@ -533,7 +557,10 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     padding="0"
                     fontSize=".9rem"
                     color="#aaa"
-                    onClick={() => (document.getElementById('unstake').value = stakedBal)}
+                    onClick={() => {
+                      document.getElementById('unstake').value = stakedBal
+                      getWithdrawable()
+                    }}
                   >
                     MAX
                   </ClickableText>
@@ -570,9 +597,9 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 <Wrap padding="0">
                   <Wrap padding="0" display="flex">
                     <Text fontSize=".9rem" padding="0" color="#aaa">
-                      Fee Amount: {feeAmount}
+                      Fee Amount ({feePercent}%): {feeAmount}
                     </Text>
-                    <Text fontSize=".9rem" padding="0 0 0 6.5rem" color="#aaa">
+                    <Text fontSize=".9rem" padding="0 0 0 6rem" color="#aaa">
                       Receiving: {receiving}
                     </Text>
                   </Wrap>

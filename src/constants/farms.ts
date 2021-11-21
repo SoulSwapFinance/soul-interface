@@ -558,6 +558,35 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
     },
+    '0x778F0d5515A3E78D1DD191f30835420c0275bde1': {  // SOUL-WETH
+      id: 36, // 1200
+      token0: {
+        id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
+        name: 'Soul Power',
+        symbol: 'SOUL',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // WETH
+        name: 'Wrapped ETH',
+        symbol: 'WETH',
+        decimals: 18,
+      },
+    },
+    '0xDA9D9CB5482EFD10839A676Fe99f05E41F57D885': {  // SOUL-WBTC
+      id: 37, // 1200
+      token0: {
+        id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
+        name: 'Soul Power',
+        symbol: 'SOUL',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x321162Cd933E2Be498Cd2267a90534A804051b11', // WBTC
+        name: 'Wrapped Bitcoin',
+        symbol: 'WBTC',
+        decimals: 8,
+    },
   }
-  
+  }
 }
