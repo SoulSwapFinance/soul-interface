@@ -91,7 +91,7 @@ export function useUserUnclaimedAmount(account: string | null | undefined): Curr
   // console.log('claimStats:', {
   //   canClaim: canClaim,
   //   userClaimData: userClaimData,
-  //   sushi: sushi
+  //   soul: soul
   // })
 
   if (!soul) return undefined
