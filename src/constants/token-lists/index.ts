@@ -14,7 +14,7 @@ const OPYN_LIST = 'https://raw.githubusercontent.com/opynfinance/opyn-tokenlist/
 const AAVE_LIST = 'tokenlist.aave.eth'
 const CMC_ALL_LIST = 'defi.cmc.eth'
 const CMC_STABLECOIN = 'stablecoin.cmc.eth'
-const COINGECKO_LIST = 'https://tokens.coingecko.com/uniswap/all.json'
+// const COINGECKO_LIST = 'https://tokens.coingecko.com/uniswap/all.json'
 const COMPOUND_LIST = 'https://raw.githubusercontent.com/compound-finance/token-list/master/compound.tokenlist.json'
 const GEMINI_LIST = 'https://www.gemini.com/uniswap/manifest.json'
 const KLEROS_LIST = 't2crtokens.eth'
@@ -37,7 +37,7 @@ export const DEFAULT_LIST_OF_LISTS: string[] = [
   WRAPPED_LIST,
   SET_LIST,
   ROLL_LIST,
-  COINGECKO_LIST,
+  // COINGECKO_LIST,
   KLEROS_LIST,
   OPYN_LIST,
   NFTX_LIST_V1,
