@@ -126,14 +126,7 @@
         "decimals": 18,
         "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/sushi.jpg"
       },
-      {
-        "address": "0xE1Be5D3f34e89dE342Ee97E6e90D405884dA6c67",
-        "chainId": 1,
-        "name": "TRON",
-        "symbol": "TRX",
-        "decimals": 6,
-        "logoURI": "https://assets.coingecko.com/coins/images/1094/small/tron-logo.png?1547035066"
-      },
+
       {
         "address": "0xc12eCeE46ed65D970EE5C899FCC7AE133AfF9b03",
         "chainId": 1,

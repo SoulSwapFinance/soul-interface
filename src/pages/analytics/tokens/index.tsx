@@ -69,11 +69,21 @@ export default function Tokens() {
           <Menu />
         </div>
         <div className="col-span-5 space-y-6 lg:col-span-4">
-          <div className="flex flex-row items-center">
+          {/* <div className="flex flex-row items-center">
             <div className="ml-3 text-2xl font-bold text-high-emphesis">Tokens</div>
-          </div>
-          <Search term={term} search={search} />
-          <TokenList tokens={tokensSearched} />
+          </div> */}
+          {/* <Search term={term} search={search} />
+          <TokenList tokens={tokensSearched} /> */}
+          {/* const Info = () => { */}
+      <iframe 
+			frameBorder={"none"}
+    		title={"INFO"}
+    		src="https://info.soulswap.finance/tokens"
+    		height={"100%" }
+    		width={"100%"}
+    />
+
+
         </div>
       </Container>
     </>
