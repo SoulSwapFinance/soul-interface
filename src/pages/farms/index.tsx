@@ -1,104 +1,69 @@
-import { ArrowRightIcon } from '@heroicons/react/outline'
+// import FarmHeader from '../../features/farm/Header'
+// import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
+// import Container from '../../components/Container'
+// // import { useIsSwapUnsupported } from '../../hooks/useIsSwapUnsupported'
+
+// // const addIsUnsupported = useIsSwapUnsupported(currencies?.CURRENCY_A, currencies?.CURRENCY_B)
+
+// const Farms = () => {
+// 	return (
+//     <DoubleGlowShadowV2 opacity="0.6">
+//         <Container id="charts-page" maxWidth="2xl" className="space-y-4">
+//           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
+//             <FarmHeader
+//               // input={currencies[Field.CURRENCY_A]}
+//               // output={currencies[Field.CURRENCY_B]}
+//               // allowedSlippage={allowedSlippage}
+//             />     
+//             <iframe 
+//               frameBorder={"none"}
+//               title={"BRIDGE"}
+//               src="https://bridge.soul.sh"
+//               height={'720' }
+//               width={"100%"}
+//             />
+// 	        </div>
+//         </Container>
+//       </DoubleGlowShadowV2>
+
+// )}
+
+// export default Farms
+
+import { Wrap } from '../../components/ReusableStyles'
+import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 import Container from '../../components/Container'
 import Head from 'next/head'
-import { I18n } from '@lingui/core'
-import Link from 'next/link'
-import Typography from '../../components/Typography'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
-import { useMemo } from 'react'
+// import FarmHeader from '../../features/farm/Header'
 
-const FARMS = (i18n: I18n) => [
-  {
-    id: 1,
-    name: 'SOUL PAIRS',
-    href: '/farms/soulpower',
-  },
-  {
-    id: 2,
-    name: 'SEANCE PAIRS',
-    href: './farms/seancecircle'
-  },
-  {
-    id: 3,
-    name: 'ENCHANT PAIRS',
-    href: './farms/enchant'
-  },
-  {
-    id: 4,
-    name: 'FANTOM PAIRS',
-    href: './farms/fanties'
-  },
-  {
-    id: 5,
-    name: 'STABLE PAIRS',
-    href: './farms/stables'
-  },
-  {
-    id: 6,
-    name: 'ALL FARMS',
-    href: '/farms/all',
-  },
-  // {
-  //   id: 8,
-  //   name: 'EARN SOUL',
-  //   href: '/seance'
-  // },
-  // {
-  //   id: 9,
-  //   name: 'EARN SEANCE',
-  //   href: './enchant'
-  // },
-  // {
-  //   id: 7,
-  //   name: 'EARN WFTM & UNIDX',
-  //   href: './farms/stables'
-  // },
-  // {
-  //   id: 5,
-  //   name: 'WETH PAIRS',
-  //   href: './scarab/create'
-  // },
-  // {
-  //   id: 6,
-  //   name: 'BTC PAIRS',
-  //   href: '/bitcoins'
-  // },
-]
+import React from 'react'
 
-export default function Tools() {
-  const { i18n } = useLingui()
-  const features = useMemo(() => FARMS(i18n), [i18n])
+import FarmList from '../../features/farm/FarmList'
+// import NavLink from '../../components/NavLink'
 
+const Farms = () => {
   return (
-    <Container id="features-page" className="py-4 space-y-4 md:py-8 lg:py-12" maxWidth="xl">
-      <Head>
-        <title>Farms | Soul</title>
-        <meta key="description" name="description" content="SoulSwap Tools..." />
-      </Head>
-      <Typography variant="h1" component="h1">
-        SOUL FARMS
-      </Typography>
-      <ul className="space-y-4 divide-y-0">
-        {features.map((feature) => (
-          <li key={feature.id} className="relative w-full p-4 rounded bg-dark-900 hover:bg-dark-800">
-            <div className="flex justify-between space-x-4">
-              <div className="flex-1 min-w-0">
-                <Link href={feature.href}>
-                  <a className="flex items-center justify-between focus:outline-none">
-                    <span className="absolute inset-0" aria-hidden="true" />
-                    <div className="space-y-1">
-                      <p className="text-xl font-bold truncate text-primary">{feature.name}</p>
-                      {/* <p className="text-sm truncate text-secondary">{feature.description}</p> */}
-                    </div>
-                    <ArrowRightIcon width={24} height={24} className="text-high-emphesis" />
-                  </a>
-                </Link>
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </Container>
+    <Wrap padding='1rem 0 0 0' justifyContent="center">
+      <DoubleGlowShadowV2 opacity="0.6">
+      {/* <h1> Farm Pairs for SOUL Rewards</h1>
+      <br /> */}
+      <Container id="farm-page">
+        <Head>
+          <title>Farm | All</title>
+          <meta key="description" name="description" content="Farm SOUL" />
+        </Head>
+        
+        <FarmList />
+      </Container>
+      {/* <NavLink href="/farms">
+            <a className="flex items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
+              <span>View All Categories</span>
+            </a>
+          </NavLink> */}
+      </DoubleGlowShadowV2>
+
+    </Wrap>
   )
 }
+
+export default Farms

@@ -198,6 +198,9 @@ msgstr ""
 msgid "Change Recipient"
 msgstr ""
 
+msgid "Charts"
+msgstr ""
+
 msgid "Chinese"
 msgstr ""
 
@@ -434,9 +437,6 @@ msgid "Expiration is the time at which the order will become invalid"
 msgstr ""
 
 msgid "Expired"
-msgstr ""
-
-msgid "Explore"
 msgstr ""
 
 msgid "Explore our Protocol."

@@ -21,13 +21,13 @@ const getQuery = (input, output) => {
   }
 }
 
-interface ExchangeHeaderProps {
+interface FarmHeaderProps {
   input?: Currency
   output?: Currency
   allowedSlippage?: Percent
 }
 
-const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippage }) => {
+const FarmHeader: FC<FarmHeaderProps> = ({ input, output, allowedSlippage }) => {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const router = useRouter()
@@ -41,12 +41,12 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
           href={{
-            pathname: '/swap',
+            pathname: '/farms/all',
             query: getQuery(input, output),
           }}
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
-            {i18n._(t`Swap`)}
+            {i18n._(t`ALL`)}
           </a>
         </NavLink>
         {/* <NavLink
@@ -62,30 +62,31 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
         </NavLink> */}
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
-          href={`/${!isRemove ? 'add' : 'remove'}${input ? `/${currencyId(input)}` : ''}${
-            output ? `/${currencyId(output)}` : ''
-          }`}
+          href={"/farms/soulpower"}
+          // href={`/${!isRemove ? 'add' : 'remove'}${input ? `/${currencyId(input)}` : ''}${
+          //   output ? `/${currencyId(output)}` : ''
+        // }`}
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-            {i18n._(t`Pool`)}
+            {i18n._(t`SOUL`)}
           </a>
         </NavLink>
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
-          href={"/info"}
+          href={"/farms/seancecircle"}
           // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-            {i18n._(t`Charts`)}
+            {i18n._(t`SEANCE`)}
           </a>
         </NavLink>
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
-          href={"https://bridge.soulswap.finance"}
+          href={"/farms/fanties"}
           // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-            {i18n._(t`Bridge`)}
+            {i18n._(t`FANTOM`)}
           </a>
         </NavLink>
         {/* <NavLink
@@ -99,7 +100,7 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
         </NavLink> */}
       </div>
 
-      <div className="flex items-center">
+      {/* <div className="flex items-center">
         <div className="grid grid-flow-col gap-1">
           {isLimitOrder && (
             <div className="items-center h-full w-full cursor-pointer hover:bg-dark-800 rounded px-3 py-1.5">
@@ -123,10 +124,10 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
           <div className="relative flex items-center w-full h-full rounded hover:bg-dark-800">
             <Settings placeholderSlippage={allowedSlippage} />
           </div>
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
     </div>
   )
 }
 
-export default ExchangeHeader
+export default FarmHeader

@@ -1,4 +1,4 @@
-import { ChainId, Currency, NATIVE, Token, WNATIVE, WNATIVE_ADDRESS, currencyEquals } from '../sdk'
+import { ChainId, Currency, NATIVE, MultiToken, Token, WNATIVE, WNATIVE_ADDRESS, currencyEquals } from '../sdk'
 import { NEVER_RELOAD, useSingleCallResult } from '../state/multicall/hooks'
 import { TokenAddressMap, useAllLists, useInactiveListUrls, useUnsupportedTokenList } from './../state/lists/hooks'
 import { useBytes32TokenContract, useTokenContract } from './useContract'
@@ -12,6 +12,58 @@ import { useActiveWeb3React } from './useActiveWeb3React'
 import { useCombinedActiveList } from '../state/lists/hooks'
 import { useMemo } from 'react'
 import { useUserAddedTokens } from '../state/user/hooks'
+
+export function useLocalToken(currency?: any): MultiToken | undefined | null {
+  const { chainId } = useActiveWeb3React()
+
+  // const address = isAddress(currency?.address)
+  const address = isAddress(currency?.address)
+
+  const symbol = currency?.symbol
+  const name = currency?.name
+  const decimals = currency?.decimals
+  const underlying = currency?.underlying
+
+  const ContractVersion = currency?.ContractVersion
+  const destChains = currency?.destChains
+  const logoUrl = currency?.logoUrl
+  const price = currency?.price
+
+  // const token = address && name ? undefined : useToken(address ? address : undefined)
+  // console.log(token)
+  // console.log(address)
+  // console.log(currency)
+  return useMemo(() => {
+    if (!currency) return undefined
+    // if (!chainId || !address) return undefined
+    if (!chainId || !address) return undefined
+    // if (token) return token
+    return new MultiToken(
+      chainId,
+      address,
+      decimals,
+      symbol,
+      name,
+      underlying,
+      ContractVersion,
+      destChains,
+      logoUrl,
+      price,
+    )
+  }, [
+    address,
+    chainId,
+    symbol,
+    decimals,
+    name,
+    underlying,
+    ContractVersion,
+    destChains,
+    logoUrl,
+    price,
+  ])
+}
+
 
 // reduce token map into standard address <-> Token mapping, optionally include user added tokens
 function useTokensFromMap(tokenMap: TokenAddressMap, includeUserAdded: boolean): { [address: string]: Token } {

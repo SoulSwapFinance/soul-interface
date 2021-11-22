@@ -4,9 +4,11 @@ import { ethers } from 'ethers'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import useSoulSummoner from './hooks/useSoulSummoner'
 
+import FarmHeader from '../../features/farm/Header'
 import FarmKey from './FarmKey'
 import FarmRowRender from './FarmRowRender'
 import { FantiesPids, WithdrawPids } from './Pids'
+import Farm from '../../pages/farm'
 // import { Wrap, Heading, Text, Button } from './ReusableStyles' // Heading, Text
 
 const FantiesList = () => {
@@ -59,6 +61,7 @@ const FantiesList = () => {
 
   return (
     <>
+      <FarmHeader/>
       <FarmKey />
       <>{farmList}</>
     </>
