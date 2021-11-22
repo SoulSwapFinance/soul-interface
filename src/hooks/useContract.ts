@@ -7,7 +7,8 @@ import {
   SOUL_FTM_PAIR,
   SEANCE_USDC_PAIR,
   FTM_USDC_PAIR,
-  SCARAB_ADDRESS
+  SCARAB_ADDRESS,
+  ATOMIC_SWAP_ADDRESS,
 } from '../constants/addresses'
 import {
   ARGENT_WALLET_DETECTOR_ABI,
@@ -59,9 +60,9 @@ import FACTORY_ABI from '../constants/abis/factory.json'
 import ISoulSwapPairABI from '../constants/abis/soulswap/ISoulSwapPair.json'
 import KASHIPAIR_ABI from '../constants/abis/kashipair.json'
 import MAKER_ABI from '../constants/abis/maker.json'
-import SOUL_SCARAB_ABI from '../constants/abis/soulswap/scarab.json' // todo
 
 // soul
+import SOUL_SCARAB_ABI from '../constants/abis/soulswap/scarab.json' // todo
 import SOUL_GUIDE_ABI from '../constants/abis/soul-guide.json' // TODO: update abi
 import SOUL_SUMMONER_ABI from '../constants/abis/soulswap/soulsummoner.json' // 28 JUL
 import SOULVAULT_ABI from '../constants/abis/soulswap/soulvault.json' // 31 JUL
@@ -70,6 +71,7 @@ import ENCHANT_ABI from '../constants/abis/soulswap/enchant.json' // 30 OCT
 import ENCHANT_HELPER_ABI from '../constants/abis/soulswap/enchant-helper.json' // 30 OCT
 import SOUL_ABI from '../constants/abis/soulswap/soulpower.json' // 28 JUL
 import SEANCE_ABI from '../constants/abis/soulswap/seance.json' // 28 JUL
+import ATOMIC_SWAP_ABI from '../constants/abis/soulswap/atomic-swap.json'
 
 // bridge
 import anyswapEthOperaBridge_ABI from '../constants/abis/soulswap/bridge/anyswapEthOperaBridge.json'
@@ -555,4 +557,11 @@ export function useLimitOrderHelperContract(withSignerIfPossible?: boolean): Con
 
 export function useAnyswapEthOperaBridge(withSignerIfPossible?: boolean): Contract | null {
   return useContract('0x5cbe98480a790554403694b98bff71a525907f5d', anyswapEthOperaBridge_ABI, withSignerIfPossible)
+}
+
+// ------- Atomic Swap --------
+
+export function useAtomicSwapContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(ATOMIC_SWAP_ADDRESS[chainId], ATOMIC_SWAP_ABI, withSignerIfPossible)
 }

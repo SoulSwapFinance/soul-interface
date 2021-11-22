@@ -134,6 +134,17 @@
       "type": "function"
     },
     {
+      "name": "name",
+      "outputs": [
+        {
+          "internalType": "string",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "address",
@@ -184,6 +195,28 @@
         }
       ],
       "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "name": "name",
+      "outputs": [
+        {
+          "internalType": "string",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "name": "symbol",
+      "outputs": [
+        {
+          "internalType": "string",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
       "type": "function"
     }
   ],

@@ -2,6 +2,14 @@ import { ChainId } from '../sdk'
 
 type AddressMap = { [chainId: number]: string }
 
+export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
+
+export const CONTRACT_SCAN = {
+  [ChainId.MAINNET]: 'https://etherscan.io/address/',
+  [ChainId.FANTOM]: 'https://ftmscan.com/address/',
+  [ChainId.FANTOM_TESTNET]: 'https://testnet.ftmscan.com/address/',
+}
+
 export const TIMELOCK_ADDRESS = '0x1a9C8182C09F50C8318d769245beA52c32BE35BC'
 
 export const ARCHER_ROUTER_ADDRESS: AddressMap = {
@@ -45,6 +53,42 @@ export const FAUCET_ADDRESS: AddressMap = {
   [ChainId.FANTOM_TESTNET]: '',
 }
 
+export const SOUL_SUMMONER_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B', // 20 SEP,
+  [ChainId.FANTOM_TESTNET]: '0x70C6A37244feD0Fa4e4148D5ffe38a209dCEd714', // 20 SEP
+}
+
+export const ATOMIC_SWAP_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x7A2C9047085F413f259Bfa2d0E292AD725493F45', // 21 NOV,
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
+export const ZAPPER_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '0xcff6eF0B9916682B37D80c19cFF8949bc1886bC2',
+  // [ChainId.ROPSTEN]: '0xcff6eF0B9916682B37D80c19cFF8949bc1886bC2',
+  [ChainId.FANTOM]: '',
+}
+
+// TODO: specify merkle distributor for mainnet
+export const MERKLE_DISTRIBUTOR_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '0xcBE6B83e77cdc011Cc18F6f0Df8444E5783ed982',
+  // [ChainId.ROPSTEN]: '0x84d1f7202e0e7dac211617017ca72a2cb5e2b955',
+}
+
+export const MULTICALL2_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696',
+  [ChainId.BSC]: '',
+  // [ChainId.FANTOM]: '0xEd2Fb478f7fCef33E1E1d980a0135789B295a7F5', // 29 AUG
+  [ChainId.FANTOM]: '0xf682Cc4468608fC4eFbaD6a06D9BC72e7790075a', // 29 AUG
+  [ChainId.FANTOM_TESTNET]: '0x1ACB479bB9D1F73009F85ef5F495E942Bb57f15A', // 7 JUL
+}
+
+// TOKENS
+
 export const SOUL_SEANCE_PAIR: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
@@ -80,60 +124,32 @@ export const ETH_USD_PAIR: AddressMap = {
   [ChainId.FANTOM_TESTNET]: '',
 }
 
-export const SOUL_SUMMONER_ADDRESS: AddressMap = {
-  [ChainId.MAINNET]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B', // 20 SEP,
-  [ChainId.FANTOM_TESTNET]: '0x70C6A37244feD0Fa4e4148D5ffe38a209dCEd714', // 20 SEP
-}
-
-export const ZAPPER_ADDRESS: AddressMap = {
-  [ChainId.MAINNET]: '0xcff6eF0B9916682B37D80c19cFF8949bc1886bC2',
-  // [ChainId.ROPSTEN]: '0xcff6eF0B9916682B37D80c19cFF8949bc1886bC2',
-  [ChainId.FANTOM]: '',
-}
-
-// TODO: specify merkle distributor for mainnet
-export const MERKLE_DISTRIBUTOR_ADDRESS: AddressMap = {
-  [ChainId.MAINNET]: '0xcBE6B83e77cdc011Cc18F6f0Df8444E5783ed982',
-  // [ChainId.ROPSTEN]: '0x84d1f7202e0e7dac211617017ca72a2cb5e2b955',
-}
-
-export const MULTICALL2_ADDRESS: AddressMap = {
-  [ChainId.MAINNET]: '0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696',
-  [ChainId.BSC]: '',
-  // [ChainId.FANTOM]: '0xEd2Fb478f7fCef33E1E1d980a0135789B295a7F5', // 29 AUG
-  [ChainId.FANTOM]: '0xf682Cc4468608fC4eFbaD6a06D9BC72e7790075a', // 29 AUG
-  [ChainId.FANTOM_TESTNET]: '0x1ACB479bB9D1F73009F85ef5F495E942Bb57f15A', // 7 JUL
-}
-
 export const WNATIVE: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
   [ChainId.FANTOM]: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
   [ChainId.FANTOM_TESTNET]: '',
- 
 }
 
 export const SOUL_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xe2fb177009ff39f52c0134e8007fa0e4baacbd07', // SOUL
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
 }
 
 export const SEANCE_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
 }
 
 export const ENCHANT_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a', // ENCHANT
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
 }
 
 export const USDC_ADDRESS: AddressMap = {
@@ -141,5 +157,4 @@ export const USDC_ADDRESS: AddressMap = {
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x04068da6c83afcfa0e13ba15a6696662335d5b75', // USDC
   [ChainId.FANTOM_TESTNET]: '',
- 
 }
