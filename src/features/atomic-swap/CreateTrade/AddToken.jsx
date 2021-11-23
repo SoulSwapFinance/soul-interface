@@ -1,3 +1,10 @@
+import React, { useState, useEffect } from 'react'
+import { ethers } from 'ethers'
+import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
+import { ZERO_ADDRESS, ATOMIC_SWAP_ADDRESS } from '../../../constants/addresses'
+
+import useApproveContract from '../hooks/useApprove'
+import useAtomicSwap from '../hooks/useAtomicSwap'
 import styled, { keyframes } from 'styled-components'
 import { UserContainer, ExternalLink } from '../TradeItemStyles'
 import { InputItem } from './InputItem'
@@ -78,14 +85,6 @@ export const Jaw = styled.img`
 // ----------------------------------------------------------------------------
 //  FUNCTIONALITY
 // ----------------------------------------------------------------------------
-
-import React, { useState, useEffect } from 'react'
-import { ethers } from 'ethers'
-
-import { ZERO_ADDRESS, ATOMIC_SWAP_ADDRESS } from '../../../constants/addresses'
-
-import useApproveContract from '../hooks/useApprove'
-import useAtomicSwap from '../hooks/useAtomicSwap'
 
 // To do:
 // - If add multiple ids, display separate tokens in token list

@@ -11,7 +11,6 @@ import Page from '../../features/atomic-swap/Page'
 const AtomicSwap = () => {
   return (
     <>
-      {' '}
       {/* <DoubleGlowShadowV2 opacity="0.6"> */}
       <Head>
         <title>Trade | Soul</title>

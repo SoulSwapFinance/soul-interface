@@ -28,7 +28,15 @@ export const ListContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media screen and (max-width: 1650px) {
+  @media screen and (max-width: 3000px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  @media screen and (max-width: 1440px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  @media screen and (max-width: 1200px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 
