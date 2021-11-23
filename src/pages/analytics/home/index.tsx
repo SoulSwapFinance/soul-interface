@@ -1,11 +1,8 @@
 import Container from '../../../components/Container'
 import Head from 'next/head'
 import AnalyticsHeader from '../../../features/analytics/Header'
-import useActiveWeb3React from '../../../hooks/useActiveWeb3React'
 
-export default function Pairs() {
-  const { account } = useActiveWeb3React()
-
+export default function Home() {
   return (
     <>
       <Head>
@@ -18,7 +15,7 @@ export default function Pairs() {
       <iframe 
   			frameBorder={"none"}
     		title={"INFO"}
-    		src={"https://info.soulswap.finance/pairs"}
+    		src="https://info.soulswap.finance/home"
     		height={"100%" }
     		width={"100%"}
       />
