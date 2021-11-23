@@ -393,6 +393,28 @@
       ],
       "stateMutability": "view",
       "type": "function"
+    },
+    {
+      "name": "name",
+      "outputs": [
+        {
+          "internalType": "string",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "name": "symbol",
+      "outputs": [
+        {
+          "internalType": "string",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
     }
   ],
   "bytecode": "0x",

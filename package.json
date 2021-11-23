@@ -147,7 +147,7 @@
     "@clover-network/clover-connector": "^1.0.0",
     "@types/big.js": "6.1.1",
     "autoprefixer": "^10.0.2",
-    "axios": "^0.21.1",
+    "axios": "^0.24.0",
     "big.js": "^6.1.1",
     "cids": "^1.1.7",
     "decimal.js-light": "^2.5.1",
