@@ -11,9 +11,9 @@ export const HiddenBtn = styled(Button)`
   width: ${({ width }) => (width ? `${width}` : `8rem`)};
   height: ${({ height }) => (height ? `${height}` : `2.5rem`)};
   font-size: ${({ fontSize }) => (fontSize ? `${fontSize}` : `.9rem`)};
-  background-color: ${({ bgColor }) => (bgColor ? `${bgColor}` : `#3D81DB`)};
+  background-color: ${({ bgColor }) => (bgColor ? `${bgColor}` : `#B026FF`)};
   color: ${({ color }) => (color ? `${color}` : `white`)};
-  border: ${({ border }) => (border ? `${border}` : `2px solid #3D81DB`)};
+  border: ${({ border }) => (border ? `${border}` : `2px solid #B026FF`)};
   border-radius: 8px;
   outline: none;
   text-decoration: none;
@@ -48,7 +48,7 @@ export const ItemCard = styled.div`
   
   &:hover {
     transform: scale(1.02);
-    border: 1.5px solid #3D81DB;
+    border: 1.5px solid #B026FF;
   }
 
   &:hover ${HiddenBtn} {

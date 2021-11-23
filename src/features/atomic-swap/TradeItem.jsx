@@ -129,7 +129,7 @@ export const TradeItem = ({ tradeId, user1Details, user2Details, creator, to, ex
   return (
     <ItemContainer>
       <ItemCard>
-        <Link href={`/trade/${tradeId}`}>
+        {/* <Link href={`/trade/${tradeId}`}> */}
           <ExternalLink padding="0" opacity="50%">
             <UserContainer>
               <Wrap padding="0 .8rem 0 0" display="flex" justifyContent="space-between">
@@ -146,7 +146,7 @@ export const TradeItem = ({ tradeId, user1Details, user2Details, creator, to, ex
               </UserBlurb>
             </UserContainer>
 
-            {user1Details[0].token !== zeroAddress ? (
+            {user1Details[0].token !== ZERO_ADDRESS ? (
               <InputRow padding="auto" justifyContent="center" alignItems="center">
                 {receiveTokenList}
               </InputRow>
@@ -161,7 +161,7 @@ export const TradeItem = ({ tradeId, user1Details, user2Details, creator, to, ex
               <UserBlurb>The tokens you will lose in the trade.</UserBlurb>
             </UserContainer>
 
-            {user2Details[0].token !== zeroAddress ? (
+            {user2Details[0].token !== ZERO_ADDRESS ? (
               <InputRow padding="auto" justifyContent="center" alignItems="center">
                 {loseTokenList}
               </InputRow>
@@ -171,7 +171,7 @@ export const TradeItem = ({ tradeId, user1Details, user2Details, creator, to, ex
               </InputRow>
             )}
           </ExternalLink>
-        </Link>
+        {/* </Link> */}
 
         <FooterContainer>
           {/* TODO: ADD CARD ONCLICK THAT VIEWS TRADE ON NEW PAGE */}
