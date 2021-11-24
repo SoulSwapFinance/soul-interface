@@ -170,14 +170,15 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
               .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
           )
         // : setFeeAmount(0)
-      receive !== 0
-        ? setReceiving(
+      // receive !== 0
+        // ? 
+        setReceiving(
             Number(receive)
               .toFixed(2)
               .toString()
               .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
           )
-        : setReceiving(0)
+        // : setReceiving(0)
     // } else {
     //   setFeeAmount(0)
     //   setReceiving(0)
