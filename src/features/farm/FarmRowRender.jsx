@@ -60,7 +60,7 @@ const TokenLogo = styled(Image)`
 `
 
 const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
-  const { chainId, account } = useActiveWeb3React()
+  const { account } = useActiveWeb3React() // chainId
 
   const {
     // helper contract
@@ -144,7 +144,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   const fetchFeePercent = async () => {
     const percent = await getFeePercent(pid)
     const result = await userInfo(pid, account)
-    const staked = await result?.[0]
+    const staked = await result[0]
 
     // set to 14 when no staked, otherwise uses percent
     staked > 0 ? await setFeePercent(percent / 10 ** 18) : await setFeePercent(14)
@@ -393,12 +393,12 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     fontSize="1.2rem"
                     target="_blank"
                     color="#F36FFE" // neon purple
-                    href={`https://exchange.soulswap.finance/add/${farm.token1Address[chainId]}/${farm.token2Address[chainId]}`}
+                    href={`https://exchange.soulswap.finance/add/${farm.token1Address[250]}/${farm.token2Address[250]}`}
                   >
                     <TokenLogo
                       src={
                         'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
-                        farm.token1Address[chainId] +
+                        farm.token1Address[250] +
                         '/logo.png'
                       }
                       alt="LOGO"
@@ -410,7 +410,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     <TokenLogo
                       src={
                         'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
-                        farm.token2Address[chainId] +
+                        farm.token2Address[250] +
                         '/logo.png'
                       }
                       alt="LOGO"
