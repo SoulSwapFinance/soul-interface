@@ -345,11 +345,11 @@ export default function SoulStake() {
           <div className="flex justify-center mb-6">
             <div className="flex flex-col w-full max-w-xl mt-auto mb-2">
               <div className="flex max-w-lg">
-                <div className="self-end mb-3 text-lg font-bold md:text-2xl text-high-emphesis md:mb-7">
-                  {i18n._(t`Borrow SEANCE with SOUL`)}
+                <div className="self-end mb-3 text-xl font-bold md:text-2xl text-high-emphesis md:mb-4">
+                  {i18n._(t`Stake your SOUL to borrow SEANCE`)}
                 </div>
               </div>
-                <div className="max-w-lg pr-3 mb-2 text-sm leading-5 md:text-base md:mb-4 md:pr-0">
+                <div className="max-w-xl pr-3 mb-2 text-sm leading-5 md:text-base md:mb-2 md:pr-0">
                   {i18n._(t`Recieve SEANCE as a reciept for your staked SOUL. Use your SEANCE to reclaim your SOUL, or
                   trade your SEANCE and risk locking your SOUL for all eternity... Either way, while you're staked, you earn more SOUL over time. 
                   Zero withdrawal fees.`
@@ -461,11 +461,11 @@ export default function SoulStake() {
                       ? 'When someone snatches the SOUL bounty, your pending SOUL gets re-invested automatically!'
                       : 'You will need to manually claim and deposit your pending SOUL to re-invest into your stake.'}
                   </div> */}
-                  <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
+                  {/* <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
                     {autoStaking
                       ? 'When withdrawing before 72hrs has passed, you will be charged 1% of your stake!'
                       : ''}
-                  </div>
+                  </div> */}
 
                   <StyledNumericalInput
                     value={input}
@@ -571,6 +571,7 @@ export default function SoulStake() {
               </div>
             </div>
             {/* SIDE BALANCE BOARD */}
+            
             <div className="w-full max-w-xl mx-auto md:mx-0 md:ml-6 md:block md:w-72">
               <div className="flex flex-col w-full px-4 pt-6 pb-5 rounded bg-dark-900 md:px-8 md:pt-7 md:pb-9">
                 <div className="flex flex-wrap">
@@ -617,34 +618,43 @@ export default function SoulStake() {
                       />
                       <div className="flex flex-col justify-center">
                         <p className="text-sm font-bold md:text-lg text-high-emphesis">
-                          {soulBalance
+                          {/* {soulBalance
                             ? soulBalance
                                 .toFixed(0)
                                 .toString()
                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                            : '-'}
+                            : '-'} */}
+                            {Number(stakedBal) === 0
+                            ? '0'
+                            : Number(stakedBal) < 0
+                            ? '<0'
+                            : Number(stakedBal)
+                            .toFixed(0)
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+
                         </p>
-                        <p className="text-sm md:text-base text-primary">SOUL</p>
+                        <p className="text-sm md:text-base text-primary">STAKED</p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex flex-col flex-grow md:mb-6">
+                  {/* <div className="flex flex-col flex-grow md:mb-6"> */}
                     {/* <div className="flex mb-3 ml-8 flex-nowrap md:ml-0"> */}
                       {/* <p className="text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
                         {i18n._(t`Staked`)}
                       </p>
                     </div> */}
-                    <div className="flex items-center ml-8 space-x-4 md:ml-0">
-                      <Image
+                    {/* <div className="flex items-center ml-8 space-x-4 md:ml-0"> */}
+                      {/* <Image
                         className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
                         src="/images/tokens/seance.png"
                         alt="SEANCE"
                         width={64}
                         height={64}
-                        />
-                      <div className="flex flex-col justify-center">
-                        <p className="text-sm font-bold md:text-lg text-high-emphesis">
+                        /> */}
+                      {/* <div className="flex flex-col justify-center"> */}
+                        {/* <p className="text-sm font-bold md:text-lg text-high-emphesis">
                           {Number(stakedBal) === 0
                             ? '0.000'
                             : Number(stakedBal) < 0.001
@@ -653,12 +663,12 @@ export default function SoulStake() {
                             .toFixed(3)
                             .toString()
                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                        </p>
-                        <p className="text-sm md:text-base text-primary">OWED</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-col flex-grow md:mb-6">
+                        </p> */}
+                        {/* <p className="text-sm md:text-base text-primary">OWED</p> */}
+                      {/* </div> */}
+                    {/* </div>
+                  </div> */}
+                  {/* <div className="flex flex-col flex-grow md:mb-6"> */}
                     {/* <div className="flex mb-3 ml-8 flex-nowrap md:ml-0"> */}
                       {/* <p className="text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
                         {i18n._(t`Staked`)}
@@ -686,7 +696,7 @@ export default function SoulStake() {
                         <p className="text-sm md:text-base text-primary">STAKED</p>
                       </div> 
                     </div> */}
-                  </div>
+                  {/* </div> */}
                 </div>
 
                 <Button

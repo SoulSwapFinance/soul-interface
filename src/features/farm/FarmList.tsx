@@ -11,31 +11,31 @@ import { AllPids, WithdrawPids } from './Pids'
 // import { Wrap, Heading, Text, Button } from './ReusableStyles' // Heading, Text
 
 const FarmList = () => {
-  const { chainId, account } = useActiveWeb3React()
+  const { chainId } = useActiveWeb3React() // account
 
-  const [totalPending, setTotalReward] = useState(0)
+  // const [totalPending, setTotalReward] = useState(0)
 
-  const { totalPendingRewards } = useSoulSummoner(
-    0,
-    '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57',
-    '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57',
-    '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57'
-  )
+  // const { totalPendingRewards } = useSoulSummoner(
+    // 0,
+    // '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57',
+    // '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57',
+    // '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57'
+  // )
 
-  useEffect(() => {
-    fetchTotalPending()
-  })
+  // useEffect(() => {
+  //   fetchTotalPending()
+  // })
 
-  const fetchTotalPending = async () => {
-    try {
-      const result = await totalPendingRewards()
-      const format = Number(result / 10 ** 18).toFixed(2)
-      setTotalReward(result)
-    } catch (e) {
-      console.log(e)
-      return e
-    }
-  }
+  // const fetchTotalPending = async () => {
+  //   try {
+  //     const result = await totalPendingRewards()
+  //     const format = Number(result / 10 ** 18).toFixed(2)
+  //     setTotalReward(result)
+  //   } catch (e) {
+  //     console.log(e)
+  //     return e
+  //   }
+  // }
 
   // const handleHarvest = async () => {
   //   try {
@@ -72,7 +72,7 @@ const FarmList = () => {
 
   return (
     <>
-                <FarmHeader/>
+      <FarmHeader/>
       <FarmKey />
       <>{farmList}</>
       <br />
