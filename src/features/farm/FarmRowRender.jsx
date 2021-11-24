@@ -537,7 +537,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                   </Text>
                 ) : (
                   <Text fontSize=".9rem" padding="0" color="#F36FFE">
-                    Withdrawal fee: {feePercent}%!
+                    Withdrawal fee: {feePercent}%
                   </Text>
                 )}
               </FunctionBox>
