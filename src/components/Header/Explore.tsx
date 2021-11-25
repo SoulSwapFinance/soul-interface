@@ -18,7 +18,7 @@ const items = (i18n: I18n) => [
     borrow: true,
     enchant: false,
     stake: false,
-    bridge: false,
+    vote: false,
     analytics: false, 
     links: false, 
     explore: false,
@@ -29,7 +29,7 @@ const items = (i18n: I18n) => [
     borrow: false,
     enchant: true,
     stake: false,
-    bridge: false,
+    vote: false,
     analytics: false, 
     links: false, 
     explore: false,
@@ -40,29 +40,29 @@ const items = (i18n: I18n) => [
     borrow: false,
     enchant: false,
     stake: true,
-    bridge: false,
+    vote: false,
     analytics: false, 
     links: false, 
     explore: false,
   },
-  // {
-  //   name: i18n._(t`Bridge`),
-  //   href: '/bridge',
-  //   borrow: false,
-  //   enchant: false,
-  //   stake: false,
-  //   bridge: true,
-  //   analytics: true, 
-  //   links: false, 
-  //   explore: false,
-  // },
+  {
+    name: i18n._(t`Vote`),
+    href: '/vote',
+    borrow: false,
+    enchant: false,
+    stake: false,
+    vote: true,
+    analytics: true, 
+    links: false, 
+    explore: false,
+  },
   {
     name: i18n._(t`Analytics`),
     href: '/analytics',
     borrow: false,
     enchant: false,
     stake: false,
-    bridge: false,
+    vote: false,
     analytics: true, 
     links: false, 
     explore: false,
@@ -73,7 +73,7 @@ const items = (i18n: I18n) => [
     borrow: false,
     enchant: false,
     stake: false,
-    bridge: false,
+    vote: false,
     analytics: false, 
     links: true, 
     explore: false,
@@ -84,7 +84,7 @@ const items = (i18n: I18n) => [
   borrow: false,
   enchant: false,
   stake: false,
-  bridge: false,
+  vote: false,
   analytics: false, 
   links: false, 
   explore: true,
@@ -156,33 +156,33 @@ export default function Menu() {
                       CIRCLES
                       </a>
                     </NavLink>
-                    // ) : item.bridge ?
-                    // (
-                    //  <NavLink key={item.name} href={item.href}>
-                    // <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                    // BRIDGE
-                    // </a>
-                    // </NavLink>
+                    ) : item.vote ?
+                    (
+                     <NavLink key={item.name} href={item.href}>
+                      <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                      VOTE
+                      </a>
+                    </NavLink>
                     ) : item.analytics ?
                     (
                      <NavLink key={item.name} href={item.href}>
-                    <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                    CHARTS
-                    </a>
+                      <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                      CHARTS
+                      </a>
                     </NavLink>
                     ) : item.links ?
                     (
                      <NavLink key={item.name} href={item.href}>
-                     <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">        
-                    ECOSYSTEM
-                    </a>
+                      <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">        
+                      ECOSYSTEM
+                      </a>
                     </NavLink>
                     ) : item.explore ?
                     (
                     <NavLink key={item.name} href={item.href}>
-                    <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                      EXPLORE
-                    </a>
+                      <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                        EXPLORE
+                      </a>
                    </NavLink>
                       ) : ''
                     )}
