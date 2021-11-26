@@ -22,6 +22,7 @@ const items = (i18n: I18n) => [
     analytics: false, 
     links: false, 
     explore: false,
+    claim: false,
   },
   {
     name: i18n._(t`Enchant`),
@@ -33,6 +34,7 @@ const items = (i18n: I18n) => [
     analytics: false, 
     links: false, 
     explore: false,
+    claim: false,
   },
   {
     name: i18n._(t`Stake`),
@@ -44,6 +46,7 @@ const items = (i18n: I18n) => [
     analytics: false, 
     links: false, 
     explore: false,
+    claim: false,
   },
   {
     name: i18n._(t`Vote`),
@@ -55,6 +58,7 @@ const items = (i18n: I18n) => [
     analytics: true, 
     links: false, 
     explore: false,
+    claim: false,
   },
   {
     name: i18n._(t`Analytics`),
@@ -66,6 +70,7 @@ const items = (i18n: I18n) => [
     analytics: true, 
     links: false, 
     explore: false,
+    claim: false,
   },
   {
     name: i18n._(t`Links`),
@@ -77,6 +82,7 @@ const items = (i18n: I18n) => [
     analytics: false, 
     links: true, 
     explore: false,
+    claim: false,
   },
   {
   name: i18n._(t`More`),
@@ -88,6 +94,19 @@ const items = (i18n: I18n) => [
   analytics: false, 
   links: false, 
   explore: true,
+  claim: false,
+  },
+  {
+  name: i18n._(t`Claim`),
+  href: 'https://docs.google.com/forms/d/1k5P9JoPgDD_3c6ykB6Oylv0gY0Ov8OAqWdLTUVhzlSI',
+  borrow: false,
+  enchant: false,
+  stake: false,
+  vote: false,
+  analytics: false, 
+  links: false, 
+  explore: false,
+  claim: true,
   },
 ]
 
@@ -182,6 +201,13 @@ export default function Menu() {
                     <NavLink key={item.name} href={item.href}>
                       <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                         EXPLORE
+                      </a>
+                   </NavLink>
+                    ) : item.claim ?
+                    (
+                    <NavLink key={item.name} href={item.href}>
+                      <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                        CLAIM
                       </a>
                    </NavLink>
                       ) : ''
