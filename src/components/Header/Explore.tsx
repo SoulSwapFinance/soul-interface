@@ -98,7 +98,7 @@ const items = (i18n: I18n) => [
   },
   {
   name: i18n._(t`Claim`),
-  href: 'https://docs.google.com/forms/d/1k5P9JoPgDD_3c6ykB6Oylv0gY0Ov8OAqWdLTUVhzlSI',
+  href: '/claim',
   borrow: false,
   enchant: false,
   stake: false,
