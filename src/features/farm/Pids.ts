@@ -227,6 +227,32 @@ export const AllPids = [
     token2Address: tokens.REAPER,
   },
   {
+    // 300
+    pid: 39,
+    token1: 'FTM',
+    token2: 'ICE',
+    lpSymbol: 'FTM-ICE',
+    lpAddresses: {
+      4002: '',
+      250: '0x944Aa704eDaF75dAD30832C6d0f111506a48b1c8',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.ICE,
+  },
+  {
+    // 300
+    pid: 38,
+    token1: 'FTM',
+    token2: 'FUSD',
+    lpSymbol: 'FTM-FUSD',
+    lpAddresses: {
+      4002: '',
+      250: '0x1AE16105a7d4bE7DFD9737FD13D9A50AEFed1437',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.FUSD,
+  },
+  {
     // 600
     pid: 23,
     token1: 'FTM',
@@ -688,7 +714,32 @@ export const FantiesPids = [
     token1Address: tokens.FTM,
     token2Address: tokens.BNB,
   },
-
+  {
+    // 300
+    pid: 39,
+    token1: 'FTM',
+    token2: 'ICE',
+    lpSymbol: 'FTM-ICE',
+    lpAddresses: {
+      4002: '',
+      250: '0x944Aa704eDaF75dAD30832C6d0f111506a48b1c8',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.ICE,
+  },
+  {
+    // 300
+    pid: 38,
+    token1: 'FTM',
+    token2: 'FUSD',
+    lpSymbol: 'FTM-FUSD',
+    lpAddresses: {
+      4002: '',
+      250: '0x1AE16105a7d4bE7DFD9737FD13D9A50AEFed1437',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.FUSD,
+  },
   {
     // 100
     pid: 11,
