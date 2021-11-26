@@ -3,25 +3,26 @@ import { Wrap } from '../../components/ReusableStyles'
 import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 import Container from '../../components/Container'
 import Head from 'next/head'
-import FarmList from '../../features/farm/FarmList'
+import CoreList from '../../features/farm/CoreList'
 
-const Farms = () => {
+const Core = () => {
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">
       <DoubleGlowShadowV2 opacity="0.6">
+
       <Container id="farm-page">
-        
         <Head>
-          <title>Farm | All</title>
+          <title>Farm | Core</title>
           <meta key="description" name="description" content="Farm SOUL" />
         </Head>
         
-        <FarmList />
+        <CoreList />
       </Container>
+
       </DoubleGlowShadowV2>
 
     </Wrap>
   )
 }
 
-export default Farms
+export default Core

@@ -4,13 +4,14 @@ import { ethers } from 'ethers'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import useSoulSummoner from './hooks/useSoulSummoner'
 
-import FarmHeader from '../../features/farm/Header'
+import FarmHeader from './Header'
 import FarmKey from './FarmKey'
 import FarmRowRender from './FarmRowRender'
-import { SeancePids } from './Pids'
+// import { SoulPids } from './Pids'
+import { SoulSwapPids } from './Pids'
 // import { Wrap, Heading, Text, Button } from './ReusableStyles' // Heading, Text
 
-const SeanceList = () => {
+const SoulList = () => {
   const { chainId, account } = useActiveWeb3React()
 
   const [totalPending, setTotalReward] = useState(0)
@@ -46,24 +47,12 @@ const SeanceList = () => {
   //   }
   // }
 
-  // const withdrawList = WithdrawPids.map((farm) => (
-  //   <FarmRowRender
-  //     key={farm.pid}
-  //     pid={farm.pid}
-  //     lpSymbol={farm.lpSymbol}
-  //     lpToken={farm.lpAddresses[250]}
-  //     token1={farm.token1}
-  //     token2={farm.token2}
-  //     farm={farm}
-  //   />
-  // ))
-
-  const farmList = SeancePids.map((farm) => (
+  const farmList = SoulSwapPids.map((farm) => (
     <FarmRowRender
       key={farm.pid}
       pid={farm.pid}
       lpSymbol={farm.lpSymbol}
-      lpToken={farm.lpAddresses[250]}
+      lpToken={farm.lpAddresses[chainId]}
       token1={farm.token1}
       token2={farm.token2}
       farm={farm}
@@ -73,13 +62,10 @@ const SeanceList = () => {
   return (
     <>
       <FarmHeader/>
-      {/* <FarmKey withdraw={true}/> */}
-      {/* <>{withdrawList}</> */}
-      {/* <br /> */}
       <FarmKey />
       <>{farmList}</>
     </>
   )
 }
 
-export default SeanceList
+export default SoulList

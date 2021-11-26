@@ -41,12 +41,12 @@ const FarmHeader: FC<FarmHeaderProps> = ({ input, output, allowedSlippage }) => 
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
           href={{
-            pathname: '/farms/all',
+            pathname: '/farms/soulswap',
             query: getQuery(input, output),
           }}
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
-            {i18n._(t`ALL`)}
+            {i18n._(t`SOULSWAP`)}
           </a>
         </NavLink>
         {/* <NavLink
@@ -60,7 +60,7 @@ const FarmHeader: FC<FarmHeaderProps> = ({ input, output, allowedSlippage }) => 
             {i18n._(t`Limit`)}
           </a>
         </NavLink> */}
-        <NavLink
+        {/* <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
           href={"/farms/soulpower"}
           // href={`/${!isRemove ? 'add' : 'remove'}${input ? `/${currencyId(input)}` : ''}${
@@ -70,16 +70,7 @@ const FarmHeader: FC<FarmHeaderProps> = ({ input, output, allowedSlippage }) => 
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
             {i18n._(t`SOUL`)}
           </a>
-        </NavLink>
-        <NavLink
-          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
-          href={"/farms/seancecircle"}
-          // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
-        >
-          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-            {i18n._(t`SEANCE`)}
-          </a>
-        </NavLink>
+        </NavLink> */}
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
           href={"/farms/fanties"}
@@ -87,6 +78,24 @@ const FarmHeader: FC<FarmHeaderProps> = ({ input, output, allowedSlippage }) => 
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
             {i18n._(t`FANTOM`)}
+          </a>
+        </NavLink>
+        <NavLink
+          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
+          href={"/farms/core"}
+          // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
+        >
+          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
+            {i18n._(t`BTC/ETH/BNB`)}
+          </a>
+        </NavLink>
+        <NavLink
+          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
+          href={"/farms/stables"}
+          // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
+        >
+          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
+            {i18n._(t`STABLES`)}
           </a>
         </NavLink>
         {/* <NavLink

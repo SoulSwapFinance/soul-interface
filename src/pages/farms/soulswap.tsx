@@ -1,30 +1,21 @@
+import React from 'react'
 import { Wrap } from '../../components/ReusableStyles'
 import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 import Container from '../../components/Container'
 import Head from 'next/head'
-import React from 'react'
+import SoulSwapList from '../../features/farm/SoulSwapList'
 
-import SoulList from '../../features/farm/SoulList'
-// import NavLink from '../../components/NavLink'
-
-const SoulPower = () => {
+const SoulSwap = () => {
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">
       <DoubleGlowShadowV2 opacity="0.6">
-      {/* <h1> Farm SOUL Pairs for SOUL Rewards</h1>
-      <br /> */}
       <Container id="farm-page">
         <Head>
-          <title>Farm with SoulPower ($SOUL)</title>
+          <title>Farm with SoulSwap Assets ($SOUL)</title>
           <meta key="description" name="description" content="Farm SOUL" />
         </Head>
-        <SoulList />
+        <SoulSwapList />
       </Container>
-      {/* <NavLink href="/farms">
-            <a className="flex items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
-              <span>View All Categories</span>
-            </a>
-          </NavLink> */}
       </DoubleGlowShadowV2>
       <div className="flex items-center px-4">
         </div>
@@ -32,4 +23,4 @@ const SoulPower = () => {
   )
 }
 
-export default SoulPower
+export default SoulSwap

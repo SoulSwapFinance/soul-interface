@@ -4,13 +4,13 @@ import { ethers } from 'ethers'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import useSoulSummoner from './hooks/useSoulSummoner'
 
-import FarmHeader from '../../features/farm/Header'
+import FarmHeader from './Header'
 import FarmKey from './FarmKey'
 import FarmRowRender from './FarmRowRender'
-import { SoulPids } from './Pids'
+import { CorePids, WithdrawPids } from './Pids'
 // import { Wrap, Heading, Text, Button } from './ReusableStyles' // Heading, Text
 
-const SoulList = () => {
+const StablesList = () => {
   const { chainId, account } = useActiveWeb3React()
 
   const [totalPending, setTotalReward] = useState(0)
@@ -46,7 +46,7 @@ const SoulList = () => {
   //   }
   // }
 
-  const farmList = SoulPids.map((farm) => (
+  const farmList = CorePids.map((farm) => (
     <FarmRowRender
       key={farm.pid}
       pid={farm.pid}
@@ -67,4 +67,4 @@ const SoulList = () => {
   )
 }
 
-export default SoulList
+export default StablesList
