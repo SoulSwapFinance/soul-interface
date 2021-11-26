@@ -266,10 +266,10 @@
       {
         "name": "Fantom USD",
         "address": "0xAd84341756Bf337f5a0164515b1f6F993D194E1f",
-        "symbol": "fUSD",
+        "symbol": "FUSD",
         "decimals": 18,
         "chainId": 250,
-        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/analytics/blockchains/fantom/assets/0xAd84341756Bf337f5a0164515b1f6F993D194E1f/logo.png"
+        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xAd84341756Bf337f5a0164515b1f6F993D194E1f/logo.png"
       },
       {
         "name": "Frapped USDT",
