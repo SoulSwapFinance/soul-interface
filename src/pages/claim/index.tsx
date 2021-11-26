@@ -8,7 +8,7 @@ const Claim = () => {
           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
             <iframe 
 			        frameBorder={"none"}
-              src="https://docs.google.com/forms/d/e/1FAIpQLSdTfCYS_byYyRiXcOceFfrRcjTeLNdJxeSpPaHETWB33pMiZg/viewform?embedded=true" 
+              src="https://docs.google.com/forms/d/1k5P9JoPgDD_3c6ykB6Oylv0gY0Ov8OAqWdLTUVhzlSI/viewform?embedded=true" 
               width="640" height="2963">
             Loading…
             </iframe>
