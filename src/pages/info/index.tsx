@@ -10,17 +10,13 @@ const Info = () => {
     <DoubleGlowShadowV2 opacity="0.6">
         <Container id="charts-page" maxWidth="2xl" className="space-y-4">
           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
-            <SwapHeader
-              // input={currencies[Field.CURRENCY_A]}
-              // output={currencies[Field.CURRENCY_B]}
-              // allowedSlippage={allowedSlippage}
-            />     
+            <SwapHeader />     
             <iframe 
               frameBorder={"none"}
               title={"INFO"}
               src="https://info.soulswap.finance"
-              height={'720' }
-              width={"100%"}
+              height={ '720' }
+              width={ "100%" }
             />
 	        </div>
         </Container>
