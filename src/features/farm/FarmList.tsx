@@ -7,7 +7,7 @@ import useSoulSummoner from './hooks/useSoulSummoner'
 import FarmHeader from '../../features/farm/Header'
 import FarmKey from './FarmKey'
 import FarmRowRender from './FarmRowRender'
-import { AllPids, WithdrawPids } from './Pids'
+import { SoulSwapPids, WithdrawPids } from './Pids'
 // import { Wrap, Heading, Text, Button } from './ReusableStyles' // Heading, Text
 
 const FarmList = () => {
@@ -58,7 +58,7 @@ const FarmList = () => {
     />
   ))
 
-  const farmList = AllPids.map((farm) => (
+  const farmList = SoulSwapPids.map((farm) => (
     <FarmRowRender
       key={farm.pid}
       pid={farm.pid}
