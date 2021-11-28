@@ -1,4 +1,4 @@
-import { SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS, ZERO } from '../../sdk'
+import { CurrencyAmount, JSBI, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS, ZERO } from '../../sdk'
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
 import React, { useEffect, useState } from 'react'
 import { SOUL, SEANCE } from '../../constants'
@@ -25,6 +25,7 @@ import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 
 import { ethers } from 'ethers'
 import { useSoulSummonerContract } from '../../hooks'
+import { serialize } from '@ethersproject/transactions'
 
 const INPUT_CHAR_LIMIT = 18
 
@@ -186,13 +187,18 @@ export default function SoulStake() {
     setUsingBalance(true)
   }
   
-const withdrawable = Number(seanceBalance) > Number(stakedBal) ?
-     Number(stakedBal) : Number(seanceBalance)
-     
-  const handleClickMaxWithdrawal = () => {
-    setInput(withdrawable ? withdrawable : 0)
-    setUsingBalance(true)
-  }
+  // convert seanceBalance to number and compare
+
+  // const withdrawable =  Number(seanceBalance) > Number(stakedBal) ? stakedBal : seanceBalance
+
+  // console.log('withdrawable', withdrawable)
+
+  // const parsedWithdrawalAmount = usingBalance ? withdrawable : tryParseAmount(input, balance?.currency)
+
+  // const handleClickMaxWithdrawal = () => {
+  //   setInput(parsedWithdrawalAmount.toLocaleString() ? parsedWithdrawalAmount.toLocaleString() : '') // .toSignificant(balance.currency.decimals).substring(0, INPUT_CHAR_LIMIT) : '')
+  //   setUsingBalance(true)
+  // }
 
   const insufficientFunds = (balance && balance.equalTo(ZERO)) || parsedAmount?.greaterThan(balance)
 
@@ -495,9 +501,9 @@ const withdrawable = Number(seanceBalance) > Number(stakedBal) ?
                         <button
                           className="px-2 py-1 ml-3 text-xs font-bold border pointer-events-auto focus:outline-none focus:ring hover:bg-opacity-40 md:bg-purple md:bg-opacity-30 border-secondary md:border-purple rounded-2xl md:py-1 md:px-3 md:ml-4 md:text-sm md:font-normal md:text-purple"
                           onClick={
-                          activeTab === 0
-                          ? handleClickMax
-                          : handleClickMaxWithdrawal
+                          // activeTab === 0 ?
+                          handleClickMax
+                          // : handleClickMaxWithdrawal
                           }
                         >
                           {i18n._(t`MAX`)}

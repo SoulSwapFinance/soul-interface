@@ -151,9 +151,6 @@ msgstr ""
 msgid "Borrow"
 msgstr ""
 
-msgid "Borrow SEANCE with SOUL"
-msgstr ""
-
 msgid "Borrow assets and leverage up"
 msgstr ""
 
@@ -205,6 +202,9 @@ msgid "Chinese"
 msgstr ""
 
 msgid "Circles"
+msgstr ""
+
+msgid "Claim"
 msgstr ""
 
 msgid "Claim SOUL"
@@ -747,6 +747,9 @@ msgstr ""
 msgid "Output will be sent to"
 msgstr ""
 
+msgid "PAIRS"
+msgstr ""
+
 msgid "POOL"
 msgstr ""
 
@@ -998,6 +1001,9 @@ msgid ""
 "one click"
 msgstr ""
 
+msgid "Stake your SOUL to borrow SEANCE"
+msgstr ""
+
 msgid "Summon Scarabs"
 msgstr ""
 
@@ -1017,6 +1023,9 @@ msgid "Swap Anyway"
 msgstr ""
 
 msgid "Swapping {0} {1} for {2} {3}"
+msgstr ""
+
+msgid "TOKENS"
 msgstr ""
 
 msgid "TVL"
@@ -1148,6 +1157,12 @@ msgid "View your Dashboard."
 msgstr ""
 
 msgid "View your Trades."
+msgstr ""
+
+msgid "Vote"
+msgstr ""
+
+msgid "WALLET"
 msgstr ""
 
 msgid "WITHDRAW"

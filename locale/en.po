@@ -151,9 +151,6 @@ msgstr "Bento Balance: {0}"
 msgid "Borrow"
 msgstr "Borrow"
 
-msgid "Borrow SEANCE with SOUL"
-msgstr "Borrow SEANCE with SOUL"
-
 msgid "Borrow assets and leverage up"
 msgstr "Borrow assets and leverage up"
 
@@ -208,6 +205,9 @@ msgstr "Chinese"
 
 msgid "Circles"
 msgstr "Circles"
+
+msgid "Claim"
+msgstr "Claim"
 
 msgid "Claim SOUL"
 msgstr "Claim SOUL"
@@ -761,6 +761,9 @@ msgstr "Output is estimated. You will receive at least"
 msgid "Output will be sent to"
 msgstr "Output will be sent to"
 
+msgid "PAIRS"
+msgstr "PAIRS"
+
 msgid "POOL"
 msgstr "POOL"
 
@@ -1017,6 +1020,9 @@ msgstr ""
 "Stake into SPELL add collateral as aSPELL on Aave all in\n"
 "one click"
 
+msgid "Stake your SOUL to borrow SEANCE"
+msgstr "Stake your SOUL to borrow SEANCE"
+
 msgid "Summon Scarabs"
 msgstr "Summon Scarabs"
 
@@ -1037,6 +1043,9 @@ msgstr "Swap Anyway"
 
 msgid "Swapping {0} {1} for {2} {3}"
 msgstr "Swapping {0} {1} for {2} {3}"
+
+msgid "TOKENS"
+msgstr "TOKENS"
 
 msgid "TVL"
 msgstr "TVL"
@@ -1170,6 +1179,12 @@ msgstr "View your Dashboard."
 
 msgid "View your Trades."
 msgstr "View your Trades."
+
+msgid "Vote"
+msgstr "Vote"
+
+msgid "WALLET"
+msgstr "WALLET"
 
 msgid "WITHDRAW"
 msgstr "WITHDRAW"
