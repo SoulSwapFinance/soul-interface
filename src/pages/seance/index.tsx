@@ -132,6 +132,7 @@ export default function SoulStake() {
 
   // Approve masterchef to move funds with `transferFrom`
   const [approvalStateChef, approveMasterchef] = useApproveCallback(parsedAmount, SOUL_SUMMONER_ADDRESS[ChainId.FANTOM])
+  
   const [approvalStateVault, approveVault] = useApproveCallback(parsedAmount, SOUL_VAULT_ADDRESS[chainId])
 
   /**
@@ -211,6 +212,16 @@ export default function SoulStake() {
 
   const handleClickMax = () => {
     setInput(parsedAmount ? parsedAmount.toSignificant(balance.currency.decimals).substring(0, INPUT_CHAR_LIMIT) : '')
+    setUsingBalance(true)
+  }
+  
+const withdrawable = seanceBalance > staked ?
+     staked : seanceBalance
+     
+const parsedAmountWithdrawal = usingBalance ? withdrawable : tryParseAmount(input, withdrawable?.currency)
+     
+  const handleClickMaxWithdrawal = () => {
+    setInput(parsedAmountWithdrawal ? parsedAmountWithdrawal.toSignificant(balance.currency.decimals).substring(0, INPUT_CHAR_LIMIT) : '')
     setUsingBalance(true)
   }
 
@@ -514,7 +525,11 @@ export default function SoulStake() {
                         </div>
                         <button
                           className="px-2 py-1 ml-3 text-xs font-bold border pointer-events-auto focus:outline-none focus:ring hover:bg-opacity-40 md:bg-purple md:bg-opacity-30 border-secondary md:border-purple rounded-2xl md:py-1 md:px-3 md:ml-4 md:text-sm md:font-normal md:text-purple"
-                          onClick={handleClickMax}
+                          onClick={
+                          activeTab === 0
+                          ? handleClickMax
+                          : handleClickMaxWithdrawal
+                          }
                         >
                           {i18n._(t`MAX`)}
                         </button>
