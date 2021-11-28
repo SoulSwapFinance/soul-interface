@@ -1,37 +1,8 @@
-// import { Wrap } from '../../components/ReusableStyles'
-// import Container from '../../components/Container'
-// import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
-// import Head from 'next/head'
-// import React from 'react'
-
-// import { StakeList } from '../../features/stake/StakePairRow'
-
-// const Farm = () => {
-//   return (
-//     <Wrap padding="4rem 0 0 0" justifyContent="center">
-//       <DoubleGlowShadowV2 opacity="0.6">
-
-//       <Container id="stake-page">
-//         <Head>
-//           <title>Stake | Soul</title>
-//           <meta key="description" name="description" content="Stake SOUL" />
-//         </Head>
-
-//         <StakeList />
-//       </Container>
-
-//       </DoubleGlowShadowV2>
-//     </Wrap>
-//   )
-// }
-
-// export default Farm
-
 import { SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS, ZERO } from '../../sdk'
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
 import React, { useEffect, useState } from 'react'
 import { SOUL, SEANCE } from '../../constants'
-// import Balance from '../../components/Balance'
+
 import Button from '../../components/Button'
 import { ChainId } from '../../sdk'
 import Head from 'next/head'
@@ -215,8 +186,8 @@ export default function SoulStake() {
     setUsingBalance(true)
   }
   
-const withdrawable = seanceBalance > staked ?
-     staked : seanceBalance
+const withdrawable = seanceBalance > stakedBal ?
+     stakedBal : seanceBalance
      
 const parsedAmountWithdrawal = usingBalance ? withdrawable : tryParseAmount(input, withdrawable?.currency)
      
