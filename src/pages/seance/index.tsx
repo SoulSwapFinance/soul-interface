@@ -189,10 +189,8 @@ export default function SoulStake() {
 const withdrawable = Number(seanceBalance) > Number(stakedBal) ?
      Number(stakedBal) : Number(seanceBalance)
      
-const parsedAmountWithdrawal = usingBalance ? withdrawable : tryParseAmount(input, withdrawable?.currency)
-     
   const handleClickMaxWithdrawal = () => {
-    setInput(parsedAmountWithdrawal ? parsedAmountWithdrawal.toSignificant(balance.currency.decimals).substring(0, INPUT_CHAR_LIMIT) : '')
+    setInput(withdrawable ? withdrawable : '')
     setUsingBalance(true)
   }
 
