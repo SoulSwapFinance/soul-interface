@@ -186,8 +186,8 @@ export default function SoulStake() {
     setUsingBalance(true)
   }
   
-const withdrawable = seanceBalance > Number(stakedBal) ?
-     Number(stakedBal) : seanceBalance
+const withdrawable = Number(seanceBalance) > Number(stakedBal) ?
+     Number(stakedBal) : Number(seanceBalance)
      
 const parsedAmountWithdrawal = usingBalance ? withdrawable : tryParseAmount(input, withdrawable?.currency)
      
