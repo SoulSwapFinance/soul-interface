@@ -1,37 +1,8 @@
-// import { Wrap } from '../../components/ReusableStyles'
-// import Container from '../../components/Container'
-// import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
-// import Head from 'next/head'
-// import React from 'react'
-
-// import { StakeList } from '../../features/stake/StakePairRow'
-
-// const Farm = () => {
-//   return (
-//     <Wrap padding="4rem 0 0 0" justifyContent="center">
-//       <DoubleGlowShadowV2 opacity="0.6">
-
-//       <Container id="stake-page">
-//         <Head>
-//           <title>Stake | Soul</title>
-//           <meta key="description" name="description" content="Stake SOUL" />
-//         </Head>
-
-//         <StakeList />
-//       </Container>
-
-//       </DoubleGlowShadowV2>
-//     </Wrap>
-//   )
-// }
-
-// export default Farm
-
-import { SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS, ZERO } from '../../sdk'
+import { CurrencyAmount, JSBI, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS, ZERO } from '../../sdk'
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
 import React, { useEffect, useState } from 'react'
 import { SOUL, SEANCE } from '../../constants'
-// import Balance from '../../components/Balance'
+
 import Button from '../../components/Button'
 import { ChainId } from '../../sdk'
 import Head from 'next/head'
@@ -54,6 +25,7 @@ import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 
 import { ethers } from 'ethers'
 import { useSoulSummonerContract } from '../../hooks'
+import { serialize } from '@ethersproject/transactions'
 
 const INPUT_CHAR_LIMIT = 18
 
@@ -132,6 +104,7 @@ export default function SoulStake() {
 
   // Approve masterchef to move funds with `transferFrom`
   const [approvalStateChef, approveMasterchef] = useApproveCallback(parsedAmount, SOUL_SUMMONER_ADDRESS[ChainId.FANTOM])
+  
   const [approvalStateVault, approveVault] = useApproveCallback(parsedAmount, SOUL_VAULT_ADDRESS[chainId])
 
   /**
@@ -213,6 +186,19 @@ export default function SoulStake() {
     setInput(parsedAmount ? parsedAmount.toSignificant(balance.currency.decimals).substring(0, INPUT_CHAR_LIMIT) : '')
     setUsingBalance(true)
   }
+  
+  // convert seanceBalance to number and compare
+
+  // const withdrawable =  Number(seanceBalance) > Number(stakedBal) ? stakedBal : seanceBalance
+
+  // console.log('withdrawable', withdrawable)
+
+  // const parsedWithdrawalAmount = usingBalance ? withdrawable : tryParseAmount(input, balance?.currency)
+
+  // const handleClickMaxWithdrawal = () => {
+  //   setInput(parsedWithdrawalAmount.toLocaleString() ? parsedWithdrawalAmount.toLocaleString() : '') // .toSignificant(balance.currency.decimals).substring(0, INPUT_CHAR_LIMIT) : '')
+  //   setUsingBalance(true)
+  // }
 
   const insufficientFunds = (balance && balance.equalTo(ZERO)) || parsedAmount?.greaterThan(balance)
 
@@ -514,7 +500,11 @@ export default function SoulStake() {
                         </div>
                         <button
                           className="px-2 py-1 ml-3 text-xs font-bold border pointer-events-auto focus:outline-none focus:ring hover:bg-opacity-40 md:bg-purple md:bg-opacity-30 border-secondary md:border-purple rounded-2xl md:py-1 md:px-3 md:ml-4 md:text-sm md:font-normal md:text-purple"
-                          onClick={handleClickMax}
+                          onClick={
+                          // activeTab === 0 ?
+                          handleClickMax
+                          // : handleClickMaxWithdrawal
+                          }
                         >
                           {i18n._(t`MAX`)}
                         </button>
