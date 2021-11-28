@@ -190,7 +190,7 @@ const withdrawable = Number(seanceBalance) > Number(stakedBal) ?
      Number(stakedBal) : Number(seanceBalance)
      
   const handleClickMaxWithdrawal = () => {
-    setInput(withdrawable ? withdrawable : '')
+    setInput(withdrawable ? withdrawable : 0)
     setUsingBalance(true)
   }
 
