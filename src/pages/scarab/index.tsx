@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import Search from '../../components/Search'
 import { classNames, isAddress } from '../../functions'
 import NavLink from '../../components/NavLink'
-// import Link from 'next/link'
+import Link from 'next/link'
 import Card from '../../components/Card'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
@@ -34,7 +34,7 @@ export default function Scarab(): JSX.Element {
 
   useEffect(() => {
     if (isAddress(tokenAddress)) {
-      scarabContract.getDepositsByTokenAddress(tokenAddress).then((r) => {
+      scarabContract.getScarabsByTokenAddress(tokenAddress).then((r) => {
         if (r.length > 0) {
           setScarabs(r.filter((x) => x.withdrawn == false))
         }
@@ -69,9 +69,6 @@ export default function Scarab(): JSX.Element {
       <div className="container px-0 mx-auto pb-6">
         <div className={`mb-2 pb-4 grid grid-cols-12 gap-4`}>
           <div className="flex justify-center items-center col-span-12 lg:justify">
-            {/* <Link href="/summoner">
-              <SoulLogo />
-            </Link> */}
           </div>
         </div>
         <DoubleGlowShadowV2 maxWidth={false} opacity={'0.3'}>
@@ -105,7 +102,7 @@ export default function Scarab(): JSX.Element {
                     setTokenAddress(value)
                   }}
                 />
-                {/* {scarabs.length == 0 && isAddress(tokenAddress) && (
+                {scarabs.length == 0 && isAddress(tokenAddress) && (
                   <div className="flex justify-center items-center col-span-12 lg:justify mt-20">
                     <span>
                       No Scarabs found for this address,{' '}
@@ -115,13 +112,15 @@ export default function Scarab(): JSX.Element {
                       to create one.
                     </span>
                   </div>
-                )} */}
+                )}
                 {scarabs.length > 0 && (
                   <div className="grid grid-cols-5 text-base font-bold text-primary mt-10 mb-2">
-                    <div className="flex items-center col-span-2 px-2">
+                    {/* <div className="flex items-center col-span-2 px-2">
                       <div className="hover:text-high-emphesis">{i18n._(t`Token`)}</div>
-                    </div>
+                    </div> */}
+                    <div className="flex items-center ">{i18n._(t`Recipient`)}</div>
                     <div className="flex items-center ">{i18n._(t`Souls Locked`)}</div>
+                    <div className="flex items-center ">{i18n._(t`Seance Tribute`)}</div>
                     <div className="items-center justify-end px-2 flex ">{i18n._(t`Unlock Date`)}</div>
                     <div className="items-center justify-end px-2 flex ">{i18n._(t``)}</div>
                   </div>
@@ -138,11 +137,17 @@ export default function Scarab(): JSX.Element {
                               )}
                             >
                               <div className="grid grid-cols-5">
-                                <div className="flex col-span-2 items-center">
+                                {/* <div className="flex col-span-2 items-center">
                                   {token?.name} ({token?.symbol})
+                                </div> */}
+                                <div className="flex flex-col justify-center">
+                                  { '-' + scarab?.recipient.substr(length - 5) }
                                 </div>
                                 <div className="flex flex-col justify-center">
                                   {CurrencyAmount.fromRawAmount(token, scarab?.amount).toSignificant(6)}
+                                </div>
+                                <div className="flex flex-col justify-center">
+                                  {CurrencyAmount.fromRawAmount(token, scarab?.tribute).toSignificant(6)}
                                 </div>
                                 <div className="flex flex-col items-end justify-center">
                                   <div className="text-xs text-right md:text-base text-secondary">

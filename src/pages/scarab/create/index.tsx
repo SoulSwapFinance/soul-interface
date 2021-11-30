@@ -10,7 +10,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { classNames, formatNumberScale, tryParseAmount } from '../../../functions'
 import { useRouter } from 'next/router'
 import NavLink from '../../../components/NavLink'
-// import Link from 'next/link'
+import Link from 'next/link'
 import Card from '../../../components/Card'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
@@ -142,15 +142,12 @@ export default function CreateScarab(): JSX.Element {
       <div className="container px-0 mx-auto pb-6">
         <div className={`mb-2 pb-4 grid grid-cols-12 gap-4`}>
           <div className="flex justify-center items-center col-span-12 lg:justify">
-            {/* <Link href="/farm"> */}
-              {/* <SoulLogo /> */}
-            {/* </Link> */}
           </div>
         </div>
         <DoubleGlowShadowV2 maxWidth={false} opacity={'0.6'}>
           <div className={`grid grid-cols-12 gap-2 min-h-1/2`}>
             <div className={`col-span-12 flex flex-col md:flex-row md:space-x-2`}>
-              {/* <NavLink
+              <NavLink
                 exact
                 href={'/scarab'}
                 activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-yellow-dark-900"
@@ -158,7 +155,7 @@ export default function CreateScarab(): JSX.Element {
                 <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
                   {i18n._(t`Search Scarabs`)}
                 </a>
-              </NavLink> */}
+              </NavLink>
               <NavLink
                 exact
                 href={'/scarab/create'}

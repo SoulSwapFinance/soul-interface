@@ -32,13 +32,13 @@ export default function useScarab() {
     [contract]
   )
 
-  const getDepositsByTokenAddress = useCallback(
+  const getScarabsByTokenAddress = useCallback(
     async (token: string) => {
       try {
-        const scarabs = await contract?.getDepositsByTokenAddress(token)
+        const scarabsIds = await contract?.getDepositsByTokenAddress(token)
         const result = []
-        if (contract?.depositsCount > 0) {
-          for (const id of scarabs) {
+        if (scarabsIds.length > 0) {
+          for (const id of scarabsIds) {
             const scarabInfo = await contract?.scarabs(id.toString())
             console.log('scarabInfo: ', scarabInfo)
             result.push({ id, ...scarabInfo })
@@ -50,8 +50,72 @@ export default function useScarab() {
         return e
       }
     },
-    [contract]
+    [contract, tokenContract]
   )
+  
 
-  return { lockSouls, getDepositsByTokenAddress, withdrawTokens }
+  // const getDepositsByTokenAddress = useCallback(
+  //   async (token: string) => {
+  //     try {
+  //       const scarabs = await contract?.getDepositsByTokenAddress(token)
+  //       const result = []
+  //       if (contract?.depositsCount > 0) {
+  //         for (const id of scarabs) {
+  //           const scarabInfo = await contract?.scarabs(id.toString())
+  //           console.log('scarabInfo: ', scarabInfo)
+  //           result.push({ id, ...scarabInfo })
+  //         }
+  //       }
+  //       return result
+  //     } catch (e) {
+  //       console.error(e)
+  //       return e
+  //     }
+  //   },
+  //   [contract]
+  // )
+
+  return { lockSouls, getScarabsByTokenAddress, withdrawTokens } // getDepositsByTokenAddress
 }
+
+// import { useLockerContract, } from '../../hooks'
+
+
+//   const contract = useLockerContract()
+//   const tokenContract = useTokenContract()
+
+
+//   const withdrawTokens = useCallback(
+//     async (id: string) => {
+//       try {
+//         return await contract?.withdrawTokens(id)
+//       } catch (e) {
+//         console.error(e)
+//         return e
+//       }
+//     },
+//     [contract]
+//   )
+
+//   const getLockersByTokenAddress = useCallback(
+//     async (token: string) => {
+//       try {
+//         const lockersIds = await contract?.getDepositsByTokenAddress(token)
+//         const result = []
+//         if (lockersIds.length > 0) {
+//           for (const id of lockersIds) {
+//             const lockerInfo = await contract?.lockedToken(id.toString())
+//             result.push({ id, ...lockerInfo })
+//           }
+//         }
+//         return result
+//       } catch (e) {
+//         console.error(e)
+//         return e
+//       }
+//     },
+//     [contract, tokenContract]
+//   )
+
+//   return { lockTokens, getLockersByTokenAddress, withdrawTokens }
+// }
