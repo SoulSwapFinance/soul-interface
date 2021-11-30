@@ -427,8 +427,8 @@ export default function Enchant() {
                         className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
                         src="/images/tokens/enchant.png"
                         alt="ENCHANT"
-                        width={64}
-                        height={64}
+                        width={42}
+                        height={42}
                       />
                       <div className="flex flex-col justify-center">
                         <p className="text-sm font-bold md:text-lg text-high-emphesis">
@@ -455,8 +455,8 @@ export default function Enchant() {
                         className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
                         src="/images/tokens/seance.png"
                         alt="SEANCE"
-                        width={64}
-                        height={64}
+                        width={42}
+                        height={42}
                       />
                       <div className="flex flex-col justify-center">
                         <p className="text-sm font-bold md:text-lg text-high-emphesis">
@@ -503,19 +503,19 @@ export default function Enchant() {
                     <div className="flex flex-col flex-grow md:mb-6">
 
                     <div className="flex items-center ml-8 space-x-4 md:ml-0">
+                          <p className="text-sm md:text-base text-primary">RATE</p>
                         <p className="text-sm font-bold md:text-lg text-high-emphesis">
                             { (Number(enchanted) / Number(totalSupply))=== 0
-                              ? '0.000'
+                              ? '0.000000'
                               :  (Number(enchanted) / Number(totalSupply)) < 0.001
-                              ? '<0.001'
+                              ? '<0.000001'
                               :  (Number(enchanted) / Number(totalSupply))
-                                .toFixed(2)
+                                .toFixed(6)
                                 .toString()
-                                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                .replace(/\B(?=(\d{7})+(?!\d))/g, ',')}
                         </p>
-                        <p className="text-sm md:text-base text-primary">RATE</p>
 
-                    <div className="flex items-center ml-8 space-x-4 md:ml-0">
+                    {/* <div className="flex items-center ml-8 space-x-4 md:ml-0">
                         <p className="text-sm font-bold md:text-lg text-high-emphesis">
                             { share === 0
                               ? '0.0'
@@ -526,8 +526,8 @@ export default function Enchant() {
                                 .toString()
                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}%
                         </p>
-                        <p className="text-sm md:text-base text-primary">OWN</p>
-                     </div>
+                        <p className="text-sm md:text-base text-primary">OWN</p> */}
+                     {/* </div> */}
                      </div>
                     </div>
                   </div>
