@@ -663,21 +663,21 @@ export const POOLS: AddressMap = {
           decimals: 18,
         },
       },
-      // '0xB38508Ed92C4878daE7652d8d46cAE46eEa8aA9A': {  // fUSDT-DAI
-      //   id: 43, // 200
-      //   token0: {
-      //     id: '0x049d68029688eAbF473097a2fC38ef61633A3C7A', // fUSDT
-      //     name: 'Frapped USDT',
-      //     symbol: 'fUSDT',
-      //     decimals: 6,
-      //   },
-      //   token1: {
-      //     id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
-      //     name: 'Dai Stablecoin',
-      //     symbol: 'DAI',
-      //     decimals: 18,
+      '0xB38508Ed92C4878daE7652d8d46cAE46eEa8aA9A': {  // fUSDT-DAI
+        id: 43, // 200
+        token0: {
+          id: '0x049d68029688eAbF473097a2fC38ef61633A3C7A', // fUSDT
+          name: 'Frapped USDT',
+          symbol: 'fUSDT',
+          decimals: 6,
+        },
+        token1: {
+          id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
+          name: 'Dai Stablecoin',
+          symbol: 'DAI',
+          decimals: 18,
           
-      //   },
-      // }
+        },
+      }
     }
 }
