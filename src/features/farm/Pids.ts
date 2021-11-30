@@ -7,7 +7,7 @@ import { tokens } from './constants/tokens'
 
 export const WithdrawPids = [
   {
-    // 400
+    // 0
     pid: 3,
     token1: 'SOUL',
     token2: 'FUSD',
@@ -18,6 +18,19 @@ export const WithdrawPids = [
     },
     token1Address: tokens.SOUL,
     token2Address: tokens.FUSD,
+  },
+  {
+    // 0
+    pid: 16,
+    token1: 'DAI',
+    token2: 'gFUSDT',
+    lpSymbol: 'DAI-gFUSDT',
+    lpAddresses: {
+      4002: '',
+      250: '0xe637D90A993EDBD75AC09E9fcB16313D193B9451',
+    },
+    token1Address: tokens.DAI,
+    token2Address: tokens.gFUSDT,
   },
 ]
 
@@ -438,20 +451,6 @@ export const AllPids = [
   },
   {
     // 200
-    pid: 16,
-    token1: 'DAI',
-    token2: 'gFUSDT',
-    lpSymbol: 'DAI-gFUSDT',
-    lpAddresses: {
-      4002: '',
-      250: '0xe637D90A993EDBD75AC09E9fcB16313D193B9451',
-    },
-    token1Address: tokens.DAI,
-    token2Address: tokens.gFUSDT,
-  },
-  
-  {
-    // 200
     pid: 30,
     token1: 'SEANCE',
     token2: 'SPIRIT',
@@ -567,6 +566,19 @@ export const AllPids = [
   //   },
   //   token1Address: tokens.FTM,
   //   token2Address: tokens.SPELL,
+  // },
+  // {
+  //   // 200
+  //   pid: 43,
+  //   token1: 'fUSDT',
+  //   token2: 'DAI',
+  //   lpSymbol: 'fUSDT-DAI',
+  //   lpAddresses: {
+  //     4002: '',
+  //     250: '0xB38508Ed92C4878daE7652d8d46cAE46eEa8aA9A',
+  //   },
+  //   token1Address: tokens.fUSDT,
+  //   token2Address: tokens.DAI,
   // },
 ]
 
@@ -1200,19 +1212,6 @@ export const EnchantPids = [
 export const StablePids = [
   {
     // 200
-    pid: 16,
-    token1: 'DAI',
-    token2: 'gFUSDT',
-    lpSymbol: 'DAI-gFUSDT',
-    lpAddresses: {
-      4002: '',
-      250: '0xe637D90A993EDBD75AC09E9fcB16313D193B9451',
-    },
-    token1Address: tokens.DAI,
-    token2Address: tokens.gFUSDT,
-  },
-  {
-    // 200
     pid: 9,
     token1: 'USDC',
     token2: 'fUSDT',
@@ -1251,5 +1250,19 @@ export const StablePids = [
     token1Address: tokens.USDC,
     token2Address: tokens.DAI,
   },
+
+  // {
+  //   // 200
+  //   pid: 43,
+  //   token1: 'fUSDT',
+  //   token2: 'DAI',
+  //   lpSymbol: 'fUSDT-DAI',
+  //   lpAddresses: {
+  //     4002: '',
+  //     250: '0xB38508Ed92C4878daE7652d8d46cAE46eEa8aA9A',
+  //   },
+  //   token1Address: tokens.fUSDT,
+  //   token2Address: tokens.DAI,
+  // },
   
 ]
