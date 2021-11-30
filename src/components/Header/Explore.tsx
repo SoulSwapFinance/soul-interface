@@ -21,8 +21,8 @@ const items = (i18n: I18n) => [
     vote: false,
     analytics: false, 
     links: false, 
-    explore: false,
     claim: false,
+    explore: false,
   },
   {
     name: i18n._(t`Enchant`),
@@ -33,8 +33,8 @@ const items = (i18n: I18n) => [
     vote: false,
     analytics: false, 
     links: false, 
-    explore: false,
     claim: false,
+    explore: false,
   },
   {
     name: i18n._(t`Stake`),
@@ -45,8 +45,8 @@ const items = (i18n: I18n) => [
     vote: false,
     analytics: false, 
     links: false, 
-    explore: false,
     claim: false,
+    explore: false,
   },
   {
     name: i18n._(t`Vote`),
@@ -57,8 +57,8 @@ const items = (i18n: I18n) => [
     vote: true,
     analytics: true, 
     links: false, 
-    explore: false,
     claim: false,
+    explore: false,
   },
   {
     name: i18n._(t`Analytics`),
@@ -69,8 +69,8 @@ const items = (i18n: I18n) => [
     vote: false,
     analytics: true, 
     links: false, 
-    explore: false,
     claim: false,
+    explore: false,
   },
   {
     name: i18n._(t`Links`),
@@ -81,20 +81,8 @@ const items = (i18n: I18n) => [
     vote: false,
     analytics: false, 
     links: true, 
-    explore: false,
     claim: false,
-  },
-  {
-  name: i18n._(t`More`),
-  href: '/explore',
-  borrow: false,
-  enchant: false,
-  stake: false,
-  vote: false,
-  analytics: false, 
-  links: false, 
-  explore: true,
-  claim: false,
+    explore: false,
   },
   {
   name: i18n._(t`Claim`),
@@ -105,8 +93,20 @@ const items = (i18n: I18n) => [
   vote: false,
   analytics: false, 
   links: false, 
-  explore: false,
   claim: true,
+  explore: false,
+  },
+  {
+  name: i18n._(t`More`),
+  href: '/explore',
+  borrow: false,
+  enchant: false,
+  stake: false,
+  vote: false,
+  analytics: false, 
+  links: false, 
+  claim: false,
+  explore: true,
   },
 ]
 
@@ -156,20 +156,20 @@ export default function Menu() {
 
                   {solutions.map((item) =>
                     item.borrow ? (
-                      <NavLink key={item.name} href={item.href}>
-                      <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                      SEANCE
-                      </a>
-                    </NavLink>
-                    ) : item.enchant ? 
-                    (
-                      <NavLink key={item.name} href={item.href}>
-                      <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                      ENCHANT
-                      </a>
-                    </NavLink>
-                    ) : item.stake ? 
-                    (
+                    //   <NavLink key={item.name} href={item.href}>
+                    //   <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                    //   SEANCE
+                    //   </a>
+                    // </NavLink>
+                    // ) : item.enchant ? 
+                    // (
+                    //   <NavLink key={item.name} href={item.href}>
+                    //   <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                    //   ENCHANT
+                    //   </a>
+                    // </NavLink>
+                    // ) : item.stake ? 
+                    // (
                       <NavLink key={item.name} href={item.href}>
                       <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                       CIRCLES
@@ -182,32 +182,32 @@ export default function Menu() {
                       VOTE
                       </a>
                     </NavLink>
-                    ) : item.analytics ?
-                    (
-                     <NavLink key={item.name} href={item.href}>
-                      <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                      CHARTS
-                      </a>
-                    </NavLink>
-                    ) : item.links ?
-                    (
-                     <NavLink key={item.name} href={item.href}>
-                      <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">        
-                      ECOSYSTEM
-                      </a>
-                    </NavLink>
-                    ) : item.explore ?
-                    (
-                    <NavLink key={item.name} href={item.href}>
-                      <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                        EXPLORE
-                      </a>
-                   </NavLink>
+                    // ) : item.analytics ?
+                    // (
+                    //  <NavLink key={item.name} href={item.href}>
+                    //   <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                    //   CHARTS
+                    //   </a>
+                    // </NavLink>
+                    // ) : item.links ?
+                    // (
+                    //  <NavLink key={item.name} href={item.href}>
+                    //   <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">        
+                    //   ECOSYSTEM
+                    //   </a>
+                    // </NavLink>
                     ) : item.claim ?
                     (
                     <NavLink key={item.name} href={item.href}>
                       <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                         CLAIM
+                      </a>
+                   </NavLink>
+                    ) : item.explore ?
+                    (
+                    <NavLink key={item.name} href={item.href}>
+                      <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                        EXPLORE
                       </a>
                    </NavLink>
                       ) : ''

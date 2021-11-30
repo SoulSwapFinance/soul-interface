@@ -41,7 +41,7 @@ export default function Menu() {
   const solutions = items(i18n)
 
   return (
-    <Popover className="relative ml-auto md:m-0">
+    <Popover className="relative ml-auto lg:m-0">
       {({ open }) => (
         <>
           <Popover.Button
