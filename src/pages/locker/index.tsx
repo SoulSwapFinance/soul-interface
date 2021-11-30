@@ -12,7 +12,7 @@ import { useLingui } from '@lingui/react'
 import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 // import SoulLogo from '../../components/SoulLogo'
 import { useTransactionAdder } from '../../state/transactions/hooks'
-import useScarab from '../../features/scarab/useScarab'
+import useLocker from '../../features/locker/useLocker'
 import { Disclosure } from '@headlessui/react'
 import moment from 'moment'
 import { useToken } from '../../hooks/Tokens'
@@ -20,7 +20,7 @@ import { CurrencyAmount } from '../../sdk'
 import Button from '../../components/Button'
 import { getAddress } from '@ethersproject/address'
 
-export default function Scarab(): JSX.Element {
+export default function Locker(): JSX.Element {
   const { i18n } = useLingui()
   const { account } = useActiveWeb3React()
   const [tokenAddress, setTokenAddress] = useState(undefined)
@@ -28,42 +28,42 @@ export default function Scarab(): JSX.Element {
   const [pendingTx, setPendingTx] = useState(false)
   const addTransaction = useTransactionAdder()
 
-  const [scarabs, setScarabs] = useState([])
+  const [lockers, setLockers] = useState([])
 
-  const scarabContract = useScarab()
+  const lockerContract = useLocker()
 
   useEffect(() => {
     if (isAddress(tokenAddress)) {
-      scarabContract.getScarabsByTokenAddress(tokenAddress).then((r) => {
+      lockerContract.getLockersByTokenAddress(tokenAddress).then((r) => {
         if (r.length > 0) {
-          setScarabs(r.filter((x) => x.withdrawn == false))
+          setLockers(r.filter((x) => x.withdrawn == false))
         }
       })
     }
-  }, [tokenAddress, scarabContract])
+  }, [tokenAddress, lockerContract])
 
   const handleWithdraw = useCallback(
     async (id) => {
       setPendingTx(true)
 
       try {
-        const tx = await scarabContract.withdrawTokens(id)
+        const tx = await lockerContract.withdrawTokens(id)
         addTransaction(tx, {
-          summary: `${i18n._(t`Withdraw from Scarab ${id}`)}`,
+          summary: `${i18n._(t`Withdraw from locker ${id}`)}`,
         })
       } catch (error) {
         console.error(error)
       }
       setPendingTx(false)
     },
-    [addTransaction, i18n, scarabContract]
+    [addTransaction, i18n, lockerContract]
   )
 
   return (
     <>
       <Head>
-        <title>Scarab | Soul</title>
-        <meta key="description" name="description" content="Soul Scarab" />
+        <title>Locker | SoulSwap</title>
+        <meta key="description" name="description" content="SoulSwap Locker" />
       </Head>
 
       <div className="container px-0 mx-auto pb-6">
@@ -76,25 +76,25 @@ export default function Scarab(): JSX.Element {
             <div className={`col-span-12 flex flex-col md:flex-row md:space-x-2`}>
               <NavLink
                 exact
-                href={'/scarab'}
-                activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-purple-dark-900"
+                href={'/locker'}
+                activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-yellow-dark-900"
               >
                 <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
-                  {i18n._(t`Search Scarabs`)}
+                  {i18n._(t`Search lockers`)}
                 </a>
               </NavLink>
               <NavLink
                 exact
-                href={'/scarab/create'}
-                activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-purple-dark-900"
+                href={'/locker/create'}
+                activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-yellow-dark-900"
               >
                 <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
-                  {i18n._(t`Summon Scarabs`)}
+                  {i18n._(t`Create lock`)}
                 </a>
               </NavLink>
             </div>
             <div className={`col-span-12`} style={{ minHeight: '35rem' }}>
-              <Card className="h-full rounded bg-dark-900">
+              <Card className="h-full bg-dark-900 z-4">
                 <Search
                   placeholder={'Search by name, symbol or address'}
                   term={tokenAddress}
@@ -102,31 +102,30 @@ export default function Scarab(): JSX.Element {
                     setTokenAddress(value)
                   }}
                 />
-                {scarabs.length == 0 && isAddress(tokenAddress) && (
+                {lockers.length == 0 && isAddress(tokenAddress) && (
                   <div className="flex justify-center items-center col-span-12 lg:justify mt-20">
                     <span>
-                      No Scarabs found for this address,{' '}
-                      <Link href="/scarab/create">
-                        <a className="hover:underline hover:text-purple">click here</a>
+                      No lockers found... {' '}
+                        <br></br>
+                      <Link href="/locker/create">
+                        <a className="hover:underline hover:text-purple">CLICK HERE TO CREATE ONE</a>
                       </Link>{' '}
-                      to create one.
+                      {/* to create one. */}
                     </span>
                   </div>
                 )}
-                {scarabs.length > 0 && (
+                {lockers.length > 0 && (
                   <div className="grid grid-cols-5 text-base font-bold text-primary mt-10 mb-2">
-                    {/* <div className="flex items-center col-span-2 px-2">
+                    <div className="flex items-center col-span-2 px-2">
                       <div className="hover:text-high-emphesis">{i18n._(t`Token`)}</div>
-                    </div> */}
-                    <div className="flex items-center ">{i18n._(t`Recipient`)}</div>
-                    <div className="flex items-center ">{i18n._(t`Souls Locked`)}</div>
-                    <div className="flex items-center ">{i18n._(t`Seance Tribute`)}</div>
-                    <div className="items-center justify-end px-2 flex ">{i18n._(t`Unlock Date`)}</div>
+                    </div>
+                    <div className="flex items-center ">{i18n._(t`Amount Locked`)}</div>
+                    <div className="items-center justify-end px-2 flex ">{i18n._(t`Unlock date`)}</div>
                     <div className="items-center justify-end px-2 flex ">{i18n._(t``)}</div>
                   </div>
                 )}
                 <div className="flex-col">
-                  {scarabs.map((scarab, index) => {
+                  {lockers.map((locker, index) => {
                     return (
                       <Disclosure key={index}>
                         {() => (
@@ -137,21 +136,15 @@ export default function Scarab(): JSX.Element {
                               )}
                             >
                               <div className="grid grid-cols-5">
-                                {/* <div className="flex col-span-2 items-center">
+                                <div className="flex col-span-2 items-center">
                                   {token?.name} ({token?.symbol})
-                                </div> */}
-                                <div className="flex flex-col justify-center">
-                                  { '-' + scarab?.recipient.substr(length - 5) }
                                 </div>
                                 <div className="flex flex-col justify-center">
-                                  {CurrencyAmount.fromRawAmount(token, scarab?.amount).toSignificant(6)}
-                                </div>
-                                <div className="flex flex-col justify-center">
-                                  {CurrencyAmount.fromRawAmount(token, scarab?.tribute).toSignificant(6)}
+                                  {CurrencyAmount.fromRawAmount(token, locker?.amount).toSignificant(6)}
                                 </div>
                                 <div className="flex flex-col items-end justify-center">
                                   <div className="text-xs text-right md:text-base text-secondary">
-                                    {moment.unix(scarab?.unlockTimestamp.toString()).fromNow()}
+                                    {moment.unix(locker?.unlockTimestamp.toString()).fromNow()}
                                   </div>
                                 </div>
                                 <div className="flex flex-col items-end justify-center">
@@ -159,11 +152,11 @@ export default function Scarab(): JSX.Element {
                                     <Button
                                       variant="link"
                                       style={{ width: '100%' }}
-                                      onClick={() => handleWithdraw(scarab?.id)}
+                                      onClick={() => handleWithdraw(locker?.id)}
                                       disabled={
-                                        moment.unix(scarab?.unlockTimestamp.toString()).isAfter(new Date()) ||
+                                        moment.unix(locker?.unlockTimestamp.toString()).isAfter(new Date()) ||
                                         !account ||
-                                        (account && getAddress(account) != getAddress(scarab?.recipient))
+                                        (account && getAddress(account) != getAddress(locker?.withdrawer))
                                       }
                                     >
                                       Withdraw

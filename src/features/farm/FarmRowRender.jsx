@@ -533,11 +533,11 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
                 {feePercent !== 0 ? (
                   <Text fontSize=".9rem" padding="0" color="#F36FFE">
-                    Withdrawal fee: {feePercent}%, decreasing 1% daily until 0%.
+                    Withdraw Fee: {feePercent}% LP, less 1% daily to 0%.
                   </Text>
                 ) : (
                   <Text fontSize=".9rem" padding="0" color="#F36FFE">
-                    Withdrawal fee: {feePercent}%
+                    Withdraw Fee: {feePercent}%
                   </Text>
                 )}
               </FunctionBox>
@@ -599,10 +599,10 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 <Wrap padding="0">
                   <Wrap padding="0" display="flex">
                     <Text fontSize=".9rem" padding="0" color="#aaa">
-                      Fee Amount ({feePercent}%): {feeAmount}
+                      Fee Amount ({feePercent}%): {feeAmount} LP
                     </Text>
                     <Text fontSize=".9rem" padding="0 0 0 6rem" color="#aaa">
-                      Receiving: {receiving}
+                      Receiving {receiving} LP
                     </Text>
                   </Wrap>
                 </Wrap>
