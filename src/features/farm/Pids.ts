@@ -700,7 +700,6 @@ export const FantiesPids = [
     token1Address: tokens.FTM,
     token2Address: tokens.WETH,
   },
-
   {
     // 600
     pid: 18,
@@ -715,6 +714,60 @@ export const FantiesPids = [
     token2Address: tokens.BNB,
   },
   {
+    // 600
+    pid: 14,
+    token1: 'FTM',
+    token2: 'fUSDT',
+    lpSymbol: 'FTM-fUSDT',
+    lpAddresses: {
+      4002: '',
+      250: '0xdC24814AD654986928F8E4aec48D37fa30bBC5BB',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.fUSDT,
+  },
+
+  {
+    // 600
+    pid: 23,
+    token1: 'FTM',
+    token2: 'DAI',
+    lpSymbol: 'FTM-DAI',
+    lpAddresses: {
+      4002: '',
+      250: '0xF3d6E8Ecece8647B456d57375Ce0B51B8F0cD40b',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.DAI,
+  },
+
+  {
+    // 600
+    pid: 2,
+    token1: 'FTM',
+    token2: 'USDC',
+    lpSymbol: 'FTM-USDC',
+    lpAddresses: {
+      4002: '',
+      250: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.USDC,
+  },
+  {
+    // 400
+    pid: 19,
+    token1: 'FTM',
+    token2: 'MIM',
+    lpSymbol: 'FTM-MIM',
+    lpAddresses: {
+      4002: '',
+      250: '0x34990FC1e6e3169DCf23624049be29782AFc81bd',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.MIM,
+  },
+  {
     // 300
     pid: 39,
     token1: 'FTM',
@@ -726,6 +779,45 @@ export const FantiesPids = [
     },
     token1Address: tokens.FTM,
     token2Address: tokens.ICE,
+  },
+  {
+    // 300
+    pid: 40,
+    token1: 'FTM',
+    token2: 'ANY',
+    lpSymbol: 'FTM-ANY',
+    lpAddresses: {
+      4002: '',
+      250: '0xf4199594986E35c49f20beaaCD0f3529D18BF08E',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.ANY,
+  },
+  {
+    // 300
+    pid: 41,
+    token1: 'FTM',
+    token2: 'CRV',
+    lpSymbol: 'FTM-CRV',
+    lpAddresses: {
+      4002: '',
+      250: '0x1C9A342A615E8CAB4d21A2ACA7E40a48b2F8747F',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.CRV,
+  },
+  {
+    // 300
+    pid: 42,
+    token1: 'FTM',
+    token2: 'SPELL',
+    lpSymbol: 'FTM-SPELL',
+    lpAddresses: {
+      4002: '',
+      250: '0x3d24C65201566f17d3Ac48C746919788d27Ee743',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.SPELL,
   },
   {
     // 300
@@ -768,63 +860,6 @@ export const FantiesPids = [
     token2Address: tokens.REAPER,
   },
 
-  {
-    // 600
-    pid: 14,
-    token1: 'FTM',
-    token2: 'fUSDT',
-    lpSymbol: 'FTM-fUSDT',
-    lpAddresses: {
-      4002: '',
-      250: '0xdC24814AD654986928F8E4aec48D37fa30bBC5BB',
-    },
-    token1Address: tokens.FTM,
-    token2Address: tokens.fUSDT,
-  },
-
-  {
-    // 600
-    pid: 23,
-    token1: 'FTM',
-    token2: 'DAI',
-    lpSymbol: 'FTM-DAI',
-    lpAddresses: {
-      4002: '',
-      250: '0xF3d6E8Ecece8647B456d57375Ce0B51B8F0cD40b',
-    },
-    token1Address: tokens.FTM,
-    token2Address: tokens.DAI,
-  },
-
-  {
-    // 600
-    pid: 2,
-    token1: 'FTM',
-    token2: 'USDC',
-    lpSymbol: 'FTM-USDC',
-    lpAddresses: {
-      4002: '',
-      250: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556',
-    },
-    token1Address: tokens.FTM,
-    token2Address: tokens.USDC,
-  },
-
-  {
-    // 400
-    pid: 19,
-    token1: 'FTM',
-    token2: 'MIM',
-    lpSymbol: 'FTM-MIM',
-    lpAddresses: {
-      4002: '',
-      250: '0x34990FC1e6e3169DCf23624049be29782AFc81bd',
-    },
-    token1Address: tokens.FTM,
-    token2Address: tokens.MIM,
-  },
-
-
 ]
 
 export const SeancePids = [
@@ -856,7 +891,6 @@ export const SeancePids = [
     token1Address: tokens.SEANCE,
     token2Address: tokens.ENCHANT,
   },
-
   {
     // 600
     pid: 10,
@@ -981,7 +1015,6 @@ export const SeancePids = [
   },
 
 ]
-
 
 export const SoulPids = [
 

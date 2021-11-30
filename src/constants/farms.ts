@@ -618,5 +618,50 @@ export const POOLS: AddressMap = {
           decimals: 18,
         },
       },
+      '0xf4199594986E35c49f20beaaCD0f3529D18BF08E': {  // FTM-ANY
+        id: 40, // 300
+        token0: {
+          id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+          name: 'Wrapped Fantom',
+          symbol: 'FTM',
+          decimals: 18,
+        },
+        token1: {
+          id: '0xdDcb3fFD12750B45d32E084887fdf1aABAb34239', // ANY
+          name: 'Anyswap',
+          symbol: 'ANY',
+          decimals: 18,
+        },
+      },
+      '0x1C9A342A615E8CAB4d21A2ACA7E40a48b2F8747F': {  // FTM-CRV
+        id: 41, // 300
+        token0: {
+          id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+          name: 'Wrapped Fantom',
+          symbol: 'FTM',
+          decimals: 18,
+        },
+        token1: {
+          id: '0x1E4F97b9f9F913c46F1632781732927B9019C68b', // CRV
+          name: 'Curve DAO',
+          symbol: 'CRV',
+          decimals: 18,
+        },
+      },
+      '0x3d24C65201566f17d3Ac48C746919788d27Ee743': {  // FTM-SPELL
+        id: 42, // 300
+        token0: {
+          id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+          name: 'Wrapped Fantom',
+          symbol: 'FTM',
+          decimals: 18,
+        },
+        token1: {
+          id: '0x468003B688943977e6130F4F68F23aad939a1040', // SPELL
+          name: 'Spell Token',
+          symbol: 'SPELL',
+          decimals: 18,
+        },
+      }
     }
 }
