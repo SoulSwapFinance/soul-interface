@@ -258,21 +258,21 @@ export const POOLS: AddressMap = {
           decimals: 6,
         },
       },
-      '0xe637D90A993EDBD75AC09E9fcB16313D193B9451': {  // DAI-gfUSDT
-        id: 16, // 200
-        token0: {
-          id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
-          name: 'Dai Stablecoin',
-          symbol: 'DAI',
-          decimals: 18,
-        },
-        token1: {
-          id: '0x940F41F0ec9ba1A34CF001cc03347ac092F5F6B5', // gfUSDT
-          name: 'Geist fUSDT',
-          symbol: 'gFUSDT',
-          decimals: 6,
-        },
-      },
+      // '0xe637D90A993EDBD75AC09E9fcB16313D193B9451': {  // DAI-gfUSDT
+      //   id: 16, // 200
+      //   token0: {
+      //     id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
+      //     name: 'Dai Stablecoin',
+      //     symbol: 'DAI',
+      //     decimals: 18,
+      //   },
+      //   token1: {
+      //     id: '0x940F41F0ec9ba1A34CF001cc03347ac092F5F6B5', // gfUSDT
+      //     name: 'Geist fUSDT',
+      //     symbol: 'gFUSDT',
+      //     decimals: 6,
+      //   },
+      // },
       '0xC1EdFbA9811B696bDFd07d31eD5FF702e031364E': {  // BNB-DAI
         id: 17, // 400
         token0: {
@@ -648,20 +648,36 @@ export const POOLS: AddressMap = {
           decimals: 18,
         },
       },
-    //   '0x3d24C65201566f17d3Ac48C746919788d27Ee743': {  // FTM-SPELL
-    //     id: 42, // 300
-    //     token0: {
-    //       id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
-    //       name: 'Wrapped Fantom',
-    //       symbol: 'FTM',
-    //       decimals: 18,
-    //     },
-    //     token1: {
-    //       id: '0x468003B688943977e6130F4F68F23aad939a1040', // SPELL
-    //       name: 'Spell Token',
-    //       symbol: 'SPELL',
-    //       decimals: 18,
-    //     },
-    //   }
+      '0x3d24C65201566f17d3Ac48C746919788d27Ee743': {  // FTM-SPELL
+        id: 42, // 300
+        token0: {
+          id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+          name: 'Wrapped Fantom',
+          symbol: 'FTM',
+          decimals: 18,
+        },
+        token1: {
+          id: '0x468003B688943977e6130F4F68F23aad939a1040', // SPELL
+          name: 'Spell Token',
+          symbol: 'SPELL',
+          decimals: 18,
+        },
+      },
+      // '0xB38508Ed92C4878daE7652d8d46cAE46eEa8aA9A': {  // fUSDT-DAI
+      //   id: 43, // 200
+      //   token0: {
+      //     id: '0x049d68029688eAbF473097a2fC38ef61633A3C7A', // fUSDT
+      //     name: 'Frapped USDT',
+      //     symbol: 'fUSDT',
+      //     decimals: 6,
+      //   },
+      //   token1: {
+      //     id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
+      //     name: 'Dai Stablecoin',
+      //     symbol: 'DAI',
+      //     decimals: 18,
+          
+      //   },
+      // }
     }
 }
