@@ -9,6 +9,7 @@ import {
   FTM_USDC_PAIR,
   SCARAB_ADDRESS,
   ATOMIC_SWAP_ADDRESS,
+  LOCKER_ADDRESS,
 } from '../constants/addresses'
 import {
   ARGENT_WALLET_DETECTOR_ABI,
@@ -87,6 +88,8 @@ import SUSHIROLL_ABI from '@sushiswap/core/abi/SushiRoll.json'
 // import SOULSWAP_MULTISWAPPER_ABI from '../constants/abis/sushiswapmultiswapper.json'
 import SOULSWAP_TWAP_ORACLE_ABI from '../constants/abis/sushiswap-slp-oracle.json'
 import TIMELOCK_ABI from '../constants/abis/timelock.json'
+
+import LOCKER_ABI from '../constants/abis/locker.json'
 
 import WETH9_ABI from '../constants/abis/weth.json'
 import ZAPPER_ABI from '../constants/abis/zapper.json'
@@ -263,6 +266,11 @@ export function useSummonerContract(withSignerIfPossible?: boolean): Contract | 
 export function useFactoryContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && FACTORY_ADDRESS[chainId], FACTORY_ABI, false)
+}
+
+export function useLockerContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && LOCKER_ADDRESS[chainId], LOCKER_ABI, withSignerIfPossible)
 }
 
 export function useRouterContract(useArcher = false, withSignerIfPossible?: boolean): Contract | null {

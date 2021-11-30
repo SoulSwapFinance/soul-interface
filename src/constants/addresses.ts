@@ -46,6 +46,13 @@ export const SCARAB_ADDRESS: AddressMap = {
   [ChainId.FANTOM_TESTNET]: '',
 }
 
+export const LOCKER_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xd21fEDFC0AEf3c640B88FD0e3Ac87a31A8aC486B', // 29 NOV
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
 export const FAUCET_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
