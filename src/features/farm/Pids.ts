@@ -567,19 +567,19 @@ export const AllPids = [
     token1Address: tokens.SEANCE,
     token2Address: tokens.SPELL,
   },
-  // {
-  //   // 200
-  //   pid: 43,
-  //   token1: 'fUSDT',
-  //   token2: 'DAI',
-  //   lpSymbol: 'fUSDT-DAI',
-  //   lpAddresses: {
-  //     4002: '',
-  //     250: '0xB38508Ed92C4878daE7652d8d46cAE46eEa8aA9A',
-  //   },
-  //   token1Address: tokens.fUSDT,
-  //   token2Address: tokens.DAI,
-  // },
+  {
+    // 200
+    pid: 43,
+    token1: 'fUSDT',
+    token2: 'DAI',
+    lpSymbol: 'fUSDT-DAI',
+    lpAddresses: {
+      4002: '',
+      250: '0xB38508Ed92C4878daE7652d8d46cAE46eEa8aA9A',
+    },
+    token1Address: tokens.fUSDT,
+    token2Address: tokens.DAI,
+  },
 ]
 
 export const MatePids = [
@@ -1251,18 +1251,18 @@ export const StablePids = [
     token2Address: tokens.DAI,
   },
 
-  // {
-  //   // 200
-  //   pid: 43,
-  //   token1: 'fUSDT',
-  //   token2: 'DAI',
-  //   lpSymbol: 'fUSDT-DAI',
-  //   lpAddresses: {
-  //     4002: '',
-  //     250: '0xB38508Ed92C4878daE7652d8d46cAE46eEa8aA9A',
-  //   },
-  //   token1Address: tokens.fUSDT,
-  //   token2Address: tokens.DAI,
-  // },
+  {
+    // 200
+    pid: 43,
+    token1: 'fUSDT',
+    token2: 'DAI',
+    lpSymbol: 'fUSDT-DAI',
+    lpAddresses: {
+      4002: '',
+      250: '0xB38508Ed92C4878daE7652d8d46cAE46eEa8aA9A',
+    },
+    token1Address: tokens.fUSDT,
+    token2Address: tokens.DAI,
+  },
   
 ]
