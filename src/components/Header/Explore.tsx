@@ -155,7 +155,7 @@ export default function Menu() {
               <div className="absolute grid gap-6 px-5 py-6 bg-dark-900 sm:gap-6 sm:p-6">
 
                   {solutions.map((item) =>
-                    item.borrow ? (
+                    // item.borrow ? (
                     //   <NavLink key={item.name} href={item.href}>
                     //   <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                     //   SEANCE
@@ -168,8 +168,8 @@ export default function Menu() {
                     //   ENCHANT
                     //   </a>
                     // </NavLink>
-                    // ) : item.stake ? 
-                    // (
+                    // ) : 
+                    item.stake ? (
                       <NavLink key={item.name} href={item.href}>
                       <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                       CIRCLES
