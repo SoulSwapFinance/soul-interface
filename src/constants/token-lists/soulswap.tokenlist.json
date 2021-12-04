@@ -320,6 +320,14 @@
         "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xf16e81dce15B08F326220742020379B855B87DF9/logo.png"
       },
       {
+        "name": "Luxor Money",
+        "address": "0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b",
+        "symbol": "LUX",
+        "decimals": 9,
+        "chainId": 250,
+        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/prod/blockchains/fantom/assets/0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b/logo.png"
+      },
+      {
         "name": "Magic Internet Money",
         "address": "0x82f0B8B456c1A451378467398982d4834b6829c1",
         "symbol": "MIM",
