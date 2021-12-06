@@ -6,19 +6,19 @@ import { tokens } from './constants/tokens'
 // - SOUL
 
 export const WithdrawPids = [
-  {
-    // 0
-    pid: 3,
-    token1: 'SOUL',
-    token2: 'FUSD',
-    lpSymbol: 'SOUL-FUSD',
-    lpAddresses: {
-      4002: '0xaf02fd55F297f2a591367F6E33Dc600Ff2Be472A',
-      250: '0x9e7711eaeb652d0da577c1748844407f8db44a10',
-    },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.FUSD,
-  },
+  // {
+  //   // 0
+  //   pid: 3,
+  //   token1: 'SOUL',
+  //   token2: 'FUSD',
+  //   lpSymbol: 'SOUL-FUSD',
+  //   lpAddresses: {
+  //     4002: '0xaf02fd55F297f2a591367F6E33Dc600Ff2Be472A',
+  //     250: '0x9e7711eaeb652d0da577c1748844407f8db44a10',
+  //   },
+  //   token1Address: tokens.SOUL,
+  //   token2Address: tokens.FUSD,
+  // },
   {
     // 0
     pid: 16,
@@ -48,6 +48,32 @@ export const AllPids = [
     },
     token1Address: tokens.SOUL,
     token2Address: tokens.FTM,
+  },
+  {
+    // 600
+    pid: 44,
+    token1: 'FTM',
+    token2: 'LUX',
+    lpSymbol: 'LUX-FTM',
+    lpAddresses: {
+      4002: '',
+      250: '0x951BBB838e49F7081072895947735b0892cCcbCD',
+    },
+    token1Address: tokens.LUX,
+    token2Address: tokens.FTM,
+  },
+  {
+    // 600
+    pid: 45,
+    token1: 'DAI',
+    token2: 'LUX',
+    lpSymbol: 'LUX-DAI',
+    lpAddresses: {
+      4002: '',
+      250: '0x46729c2AeeabE7774a0E710867df80a6E19Ef851',
+    },
+    token1Address: tokens.LUX,
+    token2Address: tokens.DAI,
   },
   {
     // 1200
@@ -490,6 +516,19 @@ export const AllPids = [
   },
   {
     // 200
+    pid: 43,
+    token1: 'fUSDT',
+    token2: 'DAI',
+    lpSymbol: 'fUSDT-DAI',
+    lpAddresses: {
+      4002: '',
+      250: '0xB38508Ed92C4878daE7652d8d46cAE46eEa8aA9A',
+    },
+    token1Address: tokens.fUSDT,
+    token2Address: tokens.DAI,
+  },
+  {
+    // 200
     pid: 30,
     token1: 'SEANCE',
     token2: 'SPIRIT',
@@ -567,23 +606,9 @@ export const AllPids = [
     token1Address: tokens.SEANCE,
     token2Address: tokens.SPELL,
   },
-  {
-    // 200
-    pid: 43,
-    token1: 'fUSDT',
-    token2: 'DAI',
-    lpSymbol: 'fUSDT-DAI',
-    lpAddresses: {
-      4002: '',
-      250: '0xB38508Ed92C4878daE7652d8d46cAE46eEa8aA9A',
-    },
-    token1Address: tokens.fUSDT,
-    token2Address: tokens.DAI,
-  },
 ]
 
 export const MatePids = [
-  
     {
       // 200
       pid: 30,
