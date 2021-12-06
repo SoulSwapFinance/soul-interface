@@ -33,9 +33,9 @@ export const POOL_DENY = []
 export const AVERAGE_BLOCK_TIME_IN_SECS = 1
 
 export const AVERAGE_BLOCK_TIME = {
+  [ChainId.MAINNET]: 12,
   [ChainId.FANTOM]: 1,
   [ChainId.BSC]: 3
-  // [ChainId.ROPSTEN]: AVERAGE_BLOCK_TIME_IN_SECS,
 }
 
 export const ARCHER_RELAY_URI: { [chainId in ChainId]?: string } = {
