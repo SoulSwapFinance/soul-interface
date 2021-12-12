@@ -20,7 +20,8 @@ const items = (i18n: I18n) => [
     stake: false,
     vote: false,
     analytics: false, 
-    links: false, 
+    links: false,
+    reserve: false,
     claim: false,
     explore: false,
   },
@@ -32,7 +33,8 @@ const items = (i18n: I18n) => [
     stake: false,
     vote: false,
     analytics: false, 
-    links: false, 
+    links: false,
+    reserve: false,
     claim: false,
     explore: false,
   },
@@ -44,7 +46,8 @@ const items = (i18n: I18n) => [
     stake: true,
     vote: false,
     analytics: false, 
-    links: false, 
+    links: false,
+    reserve: false,
     claim: false,
     explore: false,
   },
@@ -56,7 +59,8 @@ const items = (i18n: I18n) => [
     stake: false,
     vote: true,
     analytics: true, 
-    links: false, 
+    links: false,
+    reserve: false,
     claim: false,
     explore: false,
   },
@@ -68,7 +72,8 @@ const items = (i18n: I18n) => [
     stake: false,
     vote: false,
     analytics: true, 
-    links: false, 
+    links: false,
+    reserve: false,
     claim: false,
     explore: false,
   },
@@ -81,8 +86,22 @@ const items = (i18n: I18n) => [
     vote: false,
     analytics: false, 
     links: true, 
+    reserve: false,
     claim: false,
     explore: false,
+  },
+  {
+  name: i18n._(t`Reserves`),
+  href: '/luxor',
+  borrow: false,
+  enchant: false,
+  stake: false,
+  vote: false,
+  analytics: false, 
+  links: false,
+  reserve: true,
+  claim: true,
+  explore: false,
   },
   {
   name: i18n._(t`Claim`),
@@ -92,7 +111,8 @@ const items = (i18n: I18n) => [
   stake: false,
   vote: false,
   analytics: false, 
-  links: false, 
+  links: false,
+  reserve: false,
   claim: true,
   explore: false,
   },
@@ -104,7 +124,8 @@ const items = (i18n: I18n) => [
   stake: false,
   vote: false,
   analytics: false, 
-  links: false, 
+  links: false,
+  reserve: false,
   claim: false,
   explore: true,
   },
@@ -196,6 +217,13 @@ export default function Menu() {
                     //   ECOSYSTEM
                     //   </a>
                     // </NavLink>
+                    ) : item.reserve ?
+                    (
+                    <NavLink key={item.name} href={item.href}>
+                      <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                        LUXOR
+                      </a>
+                   </NavLink>
                     ) : item.claim ?
                     (
                     <NavLink key={item.name} href={item.href}>
