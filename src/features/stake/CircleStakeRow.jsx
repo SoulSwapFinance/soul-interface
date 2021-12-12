@@ -165,7 +165,8 @@ const CircleStakeRow = ({ pid, lpSymbol, lpToken, token1, token2, farm, startTim
 
     const aprPerc = 365 * rewardsPerDay / rawTvl * 100
     console.log('aprPerc', aprPerc)
-    setApr(Number(aprPerc).toFixed(0))
+    setApr(Number(0).toFixed(0))
+    // setApr(Number(aprPerc).toFixed(0))
 
     // start + end
     // if (startTime > currentTimestamp) {
@@ -302,11 +303,13 @@ const CircleStakeRow = ({ pid, lpSymbol, lpToken, token1, token2, farm, startTim
               <HideOnMobile desktopOnly={true}>
                 {rewardsPerDay === 0 ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
-                    {rewardsPerDay}
+                    { 'ENDED' } 
+                    {/* rewardsPerDay */}
                   </Text>
                 ) : (
                   <Text padding="0" fontSize="1.5rem">
-                    {rewardsPerDay}
+                    { 'ENDED' }
+                    {/* rewardsPerDay */}
                   </Text>
                 )}
               </HideOnMobile>
