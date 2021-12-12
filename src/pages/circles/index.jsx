@@ -3,6 +3,7 @@ import Container from '../../components/Container'
 import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 import Head from 'next/head'
 import React from 'react'
+import Banner from '../../components/Banner'
 
 import StakeList from '../../features/stake/StakeList'
 
@@ -16,7 +17,7 @@ const Circles = () => {
           <title>Stake | Soul</title>
           <meta key="description" name="description" content="Stake SOUL" />
         </Head>
-
+        <Banner />
         <StakeList />
       </Container>
 
