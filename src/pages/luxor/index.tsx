@@ -1,13 +1,13 @@
-const Vote = () => {
+const Luxor = () => {
 	return (
       <iframe 
 			frameBorder={"none"}
-    		title={"VOTE"}
-    		src="https://enchant.soulswap.finance"
+    		title={"LUXOR"}
+    		src="https://app.luxor.money"
     		height={"100%" }
     		width={"100%"}
     />
 	);
 };
 
-export default Vote;
+export default Luxor;
