@@ -6,14 +6,14 @@ const Banner: FC = () => (
     <div className="px-3 py-3 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div className="pr-16 sm:text-center sm:px-16">
         <p className="font-medium text-white">
-          <span className="md:hidden">View your returns today!</span>
-          <span className="hidden md:inline"> Staking APR on popular pairs for <b>SOUL SUMMONER</b>!</span>
+          <span className="centered md:hidden"><b>Concluded. Please Unstake.</b></span>
+          <span className="hidden md:inline"> Circle Has Concluded. <b>Please Unstake</b></span>
           <span className="hidden block sm:ml-2 sm:inline-block">
-            <a href="https://vfat.tools/fantom/soulswap/" target = "_blank" rel="noreferrer"
-className="font-bold text-white underline">
+            <a href="https://twitter.com/SoulSwapFinance" target = "_blank" rel="noreferrer"
+              className="font-bold text-white underline">
               {' '}
               <br />
-              Check Returns <span aria-hidden="true">&rarr;</span>
+              Stay Tuned For Our Upcoming Rounds <span aria-hidden="true">&rarr;</span>
             </a>
           </span>
         </p>
