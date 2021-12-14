@@ -217,13 +217,6 @@ export default function Menu() {
                     //   ECOSYSTEM
                     //   </a>
                     // </NavLink>
-                    ) : item.reserve ?
-                    (
-                    <NavLink key={item.name} href={item.href}>
-                      <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                        LUXOR
-                      </a>
-                   </NavLink>
                     ) : item.claim ?
                     (
                     <NavLink key={item.name} href={item.href}>
