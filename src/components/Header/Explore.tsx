@@ -100,7 +100,7 @@ const items = (i18n: I18n) => [
   analytics: false, 
   links: false,
   reserve: true,
-  claim: true,
+  claim: false,
   explore: false,
   },
   {
