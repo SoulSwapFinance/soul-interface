@@ -281,8 +281,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const handleMint = async () => {
     try {
       // console.log('minting', amount.toString())
-      const tx = await bond(pid)
-      await tx.wait()
+      const tx = await mint(pid)
+      // await tx.wait()
       // await fetchBals(pid)
     } catch (e) {
       // alert(e.message)
@@ -291,9 +291,9 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   }
 
   /**
-   * Deposits/stakes lpTokens into SoulSummoner bond
+   * Deposits/stakes lpTokens into bond
    */
-  const handleDeposit = async (amount) => {
+   const handleDeposit = async (amount) => {
     try {
       // console.log('depositing', amount.toString())
       const tx = await deposit(pid, amount)
@@ -474,9 +474,9 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     }}
                   >
                     MAX
-                  </ClickableText> */}
-                {/* </FlexText> */}
-                {/* <Input
+                  </ClickableText>
+                </FlexText>
+                <Input
                   name="unstake"
                   id="unstake"
                   type="number"
