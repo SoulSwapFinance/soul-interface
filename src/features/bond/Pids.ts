@@ -110,7 +110,7 @@ export const AllPids = [
       token2Address: tokens.WBTC,
     },
 
-    {
+    */ {
     // 600
     pid: 8,
     token1: 'WETH',
@@ -122,9 +122,9 @@ export const AllPids = [
     },
     token1Address: tokens.WETH,
     token2Address: tokens.WBTC,
-  },
+  }, */
   {
-    // 200
+    // 600
     pid: 9,
     token1: 'USDC',
     token2: 'DAI',
