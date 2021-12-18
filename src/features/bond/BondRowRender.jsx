@@ -234,7 +234,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
         setPending(Number(formatted).toFixed(2).toString())
 
         const value = pending * pendingResult?.[1]
-        setPendingValue(value.toFixed(2).toString())
+        setPendingValue(Number(value).toFixed(2).toString())
       } catch (err) {
         console.warn(err)
       }
