@@ -29,7 +29,7 @@ import SOULVAULT_ABI from '../constants/abis/soulvault.json'
 import SOUL_ABI from '../constants/abis/soulpower.json' 
 
 // unused
-import { MULTICALL_ADDRESS, SUMMONER_HELPER_ADDRESS } from '../constants/index'
+import { MULTICALL_ADDRESS, SUMMONER_HELPER_ADDRESS, BOND_HELPER_ADDRESS } from '../constants/index'
 // import PENDING_ABI from '../constants/abis/pending.json'
 // import ROUTER_ABI from '../constants/abis/router.json'
 // import TIMELOCK_ABI from '../constants/abis/timelock.json'
@@ -108,6 +108,11 @@ export function useCircleStakingContract(withSignerIfPossible?: boolean): Contra
 export function useHelperContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SUMMONER_HELPER_ADDRESS, SUMMONER_HELPER_ABI, withSignerIfPossible)
+}
+
+export function useBondHelperContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && BOND_HELPER_ADDRESS, SUMMONER_HELPER_ABI, withSignerIfPossible)
 }
 
 export function useFactoryContract(): Contract | null {
