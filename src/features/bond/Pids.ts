@@ -4,8 +4,8 @@ export const WithdrawPids = []
 
 export const AllPids = [
   {
-    // 1600
-    pid: 1,
+    // 1000
+    pid: 0,
     token1: 'SOUL',
     token2: 'FTM',
     lpSymbol: 'SOUL-FTM',
@@ -18,7 +18,7 @@ export const AllPids = [
   },
   {
     // 600
-    pid: 22,
+    pid: 1,
     token1: 'SOUL',
     token2: 'USDC',
     lpSymbol: 'SOUL-USDC',
@@ -31,7 +31,7 @@ export const AllPids = [
   },
   {
     // 600
-    pid: 10,
+    pid: 2,
     token1: 'SEANCE',
     token2: 'FTM',
     lpSymbol: 'SEANCE-FTM',
@@ -44,7 +44,7 @@ export const AllPids = [
   },
   {
     // 600
-    pid: 2,
+    pid: 3,
     token1: 'FTM',
     token2: 'USDC',
     lpSymbol: 'FTM-USDC',
@@ -58,7 +58,7 @@ export const AllPids = [
 
   {
     // 600
-    pid: 23,
+    pid: 4,
     token1: 'FTM',
     token2: 'DAI',
     lpSymbol: 'FTM-DAI',
@@ -71,7 +71,7 @@ export const AllPids = [
   },
   {
       // 600
-      pid: 18,
+      pid: 5,
       token1: 'FTM',
       token2: 'BNB',
       lpSymbol: 'FTM-BNB',
@@ -84,7 +84,7 @@ export const AllPids = [
     },
     {
       // 600
-      pid: 4,
+      pid: 6,
       token1: 'FTM',
       token2: 'WETH',
       lpSymbol: 'FTM-ETH',
@@ -98,7 +98,7 @@ export const AllPids = [
     
     {
       // 600
-      pid: 13,
+      pid: 7,
       token1: 'FTM',
       token2: 'BTC',
       lpSymbol: 'FTM-BTC',
@@ -125,7 +125,7 @@ export const AllPids = [
   },
   {
     // 200
-    pid: 21,
+    pid: 9,
     token1: 'USDC',
     token2: 'DAI',
     lpSymbol: 'USDC-DAI',

@@ -11,7 +11,7 @@ import {
   useTokenContract,
 } from './useContract'
 
-import { SoulSummonerAddress, SUMMONER_HELPER_ADDRESS as SummonerHelperAddress } from '../constants'
+import { SoulBondAddress, BOND_HELPER_ADDRESS as BondHelperAddress } from '../constants'
 
 import { AllPids } from '../Pids'
 
@@ -25,8 +25,8 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   const lpTokenContract = usePairContract(lpToken)
   const token1Contract = useTokenContract(token1Address[chainId])
   const token2Contract = useTokenContract(token2Address[chainId])
-  const soulContract = useTokenContract(AllPids[0].token1Address[chainId])
-  const fusdContract = useTokenContract(AllPids[0].token2Address[chainId])
+  const soulContract = useTokenContract(AllPids[1].token1Address[chainId])
+  const fusdContract = useTokenContract(AllPids[1].token2Address[chainId])
 
   // ----------------------------------------------
   //                  Bond Helper
@@ -120,8 +120,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
       const ftmPrice = rates?.[0]
       const soulPrice = rates?.[1]
       const seancePrice = rates?.[2]
-      const enchantPrice = rates?.[3]
-      const ethPrice = rates?.[4]
+      const ethPrice = rates?.[3]
 
       const result = await helperContract?.fetchPidDetails(pid)
 
@@ -152,8 +151,6 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
         pidTvl = rawPidValue * soulPrice
       } else if (token1Name === 'SEANCE' || token2Name === 'SEANCE') {
         pidTvl = rawPidValue * seancePrice
-      } else if (token1Name === 'ENCHANT' || token2Name === 'ENCHANT') {
-        pidTvl = rawPidValue * enchantPrice
       } else if (token1Name === 'WETH' || token2Name === 'WETH') {
         pidTvl = rawPidValue * ethPrice
       }
@@ -331,7 +328,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
    */
   const fetchUserLpTokenAlloc = async (account) => {
     try {
-      const contractBal = await lpTokenContract?.balanceOf(SoulSummonerAddress)
+      const contractBal = await lpTokenContract?.balanceOf(SoulBondAddress)
       const userBal = await lpTokenContract?.balanceOf(account)
 
       const alloc = userBal / contractBal
@@ -355,7 +352,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
       const totalSupply = await lpTokenContract?.totalSupply()
 
       // get how many lpTokens held by Summoner
-      const heldBySummoner = await lpTokenContract?.balanceOf(SoulSummonerAddress)
+      const heldBySummoner = await lpTokenContract?.balanceOf(SoulBondAddress)
 
       // get how many lpTokens held by user
       const heldByUser = await lpTokenContract?.balanceOf(account)
@@ -444,8 +441,8 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
    */
   const fusdPerSoul = async () => {
     try {
-      const totalSoul = await soulContract.balanceOf(AllPids[0].lpAddresses[chainId])
-      const totalFusd = await fusdContract.balanceOf(AllPids[3].lpAddresses[chainId])
+      const totalSoul = await soulContract.balanceOf(AllPids[1].lpAddresses[chainId])
+      const totalFusd = await fusdContract.balanceOf(AllPids[1].lpAddresses[chainId])
 
       const fusdPerSoul = totalFusd / totalSoul
 
@@ -485,7 +482,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
 
       // lp tokens held by summoner
       const totalLpTokens = await lpTokenContract?.totalSupply()
-      const summonerLpTokens = await lpTokenContract?.balanceOf(SoulSummonerAddress)
+      const summonerLpTokens = await lpTokenContract?.balanceOf(SoulBondAddress)
       const supplyHeldBySummoner = summonerLpTokens / totalLpTokens
 
       // value of lp tokens held by summoner
@@ -547,7 +544,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   const fetchPid0LiquidityValue = async (lpToken) => {
     try {
       // SOUL held by summoner
-      const rawSummonerBal = await lpTokenContract?.balanceOf(SoulSummonerAddress)
+      const rawSummonerBal = await lpTokenContract?.balanceOf(SoulBondAddress)
       const summonerBalance = BigNumber.from(ethers.utils.formatUnits(rawSummonerBal))
       console.log('summonerBalance', ethers.utils.formatUnits(summonerBalance))
 
