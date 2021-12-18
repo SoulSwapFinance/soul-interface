@@ -84,7 +84,6 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const [approved, setApproved] = useState(false)
 
   const [feePercent, setFeePercent] = useState(0)
-  const [feeAmount, setFeeAmount] = useState(0)
   const [receiving, setReceiving] = useState(0)
 
   const [stakedBal, setStakedBal] = useState(0)
@@ -92,10 +91,10 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const [pending, setPending] = useState(0)
 
   // const [earningPerDay, setEarningPerDay] = useState();
-  const [percOfBond, setPercOfBond] = useState()
-  const [poolRate, setPoolRate] = useState()
+  // const [percOfBond, setPercOfBond] = useState()
+  // const [poolRate, setPoolRate] = useState()
 
-  const [yearlySoulRewards, setYearlySoulRewards] = useState()
+  // const [yearlySoulRewards, setYearlySoulRewards] = useState()
   const [apr, setApr] = useState()
   const [liquidity, setLiquidity] = useState()
 
@@ -104,9 +103,9 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
    */
   useEffect(() => {
     getAprAndLiquidity()
-    getYearlyPoolRewards()
+    // getYearlyPoolRewards()
     fetchPending()
-    fetchUserBondAlloc()
+    // fetchUserBondAlloc()
   }, [account])
 
   /**
@@ -148,57 +147,6 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
 
     // set to 14 when no staked, otherwise uses percent
     staked > 0 ? await setFeePercent(percent / 10 ** 18) : await setFeePercent(14)
-  }
-
-  const getWithdrawable = async () => {
-    const rawAmount = document.getElementById('unstake').value
-
-    if (rawAmount !== 0 && rawAmount !== undefined && rawAmount !== '' && rawAmount !== null) {
-      const amount = document.getElementById('unstake').value
-
-      const feePerc = feePercent / 100
-
-      const fee = amount * feePerc
-      const receive = amount - fee
-
-      // fee !== 0
-      //   ? 
-        // : setFeeAmount(0)
-      // receive !== 0
-        // ? 
-        setReceiving(
-            Number(receive)
-              .toFixed(2)
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-          )
-        // : setReceiving(0)
-    // } else {
-    //   setFeeAmount(0)
-    //   setReceiving(0)
-    }
-  }
-
-  /**
-   * Checks the user's alloc of the total staked in the bond
-   */
-  const fetchUserBondAlloc = async () => {
-    const ownership = await fetchUserLpTokenAllocInBond(pid, account)
-    const userStakedPercOfSummoner = Number(ownership?.[4])
-    if (userStakedPercOfSummoner) setPercOfBond(Number(userStakedPercOfSummoner).toFixed(2))
-    else setPercOfBond(0)
-  }
-
-  const getYearlyPoolRewards = async () => {
-    const pidSoulPerYear = await fetchYearlyRewards(pid)
-    const dailyRewards = pidSoulPerYear / 10 ** 18 / 365
-
-    setYearlySoulRewards(
-      Number(dailyRewards)
-        .toFixed(0)
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-    )
   }
 
   /**
@@ -330,18 +278,18 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
     }
   }
 
-  /**
-   * Harvests rewards from SoulSummoner bond
-   */
-  const handleHarvest = async () => {
-    try {
-      const tx = await deposit(pid, 0)
-      await tx?.wait().then(await fetchPending(pid))
-    } catch (e) {
-      // alert(e.message)
-      console.log(e)
-    }
-  }
+  // /**
+  //  * Harvests rewards from SoulSummoner bond
+  //  */
+  // const handleHarvest = async () => {
+  //   try {
+  //     const tx = await deposit(pid, 0)
+  //     await tx?.wait().then(await fetchPending(pid))
+  //   } catch (e) {
+  //     // alert(e.message)
+  //     console.log(e)
+  //   }
+  // }
 
   /**
    * Withdraws staked lpTokens from SoulSummoner bond
@@ -438,7 +386,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                 )}
               </BondItemBox>
 
-              <HideOnMobile desktopOnly={true}>
+              {/* <HideOnMobile desktopOnly={true}>
                 {yearlySoulRewards === 0 ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
                     {yearlySoulRewards}
@@ -448,9 +396,9 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     {yearlySoulRewards}
                   </Text>
                 )}
-              </HideOnMobile>
+              </HideOnMobile> */}
 
-              <HideOnMobile desktopOnly={true}>
+              {/* <HideOnMobile desktopOnly={true}>
                 {percOfBond === 0 ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
                     {percOfBond}%
@@ -460,7 +408,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     {percOfBond}%
                   </Text>
                 )}
-              </HideOnMobile>
+              </HideOnMobile> */}
 
               <HideOnMobile>
                 {liquidity === '0' ? (
@@ -516,40 +464,29 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                       height="2.5rem"
                       onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
                     >
-                      Stake
+                      BOND LP
                     </SubmitButton>
                   ) : (
                     <SubmitButton height="2.5rem" onClick={() => handleApprove()}>
-                      Approve Stake
+                      APPROVE LP
                     </SubmitButton>
                   )}
                 </Wrap>
 
-                {feePercent !== 0 ? (
+                {/* {feePercent !== 0 ? ( // TODO: isBondMode
                   <Text fontSize=".9rem" padding="0" color="#F36FFE">
-                    Withdraw Fee: {feePercent}% LP, less 1% daily to 0%.
+                    Minting sends your LP to the DAO in exchange for SOUL. 
                   </Text>
                 ) : (
                   <Text fontSize=".9rem" padding="0" color="#F36FFE">
-                    Withdraw Fee: {feePercent}%
+                    Minting sends LP to YOU in exchange for SOUL. 
                   </Text>
-                )}
+                )} */}
               </FunctionBox>
 
               <FunctionBox>
-                <FlexText>
-                  <Text padding="0" fontSize=".9rem" color="#bbb">
-                    Staked: &nbsp;
-                    {Number(stakedBal) === 0
-                      ? '0.000'
-                      : stakedBal < 0.001
-                      ? '<0.001'
-                      : Number(stakedBal)
-                          .toFixed(3)
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                  </Text>
-                  <ClickableText
+                {/* <FlexText> */}
+                  {/* <ClickableText
                     padding="0"
                     fontSize=".9rem"
                     color="#aaa"
@@ -559,45 +496,53 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     }}
                   >
                     MAX
-                  </ClickableText>
-                </FlexText>
-                <Input
+                  </ClickableText> */}
+                {/* </FlexText> */}
+                {/* <Input
                   name="unstake"
                   id="unstake"
                   type="number"
                   placeholder="0.0"
                   min="0"
                   onChange={() => getWithdrawable()}
-                />
+                /> */}
 
+                  <Text fontSize=".9rem" padding="0" color="#aaa">
+                    Bonded: {Number(stakedBal)
+                        .toFixed(3)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')} LP
+                  </Text>
                 <Wrap padding="0" margin="0" display="flex">
-                  <SubmitButton
-                    height="2.5rem"
-                    padding="0"
-                    margin=".5rem .6rem .5rem 0"
-                    onClick={() => handleHarvest()}
-                  >
-                    Harvest
-                  </SubmitButton>
                   <SubmitButton
                     height="2.5rem"
                     primaryColour="#bbb"
                     color="black"
                     margin=".5rem 0 .5rem .6rem"
-                    onClick={() => handleWithdraw(ethers.utils.parseUnits(document.getElementById('unstake').value))}
+                    onClick={() => handleWithdraw(  // TODO: handleMint
+                      ethers.utils.parseUnits(
+                        document.getElementById('unstake').value)
+                      )}
                   >
-                    Unstake
+                    MINT SOUL
                   </SubmitButton>
                 </Wrap>
 
                 <Wrap padding="0">
                   <Wrap padding="0" display="flex">
-                    <Text fontSize=".9rem" padding="0" color="#aaa">
-                      Fee Amount ({feePercent}%): {feeAmount} LP
-                    </Text>
-                    <Text fontSize=".9rem" padding="0 0 0 6rem" color="#aaa">
-                      Receiving {receiving} LP
-                    </Text>
+
+                {feePercent !== 0 ? ( // TODO: isBondMode
+                  <Text fontSize=".9rem" padding="0" color="#F36FFE">
+                    Minting sends your LP in exchange for SOUL. 
+                  </Text>
+                ) : (
+                  <Text fontSize=".9rem" padding="0" color="#F36FFE">
+                    Minting sends LP in exchange for SOUL. 
+                  </Text>
+                )}
+                    {/* <Text fontSize=".9rem" textAlign="center" color="#aaa">
+                      Receiving {pending} SOUL
+                    </Text> */}
                   </Wrap>
                 </Wrap>
               </FunctionBox>

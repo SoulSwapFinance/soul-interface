@@ -63,17 +63,17 @@ export default function BondKey(withdraw) {
                 </Text>
               </BondItemBox>
 
-              <HideOnMobile desktopOnly={true}>
+              {/* <HideOnMobile desktopOnly={true}>
                 <Text padding="0" fontSize=".9rem" color="#bbb">
                 REWARDS P/D
                 </Text>
-              </HideOnMobile>
+              </HideOnMobile> */}
 
-              <HideOnMobile desktopOnly={true}>
+              {/* <HideOnMobile desktopOnly={true}>
                 <Text padding="0" fontSize=".9rem" color="#bbb">
                 OWNERSHIP
                 </Text>
-              </HideOnMobile>
+              </HideOnMobile> */}
 
               <HideOnMobile>
                 <Text padding="0" fontSize=".9rem" color="#bbb">

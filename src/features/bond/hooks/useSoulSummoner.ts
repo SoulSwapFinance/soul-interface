@@ -7,7 +7,6 @@ import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
 import {
   useHelperContract,
   useSoulSummonerContract,
-  useCircleStakingContract,
   usePairContract,
   useTokenContract,
 } from './useContract'
@@ -23,7 +22,6 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
 
   const helperContract = useHelperContract()
   const summonerContract = useSoulSummonerContract()
-  const circlesContract = useCircleStakingContract()
   const lpTokenContract = usePairContract(lpToken)
   const token1Contract = useTokenContract(token1Address[chainId])
   const token2Contract = useTokenContract(token2Address[chainId])
@@ -225,32 +223,32 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
   }
 
   // -----------------------
-  //  Staking Funcs
+  //  Staking Functions
   // -----------------------
 
-  // enterStaking
-  const enterStaking = async (amount) => {
-    try {
-      const result = await summonerContract?.enterStaking(amount)
-      return result
-    } catch (e) {
-      console.log(e)
-      alert(e.message)
-      return e
-    }
-  }
+  // // enterStaking
+  // const enterStaking = async (amount) => {
+  //   try {
+  //     const result = await summonerContract?.enterStaking(amount)
+  //     return result
+  //   } catch (e) {
+  //     console.log(e)
+  //     alert(e.message)
+  //     return e
+  //   }
+  // }
 
-  // leaveStaking
-  const leaveStaking = async (amount) => {
-    try {
-      let result = await summonerContract?.leaveStaking(amount)
-      return result
-    } catch (e) {
-      // alert(e.message)
-      console.log(e)
-      return e
-    }
-  }
+  // // leaveStaking
+  // const leaveStaking = async (amount) => {
+  //   try {
+  //     let result = await summonerContract?.leaveStaking(amount)
+  //     return result
+  //   } catch (e) {
+  //     // alert(e.message)
+  //     console.log(e)
+  //     return e
+  //   }
+  // }
 
   // -----------------------
   //  Interaction Functions
@@ -688,72 +686,6 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
     }
   }
 
-  // Circle Staking
-
-  /**
-   * [0] : reward token
-   * [1] : rewards per second
-   * [2] : token precision
-   * [3] : seance staked
-   * [4] : last reward time
-   * [5] : accRewardPerShare
-   * [6] : end time
-   * [7] : start time
-   * [8] : user limit end time
-   * [9] : dao address
-   */
-  const circlePoolInfo = async (pid) => {
-    try {
-      const result = await circlesContract?.poolInfo(pid)
-      return result
-    } catch (e) {
-      console.error(e)
-      return e
-    }
-  }
-
-  // [0] : amount
-  // [1] : rewardDebt
-  const circleUserInfo = async (pid) => {
-    try {
-      const result = await circlesContract?.userInfo(pid, account)
-      return result
-    } catch (e) {
-      console.error(e)
-      return e
-    }
-  }
-
-  const circlePendingRewards = async (pid) => {
-    try {
-      const result = await circlesContract?.pendingReward(pid, account)
-      return result
-    } catch (e) {
-      console.error(e)
-      return e
-    }
-  }
-
-  const circleDeposit = async (pid, amount) => {
-    try {
-      const result = await circlesContract?.deposit(pid, amount)
-      return result
-    } catch (e) {
-      console.error(e)
-      return e
-    }
-  }
-
-  const circleWithdraw = async (pid, amount) => {
-    try {
-      let result = await circlesContract?.withdraw(pid, amount)
-      return result
-    } catch (e) {
-      console.error(e)
-      return e
-    }
-  }
-
   return {
     // helper contract
     totalPendingRewards,
@@ -763,8 +695,6 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
     fetchBondStats,
     fetchStakeStats,
 
-    enterStaking,
-    leaveStaking,
     fetchPid0LiquidityValue,
     fetchPid0AprAndLiquidity,
 
@@ -787,13 +717,6 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
 
     fetchLiquidityValue,
     fetchAprAndLiquidity,
-
-    // circle staking
-    circlePoolInfo,
-    circleUserInfo,
-    circleDeposit,
-    circleWithdraw,
-    circlePendingRewards,
   }
 }
 

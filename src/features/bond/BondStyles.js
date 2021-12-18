@@ -145,6 +145,11 @@ export const DetailsWrapper = styled.div`
   width: 55rem;
   padding: 5px 10px;
 
+  @media screen and (max-width: 3200px) {
+    display: block;
+    width: 55rem
+  }
+
   @media screen and (max-width: 900px) {
     display: block;
     width: 28rem

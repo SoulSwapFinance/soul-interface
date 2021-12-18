@@ -42,9 +42,9 @@ const BondList = () => {
       {/* <BondHeader/> */}
       <BondKey />
       <>{bondList}</>
-      <br />
-      <BondKey withdraw={true}/>
-      <>{withdrawList}</>
+      {/* <br /> */}
+      {/* <BondKey withdraw={true}/>
+      <>{withdrawList}</> */}
     </>
   )
 }
