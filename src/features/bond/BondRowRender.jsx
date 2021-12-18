@@ -103,28 +103,30 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
     getAprAndLiquidity()
     // getYearlyPoolRewards()
     fetchPending()
+    fetchPendingValue()
     // fetchUserBondAlloc()
   }, [account])
 
   /**
    * Runs on initial render/mount and reruns every 2 seconds
    */
-  // useEffect(() => {
-  //   if (account) {
-  //     const timer = setTimeout(() => {
-  //       fetchPending()
-  //       // getAprAndLiquidity()
-  //       fetchUserBondAlloc()
+  useEffect(() => {
+    if (account) {
+      const timer = setTimeout(() => {
+        fetchPending()
+        fetchPendingValue()
+        // getAprAndLiquidity()
+        // fetchUserBondAlloc()
 
-  //       if (showing) {
-  //         fetchBals()
-  //         fetchApproval()
-  //       }
-  //     }, 8000)
-  //     // Clear timeout if the component is unmounted
-  //     return () => clearTimeout(timer)
-  //   }
-  // })
+        if (showing) {
+          fetchBals()
+          fetchApproval()
+        }
+      }, 1200)
+      // Clear timeout if the component is unmounted
+      return () => clearTimeout(timer)
+    }
+  })
 
   /**
    * Opens the function panel dropdown
@@ -233,8 +235,26 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
         const formatted = ethers.utils.formatUnits(pendingResult?.[0].toString())
         setPending(Number(formatted).toFixed(2).toString())
 
-        const value = pending * pendingResult?.[1]
-        setPendingValue(Number(value).toFixed(2).toString())
+      } catch (err) {
+        console.warn(err)
+      }
+    }
+  }
+
+  /**
+   * Fetches connected user pending soul
+   */
+  const fetchPendingValue = async () => {
+    if (!account) {
+      // alert('connect wallet')
+    } else {
+      try {
+        const pendingResult = await pendingSoul(pid, account)
+        const formatted = ethers.utils.formatUnits(pendingResult?.[0].toString())
+        setPending(Number(formatted).toFixed(2).toString())
+
+        const pendingValue = pending * pendingResult?.[1]
+        setPendingValue(Number(pendingValue).toFixed(2).toString())
       } catch (err) {
         console.warn(err)
       }
@@ -517,7 +537,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                       handleMint()
                     }
                   >
-                    MINT SOUL (${Number(pendingValue)})
+                    MINT SOUL (${(pendingValue)})
                   </SubmitButton>
                 </Wrap>
 
