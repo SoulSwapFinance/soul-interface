@@ -418,7 +418,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
         <Wrap padding="0" display="flex" justifyContent="center">
           <DetailsContainer>
             <DetailsWrapper>
-              {stakedBal === 0 ? (
+              {Number(stakedBal) === 0 ? (
                 <FunctionBox>
                   {/* <button >Max</button> */}
                   <Wrap padding="0" display="flex" justifyContent="space-between">
