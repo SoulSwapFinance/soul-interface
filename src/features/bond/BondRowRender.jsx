@@ -418,49 +418,53 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
         <Wrap padding="0" display="flex" justifyContent="center">
           <DetailsContainer>
             <DetailsWrapper>
-              <FunctionBox>
-                {/* <button >Max</button> */}
-                <Wrap padding="0" display="flex" justifyContent="space-between">
-                  <Text padding="0" fontSize=".9rem" color="#bbb">
-                    Available: &nbsp;
-                    {Number(unstakedBal) === 0
-                      ? '0.000'
-                      : unstakedBal < 0.001
-                      ? '<0.001'
-                      : Number(unstakedBal)
-                          .toFixed(3)
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                  </Text>
-                  <ClickableText
-                    padding="0"
-                    fontSize=".9rem"
-                    color="#aaa"
-                    onClick={() => (document.getElementById('stake').value = unstakedBal)}
-                  >
-                    MAX
-                  </ClickableText>
-                </Wrap>
-                <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
-                <Wrap padding="0" margin="0" display="flex">
-                  {approved ? (
-                    <SubmitButton
-                      height="2.5rem"
-                      onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
+              {stakedBal === 0 ? (
+                <FunctionBox>
+                  {/* <button >Max</button> */}
+                  <Wrap padding="0" display="flex" justifyContent="space-between">
+                    <Text padding="0" fontSize=".9rem" color="#bbb">
+                      Available: &nbsp;
+                      {Number(unstakedBal) === 0
+                        ? '0.000'
+                        : unstakedBal < 0.001
+                        ? '<0.001'
+                        : Number(unstakedBal)
+                            .toFixed(3)
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </Text>
+                    <ClickableText
+                      padding="0"
+                      fontSize=".9rem"
+                      color="#aaa"
+                      onClick={() => (document.getElementById('stake').value = unstakedBal)}
                     >
-                      BOND LP
-                    </SubmitButton>
-                  ) : (
-                    <SubmitButton height="2.5rem" onClick={() => handleApprove()}>
-                      APPROVE LP
-                    </SubmitButton>
-                  )}
-                </Wrap>
-              </FunctionBox>
+                      MAX
+                    </ClickableText>
+                  </Wrap>
+                  <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
+                  <Wrap padding="0" margin="0" display="flex">
+                    {approved ? (
+                      <SubmitButton
+                        height="2.5rem"
+                        onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
+                      >
+                        BOND LP
+                      </SubmitButton>
+                    ) : (
+                      <SubmitButton height="2.5rem" onClick={() => handleApprove()}>
+                        APPROVE LP
+                      </SubmitButton>
+                    )}
+                  </Wrap>
+                </FunctionBox>
+              ) : (
+                <></>
+              )}
 
               <FunctionBox>
                 {/* <FlexText> */}
-                  {/* <ClickableText
+                {/* <ClickableText
                     padding="0"
                     fontSize=".9rem"
                     color="#aaa"
@@ -481,35 +485,38 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   onChange={() => getWithdrawable()}
                 /> */}
 
-                  <Text fontSize=".9rem" padding="0" color="#aaa">
-                    Bonded: {Number(stakedBal)
-                        .toFixed(3)
-                        .toString()
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')} LP
-                  </Text>
+                <Text fontSize=".9rem" padding="0" color="#aaa">
+                  Bonded:{' '}
+                  {Number(stakedBal)
+                    .toFixed(3)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
+                  LP
+                </Text>
                 <Wrap padding="0" margin="0" display="flex">
                   <SubmitButton
                     height="2.5rem"
                     primaryColour="#bbb"
                     color="black"
                     margin=".5rem 0 .5rem 0"
-                    onClick={() => handleMint(  // TODO: handleMint
-                      ethers.utils.parseUnits(
-                        document.getElementById('unstake').value)
-                      )}
+                    onClick={() =>
+                      handleMint(
+                        // TODO: handleMint
+                        ethers.utils.parseUnits(document.getElementById('unstake').value)
+                      )
+                    }
                   >
                     MINT SOUL
                   </SubmitButton>
                 </Wrap>
 
                 <Wrap padding="0">
-                  <Wrap padding="0" display="flex" justifyContent='center'>
+                  <Wrap padding="0" display="flex" justifyContent="center">
+                    <Text fontSize=".9rem" padding="0" color="#F36FFE">
+                      Exchange deposited LP for earned SOUL.
+                    </Text>
 
-                  <Text fontSize=".9rem" padding="0" color="#F36FFE">
-                    Exchange deposited LP for earned SOUL.
-                  </Text>
-                  
-                {/* {isBondMode !== 0 ? (
+                    {/* {isBondMode !== 0 ? (
                   <Text fontSize=".9rem" padding="0" color="#F36FFE">
                     Minting sends your LP in exchange for SOUL. 
                   </Text>
