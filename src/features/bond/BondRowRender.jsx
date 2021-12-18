@@ -430,7 +430,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                       Available: &nbsp;
                       {Number(unstakedBal) === 0
                         ? '0.000'
-                        : unstakedBal < 0.001
+                        : Number(unstakedBal) < 0.001
                         ? '<0.001'
                         : Number(unstakedBal)
                             .toFixed(3)
@@ -487,12 +487,17 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                 /> */}
 
                 <Text fontSize=".9rem" padding="0" color="#aaa">
-                  Bonded:{' '}
-                  {Number(stakedBal)
-                    .toFixed(3)
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
-                  LP
+                  Bonded: {' '}
+                      {Number(stakedBal) === 0
+                        ? '0.000'
+                        : Number(stakedBal) < 0.001
+                        ? '<0.001'
+                        : Number(stakedBal)
+                            .toFixed(3)
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                      }
+                    {' LP'}
                 </Text>
                 <Wrap padding="0" margin="0" display="flex">
                   <SubmitButton
