@@ -81,7 +81,10 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const [receiving, setReceiving] = useState(0)
 
   const [stakedBal, setStakedBal] = useState(0)
+  const [stakedValue, setStakedValue] = useState(0)
+
   const [unstakedBal, setUnstakedBal] = useState(0)
+
   const [pending, setPending] = useState(0)
   const [pendingValue, setPendingValue] = useState(0)
 
@@ -175,12 +178,16 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
         const result1 = await userInfo(pid, account)
         const staked = ethers.utils.formatUnits(result1?.[0])
         setStakedBal(staked.toString())
+        
+        const lpPrice = await lpPrice(pid)
+        const stakedValue = staked * lpPrice
+        setStakedValue(stakedValue.toString())
 
         const result2 = await erc20BalanceOf(account)
         const unstaked = ethers.utils.formatUnits(result2)
         setUnstakedBal(unstaked.toString())
 
-        return [staked, unstaked]
+        return [staked, stakedValue, unstaked]
       } catch (err) {
         console.warn(err)
       }
@@ -497,7 +504,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                             .toString()
                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                       }
-                    {' LP'}
+                    {' LP'} 
+                    {/* (${stakedValue}) */}
                 </Text>
                 <Wrap padding="0" margin="0" display="flex">
                   <SubmitButton
@@ -509,7 +517,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                       handleMint()
                     }
                   >
-                    MINT SOUL (${pendingValue})
+                    MINT SOUL (${Number(pendingValue)})
                   </SubmitButton>
                 </Wrap>
 
