@@ -507,10 +507,10 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                 </Wrap>
 
                 <Wrap padding="0">
-                  <Wrap padding="0" display="flex">
+                  <Wrap padding="0" display="flex" justifyContent='center'>
 
                   <Text fontSize=".9rem" padding="0" color="#F36FFE">
-                    Minting sends LP in exchange for SOUL. 
+                    Exchange your deposited LP for your earned SOUL.
                   </Text>
                   
                 {/* {isBondMode !== 0 ? (
