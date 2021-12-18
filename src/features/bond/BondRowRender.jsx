@@ -496,7 +496,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     height="2.5rem"
                     primaryColour="#bbb"
                     color="black"
-                    margin=".5rem 0 .5rem .6rem"
+                    margin=".5rem 0 .5rem 0"
                     onClick={() => handleMint(  // TODO: handleMint
                       ethers.utils.parseUnits(
                         document.getElementById('unstake').value)
