@@ -6,6 +6,7 @@ import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
 
 import {
   useHelperContract,
+  usePriceHelperContract,
   useBondHelperContract,
   useSoulBondContract,
   usePairContract,
@@ -23,6 +24,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   
   const farmHelperContract = useHelperContract()
   const helperContract = useBondHelperContract()
+  const priceHelperContract = usePriceHelperContract()
   const bondContract = useSoulBondContract()
   const lpTokenContract = usePairContract(lpToken)
   const token1Contract = useTokenContract(token1Address[chainId])
@@ -64,6 +66,16 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   const fetchStakedBals = async () => {
     try {
       const result = await helperContract?.fetchStakedBals(pid)
+      return result
+    } catch (e) {
+      console.log(e)
+      return e
+    }
+  }
+
+  const fetchStakedValue = async () => {
+    try {
+      const result = await priceHelperContract?.currentFtmPriceInUsdc()
       return result
     } catch (e) {
       console.log(e)
@@ -627,6 +639,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
     totalPendingRewards,
     fetchYearlyRewards,
     fetchStakedBals,
+    fetchStakedValue,
     fetchTokenRateBals,
     fetchBondStats,
     fetchStakeStats,
