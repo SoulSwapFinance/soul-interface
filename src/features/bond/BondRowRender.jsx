@@ -83,6 +83,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const [stakedBal, setStakedBal] = useState(0)
   const [unstakedBal, setUnstakedBal] = useState(0)
   const [pending, setPending] = useState(0)
+  const [pendingValue, setPendingValue] = useState(0)
 
   // const [earningPerDay, setEarningPerDay] = useState();
   // const [percOfBond, setPercOfBond] = useState()
@@ -221,9 +222,12 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
       // alert('connect wallet')
     } else {
       try {
-        const pending = await pendingSoul(pid, account)
-        const formatted = ethers.utils.formatUnits(pending.toString())
+        const pendingResult = await pendingSoul(pid, account)
+        const formatted = ethers.utils.formatUnits(pendingResult?.[0].toString())
         setPending(Number(formatted).toFixed(2).toString())
+
+        const value = pending * pendingResult?.[1]
+        setPendingValue(Number(value).toFixed(2).toString())
       } catch (err) {
         console.warn(err)
       }
@@ -500,7 +504,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                       handleMint()
                     }
                   >
-                    MINT SOUL
+                    MINT SOUL (${pendingValue})
                   </SubmitButton>
                 </Wrap>
 

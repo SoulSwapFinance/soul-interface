@@ -315,8 +315,11 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   // amount of soul pending for redemption
   const pendingSoul = async (pid, user) => {
     try {
-      const result = await bondContract?.pendingSoul(pid, user)
-      return result
+      const prices = await fetchTokenRateBals()
+      const soulPrice = prices?.[1]
+      const soulAmount = await bondContract?.pendingSoul(pid, user)
+      console.log('soulAmount', soulAmount, 'soulprice', soulPrice)
+      return [soulAmount, soulPrice]
     } catch (e) {
       console.log(e)
       return e
