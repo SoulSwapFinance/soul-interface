@@ -4,7 +4,7 @@ import { ethers } from 'ethers'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import BondKey from '../bond/BondKey'
 import BondRowRender from '../bond/BondRowRender'
-import { AllPids, WithdrawPids } from '../bond/Pids'
+import { AllPids } from '../bond/Pids' // WithdrawPids
 
 const BondList = () => {
   const { chainId } = useActiveWeb3React() // account

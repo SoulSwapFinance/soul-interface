@@ -7,9 +7,9 @@ import { ethers } from 'ethers'
 
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
-import useSoulSummoner from './hooks/useSoulSummoner'
+import useSoulBond from './hooks/useSoulBond'
 import useApprove from './hooks/useApprove'
-import { SoulSummonerAddress } from './constants'
+import { SoulBondAddress } from './constants'
 import {
   FlexText,
   BondContainer,
@@ -71,19 +71,17 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
     fetchBondStats,
 
     fetchUserLpTokenAllocInBond,
-    withdraw,
+    mint,
     deposit,
     pendingSoul,
     userInfo,
-    getFeePercent,
-  } = useSoulSummoner(pid, lpToken, bond.token1Address, bond.token2Address)
+  } = useSoulBond(pid, lpToken, bond.token1Address, bond.token2Address)
   const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
 
   const [showing, setShowing] = useState(false)
 
   const [approved, setApproved] = useState(false)
 
-  const [feePercent, setFeePercent] = useState(0)
   const [receiving, setReceiving] = useState(0)
 
   const [stakedBal, setStakedBal] = useState(0)
@@ -136,17 +134,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
     if (!showing) {
       fetchBals()
       fetchApproval()
-      fetchFeePercent()
     }
-  }
-
-  const fetchFeePercent = async () => {
-    const percent = await getFeePercent(pid)
-    const result = await userInfo(pid, account)
-    const staked = await result[0]
-
-    // set to 14 when no staked, otherwise uses percent
-    staked > 0 ? await setFeePercent(percent / 10 ** 18) : await setFeePercent(14)
   }
 
   /**
@@ -254,7 +242,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
       alert('Connect Wallet')
     } else {
       // Checks if SoulSummoner can move tokens
-      const amount = await erc20Allowance(account, SoulSummonerAddress)
+      const amount = await erc20Allowance(account, SoulBondAddress)
       if (amount > 0) setApproved(true)
       return amount
     }
@@ -268,7 +256,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
       alert('Connect Wallet')
     } else {
       try {
-        const tx = await erc20Approve(SoulSummonerAddress)
+        const tx = await erc20Approve(SoulBondAddress)
         await tx?.wait().then(await fetchApproval())
       } catch (e) {
         // alert(e.message)
@@ -292,14 +280,14 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   // }
 
   /**
-   * Withdraws staked lpTokens from SoulSummoner bond
+   * Mints SOUL Bond
    */
-  const handleWithdraw = async (amount) => {
+  const handleMint = async () => {
     try {
-      // console.log('withdrawing', amount.toString())
-      const tx = await withdraw(pid, amount)
+      // console.log('minting', amount.toString())
+      const tx = await bond(pid)
       await tx.wait()
-      await fetchBals(pid)
+      // await fetchBals(pid)
     } catch (e) {
       // alert(e.message)
       console.log(e)
@@ -472,16 +460,6 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     </SubmitButton>
                   )}
                 </Wrap>
-
-                {/* {feePercent !== 0 ? ( // TODO: isBondMode
-                  <Text fontSize=".9rem" padding="0" color="#F36FFE">
-                    Minting sends your LP to the DAO in exchange for SOUL. 
-                  </Text>
-                ) : (
-                  <Text fontSize=".9rem" padding="0" color="#F36FFE">
-                    Minting sends LP to YOU in exchange for SOUL. 
-                  </Text>
-                )} */}
               </FunctionBox>
 
               <FunctionBox>
@@ -519,7 +497,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     primaryColour="#bbb"
                     color="black"
                     margin=".5rem 0 .5rem .6rem"
-                    onClick={() => handleWithdraw(  // TODO: handleMint
+                    onClick={() => handleMint(  // TODO: handleMint
                       ethers.utils.parseUnits(
                         document.getElementById('unstake').value)
                       )}
@@ -531,7 +509,11 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                 <Wrap padding="0">
                   <Wrap padding="0" display="flex">
 
-                {feePercent !== 0 ? ( // TODO: isBondMode
+                  <Text fontSize=".9rem" padding="0" color="#F36FFE">
+                    Minting sends LP in exchange for SOUL. 
+                  </Text>
+                  
+                {/* {isBondMode !== 0 ? (
                   <Text fontSize=".9rem" padding="0" color="#F36FFE">
                     Minting sends your LP in exchange for SOUL. 
                   </Text>
@@ -539,7 +521,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   <Text fontSize=".9rem" padding="0" color="#F36FFE">
                     Minting sends LP in exchange for SOUL. 
                   </Text>
-                )}
+                )} */}
                     {/* <Text fontSize=".9rem" textAlign="center" color="#aaa">
                       Receiving {pending} SOUL
                     </Text> */}
