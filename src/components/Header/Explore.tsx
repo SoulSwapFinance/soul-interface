@@ -190,13 +190,14 @@ export default function Menu() {
                     //   </a>
                     // </NavLink>
                     // ) : 
-                    item.stake ? (
-                      <NavLink key={item.name} href={item.href}>
-                      <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                      CIRCLES
-                      </a>
-                    </NavLink>
-                    ) : item.vote ?
+                    // item.stake ? (
+                    //   <NavLink key={item.name} href={item.href}>
+                    //   <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                    //   CIRCLES
+                    //   </a>
+                    // </NavLink>
+                    // ) : 
+                    item.vote ?
                     (
                      <NavLink key={item.name} href={item.href}>
                       <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
