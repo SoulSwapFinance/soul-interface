@@ -3,6 +3,7 @@ import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 import Container from '../../components/Container'
 import Head from 'next/head'
 import React from 'react'
+import FarmBanner from '../../components/FarmBanner'
 
 import FarmList from '../../features/farm/FarmList'
 
@@ -15,6 +16,7 @@ const All = () => {
           <title>Farm | All</title>
           <meta key="description" name="description" content="Farm SOUL" />
         </Head>
+        <FarmBanner/>
         <FarmList />
       </Container>
       </DoubleGlowShadowV2>
