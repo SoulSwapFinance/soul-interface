@@ -285,16 +285,15 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   // user info:
   // [0] amount,
   // [1] rewardDebt,
-  // [2] rewardDebtAtTime
-  // [3] lastWithdrawTime,
-  // [4] firstDepositTime,
-  // [5] timeDelta,
-  // [6] lastDepositTime
+  // [2] depositTime
+  // [3] lastDepositTime,
   const userInfo = async (pid, account) => {
     try {
       const result = await bondContract?.userInfo(pid, account)
+      console.log('userInfoResult:', result)
       const amount = result?.[0].toString()
       const rewardDebt = result?.[1].toString()
+      console.log(amount, 'lp depoed')
       return [amount, rewardDebt]
     } catch (e) {
       console.log(e)
