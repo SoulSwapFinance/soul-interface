@@ -110,7 +110,7 @@ export const AllPids = [
       token2Address: tokens.WBTC,
     },
 
-    */ {
+    /* {
     // 600
     pid: 8,
     token1: 'WETH',
