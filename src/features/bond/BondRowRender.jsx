@@ -509,7 +509,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                       handleMint()
                     }
                   >
-                    MINT SOUL (${pendingValue})
+                    MINT SOUL (${Number(pendingValue)})
                   </SubmitButton>
                 </Wrap>
 
