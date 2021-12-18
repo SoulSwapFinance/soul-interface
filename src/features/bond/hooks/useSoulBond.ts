@@ -5,6 +5,7 @@ import { ethers, BigNumber } from 'ethers'
 import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
 
 import {
+  useHelperContract,
   useBondHelperContract,
   useSoulBondContract,
   usePairContract,
@@ -19,7 +20,8 @@ import { AllPids } from '../Pids'
 
 function useSoulBond(pid, lpToken, token1Address, token2Address) {
   const { account, chainId } = useActiveWeb3React()
-
+  
+  const farmHelperContract = useHelperContract()
   const helperContract = useBondHelperContract()
   const bondContract = useSoulBondContract()
   const lpTokenContract = usePairContract(lpToken)
@@ -70,6 +72,8 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   }
 
   /**
+   * Get prices of each base token from the Farms contract (high liquidity)
+   * 
    * [0] : ftmUsdcTotalFtm
    * [1] : ftmUsdcTotalUsdc
    * [2] : soulFtmTotalSoul
@@ -81,7 +85,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
    */
   const fetchTokenRateBals = async () => {
     try {
-      const result = await helperContract?.fetchTokenRateBals()
+      const result = await farmHelperContract?.fetchTokenRateBals()
 
       const ftmPrice = result?.[1] / (result?.[0] / 10 ** 12)
       const soulPrice = (result?.[2] / result?.[3]) * ftmPrice
@@ -107,6 +111,8 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   }
 
   /**
+   * Fetches the TVL + APR for each pool
+   * 
    * [0] : summonerLpTokens
    * [1] : lpTokenSupply
    * [2] : pidAlloc
