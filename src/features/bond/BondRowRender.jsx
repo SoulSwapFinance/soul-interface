@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
-
 import { ethers } from 'ethers'
 
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
@@ -11,15 +10,12 @@ import useSoulBond from './hooks/useSoulBond'
 import useApprove from './hooks/useApprove'
 import { SoulBondAddress } from './constants'
 import {
-  FlexText,
   BondContainer,
   Row,
   BondContentWrapper,
   TokenPairBox,
   BondItemBox,
-  // BondItemHeading,
   BondItem,
-  // ShowBtn,
   DetailsContainer,
   DetailsWrapper,
   FunctionBox,
@@ -510,7 +506,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   <Wrap padding="0" display="flex" justifyContent='center'>
 
                   <Text fontSize=".9rem" padding="0" color="#F36FFE">
-                    Exchange your deposited LP for your earned SOUL.
+                    Exchange deposited LP for earned SOUL.
                   </Text>
                   
                 {/* {isBondMode !== 0 ? (
