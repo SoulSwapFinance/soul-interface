@@ -29,7 +29,11 @@ import SOULVAULT_ABI from '../constants/abis/soulvault.json'
 import SOUL_ABI from '../constants/abis/soulpower.json' 
 
 // unused
-import { MULTICALL_ADDRESS, SUMMONER_HELPER_ADDRESS, BOND_HELPER_ADDRESS } from '../constants/index'
+import { MULTICALL_ADDRESS, 
+  SOUL_BOND_ADDRESS, 
+  SUMMONER_HELPER_ADDRESS, 
+  BOND_HELPER_ADDRESS 
+} from '../constants/index'
 // import PENDING_ABI from '../constants/abis/pending.json'
 // import ROUTER_ABI from '../constants/abis/router.json'
 // import TIMELOCK_ABI from '../constants/abis/timelock.json'
@@ -93,6 +97,11 @@ export function useSoulContract(withSignerIfPossible = true): Contract | null {
 export function useSoulVaultContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SOUL_VAULT_ADDRESS[chainId], SOULVAULT_ABI, withSignerIfPossible)
+}
+
+export function useSoulBondContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOUL_BOND_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible)
 }
 
 export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
