@@ -191,11 +191,11 @@ export function useDerivedSwapInfo(doArcher = false): {
   }
 
   if (!parsedAmount) {
-    inputError = inputError ?? i18n._(t`Enter an amount`)
+    inputError = inputError ?? i18n._(t`Enter Amount`)
   }
 
   if (!currencies[Field.INPUT] || !currencies[Field.OUTPUT]) {
-    inputError = inputError ?? i18n._(t`Select a token`)
+    inputError = inputError ?? i18n._(t`Select Token`)
   }
 
   const formattedTo = isAddress(to)

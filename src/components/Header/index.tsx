@@ -88,6 +88,19 @@ function AppBar(): JSX.Element {
                         </NavLink>
                       )}
                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href={'/bonds'}>
+                          <a
+                            id={`farm-nav-link`}
+                            // className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800"
+                            className="w-full relative ml-6 md:p-2"
+                            // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                            >
+                          {/* <Image src="https://media.giphy.com/media/iH7mGoqPivDybuDc2s/giphy.gif" alt="offering soul" width={30} height={30} /> */}
+                            {i18n._(t`BOND`)}
+                          </a>
+                        </NavLink>
+                      )}
+                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                       <NavLink href={'/seance'}>
                         <a
                           id={`stake-nav-link`}
@@ -132,7 +145,7 @@ function AppBar(): JSX.Element {
                           {i18n._(t`CHARTS`)}
                           </a>
                         </NavLink>
-                      <Explore />
+                      {/* <Explore /> */}
                       {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'https://info.soul.sh'}>
                         <a
@@ -473,7 +486,7 @@ function AppBar(): JSX.Element {
                     id={`seance-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                   >
-                    {i18n._(t`Seance`)}
+                    {i18n._(t`Stake Soul`)}
                   </a>
                 </Link>
               )}
@@ -484,12 +497,22 @@ function AppBar(): JSX.Element {
                   id={`enchant-nav-link`}
                   className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                   >
-                  {i18n._(t`Enchant`)}
+                  {i18n._(t`Enchant Seance`)}
                 </a>
               </Link>
               )}
 
-             { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+              { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                <Link href={'/vote'}>
+                  <a
+                    id={`vote-nav-link`}
+                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                  >
+                    {i18n._(t`Governance`)}
+                  </a>
+                </Link>
+              )}
+             {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                 <Link href={'/scarab'}>
                   <a
                     id={`scarab-nav-link`}
@@ -498,7 +521,7 @@ function AppBar(): JSX.Element {
                     {i18n._(t`Scarab`)}
                   </a>
                 </Link>
-              )}
+              )} */}
 
              { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                 <Link href={'/analytics'}>
@@ -506,11 +529,22 @@ function AppBar(): JSX.Element {
                     id={`vote-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                   >
-                    {i18n._(t`Charts`)}
+                    {i18n._(t`View Charts`)}
                   </a>
                 </Link>
               )}
-                
+              
+              { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+               <Link href={'/claim'}>
+                  <a
+                    id={`claim-nav-link`}
+                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                    >
+                    {i18n._(t`File Claim`)}
+                  </a>
+                </Link>
+              )}
+
                {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                 <Link href={'/enchant'}>
                   <a
@@ -561,7 +595,7 @@ function AppBar(): JSX.Element {
                   id={`tools-nav-link`}
                   className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                   >
-                  {i18n._(t`More`)}
+                  {i18n._(t`Explore More`)}
                 </a>
               </Link>
               )}
