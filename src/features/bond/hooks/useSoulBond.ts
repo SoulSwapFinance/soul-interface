@@ -264,7 +264,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   }
 
   // pool info:
-  // [0] lpTokenUsed,
+  // [0] lpToken,
   // [1] allocPoint,
   // [2] lastRewardTime,
   // [3] accSoulPerShare
@@ -285,7 +285,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   // user info:
   // [0] amount,
   // [1] rewardDebt,
-  // [2] depositTime
+  // [2] depositTime,
   // [3] lastDepositTime,
   const userInfo = async (pid, account) => {
     try {

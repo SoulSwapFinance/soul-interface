@@ -281,8 +281,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const handleMint = async () => {
     try {
       // console.log('minting', amount.toString())
-      const tx = await bond(pid)
-      await tx.wait()
+      const tx = await mint(pid)
+      // await tx.wait()
       // await fetchBals(pid)
     } catch (e) {
       // alert(e.message)
@@ -291,9 +291,9 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   }
 
   /**
-   * Deposits/stakes lpTokens into SoulSummoner bond
+   * Deposits/stakes lpTokens into bond
    */
-  const handleDeposit = async (amount) => {
+   const handleDeposit = async (amount) => {
     try {
       // console.log('depositing', amount.toString())
       const tx = await deposit(pid, amount)
@@ -421,7 +421,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
               <FunctionBox>
                 {/* <button >Max</button> */}
                 <Wrap padding="0" display="flex" justifyContent="space-between">
-                  <Text padding="0" fontSize=".9rem" color="#bbb">
+                <Text padding="0" fontSize=".9rem" color="#bbb">
                     Available: &nbsp;
                     {Number(unstakedBal) === 0
                       ? '0.000'
@@ -458,6 +458,13 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                 </Wrap>
               </FunctionBox>
 
+                <Text fontSize=".9rem" padding="0" color="#aaa">
+                  Bonded: {Number(stakedBal)
+                      .toFixed(3)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')} LP
+                </Text>
+
               <FunctionBox>
                 {/* <FlexText> */}
                   {/* <ClickableText
@@ -470,23 +477,16 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     }}
                   >
                     MAX
-                  </ClickableText> */}
-                {/* </FlexText> */}
-                {/* <Input
+                  </ClickableText>
+                </FlexText>
+                <Input
                   name="unstake"
                   id="unstake"
                   type="number"
                   placeholder="0.0"
                   min="0"
                   onChange={() => getWithdrawable()}
-                /> */}
-
-                  <Text fontSize=".9rem" padding="0" color="#aaa">
-                    Bonded: {Number(stakedBal)
-                        .toFixed(3)
-                        .toString()
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')} LP
-                  </Text>
+                  /> */}
                 <Wrap padding="0" margin="0" display="flex">
                   <SubmitButton
                     height="2.5rem"
@@ -494,8 +494,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     color="black"
                     margin=".5rem 0 .5rem 0"
                     onClick={() => handleMint(  // TODO: handleMint
-                      ethers.utils.parseUnits(
-                        document.getElementById('unstake').value)
+                      // ethers.utils.parseUnits(
+                      //   document.getElementById('unstake').value)
                       )}
                   >
                     MINT SOUL

@@ -30,7 +30,7 @@ const TokenPair = styled(ExternalLink)`
   }
 `;
 
-export default function BondKey(withdraw) {
+export default function BondKey(mint) {
   return (
     <>
       <Wrap
