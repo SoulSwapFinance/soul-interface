@@ -9,8 +9,6 @@ import {
   SOUL_CIRCLE_ADDRESS,
   SOUL_VAULT_ADDRESS,
   SOUL_GUIDE_ADDRESS,
-  SOUL_BOND_ADDRESS, // NEED ADD UPDATE ADDRESS
-  SOUL_BOND_HELPER_ADDRESS, // NEED TO ADD ADDRESS
   // TIMELOCK_ADDRESS,
   WNATIVE,
 } from '../../../sdk'
@@ -31,8 +29,6 @@ import SOULVAULT_ABI from '../constants/abis/soulvault.json'
 import SPELL_ABI from '../constants/abis/spell.json'
 import ENCHANT_ABI from '../constants/abis/enchant.json'
 import SOUL_ABI from '../constants/abis/soulpower.json' 
-import SOUL_BOND_ABI from '../constants/abis/soulbond.json' 
-import SOUL_BOND_HELPER_ABI from '../constants/abis/soulbondhelper.json' 
 
 // unused
 import { MULTICALL_ADDRESS, SUMMONER_HELPER_ADDRESS } from '../constants/index'
@@ -137,18 +133,3 @@ export function useEnchantmentContract(withSignerIfPossible?: boolean): Contract
 //   const { chainId } = useActiveWeb3React()
 //   return useContract(chainId && TIMELOCK_ADDRESS[chainId], TIMELOCK_ABI, false)
 // }
-
-// ----------------------
-//  Bond
-// ----------------------
-
-export function useSoulBondContract(withSignerIfPossible = true): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_BOND_ADDRESS[chainId], SOUL_BOND_ABI, withSignerIfPossible)
-}
-
-
-export function useBondHelperContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_BOND_HELPER_ADDRESS, SOUL_BOND_HELPER_ABI, withSignerIfPossible)
-}
