@@ -19,6 +19,27 @@ msgstr ""
 msgid "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies"
 msgstr ""
 
+msgid "- 0.1 FTM to lock"
+msgstr ""
+
+msgid "- Always DYOR"
+msgstr ""
+
+msgid "- Click on \"Approve\" to allow the contract to transfer your tokens"
+msgstr ""
+
+msgid "- Click on \"Deposit\" to lock your tokens into locker contract"
+msgstr ""
+
+msgid "- Input your token or liquidity pair address, amount of tokens to lock, withdrawer address and when tokens will become unlocked"
+msgstr ""
+
+msgid "- Locker contract address: {0}"
+msgstr ""
+
+msgid "- You will not be able to withdraw your tokens before the unlock time"
+msgstr ""
+
 msgid "/ DAY"
 msgstr ""
 
@@ -91,6 +112,9 @@ msgstr ""
 msgid "Allocation"
 msgstr ""
 
+msgid "Amount Locked"
+msgstr ""
+
 msgid "Amount of Tokens"
 msgstr ""
 
@@ -136,6 +160,9 @@ msgstr ""
 msgid "Available Networks"
 msgstr ""
 
+msgid "BOND"
+msgstr ""
+
 msgid "Back to Limit Orders"
 msgstr ""
 
@@ -173,6 +200,9 @@ msgid "Buy"
 msgstr ""
 
 msgid "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
+msgstr ""
+
+msgid "CHARTS"
 msgstr ""
 
 msgid ""
@@ -305,6 +335,9 @@ msgstr ""
 msgid "Copy Address"
 msgstr ""
 
+msgid "Create Lock"
+msgstr ""
+
 msgid "Create Pair"
 msgstr ""
 
@@ -315,6 +348,9 @@ msgid "Create Scarab"
 msgstr ""
 
 msgid "Create a new Kashi Market"
+msgstr ""
+
+msgid "Create lock"
 msgstr ""
 
 msgid "Create pool"
@@ -386,6 +422,9 @@ msgstr ""
 msgid "Enchant Fee"
 msgstr ""
 
+msgid "Enchant Seance"
+msgstr ""
+
 msgid "Enchant your Seance..."
 msgstr ""
 
@@ -402,9 +441,6 @@ msgid "Enter a recipient"
 msgstr ""
 
 msgid "Enter a valid slippage percentage"
-msgstr ""
-
-msgid "Enter an amount"
 msgstr ""
 
 msgid "Error"
@@ -439,6 +475,9 @@ msgstr ""
 msgid "Expired"
 msgstr ""
 
+msgid "Explore More"
+msgstr ""
+
 msgid "Explore our Protocol."
 msgstr ""
 
@@ -458,6 +497,9 @@ msgid "Farm"
 msgstr ""
 
 msgid "Fees"
+msgstr ""
+
+msgid "File Claim"
 msgstr ""
 
 msgid "Filled"
@@ -494,6 +536,9 @@ msgstr ""
 msgid "Go Back"
 msgstr ""
 
+msgid "Governance"
+msgstr ""
+
 msgid "Hardware Wallet"
 msgstr ""
 
@@ -516,6 +561,9 @@ msgid "Historical Total Locked: Fetching Total"
 msgstr ""
 
 msgid "Historical Total Locked: {0} SOUL"
+msgstr ""
+
+msgid "How to use"
 msgstr ""
 
 msgid "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
@@ -614,6 +662,12 @@ msgstr ""
 msgid "Lockup"
 msgstr ""
 
+msgid "Luxor"
+msgstr ""
+
+msgid "Luxor Bonds."
+msgstr ""
+
 msgid "MAX"
 msgstr ""
 
@@ -650,6 +704,9 @@ msgid "Maximum sent"
 msgstr ""
 
 msgid "Maximum slippage tolerance allowed."
+msgstr ""
+
+msgid "Me"
 msgstr ""
 
 msgid "Migrate"
@@ -858,6 +915,9 @@ msgstr ""
 msgid "Repay"
 msgstr ""
 
+msgid "Reserves"
+msgstr ""
+
 msgid "Resources"
 msgstr ""
 
@@ -880,6 +940,9 @@ msgid "Routing through these tokens resulted in the best price for your trade."
 msgstr ""
 
 msgid "Russian"
+msgstr ""
+
+msgid "SCARAB"
 msgstr ""
 
 msgid "SEANCE"
@@ -906,6 +969,9 @@ msgstr ""
 msgid "STABLES"
 msgstr ""
 
+msgid "STAKE"
+msgstr ""
+
 msgid "STAKING ASSETS"
 msgstr ""
 
@@ -918,10 +984,19 @@ msgstr ""
 msgid "Seance"
 msgstr ""
 
+msgid "Seance Tribute"
+msgstr ""
+
+msgid "Search Lockers"
+msgstr ""
+
 msgid "Search Name or Address"
 msgstr ""
 
 msgid "Search Scarabs"
+msgstr ""
+
+msgid "Search lockers"
 msgstr ""
 
 msgid "Select Token"
@@ -934,9 +1009,6 @@ msgid "Select a collateral token"
 msgstr ""
 
 msgid "Select a rate"
-msgstr ""
-
-msgid "Select a token"
 msgstr ""
 
 msgid "Select a token to find your liquidity"
@@ -994,6 +1066,9 @@ msgid "Stake SOUL for SPELL"
 msgstr ""
 
 msgid "Stake Sou for Soul."
+msgstr ""
+
+msgid "Stake Soul"
 msgstr ""
 
 msgid ""
@@ -1111,6 +1186,9 @@ msgstr ""
 msgid "Unlock Date"
 msgstr ""
 
+msgid "Unlock date"
+msgstr ""
+
 msgid "Unstake"
 msgstr ""
 
@@ -1142,6 +1220,9 @@ msgid "Vesting is executed within the guidelines selected by the community in"
 msgstr ""
 
 msgid "Vietnamese"
+msgstr ""
+
+msgid "View Charts"
 msgstr ""
 
 msgid "View Liquidity Positions"
@@ -1187,6 +1268,9 @@ msgid "Withdraw"
 msgstr ""
 
 msgid "Withdraw from Scarab {id}"
+msgstr ""
+
+msgid "Withdraw from locker {id}"
 msgstr ""
 
 msgid "Wrap"

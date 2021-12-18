@@ -19,6 +19,27 @@ msgstr "% Share"
 msgid "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies"
 msgstr "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies"
 
+msgid "- 0.1 FTM to lock"
+msgstr "- 0.1 FTM to lock"
+
+msgid "- Always DYOR"
+msgstr "- Always DYOR"
+
+msgid "- Click on \"Approve\" to allow the contract to transfer your tokens"
+msgstr "- Click on \"Approve\" to allow the contract to transfer your tokens"
+
+msgid "- Click on \"Deposit\" to lock your tokens into locker contract"
+msgstr "- Click on \"Deposit\" to lock your tokens into locker contract"
+
+msgid "- Input your token or liquidity pair address, amount of tokens to lock, withdrawer address and when tokens will become unlocked"
+msgstr "- Input your token or liquidity pair address, amount of tokens to lock, withdrawer address and when tokens will become unlocked"
+
+msgid "- Locker contract address: {0}"
+msgstr "- Locker contract address: {0}"
+
+msgid "- You will not be able to withdraw your tokens before the unlock time"
+msgstr "- You will not be able to withdraw your tokens before the unlock time"
+
 msgid "/ DAY"
 msgstr "/ DAY"
 
@@ -91,6 +112,9 @@ msgstr "Additional records and weekly merkle updates can be found on"
 msgid "Allocation"
 msgstr "Allocation"
 
+msgid "Amount Locked"
+msgstr "Amount Locked"
+
 msgid "Amount of Tokens"
 msgstr "Amount of Tokens"
 
@@ -136,6 +160,9 @@ msgstr "Available"
 msgid "Available Networks"
 msgstr "Available Networks"
 
+msgid "BOND"
+msgstr "BOND"
+
 msgid "Back to Limit Orders"
 msgstr "Back to Limit Orders"
 
@@ -174,6 +201,9 @@ msgstr "Buy"
 
 msgid "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
 msgstr "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
+
+msgid "CHARTS"
+msgstr "CHARTS"
 
 msgid ""
 "Calculated based on current rates. Rates are estimates provided for your convenience\n"
@@ -309,6 +339,9 @@ msgstr "Copied"
 msgid "Copy Address"
 msgstr "Copy Address"
 
+msgid "Create Lock"
+msgstr "Create Lock"
+
 msgid "Create Pair"
 msgstr "Create Pair"
 
@@ -320,6 +353,9 @@ msgstr "Create Scarab"
 
 msgid "Create a new Kashi Market"
 msgstr "Create a new Kashi Market"
+
+msgid "Create lock"
+msgstr "Create lock"
 
 msgid "Create pool"
 msgstr "Create pool"
@@ -390,6 +426,9 @@ msgstr "Enchant"
 msgid "Enchant Fee"
 msgstr "Enchant Fee"
 
+msgid "Enchant Seance"
+msgstr "Enchant Seance"
+
 msgid "Enchant your Seance..."
 msgstr "Enchant your Seance..."
 
@@ -407,9 +446,6 @@ msgstr "Enter a recipient"
 
 msgid "Enter a valid slippage percentage"
 msgstr "Enter a valid slippage percentage"
-
-msgid "Enter an amount"
-msgstr "Enter an amount"
 
 msgid "Error"
 msgstr "Error"
@@ -445,6 +481,9 @@ msgstr "Expiration is the time at which the order will become invalid"
 msgid "Expired"
 msgstr "Expired"
 
+msgid "Explore More"
+msgstr "Explore More"
+
 msgid "Explore our Protocol."
 msgstr "Explore our Protocol."
 
@@ -465,6 +504,9 @@ msgstr "Farm"
 
 msgid "Fees"
 msgstr "Fees"
+
+msgid "File Claim"
+msgstr "File Claim"
 
 msgid "Filled"
 msgstr "Filled"
@@ -504,6 +546,9 @@ msgstr "Give me some FTM"
 msgid "Go Back"
 msgstr "Go Back"
 
+msgid "Governance"
+msgstr "Governance"
+
 msgid "Hardware Wallet"
 msgstr "Hardware Wallet"
 
@@ -527,6 +572,9 @@ msgstr "Historical Total Locked: Fetching Total"
 
 msgid "Historical Total Locked: {0} SOUL"
 msgstr "Historical Total Locked: {0} SOUL"
+
+msgid "How to use"
+msgstr "How to use"
 
 msgid "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
 msgstr "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
@@ -624,6 +672,12 @@ msgstr "Lock"
 msgid "Lockup"
 msgstr "Lockup"
 
+msgid "Luxor"
+msgstr "Luxor"
+
+msgid "Luxor Bonds."
+msgstr "Luxor Bonds."
+
 msgid "MAX"
 msgstr "MAX"
 
@@ -663,6 +717,9 @@ msgstr "Maximum sent"
 
 msgid "Maximum slippage tolerance allowed."
 msgstr "Maximum slippage tolerance allowed."
+
+msgid "Me"
+msgstr "Me"
 
 msgid "Migrate"
 msgstr "Migrate"
@@ -875,6 +932,9 @@ msgstr "Removing {0} {1} and {2} {3}"
 msgid "Repay"
 msgstr "Repay"
 
+msgid "Reserves"
+msgstr "Reserves"
+
 msgid "Resources"
 msgstr "Resources"
 
@@ -898,6 +958,9 @@ msgstr "Routing through these tokens resulted in the best price for your trade."
 
 msgid "Russian"
 msgstr "Russian"
+
+msgid "SCARAB"
+msgstr "SCARAB"
 
 msgid "SEANCE"
 msgstr "SEANCE"
@@ -923,6 +986,9 @@ msgstr "STABLE PAIRS"
 msgid "STABLES"
 msgstr "STABLES"
 
+msgid "STAKE"
+msgstr "STAKE"
+
 msgid "STAKING ASSETS"
 msgstr "STAKING ASSETS"
 
@@ -935,11 +1001,20 @@ msgstr "Scarabs are a neat way to share your SOUL with anyone, so long as they'r
 msgid "Seance"
 msgstr "Seance"
 
+msgid "Seance Tribute"
+msgstr "Seance Tribute"
+
+msgid "Search Lockers"
+msgstr "Search Lockers"
+
 msgid "Search Name or Address"
 msgstr "Search Name or Address"
 
 msgid "Search Scarabs"
 msgstr "Search Scarabs"
+
+msgid "Search lockers"
+msgstr "Search lockers"
 
 msgid "Select Token"
 msgstr "Select Token"
@@ -952,9 +1027,6 @@ msgstr "Select a collateral token"
 
 msgid "Select a rate"
 msgstr "Select a rate"
-
-msgid "Select a token"
-msgstr "Select a token"
 
 msgid "Select a token to find your liquidity"
 msgstr "Select a token to find your liquidity"
@@ -1012,6 +1084,9 @@ msgstr "Stake SOUL for SPELL"
 
 msgid "Stake Sou for Soul."
 msgstr "Stake Sou for Soul."
+
+msgid "Stake Soul"
+msgstr "Stake Soul"
 
 msgid ""
 "Stake into SPELL add collateral as aSPELL on Aave all in\n"
@@ -1132,6 +1207,9 @@ msgstr "Unknown error{0}. Try increasing your slippage tolerance."
 msgid "Unlock Date"
 msgstr "Unlock Date"
 
+msgid "Unlock date"
+msgstr "Unlock date"
+
 msgid "Unstake"
 msgstr "Unstake"
 
@@ -1164,6 +1242,9 @@ msgstr "Vesting is executed within the guidelines selected by the community in"
 
 msgid "Vietnamese"
 msgstr "Vietnamese"
+
+msgid "View Charts"
+msgstr "View Charts"
 
 msgid "View Liquidity Positions"
 msgstr "View Liquidity Positions"
@@ -1212,6 +1293,9 @@ msgstr "Withdraw"
 
 msgid "Withdraw from Scarab {id}"
 msgstr "Withdraw from Scarab {id}"
+
+msgid "Withdraw from locker {id}"
+msgstr "Withdraw from locker {id}"
 
 msgid "Wrap"
 msgstr "Wrap"

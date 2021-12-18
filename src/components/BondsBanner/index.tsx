@@ -1,19 +1,19 @@
 import { FC } from 'react'
 import { XIcon } from '@heroicons/react/outline'
 
-const FarmBanner: FC = () => (
+const BondsBanner: FC = () => (
   <div className="relative w-full bg-purple bg-opacity-05">
     <div className="px-3 py-3 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div className="pr-16 sm:text-center sm:px-16">
         <p className="font-medium text-white">
-          <span className="md:hidden text-center">WITHDRAW FEES NOW REMOVED</span>
-          <span className="hidden md:inline"><b>We now have ZERO FEES for farming.</b></span>
+          <span className="md:hidden text-center">PLEASE READ OUR POST</span>
+          <span className="hidden md:inline"><b>PLEASE READ ABOUT BONDS BEFORE BONDING</b></span>
           <span className="block sm:ml-2 sm:inline-block">
-            {/* <a href="https://twitter.com/SoulSwapFinance/status/1465633039262920707?s=20" target = "_blank" rel="noreferrer"
+            <a href="https://forum.soulswap.finance/t/introducing-bonding-mechanism-for-soul/150" target = "_blank" rel="noreferrer"
 className="font-bold text-white underline">
               {' '}
-              Read Full Details <span aria-hidden="true">&rarr;</span> */}
-            {/* </a> */}
+              Read Full Details <span aria-hidden="true">&rarr;</span>
+            </a>
           </span>
         </p>
       </div>
@@ -23,4 +23,4 @@ className="font-bold text-white underline">
   </div>
 )
 
-export default FarmBanner
+export default BondsBanner

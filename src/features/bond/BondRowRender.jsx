@@ -2,41 +2,37 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
-
 import { ethers } from 'ethers'
 
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
-import useSoulSummoner from './hooks/useSoulSummoner'
+import useSoulBond from './hooks/useSoulBond'
 import useApprove from './hooks/useApprove'
-import { SoulSummonerAddress } from './constants'
+import { SoulBondAddress } from './constants'
 import {
-  FlexText,
-  FarmContainer,
+  BondContainer,
   Row,
-  FarmContentWrapper,
+  BondContentWrapper,
   TokenPairBox,
-  FarmItemBox,
-  // FarmItemHeading,
-  FarmItem,
-  // ShowBtn,
+  BondItemBox,
+  BondItem,
   DetailsContainer,
   DetailsWrapper,
   FunctionBox,
   Input,
   SubmitButton,
-} from './FarmStyles'
+} from './BondStyles'
 
 import { Wrap, ClickableText, Heading, Text, ExternalLink } from '../../components/ReusableStyles'
 
-// params to render farm with:
+// params to render bond with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)
 // 2. totalAlloc / poolAlloc
 // 3. userInfo:
 //    - amount (in pool)
 //    - rewardDebt (owed)
 
-const HideOnMobile = styled(FarmItemBox)`
+const HideOnMobile = styled(BondItemBox)`
   @media screen and (max-width: 900px) {
     display: none;
   }
@@ -59,7 +55,7 @@ const TokenLogo = styled(Image)`
   }
 `
 
-const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
+const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const { account } = useActiveWeb3React() // chainId
 
   const {
@@ -68,34 +64,32 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     // fetchStakedBals,
     // fetchTokenRateBals,
     fetchYearlyRewards,
-    fetchFarmStats,
+    fetchBondStats,
 
-    fetchUserLpTokenAllocInFarm,
-    withdraw,
+    fetchUserLpTokenAllocInBond,
+    mint,
     deposit,
     pendingSoul,
     userInfo,
-    getFeePercent,
-  } = useSoulSummoner(pid, lpToken, farm.token1Address, farm.token2Address)
+  } = useSoulBond(pid, lpToken, bond.token1Address, bond.token2Address)
   const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
 
   const [showing, setShowing] = useState(false)
 
   const [approved, setApproved] = useState(false)
 
-  const [feePercent, setFeePercent] = useState(0)
-  const [feeAmount, setFeeAmount] = useState(0)
   const [receiving, setReceiving] = useState(0)
 
   const [stakedBal, setStakedBal] = useState(0)
   const [unstakedBal, setUnstakedBal] = useState(0)
   const [pending, setPending] = useState(0)
+  const [pendingValue, setPendingValue] = useState(0)
 
   // const [earningPerDay, setEarningPerDay] = useState();
-  const [percOfFarm, setPercOfFarm] = useState()
-  const [poolRate, setPoolRate] = useState()
+  // const [percOfBond, setPercOfBond] = useState()
+  // const [poolRate, setPoolRate] = useState()
 
-  const [yearlySoulRewards, setYearlySoulRewards] = useState()
+  // const [yearlySoulRewards, setYearlySoulRewards] = useState()
   const [apr, setApr] = useState()
   const [liquidity, setLiquidity] = useState()
 
@@ -104,9 +98,9 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    */
   useEffect(() => {
     getAprAndLiquidity()
-    getYearlyPoolRewards()
+    // getYearlyPoolRewards()
     fetchPending()
-    fetchUserFarmAlloc()
+    // fetchUserBondAlloc()
   }, [account])
 
   /**
@@ -117,7 +111,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   //     const timer = setTimeout(() => {
   //       fetchPending()
   //       // getAprAndLiquidity()
-  //       fetchUserFarmAlloc()
+  //       fetchUserBondAlloc()
 
   //       if (showing) {
   //         fetchBals()
@@ -137,84 +131,17 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     if (!showing) {
       fetchBals()
       fetchApproval()
-      fetchFeePercent()
     }
-  }
-
-  const fetchFeePercent = async () => {
-    const percent = await getFeePercent(pid)
-    const result = await userInfo(pid, account)
-    const staked = await result[0]
-
-    // set to 14 when no staked, otherwise uses percent
-    staked > 0 ? await setFeePercent(percent / 10 ** 18) : await setFeePercent(14)
-  }
-
-  const getWithdrawable = async () => {
-    const rawAmount = document.getElementById('unstake').value
-
-    if (rawAmount !== 0 && rawAmount !== undefined && rawAmount !== '' && rawAmount !== null) {
-      const amount = document.getElementById('unstake').value
-
-      const feePerc = feePercent / 100
-
-      const fee = amount * feePerc
-      const receive = amount - fee
-
-      // fee !== 0
-      //   ? 
-        setFeeAmount(
-            Number(fee)
-              .toFixed(2)
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-          )
-        // : setFeeAmount(0)
-      // receive !== 0
-        // ? 
-        setReceiving(
-            Number(receive)
-              .toFixed(2)
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-          )
-        // : setReceiving(0)
-    // } else {
-    //   setFeeAmount(0)
-    //   setReceiving(0)
-    }
-  }
-
-  /**
-   * Checks the user's alloc of the total staked in the farm
-   */
-  const fetchUserFarmAlloc = async () => {
-    const ownership = await fetchUserLpTokenAllocInFarm(pid, account)
-    const userStakedPercOfSummoner = Number(ownership?.[4])
-    if (userStakedPercOfSummoner) setPercOfFarm(Number(userStakedPercOfSummoner).toFixed(2))
-    else setPercOfFarm(0)
-  }
-
-  const getYearlyPoolRewards = async () => {
-    const pidSoulPerYear = await fetchYearlyRewards(pid)
-    const dailyRewards = pidSoulPerYear / 10 ** 18 / 365
-
-    setYearlySoulRewards(
-      Number(dailyRewards)
-        .toFixed(0)
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-    )
   }
 
   /**
    * Checks the amount of lpTokens the SoulSummoner contract holds
-   * farm <Object> : the farm object
-   * lpToken : the farm lpToken address
+   * bond <Object> : the bond object
+   * lpToken : the bond lpToken address
    */
   const getAprAndLiquidity = async () => {
     try {
-      const result = await fetchFarmStats(pid, farm.token1, farm.token2)
+      const result = await fetchBondStats(pid, bond.token1, bond.token2)
       const tvl = result[0]
       const apr = result[1]
 
@@ -225,7 +152,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
       )
 
-      // console.log("apr", farmApr);
+      // console.log("apr", bondApr);
       setApr(
         Number(apr)
           .toFixed(0)
@@ -295,9 +222,12 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       // alert('connect wallet')
     } else {
       try {
-        const pending = await pendingSoul(pid, account)
-        const formatted = ethers.utils.formatUnits(pending.toString())
+        const pendingResult = await pendingSoul(pid, account)
+        const formatted = ethers.utils.formatUnits(pendingResult?.[0].toString())
         setPending(Number(formatted).toFixed(2).toString())
+
+        const value = pending * pendingResult?.[1]
+        setPendingValue(Number(value).toFixed(2).toString())
       } catch (err) {
         console.warn(err)
       }
@@ -312,7 +242,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       alert('Connect Wallet')
     } else {
       // Checks if SoulSummoner can move tokens
-      const amount = await erc20Allowance(account, SoulSummonerAddress)
+      const amount = await erc20Allowance(account, SoulBondAddress)
       if (amount > 0) setApproved(true)
       return amount
     }
@@ -326,7 +256,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       alert('Connect Wallet')
     } else {
       try {
-        const tx = await erc20Approve(SoulSummonerAddress)
+        const tx = await erc20Approve(SoulBondAddress)
         await tx?.wait().then(await fetchApproval())
       } catch (e) {
         // alert(e.message)
@@ -336,13 +266,28 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     }
   }
 
+  // /**
+  //  * Harvests rewards from SoulSummoner bond
+  //  */
+  // const handleHarvest = async () => {
+  //   try {
+  //     const tx = await deposit(pid, 0)
+  //     await tx?.wait().then(await fetchPending(pid))
+  //   } catch (e) {
+  //     // alert(e.message)
+  //     console.log(e)
+  //   }
+  // }
+
   /**
-   * Harvests rewards from SoulSummoner farm
+   * Mints SOUL Bond
    */
-  const handleHarvest = async () => {
+  const handleMint = async () => {
     try {
-      const tx = await deposit(pid, 0)
-      await tx?.wait().then(await fetchPending(pid))
+      // console.log('minting', amount.toString())
+      const tx = await mint(pid)
+      // await tx.wait()
+      // await fetchBals(pid)
     } catch (e) {
       // alert(e.message)
       console.log(e)
@@ -350,24 +295,9 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   }
 
   /**
-   * Withdraws staked lpTokens from SoulSummoner farm
+   * Deposits/stakes lpTokens into bond
    */
-  const handleWithdraw = async (amount) => {
-    try {
-      // console.log('withdrawing', amount.toString())
-      const tx = await withdraw(pid, amount)
-      await tx.wait()
-      await fetchBals(pid)
-    } catch (e) {
-      // alert(e.message)
-      console.log(e)
-    }
-  }
-
-  /**
-   * Deposits/stakes lpTokens into SoulSummoner farm
-   */
-  const handleDeposit = async (amount) => {
+   const handleDeposit = async (amount) => {
     try {
       // console.log('depositing', amount.toString())
       const tx = await deposit(pid, amount)
@@ -382,9 +312,9 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   return (
     <>
       <Wrap padding="0" display="flex" justifyContent="center">
-        <FarmContainer>
+        <BondContainer>
           <Row onClick={() => handleShow()}>
-            <FarmContentWrapper>
+            <BondContentWrapper>
               <TokenPairBox>
                 {/* 2 token logo combined ? */}
                 <Wrap>
@@ -395,12 +325,12 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     fontSize="1.2rem"
                     target="_blank"
                     color="#F36FFE" // neon purple
-                    href={`https://exchange.soulswap.finance/add/${farm.token1Address[250]}/${farm.token2Address[250]}`}
+                    href={`https://exchange.soulswap.finance/add/${bond.token1Address[250]}/${bond.token2Address[250]}`}
                   >
                     <TokenLogo
                       src={
                         'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
-                        farm.token1Address[250] +
+                        bond.token1Address[250] +
                         '/logo.png'
                       }
                       alt="LOGO"
@@ -412,7 +342,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     <TokenLogo
                       src={
                         'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
-                        farm.token2Address[250] +
+                        bond.token2Address[250] +
                         '/logo.png'
                       }
                       alt="LOGO"
@@ -428,11 +358,11 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 </Wrap>
               </TokenPairBox>
 
-              <FarmItemBox>
-                <FarmItem>{apr ? (apr === 'Infinity' ? '∞%' : apr + '%') : '?'}</FarmItem>
-              </FarmItemBox>
+              <BondItemBox>
+                <BondItem>{apr ? (apr === 'Infinity' ? '∞%' : apr + '%') : '?'}</BondItem>
+              </BondItemBox>
 
-              <FarmItemBox desktopOnly={true}>
+              <BondItemBox desktopOnly={true}>
                 {pending === '0.00' ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
                     0
@@ -442,9 +372,9 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     {pending}
                   </Text>
                 )}
-              </FarmItemBox>
+              </BondItemBox>
 
-              <HideOnMobile desktopOnly={true}>
+              {/* <HideOnMobile desktopOnly={true}>
                 {yearlySoulRewards === 0 ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
                     {yearlySoulRewards}
@@ -454,19 +384,19 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     {yearlySoulRewards}
                   </Text>
                 )}
-              </HideOnMobile>
+              </HideOnMobile> */}
 
-              <HideOnMobile desktopOnly={true}>
-                {percOfFarm === 0 ? (
+              {/* <HideOnMobile desktopOnly={true}>
+                {percOfBond === 0 ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
-                    {percOfFarm}%
+                    {percOfBond}%
                   </Text>
                 ) : (
                   <Text padding="0" fontSize="1.5rem" color="#F36FFE">
-                    {percOfFarm}%
+                    {percOfBond}%
                   </Text>
                 )}
-              </HideOnMobile>
+              </HideOnMobile> */}
 
               <HideOnMobile>
                 {liquidity === '0' ? (
@@ -480,82 +410,62 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 )}
               </HideOnMobile>
 
-              {/* <FarmItemBox>
+              {/* <BondItemBox>
                 <ShowBtn onClick={() => handleShow()}>{showing ? `HIDE` : `SHOW`}</ShowBtn>
-              </FarmItemBox> */}
-            </FarmContentWrapper>
+              </BondItemBox> */}
+            </BondContentWrapper>
           </Row>
-        </FarmContainer>
+        </BondContainer>
       </Wrap>
 
       {showing ? (
         <Wrap padding="0" display="flex" justifyContent="center">
           <DetailsContainer>
             <DetailsWrapper>
-              <FunctionBox>
-                {/* <button >Max</button> */}
-                <Wrap padding="0" display="flex" justifyContent="space-between">
-                  <Text padding="0" fontSize=".9rem" color="#bbb">
-                    Available: &nbsp;
-                    {Number(unstakedBal) === 0
-                      ? '0.000'
-                      : unstakedBal < 0.001
-                      ? '<0.001'
-                      : Number(unstakedBal)
-                          .toFixed(3)
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                  </Text>
-                  <ClickableText
-                    padding="0"
-                    fontSize=".9rem"
-                    color="#aaa"
-                    onClick={() => (document.getElementById('stake').value = unstakedBal)}
-                  >
-                    MAX
-                  </ClickableText>
-                </Wrap>
-                <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
-                <Wrap padding="0" margin="0" display="flex">
-                  {approved ? (
-                    <SubmitButton
-                      height="2.5rem"
-                      onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
+              {stakedBal == 0 ? (
+                <FunctionBox>
+                  {/* <button >Max</button> */}
+                  <Wrap padding="0" display="flex" justifyContent="space-between">
+                    <Text padding="0" fontSize=".9rem" color="#bbb">
+                      Available: &nbsp;
+                      {Number(unstakedBal) === 0
+                        ? '0.000'
+                        : Number(unstakedBal) < 0.001
+                        ? '<0.001'
+                        : Number(unstakedBal)
+                            .toFixed(3)
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </Text>
+                    <ClickableText
+                      padding="0"
+                      fontSize=".9rem"
+                      color="#aaa"
+                      onClick={() => (document.getElementById('stake').value = unstakedBal)}
                     >
-                      Stake
-                    </SubmitButton>
-                  ) : (
-                    <SubmitButton height="2.5rem" onClick={() => handleApprove()}>
-                      Approve Stake
-                    </SubmitButton>
-                  )}
-                </Wrap>
-
-                {/* {feePercent !== 0 ? (
-                  <Text fontSize=".9rem" padding="0" color="#F36FFE">
-                    Withdraw Fee: {feePercent}% LP, less 1% daily to 0%.
-                  </Text>
-                ) : (
-                  <Text fontSize=".9rem" padding="0" color="#F36FFE">
-                    Withdraw Fee: {feePercent}%
-                  </Text>
-                )} */}
-              </FunctionBox>
-
+                      MAX
+                    </ClickableText>
+                  </Wrap>
+                  <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
+                  <Wrap padding="0" margin="0" display="flex">
+                    {approved ? (
+                      <SubmitButton
+                        height="2.5rem"
+                        onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
+                      >
+                        BOND LP
+                      </SubmitButton>
+                    ) : (
+                      <SubmitButton height="2.5rem" onClick={() => handleApprove()}>
+                        APPROVE LP
+                      </SubmitButton>
+                    )}
+                  </Wrap>
+                </FunctionBox>
+              ):(
               <FunctionBox>
-                <FlexText>
-                  <Text padding="0" fontSize=".9rem" color="#bbb">
-                    Staked: &nbsp;
-                    {Number(stakedBal) === 0
-                      ? '0.000'
-                      : stakedBal < 0.001
-                      ? '<0.001'
-                      : Number(stakedBal)
-                          .toFixed(3)
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                  </Text>
-                  <ClickableText
+                {/* <FlexText> */}
+                {/* <ClickableText
                     padding="0"
                     fontSize=".9rem"
                     color="#aaa"
@@ -574,45 +484,63 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                   placeholder="0.0"
                   min="0"
                   onChange={() => getWithdrawable()}
-                />
+                /> */}
 
+                <Text fontSize=".9rem" padding="0" color="#aaa">
+                  Bonded: {' '}
+                      {Number(stakedBal) === 0
+                        ? '0.000'
+                        : Number(stakedBal) < 0.001
+                        ? '<0.001'
+                        : Number(stakedBal)
+                            .toFixed(3)
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                      }
+                    {' LP'}
+                </Text>
                 <Wrap padding="0" margin="0" display="flex">
-                  <SubmitButton
-                    height="2.5rem"
-                    padding="0"
-                    margin=".5rem .6rem .5rem 0"
-                    onClick={() => handleHarvest()}
-                  >
-                    Harvest
-                  </SubmitButton>
                   <SubmitButton
                     height="2.5rem"
                     primaryColour="#bbb"
                     color="black"
-                    margin=".5rem 0 .5rem .6rem"
-                    onClick={() => handleWithdraw(ethers.utils.parseUnits(document.getElementById('unstake').value))}
+                    margin=".5rem 0 .5rem 0"
+                    onClick={() =>
+                      handleMint()
+                    }
                   >
-                    Unstake
+                    MINT SOUL (${pendingValue})
                   </SubmitButton>
                 </Wrap>
 
-                {/* <Wrap padding="0">
-                  <Wrap padding="0" display="flex">
-                    <Text fontSize=".9rem" padding="0" color="#aaa">
-                      Fee Amount ({feePercent}%): {feeAmount} LP
+                <Wrap padding="0">
+                  <Wrap padding="0" display="flex" justifyContent="center">
+                    <Text fontSize=".9rem" padding="0" color="#F36FFE">
+                      Exchange deposited LP for earned SOUL.
                     </Text>
-                    <Text fontSize=".9rem" padding="0 0 0 6rem" color="#aaa">
-                      Receiving {receiving} LP
-                    </Text>
+
+                    {/* {isBondMode !== 0 ? (
+                  <Text fontSize=".9rem" padding="0" color="#F36FFE">
+                    Minting sends your LP in exchange for SOUL. 
+                  </Text>
+                ) : (
+                  <Text fontSize=".9rem" padding="0" color="#F36FFE">
+                    Minting sends LP in exchange for SOUL. 
+                  </Text>
+                )} */}
+                    {/* <Text fontSize=".9rem" textAlign="center" color="#aaa">
+                      Receiving {pending} SOUL
+                    </Text> */}
                   </Wrap>
-                </Wrap> */}
+                </Wrap>
               </FunctionBox>
+              )}
             </DetailsWrapper>
-          </DetailsContainer>
-        </Wrap>
+            </DetailsContainer>
+            </Wrap>
       ) : null}
     </>
   )
 }
 
-export default FarmRowRender
+export default BondRowRender

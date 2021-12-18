@@ -22,7 +22,7 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx", "src/pages/farm/index.jsx"],
+    "**/*.tsx", "src/pages/farm/index.jsx", "src/features/bond/BondRowRender.jsx"],
   "exclude": [
     "node_modules"
   ]
