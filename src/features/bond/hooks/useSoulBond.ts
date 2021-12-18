@@ -293,7 +293,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
       console.log('userInfoResult:', result)
       const amount = result?.[0].toString()
       const rewardDebt = result?.[1].toString()
-      console.log(amount, 'lp depoed')
+      console.log(amount, 'lp deposited')
       return [amount, rewardDebt]
     } catch (e) {
       console.log(e)

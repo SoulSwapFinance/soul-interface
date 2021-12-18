@@ -418,7 +418,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
         <Wrap padding="0" display="flex" justifyContent="center">
           <DetailsContainer>
             <DetailsWrapper>
-              {stakedBal === 0 ? (
+              {stakedBal == 0 ? (
                 <FunctionBox>
                   {/* <button >Max</button> */}
                   <Wrap padding="0" display="flex" justifyContent="space-between">
@@ -458,10 +458,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     )}
                   </Wrap>
                 </FunctionBox>
-              ) : (
-                <></>
-              )}
-
+              ):(
               <FunctionBox>
                 {/* <FlexText> */}
                 {/* <ClickableText
@@ -500,10 +497,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     color="black"
                     margin=".5rem 0 .5rem 0"
                     onClick={() =>
-                      handleMint(
-                        // TODO: handleMint
-                        ethers.utils.parseUnits(document.getElementById('unstake').value)
-                      )
+                      handleMint()
                     }
                   >
                     MINT SOUL
@@ -531,9 +525,10 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   </Wrap>
                 </Wrap>
               </FunctionBox>
+              )}
             </DetailsWrapper>
-          </DetailsContainer>
-        </Wrap>
+            </DetailsContainer>
+            </Wrap>
       ) : null}
     </>
   )
