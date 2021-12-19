@@ -73,10 +73,13 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
     }
   }
 
-  const fetchStakedValue = async () => {
+  const fetchStakedValue = async (pid, address) => {
     try {
-      const result = await priceHelperContract?.currentFtmPriceInUsdc()
-      return result
+      const usdcValue = await priceHelperContract?.usdcValue([pid, address])
+      // [1] get ttl supply of lp token = usdcPrice per LP
+      // [2] multiply usdcPrice per LP [1] by stakedAmount
+      const stakedValue = usdcValue 
+      return stakedValue
     } catch (e) {
       console.log(e)
       return e
