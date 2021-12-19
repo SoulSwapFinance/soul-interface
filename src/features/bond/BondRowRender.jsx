@@ -81,7 +81,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const [receiving, setReceiving] = useState(0)
 
   const [stakedBal, setStakedBal] = useState(0)
-  const [stakedValue, setStakedValue] = useState(0)
+  // const [stakedValue, setStakedValue] = useState(0)
 
   const [unstakedBal, setUnstakedBal] = useState(0)
 
@@ -95,6 +95,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   // const [yearlySoulRewards, setYearlySoulRewards] = useState()
   const [apr, setApr] = useState()
   const [liquidity, setLiquidity] = useState()
+  const [stakedValue, setLiquidityShare] = useState()
 
   /**
    * Runs only on initial render/mount
@@ -157,6 +158,16 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
       )
 
+      const result1 = await userInfo(pid, account)
+      const staked = ethers.utils.formatUnits(result1?.[0])
+
+      setLiquidityShare(
+        Number(staked)
+          .toFixed(0)
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      )
+
       // console.log("apr", bondApr);
       setApr(
         Number(apr)
@@ -181,9 +192,9 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
         const staked = ethers.utils.formatUnits(result1?.[0])
         setStakedBal(staked.toString())
         
-        const lpPrice = await lpPrice(pid)
-        const stakedValue = staked * lpPrice
-        setStakedValue(stakedValue.toString())
+        const tvlShare = tvl
+        const stakedValue = staked * tvlShare
+        setStakedValue(stakedValue * tvlShare).toString()
 
         const result2 = await erc20BalanceOf(account)
         const unstaked = ethers.utils.formatUnits(result2)
@@ -260,6 +271,26 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
       }
     }
   }
+
+  // /**
+  //  * Fetches connected user pending soul
+  //  */
+  // const fetchStakedValue = async () => {
+  //   if (!account) {
+  //     // alert('connect wallet')
+  //   } else {
+  //     try {
+  //       const pendingResult = await pendingSoul(pid, account)
+  //       const formatted = ethers.utils.formatUnits(pendingResult?.[0].toString())
+  //       setPending(Number(formatted).toFixed(2).toString())
+
+  //       const pendingValue = pending * pendingResult?.[1]
+  //       setStakedValue(Number(pendingValue).toFixed(2).toString())
+  //     } catch (err) {
+  //       console.warn(err)
+  //     }
+  //   }
+  // }
 
   /**
    * Checks if the user has approved SoulSummoner to move lpTokens
@@ -525,7 +556,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                       }
                     {' LP'} 
-                    {/* (${stakedValue}) */}
+                    (${(stakedValue)})
                 </Text>
                 <Wrap padding="0" margin="0" display="flex">
                   <SubmitButton
