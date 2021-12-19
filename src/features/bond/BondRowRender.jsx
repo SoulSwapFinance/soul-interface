@@ -556,7 +556,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                       }
                     {' LP'} 
-                    (${(stakedValue)})
+                    {/* (${(stakedValue)}) */}
                 </Text>
                 <Wrap padding="0" margin="0" display="flex">
                   <SubmitButton
