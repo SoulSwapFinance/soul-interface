@@ -32,6 +32,86 @@ export const WithdrawPids = [
     token1Address: tokens.DAI,
     token2Address: tokens.gFUSDT,
   },
+  {
+    // 0
+    pid: 30,
+    token1: 'SEANCE',
+    token2: 'SPIRIT',
+    lpSymbol: 'SEANCE-SPIRIT',
+    lpAddresses: {
+      4002: '',
+      250: '0xE3c700551c0D96202934969Ad219B8693a723d59',
+    },
+    token1Address: tokens.SEANCE,
+    token2Address: tokens.SPIRIT,
+  },
+
+  {
+    // 0
+    pid: 31,
+    token1: 'SEANCE',
+    token2: 'BOO',
+    lpSymbol: 'SEANCE-BOO',
+    lpAddresses: {
+      4002: '',
+      250: '0x26a30b02A8DFb3f573E3F881D04258461Cae47Db',
+    },
+    token1Address: tokens.SEANCE,
+    token2Address: tokens.BOO,
+  },
+  {
+    // 0
+    pid: 32,
+    token1: 'SEANCE',
+    token2: 'ZOO',
+    lpSymbol: 'SEANCE-ZOO',
+    lpAddresses: {
+      4002: '',
+      250: '0xa2cFc18F3A41E158DA173be0e4785F017Ff92a6e',
+    },
+    token1Address: tokens.SEANCE,
+    token2Address: tokens.ZOO,
+  },
+  
+  {
+    // 0
+    pid: 33,
+    token1: 'SEANCE',
+    token2: 'TOMB',
+    lpSymbol: 'SEANCE-TOMB',
+    lpAddresses: {
+      4002: '',
+      250: '0x75aE2E7B4f3a4b5F9048AD6966f6e975e510aD03',
+    },
+    token1Address: tokens.SEANCE,
+    token2Address: tokens.TOMB,
+  },
+  {
+    // 0
+    pid: 34,
+    token1: 'SEANCE',
+    token2: 'ICE',
+    lpSymbol: 'SEANCE-ICE',
+    lpAddresses: {
+      4002: '',
+      250: '0xc0fEd4A6EDef23da7fF766D24F17Ecf454C16D25',
+    },
+    token1Address: tokens.SEANCE,
+    token2Address: tokens.ICE,
+  },
+  {
+    // 0
+    pid: 35,
+    token1: 'SEANCE',
+    token2: 'SPELL',
+    lpSymbol: 'SEANCE-SPELL',
+    lpAddresses: {
+      4002: '',
+      250: '0x63A1b4E3f210db7f1d4Ae7d29Bc0BC7F611e713a',
+    },
+    token1Address: tokens.SEANCE,
+    token2Address: tokens.SPELL,
+  },
 ]
 
 export const AllPids = [
@@ -980,89 +1060,7 @@ export const SeancePids = [
     },
     token1Address: tokens.SEANCE,
     token2Address: tokens.UNIDX,
-  },
-
-  {
-    // 200
-    pid: 30,
-    token1: 'SEANCE',
-    token2: 'SPIRIT',
-    lpSymbol: 'SEANCE-SPIRIT',
-    lpAddresses: {
-      4002: '',
-      250: '0xE3c700551c0D96202934969Ad219B8693a723d59',
-    },
-    token1Address: tokens.SEANCE,
-    token2Address: tokens.SPIRIT,
-  },
-
-  {
-    // 200
-    pid: 31,
-    token1: 'SEANCE',
-    token2: 'BOO',
-    lpSymbol: 'SEANCE-BOO',
-    lpAddresses: {
-      4002: '',
-      250: '0x26a30b02A8DFb3f573E3F881D04258461Cae47Db',
-    },
-    token1Address: tokens.SEANCE,
-    token2Address: tokens.BOO,
-  },
-  {
-    // 200
-    pid: 32,
-    token1: 'SEANCE',
-    token2: 'ZOO',
-    lpSymbol: 'SEANCE-ZOO',
-    lpAddresses: {
-      4002: '',
-      250: '0xa2cFc18F3A41E158DA173be0e4785F017Ff92a6e',
-    },
-    token1Address: tokens.SEANCE,
-    token2Address: tokens.ZOO,
-  },
-  
-  {
-    // 200
-    pid: 33,
-    token1: 'SEANCE',
-    token2: 'TOMB',
-    lpSymbol: 'SEANCE-TOMB',
-    lpAddresses: {
-      4002: '',
-      250: '0x75aE2E7B4f3a4b5F9048AD6966f6e975e510aD03',
-    },
-    token1Address: tokens.SEANCE,
-    token2Address: tokens.TOMB,
-  },
-  {
-    // 200
-    pid: 34,
-    token1: 'SEANCE',
-    token2: 'ICE',
-    lpSymbol: 'SEANCE-ICE',
-    lpAddresses: {
-      4002: '',
-      250: '0xc0fEd4A6EDef23da7fF766D24F17Ecf454C16D25',
-    },
-    token1Address: tokens.SEANCE,
-    token2Address: tokens.ICE,
-  },
-  {
-    // 200
-    pid: 35,
-    token1: 'SEANCE',
-    token2: 'SPELL',
-    lpSymbol: 'SEANCE-SPELL',
-    lpAddresses: {
-      4002: '',
-      250: '0x63A1b4E3f210db7f1d4Ae7d29Bc0BC7F611e713a',
-    },
-    token1Address: tokens.SEANCE,
-    token2Address: tokens.SPELL,
-  },
-  
+  },  
   {
     // 400
     pid: 7,
