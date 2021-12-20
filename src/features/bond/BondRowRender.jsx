@@ -63,10 +63,10 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
     // totalPendingRewards,
     // fetchStakedBals,
     // fetchTokenRateBals,
-    fetchYearlyRewards,
+    // fetchYearlyRewards,
+    // fetchUserLpTokenAllocInBond,
     fetchBondStats,
-
-    fetchUserLpTokenAllocInBond,
+    usdcPrice,
     mint,
     deposit,
     pendingSoul,
@@ -82,6 +82,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
 
   const [stakedBal, setStakedBal] = useState(0)
   const [unstakedBal, setUnstakedBal] = useState(0)
+  const [stakedValue, setStakedValue] = useState(0)
   const [pending, setPending] = useState(0)
 
   const [pendingValue, setPendingValue] = useState(0)
@@ -94,7 +95,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   // const [yearlySoulRewards, setYearlySoulRewards] = useState()
   const [apr, setApr] = useState()
   const [liquidity, setLiquidity] = useState()
-  const [stakedValue, setLiquidityShare] = useState()
+  // const [stakedValue, setLiquidityShare] = useState()
 
   /**
    * Runs only on initial render/mount
@@ -157,15 +158,15 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
       )
 
-      const result1 = await userInfo(pid, account)
-      const staked = ethers.utils.formatUnits(result1?.[0])
+      // const result1 = await userInfo(pid, account)
+      // const staked = ethers.utils.formatUnits(result1?.[0])
 
-      setLiquidityShare(
-        Number(staked)
-          .toFixed(0)
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-      )
+      // setLiquidityShare(
+      //   Number(staked)
+      //     .toFixed(0)
+      //     .toString()
+      //     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      // )
 
       // console.log("apr", bondApr);
       setApr(
@@ -195,6 +196,10 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
         const unstaked = ethers.utils.formatUnits(result2)
         setUnstakedBal(unstaked.toString())
         
+        const result3 = await usdcPrice(pid, lpToken)
+        const stakedValue = ethers.utils.formatUnits(result3)
+        setStakedValue(stakedValue.toString())
+        
         // const tvlShare = tvl
         // const stakedValue = staked * tvlShare
         // const aValue = stakedValue * tvlShare
@@ -206,7 +211,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
         // availableValue = * by its token value then * 2
         // ...
         
-        return [staked, unstaked]
+        return [staked, unstaked, stakedValue]
       } catch (err) {
         console.warn(err)
       }
@@ -277,26 +282,6 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
       }
     }
   }
-
-  // /**
-  //  * Fetches connected user pending soul
-  //  */
-  // const fetchStakedValue = async () => {
-  //   if (!account) {
-  //     // alert('connect wallet')
-  //   } else {
-  //     try {
-  //       const pendingResult = await pendingSoul(pid, account)
-  //       const formatted = ethers.utils.formatUnits(pendingResult?.[0].toString())
-  //       setPending(Number(formatted).toFixed(2).toString())
-
-  //       const pendingValue = pending * pendingResult?.[1]
-  //       setStakedValue(Number(pendingValue).toFixed(2).toString())
-  //     } catch (err) {
-  //       console.warn(err)
-  //     }
-  //   }
-  // }
 
   /**
    * Checks if the user has approved SoulSummoner to move lpTokens
@@ -563,7 +548,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                       }
                     &nbsp; LP
-                    {/* (${(stakedValue)}) */}
+                    (${(stakedValue)})
                 </Text>
                 <Wrap padding="0" margin="0" display="flex">
                   <SubmitButton

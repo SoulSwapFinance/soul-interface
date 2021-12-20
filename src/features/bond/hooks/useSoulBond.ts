@@ -432,6 +432,17 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
     }
   }
 
+  // price per LP
+  const usdcPrice = async (pid, address) => {
+    try {
+      const price = await priceHelperContract?.usdcPrice(pid, address)
+      return price
+    } catch (e) {
+      console.log(e)
+      return e
+    }
+  }
+
   // total allocation point (net amount of all pools combined)
   const totalAllocPoint = async () => {
     try {
@@ -659,6 +670,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
     pendingSoul,
     soulPerSecond,
     totalAllocPoint,
+    usdcPrice,
 
     fetchUserLpTokenAlloc,
     fetchUserLpTokenAllocInBond,
