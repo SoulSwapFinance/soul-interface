@@ -385,6 +385,30 @@
     {
         "inputs": [
             {
+                "internalType": "uint256",
+                "name": "pid",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "lpAddress",
+                "type": "address"
+            }
+        ],
+        "name": "usdcPrice",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "dollarValue",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "address[]",
                 "name": "_tokens",
                 "type": "address[]"
