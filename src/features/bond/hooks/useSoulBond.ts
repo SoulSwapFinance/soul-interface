@@ -128,22 +128,31 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   }
 
   /**
-   * @returns Value of `lpAmount` 
+   * Fetches the LP value of a user
+   * 
+   * [0] : summonerLpTokens
+   * [1] : lpTokenSupply
+   * [2] : pidAlloc
+   * [3] : totalAlloc
+   * [4] : soulPerYear
+   * [5] : tvl (token balance)
    */
-   const fetchLpValue = async (token1Name, token2Name, lpAmount) => {
+   const fetchUserLpValue = async (pid, token1Name, token2Name, lpAmount) => {
     try {
       const rates = await fetchTokenRateBals()
       const ftmPrice = rates?.[0]
       const soulPrice = rates?.[1]
       const seancePrice = rates?.[2]
-      const enchantPrice = rates?.[3]
-      const ethPrice = rates?.[4]
+      const ethPrice = rates?.[3]
 
-      // console.log(token1Name, '/', token2Name, '- result', result)
+      const result = await helperContract?.fetchPidDetails(pid)
 
-      const rawLpValue = lpAmount / (10 ** 18) // i.e. 0.1 * 100,000 = 10,000
+      // ------ TVL ------
 
-      let lpValue = rawLpValue;
+      const userPercOfSupply = lpAmount / result?.[1] // i.e, 10 / 100 = 0.1
+      const rawPidValue = (userPercOfSupply * result?.[5]) / 10 ** 18 // i.e. 0.1 * 100,000 = 10,000
+
+      let lpValue = rawPidValue
 
       if (
         token1Name === 'USDC' ||
@@ -154,23 +163,20 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
         token2Name === 'gFUSDT'
       ) {
         if (token1Name !== 'DAI') {
-          lpValue = rawLpValue / 10 ** 6
-        } 
+          lpValue = (userPercOfSupply * result?.[5]) / 10 ** 6
+        } else {}
       } else if (token1Name === 'FUSD' || token2Name === 'FUSD' || token1Name === 'DAI' || token2Name === 'DAI') {
       } else if (token1Name === 'FTM' || token2Name === 'FTM') {
-        lpValue = rawLpValue * ftmPrice
+        lpValue = rawPidValue * ftmPrice
       } else if (token1Name === 'SOUL' || token2Name === 'SOUL') {
-        lpValue = rawLpValue * soulPrice
+        lpValue = rawPidValue * soulPrice
       } else if (token1Name === 'SEANCE' || token2Name === 'SEANCE') {
-        lpValue = rawLpValue * seancePrice
-      } else if (token1Name === 'ENCHANT' || token2Name === 'ENCHANT') {
-        lpValue = rawLpValue * enchantPrice
+        lpValue = rawPidValue * seancePrice
       } else if (token1Name === 'WETH' || token2Name === 'WETH') {
-        lpValue = rawLpValue * ethPrice
+        lpValue = rawPidValue * ethPrice
       }
-      
-      console.log(`${token1Name}-${token2Name} value: ${lpValue}, amount: ${lpAmount}`)
-      return lpValue;
+
+      return lpValue
     } catch (e) {
       console.log(e)
       return e
@@ -714,7 +720,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
     
     // value fetcher
     fetchTokenRateBals,
-    fetchLpValue,
+    fetchUserLpValue,
 
     deposit,
     mint,

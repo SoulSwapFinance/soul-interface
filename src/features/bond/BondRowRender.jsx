@@ -8,7 +8,6 @@ import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
 import useSoulBond from './hooks/useSoulBond'
 import useApprove from './hooks/useApprove'
-import useLpContract from './hooks/useLpContract'
 import { SoulBondAddress } from './constants'
 import {
   BondContainer,
@@ -72,10 +71,9 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
     deposit,
     pendingSoul,
     userInfo,
-    fetchLpValue,
+    fetchUserLpValue,
   } = useSoulBond(pid, lpToken, bond.token1Address, bond.token2Address)
   const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
-  const { lpBalValue } = useLpContract(lpToken, token1, token2, bond.token1Address[chainId], bond.token2Address[chainId])
 
   const [showing, setShowing] = useState(false)
 
@@ -145,6 +143,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
 
   /**
    * Checks the amount of lpTokens the SoulSummoner contract holds
+   * 
    * bond <Object> : the bond object
    * lpToken : the bond lpToken address
    */
@@ -154,30 +153,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
       const tvl = result[0]
       const apr = result[1]
 
-      setLiquidity(
-        Number(tvl)
-          .toFixed(0)
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-      )
-
-      // const result1 = await userInfo(pid, account)
-      // const staked = ethers.utils.formatUnits(result1?.[0])
-
-      // setLiquidityShare(
-      //   Number(staked)
-      //     .toFixed(0)
-      //     .toString()
-      //     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-      // )
-
-      // console.log("apr", bondApr);
-      setApr(
-        Number(apr)
-          .toFixed(0)
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-      )
+      setLiquidity(Number(tvl).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
+      setApr(Number(apr).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
     } catch (e) {
       console.warn(e)
     }
@@ -202,13 +179,13 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
         setUnstakedBal(unstaked.toString())
 
         // get value of available, unstaked lp
-        const aLpValue = await fetchLpValue(token1, token2, result2)
+        const aLpValue = await fetchUserLpValue(pid, token1, token2, result2)
         const f_aLpValue = Number(aLpValue).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') // format to 2 decimals + commas
         setAvailableValue(f_aLpValue)
 
         // get value of staked lp (bonded lp)
         // const sLpValue = await fetchLpValue(token1, token2, result1?.[0]); 
-        const sLpValue = await lpBalValue()
+        const sLpValue = await fetchUserLpValue(pid, token1, token2, result1?.[0])
         const f_sLpValue = Number(sLpValue).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') // format to 2 decimals + commas
         setStakedLpValue(f_sLpValue);
 
@@ -257,7 +234,6 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
         const pendingResult = await pendingSoul(pid, account)
         const formatted = ethers.utils.formatUnits(pendingResult?.[0].toString())
         setPending(Number(formatted).toFixed(2).toString())
-
       } catch (err) {
         console.warn(err)
       }
@@ -477,7 +453,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   {/* <button >Max</button> */}
                   <Wrap padding="0" display="flex" justifyContent="space-between">
                     <Text padding="0" fontSize=".9rem" color="#bbb">
-                      Available: &nbsp;
+                      Available:&nbsp;
                       {Number(unstakedBal) === 0
                         ? '0.000'
                         : Number(unstakedBal) < 0.001
@@ -486,7 +462,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                             .toFixed(3)
                             .toString()
                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                      &nbsp; LP &nbsp; {Number(availableValue) !== 0 ? `($${availableValue})` : ''}
+                      &nbsp;LP &nbsp; {Number(availableValue) !== 0 ? `($${availableValue})` : ''}
                     </Text>
                     <ClickableText
                       padding="0"
@@ -538,7 +514,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                 /> */}
 
                 <Text fontSize=".9rem" padding="0" color="#aaa">
-                  Bonded: {' '}
+                  Bonded:&nbsp;
                       {Number(stakedBal) === 0
                         ? '0.000'
                         : Number(stakedBal) < 0.001
@@ -548,7 +524,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                             .toString()
                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                       }
-                    &nbsp; LP &nbsp; {Number(stakedLpValue) !== 0 ? `($${stakedLpValue})` : ''}
+                    &nbsp;LP &nbsp;{Number(stakedLpValue) !== 0 ? `($${stakedLpValue})` : ''}
                 </Text>
                 <Wrap padding="0" margin="0" display="flex">
                   <SubmitButton
