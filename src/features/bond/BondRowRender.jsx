@@ -56,21 +56,22 @@ const TokenLogo = styled(Image)`
 `
 
 const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
-  const { account } = useActiveWeb3React() // chainId
+  const { account, chainId } = useActiveWeb3React() // chainId
 
   const {
     // helper contract
     // totalPendingRewards,
     // fetchStakedBals,
     // fetchTokenRateBals,
-    fetchYearlyRewards,
+    // fetchYearlyRewards,
+    // fetchUserLpTokenAllocInBond,
     fetchBondStats,
-
-    fetchUserLpTokenAllocInBond,
+    usdcPrice,
     mint,
     deposit,
     pendingSoul,
     userInfo,
+    fetchUserLpValue,
   } = useSoulBond(pid, lpToken, bond.token1Address, bond.token2Address)
   const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
 
@@ -83,9 +84,10 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const [stakedBal, setStakedBal] = useState(0)
   const [unstakedBal, setUnstakedBal] = useState(0)
   const [pending, setPending] = useState(0)
-
-  const [pendingValue, setPendingValue] = useState(0)
+  
   const [availableValue, setAvailableValue] = useState(0)
+  const [stakedLpValue, setStakedLpValue] = useState(0)
+  const [pendingValue, setPendingValue] = useState(0)
 
   // const [earningPerDay, setEarningPerDay] = useState();
   // const [percOfBond, setPercOfBond] = useState()
@@ -94,7 +96,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   // const [yearlySoulRewards, setYearlySoulRewards] = useState()
   const [apr, setApr] = useState()
   const [liquidity, setLiquidity] = useState()
-  const [stakedValue, setLiquidityShare] = useState()
+  // const [stakedValue, setLiquidityShare] = useState()
 
   /**
    * Runs only on initial render/mount
@@ -141,6 +143,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
 
   /**
    * Checks the amount of lpTokens the SoulSummoner contract holds
+   * 
    * bond <Object> : the bond object
    * lpToken : the bond lpToken address
    */
@@ -150,30 +153,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
       const tvl = result[0]
       const apr = result[1]
 
-      setLiquidity(
-        Number(tvl)
-          .toFixed(0)
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-      )
-
-      const result1 = await userInfo(pid, account)
-      const staked = ethers.utils.formatUnits(result1?.[0])
-
-      setLiquidityShare(
-        Number(staked)
-          .toFixed(0)
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-      )
-
-      // console.log("apr", bondApr);
-      setApr(
-        Number(apr)
-          .toFixed(0)
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-      )
+      setLiquidity(Number(tvl).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
+      setApr(Number(apr).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
     } catch (e) {
       console.warn(e)
     }
@@ -187,12 +168,14 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
       // alert('connect wallet')
     } else {
       try {
+        // get total lp tokens staked in contract for pid from user
         const result1 = await userInfo(pid, account)
         const staked = ethers.utils.formatUnits(result1?.[0])
         setStakedBal(staked.toString())
 
+        // get total lp tokens for pid from user bal
         const result2 = await erc20BalanceOf(account)
-        const unstaked = ethers.utils.formatUnits(result2)
+        const unstaked = ethers.utils.formatUnits(result2) 
         setUnstakedBal(unstaked.toString())
         
         // const tvlShare = tvl
@@ -203,9 +186,17 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
         // how many much of tokenA there is 
         // ...
 
-        // availableValue = * by its token value then * 2
-        // ...
-        
+        // get value of available, unstaked lp
+        const aLpValue = await fetchUserLpValue(pid, token1, token2, result2)
+        const f_aLpValue = Number(aLpValue).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') // format to 2 decimals + commas
+        setAvailableValue(f_aLpValue)
+
+        // get value of staked lp (bonded lp)
+        // const sLpValue = await fetchLpValue(token1, token2, result1?.[0]); 
+        const sLpValue = await fetchUserLpValue(pid, token1, token2, result1?.[0])
+        const f_sLpValue = Number(sLpValue).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') // format to 2 decimals + commas
+        setStakedLpValue(f_sLpValue);
+
         return [staked, unstaked]
       } catch (err) {
         console.warn(err)
@@ -251,7 +242,6 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
         const pendingResult = await pendingSoul(pid, account)
         const formatted = ethers.utils.formatUnits(pendingResult?.[0].toString())
         setPending(Number(formatted).toFixed(2).toString())
-
       } catch (err) {
         console.warn(err)
       }
@@ -277,26 +267,6 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
       }
     }
   }
-
-  // /**
-  //  * Fetches connected user pending soul
-  //  */
-  // const fetchStakedValue = async () => {
-  //   if (!account) {
-  //     // alert('connect wallet')
-  //   } else {
-  //     try {
-  //       const pendingResult = await pendingSoul(pid, account)
-  //       const formatted = ethers.utils.formatUnits(pendingResult?.[0].toString())
-  //       setPending(Number(formatted).toFixed(2).toString())
-
-  //       const pendingValue = pending * pendingResult?.[1]
-  //       setStakedValue(Number(pendingValue).toFixed(2).toString())
-  //     } catch (err) {
-  //       console.warn(err)
-  //     }
-  //   }
-  // }
 
   /**
    * Checks if the user has approved SoulSummoner to move lpTokens
@@ -491,7 +461,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   {/* <button >Max</button> */}
                   <Wrap padding="0" display="flex" justifyContent="space-between">
                     <Text padding="0" fontSize=".9rem" color="#bbb">
-                      Available: &nbsp;
+                      Available:&nbsp;
                       {Number(unstakedBal) === 0
                         ? '0.000'
                         : Number(unstakedBal) < 0.001
@@ -500,7 +470,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                             .toFixed(3)
                             .toString()
                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                      &nbsp; LP &nbsp; {Number(availableValue) !== 0 ? `($${availableValue})` : ''}
+                      &nbsp;LP &nbsp; {Number(availableValue) !== 0 ? `($${availableValue})` : ''}
                     </Text>
                     <ClickableText
                       padding="0"
@@ -552,7 +522,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                 /> */}
 
                 <Text fontSize=".9rem" padding="0" color="#aaa">
-                  Bonded: {' '}
+                  Bonded:&nbsp;
                       {Number(stakedBal) === 0
                         ? '0.000'
                         : Number(stakedBal) < 0.001
@@ -562,8 +532,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                             .toString()
                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                       }
-                    &nbsp; LP
-                    {/* (${(stakedValue)}) */}
+                    &nbsp;LP &nbsp;{Number(stakedLpValue) !== 0 ? `($${stakedLpValue})` : ''}
                 </Text>
                 <Wrap padding="0" margin="0" display="flex">
                   <SubmitButton

@@ -8,6 +8,7 @@ import {
   useHelperContract,
   usePriceHelperContract,
   useBondHelperContract,
+  // useSoulSummonerContract,
   useSoulBondContract,
   usePairContract,
   useTokenContract,
@@ -25,6 +26,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   const farmHelperContract = useHelperContract()
   const helperContract = useBondHelperContract()
   const priceHelperContract = usePriceHelperContract()
+  // const summonerContract = useSoulSummonerContract()
   const bondContract = useSoulBondContract()
   const lpTokenContract = usePairContract(lpToken)
   const token1Contract = useTokenContract(token1Address[chainId])
@@ -73,10 +75,13 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
     }
   }
 
-  const fetchStakedValue = async () => {
+  const fetchStakedValue = async (pid, address) => {
     try {
-      const result = await priceHelperContract?.currentFtmPriceInUsdc()
-      return result
+      const usdcValue = await priceHelperContract?.usdcValue([pid, address])
+      // [1] get ttl supply of lp token = usdcPrice per LP
+      // [2] multiply usdcPrice per LP [1] by stakedAmount
+      const stakedValue = usdcValue 
+      return stakedValue
     } catch (e) {
       console.log(e)
       return e
@@ -104,18 +109,74 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
       const seancePrice = (result?.[4] / result?.[5]) * ftmPrice
       const ethPrice = (result?.[8] / result?.[9]) * ftmPrice
 
-      console.log(
-        'usdcPerFtm:',
-        ftmPrice,
-        'soulPrice:',
-        soulPrice,
-        'seancePrice:',
-        seancePrice,
-        'ethPrice:',
-        ethPrice
-      )
+      // console.log(
+      //   'usdcPerFtm:',
+      //   ftmPrice,
+      //   'soulPrice:',
+      //   soulPrice,
+      //   'seancePrice:',
+      //   seancePrice,
+      //   'ethPrice:',
+      //   ethPrice
+      // )
 
       return [ftmPrice, soulPrice, seancePrice, ethPrice]
+    } catch (e) {
+      console.log(e)
+      return e
+    }
+  }
+
+  /**
+   * Fetches the LP value of a user
+   * 
+   * [0] : summonerLpTokens
+   * [1] : lpTokenSupply
+   * [2] : pidAlloc
+   * [3] : totalAlloc
+   * [4] : soulPerYear
+   * [5] : tvl (token balance)
+   */
+   const fetchUserLpValue = async (pid, token1Name, token2Name, lpAmount) => {
+    try {
+      const rates = await fetchTokenRateBals()
+      const ftmPrice = rates?.[0]
+      const soulPrice = rates?.[1]
+      const seancePrice = rates?.[2]
+      const ethPrice = rates?.[3]
+
+      const result = await helperContract?.fetchPidDetails(pid)
+
+      // ------ TVL ------
+
+      const userPercOfSupply = lpAmount / result?.[1] // i.e, 10 / 100 = 0.1
+      const rawPidValue = (userPercOfSupply * result?.[5]) / 10 ** 18 // i.e. 0.1 * 100,000 = 10,000
+
+      let lpValue = rawPidValue
+
+      if (
+        token1Name === 'USDC' ||
+        token2Name === 'USDC' ||
+        token1Name === 'fUSDT' ||
+        token2Name === 'fUSDT' ||
+        token1Name === 'gFUSDT' ||
+        token2Name === 'gFUSDT'
+      ) {
+        if (token1Name !== 'DAI') {
+          lpValue = (userPercOfSupply * result?.[5]) / 10 ** 6
+        } else {}
+      } else if (token1Name === 'FUSD' || token2Name === 'FUSD' || token1Name === 'DAI' || token2Name === 'DAI') {
+      } else if (token1Name === 'FTM' || token2Name === 'FTM') {
+        lpValue = rawPidValue * ftmPrice
+      } else if (token1Name === 'SOUL' || token2Name === 'SOUL') {
+        lpValue = rawPidValue * soulPrice
+      } else if (token1Name === 'SEANCE' || token2Name === 'SEANCE') {
+        lpValue = rawPidValue * seancePrice
+      } else if (token1Name === 'WETH' || token2Name === 'WETH') {
+        lpValue = rawPidValue * ethPrice
+      }
+
+      return lpValue
     } catch (e) {
       console.log(e)
       return e
@@ -330,7 +391,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
       const prices = await fetchTokenRateBals()
       const soulPrice = prices?.[1]
       const soulAmount = await bondContract?.pendingSoul(pid, user)
-      console.log('soulAmount', soulAmount, 'soulprice', soulPrice)
+      // console.log('soulAmount', soulAmount, 'soulprice', soulPrice)
       return [soulAmount, soulPrice]
     } catch (e) {
       console.log(e)
@@ -423,6 +484,17 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
     try {
       const sps = await bondContract?.soulPerSecond()
       return sps
+    } catch (e) {
+      console.log(e)
+      return e
+    }
+  }
+
+  // price per LP
+  const usdcPrice = async (pid, address) => {
+    try {
+      const price = await priceHelperContract?.usdcPrice(pid, address)
+      return price
     } catch (e) {
       console.log(e)
       return e
@@ -640,12 +712,15 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
     fetchYearlyRewards,
     fetchStakedBals,
     fetchStakedValue,
-    fetchTokenRateBals,
     fetchBondStats,
     fetchStakeStats,
-
+    
     fetchPid0LiquidityValue,
     fetchPid0AprAndLiquidity,
+    
+    // value fetcher
+    fetchTokenRateBals,
+    fetchUserLpValue,
 
     deposit,
     mint,
@@ -656,6 +731,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
     pendingSoul,
     soulPerSecond,
     totalAllocPoint,
+    usdcPrice,
 
     fetchUserLpTokenAlloc,
     fetchUserLpTokenAllocInBond,
