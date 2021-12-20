@@ -113,6 +113,57 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
     }
   }
 
+  // /**
+  //  * @returns Value of `lpAmount` 
+  //  */
+  // const fetchLpValue = async (pid, token1Name, token2Name, lpAmount) => {
+  //   try {
+  //     const rates = await fetchTokenRateBals()
+  //     const ftmPrice = rates?.[0]
+  //     const soulPrice = rates?.[1]
+  //     const seancePrice = rates?.[2]
+  //     const enchantPrice = rates?.[3]
+  //     const ethPrice = rates?.[4]
+
+  //     const result = await helperContract?.fetchPidDetails(pid)
+
+  //     // console.log(token1Name, '/', token2Name, '- result', result)
+
+  //     const lpAmount = await lpTokenContract.balanceOf(account)
+
+  //     const rawPidValue = (lpAmount) / 10 ** 18 // i.e. 0.1 * 100,000 = 10,000
+
+  //     let lpValue;
+
+  //     if (
+  //       token1Name === 'USDC' ||
+  //       token2Name === 'USDC' ||
+  //       token1Name === 'fUSDT' ||
+  //       token2Name === 'fUSDT' ||
+  //       token1Name === 'gFUSDT' ||
+  //       token2Name === 'gFUSDT'
+  //     ) {
+  //       if (token1Name !== 'DAI') {
+  //         lpValue = rawPidValue / 10 ** 6
+  //       } else {}
+  //     } else if (token1Name === 'FUSD' || token2Name === 'FUSD' || token1Name === 'DAI' || token2Name === 'DAI') {
+  //     } else if (token1Name === 'FTM' || token2Name === 'FTM') {
+  //       lpValue = rawPidValue * ftmPrice
+  //     } else if (token1Name === 'SOUL' || token2Name === 'SOUL') {
+  //       lpValue = rawPidValue * soulPrice
+  //     } else if (token1Name === 'SEANCE' || token2Name === 'SEANCE') {
+  //       lpValue = rawPidValue * seancePrice
+  //     } else if (token1Name === 'ENCHANT' || token2Name === 'ENCHANT') {
+  //       lpValue = rawPidValue * enchantPrice
+  //     } else if (token1Name === 'WETH' || token2Name === 'WETH') {
+  //       lpValue = rawPidValue * ethPrice
+  //     }
+  //   } catch (e) {
+  //     console.log(e)
+  //     return e
+  //   }
+  // }
+
   /**
    * [0] : summonerLpTokens
    * [1] : lpTokenSupply

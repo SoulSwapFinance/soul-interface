@@ -8,6 +8,7 @@ import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
 import useSoulBond from './hooks/useSoulBond'
 import useApprove from './hooks/useApprove'
+import useLpContract from './hooks/useLpContract'
 import { SoulBondAddress } from './constants'
 import {
   BondContainer,
@@ -56,7 +57,7 @@ const TokenLogo = styled(Image)`
 `
 
 const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
-  const { account } = useActiveWeb3React() // chainId
+  const { account, chainId } = useActiveWeb3React() // chainId
 
   const {
     // helper contract
@@ -71,8 +72,10 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
     deposit,
     pendingSoul,
     userInfo,
+    fetchLpValue,
   } = useSoulBond(pid, lpToken, bond.token1Address, bond.token2Address)
   const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
+  const { lpBalValue } = useLpContract(lpToken, token1, token2, bond.token1Address[chainId], bond.token2Address[chainId])
 
   const [showing, setShowing] = useState(false)
 
@@ -82,11 +85,11 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
 
   const [stakedBal, setStakedBal] = useState(0)
   const [unstakedBal, setUnstakedBal] = useState(0)
-  const [stakedValue, setStakedValue] = useState(0)
   const [pending, setPending] = useState(0)
-
-  const [pendingValue, setPendingValue] = useState(0)
+  
   const [availableValue, setAvailableValue] = useState(0)
+  const [stakedLpValue, setStakedLpValue] = useState(0)
+  const [pendingValue, setPendingValue] = useState(0)
 
   // const [earningPerDay, setEarningPerDay] = useState();
   // const [percOfBond, setPercOfBond] = useState()
@@ -188,30 +191,28 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
       // alert('connect wallet')
     } else {
       try {
+        // get total lp tokens staked in contract for pid from user
         const result1 = await userInfo(pid, account)
         const staked = ethers.utils.formatUnits(result1?.[0])
         setStakedBal(staked.toString())
 
+        // get total lp tokens for pid from user bal
         const result2 = await erc20BalanceOf(account)
-        const unstaked = ethers.utils.formatUnits(result2)
+        const unstaked = ethers.utils.formatUnits(result2) 
         setUnstakedBal(unstaked.toString())
-        
-        const result3 = await usdcPrice(pid, lpToken)
-        const stakedValue = ethers.utils.formatUnits(result3)
-        setStakedValue(stakedValue.toString())
-        
-        // const tvlShare = tvl
-        // const stakedValue = staked * tvlShare
-        // const aValue = stakedValue * tvlShare
-        // setAvailableValue(aValue.toString())
 
-        // how many much of tokenA there is 
-        // ...
+        // get value of available, unstaked lp
+        const aLpValue = await fetchLpValue(token1, token2, result2)
+        const f_aLpValue = Number(aLpValue).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') // format to 2 decimals + commas
+        setAvailableValue(f_aLpValue)
 
-        // availableValue = * by its token value then * 2
-        // ...
-        
-        return [staked, unstaked, stakedValue]
+        // get value of staked lp (bonded lp)
+        // const sLpValue = await fetchLpValue(token1, token2, result1?.[0]); 
+        const sLpValue = await lpBalValue()
+        const f_sLpValue = Number(sLpValue).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') // format to 2 decimals + commas
+        setStakedLpValue(f_sLpValue);
+
+        return [staked, unstaked]
       } catch (err) {
         console.warn(err)
       }
@@ -547,8 +548,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                             .toString()
                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                       }
-                    &nbsp; LP
-                    (${(stakedValue)})
+                    &nbsp; LP &nbsp; {Number(stakedLpValue) !== 0 ? `($${stakedLpValue})` : ''}
                 </Text>
                 <Wrap padding="0" margin="0" display="flex">
                   <SubmitButton
