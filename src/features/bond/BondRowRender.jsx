@@ -177,6 +177,14 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
         const result2 = await erc20BalanceOf(account)
         const unstaked = ethers.utils.formatUnits(result2) 
         setUnstakedBal(unstaked.toString())
+        
+        // const tvlShare = tvl
+        // const stakedValue = staked * tvlShare
+        // const aValue = stakedValue * tvlShare
+        // setAvailableValue(aValue.toString())
+
+        // how many much of tokenA there is 
+        // ...
 
         // get value of available, unstaked lp
         const aLpValue = await fetchUserLpValue(pid, token1, token2, result2)
