@@ -1,4 +1,5 @@
 import { ChainId, NATIVE, SOUL_ADDRESS } from '../../sdk'
+import { AURA } from '../../constants' 
 // import React, { useEffect, useState } from 'react'
 import React from 'react'
 
@@ -21,7 +22,8 @@ import Web3Network from '../Web3Network'
 import Web3Status from '../Web3Status'
 import { t } from '@lingui/macro'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
-import { useETHBalances } from '../../state/wallet/hooks'
+import { useETHBalances, useTokenBalance } from '../../state/wallet/hooks'
+
 import { useLingui } from '@lingui/react'
 
 // import { ExternalLink, NavLink } from "./Link";
@@ -32,6 +34,7 @@ function AppBar(): JSX.Element {
   const { account, chainId, library } = useActiveWeb3React()
 
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
+  const auraBalance = useTokenBalance(account ?? undefined, AURA[chainId])
 
   return (
     <header className="flex flex-row justify-between w-screen flex-nowrap">
@@ -427,8 +430,17 @@ function AppBar(): JSX.Element {
                           <div className="px-3 py-2 text-primary text-bold">
                             {userEthBalance?.toSignificant(4)
                             .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                            } {NATIVE[chainId].symbol}
+                          } {NATIVE[chainId].symbol}
                           </div>
+                          {account && chainId && (
+                            <>
+                              <div className="px-3 py-2 text-primary text-bold">
+                                {auraBalance?.toSignificant(4)
+                                .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                                } {'AURA'}
+                              </div>
+                            </>
+                          )}
                         </>
                       )}
                       <Web3Status />
