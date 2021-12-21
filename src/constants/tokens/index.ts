@@ -156,6 +156,11 @@ export const SEANCE: ChainTokenMap = {
   [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '0xD54Cf31D5653F4a062f5DA4C83170A5867d04442', 18, 'SEANCE', 'SeanceCircle'),  // 31 JUL
 }
 
+// AURA
+export const AURA: ChainTokenMap = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0xb5c12f6DebAeEDE2107839D932E9a0d435AE5A4f', 18, 'AURA', 'SoulAura'),  // 21 DEC
+}
+
 // ENCHANT
 export const ENCHANT: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a', 18, 'ENCHANT', 'Enchantment'),  // 30 OCT
