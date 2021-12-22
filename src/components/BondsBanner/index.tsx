@@ -9,7 +9,7 @@ const BondsBanner: FC = () => (
           <span className="md:hidden text-center">PLEASE READ OUR POST</span>
           <span className="hidden md:inline"><b>PLEASE READ ABOUT BONDS BEFORE BONDING</b></span>
           <span className="block sm:ml-2 sm:inline-block">
-            <a href="https://forum.soulswap.finance/t/introducing-bonding-mechanism-for-soul/150" target = "_blank" rel="noreferrer"
+            <a href="https://soulswapfinance.medium.com/owning-our-liquidity-via-our-innovative-soul-bonds-podl-592c2849ceed" target = "_blank" rel="noreferrer"
 className="font-bold text-white underline">
               {' '}
               Read Full Details <span aria-hidden="true">&rarr;</span>
