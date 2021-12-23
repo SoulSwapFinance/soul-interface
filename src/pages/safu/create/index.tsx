@@ -26,8 +26,6 @@ import { useCurrency } from '../../../hooks/Tokens'
 import { useCurrencyBalance } from '../../../state/wallet/hooks'
 import Loader from '../../../components/Loader'
 import Web3Connect from '../../../components/Web3Connect'
-import Datetime from 'react-datetime'
-import * as moment from 'moment'
 import useSafe from '../../../features/safe/useSafe'
 import { ethers } from 'ethers'
 import { useAddPopup } from '../../../state/application/hooks'
@@ -41,7 +39,6 @@ export default function CreateSafe(): JSX.Element {
   const [grimAddress, setGrimAddress] = useState('')
   const [recipient, setRecipient] = useState('')
   const [value, setValue] = useState('')
-  const [unlockDate, setUnlockDate] = useState(moment.default())
   const [pendingTx, setPendingTx] = useState(false)
   const addTransaction = useTransactionAdder()
 
@@ -73,8 +70,6 @@ export default function CreateSafe(): JSX.Element {
       ? 'Invalid Recipient'
       : isNaN(parseFloat(value)) || parseFloat(value) == 0
       ? 'Invalid Amount'
-      : moment.isDate(unlockDate) || moment.default(unlockDate).isBefore(new Date())
-      ? 'Invalid Unlock Date'
       : ''
 
   const allInfoSubmitted = errorMessage == ''
@@ -92,8 +87,7 @@ export default function CreateSafe(): JSX.Element {
           soulAddress,
           grimAddress,
           recipient,
-          value.toBigNumber(soulToken?.decimals),
-          moment.default(unlockDate).unix().toString()
+          value.toBigNumber(18)
         )
 
         if (tx.wait) {
@@ -114,7 +108,6 @@ export default function CreateSafe(): JSX.Element {
           setGrimAddress('')
           setRecipient('')
           setValue('')
-          setUnlockDate(moment.default())
         } else {
           throw 'User denied transaction signature.'
         }
@@ -130,11 +123,7 @@ export default function CreateSafe(): JSX.Element {
         setPendingTx(false)
       }
     }
-  }, [allInfoSubmitted, safeContract, recipient, value, soulToken?.decimals, unlockDate, addPopup])
-
-  var valid = function (current) {
-    return current.isAfter(moment.default(unlockDate).subtract(1, 'day'))
-  }
+  }, [allInfoSubmitted, safeContract, recipient, value, 18, addPopup])
 
   return (
     <>
@@ -280,30 +269,6 @@ export default function CreateSafe(): JSX.Element {
                         </div>
                       </div>
                     </div>
-                    <div className={'px-4 py-2 rounded bg-dark-800'}>
-                      <div className="flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row">
-                        <div className={classNames('w-full flex sm:w-72 justify-center')}>
-                          <div className="flex flex-1 flex-col items-start mt-2 md:mt-0 md:items-end justify-center mx-3.5">
-                            <div className="text-base font-medium text-secondary whitespace-nowrap">Unlock Date</div>
-                          </div>
-                        </div>
-                        <div className={'flex items-center w-full space-x-3 rounded bg-dark-900 focus:bg-dark-700 p-3'}>
-                          <>
-                            <Datetime
-                              value={unlockDate}
-                              utc={true}
-                              closeOnSelect={true}
-                              isValidDate={valid}
-                              onChange={(e) => setUnlockDate(moment.default(e))}
-                              inputProps={{
-                                className:
-                                  'p-3 w-full flex overflow-ellipsis font-bold recipient-address-input bg-dark-900 h-full w-full rounded placeholder-low-emphesis',
-                              }}
-                            />
-                          </>
-                        </div>
-                      </div>
-                    </div>
 
                     <div className={'px-4 py-2'}>
                       <div className="flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row">
@@ -368,7 +333,11 @@ export default function CreateSafe(): JSX.Element {
                   <div className={`col-span-12 md:col-span-4 bg-dark-800 px-6 py-4 rounded`}>
                     <div className="mb-2 text-2xl text-emphesis">{i18n._(t`Directions`)}</div>
                     <div className="mb-4 text-base text-secondary">
-                      <p>{i18n._(t`These safes are strictly for users to claim their recovered SoulSwap LP from the Grim Exploit.`)}</p>
+                      <p>{i18n._(t`- These safes are strictly for users to claim their recovered SoulSwap LP from the Grim Exploit.`)}</p>
+                      <br/>
+                      <p>{i18n._(t`- Please navigate to "Search Safes" and enter your Grim LP to swap for your Soul LP.`)}</p>
+                      <br />
+                      <p>{i18n._(t`- Note: only Buns may create Safes, please use the other tab entitled "Search Safes" to claim.`)}</p>
                     </div>
                   </div>
                 </div>

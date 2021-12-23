@@ -194,7 +194,7 @@ export default function Safu(): JSX.Element {
                                       style={{ width: '100%' }}
                                       onClick={() => handleWithdraw(safe?.id)}
                                       disabled={
-                                        moment.unix(safe?.unlockTimestamp.toString()).isAfter(new Date()) ||
+                                        // moment.unix(safe?.unlockTimestamp.toString()).isAfter(new Date()) ||
                                         !account ||
                                         (account && getAddress(account) != getAddress(safe?.recipient))
                                       }

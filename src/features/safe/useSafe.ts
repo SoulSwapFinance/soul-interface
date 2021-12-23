@@ -9,14 +9,13 @@ export default function useSafe() {
   const tokenContract = useTokenContract()
 
   const lockSouls = useCallback(
-    async (soulAddress: string, grimAddress: string, recipient: string, amount: BigNumber, unlockTimestamp: string) => {
+    async (soulAddress: string, grimAddress: string, recipient: string, amount: BigNumber) => {
       try {
         return await contract?.lockSouls(
           soulAddress, 
           grimAddress,
           recipient, 
-          amount.toString(), 
-          unlockTimestamp
+          amount.toString()
         )
       } catch (e) {
         console.error(e)
