@@ -49,7 +49,7 @@ export const SCARAB_ADDRESS: AddressMap = {
 export const SAFU_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xF92069781978961eF93178A1088561Eeb7BAEAF8', // 23 DEC
+  [ChainId.FANTOM]: '0x0c88c49ec6fE41E43281ad152984954eC634e8e9', // 23 DEC
   [ChainId.FANTOM_TESTNET]: '',
 }
 

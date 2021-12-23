@@ -81,25 +81,6 @@
                 "internalType": "address",
                 "name": "",
                 "type": "address"
-            }
-        ],
-        "name": "converted",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
             },
             {
                 "internalType": "uint256",
@@ -260,11 +241,6 @@
                 "internalType": "uint256",
                 "name": "_amount",
                 "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_unlockTimestamp",
-                "type": "uint256"
             }
         ],
         "name": "lockSouls",
@@ -348,16 +324,6 @@
                 "type": "uint256"
             },
             {
-                "internalType": "uint256",
-                "name": "tribute",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "unlockTimestamp",
-                "type": "uint256"
-            },
-            {
                 "internalType": "bool",
                 "name": "withdrawn",
                 "type": "bool"
@@ -377,19 +343,6 @@
         "name": "transferOwnership",
         "outputs": [],
         "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "tributeRate",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
         "type": "function"
     },
     {
