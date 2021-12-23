@@ -104,6 +104,19 @@ function AppBar(): JSX.Element {
                         </NavLink>
                       )}
                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href={'https://app.luxor.money'}>
+                          <a
+                            id={`farm-nav-link`}
+                            // className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800"
+                            className="w-full relative ml-6 md:p-2"
+                            // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                            >
+                          {/* <Image src="https://media.giphy.com/media/iH7mGoqPivDybuDc2s/giphy.gif" alt="offering soul" width={30} height={30} /> */}
+                            {i18n._(t`LUXOR`)}
+                          </a>
+                        </NavLink>
+                      )}
+                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                       <NavLink href={'/seance'}>
                         <a
                           id={`stake-nav-link`}
@@ -278,7 +291,7 @@ function AppBar(): JSX.Element {
 
                 <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-4 lg:w-auto bg-dark-1000 lg:relative lg:p-0 lg:bg-transparent">
                   <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
-                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         library &&
                       library.provider.isMetaMask && ( // TODO: update
                         <>
@@ -324,7 +337,7 @@ function AppBar(): JSX.Element {
                             </div>
                           </QuestionHelper>
                         </>
-                      ))}
+                      ))} */}
 
                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                       library &&
