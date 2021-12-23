@@ -8,7 +8,7 @@ import {
   SEANCE_USDC_PAIR,
   FTM_USDC_PAIR,
   SCARAB_ADDRESS,
-  SAFU_ADDRESS,
+  SAFE_ADDRESS,
   ATOMIC_SWAP_ADDRESS,
   LOCKER_ADDRESS,
 } from '../constants/addresses'
@@ -64,8 +64,8 @@ import KASHIPAIR_ABI from '../constants/abis/kashipair.json'
 import MAKER_ABI from '../constants/abis/maker.json'
 
 // soul
-import SOUL_SCARAB_ABI from '../constants/abis/soulswap/scarab.json' // todo
-import SOUL_SAFU_ABI from '../constants/abis/soulswap/safu.json' // todo
+import SOUL_SCARAB_ABI from '../constants/abis/soulswap/scarab.json'
+import SOUL_SAFE_ABI from '../constants/abis/soulswap/safe.json'
 import SOUL_GUIDE_ABI from '../constants/abis/soul-guide.json' // TODO: update abi
 import SOUL_SUMMONER_ABI from '../constants/abis/soulswap/soulsummoner.json' // 28 JUL
 import SOULVAULT_ABI from '../constants/abis/soulswap/soulvault.json' // 31 JUL
@@ -217,7 +217,7 @@ export function useScarabContract(withSignerIfPossible?: boolean): Contract | nu
 
 export function useSafeContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SAFU_ADDRESS[chainId], SOUL_SAFU_ABI, withSignerIfPossible)
+  return useContract(chainId && SAFE_ADDRESS[chainId], SOUL_SAFE_ABI, withSignerIfPossible)
 }
 
 export function useSoulSeanceContract(withSignerIfPossible?: boolean): Contract | null {

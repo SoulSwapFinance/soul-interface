@@ -15,7 +15,7 @@ import Card from '../../../components/Card'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
-import { SAFU_ADDRESS } from '../../../constants'
+import { SAFE_ADDRESS } from '../../../constants'
 // import SoulLogo from '../../../components/SoulLogo'
 import { useTransactionAdder } from '../../../state/transactions/hooks'
 import Button, { ButtonConfirmed, ButtonError } from '../../../components/Button'
@@ -48,7 +48,7 @@ export default function CreateSafe(): JSX.Element {
 
   const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, soulToken ?? undefined)
 
-  const [approvalState, approve] = useApproveCallback(typedDepositValue, SAFU_ADDRESS[chainId])
+  const [approvalState, approve] = useApproveCallback(typedDepositValue, SAFE_ADDRESS[chainId])
 
   const safeContract = useSafe()
   const addPopup = useAddPopup()

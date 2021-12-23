@@ -46,10 +46,10 @@ export const SCARAB_ADDRESS: AddressMap = {
   [ChainId.FANTOM_TESTNET]: '',
 }
 
-export const SAFU_ADDRESS: AddressMap = {
+export const SAFE_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x0c88c49ec6fE41E43281ad152984954eC634e8e9', // 23 DEC
+  [ChainId.FANTOM]: '0x9817dDcb2899710d0C9D42aeDf825F54BCb84785', // 23 DEC
   [ChainId.FANTOM_TESTNET]: '',
 }
 

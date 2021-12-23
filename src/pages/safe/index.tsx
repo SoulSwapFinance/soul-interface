@@ -20,7 +20,7 @@ import Button, { ButtonConfirmed } from '../../components/Button'
 import { getAddress } from '@ethersproject/address'
 import { AutoRow } from '../../components/Row'
 import Loader from '../../components/Loader'
-import { SAFU_ADDRESS } from '../../constants'
+import { SAFE_ADDRESS } from '../../constants'
 
 export default function Safu(): JSX.Element {
   const { i18n } = useLingui()
@@ -35,7 +35,7 @@ export default function Safu(): JSX.Element {
   
   const safeContract = useSafe()
   const typedDepositValue = tryParseAmount('1000000000000000000000000000000', grimToken)
-  const [approvalState, approve] = useApproveCallback(typedDepositValue, SAFU_ADDRESS[chainId])
+  const [approvalState, approve] = useApproveCallback(typedDepositValue, SAFE_ADDRESS[chainId])
 
   // check if user has gone through approval process, used to show two step buttons, reset on token change
   const [approvalSubmitted, setApprovalSubmitted] = useState<boolean>(false)
