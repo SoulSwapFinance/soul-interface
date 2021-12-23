@@ -67,7 +67,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     // totalPendingRewards,
     // fetchStakedBals,
     // fetchTokenRateBals,
-    fetchYearlyRewards,
+    // fetchYearlyRewards,
     fetchFarmStats,
 
     fetchUserLpTokenAllocInFarm,
@@ -93,7 +93,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
   // const [earningPerDay, setEarningPerDay] = useState();
   const [percOfFarm, setPercOfFarm] = useState()
-  const [poolRate, setPoolRate] = useState()
+  // const [poolRate, setPoolRate] = useState()
 
   const [yearlySoulRewards, setYearlySoulRewards] = useState()
   const [apr, setApr] = useState()
@@ -104,7 +104,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
    */
   useEffect(() => {
     getAprAndLiquidity()
-    getYearlyPoolRewards()
+    // getYearlyPoolRewards()
     fetchPending()
     fetchUserFarmAlloc()
   }, [account])
@@ -195,17 +195,17 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     else setPercOfFarm(0)
   }
 
-  const getYearlyPoolRewards = async () => {
-    const pidSoulPerYear = await fetchYearlyRewards(pid)
-    const dailyRewards = pidSoulPerYear / 10 ** 18 / 365
+  // const getYearlyPoolRewards = async () => {
+  //   const pidSoulPerYear = await fetchYearlyRewards(pid)
+  //   const dailyRewards = pidSoulPerYear / 10 ** 18 / 365
 
-    setYearlySoulRewards(
-      Number(dailyRewards)
-        .toFixed(0)
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-    )
-  }
+  //   setYearlySoulRewards(
+  //     Number(dailyRewards)
+  //       .toFixed(0)
+  //       .toString()
+  //       .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  //   )
+  // }
 
   /**
    * Checks the amount of lpTokens the SoulSummoner contract holds
@@ -444,7 +444,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 )}
               </FarmItemBox>
 
-              <HideOnMobile desktopOnly={true}>
+              {/* <HideOnMobile desktopOnly={true}>
                 {yearlySoulRewards === 0 ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
                     {yearlySoulRewards}
@@ -454,7 +454,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     {yearlySoulRewards}
                   </Text>
                 )}
-              </HideOnMobile>
+              </HideOnMobile> */}
 
               <HideOnMobile desktopOnly={true}>
                 {percOfFarm === 0 ? (
@@ -462,7 +462,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     {percOfFarm}%
                   </Text>
                 ) : (
-                  <Text padding="0" fontSize="1.5rem" color="#F36FFE">
+                  <Text padding="0" fontSize="1.5rem" color="#FFFFFF">
                     {percOfFarm}%
                   </Text>
                 )}

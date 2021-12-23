@@ -63,11 +63,11 @@ export default function FarmKey(withdraw) {
                 </Text>
               </FarmItemBox>
 
-              <HideOnMobile desktopOnly={true}>
+              {/* <HideOnMobile desktopOnly={true}>
                 <Text padding="0" fontSize=".9rem" color="#bbb">
                 REWARDS P/D
                 </Text>
-              </HideOnMobile>
+              </HideOnMobile> */}
 
               <HideOnMobile desktopOnly={true}>
                 <Text padding="0" fontSize=".9rem" color="#bbb">
