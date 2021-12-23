@@ -279,57 +279,10 @@ function AppBar(): JSX.Element {
                 <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-4 lg:w-auto bg-dark-1000 lg:relative lg:p-0 lg:bg-transparent">
                   <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                      library &&
+                        library &&
                       library.provider.isMetaMask && ( // TODO: update
                         <>
-                          <QuestionHelper text={i18n._(t`Add ENCHANT to your MetaMask wallet`)}>
-                            <div
-                              className="hidden p-0.5 rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800"
-                              onClick={() => {
-                                if (library && library.provider.isMetaMask && library.provider.request) {
-                                  const params: any = {
-                                    type: 'ERC20',
-                                    options: {
-                                      address: '0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a',
-                                      symbol: 'ENCHANT',
-                                      decimals: 18,
-                                      image:
-                                        'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/enchant.jpg',
-                                    },
-                                  }
-                                  library.provider
-                                    .request({
-                                      method: 'wallet_watchAsset',
-                                      params,
-                                    })
-                                    .then((success) => {
-                                      if (success) {
-                                        console.log('Successfully added ENCHANT to MetaMask')
-                                      } else {
-                                        throw new Error('Something went wrong.')
-                                      }
-                                    })
-                                    .catch(console.error)
-                                }
-                              }}
-                            >
-                              <Image
-                                src="/images/tokens/enchant.png"
-                                alt="ENCHANT"
-                                width="40px"
-                                height="40px"
-                                objectFit="contain"
-                                className="rounded-md"
-                              />
-                            </div>
-                          </QuestionHelper>
-                        </>
-                      ))}
-                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                      library &&
-                      library.provider.isMetaMask && ( // TODO: update
-                        <>
-                          <QuestionHelper text={i18n._(t`Add SEANCE to your MetaMask wallet`)}>
+                          <QuestionHelper text={i18n._(t`Add SEANCE to MetaMask`)}>
                             <div
                               className="hidden p-0.5 rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800"
                               onClick={() => {
@@ -341,7 +294,55 @@ function AppBar(): JSX.Element {
                                       symbol: 'SEANCE',
                                       decimals: 18,
                                       image:
-                                        'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/seance.jpg',
+                                      'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/seance.jpg',
+                                    },
+                                  }
+                                  library.provider
+                                  .request({
+                                    method: 'wallet_watchAsset',
+                                    params,
+                                  })
+                                  .then((success) => {
+                                    if (success) {
+                                      console.log('Successfully added SEANCE to MetaMask')
+                                    } else {
+                                      throw new Error('Something went wrong.')
+                                    }
+                                  })
+                                  .catch(console.error)
+                                }
+                              }}
+                              >
+                              <Image
+                                src="/images/tokens/seance.png"
+                                alt="SEANCE"
+                                width="40px"
+                                height="40px"
+                                objectFit="contain"
+                                className="rounded-md"
+                                />
+                            </div>
+                          </QuestionHelper>
+                        </>
+                      ))}
+
+                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      library &&
+                      library.provider.isMetaMask && ( // TODO: update
+                        <>
+                          <QuestionHelper text={i18n._(t`Add LUX to MetaMask`)}>
+                            <div
+                              className="hidden p-0.5 rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800"
+                              onClick={() => {
+                                if (library && library.provider.isMetaMask && library.provider.request) {
+                                  const params: any = {
+                                    type: 'ERC20',
+                                    options: {
+                                      address: '0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b',
+                                      symbol: 'LUX',
+                                      decimals: 18,
+                                      image:
+                                        'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b/logo.png',
                                     },
                                   }
                                   library.provider
@@ -351,7 +352,7 @@ function AppBar(): JSX.Element {
                                     })
                                     .then((success) => {
                                       if (success) {
-                                        console.log('Successfully added SEANCE to MetaMask')
+                                        console.log('Successfully added LUX to MetaMask')
                                       } else {
                                         throw new Error('Something went wrong.')
                                       }
@@ -361,8 +362,8 @@ function AppBar(): JSX.Element {
                               }}
                             >
                               <Image
-                                src="/images/tokens/seance.png"
-                                alt="SEANCE"
+                                src="/images/tokens/LUXOR.svg"
+                                alt="LUX"
                                 width="40px"
                                 height="40px"
                                 objectFit="contain"
@@ -372,10 +373,9 @@ function AppBar(): JSX.Element {
                           </QuestionHelper>
                         </>
                       ))}
-
                     {chainId && chainId in SOUL_ADDRESS && library && library.provider.isMetaMask && (
                       <>
-                        <QuestionHelper text={i18n._(t`Add SOUL to your MetaMask wallet`)}>
+                        <QuestionHelper text={i18n._(t`Add SOUL to MetaMask`)}>
                           <div
                             className="hidden rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
                             onClick={() => {
