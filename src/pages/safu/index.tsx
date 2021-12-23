@@ -107,7 +107,7 @@ export default function Safu(): JSX.Element {
                 activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-purple-dark-900"
               >
                 <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
-                  {i18n._(t`Summon Souls`)}
+                  {i18n._(t`Create Safe`)}
                 </a>
               </NavLink>
             </div>

@@ -103,7 +103,7 @@ function AppBar(): JSX.Element {
                           </a>
                         </NavLink>
                       )}
-                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'https://app.luxor.money'}>
                           <a
                             id={`farm-nav-link`}
@@ -111,8 +111,19 @@ function AppBar(): JSX.Element {
                             className="w-full relative ml-6 md:p-2"
                             // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                             >
-                          {/* <Image src="https://media.giphy.com/media/iH7mGoqPivDybuDc2s/giphy.gif" alt="offering soul" width={30} height={30} /> */}
                             {i18n._(t`LUXOR`)}
+                          </a>
+                        </NavLink>
+                      )} */}
+                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href={'/safu'}>
+                          <a
+                            id={`farm-nav-link`}
+                            // className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800"
+                            className="w-full relative ml-6 md:p-2"
+                            // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                            >
+                            {i18n._(t`GRIM`)}
                           </a>
                         </NavLink>
                       )}
