@@ -150,7 +150,8 @@ export default function Safu(): JSX.Element {
                             >
                               <div className="grid grid-cols-5">
                                 <div className="flex col-span-2 items-center">
-                                  {token?.name} {' '} ({token?.symbol})
+                                  {token?.name} {' '}
+                                  {/* ({token?.symbol}) */}
                                 </div>
                                 <div className="flex flex-col justify-center">
                                   { '-' + safe?.recipient.substr(length - 5) }
