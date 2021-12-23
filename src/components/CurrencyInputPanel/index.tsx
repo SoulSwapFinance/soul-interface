@@ -146,7 +146,7 @@ export default function CurrencyInputPanel({
                   size="xs"
                   className="text-xs font-medium bg-transparent border rounded-full hover:bg-primary border-low-emphesis text-secondary whitespace-nowrap"
                 >
-                  {i18n._(t`Max`)}
+                  {i18n._(t`MAX`)}
                 </Button>
               )}
               <NumericalInput
@@ -163,7 +163,15 @@ export default function CurrencyInputPanel({
                       renderBalance(selectedCurrencyBalance)
                     ) : (
                       <>
-                        {i18n._(t`Balance:`)} {formatCurrencyAmount(selectedCurrencyBalance, 4)} {currency.symbol}
+                        {/* {i18n._(t`Balance:`)}  */}
+                        {(selectedCurrencyBalance)
+                        .toFixed(2)
+                        // .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                        } { ' ' }
+                        {/* formatCurrencyAmount(selectedCurrencyBalance, 4)}  */}
+                        
+                        {currency.symbol}
                       </>
                     )}
                   </div>
