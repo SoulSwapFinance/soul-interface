@@ -69,11 +69,11 @@ export default function BondKey(mint) {
                 </Text>
               </HideOnMobile> */}
 
-              {/* <HideOnMobile desktopOnly={true}>
+              <HideOnMobile desktopOnly={true}>
                 <Text padding="0" fontSize=".9rem" color="#bbb">
                 OWNERSHIP
                 </Text>
-              </HideOnMobile> */}
+              </HideOnMobile>
 
               <HideOnMobile>
                 <Text padding="0" fontSize=".9rem" color="#bbb">

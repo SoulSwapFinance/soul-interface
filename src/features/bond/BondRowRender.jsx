@@ -64,7 +64,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
     // fetchStakedBals,
     // fetchTokenRateBals,
     // fetchYearlyRewards,
-    // fetchUserLpTokenAllocInBond,
+    fetchUserLpTokenAllocInBond,
     fetchBondStats,
     usdcPrice,
     mint,
@@ -90,7 +90,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const [pendingValue, setPendingValue] = useState(0)
 
   // const [earningPerDay, setEarningPerDay] = useState();
-  // const [percOfBond, setPercOfBond] = useState()
+  const [percOfBond, setPercOfBond] = useState()
   // const [poolRate, setPoolRate] = useState()
 
   // const [yearlySoulRewards, setYearlySoulRewards] = useState()
@@ -106,7 +106,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
     // getYearlyPoolRewards()
     fetchPending()
     fetchPendingValue()
-    // fetchUserBondAlloc()
+    fetchUserBondAlloc()
   }, [account])
 
   /**
@@ -118,7 +118,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
         fetchPending()
         fetchPendingValue()
         // getAprAndLiquidity()
-        // fetchUserBondAlloc()
+        fetchUserBondAlloc()
 
         if (showing) {
           fetchBals()
@@ -231,6 +231,15 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   //   }
   // }
 
+ /**
+   * Checks the user's alloc of the total staked in the farm
+   */
+  const fetchUserBondAlloc = async () => {
+    const ownership = await fetchUserLpTokenAllocInBond(pid, account)
+    const userStakedPercOfSummoner = Number(ownership?.[4])
+    if (userStakedPercOfSummoner) setPercOfBond(Number(userStakedPercOfSummoner).toFixed(2))
+    else setPercOfBond(0)
+  }
   /**
    * Fetches connected user pending soul
    */
@@ -420,17 +429,17 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                 )}
               </HideOnMobile> */}
 
-              {/* <HideOnMobile desktopOnly={true}>
+              <HideOnMobile desktopOnly={true}>
                 {percOfBond === 0 ? (
                   <Text padding="0" fontSize="1.5rem" color="#666">
                     {percOfBond}%
                   </Text>
                 ) : (
-                  <Text padding="0" fontSize="1.5rem" color="#F36FFE">
+                  <Text padding="0" fontSize="1.5rem" color="#FFFFFF">
                     {percOfBond}%
                   </Text>
                 )}
-              </HideOnMobile> */}
+              </HideOnMobile>
 
               <HideOnMobile>
                 {liquidity === '0' ? (
