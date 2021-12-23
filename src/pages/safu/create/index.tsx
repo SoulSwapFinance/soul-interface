@@ -33,7 +33,7 @@ import { ethers } from 'ethers'
 import { useAddPopup } from '../../../state/application/hooks'
 import { result } from 'lodash'
 
-export default function CreateScarab(): JSX.Element {
+export default function CreateSafe(): JSX.Element {
   const { i18n } = useLingui()
   const router = useRouter()
   const { chainId, account, library } = useActiveWeb3React()
@@ -107,7 +107,7 @@ export default function CreateScarab(): JSX.Element {
           )
 
           addPopup({
-            txn: { hash: result.transactionHash, summary: `Successfully created Scarab [${_id}]`, success: true },
+            txn: { hash: result.transactionHash, summary: `Successfully created Safe [${_id}]`, success: true },
           })
 
           setSoulAddress('')
@@ -121,10 +121,10 @@ export default function CreateScarab(): JSX.Element {
       // } catch (err) {
       } catch {
         // addPopup({
-        //   txn: { hash: undefined, summary: `Failed to create Scarab: ${err}`, success: false },
+        //   txn: { hash: undefined, summary: `Failed to create Safe: ${err}`, success: false },
         // })
         addPopup({
-          txn: { hash: undefined, summary: `Scarab Successful`, success: true },
+          txn: { hash: undefined, summary: `Safe Successful`, success: true },
       })
       } finally {
         setPendingTx(false)
@@ -140,7 +140,7 @@ export default function CreateScarab(): JSX.Element {
     <>
       <Head>
         <title>Safe | Soul</title>
-        <meta key="description" name="description" content="Soul Scarab" />
+        <meta key="description" name="description" content="Soul Safe" />
       </Head>
 
       <div className="container px-0 mx-auto pb-6">

@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/link-passhref */
-import { useActiveWeb3React } from '../../hooks'
+import { ApprovalState, useActiveWeb3React, useApproveCallback } from '../../hooks'
 import Head from 'next/head'
 import React, { useCallback, useEffect, useState } from 'react'
 import Search from '../../components/Search'
-import { classNames, isAddress } from '../../functions'
+import { classNames, isAddress, tryParseAmount } from '../../functions'
 import NavLink from '../../components/NavLink'
 import Link from 'next/link'
 import Card from '../../components/Card'
@@ -14,32 +14,51 @@ import { useTransactionAdder } from '../../state/transactions/hooks'
 import useSafe from '../../features/safe/useSafe'
 import { Disclosure } from '@headlessui/react'
 import moment from 'moment'
-import { useToken } from '../../hooks/Tokens'
+import { useCurrency, useToken } from '../../hooks/Tokens'
 import { CurrencyAmount } from '../../sdk'
-import Button from '../../components/Button'
+import Button, { ButtonConfirmed } from '../../components/Button'
 import { getAddress } from '@ethersproject/address'
+import { AutoRow } from '../../components/Row'
+import Loader from '../../components/Loader'
+import { SAFU_ADDRESS } from '../../constants'
 
 export default function Safu(): JSX.Element {
   const { i18n } = useLingui()
-  const { account } = useActiveWeb3React()
-  const [tokenAddress, setTokenAddress] = useState(undefined)
-  const token = useToken(isAddress(tokenAddress) ? tokenAddress : undefined)
+  const { account, chainId } = useActiveWeb3React()
+  const [grimAddress, setGrimAddress] = useState(undefined)
+  const token = useToken(isAddress(grimAddress) ? grimAddress : undefined)
   const [pendingTx, setPendingTx] = useState(false)
   const addTransaction = useTransactionAdder()
-
+  
   const [safes, setSafes] = useState([])
-
+  const grimToken = useCurrency(grimAddress) || undefined
+  
   const safeContract = useSafe()
+  const typedDepositValue = tryParseAmount('1000000000000000000000000000000', grimToken)
+  const [approvalState, approve] = useApproveCallback(typedDepositValue, SAFU_ADDRESS[chainId])
+
+  // check if user has gone through approval process, used to show two step buttons, reset on token change
+  const [approvalSubmitted, setApprovalSubmitted] = useState<boolean>(false)
 
   useEffect(() => {
-    if (isAddress(tokenAddress)) {
-      safeContract.getSoulByGrimAddress(tokenAddress).then((r) => {
+    if (approvalState === ApprovalState.PENDING) {
+      setApprovalSubmitted(true)
+    }
+  }, [approvalState, approvalSubmitted])
+
+  useEffect(() => {
+    if (isAddress(grimAddress)) {
+      safeContract.getSoulByGrimAddress(grimAddress).then((r) => {
         if (r.length > 0) {
           setSafes(r.filter((x) => x.withdrawn == false))
         }
       })
     }
-  }, [tokenAddress, safeContract])
+  }, [grimAddress, safeContract])
+
+  const handleApprove = useCallback(async () => {
+    await approve()
+  }, [approve])
 
   const handleWithdraw = useCallback(
     async (id) => {
@@ -95,32 +114,26 @@ export default function Safu(): JSX.Element {
             <div className={`col-span-12`} style={{ minHeight: '35rem' }}>
               <Card className="h-full rounded bg-dark-900">
                 <Search
-                  placeholder={'Search by name, symbol or address'}
-                  term={tokenAddress}
+                  placeholder={'Enter Grim LP Address'}
+                  term={grimAddress}
                   search={(value: string): void => {
-                    setTokenAddress(value)
+                    setGrimAddress(value)
                   }}
                 />
-                {safes.length == 0 && isAddress(tokenAddress) && (
+                {safes.length == 0 && isAddress(grimAddress) && (
                   <div className="flex justify-center items-center col-span-12 lg:justify mt-20">
                     <span>
                       No Safes found for this address,{' '}
-                      {/* <Link href="/safu/create">
-                        <a className="hover:underline hover:text-purple">click here</a>
-                      </Link>{' '}
-                      to create one. */}
                     </span>
                   </div>
                 )}
                 {safes.length > 0 && (
                   <div className="grid grid-cols-5 text-base font-bold text-primary mt-10 mb-2">
-                    {/* <div className="flex items-center col-span-2 px-2">
+                    <div className="flex items-center col-span-2 px-2">
                       <div className="hover:text-high-emphesis">{i18n._(t`Token`)}</div>
-                    </div> */}
+                    </div>
                     <div className="flex items-center ">{i18n._(t`Recipient`)}</div>
-                    <div className="flex items-center ">{i18n._(t`Soul LP`)}</div>
-                    <div className="flex items-center ">{i18n._(t`Grim LP`)}</div>
-                    <div className="items-center justify-end px-2 flex ">{i18n._(t`Unlock Date`)}</div>
+                    <div className="flex items-center ">{i18n._(t`Amount`)}</div>
                     <div className="items-center justify-end px-2 flex ">{i18n._(t``)}</div>
                   </div>
                 )}
@@ -136,26 +149,47 @@ export default function Safu(): JSX.Element {
                               )}
                             >
                               <div className="grid grid-cols-5">
-                                {/* <div className="flex col-span-2 items-center">
-                                  {token?.name} ({token?.symbol})
-                                </div> */}
+                                <div className="flex col-span-2 items-center">
+                                  {token?.name} {' '} ({token?.symbol})
+                                </div>
                                 <div className="flex flex-col justify-center">
                                   { '-' + safe?.recipient.substr(length - 5) }
                                 </div>
                                 <div className="flex flex-col justify-center">
                                   {CurrencyAmount.fromRawAmount(token, safe?.amount).toSignificant(6)}
                                 </div>
-                                <div className="flex flex-col justify-center">
+                                {/* <div className="flex flex-col justify-center">
                                   {CurrencyAmount.fromRawAmount(token, safe?.tribute).toSignificant(6)}
-                                </div>
-                                <div className="flex flex-col items-end justify-center">
+                                </div> */}
+                                {/* <div className="flex flex-col items-end justify-center">
                                   <div className="text-xs text-right md:text-base text-secondary">
                                     {moment.unix(safe?.unlockTimestamp.toString()).fromNow()}
                                   </div>
-                                </div>
+                                </div> */}
+                                
                                 <div className="flex flex-col items-end justify-center">
                                   <div className="text-xs text-right md:text-base text-secondary">
-                                    <Button
+                                  {approvalState !== ApprovalState.APPROVED && (
+                                <ButtonConfirmed
+                                  onClick={handleApprove}
+                                  disabled={
+                                    approvalState !== ApprovalState.NOT_APPROVED ||
+                                    approvalSubmitted // ||
+                                    // !allInfoSubmitted
+                                  }
+                                >
+                                  {approvalState === ApprovalState.PENDING ? (
+                                    <div className={'p-2'}>
+                                      <AutoRow gap="6px" justify="center">
+                                        Approving <Loader stroke="white" />
+                                      </AutoRow>
+                                    </div>
+                                  ) : (
+                                    i18n._(t`Approve`)
+                                  )}
+                                </ButtonConfirmed>
+                              )}
+                                    <ButtonConfirmed
                                       variant="link"
                                       style={{ width: '100%' }}
                                       onClick={() => handleWithdraw(safe?.id)}
@@ -166,7 +200,7 @@ export default function Safu(): JSX.Element {
                                       }
                                     >
                                       Withdraw
-                                    </Button>
+                                    </ButtonConfirmed>
                                   </div>
                                 </div>
                               </div>
