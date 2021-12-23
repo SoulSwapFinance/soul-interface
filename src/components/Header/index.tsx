@@ -116,7 +116,7 @@ function AppBar(): JSX.Element {
                         </NavLink>
                       )} */}
                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'/safu'}>
+                        <NavLink href={'/safe'}>
                           <a
                             id={`farm-nav-link`}
                             // className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800"

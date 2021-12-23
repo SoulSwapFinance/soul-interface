@@ -94,7 +94,7 @@ export default function Safu(): JSX.Element {
             <div className={`col-span-12 flex flex-col md:flex-row md:space-x-2`}>
               <NavLink
                 exact
-                href={'/safu'}
+                href={'/safe'}
                 activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-purple-dark-900"
               >
                 <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
@@ -103,7 +103,7 @@ export default function Safu(): JSX.Element {
               </NavLink>
               <NavLink
                 exact
-                href={'/safu/create'}
+                href={'/safe/create'}
                 activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-purple-dark-900"
               >
                 <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
