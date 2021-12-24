@@ -92,6 +92,12 @@ export default function Safe(): JSX.Element {
         <DoubleGlowShadowV2 maxWidth={false} opacity={'0.3'}>
           <div className={`grid grid-cols-12 gap-2 min-h-1/2`}>
             <div className={`col-span-12 flex flex-col md:flex-row md:space-x-2`}>
+            <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
+            🎁 | SAFES ARE LOCKED UNTIL 12.25.2021
+                  <br/>
+                  <br/>
+                  {i18n._(t`Verify claims below for the GRIM exploit.`)}
+                </a>
               {/* <NavLink
                 exact
                 href={'/safe'}
