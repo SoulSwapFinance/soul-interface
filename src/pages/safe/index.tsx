@@ -22,7 +22,7 @@ import { AutoRow } from '../../components/Row'
 import Loader from '../../components/Loader'
 import { SAFE_ADDRESS } from '../../constants'
 
-export default function Safu(): JSX.Element {
+export default function Safe(): JSX.Element {
   const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
   const [grimAddress, setGrimAddress] = useState(undefined)
@@ -80,7 +80,7 @@ export default function Safu(): JSX.Element {
   return (
     <>
       <Head>
-        <title>Safu | Soul</title>
+        <title>Safe | Soul</title>
         <meta key="description" name="description" content="Soul Safe" />
       </Head>
 
@@ -92,7 +92,7 @@ export default function Safu(): JSX.Element {
         <DoubleGlowShadowV2 maxWidth={false} opacity={'0.3'}>
           <div className={`grid grid-cols-12 gap-2 min-h-1/2`}>
             <div className={`col-span-12 flex flex-col md:flex-row md:space-x-2`}>
-              <NavLink
+              {/* <NavLink
                 exact
                 href={'/safe'}
                 activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-purple-dark-900"
@@ -100,8 +100,8 @@ export default function Safu(): JSX.Element {
                 <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
                   {i18n._(t`Search Safes`)}
                 </a>
-              </NavLink>
-              <NavLink
+              </NavLink> */}
+              {/* <NavLink
                 exact
                 href={'/safe/create'}
                 activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-purple-dark-900"
@@ -109,7 +109,7 @@ export default function Safu(): JSX.Element {
                 <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
                   {i18n._(t`Create Safe`)}
                 </a>
-              </NavLink>
+              </NavLink> */}
             </div>
             <div className={`col-span-12`} style={{ minHeight: '35rem' }}>
               <Card className="h-full rounded bg-dark-900">
@@ -129,12 +129,12 @@ export default function Safu(): JSX.Element {
                 )}
                 {safes.length > 0 && (
                   <div className="grid grid-cols-5 text-base font-bold text-primary mt-10 mb-2">
+                    <div className="flex items-center ">{i18n._(t`Recipient`)}</div>
                     <div className="flex items-center col-span-2 px-2">
                       <div className="hover:text-high-emphesis">{i18n._(t`Token`)}</div>
                     </div>
-                    <div className="flex items-center ">{i18n._(t`Recipient`)}</div>
                     <div className="flex items-center ">{i18n._(t`Amount`)}</div>
-                    <div className="items-center justify-end px-2 flex ">{i18n._(t``)}</div>
+                    {/* <div className="items-center justify-end px-2 flex ">{i18n._(t``)}</div> */}
                   </div>
                 )}
                 <div className="flex-col">
@@ -149,15 +149,15 @@ export default function Safu(): JSX.Element {
                               )}
                             >
                               <div className="grid grid-cols-5">
+                                <div className="flex flex-col justify-center">
+                                  { '-' + safe?.recipient.substr(length - 5) }
+                                </div>
                                 <div className="flex col-span-2 items-center">
                                   {token?.name} {' '}
                                   {/* ({token?.symbol}) */}
                                 </div>
                                 <div className="flex flex-col justify-center">
-                                  { '-' + safe?.recipient.substr(length - 5) }
-                                </div>
-                                <div className="flex flex-col justify-center">
-                                  {CurrencyAmount.fromRawAmount(token, safe?.amount).toSignificant(6)}
+                                  {CurrencyAmount.fromRawAmount(token, safe?.amount).toSignificant(1)}
                                 </div>
                                 {/* <div className="flex flex-col justify-center">
                                   {CurrencyAmount.fromRawAmount(token, safe?.tribute).toSignificant(6)}
