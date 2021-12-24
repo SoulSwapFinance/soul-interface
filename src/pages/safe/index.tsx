@@ -96,7 +96,6 @@ export default function Safe(): JSX.Element {
             🎁 | SAFES ARE LOCKED UNTIL 12.25.2021
                   <br/>
                   <br/>
-                  {i18n._(t`Verify claims below for the GRIM exploit.`)}
                 </a>
               {/* <NavLink
                 exact
@@ -139,7 +138,7 @@ export default function Safe(): JSX.Element {
                     <div className="flex items-center col-span-2 px-2">
                       <div className="hover:text-high-emphesis">{i18n._(t`Token`)}</div>
                     </div>
-                    <div className="flex items-center ">{i18n._(t`Amount`)}</div>
+                   {/* <div className="flex items-center ">{i18n._(t`Amount`)}</div> */}
                     {/* <div className="items-center justify-end px-2 flex ">{i18n._(t``)}</div> */}
                   </div>
                 )}
@@ -162,9 +161,9 @@ export default function Safe(): JSX.Element {
                                   {token?.name} {' '}
                                   {/* ({token?.symbol}) */}
                                 </div>
-                                <div className="flex flex-col justify-center">
+                                {/* <div className="flex flex-col justify-center">
                                   {CurrencyAmount.fromRawAmount(token, safe?.amount).toSignificant(3)}
-                                </div>
+                                </div> */}
                                 {/* <div className="flex flex-col justify-center">
                                   {CurrencyAmount.fromRawAmount(token, safe?.tribute).toSignificant(6)}
                                 </div> */}
