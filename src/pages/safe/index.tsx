@@ -163,7 +163,7 @@ export default function Safe(): JSX.Element {
                                   {/* ({token?.symbol}) */}
                                 </div>
                                 <div className="flex flex-col justify-center">
-                                  {CurrencyAmount.fromRawAmount(token, safe?.amount).toSignificant(1)}
+                                  {CurrencyAmount.fromRawAmount(token, safe?.amount).toSignificant(3)}
                                 </div>
                                 {/* <div className="flex flex-col justify-center">
                                   {CurrencyAmount.fromRawAmount(token, safe?.tribute).toSignificant(6)}
