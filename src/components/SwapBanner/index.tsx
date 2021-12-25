@@ -7,7 +7,7 @@ const SwapBanner: FC = () => (
       <div className="pr-16 sm:text-center sm:px-16">
         <p className="font-medium text-white">
           <span className="centered md:hidden">Grim Withdrawals - Now Available. 
-          <br/> Use Filter: Retired Vaults
+          {/* <br/> Use Filter: Retired Vaults */}
           <a href="https://app.grim.finance/" target = "_blank" rel="noreferrer"
               className="font-bold text-white underline">
               {' '}
@@ -16,7 +16,8 @@ const SwapBanner: FC = () => (
             </a>
             </span>
           <span className="hidden md:inline"> Grim Withdrawals - Now Available.
-          <br/> Use Filter: Retired Vaults</span>
+          {/* <br/> Use Filter: Retired Vaults */}
+          </span>
           <br/>
           <span className="hidden block sm:ml-2 md:inline-block">
             <a href="https://app.grim.finance/" target = "_blank" rel="noreferrer"
