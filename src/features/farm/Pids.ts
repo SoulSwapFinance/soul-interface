@@ -5,7 +5,7 @@ import { tokens } from './constants/tokens'
 // - USDT
 // - SOUL
 
-export const WithdrawPids = [
+export const InactivePids = [
   // {
   //   // 0
   //   pid: 3,
@@ -19,6 +19,84 @@ export const WithdrawPids = [
   //   token1Address: tokens.SOUL,
   //   token2Address: tokens.FUSD,
   // },
+  {
+    // 600
+    pid: 44,
+    token1: 'FTM',
+    token2: 'LUX',
+    lpSymbol: 'LUX-FTM',
+    lpAddresses: {
+      4002: '',
+      250: '0x951BBB838e49F7081072895947735b0892cCcbCD',
+    },
+    token1Address: tokens.LUX,
+    token2Address: tokens.FTM,
+  },
+  {
+    // 600
+    pid: 45,
+    token1: 'DAI',
+    token2: 'LUX',
+    lpSymbol: 'LUX-DAI',
+    lpAddresses: {
+      4002: '',
+      250: '0x46729c2AeeabE7774a0E710867df80a6E19Ef851',
+    },
+    token1Address: tokens.LUX,
+    token2Address: tokens.DAI,
+  },
+  {
+    // 0
+    pid: 25,
+    token1: 'SOUL',
+    token2: 'ENCHANT',
+    lpSymbol: 'SOUL-ENCHANT',
+    lpAddresses: {
+      4002: '',
+      250: '0x9acc8f23680b6d7e295166277e2fb9c88a26cce6',
+    },
+    token1Address: tokens.SOUL,
+    token2Address: tokens.ENCHANT,
+  },
+  {
+    // 600
+    pid: 26,
+    token1: 'SEANCE',
+    token2: 'ENCHANT',
+    lpSymbol: 'SEANCE-ENCHANT',
+    lpAddresses: {
+      4002: '',
+      250: '0x5695176d085f8f7320507495066ffec940da244c',
+    },
+    token1Address: tokens.SEANCE,
+    token2Address: tokens.ENCHANT,
+  },
+  {
+    // 1200
+    pid: 24,
+    token1: 'ENCHANT',
+    token2: 'FTM',
+    lpSymbol: 'ENCHANT-FTM',
+    lpAddresses: {
+      4002: '',
+      250: '0xb4d6ff768f409e4d102bad80f9a8ac105453ccdd',
+    },
+    token1Address: tokens.ENCHANT,
+    token2Address: tokens.FTM,
+  },
+  {
+    // 400
+    pid: 29,
+    token1: 'ENCHANT',
+    token2: 'USDC',
+    lpSymbol: 'ENCHANT-USDC',
+    lpAddresses: {
+      4002: '',
+      250: '0x6c6f32008262666CA4acEd0a824c4945AB96e5F3',
+    },
+    token1Address: tokens.ENCHANT,
+    token2Address: tokens.USDC,
+  },
   {
     // 0
     pid: 16,
@@ -45,7 +123,6 @@ export const WithdrawPids = [
     token1Address: tokens.SEANCE,
     token2Address: tokens.SPIRIT,
   },
-
   {
     // 0
     pid: 31,
@@ -86,19 +163,19 @@ export const WithdrawPids = [
     token1Address: tokens.SEANCE,
     token2Address: tokens.TOMB,
   },
-  {
-    // 0
-    pid: 34,
-    token1: 'SEANCE',
-    token2: 'ICE',
-    lpSymbol: 'SEANCE-ICE',
-    lpAddresses: {
-      4002: '',
-      250: '0xc0fEd4A6EDef23da7fF766D24F17Ecf454C16D25',
-    },
-    token1Address: tokens.SEANCE,
-    token2Address: tokens.ICE,
-  },
+  // {
+  //   // 0
+  //   pid: 34,
+  //   token1: 'SEANCE',
+  //   token2: 'ICE',
+  //   lpSymbol: 'SEANCE-ICE',
+  //   lpAddresses: {
+  //     4002: '',
+  //     250: '0xc0fEd4A6EDef23da7fF766D24F17Ecf454C16D25',
+  //   },
+  //   token1Address: tokens.SEANCE,
+  //   token2Address: tokens.ICE,
+  // },
   {
     // 0
     pid: 35,
@@ -115,7 +192,19 @@ export const WithdrawPids = [
 ]
 
 export const AllPids = [
-
+  {
+    // 900
+    pid: 46,
+    token1: 'SOUL',
+    token2: 'LUX',
+    lpSymbol: 'SOUL-LUX',
+    lpAddresses: {
+      4002: '',
+      250: '0x475a63154C3e85ac0F2CB453f0b5c63e4370333c',
+    },
+    token1Address: tokens.SOUL,
+    token2Address: tokens.LUX,
+  },
   {
     // 1600
     pid: 1,
@@ -128,32 +217,6 @@ export const AllPids = [
     },
     token1Address: tokens.SOUL,
     token2Address: tokens.FTM,
-  },
-  {
-    // 600
-    pid: 44,
-    token1: 'FTM',
-    token2: 'LUX',
-    lpSymbol: 'LUX-FTM',
-    lpAddresses: {
-      4002: '',
-      250: '0x951BBB838e49F7081072895947735b0892cCcbCD',
-    },
-    token1Address: tokens.LUX,
-    token2Address: tokens.FTM,
-  },
-  {
-    // 600
-    pid: 45,
-    token1: 'DAI',
-    token2: 'LUX',
-    lpSymbol: 'LUX-DAI',
-    lpAddresses: {
-      4002: '',
-      250: '0x46729c2AeeabE7774a0E710867df80a6E19Ef851',
-    },
-    token1Address: tokens.LUX,
-    token2Address: tokens.DAI,
   },
   {
     // 1200
@@ -222,35 +285,6 @@ export const AllPids = [
     token1Address: tokens.SOUL,
     token2Address: tokens.SEANCE,
   },
-
-  {
-    // 600
-    pid: 25,
-    token1: 'SOUL',
-    token2: 'ENCHANT',
-    lpSymbol: 'SOUL-ENCHANT',
-    lpAddresses: {
-      4002: '',
-      250: '0x9acc8f23680b6d7e295166277e2fb9c88a26cce6',
-    },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.ENCHANT,
-  },
-
-  {
-    // 600
-    pid: 26,
-    token1: 'SEANCE',
-    token2: 'ENCHANT',
-    lpSymbol: 'SEANCE-ENCHANT',
-    lpAddresses: {
-      4002: '',
-      250: '0x5695176d085f8f7320507495066ffec940da244c',
-    },
-    token1Address: tokens.SEANCE,
-    token2Address: tokens.ENCHANT,
-  },
-
   {
     // 400
     pid: 27,
@@ -290,35 +324,6 @@ export const AllPids = [
     token1Address: tokens.SEANCE,
     token2Address: tokens.USDC,
   },
-
-  {
-    // 1200
-    pid: 24,
-    token1: 'ENCHANT',
-    token2: 'FTM',
-    lpSymbol: 'ENCHANT-FTM',
-    lpAddresses: {
-      4002: '',
-      250: '0xb4d6ff768f409e4d102bad80f9a8ac105453ccdd',
-    },
-    token1Address: tokens.ENCHANT,
-    token2Address: tokens.FTM,
-  },
-
-  {
-    // 400
-    pid: 29,
-    token1: 'ENCHANT',
-    token2: 'USDC',
-    lpSymbol: 'ENCHANT-USDC',
-    lpAddresses: {
-      4002: '',
-      250: '0x6c6f32008262666CA4acEd0a824c4945AB96e5F3',
-    },
-    token1Address: tokens.ENCHANT,
-    token2Address: tokens.USDC,
-  },
-
   {
     // 100
     pid: 11,
@@ -941,20 +946,6 @@ export const SeancePids = [
     token1Address: tokens.SEANCE,
     token2Address: tokens.SOUL,
   },
-
-  {
-    // 600
-    pid: 26,
-    token1: 'SEANCE',
-    token2: 'ENCHANT',
-    lpSymbol: 'SEANCE-ENCHANT',
-    lpAddresses: {
-      4002: '',
-      250: '0x5695176d085f8f7320507495066ffec940da244c',
-    },
-    token1Address: tokens.SEANCE,
-    token2Address: tokens.ENCHANT,
-  },
   {
     // 600
     pid: 10,
@@ -1013,19 +1004,7 @@ export const SoulPids = [
     token1Address: tokens.SOUL,
     token2Address: tokens.SEANCE,
   },
-  {
-    // 600
-    pid: 25,
-    token1: 'SOUL',
-    token2: 'ENCHANT',
-    lpSymbol: 'SOUL-ENCHANT',
-    lpAddresses: {
-      4002: '',
-      250: '0x9acc8f23680b6d7e295166277e2fb9c88a26cce6',
-    },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.ENCHANT,
-  },
+
 
   {
     // 1600
@@ -1096,62 +1075,62 @@ export const SoulPids = [
   }
 ]
 
-export const EnchantPids = [
-  {
-    // 600
-    pid: 25,
-    token1: 'SOUL',
-    token2: 'ENCHANT',
-    lpSymbol: 'ENCHANT-SOUL',
-    lpAddresses: {
-      4002: '',
-      250: '0x9acc8f23680b6d7e295166277e2fb9c88a26cce6',
-    },
-    token1Address: tokens.ENCHANT,
-    token2Address: tokens.SOUL,
-  },
+// export const EnchantPids = [
+//   {
+//     // 600
+//     pid: 25,
+//     token1: 'SOUL',
+//     token2: 'ENCHANT',
+//     lpSymbol: 'ENCHANT-SOUL',
+//     lpAddresses: {
+//       4002: '',
+//       250: '0x9acc8f23680b6d7e295166277e2fb9c88a26cce6',
+//     },
+//     token1Address: tokens.ENCHANT,
+//     token2Address: tokens.SOUL,
+//   },
 
-  {
+//   {
   
-      // 600
-      pid: 26,
-      token1: 'SEANCE',
-      token2: 'ENCHANT',
-      lpSymbol: 'ENCHANT-SEANCE',
-      lpAddresses: {
-        4002: '',
-        250: '0x5695176d085f8f7320507495066ffec940da244c',
-      },
-      token1Address: tokens.ENCHANT,
-      token2Address: tokens.SEANCE,
-    },
-    {
-      // 1200
-      pid: 24,
-      token1: 'ENCHANT',
-      token2: 'FTM',
-      lpSymbol: 'ENCHANT-FTM',
-      lpAddresses: {
-        4002: '',
-        250: '0xb4d6ff768f409e4d102bad80f9a8ac105453ccdd',
-      },
-      token1Address: tokens.ENCHANT,
-      token2Address: tokens.FTM,
-    },
-    {
-      // 400
-      pid: 29,
-      token1: 'ENCHANT',
-      token2: 'USDC',
-      lpSymbol: 'ENCHANT-USDC',
-      lpAddresses: {
-        4002: '',
-        250: '0x6c6f32008262666CA4acEd0a824c4945AB96e5F3',
-      },
-      token1Address: tokens.ENCHANT,
-      token2Address: tokens.USDC,
-    },
-]
+//       // 600
+//       pid: 26,
+//       token1: 'SEANCE',
+//       token2: 'ENCHANT',
+//       lpSymbol: 'ENCHANT-SEANCE',
+//       lpAddresses: {
+//         4002: '',
+//         250: '0x5695176d085f8f7320507495066ffec940da244c',
+//       },
+//       token1Address: tokens.ENCHANT,
+//       token2Address: tokens.SEANCE,
+//     },
+//     {
+//       // 1200
+//       pid: 24,
+//       token1: 'ENCHANT',
+//       token2: 'FTM',
+//       lpSymbol: 'ENCHANT-FTM',
+//       lpAddresses: {
+//         4002: '',
+//         250: '0xb4d6ff768f409e4d102bad80f9a8ac105453ccdd',
+//       },
+//       token1Address: tokens.ENCHANT,
+//       token2Address: tokens.FTM,
+//     },
+//     {
+//       // 400
+//       pid: 29,
+//       token1: 'ENCHANT',
+//       token2: 'USDC',
+//       lpSymbol: 'ENCHANT-USDC',
+//       lpAddresses: {
+//         4002: '',
+//         250: '0x6c6f32008262666CA4acEd0a824c4945AB96e5F3',
+//       },
+//       token1Address: tokens.ENCHANT,
+//       token2Address: tokens.USDC,
+//     },
+// ]
 
 export const StablePids = [
   {

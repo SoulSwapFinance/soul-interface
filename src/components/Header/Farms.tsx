@@ -16,7 +16,7 @@ const items = (i18n: I18n) => [
     href: '/farms',
     all: true,
     soul: false,
-    seance: false,
+    inactive: false,
     fantom: false,
     stales: false,
   },
@@ -25,16 +25,16 @@ const items = (i18n: I18n) => [
     href: '/farms/soulpower',
     all: false,
     soul: true,
-    seance: false,
+    inactive: false,
     fantom: false,
     stables: false,
   },
   {
-    name: i18n._(t`SEANCE`),
-    href: '/farms/seancecircle',
+    name: i18n._(t`INACTIVE`),
+    href: '/farms/inactive',
     all: false,
     soul: false,
-    seance: true,
+    inactive: true,
     fantom: false,
     stables: false,
   },
@@ -43,7 +43,7 @@ const items = (i18n: I18n) => [
     href: '/farms/fanties',
     all: false,
     soul: false,
-    seance: false,
+    inactive: false,
     fantom: true,
     stables: false,
   },
@@ -52,7 +52,7 @@ const items = (i18n: I18n) => [
     href: '/farms/stables',
     all: false,
     soul: false,
-    seance: false,
+    inactive: false,
     fantom: false,
     stables: true,
   },
@@ -110,10 +110,10 @@ export default function Menu() {
                           SOUL
                         </a>
                       </NavLink>
-                    ) : item.seance ? (
+                    ) : item.inactive ? (
                       <NavLink key={item.name} href={item.href}>
                         <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                          SEANCE
+                          INACTIVE
                         </a>
                       </NavLink>
                     ) : item.fantom ? (
