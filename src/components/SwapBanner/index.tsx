@@ -9,11 +9,12 @@ const SwapBanner: FC = () => (
           <span className="centered md:hidden">Grim Withdrawals - Now Available. 
           {/* <br/> Use Filter: Retired Vaults */}
                     </span>
+                    <br/>
           <a href="https://app.grim.finance/" target = "_blank" rel="noreferrer"
               className="font-bold text-white underline">
               {' '}
               <br />
-              Click Here to Withdraw<span aria-hidden="true"></span>
+              Click Here to Withdraw<span aria-hidden="true">
             </a>
             </span>
           <span className="hidden md:inline"> Grim Withdrawals - Now Available.
