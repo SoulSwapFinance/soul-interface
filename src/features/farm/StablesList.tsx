@@ -7,7 +7,7 @@ import useSoulSummoner from './hooks/useSoulSummoner'
 import FarmHeader from '../../features/farm/Header'
 import FarmKey from './FarmKey'
 import FarmRowRender from './FarmRowRender'
-import { StablePids, WithdrawPids } from './Pids'
+import { StablePids } from './Pids'
 // import { Wrap, Heading, Text, Button } from './ReusableStyles' // Heading, Text
 
 const StablesList = () => {

@@ -4,13 +4,13 @@ import { ethers } from 'ethers'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import useSoulSummoner from './hooks/useSoulSummoner'
 
-import FarmHeader from '../../features/farm/Header'
+import FarmHeader from './Header'
 import FarmKey from './FarmKey'
 import FarmRowRender from './FarmRowRender'
-import { EnchantPids } from './Pids'
+import { InactivePids } from './Pids'
 // import { Wrap, Heading, Text, Button } from './ReusableStyles' // Heading, Text
 
-const MateList = () => {
+const InactiveList = () => {
   const { chainId, account } = useActiveWeb3React()
 
   const [totalPending, setTotalReward] = useState(0)
@@ -58,7 +58,7 @@ const MateList = () => {
   //   />
   // ))
 
-  const farmList = EnchantPids.map((farm) => (
+  const farmList = InactivePids.map((farm) => (
     <FarmRowRender
       key={farm.pid}
       pid={farm.pid}
@@ -82,4 +82,4 @@ const MateList = () => {
   )
 }
 
-export default MateList
+export default InactiveList

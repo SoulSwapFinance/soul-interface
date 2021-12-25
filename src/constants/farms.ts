@@ -111,7 +111,7 @@ export const POOLS: AddressMap = {
         '0xD5F5E2638d636A98eD4aAEBfd2045441316e0c08': {  // USDC-FUSD
           id: 6,
           token0: {
-            id: '0x04068da6c83afcfa0e13ba15a6696662335d5b75', // USDC
+            id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
             name: 'USDC Coin',
             symbol: 'USDC',
             decimals: 6,
@@ -258,21 +258,21 @@ export const POOLS: AddressMap = {
           decimals: 6,
         },
       },
-      // '0xe637D90A993EDBD75AC09E9fcB16313D193B9451': {  // DAI-gfUSDT
-      //   id: 16, // 200
-      //   token0: {
-      //     id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
-      //     name: 'Dai Stablecoin',
-      //     symbol: 'DAI',
-      //     decimals: 18,
-      //   },
-      //   token1: {
-      //     id: '0x940F41F0ec9ba1A34CF001cc03347ac092F5F6B5', // gfUSDT
-      //     name: 'Geist fUSDT',
-      //     symbol: 'gFUSDT',
-      //     decimals: 6,
-      //   },
-      // },
+      '0xe637D90A993EDBD75AC09E9fcB16313D193B9451': {  // DAI-gfUSDT
+        id: 16, // 0
+        token0: {
+          id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
+          name: 'Dai Stablecoin',
+          symbol: 'DAI',
+          decimals: 18,
+        },
+        token1: {
+          id: '0x940F41F0ec9ba1A34CF001cc03347ac092F5F6B5', // gfUSDT
+          name: 'Geist fUSDT',
+          symbol: 'gFUSDT',
+          decimals: 6,
+        },
+      },
       '0xC1EdFbA9811B696bDFd07d31eD5FF702e031364E': {  // BNB-DAI
         id: 17, // 400
         token0: {
@@ -679,7 +679,7 @@ export const POOLS: AddressMap = {
         },
       },
       '0x951BBB838e49F7081072895947735b0892cCcbCD': {  // LUX-FTM
-        id: 44, // 600
+        id: 44, // 0
         token0: {
             id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // LUX
             name: 'Dai Stablecoin',
@@ -694,11 +694,26 @@ export const POOLS: AddressMap = {
         },
       },
       '0x46729c2AeeabE7774a0E710867df80a6E19Ef851': {  // LUX-DAI
-        id: 45, // 600
+        id: 45, // 0
         token0: {
           id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
           name: 'Dai Stablecoin',
           symbol: 'DAI',
+          decimals: 18,
+        },
+        token1: {
+          id: '0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b', // LUX
+          name: 'Luxor Money',
+          symbol: 'LUX',
+          decimals: 9,
+        },
+      },
+      '0x475a63154C3e85ac0F2CB453f0b5c63e4370333c': {  // LUX-SOUL
+        id: 46, // 900
+        token0: {
+          id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
+          name: 'Soul Power',
+          symbol: 'SOUL',
           decimals: 18,
         },
         token1: {

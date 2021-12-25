@@ -4,19 +4,19 @@ import Container from '../../components/Container'
 import Head from 'next/head'
 import React from 'react'
 
-import SeanceList from '../../features/farm/SeanceList'
+import InactiveList from '../../features/farm/InactiveList'
 // import NavLink from '../../components/NavLink'
 
-const SeanceCircle = () => {
+const Inactive = () => {
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">
       <DoubleGlowShadowV2 opacity="0.6">
       <Container id="farm-page">
         <Head>
-          <title>Farm | SeanceCircle</title>
+          <title>Farm | Inactive</title>
           <meta key="description" name="description" content="Farm SOUL" />
         </Head>
-        <SeanceList />
+        <InactiveList />
       </Container>
       </DoubleGlowShadowV2>
 
@@ -24,4 +24,4 @@ const SeanceCircle = () => {
   )
 }
 
-export default SeanceCircle
+export default Inactive
