@@ -15,8 +15,8 @@ const SwapBanner: FC = () => (
               {' '}
               <br />
               Click Here to Withdraw<span aria-hidden="true">
-            </a>
             </span>
+            </a>
           <span className="hidden md:inline"> Grim Withdrawals - Now Available.
           {/* <br/> Use Filter: Retired Vaults */}
           </span>
