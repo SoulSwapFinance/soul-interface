@@ -7,7 +7,7 @@ import useSoulSummoner from './hooks/useSoulSummoner'
 import FarmHeader from '../../features/farm/Header'
 import FarmKey from './FarmKey'
 import FarmRowRender from './FarmRowRender'
-import { FantiesPids, WithdrawPids } from './Pids'
+import { FantiesPids } from './Pids'
 import Farm from '../../pages/farm'
 // import { Wrap, Heading, Text, Button } from './ReusableStyles' // Heading, Text
 
