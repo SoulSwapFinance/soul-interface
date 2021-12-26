@@ -46,6 +46,19 @@ export const InactivePids = [
     token2Address: tokens.DAI,
   },
   {
+    // 600
+    pid: 28,
+    token1: 'SOUL',
+    token2: 'fUSDT',
+    lpSymbol: 'SOUL-FUSDT',
+    lpAddresses: {
+      4002: '',
+      250: '0xE27Cc06a7F34892BC17a5474303b91b2C9F3F21A',
+    },
+    token1Address: tokens.SOUL,
+    token2Address: tokens.fUSDT,
+  },
+  {
     // 0
     pid: 25,
     token1: 'SOUL',
@@ -257,21 +270,6 @@ export const AllPids = [
     token1Address: tokens.SOUL,
     token2Address: tokens.USDC,
   },
-
-  {
-    // 600
-    pid: 28,
-    token1: 'SOUL',
-    token2: 'fUSDT',
-    lpSymbol: 'SOUL-FUSDT',
-    lpAddresses: {
-      4002: '',
-      250: '0xE27Cc06a7F34892BC17a5474303b91b2C9F3F21A',
-    },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.fUSDT,
-  },
-
   {
     // 600
     pid: 5,
@@ -990,7 +988,19 @@ export const SeancePids = [
 ]
 
 export const SoulPids = [
-
+  {
+    // 900
+    pid: 46,
+    token1: 'SOUL',
+    token2: 'LUX',
+    lpSymbol: 'SOUL-LUX',
+    lpAddresses: {
+      4002: '',
+      250: '0x475a63154C3e85ac0F2CB453f0b5c63e4370333c',
+    },
+    token1Address: tokens.SOUL,
+    token2Address: tokens.LUX,
+  },
   {
     // 600
     pid: 5,
@@ -1004,8 +1014,6 @@ export const SoulPids = [
     token1Address: tokens.SOUL,
     token2Address: tokens.SEANCE,
   },
-
-
   {
     // 1600
     pid: 1,
@@ -1058,20 +1066,6 @@ export const SoulPids = [
     },
     token1Address: tokens.SOUL,
     token2Address: tokens.USDC,
-  },
-
-  {
-    // 600
-    pid: 28,
-    token1: 'SOUL',
-    token2: 'fUSDT',
-    lpSymbol: 'SOUL-fUSDT',
-    lpAddresses: {
-      4002: '',
-      250: '0xE27Cc06a7F34892BC17a5474303b91b2C9F3F21A',
-    },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.fUSDT,
   }
 ]
 
