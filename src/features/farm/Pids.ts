@@ -697,7 +697,6 @@ export const MatePids = [
     
   ]
 
-
 export const FantiesPids = [
 
   {
@@ -726,20 +725,6 @@ export const FantiesPids = [
     token1Address: tokens.FTM,
     token2Address: tokens.SEANCE,
   },
-  {
-    // 1200
-    pid: 24,
-    token1: 'FTM',
-    token2: 'ENCHANT',
-    lpSymbol: 'FTM-ENCHANT',
-    lpAddresses: {
-      4002: '',
-      250: '0xb4d6ff768f409e4d102bad80f9a8ac105453ccdd',
-    },
-    token1Address: tokens.FTM,
-    token2Address: tokens.ENCHANT,
-  },
-
   {
     // 600
     pid: 13,
@@ -1068,63 +1053,6 @@ export const SoulPids = [
     token2Address: tokens.USDC,
   }
 ]
-
-// export const EnchantPids = [
-//   {
-//     // 600
-//     pid: 25,
-//     token1: 'SOUL',
-//     token2: 'ENCHANT',
-//     lpSymbol: 'ENCHANT-SOUL',
-//     lpAddresses: {
-//       4002: '',
-//       250: '0x9acc8f23680b6d7e295166277e2fb9c88a26cce6',
-//     },
-//     token1Address: tokens.ENCHANT,
-//     token2Address: tokens.SOUL,
-//   },
-
-//   {
-  
-//       // 600
-//       pid: 26,
-//       token1: 'SEANCE',
-//       token2: 'ENCHANT',
-//       lpSymbol: 'ENCHANT-SEANCE',
-//       lpAddresses: {
-//         4002: '',
-//         250: '0x5695176d085f8f7320507495066ffec940da244c',
-//       },
-//       token1Address: tokens.ENCHANT,
-//       token2Address: tokens.SEANCE,
-//     },
-//     {
-//       // 1200
-//       pid: 24,
-//       token1: 'ENCHANT',
-//       token2: 'FTM',
-//       lpSymbol: 'ENCHANT-FTM',
-//       lpAddresses: {
-//         4002: '',
-//         250: '0xb4d6ff768f409e4d102bad80f9a8ac105453ccdd',
-//       },
-//       token1Address: tokens.ENCHANT,
-//       token2Address: tokens.FTM,
-//     },
-//     {
-//       // 400
-//       pid: 29,
-//       token1: 'ENCHANT',
-//       token2: 'USDC',
-//       lpSymbol: 'ENCHANT-USDC',
-//       lpAddresses: {
-//         4002: '',
-//         250: '0x6c6f32008262666CA4acEd0a824c4945AB96e5F3',
-//       },
-//       token1Address: tokens.ENCHANT,
-//       token2Address: tokens.USDC,
-//     },
-// ]
 
 export const StablePids = [
   {
