@@ -522,7 +522,7 @@ function AppBar(): JSX.Element {
                     id={`seance-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                   >
-                    {i18n._(t`Stake Soul`)}
+                    {i18n._(t`Stake`)}
                   </a>
                 </Link>
               )}
@@ -533,7 +533,7 @@ function AppBar(): JSX.Element {
                   id={`enchant-nav-link`}
                   className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                   >
-                  {i18n._(t`Enchant Seance`)}
+                  {i18n._(t`Enchant`)}
                 </a>
               </Link>
               )}
