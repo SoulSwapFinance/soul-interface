@@ -15,12 +15,12 @@ const items = (i18n: I18n) => [
   },
   {
     name: i18n._(t`Stake`),
-    description: i18n._(t`Stake Sou for Soul.`),
+    description: i18n._(t`Stake Soul for Soul.`),
     href: '/seance',
   },
   {
     name: i18n._(t`Earn`),
-    description: i18n._(t`Earn Fees with Enchantments.`),
+    description: i18n._(t`Exit from Enchant.`),
     href: '/enchant',
   },
   {
