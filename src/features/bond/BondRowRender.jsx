@@ -24,6 +24,10 @@ import {
 } from './BondStyles'
 
 import { Wrap, ClickableText, Heading, Text, ExternalLink } from '../../components/ReusableStyles'
+import Modal from '../../components/Modal'
+import ModalHeader from '../../components/ModalHeader'
+import Typography from '../../components/Typography'
+import Button from '../../components/Button'
 
 // params to render bond with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)
@@ -78,6 +82,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const [showing, setShowing] = useState(false)
 
   const [approved, setApproved] = useState(false)
+  const [confirmed, setConfirmed] = useState(false)
 
   const [receiving, setReceiving] = useState(0)
 
@@ -88,6 +93,9 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const [availableValue, setAvailableValue] = useState(0)
   const [stakedLpValue, setStakedLpValue] = useState(0)
   const [pendingValue, setPendingValue] = useState(0)
+
+  // show confirmation view before minting SOUL
+  const [showConfirmation, setShowConfirmation] = useState(false)
 
   // const [earningPerDay, setEarningPerDay] = useState();
   const [percOfBond, setPercOfBond] = useState()
@@ -352,6 +360,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
     }
   }
 
+  
   return (
     <>
       <Wrap padding="0" display="flex" justifyContent="center">
@@ -492,18 +501,21 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   </Wrap>
                   <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
                   <Wrap padding="0" margin="0" display="flex">
-                    {approved ? (
-                      <SubmitButton
+                      {approved ? 
+                      (   
+                        <SubmitButton
                         height="2.5rem"
-                        onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
-                      >
-                        BOND LP
-                      </SubmitButton>
-                    ) : (
-                      <SubmitButton height="2.5rem" onClick={() => handleApprove()}>
-                        APPROVE LP
-                      </SubmitButton>
-                    )}
+                        onClick={() => 
+                          handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))
+                        }
+                        >
+                          BOND LP
+                        </SubmitButton>
+                      ) : (
+                        <SubmitButton height="2.5rem" onClick={() => handleApprove()}>
+                          APPROVE LP
+                        </SubmitButton>
+                      )}
                   </Wrap>
                 </FunctionBox>
               ):(
@@ -550,7 +562,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     color="black"
                     margin=".5rem 0 .5rem 0"
                     onClick={() =>
-                      handleMint()
+                      setShowConfirmation(true)
+                      // handleMint()
                     }
                   >
                     MINT SOUL {pendingValue !== 0 ? `($${pendingValue})` : ''}
@@ -583,6 +596,48 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
             </DetailsContainer>
             </Wrap>
       ) : null}
+      <Modal isOpen={showConfirmation} onDismiss={
+          () => setShowConfirmation(false)          }>
+        <div className="space-y-4">
+          <ModalHeader title={`Are you sure?`} onClose={() => setShowConfirmation(false)} />
+          <Typography variant="lg">
+            Minting claims your pending rewards and sends your LP tokens to the Treasury.
+            <br/><br/>
+            You may only mint once and you may not add more to an open bond.
+          </Typography>
+          <Typography variant="sm" className="font-medium">
+            QUESTIONS OR CONCERNS?
+            <a href="mailto:soulswapfinance@gmail.com">
+            {' '} CONTACT US
+            </a>
+          </Typography>
+          <SubmitButton
+            height="2.5rem"
+            // onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
+            onClick={() => 
+              // setShowConfirmation(true)
+              handleMint()
+              }              
+            >
+              I UNDERSTAND THESE TERMS
+          </SubmitButton>
+          {/* <Button
+            color="red"
+            size="lg"
+            onClick={() => {
+              if (window.prompt(`Please type the word "confirm" to enable expert mode.`) === 'confirm') {
+                setShowConfirmation(false)
+              }
+              setShowConfirmation(false)
+            }}
+          >
+            <Typography variant="lg" id="confirm-expert-mode">
+              { `I UNDERSTAND THESE TERMS` }
+            </Typography> */}
+
+          {/* </Button> */}
+        </div>
+      </Modal>
     </>
   )
 }
