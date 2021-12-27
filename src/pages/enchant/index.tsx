@@ -272,7 +272,7 @@ export default function Enchant() {
                   We have begun implenting a new measure, including buying back and burning Soul. 
                   <br/><br/>Full details regarding the proposal passed on December 25th, 2021, may be found 
                   <b>
-                    <a href="https://forum.soulswap.finance/t/proposal-remove-enchant/159" target="_blank"> here</a>
+                    <a href="https://forum.soulswap.finance/t/proposal-remove-enchant/159" target="_blank" rel="noreferrer"> here</a>
                   </b>.
                   Please exit before February 2022, which is when the UI will no longer be accessible for an easy exit, requiring directly interacting with the smart contract.
               </div>
