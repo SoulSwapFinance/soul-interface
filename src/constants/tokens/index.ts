@@ -158,7 +158,7 @@ export const SEANCE: ChainTokenMap = {
 
 // AURA
 export const AURA: ChainTokenMap = {
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0xb086A17F18f6ca515dd9C92A1E23Ec2104248a58', 18, 'AURA', 'SoulAura'),  // 21 DEC
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x5b014e247c517Be62D622D44b912280B0b60ac73', 18, 'AURA', 'SoulAura'),  // 21 DEC
 }
 
 // ENCHANT
