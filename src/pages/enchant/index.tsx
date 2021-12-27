@@ -18,6 +18,7 @@ import useSeanceStakeManual from '../../hooks/useSeanceStakeManual'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
+import EnchantBanner from '../../components/EnchantBanner'
 import useEnchant from '../../hooks/useEnchant'
 // import useEnchantHelper from '../../hooks/useEnchant'
 import { ethers } from 'ethers'
@@ -71,7 +72,7 @@ export default function Enchant() {
   const enchantBalance = useTokenBalance(account ?? undefined, ENCHANT[chainId])
 
   const walletConnected = !!account
-  const toggleWalletModal = useWalletModalToggle()
+  // const toggleWalletModal = useWalletModalToggle()
 
   const [activeTab, setActiveTab] = useState(0)
   const [modalOpen, setModalOpen] = useState(false)
@@ -119,7 +120,7 @@ export default function Enchant() {
     if (buttonDisabled) return
 
     if (!walletConnected) {
-      toggleWalletModal()
+      // toggleWalletModal()
     } else {
       setPendingTx(true)
 
@@ -173,7 +174,7 @@ export default function Enchant() {
 
   const fetchStakedBalance = async () => {
     if (!walletConnected) {
-      toggleWalletModal()
+      // toggleWalletModal()
     } else {
       try {
         const staked = ethers.BigNumber.from(await userBalance()).toString()
@@ -192,7 +193,7 @@ export default function Enchant() {
 
   const fetchEnchantedSeance = async () => {
     if (!walletConnected) {
-      toggleWalletModal()
+      // toggleWalletModal()
     } else {
       try {
         const bal = ethers.BigNumber.from(await enchantedSeance()).toString()
@@ -215,7 +216,7 @@ export default function Enchant() {
 
   const fetchTotalSupply = async () => {
     if (!walletConnected) {
-      toggleWalletModal()
+      // toggleWalletModal()
     } else {
       try {
         const supply = ethers.BigNumber.from(await totalShares()).toString()
@@ -256,18 +257,24 @@ export default function Enchant() {
         />
       </Head>
       <DoubleGlowShadowV2 maxWidth={false} opacity={'0.3'}>
+        <EnchantBanner />
         <div className="flex flex-col w-full min-h-full">
           <div className="flex justify-center mb-6">
             <div className="flex flex-col w-full max-w-xl mt-auto mb-2">
+              <br/><br/>
               <div className="flex max-w-lg">
                 <div className="self-end mb-3 text-lg font-bold md:text-2xl text-high-emphesis md:mb-7">
-                  {i18n._(t`Enchant your Seance...`)}
+                 Enchant Has Been Discontinued
                 </div>
               </div>
                 <div className="max-w-lg pr-4 mb-2 text-md leading-5 md:text-base md:mb-4 md:pr-0">
-                  {i18n._(t`For every swap on our exchange, a 0.05% fee is collected to ENCHANT and used to buy back SEANCE. 
-                  Your ENCHANT is continuously compounding. When you unstake, you receive your deposited SEANCE and fees collected.`
-                  )}
+                  <b>Enchant rewards have been discontinued</b>. 
+                  We have begun implenting a new measure, including buying back and burning Soul. 
+                  <br/><br/>Full details regarding the proposal passed on December 25th, 2021, may be found 
+                  <b>
+                    <a href="https://forum.soulswap.finance/t/proposal-remove-enchant/159" target="_blank"> here</a>
+                  </b>.
+                  Please exit before February 2022, which is when the UI will no longer be accessible for an easy exit, requiring directly interacting with the smart contract.
               </div>
             </div>
            
