@@ -23,11 +23,10 @@ import { getAddress } from '@ethersproject/address'
 export default function Scarab(): JSX.Element {
   const { i18n } = useLingui()
   const { account } = useActiveWeb3React()
-  const [tokenAddress, setTokenAddress] = useState(undefined)
+  const [tokenAddress, setTokenAddress] = useState('0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07')
   const token = useToken(isAddress(tokenAddress) ? tokenAddress : undefined)
   const [pendingTx, setPendingTx] = useState(false)
   const addTransaction = useTransactionAdder()
-
   const [scarabs, setScarabs] = useState([])
 
   const scarabContract = useScarab()
