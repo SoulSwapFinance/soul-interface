@@ -52,6 +52,11 @@ const TokenPair = styled(ExternalLink)`
   }
 `
 
+const TokenPairLink = styled(ExternalLink)`
+  font-size: .9rem;
+  padding-left: 10;
+`
+
 const TokenLogo = styled(Image)`
   @media screen and (max-width: 400px) {
     font-size: 1rem;
@@ -138,6 +143,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
     }
   })
 
+  const isWFTM = bond.token1Address == '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'
+  
   /**
    * Opens the function panel dropdown
    */
@@ -501,21 +508,53 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   </Wrap>
                   <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
                   <Wrap padding="0" margin="0" display="flex">
-                      {approved ? 
-                      (   
+                      {(approved && Number(unstakedBal) == 0) ? 
+                      (
+                        (bond.token1 == 'FTM' || bond.token2 == 'FTM') ? (
+                        <TokenPairLink
+                        target="_blank"
+                        rel="noopener"
+                        color="#F36FFE" // neon purple
+                        href=
+                        {bond.token1 == 'FTM' ?
+                        `https://exchange.soulswap.finance/add/ETH/${
+                          bond.token2Address[250]}`
+                          : `https://exchange.soulswap.finance/add/ETH/${
+                            bond.token1Address[250]}`
+                          }
+                        >
+                          CREATE {bond.token1}-{bond.token2} PAIR
+                        </TokenPairLink>
+                        ) :                      
+                        <TokenPairLink
+                        target="_blank"
+                        rel="noopener"
+                        text-color="#F36FFE" // neon purple
+                        href=
+                        {`https://exchange.soulswap.finance/add/${
+                          bond.token1Address[250]}/${bond.token2Address[250]}`}
+                        >
+                          CREATE {bond.token1}-{bond.token2} PAIR
+                        </TokenPairLink>
+                      ) :
+                      approved ? 
+                      (
                         <SubmitButton
                         height="2.5rem"
                         onClick={() => 
                           handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))
                         }
-                        >
-                          BOND LP
+                        >                        
+                          DEPOSIT {bond.token1}-{bond.token2} LP
                         </SubmitButton>
-                      ) : (
+                      ) :
+                      (
                         <SubmitButton height="2.5rem" onClick={() => handleApprove()}>
                           APPROVE LP
                         </SubmitButton>
-                      )}
+                      )
+                    
+                    }
                   </Wrap>
                 </FunctionBox>
               ):(
@@ -568,27 +607,6 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   >
                     MINT SOUL {pendingValue !== 0 ? `($${pendingValue})` : ''}
                   </SubmitButton>
-                </Wrap>
-
-                <Wrap padding="0">
-                  <Wrap padding="0" display="flex" justifyContent="center">
-                    <Text fontSize=".9rem" padding="0" color="#F36FFE">
-                      Exchange deposited LP for earned SOUL.
-                    </Text>
-
-                    {/* {isBondMode !== 0 ? (
-                  <Text fontSize=".9rem" padding="0" color="#F36FFE">
-                    Minting sends your LP in exchange for SOUL. 
-                  </Text>
-                ) : (
-                  <Text fontSize=".9rem" padding="0" color="#F36FFE">
-                    Minting sends LP in exchange for SOUL. 
-                  </Text>
-                )} */}
-                    {/* <Text fontSize=".9rem" textAlign="center" color="#aaa">
-                      Receiving {pending} SOUL
-                    </Text> */}
-                  </Wrap>
                 </Wrap>
               </FunctionBox>
               )}
