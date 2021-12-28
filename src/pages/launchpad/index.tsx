@@ -70,7 +70,7 @@ export default function Launchpad(): JSX.Element {
                 </Typography>
                 <br />
                 <Typography variant="base" className={'max-w-xl text-gray-400'}>
-                  Want to launch your project with us?
+                  Interested in launching your project with us?
                   <br />
                   <a
                     href="https://forms.gle/oDFKZAvC8jRbAfw29"
@@ -80,7 +80,7 @@ export default function Launchpad(): JSX.Element {
                       'underline font-extrabold bg-clip-text text-transparent bg-gradient-to-l from-purple to-purple mt-2'
                     }
                   >
-                    Click here to apply for our Launchpad.
+                   {">> Click Here to Launch <<"}
                   </a>
                 </Typography>
               </div>
