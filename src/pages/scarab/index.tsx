@@ -1,9 +1,14 @@
 /* eslint-disable @next/next/link-passhref */
-import { useActiveWeb3React } from '../../hooks'
 import Head from 'next/head'
 import React, { useCallback, useEffect, useState } from 'react'
 import Search from '../../components/Search'
-import { classNames, isAddress } from '../../functions'
+import {
+  ApprovalState,
+  useActiveWeb3React,
+  useApproveCallback,
+} from '../../hooks'
+
+import { classNames, isAddress, tryParseAmount } from '../../functions'
 import NavLink from '../../components/NavLink'
 import Link from 'next/link'
 import Card from '../../components/Card'
@@ -12,24 +17,43 @@ import { useLingui } from '@lingui/react'
 import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 // import SoulLogo from '../../components/SoulLogo'
 import { useTransactionAdder } from '../../state/transactions/hooks'
+import { SCARAB_ADDRESS } from '../../constants'
 import useScarab from '../../features/scarab/useScarab'
 import { Disclosure } from '@headlessui/react'
 import moment from 'moment'
-import { useToken } from '../../hooks/Tokens'
+import { useCurrency, useToken } from '../../hooks/Tokens'
 import { CurrencyAmount } from '../../sdk'
-import Button from '../../components/Button'
+import Button, { ButtonConfirmed } from '../../components/Button'
 import { getAddress } from '@ethersproject/address'
+import { AutoRow } from '../../components/Row'
+import Loader from '../../components/Loader'
 
 export default function Scarab(): JSX.Element {
   const { i18n } = useLingui()
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const [tokenAddress, setTokenAddress] = useState('0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07')
   const token = useToken(isAddress(tokenAddress) ? tokenAddress : undefined)
   const [pendingTx, setPendingTx] = useState(false)
   const addTransaction = useTransactionAdder()
   const [scarabs, setScarabs] = useState([])
+  // const [value, setValue] = useState('')
+
+  const seance = useCurrency('0x124B06C5ce47De7A6e9EFDA71a946717130079E6') || undefined
+  const value = CurrencyAmount.fromRawAmount(seance, 1^28)
+  const typedDepositValue = value
+
+  const [approvalState, approve] = useApproveCallback(typedDepositValue, SCARAB_ADDRESS[chainId])
 
   const scarabContract = useScarab()
+
+  // check if user has gone through approval process, used to show two step buttons, reset on token change
+  const [approvalSubmitted, setApprovalSubmitted] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (approvalState === ApprovalState.PENDING) {
+      setApprovalSubmitted(true)
+    }
+  }, [approvalState, approvalSubmitted])
 
   useEffect(() => {
     if (isAddress(tokenAddress)) {
@@ -40,6 +64,10 @@ export default function Scarab(): JSX.Element {
       })
     }
   }, [tokenAddress, scarabContract])
+
+  const handleApprove = useCallback(async () => {
+    await approve()
+  }, [approve])
 
   const handleWithdraw = useCallback(
     async (id) => {
@@ -155,6 +183,26 @@ export default function Scarab(): JSX.Element {
                                 </div>
                                 <div className="flex flex-col items-end justify-center">
                                   <div className="text-xs text-right md:text-base text-secondary">
+                                  {approvalState !== ApprovalState.APPROVED && (
+                                      <ButtonConfirmed
+                                        onClick={handleApprove}
+                                        disabled={
+                                          approvalState !== ApprovalState.NOT_APPROVED ||
+                                          approvalSubmitted // ||
+                                          // !allInfoSubmitted
+                                        }
+                                      >
+                                        {approvalState === ApprovalState.PENDING ? (
+                                          <div className={'p-2'}>
+                                            <AutoRow gap="6px" justify="center">
+                                              Approving <Loader stroke="white" />
+                                            </AutoRow>
+                                          </div>
+                                        ) : (
+                                          i18n._(t`Approve`)
+                                        )}
+                                      </ButtonConfirmed>
+                                    )}
                                     <Button
                                       variant="link"
                                       style={{ width: '100%' }}
