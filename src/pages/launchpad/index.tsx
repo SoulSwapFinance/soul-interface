@@ -73,7 +73,7 @@ export default function Launchpad(): JSX.Element {
                   Want to launch your project with us?
                   <br />
                   <a
-                    href="https://forms.gle/oik9pbenvwFjMndg9"
+                    href="https://forms.gle/oDFKZAvC8jRbAfw29"
                     target="_blank"
                     rel="noreferrer"
                     className={
