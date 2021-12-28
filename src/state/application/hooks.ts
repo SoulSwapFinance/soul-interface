@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { AppDispatch, AppState } from '../index'
@@ -8,6 +8,23 @@ export function useBlockNumber(): number | undefined {
   const { chainId } = useActiveWeb3React()
 
   return useSelector((state: AppState) => state.application.blockNumber[chainId ?? -1])
+}
+
+export function useTimestampFromBlock(block: number | undefined): number | undefined {
+  const { library } = useActiveWeb3React()
+  const [timestamp, setTimestamp] = useState<number>()
+  useEffect(() => {
+    async function fetchTimestamp() {
+      if (block) {
+        const blockData = await library?.getBlock(block)
+        blockData && setTimestamp(blockData.timestamp)
+      }
+    }
+    if (!timestamp) {
+      fetchTimestamp()
+    }
+  }, [block, library, timestamp])
+  return timestamp
 }
 
 export function useModalOpen(modal: ApplicationModal): boolean {

@@ -75,6 +75,7 @@ import ENCHANT_HELPER_ABI from '../constants/abis/soulswap/enchant-helper.json' 
 import SOUL_ABI from '../constants/abis/soulswap/soulpower.json' // 28 JUL
 import SEANCE_ABI from '../constants/abis/soulswap/seance.json' // 28 JUL
 import ATOMIC_SWAP_ABI from '../constants/abis/soulswap/atomic-swap.json'
+import LAUNCHPAD_ABI from '../constants/abis/soulswap/launchpad.json'
 
 // bridge
 import anyswapEthOperaBridge_ABI from '../constants/abis/soulswap/bridge/anyswapEthOperaBridge.json'
@@ -278,6 +279,11 @@ export function useFactoryContract(): Contract | null {
 export function useLockerContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && LOCKER_ADDRESS[chainId], LOCKER_ABI, withSignerIfPossible)
+}
+
+export function useLaunchpadContract(address?: string, withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && address !== undefined && address !== '' && address, LAUNCHPAD_ABI, withSignerIfPossible)
 }
 
 export function useRouterContract(useArcher = false, withSignerIfPossible?: boolean): Contract | null {
