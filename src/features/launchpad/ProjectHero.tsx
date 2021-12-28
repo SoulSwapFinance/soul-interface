@@ -44,7 +44,7 @@ export const ProjectHero = ({ project, totalCommited }) => {
             color="gradient"
             onClick={() => router.push(`${project.id}?tab=join`)}
           >
-            Join Pool
+            Join
           </Button>
           <Button size="sm" variant="outlined" color="gradient" onClick={() => window.open(project.website, '_blank')}>
             View Project Website

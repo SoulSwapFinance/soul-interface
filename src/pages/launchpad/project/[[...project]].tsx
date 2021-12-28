@@ -721,8 +721,8 @@ export default function LaunchpadProject(): JSX.Element {
                 className="bg-dark-900 z-4 rounded"
                 header={
                   <Menu>
-                    <MenuItem tabName="about" title="About The Project" />
-                    <MenuItem tabName="join" title="Join Pool" />
+                    <MenuItem tabName="about" title="Description" />
+                    <MenuItem tabName="join" title="Join" />
                     <MenuItem tabName="claim" title="Claim" />
                   </Menu>
                 }
@@ -731,7 +731,7 @@ export default function LaunchpadProject(): JSX.Element {
                 <div className="md:p-6 min-h-[400px]">
                   {!project ? (
                     <Typography variant="base" className={'max-w-xl m-auto text-center mb-2 text-gray-400'}>
-                      Project not Found
+                      Project Not Found
                     </Typography>
                   ) : (
                     <>

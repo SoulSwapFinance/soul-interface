@@ -23,6 +23,11 @@ export type ProjectTokenomics = {
   description: string
 }
 
+export type ProjectDetails = {
+  title: string
+  description: string
+}
+
 export type ProjectIDO = {
   title: string
   description: string
@@ -55,6 +60,7 @@ export type ProjectInfo = {
   features?: ProjectFeature[]
   socials?: ProjectSocial[]
   tokenomics?: ProjectTokenomics[]
+  details?: ProjectDetails[]
   ido?: ProjectIDO[]
 }
 
@@ -108,23 +114,31 @@ export const LAUNCHPAD_PROJECTS: ProjectsMap = {
       },
     ],
     socials: [
-      { title: 'Website', link: 'https://luxor.money' },
-      { title: 'Twitter', link: 'https://twitter.com/LuxorMoney' },
-      { title: 'Telegram', link: 'https://t.me/SoulSwapDeFi' },
-      // { title: 'Discord', link: 'https://discord.com/invite/DQjChB6Wa6' },
-      // { title: 'Medium', link: 'https://soulswapfinance.medium.com/' },
-      { title: 'Litepaper', link: 'https://docs.luxor.money' },
+      { title: 'Project Website', link: 'https://luxor.money' },
+      { title: 'Token Explorer', link: 'https://tinyurl.com/ftmscan' },
+      { title: 'DeFi Application', link: 'https://app.luxor.money' },
+      { title: 'Twitter Profile', link: 'https://twitter.com/LuxorMoney' },
+      { title: 'Official Telegram', link: 'https://t.me/SoulSwapDeFi' },
+      { title: 'Official Discord', link: 'https://discord.com/invite/DQjChB6Wa6' },
+      { title: 'Project Medium', link: 'https://soulswapfinance.medium.com/' },
+      { title: 'Project Documentation', link: 'https://docs.luxor.money' },
     ],
-    tokenomics: [
+    details: [
       { title: 'Name', description: 'Luxor Money' },
       { title: 'Symbol', description: 'LUX' },
       { title: 'Blockchain', description: 'Fantom Opera' },
-      { title: 'Total Supply', description: '1,000 LUX' },
-      { title: 'Price', description: '$300' },
+      { title: 'Discounted Price', description: '100 FTM' },
+    ],
+    tokenomics: [
+      { title: 'Current Price', description: '$500' },
+      { title: 'Circulating Supply', description: '1,000 LUX' },
+      { title: 'Maximum Supply', description: '100,000 LUX' },
+      { title: 'Fully Diluted MC', description: '$50,000,000' },
     ],
     ido: [
-      { title: 'Total LUX', description: '1,000 LUX' },
-      { title: 'Total Raise', description: '$100,000' },
+      { title: 'Total Available', description: '1,000 LUX' },
+      { title: 'Launch Price', description: '100 FTM' },
+      { title: 'Raise Target', description: '$100,000' },
       { title: 'Start Date', description: 'January 2022' },
       { title: 'End Date', description: 'February 2022' },
       { title: 'Pools', description: 'Basic, Unlimited' },
