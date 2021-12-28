@@ -523,7 +523,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                             bond.token1Address[250]}`
                           }
                         >
-                          CREATE {bond.token1}-{bond.token2} PAIR
+                          CLICK HERE TO CREATE {bond.token1}-{bond.token2} PAIR
                         </TokenPairLink>
                         ) :                      
                         <TokenPairLink
