@@ -409,7 +409,7 @@ const Pool = ({ project, poolInfo, launchpadInfo }) => {
   )
 }
 
-const ClaimItem = ({ project, launchpadInfo, releaseBlock, k }) => {
+const ClaimItem = ({ project, launchpadInfo, releaseBlock, releaseTime, k }) => {
   const { account } = useActiveWeb3React()
   const blockNumber = useBlockNumber()
   const blockTimestamp = useTimestampFromBlock(blockNumber)
@@ -432,7 +432,7 @@ const ClaimItem = ({ project, launchpadInfo, releaseBlock, k }) => {
         target="_blank"
         rel="noreferrer"
       >
-        {releaseBlock?.toString()}
+        {releaseTime?.toString()}
       </a>
       <Typography variant="base" className="text-emphesis text-right">
         {formatPercent(launchpadInfo?.harvestReleasePercent[k] / 1e2)}
@@ -461,13 +461,13 @@ const ClaimItem = ({ project, launchpadInfo, releaseBlock, k }) => {
               width: '150px',
             }}
             size="xs"
-            disabled={releaseBlock > blockTimestamp || !claimEnabled || userPoolId?.claimed?.[k] || pendingTx}
+            disabled={releaseTime > blockTimestamp || !claimEnabled || userPoolId?.claimed?.[k] || pendingTx}
           >
             {pendingTx ? (
               <div className="flex items-center justify-center">
                 <div className="pr-2">Claim</div> <Loader stroke="white" size="12px" />
               </div>
-            ) : releaseBlock > blockTimestamp ? (
+            ) : releaseTime > blockTimestamp ? (
               'Locked'
             ) : userPoolId?.claimed?.[k] ? (
               'Claimed'
@@ -518,9 +518,9 @@ const Claim = ({ project, launchpadInfo }) => {
                 </Typography>
                 <Typography variant="base" className="text-light text-center  font-bold"></Typography>
               </div>
-              {launchpadInfo?.harvestReleaseBlocks?.map((releaseBlock, k) => {
+              {launchpadInfo?.harvestReleaseTimestamps?.map((releaseTime, k) => {
                 return (
-                  <ClaimItem releaseBlock={releaseBlock} key={k} k={k} launchpadInfo={launchpadInfo} project={project} />
+                  <ClaimItem releaseTime={releaseTime} key={k} k={k} launchpadInfo={launchpadInfo} project={project} releaseBlock={undefined} />
                 )
               })}
             </div>

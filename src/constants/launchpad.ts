@@ -46,6 +46,7 @@ export type ProjectInfo = {
   price?: number
   baseUrl?: string
   readmore?: string
+  docs?: string
   website?: string
   tokenContract?: string
   launchpadContract?: string
@@ -61,7 +62,7 @@ export const LAUNCHPAD_PROJECTS: ProjectsMap = {
   0: {
     name: 'Luxor Money',
     symbol: '$LUX',
-    status: PROJECT_STATUS.COMPLETED,
+    status: PROJECT_STATUS.UPCOMING,
     raise: 100000,
     price: 300,
     pairPrice: 205,
@@ -70,11 +71,12 @@ export const LAUNCHPAD_PROJECTS: ProjectsMap = {
     teaser: '/launchpad/luxor/teaser.mp4',
     image: '/launchpad/luxor/teaser.png',
     starts: 'January 22th 2022',
-    startTime: 28900000,
-    endTime: 29250000,
-    startsOn: 'January 22th 2022, 10:00 UTC',
-    endsOn: 'January 28th 2022, 16:00 UTC',
+    startTime: 1641578400,
+    endTime: 1643738400,
+    startsOn: 'January 7th 2022, 12:00 UTC',
+    endsOn: 'January 31st 2022, 12:00 UTC',
     readmore: 'https://soulswapfinance.medium.com',
+    docs: 'https://docs.luxor.money',
     website: 'https://luxor.money/',
     tokenContract: '0x6671e20b83ba463f270c8c75dae57e3cc246cb2b',
     launchpadContract: '0x739ff56D48A3aB7a29A3087E82EB985ee00895dF',

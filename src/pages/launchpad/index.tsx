@@ -131,7 +131,7 @@ export default function Launchpad(): JSX.Element {
                   {result.length == 0 && (
                     <>
                       <Typography variant="base" className={'max-w-xl m-auto text-center mb-2 text-gray-400'}>
-                        No data
+                        No Data
                       </Typography>
                     </>
                   )}
@@ -205,26 +205,36 @@ export default function Launchpad(): JSX.Element {
                                   : `≈ ${p.endsOn}`}
                               </Typography>
                             </div>
-                            <div className="flex sm:flex-row justify-between space-x-3">
+                            <div className="flex sm:flex-row space-x-3">
                               <a
                                 href={p.website}
                                 target="_blank"
                                 rel="noreferrer"
                                 className={
-                                  'hover:underline hover:font-extrabold bg-clip-text text-transparent bg-gradient-to-l from-purple to-dark-purple mt-2'
+                                  'hover:underline hover:font-extrabold bg-clip-text text-transparent bg-gradient-to-l from-purple to-purple mt-2'
                                 }
                               >
-                                Project Website
+                                Website
                               </a>
                               <a
                                 href={p.readmore}
                                 target="_blank"
                                 rel="noreferrer"
                                 className={
-                                  'hover:underline hover:font-extrabold bg-clip-text text-transparent bg-gradient-to-l from-purple to-dark-purple mt-2'
+                                  'hover:underline hover:font-extrabold bg-clip-text text-transparent bg-gradient-to-l from-purple to-purple mt-2'
                                 }
                               >
-                                Official announcement
+                                Announcement
+                              </a>
+                              <a
+                                href={p.docs}
+                                target="_blank"
+                                rel="noreferrer"
+                                className={
+                                  'hover:underline hover:font-extrabold bg-clip-text text-transparent bg-gradient-to-l from-purple to-purple mt-2'
+                                }
+                              >
+                                Docs
                               </a>
                             </div>
                           </div>

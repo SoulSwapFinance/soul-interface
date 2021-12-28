@@ -69,18 +69,18 @@ export const ProjectHero = ({ project, totalCommited }) => {
             </Typography>
             <Typography variant="h3" className="font-bold">
               {project.status == PROJECT_STATUS.UPCOMING
-                ? `Block ${project.startTime}`
+                ? `${project.startsOn}`
                 : project.status == PROJECT_STATUS.COMPLETED
-                ? `Block ${project.endTime}`
-                : `Block ${project.endTime}`}
+                ? `${project.endsOn}`
+                : `${project.endsOn}`}
             </Typography>
-            <Typography variant="xs" className="">
+            {/* <Typography variant="xs" className="">
               {project.status == PROJECT_STATUS.UPCOMING
                 ? `≈ ${project.startsOn}`
                 : project.status == PROJECT_STATUS.COMPLETED
                 ? `≈ ${project.endsOn}`
                 : `≈ ${project.endsOn}`}
-            </Typography>
+            </Typography> */}
           </div>
           <div className="flex flex-col">
             <div className="relative">
