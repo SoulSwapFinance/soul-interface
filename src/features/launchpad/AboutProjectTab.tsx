@@ -20,9 +20,9 @@ export const AboutProjectTab = ({ project }) => {
             </ul>
           </div>
         </div>
-        <div className="hidden md:grid grid-cols-1 space-y-4  justify-items-end">
+        <div className="hidden lg:grid grid-cols-1 space-y-4  justify-items-end">
           <div className="flex flex-col">
-            <Image alt={''} width={500} height={393} className={'rounded'} src={project.image} />
+            <Image alt={''} width={400} height={400} className={'rounded'} src={project.image} />
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@ export const AboutProjectTab = ({ project }) => {
             </Typography>
           </div>
         </div>
-        <div className="grid md:grid-cols-3 gap-10 mt-10">
+        <div className="grid md:grid-cols-1 gap-10 mt-10">
           <Card
             className="border py-2 px-4"
             // removePadding
