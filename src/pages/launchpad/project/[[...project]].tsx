@@ -511,7 +511,7 @@ const Claim = ({ project, launchpadInfo }) => {
             <div className={'bg-dark-700 rounded flex-col p-4 '}>
               <div className="grid  py-1 grid-cols-3 border border-t-0 border-r-0 border-l-0 border-thin border-dark-600">
                 <Typography variant="base" className="text-light font-bold">
-                  Block Number
+                  Timestamp
                 </Typography>
                 <Typography variant="base" className="text-light text-right  font-bold">
                   %
@@ -552,7 +552,7 @@ const UserInfo = ({ project, pools, launchpadInfo }) => {
           Before Sale
         </Typography>
         <Typography variant="base" className="text-emphesis">
-          You need to stake at least 50 SOUL in one of the Vaults to be eligible. Multiplier boosts are tiered, you can
+          Stake 1,000 SOUL (or more) in one of the Vaults to be eligible. Multiplier boosts are tiered, you can
           read more about it{' '}
           <a
             className="underline"
@@ -560,12 +560,13 @@ const UserInfo = ({ project, pools, launchpadInfo }) => {
             target="_blank"
             rel="noreferrer"
           >
-            here.
+            here
           </a>
+          {' for full details regarding the launch event.'}
         </Typography>
         <br/>
         <Typography variant="base" className="text-secondary mt-2">
-          During Launch Sale
+          During Launch Event
         </Typography>
         <Typography variant="base" className="text-emphesis">
             Create <b>SOUL-FTM LP</b> to commit to the pool of your choice (Basic vs. Unlimited).
@@ -573,16 +574,15 @@ const UserInfo = ({ project, pools, launchpadInfo }) => {
         </Typography>
         <br/>
         <Typography variant="base" className="text-secondary mt-2">
-          After Launchpad Sale
+          After Launch Event
         </Typography>
         <Typography variant="base" className="text-emphesis">
-          You can claim your offering tokens, and your refund (if there is overflow). The rest of the tokens are
-          gradually released following the vesting schedule.
+          You can claim your offering tokens. The rest of the tokens are gradually released following the vesting schedule.
         </Typography>
       </div>
       <div className="flex flex-col">
         <Typography variant="h3" className="text-emphesis mt-4 mb-2">
-          Your Stats
+          Eligibility Status
         </Typography>
       </div>
       {!account ? (
@@ -611,7 +611,7 @@ const UserInfo = ({ project, pools, launchpadInfo }) => {
           </div>
           <div className="flex flex-col">
             <Typography variant="h3" className="text-emphesis mt-4 mb-2">
-              Your Participation
+              Participation
             </Typography>
           </div>
           <div className={`flex flex-col  space-x-10 pb-2`}>
