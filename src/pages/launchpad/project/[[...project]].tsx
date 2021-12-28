@@ -89,13 +89,13 @@ const Pool = ({ project, poolInfo, launchpadInfo }) => {
 
   const poolRaise = project.raise * (poolInfo.raisingAmount / launchpadInfo.totalRaise)
 
-  const totalCommited = (poolInfo.totalAmountPool / 1e18) * launchpadInfo.pairPrice
-  const totalCommitedPercent = (totalCommited / poolRaise) * 100
+  const totalCommitted = (poolInfo.totalAmountPool / 1e18) * launchpadInfo.pairPrice
+  const totalCommittedPercent = (totalCommitted / poolRaise) * 100
   const multiplier = launchpadInfo?.userInfo?.multiplier
   const stakingInOtherPools = launchpadInfo?.userInfo?.pools?.find((p) => p.amount > 0 && p.id !== poolInfo.id)
   const stakingPool = launchpadInfo?.userInfo?.pools?.find((p) => p.id == poolInfo.id)
 
-  const commited =
+  const committed =
     (stakingPool?.amount && assetToken && CurrencyAmount.fromRawAmount(assetToken, stakingPool?.amount)) || 0
 
   const userCommittedAmount = stakingPool?.amount / 1e18
@@ -174,13 +174,13 @@ const Pool = ({ project, poolInfo, launchpadInfo }) => {
                 </div>
                 <div className="text-right">
                   <span className="text-base text-purple">
-                    {formatNumber(totalCommited, true, false)} ({formatPercent(totalCommitedPercent)})
+                    {formatNumber(totalCommitted, true, false)} ({formatPercent(totalCommittedPercent)})
                   </span>
                 </div>
               </div>
               <div className="overflow-hidden h-2 text-xs flex rounded bg-dark-500">
                 <div
-                  style={{ width: totalCommitedPercent > 100 ? '100%' : totalCommitedPercent.toFixed(0) + '%' }}
+                  style={{ width: totalCommittedPercent > 100 ? '100%' : totalCommittedPercent.toFixed(0) + '%' }}
                   className="rounded bg-gradient-to-r from-light-purple  to-purple"
                 ></div>
               </div>
@@ -319,7 +319,7 @@ const Pool = ({ project, poolInfo, launchpadInfo }) => {
                 <div>
                   <div className="flex mb-2 items-center justify-between ">
                     <div>
-                      <span className="text-base inline-block">Your committed</span>
+                      <span className="text-base inline-block">Your Commitment</span>
                     </div>
                   </div>
                   <div className={'flex items-center w-full space-x-3 rounded bg-dark-900 focus:bg-dark-700 p-3'}>
@@ -336,20 +336,20 @@ const Pool = ({ project, poolInfo, launchpadInfo }) => {
                         <div className="flex flex-col">
                           <div
                             onClick={() => {
-                              if (commited) {
-                                setValueUnstake(commited.toFixed(18))
+                              if (committed) {
+                                setValueUnstake(committed.toFixed(18))
                               }
                             }}
                             className="text-xxs font-medium text-right cursor-pointer text-low-emphesis"
                           >
-                            Commited: {formatNumber(userCommittedAmount, false, false)}
+                            Committed: {formatNumber(userCommittedAmount, false, false)}
                           </div>
                         </div>
                         <div className="flex flex-col">
                           <div
                             onClick={() => {
-                              if (commited) {
-                                setValueUnstake(commited.toFixed(18))
+                              if (committed) {
+                                setValueUnstake(committed.toFixed(18))
                               }
                             }}
                             className="text-xxs font-medium text-right cursor-pointer text-low-emphesis"
@@ -538,7 +538,7 @@ const UserInfo = ({ project, pools, launchpadInfo }) => {
 
   const userPoolId = launchpadInfo?.userInfo?.pools?.find((r) => r.amount > 0)
   const pool = pools[userPoolId?.id]
-  const commited = !userPoolId ? 0 : (userPoolId?.amount / 1e18) * launchpadInfo.pairPrice
+  const committed = !userPoolId ? 0 : (userPoolId?.amount / 1e18) * launchpadInfo.pairPrice
   const participation = !userPoolId ? 0 : userPoolId?.allocation / 1e12
 
   console.log(userPoolId)
@@ -629,7 +629,7 @@ const UserInfo = ({ project, pools, launchpadInfo }) => {
                   Committed
                 </Typography>
                 <Typography variant="base" className=" text-emphesis">
-                  {userPoolId ? `${formatNumber(commited, true, false)}` : '--'}
+                  {userPoolId ? `${formatNumber(committed, true, false)}` : '--'}
                 </Typography>
               </div>
               <div>
@@ -685,7 +685,7 @@ export default function LaunchpadProject(): JSX.Element {
     return previousValue + currentValue.raisingAmount * 1
   }, 0)
 
-  const totalCommited =
+  const totalCommitted =
     launchpadPools?.reduce((previousValue, currentValue) => {
       return previousValue + currentValue.totalAmountPool / 1e18
     }, 0) * pairPrice
@@ -693,7 +693,7 @@ export default function LaunchpadProject(): JSX.Element {
   const extraLaunchpadInfo = {
     ...launchpadInfo,
     totalRaise,
-    totalCommited,
+    totalCommitted,
     pairPrice,
     userInfo: {
       ...launchpadUserInfo,
@@ -716,7 +716,7 @@ export default function LaunchpadProject(): JSX.Element {
               <Back />
             </div>
             <div className={`col-span-1 md:col-span-12`}>
-              <ProjectHero project={project} totalCommited={totalCommited} />
+              <ProjectHero project={project} totalCommitted={totalCommitted} />
               <Card
                 className="bg-dark-900 z-4 rounded"
                 header={

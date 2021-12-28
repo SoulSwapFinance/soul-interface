@@ -6,9 +6,9 @@ import { formatNumber, formatPercent } from '../../functions'
 import { useRouter } from 'next/router'
 import { PROJECT_STATUS } from '../../constants/launchpad'
 
-export const ProjectHero = ({ project, totalCommited }) => {
+export const ProjectHero = ({ project, totalCommitted }) => {
   const router = useRouter()
-  const totalCommitedPercent = (totalCommited / project.raise) * 100
+  const totalCommittedPercent = (totalCommitted / project.raise) * 100
 
   return (
     <div
@@ -90,13 +90,13 @@ export const ProjectHero = ({ project, totalCommited }) => {
                 </div>
                 <div className="text-right">
                   <span className="text-base text-purple">
-                    {formatNumber(totalCommited, true, false)} ({formatPercent(totalCommitedPercent)})
+                    {formatNumber(totalCommitted, true, false)} ({formatPercent(totalCommittedPercent)})
                   </span>
                 </div>
               </div>
               <div className="overflow-hidden h-2 text-xs flex rounded bg-dark-500">
                 <div
-                  style={{ width: totalCommitedPercent > 100 ? '100%' : totalCommitedPercent.toFixed(0) + '%' }}
+                  style={{ width: totalCommittedPercent > 100 ? '100%' : totalCommittedPercent.toFixed(0) + '%' }}
                   className="rounded bg-gradient-to-r from-light-purple  to-purple"
                 ></div>
               </div>
