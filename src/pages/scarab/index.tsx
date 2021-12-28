@@ -94,7 +94,7 @@ export default function Scarab(): JSX.Element {
             </div>
             <div className={`col-span-12`} style={{ minHeight: '35rem' }}>
               <Card className="h-full rounded bg-dark-900">
-                <Search
+                {/* <Search
                   placeholder={'Search by name, symbol or address'}
                   term={tokenAddress}
                   search={(value: string): void => {
@@ -111,16 +111,16 @@ export default function Scarab(): JSX.Element {
                       to create one.
                     </span>
                   </div>
-                )}
+                )} */}
                 {scarabs.length > 0 && (
                   <div className="grid grid-cols-5 text-base font-bold text-primary mt-10 mb-2">
                     {/* <div className="flex items-center col-span-2 px-2">
                       <div className="hover:text-high-emphesis">{i18n._(t`Token`)}</div>
                     </div> */}
                     <div className="flex items-center ">{i18n._(t`Recipient`)}</div>
-                    <div className="flex items-center ">{i18n._(t`Souls Locked`)}</div>
-                    <div className="flex items-center ">{i18n._(t`Seance Tribute`)}</div>
-                    <div className="items-center justify-end px-2 flex ">{i18n._(t`Unlock Date`)}</div>
+                    <div className="flex items-center ">{i18n._(t`Locked`)}</div>
+                    <div className="flex items-center ">{i18n._(t`Tribute`)}</div>
+                    <div className="flex items-center ">{i18n._(t`Unlock`)}</div>
                     <div className="items-center justify-end px-2 flex ">{i18n._(t``)}</div>
                   </div>
                 )}
@@ -148,10 +148,10 @@ export default function Scarab(): JSX.Element {
                                 <div className="flex flex-col justify-center">
                                   {CurrencyAmount.fromRawAmount(token, scarab?.tribute).toSignificant(6)}
                                 </div>
-                                <div className="flex flex-col items-end justify-center">
-                                  <div className="text-xs text-right md:text-base text-secondary">
+                                <div className="flex flex-col justify-center">
+                                  {/* <div className="text-xs text-right md:text-base text-secondary"> */}
                                     {moment.unix(scarab?.unlockTimestamp.toString()).fromNow()}
-                                  </div>
+                                  {/* </div> */}
                                 </div>
                                 <div className="flex flex-col items-end justify-center">
                                   <div className="text-xs text-right md:text-base text-secondary">
