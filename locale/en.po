@@ -426,9 +426,6 @@ msgstr "EXIT"
 msgid "Earn"
 msgstr "Earn"
 
-msgid "Earn Fees with Enchantments."
-msgstr "Earn Fees with Enchantments."
-
 msgid "Either return to the {link}, or change to an available network."
 msgstr "Either return to the {link}, or change to an available network."
 
@@ -437,12 +434,6 @@ msgstr "Enchant"
 
 msgid "Enchant Fee"
 msgstr "Enchant Fee"
-
-msgid "Enchant Seance"
-msgstr "Enchant Seance"
-
-msgid "Enchant your Seance..."
-msgstr "Enchant your Seance..."
 
 msgid "English"
 msgstr "English"
@@ -473,6 +464,9 @@ msgstr "Everytime you stake or claim rewards your lock time renews."
 
 msgid "Exchange Rate"
 msgstr "Exchange Rate"
+
+msgid "Exit from Enchant."
+msgstr "Exit from Enchant."
 
 msgid "Expanded results from inactive Token Lists"
 msgstr "Expanded results from inactive Token Lists"
@@ -525,13 +519,6 @@ msgstr "Filled"
 
 msgid "Find Pool"
 msgstr "Find Pool"
-
-msgid ""
-"For every swap on our exchange, a 0.05% fee is collected to ENCHANT and used to buy back SEANCE. \n"
-"Your ENCHANT is continuously compounding. When you unstake, you receive your deposited SEANCE and fees collected."
-msgstr ""
-"For every swap on our exchange, a 0.05% fee is collected to ENCHANT and used to buy back SEANCE. \n"
-"Your ENCHANT is continuously compounding. When you unstake, you receive your deposited SEANCE and fees collected."
 
 msgid "Forum"
 msgstr "Forum"
@@ -587,6 +574,9 @@ msgstr "Historical Total Locked: {0} SOUL"
 
 msgid "How to use"
 msgstr "How to use"
+
+msgid "INACTIVE"
+msgstr "INACTIVE"
 
 msgid "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
 msgstr "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
@@ -977,9 +967,6 @@ msgstr "Russian"
 msgid "SCARAB"
 msgstr "SCARAB"
 
-msgid "SEANCE"
-msgstr "SEANCE"
-
 msgid "SELF"
 msgstr "SELF"
 
@@ -1100,11 +1087,8 @@ msgstr "Stake SOUL"
 msgid "Stake SOUL for SPELL"
 msgstr "Stake SOUL for SPELL"
 
-msgid "Stake Sou for Soul."
-msgstr "Stake Sou for Soul."
-
-msgid "Stake Soul"
-msgstr "Stake Soul"
+msgid "Stake Soul for Soul."
+msgstr "Stake Soul for Soul."
 
 msgid ""
 "Stake into SPELL add collateral as aSPELL on Aave all in\n"

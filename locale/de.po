@@ -422,9 +422,6 @@ msgstr ""
 msgid "Earn"
 msgstr ""
 
-msgid "Earn Fees with Enchantments."
-msgstr ""
-
 msgid "Either return to the {link}, or change to an available network."
 msgstr ""
 
@@ -432,12 +429,6 @@ msgid "Enchant"
 msgstr ""
 
 msgid "Enchant Fee"
-msgstr ""
-
-msgid "Enchant Seance"
-msgstr ""
-
-msgid "Enchant your Seance..."
 msgstr ""
 
 msgid "English"
@@ -468,6 +459,9 @@ msgid "Everytime you stake or claim rewards your lock time renews."
 msgstr ""
 
 msgid "Exchange Rate"
+msgstr ""
+
+msgid "Exit from Enchant."
 msgstr ""
 
 msgid "Expanded results from inactive Token Lists"
@@ -518,11 +512,6 @@ msgid "Filled"
 msgstr ""
 
 msgid "Find Pool"
-msgstr ""
-
-msgid ""
-"For every swap on our exchange, a 0.05% fee is collected to ENCHANT and used to buy back SEANCE. \n"
-"Your ENCHANT is continuously compounding. When you unstake, you receive your deposited SEANCE and fees collected."
 msgstr ""
 
 msgid "Forum"
@@ -576,6 +565,9 @@ msgid "Historical Total Locked: {0} SOUL"
 msgstr ""
 
 msgid "How to use"
+msgstr ""
+
+msgid "INACTIVE"
 msgstr ""
 
 msgid "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
@@ -960,9 +952,6 @@ msgstr ""
 msgid "SCARAB"
 msgstr ""
 
-msgid "SEANCE"
-msgstr ""
-
 msgid "SELF"
 msgstr ""
 
@@ -1083,10 +1072,7 @@ msgstr ""
 msgid "Stake SOUL for SPELL"
 msgstr ""
 
-msgid "Stake Sou for Soul."
-msgstr ""
-
-msgid "Stake Soul"
+msgid "Stake Soul for Soul."
 msgstr ""
 
 msgid ""
