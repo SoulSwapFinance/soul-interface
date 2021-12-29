@@ -37,15 +37,6 @@ msgstr "- Input your token or liquidity pair address, amount of tokens to lock, 
 msgid "- Locker contract address: {0}"
 msgstr "- Locker contract address: {0}"
 
-msgid "- Note: only Buns may create Safes, please use the other tab entitled \"Search Safes\" to claim."
-msgstr "- Note: only Buns may create Safes, please use the other tab entitled \"Search Safes\" to claim."
-
-msgid "- Please navigate to \"Search Safes\" and enter your Grim LP to swap for your Soul LP."
-msgstr "- Please navigate to \"Search Safes\" and enter your Grim LP to swap for your Soul LP."
-
-msgid "- These safes are strictly for users to claim their recovered SoulSwap LP from the Grim Exploit."
-msgstr "- These safes are strictly for users to claim their recovered SoulSwap LP from the Grim Exploit."
-
 msgid "- You will not be able to withdraw your tokens before the unlock time"
 msgstr "- You will not be able to withdraw your tokens before the unlock time"
 
@@ -354,9 +345,6 @@ msgstr "Create Pair"
 msgid "Create Pool & Supply"
 msgstr "Create Pool & Supply"
 
-msgid "Create Safe"
-msgstr "Create Safe"
-
 msgid "Create Scarab"
 msgstr "Create Scarab"
 
@@ -401,9 +389,6 @@ msgstr "Deposited"
 
 msgid "Depositing {0} into CoffinBox"
 msgstr "Depositing {0} into CoffinBox"
-
-msgid "Directions"
-msgstr "Directions"
 
 msgid "Disable Multihops"
 msgstr "Disable Multihops"
@@ -673,6 +658,9 @@ msgstr "Loading your {exchange} liquidity positions"
 
 msgid "Lock"
 msgstr "Lock"
+
+msgid "Locked"
+msgstr "Locked"
 
 msgid "Lockup"
 msgstr "Lockup"
@@ -1003,17 +991,11 @@ msgstr "Scarabs are a neat way to share your SOUL with anyone, so long as they'r
 msgid "Seance"
 msgstr "Seance"
 
-msgid "Seance Tribute"
-msgstr "Seance Tribute"
-
 msgid "Search Lockers"
 msgstr "Search Lockers"
 
 msgid "Search Name or Address"
 msgstr "Search Name or Address"
-
-msgid "Search Safes"
-msgstr "Search Safes"
 
 msgid "Search Scarabs"
 msgstr "Search Scarabs"
@@ -1065,9 +1047,6 @@ msgstr "Soul User"
 
 msgid "SoulSwap"
 msgstr "SoulSwap"
-
-msgid "Souls Locked"
-msgstr "Souls Locked"
 
 msgid "Spanish"
 msgstr "Spanish"
@@ -1197,6 +1176,9 @@ msgstr "Transaction Submitted"
 msgid "Transaction deadline"
 msgstr "Transaction deadline"
 
+msgid "Tribute"
+msgstr "Tribute"
+
 msgid "Try enabling multi-hop trades"
 msgstr "Try enabling multi-hop trades"
 
@@ -1206,8 +1188,8 @@ msgstr "Turn On Expert Mode"
 msgid "Unknown error{0}. Try increasing your slippage tolerance."
 msgstr "Unknown error{0}. Try increasing your slippage tolerance."
 
-msgid "Unlock Date"
-msgstr "Unlock Date"
+msgid "Unlock"
+msgstr "Unlock"
 
 msgid "Unlock date"
 msgstr "Unlock date"
@@ -1292,9 +1274,6 @@ msgstr ""
 
 msgid "Withdraw"
 msgstr "Withdraw"
-
-msgid "Withdraw from Safe {id}"
-msgstr "Withdraw from Safe {id}"
 
 msgid "Withdraw from Scarab {id}"
 msgstr "Withdraw from Scarab {id}"

@@ -37,15 +37,6 @@ msgstr ""
 msgid "- Locker contract address: {0}"
 msgstr ""
 
-msgid "- Note: only Buns may create Safes, please use the other tab entitled \"Search Safes\" to claim."
-msgstr ""
-
-msgid "- Please navigate to \"Search Safes\" and enter your Grim LP to swap for your Soul LP."
-msgstr ""
-
-msgid "- These safes are strictly for users to claim their recovered SoulSwap LP from the Grim Exploit."
-msgstr ""
-
 msgid "- You will not be able to withdraw your tokens before the unlock time"
 msgstr ""
 
@@ -350,9 +341,6 @@ msgstr ""
 msgid "Create Pool & Supply"
 msgstr ""
 
-msgid "Create Safe"
-msgstr ""
-
 msgid "Create Scarab"
 msgstr ""
 
@@ -396,9 +384,6 @@ msgid "Deposited"
 msgstr ""
 
 msgid "Depositing {0} into CoffinBox"
-msgstr ""
-
-msgid "Directions"
 msgstr ""
 
 msgid "Disable Multihops"
@@ -664,6 +649,9 @@ msgid "Loading your {exchange} liquidity positions"
 msgstr ""
 
 msgid "Lock"
+msgstr ""
+
+msgid "Locked"
 msgstr ""
 
 msgid "Lockup"
@@ -988,16 +976,10 @@ msgstr ""
 msgid "Seance"
 msgstr ""
 
-msgid "Seance Tribute"
-msgstr ""
-
 msgid "Search Lockers"
 msgstr ""
 
 msgid "Search Name or Address"
-msgstr ""
-
-msgid "Search Safes"
 msgstr ""
 
 msgid "Search Scarabs"
@@ -1049,9 +1031,6 @@ msgid "Soul User"
 msgstr ""
 
 msgid "SoulSwap"
-msgstr ""
-
-msgid "Souls Locked"
 msgstr ""
 
 msgid "Spanish"
@@ -1178,6 +1157,9 @@ msgstr ""
 msgid "Transaction deadline"
 msgstr ""
 
+msgid "Tribute"
+msgstr ""
+
 msgid "Try enabling multi-hop trades"
 msgstr ""
 
@@ -1187,7 +1169,7 @@ msgstr ""
 msgid "Unknown error{0}. Try increasing your slippage tolerance."
 msgstr ""
 
-msgid "Unlock Date"
+msgid "Unlock"
 msgstr ""
 
 msgid "Unlock date"
@@ -1269,9 +1251,6 @@ msgid ""
 msgstr ""
 
 msgid "Withdraw"
-msgstr ""
-
-msgid "Withdraw from Safe {id}"
 msgstr ""
 
 msgid "Withdraw from Scarab {id}"
