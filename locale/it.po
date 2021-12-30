@@ -88,6 +88,9 @@ msgstr ""
 msgid "Add Liquidity & Earn Fees (0.25%)"
 msgstr ""
 
+msgid "Add SOUL to MetaMask"
+msgstr ""
+
 msgid "Add collateral in order to borrow assets"
 msgstr ""
 
@@ -625,18 +628,6 @@ msgid "Limit order"
 msgstr ""
 
 msgid "Links"
-msgstr ""
-
-msgid "Liquidity Positions"
-msgstr ""
-
-msgid "Liquidity Provider Rewards"
-msgstr ""
-
-msgid ""
-"Liquidity providers earn a 0.25% fee on all trades proportional to their share of\n"
-"the pool. Fees are added to the pool, accrue in real time and can be claimed by\n"
-"withdrawing your liquidity at any time."
 msgstr ""
 
 msgid "Lists"
