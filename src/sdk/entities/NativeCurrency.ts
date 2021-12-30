@@ -8,5 +8,5 @@ import { Token } from './Token'
 export abstract class NativeCurrency extends AbstractCurrency {
   public readonly isNative: true = true
   public readonly isToken: false = false
-  public readonly address: Token = new Token(250, '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83', 18, 'FTM')// = '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'
+  public readonly address: Token = new Token(250, '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', 18, 'FTM')// = '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'
 }
