@@ -11,6 +11,10 @@ export const tokens = {
     4002: "0xf1277d1ed8ad466beddf92ef448a132661956621",
     250: "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
   },
+  WLUM: {
+    4002: "",
+    250: "0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208",
+  },
   ENCHANT: {
     4002: "",
     250: "0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a",
