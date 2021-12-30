@@ -336,9 +336,9 @@ export default function SoulStake() {
                 </div>
               </div>
                 <div className="max-w-xl pr-3 mb-2 text-sm leading-5 md:text-base md:mb-2 md:pr-0">
-                  {i18n._(t`Recieve SEANCE as a reciept for your staked SOUL. Use your SEANCE to reclaim your SOUL, or
+                  {i18n._(t`Receive SEANCE as a receipt for your staked SOUL. Use SEANCE to reclaim your SOUL, or
                   trade your SEANCE and risk locking your SOUL for all eternity... Either way, while you're staked, you earn more SOUL over time. 
-                  Zero withdrawal fees.`
+                  Zero Withdrawal Fees.`
                   )}
               </div>
             </div>
