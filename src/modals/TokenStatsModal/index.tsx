@@ -224,7 +224,7 @@ function getSummaryLine(title, value) {
                         <hr></hr>
                         <div className="flex items-center justify-between">
                           <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                            Circulating Supply
+                            Circulating
                           </Typography>
                           <Typography variant="sm" className="flex items-center font-bold py-0.5">
                             {formatNumberScale(
