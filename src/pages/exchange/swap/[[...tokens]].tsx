@@ -616,7 +616,6 @@ export default function Swap() {
         <AutoColumn justify="space-between" className="py-5">
           <iframe 
                 frameBorder={"none"}
-                title={"HOME"}
                 src={"https://analytics.soulswap.finance/tokens"}
                 height={"480" }
                 width={"100%"}

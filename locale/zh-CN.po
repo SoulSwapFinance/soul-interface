@@ -490,9 +490,6 @@ msgstr ""
 msgid "Fees"
 msgstr ""
 
-msgid "File Claim"
-msgstr ""
-
 msgid "Filled"
 msgstr ""
 
@@ -661,6 +658,9 @@ msgid "Luxor"
 msgstr ""
 
 msgid "Luxor Bonds."
+msgstr ""
+
+msgid "Luxor Money"
 msgstr ""
 
 msgid "MAX"
@@ -877,13 +877,13 @@ msgstr ""
 msgid "Receive"
 msgstr ""
 
-msgid "Recent Transactions"
+msgid ""
+"Receive SEANCE as a receipt for your staked SOUL. Use SEANCE to reclaim your SOUL, or\n"
+"trade your SEANCE and risk locking your SOUL for all eternity... Either way, while you're staked, you earn more SOUL over time. \n"
+"Zero Withdrawal Fees."
 msgstr ""
 
-msgid ""
-"Recieve SEANCE as a reciept for your staked SOUL. Use your SEANCE to reclaim your SOUL, or\n"
-"trade your SEANCE and risk locking your SOUL for all eternity... Either way, while you're staked, you earn more SOUL over time. \n"
-"Zero withdrawal fees."
+msgid "Recent Transactions"
 msgstr ""
 
 msgid "Recipient"

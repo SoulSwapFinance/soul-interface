@@ -496,9 +496,6 @@ msgstr "Farm"
 msgid "Fees"
 msgstr "Fees"
 
-msgid "File Claim"
-msgstr "File Claim"
-
 msgid "Filled"
 msgstr "Filled"
 
@@ -670,6 +667,9 @@ msgstr "Luxor"
 
 msgid "Luxor Bonds."
 msgstr "Luxor Bonds."
+
+msgid "Luxor Money"
+msgstr "Luxor Money"
 
 msgid "MAX"
 msgstr "MAX"
@@ -889,17 +889,17 @@ msgstr "Read the Documentation."
 msgid "Receive"
 msgstr "Receive"
 
+msgid ""
+"Receive SEANCE as a receipt for your staked SOUL. Use SEANCE to reclaim your SOUL, or\n"
+"trade your SEANCE and risk locking your SOUL for all eternity... Either way, while you're staked, you earn more SOUL over time. \n"
+"Zero Withdrawal Fees."
+msgstr ""
+"Receive SEANCE as a receipt for your staked SOUL. Use SEANCE to reclaim your SOUL, or\n"
+"trade your SEANCE and risk locking your SOUL for all eternity... Either way, while you're staked, you earn more SOUL over time. \n"
+"Zero Withdrawal Fees."
+
 msgid "Recent Transactions"
 msgstr "Recent Transactions"
-
-msgid ""
-"Recieve SEANCE as a reciept for your staked SOUL. Use your SEANCE to reclaim your SOUL, or\n"
-"trade your SEANCE and risk locking your SOUL for all eternity... Either way, while you're staked, you earn more SOUL over time. \n"
-"Zero withdrawal fees."
-msgstr ""
-"Recieve SEANCE as a reciept for your staked SOUL. Use your SEANCE to reclaim your SOUL, or\n"
-"trade your SEANCE and risk locking your SOUL for all eternity... Either way, while you're staked, you earn more SOUL over time. \n"
-"Zero withdrawal fees."
 
 msgid "Recipient"
 msgstr "Recipient"
