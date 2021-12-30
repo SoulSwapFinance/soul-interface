@@ -333,7 +333,7 @@ function AppBar(): JSX.Element {
                                     options: {
                                       address: '0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b',
                                       symbol: 'LUX',
-                                      decimals: 18,
+                                      decimals: 9,
                                       image:
                                         'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b/logo.png',
                                     },
