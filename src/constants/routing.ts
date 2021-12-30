@@ -178,7 +178,7 @@ export const COMMON_BASES: ChainTokenList = {
     FANTOM.SOUL,
     FANTOM.SEANCE,
     FANTOM.LUX,
-    // FANTOM.WLUM,
+    FANTOM.WLUM,
     // FANTOM.DAI,
     // FANTOM.fUSDT,
     FANTOM.USDC,
