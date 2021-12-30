@@ -206,7 +206,7 @@ export const InactivePids = [
 
 export const AllPids = [
   {
-    // 900
+    // 500
     pid: 46,
     token1: 'SOUL',
     token2: 'LUX',
@@ -217,6 +217,19 @@ export const AllPids = [
     },
     token1Address: tokens.SOUL,
     token2Address: tokens.LUX,
+  },
+  {
+    // 500
+    pid: 47,
+    token1: 'FTM',
+    token2: 'wLUM',
+    lpSymbol: 'FTM-wLUM',
+    lpAddresses: {
+      4002: '',
+      250: '0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.WLUM,
   },
   {
     // 1600
@@ -323,30 +336,17 @@ export const AllPids = [
     token2Address: tokens.USDC,
   },
   {
-    // 100
-    pid: 11,
-    token1: 'FTM',
-    token2: 'GRIM',
-    lpSymbol: 'FTM-GRIM',
+    // 400
+    pid: 7,
+    token1: 'SEANCE',
+    token2: 'USDC',
+    lpSymbol: 'SEANCE-USDC',
     lpAddresses: {
       4002: '',
-      250: '0x124D8CA33E29D1090a844e4C896DD16A360B1c96',
+      250: '0x98C678d3C7ebeD4a36B84666700d8b5b5Ddc1f79',
     },
-    token1Address: tokens.FTM,
-    token2Address: tokens.GRIM,
-  },
-  {
-    // 100
-    pid: 12,
-    token1: 'FTM',
-    token2: 'REAPER',
-    lpSymbol: 'FTM-REAPER',
-    lpAddresses: {
-      4002: '',
-      250: '0x7D776489372c8AFC0A1941a1335C9e9f90e0116a',
-    },
-    token1Address: tokens.FTM,
-    token2Address: tokens.REAPER,
+    token1Address: tokens.SEANCE,
+    token2Address: tokens.USDC,
   },
   {
     // 300
@@ -413,7 +413,7 @@ export const AllPids = [
     token1Address: tokens.FTM,
     token2Address: tokens.MIM,
   },
-
+  
   {
     // 600
     pid: 18,
@@ -557,6 +557,32 @@ export const AllPids = [
     },
     token1Address: tokens.BNB,
     token2Address: tokens.DAI,
+  },
+  {
+    // 100
+    pid: 11,
+    token1: 'FTM',
+    token2: 'GRIM',
+    lpSymbol: 'FTM-GRIM',
+    lpAddresses: {
+      4002: '',
+      250: '0x124D8CA33E29D1090a844e4C896DD16A360B1c96',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.GRIM,
+  },
+  {
+    // 100
+    pid: 12,
+    token1: 'FTM',
+    token2: 'REAPER',
+    lpSymbol: 'FTM-REAPER',
+    lpAddresses: {
+      4002: '',
+      250: '0x7D776489372c8AFC0A1941a1335C9e9f90e0116a',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.REAPER,
   },
   {
     // 200
