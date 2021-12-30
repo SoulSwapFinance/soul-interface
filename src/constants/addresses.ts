@@ -117,6 +117,13 @@ export const SOUL_FTM_PAIR: AddressMap = {
   [ChainId.FANTOM_TESTNET]: '',
 }
 
+export const SOUL_USDC_PAIR: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xC0A301f1E5E0Fe37a31657e8F60a41b14d01B0Ef',
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
 export const SEANCE_USDC_PAIR: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',

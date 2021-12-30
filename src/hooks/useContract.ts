@@ -11,6 +11,7 @@ import {
   SAFE_ADDRESS,
   ATOMIC_SWAP_ADDRESS,
   LOCKER_ADDRESS,
+  SOUL_USDC_PAIR,
 } from '../constants/addresses'
 import {
   ARGENT_WALLET_DETECTOR_ABI,
@@ -229,6 +230,11 @@ export function useSoulSeanceContract(withSignerIfPossible?: boolean): Contract 
 export function useSoulFtmContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SOUL_FTM_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
+}
+
+export function useSoulUsdcContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOUL_USDC_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
 }
 
 export function useSeanceUsdcContract(withSignerIfPossible?: boolean): Contract | null {
