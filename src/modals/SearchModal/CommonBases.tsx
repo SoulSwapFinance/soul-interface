@@ -37,9 +37,9 @@ export default function CommonBases({
               className="flex items-center p-2 m-1 space-x-2 rounded bg-dark-800 hover:bg-dark-700 disabled:bg-dark-1000 disabled:cursor-not-allowed"
             >
               <CurrencyLogo currency={currency} />
-              <Typography variant="sm" className="font-semibold">
+              {/* <Typography variant="sm" className="font-semibold">
                 {currency.symbol}
-              </Typography>
+              </Typography> */}
             </Button>
           )
         })}
