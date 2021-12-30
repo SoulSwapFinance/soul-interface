@@ -1,11 +1,11 @@
 import { ChainId, ENCHANT_ADDRESS, Token, WETH9, WNATIVE } from '../sdk'
 
 export const BSC: { [key: string]: Token } = {
-  BNB: new Token(ChainId.BSC, '', 18, 'BNB', 'Binance'),
-  DAI: new Token(ChainId.BSC, '', 18, 'DAI', 'Dai Stablecoin'),
+  DAI: new Token(ChainId.BSC, '0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3', 18, 'DAI', 'Dai Stablecoin'), // Binance Pegged DAI
 }
 
 export const FANTOM: { [key: string]: Token } = {
+  BNB: new Token(ChainId.FANTOM, '0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454', 18, 'BNB', 'Binance'),
   USDC: new Token(ChainId.FANTOM, '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6, 'USDC', 'USD Coin'),
   WBTC: new Token(ChainId.FANTOM, '0x321162Cd933E2Be498Cd2267a90534A804051b11', 8, 'WBTC', 'Wrapped Bitcoin'),
   DAI: new Token(ChainId.FANTOM, '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', 18, 'DAI', 'Dai Stablecoin'),
@@ -59,5 +59,6 @@ export const ENCHANT: ChainTokenMap = {
 
 export const WETH9_EXTENDED: { [chainId: number]: Token } = {
   ...WETH9,
+  [ChainId.BSC]: new Token(ChainId.BSC, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'WBNB', 'Wrapped Binance'),
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', 18, 'WFTM', 'Wrapped Fantom')
 }
