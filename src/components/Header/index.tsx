@@ -25,6 +25,7 @@ import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useETHBalances, useTokenBalance } from '../../state/wallet/hooks'
 
 import { useLingui } from '@lingui/react'
+import ExternalLink from '../ExternalLink'
 
 // import { ExternalLink, NavLink } from "./Link";
 // import { ReactComponent as Burger } from "../assets/images/burger.svg";
@@ -103,75 +104,42 @@ function AppBar(): JSX.Element {
                           </a>
                         </NavLink>
                       )}
-                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'https://app.luxor.money'}>
-                          <a
-                            id={`farm-nav-link`}
-                            // className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800"
-                            className="w-full relative ml-6 md:p-2"
-                            // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                            >
-                            {i18n._(t`LUXOR`)}
-                          </a>
-                        </NavLink>
-                      )} */}
                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'https://app.luxor.money'}>
-                          <a
-                            id={`farm-nav-link`}
-                            // className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800"
-                            className="w-full relative ml-6 md:p-2"
-                            // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                            >
-                            {i18n._(t`LUXOR`)}
-                          </a>
-                        </NavLink>
-                      )}
-                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                      <NavLink href={'/seance'}>
+                        <NavLink href={'/seance'}>
                         <a
                           id={`stake-nav-link`}
-                          className="hidden xl:block w-full relative ml-6 md:p-2"
+                          className="w-full relative ml-6 md:p-2"
                           >
                           {i18n._(t`STAKE`)}
                         </a>
                       </NavLink>
                       )}
                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'/enchant'}>
-                      <a
-                            id={`enchant-nav-link`}
-                            // className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800"
+                        <NavLink href={'/luxor'}>
+                          <a
+                            id={`farm-nav-link`}
                             className="hidden xl:block w-full relative ml-6 md:p-2"
-                            // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                            >
-                          {/* <Image src="https://media.giphy.com/media/iH7mGoqPivDybuDc2s/giphy.gif" alt="offering soul" width={30} height={30} /> */}
-                          {i18n._(t`ENCHANT`)}
+                          >
+                            {i18n._(t`LUXOR`)}
                           </a>
                         </NavLink>
                       )}
                       <NavLink href={'/scarab'}>
-                      <a
+                          <a
                             id={`scarab-nav-link`}
-                            // className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800"
-                            className="hidden xl:block w-full relative ml-6 md:p-2"
-                            // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                            >
-                          {/* <Image src="https://media.giphy.com/media/iH7mGoqPivDybuDc2s/giphy.gif" alt="offering soul" width={30} height={30} /> */}
+                            className="hidden xl:block w-full relative ml-6 md:p-2">
                           {i18n._(t`SCARAB`)}
                           </a>
                         </NavLink>
                       <NavLink href={'/analytics'}>
-                      <a
+                          <a 
                             id={`analytics-nav-link`}
-                            // className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800"
                             className="hidden xl:block w-full relative ml-6 md:p-2"
-                            // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                             >
                           {/* <Image src="https://media.giphy.com/media/iH7mGoqPivDybuDc2s/giphy.gif" alt="offering soul" width={30} height={30} /> */}
                           {i18n._(t`CHARTS`)}
                           </a>
-                        </NavLink>
+                      </NavLink>
                       {/* <Explore /> */}
                       {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'https://info.soul.sh'}>
@@ -514,126 +482,57 @@ function AppBar(): JSX.Element {
             </div>
 
             <Popover.Panel className="xl:hidden">
-              <div className="flex flex-col px-4 pt-2 pb-3 space-y-1">
+              <div className="flex flex-col px-10 pt-2 pb-3 space-y-4">
                 
               { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                <Link href={'/seance'}>
+                <ExternalLink href={'https://app.luxor.money'}>
                   <a
-                    id={`seance-nav-link`}
+                    id={`luxor-nav-extlink`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                   >
-                    {i18n._(t`Stake`)}
+                    {i18n._(t`Luxor Money`)}
                   </a>
-                </Link>
+                </ExternalLink>
               )}
-
               { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                <Link href={'/enchant'}>
-                <a
-                  id={`enchant-nav-link`}
-                  className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                  >
-                  {i18n._(t`Enchant`)}
-                </a>
-              </Link>
-              )}
-
+                  <ExternalLink href={'https://info.soulswap.finance'}>
+                    <a
+                      id={`vote-nav-extlink`}
+                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                    >
+                      {i18n._(t`View Charts`)}
+                    </a>
+                  </ExternalLink>
+                )}
               { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                <Link href={'/vote'}>
+                <ExternalLink href={'https://enchant.soulswap.finance'}>
                   <a
-                    id={`vote-nav-link`}
+                    id={`vote-nav-extlink`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                   >
                     {i18n._(t`Governance`)}
                   </a>
-                </Link>
+                </ExternalLink>
               )}
-             {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                <Link href={'/scarab'}>
-                  <a
-                    id={`scarab-nav-link`}
-                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                  >
-                    {i18n._(t`Scarab`)}
-                  </a>
-                </Link>
-              )} */}
-
-             { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                <Link href={'/analytics'}>
-                  <a
-                    id={`vote-nav-link`}
-                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                  >
-                    {i18n._(t`View Charts`)}
-                  </a>
-                </Link>
-              )}
-              
-              { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-               <Link href={'/claim'}>
-                  <a
-                    id={`claim-nav-link`}
-                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                    >
-                    {i18n._(t`File Claim`)}
-                  </a>
-                </Link>
-              )}
-
-               {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                <Link href={'/enchant'}>
-                  <a
-                    id={`enchant-nav-link`}
-                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                  >
-                    {i18n._(t`Enchant`)}
-                  </a>
-                </Link>
-              )}
-
-              { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                <Link href={'/seance'}>
-                <a
-                  id={`stake-nav-link`}
-                  className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                  >
-                  {i18n._(t`Seance`)}
-                </a>
-              </Link>
-              )}
-
-              { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                <Link href={'/stake'}>
-                <a
-                  id={`stake-nav-link`}
-                  className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                  >
-                  {i18n._(t`Stake`)}
-                </a>
-              </Link>
-              )} */}
-
-              {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                <Link href={'/docs'}>
+              { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                <ExternalLink href={'https://docs.soulswap.finance'}>
                 <a
                   id={`links-nav-link`}
                   className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                   >
-                  {i18n._(t`Docs`)}
+                  {i18n._(t`Documentation`)}
                 </a>
-              </Link>
-              )} */}
-
+              </ExternalLink>
+              )}
               { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                <Link href={'/tools'}>
+                <ExternalLink href={'/tools'}>
                 <a
                   id={`tools-nav-link`}
                   className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                   >
                   {i18n._(t`Explore More`)}
                 </a>
-              </Link>
+              </ExternalLink>
               )}
 
 
