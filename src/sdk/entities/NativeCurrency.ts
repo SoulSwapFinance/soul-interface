@@ -6,4 +6,5 @@ import { AbstractCurrency } from './AbstractCurrency'
 export abstract class NativeCurrency extends AbstractCurrency {
   public readonly isNative: true = true
   public readonly isToken: false = false
+  address: any
 }

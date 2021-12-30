@@ -103,20 +103,20 @@ export default function Pool() {
       <br /> <br />
       <DoubleGlowShadowV2 opacity="0.6">
         <Container maxWidth="2xl" className="space-y-6">
-          {/* <Alert
+          <Alert
           title={i18n._(t`Liquidity Provider Rewards`)}
           message={i18n._(t`Liquidity providers earn a 0.25% fee on all trades proportional to their share of
                         the pool. Fees are added to the pool, accrue in real time and can be claimed by
-                        withdrawing your liquidity`)}
+                        withdrawing your liquidity at any time.`)}
           type="information"
-        /> */}
+        />
 
           <div className="p-4 space-y-4 rounded bg-dark-900">
             <div className="p-4 mb-3 space-y-3">
               <div className="text-center">
                 <Typography component="h1" variant="h2">
                   {i18n._(t``)}
-                  {/* {i18n._(t`My Liquidity Positions`)} */}
+                  {i18n._(t`Liquidity Positions`)}
                 </Typography>
               </div>
             </div>
