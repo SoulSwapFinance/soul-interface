@@ -84,11 +84,12 @@ export function formatCurrency(c: number, precision = 0) {
     }).format(c);
 }
 
-export default function TokenStatsModal (): JSX.Element | null {
+export default function TokenStatsModal(): JSX.Element | null {
     
     const { chainId, library, account } = useActiveWeb3React()
     const tokenStatsModalOpen = useModalOpen(ApplicationModal.SOUL_STATS)
     const toggleTokenStatsModal = useToggleTokenStatsModal()
+    const toggleWalletModal = useToggleTokenStatsModal()
     const modalOpen = useModalOpen(ApplicationModal.SOUL_STATS)
     const priceHelperContract = usePriceHelperContract()
     let tokenInfo = useTokenInfo(useSoulContract())
@@ -111,13 +112,13 @@ function getSummaryLine(title, value) {
     )
   }
   if (!chainId) return null
-
+  
+function getModalContent() {
   return (
-    <Modal isOpen={tokenStatsModalOpen} onDismiss={toggleTokenStatsModal} maxWidth={672}>
-              <div className="space-y-6">
-       <div className="space-y-2">
-          <ModalHeader title={''} onClose={toggleTokenStatsModal} />
-          <div className="flex flex-row w-full py-4">
+      <><div className="space-y-6">
+      <div className="space-y-2">
+        <ModalHeader title={''} onClose={toggleTokenStatsModal} />
+        <div className="flex flex-row w-full py-4">
           <QuestionHelper text={`Add SOUL to MetaMask`}>
             <div
               className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
@@ -146,114 +147,111 @@ function getSummaryLine(title, value) {
                     })
                     .catch(console.error)
                 }
-              }}
+              } }
             >
               <Image
-                  src="/images/tokens/soul.png"
-                  alt="SOUL"
-                  width="60px"
-                  height="60px"
-                  objectFit="contain"
-                  className="rounded-md"
-              />
+                src="/images/tokens/soul.png"
+                alt="SOUL"
+                width="60px"
+                height="60px"
+                objectFit="contain"
+                className="rounded-md" />
             </div>
           </QuestionHelper>
-        <div className="flex flex-1 flex-col">
-              <div className="flex flex-row items-center px-3">
-                <div className="text-primary text-2xl">{'SOUL'}</div>
-              </div>
-              <div className="flex items-center justify-between space-x-3 gap-2">
-                  <ExternalLink
-                    href={
-                      'https://ftmscan.com/address/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'
-                    }
-                    className="px-3 ring-0 ring-transparent ring-opacity-0"
-                    color="purple"
-                    startIcon={<LinkIcon size={16} />}
-                  >
-                    <Typography variant="xs" className="hover:underline py-0.5 currentColor">
-                      {`View Contract`}
-                    </Typography>
-                  </ExternalLink>
-              </div>
+          <div className="flex flex-1 flex-col">
+            <div className="flex flex-row items-center px-3">
+              <div className="text-primary text-2xl">{'SOUL'}</div>
             </div>
-            <div className="flex items-center  text-primary text-bold">
-              <div className="ml-2 text-primary text-base text-secondary text-2xl">{`${price}`}</div>
+            <div className="flex items-center justify-between space-x-3 gap-2">
+              <ExternalLink
+                href={'https://ftmscan.com/address/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'}
+                className="px-3 ring-0 ring-transparent ring-opacity-0"
+                color="purple"
+                startIcon={<LinkIcon size={16} />}
+              >
+                <Typography variant="xs" className="hover:underline py-0.5 currentColor">
+                  {`View Contract`}
+                </Typography>
+              </ExternalLink>
             </div>
+          </div>
+          <div className="flex items-center  text-primary text-bold">
+            <div className="ml-2 text-primary text-base text-secondary text-2xl">{`${price}`}</div>
           </div>
         </div>
       </div>
-      <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <Typography weight={700}>{`Supply & Market Cap`}</Typography>
-          </div>
+    </div><div className="space-y-2">
+        <div className="flex items-center justify-between">
+          <Typography weight={700}>{`Supply & Market Cap`}</Typography>
+        </div>
+      </div><div className="flex flex-col flex-nowrap gap-1 -m-1">
+        {getSummaryLine(
+          <div className="flex items-center">
+            <Typography variant="sm" className="flex items-center py-0.5">
+              {`Circulating Supply`}
+            </Typography>
+            <QuestionHelper
+              text={<div className="flex flex-col gap-2 py-1 px-3 w-full">
+                <div className="flex items-center justify-between">
+                  <Typography variant="sm" className="flex items-center font-bold py-0.5">
+                    Total Supply
+                  </Typography>
+                  <Typography variant="sm" className="flex items-center font-bold py-0.5">
+                    {formatNumberScale(tokenInfo.totalSupply, false, 2)}
+                  </Typography>
+                </div>
+                <div className="flex items-center justify-between">
+                  <Typography variant="sm" className="flex items-center font-bold py-0.5">
+                    DAO Treasury
+                  </Typography>
+                  <Typography variant="sm" className="flex items-center font-bold py-0.5">
+                    - {formatNumberScale(Number(tokenInfo.totalSupply) * 0.125, false, 2)}
+                  </Typography>
+                </div>
+                <div className="flex items-center justify-between">
+                  <Typography variant="sm" className="flex items-center font-bold py-0.5">
+                    Total Staked
+                  </Typography>
+                  <Typography variant="sm" className="flex items-center font-bold py-0.5">
+                    - {formatNumberScale(seanceInfo.totalSupply, false, 2)}
+                  </Typography>
+                </div>
+                <hr></hr>
+                <div className="flex items-center justify-between">
+                  <Typography variant="sm" className="flex items-center font-bold py-0.5">
+                    Circulating Supply
+                  </Typography>
+                  <Typography variant="sm" className="flex items-center font-bold py-0.5">
+                    {formatNumberScale(
+                      Number(tokenInfo.totalSupply)
+                      - Number(seanceInfo.totalSupply)
+                      - (Number(tokenInfo.totalSupply) * 0.125),
+                      false, 2)}
+                  </Typography>
+                </div>
+              </div>} />
+          </div>,
+          formatNumberScale(
+            Number(tokenInfo.totalSupply)
+            - Number(seanceInfo.totalSupply)
+            - (Number(tokenInfo.totalSupply) * 0.125),
+            false, 2)
+        )}
+        {getSummaryLine(
+          <Typography variant="sm" className="flex items-center py-0.5">
+            {`Total Market Cap`}
+          </Typography>,
+          formatCurrency(
+            Number(tokenInfo.totalSupply) * Number(result) / 1E18, 2)
+        )}
       </div>
-      <div className="flex flex-col flex-nowrap gap-1 -m-1">
-            {getSummaryLine(
-              <div className="flex items-center">
-                <Typography variant="sm" className="flex items-center py-0.5">
-                  {`Circulating Supply`}
-                </Typography>
-                  <QuestionHelper
-                    text={
-                      <div className="flex flex-col gap-2 py-1 px-3 w-full">
-                        <div className="flex items-center justify-between">
-                          <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                            Total Supply
-                          </Typography>
-                          <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                            {formatNumberScale(tokenInfo.totalSupply, false, 2)}
-                          </Typography>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                            DAO Treasury
-                          </Typography>
-                          <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                            - {formatNumberScale(Number(tokenInfo.totalSupply) * 0.125, false, 2)}
-                          </Typography>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                            Total Staked
-                          </Typography>
-                          <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                            - {formatNumberScale(seanceInfo.totalSupply, false, 2)}
-                          </Typography>
-                        </div>
-                        <hr></hr>
-                        <div className="flex items-center justify-between">
-                          <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                            Circulating Supply
-                          </Typography>
-                          <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                            {formatNumberScale(
-                              Number(tokenInfo.totalSupply) 
-                              - Number(seanceInfo.totalSupply)
-                              - (Number(tokenInfo.totalSupply) * 0.125)
-                              , false, 2)}
-                          </Typography>
-                        </div>
-                      </div>
-                    }
-                  />
-              </div>,
-            formatNumberScale(
-              Number(tokenInfo.totalSupply) 
-              - Number(seanceInfo.totalSupply)
-              - (Number(tokenInfo.totalSupply) * 0.125)
-              , false, 2)
-            )}
-            {getSummaryLine(
-              <Typography variant="sm" className="flex items-center py-0.5">
-                {`Total Market Cap`}
-              </Typography>,
-                formatCurrency(
-                Number(tokenInfo.totalSupply) * Number(result) / 1E18, 2)
-            )}
-      </div>
+      </>
+      )
+    }
+  return (
+    <Modal isOpen={modalOpen} onDismiss={toggleWalletModal} minHeight={false} maxHeight={90}>
+      {getModalContent()}
     </Modal>
-  )
+    )
 }
-
 
