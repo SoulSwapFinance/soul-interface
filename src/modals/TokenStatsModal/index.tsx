@@ -16,7 +16,7 @@ import ISoulSwapPairABI from '../../constants/abis/soulswap/ISoulSwapPair.json'
 import { useContract, useSeanceContract, useSoulContract } from '../../hooks'
 import { formatNumberScale } from '../../functions'
 import axios from 'axios'
-import { SOUL_USDC_PAIR } from '../../constants/addresses'
+import { SOUL_ADDRESS } from '../../constants/addresses'
 import { ethers } from 'ethers'
 import { soul } from '@soulswap/soul-data'
 import { NEVER_RELOAD, useMultipleContractSingleData, useSingleCallResult, useSingleContractMultipleData } from '../../state/multicall/hooks'
@@ -118,14 +118,46 @@ function getSummaryLine(title, value) {
        <div className="space-y-2">
           <ModalHeader title={''} onClose={toggleTokenStatsModal} />
           <div className="flex flex-row w-full py-4">
-            <Image
-                src={'/images/tokens/soul.png'}
-                alt={'SOUL'}
-                width="64px"
-                height="64px"
-                objectFit="contain"
-                className="items-center"
+          <QuestionHelper text={`Add SOUL to MetaMask`}>
+            <div
+              className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
+              onClick={() => {
+                const params: any = {
+                  type: 'ERC20',
+                  options: {
+                    address: SOUL_ADDRESS[chainId],
+                    symbol: 'SOUL',
+                    decimals: 18,
+                    image: 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/soul.jpg',
+                  },
+                }
+                if (library && library.provider.isMetaMask && library.provider.request) {
+                  library.provider
+                    .request({
+                      method: 'wallet_watchAsset',
+                      params,
+                    })
+                    .then((success) => {
+                      if (success) {
+                        console.log('Successfully added SOUL to MetaMask')
+                      } else {
+                        throw new Error('Something went wrong.')
+                      }
+                    })
+                    .catch(console.error)
+                }
+              }}
+            >
+              <Image
+                  src="/images/tokens/soul.png"
+                  alt="SOUL"
+                  width="60px"
+                  height="60px"
+                  objectFit="contain"
+                  className="rounded-md"
               />
+            </div>
+          </QuestionHelper>
         <div className="flex flex-1 flex-col">
               <div className="flex flex-row items-center px-3">
                 <div className="text-primary text-2xl">{'SOUL'}</div>

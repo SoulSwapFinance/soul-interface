@@ -366,9 +366,9 @@ function AppBar(): JSX.Element {
                           </QuestionHelper>
                         </>
                       ))}
-                    {chainId && chainId in SOUL_ADDRESS && library && library.provider.isMetaMask && (
+                    {/* {chainId && chainId in SOUL_ADDRESS && library && library.provider.isMetaMask && ( */}
                       <>
-                        <QuestionHelper text={i18n._(t`Add SOUL to MetaMask`)}>
+                        {/* <QuestionHelper text={i18n._(t`Add SOUL to MetaMask`)}>
                           <div
                             className="hidden rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
                             onClick={() => {
@@ -407,9 +407,9 @@ function AppBar(): JSX.Element {
                                 className="rounded-md"
                             />
                           </div>
-                        </QuestionHelper>
+                        </QuestionHelper> */}
                       </>
-                    )}
+                    {/* )} */}
 
                     {library && library.provider.isMetaMask && (
                       <div className="hidden sm:inline-block">
