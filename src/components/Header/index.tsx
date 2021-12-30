@@ -526,18 +526,6 @@ function AppBar(): JSX.Element {
                   </a>
                 </Link>
               )}
-
-              { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                <Link href={'/enchant'}>
-                <a
-                  id={`enchant-nav-link`}
-                  className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                  >
-                  {i18n._(t`Enchant`)}
-                </a>
-              </Link>
-              )}
-
               { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                 <Link href={'/vote'}>
                   <a
@@ -565,7 +553,7 @@ function AppBar(): JSX.Element {
                     id={`vote-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                   >
-                    {i18n._(t`View Charts`)}
+                    {i18n._(t`Charts`)}
                   </a>
                 </Link>
               )}
@@ -576,7 +564,7 @@ function AppBar(): JSX.Element {
                     id={`claim-nav-link`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                     >
-                    {i18n._(t`File Claim`)}
+                    {i18n._(t`Claim`)}
                   </a>
                 </Link>
               )}
