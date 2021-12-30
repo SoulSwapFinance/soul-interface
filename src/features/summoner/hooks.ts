@@ -10,6 +10,7 @@ import {
   useSoulVaultContract,
   useSeanceUsdcContract,
   useFtmUsdcContract,
+  useSoulUsdcContract,
   // useSpellSeanceContract,
 } from '../../hooks'
 
@@ -215,7 +216,7 @@ const useAsync = (asyncFunction, immediate = true) => {
 }
 
 export function usePriceApi() {
-  return Promise.all([axios.get('/api/prices')])
+  return Promise.all([axios.get('/api/priceusd')])
 }
 
 export function usePrice(pairContract?: Contract | null, pairDecimals?: number | null, invert: boolean = false) {
@@ -290,11 +291,11 @@ export function usePricesApi() {
   return useMemo(() => {
     return {
       ftm: ftmPrice,
-      soul: soulPrice * ftmPrice,
+      soul: soulPrice,
       seance: seancePrice * ftmPrice,
       usdc: 1,
     }
-  }, [ftmPrice, seancePrice, soulPrice])
+  }, [ftmPrice, soulPrice, seancePrice])
 }
 
 export function useFarmsApi() {
@@ -314,7 +315,7 @@ export function useSeancePrice() {
 
 export function useSoulPrice() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  return usePrice(useSoulFtmContract())
+  return usePrice(useSoulUsdcContract())
 }
 
 export function useETHPrice() {

@@ -26,6 +26,7 @@ import { useETHBalances, useTokenBalance } from '../../state/wallet/hooks'
 
 import { useLingui } from '@lingui/react'
 import ExternalLink from '../ExternalLink'
+import TokenStats from '../TokenStats'
 
 // import { ExternalLink, NavLink } from "./Link";
 // import { ReactComponent as Burger } from "../assets/images/burger.svg";
@@ -50,7 +51,7 @@ function AppBar(): JSX.Element {
                   <Image src="/logo.png" alt="Soul" width="45" height="45" />
                 </NavLink>
                   {/* <div className="hidden sm:block lg:ml-4"> */}
-                    <div className="flex space-x-2">
+                  <div className="flex space-x-2">
                     <div className="flex space-x-4">
                       {/* <Earn /> */}
                       {/* <Exchange /> */}
@@ -92,6 +93,16 @@ function AppBar(): JSX.Element {
                         </NavLink>
                       )}
                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href={'/seance'}>
+                        <a
+                          id={`stake-nav-link`}
+                          className="w-full relative ml-6 md:p-2"
+                          >
+                          {i18n._(t`STAKE`)}
+                        </a>
+                      </NavLink>
+                      )}
+                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/bonds'}>
                           <a
                             id={`farm-nav-link`}
@@ -105,20 +116,10 @@ function AppBar(): JSX.Element {
                         </NavLink>
                       )}
                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'/seance'}>
-                        <a
-                          id={`stake-nav-link`}
-                          className="w-full relative ml-6 md:p-2"
-                          >
-                          {i18n._(t`STAKE`)}
-                        </a>
-                      </NavLink>
-                      )}
-                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/luxor'}>
                           <a
-                            id={`farm-nav-link`}
-                            className="hidden xl:block w-full relative ml-6 md:p-2"
+                            id={`luxor-nav-link`}
+                            className="hidden sm:block w-full relative ml-6 md:p-2"
                           >
                             {i18n._(t`LUXOR`)}
                           </a>
@@ -127,7 +128,7 @@ function AppBar(): JSX.Element {
                       <NavLink href={'/scarab'}>
                           <a
                             id={`scarab-nav-link`}
-                            className="hidden xl:block w-full relative ml-6 md:p-2">
+                            className="hidden lg:block w-full relative ml-6 md:p-2">
                           {i18n._(t`SCARAB`)}
                           </a>
                         </NavLink>
@@ -413,6 +414,11 @@ function AppBar(): JSX.Element {
                     {library && library.provider.isMetaMask && (
                       <div className="hidden sm:inline-block">
                         <Web3Network />
+                      </div>
+                    )}
+                    {library && library.provider.isMetaMask && (
+                      <div className="sm:inline-block">
+                        <TokenStats />
                       </div>
                     )}
 

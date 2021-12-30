@@ -185,7 +185,7 @@ export class ExtendedEther extends Ether {
     if (this.chainId in WNATIVE) return WNATIVE[this.chainId]
     // if (this.chainId in WETH9_EXTENDED) return WETH9_EXTENDED[this.chainId]
 
-    throw new Error('Unsupported chain ID')
+    throw new Error('Unsupported Chain ID')
   }
 
   public static onChain(chainId: number): ExtendedEther {
