@@ -617,8 +617,10 @@ export default function Swap() {
           <iframe 
                 frameBorder={"none"}
                 src={`https://kek.tools/t/${
-                  currencies.INPUT.isNative ? "0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83"
-                  : currencies[Field.INPUT].address }/chart`}
+                  currencies[Field.INPUT]
+                  ? currencies[Field.OUTPUT].address
+                  : '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'
+                }/chart`}
                 height={"480" }
                 width={"100%"}
             />
