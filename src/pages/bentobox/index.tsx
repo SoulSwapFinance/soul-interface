@@ -5,61 +5,64 @@ import Image from '../../components/Image'
 import Link from 'next/link'
 import React from 'react'
 import Web3Status from '../../components/Web3Status'
-import bentoBoxHero from '../../../public/bentobox-hero.jpg'
+import { SoulLaunchpad } from '../../features/launchpad/SoulLaunchpad'
 import { t } from '@lingui/macro'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useLingui } from '@lingui/react'
 
 export default function BenotBox() {
+  const soulSwapHero = 'https://media.giphy.com/media/8yQady2pFVfGJSnde7/giphy.gif'
   const { i18n } = useLingui()
   const { account } = useActiveWeb3React()
   return (
     <Container
-      id="bentobox-page"
+      id="soulswap-page"
       className="relative z-0 flex flex-col justify-center py-4 text-center md:py-8 lg:py-12"
       maxWidth="full"
     >
       <Head>
-        <title>CoffinBox | Soul</title>
+        <title>SoulSwap Vault | Soul</title>
         <meta
           key="description"
           name="description"
-          content="CoffinBox is a token vault that generates yield for liquidity providers. CoffinBox creates a source of liquidity that any user can access with minimal approvals, minimal gas usage, and maximal capital efficiency."
+          // content="SoulSwap has a token vault that generates yield for liquidity providers. SoulSwap creates a source of liquidity that any user can access with minimal approvals, minimal gas usage, and maximal capital efficiency."
         />
       </Head>
       <div className="absolute top-0 left-0 right-0 z-0 w-full h-full" style={{ maxHeight: 500 }}>
-        <Image
-          src={bentoBoxHero}
-          alt="CoffinBox Hero"
+        {/* <Image
+          src={soulSwapHero}
+          alt="SoulSwap Hero"
           layout="fill"
           // objectFit="cover"
           objectPosition="top"
           className="opacity-50"
           priority
-        />
+        /> */}
+        <SoulLaunchpad/>
       </div>
 
       <div className="flex justify-center">
-        <Image
-          src="/bentobox-logo.png"
-          alt="CoffinBox Logo"
+        {/* <Image
+          src="/title-logo.png"
+          alt="SoulSwap Logo"
           objectFit="scale-down"
           layout="responsive"
           height={150}
           width={240}
           priority
-        />
+        /> */}
       </div>
 
       <Container className="z-50 mx-auto" maxWidth="5xl">
-        <div className="text-3xl font-bold md:text-5xl text-high-emphesis">{i18n._(t`CoffinBox Apps`)}</div>
+        <div className="text-3xl font-bold md:text-5xl text-high-emphesis">{i18n._(t`SoulSwap Apps`)}</div>
         <div className="p-4 mt-0 mb-8 text-base font-medium md:text-lg lg:text-xltext-high-emphesis md:mt-4">
-          {i18n._(t`CoffinBox is an innovative way to use dapps gas-efficiently and gain extra yield.`)}
+          {/* {i18n._(t`SoulSwap has constructed an innovative way to use dapps gas-efficiently and gain extra yield.`)} */}
         </div>
         <div className="grid grid-cols-4 gap-4 sm:gap-12 grid-flow-auto">
           <Card className="flex items-center justify-center w-full col-span-2 space-y-1 rounded cursor-pointer md:col-span-1 bg-dark-800 hover:bg-dark-900 shadow-pink-glow hover:shadow-pink-glow-hovered">
             <Image
-              src="/kashi-neon.png"
+              src={soulSwapHero}
+              // src="/kashi-neon.png"
               alt="Underworld Logo"
               objectFit="scale-down"
               layout="responsive"

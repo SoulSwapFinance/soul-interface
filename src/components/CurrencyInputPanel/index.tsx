@@ -164,13 +164,16 @@ export default function CurrencyInputPanel({
                     ) : (
                       <>
                         {/* {i18n._(t`Balance:`)}  */}
-                        {(selectedCurrencyBalance)
-                        .toFixed(2)
+                        {
+                        (selectedCurrencyBalance).toFixed(8) == '0.00000000' ? '0' :
+                        (selectedCurrencyBalance).toFixed(3) == '0.000' ? '<0.001' :
+                        // Number(selectedCurrencyBalance) <= 0.001 ? '<0.001' :
+                        (selectedCurrencyBalance)
+                        .toFixed(3)
                         // .toString()
                         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                         } { ' ' }
                         {/* formatCurrencyAmount(selectedCurrencyBalance, 4)}  */}
-                        
                         {currency.symbol}
                       </>
                     )}
