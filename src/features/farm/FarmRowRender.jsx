@@ -28,6 +28,9 @@ import {
 } from './FarmStyles'
 
 import { Wrap, ClickableText, Heading, Text, ExternalLink } from '../../components/ReusableStyles'
+import { useSingleCallResult } from '../../state/multicall/hooks'
+import { usePriceHelperContract } from '../bond/hooks/useContract'
+import { formatCurrency } from '../../modals/TokenStatsModal'
 
 // params to render farm with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)
@@ -98,6 +101,12 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   const [yearlySoulRewards, setYearlySoulRewards] = useState()
   const [apr, setApr] = useState()
   const [liquidity, setLiquidity] = useState()
+
+  const priceHelperContract = usePriceHelperContract()
+  const result = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
+  console.log(Number(result))
+  const soulPrice = formatCurrency(Number(result) / 1E18, 3)
+  console.log(soulPrice)
 
   /**
    * Runs only on initial render/mount
@@ -439,10 +448,23 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                   </Text>
                 ) : (
                   <Text padding="0" fontSize="1.5rem" color="#F36FFE">
-                    {pending}
+                    {/* { Number(pending).toFixed(0) } {' '} */}
+                    {formatCurrency(pending * Number(result) / 1E18, 2)}
                   </Text>
                 )}
               </FarmItemBox>
+              
+              {/* <FarmItemBox desktopOnly={true}>
+                {pending === '0.00' ? (
+                  <Text padding="0" fontSize="1.5rem" color="#666">
+                    0
+                  </Text>
+                ) : (
+                  <Text padding="0" fontSize="1.5rem" color="#F36FFE">
+                    {formatCurrency(pending * Number(result) / 1E18)}
+                  </Text>
+                )}
+              </FarmItemBox> */}
 
               {/* <HideOnMobile desktopOnly={true}>
                 {yearlySoulRewards === 0 ? (
@@ -578,21 +600,23 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
 
                 <Wrap padding="0" margin="0" display="flex">
                   <SubmitButton
-                    height="2.5rem"
+                    height="4.2rem"
                     padding="0"
-                    margin=".5rem .6rem .5rem 0"
+                    margin=".6rem .6rem .6rem 0"
                     onClick={() => handleHarvest()}
                   >
-                    Harvest
+                    Harvest 
+                    <br/>
+                    { Number(pending).toFixed(0) } {' SOUL'}
                   </SubmitButton>
                   <SubmitButton
-                    height="2.5rem"
+                    height="4.2rem"
                     primaryColour="#bbb"
                     color="black"
-                    margin=".5rem 0 .5rem .6rem"
+                    margin=".6rem 0 .6rem .6rem"
                     onClick={() => handleWithdraw(ethers.utils.parseUnits(document.getElementById('unstake').value))}
                   >
-                    Unstake
+                    Unstake & Harvest
                   </SubmitButton>
                 </Wrap>
 
