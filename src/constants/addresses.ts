@@ -190,6 +190,6 @@ export const WLUM_ADDRESS: AddressMap = {
 export const USDC_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x04068da6c83afcfa0e13ba15a6696662335d5b75', // USDC
+  [ChainId.FANTOM]: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
   [ChainId.FANTOM_TESTNET]: '',
 }
