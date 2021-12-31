@@ -541,7 +541,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                 <Wrap padding="0" margin="0" display="flex">
                   {approved ? (
                     <SubmitButton
-                      height="2.5rem"
+                      height="3.5rem"
                       onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
                     >
                       Stake
@@ -597,10 +597,9 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                   min="0"
                   onChange={() => getWithdrawable()}
                 />
-
                 <Wrap padding="0" margin="0" display="flex">
                   <SubmitButton
-                    height="4.2rem"
+                    height="3.5rem"
                     padding="0"
                     margin=".6rem .6rem .6rem 0"
                     onClick={() => handleHarvest()}
@@ -610,7 +609,7 @@ const FarmRowRender = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                     { Number(pending).toFixed(0) } {' SOUL'}
                   </SubmitButton>
                   <SubmitButton
-                    height="4.2rem"
+                    height="3.5rem"
                     primaryColour="#bbb"
                     color="black"
                     margin=".6rem 0 .6rem .6rem"
