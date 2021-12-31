@@ -165,7 +165,7 @@ export default function CurrencyInputPanel({
                       <>
                         {/* {i18n._(t`Balance:`)}  */}
                         {
-                        (selectedCurrencyBalance).toFixed(8) == '0.00000000' ? '0' :
+                        (selectedCurrencyBalance).toFixed(6) == '0.000000' ? '0' :
                         (selectedCurrencyBalance).toFixed(3) == '0.000' ? '<0.001' :
                         // Number(selectedCurrencyBalance) <= 0.001 ? '<0.001' :
                         (selectedCurrencyBalance)
