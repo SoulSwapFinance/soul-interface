@@ -128,6 +128,24 @@
     jsonpointer "^4.1.0"
     leven "^3.1.0"
 
+"@apollo/client@3.4.15":
+  version "3.4.15"
+  resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.4.15.tgz#0aa05ff2bb54092919b501ef348ade6330911670"
+  integrity sha512-CnlT9i7TgHagkKQNvti81A9KcbIMqgpUPGJJL6bg5spTsB2R/5J6E7qiPcMvXuuXwR2xe4FmE4Ey4HizStb8Hg==
+  dependencies:
+    "@graphql-typed-document-node/core" "^3.0.0"
+    "@wry/context" "^0.6.0"
+    "@wry/equality" "^0.5.0"
+    "@wry/trie" "^0.3.0"
+    graphql-tag "^2.12.3"
+    hoist-non-react-statics "^3.3.2"
+    optimism "^0.16.1"
+    prop-types "^15.7.2"
+    symbol-observable "^4.0.0"
+    ts-invariant "^0.9.0"
+    tslib "^2.3.0"
+    zen-observable-ts "~1.1.0"
+
 "@apollo/client@^3.1.5":
   version "3.4.12"
   resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.4.12.tgz#7f1f5ff0988ccd736ea666cdc54eb4e62e860b5d"
@@ -14291,6 +14309,14 @@ jsprim@^1.2.2:
     array-includes "^3.1.3"
     object.assign "^4.1.2"
 
+kaktana-react-lightweight-charts@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/kaktana-react-lightweight-charts/-/kaktana-react-lightweight-charts-2.0.0.tgz#a724552622dd5d55b9711d0a12abfc38f2172837"
+  integrity sha512-j2hJLtz18XplhkJHW6K3tqd9f2LStamypttZbfyAgHEFYI6uRCoKzWuKNiTYTM8Eqsr18eynGcYrACIU1C10nw==
+  dependencies:
+    fast-deep-equal "^3.1.1"
+    lightweight-charts "^3.3.0"
+
 keccak@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/keccak/-/keccak-3.0.1.tgz#ae30a0e94dbe43414f741375cff6d64c8bea0bff"
@@ -14710,6 +14736,13 @@ libp2p-crypto@^0.19.0:
     secp256k1 "^4.0.0"
     uint8arrays "^3.0.0"
     ursa-optional "^0.10.1"
+
+lightweight-charts@^3.3.0:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/lightweight-charts/-/lightweight-charts-3.7.0.tgz#2be03fb9a1296bbe9804b386d8d9270de9d3ea1e"
+  integrity sha512-OFPdU4kRtgqHrzi+O86MxBPwbbMsdKRiAQm5nM14/iwN7BJRqWmrdT7uCGnP6+pU8rm3sxjZwMyL8dX0eaQnvQ==
+  dependencies:
+    fancy-canvas "0.2.2"
 
 lightweight-charts@^3.6.1:
   version "3.6.1"
