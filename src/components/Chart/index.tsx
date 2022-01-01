@@ -115,14 +115,14 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
   const inputAddress = inputCurrency?.isToken
     ? inputCurrency.address
     : inputCurrency?.isNative
-    ? MAJOR_HIERARCHY[0]
-    : ''
+      ? MAJOR_HIERARCHY[0]
+      : ''
 
   const outputAddress = outputCurrency?.isToken
     ? outputCurrency.address
     : outputCurrency?.isNative
-    ? MAJOR_HIERARCHY[0]
-    : ''
+      ? MAJOR_HIERARCHY[0]
+      : ''
 
   const token0Index = MAJOR_HIERARCHY.indexOf(inputAddress.toLowerCase())
   const token1Index = MAJOR_HIERARCHY.indexOf(outputAddress.toLowerCase())
@@ -289,26 +289,26 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
         <PeriodChooser period={candlePeriod} onChoose={(period) => setCandlePeriod(period)} />
       </div> */}
 
-      { inputCurrency?.isToken ?
+        {inputCurrency?.isToken ?
           <iframe
-              frameBorder={"none"}
-              src={`https://kek.tools/t/
-              ${inputCurrency.address}/chart?pair=${pairAddress}`}
-              height={"420"}
-              width={"100%"}
-          />
-          :
-      inputCurrency?.isNative ?
-          // outputCurrency?.isNative ?
-          <iframe 
             frameBorder={"none"}
-            src={`https://kek.tools/t/${outputCurrency.address}/chart?currencyType=native&pair=${pairAddress}`}
+            src={`https://kek.tools/t/
+              ${inputCurrency.address}/chart?pair=${pairAddress}`}
             height={"420"}
             width={"100%"}
           />
-          : 'https://kek.tools/t/0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83/chart'
+          :
+          inputCurrency?.isNative ?
+            // outputCurrency?.isNative ?
+            <iframe
+              frameBorder={"none"}
+              src={`https://kek.tools/t/${outputCurrency.address}/chart?currencyType=native&pair=${pairAddress}`}
+              height={"420"}
+              width={"100%"}
+            />
+            : 'https://kek.tools/t/0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83/chart'
         }
-      {/* <div className={'flex flex-1 h-[300px]'}>
+        {/* <div className={'flex flex-1 h-[300px]'}>
         {isLoading ? (
           <div className="w-24 h-[300px] pb-4 flex m-auto flex-col items-center justify-center">
           <div className="text-xl font-black text-gray-200">Loading...</div>
@@ -322,23 +322,86 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
               </div>
               </div>
             )} */}
-      </div> 
-            <a
-      href={`https://info.soulswap.finance/pair/${pairAddress}`}
-      target="_blank"
-      rel="noreferrer"
-      className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2"
-      >
-      <div className="flex items-center space-x-2">
-        <CurrencyLogo currency={inputCurrency} size={'30px'} className={'shadow'} />
-        <div className="text-xl font-medium">{inputCurrency?.symbol}</div>
       </div>
+      <div className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2">
+      <div className="hidden sm:flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2">
+      <CurrencyLogo currency={outputCurrency} size={'30px'} className={'shadow'} />
       <div className="text-lg font-medium text-h">/</div>
-      <div className="flex items-center space-x-2">
-        <CurrencyLogo currency={outputCurrency} size={'30px'} className={'shadow'} />
-        <div className="text-xl font-medium">{outputCurrency?.symbol}</div>
+      <CurrencyLogo currency={inputCurrency} size={'30px'} className={'shadow'} />
       </div>
+      {/* </div> */}
+      <a
+        href={`https://info.soulswap.finance/pair/${pairAddress}`}
+        target="_blank"
+        rel="noreferrer"
+        className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2"
+      >
+        <div className="flex items-center space-x-2">
+          {/* <div className="text-xl font-medium">{inputCurrency?.symbol}</div> */}
+        </div>
+        <div className="flex items-center space-x-2">
+        <div className="text-lg font-medium text-h">ANALYTICS</div>
+          {/* <div className="text-xl font-medium">{outputCurrency?.symbol}</div> */}
+        </div>
       </a>
+
+      {/* CREATE PAIR OPTION  */}
+
+      {inputCurrency.isNative ?
+        <a
+          href={`https://app.soulswap.finance/add/ETH/${outputCurrency.address}`}
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2"
+        >
+          <div className="flex items-center space-x-2">
+            {/* <div className="text-xl font-medium">{inputCurrency?.symbol}</div> */}
+          </div>
+          <div className="flex items-center space-x-2">
+          <div className="text-lg font-medium text-h">CREATE PAIR</div>
+            {/* <div className="text-xl font-medium">{outputCurrency?.symbol}</div> */}
+          </div>
+        </a>
+        : outputCurrency.isNative ?
+          <a
+            href={`https://app.soulswap.finance/add/${inputCurrency.address}/ETH`}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2"
+          >
+            <div className="flex items-center space-x-2">
+              {/* <div className="text-xl font-medium">{inputCurrency?.symbol}</div> */}
+            </div>
+            <div className="flex items-center space-x-2">
+            <div className="text-lg font-medium text-h">CREATE PAIR</div>
+              {/* <div className="text-xl font-medium">{outputCurrency?.symbol}</div> */}
+            </div>
+          </a>
+          :
+          // : outputCurrency.isNative ?
+          <a
+            href={`https://app.soulswap.finance/add/${inputCurrency.address}/${outputCurrency.address}`}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2"
+          >
+            <div className="flex items-center space-x-2">
+              {/* <div className="text-xl font-medium">{inputCurrency?.symbol}</div> */}
+            </div>
+            <div className="flex items-center space-x-2">
+            <div className="text-lg font-medium text-h">CREATE PAIR</div>
+              {/* <div className="text-xl font-medium">{outputCurrency?.symbol}</div> */}
+            </div>
+          </a>
+      }
+
+      </div>
+
+
+
+
+
+
     </>
   )
 }
