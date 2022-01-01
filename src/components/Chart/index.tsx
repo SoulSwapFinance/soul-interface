@@ -329,7 +329,6 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
       <div className="text-lg font-medium text-h">/</div>
       <CurrencyLogo currency={inputCurrency} size={'30px'} className={'shadow'} />
       </div>
-      {/* </div> */}
       <a
         href={`https://info.soulswap.finance/pair/${pairAddress}`}
         target="_blank"
@@ -337,11 +336,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
         className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2"
       >
         <div className="flex items-center space-x-2">
-          {/* <div className="text-xl font-medium">{inputCurrency?.symbol}</div> */}
-        </div>
-        <div className="flex items-center space-x-2">
         <div className="text-lg font-medium text-h">ANALYTICS</div>
-          {/* <div className="text-xl font-medium">{outputCurrency?.symbol}</div> */}
         </div>
       </a>
 
@@ -355,11 +350,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
           className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2"
         >
           <div className="flex items-center space-x-2">
-            {/* <div className="text-xl font-medium">{inputCurrency?.symbol}</div> */}
-          </div>
-          <div className="flex items-center space-x-2">
           <div className="text-lg font-medium text-h">CREATE PAIR</div>
-            {/* <div className="text-xl font-medium">{outputCurrency?.symbol}</div> */}
           </div>
         </a>
         : outputCurrency?.isNative ?
@@ -370,11 +361,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
             className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2"
           >
             <div className="flex items-center space-x-2">
-              {/* <div className="text-xl font-medium">{inputCurrency?.symbol}</div> */}
-            </div>
-            <div className="flex items-center space-x-2">
             <div className="text-lg font-medium text-h">CREATE PAIR</div>
-              {/* <div className="text-xl font-medium">{outputCurrency?.symbol}</div> */}
             </div>
           </a>
           : inputCurrency?.isToken  && outputCurrency?.isToken ?
@@ -385,11 +372,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
             className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2"
           >
             <div className="flex items-center space-x-2">
-              {/* <div className="text-xl font-medium">{inputCurrency?.symbol}</div> */}
-            </div>
-            <div className="flex items-center space-x-2">
             <div className="text-lg font-medium text-h">CREATE PAIR</div>
-              {/* <div className="text-xl font-medium">{outputCurrency?.symbol}</div> */}
             </div>
           </a>
         :   'https://app.soulswap.finance/add'
