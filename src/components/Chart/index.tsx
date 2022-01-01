@@ -284,7 +284,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
   return (
     <>
 
-      <div className="flex items-center justify-between flex-col lg:flex-row space-x-4 min-h-[40px] lg:mt-4 mb-4">
+      <div className="flex items-center justify-between flex-col lg:flex-row space-x-4 min-h-[40px] xl:ml-24 xl:mr-24 lg:mt-4 mb-0 ">
         {/* <div className="text-4xl font-black text-gray-200">{(lastClose || 0).toFixed(2)}</div>
         <PeriodChooser period={candlePeriod} onChoose={(period) => setCandlePeriod(period)} />
       </div> */}
@@ -294,7 +294,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
             frameBorder={"none"}
             src={`https://kek.tools/t/
               ${inputCurrency.address}/chart?pair=${pairAddress}`}
-            height={"420"}
+            height={"480"}
             width={"100%"}
           />
           :
@@ -303,7 +303,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
             <iframe
               frameBorder={"none"}
               src={`https://kek.tools/t/${outputCurrency.address}/chart?currencyType=native&pair=${pairAddress}`}
-              height={"420"}
+              height={"480"}
               width={"100%"}
             />
             : 'https://kek.tools/t/0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83/chart'
