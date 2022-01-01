@@ -283,7 +283,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
 
   return (
     <>
-      <a
+      {/* <a
         href={`https://info.soulswap.finance/pair/${pairAddress}`}
         target="_blank"
         rel="noreferrer"
@@ -298,7 +298,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
           <CurrencyLogo currency={outputCurrency} size={'30px'} className={'shadow'} />
           <div className="text-xl font-medium">{outputCurrency?.symbol}</div>
         </div>
-      </a>
+      </a> */}
       <div className="flex items-center justify-between flex-col lg:flex-row space-x-4 min-h-[40px] lg:mt-4 mb-4">
         {/* <div className="text-4xl font-black text-gray-200">{(lastClose || 0).toFixed(2)}</div>
         <PeriodChooser period={candlePeriod} onChoose={(period) => setCandlePeriod(period)} />
@@ -317,8 +317,6 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
           // outputCurrency?.isNative ?
           <iframe 
             frameBorder={"none"}
-            // 0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83
-            // 0x04068da6c83afcfa0e13ba15a6696662335d5b75
             src={`https://kek.tools/t/${outputCurrency.address}/chart?currencyType=native&pair=${pairAddress}`}
             height={"420"}
             width={"100%"}
