@@ -20,7 +20,7 @@ function Web3Network(): JSX.Element | null {
     >
       <div className="grid items-center grid-flow-col px-3 py-2 space-x-2 text-sm rounded-lg pointer-events-auto auto-cols-max bg-dark-1000 text-secondary">
         <Image src={NETWORK_ICON[chainId]} alt="Switch Network" className="rounded-md" width="22px" height="22px" />
-        <div className="text-primary">{NETWORK_LABEL[chainId]}</div>
+        <div className="hidden 2xl:flex text-primary">{NETWORK_LABEL[chainId]}</div>
       </div>
       <NetworkModel />
     </div>

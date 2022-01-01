@@ -119,7 +119,7 @@ function AppBar(): JSX.Element {
                         <NavLink href={'/luxor'}>
                           <a
                             id={`luxor-nav-link`}
-                            className="hidden sm:block w-full relative ml-6 md:p-2"
+                            className="hidden md:block w-full relative ml-6 md:p-2"
                           >
                             {i18n._(t`LUXOR`)}
                           </a>
@@ -128,14 +128,14 @@ function AppBar(): JSX.Element {
                       <NavLink href={'/scarab'}>
                           <a
                             id={`scarab-nav-link`}
-                            className="hidden lg:block w-full relative ml-6 md:p-2">
+                            className="hidden md:block w-full relative ml-6 md:p-2">
                           {i18n._(t`SCARAB`)}
                           </a>
                         </NavLink>
                       <NavLink href={'/analytics'}>
                           <a 
                             id={`analytics-nav-link`}
-                            className="hidden xl:block w-full relative ml-6 md:p-2"
+                            className="hidden md:block w-full relative ml-6 md:p-2"
                             >
                           {/* <Image src="https://media.giphy.com/media/iH7mGoqPivDybuDc2s/giphy.gif" alt="offering soul" width={30} height={30} /> */}
                           {i18n._(t`CHARTS`)}
@@ -145,14 +145,8 @@ function AppBar(): JSX.Element {
                   </div>
                 </div>
 
-                <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-4 lg:w-auto bg-dark-1000 lg:relative lg:p-0 lg:bg-transparent">
+                <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-4 xl:w-auto bg-dark-1000 xl:relative xl:p-0 xl:bg-transparent">
                   <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
-
-                    {library && library.provider.isMetaMask && (
-                      <div className="hidden sm:inline-block">
-                        <Web3Network />
-                      </div>
-                    )}
                     {library && library.provider.isMetaMask && (
                       <div className="sm:inline-block">
                         <TokenStats />
@@ -169,7 +163,7 @@ function AppBar(): JSX.Element {
                           </div>
                           {account && chainId && (
                             <>
-                              <div className="hidden md:flex px-3 py-2 text-primary text-bold">
+                              <div className="hidden md:inline px-3 py-2 text-primary text-bold">
                                 {auraBalance?.toSignificant(4)
                                 .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                                 } {'AURA'}
@@ -179,6 +173,11 @@ function AppBar(): JSX.Element {
                         </>
                       )}
                       <Web3Status />
+                      {library && library.provider.isMetaMask && (
+                      <div className="hidden sm:inline-block">
+                        <Web3Network />
+                      </div>
+                    )}
                     </div>
 
                     {/* <div className="hidden xl:block"> */}
