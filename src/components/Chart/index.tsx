@@ -347,7 +347,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
 
       {/* CREATE PAIR OPTION  */}
 
-      {inputCurrency.isNative ?
+      {inputCurrency?.isNative ?
         <a
           href={`https://app.soulswap.finance/add/ETH/${outputCurrency.address}`}
           target="_blank"
@@ -362,7 +362,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
             {/* <div className="text-xl font-medium">{outputCurrency?.symbol}</div> */}
           </div>
         </a>
-        : outputCurrency.isNative ?
+        : outputCurrency?.isNative ?
           <a
             href={`https://app.soulswap.finance/add/${inputCurrency.address}/ETH`}
             target="_blank"
@@ -377,8 +377,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
               {/* <div className="text-xl font-medium">{outputCurrency?.symbol}</div> */}
             </div>
           </a>
-          :
-          // : outputCurrency.isNative ?
+          : inputCurrency?.isToken  && outputCurrency?.isToken ?
           <a
             href={`https://app.soulswap.finance/add/${inputCurrency.address}/${outputCurrency.address}`}
             target="_blank"
@@ -393,7 +392,8 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
               {/* <div className="text-xl font-medium">{outputCurrency?.symbol}</div> */}
             </div>
           </a>
-      }
+        :   'https://app.soulswap.finance/add'
+    }
 
       </div>
 
