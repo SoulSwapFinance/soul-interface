@@ -1,4 +1,4 @@
-import { ChainId, NATIVE, SOUL_ADDRESS } from '../../sdk'
+import { ChainId, NATIVE } from '../../sdk'
 import { AURA } from '../../constants' 
 // import React, { useEffect, useState } from 'react'
 import React from 'react'
@@ -8,16 +8,16 @@ import React from 'react'
 // import ExternalLink from '../ExternalLink'
 import Image from 'next/image'
 // import LanguageSwitch from '../LanguageSwitch'
-import Link from 'next/link'
+// import Link from 'next/link'
 import More from './More'
 // import Exchange from './Exchange'
-import Earn from './Earn'
+// import Earn from './Earn'
 // import Farms from './Farms'
-import Explore from './Explore'
+// import Explore from './Explore'
 // import Seance from './Seance'
 import NavLink from '../NavLink'
 import { Popover } from '@headlessui/react'
-import QuestionHelper from '../QuestionHelper'
+// import QuestionHelper from '../QuestionHelper'
 import Web3Network from '../Web3Network'
 import Web3Status from '../Web3Status'
 import { t } from '@lingui/macro'
@@ -27,6 +27,7 @@ import { useETHBalances, useTokenBalance } from '../../state/wallet/hooks'
 import { useLingui } from '@lingui/react'
 import ExternalLink from '../ExternalLink'
 import TokenStats from '../TokenStats'
+// import LanguageSwitch from '../LanguageSwitch'
 
 // import { ExternalLink, NavLink } from "./Link";
 // import { ReactComponent as Burger } from "../assets/images/burger.svg";
@@ -34,7 +35,6 @@ import TokenStats from '../TokenStats'
 function AppBar(): JSX.Element {
   const { i18n } = useLingui()
   const { account, chainId, library } = useActiveWeb3React()
-
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   const auraBalance = useTokenBalance(account ?? undefined, AURA[chainId])
 
@@ -141,275 +141,12 @@ function AppBar(): JSX.Element {
                           {i18n._(t`CHARTS`)}
                           </a>
                       </NavLink>
-                      {/* <Explore /> */}
-                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'https://info.soul.sh'}>
-                        <a
-                          id={`analytics-nav-link`}
-                          className="p-2 text-base text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                        >
-                          {i18n._(t`Analytics`)}
-                        </a>
-                        </NavLink>
-                      )} */}
-                      {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href='/charts' target="_blank">
-                          <a
-                            id={`charts-nav-link`}
-                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                          >
-                            <Image src="https://media.giphy.com/media/dAEerRZK72Ah6Qo3IX/giphy.gif" alt="offering soul" width={30} height={30} />
-                            {i18n._(t`ANALYTICS`)}
-                          </a>
-                        </NavLink>
-                      )} */}
-                      {/* <Seance /> */}
-                      {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href='/scarab/create' target="_blank">
-                          <a
-                            id={`scarab-nav-link`}
-                            // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                            className="w-full relative ml-6 md:m-0"
-
-                         >
-                           <Image src="https://media.giphy.com/media/kBGxL0WetxMC0qCcLj/giphy.gif" alt="offering soul" width={50} height={50} />
-                           <br/>
-                            SCARAB
-                          </a>
-                        </NavLink>
-                      )} */}
-                      {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href='/bridge' target="_blank">
-                          <a
-                            id={`bridge-nav-link`}
-                            // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                            className="w-full relative ml-6 md:m-0"
-
-                         >
-                           <Image src="https://media.giphy.com/media/Vi6Eo8cmcYtvWqXOhm/giphy.gif" alt="offering soul" width={50} height={50} />
-                           <br/>
-                            BRIDGE
-                          </a>
-                        </NavLink>
-                      )} */}
-
-                      {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href='/dashboard' target="_blank">
-                          <a
-                            id={`bridge-nav-link`}
-                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                          >
-                            <Image src="https://media.giphy.com/media/W0JfDI1ODcNviBOylg/giphy.gif" alt="offering soul" width={30} height={30} />
-                            {i18n._(t` DASH`)}
-                          </a>
-                        </NavLink>
-                      )} */}
-                      {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href='/bridge' target="_blank">
-
-                          <a
-                            id={`bridge-nav-link`}
-                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                          >
-                          <Image src="https://media.giphy.com/media/9vFujGoURHxI9wyAkh/giphy.gif" alt="offering soul" width={30} height={30} />
-                            {i18n._(t` BRIDGE`)}
-                          </a>
-                        </NavLink>
-                      )} */}
-                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'/summoner'}>
-                        <a
-                          id={`farm-nav-link`}
-                          className="p-2 text-base text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                        >
-                          {i18n._(t`Summon`)}
-                        </a>
-                        </NavLink>
-                      {/* {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                          <>
-                            <NavLink href={'/lend'}>
-                              <a
-                                id={`lend-nav-link`}
-                                className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                              >
-                                {i18n._(t`Lend`)}
-                              </a>
-                            </NavLink>
-                            <NavLink href={'/borrow'}>
-                              <a
-                                id={`borrow-nav-link`}
-                                className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                              >
-                                {i18n._(t`Borrow`)}
-                              </a>
-                            </NavLink>
-                          </>
-                        )}
-                      {/* {chainId && [ChainId.MAINNET, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'/user'}>
-                          <a
-                            id={`bridge-nav-link`}
-                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                          >
-                            {i18n._(t`Dashboard`)}
-                          </a>
-                        </NavLink>
-                      )} */}
-                      {/* {chainId === [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <Link href={'/ifo'}>
-                          <a
-                            id={`ifo-nav-link`}
-                            className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                          >
-                            {i18n._(t`Ifo`)}
-                          </a>
-                        </Link>
-                      )} */}
                     </div>
                   </div>
                 </div>
 
                 <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-4 lg:w-auto bg-dark-1000 lg:relative lg:p-0 lg:bg-transparent">
                   <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
-                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        library &&
-                      library.provider.isMetaMask && ( // TODO: update
-                        <>
-                          <QuestionHelper text={i18n._(t`Add SEANCE to MetaMask`)}>
-                            <div
-                              className="hidden p-0.5 rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800"
-                              onClick={() => {
-                                if (library && library.provider.isMetaMask && library.provider.request) {
-                                  const params: any = {
-                                    type: 'ERC20',
-                                    options: {
-                                      address: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6',
-                                      symbol: 'SEANCE',
-                                      decimals: 18,
-                                      image:
-                                      'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/seance.jpg',
-                                    },
-                                  }
-                                  library.provider
-                                  .request({
-                                    method: 'wallet_watchAsset',
-                                    params,
-                                  })
-                                  .then((success) => {
-                                    if (success) {
-                                      console.log('Successfully added SEANCE to MetaMask')
-                                    } else {
-                                      throw new Error('Something went wrong.')
-                                    }
-                                  })
-                                  .catch(console.error)
-                                }
-                              }}
-                              >
-                              <Image
-                                src="/images/tokens/seance.png"
-                                alt="SEANCE"
-                                width="40px"
-                                height="40px"
-                                objectFit="contain"
-                                className="rounded-md"
-                                />
-                            </div>
-                          </QuestionHelper>
-                        </>
-                      ))} */}
-
-                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                      library &&
-                      library.provider.isMetaMask && ( // TODO: update
-                        <>
-                          <QuestionHelper text={i18n._(t`Add LUX to MetaMask`)}>
-                            <div
-                              className="hidden p-0.5 rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800"
-                              onClick={() => {
-                                if (library && library.provider.isMetaMask && library.provider.request) {
-                                  const params: any = {
-                                    type: 'ERC20',
-                                    options: {
-                                      address: '0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b',
-                                      symbol: 'LUX',
-                                      decimals: 9,
-                                      image:
-                                        'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b/logo.png',
-                                    },
-                                  }
-                                  library.provider
-                                    .request({
-                                      method: 'wallet_watchAsset',
-                                      params,
-                                    })
-                                    .then((success) => {
-                                      if (success) {
-                                        console.log('Successfully added LUX to MetaMask')
-                                      } else {
-                                        throw new Error('Something went wrong.')
-                                      }
-                                    })
-                                    .catch(console.error)
-                                }
-                              }}
-                            >
-                              <Image
-                                src="/images/tokens/LUXOR.svg"
-                                alt="LUX"
-                                width="40px"
-                                height="40px"
-                                objectFit="contain"
-                                className="rounded-md"
-                              />
-                            </div>
-                          </QuestionHelper>
-                        </>
-                      ))} */}
-                    {/* {chainId && chainId in SOUL_ADDRESS && library && library.provider.isMetaMask && ( */}
-                      <>
-                        {/* <QuestionHelper text={i18n._(t`Add SOUL to MetaMask`)}>
-                          <div
-                            className="hidden rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
-                            onClick={() => {
-                              const params: any = {
-                                type: 'ERC20',
-                                options: {
-                                  address: SOUL_ADDRESS[chainId],
-                                  symbol: 'SOUL',
-                                  decimals: 18,
-                                  image: 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/soul.jpg',
-                                },
-                              }
-                              if (library && library.provider.isMetaMask && library.provider.request) {
-                                library.provider
-                                  .request({
-                                    method: 'wallet_watchAsset',
-                                    params,
-                                  })
-                                  .then((success) => {
-                                    if (success) {
-                                      console.log('Successfully added SOUL to MetaMask')
-                                    } else {
-                                      throw new Error('Something went wrong.')
-                                    }
-                                  })
-                                  .catch(console.error)
-                              }
-                            }}
-                          >
-                            <Image
-                                src="/images/tokens/soul.png"
-                                alt="SOUL"
-                                width="40px"
-                                height="40px"
-                                objectFit="contain"
-                                className="rounded-md"
-                            />
-                          </div>
-                        </QuestionHelper> */}
-                      </>
-                    {/* )} */}
 
                     {library && library.provider.isMetaMask && (
                       <div className="hidden sm:inline-block">
@@ -421,18 +158,18 @@ function AppBar(): JSX.Element {
                         <TokenStats />
                       </div>
                     )}
-
                     <div className="w-auto flex items-center rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto">
                       {account && chainId && userEthBalance && (
                         <>
-                          <div className="px-3 py-2 text-primary text-bold">
+                          <div className="hidden 2xl:flex px-2 py-2 text-primary text-bold">
                             {userEthBalance?.toSignificant(4)
                             .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                          } {NATIVE[chainId].symbol}
+                          } 
+                          {NATIVE[chainId].symbol}
                           </div>
                           {account && chainId && (
                             <>
-                              <div className="px-3 py-2 text-primary text-bold">
+                              <div className="hidden md:flex px-3 py-2 text-primary text-bold">
                                 {auraBalance?.toSignificant(4)
                                 .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                                 } {'AURA'}
@@ -443,14 +180,15 @@ function AppBar(): JSX.Element {
                       )}
                       <Web3Status />
                     </div>
-                    <div className="hidden xl:block">
+
+                    {/* <div className="hidden xl:block"> */}
                       {/* <LanguageSwitch /> */}
-                    </div>
+                    {/* </div> */}
                     <More />
                   </div>
                 </div>
                 <div className="flex -mr-2 xl:hidden">
-                  {/* Mobile menu button */}
+                  {/* Mobile Menu Button */}
                   <Popover.Button className="inline-flex items-center justify-center p-2 rounded-md text-primary hover:text-high-emphesis focus:outline-none">
                     <span className="sr-only">{i18n._(t`Open Main Menu`)}</span>
                     {open ? (
@@ -464,7 +202,6 @@ function AppBar(): JSX.Element {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                       </svg>
                     ) : (
-                      // <X title="Close" className="block w-6 h-6" aria-hidden="true" />
                       <svg
                         className="block w-6 h-6"
                         aria-hidden="true"
@@ -480,7 +217,6 @@ function AppBar(): JSX.Element {
                           d="M4 6h16M4 12h16M4 18h16"
                         />
                       </svg>
-                      // <Burger title="Burger" className="block w-6 h-6" aria-hidden="true" />
                     )}
                   </Popover.Button>
                 </div>
@@ -540,115 +276,6 @@ function AppBar(): JSX.Element {
                 </a>
               </ExternalLink>
               )}
-
-
-                    {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                      <Link href={'/scarab/create'}>
-                  <a
-                    id={`scarab-nav-link`}
-                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                    >
-                    {i18n._(t`Scarab`)}
-                  </a>
-                </Link>
-                )} */}
-
-                {/* { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                  <Link href={'/charts'}>
-                    <a
-                      id={`charts-nav-link`}
-                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                    >
-                      {i18n._(t`Analytics`)}
-                    </a>
-                  </Link>
-                )}
-                
-                { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                  <Link href={'/bridge'}>
-                    <a
-                      id={`bridge-nav-link`}
-                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                    >
-                      {i18n._(t`Bridge`)}
-                    </a>
-                  </Link>
-                )} */}
-
-                    {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                      <Link href={'/user'}>
-                  <a
-                    id={`history-nav-link`}
-                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                    >
-                    {i18n._(t`Dashboard`)}
-                  </a>
-                </Link>
-                )} */}
-                {/* <Link href={'/vaults'}>
-                  <a
-                    id={`vaults-nav-link`}
-                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                  >
-                    {i18n._(t`Vaults`)}
-                  </a>
-                </Link> */}
-                {/* <Link href={'/bridge'}>
-                  <a className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap">
-                    {i18n._(t`Bridge`)}
-                  </a>
-                </Link> */}
-                {/* {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                  <>
-                    <Link href={'/lend'}>
-                      <a
-                        id={`lend-nav-link`}
-                        className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                      >
-                        {i18n._(t`Lend`)}
-                      </a>
-                    </Link>
-
-                    <Link href={'/borrow'}>
-                      <a
-                        id={`borrow-nav-link`}
-                        className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                      >
-                        {i18n._(t`Borrow`)}
-                      </a>
-                    </Link>
-                  </>
-                )} */}
-                  {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                  <Link href={'/summoner'}>
-                    <a
-                      id={`farm-nav-link`}
-                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                    >
-                      {i18n._(t`Summon`)}
-                    </a>
-                  </Link>
-                  )} */}
-                  {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                      <ExternalLink
-                      id={`analytics-nav-link`}
-                      href={ANALYTICS_URL[chainId] || 'https://analytics.soulswap.finance'}
-                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                    >
-                      {i18n._(t`Analytics`)}
-                    </ExternalLink>
-                  )} */}
-
-                  {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                  <Link href={'/ifo'}>
-                    <a
-                      id={`stake-nav-link`}
-                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                    >
-                      {i18n._(t`Ifo`)}
-                    </a>
-                  </Link>
-                )} */}
               </div>
             </Popover.Panel>
           </>
@@ -659,3 +286,7 @@ function AppBar(): JSX.Element {
 }
 
 export default AppBar
+function styled(BondItemBox: any) {
+  throw new Error('Function not implemented.')
+}
+
