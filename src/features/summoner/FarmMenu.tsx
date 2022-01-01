@@ -29,7 +29,7 @@ const Menu = ({ positionsLength, onSearch, term }) => {
       <div className="col-span-12 flex flex-col space-y-4">
         <MenuItem href="/summoner" title={i18n._(t`ALL PAIRS`)} />
         {account && positionsLength > 0 && <MenuItem href={`/summoner?filter=soul`} title={i18n._(t`SOUL PAIRS`)} />}
-        {/* {account && positionsLength > 0 && <MenuItem href={`/summoner?filter=my`} title={i18n._(t`MY PAIRS`)} />} */}
+        {account && positionsLength > 0 && <MenuItem href={`/summoner?filter=my`} title={i18n._(t`MY PAIRS`)} />}
         {account && positionsLength > 0 && <MenuItem href={`/summoner?filter=fantom`} title={i18n._(t`FANTOM PAIRS`)} />}
         {account && positionsLength > 0 && <MenuItem href={`/summoner?filter=stables`} title={i18n._(t`STABLE PAIRS`)} />}
         {account && positionsLength > 0 && <MenuItem href={`/summoner?filter=single`} title={i18n._(t`STAKING ASSETS`)} />}

@@ -31,12 +31,12 @@ const FarmListItem = ({ farm, ...rest }) => {
               <div className="flex items-center justify-between	space-x-4">
                 <DoubleLogo currency0={token0} currency1={token1} size={50} />
                 <div className="flex text-right flex-col justify-end">
-                  {/* <div>
+                  <div>
                     <span className="font-bold">{farm?.pair?.token0?.symbol}</span>/
                     <span className={farm?.pair?.type === PairType.KASHI ? 'font-thin' : 'font-bold'}>
                       {farm?.pair?.token1?.symbol}
                     </span>
-                  </div> */}
+                  </div>
                   {farm?.pair?.type === PairType.SWAP && (
                     <div className="text-xs md:text-base text-secondary">SoulSwap LP</div>
                   )}
@@ -68,8 +68,8 @@ const FarmListItem = ({ farm, ...rest }) => {
                 </div>
               </div>
               <div className="space-y-1">
-                <div className="text-xs md:text-base text-transparent bg-clip-text bg-gradient-to-r from-purple to-purple">
-                  SOUL
+                <div className="text-xs md:text-base text-transparent bg-clip-text bg-gradient-to-r from-yellow to-yellow">
+                  SOUL earned
                 </div>
                 <div className="flex items-center justify-between	 col-span-2 space-x-4">
                   <div className="flex flex-col justify-center">
@@ -100,7 +100,7 @@ const FarmListItem = ({ farm, ...rest }) => {
                 </div>
               </div>
               <div className="space-y-1">
-                <div className="text-xs md:text-base text-transparent bg-clip-text bg-gradient-to-r from-purple to-purple">
+                <div className="text-xs md:text-base text-transparent bg-clip-text bg-gradient-to-r from-yellow to-yellow">
                   {farm?.pair?.token0?.symbol}/{farm?.pair?.token1?.symbol} LP Staked
                 </div>
                 <div className="flex items-center justify-between">
@@ -127,7 +127,7 @@ const FarmListItem = ({ farm, ...rest }) => {
                 </div>
               </div>
 
-              <div className="flex-row items-center hidden space-x-4 md:flex">
+              {/* <div className="flex-row items-center hidden space-x-4 md:flex">
                 <div className="flex items-center space-x-2">
                   {farm?.rewards?.map((reward, i) => (
                     <div key={i} className="flex items-center">
@@ -149,7 +149,7 @@ const FarmListItem = ({ farm, ...rest }) => {
                     </div>
                   ))}
                 </div>
-              </div>
+              </div> */}
 
               <div className="flex flex-col items-center font-bold">{`TVL ${formatNumber(farm.tvl, true)}`}</div>
             </div>

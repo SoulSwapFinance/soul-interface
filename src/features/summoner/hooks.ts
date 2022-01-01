@@ -19,7 +19,9 @@ import { Zero } from '@ethersproject/constants'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import zip from 'lodash/zip'
 import { useToken } from '../../hooks/Tokens'
-import { useVaultInfo, useVaults } from '../vault/hooks'
+import { usePriceHelperContract } from '../bond/hooks/useContract'
+import { formatCurrency } from '../../modals/TokenStatsModal'
+import { usePriceApi } from '../vault/hooks'
 // import useSummoner from './useSummoner'
 const { default: axios } = require('axios')
 
@@ -122,12 +124,11 @@ export function useSoulPositions(contract?: Contract | null) {
     if (!account || !numberOfPools) {
       return
     }
-    return [...Array(numberOfPools).keys()].map((pid) => [String(pid), String(account)])
-    // return [...Array(numberOfPools.toNumber()).keys()].map((pid) => [String(pid), String(account)])
+    // return [...Array(numberOfPools).keys()].map((pid) => [String(pid), String(account)])
+    return [...Array(Number(numberOfPools)).keys()].map((pid) => [String(pid), String(account)])
   }, [numberOfPools, account])
 
   const pendingSoul = useSingleContractMultipleData(args ? contract : null, 'pendingSoul', args)
-
   const userInfo = useSingleContractMultipleData(args ? contract : null, 'userInfo', args)
 
   return useMemo(() => {
@@ -174,7 +175,7 @@ export function useSoulFarms(contract?: Contract | null) {
       allocPoint: data[0].result?.['allocPoint'] || '',
       lastRewardTime: data[0].result?.['lastRewardTime'] || '',
       accSoulPerShare: data[0].result?.['accSoulPerShare'] || '',
-      harvestInterval: data[0].result?.['harvestInterval'] || '',
+      // harvestInterval: data[0].result?.['harvestInterval'] || '',
       totalLp: data[0].result?.['totalLp'] || '',
     }))
   }, [args, poolInfo])
@@ -215,9 +216,9 @@ const useAsync = (asyncFunction, immediate = true) => {
   }, [value])
 }
 
-export function usePriceApi() {
-  return Promise.all([axios.get('/api/priceusd')])
-}
+// export function usePriceApi() {
+//   return Promise.all([axios.get('/api/priceusd/')])
+// }
 
 export function usePrice(pairContract?: Contract | null, pairDecimals?: number | null, invert: boolean = false) {
   const { account, chainId } = useActiveWeb3React()
@@ -284,15 +285,35 @@ export function useFarms() {
 }
 
 export function usePricesApi() {
-  const ftmPrice = useFantomPrice()
-  const soulPrice = useSoulPrice()
-  const seancePrice = useSeancePrice()
+  // const ftmPrice = useFantomPrice()
+  // const soulPrice = useSoulPrice()
+  // const seancePrice = useSeancePrice()
+
+  const priceHelperContract = usePriceHelperContract()
+
+  // SOUL PRICE
+  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
+  console.log(Number(rawSoulPrice))
+  const soulPrice = formatCurrency(Number(rawSoulPrice) / 1E18, 3)
+  console.log(soulPrice)
+
+  // FTM PRICE
+  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'])?.result
+  console.log(Number(rawFtmPrice))
+  const ftmPrice = formatCurrency(Number(rawFtmPrice) / 1E18, 2)
+  console.log(ftmPrice)
+  
+  // SEANCE PRICE
+  const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6'])?.result
+  console.log(Number(rawSeancePrice))
+  const seancePrice = formatCurrency(Number(rawSeancePrice) / 1E18, 3)
+  console.log(seancePrice)
 
   return useMemo(() => {
     return {
-      ftm: ftmPrice,
-      soul: soulPrice,
-      seance: seancePrice * ftmPrice,
+      ftm: Number(rawFtmPrice) / 1E18,
+      soul: Number(rawSoulPrice) / 1E18,
+      seance: Number(rawSeancePrice) / 1E18,
       usdc: 1,
     }
   }, [ftmPrice, soulPrice, seancePrice])
@@ -311,6 +332,7 @@ export function useFantomPrice() {
 export function useSeancePrice() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return usePrice(useSeanceUsdcContract(), 12)
+
 }
 
 export function useSoulPrice() {
