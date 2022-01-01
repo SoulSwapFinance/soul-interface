@@ -51,6 +51,7 @@ import Image from 'next/image'
 // import SoulLogo from '../../../components/SoulLogo'
 import { CenterScreen } from '../../../components/ReusableStyles'
 import Alert from '../../../components/Alert'
+import Chart from '../../../components/Chart'
 
 export default function Swap() {
   const { i18n } = useLingui()
@@ -368,6 +369,15 @@ export default function Swap() {
 
   return (
     <>
+          {/* <div className={`lg:w-full lg:flex lg:grid-cols-1 space-y-4`}> */}
+     {/* <div id="swap-page" className="w-full max-w-2xl p-4 space-y-4 rounded bg-dark-900 z-1"> */}
+      <div className={`w-full lg:grid-cols-1 order-last 2xl:order-first space-y-4 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
+        <div className={`w-full flex flex-col order-last 2xl:order-first mt-6 mb-20 sm:mb-0 lg:mt-0 p-6 rounded rounded-lg bg-light-glass`}>
+          <Chart inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+        </div>
+        </div>
+      {/* </div> */}
+
       <Head>
         <title>{i18n._(t`SoulSwap`)}</title>
         <meta
@@ -385,6 +395,12 @@ export default function Swap() {
       <br />
       <DoubleGlowShadowV2 opacity="0.6">
         <div id="swap-page" className="w-full max-w-2xl p-4 space-y-4 rounded bg-dark-900 z-1">
+        {/* <div id="swap-page" className={`grid grid-cols-1 gap-2 rounded z-4 sm:m-6`}> */}
+            {/* <div className={`grid grid-cols-1 lg:grid-cols-1 space-y-4 lg:space-x-4 lg:space-y-0`}> */}
+              {/* <div className={`col-span-1 flex flex-col order-last lg:order-first mt-6 mb-20 sm:mb-0 lg:mt-0 p-6 rounded rounded-lg bg-light-glass`}>
+        <Chart inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+          </div> */}
+          <div>
           <SwapHeader
             input={currencies[Field.INPUT]}
             output={currencies[Field.OUTPUT]}
@@ -491,8 +507,6 @@ export default function Swap() {
                 </div>
               )}
             </div>
-          </div>
-
           {recipient !== null && !showWrap && (
             <AddressInputPanel id="recipient" value={recipient} onChange={onChangeRecipient} />
           )}
@@ -607,12 +621,15 @@ export default function Swap() {
               </Column>
             )}
             {isExpertMode && swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}
-          </BottomGrouping>
-          {!swapIsUnsupported ? null : (
-            <UnsupportedCurrencyFooter show={swapIsUnsupported} currencies={[currencies.INPUT, currencies.OUTPUT]} />
-          )}
-        </div>
-        <AutoColumn justify="space-between" className="py-5">
+              </BottomGrouping>
+              {!swapIsUnsupported ? null : (
+                <UnsupportedCurrencyFooter show={swapIsUnsupported} currencies={[currencies.INPUT, currencies.OUTPUT]} />
+              )}
+            </div>
+           </div>
+          </div>
+
+        {/* <AutoColumn justify="space-between" className="py-5">
           <iframe 
                 frameBorder={"none"}
                 src={`https://kek.tools/t/${
@@ -625,8 +642,9 @@ export default function Swap() {
                 height={"480" }
                 width={"100%"}
             />
-        </AutoColumn>
+        </AutoColumn> */}
       </DoubleGlowShadowV2>
+    {/* </div> */}
     </>
   )
 }
