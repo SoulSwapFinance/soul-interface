@@ -219,19 +219,6 @@ export const AllPids = [
     token2Address: tokens.LUX,
   },
   {
-    // 500
-    pid: 47,
-    token1: 'FTM',
-    token2: 'wLUM',
-    lpSymbol: 'FTM-wLUM',
-    lpAddresses: {
-      4002: '',
-      250: '0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99',
-    },
-    token1Address: tokens.FTM,
-    token2Address: tokens.WLUM,
-  },
-  {
     // 1600
     pid: 1,
     token1: 'SOUL',
@@ -336,17 +323,17 @@ export const AllPids = [
     token2Address: tokens.USDC,
   },
   {
-    // 400
-    pid: 7,
-    token1: 'SEANCE',
-    token2: 'USDC',
-    lpSymbol: 'SEANCE-USDC',
+    // 500
+    pid: 47,
+    token1: 'FTM',
+    token2: 'wLUM',
+    lpSymbol: 'FTM-wLUM',
     lpAddresses: {
       4002: '',
-      250: '0x98C678d3C7ebeD4a36B84666700d8b5b5Ddc1f79',
+      250: '0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99',
     },
-    token1Address: tokens.SEANCE,
-    token2Address: tokens.USDC,
+    token1Address: tokens.FTM,
+    token2Address: tokens.WLUM,
   },
   {
     // 300
