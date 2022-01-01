@@ -16,7 +16,7 @@ import ISoulSwapPairABI from '../../constants/abis/soulswap/ISoulSwapPair.json'
 import { useContract, useSeanceContract, useSoulContract } from '../../hooks'
 import { formatNumberScale } from '../../functions'
 import axios from 'axios'
-import { SOUL_ADDRESS } from '../../constants/addresses'
+import { LUX_ADDRESS, SOUL_ADDRESS } from '../../constants/addresses'
 import { ethers } from 'ethers'
 import { soul } from '@soulswap/soul-data'
 import { NEVER_RELOAD, useMultipleContractSingleData, useSingleCallResult, useSingleContractMultipleData } from '../../state/multicall/hooks'
@@ -65,6 +65,11 @@ const HoverText = styled.div`
     cursor: pointer;
   }
 `
+const HideOnMobile = styled.div`
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
+`;
 
 const WALLET_VIEWS = {
   OPTIONS: 'options',
@@ -76,29 +81,34 @@ const WALLET_VIEWS = {
 const cache: { [key: string]: number } = {};
 
 export function formatCurrency(c: number, precision = 0) {
-    return new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-        maximumFractionDigits: precision,
-        minimumFractionDigits: precision,
-    }).format(c);
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: precision,
+    minimumFractionDigits: precision,
+  }).format(c);
 }
 
-export default function TokenStatsModal (): JSX.Element | null {
-    
-    const { chainId, library, account } = useActiveWeb3React()
-    const tokenStatsModalOpen = useModalOpen(ApplicationModal.SOUL_STATS)
-    const toggleTokenStatsModal = useToggleTokenStatsModal()
-    const modalOpen = useModalOpen(ApplicationModal.SOUL_STATS)
-    const priceHelperContract = usePriceHelperContract()
-    let tokenInfo = useTokenInfo(useSoulContract())
-    let seanceInfo = useTokenInfo(useSeanceContract())
-    const result = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
-    console.log(Number(result))
-    const price = formatCurrency(Number(result) / 1E18, 3)
-    console.log(price)
+export default function TokenStatsModal(): JSX.Element | null {
 
-function getSummaryLine(title, value) {
+  const { chainId, library, account } = useActiveWeb3React()
+  const tokenStatsModalOpen = useModalOpen(ApplicationModal.SOUL_STATS)
+  const toggleTokenStatsModal = useToggleTokenStatsModal()
+  const modalOpen = useModalOpen(ApplicationModal.SOUL_STATS)
+  const priceHelperContract = usePriceHelperContract()
+  let tokenInfo = useTokenInfo(useSoulContract())
+  let seanceInfo = useTokenInfo(useSeanceContract())
+  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
+  console.log(Number(rawSoulPrice))
+  const soulPrice = formatCurrency(Number(rawSoulPrice) / 1E18, 3)
+  console.log(soulPrice)
+
+  const rawLuxPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'])?.result
+  console.log(Number(rawLuxPrice))
+  const luxPrice = formatCurrency(Number(rawLuxPrice) / 1E18, 2)
+  console.log(luxPrice)
+
+  function getSummaryLine(title, value) {
     return (
       <div className="flex flex-col gap-2 bg-dark-800 rounded py-1 px-3 w-full">
         <div className="flex items-center justify-between">
@@ -114,21 +124,21 @@ function getSummaryLine(title, value) {
 
   return (
     <Modal isOpen={tokenStatsModalOpen} onDismiss={toggleTokenStatsModal} maxWidth={672}>
-              <div className="space-y-6">
-       <div className="space-y-2">
+      <div className="space-y-8">
+        <div className="space-y-2">
           <ModalHeader title={''} onClose={toggleTokenStatsModal} />
           <div className="flex flex-row w-full py-4">
-          <QuestionHelper text={`Add SOUL to MetaMask`}>
+            {/* <QuestionHelper text={`Add LUX to MetaMask`}>
             <div
               className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
               onClick={() => {
                 const params: any = {
                   type: 'ERC20',
                   options: {
-                    address: SOUL_ADDRESS[chainId],
-                    symbol: 'SOUL',
-                    decimals: 18,
-                    image: 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/soul.jpg',
+                    address: LUX_ADDRESS[chainId],
+                    symbol: 'LUX',
+                    decimals: 9,
+                    image: 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b/logo.png',
                   },
                 }
                 if (library && library.provider.isMetaMask && library.provider.request) {
@@ -139,7 +149,7 @@ function getSummaryLine(title, value) {
                     })
                     .then((success) => {
                       if (success) {
-                        console.log('Successfully added SOUL to MetaMask')
+                        console.log('Successfully added LUX to MetaMask')
                       } else {
                         throw new Error('Something went wrong.')
                       }
@@ -149,20 +159,117 @@ function getSummaryLine(title, value) {
               }}
             >
               <Image
-                  src="/images/tokens/soul.png"
-                  alt="SOUL"
-                  width="60px"
-                  height="60px"
+                  src="/images/tokens/LUXOR.svg"
+                  alt="LUX"
+                  width="80px"
+                  height="80px"
                   objectFit="contain"
                   className="rounded-md"
               />
             </div>
-          </QuestionHelper>
-        <div className="flex flex-1 flex-col">
+          </QuestionHelper> */}
+
+            <QuestionHelper text={`Add to MetaMask`}>
+              <div
+                className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
+                onClick={() => {
+                  const params: any = {
+                    type: 'ERC20',
+                    options: {
+                      address: LUX_ADDRESS[chainId],
+                      symbol: 'LUX',
+                      decimals: 9,
+                      image: 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b/logo.png',
+                    },
+                  }
+                  if (library && library.provider.isMetaMask && library.provider.request) {
+                    library.provider
+                      .request({
+                        method: 'wallet_watchAsset',
+                        params,
+                      })
+                      .then((success) => {
+                        if (success) {
+                          console.log('Successfully added LUX to MetaMask')
+                        } else {
+                          throw new Error('Something went wrong.')
+                        }
+                      })
+                      .catch(console.error)
+                  }
+                }}
+              >
+                <div
+                  className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
+                  onClick={() => {
+                    const params: any = {
+                      type: 'ERC20',
+                      options: {
+                        address: SOUL_ADDRESS[chainId],
+                        symbol: 'SOUL',
+                        decimals: 18,
+                        image: 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/soul.jpg',
+                      },
+                    }
+                    if (library && library.provider.isMetaMask && library.provider.request) {
+                      library.provider
+                        .request({
+                          method: 'wallet_watchAsset',
+                          params,
+                        })
+                        .then((success) => {
+                          if (success) {
+                            console.log('Successfully added SOUL to MetaMask')
+                          } else {
+                            throw new Error('Something went wrong.')
+                          }
+                        })
+                        .catch(console.error)
+                    }
+                  }}
+                >
+                  <HideOnMobile>
+                    <Image
+                      src="/images/tokens/LUXOR.svg"
+                      alt="LUX"
+                      width="40px"
+                      height="40px"
+                      objectFit="contain"
+                      className="rounded-md"
+                    />
+                  </HideOnMobile>
+                </div>
+                <HideOnMobile>
+                  <Image
+                    src="/images/tokens/soul.png"
+                    alt="SOUL"
+                    width="40px"
+                    height="40px"
+                    objectFit="contain"
+                    className="rounded-md"
+                  />
+                </HideOnMobile>
+              </div>
+            </QuestionHelper>
+
+            <div className="flex flex-1 flex-col">
               <div className="flex flex-row items-center px-3">
-                <div className="text-primary text-2xl">{'SOUL'}</div>
+                <div className="text-primary text-2xl">{'LUXOR & SOUL'}</div>
               </div>
               <div className="flex items-center justify-between space-x-3 gap-2">
+                <ExternalLink
+                  href={
+                    'https://ftmscan.com/address/0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'
+                  }
+                  className="px-3 ring-0 ring-transparent ring-opacity-0"
+                  color="purple"
+                  startIcon={<LinkIcon size={16} />}
+                >
+                  {/* <HideOnMobile> */}
+                    <Typography variant="sm" className="hover:underline py-0.5 currentColor">
+                      {`Luxor`}
+                    </Typography>
+                  {/* </HideOnMobile> */}
                   <ExternalLink
                     href={
                       'https://ftmscan.com/address/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'
@@ -171,86 +278,96 @@ function getSummaryLine(title, value) {
                     color="purple"
                     startIcon={<LinkIcon size={16} />}
                   >
-                    <Typography variant="xs" className="hover:underline py-0.5 currentColor">
-                      {`View Contract`}
-                    </Typography>
+                    {/* <HideOnMobile> */}
+                      <Typography variant="sm" className="hover:underline py-0.5 currentColor">
+                        {`Soul`}
+                      </Typography>
+                    {/* </HideOnMobile> */}
                   </ExternalLink>
+                </ExternalLink>
               </div>
             </div>
-            <div className="flex items-center  text-primary text-bold">
-              <div className="ml-2 text-primary text-base text-secondary text-2xl">{`${price}`}</div>
+            <div className="flex items-center text-primary text-bold">
+              <div className="span-full">
+                <div className="text-primary text-base text-secondary text-xl">{`${luxPrice}`}</div>
+                <div className="text-primary text-base text-secondary text-xl">{`${soulPrice}`}</div>
+                {/* <div className="flex items-center text-primary text-bold">
+              <div className="text-primary text-base text-secondary text-2xl">{`${luxPrice}`}</div>
+              </div>
+                  <div className="text-primary text-base text-secondary text-2xl">{`${soulPrice}`}</div>*/}
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <Typography weight={700}>{`Supply & Market Cap`}</Typography>
-          </div>
+        <div className="flex items-center justify-between">
+          <Typography weight={700}>{`Supply & Market Cap`}</Typography>
+        </div>
       </div>
       <div className="flex flex-col flex-nowrap gap-1 -m-1">
-            {getSummaryLine(
-              <div className="flex items-center">
-                <Typography variant="sm" className="flex items-center py-0.5">
-                  {`Circulating Supply`}
-                </Typography>
-                  <QuestionHelper
-                    text={
-                      <div className="flex flex-col gap-2 py-1 px-3 w-full">
-                        <div className="flex items-center justify-between">
-                          <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                            Total Supply
-                          </Typography>
-                          <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                            {formatNumberScale(tokenInfo.totalSupply, false, 2)}
-                          </Typography>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                            DAO Treasury
-                          </Typography>
-                          <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                            - {formatNumberScale(Number(tokenInfo.totalSupply) * 0.125, false, 2)}
-                          </Typography>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                            Total Staked
-                          </Typography>
-                          <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                            - {formatNumberScale(seanceInfo.totalSupply, false, 2)}
-                          </Typography>
-                        </div>
-                        <hr></hr>
-                        <div className="flex items-center justify-between">
-                          <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                            Circulating
-                          </Typography>
-                          <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                            {formatNumberScale(
-                              Number(tokenInfo.totalSupply) 
-                              - Number(seanceInfo.totalSupply)
-                              - (Number(tokenInfo.totalSupply) * 0.125)
-                              , false, 2)}
-                          </Typography>
-                        </div>
-                      </div>
-                    }
-                  />
-              </div>,
-            formatNumberScale(
-              Number(tokenInfo.totalSupply) 
-              - Number(seanceInfo.totalSupply)
-              - (Number(tokenInfo.totalSupply) * 0.125)
-              , false, 2)
-            )}
-            {getSummaryLine(
-              <Typography variant="sm" className="flex items-center py-0.5">
-                {`Total Market Cap`}
-              </Typography>,
-                formatCurrency(
-                Number(tokenInfo.totalSupply) * Number(result) / 1E18, 2)
-            )}
+        {getSummaryLine(
+          <div className="flex items-center">
+            <Typography variant="sm" className="flex items-center py-0.5">
+              {`Circulating Supply`}
+            </Typography>
+            <QuestionHelper
+              text={
+                <div className="flex flex-col gap-2 py-1 px-3 w-full">
+                  <div className="flex items-center justify-between">
+                    <Typography variant="sm" className="flex items-center font-bold py-0.5">
+                      Total Supply
+                    </Typography>
+                    <Typography variant="sm" className="flex items-center font-bold py-0.5">
+                      {formatNumberScale(tokenInfo.totalSupply, false, 2)}
+                    </Typography>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <Typography variant="sm" className="flex items-center font-bold py-0.5">
+                      DAO Treasury
+                    </Typography>
+                    <Typography variant="sm" className="flex items-center font-bold py-0.5">
+                      - {formatNumberScale(Number(tokenInfo.totalSupply) * 0.125, false, 2)}
+                    </Typography>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <Typography variant="sm" className="flex items-center font-bold py-0.5">
+                      Total Staked
+                    </Typography>
+                    <Typography variant="sm" className="flex items-center font-bold py-0.5">
+                      - {formatNumberScale(seanceInfo.totalSupply, false, 2)}
+                    </Typography>
+                  </div>
+                  <hr></hr>
+                  <div className="flex items-center justify-between">
+                    <Typography variant="sm" className="flex items-center font-bold py-0.5">
+                      Circulating
+                    </Typography>
+                    <Typography variant="sm" className="flex items-center font-bold py-0.5">
+                      {formatNumberScale(
+                        Number(tokenInfo.totalSupply)
+                        - Number(seanceInfo.totalSupply)
+                        - (Number(tokenInfo.totalSupply) * 0.125)
+                        , false, 2)}
+                    </Typography>
+                  </div>
+                </div>
+              }
+            />
+          </div>,
+          formatNumberScale(
+            Number(tokenInfo.totalSupply)
+            - Number(seanceInfo.totalSupply)
+            - (Number(tokenInfo.totalSupply) * 0.125)
+            , false, 2)
+        )}
+        {getSummaryLine(
+          <Typography variant="sm" className="flex items-center py-0.5">
+            {`Total Market Cap`}
+          </Typography>,
+          formatCurrency(
+            Number(tokenInfo.totalSupply) * Number(rawSoulPrice) / 1E18, 2)
+        )}
       </div>
     </Modal>
   )
