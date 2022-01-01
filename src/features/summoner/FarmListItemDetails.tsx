@@ -1,5 +1,6 @@
+
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
-import { ChainId, SOUL_SUMMONER_ADDRESS, Token, ZERO } from '../../sdk'
+import { ChainId, MASTERCHEF_ADDRESS, Token, ZERO } from '../../sdk'
 import { Chef, PairType } from './enum'
 import { Disclosure, Transition } from '@headlessui/react'
 import React, { useState } from 'react'
@@ -7,7 +8,8 @@ import { usePendingSoul, useUserInfo } from './hooks'
 
 import Button from '../../components/Button'
 import Dots from '../../components/Dots'
-
+// import { SOUL_SUMMONER_ADDRESS } from '../../constants'
+import { SOUL_SUMMONER_ADDRESS } from '../../constants/addresses'
 import { Input as NumericalInput } from '../../components/NumericalInput'
 import { formatNumber, formatNumberScale, formatPercent } from '../../functions'
 import { getAddress } from '@ethersproject/address'
@@ -15,12 +17,15 @@ import { t } from '@lingui/macro'
 import { tryParseAmount } from '../../functions/parse'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import { useLingui } from '@lingui/react'
-import useMasterChef from './useSummoner'
+import useSoulSummoner from './useSummoner'
 import usePendingReward from './usePendingReward'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { useTransactionAdder } from '../../state/transactions/hooks'
 import { useToken } from '../../hooks/Tokens'
 import { isMobile } from 'react-device-detect'
+import { usePriceHelperContract } from '../bond/hooks/useContract'
+import { useSingleCallResult } from '../../state/multicall/hooks'
+import { formatCurrency } from '../../modals/TokenStatsModal'
 
 const FarmListItem = ({ farm }) => {
   const { i18n } = useLingui()
@@ -44,18 +49,24 @@ const FarmListItem = ({ farm }) => {
   const balance = useTokenBalance(account, liquidityToken)
 
   // TODO: Replace these
-  const { amount } = useUserInfo(farm, liquidityToken) // nextHarvestUntil
+  const { amount } = useUserInfo(farm, liquidityToken)
 
   const pendingSoul = usePendingSoul(farm)
 
   const reward = usePendingReward(farm)
+  
+  const priceHelperContract = usePriceHelperContract()
+  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
+  console.log(Number(rawSoulPrice))
+  const soulPrice = Number(rawSoulPrice) / 1E18
+  console.log(soulPrice)
 
   const typedDepositValue = tryParseAmount(depositValue, liquidityToken)
   const typedWithdrawValue = tryParseAmount(withdrawValue, liquidityToken)
 
   const [approvalState, approve] = useApproveCallback(typedDepositValue, SOUL_SUMMONER_ADDRESS[chainId])
 
-  const { deposit, withdraw, harvest, stake, unstake, claimStake } = useMasterChef()
+  const { deposit, withdraw, harvest } = useSoulSummoner()
 
   return (
     <Transition
@@ -77,7 +88,7 @@ const FarmListItem = ({ farm }) => {
             )} */}
             {account && (
               <div className="pr-4 mb-2 text-left cursor-pointer text-secondary">
-                {i18n._(t`Wallet Balance`)}: {balance?.toSignificant(8)}
+                {i18n._(t`Wallet Balance`)}: {formatNumberScale(balance?.toSignificant(4, undefined, 2) ?? 0, false, 4)}
                 {farm.lpPrice && balance
                   ? ` (` + formatNumberScale(farm.lpPrice * Number(balance?.toFixed(18) ?? 0), true, 2) + `)`
                   : ``}
@@ -92,9 +103,9 @@ const FarmListItem = ({ farm }) => {
               {account && (
                 <Button
                   variant="outlined"
-                  color="blue"
+                  color="pink"
                   size="xs"
-                  // disabled={farm?.id === '1'}
+                  disabled={farm?.id === '1'}
                   onClick={() => {
                     if (!balance.equalTo(ZERO)) {
                       if (liquidityToken?.symbol == 'SOUL') {
@@ -109,15 +120,14 @@ const FarmListItem = ({ farm }) => {
                         setDepositValue(balance.toFixed(liquidityToken?.decimals))
                       }
                     }
-                  }
-                }
+                  }}
                   className="absolute border-0 right-4 focus:ring focus:ring-light-purple"
                 >
                   {i18n._(t`MAX`)}
                 </Button>
               )}
             </div>
-            { farm.pair.token1 && (approvalState === ApprovalState.NOT_APPROVED || approvalState === ApprovalState.PENDING) ? (
+            {approvalState === ApprovalState.NOT_APPROVED || approvalState === ApprovalState.PENDING ? (
               <Button
                 className="w-full"
                 size="sm"
@@ -134,14 +144,12 @@ const FarmListItem = ({ farm }) => {
                 size="sm"
                 variant="outlined"
                 color="gradient"
-                disabled={pendingTx || !typedDepositValue || balance.lessThan(typedDepositValue)}
+                disabled={pendingTx || !typedDepositValue || balance.lessThan(typedDepositValue) || farm?.id === '1'}
                 onClick={async () => {
                   setPendingTx(true)
                   try {
                     // KMP decimals depend on asset, SLP is always 18
-                    const tx = farm.pair.token1 ?
-                      await deposit(farm?.id, depositValue.toBigNumber(liquidityToken?.decimals))
-                      : await stake(depositValue.toBigNumber(18))
+                    const tx = await deposit(farm?.id, depositValue.toBigNumber(liquidityToken?.decimals))
 
                     addTransaction(tx, {
                       summary: `${i18n._(t`Deposit`)} ${
@@ -159,17 +167,16 @@ const FarmListItem = ({ farm }) => {
                 {i18n._(t`Stake`)}
               </Button>
             )}
-           
           </div>
           <div className="col-span-2 text-center md:col-span-1">
-            {/* {farm.depositFeeBP && !isMobile && (
-              <div className="pr-4 mb-2 text-left cursor-pointer text-secondary" className={{ height: '24px' }} />
-            )} */}
+            {farm.depositFeeBP && !isMobile && (
+              <div className="pr-4 mb-2 text-left cursor-pointer text-secondary" style={{ height: '24px' }} />
+            )}
             {account && (
               <div className="pr-4 mb-2 text-left cursor-pointer text-secondary">
-                {i18n._(t`Deposited`)}: {amount?.toSignificant(8)}
+                {i18n._(t`Your Staked`)}: {formatNumberScale(amount?.toSignificant(6)) ?? 0}
                 {farm.lpPrice && amount
-                  ? ` (` + formatNumberScale(farm.lpPrice * Number(amount.toSignificant(8) ?? 0), true, 2) + `)`
+                  ? ` (` + formatNumberScale(farm.lpPrice * Number(amount?.toSignificant(18) ?? 0), true, 2) + `)`
                   : ``}
               </div>
             )}
@@ -182,7 +189,7 @@ const FarmListItem = ({ farm }) => {
               {account && (
                 <Button
                   variant="outlined"
-                  color="pink"
+                  color="purple"
                   size="xs"
                   onClick={() => {
                     if (!amount.equalTo(ZERO)) {
@@ -195,8 +202,6 @@ const FarmListItem = ({ farm }) => {
                 </Button>
               )}
             </div>
-            { farm.pair.token1 && pendingSoul && pendingSoul.greaterThan(ZERO) && (
-
             <Button
               className="w-full"
               size="sm"
@@ -224,47 +229,13 @@ const FarmListItem = ({ farm }) => {
             >
               {i18n._(t`Unstake`)}
             </Button>
-            
-            )}
-            { !farm.pair.token1 && pendingSoul && pendingSoul.greaterThan(ZERO) && (
-
-            <Button
-              className="w-full"
-              size="sm"
-              variant="outlined"
-              color="gradient"
-              disabled={pendingTx || !typedWithdrawValue || amount.lessThan(typedWithdrawValue)}
-              onClick={async () => {
-                setPendingTx(true)
-                try {
-                  // KMP decimals depend on asset, SLP is always 18
-                  const tx = await unstake(withdrawValue.toBigNumber(18))
-                  addTransaction(tx, {
-                    summary: `${i18n._(t`Withdraw`)} ${
-                      farm.pair.token1
-                        ? `${farm.pair.token0.symbol}/${farm.pair.token1.symbol}`
-                        : farm.pair.token0.symbol
-                    }`,
-                  })
-                } catch (error) {
-                  console.error(error)
-                }
-
-                setPendingTx(false)
-              }}
-            >
-              {i18n._(t`Unstake`)}
-            </Button>
-
-            )}
-            </div>
           </div>
-        {farm.pair.token1 && pendingSoul && pendingSoul.greaterThan(ZERO) && (
+        </div>
+        {pendingSoul && pendingSoul.greaterThan(ZERO) && (
           <div className="px-4 pb-4">
             <Button
               color="gradient"
               className="w-full"
-              // variant={'filled'}
               // variant={!!nextHarvestUntil && nextHarvestUntil > Date.now() ? 'outlined' : 'filled'}
               // disabled={!!nextHarvestUntil && nextHarvestUntil > Date.now()}
               onClick={async () => {
@@ -284,36 +255,7 @@ const FarmListItem = ({ farm }) => {
                 setPendingTx(false)
               }}
             >
-              {i18n._(t`Harvest ${formatNumber(pendingSoul.toFixed(18))} SOUL`)}
-            </Button>
-          </div>
-        )}
-        { !farm.pair.token1 && pendingSoul && pendingSoul.greaterThan(ZERO) && (
-          <div className="px-4 pb-4">
-            <Button
-              color="gradient"
-              className="w-full"
-              // variant={'filled'}
-              // variant={!!nextHarvestUntil && nextHarvestUntil > Date.now() ? 'outlined' : 'filled'}
-              // disabled={!!nextHarvestUntil && nextHarvestUntil > Date.now()}
-              onClick={async () => {
-                setPendingTx(true)
-                try {
-                  const tx = await claimStake(10**18 * 0)
-                  addTransaction(tx, {
-                    summary: `${i18n._(t`Harvest`)} ${
-                      farm.pair.token1
-                        ? `${farm.pair.token0.symbol}/${farm.pair.token1.symbol}`
-                        : farm.pair.token0.symbol
-                    }`,
-                  })
-                } catch (error) {
-                  console.error(error)
-                }
-                setPendingTx(false)
-              }}
-            >
-              {i18n._(t`Harvest ${formatNumber(pendingSoul.toFixed(18))} SOUL`)}
+              {i18n._(t`Harvest ${formatCurrency(Number(pendingSoul.toFixed(2)) * Number(rawSoulPrice) / 1E18, 2)} SOUL`)}
             </Button>
           </div>
         )}

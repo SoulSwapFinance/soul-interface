@@ -1,3 +1,4 @@
+
 import { useAlcxRewarderContract, useComplexRewarderContract } from '../../hooks/useContract'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
@@ -10,7 +11,8 @@ import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useBlockNumber } from '../../state/application/hooks'
 
 const REWARDERS = {
-  [ChainId.MAINNET]: 'some'
+  [ChainId.MAINNET]: 'some',
+  // [ChainId.MATIC]: 'some',
 }
 
 // const useRewarderContract = (farm) => {
@@ -37,9 +39,9 @@ const usePending = (farm) => {
 
   const contract = useMemo(
     () => ({
-      [ChainId.MAINNET]: aclxRewarder
+      [ChainId.MAINNET]: aclxRewarder,
     }),
-    [aclxRewarder]
+    [complexRewarder, aclxRewarder]
   )
 
   useEffect(() => {
@@ -61,7 +63,7 @@ const usePending = (farm) => {
       aclxRewarder &&
       farm &&
       library &&
-      (farm.chef === Chef.SUMMONER_V2 || farm.chef === Chef.MINICHEF)
+      (farm.chef === Chef.SUMMONER || farm.chef === Chef.MINICHEF)
     ) {
       fetchPendingReward()
     }
