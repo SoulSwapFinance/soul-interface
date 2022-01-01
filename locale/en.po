@@ -16,8 +16,8 @@ msgstr ""
 msgid "% Share"
 msgstr "% Share"
 
-msgid "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies"
-msgstr "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies"
+msgid "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies."
+msgstr "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies."
 
 msgid "- 0.1 FTM to lock"
 msgstr "- 0.1 FTM to lock"
@@ -55,8 +55,8 @@ msgstr "24 Hours"
 msgid "30 Days"
 msgstr "30 Days"
 
-msgid "A portion of each trade (0.05%) goes to Spell holders as a protocol incentive."
-msgstr "A portion of each trade (0.05%) goes to Spell holders as a protocol incentive."
+msgid "A portion of each trade (0.05%) goes towards buying SOUL off the market for a weekly burn."
+msgstr "A portion of each trade (0.05%) goes towards buying SOUL off the market for a weekly burn."
 
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
 msgstr "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
@@ -87,9 +87,6 @@ msgstr "Add Liquidity"
 
 msgid "Add Liquidity & Earn Fees (0.25%)"
 msgstr "Add Liquidity & Earn Fees (0.25%)"
-
-msgid "Add SOUL to MetaMask"
-msgstr "Add SOUL to MetaMask"
 
 msgid "Add collateral in order to borrow assets"
 msgstr "Add collateral in order to borrow assets"
@@ -258,12 +255,6 @@ msgstr ""
 msgid "CoffinBox"
 msgstr "CoffinBox"
 
-msgid "CoffinBox Apps"
-msgstr "CoffinBox Apps"
-
-msgid "CoffinBox is an innovative way to use dapps gas-efficiently and gain extra yield."
-msgstr "CoffinBox is an innovative way to use dapps gas-efficiently and gain extra yield."
-
 msgid "CoffinBox strategies can create yield for your collateral tokens. This token does not yet have a strategy in the CoffinBox."
 msgstr "CoffinBox strategies can create yield for your collateral tokens. This token does not yet have a strategy in the CoffinBox."
 
@@ -417,9 +408,6 @@ msgstr "Either return to the {link}, or change to an available network."
 msgid "Enchant"
 msgstr "Enchant"
 
-msgid "Enchant Fee"
-msgstr "Enchant Fee"
-
 msgid "English"
 msgstr "English"
 
@@ -512,10 +500,10 @@ msgid "Gain exposure to tokens without reducing your assets. Leverage will enabl
 msgstr "Gain exposure to tokens without reducing your assets. Leverage will enable you to take short positions against assets and earn from downside movements."
 
 msgid ""
-"Gain governance rights with SPELL and earn 5% APR (0.05% of\n"
+"Gain governance rights with SEANCE and earn 5% APR (0.05% of\n"
 "all swaps from all chains)"
 msgstr ""
-"Gain governance rights with SPELL and earn 5% APR (0.05% of\n"
+"Gain governance rights with SEANCE and earn 5% APR (0.05% of\n"
 "all swaps from all chains)"
 
 msgid "German"
@@ -637,6 +625,21 @@ msgstr "Limit order"
 
 msgid "Links"
 msgstr "Links"
+
+msgid "Liquidity Positions"
+msgstr "Liquidity Positions"
+
+msgid "Liquidity Provider Rewards"
+msgstr "Liquidity Provider Rewards"
+
+msgid ""
+"Liquidity providers earn a 0.25% fee on all trades proportional to their share of\n"
+"the pool. Fees are added to the pool, accrue in real time and can be claimed by\n"
+"withdrawing your liquidity at any time."
+msgstr ""
+"Liquidity providers earn a 0.25% fee on all trades proportional to their share of\n"
+"the pool. Fees are added to the pool, accrue in real time and can be claimed by\n"
+"withdrawing your liquidity at any time."
 
 msgid "Lists"
 msgstr "Lists"
@@ -964,6 +967,9 @@ msgstr "SLP"
 msgid "SOUL"
 msgstr "SOUL"
 
+msgid "SOUL Burns"
+msgstr "SOUL Burns"
+
 msgid "SOUL PAIRS"
 msgstr "SOUL PAIRS"
 
@@ -1048,6 +1054,9 @@ msgstr "Soul User"
 msgid "SoulSwap"
 msgstr "SoulSwap"
 
+msgid "SoulSwap Apps"
+msgstr "SoulSwap Apps"
+
 msgid "Spanish"
 msgstr "Spanish"
 
@@ -1063,17 +1072,17 @@ msgstr "Stake Auto Reinvesting SOUL"
 msgid "Stake SOUL"
 msgstr "Stake SOUL"
 
-msgid "Stake SOUL for SPELL"
-msgstr "Stake SOUL for SPELL"
+msgid "Stake SOUL for SEANCE"
+msgstr "Stake SOUL for SEANCE"
 
 msgid "Stake Soul for Soul."
 msgstr "Stake Soul for Soul."
 
 msgid ""
-"Stake into SPELL add collateral as aSPELL on Aave all in\n"
+"Stake into SEANCE add collateral as aSEANCE on Aave all in\n"
 "one click"
 msgstr ""
-"Stake into SPELL add collateral as aSPELL on Aave all in\n"
+"Stake into SEANCE add collateral as aSEANCE on Aave all in\n"
 "one click"
 
 msgid "Stake your SOUL to borrow SEANCE"
