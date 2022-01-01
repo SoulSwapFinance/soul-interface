@@ -24,7 +24,6 @@ function TokenStats(): JSX.Element | null {
   const open = useModalOpen(ApplicationModal.SOUL_STATS)
   const priceHelperContract = usePriceHelperContract()
 
-  if (!chainId) return null
   const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
   console.log(Number(rawSoulPrice))
   const soulPrice = formatCurrency(Number(rawSoulPrice) / 1E18, 3)
@@ -34,6 +33,8 @@ function TokenStats(): JSX.Element | null {
   console.log(Number(rawLuxPrice))
   const luxPrice = formatCurrency(Number(rawLuxPrice) / 1E18, 2)
   console.log(luxPrice)
+  
+  if (!chainId) return null
   
   return (
     <div
