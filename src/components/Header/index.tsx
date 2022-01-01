@@ -319,7 +319,7 @@ function AppBar(): JSX.Element {
                         </>
                       ))} */}
 
-                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                       library &&
                       library.provider.isMetaMask && ( // TODO: update
                         <>
@@ -365,7 +365,7 @@ function AppBar(): JSX.Element {
                             </div>
                           </QuestionHelper>
                         </>
-                      ))}
+                      ))} */}
                     {/* {chainId && chainId in SOUL_ADDRESS && library && library.provider.isMetaMask && ( */}
                       <>
                         {/* <QuestionHelper text={i18n._(t`Add SOUL to MetaMask`)}>
