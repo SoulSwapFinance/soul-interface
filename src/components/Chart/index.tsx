@@ -283,22 +283,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
 
   return (
     <>
-      {/* <a
-        href={`https://info.soulswap.finance/pair/${pairAddress}`}
-        target="_blank"
-        rel="noreferrer"
-        className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2 lg:w-min"
-      >
-        <div className="flex items-center space-x-2">
-          <CurrencyLogo currency={inputCurrency} size={'30px'} className={'shadow'} />
-          <div className="text-xl font-medium">{inputCurrency?.symbol}</div>
-        </div>
-        <div className="text-lg font-medium text-h">/</div>
-        <div className="flex items-center space-x-2">
-          <CurrencyLogo currency={outputCurrency} size={'30px'} className={'shadow'} />
-          <div className="text-xl font-medium">{outputCurrency?.symbol}</div>
-        </div>
-      </a> */}
+
       <div className="flex items-center justify-between flex-col lg:flex-row space-x-4 min-h-[40px] lg:mt-4 mb-4">
         {/* <div className="text-4xl font-black text-gray-200">{(lastClose || 0).toFixed(2)}</div>
         <PeriodChooser period={candlePeriod} onChoose={(period) => setCandlePeriod(period)} />
@@ -326,18 +311,34 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
       {/* <div className={'flex flex-1 h-[300px]'}>
         {isLoading ? (
           <div className="w-24 h-[300px] pb-4 flex m-auto flex-col items-center justify-center">
-            <div className="text-xl font-black text-gray-200">Loading...</div>
+          <div className="text-xl font-black text-gray-200">Loading...</div>
           </div>
-        ) : hasData ? (
-          <KChart options={options} autoWidth height={300} candlestickSeries={candlestickSeries} />
-        ) : (
-          <div className="h-[300px] pb-4 flex m-auto flex-col items-center justify-center">
-            <div className="text-sm font-black text-gray-200">
+          ) : hasData ? (
+            <KChart options={options} autoWidth height={300} candlestickSeries={candlestickSeries} />
+            ) : (
+              <div className="h-[300px] pb-4 flex m-auto flex-col items-center justify-center">
+              <div className="text-sm font-black text-gray-200">
               {`Unfortunately, this pair doesn't have enough data.`}
-            </div>
-          </div>
-        )} */}
+              </div>
+              </div>
+            )} */}
       </div> 
+            <a
+      href={`https://info.soulswap.finance/pair/${pairAddress}`}
+      target="_blank"
+      rel="noreferrer"
+      className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2"
+      >
+      <div className="flex items-center space-x-2">
+        <CurrencyLogo currency={inputCurrency} size={'30px'} className={'shadow'} />
+        <div className="text-xl font-medium">{inputCurrency?.symbol}</div>
+      </div>
+      <div className="text-lg font-medium text-h">/</div>
+      <div className="flex items-center space-x-2">
+        <CurrencyLogo currency={outputCurrency} size={'30px'} className={'shadow'} />
+        <div className="text-xl font-medium">{outputCurrency?.symbol}</div>
+      </div>
+      </a>
     </>
   )
 }
