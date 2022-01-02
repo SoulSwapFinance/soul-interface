@@ -137,8 +137,15 @@ function AppBar(): JSX.Element {
                             id={`analytics-nav-link`}
                             className="hidden md:block w-full relative ml-6 md:p-2"
                             >
-                          {/* <Image src="https://media.giphy.com/media/iH7mGoqPivDybuDc2s/giphy.gif" alt="offering soul" width={30} height={30} /> */}
                           {i18n._(t`CHARTS`)}
+                          </a>
+                      </NavLink>
+                      <NavLink href={'/inactive'}>
+                          <a 
+                            id={`inactive-nav-link`}
+                            className="hidden md:block w-full relative ml-6 md:p-2"
+                            >
+                          {i18n._(t`ARCHIVE`)}
                           </a>
                       </NavLink>
                     </div>
