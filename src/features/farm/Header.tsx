@@ -1,5 +1,5 @@
 import { ChainId, Currency, Percent } from '../../sdk'
-import React, { FC, useState } from 'react'
+import React, { FC, useCallback, useState } from 'react'
 
 import Gas from '../../components/Gas'
 import MyOrders from '../limit-order/MyOrders'
@@ -10,6 +10,7 @@ import { t } from '@lingui/macro'
 import { useActiveWeb3React } from '../../hooks'
 import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
+import Search from '../../components/Search';
 
 const getQuery = (input, output) => {
   if (!input && !output) return
@@ -25,18 +26,24 @@ interface FarmHeaderProps {
   input?: Currency
   output?: Currency
   allowedSlippage?: Percent
+  search: (term: string) => void
 }
 
-const FarmHeader: FC<FarmHeaderProps> = ({ input, output, allowedSlippage }) => {
+const FarmHeader: FC<FarmHeaderProps> = ({ input, output, allowedSlippage, search }) => {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const router = useRouter()
   const [animateWallet, setAnimateWallet] = useState(false)
   const isRemove = router.asPath.startsWith('/remove')
   const isLimitOrder = router.asPath.startsWith('/limit-order')
+  const [term, setTerm ] = useState("");
+  const saveTermAndSearch = useCallback((searchingTerm: string) => {
+    setTerm(searchingTerm);
+    search(searchingTerm);
+  }, []);
 
   return (
-    <div className="flex items-center justify-center mb-6 space-x-3">
+    <div className="flex items-center justify-center mb-6 space-x-3 my-4">
       <div className="grid grid-cols-4 rounded p-3px bg-dark-800 h-[46px]">
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
@@ -98,6 +105,16 @@ const FarmHeader: FC<FarmHeaderProps> = ({ input, output, allowedSlippage }) => 
             {i18n._(t`Farm`)}
           </a>
         </NavLink> */}
+      </div>
+      <div className="w-2/4">
+        <Search
+          term={term}
+          search={saveTermAndSearch}
+          inputProps={{
+            className:
+              'relative bg-transparent border border-transparent rounded placeholder-secondary focus:placeholder-primary font-bold text-base px-6 py-3',
+          }}
+        />
       </div>
 
       {/* <div className="flex items-center">
