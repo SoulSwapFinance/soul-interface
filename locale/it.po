@@ -79,9 +79,6 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-msgid "Add LUX to MetaMask"
-msgstr ""
-
 msgid "Add Liquidity"
 msgstr ""
 
@@ -234,6 +231,9 @@ msgstr ""
 msgid "Claim SOUL"
 msgstr ""
 
+msgid "Claim Scarabs"
+msgstr ""
+
 msgid "Claimed"
 msgstr ""
 
@@ -347,9 +347,6 @@ msgstr ""
 msgid "Current"
 msgstr ""
 
-msgid "DAILY"
-msgstr ""
-
 msgid "DEPOSIT"
 msgstr ""
 
@@ -369,9 +366,6 @@ msgid "Deposit your SOUL-LP to earn $SOUL rewards."
 msgstr ""
 
 msgid "Deposit {0} into CoffinBox"
-msgstr ""
-
-msgid "Deposited"
 msgstr ""
 
 msgid "Depositing {0} into CoffinBox"
@@ -594,7 +588,7 @@ msgstr ""
 msgid "LUXOR"
 msgstr ""
 
-msgid "Learn more about wallets"
+msgid "Learn More About Web3 Wallets"
 msgstr ""
 
 msgid "Lend assets for interest from borrowers."
@@ -672,6 +666,9 @@ msgid ""
 msgstr ""
 
 msgid "MEV Shield by Archer DAO"
+msgstr ""
+
+msgid "MY PAIRS"
 msgstr ""
 
 msgid "Manage"
@@ -800,6 +797,9 @@ msgid "Output will be sent to"
 msgstr ""
 
 msgid "PAIRS"
+msgstr ""
+
+msgid "PENDING"
 msgstr ""
 
 msgid "POOL"
@@ -985,9 +985,6 @@ msgstr ""
 msgid "Search Name or Address"
 msgstr ""
 
-msgid "Search Scarabs"
-msgstr ""
-
 msgid "Search lockers"
 msgstr ""
 
@@ -1030,13 +1027,22 @@ msgstr ""
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr ""
 
+msgid "Soon"
+msgstr ""
+
 msgid "Soul User"
+msgstr ""
+
+msgid "Soul Vault"
 msgstr ""
 
 msgid "SoulSwap"
 msgstr ""
 
 msgid "SoulSwap Apps"
+msgstr ""
+
+msgid "SoulSwap Vault is a set of high incentivized pools. Long term supporters can choose to lock SOUL for a determined period for higher rewards."
 msgstr ""
 
 msgid "Spanish"
@@ -1108,6 +1114,9 @@ msgid "The onchain oracle that tracks the pricing for this pair"
 msgstr ""
 
 msgid "The output token cannot be transferred. There may be an issue with the output token."
+msgstr ""
+
+msgid "The participants receive various benefits such as higher rewards according to lock duration, higher allocations in Soul Launchpad and more."
 msgstr ""
 
 msgid "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
@@ -1278,9 +1287,6 @@ msgid "You Will Receive"
 msgstr ""
 
 msgid "You are creating a pool"
-msgstr ""
-
-msgid "You are on the wrong network"
 msgstr ""
 
 msgid "You don’t have liquidity in this pool yet"

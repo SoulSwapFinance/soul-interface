@@ -5,10 +5,10 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import useSortableData from '../../hooks/useSortableData'
 import { useRouter } from 'next/router'
+import NeonSelect, { NeonSelectItem } from '../../components/Select'
 // import { FixedSizeList } from 'react-window'
 // import AutoSizer from 'react-virtualized-auto-sizer'
 // import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid'
-// import NeonSelect from '../../components/Select'
 
 const FarmList = ({ farms, term, filter }) => {
   const { asPath, pathname, route, query, basePath } = useRouter()
@@ -26,17 +26,17 @@ const FarmList = ({ farms, term, filter }) => {
   ) : items ? (
     <>
       {/* <div className="flex items-center justify-end	 text-secondary gap-3 cursor-pointer"> */}
-        {/* <div className="flex flex-row items-center">
+        <div className="flex flex-row items-center">
           <span className="text-sm">{i18n._(t`Order By`)}:</span>
-        </div> */}
-        {/* <NeonSelect value={sortConfig && sortConfig.value}> */}
-          {/* {Object.entries(SortableOptions).map(([k, v]) => (
+        </div>
+        <NeonSelect value={sortConfig && sortConfig.value}>
+          {Object.entries(SortableOptions).map(([k, v]) => (
             <NeonSelectItem key={k} value={v} onClick={() => requestSort(k, 'descending')}>
               {i18n._(t`${v}`)}
             </NeonSelectItem>
-          ))} */}
-        {/* </NeonSelect>
-      </div> */}
+          ))}
+        </NeonSelect>
+      {/* </div> */}
 
       <div className="grid grid-cols-4 text-base font-bold text-primary">
         <div className="flex items-center col-span-2 px-4 cursor-pointer md:col-span-1">
@@ -46,13 +46,12 @@ const FarmList = ({ farms, term, filter }) => {
             ((sortConfig.direction === 'ascending' && <ChevronUpIcon width={12} height={12} />) ||
               (sortConfig.direction === 'descending' && <ChevronDownIcon width={12} height={12} />))} */}
         </div>
-        <div className="flex items-center px-2 cursor-pointer hover:text-high-emphesis">
-          {i18n._(t`TVL`)}
-          {/* {sortConfig &&
-            sortConfig.key === 'tvl' &&
-            ((sortConfig.direction === 'ascending' && <ChevronUpIcon width={12} height={12} />) ||
-              (sortConfig.direction === 'descending' && <ChevronDownIcon width={12} height={12} />))} */}
+        <div className="items-center justify-start hidden px-2 md:flex hover:text-high-emphesis">
+          {i18n._(t`PENDING`)}
         </div>
+        {/* <div className="flex items-center px-2 cursor-pointer hover:text-high-emphesis">
+          {i18n._(t`TVL`)}
+        </div> */}
         {/* <div className="items-center justify-start hidden px-2 md:flex hover:text-high-emphesis">
           {i18n._(t`Allocation`)}
         </div> */}
