@@ -26,7 +26,7 @@ interface FarmHeaderProps {
   input?: Currency
   output?: Currency
   allowedSlippage?: Percent
-  search: (term: string) => void
+  search?: (term: string) => void
 }
 
 const FarmHeader: FC<FarmHeaderProps> = ({ input, output, allowedSlippage, search }) => {
@@ -39,7 +39,9 @@ const FarmHeader: FC<FarmHeaderProps> = ({ input, output, allowedSlippage, searc
   const [term, setTerm ] = useState("");
   const saveTermAndSearch = useCallback((searchingTerm: string) => {
     setTerm(searchingTerm);
-    search(searchingTerm);
+    if (search && typeof search === "function") {
+      search(searchingTerm);
+    }
   }, []);
 
   return (
@@ -106,16 +108,18 @@ const FarmHeader: FC<FarmHeaderProps> = ({ input, output, allowedSlippage, searc
           </a>
         </NavLink> */}
       </div>
-      <div className="w-2/4">
-        <Search
-          term={term}
-          search={saveTermAndSearch}
-          inputProps={{
-            className:
-              'relative bg-transparent border border-transparent rounded placeholder-secondary focus:placeholder-primary font-bold text-base px-6 py-3',
-          }}
-        />
-      </div>
+      { search && 
+        <div className="w-2/4">
+          <Search
+            term={term}
+            search={saveTermAndSearch}
+            inputProps={{
+              className:
+                'relative bg-transparent border border-transparent rounded placeholder-secondary focus:placeholder-primary font-bold text-base px-6 py-3',
+            }}
+          />
+        </div>
+      }
 
       {/* <div className="flex items-center">
         <div className="grid grid-flow-col gap-1">
