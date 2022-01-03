@@ -173,9 +173,9 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
         <div className="flex items-center space-x-4">
           {i18n._(t`Manage`)}
           {showMore ? (
-            <ChevronUpIcon width="20px" height="20px" className="ml-4" />
+            <ChevronUpIcon width="20px" height="20px" className="ml-0" />
           ) : (
-            <ChevronDownIcon width="20px" height="20px" className="ml-4" />
+            <ChevronDownIcon width="20px" height="20px" className="ml-0" />
           )}
         </div>
       </Button>
