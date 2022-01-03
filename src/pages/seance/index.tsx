@@ -86,7 +86,6 @@ export default function SoulStake() {
   const [stakedBal, setStakedBal] = useState('')
   const soulBalance = useTokenBalance(account ?? undefined, SOUL[chainId])
   const seanceBalance = useTokenBalance(account ?? undefined, SEANCE[chainId])
-  const auraBalance = useTokenBalance(account ?? undefined, AURA[chainId])
 
   // show confirmation view before withdrawing SOUL
   // const [showConfirmation, setShowConfirmation] = useState(false)
@@ -134,17 +133,16 @@ export default function SoulStake() {
 
   // WITHDRAWABLE AMOUNT
   const withdrawable = 
-    Number(seanceBalance).toFixed(0) < Number(stakedBal).toFixed(2)
-    // SEANCE < STAKED
-    ? seanceBalance.toFixed(0)
+   seanceBalance?.toFixed(2) <= Number(stakedBal)?.toFixed(2)
+      // SEANCE < STAKED
+    ? seanceBalance?.toFixed(2)
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-
-    // STAKED < SEANCE
-    : Number(stakedBal)
-    .toFixed(0)
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        // STAKED < SEANCE
+      : Number(stakedBal)
+        .toFixed(2)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
   // ---------------------
   //      SOUL VAULT
