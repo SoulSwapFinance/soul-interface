@@ -34,7 +34,7 @@ const FarmHeader: FC<FarmHeaderProps> = ({ input, output, search }) => {
   }, []);
 
   return (
-    <div className="flex items-center justify-center ml-6 mr-6 mb-4 space-x-3 my-0">
+    <div className="flex items-center justify-center mb-4 space-x-3">
       <div className="grid grid-cols-3 rounded p-3px bg-dark-800 h-[46px]">
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
