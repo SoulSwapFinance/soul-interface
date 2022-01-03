@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { XIcon } from '@heroicons/react/outline'
+// import { XIcon } from '@heroicons/react/outline'
 
 const FarmBanner: FC = () => (
   <div className="relative w-full bg-purple bg-opacity-05">
