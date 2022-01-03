@@ -107,7 +107,7 @@ export default function Scarab(): JSX.Element {
                 activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-purple-dark-900"
               >
                 <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
-                  {i18n._(t`Search Scarabs`)}
+                  {i18n._(t`Claim Scarabs`)}
                 </a>
               </NavLink>
               <NavLink

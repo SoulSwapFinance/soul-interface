@@ -241,27 +241,27 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
     wickDOwnColor: `#ff3838`,
   }
 
-  useEffect(() => {
-    let formattedCandleData: NumericalCandlestickDatum[] = fillCandlestickGaps(candleData, candlePeriod)
+  // useEffect(() => {
+  //   let formattedCandleData: NumericalCandlestickDatum[] = fillCandlestickGaps(candleData, candlePeriod)
 
-    if (formattedCandleData && formattedCandleData.length) {
-      let differentBases = inputCurrency?.decimals != outputCurrency?.decimals
-      if (differentBases) {
-        let decimals = Math.abs(inputCurrency?.decimals - outputCurrency?.decimals)
-        formattedCandleData = formattedCandleData.map((r) => {
-          return {
-            close: r.close * (10 ** decimals),
-            high: r.high * (10 ** decimals),
-            low: r.low * (10 ** decimals),
-            open: r.open * (10 ** decimals),
-            time: r.time,
-          }
-        })
-      }
-    }
+  //   if (formattedCandleData && formattedCandleData.length) {
+  //     let differentBases = inputCurrency?.decimals != outputCurrency?.decimals
+  //     if (differentBases) {
+  //       let decimals = Math.abs(inputCurrency?.decimals - outputCurrency?.decimals)
+  //       formattedCandleData = formattedCandleData.map((r) => {
+  //         return {
+  //           close: r.close * (10 ** decimals),
+  //           high: r.high * (10 ** decimals),
+  //           low: r.low * (10 ** decimals),
+  //           open: r.open * (10 ** decimals),
+  //           time: r.time,
+  //         }
+  //       })
+  //     }
+  //   }
 
-    setCandlestickSeries([{ data: formattedCandleData }])
-  }, [candlePeriod, candleData])
+  //   setCandlestickSeries([{ data: formattedCandleData }])
+  // }, [candlePeriod, candleData])
 
   const hasData = candlestickSeries[0].data.length > 0
   const lastClose = hasData ? candlestickSeries[0].data[candlestickSeries[0].data.length - 1].close : undefined

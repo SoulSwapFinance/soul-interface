@@ -15,7 +15,7 @@ import {
 } from "./ReusableStyles";
 
 const HideOnMobile = styled(FarmItemBox)`
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 620px) {
     display: none;
   }
 `;

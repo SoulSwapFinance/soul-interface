@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
 import { ZERO_ADDRESS, ATOMIC_SWAP_ADDRESS } from '../../../constants/addresses'
+// import useApproveCallback from '../../../hooks/useApproveCallback'
 
 import useApproveContract from '../hooks/useApprove'
 import useAtomicSwap from '../hooks/useAtomicSwap'
@@ -102,7 +103,8 @@ const AddToken = ({ to }) => {
     erc1155SetApprovalForAll,
     erc1155IsApprovedForAll,
   } = useApproveContract()
-
+  
+  // const [approvalState, approve] = useApproveCallback(typedDepositValue, LOCKER_ADDRESS[chainId])
   const [approved, setApproved] = useState(false)
   const [erc, setErc] = useState()
 
@@ -113,6 +115,19 @@ const AddToken = ({ to }) => {
     active: 'opened',
     status: ['opened', 'closing', 'closed', 'opening'],
   })
+
+    // check if user has gone through approval process, used to show two step buttons, reset on token change
+    const [approvalSubmitted, setApprovalSubmitted] = useState<boolean>(false)
+  
+    useEffect(() => {
+      if (approvalState === ApprovalState.PENDING) {
+        setApprovalSubmitted(true)
+      }
+    }, [approvalState, approvalSubmitted])
+
+    const handleApprove = useCallback(async () => {
+      await approve()
+    }, [approve])
 
   const [section, setSection] = useState({
     position: 0,
@@ -488,7 +503,10 @@ const AddToken = ({ to }) => {
             width="100%"
             onClick={() => handleTx()}
           >
-            {!approved && loseTokenList[0] ? 'Approve All' : 'Confirm'}
+            {
+              !approved && loseTokenList[0] ? 'Approve All' : 'Confirm'
+              
+            }
           </Button>
         </FooterWrap>
       </ListWrap>

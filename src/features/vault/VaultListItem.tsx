@@ -1,3 +1,4 @@
+
 import { classNames, formatNumber, formatNumberScale, formatPercent } from '../../functions'
 
 import { Disclosure } from '@headlessui/react'
@@ -7,7 +8,7 @@ import Image from '../../components/Image'
 import React, { useContext, useState } from 'react'
 import { useCurrency } from '../../hooks/Tokens'
 import { useV2PairsWithPrice } from '../../hooks/useV2Pairs'
-import { SOUL_ADDRESS } from '../../sdk'
+import { SOUL } from '../../constants/tokens'
 import { useActiveWeb3React } from '../../hooks'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
@@ -19,8 +20,9 @@ import { WNATIVE } from '../../constants'
 import { PriceContext } from '../../contexts/priceContext'
 import { Info } from 'react-feather'
 import moment from 'moment'
-
-const totalLp = 11; // todo: update + make dynamic
+import { formatCurrency } from '../../modals/TokenStatsModal'
+import { usePriceHelperContract } from '../bond/hooks/useContract'
+import { useSingleCallResult } from '../../state/multicall/hooks'
 
 const VaultListItem = ({ farm, ...rest }) => {
   const { chainId } = useActiveWeb3React()
@@ -28,11 +30,23 @@ const VaultListItem = ({ farm, ...rest }) => {
   let token0 = useCurrency(farm.pair.token0?.id)
   let token1 = useCurrency(farm.pair.token1?.id)
 
-  const priceData = useContext(PriceContext)
+  const priceHelperContract = usePriceHelperContract()
+  const totalLp = 11; // todo: update + make dynamic
 
-  const soulPrice = priceData?.['soul']
-  const ftmPrice = priceData?.['ftm']
-  const seancePrice = priceData?.['seance']
+  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
+  console.log(Number(rawSoulPrice))
+  const soulPrice = formatCurrency(Number(rawSoulPrice) / 1E18, 3)
+  console.log(soulPrice)
+
+  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'])?.result
+  console.log(Number(rawFtmPrice))
+  const ftmPrice = formatCurrency(Number(rawFtmPrice) / 1E18, 2)
+  console.log(ftmPrice)
+
+  const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6'])?.result
+  console.log(Number(rawSeancePrice))
+  const seancePrice = formatCurrency(Number(rawSeancePrice) / 1E18, 3)
+  console.log(seancePrice)
 
   const [selectedFarm, setSelectedFarm] = useState<string>(null)
 
@@ -42,13 +56,11 @@ const VaultListItem = ({ farm, ...rest }) => {
   function getTvl() {
     let lpPrice = 0
     let decimals = 18
-    if (farm.lpToken.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase()) {
-      lpPrice = soulPrice
+    if (farm.lpToken.toLowerCase() == SOUL[chainId].address.toLowerCase()) {
+      lpPrice = Number(soulPrice)
       decimals = farm.pair.token0?.decimals
     } else if (farm.lpToken.toLowerCase() == WNATIVE[chainId].toLowerCase()) {
-      lpPrice = ftmPrice
-    } else if (farm.lpToken.toLowerCase() == '0xbD90A6125a84E5C512129D622a75CDDE176aDE5E'.toLowerCase()) {
-      lpPrice = seancePrice
+      lpPrice = Number(ftmPrice)
     } else {
       lpPrice = pairPrice
     }
@@ -56,18 +68,17 @@ const VaultListItem = ({ farm, ...rest }) => {
     farm.lpPrice = lpPrice
     farm.soulPrice = soulPrice
 
-    // return Number(farm.totalLp / 10 ** decimals) * lpPrice
-    return Number(totalLp / 10 ** decimals) * lpPrice
+    return Number(farm.totalLp / 10 ** decimals) * lpPrice
   }
 
   const tvl = getTvl()
 
-  const roiPerSecond =
+  const roiPerBlock =
     farm?.rewards?.reduce((previousValue, currentValue) => {
-      return previousValue + currentValue.rewardPerSecond * currentValue.rewardPrice
+      return previousValue + currentValue.rewardPerBlock * currentValue.rewardPrice
     }, 0) / tvl
 
-  const roiPerHour = roiPerSecond * farm.secondsPerHour
+  const roiPerHour = roiPerBlock * farm.blocksPerHour
   const roiPerDay = roiPerHour * 24
   const roiPerMonth = roiPerDay * 30
   const roiPerYear = roiPerDay * 365
@@ -101,16 +112,16 @@ const VaultListItem = ({ farm, ...rest }) => {
                     </div>
                   </div>
                 </div>
-                {/* <div className="flex flex-col justify-center font-bold">
+                <div className="flex flex-col justify-center font-bold">
                   {farm?.lockupDuration == 0 ? 'No lockup' : `${farm?.lockupDuration / 86400} days`}
-                </div> */}
+                </div>
                 <div className="flex flex-col justify-center font-bold">{formatNumberScale(tvl, true, 2)}</div>
                 <div className="flex-row items-center hidden space-x-4 lg:flex">
                   <div className="flex items-center space-x-2">
                     {farm?.rewards?.map((reward, i) => (
                       <div key={i} className="flex items-center">
                         <Image
-                          src={`/images/token/soul.png`}
+                          src={`https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/soul.jpg`}
                           width="50px"
                           height="50px"
                           className="rounded-md"
@@ -160,7 +171,7 @@ const VaultListItem = ({ farm, ...rest }) => {
           token0={token0}
           token1={token1}
           lpPrice={farm.lpPrice}
-          soulPrice={soulPrice}
+          soulPrice={Number(rawSoulPrice)}
         />
       )}
     </React.Fragment>

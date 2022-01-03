@@ -119,6 +119,7 @@ export function useVaultTVL(): TVLInfo[] {
     function isKnownToken(token: TokenInfo) {
       return (
         token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
+        token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' || token.symbol == 'FTM' ||
         token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' || token.symbol == 'fUSDT'
@@ -262,6 +263,7 @@ export function useTVL(): TVLInfo[] {
     function isKnownToken(token: TokenInfo) {
       return (
         token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
+        token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' ||
         token.symbol == 'FTM' ||
         token.symbol == 'SEANCE' ||
@@ -272,6 +274,9 @@ export function useTVL(): TVLInfo[] {
 
     function getPrice(token: TokenInfo) {
       if (token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase()) {
+        return soulPrice
+      }
+      if (token.symbol == 'SOUL') {
         return soulPrice
       }
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {

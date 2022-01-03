@@ -79,9 +79,6 @@ msgstr "Accept"
 msgid "Add"
 msgstr "Add"
 
-msgid "Add LUX to MetaMask"
-msgstr "Add LUX to MetaMask"
-
 msgid "Add Liquidity"
 msgstr "Add Liquidity"
 
@@ -236,6 +233,9 @@ msgstr "Claim"
 msgid "Claim SOUL"
 msgstr "Claim SOUL"
 
+msgid "Claim Scarabs"
+msgstr "Claim Scarabs"
+
 msgid "Claimed"
 msgstr "Claimed"
 
@@ -351,9 +351,6 @@ msgstr "Create pool"
 msgid "Current"
 msgstr "Current"
 
-msgid "DAILY"
-msgstr "DAILY"
-
 msgid "DEPOSIT"
 msgstr "DEPOSIT"
 
@@ -374,9 +371,6 @@ msgstr "Deposit your SOUL-LP to earn $SOUL rewards."
 
 msgid "Deposit {0} into CoffinBox"
 msgstr "Deposit {0} into CoffinBox"
-
-msgid "Deposited"
-msgstr "Deposited"
 
 msgid "Depositing {0} into CoffinBox"
 msgstr "Depositing {0} into CoffinBox"
@@ -602,8 +596,8 @@ msgstr "LTV"
 msgid "LUXOR"
 msgstr "LUXOR"
 
-msgid "Learn more about wallets"
-msgstr "Learn more about wallets"
+msgid "Learn More About Web3 Wallets"
+msgstr "Learn More About Web3 Wallets"
 
 msgid "Lend assets for interest from borrowers."
 msgstr "Lend assets for interest from borrowers."
@@ -686,6 +680,9 @@ msgstr ""
 
 msgid "MEV Shield by Archer DAO"
 msgstr "MEV Shield by Archer DAO"
+
+msgid "MY PAIRS"
+msgstr "MY PAIRS"
 
 msgid "Manage"
 msgstr "Manage"
@@ -816,6 +813,9 @@ msgstr "Output will be sent to"
 
 msgid "PAIRS"
 msgstr "PAIRS"
+
+msgid "PENDING"
+msgstr "PENDING"
 
 msgid "POOL"
 msgstr "POOL"
@@ -1003,9 +1003,6 @@ msgstr "Search Lockers"
 msgid "Search Name or Address"
 msgstr "Search Name or Address"
 
-msgid "Search Scarabs"
-msgstr "Search Scarabs"
-
 msgid "Search lockers"
 msgstr "Search lockers"
 
@@ -1048,14 +1045,23 @@ msgstr "Slippage tolerance"
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 
+msgid "Soon"
+msgstr "Soon"
+
 msgid "Soul User"
 msgstr "Soul User"
+
+msgid "Soul Vault"
+msgstr "Soul Vault"
 
 msgid "SoulSwap"
 msgstr "SoulSwap"
 
 msgid "SoulSwap Apps"
 msgstr "SoulSwap Apps"
+
+msgid "SoulSwap Vault is a set of high incentivized pools. Long term supporters can choose to lock SOUL for a determined period for higher rewards."
+msgstr "SoulSwap Vault is a set of high incentivized pools. Long term supporters can choose to lock SOUL for a determined period for higher rewards."
 
 msgid "Spanish"
 msgstr "Spanish"
@@ -1129,6 +1135,9 @@ msgstr "The onchain oracle that tracks the pricing for this pair"
 
 msgid "The output token cannot be transferred. There may be an issue with the output token."
 msgstr "The output token cannot be transferred. There may be an issue with the output token."
+
+msgid "The participants receive various benefits such as higher rewards according to lock duration, higher allocations in Soul Launchpad and more."
+msgstr "The participants receive various benefits such as higher rewards according to lock duration, higher allocations in Soul Launchpad and more."
 
 msgid "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
 msgstr "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
@@ -1304,9 +1313,6 @@ msgstr "You Will Receive"
 
 msgid "You are creating a pool"
 msgstr "You are creating a pool"
-
-msgid "You are on the wrong network"
-msgstr "You are on the wrong network"
 
 msgid "You don’t have liquidity in this pool yet"
 msgstr "You don’t have liquidity in this pool yet"
