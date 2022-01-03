@@ -125,11 +125,18 @@ function AppBar(): JSX.Element {
                           </a>
                         </NavLink>
                       )}
-                      <NavLink href={'/scarab'}>
+                      {/* <NavLink href={'/scarab'}>
                           <a
                             id={`scarab-nav-link`}
                             className="hidden md:block w-full relative ml-6 md:p-2">
                           {i18n._(t`SCARAB`)}
+                          </a>
+                        </NavLink> */}
+                      <NavLink href={'/launchpad'}>
+                          <a
+                            id={`launchpad-nav-link`}
+                            className="hidden md:block w-full relative ml-6 md:p-2">
+                          {i18n._(t`LAUNCHPAD`)}
                           </a>
                         </NavLink>
                       <NavLink href={'/analytics'}>
