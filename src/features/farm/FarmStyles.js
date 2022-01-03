@@ -143,7 +143,7 @@ export const DetailsWrapper = styled.div`
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   width: 55rem;
-  padding: 5px 10px;
+  padding: 5px 5px;
 
   @media screen and (max-width: 900px) {
     display: block;
