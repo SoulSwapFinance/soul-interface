@@ -35,6 +35,22 @@ const FarmHeader: FC<FarmHeaderProps> = ({ input, output, search }) => {
 
   return (
     <div className="flex items-center justify-center ml-4 mr-4 mb-2 space-x-1">
+        {search &&
+          <div className="w-2/4">
+            <Search
+              term={term}
+              search={saveTermAndSearch}
+              inputProps={{
+                placeholder: 'Search token',
+                className:
+                'relative bg-transparent border border-transparent rounded placeholder-secondary focus:placeholder-primary font-bold text-base px-3 py-2',
+              }}
+              />
+          </div>
+        }
+      <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
+            {i18n._(t`ACTIVE`)}
+          </a>
       <div className="grid grid-cols-2 rounded p-3px bg-dark-800 h-[46px]">
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
@@ -44,7 +60,7 @@ const FarmHeader: FC<FarmHeaderProps> = ({ input, output, search }) => {
           }}
           >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
-            {i18n._(t`ACTIVE`)}
+            {i18n._(t`Y`)}
           </a>
         </NavLink>
         <NavLink
@@ -52,23 +68,10 @@ const FarmHeader: FC<FarmHeaderProps> = ({ input, output, search }) => {
           href={"/farms/inactive"}
           >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-            {i18n._(t`REMOVE`)}
+            {i18n._(t`N`)}
           </a>
         </NavLink>
       </div>
-          {search &&
-            <div className="w-2/4">
-              <Search
-                term={term}
-                search={saveTermAndSearch}
-                inputProps={{
-                  placeholder: 'Search',
-                  className:
-                  'relative bg-transparent border border-transparent rounded placeholder-secondary focus:placeholder-primary font-bold text-base px-3 py-2',
-                }}
-                />
-            </div>
-          }
     </div>
   )
 
