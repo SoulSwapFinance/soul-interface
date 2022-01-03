@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
 import { ZERO_ADDRESS, ATOMIC_SWAP_ADDRESS } from '../../../constants/addresses'
 // import useApproveCallback from '../../../hooks/useApproveCallback'
-
+import { ButtonConfirmed, ButtonError } from '../../../components/Button'
 import useApproveContract from '../hooks/useApprove'
 import useAtomicSwap from '../hooks/useAtomicSwap'
 import styled, { keyframes } from 'styled-components'
@@ -20,6 +20,11 @@ import {
   OptionSelector,
   TokenImgTest,
 } from '../../../components/ReusableStyles'
+import { ApprovalState, useApproveCallback } from '../../../hooks'
+import { tryParseAmount } from '../../../functions'
+import { AutoRow, RowBetween } from '../../../components/Row'
+import Loader from '../../../components/Loader'
+import Web3Connect from '../../../components/Web3Connect'
 
 export const ListWrap = styled.div`
   align-items: center;
@@ -103,31 +108,36 @@ const AddToken = ({ to }) => {
     erc1155SetApprovalForAll,
     erc1155IsApprovedForAll,
   } = useApproveContract()
-  
-  // const [approvalState, approve] = useApproveCallback(typedDepositValue, LOCKER_ADDRESS[chainId])
+
   const [approved, setApproved] = useState(false)
   const [erc, setErc] = useState()
+  const [value, setValue] = useState('')
+
+  // approval for erc20
+  const typedDepositValue = tryParseAmount(value, erc)
 
   const [loseTokens, setLoseTokens] = useState([])
   const [receiveTokens, setReceiveTokens] = useState([])
+  const [approvalState, approve] = useApproveCallback(typedDepositValue, ATOMIC_SWAP_ADDRESS[chainId])
+  const [pendingTx, setPendingTx] = useState(false)
 
   const [jaw, setJaw] = useState({
     active: 'opened',
     status: ['opened', 'closing', 'closed', 'opening'],
   })
 
-    // check if user has gone through approval process, used to show two step buttons, reset on token change
-    const [approvalSubmitted, setApprovalSubmitted] = useState<boolean>(false)
-  
-    useEffect(() => {
-      if (approvalState === ApprovalState.PENDING) {
-        setApprovalSubmitted(true)
-      }
-    }, [approvalState, approvalSubmitted])
+  // check if user has gone through approval process, used to show two step buttons, reset on token change
+  const [approvalSubmitted, setApprovalSubmitted] = useState(false)
 
-    const handleApprove = useCallback(async () => {
-      await approve()
-    }, [approve])
+  useEffect(() => {
+    if (approvalState === ApprovalState.PENDING) {
+      setApprovalSubmitted(true)
+    }
+  }, [approvalState, approvalSubmitted])
+
+  const handleApprove = useCallback(async () => {
+    await approve()
+  }, [approve])
 
   const [section, setSection] = useState({
     position: 0,
@@ -275,12 +285,16 @@ const AddToken = ({ to }) => {
       // otherwise, if no receive token
       if (!receiveTokens[0]) {
         // create trade w/ blank receive
-        await createTrade(to, 0, loseTokens, [[ZERO_ADDRESS, 0, [0], [0]]], {
-          value: 0,
-        })
+        await createTrade(to, 0, loseTokens, [[ZERO_ADDRESS, 0, [0], [0]]], 
+        //   {
+        //   value: 0,
+        // }
+        )
       } else {
         // else, create trade w/ stored token value(s)
-        await createTrade(to, 0, loseTokens, receiveTokens, { value: 0 })
+        await createTrade(to, 0, loseTokens, receiveTokens, 
+          // { value: 0 }
+          )
       }
     }
   }
@@ -498,6 +512,7 @@ const AddToken = ({ to }) => {
         )}
 
         <FooterWrap>
+
           <Button
             disabled={!loseTokenList[0] && !receiveTokenList[0] ? true : false}
             width="100%"
@@ -505,9 +520,53 @@ const AddToken = ({ to }) => {
           >
             {
               !approved && loseTokenList[0] ? 'Approve All' : 'Confirm'
-              
+
             }
           </Button>
+          {!account ? (
+            <Web3Connect size="lg" color="gradient" className="w-full" />
+          ) : (
+            <RowBetween>
+              {/* {approvalState !== ApprovalState.APPROVED && (
+                <ButtonConfirmed
+                  onClick={handleApprove}
+                  disabled={
+                    approvalState !== ApprovalState.NOT_APPROVED ||
+                    approvalSubmitted}
+                >
+                  {approvalState === ApprovalState.PENDING ? (
+                    <div className={'p-2'}>
+                      <AutoRow gap="6px" justify="center">
+                        Approving <Loader stroke="white" />
+                      </AutoRow>
+                    </div>
+                  ) :
+                  'Approve'
+                  }
+                </ButtonConfirmed>
+              )} */}
+              {approvalState === ApprovalState.APPROVED && (
+                <ButtonError
+                  className="font-bold text-light"
+                  onClick={handleTx}
+                  style={{
+                    width: '100%',
+                  }}
+                  disabled={approvalState !== ApprovalState.APPROVED || pendingTx}
+                >
+                  {pendingTx ? (
+                    <div className={'p-2'}>
+                      <AutoRow gap="6px" justify="center">
+                        Locking <Loader stroke="white" />
+                      </AutoRow>
+                    </div>
+                  ) : (
+                    'Trade'
+                  )}
+                </ButtonError>
+              )}
+            </RowBetween>
+          )}
         </FooterWrap>
       </ListWrap>
     </Wrap>
