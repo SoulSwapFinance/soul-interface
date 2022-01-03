@@ -1,15 +1,9 @@
-import { ChainId, Currency, Percent } from '../../sdk'
+import { Currency, Percent } from '../../sdk'
 import React, { FC, useCallback, useState } from 'react'
-
-import Gas from '../../components/Gas'
-import MyOrders from '../limit-order/MyOrders'
 import NavLink from '../../components/NavLink'
-import Settings from '../../components/Settings'
-import { currencyId } from '../../functions'
+
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../hooks'
 import { useLingui } from '@lingui/react'
-import { useRouter } from 'next/router'
 import Search from '../../components/Search';
 
 const getQuery = (input, output) => {
@@ -29,24 +23,19 @@ interface FarmHeaderProps {
   search?: (term: string) => void
 }
 
-const FarmHeader: FC<FarmHeaderProps> = ({ input, output, allowedSlippage, search }) => {
+const FarmHeader: FC<FarmHeaderProps> = ({ input, output, search }) => {
   const { i18n } = useLingui()
-  const { chainId } = useActiveWeb3React()
-  const router = useRouter()
-  const [animateWallet, setAnimateWallet] = useState(false)
-  const isRemove = router.asPath.startsWith('/remove')
-  const isLimitOrder = router.asPath.startsWith('/limit-order')
   const [term, setTerm ] = useState("");
   const saveTermAndSearch = useCallback((searchingTerm: string) => {
     setTerm(searchingTerm);
     if (search && typeof search === "function") {
-      search(searchingTerm);
+      search(searchingTerm.toLowerCase()); // forces lowercase
     }
   }, []);
 
   return (
     <div className="flex items-center justify-center mb-6 space-x-3 my-4">
-      <div className="grid grid-cols-4 rounded p-3px bg-dark-800 h-[46px]">
+      <div className="grid grid-cols-3 rounded p-3px bg-dark-800 h-[46px]">
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
           href={{
@@ -58,68 +47,26 @@ const FarmHeader: FC<FarmHeaderProps> = ({ input, output, allowedSlippage, searc
             {i18n._(t`ALL`)}
           </a>
         </NavLink>
-        {/* <NavLink
-          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
-          href={{
-            pathname: '/limit-order',
-            query: getQuery(input, output),
-          }}
-        >
-          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-            {i18n._(t`Limit`)}
-          </a>
-        </NavLink> */}
-        <NavLink
-          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
-          href={"/farms/soulpower"}
-          // href={`/${!isRemove ? 'add' : 'remove'}${input ? `/${currencyId(input)}` : ''}${
-          //   output ? `/${currencyId(output)}` : ''
-        // }`}
-        >
-          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-            {i18n._(t`SOUL`)}
-          </a>
-        </NavLink>
-        <NavLink
-          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
-          href={"/farms/fanties"}
-          // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
-        >
-          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-            {i18n._(t`FANTOM`)}
-          </a>
-        </NavLink>
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
           href={"/farms/inactive"}
-          // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
             {i18n._(t`INACTIVE`)}
           </a>
         </NavLink>
-        {/* <NavLink
-          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
-          href={"/farms"}
-          // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
-        >
-          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-            {i18n._(t`Farm`)}
-          </a>
-        </NavLink> */}
-      </div>
       { search && 
-        <div className="w-2/4">
           <Search
             term={term}
             search={saveTermAndSearch}
             inputProps={{
+              // placeholder:'Search by token',
               className:
-                'relative bg-transparent border border-transparent rounded placeholder-secondary focus:placeholder-primary font-bold text-base px-6 py-3',
+              'relative bg-transparent border border-transparent rounded placeholder-secondary focus:placeholder-primary font-bold text-base px-3 py-2',
             }}
-          />
-        </div>
-      }
+            />
+    }
+      </div>
 
       {/* <div className="flex items-center">
         <div className="grid grid-flow-col gap-1">
