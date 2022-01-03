@@ -55,6 +55,7 @@ const FarmHeader: FC<FarmHeaderProps> = ({ input, output, search }) => {
             {i18n._(t`INACTIVE`)}
           </a>
         </NavLink>
+           </div>
       { search && 
           <Search
             term={term}
@@ -66,7 +67,6 @@ const FarmHeader: FC<FarmHeaderProps> = ({ input, output, search }) => {
             }}
             />
     }
-      </div>
     </div>
   )
 }
