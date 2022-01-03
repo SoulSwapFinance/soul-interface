@@ -12,11 +12,12 @@ const All = () => {
     <Wrap padding='1rem 0 0 0' justifyContent="center">
       <DoubleGlowShadowV2 opacity="0.6">
       <Container id="farm-page">
+        <FarmBanner/>
+        <br/>
         <Head>
           <title>Farm | All</title>
           <meta key="description" name="description" content="Farm SOUL" />
         </Head>
-        <FarmBanner/>
         <FarmList />
       </Container>
       </DoubleGlowShadowV2>
