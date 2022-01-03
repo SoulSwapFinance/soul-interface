@@ -688,10 +688,10 @@ export default function SoulStake() {
         <div className="space-y-4">
           <ModalHeader title={`Please Read and Confirm`} onClose={() => setShowConfirmation(false)} />
           <Typography variant="lg">
-            You have more SEANCE than you owe, which is great news! Thanks for being a contributor to our community. Yes, you may unstake.
+            `You have more SEANCE than you owe, which is great news! Thanks for being a contributor to our community. Yes, you may unstake.
             <br /><br />
             After closing this prompt, please proceed with <b>manually entering</b> any number <b>less than or equivalent to</b> the
-            amount denoted as <b>"withdrawable"</b>, for your convenience.
+            amount denoted as <b>withdrawable</b>, for your convenience.
             <br /><br />
           </Typography>
           <Typography variant="sm" className="font-medium">
