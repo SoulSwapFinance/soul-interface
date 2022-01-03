@@ -57,6 +57,7 @@ const FarmHeader: FC<FarmHeaderProps> = ({ input, output, search }) => {
         </NavLink>
            </div>
       { search && 
+      <div className="w-2/4">
           <Search
             term={term}
             search={saveTermAndSearch}
@@ -66,8 +67,8 @@ const FarmHeader: FC<FarmHeaderProps> = ({ input, output, search }) => {
               'relative bg-transparent border border-transparent rounded placeholder-secondary focus:placeholder-primary font-bold text-base px-6 py-3',
             }}
             />
+            </div>
     }
-    </div>
   )
 }
 
