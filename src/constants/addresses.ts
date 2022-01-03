@@ -155,14 +155,14 @@ export const WNATIVE: AddressMap = {
 export const SOUL_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xe2fb177009ff39f52c0134e8007fa0e4baacbd07', // SOUL
+  [ChainId.FANTOM]: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
   [ChainId.FANTOM_TESTNET]: '',
 }
 
 export const SEANCE_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
+  [ChainId.FANTOM]: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', // SEANCE
   [ChainId.FANTOM_TESTNET]: '',
 }
 
