@@ -16,7 +16,7 @@ import ISoulSwapPairABI from '../../constants/abis/soulswap/ISoulSwapPair.json'
 import { useContract, useSeanceContract, useSoulContract } from '../../hooks'
 import { formatNumberScale } from '../../functions'
 import axios from 'axios'
-import { LUX_ADDRESS, SEANCE_ADDRESS, SOUL_ADDRESS } from '../../constants/addresses'
+import { LUX_ADDRESS, SEANCE_ADDRESS, SOUL_ADDRESS, WLUM_ADDRESS } from '../../constants/addresses'
 import { ethers } from 'ethers'
 import { soul } from '@soulswap/soul-data'
 import { NEVER_RELOAD, useMultipleContractSingleData, useSingleCallResult, useSingleContractMultipleData } from '../../state/multicall/hooks'
@@ -128,13 +128,13 @@ export default function TokenStatsModal(): JSX.Element | null {
         <div className="space-y-4">
           <ModalHeader title={''} onClose={toggleTokenStatsModal} />
           <Image
-                    src="/soul2lux.gif"
-                    alt="SOUL"
-                    width="1600px"
-                    height="1600px"
-                    objectFit="contain"
-                    className="rounded-md"
-                    />
+            src="/soul2lux.gif"
+            alt="SOUL"
+            width="1600px"
+            height="1600px"
+            objectFit="contain"
+            className="rounded-md"
+          />
           <div className="flex flex-row w-full py-4">
             {/* <QuestionHelper text={`Add LUX to MetaMask`}>
             <div
@@ -213,10 +213,10 @@ export default function TokenStatsModal(): JSX.Element | null {
                     const params: any = {
                       type: 'ERC20',
                       options: {
-                        address: SOUL_ADDRESS[chainId],
-                        symbol: 'SOUL',
-                        decimals: 18,
-                        image: 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png',
+                        address: WLUM_ADDRESS[chainId],
+                        symbol: 'wLUM',
+                        decimals: 9,
+                        image: 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208/logo.png',
                       },
                     }
                     if (library && library.provider.isMetaMask && library.provider.request) {
@@ -227,7 +227,7 @@ export default function TokenStatsModal(): JSX.Element | null {
                         })
                         .then((success) => {
                           if (success) {
-                            console.log('Successfully added SOUL to MetaMask')
+                            console.log('Successfully added LUM to MetaMask')
                           } else {
                             throw new Error('Something went wrong.')
                           }
@@ -236,60 +236,68 @@ export default function TokenStatsModal(): JSX.Element | null {
                     }
                   }}
                 >
-                <div
-                  className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
-                  onClick={() => {
-                    const params: any = {
-                      type: 'ERC20',
-                      options: {
-                        address: SEANCE_ADDRESS[chainId],
-                        symbol: 'SEANCE',
-                        decimals: 18,
-                        image: 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x124B06C5ce47De7A6e9EFDA71a946717130079E6/logo.png',
-                      },
-                    }
-                    if (library && library.provider.isMetaMask && library.provider.request) {
-                      library.provider
-                        .request({
-                          method: 'wallet_watchAsset',
-                          params,
-                        })
-                        .then((success) => {
-                          if (success) {
-                            console.log('Successfully added SEANCE to MetaMask')
-                          } else {
-                            throw new Error('Something went wrong.')
-                          }
-                        })
-                        .catch(console.error)
-                    }
-                  }}
-                >
-                  {/* <HideOnMobile>
-                    <Image
-                    src="/images/tokens/LUXOR.svg"
-                    alt="LUX"
-                    width="40px"
-                    height="40px"
-                    objectFit="contain"
-                    className="rounded-md"
-                    />
-                    </HideOnMobile>
+                  <div
+                    className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
+                    onClick={() => {
+                      const params: any = {
+                        type: 'ERC20',
+                        options: {
+                          address: SOUL_ADDRESS[chainId],
+                          symbol: 'SOUL',
+                          decimals: 18,
+                          image: 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png',
+                        },
+                      }
+                      if (library && library.provider.isMetaMask && library.provider.request) {
+                        library.provider
+                          .request({
+                            method: 'wallet_watchAsset',
+                            params,
+                          })
+                          .then((success) => {
+                            if (success) {
+                              console.log('Successfully added SOUL to MetaMask')
+                            } else {
+                              throw new Error('Something went wrong.')
+                            }
+                          })
+                          .catch(console.error)
+                      }
+                    }}
+                  >
+                    <div
+                      className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
+                      onClick={() => {
+                        const params: any = {
+                          type: 'ERC20',
+                          options: {
+                            address: SEANCE_ADDRESS[chainId],
+                            symbol: 'SEANCE',
+                            decimals: 18,
+                            image: 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x124B06C5ce47De7A6e9EFDA71a946717130079E6/logo.png',
+                          },
+                        }
+                        if (library && library.provider.isMetaMask && library.provider.request) {
+                          library.provider
+                            .request({
+                              method: 'wallet_watchAsset',
+                              params,
+                            })
+                            .then((success) => {
+                              if (success) {
+                                console.log('Successfully added SEANCE to MetaMask')
+                              } else {
+                                throw new Error('Something went wrong.')
+                              }
+                            })
+                            .catch(console.error)
+                        }
+                      }}
+                    >
                     </div>
-                    <HideOnMobile>
-                    <Image
-                    src="/images/tokens/soul.png"
-                    alt="SOUL"
-                    width="40px"
-                    height="40px"
-                    objectFit="contain"
-                    className="rounded-md"
-                    />
-                  </HideOnMobile> */}
-                  
-                    </div>
-                  </div> 
                   </div>
+                </div>
+              </div>
             </QuestionHelper>
 
             <div className="flex flex-1 flex-col">
@@ -309,9 +317,9 @@ export default function TokenStatsModal(): JSX.Element | null {
                   startIcon={<LinkIcon size={16} />}
                 >
                   {/* <HideOnMobile> */}
-                    <Typography variant="sm" className="hover:underline py-0.5 currentColor">
-                      {`Luxor Bonds`}
-                    </Typography>
+                  <Typography variant="sm" className="hover:underline py-0.5 currentColor">
+                    {`Luxor Bonds`}
+                  </Typography>
                   {/* </HideOnMobile> */}
                   <ExternalLink
                     href={
@@ -325,9 +333,9 @@ export default function TokenStatsModal(): JSX.Element | null {
                     startIcon={<LinkIcon size={16} />}
                   >
                     {/* <HideOnMobile> */}
-                      <Typography variant="sm" className="hover:underline py-0.5 currentColor">
-                        {`Stake`}
-                      </Typography>
+                    <Typography variant="sm" className="hover:underline py-0.5 currentColor">
+                      {`Stake`}
+                    </Typography>
                     {/* </HideOnMobile> */}
                   </ExternalLink>
                 </ExternalLink>
