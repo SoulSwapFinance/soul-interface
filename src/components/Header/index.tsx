@@ -1,5 +1,5 @@
 import { ChainId, NATIVE } from '../../sdk'
-import { AURA } from '../../constants' 
+import { AURA } from '../../constants'
 // import React, { useEffect, useState } from 'react'
 import React from 'react'
 
@@ -11,7 +11,7 @@ import Image from 'next/image'
 // import Link from 'next/link'
 import More from './More'
 // import Exchange from './Exchange'
-// import Earn from './Earn'
+import Earn from './Earn'
 // import Farms from './Farms'
 // import Explore from './Explore'
 // import Seance from './Seance'
@@ -40,45 +40,53 @@ function AppBar(): JSX.Element {
 
   return (
     <header className="flex flex-row justify-between w-screen flex-nowrap">
-    {/* <header className="flex-shrink-0 w-full"> */}
+      {/* <header className="flex-shrink-0 w-full"> */}
       <Popover as="nav" className="z-10 w-full bg-transparent header-border-b">
         {({ open }) => (
           <>
             <div className="px-4 py-1">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                <NavLink href="/landing">
-                  <Image src="/logo.png" alt="Soul" width="45" height="45" />
-                </NavLink>
+                  <NavLink href="/landing">
+                    <Image src="/logo.png" alt="Soul" width="40" height="40" />
+                  </NavLink>
                   {/* <div className="hidden sm:block lg:ml-4"> */}
                   <div className="flex space-x-2">
-                    <div className="flex space-x-4">
-                      {/* <Earn /> */}
+                    <div className="flex space-x-3">
                       {/* <Exchange /> */}
                       {/* <Farms /> */}
-                      { chainId && [ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      {chainId && [ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href="/exchange/swap">
-                         <a
-                           id={`swap-nav-link`}
-                          //  className='focus:outline-none hover:text-high-emphesis'
-                          className="w-full relative ml-6 md:p-2"
+                          <a
+                            id={`swap-nav-link`}
+                            //  className='focus:outline-none hover:text-high-emphesis'
+                            className="w-full relative ml-2 sm:ml-6 md:p-2"
                           >
-                          
-                          {i18n._(t`SWAP`)}
-                         </a>
-                       </NavLink>
-                       )}
-                       { chainId && [ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                      <NavLink href="/pool">
-                        <a
-                          id={`pool-nav-link`}
-                          className="w-full relative ml-6 md:p-2"
-                        >
-                          {/* <Image src="https://media.giphy.com/media/N3NpRukvRmnAI/giphy.gif" alt="offering soul" width="30" height="30" /> */}
-                          {i18n._(t`POOL`)}
-                        </a>
-                      </NavLink>
+
+                            {i18n._(t`SWAP`)}
+                          </a>
+                        </NavLink>
                       )}
+                      {chainId && [ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                        <NavLink href="/pool">
+                          <a
+                            id={`pool-nav-link`}
+                            className="w-full relative ml-6 md:p-2"
+                          >
+                            {/* <Image src="https://media.giphy.com/media/N3NpRukvRmnAI/giphy.gif" alt="offering soul" width="30" height="30" /> */}
+                            {i18n._(t`PAIR`)}
+                          </a>
+                        </NavLink>
+                      )}
+                      {/* <div
+                        className="w-full relative ml-6 md:p-2"
+                      > */}
+                      {/* <NavLink href={'/seance'}>
+                        <a className="w-full relative ml-6 md:p-2"
+                        > <Earn />
+                        </a>
+                      </NavLink> */}
+                      {/* </div> */}
                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/farms'}>
                           <a
@@ -87,7 +95,6 @@ function AppBar(): JSX.Element {
                             className="w-full relative ml-6 md:p-2"
                             // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                             >
-                          {/* <Image src="https://media.giphy.com/media/iH7mGoqPivDybuDc2s/giphy.gif" alt="offering soul" width={30} height={30} /> */}
                             {i18n._(t`FARM`)}
                           </a>
                         </NavLink>
@@ -102,51 +109,48 @@ function AppBar(): JSX.Element {
                         </a>
                       </NavLink>
                       )}
-                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/bonds'}>
                           <a
                             id={`farm-nav-link`}
                             // className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800"
                             className="w-full relative ml-6 md:p-2"
-                            // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                            >
-                          {/* <Image src="https://media.giphy.com/media/iH7mGoqPivDybuDc2s/giphy.gif" alt="offering soul" width={30} height={30} /> */}
+                          >
                             {i18n._(t`BOND`)}
                           </a>
                         </NavLink>
                       )}
-                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'/luxor'}>
-                          <a
-                            id={`luxor-nav-link`}
-                            className="hidden md:block w-full relative ml-6 md:p-2"
+                      <NavLink href={'/analytics'}>
+                        <a
+                          id={`analytics-nav-link`}
+                          className="hidden md:block w-full relative ml-6 md:p-2"
                           >
-                            {i18n._(t`LUXOR`)}
-                          </a>
-                        </NavLink>
-                      )}
-                      <NavLink href={'/scarab'}>
+                          {i18n._(t`CHART`)}
+                        </a>
+                      </NavLink>
+                            {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                              <NavLink href={'/luxor'}>
+                                <a
+                                  id={`luxor-nav-link`}
+                                  className="hidden md:block w-full relative ml-6 md:p-2"
+                                >
+                                  {i18n._(t`LUXOR`)}
+                                </a>
+                              </NavLink>
+                            )}
+                      {/* <NavLink href={'/scarab'}>
                           <a
                             id={`scarab-nav-link`}
                             className="hidden md:block w-full relative ml-6 md:p-2">
                           {i18n._(t`SCARAB`)}
                           </a>
-                        </NavLink>
-                      <NavLink href={'/analytics'}>
-                          <a 
-                            id={`analytics-nav-link`}
-                            className="hidden md:block w-full relative ml-6 md:p-2"
-                            >
-                          {i18n._(t`CHARTS`)}
-                          </a>
-                      </NavLink>
-                      <NavLink href={'/inactive'}>
-                          <a 
-                            id={`inactive-nav-link`}
-                            className="hidden md:block w-full relative ml-6 md:p-2"
-                            >
-                          {i18n._(t`ARCHIVE`)}
-                          </a>
+                        </NavLink> */}
+                      <NavLink href={'/launchpad'}>
+                        <a
+                          id={`launchpad-nav-link`}
+                          className="hidden md:block w-full relative ml-6 md:p-2">
+                          {i18n._(t`LAUNCH`)}
+                        </a>
                       </NavLink>
                     </div>
                   </div>
@@ -164,15 +168,15 @@ function AppBar(): JSX.Element {
                         <>
                           <div className="hidden 2xl:flex px-2 py-2 text-primary text-bold">
                             {userEthBalance?.toSignificant(4)
-                            .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                          } 
-                          {NATIVE[chainId].symbol}
+                              .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                            }
+                            {NATIVE[chainId].symbol}
                           </div>
                           {account && chainId && (
                             <>
                               <div className="hidden md:inline px-3 py-2 text-primary text-bold">
                                 {auraBalance?.toSignificant(4)
-                                .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                                  .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                                 } {'AURA'}
                               </div>
                             </>
@@ -181,14 +185,14 @@ function AppBar(): JSX.Element {
                       )}
                       <Web3Status />
                       {library && library.provider.isMetaMask && (
-                      <div className="hidden sm:inline-block">
-                        <Web3Network />
-                      </div>
-                    )}
+                        <div className="hidden sm:inline-block">
+                          <Web3Network />
+                        </div>
+                      )}
                     </div>
 
                     {/* <div className="hidden xl:block"> */}
-                      {/* <LanguageSwitch /> */}
+                    {/* <LanguageSwitch /> */}
                     {/* </div> */}
                     <More />
                   </div>
@@ -231,18 +235,18 @@ function AppBar(): JSX.Element {
 
             <Popover.Panel className="xl:hidden">
               <div className="flex flex-col px-10 pt-2 pb-3 space-y-4">
-                
-              { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                <ExternalLink href={'https://app.luxor.money'}>
-                  <a
-                    id={`luxor-nav-extlink`}
-                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                  >
-                    {i18n._(t`Luxor Money`)}
-                  </a>
-                </ExternalLink>
-              )}
-              { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+
+                {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                  <ExternalLink href={'https://app.luxor.money'}>
+                    <a
+                      id={`luxor-nav-extlink`}
+                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                    >
+                      {i18n._(t`Luxor Money`)}
+                    </a>
+                  </ExternalLink>
+                )}
+                {chainId && [ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <ExternalLink href={'https://info.soulswap.finance'}>
                     <a
                       id={`vote-nav-extlink`}
@@ -252,36 +256,36 @@ function AppBar(): JSX.Element {
                     </a>
                   </ExternalLink>
                 )}
-              { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                <ExternalLink href={'https://enchant.soulswap.finance'}>
-                  <a
-                    id={`vote-nav-extlink`}
-                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                  >
-                    {i18n._(t`Governance`)}
-                  </a>
-                </ExternalLink>
-              )}
-              { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                <ExternalLink href={'https://docs.soulswap.finance'}>
-                <a
-                  id={`links-nav-link`}
-                  className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                  >
-                  {i18n._(t`Documentation`)}
-                </a>
-              </ExternalLink>
-              )}
-              { chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                <ExternalLink href={'/tools'}>
-                <a
-                  id={`tools-nav-link`}
-                  className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                  >
-                  {i18n._(t`Explore More`)}
-                </a>
-              </ExternalLink>
-              )}
+                {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                  <ExternalLink href={'https://app.soulswap.finance/vote'}>
+                    <a
+                      id={`vote-nav-extlink`}
+                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                    >
+                      {i18n._(t`Governance`)}
+                    </a>
+                  </ExternalLink>
+                )}
+                {chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                  <ExternalLink href={'https://docs.soulswap.finance'}>
+                    <a
+                      id={`links-nav-link`}
+                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                    >
+                      {i18n._(t`Documentation`)}
+                    </a>
+                  </ExternalLink>
+                )}
+                {chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                  <ExternalLink href={'/tools'}>
+                    <a
+                      id={`tools-nav-link`}
+                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                    >
+                      {i18n._(t`Explore More`)}
+                    </a>
+                  </ExternalLink>
+                )}
               </div>
             </Popover.Panel>
           </>
@@ -292,7 +296,3 @@ function AppBar(): JSX.Element {
 }
 
 export default AppBar
-function styled(BondItemBox: any) {
-  throw new Error('Function not implemented.')
-}
-
