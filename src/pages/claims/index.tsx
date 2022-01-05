@@ -78,9 +78,9 @@ export default function Claims() {
             setAllocation(userClaimable)
             console.log('userClaimable:', Number(userClaimable))
           })
-          // .catch((error) => {
-            // console.log(error)
-          // })
+          .catch((error) => {
+            console.log(error)
+          })
       }
       return []
     }
@@ -89,11 +89,11 @@ export default function Claims() {
 
   // let vault = ''
   if (Number(unclaimedAmount?.toFixed(8)) > 0) {
-    <Image unoptimized width="300" height="300" src={vaultImg} />
+    <Image alt="vault" unoptimized width="300" height="300" src={vaultImg} />
   } else if (Number(unclaimedAmount?.toFixed(8)) <= 0) {
-    <Image unoptimized width="300" height="300" src={vaultImg} />
+    <Image alt="vault" unoptimized width="300" height="300" src={vaultImg} />
   } else {
-    <Image unoptimized width="300" height="300" src={vaultImg} />
+    <Image alt="vault" unoptimized width="300" height="300" src={vaultImg} />
   }
 
   return (
