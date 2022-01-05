@@ -39,7 +39,7 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
       <div className="flex justify-between mb-4 space-x-3 items-center">
         <div className="flex items-center">
           <Typography component="h1" variant="base">
-            {isAdd ? i18n._(t`Add Liquidity`) : isRemove ? i18n._(t`Remove Liquidity`) : i18n._(t`Swap`)}
+            {isAdd ? i18n._(t`Add Liquidity`) : isRemove ? i18n._(t`Remove Liquidity`) : i18n._(t`Remove Liquidity`)}
           </Typography>
         </div>
         <div className="flex items-center">

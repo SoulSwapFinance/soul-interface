@@ -41,6 +41,7 @@ import { useTransactionAdder } from '../../../state/transactions/hooks'
 import useTransactionDeadline from '../../../hooks/useTransactionDeadline'
 import { useWalletModalToggle } from '../../../state/application/hooks'
 import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
+import { LiquidityHeader } from '../../../features/liquidity'
 // import SoulLogo from '../../../components/SoulLogo'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
@@ -356,7 +357,7 @@ export default function Add() {
               output={currencies[Field.CURRENCY_B]}
               allowedSlippage={allowedSlippage}
             />
-
+            <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
             <TransactionConfirmationModal
               isOpen={showConfirm}
               onDismiss={handleDismissConfirmation}
