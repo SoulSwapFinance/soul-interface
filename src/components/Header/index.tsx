@@ -52,7 +52,7 @@ function AppBar(): JSX.Element {
                   </NavLink>
                   {/* <div className="hidden sm:block lg:ml-4"> */}
                   <div className="flex space-x-2">
-                    <div className="flex space-x-2">
+                    <div className="flex space-x-3">
                       {/* <Exchange /> */}
                       {/* <Farms /> */}
                       {chainId && [ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
@@ -128,16 +128,16 @@ function AppBar(): JSX.Element {
                           {i18n._(t`CHART`)}
                         </a>
                       </NavLink>
-                      {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'/luxor'}>
-                          <a
-                            id={`luxor-nav-link`}
-                            className="hidden md:block w-full relative ml-6 md:p-2"
-                          >
-                            {i18n._(t`LUXOR`)}
-                          </a>
-                        </NavLink>
-                      )}
+                            {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                              <NavLink href={'/luxor'}>
+                                <a
+                                  id={`luxor-nav-link`}
+                                  className="hidden md:block w-full relative ml-6 md:p-2"
+                                >
+                                  {i18n._(t`LUXOR`)}
+                                </a>
+                              </NavLink>
+                            )}
                       {/* <NavLink href={'/scarab'}>
                           <a
                             id={`scarab-nav-link`}
