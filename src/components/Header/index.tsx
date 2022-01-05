@@ -52,7 +52,7 @@ function AppBar(): JSX.Element {
                 </NavLink>
                   {/* <div className="hidden sm:block lg:ml-4"> */}
                   <div className="flex space-x-2">
-                    <div className="flex space-x-4">
+                    <div className="flex space-x-2">
                       {/* <Earn /> */}
                       {/* <Exchange /> */}
                       {/* <Farms /> */}
@@ -61,7 +61,7 @@ function AppBar(): JSX.Element {
                          <a
                            id={`swap-nav-link`}
                           //  className='focus:outline-none hover:text-high-emphesis'
-                          className="w-full relative ml-6 md:p-2"
+                          className="w-full relative ml-2 sm:ml-6 md:p-2"
                           >
                           
                           {i18n._(t`SWAP`)}
@@ -75,7 +75,7 @@ function AppBar(): JSX.Element {
                           className="w-full relative ml-6 md:p-2"
                         >
                           {/* <Image src="https://media.giphy.com/media/N3NpRukvRmnAI/giphy.gif" alt="offering soul" width="30" height="30" /> */}
-                          {i18n._(t`POOL`)}
+                          {i18n._(t`LIQUIDITY`)}
                         </a>
                       </NavLink>
                       )}

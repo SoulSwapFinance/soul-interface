@@ -23,6 +23,7 @@ import { Field } from '../../../state/burn/actions'
 import Head from 'next/head'
 import Header from '../../../components/ExchangeHeader'
 import Link from 'next/link'
+import SwapHeader from '../../../features/trade/Header'
 import LiquidityHeader from '../../../features/liquidity/LiquidityHeader'
 import LiquidityPrice from '../../../features/liquidity/LiquidityPrice'
 import { MinimalPositionCard } from '../../../components/PositionCard'
@@ -578,7 +579,10 @@ export default function Remove() {
       <div className="grid gap-4 pt-3 pb-4">
         <div className="grid gap-2">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center justify-start  gap-3">
+            {/* <div className="pb-4"> */}
+        {/* <div className="flex items-center gap-3">
+          <div className="text-2xl font-bold text-high-emphesis"> */}
               <CurrencyLogo currency={currencyA} size={48} />
               <div className="text-2xl font-bold text-high-emphesis">
                 {parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)}
@@ -713,12 +717,16 @@ export default function Remove() {
       <Head>
         <title>{i18n._(t`Remove Liquidity`)} | Soul </title>
         <meta key="description" name="description" content={i18n._(t`Remove liquidity of Soul`)} />
-      </Head>
-
+        </Head>
       <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
       <DoubleGlowShadowV2 opacity="0.6">
           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>          
-            <Header input={currencyA} output={currencyB} allowedSlippage={allowedSlippage} />
+            <SwapHeader
+              input={currencyA}
+              output={currencyB}
+              allowedSlippage={allowedSlippage}
+            />
+            {/* <Header input={currencyA} output={currencyB} allowedSlippage={allowedSlippage} /> */}
             <div>
               <TransactionConfirmationModal
                 isOpen={showConfirm}
@@ -737,7 +745,6 @@ export default function Remove() {
               />
               <AutoColumn gap="md">
                 <LiquidityHeader input={currencyA} output={currencyB} />
-
                 <div>
                   <PercentInputPanel
                     value={innerLiquidityPercentage}
@@ -774,8 +781,8 @@ export default function Remove() {
                                 </Link>
                               ) : oneCurrencyIsWETH ? (
                                 <Link
-                                  href={`/exchange/remove/${currencyA?.equals(WNATIVE[chainId]) ? 'ETH' : currencyIdA}/${
-                                    currencyB?.equals(WNATIVE[chainId]) ? 'ETH' : currencyIdB
+                                  href={`/exchange/remove/${currencyA?.equals(WNATIVE[chainId]) ? 'FTM' : currencyIdA}/${
+                                    currencyB?.equals(WNATIVE[chainId]) ? 'FTM' : currencyIdB
                                   }`}
                                 >
                                   <a className="text-baseline text-blue opacity-80 hover:opacity-100 whitespace-nowrap">
