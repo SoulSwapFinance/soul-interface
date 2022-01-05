@@ -27,3 +27,4 @@ public/workbox*.js.map
 
 lokalise.yaml
 locale/*.po
+locale/*

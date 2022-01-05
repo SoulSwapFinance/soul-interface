@@ -253,7 +253,7 @@ function AppBar(): JSX.Element {
                   </ExternalLink>
                 )}
               { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                <ExternalLink href={'https://enchant.soulswap.finance'}>
+                <ExternalLink href={'https://app.soulswap.finance/vote'}>
                   <a
                     id={`vote-nav-extlink`}
                     className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
