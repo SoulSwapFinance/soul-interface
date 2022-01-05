@@ -156,7 +156,7 @@ export default function Pool() {
                     id="add-pool-button"
                     color="gradient"
                     className="grid items-center justify-center grid-flow-col gap-2 whitespace-nowrap"
-                    onClick={() => router.push(`/exchange/add/${currencyId(NATIVE[chainId])}`)}
+                    onClick={() => router.push(`/exchange/add/${currencyId(NATIVE[chainId])}/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07`)}
                   >
                     {i18n._(t`Add`)}
                   </Button>
