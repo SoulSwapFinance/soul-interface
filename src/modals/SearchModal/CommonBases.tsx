@@ -19,7 +19,7 @@ export default function CommonBases({
   const bases = typeof chainId !== 'undefined' ? COMMON_BASES[chainId] ?? [] : []
 
   return (
-    <div className="flex flex-col space-y-2">
+    <div className="flex items-center flex-col space-y-2 mb-2">
       <div className="flex flex-row">
         Common Bases
         <QuestionHelper text="These tokens are commonly paired with other tokens." />
@@ -34,7 +34,7 @@ export default function CommonBases({
               onClick={() => !isSelected && onSelect(currency)}
               disabled={isSelected}
               key={currencyId(currency)}
-              className="flex items-center p-2 m-0.5 space-x-2 rounded bg-dark-800 hover:bg-dark-700 disabled:bg-dark-1000 disabled:cursor-not-allowed"
+              className="flex items-center p-0.5 m-0.5 sm:p-.8 sm:m-1.5 space-x-2 rounded bg-dark-800 hover:bg-dark-700 disabled:bg-dark-1000 disabled:cursor-not-allowed"
             >
               <CurrencyLogo currency={currency} />
               {/* <Typography variant="sm" className="font-semibold">
