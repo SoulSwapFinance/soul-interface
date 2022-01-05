@@ -517,9 +517,9 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                         color="#F36FFE" // neon purple
                         href=
                         {bond.token1 == 'FTM' ?
-                        `https://exchange.soulswap.finance/add/ETH/${
+                        `https://exchange.soulswap.finance/add/FTM/${
                           bond.token2Address[250]}`
-                          : `https://exchange.soulswap.finance/add/ETH/${
+                          : `https://exchange.soulswap.finance/add/FTM/${
                             bond.token1Address[250]}`
                           }
                         >
