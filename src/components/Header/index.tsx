@@ -296,3 +296,4 @@ function AppBar(): JSX.Element {
 }
 
 export default AppBar
+
