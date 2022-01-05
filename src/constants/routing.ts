@@ -174,12 +174,12 @@ export const COMMON_BASES: ChainTokenList = {
   [ChainId.MAINNET]: [...WRAPPED_NATIVE_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC],
 
   [ChainId.FANTOM]: [
-    // ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], 
+    ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], 
     FANTOM.SOUL,
     FANTOM.SEANCE,
     FANTOM.LUX,
     FANTOM.WLUM,
-    // FANTOM.DAI,
+    FANTOM.DAI,
     // FANTOM.fUSDT,
     FANTOM.USDC,
     FANTOM.WBTC,
