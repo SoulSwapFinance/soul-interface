@@ -26,7 +26,8 @@ export default function useAddTokenToMetaMask(currencyToAdd: Currency | undefine
               address: token.address,
               symbol: token.symbol,
               decimals: token.decimals,
-              image: getTokenLogoURL(token.address, chainId),
+              image: `https://raw.githubusercontent.com/soulswapfinance/assets/analytics/blockchains/fantom/assets/${token.address}/logo.png`
+              // image: getTokenLogoURL(token.address, chainId),
             },
           },
         })

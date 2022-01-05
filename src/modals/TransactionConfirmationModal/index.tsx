@@ -95,7 +95,7 @@ export const TransactionSubmittedContent: FC<TransactionSubmittedContentProps> =
             ) : (
               <RowFixed>
                 {i18n._(t`Added`)} {currencyToAdd.symbol}
-                {/* <CheckCircle className="ml-1.5 text-2xl text-green" size="16px" /> */}
+                <CheckCircle className="ml-1.5 text-2xl text-green" size="16px" />
               </RowFixed>
             )}
           </Button>

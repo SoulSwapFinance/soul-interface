@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { ethers } from 'ethers'
 
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
@@ -8,10 +8,12 @@ import FarmHeader from './Header'
 import FarmKey from './FarmKey'
 import FarmRowRender from './FarmRowRender'
 import { InactivePids } from './Pids'
-// import { Wrap, Heading, Text, Button } from './ReusableStyles' // Heading, Text
+
+const tokenMatch = (search: string) => (pairInfo: any) => 
+  pairInfo.token1.toLowerCase().includes(search) || pairInfo.token2.toLowerCase().includes(search);
 
 const InactiveList = () => {
-  const { chainId, account } = useActiveWeb3React()
+  const { chainId } = useActiveWeb3React()
 
   const [totalPending, setTotalReward] = useState(0)
 
@@ -37,28 +39,12 @@ const InactiveList = () => {
     }
   }
 
-  // const handleHarvest = async () => {
-  //   try {
-  //     await harvestAllFarms()
-  //   } catch (e) {
-  //     console.log(e)
-  //     return e
-  //   }
-  // }
-
-  // const withdrawList = WithdrawPids.map((farm) => (
-  //   <FarmRowRender
-  //     key={farm.pid}
-  //     pid={farm.pid}
-  //     lpSymbol={farm.lpSymbol}
-  //     lpToken={farm.lpAddresses[250]}
-  //     token1={farm.token1}
-  //     token2={farm.token2}
-  //     farm={farm}
-  //   />
-  // ))
-
-  const farmList = InactivePids.map((farm) => (
+  const [filteredPIDs, setFilteredPIDs ] = useState(InactivePids);
+  const search = useCallback((val: string) => {
+    setFilteredPIDs(InactivePids.filter(tokenMatch(val)))
+  }, [InactivePids]);
+  
+  const farmList = filteredPIDs.map((farm) => (
     <FarmRowRender
       key={farm.pid}
       pid={farm.pid}
@@ -72,12 +58,10 @@ const InactiveList = () => {
 
   return (
     <>
-      <FarmHeader/>
-      {/* <FarmKey withdraw={true}/> */}
-      {/* <>{withdrawList}</> */}
-      {/* <br /> */}
+      <FarmHeader search={search} />
       <FarmKey />
       <>{farmList}</>
+      <br />
     </>
   )
 }

@@ -1,7 +1,7 @@
 import { CurrencyAmount, JSBI, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS, ZERO } from '../../sdk'
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
 import React, { useEffect, useState } from 'react'
-import { SOUL, SEANCE } from '../../constants'
+import { SOUL, SEANCE, AURA } from '../../constants'
 
 import Button from '../../components/Button'
 import { ChainId } from '../../sdk'
@@ -26,6 +26,10 @@ import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 import { ethers } from 'ethers'
 import { useSoulSummonerContract } from '../../hooks'
 import { serialize } from '@ethersproject/transactions'
+import Modal from '../../components/Modal'
+import ModalHeader from '../../components/ModalHeader'
+import Typography from '../../components/Typography'
+import { SubmitButton } from '../../features/seance/SeanceStyles'
 
 const INPUT_CHAR_LIMIT = 18
 
@@ -70,9 +74,10 @@ export default function SoulStake() {
     calculateHarvestSoulRewards,
     userPendingRewards,
     // deposit,
-    // withdraw,
+    withdraw,
     // withdrawAll,
     // harvest,soul
+    // unstake,
   } = useSoulVault()
   const { enter, leave, harvest } = useSoulStakeManual()
 
@@ -82,6 +87,9 @@ export default function SoulStake() {
   const [stakedBal, setStakedBal] = useState('')
   const soulBalance = useTokenBalance(account ?? undefined, SOUL[chainId])
   const seanceBalance = useTokenBalance(account ?? undefined, SEANCE[chainId])
+
+  // show confirmation view before withdrawing SOUL
+  const [showConfirmation, setShowConfirmation] = useState(false)
 
   // const pendingSoul = userPendingRewards() // amount of soul is pending for user
   // const percOfTotal = userSharePercOfTotal() // user percentage of pool
@@ -102,9 +110,9 @@ export default function SoulStake() {
 
   const parsedAmount = usingBalance ? balance : tryParseAmount(input, balance?.currency)
 
-  // Approve masterchef to move funds with `transferFrom`
+  // Approve summoner to move funds with `transferFrom`
   const [approvalStateChef, approveMasterchef] = useApproveCallback(parsedAmount, SOUL_SUMMONER_ADDRESS[ChainId.FANTOM])
-  
+
   const [approvalStateVault, approveVault] = useApproveCallback(parsedAmount, SOUL_VAULT_ADDRESS[chainId])
 
   /**
@@ -123,6 +131,23 @@ export default function SoulStake() {
       }
     }
   }
+
+  // WITHDRAWABLE AMOUNT
+  const withdrawable =
+    seanceBalance?.toFixed(2) <= Number(stakedBal)?.toFixed(2)
+      // SEANCE < STAKED
+      ? seanceBalance?.toFixed(2)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      // STAKED < SEANCE
+      : Number(stakedBal)
+        .toFixed(2)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+  // SEANCE > STAKED
+  const hasMoreSeance =
+    seanceBalance?.toFixed(2) > Number(stakedBal)?.toFixed(2)
 
   // ---------------------
   //      SOUL VAULT
@@ -186,7 +211,7 @@ export default function SoulStake() {
     setInput(parsedAmount ? parsedAmount.toSignificant(balance.currency.decimals).substring(0, INPUT_CHAR_LIMIT) : '')
     setUsingBalance(true)
   }
-  
+
   // convert seanceBalance to number and compare
 
   // const withdrawable =  Number(seanceBalance) > Number(stakedBal) ? stakedBal : seanceBalance
@@ -317,6 +342,22 @@ export default function SoulStake() {
   //   fetchData()
   // }, [data?.bar?.ratio, data?.bar?.totalSupply, soulPrice])
 
+  /**
+   * Withdraws SOUL Staked
+   */
+  const handleWithdraw = async () => {
+    try {
+      // console.log('minting', amount.toString())
+      const tx = await withdraw(balance)
+      // await tx.wait()
+      // await fetchBals(pid)
+    } catch (e) {
+      // alert(e.message)
+      console.log(e)
+    }
+  }
+
+
   return (
     <div>
       <Head>
@@ -335,11 +376,11 @@ export default function SoulStake() {
                   {i18n._(t`Stake your SOUL to borrow SEANCE`)}
                 </div>
               </div>
-                <div className="max-w-xl pr-3 mb-2 text-sm leading-5 md:text-base md:mb-2 md:pr-0">
-                  {i18n._(t`Recieve SEANCE as a reciept for your staked SOUL. Use your SEANCE to reclaim your SOUL, or
+              <div className="max-w-xl pr-3 mb-2 text-sm leading-5 md:text-base md:mb-2 md:pr-0">
+                {i18n._(t`Receive SEANCE as a receipt for your staked SOUL. Use SEANCE to reclaim your SOUL, or
                   trade your SEANCE and risk locking your SOUL for all eternity... Either way, while you're staked, you earn more SOUL over time. 
-                  Zero withdrawal fees.`
-                  )}
+                  Zero Withdrawal Fees.`
+                )}
               </div>
             </div>
             {/* SIDE BALANCE BOARD */}
@@ -456,18 +497,16 @@ export default function SoulStake() {
                   <StyledNumericalInput
                     value={input}
                     onUserInput={handleInput}
-                    className={`w-full h-14 px-3 md:px-5 mt-5 rounded bg-dark-800 text-sm md:text-lg font-bold text-dark-800 whitespace-nowrap${
-                      inputError ? ' pl-9 md:pl-12' : ''
-                    }`}
+                    className={`w-full h-14 px-3 md:px-5 mt-5 rounded bg-dark-800 text-sm md:text-lg font-bold text-dark-800 whitespace-nowrap${inputError ? ' pl-9 md:pl-12' : ''
+                      }`}
                     placeholder=" "
                   />
 
                   {/* input overlay: */}
                   <div className="relative w-full h-0 pointer-events-none bottom-14">
                     <div
-                      className={`flex justify-between items-center h-14 rounded px-3 md:px-5 ${
-                        inputError ? ' border border-red' : ''
-                      }`}
+                      className={`flex justify-between items-center h-14 rounded px-3 md:px-5 ${inputError ? ' border border-red' : ''
+                        }`}
                     >
                       <div className="flex space-x-2 ">
                         {inputError && (
@@ -480,41 +519,44 @@ export default function SoulStake() {
                           />
                         )}
                         <p
-                          className={`text-sm md:text-lg font-bold whitespace-nowrap ${
-                            input ? 'text-high-emphesis' : 'text-secondary'
-                          }`}
+                          className={`text-sm md:text-lg font-bold whitespace-nowrap ${input ? 'text-high-emphesis' : 'text-secondary'
+                            }`}
                         >
                           {`${input ? input : '0'} ${activeTab === 0 ? 'SOUL' : 'SEANCE'}`}
                         </p>
                       </div>
                       <div className="flex items-center text-sm text-secondary md:text-base">
                         <div className={input ? 'hidden md:flex md:items-center' : 'flex items-center'}>
-                          <p>{i18n._(t`Balance`)}:&nbsp;</p>
-                          <p className="text-base font-bold">{
+                          {/* <p>{i18n._(t`Balance`)}:&nbsp;</p> */}
+                          <p className="text-base mr-2 font-bold">{
                             Number(formattedBalance)
                               .toFixed(2)
                               .toString()
                               .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                              }
+                          }
                           </p>
                         </div>
-                        <button
-                          className="px-2 py-1 ml-3 text-xs font-bold border pointer-events-auto focus:outline-none focus:ring hover:bg-opacity-40 md:bg-purple md:bg-opacity-30 border-secondary md:border-purple rounded-2xl md:py-1 md:px-3 md:ml-4 md:text-sm md:font-normal md:text-purple"
+                        <SubmitButton
+                          className="px-2 py-1 mr-2 ml-3 text-xs font-bold border pointer-events-auto focus:outline-none focus:ring hover:bg-opacity-40 md:bg-purple md:bg-opacity-30 border-secondary md:border-purple rounded-2xl md:py-1 md:px-3 md:ml-4 md:text-sm md:font-normal md:text-purple"
                           onClick={
-                          // activeTab === 0 ?
-                          handleClickMax
-                          // : handleClickMaxWithdrawal
+                            activeTab == 0 ?
+                              handleClickMax
+                              : hasMoreSeance ?
+                                setShowConfirmation
+                                : handleClickMax
+                            // : handleClickMax
+                            // : handleClickMaxWithdrawal
                           }
                         >
                           {i18n._(t`MAX`)}
-                        </button>
+                        </SubmitButton>
                       </div>
                     </div>
                   </div>
                   {(autoStaking
                     ? approvalStateVault === ApprovalState.NOT_APPROVED || approvalStateVault === ApprovalState.PENDING
                     : approvalStateChef === ApprovalState.NOT_APPROVED ||
-                      approvalStateChef === ApprovalState.PENDING) && activeTab === 0 ? (
+                    approvalStateChef === ApprovalState.PENDING) && activeTab === 0 ? (
                     <Button
                       className={`${buttonStyle} text-high-emphesis bg-purple hover:bg-opacity-90`}
                       disabled={
@@ -538,10 +580,10 @@ export default function SoulStake() {
                         buttonDisabled
                           ? buttonStyleDisabled
                           : !walletConnected
-                          ? buttonStyleConnectWallet
-                          : insufficientFunds
-                          ? buttonStyleInsufficientFunds
-                          : buttonStyleEnabled
+                            ? buttonStyleConnectWallet
+                            : insufficientFunds
+                              ? buttonStyleInsufficientFunds
+                              : buttonStyleEnabled
                       }
                       onClick={handleClickButton}
                       disabled={buttonDisabled || inputError}
@@ -549,23 +591,26 @@ export default function SoulStake() {
                       {!walletConnected
                         ? i18n._(t`Connect Wallet`)
                         : !input
-                        ? i18n._(t`Enter Amount`)
-                        : insufficientFunds
-                        ? i18n._(t`Insufficient Balance`)
-                        : activeTab === 0
-                        ? i18n._(t`Confirm Staking`)
-                        : i18n._(t`Confirm Withdrawal`)}
+                          ? i18n._(t`Enter Amount`)
+                          : insufficientFunds
+                            ? i18n._(t`Insufficient Balance`)
+                            : activeTab === 0
+                              ? i18n._(t`Confirm Staking`)
+                              : i18n._(t`Confirm Withdrawal`)}
                     </button>
                   )}
+                  <p className="mt-3 text-sm text-purple font-bold text-center md:text-base text-primary">WITHDRAWABLE: {' '}
+                    {withdrawable}
+                  </p>
                 </div>
               </div>
             </div>
             {/* SIDE BALANCE BOARD */}
-            
+
             <div className="w-full max-w-xl mx-auto md:mx-0 md:ml-6 md:block md:w-72">
               <div className="flex flex-col w-full px-4 pt-6 pb-5 rounded bg-dark-900 md:px-8 md:pt-7 md:pb-9">
                 <div className="flex flex-wrap">
-                  
+
                   <div className="flex flex-col flex-grow md:mb-6">
                     {/* <p className="mb-3 text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
                       {autoStaking ? 'Shares' : i18n._(t`Balances`)}
@@ -582,11 +627,11 @@ export default function SoulStake() {
                         <p className="text-sm font-bold md:text-lg text-high-emphesis">
                           {seanceBalance
                             ? seanceBalance
-                                .toFixed(0)
-                                .toString()
-                                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                              .toFixed(0)
+                              .toString()
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                             : //.toSignificant(5)
-                              '-'}
+                            '-'}
                         </p>
                         <p className="text-sm md:text-base text-primary">SEANCE</p>
                       </div>
@@ -608,87 +653,21 @@ export default function SoulStake() {
                       />
                       <div className="flex flex-col justify-center">
                         <p className="text-sm font-bold md:text-lg text-high-emphesis">
-                          {/* {soulBalance
-                            ? soulBalance
-                                .toFixed(0)
-                                .toString()
-                                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                            : '-'} */}
-                            {Number(stakedBal) === 0
+                          {Number(stakedBal) === 0
                             ? '0'
                             : Number(stakedBal) < 0
-                            ? '<0'
-                            : Number(stakedBal)
-                            .toFixed(0)
-                            .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                              ? '<0'
+                              : Number(stakedBal)
+                                .toFixed(0)
+                                .toString()
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
 
                         </p>
                         <p className="text-sm md:text-base text-primary">STAKED</p>
                       </div>
                     </div>
                   </div>
-
-                  {/* <div className="flex flex-col flex-grow md:mb-6"> */}
-                    {/* <div className="flex mb-3 ml-8 flex-nowrap md:ml-0"> */}
-                      {/* <p className="text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
-                        {i18n._(t`Staked`)}
-                      </p>
-                    </div> */}
-                    {/* <div className="flex items-center ml-8 space-x-4 md:ml-0"> */}
-                      {/* <Image
-                        className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
-                        src="/images/tokens/seance.png"
-                        alt="SEANCE"
-                        width={64}
-                        height={64}
-                        /> */}
-                      {/* <div className="flex flex-col justify-center"> */}
-                        {/* <p className="text-sm font-bold md:text-lg text-high-emphesis">
-                          {Number(stakedBal) === 0
-                            ? '0.000'
-                            : Number(stakedBal) < 0.001
-                            ? '<0.001'
-                            : Number(stakedBal)
-                            .toFixed(3)
-                            .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                        </p> */}
-                        {/* <p className="text-sm md:text-base text-primary">OWED</p> */}
-                      {/* </div> */}
-                    {/* </div>
-                  </div> */}
-                  {/* <div className="flex flex-col flex-grow md:mb-6"> */}
-                    {/* <div className="flex mb-3 ml-8 flex-nowrap md:ml-0"> */}
-                      {/* <p className="text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
-                        {i18n._(t`Staked`)}
-                      </p>
-                    </div> */}
-                    {/* <div className="flex items-center ml-8 space-x-4 md:ml-0">
-                      <Image
-                        className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
-                        src="/images/tokens/soul.png"
-                        alt="SOUL"
-                        width={64}
-                        height={64}
-                        />
-                      <div className="flex flex-col justify-center">
-                        <p className="text-sm font-bold md:text-lg text-high-emphesis">
-                          {Number(stakedBal) === 0
-                            ? '0.000'
-                            : Number(stakedBal) < 0.001
-                            ? '<0.001'
-                            : Number(stakedBal)
-                            .toFixed(3)
-                            .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                        </p>
-                        <p className="text-sm md:text-base text-primary">STAKED</p>
-                      </div> 
-                    </div> */}
-                  {/* </div> */}
                 </div>
-
                 <Button
                   className={`${buttonStyle} text-high-emphesis bg-purple opacity-100 hover:bg-opacity-80`}
                   onClick={() => harvest()}
@@ -704,6 +683,33 @@ export default function SoulStake() {
           </div>
         </div>
       </DoubleGlowShadowV2>
+      <Modal isOpen={showConfirmation} onDismiss={
+        () => setShowConfirmation(false)}>
+        <div className="space-y-4">
+          <ModalHeader title={`Please Read and Confirm`} onClose={() => setShowConfirmation(false)} />
+          <Typography variant="lg">
+            `You have more SEANCE than you owe, which is great news! Thanks for being a contributor to our community. Yes, you may unstake.
+            <br /><br />
+            After closing this prompt, please proceed with <b>manually entering</b> any number <b>less than or equivalent to</b> the
+            amount denoted as <b>withdrawable</b>, for your convenience.
+            <br /><br />
+          </Typography>
+          <Typography variant="sm" className="font-medium">
+            QUESTIONS OR CONCERNS?
+            <a href="mailto:soulswapfinance@gmail.com">
+              {' '} CONTACT US
+            </a>
+          </Typography>
+          <SubmitButton
+            height="2.5rem"
+          onClick={() => 
+            setShowConfirmation(false)
+          }              
+          >
+            I UNDERSTAND THESE TERMS
+          </SubmitButton>
+        </div>
+      </Modal>
     </div>
   )
 }

@@ -16,7 +16,7 @@ msgstr ""
 msgid "% Share"
 msgstr ""
 
-msgid "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies"
+msgid "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies."
 msgstr ""
 
 msgid "- 0.1 FTM to lock"
@@ -37,15 +37,6 @@ msgstr ""
 msgid "- Locker contract address: {0}"
 msgstr ""
 
-msgid "- Note: only Buns may create Safes, please use the other tab entitled \"Search Safes\" to claim."
-msgstr ""
-
-msgid "- Please navigate to \"Search Safes\" and enter your Grim LP to swap for your Soul LP."
-msgstr ""
-
-msgid "- These safes are strictly for users to claim their recovered SoulSwap LP from the Grim Exploit."
-msgstr ""
-
 msgid "- You will not be able to withdraw your tokens before the unlock time"
 msgstr ""
 
@@ -64,7 +55,7 @@ msgstr ""
 msgid "30 Days"
 msgstr ""
 
-msgid "A portion of each trade (0.05%) goes to Spell holders as a protocol incentive."
+msgid "A portion of each trade (0.05%) goes towards buying SOUL off the market for a weekly burn."
 msgstr ""
 
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
@@ -88,16 +79,10 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-msgid "Add LUX to MetaMask"
-msgstr ""
-
 msgid "Add Liquidity"
 msgstr ""
 
 msgid "Add Liquidity & Earn Fees (0.25%)"
-msgstr ""
-
-msgid "Add SOUL to MetaMask"
 msgstr ""
 
 msgid "Add collateral in order to borrow assets"
@@ -246,6 +231,9 @@ msgstr ""
 msgid "Claim SOUL"
 msgstr ""
 
+msgid "Claim Scarabs"
+msgstr ""
+
 msgid "Claimed"
 msgstr ""
 
@@ -261,12 +249,6 @@ msgid ""
 msgstr ""
 
 msgid "CoffinBox"
-msgstr ""
-
-msgid "CoffinBox Apps"
-msgstr ""
-
-msgid "CoffinBox is an innovative way to use dapps gas-efficiently and gain extra yield."
 msgstr ""
 
 msgid "CoffinBox strategies can create yield for your collateral tokens. This token does not yet have a strategy in the CoffinBox."
@@ -350,9 +332,6 @@ msgstr ""
 msgid "Create Pool & Supply"
 msgstr ""
 
-msgid "Create Safe"
-msgstr ""
-
 msgid "Create Scarab"
 msgstr ""
 
@@ -366,9 +345,6 @@ msgid "Create pool"
 msgstr ""
 
 msgid "Current"
-msgstr ""
-
-msgid "DAILY"
 msgstr ""
 
 msgid "DEPOSIT"
@@ -392,13 +368,7 @@ msgstr ""
 msgid "Deposit {0} into CoffinBox"
 msgstr ""
 
-msgid "Deposited"
-msgstr ""
-
 msgid "Depositing {0} into CoffinBox"
-msgstr ""
-
-msgid "Directions"
 msgstr ""
 
 msgid "Disable Multihops"
@@ -422,22 +392,10 @@ msgstr ""
 msgid "Earn"
 msgstr ""
 
-msgid "Earn Fees with Enchantments."
-msgstr ""
-
 msgid "Either return to the {link}, or change to an available network."
 msgstr ""
 
 msgid "Enchant"
-msgstr ""
-
-msgid "Enchant Fee"
-msgstr ""
-
-msgid "Enchant Seance"
-msgstr ""
-
-msgid "Enchant your Seance..."
 msgstr ""
 
 msgid "English"
@@ -468,6 +426,9 @@ msgid "Everytime you stake or claim rewards your lock time renews."
 msgstr ""
 
 msgid "Exchange Rate"
+msgstr ""
+
+msgid "Exit from Enchant."
 msgstr ""
 
 msgid "Expanded results from inactive Token Lists"
@@ -511,18 +472,10 @@ msgstr ""
 msgid "Fees"
 msgstr ""
 
-msgid "File Claim"
-msgstr ""
-
 msgid "Filled"
 msgstr ""
 
 msgid "Find Pool"
-msgstr ""
-
-msgid ""
-"For every swap on our exchange, a 0.05% fee is collected to ENCHANT and used to buy back SEANCE. \n"
-"Your ENCHANT is continuously compounding. When you unstake, you receive your deposited SEANCE and fees collected."
 msgstr ""
 
 msgid "Forum"
@@ -535,7 +488,7 @@ msgid "Gain exposure to tokens without reducing your assets. Leverage will enabl
 msgstr ""
 
 msgid ""
-"Gain governance rights with SPELL and earn 5% APR (0.05% of\n"
+"Gain governance rights with SEANCE and earn 5% APR (0.05% of\n"
 "all swaps from all chains)"
 msgstr ""
 
@@ -576,6 +529,9 @@ msgid "Historical Total Locked: {0} SOUL"
 msgstr ""
 
 msgid "How to use"
+msgstr ""
+
+msgid "INACTIVE"
 msgstr ""
 
 msgid "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
@@ -632,7 +588,7 @@ msgstr ""
 msgid "LUXOR"
 msgstr ""
 
-msgid "Learn more about wallets"
+msgid "Learn More About Web3 Wallets"
 msgstr ""
 
 msgid "Lend assets for interest from borrowers."
@@ -656,6 +612,18 @@ msgstr ""
 msgid "Links"
 msgstr ""
 
+msgid "Liquidity Positions"
+msgstr ""
+
+msgid "Liquidity Provider Rewards"
+msgstr ""
+
+msgid ""
+"Liquidity providers earn a 0.25% fee on all trades proportional to their share of\n"
+"the pool. Fees are added to the pool, accrue in real time and can be claimed by\n"
+"withdrawing your liquidity at any time."
+msgstr ""
+
 msgid "Lists"
 msgstr ""
 
@@ -674,6 +642,9 @@ msgstr ""
 msgid "Lock"
 msgstr ""
 
+msgid "Locked"
+msgstr ""
+
 msgid "Lockup"
 msgstr ""
 
@@ -681,6 +652,9 @@ msgid "Luxor"
 msgstr ""
 
 msgid "Luxor Bonds."
+msgstr ""
+
+msgid "Luxor Money"
 msgstr ""
 
 msgid "MAX"
@@ -692,6 +666,9 @@ msgid ""
 msgstr ""
 
 msgid "MEV Shield by Archer DAO"
+msgstr ""
+
+msgid "MY PAIRS"
 msgstr ""
 
 msgid "Manage"
@@ -822,6 +799,9 @@ msgstr ""
 msgid "PAIRS"
 msgstr ""
 
+msgid "PENDING"
+msgstr ""
+
 msgid "POOL"
 msgstr ""
 
@@ -897,13 +877,13 @@ msgstr ""
 msgid "Receive"
 msgstr ""
 
-msgid "Recent Transactions"
+msgid ""
+"Receive SEANCE as a receipt for your staked SOUL. Use SEANCE to reclaim your SOUL, or\n"
+"trade your SEANCE and risk locking your SOUL for all eternity... Either way, while you're staked, you earn more SOUL over time. \n"
+"Zero Withdrawal Fees."
 msgstr ""
 
-msgid ""
-"Recieve SEANCE as a reciept for your staked SOUL. Use your SEANCE to reclaim your SOUL, or\n"
-"trade your SEANCE and risk locking your SOUL for all eternity... Either way, while you're staked, you earn more SOUL over time. \n"
-"Zero withdrawal fees."
+msgid "Recent Transactions"
 msgstr ""
 
 msgid "Recipient"
@@ -960,9 +940,6 @@ msgstr ""
 msgid "SCARAB"
 msgstr ""
 
-msgid "SEANCE"
-msgstr ""
-
 msgid "SELF"
 msgstr ""
 
@@ -970,6 +947,9 @@ msgid "SLP"
 msgstr ""
 
 msgid "SOUL"
+msgstr ""
+
+msgid "SOUL Burns"
 msgstr ""
 
 msgid "SOUL PAIRS"
@@ -999,19 +979,10 @@ msgstr ""
 msgid "Seance"
 msgstr ""
 
-msgid "Seance Tribute"
-msgstr ""
-
 msgid "Search Lockers"
 msgstr ""
 
 msgid "Search Name or Address"
-msgstr ""
-
-msgid "Search Safes"
-msgstr ""
-
-msgid "Search Scarabs"
 msgstr ""
 
 msgid "Search lockers"
@@ -1056,13 +1027,22 @@ msgstr ""
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr ""
 
+msgid "Soon"
+msgstr ""
+
 msgid "Soul User"
+msgstr ""
+
+msgid "Soul Vault"
 msgstr ""
 
 msgid "SoulSwap"
 msgstr ""
 
-msgid "Souls Locked"
+msgid "SoulSwap Apps"
+msgstr ""
+
+msgid "SoulSwap Vault is a set of high incentivized pools. Long term supporters can choose to lock SOUL for a determined period for higher rewards."
 msgstr ""
 
 msgid "Spanish"
@@ -1080,17 +1060,14 @@ msgstr ""
 msgid "Stake SOUL"
 msgstr ""
 
-msgid "Stake SOUL for SPELL"
+msgid "Stake SOUL for SEANCE"
 msgstr ""
 
-msgid "Stake Sou for Soul."
-msgstr ""
-
-msgid "Stake Soul"
+msgid "Stake Soul for Soul."
 msgstr ""
 
 msgid ""
-"Stake into SPELL add collateral as aSPELL on Aave all in\n"
+"Stake into SEANCE add collateral as aSEANCE on Aave all in\n"
 "one click"
 msgstr ""
 
@@ -1137,6 +1114,9 @@ msgid "The onchain oracle that tracks the pricing for this pair"
 msgstr ""
 
 msgid "The output token cannot be transferred. There may be an issue with the output token."
+msgstr ""
+
+msgid "The participants receive various benefits such as higher rewards according to lock duration, higher allocations in Soul Launchpad and more."
 msgstr ""
 
 msgid "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
@@ -1192,6 +1172,9 @@ msgstr ""
 msgid "Transaction deadline"
 msgstr ""
 
+msgid "Tribute"
+msgstr ""
+
 msgid "Try enabling multi-hop trades"
 msgstr ""
 
@@ -1201,7 +1184,7 @@ msgstr ""
 msgid "Unknown error{0}. Try increasing your slippage tolerance."
 msgstr ""
 
-msgid "Unlock Date"
+msgid "Unlock"
 msgstr ""
 
 msgid "Unlock date"
@@ -1285,9 +1268,6 @@ msgstr ""
 msgid "Withdraw"
 msgstr ""
 
-msgid "Withdraw from Safe {id}"
-msgstr ""
-
 msgid "Withdraw from Scarab {id}"
 msgstr ""
 
@@ -1307,9 +1287,6 @@ msgid "You Will Receive"
 msgstr ""
 
 msgid "You are creating a pool"
-msgstr ""
-
-msgid "You are on the wrong network"
 msgstr ""
 
 msgid "You don’t have liquidity in this pool yet"

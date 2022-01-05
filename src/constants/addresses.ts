@@ -117,6 +117,13 @@ export const SOUL_FTM_PAIR: AddressMap = {
   [ChainId.FANTOM_TESTNET]: '',
 }
 
+export const SOUL_USDC_PAIR: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xC0A301f1E5E0Fe37a31657e8F60a41b14d01B0Ef',
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
 export const SEANCE_USDC_PAIR: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
@@ -148,14 +155,14 @@ export const WNATIVE: AddressMap = {
 export const SOUL_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xe2fb177009ff39f52c0134e8007fa0e4baacbd07', // SOUL
+  [ChainId.FANTOM]: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
   [ChainId.FANTOM_TESTNET]: '',
 }
 
 export const SEANCE_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
+  [ChainId.FANTOM]: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', // SEANCE
   [ChainId.FANTOM_TESTNET]: '',
 }
 
@@ -173,9 +180,16 @@ export const LUX_ADDRESS: AddressMap = {
   [ChainId.FANTOM_TESTNET]: '',
 }
 
+export const WLUM_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208', // LUX
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
 export const USDC_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x04068da6c83afcfa0e13ba15a6696662335d5b75', // USDC
+  [ChainId.FANTOM]: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
   [ChainId.FANTOM_TESTNET]: '',
 }

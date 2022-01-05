@@ -101,9 +101,9 @@ export function AdvancedSwapDetails({ trade, allowedSlippage, minerBribe }: Adva
 
       <RowBetween>
         <RowFixed>
-          <div className="text-sm text-secondary">{i18n._(t`Enchant Fee`)}</div>
+          <div className="text-sm text-secondary">{i18n._(t`SOUL Burns`)}</div>
           <QuestionHelper
-            text={i18n._(t`A portion of each trade (0.05%) goes to Spell holders as a protocol incentive.`)}
+            text={i18n._(t`A portion of each trade (0.05%) goes towards buying SOUL off the market for a weekly burn.`)}
           />
         </RowFixed>
         <div className="text-sm font-bold text-high-emphesis">

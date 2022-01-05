@@ -681,11 +681,11 @@ export const POOLS: AddressMap = {
       '0x951BBB838e49F7081072895947735b0892cCcbCD': {  // LUX-FTM
         id: 44, // 0
         token0: {
-            id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // LUX
-            name: 'Dai Stablecoin',
-            symbol: 'DAI',
-            decimals: 18,
-          },
+          id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+          name: 'Wrapped Fantom',
+          symbol: 'FTM',
+          decimals: 18,
+        },
         token1: {
           id: '0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b', // LUX
           name: 'Luxor Money',
@@ -709,7 +709,7 @@ export const POOLS: AddressMap = {
         },
       },
       '0x475a63154C3e85ac0F2CB453f0b5c63e4370333c': {  // LUX-SOUL
-        id: 46, // 900
+        id: 46, // 500
         token0: {
           id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
           name: 'Soul Power',
@@ -720,6 +720,21 @@ export const POOLS: AddressMap = {
           id: '0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b', // LUX
           name: 'Luxor Money',
           symbol: 'LUX',
+          decimals: 9,
+        },
+      },
+      '0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99': {  // FTM-WLUM
+        id: 47, // 500
+        token0: {
+          id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+          name: 'Wrapped Fantom',
+          symbol: 'FTM',
+          decimals: 18,
+        },
+        token1: {
+          id: '0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208', // WLUM
+          name: 'Wrapped Lumens',
+          symbol: 'wLUM',
           decimals: 9,
         },
       }

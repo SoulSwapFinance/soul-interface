@@ -46,7 +46,7 @@ export default function BondKey(mint) {
                 {/* 2 token logo combined ? */}
                 <Wrap>
                   <Text padding ="0" fontSize=".9rem" color="#bbb">
-                  LP TOKEN PAIR
+                  TOKEN PAIR
                   </Text>
                 </Wrap>
               </TokenPairBox>
@@ -77,6 +77,8 @@ export default function BondKey(mint) {
 
               <HideOnMobile>
                 <Text padding="0" fontSize=".9rem" color="#bbb">
+                  
+                  
                   VALUE (TVL)
                 </Text>
               </HideOnMobile>

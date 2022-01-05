@@ -200,9 +200,9 @@ export default function Vesting() {
                 <Link href="/seance">
                   <a className="flex items-center justify-between gap-3">
                     <div className="flex flex-col gap-1">
-                      <div className="font-bold text-white">{i18n._(t`Stake SOUL for SPELL`)}</div>
+                      <div className="font-bold text-white">{i18n._(t`Stake SOUL for SEANCE`)}</div>
                       <div className="text-sm text-secondary">
-                        {t`Gain governance rights with SPELL and earn 5% APR (0.05% of
+                        {t`Gain governance rights with SEANCE and earn 5% APR (0.05% of
                                                             all swaps from all chains)`}
                       </div>
                     </div>
@@ -218,7 +218,7 @@ export default function Vesting() {
                     <div className="flex flex-col gap-1">
                       <div className="font-bold text-white">{i18n._(t`Stack Yields with SAAVE`)}</div>
                       <div className="text-sm text-secondary">
-                        {t`Stake into SPELL add collateral as aSPELL on Aave all in
+                        {t`Stake into SEANCE add collateral as aSEANCE on Aave all in
                                                             one click`}
                       </div>
                     </div>
@@ -232,7 +232,7 @@ export default function Vesting() {
                 <div className="flex flex-col gap-1">
                   <div className="font-bold text-white">{i18n._(t`Deposit SOUL into CoffinBox`)}</div>
                   <div className="text-sm text-secondary">
-                    {t`(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies`}
+                    {t`(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies.`}
                   </div>
                 </div>
               </div>

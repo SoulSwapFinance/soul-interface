@@ -33,16 +33,10 @@ function newTransactionsFirst(a: TransactionDetails, b: TransactionDetails) {
   return b.addedTime - a.addedTime
 }
 
-const SOCK = (
-  <span role="img" aria-label="has socks emoji" style={{ marginTop: -4, marginBottom: -4 }}>
-    🧦
-  </span>
-)
-
 // eslint-disable-next-line react/prop-types
 function StatusIcon({ connector }: { connector: AbstractConnector }) {
   if (connector === injected) {
-    return <Image src="/blob.gif" alt="Injected (MetaMask etc...)" width={20} height={20} />
+    return <Image src="/soul2lux.gif" alt="Injected (MetaMask etc...)" width={20} height={20} />
     // return <Identicon />
   } else if (connector === walletconnect) {
     return (

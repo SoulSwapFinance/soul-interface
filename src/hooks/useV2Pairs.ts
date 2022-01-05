@@ -3,13 +3,16 @@ import { ChainId, computePairAddress, Currency, CurrencyAmount, Pair, Token } fr
 import ISoulSwapPair from '../constants/abis/soulswap/ISoulSwapPair.json'
 import { Interface } from '@ethersproject/abi'
 import { useContext, useMemo } from 'react'
-import { useMultipleContractSingleData } from '../state/multicall/hooks'
+import { useMultipleContractSingleData, useSingleCallResult } from '../state/multicall/hooks'
 import { SOUL_ADDRESS, FACTORY_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS } from '../constants'
 import { useActiveWeb3React } from '../hooks/useActiveWeb3React'
 import { PriceContext } from '../contexts/priceContext'
 import { POOLS, TokenInfo } from '../constants/farms'
 import { concat } from 'lodash'
 import { VAULTS } from '../constants/vaults'
+import { usePriceHelperContract } from '../features/bond/hooks/useContract'
+import { formatCurrency } from '../modals/TokenStatsModal'
+import farm from '../pages/farm'
 
 const PAIR_INTERFACE = new Interface(ISoulSwapPair)
 
@@ -77,10 +80,22 @@ export interface TVLInfo {
 
 export function useVaultTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
-  const priceData = useContext(PriceContext)
-  const soulPrice = priceData?.['soul']
-  const ftmPrice = priceData?.['ftm']
-  const seancePrice = priceData?.['seance']
+  const priceHelperContract = usePriceHelperContract()
+
+  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'])?.result
+  console.log(Number(rawFtmPrice))
+  const ftmPrice = Number(rawFtmPrice) / 1E18
+  console.log(ftmPrice)
+
+  const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6'])?.result
+  console.log(Number(rawSeancePrice))
+  const seancePrice = Number(rawSeancePrice) / 1E18
+  console.log(seancePrice)
+
+  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
+  console.log(Number(rawSoulPrice))
+  const soulPrice = Number(rawSoulPrice) / 1E18
+  console.log(soulPrice)
 
   const farmingPools = Object.keys(VAULTS[ChainId.FANTOM]).map((key) => {
     return { ...VAULTS[ChainId.FANTOM][key] }
@@ -104,6 +119,7 @@ export function useVaultTVL(): TVLInfo[] {
     function isKnownToken(token: TokenInfo) {
       return (
         token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
+        token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' || token.symbol == 'FTM' ||
         token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' || token.symbol == 'fUSDT'
@@ -208,10 +224,22 @@ export function useVaultTVL(): TVLInfo[] {
 
 export function useTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
-  const priceData = useContext(PriceContext)
-  const soulPrice = priceData?.['soul']
-  const ftmPrice = priceData?.['ftm']
-  const seancePrice = priceData?.['seance']
+  const priceHelperContract = usePriceHelperContract()
+
+  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'])?.result
+  console.log(Number(rawFtmPrice))
+  const ftmPrice = Number(rawFtmPrice) / 1E18
+  console.log(ftmPrice)
+
+  const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6'])?.result
+  console.log(Number(rawSeancePrice))
+  const seancePrice = Number(rawSeancePrice) / 1E18
+  console.log(seancePrice)
+
+  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
+  console.log(Number(rawSoulPrice))
+  const soulPrice = Number(rawSoulPrice) / 1E18
+  console.log(soulPrice)
 
   const farmingPools = Object.keys(POOLS[ChainId.FANTOM]).map((key) => {
     return { ...POOLS[ChainId.FANTOM][key], lpToken: key }
@@ -235,6 +263,7 @@ export function useTVL(): TVLInfo[] {
     function isKnownToken(token: TokenInfo) {
       return (
         token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
+        token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' ||
         token.symbol == 'FTM' ||
         token.symbol == 'SEANCE' ||
@@ -245,6 +274,9 @@ export function useTVL(): TVLInfo[] {
 
     function getPrice(token: TokenInfo) {
       if (token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase()) {
+        return soulPrice
+      }
+      if (token.symbol == 'SOUL') {
         return soulPrice
       }
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {
@@ -341,6 +373,27 @@ export function useV2PairsWithPrice(
   currencies: [Currency | undefined, Currency | undefined][]
 ): [PairState, Pair | null, number][] {
   const { chainId } = useActiveWeb3React()
+  const priceHelperContract = usePriceHelperContract()
+
+  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
+  console.log(Number(rawSoulPrice))
+  const soulPrice = Number(rawSoulPrice) / 1E18
+  console.log('soul price:%s', soulPrice)
+
+  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'])?.result
+  console.log(Number(rawFtmPrice))
+  const ftmPrice = Number(rawFtmPrice) / 1E18
+  console.log(ftmPrice)
+
+  const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6'])?.result
+  console.log(Number(rawSeancePrice))
+  const seancePrice = Number(rawSeancePrice) / 1E18
+  console.log(seancePrice)
+
+  const rawEthPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x74b23882a30290451A17c44f4F05243b6b58C76d'])?.result
+  console.log(Number(rawEthPrice))
+  const ethPrice = Number(rawEthPrice) / 1E18
+  console.log(ethPrice)
 
   const tokens = useMemo(
     () => currencies.map(([currencyA, currencyB]) => [currencyA?.wrapped, currencyB?.wrapped]),
@@ -368,32 +421,34 @@ export function useV2PairsWithPrice(
   const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
   const totalSupply = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'totalSupply')
 
-  const priceData = useContext(PriceContext)
-  const soulPrice = priceData?.['soul']
-  const ftmPrice = priceData?.['ftm']
-  const seancePrice = priceData?.['seance']
+  // const priceData = useContext(PriceContext)
+  // const soulPrice = priceData?.['soul']
+  // const ftmPrice = priceData?.['ftm']
+  // const seancePrice = priceData?.['seance']
 
   return useMemo(() => {
     function isKnownToken(token: Token) {
       return (
         token.address.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
-        token.symbol == 'WFTM' || token.symbol == 'FTM' ||
-        token.symbol == 'SEANCE' ||
-        token.symbol == 'USDC' || token.symbol == 'fUSDT'
+        token.symbol == 'WFTM' || token.symbol == 'FTM' || token.symbol == 'SEANCE' || token.symbol == 'WETH' ||
+        token.symbol == 'USDC' || token.symbol == 'fUSDT' || token.symbol == 'DAI'
       )
     }
 
     function getPrice(token: Token) {
-      if (token.address.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase()) {
+      if (token.address.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() || token.symbol == 'SOUL') {
         return soulPrice
       }
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {
         return ftmPrice
       }
+      if (token.symbol == 'WETH' || token.symbol == 'ETH') {
+        return ethPrice
+      }
       if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
         return seancePrice
       }
-      if (token.symbol == 'USDC' || token.symbol == 'fUSDT') {
+      if (token.symbol == 'USDC' || token.symbol == 'fUSDT' || token.symbol == 'DAI') {
         return 1
       }
       return 0

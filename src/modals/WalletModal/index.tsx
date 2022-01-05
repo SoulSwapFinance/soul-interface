@@ -313,7 +313,7 @@ export default function WalletModal({
             <div className="flex flex-col text-center">
               <div className="text-secondary">{i18n._(t`New to Fantom?`)}</div>
               <ExternalLink href="https://fantom.foundation/wallets" color="blue">
-                {i18n._(t`Learn more about wallets`)}
+                {i18n._(t`Learn More About Web3 Wallets`)}
               </ExternalLink>
             </div>
           )}

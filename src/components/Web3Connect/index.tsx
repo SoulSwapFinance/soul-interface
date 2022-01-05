@@ -25,7 +25,7 @@ export default function Web3Connect({ color = 'gray', size = 'sm', className = '
       <div className="mr-1">
         <NetworkIcon />
       </div>
-      {error instanceof UnsupportedChainIdError ? i18n._(t`You are on the wrong network`) : i18n._(t`Error`)}
+      {error instanceof UnsupportedChainIdError ? i18n._(t`Wrong Network`) : i18n._(t`Error`)}
     </div>
   ) : (
     <Button

@@ -15,7 +15,8 @@ export const FANTOM: { [key: string]: Token } = {
 
   SOUL: new Token(ChainId.FANTOM, '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', 18, 'SOUL', 'SoulPower'), // 27 AUG
   SEANCE: new Token(ChainId.FANTOM, '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', 18, 'SEANCE', 'SeanceCircle'), // 27 AUG
-  LUX: new Token(ChainId.FANTOM, '0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b', 9, 'LUX', 'Luxor'),
+  LUX: new Token(ChainId.FANTOM, '0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b', 9, 'LUX', 'Luxor Money'),
+  WLUM: new Token(ChainId.FANTOM, '0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208', 9, 'WLUM', 'Wrapped Lumens'),
   USDC: new Token(ChainId.FANTOM, '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6, 'USDC', 'USD Coin'),
   WBTC: new Token(ChainId.FANTOM, '0x321162Cd933E2Be498Cd2267a90534A804051b11', 8, 'WBTC', 'Wrapped Bitcoin'),
   DAI: new Token(ChainId.FANTOM, '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', 18, 'DAI', 'Dai Stablecoin'),
@@ -158,7 +159,7 @@ export const SEANCE: ChainTokenMap = {
 
 // AURA
 export const AURA: ChainTokenMap = {
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0xb086A17F18f6ca515dd9C92A1E23Ec2104248a58', 18, 'AURA', 'SoulAura'),  // 21 DEC
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x5b014e247c517Be62D622D44b912280B0b60ac73', 18, 'AURA', 'SoulAura'),  // 21 DEC
 }
 
 // ENCHANT
@@ -185,7 +186,7 @@ export class ExtendedEther extends Ether {
     if (this.chainId in WNATIVE) return WNATIVE[this.chainId]
     // if (this.chainId in WETH9_EXTENDED) return WETH9_EXTENDED[this.chainId]
 
-    throw new Error('Unsupported chain ID')
+    throw new Error('Unsupported Chain ID')
   }
 
   public static onChain(chainId: number): ExtendedEther {

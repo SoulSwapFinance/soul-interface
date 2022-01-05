@@ -44,6 +44,12 @@ export function calculateGasMargin(value: BigNumber): BigNumber {
   return value.mul(BigNumber.from(10000 + 2000)).div(BigNumber.from(10000))
 }
 
+export function calculateGasPrice(value: BigNumber): BigNumber {
+  // const addMargin = 150 // 200% margin
+  const addMargin = Number(calculateGasMargin(value))
+  return value.mul(BigNumber.from(10000 + 100 * addMargin)).div(BigNumber.from(10000))
+}
+
 const ONE = new Fraction(1, 1)
 
 export function calculateSlippageAmount(value: CurrencyAmount<Currency>, slippage: Percent): [JSBI, JSBI] {
