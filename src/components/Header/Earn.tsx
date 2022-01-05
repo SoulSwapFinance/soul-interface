@@ -1,5 +1,5 @@
 import { Popover, Transition } from '@headlessui/react'
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 
 import ExternalLink from '../ExternalLink'
 import { I18n } from '@lingui/core'
@@ -11,66 +11,64 @@ import NavLink from '../NavLink'
 import { Link } from 'react-feather'
 
 const items = (i18n: I18n) => [
-  // {
-  //   name: i18n._(t`Soul`),
-  //   href: '/farm',
-  //   farm: true,
-  //   stake: false,
-  //   enchant: false,
-  //   circles: false,
-  //   mates: false,
-  // },
   {
-    name: i18n._(t`Seance`),
+    name: i18n._(t`Soul`),
+    href: '/farm',
+    farm: true,
+    stake: false,
+    bonds: false,
+    // circles: false,
+  },
+  {
+    name: i18n._(t`Stake`),
     href: '/seance',
     farm: false,
     stake: true,
-    enchant: false,
-    circles: false,
+    bonds: false,
+    // circles: false,
   },
-  {
-    name: i18n._(t`Circles`),
-    href: '/circles',
-    farm: false,
-    stake: false,
-    enchant: false,
-    circles: true,
-  },
+  // {
+  //   name: i18n._(t`Circles`),
+  //   href: '/circles',
+  //   farm: false,
+  //   stake: false,
+  //   bonds: false,
+  //   circles: true,
+  // },
   {
     name: i18n._(t`Enchant`),
-    href: '/enchant',
+    href: '/bonds',
     farm: false,
     stake: false,
-    enchant: true,
-    circles: false,
+    bonds: true,
+    // circles: false,
   },
 ]
+
 
 export default function Menu() {
   const { i18n } = useLingui()
   const solutions = items(i18n)
+  // Runs on render + reruns every second
+  useEffect(() => {
+    if (open) {
+      const timer = setTimeout(() => {
+      }, 20)
+      
+      // Clear timeout if the component is unmounted
+      return () => clearTimeout(timer)
+    }
+  })
 
   return (
-    <Popover as="nav" 
-    className="w-full relative ml-6 md:m-0">
+    <Popover as="nav">
+
       {({ open }) => (
         <>
-          <Popover.Button
-            className={classNames(
-              open ? 'text-primary' : 'text-secondary',
-              'focus:outline-none hover:text-high-emphesis'
-            )}
-          >
-            {/* <Image
-              src="https://media.giphy.com/media/Y4DUjvMhT9nHdNoMIj/giphy.gif"
-              alt="earn soul"
-              width={50}
-              height={50}
-            /> */}
-            {/* <br /> */}
+          <Popover.Button>
             EARN
           </Popover.Button>
-
+          
           <Transition
             show={open}
             as={Fragment}
@@ -85,29 +83,31 @@ export default function Menu() {
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                 <div className="absolute grid gap-6 px-5 py-6 bg-dark-900 sm:gap-6 sm:p-6">
                   {solutions.map((item) =>
-                    // item.farm ? (
-                      // <NavLink key={item.name} href={item.href}>
-                      //   <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                      //     SOUL
-                      //   </a>
-                      // </NavLink>
-                    // ) : 
+                    item.farm ? (
+                      <NavLink key={item.name} href={item.href}>
+                        <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                          FARM
+                        </a>
+                      </NavLink>
+                    ) : 
                     item.stake ? (
                       <NavLink key={item.name} href={item.href}>
                         <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                          SEANCE
+                          STAKE
                         </a>
                       </NavLink>
-                    ) : item.circles ? (
+                    ) 
+                    // : item.circles ? (
+                    //   <NavLink key={item.name} href={item.href}>
+                    //     <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                    //       CIRCLES
+                    //     </a>
+                    //   </NavLink>
+                    // ) 
+                    : item.bonds ? (
                       <NavLink key={item.name} href={item.href}>
                         <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                          CIRCLES
-                        </a>
-                      </NavLink>
-                    ) : item.enchant ? (
-                      <NavLink key={item.name} href={item.href}>
-                        <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                          ENCHANT
+                          BOND
                         </a>
                       </NavLink>
                     ) : (
@@ -118,8 +118,11 @@ export default function Menu() {
               </div>
             </Popover.Panel>
           </Transition>
+
         </>
-      )}
+
+      )
+    }
     </Popover>
   )
 }
