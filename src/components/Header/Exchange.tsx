@@ -51,12 +51,6 @@ export default function Menu() {
               'focus:outline-none hover:text-high-emphesis'
             )}
           >
-            {/* <Image 
-              src="https://media.giphy.com/media/eKCeRVkj3kO3572OYb/source.gif" 
-              alt="offering soul" 
-              width={50} height={50} 
-            /> */}
-            {/* <br /> */}
             EXCHANGE
           </Popover.Button>
 

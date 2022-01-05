@@ -123,8 +123,8 @@ function AppBar(): JSX.Element {
                       <NavLink href={'/analytics'}>
                         <a
                           id={`analytics-nav-link`}
-                          className="w-full relative ml-6 md:p-2"
-                        >
+                          className="hidden md:block w-full relative ml-6 md:p-2"
+                          >
                           {i18n._(t`CHART`)}
                         </a>
                       </NavLink>
