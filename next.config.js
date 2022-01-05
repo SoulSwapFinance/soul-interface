@@ -51,6 +51,11 @@ module.exports = withBundleAnalyzer(
           permanent: true,
         },        
         {
+          source: '/bond',
+          destination: '/bonds',
+          permanent: true,
+        },        
+        {
           source: '/enchantment',
           destination: '/enchant',
           permanent: true,
@@ -141,6 +146,10 @@ module.exports = withBundleAnalyzer(
         {
           source: '/farm',
           destination: '/farms',
+        },
+        {
+          source: '/bond',
+          destination: '/bonds',
         },
         // {
         // source: '/summoner',
