@@ -11,7 +11,7 @@ const FarmBanner: FC = () => {
           <div className="px-3 py-3 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="pr-16 sm:text-center sm:px-16">
               <p className="font-medium text-white">
-                <span className='mr-3'>🕯</span>
+                {/* <span className='mr-3'>🕯</span> */}
                 <span className="md:hidden text-center font-bold">WITHDRAW FEES NOW REMOVED</span>
                 <span className="hidden md:inline font-bold">We now have ZERO FEES for farming.</span>
                 <span className="block sm:ml-2 sm:inline-block">
