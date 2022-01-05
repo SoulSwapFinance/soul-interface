@@ -5,7 +5,7 @@ export function currencyId(currency: Currency): string {
   //   return currency.wrapped.address
   // }
 
-  if (currency.isNative) return 'ETH'
+  if (currency.isNative) return 'FTM'
 
   if (currency.isToken) return currency.address
   throw new Error('invalid currency')
