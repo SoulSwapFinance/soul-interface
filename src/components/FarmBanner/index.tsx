@@ -1,26 +1,36 @@
 import { FC } from 'react'
-// import { XIcon } from '@heroicons/react/outline'
+import { XIcon } from '@heroicons/react/outline'
+import useToggle from '../../hooks/useToggle'
 
-const FarmBanner: FC = () => (
-  <div className="relative w-full bg-purple bg-opacity-05">
-    <div className="px-3 py-3 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div className="pr-16 sm:text-center sm:px-16">
-        <p className="font-medium text-white">
-          <span className="md:hidden text-center">WITHDRAW FEES NOW REMOVED</span>
-          <span className="hidden md:inline"><b>We now have ZERO FEES for farming.</b></span>
-          <span className="block sm:ml-2 sm:inline-block">
-            {/* <a href="https://twitter.com/SoulSwapFinance/status/1465633039262920707?s=20" target = "_blank" rel="noreferrer"
-className="font-bold text-white underline">
-              {' '}
-              Read Full Details <span aria-hidden="true">&rarr;</span> */}
-            {/* </a> */}
-          </span>
-        </p>
-      </div>
-      <div className="absolute inset-y-0 right-0 flex items-start pt-1 pr-1 sm:pt-1 sm:pr-2 sm:items-start">
-      </div>
-    </div>
-  </div>
-)
+const FarmBanner: FC = () => {
+  const [state, toggle] = useToggle();
+
+  if(!state) {
+    return (
+        <div className="relative w-full bg-purple bg-opacity-05 rounded-lg tracking-wide">
+          <div className="px-3 py-3 mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div className="pr-16 sm:text-center sm:px-16">
+              <p className="font-medium text-white">
+                {/* <span className='mr-3'>🕯</span> */}
+                <span className="md:hidden text-center font-bold">WITHDRAW FEES NOW REMOVED</span>
+                <span className="hidden md:inline font-bold">We now have ZERO FEES for farming.</span>
+                <span className="block sm:ml-2 sm:inline-block">
+                  {/* <a href="https://twitter.com/SoulSwapFinance/status/1465633039262920707?s=20" target = "_blank" rel="noreferrer"
+      className="font-bold text-white underline">
+                    {' '}
+                    Read Full Details <span aria-hidden="true">&rarr;</span> */}
+                  {/* </a> */}
+                </span>
+              </p>
+              <XIcon className='h-5 w-5 text-gray-300 hover:text-white absolute right-3 top-3' onClick={toggle} />
+            </div>
+          </div>
+        </div>
+    )
+  } else {
+    return null;
+  }
+
+}
 
 export default FarmBanner
