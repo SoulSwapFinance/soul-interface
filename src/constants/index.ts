@@ -51,10 +51,11 @@ export const ARCHER_GAS_URI: { [chainId in ChainId]?: string } = {
 //     [TIMELOCK_ADDRESS]: 'Timelock',
 // }
 
-// TODO: update weekly with new constant
+// TODO: update weekly with new constant (if vesting)
 export const MERKLE_ROOT =
   //'https://raw.githubusercontent.com/sushiswap/sushi-vesting/master/merkle/week-13/merkle-10959148-11550728.json'
-  'https://raw.githubusercontent.com/sushiswap/sushi-vesting/master/merkle/week-14/merkle-10959148-11596364.json'
+  // 'https://raw.githubusercontent.com/sushiswap/sushi-vesting/master/merkle/week-14/merkle-10959148-11596364.json'
+  'https://raw.githubusercontent.com/SoulSwapFinance/soul-claims/main/scripts/results/dev.json'
 
 // /**
 //  * Some tokens can only be swapped via certain pairs, so we override the list of bases that are considered for these
