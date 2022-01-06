@@ -175,12 +175,12 @@ const MigrateButtons = ({ state, exchange }: { state: MigrateState; exchange: st
   const sushiRollContract = useSushiRollContract(
     state.selectedLPToken?.version ? state.selectedLPToken?.version : undefined
   )
-  // console.log(
-  //   'sushiRollContract address',
-  //   sushiRollContract?.address,
-  //   state.selectedLPToken?.balance,
-  //   state.selectedLPToken?.version
-  // )
+  console.log(
+    'sushiRollContract address',
+    sushiRollContract?.address,
+    state.selectedLPToken?.balance,
+    state.selectedLPToken?.version
+  )
 
   const [approval, approve] = useApproveCallback(state.selectedLPToken?.balance, sushiRollContract?.address)
   const noLiquidityTokens = !!state.selectedLPToken?.balance && state.selectedLPToken?.balance.equalTo(ZERO)

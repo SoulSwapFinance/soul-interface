@@ -81,10 +81,10 @@ export default function SoulStake() {
   } = useSoulVault()
   const { enter, leave, harvest } = useSoulStakeManual()
 
-  const { userInfo } = useSoulSummoner(0, '', '', '')
+  const { userInfo, fetchStakeStats } = useSoulSummoner(0, '', '', '')
 
   // ** Require Update: Need to make dynamic by fetching selected chain **
-  const [stakedBal, setStakedBal] = useState('')
+  const [stakedBal, setStakedBal] = useState('0')
   const soulBalance = useTokenBalance(account ?? undefined, SOUL[chainId])
   const seanceBalance = useTokenBalance(account ?? undefined, SEANCE[chainId])
 
@@ -112,8 +112,66 @@ export default function SoulStake() {
 
   // Approve summoner to move funds with `transferFrom`
   const [approvalStateChef, approveMasterchef] = useApproveCallback(parsedAmount, SOUL_SUMMONER_ADDRESS[ChainId.FANTOM])
-
   const [approvalStateVault, approveVault] = useApproveCallback(parsedAmount, SOUL_VAULT_ADDRESS[chainId])
+  
+  const [apr, setApr] = useState('0')
+  const [liquidity, setLiquidity] = useState('0')
+
+    /**
+   * Runs only on initial render/mount
+   */
+     useEffect(() => {
+      getAprAndLiquidity()
+    }, [account])
+  
+    /**
+     * Withdraws SOUL Staked
+     */
+    const handleWithdraw = async () => {
+      try {
+        // console.log('minting', amount.toString())
+        const tx = await withdraw(balance)
+        // await tx.wait()
+        // await fetchBals(pid)
+      } catch (e) {
+        // alert(e.message)
+        console.log(e)
+      }
+    }
+
+    /**
+   * Checks the amount of lpTokens the SoulSummoner contract holds
+   * farm <Object> : the farm object
+   * lpToken : the farm lpToken address
+   */
+     const getAprAndLiquidity = async () => {
+      try {
+        const result = await fetchStakeStats()
+        const tvl = result[0]
+        const apr = result[1]
+  
+        setLiquidity(
+          tvl
+            // .toFixed(0)
+            // .toString()
+            // .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        )
+        console.log('tvl:%s', tvl)
+        
+        // console.log("apr", farmApr);
+        setApr(
+          // Number(
+            apr
+            // )
+          // .toFixed(0)
+          // .toString()
+          // .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+          )
+          console.log('tvl:%s', apr)
+        } catch (e) {
+          console.warn(e)
+      }
+    }
 
   /**
    * Gets the lpToken balance of the user for each pool
@@ -329,35 +387,6 @@ export default function SoulStake() {
     }
   }
 
-  // const [apr, setApr] = useState<any>()
-
-  // TODO: DROP AND USE SWR HOOKS INSTEAD
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const results = await soulData.exchange.dayData()
-  //     const apr = (((results[1].volumeUSD * 0.05) / data?.bar?.totalSupply) * 365) / (data?.bar?.ratio * soulPrice)
-
-  //     setApr(apr)
-  //   }
-  //   fetchData()
-  // }, [data?.bar?.ratio, data?.bar?.totalSupply, soulPrice])
-
-  /**
-   * Withdraws SOUL Staked
-   */
-  const handleWithdraw = async () => {
-    try {
-      // console.log('minting', amount.toString())
-      const tx = await withdraw(balance)
-      // await tx.wait()
-      // await fetchBals(pid)
-    } catch (e) {
-      // alert(e.message)
-      console.log(e)
-    }
-  }
-
-
   return (
     <div>
       <Head>
@@ -376,7 +405,7 @@ export default function SoulStake() {
                   {i18n._(t`Stake your SOUL to borrow SEANCE`)}
                 </div>
               </div>
-              <div className="max-w-xl pr-3 mb-2 text-sm leading-5 md:text-base md:mb-2 md:pr-0">
+              <div className="max-w-xl pr-3 mb-2 text-sm leading-5">
                 {i18n._(t`Receive SEANCE as a receipt for your staked SOUL. Use SEANCE to reclaim your SOUL, or
                   trade your SEANCE and risk locking your SOUL for all eternity... Either way, while you're staked, you earn more SOUL over time. 
                   Zero Withdrawal Fees.`
@@ -413,8 +442,8 @@ export default function SoulStake() {
             </div>
           </div> */}
           </div>
-          <div className="flex flex-col justify-center md:flex-row">
-            <div className="flex flex-col w-full max-w-xl mx-auto mb-4 md:m-0">
+          <div className="flex flex-col justify-center">
+            <div className="flex flex-col w-full max-w-xl mx-auto mb-4">
               <div>
                 <TransactionFailedModal isOpen={modalOpen} onDismiss={() => setModalOpen(false)} />
                 <div className="w-full max-w-xl px-3 pt-2 pb-6 rounded bg-dark-900 md:pb-9 md:pt-4 md:px-8">
@@ -607,52 +636,46 @@ export default function SoulStake() {
             </div>
             {/* SIDE BALANCE BOARD */}
 
-            <div className="w-full max-w-xl mx-auto md:mx-0 md:ml-6 md:block md:w-72">
-              <div className="flex flex-col w-full px-4 pt-6 pb-5 rounded bg-dark-900 md:px-8 md:pt-7 md:pb-9">
+            <div className="flex flex-col items-center w-full max-w-xl">
+              <div className="flex flex-col w-full pt-4 pb-5 rounded bg-dark-900">
                 <div className="flex flex-wrap">
 
-                  <div className="flex flex-col flex-grow md:mb-6">
-                    {/* <p className="mb-3 text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
-                      {autoStaking ? 'Shares' : i18n._(t`Balances`)}
-                    </p> */}
-                    <div className="flex items-center ml-8 space-x-4 md:ml-0">
+                  <div className="flex flex-col flex-grow md:mb-3">
+                    <div className="flex items-center text-center ml-4 space-x-4">
                       <Image
                         className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
                         src="/images/tokens/seance.png"
                         alt="SEANCE"
-                        width={64}
-                        height={64}
+                        width={72}
+                        height={72}
                       />
                       <div className="flex flex-col justify-center">
-                        <p className="text-sm font-bold md:text-lg text-high-emphesis">
+                        <p className="text-md items-center text-center font-bold md:text-lg text-high-emphesis">
                           {seanceBalance
                             ? seanceBalance
-                              .toFixed(0)
-                              .toString()
-                              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                            .toFixed(0)
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                             : //.toSignificant(5)
                             '-'}
                         </p>
-                        <p className="text-sm md:text-base text-primary">SEANCE</p>
+                        <p className="text-center text-md text-purple text-primary font-bold text-primary">SEANCE</p>
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-col flex-grow md:mb-6">
-                    {/* <div className="flex mb-3 ml-8 flex-nowrap md:ml-0">
-                      <p className="text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
-                        {i18n._(t`Unstaked`)}
-                      </p> 
-                    </div> */}
-                    <div className="flex items-center ml-8 space-x-4 md:ml-0">
+                  <div className="flex flex-col flex-grow md:mb-3">
+                  <div className="flex items-center text-center space-x-4">
+
+                  {/* <div className="flex items-center ml-8 space-x-4 md:ml-0"> */}
                       <Image
-                        className="max-w-10 md:max-w-16 -ml-1 mr-1 md:mr-2 -mb-1.5 rounded"
+                        className="max-w-10 md:max-w-12 mb-1 mt-4 rounded"
                         src="/images/tokens/soul.png"
                         alt="SOUL"
-                        width={64}
-                        height={64}
+                        width={72}
+                        height={72}
                       />
                       <div className="flex flex-col justify-center">
-                        <p className="text-sm font-bold md:text-lg text-high-emphesis">
+                      <p className="text-md items-center text-center font-bold md:text-lg text-high-emphesis">
                           {Number(stakedBal) === 0
                             ? '0'
                             : Number(stakedBal) < 0
@@ -661,12 +684,40 @@ export default function SoulStake() {
                                 .toFixed(0)
                                 .toString()
                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-
                         </p>
-                        <p className="text-sm md:text-base text-primary">STAKED</p>
+                        <p className="text-center text-md text-purple text-primary font-bold text-primary">STAKED</p>
                       </div>
                     </div>
                   </div>
+                  <div className="flex text-center mt-4 mb-4">
+                    <div className="flex text-center items-center ml-4 mr-4 space-x-4">
+                    <p className="text-md text-center font-bold md:text-lg text-high-emphesis">
+                          <p className="text-md text-center font-bold md:text-lg text-high-emphesis">APR: {' '}
+                          {Number(apr) === 0
+                            ? '0'
+                            : Number(apr) < 0
+                              ? '<0'
+                              : Number(apr)
+                                .toFixed(0)
+                                .toString()
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}%
+                                </p>
+                        </p>
+                      <div className="flex text-center items-center flex-col justify-between">
+                        <p className="items-center text-md font-bold md:text-lg text-high-emphesis">
+                          TVL: {' '} ${Number(liquidity) === 0
+                            ? '0'
+                            : Number(liquidity) < 0
+                              ? '<0'
+                              : Number(liquidity)
+                                .toFixed(0)
+                                .toString()
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+
+                        </p>
+                      </div>
+                    </div>
+                    </div>
                 </div>
                 <Button
                   className={`${buttonStyle} text-high-emphesis bg-purple opacity-100 hover:bg-opacity-80`}
@@ -702,9 +753,9 @@ export default function SoulStake() {
           </Typography>
           <SubmitButton
             height="2.5rem"
-          onClick={() => 
-            setShowConfirmation(false)
-          }              
+            onClick={() =>
+              setShowConfirmation(false)
+            }
           >
             I UNDERSTAND THESE TERMS
           </SubmitButton>
