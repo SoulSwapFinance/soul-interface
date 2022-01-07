@@ -1,6 +1,6 @@
 // // CONVENTION formatFoo -> string
 
-// import { Currency, CurrencyAmount, Fraction, JSBI, Price } from 'sdk'
+// import { Currency, CurrencyAmount, Fraction, JSBI, Price } from '../../sdk'
 
 // import { BigNumber } from '@ethersproject/bignumber'
 // import Numeral from 'numeral'
@@ -185,7 +185,7 @@
 
 // CONVENTION formatFoo -> string
 
-import { Currency, CurrencyAmount, Fraction, JSBI, Price } from 'sdk'
+import { Currency, CurrencyAmount, Fraction, JSBI, Price } from '../sdk'
 
 import { BigNumber } from '@ethersproject/bignumber'
 import Numeral from 'numeral'

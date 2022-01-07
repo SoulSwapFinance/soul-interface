@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from 'react'
-import { useSaaveContract, useSoulContract } from 'hooks/useContract'
+import { useSaaveContract, useSoulContract } from '../hooks/useContract'
 
 import { BalanceProps } from './useTokenBalance'
-import { Fraction } from 'entities'
+import { Fraction } from '../entities'
 import { ethers } from 'ethers'
-import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { useTransactionAdder } from 'state/transactions/hooks'
+import useActiveWeb3React from '../hooks/useActiveWeb3React'
+import { useTransactionAdder } from '../state/transactions/hooks'
 
 const { BigNumber } = ethers
 

@@ -1,6 +1,6 @@
-import { contenthashToUri, uriToHttp } from 'functions/convert'
+import { contenthashToUri, uriToHttp } from '../functions/convert'
 
-import { parseENSAddress } from 'functions/ens'
+import { parseENSAddress } from '../functions/ens'
 import useENSContentHash from './useENSContentHash'
 import { useMemo } from 'react'
 

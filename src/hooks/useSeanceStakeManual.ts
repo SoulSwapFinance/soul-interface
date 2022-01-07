@@ -1,8 +1,8 @@
-import { CurrencyAmount, Token } from 'sdk'
+import { CurrencyAmount, Token } from '../sdk'
 
 import { useCallback } from 'react'
 import { useEnchantContract } from './useContract'
-import { useTransactionAdder } from 'state/transactions/hooks'
+import { useTransactionAdder } from '../state/transactions/hooks'
 
 const useSeanceStakeManual = () => {
   const addTransaction = useTransactionAdder()

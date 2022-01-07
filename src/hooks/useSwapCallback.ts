@@ -9,29 +9,29 @@ import {
   Router,
   TradeType,
   Trade as V2Trade,
-} from 'sdk'
-import { isAddress, isZero } from 'functions/validate'
+} from '../sdk'
+import { isAddress, isZero } from '../functions/validate'
 import { useFactoryContract, useRouterContract } from './useContract'
 
-import { ArcherRouter } from 'functions/archerRouter'
+import { ArcherRouter } from '../functions/archerRouter'
 import { BigNumber } from '@ethersproject/bignumber'
 import Common from '@ethereumjs/common'
 import { SignatureData } from './useERC20Permit'
 import { TransactionFactory } from '@ethereumjs/tx'
 import { TransactionRequest } from '@ethersproject/abstract-provider'
-import approveAmountCalldata from 'functions/approveAmountCalldata'
-import { calculateGasMargin } from 'functions/trade'
+import approveAmountCalldata from '../functions/approveAmountCalldata'
+import { calculateGasMargin } from '../functions/trade'
 import { ethers } from 'ethers'
-import { shortenAddress } from 'functions/format'
+import { shortenAddress } from '../functions/format'
 import { t } from '@lingui/macro'
 import { useActiveWeb3React } from './useActiveWeb3React'
 import { useArgentWalletContract } from './useArgentWalletContract'
-import { useBlockNumber } from 'state/application/hooks'
+import { useBlockNumber } from '../state/application/hooks'
 import useENS from './useENS'
 import { useMemo } from 'react'
-import { useTransactionAdder } from 'state/transactions/hooks'
+import { useTransactionAdder } from '../state/transactions/hooks'
 import useTransactionDeadline from './useTransactionDeadline'
-import { useUserArcherETHTip } from 'state/user/hooks'
+import { useUserArcherETHTip } from '../state/user/hooks'
 
 export enum SwapCallbackState {
   INVALID,

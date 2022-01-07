@@ -1,17 +1,17 @@
-import { ChainId, Currency, NATIVE, MultiToken, Token, WNATIVE, WNATIVE_ADDRESS, currencyEquals } from 'sdk'
-import { NEVER_RELOAD, useSingleCallResult } from 'state/multicall/hooks'
+import { ChainId, Currency, NATIVE, MultiToken, Token, WNATIVE, WNATIVE_ADDRESS, currencyEquals } from '../sdk'
+import { NEVER_RELOAD, useSingleCallResult } from '../state/multicall/hooks'
 import { TokenAddressMap, useAllLists, useInactiveListUrls, useUnsupportedTokenList } from './../state/lists/hooks'
 import { useBytes32TokenContract, useTokenContract } from './useContract'
 
 import { WrappedTokenInfo } from './../state/lists/wrappedTokenInfo'
 import { arrayify } from '@ethersproject/bytes'
-import { createTokenFilterFunction } from 'functions/filtering'
-import { isAddress } from 'functions/validate'
+import { createTokenFilterFunction } from '../functions/filtering'
+import { isAddress } from '../functions/validate'
 import { parseBytes32String } from '@ethersproject/strings'
 import { useActiveWeb3React } from './useActiveWeb3React'
-import { useCombinedActiveList } from 'state/lists/hooks'
+import { useCombinedActiveList } from '../state/lists/hooks'
 import { useMemo } from 'react'
-import { useUserAddedTokens } from 'state/user/hooks'
+import { useUserAddedTokens } from '../state/user/hooks'
 
 export function useLocalToken(currency?: any): MultiToken | undefined | null {
   const { chainId } = useActiveWeb3React()

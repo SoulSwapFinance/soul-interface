@@ -1,4 +1,4 @@
-import { classNames, formatNumberScale, formatPercent } from 'functions'
+import { classNames, formatNumberScale, formatPercent } from '../../functions'
 
 export default function ColoredNumber({ number, percent = false }: { number: number; percent?: boolean }): JSX.Element {
   if (isNaN(number) || number === Infinity) number = 0

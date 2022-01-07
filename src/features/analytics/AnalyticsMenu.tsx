@@ -1,8 +1,8 @@
-import Badge from 'components/Badge'
-import { ChainId } from 'sdk'
-import NavLink from 'components/NavLink'
+import Badge from '../../components/Badge'
+import { ChainId } from '../../sdk'
+import NavLink from '../../components/NavLink'
 import React from 'react'
-import { useActiveWeb3React } from 'hooks'
+import { useActiveWeb3React } from '../../hooks'
 
 const Menu = () => {
   return (
