@@ -1,14 +1,14 @@
-import { ROUTER_ADDRESS } from '../../../sdk'
-import { Currency, CurrencyAmount, Percent, TradeType, Trade as V2Trade } from '../../../sdk'
+import { ROUTER_ADDRESS } from 'sdk'
+import { Currency, CurrencyAmount, Percent, TradeType, Trade as V2Trade } from 'sdk'
 import { useCallback, useMemo } from 'react'
-import { useHasPendingApproval, useTransactionAdder } from '../../../state/transactions/hooks'
+import { useHasPendingApproval, useTransactionAdder } from 'state/transactions/hooks'
 
 import { MaxUint256 } from '@ethersproject/constants'
 import { TransactionResponse } from '@ethersproject/providers'
-import { calculateGasMargin } from '../../../functions/trade'
-import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
-import { useTokenAllowance } from './useTokenAllowance'
-import { useTokenContract } from './useContract'
+import { calculateGasMargin } from 'functions/trade'
+import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { useTokenAllowance } from 'hooks/useTokenAllowance'
+import { useTokenContract } from 'hooks/useContract'
 
 export enum ApprovalState {
   UNKNOWN = 'UNKNOWN',

@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
-import Badge from '../../components/Badge'
-import useLimitOrders from '../../hooks/useLimitOrders'
+import Badge from 'components/Badge'
+import useLimitOrders from 'hooks/useLimitOrders'
 import { useLingui } from '@lingui/react'
 import { t } from '@lingui/macro'
-import NavLink from '../../components/NavLink'
+import NavLink from 'components/NavLink'
 import { ClipboardListIcon } from '@heroicons/react/outline'
 
 const MyOrders: FC = () => {

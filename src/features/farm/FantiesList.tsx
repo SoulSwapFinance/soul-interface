@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
 
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import useSoulSummoner from './hooks/useSoulSummoner'
 
-import FarmHeader from '../../features/farm/Header'
+import FarmHeader from 'features/farm/Header'
 import FarmKey from './FarmKey'
 import FarmRowRender from './FarmRowRender'
 import { FantiesPids } from './Pids'
-import Farm from '../../pages/farm'
+import Farm from 'pages/farm'
 // import { Wrap, Heading, Text, Button } from './ReusableStyles' // Heading, Text
 
 const FantiesList = () => {

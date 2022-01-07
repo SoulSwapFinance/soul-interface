@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { useDerivedLimitOrderInfo } from '../../state/limit-order/hooks'
+import { useDerivedLimitOrderInfo } from 'state/limit-order/hooks'
 
 const PriceRatio: FC = () => {
   const { currencies } = useDerivedLimitOrderInfo()

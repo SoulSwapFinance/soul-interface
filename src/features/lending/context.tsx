@@ -1,6 +1,6 @@
-import { ChainId, NATIVE, USDC, WNATIVE } from '../../sdk'
+import { ChainId, NATIVE, USDC, WNATIVE } from 'sdk'
 import React, { createContext, useCallback, useContext, useEffect, useReducer } from 'react'
-import { ZERO, e10, maximum, minimum } from '../../functions/math'
+import { ZERO, e10, maximum, minimum } from 'functions/math'
 import {
   accrue,
   accrueTotalAssetWithFee,
@@ -8,24 +8,24 @@ import {
   getUSDValue,
   interestAccrue,
   takeFee,
-} from '../../functions/kashi'
-import { toAmount, toShare } from '../../functions/bentobox'
-import { useBentoBoxContract, useSoulGuideContract } from '../../hooks/useContract'
+} from 'functions/kashi'
+import { toAmount, toShare } from 'functions/bentobox'
+import { useBentoBoxContract, useSoulGuideContract } from 'hooks/useContract'
 
 import { BigNumber } from '@ethersproject/bignumber'
-import Fraction from '../../entities/Fraction'
-import { UNDERWORLD_ADDRESS } from '../../constants/kashi'
-// import { USDC } from '../../hooks'
+import Fraction from 'entities/Fraction'
+import { UNDERWORLD_ADDRESS } from 'constants/kashi'
+// import { USDC } from 'hooks'
 import { bentobox } from '@soulswap/soul-data'
 import { ethers } from 'ethers'
-// import { getCurrency } from '../../functions/currency'
-import { getOracle } from '../../entities/Oracle'
-import { toElastic } from '../../functions/rebase'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
-import { useAllTokens } from '../../hooks/Tokens'
-import { useBlockNumber } from '../../state/application/hooks'
-import usePrevious from '../../hooks/usePrevious'
-// import { useSingleCallResult } from '../../state/multicall/hooks'
+// import { getCurrency } from 'functions/currency'
+import { getOracle } from 'entities/Oracle'
+import { toElastic } from 'functions/rebase'
+import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { useAllTokens } from 'hooks/Tokens'
+import { useBlockNumber } from 'state/application/hooks'
+import usePrevious from 'hooks/usePrevious'
+// import { useSingleCallResult } from 'state/multicall/hooks'
 
 enum ActionType {
   UPDATE = 'UPDATE',
