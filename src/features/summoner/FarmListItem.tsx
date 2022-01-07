@@ -1,15 +1,15 @@
-import { classNames, formatNumber, formatPercent } from 'functions'
+import { classNames, formatNumber, formatPercent } from '../../functions'
 
 import { Disclosure } from '@headlessui/react'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import DoubleLogo from 'components/DoubleLogo'
+import DoubleLogo from '../../components/DoubleLogo'
 import FarmListItemDetails from './FarmListItemDetails'
-import Image from 'components/Image'
+import Image from '../../components/Image'
 import { PairType } from './enum'
 import React from 'react'
-import { useCurrency } from 'hooks/Tokens'
-import Button from 'components/Button'
+import { useCurrency } from '../../hooks/Tokens'
+import Button from '../../components/Button'
 
 const FarmListItem = ({ farm, ...rest }) => {
   const token0 = useCurrency(farm.pair.token0.id)

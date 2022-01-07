@@ -1,8 +1,8 @@
 import { ethers } from 'ethers'
 
-import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
-import { ZERO_ADDRESS, ATOMIC_SWAP_ADDRESS } from 'constants/addresses'
-import { useAtomicSwapContract, useMulticallContract } from 'hooks/useContract'
+import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
+import { ZERO_ADDRESS, ATOMIC_SWAP_ADDRESS } from '../../../constants/addresses'
+import { useAtomicSwapContract, useMulticallContract } from '../../../hooks/useContract'
 
 const useAtomicSwap = () => {
   const { account, chainId } = useActiveWeb3React()

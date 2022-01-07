@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { ethers } from 'ethers'
 
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import useSoulSummoner from 'hooks/useSoulSummoner'
+import useSoulSummoner from './hooks/useSoulSummoner'
 
 import FarmHeader from 'features/farm/Header'
 import FarmKey from './FarmKey'

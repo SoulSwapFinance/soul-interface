@@ -1,4 +1,4 @@
-import { ChainId } from 'sdk'
+import { ChainId } from '../../../sdk'
 const THE_GRAPH = 'https://api.thegraph.com'
 
 export const GRAPH_HOST = {

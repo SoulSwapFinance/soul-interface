@@ -1,10 +1,10 @@
-import { Wrap } from 'components/ReusableStyles'
-import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
-import Container from 'components/Container'
+import { Wrap } from '../../components/ReusableStyles'
+import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
+import Container from '../../components/Container'
 import Head from 'next/head'
 import React from 'react'
 
-import MateList from 'features/farm/MateList'
+import MateList from '../../features/farm/MateList'
 
 const Mate = () => {
   return (

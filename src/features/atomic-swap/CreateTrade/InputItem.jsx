@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import { ethers } from 'ethers'
 import axios from 'axios'
 
-import { Text, Wrap, ExternalLink, TokenImg, TokenImgTest } from 'ReusableStyles'
+import { Text, Wrap, ExternalLink, TokenImg, TokenImgTest } from '../ReusableStyles'
 
-import useNft from 'hooks/useNft'
+import useNft from '../hooks/useNft'
 
 export const TokenRow = styled.div`
   display: flex;

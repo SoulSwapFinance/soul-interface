@@ -20,7 +20,7 @@ import { useTokenBalance } from 'state/wallet/hooks'
 import { useWalletModalToggle } from 'state/application/hooks'
 import useSoulVault from 'hooks/useSoulVault'
 import AccountDetails from 'components/AccountDetails'
-import useSoulSummoner from 'hooks/useSoulSummoner'
+import useSoulSummoner from 'features/farm/hooks/useSoulSummoner'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 
 import { ethers } from 'ethers'

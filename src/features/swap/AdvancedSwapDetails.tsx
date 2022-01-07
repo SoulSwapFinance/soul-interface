@@ -6,20 +6,20 @@ import {
   TradeType,
   Trade,
   CurrencyAmount,
-} from 'sdk'
+} from '../../sdk'
 import React, { useMemo } from 'react'
-import { RowBetween, RowFixed } from 'components/Row'
+import { RowBetween, RowFixed } from '../../components/Row'
 
 import { ANALYTICS_URL } from '../../constants'
-import ExternalLink from 'components/ExternalLink'
+import ExternalLink from '../../components/ExternalLink'
 import FormattedPriceImpact from './FormattedPriceImpact'
-import QuestionHelper from 'components/QuestionHelper'
+import QuestionHelper from '../../components/QuestionHelper'
 import SwapRoute from './SwapRoute'
-import { computeRealizedLPFeePercent } from 'functions/prices'
+import { computeRealizedLPFeePercent } from '../../functions/prices'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useLingui } from '@lingui/react'
-import { formatNumberScale } from 'functions'
+import { formatNumberScale } from '../../functions'
 
 export interface AdvancedSwapDetailsProps {
   trade?: Trade<Currency, Currency, TradeType>

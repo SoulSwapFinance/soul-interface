@@ -1,4 +1,4 @@
-import { useActiveWeb3React, useSoulSummonerContract } from 'hooks'
+import { useActiveWeb3React, useSoulSummonerContract } from '../../hooks'
 
 import { BigNumber } from '@ethersproject/bignumber'
 import { Zero } from '@ethersproject/constants'

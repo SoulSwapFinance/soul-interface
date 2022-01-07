@@ -1,12 +1,12 @@
 import { ethers } from 'ethers'
 
-import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
-import { useContract } from 'hooks/useContract'
+import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
+import { useContract } from '../../../hooks/useContract'
 
-import IERC20 from 'constants/abis/soulswap/ERCs/IERC20.json'
-import IERC777 from 'constants/abis/soulswap/ERCs/IERC777.json'
-import IERC721 from 'constants/abis/soulswap/ERCs/IERC721.json'
-import IERC1155 from 'constants/abis/soulswap/ERCs/IERC1155.json'
+import IERC20 from '../../../constants/abis/soulswap/ERCs/IERC20.json'
+import IERC777 from '../../../constants/abis/soulswap/ERCs/IERC777.json'
+import IERC721 from '../../../constants/abis/soulswap/ERCs/IERC721.json'
+import IERC1155 from '../../../constants/abis/soulswap/ERCs/IERC1155.json'
 
 const useApproveContract = () => {
   const { account, chainId } = useActiveWeb3React()

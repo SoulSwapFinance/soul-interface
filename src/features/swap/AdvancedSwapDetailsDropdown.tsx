@@ -2,7 +2,7 @@ import { AdvancedSwapDetails, AdvancedSwapDetailsProps } from './AdvancedSwapDet
 
 import React from 'react'
 import styled from 'styled-components'
-import { useLastTruthy } from 'hooks/useLast'
+import { useLastTruthy } from '../../hooks/useLast'
 
 const AdvancedDetailsFooter = styled.div<{ show: boolean }>`
   width: 100%;

@@ -1,21 +1,21 @@
 import { AlertTriangle, ArrowDown } from 'react-feather'
-import { Currency, Percent, TradeType, Trade } from 'sdk'
+import { Currency, Percent, TradeType, Trade } from '../../sdk'
 import React, { useState } from 'react'
-import { formatNumberScale, isAddress, shortenAddress } from 'functions'
+import { formatNumberScale, isAddress, shortenAddress } from '../../functions'
 
 import { AdvancedSwapDetails } from './AdvancedSwapDetails'
-import CurrencyLogo from 'components/CurrencyLogo'
+import CurrencyLogo from '../../components/CurrencyLogo'
 import TradePrice from './TradePrice'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { useUSDCValue } from 'hooks/useUSDCPrice'
-import { warningSeverity } from 'functions'
+import { useUSDCValue } from '../../hooks/useUSDCPrice'
+import { warningSeverity } from '../../functions'
 
-// import Card from 'components/Card'
-// import { Field } from 'state/swap/actions'
-// import { RowBetween } from 'components/Row'
-// import Typography from 'components/Typography'
-// import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+// import Card from '../../components/Card'
+// import { Field } from '../../state/swap/actions'
+// import { RowBetween } from '../../components/Row'
+// import Typography from '../../components/Typography'
+// import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 
 export default function SwapModalHeader({
   trade,

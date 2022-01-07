@@ -7,7 +7,7 @@ import {
   Token,
   Trade,
   TradeType,
-} from 'sdk'
+} from '../sdk'
 import { ONE_HUNDRED_PERCENT, ZERO_PERCENT } from '../constants'
 
 import { BigNumber } from 'ethers'

@@ -1,11 +1,11 @@
-import { Wrap } from 'components/ReusableStyles'
-import Container from 'components/Container'
-import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
+import { Wrap } from '../../components/ReusableStyles'
+import Container from '../../components/Container'
+import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 import Head from 'next/head'
 import React from 'react'
-import Banner from 'components/Banner'
+import Banner from '../../components/Banner'
 
-import StakeList from 'features/stake/StakeList'
+import StakeList from '../../features/stake/StakeList'
 
 const Circles = () => {
   return (

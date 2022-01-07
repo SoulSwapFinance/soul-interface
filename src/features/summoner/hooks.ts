@@ -1,7 +1,7 @@
-import { CurrencyAmount, JSBI, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS } from 'sdk'
+import { CurrencyAmount, JSBI, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS } from '../../sdk'
 import { Chef } from './enum'
-import { SOUL } from 'constants/tokens'
-import { NEVER_RELOAD, useSingleCallResult, useSingleContractMultipleData } from 'state/multicall/hooks'
+import { SOUL  } from '../../constants'
+import { NEVER_RELOAD, useSingleCallResult, useSingleContractMultipleData } from '../../state/multicall/hooks'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   useSoulSummonerContract,
@@ -12,15 +12,15 @@ import {
   useFtmUsdcContract,
   useSoulUsdcContract,
   // useSpellSeanceContract,
-} from 'hooks'
+} from '../../hooks'
 
 import { Contract } from '@ethersproject/contracts'
 import { Zero } from '@ethersproject/constants'
-import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import zip from 'lodash/zip'
-import { useToken } from 'hooks/Tokens'
-import { usePriceHelperContract } from 'hooks/useContract'
-import { formatCurrency } from 'modals/TokenStatsModal'
+import { useToken } from '../../hooks/Tokens'
+import { usePriceHelperContract } from '../bond/hooks/useContract'
+import { formatCurrency } from '../../modals/TokenStatsModal'
 import { usePriceApi } from '../vault/hooks'
 // import useSummoner from './useSummoner'
 const { default: axios } = require('axios')

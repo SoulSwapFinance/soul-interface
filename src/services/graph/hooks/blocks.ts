@@ -1,6 +1,6 @@
 import { getAverageBlockTime, getBlock, getOneDayBlock, getOneWeekBlock, getCustomDayBlock } from '../fetchers'
 
-import { useActiveWeb3React } from 'hooks'
+import { useActiveWeb3React } from '../../../hooks'
 import useSWR, { SWRConfiguration } from 'swr'
 import { useMemo } from 'react'
 
