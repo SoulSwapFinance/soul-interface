@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Image from 'next/image'
 import { ethers } from 'ethers'
 
-import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
 import useSoulBond from './hooks/useSoulBond'
 import useApprove from './hooks/useApprove'
@@ -23,11 +23,11 @@ import {
   SubmitButton,
 } from './BondStyles'
 
-import { Wrap, ClickableText, Heading, Text, ExternalLink } from 'components/ReusableStyles'
-import Modal from 'components/Modal'
-import ModalHeader from 'components/ModalHeader'
-import Typography from 'components/Typography'
-import Button from 'components/Button'
+import { Wrap, ClickableText, Heading, Text, ExternalLink } from '../../components/ReusableStyles'
+import Modal from '../../components/Modal'
+import ModalHeader from '../../components/ModalHeader'
+import Typography from '../../components/Typography'
+import Button from '../../components/Button'
 
 // params to render bond with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)

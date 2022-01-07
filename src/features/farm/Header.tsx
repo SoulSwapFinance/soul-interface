@@ -1,10 +1,10 @@
-import { Currency, Percent } from 'sdk'
+import { Currency, Percent } from '../../sdk'
 import React, { FC, useCallback, useState } from 'react'
-import NavLink from 'components/NavLink'
+import NavLink from '../../components/NavLink'
 
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import Search from 'components/Search';
+import Search from '../../components/Search';
 
 const getQuery = (input, output) => {
   if (!input && !output) return

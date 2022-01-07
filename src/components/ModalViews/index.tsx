@@ -7,8 +7,8 @@ import CloseIcon from '../CloseIcon'
 import { CustomLightSpinner } from '../Spinner'
 import ExternalLink from '../ExternalLink'
 import { RowBetween } from '../Row'
-import { getExplorerLink } from 'functions/explorer'
-import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { getExplorerLink } from '../../functions/explorer'
+import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 
 const ConfirmOrLoadingWrapper = styled.div`
   width: 100%;

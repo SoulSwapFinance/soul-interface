@@ -4,7 +4,7 @@ import { ChevronDownIcon } from '@heroicons/react/solid'
 import { Fragment } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { classNames } from 'functions'
+import { classNames } from '../../functions'
 import { t } from '@lingui/macro'
 import { useRouter } from 'next/router'
 

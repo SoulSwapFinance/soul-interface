@@ -1,11 +1,11 @@
-import { computeRealizedLPFeePercent } from 'functions/prices'
+import { computeRealizedLPFeePercent } from '../../functions/prices'
 import FormattedPriceImpact from '../swap/FormattedPriceImpact'
-import QuestionHelper from 'components/QuestionHelper'
+import QuestionHelper from '../../components/QuestionHelper'
 import React, { useMemo } from 'react'
 import SwapRoute from '../swap/SwapRoute'
-import { TradeType, Trade as V2Trade, Currency } from 'sdk'
+import { TradeType, Trade as V2Trade, Currency } from '../../sdk'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useLingui } from '@lingui/react'
 
 function TradeReview({

@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 import { ethers } from 'ethers'
 
-import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
 import useSoulSummoner from './hooks/useSoulSummoner'
 import useApprove from './hooks/useApprove'
@@ -27,10 +27,10 @@ import {
   SubmitButton,
 } from './FarmStyles'
 
-import { Wrap, ClickableText, Heading, Text, ExternalLink } from 'components/ReusableStyles'
-import { useSingleCallResult } from 'state/multicall/hooks'
-import { usePriceHelperContract } from 'bond/hooks/useContract'
-import { formatCurrency } from 'modals/TokenStatsModal'
+import { Wrap, ClickableText, Heading, Text, ExternalLink } from '../../components/ReusableStyles'
+import { useSingleCallResult } from '../../state/multicall/hooks'
+import { usePriceHelperContract } from '../bond/hooks/useContract'
+import { formatCurrency } from '../../modals/TokenStatsModal'
 
 // params to render farm with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)

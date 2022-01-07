@@ -1,6 +1,6 @@
 // import { useActiveWeb3React } from './useActiveWeb3React'
-import { ChainId } from 'sdk'
-import { useAnyswapEthOperaBridge } from 'hooks/useContract'
+import { ChainId } from '../../sdk'
+import { useAnyswapEthOperaBridge } from '../../hooks/useContract'
 import { useCallback } from 'react'
 
 function useBridge() {
