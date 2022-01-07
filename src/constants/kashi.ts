@@ -1,5 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber'
-import { ChainId } from '../sdk'
+import { ChainId } from 'sdk'
 
 // Functions that need accrue to be called
 export const ACTION_ADD_ASSET = 1

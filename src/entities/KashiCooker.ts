@@ -1,14 +1,14 @@
 import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
-import { ChainId, WNATIVE } from '../sdk'
+import { ChainId, WNATIVE } from 'sdk'
 import { Contract, ethers } from 'ethers'
-import { ZERO, e10, maximum, minimum } from '../functions/math'
-import { getProviderOrSigner, getSigner } from '../functions/contract'
+import { ZERO, e10, maximum, minimum } from 'functions/math'
+import { getProviderOrSigner, getSigner } from 'functions/contract'
 
-import KASHIPAIR_ABI from '../constants/abis/kashipair.json'
-import { KashiPermit } from '../hooks/useKashiApproveCallback'
+import KASHIPAIR_ABI from 'constants/abis/kashipair.json'
+import { KashiPermit } from 'hooks/useKashiApproveCallback'
 import { defaultAbiCoder } from '@ethersproject/abi'
-import { toElastic } from '../functions/rebase'
-import { toShare } from '../functions/bentobox'
+import { toElastic } from 'functions/rebase'
+import { toShare } from 'functions/bentobox'
 
 export async function signMasterContractApproval(
   bentoBoxContract: ethers.Contract | null,

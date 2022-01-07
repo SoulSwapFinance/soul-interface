@@ -1,4 +1,4 @@
-import { formatNumber } from '../../../functions'
+import { formatNumber } from 'functions'
 import ColoredNumber from '../ColoredNumber'
 
 interface InfoCardProps {

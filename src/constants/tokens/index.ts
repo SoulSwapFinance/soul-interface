@@ -1,4 +1,4 @@
-import { ChainId, Ether, Token, WETH9, WNATIVE } from '../../sdk'
+import { ChainId, Ether, Token, WETH9, WNATIVE } from 'sdk'
 
 import { SupportedChainId } from '../chains'
 

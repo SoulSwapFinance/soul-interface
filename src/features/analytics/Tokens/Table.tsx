@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { usePagination, useSortBy, useTable } from 'react-table'
 
 import _ from 'lodash'
-import { classNames } from '../../../functions'
+import { classNames } from 'functions'
 
 export default function Table({ columns, data }) {
   const {

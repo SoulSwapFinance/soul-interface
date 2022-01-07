@@ -1,10 +1,10 @@
-import DoubleCurrencyLogo from '../../../components/DoubleLogo'
-import Table from '../../../components/Table'
-import { formatPercent } from '../../../functions'
-import { pairQuery } from '../../../services/graph/queries'
-import { useCurrency } from '../../../hooks/Tokens'
+import DoubleCurrencyLogo from 'components/DoubleLogo'
+import Table from 'components/Table'
+import { formatPercent } from 'functions'
+import { pairQuery } from 'services/graph/queries'
+import { useCurrency } from 'hooks/Tokens'
 import { useMemo } from 'react'
-import { useSoulPairs } from '../../../services/graph'
+import { useSoulPairs } from 'services/graph'
 
 interface TopFarmsListProps {
   farms: {

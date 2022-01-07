@@ -1,9 +1,9 @@
 import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
 import { One, Zero } from '@ethersproject/constants'
-import { formatBalance, parseBalance } from '../functions'
+import { formatBalance, parseBalance } from 'functions'
 
-import { Fraction as SDKFraction } from '../sdk'
-import { isEmptyValue } from '../functions/validate'
+import { Fraction as SDKFraction } from 'sdk'
+import { isEmptyValue } from 'functions/validate'
 
 class Fraction {
   static BASE = BigNumber.from(10).pow(18)
