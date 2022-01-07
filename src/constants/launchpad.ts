@@ -1,4 +1,4 @@
-import { ChainId } from 'sdk'
+import { ChainId } from '../sdk'
 
 type ProjectsMap = { [id: number]: ProjectInfo }
 

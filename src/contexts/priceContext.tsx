@@ -1,5 +1,5 @@
 import React from 'react'
-import { usePricesApi } from 'features/summoner/hooks'
+import { usePricesApi } from '../features/summoner/hooks'
 
 export const PriceContext = React.createContext({
   ftm: 0,

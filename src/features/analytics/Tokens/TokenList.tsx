@@ -1,11 +1,11 @@
-import { classNames, formatNumber, formatNumberScale, formatPercent } from 'functions'
+import { classNames, formatNumber, formatNumberScale, formatPercent } from '../../../functions'
 
 import ColoredNumber from '../ColoredNumber'
-import CurrencyLogo from 'components/CurrencyLogo'
+import CurrencyLogo from '../../../components/CurrencyLogo'
 import React from 'react'
-import Table from 'components/Table'
+import Table from '../../../components/Table'
 import _ from 'lodash'
-import { useCurrency } from 'hooks/Tokens'
+import { useCurrency } from '../../../hooks/Tokens'
 
 interface TokenListProps {
   tokens: {

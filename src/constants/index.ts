@@ -1,5 +1,5 @@
-import { ChainId, JSBI, Percent } from 'sdk'
-import { binance, clover, injected, walletconnect } from 'connectors'
+import { ChainId, JSBI, Percent } from '../sdk'
+import { binance, clover, injected, walletconnect } from '../connectors'
 
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { BigNumber } from 'ethers'

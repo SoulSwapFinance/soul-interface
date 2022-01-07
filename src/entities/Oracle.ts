@@ -2,11 +2,11 @@ import {
   CHAINLINK_ORACLE_ADDRESS,
   SOULSWAP_TWAP_0_ORACLE_ADDRESS,
   SOULSWAP_TWAP_1_ORACLE_ADDRESS,
-} from 'constants/kashi'
-import { ChainId, Token } from 'sdk'
+} from '../constants/kashi'
+import { ChainId, Token } from '../sdk'
 
-import { CHAINLINK_MAPPING } from 'constants/chainlink'
-import { e10 } from 'functions/math'
+import { CHAINLINK_MAPPING } from '../constants/chainlink'
+import { e10 } from '../functions/math'
 import { ethers } from 'ethers'
 
 export interface Oracle {

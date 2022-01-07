@@ -1,4 +1,4 @@
-import { ChainId } from 'sdk'
+import { ChainId } from '../sdk'
 
 const Fantom = '/images/networks/fantom-network.jpg'
 const Mainnet = '/images/networks/mainnet-network.jpg'
