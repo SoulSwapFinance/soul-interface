@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Token } from 'sdk'
+import { Currency, CurrencyAmount, Token } from '../sdk'
 
 import { ethers } from 'ethers'
 

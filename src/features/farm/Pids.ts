@@ -1,4 +1,4 @@
-import { tokens } from 'constants/tokens'
+import { tokens } from './constants/tokens'
 
 // Base tokens (token1):
 // - FTM

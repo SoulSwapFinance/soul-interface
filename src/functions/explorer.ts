@@ -1,4 +1,4 @@
-import { ChainId } from 'sdk'
+import { ChainId } from '../sdk'
 
 // Multichain Explorer
 const builders = {

@@ -1,13 +1,13 @@
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import HistoryLink from 'next/link'
-import { Percent } from 'sdk'
+import { Percent } from '../../sdk'
 import React from 'react'
 import { RowBetween } from '../Row'
 import SettingsTab from '../Settings'
-import { resetMintState } from 'state/mint/actions'
+import { resetMintState } from '../../state/mint/actions'
 import styled from 'styled-components'
 import { t } from '@lingui/macro'
-import { useAppDispatch } from 'state/hooks'
+import { useAppDispatch } from '../../state/hooks'
 import { useLingui } from '@lingui/react'
 
 const Tabs = styled.div`

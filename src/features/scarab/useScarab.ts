@@ -1,8 +1,8 @@
-import { useScarabContract, useTokenContract } from 'hooks'
+import { useScarabContract, useTokenContract } from '../../hooks'
 import { BigNumber } from '@ethersproject/bignumber'
 import { Zero } from '@ethersproject/constants'
 import { useCallback } from 'react'
-import { useToken } from 'hooks/Tokens'
+import { useToken } from '../../hooks/Tokens'
 
 export default function useScarab() {
   const contract = useScarabContract()
@@ -78,7 +78,7 @@ export default function useScarab() {
   return { lockSouls, getScarabsByTokenAddress, withdrawTokens } // getDepositsByTokenAddress
 }
 
-// import { useLockerContract, } from 'hooks'
+// import { useLockerContract, } from '../../hooks'
 
 
 //   const contract = useLockerContract()

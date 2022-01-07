@@ -1,6 +1,7 @@
 import { ENCHANT_ADDRESS, ZERO } from 'sdk'
 import { ApprovalState, useApproveCallback } from 'hooks/useApproveCallback'
 import React, { useEffect, useState } from 'react'
+import { ENCHANT, SEANCE } from '../../constants'
 import Button from 'components/Button'
 import { ChainId } from 'sdk'
 import Head from 'next/head'
@@ -21,8 +22,8 @@ import EnchantBanner from 'components/EnchantBanner'
 import useEnchant from 'hooks/useEnchant'
 // import useEnchantHelper from 'hooks/useEnchant'
 import { ethers } from 'ethers'
-import SEANCE from 'constants'
-import ENCHANT from 'constants'
+
+// import useApprove from 'features/farm/hooks/useApprove'
 
 const INPUT_CHAR_LIMIT = 18
 

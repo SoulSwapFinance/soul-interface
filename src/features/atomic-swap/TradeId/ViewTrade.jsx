@@ -8,7 +8,7 @@ import ConenctToView from "../../../components/Web3Connection/ConenctToView";
 import { cutAddress } from "../../../components/Web3Connection/useConnect";
 
 import useAtomicSwap from "../../../hooks/useAtomicSwap";
-import useApproveContract from "../hooks/useApprove";
+import useApproveContract from "../../../hooks/useApprove";
 
 import { ViewItem } from "./ViewItem";
 

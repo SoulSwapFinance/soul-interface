@@ -1,5 +1,5 @@
 import { ChainId, NATIVE } from 'sdk'
-import AURA from 'constants'
+import { AURA } from '../../constants'
 // import React, { useEffect, useState } from 'react'
 import React from 'react'
 

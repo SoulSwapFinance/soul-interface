@@ -1,7 +1,5 @@
 import { Currency, CurrencyAmount, JSBI, Percent, Token, TradeType, Trade as V2Trade } from 'sdk'
-import DAI from 'constants'
-import SOUL from 'constants'
-import USDC from 'constants'
+import { DAI, SOUL, USDC } from 'constants/tokens'
 import { useMemo, useState } from 'react'
 
 import { splitSignature } from 'ethers/lib/utils'
@@ -32,15 +30,15 @@ const PERMITTABLE_TOKENS: {
     [checksummedTokenAddress: string]: PermitInfo
   }
 } = {
-  // [1]: {
-  //   [USDC.address]: { type: PermitType.AMOUNT, name: 'USD Coin', version: '2' },
-  //   [DAI.address]: {
-  //     type: PermitType.ALLOWED,
-  //     name: 'Dai Stablecoin',
-  //     version: '1',
-  //   },
+  [1]: {
+    [USDC.address]: { type: PermitType.AMOUNT, name: 'USD Coin', version: '2' },
+    [DAI.address]: {
+      type: PermitType.ALLOWED,
+      name: 'Dai Stablecoin',
+      version: '1',
+    },
     // [SOUL[1].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
-  // },
+  },
   // [4]: {
   //   ['0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735']: {
   //     type: PermitType.ALLOWED,

@@ -1,12 +1,12 @@
-import { Currency, NATIVE, WNATIVE, currencyEquals } from 'sdk'
+import { Currency, NATIVE, WNATIVE, currencyEquals } from '../../sdk'
 
-import { AutoColumn } from 'components/Column'
-import CurrencyLogo from 'components/CurrencyLogo'
+import { AutoColumn } from '../../components/Column'
+import CurrencyLogo from '../../components/CurrencyLogo'
 import Link from 'next/link'
 import React from 'react'
-import { RowBetween } from 'components/Row'
-import { currencyId } from 'functions/currency'
-import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { RowBetween } from '../../components/Row'
+import { currencyId } from '../../functions/currency'
+import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 
 interface RemoveLiquidityReceiveDetailsProps {
   currencyA?: Currency

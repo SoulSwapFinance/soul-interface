@@ -1,8 +1,8 @@
-import { useLockerContract, useTokenContract } from 'hooks'
+import { useLockerContract, useTokenContract } from '../../hooks'
 import { BigNumber } from '@ethersproject/bignumber'
 import { Zero } from '@ethersproject/constants'
 import { useCallback } from 'react'
-import { useToken } from 'hooks/Tokens'
+import { useToken } from '../../hooks/Tokens'
 
 export default function useLocker() {
   const contract = useLockerContract()

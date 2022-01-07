@@ -7,7 +7,7 @@ import { ethers } from 'ethers'
 
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 
-import useSoulSummoner from 'hooks/useSoulSummoner'
+import useSoulSummoner from './hooks/useSoulSummoner'
 import useApprove from './hooks/useApprove'
 import { SoulSummonerAddress } from './constants'
 import {
@@ -29,7 +29,7 @@ import {
 
 import { Wrap, ClickableText, Heading, Text, ExternalLink } from 'components/ReusableStyles'
 import { useSingleCallResult } from 'state/multicall/hooks'
-import { usePriceHelperContract } from 'hooks/useContract'
+import { usePriceHelperContract } from 'bond/hooks/useContract'
 import { formatCurrency } from 'modals/TokenStatsModal'
 
 // params to render farm with:

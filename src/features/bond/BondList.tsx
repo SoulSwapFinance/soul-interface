@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
 
-import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import BondKey from './BondKey'
-import BondRowRender from './BondRowRender'
-import { AllPids } from './Pids' // WithdrawPids
+import useActiveWeb3React from '../../hooks/useActiveWeb3React'
+import BondKey from '../bond/BondKey'
+import BondRowRender from '../bond/BondRowRender'
+import { AllPids } from '../bond/Pids' // WithdrawPids
 
 const BondList = () => {
   const { chainId } = useActiveWeb3React() // account

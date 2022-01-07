@@ -1,6 +1,5 @@
 import { ChainId, Currency, CurrencyAmount, JSBI, Token } from 'sdk'
-import { MERKLE_ROOT } from './../../constants/index'
-import SOUL from 'constants'
+import { MERKLE_ROOT, SOUL } from './../../constants/index'
 import { getAddress, isAddress } from '@ethersproject/address'
 import { useEffect, useState } from 'react'
 

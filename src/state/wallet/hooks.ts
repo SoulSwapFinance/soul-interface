@@ -1,13 +1,13 @@
-import { Currency, CurrencyAmount, JSBI, NATIVE, Token } from 'sdk'
+import { Currency, CurrencyAmount, JSBI, NATIVE, Token } from '../../sdk'
 import { useMultipleContractSingleData, useSingleContractMultipleData } from '../multicall/hooks'
 
-import ERC20_ABI from 'constants/abis/erc20.json'
+import ERC20_ABI from '../../constants/abis/erc20.json'
 import { Interface } from '@ethersproject/abi'
-import { isAddress } from 'functions/validate'
-import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
-import { useAllTokens } from 'hooks/Tokens'
+import { isAddress } from '../../functions/validate'
+import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useAllTokens } from '../../hooks/Tokens'
 import { useMemo } from 'react'
-import { useMulticall2Contract } from 'hooks/useContract'
+import { useMulticall2Contract } from '../../hooks/useContract'
 import { TokenBalancesMap } from './types'
 
 /**

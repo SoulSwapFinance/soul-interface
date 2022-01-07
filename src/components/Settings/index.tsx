@@ -1,15 +1,15 @@
-import { ChainId, Percent } from 'sdk'
+import { ChainId, Percent } from '../../sdk'
 import React, { useRef, useState } from 'react'
 import {
   useExpertModeManager,
   useUserArcherUseRelay,
   useUserSingleHopOnly,
   useUserTransactionTTL,
-} from 'state/user/hooks'
-import { useModalOpen, useToggleSettingsMenu } from 'state/application/hooks'
+} from '../../state/user/hooks'
+import { useModalOpen, useToggleSettingsMenu } from '../../state/application/hooks'
 
 import { AdjustmentsIcon } from '@heroicons/react/outline'
-import { ApplicationModal } from 'state/application/actions'
+import { ApplicationModal } from '../../state/application/actions'
 import Button from '../Button'
 import Modal from '../Modal'
 import ModalHeader from '../ModalHeader'
@@ -18,9 +18,9 @@ import Toggle from '../Toggle'
 import TransactionSettings from '../TransactionSettings'
 import Typography from '../Typography'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from 'hooks'
+import { useActiveWeb3React } from '../../hooks'
 import { useLingui } from '@lingui/react'
-import { useOnClickOutside } from 'hooks/useOnClickOutside'
+import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 
 export default function SettingsTab({ placeholderSlippage }: { placeholderSlippage?: Percent }) {
   const { i18n } = useLingui()

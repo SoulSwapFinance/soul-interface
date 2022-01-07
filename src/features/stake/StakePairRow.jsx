@@ -3,12 +3,12 @@ import styled from 'styled-components'
 
 import { ethers } from 'ethers'
 
-import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
-import useSoulSummoner from 'hooks/useSoulSummoner'
-import useApprove from 'hooks/useApprove'
+import useSoulSummoner from '../farm/hooks/useSoulSummoner'
+import useApprove from '../farm/hooks/useApprove'
 
-import { SoulSummonerAddress } from 'farm/constants'
+import { SoulSummonerAddress } from '../farm/constants'
 
 import {
   FlexText,
@@ -485,7 +485,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
   )
 }
 
-import { SummonerPid0 } from 'constants/StakePids'
+import { SummonerPid0 } from '../../constants/StakePids'
 
 export const StakeList = () => {
   // Display token pair - TODO:

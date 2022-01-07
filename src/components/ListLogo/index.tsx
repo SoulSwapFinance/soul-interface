@@ -1,6 +1,6 @@
 import Logo from '../Logo'
 import React from 'react'
-import useHttpLocations from 'hooks/useHttpLocations'
+import useHttpLocations from '../../hooks/useHttpLocations'
 
 export default function ListLogo({
   logoURI,

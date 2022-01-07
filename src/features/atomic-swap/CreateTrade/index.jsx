@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 
 import { ZERO_ADDRESS, ATOMIC_SWAP_ADDRESS } from 'constants/addresses'
-import useAtomicSwap from '../hooks/useAtomicSwap'
+import useAtomicSwap from 'hooks/useAtomicSwap'
 import AddToken from './AddToken'
 
 import {

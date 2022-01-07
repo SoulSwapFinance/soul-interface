@@ -1,4 +1,4 @@
-import { JSBI, Percent } from 'sdk'
+import { JSBI, Percent } from '../../sdk'
 
 // converts a basis points value to a sdk percent
 export function basisPointsToPercent(num: number): Percent {

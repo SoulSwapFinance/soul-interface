@@ -1,5 +1,6 @@
 import { AppDispatch, AppState } from '..'
-import { ChainId, FACTORY_ADDRESS, JSBI, Pair, Percent, Token, computePairAddress } from 'sdk'
+import { BASES_TO_TRACK_LIQUIDITY_FOR, PINNED_PAIRS } from '../../config/routing'
+import { ChainId, FACTORY_ADDRESS, JSBI, Pair, Percent, Token, computePairAddress } from '../../sdk'
 import {
   SerializedPair,
   SerializedToken,
@@ -24,10 +25,8 @@ import { useCallback, useMemo } from 'react'
 
 import ReactGA from 'react-ga'
 import flatMap from 'lodash/flatMap'
-import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
-import { useAllTokens } from 'hooks/Tokens'
-import BASES_TO_TRACK_LIQUIDITY_FOR from 'constants'
-import PINNED_PAIRS from 'constants'
+import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useAllTokens } from '../../hooks/Tokens'
 
 function serializeToken(token: Token): SerializedToken {
   return {
