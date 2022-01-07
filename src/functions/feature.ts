@@ -1,4 +1,4 @@
-import { ChainId } from '../sdk'
+import { ChainId } from 'sdk'
 
 export enum Feature {
   AMM = 'AMM',

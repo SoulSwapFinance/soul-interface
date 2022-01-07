@@ -1,4 +1,4 @@
-import { ChainId } from '../sdk'
+import { ChainId } from 'sdk'
 
 const rpc = {
   [ChainId.MAINNET]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',

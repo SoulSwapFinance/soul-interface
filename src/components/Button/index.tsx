@@ -1,5 +1,5 @@
 import React from 'react'
-import { classNames } from '../../functions'
+import { classNames } from 'functions'
 
 const SIZE = {
   xs: 'px-2 py-1 text-xs',

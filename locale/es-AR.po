@@ -19,6 +19,9 @@ msgstr ""
 msgid "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies."
 msgstr ""
 
+msgid "(COMING SOON) Stake into SEANCE add collateral as all in one click."
+msgstr ""
+
 msgid "- 0.1 FTM to lock"
 msgstr ""
 
@@ -62,6 +65,9 @@ msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol
 msgstr ""
 
 msgid "A portion of each trade (0.25%) is charged as a fee to incentivize pooling."
+msgstr ""
+
+msgid "ACTIVE"
 msgstr ""
 
 msgid "ALL"
@@ -193,7 +199,7 @@ msgstr ""
 msgid "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
 msgstr ""
 
-msgid "CHARTS"
+msgid "CHART"
 msgstr ""
 
 msgid ""
@@ -216,13 +222,10 @@ msgstr ""
 msgid "Change Recipient"
 msgstr ""
 
-msgid "Charts"
+msgid "Chart"
 msgstr ""
 
 msgid "Chinese"
-msgstr ""
-
-msgid "Circles"
 msgstr ""
 
 msgid "Claim"
@@ -234,7 +237,16 @@ msgstr ""
 msgid "Claim Scarabs"
 msgstr ""
 
+msgid "Claimable: Fetching Claimable Amount"
+msgstr ""
+
+msgid "Claimable: {0} SOUL"
+msgstr ""
+
 msgid "Claimed"
+msgstr ""
+
+msgid "Claims are executed within the guidelines outlined in"
 msgstr ""
 
 msgid "Clear All"
@@ -261,6 +273,9 @@ msgid "CoffinBoxes provides extra yield on deposits with flash lending, strategi
 msgstr ""
 
 msgid "Collateral"
+msgstr ""
+
+msgid "Collatoralize your Yields"
 msgstr ""
 
 msgid "Come on Over..."
@@ -413,6 +428,9 @@ msgstr ""
 msgid "Enter a valid slippage percentage"
 msgstr ""
 
+msgid "Enter the Underworld"
+msgstr ""
+
 msgid "Error"
 msgstr ""
 
@@ -490,6 +508,9 @@ msgstr ""
 msgid ""
 "Gain governance rights with SEANCE and earn 5% APR (0.05% of\n"
 "all swaps from all chains)"
+msgstr ""
+
+msgid "Gain governance rights with SEANCE, while earning SOUL every second."
 msgstr ""
 
 msgid "German"
@@ -580,6 +601,9 @@ msgid "Japanese"
 msgstr ""
 
 msgid "Korean"
+msgstr ""
+
+msgid "LAUNCH"
 msgstr ""
 
 msgid "LTV"
@@ -722,6 +746,9 @@ msgstr ""
 msgid "My Orders"
 msgstr ""
 
+msgid "N"
+msgstr ""
+
 msgid "Network not supported yet"
 msgstr ""
 
@@ -796,13 +823,13 @@ msgstr ""
 msgid "Output will be sent to"
 msgstr ""
 
+msgid "PAIR"
+msgstr ""
+
 msgid "PAIRS"
 msgstr ""
 
 msgid "PENDING"
-msgstr ""
-
-msgid "POOL"
 msgstr ""
 
 msgid "Pay"
@@ -937,9 +964,6 @@ msgstr ""
 msgid "Russian"
 msgstr ""
 
-msgid "SCARAB"
-msgstr ""
-
 msgid "SELF"
 msgstr ""
 
@@ -974,9 +998,6 @@ msgid "SWAP"
 msgstr ""
 
 msgid "Scarabs are a neat way to share your SOUL with anyone, so long as they're also willing to perform a ritual and make a small sacrfice..."
-msgstr ""
-
-msgid "Seance"
 msgstr ""
 
 msgid "Search Lockers"
@@ -1030,6 +1051,9 @@ msgstr ""
 msgid "Soon"
 msgstr ""
 
+msgid "Soul"
+msgstr ""
+
 msgid "Soul User"
 msgstr ""
 
@@ -1064,6 +1088,9 @@ msgid "Stake SOUL for SEANCE"
 msgstr ""
 
 msgid "Stake Soul for Soul."
+msgstr ""
+
+msgid "Stake for Seance"
 msgstr ""
 
 msgid ""
@@ -1125,6 +1152,9 @@ msgstr ""
 msgid "Things you can do with your SOUL"
 msgstr ""
 
+msgid "Things you may do with your SOUL"
+msgstr ""
+
 msgid "This token doesn't appear on the active token list(s). Make sure this is the token that you want to trade."
 msgstr ""
 
@@ -1155,6 +1185,9 @@ msgid ""
 msgstr ""
 
 msgid "Total"
+msgstr ""
+
+msgid "Total Locked: Connect Wallet"
 msgstr ""
 
 msgid "Trading Fee"
@@ -1280,6 +1313,9 @@ msgstr ""
 msgid "Wrong Network"
 msgstr ""
 
+msgid "Y"
+msgstr ""
+
 msgid "You Pay:"
 msgstr ""
 
@@ -1308,6 +1344,9 @@ msgid "You will receive"
 msgstr ""
 
 msgid "Your"
+msgstr ""
+
+msgid "Your Claimable SOUL"
 msgstr ""
 
 msgid "Your Claimable SOUL this Week"
@@ -1401,6 +1440,9 @@ msgid "{0} {sign} market rate"
 msgstr ""
 
 msgid "{0}/{1} Burned"
+msgstr ""
+
+msgid "{text}"
 msgstr ""
 
 msgid "{v}"

@@ -1,8 +1,8 @@
-import { CurrencyAmount, Token } from '../../../sdk'
+import { CurrencyAmount, Token } from 'sdk'
 
 import { useMemo } from 'react'
-import { useSingleCallResult } from '../../../state/multicall/hooks'
-import { useTokenContract } from './useContract'
+import { useSingleCallResult } from 'state/multicall/hooks'
+import { useTokenContract } from 'hooks/useContract'
 
 export function useTokenAllowance(token?: Token, owner?: string, spender?: string): CurrencyAmount<Token> | undefined {
   const contract = useTokenContract(token?.address, false)

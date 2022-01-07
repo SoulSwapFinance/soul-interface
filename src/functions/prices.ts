@@ -13,9 +13,9 @@ import {
   Percent,
   Trade,
   TradeType,
-} from '../sdk'
+} from 'sdk'
 
-import { Field } from '../state/swap/actions'
+import { Field } from 'state/swap/actions'
 import { basisPointsToPercent } from './convert'
 
 const THIRTY_BIPS_FEE = new Percent(JSBI.BigInt(20), JSBI.BigInt(10000))

@@ -1,5 +1,5 @@
 import React from 'react'
-import { escapeRegExp } from '../../functions'
+import { escapeRegExp } from 'functions'
 import styled from 'styled-components'
 
 const StyledInput = styled.input<{

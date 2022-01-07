@@ -1,9 +1,9 @@
 import { ANALYTICS_URL } from '../../constants'
-import { ChainId } from '../../sdk'
+import { ChainId } from 'sdk'
 import ExternalLink from '../ExternalLink'
 import Polling from '../Polling'
 import { t } from '@lingui/macro'
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useLingui } from '@lingui/react'
 
 const Footer = () => {

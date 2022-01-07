@@ -1,4 +1,4 @@
-import { classNames, escapeRegExp } from '../../functions'
+import { classNames, escapeRegExp } from 'functions'
 
 import React from 'react'
 

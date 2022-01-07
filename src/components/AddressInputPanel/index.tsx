@@ -1,5 +1,5 @@
 import React, { FC, useCallback } from 'react'
-import useENS from '../../hooks/useENS'
+import useENS from 'hooks/useENS'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 
