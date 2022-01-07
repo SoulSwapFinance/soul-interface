@@ -3,7 +3,7 @@ import {
   poolsSummonerQuery,
 } from '../queries'
 
-import { ChainId } from '../../../sdk'
+import { ChainId } from 'sdk'
 import { GRAPH_HOST } from '../constants'
 import { request } from 'graphql-request'
 

@@ -6,17 +6,17 @@ import {
   Percent,
   TradeType,
   Trade,
-} from '../../sdk'
+} from 'sdk'
 import React, { useCallback, useMemo } from 'react'
 import TransactionConfirmationModal, {
   ConfirmationModalContent,
   TransactionErrorContent,
-} from '../../modals/TransactionConfirmationModal'
+} from 'modals/TransactionConfirmationModal'
 import SwapModalFooter from './SwapModalFooter'
 import SwapModalHeader from './SwapModalHeader'
 import { useLingui } from '@lingui/react'
 import { t } from '@lingui/macro'
-import { formatNumberScale } from '../../functions'
+import { formatNumberScale } from 'functions'
 
 /**
  * Returns true if the trade requires a confirmation of details before we can submit it

@@ -3,9 +3,9 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useLingui } from '@lingui/react'
 // import { t } from '@lingui/macro'
-import IfoArticles from '../../components/Ifo/IfoArticles'
+import IfoArticles from 'components/Ifo/IfoArticles'
 import IfoInfo from './IfoInfo'
-import Layout from '../../layouts/Ifo'
+import Layout from 'layouts/Ifo'
 
 function IFO() {
   const { i18n } = useLingui()

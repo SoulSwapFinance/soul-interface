@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 
-import { ZERO_ADDRESS, ATOMIC_SWAP_ADDRESS } from '../../../constants/addresses'
-import useAtomicSwap from '../hooks/useAtomicSwap'
+import { ZERO_ADDRESS, ATOMIC_SWAP_ADDRESS } from 'constants/addresses'
+import useAtomicSwap from 'hooks/useAtomicSwap'
 import AddToken from './AddToken'
 
 import {
@@ -14,7 +14,7 @@ import {
   Wrap,
   OverlayOpacity,
   CenterScreen,
-} from '../../../components/ReusableStyles'
+} from 'components/ReusableStyles'
 
 export const TradeInput = styled.div`
   display: flex;

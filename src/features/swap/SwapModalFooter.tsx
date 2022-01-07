@@ -1,12 +1,12 @@
-import { Currency, TradeType, Trade as V2Trade } from '../../sdk'
+import { Currency, TradeType, Trade as V2Trade } from 'sdk'
 import React, { ReactNode, useMemo } from 'react'
 
-import { ButtonError } from '../../components/Button'
+import { ButtonError } from 'components/Button'
 import { SwapCallbackError } from './styleds'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { warningSeverity } from '../../functions'
-import { useExpertModeManager } from '../../state/user/hooks'
+import { warningSeverity } from 'functions'
+import { useExpertModeManager } from 'state/user/hooks'
 
 export default function SwapModalFooter({
   trade,

@@ -1,11 +1,11 @@
 import React, { useCallback, useMemo } from 'react'
 
-import { Currency, Price, Trade, TradeType } from '../../sdk'
-import Typography from '../../components/Typography'
-import { classNames, computeRealizedLPFeePercent, formatNumberScale } from '../../functions'
+import { Currency, Price, Trade, TradeType } from 'sdk'
+import Typography from 'components/Typography'
+import { classNames, computeRealizedLPFeePercent, formatNumberScale } from 'functions'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import QuestionHelper from '../../components/QuestionHelper'
+import QuestionHelper from 'components/QuestionHelper'
 import FormattedPriceImpact from './FormattedPriceImpact'
 
 interface TradePriceProps {

@@ -1,7 +1,7 @@
-import { Currency, CurrencyAmount, Fraction, Percent } from '../../sdk'
+import { Currency, CurrencyAmount, Fraction, Percent } from 'sdk'
 
-import Button from '../../components/Button'
-import { Field } from '../../state/mint/actions'
+import Button from 'components/Button'
+import { Field } from 'state/mint/actions'
 import React from 'react'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'

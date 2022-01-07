@@ -1,7 +1,7 @@
 import { ONE_BIPS } from '../../constants'
-import { Percent } from '../../sdk'
+import { Percent } from 'sdk'
 import React from 'react'
-import { warningSeverity } from '../../functions/prices'
+import { warningSeverity } from 'functions/prices'
 
 const SEVERITY = {
   0: 'text-base',

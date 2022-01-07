@@ -1,11 +1,11 @@
-import { Wrap } from '../../components/ReusableStyles'
-import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
-import Container from '../../components/Container'
+import { Wrap } from 'components/ReusableStyles'
+import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
+import Container from 'components/Container'
 import Head from 'next/head'
 import React from 'react'
 
-import StablesList from '../../features/farm/StablesList'
-// import NavLink from '../../components/NavLink'
+import StablesList from 'features/farm/StablesList'
+// import NavLink from 'components/NavLink'
 
 const Stables = () => {
   return (

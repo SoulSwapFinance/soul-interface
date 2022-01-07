@@ -1,5 +1,4 @@
-import { ChainId } from '../../../sdk'
-// import { GRAPH_HOST } from '../constants'
+import { ChainId } from 'sdk'
 import { request } from 'graphql-request'
 
 const SPELL = {

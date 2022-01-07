@@ -1,6 +1,6 @@
 import { getEthPrice, getTokenPrices, getTokenSubset, getTokens } from './exchange'
 
-import { ChainId } from '../../../sdk'
+import { ChainId } from 'sdk'
 import { GRAPH_HOST } from '../constants'
 import { kashiPairsQuery } from '../queries/bentobox'
 import { request } from 'graphql-request'

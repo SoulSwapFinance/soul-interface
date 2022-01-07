@@ -1,17 +1,17 @@
-import { AutoRow, RowBetween } from '../../components/Row'
-import { Currency, Token } from '../../sdk'
+import { AutoRow, RowBetween } from 'components/Row'
+import { Currency, Token } from 'sdk'
 import React, { useState } from 'react'
 
-import { AutoColumn } from '../../components/Column'
-import Button from '../../components/Button'
-import CloseIcon from '../../components/CloseIcon'
-import CurrencyLogo from '../../components/CurrencyLogo'
-import ExternalLink from '../../components/ExternalLink'
-import Modal from '../../components/Modal'
-import { getExplorerLink } from '../../functions/explorer'
+import { AutoColumn } from 'components/Column'
+import Button from 'components/Button'
+import CloseIcon from 'components/CloseIcon'
+import CurrencyLogo from 'components/CurrencyLogo'
+import ExternalLink from 'components/ExternalLink'
+import Modal from 'components/Modal'
+import { getExplorerLink } from 'functions/explorer'
 import styled from 'styled-components'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
-import { useUnsupportedTokens } from '../../hooks/Tokens'
+import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { useUnsupportedTokens } from 'hooks/Tokens'
 
 const DetailsFooter = styled.div<{ show: boolean }>`
   padding-top: calc(16px + 2rem);

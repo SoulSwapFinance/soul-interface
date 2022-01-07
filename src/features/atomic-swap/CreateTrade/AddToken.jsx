@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { ethers } from 'ethers'
-import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
-import { ZERO_ADDRESS, ATOMIC_SWAP_ADDRESS } from '../../../constants/addresses'
-// import useApproveCallback from '../../../hooks/useApproveCallback'
-import { ButtonConfirmed, ButtonError } from '../../../components/Button'
-import useApproveContract from '../hooks/useApprove'
-import useAtomicSwap from '../hooks/useAtomicSwap'
+import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { ZERO_ADDRESS, ATOMIC_SWAP_ADDRESS } from 'constants/addresses'
+// import useApproveCallback from 'hooks/useApproveCallback'
+import { ButtonConfirmed, ButtonError } from 'components/Button'
+import useApproveContract from 'hooks/useApprove'
+import useAtomicSwap from 'hooks/useAtomicSwap'
 import styled, { keyframes } from 'styled-components'
-import { UserContainer, ExternalLink } from '../TradeItemStyles'
+import { UserContainer, ExternalLink } from 'TradeItemStyles'
 import { InputItem } from './InputItem'
 import {
   Wrap,
@@ -19,12 +19,12 @@ import {
   InputRow,
   OptionSelector,
   TokenImgTest,
-} from '../../../components/ReusableStyles'
-import { ApprovalState, useApproveCallback } from '../../../hooks'
-import { tryParseAmount } from '../../../functions'
-import { AutoRow, RowBetween } from '../../../components/Row'
-import Loader from '../../../components/Loader'
-import Web3Connect from '../../../components/Web3Connect'
+} from 'components/ReusableStyles'
+import { ApprovalState, useApproveCallback } from 'hooks'
+import { tryParseAmount } from 'functions'
+import { AutoRow, RowBetween } from 'components/Row'
+import Loader from 'components/Loader'
+import Web3Connect from 'components/Web3Connect'
 
 export const ListWrap = styled.div`
   align-items: center;

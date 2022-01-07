@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components'
 
 import { AlertTriangle } from 'react-feather'
 import Slider from 'rc-slider'
-import Typography from '../../components/Typography'
+import Typography from 'components/Typography'
 
 export const Wrapper = styled.div`
   position: relative;
