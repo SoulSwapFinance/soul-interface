@@ -1,10 +1,10 @@
 import { isAddress, namehash } from 'ethers/lib/utils'
 import { useENSRegistrarContract, useENSResolverContract } from './useContract'
 
-import { isZero } from 'functions'
+import { isZero } from '../functions'
 import useDebounce from './useDebounce'
 import { useMemo } from 'react'
-import { useSingleCallResult } from 'state/multicall/hooks'
+import { useSingleCallResult } from '../state/multicall/hooks'
 
 /**
  * Does a reverse lookup for an address to find its ENS name.

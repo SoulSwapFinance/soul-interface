@@ -1,4 +1,4 @@
-import { ChainId, ENCHANT_ADDRESS, Token, WETH9, WNATIVE } from 'sdk'
+import { ChainId, ENCHANT_ADDRESS, Token, WETH9, WNATIVE } from '../sdk'
 
 export const BSC: { [key: string]: Token } = {
   DAI: new Token(ChainId.BSC, '0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3', 18, 'DAI', 'Dai Stablecoin'), // Binance Pegged DAI

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { XIcon } from '@heroicons/react/solid'
-import { classNames } from 'functions'
+import { classNames } from '../../functions'
 
 const TYPE = {
   information: {

@@ -1,20 +1,20 @@
-import { CurrencyAmount, JSBI } from 'sdk'
+import { CurrencyAmount, JSBI } from '../../sdk'
 import { Chef } from './enum'
 import { SOUL } from '../../constants'
-import { NEVER_RELOAD, useSingleCallResult, useSingleContractMultipleData } from 'state/multicall/hooks'
+import { NEVER_RELOAD, useSingleCallResult, useSingleContractMultipleData } from '../../state/multicall/hooks'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   useSoulSummonerContract,
   useETHPairContract,
   useSoulFtmContract,
   useSoulVaultContract,
-} from 'hooks'
+} from '../../hooks'
 
 import { Contract } from '@ethersproject/contracts'
 import { Zero } from '@ethersproject/constants'
-import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import zip from 'lodash/zip'
-import { useToken } from 'hooks/Tokens'
+import { useToken } from '../../hooks/Tokens'
 const { default: axios } = require('axios')
 
 export function useUserInfo(farm, token) {

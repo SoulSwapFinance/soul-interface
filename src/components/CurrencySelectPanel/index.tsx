@@ -1,14 +1,14 @@
 import React, { useCallback, useState } from 'react'
 
 import { ChevronDownIcon } from '@heroicons/react/outline'
-import { Currency } from 'sdk'
+import { Currency } from '../../sdk'
 import CurrencyLogo from '../CurrencyLogo'
-import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
+import CurrencySearchModal from '../../modals/SearchModal/CurrencySearchModal'
 import Lottie from 'lottie-react'
-import selectCoinAnimation from 'animation/select-coin.json'
+import selectCoinAnimation from '../../animation/select-coin.json'
 import styled from 'styled-components'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useLingui } from '@lingui/react'
 
 const CurrencySelect = styled.button<{ selected: boolean }>`

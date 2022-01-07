@@ -18,9 +18,9 @@ import {
 import { getEthPrice, getPairs } from '../fetchers'
 import useSWR, { SWRConfiguration } from 'swr'
 
-import { ChainId } from 'sdk'
+import { ChainId } from '../../../sdk'
 import { ethPriceQuery } from '../queries'
-import { useActiveWeb3React } from 'hooks'
+import { useActiveWeb3React } from '../../../hooks'
 
 export function useExchange(variables = undefined, query = undefined, swrConfig: SWRConfiguration = undefined) {
   const { chainId } = useActiveWeb3React()

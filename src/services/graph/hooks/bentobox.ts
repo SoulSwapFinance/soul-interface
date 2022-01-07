@@ -1,9 +1,9 @@
 import { useEffect, useMemo } from 'react'
 import useSWR, { SWRConfiguration } from 'swr'
 
-import { ChainId } from 'sdk'
-// import { getKashiPairs } from 'fetchers/bentobox'
-import { useActiveWeb3React } from 'hooks'
+import { ChainId } from '../../../sdk'
+// import { getKashiPairs } from '../fetchers/bentobox'
+import { useActiveWeb3React } from '../../../hooks'
 
 export function useKashiPairs(variables = undefined, swrConfig: SWRConfiguration = undefined) {
   const { chainId } = useActiveWeb3React()

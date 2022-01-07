@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import { classNames } from 'functions'
+import { classNames } from '../../functions'
 
 export const Column: FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, className, ...rest }) => (
   <div className={classNames('flex flex-col justify-center', className)} {...rest}>

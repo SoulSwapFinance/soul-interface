@@ -7,10 +7,10 @@ import {
 import { useEffect, useMemo } from 'react'
 import useSWR, { SWRConfiguration } from 'swr'
 
-import { ChainId } from 'sdk'
-// import { Chef } from 'features/farm/enum'
+import { ChainId } from '../../../sdk'
+// import { Chef } from '../../../features/farm/enum'
 import concat from 'lodash/concat'
-import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import useActiveWeb3React from '../../../hooks/useActiveWeb3React'
 
 export * from './bentobox'
 export * from './blocks'

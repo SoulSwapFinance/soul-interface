@@ -12,16 +12,11 @@ import {
   ATOMIC_SWAP_ADDRESS,
   LOCKER_ADDRESS,
   SOUL_USDC_PAIR,
-  PRICE_HELPER_ADDRESS,
-  SUMMONER_HELPER_ADDRESS,
-  SOUL_CIRCLE_ADDRESS,
-  BOND_HELPER_ADDRESS
-
-} from 'constants/addresses'
+} from '../constants/addresses'
 import {
   ARGENT_WALLET_DETECTOR_ABI,
   ARGENT_WALLET_DETECTOR_MAINNET_ADDRESS,
-} from 'constants/abis/argent-wallet-detector'
+} from '../constants/abis/argent-wallet-detector'
 import {
   ChainId,
   REAPER_ADDRESS,
@@ -37,7 +32,7 @@ import {
   // SOULSWAP_SWAPPER_ADDRESS,
   TIMELOCK_ADDRESS,
   WNATIVE,
-} from 'sdk'
+} from '../sdk'
 import {
   COFFIN_BOX_ADDRESS,
   CHAINLINK_ORACLE_ADDRESS,
@@ -45,72 +40,67 @@ import {
   // SOUL_GUIDE_ADDRESS,
   SOULSWAP_TWAP_0_ORACLE_ADDRESS,
   SOULSWAP_TWAP_1_ORACLE_ADDRESS,
-} from 'constants/kashi'
+} from '../constants/kashi'
 import { MERKLE_DISTRIBUTOR_ADDRESS } from '../constants'
-import { MULTICALL_ABI, MULTICALL_NETWORKS } from 'constants/multicall'
-import ALCX_REWARDER_ABI from 'constants/abis/alcx-rewarder.json'
-import CLONE_REWARDER_ABI from 'constants/abis/clone-rewarder.json'
-import ARCHER_ROUTER_ABI from 'constants/abis/archer-router.json'
-import BASE_SWAPPER_ABI from 'constants/abis/swapper.json'
-import ANYSWAP_ERC20_ABI from 'constants/abis/anyswap_erc20.json'
-import BENTOBOX_ABI from 'constants/abis/bentobox.json'
-import CHAINLINK_ORACLE_ABI from 'constants/abis/chainlink-oracle.json'
-import COMPLEX_REWARDER_ABI from 'constants/abis/complex-rewarder.json'
+import { MULTICALL_ABI, MULTICALL_NETWORKS } from '../constants/multicall'
+import ALCX_REWARDER_ABI from '../constants/abis/alcx-rewarder.json'
+import CLONE_REWARDER_ABI from '../constants/abis/clone-rewarder.json'
+import ARCHER_ROUTER_ABI from '../constants/abis/archer-router.json'
+import BASE_SWAPPER_ABI from '../constants/abis/swapper.json'
+import ANYSWAP_ERC20_ABI from '../constants/abis/anyswap_erc20.json'
+import BENTOBOX_ABI from '../constants/abis/bentobox.json'
+import CHAINLINK_ORACLE_ABI from '../constants/abis/chainlink-oracle.json'
+import COMPLEX_REWARDER_ABI from '../constants/abis/complex-rewarder.json'
 import { Contract } from '@ethersproject/contracts'
-import DASHBOARD_ABI from 'constants/abis/dashboard.json'
-import EIP_2612_ABI from 'constants/abis/eip-2612.json'
-import ENS_ABI from 'constants/abis/ens-registrar.json'
-import ENS_PUBLIC_RESOLVER_ABI from 'constants/abis/ens-public-resolver.json'
-import ERC20_ABI from 'constants/abis/erc20.json'
-import { ERC20_BYTES32_ABI } from 'constants/abis/erc20'
-import FACTORY_ABI from 'constants/abis/factory.json'
-// import IUniswapV2PairABI from 'constants/abis/uniswap-v2-pair.json'
-import ISoulSwapPairABI from 'constants/abis/soulswap/ISoulSwapPair.json'
-import KASHIPAIR_ABI from 'constants/abis/kashipair.json'
-import MAKER_ABI from 'constants/abis/maker.json'
+import DASHBOARD_ABI from '../constants/abis/dashboard.json'
+import EIP_2612_ABI from '../constants/abis/eip-2612.json'
+import ENS_ABI from '../constants/abis/ens-registrar.json'
+import ENS_PUBLIC_RESOLVER_ABI from '../constants/abis/ens-public-resolver.json'
+import ERC20_ABI from '../constants/abis/erc20.json'
+import { ERC20_BYTES32_ABI } from '../constants/abis/erc20'
+import FACTORY_ABI from '../constants/abis/factory.json'
+// import IUniswapV2PairABI from '../constants/abis/uniswap-v2-pair.json'
+import ISoulSwapPairABI from '../constants/abis/soulswap/ISoulSwapPair.json'
+import KASHIPAIR_ABI from '../constants/abis/kashipair.json'
+import MAKER_ABI from '../constants/abis/maker.json'
 
 // soul
-import SOUL_SCARAB_ABI from 'constants/abis/soulswap/scarab.json'
-import SOUL_SAFE_ABI from 'constants/abis/soulswap/safe.json'
-import SOUL_GUIDE_ABI from 'constants/abis/soul-guide.json' // TODO: update abi
-import SOUL_SUMMONER_ABI from 'constants/abis/soulswap/soulsummoner.json' // 28 JUL
-import SOULVAULT_ABI from 'constants/abis/soulswap/soulvault.json' // 31 JUL
-// import SPELL_ABI from 'constants/abis/soulswap/spell.json' // 28 JUL
-import ENCHANT_ABI from 'constants/abis/soulswap/enchant.json' // 30 OCT
-import ENCHANT_HELPER_ABI from 'constants/abis/soulswap/enchant-helper.json' // 30 OCT
-import SOUL_ABI from 'constants/abis/soulswap/soulpower.json' // 28 JUL
-import SEANCE_ABI from 'constants/abis/soulswap/seance.json' // 28 JUL
-import ATOMIC_SWAP_ABI from 'constants/abis/soulswap/atomic-swap.json'
-import LAUNCHPAD_ABI from 'constants/abis/soulswap/launchpad.json'
-import PRICE_HELPER_ABI from 'constants/abis/pricehelper.json' 
-import SOUL_CIRCLE_ABI from 'constants/abis/soulcircle.json' 
-import SUMMONER_HELPER_ABI from 'constants/abis/helper.json' 
-import BOND_HELPER_ABI from 'constants/abis/bondhelper.json' 
-import SOUL_BOND_ABI from 'constants/abis/soulbond.json' 
+import SOUL_SCARAB_ABI from '../constants/abis/soulswap/scarab.json'
+import SOUL_SAFE_ABI from '../constants/abis/soulswap/safe.json'
+import SOUL_GUIDE_ABI from '../constants/abis/soul-guide.json' // TODO: update abi
+import SOUL_SUMMONER_ABI from '../constants/abis/soulswap/soulsummoner.json' // 28 JUL
+import SOULVAULT_ABI from '../constants/abis/soulswap/soulvault.json' // 31 JUL
+// import SPELL_ABI from '../constants/abis/soulswap/spell.json' // 28 JUL
+import ENCHANT_ABI from '../constants/abis/soulswap/enchant.json' // 30 OCT
+import ENCHANT_HELPER_ABI from '../constants/abis/soulswap/enchant-helper.json' // 30 OCT
+import SOUL_ABI from '../constants/abis/soulswap/soulpower.json' // 28 JUL
+import SEANCE_ABI from '../constants/abis/soulswap/seance.json' // 28 JUL
+import ATOMIC_SWAP_ABI from '../constants/abis/soulswap/atomic-swap.json'
+import LAUNCHPAD_ABI from '../constants/abis/soulswap/launchpad.json'
 
 // bridge
-import anyswapEthOperaBridge_ABI from 'constants/abis/soulswap/bridge/anyswapEthOperaBridge.json'
+import anyswapEthOperaBridge_ABI from '../constants/abis/soulswap/bridge/anyswapEthOperaBridge.json'
 
 // unused
-import MEOWSHI_ABI from 'constants/abis/meowshi.json'
-import MERKLE_DISTRIBUTOR_ABI from 'constants/abis/merkle-distributor.json'
-import MULTICALL2_ABI from 'constants/abis/multicall2.json'
-import PENDING_ABI from 'constants/abis/pending.json'
-import ROUTER_ABI from 'constants/abis/router.json'
-import SAAVE_ABI from 'constants/abis/saave.json'
+import MEOWSHI_ABI from '../constants/abis/meowshi.json'
+import MERKLE_DISTRIBUTOR_ABI from '../constants/abis/merkle-distributor.json'
+import MULTICALL2_ABI from '../constants/abis/multicall2.json'
+import PENDING_ABI from '../constants/abis/pending.json'
+import ROUTER_ABI from '../constants/abis/router.json'
+import SAAVE_ABI from '../constants/abis/saave.json'
 import SUSHIROLL_ABI from '@sushiswap/core/abi/SushiRoll.json'
-// import SOULSWAP_MULTISWAPPER_ABI from 'constants/abis/sushiswapmultiswapper.json'
-import SOULSWAP_TWAP_ORACLE_ABI from 'constants/abis/sushiswap-slp-oracle.json'
-import TIMELOCK_ABI from 'constants/abis/timelock.json'
+// import SOULSWAP_MULTISWAPPER_ABI from '../constants/abis/sushiswapmultiswapper.json'
+import SOULSWAP_TWAP_ORACLE_ABI from '../constants/abis/sushiswap-slp-oracle.json'
+import TIMELOCK_ABI from '../constants/abis/timelock.json'
 
-import LOCKER_ABI from 'constants/abis/locker.json'
+import LOCKER_ABI from '../constants/abis/locker.json'
 
-import WETH9_ABI from 'constants/abis/weth.json'
-import ZAPPER_ABI from 'constants/abis/zapper.json'
-import LIMIT_ORDER_ABI from 'constants/abis/limit-order.json'
-import LIMIT_ORDER_HELPER_ABI from 'constants/abis/limit-order-helper.json'
+import WETH9_ABI from '../constants/abis/weth.json'
+import ZAPPER_ABI from '../constants/abis/zapper.json'
+import LIMIT_ORDER_ABI from '../constants/abis/limit-order.json'
+import LIMIT_ORDER_HELPER_ABI from '../constants/abis/limit-order-helper.json'
 
-import { getContract } from 'functions/contract'
+import { getContract } from '../functions/contract'
 import { useActiveWeb3React } from './useActiveWeb3React'
 import { useMemo } from 'react'
 import { getVerifyingContract } from 'limitorderv2-sdk'
@@ -222,11 +212,6 @@ export function useETHPairContract(withSignerIfPossible?: boolean): Contract | n
   return useContract(chainId && ETH_USD_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
 }
 
-export function usePriceHelperContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && PRICE_HELPER_ADDRESS, PRICE_HELPER_ABI, withSignerIfPossible)
-}
-
 export function useScarabContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SCARAB_ADDRESS[chainId], SOUL_SCARAB_ABI, withSignerIfPossible)
@@ -297,11 +282,6 @@ export function useFactoryContract(): Contract | null {
   return useContract(chainId && FACTORY_ADDRESS[chainId], FACTORY_ABI, false)
 }
 
-export function useCircleStakingContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_CIRCLE_ADDRESS[chainId], SOUL_CIRCLE_ABI, withSignerIfPossible)
-}
-
 export function useLockerContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && LOCKER_ADDRESS[chainId], LOCKER_ABI, withSignerIfPossible)
@@ -319,11 +299,6 @@ export function useRouterContract(useArcher = false, withSignerIfPossible?: bool
   const abi = useArcher ? ARCHER_ROUTER_ABI : ROUTER_ABI
 
   return useContract(address, abi, withSignerIfPossible)
-}
-
-export function useBondHelperContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && BOND_HELPER_ADDRESS, BOND_HELPER_ABI, withSignerIfPossible)
 }
 
 export function useEnchantmentContract(withSignerIfPossible?: boolean): Contract | null {
@@ -356,18 +331,8 @@ export function useKashiPairContract(withSignerIfPossible?: boolean): Contract |
   return useContract(chainId && UNDERWORLD_ADDRESS[chainId], KASHIPAIR_ABI, withSignerIfPossible)
 }
 
-export function useSoulBondContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && '0xEdaECfc744F3BDeAF6556AEEbfcDedd79437a01F', SOUL_BOND_ABI, withSignerIfPossible)
-}
-
 export function useKashiPairCloneContract(address: string, withSignerIfPossible?: boolean): Contract | null {
   return useContract(address, KASHIPAIR_ABI, withSignerIfPossible)
-}
-
-export function useHelperContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SUMMONER_HELPER_ADDRESS[chainId], SUMMONER_HELPER_ABI, withSignerIfPossible)
 }
 
 // export function useSoulSwapSwapper(): Contract | null {

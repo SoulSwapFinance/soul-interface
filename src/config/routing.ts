@@ -36,9 +36,9 @@ import {
     USDT,
     UST,
     WBTC,
-  } from 'constants/tokens'
+  } from '../constants/tokens'
   // a list of tokens by chain
-  import { ChainId, Currency, Token, WNATIVE } from 'sdk'
+  import { ChainId, Currency, Token, WNATIVE } from '../sdk'
   
   // import { SupportedChainId } from './chains'
   

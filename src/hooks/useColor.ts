@@ -1,10 +1,10 @@
-import { ChainId, Token } from 'sdk'
+import { ChainId, Token } from '../sdk'
 import { useLayoutEffect, useState } from 'react'
 
 import Vibrant from 'node-vibrant'
 import { hex } from 'wcag-contrast'
 import { shade } from 'polished'
-import { uriToHttp } from 'functions/convert'
+import { uriToHttp } from '../functions/convert'
 
 async function getColorFromToken(token: Token): Promise<string | null> {
   if (token.chainId === ChainId.FANTOM && token.address === '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E') { // dai

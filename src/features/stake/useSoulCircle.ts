@@ -1,8 +1,8 @@
 import { useCallback } from 'react'
 import { ethers, BigNumber } from 'ethers'
-// import { formatNumber } from 'functions'
+// import { formatNumber } from '../../functions'
 
-import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 
 import {
   useHelperContract,
@@ -10,7 +10,7 @@ import {
   useCircleStakingContract,
   usePairContract,
   useTokenContract,
-} from 'hooks/useContract'
+} from '../farm/hooks/useContract'
 
 function useSoulCircle() {
   const { account, chainId } = useActiveWeb3React()

@@ -1,4 +1,4 @@
-import { ChainId } from 'sdk'
+import { ChainId } from '../sdk'
 
 const Mainnet = '/images/networks/mainnet-network.jpg'
 const Binance = 'images/networks/bsc.png'

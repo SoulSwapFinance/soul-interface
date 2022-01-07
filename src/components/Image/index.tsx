@@ -1,5 +1,5 @@
 import NextImage from 'next/image'
-import { cloudinaryLoader } from 'functions/cloudinary'
+import { cloudinaryLoader } from '../../functions/cloudinary'
 
 // Cloudflare Loader
 const normalize = (src) => {

@@ -1,16 +1,16 @@
 
 import dynamic from 'next/dynamic'
-import { ChainId, Currency, FACTORY_ADDRESS, Token, WNATIVE } from 'sdk'
-import useDexCandles from 'hooks/useDexCandles'
+import { ChainId, Currency, FACTORY_ADDRESS, Token, WNATIVE } from '../../sdk'
+import useDexCandles from '../../hooks/useDexCandles'
 import { CandlePeriod, NumericalCandlestickDatum } from './types/Candle'
 import React, { useEffect, useState } from 'react'
 import { RowFixed } from '../Row'
 import CurrencyLogo from '../CurrencyLogo'
 import NavLink from '../NavLink'
-import { classNames } from 'functions'
+import { classNames } from '../../functions'
 import Lottie from 'lottie-react'
-// import soulLoading from 'animation/solarbeam-loading.json'
-import { computePairAddress } from 'sdk'
+// import soulLoading from '../../animation/solarbeam-loading.json'
+import { computePairAddress } from '../../sdk'
 import { AutoColumn } from '../Column'
 const KChart = dynamic(() => import('kaktana-react-lightweight-charts'), { ssr: false })
 

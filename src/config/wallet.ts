@@ -1,9 +1,9 @@
 import { AbstractConnector } from '@web3-react/abstract-connector'
-import { ChainId } from 'sdk'
+import { ChainId } from '../sdk'
 import { InjectedConnector } from '@web3-react/injected-connector'
-import { NetworkConnector } from 'entities/NetworkConnector'
+import { NetworkConnector } from '../entities/NetworkConnector'
 import RPC from './rpc'
-import { binance, clover, walletconnect } from 'connectors'
+import { binance, clover, walletconnect } from '../connectors'
 export const network = new NetworkConnector({
   defaultChainId: 250,
   urls: RPC,

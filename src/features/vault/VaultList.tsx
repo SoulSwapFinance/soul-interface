@@ -1,4 +1,4 @@
-import Dots from 'components/Dots'
+import Dots from '../../components/Dots'
 import React from 'react'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'

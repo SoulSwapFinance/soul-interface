@@ -1,10 +1,10 @@
 import { BigNumber } from '@ethersproject/bignumber'
-import { WNATIVE } from 'sdk'
+import { WNATIVE } from '../sdk'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from './useActiveWeb3React'
 import { useBentoBoxContract } from './useContract'
 import { useCallback } from 'react'
-import { useTransactionAdder } from 'state/transactions/hooks'
+import { useTransactionAdder } from '../state/transactions/hooks'
 
 function useBentoBox() {
   const { account, chainId } = useActiveWeb3React()

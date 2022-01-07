@@ -1,9 +1,9 @@
-import { ChainId, Currency, WNATIVE } from 'sdk'
+import { ChainId, Currency, WNATIVE } from '../../sdk'
 import React, { FunctionComponent, useMemo } from 'react'
 
 import Logo from '../Logo'
-import { WrappedTokenInfo } from 'state/lists/wrappedTokenInfo'
-import useHttpLocations from 'hooks/useHttpLocations'
+import { WrappedTokenInfo } from '../../state/lists/wrappedTokenInfo'
+import useHttpLocations from '../../hooks/useHttpLocations'
 
 export const getTokenLogoURL = (address: string, chainId: ChainId) => {
   let imageURL
