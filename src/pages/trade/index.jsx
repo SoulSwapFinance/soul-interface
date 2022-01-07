@@ -1,12 +1,12 @@
-import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
-import Container from '../../components/Container'
+import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
+import Container from 'components/Container'
 import Head from 'next/head'
 import React from 'react'
 
-import { CreateTrade } from '../../features/atomic-swap/CreateTrade'
-import { TradeItemList } from '../../features/atomic-swap/TradeItemList'
-import { Wrap, Illustration } from '../../features/atomic-swap/ReusableStyles'
-import Page from '../../features/atomic-swap/Page'
+import { CreateTrade } from 'features/atomic-swap/CreateTrade'
+import { TradeItemList } from 'features/atomic-swap/TradeItemList'
+import { Wrap, Illustration } from 'features/atomic-swap/ReusableStyles'
+import Page from 'features/atomic-swap/Page'
 
 const AtomicSwap = () => {
   return (

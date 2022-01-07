@@ -1,13 +1,13 @@
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 
-import Container from '../../components/Container'
-// import Dots from '../../components/Dots'
+import Container from 'components/Container'
+// import Dots from 'components/Dots'
 import Head from 'next/head'
-// import Typography from '../../components/Typography'
+// import Typography from 'components/Typography'
 // import capitalize from 'lodash/capitalize'
-// import { classNames } from '../../functions'
-// import { getChainsStatus } from '../../services/covalent/fetchers'
-// import { useChainsStatus } from '../../services/covalent/hooks'
+// import { classNames } from 'functions'
+// import { getChainsStatus } from 'services/covalent/fetchers'
+// import { useChainsStatus } from 'services/covalent/hooks'
 // import { useState } from 'react'
 
 export default function Status({ initialData }) {

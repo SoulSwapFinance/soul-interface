@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 
 import { BigNumber } from '@ethersproject/bignumber'
-import Fraction from '../entities/Fraction'
+import Fraction from 'entities/Fraction'
 import { POOL_DENY } from '../constants'
 import orderBy from 'lodash/orderBy'
 import range from 'lodash/range'

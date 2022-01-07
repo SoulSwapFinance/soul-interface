@@ -1,4 +1,4 @@
-import { Chef, PairType } from '../features/summoner/enum'
+import { Chef, PairType } from 'features/summoner/enum'
 import {
   useAverageBlockTime,
   useBlock,
@@ -13,14 +13,14 @@ import {
 //   useStakePrice,
   useSoulPairs,
   useSoulPrice,
-} from '../services/graph'
+} from 'services/graph'
 
-import { ChainId } from '../sdk'
+import { ChainId } from 'sdk'
 import { getAddress } from '@ethersproject/address'
 import useActiveWeb3React from './useActiveWeb3React'
 import { useMemo } from 'react'
-import { usePositions } from '../features/summoner/hooks'
-import { aprToApy } from '../functions/convert'
+import { usePositions } from 'features/summoner/hooks'
+import { aprToApy } from 'functions/convert'
 
 export default function useFarmRewards() {
   const { chainId } = useActiveWeb3React()

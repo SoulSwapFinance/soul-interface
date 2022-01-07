@@ -1,8 +1,5 @@
-// import { AbstractCurrency } from './AbstractCurrency'
 import { ChainId } from '../enums'
 import { MultiCurrency } from './MultiCurrency'
-// import invariant from 'tiny-invariant'
-// import { validateAndParseAddress } from '../functions/validateAndParseAddress'
 
 export declare class MultiToken extends MultiCurrency {
   readonly chainId: ChainId;

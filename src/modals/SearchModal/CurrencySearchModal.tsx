@@ -1,4 +1,4 @@
-import { Currency, Token } from '../../sdk'
+import { Currency, Token } from 'sdk'
 import React, { useCallback, useEffect, useState } from 'react'
 
 import CurrencyModalView from './CurrencyModalView'
@@ -6,11 +6,11 @@ import { CurrencySearch } from './CurrencySearch'
 import ImportList from './ImportList'
 import { ImportToken } from './ImportToken'
 import Manage from './Manage'
-import Modal from '../../components/Modal'
+import Modal from 'components/Modal'
 import { TokenList } from '@uniswap/token-lists'
-import { WrappedTokenInfo } from '../../state/lists/wrappedTokenInfo'
-import useLast from '../../hooks/useLast'
-import usePrevious from '../../hooks/usePrevious'
+import { WrappedTokenInfo } from 'state/lists/wrappedTokenInfo'
+import useLast from 'hooks/useLast'
+import usePrevious from 'hooks/usePrevious'
 
 interface CurrencySearchModalProps {
   isOpen: boolean

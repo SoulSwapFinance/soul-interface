@@ -1,12 +1,12 @@
-import { ChainId, Currency, CurrencyAmount, JSBI, Token } from '../../sdk'
+import { ChainId, Currency, CurrencyAmount, JSBI, Token } from 'sdk'
 import { MERKLE_ROOT, SOUL } from './../../constants/index'
 import { getAddress, isAddress } from '@ethersproject/address'
 import { useEffect, useState } from 'react'
 
 import { TransactionResponse } from '@ethersproject/providers'
-import { calculateGasMargin } from '../../functions/trade'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
-import { useMerkleDistributorContract } from '../../hooks/useContract'
+import { calculateGasMargin } from 'functions/trade'
+import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { useMerkleDistributorContract } from 'hooks/useContract'
 import { useSingleCallResult } from '../multicall/hooks'
 import { useTransactionAdder } from '../transactions/hooks'
 

@@ -1,10 +1,10 @@
-import { ChainId, Currency, NATIVE, WNATIVE } from '../sdk'
+import { ChainId, Currency, NATIVE, WNATIVE } from 'sdk'
 
-import { tryParseAmount } from '../functions/parse'
+import { tryParseAmount } from 'functions/parse'
 import { useActiveWeb3React } from './useActiveWeb3React'
-import { useCurrencyBalance } from '../state/wallet/hooks'
+import { useCurrencyBalance } from 'state/wallet/hooks'
 import { useMemo } from 'react'
-import { useTransactionAdder } from '../state/transactions/hooks'
+import { useTransactionAdder } from 'state/transactions/hooks'
 import { useWETH9Contract } from './useContract'
 
 export enum WrapType {

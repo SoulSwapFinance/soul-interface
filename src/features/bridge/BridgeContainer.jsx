@@ -1,12 +1,12 @@
-import { useActiveWeb3React } from '../../hooks'
+import { useActiveWeb3React } from 'hooks'
 import { ethers } from 'ethers'
 
-// import { ChainId } from '../../sdk'
+// import { ChainId } from 'sdk'
 import { useState, useEffect } from 'react'
 
 import useApproveContract from './useApprove'
 import useBridge from './useBridge'
-import { Heading, Text, ClickableText, Wrap, Button, Input } from '../../components/ReusableStyles'
+import { Heading, Text, ClickableText, Wrap, Button, Input } from 'components/ReusableStyles'
 
 export default function BridgeContainer() {
   const { chainId, account } = useActiveWeb3React()

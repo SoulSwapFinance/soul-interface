@@ -1,13 +1,13 @@
-// import { injected } from '../../config/wallet'
-// import SUPPORTED_WALLETS from '../../config'
+// import { injected } from 'config/wallet'
+// import SUPPORTED_WALLETS from 'config'
 import { AbstractConnector } from '@web3-react/abstract-connector'
-import Dots from '../../components/Dots'
-import Loader from '../../components/Loader'
+import Dots from 'components/Dots'
+import Loader from 'components/Loader'
 import Option from './Option'
 import React from 'react'
 import { SUPPORTED_WALLETS } from '../../constants'
 import { darken } from 'polished'
-import { injected } from '../../connectors'
+import { injected } from 'connectors'
 import styled from 'styled-components'
 
 const PendingSection = styled.div`

@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react'
 
-import { ImportToken } from '../SearchModal/ImportToken'
-import Modal from '../../components/Modal'
-import { Token } from '../../sdk'
+import { ImportToken } from 'SearchModal/ImportToken'
+import Modal from 'components/Modal'
+import { Token } from 'sdk'
 
 export default function TokenWarningModal({
   isOpen,

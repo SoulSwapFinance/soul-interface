@@ -1,12 +1,12 @@
-import { Currency, CurrencyAmount, JSBI, Percent, Token, TradeType, Trade as V2Trade } from '../sdk'
-import { DAI, SOUL, USDC } from '../constants/tokens'
+import { Currency, CurrencyAmount, JSBI, Percent, Token, TradeType, Trade as V2Trade } from 'sdk'
+import { DAI, SOUL, USDC } from 'constants/tokens'
 import { useMemo, useState } from 'react'
 
 import { splitSignature } from 'ethers/lib/utils'
 import { useActiveWeb3React } from './useActiveWeb3React'
 import { useEIP2612Contract } from './useContract'
 import useIsArgentWallet from './useIsArgentWallet'
-import { useSingleCallResult } from '../state/multicall/hooks'
+import { useSingleCallResult } from 'state/multicall/hooks'
 import useTransactionDeadline from './useTransactionDeadline'
 
 enum PermitType {

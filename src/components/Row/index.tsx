@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import { classNames } from '../../functions'
+import { classNames } from 'functions'
 import styled from 'styled-components'
 
 interface RowProps {
