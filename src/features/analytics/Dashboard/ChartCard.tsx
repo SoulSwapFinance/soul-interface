@@ -1,4 +1,4 @@
-import { classNames, formatNumber, formatPercent } from '../../../functions'
+import { classNames, formatNumber, formatPercent } from 'functions'
 import {
   useCustomDayBlock,
   useDayData,
@@ -6,11 +6,11 @@ import {
   useFactory,
   useFarms,
   useOneDayBlock,
-} from '../../../services/graph'
+} from 'services/graph'
 import { useMemo, useState } from 'react'
 
 import ColoredNumber from '../ColoredNumber'
-import LineGraph from '../../../components/LineGraph'
+import LineGraph from 'components/LineGraph'
 
 interface ChartCardProps {
   type: 'liquidity' | 'volume'

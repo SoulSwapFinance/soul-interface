@@ -1,5 +1,5 @@
-import { ADDITIONAL_BASES, BASES_TO_CHECK_TRADES_AGAINST, CUSTOM_BASES } from '../constants/routing'
-import { Currency, Token } from '../sdk'
+import { ADDITIONAL_BASES, BASES_TO_CHECK_TRADES_AGAINST, CUSTOM_BASES } from 'constants/routing'
+import { Currency, Token } from 'sdk'
 
 import flatMap from 'lodash/flatMap'
 import { useActiveWeb3React } from './useActiveWeb3React'

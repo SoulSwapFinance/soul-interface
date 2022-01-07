@@ -2,7 +2,7 @@ import { useBentoBoxContract } from './useContract'
 import { useEffect, useState } from 'react'
 import { ENCHANT } from '../constants'
 import { BigNumber } from 'ethers'
-import { ChainId } from '../sdk'
+import { ChainId } from 'sdk'
 
 export default function useMeowshiPerSpell() {
   const bentoboxContract = useBentoBoxContract()

@@ -1,11 +1,11 @@
-import { ChainId } from '../sdk'
-import LPToken from '../types/LPToken'
+import { ChainId } from 'sdk'
+import LPToken from 'types/LPToken'
 import ReactGA from 'react-ga'
 import { ethers } from 'ethers'
 import { signERC2612Permit } from 'eth-permit'
-import { useActiveWeb3React } from '../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
 import { useCallback } from 'react'
-import { useSushiRollContract } from '../hooks/useContract'
+import { useSushiRollContract } from 'hooks/useContract'
 
 const useSushiRoll = (version: 'v1' | 'v2' = 'v2') => {
   const { chainId, library, account } = useActiveWeb3React()

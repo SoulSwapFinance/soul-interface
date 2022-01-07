@@ -1,10 +1,10 @@
 import _ from 'lodash'
 import React from 'react'
-import { formatNumber, formatNumberScale, formatPercent } from '../../../functions'
-import Table from '../../../components/Table'
-import ColoredNumber from '../../../features/analytics/ColoredNumber'
-import DoubleCurrencyLogo from '../../../components/DoubleLogo'
-import { useCurrency } from '../../../hooks/Tokens'
+import { formatNumber, formatNumberScale, formatPercent } from 'functions'
+import Table from 'components/Table'
+import ColoredNumber from 'features/analytics/ColoredNumber'
+import DoubleCurrencyLogo from 'components/DoubleLogo'
+import { useCurrency } from 'hooks/Tokens'
 
 interface PairListProps {
   pairs: {

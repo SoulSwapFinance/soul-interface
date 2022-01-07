@@ -1,5 +1,5 @@
 import { ChainId } from '..'
-import { NETWORK_ICON, NETWORK_LABEL } from '../../constants/networks'
+import { NETWORK_ICON, NETWORK_LABEL } from 'constants/networks'
 
 export type Chain = {
   id: ChainId

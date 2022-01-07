@@ -1,18 +1,18 @@
-import { ChainId, computePairAddress, Currency, CurrencyAmount, Pair, Token } from '../sdk'
+import { ChainId, computePairAddress, Currency, CurrencyAmount, Pair, Token } from 'sdk'
 
-import ISoulSwapPair from '../constants/abis/soulswap/ISoulSwapPair.json'
+import ISoulSwapPair from 'constants/abis/soulswap/ISoulSwapPair.json'
 import { Interface } from '@ethersproject/abi'
 import { useContext, useMemo } from 'react'
-import { useMultipleContractSingleData, useSingleCallResult } from '../state/multicall/hooks'
+import { useMultipleContractSingleData, useSingleCallResult } from 'state/multicall/hooks'
 import { SOUL_ADDRESS, FACTORY_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS } from '../constants'
-import { useActiveWeb3React } from '../hooks/useActiveWeb3React'
-import { PriceContext } from '../contexts/priceContext'
-import { POOLS, TokenInfo } from '../constants/farms'
+import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { PriceContext } from 'contexts/priceContext'
+import { POOLS, TokenInfo } from 'constants/farms'
 import { concat } from 'lodash'
-import { VAULTS } from '../constants/vaults'
-import { usePriceHelperContract } from '../features/bond/hooks/useContract'
-import { formatCurrency } from '../modals/TokenStatsModal'
-import farm from '../pages/farm'
+import { VAULTS } from 'constants/vaults'
+import { usePriceHelperContract } from 'hooks/useContract'
+import { formatCurrency } from 'modals/TokenStatsModal'
+import farm from 'pages/farm'
 
 const PAIR_INTERFACE = new Interface(ISoulSwapPair)
 

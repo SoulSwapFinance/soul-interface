@@ -1,4 +1,4 @@
-import { BigintIsh, Currency, CurrencyAmount, JSBI } from '../sdk'
+import { BigintIsh, Currency, CurrencyAmount, JSBI } from 'sdk'
 
 import { Interface } from '@ethersproject/abi'
 

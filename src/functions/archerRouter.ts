@@ -8,7 +8,7 @@ import {
   TradeOptions,
   TradeOptionsDeadline,
   TradeType,
-} from '../sdk'
+} from 'sdk'
 
 import { getAddress } from '@ethersproject/address'
 import invariant from 'tiny-invariant'

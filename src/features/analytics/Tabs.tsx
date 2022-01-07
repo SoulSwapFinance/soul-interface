@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { classNames } from '../../functions'
+import { classNames } from 'functions'
 import { useRouter } from 'next/router'
 
 export default function PairTabs({ tabs }: { tabs: any[] }): JSX.Element {

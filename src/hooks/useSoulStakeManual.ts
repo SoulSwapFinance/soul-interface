@@ -1,8 +1,8 @@
-import { Currency, CurrencyAmount, Token } from '../sdk'
+import { Currency, CurrencyAmount, Token } from 'sdk'
 
 import { useCallback } from 'react'
-import { useSoulSummonerContract } from '../hooks/useContract' // Not using `useSushiBarContract` to enter staking
-import { useTransactionAdder } from '../state/transactions/hooks'
+import { useSoulSummonerContract } from 'hooks/useContract' // Not using `useSushiBarContract` to enter staking
+import { useTransactionAdder } from 'state/transactions/hooks'
 
 const useSoulStakeManual = () => {
   const addTransaction = useTransactionAdder()
