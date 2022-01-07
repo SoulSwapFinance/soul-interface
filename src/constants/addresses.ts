@@ -63,7 +63,7 @@ export const LOCKER_ADDRESS: AddressMap = {
 export const CLAIM_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x209E5933f28D62ED45288cd939b64187DBC018c8', // 29 NOV
+  [ChainId.FANTOM]: '0xA121b64fd62a99869767650879C5bEc776415a45', // 29 NOV
   [ChainId.FANTOM_TESTNET]: '',
 }
 
@@ -97,7 +97,7 @@ export const ZAPPER_ADDRESS: AddressMap = {
 // TODO: specify merkle distributor for mainnet
 export const MERKLE_DISTRIBUTOR_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '0xcBE6B83e77cdc011Cc18F6f0Df8444E5783ed982', // TODO: UPDATE
-  [ChainId.FANTOM]: '0x209E5933f28D62ED45288cd939b64187DBC018c8', // JAN 5 2022
+  [ChainId.FANTOM]: '0xA121b64fd62a99869767650879C5bEc776415a45', // JAN 5 2022
   // [ChainId.ROPSTEN]: '0x84d1f7202e0e7dac211617017ca72a2cb5e2b955',
 }
 
