@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { XIcon } from '@heroicons/react/outline'
-import useToggle from 'hooks/useToggle'
+import useToggle from '../../hooks/useToggle'
 
 const FarmBanner: FC = () => {
   const [state, toggle] = useToggle();

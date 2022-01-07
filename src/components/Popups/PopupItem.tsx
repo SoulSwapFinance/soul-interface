@@ -1,11 +1,11 @@
 import { useCallback, useEffect } from 'react'
 
-import { PopupContent } from 'state/application/actions'
+import { PopupContent } from '../../state/application/actions'
 import TransactionPopup from './TransactionPopup'
 import { XIcon } from '@heroicons/react/outline'
 import { animated, useSpring } from 'react-spring'
 import styled from 'styled-components'
-import { useRemovePopup } from 'state/application/hooks'
+import { useRemovePopup } from '../../state/application/hooks'
 
 export const Popup = styled.div`
   display: inline-block;

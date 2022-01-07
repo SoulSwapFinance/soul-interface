@@ -1,11 +1,11 @@
-import { Currency } from 'sdk'
-import Button from 'components/Button'
-import { COMMON_BASES } from 'constants/routing'
-import CurrencyLogo from 'components/CurrencyLogo'
-import QuestionHelper from 'components/QuestionHelper'
+import { Currency } from '../../sdk'
+import Button from '../../components/Button'
+import { COMMON_BASES } from '../../constants/routing'
+import CurrencyLogo from '../../components/CurrencyLogo'
+import QuestionHelper from '../../components/QuestionHelper'
 import React from 'react'
-import Typography from 'components/Typography'
-import { currencyId } from 'functions'
+import Typography from '../../components/Typography'
+import { currencyId } from '../../functions'
 
 export default function CommonBases({
   chainId,

@@ -9,21 +9,21 @@ import {
   TradeType,
   Trade as V2Trade,
   WNATIVE_ADDRESS,
-} from 'sdk'
-import DEFAULT_ARCHER_ETH_TIP from 'constants'
+} from '../../sdk'
+import { DEFAULT_ARCHER_ETH_TIP, DEFAULT_ARCHER_GAS_ESTIMATE } from '../../config/archer'
 import {
   EstimatedSwapCall,
   SuccessfulCall,
   swapErrorToUserReadableMessage,
   useSwapCallArguments,
-} from 'hooks/useSwapCallback'
+} from '../../hooks/useSwapCallback'
 // import {
 //   EstimatedSwapCall,
 //   SuccessfulCall,
 //   useSwapCallArguments,
 // } from "../../hooks/useSwapCallback";
 import { Field, replaceSwapState, selectCurrency, setRecipient, switchCurrencies, typeInput } from './actions'
-import { isAddress, isZero } from 'functions/validate'
+import { isAddress, isZero } from '../../functions/validate'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -36,20 +36,19 @@ import {
   useUserSingleHopOnly,
   useUserSlippageTolerance,
 } from '../user/hooks'
-import { useV2TradeExactIn as useTradeExactIn, useV2TradeExactOut as useTradeExactOut } from 'hooks/useV2Trades'
+import { useV2TradeExactIn as useTradeExactIn, useV2TradeExactOut as useTradeExactOut } from '../../hooks/useV2Trades'
 
 import { ParsedQs } from 'qs'
 import { SwapState } from './reducer'
 import { t } from '@lingui/macro'
-import { tryParseAmount } from 'functions/parse'
-import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
-import { useCurrency } from 'hooks/Tokens'
+import { tryParseAmount } from '../../functions/parse'
+import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useCurrency } from '../../hooks/Tokens'
 import { useCurrencyBalances } from '../wallet/hooks'
-import useENS from 'hooks/useENS'
+import useENS from '../../hooks/useENS'
 import { useLingui } from '@lingui/react'
-import useParsedQueryString from 'hooks/useParsedQueryString'
-import useSwapSlippageTolerance from 'hooks/useSwapSlippageTolerance'
-import DEFAULT_ARCHER_GAS_ESTIMATE from 'constants'
+import useParsedQueryString from '../../hooks/useParsedQueryString'
+import useSwapSlippageTolerance from '../../hooks/useSwapSlippageTollerence'
 
 export function useSwapState(): AppState['swap'] {
   return useAppSelector((state) => state.swap)

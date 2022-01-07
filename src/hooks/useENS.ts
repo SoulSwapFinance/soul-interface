@@ -1,4 +1,4 @@
-import { isAddress } from 'functions/validate'
+import { isAddress } from '../functions/validate'
 import useENSAddress from './useENSAddress'
 import useENSName from './useENSName'
 

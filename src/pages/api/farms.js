@@ -1,8 +1,8 @@
 const Web3 = require('web3')
-import summonerAbi from 'constants/abis/soulswap/soulsummoner.json'
-import pairAbi from 'constants/abis/soulswap/ISoulSwapPair.json'
-import { POOLS } from 'constants/farms'
-import { ChainId } from 'sdk'
+import summonerAbi from '../../constants/abis/soulswap/soulsummoner.json'
+import pairAbi from '../../constants/abis/soulswap/ISoulSwapPair.json'
+import { POOLS } from '../../constants/farms'
+import { ChainId } from '../../sdk'
 
 const NETWORK_URL = 'https://rpc.ftm.tools'
 const web3 = new Web3(NETWORK_URL)

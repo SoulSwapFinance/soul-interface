@@ -1,13 +1,13 @@
-import { NETWORK_ICON, NETWORK_LABEL } from 'constants/networks'
-import { useModalOpen, useNetworkModalToggle } from 'state/application/hooks'
-import { ApplicationModal } from 'state/application/actions'
-import { ChainId } from 'sdk'
+import { NETWORK_ICON, NETWORK_LABEL } from '../../constants/networks'
+import { useModalOpen, useNetworkModalToggle } from '../../state/application/hooks'
+import { ApplicationModal } from '../../state/application/actions'
+import { ChainId } from '../../sdk'
 import Image from 'next/image'
-import Modal from 'components/Modal'
-import ModalHeader from 'components/ModalHeader'
+import Modal from '../../components/Modal'
+import ModalHeader from '../../components/ModalHeader'
 import React from 'react'
 import cookie from 'cookie-cutter'
-import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 
 export const SUPPORTED_NETWORKS: {
   [chainId in ChainId]?: {

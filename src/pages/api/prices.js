@@ -1,6 +1,6 @@
 const Web3 = require('web3')
 const { default: axios } = require('axios')
-import ISoulSwapPairABI from 'constants/abis/soulswap/ISoulSwapPair.json'
+import ISoulSwapPairABI from '../../constants/abis/soulswap/ISoulSwapPair.json'
 const NETWORK_URL = 'https://rpc.ftm.tools'
 const web3 = new Web3(NETWORK_URL)
 

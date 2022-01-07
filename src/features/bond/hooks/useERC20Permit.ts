@@ -1,12 +1,12 @@
-import { Currency, CurrencyAmount, JSBI, Percent, Token, TradeType, Trade } from 'sdk'
-import { DAI, SOUL, USDC } from 'constants/tokens'
+import { Currency, CurrencyAmount, JSBI, Percent, Token, TradeType, Trade } from '../../../sdk'
+import { DAI, SOUL, USDC } from '../../../constants/tokens'
 import { useMemo, useState } from 'react'
 
 import { splitSignature } from 'ethers/lib/utils'
-import { useActiveWeb3React, useEIP2612Contract } from 'hooks'
-import useIsArgentWallet from 'hooks/useIsArgentWallet'
-import { useSingleCallResult } from 'state/multicall/hooks'
-import useTransactionDeadline from 'hooks/useTransactionDeadline'
+import { useActiveWeb3React, useEIP2612Contract } from '../../../hooks'
+import useIsArgentWallet from '../../../hooks/useIsArgentWallet'
+import { useSingleCallResult } from '../../../state/multicall/hooks'
+import useTransactionDeadline from '../../../hooks/useTransactionDeadline'
 
 enum PermitType {
   AMOUNT = 1,

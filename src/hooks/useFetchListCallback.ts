@@ -1,14 +1,14 @@
-import { AppDispatch } from 'state'
+import { AppDispatch } from '../state'
 import { TokenList } from '@uniswap/token-lists'
-import { fetchTokenList } from 'state/lists/actions'
-import { getTokenList } from 'functions/list'
+import { fetchTokenList } from '../state/lists/actions'
+import { getTokenList } from '../functions/list'
 import { nanoid } from '@reduxjs/toolkit'
-import { resolveENSContentHash } from 'functions/ens'
+import { resolveENSContentHash } from '../functions/ens'
 import { useActiveWeb3React } from './useActiveWeb3React'
 import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import { ChainId } from 'sdk'
-import { getNetworkLibrary } from 'connectors'
+import { ChainId } from '../sdk'
+import { getNetworkLibrary } from '../connectors'
 
 export function useFetchListCallback(): (listUrl: string, sendDispatch?: boolean) => Promise<TokenList> {
   const { chainId, library } = useActiveWeb3React()

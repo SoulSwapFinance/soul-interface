@@ -1,6 +1,6 @@
-import { Currency, CurrencyAmount, Token } from 'sdk'
+import { Currency, CurrencyAmount, Token } from '../../sdk'
 
-import { useAllTokenBalances } from 'state/wallet/hooks'
+import { useAllTokenBalances } from '../../state/wallet/hooks'
 import { useMemo } from 'react'
 
 // compare two token amounts with highest one coming first

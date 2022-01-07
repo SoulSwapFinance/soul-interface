@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
-import ISoulSwapPairABI from 'constants/abis/soulswap/ISoulSwapPair.json'
-import { useContract } from 'hooks/useContract'
-import { isAddress } from 'functions'
+import ISoulSwapPairABI from '../../../constants/abis/soulswap/ISoulSwapPair.json'
+import { useContract } from './useContract'
+import { isAddress } from '../../../functions'
 
 const usePool = (poolAddress: string | undefined) => {
   const [poolData, setPoolData] = useState<any>({})

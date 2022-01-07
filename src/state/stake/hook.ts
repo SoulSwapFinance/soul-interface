@@ -1,8 +1,8 @@
-// import { CurrencyAmount, JSBI, Token } from 'sdk'
+// import { CurrencyAmount, JSBI, Token } from '../sdk'
 
 // import { t } from '@lingui/macro'
-// import { tryParseAmount } from 'functions'
-// import useActiveWeb3React from 'hooks/useActiveWeb3React'
+// import { tryParseAmount } from '../../functions'
+// import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
 // // based on typed value
 // export function useDerivedStakeInfo(

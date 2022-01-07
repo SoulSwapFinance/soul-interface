@@ -1,17 +1,17 @@
 import { Call, parseCallKey } from './utils'
-import { RetryableError, retry } from 'functions/retry'
+import { RetryableError, retry } from '../../functions/retry'
 import { errorFetchingMulticallResults, fetchingMulticallResults, updateMulticallResults } from './actions'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { useEffect, useMemo, useRef } from 'react'
 
 import { AppState } from '../index'
 import { Contract } from '@ethersproject/contracts'
-import { chunkArray } from 'functions/array'
+import { chunkArray } from '../../functions/array'
 import { updateBlockNumber } from '../application/actions'
-import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useBlockNumber } from '../application/hooks'
-import useDebounce from 'hooks/useDebounce'
-import { useMulticall2Contract } from 'hooks/useContract'
+import useDebounce from '../../hooks/useDebounce'
+import { useMulticall2Contract } from '../../hooks/useContract'
 
 const DEFAULT_GAS_REQUIRED = 1_000_000
 
