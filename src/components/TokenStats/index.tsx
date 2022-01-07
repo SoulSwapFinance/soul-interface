@@ -1,14 +1,14 @@
-import { NETWORK_ICON, NETWORK_LABEL } from '../../constants/networks'
+import { NETWORK_ICON, NETWORK_LABEL } from 'constants/networks'
 
 import Image from 'next/image'
-// import NetworkModel from '../../modals/NetworkModal'
-import TokenStatsModal, { formatCurrency } from '../../modals/TokenStatsModal'
+// import NetworkModel from 'modals/NetworkModal'
+import TokenStatsModal, { formatCurrency } from 'modals/TokenStatsModal'
 import React from 'react'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
-import { useModalOpen, useToggleTokenStatsModal } from '../../state/application/hooks'
-import { ApplicationModal } from '../../state/application/actions'
-import { useSingleCallResult } from '../../state/multicall/hooks'
-import { usePriceHelperContract } from '../../features/bond/hooks/useContract'
+import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { useModalOpen, useToggleTokenStatsModal } from 'state/application/hooks'
+import { ApplicationModal } from 'state/application/actions'
+import { useSingleCallResult } from 'state/multicall/hooks'
+import { usePriceHelperContract } from 'hooks/useContract'
 import styled from 'styled-components'
 
 const HideOnMobile = styled.div`

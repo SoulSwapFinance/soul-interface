@@ -1,4 +1,4 @@
-import { CurrencyAmount, Ether, Percent, Price, Token } from '../entities'
+import { CurrencyAmount, Ether, Percent, Price, Token } from 'entities'
 import { computePriceImpact } from './computePriceImpact'
 
 describe('#computePriceImpact', () => {

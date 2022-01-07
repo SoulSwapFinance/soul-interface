@@ -1,5 +1,5 @@
-import { ChainId } from '../../src/sdk'
-import { getExplorerLink } from '../../src/functions/explorer'
+import { ChainId } from 'src/sdk'
+import { getExplorerLink } from 'src/functions/explorer'
 
 describe('utils', () => {
   describe('#getExplorerLink', () => {

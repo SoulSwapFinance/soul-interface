@@ -7,9 +7,9 @@
 //     TokenAmount,
 //     Trade,
 //     TradeType,
-// } from '../../sdk'
+// } from 'sdk'
 
-// import { computeTradePriceBreakdown } from '../../src/functions/prices'
+// import { computeTradePriceBreakdown } from 'src/functions/prices'
 
 // describe('prices', () => {
 //     const token1 = new Token(

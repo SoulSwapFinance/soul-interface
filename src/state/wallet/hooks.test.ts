@@ -1,4 +1,4 @@
-import { CurrencyAmount, Token } from '../../sdk'
+import { CurrencyAmount, Token } from 'sdk'
 import { serializeBalancesMap } from './hooks'
 
 describe('Wallet Hooks', () => {

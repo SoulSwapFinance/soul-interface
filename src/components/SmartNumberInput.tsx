@@ -4,7 +4,7 @@ import { BigNumber } from '@ethersproject/bignumber'
 import Button from './Button'
 import { Input as NumericalInput } from './NumericalInput'
 import React from 'react'
-import { formatNumber } from '../functions/format'
+import { formatNumber } from 'functions/format'
 
 type SmartNumberInputProps = {
   color: 'blue' | 'pink'
