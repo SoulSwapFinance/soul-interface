@@ -14,7 +14,7 @@ import {
 
 import { SOUL_SUMMONER_ADDRESS as SoulSummonerAddress, SUMMONER_HELPER_ADDRESS as SummonerHelperAddress } from 'constants/addresses'
 
-import { AllPids } from '../features/farm/Pids'
+import { AllPids } from 'constants/pids'
 
 // const helperContract = useHelperContract()
 

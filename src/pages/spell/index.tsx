@@ -1,6 +1,8 @@
 import { SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS, ZERO } from 'sdk'
 import { ApprovalState, useApproveCallback } from 'hooks/useApproveCallback'
 import React, { useEffect, useState } from 'react'
+import SOUL from 'constants'
+import SEANCE from 'constants'
 import Button from 'components/Button'
 import { ChainId } from 'sdk'
 import Head from 'next/head'
@@ -53,10 +55,6 @@ const buttonStyleInsufficientFunds = `${buttonStyleEnabled} opacity-60`
 const buttonStyleDisabled = `${buttonStyle} text-secondary bg-dark-700`
 const buttonStyleConnectWallet = `${buttonStyle} text-high-emphesis bg-cyan-blue hover:bg-opacity-90`
 
-// FANTOM ADDRESS
-const SOUL = 0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07
-const SEANCE = 0x124b06c5ce47de7a6e9efda71a946717130079e6
-
 export default function SoulStake() {
   const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
@@ -76,7 +74,7 @@ export default function SoulStake() {
   const { enter, leave, harvest } = useSoulStakeManual()
 
   // ** Require Update: Need to make dynamic by fetching selected chain **
-  const soulBalance = useTokenBalance(account ?? undefined, SOUL[250])
+  const soulBalance = useTokenBalance(account ?? undefined, SOUL[chainId])
   const seanceBalance = useTokenBalance(account ?? undefined, SEANCE[chainId])
 
   // const pendingSoul = userPendingRewards() // amount of soul is pending for user

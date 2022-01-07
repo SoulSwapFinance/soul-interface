@@ -1,4 +1,6 @@
 import {
+  DEFAULT_ARCHER_ETH_TIP,
+  DEFAULT_ARCHER_GAS_ESTIMATE,
   DEFAULT_ARCHER_GAS_PRICES,
   DEFAULT_DEADLINE_FROM_NOW,
   INITIAL_ALLOWED_SLIPPAGE,
@@ -26,17 +28,8 @@ import {
 
 import { createReducer } from '@reduxjs/toolkit'
 import { updateVersion } from '../global/actions'
-import { BigNumber } from 'ethers'
-import { JSBI } from 'sdk'
 
 const currentTimestamp = () => new Date().getTime()
-
-export const DEFAULT_ARCHER_GAS_ESTIMATE: BigNumber = BigNumber.from(350000)
-
-// default miner tip, equal to median gas price * default gas estimate
-export const DEFAULT_ARCHER_ETH_TIP: JSBI = JSBI.BigInt(
-  DEFAULT_ARCHER_GAS_ESTIMATE.mul(DEFAULT_ARCHER_GAS_PRICES[4]).toString()
-)
 
 export interface UserState {
   // the timestamp of the last updateVersion action

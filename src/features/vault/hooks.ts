@@ -1,6 +1,6 @@
 import { CurrencyAmount, JSBI } from 'sdk'
 import { Chef } from './enum'
-import { SOUL } from '../../constants/tokens'
+import SOUL from 'constants'
 import { NEVER_RELOAD, useSingleCallResult, useSingleContractMultipleData } from 'state/multicall/hooks'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import {

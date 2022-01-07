@@ -10,7 +10,7 @@ import {
   Trade as V2Trade,
   WNATIVE_ADDRESS,
 } from 'sdk'
-import { DEFAULT_ARCHER_ETH_TIP } from '../../constants'
+import DEFAULT_ARCHER_ETH_TIP from 'constants'
 import {
   EstimatedSwapCall,
   SuccessfulCall,
@@ -49,9 +49,7 @@ import useENS from 'hooks/useENS'
 import { useLingui } from '@lingui/react'
 import useParsedQueryString from 'hooks/useParsedQueryString'
 import useSwapSlippageTolerance from 'hooks/useSwapSlippageTolerance'
-import { BigNumber } from 'ethers'
-
-export const DEFAULT_ARCHER_GAS_ESTIMATE: BigNumber = BigNumber.from(350000)
+import DEFAULT_ARCHER_GAS_ESTIMATE from 'constants'
 
 export function useSwapState(): AppState['swap'] {
   return useAppSelector((state) => state.swap)

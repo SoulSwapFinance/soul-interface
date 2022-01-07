@@ -1,6 +1,7 @@
 import { Currency, CurrencyAmount, JSBI, Percent, Token, TradeType, Trade as V2Trade } from 'sdk'
 import DAI from 'constants'
-import { SOUL } from '../constants/tokens'
+import SOUL from 'constants'
+import USDC from 'constants'
 import { useMemo, useState } from 'react'
 
 import { splitSignature } from 'ethers/lib/utils'
