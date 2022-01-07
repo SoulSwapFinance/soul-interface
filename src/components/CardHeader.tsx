@@ -1,5 +1,5 @@
 import React from 'react'
-import { classNames } from 'functions/styling'
+import { classNames } from '../functions/styling'
 
 export default function CardHeader({ className, children }: any) {
   return (

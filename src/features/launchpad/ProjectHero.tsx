@@ -1,10 +1,10 @@
-import Card from 'components/Card'
-import Typography from 'components/Typography'
-import Image from 'components/Image'
-import Button from 'components/Button'
-import { formatNumber, formatPercent } from 'functions'
+import Card from '../../components/Card'
+import Typography from '../../components/Typography'
+import Image from '../../components/Image'
+import Button from '../../components/Button'
+import { formatNumber, formatPercent } from '../../functions'
 import { useRouter } from 'next/router'
-import { PROJECT_STATUS } from 'constants/launchpad'
+import { PROJECT_STATUS } from '../../constants/launchpad'
 
 export const ProjectHero = ({ project, totalCommitted }) => {
   const router = useRouter()

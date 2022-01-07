@@ -1,4 +1,4 @@
-import { ChainId, Currency } from 'sdk'
+import { ChainId, Currency } from '../../sdk'
 
 export function currencyId(currency: Currency): string {
   // if ([ChainId.CELO].includes(currency.chainId)) {

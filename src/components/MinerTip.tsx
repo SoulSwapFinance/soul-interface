@@ -3,14 +3,14 @@ import {
   useUserArcherGasPrice,
   useUserArcherTipManualOverride,
   useUserSlippageTolerance,
-} from 'state/user/hooks'
-import { CurrencyAmount, Ether, ChainId } from 'sdk'
+} from '../state/user/hooks'
+import { CurrencyAmount, Ether, ChainId } from '../sdk'
 import React from 'react'
 import { RowBetween } from './Row'
-import { StyledSlider } from 'features/swap/styleds'
+import { StyledSlider } from '../features/swap/styleds'
 import Typography from './Typography'
-import useArcherMinerTips from 'hooks/useArcherMinerTips'
-import { useToggleSettingsMenu } from 'state/application/hooks'
+import useArcherMinerTips from '../hooks/useArcherMinerTips'
+import { useToggleSettingsMenu } from '../state/application/hooks'
 
 const getMarkLabel = (index: number, length: number): string => {
   switch (index) {

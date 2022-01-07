@@ -1,6 +1,6 @@
-import Container from 'components/Container'
+import Container from '../../../components/Container'
 import Head from 'next/head'
-import AnalyticsHeader from 'features/analytics/Header'
+import AnalyticsHeader from '../../../features/analytics/Header'
 
 export default function Home() {
   return (

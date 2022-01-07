@@ -10,7 +10,7 @@ import {
   Route,
   Pair,
 } from '.'
-import { TradeType } from 'enums'
+import { TradeType } from '../enums'
 
 describe('Trade', () => {
   const ETHER = Ether.onChain(1)

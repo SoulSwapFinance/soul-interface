@@ -1,5 +1,5 @@
-// import { ChainId, Token, TokenAmount } from 'src/sdk'
-// import { calculateGasMargin, calculateSlippageAmount } from 'src/functions/trade'
+// import { ChainId, Token, TokenAmount } from '../../src/sdk'
+// import { calculateGasMargin, calculateSlippageAmount } from '../../src/functions/trade'
 
 // import { AddressZero } from '@ethersproject/constants'
 // import { BigNumber } from '@ethersproject/bignumber'

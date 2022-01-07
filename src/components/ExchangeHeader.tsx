@@ -1,16 +1,16 @@
-import { ChainId, Currency, Percent } from 'sdk'
+import { ChainId, Currency, Percent } from '../sdk'
 import React, { FC, useState } from 'react'
 import Image from 'next/image'
 import Gas from './Gas'
 import NavLink from './NavLink'
 import Settings from './Settings'
-import { currencyId } from 'functions'
+import { currencyId } from '../functions'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from 'hooks'
+import { useActiveWeb3React } from '../hooks'
 import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
-import MyOrders from 'features/limit-order/MyOrders'
-import Typography from 'components/Typography'
+import MyOrders from '../features/limit-order/MyOrders'
+import Typography from '../components/Typography'
 
 const getQuery = (input, output) => {
   if (!input && !output) return

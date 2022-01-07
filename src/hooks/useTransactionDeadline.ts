@@ -1,4 +1,4 @@
-import { AppState } from 'state'
+import { AppState } from '../state'
 import { BigNumber } from 'ethers'
 import useCurrentBlockTimestamp from './useCurrentBlockTimestamp'
 import { useMemo } from 'react'

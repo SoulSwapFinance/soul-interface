@@ -1,4 +1,4 @@
-import { ChainId } from 'sdk'
+import { ChainId } from '../../sdk'
 import { AddressZero } from '@ethersproject/constants'
 
 type Currency = { address: string; decimals: number }

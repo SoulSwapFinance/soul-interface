@@ -3,7 +3,7 @@ import React, { Fragment } from 'react'
 import ExternalLink from './ExternalLink'
 import { I18n } from '@lingui/core'
 import Image from 'next/image'
-import { classNames } from 'functions/styling'
+import { classNames } from '../functions/styling'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 
