@@ -29,8 +29,7 @@ import Modal from 'components/Modal'
 import ModalHeader from 'components/ModalHeader'
 import Typography from 'components/Typography'
 import { SubmitButton } from 'features/seance/SeanceStyles'
-import SOUL_ADDRESS from 'constants'
-import SEANCE_ADDRESS from 'constants'
+import { SOUL, SEANCE } from '../../constants/tokens'
 
 const INPUT_CHAR_LIMIT = 18
 
@@ -86,8 +85,8 @@ export default function SoulStake() {
 
   // ** Require Update: Need to make dynamic by fetching selected chain **
   const [stakedBal, setStakedBal] = useState('0')
-  const soulBalance = useTokenBalance(account ?? undefined, SOUL_ADDRESS[chainId])
-  const seanceBalance = useTokenBalance(account ?? undefined, SEANCE_ADDRESS[chainId])
+  const soulBalance = useTokenBalance(account ?? undefined, SOUL[chainId])
+  const seanceBalance = useTokenBalance(account ?? undefined, SEANCE[chainId])
 
   // show confirmation view before withdrawing SOUL
   const [showConfirmation, setShowConfirmation] = useState(false)

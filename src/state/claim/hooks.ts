@@ -1,6 +1,5 @@
 import { ChainId, Currency, CurrencyAmount, JSBI, Token } from 'sdk'
 import { MERKLE_ROOT } from './../../constants/index'
-import SOUL from 'constants'
 import { getAddress, isAddress } from '@ethersproject/address'
 import { useEffect, useState } from 'react'
 
@@ -22,6 +21,9 @@ interface UserClaimData {
 }
 
 const CLAIM_PROMISES: { [key: string]: Promise<any | UserClaimData | null> } = {}
+
+// FANTOM ADDRESS
+const SOUL = 0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07
 
 // returns the claim for the given address, or null if not valid
 function fetchClaim(account: string, chainId: ChainId): Promise<any | UserClaimData | null> {

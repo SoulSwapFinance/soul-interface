@@ -21,8 +21,7 @@ import EnchantBanner from 'components/EnchantBanner'
 import useEnchant from 'hooks/useEnchant'
 // import useEnchantHelper from 'hooks/useEnchant'
 import { ethers } from 'ethers'
-import SEANCE from 'constants'
-import ENCHANT from 'constants'
+import { ENCHANT, SEANCE } from '../../constants/tokens'
 
 const INPUT_CHAR_LIMIT = 18
 

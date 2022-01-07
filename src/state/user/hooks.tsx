@@ -26,8 +26,7 @@ import ReactGA from 'react-ga'
 import flatMap from 'lodash/flatMap'
 import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
 import { useAllTokens } from 'hooks/Tokens'
-import BASES_TO_TRACK_LIQUIDITY_FOR from 'constants'
-import PINNED_PAIRS from 'constants'
+import { BASES_TO_TRACK_LIQUIDITY_FOR, PINNED_PAIRS } from 'constants/routing'
 
 function serializeToken(token: Token): SerializedToken {
   return {

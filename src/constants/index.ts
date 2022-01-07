@@ -1,4 +1,4 @@
-import { ChainId, JSBI, Percent } from 'sdk'
+import { ChainId, JSBI, Percent, Token } from 'sdk'
 import { binance, clover, injected, walletconnect } from 'connectors'
 
 import { AbstractConnector } from '@web3-react/abstract-connector'
@@ -57,18 +57,18 @@ export const MERKLE_ROOT =
   // 'https://raw.githubusercontent.com/sushiswap/sushi-vesting/master/merkle/week-14/merkle-10959148-11596364.json'
   'https://raw.githubusercontent.com/SoulSwapFinance/soul-claims/main/scripts/results/prod.json'
 
-// /**
-//  * Some tokens can only be swapped via certain pairs, so we override the list of bases that are considered for these
-//  * tokens.
-//  */
-// export const CUSTOM_BASES: {
-//     [chainId in ChainId]?: { [tokenAddress: string]: Token[] }
-// } = {
-//     [ChainId.MAINNET]: {
-//         [AMPL.address]: [DAI, WETH[ChainId.MAINNET]],
-//         [XSUSHI_CALL.address]: [XSUSHI, WETH[ChainId.MAINNET]],
-//     },
-// }
+/**
+ * Some tokens can only be swapped via certain pairs, so we override the list of bases that are considered for these
+ * tokens.
+ */
+export const CUSTOM_BASES: {
+    [chainId in ChainId]?: { [tokenAddress: string]: Token[] }
+} = {
+    // [ChainId.FANTOM]: {
+    //     [0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07]: [DAI, WETH[ChainId.FANTOM]],
+    //     [XSUSHI_CALL.address]: [XSUSHI, WETH[ChainId.MAINNET]],
+    // },
+}
 
 export interface WalletInfo {
   connector?: (() => Promise<AbstractConnector>) | AbstractConnector
@@ -253,7 +253,7 @@ export const ANALYTICS_URL: { [chainId in ChainId]?: string } = {
 export const EIP_1559_ACTIVATION_BLOCK: { [chainId in ChainId]?: number } = {
 }
 
-// export * from './routing'
+export * from './routing'
 export * from './addresses'
 export * from './networks'
 export * from './tokens'
