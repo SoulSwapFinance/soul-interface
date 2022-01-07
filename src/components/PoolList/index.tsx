@@ -1,18 +1,18 @@
 import { ChevronDown, ChevronUp } from 'react-feather'
-import { formatNumber, formatPercent } from '../../functions/format'
-import { useFuse, useSortableData } from '../../hooks'
+import { formatNumber, formatPercent } from 'functions/format'
+import { useFuse, useSortableData } from 'hooks'
 
-import Card from '../../components/Card'
-import CardHeader from '../../components/CardHeader'
-import Dots from '../../components/Dots'
-import DoubleLogo from '../../components/DoubleLogo'
+import Card from 'components/Card'
+import CardHeader from 'components/CardHeader'
+import Dots from 'components/Dots'
+import DoubleLogo from 'components/DoubleLogo'
 import Head from 'next/head'
-import Paper from '../../components/Paper'
+import Paper from 'components/Paper'
 import React from 'react'
 import Router from 'next/router'
-import Search from '../../components/Search'
-import { useCurrency } from '../../hooks/Tokens'
-import useFarms from '../../hooks/useZapperFarms'
+import Search from 'components/Search'
+import { useCurrency } from 'hooks/Tokens'
+import useFarms from 'hooks/useZapperFarms'
 
 const TokenBalance = ({ farm }: any) => {
   const currency0 = useCurrency(farm.liquidityPair.token0.id)

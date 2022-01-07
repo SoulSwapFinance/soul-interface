@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 import { ethers } from 'ethers'
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
 
 import useSoulCircle from './useSoulCircle'
 // import useMulticall from "../../hooks/useMulticall";
-import useApprove from '../../features/farm/hooks/useApprove'
-
-import { SoulCircleAddress } from '../farm/constants'
+import useApprove from './useApprove'
 
 import {
   FlexText,
@@ -44,6 +42,8 @@ const TokenPair = styled(ExternalLink)`
     padding-right: 10px;
   }
 `
+
+const SoulCircleAddress = "0x5063Fc9D759B5b03DD5fBC0B882b5F68CF881C32"
 
 const CircleStakeRow = ({ pid, lpSymbol, lpToken, token1, token2, farm, startTime, endTime }) => {
   const { chainId, account } = useActiveWeb3React()
@@ -137,8 +137,8 @@ const CircleStakeRow = ({ pid, lpSymbol, lpToken, token1, token2, farm, startTim
     const ownedPerc = (userStaked / totalStaked) * 100
     ownedPerc !== NaN
       ? ownedPerc < 0.01 && ownedPerc > 0
-        ? setOwnership('<0.01')
-        : setOwnership(Number(ownedPerc).toFixed(2))
+        ? setOwnership(0)
+        : setOwnership(Number(ownedPerc))
       : setOwnership(0)
 
     // rewards per day
@@ -147,9 +147,9 @@ const CircleStakeRow = ({ pid, lpSymbol, lpToken, token1, token2, farm, startTim
     const formatted = ethers.utils.formatUnits(perDay.toString())
     setRewardsPerDay(
       Number(formatted)
-        .toFixed(2)
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        // .toFixed(2)
+        // .toString()
+        // .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     )
 
     // tvl
@@ -158,14 +158,15 @@ const CircleStakeRow = ({ pid, lpSymbol, lpToken, token1, token2, farm, startTim
     const rawTvl = (totalStaked * seancePrice) / 10 ** 18
     setTvl(
       Number(rawTvl)
-        .toFixed(0)
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        // .toFixed(0)
+        // .toString()
+        // .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     )
 
     const aprPerc = 365 * rewardsPerDay / rawTvl * 100
     console.log('aprPerc', aprPerc)
     setApr(Number(0).toFixed(0))
+    // setApr(Number(0).toFixed(0))
     // setApr(Number(aprPerc).toFixed(0))
 
     // start + end

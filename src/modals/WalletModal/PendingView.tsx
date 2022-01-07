@@ -1,5 +1,3 @@
-// import { injected } from 'config/wallet'
-// import SUPPORTED_WALLETS from 'config'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import Dots from 'components/Dots'
 import Loader from 'components/Loader'

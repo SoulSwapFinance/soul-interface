@@ -1,5 +1,4 @@
 import { Currency, CurrencyAmount, JSBI, Percent, Token, TradeType, Trade } from 'sdk'
-import { DAI, SOUL, USDC } from 'constants/tokens'
 import { useMemo, useState } from 'react'
 
 import { splitSignature } from 'ethers/lib/utils'
@@ -7,6 +6,11 @@ import { useActiveWeb3React, useEIP2612Contract } from 'hooks'
 import useIsArgentWallet from 'hooks/useIsArgentWallet'
 import { useSingleCallResult } from 'state/multicall/hooks'
 import useTransactionDeadline from 'hooks/useTransactionDeadline'
+
+// FANTOM ADDRESSES || TODO: make dynamic
+// const USDC = 0x04068DA6C83AFCFA0e13ba15A6696662335D5B75
+const SOUL = 0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07
+// const DAI = 0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E
 
 enum PermitType {
   AMOUNT = 1,
@@ -29,15 +33,8 @@ const PERMITTABLE_TOKENS: {
     [checksummedTokenAddress: string]: PermitInfo
   }
 } = {
-  [1]: {
-    [USDC.address]: { type: PermitType.AMOUNT, name: 'USD Coin', version: '2' },
-    [DAI.address]: {
-      type: PermitType.ALLOWED,
-      name: 'Dai Stablecoin',
-      version: '1',
-    },
     // [SOUL[1].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
-  },
+  // },
   // [4]: {
   //   ['0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735']: {
   //     type: PermitType.ALLOWED,
@@ -61,11 +58,11 @@ const PERMITTABLE_TOKENS: {
   //   [SOUL[42].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
   // },
   [250]: {
-    [SOUL[250].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
+    [SOUL]: { type: PermitType.AMOUNT, name: 'SoulPower' },
   },
-  [4002]: {
-    [SOUL[4002].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
-  },
+  // [4002]: {
+  //   [SOUL[4002].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
+  // },
 }
 
 export enum UseERC20PermitState {

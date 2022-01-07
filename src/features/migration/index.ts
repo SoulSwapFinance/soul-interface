@@ -1,3 +1,3 @@
-import { ChainId } from '../../sdk'
+import { ChainId } from 'sdk'
 
 export const MigrationSupported = [ChainId.MAINNET]

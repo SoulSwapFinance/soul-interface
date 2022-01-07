@@ -2,8 +2,8 @@ import { IconProps } from 'react-feather'
 import React, { FC, useState } from 'react'
 
 import Image from '../Image'
-import { classNames } from '../../functions'
-import { cloudinaryLoader } from '../../functions/cloudinary'
+import { classNames } from 'functions'
+import { cloudinaryLoader } from 'functions/cloudinary'
 
 const BAD_SRCS: { [tokenAddress: string]: true } = {}
 

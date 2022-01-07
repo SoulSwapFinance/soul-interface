@@ -1,10 +1,10 @@
-import { Currency, Percent, Price } from '../../sdk'
+import { Currency, Percent, Price } from 'sdk'
 
-import { Field } from '../../state/mint/actions'
+import { Field } from 'state/mint/actions'
 import { ONE_BIPS } from '../../constants'
 import React from 'react'
-import Typography from '../../components/Typography'
-import { classNames } from '../../functions'
+import Typography from 'components/Typography'
+import { classNames } from 'functions'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 

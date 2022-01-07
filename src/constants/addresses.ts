@@ -23,6 +23,8 @@ export const FACTORY_ADDRESS = {
   [ChainId.FANTOM_TESTNET]: '',
 }
 
+export const MULTICALL_ADDRESS = '0xf682Cc4468608fC4eFbaD6a06D9BC72e7790075a' // SEP22
+
 export const ROUTER_ADDRESS = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '0x1b4df4D7E63B125f3a01fd5598E8E8458e519255',
@@ -109,6 +111,26 @@ export const MULTICALL2_ADDRESS: AddressMap = {
   [ChainId.FANTOM_TESTNET]: '0x1ACB479bB9D1F73009F85ef5F495E942Bb57f15A', // 7 JUL
 }
 
+// CONTRACTS
+
+export const SOUL_CIRCLE_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x5063Fc9D759B5b03DD5fBC0B882b5F68CF881C32', // Summoner
+  [ChainId.FANTOM_TESTNET]: ''
+}
+
+export const SUMMONER_HELPER_ADDRESS: AddressMap = {
+  4002: '',
+  // 250: '0x39C8a29F06242ce15fB9B5643B4C32AB9548cEe9'
+  250: '0x8fb243a09CB24f673b7395e2A9881562884083b1'
+}
+
+// BOND ADDRESSES
+export const BOND_HELPER_ADDRESS = '0x8226D02356eC72Bcb61A19c3c67f3e053Ae5758e'
+export const PRICE_HELPER_ADDRESS = '0x51445B73852952128bFCAE65fdd889881D8d87Bd'
+export const SOUL_BOND_ADDRESS = '0xEdaECfc744F3BDeAF6556AEEbfcDedd79437a01F'
+
 // TOKENS
 
 export const SOUL_SEANCE_PAIR: AddressMap = {
@@ -174,6 +196,20 @@ export const SEANCE_ADDRESS: AddressMap = {
   [ChainId.FANTOM_TESTNET]: '',
 }
 
+export const DAI_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // SEANCE
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
+export const WETH_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // SEANCE
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
 export const ENCHANT_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
@@ -199,5 +235,12 @@ export const USDC_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
+export const WBTC_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x321162Cd933E2Be498Cd2267a90534A804051b11', // USDC
   [ChainId.FANTOM_TESTNET]: '',
 }

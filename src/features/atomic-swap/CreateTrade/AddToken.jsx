@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { ethers } from 'ethers'
-import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
 import { ZERO_ADDRESS, ATOMIC_SWAP_ADDRESS } from 'constants/addresses'
-// import useApproveCallback from 'hooks/useApproveCallback'
 import { ButtonConfirmed, ButtonError } from 'components/Button'
-import useApproveContract from 'hooks/useApprove'
-import useAtomicSwap from 'hooks/useAtomicSwap'
+import useApproveContract from '../hooks/useApprove'
+import useAtomicSwap from '../hooks/useAtomicSwap'
 import styled, { keyframes } from 'styled-components'
-import { UserContainer, ExternalLink } from 'TradeItemStyles'
+import { UserContainer, ExternalLink } from '../TradeItemStyles'
 import { InputItem } from './InputItem'
 import {
   Wrap,

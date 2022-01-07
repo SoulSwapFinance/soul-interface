@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
 
 import useAtomicSwap from './hooks/useAtomicSwap'
-import { ZERO_ADDRESS, ATOMIC_SWAP_ADDRESS } from '../../constants/addresses'
+import { ZERO_ADDRESS, ATOMIC_SWAP_ADDRESS } from 'constants/addresses'
 import { TradeItem } from './TradeItem'
 // import Banner from "../../illustrations/AtomicSwapBanner1.png";
 
 import styled from 'styled-components'
-import { Heading, Input, Text, Wrap, OptionSelector, Illustration, Button } from '../../components/ReusableStyles'
+import { Heading, Input, Text, Wrap, OptionSelector, Illustration, Button } from 'components/ReusableStyles'
 
 export const InfoSection = styled.div`
   border: 1px solid #444;

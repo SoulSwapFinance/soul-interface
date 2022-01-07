@@ -6,7 +6,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { useWalletModalToggle } from '../../state/application/hooks'
+import { useWalletModalToggle } from 'state/application/hooks'
 
 const NetworkIcon = styled(Activity)`
   width: 16px;

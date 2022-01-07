@@ -11,30 +11,30 @@ import {
   Trade,
   TradeType,
   WNATIVE,
-} from '../../sdk'
+} from 'sdk'
 import { Field, typeInput } from './actions'
-import { PairState, useV2Pair } from '../../hooks/useV2Pairs'
+import { PairState, useV2Pair } from 'hooks/useV2Pairs'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   useUserSingleHopOnly,
   useUserSlippageTolerance,
   useUserSlippageToleranceWithDefault,
-} from '../../state/user/hooks'
+} from 'state/user/hooks'
 
-import ROUTER_ABI_SLIM from '../../constants/abis/router-slim.json'
-import { ZAPPER_ADDRESS } from '../../constants/addresses'
-import { basisPointsToPercent } from '../../functions'
+import ROUTER_ABI_SLIM from 'constants/abis/router-slim.json'
+import { ZAPPER_ADDRESS } from 'constants/addresses'
+import { basisPointsToPercent } from 'functions'
 import { ethers } from 'ethers'
-import { tryParseAmount } from '../../functions/parse'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
-import { useCurrency } from '../../hooks/Tokens'
+import { tryParseAmount } from 'functions/parse'
+import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { useCurrency } from 'hooks/Tokens'
 import { useCurrencyBalances } from '../wallet/hooks'
-import useParsedQueryString from '../../hooks/useParsedQueryString'
-import usePool from '../../hooks/usePool'
-import { useTotalSupply } from '../../hooks/useTotalSupply'
-import useTransactionDeadline from '../../hooks/useTransactionDeadline'
-import { useV2TradeExactIn } from '../../hooks/useV2Trades'
+import useParsedQueryString from 'hooks/useParsedQueryString'
+import usePool from 'hooks/usePool'
+import { useTotalSupply } from 'hooks/useTotalSupply'
+import useTransactionDeadline from 'hooks/useTransactionDeadline'
+import { useV2TradeExactIn } from 'hooks/useV2Trades'
 
 // import { wrappedCurrencyAmount } from "../../functions/currency/wrappedCurrency";
 

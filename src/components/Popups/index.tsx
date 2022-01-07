@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import { useActivePopups } from '../../state/application/hooks'
-import { useURLWarningVisible } from '../../state/user/hooks'
+import { useActivePopups } from 'state/application/hooks'
+import { useURLWarningVisible } from 'state/user/hooks'
 import PopupItem from './PopupItem'
 
 const Popups: FC = () => {

@@ -1,15 +1,15 @@
 // NOTE: Try not to add anything to thie file, it's almost entirely refactored out.
 
-import { ChainId, ROUTER_ADDRESS } from '../sdk'
+import { ChainId, ROUTER_ADDRESS } from 'sdk'
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 
 import { ARCHER_ROUTER_ADDRESS } from '../constants'
 import { AddressZero } from '@ethersproject/constants'
-import ArcherSwapRouterABI from '../constants/abis/archer-router.json'
+import ArcherSwapRouterABI from 'constants/abis/archer-router.json'
 import { Contract } from '@ethersproject/contracts'
-// import IUniswapV2Router02ABI from '../constants/abis/uniswap-v2-router-02.json'
-import ISoulSwapPairABI from '../constants/abis/soulswap/ISoulSwapPair.json'
-import { isAddress } from '../functions/validate'
+// import IUniswapV2Router02ABI from 'constants/abis/uniswap-v2-router-02.json'
+import ISoulSwapPairABI from 'constants/abis/soulswap/ISoulSwapPair.json'
+import { isAddress } from 'functions/validate'
 
 // account is not optional
 export function getSigner(library: Web3Provider, account: string): JsonRpcSigner {

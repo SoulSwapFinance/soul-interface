@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 
-import { ImportToken } from 'SearchModal/ImportToken'
+import { ImportToken } from '../SearchModal/ImportToken'
 import Modal from 'components/Modal'
 import { Token } from 'sdk'
 

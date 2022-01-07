@@ -3,15 +3,13 @@ import styled from "styled-components";
 
 import { ethers } from "ethers";
 
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
 
-import useSoulSummoner from "../../features/farm/hooks/useSoulSummoner";
-import useApprove from "../../features/farm/hooks/useApprove";
+import useSoulSummoner from "hooks/useSoulSummoner";
+import useApprove from "./useApprove";
 
 import {
-  SOUL_SUMMONER_ADDRESS,
-  // SeanceTokenAddress,
-  // SoulTokenAddress,
+  SOUL_SUMMONER_ADDRESS
 } from "../../constants";
 
 import {
@@ -70,6 +68,7 @@ const StakeRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
     pendingSoul,
     userInfo,
   } = useSoulSummoner(
+    0, // for staking pid
     lpToken,
     farm.token1Address,
     farm.token2Address

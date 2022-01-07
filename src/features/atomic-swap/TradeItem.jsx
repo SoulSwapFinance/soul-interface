@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { ethers } from 'ethers'
 import Link from 'next/link'
 import { MaxUint256 } from '@ethersproject/constants'
-import { ZERO_ADDRESS, ATOMIC_SWAP_ADDRESS, CONTRACT_SCAN } from '../../constants/addresses'
+import { ZERO_ADDRESS, ATOMIC_SWAP_ADDRESS, CONTRACT_SCAN } from 'constants/addresses'
 
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 

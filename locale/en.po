@@ -312,9 +312,6 @@ msgstr "Confirm Swap"
 msgid "Confirm Withdrawal"
 msgstr "Confirm Withdrawal"
 
-msgid "Confirm convert"
-msgstr "Confirm convert"
-
 msgid "Confirm this transaction in your wallet"
 msgstr "Confirm this transaction in your wallet"
 
@@ -324,17 +321,8 @@ msgstr "Confirm {0}"
 msgid "Connect Wallet"
 msgstr "Connect Wallet"
 
-msgid "Connect to wallet"
-msgstr "Connect to wallet"
-
 msgid "Considerations"
 msgstr "Considerations"
-
-msgid "Convert"
-msgstr "Convert"
-
-msgid "Converting {0} {1} for {2} {3}"
-msgstr "Converting {0} {1} for {2} {3}"
 
 msgid "Copied"
 msgstr "Copied"
@@ -665,9 +653,6 @@ msgstr "Lists"
 msgid "Loading"
 msgstr "Loading"
 
-msgid "Loading Balance"
-msgstr "Loading Balance"
-
 msgid "Loading balance"
 msgstr "Loading balance"
 
@@ -694,13 +679,6 @@ msgstr "Luxor Money"
 
 msgid "MAX"
 msgstr "MAX"
-
-msgid ""
-"MEOW tokens wrap SEANCE into CoffinBox for double yields and can be\n"
-"used to vote in special MEOW governor contracts."
-msgstr ""
-"MEOW tokens wrap SEANCE into CoffinBox for double yields and can be\n"
-"used to vote in special MEOW governor contracts."
 
 msgid "MEV Shield by Archer DAO"
 msgstr "MEV Shield by Archer DAO"
@@ -761,9 +739,6 @@ msgstr "My Orders"
 
 msgid "N"
 msgstr "N"
-
-msgid "Network not supported yet"
-msgstr "Network not supported yet"
 
 msgid "Never"
 msgstr "Never"
@@ -861,9 +836,6 @@ msgstr "Pending Treasury Transfer"
 
 msgid "Please connect to the appropriate network."
 msgstr "Please connect to the appropriate network."
-
-msgid "Please enter an amount"
-msgstr "Please enter an amount"
 
 msgid "Please refer to the"
 msgstr "Please refer to the"
@@ -1262,12 +1234,6 @@ msgstr "Unsupported Asset"
 
 msgid "Unwrap"
 msgstr "Unwrap"
-
-msgid "Use SEANCE"
-msgstr "Use SEANCE"
-
-msgid "Use SOUL"
-msgstr "Use SOUL"
 
 msgid "Used"
 msgstr "Used"

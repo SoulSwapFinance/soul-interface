@@ -1,7 +1,7 @@
 import { CurrencyAmount, Token } from 'sdk'
 
 import { useCallback } from 'react'
-import { useEnchantmentContract } from './useContract'
+import { useEnchantmentContract } from 'hooks/useContract'
 import { useTransactionAdder } from 'state/transactions/hooks'
 
 const useSpellBound = () => {

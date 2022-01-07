@@ -1,6 +1,6 @@
 import React, { FC, useCallback } from 'react'
 import { useActiveWeb3React, useUSDCPrice } from 'hooks'
-import { USDC } from 'constants/tokens'
+import USDC from 'constants'
 import { ConfirmationModalContent } from 'modals/TransactionConfirmationModal'
 import { useLingui } from '@lingui/react'
 import CurrencyLogo from 'components/CurrencyLogo'

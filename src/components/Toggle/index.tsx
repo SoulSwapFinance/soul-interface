@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch } from '@headlessui/react'
-import { classNames } from '../../functions'
+import { classNames } from 'functions'
 
 export interface ToggleProps {
   id?: string

@@ -1,4 +1,4 @@
-import { CurrencyAmount, Token } from '../../sdk'
+import { CurrencyAmount, Token } from 'sdk'
 
 type TokenAddress = string
 

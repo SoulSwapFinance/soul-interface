@@ -3,7 +3,7 @@ import React, { useCallback, useState } from 'react'
 import { Placement } from '@popperjs/core'
 import Portal from '@reach/portal'
 import styled from 'styled-components'
-import useInterval from '../../hooks/useInterval'
+import useInterval from 'hooks/useInterval'
 import { usePopper } from 'react-popper'
 
 const PopoverContainer = styled.div<{ show: boolean }>`

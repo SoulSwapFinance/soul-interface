@@ -1,8 +1,8 @@
 import { useCallback } from 'react'
 import { ethers, BigNumber } from 'ethers'
-// import { formatNumber } from '../../functions'
+// import { formatNumber } from 'functions'
 
-import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
 
 import {
   useHelperContract,
@@ -10,11 +10,11 @@ import {
   useCircleStakingContract,
   usePairContract,
   useTokenContract,
-} from './useContract'
+} from 'hooks/useContract'
 
-import { SoulSummonerAddress, SUMMONER_HELPER_ADDRESS as SummonerHelperAddress } from '../constants'
+import { SOUL_SUMMONER_ADDRESS as SoulSummonerAddress, SUMMONER_HELPER_ADDRESS as SummonerHelperAddress } from 'constants/addresses'
 
-import { AllPids } from '../Pids'
+import { AllPids } from 'constants/pids'
 
 // const helperContract = useHelperContract()
 
