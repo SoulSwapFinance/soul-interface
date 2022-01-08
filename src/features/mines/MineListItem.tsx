@@ -11,6 +11,7 @@ import { PairType } from './enum'
 import MineListItemDetails from './MineListItemDetails'
 import { SOUL } from '../../constants'
 import { useActiveWeb3React } from 'hooks'
+import Logo from 'components/Logo'
 
 const MineListItem = ({ farm, ...rest }) => {
   const { chainId } = useActiveWeb3React()
@@ -30,14 +31,14 @@ const MineListItem = ({ farm, ...rest }) => {
           >
             <div className="grid grid-cols-4">
               <div className="flex col-span-2 space-x-4 md:col-span-1">
-                <DoubleLogo currency0={token0} currency1={token1} size={40} />
+              { token1 ?
+                <DoubleLogo currency0={ token0 } currency1={ token1 } size={40} />
+                : <CurrencyLogo currency={ token0 } size={54}/> 
+              }
                 <div className="flex flex-col justify-center">
                   <div>
                     <span className="font-bold">{farm?.pair?.token0?.symbol}</span>
                   </div>
-                  {/* {farm?.pair?.type === PairType.SWAP && (
-                    <div className="text-xs md:text-base text-secondary">SoulSwap Farm</div>
-                  )} */}
                 </div>
               </div>
               <div className="flex flex-col justify-center font-bold">{formatNumber(farm.tvl, true)}</div>

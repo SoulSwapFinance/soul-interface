@@ -123,12 +123,6 @@ export function useChefPositions(contract?: Contract | null, rewarder?: Contract
   //     args.map((arg) => [...arg, '0'])
   // )
 
-  const getChef = useCallback(() => {
-    if (MASTERCHEF_ADDRESS[chainId] === contract.address) {
-      return Chef.MASTERCHEF
-    }
-  }, [chainId, contract])
-
   return useMemo(() => {
     if (!pendingSoul || !userInfo) {
       return []
@@ -138,13 +132,12 @@ export function useChefPositions(contract?: Contract | null, rewarder?: Contract
         id: args[i][0],
         pendingSoul: data[0].result?.[0] || Zero,
         amount: data[1].result?.[0] || Zero,
-        chef: getChef(),
         // pendingTokens: data?.[2]?.result,
       }))
       .filter(({ pendingSoul, amount }) => {
         return (pendingSoul && !pendingSoul.isZero()) || (amount && !amount.isZero())
       })
-  }, [args, getChef, pendingSoul, userInfo])
+  }, [args, pendingSoul, userInfo])
 }
 
 export function useSoulPositions(contract?: Contract | null) {

@@ -198,8 +198,8 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
         token2Name === 'USDC' ||
         token1Name === 'fUSDT' ||
         token2Name === 'fUSDT' ||
-        token1Name === 'DAI' ||
-        token2Name === 'DAI'
+        token1Name === 'gFUSDT' ||
+        token2Name === 'gFUSDT'
       ) {
         if (token1Name !== 'DAI') {
           pidTvl = (summonerPidPercOfSupply * result?.[5]) / 10 ** 6
@@ -545,23 +545,7 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
       return e
     }
   }
-
-  // const fetchFusdValue = useCallback(async (lpToken) => {
-  //   try {
-  //     // return total amount of lp tokens locked in summoner contract
-  //     const netLpTokens = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[chainId])
-
-  //     // how many ftm tokens held in the lpTokenContract account
-  //     const fusdOrFtmAmount = isFusd ? await wftmContract.balanceOf(lpToken) : await fusdContract.balanceOf(lpToken)
-
-  //     return fusdOrFtmAmount
-  //   } catch (e) {
-  //     console.log(e)
-  //     alert(e.message)
-  //     return e
-  //   }
-  // }, [summonerContract])
-
+  
   /**
    * Value of SOUL in FUSD
    */
