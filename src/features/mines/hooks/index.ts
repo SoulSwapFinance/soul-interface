@@ -29,17 +29,6 @@ export function useChefContract(chef: Chef) {
   }, [contracts, chef])
 }
 
-export function useChefContracts(chefs: Chef[]) {
-  const masterChefContract = useMasterChefContract()
-  const contracts = useMemo(
-    () => ({
-      [Chef.MASTERCHEF]: masterChefContract,
-    }),
-    [masterChefContract]
-  )
-  return chefs.map((chef) => contracts[chef])
-}
-
 export function useUserInfo(farm, token) {
   const { account } = useActiveWeb3React()
 
@@ -55,11 +44,35 @@ export function useUserInfo(farm, token) {
   const result = useSingleCallResult(args ? contract : null, 'userInfo', args)?.result
 
   const value = result?.[0]
+  const harvestValue = result?.[3]
 
   const amount = value ? JSBI.BigInt(value.toString()) : undefined
+  // const nextHarvestUntil = harvestValue ? JSBI.BigInt(harvestValue.toString()) : undefined
 
   return amount ? CurrencyAmount.fromRawAmount(token, amount) : undefined
+  // nextHarvestUntil: nextHarvestUntil ? JSBI.toNumber(nextHarvestUntil) * 1000 : undefined,
 }
+
+// export function useUserInfo(farm, token) {
+//   const { account } = useActiveWeb3React()
+
+//   const contract = useChefContract(farm.chef)
+
+//   const args = useMemo(() => {
+//     if (!account) {
+//       return
+//     }
+//     return [String(farm.id), String(account)]
+//   }, [farm, account])
+
+//   const result = useSingleCallResult(args ? contract : null, 'userInfo', args)?.result
+
+//   const value = result?.[0]
+
+//   const amount = value ? JSBI.BigInt(value.toString()) : undefined
+
+//   return amount ? CurrencyAmount.fromRawAmount(token, amount) : undefined
+// }
 
 export function usePendingSoul(farm) {
   const { account, chainId } = useActiveWeb3React()

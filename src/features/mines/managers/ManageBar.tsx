@@ -45,7 +45,7 @@ const ManageBar = ({ farm }) => {
     chainId,
     getAddress(farm.lpToken),
     farm.pair.token1 ? 18 : farm.pair.token0 ? farm.pair.token0.decimals : 18,
-    farm.pair.token1 ? farm.pair.symbol : farm.pair.token0.symbol,
+    farm.pair?.token1 ? farm.pair?.symbol : farm.pair.token0?.symbol,
     farm.pair.token1 ? farm.pair.name : farm.pair.token0.name
   )
 
@@ -86,7 +86,7 @@ const ManageBar = ({ farm }) => {
 
   const withdrawError = !parsedWithdrawValue
     ? 'Enter Amount'
-    : stakedAmount.lessThan(parsedWithdrawValue)
+    : stakedAmount?.lessThan(parsedWithdrawValue)
     ? 'Insufficient Balance'
     : undefined
 
@@ -101,12 +101,12 @@ const ManageBar = ({ farm }) => {
               checked={toggle}
               onChange={() => setToggle(!toggle)}
               className={`${
-                toggle ? 'bg-blue border-blue' : 'bg-pink border-pink'
+                toggle ? 'bg-blue border-blue' : 'bg-purple border-purple'
               } bg-opacity-60 border border-opacity-80 relative inline-flex items-center h-[32px] rounded-full w-[54px] transition-colors focus:outline-none`}
             >
               <span
                 className={`${
-                  toggle ? 'translate-x-[1px] text-blue' : 'translate-x-[23px] text-pink'
+                  toggle ? 'translate-x-[1px] text-blue' : 'translate-x-[23px] text-purple'
                 } inline-block w-7 h-7 transform bg-white rounded-full transition-transform`}
               >
                 {toggle ? <PlusIcon /> : <MinusIcon />}
@@ -120,16 +120,16 @@ const ManageBar = ({ farm }) => {
             <Button
               variant="outlined"
               size="xs"
-              color={toggle ? 'blue' : 'pink'}
+              color={toggle ? 'blue' : 'purple'}
               key={i}
               onClick={() => {
                 toggle
-                  ? setDepositValue(balance?.multiply(multipler).divide(100).toExact())
-                  : setWithdrawValue(stakedAmount?.multiply(multipler).divide(100).toExact())
-              }}
+                ? setDepositValue(balance?.multiply(multipler).divide(100).toExact())
+                : setWithdrawValue(stakedAmount?.multiply(multipler).divide(100).toExact())
+            }}
               className={classNames(
                 'text-md border border-opacity-50',
-                toggle ? 'focus:ring-blue border-blue' : 'focus:ring-pink border-pink',
+                toggle ? 'focus:ring-blue border-blue' : 'focus:ring-purple border-purple',
                 multipler === '25' || multipler === '75' ? 'hidden sm:block' : ''
               )}
             >

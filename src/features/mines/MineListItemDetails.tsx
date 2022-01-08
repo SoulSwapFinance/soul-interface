@@ -30,6 +30,7 @@ const MineListItemDetails = ({ farm }) => {
   const stakedAmount = useUserInfo(farm, liquidityToken)
 
   const [toggleView, setToggleView] = useState(stakedAmount?.greaterThan(ZERO))
+  // const [toggleView, setToggleView] = useState(stakedAmount?.greaterThan(ZERO))
 
   return (
     <Transition
@@ -70,7 +71,7 @@ const MineListItemDetails = ({ farm }) => {
                     } flex items-center justify-center flex-1 px-2 py-2 text-lg rounded cursor-pointer select-none`
                   }
                 >
-                  { i18n._(t`Liquidity`) }
+                  { i18n._(t`Manage Liquidity`) }
                 </Tab>
                 <Tab
                   className={({ selected }) =>
@@ -81,7 +82,7 @@ const MineListItemDetails = ({ farm }) => {
                     } flex items-center justify-center flex-1 px-2 py-2 text-lg rounded cursor-pointer select-none`
                   }
                 >
-                  {i18n._(t`Staking`)}
+                  {i18n._(t`Manage Farms`)}
                 </Tab>
               </Tab.List>
               <Tab.Panel>
