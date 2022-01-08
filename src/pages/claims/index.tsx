@@ -70,7 +70,7 @@ export default function Claims() {
   useEffect(() => {
     const fetchLockup = async () => {
       if (account) { // todo: update to prod
-        fetch('https://raw.githubusercontent.com/SoulSwapFinance/soul-claims/main/scripts/claims/dev.json')
+        fetch('https://raw.githubusercontent.com/SoulSwapFinance/soul-claims/main/scripts/claims/prod.json')
           .then((response) => response.json())
           .then((claimable) => {
             const userClaimableAmount = claimable[account] ? claimable[account] / 1e18 : claimable[account.toLowerCase()] / 1e18
@@ -150,7 +150,7 @@ export default function Claims() {
                 {account ? (
                   <div className="text-sm text-secondary">
                     {userAllocation ? (
-                      i18n._(t`Claimable: ${formatNumber(userAllocation)} SOUL`)
+                      i18n._(t`Allocation: ${formatNumber(userAllocation)} SOUL`)
                     ) : (
                       <Dots>{i18n._(t`Claimable: Fetching Claimable Amount`)}</Dots>
                     )}
