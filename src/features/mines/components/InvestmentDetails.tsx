@@ -19,27 +19,21 @@ import usePendingReward from '../hooks/usePendingReward'
 
 const InvestmentDetails = ({ farm }) => {
   const { i18n } = useLingui()
-
   const { chainId } = useActiveWeb3React()
-
   const { harvest } = useMasterChef()
-
   const router = useRouter()
-
   const addTransaction = useTransactionAdder()
-
-
   const [pendingTx, setPendingTx] = useState(false)
 
-  const token0 = useCurrency(farm.pair.token0.id)
-  const token1 = useCurrency(farm.pair.token1.id)
+  let token0 = useCurrency(farm.pair.token0?.id)
+  let token1 = useCurrency(farm.pair.token1?.id)
 
   const liquidityToken = new Token(
     chainId,
-    getAddress(farm.pair.id),
-    18,
-    'SLP',
-    farm.pair.name
+    getAddress(farm.lpToken),
+    farm.pair.token1 ? 18 : farm.pair.token0 ? farm.pair.token0.decimals : 18,
+    farm.pair.token1 ? farm.pair.symbol : farm.pair.token0.symbol,
+    farm.pair.token1 ? farm.pair.name : farm.pair.token0.name
   )
 
   const stakedAmount = useUserInfo(farm, liquidityToken)
