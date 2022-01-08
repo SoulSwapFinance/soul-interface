@@ -2,7 +2,7 @@ import { getAddress } from '@ethersproject/address'
 import { BigNumber } from '@ethersproject/bignumber'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, CurrencyAmount, JSBI, Token, USD, ZERO } from 'sdk'
+import { CurrencyAmount, JSBI, Token, USD, ZERO } from 'sdk'
 import Button from 'components/Button'
 import CurrencyLogo from 'components/CurrencyLogo'
 import Typography from 'components/Typography'
@@ -16,10 +16,11 @@ import { PairType } from '../enum'
 import { usePendingSoul, useUserInfo } from '../hooks'
 import useMasterChef from '../hooks/useMasterChef'
 import usePendingReward from '../hooks/usePendingReward'
+import { SOUL } from '../../../constants'
 
 const InvestmentDetails = ({ farm }) => {
   const { i18n } = useLingui()
-  const { chainId } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const { harvest } = useMasterChef()
   const router = useRouter()
   const addTransaction = useTransactionAdder()
@@ -74,7 +75,7 @@ const InvestmentDetails = ({ farm }) => {
           <div className="text-lg cursor-pointer">{i18n._(t`Your Deposits`)}:</div>
           <Typography className="font-bold">
             {formatNumber(stakedAmount?.toSignificant(6) ?? 0)} {farm.pair.token0?.symbol}-{farm.pair.token1?.symbol}{' '}
-            {liquidityToken.symbol}
+            {liquidityToken?.symbol}
           </Typography>
         </div>
         <div className="w-full h-0 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis border-gradient-r-blue-pink-dark-800 opacity-20" />
@@ -82,7 +83,7 @@ const InvestmentDetails = ({ farm }) => {
           <div className="flex flex-col justify-center space-y-2">
             <div className="flex items-center space-x-2">
               <CurrencyLogo currency={token0} size="30px" />
-              {farm.pair.type === PairType.SWAP && (
+              {(
                 <Typography>
                   {formatNumber((farm.pair.reserve0 * Number(stakedAmount?.toExact() ?? 0)) / farm.pair.totalSupply)}
                 </Typography>
@@ -99,7 +100,7 @@ const InvestmentDetails = ({ farm }) => {
               </div>
             )}
           </div>
-          <Typography>{formatNumber(positionFiatValue?.toSignificant(6) ?? 0, true)}</Typography>
+          <Typography>{formatNumber(positionFiatValue?.toSignificant(4) ?? 0, true)}</Typography>
         </div>
       </div>
       <div className="flex flex-col w-full space-y-4">
@@ -120,14 +121,14 @@ const InvestmentDetails = ({ farm }) => {
           <div className="flex flex-col space-y-2">
             {farm?.rewards?.map((reward, i) => (
               <div key={i} className="flex items-center space-x-2">
-                <CurrencyLogo currency={reward.currency} size="30px" className="rounded-md" />
-                {i === 0 && <Typography>{formatNumber(pendingSoul?.toSignificant(6) ?? 0)}</Typography>}
+                <CurrencyLogo currency={SOUL[chainId]} size="30px" className="rounded-md" />
+                {i === 0 && <Typography>{formatNumber(pendingSoul?.toSignificant(4) ?? 0)}</Typography>}
                 {i === 1 && <Typography>{formatNumber(pendingReward)}</Typography>}
                 <Typography>{reward.token}</Typography>
               </div>
             ))}
           </div>
-          <Typography>{formatNumber(rewardValue, true)}</Typography>
+          <Typography>{formatNumber(rewardValue / 1e18, true)}</Typography>
         </div>
       </div>
     </div>
