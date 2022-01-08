@@ -190,22 +190,26 @@ export default function SoulStake() {
     }
   }
 
+    // SEANCE > STAKED
+    const hasMoreSeance =
+    seanceBalance?.toFixed(2) > Number(stakedBal)?.toFixed(2)
+
   // WITHDRAWABLE AMOUNT
   const withdrawable =
-    seanceBalance?.toFixed(2) <= Number(stakedBal)?.toFixed(2)
+    // seanceBalance?.toFixed() >= Number(stakedBal)?.toString()
       // SEANCE < STAKED
-      ? seanceBalance?.toFixed(2)
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-      // STAKED < SEANCE
-      : Number(stakedBal)
+      
+      hasMoreSeance ? 
+      Number(stakedBal)
         .toFixed(2)
         .toString()
         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-
-  // SEANCE > STAKED
-  const hasMoreSeance =
-    seanceBalance?.toFixed(2) > Number(stakedBal)?.toFixed(2)
+      : !hasMoreSeance ?
+      seanceBalance?.toFixed(2)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      // STAKED < SEANCE
+      : 0
 
   // ---------------------
   //      SOUL VAULT
@@ -569,12 +573,10 @@ export default function SoulStake() {
                           className="px-2 py-1 mr-2 ml-3 text-xs font-bold border pointer-events-auto focus:outline-none focus:ring hover:bg-opacity-40 md:bg-purple md:bg-opacity-30 border-secondary md:border-purple rounded-2xl md:py-1 md:px-3 md:ml-4 md:text-sm md:font-normal md:text-purple"
                           onClick={
                             activeTab == 0 ?
-                              handleClickMax
-                              : hasMoreSeance ?
-                                setShowConfirmation
-                                : handleClickMax
-                            // : handleClickMax
-                            // : handleClickMaxWithdrawal
+                            handleClickMax
+                            : hasMoreSeance ?
+                              setShowConfirmation
+                              : handleClickMax
                           }
                         >
                           {i18n._(t`MAX`)}
@@ -739,7 +741,7 @@ export default function SoulStake() {
         <div className="space-y-4">
           <ModalHeader title={`Please Read and Confirm`} onClose={() => setShowConfirmation(false)} />
           <Typography variant="lg">
-            `You have more SEANCE than you owe, which is great news! Thanks for being a contributor to our community. Yes, you may unstake.
+           If you have more SEANCE than you have STAKED, then please read below:
             <br /><br />
             After closing this prompt, please proceed with <b>manually entering</b> any number <b>less than or equivalent to</b> the
             amount denoted as <b>withdrawable</b>, for your convenience.
