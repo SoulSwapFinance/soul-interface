@@ -2,19 +2,17 @@ import { Zero } from '@ethersproject/constants'
 import { Contract } from '@ethersproject/contracts'
 import {
   CurrencyAmount,
-  JSBI,
-  MASTERCHEF_ADDRESS
+  JSBI
 } from 'sdk'
 import {
-  useMasterChefContract, useSoulSummonerContract, useSummonerContract,
+useSoulSummonerContract, useSummonerContract,
 } from 'hooks/useContract'
 import { useActiveWeb3React } from 'services/web3'
 import { NEVER_RELOAD, useSingleCallResult, useSingleContractMultipleData } from 'state/multicall/hooks'
-import concat from 'lodash/concat'
+// import concat from 'lodash/concat'
 import zip from 'lodash/zip'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { Chef } from '../enum'
 import { SOUL } from '../../../constants'
 
 export function useUserInfo(farm, token) {

@@ -17,7 +17,7 @@ import {
 import Button, { ButtonError } from 'components/Button'
 import Dots from 'components/Dots'
 import Web3Connect from 'components/Web3Connect'
-import { classNames, tryParseAmount } from 'functions'
+import { classNames, formatNumber, tryParseAmount } from 'functions'
 import { ApprovalState, useApproveCallback } from 'hooks/useApproveCallback'
 import { useActiveWeb3React } from 'services/web3'
 import { useTransactionAdder } from 'state/transactions/hooks'
@@ -29,18 +29,21 @@ import { Chef, PairType } from '../enum'
 import { useUserInfo } from '../hooks'
 import useMasterChef from '../hooks/useMasterChef'
 import { SOUL_SUMMONER_ADDRESS } from '../../../constants'
+import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
+import { useCurrency } from 'hooks/Tokens'
 
 const ManageBar = ({ farm }) => {
   const { account, chainId } = useActiveWeb3React()
-
   const [toggle, setToggle] = useState(true)
 
   const [depositValue, setDepositValue] = useState('')
   const [withdrawValue, setWithdrawValue] = useState('')
 
   const { deposit, withdraw } = useMasterChef()
-
   const addTransaction = useTransactionAdder()
+
+  let token0 = useCurrency(farm.pair.token0?.id)
+  let token1 = useCurrency(farm.pair.token1?.id)
 
   const liquidityToken = new Token(
     chainId,
@@ -51,26 +54,36 @@ const ManageBar = ({ farm }) => {
   )
 
   const balance = useCurrencyBalance(account, liquidityToken)
-
   const stakedAmount = useUserInfo(farm, liquidityToken)
 
-  const balanceFiatValue = CurrencyAmount.fromRawAmount(
-    USD[chainId],
-        JSBI.BigInt(
-          ((Number(balance?.toExact() ?? '0') * farm.pair.reserveUSD) / farm.pair.totalSupply)
-            .toFixed(USD[chainId].decimals)
-            .toBigNumber(USD[chainId].decimals)
-        )
-  )
+  let [data] = useV2PairsWithPrice([[token0, token1]])
+  let [state, pair, pairPrice] = data
 
-  const stakedAmountFiatValue = CurrencyAmount.fromRawAmount(
-    USD[chainId],
-      JSBI.BigInt(
-          ((Number(stakedAmount?.toExact() ?? '0') * farm.pair.reserveUSD) / farm.pair.totalSupply)
-            .toFixed(USD[chainId].decimals)
-            .toBigNumber(USD[chainId].decimals)
-        )
-  )
+  const balanceFiatValue 
+    = Number(pairPrice) * Number(balance?.toSignificant(2))
+  
+
+  const stakedAmountFiatValue 
+    = Number(pairPrice) * Number(stakedAmount?.toSignificant(2))
+
+  // const balanceFiatValue = CurrencyAmount.fromRawAmount(
+  //   USD[chainId],
+  //       JSBI.BigInt(
+  //         ((Number(balance?.toExact() ?? '0') * farm.pair.reserveUSD) / farm.pair.totalSupply)
+  //           .toFixed(USD[chainId].decimals)
+  //           .toBigNumber(USD[chainId].decimals)
+  //       )
+  // )
+
+  // const stakedAmountFiatValue = CurrencyAmount.fromRawAmount(
+  //   USD[chainId],
+  //     JSBI.BigInt(
+  //         ((Number(stakedAmount?.toExact() ?? '0') * farm.pair.reserveUSD) / farm.pair.totalSupply)
+  //           .toFixed(USD[chainId].decimals)
+  //           .toBigNumber(USD[chainId].decimals)
+  //       )
+  // )
+
 
   const parsedDepositValue = tryParseAmount(depositValue, liquidityToken)
   const parsedWithdrawValue = tryParseAmount(withdrawValue, liquidityToken)
@@ -80,16 +93,16 @@ const ManageBar = ({ farm }) => {
   const depositError = !parsedDepositValue
     ? 'Enter Amount'
     : balance?.lessThan(parsedDepositValue)
-    ? 'Insufficient Balance'
-    : undefined
+      ? 'Insufficient Balance'
+      : undefined
 
   const isDepositValid = !depositError
 
   const withdrawError = !parsedWithdrawValue
     ? 'Enter Amount'
     : stakedAmount?.lessThan(parsedWithdrawValue)
-    ? 'Insufficient Balance'
-    : undefined
+      ? 'Insufficient Balance'
+      : undefined
 
   const isWithdrawValid = !withdrawError
 
@@ -101,14 +114,12 @@ const ManageBar = ({ farm }) => {
             <Switch
               checked={toggle}
               onChange={() => setToggle(!toggle)}
-              className={`${
-                toggle ? 'bg-blue border-blue' : 'bg-purple border-purple'
-              } bg-opacity-60 border border-opacity-80 relative inline-flex items-center h-[32px] rounded-full w-[54px] transition-colors focus:outline-none`}
+              className={`${toggle ? 'bg-blue border-blue' : 'bg-purple border-purple'
+                } bg-opacity-60 border border-opacity-80 relative inline-flex items-center h-[32px] rounded-full w-[54px] transition-colors focus:outline-none`}
             >
               <span
-                className={`${
-                  toggle ? 'translate-x-[1px] text-blue' : 'translate-x-[23px] text-purple'
-                } inline-block w-7 h-7 transform bg-white rounded-full transition-transform`}
+                className={`${toggle ? 'translate-x-[1px] text-blue' : 'translate-x-[23px] text-purple'
+                  } inline-block w-7 h-7 transform bg-white rounded-full transition-transform`}
               >
                 {toggle ? <PlusIcon /> : <MinusIcon />}
               </span>
@@ -125,9 +136,9 @@ const ManageBar = ({ farm }) => {
               key={i}
               onClick={() => {
                 toggle
-                ? setDepositValue(balance?.multiply(multipler).divide(100).toExact())
-                : setWithdrawValue(stakedAmount?.multiply(multipler).divide(100).toExact())
-            }}
+                  ? setDepositValue(balance?.multiply(multipler).divide(100).toExact())
+                  : setWithdrawValue(stakedAmount?.multiply(multipler).divide(100).toExact())
+              }}
               className={classNames(
                 'text-md border border-opacity-50',
                 toggle ? 'focus:ring-blue border-blue' : 'focus:ring-purple border-purple',
@@ -148,7 +159,7 @@ const ManageBar = ({ farm }) => {
             hideIcon
             onUserInput={(value) => setDepositValue(value)}
             currencyBalance={balance}
-            fiatValue={balanceFiatValue}
+            fiatValue={ balanceFiatValue.toFixed(2) }
             showMaxButton={false}
           />
           {!account ? (
@@ -192,7 +203,7 @@ const ManageBar = ({ farm }) => {
             hideIcon
             onUserInput={(value) => setWithdrawValue(value)}
             currencyBalance={stakedAmount}
-            fiatValue={stakedAmountFiatValue}
+            fiatValue={stakedAmountFiatValue.toFixed(2)}
             showMaxButton={false}
           />
           {!account ? (

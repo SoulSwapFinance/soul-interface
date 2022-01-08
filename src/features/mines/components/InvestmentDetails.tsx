@@ -68,14 +68,14 @@ const InvestmentDetails = ({ farm }) => {
   const pendingSoul = usePendingSoul(farm)
   const pendingReward = usePendingReward(farm)
 
-  const positionFiatValue = CurrencyAmount.fromRawAmount(
-    USD[chainId],
-      JSBI.BigInt(
-          ((Number(stakedAmount?.toExact()) * farm.pair.reserveUSD) / farm.pair.totalSupply)
-            .toFixed(USD[chainId].decimals)
-            .toBigNumber(USD[chainId].decimals)
-        )
-  )
+  // const positionFiatValue = CurrencyAmount.fromRawAmount(
+  //   USD[chainId],
+  //     JSBI.BigInt(
+  //         ((Number(stakedAmount?.toExact()) * farm.pair.reserveUSD) / farm.pair.totalSupply)
+  //           .toFixed(USD[chainId].decimals)
+  //           .toBigNumber(USD[chainId].decimals)
+  //       )
+  // )
   // const typedDepositValue = tryParseAmount(depositValue, liquidityToken)
   
   function getTvl() {
@@ -134,10 +134,11 @@ const InvestmentDetails = ({ farm }) => {
               <CurrencyLogo currency={token0} size="30px" />
               {/* {(
                 <Typography>
-                  {formatNumber((farm.pair?.reserve0 * Number(stakedAmount?.toExact() ?? 0)) / farm.pair?.totalSupply)}
+                {formatNumber((farm.pair?.reserve0 * Number(stakedAmount?.toExact() ?? 0)) / farm.pair?.totalSupply)}
                 </Typography>
               )} */}
               <Typography>{token0?.symbol}</Typography>
+              <Typography>{' ('}{formatNumber(Number(pairPrice) / 2 * Number(stakedAmount?.toSignificant(2)), true)}{') '}</Typography>
             </div>
               <div className="flex items-center space-x-2">
                 <CurrencyLogo currency={token1} size="30px" />
@@ -145,6 +146,7 @@ const InvestmentDetails = ({ farm }) => {
                   {formatNumber((farm.pair?.reserve1 * Number(stakedAmount) ?? 0) / farm.pair.totalSupply)}
                 </Typography> */}
                 <Typography>{token1?.symbol}</Typography>
+                <Typography>{' ('}{formatNumber(Number(pairPrice) / 2 * Number(stakedAmount?.toSignificant(2)), true)}{') '}</Typography>
               </div>
           </div>
           {/* MULTIPLE PRICE PER LP * AMOUNT LP */}
@@ -158,9 +160,9 @@ const InvestmentDetails = ({ farm }) => {
           <div className="text-lg font-bold cursor-pointer">{i18n._(t`Pending Rewards`)}:</div>
           {((pendingSoul && pendingSoul.greaterThan(ZERO)) || (pendingReward && Number(pendingReward) > 0)) && (
             <button
-              className="py-0.5 px-4 font-bold bg-transparent border border-transparent rounded cursor-pointer border-gradient-r-blue-pink-dark-800 whitespace-nowrap text-md"
-              disabled={pendingTx}
-              onClick={onHarvest}
+            className="py-0.5 px-4 font-bold bg-transparent border border-transparent rounded cursor-pointer border-gradient-r-blue-pink-dark-800 whitespace-nowrap text-md"
+            disabled={pendingTx}
+            onClick={onHarvest}
             >
               {i18n._(t`Harvest Rewards`)}
             </button>
