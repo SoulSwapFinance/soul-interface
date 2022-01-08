@@ -8,9 +8,25 @@ import { XCircle } from 'react-feather'
 import NavLink from 'components/NavLink'
 import Typography from 'components/Typography'
 import { PairType } from '../enum'
+import { useCurrency } from 'hooks/Tokens'
+import { Token } from 'sdk'
+import { useActiveWeb3React } from 'hooks'
+import { getAddress } from 'ethers/lib/utils'
 
 const InformationDisclosure = ({ farm }) => {
   const { i18n } = useLingui()
+  const { account, chainId } = useActiveWeb3React()
+
+  let token0 = useCurrency(farm.pair.token0?.id)
+  let token1 = useCurrency(farm.pair.token1?.id)
+
+  const liquidityToken = new Token(
+    chainId,
+    getAddress(farm.lpToken),
+    farm.pair.token1 ? 18 : farm.pair.token0 ? farm.pair.token0.decimals : 18,
+    farm.pair.token1 ? farm.pair.symbol : farm.pair.token0.symbol,
+    farm.pair.token1 ? farm.pair.name : farm.pair.token0.name
+  )
 
   return (
     <Disclosure>
@@ -43,14 +59,14 @@ const InformationDisclosure = ({ farm }) => {
                 <Typography variant="sm" weight={700}>
                   {i18n._(t`Step One`)}
                 </Typography>
-                {farm.pair.type === PairType.SWAP && (
                   <>
                     <Typography variant="sm">
                       {i18n._(t`Provide liquidity to the`)}
+                      
                       {` `}
-                      <NavLink href={`/add/${farm.pair.token0.id}/${farm.pair.token1.id}`}>
-                        <a className="text-sm text-blue">
-                          {farm.pair.token0.symbol}/{farm.pair.token1.symbol}
+                      <NavLink href={`/add/${token0}/${token1}`}>
+                        <a className="text-sm text-purple">
+                          {token0?.symbol}/{token1?.symbol}
                         </a>
                       </NavLink>
                       {` `}
@@ -62,24 +78,6 @@ const InformationDisclosure = ({ farm }) => {
                       {i18n._(t`) to receive SLP tokens.`)}
                     </Typography>
                   </>
-                )}
-                {farm.pair.type === PairType.KASHI && (
-                  <Typography variant="sm">
-                    {i18n._(t`Lend`)}
-                    {` `}
-                    {farm.pair.token0.symbol}
-                    {` `}
-                    {i18n._(t`to the`)}
-                    {` `}
-                    <NavLink href={`/lend/${farm.pair.id}`}>
-                      <a className="text-sm text-blue">
-                        {farm.pair.token0.symbol}/{farm.pair.token1.symbol}
-                      </a>
-                    </NavLink>
-                    {` `}
-                    {i18n._(t`Kashi market to get KMP (Kashi Medium-risk Pair) tokens.`)}
-                  </Typography>
-                )}
               </div>
               <div className="flex flex-col space-y-2 md:pr-6">
                 <Typography variant="sm" weight={700}>
@@ -88,7 +86,7 @@ const InformationDisclosure = ({ farm }) => {
                 <Typography variant="sm">
                   {i18n._(t`Approve and then deposit your`)}
                   {` `}
-                  {farm.pair.type === PairType.KASHI ? `KMP` : `SLP`}
+                  {`SLP`}
                   {` `}
                   {i18n._(t`tokens into the farm to start earning rewards.`)}
                 </Typography>
@@ -102,17 +100,6 @@ const InformationDisclosure = ({ farm }) => {
                     {i18n._(
                       t`Harvest rewards and unstake your SLP tokens at any time. You can then remove your liquidity to receive your base investment tokens back in your wallet.`
                     )}
-                  </Typography>
-                )}
-                {farm.pair.type === PairType.KASHI && (
-                  <Typography variant="sm">
-                    {i18n._(
-                      t`Harvest rewards and unstake your KMP tokens at any time. You can then withdraw your lent`
-                    )}
-                    {` `}
-                    {farm.pair.token0.symbol}
-                    {` `}
-                    {i18n._(t`into your wallet or BentoBox.`)}
                   </Typography>
                 )}
               </div>

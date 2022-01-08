@@ -130,15 +130,6 @@ const InvestmentDetails = ({ farm }) => {
           <Typography>{formatNumber(rewardValue, true)}</Typography>
         </div>
       </div>
-      {farm.pair.type === PairType.KASHI && (
-        <Button
-          size="sm"
-          className="font-bold bg-transparent border border-transparent rounded cursor-pointer border-gradient-r-blue-pink-dark-800 whitespace-nowrap text-md"
-          onClick={() => router.push(`/lend/${farm.pair.id}`)}
-        >
-          {i18n._(t`View Details on Kashi`)}
-        </Button>
-      )}
     </div>
   )
 }

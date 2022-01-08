@@ -124,8 +124,8 @@ const ManageBar = ({ farm }) => {
               key={i}
               onClick={() => {
                 toggle
-                  ? setDepositValue(balance.multiply(multipler).divide(100).toExact())
-                  : setWithdrawValue(stakedAmount.multiply(multipler).divide(100).toExact())
+                  ? setDepositValue(balance?.multiply(multipler).divide(100).toExact())
+                  : setWithdrawValue(stakedAmount?.multiply(multipler).divide(100).toExact())
               }}
               className={classNames(
                 'text-md border border-opacity-50',

@@ -69,7 +69,7 @@ const MineListItemDetails = ({ farm }) => {
                     } flex items-center justify-center flex-1 px-2 py-2 text-lg rounded cursor-pointer select-none`
                   }
                 >
-                  {farm.pair.type === PairType.KASHI ? i18n._(t`Lending`) : i18n._(t`Liquidity`)}
+                  { i18n._(t`Liquidity`) }
                 </Tab>
                 <Tab
                   className={({ selected }) =>
