@@ -11,7 +11,8 @@ import { PairType } from './enum'
 import { useUserInfo } from './hooks'
 import InformationDisclosure from './components/InformationDisclosure'
 import InvestmentDetails from './components/InvestmentDetails'
-import ManageBar from './ManageBar'
+import ManageBar from './managers/ManageBar'
+import ManageSwapPair from './managers/ManageSwapPair'
 
 const MineListItemDetails = ({ farm }) => {
   const { i18n } = useLingui()
@@ -83,6 +84,9 @@ const MineListItemDetails = ({ farm }) => {
                   {i18n._(t`Staking`)}
                 </Tab>
               </Tab.List>
+              <Tab.Panel>
+                <ManageSwapPair farm={farm} />
+              </Tab.Panel>
               <Tab.Panel>
                 <ManageBar farm={farm} />
               </Tab.Panel>

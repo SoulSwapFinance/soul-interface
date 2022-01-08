@@ -64,18 +64,18 @@ const InformationDisclosure = ({ farm }) => {
                       {i18n._(t`Provide liquidity to the`)}
                       
                       {` `}
-                      <NavLink href={`/add/${token0}/${token1}`}>
+                      <NavLink href={`/add/${token0?.address}/${token1?.address}`}>
                         <a className="text-sm text-purple">
                           {token0?.symbol}/{token1?.symbol}
                         </a>
                       </NavLink>
-                      {` `}
+                      {/* {` `}
                       {i18n._(t`pool (or`)}
                       {` `}
                       <NavLink href={`/migrate`}>
                         <a className="text-sm text-blue">migrate liquidity</a>
-                      </NavLink>
-                      {i18n._(t`) to receive SLP tokens.`)}
+                      </NavLink> */}
+                      {i18n._(t`) to receive SLP tokens.`)} 
                     </Typography>
                   </>
               </div>
@@ -95,13 +95,11 @@ const InformationDisclosure = ({ farm }) => {
                 <Typography variant="sm" weight={700}>
                   {i18n._(t`Step Three`)}
                 </Typography>
-                {farm.pair.type === PairType.SWAP && (
                   <Typography variant="sm">
                     {i18n._(
-                      t`Harvest rewards and unstake your SLP tokens at any time. You can then remove your liquidity to receive your base investment tokens back in your wallet.`
+                      t`Harvest rewards and unstake your LP tokens at any time. You can then remove your liquidity to receive your base investment tokens back in your wallet.`
                     )}
                   </Typography>
-                )}
               </div>
             </Disclosure.Panel>
           </Transition>

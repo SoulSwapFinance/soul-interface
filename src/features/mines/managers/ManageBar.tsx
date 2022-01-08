@@ -23,11 +23,11 @@ import { useTransactionAdder } from 'state/transactions/hooks'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import React, { useState } from 'react'
 
-import CurrencyInputPanel from './components/CurrencyInputPanel'
-import { Chef, PairType } from './enum'
-import { useUserInfo } from './hooks'
-import useMasterChef from './hooks/useMasterChef'
-import { SOUL_SUMMONER_ADDRESS } from '../../constants'
+import CurrencyInputPanel from '../components/CurrencyInputPanel'
+import { Chef, PairType } from '../enum'
+import { useUserInfo } from '../hooks'
+import useMasterChef from '../hooks/useMasterChef'
+import { SOUL_SUMMONER_ADDRESS } from '../../../constants'
 
 const ManageBar = ({ farm }) => {
   const { account, chainId } = useActiveWeb3React()
