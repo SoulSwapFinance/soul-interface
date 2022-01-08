@@ -42,14 +42,14 @@ export abstract class AbstractOracle implements Oracle {
 export class SushiSwapTWAP0Oracle extends AbstractOracle {
   constructor(pair: any, chainId: ChainId, tokens?: Token[]) {
     super(pair, chainId, tokens)
-    this.name = 'SushiSwap'
+    this.name = 'Soul Power'
   }
 }
 
 export class SushiSwapTWAP1Oracle extends AbstractOracle {
   constructor(pair: any, chainId: ChainId, tokens?: Token[]) {
     super(pair, chainId, tokens)
-    this.name = 'SushiSwap'
+    this.name = 'Soul Power'
   }
 }
 
