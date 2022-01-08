@@ -10,6 +10,7 @@ import {
   JSBI,
   MASTERCHEF_ADDRESS,
   Token,
+  USDC,
   USD,
   ZERO,
 } from 'sdk'
@@ -44,9 +45,9 @@ const ManageBar = ({ farm }) => {
   const liquidityToken = new Token(
     chainId,
     getAddress(farm.lpToken),
-    farm.pair.token1 ? 18 : farm.pair.token0 ? farm.pair.token0.decimals : 18,
+    18,
     farm.pair?.token1 ? farm.pair?.symbol : farm.pair.token0?.symbol,
-    farm.pair.token1 ? farm.pair.name : farm.pair.token0.name
+    farm.pair.token1 ? farm.pair?.name : farm.pair.token0?.name
   )
 
   const balance = useCurrencyBalance(account, liquidityToken)

@@ -9,8 +9,12 @@ import { useCurrency } from 'hooks/Tokens'
 
 import { PairType } from './enum'
 import MineListItemDetails from './MineListItemDetails'
+import { SOUL } from '../../constants'
+import { useActiveWeb3React } from 'hooks'
 
 const MineListItem = ({ farm, ...rest }) => {
+  const { chainId } = useActiveWeb3React()
+  
   const token0 = useCurrency(farm.pair.token0?.id)
   const token1 = useCurrency(farm.pair.token1?.id)
 
@@ -31,9 +35,9 @@ const MineListItem = ({ farm, ...rest }) => {
                   <div>
                     <span className="font-bold">{farm?.pair?.token0?.symbol}</span>
                   </div>
-                  {farm?.pair?.type === PairType.SWAP && (
+                  {/* {farm?.pair?.type === PairType.SWAP && (
                     <div className="text-xs md:text-base text-secondary">SoulSwap Farm</div>
-                  )}
+                  )} */}
                 </div>
               </div>
               <div className="flex flex-col justify-center font-bold">{formatNumber(farm.tvl, true)}</div>
@@ -41,14 +45,17 @@ const MineListItem = ({ farm, ...rest }) => {
                 <div className="flex items-center space-x-2">
                   {farm?.rewards?.map((reward, i) => (
                     <div key={i} className="flex items-center">
-                      <CurrencyLogo currency={token0} size={isMobile ? 32 : 50} />
+                      <CurrencyLogo currency={SOUL[chainId]} size={isMobile ? 32 : 50} />
                     </div>
                   ))}
                 </div>
                 <div className="flex flex-col space-y-1">
                   {farm?.rewards?.map((reward, i) => (
                     <div key={i} className="text-xs md:text-sm whitespace-nowrap">
-                      {formatNumber(reward.rewardPerDay)} SOUL / DAY
+                      {reward.rewardPerDay > 0 ?
+                        formatNumber(reward.rewardPerDay)
+                        : 'INACTIVE'
+                        }
                     </div>
                   ))}
                 </div>
