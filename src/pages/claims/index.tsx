@@ -106,7 +106,7 @@ export default function Claims() {
         <div className="hidden space-y-10 md:block">
           <Image unoptimized width="300" height="300" src={vaultImg} loader={cloudinaryLoader} alt="" />
           <div className="relative w-full p-4 overflow-hidden rounded bg-dark-900">
-            <div className="font-bold text-white">{i18n._(t`Community Approval`)}</div>
+            <div className="font-bold text-white">{i18n._(t`Harvest Redistribution`)}</div>
             <div
               className="pt-2 text-sm font-bold text-gray-400"
               style={{
@@ -116,7 +116,7 @@ export default function Claims() {
             >
               <>
                 {i18n._(t`Claims are executed within the guidelines outlined in`)}{' '}
-                <ExternalLink href="https://ftmscan.com/address/0x209e5933f28d62ed45288cd939b64187dbc018c8#code">
+                <ExternalLink href="https://ftmscan.com/address/0xA121b64fd62a99869767650879C5bEc776415a45#code">
                   Smart Contract
                 </ExternalLink>
                 .
@@ -129,28 +129,32 @@ export default function Claims() {
                 {i18n._(t`for deliberations on additional points.`)}
                 <br />
                 <br />
-                {i18n._(t`Additional records and weekly merkle updates can be found on`)}{' '}
+                {i18n._(t`Additional records and merkle updates can be found on`)}{' '}
                 <ExternalLink  href="https://github.com/SoulSwapFinance/soul-claims">Github</ExternalLink>
               </>
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-3 max-w-[400px]">
+        <div className="flex flex-col gap-3 max-w-[900px]">
           <div className="relative w-full overflow-hidden rounded bg-dark-900">
             <div className="flex flex-col gap-3 p-4">
               <div className="flex flex-row justify-between">
                 <div className="font-bold text-white">{i18n._(t`Your Claimable SOUL`)}</div>
-                <QuestionHelper text="Your SOUL will be released upon your claim and are claimable until February 14th. Claiming forfeits your ability to pose a counter-claim." />
+                <QuestionHelper text="Your SOUL will be released upon your claim and are claimable until February 28th. Claiming forfeits your ability to pose a counter-claim." />
               </div>
               {/* <div style={{ display: 'flex', alignItems: 'baseline' }}> */}
               <div className="flex flex-col items-baseline">
                 <div className="font-bold text-white text-[36px]">
-                  {unclaimedAmount?.toFixed(2)}
+                  { 
+                    unclaimedAmount?.toFixed(0)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                  }
                 </div>
                 {account ? (
                   <div className="text-sm text-secondary">
                     {userAllocation ? (
-                      i18n._(t`Allocation: ${formatNumber(userAllocation)} SOUL`)
+                      i18n._(t`Allocated: ${formatNumber(userAllocation)} SOUL`)
                     ) : (
                       <Dots>{i18n._(t`Claimable: Fetching Claimable Amount`)}</Dots>
                     )}
@@ -203,28 +207,45 @@ export default function Claims() {
                 </Link>
               </div>
               <div className="p-4 rounded bg-dark-800">
-                {/* <Link href={`/seance`}> */}
+                <Link href={`/farms`}>
                   <a className="flex items-center justify-between gap-3">
                     <div className="flex flex-col gap-1">
-                      <div className="font-bold text-white">{i18n._(t`Collatoralize your Yields`)}</div>
+                      <div className="font-bold text-white">{i18n._(t`Farm with SOUL-FTM`)}</div>
                       <div className="text-sm text-secondary">
-                        {t`(COMING SOON) Stake into SEANCE add collateral as all in one click.`}
+                        {t`Pair your SOUL with FTM and add to Farms for more SOUL and an enhanced AURA.`}
+                        {/* {t`(COMING SOON) Stake into SEANCE add collateral as all in one click.`} */}
                       </div>
                     </div>
                     <div className="min-w-[32px]">
-                      {/* <ChevronRight /> */}
+                      <ChevronRight />
                     </div>
                   </a>
-                {/* </Link> */}
+                </Link>
               </div>
               <div className="p-4 rounded bg-dark-800">
+              <Link href={`/bond`}>
+                  <a className="flex items-center justify-between gap-3">
+                    <div className="flex flex-col gap-1">
+                      <div className="font-bold text-white">{i18n._(t`Mint SOUL with Liquidity`)}</div>
+                      <div className="text-sm text-secondary">
+                        {t`Pair your SOUL and add to Bonds for more SOUL at record-high returns.`}
+                        {/* {t`(COMING SOON) Stake into SEANCE add collateral as all in one click.`} */}
+                      </div>
+                    </div>
+                    <div className="min-w-[32px]">
+                      <ChevronRight />
+                    </div>
+                  </a>
+                </Link>
+                </div>
+              {/* <div className="p-4 rounded bg-dark-800">
                 <div className="flex flex-col gap-1">
                   <div className="font-bold text-white">{i18n._(t`Enter the Underworld`)}</div>
                   <div className="text-sm text-secondary">
                     {t`(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies.`}
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
