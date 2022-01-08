@@ -129,6 +129,10 @@ export const USDC_ADDRESS: AddressMap = {
   // [ChainId.MOONRIVER]: '0xE3F5a90F9cb311505cd691a46596599aA1A0AD7D',
 }
 
+export const DAI_ADDRESS: AddressMap = {
+  [ChainId.FANTOM]: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E'
+}
+
 export const USD_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: USDC_ADDRESS[ChainId.MAINNET],
   // [ChainId.ROPSTEN]: USDC_ADDRESS[ChainId.ROPSTEN],

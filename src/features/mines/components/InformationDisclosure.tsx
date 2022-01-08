@@ -59,25 +59,60 @@ const InformationDisclosure = ({ farm }) => {
                 <Typography variant="sm" weight={700}>
                   {i18n._(t`Step One`)}
                 </Typography>
-                  <>
-                    <Typography variant="sm">
-                      {i18n._(t`Provide liquidity to the`)}
-                      
-                      {` `}
-                      <NavLink href={`/add/${token0?.address}/${token1?.address}`}>
-                        <a className="text-sm text-purple">
-                          {token0?.symbol}/{token1?.symbol}
-                        </a>
-                      </NavLink>
-                      {/* {` `}
-                      {i18n._(t`pool (or`)}
-                      {` `}
-                      <NavLink href={`/migrate`}>
+                <>
+                  <Typography variant="sm">
+                    {i18n._(t`Provide liquidity for`)}
+
+                    {` `}
+                    {
+                      token0?.symbol == 'WFTM' ?
+                        <NavLink href={
+                          `/add/FTM/${token1.address}`}
+                        >
+                          <a className="text-sm text-purple">
+                            {token0?.symbol}/{token1?.symbol}
+                          </a>
+                        </NavLink>
+
+                        : token1?.symbol == 'WFTM' ?
+
+                          <NavLink href={
+                            `/add/${token0.address}/FTM`}
+                          >
+                            <a className="text-sm text-purple">
+                              {token0?.symbol}/{token1?.symbol}
+                            </a>
+                          </NavLink>
+                          : token0?.symbol != 'WFTM' && token1?.symbol != 'WFTM' && token1?.symbol != null ?
+                            <NavLink href={
+                              `/add/${token0.address}/${token1.address}`}
+                            >
+                              <a className="text-sm text-purple">
+                                {token0?.symbol}/{token1?.symbol}
+                              </a>
+                            </NavLink>
+                            :
+                              <NavLink href={
+                                `/add/FTM/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07`}
+                              >
+                                <a className="text-sm text-purple">
+                                  {token0?.symbol}/{token1?.symbol}
+                                </a>
+                              </NavLink>
+                    
+                      }
+
+
+                    {/* /add/${token0?.address}/${token1?.address}`}> */}
+                    {` `}
+                    {/* {i18n._(t`pool (or`)} */}
+                    {` `}
+                    {/* <NavLink href={`/migrate`}>
                         <a className="text-sm text-blue">migrate liquidity</a>
                       </NavLink> */}
-                      {i18n._(t`) to receive SLP tokens.`)} 
-                    </Typography>
-                  </>
+                    {i18n._(t`to receive LP tokens.`)}
+                  </Typography>
+                </>
               </div>
               <div className="flex flex-col space-y-2 md:pr-6">
                 <Typography variant="sm" weight={700}>
@@ -95,11 +130,11 @@ const InformationDisclosure = ({ farm }) => {
                 <Typography variant="sm" weight={700}>
                   {i18n._(t`Step Three`)}
                 </Typography>
-                  <Typography variant="sm">
-                    {i18n._(
-                      t`Harvest rewards and unstake your LP tokens at any time. You can then remove your liquidity to receive your base investment tokens back in your wallet.`
-                    )}
-                  </Typography>
+                <Typography variant="sm">
+                  {i18n._(
+                    t`Harvest rewards and unstake your LP tokens at any time. You can then remove your liquidity to receive your base investment tokens back in your wallet.`
+                  )}
+                </Typography>
               </div>
             </Disclosure.Panel>
           </Transition>

@@ -198,8 +198,8 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
         token2Name === 'USDC' ||
         token1Name === 'fUSDT' ||
         token2Name === 'fUSDT' ||
-        token1Name === 'gFUSDT' ||
-        token2Name === 'gFUSDT'
+        token1Name === 'DAI' ||
+        token2Name === 'DAI'
       ) {
         if (token1Name !== 'DAI') {
           pidTvl = (summonerPidPercOfSupply * result?.[5]) / 10 ** 6
