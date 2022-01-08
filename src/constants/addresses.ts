@@ -97,8 +97,7 @@ export const ZAPPER_ADDRESS: AddressMap = {
 // TODO: specify merkle distributor for mainnet
 export const MERKLE_DISTRIBUTOR_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '0xcBE6B83e77cdc011Cc18F6f0Df8444E5783ed982', // TODO: UPDATE
-  [ChainId.FANTOM]: '0xA121b64fd62a99869767650879C5bEc776415a45', // JAN 5 2022
-  // [ChainId.ROPSTEN]: '0x84d1f7202e0e7dac211617017ca72a2cb5e2b955',
+  [ChainId.FANTOM]: '0xA121b64fd62a99869767650879C5bEc776415a45', // JAN 6TH 2022
 }
 
 export const MULTICALL2_ADDRESS: AddressMap = {
