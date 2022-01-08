@@ -35,10 +35,8 @@ export function useUserInfo(farm, token) {
   const harvestValue = result?.[3]
 
   const amount = value ? JSBI.BigInt(value.toString()) : undefined
-  // const nextHarvestUntil = harvestValue ? JSBI.BigInt(harvestValue.toString()) : undefined
 
   return amount ? CurrencyAmount.fromRawAmount(token, amount) : undefined
-  // nextHarvestUntil: nextHarvestUntil ? JSBI.toNumber(nextHarvestUntil) * 1000 : undefined,
 }
 
 // export function useUserInfo(farm, token) {
@@ -209,7 +207,6 @@ export function useSoulFarms(contract?: Contract | null) {
       allocPoint: data[0].result?.['allocPoint'] || '',
       lastRewardTime: data[0].result?.['lastRewardTime'] || '',
       accSoulPerShare: data[0].result?.['accSoulPerShare'] || '',
-      // harvestInterval: data[0].result?.['harvestInterval'] || '',
       totalLp: data[0].result?.['totalLp'] || '',
     }))
   }, [args, poolInfo])
