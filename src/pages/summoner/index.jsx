@@ -33,6 +33,7 @@ export default function FarmV2() {
   const [pendingTx, setPendingTx] = useState(false)
   const addTransaction = useTransactionAdder()
   const [liquidity, setLiquidity] = useState()
+  const [apr, setApr] = useState()
 
   const type = router.query.filter
 

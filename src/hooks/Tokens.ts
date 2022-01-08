@@ -1,4 +1,4 @@
-import { ChainId, Currency, NATIVE, MultiToken, Token, WNATIVE, WNATIVE_ADDRESS, currencyEquals } from '../sdk'
+import { ChainId, Currency, NATIVE, MultiToken, Token, WNATIVE, WNATIVE_ADDRESS, currencyEquals } from 'sdk'
 import { NEVER_RELOAD, useSingleCallResult } from '../state/multicall/hooks'
 import { TokenAddressMap, useAllLists, useInactiveListUrls, useUnsupportedTokenList } from './../state/lists/hooks'
 import { useBytes32TokenContract, useTokenContract } from './useContract'
