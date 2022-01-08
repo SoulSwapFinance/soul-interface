@@ -73,7 +73,7 @@ const InvestmentDetails = ({ farm }) => {
         <div className="flex items-end justify-between font-bold">
           <div className="text-lg cursor-pointer">{i18n._(t`Your Deposits`)}:</div>
           <Typography className="font-bold">
-            {formatNumber(stakedAmount?.toSignificant(6) ?? 0)} {farm.pair.token0.symbol}-{farm.pair.token1.symbol}{' '}
+            {formatNumber(stakedAmount?.toSignificant(6) ?? 0)} {farm.pair.token0?.symbol}-{farm.pair.token1?.symbol}{' '}
             {liquidityToken.symbol}
           </Typography>
         </div>
