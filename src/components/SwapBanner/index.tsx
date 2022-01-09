@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
 import { XIcon } from '@heroicons/react/outline'
-import NavLink from 'components/NavLink'
 
 const SwapBanner: FC = () => (
   <div className="relative w-full bg-purple bg-opacity-10">
@@ -13,21 +12,20 @@ const SwapBanner: FC = () => (
           </span>
           <br/>
           <span className="block sm:ml-2 md:inline-block">
-            <NavLink src="/claims" target = "_blank" rel="noreferrer"
+            <a href="https://exchange.soulswap.finance/claims" target = "_blank" rel="noreferrer"
               className="font-bold text-white underline">
               {' '}
               Click Here to Claim<span aria-hidden="true"></span>
-            </NavLink>
+            </a>
           </span>
         </p>
       </div>
-      <div className="absolute inset-y-0 right-0 flex items-start pt-1 pr-1 sm:pt-1 sm:pr-2 sm:items-start">
-        
-        <button type="button" className="flex p-2 focus:outline-none">
+      {/* <div className="absolute inset-y-0 right-0 flex items-start pt-1 pr-1 sm:pt-1 sm:pr-2 sm:items-start"> */}
+        {/* <button type="button" className="flex p-2 focus:outline-none">
            <span className="sr-only">Dismiss</span>
         <XIcon className="w-6 h-6 text-white" aria-hidden="true" />
-        </button>
-      </div>
+        </button> */}
+      {/* </div> */}
     </div>
   </div>
 )
