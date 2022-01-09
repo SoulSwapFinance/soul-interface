@@ -22,20 +22,20 @@ const MineList = ({ farms, term, filter }) => {
           onClick={() => requestSort('symbol')}
         >
           <div className="hover:text-high-emphesis">{i18n._(t`LP Asset`)}</div>
-          {sortConfig &&
+          {/* {sortConfig &&
             sortConfig.key === 'symbol' &&
             ((sortConfig.direction === 'ascending' && <ChevronUpIcon width={12} height={12} />) ||
-              (sortConfig.direction === 'descending' && <ChevronDownIcon width={12} height={12} />))}
+              (sortConfig.direction === 'descending' && <ChevronDownIcon width={12} height={12} />))} */}
         </div>
         <div
           className="flex items-center px-4 cursor-pointer hover:text-high-emphesis"
           onClick={() => requestSort('tvl')}
         >
           {i18n._(t`TVL`)}
-          {sortConfig &&
+          {/* {sortConfig &&
             sortConfig.key === 'tvl' &&
             ((sortConfig.direction === 'ascending' && <ChevronUpIcon width={12} height={12} />) ||
-              (sortConfig.direction === 'descending' && <ChevronDownIcon width={12} height={12} />))}
+              (sortConfig.direction === 'descending' && <ChevronDownIcon width={12} height={12} />))} */}
         </div>
         <div className="items-center justify-start hidden px-4 md:flex hover:text-high-emphesis">
           {i18n._(t`Rewards`)}
@@ -45,10 +45,10 @@ const MineList = ({ farms, term, filter }) => {
           onClick={() => requestSort('roiPerYear')}
         >
           {i18n._(t`APR`)}
-          {sortConfig &&
+          {/* {sortConfig &&
             sortConfig.key === 'roiPerYear' &&
             ((sortConfig.direction === 'ascending' && <ChevronUpIcon width={12} height={12} />) ||
-              (sortConfig.direction === 'descending' && <ChevronDownIcon width={12} height={12} />))}
+              (sortConfig.direction === 'descending' && <ChevronDownIcon width={12} height={12} />))} */}
         </div>
       </div>
       <InfiniteScroll
