@@ -8,7 +8,7 @@ export function FiatValue({
   fiatValue,
   priceImpact,
 }: {
-  fiatValue: CurrencyAmount<Currency> | number | null | undefined
+  fiatValue: CurrencyAmount<Currency> | null | undefined
   priceImpact?: Percent
 }) {
   const priceImpactClassName = useMemo(() => {
@@ -24,8 +24,7 @@ export function FiatValue({
     <div className="flex justify-end space-x-1 text-xs font-medium text-right text-secondary">
       {fiatValue ? (
         <>
-          ≈$ <div className="cursor-pointer">{fiatValue}</div>
-          {/* ≈$ <div className="cursor-pointer">{fiatValue?.toSignificant(6, { groupSeparator: ',' })}</div> */}
+          ≈$ <div className="cursor-pointer">{fiatValue?.toSignificant(6, { groupSeparator: ',' })}</div>
         </>
       ) : (
         ''

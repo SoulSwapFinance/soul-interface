@@ -146,13 +146,11 @@
   "dependencies": {
     "@apollo/client": "3.4.15",
     "@clover-network/clover-connector": "^1.0.0",
-    "@sushiswap/trident-sdk": "^1.0.0-canary.44",
     "@types/big.js": "6.1.1",
     "autoprefixer": "^10.0.2",
     "axios": "^0.24.0",
     "big.js": "^6.1.1",
     "cids": "^1.1.7",
-    "combinate": "^1.1.7",
     "decimal.js-light": "^2.5.1",
     "ethers": "^5.4.7",
     "faunadb": "^4.4.1",

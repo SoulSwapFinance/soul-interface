@@ -16,7 +16,7 @@ interface CurrencyInputPanelProps {
   onMax?: () => void
   showMaxButton: boolean
   currencyBalance: CurrencyAmount<Currency> | null
-  fiatValue?: CurrencyAmount<Token> | number | string | null
+  fiatValue?: CurrencyAmount<Token> | null
   currency?: Currency | null
   hideBalance?: boolean
   hideInput?: boolean
@@ -85,7 +85,7 @@ export default function CurrencyInputPanel({
                   <div onClick={onMax} className="text-xs font-medium text-right cursor-pointer text-low-emphesis">
                     {formatCurrencyAmount(currencyBalance, 4)} {currency?.symbol}
                   </div>
-                  <FiatValue fiatValue={Number(fiatValue)} priceImpact={priceImpact} />
+                  <FiatValue fiatValue={fiatValue} priceImpact={priceImpact} />
                 </div>
               ) : null}
             </>

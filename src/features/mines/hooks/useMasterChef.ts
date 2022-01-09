@@ -19,9 +19,9 @@ export default function useMasterChef() {
     async (pid: number, amount: BigNumber) => {
       try {
         let tx
-        tx = await contract?.deposit(pid, amount)
-      }
-      catch (e) {
+          tx = await contract?.deposit(pid, amount)
+        }
+     catch (e) {
         console.error(e)
         return e
       }
@@ -34,20 +34,20 @@ export default function useMasterChef() {
     async (pid: number, amount: BigNumber) => {
       try {
         let tx
-        tx = await contract?.withdraw(pid, amount)
+          tx = await contract?.withdraw(pid, amount)
       } catch (e) {
         console.error(e)
         return e
       }
     },
     [account, contract]
-  )
+)
 
   const harvest = useCallback(
     async (pid: number) => {
       try {
         let tx
-        tx = await contract?.deposit(pid, Zero)
+          tx = await contract?.deposit(pid, Zero)
       } catch (e) {
         console.error(e)
         return e
@@ -56,35 +56,5 @@ export default function useMasterChef() {
     [account, , contract, soul]
   )
 
-  
-  // -----------------------
-  //  Staking Funcs
-  // -----------------------
-  
-  // enterStaking
-  const enterStaking = async (amount) => {
-    try {
-      const result = await contract?.enterStaking(amount)
-      return result
-    } catch (e) {
-      console.log(e)
-      alert(e.message)
-      return e
-    }
-  }
-  
-  // leaveStaking
-  const leaveStaking = async (amount) => {
-    try {
-      let result = await contract?.leaveStaking(amount)
-      return result
-    } catch (e) {
-      // alert(e.message)
-      console.log(e)
-      return e
-    }
-  }
-
-  return { deposit, withdraw, harvest, enterStaking, leaveStaking }
-
+  return { deposit, withdraw, harvest }
 }
