@@ -60,24 +60,32 @@ const MineListItem = ({ farm, ...rest }) => {
   //   return previousValue + currentValue.rewardPerBlock * currentValue.rewardPrice
   // }, 0) / summTvl
 
-  const roiPerSecond =
-    farm?.rewards?.reduce((previousValue, currentValue) => {
-      return previousValue + currentValue.rewardPerBlock * currentValue.rewardPrice
-    }, 0) / summTvl
+  // const roiPerSecond =
+  //   farm?.rewards?.reduce((previousValue, currentValue) => {
+  //     return previousValue + currentValue.rewardPerBlock * currentValue.rewardPrice
+  //   }, 0) / summTvl
 
+  const balanceUSD = Number(pairPrice) * Number(lpBalance) / 1e18
 
   const secsPerHour = 60 * 60
 
+  // const roiPerHour = rewardAprPerHour
+  // const roiPerMonth = rewardAprPerMonth
+  // const roiPerDay = rewardAprPerDay
+  // const roiPerYear = rewardAprPerYear
+  const dailyRewards = farm?.reward?.rewardPerDay
+  const rewardPerSecond = dailyRewards / 86_400
+
+  const roiPerSecond = (rewardPerSecond * soulPrice) / balanceUSD
+  const roiPerHour = roiPerSecond * secsPerHour
+  const roiPerDay = roiPerHour * 24
+  const roiPerMonth = roiPerDay * 30
+  const roiPerYear = roiPerMonth * 12
+  
   const rewardAprPerHour = roiPerSecond * secsPerHour
   const rewardAprPerDay = rewardAprPerHour * 24
   const rewardAprPerMonth = rewardAprPerDay * 30
   const rewardAprPerYear = rewardAprPerMonth * 12
-
-  const roiPerHour = rewardAprPerHour
-  const roiPerMonth = rewardAprPerMonth
-  const roiPerDay = rewardAprPerDay
-  const roiPerYear = rewardAprPerYear
-
 
   // const roiPerSecond = 1E1000
   // const roiPerHour = roiPerSecond * 60 * 60
@@ -141,11 +149,11 @@ const MineListItem = ({ farm, ...rest }) => {
                         {
                           reward.rewardPerDay > 0 
                           ? formatNumber(
-                            (reward?.rewardPerDay) // rewards per year (annualized)
-                            * (365)
-                            // divided by TVL
-                            // / 1e18
-                            )
+                            reward?.rewardPerDay * 365 // rewards per year (annualized)
+                            * soulPrice // value of the rewards
+                            / balanceUSD // div by liq. balance (TVL)
+                            * 100 // to convert into %
+                            ) + '%'
                           : 'ZERO'
                         }
                       </div>
