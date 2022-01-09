@@ -241,6 +241,11 @@ export function useTVL(): TVLInfo[] {
   const soulPrice = Number(rawSoulPrice) / 1E18
   console.log(soulPrice)
 
+  const rawLuxPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'])?.result
+  console.log(Number(rawLuxPrice))
+  const luxPrice = Number(rawLuxPrice) / 1E18
+  console.log(luxPrice)
+
   const farmingPools = Object.keys(POOLS[ChainId.FANTOM]).map((key) => {
     return { ...POOLS[ChainId.FANTOM][key], lpToken: key }
   })
@@ -265,27 +270,34 @@ export function useTVL(): TVLInfo[] {
         token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
         token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' ||
+        token.symbol == 'LUX' ||
         token.symbol == 'FTM' ||
         token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
-        token.symbol == 'fUSDT'
+        token.symbol == 'fUSDT' ||
+        token.symbol == 'FUSDT' ||
+        token.symbol == 'MIM' ||
+        token.symbol == 'DAI'
       )
     }
 
     function getPrice(token: TokenInfo) {
-      if (token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase()) {
-        return soulPrice
-      }
       if (token.symbol == 'SOUL') {
         return soulPrice
       }
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {
         return ftmPrice
       }
-      if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
+      if (token.symbol == 'SEANCE') {
         return seancePrice
       }
-      if (token.symbol == 'USDC' || token.symbol == 'fUSDT') {
+      if (token.symbol == 'LUX') {
+        return luxPrice
+      }
+      if (
+        token.symbol == 'USDC' || token.symbol == 'fUSDT' || token.symbol == 'DAI' ||
+        token.symbol == 'FUSDT' || token.symbol == 'USDT' || token.symbol == 'MIM'
+      ) {
         return 1
       }
       return 0

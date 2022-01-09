@@ -29,10 +29,11 @@ import {
   SOUL_SUMMONER_ADDRESS,
   SOUL_VAULT_ADDRESS,
   SOUL_GUIDE_ADDRESS,
-  // SOULSWAP_SWAPPER_ADDRESS,
+  PRICE_HELPER_ADDRESS,
+  HARVEST_HELPER_ADDRESS,
   TIMELOCK_ADDRESS,
   WNATIVE,
-} from '../sdk'
+} from 'sdk'
 import {
   COFFIN_BOX_ADDRESS,
   CHAINLINK_ORACLE_ADDRESS,
@@ -77,6 +78,9 @@ import SOUL_ABI from '../constants/abis/soulswap/soulpower.json' // 28 JUL
 import SEANCE_ABI from '../constants/abis/soulswap/seance.json' // 28 JUL
 import ATOMIC_SWAP_ABI from '../constants/abis/soulswap/atomic-swap.json'
 import LAUNCHPAD_ABI from '../constants/abis/soulswap/launchpad.json'
+import SUMMONER_HELPER_ABI from '../constants/abis/soulswap/helper.json'
+import PRICE_HELPER_ABI from '../constants/abis/soulswap/pricehelper.json'
+import HARVEST_HELPER_ABI from '../constants/abis/soulswap/harvest-helper.json'
 
 // bridge
 import anyswapEthOperaBridge_ABI from '../constants/abis/soulswap/bridge/anyswapEthOperaBridge.json'
@@ -187,6 +191,16 @@ export function usePendingContract(): Contract | null {
   return useContract('0x9aeadfE6cd03A2b5730474bF6dd79802d5bCD029', PENDING_ABI, false)
 }
 
+export function usePriceHelperContract(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && PRICE_HELPER_ADDRESS[chainId], PRICE_HELPER_ABI, false)
+}
+
+export function useHarvestHelperContract(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && HARVEST_HELPER_ADDRESS[chainId], HARVEST_HELPER_ABI, false)
+}
+
 export function useMulticallContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && MULTICALL_NETWORKS[chainId], MULTICALL_ABI, false)
@@ -280,6 +294,11 @@ export function useSummonerContract(withSignerIfPossible?: boolean): Contract | 
 export function useFactoryContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && FACTORY_ADDRESS[chainId], FACTORY_ABI, false)
+}
+
+export function useHelperContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && '0xa224a5D96E58E3dae89D0e4775444A329E67774c', SUMMONER_HELPER_ABI, withSignerIfPossible)
 }
 
 export function useLockerContract(withSignerIfPossible?: boolean): Contract | null {

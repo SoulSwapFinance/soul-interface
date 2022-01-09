@@ -106,10 +106,31 @@ export const TIMELOCK_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.FANTOM_TESTNET]: ''
 }
 
+export const SUMMONER_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xa224a5D96E58E3dae89D0e4775444A329E67774c',
+  [ChainId.FANTOM_TESTNET]: ''
+}
+
 export const SOUL_GUIDE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x5A6B3Ce2736E9B731Fba73262884016b50c39184', // JUL 27TH
+  [ChainId.FANTOM_TESTNET]: ''
+}
+
+export const PRICE_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x51445B73852952128bFCAE65fdd889881D8d87Bd',
+  [ChainId.FANTOM_TESTNET]: ''
+}
+
+export const HARVEST_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xb9e5f6152b797280c8C3427947780ce5c4a55b08',
   [ChainId.FANTOM_TESTNET]: ''
 }
 

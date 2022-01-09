@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { ChainId } from 'sdk'
-import { Fraction } from 'entities'
+import { Fraction } from '../../../entities'
 import { useCloneRewarderContract, useComplexRewarderContract } from 'hooks/useContract'
 import { useActiveWeb3React } from 'services/web3/hooks/useActiveWeb3React'
 import { useBlockNumber } from 'state/application/hooks'

@@ -9,7 +9,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 
 import MineListItem from './MineListItem'
 
-const MineList = ({ farms, term }) => {
+const MineList = ({ farms, term, filter }) => {
   const { items, requestSort, sortConfig } = useSortableData(farms, { key: 'roiPerYear' })
   const { i18n } = useLingui()
   const [numDisplayed, setNumDisplayed] = useInfiniteScroll(items)
@@ -21,7 +21,7 @@ const MineList = ({ farms, term }) => {
           className="flex items-center col-span-2 px-4 cursor-pointer md:col-span-1"
           onClick={() => requestSort('symbol')}
         >
-          <div className="hover:text-high-emphesis">{i18n._(t`Pool`)}</div>
+          <div className="hover:text-high-emphesis">{i18n._(t`LP Asset`)}</div>
           {sortConfig &&
             sortConfig.key === 'symbol' &&
             ((sortConfig.direction === 'ascending' && <ChevronUpIcon width={12} height={12} />) ||

@@ -1,12 +1,11 @@
 import { InformationCircleIcon } from '@heroicons/react/solid'
 import { SOUL_ADDRESS, WNATIVE } from 'sdk'
 import Container from 'components/Container'
-import ExternalLink from 'components/ExternalLink'
+// import ExternalLink from 'components/ExternalLink'
 import Search from 'components/Search'
-import Typography from 'components/Typography'
 import MineList from 'features/mines/MineList'
 import Menu from 'features/mines/MineMenu'
-import { usePositions, useFarms, useSummonerInfo } from 'features/summoner/hooks'
+import { usePositions, useSummonerInfo } from 'features/summoner/hooks'
 import { classNames } from 'functions/styling'
 import useFarmRewards from 'hooks/useFarmRewards'
 import useFuse from 'hooks/useFuse'
@@ -15,23 +14,39 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { POOLS } from 'constants/farms'
-import AVERAGE_BLOCK_TIME from 'constants'
 import { usePriceHelperContract } from 'features/bond/hooks/useContract'
 import { useSingleCallResult } from 'state/multicall/hooks'
+import { useSoulFarms } from 'features/mines/hooks'
+import { useSoulSummonerContract } from 'hooks/useContract'
+import Button from 'components/Button'
+import { formatNumberScale } from 'functions'
+import { addTransaction } from 'state/transactions/actions'
+import useSummoner from 'features/summoner/useSummoner'
+import { getAddress } from '@ethersproject/address'
+import { useTVL } from 'hooks/useV2Pairs'
 
 export default function Farm(): JSX.Element {
   const { chainId } = useActiveWeb3React()
+  const [pendingTx, setPendingTx] = useState(false)
+
   const [liquidity, setLiquidity] = useState()
   const [apr, setApr] = useState()
 
+  function useFarms() {
+    return useSoulFarms(useSoulSummonerContract())
+  }
+
   const farms = useFarms()
   const router = useRouter()
-  const type = router.query.filter === null ? 'all' : (router.query.filter as string)
+  const type = router.query.filter === null ? 'active' : (router.query.filter as string)
 
+  const { harvest } = useSummoner()
 
   const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
     return { ...POOLS[chainId][key], lpToken: key }
   })
+
+  const tvlInfo = useTVL()
 
   const summonerInfo = useSummonerInfo()
   const positions = usePositions()
@@ -52,7 +67,7 @@ export default function Farm(): JSX.Element {
   console.log(Number(rawFtmPrice))
   const ftmPrice = Number(rawFtmPrice)
   console.log(ftmPrice)
-  
+
   const map = (pool) => {
     pool.owner = 'SoulSwap'
     pool.balance = 0
@@ -83,14 +98,14 @@ export default function Farm(): JSX.Element {
         // const result = await fetchFarmStats(pid, farm.token1, farm.token2)
         const tvl = result[0]
         const apr = result[1]
-  
+
         setLiquidity(tvl
           // Number(tvl)
           //   .toFixed(0)
           //   .toString()
           //   .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
         )
-  
+
         // console.log("apr", farmApr);
         setApr(apr
           // Number(apr)
@@ -104,7 +119,7 @@ export default function Farm(): JSX.Element {
     }
 
     // Fix this asap later
-    function getTvl(pool) {
+    function getTvl() {
       let lpPrice = 0
       let decimals = 18
       if (pool.lpToken == SOUL_ADDRESS[chainId]) {
@@ -112,12 +127,12 @@ export default function Farm(): JSX.Element {
         decimals = pair.token0?.decimals
       } else if (pool.lpToken.toLowerCase() == WNATIVE[chainId]) {
         lpPrice = ftmPrice * 1E18
-      // } else if (pool.lpToken.toLowerCase() == SEANCE_ADDRESS[chainId].toLowerCase()) {
-      //   lpPrice = seancePrice * 1E18
-      // } else {
+        // } else if (pool.lpToken.toLowerCase() == SEANCE_ADDRESS[chainId].toLowerCase()) {
+        //   lpPrice = seancePrice * 1E18
+      } else {
         lpPrice = 0
       }
-
+      // return lpPrice
       return Number(pool.totalLp) * lpPrice
     }
 
@@ -125,10 +140,17 @@ export default function Farm(): JSX.Element {
 
     const tvl = getAprAndLiquidity()
 
-    const roiPerSecond =
-      rewards.reduce((previousValue, currentValue) => {
-        return previousValue + currentValue.rewardPerSecond * currentValue.rewardPrice
-      }, 0) / Number(tvl)
+    const rewardPerSec =
+      ((pool.allocPoint / Number(summonerInfo.totalAllocPoint)) * Number(summonerInfo.soulPerSecond)) / 1e18
+
+    const rewardPrice = soulPrice
+
+    // const roiPerSecond =
+    //   farms.reduce((previousValue, currentValue) => {
+    //     return previousValue + rewardPerSec * rewardPrice
+    //   }, 0) / Number(tvl)
+
+    const roiPerSecond = Number(tvl)
 
     const roiPerHour = roiPerSecond * 60 * 60
     const roiPerDay = roiPerHour * 24
@@ -156,21 +178,37 @@ export default function Farm(): JSX.Element {
   }
 
   const FILTER = {
-    my: (farm) => farm?.amount && !farm.amount.isZero(),
-    soul: (farm) => farm.pair.token0?.id == SOUL_ADDRESS[chainId] || farm.pair.token1?.id == SOUL_ADDRESS[chainId],
+    my: (farm) => farm?.amount,
+    active: (farm) => farm?.allocPoint > 0,
+    inactive: (farm) => farm?.allocPoint == 0,
+    soul: (farm) => farm?.allocPoint > 0 
+      && (
+            farm?.pair.token0?.symbol == 'SOUL'
+            || farm?.pair.token0?.symbol == 'SEANCE'
+            || farm?.pair.token0?.symbol == 'LUX'
+            || farm?.pair.token0?.symbol == 'wLUM'
+
+            || farm?.pair.token1?.symbol == 'SOUL'
+            || farm?.pair.token1?.symbol == 'SEANCE'
+            || farm?.pair.token1?.symbol == 'LUX'
+            || farm?.pair.token1?.symbol == 'wLUM'
+          ),
     single: (farm) => !farm.pair.token1,
-    fantom: (farm) => farm.pair.token0?.id == WNATIVE[chainId] || farm.pair.token1?.id == WNATIVE[chainId],
-    stables: (farm) =>
-      farm.pair.token0?.symbol == 'USDC' ||
-      farm.pair.token1?.symbol == 'USDC' ||
-      farm.pair.token0?.symbol == 'DAI' ||
-      farm.pair.token1?.symbol == 'DAI',
+    fantom: (farm) => farm?.allocPoint > 0 && (farm?.pair.token0?.symbol == 'FTM' || farm?.pair.token1?.symbol == 'FTM'),
+    stables: (farm) => farm?.allocPoint == 200 // since all [active] stables have 200 AP <3
   }
 
   const rewards = useFarmRewards()
 
+  const farmRewards = rewards.filter((farm) => {
+    return type in FILTER ? FILTER[type](farm) : true
+  })
 
-  // const data = rewards.filter((farm) => {
+  let summTvl = tvlInfo.reduce((previousValue, currentValue) => {
+    return previousValue + currentValue.tvl
+  }, 0)
+
+  // const data = farms.map(map).filter((farm) => {
   //   return type in FILTER ? FILTER[type](farm) : true
   // })
 
@@ -188,20 +226,66 @@ export default function Farm(): JSX.Element {
     options,
   })
 
+  const allStaked = positions.reduce((previousValue, currentValue) => {
+    return previousValue + (currentValue.pendingSoul / 1e18) * soulPrice
+  }, 0)
+
+  const valueStaked = positions.reduce((previousValue, currentValue) => {
+    const pool = farmingPools.find((r) => parseInt(r.id.toString()) == parseInt(currentValue.id))
+    const poolTvl = tvlInfo.find((r) => getAddress(r.lpToken) == getAddress(pool?.lpToken))
+    return previousValue + (currentValue.amount / 1e18) * poolTvl?.lpPrice
+  }, 0)
+
   return (
     <Container id="farm-page" className="grid h-full grid-cols-4 py-4 mx-auto md:py-8 lg:py-12 gap-9" maxWidth="7xl">
       <Head>
         <title>Farm | Soul</title>
         <meta key="description" name="description" content="Farm SOUL" />
       </Head>
+
       <div className={classNames('sticky top-0 hidden lg:block md:col-span-1')} style={{ maxHeight: '40rem' }}>
         <Menu
           // term={term}
           // onSearch={(value) => {
-          //   search(value)
+          // search(value)
           // }}
           positionsLength={positions.length}
         />
+        <div className={`flex flex-col items-center justify-between px-6 py-6 `}>
+          <div className="flex items-center text-center justify-between py-2 text-emphasis">
+            {/* Total Value Locked: {formatNumberScale(summTvl + summTvlVaults, true, 2)} */}
+            VALUE (TVL): {formatNumberScale(summTvl, true, 2)}
+          </div>
+
+          {positions.length > 0 && (
+            <div className="flex items-center justify-between py-2 text-emphasis">
+              DEPOSITED: {formatNumberScale(valueStaked, true, 2)}
+            </div>
+          )}
+          {positions.length > 0 && (
+            <Button
+              color="gradient"
+              className="text-emphasis"
+              variant={'flexed'}
+              size={'nobase'}
+              disabled={pendingTx}
+              onClick={async () => {
+                setPendingTx(true)
+                for (const pos of positions) {
+                  try {
+                    const tx = await harvest(parseInt(pos.id))
+                    addTransaction(tx)
+                  } catch (error) {
+                    console.error(error)
+                  }
+                }
+                setPendingTx(false)
+              }}
+            >
+              HARVEST ALL: {formatNumberScale(allStaked / 1E18, true, 2)}
+            </Button>
+          )}
+        </div>
       </div>
       <div className={classNames('space-y-6 col-span-4 lg:col-span-3')}>
         <Search
@@ -222,7 +306,7 @@ export default function Farm(): JSX.Element {
           <div className="w-full h-0 ml-4 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis md:border-gradient-r-blue-pink-dark-800 opacity-20"></div>
         </div>
 
-        <MineList farms={result} term={term} />
+        <MineList farms={result} term={term} filter={FILTER} />
       </div>
     </Container>
   )

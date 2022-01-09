@@ -47,7 +47,7 @@ module.exports = withBundleAnalyzer(
         },
         {
           source: '/farm',
-          destination: '/farms',
+          destination: '/mines',
           permanent: true,
         },        
         {
@@ -145,7 +145,7 @@ module.exports = withBundleAnalyzer(
         // },
         {
           source: '/farm',
-          destination: '/farms',
+          destination: '/mines',
         },
         {
           source: '/bond',
