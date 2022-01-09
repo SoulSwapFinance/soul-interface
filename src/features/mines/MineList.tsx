@@ -21,14 +21,13 @@ const MineList = ({ farms, term }) => {
           className="flex items-center col-span-2 px-4 cursor-pointer md:col-span-1"
           onClick={() => requestSort('symbol')}
         >
-          <div className="hover:text-high-emphesis">{i18n._(t`Pool`)}</div>
+          <div className="hover:text-high-emphesis">{i18n._(t`LP Asset`)}</div>
           {sortConfig &&
             sortConfig.key === 'symbol' &&
             ((sortConfig.direction === 'ascending' && <ChevronUpIcon width={12} height={12} />) ||
               (sortConfig.direction === 'descending' && <ChevronDownIcon width={12} height={12} />))}
         </div>
-        <div></div>
-        {/* <div
+        <div
           className="flex items-center px-4 cursor-pointer hover:text-high-emphesis"
           onClick={() => requestSort('tvl')}
         >
@@ -37,7 +36,7 @@ const MineList = ({ farms, term }) => {
             sortConfig.key === 'tvl' &&
             ((sortConfig.direction === 'ascending' && <ChevronUpIcon width={12} height={12} />) ||
               (sortConfig.direction === 'descending' && <ChevronDownIcon width={12} height={12} />))}
-        </div> */}
+        </div>
         <div className="items-center justify-start hidden px-4 md:flex hover:text-high-emphesis">
           {i18n._(t`Rewards`)}
         </div>
