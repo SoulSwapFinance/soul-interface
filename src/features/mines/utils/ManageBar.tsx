@@ -24,7 +24,6 @@ import { useCurrencyBalance } from 'state/wallet/hooks'
 import React, { useState } from 'react'
 
 import CurrencyInputPanel from '../components/CurrencyInputPanel'
-import { Chef, PairType } from '../enum'
 import { useUserInfo } from '../hooks'
 import useMasterChef from '../hooks/useMasterChef'
 import { SOUL_SUMMONER_ADDRESS } from '../../../constants'
@@ -221,7 +220,7 @@ const ManageBar = ({ farm }) => {
             <ButtonError
               onClick={async () => {
                 try {
-                  // KMP decimals depend on asset, SLP is always 18
+                  // LP is always 18
                   const tx = await withdraw(farm.id, BigNumber.from(parsedWithdrawValue.quotient.toString()))
                   addTransaction(tx, {
                     summary: `Withdraw ${farm.pair.token0.name}/${farm.pair.token1.name}`,

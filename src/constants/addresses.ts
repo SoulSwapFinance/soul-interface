@@ -63,7 +63,14 @@ export const LOCKER_ADDRESS: AddressMap = {
 export const CLAIM_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xA121b64fd62a99869767650879C5bEc776415a45', // 29 NOV
+  [ChainId.FANTOM]: '0xA121b64fd62a99869767650879C5bEc776415a45',
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
+export const SUMMONER_HELPER_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xa224a5D96E58E3dae89D0e4775444A329E67774c',
   [ChainId.FANTOM_TESTNET]: '',
 }
 

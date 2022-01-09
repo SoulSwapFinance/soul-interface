@@ -106,6 +106,13 @@ export const TIMELOCK_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.FANTOM_TESTNET]: ''
 }
 
+export const SUMMONER_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xa224a5D96E58E3dae89D0e4775444A329E67774c',
+  [ChainId.FANTOM_TESTNET]: ''
+}
+
 export const SOUL_GUIDE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',

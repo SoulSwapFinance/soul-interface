@@ -8,7 +8,7 @@ import { classNames, formatNumber, formatPercent } from 'functions'
 import { useCurrency } from 'hooks/Tokens'
 import { Interface } from '@ethersproject/abi'
 import ISoulSwapPair from 'constants/abis/soulswap/ISoulSwapPair.json'
-
+import useSoulMine from './hooks/useSoulMine'
 import { PairType } from './enum'
 import MineListItemDetails from './MineListItemDetails'
 import { SOUL, SOUL_SUMMONER_ADDRESS } from '../../constants'
@@ -17,9 +17,14 @@ import { useActiveWeb3React,
    usePriceHelperContract,
   useSoulSummonerContract } from 'hooks'
 import Logo from 'components/Logo'
-import { useTVL, useV2PairsWithPrice } from 'hooks/useV2Pairs'
+import { useTVL } from 'hooks/useV2Pairs'
 import { useMultipleContractSingleData, useSingleCallResult } from 'state/multicall/hooks'
 import { POOLS } from 'constants/farms'
+import { Token } from 'sdk'
+import { getAddress } from '@ethersproject/address'
+// import LiquidityPrice from 'components/Liquidity/LiquidityPrice'
+import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
+
 // import useTokenBalance from 'hooks/useTokenBalance'
 // import { useSoulFarms } from './hooks'
 
@@ -32,27 +37,35 @@ const MineListItem = ({ farm, ...rest }) => {
   const token1 = useCurrency(farm.pair.token1?.id)
   const priceHelperContract = usePriceHelperContract()
   const harvestHelperContract = useHarvestHelperContract()
-  
+
   const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
   console.log(Number(rawSoulPrice))
   const soulPrice = Number(rawSoulPrice) / 1E18
   console.log(soulPrice)
   
   const tvlInfo = useTVL()
+
+  let [data] = useV2PairsWithPrice([[token0, token1]])
+  let [state, pair, pairPrice] = data
   
   const lpBalance = useSingleCallResult(harvestHelperContract, 'fetchBals', [farm?.id])?.result
+  // const lpPrice = useSingleCallResult(harvestHelperContract, 'fetchBals', [farm?.id])?.result
   // const lpPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', [farm?.id])?.result
   console.log('lpBalance: %s', Number(lpBalance))
   // const pidTvl = useTVL()
+
+  let tvl = tvlInfo.map((previousValue, currentValue) => {
+    return previousValue.tvl + currentValue
+  }, 0)
 
   let summTvl = tvlInfo.reduce((previousValue, currentValue) => {
     return previousValue + currentValue.tvl
   }, 0)
   
-  let lpPrice = tvlInfo.reduce((previousValue, currentValue) => {
-    return previousValue + currentValue.lpPrice
-  }, 0)
-    
+  // let lpPrice = tvlInfo.reduce((previousValue, currentValue) => {
+  //   return previousValue + currentValue.lpPrice
+  // }, 0)
+  
   const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
     return { ...POOLS[chainId][key], lpToken: key }
   })
@@ -63,11 +76,11 @@ const MineListItem = ({ farm, ...rest }) => {
         <div>
         { token1 ? 
           <Disclosure.Button
-            className={classNames(
-              open && 'rounded-b-none',
-              'w-full px-4 py-6 text-left rounded cursor-pointer select-none bg-dark-900 text-primary text-sm md:text-lg'
+          className={classNames(
+            open && 'rounded-b-none',
+            'w-full px-4 py-6 text-left rounded cursor-pointer select-none bg-dark-900 text-primary text-sm md:text-lg'
             )}
-          >
+            >
             <div className="grid grid-cols-4">
               <div className="flex col-span-2 space-x-4 md:col-span-1">
               { token1 ?
@@ -82,13 +95,9 @@ const MineListItem = ({ farm, ...rest }) => {
               </div>
               <div className="flex flex-col justify-center font-bold">{
                 formatNumber(
-                  // Number(lpBalance) // BALANCE
-                  // * 
-                  lpPrice / Number(lpBalance), // ttl price / balance
-                  // , // TOTAL
+                 // PRICE PER TOKEN * TOKEN BALANCE
+                  Number(pairPrice) * Number(lpBalance) / 1e18,
                   true)
-                
-                
               }</div>
               {/* <div className="flex flex-col justify-center font-bold">{formatNumber(farm.tvl, true)}</div> */}
               <div className="flex-row items-center hidden space-x-4 md:flex">

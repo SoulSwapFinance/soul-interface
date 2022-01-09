@@ -28,9 +28,7 @@ const MineListItemDetails = ({ farm }) => {
   )
 
   const stakedAmount = useUserInfo(farm, liquidityToken)
-
   const [toggleView, setToggleView] = useState(stakedAmount?.greaterThan(ZERO))
-  // const [toggleView, setToggleView] = useState(stakedAmount?.greaterThan(ZERO))
 
   return (
     <Transition
