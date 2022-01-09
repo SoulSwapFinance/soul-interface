@@ -23,7 +23,6 @@ const MineListItem = ({ farm, ...rest }) => {
     <Disclosure {...rest}>
       {({ open }) => (
         <div>
-        { token1 ? 
           <Disclosure.Button
             className={classNames(
               open && 'rounded-b-none',
@@ -32,8 +31,10 @@ const MineListItem = ({ farm, ...rest }) => {
           >
             <div className="grid grid-cols-4">
               <div className="flex col-span-2 space-x-4 md:col-span-1">
+              { token1 ?
                 <DoubleLogo currency0={ token0 } currency1={ token1 } size={40} />
-              
+                : <CurrencyLogo currency={ token0 } size={54}/> 
+              }
                 <div className="flex flex-col justify-center">
                   <div>
                     <span className="font-bold">{farm?.pair?.token0?.symbol}</span>
@@ -52,9 +53,9 @@ const MineListItem = ({ farm, ...rest }) => {
                 <div className="flex flex-col space-y-1">
                   {farm?.rewards?.map((reward, i) => (
                     <div key={i} className="text-xs md:text-sm whitespace-nowrap">
-                    {reward.rewardPerDay > 0 ?
+                      {reward.rewardPerDay > 0 ?
                         formatNumber(reward.rewardPerDay)
-                        : 'ZERO'
+                        : 'INACTIVE'
                         }
                     </div>
                   ))}
@@ -92,7 +93,6 @@ const MineListItem = ({ farm, ...rest }) => {
               </div>
             </div>
           </Disclosure.Button>
-          : '' }
           {open && <MineListItemDetails farm={farm} />}
         </div>
       )}
