@@ -55,7 +55,7 @@ const MineListItem = ({ farm, ...rest }) => {
                   {farm?.rewards?.map((reward, i) => (
                     <div key={i} className="text-xs md:text-sm whitespace-nowrap">
                       {reward.rewardPerDay > 0 ?
-                        formatNumber(reward.rewardPerDay)
+                        formatNumber(reward.rewardPerDay) + ' / DAY'
                         : 'ZERO'
                         }
                     </div>
