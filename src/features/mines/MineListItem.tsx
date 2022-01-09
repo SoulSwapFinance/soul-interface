@@ -67,7 +67,7 @@ const MineListItem = ({ farm, ...rest }) => {
                   {farm?.tvl !== 0
                     ? farm?.roiPerYear > 10000
                       ? '>10,000%'
-                      : formatPercent(farm?.roiPerYear * 100)
+                      : formatPercent(farm.roiPerYear * 100)
                     : 'Infinite'}
                   {!!farm?.feeApyPerYear && (
                     <QuestionHelper
