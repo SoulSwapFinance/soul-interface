@@ -121,7 +121,7 @@ const InformationDisclosure = ({ farm }) => {
                 <Typography variant="sm">
                   {i18n._(t`Approve and then deposit your`)}
                   {` `}
-                  {`LP`}
+                  {`SLP`}
                   {` `}
                   {i18n._(t`tokens into the farm to start earning rewards.`)}
                 </Typography>
