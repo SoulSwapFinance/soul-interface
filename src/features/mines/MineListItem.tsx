@@ -23,6 +23,7 @@ const MineListItem = ({ farm, ...rest }) => {
     <Disclosure {...rest}>
       {({ open }) => (
         <div>
+        { token1 ? 
           <Disclosure.Button
             className={classNames(
               open && 'rounded-b-none',
@@ -55,7 +56,7 @@ const MineListItem = ({ farm, ...rest }) => {
                     <div key={i} className="text-xs md:text-sm whitespace-nowrap">
                       {reward.rewardPerDay > 0 ?
                         formatNumber(reward.rewardPerDay)
-                        : 'INACTIVE'
+                        : 'ZERO'
                         }
                     </div>
                   ))}
@@ -93,6 +94,7 @@ const MineListItem = ({ farm, ...rest }) => {
               </div>
             </div>
           </Disclosure.Button>
+          : '' }
           {open && <MineListItemDetails farm={farm} />}
         </div>
       )}
