@@ -11,8 +11,8 @@ import { PairType } from './enum'
 import { useUserInfo } from './hooks'
 import InformationDisclosure from './components/InformationDisclosure'
 import InvestmentDetails from './components/InvestmentDetails'
-import ManageBar from './managers/ManageBar'
-import ManageSwapPair from './managers/ManageSwapPair'
+import ManageBar from './utils/ManageBar'
+import ManageSwapPair from './utils/ManageSwapPair'
 
 const MineListItemDetails = ({ farm }) => {
   const { i18n } = useLingui()

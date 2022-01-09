@@ -30,6 +30,7 @@ import {
   SOUL_VAULT_ADDRESS,
   SOUL_GUIDE_ADDRESS,
   PRICE_HELPER_ADDRESS,
+  HARVEST_HELPER_ADDRESS,
   // SOULSWAP_SWAPPER_ADDRESS,
   TIMELOCK_ADDRESS,
   WNATIVE,
@@ -80,6 +81,7 @@ import ATOMIC_SWAP_ABI from '../constants/abis/soulswap/atomic-swap.json'
 import LAUNCHPAD_ABI from '../constants/abis/soulswap/launchpad.json'
 import SUMMONER_HELPER_ABI from '../constants/abis/soulswap/helper.json'
 import PRICE_HELPER_ABI from '../constants/abis/soulswap/pricehelper.json'
+import HARVEST_HELPER_ABI from '../constants/abis/soulswap/harvest-helper.json'
 
 // bridge
 import anyswapEthOperaBridge_ABI from '../constants/abis/soulswap/bridge/anyswapEthOperaBridge.json'
@@ -193,6 +195,11 @@ export function usePendingContract(): Contract | null {
 export function usePriceHelperContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && PRICE_HELPER_ADDRESS[chainId], PRICE_HELPER_ABI, false)
+}
+
+export function useHarvestHelperContract(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && HARVEST_HELPER_ADDRESS[chainId], HARVEST_HELPER_ABI, false)
 }
 
 export function useMulticallContract(): Contract | null {

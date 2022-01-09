@@ -13,7 +13,7 @@ import { Link } from 'react-feather'
 const items = (i18n: I18n) => [
   {
     name: i18n._(t`Soul`),
-    href: '/farm',
+    href: '/mines',
     farm: true,
     stake: false,
     bonds: false,

@@ -6,18 +6,56 @@ import DoubleLogo from 'components/DoubleLogo'
 import QuestionHelper from 'components/QuestionHelper'
 import { classNames, formatNumber, formatPercent } from 'functions'
 import { useCurrency } from 'hooks/Tokens'
+import { Interface } from '@ethersproject/abi'
+import ISoulSwapPair from 'constants/abis/soulswap/ISoulSwapPair.json'
 
 import { PairType } from './enum'
 import MineListItemDetails from './MineListItemDetails'
-import { SOUL } from '../../constants'
-import { useActiveWeb3React } from 'hooks'
+import { SOUL, SOUL_SUMMONER_ADDRESS } from '../../constants'
+import { useActiveWeb3React,
+  useHarvestHelperContract,
+   usePriceHelperContract,
+  useSoulSummonerContract } from 'hooks'
 import Logo from 'components/Logo'
+import { useTVL, useV2PairsWithPrice } from 'hooks/useV2Pairs'
+import { useMultipleContractSingleData, useSingleCallResult } from 'state/multicall/hooks'
+import { POOLS } from 'constants/farms'
+// import useTokenBalance from 'hooks/useTokenBalance'
+// import { useSoulFarms } from './hooks'
+
+// const PAIR_INTERFACE = new Interface(ISoulSwapPair)
 
 const MineListItem = ({ farm, ...rest }) => {
   const { chainId } = useActiveWeb3React()
   
   const token0 = useCurrency(farm.pair.token0?.id)
   const token1 = useCurrency(farm.pair.token1?.id)
+  const priceHelperContract = usePriceHelperContract()
+  const harvestHelperContract = useHarvestHelperContract()
+  
+  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
+  console.log(Number(rawSoulPrice))
+  const soulPrice = Number(rawSoulPrice) / 1E18
+  console.log(soulPrice)
+  
+  const tvlInfo = useTVL()
+  
+  const lpBalance = useSingleCallResult(harvestHelperContract, 'fetchBals', [farm?.id])?.result
+  // const lpPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', [farm?.id])?.result
+  console.log('lpBalance: %s', Number(lpBalance))
+  // const pidTvl = useTVL()
+
+  let summTvl = tvlInfo.reduce((previousValue, currentValue) => {
+    return previousValue + currentValue.tvl
+  }, 0)
+  
+  let lpPrice = tvlInfo.reduce((previousValue, currentValue) => {
+    return previousValue + currentValue.lpPrice
+  }, 0)
+    
+  const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
+    return { ...POOLS[chainId][key], lpToken: key }
+  })
 
   return (
     <Disclosure {...rest}>
@@ -42,7 +80,17 @@ const MineListItem = ({ farm, ...rest }) => {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col justify-center font-bold">{formatNumber(farm.tvl, true)}</div>
+              <div className="flex flex-col justify-center font-bold">{
+                formatNumber(
+                  // Number(lpBalance) // BALANCE
+                  // * 
+                  lpPrice / Number(lpBalance), // ttl price / balance
+                  // , // TOTAL
+                  true)
+                
+                
+              }</div>
+              {/* <div className="flex flex-col justify-center font-bold">{formatNumber(farm.tvl, true)}</div> */}
               <div className="flex-row items-center hidden space-x-4 md:flex">
                 <div className="flex items-center space-x-2">
                   {farm?.rewards?.map((reward, i) => (

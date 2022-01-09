@@ -150,7 +150,7 @@ export default function Farm(): JSX.Element {
     //     return previousValue + rewardPerSec * rewardPrice
     //   }, 0) / Number(tvl)
 
-    const roiPerSecond = Number(tvl) / 1e100
+    const roiPerSecond = Number(tvl)
 
     const roiPerHour = roiPerSecond * 60 * 60
     const roiPerDay = roiPerHour * 24

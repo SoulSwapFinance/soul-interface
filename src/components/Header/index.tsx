@@ -88,7 +88,7 @@ function AppBar(): JSX.Element {
                       </NavLink> */}
                       {/* </div> */}
                       { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'/farms'}>
+                        <NavLink href={'/mines'}>
                           <a
                             id={`farm-nav-link`}
                             // className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800"
@@ -112,7 +112,7 @@ function AppBar(): JSX.Element {
                       {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/bonds'}>
                           <a
-                            id={`farm-nav-link`}
+                            id={`bond-nav-link`}
                             // className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800"
                             className="w-full relative ml-6 md:p-2"
                           >
