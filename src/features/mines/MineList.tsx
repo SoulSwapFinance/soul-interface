@@ -9,7 +9,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 
 import MineListItem from './MineListItem'
 
-const MineList = ({ farms, term }) => {
+const MineList = ({ farms, term, filter }) => {
   const { items, requestSort, sortConfig } = useSortableData(farms, { key: 'roiPerYear' })
   const { i18n } = useLingui()
   const [numDisplayed, setNumDisplayed] = useInfiniteScroll(items)
