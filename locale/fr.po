@@ -64,6 +64,9 @@ msgstr ""
 msgid "A portion of each trade (0.25%) is charged as a fee to incentivize pooling."
 msgstr ""
 
+msgid "ACTIVE"
+msgstr ""
+
 msgid "ALL"
 msgstr ""
 
@@ -97,7 +100,13 @@ msgstr ""
 msgid "Added"
 msgstr ""
 
+msgid "Additional records and merkle updates can be found on"
+msgstr ""
+
 msgid "Additional records and weekly merkle updates can be found on"
+msgstr ""
+
+msgid "Allocated: {0} SOUL"
 msgstr ""
 
 msgid "Allocation"
@@ -107,6 +116,9 @@ msgid "Amount Locked"
 msgstr ""
 
 msgid "Amount of Tokens"
+msgstr ""
+
+msgid "Amount to Remove"
 msgstr ""
 
 msgid "An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note fee on transfer and rebase tokens are incompatible with Uniswap V3."
@@ -122,6 +134,9 @@ msgid "Approve Kashi"
 msgstr ""
 
 msgid "Approve Limit Order"
+msgstr ""
+
+msgid "Approve and then deposit your"
 msgstr ""
 
 msgid "Approve {0}"
@@ -187,13 +202,16 @@ msgstr ""
 msgid "Bridge"
 msgstr ""
 
+msgid "Burned"
+msgstr ""
+
 msgid "Buy"
 msgstr ""
 
 msgid "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
 msgstr ""
 
-msgid "CHARTS"
+msgid "CHART"
 msgstr ""
 
 msgid ""
@@ -216,13 +234,10 @@ msgstr ""
 msgid "Change Recipient"
 msgstr ""
 
-msgid "Charts"
+msgid "Chart"
 msgstr ""
 
 msgid "Chinese"
-msgstr ""
-
-msgid "Circles"
 msgstr ""
 
 msgid "Claim"
@@ -234,7 +249,13 @@ msgstr ""
 msgid "Claim Scarabs"
 msgstr ""
 
+msgid "Claimable: Fetching Claimable Amount"
+msgstr ""
+
 msgid "Claimed"
+msgstr ""
+
+msgid "Claims are executed within the guidelines outlined in"
 msgstr ""
 
 msgid "Clear All"
@@ -275,6 +296,9 @@ msgstr ""
 msgid "Confirm Adding Liquidity"
 msgstr ""
 
+msgid "Confirm Deposit"
+msgstr ""
+
 msgid "Confirm Enchantment"
 msgstr ""
 
@@ -288,6 +312,9 @@ msgid "Confirm Supply"
 msgstr ""
 
 msgid "Confirm Swap"
+msgstr ""
+
+msgid "Confirm Withdraw"
 msgstr ""
 
 msgid "Confirm Withdrawal"
@@ -366,6 +393,9 @@ msgid "Deposit your SOUL-LP to earn $SOUL rewards."
 msgstr ""
 
 msgid "Deposit {0} into CoffinBox"
+msgstr ""
+
+msgid "Deposited"
 msgstr ""
 
 msgid "Depositing {0} into CoffinBox"
@@ -469,6 +499,9 @@ msgstr ""
 msgid "Farm"
 msgstr ""
 
+msgid "Farm with SOUL-FTM"
+msgstr ""
+
 msgid "Fees"
 msgstr ""
 
@@ -492,6 +525,9 @@ msgid ""
 "all swaps from all chains)"
 msgstr ""
 
+msgid "Gain governance rights with SEANCE, while earning SOUL every second."
+msgstr ""
+
 msgid "German"
 msgstr ""
 
@@ -510,7 +546,19 @@ msgstr ""
 msgid "Harvest"
 msgstr ""
 
+msgid "Harvest Redistribution"
+msgstr ""
+
+msgid "Harvest Rewards"
+msgstr ""
+
+msgid "Harvest rewards and unstake your LP tokens at any time. You can then remove your liquidity to receive your base investment tokens back in your wallet."
+msgstr ""
+
 msgid "Harvest {0} SOUL"
+msgstr ""
+
+msgid "Harvest {0}/{1}"
 msgstr ""
 
 msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
@@ -526,6 +574,9 @@ msgid "Historical Total Locked: Fetching Total"
 msgstr ""
 
 msgid "Historical Total Locked: {0} SOUL"
+msgstr ""
+
+msgid "How to Participate"
 msgstr ""
 
 msgid "How to use"
@@ -570,6 +621,9 @@ msgstr ""
 msgid "Invalid recipient"
 msgstr ""
 
+msgid "Investment Details"
+msgstr ""
+
 msgid "Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency."
 msgstr ""
 
@@ -580,6 +634,9 @@ msgid "Japanese"
 msgstr ""
 
 msgid "Korean"
+msgstr ""
+
+msgid "LAUNCH"
 msgstr ""
 
 msgid "LTV"
@@ -674,6 +731,15 @@ msgstr ""
 msgid "Manage"
 msgstr ""
 
+msgid "Manage Farms"
+msgstr ""
+
+msgid "Manage Liquidity"
+msgstr ""
+
+msgid "Manage Position"
+msgstr ""
+
 msgid "Manage Token Lists"
 msgstr ""
 
@@ -716,10 +782,16 @@ msgstr ""
 msgid "Min. Received"
 msgstr ""
 
+msgid "Mint SOUL with Liquidity"
+msgstr ""
+
 msgid "More"
 msgstr ""
 
 msgid "My Orders"
+msgstr ""
+
+msgid "N"
 msgstr ""
 
 msgid "Network not supported yet"
@@ -796,13 +868,19 @@ msgstr ""
 msgid "Output will be sent to"
 msgstr ""
 
+msgid "PAIR"
+msgstr ""
+
 msgid "PAIRS"
 msgstr ""
 
 msgid "PENDING"
 msgstr ""
 
-msgid "POOL"
+msgid "Pair your SOUL and add to Bonds for more SOUL at record-high returns."
+msgstr ""
+
+msgid "Pair your SOUL with FTM and add to Farms for more SOUL and an enhanced AURA."
 msgstr ""
 
 msgid "Pay"
@@ -812,6 +890,9 @@ msgid "Pay from:"
 msgstr ""
 
 msgid "Pending"
+msgstr ""
+
+msgid "Pending Rewards"
 msgstr ""
 
 msgid "Pending Treasury Transfer"
@@ -860,6 +941,9 @@ msgid "Price Impact Too High"
 msgstr ""
 
 msgid "Price Updated"
+msgstr ""
+
+msgid "Provide liquidity for"
 msgstr ""
 
 msgid "ROI"
@@ -922,6 +1006,9 @@ msgstr ""
 msgid "Review Limit Order"
 msgstr ""
 
+msgid "Rewards"
+msgstr ""
+
 msgid "Roll it back - this feature is not yet supported on {0}."
 msgstr ""
 
@@ -935,9 +1022,6 @@ msgid "Routing through these tokens resulted in the best price for your trade."
 msgstr ""
 
 msgid "Russian"
-msgstr ""
-
-msgid "SCARAB"
 msgstr ""
 
 msgid "SELF"
@@ -974,9 +1058,6 @@ msgid "SWAP"
 msgstr ""
 
 msgid "Scarabs are a neat way to share your SOUL with anyone, so long as they're also willing to perform a ritual and make a small sacrfice..."
-msgstr ""
-
-msgid "Seance"
 msgstr ""
 
 msgid "Search Lockers"
@@ -1030,6 +1111,9 @@ msgstr ""
 msgid "Soon"
 msgstr ""
 
+msgid "Soul"
+msgstr ""
+
 msgid "Soul User"
 msgstr ""
 
@@ -1066,12 +1150,24 @@ msgstr ""
 msgid "Stake Soul for Soul."
 msgstr ""
 
+msgid "Stake for Seance"
+msgstr ""
+
 msgid ""
 "Stake into SEANCE add collateral as aSEANCE on Aave all in\n"
 "one click"
 msgstr ""
 
 msgid "Stake your SOUL to borrow SEANCE"
+msgstr ""
+
+msgid "Step One"
+msgstr ""
+
+msgid "Step Three"
+msgstr ""
+
+msgid "Step Two"
 msgstr ""
 
 msgid "Summon Scarabs"
@@ -1125,6 +1221,9 @@ msgstr ""
 msgid "Things you can do with your SOUL"
 msgstr ""
 
+msgid "Things you may do with your SOUL"
+msgstr ""
+
 msgid "This token doesn't appear on the active token list(s). Make sure this is the token that you want to trade."
 msgstr ""
 
@@ -1155,6 +1254,9 @@ msgid ""
 msgstr ""
 
 msgid "Total"
+msgstr ""
+
+msgid "Total Locked: Connect Wallet"
 msgstr ""
 
 msgid "Trading Fee"
@@ -1280,6 +1382,9 @@ msgstr ""
 msgid "Wrong Network"
 msgstr ""
 
+msgid "Y"
+msgstr ""
+
 msgid "You Pay:"
 msgstr ""
 
@@ -1307,7 +1412,13 @@ msgstr ""
 msgid "You will receive"
 msgstr ""
 
+msgid "You'll Receive:"
+msgstr ""
+
 msgid "Your"
+msgstr ""
+
+msgid "Your Claimable SOUL"
 msgstr ""
 
 msgid "Your Claimable SOUL this Week"
@@ -1382,6 +1493,12 @@ msgstr ""
 msgid "or the transaction will revert."
 msgstr ""
 
+msgid "to receive LP tokens."
+msgstr ""
+
+msgid "tokens into the farm to start earning rewards."
+msgstr ""
+
 #. js-lingui:icu=%7B0%2C+plural%2C+one+%7BToken%7D+many+%7BTokens%7D%7D&pluralize_on=0
 msgid "Token"
 msgid_plural "Tokens"
@@ -1401,6 +1518,9 @@ msgid "{0} {sign} market rate"
 msgstr ""
 
 msgid "{0}/{1} Burned"
+msgstr ""
+
+msgid "{text}"
 msgstr ""
 
 msgid "{v}"
