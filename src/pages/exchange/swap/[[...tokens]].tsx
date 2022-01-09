@@ -22,7 +22,7 @@ import CurrencyInputPanel from '../../../components/CurrencyInputPanel'
 import { Field } from '../../../state/swap/actions'
 import Head from 'next/head'
 import Loader from '../../../components/Loader'
-// import SwapBanner from '../../../components/SwapBanner'
+import SwapBanner from '../../../components/SwapBanner'
 import Lottie from 'lottie-react'
 import ProgressSteps from '../../../components/ProgressSteps'
 import ReactGA from 'react-ga'
@@ -391,6 +391,7 @@ export default function Swap() {
         tokens={importTokensNotInDefault}
         onConfirm={handleConfirmTokenWarning}
       />
+      <SwapBanner />
       {/* <SoulLogo />       */}
       <br />
       <DoubleGlowShadowV2 opacity="0.6">

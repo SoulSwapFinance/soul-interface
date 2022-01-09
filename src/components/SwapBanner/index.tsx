@@ -6,19 +6,19 @@ const SwapBanner: FC = () => (
     <div className="px-3 py-3 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div className="pr-16 sm:text-center sm:px-16">
         <p className="font-medium text-white">
-          <span className="centered md:hidden">Grim Withdrawals - Now Available. 
+          <span className="centered md:hidden">Harvest Claims - Now Available. 
           {/* <br/> Use Filter: Retired Vaults */}
                     </span>
-          <span className="hidden md:inline"> Grim Withdrawals - Now Available.
+          <span className="hidden md:inline">Harvest Claims - Now Available.
           {/* <br/> Use Filter: Retired Vaults */}
           </span>
           <br/>
           <span className="block sm:ml-2 md:inline-block">
-            <a href="https://app.grim.finance/" target = "_blank" rel="noreferrer"
+            <a href="/claims" target = "_blank" rel="noreferrer"
               className="font-bold text-white underline">
               {' '}
               {/* <br /> */}
-              Click Here to Withdraw<span aria-hidden="true"></span>
+              Click Here to Claim<span aria-hidden="true"></span>
             </a>
           </span>
         </p>
