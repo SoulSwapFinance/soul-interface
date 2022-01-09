@@ -56,5 +56,34 @@ export default function useMasterChef() {
     [account, , contract, soul]
   )
 
-  return { deposit, withdraw, harvest }
-}
+  // -----------------------
+  //  Staking Funcs
+  // -----------------------
+
+  // enterStaking
+  const enterStaking = async (amount) => {
+    try {
+      const result = await contract?.enterStaking(amount)
+      return result
+    } catch (e) {
+      console.log(e)
+      alert(e.message)
+      return e
+    }
+  }
+
+  // leaveStaking
+  const leaveStaking = async (amount) => {
+    try {
+      let result = await contract?.leaveStaking(amount)
+      return result
+    } catch (e) {
+      // alert(e.message)
+      console.log(e)
+      return e
+    }
+  }
+
+  return { deposit, withdraw, harvest, enterStaking, leaveStaking }
+
+} 
