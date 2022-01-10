@@ -2,13 +2,14 @@ import SwapHeader from '../../features/trade/Header'
 import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 import Container from '../../components/Container'
 import { Wrap } from '../../components/ReusableStyles'
-
+import MainHeader from '../../features/swap/MainHeader'
 const Info = () => {
 	return (
     <DoubleGlowShadowV2 opacity="0.6">
+      <MainHeader />     
       <Container id="charts-page" maxWidth="7xl" className="grid h-full grid-flow-col grid-cols-5 mx-auto gap-9">
         <div className="col-span-6 space-y-6 bg-dark-900 lg:col-span-6" style={{ zIndex: 1 }}>
-            <SwapHeader />     
+            {/* <SwapHeader />      */}
             <iframe 
               frameBorder={"none"}
               title={"INFO"}
