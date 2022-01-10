@@ -237,13 +237,13 @@ export default function Farm(): JSX.Element {
   }, 0)
 
   return (
-    <Container id="farm-page" className="grid h-full grid-cols-4 py-4 mx-auto md:py-8 lg:py-12 gap-9" maxWidth="7xl">
+    <Container id="farm-page" className="grid h-full grid-cols-3 py-4 mx-auto sm:py-6 md:py-8 lg:py-12 gap-0" maxWidth="7xl">
       <Head>
         <title>Farm | Soul</title>
         <meta key="description" name="description" content="Farm SOUL" />
       </Head>
 
-      <div className={classNames('sticky top-0 hidden lg:block md:col-span-1')} style={{ maxHeight: '40rem' }}>
+      <div className={classNames('top-0 block col-span-12')} style={{ maxHeight: '40rem' }}>
         <Menu
           // term={term}
           // onSearch={(value) => {
@@ -252,7 +252,7 @@ export default function Farm(): JSX.Element {
           positionsLength={positions.length}
         />
         <div className={`flex flex-col items-center justify-between px-6 py-6 `}>
-          <div className="flex items-center text-center justify-between py-2 text-emphasis">
+          <div className="flex items-center text-center justify-between py-0 text-emphasis">
             {/* Total Value Locked: {formatNumberScale(summTvl + summTvlVaults, true, 2)} */}
             VALUE (TVL): {formatNumberScale(summTvl, true, 2)}
           </div>
@@ -264,7 +264,7 @@ export default function Farm(): JSX.Element {
           )}
           {positions.length > 0 && (
             <Button
-              color="gradient"
+              color="blue"
               className="text-emphasis"
               variant={'flexed'}
               size={'nobase'}
