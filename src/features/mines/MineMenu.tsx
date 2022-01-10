@@ -13,7 +13,7 @@ const Menu = ({ positionsLength }) => {
         <NavLink
           exact
           href={`/mines?filter=my`}
-          activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-pink-dark-900"
+          activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-purple-dark-900"
         >
           <a className="flex items-center justify-between px-4 py-6 text-base font-bold border border-transparent rounded cursor-pointer bg-dark-900 hover:bg-dark-800">
           STAKED FARMS
@@ -28,12 +28,12 @@ const Menu = ({ positionsLength }) => {
         </a>
       )}
 
-      <div className="w-full h-0 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis md:border-gradient-r-blue-pink-dark-800 opacity-20" />
+      <div className="w-full h-0 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis md:border-gradient-r-blue-purple-dark-800 opacity-20" />
 
       <NavLink
         exact
         href="/mines?filter=active"
-        activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-pink-dark-900"
+        activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-purple-dark-900"
       >
         <a className="flex items-center justify-between px-4 py-6 text-base font-bold border border-transparent rounded cursor-pointer bg-dark-900 hover:bg-dark-800">
           ACTIVE FARMS
@@ -45,7 +45,7 @@ const Menu = ({ positionsLength }) => {
           <NavLink
             exact
             href={`/mines?filter=soul`}
-            activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-pink-dark-900"
+            activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-purple-dark-900"
           >
             <a className="flex items-center justify-between px-4 py-6 text-base font-bold border border-transparent rounded cursor-pointer bg-dark-900 hover:bg-dark-800">
               SOULSWAP PAIRS
@@ -54,7 +54,7 @@ const Menu = ({ positionsLength }) => {
           {/* <NavLink
             exact
             href={`/mines?filter=fantom`}
-            activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-pink-dark-900"
+            activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-purple-dark-900"
           >
             <a className="flex items-center justify-between px-4 py-6 text-base font-bold border border-transparent rounded cursor-pointer bg-dark-900 hover:bg-dark-800">
               FANTOM PAIRS
@@ -63,7 +63,7 @@ const Menu = ({ positionsLength }) => {
           <NavLink
             exact
             href={`/mines?filter=inactive`}
-            activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-pink-dark-900"
+            activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-purple-dark-900"
           >
             <a className="flex items-center justify-between px-4 py-6 text-base font-bold border border-transparent rounded cursor-pointer bg-dark-900 hover:bg-dark-800">
               INACTIVE FARMS
