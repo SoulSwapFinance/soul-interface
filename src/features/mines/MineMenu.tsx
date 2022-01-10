@@ -51,7 +51,7 @@ const Menu = ({ positionsLength }) => {
               SOULSWAP PAIRS
             </a>
           </NavLink>
-          <NavLink
+          {/* <NavLink
             exact
             href={`/mines?filter=fantom`}
             activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-pink-dark-900"
@@ -59,7 +59,7 @@ const Menu = ({ positionsLength }) => {
             <a className="flex items-center justify-between px-4 py-6 text-base font-bold border border-transparent rounded cursor-pointer bg-dark-900 hover:bg-dark-800">
               FANTOM PAIRS
             </a>
-          </NavLink>
+          </NavLink> */}
           <NavLink
             exact
             href={`/mines?filter=inactive`}
