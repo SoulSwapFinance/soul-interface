@@ -7,6 +7,7 @@ interface AddressInputPanelProps {
   id?: string
   value: string
   onChange: (value: string) => void
+  selectChainId?: any
 }
 
 const AddressInputPanel: FC<AddressInputPanelProps> = ({ id, value, onChange }) => {
