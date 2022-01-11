@@ -4,7 +4,8 @@ import Container from 'components/Container'
 // import ExternalLink from 'components/ExternalLink'
 import Search from 'components/Search'
 import MineList from 'features/mines/MineList'
-import Menu from 'features/mines/MineMenu'
+// import Menu from 'features/mines/components/MineMenu'
+import Header from 'features/mines/components/Header'
 import { usePositions, useSummonerInfo } from 'features/summoner/hooks'
 import { classNames } from 'functions/styling'
 import useFarmRewards from 'hooks/useFarmRewards'
@@ -51,12 +52,6 @@ export default function Farm(): JSX.Element {
   const summonerInfo = useSummonerInfo()
   const positions = usePositions()
 
-  // const FILTER = {
-  //   all: (farm) => farm.allocPoint !== '0' && farm.chef,
-  //   portfolio: (farm) => farm?.amount && !farm.amount.isZero(),
-  //   soul: (farm) => farm.pair.type === PairType.SWAP && farm.allocPoint !== '0',
-  // }
-
   const priceHelperContract = usePriceHelperContract()
   const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
   console.log(Number(rawSoulPrice))
@@ -93,31 +88,6 @@ export default function Farm(): JSX.Element {
       return defaultRewards
     }
 
-    const getAprAndLiquidity = async () => {
-      try {
-        // const result = await fetchFarmStats(pid, farm.token1, farm.token2)
-        const tvl = result[0]
-        const apr = result[1]
-
-        setLiquidity(tvl
-          // Number(tvl)
-          //   .toFixed(0)
-          //   .toString()
-          //   .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-        )
-
-        // console.log("apr", farmApr);
-        setApr(apr
-          // Number(apr)
-          //   .toFixed(0)
-          //   .toString()
-          //   .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-        )
-      } catch (e) {
-        console.warn(e)
-      }
-    }
-
     // Fix this asap later
     function getTvl() {
       let lpPrice = 0
@@ -138,7 +108,7 @@ export default function Farm(): JSX.Element {
 
     const rewards = getRewards()
 
-    const tvl = getAprAndLiquidity()
+    const tvl = getTvl()
 
     const rewardPerSec =
       ((pool.allocPoint / Number(summonerInfo.totalAllocPoint)) * Number(summonerInfo.soulPerSecond)) / 1e18
@@ -181,7 +151,7 @@ export default function Farm(): JSX.Element {
     my: (farm) => farm?.amount,
     active: (farm) => farm?.allocPoint > 0,
     inactive: (farm) => farm?.allocPoint == 0,
-    soul: (farm) => farm?.allocPoint > 0 
+    soulswap: (farm) => farm?.allocPoint > 0 
       && (
             farm?.pair.token0?.symbol == 'SOUL'
             || farm?.pair.token0?.symbol == 'SEANCE'
@@ -244,13 +214,7 @@ export default function Farm(): JSX.Element {
       </Head>
 
       <div className={classNames('top-0 block col-span-12')} style={{ maxHeight: '40rem' }}>
-        <Menu
-          // term={term}
-          // onSearch={(value) => {
-          // search(value)
-          // }}
-          positionsLength={positions.length}
-        />
+        <Header />
         <div className={`flex flex-col items-center justify-between px-6 py-6 `}>
           <div className="flex items-center text-center justify-between py-0 text-emphasis">
             {/* Total Value Locked: {formatNumberScale(summTvl + summTvlVaults, true, 2)} */}
