@@ -136,19 +136,19 @@ export const InactivePids = [
     token1Address: tokens.SEANCE,
     token2Address: tokens.SPIRIT,
   },
-  {
-    // 0
-    pid: 31,
-    token1: 'SEANCE',
-    token2: 'BOO',
-    lpSymbol: 'SEANCE-BOO',
-    lpAddresses: {
-      4002: '',
-      250: '0x26a30b02A8DFb3f573E3F881D04258461Cae47Db',
-    },
-    token1Address: tokens.SEANCE,
-    token2Address: tokens.BOO,
-  },
+  // {
+  //   // 0
+  //   pid: 31,
+  //   token1: 'SEANCE',
+  //   token2: 'BOO',
+  //   lpSymbol: 'SEANCE-BOO',
+  //   lpAddresses: {
+  //     4002: '',
+  //     250: '0x26a30b02A8DFb3f573E3F881D04258461Cae47Db',
+  //   },
+  //   token1Address: tokens.SEANCE,
+  //   token2Address: tokens.BOO,
+  // },
   {
     // 0
     pid: 32,
@@ -189,19 +189,19 @@ export const InactivePids = [
   //   token1Address: tokens.SEANCE,
   //   token2Address: tokens.ICE,
   // },
-  {
-    // 0
-    pid: 35,
-    token1: 'SEANCE',
-    token2: 'SPELL',
-    lpSymbol: 'SEANCE-SPELL',
-    lpAddresses: {
-      4002: '',
-      250: '0x63A1b4E3f210db7f1d4Ae7d29Bc0BC7F611e713a',
-    },
-    token1Address: tokens.SEANCE,
-    token2Address: tokens.SPELL,
-  },
+  // {
+  //   // 0
+  //   pid: 35,
+  //   token1: 'SEANCE',
+  //   token2: 'SPELL',
+  //   lpSymbol: 'SEANCE-SPELL',
+  //   lpAddresses: {
+  //     4002: '',
+  //     250: '0x63A1b4E3f210db7f1d4Ae7d29Bc0BC7F611e713a',
+  //   },
+  //   token1Address: tokens.SEANCE,
+  //   token2Address: tokens.SPELL,
+  // },
 ]
 
 export const AllPids = [
@@ -640,19 +640,19 @@ export const MatePids = [
       token2Address: tokens.SPIRIT,
     },
   
-    {
-      // 200
-      pid: 31,
-      token1: 'SEANCE',
-      token2: 'BOO',
-      lpSymbol: 'SEANCE-BOO',
-      lpAddresses: {
-        4002: '',
-        250: '0x26a30b02A8DFb3f573E3F881D04258461Cae47Db',
-      },
-      token1Address: tokens.SEANCE,
-      token2Address: tokens.BOO,
-    },
+    // {
+    //   // 200
+    //   pid: 31,
+    //   token1: 'SEANCE',
+    //   token2: 'BOO',
+    //   lpSymbol: 'SEANCE-BOO',
+    //   lpAddresses: {
+    //     4002: '',
+    //     250: '0x26a30b02A8DFb3f573E3F881D04258461Cae47Db',
+    //   },
+    //   token1Address: tokens.SEANCE,
+    //   token2Address: tokens.BOO,
+    // },
   
     {
       // 200
@@ -681,32 +681,32 @@ export const MatePids = [
       token1Address: tokens.SEANCE,
       token2Address: tokens.TOMB,
     },
-    {
-      // 200
-      pid: 34,
-      token1: 'SEANCE',
-      token2: 'ICE',
-      lpSymbol: 'SEANCE-ICE',
-      lpAddresses: {
-        4002: '',
-        250: '0xc0fEd4A6EDef23da7fF766D24F17Ecf454C16D25',
-      },
-      token1Address: tokens.SEANCE,
-      token2Address: tokens.ICE,
-    },
-    {
-      // 200
-      pid: 35,
-      token1: 'SEANCE',
-      token2: 'SPELL',
-      lpSymbol: 'SEANCE-SPELL',
-      lpAddresses: {
-        4002: '',
-        250: '0x63A1b4E3f210db7f1d4Ae7d29Bc0BC7F611e713a',
-      },
-      token1Address: tokens.SEANCE,
-      token2Address: tokens.SPELL,
-    },
+    // {
+    //   // 200
+    //   pid: 34,
+    //   token1: 'SEANCE',
+    //   token2: 'ICE',
+    //   lpSymbol: 'SEANCE-ICE',
+    //   lpAddresses: {
+    //     4002: '',
+    //     250: '0xc0fEd4A6EDef23da7fF766D24F17Ecf454C16D25',
+    //   },
+    //   token1Address: tokens.SEANCE,
+    //   token2Address: tokens.ICE,
+    // },
+    // {
+    //   // 200
+    //   pid: 35,
+    //   token1: 'SEANCE',
+    //   token2: 'SPELL',
+    //   lpSymbol: 'SEANCE-SPELL',
+    //   lpAddresses: {
+    //     4002: '',
+    //     250: '0x63A1b4E3f210db7f1d4Ae7d29Bc0BC7F611e713a',
+    //   },
+    //   token1Address: tokens.SEANCE,
+    //   token2Address: tokens.SPELL,
+    // },
     
   ]
 

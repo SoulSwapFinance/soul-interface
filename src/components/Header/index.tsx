@@ -67,17 +67,16 @@ function AppBar(): JSX.Element {
                           </a>
                         </NavLink>
                       )}
-                      {chainId && [ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      {/* {chainId && [ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href="/pool">
                           <a
                             id={`pool-nav-link`}
                             className="w-full relative ml-6 md:p-2"
                           >
-                            {/* <Image src="https://media.giphy.com/media/N3NpRukvRmnAI/giphy.gif" alt="offering soul" width="30" height="30" /> */}
                             {i18n._(t`PAIR`)}
                           </a>
                         </NavLink>
-                      )}
+                      )} */}
                       {/* <div
                         className="w-full relative ml-6 md:p-2"
                       > */}
@@ -123,9 +122,9 @@ function AppBar(): JSX.Element {
                       <NavLink href={'/analytics'}>
                         <a
                           id={`analytics-nav-link`}
-                          className="hidden md:block w-full relative ml-6 md:p-2"
+                          className="w-full relative ml-6 md:p-2"
                           >
-                          {i18n._(t`CHART`)}
+                          {i18n._(t`ANALYTICS`)}
                         </a>
                       </NavLink>
                             {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
