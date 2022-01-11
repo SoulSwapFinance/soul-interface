@@ -39,9 +39,9 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
 
   return (
     <div className="flex justify-between mb-4 space-x-3 items-center">
-      <div className="flex rounded p-3px">
-      {/* <div className="flex rounded p-3px bg-dark-800 h-[46px]"> */}
-        {/* <NavLink
+      <div className="flex rounded p-3px bg-dark-800 h-[46px]">
+        
+        <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
           href={{
             pathname: '/swap',
@@ -50,19 +50,60 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
           >
           <a className="flex px-3 items-center justify-center text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
             Swap
+            {/* <Image src="https://media.giphy.com/media/vXv6QjtFlPIAN7CZOA/giphy.gif" alt="swap gif" width={25} height={25} /> */}
+          </a>
+        </NavLink>
+        {/* <NavLink
+          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
+          href={{
+            pathname: '/limit-order',
+            query: getQuery(input, output),
+          }}
+        >
+          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
+            {i18n._(t`Limit`)}
           </a>
         </NavLink> */}
-        {/* <NavLink
+        <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
           href={`/${!isRemove ? 'add' : 'remove'}${input ? `/${currencyId(input)}` : '/FTM'}${
             output ? `/${currencyId(output)}` : '/0xe2fb177009ff39f52c0134e8007fa0e4baacbd07'
           }`}
         >
           <a className="flex px-3 items-center justify-center text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
+            {/* <Image src="https://media.giphy.com/media/Gyqi1LOwFnwgKOkg4H/giphy.gif" alt="add gif" width={50} height={50} /> */}
           {'+/-'}
           </a>
-        </NavLink>   */}
-      </div>  
+        </NavLink>
+        <NavLink
+          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
+          href={"/info"}
+          // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
+        >
+        <a className="flex px-3 items-center justify-center text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
+            {i18n._(t`Chart`)}
+          {/* <Image src="https://media.giphy.com/media/m8IGpimG3jEbZngmBS/giphy.gif" alt="chart gif" width={50} height={50} /> */}
+          </a>
+        </NavLink>
+        <NavLink
+          href={"/bridge"}
+          // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
+        >
+          <a className="flex px-3 items-center justify-center text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
+            {i18n._(t`Bridge`)}
+            {/* <Image src="https://media.giphy.com/media/zNi2wAYSz3wFQtTd4Q/giphy.gif" alt="bridge gif" width={50} height={50} /> */}
+          </a>
+        </NavLink>
+        {/* <NavLink
+          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
+          href={"/farms"}
+          // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
+        >
+          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
+            {i18n._(t`Farm`)}
+          </a>
+        </NavLink> */}
+      </div>
 
       <div className="flex items-center">
         <div className="grid grid-flow-col gap-1">
