@@ -1,7 +1,7 @@
 import { useLingui } from '@lingui/react'
 import Alert from '../../components/Alert'
 import { t } from '@lingui/macro'
-import Button, { ButtonProps } from '../../components/Button'
+import {Button, ButtonProps } from '../../components/Button'
 import React, { FC, useCallback, useState } from 'react'
 import useLimitOrderApproveCallback, { BentoApprovalState } from '../../hooks/useLimitOrderApproveCallback'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'

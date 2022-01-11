@@ -3,7 +3,7 @@ import { Currency, Token } from '../../sdk'
 
 import { AlertTriangle } from 'react-feather'
 import { AutoColumn } from '../../components/Column'
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import Card from '../../components/Card'
 import CurrencyLogo from '../../components/CurrencyLogo'
 import ExternalLink from '../../components/ExternalLink'

@@ -8,13 +8,14 @@ import TransactionConfirmationModal, { ConfirmationModalContent } from '../../..
 import { calculateGasMargin, calculateSlippageAmount } from '../../../functions/trade'
 import { useBurnActionHandlers, useBurnState, useDerivedBurnInfo } from '../../../state/burn/hooks'
 import { usePairContract, useRouterContract } from '../../../hooks/useContract'
+import MainHeader from 'features/swap/MainHeader'
 
 import { AddRemoveTabs } from '../../../components/NavigationTabs'
 import Alert from '../../../components/Alert'
 import { ArrowDownIcon } from '@heroicons/react/solid'
 import { AutoColumn } from '../../../components/Column'
 import { BigNumber } from '@ethersproject/bignumber'
-import Button from '../../../components/Button'
+import { Button } from '../../../components/Button'
 import Container from '../../../components/Container'
 import { Contract } from '@ethersproject/contracts'
 import CurrencyLogo from '../../../components/CurrencyLogo'
@@ -49,6 +50,7 @@ import { useUserSlippageToleranceWithDefault } from '../../../state/user/hooks'
 import { useV2LiquidityTokenPermit } from '../../../hooks/useERC20Permit'
 import { useWalletModalToggle } from '../../../state/application/hooks'
 import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
+import SwapBanner from 'components/SwapBanner'
 
 const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(5, 100)
 
@@ -718,14 +720,20 @@ export default function Remove() {
         <title>{i18n._(t`Remove Liquidity`)} | Soul </title>
         <meta key="description" name="description" content={i18n._(t`Remove liquidity of Soul`)} />
         </Head>
+          <MainHeader
+            input={currencyA}
+            output={currencyB}
+            allowedSlippage={allowedSlippage}
+          />
       <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
+        <SwapBanner />
       <DoubleGlowShadowV2 opacity="0.6">
           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>          
-            <SwapHeader
+            {/* <SwapHeader
               input={currencyA}
               output={currencyB}
               allowedSlippage={allowedSlippage}
-            />
+            /> */}
             {/* <Header input={currencyA} output={currencyB} allowedSlippage={allowedSlippage} /> */}
             <div>
               <TransactionConfirmationModal

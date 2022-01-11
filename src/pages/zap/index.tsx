@@ -1,7 +1,7 @@
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
 import { AutoRow, RowBetween, RowFixed } from '../../components/Row'
 import { BIPS_BASE, INITIAL_ALLOWED_SLIPPAGE } from '../../constants'
-import Button, { ButtonError } from '../../components/Button'
+import { Button, ButtonError } from '../../components/Button'
 import { ROUTER_ADDRESS } from '../../sdk'
 import { ChainId, Currency, Ether, JSBI, NATIVE, Percent, Trade, WNATIVE } from '../../sdk'
 import Column, { AutoColumn } from '../../components/Column'

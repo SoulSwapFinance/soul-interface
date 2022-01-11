@@ -1,5 +1,5 @@
 import { ApprovalState, useApproveCallback } from '../../../hooks/useApproveCallback'
-import Button, { ButtonConfirmed } from '../../../components/Button'
+import { Button, ButtonConfirmed } from '../../../components/Button'
 import { ChainId, JSBI } from '../../../sdk'
 import { ChevronDownIcon, XIcon } from '@heroicons/react/outline'
 import React, { useCallback, useEffect, useState } from 'react'

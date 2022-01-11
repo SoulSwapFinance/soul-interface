@@ -8,7 +8,7 @@ import { t } from '@lingui/macro'
 import { Trans } from '@lingui/react'
 import { useDerivedLimitOrderInfo, useLimitOrderState } from '../../state/limit-order/hooks'
 import { Field } from '../../state/limit-order/actions'
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import Modal from '../../components/Modal'
 import { formatNumber, shortenAddress } from '../../functions'
 

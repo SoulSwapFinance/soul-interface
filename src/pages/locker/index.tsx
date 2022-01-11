@@ -17,7 +17,7 @@ import { Disclosure } from '@headlessui/react'
 import moment from 'moment'
 import { useToken } from '../../hooks/Tokens'
 import { CurrencyAmount } from '../../sdk'
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import { getAddress } from '@ethersproject/address'
 
 export default function Locker(): JSX.Element {

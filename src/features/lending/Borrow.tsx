@@ -8,7 +8,7 @@ import { ZERO, e10, maximum, minimum } from '../../functions/math'
 import { computeRealizedLPFeePercent, warningSeverity } from '../../functions/prices'
 import { useExpertModeManager, useUserSlippageToleranceWithDefault } from '../../state/user/hooks'
 
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import { Field } from '../../state/swap/actions'
 import KashiCooker from '../../entities/KashiCooker'
 import { SOULSWAP_MULTISWAPPER_ADDRESS } from '../../constants/kashi'

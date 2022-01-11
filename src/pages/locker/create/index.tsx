@@ -17,7 +17,7 @@ import {
   import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
   import { LOCKER_ADDRESS } from '../../../constants'
   import { useTransactionAdder } from '../../../state/transactions/hooks'
-  import Button, { ButtonConfirmed, ButtonError } from '../../../components/Button'
+  import { Button, ButtonConfirmed, ButtonError } from '../../../components/Button'
   import NumericalInput from '../../../components/NumericalInput'
   import { AutoRow, RowBetween } from '../../../components/Row'
   import { isAddress } from '@ethersproject/address'

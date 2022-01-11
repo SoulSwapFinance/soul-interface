@@ -9,7 +9,7 @@ import { useActiveListUrls, useAllLists, useIsListActive } from '../../state/lis
 import { useDispatch, useSelector } from 'react-redux'
 
 import AutoSizer from 'react-virtualized-auto-sizer'
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import CurrencyModalView from './CurrencyModalView'
 import ExternalLink from '../../components/ExternalLink'
 import IconWrapper from '../../components/IconWrapper'

@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react'
 import { classNames } from '../../functions'
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import { t } from '@lingui/macro'
 import { Input as NumericalInput } from '../../components/NumericalInput'
 import { useLingui } from '@lingui/react'

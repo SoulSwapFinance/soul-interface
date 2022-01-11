@@ -16,7 +16,7 @@ import { useExpertModeManager, useUserSingleHopOnly, useUserTransactionTTL } fro
 import useWrapCallback, { WrapType } from '../../../hooks/useWrapCallback'
 import MainHeader from 'features/swap/MainHeader'
 import AddressInputPanel from '../../../components/AddressInputPanel'
-import Button from '../../../components/Button'
+import { Button } from '../../../components/Button'
 import ConfirmSwapModal from '../../../features/swap/ConfirmSwapModal'
 import CurrencyInputPanel from '../../../components/CurrencyInputPanel'
 import { Field } from '../../../state/swap/actions'
@@ -386,7 +386,11 @@ export default function Swap() {
           content="Soul allows for swapping of compatible tokens on Fantom."
         />
       </Head>
-      <MainHeader />
+      <MainHeader 
+    input={currencies[Field.INPUT]}
+    output={currencies[Field.OUTPUT]}
+    allowedSlippage={allowedSlippage}
+  />
       <TokenWarningModal
         isOpen={importTokensNotInDefault.length > 0 && !dismissTokenWarning}
         tokens={importTokensNotInDefault}

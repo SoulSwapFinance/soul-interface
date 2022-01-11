@@ -2,7 +2,7 @@ import { Currency, CurrencyAmount, Pair, Percent, Token } from '../../sdk'
 import React, { ReactNode, useCallback, useState } from 'react'
 import { classNames, formatCurrencyAmount } from '../../functions'
 
-import Button from '../Button'
+import { Button } from '../Button'
 import { ChevronDownIcon } from '@heroicons/react/outline'
 import CurrencyLogo from '../CurrencyLogo'
 import CurrencySearchModal from '../../modals/SearchModal/CurrencySearchModal'

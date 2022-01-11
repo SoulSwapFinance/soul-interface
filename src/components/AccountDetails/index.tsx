@@ -2,7 +2,7 @@ import React, { FC, useCallback } from 'react'
 import { fortmatic, injected, portis, torus, walletconnect, walletlink } from '../../connectors'
 
 import { AppDispatch } from '../../state'
-import Button from '../Button'
+import { Button } from '../Button'
 import Copy from './Copy'
 import ExternalLink from '../ExternalLink'
 import Image from 'next/image'

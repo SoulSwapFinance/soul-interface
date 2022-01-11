@@ -8,7 +8,7 @@ import Typography from '../Typography'
 import { classNames } from '../../functions'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import Button from '../Button'
+import { Button } from '../Button'
 
 enum SlippageError {
   InvalidInput = 'InvalidInput',

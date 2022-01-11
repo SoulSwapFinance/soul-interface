@@ -6,7 +6,7 @@ import { Disclosure, Transition } from '@headlessui/react'
 import React, { useState } from 'react'
 import { usePendingSoul, useUserInfo } from './hooks'
 
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import Dots from '../../components/Dots'
 // import { SOUL_SUMMONER_ADDRESS } from '../../constants'
 import { SOUL_SUMMONER_ADDRESS } from '../../constants/addresses'

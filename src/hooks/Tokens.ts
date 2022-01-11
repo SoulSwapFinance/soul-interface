@@ -13,7 +13,58 @@ import { useCombinedActiveList } from '../state/lists/hooks'
 import { useMemo } from 'react'
 import { useUserAddedTokens } from '../state/user/hooks'
 
-export function useLocalToken(currency?: any): MultiToken | undefined | null {
+// export function useLocalToken(currency?: any): MultiToken | undefined | null {
+//   const { chainId } = useActiveWeb3React()
+
+//   // const address = isAddress(currency?.address)
+//   const address = isAddress(currency?.address)
+
+//   const symbol = currency?.symbol
+//   const name = currency?.name
+//   const decimals = currency?.decimals
+//   const underlying = currency?.underlying
+
+//   const ContractVersion = currency?.ContractVersion
+//   const destChains = currency?.destChains
+//   const logoUrl = currency?.logoUrl
+//   const price = currency?.price
+
+//   // const token = address && name ? undefined : useToken(address ? address : undefined)
+//   // console.log(token)
+//   // console.log(address)
+//   // console.log(currency)
+//   return useMemo(() => {
+//     if (!currency) return undefined
+//     // if (!chainId || !address) return undefined
+//     if (!chainId || !address) return undefined
+//     // if (token) return token
+//     return new MultiToken(
+//       chainId,
+//       address,
+//       decimals,
+//       symbol,
+//       name,
+//       underlying,
+//       ContractVersion,
+//       destChains,
+//       logoUrl,
+//       price,
+//     )
+//   }, [
+//     address,
+//     chainId,
+//     symbol,
+//     decimals,
+//     name,
+//     underlying,
+//     ContractVersion,
+//     destChains,
+//     logoUrl,
+//     price,
+//   ])
+// }
+
+export function useLocalToken(currency?: any): Token | undefined | null {
   const { chainId } = useActiveWeb3React()
 
   // const address = isAddress(currency?.address)
@@ -38,17 +89,17 @@ export function useLocalToken(currency?: any): MultiToken | undefined | null {
     // if (!chainId || !address) return undefined
     if (!chainId || !address) return undefined
     // if (token) return token
-    return new MultiToken(
+    return new Token(
       chainId,
       address,
       decimals,
       symbol,
       name,
-      underlying,
-      ContractVersion,
-      destChains,
-      logoUrl,
-      price,
+      // underlying,
+      // ContractVersion,
+      // destChains,
+      // logoUrl,
+      // price,
     )
   }, [
     address,
@@ -63,7 +114,6 @@ export function useLocalToken(currency?: any): MultiToken | undefined | null {
     price,
   ])
 }
-
 
 // reduce token map into standard address <-> Token mapping, optionally include user added tokens
 function useTokensFromMap(tokenMap: TokenAddressMap, includeUserAdded: boolean): { [address: string]: Token } {

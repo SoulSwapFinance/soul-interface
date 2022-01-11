@@ -6,7 +6,7 @@ import { enableList, removeList } from '../../state/lists/actions'
 
 import { AppDispatch } from '../../state'
 import { AutoColumn } from '../../components/Column'
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import CloseIcon from '../../components/CloseIcon'
 import CurrencyModalView from './CurrencyModalView'
 import ExternalLink from '../../components/ExternalLink'

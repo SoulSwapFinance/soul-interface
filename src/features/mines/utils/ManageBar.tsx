@@ -13,7 +13,7 @@ import {
   USD,
   ZERO,
 } from 'sdk'
-import Button, { ButtonError } from 'components/Button'
+import {Button, ButtonError } from 'components/Button'
 import Dots from 'components/Dots'
 import Web3Connect from 'components/Web3Connect'
 import { classNames, tryParseAmount } from 'functions'

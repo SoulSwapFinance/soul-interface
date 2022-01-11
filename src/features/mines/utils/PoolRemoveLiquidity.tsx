@@ -15,7 +15,7 @@ import { useBurnActionHandlers, useBurnState, useDerivedBurnInfo } from 'state/b
 import { useTransactionAdder } from 'state/transactions/hooks'
 import { useUserSlippageToleranceWithDefault } from 'state/user/hooks'
 import useDebouncedChangeHandler from 'hooks/useDebouncedChangeHandler'
-import Button, { ButtonError } from 'components/Button'
+import { Button, ButtonError } from 'components/Button'
 import CurrencyLogo from 'components/CurrencyLogo'
 import { Plus } from 'react-feather'
 import Web3Connect from 'components/Web3Connect'

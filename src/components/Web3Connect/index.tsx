@@ -1,4 +1,4 @@
-import Button, { ButtonProps } from '../Button'
+import { Button, ButtonProps } from '../Button'
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
 
 import { Activity } from 'react-feather'

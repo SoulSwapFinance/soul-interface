@@ -3,7 +3,7 @@ import { KashiApproveButton, TokenApproveButton } from './Button'
 import React, { useState } from 'react'
 import { ZERO, e10 } from '../../functions/math'
 
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import KashiCooker from '../../entities/KashiCooker'
 import SmartNumberInput from '../../components/SmartNumberInput'
 import TransactionReviewList from './TransactionReview'

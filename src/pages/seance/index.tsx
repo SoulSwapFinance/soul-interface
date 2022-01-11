@@ -3,7 +3,7 @@ import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallbac
 import React, { useEffect, useState } from 'react'
 import { SOUL, SEANCE, AURA } from '../../constants'
 
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import { ChainId } from '../../sdk'
 import Head from 'next/head'
 import Dots from '../../components/Dots'
