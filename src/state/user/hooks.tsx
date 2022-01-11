@@ -7,6 +7,7 @@ import {
   addSerializedPair,
   addSerializedToken,
   removeSerializedToken,
+  selectNetworkId,
   toggleURLWarning,
   updateUserArcherETHTip,
   updateUserArcherGasEstimate,
@@ -399,4 +400,20 @@ export function useUserSlippageToleranceWithDefault(defaultSlippageTolerance: Pe
     () => (allowedSlippage === 'auto' ? defaultSlippageTolerance : allowedSlippage),
     [allowedSlippage, defaultSlippageTolerance]
   )
+}
+
+export function useUserSelectChainId(): [any, (selectChainInfo: any) => void] {
+  const dispatch = useDispatch<AppDispatch>()
+  const selectNetworkInfo = useSelector<AppState, AppState['user']['selectNetworkId']>(state => {
+    return state.user.selectNetworkId
+  })
+
+  const setUserSelectNetwork = useCallback(
+    (selectNetworkInfo: any) => {
+      dispatch(selectNetworkId(selectNetworkInfo))
+    },
+    [dispatch]
+  )
+
+  return [selectNetworkInfo, setUserSelectNetwork]
 }

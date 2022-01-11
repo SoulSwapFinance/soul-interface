@@ -54,3 +54,5 @@ export const updateUserArcherGasEstimate = createAction<{
 export const updateUserArcherTipManualOverride = createAction<{
   userArcherTipManualOverride: boolean
 }>('user/updateUserArcherTipManualOverride')
+
+export const selectNetworkId = createAction<{ chainId: string, label: string }>('user/selectNetworkId')
