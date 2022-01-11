@@ -94,7 +94,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const [stakedBal, setStakedBal] = useState(0)
   const [unstakedBal, setUnstakedBal] = useState(0)
   const [pending, setPending] = useState(0)
-  
+
   const [availableValue, setAvailableValue] = useState(0)
   const [stakedLpValue, setStakedLpValue] = useState(0)
   const [pendingValue, setPendingValue] = useState(0)
@@ -111,6 +111,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const [liquidity, setLiquidity] = useState()
   // const [stakedValue, setLiquidityShare] = useState()
 
+  // const moment = new Date()
   /**
    * Runs only on initial render/mount
    */
@@ -144,7 +145,31 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   })
 
   const isWFTM = bond.token1Address == '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'
-  
+
+  const dailyRoi
+    = (apr / 365)
+      .toFixed(2)
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+  const reached
+    = (100 * pendingValue / stakedLpValue)
+      .toFixed(2)
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+  const term
+    = (365 / dailyRoi)
+      .toFixed(2)
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+  const elapsed
+    = (dailyRoi / reached) // Return Per Day / % Acheived = Days Elapsed
+      .toFixed(2)
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
   /**
    * Opens the function panel dropdown
    */
@@ -190,9 +215,9 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
 
         // get total lp tokens for pid from user bal
         const result2 = await erc20BalanceOf(account)
-        const unstaked = ethers.utils.formatUnits(result2) 
+        const unstaked = ethers.utils.formatUnits(result2)
         setUnstakedBal(unstaked.toString())
-        
+
         // const tvlShare = tvl
         // const stakedValue = staked * tvlShare
         // const aValue = stakedValue * tvlShare
@@ -246,9 +271,9 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   //   }
   // }
 
- /**
-   * Checks the user's alloc of the total staked in the farm
-   */
+  /**
+    * Checks the user's alloc of the total staked in the farm
+    */
   const fetchUserBondAlloc = async () => {
     const ownership = await fetchUserLpTokenAllocInBond(pid, account)
     const userStakedPercOfSummoner = Number(ownership?.[4])
@@ -355,7 +380,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   /**
    * Deposits/stakes lpTokens into bond
    */
-   const handleDeposit = async (amount) => {
+  const handleDeposit = async (amount) => {
     try {
       // console.log('depositing', amount.toString())
       const tx = await deposit(pid, amount)
@@ -367,7 +392,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
     }
   }
 
-  
+
   return (
     <>
       <Wrap padding="0" display="flex" justifyContent="center">
@@ -490,8 +515,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                       {Number(unstakedBal) === 0
                         ? '0.000'
                         : Number(unstakedBal) < 0.001
-                        ? '<0.001'
-                        : Number(unstakedBal)
+                          ? '<0.001'
+                          : Number(unstakedBal)
                             .toFixed(3)
                             .toString()
                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
@@ -508,59 +533,56 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   </Wrap>
                   <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
                   <Wrap padding="0" margin="0" display="flex">
-                      {(approved && Number(unstakedBal) == 0) ? 
+                    {(approved && Number(unstakedBal) == 0) ?
                       (
                         (bond.token1 == 'FTM' || bond.token2 == 'FTM') ? (
-                        <TokenPairLink
-                        target="_blank"
-                        rel="noopener"
-                        color="#F36FFE" // neon purple
-                        href=
-                        {bond.token1 == 'FTM' ?
-                        `https://exchange.soulswap.finance/add/FTM/${
-                          bond.token2Address[250]}`
-                          : `https://exchange.soulswap.finance/add/FTM/${
-                            bond.token1Address[250]}`
-                          }
-                        >
-                          CLICK HERE TO CREATE {bond.token1}-{bond.token2} PAIR
-                        </TokenPairLink>
-                        ) :                      
-                        <TokenPairLink
-                        target="_blank"
-                        rel="noopener"
-                        text-color="#F36FFE" // neon purple
-                        href=
-                        {`https://exchange.soulswap.finance/add/${
-                          bond.token1Address[250]}/${bond.token2Address[250]}`}
-                        >
-                          CREATE {bond.token1}-{bond.token2} PAIR
-                        </TokenPairLink>
+                          <TokenPairLink
+                            target="_blank"
+                            rel="noopener"
+                            color="#F36FFE" // neon purple
+                            href=
+                            {bond.token1 == 'FTM' ?
+                              `https://exchange.soulswap.finance/add/FTM/${bond.token2Address[250]}`
+                              : `https://exchange.soulswap.finance/add/FTM/${bond.token1Address[250]}`
+                            }
+                          >
+                            CLICK HERE TO CREATE {bond.token1}-{bond.token2} PAIR
+                          </TokenPairLink>
+                        ) :
+                          <TokenPairLink
+                            target="_blank"
+                            rel="noopener"
+                            text-color="#F36FFE" // neon purple
+                            href=
+                            {`https://exchange.soulswap.finance/add/${bond.token1Address[250]}/${bond.token2Address[250]}`}
+                          >
+                            CREATE {bond.token1}-{bond.token2} PAIR
+                          </TokenPairLink>
                       ) :
-                      approved ? 
-                      (
-                        <SubmitButton
-                        height="2.5rem"
-                        onClick={() => 
-                          handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))
-                        }
-                        >                        
-                          DEPOSIT {bond.token1}-{bond.token2} LP
-                        </SubmitButton>
-                      ) :
-                      (
-                        <SubmitButton height="2.5rem" onClick={() => handleApprove()}>
-                          APPROVE LP
-                        </SubmitButton>
-                      )
-                    
+                      approved ?
+                        (
+                          <SubmitButton
+                            height="2.5rem"
+                            onClick={() =>
+                              handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))
+                            }
+                          >
+                            DEPOSIT {bond.token1}-{bond.token2} LP
+                          </SubmitButton>
+                        ) :
+                        (
+                          <SubmitButton height="2.5rem" onClick={() => handleApprove()}>
+                            APPROVE LP
+                          </SubmitButton>
+                        )
+
                     }
                   </Wrap>
                 </FunctionBox>
-              ):(
-              <FunctionBox>
-                {/* <FlexText> */}
-                {/* <ClickableText
+              ) : (
+                <FunctionBox>
+                  {/* <FlexText> */}
+                  {/* <ClickableText
                     padding="0"
                     fontSize=".9rem"
                     color="#aaa"
@@ -580,64 +602,76 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   min="0"
                   onChange={() => getWithdrawable()}
                 /> */}
-
-                <Text fontSize=".9rem" padding="0" color="#aaa">
-                  Bonded:&nbsp;
-                      {Number(stakedBal) === 0
-                        ? '0.000'
-                        : Number(stakedBal) < 0.001
+                  <Wrap padding="0" margin="0" display="flex" justifyContent="space-between">
+                  <Text fontSize=".9rem" padding="0" textAlign="left" color="#aaa">
+                    BONDED:&nbsp;
+                    {Number(stakedBal) === 0
+                      ? '0.000'
+                      : Number(stakedBal) < 0.001
                         ? '<0.001'
                         : Number(stakedBal)
-                            .toFixed(3)
-                            .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                      }
-                    &nbsp;LP &nbsp;{Number(stakedLpValue) !== 0 ? `($${stakedLpValue})` : ''}
-                </Text>
-                <Wrap padding="0" margin="0" display="flex">
-                  <SubmitButton
-                    height="2.5rem"
-                    primaryColour="#bbb"
-                    color="black"
-                    margin=".5rem 0 .5rem 0"
-                    onClick={() =>
-                      setShowConfirmation(true)
-                      // handleMint()
+                          .toFixed(3)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                    }&nbsp;LP
+                    <br/>
+                    VALUE:&nbsp;{Number(stakedLpValue) !== 0 ? `$${stakedLpValue}` : '0'}
+                  </Text>
+                  <Text fontSize=".9rem" padding="0" color="#F36FFE" textAlign="right">
+                    {
+                      ' YTD: ' + reached + '%'
                     }
-                  >
-                    MINT SOUL {pendingValue !== 0 ? `($${pendingValue})` : ''}
-                  </SubmitButton>
-                </Wrap>
-              </FunctionBox>
+                    <br/>
+                    {/* <br/> */}
+                    {'DAILY: ' + dailyRoi
+                      + '%'
+                    }
+                  </Text>
+                  </Wrap>
+                  <Wrap padding="0" margin="0" display="flex">
+                    <SubmitButton
+                      height="2.5rem"
+                      primaryColour="#bbb"
+                      color="black"
+                      margin=".5rem 0 .5rem 0"
+                      onClick={() =>
+                        setShowConfirmation(true)
+                        // handleMint()
+                      }
+                    >
+                      MINT SOUL {pendingValue !== 0 ? `($${pendingValue})` : ''}
+                    </SubmitButton>
+                  </Wrap>
+                </FunctionBox>
               )}
             </DetailsWrapper>
-            </DetailsContainer>
-            </Wrap>
+          </DetailsContainer>
+        </Wrap>
       ) : null}
       <Modal isOpen={showConfirmation} onDismiss={
-          () => setShowConfirmation(false)          }>
+        () => setShowConfirmation(false)}>
         <div className="space-y-4">
           <ModalHeader title={`Are you sure?`} onClose={() => setShowConfirmation(false)} />
           <Typography variant="lg">
             Minting claims your pending rewards and sends your LP tokens to the Treasury.
-            <br/><br/>
+            <br /><br />
             You may only mint once and you may not add more to an open bond.
           </Typography>
           <Typography variant="sm" className="font-medium">
             QUESTIONS OR CONCERNS?
             <a href="mailto:soulswapfinance@gmail.com">
-            {' '} CONTACT US
+              {' '} CONTACT US
             </a>
           </Typography>
           <SubmitButton
             height="2.5rem"
             // onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
-            onClick={() => 
+            onClick={() =>
               // setShowConfirmation(true)
               handleMint()
-              }              
-            >
-              I UNDERSTAND THESE TERMS
+            }
+          >
+            I UNDERSTAND THESE TERMS
           </SubmitButton>
           {/* <Button
             color="red"
