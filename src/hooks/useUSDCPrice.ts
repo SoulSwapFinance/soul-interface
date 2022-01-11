@@ -1,8 +1,11 @@
-import { ChainId, Currency, CurrencyAmount, Price, Token } from '../sdk'
+import { ChainId, Currency, CurrencyAmount, JSBI, NATIVE, Price, Token } from 'sdk'
 
 import { useActiveWeb3React } from '../hooks/useActiveWeb3React'
 import { useMemo } from 'react'
 import { useV2TradeExactOut } from './useV2Trades'
+import { useSingleCallResult } from 'state/multicall/hooks'
+import { usePriceHelperContract } from 'hooks'
+import { SOUL } from '../constants'
 
 // import { wrappedCurrency } from "../functions/currency/wrappedCurrency";
 
@@ -12,12 +15,29 @@ export const USDC = {
   [ChainId.BSC]: new Token(ChainId.BSC, '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d', 6, 'USDC', 'USD Coin'),
 }
 
+export const FUSDT = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x049d68029688eAbF473097a2fC38ef61633A3C7A', 6, 'USDT', 'Frapped USDT'),
+}
+
 // Stablecoin amounts used when calculating spot price for a given currency.
 // The amount is large enough to filter low liquidity pairs.
 const STABLECOIN_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.MAINNET]: CurrencyAmount.fromRawAmount(USDC[ChainId.MAINNET], 100_000e6),
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(USDC[ChainId.FANTOM], 100_000e6)
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(USDC[ChainId.FANTOM], 100_000e6),
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(FUSDT[ChainId.FANTOM], 100_000e6)
 }
+
+// Soul amounts used when calculating spot price for a given currency.
+// The amount is large enough to filter low liquidity pairs.
+const SOUL_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(SOUL[ChainId.FANTOM], 100_000e6)
+}
+
+// ETH amounts used when calculating spot price for a given currency.
+// The amount is large enough to filter low liquidity pairs.
+// const ETH_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
+//   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WETH[ChainId.FANTOM], 100_000e6)
+// }
 
 /**
  * Returns the price in USDC of the input currency
@@ -25,6 +45,31 @@ const STABLECOIN_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
  */
 export default function useUSDCPrice(currency?: Currency): Price<Currency, Token> | undefined {
   const { chainId } = useActiveWeb3React()
+
+  const priceHelperContract = usePriceHelperContract()
+
+  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'])?.result
+  console.log(Number(rawFtmPrice))
+  const ftmPrice = Number(rawFtmPrice) / 1E18
+  console.log(ftmPrice)
+
+  const rawEthPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x74b23882a30290451A17c44f4F05243b6b58C76d'])?.result
+  console.log(Number(rawEthPrice))
+  const ethPrice = Number(rawEthPrice) / 1E18
+  console.log(ethPrice)
+  
+  const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6'])?.result
+  console.log(Number(rawSeancePrice))
+  const seancePrice = Number(rawSeancePrice) / 1E18
+  console.log(seancePrice)
+  
+  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
+  console.log(Number(rawSoulPrice))
+  const soulPrice = Number(rawSoulPrice) / 1E18
+  console.log(soulPrice)
+  
+  const soulAmountOut = chainId ? SOUL_AMOUNT_OUT[chainId] : undefined
+  const soul = soulAmountOut?.currency
 
   const amountOut = chainId ? STABLECOIN_AMOUNT_OUT[chainId] : undefined
   const stablecoin = amountOut?.currency
@@ -43,6 +88,11 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
       return new Price(stablecoin, stablecoin, '1', '1')
     }
 
+    // handle soul
+    if (currency?.wrapped.equals(soul)) {
+      return new Price(soul, soul, Number(soulPrice * 158).toFixed(), '1')
+    }
+
     // use v2 price if available
     if (v2USDCTrade) {
       const { numerator, denominator } = v2USDCTrade.route.midPrice
@@ -50,7 +100,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
     }
 
     return undefined
-  }, [currency, stablecoin, v2USDCTrade])
+  }, [currency, stablecoin, soul, v2USDCTrade])
 
   // if (!(chainId in USDC)) return undefined;
 

@@ -151,6 +151,16 @@ export const SOUL: ChainTokenMap = {
   [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5', 18, 'SOUL', 'SoulPower'), // 31 JUL
 }
 
+// WETH
+export const WETH: ChainTokenMap = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x74b23882a30290451A17c44f4F05243b6b58C76d', 18, 'WETH', 'Wrapped ETH'),
+}
+
+// WFTM
+export const WFTM: ChainTokenMap = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', 18, 'FTM', 'Wrapped Fantom')
+}
+
 // SEANCE TOKEN
 export const SEANCE: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', 18, 'SEANCE', 'SeanceCircle'),  // 31 JUL
@@ -168,18 +178,18 @@ export const ENCHANT: ChainTokenMap = {
   // [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '', 18, 'ENCHANT', 'Enchantment'), // 30 OCT
 }
 
-// export const WETH9_EXTENDED: { [chainId: number]: Token } = {
-//   ...WETH9,
-//   // 
+export const WETH9_EXTENDED: { [chainId: number]: Token } = {
+  ...WETH9,
+  // 
 
-//   [SupportedChainId.FANTOM]: new Token(
-//     ChainId.FANTOM,
-//     '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
-//     18,
-//     'WFTM',
-//     'Wrapped Fantom'
-//   ),
-// }
+  [SupportedChainId.FANTOM]: new Token(
+    ChainId.FANTOM,
+    '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
+    18,
+    'WFTM',
+    'Wrapped Fantom'
+  ),
+}
 
 export class ExtendedEther extends Ether {
   public get wrapped(): Token {
