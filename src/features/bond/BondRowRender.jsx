@@ -148,9 +148,9 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
 
   const dailyRoi
     = (apr / 365)
-      .toFixed(2)
-      .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    //   .toFixed(2)
+    //   .toString()
+    //   .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
   const reached
     = (100 * pendingValue / stakedLpValue)
@@ -194,7 +194,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
       const apr = result[1]
 
       setLiquidity(Number(tvl).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
-      setApr(Number(apr).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
+      setApr(Number(apr))
+      // setApr(Number(apr).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
     } catch (e) {
       console.warn(e)
     }
@@ -443,7 +444,11 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
               </TokenPairBox>
 
               <BondItemBox>
-                <BondItem>{apr ? (apr === 'Infinity' ? '∞%' : apr + '%') : '?'}</BondItem>
+                <BondItem>{
+                apr 
+                ? (apr === 'Infinity' ? '∞%' 
+                : apr + '%') 
+                : '?'}</BondItem>
               </BondItemBox>
 
               <BondItemBox desktopOnly={true}>
@@ -623,9 +628,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     }
                     <br/>
                     {/* <br/> */}
-                    DAILY:&nbsp; 
-                    { dailyRoi > 0 ? dailyRoi : '...'
-                    }%
+                    { dailyRoi > 0 
+                    ? 'DAILY: ' + dailyRoi.toFixed(2) : 0                    }%
                     
                   </Text>
                   </Wrap>
