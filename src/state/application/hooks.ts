@@ -125,3 +125,7 @@ export function useActivePopups(): AppState['application']['popupList'] {
 export function useKashiApprovalPending(): string {
   return useSelector((state: AppState) => state.application.kashiApprovalPending)
 }
+
+export function useToggleNetworkModal(): () => void {
+  return useToggleModal(ApplicationModal.NETWORK)
+}

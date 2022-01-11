@@ -41,14 +41,14 @@ import { useV2TradeExactIn as useTradeExactIn, useV2TradeExactOut as useTradeExa
 import { ParsedQs } from 'qs'
 import { SwapState } from './reducer'
 import { t } from '@lingui/macro'
-import { tryParseAmount } from '../../functions/parse'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
-import { useCurrency } from '../../hooks/Tokens'
+import { tryParseAmount } from 'functions/parse'
+import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { useCurrency } from 'hooks/Tokens'
 import { useCurrencyBalances } from '../wallet/hooks'
-import useENS from '../../hooks/useENS'
+import useENS from 'hooks/useENS'
 import { useLingui } from '@lingui/react'
-import useParsedQueryString from '../../hooks/useParsedQueryString'
-import useSwapSlippageTolerance from '../../hooks/useSwapSlippageTollerence'
+import useParsedQueryString from 'hooks/useParsedQueryString'
+import useSwapSlippageTolerance from 'hooks/useSwapSlippageTollerence'
 
 export function useSwapState(): AppState['swap'] {
   return useAppSelector((state) => state.swap)

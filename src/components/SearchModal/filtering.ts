@@ -1,4 +1,4 @@
-import { Token } from 'anyswap-sdk'
+import { Token } from 'sdk'
 import { isAddress } from 'functions'
 
 export function filterTokens(tokens: Token[], search: string): Token[] {

@@ -1,6 +1,5 @@
 import ERC20_ABI from '../../constants/abis/erc20.json'
 import config from '../../config'
-import {RPC} from '../../constants'
 import { web3Fn } from 'multichain-bridge'
 const Web3 = require('web3')
 
