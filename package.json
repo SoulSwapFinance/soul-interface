@@ -147,6 +147,7 @@
     "@apollo/client": "3.4.15",
     "@clover-network/clover-connector": "^1.0.0",
     "@types/big.js": "6.1.1",
+    "anyswap-sdk": "^3.0.11",
     "autoprefixer": "^10.0.2",
     "axios": "^0.24.0",
     "big.js": "^6.1.1",
