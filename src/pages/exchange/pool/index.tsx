@@ -29,6 +29,7 @@ import { useV2Pairs } from '../../../hooks/useV2Pairs'
 import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
 import { chain } from 'lodash'
 import MainHeader from 'features/swap/MainHeader'
+import NavLink from 'components/NavLink'
 // import SoulLogo from '../../../components/SoulLogo'
 
 export default function Pool() {
@@ -104,7 +105,7 @@ export default function Pool() {
       {/* <SoulLogo /> */}
       {/* <br /> <br /> */}
       <DoubleGlowShadowV2 opacity="0.6">
-        <Container maxWidth="2xl" className="space-y-6">
+        <Container maxWidth="2xl" className="space-y-3">
           <Alert
           title={i18n._(t`Liquidity Provider Rewards`)}
           message={i18n._(t`Liquidity providers earn a 0.25% fee on all trades proportional to their share of
@@ -113,7 +114,7 @@ export default function Pool() {
           type="information"
         />
 
-          <div className="p-4 space-y-4 rounded bg-dark-900">
+          <div className="p-4 space-y-2 rounded bg-dark-900">
             <div className="p-4 mb-3 space-y-3">
               <div className="text-center">
                 <Typography component="h1" variant="h2">
@@ -132,12 +133,12 @@ export default function Pool() {
                 </Empty>
               ) : allV2PairsWithLiquidity?.length > 0 ? (
                 <>
-                  <div className="flex items-center justify-center">
-                  <ExternalLink
-                      href={'/analytics/dashboard'}
-                  >
-                    Account Analytics and Accrued Fees <span> ↗</span>
-                  </ExternalLink>
+                  <div className="flex mb-4 items-center justify-center">
+                  <NavLink href={'/analytics/dashboard'}>
+                        <a className="block text-pink p-2 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                        Account Analytics and Accrued Fees <span> ↗</span>
+                        </a>
+                  </NavLink>
                 </div>
                   {allV2PairsWithLiquidity.map((v2Pair) => (
                     <FullPositionCard
