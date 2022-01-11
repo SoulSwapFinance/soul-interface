@@ -43,6 +43,7 @@ import useTransactionDeadline from '../../../hooks/useTransactionDeadline'
 import { useWalletModalToggle } from '../../../state/application/hooks'
 import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
 import { LiquidityHeader } from '../../../features/liquidity'
+import SwapBanner from 'components/SwapBanner'
 // import SoulLogo from '../../../components/SoulLogo'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
@@ -348,9 +349,14 @@ export default function Add() {
           content="Add liquidity to the Soul AMM to enable gas optimised and low slippage trades across countless networks"
         />
       </Head>
+            <MainHeader 
+  input={currencies[Field.CURRENCY_A]}
+  output={currencies[Field.CURRENCY_B]}
+  allowedSlippage={allowedSlippage}
+/>
       {/* <SoulLogo /> */}
-      <MainHeader />
       <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
+      <SwapBanner /> 
       <DoubleGlowShadowV2 opacity="0.6">
           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
             {/* <SwapHeader

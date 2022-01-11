@@ -386,7 +386,11 @@ export default function Swap() {
           content="Soul allows for swapping of compatible tokens on Fantom."
         />
       </Head>
-      <MainHeader />
+      <MainHeader 
+    input={currencies[Field.INPUT]}
+    output={currencies[Field.OUTPUT]}
+    allowedSlippage={allowedSlippage}
+  />
       <TokenWarningModal
         isOpen={importTokensNotInDefault.length > 0 && !dismissTokenWarning}
         tokens={importTokensNotInDefault}

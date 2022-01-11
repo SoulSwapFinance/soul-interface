@@ -5,7 +5,7 @@ import React, { FC, useState } from 'react'
 // import MyOrders from '../limit-order/MyOrders'
 import NavLink from '../../components/NavLink'
 // import Settings from '../../components/Settings'
-// import { currencyId } from '../../functions'
+import { currencyId } from '../../functions'
 import { t } from '@lingui/macro'
 import { useActiveWeb3React } from '../../hooks'
 import { useLingui } from '@lingui/react'
@@ -62,10 +62,10 @@ const MainHeader: FC<MainHeaderProps> = ({ input, output, allowedSlippage }) => 
         </NavLink> */}
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
-          href={"/add/FTM/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07"}
-          // href={`/${!isRemove ? 'add' : 'remove'}${input ? `/${currencyId(input)}` : ''}${
-          //   output ? `/${currencyId(output)}` : ''
-        // }`}
+          // href={"/add/FTM/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07"}
+          href={`/${!isRemove ? 'add' : 'remove'}${input ? `/${currencyId(input)}` : '/FTM'}${
+            output ? `/${currencyId(output)}` : '/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'
+        }`}
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
             {i18n._(t`+ / -`)}
