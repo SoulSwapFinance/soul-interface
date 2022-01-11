@@ -3,7 +3,7 @@ import { ChainId, Currency } from '../../sdk'
 import React, { FC } from 'react'
 import { Trans, t } from '@lingui/macro'
 
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import CloseIcon from '../../components/CloseIcon'
 import ExternalLink from '../../components/ExternalLink'
 import Image from '../../components/Image'

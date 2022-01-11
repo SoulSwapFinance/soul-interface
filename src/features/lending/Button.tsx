@@ -3,7 +3,7 @@ import useKashiApproveCallback, { BentoApprovalState } from '../../hooks/useKash
 
 import Alert from '../../components/Alert'
 import { COFFIN_BOX_ADDRESS } from '../../constants/kashi'
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import Dots from '../../components/Dots'
 import React from 'react'
 import { WNATIVE } from '../../sdk'

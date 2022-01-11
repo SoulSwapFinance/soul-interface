@@ -6,7 +6,7 @@ import { useFuse, useSortableData } from '../../hooks'
 
 import { COFFIN_BOX_ADDRESS } from '../../constants/kashi'
 import Back from '../../components/Back'
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import Card from '../../components/Card'
 import CardHeader from '../../components/CardHeader'
 import Container from '../../components/Container'

@@ -27,7 +27,7 @@ import { Wrap, ClickableText, Heading, Text, ExternalLink } from '../../componen
 import Modal from '../../components/Modal'
 import ModalHeader from '../../components/ModalHeader'
 import Typography from '../../components/Typography'
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 
 // params to render bond with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)

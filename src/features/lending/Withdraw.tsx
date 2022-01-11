@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { e10, minimum } from '../../functions/math'
 
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import { KashiApproveButton } from './Button'
 import KashiCooker from '../../entities/KashiCooker'
 import SmartNumberInput from '../../components/SmartNumberInput'

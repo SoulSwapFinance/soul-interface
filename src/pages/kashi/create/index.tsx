@@ -2,7 +2,7 @@ import { CHAINLINK_ORACLE_ADDRESS, UNDERWORLD_ADDRESS } from '../../../constants
 import React, { useCallback } from 'react'
 import { useCreateActionHandlers, useCreateState, useDerivedCreateInfo } from '../../../state/create/hook'
 
-import Button from '../../../components/Button'
+import { Button } from '../../../components/Button'
 import { CHAINLINK_MAPPING } from '../../../constants/chainlink'
 import Card from '../../../components/Card'
 import CardHeader from '../../../components/CardHeader'

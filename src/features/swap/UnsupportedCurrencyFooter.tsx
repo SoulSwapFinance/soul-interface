@@ -3,7 +3,7 @@ import { Currency, Token } from '../../sdk'
 import React, { useState } from 'react'
 
 import { AutoColumn } from '../../components/Column'
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import CloseIcon from '../../components/CloseIcon'
 import CurrencyLogo from '../../components/CurrencyLogo'
 import ExternalLink from '../../components/ExternalLink'

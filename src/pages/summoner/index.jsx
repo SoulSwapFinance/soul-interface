@@ -10,7 +10,7 @@ import { formatNumberScale } from '../../functions'
 import { usePositions, useFarms, useSummonerInfo } from '../../features/summoner/hooks'
 import { useRouter } from 'next/router'
 import Card from '../../components/Card'
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 import FarmList from '../../features/summoner/FarmList'
 import Menu from '../../features/summoner/FarmMenu' // todo ?

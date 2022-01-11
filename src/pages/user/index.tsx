@@ -4,7 +4,7 @@ import { isTransactionRecent, useAllTransactions } from '../../state/transaction
 import useSWR, { SWRResponse } from 'swr'
 
 import Back from '../../components/Back'
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import Container from '../../components/Container'
 import Dots from '../../components/Dots'
 import Head from 'next/head'

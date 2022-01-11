@@ -3,7 +3,7 @@ import React, { CSSProperties } from 'react'
 import { useIsTokenActive, useIsUserAddedToken } from '../../hooks/Tokens'
 
 import { AutoColumn } from '../../components/Column'
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import { CheckCircle } from 'react-feather'
 import CurrencyLogo from '../../components/CurrencyLogo'
 import ListLogo from '../../components/ListLogo'

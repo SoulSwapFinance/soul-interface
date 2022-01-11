@@ -4,7 +4,7 @@ import { filterTokens, useSortedTokensByQuery } from '../../functions/filtering'
 import { useAllTokens, useIsUserAddedToken, useSearchInactiveTokenLists, useToken } from '../../hooks/Tokens'
 
 import AutoSizer from 'react-virtualized-auto-sizer'
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import CHAINLINK_TOKENS from '@sushiswap/chainlink-whitelist/dist/sushiswap-chainlink.whitelist.json'
 import Column from '../../components/Column'
 import CommonBases from './CommonBases'

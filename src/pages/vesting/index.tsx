@@ -4,7 +4,7 @@ import { useClaimCallback, useUserUnclaimedAmount } from '../../state/claim/hook
 import { useModalOpen, useToggleSelfClaimModal } from '../../state/application/hooks'
 import { ApplicationModal } from '../../state/application/actions'
 import { BigNumber } from '@ethersproject/bignumber'
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import { ChevronRight } from 'react-feather'
 import Container from '../../components/Container'
 import Dots from '../../components/Dots'

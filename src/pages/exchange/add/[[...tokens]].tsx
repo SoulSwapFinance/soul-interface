@@ -1,6 +1,6 @@
 import { ApprovalState, useApproveCallback } from '../../../hooks/useApproveCallback'
 import { AutoRow, RowBetween } from '../../../components/Row'
-import Button, { ButtonError } from '../../../components/Button'
+import { Button, ButtonError } from '../../../components/Button'
 import { Currency, CurrencyAmount, Percent, WNATIVE, currencyEquals } from '../../../sdk'
 import { ZERO_PERCENT } from '../../../constants'
 import React, { useCallback, useState } from 'react'

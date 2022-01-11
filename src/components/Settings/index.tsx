@@ -10,7 +10,7 @@ import { useModalOpen, useToggleSettingsMenu } from '../../state/application/hoo
 
 import { AdjustmentsIcon } from '@heroicons/react/outline'
 import { ApplicationModal } from '../../state/application/actions'
-import Button from '../Button'
+import { Button } from '../Button'
 import Modal from '../Modal'
 import ModalHeader from '../ModalHeader'
 import QuestionHelper from '../QuestionHelper'

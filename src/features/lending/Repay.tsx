@@ -15,7 +15,7 @@ import {
 import { useV2TradeExactOut } from '../../hooks/useV2Trades'
 
 import { BigNumber } from '@ethersproject/bignumber'
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 // import { Field } from '../../state/swap/actions'
 import { KashiCooker } from '../../entities'
 import SmartNumberInput from '../../components/SmartNumberInput'
