@@ -6,7 +6,7 @@ import { toV2LiquidityToken, useTrackedTokenPairs } from '../../../state/user/ho
 import Alert from '../../../components/Alert'
 import { BIG_INT_ZERO } from '../../../constants'
 import Back from '../../../components/Back'
-import Button from '../../../components/Button'
+import { Button } from '../../../components/Button'
 import Card from '../../../components/Card'
 import Container from '../../../components/Container'
 import Dots from '../../../components/Dots'

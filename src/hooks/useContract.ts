@@ -84,6 +84,7 @@ import HARVEST_HELPER_ABI from '../constants/abis/soulswap/harvest-helper.json'
 
 // bridge
 import anyswapEthOperaBridge_ABI from '../constants/abis/soulswap/bridge/anyswapEthOperaBridge.json'
+import ROUTER_ACTION_ABI from '../constants/abis/soulswap/bridge/router-action.json'
 
 // unused
 import MEOWSHI_ABI from '../constants/abis/meowshi.json'
@@ -421,6 +422,10 @@ export function useZapperContract(withSignerIfPossible?: boolean): Contract | nu
   const { chainId } = useActiveWeb3React()
   const address = ZAPPER_ADDRESS[chainId]
   return useContract(address, ZAPPER_ABI, withSignerIfPossible)
+}
+
+export function useSwapUnderlyingContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {
+  return useContract(tokenAddress, ROUTER_ACTION_ABI, withSignerIfPossible)
 }
 
 export function useQuickSwapFactoryContract(): Contract | null {
