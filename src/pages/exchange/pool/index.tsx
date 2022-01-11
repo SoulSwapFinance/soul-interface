@@ -28,6 +28,7 @@ import { useTokenBalancesWithLoadingIndicator } from '../../../state/wallet/hook
 import { useV2Pairs } from '../../../hooks/useV2Pairs'
 import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
 import { chain } from 'lodash'
+import MainHeader from 'features/swap/MainHeader'
 // import SoulLogo from '../../../components/SoulLogo'
 
 export default function Pool() {
@@ -99,8 +100,9 @@ export default function Pool() {
           content="Soul liquidity pools are markets for trades between the two tokens, you can provide these tokens and become a liquidity provider to earn 0.25% of fees from trades."
         />
       </Head>
+      <MainHeader />
       {/* <SoulLogo /> */}
-      <br /> <br />
+      {/* <br /> <br /> */}
       <DoubleGlowShadowV2 opacity="0.6">
         <Container maxWidth="2xl" className="space-y-6">
           <Alert

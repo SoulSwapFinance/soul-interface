@@ -37,7 +37,7 @@ const MainHeader: FC<MainHeaderProps> = ({ input, output, allowedSlippage }) => 
 
   return (
     <div className="flex items-center justify-center mb-6 space-x-3">
-      <div className="grid grid-cols-4 rounded p-3px bg-dark-800 h-[46px]">
+      <div className="grid grid-cols-5 rounded p-3px bg-dark-800 h-[46px]">
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
           href={{
@@ -89,15 +89,15 @@ const MainHeader: FC<MainHeaderProps> = ({ input, output, allowedSlippage }) => 
             {i18n._(t`BRIDGE`)}
           </a>
         </NavLink>
-        {/* <NavLink
+        <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
-          href={"/farms"}
+          href={"/pool"}
           // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-            {i18n._(t`Farm`)}
+            {i18n._(t`POOL`)}
           </a>
-        </NavLink> */}
+        </NavLink>
       </div>
 
       {/* <div className="flex items-center">
