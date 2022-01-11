@@ -1,5 +1,10 @@
 import React from 'react'
+import styled from 'styled-components'
+import { RowBetween } from '../Row'
+import { darken, lighten } from 'polished'
+
 import { classNames } from '../../functions'
+import { Button as RebassButton, ButtonProps } from 'rebass/styled-components'
 
 const SIZE = {
   xs: 'px-2 py-1 text-xs',
@@ -77,7 +82,91 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   ref?: React.Ref<HTMLButtonElement>
 }
 
-function Button({
+const Base = styled(RebassButton)<{
+  padding?: string
+  width?: string
+  height?: string
+  maxWidth?: string
+  borderRadius?: string
+  altDisabledStyle?: boolean
+}>`
+  padding: ${({ padding }) => (padding ? padding : '1rem')};
+  width: ${({ width }) => (width ? width : '100%')};
+  height: ${({ height }) => (height ? height : '54px')};
+  max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : '320px')};
+  font-weight: 500;
+  text-align: center;
+  border-radius: 12px;
+  border-radius: ${({ borderRadius }) => borderRadius && borderRadius};
+  outline: none;
+  border: 1px solid transparent;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  &:disabled {
+    cursor: auto;
+  }
+  > * {
+    user-select: none;
+  }
+`
+
+export const ButtonPrimary = styled(Base)`
+  background: ${({ theme }) => theme.primary1};
+  color: white;
+  &:focus {
+    opacity: 0.91;
+  }
+  &:hover {
+    opacity: 0.92;
+  }
+  &:active {
+    opacity: 0.93;
+  }
+  &:disabled {
+    background-color: ${({ theme, altDisabledStyle }) => (altDisabledStyle ? theme.primary1 : theme.bg3)};
+    color: ${({ theme, altDisabledStyle }) => (altDisabledStyle ? 'white' : theme.text3)};
+    cursor: auto;
+    box-shadow: none;
+    border: 1px solid transparent;
+    outline: none;
+    opacity: ${({ altDisabledStyle }) => (altDisabledStyle ? '0.5' : '0.5')};
+  }
+`
+
+export const ButtonLight = styled(Base)`
+  background-color: ${({ theme }) => theme.primary5};
+  color: ${({ theme }) => theme.primaryText1};
+  font-size: 16px;
+  font-weight: 500;
+  &:focus {
+    opacity: 0.91;
+  }
+  &:hover {
+    opacity: 0.92;
+  }
+  &:active {
+    opacity: 0.93;
+  }
+  :disabled {
+    opacity: 0.4;
+    :hover {
+      cursor: auto;
+      background-color: ${({ theme }) => theme.primary5};
+      box-shadow: none;
+      border: 1px solid transparent;
+      outline: none;
+    }
+  }
+`
+
+export function Button({
   children,
   className = undefined,
   color = 'default',
@@ -100,8 +189,6 @@ function Button({
     </button>
   )
 }
-
-export default Button
 
 export function ButtonConfirmed({
   confirmed,
