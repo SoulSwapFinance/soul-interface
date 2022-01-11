@@ -2,10 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { useActiveWeb3React } from '../../hooks'
-
 import config from '../../config'
-
-import initPath from '../../assets/images/question.svg'
+import initPath from 'assets/images/question.svg'
 
 const Image = styled.img<{ size?: any }>`
   width: ${({ size }) => size};
@@ -17,6 +15,7 @@ const Image = styled.img<{ size?: any }>`
 `
 
 // const initPath = require('../../assets/images/question.svg')
+
 
 function getSourcePath(symbol: any) {
   let path = ''
