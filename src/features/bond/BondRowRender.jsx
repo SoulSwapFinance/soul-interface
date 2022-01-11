@@ -623,9 +623,10 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     }
                     <br/>
                     {/* <br/> */}
-                    {'DAILY: ' + dailyRoi
-                      + '%'
-                    }
+                    DAILY:&nbsp; 
+                    { dailyRoi > 0 ? dailyRoi : '...'
+                    }%
+                    
                   </Text>
                   </Wrap>
                   <Wrap padding="0" margin="0" display="flex">
