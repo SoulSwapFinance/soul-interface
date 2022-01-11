@@ -602,8 +602,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   min="0"
                   onChange={() => getWithdrawable()}
                 /> */}
-
-                  <Text fontSize=".9rem" padding="0" color="#aaa">
+                  <Wrap padding="0" margin="0" display="flex" justifyContent="space-between">
+                  <Text fontSize=".9rem" padding="0" textAlign="left" color="#aaa">
                     Bonded:&nbsp;
                     {Number(stakedBal) === 0
                       ? '0.000'
@@ -616,26 +616,16 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     }
                     &nbsp;LP &nbsp;{Number(stakedLpValue) !== 0 ? `($${stakedLpValue})` : ''}
                   </Text>
-                  <Text fontSize=".9rem" padding="0" color="#F36FFE">
+                  <Text fontSize=".9rem" padding="0" color="#F36FFE" textAlign="right">
                     {
-                      'YTD: ' + reached + '%'
+                      ' YTD: ' + reached + '%'
                     }
                     {/* <br/> */}
                     {' | DAILY: ' + dailyRoi
                       + '%'
                     }
-                    {/* {' | '} */}
-                    {/* { Number(term) // days [ttl]
-                      - elapsed // percent covered so far
-                    } */}
-                    {/* { dailyRoi } */}
-                    {/* Estimated Maturity Date: 
-                    { yourStartTime }
-                    {
-                      // YEAR / (roiPerDay) = days til maturation.
-                      365 / (apr / 100)
-                    }. */}
                   </Text>
+                  </Wrap>
                   <Wrap padding="0" margin="0" display="flex">
                     <SubmitButton
                       height="2.5rem"
