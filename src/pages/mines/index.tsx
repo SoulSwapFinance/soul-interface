@@ -266,8 +266,10 @@ export default function Farm(): JSX.Element {
             <Button
               color="blue"
               className="text-emphasis"
-              variant={'flexed'}
-              size={'nobase'}
+              // variant={'flexed'}
+              variant="outlined"
+              size={"sm"}
+              // size={'nobase'}
               disabled={pendingTx}
               onClick={async () => {
                 setPendingTx(true)
