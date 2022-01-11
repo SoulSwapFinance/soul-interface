@@ -151,18 +151,18 @@ export default function Farm(): JSX.Element {
     my: (farm) => farm?.amount,
     active: (farm) => farm?.allocPoint > 0,
     inactive: (farm) => farm?.allocPoint == 0,
-    soulswap: (farm) => farm?.allocPoint > 0 
+    soulswap: (farm) => farm?.allocPoint > 0
       && (
-            farm?.pair.token0?.symbol == 'SOUL'
-            || farm?.pair.token0?.symbol == 'SEANCE'
-            || farm?.pair.token0?.symbol == 'LUX'
-            || farm?.pair.token0?.symbol == 'wLUM'
+        farm?.pair.token0?.symbol == 'SOUL'
+        || farm?.pair.token0?.symbol == 'SEANCE'
+        || farm?.pair.token0?.symbol == 'LUX'
+        || farm?.pair.token0?.symbol == 'wLUM'
 
-            || farm?.pair.token1?.symbol == 'SOUL'
-            || farm?.pair.token1?.symbol == 'SEANCE'
-            || farm?.pair.token1?.symbol == 'LUX'
-            || farm?.pair.token1?.symbol == 'wLUM'
-          ),
+        || farm?.pair.token1?.symbol == 'SOUL'
+        || farm?.pair.token1?.symbol == 'SEANCE'
+        || farm?.pair.token1?.symbol == 'LUX'
+        || farm?.pair.token1?.symbol == 'wLUM'
+      ),
     single: (farm) => !farm.pair.token1,
     fantom: (farm) => farm?.allocPoint > 0 && (farm?.pair.token0?.symbol == 'FTM' || farm?.pair.token1?.symbol == 'FTM'),
     stables: (farm) => farm?.allocPoint == 200 // since all [active] stables have 200 AP <3
@@ -215,23 +215,36 @@ export default function Farm(): JSX.Element {
 
       <div className={classNames('top-0 block col-span-12')} style={{ maxHeight: '40rem' }}>
         <Header />
-        <div className={`flex flex-col items-center justify-between px-6 py-6 `}>
-          <div className="flex items-center text-center justify-between py-0 text-emphasis">
-            {/* Total Value Locked: {formatNumberScale(summTvl + summTvlVaults, true, 2)} */}
-            VALUE (TVL): {formatNumberScale(summTvl, true, 2)}
-          </div>
+        <div className={`flex flex-col-2 items-center justify-between px-6 py-6 `}>
+          {/* <div className="flex items-center text-center justify-between py-0 text-emphasis"> */}
+          {/* Total Value Locked: {formatNumberScale(summTvl + summTvlVaults, true, 2)} */}
+          {/* TVL */}
+          {/* <br/>
+            {formatNumberScale(summTvl, true, 0)} */}
 
           {positions.length > 0 && (
-            <div className="flex items-center justify-between py-2 text-emphasis">
-              DEPOSITED: {formatNumberScale(valueStaked, true, 2)}
-            </div>
-          )}
-          {positions.length > 0 && (
+
+
+
             <Button
               color="blue"
               className="text-emphasis"
               // variant={'flexed'}
               variant="outlined"
+              size={"sm"}
+            // size={'nobase'}
+            // disabled={pendingTx}
+            >
+              {'VALUE (YOURS): '}
+              {formatNumberScale(valueStaked, true, 2)}             </Button>
+          )}
+
+          {positions.length > 0 && (
+            <Button
+              color="blue"
+              className="text-emphasis"
+              // variant={'flexed'}
+              variant="flexed"
               size={"sm"}
               // size={'nobase'}
               disabled={pendingTx}
@@ -248,9 +261,22 @@ export default function Farm(): JSX.Element {
                 setPendingTx(false)
               }}
             >
-              HARVEST ALL: {formatNumberScale(allStaked / 1E18, true, 2)}
+              HARVEST REWARDS: {formatNumberScale(allStaked / 1E18, true, 2)}
             </Button>
           )}
+
+          <Button
+            color="blue"
+            className="text-emphasis"
+            variant={'outlined'}
+            // variant="flexed"
+            size={"sm"}
+          // size={'nobase'}
+          // disabled={pendingTx}
+          >
+            {'VALUE (TOTAL): '}
+            {formatNumberScale(summTvl, true, 2)}
+          </Button>
         </div>
       </div>
       <div className={classNames('space-y-6 col-span-4 lg:col-span-3')}>
