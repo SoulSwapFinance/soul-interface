@@ -151,7 +151,7 @@ export default function Farm(): JSX.Element {
     my: (farm) => farm?.amount,
     active: (farm) => farm?.allocPoint > 0,
     inactive: (farm) => farm?.allocPoint == 0,
-    soul: (farm) => farm?.allocPoint > 0 
+    soulswap: (farm) => farm?.allocPoint > 0 
       && (
             farm?.pair.token0?.symbol == 'SOUL'
             || farm?.pair.token0?.symbol == 'SEANCE'
