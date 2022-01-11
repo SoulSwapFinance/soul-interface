@@ -604,7 +604,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                 /> */}
                   <Wrap padding="0" margin="0" display="flex" justifyContent="space-between">
                   <Text fontSize=".9rem" padding="0" textAlign="left" color="#aaa">
-                    Bonded:&nbsp;
+                    BONDED:&nbsp;
                     {Number(stakedBal) === 0
                       ? '0.000'
                       : Number(stakedBal) < 0.001
@@ -613,15 +613,17 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                           .toFixed(3)
                           .toString()
                           .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                    }
-                    &nbsp;LP &nbsp;{Number(stakedLpValue) !== 0 ? `($${stakedLpValue})` : ''}
+                    }&nbsp;LP
+                    <br/>
+                    VALUE:&nbsp;{Number(stakedLpValue) !== 0 ? `$${stakedLpValue}` : '0'}
                   </Text>
                   <Text fontSize=".9rem" padding="0" color="#F36FFE" textAlign="right">
                     {
                       ' YTD: ' + reached + '%'
                     }
+                    <br/>
                     {/* <br/> */}
-                    {' | DAILY: ' + dailyRoi
+                    {'DAILY: ' + dailyRoi
                       + '%'
                     }
                   </Text>
