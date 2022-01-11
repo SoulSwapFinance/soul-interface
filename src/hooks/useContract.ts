@@ -174,6 +174,10 @@ export function useBytes32TokenContract(tokenAddress?: string, withSignerIfPossi
   return useContract(tokenAddress, ERC20_BYTES32_ABI, withSignerIfPossible)
 }
 
+export function useBridgeContract(routerToken?:any, withSignerIfPossible?: boolean): Contract | null {
+  return useContract(routerToken ? routerToken : undefined, ROUTER_ACTION_ABI, withSignerIfPossible)
+}
+
 export function usePairContract(pairAddress?: string, withSignerIfPossible?: boolean): Contract | null {
   return useContract(pairAddress, ISoulSwapPairABI, withSignerIfPossible)
 }
