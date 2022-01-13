@@ -146,6 +146,7 @@
   "dependencies": {
     "@apollo/client": "3.4.15",
     "@clover-network/clover-connector": "^1.0.0",
+    "@graphprotocol/graph-ts": "^0.24.1",
     "@terra-money/terra.js": "^3.0.4",
     "@terra-money/wallet-provider": "^3.6.5",
     "@types/big.js": "6.1.1",
