@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react'
 import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
-import { ACTION_ACCRUE } from '@sushiswap/kashi-sdk'
 
 import { Button } from '../../components/Button'
 import QuestionHelper from '../../components/QuestionHelper'
@@ -9,6 +8,8 @@ import { KashiCooker } from '../../entities'
 import { formatPercent } from '../../functions'
 import { ZERO } from '../../functions/math'
 import useKashiApproveCallback from '../../hooks/useKashiApproveCallback'
+
+const ACTION_ACCRUE = 8;
 
 export default function PairTools({ pair }) {
   const [, , , , onCook] = useKashiApproveCallback()
