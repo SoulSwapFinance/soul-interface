@@ -1,65 +1,55 @@
-import { classNames } from 'functions'
-import React, { FC, forwardRef } from 'react'
+import React from 'react'
 
-export type TypographyWeight = 400 | 500 | 700
+import { classNames } from '../../functions'
+
+export type TypographyWeight = 400 | 700
 
 const WEIGHTS = {
   400: 'font-medium',
   700: 'font-bold',
 }
 
-export type TypographyVariant = 'hero' | 'h1' | 'h2' | 'h3' | 'lg' | 'base' | 'sm' | 'xs' | 'xxs'
+export type TypographyVariant = 'hero' | 'h1' | 'h2' | 'h3' | 'lg' | 'base' | 'sm' | 'xs'
 
 const VARIANTS = {
-  hero: 'text-hero leading-[4rem]',
-  h1: 'text-4xl leading-[28px]',
-  h2: 'text-3xl tracking-[-0.02em]',
-  h3: 'text-2xl leading-7 tracking-[-0.01em]',
-  lg: 'text-lg leading-6',
-  base: 'text-base leading-5',
-  sm: 'text-sm leading-5',
-  xs: 'text-xs leading-4',
-  xxs: 'text-[0.625rem] leading-[1.2]',
+  hero: 'text-hero',
+  h1: 'text-4xl',
+  h2: 'text-3xl',
+  h3: 'text-2xl',
+  lg: 'text-lg',
+  base: 'text-base',
+  sm: 'text-sm',
+  xs: 'text-xs',
 }
 
-export interface TypographyProps extends React.AllHTMLAttributes<React.ReactHTML> {
+export interface TypographyProps {
   variant?: TypographyVariant
   weight?: TypographyWeight
   component?: keyof React.ReactHTML
   className?: string
+  // children?: React.ReactNode | React.ReactNode[]
   clickable?: boolean
 }
 
-const Typography: FC<TypographyProps> = forwardRef(
-  (
+function Typography({
+  variant = 'base',
+  weight = 400,
+  component = 'div',
+  className = 'currentColor',
+  clickable = false,
+  children = [],
+  onClick = undefined,
+  ...rest
+}: React.HTMLAttributes<React.ReactHTML> & TypographyProps): JSX.Element {
+  return React.createElement(
+    component,
     {
-      variant = 'base',
-      weight = 400,
-      component = 'div',
-      className = 'currentColor',
-      clickable = false,
-      children = [],
-      onClick = undefined,
-      ...rest
+      className: classNames(VARIANTS[variant], WEIGHTS[weight], onClick ? 'cursor-pointer select-none' : '', className),
+      onClick,
+      ...rest,
     },
-    ref
-  ) => {
-    return React.createElement(
-      component,
-      {
-        className: classNames(
-          VARIANTS[variant],
-          WEIGHTS[weight],
-          onClick ? 'cursor-pointer select-none' : '',
-          className
-        ),
-        onClick,
-        ...rest,
-        ref,
-      },
-      children
-    )
-  }
-)
+    children
+  )
+}
 
 export default Typography
