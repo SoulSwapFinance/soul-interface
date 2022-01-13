@@ -146,6 +146,7 @@
   "dependencies": {
     "@apollo/client": "3.4.15",
     "@clover-network/clover-connector": "^1.0.0",
+    "@sushiswap/kashi-sdk": "^1.0.0-canary.10",
     "@terra-money/terra.js": "^3.0.4",
     "@terra-money/wallet-provider": "^3.6.5",
     "@types/big.js": "6.1.1",
@@ -175,6 +176,7 @@
     "react-inlinesvg": "^2.3.0",
     "react-router-dom": "^5.3.0",
     "rebass": "^4.0.7",
+    "recoil": "^0.5.2",
     "tiny-invariant": "^1.1.0",
     "toformat": "^2.0.0",
     "web3": "3.0.0-rc.4",

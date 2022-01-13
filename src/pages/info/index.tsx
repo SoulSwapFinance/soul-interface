@@ -1,9 +1,7 @@
-import SwapHeader from '../../features/trade/Header'
 import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 import Container from '../../components/Container'
-import { Wrap } from '../../components/ReusableStyles'
 import MainHeader from '../../features/swap/MainHeader'
-// import SwapBanner from 'components/SwapBanner'
+
 const Info = () => {
 	return (
     <>
