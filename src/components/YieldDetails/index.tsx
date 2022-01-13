@@ -9,7 +9,7 @@ import { ApplicationModal } from '../../state/application/actions'
 import { useModalOpen } from '../../state/application/hooks'
 import CurrencyLogo from '../CurrencyLogo'
 import DoubleLogo from '../DoubleLogo'
-import Modal from '../DefaultModal'
+import Modal from '../Modal'
 import ModalHeader from '../ModalHeader'
 import Typography from '../Typography'
 

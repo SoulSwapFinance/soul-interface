@@ -1,6 +1,6 @@
 import CloseIcon from './CloseIcon'
 import Image from 'next/image'
-import Modal from './DefaultModal'
+import Modal from './Modal'
 import React from 'react'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'

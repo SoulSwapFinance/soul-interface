@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 
 import Column from '../Column'
 import { RowBetween } from '../Row'
-import Modal from '../DefaultModal'
+import Modal from '../Modal'
 import QuestionHelper from '../QuestionHelper'
 import { PaddedColumn, SearchInput, Separator } from '../SearchModal/styleds'
 import { filterTokens } from '../SearchModal/filtering'
