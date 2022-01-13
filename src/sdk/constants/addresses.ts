@@ -71,6 +71,13 @@ export const COFFIN_BOX_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.FANTOM_TESTNET]: ''
 }
 
+export const UNDERWORLD_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '', // TODO
+  [ChainId.FANTOM_TESTNET]: ''
+}
+
 export const ENCHANT_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',

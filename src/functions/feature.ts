@@ -16,6 +16,15 @@ const features = {
   [ChainId.FANTOM_TESTNET]: [Feature.AMM, Feature.LIQUIDITY_MINING]
 }
 
+// export function featureEnabled(feature: Feature, chainId: ChainId): boolean {
+//   return features[chainId].includes(feature)
+// }
 export function featureEnabled(feature: Feature, chainId: ChainId): boolean {
-  return features[chainId].includes(feature)
+  return chainId && chainId in features && features[chainId].includes(feature)
+}
+
+export function chainsWithFeature(feature: Feature): ChainId[] {
+  return Object.keys(features)
+    .filter((chainKey) => featureEnabled(feature, ChainId[chainKey]))
+    .map((chain) => ChainId[chain])
 }

@@ -41,7 +41,7 @@ import {
   // SOUL_GUIDE_ADDRESS,
   SOULSWAP_TWAP_0_ORACLE_ADDRESS,
   SOULSWAP_TWAP_1_ORACLE_ADDRESS,
-} from '../constants/kashi'
+} from 'constants/kashi'
 import { MERKLE_DISTRIBUTOR_ADDRESS } from '../constants'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from '../constants/multicall'
 import ALCX_REWARDER_ABI from '../constants/abis/alcx-rewarder.json'
@@ -71,6 +71,7 @@ import SOUL_SAFE_ABI from '../constants/abis/soulswap/safe.json'
 import SOUL_GUIDE_ABI from '../constants/abis/soul-guide.json' // TODO: update abi
 import SOUL_SUMMONER_ABI from '../constants/abis/soulswap/soulsummoner.json' // 28 JUL
 import SOULVAULT_ABI from '../constants/abis/soulswap/soulvault.json' // 31 JUL
+import BORING_HELPER_ABI from '../constants/abis/soulswap/boring-helper.json' // TODO: update abi
 // import SPELL_ABI from '../constants/abis/soulswap/spell.json' // 28 JUL
 import ENCHANT_ABI from '../constants/abis/soulswap/enchant.json' // 30 OCT
 import ENCHANT_HELPER_ABI from '../constants/abis/soulswap/enchant-helper.json' // 30 OCT
@@ -194,6 +195,12 @@ export function useSoulGuideContract(): Contract | null {
 
 export function usePendingContract(): Contract | null {
   return useContract('0x9aeadfE6cd03A2b5730474bF6dd79802d5bCD029', PENDING_ABI, false)
+}
+
+export function useBoringHelperContract(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  // TODO ramin update in sdk
+  return useContract(chainId && '0x26bbB91Ade07f995E1c5D1F4A050639763F4C44b', BORING_HELPER_ABI, false)
 }
 
 export function usePriceHelperContract(): Contract | null {
