@@ -10,7 +10,7 @@ import Column from '../Column'
 import { PaddedColumn, Separator } from '../SearchModal/styleds'
 import { Input as NumericalInput } from '../NumericalInput'
 import TokenLogo from '../TokenLogo'
-import Modal from '../DefaultModal'
+import Modal from '../Modal'
 import {
   OptionCardClickable,
   Option
@@ -266,11 +266,7 @@ export default function SelectChainIdInputPanel({
         </Container>
       </InputPanel>
       {!disableCurrencySelect && onChainSelect && (
-        <Modal 
-        isOpen={modalOpen} 
-        onDismiss={handleDismissSearch} 
-        maxHeight={300}
-        >
+        <Modal isOpen={modalOpen} onDismiss={handleDismissSearch} maxHeight={300}>
           <Column style={{ width: '100%', flex: '1 1' }}>
             <PaddedColumn gap="14px">
               <RowBetween>
