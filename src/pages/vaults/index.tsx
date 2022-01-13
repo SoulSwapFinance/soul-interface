@@ -1,4 +1,3 @@
-
 /* eslint-disable @next/next/link-passhref */
 import { useActiveWeb3React, useFuse, useSoulSummonerContract } from '../../hooks'
 
@@ -7,7 +6,7 @@ import React, { useContext, useState } from 'react'
 import { formatNumberScale } from '../../functions'
 // import { usePositions, useSoulVaultInfo, useVaults } from '../../features/vault/hooks'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
+// import Link from 'next/link'
 import Card from '../../components/Card'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
@@ -17,11 +16,11 @@ import { VAULTS } from '../../constants/vaults'
 // import SoulSwapLogo from '../../components/SoulSwapLogo'
 import { PriceContext } from '../../contexts/priceContext'
 import { useTVL } from '../../hooks/useV2Pairs'
-import { getAddress } from '@ethersproject/address'
+// import { getAddress } from '@ethersproject/address'
 import VaultList from '../../features/vault/VaultList'
-import useSummoner from '../../features/summoner/useSummoner'
+// import useSummoner from '../../features/summoner/useSummoner'
 import { useFarms, usePositions, useSoulSummonerInfo } from '../../features/summoner/hooks'
-import useSoulSummoner from '../../features/farm/hooks/useSoulSummoner'
+// import useSoulSummoner from '../../features/farm/hooks/useSoulSummoner'
 
 export default function Vault(): JSX.Element {
   const { i18n } = useLingui()
