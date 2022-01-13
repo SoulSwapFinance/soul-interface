@@ -146,6 +146,7 @@
   "dependencies": {
     "@apollo/client": "3.4.15",
     "@clover-network/clover-connector": "^1.0.0",
+    "@storybook/react": "^6.4.12",
     "@sushiswap/core-sdk": "^1.0.0-canary.34",
     "@sushiswap/kashi-sdk": "^1.0.0-canary.10",
     "@terra-money/terra.js": "^3.0.4",
