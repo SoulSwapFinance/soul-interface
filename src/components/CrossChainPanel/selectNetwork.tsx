@@ -7,7 +7,7 @@ import { Settings, CheckSquare } from 'react-feather'
 import { Box } from 'rebass/styled-components'
 
 import TokenLogo from '../TokenLogo'
-import Modal from '../Modal'
+import Modal from '../DefaultModal'
 import Loader from '../Loader'
 
 import { useActiveWeb3React } from '../../hooks'
