@@ -1,35 +1,13 @@
+import { ChevronDownIcon } from '@heroicons/react/outline'
+import { t } from '@lingui/macro'
+import { useLingui } from '@lingui/react'
+import { Currency } from 'sdk'
+import selectCoinAnimation from 'animation/select-coin.json'
+import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
+import Lottie from 'lottie-react'
 import React, { useCallback, useState } from 'react'
 
-import { ChevronDownIcon } from '@heroicons/react/outline'
-import { Currency } from '../../sdk'
 import CurrencyLogo from '../CurrencyLogo'
-import CurrencySearchModal from '../../modals/SearchModal/CurrencySearchModal'
-import Lottie from 'lottie-react'
-import selectCoinAnimation from '../../animation/select-coin.json'
-import styled from 'styled-components'
-import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
-import { useLingui } from '@lingui/react'
-
-const CurrencySelect = styled.button<{ selected: boolean }>`
-  align-items: center;
-  height: 100%;
-  font-size: 20px;
-  font-weight: 500;
-  outline: none;
-  cursor: pointer;
-  user-select: none;
-  border: none;
-`
-
-const StyledDropDown = styled(ChevronDownIcon)<{ selected: boolean }>`
-  margin: 0 0.25rem 0 0.5rem;
-  height: 35%;
-  path {
-    stroke: ${({ selected, theme }) => (selected ? theme.text1 : theme.white)};
-    stroke-width: 1.5px;
-  }
-`
 
 interface CurrencySelectPanelProps {
   onClick?: () => void
@@ -53,7 +31,6 @@ export default function CurrencySelectPanel({
   const { i18n } = useLingui()
 
   const [modalOpen, setModalOpen] = useState(false)
-  const { chainId } = useActiveWeb3React()
 
   const handleDismissSearch = useCallback(() => {
     setModalOpen(false)
@@ -63,9 +40,8 @@ export default function CurrencySelectPanel({
     <div id={id} className="p-5 rounded bg-dark-800">
       <div className="flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row">
         <div className="w-full" onClick={onClick}>
-          <CurrencySelect
-            selected={!!currency}
-            className="open-currency-select-button"
+          <div
+            className="items-center h-full text-xl font-medium border-none outline-none cursor-pointer select-none"
             onClick={() => {
               if (!disableCurrencySelect) {
                 setModalOpen(true)
@@ -92,7 +68,7 @@ export default function CurrencySelectPanel({
                         currency.symbol.slice(currency.symbol.length - 5, currency.symbol.length)
                       : currency?.symbol) || (
                       <div className="px-2 py-1 mt-1 text-xs font-medium bg-transparent border rounded-full hover:bg-primary border-low-emphesis text-secondary whitespace-nowrap">
-                        {i18n._(t`Select Token`)}
+                        {i18n._(t`Select a token`)}
                       </div>
                     )}
                   </div>
@@ -106,16 +82,16 @@ export default function CurrencySelectPanel({
                 </div>
               </div>
             </div>
-          </CurrencySelect>
+          </div>
         </div>
       </div>
       {!disableCurrencySelect && onCurrencySelect && (
-        <CurrencySearchModal
-          isOpen={modalOpen}
+        <CurrencySearchModal.Controlled
+          open={modalOpen}
           onDismiss={handleDismissSearch}
           onCurrencySelect={onCurrencySelect}
-          selectedCurrency={currency}
-          otherSelectedCurrency={otherCurrency}
+          selectedCurrency={currency ?? undefined}
+          otherSelectedCurrency={otherCurrency ?? undefined}
           showCommonBases={showCommonBases}
         />
       )}

@@ -1,16 +1,29 @@
 import React from 'react'
 import { Text } from 'rebass'
 import styled from 'styled-components'
-// import AutoSizer from 'react-virtualized-auto-sizer'
-// import { useTranslation } from 'react-i18next'
+import { AutoColumn } from '../Column'
 
 import Modal from './index'
 import Column from '../Column'
 import { RowBetween } from '../Row'
 import QuestionHelper from '../QuestionHelper'
-import { PaddedColumn, Separator } from '../SearchModal/styleds'
 import { CloseIcon } from '../../theme'
 
+export const PaddedColumn = styled(AutoColumn)`
+  padding: 20px;
+  padding-bottom: 12px;
+`
+export const Separator = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: ${({ theme }) => theme.bg2};
+`
+
+export const SeparatorDark = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: ${({ theme }) => theme.bg3};
+`
 const ContentWrapper = styled.div`
   width: 100%;
   ${({ theme }) => theme.mediaWidth.upToMedium`padding: 1rem`};

@@ -8,11 +8,11 @@ import Card from 'components/Card'
 import Container from 'components/Container'
 import CurrencyInputPanel from 'components/CurrencyInputPanel'
 import { CHAINLINK_PRICE_FEED_MAP } from 'config/oracles/chainlink'
-import { Feature } from 'enums'
+// import { Feature } from 'enums'
 import { e10 } from 'functions/math'
-import NetworkGuard from 'guards/Network'
+// import NetworkGuard from 'guards/Network'
 import { useBentoBoxContract } from 'hooks/useContract'
-import Layout from 'layouts/Kashi'
+import Layout from 'layouts/Underworld'
 import { useActiveWeb3React } from 'services/web3'
 import { Field } from 'state/create/actions'
 import { useCreateActionHandlers, useCreateState, useDerivedCreateInfo } from 'state/create/hook'
@@ -20,10 +20,10 @@ import { useTransactionAdder } from 'state/transactions/hooks'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useCallback } from 'react'
+import { CHAINLINK_ORACLE_ADDRESS } from 'constants/kashi'
 
 // TODO : UPDATE ADDRESSES //
-const UNDERWORLD_ADDRESS = '0x07a676Da1B50ABCf455C778cddD306c6E44CB2fe'
-const CHAINLINK_ORACLE_ADDRESS = '0x00632CFe43d8F9f8E6cD0d39Ffa3D4fa7ec73CFB'
+const UNDERWORLD_ADDRESS = '0x0A497d994E18c581fbdCE5d51A3438D53e3540d6'
 
 export type ChainlinkToken = {
   symbol: string
@@ -35,7 +35,7 @@ export type ChainlinkToken = {
 export default function Create() {
   const { chainId } = useActiveWeb3React()
 
-  const bentoBoxContract = useBentoBoxContract()
+  const coffinBoxContract = useBentoBoxContract()
 
   const addTransaction = useTransactionAdder()
 
@@ -157,10 +157,10 @@ export default function Create() {
         oracleData,
       ])
 
-      const tx = await bentoBoxContract?.deploy(chainId && UNDERWORLD_ADDRESS[chainId], underworldData, true)
+      const tx = await coffinBoxContract?.deploy(chainId && UNDERWORLD_ADDRESS[chainId], underworldData, true)
 
       addTransaction(tx, {
-        summary: `Add Kashi market ${currencies[Field.ASSET].symbol}/${currencies[Field.COLLATERAL].symbol} Chainlink`,
+        summary: `Add Underworld Market ${currencies[Field.ASSET].symbol}/${currencies[Field.COLLATERAL].symbol} Chainlink`,
       })
 
       router.push('/lend')
@@ -179,7 +179,7 @@ export default function Create() {
         className="h-full bg-dark-900"
         header={
           <Card.Header className="bg-dark-800">
-            <div className="text-3xl text-high-emphesis leading-48px">Create a Market</div>
+            <div className="text-3xl text-high-emphesis leading-48px">Create Market</div>
           </Card.Header>
         }
       >
@@ -236,7 +236,7 @@ const CreateLayout = ({ children }) => {
         <Card
           className="h-full bg-dark-900"
           backgroundImage="/images/underworld/deposit.png"
-          title={i18n._(t`Create a new Kashi Market`)}
+          title={i18n._(t`Create a new Underworld Market`)}
           description={i18n._(
             t`If you want to supply to a market that is not listed yet, you can use this tool to create a new pair.`
           )}

@@ -5,12 +5,12 @@ import Card from 'components/Card'
 import Image from 'components/Image'
 import QuestionHelper from 'components/QuestionHelper'
 import { Feature } from 'enums'
-import { Deposit, Withdraw, PairTools, Strategy } from 'features/lending'
-import { useKashiPair } from 'features/lending/context'
+import { Deposit, PairTools, Strategy, Withdraw } from 'features/lending'
+import { useUnderworldPair } from 'features/underworld/hooks'
 import { formatNumber, formatPercent } from 'functions/format'
 import NetworkGuard from 'guards/Network'
 import { useRedirectOnChainId } from 'hooks/useRedirectOnChainId'
-import Layout from 'layouts/Kashi'
+import Layout from 'layouts/Underworld'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -22,7 +22,7 @@ export default function Pair() {
   const router = useRouter()
   const { i18n } = useLingui()
 
-  const pair = useKashiPair(router.query.pair as string)
+  const pair = useUnderworldPair(router.query.pair as string)
 
   if (!pair) return <div />
 
@@ -60,7 +60,7 @@ export default function Pair() {
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-3xl text-high-emphesis">
-                    {i18n._(t`Lend`)} {pair && pair.asset?.tokenInfo.symbol}
+                    {i18n._(t`Lend`)} {pair && pair.asset.tokenInfo.symbol}
                   </div>
                   <div className="flex items-center">
                     <div className="mr-1 text-sm text-secondary">{i18n._(t`Collateral`)}:</div>
@@ -132,7 +132,7 @@ Pair.Provider = RecoilRoot
 const PairLayout = ({ children }) => {
   const router = useRouter()
   const { i18n } = useLingui()
-  const pair = useKashiPair(router.query.pair as string)
+  const pair = useUnderworldPair(router.query.pair as string)
 
   return pair ? (
     <Layout

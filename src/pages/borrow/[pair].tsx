@@ -8,15 +8,14 @@ import Image from 'components/Image'
 import QuestionHelper from 'components/QuestionHelper'
 import { Feature } from 'enums'
 import { Borrow, PairTools, Repay, Strategy } from 'features/lending'
-import { useKashiPair } from 'features/lending/context'
-// import { useKashiPair } from 'features/kashi/hooks'
+import { useUnderworldPair } from 'features/underworld/hooks'
 import { formatNumber, formatPercent } from 'functions/format'
 import NetworkGuard from 'guards/Network'
 import { useUSDCPrice } from 'hooks'
 import { useToken } from 'hooks/Tokens'
 import { useRedirectOnChainId } from 'hooks/useRedirectOnChainId'
 import { useV2Pair } from 'hooks/useV2Pairs'
-import Layout from 'layouts/Kashi'
+import Layout from 'layouts/Underworld'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -28,7 +27,7 @@ export default function Pair() {
   const router = useRouter()
   const { i18n } = useLingui()
 
-  const pair = useKashiPair(router.query.pair as string)
+  const pair = useUnderworldPair(router.query.pair as string)
 
   if (!pair) return <div />
 
@@ -146,7 +145,7 @@ Pair.Provider = RecoilRoot
 const PairLayout = ({ children }) => {
   const { i18n } = useLingui()
   const router = useRouter()
-  const pair = useKashiPair(router.query.pair as string)
+  const pair = useUnderworldPair(router.query.pair as string)
   const asset = useToken(pair?.asset.address)
   const collateral = useToken(pair?.collateral.address)
   const [pairState, liquidityPair] = useV2Pair(asset, collateral)

@@ -4,7 +4,7 @@ import Lottie from 'lottie-react'
 import selectCoinAnimation from '../../animation/select-coin.json'
 import { t } from '@lingui/macro'
 import { ChevronDownIcon } from '@heroicons/react/solid'
-import { Currency } from '../../sdk'
+import { Currency } from 'sdk'
 import { useLingui } from '@lingui/react'
 import CurrencySearchModal from '../../modals/SearchModal/CurrencySearchModal'
 import CurrencyLogo from '../../components/CurrencyLogo'
@@ -82,17 +82,7 @@ const CurrencySelect: FC<CurrencySelectProps> = ({
         </div>
       </button>
       {!disabled && onSelect && (
-        <CurrencySearchModal
-          isOpen={modalOpen}
-          onDismiss={() => setModalOpen(false)}
-          onCurrencySelect={onSelect}
-          selectedCurrency={currency}
-          otherSelectedCurrency={otherCurrency}
-          showCommonBases={showCommonBases}
-          currencyList={currencyList}
-          includeNativeCurrency={includeNativeCurrency}
-          allowManageTokenList={allowManageTokenList}
-        />
+       <CurrencySearchModal trigger={''} onCurrencySelect={undefined} />
       )}
     </>
   )

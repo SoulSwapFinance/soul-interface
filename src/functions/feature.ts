@@ -5,14 +5,14 @@ export enum Feature {
   AMM_V2 = 'AMM V2',
   LIQUIDITY_MINING = 'Liquidity Mining',
   BENTOBOX = 'BentoBox',
-  KASHI = 'Kashi',
+  UNDERWORLD = 'Underworld',
   IFO = 'IFO',
   ANALYTICS = 'Analytics',
 }
 
 const features = {
   [ChainId.MAINNET]: [Feature.AMM],
-  [ChainId.FANTOM]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.ANALYTICS],
+  [ChainId.FANTOM]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.ANALYTICS, Feature.UNDERWORLD],
   [ChainId.FANTOM_TESTNET]: [Feature.AMM, Feature.LIQUIDITY_MINING]
 }
 
