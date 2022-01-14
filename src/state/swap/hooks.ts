@@ -200,14 +200,14 @@ export function useDerivedSwapInfo(doArcher = false): {
 
   const formattedTo = isAddress(to)
   if (!to || !formattedTo) {
-    inputError = inputError ?? i18n._(t`Enter a recipient`)
+    inputError = inputError ?? i18n._(t`Enter Recipient`)
   } else {
     if (
       BAD_RECIPIENT_ADDRESSES?.[chainId]?.[formattedTo] ||
       (bestTradeExactIn && involvesAddress(bestTradeExactIn, formattedTo)) ||
       (bestTradeExactOut && involvesAddress(bestTradeExactOut, formattedTo))
     ) {
-      inputError = inputError ?? i18n._(t`Invalid recipient`)
+      inputError = inputError ?? i18n._(t`Invalid Recipient`)
     }
   }
 

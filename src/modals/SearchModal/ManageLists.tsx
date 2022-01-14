@@ -107,7 +107,7 @@ const ListRow: FC<{ listUrl: string }> = memo(({ listUrl }) => {
             <Typography variant="xs" className="text-white">
               {i18n._(t`${list.tokens.length} tokens`)}
             </Typography>
-            <Popover
+            {/* <Popover
               placement="bottom-start"
               content={
                 <div className="flex flex-col gap-1 border rounded shadow bg-dark-900 border-dark-700 p-3">
@@ -140,7 +140,7 @@ const ListRow: FC<{ listUrl: string }> = memo(({ listUrl }) => {
               }
             >
               <Settings size={12} className="text-high-emphesis cursor-pointer hover:text-white" />
-            </Popover>
+            </Popover> */}
           </div>
         </div>
       </div>

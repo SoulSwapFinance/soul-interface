@@ -1,4 +1,3 @@
-
 import dynamic from 'next/dynamic'
 import { ChainId, Currency, FACTORY_ADDRESS, Token, WNATIVE } from '../../sdk'
 import useDexCandles from '../../hooks/useDexCandles'

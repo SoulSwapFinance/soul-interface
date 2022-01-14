@@ -116,7 +116,8 @@ const Component: FC<ComponentProps> = ({
         ]
       )}
     >
-      <div className="lg:max-h-[92vh] lg:h-[40rem] h-full flex flex-col gap-4">
+      <div className="max-h-[92vh] h-[40rem] h-full flex flex-col gap-4">
+      {/* <div className="lg:max-h-[92vh] lg:h-[40rem] h-full flex flex-col gap-4"> */}
         {view === CurrencyModalView.search ? (
           <CurrencySearch
             otherSelectedCurrency={otherSelectedCurrency}
