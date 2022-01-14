@@ -37,8 +37,9 @@ const MainHeader: FC<MainHeaderProps> = ({ input, output, allowedSlippage }) => 
   const isLimitOrder = router.asPath.startsWith('/limit-order')
 
   return (
-    <><SwapBanner />
-    <div className="flex mt-6 items-center justify-center mb-4 space-x-3">
+    <>
+    <SwapBanner />
+   {/* <div className="flex mt-6 items-center justify-center mb-4 space-x-3">
       <div className="grid grid-cols-3 rounded p-3px bg-dark-800 h-[46px]">
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
@@ -51,7 +52,7 @@ const MainHeader: FC<MainHeaderProps> = ({ input, output, allowedSlippage }) => 
             {i18n._(t`SWAP`)}
           </a>
         </NavLink>
-        {/* <NavLink
+         <NavLink
       activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
       href={{
         pathname: '/limit-order',
@@ -61,7 +62,7 @@ const MainHeader: FC<MainHeaderProps> = ({ input, output, allowedSlippage }) => 
       <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
         {i18n._(t`Limit`)}
       </a>
-    </NavLink> */}
+    </NavLink> 
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
           // href={"/add/FTM/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07"}
@@ -71,15 +72,15 @@ const MainHeader: FC<MainHeaderProps> = ({ input, output, allowedSlippage }) => 
             {i18n._(t`PAIR`)}
           </a>
         </NavLink>
-        {/* <NavLink
+        <NavLink
       activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
       href={"/info"}
-      // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
+      href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
     >
       <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
         {i18n._(t`INFO`)}
       </a>
-    </NavLink> */}
+    </NavLink>
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
           href={"/bridge"}
@@ -88,7 +89,7 @@ const MainHeader: FC<MainHeaderProps> = ({ input, output, allowedSlippage }) => 
             {i18n._(t`BRIDGE`)}
           </a>
         </NavLink>
-        {/* <NavLink
+        <NavLink
       activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
       href={"/pool"}
       // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
@@ -96,10 +97,10 @@ const MainHeader: FC<MainHeaderProps> = ({ input, output, allowedSlippage }) => 
       <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
         {i18n._(t`POOLS`)}
       </a>
-    </NavLink> */}
+    </NavLink>
       </div>
 
-      {/* <div className="flex items-center">
+       <div className="flex items-center">
       <div className="grid grid-flow-col gap-1">
         {isLimitOrder && (
           <div className="items-center h-full w-full cursor-pointer hover:bg-dark-800 rounded px-3 py-1.5">
@@ -123,10 +124,15 @@ const MainHeader: FC<MainHeaderProps> = ({ input, output, allowedSlippage }) => 
         <div className="relative flex items-center w-full h-full rounded hover:bg-dark-800">
           <Settings placeholderSlippage={allowedSlippage} />
         </div>
-      </div> */}
-      {/* </div> */}
-    </div></>
+      </div>
+     </div> 
   )
 }
-
+    </div>
+  */}
+    </>
+  )}
 export default MainHeader
+
+
+// #D4A1FB - L. PURPLE

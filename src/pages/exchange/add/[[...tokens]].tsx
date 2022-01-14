@@ -355,7 +355,7 @@ export default function Add() {
             allowedSlippage={allowedSlippage}
       />
       {/* <SoulLogo /> */}
-      <div className="mb-6"/>
+      <div className="mb-4"/>
       <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
       {/* <SwapBanner /> */}
       <DoubleGlowShadowV2 opacity="0.6">
