@@ -119,7 +119,7 @@ function AppBar(): JSX.Element {
                           </a>
                         </NavLink>
                       )}
-                      <NavLink href={'/analytics/dashboard'}>
+                      <NavLink href={'/analytics'}>
                         <a
                           id={`analytics-nav-link`}
                           className="w-full relative ml-6 md:p-2"
