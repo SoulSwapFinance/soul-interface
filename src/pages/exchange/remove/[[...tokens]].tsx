@@ -725,8 +725,10 @@ export default function Remove() {
             output={currencyB}
             allowedSlippage={allowedSlippage}
           />
+                <div className="mb-6"/>
+
       <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
-        <SwapBanner />
+        {/* <SwapBanner /> */}
       <DoubleGlowShadowV2 opacity="0.6">
           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>          
             {/* <SwapHeader

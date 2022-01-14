@@ -163,7 +163,7 @@ export default function Farm(): JSX.Element {
         || farm?.pair.token1?.symbol == 'LUX'
         || farm?.pair.token1?.symbol == 'wLUM'
       ),
-    single: (farm) => !farm.pair.token1,
+    single: (farm) => farm.pair.token0 && !farm.pair.token1,
     fantom: (farm) => farm?.allocPoint > 0 && (farm?.pair.token0?.symbol == 'FTM' || farm?.pair.token1?.symbol == 'FTM'),
     stables: (farm) => farm?.allocPoint == 200 // since all [active] stables have 200 AP <3
   }

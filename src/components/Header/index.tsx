@@ -67,16 +67,16 @@ function AppBar(): JSX.Element {
                           </a>
                         </NavLink>
                       )}
-                      {/* {chainId && [ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      {chainId && [ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href="/pool">
                           <a
                             id={`pool-nav-link`}
                             className="w-full relative ml-6 md:p-2"
                           >
-                            {i18n._(t`PAIR`)}
+                            {i18n._(t`POOL`)}
                           </a>
                         </NavLink>
-                      )} */}
+                      )}
                       {/* <div
                         className="w-full relative ml-6 md:p-2"
                       > */}
@@ -98,7 +98,7 @@ function AppBar(): JSX.Element {
                           </a>
                         </NavLink>
                       )}
-                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/seance'}>
                         <a
                           id={`stake-nav-link`}
@@ -107,7 +107,7 @@ function AppBar(): JSX.Element {
                           {i18n._(t`STAKE`)}
                         </a>
                       </NavLink>
-                      )}
+                      )} */}
                       {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/bonds'}>
                           <a
@@ -127,6 +127,14 @@ function AppBar(): JSX.Element {
                           {i18n._(t`DATA`)}
                         </a>
                       </NavLink>
+                        <NavLink href={'/launchpad'}>
+                          <a
+                            id={`launchpad-nav-link`}
+                            className="hidden md:block w-full relative ml-6 md:p-2"
+                          >
+                            {i18n._(t`LAUNCH`)}
+                          </a>
+                        </NavLink>
                             {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                               <NavLink href={'/luxor'}>
                                 <a
@@ -144,13 +152,6 @@ function AppBar(): JSX.Element {
                           {i18n._(t`SCARAB`)}
                           </a>
                         </NavLink> */}
-                      <NavLink href={'/launchpad'}>
-                        <a
-                          id={`launchpad-nav-link`}
-                          className="hidden md:block w-full relative ml-6 md:p-2">
-                          {i18n._(t`LAUNCH`)}
-                        </a>
-                      </NavLink>
                     </div>
                   </div>
                 </div>

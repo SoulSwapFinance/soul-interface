@@ -13,7 +13,7 @@ import {
   USD,
   ZERO,
 } from 'sdk'
-import {Button, ButtonError } from 'components/Button'
+import { Button, ButtonError } from 'components/Button'
 import Dots from 'components/Dots'
 import Web3Connect from 'components/Web3Connect'
 import { classNames, tryParseAmount } from 'functions'
@@ -29,6 +29,8 @@ import useMasterChef from '../hooks/useMasterChef'
 import { SOUL_SUMMONER_ADDRESS } from '../../../constants'
 import { useCurrency } from 'hooks/Tokens'
 import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
+import { usePriceHelperContract } from 'hooks'
+import { useSingleCallResult } from 'state/multicall/hooks'
 
 const ManageBar = ({ farm }) => {
   const { account, chainId } = useActiveWeb3React()
@@ -37,7 +39,7 @@ const ManageBar = ({ farm }) => {
   const [depositValue, setDepositValue] = useState('')
   const [withdrawValue, setWithdrawValue] = useState('')
 
-  const { deposit, withdraw } = useMasterChef()
+  const { deposit, withdraw, enterStaking, leaveStaking } = useMasterChef()
   const addTransaction = useTransactionAdder()
 
   let token0 = useCurrency(farm.pair.token0?.id)
@@ -51,6 +53,13 @@ const ManageBar = ({ farm }) => {
     farm.pair.token1 ? farm.pair?.name : farm.pair.token0?.name
   )
 
+  const priceHelperContract = usePriceHelperContract()
+
+  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
+  console.log(Number(rawSoulPrice))
+  const soulPrice = Number(rawSoulPrice) / 1E18
+  console.log('soul price:%s', soulPrice)
+
   const balance = useCurrencyBalance(account, liquidityToken)
   const stakedAmount = useUserInfo(farm, liquidityToken)
 
@@ -58,10 +67,12 @@ const ManageBar = ({ farm }) => {
   let [state, pair, pairPrice] = data
 
   const balanceFiatValueRaw
-    = Number(pairPrice) * Number(balance?.toSignificant())
+    = pair?.token1 ? Number(pairPrice) * Number(balance?.toSignificant())
+    : Number(soulPrice) * Number(balance?.toSignificant())
 
   const stakedAmountFiatValueRaw
-    = Number(pairPrice) * Number(stakedAmount?.toSignificant())
+    = pair?.token1 ? Number(pairPrice) * Number(stakedAmount?.toSignificant())
+    : Number(soulPrice) * Number(stakedAmount?.toSignificant())
 
   const balanceFiatValue
     = CurrencyAmount.fromRawAmount(
@@ -183,26 +194,47 @@ const ManageBar = ({ farm }) => {
               {approvalState === ApprovalState.PENDING ? <Dots>{i18n._(t`Approving`)}</Dots> : i18n._(t`Approve`)}
             </Button>
           ) : (
-            <ButtonError
-              onClick={async () => {
-                try {
-                  // KMP decimals depend on asset, SLP is always 18
-                  const tx = await deposit(farm.id, BigNumber.from(parsedDepositValue.quotient.toString()))
-                  addTransaction(tx, {
-                    summary: `Deposit ${farm.pair.token0.name}/${farm.pair.token1.name}`,
-                  })
-                } catch (error) {
-                  console.error(error)
-                }
-              }}
-              disabled={!isDepositValid}
-              error={!isDepositValid && !!parsedDepositValue}
-            >
-              {depositError || i18n._(t`Confirm Deposit`)}
-            </ButtonError>
+              farm.pair?.token1 ?
+                <ButtonError
+                  onClick={async () => {
+                    try {
+                      // LP is always 18
+                      const tx = await deposit(farm.id, BigNumber.from(parsedDepositValue.quotient.toString()))
+                      addTransaction(tx, {
+                        summary: `Deposit ${farm.pair?.token0.name}/${farm.pair?.token1.name}`,
+                      })
+                    } catch (error) {
+                      console.error(error)
+                    }
+                  }}
+                  disabled={!isDepositValid}
+                  error={!isDepositValid && !!parsedDepositValue}
+                >
+                  {depositError || i18n._(t`Confirm Deposit`)}
+                </ButtonError>
+                : <ButtonError
+                  onClick={async () => {
+                    try {
+                      // LP is always 18
+                      const tx = await enterStaking(BigNumber.from(parsedDepositValue.quotient.toString()))
+                      addTransaction(tx, {
+                        summary: `Deposit ${farm.pair?.token0?.name}/${farm.pair?.token1.name}`,
+                      })
+                    } catch (error) {
+                      console.error(error)
+                    }
+                  }}
+                  disabled={!isDepositValid}
+                  error={!isDepositValid && !!parsedDepositValue}
+                >
+                  {depositError || i18n._(t`Confirm Deposit`)}
+                </ButtonError>
+            
           )}
         </div>
       ) : (
+
+        farm.pair.token1 ?
         <div className="flex flex-col space-y-4">
           <CurrencyInputPanel
             value={withdrawValue}
@@ -233,6 +265,40 @@ const ManageBar = ({ farm }) => {
               error={!isWithdrawValid && !!parsedWithdrawValue}
             >
               {withdrawError || i18n._(t`Confirm Withdraw`)}
+            </ButtonError>
+          )}
+        </div>
+        :
+        <div className="flex flex-col space-y-4">
+          <CurrencyInputPanel
+            value={withdrawValue}
+            currency={liquidityToken}
+            id="add-liquidity-input-tokenb"
+            hideIcon
+            onUserInput={(value) => setWithdrawValue(value)}
+            currencyBalance={stakedAmount}
+            fiatValue={stakedAmountFiatValue}
+            showMaxButton={false}
+          />
+          {!account ? (
+            <Web3Connect size="lg" color="blue" className="w-full" />
+          ) : (
+            <ButtonError
+              onClick={async () => {
+                try {
+                  // LP is always 18
+                  const tx = await leaveStaking(BigNumber.from(parsedWithdrawValue.quotient.toString()))
+                  addTransaction(tx, {
+                    summary: `Withdraw SOUL`,
+                  })
+                } catch (error) {
+                  console.error(error)
+                }
+              }}
+              disabled={!isWithdrawValid}
+              error={!isWithdrawValid && !!parsedWithdrawValue}
+            >
+              {withdrawError || i18n._(t`Redeem with Seance`)}
             </ButtonError>
           )}
         </div>

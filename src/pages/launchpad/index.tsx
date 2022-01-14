@@ -70,7 +70,7 @@ export default function Launchpad(): JSX.Element {
                 </Typography>
                 <br />
                 <Typography variant="base" className={'max-w-xl text-gray-400'}>
-                  Interested in launching your project with us?
+                  Interested in launching with us?
                   <br />
                   <a
                     href="https://forms.gle/oDFKZAvC8jRbAfw29"
