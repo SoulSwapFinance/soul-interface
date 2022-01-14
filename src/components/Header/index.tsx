@@ -145,6 +145,16 @@ function AppBar(): JSX.Element {
                                 </a>
                               </NavLink>
                             )}
+                            {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                              <NavLink href={'/claims'}>
+                                <a
+                                  id={`claims-nav-link`}
+                                  className="hidden md:block w-full relative ml-6 md:p-2"
+                                >
+                                  {i18n._(t`CLAIM`)}
+                                </a>
+                              </NavLink>
+                            )}
                       {/* <NavLink href={'/scarab'}>
                           <a
                             id={`scarab-nav-link`}

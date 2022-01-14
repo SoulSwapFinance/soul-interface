@@ -10,7 +10,7 @@ import { t } from '@lingui/macro'
 import { useActiveWeb3React } from '../../hooks'
 import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
-import SwapBanner from 'components/SwapBanner'
+// import SwapBanner from 'components/SwapBanner'
 
 const getQuery = (input, output) => {
   if (!input && !output) return
@@ -38,7 +38,7 @@ const MainHeader: FC<MainHeaderProps> = ({ input, output, allowedSlippage }) => 
 
   return (
     <>
-    <SwapBanner />
+    {/* <SwapBanner /> */}
    {/* <div className="flex mt-6 items-center justify-center mb-4 space-x-3">
       <div className="grid grid-cols-3 rounded p-3px bg-dark-800 h-[46px]">
         <NavLink
