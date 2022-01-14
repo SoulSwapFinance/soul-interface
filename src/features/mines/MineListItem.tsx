@@ -65,7 +65,9 @@ const MineListItem = ({ farm, ...rest }) => {
   //     return previousValue + currentValue.rewardPerBlock * currentValue.rewardPrice
   //   }, 0) / summTvl
 
-  const balanceUSD = Number(pairPrice) * Number(lpBalance) / 1e18
+  const balanceUSD = farm.pair?.token1
+    ? Number(pairPrice) * Number(lpBalance) / 1e18
+    : Number(soulPrice) * Number(lpBalance) / 1e18
 
   const secsPerHour = 60 * 60
 
@@ -97,7 +99,7 @@ const MineListItem = ({ farm, ...rest }) => {
     <Disclosure {...rest}>
       {({ open }) => (
         <div>
-          {token1 ?
+          {/* {token1 ? */}
             <Disclosure.Button
               className={classNames(
                 open && 'rounded-b-none',
@@ -106,7 +108,7 @@ const MineListItem = ({ farm, ...rest }) => {
             >
               <div className="grid grid-cols-4">
                 <div className="flex col-span-2 space-x-4 md:col-span-1">
-                  {token1 ?
+                  { token1 ?
                     <DoubleLogo currency0={token0} currency1={token1} size={40} />
                     : <CurrencyLogo currency={token0} size={54} />
                   }
@@ -116,12 +118,22 @@ const MineListItem = ({ farm, ...rest }) => {
                     </div>
                   </div>
                 </div>
+                {/* TVL */}
+                { token1 ?
                 <div className="flex flex-col justify-center font-bold">{
                   formatNumber(
                     // PRICE PER TOKEN * TOKEN BALANCE
                     Number(pairPrice) * Number(lpBalance) / 1e18,
                     true)
                 }</div>
+              
+              : <div className="flex flex-col justify-center font-bold">{
+                  formatNumber(
+                    // PRICE PER TOKEN * TOKEN BALANCE
+                    Number(soulPrice) * Number(lpBalance) / 1e18,
+                    true)
+                }</div>
+                }
                 <div className="flex-row items-center hidden space-x-4 md:flex">
                   <div className="flex items-center space-x-2">
                     {farm?.rewards?.map((reward, i) => (
@@ -194,7 +206,7 @@ const MineListItem = ({ farm, ...rest }) => {
                 </div>
               </div>
             </Disclosure.Button>
-            : ''}
+            {/* : ''} */}
           {open && <MineListItemDetails farm={farm} />}
         </div>
       )}
