@@ -9,6 +9,7 @@ import { calculateGasMargin, calculateSlippageAmount } from 'functions/trade'
 import { currencyId, maxAmountSpend } from 'functions/currency'
 import { useDerivedMintInfo, useMintActionHandlers, useMintState } from 'state/mint/hooks'
 import { useExpertModeManager, useUserSlippageToleranceWithDefault } from 'state/user/hooks'
+import MainHeader from 'features/swap/MainHeader'
 
 import { AutoColumn } from 'components/Column'
 import { BigNumber } from '@ethersproject/bignumber'
@@ -42,6 +43,7 @@ import useTransactionDeadline from 'hooks/useTransactionDeadline'
 import { useWalletModalToggle } from 'state/application/hooks'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { LiquidityHeader } from 'features/liquidity'
+import SwapBanner from 'components/SwapBanner'
 // import SoulLogo from 'components/SoulLogo'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
@@ -347,9 +349,15 @@ export default function Add() {
           content="Add liquidity to the Soul AMM to enable gas optimised and low slippage trades across countless networks"
         />
       </Head>
+      <MainHeader
+            input={currencyA}
+            output={currencyB}
+            allowedSlippage={allowedSlippage}
+      />
       {/* <SoulLogo /> */}
-      <br /> <br />
+      {/* <br /> <br /> */}
       <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
+      <SwapBanner />
       <DoubleGlowShadowV2 opacity="0.6">
           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
             <SwapHeader
