@@ -172,8 +172,8 @@ export default function Create() {
   return (
     <CreateLayout>
       <Head>
-        <title>Create Lending Pair | Kashi by Sushi</title>
-        <meta key="description" name="description" content="Create Lending Pair on Kashi by Sushi" />
+        <title>Create Lending Pair | Underworld by Soul</title>
+        <meta key="description" name="description" content="Create Lending Pair on Underworld by Soul" />
       </Head>
       <Card
         className="h-full bg-dark-900"

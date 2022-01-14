@@ -35,7 +35,7 @@ export default function Pair() {
   return (
     <PairLayout>
       <Head>
-        <title>{i18n._(t`Borrow ${pair?.asset?.symbol}-${pair?.collateral?.symbol}`)} | Sushi</title>
+        <title>{i18n._(t`Borrow ${pair?.asset?.symbol}-${pair?.collateral?.symbol}`)} | Soul</title>
         <meta
           key="description"
           name="description"
