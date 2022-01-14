@@ -186,7 +186,7 @@ const ManageBar = ({ farm }) => {
             <ButtonError
               onClick={async () => {
                 try {
-                  // KMP decimals depend on asset, SLP is always 18
+                  // LP is always 18
                   const tx = await deposit(farm.id, BigNumber.from(parsedDepositValue.quotient.toString()))
                   addTransaction(tx, {
                     summary: `Deposit ${farm.pair.token0.name}/${farm.pair.token1.name}`,
