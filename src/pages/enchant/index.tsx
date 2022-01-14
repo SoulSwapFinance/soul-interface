@@ -8,7 +8,7 @@ import Head from 'next/head'
 import Dots from '../../components/Dots'
 import Image from 'next/image'
 import { Input as NumericalInput } from '../../components/NumericalInput'
-import TransactionFailedModal from '../../components/TransactionFailedModal'
+// import TransactionFailedModal from '../../components/TransactionFailedModal'
 import styled from 'styled-components'
 import { t } from '@lingui/macro'
 import { tryParseAmount } from '../../functions/parse'
@@ -282,7 +282,7 @@ export default function Enchant() {
           <div className="flex flex-col justify-center md:flex-row">
             <div className="flex flex-col w-full max-w-xl mx-auto mb-4 md:m-0">
               <div>
-                <TransactionFailedModal isOpen={modalOpen} onDismiss={() => setModalOpen(false)} />
+                {/* <TransactionFailedModal isOpen={modalOpen} onDismiss={() => setModalOpen(false)} /> */}
                 <div className="w-full max-w-xl px-3 pt-2 pb-6 rounded bg-dark-900 md:pb-9 md:pt-4 md:px-8">
                 <br />
                   {/* STAKING OR UNSTAKING */}

@@ -322,7 +322,7 @@ export default function WalletModal({
   }
 
   return (
-    <HeadlessUiModal.Controlled isOpen={walletModalOpen} onDismiss={toggleWalletModal} minHeight={false} maxHeight={90}>
+    <HeadlessUiModal.Controlled isOpen={walletModalOpen} onDismiss={toggleWalletModal}>
       {getModalContent()}
     </HeadlessUiModal.Controlled>
   )
