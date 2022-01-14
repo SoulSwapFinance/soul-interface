@@ -16,6 +16,7 @@ import loadingRollingCircle from 'animation/loading-rolling-circle.json'
 import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
 import useAddTokenToMetaMask from 'hooks/useAddTokenToMetaMask'
 import { useLingui } from '@lingui/react'
+import { HeadlessUiModal } from 'components/Modal'
 
 interface ConfirmationPendingContentProps {
   onDismiss: () => void
@@ -186,7 +187,7 @@ const TransactionConfirmationModal: FC<ConfirmationModalProps> = ({
 
   // confirmation screen
   return (
-    <Modal isOpen={isOpen} onDismiss={onDismiss} maxHeight={90}>
+    <HeadlessUiModal.Controlled isOpen={isOpen} onDismiss={onDismiss}>
       {attemptingTxn ? (
         <ConfirmationPendingContent onDismiss={onDismiss} pendingText={pendingText} pendingText2={pendingText2} />
       ) : hash ? (
@@ -199,7 +200,7 @@ const TransactionConfirmationModal: FC<ConfirmationModalProps> = ({
       ) : (
         content()
       )}
-    </Modal>
+    </HeadlessUiModal.Controlled>
   )
 }
 

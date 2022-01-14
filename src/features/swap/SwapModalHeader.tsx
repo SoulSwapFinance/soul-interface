@@ -101,7 +101,7 @@ export default function SwapModalHeader({
       <div className="justify-start text-sm text-secondary">
         {trade?.tradeType === TradeType.EXACT_INPUT ? (
           <>
-            {i18n._(t`Output is estimated. You will receive at least`)}{' '}
+            {i18n._(t`Output is estimated. You'll receive at least`)}{' '}
             <b>
               {trade?.minimumAmountOut(allowedSlippage).toSignificant(6)} {trade?.outputAmount?.currency?.symbol}
             </b>{' '}

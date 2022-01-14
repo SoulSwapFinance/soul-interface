@@ -743,7 +743,7 @@ export default function Remove() {
                 hash={txHash ? txHash : ''}
                 content={() => (
                   <ConfirmationModalContent
-                    title={i18n._(t`You Will Receive`)}
+                    title={i18n._(t`Receive`)}
                     onDismiss={handleDismissConfirmation}
                     topContent={modalHeader}
                     bottomContent={modalBottom}
@@ -774,7 +774,7 @@ export default function Remove() {
                     <div className="flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row">
                       <div className="w-full text-white sm:w-2/5" style={{ margin: 'auto 0px' }}>
                         <AutoColumn>
-                          <div>{i18n._(t`You Will Receive`)}</div>
+                          <div>{i18n._(t`Receive`)}</div>
                           {chainId && (oneCurrencyIsWETH || oneCurrencyIsETH) ? (
                             <RowBetween className="text-sm">
                               {oneCurrencyIsETH ? (
