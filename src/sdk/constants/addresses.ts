@@ -67,7 +67,7 @@ export const SOUL_VAULT_ADDRESS: { [chainId in ChainId]: string } = {
 export const COFFIN_BOX_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '',
+  [ChainId.FANTOM]: '0xB9c7c6368a69b61508a556bd539eb2b8C351d27A',
   [ChainId.FANTOM_TESTNET]: ''
 }
 
