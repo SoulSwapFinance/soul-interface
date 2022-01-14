@@ -1,8 +1,6 @@
-import { Currency, CurrencyAmount, Percent } from '../../sdk'
+import { Currency, CurrencyAmount, Percent } from 'sdk'
+import { warningSeverity } from 'functions/prices'
 import React, { useMemo } from 'react'
-
-import { t } from '@lingui/macro'
-import { warningSeverity } from '../../functions/prices'
 
 export function FiatValue({
   fiatValue,
