@@ -5,7 +5,6 @@ import {
   useEthPrice,
   useFarms,
   useKashiPairs,
-//   useMasterChefV1SushiPerBlock,
 //   useMasterChefV1TotalAllocPoint,
 //   useMaticPrice,
 //   useNativePrice,
