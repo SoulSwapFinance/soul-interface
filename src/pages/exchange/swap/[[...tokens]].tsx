@@ -52,6 +52,7 @@ import Image from 'next/image'
 import { CenterScreen } from '../../../components/ReusableStyles'
 import Alert from '../../../components/Alert'
 import Chart from '../../../components/Chart'
+import NavLink from 'components/NavLink'
 
 export default function Swap() {
   const { i18n } = useLingui()
