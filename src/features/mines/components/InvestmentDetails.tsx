@@ -16,7 +16,7 @@ import { PairType } from '../enum'
 import { usePendingSoul, useUserInfo } from '../hooks'
 import useSummoner from 'features/summoner/useSummoner'
 import usePendingReward from '../hooks/usePendingReward'
-import { SOUL, SOUL_ADDRESS, WNATIVE} from '../../../constants'
+import { SOUL, SOUL_ADDRESS, WNATIVE } from '../../../constants'
 import { usePriceHelperContract } from 'features/bond/hooks/useContract'
 import { useSingleCallResult } from 'state/multicall/hooks'
 import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
@@ -64,7 +64,7 @@ const InvestmentDetails = ({ farm }) => {
 
   let [data] = useV2PairsWithPrice([[token0, token1]])
   let [state, pair, pairPrice] = data
-  
+
   const pendingSoul = usePendingSoul(farm)
   const pendingReward = usePendingReward(farm)
 
@@ -77,7 +77,7 @@ const InvestmentDetails = ({ farm }) => {
   //       )
   // )
   // const typedDepositValue = tryParseAmount(depositValue, liquidityToken)
-  
+
   function getTvl() {
     let lpPrice = 0
     let decimals = 18
@@ -85,9 +85,9 @@ const InvestmentDetails = ({ farm }) => {
       lpPrice = Number(soulPrice)
       decimals = farm.pair.token0?.decimals
     } else if (farm.lpToken.toLowerCase() == WNATIVE[chainId].toLowerCase()) {
-      lpPrice =  Number(ftmPrice)
+      lpPrice = Number(ftmPrice)
     } else if (farm.lpToken.toLowerCase() == '0x124B06C5ce47De7A6e9EFDA71a946717130079E6'.toLowerCase()) {
-      lpPrice =  Number(seancePrice)
+      lpPrice = Number(seancePrice)
     } else {
       lpPrice = pairPrice
     }
@@ -97,8 +97,9 @@ const InvestmentDetails = ({ farm }) => {
 
     return Number(farm.totalLp / 10 ** decimals) * lpPrice
   }
-  
+
   const tvl = getTvl()
+
 
   const rewardValue =
     (farm?.rewards?.[0]?.rewardPrice ?? 0) * Number(pendingSoul?.toExact() ?? 0) +
@@ -123,8 +124,11 @@ const InvestmentDetails = ({ farm }) => {
         <div className="flex items-end justify-between font-bold">
           <div className="text-lg cursor-pointer">{i18n._(t`Deposited`)}:</div>
           <Typography className="font-bold">
-            {formatNumber(stakedAmount?.toSignificant(6) ?? 0)} {farm.pair.token0?.symbol}-{farm.pair.token1?.symbol}{' '}
+
+            {formatNumber(stakedAmount?.toSignificant(6) ?? 0)} &nbsp;
+            {farm.pair.token0?.symbol}-{farm.pair.token1?.symbol}
             {liquidityToken?.symbol}
+
           </Typography>
         </div>
         <div className="w-full h-0 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis border-gradient-r-blue-pink-dark-800 opacity-20" />
@@ -140,17 +144,23 @@ const InvestmentDetails = ({ farm }) => {
               <Typography>{token0?.symbol}</Typography>
               <Typography>{' ('}{formatNumber(Number(pairPrice) / 2 * Number(stakedAmount?.toSignificant(2)), true)}{') '}</Typography>
             </div>
-              <div className="flex items-center space-x-2">
-                <CurrencyLogo currency={token1} size="30px" />
-                {/* <Typography>
+            {token1?.symbol ?
+             <div className="flex items-center space-x-2">
+           <CurrencyLogo currency={token1} size="30px" />
+               {/* <Typography>
                   {formatNumber((farm.pair?.reserve1 * Number(stakedAmount) ?? 0) / farm.pair.totalSupply)}
                 </Typography> */}
-                <Typography>{token1?.symbol}</Typography>
-                <Typography>{' ('}{formatNumber(Number(pairPrice) / 2 * Number(stakedAmount?.toSignificant(2)), true)}{') '}</Typography>
-              </div>
+               <Typography>{token1?.symbol}</Typography>
+              <Typography>{' ('}{formatNumber(Number(pairPrice) / 2 * Number(stakedAmount?.toSignificant(2)), true)}{') '}</Typography>
+            </div>
+                : ''}
           </div>
-          {/* MULTIPLE PRICE PER LP * AMOUNT LP */}
+
+          {/* MULTIPLY PRICE PER ASSET * AMOUNT LP */}
+          { pair?.token1 ?
           <Typography>{formatNumber(Number(pairPrice) * Number(stakedAmount?.toSignificant(2)), true)}</Typography>
+          :
+          <Typography>{formatNumber(Number(soulPrice) * Number(stakedAmount?.toSignificant(2)), true)}</Typography> }
           {/* <Typography>{formatNumber(pairPrice ?? 0, true)}</Typography> */}
           {/* <Typography>{formatNumber(positionFiatValue?.toSignificant(4) ?? 0, true)}</Typography> */}
         </div>
