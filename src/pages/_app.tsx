@@ -150,9 +150,9 @@ function MyApp({
             <Web3ProviderNetworkBridge getLibrary={getLibrary}>
               <Web3ReactManager>
                 <ReduxProvider store={store}>
-                  {/* <PriceProvider> */}
+                  <PriceProvider>
                     <>
-                      <ListsUpdater />
+                      {/* <ListsUpdater /> */}
                       <UserUpdater />
                       <ApplicationUpdater />
                       <TransactionUpdater />
@@ -165,7 +165,7 @@ function MyApp({
                         </Guard>
                       </Layout>
                     </Provider>
-                  {/* </PriceProvider> */}
+                  </PriceProvider>
                 </ReduxProvider>
               </Web3ReactManager>
             </Web3ProviderNetworkBridge>

@@ -122,7 +122,7 @@ export default function CurrencyInputPanel({
                           currency.symbol.slice(currency.symbol.length - 5, currency.symbol.length)
                         : currency?.symbol) || (
                         <div className="px-2 py-1 mt-1 text-xs font-medium bg-transparent border rounded-full hover:bg-primary border-low-emphesis text-secondary whitespace-nowrap ">
-                          {i18n._(t`Select a token`)}
+                          {i18n._(t`Select Token`)}
                         </div>
                       )}
                     </div>
@@ -144,8 +144,8 @@ export default function CurrencyInputPanel({
           >
             <>
               {showMaxButton && selectedCurrencyBalance && (
-                <Button variant="outlined" color="blue" onClick={onMax} size="xs">
-                  {i18n._(t`Max`)}
+                <Button variant="outlined" color="purple" onClick={onMax} size="xs">
+                  {i18n._(t`MAX`)}
                 </Button>
               )}
               <Input.Numeric

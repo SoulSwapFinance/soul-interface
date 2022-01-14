@@ -46,7 +46,7 @@ export function CurrencySearch({
   const searchTokenIsAdded = useIsUserAddedToken(searchToken)
   const tokenComparator = useTokenComparator()
 
-  if (router.asPath.startsWith('/kashi/create') && chainId) {
+  if (router.asPath.startsWith('/create') && chainId) {
     allTokens = Object.keys(allTokens).reduce((obj, key) => {
       if (CHAINLINK_TOKENS[chainId].find((address) => address === key)) obj[key] = allTokens[key]
       return obj
@@ -84,7 +84,7 @@ export function CurrencySearch({
 
   const filteredSortedTokensWithETH: Currency[] = useMemo(() => {
     const s = debouncedQuery.toLowerCase().trim()
-    if (s === '' || s === 'e' || s === 'et' || s === 'eth') {
+    if (s === '' || s === 'f' || s === 'ft' || s === 'ftm') {
       return ether ? [ether, ...filteredSortedTokens] : filteredSortedTokens
     }
     return filteredSortedTokens
@@ -109,7 +109,7 @@ export function CurrencySearch({
     (e: KeyboardEvent<HTMLInputElement>) => {
       if (e.key === 'Enter') {
         const s = debouncedQuery.toLowerCase().trim()
-        if (s === 'eth' && ether) {
+        if (s === 'ftm' && ether) {
           handleCurrencySelect(ether)
         } else if (filteredSortedTokensWithETH.length > 0) {
           if (
@@ -139,7 +139,7 @@ export function CurrencySearch({
 
   return (
     <>
-      <HeadlessUiModal.Header onClose={onDismiss} header={i18n._(t`Select a token`)} />
+      <HeadlessUiModal.Header onClose={onDismiss} header={i18n._(t`Select Token`)} />
       {!currencyList && showSearch && (
         <input
           type="text"
@@ -149,7 +149,7 @@ export function CurrencySearch({
           value={searchQuery}
           onChange={handleInput}
           onKeyDown={handleEnter}
-          className="w-full bg-[rgba(0,0,0,0.2)] border border-dark-800 focus:border-blue rounded placeholder-secondary font-bold text-base p-4 appearance-none"
+          className="w-full bg-[rgba(0,0,0,0.2)] border border-dark-800 focus:border-purple rounded placeholder-secondary font-bold text-base p-4 appearance-none"
         />
       )}
       {showCommonBases && <CommonBases />}
@@ -168,7 +168,7 @@ export function CurrencySearch({
           </Typography>
         )}
       </div>
-      {allowManageTokenList && (
+      {/* {allowManageTokenList && (
         <div className="flex justify-center">
           <Button
             size="sm"
@@ -180,7 +180,7 @@ export function CurrencySearch({
             {i18n._(t`Manage Token Lists`)}
           </Button>
         </div>
-      )}
+      )} */}
     </>
   )
 }

@@ -81,11 +81,11 @@ export function useDerivedCreateInfo(): {
   }
 
   if (!currencies[Field.COLLATERAL]) {
-    inputError = inputError ?? i18n._(t`Select a collateral token`)
+    inputError = inputError ?? i18n._(t`Select Collateral`)
   }
 
   if (!currencies[Field.ASSET] || !currencies[Field.ASSET]) {
-    inputError = inputError ?? i18n._(t`Select a asset token`)
+    inputError = inputError ?? i18n._(t`Select Asset`)
   }
 
   return {

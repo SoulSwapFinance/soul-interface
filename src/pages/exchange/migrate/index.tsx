@@ -59,7 +59,7 @@ const AmountInput = ({ state }: { state: MigrateState }) => {
         </Typography>
         <div className="p-3 text-center rounded cursor-not-allowed bg-dark-800">
           <Typography variant="lg" className="text-secondary">
-            {state.mode && state.lpTokens.length === 0 ? 'No LP tokens found' : 'Select an LP Token'}
+            {state.mode && state.lpTokens.length === 0 ? 'No LP tokens found' : 'Select LP Token'}
           </Typography>
         </div>
       </>

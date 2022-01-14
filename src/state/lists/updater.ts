@@ -1,85 +1,191 @@
-import { VersionUpgrade, getVersionUpgrade, minVersionBump } from '@uniswap/token-lists'
-import { useCallback, useEffect } from 'react'
+import { createReducer } from '@reduxjs/toolkit'
+import { getVersionUpgrade, VersionUpgrade } from '@uniswap/token-lists'
+import { TokenList } from '@uniswap/token-lists/dist/types'
 
-import { UNSUPPORTED_LIST_URLS } from '../../constants/token-lists'
-import { acceptListUpdate } from './actions'
-import { useActiveListUrls } from './hooks'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
-import { useAllLists } from './hooks'
-import { useAppDispatch } from '../hooks'
-import { useFetchListCallback } from '../../hooks/useFetchListCallback'
-import useInterval from '../../hooks/useInterval'
-import useIsWindowVisible from '../../hooks/useIsWindowVisible'
+import { DEFAULT_ACTIVE_LIST_URLS, DEFAULT_LIST_OF_LISTS } from 'config/token-lists'
+import { updateVersion } from '../global/actions'
+import { acceptListUpdate, addList, disableList, enableList, fetchTokenList, removeList } from './actions'
 
-export default function Updater(): null {
-  const { library } = useActiveWeb3React()
-  const dispatch = useAppDispatch()
-  const isWindowVisible = useIsWindowVisible()
+const DEFAULT_TOKEN_LIST = 'https://raw.githubusercontent.com/soulswapfinance/default-token-list/master/soulswap.tokenlist.json'
 
-  // get all loaded lists, and the active urls
-  const lists = useAllLists()
-  const activeListUrls = useActiveListUrls()
+export interface ListsState {
+  readonly byUrl: {
+    readonly [url: string]: {
+      readonly current: TokenList | null
+      readonly pendingUpdate: TokenList | null
+      readonly loadingRequestId: string | null
+      readonly error: string | null
+    }
+  }
+  // this contains the default list of lists from the last time the updateVersion was called, i.e. the app was reloaded
+  readonly lastInitializedDefaultListOfLists?: string[]
 
-  const fetchList = useFetchListCallback()
-  const fetchAllListsCallback = useCallback(() => {
-    if (!isWindowVisible) return
-    Object.keys(lists).forEach((url) =>
-      fetchList(url).catch((error) => console.debug('interval list fetching error', error))
-    )
-  }, [fetchList, isWindowVisible, lists])
+  // currently active lists
+  readonly activeListUrls: string[] | undefined
+}
 
-  // fetch all lists every 10 minutes, but only after we initialize library
-  useInterval(fetchAllListsCallback, library ? 1000 * 60 * 10 : null)
+type ListState = ListsState['byUrl'][string]
 
-  // whenever a list is not loaded and not loading, try again to load it
-  useEffect(() => {
-    Object.keys(lists).forEach((listUrl) => {
-      const list = lists[listUrl]
-      if (!list.current && !list.loadingRequestId && !list.error) {
-        fetchList(listUrl).catch((error) => console.debug('list added fetching error', error))
+const NEW_LIST_STATE: ListState = {
+  error: null,
+  current: null,
+  loadingRequestId: null,
+  pendingUpdate: null,
+}
+
+type Mutable<T> = {
+  -readonly [P in keyof T]: T[P] extends ReadonlyArray<infer U> ? U[] : T[P]
+}
+
+const initialState: ListsState = {
+  lastInitializedDefaultListOfLists: DEFAULT_LIST_OF_LISTS,
+  byUrl: {
+    ...DEFAULT_LIST_OF_LISTS.reduce<Mutable<ListsState['byUrl']>>((memo, listUrl) => {
+      memo[listUrl] = NEW_LIST_STATE
+      return memo
+    }, {}),
+  },
+  activeListUrls: DEFAULT_ACTIVE_LIST_URLS,
+}
+
+export default createReducer(initialState, (builder) =>
+  builder
+    .addCase(fetchTokenList.pending, (state, { payload: { requestId, url } }) => {
+      state.byUrl[url] = {
+        current: null,
+        pendingUpdate: null,
+        ...state.byUrl[url],
+        loadingRequestId: requestId,
+        error: null,
       }
     })
-  }, [dispatch, fetchList, library, lists])
+    .addCase(fetchTokenList.fulfilled, (state, { payload: { requestId, tokenList, url } }) => {
+      const current = state.byUrl[url]?.current
+      const loadingRequestId = state.byUrl[url]?.loadingRequestId
 
-  // if any lists from unsupported lists are loaded, check them too (in case new updates since last visit)
-  useEffect(() => {
-    UNSUPPORTED_LIST_URLS.forEach((listUrl) => {
-      const list = lists[listUrl]
-      if (!list || (!list.current && !list.loadingRequestId && !list.error)) {
-        fetchList(listUrl).catch((error) => console.debug('list added fetching error', error))
-      }
-    })
-  }, [dispatch, fetchList, library, lists])
+      // no-op if update does nothing
+      if (current) {
+        const upgradeType = getVersionUpgrade(current.version, tokenList.version)
 
-  // automatically update lists if versions are minor/patch
-  useEffect(() => {
-    Object.keys(lists).forEach((listUrl) => {
-      const list = lists[listUrl]
-      if (list.current && list.pendingUpdate) {
-        const bump = getVersionUpgrade(list.current.version, list.pendingUpdate.version)
-        switch (bump) {
-          case VersionUpgrade.NONE:
-            throw new Error('unexpected no version bump')
-          case VersionUpgrade.PATCH:
-          case VersionUpgrade.MINOR:
-            const min = minVersionBump(list.current.tokens, list.pendingUpdate.tokens)
-            // automatically update minor/patch as long as bump matches the min update
-            if (bump >= min) {
-              dispatch(acceptListUpdate(listUrl))
-            } else {
-              console.error(
-                `List at url ${listUrl} could not automatically update because the version bump was only PATCH/MINOR while the update had breaking changes and should have been MAJOR`
-              )
-            }
-            break
+        if (upgradeType === VersionUpgrade.NONE) return
+        if (loadingRequestId === null || loadingRequestId === requestId) {
+          state.byUrl[url] = {
+            ...state.byUrl[url],
+            loadingRequestId: null,
+            error: null,
+            current: current,
+            pendingUpdate: tokenList,
+          }
+        }
+      } else {
+        // activate if on default active
+        if (DEFAULT_ACTIVE_LIST_URLS.includes(url)) {
+          state.activeListUrls?.push(url)
+        }
 
-          // update any active or inactive lists
-          case VersionUpgrade.MAJOR:
-            dispatch(acceptListUpdate(listUrl))
+        state.byUrl[url] = {
+          ...state.byUrl[url],
+          loadingRequestId: null,
+          error: null,
+          current: tokenList,
+          pendingUpdate: null,
         }
       }
     })
-  }, [dispatch, lists, activeListUrls])
+    .addCase(fetchTokenList.rejected, (state, { payload: { url, requestId, errorMessage } }) => {
+      if (state.byUrl[url]?.loadingRequestId !== requestId) {
+        // no-op since it's not the latest request
+        return
+      }
 
-  return null
-}
+      state.byUrl[url] = {
+        ...state.byUrl[url],
+        loadingRequestId: null,
+        error: errorMessage,
+        current: null,
+        pendingUpdate: null,
+      }
+    })
+    .addCase(addList, (state, { payload: url }) => {
+      if (!state.byUrl[url]) {
+        state.byUrl[url] = NEW_LIST_STATE
+      }
+    })
+    .addCase(removeList, (state, { payload: url }) => {
+      if (state.byUrl[url]) {
+        delete state.byUrl[url]
+      }
+      // remove list from active urls if needed
+      if (state.activeListUrls && state.activeListUrls.includes(url)) {
+        state.activeListUrls = state.activeListUrls.filter((u) => u !== url)
+      }
+    })
+    .addCase(enableList, (state, { payload: url }) => {
+      if (!state.byUrl[url]) {
+        state.byUrl[url] = NEW_LIST_STATE
+      }
+
+      if (state.activeListUrls && !state.activeListUrls.includes(url)) {
+        state.activeListUrls.push(url)
+      }
+
+      if (!state.activeListUrls) {
+        state.activeListUrls = [url]
+      }
+    })
+    .addCase(disableList, (state, { payload: url }) => {
+      if (state.activeListUrls && state.activeListUrls.includes(url)) {
+        state.activeListUrls = state.activeListUrls.filter((u) => u !== url)
+      }
+    })
+    .addCase(acceptListUpdate, (state, { payload: url }) => {
+      if (!state.byUrl[url]?.pendingUpdate) {
+        throw new Error('accept list update called without pending update')
+      }
+      state.byUrl[url] = {
+        ...state.byUrl[url],
+        pendingUpdate: null,
+        current: state.byUrl[url].pendingUpdate,
+      }
+    })
+    .addCase(updateVersion, (state) => {
+      // state loaded from localStorage, but new lists have never been initialized
+      if (!state.lastInitializedDefaultListOfLists) {
+        state.byUrl = initialState.byUrl
+        state.activeListUrls = initialState.activeListUrls
+      } else if (state.lastInitializedDefaultListOfLists) {
+        const lastInitializedSet = state.lastInitializedDefaultListOfLists.reduce<Set<string>>(
+          (s, l) => s.add(l),
+          new Set()
+        )
+        const newListOfListsSet = DEFAULT_LIST_OF_LISTS.reduce<Set<string>>((s, l) => s.add(l), new Set())
+
+        DEFAULT_LIST_OF_LISTS.forEach((listUrl) => {
+          if (!lastInitializedSet.has(listUrl)) {
+            state.byUrl[listUrl] = NEW_LIST_STATE
+          }
+        })
+
+        state.lastInitializedDefaultListOfLists.forEach((listUrl) => {
+          if (!newListOfListsSet.has(listUrl)) {
+            delete state.byUrl[listUrl]
+          }
+        })
+      }
+
+      state.lastInitializedDefaultListOfLists = DEFAULT_LIST_OF_LISTS
+
+      // if no active lists, activate defaults
+      if (!state.activeListUrls) {
+        state.activeListUrls = DEFAULT_ACTIVE_LIST_URLS
+
+        // for each list on default list, initialize if needed
+        DEFAULT_ACTIVE_LIST_URLS.map((listUrl: string) => {
+          if (!state.byUrl[listUrl]) {
+            state.byUrl[listUrl] = NEW_LIST_STATE
+          }
+          return true
+        })
+      }
+    })
+)
