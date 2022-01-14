@@ -68,7 +68,7 @@ export const COFFIN_BOX_ADDRESS: {
 } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '',
+  [ChainId.FANTOM]: '0xB9c7c6368a69b61508a556bd539eb2b8C351d27A', // TODO: REVIEW
   [ChainId.FANTOM_TESTNET]: ''
 }
 
@@ -77,7 +77,7 @@ export const UNDERWORLD_ADDRESS: {
 } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '',
+  [ChainId.FANTOM]: '0x0A497d994E18c581fbdCE5d51A3438D53e3540d6', // TODO: REVIEW
   [ChainId.FANTOM_TESTNET]: '',
 }
 
