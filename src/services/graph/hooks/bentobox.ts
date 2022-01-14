@@ -1,23 +1,92 @@
-import { useEffect, useMemo } from 'react'
-import useSWR, { SWRConfiguration } from 'swr'
+import { ChainId, CurrencyAmount, Token } from 'sdk'
+import { Feature } from 'enums'
+import { featureEnabled } from 'functions/feature'
+import {
+  getBentoBox,
+  getBentoStrategies,
+  getBentoTokens,
+  getBentoUserTokens,
+  getClones,
+  getKashiPairs,
+} from 'services/graph/fetchers'
+import stringify from 'fast-json-stable-stringify'
+import useSWR from 'swr'
 
-import { ChainId } from '../../../sdk'
-// import { getKashiPairs } from '../fetchers/bentobox'
-import { useActiveWeb3React } from '../../../hooks'
+import { GraphProps } from '../interfaces'
 
-export function useKashiPairs(variables = undefined, swrConfig: SWRConfiguration = undefined) {
-  const { chainId } = useActiveWeb3React()
-  const shouldFetch = chainId && (chainId === ChainId.MAINNET)
+// TODO: Fix shouldFetch //
 
-  // useEffect(() => {
-  //   console.log('debug', { shouldFetch, chainId, pairAddresses })
-  // }, [shouldFetch, chainId, pairAddresses])
+export function useClones({ chainId, shouldFetch = true, swrConfig = undefined }) {
+  const { data } = useSWR(shouldFetch ? () => ['clones', chainId] : null, (_, chainId) => getClones(chainId), swrConfig)
+  return data
+}
 
-  // const { data } = useSWR(
-  //   shouldFetch ? () => ['kashiPairs', chainId, JSON.stringify(variables)] : null,
-  //   (_, chainId) => getKashiPairs(chainId, variables),
-  //   swrConfig
-  // )
+export function useKashiPairs({
+  chainId = ChainId.MAINNET,
+  variables,
+  shouldFetch = true,
+  swrConfig = undefined,
+}: GraphProps) {
+  const { data } = useSWR(
+    shouldFetch ? () => ['kashiPairs', chainId, stringify(variables)] : null,
+    (_, chainId) => getKashiPairs(chainId, variables),
+    swrConfig
+  )
+  return data
+}
 
-  // return data
+export function useBentoBox({ chainId = ChainId.MAINNET, variables, shouldFetch = true, swrConfig }: GraphProps) {
+  const { data } = useSWR(
+    shouldFetch ? ['bentoBox', chainId, stringify(variables)] : null,
+    () => getBentoBox(chainId, variables),
+    swrConfig
+  )
+
+  return data
+}
+
+// subset of tokens, not strategies
+export function useBentoStrategies({
+  chainId = ChainId.MAINNET,
+  variables,
+  // shouldFetch = featureEnabled(Feature.BENTOBOX, chainId),
+  swrConfig = undefined,
+}: GraphProps) {
+  const { data } = useSWR(
+    // shouldFetch ? ['bentoStrategies', chainId, stringify(variables)] : 
+    null,
+    () => getBentoStrategies(chainId, variables),
+    swrConfig
+  )
+
+  return data as { token: string; apy: number; targetPercentage: number }[]
+}
+
+export function useBentoTokens({
+  chainId,
+  variables,
+  // shouldFetch = featureEnabled(Feature.BENTOBOX, chainId),
+  swrConfig = undefined,
+}: GraphProps) {
+  const { data } = useSWR(
+    // shouldFetch ? ['bentoTokens', chainId, stringify(variables)] :
+    null,
+    () => getBentoTokens(chainId, variables),
+    swrConfig
+  )
+  return data
+}
+
+export function useBentoUserTokens({
+  chainId,
+  variables,
+  // shouldFetch = featureEnabled(Feature.BENTOBOX, chainId),
+  swrConfig = undefined,
+}: GraphProps) {
+  return useSWR<CurrencyAmount<Token>[]>(
+    // shouldFetch ? ['bentoUserTokens', chainId, stringify(variables)] : 
+    null,
+    () => getBentoUserTokens(chainId, variables),
+    swrConfig
+  )
 }
