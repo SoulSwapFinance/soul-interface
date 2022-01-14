@@ -41,9 +41,9 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
   const isLimitOrder = router.asPath.startsWith('/limit-order')
 
   return (
-    <div className="flex justify-between mb-4 space-x-3 items-center">
-      {/* <div className="flex rounded p-3px"> */}
-      <div className="flex rounded p-3px bg-dark-800 h-[46px]">
+    <div className="flex justify-between mb-3 space-y-2 space-x-2 items-center">
+        <div className="flex mt-2 mb-1">
+      <div className="flex rounded p-0 bg-dark-800 h-[46px]">
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
           href={{
@@ -51,8 +51,8 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
             query: getQuery(input, output),
           }}
         >
-          <a className="flex px-6 items-center justify-center text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
-          <Image src={ SWAP } width="48px" alt="swap icon" />
+          <a className="flex px-4 py-6 items-center justify-center font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
+          <Image src={ SWAP } height="40px" width="40px" alt="swap icon" />
           </a>
         </NavLink>
         <NavLink
@@ -60,8 +60,8 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
           href={`/${!isRemove ? 'add' : 'remove'}${input ? `/${currencyId(input)}` : '/FTM'}${output ? `/${currencyId(output)}` : '/0xe2fb177009ff39f52c0134e8007fa0e4baacbd07'
             }`}
         >
-          <a className="flex px-6 items-center justify-center text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
-          <Image src={ ADD } width="48px" alt="add icon" />
+          <a className="flex px-4 py-6 items-center justify-center font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
+          <Image src={ ADD } height="40px" width="40px" alt="add icon" />
           </a>
         </NavLink>
         
@@ -69,10 +69,11 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
           href={'/charts'}
         >
-          <a className="flex px-6 items-center justify-center text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
-          <Image src={ CHART } width="48px" alt="chart icon" />
+          <a className="flex px-4 py-6 items-center justify-center font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
+          <Image src={ CHART } height="40px" width="40px" alt="chart icon" />
           </a>
         </NavLink>
+      </div>
       </div>
 
       <div className="flex items-center">

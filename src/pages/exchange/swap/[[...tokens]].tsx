@@ -374,7 +374,7 @@ export default function Swap() {
     <>
       {/* <div className={`lg:w-full lg:flex lg:grid-cols-1 space-y-4`}> */}
       {/* <div id="swap-page" className="w-full max-w-2xl p-4 space-y-4 rounded bg-dark-900 z-1"> */}
-      <div className={`xl:max-w-7xl w-full lg:grid-cols-1 order-last space-y-4 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
+      <div className={`xl:max-w-7xl mt-6 w-full lg:grid-cols-1 order-last space-y-4 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
         <div className={`w-full flex flex-col order-last mt-6 mb-20 sm:mb-0 lg:mt-0 p-6 rounded rounded-lg bg-light-glass`}>
           <Chart inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
         </div>
@@ -660,16 +660,16 @@ export default function Swap() {
                   </a>
                 </ExternalLink>
               </FlexText>
-              <a className="flex mt-0 mb-0 p-1 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
-              </a>
             </a>
             {/* <a className="flex text-pink mt-4 mb-4 bg-dark-700 ml-3 p-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
                         <span>Farms</span>
                         </a>
                         <a className="flex text-pink mt-4 mb-4 bg-dark-700 ml-3 p-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
                         <span>Bonds</span>
-                        </a> */}
+                      </a> */}
           </div>
+                      <div className="flex mt-2 mb-4 p-1 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
+                      </div>
         </div>
 
         {/* <AutoColumn justify="space-between" className="py-5">
