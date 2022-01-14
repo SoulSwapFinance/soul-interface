@@ -3,11 +3,11 @@ import { useModalOpen, useNetworkModalToggle } from '../../state/application/hoo
 import { ApplicationModal } from '../../state/application/actions'
 import { ChainId } from '../../sdk'
 import Image from 'next/image'
-import Modal from '../../components/DefaultModal'
 import ModalHeader from '../../components/ModalHeader'
 import React from 'react'
 import cookie from 'cookie-cutter'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { HeadlessUiModal } from 'components/Modal'
 
 export const SUPPORTED_NETWORKS: {
   [chainId in ChainId]?: {
@@ -172,14 +172,14 @@ export default function NetworkModal(): JSX.Element | null {
   if (!chainId) return null
 
   return (
-    <Modal isOpen={networkModalOpen} onDismiss={toggleNetworkModal} maxWidth={672}>
-      <ModalHeader onClose={toggleNetworkModal} title="Select Network" />
+    <HeadlessUiModal.Controlled isOpen={networkModalOpen} onDismiss={toggleNetworkModal}>
+      {/* <ModalHeader onClose={toggleNetworkModal} title="Select Network" /> */}
       <div className="mb-6 text-lg text-primary">
         You are browsing <span className="font-bold text-pink">SOUL</span> on <span className="font-bold text-blue">{NETWORK_LABEL[chainId]}</span>.
         <br /> More chains coming soon!
       </div>
-
-      <div className="grid grid-flow-row-dense grid-cols-1 gap-5 overflow-y-auto md:grid-cols-2">
+        <HeadlessUiModal.Header header={'Select Network'} onClose={toggleNetworkModal} />
+        <div className="grid grid-flow-row-dense grid-cols-1 gap-5 overflow-y-auto md:grid-cols-2">
         {[
           ChainId.MAINNET,
           ChainId.BSC,
@@ -246,6 +246,6 @@ export default function NetworkModal(): JSX.Element | null {
           </button>
         ))} */}
       </div>
-    </Modal>
+    </HeadlessUiModal.Controlled>
   )
 }
