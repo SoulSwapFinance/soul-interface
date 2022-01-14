@@ -229,8 +229,8 @@ export function toV2LiquidityToken([tokenA, tokenB]: [Token, Token]): Token {
     tokenA.chainId,
     computePairAddress({ factoryAddress: FACTORY_ADDRESS[tokenA.chainId], tokenA, tokenB }),
     18,
-    'UNI-V2',
-    'Uniswap V2'
+    'SOUL-LP',
+    'SoulSwap LP'
   )
 }
 

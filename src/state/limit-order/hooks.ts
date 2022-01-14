@@ -174,15 +174,15 @@ export function useDerivedLimitOrderInfo(): {
 
   const formattedTo = isAddress(to)
   if (!to || !formattedTo) {
-    inputError = inputError ?? i18n._(t`Enter a recipient`)
+    inputError = inputError ?? i18n._(t`Enter Recipient`)
   }
 
   if (!limitPrice) {
-    inputError = inputError ?? i18n._(t`Select a rate`)
+    inputError = inputError ?? i18n._(t`Select Rate`)
   }
 
   if (!orderExpiration) {
-    inputError = inputError ?? i18n._(t`Select an order expiration`)
+    inputError = inputError ?? i18n._(t`Select Order Expiration`)
   }
 
   // compare input balance to max input based on version

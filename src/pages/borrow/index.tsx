@@ -4,14 +4,14 @@ import Card from 'components/Card'
 import Dots from 'components/Dots'
 import GradientDot from 'components/GradientDot'
 import Image from 'components/Image'
-import { Feature } from 'enums/Feature'
+// import { Feature } from 'enums/Feature'
 import ListHeaderWithSort from 'features/underworld/components/ListHeaderWithSort'
 import { useUnderworldPairAddresses, useUnderworldPairs } from 'features/underworld/hooks'
 import { formatNumber, formatPercent } from 'functions/format'
-import NetworkGuard from 'guards/Network'
+// import NetworkGuard from 'guards/Network'
 import { useInfiniteScroll } from 'hooks/useInfiniteScroll'
 import useSearchAndSort from 'hooks/useSearchAndSort'
-import Layout from 'layouts/Kashi'
+import Layout from 'layouts/Underworld'
 import Head from 'next/head'
 import Link from 'next/link'
 import React from 'react'
@@ -46,7 +46,7 @@ export default function Borrow() {
         <meta
           key="description"
           name="description"
-          content="Kashi is a lending and margin trading platform, built upon BentoBox, which allows for anyone to create customized and gas-efficient markets for lending, borrowing, and collateralizing a variety of DeFi tokens, stable coins, and synthetic assets."
+          content="Underworld is a lending and margin trading platform, built upon CoffinBox, which allows for anyone to create customized and gas-efficient markets for lending, borrowing, and collateralizing a variety of DeFi tokens, stable coins, and synthetic assets."
         />
       </Head>
       <Card className="h-full bg-dark-900" header={<MarketHeader type="Borrow" lists={[pairs, positions]} />}>

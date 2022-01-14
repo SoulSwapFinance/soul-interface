@@ -1,20 +1,20 @@
-import { Currency, CurrencyAmount, Pair, Percent, Token } from '../../sdk'
+import { ChevronDownIcon } from '@heroicons/react/outline'
+import { t } from '@lingui/macro'
+import { useLingui } from '@lingui/react'
+import { Currency, CurrencyAmount, Pair, Percent, Token } from 'sdk'
+import selectCoinAnimation from 'animation/select-coin.json'
+import { classNames, formatCurrencyAmount } from 'functions'
+import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
+import { useActiveWeb3React } from 'services/web3'
+import { useCurrencyBalance } from 'state/wallet/hooks'
+import Lottie from 'lottie-react'
 import React, { ReactNode, useCallback, useState } from 'react'
-import { classNames, formatCurrencyAmount } from '../../functions'
 
 import { Button } from '../Button'
-import { ChevronDownIcon } from '@heroicons/react/outline'
 import CurrencyLogo from '../CurrencyLogo'
-import CurrencySearchModal from '../../modals/SearchModal/CurrencySearchModal'
 import DoubleCurrencyLogo from '../DoubleLogo'
+import Input from '../Input'
 import { FiatValue } from './FiatValue'
-import Lottie from 'lottie-react'
-import { Input as NumericalInput } from '../NumericalInput'
-import selectCoinAnimation from '../../animation/select-coin.json'
-import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
-import { useCurrencyBalance } from '../../state/wallet/hooks'
-import { useLingui } from '@lingui/react'
 
 interface CurrencyInputPanelProps {
   value?: string
@@ -33,9 +33,11 @@ interface CurrencyInputPanelProps {
   priceImpact?: Percent
   id: string
   showCommonBases?: boolean
+  allowManageTokenList?: boolean
   renderBalance?: (amount: CurrencyAmount<Currency>) => ReactNode
   locked?: boolean
   customBalanceText?: string
+  showSearch?: boolean
 }
 
 export default function CurrencyInputPanel({
@@ -58,6 +60,8 @@ export default function CurrencyInputPanel({
   hideInput = false,
   locked = false,
   customBalanceText,
+  allowManageTokenList = true,
+  showSearch = true,
 }: CurrencyInputPanelProps) {
   const { i18n } = useLingui()
   const [modalOpen, setModalOpen] = useState(false)
@@ -136,20 +140,15 @@ export default function CurrencyInputPanel({
           <div
             className={classNames(
               'flex items-center w-full space-x-3 rounded bg-dark-900 focus:bg-dark-700 p-3 sm:w-3/5'
-              // showMaxButton && selectedCurrencyBalance && 'px-3'
             )}
           >
             <>
               {showMaxButton && selectedCurrencyBalance && (
-                <Button
-                  onClick={onMax}
-                  size="xs"
-                  className="text-xs font-medium bg-transparent border rounded-full hover:bg-primary border-low-emphesis text-secondary whitespace-nowrap"
-                >
+                <Button variant="outlined" color="purple" onClick={onMax} size="xs">
                   {i18n._(t`MAX`)}
                 </Button>
               )}
-              <NumericalInput
+              <Input.Numeric
                 id="token-amount-input"
                 value={value}
                 onUserInput={(val) => {
@@ -163,18 +162,7 @@ export default function CurrencyInputPanel({
                       renderBalance(selectedCurrencyBalance)
                     ) : (
                       <>
-                        {/* {i18n._(t`Balance:`)}  */}
-                        {
-                        (selectedCurrencyBalance).toFixed(6) == '0.000000' ? '0' :
-                        (selectedCurrencyBalance).toFixed(3) == '0.000' ? '<0.001' :
-                        // Number(selectedCurrencyBalance) <= 0.001 ? '<0.001' :
-                        (selectedCurrencyBalance)
-                        .toFixed(3)
-                        // .toString()
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                        } { ' ' }
-                        {/* formatCurrencyAmount(selectedCurrencyBalance, 4)}  */}
-                        {currency.symbol}
+                        {i18n._(t`Balance:`)} {formatCurrencyAmount(selectedCurrencyBalance, 4)} {currency.symbol}
                       </>
                     )}
                   </div>
@@ -186,13 +174,15 @@ export default function CurrencyInputPanel({
         )}
       </div>
       {!disableCurrencySelect && onCurrencySelect && (
-        <CurrencySearchModal
-          isOpen={modalOpen}
+        <CurrencySearchModal.Controlled
+          open={modalOpen}
           onDismiss={handleDismissSearch}
           onCurrencySelect={onCurrencySelect}
-          selectedCurrency={currency}
-          otherSelectedCurrency={otherCurrency}
+          selectedCurrency={currency ?? undefined}
+          otherSelectedCurrency={otherCurrency ?? undefined}
           showCommonBases={showCommonBases}
+          allowManageTokenList={allowManageTokenList}
+          showSearch={showSearch}
         />
       )}
     </div>

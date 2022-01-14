@@ -4,13 +4,13 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { Zero } from '@ethersproject/constants'
 import { ChainId, NATIVE, Token, USD, WNATIVE_ADDRESS } from 'sdk'
 import { Fraction } from 'entities'
-import { Feature } from 'enums'
+// import { Feature } from 'enums/Feature'
 import {
   accrue,
   accrueTotalAssetWithFee,
   e10,
   easyAmount,
-//   featureEnabled,
+  // featureEnabled,
   getOracle,
   getUSDValue,
   interestAccrue,
@@ -29,7 +29,7 @@ import { useActiveWeb3React, useQueryFilter } from 'services/web3'
 import { useSingleCallResult } from 'state/multicall/hooks'
 import { useMemo } from 'react'
 
-const UNDERWORLD_ADDRESS = '0x07a676Da1B50ABCf455C778cddD306c6E44CB2fe'
+const UNDERWORLD_ADDRESS = '0x0A497d994E18c581fbdCE5d51A3438D53e3540d6'
 
 const BLACKLISTED_TOKENS = ['0xC6d54D2f624bc83815b49d9c2203b1330B841cA0']
 const BLACKLISTED_ORACLES = ['0x8f2CC3376078568a04eBC600ae5F0a036DBfd812']
@@ -45,7 +45,7 @@ export function useUnderworldPairAddresses(): string[] {
     contract: bentoBoxContract,
     event: bentoBoxContract && bentoBoxContract.filters.LogDeploy(UNDERWORLD_ADDRESS[chainId]),
     shouldFetch: useEvents 
-    // && featureEnabled(Feature.KASHI, chainId),
+    // && featureEnabled(Feature.UNDERWORLD, chainId),
   })
   const clones = useClones({ chainId, shouldFetch: !useEvents })
   return (
@@ -75,11 +75,8 @@ export function useUnderworldPairs(addresses = []) {
   const { chainId, account } = useActiveWeb3React()
 
   const boringHelperContract = useBoringHelperContract()
-
   const wnative = WNATIVE_ADDRESS[chainId]
-
   const currency = USD[chainId]
-
   const allTokens = useAllTokens()
 
   const pollArgs = useMemo(() => [account, addresses], [account, addresses])
@@ -312,15 +309,15 @@ export function useUnderworldPairs(addresses = []) {
     }, [])
   }, [addresses, tokens, pollKashiPairs, chainId, pairTokens, balances])
 
-  //   return useMemo(
-  //     () =>
-  //       addresses.reduce((memo, address, i) => {
-  //         const value = pairs?.result[0]?.[i]
-  //         if (value && chainId) memo = [...memo, value]
-  //         return memo
-  //       }, []),
-  //     [addresses, chainId, pairs]
-  //   )
+    // return useMemo(
+    //   () =>
+    //     addresses.reduce((memo, address, i) => {
+    //       const value = pairs?.result[0]?.[i]
+    //       if (value && chainId) memo = [...memo, value]
+    //       return memo
+    //     }, []),
+    //   [addresses, chainId, pairs]
+    // )
 }
 
 export function useUnderworldPair(address: string) {

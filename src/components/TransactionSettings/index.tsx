@@ -91,7 +91,7 @@ export default function TransactionSettings({ placeholderSlippage }: Transaction
       <div className="grid gap-2">
         <div className="flex items-center">
           <Typography variant="sm" className="text-high-emphesis">
-            {i18n._(t`Slippage tolerance`)}
+            {i18n._(t`Slippage Tolerance`)}
           </Typography>
 
           <QuestionHelper

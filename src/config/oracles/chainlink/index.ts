@@ -4,6 +4,7 @@ import { ChainId } from 'sdk'
 // import AVALANCHE from './mappings/avalanche'
 import BSC from './mappings/bsc'
 // import HECO from './mappings/heco'
+import FANTOM from './mappings/fantom'
 // import KOVAN from './mappings/kovan'
 import MAINNET from './mappings/mainnet'
 // import MATIC from './mappings/matic'
@@ -26,7 +27,8 @@ export const CHAINLINK_PRICE_FEED_MAP: {
 } = {
   [ChainId.MAINNET]: MAINNET,
   [ChainId.BSC]: BSC,
-//   [ChainId.KOVAN]: KOVAN,
+  [ChainId.FANTOM]: FANTOM,
+  // [ChainId.KOVAN]: KOVAN,
 //   [ChainId.HECO]: HECO,
 //   [ChainId.MATIC]: MATIC,
 //   [ChainId.XDAI]: XDAI,
