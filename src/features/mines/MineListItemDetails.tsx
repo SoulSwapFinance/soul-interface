@@ -57,35 +57,38 @@ const MineListItemDetails = ({ farm }) => {
           <div className="w-full h-0 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis border-gradient-r-blue-pink-dark-800 opacity-20" />
           {toggleView ? (
             <InvestmentDetails farm={farm} />
-          ) : (
-            <Tab.Group>
+            ) : (
+              <Tab.Group>
+
               <Tab.List className="flex rounded bg-dark-900">
-                <Tab
-                  className={({ selected }) =>
-                    `${
-                      selected
-                        ? 'text-high-emphesis bg-gradient-to-r from-opaque-blue to-opaque-pink hover:from-blue hover:to-pink'
-                        : 'text-secondary'
+              { farm.pair?.token1 ?
+                  <Tab
+                    className={({ selected }) =>
+                    `${selected
+                      ? 'text-high-emphesis bg-gradient-to-r from-opaque-blue to-opaque-pink hover:from-blue hover:to-pink'
+                      : 'text-secondary'
                     } flex items-center justify-center flex-1 px-2 py-2 text-lg rounded cursor-pointer select-none`
                   }
-                >
-                  { i18n._(t`Manage Liquidity`) }
-                </Tab>
-                <Tab
-                  className={({ selected }) =>
-                    `${
-                      selected
+                  >
+                    {i18n._(t`Manage Liquidity`)}
+                  </Tab>
+                  : '' }
+                  <Tab
+                    className={({ selected }) =>
+                      `${selected
                         ? 'text-high-emphesis bg-gradient-to-r from-opaque-blue to-opaque-pink hover:from-blue hover:to-pink'
                         : 'text-secondary'
-                    } flex items-center justify-center flex-1 px-2 py-2 text-lg rounded cursor-pointer select-none`
-                  }
-                >
-                  {i18n._(t`Manage Farms`)}
-                </Tab>
+                      } flex items-center justify-center flex-1 px-2 py-2 text-lg rounded cursor-pointer select-none`
+                    }
+                  >
+                    {i18n._(t`Manage Farms`)}
+                  </Tab>
               </Tab.List>
+              { farm.pair?.token1 ?
               <Tab.Panel>
                 <ManageSwapPair farm={farm} />
               </Tab.Panel>
+              : '' }
               <Tab.Panel>
                 <ManageBar farm={farm} />
               </Tab.Panel>
