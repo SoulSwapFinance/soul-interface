@@ -165,6 +165,7 @@
     "multichain-bridge": "1.1.20",
     "multicodec": "^3.1.0",
     "multihashes": "^4.0.2",
+    "react-blockies": "^1.4.1",
     "react-bootstrap": "^1.6.3",
     "react-countup": "^6.1.0",
     "react-datetime": "^3.1.1",
