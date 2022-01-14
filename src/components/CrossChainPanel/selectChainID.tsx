@@ -10,7 +10,7 @@ import Column from '../Column'
 import { PaddedColumn, Separator } from '../SearchModal/styleds'
 import { Input as NumericalInput } from '../NumericalInput'
 import TokenLogo from '../TokenLogo'
-import Modal from '../Modal'
+import Modal from '../DefaultModal'
 import {
   OptionCardClickable,
   Option

@@ -161,7 +161,7 @@ module.exports = withBundleAnalyzer(
         },
         {
           source: '/balances',
-          destination: '/user/balances',
+          destination: '/user',
         },
       ]
     },

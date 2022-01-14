@@ -80,6 +80,7 @@ import ATOMIC_SWAP_ABI from '../constants/abis/soulswap/atomic-swap.json'
 import LAUNCHPAD_ABI from '../constants/abis/soulswap/launchpad.json'
 import SUMMONER_HELPER_ABI from '../constants/abis/soulswap/helper.json'
 import PRICE_HELPER_ABI from '../constants/abis/soulswap/pricehelper.json'
+import BORING_HELPER_ABI from '../constants/abis/soulswap/boring-helper.json'
 import HARVEST_HELPER_ABI from '../constants/abis/soulswap/harvest-helper.json'
 
 // bridge
@@ -249,6 +250,11 @@ export function useSoulSeanceContract(withSignerIfPossible?: boolean): Contract 
 export function useSoulFtmContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SOUL_FTM_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
+}
+
+export function useBoringHelperContract(withSignerIfPossible?: boolean): Contract | null {
+  // const { chainId } = useActiveWeb3React()
+  return useContract('0x26bbB91Ade07f995E1c5D1F4A050639763F4C44b', BORING_HELPER_ABI, withSignerIfPossible)
 }
 
 export function useSoulUsdcContract(withSignerIfPossible?: boolean): Contract | null {

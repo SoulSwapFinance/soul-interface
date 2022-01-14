@@ -5,7 +5,6 @@ import {
   useEthPrice,
   useFarms,
   useKashiPairs,
-//   useMasterChefV1SushiPerBlock,
 //   useMasterChefV1TotalAllocPoint,
 //   useMaticPrice,
 //   useNativePrice,
@@ -40,7 +39,7 @@ export default function useFarmRewards() {
     shouldFetch: !!block1w && !!farmAddresses,
     chainId,
   })
-  const kashiPairs = useKashiPairs({ subset: farmAddresses, shouldFetch: !!farmAddresses, chainId })
+  // const kashiPairs = useKashiPairs({ subset: farmAddresses, shouldFetch: !!farmAddresses, chainId })
 
   const averageBlockTime = useAverageBlockTime()
 

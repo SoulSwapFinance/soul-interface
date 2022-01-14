@@ -6,6 +6,7 @@ export { JSBI }
 export * from './constants'
 export * from './errors'
 export * from './entities'
+export * from './interfaces'
 export * from './functions'
 export * from './router'
 export * from './enums'

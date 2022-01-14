@@ -78,12 +78,13 @@ export function CurrencySearch({
 
   const router = useRouter()
 
-  if (router.asPath.startsWith('/kashi/create')) {
-    allTokens = Object.keys(allTokens).reduce((obj, key) => {
-      if (CHAINLINK_TOKENS[chainId].find((address) => address === key)) obj[key] = allTokens[key]
-      return obj
-    }, {})
-  }
+  // TODO : USE FOR LENDING MARKET TO LIMIT ELIGIBLE ASSETS //
+  // if (router.asPath.startsWith('/kashi/create')) {
+  //   allTokens = Object.keys(allTokens).reduce((obj, key) => {
+  //     if (CHAINLINK_TOKENS[chainId].find((address) => address === key)) obj[key] = allTokens[key]
+  //     return obj
+  //   }, {})
+  // }
 
   if (currencyList) {
     allTokens = Object.keys(allTokens).reduce((obj, key) => {

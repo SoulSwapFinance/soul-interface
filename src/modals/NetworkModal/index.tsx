@@ -3,7 +3,7 @@ import { useModalOpen, useNetworkModalToggle } from '../../state/application/hoo
 import { ApplicationModal } from '../../state/application/actions'
 import { ChainId } from '../../sdk'
 import Image from 'next/image'
-import Modal from '../../components/Modal'
+import Modal from '../../components/DefaultModal'
 import ModalHeader from '../../components/ModalHeader'
 import React from 'react'
 import cookie from 'cookie-cutter'
