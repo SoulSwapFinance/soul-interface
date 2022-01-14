@@ -62,6 +62,7 @@ import { ERC20_BYTES32_ABI } from '../constants/abis/erc20'
 import FACTORY_ABI from '../constants/abis/factory.json'
 // import IUniswapV2PairABI from '../constants/abis/uniswap-v2-pair.json'
 import ISoulSwapPairABI from '../constants/abis/soulswap/ISoulSwapPair.json'
+import UNDERWORLD_ABI from '../constants/abis/kashipair.json'
 import KASHIPAIR_ABI from '../constants/abis/kashipair.json'
 import MAKER_ABI from '../constants/abis/maker.json'
 
@@ -358,7 +359,7 @@ export function useBentoBoxContract(withSignerIfPossible?: boolean): Contract | 
 
 export function useKashiPairContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && UNDERWORLD_ADDRESS[chainId], KASHIPAIR_ABI, withSignerIfPossible)
+  return useContract(chainId && UNDERWORLD_ADDRESS[chainId], UNDERWORLD_ABI, withSignerIfPossible)
 }
 
 export function useKashiPairCloneContract(address: string, withSignerIfPossible?: boolean): Contract | null {
