@@ -9,7 +9,7 @@ import { Trans } from '@lingui/react'
 import { useDerivedLimitOrderInfo, useLimitOrderState } from '../../state/limit-order/hooks'
 import { Field } from '../../state/limit-order/actions'
 import { Button } from '../../components/Button'
-import Modal from '../../components/Modal'
+import Modal from '../../components/DefaultModal'
 import { formatNumber, shortenAddress } from '../../functions'
 
 interface ConfirmLimitOrderModalProps {

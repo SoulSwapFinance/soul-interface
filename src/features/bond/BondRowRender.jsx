@@ -24,7 +24,7 @@ import {
 } from './BondStyles'
 
 import { Wrap, ClickableText, Heading, Text, ExternalLink } from '../../components/ReusableStyles'
-import Modal from '../../components/Modal'
+import Modal from '../../components/DefaultModal'
 import ModalHeader from '../../components/ModalHeader'
 import Typography from '../../components/Typography'
 import { Button } from '../../components/Button'
