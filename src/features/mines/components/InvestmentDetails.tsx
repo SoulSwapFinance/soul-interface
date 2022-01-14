@@ -26,7 +26,7 @@ const InvestmentDetails = ({ farm }) => {
   const { account, chainId } = useActiveWeb3React()
   const [depositValue, setDepositValue] = useState('')
 
-  const { harvest } = useSummoner()
+  const { harvest, stake } = useSummoner()
   const router = useRouter()
   const addTransaction = useTransactionAdder()
   const [pendingTx, setPendingTx] = useState(false)
@@ -117,6 +117,19 @@ const InvestmentDetails = ({ farm }) => {
     }
     setPendingTx(false)
   }
+  
+  async function claimStaking() {
+    setPendingTx(true)
+    try {
+      const tx = await stake(farm.id)
+      addTransaction(tx, {
+        summary: i18n._(t`Harvest SOUL`),
+      })
+    } catch (error) {
+      console.error(error)
+    }
+    setPendingTx(false)
+  }
 
   return (
     <div className="flex flex-col w-full space-y-8">
@@ -168,7 +181,9 @@ const InvestmentDetails = ({ farm }) => {
       <div className="flex flex-col w-full space-y-4">
         <div className="flex items-end justify-between">
           <div className="text-lg font-bold cursor-pointer">{i18n._(t`Pending Rewards`)}:</div>
-          {((pendingSoul && pendingSoul.greaterThan(ZERO)) || (pendingReward && Number(pendingReward) > 0)) && (
+          {((pendingSoul && pendingSoul.greaterThan(ZERO)) || (pendingReward && Number(pendingReward) > 0)) && 
+          farm.pair?.token1 ?
+          (
             <button
               className="py-0.5 px-4 font-bold bg-transparent border border-transparent rounded cursor-pointer border-gradient-r-blue-pink-dark-800 whitespace-nowrap text-md"
               disabled={pendingTx}
@@ -176,7 +191,17 @@ const InvestmentDetails = ({ farm }) => {
             >
               {i18n._(t`Harvest Rewards`)}
             </button>
-          )}
+          ) : (
+            <button
+            className="py-0.5 px-4 font-bold bg-transparent border border-transparent rounded cursor-pointer border-gradient-r-blue-pink-dark-800 whitespace-nowrap text-md"
+            disabled={pendingTx}
+            onClick={claimStaking}
+          >
+            {i18n._(t`Harvest Rewards`)}
+          </button>
+          )
+        
+        }
         </div>
         <div className="w-full bg-transparent border border-b-0 border-transparent rounded h-0font-bold text-high-emphesis border-gradient-r-blue-pink-dark-800 opacity-20" />
         <div className="flex justify-between">
