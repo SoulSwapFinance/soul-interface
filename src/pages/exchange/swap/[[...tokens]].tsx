@@ -397,7 +397,7 @@ export default function Swap() {
         tokens={importTokensNotInDefault}
         onConfirm={handleConfirmTokenWarning}
       />
-      <SwapBanner />
+      {/* <SwapBanner /> */}
       {/* <SoulLogo />       */}
       <br />
       <DoubleGlowShadowV2 opacity="0.6">
