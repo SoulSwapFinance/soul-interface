@@ -424,7 +424,7 @@ export default function Swap() {
             onConfirm={handleSwap}
             swapErrorMessage={swapErrorMessage}
             onDismiss={handleConfirmDismiss}
-            minerBribe={undefined}
+            // minerBribe={undefined}
           />
           <div>
             <CurrencyInputPanel
@@ -508,7 +508,7 @@ export default function Swap() {
                     showInverted={showInverted}
                     setShowInverted={setShowInverted}
                     className="bg-dark-900"
-                    trade={trade}
+                    // trade={trade}
                   />
                 </div>
               )}

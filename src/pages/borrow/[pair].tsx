@@ -38,7 +38,7 @@ export default function Pair() {
         <meta
           key="description"
           name="description"
-          content={`Borrow ${pair?.asset?.symbol} against ${pair?.collateral?.symbol} collateral on Kashi by Sushi`}
+          content={`Borrow ${pair?.asset?.symbol} against ${pair?.collateral?.symbol} collateral in the Underworld by Soul`}
         />
       </Head>
       <Card
@@ -235,7 +235,7 @@ const PairLayout = ({ children }) => {
 
             <Strategy token={pair.collateral} />
 
-            {pair && pair.oracle.name === 'SushiSwap' && (
+            {pair && pair.oracle.name === 'SoulSwap' && (
               <>
                 <div className="flex justify-between pt-3">
                   <div className="text-xl text-high-emphesis">{i18n._(t`SLP`)}</div>

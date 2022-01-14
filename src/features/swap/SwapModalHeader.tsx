@@ -3,13 +3,13 @@ import { Currency, Percent, TradeType, Trade } from '../../sdk'
 import React, { useState } from 'react'
 import { formatNumberScale, isAddress, shortenAddress } from '../../functions'
 
-import { AdvancedSwapDetails } from './AdvancedSwapDetails'
 import CurrencyLogo from '../../components/CurrencyLogo'
 import TradePrice from './TradePrice'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { useUSDCValue } from '../../hooks/useUSDCPrice'
 import { warningSeverity } from '../../functions'
+import AdvancedSwapDetails from './AdvancedSwapDetails'
 
 // import Card from '../../components/Card'
 // import { Field } from '../../state/swap/actions'
@@ -23,14 +23,14 @@ export default function SwapModalHeader({
   recipient,
   showAcceptChanges,
   onAcceptChanges,
-  minerBribe,
+  // minerBribe,
 }: {
   trade: Trade<Currency, Currency, TradeType>
   allowedSlippage: Percent
   recipient: string | null
   showAcceptChanges: boolean
   onAcceptChanges: () => void
-  minerBribe?: string
+  // minerBribe?: string
 }) {
   const { i18n } = useLingui()
 
@@ -39,47 +39,51 @@ export default function SwapModalHeader({
   // const fiatValueInput = useUSDCValue(trade.inputAmount)
   // const fiatValueOutput = useUSDCValue(trade.outputAmount)
 
-  const priceImpactSeverity = warningSeverity(trade.priceImpact)
+  const priceImpactSeverity = warningSeverity(trade?.priceImpact)
 
   return (
     <div className="grid gap-4">
       <div className="grid gap-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <CurrencyLogo currency={trade.inputAmount.currency} size={48} />
+            <CurrencyLogo currency={trade?.inputAmount?.currency} size={48} />
             <div className="overflow-ellipsis w-[220px] overflow-hidden font-bold text-2xl text-high-emphesis">
-              {formatNumberScale(trade.inputAmount.toSignificant(6), false, 4)}
+              {formatNumberScale(trade?.inputAmount?.toSignificant(6), false, 4)}
             </div>
           </div>
-          <div className="ml-3 text-2xl font-medium text-high-emphesis">{trade.inputAmount.currency.symbol}</div>
+          <div className="ml-3 text-2xl font-medium text-high-emphesis">{trade?.inputAmount?.currency?.symbol}</div>
         </div>
         <div className="ml-3 mr-3 min-w-[24px]">
           <ArrowDown size={24} />
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <CurrencyLogo currency={trade.outputAmount.currency} size={48} />
+            <CurrencyLogo currency={trade?.outputAmount?.currency} size={48} />
             <div
               className={`overflow-ellipsis w-[220px] overflow-hidden font-bold text-2xl ${
                 priceImpactSeverity > 2 ? 'text-red' : 'text-high-emphesis'
               }`}
             >
-              {formatNumberScale(trade.outputAmount.toSignificant(6), false, 4)}
+              {formatNumberScale(trade?.outputAmount?.toSignificant(6), false, 4)}
             </div>
           </div>
-          <div className="ml-3 text-2xl font-medium text-high-emphesis">{trade.outputAmount.currency.symbol}</div>
+          <div className="ml-3 text-2xl font-medium text-high-emphesis">{trade?.outputAmount?.currency?.symbol}</div>
         </div>
       </div>
 
       <TradePrice
-        price={trade.executionPrice}
+        price={trade?.executionPrice}
         showInverted={showInverted}
         setShowInverted={setShowInverted}
         className="px-0"
-        trade={trade}
+        // trade={trade}
       />
 
-      <AdvancedSwapDetails trade={trade} allowedSlippage={allowedSlippage} minerBribe={minerBribe} />
+      <AdvancedSwapDetails 
+        trade={trade} 
+        allowedSlippage={allowedSlippage} 
+        // minerBribe={minerBribe} 
+      />
 
       {showAcceptChanges ? (
         <div className="flex items-center justify-between p-2 px-3 border border-dark-600 rounded">
@@ -95,11 +99,11 @@ export default function SwapModalHeader({
         </div>
       ) : null}
       <div className="justify-start text-sm text-secondary">
-        {trade.tradeType === TradeType.EXACT_INPUT ? (
+        {trade?.tradeType === TradeType.EXACT_INPUT ? (
           <>
             {i18n._(t`Output is estimated. You will receive at least`)}{' '}
             <b>
-              {trade.minimumAmountOut(allowedSlippage).toSignificant(6)} {trade.outputAmount.currency.symbol}
+              {trade?.minimumAmountOut(allowedSlippage).toSignificant(6)} {trade?.outputAmount?.currency?.symbol}
             </b>{' '}
             {i18n._(t`or the transaction will revert.`)}
           </>
@@ -107,7 +111,7 @@ export default function SwapModalHeader({
           <>
             {i18n._(t`Input is estimated. You will sell at most`)}{' '}
             <b>
-              {trade.maximumAmountIn(allowedSlippage).toSignificant(6)} {trade.inputAmount.currency.symbol}
+              {trade?.maximumAmountIn(allowedSlippage).toSignificant(6)} {trade?.inputAmount?.currency?.symbol}
             </b>{' '}
             {i18n._(t`or the transaction will revert.`)}
           </>

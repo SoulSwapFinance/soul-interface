@@ -5,7 +5,7 @@ import React from 'react'
 import Chip from './index'
 
 export default {
-  title: 'SushiSwap/Chip',
+  title: 'SoulSwap/Chip',
   component: Chip,
   argTypes: {
     variant: ['filled'],
