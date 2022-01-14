@@ -55,6 +55,11 @@ import Chart from '../../../components/Chart'
 import NavLink from 'components/NavLink'
 import { FlexText } from 'features/bond/BondStyles'
 import ExternalLink from 'components/ExternalLink'
+import DISCORD from 'assets/icons/discord.svg'
+import TWITTER from 'assets/icons/twitter.svg'
+import TELEGRAM from 'assets/icons/telegram.svg'
+import DOCS from 'assets/icons/docs.svg'
+import FORUM from 'assets/icons/discussion.svg'
 
 export default function Swap() {
   const { i18n } = useLingui()
@@ -400,7 +405,6 @@ export default function Swap() {
       />
       {/* <SwapBanner /> */}
       {/* <SoulLogo />       */}
-      {/* <br /> */}
       <DoubleGlowShadowV2 opacity="0.6">
         <div id="swap-page" className="mt-4 w-full max-w-2xl p-4 space-y-4 rounded bg-dark-900 z-1">
           {/* <div id="swap-page" className={`grid grid-cols-1 gap-2 rounded z-4 sm:m-6`}> */}
@@ -636,27 +640,39 @@ export default function Swap() {
             </div>
           </div>
           <div className="flex-span justify-center">
-            <a className="flex justify-center text-white p-4 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
+            <a className="flex justify-center text-white p-4 mb-0 mt-4 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
               {/* <span>FOLLOW US</span> */}
             </a>
             <a className="flex-col justify-center bg-dark-800 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
               <FlexText justify="space-between">
                 <ExternalLink href={'https://discord.gg/DQjChB6Wa6'} target="_blank">
-                  <a className="flex-span text-purple bg-dark-800 ml-1 mr-1 p-4 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
-                    <span>DISCORD</span>
-                    {/* Account Analytics ↗</span> */}
+                  <a className="flex-span text-purple bg-dark-420 p-4 x-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
+                    {/* <span>DISCORD</span> */}
+                    <Image src={ DISCORD } height="42px" width="42px" alt="discord icon" />
                   </a>
                 </ExternalLink>
                 <ExternalLink href={'https://twitter.com/SoulSwapFinance'} target="_blank">
-                  <a className="flex-span text-purple bg-dark-800 ml-1 mr-1 p-4 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
-                    <span>TWITTER</span>
-                    {/* Account Analytics ↗</span> */}
+                  <a className="flex-span text-purple bg-dark-420 p-4 x-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
+                    {/* <span>TWITTER</span> */}
+                    <Image src={ TWITTER } height="42px" width="42px" alt="twitter icon" />
                   </a>
                 </ExternalLink>
                 <ExternalLink href={'https://t.me/SoulSwapDeFi'} target="_blank">
-                  <a className="flex-span text-purple bg-dark-800 ml-1 mr-1 p-4 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
-                    <span>TELEGRAM</span>
-                    {/* Account Analytics ↗</span> */}
+                  <a className="flex-span text-purple bg-dark-420 p-4 x-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
+                    {/* <span>TELEGRAM</span> */}
+                    <Image src={ TELEGRAM } height="42px" width="42px" alt="telegram icon" />
+                  </a>
+                </ExternalLink>
+                <ExternalLink href={'https://docs.soulswap.finance'} target="_blank">
+                  <a className="flex-span text-purple bg-dark-420 p-4 x-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
+                    {/* <span>TELEGRAM</span> */}
+                    <Image src={ DOCS } height="42px" width="42px" alt="documentation icon" />
+                  </a>
+                </ExternalLink>
+                <ExternalLink href={'https://forum.soulswap.finance'} target="_blank">
+                  <a className="flex-span text-purple bg-dark-420 p-4 x-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
+                    {/* <span>TELEGRAM</span> */}
+                    <Image src={ FORUM } height="42px" width="42px" alt="forum icon" />
                   </a>
                 </ExternalLink>
               </FlexText>

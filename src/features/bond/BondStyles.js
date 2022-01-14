@@ -4,6 +4,10 @@ export const FlexText = styled.div`
   display: flex;
   justify-content: space-between;
 `
+export const FlexSocialText = styled.div`
+  display: flex;
+  justify-content: centered;
+`
 
 // ---------------------
 //  Row Section
