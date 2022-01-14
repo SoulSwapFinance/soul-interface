@@ -1,21 +1,30 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
-import { Currency, Percent, Trade, TradeType } from 'sdk'
+import {
+  ChainId,
+  Currency,
+  CurrencyAmount,
+  Ether,
+  Percent,
+  TradeType,
+  Trade,
+} from '../../sdk'
+import React, { useCallback, useMemo } from 'react'
 import TransactionConfirmationModal, {
   ConfirmationModalContent,
   TransactionErrorContent,
-} from 'modals/TransactionConfirmationModal'
-import { TradeUnion } from 'types'
-import React, { FC, useMemo } from 'react'
-
+} from '../../modals/TransactionConfirmationModal'
 import SwapModalFooter from './SwapModalFooter'
 import SwapModalHeader from './SwapModalHeader'
+import { useLingui } from '@lingui/react'
+import { t } from '@lingui/macro'
+import { formatNumberScale } from '../../functions'
 
 /**
  * Returns true if the trade requires a confirmation of details before we can submit it
  * @param args either a pair of V2 trades or a pair of V3 trades
  */
-function tradeMeaningfullyDiffers(...args: [TradeUnion, TradeUnion]): boolean {
+function tradeMeaningfullyDiffers(
+  ...args: [Trade<Currency, Currency, TradeType>, Trade<Currency, Currency, TradeType>]
+): boolean {
   const [tradeA, tradeB] = args
   return (
     tradeA.tradeType !== tradeB.tradeType ||
@@ -26,21 +35,7 @@ function tradeMeaningfullyDiffers(...args: [TradeUnion, TradeUnion]): boolean {
   )
 }
 
-interface ConfirmSwapModal {
-  isOpen: boolean
-  trade?: TradeUnion
-  originalTrade?: TradeUnion
-  attemptingTxn: boolean
-  allowedSlippage: Percent
-  onAcceptChanges(): void
-  onConfirm(): void
-  onDismiss(): void
-  txHash?: string
-  recipient?: string
-  swapErrorMessage?: string
-}
-
-const ConfirmSwapModal: FC<ConfirmSwapModal> = ({
+export default function ConfirmSwapModal({
   trade,
   originalTrade,
   onAcceptChanges,
@@ -52,16 +47,76 @@ const ConfirmSwapModal: FC<ConfirmSwapModal> = ({
   isOpen,
   attemptingTxn,
   txHash,
-}) => {
-  const { i18n } = useLingui()
+  minerBribe,
+}: {
+  isOpen: boolean
+  trade: Trade<Currency, Currency, TradeType> | undefined
+  originalTrade: Trade<Currency, Currency, TradeType> | undefined
+  attemptingTxn: boolean
+  txHash: string | undefined
+  recipient: string | null
+  allowedSlippage: Percent
+  minerBribe?: string
+  onAcceptChanges: () => void
+  onConfirm: () => void
+  swapErrorMessage: string | undefined
+  onDismiss: () => void
+}) {
   const showAcceptChanges = useMemo(
     () => Boolean(trade && originalTrade && tradeMeaningfullyDiffers(trade, originalTrade)),
     [originalTrade, trade]
   )
+  const { i18n } = useLingui()
 
-  const pendingText = `Swapping ${trade?.inputAmount?.toSignificant(6)} ${
-    trade?.inputAmount?.currency?.symbol
-  } for ${trade?.outputAmount?.toSignificant(6)} ${trade?.outputAmount?.currency?.symbol}`
+  const modalHeader = useCallback(() => {
+    return trade ? (
+      <SwapModalHeader
+        trade={trade}
+        allowedSlippage={allowedSlippage}
+        recipient={recipient}
+        showAcceptChanges={showAcceptChanges}
+        onAcceptChanges={onAcceptChanges}
+        // minerBribe={minerBribe}
+      />
+    ) : null
+  }, [allowedSlippage, onAcceptChanges, recipient, showAcceptChanges, trade])
+
+  const modalBottom = useCallback(() => {
+    return trade ? (
+      <SwapModalFooter
+        onConfirm={onConfirm}
+        // trade={trade}
+        disabledConfirm={showAcceptChanges}
+        swapErrorMessage={swapErrorMessage}
+      />
+    ) : null
+  }, [onConfirm, showAcceptChanges, swapErrorMessage, trade])
+
+  // text to show while loading
+  const pendingText = i18n._(
+    t`Swapping ${formatNumberScale(trade?.inputAmount?.toSignificant(6))} ${
+      trade?.inputAmount?.currency?.symbol
+    } for ${formatNumberScale(trade?.outputAmount?.toSignificant(6))} ${trade?.outputAmount?.currency?.symbol}`
+  )
+
+  const pendingText2 = minerBribe
+    ? `Plus ${CurrencyAmount.fromRawAmount(Ether.onChain(ChainId.MAINNET), minerBribe).toSignificant(6)} FTM Miner Tip`
+    : undefined
+
+  const confirmationContent = useCallback(
+    () =>
+      swapErrorMessage ? (
+        <TransactionErrorContent onDismiss={onDismiss} message={swapErrorMessage} />
+      ) : (
+        <ConfirmationModalContent
+          title={i18n._(t`Confirm Swap`)}
+          onDismiss={onDismiss}
+          topContent={modalHeader}
+          bottomContent={modalBottom}
+        />
+      ),
+    [onDismiss, modalBottom, modalHeader, swapErrorMessage]
+  )
 
   return (
     <TransactionConfirmationModal
@@ -69,36 +124,10 @@ const ConfirmSwapModal: FC<ConfirmSwapModal> = ({
       onDismiss={onDismiss}
       attemptingTxn={attemptingTxn}
       hash={txHash}
-      content={
-        swapErrorMessage ? (
-          <TransactionErrorContent onDismiss={onDismiss} message={swapErrorMessage} />
-        ) : (
-          <ConfirmationModalContent
-            title={i18n._(t`Confirm Swap`)}
-            onDismiss={onDismiss}
-            topContent={
-              <SwapModalHeader
-                trade={trade}
-                allowedSlippage={allowedSlippage}
-                recipient={recipient}
-                showAcceptChanges={showAcceptChanges}
-                onAcceptChanges={onAcceptChanges}
-              />
-            }
-            bottomContent={
-              <SwapModalFooter
-                onConfirm={onConfirm}
-                disabledConfirm={showAcceptChanges}
-                swapErrorMessage={swapErrorMessage}
-              />
-            }
-          />
-        )
-      }
+      content={confirmationContent}
       pendingText={pendingText}
+      pendingText2={pendingText2}
       currencyToAdd={trade?.outputAmount.currency}
     />
   )
 }
-
-export default ConfirmSwapModal

@@ -263,7 +263,7 @@ const PoolDeposit = ({ currencyA, currencyB }) => {
         hash={txHash}
         content={() => (
           <ConfirmationModalContent
-            title={noLiquidity ? i18n._(t`You are creating a pool`) : i18n._(t`You will receive`)}
+            title={noLiquidity ? i18n._(t`You are creating a pool`) : i18n._(t`Receive`)}
             onDismiss={handleDismissConfirmation}
             topContent={modalHeader}
             bottomContent={modalBottom}

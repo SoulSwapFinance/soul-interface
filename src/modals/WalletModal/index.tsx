@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
 import { injected} from '../../connectors'
-// import { injected } from '../../config/wallet'
 import { useModalOpen, useWalletModalToggle } from '../../state/application/hooks'
 
 import { AbstractConnector } from '@web3-react/abstract-connector'
@@ -10,7 +9,6 @@ import { ApplicationModal } from '../../state/application/actions'
 import { ButtonError } from '../../components/Button'
 import ExternalLink from '../../components/ExternalLink'
 import Image from 'next/image'
-import Modal from '../../components/DefaultModal'
 import ModalHeader from '../../components/ModalHeader'
 import { OVERLAY_READY } from '../../entities/FortmaticConnector'
 import Option from './Option'
@@ -25,6 +23,7 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import usePrevious from '../../hooks/usePrevious'
 import { fortmatic, portis } from '../../connectors'
+import { HeadlessUiModal } from 'components/Modal'
 
 const CloseIcon = styled.div`
   position: absolute;
@@ -323,8 +322,8 @@ export default function WalletModal({
   }
 
   return (
-    <Modal isOpen={walletModalOpen} onDismiss={toggleWalletModal} minHeight={false} maxHeight={90}>
+    <HeadlessUiModal.Controlled isOpen={walletModalOpen} onDismiss={toggleWalletModal}>
       {getModalContent()}
-    </Modal>
+    </HeadlessUiModal.Controlled>
   )
 }

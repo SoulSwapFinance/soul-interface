@@ -1,50 +1,48 @@
-import { ApprovalState, useApproveCallback } from '../../../hooks/useApproveCallback'
-import { AutoRow, RowBetween } from '../../../components/Row'
-import { Button, ButtonError } from '../../../components/Button'
-import { Currency, CurrencyAmount, Percent, WNATIVE, currencyEquals } from '../../../sdk'
+import { ApprovalState, useApproveCallback } from 'hooks/useApproveCallback'
+import { AutoRow, RowBetween } from 'components/Row'
+import { Button, ButtonError } from 'components/Button'
+import { Currency, CurrencyAmount, Percent, WNATIVE, currencyEquals } from 'sdk'
 import { ZERO_PERCENT } from '../../../constants'
 import React, { useCallback, useState } from 'react'
-import TransactionConfirmationModal, { ConfirmationModalContent } from '../../../modals/TransactionConfirmationModal'
-import { calculateGasMargin, calculateSlippageAmount } from '../../../functions/trade'
-import { currencyId, maxAmountSpend } from '../../../functions/currency'
-import { useDerivedMintInfo, useMintActionHandlers, useMintState } from '../../../state/mint/hooks'
-import { useExpertModeManager, useUserSlippageToleranceWithDefault } from '../../../state/user/hooks'
-import MainHeader from 'features/swap/MainHeader'
+import TransactionConfirmationModal, { ConfirmationModalContent } from 'modals/TransactionConfirmationModal'
+import { calculateGasMargin, calculateSlippageAmount } from 'functions/trade'
+import { currencyId, maxAmountSpend } from 'functions/currency'
+import { useDerivedMintInfo, useMintActionHandlers, useMintState } from 'state/mint/hooks'
+import { useExpertModeManager, useUserSlippageToleranceWithDefault } from 'state/user/hooks'
 
-import { AutoColumn } from '../../../components/Column'
+import { AutoColumn } from 'components/Column'
 import { BigNumber } from '@ethersproject/bignumber'
-import { ConfirmAddModalBottom } from '../../../features/liquidity/ConfirmAddModalBottom'
-import Container from '../../../components/Container'
-import CurrencyInputPanel from '../../../components/CurrencyInputPanel'
-import Dots from '../../../components/Dots'
-import DoubleCurrencyLogo from '../../../components/DoubleLogo'
-// import ExchangeHeader from '../../../components/ExchangeHeader'
-import SwapHeader from '../../../features/trade/Header'
-import { Field } from '../../../state/mint/actions'
+import { ConfirmAddModalBottom } from 'features/liquidity/ConfirmAddModalBottom'
+import Container from 'components/Container'
+import CurrencyInputPanel from 'components/CurrencyInputPanel'
+import Dots from 'components/Dots'
+import DoubleCurrencyLogo from 'components/DoubleLogo'
+// import ExchangeHeader from 'components/ExchangeHeader'
+import SwapHeader from 'features/trade/Header'
+import { Field } from 'state/mint/actions'
 import Head from 'next/head'
-import LiquidityPrice from '../../../features/liquidity/LiquidityPrice'
-import { MinimalPositionCard } from '../../../components/PositionCard'
-import NavLink from '../../../components/NavLink'
-import { PairState } from '../../../hooks/useV2Pairs'
+import LiquidityPrice from 'features/liquidity/LiquidityPrice'
+import { MinimalPositionCard } from 'components/PositionCard'
+import NavLink from 'components/NavLink'
+import { PairState } from 'hooks/useV2Pairs'
 import { Plus } from 'react-feather'
 import ReactGA from 'react-ga'
 import { TransactionResponse } from '@ethersproject/providers'
-import UnsupportedCurrencyFooter from '../../../features/swap/UnsupportedCurrencyFooter'
-import Web3Connect from '../../../components/Web3Connect'
+import UnsupportedCurrencyFooter from 'features/swap/UnsupportedCurrencyFooter'
+import Web3Connect from 'components/Web3Connect'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
-import { useCurrency } from '../../../hooks/Tokens'
-import { useIsSwapUnsupported } from '../../../hooks/useIsSwapUnsupported'
+import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { useCurrency } from 'hooks/Tokens'
+import { useIsSwapUnsupported } from 'hooks/useIsSwapUnsupported'
 import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
-import { useRouterContract } from '../../../hooks'
-import { useTransactionAdder } from '../../../state/transactions/hooks'
-import useTransactionDeadline from '../../../hooks/useTransactionDeadline'
-import { useWalletModalToggle } from '../../../state/application/hooks'
-import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
-import { LiquidityHeader } from '../../../features/liquidity'
-import SwapBanner from 'components/SwapBanner'
-// import SoulLogo from '../../../components/SoulLogo'
+import { useRouterContract } from 'hooks'
+import { useTransactionAdder } from 'state/transactions/hooks'
+import useTransactionDeadline from 'hooks/useTransactionDeadline'
+import { useWalletModalToggle } from 'state/application/hooks'
+import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
+import { LiquidityHeader } from 'features/liquidity'
+// import SoulLogo from 'components/SoulLogo'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
 
@@ -349,21 +347,16 @@ export default function Add() {
           content="Add liquidity to the Soul AMM to enable gas optimised and low slippage trades across countless networks"
         />
       </Head>
-            <MainHeader 
-  input={currencies[Field.CURRENCY_A]}
-  output={currencies[Field.CURRENCY_B]}
-  allowedSlippage={allowedSlippage}
-/>
       {/* <SoulLogo /> */}
+      <br /> <br />
       <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
-      <SwapBanner /> 
       <DoubleGlowShadowV2 opacity="0.6">
           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
-            {/* <SwapHeader
+            <SwapHeader
               input={currencies[Field.CURRENCY_A]}
               output={currencies[Field.CURRENCY_B]}
               allowedSlippage={allowedSlippage}
-            /> */}
+            />
             <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
             <TransactionConfirmationModal
               isOpen={showConfirm}
@@ -372,7 +365,7 @@ export default function Add() {
               hash={txHash}
               content={() => (
                 <ConfirmationModalContent
-                  title={noLiquidity ? i18n._(t`You are creating a pool`) : i18n._(t`You will receive`)}
+                  title={noLiquidity ? i18n._(t`You are creating a pool`) : i18n._(t`Receive`)}
                   onDismiss={handleDismissConfirmation}
                   topContent={modalHeader}
                   bottomContent={modalBottom}

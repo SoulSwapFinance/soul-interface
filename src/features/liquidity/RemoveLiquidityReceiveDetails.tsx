@@ -34,7 +34,7 @@ export default function RemoveLiquidityReceiveDetails({
       <div className="flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row">
         <div className="w-full text-white sm:w-2/5" style={{ margin: 'auto 0px' }}>
           <AutoColumn>
-            <div>You Will Receive:</div>
+            <div>Receive:</div>
             <RowBetween className="text-sm">
               {hasWETH ? (
                 <Link href={`/remove/${currencyId(currencyA)}/${currencyId(currencyB)}`}>

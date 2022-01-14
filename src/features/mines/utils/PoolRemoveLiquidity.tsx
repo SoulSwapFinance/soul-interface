@@ -400,7 +400,7 @@ const PoolWithdraw = ({ currencyA, currencyB }) => {
         hash={txHash ? txHash : ''}
         content={() => (
           <ConfirmationModalContent
-            title={i18n._(t`You will receive`)}
+            title={i18n._(t`Receive`)}
             onDismiss={handleDismissConfirmation}
             topContent={modalHeader}
             bottomContent={modalBottom}
@@ -448,7 +448,7 @@ const PoolWithdraw = ({ currencyA, currencyB }) => {
             </div>
           </div>
           <div className="flex justify-between">
-            <div>{i18n._(t`You'll Receive:`)}</div>
+            <div>{i18n._(t`Receive:`)}</div>
             {(oneCurrencyIsETH || oneCurrencyIsWETH) && (
               <a
                 className="cursor-pointer text-baseline text-blue opacity-80 hover:opacity-100 whitespace-nowrap"

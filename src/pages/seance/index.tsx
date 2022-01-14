@@ -9,7 +9,7 @@ import Head from 'next/head'
 import Dots from '../../components/Dots'
 import Image from 'next/image'
 import { Input as NumericalInput } from '../../components/NumericalInput'
-import TransactionFailedModal from '../../components/TransactionFailedModal'
+// import TransactionFailedModal from '../../components/TransactionFailedModal'
 import styled from 'styled-components'
 import { t } from '@lingui/macro'
 import { tryParseAmount } from '../../functions/parse'
@@ -26,10 +26,10 @@ import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 import { ethers } from 'ethers'
 import { useSoulSummonerContract } from '../../hooks'
 import { serialize } from '@ethersproject/transactions'
-import Modal from '../../components/DefaultModal'
 import ModalHeader from '../../components/ModalHeader'
 import Typography from '../../components/Typography'
 import { SubmitButton } from '../../features/seance/SeanceStyles'
+import { HeadlessUiModal } from 'components/Modal'
 
 const INPUT_CHAR_LIMIT = 18
 
@@ -449,7 +449,7 @@ export default function SoulStake() {
           <div className="flex flex-col justify-center">
             <div className="flex flex-col w-full max-w-xl mx-auto mb-4">
               <div>
-                <TransactionFailedModal isOpen={modalOpen} onDismiss={() => setModalOpen(false)} />
+                {/* <TransactionFailedModal isOpen={modalOpen} onDismiss={() => setModalOpen(false)} /> */}
                 <div className="w-full max-w-xl px-3 pt-2 pb-6 rounded bg-dark-900 md:pb-9 md:pt-4 md:px-8">
                   {/* AUTOMATIC OR MANUAL STAKING */}
                   {/* <div className="flex w-full rounded h-14 bg-dark-800">
@@ -736,7 +736,7 @@ export default function SoulStake() {
           </div>
         </div>
       </DoubleGlowShadowV2>
-      <Modal isOpen={showConfirmation} onDismiss={
+      <HeadlessUiModal.Controlled isOpen={showConfirmation} onDismiss={
         () => setShowConfirmation(false)}>
         <div className="space-y-4">
           <ModalHeader title={`Please Read and Confirm`} onClose={() => setShowConfirmation(false)} />
@@ -762,7 +762,7 @@ export default function SoulStake() {
             I UNDERSTAND THESE TERMS
           </SubmitButton>
         </div>
-      </Modal>
+      </HeadlessUiModal.Controlled>
     </div>
   )
 }
