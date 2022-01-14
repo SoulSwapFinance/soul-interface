@@ -155,7 +155,10 @@ const InvestmentDetails = ({ farm }) => {
                 </Typography>
               )} */}
               <Typography>{token0?.symbol}</Typography>
+               { token1?.symbol ?
               <Typography>{' ('}{formatNumber(Number(pairPrice) / 2 * Number(stakedAmount?.toSignificant(2)), true)}{') '}</Typography>
+              : <Typography>{' ('}{formatNumber(Number(soulPrice) * Number(stakedAmount?.toSignificant(2)), true)}{') '}</Typography>
+              }
             </div>
             {token1?.symbol ?
              <div className="flex items-center space-x-2">
