@@ -7,8 +7,9 @@ import {
   useUserTransactionTTL,
 } from '../../state/user/hooks'
 import { useModalOpen, useToggleSettingsMenu } from '../../state/application/hooks'
+import Image from '../../components/Image'
 
-import { AdjustmentsIcon } from '@heroicons/react/outline'
+// import { AdjustmentsIcon } from '@heroicons/react/outline'
 import { ApplicationModal } from '../../state/application/actions'
 import { Button } from '../Button'
 import Modal from '../DefaultModal'
@@ -21,6 +22,7 @@ import { t } from '@lingui/macro'
 import { useActiveWeb3React } from '../../hooks'
 import { useLingui } from '@lingui/react'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
+import SETTINGS from 'assets/icons/controls.svg'
 
 export default function SettingsTab({ placeholderSlippage }: { placeholderSlippage?: Percent }) {
   const { i18n } = useLingui()
@@ -50,7 +52,8 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
         onClick={toggle}
         id="open-settings-dialog-button"
       >
-        <AdjustmentsIcon className="w-[26px] h-[26px] transform rotate-90" />
+        {/* <AdjustmentsIcon className="w-[26px] h-[26px] transform rotate-90" /> */}
+  <Image src={ SETTINGS } width="48px" alt="bridge icon" />
       </div>
       {open && (
         <div className="absolute top-14 right-0 z-50 -mr-2.5 min-w-20 md:m-w-22 md:-mr-5 bg-dark-900 border-2 border-dark-800 rounded w-80 shadow-lg">

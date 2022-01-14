@@ -22,7 +22,7 @@ import CurrencyLogo from '../../../components/CurrencyLogo'
 import Dots from '../../../components/Dots'
 import { Field } from '../../../state/burn/actions'
 import Head from 'next/head'
-import Header from '../../../components/ExchangeHeader'
+// import Header from '../../../components/ExchangeHeader'
 import Link from 'next/link'
 import SwapHeader from '../../../features/trade/Header'
 import LiquidityHeader from '../../../features/liquidity/LiquidityHeader'
@@ -725,17 +725,17 @@ export default function Remove() {
             output={currencyB}
             allowedSlippage={allowedSlippage}
           />
-                <div className="mb-6"/>
+                <div className="mb-4"/>
 
       <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
         {/* <SwapBanner /> */}
       <DoubleGlowShadowV2 opacity="0.6">
           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>          
-            {/* <SwapHeader
+            <SwapHeader
               input={currencyA}
               output={currencyB}
               allowedSlippage={allowedSlippage}
-            /> */}
+            />
             {/* <Header input={currencyA} output={currencyB} allowedSlippage={allowedSlippage} /> */}
             <div>
               <TransactionConfirmationModal
