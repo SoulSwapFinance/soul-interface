@@ -23,44 +23,44 @@ export default function SwapModalHeader({
   recipient,
   showAcceptChanges,
   onAcceptChanges,
-  // minerBribe,
+  minerBribe,
 }: {
   trade: Trade<Currency, Currency, TradeType>
   allowedSlippage: Percent
   recipient: string | null
   showAcceptChanges: boolean
   onAcceptChanges: () => void
-  // minerBribe?: string
+  minerBribe?: string
 }) {
   const { i18n } = useLingui()
 
   const [showInverted, setShowInverted] = useState<boolean>(false)
 
-  // const fiatValueInput = useUSDCValue(trade.inputAmount)
-  // const fiatValueOutput = useUSDCValue(trade.outputAmount)
+  const fiatValueInput = useUSDCValue(trade.inputAmount)
+  const fiatValueOutput = useUSDCValue(trade.outputAmount)
 
   const priceImpactSeverity = warningSeverity(trade?.priceImpact)
 
   return (
-    <div className="grid gap-4">
-      <div className="grid gap-2">
+    <div className="grid md:gap-4">
+      <div className="grid md:gap-2">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 md:gap-3">
             <CurrencyLogo currency={trade?.inputAmount?.currency} size={48} />
-            <div className="overflow-ellipsis w-[220px] overflow-hidden font-bold text-2xl text-high-emphesis">
+            <div className="overflow-ellipsis w-[190px] overflow-hidden font-bold text-2xl text-high-emphesis">
               {formatNumberScale(trade?.inputAmount?.toSignificant(6), false, 4)}
             </div>
           </div>
-          <div className="ml-3 text-2xl font-medium text-high-emphesis">{trade?.inputAmount?.currency?.symbol}</div>
+          <div className="md:ml-3 text-2xl font-medium text-high-emphesis">{trade?.inputAmount?.currency?.symbol}</div>
         </div>
-        <div className="ml-3 mr-3 min-w-[24px]">
+        <div className="ml-3 mb-2 mt-2 mr-3 min-w-[24px]">
           <ArrowDown size={24} />
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <CurrencyLogo currency={trade?.outputAmount?.currency} size={48} />
             <div
-              className={`overflow-ellipsis w-[220px] overflow-hidden font-bold text-2xl ${
+              className={`overflow-ellipsis md:w-[220px] overflow-hidden font-bold text-2xl ${
                 priceImpactSeverity > 2 ? 'text-red' : 'text-high-emphesis'
               }`}
             >
@@ -75,7 +75,7 @@ export default function SwapModalHeader({
         price={trade?.executionPrice}
         showInverted={showInverted}
         setShowInverted={setShowInverted}
-        className="px-0"
+        className="px-0 mb-3 mt-3"
         // trade={trade}
       />
 
@@ -86,19 +86,19 @@ export default function SwapModalHeader({
       />
 
       {showAcceptChanges ? (
-        <div className="flex items-center justify-between p-2 px-3 border border-dark-600 rounded">
+        <div className="flex mt-3 items-center justify-between p-0 md:p-2 px-0 md:px-3 border border-dark-600 rounded">
           <div className="flex items-center justify-start text-sm font-bold uppercase text-high-emphesis">
-            <div className="mr-3 min-w-[24px]">
+            <div className="ml-2 mb-2 mt-2 m:mr-0 mr-3 min-w-[24px]">
               <AlertTriangle size={24} />
             </div>
             <span>{i18n._(t`Price Updated`)}</span>
           </div>
-          <span className="text-sm cursor-pointer text-purple" onClick={onAcceptChanges}>
+          <span className="mr-2 text-sm cursor-pointer text-purple" onClick={onAcceptChanges}>
             {i18n._(t`Accept`)}
           </span>
         </div>
       ) : null}
-      <div className="justify-start text-sm text-secondary">
+      <div className="mb-2 mt-2 justify-start text-sm text-secondary">
         {trade?.tradeType === TradeType.EXACT_INPUT ? (
           <>
             {i18n._(t`Output is estimated. You'll receive at least`)}{' '}
