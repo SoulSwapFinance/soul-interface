@@ -669,7 +669,7 @@ export default function Swap() {
                     <Image src={ DOCS } height="42px" width="42px" alt="documentation icon" />
                   </a>
                 </ExternalLink>
-                <ExternalLink href={'https://forum.soulswap.finance'} target="_blank">
+                <ExternalLink href={'http://board.soulswap.finance'} target="_blank">
                   <a className="flex-span text-purple bg-dark-420 p-4 x-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
                     {/* <span>TELEGRAM</span> */}
                     <Image src={ FORUM } height="42px" width="42px" alt="forum icon" />
