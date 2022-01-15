@@ -15,7 +15,7 @@ export default function PairTabs({ tabs }: { tabs: any[] }): JSX.Element {
                 <a
                   className={classNames(
                     router.asPath === tab.href
-                      ? tab.customCurrent ?? 'bg-gradient-to-r from-blue to-pink text-transparent bg-clip-text'
+                      ? tab.customCurrent ?? 'bg-gradient-to-r from-blue to-purple text-transparent bg-clip-text'
                       : 'text-primary hover:text-gray-200',
                     'group flex flex-auto flex-col px-1 font-bold text-lg'
                   )}
@@ -32,7 +32,7 @@ export default function PairTabs({ tabs }: { tabs: any[] }): JSX.Element {
                     <div
                       className={classNames(
                         router.asPath === tab.href &&
-                          'border-gradient-r-blue-pink-dark-900 border bg-transparent border-transparent',
+                          'border-gradient-r-blue-purple-dark-900 border bg-transparent border-transparent',
                         'w-full'
                       )}
                     />

@@ -21,7 +21,7 @@ const Menu = () => {
 
       {/* <NavLink
         href="/portfolio"
-        activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-pink-dark-900"
+        activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-purple-dark-900"
       >
         <a className="flex items-center px-1 py-3 text-base font-bold border border-transparent rounded cursor-pointer bg-dark-900 hover:bg-dark-800"> */}
           {/* <svg width="26" height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,7 +33,7 @@ const Menu = () => {
 
       {/* <NavLink
         href="/analytics/bound"
-        activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-pink-dark-900"
+        activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-purple-dark-900"
       >
         <a className="flex items-center px-1 py-3 text-base font-bold border border-transparent rounded cursor-pointer bg-dark-900 hover:bg-dark-800"> */}
           {/* <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,7 +46,7 @@ const Menu = () => {
 
       {/* <NavLink
         href="/analyics/pools"
-        activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-pink-dark-900"
+        activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-purple-dark-900"
       >
         <a className="flex items-center px-1 py-3 text-base font-bold border border-transparent rounded cursor-pointer bg-dark-900 hover:bg-dark-800">
           <div className="ml-5">Pools</div>
@@ -55,7 +55,7 @@ const Menu = () => {
 
       <NavLink
         href="/analytics/pairs"
-        activeClassName="bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-pink-dark-900"
+        activeClassName="bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-purple-dark-900"
       >
         <a className="flex items-center px-1 py-3 text-base font-bold border border-transparent rounded cursor-pointer bg-dark-900 hover:bg-dark-800">
           {/* <svg width="35" height="25" viewBox="0 0 35 25" fill="none" xmlns="http://www.w3.org/2000/svg">

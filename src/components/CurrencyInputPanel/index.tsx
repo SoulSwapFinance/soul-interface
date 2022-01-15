@@ -144,7 +144,7 @@ export default function CurrencyInputPanel({
           >
             <>
               {showMaxButton && selectedCurrencyBalance && (
-                <Button variant="outlined" color="purple" onClick={onMax} size="xs">
+                <Button variant="flexed" color="greydient" onClick={onMax} size="xs">
                   {i18n._(t`MAX`)}
                 </Button>
               )}
@@ -160,9 +160,11 @@ export default function CurrencyInputPanel({
                   <div onClick={onMax} className="text-xs font-medium text-right cursor-pointer text-low-emphesis">
                     {renderBalance ? (
                       renderBalance(selectedCurrencyBalance)
-                    ) : (
+                    ) : (           
+
                       <>
-                        {i18n._(t`Balance:`)} {formatCurrencyAmount(selectedCurrencyBalance, 4)} {currency.symbol}
+                        {/* {i18n._(t`Balance:`)}  */}
+                        {selectedCurrencyBalance?.toSignificant(6, { groupSeparator: ',' }) || '0'} {currency?.symbol}
                       </>
                     )}
                   </div>

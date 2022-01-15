@@ -215,7 +215,7 @@ export default function Farm(): JSX.Element {
 
       <div className={classNames('top-0 block col-span-12')} style={{ maxHeight: '40rem' }}>
         <Header />
-        <div className={`flex flex-col-2 items-center justify-between px-6 py-6 `}>
+        <div className={`flex flex-col-2 items-center justify-between px-6 py-6`}>
           {/* <div className="flex items-center text-center justify-between py-0 text-emphasis"> */}
           {/* Total Value Locked: {formatNumberScale(summTvl + summTvlVaults, true, 2)} */}
           {/* TVL */}
@@ -235,13 +235,13 @@ export default function Farm(): JSX.Element {
             // size={'nobase'}
             // disabled={pendingTx}
             >
-              {'VALUE (YOURS): '}
-              {formatNumberScale(valueStaked, true, 2)}             </Button>
+              {/* {'YOURS '} */}
+              {formatNumberScale(valueStaked, true, 2)} {' STAKED'}             </Button>
           )}
 
           {positions.length > 0 && (
             <Button
-              color="blue"
+              color="greydient"
               className="text-emphasis"
               // variant={'flexed'}
               variant="flexed"
@@ -261,7 +261,7 @@ export default function Farm(): JSX.Element {
                 setPendingTx(false)
               }}
             >
-              HARVEST REWARDS: {formatNumberScale(allStaked / 1E18, true, 2)}
+              CLAIM ALL {formatNumberScale(allStaked / 1E18, true, 2)}
             </Button>
           )}
 
@@ -274,8 +274,8 @@ export default function Farm(): JSX.Element {
           // size={'nobase'}
           // disabled={pendingTx}
           >
-            {'VALUE (TOTAL): '}
-            {formatNumberScale(summTvl, true, 2)}
+            {/* {'TOTAL: '} */}
+            {formatNumberScale(summTvl, true, 2)} {' '} TOTAL
           </Button>
         </div>
       </div>
