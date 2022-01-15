@@ -144,7 +144,7 @@ export default function CurrencyInputPanel({
           >
             <>
               {showMaxButton && selectedCurrencyBalance && (
-                <Button variant="outlined" color="purple" onClick={onMax} size="xs">
+                <Button variant="flexed" color="greydient" onClick={onMax} size="xs">
                   {i18n._(t`MAX`)}
                 </Button>
               )}

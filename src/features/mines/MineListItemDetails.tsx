@@ -48,13 +48,13 @@ const MineListItemDetails = ({ farm }) => {
               {toggleView ? i18n._(t`Investment Details`) : i18n._(t`Manage Position`)}
             </div>
             <button
-              className="py-0.5 px-4 font-bold bg-transparent border border-transparent rounded cursor-pointer border-gradient-r-blue-pink-dark-800 whitespace-nowrap"
+              className="py-0.5 px-4 font-bold bg-transparent border border-transparent rounded cursor-pointer border-gradient-r-blue-purple-dark-800 whitespace-nowrap"
               onClick={() => setToggleView(!toggleView)}
             >
               {toggleView ? i18n._(t`Manage Position`) : i18n._(t`Investment Details`)}
             </button>
           </div>
-          <div className="w-full h-0 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis border-gradient-r-blue-pink-dark-800 opacity-20" />
+          <div className="w-full h-0 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis border-gradient-r-blue-purple-dark-800 opacity-20" />
           {toggleView ? (
             <InvestmentDetails farm={farm} />
             ) : (
@@ -65,7 +65,7 @@ const MineListItemDetails = ({ farm }) => {
                   <Tab
                     className={({ selected }) =>
                     `${selected
-                      ? 'text-high-emphesis bg-gradient-to-r from-opaque-blue to-opaque-pink hover:from-blue hover:to-pink'
+                      ? 'text-high-emphesis bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple'
                       : 'text-secondary'
                     } flex items-center justify-center flex-1 px-2 py-2 text-lg rounded cursor-pointer select-none`
                   }
@@ -76,7 +76,7 @@ const MineListItemDetails = ({ farm }) => {
                   <Tab
                     className={({ selected }) =>
                       `${selected
-                        ? 'text-high-emphesis bg-gradient-to-r from-opaque-blue to-opaque-pink hover:from-blue hover:to-pink'
+                        ? 'text-high-emphesis bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple'
                         : 'text-secondary'
                       } flex items-center justify-center flex-1 px-2 py-2 text-lg rounded cursor-pointer select-none`
                     }
