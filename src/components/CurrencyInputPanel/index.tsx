@@ -160,9 +160,11 @@ export default function CurrencyInputPanel({
                   <div onClick={onMax} className="text-xs font-medium text-right cursor-pointer text-low-emphesis">
                     {renderBalance ? (
                       renderBalance(selectedCurrencyBalance)
-                    ) : (
+                    ) : (           
+
                       <>
-                        {i18n._(t`Balance:`)} {formatCurrencyAmount(selectedCurrencyBalance, 4)} {currency.symbol}
+                        {/* {i18n._(t`Balance:`)}  */}
+                        {selectedCurrencyBalance?.toSignificant(6, { groupSeparator: ',' }) || '0'} {currency?.symbol}
                       </>
                     )}
                   </div>
