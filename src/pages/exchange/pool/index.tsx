@@ -105,7 +105,7 @@ export default function Pool() {
       {/* <MainHeader /> */}
       {/* <SoulLogo /> */}
       {/* <br /> <br /> */}
-      <DoubleGlowShadowV2 opacity="0.6">
+      {/* <DoubleGlowShadowV2 opacity="0.6"> */}
         <Container maxWidth="2xl" className="space-y-3">
           <Alert
           title={i18n._(t`Liquidity Provider Rewards`)}
@@ -115,7 +115,7 @@ export default function Pool() {
           type="information"
         />
 
-          <div className="p-4 space-y-2 rounded bg-dark-900">
+          <div className="p-4 space-y-2 rounded bg-dark-1200">
             <div className="p-4 mb-00 space-y-3">
               <div className="text-center">
                 <Typography component="h1" variant="h2">
@@ -186,7 +186,7 @@ export default function Pool() {
             </div>
           </div>
         </Container>
-      </DoubleGlowShadowV2>
+      {/* </DoubleGlowShadowV2> */}
     </>
   )
 }
