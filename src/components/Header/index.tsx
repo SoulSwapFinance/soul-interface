@@ -73,7 +73,7 @@ function AppBar(): JSX.Element {
                             id={`pool-nav-link`}
                             className="w-full relative ml-6 md:p-2"
                           >
-                            {i18n._(t`POOL`)}
+                            {i18n._(t`LIQUIDITY`)}
                           </a>
                         </NavLink>
                       )}
