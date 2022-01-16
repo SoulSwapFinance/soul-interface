@@ -73,6 +73,14 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
           <Image src={ CHART } height="40px" width="40px" alt="chart icon" />
           </a>
         </NavLink>
+        <NavLink
+          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
+          href={'/bridge'}
+        >
+          <a className="flex px-4 py-6 items-center justify-center font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
+          <Image src={ BRIDGE } height="40px" width="40px" alt="chart icon" />
+          </a>
+        </NavLink>
       </div>
       </div>
 
