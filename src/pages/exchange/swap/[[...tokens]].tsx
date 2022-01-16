@@ -648,31 +648,31 @@ export default function Swap() {
                 <ExternalLink href={'https://discord.gg/DQjChB6Wa6'} target="_blank">
                   <a className="flex-span text-purple bg-dark-420 p-4 x-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
                     {/* <span>DISCORD</span> */}
-                    <Image src={ DISCORD } height="42px" width="42px" alt="discord icon" />
+                    <Image src={DISCORD} height="42px" width="42px" alt="discord icon" />
                   </a>
                 </ExternalLink>
                 <ExternalLink href={'https://twitter.com/SoulSwapFinance'} target="_blank">
                   <a className="flex-span text-purple bg-dark-420 p-4 x-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
                     {/* <span>TWITTER</span> */}
-                    <Image src={ TWITTER } height="42px" width="42px" alt="twitter icon" />
+                    <Image src={TWITTER} height="42px" width="42px" alt="twitter icon" />
                   </a>
                 </ExternalLink>
                 <ExternalLink href={'https://t.me/SoulSwapDeFi'} target="_blank">
                   <a className="flex-span text-purple bg-dark-420 p-4 x-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
                     {/* <span>TELEGRAM</span> */}
-                    <Image src={ TELEGRAM } height="42px" width="42px" alt="telegram icon" />
+                    <Image src={TELEGRAM} height="42px" width="42px" alt="telegram icon" />
                   </a>
                 </ExternalLink>
                 <ExternalLink href={'https://docs.soulswap.finance'} target="_blank">
                   <a className="flex-span text-purple bg-dark-420 p-4 x-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
                     {/* <span>TELEGRAM</span> */}
-                    <Image src={ DOCS } height="42px" width="42px" alt="documentation icon" />
+                    <Image src={DOCS} height="42px" width="42px" alt="documentation icon" />
                   </a>
                 </ExternalLink>
                 <ExternalLink href={'http://board.soulswap.finance'} target="_blank">
                   <a className="flex-span text-purple bg-dark-420 p-4 x-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
                     {/* <span>TELEGRAM</span> */}
-                    <Image src={ FORUM } height="42px" width="42px" alt="forum icon" />
+                    <Image src={FORUM} height="42px" width="42px" alt="forum icon" />
                   </a>
                 </ExternalLink>
               </FlexText>
@@ -684,8 +684,8 @@ export default function Swap() {
                         <span>Bonds</span>
                       </a> */}
           </div>
-                      <div className="flex mt-2 mb-4 p-1 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
-                      </div>
+          <div className="flex mt-2 mb-4 p-1 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
+          </div>
         </div>
 
         {/* <AutoColumn justify="space-between" className="py-5">
