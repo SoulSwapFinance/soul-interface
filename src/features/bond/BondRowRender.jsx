@@ -230,13 +230,13 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
         // get value of available, unstaked lp
         const aLpValue = await fetchUserLpValue(pid, token1, token2, result2)
         const f_aLpValue = Number(aLpValue).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') // format to 2 decimals + commas
-        setAvailableValue(f_aLpValue)
+        setAvailableValue(Number(aLpValue).toFixed(2).toString())
 
         // get value of staked lp (bonded lp)
         // const sLpValue = await fetchLpValue(token1, token2, result1?.[0]); 
         const sLpValue = await fetchUserLpValue(pid, token1, token2, result1?.[0])
         const f_sLpValue = Number(sLpValue).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') // format to 2 decimals + commas
-        setStakedLpValue(f_sLpValue);
+        setStakedLpValue(Number(sLpValue).toFixed(2).toString())
 
         return [staked, unstaked]
       } catch (err) {
@@ -623,9 +623,9 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     VALUE:&nbsp;{Number(stakedLpValue) !== 0 ? `$${stakedLpValue}` : '0'}
                   </Text>
                   <Text fontSize=".9rem" padding="0" color="#F36FFE" textAlign="right">
-                    {
-                      ' YTD: ' + (reached > 0 ? reached : '<0.0') + '%'
-                    }
+                    
+                    YTD:&nbsp;{Number(reached) > 0 ? `${reached}` : '<0.0'}%
+                
                     <br/>
                     {/* <br/> */}
                     { dailyRoi > 0 
