@@ -1,8 +1,9 @@
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/outline'
-import { CurrencyAmount, JSBI, Pair, Percent, Token } from '../../sdk'
+import { CurrencyAmount, JSBI, Pair, Percent, Token, USD } from '../../sdk'
 import React, { useState } from 'react'
 import { RowBetween, RowFixed } from '../Row'
 import { currencyId, unwrappedToken } from '../../functions/currency'
+import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 
 import Alert from '../Alert'
 import { AutoColumn } from '../Column'
@@ -16,10 +17,14 @@ import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useColor } from '../../hooks'
 import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
-import { useTokenBalance } from '../../state/wallet/hooks'
+import { useCurrencyBalance, useTokenBalance } from '../../state/wallet/hooks'
 import { useTotalSupply } from '../../hooks/useTotalSupply'
 import { classNames, formatNumberScale } from '../../functions'
 import { Transition } from '@headlessui/react'
+import { useSingleCallResult } from 'state/multicall/hooks'
+import { useCurrency } from 'hooks/Tokens'
+import { usePriceHelperContract } from 'features/bond/hooks/useContract'
+import { useUserInfo } from 'features/mines/hooks'
 
 interface PositionCardProps {
   pair: Pair
@@ -112,6 +117,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
   )
 }
 
+
 export default function FullPositionCard({ pair, border, stakedBalance }: PositionCardProps) {
   const { i18n } = useLingui()
   const router = useRouter()
@@ -126,6 +132,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
 
   const totalPoolTokens = useTotalSupply(pair.liquidityToken)
 
+  
   // if staked balance balance provided, add to standard liquidity amount
   const userPoolBalance = stakedBalance ? userDefaultPoolBalance?.add(stakedBalance) : userDefaultPoolBalance
 
@@ -150,6 +157,42 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
 
   const backgroundColor = useColor(pair?.token0)
 
+  const [depositValue, setDepositValue] = useState('')
+  const [withdrawValue, setWithdrawValue] = useState('')  
+  
+  const priceHelperContract = usePriceHelperContract()
+  
+  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
+  console.log(Number(rawSoulPrice))
+  const soulPrice = Number(rawSoulPrice) / 1E18
+  console.log('soul price:%s', soulPrice)
+  
+  const balance = userPoolBalance
+  // const stakedAmount = useUserInfo(farm, liquidityToken)
+  
+  let [data] = useV2PairsWithPrice([[currency0, currency1]])
+  let [state, liquidityToken, pairPrice] = data
+  
+  const balanceFiatValueRaw
+    = pair?.token1 ? Number(pairPrice) * Number(balance?.toSignificant())
+    : Number(soulPrice) * Number(balance?.toSignificant())
+  
+  const pooledAmountFiatValueRaw
+    = pair?.token1 ? Number(pairPrice) * Number(userPoolBalance?.toSignificant())
+    : Number(soulPrice) * Number(userPoolBalance?.toSignificant())
+  
+  const balanceFiatValue
+    = CurrencyAmount.fromRawAmount(
+      USD[chainId],
+      JSBI.BigInt(balanceFiatValueRaw.toFixed(USD[chainId].decimals).toBigNumber(USD[chainId].decimals))
+    )
+  
+  const pooledAmountFiatValue
+    = CurrencyAmount.fromRawAmount(
+      USD[chainId],
+      JSBI.BigInt(pooledAmountFiatValueRaw.toFixed(USD[chainId].decimals).toBigNumber(USD[chainId].decimals))
+    )
+  
   return (
     <div
       className="rounded bg-dark-800"
@@ -229,6 +272,14 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
               )}
             </div>
 
+            <div className="flex items-center justify-between">
+              <div>{i18n._(t`Deposited Value`)}:</div>
+              <div className="font-semibold">
+                ${userPoolBalance 
+                  ? pooledAmountFiatValue?.toSignificant(6, { groupSeparator: ',' }) // ?.toSignificant(4) */}
+                  : 0}
+              </div>
+            </div>
             <div className="flex items-center justify-between">
               <div>{i18n._(t`% Share`)}:</div>
               <div className="font-semibold">
