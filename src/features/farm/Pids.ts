@@ -19,19 +19,19 @@ export const InactivePids = [
   //   token1Address: tokens.SOUL,
   //   token2Address: tokens.FUSD,
   // },
-  {
-    // 600
-    pid: 44,
-    token1: 'FTM',
-    token2: 'LUX',
-    lpSymbol: 'LUX-FTM',
-    lpAddresses: {
-      4002: '',
-      250: '0x951BBB838e49F7081072895947735b0892cCcbCD',
-    },
-    token1Address: tokens.LUX,
-    token2Address: tokens.FTM,
-  },
+  // {
+  // // 0
+  // pid: 44,
+  // token1: 'FTM',
+  // token2: 'LUX',
+  // lpSymbol: 'LUX-FTM',
+  // lpAddresses: {
+  //  4002: '',
+  //  250: '0x951BBB838e49F7081072895947735b0892cCcbCD',
+  // },
+  // token1Address: tokens.LUX,
+  // token2Address: tokens.FTM,
+  // },
   {
     // 600
     pid: 45,

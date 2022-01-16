@@ -678,7 +678,7 @@ export const POOLS: AddressMap = {
           decimals: 18,
         },
       },
-      '0x951BBB838e49F7081072895947735b0892cCcbCD': {  // LUX-FTM
+ /*     '0x951BBB838e49F7081072895947735b0892cCcbCD': {  // LUX-FTM
         id: 44, // 0
         token0: {
           id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
@@ -692,7 +692,7 @@ export const POOLS: AddressMap = {
           symbol: 'LUX',
           decimals: 9,
         },
-      },
+      }, */
       // '0x46729c2AeeabE7774a0E710867df80a6E19Ef851': {  // LUX-DAI
       //   id: 45, // 0
       //   token0: {
