@@ -101,6 +101,7 @@ export default function Pool() {
           content="Soul liquidity pools are markets for trades between the two tokens, you can provide these tokens and become a liquidity provider to earn 0.25% of fees from trades."
         />
       </Head>
+
       {/* <MainHeader /> */}
       {/* <SoulLogo /> */}
       {/* <br /> <br /> */}
@@ -115,7 +116,7 @@ export default function Pool() {
         />
 
           <div className="p-4 space-y-2 rounded bg-dark-900">
-            <div className="p-4 mb-3 space-y-3">
+            <div className="p-4 mb-00 space-y-3">
               <div className="text-center">
                 <Typography component="h1" variant="h2">
                   {i18n._(t``)}
@@ -123,8 +124,17 @@ export default function Pool() {
                 </Typography>
               </div>
             </div>
-
+            <div className="flex mb-4 items-center justify-center">
+                  <Button variant="outlined" color="gradient" size="lg">
+                  <NavLink href={'/analytics/dashboard'}>
+                        <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                        Account Analytics and Accrued Fees <span> ↗</span>
+                        </a>
+                  </NavLink>
+                  </Button>
+              </div>
             <div className="grid grid-flow-row gap-3">
+                  <div className="mb-1 mt-1" />
               {!account ? (
                 <Web3Connect size="lg" color="gradient" className="w-full" />
               ) : v2IsLoading ? (
@@ -133,13 +143,6 @@ export default function Pool() {
                 </Empty>
               ) : allV2PairsWithLiquidity?.length > 0 ? (
                 <>
-                  <div className="flex mb-4 items-center justify-center">
-                  <NavLink href={'/analytics/dashboard'}>
-                        <a className="block text-pink p-2 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                        Account Analytics and Accrued Fees <span> ↗</span>
-                        </a>
-                  </NavLink>
-                </div>
                   {allV2PairsWithLiquidity.map((v2Pair) => (
                     <FullPositionCard
                       key={v2Pair.liquidityToken.address}
@@ -157,13 +160,19 @@ export default function Pool() {
                 <div className={classNames('grid gap-4', migrationSupported ? 'grid-cols-3' : 'grid-cols-2')}>
                   <Button
                     id="add-pool-button"
+                    variant="filled"
                     color="gradient"
                     className="grid items-center justify-center grid-flow-col gap-2 whitespace-nowrap"
                     onClick={() => router.push(`/exchange/add/${currencyId(NATIVE[chainId])}/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07`)}
                   >
                     {i18n._(t`Add`)}
                   </Button>
-                  <Button id="add-pool-button" color="gray" onClick={() => router.push(`/exchange/find`)}>
+                  <Button 
+                    id="add-pool-button"
+                    variant="filled"
+                    color="gradient" 
+                    onClick={() => router.push(`/exchange/find`)}
+                  >
                     {i18n._(t`Import`)}
                   </Button>
 
