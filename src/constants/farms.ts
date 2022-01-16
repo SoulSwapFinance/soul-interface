@@ -722,8 +722,8 @@ export const POOLS: AddressMap = {
           symbol: 'LUX',
           decimals: 9,
         },
-      },
-      '0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99': {  // FTM-WLUM
+      }
+/*      '0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99': {  // FTM-WLUM
         id: 47, // 500
         token0: {
           id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
@@ -738,5 +738,6 @@ export const POOLS: AddressMap = {
           decimals: 9,
         },
       }
+      */
     }
 }
