@@ -223,9 +223,6 @@ export default function Farm(): JSX.Element {
             {formatNumberScale(summTvl, true, 0)} */}
 
           {positions.length > 0 && (
-
-
-
             <Button
               color="blue"
               className="text-emphasis"
@@ -285,7 +282,7 @@ export default function Farm(): JSX.Element {
           term={term}
           inputProps={{
             className:
-              'relative w-full bg-transparent border border-transparent focus:border-gradient-r-blue-pink-dark-900 rounded placeholder-secondary focus:placeholder-primary font-bold text-base px-6 py-3.5',
+              'relative w-full bg-transparent border border-transparent focus:border-gradient-r-blue-purple-dark-900 rounded placeholder-secondary focus:placeholder-primary font-bold text-base px-6 py-3.5',
           }}
         />
         {/* <div className="flex items-center text-lg font-bold text-high-emphesis whitespace-nowrap">
@@ -295,7 +292,7 @@ export default function Farm(): JSX.Element {
           <MineList farms={filtered} term={term} /> */}
         <div className="flex items-center text-lg font-bold text-high-emphesis whitespace-nowrap">
           Farms{' '}
-          <div className="w-full h-0 ml-4 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis md:border-gradient-r-blue-pink-dark-800 opacity-20"></div>
+          <div className="w-full h-0 ml-4 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis md:border-gradient-r-blue-purple-dark-800 opacity-20"></div>
         </div>
 
         <MineList farms={result} term={term} filter={FILTER} />
