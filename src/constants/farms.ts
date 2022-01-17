@@ -678,7 +678,7 @@ export const POOLS: AddressMap = {
           decimals: 18,
         },
       },
- /*     '0x951BBB838e49F7081072895947735b0892cCcbCD': {  // LUX-FTM
+      '0x951BBB838e49F7081072895947735b0892cCcbCD': {  // LUX-FTM
         id: 44, // 0
         token0: {
           id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
@@ -692,22 +692,22 @@ export const POOLS: AddressMap = {
           symbol: 'LUX',
           decimals: 9,
         },
-      }, */
-      // '0x46729c2AeeabE7774a0E710867df80a6E19Ef851': {  // LUX-DAI
-      //   id: 45, // 0
-      //   token0: {
-      //     id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
-      //     name: 'Dai Stablecoin',
-      //     symbol: 'DAI',
-      //     decimals: 18,
-      //   },
-      //   token1: {
-      //     id: '0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b', // LUX
-      //     name: 'Luxor Money',
-      //     symbol: 'LUX',
-      //     decimals: 9,
-      //   },
-      // },
+      },
+      '0x46729c2AeeabE7774a0E710867df80a6E19Ef851': {  // LUX-DAI
+        id: 45, // 0
+         token0: {
+          id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
+          name: 'Dai Stablecoin',
+          symbol: 'DAI',
+          decimals: 18,
+        },
+         token1: {
+          id: '0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b', // LUX
+          name: 'Luxor Money',
+          symbol: 'LUX',
+          decimals: 9,
+        },
+      },
       '0x475a63154C3e85ac0F2CB453f0b5c63e4370333c': {  // LUX-SOUL
         id: 46, // 500
         token0: {
