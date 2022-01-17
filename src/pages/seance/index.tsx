@@ -1,7 +1,7 @@
 import { CurrencyAmount, JSBI, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS, ZERO } from '../../sdk'
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
 import React, { useEffect, useState } from 'react'
-import { SOUL, SEANCE, AURA } from '../../constants'
+import { SOUL, SEANCE } from '../../constants'
 
 import { Button } from '../../components/Button'
 import { ChainId } from '../../sdk'
@@ -9,7 +9,6 @@ import Head from 'next/head'
 import Dots from '../../components/Dots'
 import Image from 'next/image'
 import { Input as NumericalInput } from '../../components/NumericalInput'
-// import TransactionFailedModal from '../../components/TransactionFailedModal'
 import styled from 'styled-components'
 import { t } from '@lingui/macro'
 import { tryParseAmount } from '../../functions/parse'
@@ -19,13 +18,10 @@ import useSoulStakeManual from '../../hooks/useSoulStakeManual'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import useSoulVault from '../../hooks/useSoulVault'
-import AccountDetails from '../../components/AccountDetails'
 import useSoulSummoner from '../../features/farm/hooks/useSoulSummoner'
-import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 
 import { ethers } from 'ethers'
 import { useSoulSummonerContract } from '../../hooks'
-import { serialize } from '@ethersproject/transactions'
 import ModalHeader from '../../components/ModalHeader'
 import Typography from '../../components/Typography'
 import { SubmitButton } from '../../features/seance/SeanceStyles'
@@ -68,33 +64,17 @@ export default function SoulStake() {
   const { account, chainId } = useActiveWeb3React()
 
   // functions from SoulVault contract we're using
-  const {
-    // userInfo,
-    // totalShares,
-    // userSharePercOfTotal,
-    // calculateHarvestSoulRewards,
-    // userPendingRewards,
-    // deposit,
-    withdraw,
-    // withdrawAll,
-    // harvest,soul
-    // unstake,
-  } = useSoulVault()
+  const { withdraw } = useSoulVault()
   const { enter, leave, harvest } = useSoulStakeManual()
 
   const { userInfo, fetchStakeStats } = useSoulSummoner(0, '', '', '')
 
-  // ** Require Update: Need to make dynamic by fetching selected chain **
   const [stakedBal, setStakedBal] = useState('0')
   const soulBalance = useTokenBalance(account ?? undefined, SOUL[chainId])
   const seanceBalance = useTokenBalance(account ?? undefined, SEANCE[chainId])
 
   // show confirmation view before withdrawing SOUL
   const [showConfirmation, setShowConfirmation] = useState(false)
-
-  // const pendingSoul = userPendingRewards() // amount of soul is pending for user
-  // const percOfTotal = userSharePercOfTotal() // user percentage of pool
-
   const walletConnected = !!account
   const toggleWalletModal = useWalletModalToggle()
 
@@ -106,9 +86,7 @@ export default function SoulStake() {
   const [usingBalance, setUsingBalance] = useState(false)
 
   const balance = activeTab === 0 ? soulBalance : seanceBalance
-
   const formattedBalance = balance?.toSignificant(4)
-
   const parsedAmount = usingBalance ? balance : tryParseAmount(input, balance?.currency)
 
   // Approve summoner to move funds with `transferFrom`
@@ -140,7 +118,7 @@ export default function SoulStake() {
     }
   }
 
-  /**
+/**
  * Checks the amount of lpTokens the SoulSummoner contract holds
  * farm <Object> : the farm object
  * lpToken : the farm lpToken address
@@ -197,9 +175,6 @@ export default function SoulStake() {
 
   // WITHDRAWABLE AMOUNT
   const withdrawable =
-    // seanceBalance?.toFixed() >= Number(stakedBal)?.toString()
-    // SEANCE < STAKED
-
     hasMoreSeance ?
       Number(stakedBal)
         .toFixed(2)
@@ -212,57 +187,6 @@ export default function SoulStake() {
         // STAKED < SEANCE
         : 0
 
-  // ---------------------
-  //      SOUL VAULT
-  // ---------------------
-  // const [claiming, setClaiming] = useState(false)
-  const [bounty, setBounty] = useState(0)
-  // const [userShare, setUserShare] = useState()
-
-  // const userShares = async () => {
-  //   const shares = await calculateHarvestSoulRewards()
-  //   setUserShare(shares) // TODO: looking to grab only `shares` out of the array
-  // }
-
-  // // checks SOUL bounty funds available for harvest
-  // const updateBountyStats = async () => {
-  //   const pending = await calculateHarvestSoulRewards()
-  //   // const formattedPending = pending // TODO: format to `toSignificant(4)`
-  //   setBounty(bounty)
-  // }
-
-  // // will update bounty stats every 5 seconds
-  // useEffect(() => {
-  //   let timer = setTimeout(() => {
-  //     updateBountyStats()  // value
-  //   }, 3 * 1000) // delay
-
-  //   // this will clear Timeout
-  //   // when component unmount like in willComponentUnmount
-  //   // and show will not change to true
-  //   return () => {
-  //     clearTimeout(timer)
-  //   }
-  // })
-
-  /**
-   * @dev Calls `harvest` func of SoulVault
-   */
-  // const handleHarvest = async () => {
-  //   if (!walletConnected) {
-  //     toggleWalletModal()
-  //   } else {
-  //     setClaiming(true)
-  //     const success = await sendTx(() => harvest())
-  //     if (!success) {
-  //       setClaiming(false)
-  //       return
-  //     }
-
-  //     setClaiming(false)
-  //   }
-  // }
-
   const handleInput = (v: string) => {
     if (v.length <= INPUT_CHAR_LIMIT) {
       setUsingBalance(false)
@@ -274,19 +198,6 @@ export default function SoulStake() {
     setInput(parsedAmount ? parsedAmount.toSignificant(balance.currency.decimals).substring(0, INPUT_CHAR_LIMIT) : '')
     setUsingBalance(true)
   }
-
-  // convert seanceBalance to number and compare
-
-  // const withdrawable =  Number(seanceBalance) > Number(stakedBal) ? stakedBal : seanceBalance
-
-  // console.log('withdrawable', withdrawable)
-
-  // const parsedWithdrawalAmount = usingBalance ? withdrawable : tryParseAmount(input, balance?.currency)
-
-  // const handleClickMaxWithdrawal = () => {
-  //   setInput(parsedWithdrawalAmount.toLocaleString() ? parsedWithdrawalAmount.toLocaleString() : '') // .toSignificant(balance.currency.decimals).substring(0, INPUT_CHAR_LIMIT) : '')
-  //   setUsingBalance(true)
-  // }
 
   const insufficientFunds = (balance && balance.equalTo(ZERO)) || parsedAmount?.greaterThan(balance)
 
@@ -352,7 +263,6 @@ export default function SoulStake() {
     handleInput('')
     setPendingTx(false)
   }
-  // const summonerContract = useSoulSummonerContract()
 
   const { pendingSoul } = useSoulSummonerContract()
 
@@ -402,7 +312,7 @@ export default function SoulStake() {
         />
       </Head>
       {/* <DoubleGlowShadowV2 maxWidth={false} opacity={'0.3'}> */}
-      <div className="mb-8" />
+      <div className="mb-4 md:mb-8" />
         <Header />
         <div className="mt-2 mb-8" />
         <div className="flex flex-col w-full min-h-full">
@@ -410,68 +320,12 @@ export default function SoulStake() {
             <div className="flex flex-col w-full max-w-xl mt-auto mb-2">
               <div className="flex max-w-lg">
 
-                {/* SIDE BALANCE BOARD */}
-                {/* <div className="w-full max-w-xl mx-auto md:mx-0 md:ml-6 md:block md:w-72">
-            <div className="flex flex-col w-full px-4 pt-6 pb-5 rounded bg-dark-900 md:px-8 md:pt-7 md:pb-9">
-              <div className="flex flex-wrap">
-                {/* SOUL BOUNTY *}
-                <p className="mb-3 text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
-                  {i18n._(t`Snatch Bounty`)}
-                </p>
-                <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
-                  {i18n._(t`If withdrawing before 72hrs has passed, you will be charged 1% of your stake!`)}
-                </div>
-                <Button
-                  className={`${buttonStyle} text-high-emphesis bg-purple hover:bg-opacity-90`}
-                  disabled={walletConnected === !account}
-                  onClick={handleHarvest}
-                >
-                  {claiming ? <Dots>Snatching {bounty} SOUL </Dots> : 
-                  
-                  <Balance 
-                    value = {bounty / (10**18)} 
-                    decimals = {4}
-                    unit = " SOUL"
-                    />
-                  
-                  }
-                </Button>
-              </div> 
-            </div>
-          </div> */}
               </div>
               <div className="flex flex-col justify-center">
                 <div className="flex flex-col w-full max-w-xl mx-auto mb-4">
                   <div>
                     {/* <TransactionFailedModal isOpen={modalOpen} onDismiss={() => setModalOpen(false)} /> */}
                     <div className="w-full max-w-xl px-3 pt-2 pb-6 rounded bg-dark-900 md:pb-9 md:pt-4 md:px-8">
-                      {/* AUTOMATIC OR MANUAL STAKING */}
-                      {/* <div className="flex w-full rounded h-14 bg-dark-800">
-                  <div
-                    className="h-full w-6/12 p-0.5"
-                    onClick={() => {
-                      userShares()
-                      calculateHarvestSoulRewards()
-                      setAutoStaking(false)
-                    }}
-                  >
-                    <div className={!autoStaking ? activeTabStyle : inactiveTabStyle}>
-                      <p>{i18n._(t`Manual Reinvesting`)}</p>
-                    </div>
-                  </div>
-                  <div
-                    className="h-full w-6/12 p-0.5"
-                    onClick={() => {
-                      setAutoStaking(true)
-                    }}
-                  >
-                    <div className={autoStaking ? activeTabStyle : inactiveTabStyle}>
-                      <p>{i18n._(t`Automatic Reinvesting`)}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <br /> */}
                       {/* STAKING OR UNSTAKING */}
                       <div className="flex w-full rounded h-14 bg-dark-800">
                         <div
@@ -510,16 +364,6 @@ export default function SoulStake() {
                           }
                         </p>
                       </div>
-                      {/* <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
-                    {autoStaking
-                      ? 'When someone snatches the SOUL bounty, your pending SOUL gets re-invested automatically!'
-                      : 'You will need to manually claim and deposit your pending SOUL to re-invest into your stake.'}
-                  </div> */}
-                      {/* <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
-                    {autoStaking
-                      ? 'When withdrawing before 72hrs has passed, you will be charged 1% of your stake!'
-                      : ''}
-                  </div> */}
 
                       <StyledNumericalInput
                         value={input}
@@ -661,8 +505,6 @@ export default function SoulStake() {
                       </div>
                       <div className="flex flex-col flex-grow md:mb-3">
                         <div className="flex items-center text-center space-x-4">
-
-                          {/* <div className="flex items-center ml-8 space-x-4 md:ml-0"> */}
                           <Image
                             className="max-w-10 md:max-w-12 mb-1 mt-4 rounded"
                             src="/images/tokens/soul.png"
