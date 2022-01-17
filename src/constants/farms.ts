@@ -483,81 +483,81 @@ export const POOLS: AddressMap = {
           decimals: 18,
         },
       },
-      // '0x26a30b02A8DFb3f573E3F881D04258461Cae47Db': {  // SEANCE-BOO
-      //   id: 31, // 200
-      //   token0: {
-      //     id: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
-      //     name: 'Seance Circle',
-      //     symbol: 'SEANCE',
-      //     decimals: 18,
-      //   },
-      //   token1: {
-      //     id: '0x841fad6eae12c286d1fd18d1d525dffa75c7effe', // BOO
-      //     name: 'SpookyToken',
-      //     symbol: 'BOO',
-      //     decimals: 18,
-      //   },
-      // },
-      // '0xa2cFc18F3A41E158DA173be0e4785F017Ff92a6e': {  // SEANCE-ZOO
-      //   id: 32, // 200
-      //   token0: {
-      //     id: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
-      //     name: 'Seance Circle',
-      //     symbol: 'SEANCE',
-      //     decimals: 18,
-      //   },
-      //   token1: {
-      //     id: '0x09e145A1D53c0045F41aEEf25D8ff982ae74dD56', // ZOO
-      //     name: 'Zoo Coin',
-      //     symbol: 'ZOO',
-      //     decimals: 0,
-      //   },
-      // },
-      // '0x75aE2E7B4f3a4b5F9048AD6966f6e975e510aD03': {  // SEANCE-TOMB
-      //   id: 33, // 200
-      //   token0: {
-      //     id: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
-      //     name: 'Seance Circle',
-      //     symbol: 'SEANCE',
-      //     decimals: 18,
-      //   },
-      //   token1: {
-      //     id: '0x6c021Ae822BEa943b2E66552bDe1D2696a53fbB7', // TOMB
-      //     name: 'Tomb Token',
-      //     symbol: 'TOMB',
-      //     decimals: 18,
-      //   },
-      // },
-      // '0xc0fEd4A6EDef23da7fF766D24F17Ecf454C16D25': {  // SEANCE-ICE
-      //   id: 34, // 200
-      //   token0: {
-      //     id: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
-      //     name: 'Seance Circle',
-      //     symbol: 'SEANCE',
-      //     decimals: 18,
-      //   },
-      //   token1: {
-      //     id: '0xf16e81dce15B08F326220742020379B855B87DF9', // ICE
-      //     name: 'IceToken',
-      //     symbol: 'ICE',
-      //     decimals: 18,
-      //   },
-      // },
-      // '0x63A1b4E3f210db7f1d4Ae7d29Bc0BC7F611e713a': {  // SEANCE-SPELL
-      //   id: 35, // 200
-      //   token0: {
-      //     id: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
-      //     name: 'Seance Circle',
-      //     symbol: 'SEANCE',
-      //     decimals: 18,
-      //   },
-      //   token1: {
-      //     id: '0x468003B688943977e6130F4F68F23aad939a1040', // SPELL
-      //     name: 'Spell Token',
-      //     symbol: 'SPELL',
-      //     decimals: 18,
-      //   },
-      // },
+      '0x26a30b02A8DFb3f573E3F881D04258461Cae47Db': {  // SEANCE-BOO
+         id: 31, // 200
+          token0: {
+           id: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
+           name: 'Seance Circle',
+            symbol: 'SEANCE',
+           decimals: 18,
+         },
+           token1: {
+            id: '0x841fad6eae12c286d1fd18d1d525dffa75c7effe', // BOO
+            name: 'SpookyToken',
+            symbol: 'BOO',
+            decimals: 18,
+          },
+         },
+        '0xa2cFc18F3A41E158DA173be0e4785F017Ff92a6e': {  // SEANCE-ZOO
+          id: 32, // 200
+           token0: {
+            id: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
+            name: 'Seance Circle',
+            symbol: 'SEANCE',
+            decimals: 18,
+          },
+           token1: {
+            id: '0x09e145A1D53c0045F41aEEf25D8ff982ae74dD56', // ZOO
+            name: 'Zoo Coin',
+            symbol: 'ZOO',
+            decimals: 0,
+          },
+         },
+      '0x75aE2E7B4f3a4b5F9048AD6966f6e975e510aD03': {  // SEANCE-TOMB
+          id: 33, // 200
+           token0: {
+             id: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
+             name: 'Seance Circle',
+             symbol: 'SEANCE',
+             decimals: 18,
+          },
+            token1: {
+             id: '0x6c021Ae822BEa943b2E66552bDe1D2696a53fbB7', // TOMB
+             name: 'Tomb Token',
+             symbol: 'TOMB',
+             decimals: 18,
+          },
+        },
+      '0xc0fEd4A6EDef23da7fF766D24F17Ecf454C16D25': {  // SEANCE-ICE
+           id: 34, // 200
+            token0: {
+             id: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
+             name: 'Seance Circle',
+             symbol: 'SEANCE',
+             decimals: 18,
+           },
+            token1: {
+             id: '0xf16e81dce15B08F326220742020379B855B87DF9', // ICE
+             name: 'IceToken',
+             symbol: 'ICE',
+             decimals: 18,
+         },
+        },
+      '0x63A1b4E3f210db7f1d4Ae7d29Bc0BC7F611e713a': {  // SEANCE-SPELL
+         id: 35, // 200
+          token0: {
+           id: '0x124b06c5ce47de7a6e9efda71a946717130079e6', // SEANCE
+           name: 'Seance Circle',
+           symbol: 'SEANCE',
+           decimals: 18,
+          },
+          token1: {
+           id: '0x468003B688943977e6130F4F68F23aad939a1040', // SPELL
+           name: 'Spell Token',
+           symbol: 'SPELL',
+           decimals: 18,
+        },
+      },
       '0x778F0d5515A3E78D1DD191f30835420c0275bde1': {  // SOUL-WETH
         id: 36, // 1200
         token0: {
@@ -678,7 +678,7 @@ export const POOLS: AddressMap = {
           decimals: 18,
         },
       },
- /*     '0x951BBB838e49F7081072895947735b0892cCcbCD': {  // LUX-FTM
+      '0x951BBB838e49F7081072895947735b0892cCcbCD': {  // LUX-FTM
         id: 44, // 0
         token0: {
           id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
@@ -692,22 +692,22 @@ export const POOLS: AddressMap = {
           symbol: 'LUX',
           decimals: 9,
         },
-      }, */
-      // '0x46729c2AeeabE7774a0E710867df80a6E19Ef851': {  // LUX-DAI
-      //   id: 45, // 0
-      //   token0: {
-      //     id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
-      //     name: 'Dai Stablecoin',
-      //     symbol: 'DAI',
-      //     decimals: 18,
-      //   },
-      //   token1: {
-      //     id: '0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b', // LUX
-      //     name: 'Luxor Money',
-      //     symbol: 'LUX',
-      //     decimals: 9,
-      //   },
-      // },
+      },
+      '0x46729c2AeeabE7774a0E710867df80a6E19Ef851': {  // LUX-DAI
+        id: 45, // 0
+         token0: {
+          id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
+          name: 'Dai Stablecoin',
+          symbol: 'DAI',
+          decimals: 18,
+        },
+         token1: {
+          id: '0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b', // LUX
+          name: 'Luxor Money',
+          symbol: 'LUX',
+          decimals: 9,
+        },
+      },
       '0x475a63154C3e85ac0F2CB453f0b5c63e4370333c': {  // LUX-SOUL
         id: 46, // 500
         token0: {
