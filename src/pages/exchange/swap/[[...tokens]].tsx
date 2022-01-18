@@ -640,39 +640,39 @@ export default function Swap() {
             </div>
           </div>
           <div className="flex-span justify-center">
-            <a className="flex justify-center text-white p-4 mb-0 mt-4 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
+            <a className="flex justify-center text-white p-1 mb-0 mt-0 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
               {/* <span>FOLLOW US</span> */}
             </a>
             <a className="flex-col justify-center bg-dark-800 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
               <FlexText justify="space-between">
                 <ExternalLink href={'https://discord.gg/DQjChB6Wa6'} target="_blank">
-                  <a className="flex-span text-purple bg-dark-420 p-4 x-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
-                    {/* <span>DISCORD</span> */}
-                    <Image src={DISCORD} height="42px" width="42px" alt="discord icon" />
+                  <a className="flex-span text-purple bg-dark-800 p-1 md:p-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
+                    <span>DISCORD</span>
+                    {/* <Image src={DISCORD} height="42px" width="42px" alt="discord icon" /> */}
                   </a>
                 </ExternalLink>
                 <ExternalLink href={'https://twitter.com/SoulSwapFinance'} target="_blank">
-                  <a className="flex-span text-purple bg-dark-420 p-4 x-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
-                    {/* <span>TWITTER</span> */}
-                    <Image src={TWITTER} height="42px" width="42px" alt="twitter icon" />
+                  <a className="flex-span text-purple bg-dark-800 p-1 md:p-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
+                    <span>TWITTER</span>
+                    {/* <Image src={TWITTER} height="42px" width="42px" alt="twitter icon" /> */}
                   </a>
                 </ExternalLink>
                 <ExternalLink href={'https://t.me/SoulSwapDeFi'} target="_blank">
-                  <a className="flex-span text-purple bg-dark-420 p-4 x-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
-                    {/* <span>TELEGRAM</span> */}
-                    <Image src={TELEGRAM} height="42px" width="42px" alt="telegram icon" />
+                  <a className="flex-span text-purple bg-dark-800 p-1 md:p-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
+                    <span>TELEGRAM</span>
+                    {/* <Image src={TELEGRAM} height="42px" width="42px" alt="telegram icon" /> */}
                   </a>
                 </ExternalLink>
-                <ExternalLink href={'https://docs.soulswap.finance'} target="_blank">
-                  <a className="flex-span text-purple bg-dark-420 p-4 x-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
-                    {/* <span>TELEGRAM</span> */}
+                {/* <ExternalLink href={'https://docs.soulswap.finance'} target="_blank">
+                  <a className="flex-span text-purple bg-dark-800 p-1 md:p-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
+                    <span>DOCS</span>
                     <Image src={DOCS} height="42px" width="42px" alt="documentation icon" />
                   </a>
-                </ExternalLink>
+                </ExternalLink> */}
                 <ExternalLink href={'http://board.soulswap.finance'} target="_blank">
-                  <a className="flex-span text-purple bg-dark-420 p-4 x-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
-                    {/* <span>TELEGRAM</span> */}
-                    <Image src={FORUM} height="42px" width="42px" alt="forum icon" />
+                  <a className="flex-span text-purple bg-dark-800 p-1 md:p-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
+                    <span>FEEDBACK</span>
+                    {/* <Image src={FORUM} height="42px" width="42px" alt="forum icon" /> */}
                   </a>
                 </ExternalLink>
               </FlexText>
@@ -683,8 +683,8 @@ export default function Swap() {
                         <a className="flex text-pink mt-4 mb-4 bg-dark-700 ml-3 p-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
                         <span>Bonds</span>
                       </a> */}
+          <div className="flex mt-0 mb-0 p-1 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
           </div>
-          <div className="flex mt-2 mb-4 p-1 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
           </div>
         </div>
 
