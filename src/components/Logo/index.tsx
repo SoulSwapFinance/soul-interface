@@ -23,6 +23,7 @@ const Logo: FC<LogoProps> = ({ srcs, width, height, style, alt = '', className, 
   return (
     <div className="rounded" style={{ width, height }}>
       <Image
+        unoptimized
         src={src || 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/unknown.png'}
         loader={cloudinaryLoader}
         onError={() => {
@@ -34,7 +35,7 @@ const Logo: FC<LogoProps> = ({ srcs, width, height, style, alt = '', className, 
         alt={alt}
         layout="fixed"
         className={classNames('rounded', className)}
-        style={style}
+        // style={style}
         {...rest}
       />
     </div>
