@@ -100,12 +100,12 @@ export default function TokenStatsModal(): JSX.Element | null {
   let seanceInfo = useTokenInfo(useSeanceContract())
   const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
   console.log(Number(rawSoulPrice))
-  const soulPrice = formatCurrency(Number(rawSoulPrice) / 1E18, 3)
+  const soulPrice = formatCurrency(Number(rawSoulPrice) / 1E18, 2)
   console.log(soulPrice)
 
   const rawLuxPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'])?.result
   console.log(Number(rawLuxPrice))
-  const luxPrice = formatCurrency(Number(rawLuxPrice) / 1E18, 2)
+  const luxPrice = formatCurrency(Number(rawLuxPrice) / 1E18, 0)
   console.log(luxPrice)
 
   function getSummaryLine(title, value) {
@@ -359,7 +359,7 @@ export default function TokenStatsModal(): JSX.Element | null {
           <Typography weight={700}>{`Supply & Market Cap`}</Typography>
         </div>
       </div>
-      <div className="flex flex-col flex-nowrap gap-1 -m-1">
+      <div className="flex flex-col mt-2 flex-nowrap gap-1 -m-1">
         {getSummaryLine(
           <div className="flex items-center">
             <Typography variant="sm" className="flex items-center py-0.5">
