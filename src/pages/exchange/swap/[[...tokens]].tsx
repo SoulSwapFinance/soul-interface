@@ -412,7 +412,7 @@ export default function Swap() {
       />
       {/* <SwapBanner /> */}
       {/* <SoulLogo />       */}
-      <DoubleGlowShadowV2 opacity="0.6">
+      <DoubleGlowShadowV2 opacity="0.75">
         <div id="swap-page" className="mt-4 w-full max-w-2xl p-4 space-y-4 rounded bg-dark-900 z-1">
           {/* <div id="swap-page" className={`grid grid-cols-1 gap-2 rounded z-4 sm:m-6`}> */}
           {/* <div className={`grid grid-cols-1 lg:grid-cols-1 space-y-4 lg:space-x-4 lg:space-y-0`}> */}
@@ -515,7 +515,7 @@ export default function Swap() {
                   id="swap-currency-output"
                 />
                 {Boolean(trade) && (
-                  <div className="p-1 -mt-2  rounded-b-md bg-dark-800">
+                  <div className="p-1 -mt-2 rounded-b-md bg-dark-800">
                     <TradePrice
                       price={trade?.executionPrice}
                       showInverted={showInverted}
@@ -711,7 +711,7 @@ export default function Swap() {
                 width={"100%"}
             />
         </AutoColumn> */}
-        <DoubleGlowShadowV2 opacity="0.6">
+        {/* <DoubleGlowShadowV2 opacity="0.6"> */}
           {/* <div className="flex text-blue items-center px-4">
             <NavLink href="/bridge">
               <a className="flex items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
@@ -722,7 +722,7 @@ export default function Swap() {
           {/* <div className="flex mb-4 mt-4 items-center px-4 bg-dark-800"> */}
 
           {/* </div> */}
-        </DoubleGlowShadowV2>
+        {/* </DoubleGlowShadowV2> */}
       </DoubleGlowShadowV2>
 
       {/* </div> */}
