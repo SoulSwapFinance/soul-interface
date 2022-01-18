@@ -6,6 +6,7 @@ import { Currency, CurrencyAmount, JSBI, Token, TradeType, Trade as V2Trade, SOU
 import Column, { AutoColumn } from '../../../components/Column'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useAllTokens, useCurrency } from '../../../hooks/Tokens'
+import styled from 'styled-components'
 import {
   useDefaultsFromURLSearch,
   useDerivedSwapInfo,
@@ -60,6 +61,12 @@ import TWITTER from 'assets/icons/twitter.svg'
 import TELEGRAM from 'assets/icons/telegram.svg'
 import DOCS from 'assets/icons/docs.svg'
 import FORUM from 'assets/icons/discussion.svg'
+
+const HideOnMobile = styled.div`
+@media screen and (max-width: 500px) {
+  display: none;
+}
+`;
 
 export default function Swap() {
   const { i18n } = useLingui()
@@ -646,31 +653,33 @@ export default function Swap() {
             <a className="flex-col justify-center bg-dark-800 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
               <FlexText justify="space-between">
                 <ExternalLink href={'https://discord.gg/DQjChB6Wa6'} target="_blank">
-                  <a className="flex-span text-purple bg-dark-1000 p-1 md:p-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                  <a className="flex-span text-purple bg-dark-1000 p-1 md:p-4 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                     <span>DISCORD</span>
                     {/* <Image src={DISCORD} height="42px" width="42px" alt="discord icon" /> */}
                   </a>
                 </ExternalLink>
                 <ExternalLink href={'https://twitter.com/SoulSwapFinance'} target="_blank">
-                  <a className="flex-span text-purple bg-dark-1000 p-1 md:p-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                  <a className="flex-span text-purple bg-dark-1000 p-1 md:p-4 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                     <span>TWITTER</span>
                     {/* <Image src={TWITTER} height="42px" width="42px" alt="twitter icon" /> */}
                   </a>
                 </ExternalLink>
                 <ExternalLink href={'https://t.me/SoulSwapDeFi'} target="_blank">
-                  <a className="flex-span text-purple bg-dark-1000 p-1 md:p-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                  <a className="flex-span text-purple bg-dark-1000 p-1 md:p-4 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                     <span>TELEGRAM</span>
                     {/* <Image src={TELEGRAM} height="42px" width="42px" alt="telegram icon" /> */}
                   </a>
                 </ExternalLink>
-                {/* <ExternalLink href={'https://docs.soulswap.finance'} target="_blank">
-                  <a className="flex-span text-purple bg-dark-1000 p-1 md:p-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
-                    <span>DOCS</span>
-                    <Image src={DOCS} height="42px" width="42px" alt="documentation icon" />
+                <HideOnMobile>
+                <ExternalLink href={'https://docs.soulswap.finance'} target="_blank">
+                  <a className="flex-span text-purple bg-dark-1000 p-1 md:p-4 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                    <span>DOCUMENTATION</span>
+                    {/* <Image src={DOCS} height="42px" width="42px" alt="documentation icon" /> */}
                   </a>
-                </ExternalLink> */}
+                </ExternalLink>
+                </HideOnMobile>
                 <ExternalLink href={'http://board.soulswap.finance'} target="_blank">
-                  <a className="flex-span text-purple bg-dark-1000 p-1 md:p-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                  <a className="flex-span text-purple bg-dark-1000 p-1 md:p-4 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
                     <span>FEEDBACK</span>
                     {/* <Image src={FORUM} height="42px" width="42px" alt="forum icon" /> */}
                   </a>
