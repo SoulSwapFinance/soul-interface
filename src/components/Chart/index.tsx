@@ -283,7 +283,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
   return (
     <>
 
-      <div className="flex items-center justify-between flex-col lg:flex-row space-x-4 min-h-[40px] xl:ml-24 xl:mr-24 lg:mt-4 mb-0 ">
+      <div className="flex items-center justify-between flex-col lg:flex-row space-x-4 min-h-[40px] xl:ml-4 xl:mr-4 mb-0">
         {/* <div className="text-4xl font-black text-gray-200">{(lastClose || 0).toFixed(2)}</div>
         <PeriodChooser period={candlePeriod} onChoose={(period) => setCandlePeriod(period)} />
       </div> */}
@@ -321,7 +321,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
               </div>
             )} */}
       </div>
-      <div className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2">
+      {/* <div className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2">
       <div className="hidden sm:flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2">
       <CurrencyLogo currency={outputCurrency} size={'30px'} className={'shadow'} />
       <div className="text-lg font-medium text-h">/</div>
@@ -336,11 +336,11 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
         <div className="flex items-center space-x-2">
         <div className="text-lg font-medium text-h">ANALYTICS</div>
         </div>
-      </a>
+      </a> */}
 
       {/* CREATE PAIR OPTION  */}
 
-      {inputCurrency?.isNative ?
+      {/* {inputCurrency?.isNative ?
         <a
           href={`https://app.soulswap.finance/add/FTM/${outputCurrency.address}`}
           target="_blank"
@@ -374,15 +374,8 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
             </div>
           </a>
         :   'https://app.soulswap.finance/add/FTM/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'
-    }
-
-      </div>
-
-
-
-
-
-
+    } */}
+      {/* </div> */}
     </>
   )
 }
