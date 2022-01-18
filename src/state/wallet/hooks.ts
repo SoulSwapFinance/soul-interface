@@ -6,9 +6,11 @@ import { Interface } from '@ethersproject/abi'
 import { isAddress } from '../../functions/validate'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useAllTokens } from '../../hooks/Tokens'
-import { useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useMulticall2Contract } from '../../hooks/useContract'
 import { TokenBalancesMap } from './types'
+import Web3 from 'web3'
+import { RPC } from 'connectors'
 
 /**
  * Returns a map of the given addresses to their eventually consistent ETH balances.
@@ -147,6 +149,54 @@ export function useAllTokenBalances(): TokenBalancesMap {
   const allTokensArray = useMemo(() => Object.values(allTokens ?? {}), [allTokens])
   return useTokenBalances(account ?? undefined, allTokensArray)
 }
+
+export function useMultichainCurrencyBalance(
+  chainId?: number,
+  account?: string,
+  currency?: Currency
+): CurrencyAmount<Currency> | undefined {
+  const { chainId: fantomChainId } = useActiveWeb3React()
+  const fantomBalance = useCurrencyBalance(
+    chainId == fantomChainId && account,
+    chainId == fantomChainId && currency
+  )
+  const [value, setValue] = useState(null)
+
+  const getBalance = useCallback(() => {
+    const web3 = new Web3(RPC[chainId])
+    if (currency.isNative) {
+      web3.eth.getBalance(account).then((response) => {
+        const amount = CurrencyAmount.fromRawAmount(currency, response || 0)
+        setValue(amount)
+      })
+    } else if (currency.isToken) {
+      let contract = new web3.eth.Contract(ERC20_ABI as any, currency.address)
+      contract.methods
+        .balanceOf(account)
+        .call()
+        .then((response) => {
+          const amount = CurrencyAmount.fromRawAmount(currency, response || 0)
+          setValue(amount)
+        })
+        .catch((ex) => {
+          console.error(ex)
+        })
+    }
+  }, [account, chainId, currency])
+
+  useEffect(() => {
+    if (account && chainId && currency && chainId != fantomChainId) {
+      getBalance()
+    } else {
+      setValue(null)
+    }
+  }, [account, chainId, currency, getBalance, fantomChainId])
+
+  return useMemo(() => {
+    return chainId == fantomChainId ? fantomBalance : value
+  }, [chainId, fantomBalance, fantomChainId, value])
+}
+
 
 // TODO: Replace
 // get the total owned, unclaimed, and unharvested UNI for account
