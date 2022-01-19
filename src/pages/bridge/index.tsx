@@ -24,7 +24,7 @@ const Bridge = () => {
             frameBorder={"none"}
             title={"BRIDGE"}
             src={'https://bridge.soulswap.finance/bridge'}
-            height={'600'}
+            height={'720'}
             width={"100%"} />
         {/* </div> */}
       </div>
