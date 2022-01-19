@@ -172,6 +172,7 @@ const MineListItem2 = ({ farm, ...rest }) => {
           key={farm.id}
           isOpen={selectedFarm == farm.id}
           onDismiss={() => setSelectedFarm(null)}
+          roiPerHour={roiPerHour}
           roiPerDay={roiPerDay}
           roiPerMonth={roiPerMonth}
           roiPerYear={roiPerYear}
