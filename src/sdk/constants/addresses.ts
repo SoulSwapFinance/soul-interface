@@ -5,169 +5,133 @@ export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '0xa9EC396a1b709689e98DaB9eAf4f18A913775d39',
   [ChainId.FANTOM]: '0x1120e150dA9def6Fe930f4fEDeD18ef57c0CA7eF',
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.MOONRIVER]: ''
-
+  [ChainId.FANTOM_TESTNET]: ''
 }
 
 export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '0x1b4df4D7E63B125f3a01fd5598E8E8458e519255',
   [ChainId.FANTOM]: '0x6b3d631B87FE27aF29efeC61d2ab8CE4d621cCBF',
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.MOONRIVER]: ''
-
+  [ChainId.FANTOM_TESTNET]: ''
 }
 
 export const SOUL_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07',
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.MOONRIVER]: ''
-
+  [ChainId.FANTOM_TESTNET]: ''
 }
 
 export const SEANCE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', // SEANCE
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.MOONRIVER]: ''
-
+  [ChainId.FANTOM_TESTNET]: ''
 }
 
 export const MASTERCHEF_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B', // Summoner
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.MOONRIVER]: ''
-
+  [ChainId.FANTOM_TESTNET]: ''
 }
 
 export const SUMMONER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B', // Summoner
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.MOONRIVER]: ''
-
+  [ChainId.FANTOM_TESTNET]: ''
 }
 
 export const SOUL_SUMMONER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B', // Summoner
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.MOONRIVER]: ''
-
+  [ChainId.FANTOM_TESTNET]: ''
 }
 
 export const SOUL_CIRCLE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x5063Fc9D759B5b03DD5fBC0B882b5F68CF881C32', // Summoner
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.MOONRIVER]: ''
-
+  [ChainId.FANTOM_TESTNET]: ''
 }
 
 export const SOUL_VAULT_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B', // Summoner
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.MOONRIVER]: ''
-
+  [ChainId.FANTOM_TESTNET]: ''
 }
 
 export const COFFIN_BOX_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xB9c7c6368a69b61508a556bd539eb2b8C351d27A',
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.MOONRIVER]: ''
-
+  [ChainId.FANTOM_TESTNET]: ''
 }
 
 export const ENCHANT_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a',
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.MOONRIVER]: ''
-
+  [ChainId.FANTOM_TESTNET]: ''
 }
 
 export const ENCHANT_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x62acBC5E5501374D6e462a095B48003Eaac3593C',
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.MOONRIVER]: ''
-
+  [ChainId.FANTOM_TESTNET]: ''
 }
 
 export const AURA_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x1D549636104Cc5cA79773E7D002AfE1FD5A03497',
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.MOONRIVER]: ''
-
+  [ChainId.FANTOM_TESTNET]: ''
 }
 
 export const REAPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '',
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.MOONRIVER]: ''
-
+  [ChainId.FANTOM_TESTNET]: ''
 }
 
 export const TIMELOCK_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '',
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.MOONRIVER]: ''
-
+  [ChainId.FANTOM_TESTNET]: ''
 }
 
 export const SUMMONER_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xa224a5D96E58E3dae89D0e4775444A329E67774c',
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.MOONRIVER]: ''
-
+  [ChainId.FANTOM_TESTNET]: ''
 }
 
 export const SOUL_GUIDE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x5A6B3Ce2736E9B731Fba73262884016b50c39184', // JUL 27TH
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.MOONRIVER]: ''
-
+  [ChainId.FANTOM_TESTNET]: ''
 }
 
 export const PRICE_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x51445B73852952128bFCAE65fdd889881D8d87Bd',
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.MOONRIVER]: ''
+  [ChainId.FANTOM_TESTNET]: ''
 }
 
 export const HARVEST_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xb9e5f6152b797280c8C3427947780ce5c4a55b08',
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.MOONRIVER]: ''
+  [ChainId.FANTOM_TESTNET]: ''
 }
 
 export const USDC_ADDRESS: AddressMap = {
@@ -183,7 +147,7 @@ export const USDC_ADDRESS: AddressMap = {
   // [ChainId.XDAI]: '0xDDAfbb505ad214D7b80b1f830fcCc89B60fb7A83',
   // [ChainId.ARBITRUM]: '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8',
   // [ChainId.AVALANCHE]: '0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664',
-  [ChainId.MOONRIVER]: '0xE3F5a90F9cb311505cd691a46596599aA1A0AD7D',
+  // [ChainId.MOONRIVER]: '0xE3F5a90F9cb311505cd691a46596599aA1A0AD7D',
 }
 
 export const DAI_ADDRESS: AddressMap = {
@@ -203,7 +167,7 @@ export const USD_ADDRESS: AddressMap = {
   // [ChainId.XDAI]: USDC_ADDRESS[ChainId.XDAI],
   // [ChainId.ARBITRUM]: USDC_ADDRESS[ChainId.ARBITRUM],
   // [ChainId.AVALANCHE]: USDC_ADDRESS[ChainId.AVALANCHE],
-  [ChainId.MOONRIVER]: USDC_ADDRESS[ChainId.MOONRIVER],
+  // [ChainId.MOONRIVER]: USDC_ADDRESS[ChainId.MOONRIVER],
   // [ChainId.CELO]: '0x765DE816845861e75A25fCA122bb6898B8B1282a',
 }
 
@@ -251,7 +215,7 @@ export const WNATIVE_ADDRESS: AddressMap = {
   // [ChainId.OKEX_TESTNET]: '0x2219845942d28716c0F7C605765fABDcA1a7d9E0',
   // [ChainId.CELO]: '0x471EcE3750Da237f93B8E339c536989b8978a438',
   // [ChainId.PALM]: '0xF98cABF0a963452C5536330408B2590567611a71',
-  [ChainId.MOONRIVER]: '0xf50225a84382c74CbdeA10b0c176f71fc3DE0C4d',
+  // [ChainId.MOONRIVER]: '0xf50225a84382c74CbdeA10b0c176f71fc3DE0C4d',
   // [ChainId.FUSE]: '0x0BE9e53fd7EDaC9F859882AfdDa116645287C629',
 }
 

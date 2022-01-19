@@ -3,7 +3,7 @@ import { ChainId } from '../sdk'
 const Fantom = '/images/networks/fantom-network.jpg'
 const Mainnet = '/images/networks/mainnet-network.jpg'
 const Bsc = '/images/networks/bsc.png'
-const Moonriver = '/images/networks/moonriver.png'
+
 // const Arbitrum = '/images/networks/arbitrum-network.jpg'
 // const Avalanche = '/images/networks/avalanche-network.jpg'
 // const Goerli = '/images/networks/goerli-network.jpg'
@@ -23,7 +23,6 @@ export const NETWORK_ICON = {
   [ChainId.MAINNET]: Mainnet,
   [ChainId.BSC]: Bsc,
   [ChainId.FANTOM]: Fantom,
-  [ChainId.MOONRIVER]: Moonriver,
   [ChainId.FANTOM_TESTNET]: Fantom,
   // [ChainId.ROPSTEN]: Ropsten,
   // [ChainId.RINKEBY]: Rinkeby,
@@ -50,7 +49,6 @@ export const NETWORK_LABEL: { [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: 'Ethereum',
   [ChainId.BSC]: 'Binance',
   [ChainId.FANTOM]: 'Fantom',
-  [ChainId.MOONRIVER]: 'Moonriver',
   [ChainId.FANTOM_TESTNET]: 'Fantom Testnet',
   // [ChainId.RINKEBY]: 'Rinkeby',
   // [ChainId.ROPSTEN]: 'Ropsten',
