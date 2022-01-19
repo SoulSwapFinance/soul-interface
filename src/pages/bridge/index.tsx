@@ -15,7 +15,7 @@ const Bridge = () => {
     // output={currencies[Field.OUTPUT]}
     // allowedSlippage={allowedSlippage}
   />
-    <DoubleGlowShadowV2 opacity="0.6">
+    {/* <DoubleGlowShadowV2 opacity="0.6"> */}
     <div id="bridge-page" className="mt-4 w-full max-w-2xl p-4 space-y-4 rounded bg-dark-900 z-1">
       {/* <Container id="charts-page" maxWidth="2xl" className="space-y-4"> */}
         {/* <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
@@ -28,7 +28,7 @@ const Bridge = () => {
             width={"100%"} />
         {/* </div> */}
       </div>
-    </DoubleGlowShadowV2>
+    {/* </DoubleGlowShadowV2> */}
     </>
 
   )
