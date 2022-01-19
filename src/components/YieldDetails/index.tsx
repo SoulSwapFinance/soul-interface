@@ -95,7 +95,7 @@ const YieldDetails: React.FC<YieldDetailsProps> = ({
                 <span className="font-bold text-2xl">{token0?.symbol}</span>
                 {token1 && <span className="font-bold text-2xl">{`/${token1?.symbol}`}</span>}
               </div>
-                { 'ROI OVERVIEW' }
+                { 'OVERVIEW' }
             </div>
           </div>
         </div>
