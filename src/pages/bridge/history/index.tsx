@@ -15,7 +15,7 @@ import { BottomGrouping } from '../../../features/swap/styleds'
 import Web3Connect from '../../../components/Web3Connect'
 import { useWeb3React } from '@web3-react/core'
 import { BridgeContextName } from '../../../constants'
-import { bridgeInjected } from '../../../connectors'
+// import { bridgeInjected } from '../../../connectors'
 import { isTransactionRecent, useAllTransactions } from '../../../state/bridgeTransactions/hooks'
 import { TransactionDetails } from '../../../state/transactions/reducer'
 import { useDispatch } from 'react-redux'
@@ -216,9 +216,10 @@ export default function Bridge() {
 
   const allTransactions = useAllTransactions(refresher)
 
-  useEffect(() => {
-    activate(bridgeInjected)
-  }, [activate, chainId, activeAccount, activeChainId])
+  // TODO -- ACTIVATE BRIDGE INJECTED TO UNLOCK //
+  // useEffect(() => {
+  //   activate(bridgeInjected)
+  // }, [activate, chainId, activeAccount, activeChainId])
 
   return (
     <>

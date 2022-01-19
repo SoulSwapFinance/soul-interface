@@ -20,7 +20,7 @@ const BLOCKCHAIN = {
   [ChainId.MAINNET]: 'ethereum',
   [ChainId.FANTOM]: 'fantom',
   [ChainId.BSC]: 'binance',
-  [ChainId.MOONRIVER]: 'moonriver',
+  // [ChainId.MOONRIVER]: 'moonriver',
   // [ChainId.FANTOM_TESTNET]: 'fantom testnet'
 }
 
@@ -55,20 +55,20 @@ function getCurrencyLogoUrls(currency) {
 const EthereumLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/eth.jpg'
 const FantomLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/ftm.jpg'
 const BinanceLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/ftm.jpg'
-const MoonriverLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/ftm.jpg'
+// const MoonriverLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/ftm.jpg'
 
 const logo: { readonly [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: EthereumLogo,
   [ChainId.FANTOM]: FantomLogo,
   [ChainId.BSC]: BinanceLogo, // TODO FIX
-  [ChainId.MOONRIVER]: MoonriverLogo, // TODO FIX
+  // [ChainId.MOONRIVER]: MoonriverLogo, // TODO FIX
   [ChainId.FANTOM_TESTNET]: FantomLogo
 }
 
 interface CurrencyLogoProps {
   currency?: Currency
   size?: string | number
-  // style?: React.CSSProperties
+  style?: React.CSSProperties
   className?: string
   squared?: boolean
 }
@@ -78,7 +78,7 @@ const unknown = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/
 const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({
   currency,
   size = '24px',
-  // style,
+  style,
   className = '',
   ...rest
 }) => {

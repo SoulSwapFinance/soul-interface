@@ -360,13 +360,17 @@ export default function Zap() {
                   <div>
                     <div style={{ fontSize: '14px' }}>Est. Pool Allocation</div>
                     <PoolTokenRow>
-                      <CurrencyLogo size="22px" currency={currency0 ?? undefined} style={{ marginRight: '6px' }} />
+                      <CurrencyLogo size="22px" currency={currency0 ?? undefined} 
+                      className={'mr-6px'} 
+                      />
                       <div style={{ fontSize: '14px' }}>
                         {currencyZeroOutput?.toSignificant(6) || 0} {currency0?.symbol}
                       </div>
                     </PoolTokenRow>
                     <PoolTokenRow>
-                      <CurrencyLogo size="22px" currency={currency1 ?? undefined} style={{ marginRight: '6px' }} />
+                      <CurrencyLogo size="22px" currency={currency1 ?? undefined} 
+                      className={'mr-6px'} 
+                      />
                       <div style={{ fontSize: '14px' }}>
                         {currencyOneOutput?.toSignificant(6) || 0} {currency1?.symbol}
                       </div>
