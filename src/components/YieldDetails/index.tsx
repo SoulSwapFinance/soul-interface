@@ -2,7 +2,7 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Currency } from '../../sdk'
 import React from 'react'
-import { formatNumberScale, formatPercent } from '../../functions'
+import { formatNumber, formatNumberScale, formatPercent } from '../../functions'
 import { useActiveWeb3React } from '../../hooks'
 import { useCurrency } from '../../hooks/Tokens'
 import { ApplicationModal } from '../../state/application/actions'
@@ -12,12 +12,14 @@ import DoubleLogo from '../DoubleLogo'
 import ModalHeader from '../ModalHeader'
 import Typography from '../Typography'
 import { HeadlessUiModal } from 'components/Modal'
+import { formatCurrency } from 'modals/TokenStatsModal'
 
 interface YieldDetailsProps {
   isOpen: boolean
   onDismiss: () => void
   token0: Currency
   token1?: Currency
+  roiPerHour: number
   roiPerDay: number
   roiPerMonth: number
   roiPerYear: number
@@ -30,6 +32,7 @@ const YieldDetails: React.FC<YieldDetailsProps> = ({
   onDismiss,
   token0,
   token1,
+  roiPerHour,
   roiPerDay,
   roiPerMonth,
   roiPerYear,
@@ -42,10 +45,16 @@ const YieldDetails: React.FC<YieldDetailsProps> = ({
 
   const roiPerWeek: number = roiPerDay * 7
 
-  const perDay: number = Number((1000 * roiPerDay) / soulPrice)
-  const perWeek: number = Number((1000 * roiPerWeek) / soulPrice)
-  const perMonth: number = Number((1000 * roiPerMonth) / soulPrice)
-  const perYear: number = Number((1000 * roiPerYear) / soulPrice)
+  // const perHour: number = Number((1000 * roiPerHour) / soulPrice)
+  // const perDay: number = Number((1000 * roiPerDay) / soulPrice)
+  // const perWeek: number = Number((1000 * roiPerWeek) / soulPrice)
+  // const perMonth: number = Number((1000 * roiPerMonth) / soulPrice)
+  // const perYear: number = Number((1000 * roiPerYear) / soulPrice)
+  const perHour: number = Number(1000 * roiPerHour)
+  const perDay: number = Number(1000 * roiPerDay)
+  const perWeek: number = Number(1000 * roiPerWeek)
+  const perMonth: number = Number(1000 * roiPerMonth)
+  const perYear: number = Number(1000 * roiPerYear)
 
   const getRoiEntry = (period: string, percent: number, value: Number) => {
     return (
@@ -59,7 +68,7 @@ const YieldDetails: React.FC<YieldDetailsProps> = ({
         </div>
 
         <div className="flex flex-row px-2 w-full">
-          <div className="flex items-center justify-between">{formatNumberScale(value, false, 2)}</div>
+          <div className="flex items-center justify-between">{formatCurrency(Number(value), 2)}</div>
         </div>
       </div>
     )
@@ -68,7 +77,7 @@ const YieldDetails: React.FC<YieldDetailsProps> = ({
   const getModalContent = () => (
     <div className="space-y-6">
       <div className="space-y-2">
-        <ModalHeader title={i18n._(t`Pool Details`)} onClose={onDismiss} />
+        <ModalHeader title={i18n._(t`Yield Details`)} onClose={onDismiss} />
         <div className="grid grid-cols-2">
           <div className="flex flex-row w-full py-4 gap-2">
             <div className="flex col-span-1 space-x-4">
@@ -83,9 +92,10 @@ const YieldDetails: React.FC<YieldDetailsProps> = ({
 
             <div className="flex flex-col col-span-1 justify-center space-x-2">
               <div>
-                <span className="font-bold text-2xl">{token0.symbol}</span>
-                {token1 && <span className="font-bold text-2xl">{`/${token1.symbol}`}</span>}
+                <span className="font-bold text-2xl">{token0?.symbol}</span>
+                {token1 && <span className="font-bold text-2xl">{`/${token1?.symbol}`}</span>}
               </div>
+                { 'ROI BREAKDOWN' }
             </div>
           </div>
         </div>
@@ -93,17 +103,18 @@ const YieldDetails: React.FC<YieldDetailsProps> = ({
       <div className="space-y-2 flex flex-col">
         <div className="flex flex-row flex-nowrap gap-1 font-bold">
           <div className="flex flex-row py-1 px-2 w-full">
-            <div className="flex items-center justify-between uppercase">{i18n._(t`Timeframe`)}</div>
+            <div className="flex items-center justify-between uppercase">{i18n._(t`TIMEFRAME`)}</div>
           </div>
 
           <div className="flex flex-row py-1 px-2 w-full">
-            <div className="flex items-center justify-between uppercase">{i18n._(t`ROI`)}</div>
+            <div className="flex items-center justify-between uppercase">{i18n._(t`RETURNS`)}</div>
           </div>
 
           <div className="flex flex-row py-1 px-2 w-full">
-            <div className="flex items-center justify-between uppercase">{i18n._(t`SOUL per $1000`)}</div>
+            <div className="flex items-center justify-between uppercase">{i18n._(t`PER $1K`)}</div>
           </div>
         </div>
+        {getRoiEntry('Hourly', roiPerHour, perHour)}
         {getRoiEntry('Daily', roiPerDay, perDay)}
         {getRoiEntry('Weekly', roiPerWeek, perWeek)}
         {getRoiEntry('Monthly', roiPerMonth, perMonth)}
