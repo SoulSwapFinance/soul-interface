@@ -122,8 +122,7 @@ const YieldDetails: React.FC<YieldDetailsProps> = ({
       </div>
       <div className="space-y-2">
         <div className="text-s">
-          {i18n._(t`Calculated based on current rates. Rates are estimates provided for your convenience
-          only, and by no means represent guaranteed returns.`)}
+          {i18n._(t`Calculated based on current rates. Rates are estimates for your convenience, they do not represent guaranteed returns.`)}
         </div>
       </div>
     </div>
