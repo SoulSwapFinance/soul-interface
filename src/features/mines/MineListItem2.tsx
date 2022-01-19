@@ -157,7 +157,6 @@ const MineListItem2 = ({ farm, ...rest }) => {
                     <IconWrapper size="16px" marginRight={'10px'}>
                       <Info />
                     </IconWrapper>
-                    {/* {formatPercent(farm?.roiPerYear || 7508 * 100)} */}
                     {roiPerYear > 1000000 ? '100000000%+' : formatPercent(roiPerYear * 100)}
                   </div>
                   <div className="text-xs text-right md:text-base text-secondary">{i18n._(t`annualized`)}</div>
