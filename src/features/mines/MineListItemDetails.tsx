@@ -21,10 +21,10 @@ const MineListItemDetails = ({ farm }) => {
 
   const liquidityToken = new Token(
     chainId,
-    getAddress(farm.lpToken),
-    farm.pair.token1 ? 18 : farm.pair.token0 ? farm.pair.token0.decimals : 18,
-    farm.pair.token1 ? farm.pair.symbol : farm.pair.token0.symbol,
-    farm.pair.token1 ? farm.pair.name : farm.pair.token0.name
+    getAddress(farm?.lpToken),
+    18, // always 18 for SOUL-LP
+    farm?.pair.token1 ? farm?.pair.symbol : farm?.pair.token0.symbol,
+    farm?.pair.token1 ? farm?.pair.name : farm?.pair.token0.name
   )
 
   const stakedAmount = useUserInfo(farm, liquidityToken)
