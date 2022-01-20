@@ -1,5 +1,5 @@
 import { ChainId, CurrencyAmount, Token } from '../sdk'
-import { useSoulGuideContract, useDashboardContract, useQuickSwapFactoryContract } from '../hooks/useContract'
+import { useSoulGuideContract, useDashboardContract, useFactoryContract } from '../hooks/useContract'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import LPToken from '../types/LPToken'
@@ -21,7 +21,7 @@ const useLPTokensState = () => {
   const { account, chainId } = useActiveWeb3React()
   const soulGuideContract = useSoulGuideContract()
   const dashboardContract = useDashboardContract()
-  const quickSwapFactoryContract = useQuickSwapFactoryContract()
+  const soulSwapFactoryContract = useFactoryContract()
   const [lpTokens, setLPTokens] = useState<LPToken[]>([])
   const [selectedLPToken, setSelectedLPToken] = useState<LPToken>()
   const [selectedLPTokenAllowed, setSelectedLPTokenAllowed] = useState(false)
@@ -30,63 +30,63 @@ const useLPTokensState = () => {
   const updateLPTokens = useCallback(async () => {
     try {
       updatingLPTokens.current = true
-      // if (ChainId.MATIC === chainId) {
-      //   const LP_TOKENS_LIMIT = 500
-      //   const length = await quickSwapFactoryContract?.allPairsLength()
-      //   const pages: number[] = []
-      //   for (let i = 0; i < length; i += LP_TOKENS_LIMIT) pages.push(i)
-      //   const pairs = (
-      //     await Promise.all(
-      //       pages.map((page) =>
-      //         soulGuideContract?.getPairs(
-      //           '0x5757371414417b8C6CAad45bAeF941aBc7d3Ab32', // Factory address
-      //           page,
-      //           Math.min(page + LP_TOKENS_LIMIT, length.toNumber())
-      //         )
-      //       )
-      //     )
-      //   )
-      //     .flat()
-      //     .filter((pair) => pair.token0 !== '0x1f6c3E047f529f82f743a7378A212a3d62fAA390')
+      if (ChainId.FANTOM === chainId) {
+        const LP_TOKENS_LIMIT = 500
+        const length = await soulSwapFactoryContract?.totalPairs()
+        const pages: number[] = []
+        for (let i = 0; i < length; i += LP_TOKENS_LIMIT) pages.push(i)
+        const pairs = (
+          await Promise.all(
+            pages.map((page) =>
+              soulGuideContract?.getPairs(
+                '0x1120e150dA9def6Fe930f4fEDeD18ef57c0CA7eF', // Factory address
+                page,
+                Math.min(page + LP_TOKENS_LIMIT, length.toNumber())
+              )
+            )
+          )
+        )
+          .flat()
+          .filter((pair) => pair.token0 !== '')
 
-      //   const pairAddresses = pairs.map((pair) => pair[0])
-      //   const pollPairs = await soulGuideContract?.pollPairs(account, pairAddresses)
-      //   const tokenAddresses = Array.from(
-      //     new Set(pairs.reduce((a: any, b: any) => a.push(b.token, b.token0, b.token1) && a, []))
-      //   ).flat()
-      //   const tokenDetails = (await soulGuideContract?.getTokenInfo(tokenAddresses)).reduce((acc: any, cur: any) => {
-      //     acc[cur[0]] = cur
-      //     return acc
-      //   }, {})
+        const pairAddresses = pairs.map((pair) => pair[0])
+        const pollPairs = await soulGuideContract?.pollPairs(account, pairAddresses)
+        const tokenAddresses = Array.from(
+          new Set(pairs.reduce((a: any, b: any) => a.push(b.token, b.token0, b.token1) && a, []))
+        ).flat()
+        const tokenDetails = (await soulGuideContract?.getTokenInfo(tokenAddresses)).reduce((acc: any, cur: any) => {
+          acc[cur[0]] = cur
+          return acc
+        }, {})
 
-      //   const data = pairs.map((pair, index) => {
-      //     const token = new Token(
-      //       chainId as ChainId,
-      //       tokenDetails[pair.token].token,
-      //       tokenDetails[pair.token].decimals,
-      //       tokenDetails[pair.token].symbol,
-      //       tokenDetails[pair.token].name
-      //     )
+        const data = pairs.map((pair, index) => {
+          const token = new Token(
+            chainId as ChainId,
+            tokenDetails[pair.token].token,
+            tokenDetails[pair.token].decimals,
+            tokenDetails[pair.token].symbol,
+            tokenDetails[pair.token].name
+          )
 
-      //     const tokenA = tokenDetails[pair.token0]
-      //     const tokenB = tokenDetails[pair.token1]
+          const tokenA = tokenDetails[pair.token0]
+          const tokenB = tokenDetails[pair.token1]
 
-      //     return {
-      //       address: token.address,
-      //       decimals: token.decimals,
-      //       name: token.name,
-      //       symbol: token.symbol,
-      //       balance: CurrencyAmount.fromRawAmount(token, pollPairs[index].balance),
-      //       totalSupply: pair.totalSupply,
-      //       tokenA: new Token(chainId as ChainId, tokenA.token, tokenA.decimals, tokenA.symbol, tokenA.name),
-      //       tokenB: new Token(chainId as ChainId, tokenB.token, tokenB.decimals, tokenB.symbol, tokenB.name),
-      //     } as LPToken
-      //   })
+          return {
+            address: token.address,
+            decimals: token.decimals,
+            name: token.name,
+            symbol: token.symbol,
+            balance: CurrencyAmount.fromRawAmount(token, pollPairs[index].balance),
+            totalSupply: pair.totalSupply,
+            tokenA: new Token(chainId as ChainId, tokenA.token, tokenA.decimals, tokenA.symbol, tokenA.name),
+            tokenB: new Token(chainId as ChainId, tokenB.token, tokenB.decimals, tokenB.symbol, tokenB.name),
+          } as LPToken
+        })
 
-      //   if (data) setLPTokens(data)
+        if (data) setLPTokens(data)
 
-      //   // MAINNET
-      // } else 
+        // MAINNET
+      } else 
       if (chainId && [ChainId.MAINNET].includes(chainId)) {
         const requests: any = {
           [ChainId.MAINNET]: [
