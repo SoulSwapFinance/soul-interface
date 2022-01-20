@@ -246,7 +246,7 @@ function AppBar(): JSX.Element {
             <Popover.Panel className="xl:hidden">
               <div className="flex flex-col px-10 pt-2 pb-3 space-y-4">
 
-                {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                {/* {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && ( */}
                   <ExternalLink href={'https://app.luxor.money'}>
                     <a
                       id={`luxor-nav-extlink`}
@@ -255,7 +255,7 @@ function AppBar(): JSX.Element {
                       {i18n._(t`Luxor Money`)}
                     </a>
                   </ExternalLink>
-                )}
+                {/* )} */}
                 {chainId && [ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <ExternalLink href={'https://info.soulswap.finance'}>
                     <a
@@ -286,7 +286,7 @@ function AppBar(): JSX.Element {
                     </a>
                   </ExternalLink>
                 )}
-                {chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                {/* {chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && ( */}
                   <ExternalLink href={'/tools'}>
                     <a
                       id={`tools-nav-link`}
@@ -295,7 +295,7 @@ function AppBar(): JSX.Element {
                       {i18n._(t`Explore More`)}
                     </a>
                   </ExternalLink>
-                )}
+                {/* )} */}
               </div>
             </Popover.Panel>
           </>

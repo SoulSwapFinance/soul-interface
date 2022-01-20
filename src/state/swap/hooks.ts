@@ -340,20 +340,20 @@ function validatedRecipient(recipient: any): string | null {
   if (ADDRESS_REGEX.test(recipient)) return recipient
   return null
 }
-export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId = ChainId.MAINNET): SwapState {
+export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId = ChainId.FANTOM): SwapState {
   let inputCurrency = parseCurrencyFromURLParameter(parsedQs.inputCurrency)
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
-  const eth = 
+  const ftm = 
     // chainId === ChainId.CELO ? WNATIVE_ADDRESS[chainId] : 
     'FTM'
   const soul = SOUL_ADDRESS[chainId]
   if (inputCurrency === '' && outputCurrency === '') {
-    inputCurrency = eth
+    inputCurrency = ftm
     outputCurrency = soul
   } else if (inputCurrency === '') {
-    inputCurrency = outputCurrency === eth ? soul : eth
+    inputCurrency = outputCurrency === ftm ? soul : ftm
   } else if (outputCurrency === '' || inputCurrency === outputCurrency) {
-    outputCurrency = inputCurrency === eth ? soul : eth
+    outputCurrency = inputCurrency === ftm ? soul : ftm
   }
 
   const recipient = validatedRecipient(parsedQs.recipient)

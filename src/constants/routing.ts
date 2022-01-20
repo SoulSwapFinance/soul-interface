@@ -96,6 +96,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     FANTOM.SEANCE,
     FANTOM.DAI, 
     FANTOM.USDC, 
+    FANTOM.USDT, 
     FANTOM.WBTC, 
     FANTOM.WETH
   ], // 27 AUG

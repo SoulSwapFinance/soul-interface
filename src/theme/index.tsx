@@ -69,7 +69,7 @@ export function colors(darkMode?: boolean): Colors {
 		danger: "#EB6B6B",
 		dangerLight: "rgba(235, 107, 107, 0.15)",
 		success: "#34D399",
-		scrollbar: darkMode ? "#3F3F46" : "#A1A1AA",
+		scrollbar: darkMode ? "#433f46" : "#a5a1aa",
 
 		// Primaries
 		primary: "#a890fe",

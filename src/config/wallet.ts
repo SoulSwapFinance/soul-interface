@@ -58,7 +58,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
           250, // fantom
           4002, // fantom testnet
         ],
-        // pollingInterval: 15000,
+        pollingInterval: 5000,
       })
     },
     name: 'WalletConnect',
@@ -90,7 +90,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     connector: async () => {
       const WalletLinkConnector = (await import('@web3-react/walletlink-connector')).WalletLinkConnector
       return new WalletLinkConnector({
-        url: RPC[ChainId.MAINNET],
+        url: RPC[ChainId.FANTOM],
         appName: 'SoulSwap',
         appLogoUrl: 'https://raw.githubusercontent.com/soulswapfinance/icons/master/token/soul.jpg',
       })
