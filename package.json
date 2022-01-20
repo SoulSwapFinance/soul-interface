@@ -146,6 +146,7 @@
   "dependencies": {
     "@apollo/client": "3.5.7",
     "@clover-network/clover-connector": "^1.0.0",
+    "@keystonehq/keystone-connector": "^0.9.5",
     "@storybook/react": "6.3.0",
     "@terra-money/terra.js": "^3.0.4",
     "@terra-money/wallet-provider": "^3.6.5",
@@ -156,6 +157,7 @@
     "big.js": "^6.1.1",
     "cids": "^1.1.7",
     "decimal.js-light": "^2.5.1",
+    "eth-block-tracker": "^5.0.1",
     "ethers": "^5.4.7",
     "faunadb": "^4.4.1",
     "graphql": "^15.5.3",

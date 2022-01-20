@@ -50,15 +50,15 @@ export default function Menu() {
   const { i18n } = useLingui()
   const solutions = items(i18n)
   // Runs on render + reruns every second
-  useEffect(() => {
-    if (open) {
-      const timer = setTimeout(() => {
-      }, 20)
+  // useEffect(() => {
+    // if (open) {
+    //   const timer = setTimeout(() => {
+    //   }, 20)
       
-      // Clear timeout if the component is unmounted
-      return () => clearTimeout(timer)
-    }
-  })
+    //   // Clear timeout if the component is unmounted
+    //   return () => clearTimeout(timer)
+    // }
+  // })
 
   return (
     <Popover as="nav">
