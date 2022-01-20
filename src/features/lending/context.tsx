@@ -117,7 +117,7 @@ async function getPairs(bentoBoxContract: any, chainId: ChainId) {
   let logs = []
   let success = false
   const masterAddress = UNDERWORLD_ADDRESS[chainId]
-  if (chainId !== ChainId.MAINNET) {
+  if (chainId !== ChainId.FANTOM) {
     logs = await bentoBoxContract.queryFilter(bentoBoxContract.filters.LogDeploy(masterAddress))
     success = true
   }

@@ -95,6 +95,7 @@ import {
       FANTOM.SEANCE,
       FANTOM.DAI, 
       FANTOM.USDC, 
+      FANTOM.USDT, 
       FANTOM.WBTC, 
       FANTOM.WETH
     ], // 27 AUG
