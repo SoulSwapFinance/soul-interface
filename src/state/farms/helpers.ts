@@ -49,7 +49,7 @@ export const transformUserData = (userData) => {
 
 export async function getStoredToken(type, tokenAddress, soulSummonerAddress) {
   switch (type) {
-    case 'uniswap':
+    case 'soulswap':
       return await getPool(PAIR_ABI, tokenAddress, soulSummonerAddress)
     case 'erc20':
       return await getErc20(erc20, tokenAddress, soulSummonerAddress)
@@ -125,9 +125,9 @@ export async function getToken(tokenAddress, soulSummonerAddress) {
   if (type) return getStoredToken(type, tokenAddress, soulSummonerAddress)
 
   try {
-    const uniPool = await getPool(PAIR_ABI, tokenAddress, soulSummonerAddress)
-    window.localStorage.setItem(tokenAddress, 'uniswap')
-    return uniPool
+    const soulPool = await getPool(PAIR_ABI, tokenAddress, soulSummonerAddress)
+    window.localStorage.setItem(tokenAddress, 'soulswap')
+    return soulPool
   } catch (e) {
     console.log(e)
   }
@@ -141,7 +141,7 @@ export async function getToken(tokenAddress, soulSummonerAddress) {
   }
 }
 
-const getUniPrices = (prices, pool) => {
+const getSoulPrices = (prices, pool) => {
   var t0 = pool.token0
   var p0 = getParameterCaseInsensitive(prices, pool.token0.address)
   var t1 = pool.token1
@@ -201,7 +201,7 @@ const getErc20Prices = (prices, pool) => {
 }
 
 export function getPoolPrices(prices, pool) {
-  if (pool.token1) return getUniPrices(prices, pool)
+  if (pool.token1) return getSoulPrices(prices, pool)
   return getErc20Prices(prices, pool)
 }
 

@@ -49,7 +49,7 @@ export const SUPPORTED_NETWORKS: {
   
   [ChainId.FANTOM]: {
     chainId: '0xFA',
-    chainName: 'Fantom',
+    chainName: 'Fantom Opera',
     nativeCurrency: {
       name: 'Fantom',
       symbol: 'FTM',
