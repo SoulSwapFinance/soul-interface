@@ -304,6 +304,8 @@ export default function Migrate() {
 
   if (chainId === ChainId.MAINNET) {
     exchange = 'Uniswap'
+  } else if (chainId === ChainId.FANTOM) {
+    exchange = 'SpookySwap'
   // } else if (chainId === ChainId.MATIC) {
   //   exchange = 'QuickSwap'
   }

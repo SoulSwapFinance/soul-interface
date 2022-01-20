@@ -99,11 +99,11 @@ export const injected = new InjectedConnector({
 
 // mainnet only
 export const walletconnect = new WalletConnectConnector({
-  rpc: { [ChainId.MAINNET]: RPC[ChainId.MAINNET] },
+  rpc: { [ChainId.FANTOM]: RPC[ChainId.FANTOM] },
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   supportedChainIds,
-  pollingInterval: 15000,
+  pollingInterval: 5000,
 })
 
 // mainnet only
@@ -120,7 +120,7 @@ export const portis = new PortisConnector({
 
 // mainnet only
 export const walletlink = new WalletLinkConnector({
-  url: RPC[ChainId.MAINNET],
+  url: RPC[ChainId.FANTOM],
   appName: 'SoulSwap',
   appLogoUrl:
   'https://raw.github.com/SoulSwapFinance/icons/master/token/soul.jpg',

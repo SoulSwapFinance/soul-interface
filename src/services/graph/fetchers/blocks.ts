@@ -6,7 +6,7 @@ import { blockQuery, blocksQuery } from '../queries'
 import { request } from 'graphql-request'
 
 export const BLOCKS = {
-  [ChainId.MAINNET]: 'blocklytics/ethereum-blocks',
+  // [ChainId.MAINNET]: 'blocklytics/ethereum-blocks',
   [ChainId.FANTOM]: 'matthewlilley/fantom-blocks',
   // [ChainId.XDAI]: 'matthewlilley/xdai-blocks',
   // [ChainId.MATIC]: 'matthewlilley/polygon-blocks',
@@ -19,7 +19,7 @@ export const fetcher = async (chainId = ChainId.FANTOM, query, variables) =>
   request(`${GRAPH_HOST[chainId]}/subgraphs/name/${BLOCKS[chainId]}`, query, variables)
 
 
-export const getBlock = async (chainId = ChainId.MAINNET, timestamp: number) => {
+export const getBlock = async (chainId = ChainId.FANTOM, timestamp: number) => {
   const { blocks } = await fetcher(
     chainId,
     blockQuery,
