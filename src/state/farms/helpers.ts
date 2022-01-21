@@ -9,8 +9,9 @@ const BIG_ZERO = new BigNumber(0)
 const BIG_TEN = new BigNumber(10)
 
 const DEFAULT_TOKEN_DECIMAL = 18;
-const MULTICALL_ADDRESS = '0xEd2Fb478f7fCef33E1E1d980a0135789B295a7F5';
-const RPC_ENDPOINT = 'https://rpc.ftm.tools'; // process.env.REACT_APP_RPC_ENDPOINT
+const MULTICALL_ADDRESS = '0xf682Cc4468608fC4eFbaD6a06D9BC72e7790075a';
+const RPC_ENDPOINT = 'https://rpcapi.fantom.network/'; // process.env.REACT_APP_RPC_ENDPOINT
+// const RPC_ENDPOINT = 'https://rpc.ftm.tools'; // process.env.REACT_APP_RPC_ENDPOINT
 
 const simpleRpcProvider = new ethers.providers.JsonRpcProvider(RPC_ENDPOINT)
 

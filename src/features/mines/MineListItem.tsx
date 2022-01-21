@@ -33,7 +33,7 @@ const MineListItem = ({ farm, ...rest }) => {
   const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
   console.log(Number(rawSoulPrice))
   const soulPrice = Number(rawSoulPrice) / 1E18
-  console.log(soulPrice)
+  // console.log(soulPrice)
 
   const tvlInfo = useTVL()
 
@@ -41,7 +41,7 @@ const MineListItem = ({ farm, ...rest }) => {
   let [state, pair, pairPrice] = data
 
   const lpBalance = useSingleCallResult(harvestHelperContract, 'fetchBals', [farm?.id])?.result
-  console.log('lpBalance: %s', Number(lpBalance))
+  // console.log('lpBalance: %s', Number(lpBalance))
 
   let tvl = tvlInfo.map((previousValue, currentValue) => {
     return previousValue.tvl + currentValue
@@ -55,9 +55,9 @@ const MineListItem = ({ farm, ...rest }) => {
   //   return previousValue + currentValue.lpPrice
   // }, 0)
   
-  const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
-    return { ...POOLS[chainId][key], lpToken: key }
-  })
+  // const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
+  //   return { ...POOLS[chainId][key], lpToken: key }
+  // })
 
   const balanceUSD = farm.pair?.token1
     ? Number(pairPrice) * Number(lpBalance) / 1e18
@@ -97,7 +97,7 @@ const MineListItem = ({ farm, ...rest }) => {
     const roiPerMonth = roiPerYear / 12
     const roiPerDay = roiPerMonth / 30
     const roiPerHour = roiPerDay / 24
-    const roiPerSecond = roiPerHour / 60 / 60
+    // const roiPerSecond = roiPerHour / 60 / 60
 
   return (
     <React.Fragment>

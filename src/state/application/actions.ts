@@ -31,6 +31,7 @@ export enum ApplicationModal {
   NETWORK,
   CHAIN,
   SOUL_STATS,
+  LUXOR_STATS,
   FTM_STATS,
   YIELD_DETAILS,
 }

@@ -110,7 +110,6 @@ export const MERKLE_DISTRIBUTOR_ADDRESS: AddressMap = {
 export const MULTICALL2_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696',
   [ChainId.BSC]: '',
-  // [ChainId.FANTOM]: '0xEd2Fb478f7fCef33E1E1d980a0135789B295a7F5', // 29 AUG
   [ChainId.FANTOM]: '0xf682Cc4468608fC4eFbaD6a06D9BC72e7790075a', // 29 AUG
   [ChainId.FANTOM_TESTNET]: '0x1ACB479bB9D1F73009F85ef5F495E942Bb57f15A', // 7 JUL
 }
@@ -197,7 +196,7 @@ export const LUX_ADDRESS: AddressMap = {
 export const WLUM_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208', // LUX
+  [ChainId.FANTOM]: '0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208', // WLUM
   [ChainId.FANTOM_TESTNET]: '',
 }
 

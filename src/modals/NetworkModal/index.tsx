@@ -55,7 +55,7 @@ export const SUPPORTED_NETWORKS: {
       symbol: 'FTM',
       decimals: 18,
     },
-    rpcUrls: ['https://rpc.ftm.tools'],
+    rpcUrls: ['https://rpc.ftm.tools', 'https://rpcapi.fantom.network'],
     blockExplorerUrls: ['https://ftmscan.com'],
   },
   [ChainId.FANTOM_TESTNET]: {

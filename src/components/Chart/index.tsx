@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 import { ChainId, Currency, FACTORY_ADDRESS, Token, WNATIVE } from '../../sdk'
-import useDexCandles from '../../hooks/useDexCandles'
+// import useDexCandles from '../../hooks/useDexCandles'
 import { CandlePeriod, NumericalCandlestickDatum } from './types/Candle'
 import React, { useEffect, useState } from 'react'
 import { RowFixed } from '../Row'
@@ -133,7 +133,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
   const token0LCase = token0Index < token1Index ? inputAddress.toLowerCase() : outputAddress.toLowerCase()
   const token1LCase = token0Index < token1Index ? outputAddress.toLowerCase() : inputAddress.toLowerCase()
 
-  let { isLoading, candleData } = useDexCandles(token0LCase, token1LCase, candlePeriod)
+  // let { isLoading, candleData } = useDexCandles(token0LCase, token1LCase, candlePeriod)
 
   const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
 

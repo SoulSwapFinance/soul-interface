@@ -27,6 +27,7 @@ import { useETHBalances, useTokenBalance } from '../../state/wallet/hooks'
 import { useLingui } from '@lingui/react'
 import ExternalLink from '../ExternalLink'
 import TokenStats from '../TokenStats'
+import LuxorStats from 'components/LuxorStats'
 // import LanguageSwitch from '../LanguageSwitch'
 
 // import { ExternalLink, NavLink } from "./Link";
@@ -170,6 +171,11 @@ function AppBar(): JSX.Element {
                   <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
                     {library && library.provider.isMetaMask && (
                       <div className="sm:inline-block">
+                        <LuxorStats />
+                      </div>
+                    )}
+                    {library && library.provider.isMetaMask && (
+                      <div className="sm:inline-block">
                         <TokenStats />
                       </div>
                     )}
@@ -256,7 +262,7 @@ function AppBar(): JSX.Element {
                     </a>
                   </ExternalLink>
                 {/* )} */}
-                {chainId && [ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                {/* {chainId && [ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && ( */}
                   <ExternalLink href={'https://info.soulswap.finance'}>
                     <a
                       id={`vote-nav-extlink`}
@@ -265,8 +271,8 @@ function AppBar(): JSX.Element {
                       {i18n._(t`View Charts`)}
                     </a>
                   </ExternalLink>
-                )}
-                {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                {/* )} */}
+                {/* {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && ( */}
                   <ExternalLink href={'https://app.soulswap.finance/vote'}>
                     <a
                       id={`vote-nav-extlink`}
@@ -275,8 +281,8 @@ function AppBar(): JSX.Element {
                       {i18n._(t`Governance`)}
                     </a>
                   </ExternalLink>
-                )}
-                {chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                {/* )} */}
+                {/* {chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && ( */}
                   <ExternalLink href={'https://docs.soulswap.finance'}>
                     <a
                       id={`links-nav-link`}
@@ -285,7 +291,7 @@ function AppBar(): JSX.Element {
                       {i18n._(t`Documentation`)}
                     </a>
                   </ExternalLink>
-                )}
+                {/* )} */}
                 {/* {chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && ( */}
                   <ExternalLink href={'/tools'}>
                     <a

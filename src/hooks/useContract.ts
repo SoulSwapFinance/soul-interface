@@ -12,6 +12,8 @@ import {
   ATOMIC_SWAP_ADDRESS,
   LOCKER_ADDRESS,
   SOUL_USDC_PAIR,
+  LUX_ADDRESS,
+  WLUM_ADDRESS,
 } from '../constants/addresses'
 import {
   ARGENT_WALLET_DETECTOR_ABI,
@@ -72,7 +74,8 @@ import SOUL_SAFE_ABI from '../constants/abis/soulswap/safe.json'
 import SOUL_GUIDE_ABI from '../constants/abis/soul-guide.json' // TODO: update abi
 import SOUL_SUMMONER_ABI from '../constants/abis/soulswap/soulsummoner.json' // 28 JUL
 import SOULVAULT_ABI from '../constants/abis/soulswap/soulvault.json' // 31 JUL
-// import SPELL_ABI from '../constants/abis/soulswap/spell.json' // 28 JUL
+import LUXOR_ABI from '../constants/abis/soulswap/luxor.json'
+import WLUM_ABI from '../constants/abis/soulswap/wlumens.json'
 import ENCHANT_ABI from '../constants/abis/soulswap/enchant.json' // 30 OCT
 import ENCHANT_HELPER_ABI from '../constants/abis/soulswap/enchant-helper.json' // 30 OCT
 import SOUL_ABI from '../constants/abis/soulswap/soulpower.json' // 28 JUL
@@ -281,6 +284,16 @@ export function useSoulVaultContract(withSignerIfPossible = true): Contract | nu
 export function useEnchantContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && ENCHANT_ADDRESS[chainId], ENCHANT_ABI, withSignerIfPossible)
+}
+
+export function useLuxorContract(withSignerIfPossible = true): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && LUX_ADDRESS[chainId], LUXOR_ABI, withSignerIfPossible)
+}
+
+export function useWrappedLumensContract(withSignerIfPossible = true): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && WLUM_ADDRESS[chainId], WLUM_ABI, withSignerIfPossible)
 }
 
 export function useEnchantHelperContract(withSignerIfPossible = true): Contract | null {

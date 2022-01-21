@@ -1,15 +1,16 @@
+import { ChainId } from 'sdk'
 import { AbstractConnector } from '@web3-react/abstract-connector'
-import { ChainId } from '../sdk'
 import { InjectedConnector } from '@web3-react/injected-connector'
-import { NetworkConnector } from '../entities/NetworkConnector'
+import { NetworkConnector } from 'entities/connectors'
+
 import RPC from './rpc'
-import { binance, clover, walletconnect } from '../connectors'
+
+const supportedChainIds = Object.values(ChainId) as number[]
+
 export const network = new NetworkConnector({
-  defaultChainId: 250,
+  defaultChainId: 1,
   urls: RPC,
 })
-
-export const supportedChainIds = Object.values(ChainId) as number[]
 
 export const injected = new InjectedConnector({
   supportedChainIds,
@@ -45,6 +46,15 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     href: null,
     color: '#E8831D',
   },
+//   METAMASK_MOBILE: {
+//     name: 'MetaMask',
+//     iconName: 'metamask.png',
+//     description: 'Open in MetaMask app.',
+//     href: 'https://metamask.app.linapp.sushi.com',
+//     color: '#E8831D',
+//     mobile: true,
+//     mobileOnly: true,
+//   },
   WALLET_CONNECT: {
     connector: async () => {
       const WalletConnectConnector = (await import('@web3-react/walletconnect-connector')).WalletConnectConnector
@@ -52,13 +62,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
         rpc: RPC,
         bridge: 'https://bridge.walletconnect.org',
         qrcode: true,
-        supportedChainIds: [
-          1, // mainnet
-          // 56, // binance smart chain
-          250, // fantom
-          // 4002, // fantom testnet
-        ],
-        // pollingInterval: 5000,
+        supportedChainIds,
       })
     },
     name: 'WalletConnect',
@@ -68,7 +72,21 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     color: '#4196FC',
     mobile: true,
   },
-
+  KEYSTONE: {
+    connector: async () => {
+      const KeystoneConnector = (await import('@keystonehq/keystone-connector')).KeystoneConnector
+      return new KeystoneConnector({
+        chainId: 1,
+        url: RPC[ChainId.MAINNET],
+      })
+    },
+    name: 'Keystone',
+    iconName: 'keystone.png',
+    description: 'Connect to Keystone hardware wallet.',
+    href: null,
+    color: '#4196FC',
+    mobile: true,
+  },
   LATTICE: {
     connector: async () => {
       const LatticeConnector = (await import('@web3-react/lattice-connector')).LatticeConnector
@@ -85,7 +103,6 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     color: '#40a9ff',
     mobile: true,
   },
-
   WALLET_LINK: {
     connector: async () => {
       const WalletLinkConnector = (await import('@web3-react/walletlink-connector')).WalletLinkConnector
@@ -93,6 +110,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
         url: RPC[ChainId.MAINNET],
         appName: 'SoulSwap',
         appLogoUrl: 'https://raw.githubusercontent.com/soulswapfinance/icons/master/token/soul.jpg',
+        darkMode: true,
       })
     },
     name: 'Coinbase Wallet',
@@ -109,15 +127,6 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     color: '#315CF5',
     mobile: true,
     mobileOnly: true,
-  },
-  TRUST_WALLET: {
-    connector: injected,
-    name: 'Trust Wallet',
-    iconName: 'trustwallet.svg',
-    description: 'The most trusted & secure crypto wallet.',
-    href: null,
-    color: '#3688EB',
-    mobile: true,
   },
   FORTMATIC: {
     connector: async () => {
@@ -178,12 +187,16 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     mobile: true,
   },
   Clover: {
-    connector: clover,
+    connector: async () => {
+      const CloverConnector = (await import('@clover-network/clover-connector')).CloverConnector
+      return new CloverConnector({
+        supportedChainIds: [1, 250],
+      })
+    },
     name: 'Clover',
     iconName: 'clover.svg',
     description: 'Login using Clover hosted wallet',
     href: null,
     color: '#269964',
-    mobile: true
   },
 }

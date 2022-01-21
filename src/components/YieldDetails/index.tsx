@@ -12,7 +12,7 @@ import DoubleLogo from '../DoubleLogo'
 import ModalHeader from '../ModalHeader'
 import Typography from '../Typography'
 import { HeadlessUiModal } from 'components/Modal'
-import { formatCurrency } from 'modals/TokenStatsModal'
+import { formatCurrency } from 'modals/TokensStatsModal'
 
 interface YieldDetailsProps {
   isOpen: boolean
