@@ -106,7 +106,7 @@ const YieldDetails: React.FC<YieldDetailsProps> = ({
           </div>
 
           <div className="flex flex-row py-1 px-2 w-full">
-            <div className="flex items-center justify-between uppercase">{i18n._(t`PER $1K`)}</div>
+            <div className="flex items-center justify-between uppercase">{i18n._(t`SOUL / $1K`)}</div>
           </div>
         </div>
         {getRoiEntry('Hourly', roiPerHour, perHour)}
