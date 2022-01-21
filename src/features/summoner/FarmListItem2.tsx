@@ -22,7 +22,7 @@ import { Info } from 'react-feather'
 import Link from 'next/link'
 import { useSingleCallResult } from '../../state/multicall/hooks'
 import { usePriceHelperContract } from '../bond/hooks/useContract'
-import { formatCurrency } from '../../modals/TokenStatsModal'
+import { formatCurrency } from '../../modals/TokensStatsModal'
 
 const FarmListItem2 = ({ farm, ...rest }) => {
   const { chainId } = useActiveWeb3React()

@@ -11,7 +11,7 @@ import { POOLS, TokenInfo } from '../constants/farms'
 import { concat } from 'lodash'
 import { VAULTS } from '../constants/vaults'
 import { usePriceHelperContract } from '../features/bond/hooks/useContract'
-import { formatCurrency } from '../modals/TokenStatsModal'
+import { formatCurrency } from '../modals/TokensStatsModal'
 import farm from '../pages/farm'
 
 const PAIR_INTERFACE = new Interface(ISoulSwapPair)

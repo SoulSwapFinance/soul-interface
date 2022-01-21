@@ -20,7 +20,7 @@ import { WNATIVE } from '../../constants'
 import { PriceContext } from '../../contexts/priceContext'
 import { Info } from 'react-feather'
 import moment from 'moment'
-import { formatCurrency } from '../../modals/TokenStatsModal'
+import { formatCurrency } from '../../modals/TokensStatsModal'
 import { usePriceHelperContract } from '../bond/hooks/useContract'
 import { useSingleCallResult } from '../../state/multicall/hooks'
 

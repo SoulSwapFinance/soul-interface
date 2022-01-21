@@ -22,7 +22,7 @@ import { Info } from 'react-feather'
 import Link from 'next/link'
 import { useSingleCallResult } from '../../state/multicall/hooks'
 import { usePriceHelperContract } from '../bond/hooks/useContract'
-import { formatCurrency } from '../../modals/TokenStatsModal'
+import { formatCurrency } from '../../modals/TokensStatsModal'
 
 const MineListItem2 = ({ farm, ...rest }) => {
   const { chainId } = useActiveWeb3React()
@@ -33,17 +33,17 @@ const MineListItem2 = ({ farm, ...rest }) => {
   const priceHelperContract = usePriceHelperContract()
 
   const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
-  console.log(Number(rawSoulPrice))
+  // console.log(Number(rawSoulPrice))
   const soulPrice = Number(rawSoulPrice) / 1E18
   // console.log('soul price:%s', soulPrice)
 
   const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'])?.result
-  console.log(Number(rawFtmPrice))
+  // console.log(Number(rawFtmPrice))
   const ftmPrice = Number(rawFtmPrice) / 1E18
   // console.log(ftmPrice)
 
   const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6'])?.result
-  console.log(Number(rawSeancePrice))
+  // console.log(Number(rawSeancePrice))
   const seancePrice = Number(rawSeancePrice) / 1E18
   // console.log(seancePrice)
   

@@ -30,7 +30,7 @@ import {
 import { Wrap, ClickableText, Heading, Text, ExternalLink } from '../../components/ReusableStyles'
 import { useSingleCallResult } from '../../state/multicall/hooks'
 import { usePriceHelperContract } from '../bond/hooks/useContract'
-import { formatCurrency } from '../../modals/TokenStatsModal'
+import { formatCurrency } from '../../modals/TokensStatsModal'
 
 // params to render farm with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)

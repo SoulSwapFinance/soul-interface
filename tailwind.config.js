@@ -26,7 +26,7 @@ module.exports = {
         background: {
           'dark-1000': '#0D0415',
           'dark-900': '#161522',
-          'dark-800': '#202231',
+          'dark-800': '#360069',
           'dark-pink-red': '#4e3034',
         },
         border: {
@@ -59,7 +59,7 @@ module.exports = {
         'dark-850': '#1d1e2c',
         'dark-800': '#202231',
         'dark-700': '#2E3348',
-        'dark-600': '#1C2D49',
+        'dark-600': '#B485FF',
         'dark-500': '#223D5E',
         'low-emphesis': '#575757',
         primary: '#BFBFBF',

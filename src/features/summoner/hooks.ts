@@ -20,7 +20,7 @@ import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import zip from 'lodash/zip'
 import { useToken } from '../../hooks/Tokens'
 import { usePriceHelperContract } from '../bond/hooks/useContract'
-import { formatCurrency } from '../../modals/TokenStatsModal'
+import { formatCurrency } from '../../modals/TokensStatsModal'
 import { usePriceApi } from '../vault/hooks'
 // import useSummoner from './useSummoner'
 const { default: axios } = require('axios')

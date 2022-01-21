@@ -24,7 +24,7 @@ import Search from '../../components/Search'
 import useSummoner from '../../features/summoner/useSummoner'
 import { useSingleCallResult } from '../../state/multicall/hooks'
 import { usePriceHelperContract } from '../../features/bond/hooks/useContract'
-import { formatCurrency } from '../../modals/TokenStatsModal'
+import { formatCurrency } from '../../modals/TokensStatsModal'
 
 export default function FarmV2() {
   const { i18n } = useLingui()

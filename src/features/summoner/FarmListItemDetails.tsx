@@ -25,7 +25,7 @@ import { useToken } from '../../hooks/Tokens'
 import { isMobile } from 'react-device-detect'
 import { usePriceHelperContract } from '../bond/hooks/useContract'
 import { useSingleCallResult } from '../../state/multicall/hooks'
-import { formatCurrency } from '../../modals/TokenStatsModal'
+import { formatCurrency } from '../../modals/TokensStatsModal'
 
 const FarmListItem = ({ farm }) => {
   const { i18n } = useLingui()
@@ -57,9 +57,9 @@ const FarmListItem = ({ farm }) => {
   
   const priceHelperContract = usePriceHelperContract()
   const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
-  console.log(Number(rawSoulPrice))
+  // console.log(Number(rawSoulPrice))
   const soulPrice = Number(rawSoulPrice) / 1E18
-  console.log(soulPrice)
+  // console.log(soulPrice)
 
   const typedDepositValue = tryParseAmount(depositValue, liquidityToken)
   const typedWithdrawValue = tryParseAmount(withdrawValue, liquidityToken)
