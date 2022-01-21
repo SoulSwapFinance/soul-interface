@@ -258,13 +258,6 @@ export default function LuxorStatsModal(): JSX.Element | null {
         )}
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
-            {`Total Value Locked`}
-          </Typography>,
-          formatCurrency(
-            Number(summTvl), 0) // staked + tvl
-        )}
-        {getSummaryLine(
-          <Typography variant="sm" className="flex items-center py-0.5">
             {`Luxor Market Price`}
           </Typography>,
           formatCurrency(
