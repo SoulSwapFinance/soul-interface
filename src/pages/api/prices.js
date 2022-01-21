@@ -3,7 +3,8 @@ const Web3 = require('web3')
 // import { usePriceHelperContract } from 'hooks/useContract'
 // import useSingleCallResult from 'state/multicall/hooks'
 import ISoulSwapPairABI from '../../constants/abis/soulswap/ISoulSwapPair.json'
-const NETWORK_URL = 'https://rpc.ftm.tools'
+const NETWORK_URL = 'https://rpcapi.fantom.network'
+// const NETWORK_URL = 'https://rpc.ftm.tools'
 const web3 = new Web3(NETWORK_URL)
 
 export default async function handler(req, res) {
