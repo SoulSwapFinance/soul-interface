@@ -45,16 +45,11 @@ const YieldDetails: React.FC<YieldDetailsProps> = ({
 
   const roiPerWeek: number = roiPerDay * 7
 
-  // const perHour: number = Number((1000 * roiPerHour) / soulPrice)
-  // const perDay: number = Number((1000 * roiPerDay) / soulPrice)
-  // const perWeek: number = Number((1000 * roiPerWeek) / soulPrice)
-  // const perMonth: number = Number((1000 * roiPerMonth) / soulPrice)
-  // const perYear: number = Number((1000 * roiPerYear) / soulPrice)
-  const perHour: number = Number(1000 * roiPerHour)
-  const perDay: number = Number(1000 * roiPerDay)
-  const perWeek: number = Number(1000 * roiPerWeek)
-  const perMonth: number = Number(1000 * roiPerMonth)
-  const perYear: number = Number(1000 * roiPerYear)
+  const perHour: number = Number((1000 * roiPerHour) / soulPrice)
+  const perDay: number = Number((1000 * roiPerDay) / soulPrice)
+  const perWeek: number = Number((1000 * roiPerWeek) / soulPrice)
+  const perMonth: number = Number((1000 * roiPerMonth) / soulPrice)
+  const perYear: number = Number((1000 * roiPerYear) / soulPrice)
 
   const getRoiEntry = (period: string, percent: number, value: Number) => {
     return (
@@ -68,11 +63,11 @@ const YieldDetails: React.FC<YieldDetailsProps> = ({
         </div>
 
         <div className="flex flex-row px-2 w-full">
-          <div className="flex items-center justify-between">{formatCurrency(Number(value), 2)}</div>
+          <div className="flex items-center justify-between">{formatNumberScale(value, false, 2)}</div>
         </div>
       </div>
     )
-  }
+}
 
   const getModalContent = () => (
     <div className="space-y-6">
