@@ -41,7 +41,7 @@ function LuxorStats(): JSX.Element | null {
     >
       <div className="grid items-center grid-flow-col px-1.5 py-1 space-x-2 text-sm rounded-lg pointer-events-auto auto-cols-max bg-dark-1000 text-secondary">
         <Image
-          src="/images/tokens/wlum.png"
+          src="/images/tokens/wLUM.png"
           alt="WLUM"
           width="28px"
           height="28px"

@@ -262,7 +262,7 @@ function AppBar(): JSX.Element {
                     </a>
                   </ExternalLink>
                 {/* )} */}
-                {/* {chainId && [ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && ( */}
+                                {chainId && [ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <ExternalLink href={'https://info.soulswap.finance'}>
                     <a
                       id={`vote-nav-extlink`}
@@ -271,8 +271,8 @@ function AppBar(): JSX.Element {
                       {i18n._(t`View Charts`)}
                     </a>
                   </ExternalLink>
-                {/* )} */}
-                {/* {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && ( */}
+                 )}
+                {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <ExternalLink href={'https://app.soulswap.finance/vote'}>
                     <a
                       id={`vote-nav-extlink`}
@@ -281,8 +281,8 @@ function AppBar(): JSX.Element {
                       {i18n._(t`Governance`)}
                     </a>
                   </ExternalLink>
-                {/* )} */}
-                {/* {chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && ( */}
+                                )}
+                {chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                   <ExternalLink href={'https://docs.soulswap.finance'}>
                     <a
                       id={`links-nav-link`}
@@ -291,7 +291,7 @@ function AppBar(): JSX.Element {
                       {i18n._(t`Documentation`)}
                     </a>
                   </ExternalLink>
-                {/* )} */}
+                                )}
                 {/* {chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && ( */}
                   <ExternalLink href={'/tools'}>
                     <a
