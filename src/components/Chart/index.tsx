@@ -291,20 +291,26 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
         {inputCurrency?.isToken ?
           <iframe
             frameBorder={"none"}
-            src={`https://kek.tools/t/${inputCurrency.address}/chart?pair=${pairAddress}&accent=7B48BE`}
+            src={`https://kek.tools/t/${inputCurrency?.address}/chart?pair=${pairAddress}&accent=7B48BE`}
             height={"480"}
             width={"100%"}
           />
           :
-          inputCurrency?.isNative ?
+          inputCurrency?.isNative && outputCurrency?.isToken ?
             // outputCurrency?.isNative ?
             <iframe
               frameBorder={"none"}
-              src={`https://kek.tools/t/${outputCurrency.address}/chart?currencyType=native&pair=${pairAddress}&accent=7B48BE`}
+              src={`https://kek.tools/t/${outputCurrency?.address}/chart?currencyType=native&pair=${pairAddress}&accent=7B48BE`}
               height={"480"}
               width={"100%"}
             />
-            : 'https://kek.tools/t/0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83/chart?&accent=B026FF'
+            :             <iframe
+            frameBorder={"none"}
+            src={'https://kek.tools/t/0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83/chart?&accent=B026FF'}
+            height={"480"}
+            width={"100%"}
+          />
+            
         }
         {/* <div className={'flex flex-1 h-[300px]'}>
         {isLoading ? (
