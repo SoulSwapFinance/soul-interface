@@ -51,19 +51,19 @@ function AppBar(): JSX.Element {
                   <NavLink href="/landing">
                     <Image src="/logo.png" alt="Soul" width="40" height="40" />
                   </NavLink>
-                  
+
                   <div className="flex space-x-2">
                     <div className="flex space-x-3">
-                        <NavLink href="/exchange/swap">
-                          <a
-                            id={`swap-nav-link`}
-                            className="w-full relative ml-2 sm:ml-6 md:p-2"
-                          >
+                      <NavLink href="/exchange/swap">
+                        <a
+                          id={`swap-nav-link`}
+                          className="w-full relative ml-2 sm:ml-6 md:p-2"
+                        >
 
-                            {i18n._(t`SWAP`)}
-                          </a>
-                        </NavLink>
-                      
+                          {i18n._(t`SWAP`)}
+                        </a>
+                      </NavLink>
+                      {chainId && [ChainId.FANTOM].includes(chainId) && (
                         <NavLink href="/pool">
                           <a
                             id={`pool-nav-link`}
@@ -72,56 +72,58 @@ function AppBar(): JSX.Element {
                             {i18n._(t`LIQUIDITY`)}
                           </a>
                         </NavLink>
+                      )}
+                      {chainId && [ChainId.FANTOM].includes(chainId) && (
                         <NavLink href={'/mines'}>
                           <a
                             id={`farm-nav-link`}
                             className="w-full relative ml-6 md:p-2"
-                            >
+                          >
                             {i18n._(t`FARM`)}
                           </a>
                         </NavLink>
-
-                        <NavLink href={'/bonds'}>
-                          <a
-                            id={`bond-nav-link`}
-            className="w-full relative ml-6 md:p-2"
-                          >
-                            {i18n._(t`BOND`)}
-                          </a>
-                        </NavLink>
+                      )}
+                      <NavLink href={'/bonds'}>
+                        <a
+                          id={`bond-nav-link`}
+                          className="w-full relative ml-6 md:p-2"
+                        >
+                          {i18n._(t`BOND`)}
+                        </a>
+                      </NavLink>
                       <NavLink href={'/analytics'}>
                         <a
                           id={`analytics-nav-link`}
                           className="w-full relative ml-6 md:p-2"
-                          >
+                        >
                           {i18n._(t`DATA`)}
                         </a>
                       </NavLink>
-                        <NavLink href={'/launchpad'}>
-                          <a
-                            id={`launchpad-nav-link`}
-                            className="hidden md:block w-full relative ml-6 md:p-2"
-                          >
-                            {i18n._(t`LAUNCH`)}
-                          </a>
-                        </NavLink>
-                              <NavLink href={'/luxor'}>
-                                <a
-                                  id={`luxor-nav-link`}
-                                  className="hidden md:block w-full relative ml-6 md:p-2"
-                                >
-                                  {i18n._(t`LUXOR`)}
-                                </a>
-                              </NavLink>
-                            
-                              <NavLink href={'/claims'}>
-                                <a
-                                  id={`claims-nav-link`}
-                                  className="hidden md:block w-full relative ml-6 md:p-2"
-                                >
-                                  {i18n._(t`CLAIM`)}
-                                </a>
-                              </NavLink>
+                      <NavLink href={'/launchpad'}>
+                        <a
+                          id={`launchpad-nav-link`}
+                          className="hidden md:block w-full relative ml-6 md:p-2"
+                        >
+                          {i18n._(t`LAUNCH`)}
+                        </a>
+                      </NavLink>
+                      <NavLink href={'/luxor'}>
+                        <a
+                          id={`luxor-nav-link`}
+                          className="hidden md:block w-full relative ml-6 md:p-2"
+                        >
+                          {i18n._(t`LUXOR`)}
+                        </a>
+                      </NavLink>
+
+                      <NavLink href={'/claims'}>
+                        <a
+                          id={`claims-nav-link`}
+                          className="hidden md:block w-full relative ml-6 md:p-2"
+                        >
+                          {i18n._(t`CLAIM`)}
+                        </a>
+                      </NavLink>
                     </div>
                   </div>
                 </div>
@@ -207,51 +209,51 @@ function AppBar(): JSX.Element {
             <Popover.Panel className="xl:hidden">
               <div className="flex flex-col px-10 pt-2 pb-3 space-y-4">
 
-                  <ExternalLink href={'https://app.luxor.money'}>
-                    <a
-                      id={`luxor-nav-extlink`}
-                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                    >
-                      {i18n._(t`Luxor Money`)}
-                    </a>
-                  </ExternalLink>
+                <ExternalLink href={'https://app.luxor.money'}>
+                  <a
+                    id={`luxor-nav-extlink`}
+                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                  >
+                    {i18n._(t`Luxor Money`)}
+                  </a>
+                </ExternalLink>
 
-                  <ExternalLink href={'https://info.soulswap.finance'}>
-                    <a
-                      id={`vote-nav-extlink`}
-                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                    >
-                      {i18n._(t`View Charts`)}
-                    </a>
-                  </ExternalLink>
-                
-                  <ExternalLink href={'https://app.soulswap.finance/vote'}>
-                    <a
-                      id={`vote-nav-extlink`}
-                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                    >
-                      {i18n._(t`Governance`)}
-                    </a>
-                  </ExternalLink>
-            
-                  <ExternalLink href={'https://docs.soulswap.finance'}>
-                    <a
-                      id={`links-nav-link`}
-                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                    >
-                      {i18n._(t`Documentation`)}
-                    </a>
-                  </ExternalLink>
-                        
-   
-                  <ExternalLink href={'/tools'}>
-                    <a
-                      id={`tools-nav-link`}
-                      className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
-                    >
-                      {i18n._(t`Explore More`)}
-                    </a>
-                  </ExternalLink>
+                <ExternalLink href={'https://info.soulswap.finance'}>
+                  <a
+                    id={`vote-nav-extlink`}
+                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                  >
+                    {i18n._(t`View Charts`)}
+                  </a>
+                </ExternalLink>
+
+                <ExternalLink href={'https://app.soulswap.finance/vote'}>
+                  <a
+                    id={`vote-nav-extlink`}
+                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                  >
+                    {i18n._(t`Governance`)}
+                  </a>
+                </ExternalLink>
+
+                <ExternalLink href={'https://docs.soulswap.finance'}>
+                  <a
+                    id={`links-nav-link`}
+                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                  >
+                    {i18n._(t`Documentation`)}
+                  </a>
+                </ExternalLink>
+
+
+                <ExternalLink href={'/tools'}>
+                  <a
+                    id={`tools-nav-link`}
+                    className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                  >
+                    {i18n._(t`Explore More`)}
+                  </a>
+                </ExternalLink>
               </div>
             </Popover.Panel>
           </>
