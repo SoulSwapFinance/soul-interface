@@ -54,7 +54,7 @@ export function getNetwork(defaultChainId, urls = RPC) {
 }
 
 export const network = new NetworkConnector({
-  defaultChainId: 250,
+  defaultChainId: 1,
   urls: RPC,
 })
 
@@ -65,7 +65,7 @@ export function getNetworkLibrary(): Web3Provider {
 }
 
 const supportedChainIds = [
-  // 1, // mainnet
+  1, // mainnet
   // 56, // binance smart chain
   250, // fantom
   // 4002, // fantom testnet
@@ -99,11 +99,11 @@ export const injected = new InjectedConnector({
 
 // mainnet only
 export const walletconnect = new WalletConnectConnector({
-  rpc: { [ChainId.FANTOM]: RPC[ChainId.FANTOM] },
+  rpc: { [ChainId.MAINNET]: RPC[ChainId.MAINNET] },
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   supportedChainIds,
-  pollingInterval: 5000,
+  // pollingInterval: 5000,
 })
 
 // mainnet only
@@ -120,7 +120,7 @@ export const portis = new PortisConnector({
 
 // mainnet only
 export const walletlink = new WalletLinkConnector({
-  url: RPC[ChainId.FANTOM],
+  url: RPC[ChainId.MAINNET],
   appName: 'SoulSwap',
   appLogoUrl:
   'https://raw.github.com/SoulSwapFinance/icons/master/token/soul.jpg',
@@ -134,4 +134,4 @@ export const torus = new TorusConnector({
 // binance only
 export const binance = new BscConnector({ supportedChainIds: [56] })
 
-export const clover = new CloverConnector({ supportedChainIds: [250] })
+export const clover = new CloverConnector({ supportedChainIds: [1, 250] })

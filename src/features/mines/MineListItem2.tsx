@@ -35,17 +35,17 @@ const MineListItem2 = ({ farm, ...rest }) => {
   const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
   console.log(Number(rawSoulPrice))
   const soulPrice = Number(rawSoulPrice) / 1E18
-  console.log('soul price:%s', soulPrice)
+  // console.log('soul price:%s', soulPrice)
 
   const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'])?.result
   console.log(Number(rawFtmPrice))
   const ftmPrice = Number(rawFtmPrice) / 1E18
-  console.log(ftmPrice)
+  // console.log(ftmPrice)
 
   const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6'])?.result
   console.log(Number(rawSeancePrice))
   const seancePrice = Number(rawSeancePrice) / 1E18
-  console.log(seancePrice)
+  // console.log(seancePrice)
   
   const [selectedFarm, setSelectedFarm] = useState<string>(null)
 
@@ -60,7 +60,7 @@ const MineListItem2 = ({ farm, ...rest }) => {
       decimals = farm.pair.token0?.decimals
     } else if (farm.lpToken.toLowerCase() == WNATIVE[chainId].toLowerCase()) {
       lpPrice =  Number(ftmPrice)
-    } else if (farm.lpToken.toLowerCase() == '0x124B06C5ce47De7A6e9EFDA71a946717130079E6'.toLowerCase()) {
+    } else if (farm.lpToken.toLowerCase() == '0x124b06c5ce47de7a6e9efda71a946717130079e6'.toLowerCase()) {
       lpPrice =  Number(seancePrice)
     } else {
       lpPrice = pairPrice
