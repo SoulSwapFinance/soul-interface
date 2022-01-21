@@ -27,7 +27,7 @@ export class Token extends AbstractCurrency {
 
   // note: added to include Token
   public equals(other: Currency | Token): boolean {
-    return other.isToken && this.chainId === other.chainId && this.address === other.address
+    return other?.isToken && this.chainId === other.chainId && this.address === other.address
   }
 
   /**

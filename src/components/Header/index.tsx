@@ -41,7 +41,7 @@ function AppBar(): JSX.Element {
 
   return (
     <header className="flex flex-row justify-between w-screen flex-nowrap">
-      {/* <header className="flex-shrink-0 w-full"> */}
+
       <Popover as="nav" className="z-10 w-full bg-transparent header-border-b">
         {({ open }) => (
           <>
@@ -51,24 +51,19 @@ function AppBar(): JSX.Element {
                   <NavLink href="/landing">
                     <Image src="/logo.png" alt="Soul" width="40" height="40" />
                   </NavLink>
-                  {/* <div className="hidden sm:block lg:ml-4"> */}
+                  
                   <div className="flex space-x-2">
                     <div className="flex space-x-3">
-                      {/* <Exchange /> */}
-                      {/* <Farms /> */}
-                      {chainId && [ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href="/exchange/swap">
                           <a
                             id={`swap-nav-link`}
-                            //  className='focus:outline-none hover:text-high-emphesis'
                             className="w-full relative ml-2 sm:ml-6 md:p-2"
                           >
 
                             {i18n._(t`SWAP`)}
                           </a>
                         </NavLink>
-                      )}
-                      {chainId && [ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                      
                         <NavLink href="/pool">
                           <a
                             id={`pool-nav-link`}
@@ -77,49 +72,23 @@ function AppBar(): JSX.Element {
                             {i18n._(t`LIQUIDITY`)}
                           </a>
                         </NavLink>
-                      )}
-                      {/* <div
-                        className="w-full relative ml-6 md:p-2"
-                      > */}
-                      {/* <NavLink href={'/seance'}>
-                        <a className="w-full relative ml-6 md:p-2"
-                        > <Earn />
-                        </a>
-                      </NavLink> */}
-                      {/* </div> */}
-                      { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                         <NavLink href={'/mines'}>
                           <a
                             id={`farm-nav-link`}
-                            // className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800"
                             className="w-full relative ml-6 md:p-2"
-                            // className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
                             >
                             {i18n._(t`FARM`)}
                           </a>
                         </NavLink>
-                      )}
-                      {/* { chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
-                        <NavLink href={'/seance'}>
-                        <a
-                          id={`stake-nav-link`}
-                          className="w-full relative ml-6 md:p-2"
-                          >
-                          {i18n._(t`STAKE`)}
-                        </a>
-                      </NavLink>
-                      )} */}
-                      {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+
                         <NavLink href={'/bonds'}>
                           <a
                             id={`bond-nav-link`}
-                            // className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800"
-                            className="w-full relative ml-6 md:p-2"
+            className="w-full relative ml-6 md:p-2"
                           >
                             {i18n._(t`BOND`)}
                           </a>
                         </NavLink>
-                      )}
                       <NavLink href={'/analytics'}>
                         <a
                           id={`analytics-nav-link`}
@@ -136,7 +105,6 @@ function AppBar(): JSX.Element {
                             {i18n._(t`LAUNCH`)}
                           </a>
                         </NavLink>
-                            {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
                               <NavLink href={'/luxor'}>
                                 <a
                                   id={`luxor-nav-link`}
@@ -145,8 +113,7 @@ function AppBar(): JSX.Element {
                                   {i18n._(t`LUXOR`)}
                                 </a>
                               </NavLink>
-                            )}
-                            {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                            
                               <NavLink href={'/claims'}>
                                 <a
                                   id={`claims-nav-link`}
@@ -155,14 +122,6 @@ function AppBar(): JSX.Element {
                                   {i18n._(t`CLAIM`)}
                                 </a>
                               </NavLink>
-                            )}
-                      {/* <NavLink href={'/scarab'}>
-                          <a
-                            id={`scarab-nav-link`}
-                            className="hidden md:block w-full relative ml-6 md:p-2">
-                          {i18n._(t`SCARAB`)}
-                          </a>
-                        </NavLink> */}
                     </div>
                   </div>
                 </div>
@@ -206,10 +165,6 @@ function AppBar(): JSX.Element {
                         </div>
                       )}
                     </div>
-
-                    {/* <div className="hidden xl:block"> */}
-                    {/* <LanguageSwitch /> */}
-                    {/* </div> */}
                     <More />
                   </div>
                 </div>
@@ -252,7 +207,6 @@ function AppBar(): JSX.Element {
             <Popover.Panel className="xl:hidden">
               <div className="flex flex-col px-10 pt-2 pb-3 space-y-4">
 
-                {/* {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && ( */}
                   <ExternalLink href={'https://app.luxor.money'}>
                     <a
                       id={`luxor-nav-extlink`}
@@ -261,8 +215,7 @@ function AppBar(): JSX.Element {
                       {i18n._(t`Luxor Money`)}
                     </a>
                   </ExternalLink>
-                {/* )} */}
-                                {chainId && [ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+
                   <ExternalLink href={'https://info.soulswap.finance'}>
                     <a
                       id={`vote-nav-extlink`}
@@ -271,8 +224,7 @@ function AppBar(): JSX.Element {
                       {i18n._(t`View Charts`)}
                     </a>
                   </ExternalLink>
-                 )}
-                {chainId && [ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+                
                   <ExternalLink href={'https://app.soulswap.finance/vote'}>
                     <a
                       id={`vote-nav-extlink`}
@@ -281,8 +233,7 @@ function AppBar(): JSX.Element {
                       {i18n._(t`Governance`)}
                     </a>
                   </ExternalLink>
-                                )}
-                {chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && (
+            
                   <ExternalLink href={'https://docs.soulswap.finance'}>
                     <a
                       id={`links-nav-link`}
@@ -291,8 +242,8 @@ function AppBar(): JSX.Element {
                       {i18n._(t`Documentation`)}
                     </a>
                   </ExternalLink>
-                                )}
-                {/* {chainId && [ChainId.MAINNET, ChainId.BSC, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId) && ( */}
+                        
+   
                   <ExternalLink href={'/tools'}>
                     <a
                       id={`tools-nav-link`}
@@ -301,7 +252,6 @@ function AppBar(): JSX.Element {
                       {i18n._(t`Explore More`)}
                     </a>
                   </ExternalLink>
-                {/* )} */}
               </div>
             </Popover.Panel>
           </>
