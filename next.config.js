@@ -5,7 +5,7 @@ const { locales, sourceLocale } = linguiConfig
 
 const defaultTheme = require('tailwindcss/defaultTheme')
 
-const { ChainId } = require('sdk')
+// const { ChainId } = require('sdk')
 const { screens } = defaultTheme
 
 
@@ -197,16 +197,16 @@ const nextConfig = {
     defaultLocale: sourceLocale,
   },
   network: {
-    chainIds: [ChainId.MAINNET, ChainId.FANTOM],
-    defaultChainId: ChainId.MAINNET,
+    chainIds: [1, 250],
+    defaultChainId: 250,
     domains: [
       {
         domain: 'soulswap.finance',
-        defaultChainId: ChainId.MAINNET,
+        defaultChainId: 1,
       },
       {
         domain: 'exchange.soulswap.finance',
-        defaultChainId: ChainId.FANTOM,
+        defaultChainId: 250,
       },
     ],
   },
