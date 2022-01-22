@@ -20,6 +20,7 @@ import { Wrapper } from 'features/swap/styleds'
 import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
+import QuestionHelper from 'components/QuestionHelper'
 
 const cache: { [key: string]: number } = {};
 
@@ -189,7 +190,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
             <Typography variant="sm" className="flex items-center py-0.5">
               {`Circulating Supply`}
             </Typography>
-            {/* <QuestionHelper */}
+            <QuestionHelper
               text={
                 <div className="flex flex-col gap-2 py-1 px-3 w-full">
                   <div className="flex items-center justify-between">
@@ -233,7 +234,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
                   </div>
                 </div>
               }
-            {/* /> */}
+            />
           </div>,
           formatNumberScale(
             Number(tokenInfo?.totalSupply)
