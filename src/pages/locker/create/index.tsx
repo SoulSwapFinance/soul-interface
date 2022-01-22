@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/link-passhref */
 import {
     ApprovalState,
-    useActiveWeb3React,
     useApproveCallback,
   } from '../../../hooks'
   
@@ -31,6 +30,7 @@ import {
   import { ethers } from 'ethers'
   import { useAddPopup } from '../../../state/application/hooks'
 import { BigNumber } from '@ethersproject/bignumber'
+import { useActiveWeb3React } from 'services/web3'
   
   export default function CreateLocker(): JSX.Element {
     const { i18n } = useLingui()

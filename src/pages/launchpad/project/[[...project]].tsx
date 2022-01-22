@@ -10,7 +10,7 @@ import { ButtonConfirmed, ButtonError } from '../../../components/Button'
 import { LAUNCHPAD_PROJECTS, PROJECT_STATUS } from '../../../constants/launchpad'
 import Back from '../../../components/Back'
 import NumericalInput from '../../../components/NumericalInput'
-import { ApprovalState, useActiveWeb3React, useApproveCallback } from '../../../hooks'
+import { ApprovalState, useApproveCallback } from '../../../hooks'
 import { useCurrency } from '../../../hooks/Tokens'
 import { SOUL_ADDRESS, SOUL_FTM_PAIR, WNATIVE } from '../../../constants'
 import Web3Connect from '../../../components/Web3Connect'
@@ -26,6 +26,7 @@ import { useCurrencyBalance } from '../../../state/wallet/hooks'
 import { useTransactionAdder } from '../../../state/transactions/hooks'
 import { CurrencyAmount } from '../../../sdk'
 import { BigNumber } from '@ethersproject/bignumber'
+import { useActiveWeb3React } from 'services/web3'
 
 const Menu = ({ children }) => {
   return (

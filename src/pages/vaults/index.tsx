@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/link-passhref */
-import { useActiveWeb3React, useFuse, useSoulSummonerContract } from '../../hooks'
+import { useFuse, useSoulSummonerContract } from '../../hooks'
 
 import Head from 'next/head'
 import React, { useContext, useState } from 'react'
@@ -20,6 +20,7 @@ import { useTVL } from '../../hooks/useV2Pairs'
 import VaultList from '../../features/vault/VaultList'
 // import useSummoner from '../../features/summoner/useSummoner'
 import { useFarms, usePositions, useSoulSummonerInfo } from '../../features/summoner/hooks'
+import { useActiveWeb3React } from 'services/web3'
 // import useSoulSummoner from '../../features/farm/hooks/useSoulSummoner'
 
 export default function Vault(): JSX.Element {

@@ -22,7 +22,7 @@ function LuxorStats(): JSX.Element | null {
 
   const priceHelperContract = usePriceHelperContract()
 
-  const rawLuxPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'])?.result
+  const rawLuxPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'])
   // console.log(Number(rawLuxPrice))
   const luxPrice = formatCurrency(Number(rawLuxPrice) / 1E18, 0)
   // console.log(luxPrice)
