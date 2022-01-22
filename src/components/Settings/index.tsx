@@ -1,35 +1,22 @@
-import { ChainId, Percent } from 'sdk'
-import React, { FC, useState } from 'react'
-import {
-  useExpertModeManager,
-  useUserOpenMev,
-  useUserSingleHopOnly,
-  useUserTransactionTTL,
-} from 'state/user/hooks'
-import { useModalOpen, useToggleSettingsMenu } from '../../state/application/hooks'
-import Image from '../../components/Image'
 import { CheckIcon, CogIcon } from '@heroicons/react/outline'
+import { t } from '@lingui/macro'
+import { useLingui } from '@lingui/react'
+import { Percent } from 'sdk'
+import { Button } from 'components/Button'
 import CloseIcon from 'components/CloseIcon'
+import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
+import Popover from 'components/Popover'
+import QuestionHelper from 'components/QuestionHelper'
 import Switch from 'components/Switch'
+import TransactionSettings from 'components/TransactionSettings'
+import Typography from 'components/Typography'
 import { classNames } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
-// import { AdjustmentsIcon } from '@heroicons/react/outline'
-import { ApplicationModal } from 'state/application/actions'
-import { Button } from '../Button'
-import { OPENMEV_ENABLED, OPENMEV_SUPPORTED_NETWORKS } from 'config/openmev'
-import Modal from '../DefaultModal'
-import ModalHeader from '../ModalHeader'
-import QuestionHelper from '../QuestionHelper'
-import Toggle from '../Toggle'
-import TransactionSettings from '../TransactionSettings'
-import Typography from '../Typography'
-import { t } from '@lingui/macro'
-// import { useActiveWeb3React } from 'hooks'
-import { useLingui } from '@lingui/react'
-import { useOnClickOutside } from 'hooks/useOnClickOutside'
-import SETTINGS from 'assets/icons/controls.svg'
-import Popover from 'components/Popover'
-import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
+import { useToggleSettingsMenu } from 'state/application/hooks'
+import { useExpertModeManager, useUserOpenMev, useUserSingleHopOnly } from 'state/user/hooks'
+import React, { FC, useState } from 'react'
+
+import { OPENMEV_ENABLED, OPENMEV_SUPPORTED_NETWORKS } from '../../config/openmev'
 
 interface SettingsTabProps {
   placeholderSlippage?: Percent
@@ -49,7 +36,8 @@ const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className, tri
 
   return (
     <>
-    <Popover
+      <Popover
+      show={true} // ?
         placement="bottom-end"
         content={
           <div className="flex flex-col gap-3 p-3 border rounded shadow-xl bg-dark-900 w-80 border-dark-700">
@@ -57,7 +45,7 @@ const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className, tri
               <Typography variant="xxs" weight={700} className="text-secondary">
                 {i18n._(t`Transaction Settings`)}
               </Typography>
-              <TransactionSettings placeholderSlippage={placeholderSlippage}
+              <TransactionSettings placeholderSlippage={placeholderSlippage} 
               // trident={trident} 
               />
             </div>
@@ -96,7 +84,7 @@ const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className, tri
                   color="gradient"
                 />
               </div>
-              {/* {!trident && ( */}
+              {!trident && (
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <Typography variant="xs" className="text-high-emphesis" weight={700}>
@@ -114,7 +102,7 @@ const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className, tri
                     color="gradient"
                   />
                 </div>
-              {/* )} */}
+              )}
               {/*@ts-ignore TYPE NEEDS FIXING*/}
               {OPENMEV_ENABLED && OPENMEV_SUPPORTED_NETWORKS.includes(chainId) && (
                 <div className="flex items-center justify-between">
