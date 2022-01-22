@@ -19,7 +19,7 @@ import { cloudinaryLoader } from '../../functions/cloudinary'
 import { formatNumber } from '../../functions/format'
 import { isAddress } from 'ethers/lib/utils'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useLingui } from '@lingui/react'
 import { useUserHasSubmittedClaim } from '../../state/transactions/hooks'
 

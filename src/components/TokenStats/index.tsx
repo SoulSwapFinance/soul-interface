@@ -4,12 +4,12 @@ import Image from 'next/image'
 // import NetworkModel from '../../modals/NetworkModal'
 import TokensStatsModal, { formatCurrency } from '../../modals/TokensStatsModal'
 import React from 'react'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useModalOpen, useToggleTokenStatsModal } from '../../state/application/hooks'
 import { ApplicationModal } from '../../state/application/actions'
 import { useSingleCallResult } from '../../state/multicall/hooks'
 import { usePriceHelperContract } from '../../features/bond/hooks/useContract'
 import styled from 'styled-components'
+import { useActiveWeb3React } from 'services/web3'
 
 const HideOnMobile = styled.div`
 @media screen and (max-width: 500px) {

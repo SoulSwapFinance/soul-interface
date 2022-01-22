@@ -8,7 +8,7 @@ import { CustomLightSpinner } from '../Spinner'
 import ExternalLink from '../ExternalLink'
 import { RowBetween } from '../Row'
 import { getExplorerLink } from '../../functions/explorer'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 
 const ConfirmOrLoadingWrapper = styled.div`
   width: 100%;

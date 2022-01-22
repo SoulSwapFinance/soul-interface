@@ -1,6 +1,6 @@
 import { ChainId, Currency, CurrencyAmount, JSBI, NATIVE, Price, Token } from 'sdk'
 
-import { useActiveWeb3React } from '../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useMemo } from 'react'
 import { useV2TradeExactOut } from './useV2Trades'
 import { useSingleCallResult } from 'state/multicall/hooks'

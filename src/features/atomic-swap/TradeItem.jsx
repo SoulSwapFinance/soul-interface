@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { MaxUint256 } from '@ethersproject/constants'
 import { ZERO_ADDRESS, ATOMIC_SWAP_ADDRESS, CONTRACT_SCAN } from '../../constants/addresses'
 
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 
 import useAtomicSwap from './hooks/useAtomicSwap'
 import useApproveContract from './hooks/useApprove'

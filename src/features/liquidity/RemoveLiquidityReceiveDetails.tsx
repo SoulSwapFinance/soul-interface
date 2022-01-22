@@ -6,7 +6,7 @@ import Link from 'next/link'
 import React from 'react'
 import { RowBetween } from '../../components/Row'
 import { currencyId } from '../../functions/currency'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 
 interface RemoveLiquidityReceiveDetailsProps {
   currencyA?: Currency

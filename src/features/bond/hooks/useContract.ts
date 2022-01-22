@@ -44,8 +44,8 @@ import { MULTICALL_ADDRESS,
 import WETH9_ABI from '../constants/abis/weth.json'
 
 import { getContract } from '../../../functions/contract'
-import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
 import { useMemo } from 'react'
+import { useActiveWeb3React } from 'services/web3'
 
 // returns null on errors
 export function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {

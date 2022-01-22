@@ -39,7 +39,7 @@
     "@ethersproject/providers": "^5.4.1",
     "@fontsource/dm-sans": "^4.4.5",
     "@gnosis.pm/safe-apps-web3-react": "^0.6.3",
-    "@headlessui/react": "^1.4.1",
+    "@headlessui/react": "1.4.0",
     "@heroicons/react": "^1.0.4",
     "@lingui/cli": "^3.11.1",
     "@lingui/core": "^3.11.1",

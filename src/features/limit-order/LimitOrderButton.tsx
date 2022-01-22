@@ -4,7 +4,7 @@ import { t } from '@lingui/macro'
 import {Button, ButtonProps } from '../../components/Button'
 import React, { FC, useCallback, useState } from 'react'
 import useLimitOrderApproveCallback, { BentoApprovalState } from '../../hooks/useLimitOrderApproveCallback'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { ApprovalState, useApproveCallback } from '../../hooks'
 import { COFFIN_BOX_ADDRESS } from '../../constants/kashi'
 import { ChainId, Currency } from '../../sdk'
@@ -85,8 +85,8 @@ const LimitOrderButton: FC<LimitOrderButtonProps> = ({ currency, color, ...rest 
       endTime.toString()
     )
 
-    try {
-      await order.signOrderWithProvider(chainId, library)
+    try { // TODO: FIX
+      // await order.signOrderWithProvider(chainId, library)
       setOpenConfirmationModal(false)
 
       const resp = await order.send()

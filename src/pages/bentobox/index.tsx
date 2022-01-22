@@ -7,7 +7,7 @@ import React from 'react'
 import Web3Status from '../../components/Web3Status'
 import { SoulLaunchpad } from '../../features/launchpad/SoulLaunchpad'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useLingui } from '@lingui/react'
 
 export default function BenotBox() {

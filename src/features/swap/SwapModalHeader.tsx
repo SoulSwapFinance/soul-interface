@@ -15,7 +15,7 @@ import AdvancedSwapDetails from './AdvancedSwapDetails'
 // import { Field } from '../../state/swap/actions'
 // import { RowBetween } from '../../components/Row'
 // import Typography from '../../components/Typography'
-// import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+// import { useActiveWeb3React } from 'services/web3'
 
 export default function SwapModalHeader({
   trade,

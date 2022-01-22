@@ -5,7 +5,7 @@ import React, { useMemo } from 'react'
 import SwapRoute from '../swap/SwapRoute'
 import { TradeType, Trade as V2Trade, Currency } from '../../sdk'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useLingui } from '@lingui/react'
 
 function TradeReview({

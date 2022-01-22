@@ -32,7 +32,7 @@ import { currencyId as getCurrencyId } from '../../functions/currency/currencyId
 import { maxAmountSpend } from '../../functions/currency/maxAmountSpend'
 import { resetZapState } from '../../state/zap/actions'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useCurrency } from '../../hooks/Tokens'
 import { useDefaultsFromURLSearch } from '../../state/zap/hooks'
 import { useDispatch } from 'react-redux'

@@ -9,7 +9,7 @@ import { CurrencyLogo } from '../../components/CurrencyLogo'
 import ExternalLink from '../../components/ExternalLink'
 import { getExplorerLink } from '../../functions/explorer'
 import styled from 'styled-components'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useUnsupportedTokens } from '../../hooks/Tokens'
 import { HeadlessUiModal } from 'components/Modal'
 

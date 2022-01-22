@@ -7,7 +7,7 @@ import { ChainId } from '../../sdk'
 import { Chef } from './enum'
 import { Fraction } from '../../entities/bignumber/Fraction'
 import { getContract } from '../../functions'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useBlockNumber } from '../../state/application/hooks'
 
 const REWARDERS = {

@@ -2,8 +2,6 @@ import { useCallback } from 'react'
 import { ethers, BigNumber } from 'ethers'
 // import { formatNumber } from '../../functions'
 
-import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
-
 import {
   useHelperContract,
   useSoulSummonerContract,
@@ -15,6 +13,7 @@ import {
 import { SoulSummonerAddress, SUMMONER_HELPER_ADDRESS as SummonerHelperAddress } from '../constants'
 
 import { AllPids } from '../Pids'
+import { useActiveWeb3React } from 'services/web3'
 
 // const helperContract = useHelperContract()
 

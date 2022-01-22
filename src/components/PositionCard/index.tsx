@@ -13,7 +13,6 @@ import { CurrencyLogo } from '../CurrencyLogo'
 import Dots from '../Dots'
 import DoubleCurrencyLogo from '../DoubleLogo'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useColor } from '../../hooks'
 import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
@@ -25,6 +24,7 @@ import { useSingleCallResult } from 'state/multicall/hooks'
 import { useCurrency } from 'hooks/Tokens'
 import { usePriceHelperContract } from 'features/bond/hooks/useContract'
 import { useUserInfo } from 'features/mines/hooks'
+import { useActiveWeb3React } from 'services/web3'
 
 interface PositionCardProps {
   pair: Pair
@@ -121,7 +121,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
 export default function FullPositionCard({ pair, border, stakedBalance }: PositionCardProps) {
   const { i18n } = useLingui()
   const router = useRouter()
-  const { account, chainId } = useActiveWeb3React()
+  const { account } = useActiveWeb3React()
 
   const currency0 = unwrappedToken(pair.token0)
   const currency1 = unwrappedToken(pair.token1)

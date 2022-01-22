@@ -1,8 +1,8 @@
 import { ChainId, Currency, CurrencyAmount, Price, Token } from '../../../sdk'
 
-import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
 import { useMemo } from 'react'
 import { useV2TradeExactOut } from '../../../hooks/useV2Trades'
+import { useActiveWeb3React } from 'services/web3'
 
 // import { wrappedCurrency } from "../functions/currency/wrappedCurrency";
 

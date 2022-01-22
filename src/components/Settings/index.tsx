@@ -37,7 +37,6 @@ const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className, tri
   return (
     <>
       <Popover
-      show={true} // ?
         placement="bottom-end"
         content={
           <div className="flex flex-col gap-3 p-3 border rounded shadow-xl bg-dark-900 w-80 border-dark-700">

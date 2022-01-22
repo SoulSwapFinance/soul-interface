@@ -3,8 +3,8 @@ import { ChainId } from '../../sdk'
 import ExternalLink from '../ExternalLink'
 import Polling from '../Polling'
 import { t } from '@lingui/macro'
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import { useLingui } from '@lingui/react'
+import { useActiveWeb3React } from 'services/web3'
 
 const Footer = () => {
   const { chainId } = useActiveWeb3React()
