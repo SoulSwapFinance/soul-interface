@@ -5,7 +5,7 @@ import { ZERO, e10 } from '../../functions/math'
 
 import { Button } from '../../components/Button'
 import KashiCooker from '../../entities/KashiCooker'
-import SmartNumberInput from '../../components/SmartNumberInput'
+import SmartNumberInput from './SmartNumberInput'
 import TransactionReviewList from './TransactionReview'
 import { WNATIVE } from '../../sdk'
 import { Warnings } from '../../entities/Warnings'
@@ -14,6 +14,7 @@ import { formatNumber } from '../../functions/format'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useCurrency } from '../../hooks/Tokens'
 import { useKashiInfo } from './context'
+import { BigNumber } from '@ethersproject/bignumber'
 
 export default function Deposit({ pair }: any): JSX.Element {
   const { chainId } = useActiveWeb3React()
@@ -36,7 +37,8 @@ export default function Deposit({ pair }: any): JSX.Element {
   const warnings = new Warnings()
 
   warnings.add(
-    balance?.lt(value.toBigNumber(pair.asset.tokenInfo.decimals)),
+    balance?.lt(value),
+      // .toBigNumber(pair.asset.tokenInfo.decimals)),
     `Please make sure your ${useBento ? 'CoffinBox' : 'wallet'} balance is sufficient to deposit and then try again.`,
     true
   )
@@ -44,11 +46,13 @@ export default function Deposit({ pair }: any): JSX.Element {
   const transactionReview = new TransactionReview()
 
   if (value && !warnings.broken) {
-    const amount = value.toBigNumber(pair.asset.tokenInfo.decimals)
+    const amount = value
+    // .toBigNumber(pair.asset.tokenInfo.decimals)
     const newUserAssetAmount = pair.currentUserAssetAmount.value.add(amount)
     transactionReview.addTokenAmount('Balance', pair.currentUserAssetAmount.value, newUserAssetAmount, pair.asset)
     transactionReview.addUSD('Balance USD', pair.currentUserAssetAmount.value, newUserAssetAmount, pair.asset)
-    const newUtilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.add(amount))
+    const newUtilization = e10(18)
+      .mul(pair.currentBorrowAmount.value).div(pair.currentAllAssets.value.add(amount))
     transactionReview.addPercentage('Borrowed', pair.utilization.value, newUtilization)
     if (pair.currentExchangeRate.isZero()) {
       transactionReview.add(
@@ -70,7 +74,9 @@ export default function Deposit({ pair }: any): JSX.Element {
     if (pair.currentExchangeRate.isZero()) {
       cooker.updateExchangeRate(false, ZERO, ZERO)
     }
-    cooker.addAsset(value.toBigNumber(pair.asset.tokenInfo.decimals), useBento)
+    cooker.addAsset(new BigNumber(value, ''),
+      // .toBigNumber(pair.asset.tokenInfo.decimals), 
+      useBento)
     return `Deposit ${pair.asset.tokenInfo.symbol}`
   }
 
@@ -101,7 +107,9 @@ export default function Deposit({ pair }: any): JSX.Element {
           <TokenApproveButton value={value} token={assetToken} needed={!useBento}>
             <Button
               onClick={() => onCook(pair, onExecute)}
-              disabled={value.toBigNumber(pair.asset.tokenInfo.decimals).lte(0) || warnings.broken}
+              disabled={value
+                // .toBigNumber(pair.asset.tokenInfo.decimals).lte(0) 
+                || warnings.broken}
             >
               Deposit
             </Button>
