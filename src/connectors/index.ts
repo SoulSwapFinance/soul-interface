@@ -55,7 +55,7 @@ export function getNetwork(defaultChainId, urls = RPC) {
 }
 
 export const network = new NetworkConnector({
-  defaultChainId: 1,
+  defaultChainId: 250,
   urls: RPC,
 })
 
@@ -67,7 +67,7 @@ export function getNetworkLibrary(): Web3Provider {
 
 const supportedChainIds = [
   1, // mainnet
-  // 56, // binance smart chain
+  56, // binance smart chain
   250, // fantom
   // 4002, // fantom testnet
   // 3, // ropsten
@@ -100,7 +100,7 @@ export const injected = new InjectedConnector({
 
 // mainnet only
 export const walletconnect = new WalletConnectConnector({
-  rpc: { [ChainId.MAINNET]: RPC[ChainId.MAINNET] },
+  rpc: RPC,
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   supportedChainIds,
