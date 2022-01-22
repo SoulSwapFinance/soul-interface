@@ -1,57 +1,33 @@
 const withPWA = require('next-pwa')
 const runtimeCaching = require('next-pwa/cache')
+
 const linguiConfig = require('./lingui.config.js')
+
 const { locales, sourceLocale } = linguiConfig
-
-const defaultTheme = require('tailwindcss/defaultTheme')
-
-// const { ChainId } = require('sdk')
-const { screens } = defaultTheme
-
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
-// This file sets a custom webpack configuration to use your Next.js app
-// with Sentry.
-// https://nextjs.org/docs/api-reference/next.config.js/introduction
-// https://docs.sentry.io/platforms/javascript/guides/nextjs/
-
-const nextConfig = {
-  webpack: (config) => {
-    config.module.rules = [
-      ...config.module.rules,
-      {
-        resourceQuery: /raw-lingui/,
-        type: 'javascript/auto',
-      },
-    ]
-
-    return config
-  },
-  // experimental: {
-  //   concurrentFeatures: true,
-  //   serverComponents: true,
-  // },
-  swcMinify: false,
-  reactStrictMode: true,
-  pwa: {
-    dest: 'public',
-    // runtimeCaching,
-    dynamicStartUrlRedirect: '/swap',
-    disable: process.env.NODE_ENV === 'development',
-  },
-  images: {
-    domains: [
-    'assets.soulswap.finance',
-    'media.giphy.com',
-    'assets.sushi.com',
-    'res.cloudinary.com',
-    'raw.githubusercontent.com',
-    'logos.covalenthq.com'
-    ],
-  },
+module.exports = withBundleAnalyzer(
+  withPWA({
+    pwa: {
+      dest: 'public',
+      runtimeCaching,
+      disable: process.env.NODE_ENV === 'development',
+    },
+    images: {
+      domains: [
+        'assets.soulswap.finance',
+        'media.giphy.com',
+        'assets.sushi.com',
+        'res.cloudinary.com',
+        'raw.githubusercontent.com',
+        'logos.covalenthq.com',
+      ],
+      deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    },
+    reactStrictMode: true,
     async redirects() {
       return [
         {
@@ -189,29 +165,12 @@ const nextConfig = {
         },
       ]
     },
-  i18n: {
-    localeDetection: true,
-    locales,
-    defaultLocale: sourceLocale,
-  },
-  network: {
-    chainIds: [1, 250],
-    defaultChainId: 250,
-    domains: [
-      {
-        domain: 'soulswap.finance',
-        defaultChainId: 1,
-      },
-      {
-        domain: 'exchange.soulswap.finance',
-        defaultChainId: 250,
-      },
-    ],
-  },
-  publicRuntimeConfig: {
-    breakpoints: screens,
-  },
-}
+    i18n: {
+      locales,
+      defaultLocale: sourceLocale,
+    },
+  })
+)
 
 // Don't delete this console log, useful to see the config in Vercel deployments
 console.log('next.config.js', JSON.stringify(module.exports, null, 2))
