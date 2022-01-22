@@ -4,7 +4,6 @@ import { ApplicationModal } from 'state/application/actions'
 import Image from 'next/image'
 import styled from 'styled-components'
 import Modal from 'components/DefaultModal'
-import ModalHeader from 'components/ModalHeader'
 import Typography from 'components/Typography'
 import ExternalLink from 'components/ExternalLink'
 import { ExternalLink as LinkIcon } from 'react-feather'
@@ -20,6 +19,7 @@ import { Wrapper } from 'features/swap/styleds'
 import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
+import ModalHeader from 'components/Modal/Header'
 
 const cache: { [key: string]: number } = {};
 
@@ -74,7 +74,7 @@ export default function SoulStatsModal(): JSX.Element | null {
     <Modal isOpen={soulStatsModalOpen} onDismiss={toggleSoulStatsModal} maxWidth={672}>
       <div className="space-y-8">
         <div className="space-y-4">
-          <ModalHeader title={''} onClose={toggleSoulStatsModal} />
+          <ModalHeader header={''} onClose={toggleSoulStatsModal} />
           {/* <Wrapper className="flex flex-col-2 justify-between" > */}
 
           <div className="flex justify-between flex-col-2 w-full py-4">

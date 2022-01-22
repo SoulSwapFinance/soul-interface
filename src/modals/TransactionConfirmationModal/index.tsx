@@ -9,7 +9,6 @@ import ExternalLink from 'components/ExternalLink'
 import Image from 'components/Image'
 import Lottie from 'lottie-react'
 import Modal from 'components/DefaultModal'
-import ModalHeader from 'components/ModalHeader'
 import { RowFixed } from 'components/Row'
 import { getExplorerLink } from 'functions/explorer'
 import loadingRollingCircle from 'animation/loading-rolling-circle.json'
@@ -17,6 +16,7 @@ import { useActiveWeb3React } from 'services/web3'
 import useAddTokenToMetaMask from 'hooks/useAddTokenToMetaMask'
 import { useLingui } from '@lingui/react'
 import { HeadlessUiModal } from 'components/Modal'
+import ModalHeader from 'components/Modal/Header'
 
 interface ConfirmationPendingContentProps {
   onDismiss: () => void
@@ -124,7 +124,7 @@ export const ConfirmationModalContent: FC<ConfirmationModelContentProps> = ({
 }) => {
   return (
     <div className="grid gap-4">
-      <ModalHeader title={title} onClose={onDismiss} />
+      <ModalHeader header={title} onClose={onDismiss} />
       {topContent()}
       {bottomContent()}
     </div>

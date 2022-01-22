@@ -22,11 +22,11 @@ import useSoulSummoner from '../../features/farm/hooks/useSoulSummoner'
 
 import { ethers } from 'ethers'
 import { useSoulSummonerContract } from '../../hooks'
-import ModalHeader from '../../components/ModalHeader'
 import Typography from '../../components/Typography'
 import { SubmitButton } from '../../features/seance/SeanceStyles'
 import { HeadlessUiModal } from 'components/Modal'
 import Header from 'features/mines/components/Header'
+import ModalHeader from 'components/Modal/Header'
 
 const INPUT_CHAR_LIMIT = 18
 
@@ -585,7 +585,7 @@ export default function SoulStake() {
       <HeadlessUiModal.Controlled isOpen={showConfirmation} onDismiss={
         () => setShowConfirmation(false)}>
         <div className="space-y-4">
-          <ModalHeader title={`Please Read and Confirm`} onClose={() => setShowConfirmation(false)} />
+          <ModalHeader header={`Please Read and Confirm`} onClose={() => setShowConfirmation(false)} />
           <Typography variant="lg">
             If you have more SEANCE than you have STAKED, then please read below:
             <br /><br />

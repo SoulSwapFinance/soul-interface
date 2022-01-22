@@ -18,11 +18,11 @@ import { useTokenBalance } from '../../state/wallet/hooks'
 import { useTransactionAdder } from '../../state/transactions/hooks'
 import { isMobile } from 'react-device-detect'
 import Modal from 'components/DefaultModal'
-import ModalHeader from '../../components/ModalHeader'
 import Typography from '../../components/Typography'
 import moment from 'moment'
 import { BigNumber } from '@ethersproject/bignumber'
 import { useActiveWeb3React } from 'services/web3'
+import ModalHeader from 'components/Modal/Header'
 
 const VaultListItem = ({ farm }) => {
   const { i18n } = useLingui()
@@ -64,7 +64,7 @@ const VaultListItem = ({ farm }) => {
       <Modal isOpen={showConfirmation} onDismiss={() => setShowConfirmation(false)}>
         <div className="space-y-4">
           <ModalHeader
-            title={i18n._(t`Confirm ${currentAction.action == 'deposit' ? 'Staking' : 'Harvesting'}`)}
+            header={i18n._(t`Confirm ${currentAction.action == 'deposit' ? 'Staking' : 'Harvesting'}`)}
             onClose={() => setShowConfirmation(false)}
           />
           {/* <Typography variant="lg" className="font-medium pt-4">

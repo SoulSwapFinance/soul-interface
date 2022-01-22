@@ -13,7 +13,6 @@ import Image from '../../components/Image'
 import { ApplicationModal } from '../../state/application/actions'
 import { Button } from 'components/Button'
 import Modal from 'components/DefaultModal'
-import ModalHeader from 'components/ModalHeader'
 import QuestionHelper from 'components/QuestionHelper'
 import Toggle from 'components/Toggle'
 import Typography from 'components/Typography'
@@ -23,6 +22,7 @@ import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import SETTINGS from 'assets/icons/controls.svg'
 import { useActiveWeb3React } from 'services/web3'
 import TransactionSettings from 'components/TransactionSettings'
+import ModalHeader from 'components/Modal/Header'
 
 export default function SettingsTab({ placeholderSlippage }: { placeholderSlippage?: Percent }) {
   const { i18n } = useLingui()
@@ -131,7 +131,9 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
 
       <Modal isOpen={showConfirmation} onDismiss={() => setShowConfirmation(false)}>
         <div className="space-y-4">
-          <ModalHeader title={i18n._(t`Are you sure?`)} onClose={() => setShowConfirmation(false)} />
+          <ModalHeader 
+            // title={i18n._(t`Are you sure?`)} 
+            onClose={() => setShowConfirmation(false)} header={'Are you sure?'} />
           <Typography variant="lg">
             {i18n._(t`Expert mode turns off the confirm transaction prompt and allows high slippage trades
                                 that often result in bad rates and lost funds.`)}
