@@ -152,6 +152,7 @@
     "@sentry/browser": "6.15.0",
     "@sentry/tracing": "6.15.0",
     "@storybook/react": "6.3.0",
+    "@sushiswap/limit-order-sdk": "^1.0.0-canary.20",
     "@terra-money/terra.js": "^3.0.4",
     "@terra-money/wallet-provider": "^3.6.5",
     "@types/big.js": "6.1.1",
