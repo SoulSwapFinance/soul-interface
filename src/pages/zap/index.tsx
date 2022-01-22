@@ -8,7 +8,7 @@ import Column, { AutoColumn } from '../../components/Column'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { computeRealizedLPFeePercent, warningSeverity } from '../../functions/prices'
 import styled, { keyframes } from 'styled-components'
-import { useDerivedZapInfo, useZapActionHandlers, useZapState } from '../../state/zap/hooks'
+import { useDerivedZapInfo, useZapActionHandlers } from '../../state/zap/hooks'
 import { useUserSlippageTolerance, useUserSlippageToleranceWithDefault } from '../../state/user/hooks'
 
 import Alert from '../../components/Alert'

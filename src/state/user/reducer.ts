@@ -10,6 +10,8 @@ import {
   SerializedPair,
   SerializedToken,
   toggleURLWarning,
+  updateMatchesDarkMode,
+  updateUserDarkMode,
   updateUserDeadline,
   updateUserExpertMode,
   updateUserSingleHopOnly,
@@ -50,6 +52,9 @@ export interface UserState {
   }
 
   timestamp: number
+  userDarkMode: boolean | null // the user's choice for dark mode or light mode
+  matchesDarkMode: boolean // whether the dark mode media query matches
+
   URLWarningVisible: boolean
 }
 
@@ -65,6 +70,8 @@ export const initialState: UserState = {
   tokens: {},
   pairs: {},
   timestamp: currentTimestamp(),
+  userDarkMode: null,
+  matchesDarkMode: false,
   URLWarningVisible: true,
   userUseOpenMev: true,
 }
@@ -86,7 +93,14 @@ export default createReducer(initialState, (builder) =>
 
       state.lastUpdateVersionTimestamp = currentTimestamp()
     })
-
+    .addCase(updateUserDarkMode, (state, action) => {
+      state.userDarkMode = action.payload.userDarkMode
+      state.timestamp = currentTimestamp()
+    })
+    .addCase(updateMatchesDarkMode, (state, action) => {
+      state.matchesDarkMode = action.payload.matchesDarkMode
+      state.timestamp = currentTimestamp()
+    })
     .addCase(updateUserExpertMode, (state, action) => {
       state.userExpertMode = action.payload.userExpertMode
       state.timestamp = currentTimestamp()

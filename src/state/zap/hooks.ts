@@ -40,9 +40,9 @@ import { useV2TradeExactIn } from '../../hooks/useV2Trades'
 
 const ZERO = JSBI.BigInt(0)
 
-export function useZapState(): AppState['zap'] {
-  return useSelector<AppState, AppState['zap']>((state) => state.zap)
-}
+// export function useZapState(): AppState['zap'] {
+//   return useSelector<AppState, AppState['zap']>((state) => state.zap)
+// }
 
 export function useZapActionHandlers(noLiquidity: boolean | undefined): {
   onFieldInput: (typedValue: string) => void
@@ -282,3 +282,7 @@ export function useDefaultsFromURLSearch():
 
   return result
 }
+function useZapState(): { typedValue: any } {
+  throw new Error('Function not implemented.')
+}
+
