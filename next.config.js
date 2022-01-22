@@ -1,33 +1,60 @@
 const withPWA = require('next-pwa')
 const runtimeCaching = require('next-pwa/cache')
 
-const linguiConfig = require('./lingui.config.js')
-
 const { locales, sourceLocale } = linguiConfig
+
+const linguiConfig = require('./lingui.config.js')
+const defaultTheme = require('tailwindcss/defaultTheme')
+
+const { ChainId } = require('sdk')
+const { screens } = defaultTheme
+
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
-module.exports = withBundleAnalyzer(
-  withPWA({
-    pwa: {
-      dest: 'public',
-      runtimeCaching,
-      disable: process.env.NODE_ENV === 'development',
-    },
-    images: {
-      domains: [
-        'assets.soulswap.finance',
-        'media.giphy.com',
-        'assets.sushi.com',
-        'res.cloudinary.com',
-        'raw.githubusercontent.com',
-        'logos.covalenthq.com',
-      ],
-      deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    },
-    reactStrictMode: true,
+// This file sets a custom webpack configuration to use your Next.js app
+// with Sentry.
+// https://nextjs.org/docs/api-reference/next.config.js/introduction
+// https://docs.sentry.io/platforms/javascript/guides/nextjs/
+
+const { withSentryConfig } = require('@sentry/nextjs')
+
+const nextConfig = {
+  webpack: (config) => {
+    config.module.rules = [
+      ...config.module.rules,
+      {
+        resourceQuery: /raw-lingui/,
+        type: 'javascript/auto',
+      },
+    ]
+
+    return config
+  },
+  // experimental: {
+  //   concurrentFeatures: true,
+  //   serverComponents: true,
+  // },
+  swcMinify: false,
+  reactStrictMode: true,
+  pwa: {
+    dest: 'public',
+    // runtimeCaching,
+    dynamicStartUrlRedirect: '/swap',
+    disable: process.env.NODE_ENV === 'development',
+  },
+  images: {
+    domains: [
+    'assets.soulswap.finance',
+    'media.giphy.com',
+    'assets.sushi.com',
+    'res.cloudinary.com',
+    'raw.githubusercontent.com',
+    'logos.covalenthq.com'
+    ],
+  },
     async redirects() {
       return [
         {
@@ -165,12 +192,45 @@ module.exports = withBundleAnalyzer(
         },
       ]
     },
-    i18n: {
-      locales,
-      defaultLocale: sourceLocale,
-    },
-  })
-)
+  i18n: {
+    localeDetection: true,
+    locales,
+    defaultLocale: sourceLocale,
+  },
+  network: {
+    chainIds: [ChainId.MAINNET, ChainId.FANTOM],
+    defaultChainId: ChainId.MAINNET,
+    domains: [
+      {
+        domain: 'soulswap.finance',
+        defaultChainId: ChainId.MAINNET,
+      },
+      {
+        domain: 'exchange.soulswap.finance',
+        defaultChainId: ChainId.FANTOM,
+      },
+    ],
+  },
+  publicRuntimeConfig: {
+    breakpoints: screens,
+  },
+}
+
+const SentryWebpackPluginOptions = {
+  // Additional config options for the Sentry Webpack plugin. Keep in mind that
+  // the following options are set automatically, and overriding them is not
+  // recommended:
+  //   release, url, org, project, authToken, configFile, stripPrefix,
+  //   urlPrefix, include, ignore
+
+  silent: true, // Suppresses all logs
+  // For all available options, see:
+  // https://github.com/getsentry/sentry-webpack-plugin#options.
+}
+
+// Make sure adding Sentry options is the last code to run before exporting, to
+// ensure that your source maps include changes from all other Webpack plugins
+module.exports = withSentryConfig(withPWA(withBundleAnalyzer(nextConfig)), SentryWebpackPluginOptions)
 
 // Don't delete this console log, useful to see the config in Vercel deployments
 console.log('next.config.js', JSON.stringify(module.exports, null, 2))

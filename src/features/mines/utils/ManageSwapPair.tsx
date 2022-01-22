@@ -7,7 +7,7 @@ import Typography from 'components/Typography'
 import { classNames } from 'functions'
 import { useCurrency } from 'hooks/Tokens'
 import React, { useMemo, useState } from 'react'
-
+import { Percent } from 'sdk'
 import PoolAddLiquidity from './PoolAddLiquidity'
 import PoolRemoveLiquidity from './PoolRemoveLiquidity'
 
@@ -15,7 +15,10 @@ import PoolRemoveLiquidity from './PoolRemoveLiquidity'
 const ManageSwapPair = ({ farm }) => {
   const { i18n } = useLingui()
   const [toggle, setToggle] = useState(true)
+  
+  const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
 
+const allowedSlippage = useUserSlippageToleranceWithDefault(DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE) // custom from users
   const token0 = useCurrency(farm.pair.token0.id)
   const token1 = useCurrency(farm.pair.token1?.id)
 
