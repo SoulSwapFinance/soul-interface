@@ -38,14 +38,14 @@ const AccountDetails: FC<AccountDetailsProps> = ({
   const dispatch = useAppDispatch()
 
   const connectorName = useMemo(() => {
-    // const { ethereum } = window
-    // const isMetaMask = !!(ethereum && ethereum.isMetaMask)
+    const { ethereum } = window
+    const isMetaMask = !!(ethereum && ethereum.isMetaMask)
     const name = Object.keys(SUPPORTED_WALLETS)
       .filter(
         (k) =>
           SUPPORTED_WALLETS[k].connector === connector && (
             connector !== injected 
-            // || isMetaMask === (k === 'METAMASK')
+            || isMetaMask === (k === 'METAMASK')
             )
       )
       .map((k) => SUPPORTED_WALLETS[k].name)[0]

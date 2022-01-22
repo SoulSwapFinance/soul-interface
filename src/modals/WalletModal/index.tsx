@@ -122,7 +122,7 @@ const WalletModal: FC<WalletModal> = ({ pendingTransactions, confirmedTransactio
 
   // get wallets user can switch too, depending on device/browser
   const options = useMemo(() => {
-    // const isMetamask = window.ethereum && window.ethereum.isMetaMask
+    const isMetamask = window.ethereum && window.ethereum.isMetaMask
     return Object.keys(SUPPORTED_WALLETS).map((key) => {
       const option = SUPPORTED_WALLETS[key]
 
@@ -133,12 +133,11 @@ const WalletModal: FC<WalletModal> = ({ pendingTransactions, confirmedTransactio
           return null
         }
 
-        if 
-        (
+        if
+          (
           // !window.web3 && !window.ethereum && 
           option.mobile
-        )
-          {
+        ) {
           return (
             <Option
               onClick={() => tryActivation(option.connector, key)}
@@ -158,7 +157,7 @@ const WalletModal: FC<WalletModal> = ({ pendingTransactions, confirmedTransactio
       // overwrite injected when needed
       if (option.connector === injected) {
         // don't show injected if there's no injected provider
-        // if (!(window.web3 || window.ethereum)) {
+        if (!(window.web3 || window.ethereum)) {
           if (option.name === 'MetaMask') {
             return (
               <Option
@@ -170,22 +169,21 @@ const WalletModal: FC<WalletModal> = ({ pendingTransactions, confirmedTransactio
                 icon="/images/wallets/metamask.png"
               />
             )
-          } 
-          // else {
-            // return null // dont want to return install twice
-          // }
-        // }
+          }
+          else {
+            return null // dont want to return install twice
+          }
+        }
         // don't return metamask if injected provider isn't metamask
         else if (option.name === 'MetaMask'
-        // && !isMetamask
+          && !isMetamask
         ) {
           return null
         }
         // likewise for generic
-        else if (option.name === 'Injected' 
-        // && isMetamask
-        ) 
-        {
+        else if (option.name === 'Injected'
+          && isMetamask
+        ) {
           return null
         }
       }
