@@ -1,9 +1,8 @@
 const withPWA = require('next-pwa')
 const runtimeCaching = require('next-pwa/cache')
-
+const linguiConfig = require('./lingui.config.js')
 const { locales, sourceLocale } = linguiConfig
 
-const linguiConfig = require('./lingui.config.js')
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 const { ChainId } = require('sdk')
