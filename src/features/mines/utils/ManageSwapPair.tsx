@@ -10,6 +10,7 @@ import React, { useMemo, useState } from 'react'
 import { Percent } from 'sdk'
 import PoolAddLiquidity from './PoolAddLiquidity'
 import PoolRemoveLiquidity from './PoolRemoveLiquidity'
+import { useUserSlippageToleranceWithDefault } from 'state/user/hooks'
 
 // @ts-ignore TYPE NEEDS FIXING
 const ManageSwapPair = ({ farm }) => {
