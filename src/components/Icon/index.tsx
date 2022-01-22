@@ -181,10 +181,10 @@ export const MintableTokenIcon = (props: React.ComponentProps<'svg'>) => {
   )
 }
 
-export const SushiTokenIcon = (props: React.ComponentProps<'svg'>) => {
+export const SoulTokenIcon = (props: React.ComponentProps<'svg'>) => {
   return (
     <svg {...props} viewBox="0 0 83 83" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
+    {/*   <path
         d="M33.92 71.552c-11.344 0-23.404-2.883-23.404-8.229l.017-.002a.782.782 0 0 1-.017-.172V38.861h1.693l.011 24.371c-.01 3.185 8.906 6.632 21.702 6.632 12.793 0 21.71-3.445 21.71-6.538l-.014-.163.014-.066V38.863h1.693v24.463c-.005 5.343-12.062 8.226-23.406 8.226zm-22.682-8.317-.113.036.243-.02-.13-.016zm44.419-.296a.792.792 0 0 0-.028.135l.028-.135z"
         fill="#fff"
       />
@@ -203,7 +203,7 @@ export const SushiTokenIcon = (props: React.ComponentProps<'svg'>) => {
       <path
         d="m55.627 54.785-.011-15.974c.011-3.218-8.903-6.665-21.699-6.665l-1.09.01-.16-.854V26.48h1.693v3.975c10.729.07 21.942 2.709 22.894 7.556h.052l.006.468c.006.066.006.135.006.205v14.298c8.87-.667 14.317-3.26 14.317-5.37l-.006-.117.02-.185-.014-20.83h1.693l-.01 21.145c-.192 4.28-8.53 6.621-16.792 7.108l-.899.053z"
         fill="#fff"
-      />
+      /> */}
     </svg>
   )
 }
