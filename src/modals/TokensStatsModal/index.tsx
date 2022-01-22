@@ -79,7 +79,7 @@ export default function SoulStatsModal(): JSX.Element | null {
 
           <div className="flex flex-col w-full py-4">
             {/* <div className="block"> */}
-            <QuestionHelper text={`Add to MetaMask`}>
+            {/* <QuestionHelper text={`Add to MetaMask`}> */}
               <div
                 className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
                 onClick={() => {
@@ -156,7 +156,7 @@ export default function SoulStatsModal(): JSX.Element | null {
                   className="rounded-md"
                 />
               </div>
-            </QuestionHelper>
+            {/* </QuestionHelper> */}
 
             {/* </div> */}
             {/* <div className="flex flex-1 flex-col"> */}
