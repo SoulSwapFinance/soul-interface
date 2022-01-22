@@ -7,6 +7,9 @@ import { SUPPORTED_WALLETS } from '../../constants'
 import { darken } from 'polished'
 import { injected } from '../../connectors'
 import styled from 'styled-components'
+import { useWeb3React } from '@web3-react/core'
+
+const { chainId } = useWeb3React()
 
 const PendingSection = styled.div`
   align-items: center;
@@ -63,7 +66,8 @@ export default function PendingView({
   setPendingError: (error: boolean) => void
   tryActivation: (connector: AbstractConnector) => void
 }) {
-  const isMetamask = window?.ethereum?.isMetaMask
+  const isMetamask = chainId && chainId == 250
+  // const isMetamask = window?.ethereum?.isMetaMask
 
   return (
     <PendingSection>
