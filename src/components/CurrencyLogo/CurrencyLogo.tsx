@@ -33,7 +33,8 @@ export const getCurrencyLogoUrls = (currency): string[] => {
   if (currency.chainId in BLOCKCHAIN) {
     urls.push(
       // @ts-ignore TYPE NEEDS FIXING
-      `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${
+      `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${BLOCKCHAIN[currency.chainId]}/assets/${
+      // `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${
         currency.address
     }/logo.png`
     )

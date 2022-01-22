@@ -37,7 +37,7 @@ const ImportList: FC = () => {
           label: listUrl,
         })
 
-        console.log(listUrl)
+        // console.log(listUrl)
         dispatch(enableList(listUrl))
         setView(CurrencyModalView.manage)
       })

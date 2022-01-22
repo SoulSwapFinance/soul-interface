@@ -77,8 +77,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
         <div className="space-y-4">
           <ModalHeader title={''} onClose={toggleLuxorStatsModal} />
           {/* <Wrapper className="flex flex-col-2 justify-between" > */}
-
-          <div className="flex flex-col w-full py-4">
+          <div className="flex flex-col-2 w-full py-4">
             {/* <div className="block"> */}
             {/* <QuestionHelper text={`Add to MetaMask`}> */}
               <div
@@ -111,10 +110,10 @@ export default function LuxorStatsModal(): JSX.Element | null {
                 }}
               >
                 <Image
-                  src="https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b/logo.png"
+                  src="/images/tokens/LUX-transparent.png"
                   alt="LUX"
-                  width="200px"
-                  height="200px"
+                  width="1200px"
+                  height="1200px"
                   objectFit="contain"
                   className="rounded-md"
                 />
@@ -149,10 +148,10 @@ export default function LuxorStatsModal(): JSX.Element | null {
                 }}
               >
                 <Image
-                  src="https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208/logo.png"
+                  src="/images/tokens/WLUM-transparent.png"
                   alt="WLUM"
-                  width="200px"
-                  height="200px"
+                  width="1200px"
+                  height="1200px"
                   objectFit="contain"
                   className="rounded-md"
                 />
@@ -162,7 +161,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
             {/* </div> */}
             {/* <div className="flex flex-1 flex-col"> */}
             {/* <div className="flex mt-4 flex-row justify-center"> */}
-            <div className="mt-6 flex justify-center text-3xl">{'LUX & WLUM'}</div>
+            {/* <div className="mt-6 flex justify-center text-3xl">{'LUX & WLUM'}</div> */}
             {/* <div className="flex items-center text-purple justify-between"> */}
           </div>
           {/* </div> */}

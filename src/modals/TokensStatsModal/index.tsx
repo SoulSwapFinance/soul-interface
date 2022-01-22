@@ -77,9 +77,9 @@ export default function SoulStatsModal(): JSX.Element | null {
           <ModalHeader title={''} onClose={toggleSoulStatsModal} />
           {/* <Wrapper className="flex flex-col-2 justify-between" > */}
 
-          <div className="flex flex-col w-full py-4">
+          <div className="flex justify-between flex-col-2 w-full py-4">
             {/* <div className="block"> */}
-            {/* <QuestionHelper text={`Add to MetaMask`}> */}
+            {/* <QuestionHelper text={`Add to MetaMask`}/> */}
               <div
                 className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
                 onClick={() => {
@@ -112,8 +112,8 @@ export default function SoulStatsModal(): JSX.Element | null {
                 <Image
                   src="https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png"
                   alt="SOUL"
-                  width="200px"
-                  height="200px"
+                  width="1200px"
+                  height="1200px"
                   objectFit="contain"
                   className="rounded-md"
                 />
@@ -150,18 +150,17 @@ export default function SoulStatsModal(): JSX.Element | null {
                 <Image
                   src="https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x124B06C5ce47De7A6e9EFDA71a946717130079E6/logo.png"
                   alt="SEANCE"
-                  width="200px"
-                  height="200px"
+                  width="1200px"
+                  height="1200px"
                   objectFit="contain"
                   className="rounded-md"
                 />
               </div>
-            {/* </QuestionHelper> */}
 
             {/* </div> */}
             {/* <div className="flex flex-1 flex-col"> */}
             {/* <div className="flex mt-4 flex-row justify-center"> */}
-            <div className="mt-6 flex justify-center text-3xl">{'SOUL & SEANCE'}</div>
+            {/* <div className="mt-6 flex justify-center text-3xl">{'SOUL & SEANCE'}</div> */}
             {/* <div className="flex items-center text-purple justify-between"> */}
           </div>
           {/* </div> */}
