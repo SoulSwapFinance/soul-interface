@@ -173,29 +173,29 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
   let [data] = useV2PairsWithPrice([[currency0, currency1]])
   let [state, liquidityToken, pairPrice] = data
   
-  const balanceFiatValueRaw
-    = pair?.token1 ? Number(pairPrice) * Number(balance?.toSignificant())
-    : Number(soulPrice) * Number(balance?.toSignificant())
+  // const balanceFiatValueRaw
+  //   = pair?.token1 ? Number(pairPrice) * Number(balance?.toSignificant())
+  //   : Number(soulPrice) * Number(balance?.toSignificant())
   
   const pooledAmountFiatValueRaw
     = pair?.token1 ? Number(pairPrice) * Number(userPoolBalance?.toSignificant())
     : Number(soulPrice) * Number(userPoolBalance?.toSignificant())
   
-  const balanceFiatValue
-    = CurrencyAmount.fromRawAmount(
-      USD[chainId],
-      JSBI.BigInt(balanceFiatValueRaw.toFixed(USD[chainId].decimals)
-      // .toBigNumber(USD[chainId].decimals)
-      )
-    )
+  // const balanceFiatValue
+  //   = CurrencyAmount.fromRawAmount(
+  //     USD[chainId],
+  //     JSBI.BigInt(balanceFiatValueRaw.toFixed(USD[chainId].decimals)
+  //     // .toBigNumber(USD[chainId].decimals)
+  //     )
+  //   )
   
-  const pooledAmountFiatValue
-    = CurrencyAmount.fromRawAmount(
-      USD[chainId],
-      JSBI.BigInt(pooledAmountFiatValueRaw.toFixed(USD[chainId].decimals)
-      // .toBigNumber(USD[chainId].decimals)
-      )
-    )
+  // const pooledAmountFiatValue
+  //   = CurrencyAmount.fromRawAmount(
+  //     USD[chainId],
+  //     JSBI.BigInt(pooledAmountFiatValueRaw.toFixed(USD[chainId].decimals)
+  //     // .toBigNumber(USD[chainId].decimals)
+  //     )
+  //   )
   
   return (
     <div
@@ -279,8 +279,9 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
             <div className="flex items-center justify-between">
               <div>{i18n._(t`Deposited Value`)}:</div>
               <div className="font-semibold">
-                ${userPoolBalance 
-                  ? pooledAmountFiatValue?.toSignificant(6, { groupSeparator: ',' }) // ?.toSignificant(4) */}
+                ${userPoolBalance ? pooledAmountFiatValueRaw?.toPrecision(4)
+                  // ? pooledAmountFiatValue
+                // ?.toSignificant(6, { groupSeparator: ',' }) // ?.toSignificant(4) */}
                   : 0}
               </div>
             </div>
