@@ -11,8 +11,17 @@ import ModalError, { ModalActionErrorProps } from 'components/Modal/Error'
 import ModalHeader, { ModalHeaderProps } from 'components/Modal/Header'
 import SubmittedModalContent, { SubmittedModalContentProps } from 'components/Modal/SubmittedModalContent'
 import { classNames } from 'functions'
-import { cloneElement, FC, isValidElement, ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
+import { cloneElement, FC, isValidElement, ReactNode, useCallback, useMemo, useState } from 'react'
 import React, { Fragment } from 'react'
+
+const MAX_WIDTH_CLASS_MAPPING = {
+  sm: 'lg:max-w-sm',
+  md: 'lg:max-w-md',
+  lg: 'lg:max-w-lg',
+  xl: 'lg:max-w-xl',
+  '2xl': 'lg:max-w-2xl',
+  '3xl': 'lg:max-w-3xl',
+}
 
 import useDesktopMediaQuery from '../../hooks/useDesktopMediaQuery'
 
@@ -59,6 +68,7 @@ const HeadlessUiModal: HeadlessUiModalType<Props> = ({ children: childrenProp, t
 
   // If children is a function, render props
   // Else just render normally
+  // @ts-ignore TYPE NEEDS FIXING
   const children = useMemo(
     () => (typeof childrenProp === 'function' ? childrenProp({ onClick, open, setOpen }) : children),
     [onClick, open, childrenProp]
@@ -134,7 +144,8 @@ const HeadlessUiModalControlled: FC<ControlledModalProps> = ({
             <div
               className={classNames(
                 transparent ? '' : 'bg-dark-900 border border-dark-800',
-                isDesktop ? `lg:max-w-${maxWidth} w-full` : 'w-[85vw] max-h-[85vh] overflow-y-auto mx-auto',
+                isDesktop ? MAX_WIDTH_CLASS_MAPPING[maxWidth] : '',
+                isDesktop ? `w-full` : 'w-[85vw] max-h-[85vh] overflow-y-auto mx-auto',
                 'inline-block align-bottom rounded-xl text-left overflow-hidden transform p-4'
               )}
             >
@@ -145,15 +156,6 @@ const HeadlessUiModalControlled: FC<ControlledModalProps> = ({
       </Dialog>
     </Transition>
   )
-}
-
-const Test = () => {
-  useEffect(() => {
-    return () => {
-      console.log('efae')
-    }
-  }, [])
-  return <span />
 }
 
 HeadlessUiModal.Controlled = HeadlessUiModalControlled

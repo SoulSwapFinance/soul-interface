@@ -62,10 +62,10 @@ const PERMITTABLE_TOKENS: {
   //   [SOUL[42].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
   // },
   [250]: {
-    [SOUL[250].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
+    [SOUL[250].address]: { type: PermitType.AMOUNT, name: 'Soul Power' },
   },
   [4002]: {
-    [SOUL[4002].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
+    [SOUL[4002].address]: { type: PermitType.AMOUNT, name: 'Soul Power' },
   },
 }
 

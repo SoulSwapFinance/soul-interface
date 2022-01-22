@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from 'components/Button'
+import {Button, ButtonProps } from 'components/Button'
 import React, { FC } from 'react'
 
 export interface ModalActionProps extends ButtonProps {
@@ -7,7 +7,7 @@ export interface ModalActionProps extends ButtonProps {
 
 const ModalAction: FC<ModalActionProps> = ({ children, disabled, main = false, ...props }) => {
   return (
-    <Button {...props} size="sm" color={main ? 'blue' : 'gray'} disabled={disabled} variant="outlined">
+    <Button {...props} size="sm" color="blue" disabled={disabled} variant={main ? 'filled' : 'empty'}>
       {children}
     </Button>
   )

@@ -9,7 +9,7 @@ import Alert from '../Alert'
 import { AutoColumn } from '../Column'
 import { BIG_INT_ZERO } from '../../constants'
 import { Button } from '../Button'
-import CurrencyLogo from '../CurrencyLogo'
+import { CurrencyLogo } from '../CurrencyLogo'
 import Dots from '../Dots'
 import DoubleCurrencyLogo from '../DoubleLogo'
 import { t } from '@lingui/macro'
@@ -184,13 +184,17 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
   const balanceFiatValue
     = CurrencyAmount.fromRawAmount(
       USD[chainId],
-      JSBI.BigInt(balanceFiatValueRaw.toFixed(USD[chainId].decimals).toBigNumber(USD[chainId].decimals))
+      JSBI.BigInt(balanceFiatValueRaw.toFixed(USD[chainId].decimals)
+      // .toBigNumber(USD[chainId].decimals)
+      )
     )
   
   const pooledAmountFiatValue
     = CurrencyAmount.fromRawAmount(
       USD[chainId],
-      JSBI.BigInt(pooledAmountFiatValueRaw.toFixed(USD[chainId].decimals).toBigNumber(USD[chainId].decimals))
+      JSBI.BigInt(pooledAmountFiatValueRaw.toFixed(USD[chainId].decimals)
+      // .toBigNumber(USD[chainId].decimals)
+      )
     )
   
   return (

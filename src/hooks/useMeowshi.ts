@@ -2,10 +2,10 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useMeowshiContract, useEnchantmentContract, useSoulContract } from './useContract'
 
 import { BalanceProps } from './useTokenBalance'
-import Fraction from '../entities/Fraction'
+import { Fraction } from 'entities/bignumber/Fraction'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from './useActiveWeb3React'
-import { useTransactionAdder } from '../state/transactions/hooks'
+import { useTransactionAdder } from 'state/transactions/hooks'
 import { ApprovalState } from './useApproveCallback'
 
 const { BigNumber } = ethers

@@ -4,7 +4,7 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { CurrencyAmount, JSBI, Token, USD, ZERO } from 'sdk'
 import { Button } from 'components/Button'
-import CurrencyLogo from 'components/CurrencyLogo'
+import { CurrencyLogo } from 'components/CurrencyLogo'
 import Typography from 'components/Typography'
 import { easyAmount, formatNumber, tryParseAmount } from 'functions'
 import { useCurrency } from 'hooks/Tokens'
@@ -37,23 +37,23 @@ const InvestmentDetails = ({ farm }) => {
   const priceHelperContract = usePriceHelperContract()
 
   const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
-  console.log(Number(rawSoulPrice))
+  // console.log(Number(rawSoulPrice))
   const soulPrice = Number(rawSoulPrice) / 1E18
-  console.log('soul price:%s', soulPrice)
+  // console.log('soul price:%s', soulPrice)
 
   const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'])?.result
-  console.log(Number(rawFtmPrice))
+  // console.log(Number(rawFtmPrice))
   const ftmPrice = Number(rawFtmPrice) / 1E18
-  console.log(ftmPrice)
+  // console.log(ftmPrice)
 
   const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6'])?.result
-  console.log(Number(rawSeancePrice))
+  // console.log(Number(rawSeancePrice))
   const seancePrice = Number(rawSeancePrice) / 1E18
-  console.log(seancePrice)
+  // console.log(seancePrice)
 
   const liquidityToken = new Token(
     chainId,
-    getAddress(farm.lpToken),
+    getAddress(farm?.lpToken),
     farm.pair.token1 ? 18 : farm.pair.token0 ? farm.pair.token0.decimals : 18,
     farm.pair.token1 ? farm.pair.symbol : farm.pair.token0.symbol,
     farm.pair.token1 ? farm.pair.name : farm.pair.token0.name
@@ -68,15 +68,17 @@ const InvestmentDetails = ({ farm }) => {
   const pendingSoul = usePendingSoul(farm)
   const pendingReward = usePendingReward(farm)
 
-  // const positionFiatValue = CurrencyAmount.fromRawAmount(
-  //   USD[chainId],
-  //     JSBI.BigInt(
-  //         ((Number(stakedAmount?.toExact()) * farm.pair.reserveUSD) / farm.pair.totalSupply)
-  //           .toFixed(USD[chainId].decimals)
-  //           .toBigNumber(USD[chainId].decimals)
-  //       )
+  const positionFiatValue = (
+    USD[chainId], stakedAmount
+    )
+    // USD[chainId],
+    //   JSBI.BigInt(
+    //       ((Number(stakedAmount?.toExact()) * farm.pair.reserveUSD) / farm.pair.totalSupply)
+    //         .toFixed(USD[chainId].decimals)
+    //         .toBigNumber(USD[chainId].decimals)
+        // )
   // )
-  // const typedDepositValue = tryParseAmount(depositValue, liquidityToken)
+  const typedDepositValue = tryParseAmount(depositValue, liquidityToken)
 
   function getTvl() {
     let lpPrice = 0
@@ -176,9 +178,9 @@ const InvestmentDetails = ({ farm }) => {
           { pair?.token1 ?
           <Typography>{formatNumber(Number(pairPrice) * Number(stakedAmount?.toSignificant(2)), true)}</Typography>
           :
-          <Typography>{formatNumber(Number(soulPrice) * Number(stakedAmount?.toSignificant(2)), true)}</Typography> }
-          {/* <Typography>{formatNumber(pairPrice ?? 0, true)}</Typography> */}
-          {/* <Typography>{formatNumber(positionFiatValue?.toSignificant(4) ?? 0, true)}</Typography> */}
+          /* <Typography>{formatNumber(Number(soulPrice) * Number(stakedAmount?.toSignificant(2)), true)}</Typography> } */
+          /* <Typography>{formatNumber(pairPrice ?? 0, true)}</Typography> */
+          <Typography>{formatNumber(positionFiatValue?.toSignificant(4) ?? 0, true)}</Typography>}
         </div>
       </div>
       <div className="flex flex-col w-full space-y-4">

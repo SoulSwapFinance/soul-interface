@@ -4,7 +4,7 @@ import { Currency, CurrencyAmount, Percent, Token } from 'sdk'
 import selectCoinAnimation from 'animation/select-coin.json'
 import { Button } from 'components/Button'
 import { FiatValue } from 'components/CurrencyInputPanel/FiatValue'
-import CurrencyLogo from 'components/CurrencyLogo'
+import { CurrencyLogo } from 'components/CurrencyLogo'
 import Input from 'components/Input'
 import { classNames, formatCurrencyAmount } from 'functions'
 import Lottie from 'lottie-react'
@@ -16,7 +16,7 @@ interface CurrencyInputPanelProps {
   onMax?: () => void
   showMaxButton: boolean
   currencyBalance: CurrencyAmount<Currency> | null
-  fiatValue?: CurrencyAmount<Token> | null
+  fiatValue?: CurrencyAmount<Currency> | null
   currency?: Currency | null
   hideBalance?: boolean
   hideInput?: boolean

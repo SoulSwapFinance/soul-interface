@@ -36,6 +36,13 @@ export const MASTERCHEF_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.FANTOM_TESTNET]: ''
 }
 
+export const UNDERWORLD_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '', // TODO
+  [ChainId.FANTOM_TESTNET]: ''
+}
+
 export const SUMMONER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
@@ -68,6 +75,13 @@ export const COFFIN_BOX_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xB9c7c6368a69b61508a556bd539eb2b8C351d27A',
+  [ChainId.FANTOM_TESTNET]: ''
+}
+
+export const CHAINLINK_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.MAINNET]: '0x00632CFe43d8F9f8E6cD0d39Ffa3D4fa7ec73CFB',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x00632CFe43d8F9f8E6cD0d39Ffa3D4fa7ec73CFB', // TODO: update
   [ChainId.FANTOM_TESTNET]: ''
 }
 

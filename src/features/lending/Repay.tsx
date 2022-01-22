@@ -84,7 +84,8 @@ export default function Repay({ pair }: RepayProps) {
     pair.userCollateralAmount.value.sub(nextMinCollateralMinimum.mul(100).div(95)),
     ZERO
   )
-  const maxRemoveCollateral = nextMaxRemoveCollateral.toFixed(pair.collateral.tokenInfo.decimals)
+  const maxRemoveCollateral = nextMaxRemoveCollateral
+  // .toFixed(pair.collateral.tokenInfo.decimals)
 
   const displayRemoveValue = pinRemoveMax ? maxRemoveCollateral : removeValue
 
@@ -116,7 +117,7 @@ export default function Repay({ pair }: RepayProps) {
       ? trade
           .maximumAmountIn(allowedSlippage)
           .toFixed(pair.collateral.tokenInfo.decimals)
-          .toBigNumber(pair.collateral.tokenInfo.decimals)
+          // .toBigNumber(pair.collateral.tokenInfo.decimals)
       : ZERO
 
   // const nextUserCollateralValue = pair.userCollateralAmount.value.add(collateralValue.toBigNumber(pair.collateral.tokenInfo.decimals)).add(extraCollateral)
@@ -132,7 +133,7 @@ export default function Repay({ pair }: RepayProps) {
     displayUpdateOracle ? pair.oracleExchangeRate : pair.currentExchangeRate
   )
   const nextMaxBorrowMinimum = minimum(nextMaxBorrowableOracle, nextMaxBorrowableSpot, nextMaxBorrowableStored)
-  const nextMaxBorrowSafe = nextMaxBorrowMinimum.mulDiv('95', '100').sub(pair.currentUserBorrowAmount.value)
+  const nextMaxBorrowSafe = nextMaxBorrowMinimum.mul('95').div('100').sub(pair.currentUserBorrowAmount.value)
   const nextMaxBorrowPossible = maximum(minimum(nextMaxBorrowSafe, pair.maxAssetAvailable), ZERO)
 
   const nextHealth = pair.currentUserBorrowAmount.value

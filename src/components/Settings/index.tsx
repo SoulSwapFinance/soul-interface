@@ -1,17 +1,22 @@
-import { ChainId, Percent } from '../../sdk'
-import React, { useRef, useState } from 'react'
+import { ChainId, Percent } from 'sdk'
+import React, { FC, useState } from 'react'
 import {
   useExpertModeManager,
-  useUserArcherUseRelay,
+  useUserOpenMev,
   useUserSingleHopOnly,
   useUserTransactionTTL,
-} from '../../state/user/hooks'
+} from 'state/user/hooks'
 import { useModalOpen, useToggleSettingsMenu } from '../../state/application/hooks'
 import Image from '../../components/Image'
-
+import { CheckIcon, CogIcon } from '@heroicons/react/outline'
+import CloseIcon from 'components/CloseIcon'
+import Switch from 'components/Switch'
+import { classNames } from 'functions'
+import { useActiveWeb3React } from 'services/web3'
 // import { AdjustmentsIcon } from '@heroicons/react/outline'
-import { ApplicationModal } from '../../state/application/actions'
+import { ApplicationModal } from 'state/application/actions'
 import { Button } from '../Button'
+import { OPENMEV_ENABLED, OPENMEV_SUPPORTED_NETWORKS } from 'config/openmev'
 import Modal from '../DefaultModal'
 import ModalHeader from '../ModalHeader'
 import QuestionHelper from '../QuestionHelper'
@@ -19,144 +24,154 @@ import Toggle from '../Toggle'
 import TransactionSettings from '../TransactionSettings'
 import Typography from '../Typography'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../hooks'
+// import { useActiveWeb3React } from 'hooks'
 import { useLingui } from '@lingui/react'
-import { useOnClickOutside } from '../../hooks/useOnClickOutside'
+import { useOnClickOutside } from 'hooks/useOnClickOutside'
 import SETTINGS from 'assets/icons/controls.svg'
+import Popover from 'components/Popover'
+import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
 
-export default function SettingsTab({ placeholderSlippage }: { placeholderSlippage?: Percent }) {
+interface SettingsTabProps {
+  placeholderSlippage?: Percent
+  trident?: boolean
+  className?: string
+}
+
+const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className, trident = false }) => {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
 
-  const node = useRef<HTMLDivElement>(null)
-  const open = useModalOpen(ApplicationModal.SETTINGS)
   const toggle = useToggleSettingsMenu()
-
   const [expertMode, toggleExpertMode] = useExpertModeManager()
-
   const [singleHopOnly, setSingleHopOnly] = useUserSingleHopOnly()
-
-  // show confirmation view before turning on
   const [showConfirmation, setShowConfirmation] = useState(false)
-
-  useOnClickOutside(node, open ? toggle : undefined)
-
-  const [ttl, setTtl] = useUserTransactionTTL()
-
-  const [userUseArcher, setUserUseArcher] = useUserArcherUseRelay()
+  const [userUseOpenMev, setUserUseOpenMev] = useUserOpenMev()
 
   return (
-    <div className="relative flex" ref={node}>
-      <div
-        className="flex items-center justify-center w-8 h-8 rounded cursor-pointer"
-        onClick={toggle}
-        id="open-settings-dialog-button"
-      >
-        {/* <AdjustmentsIcon className="w-[26px] h-[26px] transform rotate-90" /> */}
-  <Image src={ SETTINGS } height="40px" width="40px" alt="settings icon" />
-      </div>
-      {open && (
-        <div className="absolute top-14 right-0 z-50 -mr-2.5 min-w-20 md:m-w-22 md:-mr-5 bg-dark-900 border-2 border-dark-800 rounded w-80 shadow-lg">
-          <div className="p-4 space-y-4">
-            <Typography weight={700} className="text-high-emphesis">
-              {i18n._(t`Transaction Settings`)}
-            </Typography>
-
-            <TransactionSettings placeholderSlippage={placeholderSlippage} />
-
-            <Typography className="text-high-emphesis" weight={700}>
-              {i18n._(t`Interface Settings`)}
-            </Typography>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <Typography variant="sm" className="text-primary">
-                  {i18n._(t`Toggle Expert Mode`)}
-                </Typography>
-                <QuestionHelper
-                  text={i18n._(t`Bypasses confirmation modals and allows high slippage trades. Use at your own risk.`)}
-                />
-              </div>
-              <Toggle
-                id="toggle-expert-mode-button"
-                isActive={expertMode}
-                toggle={
-                  expertMode
-                    ? () => {
-                        toggleExpertMode()
-                        setShowConfirmation(false)
-                      }
-                    : () => {
-                        toggle()
-                        setShowConfirmation(true)
-                      }
-                }
+    <>
+    <Popover
+        placement="bottom-end"
+        content={
+          <div className="flex flex-col gap-3 p-3 border rounded shadow-xl bg-dark-900 w-80 border-dark-700">
+            <div className="flex flex-col gap-4 p-3 border rounded border-dark-800/60">
+              <Typography variant="xxs" weight={700} className="text-secondary">
+                {i18n._(t`Transaction Settings`)}
+              </Typography>
+              <TransactionSettings placeholderSlippage={placeholderSlippage}
+              // trident={trident} 
               />
             </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <Typography variant="sm" className="text-primary">
-                  {i18n._(t`Disable Multihops`)}
-                </Typography>
-                <QuestionHelper text={i18n._(t`Restricts swaps to direct pairs only.`)} />
-              </div>
-              <Toggle
-                id="toggle-disable-multihop-button"
-                isActive={singleHopOnly}
-                toggle={() => (singleHopOnly ? setSingleHopOnly(false) : setSingleHopOnly(true))}
-              />
-            </div>
-            {chainId == ChainId.MAINNET && (
+            <div className="flex flex-col gap-3 p-3 border rounded border-dark-800/60">
+              <Typography variant="xxs" weight={700} className="text-secondary">
+                {i18n._(t`Interface Settings`)}
+              </Typography>
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <Typography variant="sm" className="text-primary">
-                    {i18n._(t`MEV Shield by Archer DAO`)}
+                  <Typography variant="xs" className="text-high-emphesis" weight={700}>
+                    {i18n._(t`Toggle expert mode`)}
                   </Typography>
                   <QuestionHelper
                     text={i18n._(
-                      t`Send transaction privately to avoid front-running and sandwich attacks. Requires a miner tip to incentivize miners`
+                      t`Bypasses confirmation modals and allows high slippage trades. Use at your own risk.`
                     )}
                   />
                 </div>
-                <Toggle
-                  id="toggle-use-archer"
-                  isActive={userUseArcher}
-                  toggle={() => setUserUseArcher(!userUseArcher)}
+                <Switch
+                  size="sm"
+                  id="toggle-expert-mode-button"
+                  checked={expertMode}
+                  onChange={
+                    expertMode
+                      ? () => {
+                          toggleExpertMode()
+                          setShowConfirmation(false)
+                        }
+                      : () => {
+                          toggle()
+                          setShowConfirmation(true)
+                        }
+                  }
+                  checkedIcon={<CheckIcon className="text-dark-700" />}
+                  uncheckedIcon={<CloseIcon />}
+                  color="gradient"
                 />
               </div>
-            )}
+              {/* {!trident && ( */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <Typography variant="xs" className="text-high-emphesis" weight={700}>
+                      {i18n._(t`Disable multihops`)}
+                    </Typography>
+                    <QuestionHelper text={i18n._(t`Restricts swaps to direct pairs only.`)} />
+                  </div>
+                  <Switch
+                    size="sm"
+                    id="toggle-disable-multihop-button"
+                    checked={singleHopOnly}
+                    onChange={() => (singleHopOnly ? setSingleHopOnly(false) : setSingleHopOnly(true))}
+                    checkedIcon={<CheckIcon className="text-dark-700" />}
+                    uncheckedIcon={<CloseIcon />}
+                    color="gradient"
+                  />
+                </div>
+              {/* )} */}
+              {/*@ts-ignore TYPE NEEDS FIXING*/}
+              {OPENMEV_ENABLED && OPENMEV_SUPPORTED_NETWORKS.includes(chainId) && (
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <Typography variant="xs" className="text-high-emphesis" weight={700}>
+                      {i18n._(t`OpenMEV Gas Refunder`)}
+                    </Typography>
+                    <QuestionHelper text={i18n._(t`OpenMEV refunds up to 95% of transaction costs in 35 blocks.`)} />
+                  </div>
+                  <Switch
+                    size="sm"
+                    id="toggle-use-openmev"
+                    checked={userUseOpenMev}
+                    onChange={() => (userUseOpenMev ? setUserUseOpenMev(false) : setUserUseOpenMev(true))}
+                    checkedIcon={<CheckIcon className="text-dark-700" />}
+                    uncheckedIcon={<CloseIcon />}
+                    color="gradient"
+                  />
+                </div>
+              )}
+            </div>
           </div>
+        }
+      >
+        <div
+          className={classNames(className, 'flex items-center justify-center w-10 h-10 rounded-full cursor-pointer')}
+        >
+          <CogIcon className="w-[26px] h-[26px] transform rotate-90 hover:text-white" />
         </div>
-      )}
-
-      <Modal isOpen={showConfirmation} onDismiss={() => setShowConfirmation(false)}>
-        <div className="space-y-4">
-          <ModalHeader title={i18n._(t`Are you sure?`)} onClose={() => setShowConfirmation(false)} />
-          <Typography variant="lg">
-            {i18n._(t`Expert mode turns off the confirm transaction prompt and allows high slippage trades
+      </Popover>
+      <HeadlessUiModal.Controlled isOpen={showConfirmation} onDismiss={() => setShowConfirmation(false)} maxWidth="md">
+        <div className="flex flex-col gap-4">
+          <HeadlessUiModal.Header header={i18n._(t`Confirm`)} onClose={() => setShowConfirmation(false)} />
+          <HeadlessUiModal.BorderedContent className="flex flex-col gap-3 !border-yellow/40">
+            <Typography variant="xs" weight={700} className="text-secondary">
+              {i18n._(t`Only use this mode if you know what you are doing.`)}
+            </Typography>
+            <Typography variant="sm" weight={700} className="text-yellow">
+              {i18n._(t`Expert mode turns off the confirm transaction prompt and allows high slippage trades
                                 that often result in bad rates and lost funds.`)}
-          </Typography>
-          <Typography variant="sm" className="font-medium">
-            {i18n._(t`ONLY USE THIS MODE IF YOU KNOW WHAT YOU ARE DOING.`)}
-          </Typography>
+            </Typography>
+          </HeadlessUiModal.BorderedContent>
           <Button
-            color="red"
-            size="lg"
+            id="confirm-expert-mode"
+            color="blue"
+            variant="filled"
             onClick={() => {
-              // if (window.prompt(i18n._(t`Please type the word "confirm" to enable expert mode.`)) === 'confirm') {
-              //   toggleExpertMode()
-              //   setShowConfirmation(false)
-              // }
               toggleExpertMode()
               setShowConfirmation(false)
             }}
           >
-            <Typography variant="lg" id="confirm-expert-mode">
-              {i18n._(t`Turn On Expert Mode`)}
-            </Typography>
+            {i18n._(t`Enable Expert Mode`)}
           </Button>
         </div>
-      </Modal>
-    </div>
+      </HeadlessUiModal.Controlled>
+    </>
   )
 }
+
+export default SettingsTab

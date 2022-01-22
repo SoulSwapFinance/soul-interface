@@ -12,8 +12,10 @@ type SwitchProps = ComponentProps<typeof HeadlessUiSwitch> & {
 }
 
 const COLOR = {
+  // @ts-ignore TYPE NEEDS FIXING
   default: (checked) => (checked ? 'bg-high-emphesis' : 'bg-high-emphesis'),
-  gradient: (checked) => (checked ? 'bg-gradient-to-r from-blue to-purple' : 'bg-dark-700'),
+  // @ts-ignore TYPE NEEDS FIXING
+  gradient: (checked) => (checked ? 'bg-gradient-to-r from-blue to-pink' : 'bg-dark-700'),
 }
 
 const HEIGHT = {

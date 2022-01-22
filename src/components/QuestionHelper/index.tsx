@@ -1,38 +1,50 @@
-import React, { FC, useCallback, useState } from 'react'
 import { QuestionMarkCircleIcon as SolidQuestionMarkCircleIcon } from '@heroicons/react/solid'
+import { classNames } from 'functions'
+import { useOnClickOutside } from 'hooks/useOnClickOutside'
+import useToggle from 'hooks/useToggle'
+import React, { FC, ReactElement, ReactNode, useCallback, useRef, useState } from 'react'
+
 import Tooltip from '../Tooltip'
 
-const QuestionHelper: FC<{ text: any }> = ({ children, text }) => {
+const QuestionHelper: FC<{ text?: any; icon?: ReactNode; children?: ReactElement; className?: string }> = ({
+  className,
+  children,
+  text,
+  icon = <SolidQuestionMarkCircleIcon width={16} height={16} />,
+}) => {
   const [show, setShow] = useState<boolean>(false)
+  const [toggle, setToggle] = useToggle(false)
+  const node = useRef<HTMLDivElement | null>(null)
+  useOnClickOutside(node, toggle ? setToggle : undefined)
 
   const open = useCallback(() => setShow(true), [setShow])
   const close = useCallback(() => setShow(false), [setShow])
 
   if (children) {
     return (
-      <Tooltip text={text} show={show}>
-        <div
-          className="flex items-center justify-center outline-none"
-          onClick={open}
-          onMouseEnter={open}
-          onMouseLeave={close}
-        >
-          {children}
-        </div>
+      <Tooltip text={text} show={show || toggle} className={className}>
+        {React.cloneElement(children, {
+          ref: node,
+          onClick: setToggle,
+          className: classNames(children.props.className, 'flex items-center justify-center w-full outline-none'),
+          onMouseEnter: open,
+          onMouseLeave: close,
+        })}
       </Tooltip>
     )
   }
 
   return (
     <span className="ml-1">
-      <Tooltip text={text} show={show}>
+      <Tooltip text={text} show={show || toggle} className={className}>
         <div
+          ref={node}
+          onClick={setToggle}
           className="flex items-center justify-center outline-none cursor-help hover:text-primary"
-          onClick={open}
           onMouseEnter={open}
           onMouseLeave={close}
         >
-          <SolidQuestionMarkCircleIcon width={16} height={16} />
+          {icon}
         </div>
       </Tooltip>
     </span>

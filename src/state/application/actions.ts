@@ -28,18 +28,26 @@ export enum ApplicationModal {
   DELEGATE,
   VOTE,
   LANGUAGE,
-  NETWORK,
   CHAIN,
-  SOUL_STATS,
-  LUXOR_STATS,
-  FTM_STATS,
+  NETWORK,
   YIELD_DETAILS,
+  SOUL_STATS,
+  LUXOR_STATS
 }
 
 export const updateBlockNumber = createAction<{
   chainId: number
   blockNumber: number
 }>('application/updateBlockNumber')
+export const updateBlockTimestamp = createAction<{
+  chainId: number
+  blockTimestamp: number
+}>('application/updateBlockTimestamp')
+export const updateChainId = createAction<{ chainId: number }>('application/updateChainId')
+export const setChainConnectivityWarning = createAction<{ chainConnectivityWarning: boolean }>(
+  'application/setChainConnectivityWarning'
+)
+export const setImplements3085 = createAction<{ implements3085: boolean }>('application/setImplements3085')
 export const setOpenModal = createAction<ApplicationModal | null>('application/setOpenModal')
 export const addPopup = createAction<{
   key?: string

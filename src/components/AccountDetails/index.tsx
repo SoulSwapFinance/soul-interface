@@ -1,32 +1,22 @@
+import Davatar from '@davatar/react'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { HeadlessUiModal } from 'components/Modal'
-import { injected, SUPPORTED_WALLETS } from 'config/wallet'
+import { injected, SUPPORTED_WALLETS } from 'config/wallets'
 import { getExplorerLink } from 'functions/explorer'
 import { shortenAddress } from 'functions/format'
 import { useActiveWeb3React } from 'services/web3'
-import { AppDispatch } from 'state'
+import { useAppDispatch } from 'state/hooks'
 import { clearAllTransactions } from 'state/transactions/actions'
 import Image from 'next/image'
 import React, { FC, useCallback, useMemo } from 'react'
-import Identicon from 'react-blockies'
 import { ExternalLink as LinkIcon } from 'react-feather'
-import { useDispatch } from 'react-redux'
 
 import { Button } from '../Button'
 import ExternalLink from '../ExternalLink'
 import Typography from '../Typography'
 import Copy from './Copy'
 import Transaction from './Transaction'
-
-const WalletIcon: FC<{ size?: number; src: string; alt: string }> = ({ size, src, alt, children }) => {
-  return (
-    <div className="flex flex-row items-end justify-center mr-2 flex-nowrap md:items-center">
-      <Image src={src} alt={alt} width={size} height={size} />
-      {children}
-    </div>
-  )
-}
 
 interface AccountDetailsProps {
   toggleWalletModal: () => void
@@ -44,16 +34,19 @@ const AccountDetails: FC<AccountDetailsProps> = ({
   openOptions,
 }) => {
   const { i18n } = useLingui()
-  const { chainId, account, connector, deactivate } = useActiveWeb3React()
-  const dispatch = useDispatch<AppDispatch>()
+  const { chainId, account, connector, deactivate, library } = useActiveWeb3React()
+  const dispatch = useAppDispatch()
 
   const connectorName = useMemo(() => {
-    const { ethereum } = window
-    const isMetaMask = !!(ethereum && ethereum.isMetaMask)
+    // const { ethereum } = window
+    // const isMetaMask = !!(ethereum && ethereum.isMetaMask)
     const name = Object.keys(SUPPORTED_WALLETS)
       .filter(
         (k) =>
-          SUPPORTED_WALLETS[k].connector === connector && (connector !== injected || isMetaMask === (k === 'METAMASK'))
+          SUPPORTED_WALLETS[k].connector === connector && (
+            connector !== injected 
+            // || isMetaMask === (k === 'METAMASK')
+            )
       )
       .map((k) => SUPPORTED_WALLETS[k].name)[0]
     return (
@@ -63,34 +56,6 @@ const AccountDetails: FC<AccountDetailsProps> = ({
     )
   }, [connector])
 
-  const statusIcon = useMemo(() => {
-    if (connector === injected) {
-      return <Identicon seed={account ?? ''} />
-    } else if (connector?.constructor.name === 'WalletConnectConnector') {
-      return <WalletIcon src="/wallet-connect.png" alt="Wallet Connect" size={16} />
-    } else if (connector?.constructor.name === 'WalletLinkConnector') {
-      return <WalletIcon src="/coinbase.svg" alt="Coinbase" size={16} />
-    } else if (connector?.constructor.name === 'FortmaticConnector') {
-      return <WalletIcon src="/formatic.png" alt="Fortmatic" size={16} />
-    } else if (connector?.constructor.name === 'PortisConnector') {
-      return (
-        <WalletIcon src="/portnis.png" alt="Portis" size={16}>
-          <Button
-            onClick={async () => {
-              // casting as PortisConnector here defeats the lazyload purpose
-              ;(connector as any).portis.showPortis()
-            }}
-          >
-            Show Portis
-          </Button>
-        </WalletIcon>
-      )
-    } else if (connector?.constructor.name === 'TorusConnector') {
-      return <WalletIcon src="/torus.png" alt="Torus" size={16} />
-    }
-    return null
-  }, [account, connector])
-
   const clearAllTransactionsCallback = useCallback(() => {
     if (chainId) dispatch(clearAllTransactions({ chainId }))
   }, [dispatch, chainId])
@@ -98,7 +63,6 @@ const AccountDetails: FC<AccountDetailsProps> = ({
   return (
     <div className="space-y-3">
       <div className="space-y-3">
-        
         <HeadlessUiModal.Header header={i18n._(t`Account`)} onClose={toggleWalletModal} />
         <HeadlessUiModal.BorderedContent className="flex flex-col gap-3">
           <div className="flex items-center justify-between">
@@ -108,8 +72,16 @@ const AccountDetails: FC<AccountDetailsProps> = ({
             </Button>
           </div>
           <div id="web3-account-identifier-row" className="flex flex-col justify-center gap-4">
-            <div className="flex gap-4 items-center">
-              <div className="rounded-full overflow-hidden">{statusIcon}</div>
+            <div className="flex items-center gap-4">
+              <div className="overflow-hidden rounded-full">
+                <Davatar
+                  size={48}
+                  // @ts-ignore TYPE NEEDS FIXING
+                  address={account}
+                  defaultComponent={<Image src="/images/soul2lux.gif" alt="Soul Icon" width={48} height={48} />}
+                  provider={library}
+                />
+              </div>
               <Typography weight={700} variant="lg" className="text-white">
                 {ENSName ? ENSName : account && shortenAddress(account)}
               </Typography>

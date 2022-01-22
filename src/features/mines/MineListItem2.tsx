@@ -12,7 +12,7 @@ import { SOUL_ADDRESS } from '../../constants/addresses'
 import { useActiveWeb3React } from '../../hooks'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import CurrencyLogo from '../../components/CurrencyLogo'
+import { CurrencyLogo } from '../../components/CurrencyLogo'
 import { isMobile } from 'react-device-detect'
 import YieldDetails from '../../components/YieldDetails'
 import IconWrapper from '../../components/IconWrapper'
@@ -163,7 +163,7 @@ const MineListItem2 = ({ farm, ...rest }) => {
                 </div>
               </div>
             </Disclosure.Button>
-            {open && <MineListItemDetails farm={farm} />}
+            {open && <MineListItemDetails farm={farm} onDismiss={undefined} />}
           </div>
         )}
       </Disclosure>

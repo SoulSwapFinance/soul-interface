@@ -13,7 +13,7 @@ import { toAmount, toShare } from '../../functions/bentobox'
 import { useBentoBoxContract, useSoulGuideContract } from '../../hooks/useContract'
 
 import { BigNumber } from '@ethersproject/bignumber'
-import Fraction from '../../entities/Fraction'
+import { Fraction } from '../../entities/bignumber/Fraction'
 import { UNDERWORLD_ADDRESS } from '../../constants/kashi'
 // import { USDC } from '../../hooks'
 import { bentobox } from '@soulswap/soul-data'
@@ -280,7 +280,7 @@ export function KashiProvider({ children }) {
       // Calculate the USD price for each token
       Object.values(pairTokens).forEach((token) => {
         token.symbol = token.address === weth.address ? NATIVE[chainId].symbol : token.tokenInfo.symbol
-        token.usd = e10(token.tokenInfo.decimals).mulDiv(pairTokens[currency.address].rate, token.rate)
+        token.usd = e10(token.tokenInfo.decimals).mul(pairTokens[currency.address].rate).div(token.rate)
       })
 
       dispatch({
@@ -333,7 +333,7 @@ export function KashiProvider({ children }) {
               )
 
               // The percentage of assets that is borrowed out right now
-              pair.utilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value)
+              pair.utilization = e10(18).mul(pair.currentBorrowAmount.value).div(pair.currentAllAssets.value)
 
               // Interest per year received by lenders as of now
               pair.supplyAPR = takeFee(pair.interestPerYear.mulDiv(pair.utilization, e10(18)))

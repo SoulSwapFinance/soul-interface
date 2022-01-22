@@ -1,12 +1,10 @@
-import { AppDispatch, AppState } from '../index'
-import { useAppDispatch, useAppSelector } from '../hooks'
+import { useActiveWeb3React } from 'services/web3'
+import { useAppDispatch, useAppSelector } from 'state/hooks'
+import { selectTransactions } from 'state/transactions/selectors'
 import { useCallback, useMemo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 
-import { TransactionDetails } from './reducer'
-import { TransactionResponse } from '@ethersproject/providers'
 import { addTransaction } from './actions'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { TransactionDetails, TransactionState } from './reducer'
 
 export interface TransactionResponseLight {
   hash: string
@@ -19,12 +17,6 @@ export function useTransactionAdder(): (
     summary?: string
     approval?: { tokenAddress: string; spender: string }
     claim?: { recipient: string }
-    archer?: {
-      rawTransaction: string
-      deadline: number
-      nonce: number
-      ethTip: string
-    }
   }
 ) => void {
   const { chainId, account } = useActiveWeb3React()
@@ -37,17 +29,10 @@ export function useTransactionAdder(): (
         summary,
         approval,
         claim,
-        archer,
       }: {
         summary?: string
         claim?: { recipient: string }
         approval?: { tokenAddress: string; spender: string }
-        archer?: {
-          rawTransaction: string
-          deadline: number
-          nonce: number
-          ethTip: string
-        }
       } = {}
     ) => {
       if (!account) return
@@ -65,7 +50,6 @@ export function useTransactionAdder(): (
           approval,
           summary,
           claim,
-          archer,
         })
       )
     },
@@ -77,7 +61,7 @@ export function useTransactionAdder(): (
 export function useAllTransactions(): { [txHash: string]: TransactionDetails } {
   const { chainId } = useActiveWeb3React()
 
-  const state = useAppSelector((state) => state.transactions)
+  const state: TransactionState = useAppSelector(selectTransactions)
 
   return chainId ? state[chainId] ?? {} : {}
 }

@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react'
 
 import { BigNumber } from '@ethersproject/bignumber'
 import ERC20_ABI from '../constants/abis/erc20.json'
-import Fraction from '../entities/Fraction'
+import { Fraction } from '../entities/bignumber/Fraction'
 import { getAddress } from '@ethersproject/address'
 import { useActiveWeb3React } from '../hooks/useActiveWeb3React'
 

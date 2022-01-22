@@ -1,11 +1,12 @@
 import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
 import { One, Zero } from '@ethersproject/constants'
-import { formatBalance, parseBalance } from '../functions'
+import { Fraction as SDKFraction } from 'sdk'
+// import { Fraction as SDKFraction } from '@sushiswap/core-sdk'
+import { formatBalance } from 'functions/format'
+import { parseBalance } from 'functions/parse'
+import { isEmptyValue } from 'functions/validate'
 
-import { Fraction as SDKFraction } from '../sdk'
-import { isEmptyValue } from '../functions/validate'
-
-class Fraction {
+export class Fraction {
   static BASE = BigNumber.from(10).pow(18)
 
   static NAN = new Fraction(Zero, Zero)
@@ -68,5 +69,3 @@ class Fraction {
     return this.denominator.isZero() ? Zero : this.numerator.mul(value).div(this.denominator)
   }
 }
-
-export default Fraction

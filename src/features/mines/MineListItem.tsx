@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import { Disclosure } from '@headlessui/react'
-import CurrencyLogo from 'components/CurrencyLogo'
+import { CurrencyLogo } from 'components/CurrencyLogo'
 import DoubleLogo from 'components/DoubleLogo'
 import QuestionHelper from 'components/QuestionHelper'
 import { classNames, formatNumber, formatPercent } from 'functions'
@@ -192,7 +192,7 @@ const MineListItem = ({ farm, ...rest }) => {
                 </div>
               </div>
             </Disclosure.Button>
-            {open && <MineListItemDetails farm={farm} />}
+            {open && <MineListItemDetails farm={farm} onDismiss={undefined} />}
           </div>
         )}
       </Disclosure>
