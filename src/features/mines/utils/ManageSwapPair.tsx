@@ -34,7 +34,10 @@ const ManageSwapPair = ({ farm }) => {
               checkedIcon={<PlusIcon className="text-dark-1000" />}
               uncheckedIcon={<MinusIcon className="text-dark-1000" />}
             />
-            <Settings className="w-[unset] h-[unset]" />
+            <Settings 
+            placeholderSlippage={allowedSlippage}
+            // className="w-[unset] h-[unset]" 
+            />
           </div>
         </div>
       </div>
