@@ -1,4 +1,4 @@
-import { classNames, formatNumber } from '../../../functions'
+import { classNames, formatNumber } from 'functions'
 import {
   useCustomDayBlock,
   useEthPrice,
@@ -8,20 +8,20 @@ import {
   useToken,
   useTokenPairs,
   useTransactions,
-} from '../../../services/graph'
+} from 'services/graph'
 import { useMemo, useState } from 'react'
 
-import ColoredNumber from '../../../features/analytics/ColoredNumber'
-import Container from '../../../components/Container'
-import CurrencyCard from '../../../features/analytics/Tokens/CurrencyCard'
-import CurrencyLogo from '../../../components/CurrencyLogo'
-import InfoCard from '../../../features/analytics/Tokens/InfoCard'
-import LineGraph from '../../../components/LineGraph'
-import TopFarmsList from '../../../features/analytics/Tokens/TopFarmsList'
-import TransactionList from '../../../features/analytics/Tokens/TransactionList'
+import ColoredNumber from 'features/analytics/ColoredNumber'
+import Container from 'components/Container'
+import CurrencyCard from 'features/analytics/Tokens/CurrencyCard'
+import { CurrencyLogo } from 'components/CurrencyLogo'
+import InfoCard from 'features/analytics/Tokens/InfoCard'
+import LineGraph from 'components/LineGraph'
+import TopFarmsList from 'features/analytics/Tokens/TopFarmsList'
+import TransactionList from 'features/analytics/Tokens/TransactionList'
 import { times } from 'lodash'
-import { tokenDayDatasQuery } from '../../../services/graph/queries'
-import { useCurrency } from '../../../hooks/Tokens'
+import { tokenDayDatasQuery } from 'services/graph/queries'
+import { useCurrency } from 'hooks/Tokens'
 import { useRouter } from 'next/router'
 
 const socialsPlaceholder = [

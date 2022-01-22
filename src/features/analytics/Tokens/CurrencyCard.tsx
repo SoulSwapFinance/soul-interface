@@ -1,4 +1,4 @@
-import CurrencyLogo from '../../../components/CurrencyLogo'
+import { CurrencyLogo } from '../../../components/CurrencyLogo'
 import { useCurrency } from '../../../hooks/Tokens'
 
 interface CurrencyCardProps {

@@ -1,7 +1,7 @@
 import { Currency, NATIVE, WNATIVE, currencyEquals } from '../../sdk'
 
 import { AutoColumn } from '../../components/Column'
-import CurrencyLogo from '../../components/CurrencyLogo'
+import { CurrencyLogo } from '../../components/CurrencyLogo'
 import Link from 'next/link'
 import React from 'react'
 import { RowBetween } from '../../components/Row'

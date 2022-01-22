@@ -7,7 +7,7 @@ import { ChevronDownIcon } from '@heroicons/react/solid'
 import { Currency } from 'sdk'
 import { useLingui } from '@lingui/react'
 import CurrencySearchModal from '../../modals/SearchModal/CurrencySearchModal'
-import CurrencyLogo from '../../components/CurrencyLogo'
+import { CurrencyLogo } from '../../components/CurrencyLogo'
 
 interface CurrencySelectProps {
   currency: Currency

@@ -3,7 +3,6 @@ import React, { FC } from 'react'
 
 import Typography from '../Typography'
 import CurrencyLogo, { CurrencyLogoProps } from './CurrencyLogo'
-
 interface CurrencyLogosProps extends Omit<CurrencyLogoProps, 'currency' | 'size'> {
   currencies: Currency[]
   dense?: boolean

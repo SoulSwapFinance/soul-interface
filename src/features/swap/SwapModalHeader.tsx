@@ -3,7 +3,7 @@ import { Currency, Percent, TradeType, Trade } from '../../sdk'
 import React, { useState } from 'react'
 import { formatNumberScale, isAddress, shortenAddress } from '../../functions'
 
-import CurrencyLogo from '../../components/CurrencyLogo'
+import { CurrencyLogo } from '../../components/CurrencyLogo'
 import TradePrice from './TradePrice'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
