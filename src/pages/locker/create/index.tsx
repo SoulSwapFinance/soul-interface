@@ -30,6 +30,7 @@ import {
   import useLocker from '../../../features/locker/useLocker'
   import { ethers } from 'ethers'
   import { useAddPopup } from '../../../state/application/hooks'
+import { BigNumber } from '@ethersproject/bignumber'
   
   export default function CreateLocker(): JSX.Element {
     const { i18n } = useLingui()
@@ -78,7 +79,7 @@ import {
       await approve()
     }, [approve])
   
-    const handleLock = useCallback(async () => {
+    const handleLock = useCallback(async () => {``
       if (allInfoSubmitted) {
         setPendingTx(true)
   
@@ -86,7 +87,8 @@ import {
           const tx = await lockerContract.lockTokens(
             tokenAddress,
             withdrawer,
-            value.toBigNumber(assetToken?.decimals),
+            new BigNumber(value, assetToken?.decimals.toString()),
+            // .toBigNumber(assetToken?.decimals),
             moment.default(unlockDate).unix().toString()
           )
   

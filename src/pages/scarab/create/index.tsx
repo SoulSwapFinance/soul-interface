@@ -32,6 +32,7 @@ import useScarab from '../../../features/scarab/useScarab'
 import { ethers } from 'ethers'
 import { useAddPopup } from '../../../state/application/hooks'
 import { result } from 'lodash'
+import { BigNumber } from '@ethersproject/bignumber'
 
 export default function CreateScarab(): JSX.Element {
   const { i18n } = useLingui()
@@ -90,7 +91,8 @@ export default function CreateScarab(): JSX.Element {
         const tx = await scarabContract.lockSouls(
           // tokenAddress,
           recipient,
-          value.toBigNumber(assetToken?.decimals),
+          new BigNumber(value, '18'),
+          // .toBigNumber(assetToken?.decimals),
           moment.default(unlockDate).unix().toString()
         )
 

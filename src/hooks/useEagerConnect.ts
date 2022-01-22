@@ -2,24 +2,26 @@ import { useEffect, useState } from 'react'
 
 import { injected } from '../connectors'
 import { isMobile } from 'react-device-detect'
-import { useWeb3React as useWeb3ReactCore } from '@web3-react/core'
+import { useWeb3React, useWeb3React as useWeb3ReactCore } from '@web3-react/core'
 
 function useEagerConnect() {
   const { activate, active } = useWeb3ReactCore() // specifically using useWeb3ReactCore because of what this hook does
   const [tried, setTried] = useState(false)
+  const { chainId } = useWeb3React()
 
   useEffect(() => {
     injected.isAuthorized().then((isAuthorized) => {
       if (isAuthorized) {
         activate(injected, undefined, true)
-          .then(() => window.ethereum.removeAllListeners(['networkChanged']))
+          // .then(() => window.ethereum.removeAllListeners(['networkChanged']))
           .catch(() => {
             setTried(true)
           })
       } else {
-        if (isMobile && window.ethereum) {
+        if (isMobile && chainId == 1) {
+        // if (isMobile && window.ethereum) {
           activate(injected, undefined, true)
-            .then(() => window.ethereum.removeAllListeners(['networkChanged']))
+            // .then(() => window.ethereum.removeAllListeners(['networkChanged']))
             .catch(() => {
               setTried(true)
             })

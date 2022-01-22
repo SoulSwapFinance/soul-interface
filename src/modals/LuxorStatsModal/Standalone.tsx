@@ -95,7 +95,7 @@ export default function TokenStatsStandalone({
   ENSName?: string
 }) {
   // important that these are destructed from the account-specific web3-react context
-  const { active, account, connector, activate, error } = useWeb3React()
+  const { active, account, chainId, connector, activate, error } = useWeb3React()
 
   const [walletView, setWalletView] = useState(WALLET_VIEWS.ACCOUNT)
 
@@ -175,7 +175,8 @@ export default function TokenStatsStandalone({
 
   // get wallets user can switch too, depending on device/browser
   function getOptions() {
-    const isMetamask = window.ethereum && window.ethereum.isMetaMask
+    const isMetamask = chainId && chainId == 250
+    // const isMetamask = window.ethereum && window.ethereum.isMetaMask
     return Object.keys(SUPPORTED_WALLETS).map((key) => {
       const option = SUPPORTED_WALLETS[key]
 
@@ -186,7 +187,8 @@ export default function TokenStatsStandalone({
           return null
         }
 
-        if (!window.web3 && !window.ethereum && option.mobile) {
+        if (option.mobile) {
+        // if (!window.web3 && !window.ethereum && option.mobile) {
           return (
             <Option
               onClick={() => {
@@ -209,7 +211,7 @@ export default function TokenStatsStandalone({
       // overwrite injected when needed
       if (option.connector === injected) {
         // don't show injected if there's no injected provider
-        if (!(window.web3 || window.ethereum)) {
+        // if (!(window.web3 || window.ethereum)) {
           if (option.name === 'MetaMask') {
             return (
               <Option
@@ -245,7 +247,7 @@ export default function TokenStatsStandalone({
         // likewise for generic
         else if (option.name === 'Injected' && isMetamask) {
           return null
-        }
+        // }
       }
 
       // return rest of options

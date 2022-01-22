@@ -73,7 +73,10 @@ export default function SmartNumberInput({
           </span>
         </div>
         <div className="text-base text-right text-secondary" style={{ display: 'inline', cursor: 'pointer' }}>
-          {maxTitle} {formatNumber(max.toFixed(token.tokenInfo.decimals))}
+          {maxTitle} {formatNumber(
+            Number(max)
+            .toFixed(token.tokenInfo.decimals))
+            }
         </div>
       </div>
 
@@ -104,7 +107,7 @@ export default function SmartNumberInput({
               if (setPinMax) {
                 setPinMax(true)
               } else {
-                setValue(max.toFixed(token.tokenInfo.decimals))
+                setValue(Number(max).toFixed(token.tokenInfo.decimals))
               }
             }}
             className={'absolute right-4 focus:ring focus:ring-' + color}

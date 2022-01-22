@@ -15,7 +15,7 @@ import { formatNumberScale } from 'functions'
 import { LUX_ADDRESS, WLUM_ADDRESS } from 'constants/addresses'
 import { useSingleCallResult } from 'state/multicall/hooks'
 import { usePriceHelperContract } from 'features/bond/hooks/useContract'
-import QuestionHelper from '../../components/QuestionHelper'
+// import QuestionHelper from '../../components/QuestionHelper'
 import { useTVL } from 'hooks/useV2Pairs'
 import { Wrapper } from 'features/swap/styleds'
 import { Button } from 'components/Button'
@@ -79,7 +79,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
 
           <div className="flex flex-col w-full py-4">
             {/* <div className="block"> */}
-            <QuestionHelper text={`Add to MetaMask`}>
+            {/* <QuestionHelper text={`Add to MetaMask`}> */}
               <div
                 className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
                 onClick={() => {
@@ -156,7 +156,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
                   className="rounded-md"
                 />
               </div>
-            </QuestionHelper>
+            {/* </QuestionHelper> */}
 
             {/* </div> */}
             {/* <div className="flex flex-1 flex-col"> */}
@@ -189,7 +189,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
             <Typography variant="sm" className="flex items-center py-0.5">
               {`Circulating Supply`}
             </Typography>
-            <QuestionHelper
+            {/* <QuestionHelper */}
               text={
                 <div className="flex flex-col gap-2 py-1 px-3 w-full">
                   <div className="flex items-center justify-between">
@@ -233,7 +233,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
                   </div>
                 </div>
               }
-            />
+            {/* /> */}
           </div>,
           formatNumberScale(
             Number(tokenInfo?.totalSupply)

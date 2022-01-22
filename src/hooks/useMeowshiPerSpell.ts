@@ -13,12 +13,14 @@ export default function useMeowshiPerSpell() {
     ;(async () => {
       const toShare = await bentoboxContract.toShare(
         ENCHANT[ChainId.FANTOM],
-        '1'.toBigNumber(ENCHANT[ChainId.FANTOM].decimals),
+        '1',
+        // .toBigNumber(ENCHANT[ChainId.FANTOM].decimals),
         false
       )
       const toAmount = await bentoboxContract.toAmount(
         ENCHANT[ChainId.FANTOM],
-        '1'.toBigNumber(ENCHANT[ChainId.FANTOM].decimals),
+        '1',
+        // .toBigNumber(ENCHANT[ChainId.FANTOM].decimals),
         false
       )
       setState([toShare, toAmount])

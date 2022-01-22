@@ -22,6 +22,7 @@ import Modal from 'components/DefaultModal'
 import ModalHeader from '../../components/ModalHeader'
 import Typography from '../../components/Typography'
 import moment from 'moment'
+import { BigNumber } from '@ethersproject/bignumber'
 
 const VaultListItem = ({ farm }) => {
   const { i18n } = useLingui()
@@ -172,7 +173,9 @@ const VaultListItem = ({ farm }) => {
                       setPendingTx(true)
                       try {
                         // KMP decimals depend on asset, SLP is always 18
-                        const tx = await deposit(farm?.id, depositValue.toBigNumber(liquidityToken?.decimals))
+                        const tx = await deposit(farm?.id, 
+                          new BigNumber(depositValue, liquidityToken?.decimals.toString()))
+                          // .toBigNumber(liquidityToken?.decimals))
 
                         addTransaction(tx, {
                           summary: `${i18n._(t`Deposit`)} ${
@@ -254,7 +257,9 @@ const VaultListItem = ({ farm }) => {
                   setPendingTx(true)
                   try {
                     // KMP decimals depend on asset, SLP is always 18
-                    const tx = await withdraw(farm?.id, withdrawValue.toBigNumber(liquidityToken?.decimals))
+                    const tx = await withdraw(farm?.id, 
+                      new BigNumber(withdrawValue, liquidityToken?.decimals.toString()))
+                      // .toBigNumber(liquidityToken?.decimals))
                     addTransaction(tx, {
                       summary: `${i18n._(t`Withdraw`)} ${
                         farm.pair.token1

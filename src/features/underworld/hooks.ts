@@ -115,7 +115,9 @@ export function useUnderworldPairs(addresses = []) {
     .reduce((previousValue, currentValue) => {
       const balance = balances[currentValue.address]
       const strategy = strategies?.find((strategy) => strategy.token === currentValue.address.toLowerCase())
-      const usd = e10(currentValue.decimals).mulDiv(balances[currency.address].rate, balance.rate)
+      const usd = e10(currentValue.decimals)
+      .mul(balances[currency.address].rate
+        .div(balance.rate))
       const symbol = currentValue.address === wnative ? NATIVE[chainId].symbol : currentValue.symbol
       return {
         ...previousValue,
@@ -183,7 +185,9 @@ export function useUnderworldPairs(addresses = []) {
         )
 
         // The percentage of assets that is borrowed out right now
-        pair.utilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value)
+        pair.utilization = e10(18)
+        .mul(pair.currentBorrowAmount.value)
+        .div(pair.currentAllAssets.value)
 
         // Interest per year received by lenders as of now
         pair.supplyAPR = takeFee(pair.interestPerYear.mulDiv(pair.utilization, e10(18)))

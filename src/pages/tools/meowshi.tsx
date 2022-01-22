@@ -16,6 +16,7 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import useMeowshiPerSpell from '../../hooks/useMeowshiPerSpell'
 import useSoulPerSpell from '../../hooks/useSpellPerSoul'
+import { BigNumber } from '@ethersproject/bignumber'
 
 export enum Field {
   INPUT = 'INPUT',
@@ -56,46 +57,60 @@ export default function Meowshi() {
 
   const handleInput = useCallback(
     async (val, field) => {
-      setFields((prevState) => {
-        const inputRate =
-          currencies[Field.INPUT] === ENCHANT
-            ? meowshiPerSpell.mul(e10(5))
-            : meowshiPerSpell.mul(e10(5)).mulDiv(e10(18), soulPerSpell.toString().toBigNumber(18))
-        const outputRate =
-          currencies[Field.OUTPUT] === ENCHANT
-            ? spellPerMeowshi.div(e10(5))
-            : spellPerMeowshi.mulDiv(soulPerSpell.toString().toBigNumber(18), e10(18)).div(e10(5))
+      // setFields((prevState) => {
+      //   const inputRate =
+      //     currencies[Field.INPUT] === ENCHANT
+      //       ? meowshiPerSpell.mul(e10(5))
+      //       : meowshiPerSpell.mul(e10(5)).mul(e10(18)).div(soulPerSpell
+      //         .toString())
+      //         // .toBigNumber(18))
+      //   const outputRate =
+      //     currencies[Field.OUTPUT] === ENCHANT
+      //       ? spellPerMeowshi.div(e10(5))
+      //       : spellPerMeowshi.mul(soulPerSpell).div(e10(18))
+      //         // .toBigNumber(18), e10(18))
+      //         .div(e10(5))
 
-        if (field === Field.INPUT) {
-          if (currencies[Field.OUTPUT] === MEOW) {
-            return {
-              independentField: Field.INPUT,
-              [Field.INPUT]: val || prevState[Field.INPUT],
-              [Field.OUTPUT]: inputRate.mulDiv((val || prevState[Field.INPUT]).toBigNumber(18), e10(18))?.toFixed(18),
-            }
-          } else {
-            return {
-              independentField: Field.INPUT,
-              [Field.INPUT]: val || prevState[Field.INPUT],
-              [Field.OUTPUT]: outputRate.mulDiv((val || prevState[Field.INPUT]).toBigNumber(18), e10(18))?.toFixed(18),
-            }
-          }
-        } else {
-          if (currencies[Field.OUTPUT] === MEOW) {
-            return {
-              independentField: Field.OUTPUT,
-              [Field.INPUT]: (val || prevState[Field.OUTPUT]).toBigNumber(18).mulDiv(e10(18), inputRate)?.toFixed(18),
-              [Field.OUTPUT]: val || prevState[Field.OUTPUT],
-            }
-          } else {
-            return {
-              independentField: Field.OUTPUT,
-              [Field.INPUT]: (val || prevState[Field.OUTPUT]).toBigNumber(18).mulDiv(e10(18), outputRate)?.toFixed(18),
-              [Field.OUTPUT]: val || prevState[Field.OUTPUT],
-            }
-          }
-        }
-      })
+      //   if (field === Field.INPUT) {
+      //     if (currencies[Field.OUTPUT] === MEOW) {
+      //       return {
+      //         independentField: Field.INPUT,
+      //         [Field.INPUT]: val || prevState[Field.INPUT],
+      //         [Field.OUTPUT]: 
+      //         inputRate
+      //           .mul(
+      //             (val || prevState[Field.INPUT]).toBigNumber(18)
+      //             .div(e10(18))?.toFixed(18),
+      //       }
+      //     } else {
+      //       return {
+      //         independentField: Field.INPUT,
+      //         [Field.INPUT]: val || prevState[Field.INPUT],
+      //         [Field.OUTPUT]: 
+      //         outputRate
+      //           .mul(val || 
+      //             new BigNumber(prevState[Field.INPUT], '18'))
+      //             // .toBigNumber(18)
+      //           .div(e10(18)),
+      //           // ?.toFixed(18),
+      //       }
+      //     }
+      //   } else {
+      //     if (currencies[Field.OUTPUT] === MEOW) {
+      //       return {
+      //         independentField: Field.OUTPUT,
+      //         [Field.INPUT]: (val || prevState[Field.OUTPUT]).toBigNumber(18).mulDiv(e10(18), inputRate)?.toFixed(18),
+      //         [Field.OUTPUT]: val || prevState[Field.OUTPUT],
+      //       }
+      //     } else {
+      //       return {
+      //         independentField: Field.OUTPUT,
+      //         [Field.INPUT]: (val || prevState[Field.OUTPUT]).toBigNumber(18).mulDiv(e10(18), outputRate)?.toFixed(18),
+      //         [Field.OUTPUT]: val || prevState[Field.OUTPUT],
+      //       }
+      //     }
+      //   }
+      // })
     },
     [currencies, meowshiPerSpell, soulPerSpell, spellPerMeowshi]
   )

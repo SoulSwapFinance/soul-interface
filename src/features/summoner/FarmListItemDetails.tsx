@@ -26,6 +26,7 @@ import { isMobile } from 'react-device-detect'
 import { usePriceHelperContract } from '../bond/hooks/useContract'
 import { useSingleCallResult } from '../../state/multicall/hooks'
 import { formatCurrency } from '../../modals/TokensStatsModal'
+import { BigNumber } from '@ethersproject/bignumber'
 
 const FarmListItem = ({ farm }) => {
   const { i18n } = useLingui()
@@ -149,7 +150,8 @@ const FarmListItem = ({ farm }) => {
                   setPendingTx(true)
                   try {
                     // KMP decimals depend on asset, SLP is always 18
-                    const tx = await deposit(farm?.id, depositValue.toBigNumber(liquidityToken?.decimals))
+                    const tx = await deposit(farm?.id, new BigNumber(depositValue, `18`))
+                      // .toBigNumber(liquidityToken?.decimals))
 
                     addTransaction(tx, {
                       summary: `${i18n._(t`Deposit`)} ${
@@ -212,7 +214,8 @@ const FarmListItem = ({ farm }) => {
                 setPendingTx(true)
                 try {
                   // KMP decimals depend on asset, SLP is always 18
-                  const tx = await withdraw(farm?.id, withdrawValue.toBigNumber(liquidityToken?.decimals))
+                  const tx = await withdraw(farm?.id, new BigNumber(withdrawValue, '18'))
+                    // .toBigNumber(liquidityToken?.decimals))
                   addTransaction(tx, {
                     summary: `${i18n._(t`Withdraw`)} ${
                       farm.pair.token1

@@ -1,7 +1,7 @@
 import { Currency, Token } from '../sdk'
 import { useCallback, useState } from 'react'
 
-import { getTokenLogoURL } from './../components/CurrencyLogo'
+// import { getTokenLogoURL } from './../components/CurrencyLogo'
 import { useActiveWeb3React } from './useActiveWeb3React'
 
 export default function useAddTokenToMetaMask(currencyToAdd: Currency | undefined): {
