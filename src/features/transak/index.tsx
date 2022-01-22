@@ -1,7 +1,7 @@
 import { ChainId } from '../../sdk'
 import { t } from '@lingui/macro'
 import transakSDK from '@transak/transak-sdk'
-import { useActiveWeb3React } from '../../hooks'
+import { useActiveWeb3React } from 'services/web3'
 import { useCallback } from 'react'
 import { useLingui } from '@lingui/react'
 

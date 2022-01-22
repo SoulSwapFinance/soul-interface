@@ -1,16 +1,14 @@
 import { TransactionFactory } from '@ethereumjs/tx'
-import { defaultAbiCoder } from '@ethersproject/abi'
+// import { defaultAbiCoder } from '@ethersproject/abi'
 import { TransactionRequest } from '@ethersproject/abstract-provider'
 import { BigNumber } from '@ethersproject/bignumber'
 import { Signature } from '@ethersproject/bytes'
 import { arrayify, DataOptions, hexlify, splitSignature } from '@ethersproject/bytes'
-import { AddressZero } from '@ethersproject/constants'
+// import { AddressZero } from '@ethersproject/constants'
 import { t } from '@lingui/macro'
 import {
   Currency,
   CurrencyAmount,
-  getBigNumber,
-  MultiRoute,
   Percent,
   Router as LegacyRouter,
   SwapParameters,
@@ -44,10 +42,9 @@ import { useBlockNumber } from 'state/application/hooks'
 import { TransactionResponseLight, useTransactionAdder } from 'state/transactions/hooks'
 import { useMemo } from 'react'
 
-import { OPENMEV_SUPPORTED_NETWORKS, OPENMEV_URI } from 'config/openmev'
+import { OPENMEV_SUPPORTED_NETWORKS, OPENMEV_URI } from '../config/openmev'
 import { useArgentWalletContract } from './useArgentWalletContract'
-import { useRouterContract } from './useContract'
-// import { useRouterContract, useTridentRouterContract } from './useContract'
+import { useRouterContract } from './useContract' // useTridentRouterContract
 import useENS from './useENS'
 import { SignatureData } from './useERC20Permit'
 import useTransactionDeadline from './useTransactionDeadline'
@@ -78,13 +75,13 @@ interface FailedCall extends SwapCallEstimate {
   error: Error
 }
 
-// interface TridentTradeContext {
-//   fromWallet: boolean
-//   receiveToWallet: boolean
-//   bentoPermit?: Signature
-//   resetBentoPermit?: () => void
-//   parsedAmounts?: (CurrencyAmount<Currency> | undefined)[]
-// }
+interface TridentTradeContext {
+  fromWallet: boolean
+  receiveToWallet: boolean
+  bentoPermit?: Signature
+  resetBentoPermit?: () => void
+  parsedAmounts?: (CurrencyAmount<Currency> | undefined)[]
+}
 
 export type EstimatedSwapCall = SuccessfulCall | FailedCall
 
@@ -292,9 +289,9 @@ export type EstimatedSwapCall = SuccessfulCall | FailedCall
 //   return RouteType.Unknown
 // }
 
-// function multFraction(bn: BigNumber, fr: number, precision = 1e6) {
-//   return bn.mulDiv(Math.round(fr * precision), precision)
-// }
+function multFraction(bn: BigNumber, fr: number, precision = 1e6) {
+  return bn.mulDiv(Math.round(fr * precision), precision)
+}
 
 // function getInitialPathAmount(
 //   legIndex: number,
@@ -308,7 +305,7 @@ export type EstimatedSwapCall = SuccessfulCall | FailedCall
 //     const sumIntialPathAmounts = initialPaths.map((p) => p.amount).reduce((a, b) => a.add(b))
 //     return fromWallet
 //       ? inputAmount.quotient.toString().toBigNumber(0).sub(sumIntialPathAmounts)
-//       : getBigNumber(multiRoute.amountIn,).sub(sumIntialPathAmounts)
+//       : getBigNumber(multiRoute.amountIn).sub(sumIntialPathAmounts)
 //   } else {
 //     return fromWallet
 //       ? multFraction(inputAmount.quotient.toString().toBigNumber(0), multiRoute.legs[legIndex].absolutePortion)
@@ -331,7 +328,7 @@ export function useSwapCallArguments(
   allowedSlippage: Percent, // in bips
   recipientAddressOrName: string | null, // the ENS name or address of the recipient of the trade, or null if swap should be returned to sender
   signatureData: SignatureData | null | undefined,
-  // tridentTradeContext?: TridentTradeContext
+  tridentTradeContext?: TridentTradeContext
 ): SwapCall[] {
   const { account, chainId, library } = useActiveWeb3React()
 
@@ -533,7 +530,7 @@ export function useSwapCallback(
   allowedSlippage: Percent, // in bips
   recipientAddressOrName: string | null, // the ENS name or address of the recipient of the trade, or null if swap should be returned to sender
   signatureData: SignatureData | undefined | null,
-  // tridentTradeContext?: TridentTradeContext,
+  tridentTradeContext?: TridentTradeContext,
   useOpenMev: boolean = false
 ): {
   state: SwapCallbackState
@@ -552,7 +549,7 @@ export function useSwapCallback(
     allowedSlippage,
     recipientAddressOrName,
     signatureData,
-    // tridentTradeContext
+    tridentTradeContext
   )
 
   const addTransaction = useTransactionAdder()
@@ -659,13 +656,15 @@ export function useSwapCallback(
         } = bestCallOption
 
         console.log('gasEstimate' in bestCallOption ? { gasLimit: calculateGasMargin(bestCallOption.gasEstimate) } : {})
-
+        
         const txParams: TransactionRequest = {
           from: account,
           to: address,
           data: calldata,
           // let the wallet try if we can't estimate the gas
-          ...('gasEstimate' in bestCallOption ? { gasLimit: calculateGasMargin(bestCallOption.gasEstimate) } : {}),
+          ...('gasEstimate' in bestCallOption ? { 
+            gasLimit: new BigNumber(calculateGasMargin(bestCallOption.gasEstimate), '')
+           } : {}),
           // gasPrice: !eip1559 && chainId === ChainId.HARMONY ? BigNumber.from('2000000000') : undefined,
           ...(value && !isZero(value) ? { value } : {}),
         }
@@ -753,19 +752,19 @@ export function useSwapCallback(
             let base = `Swap ${trade?.inputAmount?.toSignificant(4)} ${
               trade?.inputAmount.currency?.symbol
             } for ${trade?.outputAmount?.toSignificant(4)} ${trade?.outputAmount.currency?.symbol}`
-            // if (tridentTradeContext?.parsedAmounts) {
-            //   base = `Swap ${tridentTradeContext?.parsedAmounts[0]?.toSignificant(4)} ${
-            //     // @ts-ignore TYPE NEEDS FIXING
-            //     tridentTradeContext?.parsedAmounts[0].currency?.symbol
-            //   } for ${tridentTradeContext?.parsedAmounts[1]?.toSignificant(4)} ${
-            //     // @ts-ignore TYPE NEEDS FIXING
-            //     tridentTradeContext?.parsedAmounts[1].currency?.symbol
-            //   }`
-            // }
+            if (tridentTradeContext?.parsedAmounts) {
+              base = `Swap ${tridentTradeContext?.parsedAmounts[0]?.toSignificant(4)} ${
+                // @ts-ignore TYPE NEEDS FIXING
+                tridentTradeContext?.parsedAmounts[0].currency?.symbol
+              } for ${tridentTradeContext?.parsedAmounts[1]?.toSignificant(4)} ${
+                // @ts-ignore TYPE NEEDS FIXING
+                tridentTradeContext?.parsedAmounts[1].currency?.symbol
+              }`
+            }
 
-            // if (tridentTradeContext?.bentoPermit && tridentTradeContext?.resetBentoPermit) {
-            //   tridentTradeContext.resetBentoPermit()
-            // }
+            if (tridentTradeContext?.bentoPermit && tridentTradeContext?.resetBentoPermit) {
+              tridentTradeContext.resetBentoPermit()
+            }
 
             const withRecipient =
               recipient === account

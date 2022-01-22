@@ -7,7 +7,7 @@ import NavLink from '../../components/NavLink'
 import Settings from '../../components/Settings'
 import { currencyId } from '../../functions'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../hooks'
+import { useActiveWeb3React } from 'services/web3'
 import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
 

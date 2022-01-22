@@ -68,17 +68,6 @@ const HideOnMobile = styled.div`
 }
 `;
 
-const refresh = async () => {
-  // reset states
-  useSwapState()
-  // logs
-}
-
-// Render trades on mount
-useEffect(() => {
-  refresh()
-}, [])
-
 export default function Swap() {
   const { i18n } = useLingui()
 

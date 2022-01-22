@@ -9,7 +9,7 @@ import useUSDCPrice from 'hooks/useUSDCPrice'
 import { ConfirmationModalContent } from 'modals/TransactionConfirmationModal'
 import { useActiveWeb3React } from 'services/web3'
 import { Field } from 'state/limit-order/actions'
-import { useDerivedLimitOrderInfo, useLimitOrderState } from 'state/limit-order/hooks'
+import { useLimitOrderState } from 'state/limit-order/hooks'
 import React, { FC, useCallback } from 'react'
 
 interface ConfirmLimitOrderModalProps {
@@ -122,3 +122,7 @@ const ConfirmLimitOrderBottomContent: FC<ConfirmLimitOrderBottomContentProps> = 
 }
 
 export default ConfirmLimitOrderModal
+function useDerivedLimitOrderInfo(): { currencies: any; parsedAmounts: any } {
+  throw new Error('Function not implemented.')
+}
+

@@ -34,7 +34,7 @@ import Typography from '../../../components/Typography'
 import limitOrderPairList from '@sushiswap/limit-order-pair-list/dist/limit-order.pairlist.json'
 import swapArrowsAnimationData from '../../../animation/swap-arrows.json'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../../hooks'
+import { useActiveWeb3React } from 'services/web3'
 import { useExpertModeManager } from '../../../state/user/hooks'
 import { useLingui } from '@lingui/react'
 

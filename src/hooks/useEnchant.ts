@@ -1,8 +1,8 @@
 import { CurrencyAmount, Token, ENCHANT_ADDRESS } from '../sdk'
-import { useActiveWeb3React } from '.'
 import { useCallback } from 'react'
 import { useEnchantContract, useEnchantHelperContract, useSeanceContract } from './useContract'
 import { useTransactionAdder } from '../state/transactions/hooks'
+import { useActiveWeb3React } from 'services/web3'
 
 const useEnchant = () => {
   const { account } = useActiveWeb3React()

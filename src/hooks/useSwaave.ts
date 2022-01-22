@@ -4,7 +4,7 @@ import { useSaaveContract, useSoulContract } from '../hooks/useContract'
 import { BalanceProps } from './useTokenBalance'
 import { Fraction } from '../entities'
 import { ethers } from 'ethers'
-import useActiveWeb3React from '../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useTransactionAdder } from '../state/transactions/hooks'
 
 const { BigNumber } = ethers

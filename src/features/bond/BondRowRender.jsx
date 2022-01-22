@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Image from 'next/image'
 import { ethers } from 'ethers'
 
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 
 import useSoulBond from './hooks/useSoulBond'
 import useApprove from './hooks/useApprove'

@@ -11,7 +11,6 @@ import { formatNumber, formatNumberScale, formatPercent } from '../../functions'
 import { getAddress } from '@ethersproject/address'
 import { t } from '@lingui/macro'
 import { tryParseAmount } from '../../functions/parse'
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import { useLingui } from '@lingui/react'
 import useMasterChef from './useSummoner'
 import usePendingReward from './usePendingReward'
@@ -23,6 +22,7 @@ import ModalHeader from '../../components/ModalHeader'
 import Typography from '../../components/Typography'
 import moment from 'moment'
 import { BigNumber } from '@ethersproject/bignumber'
+import { useActiveWeb3React } from 'services/web3'
 
 const VaultListItem = ({ farm }) => {
   const { i18n } = useLingui()

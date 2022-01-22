@@ -5,7 +5,6 @@ import Image from 'next/image'
 import styled from 'styled-components'
 import Modal from 'components/DefaultModal'
 import ModalHeader from 'components/ModalHeader'
-import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
 import Typography from 'components/Typography'
 import ExternalLink from 'components/ExternalLink'
 import { ExternalLink as LinkIcon } from 'react-feather'
@@ -20,6 +19,7 @@ import { useTVL } from 'hooks/useV2Pairs'
 import { Wrapper } from 'features/swap/styleds'
 import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
+import { useActiveWeb3React } from 'services/web3'
 
 const cache: { [key: string]: number } = {};
 

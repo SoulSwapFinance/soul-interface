@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 
 import useAtomicSwap from './hooks/useAtomicSwap'
 import { ZERO_ADDRESS, ATOMIC_SWAP_ADDRESS } from '../../constants/addresses'

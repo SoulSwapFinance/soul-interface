@@ -253,10 +253,21 @@ export default function Remove() {
           .then(calculateGasMargin)
           .catch((error) => {
             console.error(`estimateGas failed`, methodName, args, error)
-            return BigNumber.from('1000000')
+            return undefined
           })
       )
     )
+    
+    // const safeGasEstimates: (BigNumber | undefined)[] = await Promise.all(
+    //   methodNames.map((methodName) =>
+    //     routerContract.estimateGas[methodName](...args)
+    //       .then(calculateGasMargin)
+    //       .catch((error) => {
+    //         console.error(`estimateGas failed`, methodName, args, error)
+    //         return BigNumber.from('1000000')
+    //       })
+    //   )
+    // )
 
     const indexOfSuccessfulEstimation = safeGasEstimates.findIndex((safeGasEstimate) =>
       BigNumber.isBigNumber(safeGasEstimate)
@@ -519,16 +530,16 @@ export default function Remove() {
   //     );
   //   }
 
-  //   const safeGasEstimates: (BigNumber | undefined)[] = await Promise.all(
-  //     methodNames.map((methodName) =>
-  //       router.estimateGas[methodName](...args)
-  //         .then(calculateGasMargin)
-  //         .catch((error) => {
-  //           console.error(`estimateGas failed`, methodName, args, error);
-  //           return undefined;
-  //         })
-  //     )
-  //   );
+    // const safeGasEstimates: (BigNumber | undefined)[] = await Promise.all(
+    //   methodNames.map((methodName) =>
+    //     router.estimateGas[methodName](...args)
+    //       .then(calculateGasMargin)
+    //       .catch((error) => {
+    //         console.error(`estimateGas failed`, methodName, args, error);
+    //         return undefined;
+    //       })
+    //   )
+    // );
 
   //   const indexOfSuccessfulEstimation = safeGasEstimates.findIndex(
   //     (safeGasEstimate) => BigNumber.isBigNumber(safeGasEstimate)
@@ -796,7 +807,7 @@ export default function Remove() {
                                   }`}
                                 >
                                   <a className="text-baseline text-blue opacity-80 hover:opacity-100 whitespace-nowrap">
-                                    Receive W{NATIVE[chainId].symbol}
+                                    Receive {NATIVE[chainId].symbol}
                                   </a>
                                 </Link>
                               ) : null}

@@ -7,7 +7,7 @@ import { ARCHER_ROUTER_ADDRESS } from '../constants'
 import { MaxUint256 } from '@ethersproject/constants'
 import { TransactionResponse } from '@ethersproject/providers'
 import { calculateGasMargin } from '../functions/trade'
-import { useActiveWeb3React } from './useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useTokenAllowance } from './useTokenAllowance'
 import { useTokenContract } from './useContract'
 

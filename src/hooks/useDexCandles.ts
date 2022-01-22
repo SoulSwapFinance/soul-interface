@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { dexCandlesGraph } from './apollo/client'
 import { dexCandlesQuery } from './apollo/queries'
-import { useActiveWeb3React } from './index'
+import { useActiveWeb3React } from 'services/web3'
 import { CandlePeriod, NumericalCandlestickDatum, RawCandlestickDatum } from '../components/Chart/types/Candle'
 
 const useDexCandles = (token0LCase: string, token1LCase: string, period: CandlePeriod) => {

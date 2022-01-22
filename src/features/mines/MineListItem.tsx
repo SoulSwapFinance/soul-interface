@@ -9,7 +9,6 @@ import { useCurrency } from 'hooks/Tokens'
 import MineListItemDetails from './MineListItemDetails'
 import { SOUL } from '../../constants'
 import {
-  useActiveWeb3React,
   useHarvestHelperContract,
   usePriceHelperContract
 } from 'hooks'
@@ -20,6 +19,7 @@ import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 import YieldDetails from 'components/YieldDetails'
 import IconWrapper from 'components/IconWrapper'
 import { Info } from 'react-feather'
+import { useActiveWeb3React } from 'services/web3'
 
 const MineListItem = ({ farm, ...rest }) => {
   const { chainId } = useActiveWeb3React()

@@ -4,7 +4,7 @@ import useLPTokensState, { LPTokensState } from './useLPTokensState'
 
 import { ChainId } from '../sdk'
 import { parseUnits } from '@ethersproject/units'
-import { useActiveWeb3React } from './useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import useSushiRoll from './useSushiRoll'
 
 export type MigrateMode = 'permit' | 'approve'

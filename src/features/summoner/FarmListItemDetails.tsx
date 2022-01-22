@@ -15,7 +15,6 @@ import { formatNumber, formatNumberScale, formatPercent } from '../../functions'
 import { getAddress } from '@ethersproject/address'
 import { t } from '@lingui/macro'
 import { tryParseAmount } from '../../functions/parse'
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import { useLingui } from '@lingui/react'
 import useSoulSummoner from './useSummoner'
 import usePendingReward from './usePendingReward'
@@ -27,6 +26,7 @@ import { usePriceHelperContract } from '../bond/hooks/useContract'
 import { useSingleCallResult } from '../../state/multicall/hooks'
 import { formatCurrency } from '../../modals/TokensStatsModal'
 import { BigNumber } from '@ethersproject/bignumber'
+import { useActiveWeb3React } from 'services/web3'
 
 const FarmListItem = ({ farm }) => {
   const { i18n } = useLingui()

@@ -4,7 +4,7 @@ import { AutoRow } from '../Row'
 import ExternalLink from '../../components/ExternalLink'
 import { getExplorerLink } from '../../functions/explorer'
 import styled from 'styled-components'
-import { useActiveWeb3React } from '../../hooks'
+import { useActiveWeb3React } from 'services/web3'
 import { ExternalLinkIcon } from '@heroicons/react/outline'
 import React from 'react'
 

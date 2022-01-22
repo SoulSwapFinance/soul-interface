@@ -1,7 +1,7 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { WNATIVE } from '../sdk'
 import { ethers } from 'ethers'
-import { useActiveWeb3React } from './useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useBentoBoxContract } from './useContract'
 import { useCallback } from 'react'
 import { useTransactionAdder } from '../state/transactions/hooks'

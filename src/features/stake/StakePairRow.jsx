@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { ethers } from 'ethers'
 
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 
 import useSoulSummoner from '../farm/hooks/useSoulSummoner'
 import useApprove from '../farm/hooks/useApprove'
