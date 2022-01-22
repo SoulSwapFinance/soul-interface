@@ -45,7 +45,7 @@ export const SUPPORTED_NETWORKS: {
       symbol: 'FTM',
       decimals: 18,
     },
-    rpcUrls: ['https://rpc.ftm.tools', 'https://rpcapi.fantom.network'],
+    rpcUrls: ['https://rpc.ftm.tools'],
     blockExplorerUrls: ['https://ftmscan.com'],
   },
   [ChainId.BSC]: {
@@ -58,6 +58,17 @@ export const SUPPORTED_NETWORKS: {
     },
     rpcUrls: ['https://bsc-dataseed.binance.org'],
     blockExplorerUrls: ['https://bscscan.com'],
+  },
+  [ChainId.FANTOM_TESTNET]: {
+    chainId: '0xFA2',
+    chainName: 'Fantom Testnet',
+    nativeCurrency: {
+      name: 'Fantom Testnet',
+      symbol: 'FTM',
+      decimals: 18,
+    },
+    rpcUrls: ['https://rpc.testnet.fantom.network'],
+    blockExplorerUrls: ['https://testnet.ftmscan.com'],
   },
   // [ChainId.MATIC]: {
   //   chainId: '0x89',
@@ -219,6 +230,7 @@ const NetworkModal: FC = () => {
             // ChainId.MOONRIVER,
             ChainId.FANTOM,
             ChainId.BSC,
+            ChainId.FANTOM_TESTNET,
             // ChainId.XDAI,
             // ChainId.HARMONY,
             // ChainId.TELOS,

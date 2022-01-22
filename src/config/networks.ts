@@ -1,7 +1,7 @@
 import { ChainId } from '../sdk'
 
 const Mainnet = '/images/networks/mainnet-network.jpg'
-const Binance = 'images/networks/bsc.png'
+const Binance = '/images/networks/bsc.png'
 const Fantom = '/images/networks/fantom-network.jpg'
 // const Arbitrum = '/images/networks/arbitrum-network.jpg'
 // const Avalanche = '/images/networks/avalanche-network.jpg'
