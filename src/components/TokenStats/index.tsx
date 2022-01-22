@@ -10,7 +10,7 @@ import { useSingleCallResult } from '../../state/multicall/hooks'
 import { usePriceHelperContract } from '../../features/bond/hooks/useContract'
 import styled from 'styled-components'
 import { useActiveWeb3React } from 'services/web3'
-
+import { usePriceApi } from 'features/vault/hooks'
 const HideOnMobile = styled.div`
 @media screen and (max-width: 500px) {
   display: none;
@@ -24,13 +24,12 @@ function TokenStats(): JSX.Element | null {
   // const open = useModalOpen(ApplicationModal.SOUL_STATS)
 
   const priceHelperContract = usePriceHelperContract()
-
-  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
+  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07']).result
   // console.log(Number(rawSoulPrice))
   const soulPrice = formatCurrency(Number(rawSoulPrice) / 1E18, 3)
   // console.log(soulPrice)
 
-  const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6'])?.result
+  const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6']).result
   // console.log(Number(rawSeancePrice))
   const seancePrice = formatCurrency(Number(rawSeancePrice) / 1E18, 3)
   // console.log(seancePrice)
