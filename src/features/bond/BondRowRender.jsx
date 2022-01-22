@@ -138,7 +138,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
           fetchBals()
           fetchApproval()
         }
-      }, 1200)
+      }, 3000)
       // Clear timeout if the component is unmounted
       return () => clearTimeout(timer)
     }

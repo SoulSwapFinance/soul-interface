@@ -31,9 +31,9 @@ import store from '../state'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import PriceProvider  from '../contexts/priceContext'
-import FarmContext from '../contexts/farmContext'
+// import FarmContext from '../contexts/farmContext'
 // import { usePricesApi } from '../features/summoner/hooks'
-import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
+// import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
 const Web3ProviderNetwork = dynamic(() => import('../components/Web3ProviderNetwork'), { ssr: false })
 const Web3ProviderNetworkBridge = dynamic(() => import('../components/Web3ProviderBridge'), { ssr: false })

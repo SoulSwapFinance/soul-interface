@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import * as Sentry from '@sentry/browser'
-import { Fee, Pair, Token } from 'sdk'
+import { Pair, Token } from 'sdk'
 // import { ConstantProductPool, Fee } from '@sushiswap/trident-sdk'
 // import { PoolUnion } from 'features/trident/types'
 // import { RoutingInfo } from 'hooks/useBestTridentTrade'
@@ -42,33 +42,31 @@ function getTokenInfo(t: Token) {
   }
 }
 
-export function getPoolInfo(pool: Pair) {
 // function getPoolInfo(pool: PoolUnion | Pair) {
-  // if (pool instanceof ConstantProductPool) {
-  //   return {
-  //     type: 'ConstantProduct',
-  //     address: pool.liquidityToken.address,
-  //     token0: getTokenInfo(pool.assets[0]),
-  //     token1: getTokenInfo(pool.assets[1]),
-  //     fee: pool.fee / 10000,
-  //     reserve0: pool.reserves[0].quotient.toString(),
-  //     reserve1: pool.reserves[1].quotient.toString(),
-  //   }
-  // } else 
-  if (pool instanceof Pair) {
-    return {
-      type: 'Legacy',
-      address: pool.liquidityToken.address,
-      token0: getTokenInfo(pool.token0),
-      token1: getTokenInfo(pool.token1),
-      fee: Fee.DEFAULT / 10000,
-      reserve0: pool.reserve0.quotient.toString(),
-      reserve1: pool.reserve1.quotient.toString(),
-    }
-  } else {
-    return 'Unsupported type of pool !!!'
-  }
-}
+//   if (pool instanceof ConstantProductPool) {
+//     return {
+//       type: 'ConstantProduct',
+//       address: pool.liquidityToken.address,
+//       token0: getTokenInfo(pool.assets[0]),
+//       token1: getTokenInfo(pool.assets[1]),
+//       fee: pool.fee / 10000,
+//       reserve0: pool.reserves[0].quotient.toString(),
+//       reserve1: pool.reserves[1].quotient.toString(),
+//     }
+//   } else if (pool instanceof Pair) {
+//     return {
+//       type: 'Legacy',
+//       address: pool.liquidityToken.address,
+//       token0: getTokenInfo(pool.token0),
+//       token1: getTokenInfo(pool.token1),
+//       fee: Fee.DEFAULT / 10000,
+//       reserve0: pool.reserve0.quotient.toString(),
+//       reserve1: pool.reserve1.quotient.toString(),
+//     }
+//   } else {
+//     return 'Unsupported type of pool !!!'
+//   }
+// }
 
 export async function sendRevertTransactionLog(txHash: string) {
       Sentry.captureException({ message: 'Reverted Transaction', txHash })

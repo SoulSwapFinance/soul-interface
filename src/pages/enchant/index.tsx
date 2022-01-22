@@ -165,7 +165,7 @@ export default function Enchant() {
     if (account) {
       const timer = setTimeout(() => {
         setPending(account)
-      }, 3000)
+      }, 10000)
 
       // Clear timeout if the component is unmounted
       return () => clearTimeout(timer)

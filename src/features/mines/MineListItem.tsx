@@ -104,7 +104,6 @@ const MineListItem = ({ farm, ...rest }) => {
       <Disclosure {...rest}>
         {({ open }) => (
           <div>
-            {/* {token1 ? */}
             <Disclosure.Button
               className={classNames(
                 open && 'rounded-b-none',

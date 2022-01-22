@@ -65,7 +65,7 @@ const useDexCandles = (token0LCase: string, token1LCase: string, period: CandleP
       // There is a race condition when you set input and output currencies, goto a different page and come back to
       // swap page again. We force a small pause to ensure the correct input and ouput currencies are showing on the
       // chart
-      setTimeout(() => {}, 1000)
+      // setTimeout(() => {}, 1000)
       // @ts-ignore
       setCandleData(parsedData)
       setLoading(false)

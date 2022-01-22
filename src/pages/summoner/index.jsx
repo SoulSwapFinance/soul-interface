@@ -5,7 +5,7 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { getAddress } from '@ethersproject/address'
 
-import { useActiveWeb3React, useFuse } from '../../hooks'
+import { useFuse } from '../../hooks'
 import { formatNumberScale } from '../../functions'
 import { usePositions, useFarms, useSummonerInfo } from '../../features/summoner/hooks'
 import { useRouter } from 'next/router'
@@ -25,6 +25,7 @@ import useSummoner from '../../features/summoner/useSummoner'
 import { useSingleCallResult } from '../../state/multicall/hooks'
 import { usePriceHelperContract } from '../../features/bond/hooks/useContract'
 import { formatCurrency } from '../../modals/TokensStatsModal'
+import { useActiveWeb3React } from 'services/web3'
 
 export default function FarmV2() {
   const { i18n } = useLingui()
@@ -117,19 +118,19 @@ export default function FarmV2() {
         const tvl = result[0]
         const apr = result[1]
   
-        setLiquidity(
-          Number(tvl)
-            .toFixed(0)
-            .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        setLiquidity(tvl
+          // Number(tvl)
+            // .toFixed(0)
+            // .toString()
+            // .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
         )
   
         // console.log("apr", farmApr);
-        setApr(
-          Number(apr)
-            .toFixed(0)
-            .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        setApr(apr
+          // Number(apr)
+            // .toFixed(0)
+            // .toString()
+            // .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
         )
       } catch (e) {
         console.warn(e)

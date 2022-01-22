@@ -1,16 +1,13 @@
-import { ChainId } from 'sdk'
-import { retry, RetryableError, RetryOptions } from 'functions/retry'
-// import { routingInfo } from 'hooks/useBestTridentTrade'
-import { useActiveWeb3React } from 'services/web3'
-import { updateBlockNumber } from 'state/application/actions'
-import { useAddPopup, useBlockNumber } from 'state/application/hooks'
-import { useAppDispatch, useAppSelector } from 'state/hooks'
-import { selectTransactions } from 'state/transactions/selectors'
-import { useCallback, useEffect, useMemo } from 'react'
-import { useRecoilValue } from 'recoil'
-
+import { AppDispatch, AppState } from '../index'
+import { RetryOptions, RetryableError, retry } from '../../functions/retry'
 import { checkedTransaction, finalizeTransaction } from './actions'
-import { sendRevertTransactionLog } from './sentryLogger'
+import { useAddPopup, useBlockNumber } from '../application/hooks'
+import { useAppDispatch, useAppSelector } from '../hooks'
+import { useCallback, useEffect, useMemo } from 'react'
+
+import { ChainId } from '../../sdk'
+import { updateBlockNumber } from '../application/actions'
+import { useActiveWeb3React } from 'services/web3'
 
 interface TxInterface {
   addedTime: number
@@ -48,7 +45,7 @@ export default function Updater(): null {
   const lastBlockNumber = useBlockNumber()
 
   const dispatch = useAppDispatch()
-  const state = useAppSelector(selectTransactions)
+  const state = useAppSelector((state) => state.transactions)
 
   const transactions = useMemo(() => (chainId ? state[chainId] ?? {} : {}), [chainId, state])
 
@@ -73,8 +70,6 @@ export default function Updater(): null {
     },
     [chainId, library]
   )
-
-  // const routeInfo = useRecoilValue(routingInfo)
 
   useEffect(() => {
     if (!chainId || !library || !lastBlockNumber) return
@@ -118,11 +113,6 @@ export default function Updater(): null {
               if (receipt.blockNumber > lastBlockNumber) {
                 dispatch(updateBlockNumber({ chainId, blockNumber: receipt.blockNumber }))
               }
-
-              if (receipt.status === 0) {
-                // @ts-ignore TYPE NEEDS FIXING
-                sendRevertTransactionLog(hash, routeInfo)
-              }
             } else {
               dispatch(checkedTransaction({ chainId, hash, blockNumber: lastBlockNumber }))
             }
@@ -138,7 +128,7 @@ export default function Updater(): null {
     return () => {
       cancels.forEach((cancel) => cancel())
     }
-  }, [chainId, library, transactions, lastBlockNumber, dispatch, addPopup, getReceipt]) // routeInfo
+  }, [chainId, library, transactions, lastBlockNumber, dispatch, addPopup, getReceipt])
 
   return null
 }
