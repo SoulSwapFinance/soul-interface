@@ -2,7 +2,7 @@ import { ChainId } from 'sdk'
 
 const config = {
   // Global configuration
-  defaultChainId: ChainId.MAINNET,
+  defaultChainId: ChainId.FANTOM,
   blockedAddresses: [
     // SDN OFAC addresses
     '0x7F367cC41522cE07553e823bf3be79A889DEbe1B',
@@ -15,10 +15,10 @@ const config = {
     averageBlockTimeInSeconds: 13,
     kashi: { blacklistedTokens: [], blacklistedOracles: ['0x8f2CC3376078568a04eBC600ae5F0a036DBfd812'] },
   },
-  // [ChainId.FANTOM]: {
-  //   averageBlockTimeInSeconds: 1,
-  //   kashi: { blacklistedTokens: [], blacklistedOracles: [] },
-  // },
+  [ChainId.FANTOM]: {
+    averageBlockTimeInSeconds: 1,
+    kashi: { blacklistedTokens: [], blacklistedOracles: [] },
+  },
   // [ChainId.MATIC]: {
   //   averageBlockTimeInSeconds: 13,
   //   kashi: { blacklistedTokens: ['0xC6d54D2f624bc83815b49d9c2203b1330B841cA0'], blacklistedOracles: [] },

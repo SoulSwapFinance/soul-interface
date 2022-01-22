@@ -56,8 +56,11 @@ const MineListItemDetails = ({ farm, onDismiss }) => {
             onChange={(view: MineModalView) => dispatch(setMineModalView(view))}
             variant="filled"
           >
+            
             <ToggleButtonGroup.Button value={MineModalView.Liquidity}>
-              {farm.pair.type === PairType.KASHI ? i18n._(t`Lending`) : i18n._(t`Liquidity`)}
+              {farm.pair.token1 && (
+              farm.pair.type === PairType.KASHI ? i18n._(t`Lending`) : i18n._(t`Liquidity`)
+              )}
             </ToggleButtonGroup.Button>
             <ToggleButtonGroup.Button value={MineModalView.Staking}>{i18n._(t`Staking`)}</ToggleButtonGroup.Button>
             <ToggleButtonGroup.Button value={MineModalView.Position}>{i18n._(t`Rewards`)}</ToggleButtonGroup.Button>
@@ -67,9 +70,11 @@ const MineListItemDetails = ({ farm, onDismiss }) => {
           <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Position ? 'block' : 'hidden')}>
             <InvestmentDetails farm={farm} />
           </div>
-          <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Liquidity ? 'block' : 'hidden')}>
+          { farm.pair.token1 &&
+            <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Liquidity ? 'block' : 'hidden')}>
             <ManageSwapPair farm={farm} />
           </div>
+          }
           {/* <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Liquidity ? 'block' : 'hidden')}>
             {farm.pair.type === PairType.KASHI ? <ManageKashiPair farm={farm} /> : <ManageSwapPair farm={farm} />}
           </div> */}

@@ -60,7 +60,7 @@ const InvestmentDetails = ({ farm }) => {
   )
 
   const stakedAmount = useUserInfo(farm, liquidityToken)
-  // const [selectedFarm, setSelectedFarm] = useState<string>(null)
+  const [selectedFarm, setSelectedFarm] = useState<string>(null)
 
   let [data] = useV2PairsWithPrice([[token0, token1]])
   let [state, pair, pairPrice] = data
@@ -69,15 +69,15 @@ const InvestmentDetails = ({ farm }) => {
   const pendingReward = usePendingReward(farm)
 
   const positionFiatValue = (
-    USD[chainId], stakedAmount
-    )
-    // USD[chainId],
-    //   JSBI.BigInt(
-    //       ((Number(stakedAmount?.toExact()) * farm.pair.reserveUSD) / farm.pair.totalSupply)
-    //         .toFixed(USD[chainId].decimals)
-    //         .toBigNumber(USD[chainId].decimals)
-        // )
-  // )
+    // USD[chainId], stakedAmount
+    // )
+    USD[chainId],
+      JSBI.BigInt(
+          ((Number(stakedAmount?.toExact()) * farm.pair.reserveUSD) / farm.pair.totalSupply)
+            .toFixed(USD[chainId].decimals)
+            .toBigNumber(USD[chainId].decimals)
+        )
+  )
   const typedDepositValue = tryParseAmount(depositValue, liquidityToken)
 
   function getTvl() {
@@ -178,10 +178,9 @@ const InvestmentDetails = ({ farm }) => {
           { pair?.token1 ?
           <Typography>{formatNumber(Number(pairPrice) * Number(stakedAmount?.toSignificant(2)), true)}</Typography>
           :
-          /* <Typography>{formatNumber(Number(soulPrice) * Number(stakedAmount?.toSignificant(2)), true)}</Typography> } */
-          /* <Typography>{formatNumber(pairPrice ?? 0, true)}</Typography> */
-          <Typography>{formatNumber(positionFiatValue?.toSignificant(4) ?? 0, true)}</Typography>}
-        </div>
+          <Typography>{formatNumber(Number(soulPrice) * Number(stakedAmount?.toSignificant(2)), true)}</Typography> 
+          }
+          </div>
       </div>
       <div className="flex flex-col w-full space-y-4">
         <div className="flex items-end justify-between">
