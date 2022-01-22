@@ -20,29 +20,20 @@ if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
   })
 }
 
-export function muldiv(multiplier: BigNumberish, divisor: BigNumberish): BigNumber {
+BigNumber.prototype.mulDiv = function (multiplier: BigNumberish, divisor: BigNumberish): BigNumber {
+  // console.log('mulDiv', multiplier, divisor)
   return BigNumber.from(divisor).gt(0) ? BigNumber.from(this).mul(multiplier).div(divisor) : Zero
 }
 
-export function toFraction(decimals: BigNumberish = 18): Fraction {
+BigNumber.prototype.toFraction = function (decimals: BigNumberish = 18): Fraction {
   return Fraction.from(this, decimals ? BigNumber.from(10).pow(decimals) : Zero)
 }
 
-export function toFixed(decimals: BigNumberish = 18, maxFractions: BigNumberish = 8): string {
+BigNumber.prototype.toFixed = function (decimals: BigNumberish = 18, maxFractions: BigNumberish = 8): string {
   return this.toFraction(decimals, 10).toString(BigNumber.from(maxFractions).toNumber())
 }
 
-// String.prototype.toBigNumber = function (decimals: BigNumberish): BigNumber {
-export function toBigNumber(decimals: BigNumberish): BigNumber {
-  try {
-    return parseUnits(this as string, decimals)
-  } catch (error) {
-    console.debug(`Failed to parse input amount: "${this}"`, error)
-  }
-  return BigNumber.from(0)
-}
-
-export function min(...values: BigNumberish[]): BigNumber {
+BigNumber.prototype.min = function (...values: BigNumberish[]): BigNumber {
   let lowest = BigNumber.from(values[0])
   for (let i = 1; i < values.length; i++) {
     const value = BigNumber.from(values[i])
@@ -53,7 +44,7 @@ export function min(...values: BigNumberish[]): BigNumber {
   return lowest
 }
 
-export function max(...values: BigNumberish[]): BigNumber {
+BigNumber.prototype.max = function (...values: BigNumberish[]): BigNumber {
   let highest = BigNumber.from(values[0])
   for (let i = 1; i < values.length; i++) {
     const value = BigNumber.from(values[i])
@@ -69,7 +60,7 @@ Sentry.init({
 
   // Alternatively, use `process.env.npm_package_version` for a dynamic release version
   // if your build tool supports it.
-  release: 'soul-interface@1.0.0',
+  release: 'sushiswap-interface@1.0.0',
   integrations: [new Integrations.BrowserTracing()],
 
   // Set tracesSampleRate to 1.0 to capture 100%
