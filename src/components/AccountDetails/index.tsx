@@ -78,7 +78,8 @@ const AccountDetails: FC<AccountDetailsProps> = ({
                   size={48}
                   // @ts-ignore TYPE NEEDS FIXING
                   address={account}
-                  defaultComponent={<Image src="/images/soul2lux.gif" alt="Soul Icon" width={48} height={48} />}
+                  defaultComponent={<Image src="/logo.png" 
+                  alt="Soul Icon" width={48} height={48} />}
                   provider={library}
                 />
               </div>
@@ -94,7 +95,7 @@ const AccountDetails: FC<AccountDetailsProps> = ({
                   href={chainId && getExplorerLink(chainId, ENSName || account, 'address')}
                 >
                   <Typography variant="xs" weight={700}>
-                    {i18n._(t`View on explorer`)}
+                    {i18n._(t`View on Explorer`)}
                   </Typography>
                 </ExternalLink>
               )}
