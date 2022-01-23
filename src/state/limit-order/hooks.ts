@@ -278,15 +278,15 @@ export const useLimitOrderDerivedInputError: UseLimitOrderDerivedInputError = ({
     return !account
       ? 'Connect Wallet'
       : !trade?.inputAmount.greaterThan(ZERO)
-      ? i18n._(t`Enter an amount`)
+      ? i18n._(t`Enter Amount`)
       : !inputCurrency || !outputCurrency
-      ? i18n._(t`Select a token`)
+      ? i18n._(t`Select Token`)
       : !to || !isAddress(to)
-      ? i18n._(t`Enter a recipient`)
+      ? i18n._(t`Enter Recipient`)
       : limitPrice !== LimitPrice.CURRENT && parsedRate?.equalTo(ZERO)
-      ? i18n._(t`Select a rate`)
+      ? i18n._(t`Select Rate`)
       : !orderExpiration
-      ? i18n._(t`Select an order expiration`)
+      ? i18n._(t`Select Order Expiration`)
       : !balance
       ? i18n._(t`Loading balance`)
       : balance && trade?.inputAmount && balance.lessThan(trade.inputAmount)

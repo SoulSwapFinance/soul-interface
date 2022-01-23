@@ -52,7 +52,7 @@ export function useSwapActionHandlers(): {
           currencyId: currency.isToken
             ? currency.address
             : currency.isNative // && currency.chainId !== ChainId.CELO
-            ? 'ETH'
+            ? 'FTM'
             : '',
         })
       )
@@ -176,16 +176,16 @@ export function useDerivedSwapInfo(): {
   }
 
   if (!parsedAmount) {
-    inputError = inputError ?? i18n._(t`Enter an amount`)
+    inputError = inputError ?? i18n._(t`Enter Amount`)
   }
 
   if (!currencies[Field.INPUT] || !currencies[Field.OUTPUT]) {
-    inputError = inputError ?? i18n._(t`Select a token`)
+    inputError = inputError ?? i18n._(t`Select Token`)
   }
 
   const formattedTo = isAddress(to)
   if (!to || !formattedTo) {
-    inputError = inputError ?? i18n._(t`Enter a recipient`)
+    inputError = inputError ?? i18n._(t`Enter Recipient`)
   } else {
     if (
       // @ts-ignore TYPE NEEDS FIXING
@@ -193,7 +193,7 @@ export function useDerivedSwapInfo(): {
       (bestTradeExactIn && involvesAddress(bestTradeExactIn, formattedTo)) ||
       (bestTradeExactOut && involvesAddress(bestTradeExactOut, formattedTo))
     ) {
-      inputError = inputError ?? i18n._(t`Invalid recipient`)
+      inputError = inputError ?? i18n._(t`Invalid Recipient`)
     }
   }
 
@@ -221,7 +221,7 @@ function parseCurrencyFromURLParameter(urlParam: any): string {
   if (typeof urlParam === 'string') {
     const valid = isAddress(urlParam)
     if (valid) return valid
-    if (urlParam.toUpperCase() === 'ETH') return 'ETH'
+    if (urlParam.toUpperCase() === 'FTM') return 'FTM'
   }
   return ''
 }
@@ -244,7 +244,7 @@ function validatedRecipient(recipient: any): string | null {
   if (ADDRESS_REGEX.test(recipient)) return recipient
   return null
 }
-export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId = ChainId.MAINNET): SwapState {
+export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId = ChainId.FANTOM): SwapState {
   let inputCurrency = parseCurrencyFromURLParameter(parsedQs.inputCurrency)
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
   const eth =
