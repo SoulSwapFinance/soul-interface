@@ -39,7 +39,6 @@ import { RecoilRoot } from 'recoil'
 // import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
 const Web3ProviderNetwork = dynamic(() => import('../components/Web3ProviderNetwork'), { ssr: false })
-const Web3ProviderNetworkBridge = dynamic(() => import('../components/Web3ProviderBridge'), { ssr: false })
 
 if (typeof window !== 'undefined' && !!window.ethereum) {
   window.ethereum.autoRefreshOnNetworkChange = false
@@ -150,7 +149,6 @@ function MyApp({
       <I18nProvider i18n={i18n} forceRenderOnLocaleChange={false}>
         <Web3ReactProvider getLibrary={getLibrary}>
           <Web3ProviderNetwork getLibrary={getLibrary}>
-            <Web3ProviderNetworkBridge getLibrary={getLibrary}>
               <Web3ReactManager>
                 <ReduxProvider store={store}>
                   <PriceProvider>
@@ -175,7 +173,6 @@ function MyApp({
                   </PriceProvider>
                 </ReduxProvider>
               </Web3ReactManager>
-            </Web3ProviderNetworkBridge>
           </Web3ProviderNetwork>
         </Web3ReactProvider>
       </I18nProvider>
