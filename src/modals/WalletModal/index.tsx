@@ -260,10 +260,10 @@ const WalletModal: FC<WalletModal> = ({ pendingTransactions, confirmedTransactio
           )}
           <div className="flex justify-center">
             <Typography variant="xs" className="text-secondary" component="span">
-              {i18n._(t`New to Ethereum?`)}{' '}
+              {i18n._(t`New to Fantom?`)}{' '}
               <Typography variant="xs" className="text-blue" component="span">
-                <ExternalLink href="https://ethereum.org/wallets/" color="blue">
-                  {i18n._(t`Learn more about wallets`)}
+                <ExternalLink href="https://docs.fantom.foundation/tutorials/set-up-metamask/" color="blue">
+                  {i18n._(t`Learn About Wallets`)}
                 </ExternalLink>
               </Typography>
             </Typography>
