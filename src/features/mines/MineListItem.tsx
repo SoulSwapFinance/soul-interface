@@ -166,9 +166,9 @@ const MineListItem = ({ farm, ...rest }) => {
                         setSelectedFarm(farm.id)
                       }}
                     >
-                      <IconWrapper size="16px" marginRight={'10px'}>
+                      {/* <IconWrapper size="16px" marginRight={'10px'}>
                         <Info />
-                      </IconWrapper>
+                      </IconWrapper> */}
                       {farm?.rewards?.map((reward, i) => (
                         <div key={i} className="text-xs md:text-sm whitespace-nowrap">
                           {
