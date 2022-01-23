@@ -25,9 +25,9 @@ import {
 
 import { Wrap, ClickableText, Heading, Text, ExternalLink } from '../../components/ReusableStyles'
 import Modal from '../../components/DefaultModal'
-import ModalHeader from '../../components/ModalHeader'
 import Typography from '../../components/Typography'
 import { Button } from '../../components/Button'
+import ModalHeader from 'components/Modal/Header'
 
 // params to render bond with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)
@@ -656,7 +656,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
       <Modal isOpen={showConfirmation} onDismiss={
         () => setShowConfirmation(false)}>
         <div className="space-y-4">
-          <ModalHeader title={`Are you sure?`} onClose={() => setShowConfirmation(false)} />
+          <ModalHeader header={`Are you sure?`} onClose={() => setShowConfirmation(false)} />
           <Typography variant="lg">
             Minting claims your pending rewards and sends your LP tokens to the Treasury.
             <br /><br />
