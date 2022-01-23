@@ -1,21 +1,18 @@
-import { ChainId } from '../sdk'
-
-export enum Feature {
-  AMM = 'AMM',
-  AMM_V2 = 'AMM V2',
-  LIQUIDITY_MINING = 'Liquidity Mining',
-  BENTOBOX = 'BentoBox',
-  UNDERWORLD = 'Underworld',
-  IFO = 'IFO',
-  ANALYTICS = 'Analytics',
-}
-
-const features = {
-  [ChainId.MAINNET]: [Feature.AMM],
-  [ChainId.FANTOM]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.ANALYTICS, Feature.UNDERWORLD],
-  [ChainId.FANTOM_TESTNET]: [Feature.AMM, Feature.LIQUIDITY_MINING]
-}
+import { ChainId } from 'sdk'
+import features from 'config/features'
+import { Feature } from 'enums'
 
 export function featureEnabled(feature: Feature, chainId: ChainId): boolean {
-  return features[chainId].includes(feature)
+  // @ts-ignore TYPE NEEDS FIXING
+  return chainId && chainId in features && features[chainId].includes(feature)
+}
+
+export function chainsWithFeature(feature: Feature): ChainId[] {
+  return (
+    Object.keys(features)
+      // @ts-ignore TYPE NEEDS FIXING
+      .filter((chainKey) => featureEnabled(feature, ChainId[chainKey]))
+      // @ts-ignore TYPE NEEDS FIXING
+      .map((chain) => ChainId[chain])
+  )
 }

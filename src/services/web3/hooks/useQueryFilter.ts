@@ -3,6 +3,7 @@ import { ChainId } from 'sdk'
 import stringify from 'fast-json-stable-stringify'
 import useSWR from 'swr'
 
+// @ts-ignore TYPE NEEDS FIXING
 async function queryFilter(contract: Contract, event, fromBlockOrBlockHash, toBlock) {
   return await contract.queryFilter(event, fromBlockOrBlockHash, toBlock)
 }
@@ -10,7 +11,9 @@ async function queryFilter(contract: Contract, event, fromBlockOrBlockHash, toBl
 export function useQueryFilter({
   chainId = ChainId.FANTOM,
   shouldFetch = true,
+  // @ts-ignore TYPE NEEDS FIXING
   contract,
+  // @ts-ignore TYPE NEEDS FIXING
   event,
   fromBlockOrBlockHash = undefined,
   toBlock = undefined,
