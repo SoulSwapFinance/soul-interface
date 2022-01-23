@@ -148,7 +148,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
                 }}
               >
                 <Image
-                  src="/images/tokens/WLUM-transparent.png"
+                  src="/images/tokens/wlumens-transparent.png"
                   alt="WLUM"
                   width="1200px"
                   height="1200px"

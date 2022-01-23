@@ -20,6 +20,7 @@ module.exports = withBundleAnalyzer(
       domains: [
         'assets.soulswap.finance',
         'media.giphy.com',
+        'exchange.soulswap.finance',
         'assets.sushi.com',
         'res.cloudinary.com',
         'raw.githubusercontent.com',
