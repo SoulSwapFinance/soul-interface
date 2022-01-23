@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Button } from 'components/Button'
-import CurrencyLogo from 'components/CurrencyLogo'
+import { CurrencyLogo } from 'components/CurrencyLogo'
 import ExternalLink from 'components/ExternalLink'
 import { ExternalLinkIcon } from 'components/ExternalLinkIcon'
 import { HeadlessUiModal } from 'components/Modal'

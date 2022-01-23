@@ -6,8 +6,8 @@ import { useEffect, useMemo } from 'react'
 
 import { BigNumber } from '@ethersproject/bignumber'
 import { Contract } from '@ethersproject/contracts'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useBlockNumber } from '../application/hooks'
+import { useActiveWeb3React } from 'services/web3'
 
 export interface Result extends ReadonlyArray<any> {
   readonly [key: string]: any
@@ -254,6 +254,9 @@ export function useSingleCallResult(
   const latestBlockNumber = useBlockNumber()
 
   return useMemo(() => {
-    return toCallState(result, contract?.interface, fragment, latestBlockNumber)
+    return toCallState(result, 
+      contract?.interface, 
+      fragment, 
+      latestBlockNumber)
   }, [result, contract, fragment, latestBlockNumber])
 }

@@ -1,6 +1,6 @@
 import { ethers } from 'ethers'
 
-import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useContract } from '../../../hooks/useContract'
 
 import IERC20 from '../../../constants/abis/soulswap/ERCs/IERC20.json'

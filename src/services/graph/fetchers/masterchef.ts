@@ -9,7 +9,7 @@ import { request } from 'graphql-request'
 
 export const MASTERCHEF_V2 = {
   [ChainId.MAINNET]: 'sushiswap/master-chefv2',
-  // [ChainId.FANTOM]: 'soulswapfinance/soul-summoner',
+  [ChainId.FANTOM]: 'soulswapfinance/soul-summoner',
 }
 export const masterChefV2 = async (query, chainId = ChainId.MAINNET) =>
   request(`${GRAPH_HOST[chainId]}/subgraphs/name/${MASTERCHEF_V2[chainId]}`, query)

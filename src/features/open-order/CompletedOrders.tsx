@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import CurrencyLogo from '../../components/CurrencyLogo'
+import { CurrencyLogo } from '../../components/CurrencyLogo'
 import useLimitOrders from '../../hooks/useLimitOrders'
 import Badge from '../../components/Badge'
 import Lottie from 'lottie-react'

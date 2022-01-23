@@ -3,16 +3,16 @@ import { useLingui } from '@lingui/react'
 import { Currency } from '../../sdk'
 import React from 'react'
 import { formatNumber, formatNumberScale, formatPercent } from '../../functions'
-import { useActiveWeb3React } from '../../hooks'
+import { useActiveWeb3React } from 'services/web3'
 import { useCurrency } from '../../hooks/Tokens'
 import { ApplicationModal } from '../../state/application/actions'
 import { useModalOpen } from '../../state/application/hooks'
-import CurrencyLogo from '../CurrencyLogo'
+import { CurrencyLogo } from '../CurrencyLogo'
 import DoubleLogo from '../DoubleLogo'
-import ModalHeader from '../ModalHeader'
 import Typography from '../Typography'
 import { HeadlessUiModal } from 'components/Modal'
 import { formatCurrency } from 'modals/TokensStatsModal'
+import ModalHeader from 'components/Modal/Header'
 
 interface YieldDetailsProps {
   isOpen: boolean
@@ -72,7 +72,7 @@ const YieldDetails: React.FC<YieldDetailsProps> = ({
   const getModalContent = () => (
     <div className="space-y-6">
       <div className="space-y-2">
-        <ModalHeader title={i18n._(t`Yield Details`)} onClose={onDismiss} />
+        <ModalHeader header={i18n._(t`Yield Details`)} onClose={onDismiss} />
         <div className="grid grid-cols-2">
           <div className="flex flex-row w-full py-4 gap-2">
             <div className="flex col-span-1 space-x-4">

@@ -1,6 +1,6 @@
 import React, { FC, useCallback } from 'react'
 import { Field } from '../../state/swap/actions'
-import { useDerivedLimitOrderInfo, useLimitOrderActionHandlers } from '../../state/limit-order/hooks'
+import { useLimitOrderActionHandlers } from '../../state/limit-order/hooks'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { useDispatch } from 'react-redux'
@@ -52,3 +52,7 @@ const BalancePanel: FC = () => {
 }
 
 export default BalancePanel
+function useDerivedLimitOrderInfo(): { walletBalances: any; bentoboxBalances: any; currencies: any } {
+  throw new Error('Function not implemented.')
+}
+

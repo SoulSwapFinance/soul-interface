@@ -39,7 +39,6 @@ import { maxAmountSpend } from '../../../functions/currency'
 import swapArrowsAnimationData from '../../../animation/swap-arrows.json'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
 import useENSAddress from '../../../hooks/useENSAddress'
 import useIsArgentWallet from '../../../hooks/useIsArgentWallet'
 import { useIsSwapUnsupported } from '../../../hooks/useIsSwapUnsupported'
@@ -61,6 +60,7 @@ import TWITTER from 'assets/icons/twitter.svg'
 import TELEGRAM from 'assets/icons/telegram.svg'
 import DOCS from 'assets/icons/docs.svg'
 import FORUM from 'assets/icons/discussion.svg'
+import { useActiveWeb3React } from 'services/web3'
 
 const HideOnMobile = styled.div`
 @media screen and (max-width: 500px) {
@@ -113,7 +113,7 @@ export default function Swap() {
     currencies,
     inputError: swapInputError,
     allowedSlippage,
-  } = useDerivedSwapInfo(false)
+  } = useDerivedSwapInfo()
 
   const {
     wrapType,
@@ -238,7 +238,7 @@ export default function Swap() {
     allowedSlippage,
     recipient,
     signatureData,
-    false ? ttl : undefined
+    // false ? ttl : undefined
   )
 
   const [singleHopOnly] = useUserSingleHopOnly()

@@ -16,7 +16,7 @@ import {
 
 import { ChainId } from '../sdk'
 import { getAddress } from '@ethersproject/address'
-import useActiveWeb3React from './useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useMemo } from 'react'
 import { usePositions } from '../features/summoner/hooks'
 import { aprToApy } from '../functions/convert'

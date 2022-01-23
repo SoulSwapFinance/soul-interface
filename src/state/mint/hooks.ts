@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { t } from '@lingui/macro'
 import { tryParseAmount } from '../../functions/parse'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useCurrencyBalances } from '../wallet/hooks'
 import { useLingui } from '@lingui/react'
 import { useTotalSupply } from '../../hooks/useTotalSupply'

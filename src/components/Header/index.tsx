@@ -2,36 +2,21 @@ import { ChainId, NATIVE } from '../../sdk'
 import { AURA } from '../../constants'
 // import React, { useEffect, useState } from 'react'
 import React from 'react'
-
-// import { ANALYTICS_URL } from '../../constants'
-// import Buy from '../../features/ramp'
-// import ExternalLink from '../ExternalLink'
 import Image from 'next/image'
-// import LanguageSwitch from '../LanguageSwitch'
-// import Link from 'next/link'
 import More from './More'
-// import Exchange from './Exchange'
-import Earn from './Earn'
-// import Farms from './Farms'
-// import Explore from './Explore'
-// import Seance from './Seance'
 import NavLink from '../NavLink'
 import { Popover } from '@headlessui/react'
 // import QuestionHelper from '../QuestionHelper'
 import Web3Network from '../Web3Network'
 import Web3Status from '../Web3Status'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useETHBalances, useTokenBalance } from '../../state/wallet/hooks'
 
 import { useLingui } from '@lingui/react'
 import ExternalLink from '../ExternalLink'
 import TokenStats from '../TokenStats'
 import LuxorStats from 'components/LuxorStats'
-// import LanguageSwitch from '../LanguageSwitch'
-
-// import { ExternalLink, NavLink } from "./Link";
-// import { ReactComponent as Burger } from "../assets/images/burger.svg";
+import { useActiveWeb3React } from 'services/web3'
 
 function AppBar(): JSX.Element {
   const { i18n } = useLingui()

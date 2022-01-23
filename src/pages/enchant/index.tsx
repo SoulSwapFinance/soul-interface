@@ -12,7 +12,7 @@ import { Input as NumericalInput } from '../../components/NumericalInput'
 import styled from 'styled-components'
 import { t } from '@lingui/macro'
 import { tryParseAmount } from '../../functions/parse'
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useLingui } from '@lingui/react'
 import useSeanceStakeManual from '../../hooks/useSeanceStakeManual'
 import { useTokenBalance } from '../../state/wallet/hooks'
@@ -165,7 +165,7 @@ export default function Enchant() {
     if (account) {
       const timer = setTimeout(() => {
         setPending(account)
-      }, 3000)
+      }, 10000)
 
       // Clear timeout if the component is unmounted
       return () => clearTimeout(timer)

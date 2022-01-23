@@ -4,7 +4,6 @@ import React, { useCallback, useEffect, useState } from 'react'
 import Search from '../../components/Search'
 import {
   ApprovalState,
-  useActiveWeb3React,
   useApproveCallback,
 } from '../../hooks'
 
@@ -27,6 +26,7 @@ import { Button, ButtonConfirmed } from '../../components/Button'
 import { getAddress } from '@ethersproject/address'
 import { AutoRow } from '../../components/Row'
 import Loader from '../../components/Loader'
+import { useActiveWeb3React } from 'services/web3'
 
 export default function Scarab(): JSX.Element {
   const { i18n } = useLingui()

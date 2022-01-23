@@ -14,6 +14,7 @@ import {
 import { ZERO, e10 } from './math'
 
 import { getCurrency } from './currency/getCurrency'
+import { toNumber } from 'lodash'
 
 export function accrue(pair: any, amount: BigNumber, includePrincipal = false): BigNumber {
   return amount
@@ -49,10 +50,10 @@ export function interestAccrue(pair: any, interest: BigNumber): BigNumber {
 
   let currentInterest = interest
   if (pair.utilization.lt(MINIMUM_TARGET_UTILIZATION)) {
-    const underFactor = MINIMUM_TARGET_UTILIZATION.sub(pair.utilization).mulDiv(
-      FACTOR_PRECISION,
-      MINIMUM_TARGET_UTILIZATION
-    )
+    const underFactor = MINIMUM_TARGET_UTILIZATION.sub(pair.utilization)
+    .mul(
+      FACTOR_PRECISION)
+      .div(MINIMUM_TARGET_UTILIZATION)
     const scale = INTEREST_ELASTICITY.add(underFactor.mul(underFactor).mul(pair.elapsedSeconds))
     currentInterest = currentInterest.mul(INTEREST_ELASTICITY).div(scale)
 
@@ -82,9 +83,13 @@ export function getUSDString(amount: BigNumberish, token: any): string {
   return BigNumber.from(amount)
     .mul(token.usd)
     .div(e10(token?.decimals ? token.decimals : token.tokenInfo.decimals))
-    .toFixed(getCurrency(token?.chainId ?
+    .toNumber()
+    // .toString().
+    .toFixed(getCurrency(
+      token?.chainId ?
       token.chainId : 
-      token.tokenInfo.chainId).decimals)
+      token.tokenInfo.chainId)
+      .decimals)
 }
 
 export function easyAmount(
@@ -93,7 +98,9 @@ export function easyAmount(
 ): { value: BigNumber; string: string; usdValue: BigNumber; usd: string } {
   return {
     value: amount,
-    string: amount.toFixed(token?.decimals ? token.decimals : token.tokenInfo.decimals),
+    string: amount
+    .toNumber()
+    .toFixed(token?.decimals ? token.decimals : token.tokenInfo.decimals),
     usdValue: getUSDValue(amount, token),
     usd: getUSDString(amount, token),
   }

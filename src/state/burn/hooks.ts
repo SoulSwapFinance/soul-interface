@@ -1,16 +1,16 @@
-import { Currency, CurrencyAmount, JSBI, Pair, Percent, Token } from '../../sdk'
-import { Field, typeInput } from './actions'
-import { useAppDispatch, useAppSelector } from '../hooks'
-
-import { AppState } from '../index'
 import { t } from '@lingui/macro'
-import { tryParseAmount } from '../../functions/parse'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
-import { useCallback } from 'react'
 import { useLingui } from '@lingui/react'
-import { useTokenBalances } from '../wallet/hooks'
-import { useTotalSupply } from '../../hooks/useTotalSupply'
-import { useV2Pair } from '../../hooks/useV2Pairs'
+import { Currency, CurrencyAmount, JSBI, Pair, Percent, Token, ZERO } from 'sdk'
+import { tryParseAmount } from 'functions/parse'
+import { useTotalSupply } from 'hooks/useTotalSupply'
+import { useV2Pair } from 'hooks/useV2Pairs'
+import { useActiveWeb3React } from 'services/web3'
+import { AppState } from 'state'
+import { useAppDispatch, useAppSelector } from 'state/hooks'
+import { useTokenBalances } from 'state/wallet/hooks'
+import { useCallback } from 'react'
+
+import { Field, typeInput } from './actions'
 
 export function useBurnState(): AppState['burn'] {
   return useAppSelector((state) => state.burn)
@@ -28,6 +28,7 @@ export function useDerivedBurnInfo(
     [Field.CURRENCY_B]?: CurrencyAmount<Currency>
   }
   error?: string
+  userLiquidity: CurrencyAmount<Token> | undefined
 } {
   const { account, chainId } = useActiveWeb3React()
 
@@ -96,8 +97,11 @@ export function useDerivedBurnInfo(
   }
   // user specified a specific amount of token a or b
   else {
+    // @ts-ignore TYPE NEEDS FIXING
     if (tokens[independentField]) {
+      // @ts-ignore TYPE NEEDS FIXING
       const independentAmount = tryParseAmount(typedValue, tokens[independentField])
+      // @ts-ignore TYPE NEEDS FIXING
       const liquidityValue = liquidityValues[independentField]
       if (independentAmount && liquidityValue && !independentAmount.greaterThan(liquidityValue)) {
         percentToRemove = new Percent(independentAmount.quotient, liquidityValue.quotient)
@@ -138,7 +142,11 @@ export function useDerivedBurnInfo(
     error = error ?? i18n._(t`Enter Amount`)
   }
 
-  return { pair, parsedAmounts, error }
+  if (parsedAmounts[Field.CURRENCY_A]?.equalTo(ZERO) && parsedAmounts[Field.CURRENCY_B]?.equalTo(ZERO)) {
+    error = error ?? i18n._(t`Insufficient Balance`)
+  }
+
+  return { pair, parsedAmounts, error, userLiquidity }
 }
 
 export function useBurnActionHandlers(): {

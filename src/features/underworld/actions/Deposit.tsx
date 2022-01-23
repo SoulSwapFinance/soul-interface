@@ -33,28 +33,32 @@ export default function Deposit({ pair }: any): JSX.Element {
   const [value, setValue] = useState('')
 
   // Calculated
+  // @ts-ignore TYPE NEEDS FIXING
   const assetNative = WNATIVE[chainId].address === pair.asset.address
 
+  // @ts-ignore TYPE NEEDS FIXING
   const ethBalance = useETHBalances(assetNative ? [account] : [])
 
   const balance = useBento
     ? pair.asset.bentoBalance
     : assetNative
-    ? BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
+    ? //  @ts-ignore TYPE NEEDS FIXING
+      BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
     : pair.asset.balance
-
-  console.log({ balance })
 
   const max = useBento
     ? pair.asset.bentoBalance
     : assetNative
-    ? BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
+    ? // @ts-ignore TYPE NEEDS FIXING
+      BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
     : pair.asset.balance
 
   const warnings = new Warnings()
 
   warnings.add(
-    balance?.lt(value.toBigNumber(pair.asset.tokenInfo.decimals)),
+    balance?.lt(value
+      // .toBigNumber(pair.asset.tokenInfo.decimals
+      ),
     i18n._(
       t`Please make sure your ${useBento ? 'BentoBox' : 'wallet'} balance is sufficient to deposit and then try again.`
     ),
@@ -64,7 +68,8 @@ export default function Deposit({ pair }: any): JSX.Element {
   const transactionReview = new TransactionReview()
 
   if (value && !warnings.broken) {
-    const amount = value.toBigNumber(pair.asset.tokenInfo.decimals)
+    const amount = value
+    // .toBigNumber(pair.asset.tokenInfo.decimals)
     const newUserAssetAmount = pair.currentUserAssetAmount.value.add(amount)
     transactionReview.addTokenAmount(
       i18n._(t`Balance`),
@@ -73,7 +78,7 @@ export default function Deposit({ pair }: any): JSX.Element {
       pair.asset
     )
     transactionReview.addUSD(i18n._(t`Balance USD`), pair.currentUserAssetAmount.value, newUserAssetAmount, pair.asset)
-    const newUtilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.add(amount))
+    const newUtilization = e10(18).mul(pair.currentBorrowAmount.value).div(pair.currentAllAssets.value.add(amount))
     transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
     if (pair.currentExchangeRate.isZero()) {
       transactionReview.add(
@@ -95,18 +100,18 @@ export default function Deposit({ pair }: any): JSX.Element {
     if (pair.currentExchangeRate.isZero()) {
       cooker.updateExchangeRate(false, ZERO, ZERO)
     }
-    const amount = value.toBigNumber(pair.asset.tokenInfo.decimals)
+    const amount = new BigNumber(value, '')
+    // .toBigNumber(pair.asset.tokenInfo.decimals)
 
+    // @ts-ignore TYPE NEEDS FIXING
     const deadBalance = await bentoBoxContract.balanceOf(
       pair.asset.address,
       '0x000000000000000000000000000000000000dead'
     )
 
-    cooker.addAsset(
-        amount, 
-        useBento, 
-        // deadBalance.isZero()
-        )
+    cooker.addAsset(amount, useBento 
+      // deadBalance.isZero()
+    )
 
     return `${i18n._(t`Deposit`)} ${pair.asset.tokenInfo.symbol}`
   }
@@ -138,7 +143,11 @@ export default function Deposit({ pair }: any): JSX.Element {
           <TokenApproveButton value={value} token={assetToken} needed={!useBento}>
             <Button
               onClick={() => onCook(pair, onExecute)}
-              disabled={value.toBigNumber(pair.asset.tokenInfo.decimals).lte(0) || warnings.broken}
+              disabled={value
+                // .toBigNumber(pair.asset.tokenInfo.decimals).lte(0) 
+                || warnings.broken
+              }
+              fullWidth={true}
             >
               {i18n._(t`Deposit`)}
             </Button>

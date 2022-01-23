@@ -1,6 +1,7 @@
+import { useActivePopups } from 'state/application/hooks'
+import { useURLWarningVisible } from 'state/user/hooks'
 import { FC } from 'react'
-import { useActivePopups } from '../../state/application/hooks'
-import { useURLWarningVisible } from '../../state/user/hooks'
+
 import PopupItem from './PopupItem'
 
 const Popups: FC = () => {
@@ -12,10 +13,11 @@ const Popups: FC = () => {
   return (
     <>
       <div
-        className={`hidden md:block fixed right-[36px] max-w-[355px] w-full z-3 flex flex-col ${
+        className={`hidden md:block fixed right-[36px] max-w-[355px] w-full z-30 flex flex-col ${
           urlWarningActive ? 'top-[108px]' : 'top-[88px]'
         }`}
       >
+        {/*@ts-ignore TYPE NEEDS FIXING*/}
         {activePopups.map((item) => (
           <PopupItem key={item.key} content={item.content} popKey={item.key} removeAfterMs={item.removeAfterMs} />
         ))}
@@ -28,6 +30,7 @@ const Popups: FC = () => {
           {activePopups // reverse so new items up front
             .slice(0)
             .reverse()
+            // @ts-ignore TYPE NEEDS FIXING
             .map((item) => (
               <PopupItem key={item.key} content={item.content} popKey={item.key} removeAfterMs={item.removeAfterMs} />
             ))}

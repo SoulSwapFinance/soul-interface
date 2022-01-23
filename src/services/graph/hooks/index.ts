@@ -10,7 +10,7 @@ import useSWR, { SWRConfiguration } from 'swr'
 import { ChainId } from '../../../sdk'
 // import { Chef } from '../../../features/farm/enum'
 import concat from 'lodash/concat'
-import useActiveWeb3React from '../../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 
 export * from './bentobox'
 export * from './blocks'

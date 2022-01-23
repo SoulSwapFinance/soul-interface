@@ -2,8 +2,8 @@ import { ADDITIONAL_BASES, BASES_TO_CHECK_TRADES_AGAINST, CUSTOM_BASES } from '.
 import { Currency, Token } from '../sdk'
 
 import flatMap from 'lodash/flatMap'
-import { useActiveWeb3React } from './useActiveWeb3React'
 import { useMemo } from 'react'
+import { useActiveWeb3React } from 'services/web3'
 
 export function useAllCurrencyCombinations(currencyA?: Currency, currencyB?: Currency): [Token, Token][] {
   const { chainId } = useActiveWeb3React()

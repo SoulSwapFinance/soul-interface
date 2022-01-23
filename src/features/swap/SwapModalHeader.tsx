@@ -3,7 +3,7 @@ import { Currency, Percent, TradeType, Trade } from '../../sdk'
 import React, { useState } from 'react'
 import { formatNumberScale, isAddress, shortenAddress } from '../../functions'
 
-import CurrencyLogo from '../../components/CurrencyLogo'
+import { CurrencyLogo } from '../../components/CurrencyLogo'
 import TradePrice from './TradePrice'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
@@ -15,7 +15,7 @@ import AdvancedSwapDetails from './AdvancedSwapDetails'
 // import { Field } from '../../state/swap/actions'
 // import { RowBetween } from '../../components/Row'
 // import Typography from '../../components/Typography'
-// import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+// import { useActiveWeb3React } from 'services/web3'
 
 export default function SwapModalHeader({
   trade,

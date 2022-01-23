@@ -1,35 +1,47 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { TransactionResponse } from '@ethersproject/providers'
+import { PlusIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, Currency, CurrencyAmount, currencyEquals, NATIVE, Percent, WNATIVE } from 'sdk'
-import React, { useCallback, useState } from 'react'
-import ReactGA from 'react-ga'
-import { Button, ButtonError } from 'components/Button'
-import Dots from 'components/Dots'
-import DoubleCurrencyLogo from 'components/DoubleLogo'
+import { ChainId, CurrencyAmount, currencyEquals, NATIVE, Percent, WNATIVE } from 'sdk'
+import AssetInput from 'components/AssetInput'
+import { Button } from 'components/Button'
+import { HeadlessUiModal } from 'components/Modal'
 import Web3Connect from 'components/Web3Connect'
 import { ZERO_PERCENT } from '../../../constants'
-import { calculateGasMargin, calculateSlippageAmount, maxAmountSpend } from 'functions'
-import { ApprovalState, useActiveWeb3React, useApproveCallback, useRouterContract } from 'hooks'
+import { useMineListItemDetailsModal } from 'features/mines/MineListItemDetails'
+import PoolAddLiquidityReviewContent from 'features/mines/utils/PoolAddLiquidityReviewContent'
+import { calculateGasMargin, calculateSlippageAmount } from 'functions'
+import { ApprovalState, useApproveCallback } from 'hooks/useApproveCallback'
+import { useRouterContract } from 'hooks/useContract'
 import useTransactionDeadline from 'hooks/useTransactionDeadline'
-import { useUSDCValue } from 'hooks/useUSDCPrice'
-import TransactionConfirmationModal, { ConfirmationModalContent } from 'modals/TransactionConfirmationModal'
+import { useActiveWeb3React } from 'services/web3'
 import { Field } from 'state/mint/actions'
 import { useDerivedMintInfo, useMintActionHandlers, useMintState } from 'state/mint/hooks'
 import { useTransactionAdder } from 'state/transactions/hooks'
 import { useExpertModeManager, useUserSlippageToleranceWithDefault } from 'state/user/hooks'
-import { ConfirmAddModalBottom } from '../../liquidity/ConfirmAddModalBottom'
-import CurrencyInputPanel from '../components/CurrencyInputPanel'
+import React, { useState } from 'react'
+import ReactGA from 'react-ga'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
 
-const PoolDeposit = ({ currencyA, currencyB }) => {
+// @ts-ignore TYPE NEEDS FIXING
+const PoolDeposit = ({ currencyA, currencyB, header }) => {
   const { i18n } = useLingui()
+  const { setContent } = useMineListItemDetailsModal()
   const { account, chainId, library } = useActiveWeb3React()
-  const [useETH, setUseETH] = useState(true)
+  const [useETH, setUseETH] = useState(false)
+  // const [useETH, setUseETH] = useState(chainId !== ChainId.CELO)
+  const [isExpertMode] = useExpertModeManager()
+  const deadline = useTransactionDeadline() // custom from users settings
+  const [attemptingTxn, setAttemptingTxn] = useState<boolean>(false) // clicked confirm
+  const allowedSlippage = useUserSlippageToleranceWithDefault(DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE) // custom from users
+  const routerContract = useRouterContract()
+  const addTransaction = useTransactionAdder()
 
+  // @ts-ignore TYPE NEEDS FIXING
   chainId && useETH && currencyA && currencyEquals(currencyA, WNATIVE[chainId]) && (currencyA = NATIVE[chainId])
+  // @ts-ignore TYPE NEEDS FIXING
   chainId && useETH && currencyB && currencyEquals(currencyB, WNATIVE[chainId]) && (currencyB = NATIVE[chainId])
 
   const oneCurrencyIsETH = currencyA?.isNative || currencyB?.isNative
@@ -40,36 +52,14 @@ const PoolDeposit = ({ currencyA, currencyB }) => {
         (currencyB && currencyEquals(currencyB, WNATIVE[chainId])))
   )
 
-  const [isExpertMode] = useExpertModeManager()
-
   // mint state
   const { independentField, typedValue, otherTypedValue } = useMintState()
-  const {
-    dependentField,
-    currencies,
-    currencyBalances,
-    parsedAmounts,
-    price,
-    noLiquidity,
-    liquidityMinted,
-    poolTokenPercentage,
-    error,
-  } = useDerivedMintInfo(currencyA ?? undefined, currencyB ?? undefined)
+  const { dependentField, currencies, parsedAmounts, noLiquidity, liquidityMinted, poolTokenPercentage, error } =
+    useDerivedMintInfo(currencyA ?? undefined, currencyB ?? undefined)
 
   const { onFieldAInput, onFieldBInput } = useMintActionHandlers(noLiquidity)
 
   const isValid = !error
-
-  // modal and loading
-  const [showConfirm, setShowConfirm] = useState<boolean>(false)
-  const [attemptingTxn, setAttemptingTxn] = useState<boolean>(false) // clicked confirm
-
-  // txn values
-  const deadline = useTransactionDeadline() // custom from users settings
-
-  const allowedSlippage = useUserSlippageToleranceWithDefault(DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE) // custom from users
-
-  const [txHash, setTxHash] = useState<string>('')
 
   // get formatted amounts
   const formattedAmounts = {
@@ -77,44 +67,23 @@ const PoolDeposit = ({ currencyA, currencyB }) => {
     [dependentField]: noLiquidity ? otherTypedValue : parsedAmounts[dependentField]?.toSignificant(6) ?? '',
   }
 
-  // get the max amounts user can add
-  const maxAmounts: { [field in Field]?: CurrencyAmount<Currency> } = [Field.CURRENCY_A, Field.CURRENCY_B].reduce(
-    (accumulator, field) => {
-      return {
-        ...accumulator,
-        [field]: maxAmountSpend(currencyBalances[field]),
-      }
-    },
-    {}
-  )
-
-  const atMaxAmounts: { [field in Field]?: CurrencyAmount<Currency> } = [Field.CURRENCY_A, Field.CURRENCY_B].reduce(
-    (accumulator, field) => {
-      return {
-        ...accumulator,
-        [field]: maxAmounts[field]?.equalTo(parsedAmounts[field] ?? '0'),
-      }
-    },
-    {}
-  )
-
-  const routerContract = useRouterContract()
-
   // check whether the user has approved the router on the tokens
   const [approvalA, approveACallback] = useApproveCallback(parsedAmounts[Field.CURRENCY_A], routerContract?.address)
   const [approvalB, approveBCallback] = useApproveCallback(parsedAmounts[Field.CURRENCY_B], routerContract?.address)
 
-  const currencyAFiatValue = useUSDCValue(parsedAmounts[Field.CURRENCY_A] ?? currencyBalances[Field.CURRENCY_A])
-  const currencyBFiatValue = useUSDCValue(parsedAmounts[Field.CURRENCY_B] ?? currencyBalances[Field.CURRENCY_B])
+  const minLiquidityMintedJSBI = liquidityMinted
+    ? calculateSlippageAmount(liquidityMinted, noLiquidity ? ZERO_PERCENT : allowedSlippage)[0]
+    : undefined
 
-  const addTransaction = useTransactionAdder()
+  const minLiquidityCurrencyAmount =
+    liquidityMinted?.currency && minLiquidityMintedJSBI
+      ? CurrencyAmount.fromRawAmount(liquidityMinted.currency, minLiquidityMintedJSBI)
+      : undefined
 
   async function onAdd() {
     if (!chainId || !library || !account || !routerContract) return
 
     const { [Field.CURRENCY_A]: parsedAmountA, [Field.CURRENCY_B]: parsedAmountB } = parsedAmounts
-
-    console.log({ parsedAmountA, parsedAmountB, currencyA, currencyB, deadline })
 
     if (!parsedAmountA || !parsedAmountB || !currencyA || !currencyB || !deadline) {
       return
@@ -167,6 +136,17 @@ const PoolDeposit = ({ currencyA, currencyB }) => {
         }).then((response) => {
           setAttemptingTxn(false)
 
+          setContent(
+            <PoolAddLiquidityReviewContent
+              noLiquidity={noLiquidity}
+              liquidityMinted={liquidityMinted}
+              poolShare={poolTokenPercentage}
+              parsedAmounts={parsedAmounts}
+              execute={onAdd}
+              txHash={response.hash}
+            />
+          )
+
           addTransaction(response, {
             summary: i18n._(
               t`Add ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${
@@ -174,8 +154,6 @@ const PoolDeposit = ({ currencyA, currencyB }) => {
               } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencies[Field.CURRENCY_B]?.symbol}`
             ),
           })
-
-          setTxHash(response.hash)
 
           ReactGA.event({
             category: 'Liquidity',
@@ -193,180 +171,104 @@ const PoolDeposit = ({ currencyA, currencyB }) => {
       })
   }
 
-  const handleDismissConfirmation = useCallback(() => {
-    setShowConfirm(false)
-    // if there was a tx hash, we want to clear the input
-    if (txHash) {
-      onFieldAInput('')
-    }
-    setTxHash('')
-  }, [onFieldAInput, txHash])
-
-  const modalHeader = () => {
-    return noLiquidity ? (
-      <div className="pb-4">
-        <div className="flex items-center justify-start gap-3">
-          <div className="text-2xl font-bold text-high-emphesis">
-            {currencies[Field.CURRENCY_A]?.symbol + '/' + currencies[Field.CURRENCY_B]?.symbol}
-          </div>
-          <DoubleCurrencyLogo currency0={currencyA} currency1={currencyB} size={48} />
-        </div>
-      </div>
-    ) : (
-      <div className="pb-4">
-        <div className="flex items-center justify-start gap-3">
-          <div className="text-xl font-bold md:text-3xl text-high-emphesis">{liquidityMinted?.toSignificant(6)}</div>
-          <div className="grid grid-flow-col gap-2">
-            <DoubleCurrencyLogo currency0={currencyA} currency1={currencyB} size={48} />
-          </div>
-        </div>
-        <div className="text-lg font-medium md:text-2xl text-high-emphesis">
-          {currencies[Field.CURRENCY_A]?.symbol}/{currencies[Field.CURRENCY_B]?.symbol}
-          &nbsp;{i18n._(t`Pool Tokens`)}
-        </div>
-        <div className="pt-3 text-xs italic text-secondary">
-          {i18n._(
-            t`Output is estimated. If the price changes by more than ${allowedSlippage.toSignificant(
-              4
-            )}% your transaction will revert.`
-          )}
-        </div>
-      </div>
-    )
-  }
-
-  const modalBottom = () => {
-    return (
-      <ConfirmAddModalBottom
-        price={price}
-        currencies={currencies}
-        parsedAmounts={parsedAmounts}
-        noLiquidity={noLiquidity}
-        onAdd={onAdd}
-        poolTokenPercentage={poolTokenPercentage}
-      />
-    )
-  }
-
-  const pendingText = i18n._(
-    t`Supplying ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${
-      currencies[Field.CURRENCY_A]?.symbol
-    } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencies[Field.CURRENCY_B]?.symbol}`
-  )
-
   return (
-    <div>
-      <TransactionConfirmationModal
-        isOpen={showConfirm}
-        onDismiss={handleDismissConfirmation}
-        attemptingTxn={attemptingTxn}
-        hash={txHash}
-        content={() => (
-          <ConfirmationModalContent
-            title={noLiquidity ? i18n._(t`You are creating a pool`) : i18n._(t`Receive`)}
-            onDismiss={handleDismissConfirmation}
-            topContent={modalHeader}
-            bottomContent={modalBottom}
-          />
-        )}
-        pendingText={pendingText}
-      />
-      <div className="flex flex-col space-y-4">
-        <CurrencyInputPanel
+    <>
+      <HeadlessUiModal.BorderedContent className="flex flex-col gap-4 bg-dark-1000/40">
+        {header}
+        <AssetInput
+          size="sm"
+          id="add-liquidity-input-tokena"
           value={formattedAmounts[Field.CURRENCY_A]}
           currency={currencyA}
-          id="add-liquidity-input-tokena"
-          showMaxButton
-          onUserInput={onFieldAInput}
-          onMax={() => {
-            onFieldAInput(maxAmounts[Field.CURRENCY_A]?.toExact() ?? '')
-          }}
-          currencyBalance={currencyBalances[Field.CURRENCY_A]}
-          fiatValue={currencyAFiatValue}
+          // @ts-ignore TYPE NEEDS FIXING
+          onChange={onFieldAInput}
         />
-        <div>
-          <CurrencyInputPanel
-            value={formattedAmounts[Field.CURRENCY_B]}
-            currency={currencyB}
-            id="add-liquidity-input-tokenb"
-            showMaxButton
-            onUserInput={onFieldBInput}
-            onMax={() => {
-              onFieldBInput(maxAmounts[Field.CURRENCY_B]?.toExact() ?? '')
-            }}
-            currencyBalance={currencyBalances[Field.CURRENCY_B]}
-            fiatValue={currencyBFiatValue}
-          />
-          {/* TODO -- fix below */}
-          
-          {/* {(oneCurrencyIsETH || oneCurrencyIsWETH) (
-            <a
-              className="cursor-pointer text-baseline text-blue opacity-80 hover:opacity-100 whitespace-nowrap"
-              onClick={() => setUseETH(!useETH)}
-            >
-              {i18n._(t`Use`)} {useETH && 'W'}
-              {NATIVE[chainId].symbol}
-            </a>
-          )} */}
+        <div className="z-10 flex justify-center -mt-6 -mb-6">
+          <div className="p-1.5 rounded-full bg-dark-800 border border-dark-800 shadow-md border-dark-700">
+            <PlusIcon width={14} className="text-high-emphesis" />
+          </div>
         </div>
-        <div>
-          {!account ? (
-            <Web3Connect size="lg" color="blue" className="w-full" />
-          ) : isValid &&
-            (approvalA === ApprovalState.NOT_APPROVED ||
-              approvalA === ApprovalState.PENDING ||
-              approvalB === ApprovalState.NOT_APPROVED ||
-              approvalB === ApprovalState.PENDING) ? (
-            <div className="flex space-x-4">
-              {approvalA !== ApprovalState.APPROVED && (
-                <Button
-                  color="gradient"
-                  size="lg"
-                  onClick={approveACallback}
-                  disabled={approvalA === ApprovalState.PENDING}
-                  style={{
-                    width: approvalB !== ApprovalState.APPROVED ? '48%' : '100%',
-                  }}
-                >
-                  {approvalA === ApprovalState.PENDING ? (
-                    <Dots>{i18n._(t`Approving ${currencies[Field.CURRENCY_A]?.symbol}`)}</Dots>
-                  ) : (
-                    i18n._(t`Approve ${currencies[Field.CURRENCY_A]?.symbol}`)
-                  )}
-                </Button>
-              )}
-              {approvalB !== ApprovalState.APPROVED && (
-                <Button
-                  color="gradient"
-                  size="lg"
-                  onClick={approveBCallback}
-                  disabled={approvalB === ApprovalState.PENDING}
-                  style={{
-                    width: approvalA !== ApprovalState.APPROVED ? '48%' : '100%',
-                  }}
-                >
-                  {approvalB === ApprovalState.PENDING ? (
-                    <Dots>{i18n._(t`Approving ${currencies[Field.CURRENCY_B]?.symbol}`)}</Dots>
-                  ) : (
-                    i18n._(t`Approve ${currencies[Field.CURRENCY_B]?.symbol}`)
-                  )}
-                </Button>
-              )}
-            </div>
-          ) : (
-            <ButtonError
-              onClick={() => {
-                isExpertMode ? onAdd() : setShowConfirm(true)
+        <AssetInput
+          size="sm"
+          id="add-liquidity-input-tokena"
+          value={formattedAmounts[Field.CURRENCY_B]}
+          currency={currencyB}
+          // @ts-ignore TYPE NEEDS FIXING
+          onChange={onFieldBInput}
+          className="!mt-0"
+        />
+        {(oneCurrencyIsETH || oneCurrencyIsWETH) && (
+        /* {(oneCurrencyIsETH || oneCurrencyIsWETH) && chainId != ChainId.CELO && ( */
+          <div className="flex justify-center">
+            <Button size="xs" variant="empty" color="blue" className="rounded-none" onClick={() => 
+              setUseETH(!useETH)
+            }
+              >
+              {i18n._(t`Use`)} {useETH && 'W'}
+              {/* @ts-ignore TYPE NEEDS FIXING */}
+              {NATIVE[chainId].symbol} instead of {!useETH && 'W'}
+              {/* @ts-ignore TYPE NEEDS FIXING */}
+              {NATIVE[chainId].symbol}
+            </Button>
+          </div>
+        )}
+      </HeadlessUiModal.BorderedContent>
+      {!account ? (
+        <Web3Connect />
+        // <Web3Connect fullWidth />
+      ) : isValid &&
+        (approvalA === ApprovalState.NOT_APPROVED ||
+          approvalA === ApprovalState.PENDING ||
+          approvalB === ApprovalState.NOT_APPROVED ||
+          approvalB === ApprovalState.PENDING) ? (
+        <div className="flex gap-4">
+          {approvalA !== ApprovalState.APPROVED && (
+            <Button
+              fullWidth
+              loading={approvalA === ApprovalState.PENDING}
+              onClick={approveACallback}
+              disabled={approvalA === ApprovalState.PENDING}
+              style={{
+                width: approvalB !== ApprovalState.APPROVED ? '48%' : '100%',
               }}
-              disabled={!isValid || attemptingTxn}
-              error={!isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B]}
             >
-              {error ?? i18n._(t`Confirm Adding Liquidity`)}
-            </ButtonError>
+              {i18n._(t`Approve ${currencies[Field.CURRENCY_A]?.symbol}`)}
+            </Button>
+          )}
+          {approvalB !== ApprovalState.APPROVED && (
+            <Button
+              fullWidth
+              loading={approvalB === ApprovalState.PENDING}
+              onClick={approveBCallback}
+              disabled={approvalB === ApprovalState.PENDING}
+            >
+              {i18n._(t`Approve ${currencies[Field.CURRENCY_B]?.symbol}`)}
+            </Button>
           )}
         </div>
-      </div>
-    </div>
+      ) : (
+        <Button
+          color={!isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B] ? 'red' : 'blue'}
+          onClick={() => {
+            isExpertMode
+              ? onAdd()
+              : setContent(
+                  <PoolAddLiquidityReviewContent
+                    noLiquidity={noLiquidity}
+                    liquidityMinted={minLiquidityCurrencyAmount}
+                    poolShare={poolTokenPercentage}
+                    parsedAmounts={parsedAmounts}
+                    execute={onAdd}
+                  />
+                )
+          }}
+          disabled={!isValid || attemptingTxn}
+          fullWidth
+        >
+          {error ?? i18n._(t`Confirm Adding Liquidity`)}
+        </Button>
+      )}
+    </>
   )
 }
 

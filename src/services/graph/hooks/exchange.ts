@@ -20,7 +20,7 @@ import useSWR, { SWRConfiguration } from 'swr'
 
 import { ChainId } from '../../../sdk'
 import { ethPriceQuery } from '../queries'
-import { useActiveWeb3React } from '../../../hooks'
+import { useActiveWeb3React } from 'services/web3'
 
 export function useExchange(variables = undefined, query = undefined, swrConfig: SWRConfiguration = undefined) {
   const { chainId } = useActiveWeb3React()

@@ -8,7 +8,6 @@ export const useRedirectOnChainId = (address: string) => {
     const { ethereum } = window
     if (ethereum && ethereum.on) {
       const onChainChange = () => router.push(address)
-
       ethereum.on('chainChanged', onChainChange)
       return () => {
         if (ethereum.removeListener) {
@@ -16,7 +15,6 @@ export const useRedirectOnChainId = (address: string) => {
         }
       }
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 }

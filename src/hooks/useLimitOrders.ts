@@ -1,4 +1,5 @@
-import { useActiveWeb3React, useLimitOrderContract } from '.'
+import { useLimitOrderContract } from '.'
+import { useActiveWeb3React } from 'services/web3'
 import useSWR, { SWRResponse } from 'swr'
 import { LAMBDA_URL, LimitOrder, OrderStatus } from 'limitorderv2-sdk'
 import { BigNumber } from 'ethers'

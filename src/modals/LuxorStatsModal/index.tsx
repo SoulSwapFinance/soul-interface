@@ -4,8 +4,6 @@ import { ApplicationModal } from 'state/application/actions'
 import Image from 'next/image'
 import styled from 'styled-components'
 import Modal from 'components/DefaultModal'
-import ModalHeader from 'components/ModalHeader'
-import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
 import Typography from 'components/Typography'
 import ExternalLink from 'components/ExternalLink'
 import { ExternalLink as LinkIcon } from 'react-feather'
@@ -15,11 +13,14 @@ import { formatNumberScale } from 'functions'
 import { LUX_ADDRESS, WLUM_ADDRESS } from 'constants/addresses'
 import { useSingleCallResult } from 'state/multicall/hooks'
 import { usePriceHelperContract } from 'features/bond/hooks/useContract'
-import QuestionHelper from '../../components/QuestionHelper'
+// import QuestionHelper from '../../components/QuestionHelper'
 import { useTVL } from 'hooks/useV2Pairs'
 import { Wrapper } from 'features/swap/styleds'
 import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
+import { useActiveWeb3React } from 'services/web3'
+import QuestionHelper from 'components/QuestionHelper'
+import ModalHeader from 'components/Modal/Header'
 
 const cache: { [key: string]: number } = {};
 
@@ -74,12 +75,11 @@ export default function LuxorStatsModal(): JSX.Element | null {
     <Modal isOpen={luxorStatsModalOpen} onDismiss={toggleLuxorStatsModal} maxWidth={672}>
       <div className="space-y-8">
         <div className="space-y-4">
-          <ModalHeader title={''} onClose={toggleLuxorStatsModal} />
+          <ModalHeader header={''} onClose={toggleLuxorStatsModal} />
           {/* <Wrapper className="flex flex-col-2 justify-between" > */}
-
-          <div className="flex flex-col w-full py-4">
+          <div className="flex flex-col-2 w-full py-4">
             {/* <div className="block"> */}
-            <QuestionHelper text={`Add to MetaMask`}>
+            {/* <QuestionHelper text={`Add to MetaMask`}> */}
               <div
                 className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
                 onClick={() => {
@@ -110,10 +110,10 @@ export default function LuxorStatsModal(): JSX.Element | null {
                 }}
               >
                 <Image
-                  src="https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b/logo.png"
+                  src="/images/tokens/LUX-transparent.png"
                   alt="LUX"
-                  width="200px"
-                  height="200px"
+                  width="1200px"
+                  height="1200px"
                   objectFit="contain"
                   className="rounded-md"
                 />
@@ -148,20 +148,20 @@ export default function LuxorStatsModal(): JSX.Element | null {
                 }}
               >
                 <Image
-                  src="https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208/logo.png"
+                  src="/images/tokens/WLUM-transparent.png"
                   alt="WLUM"
-                  width="200px"
-                  height="200px"
+                  width="1200px"
+                  height="1200px"
                   objectFit="contain"
                   className="rounded-md"
                 />
               </div>
-            </QuestionHelper>
+            {/* </QuestionHelper> */}
 
             {/* </div> */}
             {/* <div className="flex flex-1 flex-col"> */}
             {/* <div className="flex mt-4 flex-row justify-center"> */}
-            <div className="mt-6 flex justify-center text-3xl">{'LUX & WLUM'}</div>
+            {/* <div className="mt-6 flex justify-center text-3xl">{'LUX & WLUM'}</div> */}
             {/* <div className="flex items-center text-purple justify-between"> */}
           </div>
           {/* </div> */}

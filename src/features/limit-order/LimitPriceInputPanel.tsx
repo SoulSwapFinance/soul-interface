@@ -5,7 +5,8 @@ import { Input as NumericalInput } from '../../components/NumericalInput'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../../state'
 import { Field, setLimitPrice } from '../../state/limit-order/actions'
-import { useDerivedLimitOrderInfo, useLimitOrderState } from '../../state/limit-order/hooks'
+import { useLimitOrderState } from '../../state/limit-order/hooks'
+import useDerivedLimitOrderInfo from '../../state/limit-order/hooks'
 
 interface LimitPriceInputPanelProps {
   onBlur: (value: string) => void
@@ -14,7 +15,8 @@ interface LimitPriceInputPanelProps {
 const LimitPriceInputPanel: FC<LimitPriceInputPanelProps> = ({ onBlur }) => {
   const dispatch = useDispatch<AppDispatch>()
   const { limitPrice } = useLimitOrderState()
-  const { currencies, currentPrice } = useDerivedLimitOrderInfo()
+  const { } = useDerivedLimitOrderInfo()
+  // const { currencies, currentPrice } = useDerivedLimitOrderInfo()
   const { i18n } = useLingui()
   const handleInput = useCallback(
     (value) => {
@@ -24,7 +26,8 @@ const LimitPriceInputPanel: FC<LimitPriceInputPanelProps> = ({ onBlur }) => {
     [dispatch, onBlur]
   )
 
-  const disabled = !currencies[Field.INPUT] || !currencies[Field.OUTPUT]
+  const disabled = ![Field.INPUT] || ![Field.OUTPUT]
+  // const disabled = !currencies[Field.INPUT] || !currencies[Field.OUTPUT]
 
   return (
     <div
@@ -38,7 +41,8 @@ const LimitPriceInputPanel: FC<LimitPriceInputPanelProps> = ({ onBlur }) => {
           className={`uppercase border border-blue bg-blue text-blue bg-opacity-30 border-opacity-50 py-0.5 px-1.5 text-xs rounded-3xl flex items-center justify-center ${
             !disabled ? 'cursor-pointer hover:border-opacity-100' : ''
           }`}
-          onClick={() => handleInput(currentPrice?.toSignificant(6))}
+          onClick={() => handleInput(1)}
+          // onClick={() => handleInput(currentPrice?.toSignificant(6))}
         >
           {i18n._(t`Current`)}
         </span>
@@ -47,14 +51,14 @@ const LimitPriceInputPanel: FC<LimitPriceInputPanelProps> = ({ onBlur }) => {
         <NumericalInput
           disabled={disabled}
           className="w-full bg-transparent font-medium text-2xl"
-          placeholder={currentPrice ? currentPrice.toSignificant(6) : '0.0'}
+          // placeholder={currentPrice ? currentPrice.toSignificant(6) : '0.0'}
           id="limit-price-input"
           value={limitPrice || ''}
           onUserInput={handleInput}
           onBlur={() => onBlur(limitPrice)}
         />
         <div className="text-xs text-secondary whitespace-nowrap">
-          {currencies.OUTPUT?.symbol} per {currencies.INPUT?.symbol}
+          {/* {currencies.OUTPUT?.symbol} per {currencies.INPUT?.symbol} */}
         </div>
       </div>
     </div>

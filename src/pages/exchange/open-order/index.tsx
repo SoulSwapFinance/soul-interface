@@ -1,5 +1,3 @@
-import { useActiveWeb3React, useContract } from '../../../hooks'
-
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import { ChainId } from '../../../sdk'
 import CompletedOrders from '../../../features/open-order/CompletedOrders'

@@ -2,7 +2,7 @@
 
 // import { t } from '@lingui/macro'
 // import { tryParseAmount } from '../../functions'
-// import useActiveWeb3React from '../../hooks/useActiveWeb3React'
+// import { useActiveWeb3React } from 'services/web3'
 
 // // based on typed value
 // export function useDerivedStakeInfo(

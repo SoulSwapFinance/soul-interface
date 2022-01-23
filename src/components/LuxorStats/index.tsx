@@ -1,12 +1,12 @@
 import Image from 'next/image'
 import LuxorStatsModal, { formatCurrency } from 'modals/LuxorStatsModal'
 import React from 'react'
-import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
 import { useModalOpen, useToggleLuxorStatsModal } from 'state/application/hooks'
 import { ApplicationModal } from 'state/application/actions'
 import { useSingleCallResult } from 'state/multicall/hooks'
 import { usePriceHelperContract } from 'features/bond/hooks/useContract'
 import styled from 'styled-components'
+import { useActiveWeb3React } from 'services/web3'
 
 const HideOnMobile = styled.div`
 @media screen and (max-width: 500px) {
@@ -22,12 +22,12 @@ function LuxorStats(): JSX.Element | null {
 
   const priceHelperContract = usePriceHelperContract()
 
-  const rawLuxPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'])?.result
+  const rawLuxPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b']).result
   // console.log(Number(rawLuxPrice))
   const luxPrice = formatCurrency(Number(rawLuxPrice) / 1E18, 0)
   // console.log(luxPrice)
   
-  const rawWrappedLumPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208'])?.result
+  const rawWrappedLumPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208']).result
   // console.log(Number(rawWrappedLumPrice))
   const wLumPrice = formatCurrency(Number(rawWrappedLumPrice) / 1E18, 0)
   // console.log(wLumPrice)

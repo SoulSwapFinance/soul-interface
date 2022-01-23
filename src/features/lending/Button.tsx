@@ -9,7 +9,7 @@ import React from 'react'
 import { WNATIVE } from '../../sdk'
 import { t } from '@lingui/macro'
 import { tryParseAmount } from '../../functions/parse'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useLingui } from '@lingui/react'
 
 export function KashiApproveButton({ content, color }: any): any {

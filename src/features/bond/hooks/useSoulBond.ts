@@ -2,7 +2,6 @@ import { useCallback } from 'react'
 import { ethers, BigNumber } from 'ethers'
 // import { formatNumber } from '../../functions'
 
-import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
 
 import {
   useHelperContract,
@@ -17,6 +16,7 @@ import {
 import { SoulBondAddress, BOND_HELPER_ADDRESS as BondHelperAddress } from '../constants'
 
 import { AllPids } from '../Pids'
+import { useActiveWeb3React } from 'services/web3'
 
 // const helperContract = useHelperContract()
 

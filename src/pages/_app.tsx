@@ -9,6 +9,8 @@ import * as plurals from 'make-plural/plurals'
 
 import React, { Fragment, FunctionComponent } from 'react'
 import { NextComponentType, NextPageContext } from 'next'
+import { SyncWithRedux } from 'components/SyncWithRedux'
+import Portals from 'components/Portals'
 
 import type { AppProps } from 'next/app'
 import ApplicationUpdater from '../state/application/updater'
@@ -23,7 +25,7 @@ import { Provider as ReduxProvider } from 'react-redux'
 import TransactionUpdater from '../state/transactions/updater'
 import UserUpdater from '../state/user/updater'
 import Web3ReactManager from '../components/Web3ReactManager'
-import { createWeb3ReactRoot, Web3ReactProvider } from '@web3-react/core'
+import { createWeb3ReactRoot, useWeb3React, Web3ReactProvider } from '@web3-react/core'
 import dynamic from 'next/dynamic'
 import getLibrary from '../functions/getLibrary'
 import { i18n } from '@lingui/core'
@@ -31,9 +33,10 @@ import store from '../state'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import PriceProvider  from '../contexts/priceContext'
-import FarmContext from '../contexts/farmContext'
+import { RecoilRoot } from 'recoil'
+// import FarmContext from '../contexts/farmContext'
 // import { usePricesApi } from '../features/summoner/hooks'
-import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
+// import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
 const Web3ProviderNetwork = dynamic(() => import('../components/Web3ProviderNetwork'), { ssr: false })
 const Web3ProviderNetworkBridge = dynamic(() => import('../components/Web3ProviderBridge'), { ssr: false })
@@ -152,12 +155,14 @@ function MyApp({
                 <ReduxProvider store={store}>
                   <PriceProvider>
                     <>
-                      {/* <ListsUpdater /> */}
+                      <ListsUpdater />
                       <UserUpdater />
                       <ApplicationUpdater />
                       <TransactionUpdater />
                       <MulticallUpdater />
                     </>
+                    <RecoilRoot>
+                    <SyncWithRedux />
                     <Provider>
                       <Layout>
                         <Guard>
@@ -165,6 +170,8 @@ function MyApp({
                         </Guard>
                       </Layout>
                     </Provider>
+                    <TransactionUpdater />
+                    </RecoilRoot>
                   </PriceProvider>
                 </ReduxProvider>
               </Web3ReactManager>

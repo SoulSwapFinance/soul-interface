@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import { Disclosure } from '@headlessui/react'
-import CurrencyLogo from 'components/CurrencyLogo'
+import { CurrencyLogo } from 'components/CurrencyLogo'
 import DoubleLogo from 'components/DoubleLogo'
 import QuestionHelper from 'components/QuestionHelper'
 import { classNames, formatNumber, formatPercent } from 'functions'
@@ -9,7 +9,6 @@ import { useCurrency } from 'hooks/Tokens'
 import MineListItemDetails from './MineListItemDetails'
 import { SOUL } from '../../constants'
 import {
-  useActiveWeb3React,
   useHarvestHelperContract,
   usePriceHelperContract
 } from 'hooks'
@@ -20,6 +19,7 @@ import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 import YieldDetails from 'components/YieldDetails'
 import IconWrapper from 'components/IconWrapper'
 import { Info } from 'react-feather'
+import { useActiveWeb3React } from 'services/web3'
 
 const MineListItem = ({ farm, ...rest }) => {
   const { chainId } = useActiveWeb3React()
@@ -104,7 +104,6 @@ const MineListItem = ({ farm, ...rest }) => {
       <Disclosure {...rest}>
         {({ open }) => (
           <div>
-            {/* {token1 ? */}
             <Disclosure.Button
               className={classNames(
                 open && 'rounded-b-none',
@@ -167,9 +166,9 @@ const MineListItem = ({ farm, ...rest }) => {
                         setSelectedFarm(farm.id)
                       }}
                     >
-                      <IconWrapper size="16px" marginRight={'10px'}>
+                      {/* <IconWrapper size="16px" marginRight={'10px'}>
                         <Info />
-                      </IconWrapper>
+                      </IconWrapper> */}
                       {farm?.rewards?.map((reward, i) => (
                         <div key={i} className="text-xs md:text-sm whitespace-nowrap">
                           {
@@ -192,7 +191,7 @@ const MineListItem = ({ farm, ...rest }) => {
                 </div>
               </div>
             </Disclosure.Button>
-            {open && <MineListItemDetails farm={farm} />}
+            {open && <MineListItemDetails farm={farm} onDismiss={undefined} />}
           </div>
         )}
       </Disclosure>

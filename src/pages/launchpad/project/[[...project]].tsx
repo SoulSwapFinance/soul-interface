@@ -10,7 +10,7 @@ import { ButtonConfirmed, ButtonError } from '../../../components/Button'
 import { LAUNCHPAD_PROJECTS, PROJECT_STATUS } from '../../../constants/launchpad'
 import Back from '../../../components/Back'
 import NumericalInput from '../../../components/NumericalInput'
-import { ApprovalState, useActiveWeb3React, useApproveCallback } from '../../../hooks'
+import { ApprovalState, useApproveCallback } from '../../../hooks'
 import { useCurrency } from '../../../hooks/Tokens'
 import { SOUL_ADDRESS, SOUL_FTM_PAIR, WNATIVE } from '../../../constants'
 import Web3Connect from '../../../components/Web3Connect'
@@ -25,6 +25,8 @@ import { useV2PairsWithPrice } from '../../../hooks/useV2Pairs'
 import { useCurrencyBalance } from '../../../state/wallet/hooks'
 import { useTransactionAdder } from '../../../state/transactions/hooks'
 import { CurrencyAmount } from '../../../sdk'
+import { BigNumber } from '@ethersproject/bignumber'
+import { useActiveWeb3React } from 'services/web3'
 
 const Menu = ({ children }) => {
   return (
@@ -289,7 +291,10 @@ const Pool = ({ project, poolInfo, launchpadInfo }) => {
                         onClick={async () => {
                           setPendingTx(true)
                           try {
-                            const tx = await deposit(value.toBigNumber(18), poolInfo?.id)
+                            const tx = await deposit(
+                              new BigNumber(value, '18'),
+                              // .toBigNumber(18), 
+                              poolInfo?.id)
                             addTransaction(tx, { summary: 'Commit' })
                           } catch (error) {
                             console.error(error)
@@ -375,7 +380,10 @@ const Pool = ({ project, poolInfo, launchpadInfo }) => {
                         onClick={async () => {
                           setPendingWithdrawTx(true)
                           try {
-                            const tx = await withdraw(valueUnstake.toBigNumber(18), poolInfo?.id)
+                            const tx = await withdraw(
+                              new BigNumber(valueUnstake, '18'),
+                              // .toBigNumber(18), 
+                              poolInfo?.id)
                             addTransaction(tx, { summary: 'Withdraw' })
                           } catch (error) {
                             console.error(error)

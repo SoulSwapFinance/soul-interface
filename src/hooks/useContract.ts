@@ -111,7 +111,7 @@ import LIMIT_ORDER_ABI from '../constants/abis/limit-order.json'
 import LIMIT_ORDER_HELPER_ABI from '../constants/abis/limit-order-helper.json'
 
 import { getContract } from '../functions/contract'
-import { useActiveWeb3React } from './useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useMemo } from 'react'
 import { getVerifyingContract } from 'limitorderv2-sdk'
 

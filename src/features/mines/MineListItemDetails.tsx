@@ -1,103 +1,99 @@
-import { getAddress } from '@ethersproject/address'
-import { Disclosure, Transition } from '@headlessui/react'
-import { Tab } from '@headlessui/react'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Token, ZERO } from 'sdk'
-import { useActiveWeb3React } from 'services/web3'
-import React, { useState } from 'react'
+import { HeadlessUiModal } from 'components/Modal'
+import QuestionHelper from 'components/QuestionHelper'
+import ToggleButtonGroup from 'components/ToggleButton'
+import { selectMines, setMineModalView } from 'features/mines/minesSlice'
+import { classNames } from 'functions'
+import { useAppDispatch, useAppSelector } from 'state/hooks'
+import React, { createContext, ReactNode, useContext, useMemo, useState } from 'react'
 
-import { PairType } from './enum'
-import { useUserInfo } from './hooks'
+import { MineModalView, PairType } from './enum'
 import InformationDisclosure from './components/InformationDisclosure'
 import InvestmentDetails from './components/InvestmentDetails'
 import ManageBar from './utils/ManageBar'
+// import ManageKashiPair from './ManageKashiPair'
 import ManageSwapPair from './utils/ManageSwapPair'
 
-const MineListItemDetails = ({ farm }) => {
+const COLUMN_CONTAINER = 'flex flex-col flex-grow gap-4'
+
+interface MineListItemDetailsModal {
+  content: ReactNode
+  setContent: React.Dispatch<React.SetStateAction<React.ReactNode>>
+}
+
+const Context = createContext<MineListItemDetailsModal | undefined>(undefined)
+
+// @ts-ignore TYPE NEEDS FIXING
+const MineListItemDetails = ({ farm, onDismiss }) => {
   const { i18n } = useLingui()
-
-  const { chainId } = useActiveWeb3React()
-
-  const liquidityToken = new Token(
-    chainId,
-    getAddress(farm.lpToken),
-    18, // always 18 for SOUL-LP
-    farm.pair.token1 ? farm.pair.symbol : farm.pair.token0.symbol,
-    farm.pair.token1 ? farm.pair.name : farm.pair.token0.name
-  )
-
-  const stakedAmount = useUserInfo(farm, liquidityToken)
-  const [toggleView, setToggleView] = useState(stakedAmount?.greaterThan(ZERO))
+  const { view } = useAppSelector(selectMines)
+  const dispatch = useAppDispatch()
+  const [content, setContent] = useState<ReactNode>()
 
   return (
-    <Transition
-      show={true}
-      enter="transition-opacity duration-75"
-      enterFrom="opacity-0"
-      enterTo="opacity-100"
-      leave="transition-opacity duration-150"
-      leaveFrom="opacity-100"
-      leaveTo="opacity-0"
-    >
-      <Disclosure.Panel className="flex w-full border-t-0 rounded rounded-t-none bg-dark-800" static>
-        <InformationDisclosure farm={farm} />
-        <div className="flex flex-col w-full p-6 pl-2 space-y-8 sm:pl-6">
-          <div className="flex items-center justify-between">
-            <div className="text-xl font-bold cursor-pointer">
-              {toggleView ? i18n._(t`Investment Details`) : i18n._(t`Manage Position`)}
-            </div>
-            <button
-              className="py-0.5 px-4 font-bold bg-transparent border border-transparent rounded cursor-pointer border-gradient-r-blue-purple-dark-800 whitespace-nowrap"
-              onClick={() => setToggleView(!toggleView)}
-            >
-              {toggleView ? i18n._(t`Manage Position`) : i18n._(t`Investment Details`)}
-            </button>
-          </div>
-          <div className="w-full h-0 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis border-gradient-r-blue-purple-dark-800 opacity-20" />
-          {toggleView ? (
-            <InvestmentDetails farm={farm} />
-            ) : (
-              <Tab.Group>
+    <Context.Provider value={useMemo(() => ({ content, setContent }), [content, setContent])}>
+      <div className={classNames('mt-3')}>
+        <div className={classNames(COLUMN_CONTAINER, content ? '' : 'hidden')}>{content}</div>
+        <div className={classNames(COLUMN_CONTAINER, content ? 'hidden' : '')}>
+          <HeadlessUiModal.Header
+            header={
+              <div className="flex gap-0.5 items-center">
+                {view === MineModalView.Liquidity
+                  ? i18n._(t`Manage Liquidity`)
+                  : view === MineModalView.Position
+                  ? i18n._(t`Position and Rewards`)
+                  : i18n._(t`Manage Position`)}
+                {/* <QuestionHelper text={<InformationDisclosure farm={farm} />} /> */}
+                <QuestionHelper className="!bg-dark-800 !shadow-xl p-2" text={<InformationDisclosure farm={farm} />} />
+              </div>
+            }
+            onClose={onDismiss}
+          />
+          <ToggleButtonGroup
+            size="sm"
+            value={view}
+            onChange={(view: MineModalView) => dispatch(setMineModalView(view))}
+            variant="filled"
+          >
+            
+            <ToggleButtonGroup.Button value={MineModalView.Liquidity}>
+              {farm.pair.token1 && (
+              farm.pair.type === PairType.KASHI ? i18n._(t`Lending`) : i18n._(t`Liquidity`)
+              )}
+            </ToggleButtonGroup.Button>
+            <ToggleButtonGroup.Button value={MineModalView.Staking}>{i18n._(t`Staking`)}</ToggleButtonGroup.Button>
+            <ToggleButtonGroup.Button value={MineModalView.Position}>{i18n._(t`Rewards`)}</ToggleButtonGroup.Button>
+          </ToggleButtonGroup>
 
-              <Tab.List className="flex rounded bg-dark-900">
-              { farm.pair?.token1 ?
-                  <Tab
-                    className={({ selected }) =>
-                    `${selected
-                      ? 'text-high-emphesis bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple'
-                      : 'text-secondary'
-                    } flex items-center justify-center flex-1 px-2 py-2 text-lg rounded cursor-pointer select-none`
-                  }
-                  >
-                    {i18n._(t`Manage Liquidity`)}
-                  </Tab>
-                  : '' }
-                  <Tab
-                    className={({ selected }) =>
-                      `${selected
-                        ? 'text-high-emphesis bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple'
-                        : 'text-secondary'
-                      } flex items-center justify-center flex-1 px-2 py-2 text-lg rounded cursor-pointer select-none`
-                    }
-                  >
-                    {i18n._(t`Manage Farms`)}
-                  </Tab>
-              </Tab.List>
-              { farm.pair?.token1 ?
-              <Tab.Panel>
-                <ManageSwapPair farm={farm} />
-              </Tab.Panel>
-              : '' }
-              <Tab.Panel>
-                <ManageBar farm={farm} />
-              </Tab.Panel>
-            </Tab.Group>
-          )}
+          {/*Dont unmount following components to make modal more react faster*/}
+          <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Position ? 'block' : 'hidden')}>
+            <InvestmentDetails farm={farm} />
+          </div>
+          { farm.pair.token1 &&
+            <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Liquidity ? 'block' : 'hidden')}>
+            <ManageSwapPair farm={farm} />
+          </div>
+          }
+          {/* <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Liquidity ? 'block' : 'hidden')}>
+            {farm.pair.type === PairType.KASHI ? <ManageKashiPair farm={farm} /> : <ManageSwapPair farm={farm} />}
+          </div> */}
+          <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Staking ? 'block' : 'hidden')}>
+            <ManageBar farm={farm} />
+          </div>
         </div>
-      </Disclosure.Panel>
-    </Transition>
+      </div>
+    </Context.Provider>
   )
+}
+
+export const useMineListItemDetailsModal = () => {
+  const context = useContext(Context)
+  if (!context) {
+    throw new Error('Hook can only be used inside Farm List Item Details Context')
+  }
+
+  return context
 }
 
 export default MineListItemDetails

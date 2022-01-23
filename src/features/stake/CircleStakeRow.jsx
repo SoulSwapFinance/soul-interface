@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 import { ethers } from 'ethers'
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 
 import useSoulCircle from './useSoulCircle'
 // import useMulticall from "../../hooks/useMulticall";

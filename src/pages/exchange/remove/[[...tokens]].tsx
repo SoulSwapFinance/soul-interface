@@ -18,7 +18,7 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { Button } from '../../../components/Button'
 import Container from '../../../components/Container'
 import { Contract } from '@ethersproject/contracts'
-import CurrencyLogo from '../../../components/CurrencyLogo'
+import { CurrencyLogo } from '../../../components/CurrencyLogo'
 import Dots from '../../../components/Dots'
 import { Field } from '../../../state/burn/actions'
 import Head from 'next/head'
@@ -26,7 +26,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import SwapHeader from '../../../features/trade/Header'
 import LiquidityHeader from '../../../features/liquidity/LiquidityHeader'
-import LiquidityPrice from '../../../features/liquidity/LiquidityPrice'
+// import LiquidityPrice from '../../../features/liquidity/LiquidityPrice'
 import { MinimalPositionCard } from '../../../components/PositionCard'
 import NavLink from '../../../components/NavLink'
 import PercentInputPanel from '../../../components/PercentInputPanel'
@@ -37,7 +37,7 @@ import Web3Connect from '../../../components/Web3Connect'
 import { currencyId } from '../../../functions/currency'
 import { splitSignature } from '@ethersproject/bytes'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useCurrency } from '../../../hooks/Tokens'
 import useDebouncedChangeHandler from '../../../hooks/useDebouncedChangeHandler'
 import { useDerivedMintInfo } from '../../../state/mint/hooks'
@@ -253,10 +253,21 @@ export default function Remove() {
           .then(calculateGasMargin)
           .catch((error) => {
             console.error(`estimateGas failed`, methodName, args, error)
-            return BigNumber.from('1000000')
+            return undefined
           })
       )
     )
+    
+    // const safeGasEstimates: (BigNumber | undefined)[] = await Promise.all(
+    //   methodNames.map((methodName) =>
+    //     routerContract.estimateGas[methodName](...args)
+    //       .then(calculateGasMargin)
+    //       .catch((error) => {
+    //         console.error(`estimateGas failed`, methodName, args, error)
+    //         return BigNumber.from('1000000')
+    //       })
+    //   )
+    // )
 
     const indexOfSuccessfulEstimation = safeGasEstimates.findIndex((safeGasEstimate) =>
       BigNumber.isBigNumber(safeGasEstimate)
@@ -519,16 +530,16 @@ export default function Remove() {
   //     );
   //   }
 
-  //   const safeGasEstimates: (BigNumber | undefined)[] = await Promise.all(
-  //     methodNames.map((methodName) =>
-  //       router.estimateGas[methodName](...args)
-  //         .then(calculateGasMargin)
-  //         .catch((error) => {
-  //           console.error(`estimateGas failed`, methodName, args, error);
-  //           return undefined;
-  //         })
-  //     )
-  //   );
+    // const safeGasEstimates: (BigNumber | undefined)[] = await Promise.all(
+    //   methodNames.map((methodName) =>
+    //     router.estimateGas[methodName](...args)
+    //       .then(calculateGasMargin)
+    //       .catch((error) => {
+    //         console.error(`estimateGas failed`, methodName, args, error);
+    //         return undefined;
+    //       })
+    //   )
+    // );
 
   //   const indexOfSuccessfulEstimation = safeGasEstimates.findIndex(
   //     (safeGasEstimate) => BigNumber.isBigNumber(safeGasEstimate)
@@ -796,7 +807,7 @@ export default function Remove() {
                                   }`}
                                 >
                                   <a className="text-baseline text-blue opacity-80 hover:opacity-100 whitespace-nowrap">
-                                    Receive W{NATIVE[chainId].symbol}
+                                    Receive {NATIVE[chainId].symbol}
                                   </a>
                                 </Link>
                               ) : null}

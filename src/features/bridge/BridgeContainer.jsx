@@ -1,4 +1,4 @@
-import { useActiveWeb3React } from '../../hooks'
+import { useActiveWeb3React } from 'services/web3'
 import { ethers } from 'ethers'
 
 // import { ChainId } from '../../sdk'

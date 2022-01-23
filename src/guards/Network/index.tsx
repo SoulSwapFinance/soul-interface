@@ -1,5 +1,5 @@
 import React, { FC, Fragment } from 'react'
-import { useActiveWeb3React } from '../../hooks'
+import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from '../../sdk'
 import Typography from '../../components/Typography'
 import Image from 'next/image'

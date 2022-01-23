@@ -2,7 +2,7 @@ import { ChainId, Percent } from '../../sdk'
 import React, { useRef, useState } from 'react'
 import {
   useExpertModeManager,
-  useUserArcherUseRelay,
+  // useUserArcherUseRelay,
   useUserSingleHopOnly,
   useUserTransactionTTL,
 } from '../../state/user/hooks'
@@ -11,18 +11,18 @@ import Image from '../../components/Image'
 
 // import { AdjustmentsIcon } from '@heroicons/react/outline'
 import { ApplicationModal } from '../../state/application/actions'
-import { Button } from '../Button'
-import Modal from '../DefaultModal'
-import ModalHeader from '../ModalHeader'
-import QuestionHelper from '../QuestionHelper'
-import Toggle from '../Toggle'
-import TransactionSettings from '../TransactionSettings'
-import Typography from '../Typography'
+import { Button } from 'components/Button'
+import Modal from 'components/DefaultModal'
+import QuestionHelper from 'components/QuestionHelper'
+import Toggle from 'components/Toggle'
+import Typography from 'components/Typography'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../hooks'
 import { useLingui } from '@lingui/react'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import SETTINGS from 'assets/icons/controls.svg'
+import { useActiveWeb3React } from 'services/web3'
+import TransactionSettings from 'components/TransactionSettings'
+import ModalHeader from 'components/Modal/Header'
 
 export default function SettingsTab({ placeholderSlippage }: { placeholderSlippage?: Percent }) {
   const { i18n } = useLingui()
@@ -43,7 +43,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
 
   const [ttl, setTtl] = useUserTransactionTTL()
 
-  const [userUseArcher, setUserUseArcher] = useUserArcherUseRelay()
+  // const [userUseArcher, setUserUseArcher] = useUserArcherUseRelay()
 
   return (
     <div className="relative flex" ref={node}>
@@ -106,7 +106,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
                 toggle={() => (singleHopOnly ? setSingleHopOnly(false) : setSingleHopOnly(true))}
               />
             </div>
-            {chainId == ChainId.MAINNET && (
+            {/* {chainId == ChainId.MAINNET && (
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   <Typography variant="sm" className="text-primary">
@@ -124,14 +124,16 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
                   toggle={() => setUserUseArcher(!userUseArcher)}
                 />
               </div>
-            )}
+            )} */}
           </div>
         </div>
       )}
 
       <Modal isOpen={showConfirmation} onDismiss={() => setShowConfirmation(false)}>
         <div className="space-y-4">
-          <ModalHeader title={i18n._(t`Are you sure?`)} onClose={() => setShowConfirmation(false)} />
+          <ModalHeader 
+            // title={i18n._(t`Are you sure?`)} 
+            onClose={() => setShowConfirmation(false)} header={'Are you sure?'} />
           <Typography variant="lg">
             {i18n._(t`Expert mode turns off the confirm transaction prompt and allows high slippage trades
                                 that often result in bad rates and lost funds.`)}

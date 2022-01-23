@@ -12,7 +12,7 @@ import { Input as NumericalInput } from '../../components/NumericalInput'
 import styled from 'styled-components'
 import { t } from '@lingui/macro'
 import { tryParseAmount } from '../../functions/parse'
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useLingui } from '@lingui/react'
 import useSoulStakeManual from '../../hooks/useSoulStakeManual'
 import { useTokenBalance } from '../../state/wallet/hooks'
@@ -22,11 +22,11 @@ import useSoulSummoner from '../../features/farm/hooks/useSoulSummoner'
 
 import { ethers } from 'ethers'
 import { useSoulSummonerContract } from '../../hooks'
-import ModalHeader from '../../components/ModalHeader'
 import Typography from '../../components/Typography'
 import { SubmitButton } from '../../features/seance/SeanceStyles'
 import { HeadlessUiModal } from 'components/Modal'
 import Header from 'features/mines/components/Header'
+import ModalHeader from 'components/Modal/Header'
 
 const INPUT_CHAR_LIMIT = 18
 
@@ -278,7 +278,7 @@ export default function SoulStake() {
     if (account) {
       const timer = setTimeout(() => {
         fetchPending(0)
-      }, 3000)
+      }, 10000)
 
       // Clear timeout if the component is unmounted
       return () => clearTimeout(timer)
@@ -585,7 +585,7 @@ export default function SoulStake() {
       <HeadlessUiModal.Controlled isOpen={showConfirmation} onDismiss={
         () => setShowConfirmation(false)}>
         <div className="space-y-4">
-          <ModalHeader title={`Please Read and Confirm`} onClose={() => setShowConfirmation(false)} />
+          <ModalHeader header={`Please Read and Confirm`} onClose={() => setShowConfirmation(false)} />
           <Typography variant="lg">
             If you have more SEANCE than you have STAKED, then please read below:
             <br /><br />

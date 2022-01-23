@@ -54,14 +54,14 @@ export default function Farm(): JSX.Element {
 
   const priceHelperContract = usePriceHelperContract()
   const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
-  console.log(Number(rawSoulPrice))
+  // console.log(Number(rawSoulPrice))
   const soulPrice = Number(rawSoulPrice)
-  console.log(soulPrice)
+  // console.log(soulPrice)
 
   const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'])?.result
-  console.log(Number(rawFtmPrice))
+  // console.log(Number(rawFtmPrice))
   const ftmPrice = Number(rawFtmPrice)
-  console.log(ftmPrice)
+  // console.log(ftmPrice)
 
   const map = (pool) => {
     pool.owner = 'SoulSwap'

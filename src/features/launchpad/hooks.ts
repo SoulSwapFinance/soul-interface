@@ -1,9 +1,10 @@
 import { useCallback, useMemo } from 'react'
-import { useActiveWeb3React, useLaunchpadContract } from '../../hooks'
+import { useLaunchpadContract } from '../../hooks'
 import { NEVER_RELOAD, useSingleCallResult, useSingleContractMultipleData } from '../../state/multicall/hooks'
 import { zip, chunk } from 'lodash'
 import { BigNumber } from 'ethers'
 import { calculateGasPrice } from '../../functions'
+import { useActiveWeb3React } from 'services/web3'
 
 export function useLaunchpadUserInfo(contractAddress?: string) {
   const { account } = useActiveWeb3React()

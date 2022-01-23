@@ -2,14 +2,14 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { USDC } from 'sdk'
 import { Button } from 'components/Button'
-import CurrencyLogo from 'components/CurrencyLogo'
+import { CurrencyLogo } from 'components/CurrencyLogo'
 import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
 import { formatNumber, shortenAddress } from 'functions'
 import useUSDCPrice from 'hooks/useUSDCPrice'
 import { ConfirmationModalContent } from 'modals/TransactionConfirmationModal'
 import { useActiveWeb3React } from 'services/web3'
 import { Field } from 'state/limit-order/actions'
-import { useDerivedLimitOrderInfo, useLimitOrderState } from 'state/limit-order/hooks'
+import { useLimitOrderState } from 'state/limit-order/hooks'
 import React, { FC, useCallback } from 'react'
 
 interface ConfirmLimitOrderModalProps {
@@ -122,3 +122,7 @@ const ConfirmLimitOrderBottomContent: FC<ConfirmLimitOrderBottomContentProps> = 
 }
 
 export default ConfirmLimitOrderModal
+function useDerivedLimitOrderInfo(): { currencies: any; parsedAmounts: any } {
+  throw new Error('Function not implemented.')
+}
+

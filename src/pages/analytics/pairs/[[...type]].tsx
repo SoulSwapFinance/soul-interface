@@ -1,7 +1,7 @@
 import Container from '../../../components/Container'
 import Head from 'next/head'
 import AnalyticsHeader from '../../../features/analytics/Header'
-import useActiveWeb3React from '../../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 
 export default function Pairs() {
   const { account } = useActiveWeb3React()

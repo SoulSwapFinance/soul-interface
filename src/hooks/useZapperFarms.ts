@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from 'react'
 
 import { BigNumber } from '@ethersproject/bignumber'
-import Fraction from '../entities/Fraction'
+import { Fraction } from 'entities/bignumber/Fraction'
 import { POOL_DENY } from '../constants'
 import orderBy from 'lodash/orderBy'
 import range from 'lodash/range'
 import soulData from '@soulswap/soul-data'
-import { useActiveWeb3React } from './useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useSoulGuideContract } from './useContract'
 
 // Todo: Rewrite in terms of web3 as opposed to subgraph

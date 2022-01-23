@@ -1,5 +1,5 @@
 import { Currency } from '../../sdk'
-import CurrencyLogo from '../CurrencyLogo'
+import { CurrencyLogo } from '../CurrencyLogo'
 import React from 'react'
 
 interface DoubleCurrencyLogoProps {

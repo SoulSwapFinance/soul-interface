@@ -1,153 +1,94 @@
 import { getAddress } from '@ethersproject/address'
 import { BigNumber } from '@ethersproject/bignumber'
-import { Switch } from '@headlessui/react'
 import { MinusIcon, PlusIcon } from '@heroicons/react/solid'
 import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
-import {
-  ChainId,
-  CurrencyAmount,
-  JSBI,
-  Token,
-  USDC,
-  USD,
-  ZERO,
-} from 'sdk'
-import { Button, ButtonError } from 'components/Button'
-import Dots from 'components/Dots'
+import { ChainId, SOUL_SUMMONER_ADDRESS, Token } from 'sdk'
+import AssetInput from 'components/AssetInput'
+import { Button } from 'components/Button'
+import { HeadlessUiModal } from 'components/Modal'
+import Switch from 'components/Switch'
+import Typography from 'components/Typography'
 import Web3Connect from 'components/Web3Connect'
+// import { OLD_FARMS } from 'config/farms'
+import { useMineListItemDetailsModal } from 'features/mines/MineListItemDetails'
+import { setMinesModalOpen } from 'features/mines/minesSlice'
 import { classNames, tryParseAmount } from 'functions'
 import { ApprovalState, useApproveCallback } from 'hooks/useApproveCallback'
 import { useActiveWeb3React } from 'services/web3'
+import { useAppDispatch } from 'state/hooks'
 import { useTransactionAdder } from 'state/transactions/hooks'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import React, { useState } from 'react'
 
-import CurrencyInputPanel from '../components/CurrencyInputPanel'
+// import { PairType } from '../enum'
 import { useUserInfo } from '../hooks'
 import useMasterChef from '../hooks/useMasterChef'
-import { SOUL_SUMMONER_ADDRESS } from '../../../constants'
-import { useCurrency } from 'hooks/Tokens'
-import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
-import { usePriceHelperContract } from 'hooks'
-import { useSingleCallResult } from 'state/multicall/hooks'
 
+// @ts-ignore TYPE NEEDS FIXING
 const ManageBar = ({ farm }) => {
+  const dispatch = useAppDispatch()
   const { account, chainId } = useActiveWeb3React()
-
+  const { setContent } = useMineListItemDetailsModal()
   const [toggle, setToggle] = useState(true)
-  const [depositValue, setDepositValue] = useState('')
-  const [withdrawValue, setWithdrawValue] = useState('')
-
-  const { deposit, withdraw, enterStaking, leaveStaking } = useMasterChef()
+  const [depositValue, setDepositValue] = useState<string>()
+  const [withdrawValue, setWithdrawValue] = useState<string>()
+  const { deposit, withdraw } = useMasterChef()
   const addTransaction = useTransactionAdder()
-
-  let token0 = useCurrency(farm.pair.token0?.id)
-  let token1 = useCurrency(farm.pair.token1?.id)
-
   const liquidityToken = new Token(
-    chainId,
+    // @ts-ignore TYPE NEEDS FIXING
+    chainId || 250,
     getAddress(farm.lpToken),
     18,
-    farm.pair?.token1 ? farm.pair?.symbol : farm.pair.token0?.symbol,
-    farm.pair.token1 ? farm.pair?.name : farm.pair.token0?.name
+    'SOUL-LP'
+    // farm.pair.type === PairType.KASHI ? Number(farm.pair.asset.decimals) : 18,
+    // farm.pair.type === PairType.KASHI ? 'KMP' : 'SLP'
   )
-
-  const priceHelperContract = usePriceHelperContract()
-
-  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
-  console.log(Number(rawSoulPrice))
-  const soulPrice = Number(rawSoulPrice) / 1E18
-  console.log('soul price:%s', soulPrice)
-
-  const balance = useCurrencyBalance(account, liquidityToken)
+  const balance = useCurrencyBalance(account ?? undefined, liquidityToken)
   const stakedAmount = useUserInfo(farm, liquidityToken)
-
-  let [data] = useV2PairsWithPrice([[token0, token1]])
-  let [state, pair, pairPrice] = data
-
-  const balanceFiatValueRaw
-    = pair?.token1 ? Number(pairPrice) * Number(balance?.toSignificant())
-    : Number(soulPrice) * Number(balance?.toSignificant())
-
-  const stakedAmountFiatValueRaw
-    = pair?.token1 ? Number(pairPrice) * Number(stakedAmount?.toSignificant())
-    : Number(soulPrice) * Number(stakedAmount?.toSignificant())
-
-  const balanceFiatValue
-    = CurrencyAmount.fromRawAmount(
-      USD[chainId],
-      JSBI.BigInt(balanceFiatValueRaw.toFixed(USD[chainId].decimals).toBigNumber(USD[chainId].decimals))
-    )
-
-  const stakedAmountFiatValue
-    = CurrencyAmount.fromRawAmount(
-      USD[chainId],
-      JSBI.BigInt(stakedAmountFiatValueRaw.toFixed(USD[chainId].decimals).toBigNumber(USD[chainId].decimals))
-    )
-
-  // const balanceFiatValue = CurrencyAmount.fromRawAmount(
-  //   USD[chainId],
-  //       JSBI.BigInt(
-  //         ((Number(balance?.toExact() ?? '0') * farm.pair.reserveUSD) / farm.pair.totalSupply)
-  //           .toFixed(USD[chainId].decimals)
-  //           .toBigNumber(USD[chainId].decimals)
-  //       )
-  // )
-
-  // const stakedAmountFiatValue = CurrencyAmount.fromRawAmount(
-  //   USD[chainId],
-  //     JSBI.BigInt(
-  //         ((Number(stakedAmount?.toExact() ?? '0') * farm.pair.reserveUSD) / farm.pair.totalSupply)
-  //           .toFixed(USD[chainId].decimals)
-  //           .toBigNumber(USD[chainId].decimals)
-  //       )
-  // )
-
   const parsedDepositValue = tryParseAmount(depositValue, liquidityToken)
   const parsedWithdrawValue = tryParseAmount(withdrawValue, liquidityToken)
-
+  // @ts-ignore TYPE NEEDS FIXING
   const [approvalState, approve] = useApproveCallback(parsedDepositValue, SOUL_SUMMONER_ADDRESS[chainId])
 
   const depositError = !parsedDepositValue
     ? 'Enter Amount'
     : balance?.lessThan(parsedDepositValue)
-      ? 'Insufficient Balance'
-      : undefined
-
+    ? 'Insufficient Balance'
+    : undefined
   const isDepositValid = !depositError
-
   const withdrawError = !parsedWithdrawValue
     ? 'Enter Amount'
-    : stakedAmount?.lessThan(parsedWithdrawValue)
-      ? 'Insufficient Balance'
-      : undefined
-
+    : // @ts-ignore TYPE NEEDS FIXING
+    stakedAmount?.lessThan(parsedWithdrawValue)
+    ? 'Insufficient Balance'
+    : undefined
   const isWithdrawValid = !withdrawError
 
   return (
-    <div className="flex flex-col space-y-2">
-      <div className="flex items-center justify-between pb-2">
-        <Switch.Group>
-          <div className="flex items-center">
+    <>
+      <HeadlessUiModal.BorderedContent className="flex flex-col gap-4 bg-dark-1000/40">
+        <div className="flex flex-col gap-2">
+          <div className="flex justify-between">
+            <Typography variant="lg" weight={700} className="text-high-emphesis">
+              {toggle ? i18n._(t`Deposit Liquidity`) : i18n._(t`Withdraw Liquidity`)}
+            </Typography>
             <Switch
+              size="sm"
               checked={toggle}
               onChange={() => setToggle(!toggle)}
-              className={`${toggle ? 'bg-blue border-blue' : 'bg-purple border-purple'
-                } bg-opacity-60 border border-opacity-80 relative inline-flex items-center h-[32px] rounded-full w-[54px] transition-colors focus:outline-none`}
-            >
-              <span
-                className={`${toggle ? 'translate-x-[1px] text-blue' : 'translate-x-[23px] text-purple'
-                  } inline-block w-7 h-7 transform bg-white rounded-full transition-transform`}
-              >
-                {toggle ? <PlusIcon /> : <MinusIcon />}
-              </span>
-            </Switch>
-            <Switch.Label className="ml-3">{toggle ? i18n._(t`Deposit`) : i18n._(t`Withdraw`)}</Switch.Label>
+              checkedIcon={<PlusIcon className="text-dark-1000" />}
+              uncheckedIcon={<MinusIcon className="text-dark-1000" />}
+            />
           </div>
-        </Switch.Group>
-        <div className="flex justify-end space-x-4">
-          {['25', '50', '75', '100'].map((multipler, i) => (
+
+          <Typography variant="sm" className="text-secondary">
+            {i18n._(t`Use one of the buttons to set a percentage or enter a value manually using the input field.`)}
+          </Typography>
+        </div>
+
+        <div className="flex justify-end gap-2">
+          {['25', '50', '75', '100'].map((multiplier, i) => (
             <Button
               variant="outlined"
               size="xs"
@@ -155,155 +96,112 @@ const ManageBar = ({ farm }) => {
               key={i}
               onClick={() => {
                 toggle
-                  ? setDepositValue(balance?.multiply(multipler).divide(100).toExact())
-                  : setWithdrawValue(stakedAmount?.multiply(multipler).divide(100).toExact())
+                  ? balance
+                    ? // @ts-ignore TYPE NEEDS FIXING
+                      setDepositValue(balance.multiply(multiplier).divide(100).toExact())
+                    : undefined
+                  : stakedAmount
+                  ? // @ts-ignore TYPE NEEDS FIXING
+                    setWithdrawValue(stakedAmount.multiply(multiplier).divide(100).toExact())
+                  : undefined
               }}
               className={classNames(
                 'text-md border border-opacity-50',
-                toggle ? 'focus:ring-blue border-blue' : 'focus:ring-purple border-purple',
-                multipler === '25' || multipler === '75' ? 'hidden sm:block' : ''
+                toggle ? 'focus:ring-blue border-blue' : 'focus:ring-pink border-pink'
               )}
             >
-              {multipler === '100' ? 'MAX' : multipler + '%'}
+              {multiplier === '100' ? 'MAX' : multiplier + '%'}
             </Button>
           ))}
         </div>
-      </div>
+        <AssetInput
+          currencyLogo={false}
+          currency={liquidityToken}
+          value={toggle ? depositValue : withdrawValue}
+          onChange={setDepositValue}
+          balance={toggle ? undefined : stakedAmount}
+          showMax={false}
+        />
+      </HeadlessUiModal.BorderedContent>
       {toggle ? (
-        <div className="flex flex-col space-y-4">
-          <CurrencyInputPanel
-            value={depositValue}
-            currency={liquidityToken}
-            id="add-liquidity-input-tokenb"
-            hideIcon
-            onUserInput={(value) => setDepositValue(value)}
-            currencyBalance={balance}
-            fiatValue={balanceFiatValue}
-            showMaxButton={false}
-          />
-          {!account ? (
-            <Web3Connect size="lg" color="blue" className="w-full" />
-          ) : isDepositValid &&
-            (approvalState === ApprovalState.NOT_APPROVED || approvalState === ApprovalState.PENDING) ? (
-            <Button
-              color="gradient"
-              size="lg"
-              onClick={approve}
-              disabled={approvalState !== ApprovalState.NOT_APPROVED}
-            >
-              {approvalState === ApprovalState.PENDING ? <Dots>{i18n._(t`Approving`)}</Dots> : i18n._(t`Approve`)}
-            </Button>
-          ) : (
-              farm.pair?.token1 ?
-                <ButtonError
-                  onClick={async () => {
-                    try {
-                      // LP is always 18
-                      const tx = await deposit(farm.id, BigNumber.from(parsedDepositValue.quotient.toString()))
-                      addTransaction(tx, {
-                        summary: `Deposit ${farm.pair?.token0.name}/${farm.pair?.token1.name}`,
-                      })
-                    } catch (error) {
-                      console.error(error)
-                    }
-                  }}
-                  disabled={!isDepositValid}
-                  error={!isDepositValid && !!parsedDepositValue}
-                >
-                  {depositError || i18n._(t`Confirm Deposit`)}
-                </ButtonError>
-                : <ButtonError
-                  onClick={async () => {
-                    try {
-                      // LP is always 18
-                      const tx = await enterStaking(BigNumber.from(parsedDepositValue.quotient.toString()))
-                      addTransaction(tx, {
-                        summary: `Deposit ${farm.pair?.token0?.name}/${farm.pair?.token1.name}`,
-                      })
-                    } catch (error) {
-                      console.error(error)
-                    }
-                  }}
-                  disabled={!isDepositValid}
-                  error={!isDepositValid && !!parsedDepositValue}
-                >
-                  {depositError || i18n._(t`Confirm Deposit`)}
-                </ButtonError>
-            
-          )}
-        </div>
+        !account ? (
+          <Web3Connect size="lg" color="blue" />
+        ) : isDepositValid &&
+          (approvalState === ApprovalState.NOT_APPROVED || approvalState === ApprovalState.PENDING) ? (
+          <Button
+            fullWidth
+            loading={approvalState === ApprovalState.PENDING}
+            color="gradient"
+            onClick={approve}
+            disabled={approvalState !== ApprovalState.NOT_APPROVED}
+          >
+            {i18n._(t`Approve`)}
+          </Button>
+        ) : (
+          <Button
+            fullWidth
+            color={!isDepositValid && !!parsedDepositValue ? 'red' : 'blue'}
+            onClick={async () => {
+              try {
+                // KMP decimals depend on asset, SLP is always 18
+                // @ts-ignore TYPE NEEDS FIXING
+                const tx = await deposit(farm.id, BigNumber.from(parsedDepositValue?.quotient.toString()))
+                if (tx?.hash) {
+                  setContent(
+                    <HeadlessUiModal.SubmittedModalContent
+                      txHash={tx?.hash}
+                      header={i18n._(t`Success!`)}
+                      subheader={i18n._(t`Success! Transaction successfully submitted`)}
+                      onDismiss={() => dispatch(setMinesModalOpen(false))}
+                    />
+                  )
+                  addTransaction(tx, {
+                    summary: `Deposit ${farm.pair.token0.name}/${farm.pair.token1.name}`,
+                  })
+                }
+              } catch (error) {
+                console.error(error)
+              }
+            }}
+            disabled={!isDepositValid}
+          >
+            {depositError || i18n._(t`Confirm Deposit`)}
+          </Button>
+        )
+      ) : !account ? (
+        <Web3Connect color="blue" className="w-full" />
       ) : (
-
-        farm.pair.token1 ?
-        <div className="flex flex-col space-y-4">
-          <CurrencyInputPanel
-            value={withdrawValue}
-            currency={liquidityToken}
-            id="add-liquidity-input-tokenb"
-            hideIcon
-            onUserInput={(value) => setWithdrawValue(value)}
-            currencyBalance={stakedAmount}
-            fiatValue={stakedAmountFiatValue}
-            showMaxButton={false}
-          />
-          {!account ? (
-            <Web3Connect size="lg" color="blue" className="w-full" />
-          ) : (
-            <ButtonError
-              onClick={async () => {
-                try {
-                  // LP is always 18
-                  const tx = await withdraw(farm.id, BigNumber.from(parsedWithdrawValue.quotient.toString()))
-                  addTransaction(tx, {
-                    summary: `Withdraw ${farm.pair.token0.name}/${farm.pair.token1.name}`,
-                  })
-                } catch (error) {
-                  console.error(error)
-                }
-              }}
-              disabled={!isWithdrawValid}
-              error={!isWithdrawValid && !!parsedWithdrawValue}
-            >
-              {withdrawError || i18n._(t`Confirm Withdraw`)}
-            </ButtonError>
-          )}
-        </div>
-        :
-        <div className="flex flex-col space-y-4">
-          <CurrencyInputPanel
-            value={withdrawValue}
-            currency={liquidityToken}
-            id="add-liquidity-input-tokenb"
-            hideIcon
-            onUserInput={(value) => setWithdrawValue(value)}
-            currencyBalance={stakedAmount}
-            fiatValue={stakedAmountFiatValue}
-            showMaxButton={false}
-          />
-          {!account ? (
-            <Web3Connect size="lg" color="blue" className="w-full" />
-          ) : (
-            <ButtonError
-              onClick={async () => {
-                try {
-                  // LP is always 18
-                  const tx = await leaveStaking(BigNumber.from(parsedWithdrawValue.quotient.toString()))
-                  addTransaction(tx, {
-                    summary: `Withdraw SOUL`,
-                  })
-                } catch (error) {
-                  console.error(error)
-                }
-              }}
-              disabled={!isWithdrawValid}
-              error={!isWithdrawValid && !!parsedWithdrawValue}
-            >
-              {withdrawError || i18n._(t`Redeem with Seance`)}
-            </ButtonError>
-          )}
-        </div>
+        <Button
+          fullWidth
+          color={!isWithdrawValid && !!parsedWithdrawValue ? 'red' : 'blue'}
+          onClick={async () => {
+            try {
+              // KMP decimals depend on asset, SLP is always 18
+              // @ts-ignore TYPE NEEDS FIXING
+              const tx = await withdraw(farm.id, BigNumber.from(parsedWithdrawValue?.quotient.toString()))
+              if (tx?.hash) {
+                setContent(
+                  <HeadlessUiModal.SubmittedModalContent
+                    txHash={tx?.hash}
+                    header={i18n._(t`Success!`)}
+                    subheader={i18n._(t`Success! Transaction successfully submitted`)}
+                    onDismiss={() => dispatch(setMinesModalOpen(false))}
+                  />
+                )
+                addTransaction(tx, {
+                  summary: `Withdraw ${farm.pair.token0.name}/${farm.pair.token1.name}`,
+                })
+              }
+            } catch (error) {
+              console.error(error)
+            }
+          }}
+          disabled={!isWithdrawValid}
+        >
+          {withdrawError || i18n._(t`Confirm Withdraw`)}
+        </Button>
       )}
-    </div>
+    </>
   )
 }
 

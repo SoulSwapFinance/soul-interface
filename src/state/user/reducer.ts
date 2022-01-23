@@ -1,42 +1,29 @@
+import { createReducer } from '@reduxjs/toolkit'
+import { DEFAULT_DEADLINE_FROM_NOW, INITIAL_ALLOWED_SLIPPAGE } from '../../constants'
+import { updateVersion } from 'state/global/actions'
+
 import {
-  DEFAULT_ARCHER_ETH_TIP,
-  DEFAULT_ARCHER_GAS_ESTIMATE,
-  DEFAULT_ARCHER_GAS_PRICES,
-  DEFAULT_DEADLINE_FROM_NOW,
-  INITIAL_ALLOWED_SLIPPAGE,
-} from '../../constants'
-import {
-  SerializedPair,
-  SerializedToken,
   addSerializedPair,
   addSerializedToken,
   removeSerializedPair,
   removeSerializedToken,
+  SerializedPair,
+  SerializedToken,
   toggleURLWarning,
   updateMatchesDarkMode,
-  updateUserArcherETHTip,
-  updateUserArcherGasEstimate,
-  updateUserArcherGasPrice,
-  updateUserArcherTipManualOverride,
-  updateUserArcherUseRelay,
   updateUserDarkMode,
   updateUserDeadline,
   updateUserExpertMode,
   updateUserSingleHopOnly,
   updateUserSlippageTolerance,
+  updateUserUseOpenMev,
 } from './actions'
-
-import { createReducer } from '@reduxjs/toolkit'
-import { updateVersion } from '../global/actions'
 
 const currentTimestamp = () => new Date().getTime()
 
 export interface UserState {
   // the timestamp of the last updateVersion action
   lastUpdateVersionTimestamp?: number
-
-  userDarkMode: boolean | null // the user's choice for dark mode or light mode
-  matchesDarkMode: boolean // whether the dark mode media query matches
 
   userExpertMode: boolean
 
@@ -47,6 +34,9 @@ export interface UserState {
 
   // deadline set by user in minutes, used in all txns
   userDeadline: number
+
+  // true if OpenMEV protection is enabled
+  userUseOpenMev: boolean
 
   tokens: {
     [chainId: number]: {
@@ -62,13 +52,10 @@ export interface UserState {
   }
 
   timestamp: number
-  URLWarningVisible: boolean
+  userDarkMode: boolean | null // the user's choice for dark mode or light mode
+  matchesDarkMode: boolean // whether the dark mode media query matches
 
-  userArcherUseRelay: boolean // use relay or go directly to router
-  userArcherGasPrice: string // Current gas price
-  userArcherETHTip: string // ETH tip for relay, as full BigInt string
-  userArcherGasEstimate: string // Gas estimate for trade
-  userArcherTipManualOverride: boolean // is user manually entering tip
+  URLWarningVisible: boolean
 }
 
 function pairKey(token0Address: string, token1Address: string) {
@@ -76,8 +63,6 @@ function pairKey(token0Address: string, token1Address: string) {
 }
 
 export const initialState: UserState = {
-  userDarkMode: null,
-  matchesDarkMode: false,
   userExpertMode: false,
   userSingleHopOnly: false,
   userSlippageTolerance: INITIAL_ALLOWED_SLIPPAGE,
@@ -85,12 +70,10 @@ export const initialState: UserState = {
   tokens: {},
   pairs: {},
   timestamp: currentTimestamp(),
+  userDarkMode: null,
+  matchesDarkMode: false,
   URLWarningVisible: true,
-  userArcherUseRelay: false,
-  userArcherGasPrice: DEFAULT_ARCHER_GAS_PRICES[4].toString(),
-  userArcherETHTip: DEFAULT_ARCHER_ETH_TIP.toString(),
-  userArcherGasEstimate: DEFAULT_ARCHER_GAS_ESTIMATE.toString(),
-  userArcherTipManualOverride: false,
+  userUseOpenMev: true,
 }
 
 export default createReducer(initialState, (builder) =>
@@ -165,19 +148,7 @@ export default createReducer(initialState, (builder) =>
     .addCase(toggleURLWarning, (state) => {
       state.URLWarningVisible = !state.URLWarningVisible
     })
-    .addCase(updateUserArcherUseRelay, (state, action) => {
-      state.userArcherUseRelay = action.payload.userArcherUseRelay
-    })
-    .addCase(updateUserArcherGasPrice, (state, action) => {
-      state.userArcherGasPrice = action.payload.userArcherGasPrice
-    })
-    .addCase(updateUserArcherETHTip, (state, action) => {
-      state.userArcherETHTip = action.payload.userArcherETHTip
-    })
-    .addCase(updateUserArcherGasEstimate, (state, action) => {
-      state.userArcherGasEstimate = action.payload.userArcherGasEstimate
-    })
-    .addCase(updateUserArcherTipManualOverride, (state, action) => {
-      state.userArcherTipManualOverride = action.payload.userArcherTipManualOverride
+    .addCase(updateUserUseOpenMev, (state, action) => {
+      state.userUseOpenMev = action.payload.userUseOpenMev
     })
 )

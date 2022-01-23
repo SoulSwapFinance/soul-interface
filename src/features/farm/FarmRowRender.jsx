@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 import { ethers } from 'ethers'
 
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 
 import useSoulSummoner from './hooks/useSoulSummoner'
 import useApprove from './hooks/useApprove'

@@ -4,7 +4,7 @@ import { useMultipleContractSingleData, useSingleContractMultipleData } from '..
 import ERC20_ABI from '../../constants/abis/erc20.json'
 import { Interface } from '@ethersproject/abi'
 import { isAddress } from '../../functions/validate'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useAllTokens } from '../../hooks/Tokens'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useMulticall2Contract } from '../../hooks/useContract'

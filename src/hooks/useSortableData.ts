@@ -3,8 +3,8 @@ import { useMemo, useState } from 'react'
 import { BigNumber } from '@ethersproject/bignumber'
 
 export enum SortableOptions {
-  // 'tvl' = 'TVL',
-  // 'roiPerYear' = 'APY',
+  'tvl' = 'TVL',
+  'roiPerYear' = 'APY',
   'rewards' = 'SOUL'
 }
 

@@ -24,14 +24,14 @@ import { calculateGasMargin } from '../functions/trade'
 import { ethers } from 'ethers'
 import { shortenAddress } from '../functions/format'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from './useActiveWeb3React'
 import { useArgentWalletContract } from './useArgentWalletContract'
 import { useBlockNumber } from '../state/application/hooks'
 import useENS from './useENS'
 import { useMemo } from 'react'
 import { useTransactionAdder } from '../state/transactions/hooks'
 import useTransactionDeadline from './useTransactionDeadline'
-import { useUserArcherETHTip } from '../state/user/hooks'
+import { useActiveWeb3React } from 'services/web3'
+// import { useUserArcherETHTip } from '../state/user/hooks'
 
 export enum SwapCallbackState {
   INVALID,
@@ -86,7 +86,7 @@ export function useSwapCallArguments(
 
   const argentWalletContract = useArgentWalletContract()
 
-  const [archerETHTip] = useUserArcherETHTip()
+  // const [archerETHTip] = useUserArcherETHTip()
 
   return useMemo(() => {
     if (!trade || !recipient || !library || !account || !chainId || !deadline) return []
@@ -120,7 +120,7 @@ export function useSwapCallArguments(
             allowedSlippage,
             recipient,
             ttl: deadline.toNumber(),
-            ethTip: CurrencyAmount.fromRawAmount(Ether.onChain(ChainId.MAINNET), archerETHTip),
+            // ethTip: CurrencyAmount.fromRawAmount(Ether.onChain(ChainId.MAINNET), archerETHTip),
           })
         )
       }
@@ -153,7 +153,7 @@ export function useSwapCallArguments(
   }, [
     account,
     allowedSlippage,
-    archerETHTip,
+    // archerETHTip,
     argentWalletContract,
     chainId,
     deadline,
@@ -240,7 +240,7 @@ export function useSwapCallback(
 
   const recipient = recipientAddressOrName === null ? account : recipientAddress
 
-  const [archerETHTip] = useUserArcherETHTip()
+  // const [archerETHTip] = useUserArcherETHTip()
 
   return useMemo(() => {
     if (!trade || !library || !account || !chainId) {
@@ -530,7 +530,7 @@ export function useSwapCallback(
                       rawTransaction: signedTx,
                       deadline: Math.floor(archerRelayDeadline + new Date().getTime() / 1000),
                       nonce: ethers.BigNumber.from(fullTx.nonce).toNumber(),
-                      ethTip: archerETHTip,
+                      // ethTip: archerETHTip,
                     }
                   : undefined
               // console.log('archer', archer)
@@ -538,7 +538,7 @@ export function useSwapCallback(
                 { hash },
                 {
                   summary: withRecipient,
-                  archer,
+                  // archer,
                 }
               )
               return archer ? postToRelay(archer.rawTransaction, archer.deadline).then(() => hash) : hash
@@ -560,5 +560,5 @@ export function useSwapCallback(
       },
       error: null,
     }
-  }, [trade, library, account, chainId, recipient, recipientAddressOrName, swapCalls, useArcher, addTransaction, archerRelayDeadline, archerETHTip])
+  }, [trade, library, account, chainId, recipient, recipientAddressOrName, swapCalls, useArcher, addTransaction, archerRelayDeadline])
 }

@@ -1,8 +1,8 @@
 import { BscConnector } from '@binance-chain/bsc-connector'
-// import { ChainId } from '../sdk'
-import { FortmaticConnector } from '../entities/FortmaticConnector'
+// import { ChainId } from 'sdk'
+import { FortmaticConnector } from 'entities/connectors/FortmaticConnector'
 import { InjectedConnector } from '@web3-react/injected-connector'
-import { NetworkConnector } from '../entities/NetworkConnector'
+import { NetworkConnector } from 'entities/connectors/NetworkConnector'
 import { PortisConnector } from '@web3-react/portis-connector'
 import { TorusConnector } from '@web3-react/torus-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
@@ -20,7 +20,8 @@ enum ChainId { // TODO
 export const RPC = {
   [ChainId.MAINNET]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
   [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
-  [ChainId.FANTOM]: 'https://rpcapi.fantom.network/',
+  [ChainId.FANTOM]: 'https://rpc.ftm.tools/',
+  // [ChainId.FANTOM]: 'https://rpcapi.fantom.network/',
   // [ChainId.FANTOM_TESTNET]: 'https://rpc.testnet.fantom.network',
   // [ChainId.ROPSTEN]: 'https://eth-ropsten.alchemyapi.io/v2/cidKix2Xr-snU3f6f6Zjq_rYdalKKHmW',
   // [ChainId.RINKEBY]: 'https://eth-rinkeby.alchemyapi.io/v2/XVLwDlhGP6ApBXFz_lfv0aZ6VmurWhYD',
@@ -54,7 +55,7 @@ export function getNetwork(defaultChainId, urls = RPC) {
 }
 
 export const network = new NetworkConnector({
-  defaultChainId: 1,
+  defaultChainId: 250,
   urls: RPC,
 })
 
@@ -66,7 +67,7 @@ export function getNetworkLibrary(): Web3Provider {
 
 const supportedChainIds = [
   1, // mainnet
-  // 56, // binance smart chain
+  56, // binance smart chain
   250, // fantom
   // 4002, // fantom testnet
   // 3, // ropsten
@@ -99,7 +100,7 @@ export const injected = new InjectedConnector({
 
 // mainnet only
 export const walletconnect = new WalletConnectConnector({
-  rpc: { [ChainId.MAINNET]: RPC[ChainId.MAINNET] },
+  rpc: RPC,
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   supportedChainIds,

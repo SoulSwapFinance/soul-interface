@@ -9,11 +9,10 @@ import Alert from '../Alert'
 import { AutoColumn } from '../Column'
 import { BIG_INT_ZERO } from '../../constants'
 import { Button } from '../Button'
-import CurrencyLogo from '../CurrencyLogo'
+import { CurrencyLogo } from '../CurrencyLogo'
 import Dots from '../Dots'
 import DoubleCurrencyLogo from '../DoubleLogo'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useColor } from '../../hooks'
 import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
@@ -25,6 +24,7 @@ import { useSingleCallResult } from 'state/multicall/hooks'
 import { useCurrency } from 'hooks/Tokens'
 import { usePriceHelperContract } from 'features/bond/hooks/useContract'
 import { useUserInfo } from 'features/mines/hooks'
+import { useActiveWeb3React } from 'services/web3'
 
 interface PositionCardProps {
   pair: Pair
@@ -121,7 +121,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
 export default function FullPositionCard({ pair, border, stakedBalance }: PositionCardProps) {
   const { i18n } = useLingui()
   const router = useRouter()
-  const { account, chainId } = useActiveWeb3React()
+  const { account } = useActiveWeb3React()
 
   const currency0 = unwrappedToken(pair.token0)
   const currency1 = unwrappedToken(pair.token1)
@@ -173,25 +173,29 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
   let [data] = useV2PairsWithPrice([[currency0, currency1]])
   let [state, liquidityToken, pairPrice] = data
   
-  const balanceFiatValueRaw
-    = pair?.token1 ? Number(pairPrice) * Number(balance?.toSignificant())
-    : Number(soulPrice) * Number(balance?.toSignificant())
+  // const balanceFiatValueRaw
+  //   = pair?.token1 ? Number(pairPrice) * Number(balance?.toSignificant())
+  //   : Number(soulPrice) * Number(balance?.toSignificant())
   
   const pooledAmountFiatValueRaw
     = pair?.token1 ? Number(pairPrice) * Number(userPoolBalance?.toSignificant())
     : Number(soulPrice) * Number(userPoolBalance?.toSignificant())
   
-  const balanceFiatValue
-    = CurrencyAmount.fromRawAmount(
-      USD[chainId],
-      JSBI.BigInt(balanceFiatValueRaw.toFixed(USD[chainId].decimals).toBigNumber(USD[chainId].decimals))
-    )
+  // const balanceFiatValue
+  //   = CurrencyAmount.fromRawAmount(
+  //     USD[chainId],
+  //     JSBI.BigInt(balanceFiatValueRaw.toFixed(USD[chainId].decimals)
+  //     // .toBigNumber(USD[chainId].decimals)
+  //     )
+  //   )
   
-  const pooledAmountFiatValue
-    = CurrencyAmount.fromRawAmount(
-      USD[chainId],
-      JSBI.BigInt(pooledAmountFiatValueRaw.toFixed(USD[chainId].decimals).toBigNumber(USD[chainId].decimals))
-    )
+  // const pooledAmountFiatValue
+  //   = CurrencyAmount.fromRawAmount(
+  //     USD[chainId],
+  //     JSBI.BigInt(pooledAmountFiatValueRaw.toFixed(USD[chainId].decimals)
+  //     // .toBigNumber(USD[chainId].decimals)
+  //     )
+  //   )
   
   return (
     <div
@@ -275,8 +279,9 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
             <div className="flex items-center justify-between">
               <div>{i18n._(t`Deposited Value`)}:</div>
               <div className="font-semibold">
-                ${userPoolBalance 
-                  ? pooledAmountFiatValue?.toSignificant(6, { groupSeparator: ',' }) // ?.toSignificant(4) */}
+                ${userPoolBalance ? pooledAmountFiatValueRaw?.toPrecision(4)
+                  // ? pooledAmountFiatValue
+                // ?.toSignificant(6, { groupSeparator: ',' }) // ?.toSignificant(4) */}
                   : 0}
               </div>
             </div>
