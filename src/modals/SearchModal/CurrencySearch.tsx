@@ -168,7 +168,7 @@ export function CurrencySearch({
           </Typography>
         )}
       </div>
-      {/* {allowManageTokenList && (
+      {allowManageTokenList && (
         <div className="flex justify-center">
           <Button
             size="sm"
@@ -180,7 +180,7 @@ export function CurrencySearch({
             {i18n._(t`Manage Token Lists`)}
           </Button>
         </div>
-      )} */}
+      )}
     </>
   )
 }
