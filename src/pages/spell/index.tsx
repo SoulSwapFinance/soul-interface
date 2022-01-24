@@ -296,7 +296,7 @@ export default function SoulStake() {
               </div>
             </div>
             <div className="max-w-lg pr-3 mb-2 text-sm leading-5 text-gray-500 md:text-base md:mb-4 md:pr-0">
-              {i18n._(t`When your SOUL is staked into the Circle, you recieve SEANCE in return for voting rights and a fully composable 
+              {i18n._(t`When your SOUL is staked into the Circle, you receive SEANCE in return for voting rights and a fully composable 
               token that can interact with other protocols. Your SEANCE is continuously compounding, when you unstake you will receive all 
               the originally deposited SOUL, your SOUL harvest rewards, and (soon) fee share.`)}
             </div>

@@ -1,16 +1,18 @@
-import { NETWORK_ICON, NETWORK_LABEL } from '../../constants/networks'
+import { NETWORK_ICON, NETWORK_LABEL } from 'constants/networks'
 
 import Image from 'next/image'
-// import NetworkModel from '../../modals/NetworkModal'
-import TokensStatsModal, { formatCurrency } from '../../modals/TokensStatsModal'
+// import NetworkModel from 'modals/NetworkModal'
+import TokensStatsModal, { formatCurrency } from 'modals/TokensStatsModal'
 import React from 'react'
-import { useModalOpen, useToggleTokenStatsModal } from '../../state/application/hooks'
-import { ApplicationModal } from '../../state/application/actions'
-import { useSingleCallResult } from '../../state/multicall/hooks'
-import { usePriceHelperContract } from '../../features/bond/hooks/useContract'
+import { useModalOpen, useToggleTokenStatsModal } from 'state/application/hooks'
+import { ApplicationModal } from 'state/application/actions'
+import { useSingleCallResult } from 'state/multicall/hooks'
+import { usePriceHelperContract } from 'features/bond/hooks/useContract'
 import styled from 'styled-components'
 import { useActiveWeb3React } from 'services/web3'
 import { usePriceApi } from 'features/vault/hooks'
+import { SEANCE_ADDRESS, SOUL_ADDRESS } from 'constants/addresses'
+import { usePrice } from 'hooks/usePrice'
 const HideOnMobile = styled.div`
 @media screen and (max-width: 500px) {
   display: none;
@@ -21,18 +23,9 @@ function TokenStats(): JSX.Element | null {
 
   const { chainId } = useActiveWeb3React()
   const toggleTokenStatsModal = useToggleTokenStatsModal()
-  // const open = useModalOpen(ApplicationModal.SOUL_STATS)
-
-  const priceHelperContract = usePriceHelperContract()
-  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07']).result
-  // console.log(Number(rawSoulPrice))
-  const soulPrice = formatCurrency(Number(rawSoulPrice) / 1E18, 3)
-  // console.log(soulPrice)
-
-  const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6']).result
-  // console.log(Number(rawSeancePrice))
-  const seancePrice = formatCurrency(Number(rawSeancePrice) / 1E18, 3)
-  // console.log(seancePrice)
+  const open = useModalOpen(ApplicationModal.SOUL_STATS)
+  const soulPrice = usePrice(SOUL_ADDRESS[chainId])
+  const seancePrice = usePrice(SEANCE_ADDRESS[chainId])
 
   if (!chainId) return null
 
@@ -52,7 +45,7 @@ function TokenStats(): JSX.Element | null {
           className="rounded-md"
         />
         <HideOnMobile>
-          <div className="text-primary">{ seancePrice }</div>
+          <div className="text-primary">{ formatCurrency(seancePrice, 3) }</div>
         </HideOnMobile>
       </div>
 
@@ -65,7 +58,7 @@ function TokenStats(): JSX.Element | null {
           objectFit="contain"
           className="rounded-md"
         />
-          <div className="text-primary">{ soulPrice }</div>
+          <div className="text-primary">{ formatCurrency(soulPrice, 3) }</div>
       </div>
       <TokensStatsModal />
     </div>

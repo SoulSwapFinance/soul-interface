@@ -200,7 +200,7 @@ const AssetInputPanel = ({
                   className="!rounded-full"
                   endIcon={<ChevronDownIcon width={24} height={24} />}
                 >
-                  {i18n._(t`Select a Token`)}
+                  {i18n._(t`Select Token`)}
                 </Button>
               </div>
             }

@@ -220,7 +220,7 @@ const NetworkModal: FC = () => {
   return (
     <HeadlessUiModal.Controlled isOpen={networkModalOpen} onDismiss={toggleNetworkModal}>
       <div className="flex flex-col gap-4">
-        <HeadlessUiModal.Header header={i18n._(t`Select a network`)} onClose={toggleNetworkModal} />
+        <HeadlessUiModal.Header header={i18n._(t`Select Network`)} onClose={toggleNetworkModal} />
         <div className="grid grid-flow-row-dense grid-cols-1 gap-4 overflow-y-auto md:grid-cols-2">
           {[
             ChainId.MAINNET,

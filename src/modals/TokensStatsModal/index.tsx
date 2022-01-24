@@ -20,6 +20,7 @@ import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
 import ModalHeader from 'components/Modal/Header'
+import { usePrice } from 'hooks/usePrice'
 
 const cache: { [key: string]: number } = {};
 
@@ -37,19 +38,10 @@ export default function SoulStatsModal(): JSX.Element | null {
   const { chainId, library, account } = useActiveWeb3React()
   const soulStatsModalOpen = useModalOpen(ApplicationModal.SOUL_STATS)
   const toggleSoulStatsModal = useToggleTokenStatsModal()
-  const priceHelperContract = usePriceHelperContract()
   let tokenInfo = useTokenInfo(useSoulContract())
   let seanceInfo = useTokenInfo(useSeanceContract())
-  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
-  // console.log(Number(rawSoulPrice))
-  const soulPrice = formatCurrency(Number(rawSoulPrice) / 1E18, 2)
-  // console.log(soulPrice)
-
-  const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6'])?.result
-  // console.log(Number(rawSeancePrice))
-  const seancePrice = formatCurrency(Number(rawSeancePrice) / 1E18, 2)
-  // console.log(seancePrice)
-
+  const soulPrice = usePrice(SOUL_ADDRESS[chainId])
+  const seancePrice = usePrice(SEANCE_ADDRESS[chainId])
   const tvlInfo = useTVL()
 
   let summTvl = tvlInfo?.reduce((previousValue, currentValue) => {
@@ -251,7 +243,7 @@ export default function SoulStatsModal(): JSX.Element | null {
             {`Total Market Cap`}
           </Typography>,
           formatCurrency(
-            Number(tokenInfo?.totalSupply) * Number(rawSoulPrice) / 1E18, 0)
+            Number(tokenInfo?.totalSupply) * soulPrice)
         )}
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
@@ -265,14 +257,14 @@ export default function SoulStatsModal(): JSX.Element | null {
             {`Soul Market Price`}
           </Typography>,
           formatCurrency(
-            Number(rawSoulPrice) / 1E18, 2)
+            soulPrice, 2)
         )}
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Seance Market Price`}
           </Typography>,
           formatCurrency(
-            Number(rawSeancePrice) / 1E18, 2)
+            seancePrice, 2)
         )}
         <div className="flex mt-3" />
         {/* <div className="flex"> */}
