@@ -57,7 +57,7 @@ export const getCustomDay = async (chainId = ChainId.MAINNET, days: number) => {
 
 // Grabs the last 1000 (a sample statistical) blocks and averages
 // the time difference between them
-export const getAverageBlock = async (chainId = ChainId.MAINNET) => {
+export const getAverageBlock = async (chainId = ChainId.FANTOM) => {
   // console.log('getAverageBlockTime')
   const now = startOfHour(Date.now())
   const start = getUnixTime(subHours(now, 6))

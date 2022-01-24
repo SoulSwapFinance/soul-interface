@@ -76,7 +76,7 @@ function AppBar(): JSX.Element {
                           {i18n._(t`BOND`)}
                         </a>
                       </NavLink>
-                      <NavLink href={'/analytics'}>
+                      <NavLink href={'/info'}>
                         <a
                           id={`analytics-nav-link`}
                           className="w-full relative ml-6 md:p-2"

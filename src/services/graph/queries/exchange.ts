@@ -1,11 +1,12 @@
+
 import gql from 'graphql-tag'
 
 export const factoryQuery = gql`
   query factoryQuery($block: Block_height) {
     factories(first: 1, block: $block) {
       id
-      totalVolumeUSD
-      totalLiquidityUSD
+      volumeUSD
+      liquidityUSD
     }
   }
 `
@@ -107,7 +108,7 @@ export const pairFieldsQuery = gql`
     token1Price
     totalSupply
     txCount
-    createdAtTimestamp
+    timestamp
   }
   fragment PairToken on Token {
     id
@@ -147,7 +148,7 @@ export const pairDayDatasQuery = gql`
   query pairDayDatasQuery($first: Int = 1000, $skip: Int, $block: Block_height, $where: PairDayData_filter) {
     pairDayDatas(first: $first, skip: $skip, orderBy: date, orderDirection: desc, where: $where, block: $block) {
       date
-      pairAddress {
+      pair {
         id
       }
       token0 {
@@ -157,10 +158,10 @@ export const pairDayDatasQuery = gql`
         derivedETH
       }
       reserveUSD
-      dailyVolumeToken0
-      dailyVolumeToken1
-      dailyVolumeUSD
-      dailyTxns
+      volumeToken0
+      volumeToken1
+      volumeUSD
+      txCount
     }
   }
 `
@@ -230,11 +231,11 @@ export const tokenFieldsQuery = gql`
     name
     decimals
     totalSupply
-    tradeVolumme
-    tradeVolumeUSD
+    volume
+    volumeUSD
     untrackedVolumeUSD
     txCount
-    totalLiquidity
+    liquidity
     derivedETH
   }
 `
@@ -264,10 +265,10 @@ export const tokenDayDatasQuery = gql`
       token {
         id
       }
-      dailyVolumeUSD
-      totalLiquidityUSD
+      volumeUSD
+      liquidityUSD
       priceUSD
-      dailyTxns
+      txCount
     }
   }
 `
@@ -302,7 +303,7 @@ export const tokensQuery = gql`
   query tokensQuery($first: Int! = 1000, $skip: Int, $block: Block_height, $where: Token_filter) {
     tokens(first: $first, skip: $skip, orderBy: volumeUSD, orderDirection: desc, block: $block, where: $where) {
       ...tokenFields
-      uniswapDayData(first: 7, orderBy: date, orderDirection: desc) {
+      dayData(first: 7, orderBy: date, orderDirection: desc) {
         id
         priceUSD
         date
