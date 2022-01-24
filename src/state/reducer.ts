@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import mines from '../features/mines/minesSlice'
+import mines from 'features/mines/minesSlice'
 // import tridentAdd from '../features/trident/add/addSlice'
 // import tridentBalances from '../features/trident/balances/balancesSlice'
 // import tridentCreate from '../features/trident/create/createSlice'
@@ -13,7 +13,7 @@ import burn from './burn/reducer'
 import create from './create/reducer'
 import web3Context from './global/web3ContextSlice'
 // import inari from './inari/reducer'
-// import limitOrder from './limit-order/reducer'
+import limitOrder from './limit-order/reducer'
 import lists from './lists/reducer'
 import mint from './mint/reducer'
 import multicall from './multicall/reducer'
@@ -31,7 +31,7 @@ const reducer = combineReducers({
   burn,
   multicall,
   lists,
-  // limitOrder,
+  limitOrder,
   create,
   // inari,
   mines,

@@ -1,383 +1,314 @@
-// import { ChainId, Token } from '../../../sdk'
-// import React, { useCallback, useEffect, useMemo, useState } from 'react'
-// import { formatPercent, maxAmountSpend, tryParseAmount } from '../../../functions'
-// import { useAllTokens, useCurrency } from '../../../hooks/Tokens'
-// import {
-//   useDefaultsFromURLSearch,
-//   // useDerivedLimitOrderInfo,
-//   useLimitOrderActionHandlers,
-//   useLimitOrderState,
-// } from '../../../state/limit-order/hooks'
+import { ArrowDownIcon } from '@heroicons/react/outline'
+import { t } from '@lingui/macro'
+import { useLingui } from '@lingui/react'
+import { Percent, ZERO } from 'sdk'
+import limitOrderPairList from '@sushiswap/limit-order-pair-list/dist/limit-order.pairlist.json'
+import swapArrowsAnimationData from 'animation/swap-arrows.json'
+import AddressInputPanel from 'components/AddressInputPanel'
+import Container from 'components/Container'
+import DoubleGlowShadow from 'components/DoubleGlowShadow'
+import ExpertModePanel from 'components/ExpertModePanel'
+import Typography from 'components/Typography'
+import { Feature } from 'enums'
+import BalancePanel from 'features/limit-order/BalancePanel'
+import CurrencyInput from 'features/limit-order/CurrencyInput'
+import CurrencyInputPanel from 'features/limit-order/CurrencyInputPanel'
+import CurrencySelect from 'features/limit-order/CurrencySelect'
+import LimitOrderButton from 'features/limit-order/LimitOrderButton'
+import LimitOrderReviewModal from 'features/limit-order/LimitOrderReviewModal'
+import LimitPriceInputPanel from 'features/limit-order/LimitPriceInputPanel'
+import OrderExpirationDropdown from 'features/limit-order/OrderExpirationDropdown'
+import PayFromToggle from 'features/limit-order/PayFromToggle'
+import PriceRatio from 'features/limit-order/PriceRatio'
+import ExchangeHeader from 'features/trade/Header'
+import { classNames, maxAmountSpend } from 'functions'
+import NetworkGuard from 'guards/Network'
+import { useBentoOrWalletBalances } from 'hooks/useBentoOrWalletBalance'
+import { useActiveWeb3React } from 'services/web3'
+import { Field } from 'state/limit-order/actions'
+import useLimitOrderDerivedCurrencies, {
+    useLimitOrderActionHandlers,
+    useLimitOrderDerivedLimitPrice,
+    useLimitOrderDerivedParsedAmounts,
+    useLimitOrderDerivedTrade,
+    useLimitOrderState,
+} from 'state/limit-order/hooks'
+import { useExpertModeManager } from 'state/user/hooks'
+import Lottie from 'lottie-react'
+import Head from 'next/head'
+import React, { useCallback, useMemo, useState } from 'react'
 
-// import AddressInputPanel from '../../../components/AddressInputPanel'
-// import { ArrowDownIcon } from '@heroicons/react/outline'
-// import BalancePanel from '../../../features/limit-order/BalancePanel'
-// import Container from '../../../components/Container'
-// import CurrencyInput from '../../../features/limit-order/CurrencyInput'
-// import CurrencyInputPanel from '../../../features/limit-order/CurrencyInputPanel'
-// import CurrencySelect from '../../../features/limit-order/CurrencySelect'
-// import DoubleGlowShadow from '../../../components/DoubleGlowShadow'
-// import ExchangeHeader from '../../../components/ExchangeHeader'
-// import { ExclamationIcon } from '@heroicons/react/solid'
-// import ExpertModePanel from '../../../components/ExpertModePanel'
-// import { Field } from '../../../state/swap/actions'
-// import Head from 'next/head'
-// import LimitOrderButton from '../../../features/limit-order/LimitOrderButton'
-// import LimitPriceInputPanel from '../../../features/limit-order/LimitPriceInputPanel'
-// import Lottie from 'lottie-react'
-// import NetworkGuard from '../../../guards/Network'
-// import OrderExpirationDropdown from '../../../features/limit-order/OrderExpirationDropdown'
-// import PayFromToggle from '../../../features/limit-order/PayFromToggle'
-// import PriceRatio from '../../../features/limit-order/PriceRatio'
-// import TokenWarningModal from '../../../modals/TokenWarningModal'
-// import Typography from '../../../components/Typography'
-// import limitOrderPairList from '@sushiswap/limit-order-pair-list/dist/limit-order.pairlist.json'
-// import swapArrowsAnimationData from '../../../animation/swap-arrows.json'
-// import { t } from '@lingui/macro'
-// import { useActiveWeb3React } from 'services/web3'
-// import { useExpertModeManager } from '../../../state/user/hooks'
-// import { useLingui } from '@lingui/react'
-
-// const areEqual = (first, second) => {
-//   if (first.length !== second.length) {
-//     return false
-//   }
-//   for (let i = 0; i < first.length; i++) {
-//     if (!second.includes(first[i])) {
-//       return false
-//     }
-//   }
-//   return true
-// }
-
-function LimitOrder() {
-//   const { i18n } = useLingui()
-//   const { chainId } = useActiveWeb3React()
-
-//   const loadedUrlParams = useDefaultsFromURLSearch()
-//   const [loadedInputCurrency, loadedOutputCurrency] = [
-//     useCurrency(loadedUrlParams?.inputCurrencyId),
-//     useCurrency(loadedUrlParams?.outputCurrencyId),
-//   ]
-
-//   const pairs = (limitOrderPairList.pairs[chainId] || []).map(([token0, token1]) => [token0.address, token1.address])
-
-//   // token warning stuff
-//   const [dismissTokenWarning, setDismissTokenWarning] = useState<boolean>(false)
-
-//   const urlLoadedTokens: Token[] = useMemo(
-//     () => [loadedInputCurrency, loadedOutputCurrency]?.filter((c): c is Token => c instanceof Token) ?? [],
-//     [loadedInputCurrency, loadedOutputCurrency]
-//   )
-//   const handleConfirmTokenWarning = useCallback(() => {
-//     setDismissTokenWarning(true)
-//   }, [])
-
-//   // dismiss warning if all imported tokens are in active lists
-//   const defaultTokens = useAllTokens()
-//   const importTokensNotInDefault =
-//     urlLoadedTokens &&
-//     urlLoadedTokens.filter((token: Token) => {
-//       return !Boolean(token.address in defaultTokens)
-//     })
-
-//   // for expert mode
-//   const [isExpertMode, toggleExpertMode] = useExpertModeManager()
-
-//   // Limit order state
-//   const { independentField, typedValue, recipient, limitPrice, fromBentoBalance } = useLimitOrderState()
-
-//   // Limit order derived state
-//   const { currencies, parsedAmounts, walletBalances, bentoboxBalances, currentPrice } = useDerivedLimitOrderInfo()
-
-//   // Limit order state handlers
-//   const { onSwitchTokens, onCurrencySelection, onUserInput, onChangeRecipient } = useLimitOrderActionHandlers()
-
-//   const dependentField: Field = independentField === Field.INPUT ? Field.OUTPUT : Field.INPUT
-
-//   const formattedAmounts = {
-//     [independentField]: typedValue,
-//     [dependentField]: parsedAmounts[dependentField]?.toSignificant(6) ?? '',
-//   }
-
-//   const maxAmountInput = maxAmountSpend(walletBalances[Field.INPUT])
-
-//   const atMaxAmountInput = Boolean(
-//     fromBentoBalance
-//       ? parsedAmounts[Field.INPUT]?.equalTo(bentoboxBalances[Field.INPUT])
-//       : maxAmountInput && parsedAmounts[Field.INPUT]?.equalTo(maxAmountInput)
-//   )
-
-//   const handleInputSelect = useCallback(
-//     (inputCurrency) => {
-//       onCurrencySelection(Field.INPUT, inputCurrency)
-//     },
-//     [onCurrencySelection]
-//   )
-
-//   const handleMaxInput = useCallback(() => {
-//     if (fromBentoBalance) {
-//       onUserInput(Field.INPUT, bentoboxBalances[Field.INPUT].toExact())
-//     } else {
-//       maxAmountInput && onUserInput(Field.INPUT, maxAmountInput.toExact())
-//     }
-//   }, [bentoboxBalances, fromBentoBalance, maxAmountInput, onUserInput])
-
-//   const handleOutputSelect = useCallback(
-//     (outputCurrency) => onCurrencySelection(Field.OUTPUT, outputCurrency),
-//     [onCurrencySelection]
-//   )
-
-//   const [animateSwapArrows, setAnimateSwapArrows] = useState<boolean>(false)
-
-//   const [currencyInputPanelError, setCurrencyInputPanelError] = useState<string>()
-
-//   const checkLimitPrice = useCallback(
-//     (limitPrice) => {
-//       const parsedLimitPrice = tryParseAmount(
-//         limitPrice,
-//         (dependentField === Field.INPUT ? currencies[Field.INPUT] : currencies[Field.OUTPUT]) ?? undefined
-//       )
-//       const parsedCurrentPrice = tryParseAmount(
-//         currentPrice?.toSignificant(6),
-//         (dependentField === Field.INPUT ? currencies[Field.INPUT] : currencies[Field.OUTPUT]) ?? undefined
-//       )
-
-//       if (parsedLimitPrice?.lessThan(parsedCurrentPrice)) {
-//         setCurrencyInputPanelError(i18n._(t`This transaction is below market rate`))
-//       } else {
-//         setCurrencyInputPanelError('')
-//       }
-//     },
-//     [currencies, currentPrice, dependentField, i18n]
-//   )
-
-//   const currencyInputPanelHelperText = useMemo(() => {
-//     const parsedLimitPrice = tryParseAmount(
-//       limitPrice,
-//       (dependentField === Field.INPUT ? currencies[Field.INPUT] : currencies[Field.OUTPUT]) ?? undefined
-//     )
-//     const parsedCurrentPrice = tryParseAmount(
-//       currentPrice?.toFixed(),
-//       (dependentField === Field.INPUT ? currencies[Field.INPUT] : currencies[Field.OUTPUT]) ?? undefined
-//     )
-
-//     if (!parsedLimitPrice || !parsedCurrentPrice || parsedLimitPrice.equalTo(parsedCurrentPrice)) return
-
-//     const sign = parsedLimitPrice.greaterThan(parsedCurrentPrice) ? i18n._(t`above`) : i18n._(t`below`)
-//     const pct = ((+limitPrice - +currentPrice?.toSignificant(6)) / +currentPrice?.toSignificant(6)) * 100
-//     return i18n._(t`${formatPercent(pct)} ${sign} market rate`)
-//   }, [limitPrice, dependentField, currencies, currentPrice, i18n])
-
-//   useEffect(() => {
-//     if (
-//       pairs &&
-//       currencies[Field.INPUT] &&
-//       currencies[Field.OUTPUT] &&
-//       !pairs.find((el) =>
-//         areEqual(el, [currencies[Field.INPUT].wrapped.address, currencies[Field.OUTPUT].wrapped.address])
-//       )
-//     ) {
-//       setCurrencyInputPanelError('Invalid pair')
-//     } else if (currencyInputPanelError === 'Invalid pair') {
-//       setCurrencyInputPanelError('')
-//     }
-//   }, [currencies, currencyInputPanelError, pairs])
-
-//   const inputTokenList = useMemo(() => {
-//     if (pairs.length === 0) return []
-//     return pairs.reduce((acc, [token0, token1]) => {
-//       acc.push(token0)
-//       acc.push(token1)
-//       return acc
-//     }, [])
-//   }, [pairs])
-
-//   const outputTokenList = useMemo(() => {
-//     if (pairs.length === 0) return []
-//     if (currencies[Field.INPUT]) {
-//       return pairs.reduce((acc, [token0, token1]) => {
-//         if (currencies[Field.INPUT].wrapped.address === token0) acc.push(token1)
-//         if (currencies[Field.INPUT].wrapped.address === token1) acc.push(token0)
-//         return acc
-//       }, [])
-//     }
-//     return pairs.reduce((acc, [token0, token1]) => {
-//       acc.push(token0)
-//       acc.push(token1)
-//       return acc
-//     }, [])
-//   }, [currencies, pairs])
-
-//   return (
-//     <Container id="limit-order-page" className="py-4 space-y-6 md:py-8 lg:py-12" maxWidth="2xl">
-//       <Head>
-//         <title>{i18n._(t`Limit order`)} | Soul</title>
-//         <meta
-//           name="description"
-//           content="SoulSwap allows for swapping of ERC20 compatible tokens across multiple networks"
-//         />
-//       </Head>
-//       <TokenWarningModal
-//         isOpen={importTokensNotInDefault.length > 0 && !dismissTokenWarning}
-//         tokens={importTokensNotInDefault}
-//         onConfirm={handleConfirmTokenWarning}
-//       />
-//       <ExpertModePanel
-//         active={isExpertMode}
-//         onClose={() => {
-//           onChangeRecipient(null)
-//           toggleExpertMode()
-//         }}
-//       >
-//         <DoubleGlowShadow>
-//           <div id="limit-order-page" className="flex flex-col gap-4 p-4 rounded bg-dark-900">
-//             <ExchangeHeader input={currencies[Field.INPUT]} output={currencies[Field.OUTPUT]} />
-//             <div className="flex flex-col gap-4">
-//               <CurrencyInputPanel
-//                 className="rounded-t"
-//                 id="swap-currency-input"
-//                 topAdornment={<PayFromToggle />}
-//                 bottomAdornment={<BalancePanel />}
-//                 selectComponent={
-//                   <CurrencySelect
-//                     currency={currencies[Field.INPUT]}
-//                     otherCurrency={currencies[Field.OUTPUT]}
-//                     label={i18n._(t`You pay`)}
-//                     onSelect={handleInputSelect}
-//                     currencyList={inputTokenList}
-//                     allowManageTokenList={false}
-//                   />
-//                 }
-//                 inputComponent={
-//                   <CurrencyInput
-//                     id="token-amount-input"
-//                     onMax={handleMaxInput}
-//                     showMaxButton={!atMaxAmountInput}
-//                     onUserInput={(value) => onUserInput(Field.INPUT, value)}
-//                     value={formattedAmounts[Field.INPUT]}
-//                   />
-//                 }
-//               />
-//               <div className="flex flex-row gap-5">
-//                 <div />
-//                 <div className="relative flex items-center">
-//                   <div className="z-0 absolute w-[2px] bg-dark-800 h-[calc(100%+32px)] top-[-16px] left-[calc(50%-1px)]" />
-//                   <button
-//                     className="z-10 rounded-full bg-dark-900 p-3px"
-//                     onClick={() => {
-//                       onSwitchTokens()
-//                     }}
-//                   >
-//                     <div
-//                       className="p-2 rounded-full bg-dark-800 hover:bg-dark-700"
-//                       onMouseEnter={() => setAnimateSwapArrows(true)}
-//                       onMouseLeave={() => setAnimateSwapArrows(false)}
-//                     >
-//                       <Lottie
-//                         animationData={swapArrowsAnimationData}
-//                         autoplay={animateSwapArrows}
-//                         loop={false}
-//                         className="w-[32px] h-[32px]"
-//                       />
-//                     </div>
-//                   </button>
-//                 </div>
-//                 <LimitPriceInputPanel onBlur={(val) => checkLimitPrice(val)} />
-//               </div>
-//               <CurrencyInputPanel
-//                 className="relative rounded z-1"
-//                 id="swap-currency-input"
-//                 selectComponent={
-//                   <CurrencySelect
-//                     disabled={!currencies[Field.INPUT]}
-//                     currency={currencies[Field.OUTPUT]}
-//                     otherCurrency={currencies[Field.INPUT]}
-//                     label={i18n._(t`You receive:`)}
-//                     onSelect={handleOutputSelect}
-//                     currencyList={outputTokenList}
-//                     includeNativeCurrency={false}
-//                     allowManageTokenList={false}
-//                   />
-//                 }
-//                 inputComponent={
-//                   <CurrencyInput
-//                     id="token-amount-output"
-//                     showMaxButton={false}
-//                     onUserInput={(value) => onUserInput(Field.OUTPUT, value)}
-//                     value={formattedAmounts[Field.OUTPUT]}
-//                     error={currencyInputPanelError}
-//                     endAdornment={
-//                       <div className="flex flex-col">
-//                         <span className="text-xs font-bold text-right text-high-emphesis">
-//                           {currencyInputPanelHelperText}
-//                         </span>
-//                       </div>
-//                     }
-//                   />
-//                 }
-//                 bottomAdornment={
-//                   currencyInputPanelError ? (
-//                     <div className="z-0 flex items-center justify-center py-2 -mt-2 rounded-b bg-red bg-opacity-20">
-//                       <div className="flex items-center gap-2 pt-2">
-//                         <ExclamationIcon className="text-red" width={24} height={24} />
-//                         <Typography variant="xs" weight={700}>
-//                           {currencyInputPanelError}
-//                         </Typography>
-//                       </div>
-//                     </div>
-//                   ) : (
-//                     <></>
-//                   )
-//                 }
-//               />
-//               {recipient !== null ? (
-//                 <>
-//                   <div className="relative left-9">
-//                     <ArrowDownIcon className="text-high-emphesis" strokeWidth={2} width={16} height={16} />
-//                   </div>
-//                   <AddressInputPanel id="recipient" value={recipient} onChange={onChangeRecipient} />
-//                 </>
-//               ) : null}
-//             </div>
-
-//             <div className="flex flex-col items-end justify-between w-full gap-4 md:flex-row md:items-center">
-//               {currencies[Field.INPUT] && currencies[Field.OUTPUT] && (
-//                 <div className="flex flex-1">
-//                   <PriceRatio />
-//                 </div>
-//               )}
-//               {isExpertMode && recipient === null && (
-//                 <div
-//                   className={`flex flex-1 ${
-//                     currencies[Field.INPUT] && currencies[Field.OUTPUT] ? 'justify-center' : ''
-//                   }`}
-//                 >
-//                   <div
-//                     className="flex items-center text-sm underline cursor-pointer text-blue"
-//                     onClick={() => onChangeRecipient('')}
-//                   >
-//                     {i18n._(t`Change Recipient`)}
-//                   </div>
-//                 </div>
-//               )}
-//               {!(currencies[Field.INPUT] && currencies[Field.OUTPUT]) && !(isExpertMode && recipient === null) && (
-//                 <div className="flex flex-1" />
-//               )}
-
-//               <OrderExpirationDropdown />
-//             </div>
-
-//             <div className="flex">
-//               <LimitOrderButton color="gradient" className="font-bold" currency={currencies[Field.INPUT]} />
-//             </div>
-//           </div>
-//         </DoubleGlowShadow>
-//       </ExpertModePanel>
-//     </Container>
-//   )
+// @ts-ignore TYPE NEEDS FIXING
+const areEqual = (first, second) => {
+    if (first.length !== second.length) {
+        return false
+    }
+    for (let i = 0; i < first.length; i++) {
+        if (!second.includes(first[i])) {
+            return false
+        }
+    }
+    return true
 }
 
-// LimitOrder.Guard = NetworkGuard([])
+const LimitOrder = () => {
+    const { i18n } = useLingui()
+    const { chainId, account } = useActiveWeb3React()
+    const [isExpertMode, toggleExpertMode] = useExpertModeManager()
+    const { typedField, typedValue, recipient, fromBentoBalance } = useLimitOrderState()
+    const { inputCurrency, outputCurrency } = useLimitOrderDerivedCurrencies()
+    const trade = useLimitOrderDerivedTrade()
+    const rate = useLimitOrderDerivedLimitPrice()
+    const parsedAmounts = useLimitOrderDerivedParsedAmounts({ rate, trade })
+    const { onSwitchTokens, onCurrencySelection, onUserInput, onChangeRecipient } = useLimitOrderActionHandlers()
+    const [animateSwapArrows, setAnimateSwapArrows] = useState<boolean>(false)
+    const pairs = useMemo(
+        // @ts-ignore TYPE NEEDS FIXING
+        () => (limitOrderPairList.pairs[chainId || 1] || []).map(([token0, token1]) => [token0.address, token1.address]),
+        [chainId]
+    )
+
+    const [walletBalance, bentoBalance] = useBentoOrWalletBalances(
+        account ?? undefined,
+        [inputCurrency, inputCurrency],
+        [true, false]
+    )
+
+    const maxAmountInput = maxAmountSpend(walletBalance)
+    const atMaxAmountInput = bentoBalance
+        ? Boolean(
+            fromBentoBalance
+                ? trade?.inputAmount?.equalTo(bentoBalance)
+                : maxAmountInput && trade?.inputAmount?.equalTo(maxAmountInput)
+        )
+        : undefined
+
+    const handleMaxInput = useCallback(() => {
+        if (fromBentoBalance) {
+            bentoBalance && onUserInput(Field.INPUT, bentoBalance.toExact())
+        } else {
+            maxAmountInput && onUserInput(Field.INPUT, maxAmountInput.toExact())
+        }
+    }, [bentoBalance, fromBentoBalance, maxAmountInput, onUserInput])
+
+    const inputPanelHelperText = useMemo(() => {
+        if (
+            pairs &&
+            inputCurrency &&
+            outputCurrency &&
+            // @ts-ignore TYPE NEEDS FIXING
+            !pairs.find((el) => areEqual(el, [inputCurrency.wrapped.address, outputCurrency.wrapped.address]))
+        ) {
+            return { type: 'error', msg: 'Invalid pair' }
+        }
+
+        if (rate && trade) {
+            const { numerator, denominator } = rate.subtract(trade.executionPrice).divide(trade.executionPrice)
+            const deviation = new Percent(numerator, denominator)
+            if (deviation.lessThan(ZERO)) {
+                return { type: 'error', msg: i18n._(t`This transaction is ${deviation.toSignificant(2)}% below market rate`) }
+            } else {
+                return { type: 'info', msg: i18n._(t`This transaction is ${deviation.toSignificant(2)}% above market rate`) }
+            }
+        }
+    }, [i18n, inputCurrency, rate, outputCurrency, pairs, trade])
+
+    const inputTokenList = useMemo(() => {
+        if (pairs.length === 0) return []
+        // @ts-ignore TYPE NEEDS FIXING
+        return pairs.reduce((acc, [token0, token1]) => {
+            acc.push(token0)
+            acc.push(token1)
+            return acc
+        }, [])
+    }, [pairs])
+
+    const outputTokenList = useMemo(() => {
+        if (pairs.length === 0) return []
+        if (inputCurrency) {
+            // @ts-ignore TYPE NEEDS FIXING
+            return pairs.reduce((acc, [token0, token1]) => {
+                if (inputCurrency.wrapped.address === token0) acc.push(token1)
+                if (inputCurrency.wrapped.address === token1) acc.push(token0)
+                return acc
+            }, [])
+        }
+        // @ts-ignore TYPE NEEDS FIXING
+        return pairs.reduce((acc, [token0, token1]) => {
+            acc.push(token0)
+            acc.push(token1)
+            return acc
+        }, [])
+    }, [inputCurrency, pairs])
+
+    return (
+        <Container id="limit-order-page" className="py-4 space-y-6 md:py-8 lg:py-12" maxWidth="2xl">
+            <Head>
+                <title>{i18n._(t`Limit order`)} | SoulSwap</title>
+            </Head>
+            <ExpertModePanel
+                active={isExpertMode}
+                onClose={() => {
+                    onChangeRecipient(undefined)
+                    toggleExpertMode()
+                }}
+            >
+                <DoubleGlowShadow>
+                    <div id="limit-order-page" className="flex flex-col gap-4 p-4 rounded bg-dark-900">
+                        <ExchangeHeader input={inputCurrency} output={outputCurrency} />
+                        <div className="flex flex-col gap-4">
+                            <CurrencyInputPanel
+                                className="rounded-t"
+                                id="swap-currency-input"
+                                topAdornment={<PayFromToggle />}
+                                bottomAdornment={<BalancePanel />}
+                                selectComponent={
+                                    <CurrencySelect
+                                        currency={inputCurrency}
+                                        otherCurrency={outputCurrency}
+                                        label={i18n._(t`You pay`)}
+                                        onSelect={(inputCurrency) => onCurrencySelection(Field.INPUT, inputCurrency)}
+                                        currencyList={inputTokenList}
+                                        allowManageTokenList={false}
+                                    />
+                                }
+                                inputComponent={
+                                    <CurrencyInput
+                                        id="token-amount-input"
+                                        onMax={handleMaxInput}
+                                        showMaxButton={!atMaxAmountInput}
+                                        onUserInput={(value) => onUserInput(Field.INPUT, value)}
+                                        value={
+                                            (typedField === Field.INPUT ? typedValue : parsedAmounts?.inputAmount?.toSignificant(6)) || ''
+                                        }
+                                    />
+                                }
+                            />
+                            <div className="flex flex-row gap-5">
+                                <div />
+                                <div className="relative flex items-center">
+                                    <div className="z-0 absolute w-[2px] bg-dark-800 h-[calc(100%+32px)] top-[-16px] left-[calc(50%-1px)]" />
+                                    <button
+                                        className="z-10 rounded-full bg-dark-900 p-3px"
+                                        onClick={() => {
+                                            onSwitchTokens()
+                                        }}
+                                    >
+                                        <div
+                                            className="p-2 rounded-full bg-dark-800 hover:bg-dark-700"
+                                            onMouseEnter={() => setAnimateSwapArrows(true)}
+                                            onMouseLeave={() => setAnimateSwapArrows(false)}
+                                        >
+                                            <Lottie
+                                                animationData={swapArrowsAnimationData}
+                                                autoplay={animateSwapArrows}
+                                                loop={false}
+                                                className="w-[32px] h-[32px]"
+                                            />
+                                        </div>
+                                    </button>
+                                </div>
+                                {/*@ts-ignore TYPE NEEDS FIXING*/}
+                                <LimitPriceInputPanel trade={trade} limitPrice={!!rate ? rate : trade?.executionPrice} />
+                            </div>
+                            <CurrencyInputPanel
+                                className="relative rounded z-1"
+                                id="swap-currency-input"
+                                selectComponent={
+                                    <CurrencySelect
+                                        disabled={!inputCurrency}
+                                        currency={outputCurrency}
+                                        otherCurrency={inputCurrency}
+                                        label={i18n._(t`You receive:`)}
+                                        onSelect={(outputCurrency) => onCurrencySelection(Field.OUTPUT, outputCurrency)}
+                                        currencyList={outputTokenList}
+                                        includeNativeCurrency={false}
+                                        allowManageTokenList={false}
+                                    />
+                                }
+                                inputComponent={
+                                    <CurrencyInput
+                                        id="token-amount-output"
+                                        showMaxButton={false}
+                                        onUserInput={(value) => onUserInput(Field.OUTPUT, value)}
+                                        value={
+                                            (typedField === Field.OUTPUT ? typedValue : parsedAmounts?.outputAmount?.toSignificant(6)) || ''
+                                        }
+                                        {...(inputPanelHelperText?.type === 'error' && { error: inputPanelHelperText.msg })}
+                                    />
+                                }
+                                bottomAdornment={
+                                    inputPanelHelperText ? (
+                                        <div
+                                            className={classNames(
+                                                inputPanelHelperText.type === 'error' ? 'bg-red/40' : 'bg-green/40',
+                                                'z-0 flex items-center justify-center py-2 -mt-2 rounded-b'
+                                            )}
+                                        >
+                                            <div className="flex items-center gap-2 pt-2">
+                                                <Typography variant="xs" weight={700} className="text-white">
+                                                    {inputPanelHelperText.msg}
+                                                </Typography>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <></>
+                                    )
+                                }
+                            />
+                            {recipient !== undefined ? (
+                                <>
+                                    <div className="relative left-9">
+                                        <ArrowDownIcon className="text-high-emphesis" strokeWidth={2} width={16} height={16} />
+                                    </div>
+                                    <AddressInputPanel id="recipient" value={recipient} onChange={onChangeRecipient} />
+                                    {recipient !== account && (
+                                        <div className="rounded p-4 border border-yellow/40">
+                                            <Typography variant="sm" weight={700}>
+                                                {i18n._(
+                                                    t`Please note that the recipient address is different from the connected wallet address.`
+                                                )}
+                                            </Typography>
+                                        </div>
+                                    )}
+                                </>
+                            ) : undefined}
+                        </div>
+
+                        <div className="flex flex-col items-end justify-between w-full gap-4 md:flex-row md:items-center">
+                            <PriceRatio 
+                            price={!!rate ? rate : trade?.executionPrice} 
+                            />
+                            {isExpertMode && recipient === undefined && (
+                                <div className={`flex flex-1 ${inputCurrency && outputCurrency ? 'justify-center' : ''}`}>
+                                    <div
+                                        className="flex items-center text-sm underline cursor-pointer text-blue"
+                                        onClick={() => onChangeRecipient('')}
+                                    >
+                                        {i18n._(t`Change Recipient`)}
+                                    </div>
+                                </div>
+                            )}
+                            {!(inputCurrency && outputCurrency) && !(isExpertMode && recipient === undefined) && (
+                                <div className="flex flex-1" />
+                            )}
+
+                            <OrderExpirationDropdown />
+                        </div>
+
+                        <LimitOrderButton trade={trade} parsedAmounts={parsedAmounts} />
+                        <LimitOrderReviewModal
+                            parsedAmounts={parsedAmounts}
+                            trade={trade}
+                            limitPrice={!!rate ? rate : trade?.executionPrice}
+                        />
+                    </div>
+                </DoubleGlowShadow>
+            </ExpertModePanel>
+        </Container>
+    )
+}
+
+// LimitOrder.Guard = NetworkGuard(Feature.LIMIT_ORDERS)
 
 export default LimitOrder

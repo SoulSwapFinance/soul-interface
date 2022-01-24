@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react'
-import { classNames } from '../../functions'
 import { ExclamationIcon } from '@heroicons/react/solid'
+import { classNames } from 'functions'
+import React, { ReactNode } from 'react'
 
 interface CurrencyInputPanelProps {
   id: string
@@ -16,10 +16,10 @@ export default function CurrencyInputPanel({
   id,
   error = '',
   className = '',
-  topAdornment = null,
-  bottomAdornment = null,
-  selectComponent = null,
-  inputComponent = null,
+  topAdornment = undefined,
+  bottomAdornment = undefined,
+  selectComponent = undefined,
+  inputComponent = undefined,
 }: CurrencyInputPanelProps) {
   return (
     <div id={id}>

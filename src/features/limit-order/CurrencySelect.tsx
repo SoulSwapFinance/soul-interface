@@ -1,17 +1,17 @@
-import React, { FC, useCallback, useState } from 'react'
-import { classNames } from '../../functions'
-import Lottie from 'lottie-react'
-import selectCoinAnimation from '../../animation/select-coin.json'
-import { t } from '@lingui/macro'
 import { ChevronDownIcon } from '@heroicons/react/solid'
-import { Currency } from 'sdk'
+import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import CurrencySearchModal from '../../modals/SearchModal/CurrencySearchModal'
-import { CurrencyLogo } from '../../components/CurrencyLogo'
+import { Currency } from 'sdk'
+import selectCoinAnimation from 'animation/select-coin.json'
+import { CurrencyLogo } from 'components/CurrencyLogo'
+import { classNames } from 'functions'
+import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
+import Lottie from 'lottie-react'
+import React, { FC, useCallback, useState } from 'react'
 
 interface CurrencySelectProps {
-  currency: Currency
-  otherCurrency: Currency
+  currency?: Currency
+  otherCurrency?: Currency
   showCommonBases?: boolean
   onSelect: (x: Currency) => void
   disabled?: boolean
@@ -36,6 +36,7 @@ const CurrencySelect: FC<CurrencySelectProps> = ({
   const [modalOpen, setModalOpen] = useState(false)
 
   const handleClick = useCallback(() => {
+    // @ts-ignore TYPE NEEDS FIXING
     if (onSelect) setModalOpen(true)
   }, [onSelect])
 
@@ -71,7 +72,7 @@ const CurrencySelect: FC<CurrencySelectProps> = ({
                     currency.symbol.slice(currency.symbol.length - 5, currency.symbol.length)
                   : currency?.symbol) || (
                   <div className="px-2 py-1 mt-1 text-xs font-medium bg-transparent border rounded-full hover:bg-primary border-low-emphesis text-secondary whitespace-nowrap ">
-                    {i18n._(t`Select Token`)}
+                    {i18n._(t`Select a token`)}
                   </div>
                 )}
               </div>
@@ -82,7 +83,18 @@ const CurrencySelect: FC<CurrencySelectProps> = ({
         </div>
       </button>
       {!disabled && onSelect && (
-       <CurrencySearchModal trigger={''} onCurrencySelect={undefined} />
+        <CurrencySearchModal.Controlled
+          open={modalOpen}
+          onDismiss={() => setModalOpen(false)}
+          onCurrencySelect={onSelect}
+          selectedCurrency={currency}
+          otherSelectedCurrency={otherCurrency}
+          showCommonBases={showCommonBases}
+          currencyList={currencyList}
+          includeNativeCurrency={includeNativeCurrency}
+          allowManageTokenList={allowManageTokenList}
+          showSearch={true}
+        />
       )}
     </>
   )
