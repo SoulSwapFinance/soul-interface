@@ -149,7 +149,7 @@ export default function Pair() {
               <div className="text-lg font-bold text-high-emphesis">
                 {pair?.token0?.symbol}-{pair?.token1?.symbol}
               </div>
-              <div className="text-xs text-secondary">Sushi Liquidity Pool</div>
+              <div className="text-xs text-secondary">Soul Liquidity Pool</div>
             </div>
             <div className="rounded-3xl text-sm bg-[#414a6c] py-px px-2 flex items-center space-x-1">
               <div>{shortenAddress(id)}</div>
