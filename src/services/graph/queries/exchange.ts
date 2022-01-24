@@ -4,8 +4,8 @@ export const factoryQuery = gql`
   query factoryQuery($block: Block_height) {
     factories(first: 1, block: $block) {
       id
-      volumeUSD
-      liquidityUSD
+      totalVolumeUSD
+      totalLiquidityUSD
     }
   }
 `
@@ -230,11 +230,11 @@ export const tokenFieldsQuery = gql`
     name
     decimals
     totalSupply
-    volume
-    volumeUSD
+    tradeVolumme
+    tradeVolumeUSD
     untrackedVolumeUSD
     txCount
-    liquidity
+    totalLiquidity
     derivedETH
   }
 `
@@ -264,10 +264,10 @@ export const tokenDayDatasQuery = gql`
       token {
         id
       }
-      volumeUSD
-      liquidityUSD
+      dailyVolumeUSD
+      totalLiquidityUSD
       priceUSD
-      txCount
+      dailyTxns
     }
   }
 `
@@ -302,7 +302,7 @@ export const tokensQuery = gql`
   query tokensQuery($first: Int! = 1000, $skip: Int, $block: Block_height, $where: Token_filter) {
     tokens(first: $first, skip: $skip, orderBy: volumeUSD, orderDirection: desc, block: $block, where: $where) {
       ...tokenFields
-      dayData(first: 7, orderBy: date, orderDirection: desc) {
+      uniswapDayData(first: 7, orderBy: date, orderDirection: desc) {
         id
         priceUSD
         date
