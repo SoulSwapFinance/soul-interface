@@ -11,7 +11,6 @@ import { concat } from 'lodash'
 import { VAULTS } from '../constants/vaults'
 import { usePriceHelperContract } from '../features/bond/hooks/useContract'
 import { formatCurrency } from '../modals/TokensStatsModal'
-import farm from '../pages/farm'
 import { useActiveWeb3React } from 'services/web3'
 
 const PAIR_INTERFACE = new Interface(ISoulSwapPair)
