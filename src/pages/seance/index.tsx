@@ -576,8 +576,10 @@ export default function SoulStake() {
             {i18n._(t`Stake SOUL to borrow SEANCE`)}
           </div>
         <div className="max-w-xl pr-3 mb-2 text-sm leading-5">
-          {i18n._(t`SEANCE is a receipt for your staked SOUL. Use SEANCE to reclaim your SOUL, or
-                  trade your SEANCE and lock your SOUL away for all eternity... Either way, while staked, you'll earn more SOUL over time.`
+          {i18n._(t`SEANCE is a receipt for your staked SOUL.
+          Use SEANCE to reclaim your SOUL when you want to withdraw.
+          You may trade or farm your SEANCE and risk locking your SOUL for all eternity...
+          Either way, while staked, you'll earn more SOUL over time.`
           )}
         </div>
         </div>

@@ -3,23 +3,20 @@ import { isMobile } from 'react-device-detect'
 import { Disclosure } from '@headlessui/react'
 import { CurrencyLogo } from 'components/CurrencyLogo'
 import DoubleLogo from 'components/DoubleLogo'
-import QuestionHelper from 'components/QuestionHelper'
+// import QuestionHelper from 'components/QuestionHelper'
 import { classNames, formatNumber, formatPercent } from 'functions'
 import { useCurrency } from 'hooks/Tokens'
 import MineListItemDetails from './MineListItemDetails'
-import { SOUL } from '../../constants'
-import {
-  useHarvestHelperContract,
-  usePriceHelperContract
-} from 'hooks'
+import { SOUL, SOUL_ADDRESS } from '../../constants'
+import { useHarvestHelperContract } from 'hooks'
 import { useTVL } from 'hooks/useV2Pairs'
-import { useMultipleContractSingleData, useSingleCallResult } from 'state/multicall/hooks'
-import { POOLS } from 'constants/farms'
+import { useSingleCallResult } from 'state/multicall/hooks'
 import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 import YieldDetails from 'components/YieldDetails'
-import IconWrapper from 'components/IconWrapper'
-import { Info } from 'react-feather'
+// import IconWrapper from 'components/IconWrapper'
+// import { Info } from 'react-feather'
 import { useActiveWeb3React } from 'services/web3'
+import { usePrice } from 'hooks/usePrice'
 
 const MineListItem = ({ farm, ...rest }) => {
   const { chainId } = useActiveWeb3React()
@@ -27,14 +24,8 @@ const MineListItem = ({ farm, ...rest }) => {
 
   const token0 = useCurrency(farm.pair.token0?.id)
   const token1 = useCurrency(farm.pair.token1?.id)
-  const priceHelperContract = usePriceHelperContract()
   const harvestHelperContract = useHarvestHelperContract()
-
-  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
-  console.log(Number(rawSoulPrice))
-  const soulPrice = Number(rawSoulPrice) / 1E18
-  // console.log(soulPrice)
-
+  const soulPrice = usePrice(SOUL_ADDRESS[chainId])
   const tvlInfo = useTVL()
 
   let [data] = useV2PairsWithPrice([[token0, token1]])
@@ -43,18 +34,18 @@ const MineListItem = ({ farm, ...rest }) => {
   const lpBalance = useSingleCallResult(harvestHelperContract, 'fetchBals', [farm?.id])?.result
   // console.log('lpBalance: %s', Number(lpBalance))
 
-  let tvl = tvlInfo.map((previousValue, currentValue) => {
-    return previousValue.tvl + currentValue
-  }, 0)
+  // let tvl = tvlInfo.map((previousValue, currentValue) => {
+  //   return previousValue.tvl + currentValue
+  // }, 0)
 
-  let summTvl = tvlInfo.reduce((previousValue, currentValue) => {
-    return previousValue + currentValue.tvl
-  }, 0)
+  // let summTvl = tvlInfo.reduce((previousValue, currentValue) => {
+  //   return previousValue + currentValue.tvl
+  // }, 0)
 
   // let lpPrice = tvlInfo.reduce((previousValue, currentValue) => {
   //   return previousValue + currentValue.lpPrice
   // }, 0)
-  
+
   // const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
   //   return { ...POOLS[chainId][key], lpToken: key }
   // })
@@ -72,7 +63,7 @@ const MineListItem = ({ farm, ...rest }) => {
   const rewardPerDay = rewardPerSecond * 86_400
   const rewardPerYear = rewardPerDay * 365
 
-    // ROI CALCULATIONS //
+  // ROI CALCULATIONS //
   // const roiPerSecond =
   //   farm?.rewards?.reduce((previousValue, currentValue) => {
   //     return previousValue + currentValue.rewardPerSecond * currentValue.rewardPrice
@@ -86,18 +77,18 @@ const MineListItem = ({ farm, ...rest }) => {
   //   * 24 // hours in a day 
   //   // * soulPrice // value of the rewards
   //   // / balanceUSD // div by liq. balance (TVL)
-  
+
   // const roiPerMonth = roiPerDay * 30
 
   const roiPerYear  // = roiPerMonth * 12
-    = rewardPerYear 
+    = rewardPerYear
     * soulPrice // value of the rewards
     / balanceUSD // div by liq. balance (TVL)
 
-    const roiPerMonth = roiPerYear / 12
-    const roiPerDay = roiPerMonth / 30
-    const roiPerHour = roiPerDay / 24
-    // const roiPerSecond = roiPerHour / 60 / 60
+  const roiPerMonth = roiPerYear / 12
+  const roiPerDay = roiPerMonth / 30
+  const roiPerHour = roiPerDay / 24
+  // const roiPerSecond = roiPerHour / 60 / 60
 
   return (
     <React.Fragment>
@@ -178,8 +169,8 @@ const MineListItem = ({ farm, ...rest }) => {
                                 * soulPrice // value of the rewards
                                 / balanceUSD // div by liq. balance (TVL)
                                 * 100, // to convert into %
-                              false,
-                              true
+                                false,
+                                true
                               ) + '%'
                               : 'ZERO'
                           }

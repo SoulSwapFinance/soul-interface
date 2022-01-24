@@ -14,8 +14,7 @@ import TransactionConfirmationModal, {
 } from '../../modals/TransactionConfirmationModal'
 import SwapModalFooter from './SwapModalFooter'
 import SwapModalHeader from './SwapModalHeader'
-import { useLingui } from '@lingui/react'
-import { t } from '@lingui/macro'
+
 import { formatNumberScale } from '../../functions'
 
 /**
@@ -66,7 +65,6 @@ export default function ConfirmSwapModal({
     () => Boolean(trade && originalTrade && tradeMeaningfullyDiffers(trade, originalTrade)),
     [originalTrade, trade]
   )
-  const { i18n } = useLingui()
 
   const modalHeader = useCallback(() => {
     return trade ? (
@@ -76,7 +74,7 @@ export default function ConfirmSwapModal({
         recipient={recipient}
         showAcceptChanges={showAcceptChanges}
         onAcceptChanges={onAcceptChanges}
-        // minerBribe={minerBribe}
+      // minerBribe={minerBribe}
       />
     ) : null
   }, [allowedSlippage, onAcceptChanges, recipient, showAcceptChanges, trade])
@@ -93,11 +91,9 @@ export default function ConfirmSwapModal({
   }, [onConfirm, showAcceptChanges, swapErrorMessage, trade])
 
   // text to show while loading
-  const pendingText = i18n._(
-    t`Swapping ${formatNumberScale(trade?.inputAmount?.toSignificant(6))} ${
-      trade?.inputAmount?.currency?.symbol
+  const pendingText =
+    `Swapping ${formatNumberScale(trade?.inputAmount?.toSignificant(6))} ${trade?.inputAmount?.currency?.symbol
     } for ${formatNumberScale(trade?.outputAmount?.toSignificant(6))} ${trade?.outputAmount?.currency?.symbol}`
-  )
 
   const pendingText2 = minerBribe
     ? `Plus ${CurrencyAmount.fromRawAmount(Ether.onChain(ChainId.MAINNET), minerBribe).toSignificant(6)} ETH Miner Tip`
@@ -109,7 +105,7 @@ export default function ConfirmSwapModal({
         <TransactionErrorContent onDismiss={onDismiss} message={swapErrorMessage} />
       ) : (
         <ConfirmationModalContent
-          title={i18n._(t`Confirm Swap`)}
+          title={'Confirm Swap'}
           onDismiss={onDismiss}
           topContent={modalHeader}
           bottomContent={modalBottom}
