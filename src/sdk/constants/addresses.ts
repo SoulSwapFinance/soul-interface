@@ -15,6 +15,19 @@ export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.FANTOM_TESTNET]: ''
 }
 
+export const LIMIT_ORDER_HELPER_ADDRESS: AddressMap = {
+  // [ChainId.MATIC]: '0xe2f736B7d1f6071124CBb5FC23E93d141CD24E12',
+  // [ChainId.AVALANCHE]: '0x889ec9e19C1598358899fCA4879011686c3d4045',
+  [ChainId.FANTOM]: '0xBf28dD7C3B863eae035eBf535B1B214070E8ddBf',
+}
+
+export const STOP_LIMIT_ORDER_ADDRESS: AddressMap = {
+  // [ChainId.KOVAN]: '0xce9365dB1C99897f04B3923C03ba9a5f80E8DB87',
+  // [ChainId.MATIC]: '0x1aDb3Bd86bb01797667eC382a0BC6A9854b4005f',
+  // [ChainId.AVALANCHE]: '0xf6f9c9DB78AF5791A296c4bF34d59E0236E990E0',
+  [ChainId.FANTOM]: '0x0dd184Bec9e43701F76d75D5FFfE246B2DC8d4EA',
+}
+
 export const SOUL_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',

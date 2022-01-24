@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, JSBI, Percent, Token, TradeType, Trade as V2Trade } from '../sdk'
+import { Currency, CurrencyAmount, JSBI, MaxUint256, Percent, Token, TradeType, Trade as V2Trade } from '../sdk'
 import { DAI, SOUL, USDC } from '../constants/tokens'
 import { useMemo, useState } from 'react'
 
@@ -301,5 +301,19 @@ export function useERC20PermitFromTrade(
     // v2 router does not support
     trade instanceof V2Trade ? undefined : trade,
     null
+  )
+}
+
+const REMOVE_TRIDENT_LIQUIDITY_PERMIT_INFO: PermitInfo = {
+  version: '1',
+  name: 'SoulSwap LP Token',
+  type: PermitType.AMOUNT,
+}
+
+export function useTridentLiquidityTokenPermit(liquidityAmount?: CurrencyAmount<Token>, spender?: string) {
+  return useERC20Permit(
+    liquidityAmount ? CurrencyAmount.fromRawAmount(liquidityAmount.currency, MaxUint256) : undefined,
+    spender,
+    REMOVE_TRIDENT_LIQUIDITY_PERMIT_INFO
   )
 }

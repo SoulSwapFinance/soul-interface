@@ -46,7 +46,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
         // .toBigNumber(pair.asset.tokenInfo.decimals)),
       i18n._(
         t`Please make sure your ${
-          useBento ? 'BentoBox' : 'wallet'
+          useBento ? 'CoffinBox' : 'wallet'
         } balance is sufficient to withdraw and then try again.`
       ),
       true

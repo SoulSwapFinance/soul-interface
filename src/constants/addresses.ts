@@ -206,3 +206,9 @@ export const USDC_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
   [ChainId.FANTOM_TESTNET]: '',
 }
+export const STOP_LIMIT_ORDER_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x0dd184Bec9e43701F76d75D5FFfE246B2DC8d4EA', // TODO
+  [ChainId.FANTOM_TESTNET]: '',
+}
