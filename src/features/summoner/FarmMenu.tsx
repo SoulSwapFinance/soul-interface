@@ -1,11 +1,8 @@
-import Badge from '../../components/Badge'
-import { ChainId } from '../../sdk'
 import NavLink from '../../components/NavLink'
 import React from 'react'
 import { useActiveWeb3React } from 'services/web3'
 import { useLingui } from '@lingui/react'
 import { t } from '@lingui/macro'
-import Search from '../../components/Search'
 
 const MenuItem = ({ href, title }) => {
   const { i18n } = useLingui()

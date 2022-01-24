@@ -1,5 +1,3 @@
-import Badge from '../../components/Badge'
-import { ChainId } from '../../sdk'
 import NavLink from '../../components/NavLink'
 import React from 'react'
 
