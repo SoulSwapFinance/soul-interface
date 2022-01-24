@@ -70,7 +70,7 @@ const ConfirmLimitOrderTopContent = () => {
           </span>
         </div>
         <div className="flex flex-col gap-3">
-          <div className="flex gap-2 text-xl font-bold text-white">{i18n._(t`You receive`)}</div>
+          <div className="flex gap-2 text-xl font-bold text-white">{i18n._(t`You Receive`)}</div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <CurrencyLogo size={40} currency={currencies[Field.OUTPUT]} />

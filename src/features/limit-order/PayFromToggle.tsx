@@ -37,7 +37,7 @@ const PayFromToggle: FC = () => {
           </Switch>
           <Switch.Label className="ml-2">
             <Typography variant="sm" className={fromBentoBalance ? 'text-primary' : 'text-low-emphesis'}>
-              BentoBox
+              CoffinBox
             </Typography>
           </Switch.Label>
         </div>
