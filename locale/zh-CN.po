@@ -70,6 +70,9 @@ msgstr ""
 msgid "APR"
 msgstr ""
 
+msgid "About CoffinBox Funding"
+msgstr ""
+
 msgid "Accept"
 msgstr ""
 
@@ -133,6 +136,12 @@ msgstr ""
 msgid "Approve"
 msgstr ""
 
+msgid "Approve CoffinBox"
+msgstr ""
+
+msgid "Approve Master Contract"
+msgstr ""
+
 msgid "Approve Underworld"
 msgstr ""
 
@@ -148,7 +157,13 @@ msgstr ""
 msgid "Approving"
 msgstr ""
 
+msgid "Approving Master Contract"
+msgstr ""
+
 msgid "Approving {0}"
+msgstr ""
+
+msgid "Approving {contractName} Master Contract"
 msgstr ""
 
 msgid "Asset"
@@ -160,13 +175,13 @@ msgstr ""
 msgid "Available"
 msgstr ""
 
+msgid "Available Networks"
+msgstr ""
+
 msgid "Avg. APY"
 msgstr ""
 
 msgid "BOND"
-msgstr ""
-
-msgid "Back to Limit Orders"
 msgstr ""
 
 msgid "Balance"
@@ -270,6 +285,9 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
+msgid "CoffinBox"
+msgstr ""
+
 msgid "Collateral"
 msgstr ""
 
@@ -318,6 +336,9 @@ msgstr ""
 msgid "Confirm create pool"
 msgstr ""
 
+msgid "Confirm order"
+msgstr ""
+
 msgid "Confirm this transaction in your wallet"
 msgstr ""
 
@@ -325,9 +346,6 @@ msgid "Confirm {0}"
 msgstr ""
 
 msgid "Connect Wallet"
-msgstr ""
-
-msgid "Connect to a wallet"
 msgstr ""
 
 msgid "Considerations"
@@ -339,7 +357,13 @@ msgstr ""
 msgid "Copy Address"
 msgstr ""
 
+msgid "Create Limit Order"
+msgstr ""
+
 msgid "Create Lock"
+msgstr ""
+
+msgid "Create Order"
 msgstr ""
 
 msgid "Create Pair"
@@ -358,9 +382,6 @@ msgid "Create lock"
 msgstr ""
 
 msgid "Create pool"
-msgstr ""
-
-msgid "Current"
 msgstr ""
 
 msgid "Current Percentage"
@@ -396,10 +417,13 @@ msgstr ""
 msgid "Deposited Value"
 msgstr ""
 
-msgid "Disable multihops"
+msgid "Disable Multihops"
 msgstr ""
 
 msgid "Disconnect"
+msgstr ""
+
+msgid "Do not show again"
 msgstr ""
 
 msgid "Documentation"
@@ -417,9 +441,6 @@ msgstr ""
 msgid "Either return to the {link}, or change to an available network."
 msgstr ""
 
-msgid "Enable Expert Mode"
-msgstr ""
-
 msgid "Enchant"
 msgstr ""
 
@@ -432,13 +453,10 @@ msgstr ""
 msgid "Enter Amount"
 msgstr ""
 
-msgid "Enter a recipient"
+msgid "Enter Recipient"
 msgstr ""
 
 msgid "Enter a valid slippage percentage"
-msgstr ""
-
-msgid "Enter an amount"
 msgstr ""
 
 msgid "Error"
@@ -467,10 +485,10 @@ msgid ""
 "that often result in bad rates and lost funds."
 msgstr ""
 
-msgid "Expiration is the time at which the order will become invalid"
+msgid "Expiration"
 msgstr ""
 
-msgid "Expired"
+msgid "Expiration is the time at which the order will become invalid"
 msgstr ""
 
 msgid "Explore More"
@@ -501,9 +519,6 @@ msgid "Faucet"
 msgstr ""
 
 msgid "Fees"
-msgstr ""
-
-msgid "Filled"
 msgstr ""
 
 msgid "Find Pool"
@@ -616,7 +631,7 @@ msgstr ""
 msgid "Import token"
 msgstr ""
 
-msgid "In Bento:"
+msgid "In Coffin:"
 msgstr ""
 
 msgid "In Wallet:"
@@ -628,9 +643,6 @@ msgstr ""
 msgid "Insufficient Balance"
 msgstr ""
 
-msgid "Insufficient SLP balance"
-msgstr ""
-
 msgid "Insufficient liquidity for this trade"
 msgstr ""
 
@@ -640,13 +652,23 @@ msgstr ""
 msgid "Interface Settings"
 msgstr ""
 
+msgid "Invalid Recipient"
+msgstr ""
+
 msgid "Invalid pair"
 msgstr ""
 
-msgid "Invalid recipient"
+msgid "Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency."
 msgstr ""
 
-msgid "Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency."
+msgid ""
+"It seems like you have open orders while the limit order master contract is not approved. Please make\n"
+"sure you approved the limit order master contract or the order will not execute"
+msgstr ""
+
+msgid ""
+"It seems like you have open orders while the limit order master contract is not yet approved. Please make\n"
+"sure you have approved the limit order master contract or the order will not execute"
 msgstr ""
 
 msgid "Italian"
@@ -670,7 +692,7 @@ msgstr ""
 msgid "LUXOR"
 msgstr ""
 
-msgid "Learn more about wallets"
+msgid "Learn About Wallets"
 msgstr ""
 
 msgid "Lend"
@@ -689,6 +711,12 @@ msgid "Lent"
 msgstr ""
 
 msgid "Limit"
+msgstr ""
+
+msgid "Limit Orders"
+msgstr ""
+
+msgid "Limit orders use funds from CoffinBox, to create a limit order depositing into CoffinBox is required."
 msgstr ""
 
 msgid "Links"
@@ -710,6 +738,9 @@ msgid "Loading balance"
 msgstr ""
 
 msgid "Loading your {exchange} liquidity positions"
+msgstr ""
+
+msgid "Loading..."
 msgstr ""
 
 msgid "Lock"
@@ -743,6 +774,9 @@ msgid "Manage Liquidity"
 msgstr ""
 
 msgid "Manage Position"
+msgstr ""
+
+msgid "Manage Token Lists"
 msgstr ""
 
 msgid "Manage this pool"
@@ -790,16 +824,16 @@ msgstr ""
 msgid "More"
 msgstr ""
 
-msgid "My Orders"
-msgstr ""
-
 msgid "N"
 msgstr ""
 
 msgid "Never"
 msgstr ""
 
-msgid "New to Ethereum?"
+msgid "New to Fantom?"
+msgstr ""
+
+msgid "Next"
 msgstr ""
 
 msgid "No Liquidity found"
@@ -811,7 +845,7 @@ msgstr ""
 msgid "No liquidity found to do swap"
 msgstr ""
 
-msgid "No order history"
+msgid "No open orders"
 msgstr ""
 
 msgid "No pool found"
@@ -826,7 +860,10 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-msgid "Only use this mode if you know what you are doing."
+msgid "Not available for legacy route"
+msgstr ""
+
+msgid "ONLY USE THIS MODE IF YOU KNOW WHAT YOU ARE DOING."
 msgstr ""
 
 msgid "Oops!"
@@ -838,13 +875,7 @@ msgstr ""
 msgid "Open Main Menu"
 msgstr ""
 
-msgid "Open Orders"
-msgstr ""
-
-msgid "OpenMEV Gas Refunder"
-msgstr ""
-
-msgid "OpenMEV refunds up to 95% of transaction costs in 35 blocks."
+msgid "Open orders"
 msgstr ""
 
 msgid "Oracle"
@@ -856,7 +887,7 @@ msgstr ""
 msgid "Order Expiration"
 msgstr ""
 
-msgid "Order History"
+msgid "Orders"
 msgstr ""
 
 msgid "Our Resources."
@@ -891,7 +922,7 @@ msgstr ""
 msgid "Pair your SOUL with FTM and add to Farms for more SOUL and an enhanced AURA."
 msgstr ""
 
-msgid "Pay"
+msgid "Pay from"
 msgstr ""
 
 msgid "Pay from:"
@@ -906,6 +937,9 @@ msgstr ""
 msgid "Pending Treasury Transfer"
 msgstr ""
 
+msgid "Place a limit order or check the status of your past orders"
+msgstr ""
+
 msgid "Please connect to the appropriate Ethereum network."
 msgstr ""
 
@@ -913,6 +947,9 @@ msgid "Please make sure your {0} balance is sufficient to deposit and then try a
 msgstr ""
 
 msgid "Please make sure your {0} balance is sufficient to withdraw and then try again."
+msgstr ""
+
+msgid "Please note that after order execution, your tokens will be received in your BentoBox"
 msgstr ""
 
 msgid "Please refer to the"
@@ -943,6 +980,9 @@ msgid "Position and Rewards"
 msgstr ""
 
 msgid "Positions"
+msgstr ""
+
+msgid "Previous"
 msgstr ""
 
 msgid "Price Impact"
@@ -1023,7 +1063,13 @@ msgstr ""
 msgid "Restricts swaps to direct pairs only."
 msgstr ""
 
+msgid "Review Limit Order"
+msgstr ""
+
 msgid "Rewards"
+msgstr ""
+
+msgid "Roll it back - this feature is not yet supported on {0}."
 msgstr ""
 
 msgid "Romanian"
@@ -1039,8 +1085,10 @@ msgid "Russian"
 msgstr ""
 
 msgid ""
-"SEANCE is a receipt for your staked SOUL. Use SEANCE to reclaim your SOUL, or\n"
-"trade your SEANCE and lock your SOUL away for all eternity... Either way, while staked, you'll earn more SOUL over time."
+"SEANCE is a receipt for your staked SOUL.\n"
+"Use SEANCE to reclaim your SOUL when you want to withdraw.\n"
+"You may trade or farm your SEANCE and risk locking your SOUL for all eternity...\n"
+"Either way, while staked, you'll earn more SOUL over time."
 msgstr ""
 
 msgid "SELF"
@@ -1088,28 +1136,25 @@ msgstr ""
 msgid "Select Collateral"
 msgstr ""
 
+msgid "Select Network"
+msgstr ""
+
+msgid "Select Order Expiration"
+msgstr ""
+
+msgid "Select Rate"
+msgstr ""
+
 msgid "Select Token"
 msgstr ""
 
 msgid "Select a Token"
 msgstr ""
 
-msgid "Select a network"
-msgstr ""
-
-msgid "Select a rate"
-msgstr ""
-
-msgid "Select a token"
-msgstr ""
-
 msgid "Select a token to find your liquidity"
 msgstr ""
 
 msgid "Select a wallet"
-msgstr ""
-
-msgid "Select an order expiration"
 msgstr ""
 
 msgid "Send to:"
@@ -1121,10 +1166,13 @@ msgstr ""
 msgid "Share of Pool:"
 msgstr ""
 
+msgid "Showing Results"
+msgstr ""
+
 msgid "Slippage Tolerance"
 msgstr ""
 
-msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click 'Approve BentoBox' again for approving using the fallback method"
+msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click 'Approve CoffinBox' again for approving using the fallback method"
 msgstr ""
 
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
@@ -1146,6 +1194,9 @@ msgid "SoulSwap Apps"
 msgstr ""
 
 msgid "SoulSwap Vault is a set of high incentivized pools. Long term supporters can choose to lock SOUL for a determined period for higher rewards."
+msgstr ""
+
+msgid "SoulSwap utilizes a token vault called CoffinBox that has balances separate from your wallet."
 msgstr ""
 
 msgid "Spanish"
@@ -1231,9 +1282,6 @@ msgstr ""
 msgid "Swap Anyway"
 msgstr ""
 
-msgid "Swapping {0} {1} for {2} {3}"
-msgstr ""
-
 msgid "TIMEFRAME"
 msgstr ""
 
@@ -1285,7 +1333,7 @@ msgstr ""
 msgid "This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance."
 msgstr ""
 
-msgid "Toggle expert mode"
+msgid "Toggle Expert Mode"
 msgstr ""
 
 msgid "Token"
@@ -1332,6 +1380,9 @@ msgstr ""
 msgid "Try enabling multi-hop trades"
 msgstr ""
 
+msgid "Turn On Expert Mode"
+msgstr ""
+
 msgid "Unknown Source"
 msgstr ""
 
@@ -1369,6 +1420,9 @@ msgid "Use"
 msgstr ""
 
 msgid "Use one of the buttons to set a percentage or enter a value manually using the input field."
+msgstr ""
+
+msgid "Use the toggle to switch between balances when interacting with our platform."
 msgstr ""
 
 msgid "Used"
@@ -1417,7 +1471,7 @@ msgid "Wallet Balance"
 msgstr ""
 
 msgid ""
-"When your SOUL is staked into the Circle, you recieve SEANCE in return for voting rights and a fully composable \n"
+"When your SOUL is staked into the Circle, you receive SEANCE in return for voting rights and a fully composable \n"
 "token that can interact with other protocols. Your SEANCE is continuously compounding, when you unstake you will receive all \n"
 "the originally deposited SOUL, your SOUL harvest rewards, and (soon) fee share."
 msgstr ""
@@ -1452,6 +1506,9 @@ msgstr ""
 msgid "You Pay:"
 msgstr ""
 
+msgid "You Receive"
+msgstr ""
+
 msgid "You are creating a pool"
 msgstr ""
 
@@ -1459,6 +1516,9 @@ msgid "You are depositing:"
 msgstr ""
 
 msgid "You are on the wrong network"
+msgstr ""
+
+msgid "You can think of this as having \"account balances\" for asset within SoulSwap."
 msgstr ""
 
 msgid "You don’t have liquidity in this pool yet"
@@ -1470,7 +1530,16 @@ msgstr ""
 msgid "You need to first approve LP tokens and then migrate it"
 msgstr ""
 
+msgid "You pay"
+msgstr ""
+
 msgid "You receive"
+msgstr ""
+
+msgid "You'll pay"
+msgstr ""
+
+msgid "You'll receive"
 msgstr ""
 
 msgid "You'll receive (at least):"
@@ -1524,6 +1593,9 @@ msgstr ""
 msgid "Your {exchange} {0}/{1} liquidity will become SoulSwap {2}/{3} liquidity."
 msgstr ""
 
+msgid "You’ll see these icons next to your balance in various input fields."
+msgstr ""
+
 msgid "Zap"
 msgstr ""
 
@@ -1537,6 +1609,9 @@ msgid "for deliberations on additional points."
 msgstr ""
 
 msgid "forum discussion"
+msgstr ""
+
+msgid "home page"
 msgstr ""
 
 msgid "into your wallet or CoffinBox."
@@ -1582,4 +1657,7 @@ msgid "• 10% in Seance"
 msgstr ""
 
 msgid "• Soul is unlockable before the unlock time."
+msgstr ""
+
+msgid "⚠️ Loading Error"
 msgstr ""

@@ -1,10 +1,8 @@
-import DoubleCurrencyLogo from '../../../components/DoubleLogo'
-import Table from '../../../components/Table'
-import { formatPercent } from '../../../functions'
-import { pairQuery } from '../../../services/graph/queries'
-import { useCurrency } from '../../../hooks/Tokens'
+import DoubleCurrencyLogo from 'components/DoubleLogo'
+import Table from 'components/Table'
+import { formatPercent } from 'functions'
+import { useCurrency } from 'hooks/Tokens'
 import { useMemo } from 'react'
-import { useSoulPairs } from '../../../services/graph'
 
 interface TopFarmsListProps {
   farms: {
@@ -22,7 +20,7 @@ interface TopFarmsListProps {
     rewards: {
       icon: JSX.Element
     }[]
-  }
+  }[]
 }
 
 interface FarmListNameProps {
@@ -44,6 +42,7 @@ function FarmListname({ pair }: FarmListNameProps): JSX.Element {
 
   return (
     <div className="flex items-center">
+      {/*@ts-ignore TYPE NEEDS FIXING*/}
       <DoubleCurrencyLogo currency0={token0} currency1={token1} size={28} />
       <div className="ml-3 font-bold text-high-emphesis">
         {pair.token0.symbol}-{pair.token1.symbol}
@@ -58,6 +57,7 @@ export default function TopFarmsList({ farms }: TopFarmsListProps): JSX.Element 
       {
         Header: 'Token Pair',
         accessor: 'pair',
+        // @ts-ignore TYPE NEEDS FIXING
         Cell: (props) => <FarmListname pair={props.value} />,
         disableSortBy: true,
         align: 'left',
@@ -65,12 +65,14 @@ export default function TopFarmsList({ farms }: TopFarmsListProps): JSX.Element 
       {
         Header: 'ROI (1Y)',
         accessor: 'roi',
+        // @ts-ignore TYPE NEEDS FIXING
         Cell: (props) => formatPercent(props.value),
         align: 'right',
       },
       {
         Header: 'Rewards',
         accessor: 'rewards',
+        // @ts-ignore TYPE NEEDS FIXING
         Cell: (props) => props.value,
       },
     ],

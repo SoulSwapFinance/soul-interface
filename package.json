@@ -160,6 +160,7 @@
     "@terra-money/wallet-provider": "^3.6.5",
     "@types/big.js": "6.1.1",
     "@types/gtag.js": "0.0.7",
+    "@visx/event": "^2.6.0",
     "autoprefixer": "^10.0.2",
     "axios": "^0.25.0",
     "big.js": "^6.1.1",

@@ -22,7 +22,7 @@ const features: FeatureMap = {
     Feature.STAKING,
     Feature.ANALYTICS,
     Feature.LIQUIDITY_MINING,
-    Feature.LIMIT_ORDERS,
+    // Feature.LIMIT_ORDERS,
     Feature.BENTOBOX],
 
   [ChainId.FANTOM_TESTNET]: [Feature.AMM],
