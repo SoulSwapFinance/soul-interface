@@ -6,8 +6,6 @@ import { useInfiniteScroll } from './hooks/useInfiniteScroll'
 import useSortableData from 'hooks/useSortableData'
 import React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
-
-import MineListItem2 from './MineListItem2'
 import MineListItem from './MineListItem'
 
 const MineList = ({ farms, term, filter }) => {
@@ -61,7 +59,6 @@ const MineList = ({ farms, term, filter }) => {
         <div className="space-y-4">
           {items.slice(0, numDisplayed).map((farm, index) => (
             <MineListItem key={index} farm={farm} />
-            // <MineListItem2 key={index} farm={farm} />
           ))}
         </div>
       </InfiniteScroll>

@@ -78,16 +78,16 @@ export const getPrice = (coin:string) => {
       url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=fantom'
     } else if (coin === 'ANY') {
       url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=anyswap'
-    } else if (coin === 'DEP') {
-      url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=deapcoin'
+    } else if (coin === 'SOUL') {
+      url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=soul-swap'
+    } else if (coin === 'SEANCE') {
+      url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=seancecircle'
+    } else if (coin === 'LUX') {
+      url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=luxor'
     } else if (coin === 'HERO') {
       url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=hero'
     } else if (coin === 'PLAY') {
       url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=polyplay'
-    } else if (coin === 'BACON') {
-      url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bacondao'
-    } else if (coin === 'KABY') {
-      url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=kaby-arena'
     }
     // console.log(url)
     getApiData(url, coin + '_PRICE', 1000 * 60 * 60).then((res:any) => {
