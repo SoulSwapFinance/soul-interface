@@ -1,9 +1,9 @@
-import React, { FC, ReactNode } from 'react'
-import { classNames } from '../../functions'
-import { Button } from '../../components/Button'
 import { t } from '@lingui/macro'
-import { Input as NumericalInput } from '../../components/NumericalInput'
 import { useLingui } from '@lingui/react'
+import { Button } from 'components/Button'
+import Input from 'components/Input'
+import { classNames } from 'functions'
+import React, { FC, ReactNode } from 'react'
 
 interface CurrencyInputProps {
   id: string
@@ -43,7 +43,7 @@ const CurrencyInput: FC<CurrencyInputProps> = ({
             {i18n._(t`Max`)}
           </Button>
         )}
-        <NumericalInput
+        <Input.Numeric
           id={id}
           value={value}
           onUserInput={(val) => {

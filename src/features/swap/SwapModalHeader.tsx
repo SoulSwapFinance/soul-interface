@@ -23,14 +23,14 @@ export default function SwapModalHeader({
   recipient,
   showAcceptChanges,
   onAcceptChanges,
-  minerBribe,
+  // minerBribe,
 }: {
   trade: Trade<Currency, Currency, TradeType>
   allowedSlippage: Percent
   recipient: string | null
   showAcceptChanges: boolean
   onAcceptChanges: () => void
-  minerBribe?: string
+  // minerBribe?: string
 }) {
   const { i18n } = useLingui()
 

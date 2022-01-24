@@ -6,8 +6,7 @@ import Container from 'components/Container'
 import Dots from 'components/Dots'
 import Typography from 'components/Typography'
 import { NETWORK_LABEL } from 'config/networks'
-import Transaction from 'components/AccountDetails/Transaction'
-// import TransactionList from 'features/user/TransactionList'
+import TransactionList from 'features/user/TransactionList'
 import { getExplorerLink } from 'functions/explorer'
 import { shortenAddress } from 'functions/format'
 import useENSName from 'hooks/useENSName'
@@ -21,20 +20,11 @@ import Head from 'next/head'
 import React, { useCallback, useMemo } from 'react'
 import { ExternalLink, User } from 'react-feather'
 import useSWR, { SWRResponse } from 'swr'
+import Transaction from 'components/AccountDetails/Transaction'
 
 // we want the latest one to come first, so return negative if a is after b
 function newTransactionsFirst(a: TransactionDetails, b: TransactionDetails) {
   return b.addedTime - a.addedTime
-}
-
-function renderTransactions(transactions: string[]) {
-  return (
-    <div className="flex flex-col flex-nowrap gap-2">
-      {transactions.map((hash, i) => {
-        return <Transaction key={i} hash={hash} />
-      })}
-    </div>
-  )
 }
 
 export default function Me() {
@@ -61,7 +51,7 @@ export default function Me() {
 
   const { data, error }: SWRResponse<any, Error> = useSWR(
     `https://api.covalenthq.com/v1/${chainId}/address/${account}/balances_v2/?&key=ckey_224c8a82c8df48d8909fc4a2a05`,
-    // `https://api.covalenthq.com/v1/${chainId}/address/${account}/stacks/sushiswap/acts/?&key=ckey_cba3674f2ce5450f9d5dd290589&swaps=true&quote-currency=usd`,
+    // @ts-ignore TYPE NEEDS FIXING
     (url) =>
       fetch(url)
         .then((r) => r.json())
@@ -74,14 +64,16 @@ export default function Me() {
   return (
     <Container id="user-page" className="py-4 space-y-3 md:py-8 lg:py-12" maxWidth="2xl">
       <Head>
-        <title>Transactions | Soul</title>
-        <meta key="description" name="description" content="Transactions" />
+      <title>Transactions | Soul</title>
+      <meta key="description" name="description" content="Transactions" />
+        <meta key="twitter:description" name="twitter:description" content="My SOUL" />
+        <meta key="og:description" property="og:description" content="My SOUL" />
       </Head>
       <div className="p-4 mb-3 space-y-3">
         <Back />
 
         <Typography component="h1" variant="h2" className=" text-high-emphesis">
-          {i18n._(t`Transactions`)}
+        {i18n._(t`Transactions`)}
         </Typography>
       </div>
 
@@ -140,9 +132,8 @@ export default function Me() {
         </div>
 
         {/* TODO: KEEP THIS STYLE BUT FEED WITH AGNOSTIC TX DATA */}
-        {/* <TransactionList transactions={data.items} /> */}
+        <TransactionList transactions={data.items} />
         <Transaction hash={''} />
-
         {/* <TransactionList transactions={data.items} /> */}
       </div>
     </Container>

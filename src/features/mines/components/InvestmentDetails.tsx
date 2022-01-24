@@ -37,7 +37,7 @@ const InvestmentDetails = ({ farm }) => {
 
   const liquidityToken = new Token(
     chainId,
-    getAddress(farm?.lpToken),
+    getAddress(farm.lpToken),
     18,
     // farm.pair.token1 ? 18 : farm.pair.token0 ? farm.pair.token0.decimals : 18,
     farm.pair.token1 ? farm.pair.symbol : farm.pair.token0.symbol,

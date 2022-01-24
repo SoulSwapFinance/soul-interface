@@ -149,6 +149,14 @@ module.exports = withBundleAnalyzer(
           destination: '/mines',
         },
         {
+          source: '/farms',
+          destination: '/mines',
+        },
+        {
+          source: '/analytics',
+          destination: '/analytics/dashboard',
+        },
+        {
           source: '/bond',
           destination: '/bonds',
         },

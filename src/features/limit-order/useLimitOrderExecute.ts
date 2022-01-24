@@ -3,7 +3,6 @@ import { Signature } from '@ethersproject/bytes'
 import { AddressZero } from '@ethersproject/constants'
 import { TransactionResponse } from '@ethersproject/providers'
 import { Currency, CurrencyAmount } from 'sdk'
-import { LimitOrder, STOP_LIMIT_ORDER_ADDRESS } from '@sushiswap/limit-order-sdk'
 import { calculateGasMargin, ZERO } from 'functions'
 import { useBentoBoxContract, useLimitOrderHelperContract } from 'hooks'
 import useLimitOrders from 'hooks/useLimitOrders'
@@ -14,6 +13,7 @@ import { clear, setLimitOrderAttemptingTxn, setLimitOrderBentoPermit } from 'sta
 import { OrderExpiration } from 'state/limit-order/reducer'
 import { useTransactionAdder } from 'state/transactions/hooks'
 import { useCallback } from 'react'
+import { STOP_LIMIT_ORDER_ADDRESS } from 'constants/addresses'
 
 const getEndTime = (orderExpiration: OrderExpiration | string): number => {
   switch (orderExpiration) {

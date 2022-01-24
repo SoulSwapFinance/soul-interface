@@ -7,6 +7,8 @@ export default function Settings() {
       <Head>
         <title>Settings | Soul</title>
         <meta name="description" content="SoulSwap Settings..." />
+        <meta key="twitter:description" name="twitter:description" content="SoulSwap Settings..." />
+        <meta key="og:description" property="og:description" content="SoulSwap Settings..." />
       </Head>
     </Container>
   )

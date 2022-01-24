@@ -2,11 +2,11 @@ import { getUnixTime, startOfHour, startOfMinute, startOfSecond, subDays, subHou
 
 import { ChainId } from '../../../sdk'
 import { GRAPH_HOST } from '../constants'
-import { blockQuery, blocksQuery } from '../queries'
+import { blockQuery, blocksQuery, massBlocksQuery } from '../queries'
 import { request } from 'graphql-request'
 
 export const BLOCKS = {
-  [ChainId.MAINNET]: 'blocklytics/ethereum-blocks',
+  [ChainId.MAINNET]: 'blocklytics/FANTOM-blocks',
   [ChainId.FANTOM]: 'matthewlilley/fantom-blocks',
   // [ChainId.XDAI]: 'matthewlilley/xdai-blocks',
   // [ChainId.MATIC]: 'matthewlilley/polygon-blocks',
@@ -15,61 +15,35 @@ export const BLOCKS = {
   // [ChainId.CELO]: 'sushiswap/celo-blocks',
 }
 
-export const fetcher = async (chainId = ChainId.FANTOM, query, variables) =>
-  request(`${GRAPH_HOST[chainId]}/subgraphs/name/${BLOCKS[chainId]}`, query, variables)
 
-
-export const getBlock = async (chainId = ChainId.FANTOM, timestamp: number) => {
-  const { blocks } = await fetcher(
-    chainId,
-    blockQuery,
-    timestamp
-      ? {
-          where: {
-            timestamp_gt: timestamp - 600,
-            timestamp_lt: timestamp,
-          },
-        }
-      : {}
-  )
-
-  return Number(blocks?.[0]?.number)
+// @ts-ignore TYPE NEEDS FIXING
+const fetcher = async (chainId = ChainId.FANTOM, query, variables = undefined) => {
+  // @ts-ignore TYPE NEEDS FIXING
+  return request(`${GRAPH_HOST[chainId]}/subgraphs/name/${BLOCKS[chainId]}`, query, variables)
 }
 
+// @ts-ignore TYPE NEEDS FIXING
+export const getBlock = async (chainId = ChainId.FANTOM, variables) => {
+  const { blocks } = await fetcher(chainId, blockQuery, variables)
 
-export const getBlocks = async (chainId = ChainId.FANTOM, start, end) => {
-  const { blocks } = await fetcher(chainId, blocksQuery, {
-    start,
-    end,
-  })
+  return { number: Number(blocks?.[0]?.number) }
+}
+
+// @ts-ignore TYPE NEEDS FIXING
+export const getBlocks = async (chainId = ChainId.FANTOM, variables) => {
+  const { blocks } = await fetcher(chainId, blocksQuery, variables)
   return blocks
 }
 
-export const getOneDayBlock = async (chainId = ChainId.FANTOM) => {
-  const date = startOfHour(subDays(Date.now(), 1))
-  const start = Math.floor(Number(date) / 1000)
-  const end = Math.floor(Number(date) / 1000) + 600
-  const { blocks } = await fetcher(chainId, blocksQuery, { start, end })
-  return blocks?.[0]?.number
-}
-
-export const getOneWeekBlock = async (chainId = ChainId.FANTOM) => {
-  const date = startOfHour(subDays(Date.now(), 7))
-  const start = Math.floor(Number(date) / 1000)
-  const end = Math.floor(Number(date) / 1000) + 600
-  const { blocks } = await fetcher(chainId, blocksQuery, { start, end })
-  return blocks?.[0]?.number
-}
-
-export const getCustomDayBlock = async (chainId = ChainId.FANTOM, days: number) => {
-  const date = startOfHour(subDays(Date.now(), days))
-  const start = Math.floor(Number(date) / 1000)
-  const end = Math.floor(Number(date) / 1000) + 600
-  const { blocks } = await request(`https://api.thegraph.com/subgraphs/name/${BLOCKS[chainId]}`, blocksQuery, {
-    start,
-    end,
-  })
-  return blocks?.[0]?.number
+// @ts-ignore TYPE NEEDS FIXING
+export const getMassBlocks = async (chainId = ChainId.FANTOM, timestamps) => {
+  const data = await fetcher(chainId, massBlocksQuery(timestamps))
+  return Object.values(data).map((entry) => ({
+    // @ts-ignore TYPE NEEDS FIXING
+    number: Number(entry[0].number),
+    // @ts-ignore TYPE NEEDS FIXING
+    timestamp: Number(entry[0].timestamp),
+  }))
 }
 
 // Grabs the last 1000 (a sample statistical) blocks and averages
@@ -77,10 +51,15 @@ export const getCustomDayBlock = async (chainId = ChainId.FANTOM, days: number) 
 export const getAverageBlockTime = async (chainId = ChainId.FANTOM) => {
   // console.log('getAverageBlockTime')
   const now = startOfHour(Date.now())
-  const start = getUnixTime(subHours(now, 6))
-  const end = getUnixTime(now)
-  const blocks = await getBlocks(chainId, start, end)
+  const blocks = await getBlocks(chainId, {
+    where: {
+      timestamp_gt: getUnixTime(subHours(now, 6)),
+      timestamp_lt: getUnixTime(now),
+    },
+  })
+
   const averageBlockTime = blocks?.reduce(
+    // @ts-ignore TYPE NEEDS FIXING
     (previousValue, currentValue, currentIndex) => {
       if (previousValue.timestamp) {
         const difference = previousValue.timestamp - currentValue.timestamp

@@ -113,7 +113,7 @@ const LPTokenSelect = ({ lpToken, onToggle, isSelected, updating, exchange }: Po
           variant="lg"
           className="text-primary"
         >{`${lpToken.tokenA.symbol}/${lpToken.tokenB.symbol}`}</Typography>
-        {lpToken.version && <Badge color="pink">{lpToken.version}</Badge>}
+        {lpToken.version && <Badge color="pink" value={''}>{lpToken.version}</Badge>}
       </div>
       {isSelected ? <XIcon width={16} height={16} /> : <ChevronDownIcon width={16} height={16} />}
     </div>

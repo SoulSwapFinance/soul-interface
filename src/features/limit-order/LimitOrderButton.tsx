@@ -1,17 +1,18 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Currency, CurrencyAmount, Trade, TradeType } from 'sdk'
-import { STOP_LIMIT_ORDER_ADDRESS } from '@sushiswap/limit-order-sdk'
-import { Button } from 'components/Button'
+// import { Button } from 'components/Button'
 import Typography from 'components/Typography'
 import useLimitOrderExecute, { DepositPayload } from '../../features/limit-order/useLimitOrderExecute'
-// import TridentApproveGate from 'features/trident/TridentApproveGate'
+import TridentApproveGate from 'features/trident/TridentApproveGate'
 import { useBentoBoxContract } from 'hooks'
 import { useActiveWeb3React } from 'services/web3'
 import { useAppDispatch } from 'state/hooks'
 import { setFromBentoBalance, setLimitOrderBentoPermit, setLimitOrderShowReview } from 'state/limit-order/actions'
 import { useLimitOrderDerivedInputError, useLimitOrderState } from 'state/limit-order/hooks'
 import React, { FC, useCallback, useState } from 'react'
+import { STOP_LIMIT_ORDER_ADDRESS } from 'constants/addresses'
+import { Button } from 'components/Button'
 
 interface LimitOrderButton {
   trade?: Trade<Currency, Currency, TradeType>
@@ -61,11 +62,11 @@ const LimitOrderButton: FC<LimitOrderButton> = ({ trade, parsedAmounts }) => {
       {permitError && (
         <Typography variant="sm" className="border border-yellow/40 text-yellow p-4 rounded text-center">
           {i18n._(
-            t`Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click 'Approve BentoBox' again for approving using the fallback method`
+            t`Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click 'Approve CoffinBox' again for approving using the fallback method`
           )}
         </Typography>
       )}
-      {/* <TridentApproveGate
+      <TridentApproveGate
         inputAmounts={[trade?.inputAmount]}
         tokenApproveOn={bentoboxContract?.address}
         masterContractAddress={masterContractAddress}
@@ -86,7 +87,7 @@ const LimitOrderButton: FC<LimitOrderButton> = ({ trade, parsedAmounts }) => {
             </Button>
           )
         }}
-      </TridentApproveGate> */}
+      </TridentApproveGate>
     </>
   )
 }

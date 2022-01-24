@@ -1,4 +1,5 @@
 export { ChainId } from './ChainId'
 export { Fee } from './Fee'
+export { OrderStatus } from './OrderStatus'
 export { Rounding } from './Rounding'
 export { TradeType } from './TradeType'

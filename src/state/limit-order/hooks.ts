@@ -34,7 +34,7 @@ import {
   switchCurrencies,
   typeInput,
 } from './actions'
-import { LimitOrderState, OrderExpiration } from './reducer' // selectLimitOrder
+import { LimitOrderState, OrderExpiration, selectLimitOrder } from './reducer'
 
 export function useLimitOrderActionHandlers(): {
   onCurrencySelection(field: Field, currency: Currency): void
@@ -48,7 +48,7 @@ export function useLimitOrderActionHandlers(): {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency.isToken ? currency.address : currency.isNative ? 'ETH' : '',
+          currencyId: currency.isToken ? currency.address : currency.isNative ? 'FTM' : '',
         })
       )
     },
@@ -83,15 +83,14 @@ export function useLimitOrderActionHandlers(): {
 }
 
 export function useLimitOrderState(): LimitOrderState {
-  return useSelector(null)
-  // return useSelector(selectLimitOrder)
+  return useSelector(selectLimitOrder)
 }
 
 function parseCurrencyFromURLParameter(urlParam: any): string {
   if (typeof urlParam === 'string') {
     const valid = isAddress(urlParam)
     if (valid) return valid
-    if (urlParam.toUpperCase() === 'ETH') return 'ETH'
+    if (urlParam.toUpperCase() === 'FTM') return 'FTM'
   }
   return ''
 }
@@ -125,19 +124,17 @@ function validatedRecipient(recipient: any): string | undefined {
 export function queryParametersToSwapState(chainId: ChainId, parsedQs: ParsedQs) {
   let inputCurrency = parseCurrencyFromURLParameter(parsedQs.inputCurrency)
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
-  const ftm =
-    // chainId === 
-      // ChainId.CELO 
-      // ? WNATIVE_ADDRESS[chainId] :
-      'FTM'
+  const eth = 
+  // chainId === ChainId.CELO ? WNATIVE_ADDRESS[chainId] :
+    'FTM'
   const soul = SOUL_ADDRESS[chainId]
   if (inputCurrency === '' && outputCurrency === '') {
-    inputCurrency = ftm
+    inputCurrency = eth
     outputCurrency = soul
   } else if (inputCurrency === '') {
-    inputCurrency = outputCurrency === ftm ? soul : ftm
+    inputCurrency = outputCurrency === eth ? soul : eth
   } else if (outputCurrency === '' || inputCurrency === outputCurrency) {
-    outputCurrency = inputCurrency === ftm ? soul : ftm
+    outputCurrency = inputCurrency === eth ? soul : eth
   }
 
   return {

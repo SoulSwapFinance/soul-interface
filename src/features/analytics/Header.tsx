@@ -41,7 +41,7 @@ const AnalyticsHeader: FC<AnalyticsHeaderProps> = ({ input, output, allowedSlipp
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
           href={{
-            pathname: '/analytics/home',
+            pathname: '/info/home',
             query: getQuery(input, output),
           }}
         >
@@ -62,7 +62,7 @@ const AnalyticsHeader: FC<AnalyticsHeaderProps> = ({ input, output, allowedSlipp
         </NavLink> */}
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
-          href={"/analytics/dashboard"}
+          href={"/info/dashboard"}
           // href={`/${!isRemove ? 'add' : 'remove'}${input ? `/${currencyId(input)}` : ''}${
           //   output ? `/${currencyId(output)}` : ''
         // }`}
@@ -73,7 +73,7 @@ const AnalyticsHeader: FC<AnalyticsHeaderProps> = ({ input, output, allowedSlipp
         </NavLink>
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
-          href={"/analytics/tokens"}
+          href={"/info/tokens"}
           // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
@@ -82,7 +82,7 @@ const AnalyticsHeader: FC<AnalyticsHeaderProps> = ({ input, output, allowedSlipp
         </NavLink>
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
-          href={"/analytics/pairs"}
+          href={"/info/pairs"}
           // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">

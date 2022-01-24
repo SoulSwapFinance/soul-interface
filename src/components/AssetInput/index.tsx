@@ -11,7 +11,7 @@ import { BentoboxIcon, WalletIcon } from 'components/Icon'
 import NumericalInput from 'components/Input/Numeric'
 import Switch from 'components/Switch'
 import Typography from 'components/Typography'
-// import BentoBoxFundingSourceModal from 'features/trident/add/BentoBoxFundingSourceModal'
+import BentoBoxFundingSourceModal from 'features/trident/add/BentoBoxFundingSourceModal'
 import { classNames, maxAmountSpend, tryParseAmount } from 'functions'
 import { useBentoOrWalletBalance } from 'hooks/useBentoOrWalletBalance'
 import useDesktopMediaQuery from 'hooks/useDesktopMediaQuery'
@@ -347,7 +347,7 @@ const AssetInputWalletSwitch: FC<AssetInputWalletSwitchProps> = ({ checked, onCh
   const isDesktop = useDesktopMediaQuery()
   const { i18n } = useLingui()
 
-//   const helper = <BentoBoxFundingSourceModal />
+  const helper = <BentoBoxFundingSourceModal />
 
   return (
     <div
@@ -366,8 +366,7 @@ const AssetInputWalletSwitch: FC<AssetInputWalletSwitchProps> = ({ checked, onCh
             weight={700}
             className="text-right text-high-emphesis lg:text-center lg:flex lg:gap-1 lg:items-center lg:justify-center"
           >
-            {checked ? i18n._(t`Wallet`) : i18n._(t`BentoBox`)} {isDesktop}
-            {/* {checked ? i18n._(t`Wallet`) : i18n._(t`BentoBox`)} {isDesktop && helper} */}
+            {checked ? i18n._(t`Wallet`) : i18n._(t`BentoBox`)} {isDesktop && helper}
           </Typography>
         </div>
         <div className="order-2 lg:order-1">
@@ -389,8 +388,7 @@ const AssetInputWalletSwitch: FC<AssetInputWalletSwitchProps> = ({ checked, onCh
         </div>
       </div>
 
-      {!isDesktop}
-      {/* {!isDesktop && helper} */}
+      {!isDesktop && helper}
     </div>
   )
 }

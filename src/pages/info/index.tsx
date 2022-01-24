@@ -1,27 +1,29 @@
-import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
-import Container from '../../components/Container'
-import MainHeader from '../../features/swap/MainHeader'
+import Container from 'components/Container'
+import Head from 'next/head'
+import AnalyticsHeader from 'features/analytics/Header'
+import { useActiveWeb3React } from 'services/web3'
 
-const Info = () => {
-	return (
+export default function Tokens() {
+  const { account } = useActiveWeb3React()
+
+  return (
     <>
-      {/* <MainHeader />      */}
-    <DoubleGlowShadowV2 opacity="0.6">
-      <Container id="charts-page" maxWidth="7xl" className="grid h-full grid-flow-col grid-cols-5 mx-auto gap-9">
-        <div className="col-span-6 space-y-6 bg-dark-900 lg:col-span-6" style={{ zIndex: 1 }}>
-            {/* <SwapBanner />      */}
-            <iframe 
-              frameBorder={"none"}
-              title={"INFO"}
-              src="https://info.soulswap.finance"
-              height={ '720' }
-              width={ "100%" }
-            />
-	        </div>
-        </Container>
-      </DoubleGlowShadowV2>
+      <Head>
+        <title>SoulSwap Liquidity Pair (LP) Analytics | Soul</title>
+        <meta name="description" content="SoulSwap Liquidity Pair (SLP) Analytics by Soul" />
+      </Head>
+      <AnalyticsHeader />   
+      <Container maxWidth="full" className="grid h-full grid-flow-col grid-cols-5 mx-auto gap-9">
+        <div className="col-span-6 space-y-6 lg:col-span-6">
+      <iframe 
+  			frameBorder={"none"}
+    		title={"INFO"}
+    		src={"https://info.soulswap.finance/home"}
+    		height={"100%" }
+    		width={"100%"}
+      />
+        </div>
+      </Container>
     </>
-
-)}
-
-export default Info
+  )
+}

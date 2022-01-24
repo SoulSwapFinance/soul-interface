@@ -17,11 +17,14 @@ const features: FeatureMap = {
     // Feature.VESTING,
   ],
   [ChainId.BSC]: [Feature.AMM, Feature.ANALYTICS],
+
   [ChainId.FANTOM]: [Feature.AMM,
     Feature.STAKING,
     Feature.ANALYTICS,
     Feature.LIQUIDITY_MINING,
+    // Feature.LIMIT_ORDERS,
     Feature.BENTOBOX],
+
   [ChainId.FANTOM_TESTNET]: [Feature.AMM],
   
 //   [ChainId.MATIC_TESTNET]: [Feature.AMM],

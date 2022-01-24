@@ -3,7 +3,7 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { MinusIcon, PlusIcon } from '@heroicons/react/solid'
 import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
-import { ChainId, SOUL_SUMMONER_ADDRESS, Token } from 'sdk'
+import { SOUL_SUMMONER_ADDRESS, Token } from 'sdk'
 import AssetInput from 'components/AssetInput'
 import { Button } from 'components/Button'
 import { HeadlessUiModal } from 'components/Modal'
@@ -24,6 +24,8 @@ import React, { useState } from 'react'
 // import { PairType } from '../enum'
 import { useUserInfo } from '../hooks'
 import useMasterChef from '../hooks/useMasterChef'
+import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
+import { useCurrency } from 'hooks/Tokens'
 
 // @ts-ignore TYPE NEEDS FIXING
 const ManageBar = ({ farm }) => {
@@ -50,6 +52,13 @@ const ManageBar = ({ farm }) => {
   const parsedWithdrawValue = tryParseAmount(withdrawValue, liquidityToken)
   // @ts-ignore TYPE NEEDS FIXING
   const [approvalState, approve] = useApproveCallback(parsedDepositValue, SOUL_SUMMONER_ADDRESS[chainId])
+  
+  let token0 = useCurrency(farm.pair.token0?.id)
+  let token1 = useCurrency(farm.pair.token1?.id)
+  
+  let [data] = useV2PairsWithPrice([[token0, token1]])
+  let [state, pair, pairPrice] = data
+
 
   const depositError = !parsedDepositValue
     ? 'Enter Amount'
@@ -107,7 +116,7 @@ const ManageBar = ({ farm }) => {
               }}
               className={classNames(
                 'text-md border border-opacity-50',
-                toggle ? 'focus:ring-blue border-blue' : 'focus:ring-pink border-pink'
+                toggle ? 'focus:ring-blue border-blue' : 'focus:ring-purple border-purple'
               )}
             >
               {multiplier === '100' ? 'MAX' : multiplier + '%'}
