@@ -1,36 +1,53 @@
-import React, { FC, Fragment } from 'react'
-import { useActiveWeb3React } from 'services/web3'
-import { ChainId } from '../../sdk'
-import Typography from '../../components/Typography'
-import Image from 'next/image'
-import { NETWORK_ICON, NETWORK_LABEL } from '../../constants/networks'
-import { SUPPORTED_NETWORKS } from '../../modals/NetworkModal'
-import cookie from 'cookie-cutter'
-import { useLingui, Trans } from '@lingui/react'
-import NavLink from '../../components/NavLink'
-import Modal from 'components/Modal/DefaultModal'
+import { t } from '@lingui/macro'
+import { Trans, useLingui } from '@lingui/react'
+import { ChainId } from 'sdk'
 import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
+import NavLink from 'components/NavLink'
+import Typography from 'components/Typography'
+import features from 'config/features'
+import { NETWORK_ICON, NETWORK_LABEL } from 'config/networks'
+import { Feature } from 'enums'
+import { SUPPORTED_NETWORKS } from 'modals/NetworkModal'
+import { useActiveWeb3React } from 'services/web3'
+// @ts-ignore TYPE NEEDS FIXING
+import cookie from 'cookie-cutter'
+import Image from 'next/image'
+import React, { FC, Fragment } from 'react'
 
 interface NetworkGuardProps {
-  networks: ChainId[]
+  feature: Feature
 }
 
-const Component: FC<NetworkGuardProps> = ({ children, networks = [] }) => {
+const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
   const { i18n } = useLingui()
   const { chainId, library, account } = useActiveWeb3React()
 
   const link = (
     <NavLink href="/swap">
-      <a className="text-blue focus:outline-none">home page</a>
+      <a className="text-blue focus:outline-none">{i18n._(t`home page`)}</a>
     </NavLink>
   )
 
+  const supportedNetworks = Object.entries(features).reduce<string[]>((acc, [k, v]) => {
+    if (v.includes(feature)) {
+      acc.push(k)
+    }
+
+    return acc
+  }, [])
+
   return (
     <>
-      <Modal isOpen={!!account && !networks.includes(chainId)} onDismiss={() => null}>
-        <div className="flex flex-col gap-7 justify-center">
+      <HeadlessUIModal.Controlled
+        // @ts-ignore TYPE NEEDS FIXING
+        isOpen={!!account && !features[chainId].includes(feature)}
+        onDismiss={() => null}
+        transparent={true}
+      >
+        <div className="flex flex-col gap-7 justify-center p-4 mt-10 lg:mt-0">
           <Typography variant="h1" className="max-w-2xl text-white text-center" weight={700}>
-            Roll it back - this feature is not yet supported on ${NETWORK_LABEL[chainId]}.
+            {/*@ts-ignore TYPE NEEDS FIXING*/}
+            {i18n._(t`Roll it back - this feature is not yet supported on ${NETWORK_LABEL[chainId]}.`)}
           </Typography>
           <Typography className="text-center">
             <Trans
@@ -40,22 +57,20 @@ const Component: FC<NetworkGuardProps> = ({ children, networks = [] }) => {
             />
           </Typography>
           <Typography className="uppercase text-white text-center text-lg tracking-[.2rem]" weight={700}>
-            Available Networks
+            {i18n._(t`Available Networks`)}
           </Typography>
-          <div
-            className={`grid gap-5 md:gap-10 md:grid-cols-[${Math.min(6, networks.length)}] grid-cols-[${Math.min(
-              3,
-              networks.length
-            )}]`}
-          >
-            {networks.map((key: ChainId, idx: number) => (
+          <div className="flex gap-5 md:gap-10 justify-center">
+            {supportedNetworks.map((key: string, idx: number) => (
               <button
                 className="text-primary hover:text-white flex items-center flex-col gap-2 justify-start"
                 key={idx}
                 onClick={() => {
+                  // @ts-ignore TYPE NEEDS FIXING
                   const params = SUPPORTED_NETWORKS[key]
                   cookie.set('chainId', key)
-                  if (key === ChainId.MAINNET) {
+                  if (key === ChainId.FANTOM.toString()) {
+                    library?.send('wallet_switchEthereumChain', [{ chainId: '0xFA' }, account])
+                  } else if (key === ChainId.MAINNET.toString()) {
                     library?.send('wallet_switchEthereumChain', [{ chainId: '0x1' }, account])
                   } else {
                     library?.send('wallet_addEthereumChain', [params, account])
@@ -64,6 +79,7 @@ const Component: FC<NetworkGuardProps> = ({ children, networks = [] }) => {
               >
                 <div className="w-[40px] h-[40px]">
                   <Image
+                    // @ts-ignore TYPE NEEDS FIXING
                     src={NETWORK_ICON[key]}
                     alt="Switch Network"
                     className="rounded-md filter drop-shadow-currencyLogo"
@@ -71,19 +87,21 @@ const Component: FC<NetworkGuardProps> = ({ children, networks = [] }) => {
                     height="40px"
                   />
                 </div>
+                {/*@ts-ignore TYPE NEEDS FIXING*/}
                 <Typography className="text-sm">{NETWORK_LABEL[key]}</Typography>
               </button>
             ))}
           </div>
         </div>
-      </Modal>
+      </HeadlessUIModal.Controlled>
       {children}
     </>
   )
 }
 
-const NetworkGuard = (networks: ChainId[]) => {
-  return ({ children }) => <Component networks={networks}>{children}</Component>
+const NetworkGuard = (feature: Feature) => {
+  // @ts-ignore TYPE NEEDS FIXING
+  return ({ children }) => <Component feature={feature}>{children}</Component>
 }
 
 export default NetworkGuard

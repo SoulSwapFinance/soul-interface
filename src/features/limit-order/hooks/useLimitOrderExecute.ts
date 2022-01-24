@@ -2,10 +2,10 @@ import { getAddress } from '@ethersproject/address'
 import { Signature } from '@ethersproject/bytes'
 import { AddressZero } from '@ethersproject/constants'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Currency, CurrencyAmount } from 'sdk'
+import { Currency, CurrencyAmount, LimitOrder } from 'sdk'
+import useLimitOrders from 'features/limit-order/hooks/useLimitOrders'
 import { calculateGasMargin, ZERO } from 'functions'
 import { useBentoBoxContract, useLimitOrderHelperContract } from 'hooks'
-import useLimitOrders from 'hooks/useLimitOrders'
 import { useActiveWeb3React } from 'services/web3'
 import { useAddPopup } from 'state/application/hooks'
 import { useAppDispatch } from 'state/hooks'
@@ -177,36 +177,33 @@ const useLimitOrderExecute: UseLimitOrderExecute = () => {
     [account, addTransaction, bentoBoxContract, depositAndApprove, dispatch, limitOrderContractAddress]
   )
 
-    // TODO: create LimitOrderSDK
   const execute = useCallback<UseLimitOrderExecuteExecute>(
     async ({ orderExpiration, inputAmount, outputAmount, recipient }) => {
       if (!inputAmount || !outputAmount || !account || !library) throw new Error('Dependencies unavailable')
 
       const endTime = getEndTime(orderExpiration)
-      const order = 1
-    // =  new LimitOrder(
-        // account,
-        // inputAmount.wrapped,
-        // outputAmount.wrapped,
-        // recipient ? recipient : account,
-        // Math.floor(new Date().getTime() / 1000).toString(),
-        // endTime.toString()
-    //   )
+      const order = new LimitOrder(
+        account,
+        inputAmount.wrapped,
+        outputAmount.wrapped,
+        recipient ? recipient : account,
+        Math.floor(new Date().getTime() / 1000).toString(),
+        endTime.toString()
+      )
 
       try {
         dispatch(setLimitOrderAttemptingTxn(true))
-        // await order?
-            // .signOrderWithProvider(chainId || 1, library)
+        await order?.signOrderWithProvider(chainId || 1, library)
 
-        // const resp = await order?.send()
-        // if (resp.success) {
-        //   addPopup({
-        //     txn: { hash: '', summary: 'Limit order created', success: true },
-        //   })
+        const resp = await order?.send()
+        if (resp.success) {
+          addPopup({
+            txn: { hash: '', summary: 'Limit order created', success: true },
+          })
 
-        //   await mutate()
-        //   dispatch(clear())
-        // }
+          await mutate()
+          dispatch(clear())
+        }
 
         dispatch(setLimitOrderAttemptingTxn(false))
       } catch (e) {
