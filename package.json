@@ -166,6 +166,7 @@
     "cids": "^1.1.7",
     "decimal.js-light": "^2.5.1",
     "eth-block-tracker": "^5.0.1",
+    "fast-json-stable-stringify": "^2.1.0",
     "faunadb": "^4.4.1",
     "graphql": "^15.5.3",
     "graphql-request": "^3.5.0",

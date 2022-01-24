@@ -1,8 +1,11 @@
 import { getAverageBlockTime, getBlock, getOneDayBlock, getOneWeekBlock, getCustomDayBlock } from '../fetchers'
+import stringify from 'fast-json-stable-stringify'
 
 import { useActiveWeb3React } from 'services/web3'
 import useSWR, { SWRConfiguration } from 'swr'
 import { useMemo } from 'react'
+import { ChainId } from 'sdk'
+import { GraphProps } from '../interfaces'
 
 interface useBlockProps {
   timestamp?: number
@@ -71,6 +74,22 @@ export function useAverageBlockTime(swrConfig = undefined) {
   const { data } = useSWR(
     chainId ? ['averageBlockTime', chainId] : null,
     (_, chainId) => getAverageBlockTime(chainId),
+    swrConfig
+  )
+
+  return data
+}
+
+export function useNativePrice({
+  chainId = ChainId.FANTOM,
+  variables,
+  shouldFetch = true,
+  swrConfig = undefined,
+}: GraphProps) {
+  const { data } = useSWR(
+    shouldFetch ? ['nativePrice', chainId, stringify(variables)] : null,
+    // @ts-ignore TYPE NEEDS FIXING
+    () => getNativePrice(chainId, variables),
     swrConfig
   )
 
