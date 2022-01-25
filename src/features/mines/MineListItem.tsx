@@ -15,7 +15,8 @@ import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 import { useSingleCallResult } from 'state/multicall/hooks'
 
 // FETCH PENDING REWARDS //
-import usePendingReward from '../hooks/usePendingReward'
+
+import { usePendingReward } from 'features/mines/hooks'
 import { useSoulPositions } from './hooks'
 import { usePrice } from 'hooks/usePrice'
 import useFarms from 'hooks/useFarmRewards'
