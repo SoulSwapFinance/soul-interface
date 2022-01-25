@@ -16,7 +16,7 @@ import { useSingleCallResult } from 'state/multicall/hooks'
 
 // FETCH PENDING REWARDS //
 
-import { usePendingReward } from 'features/mines/hooks'
+import { usePendingReward } from 'features/mines/hooks/usePendingReward'
 import { useSoulPositions } from './hooks'
 import { usePrice } from 'hooks/usePrice'
 import useFarms from 'hooks/useFarmRewards'
