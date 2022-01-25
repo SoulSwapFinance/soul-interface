@@ -11,7 +11,7 @@ const BIG_TEN = new BigNumber(10)
 const DEFAULT_TOKEN_DECIMAL = 18;
 const MULTICALL_ADDRESS = '0xf682Cc4468608fC4eFbaD6a06D9BC72e7790075a';
 // const RPC_ENDPOINT = 'https://rpcapi.fantom.network/'; // process.env.REACT_APP_RPC_ENDPOINT
-const RPC_ENDPOINT = 'https://rpc.fantom.network/'; // process.env.REACT_APP_RPC_ENDPOINT
+const RPC_ENDPOINT = 'https://ftmrpc.ultimatenodes.io/'; // process.env.REACT_APP_RPC_ENDPOINT
 
 const simpleRpcProvider = new ethers.providers.JsonRpcProvider(RPC_ENDPOINT)
 

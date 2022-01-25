@@ -45,7 +45,7 @@ export const SUPPORTED_NETWORKS: {
       symbol: 'FTM',
       decimals: 18,
     },
-    rpcUrls: ['https://rpc.fantom.network'],
+    rpcUrls: ['https://rpc.fantom.network', 'https://ftmrpc.ultimatenodes.io'],
     blockExplorerUrls: ['https://ftmscan.com'],
   },
   [ChainId.BSC]: {

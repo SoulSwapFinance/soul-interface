@@ -4,7 +4,7 @@ const Web3 = require('web3')
 // import useSingleCallResult from 'state/multicall/hooks'
 import ISoulSwapPairABI from '../../constants/abis/soulswap/ISoulSwapPair.json'
 // const NETWORK_URL = 'https://rpcapi.fantom.network'
-const NETWORK_URL = 'https://rpc.fantom.network'
+const NETWORK_URL = 'https://ftmrpc.ultimatenodes.io/'
 const web3 = new Web3(NETWORK_URL)
 
 export default async function handler(req, res) {

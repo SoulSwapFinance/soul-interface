@@ -5,7 +5,7 @@ import { POOLS } from '../../constants/farms'
 import { ChainId } from '../../sdk'
 
 // const NETWORK_URL = 'https://rpcapi.fantom.network/'
-const NETWORK_URL = 'https://rpc.fantom.network'
+const NETWORK_URL = 'https://ftmrpc.ultimatenodes.io/'
 const web3 = new Web3(NETWORK_URL)
 
 export default async function handler(req, res) {
