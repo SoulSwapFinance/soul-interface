@@ -145,7 +145,7 @@ export const kashiUserPairsQuery = gql`
 
 export const bentoBoxQuery = gql`
   query bentoBoxQuery(
-    $id: String! = "0xf5bce5077908a1b7370b9ae04adc565ebd643966"
+    $id: String! = "0xF539C37275e947F24480fAb9f7e302aE827570b2"
     $block: Block_height
     $where: BentoBox_filter
   ) {

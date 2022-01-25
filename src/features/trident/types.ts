@@ -1,10 +1,17 @@
-import { ConstantProductPool, HybridPool, PoolType } from 'sdk'
+import { ConstantProductPool, HybridPool } from 'sdk'
 import { ChipColor } from 'components/Chip'
 import { ConstantProductPoolState } from 'hooks/useTridentClassicPools'
 import { StablePoolState } from 'hooks/useTridentStablePools'
 
 // TODO add last two pool types
 export type PoolUnion = ConstantProductPool | HybridPool
+
+export enum PoolType {
+  ConstantProduct = 'ConstantProduct',
+  Weighted = 'Weighted',
+  Hybrid = 'Hybrid',
+  ConcentratedLiquidity = 'ConcentratedLiquidity'
+}
 
 export const poolTypeNameMapper: Record<PoolType, string> = {
   ConstantProduct: 'Classic',

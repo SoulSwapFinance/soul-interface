@@ -18,7 +18,7 @@ export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
 export const LIMIT_ORDER_HELPER_ADDRESS: AddressMap = {
   // [ChainId.MATIC]: '0xe2f736B7d1f6071124CBb5FC23E93d141CD24E12',
   // [ChainId.AVALANCHE]: '0x889ec9e19C1598358899fCA4879011686c3d4045',
-  [ChainId.FANTOM]: '0xBf28dD7C3B863eae035eBf535B1B214070E8ddBf',
+  [ChainId.FANTOM]: '0xd63E7D4eB9aB59bf85975c7100a5D92919C4E7E5', // UPDATED
 }
 
 // TODO: update
@@ -88,7 +88,7 @@ export const SOUL_VAULT_ADDRESS: { [chainId in ChainId]: string } = {
 export const COFFIN_BOX_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xD25354e20b5Ed0D5E0A2193993E3dd6e4f42B4f7',
+  [ChainId.FANTOM]: '0xF539C37275e947F24480fAb9f7e302aE827570b2',
   [ChainId.FANTOM_TESTNET]: ''
 }
 

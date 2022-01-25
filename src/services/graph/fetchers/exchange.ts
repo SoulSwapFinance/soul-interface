@@ -147,13 +147,13 @@ export const getMphPrice = async (variables = {}) => {
   })
 }
 
-export const getSushiPrice = async (variables = {}) => {
-  // console.log('getSushiPrice')
-  return getTokenPrice(ChainId.MAINNET, tokenPriceQuery, {
-    id: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
-    ...variables,
-  })
-}
+// export const getSushiPrice = async (variables = {}) => {
+//   // console.log('getSushiPrice')
+//   return getTokenPrice(ChainId.MAINNET, tokenPriceQuery, {
+//     id: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
+//     ...variables,
+//   })
+// }
 
 export const getSoulPrice = async (variables = {}) => {
   // console.log('getSoulPrice')

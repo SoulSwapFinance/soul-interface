@@ -478,156 +478,6 @@ export function useSwapUnderlyingContract(tokenAddress?: string, withSignerIfPos
   return useContract(tokenAddress, ROUTER_ACTION_ABI, withSignerIfPossible)
 }
 
-export function useQuickSwapFactoryContract(): Contract | null {
-  return useContract(
-    '0x5757371414417b8C6CAad45bAeF941aBc7d3Ab32',
-    [
-      {
-        type: 'constructor',
-        stateMutability: 'nonpayable',
-        payable: false,
-        inputs: [
-          {
-            type: 'address',
-            name: '_feeToSetter',
-            internalType: 'address',
-          },
-        ],
-      },
-      {
-        type: 'event',
-        name: 'PairCreated',
-        inputs: [
-          {
-            type: 'address',
-            name: 'token0',
-            internalType: 'address',
-            indexed: true,
-          },
-          {
-            type: 'address',
-            name: 'token1',
-            internalType: 'address',
-            indexed: true,
-          },
-          {
-            type: 'address',
-            name: 'pair',
-            internalType: 'address',
-            indexed: false,
-          },
-          {
-            type: 'uint256',
-            name: '',
-            internalType: 'uint256',
-            indexed: false,
-          },
-        ],
-        anonymous: false,
-      },
-      {
-        type: 'function',
-        stateMutability: 'view',
-        payable: false,
-        outputs: [{ type: 'address', name: '', internalType: 'address' }],
-        name: 'allPairs',
-        inputs: [{ type: 'uint256', name: '', internalType: 'uint256' }],
-        constant: true,
-      },
-      {
-        type: 'function',
-        stateMutability: 'view',
-        payable: false,
-        outputs: [{ type: 'uint256', name: '', internalType: 'uint256' }],
-        name: 'allPairsLength',
-        inputs: [],
-        constant: true,
-      },
-      {
-        type: 'function',
-        stateMutability: 'nonpayable',
-        payable: false,
-        outputs: [{ type: 'address', name: 'pair', internalType: 'address' }],
-        name: 'createPair',
-        inputs: [
-          {
-            type: 'address',
-            name: 'tokenA',
-            internalType: 'address',
-          },
-          {
-            type: 'address',
-            name: 'tokenB',
-            internalType: 'address',
-          },
-        ],
-        constant: false,
-      },
-      {
-        type: 'function',
-        stateMutability: 'view',
-        payable: false,
-        outputs: [{ type: 'address', name: '', internalType: 'address' }],
-        name: 'feeTo',
-        inputs: [],
-        constant: true,
-      },
-      {
-        type: 'function',
-        stateMutability: 'view',
-        payable: false,
-        outputs: [{ type: 'address', name: '', internalType: 'address' }],
-        name: 'feeToSetter',
-        inputs: [],
-        constant: true,
-      },
-      {
-        type: 'function',
-        stateMutability: 'view',
-        payable: false,
-        outputs: [{ type: 'address', name: '', internalType: 'address' }],
-        name: 'getPair',
-        inputs: [
-          { type: 'address', name: '', internalType: 'address' },
-          { type: 'address', name: '', internalType: 'address' },
-        ],
-        constant: true,
-      },
-      {
-        type: 'function',
-        stateMutability: 'nonpayable',
-        payable: false,
-        outputs: [],
-        name: 'setFeeTo',
-        inputs: [
-          {
-            type: 'address',
-            name: '_feeTo',
-            internalType: 'address',
-          },
-        ],
-        constant: false,
-      },
-      {
-        type: 'function',
-        stateMutability: 'nonpayable',
-        payable: false,
-        outputs: [],
-        name: 'setFeeToSetter',
-        inputs: [
-          {
-            type: 'address',
-            name: '_feeToSetter',
-            internalType: 'address',
-          },
-        ],
-        constant: false,
-      },
-    ],
-    false
-  )
-}
-
 export function useComplexRewarderContract(address, withSignerIfPossible?: boolean): Contract | null {
   return useContract(address, COMPLEX_REWARDER_ABI, withSignerIfPossible)
 }
@@ -640,17 +490,13 @@ export function useCloneRewarderContract(address, withSignerIfPossibe?: boolean)
   return useContract(address, CLONE_REWARDER_ABI, withSignerIfPossibe)
 }
 
-export function useMeowshiContract(withSignerIfPossible?: boolean): Contract | null {
-  return useContract('0x650F44eD6F1FE0E1417cb4b3115d52494B4D9b6D', MEOWSHI_ABI, withSignerIfPossible)
-}
-
 export function useLimitOrderContract(withSignerIfPossibe?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(getVerifyingContract(chainId), LIMIT_ORDER_ABI, withSignerIfPossibe)
 }
 
 export function useLimitOrderHelperContract(withSignerIfPossible?: boolean): Contract | null {
-  return useContract('0xBf28dD7C3B863eae035eBf535B1B214070E8ddBf', LIMIT_ORDER_HELPER_ABI, withSignerIfPossible)
+  return useContract('0xd63E7D4eB9aB59bf85975c7100a5D92919C4E7E5', LIMIT_ORDER_HELPER_ABI, withSignerIfPossible)
 }
 
 

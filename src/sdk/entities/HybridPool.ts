@@ -45,8 +45,8 @@ import {
         currencyAmounts[0].currency.chainId,
         HybridPool.getAddress(currencyAmounts[0].currency, currencyAmounts[1].currency, fee, a),
         18,
-        'SLP',
-        'Sushi LP Token'
+        'SOUL-LP',
+        'SoulSwap LP'
       )
       this.fee = fee
       this.a = a

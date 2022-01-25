@@ -3,7 +3,7 @@ import AnalyticsContainer from 'features/analytics/AnalyticsContainer'
 import Background from 'features/analytics/Background'
 import ChartCard from 'features/analytics/ChartCard'
 import DashboardTabs from 'features/analytics/Dashboard/DashboardTabs'
-import PoolList from 'features/analytics/Farms/FarmList'
+// import PoolList from 'features/analytics/Farms/FarmList'
 import PairList from 'features/analytics/Pairs/PairList'
 import TokenList from 'features/analytics/Tokens/TokenList'
 // import useFarmRewards from 'hooks/useFarmRewards'
@@ -41,7 +41,9 @@ const chartTimespans = [
 ]
 
 export default function Dashboard(): JSX.Element {
-  const [type, setType] = useState<'pools' | 'pairs' | 'tokens'>('pools')
+  const [type, setType]
+    = useState<'pairs' | 'tokens'>('pairs')
+    // = useState<'pools' | 'pairs' | 'tokens'>('pools')
 
   const { chainId } = useActiveWeb3React()
 
@@ -175,8 +177,8 @@ export default function Dashboard(): JSX.Element {
 
   const { options, data } = useMemo(() => {
     switch (type) {
-      case 'pools':
-        return {
+      // case 'pools':
+      //   return {
     //       options: {
     //         keys: [
     //           'pair.token0.id',
@@ -189,7 +191,7 @@ export default function Dashboard(): JSX.Element {
     //         threshold: 0.4,
     //       },
     //       data: farmsFormatted,
-        }
+        // }
 
       case 'pairs':
         return {
@@ -229,7 +231,7 @@ export default function Dashboard(): JSX.Element {
 
   return (
     <AnalyticsContainer>
-      <Background background="dashboard">
+      {/* <Background background="dashboard">
         <div className="grid items-center justify-between grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-2">
           <div>
             <div className="text-3xl font-bold text-high-emphesis">Soul Analytics</div>
@@ -240,9 +242,9 @@ export default function Dashboard(): JSX.Element {
           </div>
           <Search term={term} search={search} />
         </div>
-      </Background>
+      </Background> */}
       <div className="px-4 py-6 space-y-4 lg:px-14">
-        <div className="text-2xl font-bold text-high-emphesis">Overview</div>
+        {/* <div className="text-center text-2xl font-bold text-high-emphesis">Dashboard Overview</div> */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <ChartCard
             header="TVL"
@@ -266,7 +268,7 @@ export default function Dashboard(): JSX.Element {
       </div>
       <DashboardTabs currentType={type} setType={setType} />
       <div className="px-4 pt-4 lg:px-14">
-        {type === 'pools' && <PoolList pools={searched} />}
+        {/* {type === 'pools' && <PoolList pools={searched} />} */}
         {type === 'pairs' && <PairList pairs={searched} type={'all'} />}
         {type === 'tokens' && <TokenList tokens={searched} />}
       </div>

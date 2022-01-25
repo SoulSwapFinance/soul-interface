@@ -14,9 +14,10 @@ import {
     findMultiRouteExactOut,
     findSingleRouteExactIn,
     findSingleRouteExactOut,
+    MultiRoute,
+    RouteStatus,
     WNATIVE 
 } from 'sdk'
-import { MultiRoute, RouteStatus } from '@sushiswap/tines'
 
 import { PoolUnion } from 'features/trident/types'
 import { toShareCurrencyAmount } from 'functions'

@@ -15,37 +15,44 @@ export default function Updater(): null {
   const { library, chainId, account } = useActiveWeb3React()
   const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //   if (chainId === ChainId.CELO) {
-  //     // @ts-ignore TYPE NEEDS FIXING
-  //     const originalBlockFormatter = library.formatter._block
-  //     // @ts-ignore TYPE NEEDS FIXING
-  //     library.formatter._block = (value, format) => {
-  //       return originalBlockFormatter(
-  //         {
-  //           gasLimit: Zero,
-  //           ...value,
-  //         },
-  //         format
-  //       )
-  //     }
-  //   }
-  //   return () => {
-  //     if (chainId === ChainId.CELO) {
-  //       // @ts-ignore TYPE NEEDS FIXING
-  //       library.formatter._block = (value: any, format: any): Block => {
-  //         if (value.author != null && value.miner == null) {
-  //           value.miner = value.author
-  //         }
-  //         // The difficulty may need to come from _difficulty in recursed blocks
-  //         const difficulty = value._difficulty != null ? value._difficulty : value.difficulty
-  //         const result = Formatter.check(format, value)
-  //         result._difficulty = difficulty == null ? null : BigNumber.from(difficulty)
-  //         return result
-  //       }
-  //     }
-  //   }
-  // }, [chainId, library])
+  useEffect(() => {
+    if (chainId != ChainId.FANTOM 
+      && chainId != ChainId.MAINNET
+      && chainId != ChainId.BSC
+      ) {
+      // @ts-ignore TYPE NEEDS FIXING
+      const originalBlockFormatter = library.formatter._block
+      // @ts-ignore TYPE NEEDS FIXING
+      library.formatter._block = (value, format) => {
+        return originalBlockFormatter(
+          {
+            gasLimit: Zero,
+            ...value,
+          },
+          format
+        )
+      }
+    }
+    return () => {
+      // if (chainId === ChainId.CELO) {
+      if (chainId != ChainId.FANTOM 
+        && chainId != ChainId.MAINNET
+        && chainId != ChainId.BSC
+        ) {     
+        // @ts-ignore TYPE NEEDS FIXING
+        library.formatter._block = (value: any, format: any): Block => {
+          if (value.author != null && value.miner == null) {
+            value.miner = value.author
+          }
+          // The difficulty may need to come from _difficulty in recursed blocks
+          const difficulty = value._difficulty != null ? value._difficulty : value.difficulty
+          const result = Formatter.check(format, value)
+          result._difficulty = difficulty == null ? null : BigNumber.from(difficulty)
+          return result
+        }
+      }
+    }
+  }, [chainId, library])
 
   const windowVisible = useIsWindowVisible()
 
@@ -95,7 +102,7 @@ export default function Updater(): null {
 
     library
       .getBlock('latest')
-      // .then(blockCallback)
+      .then(blockCallback)
       .catch((error) => console.error(`Failed to get block for chainId: ${chainId}`, error))
 
     library.on('block', onBlock)
