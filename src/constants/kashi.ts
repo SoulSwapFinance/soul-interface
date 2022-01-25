@@ -61,14 +61,12 @@ export const PROTOCOL_FEE = BigNumber.from('10000') // 10%
 
 export const PROTOCOL_FEE_DIVISOR = BigNumber.from('100000')
 
-// export const COFFIN_BOX_ADDRESS = ''
-
 export const COFFIN_BOX_ADDRESS: {
   [chainId in ChainId]: string
 } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xB9c7c6368a69b61508a556bd539eb2b8C351d27A', // TODO: REVIEW
+  [ChainId.FANTOM]: '0xD25354e20b5Ed0D5E0A2193993E3dd6e4f42B4f7', // TODO: REVIEW
   [ChainId.FANTOM_TESTNET]: ''
 }
 

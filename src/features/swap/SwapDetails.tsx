@@ -6,7 +6,7 @@ import { Currency, Route, TradeVersion } from 'sdk'
 import Typography from 'components/Typography'
 import TradePrice from 'features/swap/TradePrice'
 import { classNames, computeRealizedLPFeePercent, shortenAddress } from 'functions'
-import { getTradeVersion } from 'functions/getTradeVersion'
+// import { getTradeVersion } from 'functions/getTradeVersion'
 import useSwapSlippageTolerance from 'hooks/useSwapSlippageTollerence'
 import { TradeUnion } from 'types'
 import React, { FC, Fragment, useState } from 'react'
@@ -81,7 +81,8 @@ const SwapDetailsContent: FC<SwapDetails> = ({ trade, recipient }) => {
   const realizedLpFeePercent = trade ? computeRealizedLPFeePercent(trade) : undefined
 
   let path
-  if (trade && getTradeVersion(trade) === TradeVersion.V2TRADE) {
+  if (trade) {
+  // if (trade && getTradeVersion(trade) === TradeVersion.V2TRADE) {
     path = (trade.route as Route<Currency, Currency>).path
   }
 

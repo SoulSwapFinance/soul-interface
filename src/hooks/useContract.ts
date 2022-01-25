@@ -87,6 +87,7 @@ import SUMMONER_HELPER_ABI from '../constants/abis/soulswap/helper.json'
 import PRICE_HELPER_ABI from '../constants/abis/soulswap/pricehelper.json'
 import BORING_HELPER_ABI from '../constants/abis/soulswap/boring-helper.json'
 import HARVEST_HELPER_ABI from '../constants/abis/soulswap/harvest-helper.json'
+import COFFIN_BOX_ABI from '../constants/abis/soulswap/coffinbox.json'
 
 // bridge
 import anyswapEthOperaBridge_ABI from '../constants/abis/soulswap/bridge/anyswapEthOperaBridge.json'
@@ -392,7 +393,7 @@ export function useTimelockContract(): Contract | null {
 
 export function useBentoBoxContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && COFFIN_BOX_ADDRESS[chainId], BENTOBOX_ABI, withSignerIfPossible)
+  return useContract(chainId && COFFIN_BOX_ADDRESS[chainId], COFFIN_BOX_ABI, withSignerIfPossible)
 }
 
 export function useKashiPairContract(withSignerIfPossible?: boolean): Contract | null {
@@ -649,7 +650,7 @@ export function useLimitOrderContract(withSignerIfPossibe?: boolean): Contract |
 }
 
 export function useLimitOrderHelperContract(withSignerIfPossible?: boolean): Contract | null {
-  return useContract('0xe2f736B7d1f6071124CBb5FC23E93d141CD24E12', LIMIT_ORDER_HELPER_ABI, withSignerIfPossible)
+  return useContract('0xBf28dD7C3B863eae035eBf535B1B214070E8ddBf', LIMIT_ORDER_HELPER_ABI, withSignerIfPossible)
 }
 
 
