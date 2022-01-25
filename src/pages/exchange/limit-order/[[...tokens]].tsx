@@ -145,7 +145,7 @@ const LimitOrder = () => {
         />
       </SwapLayoutCard>
       <Typography variant="xs" className="px-10 mt-5 italic text-center text-low-emphesis">
-        {i18n._(t`Limit orders use funds from CoffinBox, to create a limit order depositing into BentoBox is required.`)}
+        {i18n._(t`Limit orders use funds from CoffinBox, to create a limit order depositing into CoffinBox is required.`)}
       </Typography>
     </>
   )
