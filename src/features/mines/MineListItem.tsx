@@ -35,9 +35,9 @@ interface MineListItem {
 // @ts-ignore TYPE NEEDS FIXING
 const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   const { i18n } = useLingui()
-  const token0 = useCurrency(farm.pair.token0?.id) ?? undefined
+  const token0 = useCurrency(farm.pair?.token0?.id) ?? undefined
   const token1 = useCurrency(farm.pair.token1?.id) ?? undefined
-  const tvlInfo = useTVL()
+  // const tvlInfo = useTVL()
   const harvestHelperContract = useHarvestHelperContract()
   const soulPrice = usePrice(SOUL_ADDRESS[250]) // to avoid RPC call
 
@@ -90,27 +90,27 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
         {token1 ? <CurrencyLogoArray currencies={[token0, token1]} dense size={32} />
           : <CurrencyLogo currency={token0} size={54} />
         }
-        {/* <HideOnMobile> */}
-          <div className="flex flex-col items-start">
-            <Typography weight={700} className="flex gap-1 text-high-emphesis">
-              {farm.pair.token1 ?
-                farm?.pair?.token0?.symbol
-                : farm?.pair?.token0?.symbol
-              }
-              {farm.pair.token1 &&
-                <span className="text-low-emphesis">/</span>
-              }
-              {farm?.pair?.token1?.symbol}
-            </Typography>
-            {farm?.rewards?.map((reward, i) => (
-              <Typography variant="xs" className="text-low-emphesis">
-                {formatNumber(reward.rewardPerDay)} DAILY
-                {/* <CurrencyLogo currency={SOUL[250]} size={isMobile ? 32 : 50} /> */}
-              </Typography>
-            ))
+        <div className="flex flex-col items-start">
+          {/* <HideOnMobile> */}
+          <Typography weight={700} className="flex gap-1 text-high-emphesis">
+            {farm.pair.token1 ?
+              farm?.pair?.token0?.symbol
+              : farm?.pair?.token0?.symbol
             }
-          </div>
-        {/* </HideOnMobile> */}
+            {farm.pair.token1 &&
+              <span className="text-low-emphesis">/</span>
+            }
+            {farm?.pair?.token1?.symbol}
+          </Typography>
+          {farm?.rewards?.map((reward, i) => (
+            <Typography variant="xs" className="text-low-emphesis">
+              {formatNumber(reward.rewardPerDay)} DAILY
+              {/* <CurrencyLogo currency={SOUL[250]} size={isMobile ? 32 : 50} /> */}
+            </Typography>
+          ))
+          }
+          {/* </HideOnMobile> */}
+        </div>
       </div>
       <div className={TABLE_TBODY_TD_CLASSNAME(1, 4)}>
         <Typography weight={700} className="text-high-emphesis">
