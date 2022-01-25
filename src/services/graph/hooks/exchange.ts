@@ -14,16 +14,13 @@ import {
   getNativePrice,
   getPairDayData,
   getPairs,
-  getPicklePrice,
   getRulerPrice,
   getSoulPrice,
   getSpellPrice,
-  getSushiPrice,
   getTokenDayData,
   getTokenPairs,
   getTokens,
   getTruPrice,
-  getYggPrice,
 } from '../fetchers'
 import { GraphProps } from '../interfaces'
 import { ethPriceQuery } from '../queries'
@@ -119,10 +116,10 @@ export function useCvxPrice(swrConfig: SWRConfiguration = undefined) {
 }
 
 // @ts-ignore TYPE NEEDS FIXING
-export function useSushiPrice(swrConfig: SWRConfiguration = undefined) {
-  const { data } = useSWR(['sushiPrice'], () => getSushiPrice(), swrConfig)
-  return data
-}
+// export function useSushiPrice(swrConfig: SWRConfiguration = undefined) {
+//   const { data } = useSWR(['sushiPrice'], () => getSushiPrice(), swrConfig)
+//   return data
+// }
 
 // @ts-ignore TYPE NEEDS FIXING
 export function useSoulPrice(swrConfig: SWRConfiguration = undefined) {
@@ -159,7 +156,7 @@ export function useSoulPairs({
   swrConfig = undefined,
 }: GraphProps) {
   const { data } = useSWR(
-    shouldFetch ? ['sushiPairs', chainId, stringify(variables)] : null,
+    shouldFetch ? ['soulPairs', chainId, stringify(variables)] : null,
     // @ts-ignore TYPE NEEDS FIXING
     (_, chainId) => getPairs(chainId, variables),
     swrConfig

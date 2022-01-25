@@ -169,7 +169,7 @@ export default function useFarmRewards() {
             } else if (pool.chef === Chef.MINICHEF) {
                 const soulPerSecond = ((pool.allocPoint / pool.miniChef.totalAllocPoint) * pool.miniChef.soulPerSecond) / 1e18
                 const soulPerBlock = soulPerSecond * averageBlockTime
-                const sushiPerDay = soulPerBlock * blocksPerDay
+                const soulPerDay = soulPerBlock * blocksPerDay
                 const summonerInfo = useSummonerInfo()
 
                 const rewardPerSecond =
@@ -269,7 +269,7 @@ export default function useFarmRewards() {
             } else if (pool.chef === Chef.OLD_FARMS) {
                 const soulPerSecond = ((pool.allocPoint / pool.miniChef.totalAllocPoint) * pool.miniChef.soulPerSecond) / 1e18
                 const soulPerBlock = soulPerSecond * averageBlockTime
-                const sushiPerDay = soulPerBlock * blocksPerDay
+                const soulPerDay = soulPerBlock * blocksPerDay
 
                 const rewardPerSecond =
                     //   pool.rewarder.rewardPerSecond && chainId === ChainId.ARBITRUM
@@ -294,7 +294,7 @@ export default function useFarmRewards() {
                 rewards[0] = {
                     ...defaultReward,
                     rewardPerBlock: soulPerBlock,
-                    rewardPerDay: sushiPerDay,
+                    rewardPerDay: soulPerDay,
                 }
 
                 // @ts-ignore TYPE NEEDS FIXING
