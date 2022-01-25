@@ -145,11 +145,15 @@ module.exports = withBundleAnalyzer(
         },
         {
           source: '/farm',
-          destination: '/mines',
+          destination: '/mines?filter=active',
         },
         {
           source: '/farms',
-          destination: '/mines',
+          destination: '/mines?filter=active',
+        },
+        {
+          source: '/mines',
+          destination: '/mines?filter=active',
         },
         {
           source: '/analytics',

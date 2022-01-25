@@ -33,7 +33,7 @@ const MineListItemDetails = ({ farm, onDismiss }) => {
 
   return (
     <Context.Provider value={useMemo(() => ({ content, setContent }), [content, setContent])}>
-      <div className={classNames('mt-3')}>
+      <div className={classNames('')}>
         <div className={classNames(COLUMN_CONTAINER, content ? '' : 'hidden')}>{content}</div>
         <div className={classNames(COLUMN_CONTAINER, content ? 'hidden' : '')}>
           <HeadlessUiModal.Header
@@ -42,9 +42,8 @@ const MineListItemDetails = ({ farm, onDismiss }) => {
                 {view === MineModalView.Liquidity
                   ? i18n._(t`Manage Liquidity`)
                   : view === MineModalView.Position
-                  ? i18n._(t`Position and Rewards`)
-                  : i18n._(t`Manage Position`)}
-                {/* <QuestionHelper text={<InformationDisclosure farm={farm} />} /> */}
+                    ? i18n._(t`Position and Rewards`)
+                    : i18n._(t`Manage Position`)}
                 <QuestionHelper className="!bg-dark-800 !shadow-xl p-2" text={<InformationDisclosure farm={farm} />} />
               </div>
             }
@@ -56,12 +55,12 @@ const MineListItemDetails = ({ farm, onDismiss }) => {
             onChange={(view: MineModalView) => dispatch(setMineModalView(view))}
             variant="filled"
           >
-            
-            <ToggleButtonGroup.Button value={MineModalView.Liquidity}>
-              {farm.pair.token1 && (
-              farm.pair.type === PairType.KASHI ? i18n._(t`Lending`) : i18n._(t`Liquidity`)
-              )}
-            </ToggleButtonGroup.Button>
+
+            {farm.pair.token1 && (
+              <ToggleButtonGroup.Button value={MineModalView.Liquidity}>
+                {farm.pair.type === PairType.KASHI ? i18n._(t`Lending`) : i18n._(t`Liquidity`)}
+              </ToggleButtonGroup.Button>
+            )}
             <ToggleButtonGroup.Button value={MineModalView.Staking}>{i18n._(t`Staking`)}</ToggleButtonGroup.Button>
             <ToggleButtonGroup.Button value={MineModalView.Position}>{i18n._(t`Rewards`)}</ToggleButtonGroup.Button>
           </ToggleButtonGroup>
@@ -70,10 +69,10 @@ const MineListItemDetails = ({ farm, onDismiss }) => {
           <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Position ? 'block' : 'hidden')}>
             <InvestmentDetails farm={farm} />
           </div>
-          { farm.pair.token1 &&
+          {farm.pair.token1 &&
             <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Liquidity ? 'block' : 'hidden')}>
-            <ManageSwapPair farm={farm} />
-          </div>
+              <ManageSwapPair farm={farm} />
+            </div>
           }
           {/* <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Liquidity ? 'block' : 'hidden')}>
             {farm.pair.type === PairType.KASHI ? <ManageKashiPair farm={farm} /> : <ManageSwapPair farm={farm} />}

@@ -264,7 +264,7 @@ export default function Mines(): JSX.Element {
             <Search search={search} term={term} />
             <Menu />
           </div>
-          <MineList farms={result} term={term} filter={undefined} />
+          <MineList farms={result} term={term} />
         </div>
       </TridentBody>
     </>

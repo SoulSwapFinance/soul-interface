@@ -22,8 +22,8 @@ import { Button } from 'components/Button'
 
 const InvestmentDetails = ({ farm }) => {
   const { i18n } = useLingui()
-  const { account, chainId } = useActiveWeb3React()
-  const [depositValue, setDepositValue] = useState('')
+  // const { account, 250 } = useActiveWeb3React()
+  // const [depositValue, setDepositValue] = useState('')
 
   const { harvest, stake } = useSummoner()
   const router = useRouter()
@@ -33,10 +33,10 @@ const InvestmentDetails = ({ farm }) => {
   let token0 = useCurrency(farm.pair.token0?.id)
   let token1 = useCurrency(farm.pair.token1?.id)
 
-  const soulPrice = usePrice(SOUL_ADDRESS[chainId])
+  const soulPrice = usePrice(SOUL_ADDRESS[250])
 
   const liquidityToken = new Token(
-    chainId,
+    250,
     getAddress(farm.lpToken),
     18,
     // farm.pair.token1 ? 18 : farm.pair.token0 ? farm.pair.token0.decimals : 18,
@@ -54,13 +54,13 @@ const InvestmentDetails = ({ farm }) => {
   const pendingReward = usePendingReward(farm)
 
   const positionFiatValue = (
-    // USD[chainId], stakedAmount
+    // USD[250], stakedAmount
     // )
-    USD[chainId],
+    USD[250],
       JSBI.BigInt(
           ((Number(stakedAmount?.toExact()) * farm.pair.reserveUSD) / farm.pair.totalSupply)
-            .toFixed(USD[chainId].decimals)
-            .toBigNumber(USD[chainId].decimals)
+            .toFixed(18)
+            .toBigNumber(18)
         )
   )
   // const typedDepositValue = tryParseAmount(depositValue, liquidityToken)
@@ -68,10 +68,10 @@ const InvestmentDetails = ({ farm }) => {
   // function getTvl() {
   //   let lpPrice = 0
   //   let decimals = 18
-  //   if (farm.lpToken.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase()) {
+  //   if (farm.lpToken.toLowerCase() == SOUL_ADDRESS[250].toLowerCase()) {
   //     lpPrice = Number(soulPrice)
   //     decimals = farm.pair.token0?.decimals
-  //   } else if (farm.lpToken.toLowerCase() == WNATIVE[chainId].toLowerCase()) {
+  //   } else if (farm.lpToken.toLowerCase() == WNATIVE[250].toLowerCase()) {
   //     lpPrice = Number(ftmPrice)
   //   } else if (farm.lpToken.toLowerCase() == '0x124B06C5ce47De7A6e9EFDA71a946717130079E6'.toLowerCase()) {
   //     lpPrice = Number(seancePrice)
@@ -174,7 +174,7 @@ const InvestmentDetails = ({ farm }) => {
           farm.pair?.token1 ?
           (
             <Button
-            color="purple"
+            color="blue"
             className="text-emphasis"
             // variant={'flexed'}
             variant="outlined"
@@ -186,7 +186,7 @@ const InvestmentDetails = ({ farm }) => {
             </Button>
           ) : (
             <Button
-            color="purple"
+            color="blue"
             variant="outlined"
             disabled={pendingTx}
             onClick={claimStaking}
@@ -202,7 +202,7 @@ const InvestmentDetails = ({ farm }) => {
           <div className="flex flex-col space-y-2">
             {farm?.rewards?.map((reward, i) => (
               <div key={i} className="flex items-center space-x-2">
-                <CurrencyLogo currency={SOUL[chainId]} size="30px" className="rounded-md" />
+                <CurrencyLogo currency={SOUL[250]} size="30px" className="rounded-md" />
                 {i === 0 && <Typography>{formatNumber(pendingSoul?.toSignificant(4) ?? 0)}</Typography>}
                 {i === 1 && <Typography>{formatNumber(pendingReward)}</Typography>}
                 <Typography>{reward.token}</Typography>

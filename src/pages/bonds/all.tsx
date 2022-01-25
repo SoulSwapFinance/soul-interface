@@ -9,7 +9,7 @@ import BondList from '../../features/bond/BondList'
 const All = () => {
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">
-      <DoubleGlowShadowV2 opacity="0.6">
+      {/* <DoubleGlowShadowV2 opacity="0.6"> */}
       <Container id="bond-page">
         <Head>
           <title>Bond | All</title>
@@ -17,8 +17,7 @@ const All = () => {
         </Head>
         <BondList />
       </Container>
-      </DoubleGlowShadowV2>
-
+      {/* </DoubleGlowShadowV2> */}
     </Wrap>
   )
 }
