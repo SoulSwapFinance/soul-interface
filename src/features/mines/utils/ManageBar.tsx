@@ -35,7 +35,7 @@ const ManageBar = ({ farm }) => {
   const [toggle, setToggle] = useState(true)
   const [depositValue, setDepositValue] = useState<string>()
   const [withdrawValue, setWithdrawValue] = useState<string>()
-  const { deposit, withdraw } = useMasterChef()
+  const { deposit, withdraw, enterStaking, leaveStaking } = useMasterChef()
   const addTransaction = useTransactionAdder()
   const liquidityToken = new Token(
     // @ts-ignore TYPE NEEDS FIXING
@@ -146,7 +146,8 @@ const ManageBar = ({ farm }) => {
           >
             {i18n._(t`Approve`)}
           </Button>
-        ) : (
+        ) : 
+        ( farm.pair.token1 ? (
           <Button
             fullWidth
             color={!isDepositValid && !!parsedDepositValue ? 'red' : 'blue'}
@@ -176,10 +177,42 @@ const ManageBar = ({ farm }) => {
           >
             {depositError || i18n._(t`Confirm Deposit`)}
           </Button>
+          ) : (
+          <Button
+            fullWidth
+            color={!isDepositValid && !!parsedDepositValue ? 'red' : 'blue'}
+            onClick={async () => {
+              try {
+                // KMP decimals depend on asset, SLP is always 18
+                // @ts-ignore TYPE NEEDS FIXING
+                const tx = await enterStaking(farm.id, BigNumber.from(parsedDepositValue?.quotient.toString()))
+                if (tx?.hash) {
+                  setContent(
+                    <HeadlessUiModal.SubmittedModalContent
+                      txHash={tx?.hash}
+                      header={i18n._(t`Success!`)}
+                      subheader={i18n._(t`Success! Transaction successfully submitted`)}
+                      onDismiss={() => dispatch(setMinesModalOpen(false))}
+                    />
+                  )
+                  addTransaction(tx, {
+                    summary: `Deposit ${farm.pair.token0.name}/${farm.pair.token1.name}`,
+                  })
+                }
+              } catch (error) {
+                console.error(error)
+              }
+            }}
+            disabled={!isDepositValid}
+          >
+            {depositError || i18n._(t`Confirm Deposit`)}
+          </Button>
         )
+      )
       ) : !account ? (
         <Web3Connect color="blue" className="w-full" />
       ) : (
+        farm.pair.token1 ?
         <Button
           fullWidth
           color={!isWithdrawValid && !!parsedWithdrawValue ? 'red' : 'blue'}
@@ -209,6 +242,36 @@ const ManageBar = ({ farm }) => {
         >
           {withdrawError || i18n._(t`Confirm Withdraw`)}
         </Button>
+      : 
+      <Button
+      fullWidth
+      color={!isWithdrawValid && !!parsedWithdrawValue ? 'red' : 'blue'}
+      onClick={async () => {
+        try {
+          // KMP decimals depend on asset, SLP is always 18
+          // @ts-ignore TYPE NEEDS FIXING
+          const tx = await leaveStaking(farm.id, BigNumber.from(parsedWithdrawValue?.quotient.toString()))
+          if (tx?.hash) {
+            setContent(
+              <HeadlessUiModal.SubmittedModalContent
+                txHash={tx?.hash}
+                header={i18n._(t`Success!`)}
+                subheader={i18n._(t`Success! Transaction successfully submitted`)}
+                onDismiss={() => dispatch(setMinesModalOpen(false))}
+              />
+            )
+            addTransaction(tx, {
+              summary: `Withdraw ${farm.pair.token0.name}/${farm.pair.token1.name}`,
+            })
+          }
+        } catch (error) {
+          console.error(error)
+        }
+      }}
+      disabled={!isWithdrawValid}
+    >
+      {withdrawError || i18n._(t`Confirm Withdraw`)}
+    </Button>
       )}
     </>
   )
