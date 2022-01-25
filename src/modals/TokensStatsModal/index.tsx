@@ -3,7 +3,6 @@ import { useModalOpen, useToggleTokenStatsModal } from 'state/application/hooks'
 import { ApplicationModal } from 'state/application/actions'
 import Image from 'next/image'
 import styled from 'styled-components'
-import Modal from 'components/DefaultModal'
 import Typography from 'components/Typography'
 import ExternalLink from 'components/ExternalLink'
 import { ExternalLink as LinkIcon } from 'react-feather'
@@ -21,6 +20,7 @@ import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
 import ModalHeader from 'components/Modal/Header'
 import { usePrice } from 'hooks/usePrice'
+import { HeadlessUiModal } from 'components/Modal'
 
 const cache: { [key: string]: number } = {};
 
@@ -63,7 +63,10 @@ export default function SoulStatsModal(): JSX.Element | null {
   if (!chainId) return null
 
   return (
-    <Modal isOpen={soulStatsModalOpen} onDismiss={toggleSoulStatsModal} maxWidth={672}>
+    <HeadlessUiModal.Controlled isOpen={soulStatsModalOpen} 
+    onDismiss={toggleSoulStatsModal} 
+    maxWidth={'md'}
+    >
       <div className="space-y-8">
         <div className="space-y-4">
           <ModalHeader header={''} onClose={toggleSoulStatsModal} />
@@ -304,7 +307,7 @@ export default function SoulStatsModal(): JSX.Element | null {
           </NavLink>
         </Button>
       </div>
-    </Modal>
+    </HeadlessUiModal.Controlled>
   )
 }
 
