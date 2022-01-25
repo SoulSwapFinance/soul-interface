@@ -29,11 +29,13 @@ export const computeConstantProductPoolAddress = ({
     [...[token0.address, token1.address].sort(), fee, twap]
   )
 
+    // TODO: update masterDeployerAddress
   // Compute init code hash based off the bytecode, deployData & masterDeployerAddress
   const CONSTANT_PRODUCT_POOL_INIT_CODE_HASH = computePoolInitCodeHash({
     creationCode: constantProductPoolArtifact.bytecode,
     deployData,
-    masterDeployerAddress: EXPORTS[ChainId.MAINNET][ChainKey.MAINNET].contracts.MasterDeployer.address,
+    masterDeployerAddress: '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506',
+    // masterDeployerAddress: EXPORTS[ChainId.FANTOM][ChainKey.FANTOM].contracts.MasterDeployer.address,
   })
 
   // Compute pool address

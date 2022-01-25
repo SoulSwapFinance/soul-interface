@@ -305,8 +305,9 @@ export function useEnchantHelperContract(withSignerIfPossible = true): Contract 
 export function useTridentRouterContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   // @ts-ignore TYPE NEEDS FIXING
-  const router = TRIDENT[chainId]?.[CHAIN_KEY[chainId]]?.contracts.TridentRouter
-  return useContract(router?.address, router?.abi, withSignerIfPossible)
+  return useContract(chainId && TRIDENT[chainId], FACTORY_ABI, withSignerIfPossible)
+  // const router = TRIDENT[chainId]?.[CHAIN_KEY[chainId]]?.contracts.TridentRouter
+  // return useContract(router?.address, router?.abi, withSignerIfPossible)
 }
 
 export function useMasterChefContract(withSignerIfPossible?: boolean): Contract | null {
@@ -316,16 +317,18 @@ export function useMasterChefContract(withSignerIfPossible?: boolean): Contract 
 
 export function useConstantProductPoolFactory(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  // @ts-ignore TYPE NEEDS FIXING
-  const factory = TRIDENT[chainId]?.[CHAIN_KEY[chainId]]?.contracts.ConstantProductPoolFactory
-  return useContract(factory?.address, factory?.abi, withSignerIfPossible)
+  // @ts-ignore TYPE NEEDS FIXING // TODO
+  return useContract(chainId && TRIDENT[chainId], FACTORY_ABI, withSignerIfPossible)
+  // const factory = TRIDENT[chainId]?.[CHAIN_KEY[chainId]]?.contracts.ConstantProductPoolFactory
+  // return useContract(factory?.address, factory?.abi, withSignerIfPossible)
 }
 
 export function useStablePoolFactory(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   // @ts-ignore TYPE NEEDS FIXING
-  const factory = TRIDENT[chainId]?.[CHAIN_KEY[chainId]]?.contracts.HybridPoolFactory
-  return useContract(factory?.address, factory?.abi, withSignerIfPossible)
+  return useContract(chainId && TRIDENT[chainId], FACTORY_ABI, withSignerIfPossible)
+  // const factory = TRIDENT[chainId]?.[CHAIN_KEY[chainId]]?.contracts.HybridPoolFactory
+  // return useContract(factory?.address, factory?.abi, withSignerIfPossible)
 }
 
 export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {

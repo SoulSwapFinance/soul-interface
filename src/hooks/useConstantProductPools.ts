@@ -5,7 +5,8 @@ import {
     Fee, 
     PoolState,
     Currency, 
-    CurrencyAmount } from 'sdk'
+    CurrencyAmount, 
+    } from 'sdk'
 import constantProductPoolArtifact from 'sdk/abis/ConstantProductPool.json'
 import { enumToArray } from 'functions/array/enumToArray'
 import { useConstantProductPoolFactory } from 'hooks/useContract'
@@ -70,17 +71,23 @@ export function useConstantProductPools(pools: PoolInput[]): PoolWithState<Const
       const tokenB = pools[i][1]?.wrapped
       const fee = pools[i]?.[2]
       const twap = pools[i]?.[3]
-      if (loading) return { state: PoolState.LOADING }
-      if (!reserves) return { state: PoolState.NOT_EXISTS }
+      // TODO: fix lines below
+      if (loading) return
+      // if (loading) return { state: PoolState.LOADING }
+      // if (!reserves) return { state: PoolState.NOT_EXISTS }
       if (!tokenA || !tokenB || tokenA.equals(tokenB)) return { state: PoolState.INVALID }
 
-      const { _reserve0: reserve0, _reserve1: reserve1 } = reserves
+      // const { _reserve0: reserve0, _reserve1: reserve1 } = reserves
       const [token0, token1] = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA]
       return {
-        state: PoolState.EXISTS,
+        // TODO: fix lines below
+        state: 2,
+        // state: PoolState.EXISTS,
         pool: new ConstantProductPool(
-          CurrencyAmount.fromRawAmount(token0, reserve0.toString()),
-          CurrencyAmount.fromRawAmount(token1, reserve1.toString()),
+          CurrencyAmount.fromRawAmount(token0, 'reserve0'),
+          CurrencyAmount.fromRawAmount(token1, 'reserve1'),
+          // CurrencyAmount.fromRawAmount(token0, reserve0.toString()),
+          // CurrencyAmount.fromRawAmount(token1, reserve1.toString()),
           fee,
           twap
         ),
