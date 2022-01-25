@@ -56,9 +56,9 @@ const FarmList = ({ farms, term }) => {
             onClick={() => requestSort('pair.token1.symbol')}
           >
             <Typography variant="sm" weight={700}>
-              {i18n._(t`Asset`)}
+              {i18n._(t`Liquidity Pools`)}
             </Typography>
-            <SortIcon id={sortConfig.key} direction={sortConfig.direction} active={sortConfig.key === 'symbol'} />
+            {/* <SortIcon id={sortConfig.key} direction={sortConfig.direction} active={sortConfig.key === 'symbol'} /> */}
           </div>
           <div
             className={classNames('flex gap-1 items-center cursor-pointer justify-end', TABLE_TR_TH_CLASSNAME(1, 4))}
@@ -67,7 +67,7 @@ const FarmList = ({ farms, term }) => {
             <Typography variant="sm" weight={700}>
               {i18n._(t`TVL`)}
             </Typography>
-            <SortIcon id={sortConfig.key} direction={sortConfig.direction} active={sortConfig.key === 'tvl'} />
+            {/* <SortIcon id={sortConfig.key} direction={sortConfig.direction} active={sortConfig.key === 'tvl'} /> */}
           </div>
           <div className={classNames(TABLE_TR_TH_CLASSNAME(2, 4))}>
             <Typography variant="sm" weight={700}>
@@ -81,7 +81,7 @@ const FarmList = ({ farms, term }) => {
             <Typography variant="sm" weight={700}>
               {i18n._(t`APR`)}
             </Typography>
-            <SortIcon id={sortConfig.key} direction={sortConfig.direction} active={sortConfig.key === 'roiPerYear'} />
+            {/* <SortIcon id={sortConfig.key} direction={sortConfig.direction} active={sortConfig.key === 'roiPerYear'} /> */}
           </div>
         </div>
         <div className="divide-y divide-dark-900 min-w-[768px]">
