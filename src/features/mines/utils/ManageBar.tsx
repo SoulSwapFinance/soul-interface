@@ -37,7 +37,11 @@ const ManageBar = ({ farm }) => {
   const [withdrawValue, setWithdrawValue] = useState<string>()
   const { deposit, withdraw, enterStaking, leaveStaking } = useMasterChef()
   const addTransaction = useTransactionAdder()
-  const liquidityToken = new Token(
+  
+
+  const liquidityToken = 
+  
+  farm.pair.token1 ? new Token(
     // @ts-ignore TYPE NEEDS FIXING
     chainId || 250,
     getAddress(farm.lpToken),
@@ -45,7 +49,16 @@ const ManageBar = ({ farm }) => {
     'SOUL-LP'
     // farm.pair.type === PairType.KASHI ? Number(farm.pair.asset.decimals) : 18,
     // farm.pair.type === PairType.KASHI ? 'KMP' : 'SLP'
+  ) : new Token(
+    // @ts-ignore TYPE NEEDS FIXING
+    chainId || 250,
+    getAddress(farm.lpToken),
+    18,
+    'SOUL'
+    // farm.pair.type === PairType.KASHI ? Number(farm.pair.asset.decimals) : 18,
+    // farm.pair.type === PairType.KASHI ? 'KMP' : 'SLP'
   )
+
   const balance = useCurrencyBalance(account ?? undefined, liquidityToken)
   const stakedAmount = useUserInfo(farm, liquidityToken)
   const parsedDepositValue = tryParseAmount(depositValue, liquidityToken)
