@@ -50,7 +50,7 @@ const BottomSlideIn: FC<BottomSlideInProps> = ({ title, open, onClose, children,
                           closeTrigger
                         ) : (
                           <button onClick={onClose}>
-                            <span className="sr-only">Close panel</span>
+                            <span className="sr-only">Close Panel</span>
                             <XIcon className="h-6 w-6 text-high-emphesis" aria-hidden="true" />
                           </button>
                         )}

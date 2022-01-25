@@ -144,7 +144,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
     }
   })
 
-  const isWFTM = bond.token1Address == '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'
+  // const isWFTM = bond.token1Address == '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'
 
   const dailyRoi
     = (apr / 365)
@@ -158,17 +158,17 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
       .toString()
       .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
-  const term
-    = (365 / dailyRoi)
-      .toFixed(2)
-      .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  // const term
+  //   = (365 / dailyRoi)
+  //     .toFixed(2)
+  //     .toString()
+  //     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
-  const elapsed
-    = (dailyRoi / reached) // Return Per Day / % Acheived = Days Elapsed
-      .toFixed(2)
-      .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  // const elapsed
+  //   = (dailyRoi / reached) // Return Per Day / % Acheived = Days Elapsed
+  //     .toFixed(2)
+  //     .toString()
+  //     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
   /**
    * Opens the function panel dropdown

@@ -67,7 +67,7 @@ export function useZapActionHandlers(noLiquidity: boolean | undefined): {
   }
 }
 
-const DEFAULT_ZAP_SLIPPAGE_TOLERANCE = new Percent(5, 100)
+const DEFAULT_ZAP_SLIPPAGE_TOLERANCE = new Percent(10, 1000)
 
 export function useDerivedZapInfo(
   currency: Currency | undefined,
