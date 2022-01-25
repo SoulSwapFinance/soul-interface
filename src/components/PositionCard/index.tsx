@@ -163,9 +163,9 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
   const priceHelperContract = usePriceHelperContract()
   
   const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
-  console.log(Number(rawSoulPrice))
+  // console.log(Number(rawSoulPrice))
   const soulPrice = Number(rawSoulPrice) / 1E18
-  console.log('soul price:%s', soulPrice)
+  // console.log('soul price:%s', soulPrice)
   
   const balance = userPoolBalance
   // const stakedAmount = useUserInfo(farm, liquidityToken)

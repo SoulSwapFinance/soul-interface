@@ -17,7 +17,7 @@ const ManageSwapPair = ({ farm }) => {
   const { i18n } = useLingui()
   const [toggle, setToggle] = useState(true)
   
-  const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
+  const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(100, 10_000)
 
 const allowedSlippage = useUserSlippageToleranceWithDefault(DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE) // custom from users
   const token0 = useCurrency(farm.pair.token0.id)

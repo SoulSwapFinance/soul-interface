@@ -104,7 +104,7 @@ const FarmListItem = ({ farm }) => {
               {account && (
                 <Button
                   variant="outlined"
-                  color="pink"
+                  color="purple"
                   size="xs"
                   disabled={farm?.id === '1'}
                   onClick={() => {
