@@ -155,6 +155,7 @@
     "@keystonehq/keystone-connector": "0.9.0",
     "@lingui/remote-loader": "3.11.0",
     "@sentry/browser": "6.15.0",
+    "@sentry/nextjs": "^6.17.1",
     "@sentry/tracing": "6.15.0",
     "@storybook/react": "6.3.0",
     "@sushiswap/limit-order-sdk": "^1.0.0-canary.20",

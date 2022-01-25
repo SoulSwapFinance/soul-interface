@@ -47,11 +47,11 @@ const WalletActions: FC = () => {
           <>
             <ActionItem
               svg={<BentoboxIcon width={20} height={20} />}
-              label={i18n._(t`Deposit to BentoBox`)}
+              label={i18n._(t`Deposit to CoffinBox`)}
               onClick={() => dispatch(setBalancesActiveModal(ActiveModal.DEPOSIT))}
             />
             {/*<Typography variant="sm" className="text-blue text-center mb-5 mt-2 cursor-pointer">*/}
-            {/*  What is BentoBox?*/}
+            {/*  What is CoffinBox?*/}
             {/*</Typography>*/}
           </>
         )}

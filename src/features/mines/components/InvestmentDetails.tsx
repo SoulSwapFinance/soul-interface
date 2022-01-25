@@ -169,7 +169,7 @@ const InvestmentDetails = ({ farm }) => {
       </div>
       <div className="flex flex-col w-full space-y-4">
         <div className="flex items-end justify-between">
-          <div className="text-lg font-bold cursor-pointer">{i18n._(t`Pending Rewards`)}:</div>
+          <div className="text-lg font-bold cursor-pointer">{i18n._(t`Rewards`)}:</div>
           {((pendingSoul && pendingSoul.greaterThan(ZERO)) || (pendingReward && Number(pendingReward) > 0)) && 
           farm.pair?.token1 ?
           (
@@ -182,7 +182,7 @@ const InvestmentDetails = ({ farm }) => {
             disabled={pendingTx}
             onClick={onHarvest}
             >
-              {i18n._(t`Harvest Rewards`)}
+              {i18n._(t`Harvest`)}
             </Button>
           ) : (
             <Button
@@ -191,7 +191,7 @@ const InvestmentDetails = ({ farm }) => {
             disabled={pendingTx}
             onClick={claimStaking}
           >
-            {i18n._(t`Harvest Rewards`)}
+            {i18n._(t`Harvest`)}
           </Button>
           )
         
