@@ -145,7 +145,8 @@ const HeadlessUiModalControlled: FC<ControlledModalProps> = ({
               className={classNames(
                 transparent ? '' : 'bg-dark-900 border border-dark-800',
                 isDesktop ? MAX_WIDTH_CLASS_MAPPING[maxWidth] : '',
-                isDesktop ? `w-full` : 'w-[85vw] max-h-[85vh] overflow-y-auto mx-auto',
+                isDesktop ? `w-full` : 'w-[85vw] max-w-[45vh]  max-h-[85vh] overflow-y-auto mx-auto',
+                // isDesktop ? `w-full` : 'w-[85vw] max-h-[85vh] overflow-y-auto mx-auto',
                 'inline-block align-bottom rounded-xl text-left overflow-hidden transform p-4'
               )}
             >
