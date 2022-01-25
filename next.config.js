@@ -135,15 +135,14 @@ module.exports = withBundleAnalyzer(
         //   source: '/lend/:token*',
         //   destination: '/kashi/lend/:token*',
         // },
-        // Onsen
-        // {
-        //   source: '/farm',
-        //   destination: '/onsen',
-        // },
-        // {
-        //   source: '/farm/:type*',
-        //   destination: '/onsen/:type*',
-        // },
+        {
+          source: '/balances',
+          destination: '/trident/balances/wallet',
+        },
+        {
+          source: '/trident/balances',
+          destination: '/trident/balances/wallet',
+        },
         {
           source: '/farm',
           destination: '/mines',
@@ -160,16 +159,8 @@ module.exports = withBundleAnalyzer(
           source: '/bond',
           destination: '/bonds',
         },
-        // {
-        // source: '/summoner',
-        //  destination: '/summoner',
-        // },
         {
           source: '/me',
-          destination: '/user',
-        },
-        {
-          source: '/balances',
           destination: '/user',
         },
       ]
