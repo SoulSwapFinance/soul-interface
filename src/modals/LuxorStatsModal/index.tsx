@@ -3,7 +3,7 @@ import { useModalOpen, useToggleLuxorStatsModal } from 'state/application/hooks'
 import { ApplicationModal } from 'state/application/actions'
 import Image from 'next/image'
 import styled from 'styled-components'
-import Modal from 'components/DefaultModal'
+import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
 import Typography from 'components/Typography'
 import ExternalLink from 'components/ExternalLink'
 import { ExternalLink as LinkIcon } from 'react-feather'
@@ -72,7 +72,10 @@ export default function LuxorStatsModal(): JSX.Element | null {
   if (!chainId) return null
 
   return (
-    <Modal isOpen={luxorStatsModalOpen} onDismiss={toggleLuxorStatsModal} maxWidth={672}>
+    <HeadlessUiModal.Controlled isOpen={luxorStatsModalOpen} onDismiss={toggleLuxorStatsModal} 
+    maxWidth={'md'}
+    // maxWidth={672}
+    >
       <div className="space-y-8">
         <div className="space-y-4">
           <ModalHeader header={''} onClose={toggleLuxorStatsModal} />
@@ -308,7 +311,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
           </ExternalLink>
         </Button>
       </div>
-    </Modal>
+    </HeadlessUiModal.Controlled>
   )
 }
 
