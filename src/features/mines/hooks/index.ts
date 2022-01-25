@@ -2,8 +2,7 @@ import { Zero } from '@ethersproject/constants'
 import { Contract } from '@ethersproject/contracts'
 import {
   CurrencyAmount,
-  JSBI,
-  MASTERCHEF_ADDRESS
+  JSBI
 } from 'sdk'
 import {
   useMasterChefContract, useSoulSummonerContract, useSummonerContract,
@@ -32,7 +31,7 @@ export function useUserInfo(farm, token) {
   const result = useSingleCallResult(args ? contract : null, 'userInfo', args)?.result
 
   const value = result?.[0]
-  const harvestValue = result?.[3]
+  // const harvestValue = result?.[3]
 
   const amount = value ? JSBI.BigInt(value.toString()) : undefined
 
@@ -177,7 +176,7 @@ export function usePositions() {
 }
 
 export function useSoulFarms(contract?: Contract | null) {
-  const { chainId, account } = useActiveWeb3React()
+  // const { chainId, account } = useActiveWeb3React()
 
   const numberOfPools = useSingleCallResult(contract ? contract : null, 'poolLength', undefined, NEVER_RELOAD)?.result?.[0]
 
@@ -205,37 +204,37 @@ export function useSoulFarms(contract?: Contract | null) {
   }, [args, poolInfo])
 }
 
-const useAsync = (asyncFunction, immediate = true) => {
-  const [value, setValue] = useState(null)
+// const useAsync = (asyncFunction, immediate = true) => {
+//   const [value, setValue] = useState(null)
 
   // The execute function wraps asyncFunction and
   // handles setting state for pending, value, and error.
   // useCallback ensures the below useEffect is not called
   // on every render, but only if asyncFunction changes.
-  const execute = useCallback(() => {
-    return asyncFunction().then((response) => {
-      let [prices] = response
-      setValue({ data: { ...prices?.data } })
-    })
-  }, [asyncFunction])
+  // const execute = useCallback(() => {
+  //   return asyncFunction().then((response) => {
+  //     let [prices] = response
+  //     setValue({ data: { ...prices?.data } })
+  //   })
+  // }, [asyncFunction])
   // Call execute if we want to fire it right away.
   // Otherwise execute can be called later, such as
   // in an onClick handler.
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      execute()
-    }, 60000)
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     execute()
+  //   }, 60000)
 
-    if (immediate) {
-      execute()
-    }
+  //   if (immediate) {
+  //     execute()
+  //   }
 
-    return () => {
-      clearInterval(intervalId) // This is important
-    }
-  }, [execute, immediate])
+  //   return () => {
+  //     clearInterval(intervalId) // This is important
+  //   }
+  // }, [execute, immediate])
 
-  return useMemo(() => {
-    return value
-  }, [value])
-}
+//   return useMemo(() => {
+//     return value
+//   }, [value])
+// }
