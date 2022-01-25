@@ -216,8 +216,8 @@ const Swap = () => {
             </DerivedTradeContext.Provider>
             <ConfirmSwapModal
               isOpen={showReview}
-              trade={trade}
-              originalTrade={confirmTrade}
+              // trade={trade}
+              // originalTrade={confirmTrade}
               onAcceptChanges={() => setConfirmTrade(trade)}
               attemptingTxn={attemptingTxn}
               txHash={txHash}
@@ -225,8 +225,7 @@ const Swap = () => {
               allowedSlippage={allowedSlippage}
               onConfirm={execute}
               swapErrorMessage={swapStateError}
-              onDismiss={handleDismiss}
-            />
+              onDismiss={handleDismiss} trade={undefined} originalTrade={undefined}            />
           </div>
         </div>
       </DoubleGlowShadow>

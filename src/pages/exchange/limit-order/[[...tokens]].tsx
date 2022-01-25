@@ -158,6 +158,6 @@ const LimitOrder = () => {
   )
 }
 
-// LimitOrder.Guard = NetworkGuard(Feature.LIMIT_ORDERS)
+LimitOrder.Guard = NetworkGuard(Feature.LIMIT_ORDERS)
 
 export default LimitOrder
