@@ -3,7 +3,7 @@ import { PoolType } from '@sushiswap/tines'
 import { Button } from 'components/Button'
 import Chip from 'components/Chip'
 import Typography from 'components/Typography'
-import { PoolCell } from 'features/trident/pools/PoolCell'
+// import { PoolCell } from 'features/trident/pools/PoolCell'
 // import { feeTiersFilter, filterForSearchQueryAndTWAP } from 'features/trident/pools/poolTableFilters'
 import { chipPoolColorMapper, poolTypeNameMapper } from 'features/trident/types'
 import { formatPercent } from 'functions'
@@ -27,7 +27,7 @@ export const useLPTableConfig = (positions) => {
               className: 'text-left',
               // @ts-ignore TYPE NEEDS FIXING
               Cell: ({ value, row: { original } }) => {
-                return <PoolCell assets={value} twapEnabled={original.twapEnabled} />
+                // return <PoolCell assets={value} twapEnabled={original.twapEnabled} />
               },
             //   filter: filterForSearchQueryAndTWAP,
             },

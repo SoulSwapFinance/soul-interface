@@ -8,7 +8,7 @@ const useBalancesMenuItems = () => {
   return [
     {
       key: 'wallet',
-      label: i18n._(t`Wallet`),
+      label: i18n._(t`Wallet Assets`),
       icon: <WalletIcon width={20} height={20} />,
       link: '/trident/balances/wallet',
     },
