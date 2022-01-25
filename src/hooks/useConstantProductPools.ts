@@ -6,7 +6,7 @@ import {
     PoolState,
     Currency, 
     CurrencyAmount } from 'sdk'
-import { default as constantProductPoolArtifact } from '@sushiswap/trident/artifacts/contracts/pool/ConstantProductPool.sol/ConstantProductPool.json'
+import constantProductPoolArtifact from 'sdk/abis/ConstantProductPool.json'
 import { enumToArray } from 'functions/array/enumToArray'
 import { useConstantProductPoolFactory } from 'hooks/useContract'
 import { PoolWithState } from 'types'
