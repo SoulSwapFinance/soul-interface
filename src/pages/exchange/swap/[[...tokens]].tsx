@@ -412,7 +412,7 @@ export default function Swap() {
       />
       {/* <SwapBanner /> */}
       {/* <SoulLogo />       */}
-      <DoubleGlowShadowV2 opacity="0.75">
+      {/* <DoubleGlowShadowV2 opacity="0.75"> */}
         <div id="swap-page" className="mt-4 w-full max-w-2xl p-4 space-y-4 rounded bg-dark-900 z-1">
           {/* <div id="swap-page" className={`grid grid-cols-1 gap-2 rounded z-4 sm:m-6`}> */}
           {/* <div className={`grid grid-cols-1 lg:grid-cols-1 space-y-4 lg:space-x-4 lg:space-y-0`}> */}
@@ -723,7 +723,7 @@ export default function Swap() {
 
           {/* </div> */}
         {/* </DoubleGlowShadowV2> */}
-      </DoubleGlowShadowV2>
+      {/* </DoubleGlowShadowV2> */}
 
       {/* </div> */}
     </>

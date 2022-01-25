@@ -1,5 +1,5 @@
 import { Wrap } from '../../components/ReusableStyles'
-import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
+// import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 import BondsBanner from '../../components/BondsBanner'
 import Container from '../../components/Container'
 import Head from 'next/head'
@@ -9,7 +9,7 @@ import BondList from '../../features/bond/BondList'
 const Bonds = () => {
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">
-      <DoubleGlowShadowV2 opacity="0.6">
+      {/* <DoubleGlowShadowV2 opacity="0.6"> */}
       <Container id="farm-page">
         <BondsBanner/>
         <br/>
@@ -19,7 +19,7 @@ const Bonds = () => {
         </Head>
         <BondList />
       </Container>
-      </DoubleGlowShadowV2>
+      {/* </DoubleGlowShadowV2> */}
     </Wrap>
   )
 }

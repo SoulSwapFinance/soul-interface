@@ -102,7 +102,7 @@ export default function CoffinBox(): JSX.Element {
       <Background background="dashboard">
         <div className="grid items-center justify-between grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-2">
           <div>
-            <div className="text-3xl font-bold text-high-emphesis">Bento Box</div>
+            <div className="text-3xl font-bold text-high-emphesis">Coffin Box</div>
             <div className="">Click on the column name to sort tokens by price or liquidity.</div>
           </div>
           <Search term={term} search={search} />

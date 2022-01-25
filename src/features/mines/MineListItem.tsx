@@ -1,56 +1,64 @@
-import React, { useState } from 'react'
+import { t } from '@lingui/macro'
+import { useLingui } from '@lingui/react'
 import { isMobile } from 'react-device-detect'
-import { Disclosure } from '@headlessui/react'
-import { CurrencyLogo } from 'components/CurrencyLogo'
-import DoubleLogo from 'components/DoubleLogo'
-// import QuestionHelper from 'components/QuestionHelper'
-import { classNames, formatNumber, formatPercent } from 'functions'
+import { CurrencyLogo, CurrencyLogoArray } from 'components/CurrencyLogo'
+import QuestionHelper from 'components/QuestionHelper'
+import Typography from 'components/Typography'
+import { TABLE_TBODY_TD_CLASSNAME, TABLE_TBODY_TR_CLASSNAME } from 'features/trident/constants'
+import { aprToApy, classNames, formatNumber, formatPercent } from 'functions'
 import { useCurrency } from 'hooks/Tokens'
-import MineListItemDetails from './MineListItemDetails'
-import { SOUL, SOUL_ADDRESS } from '../../constants'
-import { useHarvestHelperContract } from 'hooks'
+import React, { FC, ReactNode } from 'react'
 import { useTVL } from 'hooks/useV2Pairs'
-import { useSingleCallResult } from 'state/multicall/hooks'
 import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
-import YieldDetails from 'components/YieldDetails'
-// import IconWrapper from 'components/IconWrapper'
-// import { Info } from 'react-feather'
-import { useActiveWeb3React } from 'services/web3'
+import { useSingleCallResult } from 'state/multicall/hooks'
+import { SOUL, SOUL_ADDRESS } from '../../constants'
 import { usePrice } from 'hooks/usePrice'
+import useFarms from 'hooks/useFarmRewards'
+import { PairType } from './enum'
+import { useHarvestHelperContract, useSoulSummonerContract } from 'hooks/useContract'
+import { getAddress } from 'ethers/lib/utils'
+import { POOLS } from 'constants/farms'
+import { useSoulPositions } from './hooks'
+import styled from 'styled-components'
 
-const MineListItem = ({ farm, ...rest }) => {
-  const { chainId } = useActiveWeb3React()
-  const [selectedFarm, setSelectedFarm] = useState<string>(null)
+const HideOnMobile = styled.div`
+@media screen and (max-width: 500px) {
+  display: none;
+}
+`;
 
-  const token0 = useCurrency(farm.pair.token0?.id)
-  const token1 = useCurrency(farm.pair.token1?.id)
-  const harvestHelperContract = useHarvestHelperContract()
-  const soulPrice = usePrice(SOUL_ADDRESS[chainId])
+interface MineListItem {
+  farm: any
+  onClick(x: ReactNode): void
+}
+
+// @ts-ignore TYPE NEEDS FIXING
+const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
+  const { i18n } = useLingui()
+  const token0 = useCurrency(farm.pair.token0?.id) ?? undefined
+  const token1 = useCurrency(farm.pair.token1?.id) ?? undefined
   const tvlInfo = useTVL()
+  const harvestHelperContract = useHarvestHelperContract()
+  const soulPrice = usePrice(SOUL_ADDRESS[250]) // to avoid RPC call
+
+  const rewards = useFarms()
 
   let [data] = useV2PairsWithPrice([[token0, token1]])
   let [state, pair, pairPrice] = data
 
-  const lpBalance = useSingleCallResult(harvestHelperContract, 'fetchBals', [farm?.id])?.result
-  // console.log('lpBalance: %s', Number(lpBalance))
+  // function usePositions() {
+  //   return useSoulPositions(useSoulSummonerContract())
+  // }
 
-  // let tvl = tvlInfo.map((previousValue, currentValue) => {
-  //   return previousValue.tvl + currentValue
-  // }, 0)
-
-  // let summTvl = tvlInfo.reduce((previousValue, currentValue) => {
-  //   return previousValue + currentValue.tvl
-  // }, 0)
-
-  // let lpPrice = tvlInfo.reduce((previousValue, currentValue) => {
-  //   return previousValue + currentValue.lpPrice
-  // }, 0)
-
-  // const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
-  //   return { ...POOLS[chainId][key], lpToken: key }
+  // const positions = usePositions()
+  // const farmingPools = Object.keys(POOLS[250]).map((key) => {
+  //   return { ...POOLS[250][key], lpToken: key }
   // })
 
-  const balanceUSD = farm.pair?.token1
+
+  const lpBalance = useSingleCallResult(harvestHelperContract, 'fetchBals', [farm?.id])?.result
+
+  const tvl = farm.pair?.token1
     ? Number(pairPrice) * Number(lpBalance) / 1e18
     : Number(soulPrice) * Number(lpBalance) / 1e18
 
@@ -64,144 +72,123 @@ const MineListItem = ({ farm, ...rest }) => {
   const rewardPerYear = rewardPerDay * 365
 
   // ROI CALCULATIONS //
-  // const roiPerSecond =
-  //   farm?.rewards?.reduce((previousValue, currentValue) => {
-  //     return previousValue + currentValue.rewardPerSecond * currentValue.rewardPrice
-  //   }, 0) / balanceUSD * 100 / 1e18
-
-
-  // const roiPerHour = roiPerSecond * 60 * 60
-
-  // const roiPerDay 
-  //   = roiPerHour 
-  //   * 24 // hours in a day 
-  //   // * soulPrice // value of the rewards
-  //   // / balanceUSD // div by liq. balance (TVL)
-
-  // const roiPerMonth = roiPerDay * 30
 
   const roiPerYear  // = roiPerMonth * 12
     = rewardPerYear
     * soulPrice // value of the rewards
-    / balanceUSD // div by liq. balance (TVL)
+    / tvl // div by liq. balance (TVL)
 
   const roiPerMonth = roiPerYear / 12
   const roiPerDay = roiPerMonth / 30
   const roiPerHour = roiPerDay / 24
-  // const roiPerSecond = roiPerHour / 60 / 60
 
   return (
-    <React.Fragment>
-      <Disclosure {...rest}>
-        {({ open }) => (
-          <div>
-            <Disclosure.Button
-              className={classNames(
-                open && 'rounded-b-none',
-                'w-full px-4 py-6 text-left rounded cursor-pointer select-none bg-dark-900 text-primary text-sm md:text-lg'
-              )}
-            >
-              <div className="grid grid-cols-4">
-                <div className="flex col-span-2 space-x-4 md:col-span-1">
-                  {token1 ?
-                    <DoubleLogo currency0={token0} currency1={token1} size={40} />
-                    : <CurrencyLogo currency={token0} size={54} />
-                  }
-                  <div className="flex flex-col justify-center">
-                    <div>
-                      <span className="font-bold">{farm?.pair?.token0?.symbol}</span>
-                    </div>
-                  </div>
-                </div>
-                {/* TVL */}
-                {token1 ?
-                  <div className="flex flex-col justify-center font-bold">{
-                    formatNumber(
-                      // PRICE PER TOKEN * TOKEN BALANCE
-                      Number(pairPrice) * Number(lpBalance) / 1e18,
-                      true)
-                  }</div>
+    // <div className={classNames(TABLE_TBODY_TR_CLASSNAME, 'min-w-[460px] sm:min-w-[500px] md:min-w-[920px] lg:min-w-[1200px] max-w-[1600px] grid grid-cols-3')} onClick={onClick}>
+    <div className={classNames(TABLE_TBODY_TR_CLASSNAME, 'grid grid-cols-4')} onClick={onClick}>
+      <div className={classNames('flex gap-2', TABLE_TBODY_TD_CLASSNAME(0, 4))}>
 
-                  : <div className="flex flex-col justify-center font-bold">{
-                    formatNumber(
-                      // PRICE PER TOKEN * TOKEN BALANCE
-                      Number(soulPrice) * Number(lpBalance) / 1e18,
-                      true)
-                  }</div>
-                }
-                <div className="flex-row items-center hidden space-x-4 md:flex">
-                  <div className="flex items-center space-x-2">
-                    {farm?.rewards?.map((reward, i) => (
-                      <div key={i} className="flex items-center">
-                        <CurrencyLogo currency={SOUL[chainId]} size={isMobile ? 32 : 50} />
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex flex-col space-y-1">
-                    {farm?.rewards?.map((reward, i) => (
-                      <div key={i} className="text-xs md:text-sm whitespace-nowrap">
-                        {reward.rewardPerDay > 0 ?
-                          formatNumber(reward.rewardPerDay) + ' / DAY'
+        {token1 ? <CurrencyLogoArray currencies={[token0, token1]} dense size={32} />
+          : <CurrencyLogo currency={token0} size={54} />
+        }
+        {/* <HideOnMobile> */}
+          <div className="flex flex-col items-start">
+            <Typography weight={700} className="flex gap-1 text-high-emphesis">
+              {farm.pair.token1 ?
+                farm?.pair?.token0?.symbol
+                : farm?.pair?.token0?.symbol
+              }
+              {farm.pair.token1 &&
+                <span className="text-low-emphesis">/</span>
+              }
+              {farm?.pair?.token1?.symbol}
+            </Typography>
+            {farm?.rewards?.map((reward, i) => (
+              <Typography variant="xs" className="text-low-emphesis">
+                {formatNumber(reward.rewardPerDay)} DAILY
+                {/* <CurrencyLogo currency={SOUL[250]} size={isMobile ? 32 : 50} /> */}
+              </Typography>
+            ))
+            }
+          </div>
+        {/* </HideOnMobile> */}
+      </div>
+      <div className={TABLE_TBODY_TD_CLASSNAME(1, 4)}>
+        <Typography weight={700} className="text-high-emphesis">
+          {/* @ts-ignore TYPE NEEDS FIXING */}
+          {formatNumber(
+            // PRICE PER TOKEN * TOKEN BALANCE
+            tvl,
+            true)
+          }
+        </Typography>
+      </div>
+      <div className={classNames('flex flex-col !items-end !justify-center', TABLE_TBODY_TD_CLASSNAME(2, 4))}>
+        {farm?.rewards?.map((reward, i) => (
+          <Typography
+            variant="sm"
+            weight={700}
+            key={i}
+            className="flex gap-1.5 text-high-emphesis justify-center items-center"
+            component="span"
+          >
+            {formatNumber(reward.rewardPerDay)}
+            <CurrencyLogo currency={SOUL[250]} size={isMobile ? 32 : 50} />
+          </Typography>
+        ))}
+      </div>
+      <div className={classNames('flex flex-col !items-end', TABLE_TBODY_TD_CLASSNAME(3, 4))}>
+        <Typography weight={700} className="flex gap-0.5 items-center text-high-emphesis">
+          {farm?.rewards?.map((reward, i) => (
+            <div key={i} className="text-xs md:text-sm whitespace-nowrap">
+              {
+                reward.rewardPerDay > 0
+                  ? formatNumber(
+                    reward?.rewardPerDay * 365 // rewards per year (annualized)
+                    * soulPrice // value of the rewards
+                    / tvl // div by liq. balance (TVL)
+                    * 100, // to convert into %
+                    false,
+                    true
+                  ) + '%'
+                  : 'ZERO'
+              }
+            </div>
+          ))}
+          {/* {!!farm?.feeApyPerYear && ( */}
+          {/* <QuestionHelper
+            text={
+              <div className="flex flex-col">
+                <div>
+                  Reward APR:{' '}
+                  {farm?.rewards?.map((reward, i) => (
+                    <div key={i} className="text-xs md:text-sm whitespace-nowrap">
+                      {
+                        reward.rewardPerDay > 0
+                          ? formatNumber(
+                            reward?.rewardPerDay * 365 // rewards per year (annualized)
+                            * soulPrice // value of the rewards
+                            / tvl // div by liq. balance (TVL)
+                            * 100, // to convert into %
+                            false,
+                            true
+                          ) + '%'
                           : 'ZERO'
-                        }
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div className="flex flex-col items-end justify-center">
-                  <div className="flex flex-row items-center font-bold text-right text-high-emphesis">
-                    <div
-                      className="font-bold flex justify items-center text-righttext-high-emphesis"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        setSelectedFarm(farm.id)
-                      }}
-                    >
-                      {/* <IconWrapper size="16px" marginRight={'10px'}>
-                        <Info />
-                      </IconWrapper> */}
-                      {farm?.rewards?.map((reward, i) => (
-                        <div key={i} className="text-xs md:text-sm whitespace-nowrap">
-                          {
-                            reward.rewardPerDay > 0
-                              ? formatNumber(
-                                reward?.rewardPerDay * 365 // rewards per year (annualized)
-                                * soulPrice // value of the rewards
-                                / balanceUSD // div by liq. balance (TVL)
-                                * 100, // to convert into %
-                                false,
-                                true
-                              ) + '%'
-                              : 'ZERO'
-                          }
-                        </div>
-                      ))}
+                      }
                     </div>
-                  </div>
-                  <div className="text-xs text-right md:text-base text-secondary">{`annualized`}</div>
+                  ))}
+                </div>
+                <div>
+                  Fee APR: {farm?.feeApyPerYear < 10000 ? formatPercent(farm?.feeApyPerYear * 100) : '>10,000%'}
                 </div>
               </div>
-            </Disclosure.Button>
-            {open && <MineListItemDetails farm={farm} onDismiss={undefined} />}
-          </div>
-        )}
-      </Disclosure>
-      {!!selectedFarm && (
-        <YieldDetails
-          key={farm?.id}
-          isOpen={selectedFarm == farm?.id}
-          onDismiss={() => setSelectedFarm(null)}
-          roiPerHour={roiPerHour}
-          roiPerDay={roiPerDay}
-          roiPerMonth={roiPerMonth}
-          roiPerYear={roiPerYear}
-          token0={token0}
-          token1={token1}
-          lpPrice={farm.lpPrice}
-          soulPrice={soulPrice}
-        />
-      )}
-    </React.Fragment>
+            }
+          /> */}
+        </Typography>
+        <Typography variant="xs" className="text-low-emphesis">
+          {i18n._(t`annualized`)}
+        </Typography>
+      </div>
+    </div>
   )
 }
 
