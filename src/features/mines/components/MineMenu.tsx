@@ -1,125 +1,146 @@
+import { Menu, Transition } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/solid'
+import { t } from '@lingui/macro'
+import { useLingui } from '@lingui/react'
 import { ChainId } from 'sdk'
-import NavLink from 'components/NavLink'
+import Typography from 'components/Typography'
 import { useActiveWeb3React } from 'services/web3'
 import { useWalletModalToggle } from 'state/application/hooks'
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { FC, Fragment, ReactNode, useMemo, useState } from 'react'
 
-const Menu = ({ positionsLength }) => {
+const MenuLink: FC<{ href?: string; label: string; onClick?(): void }> = ({ href, label, onClick }) => {
+  const router = useRouter()
+
+  if (onClick) {
+    return (
+      <Menu.Item>
+        {({ active }) => {
+          return (
+            <Typography variant="sm" weight={700} onClick={onClick} className={active ? 'text-white' : 'text-primary'}>
+              {label}
+            </Typography>
+          )
+        }}
+      </Menu.Item>
+    )
+  }
+
+  if (href) {
+    return (
+      <Menu.Item onClick={() => router.push(href)}>
+        {({ active }) => {
+          return (
+            <Typography variant="sm" weight={700} onClick={onClick} className={active ? 'text-white' : 'text-primary'}>
+              {label}
+            </Typography>
+          )
+        }}
+      </Menu.Item>
+    )
+  }
+
+  return <></>
+}
+
+enum FarmFilter {
+  Active = 'Active',
+  Deposited = 'Deposited',
+  Fantom = 'Fantom',
+  SoulSwap = 'SoulSwap',
+  Stables = 'Stables',
+  Inactive = 'Inactive',
+}
+
+const filters: Record<string, FarmFilter> = {
+  deposited: FarmFilter.Deposited,
+  active: FarmFilter.Active,
+  fantom: FarmFilter.Fantom,
+  soulswap: FarmFilter.SoulSwap,
+  stables: FarmFilter.Stables,
+  inactive: FarmFilter.Inactive,
+}
+
+const OnsenFilter = () => {
+  const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
   const toggleWalletModal = useWalletModalToggle()
-  return (
-    <div className="space-y-4">
-      {account ? (
-        <NavLink
-          exact
-          href={`/mines?filter=my`}
-          activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-purple-dark-900"
-        >
-          <a className="flex items-center justify-between px-4 py-6 text-base font-bold border border-transparent rounded cursor-pointer bg-dark-900 hover:bg-dark-800">
-          STAKED FARMS
-          </a>
-        </NavLink>
+  const { query } = useRouter()
+  const filter = query?.filter as string
+  const [selected, setSelected] = useState<FarmFilter>(filters[filter] || FarmFilter.Active)
+
+  const items = useMemo(() => {
+    const map: Record<string, ReactNode> = {
+      [FarmFilter.Active]: <MenuLink href={'/farm?filter=active'} label={i18n._(t`Active`)} />,
+      [FarmFilter.Deposited]: account ? (
+        <MenuLink href={'/farm?filter=deposited'} label={i18n._(t`Deposited`)} />
       ) : (
-        <a
-          className="flex items-center justify-between px-4 py-6 text-base font-bold border border-transparent rounded cursor-pointer striped-background text-secondary bg-dark-900 hover:bg-dark-800"
-          onClick={toggleWalletModal}
+        <MenuLink onClick={toggleWalletModal} label={i18n._(t`Deposited`)} />
+      ),
+      [FarmFilter.Fantom]:
+        chainId === ChainId.FANTOM ? (
+          <MenuLink href={'/farm?filter=fantom'} label={i18n._(t`Fantom`)} />
+        ) : undefined,
+      [FarmFilter.SoulSwap]:
+        chainId === ChainId.FANTOM ? (
+          <MenuLink href={'/farm?filter=soulswap'} label={i18n._(t`SoulSwap`)} />
+        ) : undefined,
+      [FarmFilter.Stables]:
+        chainId === ChainId.FANTOM ? (
+          <MenuLink href={'/farm?filter=stables'} label={i18n._(t`Stables`)} />
+        ) : undefined,
+      // @ts-ignore TYPE NEEDS FIXING
+      [FarmFilter.Inactive]: (
+        <MenuLink href={'/farm?filter=inactive'} label={i18n._(t`Inactive`)} />
+      )
+    }
+
+    return Object.entries(map).reduce<Record<string, ReactNode>>((acc, [k, v]) => {
+      if (v && selected !== k) acc[k] = v
+      return acc
+    }, {})
+  }, [account, chainId, i18n, selected, toggleWalletModal])
+
+  return (
+    <div className="flex gap-2 items-center w-[180px]">
+      <Menu as="div" className="relative inline-block w-full text-left">
+        <div>
+          <Menu.Button className="w-full px-4 py-2.5 text-sm font-bold bg-transparent border rounded shadow-sm text-primary border-dark-800 hover:bg-dark-900">
+            <div className="flex flex-row items-center justify-between">
+              <Typography weight={700} variant="sm">
+                {selected}
+              </Typography>
+              <ChevronDownIcon className="w-5 h-5 ml-2 -mr-1" aria-hidden="true" />
+            </div>
+          </Menu.Button>
+        </div>
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
         >
-          STAKED FARMS
-        </a>
-      )}
-
-      <div className="w-full h-0 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis md:border-gradient-r-blue-purple-dark-800 opacity-20" />
-
-      <NavLink
-        exact
-        href="/mines?filter=active"
-        activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-purple-dark-900"
-      >
-        <a className="flex items-center justify-between px-4 py-6 text-base font-bold border border-transparent rounded cursor-pointer bg-dark-900 hover:bg-dark-800">
-          ACTIVE FARMS
-        </a>
-      </NavLink>
-
-      {chainId === ChainId.FANTOM && (
-        <>
-          <NavLink
-            exact
-            href={`/mines?filter=soul`}
-            activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-purple-dark-900"
+          <Menu.Items
+            static
+            className="absolute w-full z-10 mt-2 border divide-y rounded shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none border-dark-900 bg-dark-1000 divide-dark-900"
           >
-            <a className="flex items-center justify-between px-4 py-6 text-base font-bold border border-transparent rounded cursor-pointer bg-dark-900 hover:bg-dark-800">
-              SOULSWAP PAIRS
-            </a>
-          </NavLink>
-          {/* <NavLink
-            exact
-            href={`/mines?filter=fantom`}
-            activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-purple-dark-900"
-          >
-            <a className="flex items-center justify-between px-4 py-6 text-base font-bold border border-transparent rounded cursor-pointer bg-dark-900 hover:bg-dark-800">
-              FANTOM PAIRS
-            </a>
-          </NavLink> */}
-          <NavLink
-            exact
-            href={`/mines?filter=inactive`}
-            activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-blue-purple-dark-900"
-          >
-            <a className="flex items-center justify-between px-4 py-6 text-base font-bold border border-transparent rounded cursor-pointer bg-dark-900 hover:bg-dark-800">
-              INACTIVE FARMS
-            </a>
-          </NavLink>
-        </>
-      )}
+            {Object.entries(items).map(([k, v], index) => (
+              <div
+                key={index}
+                onClick={() => setSelected(k as FarmFilter)}
+                className="px-3 py-2 cursor-pointer hover:bg-dark-900/40"
+              >
+                {v}
+              </div>
+            ))}
+          </Menu.Items>
+        </Transition>
+      </Menu>
     </div>
   )
 }
 
-export default Menu
-
-// import Badge from '../../components/Badge'
-// import { ChainId } from '../../sdk'
-// import NavLink from '../../components/NavLink'
-// import React from 'react'
-// import { useActiveWeb3React } from 'services/web3'
-// import { useLingui } from '@lingui/react'
-// import { t } from '@lingui/macro'
-// import Search from '../../components/Search'
-
-// const MenuItem = ({ href, title }) => {
-//   const { i18n } = useLingui()
-//   return (
-//     <NavLink
-//       exact
-//       href={href}
-//       activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-purple-dark-900"
-//     >
-//       <a className="flex items-center justify-between px-6 py-6  text-base font-bold border border-transparent rounded cursor-pointer bg-dark-800">
-//         {title}
-//       </a>
-//     </NavLink>
-//   )
-// }
-// const Menu = ({ positionsLength, onSearch, term }) => {
-//   const { account, chainId } = useActiveWeb3React()
-//   const { i18n } = useLingui()
-//   return (
-//     <div className={`grid grid-cols-12`}>
-//       <div className="col-span-12 flex flex-col space-y-4">
-//         <MenuItem href="/mines" title={i18n._(t`ALL PAIRS`)} />
-//         {account && positionsLength > 0 && <MenuItem href={`/mines?filter=soul`} title={i18n._(t`SOUL PAIRS`)} />}
-//         {account && positionsLength > 0 && <MenuItem href={`/mines?filter=my`} title={i18n._(t`MY PAIRS`)} />}
-//         {account && positionsLength > 0 && <MenuItem href={`/mines?filter=ftm`} title={i18n._(t`FANTOM PAIRS`)} />}
-//         {account && positionsLength > 0 && <MenuItem href={`/mines?filter=stables`} title={i18n._(t`STABLE PAIRS`)} />}
-//         {account && positionsLength > 0 && <MenuItem href={`/mines?filter=inactive`} title={i18n._(t`INACTIVE PAIRS`)} />}
-//         {/* {account && positionsLength > 0 && <MenuItem href={`/mines?filter=single`} title={i18n._(t`STAKING ASSETS`)} />} */}
-
-//         {/* <MenuItem href="/farm?filter=soul" title="SOUL Farms" />
-//         <MenuItem href="/farm?filter=stables" title="Stables Farms" />
-//         <MenuItem href="/farm?filter=single" title="Single Asset" /> */}
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default Menu
+export default OnsenFilter

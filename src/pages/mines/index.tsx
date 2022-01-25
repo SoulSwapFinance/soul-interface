@@ -4,7 +4,7 @@ import Container from 'components/Container'
 // import ExternalLink from 'components/ExternalLink'
 import Search from 'components/Search'
 import MineList from 'features/mines/MineList'
-// import Menu from 'features/mines/components/MineMenu'
+import Menu from 'features/mines/components/MineMenu'
 import Header from 'features/mines/components/Header'
 import { usePositions, useSummonerInfo } from 'features/summoner/hooks'
 import { classNames } from 'functions/styling'
@@ -24,6 +24,11 @@ import { getAddress } from '@ethersproject/address'
 import { useTVL } from 'hooks/useV2Pairs'
 import { usePrice } from 'hooks/usePrice'
 import { SEANCE_ADDRESS, WNATIVE } from 'constants/addresses'
+import { TridentBody, TridentHeader } from 'layouts/Trident'
+import Typography from 'components/Typography'
+import ExternalLink from 'components/ExternalLink'
+import { i18n } from '@lingui/core'
+import { t } from '@lingui/macro'
 
 export default function Mines(): JSX.Element {
   const { chainId } = useActiveWeb3React()
@@ -138,12 +143,12 @@ export default function Mines(): JSX.Element {
   }
 
   const FILTER = {
-    my: (farm) => farm.amount,
+    deposited: (farm) => farm.amount,
     active: (farm) => farm.allocPoint > 0,
     inactive: (farm) => farm.allocPoint == 0,
     soulswap: (farm) => farm.allocPoint > 0
       && (
-           farm.pair.token0?.symbol == 'SOUL'
+        farm.pair.token0?.symbol == 'SOUL'
         || farm.pair.token0?.symbol == 'SEANCE'
         || farm.pair.token0?.symbol == 'LUX'
         || farm.pair.token0?.symbol == 'wLUM'
@@ -197,43 +202,33 @@ export default function Mines(): JSX.Element {
   }, 0)
 
   return (
-    <Container id="farm-page" className="grid h-full grid-cols-3 py-4 mx-auto sm:py-6 md:py-8 lg:py-12 gap-0" maxWidth="7xl">
-      <Head>
-        <title>Farm | Soul</title>
-        <meta key="description" name="description" content="Farm SOUL" />
-      </Head>
-
-      <div className={classNames('top-0 block col-span-12')} style={{ maxHeight: '40rem' }}>
-        <Header />
-        <div className={`flex flex-col-2 items-center justify-between px-6 py-6`}>
-          {/* <div className="flex items-center text-center justify-between py-0 text-emphasis"> */}
-          {/* Total Value Locked: {formatNumberScale(summTvl + summTvlVaults, true, 2)} */}
-          {/* TVL */}
-          {/* <br/>
-            {formatNumberScale(summTvl, true, 0)} */}
-
-          {positions.length > 0 && (
-            <Button
-              color="blue"
-              className="text-emphasis"
-              // variant={'flexed'}
-              variant="outlined"
-              size={"sm"}
-            // size={'nobase'}
-            // disabled={pendingTx}
-            >
-              {/* {'YOURS '} */}
-              {formatNumberScale(valueStaked, true, 2)} {' STAKED'}             </Button>
-          )}
-
+    <>
+      <TridentHeader className="sm:!flex-row justify-center items-center" pattern="bg-bubble">
+        {/* <div> */}
+          {/* <Typography variant="h2" className="text-high-emphesis" weight={700}>
+            {i18n._(t`SoulSwap Farms`)}
+          </Typography>
+          <Typography variant="sm" weight={400}>
+            {i18n._(t`Earn fees and rewards by depositing and staking your tokens to the platform.`)}
+          </Typography> */}
+        {/* </div> */}
+       <div className={`flex items-center justify-between px-2 py-2`}>
+        <div className="flex gap-0">
+          <Button
+            color="blue"
+            className="text-emphasis"
+            variant="outlined"
+            size={"sm"}
+          >
+            {/* {'YOURS '} */}
+            {formatNumberScale(valueStaked, true, 2)} {' STAKED'}             
+            </Button>
           {positions.length > 0 && (
             <Button
               color="greydient"
               className="text-emphasis"
-              // variant={'flexed'}
               variant="flexed"
               size={"sm"}
-              // size={'nobase'}
               disabled={pendingTx}
               onClick={async () => {
                 setPendingTx(true)
@@ -251,42 +246,71 @@ export default function Mines(): JSX.Element {
               CLAIM ALL {formatNumberScale(allStaked, true, 2)}
             </Button>
           )}
-
-          <Button
+         <Button
             color="blue"
             className="text-emphasis"
             variant={'outlined'}
-            // variant="flexed"
             size={"sm"}
-          // size={'nobase'}
-          // disabled={pendingTx}
           >
             {/* {'TOTAL: '} */}
             {formatNumberScale(summTvl, true, 2)} {' '} TOTAL
           </Button>
         </div>
-      </div>
-      <div className={classNames('space-y-6 col-span-4 lg:col-span-3')}>
-        <Search
-          search={search}
-          term={term}
-          inputProps={{
-            className:
-              'relative w-full bg-transparent border border-transparent focus:border-gradient-r-blue-purple-dark-900 rounded placeholder-secondary focus:placeholder-primary font-bold text-base px-6 py-3.5',
-          }}
-        />
-        {/* <div className="flex items-center text-lg font-bold text-high-emphesis whitespace-nowrap">
-            Ready to Stake{' '}
-            <div className="w-full h-0 ml-4 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis md:border-gradient-r-blue-pink-dark-800 opacity-20"></div>
-          </div>
-          <MineList farms={result} term={term} filter={FILTER} /> */}
-        <div className="flex items-center text-lg font-bold text-high-emphesis whitespace-nowrap">
-          Farms{' '}
-          <div className="w-full h-0 ml-4 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis md:border-gradient-r-blue-purple-dark-800 opacity-20"></div>
         </div>
-
-        <MineList farms={result} term={term} filter={FILTER} />
-      </div>
-    </Container>
+      </TridentHeader>
+      <TridentBody>
+        <div className="flex flex-col w-full gap-6">
+          <div className="flex flex-col sm:flex-row justify-between gap-4 items-center">
+            <Search search={search} term={term} />
+            <Menu />
+          </div>
+          <MineList farms={result} term={term} filter={undefined} />
+        </div>
+      </TridentBody>
+    </>
   )
 }
+
+  // return (
+  //   <Container id="farm-page" className="grid h-full grid-cols-3 py-4 mx-auto sm:py-6 md:py-8 lg:py-12 gap-0" maxWidth="7xl">
+  //     <Head>
+  //       <title>Farm | Soul</title>
+  //       <meta key="description" name="description" content="Farm SOUL" />
+  //     </Head>
+
+  //     <div className={classNames('top-0 block col-span-12')} style={{ maxHeight: '40rem' }}>
+  //       <Header />
+  //       <div className={`flex flex-col-2 items-center justify-between px-6 py-6`}>
+  //         {/* <div className="flex items-center text-center justify-between py-0 text-emphasis"> */}
+  //         {/* Total Value Locked: {formatNumberScale(summTvl + summTvlVaults, true, 2)} */}
+  //         {/* TVL */}
+  //         {/* <br/>
+  //           {formatNumberScale(summTvl, true, 0)} */}
+
+
+  //       </div>
+  //     </div>
+  //     <div className={classNames('space-y-6 col-span-4 lg:col-span-3')}>
+  //       <Search
+  //         search={search}
+  //         term={term}
+  //         inputProps={{
+  //           className:
+  //             'relative w-full bg-transparent border border-transparent focus:border-gradient-r-blue-purple-dark-900 rounded placeholder-secondary focus:placeholder-primary font-bold text-base px-6 py-3.5',
+  //         }}
+  //       />
+  //       {/* <div className="flex items-center text-lg font-bold text-high-emphesis whitespace-nowrap">
+  //           Ready to Stake{' '}
+  //           <div className="w-full h-0 ml-4 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis md:border-gradient-r-blue-pink-dark-800 opacity-20"></div>
+  //         </div>
+  //         <MineList farms={result} term={term} filter={FILTER} /> */}
+  //       <div className="flex items-center text-lg font-bold text-high-emphesis whitespace-nowrap">
+  //         Farms{' '}
+  //         <div className="w-full h-0 ml-4 font-bold bg-transparent border border-b-0 border-transparent rounded text-high-emphesis md:border-gradient-r-blue-purple-dark-800 opacity-20"></div>
+  //       </div>
+
+  //       <MineList farms={result} term={term} filter={FILTER} />
+  //     </div>
+  //   </Container>
+  // )
+// }
