@@ -252,4 +252,4 @@ const LendLayout = ({ children }) => {
   )
 }
 
-// Lend.Guard = NetworkGuard(Feature.KASHI)
+Lend.Guard = NetworkGuard(Feature.UNDERWORLD)

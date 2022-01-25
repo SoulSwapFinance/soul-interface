@@ -20,7 +20,6 @@ import Head from 'next/head'
 import React, { useCallback, useMemo } from 'react'
 import { ExternalLink, User } from 'react-feather'
 import useSWR, { SWRResponse } from 'swr'
-import Transaction from 'components/AccountDetails/Transaction'
 
 // we want the latest one to come first, so return negative if a is after b
 function newTransactionsFirst(a: TransactionDetails, b: TransactionDetails) {
@@ -64,8 +63,8 @@ export default function Me() {
   return (
     <Container id="user-page" className="py-4 space-y-3 md:py-8 lg:py-12" maxWidth="2xl">
       <Head>
-      <title>Transactions | Soul</title>
-      <meta key="description" name="description" content="Transactions" />
+        <title>SOUL | Transactions</title>
+        <meta key="description" name="description" content="My SOUL" />
         <meta key="twitter:description" name="twitter:description" content="My SOUL" />
         <meta key="og:description" property="og:description" content="My SOUL" />
       </Head>
@@ -73,7 +72,7 @@ export default function Me() {
         <Back />
 
         <Typography component="h1" variant="h2" className=" text-high-emphesis">
-        {i18n._(t`Transactions`)}
+          {i18n._(t`SOUL`)}
         </Typography>
       </div>
 
@@ -89,7 +88,7 @@ export default function Me() {
                 {account && chainId && (
                   <>
                     {userEthBalance ? (
-                      <div>{userEthBalance?.toSignificant(4)} FTM</div>
+                      <div>{userEthBalance?.toSignificant(4)} ETH</div>
                     ) : (
                       <Dots>{i18n._(t`Loading`)}</Dots>
                     )}
@@ -109,7 +108,7 @@ export default function Me() {
               {/* <div className="ml-1">View on Explorer</div> */}
               {chainId && account && (
                 <a href={getExplorerLink(chainId, account, 'address')}>
-                  <span style={{ marginLeft: '4px' }}>{i18n._(t`View on Explorer`)}</span>
+                  <span style={{ marginLeft: '4px' }}>{i18n._(t`View on explorer`)}</span>
                 </a>
               )}
             </div>
@@ -133,7 +132,7 @@ export default function Me() {
 
         {/* TODO: KEEP THIS STYLE BUT FEED WITH AGNOSTIC TX DATA */}
         <TransactionList transactions={data.items} />
-        <Transaction hash={''} />
+
         {/* <TransactionList transactions={data.items} /> */}
       </div>
     </Container>

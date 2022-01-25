@@ -15,7 +15,10 @@ const Wallet = () => {
   return (
     <>
       <TridentHeader pattern="bg-chevron">
-        <HeaderDropdown label={i18n._(t`Wallet Assets`)} />
+        <HeaderDropdown 
+        label={i18n._(t`Wallet Assets`)} 
+        />
+        {/* <HeaderDropdown label={i18n._(t`Wallet Assets`)} /> */}
         <WalletBalancesSum />
       </TridentHeader>
       <TridentBody>
@@ -25,7 +28,7 @@ const Wallet = () => {
             <div className="flex flex-col gap-4">
               <WalletBalances />
             </div>
-            <WalletActionsModal />
+            {/* <WalletActionsModal /> */}
           </div>
           <div className="flex flex-col hidden mt-[-188px] lg:block lg:min-w-[304px]">
             <ActionsAsideWallet />

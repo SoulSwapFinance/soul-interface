@@ -10,7 +10,7 @@ const useBalancesMenuItems = () => {
       key: 'wallet',
       label: i18n._(t`Wallet Assets`),
       icon: <WalletIcon width={20} height={20} />,
-      link: '/trident/balances/wallet',
+      link: '/balances',
     },
     // {
     //   key: 'bentobox',
@@ -18,12 +18,12 @@ const useBalancesMenuItems = () => {
     //   icon: <BentoboxIcon width={20} height={20} />,
     //   link: '/trident/balances/bentobox',
     // },
-    {
-      key: 'liquidity',
-      label: i18n._(t`Deposited Assets`),
-      icon: <BentoboxIcon width={20} height={20} />,
-      link: '/trident/balances/liquidity',
-    },
+    // {
+    //   key: 'liquidity',
+    //   label: i18n._(t`Deposited Assets`),
+    //   icon: <BentoboxIcon width={20} height={20} />,
+    //   link: '/trident/balances/liquidity',
+    // },
   ]
 }
 

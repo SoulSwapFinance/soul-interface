@@ -236,6 +236,6 @@ const PairLayout = ({ children }) => {
   ) : null
 }
 
-//Pair.Layout = PairLayout
+Pair.Layout = PairLayout
 
-// Pair.Guard = NetworkGuard(Feature.KASHI)
+Pair.Guard = NetworkGuard(Feature.UNDERWORLD)
