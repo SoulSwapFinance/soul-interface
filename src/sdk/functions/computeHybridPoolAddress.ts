@@ -1,8 +1,7 @@
 import { ChainId, ChainKey, JSBI, Token } from 'sdk'
-
+import EXPORTS from 'sdk/abis/all.json'
 import { Fee } from '../enums/Fee'
-import EXPORTS from '@sushiswap/trident/exports/all.json'
-import hybridPoolArtifact from '@sushiswap/trident/artifacts/contracts/pool/HybridPool.sol/HybridPool.json'
+import hybridPoolArtifact from 'sdk/abis/HybridPool.json'
 import { computePoolInitCodeHash } from './computePoolInitCodeHash'
 import { defaultAbiCoder } from '@ethersproject/abi'
 import { getCreate2Address } from '@ethersproject/address'

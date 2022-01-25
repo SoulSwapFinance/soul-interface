@@ -1,6 +1,7 @@
 import {
   ARCHER_ROUTER_ADDRESS,
   MULTICALL2_ADDRESS,
+  TRIDENT,
   ZAPPER_ADDRESS,
   ETH_USD_PAIR,
   SOUL_SEANCE_PAIR,
@@ -299,6 +300,13 @@ export function useWrappedLumensContract(withSignerIfPossible = true): Contract 
 export function useEnchantHelperContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && ENCHANT_HELPER_ADDRESS[chainId], ENCHANT_HELPER_ABI, withSignerIfPossible)
+}
+
+export function useTridentRouterContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  // @ts-ignore TYPE NEEDS FIXING
+  const router = TRIDENT[chainId]?.[CHAIN_KEY[chainId]]?.contracts.TridentRouter
+  return useContract(router?.address, router?.abi, withSignerIfPossible)
 }
 
 export function useMasterChefContract(withSignerIfPossible?: boolean): Contract | null {

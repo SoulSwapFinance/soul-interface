@@ -1,7 +1,7 @@
-import { Currency, PoolState, TradeType, TridentTrade as Trade, Trade as LegacyTrade  } from 'sdk'
+import { Currency, PoolState, TradeType, TridentTrade, Trade as LegacyTrade  } from 'sdk'
 
 export type TradeUnion =
-  | Trade<Currency, Currency, TradeType.EXACT_INPUT | TradeType.EXACT_OUTPUT>
+  | TridentTrade<Currency, Currency, TradeType.EXACT_INPUT | TradeType.EXACT_OUTPUT>
   | LegacyTrade<Currency, Currency, TradeType.EXACT_INPUT | TradeType.EXACT_OUTPUT>
 
 export type PoolWithStateExists<T> = {

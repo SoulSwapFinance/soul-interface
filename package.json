@@ -168,6 +168,7 @@
     "axios": "^0.25.0",
     "big.js": "^6.1.1",
     "cids": "^1.1.7",
+    "combinate": "1.1.7",
     "decimal.js-light": "^2.5.1",
     "eth-block-tracker": "^5.0.1",
     "fast-json-stable-stringify": "^2.1.0",

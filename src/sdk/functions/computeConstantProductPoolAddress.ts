@@ -2,7 +2,7 @@ import { ChainId, ChainKey, Token } from 'sdk'
 
 import { Fee } from '../enums/Fee'
 import EXPORTS from '../abis/all.json'
-import constantProductPoolArtifact from '@sushiswap/trident/artifacts/contracts/pool/ConstantProductPool.sol/ConstantProductPool.json'
+import constantProductPoolArtifact from 'sdk/abis/ConstantProductPool.json'
 import { computePoolInitCodeHash } from './computePoolInitCodeHash'
 import { defaultAbiCoder } from '@ethersproject/abi'
 import { getCreate2Address } from '@ethersproject/address'
