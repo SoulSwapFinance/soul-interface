@@ -2,7 +2,7 @@ import { combineReducers } from '@reduxjs/toolkit'
 
 import mines from 'features/mines/minesSlice'
 import tridentAdd from '../features/trident/add/addSlice'
-// import tridentBalances from '../features/trident/balances/balancesSlice'
+import tridentBalances from '../features/trident/balances/balancesSlice'
 // import tridentCreate from '../features/trident/create/createSlice'
 // import tridentMigrations from '../features/trident/migrate/context/migrateSlice'
 // import tridentPools from '../features/trident/pools/poolsSlice'
@@ -39,7 +39,7 @@ const reducer = combineReducers({
   tridentSwap,
   tridentAdd,
   // tridentRemove,
-  // tridentBalances,
+  tridentBalances,
   // tridentPools,
   // tridentCreate,
   // tridentMigrations,

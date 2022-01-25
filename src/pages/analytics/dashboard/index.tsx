@@ -244,7 +244,7 @@ export default function Dashboard(): JSX.Element {
         </div>
       </Background> */}
       <div className="px-4 py-6 space-y-4 lg:px-14">
-        <div className="text-center text-2xl font-bold text-high-emphesis">Overview</div>
+        {/* <div className="text-center text-2xl font-bold text-high-emphesis">Dashboard Overview</div> */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <ChartCard
             header="TVL"

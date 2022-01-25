@@ -52,7 +52,7 @@ const initialState: LimitOrderState = {
   typedField: Field.INPUT,
   typedValue: '',
   limitPrice: '',
-  inputCurrencyId: '',
+  inputCurrencyId: 'FTM',
   outputCurrencyId: '',
   recipient: undefined,
   fromBentoBalance: false,

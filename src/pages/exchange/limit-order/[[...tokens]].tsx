@@ -145,13 +145,13 @@ const LimitOrder = () => {
         />
       </SwapLayoutCard>
       <Typography variant="xs" className="px-10 mt-5 italic text-center text-low-emphesis">
-        {i18n._(t`Limit orders use funds from BentoBox, to create a limit order depositing into BentoBox is required.`)}
+        {i18n._(t`Limit orders use funds from CoffinBox, to create a limit order depositing into BentoBox is required.`)}
       </Typography>
     </>
   )
 }
 
-// LimitOrder.Guard = NetworkGuard(Feature.LIMIT_ORDERS)
+LimitOrder.Guard = NetworkGuard(Feature.LIMIT_ORDERS)
 LimitOrder.Layout = SwapLayout('limit-order-page')
 
 export default LimitOrder

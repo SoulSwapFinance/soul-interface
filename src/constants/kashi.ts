@@ -66,7 +66,7 @@ export const COFFIN_BOX_ADDRESS: {
 } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xD25354e20b5Ed0D5E0A2193993E3dd6e4f42B4f7', // TODO: REVIEW
+  [ChainId.FANTOM]: '0xF539C37275e947F24480fAb9f7e302aE827570b2', // TODO: REVIEW
   [ChainId.FANTOM_TESTNET]: ''
 }
 

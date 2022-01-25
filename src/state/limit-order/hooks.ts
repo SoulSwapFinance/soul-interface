@@ -189,8 +189,8 @@ type UseLimitOrderDerivedCurrencies = () => { inputCurrency?: Currency; outputCu
 export const useLimitOrderDerivedCurrencies: UseLimitOrderDerivedCurrencies = () => {
   const { chainId } = useActiveWeb3React()
   const { inputCurrencyId, outputCurrencyId } = useLimitOrderState()
-  const inputCurrency = useCurrency(inputCurrencyId || 'ETH') ?? undefined
-  const outputCurrency = useCurrency(outputCurrencyId || SOUL_ADDRESS[chainId || 1]) ?? undefined
+  const inputCurrency = useCurrency(inputCurrencyId || 'FTM') ?? undefined
+  const outputCurrency = useCurrency(outputCurrencyId || SOUL_ADDRESS[chainId || 250]) ?? undefined
 
   return useMemo(() => {
     return {
@@ -285,7 +285,7 @@ export const useLimitOrderDerivedInputError: UseLimitOrderDerivedInputError = ({
       : !orderExpiration
       ? i18n._(t`Select Order Expiration`)
       : !balance
-      ? i18n._(t`Loading balance`)
+      ? i18n._(t`Loading Balance`)
       : balance && trade?.inputAmount && balance.lessThan(trade.inputAmount)
       ? i18n._(t`Insufficient Balance`)
       : ''

@@ -1,6 +1,7 @@
-import { BigintIsh, Currency, CurrencyAmount, JSBI } from '../sdk'
+import { Currency, CurrencyAmount, JSBI } from '../sdk'
 
 import { Interface } from '@ethersproject/abi'
+import { BigintIsh } from 'sdk/types'
 
 export function toHex(bigintIsh: BigintIsh) {
   const bigInt = JSBI.BigInt(bigintIsh)
