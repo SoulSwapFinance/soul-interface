@@ -24,7 +24,7 @@ import { useUserSlippageToleranceWithDefault } from 'state/user/hooks'
 import React, { useCallback, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
 
-const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(5, 100)
+const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(100, 10_000)
 
 // @ts-ignore TYPE NEEDS FIXING
 const PoolWithdraw = ({ currencyA, currencyB, header }) => {

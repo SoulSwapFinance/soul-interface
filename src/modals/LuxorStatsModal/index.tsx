@@ -288,7 +288,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
                   </ExternalLink> */}
         <Button
           color='yellow'
-          type='flexed'
+          type='outlined'
           size='xs'
           className="text-white"
         >
@@ -300,7 +300,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
         </Button>
         <Button
           color='yellow'
-          type='flexed'
+          type='outlined'
           size='xs'
           className="text-white"
         >

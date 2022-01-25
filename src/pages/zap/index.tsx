@@ -133,7 +133,7 @@ const CardHeader = () => {
   )
 }
 
-const DEFAULT_ZAP_SLIPPAGE_TOLERANCE = new Percent(5, 100)
+const DEFAULT_ZAP_SLIPPAGE_TOLERANCE = new Percent(10, 1000)
 
 export default function Zap() {
   const { i18n } = useLingui()

@@ -31,7 +31,7 @@ interface RepayProps {
   pair: any
 }
 
-const DEFAULT_KASHI_REPAY_SLIPPAGE_TOLERANCE = new Percent(5, 100)
+const DEFAULT_KASHI_REPAY_SLIPPAGE_TOLERANCE = new Percent(10, 1000)
 
 const DEFAULT_UPDATE_ORACLE = true
 

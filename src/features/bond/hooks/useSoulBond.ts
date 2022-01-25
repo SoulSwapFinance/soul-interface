@@ -589,7 +589,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
 
       return [totalLpValue, summonerTotalLpValue]
     } catch (e) {
-      console.log(e)
+      // console.log(e)
       // alert(e.message)
       return e
     }
@@ -622,7 +622,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
 
       return [farmApr, fetchedLiquidity[0], fetchedLiquidity[1]]
     } catch (e) {
-      console.log(e)
+      // console.log(e)
       // alert(e.message)
       return e
     }
@@ -651,7 +651,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
 
       return totalLpValue
     } catch (e) {
-      console.log(e)
+      // console.log(e)
       // alert(e.message);
       return e
     }
@@ -660,19 +660,19 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   /**
    * Soul Price
    */
-  const fetchSoulPrice = async () => {
-    try {
-      // summonerBal * soulPrice = TVL
-      const soulPrice = await fusdPerSoul()
-      console.log('soulPrice', soulPrice)
+  // const fetchSoulPrice = async () => {
+  //   try {
+  //     // summonerBal * soulPrice = TVL
+  //     const soulPrice = await fusdPerSoul()
+  //     console.log('soulPrice', soulPrice)
 
-      return soulPrice
-    } catch (e) {
-      console.log(e)
-      // alert(e.message);
-      return e
-    }
-  }
+  //     return soulPrice
+  //   } catch (e) {
+  //     // console.log(e)
+  //     // alert(e.message);
+  //     return e
+  //   }
+  // }
 
   /**
    * Fetches the APR percentage for the `pid`

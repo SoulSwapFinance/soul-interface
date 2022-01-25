@@ -5,28 +5,27 @@ import Container from 'components/Container'
 import Search from 'components/Search'
 import MineList from 'features/mines/MineList'
 import Menu from 'features/mines/components/MineMenu'
-import Header from 'features/mines/components/Header'
-import { usePositions, useSummonerInfo } from 'features/summoner/hooks'
-import { classNames } from 'functions/styling'
+// import Header from 'features/mines/components/Header'
+import { useFarms, useSummonerInfo } from 'features/summoner/hooks'
+// import { classNames } from 'functions/styling'
 import useFuse from 'hooks/useFuse'
 import { useActiveWeb3React } from 'services/web3'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { POOLS } from 'constants/farms'
-import { useSoulFarms } from 'features/mines/hooks'
-import { useSoulSummonerContract } from 'hooks/useContract'
-import { Button } from 'components/Button'
-import { formatNumberScale } from 'functions'
-import { addTransaction } from 'state/transactions/actions'
-import useSummoner from 'features/summoner/useSummoner'
-import { getAddress } from '@ethersproject/address'
-import { useTVL } from 'hooks/useV2Pairs'
+// import { useSoulSummonerContract } from 'hooks/useContract'
+// import { Button } from 'components/Button'
+// import { formatNumberScale } from 'functions'
+// import { addTransaction } from 'state/transactions/actions'
+// import useSummoner from 'features/summoner/useSummoner'
+// import { getAddress } from '@ethersproject/address'
+// import { useTVL } from 'hooks/useV2Pairs'
 import { usePrice } from 'hooks/usePrice'
-import { SEANCE_ADDRESS, WNATIVE } from 'constants/addresses'
+// import { SEANCE_ADDRESS, WNATIVE } from 'constants/addresses'
 import { TridentBody, TridentHeader } from 'layouts/Trident'
 import Typography from 'components/Typography'
-import ExternalLink from 'components/ExternalLink'
+// import ExternalLink from 'comp/onents/ExternalLink'
 import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
 import useFarmRewards from 'hooks/useFarmRewards'
@@ -37,9 +36,9 @@ export default function Mines(): JSX.Element {
   const type = router.query.filter === null ? 'active' : (router.query.filter as string)
   const rewards = useFarmRewards()
 
-  function useFarms() {
-    return useSoulFarms(useSoulSummonerContract())
-  }
+  // function useFarms() {
+  //   return useSoulFarms(useSoulSummonerContract())
+  // }
 
   const farms = useFarms()
 

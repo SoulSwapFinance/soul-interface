@@ -686,7 +686,7 @@ export default function Swap() {
                 </ExternalLink>
               </FlexText>
             </a>
-            {/* <a className="flex text-pink mt-4 mb-4 bg-dark-700 ml-3 p-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
+            {/* <a className="flex text-purple mt-4 mb-4 bg-dark-700 ml-3 p-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
                         <span>Farms</span>
                         </a>
                         <a className="flex text-pink mt-4 mb-4 bg-dark-700 ml-3 p-2 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">

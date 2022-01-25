@@ -23,7 +23,7 @@ import { useExpertModeManager, useUserSlippageToleranceWithDefault } from 'state
 import React, { useState } from 'react'
 import ReactGA from 'react-ga'
 
-const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
+const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(125, 10_000)
 
 // @ts-ignore TYPE NEEDS FIXING
 const PoolDeposit = ({ currencyA, currencyB, header }) => {

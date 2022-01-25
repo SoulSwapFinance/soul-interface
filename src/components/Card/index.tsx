@@ -12,7 +12,7 @@ const Gradient: FC<{ className?: string }> = ({ children, className }) => {
     <div className="relative">
       <div
         className={classNames(
-          'rounded pointer-events-none absolute w-full h-full bg-gradient-to-r from-opaque-blue to-opaque-pink opacity-40',
+          'rounded pointer-events-none absolute w-full h-full bg-gradient-to-r from-opaque-blue to-opaque-purple opacity-40',
           className
         )}
       />

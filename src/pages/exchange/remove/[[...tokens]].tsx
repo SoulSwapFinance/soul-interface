@@ -52,7 +52,7 @@ import { useWalletModalToggle } from '../../../state/application/hooks'
 // import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
 import SwapBanner from 'components/SwapBanner'
 
-const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(5, 100)
+const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(10, 1000) // 1%
 
 const REMOVE_TIPS = {}
 

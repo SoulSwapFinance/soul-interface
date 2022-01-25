@@ -1,14 +1,13 @@
-import { Currency, Trade as V2Trade } from '../../sdk'
-import { Field, replaceCreateState, selectCurrency, switchCurrencies, typeInput } from './actions'
-import { useAppDispatch, useAppSelector } from '../hooks'
-
-import { AppState } from '../index'
-import { CreateState } from './reducer'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from 'services/web3'
-import { useCallback } from 'react'
-import { useCurrency } from '../../hooks/Tokens'
 import { useLingui } from '@lingui/react'
+import { Currency } from 'sdk'
+import { useCurrency } from 'hooks/Tokens'
+import { useActiveWeb3React } from 'services/web3'
+import { AppState } from 'state'
+import { useAppDispatch, useAppSelector } from 'state/hooks'
+import { useCallback } from 'react'
+
+import { Field, selectCurrency, switchCurrencies, typeInput } from './actions'
 
 export function useCreateState(): AppState['create'] {
   return useAppSelector((state) => state.create)
@@ -25,7 +24,7 @@ export function useCreateActionHandlers(): {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency.isToken ? currency.address : currency.isNative ? 'FTM' : '',
+          currencyId: currency.isToken ? currency.address : currency.isNative ? 'ETH' : '',
         })
       )
     },
