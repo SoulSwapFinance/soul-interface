@@ -1,14 +1,15 @@
-import React, { useRef, useState } from 'react'
-import { useSetUserSlippageTolerance, useUserSlippageTolerance, useUserTransactionTTL } from '../../state/user/hooks'
-
-import { DEFAULT_DEADLINE_FROM_NOW } from '../../constants'
-import { Percent } from '../../sdk'
-import QuestionHelper from '../QuestionHelper'
-import Typography from '../Typography'
-import { classNames } from '../../functions'
+import { ExclamationIcon } from '@heroicons/react/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
+import { Percent } from 'sdk'
+import { DEFAULT_DEADLINE_FROM_NOW } from '../../constants'
+import { classNames } from 'functions'
+import { useSetUserSlippageTolerance, useUserSlippageTolerance, useUserTransactionTTL } from 'state/user/hooks'
+import React, { FC, useState } from 'react'
+
 import { Button } from '../Button'
+import QuestionHelper from '../QuestionHelper'
+import Typography from '../Typography'
 
 enum SlippageError {
   InvalidInput = 'InvalidInput',
@@ -22,12 +23,11 @@ enum DeadlineError {
 
 export interface TransactionSettingsProps {
   placeholderSlippage?: Percent // varies according to the context in which the settings dialog is placed
+  trident?: boolean
 }
 
-export default function TransactionSettings({ placeholderSlippage }: TransactionSettingsProps) {
+const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage, trident = false }) => {
   const { i18n } = useLingui()
-
-  const inputRef = useRef<HTMLInputElement>()
 
   const userSlippageTolerance = useUserSlippageTolerance()
   const setUserSlippageTolerance = useSetUserSlippageTolerance()
@@ -50,7 +50,7 @@ export default function TransactionSettings({ placeholderSlippage }: Transaction
     } else {
       const parsed = Math.floor(Number.parseFloat(value) * 100)
 
-      if (!Number.isInteger(parsed) || parsed < 0 || parsed > 5000) {
+      if (!Number.isInteger(parsed) || parsed < 1 || parsed > 5000) {
         setUserSlippageTolerance('auto')
         if (value !== '.') {
           setSlippageError(SlippageError.InvalidInput)
@@ -74,7 +74,7 @@ export default function TransactionSettings({ placeholderSlippage }: Transaction
     } else {
       try {
         const parsed: number = Math.floor(Number.parseFloat(value) * 60)
-        if (!Number.isInteger(parsed) || parsed < 60 || parsed > 180 * 60) {
+        if (!Number.isInteger(parsed) || parsed < 60 || parsed >= Number.MAX_SAFE_INTEGER) {
           setDeadlineError(DeadlineError.InvalidInput)
         } else {
           setDeadline(parsed)
@@ -87,11 +87,11 @@ export default function TransactionSettings({ placeholderSlippage }: Transaction
   }
 
   return (
-    <div className="grid gap-4">
+    <div className="flex flex-col gap-4">
       <div className="grid gap-2">
         <div className="flex items-center">
-          <Typography variant="sm" className="text-high-emphesis">
-            {i18n._(t`Slippage Tolerance`)}
+          <Typography variant="xs" weight={700} className="text-high-emphesis">
+            {i18n._(t`Slippage tolerance`)}
           </Typography>
 
           <QuestionHelper
@@ -104,26 +104,25 @@ export default function TransactionSettings({ placeholderSlippage }: Transaction
           <div
             className={classNames(
               !!slippageError
-                ? 'border-red'
+                ? 'border-red/60'
                 : tooLow || tooHigh
-                ? 'border-yellow'
+                ? 'border-yellow/60'
                 : userSlippageTolerance !== 'auto'
                 ? 'border-blue'
-                : 'border-transparent',
-              'border p-2 rounded bg-dark-800'
+                : 'border-dark-800',
+              'border-2 h-[36px] flex items-center px-2 rounded bg-dark-1000/40'
             )}
             tabIndex={-1}
           >
-            <div className="flex justify-between items-center gap-1">
-              {tooLow || tooHigh ? (
-                <span className="hidden sm:inline text-yellow" role="img" aria-label="warning">
-                  ⚠️
-                </span>
-              ) : null}
+            <div className="flex items-center justify-between gap-1">
+              {tooLow || tooHigh ? <ExclamationIcon className="text-yellow" width={24} /> : null}
               <input
-                className={classNames(slippageError ? 'text-red' : '', 'bg-transparent placeholder-low-emphesis')}
+                id="text-slippage"
+                className={classNames(
+                  slippageError ? 'text-red' : '',
+                  'bg-transparent placeholder-low-emphesis min-w-0 w-full font-bold'
+                )}
                 placeholder={placeholderSlippage?.toFixed(2)}
-                type="number"
                 value={
                   slippageInput.length > 0
                     ? slippageInput
@@ -141,16 +140,16 @@ export default function TransactionSettings({ placeholderSlippage }: Transaction
               %
             </div>
           </div>
-          <Button
-            size="sm"
-            color={userSlippageTolerance === 'auto' ? 'blue' : 'gray'}
-            variant={userSlippageTolerance === 'auto' ? 'filled' : 'outlined'}
-            onClick={() => {
-              parseSlippageInput('')
-            }}
-          >
-            {i18n._(t`Auto`)}
-          </Button>
+          <div>
+            <Button
+              size="sm"
+              color={userSlippageTolerance === 'auto' ? 'blue' : 'gray'}
+              variant="outlined"
+              onClick={() => parseSlippageInput('')}
+            >
+              {i18n._(t`Auto`)}
+            </Button>
+          </div>
         </div>
         {slippageError || tooLow || tooHigh ? (
           <Typography
@@ -158,7 +157,8 @@ export default function TransactionSettings({ placeholderSlippage }: Transaction
               slippageError === SlippageError.InvalidInput ? 'text-red' : 'text-yellow',
               'font-medium flex items-center space-x-2'
             )}
-            variant="sm"
+            variant="xs"
+            weight={700}
           >
             <div>
               {slippageError === SlippageError.InvalidInput
@@ -171,24 +171,22 @@ export default function TransactionSettings({ placeholderSlippage }: Transaction
         ) : null}
       </div>
 
-      <div className="grid gap-2">
-        <div className="flex items-center">
-          <Typography variant="sm" className="text-high-emphesis">
-            {i18n._(t`Transaction deadline`)}
-          </Typography>
+      {!trident && (
+        <div className="grid gap-2">
+          <div className="flex items-center">
+            <Typography variant="xs" weight={700} className="text-high-emphesis">
+              {i18n._(t`Transaction deadline`)}
+            </Typography>
 
-          <QuestionHelper text={i18n._(t`Your transaction will revert if it is pending for more than this long.`)} />
-        </div>
-        <div className="flex items-center">
-          <div
-            className="p-2 rounded bg-dark-800 min-w-[82px] max-w-[102px]"
-            style={{ maxWidth: '40px', marginRight: '8px' }}
-            tabIndex={-1}
-          >
+            <QuestionHelper text={i18n._(t`Your transaction will revert if it is pending for more than this long.`)} />
+          </div>
+          <div className="flex items-center gap-2">
             <input
-              className={classNames(deadlineError ? 'text-red' : '', 'bg-transparent placeholder-low-emphesis')}
+              className={classNames(
+                deadlineError ? 'text-red' : '',
+                'font-bold bg-transparent placeholder-low-emphesis bg-dark-1000/40 border-2 border-dark-800 rounded px-3 py-2 max-w-[100px] focus:border-blue'
+              )}
               placeholder={(DEFAULT_DEADLINE_FROM_NOW / 60).toString()}
-              type="number"
               value={
                 deadlineInput.length > 0
                   ? deadlineInput
@@ -203,10 +201,14 @@ export default function TransactionSettings({ placeholderSlippage }: Transaction
               }}
               color={deadlineError ? 'red' : ''}
             />
+            <Typography variant="sm" weight={700} className="text-secondary">
+              {i18n._(t`minutes`)}
+            </Typography>
           </div>
-          <Typography variant="sm">{i18n._(t`minutes`)}</Typography>
         </div>
-      </div>
+      )}
     </div>
   )
 }
+
+export default TransactionSettings

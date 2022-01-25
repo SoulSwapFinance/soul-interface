@@ -2,8 +2,8 @@ import SwapHeader from '../../features/trade/Header'
 import MainHeader from 'features/swap/MainHeader'
 
 // import MainHeader from 'features/swap/MainHeader'
-import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
-import Container from '../../components/Container'
+// import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
+// import Container from '../../components/Container'
 // import { useIsSwapUnsupported } from '../../hooks/useIsSwapUnsupported'
 // const addIsUnsupported = useIsSwapUnsupported(currencies?.CURRENCY_A, currencies?.CURRENCY_B)
 

@@ -1,42 +1,33 @@
 import '../bootstrap'
 import '../styles/index.css'
-import '@fontsource/dm-sans/index.css'
-import 'react-virtualized/styles.css'
-import 'react-tabs/style/react-tabs.css'
-import 'react-datetime/css/react-datetime.css'
 
-import * as plurals from 'make-plural/plurals'
-
-import React, { Fragment, FunctionComponent } from 'react'
-import { NextComponentType, NextPageContext } from 'next'
-import { SyncWithRedux } from 'components/SyncWithRedux'
-import Portals from 'components/Portals'
-
-import type { AppProps } from 'next/app'
-import ApplicationUpdater from '../state/application/updater'
-import DefaultLayout from '../layouts/Default'
-import Head from 'next/head'
-import { I18nProvider } from '@lingui/react'
-import ListsUpdater from '../state/lists/updater'
-import MulticallUpdater from '../state/multicall/updater'
-import { PersistGate } from 'redux-persist/integration/react'
-import ReactGA from 'react-ga'
-import { Provider as ReduxProvider } from 'react-redux'
-import TransactionUpdater from '../state/transactions/updater'
-import UserUpdater from '../state/user/updater'
-import Web3ReactManager from '../components/Web3ReactManager'
-import { createWeb3ReactRoot, useWeb3React, Web3ReactProvider } from '@web3-react/core'
-import dynamic from 'next/dynamic'
-import getLibrary from '../functions/getLibrary'
 import { i18n } from '@lingui/core'
-import store from '../state'
-import { useEffect } from 'react'
+import { I18nProvider } from '@lingui/react'
+import { remoteLoader } from '@lingui/remote-loader'
+import { Web3ReactProvider } from '@web3-react/core'
+import Dots from 'components/Dots'
+import Portals from 'components/Portals'
+import { SyncWithRedux } from 'components/SyncWithRedux'
+import Web3ReactManager from 'components/Web3ReactManager'
+import getLibrary from 'functions/getLibrary'
+import { exception, GOOGLE_ANALYTICS_TRACKING_ID, pageview } from 'functions/gtag'
+import DefaultLayout from 'layouts/Default'
+// @ts-ignore TYPE NEEDS FIXING
+import store, { persistor } from 'state'
+import ApplicationUpdater from 'state/application/updater'
+import ListsUpdater from 'state/lists/updater'
+import MulticallUpdater from 'state/multicall/updater'
+import TransactionUpdater from 'state/transactions/updater'
+import UserUpdater from 'state/user/updater'
+import * as plurals from 'make-plural/plurals'
+import dynamic from 'next/dynamic'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
-import PriceProvider  from '../contexts/priceContext'
+import Script from 'next/script'
+import React, { Fragment, useEffect } from 'react'
+import { Provider as ReduxProvider } from 'react-redux'
 import { RecoilRoot } from 'recoil'
-// import FarmContext from '../contexts/farmContext'
-// import { usePricesApi } from '../features/summoner/hooks'
-// import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
+import { PersistGate } from 'redux-persist/integration/react'
 
 const Web3ProviderNetwork = dynamic(() => import('../components/Web3ProviderNetwork'), { ssr: false })
 
@@ -44,47 +35,60 @@ if (typeof window !== 'undefined' && !!window.ethereum) {
   window.ethereum.autoRefreshOnNetworkChange = false
 }
 
-function MyApp({
-  Component,
-  pageProps,
-}: AppProps & {
-  Component: NextComponentType<NextPageContext> & {
-    Guard: FunctionComponent
-    Layout: FunctionComponent
-    Provider: FunctionComponent
-  }
-}) {
+// @ts-ignore TYPE NEEDS FIXING
+function MyApp({ Component, pageProps, fallback }) {
   const router = useRouter()
-
-  const { pathname, query, locale } = router
+  const { locale, events } = router
 
   useEffect(() => {
-    ReactGA.initialize(process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS, { testMode: process.env.NODE_ENV === 'development' })
+    // @ts-ignore TYPE NEEDS FIXING
+    const handleRouteChange = (url) => {
+      pageview(url)
+    }
+    events.on('routeChangeComplete', handleRouteChange)
 
-    const errorHandler = (error) => {
-      ReactGA.exception({
+    // @ts-ignore TYPE NEEDS FIXING
+    const handleError = (error) => {
+      exception({
         description: `${error.message} @ ${error.filename}:${error.lineno}:${error.colno}`,
         fatal: true,
       })
     }
 
-    window.addEventListener('error', errorHandler)
+    window.addEventListener('error', handleError)
 
-    return () => window.removeEventListener('error', errorHandler)
-  }, [])
+    return () => {
+      events.off('routeChangeComplete', handleRouteChange)
+      window.removeEventListener('error', handleError)
+    }
+  }, [events])
 
   useEffect(() => {
-    ReactGA.pageview(`${pathname}${query}`)
-  }, [pathname, query])
-
-  useEffect(() => {
+    // @ts-ignore TYPE NEEDS FIXING
     async function load(locale) {
-      const { messages } = await import(`@lingui/loader!./../../locale/${locale}.po`)
-      i18n.loadLocaleData(locale, { plurals: plurals[locale.toLowerCase() == 'pt-br' ? 'pt' : 'en'] })
-      i18n.load(locale, messages)
+      // @ts-ignore TYPE NEEDS FIXING
+      i18n.loadLocaleData(locale, { plurals: plurals[locale.split('_')[0]] })
+
+      try {
+        // Load messages from AWS, use q session param to get latest version from cache
+        const res = await fetch(
+          `https://raw.githubusercontent.com/sushiswap/translations/master/sushiswap/${locale}.json`
+        )
+        const remoteMessages = await res.json()
+
+        const messages = remoteLoader({ messages: remoteMessages, format: 'minimal' })
+        i18n.load(locale, messages)
+      } catch {
+        // Load fallback messages
+        // const { messages } = await import(`@lingui/loader!./../../locale/${locale}.json?raw-lingui`)
+        // i18n.load(locale, messages)
+      }
+
       i18n.activate(locale)
     }
+
     load(locale)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [locale])
 
   // Allows for conditionally setting a provider to be hoisted per page
@@ -97,86 +101,63 @@ function MyApp({
   const Guard = Component.Guard || Fragment
 
   return (
-    <Fragment>
-      <Head>
-        <meta charSet="utf-8" />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+    <>
+      <Head>Soul</Head>
+      <meta
+        name="viewport"
+        content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
+      />
 
-        <meta
-          name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
-        />
-        <title key="title">SOUL</title>
-
-        <meta
-          key="description"
-          name="description"
-          content="Be a DeFi Summoner with Soul. Swap, earn, grow yield, lend, borrow, leverage all on one decentralized, community driven platform. Welcome home to DeFi"
-        />
-
-        <meta name="application-name" content="SOUL DEFI" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="SOUL DEFI" />
-
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="msapplication-config" content="/browserconfig.xml" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <meta name="theme-color" content="#EE82EE" />
-
-        <meta key="twitter:card" name="twitter:card" content="app" />
-        <meta key="twitter:title" name="twitter:title" content="SOUL DEFI" />
-        <meta key="twitter:url" name="twitter:url" content="https://exchange.soulswap.finance" />
-        <meta
-          key="twitter:description"
-          name="twitter:description"
-          content="Be a DeFi summoner with Soul. Swap, earn, stack yields, lend, borrow, leverage all on one decentralized, community driven platform. Welcome home to DeFi"
-        />
-        <meta key="twitter:image" name="twitter:image" content="https://exchange.soulswap.finance/icons/icon-192x192.png" />
-        <meta key="twitter:creator" name="twitter:creator" content="@SoulSwapFinance" />
-        <meta key="og:type" property="og:type" content="website" />
-        <meta key="og:site_name" property="og:site_name" content="SOUL DEFI" />
-        <meta key="og:url" property="og:url" content="https://exchange.soulswap.finance" />
-        <meta key="og:image" property="og:image" content="https://exchange.soulswap.finance/apple-touch-icon.png" />
-        <meta
-          key="og:description"
-          property="og:description"
-          content="Be a DeFi Summoner with Soul. Swap, earn, grow yield, lend, borrow, leverage all on one decentralized, community driven platform. Welcome home to DeFi"
-        />
-      </Head>
-      
+      {/* Global Site Tag (gtag.js) - Google Analytics */}
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_TRACKING_ID}`}
+      />
+      <Script
+        id="gtag-init"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GOOGLE_ANALYTICS_TRACKING_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+        }}
+      />
       <I18nProvider i18n={i18n} forceRenderOnLocaleChange={false}>
         <Web3ReactProvider getLibrary={getLibrary}>
           <Web3ProviderNetwork getLibrary={getLibrary}>
-              <Web3ReactManager>
-                <ReduxProvider store={store}>
-                  <PriceProvider>
-                    <>
-                      <ListsUpdater />
-                      <UserUpdater />
-                      <ApplicationUpdater />
-                      <TransactionUpdater />
-                      <MulticallUpdater />
-                    </>
-                    <RecoilRoot>
+            <Web3ReactManager>
+              <ReduxProvider store={store}>
+                <PersistGate loading={<Dots>loading</Dots>} persistor={persistor}>
+                  <>
+                    <ListsUpdater />
+                    <UserUpdater />
+                    <ApplicationUpdater />
+                    <MulticallUpdater />
+                  </>
+                  <RecoilRoot>
                     <SyncWithRedux />
                     <Provider>
                       <Layout>
                         <Guard>
                           <Component {...pageProps} />
                         </Guard>
+                        <Portals />
                       </Layout>
                     </Provider>
                     <TransactionUpdater />
-                    </RecoilRoot>
-                  </PriceProvider>
-                </ReduxProvider>
-              </Web3ReactManager>
+                  </RecoilRoot>
+                </PersistGate>
+              </ReduxProvider>
+            </Web3ReactManager>
           </Web3ProviderNetwork>
         </Web3ReactProvider>
       </I18nProvider>
-    </Fragment>
+    </>
   )
 }
 

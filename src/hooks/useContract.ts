@@ -1,6 +1,7 @@
 import {
   ARCHER_ROUTER_ADDRESS,
   MULTICALL2_ADDRESS,
+  TRIDENT,
   ZAPPER_ADDRESS,
   ETH_USD_PAIR,
   SOUL_SEANCE_PAIR,
@@ -86,6 +87,7 @@ import SUMMONER_HELPER_ABI from '../constants/abis/soulswap/helper.json'
 import PRICE_HELPER_ABI from '../constants/abis/soulswap/pricehelper.json'
 import BORING_HELPER_ABI from '../constants/abis/soulswap/boring-helper.json'
 import HARVEST_HELPER_ABI from '../constants/abis/soulswap/harvest-helper.json'
+import COFFIN_BOX_ABI from '../constants/abis/soulswap/coffinbox.json'
 
 // bridge
 import anyswapEthOperaBridge_ABI from '../constants/abis/soulswap/bridge/anyswapEthOperaBridge.json'
@@ -301,9 +303,33 @@ export function useEnchantHelperContract(withSignerIfPossible = true): Contract 
   return useContract(chainId && ENCHANT_HELPER_ADDRESS[chainId], ENCHANT_HELPER_ABI, withSignerIfPossible)
 }
 
+export function useTridentRouterContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  // @ts-ignore TYPE NEEDS FIXING
+  return useContract(chainId && TRIDENT[chainId], FACTORY_ABI, withSignerIfPossible)
+  // const router = TRIDENT[chainId]?.[CHAIN_KEY[chainId]]?.contracts.TridentRouter
+  // return useContract(router?.address, router?.abi, withSignerIfPossible)
+}
+
 export function useMasterChefContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible) // 31 JUL (SOUL SUMMONER)
+}
+
+export function useConstantProductPoolFactory(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  // @ts-ignore TYPE NEEDS FIXING // TODO
+  return useContract(chainId && TRIDENT[chainId], FACTORY_ABI, withSignerIfPossible)
+  // const factory = TRIDENT[chainId]?.[CHAIN_KEY[chainId]]?.contracts.ConstantProductPoolFactory
+  // return useContract(factory?.address, factory?.abi, withSignerIfPossible)
+}
+
+export function useStablePoolFactory(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  // @ts-ignore TYPE NEEDS FIXING
+  return useContract(chainId && TRIDENT[chainId], FACTORY_ABI, withSignerIfPossible)
+  // const factory = TRIDENT[chainId]?.[CHAIN_KEY[chainId]]?.contracts.HybridPoolFactory
+  // return useContract(factory?.address, factory?.abi, withSignerIfPossible)
 }
 
 export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
@@ -367,7 +393,7 @@ export function useTimelockContract(): Contract | null {
 
 export function useBentoBoxContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && COFFIN_BOX_ADDRESS[chainId], BENTOBOX_ABI, withSignerIfPossible)
+  return useContract(chainId && COFFIN_BOX_ADDRESS[chainId], COFFIN_BOX_ABI, withSignerIfPossible)
 }
 
 export function useKashiPairContract(withSignerIfPossible?: boolean): Contract | null {
@@ -624,7 +650,7 @@ export function useLimitOrderContract(withSignerIfPossibe?: boolean): Contract |
 }
 
 export function useLimitOrderHelperContract(withSignerIfPossible?: boolean): Contract | null {
-  return useContract('0xe2f736B7d1f6071124CBb5FC23E93d141CD24E12', LIMIT_ORDER_HELPER_ABI, withSignerIfPossible)
+  return useContract('0xBf28dD7C3B863eae035eBf535B1B214070E8ddBf', LIMIT_ORDER_HELPER_ABI, withSignerIfPossible)
 }
 
 

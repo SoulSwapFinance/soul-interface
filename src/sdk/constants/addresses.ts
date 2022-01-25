@@ -21,6 +21,7 @@ export const LIMIT_ORDER_HELPER_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0xBf28dD7C3B863eae035eBf535B1B214070E8ddBf',
 }
 
+// TODO: update
 export const STOP_LIMIT_ORDER_ADDRESS: AddressMap = {
   // [ChainId.KOVAN]: '0xce9365dB1C99897f04B3923C03ba9a5f80E8DB87',
   // [ChainId.MATIC]: '0x1aDb3Bd86bb01797667eC382a0BC6A9854b4005f',
@@ -87,7 +88,7 @@ export const SOUL_VAULT_ADDRESS: { [chainId in ChainId]: string } = {
 export const COFFIN_BOX_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xB9c7c6368a69b61508a556bd539eb2b8C351d27A',
+  [ChainId.FANTOM]: '0xD25354e20b5Ed0D5E0A2193993E3dd6e4f42B4f7',
   [ChainId.FANTOM_TESTNET]: ''
 }
 
