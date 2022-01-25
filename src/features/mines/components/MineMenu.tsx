@@ -61,7 +61,7 @@ const filters: Record<string, FarmFilter> = {
   inactive: FarmFilter.Inactive,
 }
 
-const OnsenFilter = () => {
+const MineMenu = () => {
   const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
   const toggleWalletModal = useWalletModalToggle()
@@ -143,4 +143,4 @@ const OnsenFilter = () => {
   )
 }
 
-export default OnsenFilter
+export default MineMenu
