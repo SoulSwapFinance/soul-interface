@@ -45,7 +45,7 @@ const MenuLink: FC<{ href?: string; label: string; onClick?(): void }> = ({ href
 
 enum FarmFilter {
   Active = 'Active',
-  Deposited = 'Deposited',
+  // Deposited = 'Deposited',
   Fantom = 'Fantom',
   SoulSwap = 'SoulSwap',
   Stables = 'Stables',
@@ -53,7 +53,7 @@ enum FarmFilter {
 }
 
 const filters: Record<string, FarmFilter> = {
-  deposited: FarmFilter.Deposited,
+  // deposited: FarmFilter.Deposited,
   active: FarmFilter.Active,
   fantom: FarmFilter.Fantom,
   soulswap: FarmFilter.SoulSwap,
@@ -72,11 +72,13 @@ const MineMenu = () => {
   const items = useMemo(() => {
     const map: Record<string, ReactNode> = {
       [FarmFilter.Active]: <MenuLink href={'/farm?filter=active'} label={i18n._(t`Active`)} />,
+      /*
       [FarmFilter.Deposited]: account ? (
         <MenuLink href={'/farm?filter=deposited'} label={i18n._(t`Deposited`)} />
       ) : (
         <MenuLink onClick={toggleWalletModal} label={i18n._(t`Deposited`)} />
       ),
+       */
       [FarmFilter.Fantom]:
         chainId === ChainId.FANTOM ? (
           <MenuLink href={'/farm?filter=fantom'} label={i18n._(t`Fantom`)} />

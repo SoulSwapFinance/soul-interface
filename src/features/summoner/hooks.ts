@@ -152,8 +152,6 @@ export function usePositions() {
 }
 
 export function useSoulFarms(contract?: Contract | null) {
-  const { chainId, account } = useActiveWeb3React()
-
   const numberOfPools = useSingleCallResult(contract ? contract : null, 'poolLength', undefined, NEVER_RELOAD)?.result?.[0]
 
   const args = useMemo(() => {
@@ -221,8 +219,6 @@ const useAsync = (asyncFunction, immediate = true) => {
 // }
 
 export function usePrice(pairContract?: Contract | null, pairDecimals?: number | null, invert: boolean = false) {
-  const { account, chainId } = useActiveWeb3React()
-
   const result = useSingleCallResult(pairContract ? pairContract : null, 'getReserves', undefined, NEVER_RELOAD)?.result
 
   const _reserve1 = invert ? result?.['reserve0'] : result?.['reserve1']
@@ -234,7 +230,6 @@ export function usePrice(pairContract?: Contract | null, pairDecimals?: number |
 }
 
 export function useTokenInfo(tokenContract?: Contract | null) {
-  const { account, chainId } = useActiveWeb3React()
   // const vaults = useVaults()
 
   const _totalSupply = useSingleCallResult(tokenContract ? tokenContract : null, 'totalSupply')?.result

@@ -12,7 +12,7 @@ import useFuse from 'hooks/useFuse'
 import { useActiveWeb3React } from 'services/web3'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { POOLS } from 'constants/farms'
 // import { useSoulSummonerContract } from 'hooks/useContract'
 // import { Button } from 'components/Button'
@@ -28,13 +28,31 @@ import Typography from 'components/Typography'
 // import ExternalLink from 'comp/onents/ExternalLink'
 import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
-import useFarmRewards from 'hooks/useFarmRewards'
+import { farmMap } from '../../lib/fns'
+
+const FILTER = {
+  active: (farm) => farm.allocPointNumber > 0,
+  inactive: (farm) => !farm.allocPointNumber,
+  soulswap: (farm) => farm.allocPointNumber > 0
+    && (
+      farm.pair.token0?.symbol == 'SOUL'
+      || farm.pair.token0?.symbol == 'SEANCE'
+      || farm.pair.token0?.symbol == 'LUX'
+      || farm.pair.token0?.symbol == 'wLUM'
+
+      || farm.pair.token1?.symbol == 'SOUL'
+      || farm.pair.token1?.symbol == 'SEANCE'
+      || farm.pair.token1?.symbol == 'LUX'
+      || farm.pair.token1?.symbol == 'wLUM'
+    ),
+  single: (farm) => farm.pair.token0 && !farm.pair.token1,
+  fantom: (farm) => farm.allocPointNumber > 0 && (farm.pair.token0?.symbol == 'FTM' || farm.pair.token1?.symbol == 'FTM'),
+  stables: (farm) => farm.allocPointNumber === 200 // since all [active] stables have 200 AP <3
+}
 
 export default function Mines(): JSX.Element {
   const { chainId } = useActiveWeb3React()
-  const router = useRouter()
-  const type = router.query.filter === null ? 'active' : (router.query.filter as string)
-  const rewards = useFarmRewards()
+  const { query, asPath } = useRouter()
 
   // function useFarms() {
   //   return useSoulFarms(useSoulSummonerContract())
@@ -56,95 +74,6 @@ export default function Mines(): JSX.Element {
   const soulPrice = usePrice(SOUL_ADDRESS[chainId])
   // const ftmPrice = usePrice(WNATIVE[chainId])
 
-  const map = (pool) => {
-    pool.owner = 'SoulSwap'
-    pool.balance = 0
-
-    const pair = POOLS[chainId][pool.lpToken]
-
-  //   const secondsPerHour = 60 * 60
-
-    function getRewards() {
-      const rewardPerSecond =
-        ((pool.allocPoint / Number(summonerInfo.totalAllocPoint)) * Number(summonerInfo.soulPerSecond)) / 1e18
-
-      const defaultReward = {
-        token: 'SOUL',
-        icon: '/images/token/soul.png',
-        rewardPerSecond,
-        rewardPerDay: rewardPerSecond * 86400,
-        rewardPrice: soulPrice,
-      }
-
-      const defaultRewards = [defaultReward]
-
-      return defaultRewards
-    }
-
-    const rewards = getRewards()
-
-  //   // const tvl = getTvl()
-  //   const tvl = pool.pair?.token1
-  //   ? Number(pool.pairPrice) * Number(pool.lpBalance) / 1e18
-  //   : Number(soulPrice) * Number(pool.lpBalance) / 1e18
-
-  //   const rewardPerSec =
-  //     ((pool.allocPoint / Number(summonerInfo.totalAllocPoint)) * Number(summonerInfo.soulPerSecond)) / 1e18
-
-  //   const rewardPrice = soulPrice
-
-  //   const roiPerSecond =
-  //     farms.reduce((previousValue, currentValue) => {
-  //       return previousValue + rewardPerSec * rewardPrice
-  //     }, 0) / Number(tvl)
-
-  //   // const roiPerSecond = Number(tvl)
-  //   const roiPerHour = roiPerSecond * 60 * 60
-  //   const roiPerDay = roiPerHour * 24
-  //   const roiPerMonth = roiPerDay * 30
-  //   const roiPerYear = roiPerDay * 365
-
-  //   const position = positions.find((position) => position.id === pool.id)
-
-    return {
-      ...pool,
-      // ...position,
-      pair: {
-        ...pair,
-        decimals: 18,
-      },
-      // roiPerSecond,
-      // roiPerHour,
-      // roiPerDay,
-      // roiPerMonth,
-      // roiPerYear,
-      rewards,
-      // tvl,
-      // secondsPerHour,
-    }
-  }
-
-  const FILTER = {
-    deposited: (farm) => farm.amount,
-    active: (farm) => farm.allocPoint > 0,
-    inactive: (farm) => farm.allocPoint == 0,
-    soulswap: (farm) => farm.allocPoint > 0
-      && (
-        farm.pair.token0?.symbol == 'SOUL'
-        || farm.pair.token0?.symbol == 'SEANCE'
-        || farm.pair.token0?.symbol == 'LUX'
-        || farm.pair.token0?.symbol == 'wLUM'
-
-        || farm.pair.token1?.symbol == 'SOUL'
-        || farm.pair.token1?.symbol == 'SEANCE'
-        || farm.pair.token1?.symbol == 'LUX'
-        || farm.pair.token1?.symbol == 'wLUM'
-      ),
-    single: (farm) => farm.pair.token0 && !farm.pair.token1,
-    fantom: (farm) => farm.allocPoint > 0 && (farm.pair.token0?.symbol == 'FTM' || farm.pair.token1?.symbol == 'FTM'),
-    stables: (farm) => farm.allocPoint == 200 // since all [active] stables have 200 AP <3
-  }
-
   // const rewards = useFarmRewards()
 
   // const farmRewards = rewards.filter((farm) => {
@@ -155,9 +84,16 @@ export default function Mines(): JSX.Element {
   //   return previousValue + currentValue.tvl
   // }, 0)
 
-  const data = farms.map(map).filter((farm) => {
-    return type in FILTER ? FILTER[type](farm) : true
-  })
+  const data = useMemo(() => {
+    if (farms && soulPrice && summonerInfo) {
+      const map = farmMap(summonerInfo, soulPrice, chainId);
+      const filterValue = asPath.match(/filter=(.*)/);
+      const type = !filterValue ? 'active' : (filterValue[1] as string)
+      return farms.map(map).filter((farm) => {
+        return type in FILTER ? FILTER[type](farm) : true
+      })
+    }
+  }, [farms, asPath, summonerInfo, soulPrice, chainId]);
 
   // const data = rewards.filter((farm) => {
   //   // @ts-ignore TYPE NEEDS FIXING
@@ -247,7 +183,7 @@ export default function Mines(): JSX.Element {
             <Search search={search} term={term} />
             <Menu />
           </div>
-          <MineList farms={result} term={term} />
+          <MineList farms={result} term={term} key={asPath} />
         </div>
       </TridentBody>
     </>
