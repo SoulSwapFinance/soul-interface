@@ -8,17 +8,26 @@ import { TABLE_TBODY_TD_CLASSNAME, TABLE_TBODY_TR_CLASSNAME } from 'features/tri
 import { aprToApy, classNames, formatNumber, formatPercent } from 'functions'
 import { useCurrency } from 'hooks/Tokens'
 import React, { FC, ReactNode } from 'react'
+
+// HOOKS //
 import { useTVL } from 'hooks/useV2Pairs'
 import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 import { useSingleCallResult } from 'state/multicall/hooks'
-import { SOUL, SOUL_ADDRESS } from '../../constants'
+import { usePendingSoul } from 'features/mines/hooks'
+  
+// FETCH PENDING REWARDS //
+
+import { useSoulPositions } from './hooks'
 import { usePrice } from 'hooks/usePrice'
 import useFarms from 'hooks/useFarmRewards'
-import { PairType } from './enum'
 import { useHarvestHelperContract, useSoulSummonerContract } from 'hooks/useContract'
 import { getAddress } from 'ethers/lib/utils'
+
+import { PairType } from './enum'
+
+import { SOUL, SOUL_ADDRESS } from '../../constants'
 import { POOLS } from 'constants/farms'
-import { useSoulPositions } from './hooks'
+
 import styled from 'styled-components'
 
 const HideOnMobile = styled.div`
@@ -42,6 +51,8 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   const soulPrice = usePrice(SOUL_ADDRESS[250]) // to avoid RPC call
 
   const rewards = useFarms()
+  
+  const pendingSoul = usePendingSoul(farm)
 
   let [data] = useV2PairsWithPrice([[token0, token1]])
   let [state, pair, pairPrice] = data
@@ -55,6 +66,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   //   return { ...POOLS[250][key], lpToken: key }
   // })
 
+// BALANCES AND TVL //
 
   const lpBalance = useSingleCallResult(harvestHelperContract, 'fetchBals', [farm?.id])?.result
 
@@ -83,16 +95,18 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   const roiPerHour = roiPerDay / 24
 
   return (
-    // <div className={classNames(TABLE_TBODY_TR_CLASSNAME, 'min-w-[460px] sm:min-w-[500px] md:min-w-[920px] lg:min-w-[1200px] max-w-[1600px] grid grid-cols-3')} onClick={onClick}>
     <div className={classNames(TABLE_TBODY_TR_CLASSNAME, 'grid grid-cols-4')} onClick={onClick}>
       <div className={classNames('flex gap-2', TABLE_TBODY_TD_CLASSNAME(0, 4))}>
-
+      
+        { /* TOKEN-LOGO */ }
+        
         {token1 ? <CurrencyLogoArray currencies={[token0, token1]} dense size={32} />
           : <CurrencyLogo currency={token0} size={54} />
         }
+        
+        { /* LP-TOKEN */ }
         <div className="flex flex-col items-start">
-          {/* <HideOnMobile> */}
-          <Typography weight={700} className="flex gap-1 text-high-emphesis">
+     <Typography weight={700} className="flex gap-1 text-high-emphesis">
             {farm.pair.token1 ?
               farm?.pair?.token0?.symbol
               : farm?.pair?.token0?.symbol
@@ -101,15 +115,30 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
               <span className="text-low-emphesis">/</span>
             }
             {farm?.pair?.token1?.symbol}
+            
+            { /* PENDING REWARDS (SUBTITLE) */ }
+
           </Typography>
           {farm?.rewards?.map((reward, i) => (
-            <Typography variant="xs" className="text-low-emphesis">
-              {formatNumber(reward.rewardPerDay)} DAILY
-              {/* <CurrencyLogo currency={SOUL[250]} size={isMobile ? 32 : 50} /> */}
+  <Typography variant="xs" className="text-low-emphesis">
+  Claimable: {' '}
+              {formatNumber(pendingSoul?.toSignificant(4) ?? 0)} {' '} SOUL
+              
             </Typography>
-          ))
-          }
-          {/* </HideOnMobile> */}
+          ))}
+          
+          { /* DAILY REWARDS (SUBTITLE) */ }
+            
+      {/*
+          </Typography>
+          {farm?.rewards?.map((reward, i) => (
+  <Typography variant="xs" className="text-low-emphesis">
+              {formatNumber(reward.rewardPerDay)} DAILY
+            </Typography>
+          ))}
+          
+          */}
+
         </div>
       </div>
       <div className={TABLE_TBODY_TD_CLASSNAME(1, 4)}>
