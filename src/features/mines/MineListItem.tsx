@@ -13,7 +13,8 @@ import React, { FC, ReactNode } from 'react'
 import { useTVL } from 'hooks/useV2Pairs'
 import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 import { useSingleCallResult } from 'state/multicall/hooks'
-
+import { usePendingSoul } from 'features/mines/hooks'
+  
 // FETCH PENDING REWARDS //
 
 import usePendingReward from 'features/mines/hooks/usePendingReward'
@@ -53,6 +54,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   const rewards = useFarms()
   const pendingReward = usePendingReward(farm)
   
+  const pendingSoul = usePendingSoul(farm)
 
   let [data] = useV2PairsWithPrice([[token0, token1]])
   let [state, pair, pairPrice] = data
@@ -121,7 +123,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
           </Typography>
           {farm?.rewards?.map((reward, i) => (
   <Typography variant="xs" className="text-low-emphesis">
-              {formatNumber(pendingReward)} 
+              {formatNumber(pendingSoul?.toSignificant(4) ?? 0)}
               CLAIMABLE
             </Typography>
           ))}
