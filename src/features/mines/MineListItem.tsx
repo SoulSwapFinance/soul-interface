@@ -120,7 +120,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
           </Typography>
           {farm?.rewards?.map((reward, i) => (
   <Typography variant="xs" className="text-low-emphesis">
-              {formatNumber(pendingRewards)} CLAIMABLE
+              {formatNumber(usePendingReward)} CLAIMABLE
             </Typography>
           ))}
           
