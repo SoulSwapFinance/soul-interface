@@ -52,6 +52,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
 
   const rewards = useFarms()
   const pendingReward = usePendingReward(farm)
+  
 
   let [data] = useV2PairsWithPrice([[token0, token1]])
   let [state, pair, pairPrice] = data
@@ -120,7 +121,8 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
           </Typography>
           {farm?.rewards?.map((reward, i) => (
   <Typography variant="xs" className="text-low-emphesis">
-              {formatNumber(usePendingReward)} CLAIMABLE
+              {formatNumber(pendingReward)} 
+              CLAIMABLE
             </Typography>
           ))}
           
