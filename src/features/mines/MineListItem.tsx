@@ -17,7 +17,6 @@ import { usePendingSoul } from 'features/mines/hooks'
   
 // FETCH PENDING REWARDS //
 
-import usePendingReward from 'features/mines/hooks/usePendingReward'
 import { useSoulPositions } from './hooks'
 import { usePrice } from 'hooks/usePrice'
 import useFarms from 'hooks/useFarmRewards'
@@ -52,7 +51,6 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   const soulPrice = usePrice(SOUL_ADDRESS[250]) // to avoid RPC call
 
   const rewards = useFarms()
-  const pendingReward = usePendingReward(farm)
   
   const pendingSoul = usePendingSoul(farm)
 
@@ -123,8 +121,9 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
           </Typography>
           {farm?.rewards?.map((reward, i) => (
   <Typography variant="xs" className="text-low-emphesis">
-              {formatNumber(pendingSoul?.toSignificant(4) ?? 0)}
-              CLAIMABLE
+  Claimable: {' '}
+              {formatNumber(pendingSoul?.toSignificant(4) ?? 0)} {' '} SOUL
+              
             </Typography>
           ))}
           
