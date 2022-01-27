@@ -49,7 +49,7 @@ export function useBentoBox({ chainId = ChainId.MAINNET, variables, shouldFetch 
 export function useBentoStrategies({
   chainId = ChainId.MAINNET,
   variables,
-  // shouldFetch = featureEnabled(Feature.BENTOBOX, chainId),
+  // shouldFetch = featureEnabled(Feature.COFFINBOX, chainId),
   swrConfig = undefined,
 }: GraphProps) {
   const { data } = useSWR(
@@ -65,7 +65,7 @@ export function useBentoStrategies({
 export function useBentoTokens({
   chainId,
   variables,
-  // shouldFetch = featureEnabled(Feature.BENTOBOX, chainId),
+  // shouldFetch = featureEnabled(Feature.COFFINBOX, chainId),
   swrConfig = undefined,
 }: GraphProps) {
   const { data } = useSWR(
@@ -80,7 +80,7 @@ export function useBentoTokens({
 export function useBentoUserTokens({
   chainId,
   variables,
-  // shouldFetch = featureEnabled(Feature.BENTOBOX, chainId),
+  // shouldFetch = featureEnabled(Feature.COFFINBOX, chainId),
   swrConfig = undefined,
 }: GraphProps) {
   return useSWR<CurrencyAmount<Token>[]>(

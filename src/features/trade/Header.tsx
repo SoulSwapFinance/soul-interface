@@ -52,7 +52,8 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
           }}
         >
           <a className="flex px-4 py-6 items-center justify-center font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
-          <Image src={ SWAP } height="42px" width="42px" alt="swap icon" />
+          SWAP  
+          {/* <Image src={ SWAP } height="42px" width="42px" alt="swap icon" /> */}
           </a>
         </NavLink>
         <NavLink
@@ -61,7 +62,8 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
             }`}
         >
           <a className="flex px-4 py-6 items-center justify-center font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
-          <Image src={ ADD } height="42px" width="42px" alt="add icon" />
+          + / -
+          {/* <Image src={ ADD } height="42px" width="42px" alt="add icon" /> */}
           </a>
         </NavLink>
         
@@ -70,7 +72,8 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
           href={'/charts'}
         >
           <a className="flex px-4 py-6 items-center justify-center font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
-          <Image src={ CHART } height="42px" width="42px" alt="chart icon" />
+          CHART
+          {/* <Image src={ CHART } height="42px" width="42px" alt="chart icon" /> */}
           </a>
         </NavLink>
         <NavLink
@@ -78,7 +81,8 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
           href={'/bridge'}
         >
           <a className="flex px-4 py-6 items-center justify-center font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
-          <Image src={ BRIDGE } height="42px" width="42px" alt="chart icon" />
+            BRIDGE
+          {/* <Image src={ BRIDGE } height="42px" width="42px" alt="chart icon" /> */}
           </a>
         </NavLink>
       </div>

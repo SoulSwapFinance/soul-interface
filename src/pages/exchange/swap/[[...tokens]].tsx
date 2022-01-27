@@ -15,7 +15,7 @@ import {
 } from '../../../state/swap/hooks'
 import { useExpertModeManager, useUserSingleHopOnly, useUserTransactionTTL } from '../../../state/user/hooks'
 import useWrapCallback, { WrapType } from '../../../hooks/useWrapCallback'
-import MainHeader from 'features/swap/MainHeader'
+// import MainHeader from 'features/swap/MainHeader'
 import AddressInputPanel from '../../../components/AddressInputPanel'
 import { Button } from '../../../components/Button'
 import ConfirmSwapModal from '../../../features/swap/ConfirmSwapModal'
@@ -28,7 +28,8 @@ import Lottie from 'lottie-react'
 import ProgressSteps from '../../../components/ProgressSteps'
 import ReactGA from 'react-ga'
 // import SwapHeader from '../../../components/ExchangeHeader'
-import SwapHeader from '../../../features/trade/Header'
+// import SwapHeader from '../../../features/trade/Header'
+import SwapHeader from '../../../features/trade/HeaderNew'
 import TokenWarningModal from '../../../modals/TokenWarningModal'
 import TradePrice from '../../../features/swap/TradePrice'
 import UnsupportedCurrencyFooter from '../../../features/swap/UnsupportedCurrencyFooter'
@@ -400,11 +401,11 @@ export default function Swap() {
           content="Soul allows for swapping of compatible tokens on Fantom."
         />
       </Head>
-      <MainHeader
+      {/* <MainHeader
         input={currencies[Field.INPUT]}
         output={currencies[Field.OUTPUT]}
         allowedSlippage={allowedSlippage}
-      />
+      /> */}
       <TokenWarningModal
         isOpen={importTokensNotInDefault.length > 0 && !dismissTokenWarning}
         tokens={importTokensNotInDefault}
@@ -421,9 +422,9 @@ export default function Swap() {
           </div> */}
           <div>
             <SwapHeader
-              input={currencies[Field.INPUT]}
-              output={currencies[Field.OUTPUT]}
-              allowedSlippage={allowedSlippage}
+              inputCurrency={currencies[Field.INPUT]}
+              outputCurrency={currencies[Field.OUTPUT]}
+              // allowedSlippage={allowedSlippage}
             />
             <ConfirmSwapModal
               isOpen={showConfirm}
