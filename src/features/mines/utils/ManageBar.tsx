@@ -198,7 +198,7 @@ const ManageBar = ({ farm }) => {
               try {
                 // KMP decimals depend on asset, SLP is always 18
                 // @ts-ignore TYPE NEEDS FIXING
-                const tx = await enterStaking(farm.id, BigNumber.from(parsedDepositValue?.quotient.toString()))
+                const tx = await enterStaking(BigNumber.from(parsedDepositValue?.quotient.toString()))
                 if (tx?.hash) {
                   setContent(
                     <HeadlessUiModal.SubmittedModalContent
@@ -263,7 +263,7 @@ const ManageBar = ({ farm }) => {
         try {
           // KMP decimals depend on asset, SLP is always 18
           // @ts-ignore TYPE NEEDS FIXING
-          const tx = await leaveStaking(farm.id, BigNumber.from(parsedWithdrawValue?.quotient.toString()))
+          const tx = await leaveStaking(BigNumber.from(parsedWithdrawValue?.quotient.toString()))
           if (tx?.hash) {
             setContent(
               <HeadlessUiModal.SubmittedModalContent
