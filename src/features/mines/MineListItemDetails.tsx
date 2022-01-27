@@ -27,9 +27,10 @@ const Context = createContext<MineListItemDetailsModal | undefined>(undefined)
 // @ts-ignore TYPE NEEDS FIXING
 const MineListItemDetails = ({ farm, onDismiss }) => {
   const { i18n } = useLingui()
-  const { view } = useAppSelector(selectMines)
+  let { view } = useAppSelector(selectMines)
   const dispatch = useAppDispatch()
   const [content, setContent] = useState<ReactNode>()
+  view = view || MineModalView.Staking as MineModalView // view type looks wrong
 
   return (
     <Context.Provider value={useMemo(() => ({ content, setContent }), [content, setContent])}>
