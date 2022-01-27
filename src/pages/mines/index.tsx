@@ -29,6 +29,7 @@ import Typography from 'components/Typography'
 import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
 import useFarmRewards from 'hooks/useFarmRewards'
+import { usePositions } from 'features/mines/hooks'
 
 export default function Mines(): JSX.Element {
   const { chainId } = useActiveWeb3React()
@@ -51,7 +52,7 @@ export default function Mines(): JSX.Element {
   // const tvlInfo = useTVL()
 
   const summonerInfo = useSummonerInfo()
-  // const positions = usePositions()
+  const positions = usePositions()
 
   const soulPrice = usePrice(SOUL_ADDRESS[chainId])
   // const ftmPrice = usePrice(WNATIVE[chainId])
@@ -104,11 +105,11 @@ export default function Mines(): JSX.Element {
   //   const roiPerMonth = roiPerDay * 30
   //   const roiPerYear = roiPerDay * 365
 
-  //   const position = positions.find((position) => position.id === pool.id)
+    const position = positions.find((position) => position.id === pool.id)
 
     return {
       ...pool,
-      // ...position,
+      ...position,
       pair: {
         ...pair,
         decimals: 18,
