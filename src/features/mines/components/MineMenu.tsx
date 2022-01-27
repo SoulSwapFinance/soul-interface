@@ -71,27 +71,27 @@ const MineMenu = () => {
 
   const items = useMemo(() => {
     const map: Record<string, ReactNode> = {
-      [FarmFilter.Active]: <MenuLink href={'/farm?filter=active'} label={i18n._(t`Active`)} />,
+      [FarmFilter.Active]: <MenuLink href={'/mines?filter=active'} label={i18n._(t`Active`)} />,
       [FarmFilter.Deposited]: account ? (
-        <MenuLink href={'/farm?filter=deposited'} label={i18n._(t`Deposited`)} />
+        <MenuLink href={'/mines?filter=deposited'} label={i18n._(t`Deposited`)} />
       ) : (
         <MenuLink onClick={toggleWalletModal} label={i18n._(t`Deposited`)} />
       ),
       [FarmFilter.Fantom]:
         chainId === ChainId.FANTOM ? (
-          <MenuLink href={'/farm?filter=fantom'} label={i18n._(t`Fantom`)} />
+          <MenuLink href={'/mines?filter=fantom'} label={i18n._(t`Fantom`)} />
         ) : undefined,
       [FarmFilter.SoulSwap]:
         chainId === ChainId.FANTOM ? (
-          <MenuLink href={'/farm?filter=soulswap'} label={i18n._(t`SoulSwap`)} />
+          <MenuLink href={'/mines?filter=soulswap'} label={i18n._(t`SoulSwap`)} />
         ) : undefined,
       [FarmFilter.Stables]:
         chainId === ChainId.FANTOM ? (
-          <MenuLink href={'/farm?filter=stables'} label={i18n._(t`Stables`)} />
+          <MenuLink href={'/mines?filter=stables'} label={i18n._(t`Stables`)} />
         ) : undefined,
       // @ts-ignore TYPE NEEDS FIXING
       [FarmFilter.Inactive]: (
-        <MenuLink href={'/farm?filter=inactive'} label={i18n._(t`Inactive`)} />
+        <MenuLink href={'/mines?filter=inactive'} label={i18n._(t`Inactive`)} />
       )
     }
 
