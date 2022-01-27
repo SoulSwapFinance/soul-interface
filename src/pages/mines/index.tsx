@@ -23,6 +23,7 @@ import { usePrice, useFarms, useSummonerInfo } from 'hooks'
 // import { SEANCE_ADDRESS, WNATIVE } from 'constants/addresses'
 import { TridentBody, TridentHeader } from 'layouts/Trident'
 import Typography from 'components/Typography'
+import { useRewards } from 'hooks/useRewards'
 // import ExternalLink from 'comp/onents/ExternalLink'
 import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
@@ -49,11 +50,7 @@ export default function Mines(): JSX.Element {
 
   // const tvlInfo = useTVL()
 
-  const summonerInfo = useSummonerInfo()
   const positions = usePositions()
-
-  const soulPrice = usePrice(SOUL_ADDRESS[chainId])
-  // const ftmPrice = usePrice(WNATIVE[chainId])
 
   const map = (pool) => {
     pool.owner = 'SoulSwap'
@@ -63,24 +60,7 @@ export default function Mines(): JSX.Element {
 
   //   const secondsPerHour = 60 * 60
 
-    function getRewards() {
-      const rewardPerSecond =
-        ((pool.allocPoint / Number(summonerInfo.totalAllocPoint)) * Number(summonerInfo.soulPerSecond)) / 1e18
-
-      const defaultReward = {
-        token: 'SOUL',
-        icon: '/images/token/soul.png',
-        rewardPerSecond,
-        rewardPerDay: rewardPerSecond * 86400,
-        rewardPrice: soulPrice,
-      }
-
-      const defaultRewards = [defaultReward]
-
-      return defaultRewards
-    }
-
-    const rewards = getRewards()
+    // const rewards = useRewards(pool)
 
   //   // const tvl = getTvl()
   //   const tvl = pool.pair?.token1
@@ -103,7 +83,7 @@ export default function Mines(): JSX.Element {
   //   const roiPerMonth = roiPerDay * 30
   //   const roiPerYear = roiPerDay * 365
 
-    const position = positions.find((position) => position.id === pool.id)
+  const position = positions.find((position) => position.id === pool.id)
 
     return {
       ...pool,
