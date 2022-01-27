@@ -37,7 +37,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
           'hover:text-white font-bold py-5 px-2 rounded flex gap-3'
         )}
       >
-        {/* {!isDesktop && node.icon} */}
+        {!isDesktop && node.icon}
         {node.title}
       </Typography>
     )
@@ -58,7 +58,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
               variant="sm"
               className={classNames(open ? 'text-white' : '', 'font-bold py-5 px-2 rounded flex gap-3 items-center')}
             >
-              {/* {!isDesktop && node.icon} */}
+              {!isDesktop && node.icon}
               {node.title}
               <ChevronDownIcon strokeWidth={5} width={12} />
             </Typography>

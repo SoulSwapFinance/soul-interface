@@ -37,7 +37,7 @@ const Desktop: FC = () => {
             <div className="flex gap-4 px-6 items-center justify-between">
               <div className="flex gap-4">
                 <div className="flex w-6 mr-4 items-center">
-                  <NavLink href="/landing">
+                  <NavLink href="/swap">
                     <Image src="/logo.png" alt="Soul" width="40" height="40" />
                   </NavLink>
                 </div>
