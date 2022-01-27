@@ -1,14 +1,14 @@
 
 import { POOLS } from 'constants/farms'
-import { ChainId } from 'sdk'
+import { usePrice, useSummonerInfo } from 'hooks'
+import { ChainId, SOUL_ADDRESS } from 'sdk'
 
-export const farmMap = (summonerInfo: any, soulPrice: number, chainId: ChainId) => (pool: any) => {
+export const farmMap = (chainId: ChainId) => (pool: any) => {
   pool.owner = 'SoulSwap'
   pool.balance = 0
-
+  const soulPrice = usePrice(SOUL_ADDRESS[chainId])
   const pair = POOLS[chainId][pool.lpToken]
-
-//   const secondsPerHour = 60 * 60
+  const summonerInfo = useSummonerInfo()
 
   function getRewards() {
     const rewardPerSecond =
