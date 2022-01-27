@@ -178,7 +178,7 @@ export default function Launchpad(): JSX.Element {
                               <div className="flex flex-col">
                                 <Typography variant="base">Total Raise</Typography>
                                 <Typography variant="lg" className="font-bold text-right">
-                                  {formatNumberScale(p.raise, true, 2)}
+                                  {formatNumberScale(p.raise, true)}
                                 </Typography>
                               </div>
                             </div>

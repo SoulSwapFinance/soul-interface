@@ -203,7 +203,7 @@ export default function Mines(): JSX.Element {
             size={"sm"}
           >
             {'YOURS '}
-            {formatNumberScale(valueStaked, true, 2)} {' STAKED'}             
+            {formatNumberScale(valueStaked, true)} {' STAKED'}             
             </Button> */}
           {/* {positions.length > 0 && (
             <Button
@@ -225,7 +225,7 @@ export default function Mines(): JSX.Element {
                 setPendingTx(false)
               }}
             >
-              CLAIM ALL {formatNumberScale(allStaked, true, 2)}
+              CLAIM ALL {formatNumberScale(allStaked, true)}
             </Button>
           )} */}
          {/* <Button
@@ -235,7 +235,7 @@ export default function Mines(): JSX.Element {
             size={"sm"}
           >
             {'TOTAL: '}
-            {formatNumberScale(summTvl, true, 2)} {' '} TOTAL
+            {formatNumberScale(summTvl, true)} {' '} TOTAL
           </Button>
         </div>
         </div> */}

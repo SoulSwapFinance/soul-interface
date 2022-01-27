@@ -170,14 +170,14 @@ export default function Vault(): JSX.Element {
                     </div>
                     <div className={`flex flex-col items-center justify-between px-6 py-6 `}>
                       {/* <div className="flex items-center justify-between py-2 text-emphasis">
-                        Total Value Locked: {formatNumberScale(summTvl + summTvlVaults, true, 2)}
+                        Total Value Locked: {formatNumberScale(summTvl + summTvlVaults, true)}
                       </div> */}
                       {/* <div className="flex items-center justify-between py-2 text-emphasis">
-                        Vaults TVL: {formatNumberScale(summTvlVaults, true, 2)}
+                        Vaults TVL: {formatNumberScale(summTvlVaults, true)}
                       </div> */}
                       {positions.length > 0 && (
                         <div className="flex items-center justify-between py-2 text-emphasis">
-                          My Holdings: {formatNumberScale(valueStaked, true, 2)}
+                          My Holdings: {formatNumberScale(valueStaked, true)}
                         </div>
                       )}
                     </div>

@@ -38,7 +38,7 @@ export const LiquidityPositionsBalancesSum = () => {
         <Typography variant="sm">{i18n._(t`Total Value`)}</Typography>
         <Typography variant="lg" weight={700} className="text-high-emphesis">
           {/* ${sum?.toFixed(2) || '0.00'} */}
-          { formatNumberScale(valueStaked, true, 2) }
+          { formatNumberScale(valueStaked, true) }
         </Typography>
       </div>
       <div className="flex flex-col gap-1">

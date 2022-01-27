@@ -122,9 +122,9 @@ const VaultListItem = ({ farm }) => {
               {account && (
                 <div className="pr-4 mb-2 text-left cursor-pointer text-secondary">
                   {i18n._(t`Wallet Balance`)}:{' '}
-                  {formatNumberScale(balance?.toSignificant(4, undefined, 2) ?? 0, false, 4)}
+                  {formatNumberScale(balance?.toSignificant(4, undefined, 2) ?? 0, false)}
                   {farm.lpPrice && balance
-                    ? ` (` + formatNumberScale(farm.lpPrice * Number(balance?.toFixed(18) ?? 0), true, 2) + `)`
+                    ? ` (` + formatNumberScale(farm.lpPrice * Number(balance?.toFixed(18) ?? 0), true) + `)`
                     : ``}
                 </div>
               )}
@@ -214,7 +214,7 @@ const VaultListItem = ({ farm }) => {
                 <div className="pr-4 mb-2 text-left cursor-pointer text-secondary">
                   {i18n._(t`Your Staked`)}: {formatNumberScale(amount?.toSignificant(6)) ?? 0}
                   {farm.lpPrice && amount
-                    ? ` (` + formatNumberScale(farm.lpPrice * Number(amount?.toSignificant(18) ?? 0), true, 2) + `)`
+                    ? ` (` + formatNumberScale(farm.lpPrice * Number(amount?.toSignificant(18) ?? 0), true) + `)`
                     : ``}
                 </div>
               )}

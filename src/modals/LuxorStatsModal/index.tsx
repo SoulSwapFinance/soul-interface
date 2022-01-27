@@ -200,7 +200,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
                       Total Supply
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                      {formatNumberScale(tokenInfo?.totalSupply, false, 2)}
+                      {formatNumberScale(tokenInfo?.totalSupply, false)}
                     </Typography>
                   </div>
                   <div className="flex items-center justify-between">
@@ -209,7 +209,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold py-0.5">
                     {/* TODO: make exact */}
-                      - {formatNumberScale(Number(tokenInfo?.totalSupply) * 0.19, false, 2)} 
+                      - {formatNumberScale(Number(tokenInfo?.totalSupply) * 0.19, false)} 
                     </Typography>
                   </div>
                   {/* TODO: make exact */}
@@ -231,7 +231,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
                         Number(tokenInfo?.totalSupply)
                         - Number(wrappedLumensInfo?.circulatingSupply)
                         - (Number(tokenInfo?.totalSupply) * 0.19) // TODO: make exact
-                        , false, 2)}
+                        , false)}
                     </Typography>
                   </div>
                 </div>
@@ -242,7 +242,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
             Number(tokenInfo?.totalSupply)
             - Number(wrappedLumensInfo?.circulatingSupply)
             - (Number(tokenInfo?.totalSupply) * 0.19) // TODO: make exact
-            , false, 2)
+            , false)
         )}
         {/* {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
