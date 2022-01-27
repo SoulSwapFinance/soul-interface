@@ -17,8 +17,8 @@ import { POOLS } from 'constants/farms'
 // import { Button } from 'components/Button'
 // import { formatNumberScale } from 'functions'
 // import { addTransaction } from 'state/transactions/actions'
-// import { getAddress } from '@ethersproject/address'
-// import { useTVL } from 'hooks/useV2Pairs'
+import { getAddress } from '@ethersproject/address'
+import { useTVL } from 'hooks/useV2Pairs'
 import { usePrice, useFarms, useSummonerInfo } from 'hooks'
 // import { SEANCE_ADDRESS, WNATIVE } from 'constants/addresses'
 import { TridentBody, TridentHeader } from 'layouts/Trident'
@@ -28,10 +28,16 @@ import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
 import useFarmRewards from 'hooks/useFarmRewards'
 import { usePositions } from 'features/mines/hooks'
+import { Button } from 'components/Button'
+import { formatNumberScale } from 'functions'
+import { addTransaction } from 'state/transactions/actions'
+import useSummoner from 'features/vault/useSummoner'
 
 export default function Mines(): JSX.Element {
   const { chainId } = useActiveWeb3React()
   const router = useRouter()
+  const [pendingTx, setPendingTx] = useState(false)
+
   const type = router.query.filter === null ? 'active' : (router.query.filter as string)
   const rewards = useFarmRewards()
 
@@ -41,13 +47,13 @@ export default function Mines(): JSX.Element {
 
   const farms = useFarms()
 
-  // const { harvest } = useSummoner()
+  const { harvest } = useSummoner()
 
-  // const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
-  //   return { ...POOLS[chainId][key], lpToken: key }
-  // })
+  const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
+    return { ...POOLS[chainId][key], lpToken: key }
+  })
 
-  // const tvlInfo = useTVL()
+  const tvlInfo = useTVL()
 
   const summonerInfo = useSummonerInfo()
   const positions = usePositions()
@@ -150,9 +156,9 @@ export default function Mines(): JSX.Element {
   //   return type in FILTER ? FILTER[type](farm) : true
   // })
 
-  // let summTvl = tvlInfo.reduce((previousValue, currentValue) => {
-  //   return previousValue + currentValue.tvl
-  // }, 0)
+  let summTvl = tvlInfo.reduce((previousValue, currentValue) => {
+    return previousValue + currentValue.tvl
+  }, 0)
 
   const data = farms.map(map).filter((farm) => {
     return type in FILTER ? FILTER[type](farm) : true
@@ -173,15 +179,15 @@ export default function Mines(): JSX.Element {
     options,
   })
 
-  // const allStaked = positions.reduce((previousValue, currentValue) => {
-  //   return previousValue + (currentValue.pendingSoul / 1e18) * soulPrice
-  // }, 0)
+  const allStaked = positions.reduce((previousValue, currentValue) => {
+    return previousValue + (currentValue.pendingSoul / 1e18) * soulPrice
+  }, 0)
 
-  // const valueStaked = positions.reduce((previousValue, currentValue) => {
-  //   const pool = farmingPools.find((r) => parseInt(r.id.toString()) == parseInt(currentValue.id))
-  //   const poolTvl = tvlInfo.find((r) => getAddress(r.lpToken) == getAddress(pool?.lpToken))
-  //   return previousValue + (currentValue.amount / 1e18) * poolTvl?.lpPrice
-  // }, 0)
+  const valueStaked = positions.reduce((previousValue, currentValue) => {
+    const pool = farmingPools.find((r) => parseInt(r.id.toString()) == parseInt(currentValue.id))
+    const poolTvl = tvlInfo.find((r) => getAddress(r.lpToken) == getAddress(pool?.lpToken))
+    return previousValue + (currentValue.amount / 1e18) * poolTvl?.lpPrice
+  }, 0)
   
   return (
     <>
@@ -194,7 +200,7 @@ export default function Mines(): JSX.Element {
             {i18n._(t`Earn fees and rewards by depositing and staking your liquidity tokens (LP) to the platform.`)}
           </Typography>
         </div>
-       {/* <div className={`flex items-center justify-between px-2 py-2`}>
+       <div className={`flex items-center justify-between px-2 py-2`}>
         <div className="flex gap-0">
           <Button
             color="blue"
@@ -202,10 +208,10 @@ export default function Mines(): JSX.Element {
             variant="outlined"
             size={"sm"}
           >
-            {'YOURS '}
+            {/* {'YOURS '} */}
             {formatNumberScale(valueStaked, true)} {' STAKED'}             
-            </Button> */}
-          {/* {positions.length > 0 && (
+            </Button>
+          {positions.length > 0 && (
             <Button
               color="greydient"
               className="text-emphasis"
@@ -227,18 +233,18 @@ export default function Mines(): JSX.Element {
             >
               CLAIM ALL {formatNumberScale(allStaked, true)}
             </Button>
-          )} */}
-         {/* <Button
+          )}
+         <Button
             color="blue"
             className="text-emphasis"
             variant={'outlined'}
             size={"sm"}
           >
-            {'TOTAL: '}
+            {/* {'TOTAL: '} */}
             {formatNumberScale(summTvl, true)} {' '} TOTAL
           </Button>
+        </div> 
         </div>
-        </div> */}
       </TridentHeader>
       <TridentBody>
         <div className="flex flex-col w-full gap-6">
