@@ -108,7 +108,6 @@ const allColumns = [
   },
   {
     Header: 'Daily / Weekly Fees',
-    // @ts-ignore TYPE NEEDS FIXING
     accessor: (row) => (
       <div>
         <div className="font-medium text-high-emphesis">{formatNumber(row.volume1d * 0.003, true, false)}</div>

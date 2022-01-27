@@ -31,7 +31,7 @@ import { usePositions } from 'features/mines/hooks'
 import { Button } from 'components/Button'
 import { formatNumberScale } from 'functions'
 import { addTransaction } from 'state/transactions/actions'
-import useSummoner from 'features/vault/useSummoner'
+import useSummoner from 'features/mines/hooks/useMasterChef'
 
 export default function Mines(): JSX.Element {
   const { chainId } = useActiveWeb3React()

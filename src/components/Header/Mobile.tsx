@@ -7,7 +7,7 @@ import useMenu from 'components/Header/useMenu'
 import Web3Network from 'components/Web3Network'
 import Web3Status from 'components/Web3Status'
 import { useActiveWeb3React } from 'services/web3'
-import { useETHBalances } from 'state/wallet/hooks'
+import { useETHBalances, useTokenBalance } from 'state/wallet/hooks'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { FC, Fragment, useState } from 'react'
@@ -17,11 +17,14 @@ import TokenStats from 'components/TokenStats'
 import LuxorStats from 'components/LuxorStats'
 import More from './More'
 import NavLink from 'components/NavLink'
+import { AURA } from 'constants/tokens'
 
 const Mobile: FC = () => {
   const menu = useMenu()
   const { account, chainId, library, connector } = useActiveWeb3React()
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
+  const auraBalance = useTokenBalance(account ?? undefined, AURA[chainId])
+  
   const [open, setOpen] = useState(false)
 
   const isCbWallet =
@@ -123,15 +126,15 @@ const Mobile: FC = () => {
                     }
                     {NATIVE[chainId].symbol}
                   </div>
-                  {account && chainId && (
+                  {/* {account && chainId && (
                     <>
                       <div className="hidden md:inline px-3 py-2 text-primary text-bold">
-                        {/* {auraBalance?.toSignificant(4) */}
-                        {/* .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') */}
-                        {/* } {'AURA'} */}
+                        {auraBalance?.toSignificant(4)
+                          .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                        } {'AURA'}
                       </div>
                     </>
-                  )}
+                  )} */}
                 </>
               )}
               <Web3Status />

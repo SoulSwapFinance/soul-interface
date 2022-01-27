@@ -12,14 +12,14 @@ export interface MenuItemLeaf {
   key: string
   title: string
   link: string
-  // icon?: ReactNode
+  icon?: ReactNode
 }
 
 export interface MenuItemNode {
   key: string
   title: string
   items: MenuItemLeaf[]
-  // icon?: ReactNode
+  icon?: ReactNode
 }
 
 export type MenuItem = MenuItemLeaf | MenuItemNode
@@ -38,7 +38,7 @@ const useMenu: UseMenu = () => {
       key: 'swap',
       title: i18n._(t`Exchange`),
       link: '/swap',
-      // icon: <SwitchVerticalIcon width={20} />,
+      icon: <SwitchVerticalIcon width={20} />,
     }
  // If AMM is enabled, replace swap button with a submenu under trade
 //  if (featureEnabled(Feature.AMM, chainId)) {
@@ -65,7 +65,7 @@ const useMenu: UseMenu = () => {
       tradeMenu = {
         key: 'trade',
         title: i18n._(t`Trade`),
-        // icon: <SwitchVerticalIcon width={20} />,
+        icon: <SwitchVerticalIcon width={20} />,
         items: [
           {
             key: 'swap',
@@ -92,11 +92,11 @@ const useMenu: UseMenu = () => {
         title: i18n._(t`Add`),
         link: `/add/FTM/${SOUL_ADDRESS[chainId]}`,
       },
-      // {
-      //   key: 'remove-liquidity',
-      //   title: i18n._(t`Remove`),
-      //   link: '/remove',
-      // },
+      {
+        key: 'remove-liquidity',
+        title: i18n._(t`Remove`),
+      link: `/remove/FTM/${SOUL_ADDRESS[chainId]}`,
+      },
       {
         key: 'import',
         title: i18n._(t`Import`),
@@ -128,7 +128,7 @@ const useMenu: UseMenu = () => {
         key: 'pool',
         title: i18n._(t`Liquidity`),
         items: poolMenu,
-        // icon: <PoolIcon width={20} />,
+        icon: <PoolIcon width={20} />,
       })
 
     if (exploreMenu.length > 0)
@@ -136,29 +136,29 @@ const useMenu: UseMenu = () => {
         key: 'explore',
         title: i18n._(t`Explore`),
         items: exploreMenu,
-        // icon: <GlobeIcon width={20} />,
+        icon: <GlobeIcon width={20} />,
       })
 
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const farmItems = {
-        key: 'farm',
-        title: i18n._(t`Farms`),
-        // icon: <SwitchVerticalIcon width={20} className="rotate-90 filter" />,
+        key: 'Rewards',
+        title: i18n._(t`Rewards`),
+        icon: <SwitchVerticalIcon width={20} className="rotate-90 filter" />,
         items: [
           {
             key: 'your-farms',
-            title: i18n._(t`Deposited`),
+            title: i18n._(t`Farms`),
             link: '/mines?filter=deposited',
           },
           {
-            key: 'your-farms',
+            key: 'staking',
             title: i18n._(t`Staking`),
             link: '/seance',
           },
           {
-            key: 'all-farms',
-            title: i18n._(t`Active`),
-            link: '/mines?filter=active',
+            key: 'bonds',
+            title: i18n._(t`Bonds`),
+            link: '/bonds',
           },
         ],
       }
@@ -208,7 +208,7 @@ const useMenu: UseMenu = () => {
     let analyticsMenu: MenuItem = {
       key: 'analytics',
       title: i18n._(t`Analytics`),
-      // icon: <TrendingUpIcon width={20} />,
+      icon: <TrendingUpIcon width={20} />,
       items: [
         {
           key: 'wallet',
@@ -250,12 +250,12 @@ const useMenu: UseMenu = () => {
       mainItems.push(analyticsMenu)
     }
 
-    // mainItems.push({
-    //   key: 'balances',
-    //   title: i18n._(t`Portfolio`),
-    //   link: '/balances',
-    //   // icon: <WalletIcon width={20} />,
-    // })
+    mainItems.push({
+      key: 'balances',
+      title: i18n._(t`Portfolio`),
+      link: '/balances',
+      icon: <WalletIcon width={20} />,
+    })
 
     return mainItems.filter((el) => Object.keys(el).length > 0)
   }, [chainId, i18n])

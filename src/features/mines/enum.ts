@@ -13,6 +13,7 @@ export enum Rewarder {
 
 export enum PairType {
   SWAP,
+  UNDERWORLD,
   KASHI,
 }
 
