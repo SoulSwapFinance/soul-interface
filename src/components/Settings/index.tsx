@@ -1,5 +1,6 @@
 import { ChainId, Percent } from '../../sdk'
 import React, { useRef, useState } from 'react'
+import { CheckIcon, CogIcon } from '@heroicons/react/outline'
 import {
   useExpertModeManager,
   // useUserArcherUseRelay,
@@ -53,7 +54,8 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
         id="open-settings-dialog-button"
       >
         {/* <AdjustmentsIcon className="w-[26px] h-[26px] transform rotate-90" /> */}
-  <Image src={ SETTINGS } height="40px" width="40px" alt="settings icon" />
+        <CogIcon className="w-[26px] h-[26px] transform rotate-90 hover:text-white" />
+  {/* <Image src={ SETTINGS } height="40px" width="40px" alt="settings icon" /> */}
       </div>
       {open && (
         <div className="absolute top-14 right-0 z-50 -mr-2.5 min-w-20 md:m-w-22 md:-mr-5 bg-dark-900 border-2 border-dark-800 rounded w-80 shadow-lg">
