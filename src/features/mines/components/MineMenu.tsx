@@ -92,6 +92,9 @@ const MineMenu = () => {
       // @ts-ignore TYPE NEEDS FIXING
       [FarmFilter.Inactive]: (
         <MenuLink href={'/mines?filter=inactive'} label={i18n._(t`Inactive`)} />
+      ),
+      [FarmFilter.Inactive]: (
+        <MenuLink href={'/seance'} label={i18n._(t`Stake`)} />
       )
     }
 
