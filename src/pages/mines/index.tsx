@@ -11,7 +11,7 @@ import useFuse from 'hooks/useFuse'
 import { useActiveWeb3React } from 'services/web3'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import { POOLS } from 'constants/farms'
 // import { useSoulSummonerContract } from 'hooks/useContract'
 // import { Button } from 'components/Button'
@@ -29,13 +29,12 @@ import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
 import useFarmRewards from 'hooks/useFarmRewards'
 import { usePositions } from 'features/mines/hooks'
-import { farmMap } from 'functions'
+
 export default function Mines(): JSX.Element {
   const { chainId } = useActiveWeb3React()
   const router = useRouter()
   const type = router.query.filter === null ? 'active' : (router.query.filter as string)
   const rewards = useFarmRewards()
-  const { query, asPath } = useRouter()
 
   // function useFarms() {
   //   return useSoulFarms(useSoulSummonerContract())
@@ -52,6 +51,57 @@ export default function Mines(): JSX.Element {
   // const tvlInfo = useTVL()
 
   const positions = usePositions()
+
+  const map = (pool) => {
+    pool.owner = 'SoulSwap'
+    pool.balance = 0
+
+    const pair = POOLS[chainId][pool.lpToken]
+
+  //   const secondsPerHour = 60 * 60
+
+    // const rewards = useRewards(pool)
+
+  //   // const tvl = getTvl()
+  //   const tvl = pool.pair?.token1
+  //   ? Number(pool.pairPrice) * Number(pool.lpBalance) / 1e18
+  //   : Number(soulPrice) * Number(pool.lpBalance) / 1e18
+
+  //   const rewardPerSec =
+  //     ((pool.allocPoint / Number(summonerInfo.totalAllocPoint)) * Number(summonerInfo.soulPerSecond)) / 1e18
+
+  //   const rewardPrice = soulPrice
+
+  //   const roiPerSecond =
+  //     farms.reduce((previousValue, currentValue) => {
+  //       return previousValue + rewardPerSec * rewardPrice
+  //     }, 0) / Number(tvl)
+
+  //   // const roiPerSecond = Number(tvl)
+  //   const roiPerHour = roiPerSecond * 60 * 60
+  //   const roiPerDay = roiPerHour * 24
+  //   const roiPerMonth = roiPerDay * 30
+  //   const roiPerYear = roiPerDay * 365
+
+  const position = positions.find((position) => position.id === pool.id)
+
+    return {
+      ...pool,
+      ...position,
+      pair: {
+        ...pair,
+        decimals: 18,
+      },
+      // roiPerSecond,
+      // roiPerHour,
+      // roiPerDay,
+      // roiPerMonth,
+      // roiPerYear,
+      rewards,
+      // tvl,
+      // secondsPerHour,
+    }
+  }
 
   const FILTER = {
     deposited: (farm) => farm.amount,
@@ -74,18 +124,24 @@ export default function Mines(): JSX.Element {
     stables: (farm) => farm.allocPoint == 200 // since all [active] stables have 200 AP <3
   }
 
-  const summonerInfo = useSummonerInfo()
+  // const rewards = useFarmRewards()
 
-  const data = useMemo(() => {
-    if (farms && summonerInfo) {
-      const map = farmMap(chainId);
-      const filterValue = asPath.match(/filter=(.*)/);
-      const type = !filterValue ? 'active' : (filterValue[1] as string)
-      return farms.map(map).filter((farm) => {
-        return type in FILTER ? FILTER[type](farm) : true
-      })
-    }
-  }, [farms, asPath, summonerInfo, chainId]);
+  // const farmRewards = rewards.filter((farm) => {
+  //   return type in FILTER ? FILTER[type](farm) : true
+  // })
+
+  // let summTvl = tvlInfo.reduce((previousValue, currentValue) => {
+  //   return previousValue + currentValue.tvl
+  // }, 0)
+
+  const data = farms.map(map).filter((farm) => {
+    return type in FILTER ? FILTER[type](farm) : true
+  })
+
+  // const data = rewards.filter((farm) => {
+  //   // @ts-ignore TYPE NEEDS FIXING
+  //   return type in FILTER ? FILTER[type](farm) : true
+  // })
 
   const options = {
     keys: ['pair.id', 'pair.token0.symbol', 'pair.token1.symbol'],
