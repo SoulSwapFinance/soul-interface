@@ -21,9 +21,9 @@ const UnauditedWarning = ({ contractName, constantName }) => {
   const { network, chainId } = Connection.useContainer();
 
   useEffect(() => {
-    console.log("scan", ContractScan[network.chainId]);
-    console.log("chainId", network.chainId);
-    console.log('constant', constantName?.[network.chainId])
+    // console.log("scan", ContractScan[network.chainId]);
+    // console.log("chainId", network.chainId);
+    // console.log('constant', constantName?.[network.chainId])
   }, [chainId]);
 
   return (

@@ -84,6 +84,19 @@ export default function useMasterChef() {
     }
   }
 
-  return { deposit, withdraw, harvest, enterStaking, leaveStaking }
+  // Claim Staking Rewards
+  const claimStake = useCallback(
+    async (amount: Number) => {
+      try {
+        return await contract?.leaveStaking(Zero);
+      } catch (e) {
+        console.error(e)
+        return e
+      }
+    },
+    [contract]
+  )
+
+  return { claimStake, deposit, withdraw, harvest, enterStaking, leaveStaking }
 
 } 
