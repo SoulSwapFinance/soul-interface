@@ -43,7 +43,7 @@ const WalletActions: FC = () => {
         </Typography>
         <ActionItem svg={<SwitchHorizontalIcon width={24} />} label={i18n._(t`Swap`)} onClick={swapActionHandler} />
         {/*@ts-ignore TYPE NEEDS FIXING*/}
-        {featureEnabled(Feature.BENTOBOX, chainId) && (
+        {featureEnabled(Feature.COFFINBOX, chainId) && (
           <>
             <ActionItem
               svg={<BentoboxIcon width={20} height={20} />}

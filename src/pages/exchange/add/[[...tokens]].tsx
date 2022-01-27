@@ -19,7 +19,7 @@ import CurrencyInputPanel from 'components/CurrencyInputPanel'
 import Dots from 'components/Dots'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 // import ExchangeHeader from 'components/ExchangeHeader'
-import SwapHeader from 'features/trade/Header'
+import SwapHeader from 'features/trade/HeaderNew'
 import { Field } from 'state/mint/actions'
 import Head from 'next/head'
 import LiquidityPrice from 'features/liquidity/LiquidityPrice'
@@ -361,9 +361,9 @@ export default function Add() {
       {/* <DoubleGlowShadowV2 opacity="0.6"> */}
           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
             <SwapHeader
-              input={currencies[Field.CURRENCY_A]}
-              output={currencies[Field.CURRENCY_B]}
-              allowedSlippage={allowedSlippage}
+              inputCurrency={currencies[Field.CURRENCY_A]}
+              outputCurrency={currencies[Field.CURRENCY_B]}
+              // allowedSlippage={allowedSlippage}
             />
             <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
             <TransactionConfirmationModal

@@ -45,7 +45,7 @@ export default function CoffinBox(): JSX.Element {
   }, [tokens1w])
 
   // @ts-ignore TYPE NEEDS FIXING
-  const bentoBox = useBentoBox({ chainId, shouldFetch: featureEnabled(Feature.BENTOBOX, chainId) })
+  const bentoBox = useBentoBox({ chainId, shouldFetch: featureEnabled(Feature.COFFINBOX, chainId) })
 
   // Combine Bento Box Tokens with Token data from exchange
   const bentoBoxTokensFormatted = useMemo<Array<any>>(

@@ -1,4 +1,4 @@
-import SwapHeader from '../../features/trade/Header'
+import SwapHeader from '../../features/trade/HeaderNew'
 import MainHeader from 'features/swap/MainHeader'
 
 // import MainHeader from 'features/swap/MainHeader'

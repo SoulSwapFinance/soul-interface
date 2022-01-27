@@ -1,9 +1,12 @@
 const withPWA = require('next-pwa')
 const runtimeCaching = require('next-pwa/cache')
+const { ChainId } = require('@soulswap/sdk')
 
 const linguiConfig = require('./lingui.config.js')
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 const { locales, sourceLocale } = linguiConfig
+const { screens } = defaultTheme
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -20,6 +23,7 @@ module.exports = withBundleAnalyzer(
       domains: [
         'assets.soulswap.finance',
         'media.giphy.com',
+        'app.soulswap.finance',
         'exchange.soulswap.finance',
         'assets.sushi.com',
         'res.cloudinary.com',
@@ -170,11 +174,25 @@ module.exports = withBundleAnalyzer(
       ]
     },
     i18n: {
+      // localeDetection: true,
       locales,
       defaultLocale: sourceLocale,
+    },
+    network: {
+      chainIds: [ChainId.FANTOM],
+      defaultChainId: ChainId.FANTOM,
+      domains: [
+        {
+          domain: 'soulswap.finance',
+          defaultChainId: ChainId.FANTOM,
+        },
+      ],
+    },
+    publicRuntimeConfig: {
+      breakpoints: screens,
     },
   })
 )
 
 // Don't delete this console log, useful to see the config in Vercel deployments
-console.log('next.config.js', JSON.stringify(module.exports, null, 2))
+console.log('next.config.s', JSON.stringify(module.exports, null, 2))

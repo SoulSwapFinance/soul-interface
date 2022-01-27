@@ -23,21 +23,21 @@ const features: FeatureMap = {
     Feature.ANALYTICS,
     Feature.LIQUIDITY_MINING,
     // Feature.LIMIT_ORDERS,
-    Feature.BENTOBOX],
+    Feature.COFFINBOX],
 
   [ChainId.FANTOM_TESTNET]: [Feature.AMM],
   
 //   [ChainId.MATIC_TESTNET]: [Feature.AMM],
 //   [ChainId.HARMONY]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.ANALYTICS],
 //   [ChainId.HARMONY_TESTNET]: [Feature.AMM],
-//   [ChainId.AVALANCHE]: [Feature.AMM, Feature.BENTOBOX, Feature.KASHI, Feature.LIMIT_ORDERS],
+//   [ChainId.AVALANCHE]: [Feature.AMM, Feature.COFFINBOX, Feature.KASHI, Feature.LIMIT_ORDERS],
 //   [ChainId.AVALANCHE_TESTNET]: [Feature.AMM],
 //   [ChainId.OKEX]: [Feature.AMM],
 //   [ChainId.OKEX_TESTNET]: [Feature.AMM],
-//   [ChainId.XDAI]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.ANALYTICS, Feature.BENTOBOX, Feature.KASHI],
+//   [ChainId.XDAI]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.ANALYTICS, Feature.COFFINBOX, Feature.KASHI],
 //   [ChainId.MOONRIVER]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.ANALYTICS],
 //   [ChainId.CELO]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.ANALYTICS],
-//   [ChainId.ARBITRUM]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.ANALYTICS, Feature.BENTOBOX, Feature.KASHI],
+//   [ChainId.ARBITRUM]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.ANALYTICS, Feature.COFFINBOX, Feature.KASHI],
 //   [ChainId.FUSE]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.ANALYTICS],
 }
 

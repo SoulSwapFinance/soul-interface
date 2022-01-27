@@ -24,7 +24,7 @@ import { Field } from '../../../state/burn/actions'
 import Head from 'next/head'
 // import Header from '../../../components/ExchangeHeader'
 import Link from 'next/link'
-import SwapHeader from '../../../features/trade/Header'
+import SwapHeader from '../../../features/trade/HeaderNew'
 import LiquidityHeader from '../../../features/liquidity/LiquidityHeader'
 // import LiquidityPrice from '../../../features/liquidity/LiquidityPrice'
 import { MinimalPositionCard } from '../../../components/PositionCard'
@@ -743,9 +743,9 @@ export default function Remove() {
       {/* <DoubleGlowShadowV2 opacity="0.6"> */}
           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>          
             <SwapHeader
-              input={currencyA}
-              output={currencyB}
-              allowedSlippage={allowedSlippage}
+              inputCurrency={currencyA}
+              outputCurrency={currencyB}
+              // allowedSlippage={allowedSlippage}
             />
             {/* <Header input={currencyA} output={currencyB} allowedSlippage={allowedSlippage} /> */}
             <div>
