@@ -19,6 +19,9 @@ msgstr ""
 msgid "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies."
 msgstr ""
 
+msgid "+ Add Recipient (optional)"
+msgstr ""
+
 msgid "- 0.1 FTM to lock"
 msgstr ""
 
@@ -64,9 +67,6 @@ msgstr ""
 msgid "ALL"
 msgstr ""
 
-msgid "ALL PAIRS"
-msgstr ""
-
 msgid "APR"
 msgstr ""
 
@@ -95,6 +95,9 @@ msgid "Add Liquidity & Earn Fees (0.25%)"
 msgstr ""
 
 msgid "Add collateral in order to borrow assets"
+msgstr ""
+
+msgid "Add recipient"
 msgstr ""
 
 msgid "Add {0} to MetaMask"
@@ -166,13 +169,13 @@ msgstr ""
 msgid "Approving {contractName} Master Contract"
 msgstr ""
 
-msgid "Asset"
-msgstr ""
-
 msgid "Auto"
 msgstr ""
 
 msgid "Available"
+msgstr ""
+
+msgid "Available Actions"
 msgstr ""
 
 msgid "Available Networks"
@@ -196,9 +199,6 @@ msgstr ""
 msgid "BentoBox"
 msgstr ""
 
-msgid "BentoBox strategies can create yield for your liquidity while it is not lent out. This token does not yet have a strategy in the BentoBox."
-msgstr ""
-
 msgid "Borrow"
 msgstr ""
 
@@ -218,6 +218,9 @@ msgid "Borrowing allows you to obtain liquidity without selling. Your borrow lim
 msgstr ""
 
 msgid "Bridge"
+msgstr ""
+
+msgid "Browse"
 msgstr ""
 
 msgid "Buy"
@@ -253,9 +256,6 @@ msgstr ""
 msgid "Choose an Asset"
 msgstr ""
 
-msgid "Claim"
-msgstr ""
-
 msgid "Claim SOUL"
 msgstr ""
 
@@ -286,6 +286,9 @@ msgid "Close"
 msgstr ""
 
 msgid "CoffinBox"
+msgstr ""
+
+msgid "CoffinBox strategies can create yield for your liquidity while it is not lent out. This token does not yet have a strategy in the CoffinBox."
 msgstr ""
 
 msgid "Collateral"
@@ -408,6 +411,9 @@ msgstr ""
 msgid "Deposit SOUL into CoffinBox"
 msgstr ""
 
+msgid "Deposit to CoffinBox"
+msgstr ""
+
 msgid "Deposit your SOUL-LP to earn $SOUL rewards."
 msgstr ""
 
@@ -417,7 +423,13 @@ msgstr ""
 msgid "Deposited Value"
 msgstr ""
 
+msgid "Depositing"
+msgstr ""
+
 msgid "Disable Multihops"
+msgstr ""
+
+msgid "Disable multihops"
 msgstr ""
 
 msgid "Disconnect"
@@ -438,10 +450,13 @@ msgstr ""
 msgid "Earn"
 msgstr ""
 
+msgid "Earn fees and rewards by depositing and staking your liquidity tokens (LP) to the platform."
+msgstr ""
+
 msgid "Either return to the {link}, or change to an available network."
 msgstr ""
 
-msgid "Enchant"
+msgid "Enable Expert Mode"
 msgstr ""
 
 msgid "English"
@@ -459,6 +474,9 @@ msgstr ""
 msgid "Enter a valid slippage percentage"
 msgstr ""
 
+msgid "Enter an amount"
+msgstr ""
+
 msgid "Error"
 msgstr ""
 
@@ -471,10 +489,19 @@ msgstr ""
 msgid "Everytime you stake or claim rewards your lock time renews."
 msgstr ""
 
+msgid "Exchange"
+msgstr ""
+
+msgid "Exchange Rate"
+msgstr ""
+
 msgid "Exit from Enchant."
 msgstr ""
 
 msgid "Expanded results from inactive token lists"
+msgstr ""
+
+msgid "Expected Output"
 msgstr ""
 
 msgid "Expert Mode"
@@ -491,19 +518,22 @@ msgstr ""
 msgid "Expiration is the time at which the order will become invalid"
 msgstr ""
 
+msgid "Explore"
+msgstr ""
+
 msgid "Explore More"
 msgstr ""
 
 msgid "Explore our Protocol."
 msgstr ""
 
-msgid "FANTOM PAIRS"
-msgstr ""
-
 msgid "FARM"
 msgstr ""
 
 msgid "Failed"
+msgstr ""
+
+msgid "Fantom"
 msgstr ""
 
 msgid "Fantom Faucet"
@@ -513,6 +543,9 @@ msgid "Farm"
 msgstr ""
 
 msgid "Farm with SOUL-FTM"
+msgstr ""
+
+msgid "Farms"
 msgstr ""
 
 msgid "Faucet"
@@ -563,9 +596,6 @@ msgid "Harvest"
 msgstr ""
 
 msgid "Harvest Redistribution"
-msgstr ""
-
-msgid "Harvest Rewards"
 msgstr ""
 
 msgid "Harvest SOUL"
@@ -634,7 +664,13 @@ msgstr ""
 msgid "In Coffin:"
 msgstr ""
 
+msgid "In Wallet"
+msgstr ""
+
 msgid "In Wallet:"
+msgstr ""
+
+msgid "Inactive"
 msgstr ""
 
 msgid "Input is estimated. You will sell at most"
@@ -643,7 +679,13 @@ msgstr ""
 msgid "Insufficient Balance"
 msgstr ""
 
+msgid "Insufficient balance to cover for fees"
+msgstr ""
+
 msgid "Insufficient liquidity for this trade"
+msgstr ""
+
+msgid "Insufficient {0} Balance"
 msgstr ""
 
 msgid "Insufficient {0} balance"
@@ -716,6 +758,9 @@ msgstr ""
 msgid "Limit Orders"
 msgstr ""
 
+msgid "Limit order"
+msgstr ""
+
 msgid "Limit orders use funds from CoffinBox, to create a limit order depositing into CoffinBox is required."
 msgstr ""
 
@@ -725,7 +770,13 @@ msgstr ""
 msgid "Liquidity"
 msgstr ""
 
+msgid "Liquidity Pools"
+msgstr ""
+
 msgid "Liquidity Positions"
+msgstr ""
+
+msgid "Liquidity provider fee"
 msgstr ""
 
 msgid "Lists"
@@ -734,7 +785,7 @@ msgstr ""
 msgid "Loading"
 msgstr ""
 
-msgid "Loading balance"
+msgid "Loading Balance"
 msgstr ""
 
 msgid "Loading your {exchange} liquidity positions"
@@ -764,9 +815,6 @@ msgstr ""
 msgid "MAX"
 msgstr ""
 
-msgid "MY PAIRS"
-msgstr ""
-
 msgid "Manage"
 msgstr ""
 
@@ -789,9 +837,6 @@ msgid "Markets"
 msgstr ""
 
 msgid "Max"
-msgstr ""
-
-msgid "Maximize yield by staking SOUL for SEANCE"
 msgstr ""
 
 msgid "Me"
@@ -818,10 +863,13 @@ msgstr ""
 msgid "Minimum received"
 msgstr ""
 
+msgid "Minimum received after slippage"
+msgstr ""
+
 msgid "Mint SOUL with Liquidity"
 msgstr ""
 
-msgid "More"
+msgid "My CoffinBox"
 msgstr ""
 
 msgid "N"
@@ -836,10 +884,10 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-msgid "No Liquidity found"
+msgid "No Balances"
 msgstr ""
 
-msgid "No Results"
+msgid "No Liquidity found"
 msgstr ""
 
 msgid "No liquidity found to do swap"
@@ -854,6 +902,9 @@ msgstr ""
 msgid "No results found"
 msgstr ""
 
+msgid "No route found"
+msgstr ""
+
 msgid "Non-hardware Wallet"
 msgstr ""
 
@@ -863,7 +914,13 @@ msgstr ""
 msgid "Not available for legacy route"
 msgstr ""
 
+msgid "Number of Farms"
+msgstr ""
+
 msgid "ONLY USE THIS MODE IF YOU KNOW WHAT YOU ARE DOING."
+msgstr ""
+
+msgid "Only use this mode if you know what you are doing."
 msgstr ""
 
 msgid "Oops!"
@@ -878,10 +935,13 @@ msgstr ""
 msgid "Open orders"
 msgstr ""
 
-msgid "Oracle"
+msgid "OpenMEV Gas Refunder"
 msgstr ""
 
-msgid "Order By"
+msgid "OpenMEV refunds up to 95% of transaction costs in 35 blocks."
+msgstr ""
+
+msgid "Oracle"
 msgstr ""
 
 msgid "Order Expiration"
@@ -904,16 +964,10 @@ msgstr ""
 msgid "Output is estimated. If the price changes by more than {0}% your transaction will revert."
 msgstr ""
 
-msgid "Output is estimated. You'll receive at least"
-msgstr ""
-
-msgid "Output will be sent to"
+msgid "Output is estimated. You will receive at least"
 msgstr ""
 
 msgid "PAIRS"
-msgstr ""
-
-msgid "PENDING"
 msgstr ""
 
 msgid "Pair your SOUL and add to Bonds for more SOUL at record-high returns."
@@ -929,9 +983,6 @@ msgid "Pay from:"
 msgstr ""
 
 msgid "Pending"
-msgstr ""
-
-msgid "Pending Rewards"
 msgstr ""
 
 msgid "Pending Treasury Transfer"
@@ -952,7 +1003,13 @@ msgstr ""
 msgid "Please note that after order execution, your tokens will be received in your BentoBox"
 msgstr ""
 
+msgid "Please note the recipient address is different from the connected wallet address."
+msgstr ""
+
 msgid "Please refer to the"
+msgstr ""
+
+msgid "Please select an asset to view available actions"
 msgstr ""
 
 msgid "Please try again"
@@ -1021,6 +1078,9 @@ msgstr ""
 msgid "Receive"
 msgstr ""
 
+msgid "Receive to"
+msgstr ""
+
 msgid "Receive:"
 msgstr ""
 
@@ -1042,6 +1102,9 @@ msgstr ""
 msgid "Remove liquidity of Soul"
 msgstr ""
 
+msgid "Remove recipient"
+msgstr ""
+
 msgid "Remove {0} {1} and {2} {3}"
 msgstr ""
 
@@ -1052,9 +1115,6 @@ msgid "Removing {0} {1} and {2} {3}"
 msgstr ""
 
 msgid "Repay"
-msgstr ""
-
-msgid "Reserves"
 msgstr ""
 
 msgid "Resources"
@@ -1103,16 +1163,7 @@ msgstr ""
 msgid "SOUL / $1K"
 msgstr ""
 
-msgid "SOUL PAIRS"
-msgstr ""
-
-msgid "STABLE PAIRS"
-msgstr ""
-
 msgid "STAKE"
-msgstr ""
-
-msgid "STAKING ASSETS"
 msgstr ""
 
 msgid "SWAP"
@@ -1172,16 +1223,13 @@ msgstr ""
 msgid "Slippage Tolerance"
 msgstr ""
 
+msgid "Slippage tolerance"
+msgstr ""
+
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click 'Approve CoffinBox' again for approving using the fallback method"
 msgstr ""
 
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
-msgstr ""
-
-msgid "Soon"
-msgstr ""
-
-msgid "Soul"
 msgstr ""
 
 msgid "Soul Vault"
@@ -1193,6 +1241,9 @@ msgstr ""
 msgid "SoulSwap Apps"
 msgstr ""
 
+msgid "SoulSwap Farms"
+msgstr ""
+
 msgid "SoulSwap Vault is a set of high incentivized pools. Long term supporters can choose to lock SOUL for a determined period for higher rewards."
 msgstr ""
 
@@ -1202,6 +1253,9 @@ msgstr ""
 msgid "Spanish"
 msgstr ""
 
+msgid "Stables"
+msgstr ""
+
 msgid "Stack Yields with SAAVE"
 msgstr ""
 
@@ -1209,9 +1263,6 @@ msgid "Stake"
 msgstr ""
 
 msgid "Stake Auto Reinvesting SOUL"
-msgstr ""
-
-msgid "Stake SOUL"
 msgstr ""
 
 msgid "Stake SOUL for SEANCE"
@@ -1282,6 +1333,9 @@ msgstr ""
 msgid "Swap Anyway"
 msgstr ""
 
+msgid "Swapping"
+msgstr ""
+
 msgid "TIMEFRAME"
 msgstr ""
 
@@ -1336,6 +1390,9 @@ msgstr ""
 msgid "Toggle Expert Mode"
 msgstr ""
 
+msgid "Toggle expert mode"
+msgstr ""
+
 msgid "Token"
 msgstr ""
 
@@ -1350,7 +1407,22 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
+msgid "Total Assets"
+msgstr ""
+
+msgid "Total Deposits"
+msgstr ""
+
 msgid "Total Locked: Connect Wallet"
+msgstr ""
+
+msgid "Total Value"
+msgstr ""
+
+msgid "Total in CoffinBox"
+msgstr ""
+
+msgid "Trade"
 msgstr ""
 
 msgid "Transaction Hash"
@@ -1401,16 +1473,16 @@ msgstr ""
 msgid "Unstake Auto Reinvesting SOUL"
 msgstr ""
 
-msgid "Unstake SOUL"
-msgstr ""
-
-msgid "Unstaked"
+msgid "Unsupported"
 msgstr ""
 
 msgid "Unsupported Asset"
 msgstr ""
 
 msgid "Unwrap"
+msgstr ""
+
+msgid "Unwrap {0} {1} to {2}"
 msgstr ""
 
 msgid "Update Price"
@@ -1428,6 +1500,9 @@ msgstr ""
 msgid "Used"
 msgstr ""
 
+msgid "Version"
+msgstr ""
+
 msgid "Vesting is executed within the guidelines selected by the community in"
 msgstr ""
 
@@ -1443,6 +1518,9 @@ msgstr ""
 msgid "View on Explorer"
 msgstr ""
 
+msgid "View on explorer"
+msgstr ""
+
 msgid "View our Data."
 msgstr ""
 
@@ -1450,9 +1528,6 @@ msgid "View your Dashboard."
 msgstr ""
 
 msgid "View your Trades."
-msgstr ""
-
-msgid "Vote"
 msgstr ""
 
 msgid "WALLET"
@@ -1467,13 +1542,13 @@ msgstr ""
 msgid "Wallet"
 msgstr ""
 
+msgid "Wallet Assets"
+msgstr ""
+
 msgid "Wallet Balance"
 msgstr ""
 
-msgid ""
-"When your SOUL is staked into the Circle, you receive SEANCE in return for voting rights and a fully composable \n"
-"token that can interact with other protocols. Your SEANCE is continuously compounding, when you unstake you will receive all \n"
-"the originally deposited SOUL, your SOUL harvest rewards, and (soon) fee share."
+msgid "Wallet address or ENS name"
 msgstr ""
 
 msgid "Withdraw"
@@ -1488,7 +1563,19 @@ msgstr ""
 msgid "Withdraw from locker {id}"
 msgstr ""
 
+msgid "Withdraw to Wallet"
+msgstr ""
+
+msgid "Withdraw to wallet"
+msgstr ""
+
+msgid "Withdrawing"
+msgstr ""
+
 msgid "Wrap"
+msgstr ""
+
+msgid "Wrap {0} {1} to {2}"
 msgstr ""
 
 msgid "Wrong Network"
@@ -1648,9 +1735,6 @@ msgid "{0}/{1} Burned"
 msgstr ""
 
 msgid "{text}"
-msgstr ""
-
-msgid "{v}"
 msgstr ""
 
 msgid "• 10% in Seance"
