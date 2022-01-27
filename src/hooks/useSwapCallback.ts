@@ -345,7 +345,7 @@ export function useSwapCallArguments(
     let result: SwapCall[] = []
     if (
       // @ts-ignore TYPE NEEDS FIXING
-      (featureEnabled(Feature.BENTOBOX, chainId) && !rebase) ||
+      (featureEnabled(Feature.COFFINBOX, chainId) && !rebase) ||
       !trade ||
       !recipient ||
       !library ||
