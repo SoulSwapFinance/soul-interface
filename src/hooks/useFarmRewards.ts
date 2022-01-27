@@ -1,6 +1,7 @@
 import { getAddress } from '@ethersproject/address'
 import { ChainId, Currency, NATIVE, SOUL_ADDRESS, Token } from 'sdk'
-import { usePositions, useSummonerInfo } from 'features/summoner/hooks'
+import { useSummonerInfo } from 'hooks/useSummonerInfo'
+import { usePositions } from 'hooks/usePositions'
 import { Chef, PairType } from 'features/mines/enum'
 // import { usePositions } from 'features/mines/hooks'
 import { aprToApy } from 'functions/convert'
@@ -8,7 +9,7 @@ import {
     useAverageBlockTime,
     useEthPrice,
     useFantomPrice,
-    useFarms,
+    // useFarms,
     useKashiPairs,
     useOneDayBlock,
     useSoulPrice,
@@ -17,21 +18,56 @@ import {
 import { useActiveWeb3React } from 'services/web3'
 import toLower from 'lodash/toLower'
 import { useMemo } from 'react'
+import { useSoulSummonerContract } from 'hooks'
+import { NEVER_RELOAD, useSingleCallResult, useSingleContractMultipleData } from 'state/multicall/hooks'
+import zip from 'lodash/zip'
+import { Contract } from '@ethersproject/contracts'
 
+export function useSoulFarms(contract?: Contract | null) {
+    const { chainId, account } = useActiveWeb3React()
+  
+    const numberOfPools = useSingleCallResult(contract ? contract : null, 'poolLength', undefined, NEVER_RELOAD)?.result?.[0]
+  
+    const args = useMemo(() => {
+      if (!numberOfPools) {
+        return
+      }
+      return [...Array(numberOfPools.toNumber()).keys()].map((pid) => [String(pid)])
+    }, [numberOfPools])
+  
+    const poolInfo = useSingleContractMultipleData(args ? contract : null, 'poolInfo', args)
+  
+    return useMemo(() => {
+      if (!poolInfo) {
+        return []
+      }
+      return zip(poolInfo).map((data, i) => ({
+        id: args[i][0],
+        lpToken: data[0].result?.['lpToken'] || '',
+        allocPoint: data[0].result?.['allocPoint'] || '',
+        lastRewardTime: data[0].result?.['lastRewardTime'] || '',
+        accSoulPerShare: data[0].result?.['accSoulPerShare'] || '',
+        // harvestInterval: data[0].result?.['harvestInterval'] || '',
+        totalLp: data[0].result?.['totalLp'] || '',
+      }))
+    }, [args, poolInfo])
+  }
+
+  
+export function useFarms() {
+    return useSoulFarms(useSoulSummonerContract())
+  }
+
+  
 export default function useFarmRewards() {
     const { chainId } = useActiveWeb3React()
 
-    // @ts-ignore TYPE NEEDS FIXING
-    const positions = usePositions(chainId)
-
-    // console.log({ positions })
-
+    const positions = usePositions()
     const block1d = useOneDayBlock({ chainId, shouldFetch: !!chainId })
 
-    // @ts-ignore TYPE NEEDS FIXING
-    const farms = useFarms({ chainId })
+    const farms = useFarms()
 
-    const farmAddresses = useMemo(() => farms.map((farm) => farm.pair), [farms])
+    const farmAddresses = useMemo(() => farms.map((farm) => farm.lpToken), [farms])
 
     const swapPairs = useSoulPairs({
         chainId,
