@@ -191,7 +191,7 @@ export default function SoulStatsModal(): JSX.Element | null {
                       Total Supply
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                      {formatNumberScale(tokenInfo?.totalSupply, false, 2)}
+                      {formatNumberScale(tokenInfo?.totalSupply, false)}
                     </Typography>
                   </div>
                   <div className="flex items-center justify-between">
@@ -199,7 +199,7 @@ export default function SoulStatsModal(): JSX.Element | null {
                       DAO Treasury
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                      - {formatNumberScale(Number(tokenInfo?.totalSupply) * 0.125, false, 2)}
+                      - {formatNumberScale(Number(tokenInfo?.totalSupply) * 0.125, false)}
                     </Typography>
                   </div>
                   <div className="flex items-center justify-between">
@@ -207,7 +207,7 @@ export default function SoulStatsModal(): JSX.Element | null {
                       Total Staked
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                      - {formatNumberScale(seanceInfo?.totalSupply, false, 2)}
+                      - {formatNumberScale(seanceInfo?.totalSupply, false)}
                     </Typography>
                   </div>
                   <hr></hr>
@@ -220,7 +220,7 @@ export default function SoulStatsModal(): JSX.Element | null {
                         Number(tokenInfo?.totalSupply)
                         - Number(seanceInfo?.totalSupply)
                         - (Number(tokenInfo?.totalSupply) * 0.125)
-                        , false, 2)}
+                        , false)}
                     </Typography>
                   </div>
                 </div>
@@ -231,7 +231,7 @@ export default function SoulStatsModal(): JSX.Element | null {
             Number(tokenInfo?.totalSupply)
             - Number(seanceInfo?.totalSupply)
             - (Number(tokenInfo?.totalSupply) * 0.125)
-            , false, 2)
+            , false)
         )}
         {/* {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">

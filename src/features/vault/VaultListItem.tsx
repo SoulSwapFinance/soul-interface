@@ -115,7 +115,7 @@ const VaultListItem = ({ farm, ...rest }) => {
                 <div className="flex flex-col justify-center font-bold">
                   {farm?.lockupDuration == 0 ? 'No lockup' : `${farm?.lockupDuration / 86400} days`}
                 </div>
-                <div className="flex flex-col justify-center font-bold">{formatNumberScale(tvl, true, 2)}</div>
+                <div className="flex flex-col justify-center font-bold">{formatNumberScale(tvl, true)}</div>
                 <div className="flex-row items-center hidden space-x-4 lg:flex">
                   <div className="flex items-center space-x-2">
                     {farm?.rewards?.map((reward, i) => (

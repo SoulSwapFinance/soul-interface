@@ -63,7 +63,7 @@ const YieldDetails: React.FC<YieldDetailsProps> = ({
         </div>
 
         <div className="flex flex-row px-2 w-full">
-          <div className="flex items-center justify-between">{formatNumberScale(value, false, 2)}</div>
+          <div className="flex items-center justify-between">{formatNumberScale(value, false)}</div>
         </div>
       </div>
     )
