@@ -12,7 +12,7 @@ import { useTransactionAdder } from 'state/transactions/hooks'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { usePendingSoul, useUserInfo } from '../hooks'
-import useSummoner from 'features/summoner/useSummoner'
+import useSummoner from '../hooks/useMasterChef'
 import usePendingReward from '../hooks/usePendingReward'
 import { SOUL, SEANCE_ADDRESS, SOUL_ADDRESS, WNATIVE } from '../../../constants'
 import { useSingleCallResult } from 'state/multicall/hooks'
@@ -25,7 +25,7 @@ const InvestmentDetails = ({ farm }) => {
   // const { account, 250 } = useActiveWeb3React()
   // const [depositValue, setDepositValue] = useState('')
 
-  const { harvest, stake } = useSummoner()
+  const { harvest, claimStake } = useSummoner()
   const router = useRouter()
   const addTransaction = useTransactionAdder()
   const [pendingTx, setPendingTx] = useState(false)
@@ -108,7 +108,7 @@ const InvestmentDetails = ({ farm }) => {
   async function claimStaking() {
     setPendingTx(true)
     try {
-      const tx = await stake(farm.id)
+      const tx = await claimStake(farm.id)
       addTransaction(tx, {
         summary: i18n._(t`Harvest SOUL`),
       })

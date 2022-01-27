@@ -8,8 +8,7 @@ import { useActiveWeb3React } from 'services/web3'
 import { useBentoBalancesV2 } from 'state/bentobox/hooks'
 import { useAllTokenBalances, useCurrencyBalance } from 'state/wallet/hooks'
 import React, { FC, useMemo } from 'react'
-import { usePositions } from 'features/mines/hooks'
-import { useSoulPositions } from 'features/summoner/hooks'
+import { usePositions, useSoulPositions } from 'hooks/usePositions'
 import { useSoulSummonerContract } from 'hooks/useContract'
 import { formatNumberScale } from 'functions'
 import { POOLS } from 'constants/farms'
@@ -20,10 +19,6 @@ export const LiquidityPositionsBalancesSum = () => {
   const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
 
-  function usePositions() {
-    return useSoulPositions(useSoulSummonerContract())
-  }
-  
   const positions = usePositions()
   const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
     return { ...POOLS[chainId][key], lpToken: key }

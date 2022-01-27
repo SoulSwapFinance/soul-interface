@@ -133,21 +133,21 @@ export const TradeItemList = () => {
 
   // Loops + renders trades
   const logTrades = async () => {
-    console.log('startLength:', trades.length)
+    // console.log('startLength:', trades.length)
     setLoading(true)
 
     for (let i = renderFromId; i !== 0; i--) {
       setRenderFromId(i)
 
-      console.log('checking:', i)
+      // console.log('checking:', i)
       if (trades.length === 10) {
-        console.log('trades.length = render.')
+        // console.log('trades.length = render.')
         break
       }
       await pushTrade(i)
     }
 
-    console.log('endLength:', trades.length)
+    // console.log('endLength:', trades.length)
 
     await listTrades()
 
@@ -160,11 +160,11 @@ export const TradeItemList = () => {
 
     for (let i = renderFromId; i !== 0; i--) {
       setRenderFromId(i)
-      console.log('checking:', i)
+      // console.log('checking:', i)
 
       // if current array + new array length == amount to display, stop loop
       if (newTrades.length === loadAmount) {
-        console.log('STOP - REACHED DISPLAY COUNT')
+        // console.log('STOP - REACHED DISPLAY COUNT')
         return
       }
 

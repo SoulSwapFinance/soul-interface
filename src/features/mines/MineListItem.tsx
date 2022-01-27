@@ -20,13 +20,11 @@ import { usePendingSoul } from 'features/mines/hooks'
 import { useSoulPositions } from './hooks'
 import { usePrice } from 'hooks/usePrice'
 import useFarms from 'hooks/useFarmRewards'
-import { useHarvestHelperContract, useSoulSummonerContract } from 'hooks/useContract'
-import { getAddress } from 'ethers/lib/utils'
+import { useHarvestHelperContract } from 'hooks/useContract'
 
 import { PairType } from './enum'
 
 import { SOUL, SOUL_ADDRESS } from '../../constants'
-import { POOLS } from 'constants/farms'
 
 import styled from 'styled-components'
 
@@ -49,8 +47,6 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   // const tvlInfo = useTVL()
   const harvestHelperContract = useHarvestHelperContract()
   const soulPrice = usePrice(SOUL_ADDRESS[250]) // to avoid RPC call
-
-  const rewards = useFarms()
   
   const pendingSoul = usePendingSoul(farm)
 

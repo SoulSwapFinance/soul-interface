@@ -82,19 +82,19 @@ export function useVaultTVL(): TVLInfo[] {
   const priceHelperContract = usePriceHelperContract()
 
   const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'])?.result
-  console.log(Number(rawFtmPrice))
+  // console.log(Number(rawFtmPrice))
   const ftmPrice = Number(rawFtmPrice) / 1E18
-  console.log(ftmPrice)
+  // console.log(ftmPrice)
 
   const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6'])?.result
-  console.log(Number(rawSeancePrice))
+  // console.log(Number(rawSeancePrice))
   const seancePrice = Number(rawSeancePrice) / 1E18
-  console.log(seancePrice)
+  // console.log(seancePrice)
 
   const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
-  console.log(Number(rawSoulPrice))
+  // console.log(Number(rawSoulPrice))
   const soulPrice = Number(rawSoulPrice) / 1E18
-  console.log(soulPrice)
+  // console.log(soulPrice)
 
   const farmingPools = Object.keys(VAULTS[ChainId.FANTOM]).map((key) => {
     return { ...VAULTS[ChainId.FANTOM][key] }
@@ -226,24 +226,24 @@ export function useTVL(): TVLInfo[] {
   const priceHelperContract = usePriceHelperContract()
 
   const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'])?.result
-  console.log(Number(rawFtmPrice))
+  // console.log(Number(rawFtmPrice))
   const ftmPrice = Number(rawFtmPrice) / 1E18
-  console.log(ftmPrice)
+  // console.log(ftmPrice)
 
   const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6'])?.result
-  console.log(Number(rawSeancePrice))
+  // console.log(Number(rawSeancePrice))
   const seancePrice = Number(rawSeancePrice) / 1E18
-  console.log(seancePrice)
+  // console.log(seancePrice)
 
   const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
-  console.log(Number(rawSoulPrice))
+  // console.log(Number(rawSoulPrice))
   const soulPrice = Number(rawSoulPrice) / 1E18
-  console.log(soulPrice)
+  // console.log(soulPrice)
 
   const rawLuxPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'])?.result
-  console.log(Number(rawLuxPrice))
+  // console.log(Number(rawLuxPrice))
   const luxPrice = Number(rawLuxPrice) / 1E18
-  console.log(luxPrice)
+  // console.log(luxPrice)
 
   const farmingPools = Object.keys(POOLS[ChainId.FANTOM]).map((key) => {
     return { ...POOLS[ChainId.FANTOM][key], lpToken: key }
@@ -387,24 +387,24 @@ export function useV2PairsWithPrice(
   const priceHelperContract = usePriceHelperContract()
 
   const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
-  console.log(Number(rawSoulPrice))
+  // console.log(Number(rawSoulPrice))
   const soulPrice = Number(rawSoulPrice) / 1E18
-  console.log('soul price:%s', soulPrice)
+  // console.log('soul price:%s', soulPrice)
 
   const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'])?.result
-  console.log(Number(rawFtmPrice))
+  // console.log(Number(rawFtmPrice))
   const ftmPrice = Number(rawFtmPrice) / 1E18
-  console.log(ftmPrice)
+  // console.log(ftmPrice)
 
   const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6'])?.result
-  console.log(Number(rawSeancePrice))
+  // console.log(Number(rawSeancePrice))
   const seancePrice = Number(rawSeancePrice) / 1E18
-  console.log(seancePrice)
+  // console.log(seancePrice)
 
   const rawEthPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x74b23882a30290451A17c44f4F05243b6b58C76d'])?.result
-  console.log(Number(rawEthPrice))
+  // console.log(Number(rawEthPrice))
   const ethPrice = Number(rawEthPrice) / 1E18
-  console.log(ethPrice)
+  // console.log(ethPrice)
 
   const tokens = useMemo(
     () => currencies.map(([currencyA, currencyB]) => [currencyA?.wrapped, currencyB?.wrapped]),
