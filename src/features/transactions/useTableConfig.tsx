@@ -31,7 +31,7 @@ export const useTableConfig = (transactions?: Transactions[]) => {
         // @ts-ignore TYPE NEEDS FIXING
         Cell: (props) => {
           return (
-            <ExternalLink color="blue" href={`https://etherscan.io/address/${props.cell.value}`}>
+            <ExternalLink color="blue" href={`https://ftmscan.com/address/${props.cell.value}`}>
               {shortenAddress(props.cell.value)}
             </ExternalLink>
           )
