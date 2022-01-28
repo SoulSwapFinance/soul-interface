@@ -44,7 +44,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
   }
 
   return (
-    <Popover key={node.key} className="flex relative">
+    <Popover key={node.key} className="flex relative text-center">
       {({ open }) => (
         <div
           {...(!touchDevice && {
