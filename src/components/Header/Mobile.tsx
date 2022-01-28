@@ -52,10 +52,9 @@ const Mobile: FC = () => {
                   return <NavigationItem node={node} key={node.key} />
                 })}
                   {/* <LanguageSwitch /> */}
-              {/* </div> */}
+               </div>
           </Container>
         </nav>
-        </div>
         <Transition.Root show={open} as={Fragment}>
           <Dialog as="div" className="fixed inset-0 overflow-hidden z-20" onClose={setOpen}>
             <div className="absolute inset-0 overflow-hidden">
