@@ -46,6 +46,7 @@ const MenuLink: FC<{ href?: string; label: string; onClick?(): void }> = ({ href
 enum FarmFilter {
   Active = 'Active',
   Deposited = 'Deposited',
+  Staking = 'Staking',
   Fantom = 'Fantom',
   SoulSwap = 'SoulSwap',
   Stables = 'Stables',
@@ -53,8 +54,9 @@ enum FarmFilter {
 }
 
 const filters: Record<string, FarmFilter> = {
-  deposited: FarmFilter.Deposited,
   active: FarmFilter.Active,
+  deposited: FarmFilter.Deposited,
+  staking: FarmFilter.Staking,
   fantom: FarmFilter.Fantom,
   soulswap: FarmFilter.SoulSwap,
   stables: FarmFilter.Stables,
@@ -77,6 +79,9 @@ const MineMenu = () => {
       ) : (
         <MenuLink onClick={toggleWalletModal} label={i18n._(t`Deposited`)} />
       ),
+      [FarmFilter.Staking]: (
+        <MenuLink href={'/seance'} label={i18n._(t`Staking`)} />
+      ),
       [FarmFilter.Fantom]:
         chainId === ChainId.FANTOM ? (
           <MenuLink href={'/mines?filter=fantom'} label={i18n._(t`Fantom`)} />
@@ -93,9 +98,6 @@ const MineMenu = () => {
       [FarmFilter.Inactive]: (
         <MenuLink href={'/mines?filter=inactive'} label={i18n._(t`Inactive`)} />
       ),
-      [FarmFilter.Inactive]: (
-        <MenuLink href={'/seance'} label={i18n._(t`Stake`)} />
-      )
     }
 
     return Object.entries(map).reduce<Record<string, ReactNode>>((acc, [k, v]) => {
