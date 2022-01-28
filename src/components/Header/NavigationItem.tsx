@@ -34,7 +34,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
         variant="sm"
         className={classNames(
           router.asPath === link ? 'text-white' : '',
-          'hover:text-white font-bold py-6 px-2 rounded flex gap-3'
+          'hover:text-white font-bold py-5 px-2 rounded flex gap-3'
         )}
       >
         {!isDesktop && node.icon}
@@ -44,7 +44,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
   }
 
   return (
-    <Popover key={node.key} className="flex relative text-center">
+    <Popover key={node.key} className="flex relative">
       {({ open }) => (
         <div
           {...(!touchDevice && {
@@ -56,7 +56,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
             <Typography
               weight={700}
               variant="sm"
-              className={classNames(open ? 'text-purple' : '', 'font-bold py-4 px-2 rounded flex gap-3 items-center')}
+              className={classNames(open ? 'text-purple' : '', 'font-bold py-5 px-2 rounded flex gap-3 items-center')}
             >
               {!isDesktop && node.icon}
               {node.title}
