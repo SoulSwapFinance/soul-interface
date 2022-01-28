@@ -17,7 +17,7 @@ import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 're
 import BentoBoxFundingSourceModal from '../add/BentoBoxFundingSourceModal'
 
 interface SwapAssetPanel {
-  error: boolean
+  error?: boolean
   // @ts-ignore TYPE NEEDS FIXING
   header: (x) => React.ReactNode
   // @ts-ignore TYPE NEEDS FIXING
@@ -109,7 +109,7 @@ const WalletSwitch: FC<
         component="span"
         className="flex items-center gap-1 px-2 py-1 rounded-full cursor-pointer text-high-emphesis hover:text-white hover:shadow bg-dark-800 hover:bg-dark-700"
       >
-        {spendFromWallet ? i18n._(t`Wallet`) : i18n._(t`CoffinBox`)}
+        {spendFromWallet ? i18n._(t`Wallet`) : i18n._(t`BentoBox`)}
       </Typography>
       <BentoBoxFundingSourceModal />
     </Typography>
@@ -161,9 +161,9 @@ const InputPanel: FC<
         component="span"
         style={{ left: width }}
       >
-        {usdcValue?.greaterThan(ZERO) && <>~{formatNumber(usdcValue?.toFixed(), true, true)} </>}
+        {usdcValue?.greaterThan(ZERO) && <>~{formatNumber(usdcValue?.toFixed(), true, true, 2)} </>}
         {priceImpact && (
-          <span className={priceImpactCss || priceImpactClassName}>{priceImpact?.toSignificant(2)}%</span>
+          <span className={priceImpactCss || priceImpactClassName}>({priceImpact?.toSignificant(2)}%)</span>
         )}
       </Typography>
       {/*This acts as a reference to get input width*/}
