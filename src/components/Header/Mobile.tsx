@@ -40,7 +40,7 @@ const Mobile: FC = () => {
 
   return (
     <>      
-    <header className="flex flex-row mr-4 ml-4 justify-between w-screen flex-nowrap">
+    <header className="flex flex-row mr-4 ml-4 justify-center w-screen flex-nowrap">
     {/* <div className="flex items-center justify-between">
           </div> */}
         {/* <div className="flex p-2 justify-between"> */}
