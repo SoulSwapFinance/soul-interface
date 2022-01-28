@@ -82,21 +82,17 @@ const MineMenu = () => {
       [FarmFilter.Staking]: (
         <MenuLink href={'/seance'} label={i18n._(t`Staking`)} />
       ),
-      [FarmFilter.Fantom]:
-        chainId === ChainId.FANTOM ? (
+      [FarmFilter.Fantom]: (
           <MenuLink href={'/mines?filter=fantom'} label={i18n._(t`Fantom`)} />
-        ) : undefined,
-      [FarmFilter.SoulSwap]:
-        chainId === ChainId.FANTOM ? (
-          <MenuLink href={'/mines?filter=soulswap'} label={i18n._(t`SoulSwap`)} />
-        ) : undefined,
-      [FarmFilter.Stables]:
-        chainId === ChainId.FANTOM ? (
-          <MenuLink href={'/mines?filter=stables'} label={i18n._(t`Stables`)} />
-        ) : undefined,
-      // @ts-ignore TYPE NEEDS FIXING
+        ),
+      [FarmFilter.SoulSwap]: (
+        <MenuLink href={'/mines?filter=soulswap'} label={i18n._(t`SoulSwap`)} />
+        ),
+      [FarmFilter.Stables]: (
+        <MenuLink href={'/mines?filter=stables'} label={i18n._(t`Stables`)} />
+        ),
       [FarmFilter.Inactive]: (
-        <MenuLink href={'/mines?filter=inactive'} label={i18n._(t`Inactive`)} />
+      <MenuLink href={'/mines?filter=inactive'} label={i18n._(t`Inactive`)} />
       ),
     }
 
