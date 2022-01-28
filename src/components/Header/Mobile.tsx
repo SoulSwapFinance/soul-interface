@@ -47,7 +47,7 @@ const Mobile: FC = () => {
             <MenuIcon width={20} className="hover:text-white text-white cursor-pointer" onClick={() => setOpen(true)} />
           <nav className={NAV_CLASS}>
           <Container maxWidth="xl" className="mx-auto">
-            <div className="flex gap-1 items-center justify-between">
+            <div className="flex items-center">
                 {mobileMenu.map((node) => {
                   return <NavigationItem node={node} key={node.key} />
                 })}
