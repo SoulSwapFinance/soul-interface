@@ -14,14 +14,14 @@ import { useTVL } from 'hooks/useV2Pairs'
 import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 import { useSingleCallResult } from 'state/multicall/hooks'
 import { usePendingSoul } from 'features/mines/hooks'
-  
+
 // FETCH PENDING REWARDS //
 
 import { useSoulPositions } from './hooks'
 import { usePrice } from 'hooks/usePrice'
 import useFarms from 'hooks/useFarmRewards'
 import { useHarvestHelperContract } from 'hooks/useContract'
-
+import useTokenAnalytics from 'features/analytics/hooks/useTokensAnalytics'
 import { PairType } from './enum'
 
 import { SOUL, SOUL_ADDRESS } from '../../constants'
@@ -47,9 +47,8 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   // const tvlInfo = useTVL()
   const harvestHelperContract = useHarvestHelperContract()
   const soulPrice = usePrice(SOUL_ADDRESS[250]) // to avoid RPC call
-  
-  const pendingSoul = usePendingSoul(farm)
 
+  const pendingSoul = usePendingSoul(farm)
   let [data] = useV2PairsWithPrice([[token0, token1]])
   let [state, pair, pairPrice] = data
 
@@ -62,13 +61,17 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   //   return { ...POOLS[250][key], lpToken: key }
   // })
 
-// BALANCES AND TVL //
+  // BALANCES AND TVL //
 
   const lpBalance = useSingleCallResult(harvestHelperContract, 'fetchBals', [farm?.id])?.result
 
   const tvl = farm.pair?.token1
     ? Number(pairPrice) * Number(lpBalance) / 1e18
     : Number(soulPrice) * Number(lpBalance) / 1e18
+
+  const volume = farm.pair?.token1
+    ? Number(lpBalance) / 1e18
+    : 0 // 0 for SOUL SAS
 
   // REWARD RATE CALCULATIONS //
   const rewardPerSecond =
@@ -90,19 +93,29 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   const roiPerDay = roiPerMonth / 30
   const roiPerHour = roiPerDay / 24
 
+  // use vol, liq to getApy 
+  const getApy = (volume, liquidity) => {
+    const apy = aprToApy((((volume / 7) * 365 * 0.0025) / liquidity) * 100, 3650)
+    if (apy > 1000) return '>10,000%'
+    return formatPercent(apy)
+  }
+  console.log('volume1d: ', farm.pair.volume1d)
+
+  // console.log('feeApyPerYear: ', farm.feeApyPerYear)
+
   return (
     <div className={classNames(TABLE_TBODY_TR_CLASSNAME, 'grid grid-cols-4')} onClick={onClick}>
       <div className={classNames('flex gap-2', TABLE_TBODY_TD_CLASSNAME(0, 4))}>
-      
-        { /* TOKEN-LOGO */ }
-        
+
+        { /* TOKEN-LOGO */}
+
         {token1 ? <CurrencyLogoArray currencies={[token0, token1]} dense size={32} />
           : <CurrencyLogo currency={token0} size={54} />
         }
-        
-        { /* LP-TOKEN */ }
+
+        { /* LP-TOKEN */}
         <div className="flex flex-col items-start">
-     <Typography weight={700} className="flex gap-1 text-high-emphesis">
+          <Typography weight={700} className="flex gap-1 text-high-emphesis">
             {farm.pair.token1 ?
               farm?.pair?.token0?.symbol
               : farm?.pair?.token0?.symbol
@@ -111,21 +124,21 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
               <span className="text-low-emphesis">/</span>
             }
             {farm?.pair?.token1?.symbol}
-            
-            { /* PENDING REWARDS (SUBTITLE) */ }
+
+            { /* PENDING REWARDS (SUBTITLE) */}
 
           </Typography>
           {farm?.rewards?.map((reward, i) => (
-  <Typography variant="xs" className="text-low-emphesis">
-  Claimable: {' '}
+            <Typography variant="xs" className="text-low-emphesis">
+              Claimable: {' '}
               {formatNumber(pendingSoul?.toSignificant(4) ?? 0)}
-              
+
             </Typography>
           ))}
-          
-          { /* DAILY REWARDS (SUBTITLE) */ }
-            
-      {/*
+
+          { /* DAILY REWARDS (SUBTITLE) */}
+
+          {/*
           </Typography>
           {farm?.rewards?.map((reward, i) => (
   <Typography variant="xs" className="text-low-emphesis">
@@ -203,7 +216,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
                   ))}
                 </div>
                 <div>
-                  Fee APR: {farm?.feeApyPerYear < 10000 ? formatPercent(farm?.feeApyPerYear * 100) : '>10,000%'}
+                  Fee APR: {getApy(volume, tvl)}
                 </div>
               </div>
             }
