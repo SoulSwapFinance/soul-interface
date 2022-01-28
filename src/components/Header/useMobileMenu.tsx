@@ -216,11 +216,6 @@ const useMobileMenu: UseMobileMenu = () => {
           link: '/info/dashboard',
         },
         {
-          key: 'balances',
-          title: 'Balances',
-          link: '/balances',
-        },
-        {
           key: 'dashboard',
           title: 'Overview',
           link: '/analytics/dashboard',
