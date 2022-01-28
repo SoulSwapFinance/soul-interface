@@ -43,7 +43,7 @@ const Mobile: FC = () => {
     <header className="flex flex-row mr-4 ml-4 justify-center w-screen flex-nowrap">
     {/* <div className="flex items-center justify-between">
           </div> */}
-        <div className="flex ml-1 p-2 justify-between">
+        <div className="flex p-2 justify-between">
             <MenuIcon width={20} className="hover:text-white text-white cursor-pointer" onClick={() => setOpen(true)} />
           <nav className={NAV_CLASS}>
           <Container maxWidth="xl" className="mx-auto">
