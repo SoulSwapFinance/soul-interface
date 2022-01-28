@@ -3,7 +3,6 @@ import { MenuIcon } from '@heroicons/react/outline'
 import { NATIVE } from 'sdk'
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { WalletLinkConnector } from '@web3-react/walletlink-connector'
-import useMenu from 'components/Header/useMenu'
 import Web3Network from 'components/Web3Network'
 import Web3Status from 'components/Web3Status'
 import { useActiveWeb3React } from 'services/web3'
@@ -18,12 +17,19 @@ import LuxorStats from 'components/LuxorStats'
 import More from './More'
 import NavLink from 'components/NavLink'
 import { AURA } from 'constants/tokens'
+import Container from 'components/Container'
+import LanguageSwitch from 'components/LanguageSwitch'
+import { NAV_CLASS } from './styles'
+import useMobileMenu from 'components/Header/useMobileMenu'
+import useMenu from 'components/Header/useMenu'
+
+const HEADER_HEIGHT = 64
 
 const Mobile: FC = () => {
   const menu = useMenu()
+  const mobileMenu = useMobileMenu()
   const { account, chainId, library, connector } = useActiveWeb3React()
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
-  const auraBalance = useTokenBalance(account ?? undefined, AURA[chainId])
   
   const [open, setOpen] = useState(false)
 
@@ -33,17 +39,22 @@ const Mobile: FC = () => {
     window?.ethereum?.isCoinbaseWallet
 
   return (
-    <>
+    <>      
       <header className="w-full flex items-center justify-between min-h-[64px] h-[64px] px-4">
-        <div className="flex flex-grow justify-between">
           <div className="p-2 hover:bg-white/10 rounded-full">
-            <MenuIcon width={28} className="hover:text-white text-white cursor-pointer" onClick={() => setOpen(true)} />
+            <MenuIcon width={20} className="hover:text-white text-white cursor-pointer" onClick={() => setOpen(true)} />
           </div>
-          <div className="flex w-6 mr-1 items-center">
-            <NavLink href="/landing">
-              <Image src="/logo.png" alt="Soul" width="40" height="40" />
-            </NavLink>
-          </div>
+        <div className="flex flex-grow justify-between">
+          <nav className={NAV_CLASS}>
+          <Container maxWidth="7xl" className="mx-auto">
+            <div className="flex gap-0 px-0 items-center justify-between">
+                {mobileMenu.map((node) => {
+                  return <NavigationItem node={node} key={node.key} />
+                })}
+                  <LanguageSwitch />
+                </div>
+          </Container>
+        </nav>
         </div>
         <Transition.Root show={open} as={Fragment}>
           <Dialog as="div" className="fixed inset-0 overflow-hidden z-20" onClose={setOpen}>
@@ -77,27 +88,6 @@ const Mobile: FC = () => {
                           return <NavigationItem node={node} key={node.key} />
                         })}
                       </nav>
-
-                      <div className="px-6 flex flex-col gap-4">
-                        {/* {library && (library.provider.isMetaMask || isCbWallet) && (
-                          <div className="hidden sm:flex">
-                            <Web3Network />
-                          </div>
-                        )} */}
-
-                        {/* <div className="flex items-center justify-start gap-2">
-                          <div className="flex items-center w-auto text-sm font-bold border-2 rounded shadow cursor-pointer pointer-events-auto select-none border-dark-800 hover:border-dark-700 bg-dark-900 whitespace-nowrap">
-                            {account && chainId && userEthBalance && (
-                              <Link href="/balances" passHref={true}>
-                                <a className="hidden px-3 text-high-emphesis text-bold md:block">
-                                  {userEthBalance?.toSignificant(4)} {NATIVE[chainId || 250].symbol}
-                                </a>
-                              </Link>
-                            )}
-                            <Web3Status />
-                          </div>
-                        </div> */}
-                      </div>
                     </div>
                   </div>
                 </Transition.Child>
@@ -126,15 +116,6 @@ const Mobile: FC = () => {
                     }
                     {NATIVE[chainId].symbol}
                   </div>
-                  {/* {account && chainId && (
-                    <>
-                      <div className="hidden md:inline px-3 py-2 text-primary text-bold">
-                        {auraBalance?.toSignificant(4)
-                          .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                        } {'AURA'}
-                      </div>
-                    </>
-                  )} */}
                 </>
               )}
               <Web3Status />
@@ -151,5 +132,6 @@ const Mobile: FC = () => {
     </>
   )
 }
+<div style={{ height: HEADER_HEIGHT, minHeight: HEADER_HEIGHT }} />
 
 export default Mobile

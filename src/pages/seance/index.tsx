@@ -27,6 +27,7 @@ import { SubmitButton } from '../../features/seance/SeanceStyles'
 import { HeadlessUiModal } from 'components/Modal'
 import Header from 'features/mines/components/Header'
 import ModalHeader from 'components/Modal/Header'
+import NavLink from 'components/NavLink'
 
 const INPUT_CHAR_LIMIT = 18
 
@@ -312,9 +313,25 @@ export default function SoulStake() {
         />
       </Head>
       {/* <DoubleGlowShadowV2 maxWidth={false} opacity={'0.3'}> */}
-      <div className="mb-4 md:mb-8" />
-        <Header />
-        <div className="mt-2 mb-8" />
+      <div className="mb-1 md:mb-2" />
+        {/* <Header /> */}
+        <div className="flex items-right px-4">
+          <NavLink href="/mines?filter=active">
+            <a className="flex items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
+              <span>{i18n._(t`Back to Farms`)}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </NavLink>
+        </div>
+        <div className="mt-2 mb-1" />
         <div className="flex flex-col w-full min-h-full">
           <div className="flex justify-center mb-6">
             <div className="flex flex-col w-full max-w-xl mt-auto mb-2">

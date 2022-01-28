@@ -56,11 +56,11 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
             <Typography
               weight={700}
               variant="sm"
-              className={classNames(open ? 'text-white' : '', 'font-bold py-5 px-2 rounded flex gap-3 items-center')}
+              className={classNames(open ? 'text-purple' : '', 'font-bold py-5 px-2 rounded flex gap-3 items-center')}
             >
               {!isDesktop && node.icon}
               {node.title}
-              <ChevronDownIcon strokeWidth={5} width={12} />
+              <ChevronDownIcon className={'hidden sm:flex'} strokeWidth={5} width={12} />
             </Typography>
           </Popover.Button>
           {node.hasOwnProperty('items') && (
