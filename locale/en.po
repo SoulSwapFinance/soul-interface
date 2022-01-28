@@ -187,6 +187,9 @@ msgstr "Avg. APY"
 msgid "BOND"
 msgstr "BOND"
 
+msgid "Back to Farms"
+msgstr "Back to Farms"
+
 msgid "Balance"
 msgstr "Balance"
 
@@ -198,6 +201,9 @@ msgstr "Balance:"
 
 msgid "BentoBox"
 msgstr "BentoBox"
+
+msgid "Bonds"
+msgstr "Bonds"
 
 msgid "Borrow"
 msgstr "Borrow"
@@ -446,6 +452,9 @@ msgstr "Do not show again"
 msgid "Documentation"
 msgstr "Documentation"
 
+msgid "EARN"
+msgstr "EARN"
+
 msgid "ENCHANT"
 msgstr "ENCHANT"
 
@@ -691,8 +700,8 @@ msgstr "Insufficient Balance"
 msgid "Insufficient balance to cover for fees"
 msgstr "Insufficient balance to cover for fees"
 
-msgid "Insufficient liquidity for this trade"
-msgstr "Insufficient liquidity for this trade"
+msgid "Insufficient liquidity for this trade."
+msgstr "Insufficient liquidity for this trade."
 
 msgid "Insufficient {0} Balance"
 msgstr "Insufficient {0} Balance"
@@ -985,6 +994,9 @@ msgstr "Output is estimated. You will receive at least"
 msgid "PAIRS"
 msgstr "PAIRS"
 
+msgid "POOL"
+msgstr "POOL"
+
 msgid "Pair your SOUL and add to Bonds for more SOUL at record-high returns."
 msgstr "Pair your SOUL and add to Bonds for more SOUL at record-high returns."
 
@@ -1048,6 +1060,9 @@ msgstr "Pooled Tokens"
 msgid "Pooled {0}"
 msgstr "Pooled {0}"
 
+msgid "Portfolio"
+msgstr "Portfolio"
+
 msgid "Position and Rewards"
 msgstr "Position and Rewards"
 
@@ -1110,9 +1125,6 @@ msgstr "Remove"
 
 msgid "Remove Liquidity"
 msgstr "Remove Liquidity"
-
-msgid "Remove Recipient"
-msgstr "Remove Recipient"
 
 msgid "Remove liquidity of Soul"
 msgstr "Remove liquidity of Soul"
@@ -1353,6 +1365,12 @@ msgstr "Swap"
 
 msgid "Swap Anyway"
 msgstr "Swap Anyway"
+
+msgid "Swap from:"
+msgstr "Swap from:"
+
+msgid "Swap to:"
+msgstr "Swap to:"
 
 msgid "Swapping"
 msgstr "Swapping"
