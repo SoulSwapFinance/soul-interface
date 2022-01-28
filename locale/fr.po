@@ -187,6 +187,9 @@ msgstr ""
 msgid "BOND"
 msgstr ""
 
+msgid "Back to Farms"
+msgstr ""
+
 msgid "Balance"
 msgstr ""
 
@@ -197,6 +200,9 @@ msgid "Balance:"
 msgstr ""
 
 msgid "BentoBox"
+msgstr ""
+
+msgid "Bonds"
 msgstr ""
 
 msgid "Borrow"
@@ -441,6 +447,9 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
+msgid "EARN"
+msgstr ""
+
 msgid "ENCHANT"
 msgstr ""
 
@@ -682,7 +691,7 @@ msgstr ""
 msgid "Insufficient balance to cover for fees"
 msgstr ""
 
-msgid "Insufficient liquidity for this trade"
+msgid "Insufficient liquidity for this trade."
 msgstr ""
 
 msgid "Insufficient {0} Balance"
@@ -970,6 +979,9 @@ msgstr ""
 msgid "PAIRS"
 msgstr ""
 
+msgid "POOL"
+msgstr ""
+
 msgid "Pair your SOUL and add to Bonds for more SOUL at record-high returns."
 msgstr ""
 
@@ -1033,6 +1045,9 @@ msgstr ""
 msgid "Pooled {0}"
 msgstr ""
 
+msgid "Portfolio"
+msgstr ""
+
 msgid "Position and Rewards"
 msgstr ""
 
@@ -1094,9 +1109,6 @@ msgid "Remove"
 msgstr ""
 
 msgid "Remove Liquidity"
-msgstr ""
-
-msgid "Remove Recipient"
 msgstr ""
 
 msgid "Remove liquidity of Soul"
@@ -1331,6 +1343,12 @@ msgid "Swap"
 msgstr ""
 
 msgid "Swap Anyway"
+msgstr ""
+
+msgid "Swap from:"
+msgstr ""
+
+msgid "Swap to:"
 msgstr ""
 
 msgid "Swapping"
