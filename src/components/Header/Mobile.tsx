@@ -40,14 +40,14 @@ const Mobile: FC = () => {
 
   return (
     <>      
-      <header className="max-w-full flex items-center justify-between min-h-[64px] h-[64px] mr-0 ml-0">
-          <div className="p-0 hover:bg-white/10 rounded-full">
-            <MenuIcon width={20} className="hover:text-white text-white cursor-pointer" onClick={() => setOpen(true)} />
-          </div>
-        <div className="flex flex-grow justify-between">
+    <header className="flex flex-row mr-4 ml-4 justify-between w-screen flex-nowrap">
+    {/* <div className="flex items-center justify-between">
+          </div> */}
+        {/* <div className="flex p-2 justify-between"> */}
+            {/* <MenuIcon width={20} className="hover:text-white text-white cursor-pointer" onClick={() => setOpen(true)} /> */}
           <nav className={NAV_CLASS}>
-          <Container maxWidth="md" className="mx-auto">
-            <div className="flex gap-3 px-6 items-center justify-between">
+          <Container maxWidth="xl" className="mx-auto">
+            <div className="flex gap-1 px-4 items-center justify-between">
                 {mobileMenu.map((node) => {
                   return <NavigationItem node={node} key={node.key} />
                 })}
@@ -55,7 +55,7 @@ const Mobile: FC = () => {
                 </div>
           </Container>
         </nav>
-        </div>
+        {/* </div> */}
         <Transition.Root show={open} as={Fragment}>
           <Dialog as="div" className="fixed inset-0 overflow-hidden z-20" onClose={setOpen}>
             <div className="absolute inset-0 overflow-hidden">

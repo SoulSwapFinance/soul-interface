@@ -73,7 +73,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
-              <Popover.Panel className="z-10 w-full absolute w-40 translate-y-[-8px] translate-x-[-8px]">
+              <Popover.Panel className="z-10 w-full absolute w-30 translate-y-[-8px] translate-x-[-8px]">
                 <div
                   className={classNames(
                     'shadow-md shadow-black/40 border border-dark-700 rounded overflow-hidden',
@@ -90,7 +90,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
                       onClick={() => {
                         router.push(leaf.link).then(() => buttonRef?.current?.click())
                       }}
-                      className="relative px-3 py-2 hover:cursor-pointer hover:text-white m-1 rounded-lg hover:bg-white/10"
+                      className="relative px-1 py-2 hover:cursor-pointer hover:text-white m-1 rounded-lg hover:bg-white/10"
                     >
                       {leaf.title}
                     </Typography>
