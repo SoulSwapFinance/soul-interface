@@ -12,14 +12,14 @@ export interface MenuItemLeaf {
   key: string
   title: string
   link: string
-  // icon?: ReactNode
+  icon?: ReactNode
 }
 
 export interface MenuItemNode {
   key: string
   title: string
   items: MenuItemLeaf[]
-  // icon?: ReactNode
+  icon?: ReactNode
 }
 
 export type MenuItem = MenuItemLeaf | MenuItemNode
@@ -38,14 +38,14 @@ const useMobileMenu: UseMobileMenu = () => {
       key: 'swap',
       title: i18n._(t`SWAP`),
       link: '/swap',
-      // icon: <SwitchVerticalIcon width={20} />,
+      icon: <SwitchVerticalIcon width={16} />,
     }
  // If AMM is enabled, replace swap button with a submenu under trade
  if (featureEnabled(Feature.AMM, chainId)) {
   tradeMenu = {
     key: 'exchange',
     title: i18n._(t`SWAP`),
-    // icon: <SwitchVerticalIcon width={20} />,
+    icon: <SwitchVerticalIcon width={16} />,
     items: [
       {
         key: 'swap',
@@ -65,7 +65,7 @@ const useMobileMenu: UseMobileMenu = () => {
       tradeMenu = {
         key: 'trade',
         title: i18n._(t`Trade`),
-        // icon: <SwitchVerticalIcon width={20} />,
+        icon: <SwitchVerticalIcon width={16} />,
         items: [
           {
             key: 'swap',
@@ -126,9 +126,9 @@ const useMobileMenu: UseMobileMenu = () => {
     if (poolMenu.length > 0)
       mainItems.push({
         key: 'pool',
-        title: i18n._(t`LIQUIDITY`),
+        title: i18n._(t`POOL`),
         items: poolMenu,
-        // icon: <PoolIcon width={20} />,
+        icon: <PoolIcon width={16} />,
       })
 
     if (exploreMenu.length > 0)
@@ -136,14 +136,14 @@ const useMobileMenu: UseMobileMenu = () => {
         key: 'explore',
         title: i18n._(t`Explore`),
         items: exploreMenu,
-        // icon: <GlobeIcon width={20} />,
+        icon: <GlobeIcon width={16} />,
       })
 
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const farmItems = {
         key: 'Rewards',
         title: i18n._(t`EARN`),
-        // icon: <SwitchVerticalIcon width={20} className="rotate-90 filter" />,
+        icon: <SwitchVerticalIcon width={16} className="rotate-90 filter" />,
         items: [
           {
             key: 'your-farms',
@@ -169,7 +169,7 @@ const useMobileMenu: UseMobileMenu = () => {
     //   mainItems.push({
     //     key: 'lending',
     //     title: i18n._(t`Lending`),
-    //     icon: <SwitchVerticalIcon width={20} className="rotate-90 filter" />,
+    //     icon: <SwitchVerticalIcon width={16} className="rotate-90 filter" />,
     //     items: [
     //       {
     //         key: 'lend',
@@ -189,7 +189,7 @@ const useMobileMenu: UseMobileMenu = () => {
     //   mainItems.push({
     //     key: 'launchpad',
     //     title: i18n._(t`Launchpad`),
-    //     icon: <RocketIcon width={20} />,
+    //     icon: <RocketIcon width={16} />,
     //     items: [
     //       {
     //         key: 'marketplace',
@@ -208,7 +208,7 @@ const useMobileMenu: UseMobileMenu = () => {
     let analyticsMenu: MenuItem = {
       key: 'analytics',
       title: i18n._(t`DATA`),
-      // icon: <TrendingUpIcon width={20} />,
+      icon: <TrendingUpIcon width={16} />,
       items: [
         {
           key: 'wallet',
@@ -222,7 +222,7 @@ const useMobileMenu: UseMobileMenu = () => {
         },
         {
           key: 'dashboard',
-          title: 'Dashboard',
+          title: 'Overview',
           link: '/analytics/dashboard',
         },
         {
@@ -254,7 +254,7 @@ const useMobileMenu: UseMobileMenu = () => {
     //   key: 'balances',
     //   title: i18n._(t`Portfolio`),
     //   link: '/balances',
-    //   // icon: <WalletIcon width={20} />,
+    //   // icon: <WalletIcon width={16} />,
     // })
 
     return mainItems.filter((el) => Object.keys(el).length > 0)
