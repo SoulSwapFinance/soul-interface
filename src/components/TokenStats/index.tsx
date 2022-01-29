@@ -1,9 +1,7 @@
-import { NETWORK_ICON, NETWORK_LABEL } from 'constants/networks'
-
+import React from 'react'
 import Image from 'next/image'
 // import NetworkModel from 'modals/NetworkModal'
 import TokensStatsModal, { formatCurrency } from 'modals/TokensStatsModal'
-import React from 'react'
 import { useModalOpen, useToggleTokenStatsModal } from 'state/application/hooks'
 import { ApplicationModal } from 'state/application/actions'
 import { useSingleCallResult } from 'state/multicall/hooks'
