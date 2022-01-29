@@ -5,7 +5,7 @@ const { publicRuntimeConfig } = getConfig()
 const useDesktopMediaQuery = () => {
   const { breakpoints } = publicRuntimeConfig
   // return useMediaQuery({ query: `(min-width: lg` })
-  return useMediaQuery({ query: `(min-width: ${breakpoints.md}` })
+  return useMediaQuery({ query: `(min-width: ${breakpoints.lg}` })
 }
 
 export const useTouchDeviceMediaQuery = () => {

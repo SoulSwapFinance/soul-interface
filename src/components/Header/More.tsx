@@ -17,6 +17,12 @@ const items = (i18n: I18n) => [
     external: true,
   },
   {
+    name: i18n._(t`SoulSwapFinance@gnail.com`),
+    description: i18n._(t`Email Us.`),
+    href: 'mailto:soulswapfinance@gmail.com',
+    external: true,
+  },
+  {
     name: i18n._(t`Documentation`),
     description: i18n._(t`Read the Documentation.`),
     href: 'https://docs.soulswap.finance',
