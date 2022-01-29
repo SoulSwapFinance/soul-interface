@@ -174,7 +174,7 @@ const InvestmentDetails = ({ farm }) => {
           farm.pair?.token1 ?
           (
             <Button
-            color="blue"
+            color="purple"
             className="text-emphasis"
             // variant={'flexed'}
             variant="outlined"
@@ -186,7 +186,7 @@ const InvestmentDetails = ({ farm }) => {
             </Button>
           ) : (
             <Button
-            color="blue"
+            color="purple"
             variant="outlined"
             disabled={pendingTx}
             onClick={claimStaking}
