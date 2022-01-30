@@ -68,7 +68,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
     return previousValue + currentValue?.tvl
   }, 0)
 
-  let tvl = farmsTvl - vaultsTvl
+  let tvl = farmsTvl
 
   function getSummaryLine(title, value) {
     return (

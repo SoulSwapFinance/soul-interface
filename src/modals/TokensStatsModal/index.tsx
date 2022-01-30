@@ -365,7 +365,7 @@ export default function SoulStatsModal(): JSX.Element | null {
           concat(formatNumberScale(
             Number(bondsTvl + soulTvl), true)
             , 
-            ` (${((podl / tvl * 100).toFixed(0))}%)`
+            ` (${((podl / farmsTvl * 100).toFixed(0))}%)`
         ))}
         {/* {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
