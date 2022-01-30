@@ -88,6 +88,20 @@ export const SOUL_SUMMONER_ADDRESS: AddressMap = {
   [ChainId.FANTOM_TESTNET]: '0x70C6A37244feD0Fa4e4148D5ffe38a209dCEd714', // 20 SEP
 }
 
+export const SOUL_DAO_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x1C63C726926197BD3CB75d86bCFB1DaeBcD87250',
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
+export const LUX_TREASURY_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xDF2A28Cc2878422354A93fEb05B41Bd57d71DB24',
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
 export const ATOMIC_SWAP_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',

@@ -14,13 +14,14 @@ import { LUX_ADDRESS, WLUM_ADDRESS } from 'constants/addresses'
 import { useSingleCallResult } from 'state/multicall/hooks'
 import { usePriceHelperContract } from 'features/bond/hooks/useContract'
 // import QuestionHelper from '../../components/QuestionHelper'
-import { useTVL } from 'hooks/useV2Pairs'
+import { useLuxTVL, useTVL, useVaultTVL } from 'hooks/useV2Pairs'
 // import { Wrapper } from 'features/swap/styleds'
 import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
 import QuestionHelper from 'components/QuestionHelper'
 import ModalHeader from 'components/Modal/Header'
+import { concat } from 'lodash'
 
 const cache: { [key: string]: number } = {};
 
@@ -51,11 +52,23 @@ export default function LuxorStatsModal(): JSX.Element | null {
   const wrappedLumensPrice = formatCurrency(Number(rawWrappedLumensPrice) / 1E18, 2)
   // console.log(wrappedLumensPrice)
 
-  const tvlInfo = useTVL()
+  const farmInfo = useTVL()
+  const vaultInfo = useVaultTVL()
+  const luxInfo = useLuxTVL()
 
-  let summTvl = tvlInfo?.reduce((previousValue, currentValue) => {
+  let luxTvl = luxInfo?.reduce((previousValue, currentValue) => {
     return previousValue + currentValue?.tvl
   }, 0)
+
+  let vaultsTvl = vaultInfo?.reduce((previousValue, currentValue) => {
+    return previousValue + currentValue?.tvl
+  }, 0)
+
+  let farmsTvl = farmInfo?.reduce((previousValue, currentValue) => {
+    return previousValue + currentValue?.tvl
+  }, 0)
+
+  let tvl = farmsTvl - vaultsTvl
 
   function getSummaryLine(title, value) {
     return (
@@ -72,8 +85,8 @@ export default function LuxorStatsModal(): JSX.Element | null {
   if (!chainId) return null
 
   return (
-    <HeadlessUiModal.Controlled isOpen={luxorStatsModalOpen} onDismiss={toggleLuxorStatsModal} 
-    maxWidth={'md'}
+    <HeadlessUiModal.Controlled isOpen={luxorStatsModalOpen} onDismiss={toggleLuxorStatsModal}
+      maxWidth={'md'}
     // maxWidth={672}
     >
       <div className="space-y-8">
@@ -83,82 +96,82 @@ export default function LuxorStatsModal(): JSX.Element | null {
           <div className="flex flex-col-2 w-full py-4">
             {/* <div className="block"> */}
             {/* <QuestionHelper text={`Add to MetaMask`}> */}
-              <div
-                className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
-                onClick={() => {
-                  const params: any = {
-                    type: 'ERC20',
-                    options: {
-                      address: LUX_ADDRESS[chainId],
-                      symbol: 'LUX',
-                      decimals: 9,
-                      image: 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b/logo.png',
-                    },
-                  }
-                  if (library && library.provider.isMetaMask && library.provider.request) {
-                    library.provider
-                      .request({
-                        method: 'wallet_watchAsset',
-                        params,
-                      })
-                      .then((success) => {
-                        if (success) {
-                          console.log('Successfully added LUX to MetaMask')
-                        } else {
-                          throw new Error('Something went wrong.')
-                        }
-                      })
-                      .catch(console.error)
-                  }
-                }}
-              >
-                <Image
-                  src="/images/tokens/LUX-transparent.png"
-                  alt="LUX"
-                  width="1200px"
-                  height="1200px"
-                  objectFit="contain"
-                  className="rounded-md"
-                />
-              </div>
-              <div
-                className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
-                onClick={() => {
-                  const params: any = {
-                    type: 'ERC20',
-                    options: {
-                      address: WLUM_ADDRESS[chainId],
-                      symbol: 'WLUM',
-                      decimals: 9,
-                      image: 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208/logo.png',
-                    },
-                  }
-                  if (library && library.provider.isMetaMask && library.provider.request) {
-                    library.provider
-                      .request({
-                        method: 'wallet_watchAsset',
-                        params,
-                      })
-                      .then((success) => {
-                        if (success) {
-                          console.log('Successfully added WLUM to MetaMask')
-                        } else {
-                          throw new Error('Something went wrong.')
-                        }
-                      })
-                      .catch(console.error)
-                  }
-                }}
-              >
-                <Image
-                  src="/images/tokens/wlumens-transparent.png"
-                  alt="WLUM"
-                  width="1200px"
-                  height="1200px"
-                  objectFit="contain"
-                  className="rounded-md"
-                />
-              </div>
+            <div
+              className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
+              onClick={() => {
+                const params: any = {
+                  type: 'ERC20',
+                  options: {
+                    address: LUX_ADDRESS[chainId],
+                    symbol: 'LUX',
+                    decimals: 9,
+                    image: 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b/logo.png',
+                  },
+                }
+                if (library && library.provider.isMetaMask && library.provider.request) {
+                  library.provider
+                    .request({
+                      method: 'wallet_watchAsset',
+                      params,
+                    })
+                    .then((success) => {
+                      if (success) {
+                        console.log('Successfully added LUX to MetaMask')
+                      } else {
+                        throw new Error('Something went wrong.')
+                      }
+                    })
+                    .catch(console.error)
+                }
+              }}
+            >
+              <Image
+                src="/images/tokens/LUX-transparent.png"
+                alt="LUX"
+                width="1200px"
+                height="1200px"
+                objectFit="contain"
+                className="rounded-md"
+              />
+            </div>
+            <div
+              className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
+              onClick={() => {
+                const params: any = {
+                  type: 'ERC20',
+                  options: {
+                    address: WLUM_ADDRESS[chainId],
+                    symbol: 'WLUM',
+                    decimals: 9,
+                    image: 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208/logo.png',
+                  },
+                }
+                if (library && library.provider.isMetaMask && library.provider.request) {
+                  library.provider
+                    .request({
+                      method: 'wallet_watchAsset',
+                      params,
+                    })
+                    .then((success) => {
+                      if (success) {
+                        console.log('Successfully added WLUM to MetaMask')
+                      } else {
+                        throw new Error('Something went wrong.')
+                      }
+                    })
+                    .catch(console.error)
+                }
+              }}
+            >
+              <Image
+                src="/images/tokens/wlumens-transparent.png"
+                alt="WLUM"
+                width="1200px"
+                height="1200px"
+                objectFit="contain"
+                className="rounded-md"
+              />
+            </div>
             {/* </QuestionHelper> */}
 
             {/* </div> */}
@@ -183,7 +196,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
       </div>
       <div className="space-y-0">
 
-      <div className="flex mt-1" />
+        <div className="flex mt-1" />
         <Typography className='flex justify-center text-2xl leading-[28px] bg-dark-700'>{`Tokenomics Overview`}</Typography>
       </div>
       <div className="flex flex-col mt-2 mb-2 flex-nowrap gap-1.5 -m-1">
@@ -208,8 +221,8 @@ export default function LuxorStatsModal(): JSX.Element | null {
                       DAO Treasury
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                    {/* TODO: make exact */}
-                      - {formatNumberScale(Number(tokenInfo?.totalSupply) * 0.19, false)} 
+                      {/* TODO: make exact */}
+                      - {formatNumberScale(Number(tokenInfo?.totalSupply) * 0.19, false)}
                     </Typography>
                   </div>
                   {/* TODO: make exact */}
@@ -244,14 +257,6 @@ export default function LuxorStatsModal(): JSX.Element | null {
             - (Number(tokenInfo?.totalSupply) * 0.19) // TODO: make exact
             , false)
         )}
-        {/* {getSummaryLine(
-          <Typography variant="sm" className="flex items-center py-0.5">
-            {`Maximum Supply`}
-          </Typography>,
-          formatNumberScale(
-            Number(250_000_000), false, 0)
-        )} */}
-
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Total Market Cap`}
@@ -259,6 +264,15 @@ export default function LuxorStatsModal(): JSX.Element | null {
           formatCurrency(
             Number(tokenInfo?.totalSupply) * Number(rawLuxorPrice) / 1E18, 0)
         )}
+        {getSummaryLine(
+          <Typography variant="sm" className="flex items-center py-0.5">
+            {`Protocol Owned Liquidity`}
+          </Typography>,
+          concat(formatNumberScale(
+            luxTvl, true)
+            ,
+            ` (${((luxTvl / tvl * 100).toFixed(0))}%)`)
+          )}
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Luxor Market Price`}

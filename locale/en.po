@@ -470,6 +470,9 @@ msgstr "Earn fees and rewards by depositing and staking your liquidity tokens (L
 msgid "Either return to the {link}, or change to an available network."
 msgstr "Either return to the {link}, or change to an available network."
 
+msgid "Email Us."
+msgstr "Email Us."
+
 msgid "Enable Expert Mode"
 msgstr "Enable Expert Mode"
 
@@ -957,12 +960,6 @@ msgstr "Open Main Menu"
 msgid "Open orders"
 msgstr "Open orders"
 
-msgid "OpenMEV Gas Refunder"
-msgstr "OpenMEV Gas Refunder"
-
-msgid "OpenMEV refunds up to 95% of transaction costs in 35 blocks."
-msgstr "OpenMEV refunds up to 95% of transaction costs in 35 blocks."
-
 msgid "Oracle"
 msgstr "Oracle"
 
@@ -1230,9 +1227,6 @@ msgstr "Select Rate"
 msgid "Select Token"
 msgstr "Select Token"
 
-msgid "Select a Token"
-msgstr "Select a Token"
-
 msgid "Select a token to find your liquidity"
 msgstr "Select a token to find your liquidity"
 
@@ -1280,6 +1274,9 @@ msgstr "SoulSwap Vault is a set of high incentivized pools. Long term supporters
 
 msgid "SoulSwap utilizes a token vault called CoffinBox that has balances separate from your wallet."
 msgstr "SoulSwap utilizes a token vault called CoffinBox that has balances separate from your wallet."
+
+msgid "SoulSwapFinance@gmail.com"
+msgstr "SoulSwapFinance@gmail.com"
 
 msgid "Spanish"
 msgstr "Spanish"
@@ -1558,9 +1555,6 @@ msgstr "View Liquidity Positions"
 
 msgid "View on Explorer"
 msgstr "View on Explorer"
-
-msgid "View on explorer"
-msgstr "View on explorer"
 
 msgid "View our Data."
 msgstr "View our Data."

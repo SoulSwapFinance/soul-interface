@@ -86,26 +86,6 @@ const ManageBar = ({ farm }) => {
 
   const soulPrice = usePrice(SOUL_ADDRESS[250])
 
-  const balanceFiatValueRaw
-  = pair?.token1 ? Number(pairPrice) * Number(balance?.toSignificant())
-  : Number(soulPrice) * Number(balance?.toSignificant())
-
-  const balanceFiatValue
-    = CurrencyAmount.fromRawAmount(
-      USD[250],
-      JSBI.BigInt(balanceFiatValueRaw.toFixed(USD[250].decimals).toBigNumber(USD[250].decimals))
-    )
-
-  const stakedAmountFiatValueRaw
-  = pair?.token1 ? Number(pairPrice) * Number(stakedAmount?.toSignificant())
-  : Number(soulPrice) * Number(stakedAmount?.toSignificant())
-
-  const stakedFiatValue
-  = CurrencyAmount.fromRawAmount(
-    USD[250],
-    JSBI.BigInt(stakedAmountFiatValueRaw.toFixed(USD[250].decimals).toBigNumber(USD[250].decimals))
-  )
-
   return (
     <>
       <HeadlessUiModal.BorderedContent className="flex flex-col gap-4 bg-dark-1000/40">
