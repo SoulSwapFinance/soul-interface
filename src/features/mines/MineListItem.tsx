@@ -160,7 +160,6 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
       </div>
       <div className={TABLE_TBODY_TD_CLASSNAME(1, 4)}>
         <Typography weight={700} className="text-high-emphesis">
-          {/* @ts-ignore TYPE NEEDS FIXING */}
           {formatNumber(
             // PRICE PER TOKEN * TOKEN BALANCE
             tvl,

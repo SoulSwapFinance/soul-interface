@@ -42,7 +42,6 @@ function FarmListname({ pair }: FarmListNameProps): JSX.Element {
 
   return (
     <div className="flex items-center">
-      {/*@ts-ignore TYPE NEEDS FIXING*/}
       <DoubleCurrencyLogo currency0={token0} currency1={token1} size={28} />
       <div className="ml-3 font-bold text-high-emphesis">
         {pair.token0.symbol}-{pair.token1.symbol}

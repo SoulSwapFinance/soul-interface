@@ -10,7 +10,6 @@ import { HeadlessUiModal } from 'components/Modal'
 import Switch from 'components/Switch'
 import Typography from 'components/Typography'
 import Web3Connect from 'components/Web3Connect'
-// import { OLD_FARMS } from 'config/farms'
 import { useMineListItemDetailsModal } from 'features/mines/MineListItemDetails'
 import { setMinesModalOpen } from 'features/mines/minesSlice'
 import { classNames, tryParseAmount } from 'functions'
@@ -26,11 +25,9 @@ import { useUserInfo } from '../hooks'
 import useMasterChef from '../hooks/useMasterChef'
 import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 import { useCurrency } from 'hooks/Tokens'
-import CurrencyInputPanel from 'components/CurrencyInputPanel'
 import { SOUL_ADDRESS } from 'constants/addresses'
 import { usePrice } from 'hooks/usePrice'
 
-// @ts-ignore TYPE NEEDS FIXING
 const ManageBar = ({ farm }) => {
   const dispatch = useAppDispatch()
   const { account } = useActiveWeb3React()
@@ -86,13 +83,6 @@ const ManageBar = ({ farm }) => {
     ? 'Insufficient Balance'
     : undefined
   const isWithdrawValid = !withdrawError
-  
-  // const txnError = !parsedValue
-  //   ? 'Enter Amount'
-  //   : stakedAmount?.lessThan(parsedValue)
-  //   ? 'Insufficient Balance'
-  //   : undefined
-  // const isWithdrawValid = !withdrawError
 
   const soulPrice = usePrice(SOUL_ADDRESS[250])
 
@@ -100,14 +90,20 @@ const ManageBar = ({ farm }) => {
   = pair?.token1 ? Number(pairPrice) * Number(balance?.toSignificant())
   : Number(soulPrice) * Number(balance?.toSignificant())
 
-const stakedAmountFiatValueRaw
+  const balanceFiatValue
+    = CurrencyAmount.fromRawAmount(
+      USD[250],
+      JSBI.BigInt(balanceFiatValueRaw.toFixed(USD[250].decimals).toBigNumber(USD[250].decimals))
+    )
+
+  const stakedAmountFiatValueRaw
   = pair?.token1 ? Number(pairPrice) * Number(stakedAmount?.toSignificant())
   : Number(soulPrice) * Number(stakedAmount?.toSignificant())
 
-const balanceFiatValue
+  const stakedFiatValue
   = CurrencyAmount.fromRawAmount(
     USD[250],
-    JSBI.BigInt(balanceFiatValueRaw.toFixed(USD[250].decimals).toBigNumber(USD[250].decimals))
+    JSBI.BigInt(stakedAmountFiatValueRaw.toFixed(USD[250].decimals).toBigNumber(USD[250].decimals))
   )
 
   return (
@@ -158,13 +154,15 @@ const balanceFiatValue
           ))}
         </div>
         <AssetInput
-          currencyLogo={false}
-          currency={liquidityToken}
-          value={toggle ? depositValue : withdrawValue}
-          onChange={toggle ? setDepositValue : setWithdrawValue}
-          // onChange={setDepositValue}
-          balance={toggle ? balance : stakedAmount}
-          showMax={true}
+          currencyLogo={ false }
+          currency={ liquidityToken }
+          token0={ pair?.token0.address }
+          token1={ pair?.token1.address }
+          value={ toggle ? depositValue : withdrawValue }
+          // fiatValue={balanceFiatValue}
+          onChange={ toggle ? setDepositValue : setWithdrawValue }
+          balance={ toggle ? balance : stakedAmount }
+          showMax={ true }
         />
           {/* <CurrencyInputPanel
             value={depositValue}

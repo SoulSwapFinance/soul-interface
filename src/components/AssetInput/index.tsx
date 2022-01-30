@@ -19,11 +19,19 @@ import { useUSDCValue } from 'hooks/useUSDCPrice'
 import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
 import { useActiveWeb3React } from 'services/web3'
 import Lottie from 'lottie-react'
+
 import React, { createContext, FC, ReactNode, useContext, useEffect, useMemo, useRef, useState } from 'react'
+import { usePrice } from 'hooks/usePrice'
+import { FiatValue } from './FiatValue'
+import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
+import { useCurrency } from 'hooks/Tokens'
+import { formatCurrency } from 'modals/TokensStatsModal'
 
 interface AssetInputProps {
   value?: string
   currency?: Currency
+  token0?: string,
+  token1?: string,
   onChange: (x: string | undefined) => void
   spendFromWallet?: boolean
   title?: string
@@ -98,7 +106,6 @@ const AssetInput: AssetInput<AssetInputProps> = ({
               <CurrencySearchModal.Controlled
                 open={open}
                 selectedCurrency={props.currency}
-                // @ts-ignore TYPE NEEDS FIXING
                 onCurrencySelect={props.onSelect}
                 onDismiss={() => setOpen(false)}
                 currencyList={props.currencies}
@@ -158,6 +165,8 @@ interface AssetInputPanelProps extends AssetInputProps {
 const AssetInputPanel = ({
   value,
   currency,
+  token0,
+  token1,
   onChange,
   onSelect,
   onMax,
@@ -172,7 +181,19 @@ const AssetInputPanel = ({
   const error = useAssetInputContextError()
   const isDesktop = useDesktopMediaQuery()
   const { i18n } = useLingui()
+
+  let tokenA = useCurrency(token0)
+  let tokenB = useCurrency(token1)
+
+  console.log('token0: ', token0)
+
+  let [data] = useV2PairsWithPrice([[tokenA, tokenB]])
+  let [state, pair, pairPrice] = data
+
+  // const pairValue = useUSDCValue(tryParseAmount(Number(value) === 0 ? '1' : value, currency))
   const usdcValue = useUSDCValue(tryParseAmount(Number(value) === 0 ? '1' : value, currency))
+
+  // const usdValue = usePrice(currency.toString())
   const span = useRef<HTMLSpanElement | null>(null)
   const [width, setWidth] = useState(0)
 
@@ -200,12 +221,11 @@ const AssetInputPanel = ({
                   className="!rounded-full"
                   endIcon={<ChevronDownIcon width={24} height={24} />}
                 >
-                  {i18n._(t`Select a Token`)}
+                  {i18n._(t`Select Token`)}
                 </Button>
               </div>
             }
             selectedCurrency={currency}
-            // @ts-ignore TYPE NEEDS FIXING
             onCurrencySelect={onSelect}
             currencyList={currencies}
           />
@@ -250,7 +270,8 @@ const AssetInputPanel = ({
             variant="xs"
             className={error ? 'text-red' : usdcValue && value ? 'text-green' : 'text-low-emphesis'}
           >
-            ≈${usdcValue ? usdcValue.toSignificant(6) : '0.00'}
+            {/* ≈${fiatValue ? fiatValue : '0.00'} */}
+            ≈{usdcValue ? formatCurrency(Number(usdcValue), 2) : formatCurrency(pairPrice * Number(value), 2)}
           </Typography>
         </div>
         {error ? (

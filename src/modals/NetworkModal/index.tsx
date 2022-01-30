@@ -290,7 +290,6 @@ const NetworkModal: FC = () => {
                   'bg-[rgba(0,0,0,0.2)] focus:outline-none flex items-center gap-4 w-full px-4 py-3 rounded border border-dark-700 hover:border-blue'
                 )}
               >
-                {/*@ts-ignore TYPE NEEDS FIXING*/}
                 <Image src={NETWORK_ICON[key]} alt="Switch Network" className="rounded-md" width="32px" height="32px" />
                 <Typography weight={700} className="text-high-emphesis">
                   {NETWORK_LABEL[key]}
