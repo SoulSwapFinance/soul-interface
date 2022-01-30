@@ -324,7 +324,7 @@ export default function SoulStatsModal(): JSX.Element | null {
         {getSummaryLine(
           <div className="flex items-center">
             <Typography variant="sm" className="flex items-center py-0.5">
-              {`Protocol Owned Liquidity`}
+              {`Protocol Liquidity`}
             </Typography>
             <QuestionHelper
               text={
