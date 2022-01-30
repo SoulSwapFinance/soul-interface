@@ -30,7 +30,6 @@ const MineListItemDetails = ({ farm, onDismiss }) => {
   const { view } = useAppSelector(selectMines)
   const dispatch = useAppDispatch()
   const [content, setContent] = useState<ReactNode>()
-  // view = view || MineModalView.Staking as MineModalView // view type looks wrong
 
   return (
     <Context.Provider value={useMemo(() => ({ content, setContent }), [content, setContent])}>

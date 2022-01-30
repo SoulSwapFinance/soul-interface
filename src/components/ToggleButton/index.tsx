@@ -7,7 +7,6 @@ import { classNames } from '../../functions'
 const FILLED = {
   group: 'border border-dark-800 rounded p-0.5 bg-dark-900',
   option: {
-    // @ts-ignore TYPE NEEDS FIXING
     checked: (checked) => (checked ? 'border-transparent border-gradient-r-blue-purple-dark-900' : 'border-transparent'),
     default: 'py-1 rounded-lg border',
   },
@@ -16,7 +15,6 @@ const FILLED = {
 const OUTLINED = {
   group: 'gap-2',
   option: {
-    // @ts-ignore TYPE NEEDS FIXING
     checked: (checked) => (checked ? 'border-dark-700 bg-gradient-to-r from-blue to-purple' : 'border-dark-700'),
     default: 'py-3 rounded border',
   },
@@ -40,7 +38,6 @@ const ToggleButtonGroup: ToggleButtonGroup<Props> = ({
   ...props
 }) => {
   return (
-    // @ts-ignore TYPE NEEDS FIXING
     <HeadlessRadioGroup {...props} className={classNames(className, `flex bg-dark-1000/40`, VARIANTS[variant].group)}>
       {Children.map(children, (child) => {
         if (isValidElement(child)) {

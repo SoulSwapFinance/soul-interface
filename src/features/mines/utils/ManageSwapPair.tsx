@@ -12,7 +12,6 @@ import PoolAddLiquidity from './PoolAddLiquidity'
 import PoolRemoveLiquidity from './PoolRemoveLiquidity'
 import { useUserSlippageToleranceWithDefault } from 'state/user/hooks'
 
-// @ts-ignore TYPE NEEDS FIXING
 const ManageSwapPair = ({ farm }) => {
   const { i18n } = useLingui()
   const [toggle, setToggle] = useState(true)

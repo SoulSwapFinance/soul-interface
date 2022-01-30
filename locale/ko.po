@@ -465,6 +465,9 @@ msgstr ""
 msgid "Either return to the {link}, or change to an available network."
 msgstr ""
 
+msgid "Email Us."
+msgstr ""
+
 msgid "Enable Expert Mode"
 msgstr ""
 
@@ -944,12 +947,6 @@ msgstr ""
 msgid "Open orders"
 msgstr ""
 
-msgid "OpenMEV Gas Refunder"
-msgstr ""
-
-msgid "OpenMEV refunds up to 95% of transaction costs in 35 blocks."
-msgstr ""
-
 msgid "Oracle"
 msgstr ""
 
@@ -1211,9 +1208,6 @@ msgstr ""
 msgid "Select Token"
 msgstr ""
 
-msgid "Select a Token"
-msgstr ""
-
 msgid "Select a token to find your liquidity"
 msgstr ""
 
@@ -1260,6 +1254,9 @@ msgid "SoulSwap Vault is a set of high incentivized pools. Long term supporters 
 msgstr ""
 
 msgid "SoulSwap utilizes a token vault called CoffinBox that has balances separate from your wallet."
+msgstr ""
+
+msgid "SoulSwapFinance@gmail.com"
 msgstr ""
 
 msgid "Spanish"
@@ -1534,9 +1531,6 @@ msgid "View Liquidity Positions"
 msgstr ""
 
 msgid "View on Explorer"
-msgstr ""
-
-msgid "View on explorer"
 msgstr ""
 
 msgid "View our Data."

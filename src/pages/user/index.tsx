@@ -50,7 +50,6 @@ export default function Me() {
 
   const { data, error }: SWRResponse<any, Error> = useSWR(
     `https://api.covalenthq.com/v1/${chainId}/address/${account}/balances_v2/?&key=ckey_224c8a82c8df48d8909fc4a2a05`,
-    // @ts-ignore TYPE NEEDS FIXING
     (url) =>
       fetch(url)
         .then((r) => r.json())
@@ -108,18 +107,16 @@ export default function Me() {
               {/* <div className="ml-1">View on Explorer</div> */}
               {chainId && account && (
                 <a href={getExplorerLink(chainId, account, 'address')}>
-                  <span style={{ marginLeft: '4px' }}>{i18n._(t`View on explorer`)}</span>
+                  <span style={{ marginLeft: '4px' }}>{i18n._(t`View on Explorer`)}</span>
                 </a>
               )}
             </div>
           </div>
         </div>
       </div>
-
       {/* <Typography component="h2" variant="h3" className="p-4 text-primary">
           {i18n._(t`Balance`)}
         </Typography> */}
-
       <div className="w-full max-w-2xl p-4 rounded bg-dark-900">
         <div className="flex flex-col items-center justify-between mb-3 sm:flex-row">
           <Typography component="h2" variant="lg" className="font-medium text-high-emphesis">
@@ -129,11 +126,8 @@ export default function Me() {
             <span className="text-sm">{i18n._(t`Clear History`)}</span>
           </Button>
         </div>
-
         {/* TODO: KEEP THIS STYLE BUT FEED WITH AGNOSTIC TX DATA */}
         <TransactionList transactions={data.items} />
-
-        {/* <TransactionList transactions={data.items} /> */}
       </div>
     </Container>
   )
