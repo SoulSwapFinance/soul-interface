@@ -27,6 +27,7 @@ import { PairType } from './enum'
 import { SOUL, SOUL_ADDRESS } from '../../constants'
 
 import styled from 'styled-components'
+import usePendingReward from './hooks/usePendingReward'
 
 const HideOnMobile = styled.div`
 @media screen and (max-width: 500px) {
@@ -49,8 +50,15 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   const soulPrice = usePrice(SOUL_ADDRESS[250]) // to avoid RPC call
 
   const pendingSoul = usePendingSoul(farm)
+  const pendingReward = usePendingReward(farm)
+
   let [data] = useV2PairsWithPrice([[token0, token1]])
   let [state, pair, pairPrice] = data
+
+  const rewardValue =
+  (farm?.rewards?.[0]?.rewardPrice ?? 0) * Number(pendingSoul?.toExact() ?? 0) +
+  (farm?.rewards?.[1]?.rewardPrice ?? 0) * Number(pendingReward ?? 0)
+
 
   // function usePositions() {
   //   return useSoulPositions(useSoulSummonerContract())
@@ -131,8 +139,8 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
           {farm?.rewards?.map((reward, i) => (
             <Typography variant="xs" className="text-low-emphesis">
               Claimable: {' '}
-              {formatNumber(pendingSoul?.toSignificant(4) ?? 0)}
-
+              {formatNumber(rewardValue, true)}
+              {/* {formatNumber(pendingSoul?.toSignificant(4) ?? 0)} */}
             </Typography>
           ))}
 
