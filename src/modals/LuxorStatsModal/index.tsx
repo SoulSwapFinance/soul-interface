@@ -266,7 +266,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
         )}
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
-            {`Protocol Owned Liquidity`}
+            {`Protocol Liquidity`}
           </Typography>,
           concat(formatNumberScale(
             luxTvl, true)
