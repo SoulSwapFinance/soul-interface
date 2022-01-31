@@ -3,8 +3,9 @@ import { useMemo } from "react"
 import { NEVER_RELOAD, useSingleCallResult } from "state/multicall/hooks"
 import { Contract } from '@ethersproject/contracts'
 import { useActiveWeb3React } from "services/web3"
+import { Currency } from "sdk"
 
-export function usePrice(tokenAddress: String | undefined | null) {
+export function usePrice(tokenAddress: string | Currency | undefined | null) {
     const priceHelperContract = usePriceHelperContract()
     const rawPrice = useSingleCallResult(
         priceHelperContract,

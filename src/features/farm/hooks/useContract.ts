@@ -26,7 +26,6 @@ import SOUL_SUMMONER_ABI from '../constants/abis/soulsummoner.json'
 import SOUL_CIRCLE_ABI from '../constants/abis/soulcircle.json' 
 import SUMMONER_HELPER_ABI from '../constants/abis/helper.json' 
 import SOULVAULT_ABI from '../constants/abis/soulvault.json'
-import SPELL_ABI from '../constants/abis/spell.json'
 import ENCHANT_ABI from '../constants/abis/enchant.json'
 import SOUL_ABI from '../constants/abis/soulpower.json' 
 

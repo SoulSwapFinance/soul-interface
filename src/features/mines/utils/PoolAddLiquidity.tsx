@@ -39,9 +39,7 @@ const PoolDeposit = ({ currencyA, currencyB, header }) => {
   const routerContract = useRouterContract()
   const addTransaction = useTransactionAdder()
 
-  // @ts-ignore TYPE NEEDS FIXING
   chainId && useETH && currencyA && currencyEquals(currencyA, WNATIVE[chainId]) && (currencyA = NATIVE[chainId])
-  // @ts-ignore TYPE NEEDS FIXING
   chainId && useETH && currencyB && currencyEquals(currencyB, WNATIVE[chainId]) && (currencyB = NATIVE[chainId])
 
   const oneCurrencyIsETH = currencyA?.isNative || currencyB?.isNative
