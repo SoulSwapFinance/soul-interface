@@ -431,9 +431,6 @@ msgstr "Deposit your SOUL-LP to earn $SOUL rewards."
 msgid "Deposited"
 msgstr "Deposited"
 
-msgid "Deposited Value"
-msgstr "Deposited Value"
-
 msgid "Depositing"
 msgstr "Depositing"
 
@@ -1053,6 +1050,9 @@ msgstr "Pool Tokens"
 
 msgid "Pooled Tokens"
 msgstr "Pooled Tokens"
+
+msgid "Pooled Value"
+msgstr "Pooled Value"
 
 msgid "Pooled {0}"
 msgstr "Pooled {0}"

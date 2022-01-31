@@ -227,6 +227,70 @@ export const USDC_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
   [ChainId.FANTOM_TESTNET]: '',
 }
+
+export const FUSD_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xAd84341756Bf337f5a0164515b1f6F993D194E1f', // FUSD
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
+export const WETH_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // USDC
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
+export const WBTC_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x321162Cd933E2Be498Cd2267a90534A804051b11', // WBTC
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
+export const BNB_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454', // BNB
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
+export const ANY_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xdDcb3fFD12750B45d32E084887fdf1aABAb34239', // ANY
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
+export const CRV_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x1E4F97b9f9F913c46F1632781732927B9019C68b', // CRV
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
+export const UNIDX_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x2130d2a1e51112D349cCF78D2a1EE65843ba36e0', // UNIDX
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
+export const GRIM_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x7eC94C4327dC757601B4273cD67014d7760Be97E', // GRIM
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
+export const REAPER_ADDRESS: AddressMap = {
+  [ChainId.MAINNET]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb', // REAPER
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
 export const STOP_LIMIT_ORDER_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',

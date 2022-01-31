@@ -1,4 +1,4 @@
-import { ADDITIONAL_BASES, BASES_TO_CHECK_TRADES_AGAINST, CUSTOM_BASES } from '../constants/routing'
+import { BASES_TO_CHECK_TRADES_AGAINST, CUSTOM_BASES } from '../constants/routing'
 import { Currency, Token } from '../sdk'
 
 import flatMap from 'lodash/flatMap'
@@ -14,10 +14,14 @@ export function useAllCurrencyCombinations(currencyA?: Currency, currencyB?: Cur
     if (!chainId) return []
 
     const common = BASES_TO_CHECK_TRADES_AGAINST[chainId] ?? []
-    const additionalA = tokenA ? ADDITIONAL_BASES[chainId]?.[tokenA.address] ?? [] : []
-    const additionalB = tokenB ? ADDITIONAL_BASES[chainId]?.[tokenB.address] ?? [] : []
+    // const additionalA = tokenA ? ADDITIONAL_BASES[chainId]?.[tokenA.address] ?? [] : []
+    // const additionalB = tokenB ? ADDITIONAL_BASES[chainId]?.[tokenB.address] ?? [] : []
 
-    return [...common, ...additionalA, ...additionalB]
+    return [
+      ...common, 
+      // ...additionalA, 
+      // ...additionalB
+    ]
   }, [chainId, tokenA, tokenB])
 
   const basePairs: [Token, Token][] = useMemo(

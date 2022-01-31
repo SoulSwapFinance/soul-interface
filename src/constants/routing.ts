@@ -88,7 +88,7 @@ const WRAPPED_NATIVE_ONLY: ChainTokenList = {
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WRAPPED_NATIVE_ONLY,
-  [ChainId.MAINNET]: [...WRAPPED_NATIVE_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC, RUNE, NFTX, STETH],
+  // [ChainId.MAINNET]: [...WRAPPED_NATIVE_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC, RUNE, NFTX, STETH],
   // [ChainId.MATIC]: [...WRAPPED_NATIVE_ONLY[ChainId.MATIC], MATIC.USDC, MATIC.WBTC, MATIC.DAI, MATIC.WETH, MATIC.USDT],
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], 
@@ -104,38 +104,36 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
 
 }
 
-export const ADDITIONAL_BASES: {
-  [chainId: number]: { [tokenAddress: string]: Token[] }
-} = {
-  [ChainId.MAINNET]: {
-    ...MIRROR_ADDITIONAL_BASES,
-    '0xF16E4d813f4DcfDe4c5b44f305c908742De84eF0': [ETH2X_FLI],
-    '0xb5083b964a0B6A447564657285AeE1E76524B3Db': [ENCHANT[ChainId.MAINNET]], // XSUSHI 25 Call [30 June 2021] // JUL 27th
-    '0xB46F57e7Ce3a284d74b70447Ef9352B5E5Df8963': [UMA], // UMA 25 Call [30 June 2021]
-    [FEI.address]: [TRIBE],
-    [TRIBE.address]: [FEI],
-    [FRAX.address]: [FXS],
-    [FXS.address]: [FRAX],
-    [WBTC.address]: [RENBTC],
-    [RENBTC.address]: [WBTC],
-    [PONT.address]: [PWING],
-    [PWING.address]: [PONT],
-    [PLAY.address]: [DOUGH],
-    [DOUGH.address]: [PLAY],
-    [IBETH.address]: [ALPHA],
-    [ALPHA.address]: [IBETH],
-    [HBTC.address]: [CREAM],
-    [CREAM.address]: [HBTC],
-    [DUCK.address]: [USDP],
-    [USDP.address]: [DUCK],
-    [BAB.address]: [BAC],
-    [BAC.address]: [BAB],
-    [LIFT.address]: [LFBTC],
-    [LFBTC.address]: [LIFT],
-    [CVXCRV.address]: [CRV],
-    [CRV.address]: [CVXCRV],
-  },
-}
+// export const ADDITIONAL_BASES: {
+//   [chainId: number]: { [tokenAddress: string]: Token[] }
+// } = {
+//   [ChainId.MAINNET]: {
+//     ...MIRROR_ADDITIONAL_BASES,
+//     '0xF16E4d813f4DcfDe4c5b44f305c908742De84eF0': [ETH2X_FLI],
+//     '0xb5083b964a0B6A447564657285AeE1E76524B3Db': [ENCHANT[ChainId.MAINNET]], // XSUSHI 25 Call [30 June 2021] // JUL 27th
+//     '0xB46F57e7Ce3a284d74b70447Ef9352B5E5Df8963': [UMA], // UMA 25 Call [30 June 2021]
+//     [FEI.address]: [TRIBE],
+//     [TRIBE.address]: [FEI],
+//     [FRAX.address]: [FXS],
+//     [FXS.address]: [FRAX],
+//     [RENBTC.address]: [WBTC],
+//     [PONT.address]: [PWING],
+//     [PWING.address]: [PONT],
+//     [PLAY.address]: [DOUGH],
+//     [DOUGH.address]: [PLAY],
+//     [IBETH.address]: [ALPHA],
+//     [ALPHA.address]: [IBETH],
+//     [HBTC.address]: [CREAM],
+//     [CREAM.address]: [HBTC],
+//     [DUCK.address]: [USDP],
+//     [USDP.address]: [DUCK],
+//     [BAB.address]: [BAC],
+//     [BAC.address]: [BAB],
+//     [LIFT.address]: [LFBTC],
+//     [LFBTC.address]: [LIFT],
+//     [CVXCRV.address]: [CRV],
+//   },
+// }
 
 /**
  * Some tokens can only be swapped via certain pairs, so we override the list of bases that are considered for these
@@ -172,7 +170,7 @@ export const CUSTOM_BASES: {
  * Shows up in the currency select for swap and add liquidity
  */
 export const COMMON_BASES: ChainTokenList = {
-  [ChainId.MAINNET]: [...WRAPPED_NATIVE_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC],
+  // [ChainId.MAINNET]: [...WRAPPED_NATIVE_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC],
 
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], 
@@ -199,7 +197,7 @@ export const COMMON_BASES: ChainTokenList = {
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WRAPPED_NATIVE_ONLY,
-  [ChainId.MAINNET]: [...WRAPPED_NATIVE_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC],
+  // [ChainId.MAINNET]: [...WRAPPED_NATIVE_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC],
   [ChainId.FANTOM]: [...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], FANTOM.SOUL, FANTOM.DAI, FANTOM.USDC, FANTOM.FUSDT, FANTOM.WBTC, FANTOM.WETH],
   [ChainId.BSC]: [...WRAPPED_NATIVE_ONLY[ChainId.BSC], BSC.DAI, BSC.USD, BSC.USDC, BSC.USDT, BSC.BTCB, BSC.WETH],
 
@@ -214,7 +212,7 @@ export const PINNED_PAIRS: {
       new Token(ChainId.MAINNET, '0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643', 8, 'cDAI', 'Compound Dai'),
       new Token(ChainId.MAINNET, '0x39AA39c021dfbaE8faC545936693aC917d5E7563', 8, 'cUSDC', 'Compound USD Coin'),
     ],
-    [USDC, USDT],
-    [DAI, USDT],
+    // [USDC, USDT],
+    // [DAI, USDT],
   ],
 }
