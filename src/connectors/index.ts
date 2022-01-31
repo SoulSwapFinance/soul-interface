@@ -20,7 +20,7 @@ enum ChainId { // TODO
 export const RPC = {
   [ChainId.MAINNET]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
   [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
-  [ChainId.FANTOM]: 'https://ftmrpc.ultimatenodes.io/',
+  [ChainId.FANTOM]: 'https://rpcapi.fantom.network',
   // [ChainId.FANTOM]: 'https://rpcapi.fantom.network/',
   // [ChainId.FANTOM_TESTNET]: 'https://rpc.testnet.fantom.network',
   // [ChainId.ROPSTEN]: 'https://eth-ropsten.alchemyapi.io/v2/cidKix2Xr-snU3f6f6Zjq_rYdalKKHmW',

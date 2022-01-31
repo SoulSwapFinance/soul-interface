@@ -87,7 +87,7 @@ import {
   // used to construct intermediary pairs for trading
   export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     ...WRAPPED_NATIVE_ONLY,
-    [ChainId.MAINNET]: [...WRAPPED_NATIVE_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC, RUNE, NFTX, STETH],
+    // [ChainId.MAINNET]: [...WRAPPED_NATIVE_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC, RUNE, NFTX, STETH],
     // [ChainId.MATIC]: [...WRAPPED_NATIVE_ONLY[ChainId.MATIC], MATIC.USDC, MATIC.WBTC, MATIC.DAI, MATIC.WETH, MATIC.USDT],
     [ChainId.FANTOM]: [
       ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], 
@@ -115,8 +115,6 @@ import {
       [TRIBE.address]: [FEI],
       [FRAX.address]: [FXS],
       [FXS.address]: [FRAX],
-      [WBTC.address]: [RENBTC],
-      [RENBTC.address]: [WBTC],
       [PONT.address]: [PWING],
       [PWING.address]: [PONT],
       [PLAY.address]: [DOUGH],
@@ -131,8 +129,6 @@ import {
       [BAC.address]: [BAB],
       [LIFT.address]: [LFBTC],
       [LFBTC.address]: [LIFT],
-      [CVXCRV.address]: [CRV],
-      [CRV.address]: [CVXCRV],
     },
   }
   
@@ -171,7 +167,7 @@ import {
    * Shows up in the currency select for swap and add liquidity
    */
   export const COMMON_BASES: ChainTokenList = {
-    [ChainId.MAINNET]: [...WRAPPED_NATIVE_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC],
+    // [ChainId.MAINNET]: [...WRAPPED_NATIVE_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC],
   
     [ChainId.FANTOM]: [
       ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], 
@@ -194,7 +190,7 @@ import {
   // used to construct the list of all pairs we consider by default in the frontend
   export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
     ...WRAPPED_NATIVE_ONLY,
-    [ChainId.MAINNET]: [...WRAPPED_NATIVE_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC],
+    // [ChainId.MAINNET]: [...WRAPPED_NATIVE_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC],
     [ChainId.FANTOM]: [...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], FANTOM.SOUL, FANTOM.DAI, FANTOM.USDC, FANTOM.WBTC, FANTOM.WETH],
     [ChainId.BSC]: [...WRAPPED_NATIVE_ONLY[ChainId.BSC], BSC.DAI, BSC.USD, BSC.USDC, BSC.USDT, BSC.BTCB, BSC.WETH],
   
@@ -209,8 +205,8 @@ import {
         new Token(ChainId.MAINNET, '0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643', 8, 'cDAI', 'Compound Dai'),
         new Token(ChainId.MAINNET, '0x39AA39c021dfbaE8faC545936693aC917d5E7563', 8, 'cUSDC', 'Compound USD Coin'),
       ],
-      [USDC, USDT],
-      [DAI, USDT],
+      // [USDC, USDT],
+      // [DAI, USDT],
     ],
   }
   

@@ -426,9 +426,6 @@ msgstr ""
 msgid "Deposited"
 msgstr ""
 
-msgid "Deposited Value"
-msgstr ""
-
 msgid "Depositing"
 msgstr ""
 
@@ -1037,6 +1034,9 @@ msgid "Pool Tokens"
 msgstr ""
 
 msgid "Pooled Tokens"
+msgstr ""
+
+msgid "Pooled Value"
 msgstr ""
 
 msgid "Pooled {0}"

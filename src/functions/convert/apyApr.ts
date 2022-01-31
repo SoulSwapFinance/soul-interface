@@ -27,9 +27,10 @@
   *
   * @NOTE: We round up due to an observed increase in block prop. from Muir Glacier <> Berlin vs. Berlin <> London
   *   Muir-Glacier <> Berlin sees ~13.15
+  *   Fantom Opera sees ~13.15
   */
  
- const BLOCKS_IN_A_YEAR = SECONDS_PER_YEAR / 13.25
+ const BLOCKS_IN_A_YEAR = SECONDS_PER_YEAR
  
  /**
   * Formula source: http://www.linked8.com/blog/158-apy-to-apr-and-apr-to-apy-calculation-methodologies
