@@ -23,7 +23,7 @@ import { useExpertModeManager, useUserSlippageToleranceWithDefault } from 'state
 import React, { useState } from 'react'
 import ReactGA from 'react-ga'
 
-const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(125, 10_000)
+const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(100, 10_000)
 
 // @ts-ignore TYPE NEEDS FIXING
 const PoolDeposit = ({ currencyA, currencyB, header }) => {
@@ -180,7 +180,6 @@ const PoolDeposit = ({ currencyA, currencyB, header }) => {
           id="add-liquidity-input-tokena"
           value={formattedAmounts[Field.CURRENCY_A]}
           currency={currencyA}
-          // @ts-ignore TYPE NEEDS FIXING
           onChange={onFieldAInput}
         />
         <div className="z-10 flex justify-center -mt-6 -mb-6">
@@ -193,7 +192,6 @@ const PoolDeposit = ({ currencyA, currencyB, header }) => {
           id="add-liquidity-input-tokena"
           value={formattedAmounts[Field.CURRENCY_B]}
           currency={currencyB}
-          // @ts-ignore TYPE NEEDS FIXING
           onChange={onFieldBInput}
           className="!mt-0"
         />

@@ -293,6 +293,8 @@ const PoolWithdraw = ({ currencyA, currencyB, header }) => {
           currencyLogo={false}
           currency={pair?.liquidityToken}
           value={typedValue}
+          token0={pair?.token0.address}
+          token1={pair?.token1.address}
           // @ts-ignore TYPE NEEDS FIXING
           onChange={onLiquidityInput}
         />
