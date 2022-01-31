@@ -1,7 +1,7 @@
 import { QuestionMarkCircleIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { BentoboxIcon, WalletIcon } from 'components/Icon'
+import { CoffinboxIcon, WalletIcon } from 'components/Icon'
 import Image from 'components/Image'
 import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
 import Switch from 'components/Switch'
@@ -9,7 +9,7 @@ import Typography from 'components/Typography'
 import { classNames } from 'functions'
 import React, { FC, useState } from 'react'
 
-const BentoBoxFundingSourceModal: FC = () => {
+const CoffinBoxFundingSourceModal: FC = () => {
   const { i18n } = useLingui()
   const [walletSelected, setWalletSelected] = useState(false)
 
@@ -27,7 +27,7 @@ const BentoBoxFundingSourceModal: FC = () => {
           <HeadlessUiModal.Header header={i18n._(t`About CoffinBox Funding`)} onClose={() => setOpen(false)} />
           <div className="flex justify-center gap-4">
             <div className="relative shadow-pink-glow">
-              <Image src="https://exchange.soulswap.finance/soul2lux.gif" width={160} height={120} alt="BentoBox Logo" />
+              <Image src="https://exchange.soulswap.finance/soul2lux.gif" width={160} height={120} alt="CoffinBox Logo" />
             </div>
             <div className="flex flex-col gap-2">
               <Typography variant="lg" weight={700} className="text-center text-high-emphesis">
@@ -48,7 +48,7 @@ const BentoBoxFundingSourceModal: FC = () => {
                       walletSelected ? 'text-low-emphesis' : 'text-high-emphesis'
                     )}
                   >
-                    <BentoboxIcon width={48} />
+                    <CoffinboxIcon width={48} />
                     <Typography variant="xs" className="text-secondary">
                       {i18n._(t`CoffinBox`)}
                     </Typography>
@@ -95,4 +95,4 @@ const BentoBoxFundingSourceModal: FC = () => {
   )
 }
 
-export default BentoBoxFundingSourceModal
+export default CoffinBoxFundingSourceModal

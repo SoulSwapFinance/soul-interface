@@ -42,8 +42,8 @@
                 "type": "address"
             },
             {
-                "internalType": "contract IBentoBox",
-                "name": "bentoBox_",
+                "internalType": "contract ICoffinBox",
+                "name": "coffinBox_",
                 "type": "address"
             }
         ],
@@ -91,10 +91,10 @@
     },
     {
         "inputs": [],
-        "name": "bentoBox",
+        "name": "coffinBox",
         "outputs": [
             {
-                "internalType": "contract IBentoBox",
+                "internalType": "contract ICoffinBox",
                 "name": "",
                 "type": "address"
             }
@@ -144,7 +144,7 @@
                     },
                     {
                         "internalType": "uint256",
-                        "name": "bentoBalance",
+                        "name": "coffinBalance",
                         "type": "uint256"
                     }
                 ],
@@ -226,12 +226,12 @@
                     },
                     {
                         "internalType": "uint256",
-                        "name": "bentoBalance",
+                        "name": "coffinBalance",
                         "type": "uint256"
                     },
                     {
                         "internalType": "uint256",
-                        "name": "bentoAllowance",
+                        "name": "coffinAllowance",
                         "type": "uint256"
                     },
                     {
@@ -241,12 +241,12 @@
                     },
                     {
                         "internalType": "uint128",
-                        "name": "bentoAmount",
+                        "name": "coffinAmount",
                         "type": "uint128"
                     },
                     {
                         "internalType": "uint128",
-                        "name": "bentoShare",
+                        "name": "coffinShare",
                         "type": "uint128"
                     },
                     {
@@ -913,8 +913,8 @@
                 "type": "address"
             },
             {
-                "internalType": "contract IBentoBox",
-                "name": "bentoBox_",
+                "internalType": "contract ICoffinBox",
+                "name": "coffinBox_",
                 "type": "address"
             }
         ],

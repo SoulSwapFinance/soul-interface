@@ -9,14 +9,14 @@ import {
   interestAccrue,
   takeFee,
 } from '../../functions/kashi'
-import { toAmount, toShare } from '../../functions/bentobox'
-import { useBentoBoxContract, useSoulGuideContract } from '../../hooks/useContract'
+import { toAmount, toShare } from '../../functions/coffinbox'
+import { useCoffinBoxContract, useSoulGuideContract } from '../../hooks/useContract'
 
 import { BigNumber } from '@ethersproject/bignumber'
 import { Fraction } from '../../entities/bignumber/Fraction'
 import { UNDERWORLD_ADDRESS } from '../../constants/kashi'
 // import { USDC } from '../../hooks'
-import { bentobox } from '@soulswap/soul-data'
+import { coffinbox as coffinbox } from '@soulswap/soul-data'
 import { ethers } from 'ethers'
 // import { getCurrency } from '../../functions/currency'
 import { getOracle } from '../../entities/Oracle'
@@ -113,17 +113,17 @@ const reducer: React.Reducer<State, Reducer> = (state: any, action: any) => {
   }
 }
 
-async function getPairs(bentoBoxContract: any, chainId: ChainId) {
+async function getPairs(coffinBoxContract: any, chainId: ChainId) {
   let logs = []
   let success = false
   const masterAddress = UNDERWORLD_ADDRESS[chainId]
   if (chainId !== ChainId.FANTOM) {
-    logs = await bentoBoxContract.queryFilter(bentoBoxContract.filters.LogDeploy(masterAddress))
+    logs = await coffinBoxContract.queryFilter(coffinBoxContract.filters.LogDeploy(masterAddress))
     success = true
   }
   if (!success) {
     logs = (
-      (await bentobox.clones({
+      (await coffinbox.clones({
         masterAddress,
         chainId,
       })) as any
@@ -192,7 +192,7 @@ export function KashiProvider({ children }) {
   const currency = USDC[chainId]
 
   const soulGuideContract = useSoulGuideContract()
-  const bentoBoxContract = useBentoBoxContract()
+  const coffinBoxContract = useCoffinBoxContract()
 
   const tokens = useAllTokens()
 
@@ -215,14 +215,14 @@ export function KashiProvider({ children }) {
       return
     }
 
-    if (soulGuideContract && bentoBoxContract) {
+    if (soulGuideContract && coffinBoxContract) {
       // // console.log('READY TO RUMBLE')
       const info = rpcToObj(
         await soulGuideContract.getUIInfo(account, [], currency.address, [UNDERWORLD_ADDRESS[chainId]])
       )
 
       // Get the deployed pairs from the logs and decode
-      const logPairs = await getPairs(bentoBoxContract, chainId)
+      const logPairs = await getPairs(coffinBoxContract, chainId)
       // console.log({ logPairs })
 
       // Filter all pairs by supported oracles and verify the oracle setup
@@ -256,7 +256,7 @@ export function KashiProvider({ children }) {
         pair.asset = pairTokens.add(pair.asset)
       })
 
-      // Get balances, bentobox info and allowences for the tokens
+      // Get balances, coffinbox info and allowences for the tokens
       const pairAddresses = Object.values(pairTokens).map((token) => token.address)
       const balances = rpcToObj(await soulGuideContract.getBalances(account, pairAddresses))
 
@@ -447,7 +447,7 @@ export function KashiProvider({ children }) {
         },
       })
     }
-  }, [account, chainId, soulGuideContract, bentoBoxContract, currency.address, tokens, weth.address])
+  }, [account, chainId, soulGuideContract, coffinBoxContract, currency.address, tokens, weth.address])
 
   const previousBlockNumber = usePrevious(blockNumber)
 

@@ -66,7 +66,7 @@ module.exports = withBundleAnalyzer(
           permanent: true,
         },
         // {
-        //   source: '/bento/kashi',
+        //   source: '/coffin/kashi',
         //   destination: '/lend',
         //   permanent: true,
         // },

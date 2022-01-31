@@ -1,7 +1,7 @@
 import { ConstantProductPool, Currency, CurrencyAmount, JSBI, PoolState, Percent, Rebase, Token, ZERO } from 'sdk'
 import useCurrenciesFromURL from 'features/trident/useCurrenciesFromURL'
 import { toAmountCurrencyAmount } from 'functions'
-import useBentoRebases from 'hooks/useBentoRebases'
+import useCoffinRebases from 'hooks/useCoffinRebases'
 import { useConstantProductPool } from 'hooks/useConstantProductPools'
 import { useTotalSupply } from 'hooks/useTotalSupply'
 import { useActiveWeb3React } from 'services/web3'
@@ -28,7 +28,7 @@ const PoolContext: FC = ({ children }) => {
   const poolWithState = useConstantProductPool(currencies[0], currencies[1], fee, twap)
   const totalSupply = useTotalSupply(poolWithState?.pool?.liquidityToken)
   const poolBalance = useTokenBalance(account ?? undefined, poolWithState?.pool?.liquidityToken)
-  const { rebases, loading: rebasesLoading } = useBentoRebases([
+  const { rebases, loading: rebasesLoading } = useCoffinRebases([
     poolWithState?.pool?.token0,
     poolWithState?.pool?.token1,
   ])

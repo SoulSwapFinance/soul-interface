@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { BentoboxIcon, WalletIcon } from 'components/Icon'
+import { CoffinboxIcon, WalletIcon } from 'components/Icon'
 import React from 'react'
 
 const useBalancesMenuItems = () => {
@@ -12,16 +12,16 @@ const useBalancesMenuItems = () => {
       icon: <WalletIcon width={20} height={20} />,
       link: '/balances',
     },
-    // {
-    //   key: 'bentobox',
-    //   label: i18n._(t`BentoBox`),
-    //   icon: <BentoboxIcon width={20} height={20} />,
-    //   link: '/trident/balances/bentobox',
-    // },
+    {
+      key: 'coffinbox',
+      label: i18n._(t`CoffinBox`),
+      icon: <CoffinboxIcon width={20} height={20} />,
+      link: '/coffinbox',
+    },
     // {
     //   key: 'liquidity',
     //   label: i18n._(t`Deposited Assets`),
-    //   icon: <BentoboxIcon width={20} height={20} />,
+    //   icon: <CoffinboxIcon width={20} height={20} />,
     //   link: '/trident/balances/liquidity',
     // },
   ]

@@ -19,7 +19,7 @@ export const types = {
     ]
   }
   
-  export const bentoTypes = {
+  export const coffinTypes = {
     EIP712Domain: [
       { name: 'name', type: 'string' },
       { name: 'chainId', type: 'uint256' },

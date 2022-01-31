@@ -11,7 +11,7 @@ import { CHAINLINK_PRICE_FEED_MAP } from 'config/oracles/chainlink'
 // import { Feature } from 'enums'
 import { e10 } from 'functions/math'
 // import NetworkGuard from 'guards/Network'
-import { useBentoBoxContract } from 'hooks/useContract'
+import { useCoffinBoxContract } from 'hooks/useContract'
 import Layout from 'layouts/Underworld'
 import { useActiveWeb3React } from 'services/web3'
 import { Field } from 'state/create/actions'
@@ -35,7 +35,7 @@ export type ChainlinkToken = {
 export default function Create() {
   const { chainId } = useActiveWeb3React()
 
-  const coffinBoxContract = useBentoBoxContract()
+  const coffinBoxContract = useCoffinBoxContract()
 
   const addTransaction = useTransactionAdder()
 

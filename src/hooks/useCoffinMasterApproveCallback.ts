@@ -5,13 +5,13 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { signMasterContractApproval } from 'entities/KashiCooker'
 import { useActiveWeb3React } from 'services/web3'
-import { useBentoMasterContractAllowed } from 'state/bentobox/hooks'
+import { useCoffinMasterContractAllowed } from 'state/coffinbox/hooks'
 import { useAllTransactions, useTransactionAdder } from 'state/transactions/hooks'
 import { useCallback, useMemo, useState } from 'react'
 
-import { useBentoBoxContract } from './useContract'
+import { useCoffinBoxContract } from './useContract'
 
-export enum BentoApprovalState {
+export enum CoffinApprovalState {
   UNKNOWN,
   NOT_APPROVED,
   PENDING,
@@ -19,14 +19,14 @@ export enum BentoApprovalState {
   APPROVED,
 }
 
-export enum BentoApproveOutcome {
+export enum CoffinBoxApproveOutcome {
   SUCCESS,
   REJECTED,
   FAILED,
   NOT_READY,
 }
 
-const useBentoHasPendingApproval = (masterContract?: string, account?: string, contractName?: string) => {
+const useCoffinBoxHasPendingApproval = (masterContract?: string, account?: string, contractName?: string) => {
   const allTransactions = useAllTransactions()
   return useMemo(
     () =>
@@ -47,51 +47,51 @@ const useBentoHasPendingApproval = (masterContract?: string, account?: string, c
   )
 }
 
-export interface BentoPermit {
-  outcome: BentoApproveOutcome
+export interface CoffinPermit {
+  outcome: CoffinBoxApproveOutcome
   signature?: Signature
   data?: string
 }
 
-export interface BentoMasterApproveCallback {
-  approvalState: BentoApprovalState
+export interface CoffinMasterApproveCallback {
+  approvalState: CoffinApprovalState
   approve: () => Promise<void>
-  getPermit: () => Promise<BentoPermit | undefined>
-  permit: BentoPermit | undefined
+  getPermit: () => Promise<CoffinPermit | undefined>
+  permit: CoffinPermit | undefined
 }
 
-export interface BentoMasterApproveCallbackOptions {
-  otherBentoBoxContract?: Contract | null
+export interface CoffinMasterApproveCallbackOptions {
+  otherCoffinBoxContract?: Contract | null
   contractName?: string
   functionFragment?: string
 }
 
-const useBentoMasterApproveCallback = (
+const useCoffinBoxMasterApproveCallback = (
   masterContract: string | undefined,
-  { otherBentoBoxContract, contractName, functionFragment }: BentoMasterApproveCallbackOptions
-): BentoMasterApproveCallback => {
+  { otherCoffinBoxContract, contractName, functionFragment }: CoffinMasterApproveCallbackOptions
+): CoffinMasterApproveCallback => {
   const { i18n } = useLingui()
   const { account, chainId, library } = useActiveWeb3React()
-  const bentoBoxContract = useBentoBoxContract()
+  const coffinBoxContract = useCoffinBoxContract()
   const addTransaction = useTransactionAdder()
-  const currentAllowed = useBentoMasterContractAllowed(masterContract, account || AddressZero)
-  const pendingApproval = useBentoHasPendingApproval(masterContract, account ? account : undefined, contractName)
-  const [permit, setPermit] = useState<BentoPermit | undefined>()
+  const currentAllowed = useCoffinMasterContractAllowed(masterContract, account || AddressZero)
+  const pendingApproval = useCoffinBoxHasPendingApproval(masterContract, account ? account : undefined, contractName)
+  const [permit, setPermit] = useState<CoffinPermit | undefined>()
 
-  const approvalState: BentoApprovalState = useMemo(() => {
-    if (permit) return BentoApprovalState.APPROVED
-    if (pendingApproval) return BentoApprovalState.PENDING
+  const approvalState: CoffinApprovalState = useMemo(() => {
+    if (permit) return CoffinApprovalState.APPROVED
+    if (pendingApproval) return CoffinApprovalState.PENDING
 
     // We might not have enough data to know whether or not we need to approve
-    if (currentAllowed === undefined) return BentoApprovalState.UNKNOWN
-    if (!masterContract || !account) return BentoApprovalState.UNKNOWN
-    if (!currentAllowed) return BentoApprovalState.NOT_APPROVED
+    if (currentAllowed === undefined) return CoffinApprovalState.UNKNOWN
+    if (!masterContract || !account) return CoffinApprovalState.UNKNOWN
+    if (!currentAllowed) return CoffinApprovalState.NOT_APPROVED
 
-    return BentoApprovalState.APPROVED
+    return CoffinApprovalState.APPROVED
   }, [account, currentAllowed, masterContract, pendingApproval, permit])
 
   const getPermit = useCallback(async () => {
-    if (approvalState !== BentoApprovalState.NOT_APPROVED) {
+    if (approvalState !== CoffinApprovalState.NOT_APPROVED) {
       console.error('approve was called unnecessarily')
       return
     }
@@ -108,7 +108,7 @@ const useBentoMasterApproveCallback = (
 
     try {
       const signatureString = await signMasterContractApproval(
-        bentoBoxContract,
+        coffinBoxContract,
         masterContract,
         account,
         library,
@@ -118,9 +118,9 @@ const useBentoMasterApproveCallback = (
 
       const signature = splitSignature(signatureString)
       const permit = {
-        outcome: BentoApproveOutcome.SUCCESS,
+        outcome: CoffinBoxApproveOutcome.SUCCESS,
         signature: splitSignature(signature),
-        data: (otherBentoBoxContract || bentoBoxContract)?.interface?.encodeFunctionData(
+        data: (otherCoffinBoxContract || coffinBoxContract)?.interface?.encodeFunctionData(
           functionFragment || 'setMasterContractApproval',
           [account, masterContract, true, signature.v, signature.r, signature.s]
         ),
@@ -131,7 +131,7 @@ const useBentoMasterApproveCallback = (
     } catch (e) {
       return {
         // @ts-ignore TYPE NEEDS FIXING
-        outcome: e.code === 4001 ? BentoApproveOutcome.REJECTED : BentoApproveOutcome.FAILED,
+        outcome: e.code === 4001 ? CoffinBoxApproveOutcome.REJECTED : CoffinBoxApproveOutcome.FAILED,
         signature: undefined,
         data: undefined,
       }
@@ -139,17 +139,17 @@ const useBentoMasterApproveCallback = (
   }, [
     account,
     approvalState,
-    bentoBoxContract,
+    coffinBoxContract,
     chainId,
     functionFragment,
     library,
     masterContract,
-    otherBentoBoxContract,
+    otherCoffinBoxContract,
   ])
 
   const approve = useCallback(async () => {
     try {
-      const tx = await (otherBentoBoxContract || bentoBoxContract)?.setMasterContractApproval(
+      const tx = await (otherCoffinBoxContract || coffinBoxContract)?.setMasterContractApproval(
         account,
         masterContract,
         true,
@@ -164,7 +164,7 @@ const useBentoMasterApproveCallback = (
           : i18n._(t`Approving Master Contract`),
       })
     } catch (e) {}
-  }, [account, addTransaction, bentoBoxContract, contractName, i18n, masterContract, otherBentoBoxContract])
+  }, [account, addTransaction, coffinBoxContract, contractName, i18n, masterContract, otherCoffinBoxContract])
 
   return {
     approvalState,
@@ -174,4 +174,4 @@ const useBentoMasterApproveCallback = (
   }
 }
 
-export default useBentoMasterApproveCallback
+export default useCoffinBoxMasterApproveCallback

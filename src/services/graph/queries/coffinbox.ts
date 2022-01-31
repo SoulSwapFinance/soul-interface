@@ -33,10 +33,10 @@ export const clonesQuery = gql`
   ${cloneFieldsQuery}
 `
 
-export const bentoTokenFieldsQuery = gql`
-  fragment bentoTokenFields on Token {
+export const coffinTokenFieldsQuery = gql`
+  fragment coffinTokenFields on Token {
     id
-    # bentoBox
+    # coffinBox
     name
     symbol
     decimals
@@ -47,31 +47,31 @@ export const bentoTokenFieldsQuery = gql`
   }
 `
 
-export const bentoTokensQuery = gql`
-  query bentoTokens($first: Int = 1000, $block: Block_height, $where: Token_filter) {
+export const coffinTokensQuery = gql`
+  query coffinTokens($first: Int = 1000, $block: Block_height, $where: Token_filter) {
     tokens(first: $first, skip: $skip, block: $block, where: $where) {
-      ...bentoTokenFields
+      ...coffinTokenFields
     }
   }
-  ${bentoTokenFieldsQuery}
+  ${coffinTokenFieldsQuery}
 `
 
-export const bentoUserTokensQuery = gql`
-  query bentoUserTokens($user: String!, $skip: Int = 0, $first: Int = 1000, $block: Block_height) {
+export const coffinUserTokensQuery = gql`
+  query coffinUserTokens($user: String!, $skip: Int = 0, $first: Int = 1000, $block: Block_height) {
     userTokens(skip: $skip, first: $first, block: $block, where: { share_gt: 0, user: $user }) {
       token {
-        ...bentoTokenFields
+        ...coffinTokenFields
       }
       share
     }
   }
-  ${bentoTokenFieldsQuery}
+  ${coffinTokenFieldsQuery}
 `
 
-export const kashiPairFieldsQuery = gql`
-  fragment kashiPairFields on KashiPair {
+export const underworldPairFieldsQuery = gql`
+  fragment underworldPairFields on UnderworldPair {
     id
-    # bentoBox
+    # coffinBox
     type
     masterContract
     owner
@@ -80,10 +80,10 @@ export const kashiPairFieldsQuery = gql`
     symbol
     oracle
     asset {
-      ...bentoTokenFields
+      ...coffinTokenFields
     }
     collateral {
-      ...bentoTokenFields
+      ...coffinTokenFields
     }
     exchangeRate
     totalAssetElastic
@@ -103,19 +103,19 @@ export const kashiPairFieldsQuery = gql`
     block
     timestamp
   }
-  ${bentoTokenFieldsQuery}
+  ${coffinTokenFieldsQuery}
 `
 
-export const kashiPairsQuery = gql`
-  query kashiPairs(
+export const underworldPairsQuery = gql`
+  query underworldPairs(
     $skip: Int = 0
     $first: Int = 1000
-    $where: KashiPair_filter
+    $where: UnderworldPair_filter
     $block: Block_height
-    $orderBy: KashiPair_orderBy = "utilization"
+    $orderBy: UnderworldPair_orderBy = "utilization"
     $orderDirection: OrderDirection! = "desc"
   ) {
-    kashiPairs(
+    underworldPairs(
       skip: $skip
       first: $first
       where: $where
@@ -123,37 +123,37 @@ export const kashiPairsQuery = gql`
       orderBy: $orderBy
       orderDirection: $orderDirection
     ) {
-      ...kashiPairFields
+      ...underworldPairFields
     }
   }
-  ${kashiPairFieldsQuery}
+  ${underworldPairFieldsQuery}
 `
 
-export const kashiUserPairsQuery = gql`
-  query kashiUserPairs($user: String!, $skip: Int = 0, $first: Int = 1000, $block: Block_height) {
-    userKashiPairs(skip: $skip, first: $first, block: $block, where: { user: $user }) {
+export const underworldUserPairsQuery = gql`
+  query underworldUserPairs($user: String!, $skip: Int = 0, $first: Int = 1000, $block: Block_height) {
+    userUnderworldPairs(skip: $skip, first: $first, block: $block, where: { user: $user }) {
       assetFraction
       collateralShare
       borrowPart
       pair {
-        ...kashiPairFields
+        ...underworldPairFields
       }
     }
   }
-  ${kashiPairFieldsQuery}
+  ${underworldPairFieldsQuery}
 `
 
-export const bentoBoxQuery = gql`
-  query bentoBoxQuery(
+export const coffinBoxQuery = gql`
+  query coffinBoxQuery(
     $id: String! = "0xF539C37275e947F24480fAb9f7e302aE827570b2"
     $block: Block_height
-    $where: BentoBox_filter
+    $where: CoffinBox_filter
   ) {
-    bentoBoxes(first: 1, block: $block, where: $where) {
+    coffinBoxes(first: 1, block: $block, where: $where) {
       id
       totalUsers
       totalTokens
-      totalKashiPairs
+      totalUnderworldPairs
       tokens(first: 1000) {
         id
         name
@@ -166,8 +166,8 @@ export const bentoBoxQuery = gql`
   }
 `
 
-export const bentoStrategiesQuery = gql`
-  query bentoStrategies($first: Int = 1000, $firstHarvests: Int = 3, $block: Block_height, $where: Strategy_filter!) {
+export const coffinStrategiesQuery = gql`
+  query coffinStrategies($first: Int = 1000, $firstHarvests: Int = 3, $block: Block_height, $where: Strategy_filter!) {
     strategies(first: $first, block: $block, where: $where) {
       token {
         id
@@ -188,5 +188,5 @@ export const bentoStrategiesQuery = gql`
       block
     }
   }
-  ${bentoTokenFieldsQuery}
+  ${coffinTokenFieldsQuery}
 `

@@ -2,10 +2,10 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import Typography from 'components/Typography'
 import { maxAmountSpend } from 'functions'
-import { useBentoOrWalletBalances } from 'hooks/useBentoOrWalletBalance'
+import { useCoffinOrWalletBalances } from 'hooks/useCoffinOrWalletBalance'
 import { useActiveWeb3React } from 'services/web3'
 import { useAppDispatch } from 'state/hooks'
-import { setFromBentoBalance } from 'state/limit-order/actions'
+import { setFromCoffinBalance } from 'state/limit-order/actions'
 import useLimitOrderDerivedCurrencies, { useLimitOrderActionHandlers } from 'state/limit-order/hooks'
 import { Field } from 'state/swap/actions'
 import React, { FC, useCallback } from 'react'
@@ -15,7 +15,7 @@ const BalancePanel: FC = () => {
   const { i18n } = useLingui()
   const { inputCurrency } = useLimitOrderDerivedCurrencies()
   const { onUserInput } = useLimitOrderActionHandlers()
-  const [walletBalance, bentoBalance] = useBentoOrWalletBalances(
+  const [walletBalance, coffinBalance] = useCoffinOrWalletBalances(
     account ?? undefined,
     [inputCurrency, inputCurrency],
     [true, false]
@@ -24,16 +24,16 @@ const BalancePanel: FC = () => {
   const dispatch = useAppDispatch()
 
   const handleMaxInput = useCallback(
-    (bento) => {
-      if (bento) {
-        bentoBalance && onUserInput(Field.INPUT, bentoBalance.toExact())
-        dispatch(setFromBentoBalance(true))
+    (coffin) => {
+      if (coffin) {
+        coffinBalance && onUserInput(Field.INPUT, coffinBalance.toExact())
+        dispatch(setFromCoffinBalance(true))
       } else {
         maxAmountInput && onUserInput(Field.INPUT, maxAmountInput.toExact())
-        dispatch(setFromBentoBalance(false))
+        dispatch(setFromCoffinBalance(false))
       }
     },
-    [bentoBalance, dispatch, maxAmountInput, onUserInput]
+    [coffinBalance, dispatch, maxAmountInput, onUserInput]
   )
 
   return (
@@ -43,7 +43,7 @@ const BalancePanel: FC = () => {
           {i18n._(t`In Coffin:`)}
         </Typography>
         <Typography variant="sm" className="text-secondary" onClick={() => handleMaxInput(true)}>
-          {bentoBalance?.toSignificant(6, { groupSeparator: ',' })} {bentoBalance?.currency.symbol}
+          {coffinBalance?.toSignificant(6, { groupSeparator: ',' })} {coffinBalance?.currency.symbol}
         </Typography>
       </div>
       <div className="flex gap-2">

@@ -5,10 +5,10 @@ import { Currency, CurrencyAmount, Trade, TradeType } from 'sdk'
 import Typography from 'components/Typography'
 import useLimitOrderExecute, { DepositPayload } from '../../features/limit-order/useLimitOrderExecute'
 import TridentApproveGate from 'features/trident/TridentApproveGate'
-import { useBentoBoxContract } from 'hooks'
+import { useCoffinBoxContract } from 'hooks'
 import { useActiveWeb3React } from 'services/web3'
 import { useAppDispatch } from 'state/hooks'
-import { setFromBentoBalance, setLimitOrderBentoPermit, setLimitOrderShowReview } from 'state/limit-order/actions'
+import { setFromCoffinBalance, setLimitOrderCoffinPermit, setLimitOrderShowReview } from 'state/limit-order/actions'
 import { useLimitOrderDerivedInputError, useLimitOrderState } from 'state/limit-order/hooks'
 import React, { FC, useCallback, useState } from 'react'
 import { STOP_LIMIT_ORDER_ADDRESS } from 'constants/addresses'
@@ -26,10 +26,10 @@ const LimitOrderButton: FC<LimitOrderButton> = ({ trade, parsedAmounts }) => {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const dispatch = useAppDispatch()
-  const { fromBentoBalance, bentoPermit, attemptingTxn } = useLimitOrderState()
+  const { fromCoffinBalance, coffinPermit, attemptingTxn } = useLimitOrderState()
   const error = useLimitOrderDerivedInputError({ trade })
   const { deposit } = useLimitOrderExecute()
-  const bentoboxContract = useBentoBoxContract()
+  const coffinboxContract = useCoffinBoxContract()
   const masterContractAddress = chainId && STOP_LIMIT_ORDER_ADDRESS[chainId]
   const [permitError, setPermitError] = useState(false)
 
@@ -37,7 +37,7 @@ const LimitOrderButton: FC<LimitOrderButton> = ({ trade, parsedAmounts }) => {
     async (payload: DepositPayload) => {
       const tx = await deposit(payload)
       if (tx?.hash) {
-        dispatch(setFromBentoBalance(true))
+        dispatch(setFromCoffinBalance(true))
       }
     },
     [deposit, dispatch]
@@ -46,16 +46,16 @@ const LimitOrderButton: FC<LimitOrderButton> = ({ trade, parsedAmounts }) => {
   const handler = useCallback(async () => {
     if (!parsedAmounts?.inputAmount) return
 
-    if (fromBentoBalance) {
+    if (fromCoffinBalance) {
       dispatch(setLimitOrderShowReview(true))
     } else {
       await _deposit({
         inputAmount: parsedAmounts?.inputAmount,
-        bentoPermit,
-        fromBentoBalance,
+        coffinPermit,
+        fromCoffinBalance,
       })
     }
-  }, [_deposit, bentoPermit, dispatch, fromBentoBalance, parsedAmounts?.inputAmount])
+  }, [_deposit, coffinPermit, dispatch, fromCoffinBalance, parsedAmounts?.inputAmount])
 
   return (
     <>
@@ -68,14 +68,14 @@ const LimitOrderButton: FC<LimitOrderButton> = ({ trade, parsedAmounts }) => {
       )}
       <TridentApproveGate
         inputAmounts={[trade?.inputAmount]}
-        tokenApproveOn={bentoboxContract?.address}
+        tokenApproveOn={coffinboxContract?.address}
         masterContractAddress={masterContractAddress}
-        {...(fromBentoBalance
+        {...(fromCoffinBalance
           ? { withPermit: false }
           : {
               withPermit: true,
-              permit: bentoPermit,
-              onPermit: (permit) => dispatch(setLimitOrderBentoPermit(permit)),
+              permit: coffinPermit,
+              onPermit: (permit) => dispatch(setLimitOrderCoffinPermit(permit)),
               onPermitError: () => setPermitError(true),
             })}
       >
@@ -83,7 +83,7 @@ const LimitOrderButton: FC<LimitOrderButton> = ({ trade, parsedAmounts }) => {
           const disabled = !!error || !approved || loading || attemptingTxn
           return (
             <Button loading={loading || attemptingTxn} color="gradient" disabled={disabled} onClick={handler}>
-              {error ? error : fromBentoBalance ? i18n._(t`Review Limit Order`) : i18n._(t`Confirm Deposit`)}
+              {error ? error : fromCoffinBalance ? i18n._(t`Review Limit Order`) : i18n._(t`Confirm Deposit`)}
             </Button>
           )
         }}

@@ -42,7 +42,7 @@ export default function AnalyticsContainer({ children }): JSX.Element {
               },
               // {
               //   text: 'CoffinBox',
-              //   href: '/analytics/bentobox',
+              //   href: '/analytics/coffinbox',
               // },
             ]}
           />

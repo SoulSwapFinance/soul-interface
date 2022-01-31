@@ -16,11 +16,11 @@ export const ACTION_ADD_COLLATERAL = 10
 export const ACTION_UPDATE_EXCHANGE_RATE = 11
 
 // Function on CoffinBox
-export const ACTION_BENTO_DEPOSIT = 20
-export const ACTION_BENTO_WITHDRAW = 21
-export const ACTION_BENTO_TRANSFER = 22
-export const ACTION_BENTO_TRANSFER_MULTIPLE = 23
-export const ACTION_BENTO_SETAPPROVAL = 24
+export const ACTION_COFFIN_DEPOSIT = 20
+export const ACTION_COFFIN_WITHDRAW = 21
+export const ACTION_COFFIN_TRANSFER = 22
+export const ACTION_COFFIN_TRANSFER_MULTIPLE = 23
+export const ACTION_COFFIN_SETAPPROVAL = 24
 
 // Any external call (except to CoffinBox)
 export const ACTION_CALL = 30

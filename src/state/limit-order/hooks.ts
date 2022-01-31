@@ -14,7 +14,7 @@ import {
 } from 'sdk'
 import { isAddress, tryParseAmount } from 'functions'
 import { useCurrency } from 'hooks/Tokens'
-import { useBentoOrWalletBalance } from 'hooks/useBentoOrWalletBalance'
+import { useCoffinOrWalletBalance } from 'hooks/useCoffinOrWalletBalance'
 import useENS from 'hooks/useENS'
 import useParsedQueryString from 'hooks/useParsedQueryString'
 import { useV2TradeExactIn as useTradeExactIn, useV2TradeExactOut as useTradeExactOut } from 'hooks/useV2Trades'
@@ -144,7 +144,7 @@ export function queryParametersToSwapState(chainId: ChainId, parsedQs: ParsedQs)
     independentField: parseIndependentFieldURLParameter(parsedQs.exactField),
     recipient: validatedRecipient(parsedQs.recipient),
     limitPrice: parseTokenAmountURLParameter(parsedQs.exactRate),
-    fromBentoBalance: parseBooleanFieldParameter(parsedQs.fromBento),
+    fromCoffinBalance: parseBooleanFieldParameter(parsedQs.fromCoffin),
     orderExpiration: { value: OrderExpiration.never, label: i18n._(t`Never`) },
   }
 }
@@ -263,13 +263,13 @@ export const useLimitOrderDerivedTypedInputAmount: UseLimitOrderDerivedTypedInpu
 
 type UseLimitOrderDerivedInputError = ({ trade }: { trade?: Trade<Currency, Currency, TradeType> }) => string
 export const useLimitOrderDerivedInputError: UseLimitOrderDerivedInputError = ({ trade }) => {
-  const { recipient, orderExpiration, fromBentoBalance, limitPrice } = useLimitOrderState()
+  const { recipient, orderExpiration, fromCoffinBalance, limitPrice } = useLimitOrderState()
   const { account } = useActiveWeb3React()
   const { inputCurrency, outputCurrency } = useLimitOrderDerivedCurrencies()
   const recipientLookup = useENS(recipient)
   const to = !recipient ? account : recipientLookup.address
   const parsedRate = useLimitOrderDerivedLimitPrice()
-  const balance = useBentoOrWalletBalance(account ?? undefined, inputCurrency, !fromBentoBalance)
+  const balance = useCoffinOrWalletBalance(account ?? undefined, inputCurrency, !fromCoffinBalance)
 
   return useMemo(() => {
     return !account

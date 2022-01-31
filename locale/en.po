@@ -199,9 +199,6 @@ msgstr "Balance USD"
 msgid "Balance:"
 msgstr "Balance:"
 
-msgid "BentoBox"
-msgstr "BentoBox"
-
 msgid "Bonds"
 msgstr "Bonds"
 
@@ -1021,8 +1018,8 @@ msgstr "Please make sure your {0} balance is sufficient to deposit and then try 
 msgid "Please make sure your {0} balance is sufficient to withdraw and then try again."
 msgstr "Please make sure your {0} balance is sufficient to withdraw and then try again."
 
-msgid "Please note that after order execution, your tokens will be received in your BentoBox"
-msgstr "Please note that after order execution, your tokens will be received in your BentoBox"
+msgid "Please note that after order execution, your tokens will be received in your CoffinBox"
+msgstr "Please note that after order execution, your tokens will be received in your CoffinBox"
 
 msgid "Please note the recipient address is different from the connected wallet address."
 msgstr "Please note the recipient address is different from the connected wallet address."

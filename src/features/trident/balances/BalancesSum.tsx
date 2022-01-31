@@ -5,7 +5,7 @@ import Typography from 'components/Typography'
 import SumUSDCValues from 'features/trident/SumUSDCValues'
 // import { useTridentLiquidityPositions } from 'services/graph'
 import { useActiveWeb3React } from 'services/web3'
-import { useBentoBalancesV2 } from 'state/bentobox/hooks'
+import { useCoffinBalancesV2 } from 'state/coffinbox/hooks'
 import { useAllTokenBalances, useCurrencyBalance } from 'state/wallet/hooks'
 import React, { FC, useMemo } from 'react'
 import { usePositions, useSoulPositions } from 'hooks/usePositions'
@@ -51,8 +51,8 @@ export const LiquidityPositionsBalancesSum = () => {
   )
 }
 
-export const BentoBalancesSum = () => {
-  const balances = useBentoBalancesV2()
+export const CoffinBalancesSum = () => {
+  const balances = useCoffinBalancesV2()
   return <_BalancesSum amounts={balances} />
 }
 
@@ -78,7 +78,7 @@ interface BalancesSumProps {
 
 const _BalancesSum: FC<BalancesSumProps> = ({ amounts }) => {
   const { i18n } = useLingui()
-    //   icon: <BentoboxIcon width={20} height={20} />,
+    //   icon: <CoffinboxIcon width={20} height={20} />,
 
   return (
     <SumUSDCValues amounts={ amounts }>

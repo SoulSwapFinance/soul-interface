@@ -2,7 +2,7 @@ import { SwitchHorizontalIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { NATIVE } from 'sdk'
-import { BentoboxIcon } from 'components/Icon'
+import { CoffinboxIcon } from 'components/Icon'
 import Typography from 'components/Typography'
 import { Feature } from 'enums/Feature'
 import ActionItem from 'features/trident/balances/ActionsModal/ActionItem'
@@ -46,7 +46,7 @@ const WalletActions: FC = () => {
         {featureEnabled(Feature.COFFINBOX, chainId) && (
           <>
             <ActionItem
-              svg={<BentoboxIcon width={20} height={20} />}
+              svg={<CoffinboxIcon width={20} height={20} />}
               label={i18n._(t`Deposit to CoffinBox`)}
               onClick={() => dispatch(setBalancesActiveModal(ActiveModal.DEPOSIT))}
             />

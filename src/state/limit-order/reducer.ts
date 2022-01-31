@@ -7,10 +7,10 @@ import {
   Field,
   replaceLimitOrderState,
   selectCurrency,
-  setFromBentoBalance,
+  setFromCoffinBalance,
   setLimitOrderApprovalPending,
   setLimitOrderAttemptingTxn,
-  setLimitOrderBentoPermit,
+  setLimitOrderCoffinPermit,
   setLimitOrderInvertRate,
   setLimitOrderInvertState,
   setLimitOrderShowReview,
@@ -36,13 +36,13 @@ export interface LimitOrderState {
   readonly inputCurrencyId: string
   readonly outputCurrencyId: string
   readonly recipient?: string
-  readonly fromBentoBalance: boolean
+  readonly fromCoffinBalance: boolean
   readonly limitOrderApprovalPending: string
   readonly orderExpiration: {
     value: OrderExpiration | string
     label: string
   }
-  readonly bentoPermit?: Signature
+  readonly coffinPermit?: Signature
   readonly attemptingTxn: boolean
   readonly showReview: boolean
   readonly invertRate: boolean
@@ -55,13 +55,13 @@ const initialState: LimitOrderState = {
   inputCurrencyId: 'FTM',
   outputCurrencyId: '',
   recipient: undefined,
-  fromBentoBalance: false,
+  fromCoffinBalance: false,
   limitOrderApprovalPending: '',
   orderExpiration: {
     value: OrderExpiration.never,
     label: 'Never',
   },
-  bentoPermit: undefined,
+  coffinPermit: undefined,
   attemptingTxn: false,
   showReview: false,
   invertRate: false,
@@ -81,7 +81,7 @@ export default createReducer<LimitOrderState>(initialState, (builder) =>
     //         independentField,
     //         inputCurrencyId,
     //         outputCurrencyId,
-    //         fromBentoBalance,
+    //         fromCoffinBalance,
     //         limitPrice,
     //         orderExpiration,
     //       },
@@ -96,7 +96,7 @@ export default createReducer<LimitOrderState>(initialState, (builder) =>
     //     independentField,
     //     typedValue: typedValue,
     //     recipient,
-    //     fromBentoBalance,
+    //     fromCoffinBalance,
     //     limitPrice,
     //     orderExpiration,
     //     limitOrderApprovalPending: state.limitOrderApprovalPending,
@@ -113,8 +113,8 @@ export default createReducer<LimitOrderState>(initialState, (builder) =>
       // @ts-ignore TYPE NEEDS FIXING
       state.orderExpiration = orderExpiration
     })
-    .addCase(setFromBentoBalance, (state, { payload: fromBentoBalance }) => {
-      state.fromBentoBalance = fromBentoBalance
+    .addCase(setFromCoffinBalance, (state, { payload: fromCoffinBalance }) => {
+      state.fromCoffinBalance = fromCoffinBalance
     })
     .addCase(selectCurrency, (state, { payload: { currencyId, field } }) => {
       if (field === Field.INPUT) state.inputCurrencyId = currencyId
@@ -137,8 +137,8 @@ export default createReducer<LimitOrderState>(initialState, (builder) =>
         ...initialState,
       }
     })
-    .addCase(setLimitOrderBentoPermit, (state, { payload: bentoPermit }) => {
-      state.bentoPermit = bentoPermit
+    .addCase(setLimitOrderCoffinPermit, (state, { payload: coffinPermit }) => {
+      state.coffinPermit = coffinPermit
     })
     .addCase(setLimitOrderAttemptingTxn, (state, { payload: attemptingTxn }) => {
       state.attemptingTxn = attemptingTxn

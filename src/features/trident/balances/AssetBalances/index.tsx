@@ -7,7 +7,7 @@ import { useBalancesSelectedCurrency } from 'features/trident/balances/useBalanc
 import { ActiveModal } from 'features/trident/types'
 // import { useTridentLiquidityPositions } from 'services/graph'
 import { useActiveWeb3React } from 'services/web3'
-import { useBentoBalancesV2 } from 'state/bentobox/hooks'
+import { useCoffinBalancesV2 } from 'state/coffinbox/hooks'
 import { useAppDispatch } from 'state/hooks'
 import { useAllTokenBalances, useCurrencyBalance } from 'state/wallet/hooks'
 import React, { useCallback, useMemo } from 'react'
@@ -44,10 +44,10 @@ const positions = usePositions()
   return <AssetBalances config={config} />
 }
 
-export const BentoBalances = () => {
+export const CoffinBalances = () => {
   const dispatch = useAppDispatch()
   const selected = useBalancesSelectedCurrency()
-  const balances = useBentoBalancesV2()
+  const balances = useCoffinBalancesV2()
   const assets = balances.reduce<Assets[]>((acc, el) => {
     if (el) acc.push({ asset: el })
     return acc

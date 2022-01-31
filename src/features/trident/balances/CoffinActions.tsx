@@ -13,7 +13,7 @@ import { useAppDispatch } from 'state/hooks'
 import { useRouter } from 'next/router'
 import React, { FC, useCallback } from 'react'
 
-const BentoActions: FC = () => {
+const CoffinActions: FC = () => {
   const { chainId } = useActiveWeb3React()
   const isDesktop = useDesktopMediaQuery()
   const dispatch = useAppDispatch()
@@ -59,4 +59,4 @@ const BentoActions: FC = () => {
   )
 }
 
-export default BentoActions
+export default CoffinActions

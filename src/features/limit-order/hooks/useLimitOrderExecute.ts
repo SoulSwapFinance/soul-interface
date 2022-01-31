@@ -5,11 +5,11 @@ import { TransactionResponse } from '@ethersproject/providers'
 import { Currency, CurrencyAmount, LimitOrder } from 'sdk'
 import useLimitOrders from 'features/limit-order/hooks/useLimitOrders'
 import { calculateGasMargin, ZERO } from 'functions'
-import { useBentoBoxContract, useLimitOrderHelperContract } from 'hooks'
+import { useCoffinBoxContract, useLimitOrderHelperContract } from 'hooks'
 import { useActiveWeb3React } from 'services/web3'
 import { useAddPopup } from 'state/application/hooks'
 import { useAppDispatch } from 'state/hooks'
-import { clear, setLimitOrderAttemptingTxn, setLimitOrderBentoPermit } from 'state/limit-order/actions'
+import { clear, setLimitOrderAttemptingTxn, setLimitOrderCoffinPermit } from 'state/limit-order/actions'
 import { OrderExpiration } from 'state/limit-order/reducer'
 import { useTransactionAdder } from 'state/transactions/hooks'
 import { useCallback } from 'react'
@@ -29,11 +29,11 @@ const getEndTime = (orderExpiration: OrderExpiration | string): number => {
   }
 }
 
-export type DepositAndApprovePayload = { inputAmount: CurrencyAmount<Currency>; bentoPermit: Signature }
+export type DepositAndApprovePayload = { inputAmount: CurrencyAmount<Currency>; coffinPermit: Signature }
 export type DepositPayload = {
   inputAmount?: CurrencyAmount<Currency>
-  bentoPermit?: Signature
-  fromBentoBalance: boolean
+  coffinPermit?: Signature
+  fromCoffinBalance: boolean
 }
 export type ExecutePayload = {
   orderExpiration: OrderExpiration | string
@@ -52,17 +52,17 @@ export type UseLimitOrderExecute = () => {
 const useLimitOrderExecute: UseLimitOrderExecute = () => {
   const { account, chainId, library } = useActiveWeb3React()
   const dispatch = useAppDispatch()
-  const bentoBoxContract = useBentoBoxContract()
+  const coffinBoxContract = useCoffinBoxContract()
   const limitOrderHelperContract = useLimitOrderHelperContract()
   const addTransaction = useTransactionAdder()
   const limitOrderContractAddress = chainId && STOP_LIMIT_ORDER_ADDRESS[chainId]
   const addPopup = useAddPopup()
   const { mutate } = useLimitOrders()
 
-  // Deposit to BentoBox and approve BentoBox in one transaction
+  // Deposit to CoffinBox and approve CoffinBox in one transaction
   const depositAndApprove = useCallback(
-    async ({ inputAmount, bentoPermit }: DepositAndApprovePayload) => {
-      const { v, r, s } = bentoPermit
+    async ({ inputAmount, coffinPermit }: DepositAndApprovePayload) => {
+      const { v, r, s } = coffinPermit
       const amount = inputAmount.quotient.toString()
 
       try {
@@ -95,10 +95,10 @@ const useLimitOrderExecute: UseLimitOrderExecute = () => {
 
           await tx.wait()
           addTransaction(tx, {
-            summary: `Approve limit orders and Deposit ${inputAmount.currency.symbol} into BentoBox`,
+            summary: `Approve limit orders and Deposit ${inputAmount.currency.symbol} into CoffinBox`,
           })
           dispatch(setLimitOrderAttemptingTxn(false))
-          dispatch(setLimitOrderBentoPermit(undefined))
+          dispatch(setLimitOrderCoffinPermit(undefined))
 
           return tx
         }
@@ -110,26 +110,26 @@ const useLimitOrderExecute: UseLimitOrderExecute = () => {
     [account, addTransaction, dispatch, limitOrderContractAddress, limitOrderHelperContract]
   )
 
-  // Deposit to BentoBox
+  // Deposit to CoffinBox
   const deposit = useCallback<UseLimitOrderExecuteDeposit>(
-    async ({ inputAmount, bentoPermit, fromBentoBalance }) => {
-      if (!bentoBoxContract || !limitOrderContractAddress || !inputAmount) throw new Error('Dependencies unavailable')
+    async ({ inputAmount, coffinPermit, fromCoffinBalance }) => {
+      if (!coffinBoxContract || !limitOrderContractAddress || !inputAmount) throw new Error('Dependencies unavailable')
 
       const batch: string[] = []
       const amount = inputAmount.quotient.toString()
 
       // Since the setMasterContractApproval is not payable, we can't batch native deposit and approve
       // For this case, we setup a helper contract
-      if (inputAmount.currency.isNative && bentoPermit) {
-        return depositAndApprove({ inputAmount, bentoPermit })
+      if (inputAmount.currency.isNative && coffinPermit) {
+        return depositAndApprove({ inputAmount, coffinPermit })
       }
 
       try {
         // If we have the permit, add the permit to the batch
-        if (bentoPermit) {
-          const { v, r, s } = bentoPermit
+        if (coffinPermit) {
+          const { v, r, s } = coffinPermit
           batch.push(
-            bentoBoxContract.interface.encodeFunctionData('setMasterContractApproval', [
+            coffinBoxContract.interface.encodeFunctionData('setMasterContractApproval', [
               account,
               limitOrderContractAddress,
               true,
@@ -140,15 +140,15 @@ const useLimitOrderExecute: UseLimitOrderExecute = () => {
           )
         }
 
-        // If we spend from wallet, we have to deposit into bentoBox first
-        if (!fromBentoBalance) {
+        // If we spend from wallet, we have to deposit into coffinBox first
+        if (!fromCoffinBalance) {
           if (inputAmount.currency.isNative) {
             batch.push(
-              bentoBoxContract.interface.encodeFunctionData('deposit', [AddressZero, account, account, amount, 0])
+              coffinBoxContract.interface.encodeFunctionData('deposit', [AddressZero, account, account, amount, 0])
             )
           } else {
             batch.push(
-              bentoBoxContract.interface.encodeFunctionData('deposit', [
+              coffinBoxContract.interface.encodeFunctionData('deposit', [
                 getAddress(inputAmount.currency.wrapped.address),
                 account,
                 account,
@@ -160,7 +160,7 @@ const useLimitOrderExecute: UseLimitOrderExecute = () => {
         }
 
         dispatch(setLimitOrderAttemptingTxn(true))
-        const tx = await bentoBoxContract.batch(batch, true, {
+        const tx = await coffinBoxContract.batch(batch, true, {
           value: inputAmount.currency.isNative ? amount : ZERO,
         })
 
@@ -168,13 +168,13 @@ const useLimitOrderExecute: UseLimitOrderExecute = () => {
         addTransaction(tx, { summary: 'Create limit order' })
 
         dispatch(setLimitOrderAttemptingTxn(false))
-        dispatch(setLimitOrderBentoPermit(undefined))
+        dispatch(setLimitOrderCoffinPermit(undefined))
         return tx
       } catch (e) {
         dispatch(setLimitOrderAttemptingTxn(false))
       }
     },
-    [account, addTransaction, bentoBoxContract, depositAndApprove, dispatch, limitOrderContractAddress]
+    [account, addTransaction, coffinBoxContract, depositAndApprove, dispatch, limitOrderContractAddress]
   )
 
   const execute = useCallback<UseLimitOrderExecuteExecute>(

@@ -1,9 +1,9 @@
 import { Currency, CurrencyAmount, Token } from 'sdk'
-import { useBentoBalancesV2 } from 'state/bentobox/hooks'
+import { useCoffinBalancesV2 } from 'state/coffinbox/hooks'
 import { useCurrencyBalances } from 'state/wallet/hooks'
 import { useMemo } from 'react'
 
-export const useBentoOrWalletBalances = (
+export const useCoffinOrWalletBalances = (
   account: string | undefined,
   currencies: (Currency | Token | undefined)[],
   fromWallet?: (boolean | undefined)[]
@@ -15,10 +15,10 @@ export const useBentoOrWalletBalances = (
   )
 
   const balance = useCurrencyBalances(account, currencies)
-  const bentoBalance = useBentoBalancesV2(tokenAddresses)
+  const coffinBalance = useCoffinBalancesV2(tokenAddresses)
 
   return useMemo(() => {
-    if (!currencies.every((el) => !!el) || !bentoBalance) {
+    if (!currencies.every((el) => !!el) || !coffinBalance) {
       return []
     }
 
@@ -30,7 +30,7 @@ export const useBentoOrWalletBalances = (
       let element: CurrencyAmount<Currency> | undefined
       const tokenBalanceFromWallet = fromWallet?.[index]
       if (tokenBalanceFromWallet === false) {
-        element = bentoBalance.find((el) => el?.currency.wrapped.address === cur.wrapped.address)
+        element = coffinBalance.find((el) => el?.currency.wrapped.address === cur.wrapped.address)
       } else {
         element = balance.find((el) => el?.currency.wrapped.address === cur.wrapped.address)
       }
@@ -41,12 +41,12 @@ export const useBentoOrWalletBalances = (
 
       return element
     }, [])
-  }, [currencies, bentoBalance, fromWallet, balance])
+  }, [currencies, coffinBalance, fromWallet, balance])
 }
 
-export const useBentoOrWalletBalance = (account?: string, currency?: Currency, fromWallet?: boolean) => {
+export const useCoffinOrWalletBalance = (account?: string, currency?: Currency, fromWallet?: boolean) => {
   const currencies = useMemo(() => [currency], [currency])
   const flags = useMemo(() => [fromWallet], [fromWallet])
-  const balances = useBentoOrWalletBalances(account, currencies, flags)
+  const balances = useCoffinOrWalletBalances(account, currencies, flags)
   return useMemo(() => (balances ? balances[0] : undefined), [balances])
 }

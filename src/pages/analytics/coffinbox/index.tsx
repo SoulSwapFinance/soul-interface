@@ -7,7 +7,7 @@ import TokenList from 'features/analytics/Tokens/TokenList'
 import { featureEnabled } from 'functions/feature'
 import { formatNumber } from 'functions/format'
 import useFuse from 'hooks/useFuse'
-import { useBentoBox, useNativePrice, useOneDayBlock, useOneWeekBlock, useTokens } from 'services/graph'
+import { useCoffinBox, useNativePrice, useOneDayBlock, useOneWeekBlock, useTokens } from 'services/graph'
 import { useActiveWeb3React } from 'services/web3'
 import { useMemo } from 'react'
 
@@ -45,12 +45,12 @@ export default function CoffinBox(): JSX.Element {
   }, [tokens1w])
 
   // @ts-ignore TYPE NEEDS FIXING
-  const bentoBox = useBentoBox({ chainId, shouldFetch: featureEnabled(Feature.COFFINBOX, chainId) })
+  const coffinBox = useCoffinBox({ chainId, shouldFetch: featureEnabled(Feature.COFFINBOX, chainId) })
 
-  // Combine Bento Box Tokens with Token data from exchange
-  const bentoBoxTokensFormatted = useMemo<Array<any>>(
+  // Combine CoffinBox Box Tokens with Token data from exchange
+  const coffinBoxTokensFormatted = useMemo<Array<any>>(
     () =>
-      (bentoBox?.tokens || [])
+      (coffinBox?.tokens || [])
         // @ts-ignore TYPE NEEDS FIXING
         .map(({ id, totalSupplyElastic, decimals, symbol, name }) => {
           const token = tokenIdToPrice.get(id)
@@ -82,7 +82,7 @@ export default function CoffinBox(): JSX.Element {
           }
         })
         .filter(Boolean),
-    [bentoBox, tokenIdToPrice, nativePrice, token1dIdToPrice, token1wIdToPrice, nativePrice1d, nativePrice1w]
+    [coffinBox, tokenIdToPrice, nativePrice, token1dIdToPrice, token1wIdToPrice, nativePrice1d, nativePrice1w]
   )
 
   const {
@@ -94,7 +94,7 @@ export default function CoffinBox(): JSX.Element {
       keys: ['token.address', 'token.symbol', 'token.name'],
       threshold: 0.4,
     },
-    data: bentoBoxTokensFormatted,
+    data: coffinBoxTokensFormatted,
   })
 
   return (
@@ -114,14 +114,14 @@ export default function CoffinBox(): JSX.Element {
           <InfoCard
             text="TVL"
             number={formatNumber(
-              bentoBoxTokensFormatted.reduce((prev, curr) => prev + curr.liquidity, 0),
+              coffinBoxTokensFormatted.reduce((prev, curr) => prev + curr.liquidity, 0),
               true,
               false
             )}
           />
-          <InfoCard text="Total Users" number={formatNumber(bentoBox?.totalUsers)} />
-          <InfoCard text="Total Tokens" number={bentoBox?.totalTokens} />
-          <InfoCard text="Total Kashi Pairs" number={bentoBox?.totalKashiPairs} />
+          <InfoCard text="Total Users" number={formatNumber(coffinBox?.totalUsers)} />
+          <InfoCard text="Total Tokens" number={coffinBox?.totalTokens} />
+          <InfoCard text="Total Kashi Pairs" number={coffinBox?.totalKashiPairs} />
         </div>
       </div>
       <div className="py-6 space-y-4 text-2xl font-bold text-high-emphesis lg:px-14">Tokens</div>

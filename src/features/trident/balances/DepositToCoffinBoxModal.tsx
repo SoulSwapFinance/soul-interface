@@ -5,37 +5,37 @@ import { ZERO } from 'sdk'
 import AssetInput from 'components/AssetInput'
 import { Button } from 'components/Button'
 import Dots from 'components/Dots'
-import { BentoboxIcon } from 'components/Icon'
+import { CoffinboxIcon } from 'components/Icon'
 import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
 import Typography from 'components/Typography'
 import { useBalancesSelectedCurrency } from 'features/trident/balances/useBalancesDerivedState'
 import TridentApproveGate from 'features/trident/TridentApproveGate'
 import { tryParseAmount } from 'functions'
-import { useBentoBox, useBentoBoxContract } from 'hooks'
+import { useCoffinBox, useCoffinBoxContract } from 'hooks'
 import { useActiveWeb3React } from 'services/web3'
-import { useBentoBalanceV2 } from 'state/bentobox/hooks'
+import { useCoffinBalanceV2 } from 'state/coffinbox/hooks'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import React, { FC, useCallback, useState } from 'react'
 
-interface DepositToBentoBoxModalProps {
+interface DepositToCoffinBoxModalProps {
   open: boolean
   onClose(): void
 }
 
-const DepositToBentoBoxModal: FC<DepositToBentoBoxModalProps> = ({ open, onClose }) => {
+const DepositToCoffinBoxModal: FC<DepositToCoffinBoxModalProps> = ({ open, onClose }) => {
   const { account } = useActiveWeb3React()
   const currency = useBalancesSelectedCurrency()
   const [attemptingTxn, setAttemptingTxn] = useState<boolean>(false)
   const walletBalance = useCurrencyBalance(account ?? undefined, currency)
-  const bentoBalance = useBentoBalanceV2(currency ? currency.wrapped.address : undefined)
-  const { deposit } = useBentoBox()
+  const coffinBalance = useCoffinBalanceV2(currency ? currency.wrapped.address : undefined)
+  const { deposit } = useCoffinBox()
   const [value, setValue] = useState<string>()
   const { i18n } = useLingui()
-  const bentoboxContract = useBentoBoxContract()
+  const coffinboxContract = useCoffinBoxContract()
 
   const valueCA = currency ? tryParseAmount(value, currency) : undefined
   let valuePlusBalance = valueCA?.wrapped
-  if (valuePlusBalance && bentoBalance) valuePlusBalance = valuePlusBalance.add(bentoBalance)
+  if (valuePlusBalance && coffinBalance) valuePlusBalance = valuePlusBalance.add(coffinBalance)
 
   const execute = useCallback(async () => {
     if (!currency || !value) return
@@ -77,18 +77,18 @@ const DepositToBentoBoxModal: FC<DepositToBentoBoxModalProps> = ({ open, onClose
         </div>
         <HeadlessUiModal.BorderedContent className="bg-dark-900 flex gap-3 px-3">
           <div className="border border-dark-700 rounded-full w-[48px] h-[48px] flex items-center justify-center shadow-md">
-            <BentoboxIcon width={20} height={20} />
+            <CoffinboxIcon width={20} height={20} />
           </div>
           <div className="flex flex-col gap-1">
             <Typography variant="h3" className={value ? 'text-high-emphesis' : 'text-secondary'} weight={700}>
-              {(valuePlusBalance || bentoBalance)?.toSignificant(6)}
+              {(valuePlusBalance || coffinBalance)?.toSignificant(6)}
             </Typography>
             <Typography variant="xxs" className="text-secondary">
               {i18n._(t`Total in CoffinBox`)}
             </Typography>
           </div>
         </HeadlessUiModal.BorderedContent>
-        <TridentApproveGate inputAmounts={[valueCA]} tokenApproveOn={bentoboxContract?.address}>
+        <TridentApproveGate inputAmounts={[valueCA]} tokenApproveOn={coffinboxContract?.address}>
           {({ approved, loading }) => {
             const disabled = !!error || !approved || loading || attemptingTxn
             const buttonText = attemptingTxn ? (
@@ -115,4 +115,4 @@ const DepositToBentoBoxModal: FC<DepositToBentoBoxModalProps> = ({ open, onClose
   )
 }
 
-export default DepositToBentoBoxModal
+export default DepositToCoffinBoxModal

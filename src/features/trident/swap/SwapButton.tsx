@@ -4,7 +4,7 @@ import { Button } from 'components/Button'
 import Dots from 'components/Dots'
 import { useDerivedTridentSwapContext } from 'features/trident/swap/DerivedTradeContext'
 import { selectTridentSwap, setTridentSwapState } from 'features/trident/swap/swapSlice'
-import { useBentoBoxContract, useTridentRouterContract } from 'hooks'
+import { useCoffinBoxContract, useTridentRouterContract } from 'hooks'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
 import { TradeUnion } from 'types'
 import React, { FC, useCallback } from 'react'
@@ -21,7 +21,7 @@ const SwapButton: FC<SwapButton> = ({ onClick }) => {
   const tridentSwapState = useAppSelector(selectTridentSwap)
   const { attemptingTxn } = tridentSwapState
   const router = useTridentRouterContract()
-  const bentoBox = useBentoBoxContract()
+  const coffinBox = useCoffinBoxContract()
   const { parsedAmounts, error, trade } = useDerivedTridentSwapContext()
 
   const handleClick = useCallback(() => {
@@ -32,7 +32,7 @@ const SwapButton: FC<SwapButton> = ({ onClick }) => {
   return (
     <TridentApproveGate
       inputAmounts={[parsedAmounts?.[0]]}
-      tokenApproveOn={bentoBox?.address}
+      tokenApproveOn={coffinBox?.address}
       masterContractAddress={router?.address}
     >
       {({ approved, loading }) => {

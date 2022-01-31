@@ -18,7 +18,7 @@ import NetworkGuard from 'guards/Network'
 import { SwapLayout, SwapLayoutCard } from 'layouts/SwapLayout'
 import { useActiveWeb3React } from 'services/web3'
 import { useAppDispatch } from 'state/hooks'
-import { Field, setFromBentoBalance, setRecipient } from 'state/limit-order/actions'
+import { Field, setFromCoffinBalance, setRecipient } from 'state/limit-order/actions'
 import useLimitOrderDerivedCurrencies, {
   useLimitOrderActionHandlers,
   useLimitOrderDerivedLimitPrice,
@@ -34,7 +34,7 @@ const LimitOrder = () => {
   const dispatch = useAppDispatch()
   const { chainId } = useActiveWeb3React()
   const [isExpertMode] = useExpertModeManager()
-  const { typedField, typedValue, fromBentoBalance, recipient } = useLimitOrderState()
+  const { typedField, typedValue, fromCoffinBalance, recipient } = useLimitOrderState()
   const { inputCurrency, outputCurrency } = useLimitOrderDerivedCurrencies()
   const trade = useLimitOrderDerivedTrade()
   const rate = useLimitOrderDerivedLimitPrice()
@@ -98,11 +98,11 @@ const LimitOrder = () => {
                 id={`switch-classic-withdraw-from-0}`}
                 {...props}
                 label={i18n._(t`Pay from`)}
-                onChange={() => dispatch(setFromBentoBalance(!fromBentoBalance))}
+                onChange={() => dispatch(setFromCoffinBalance(!fromCoffinBalance))}
               />
             )}
             selected={true}
-            spendFromWallet={!fromBentoBalance}
+            spendFromWallet={!fromCoffinBalance}
             currency={inputCurrency}
             value={(typedField === Field.INPUT ? typedValue : parsedAmounts?.inputAmount?.toSignificant(6)) || ''}
             onChange={(value) => onUserInput(Field.INPUT, value || '')}

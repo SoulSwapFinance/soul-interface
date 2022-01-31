@@ -2,17 +2,17 @@ import { Currency, JSBI, Rebase } from 'sdk'
 import { useMemo } from 'react'
 
 import { useSingleContractMultipleData } from '../state/multicall/hooks'
-import { useBentoBoxContract } from './useContract'
+import { useCoffinBoxContract } from './useContract'
 
-type UseBentoRebases = (tokens: (Currency | undefined)[]) => {
+type UseCoffinRebases = (tokens: (Currency | undefined)[]) => {
   rebases: Record<string, Rebase | undefined>
   loading: boolean
 }
 
-const useBentoRebases: UseBentoRebases = (tokens) => {
+const useCoffinRebases: UseCoffinRebases = (tokens) => {
   const addresses = useMemo(() => tokens.map((token) => [token?.wrapped.address]), [tokens])
-  const bentoboxContract = useBentoBoxContract()
-  const results = useSingleContractMultipleData(bentoboxContract, 'totals', addresses)
+  const coffinboxContract = useCoffinBoxContract()
+  const results = useSingleContractMultipleData(coffinboxContract, 'totals', addresses)
   const loading: boolean = useMemo(() => results.some((callState) => callState.loading), [results])
 
   return useMemo(
@@ -37,9 +37,9 @@ const useBentoRebases: UseBentoRebases = (tokens) => {
   )
 }
 
-export const useBentoRebase = (token: Currency | undefined) => {
+export const useCoffinRebase = (token: Currency | undefined) => {
   const tokens = useMemo(() => [token], [token])
-  const { rebases, loading } = useBentoRebases(tokens)
+  const { rebases, loading } = useCoffinRebases(tokens)
 
   return useMemo(() => {
     if (token && !loading) {
@@ -50,4 +50,4 @@ export const useBentoRebase = (token: Currency | undefined) => {
   }, [loading, rebases, token])
 }
 
-export default useBentoRebases
+export default useCoffinRebases

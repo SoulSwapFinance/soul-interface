@@ -23,11 +23,11 @@ export default function Withdraw({ pair }: any): JSX.Element {
   const { i18n } = useLingui()
 
   // State
-  const [useBento, setUseBento] = useState<boolean>(pair.asset.bentoBalance.gt(0))
+  const [useCoffin, setUseCoffin] = useState<boolean>(pair.asset.coffinBalance.gt(0))
   const [value, setValue] = useState('')
   const [pinMax, setPinMax] = useState(false)
 
-  const [kashiApprovalState, approveKashiFallback, kashiPermit, onApprove, onCook] = useKashiApproveCallback()
+  const [underworldApprovalState, approveKashiFallback, kashiPermit, onApprove, onCook] = useKashiApproveCallback()
 
   // Calculated
   const max = minimum(pair.maxAssetAvailable, pair.currentUserAssetAmount.value)
@@ -46,7 +46,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
         // .toBigNumber(pair.asset.tokenInfo.decimals)),
       i18n._(
         t`Please make sure your ${
-          useBento ? 'CoffinBox' : 'wallet'
+          useCoffin ? 'CoffinBox' : 'wallet'
         } balance is sufficient to withdraw and then try again.`
       ),
       true
@@ -86,7 +86,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
           // .toBigNumber(pair.asset.tokenInfo.decimals)
           // .mulDiv(pair.currentTotalAsset.base, pair.currentAllAssets.value)
 
-    // cooker.removeAsset(fraction, useBento)
+    // cooker.removeAsset(fraction, useCoffin)
     return `${i18n._(t`Withdraw`)} ${pair.asset.tokenInfo.symbol}`
   }
 
@@ -101,10 +101,10 @@ export default function Withdraw({ pair }: any): JSX.Element {
         token={pair.asset}
         value={Number(displayValue).toString()}
         setValue={setValue}
-        useBentoTitleDirection="up"
-        useBentoTitle="to"
-        useBento={useBento}
-        setUseBento={setUseBento}
+        useCoffinTitleDirection="up"
+        useCoffinTitle="to"
+        useCoffin={useCoffin}
+        setUseCoffin={setUseCoffin}
         max={max}
         pinMax={pinMax}
         setPinMax={setPinMax}

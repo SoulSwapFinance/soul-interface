@@ -8,7 +8,7 @@ import { Button } from 'components/Button'
 import { KashiCooker } from 'entities'
 import { TransactionReview } from 'entities/TransactionReview'
 import { Warning, Warnings } from 'entities/Warnings'
-import { toAmount, toShare } from 'functions/bentobox'
+import { toAmount, toShare } from 'functions/coffinbox'
 import { e10, maximum, minimum, ZERO } from 'functions/math'
 import { tryParseAmount } from 'functions/parse'
 import { computeRealizedLPFeePercent, warningSeverity } from 'functions/prices'
@@ -39,8 +39,8 @@ export default function Repay({ pair }: RepayProps) {
   const { account, chainId } = useActiveWeb3React()
 
   // State
-  const [useBentoRepay, setUseBentoRepay] = useState<boolean>(pair.asset.bentoBalance.gt(0))
-  const [useBentoRemove, setUseBentoRemoveCollateral] = useState<boolean>(true)
+  const [useCoffinRepay, setUseCoffinRepay] = useState<boolean>(pair.asset.coffinBalance.gt(0))
+  const [useCoffinRemove, setUseCoffinRemoveCollateral] = useState<boolean>(true)
 
   const [repayValue, setRepayAssetValue] = useState('')
   const [removeValue, setRemoveCollateralValue] = useState('')
@@ -58,8 +58,8 @@ export default function Repay({ pair }: RepayProps) {
 
   console.log({ pair })
 
-  const balance = useBentoRepay
-    ? toAmount(pair.asset, pair.asset.bentoBalance)
+  const balance = useCoffinRepay
+    ? toAmount(pair.asset, pair.asset.coffinBalance)
     : assetNative
     ? BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
     : pair.asset.balance
@@ -166,8 +166,8 @@ export default function Repay({ pair }: RepayProps) {
 
   const warnings = new Warnings()
     .addError(
-      assetNative && !useBentoRepay && pinRepayMax,
-      `You cannot MAX repay ${pair.asset.tokenInfo.symbol} directly from your wallet. Please deposit your ${pair.asset.tokenInfo.symbol} into the BentoBox first, then repay. Because your debt is slowly accrueing interest we can't predict how much it will be once your transaction gets mined.`
+      assetNative && !useCoffinRepay && pinRepayMax,
+      `You cannot MAX repay ${pair.asset.tokenInfo.symbol} directly from your wallet. Please deposit your ${pair.asset.tokenInfo.symbol} into the Coffin first, then repay. Because your debt is slowly accrueing interest we can't predict how much it will be once your transaction gets mined.`
     )
     .addError(
       new BigNumber(displayRemoveValue, pair.collateral.tokenInfo.decimals)
@@ -187,7 +187,7 @@ export default function Repay({ pair }: RepayProps) {
           new BigNumber(displayRepayValue, pair.asset.tokenInfo.decimals)),
           // .toBigNumber(pair.asset.tokenInfo.decimals)),
         `Please make sure your ${
-          useBentoRepay ? 'BentoBox' : 'wallet'
+          useCoffinRepay ? 'Coffin' : 'wallet'
         } balance is sufficient to repay and then try again.`,
         true
       )
@@ -268,7 +268,7 @@ export default function Repay({ pair }: RepayProps) {
       const share = toShare(pair.collateral, pair.userCollateralAmount.value)
 
       cooker.removeCollateral(pair.userCollateralShare, true)
-      cooker.bentoTransferCollateral(pair.userCollateralShare, SOULSWAP_MULTI_EXACT_SWAPPER_ADDRESS[chainId || 1])
+      cooker.coffinTransferCollateral(pair.userCollateralShare, SOULSWAP_MULTI_EXACT_SWAPPER_ADDRESS[chainId || 1])
       cooker.repayShare(pair.userBorrowPart)
 
       const path = trade.route.path.map((token) => token.address) || []
@@ -307,14 +307,14 @@ export default function Repay({ pair }: RepayProps) {
 
       cooker.repayPart(pair.userBorrowPart, true)
 
-      if (!useBentoRemove) {
-        cooker.bentoWithdrawCollateral(ZERO, BigNumber.from(-1))
+      if (!useCoffinRemove) {
+        cooker.coffinWithdrawCollateral(ZERO, BigNumber.from(-1))
       }
 
       summary = 'Repay All'
     } else {
       if (pinRepayMax && pair.userBorrowPart.gt(0) && balance.gte(pair.currentUserBorrowAmount.value)) {
-        cooker.repayPart(pair.userBorrowPart, useBentoRepay)
+        cooker.repayPart(pair.userBorrowPart, useCoffinRepay)
         summary = 'Repay Max'
       } else if (
         new BigNumber(displayRepayValue, pair.asset.tokenInfo.decimals)
@@ -323,7 +323,7 @@ export default function Repay({ pair }: RepayProps) {
         cooker.repay(
           new BigNumber(displayRepayValue, pair.asset.tokenInfo.decimals),
           // .toBigNumber(pair.asset.tokenInfo.decimals), 
-          useBentoRepay
+          useCoffinRepay
         )
         summary = 'Repay'
       }
@@ -344,7 +344,7 @@ export default function Repay({ pair }: RepayProps) {
               // .toBigNumber(pair.collateral.tokenInfo.decimals)
               )
 
-        cooker.removeCollateral(share, useBentoRemove)
+        cooker.removeCollateral(share, useCoffinRemove)
         summary += (summary ? ' and ' : '') + 'Remove Collateral'
       }
     }
@@ -363,10 +363,10 @@ export default function Repay({ pair }: RepayProps) {
         token={pair.asset}
         value={displayRepayValue}
         setValue={setRepayAssetValue}
-        useBentoTitleDirection="down"
-        useBentoTitle={`Repay ${pair.asset.tokenInfo.symbol} from`}
-        useBento={useBentoRepay}
-        setUseBento={setUseBentoRepay}
+        useCoffinTitleDirection="down"
+        useCoffinTitle={`Repay ${pair.asset.tokenInfo.symbol} from`}
+        useCoffin={useCoffinRepay}
+        setUseCoffin={setUseCoffinRepay}
         maxTitle="Balance"
         max={balance}
         pinMax={pinRepayMax}
@@ -381,10 +381,10 @@ export default function Repay({ pair }: RepayProps) {
         token={pair.collateral}
         value={displayRemoveValue}
         setValue={setRemoveCollateralValue}
-        useBentoTitleDirection="up"
-        useBentoTitle={`Remove ${pair.collateral.tokenInfo.symbol} to`}
-        useBento={useBentoRemove}
-        setUseBento={setUseBentoRemoveCollateral}
+        useCoffinTitleDirection="up"
+        useCoffinTitle={`Remove ${pair.collateral.tokenInfo.symbol} to`}
+        useCoffin={useCoffinRemove}
+        setUseCoffin={setUseCoffinRemoveCollateral}
         max={nextMaxRemoveCollateral}
         pinMax={pinRemoveMax}
         setPinMax={setPinRemoveMax}
@@ -432,7 +432,7 @@ export default function Repay({ pair }: RepayProps) {
       <UnderworldApproveButton
         color="pink"
         content={(onCook: any) => (
-          <TokenApproveButton value={displayRepayValue} token={assetToken} needed={!useBentoRepay}>
+          <TokenApproveButton value={displayRepayValue} token={assetToken} needed={!useCoffinRepay}>
             <Button onClick={() => onCook(pair, onExecute)} disabled={actionDisabled}>
               {actionName}
             </Button>

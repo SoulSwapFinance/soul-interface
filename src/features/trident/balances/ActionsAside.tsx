@@ -4,7 +4,7 @@ import Card from 'components/Card'
 import { CurrencyLogo } from 'components/CurrencyLogo'
 import Typography from 'components/Typography'
 import { selectTridentBalances } from 'features/trident/balances/balancesSlice'
-import BentoActions from 'features/trident/balances/BentoActions'
+import CoffinActions from 'features/trident/balances/CoffinActions'
 import { useBalancesSelectedCurrency } from 'features/trident/balances/useBalancesDerivedState'
 import { ActiveModal } from 'features/trident/types'
 import { useAppSelector } from 'state/hooks'
@@ -27,14 +27,14 @@ const _ActionsHeader = () => {
   )
 }
 
-export const ActionsAsideBento = () => {
+export const ActionsAsideCoffin = () => {
   const { activeModal } = useAppSelector(selectTridentBalances)
 
   if (activeModal && [ActiveModal.MENU, ActiveModal.WITHDRAW].includes(activeModal))
     return (
       <div className="shadow-xl shadow-pink/5 rounded overflow-hidden">
         <_ActionsHeader />
-        <BentoActions />
+        <CoffinActions />
       </div>
     )
 

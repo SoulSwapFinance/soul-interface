@@ -1,7 +1,7 @@
 [
   {
     "inputs": [
-      { "internalType": "contract IBentoBoxV1", "name": "bentoBox_", "type": "address" },
+      { "internalType": "contract ICoffinBoxV1", "name": "coffinBox_", "type": "address" },
       { "internalType": "contract IUniswapV2Factory", "name": "factory_", "type": "address" },
       { "internalType": "bytes32", "name": "pairCodeHash_", "type": "bytes32" }
     ],
@@ -10,8 +10,8 @@
   },
   {
     "inputs": [],
-    "name": "bentoBox",
-    "outputs": [{ "internalType": "contract IBentoBoxV1", "name": "", "type": "address" }],
+    "name": "coffinBox",
+    "outputs": [{ "internalType": "contract ICoffinBoxV1", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },

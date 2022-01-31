@@ -6,8 +6,8 @@ import useCurrenciesFromURL from 'features/trident/useCurrenciesFromURL'
 import { maxAmountSpend, toAmountCurrencyAmount } from 'functions'
 import { getTradeVersion } from 'functions/getTradeVersion'
 import { tryParseAmount } from 'functions/parse'
-import { useBentoOrWalletBalance } from 'hooks/useBentoOrWalletBalance'
-import useBentoRebases from 'hooks/useBentoRebases'
+import { useCoffinOrWalletBalance } from 'hooks/useCoffinOrWalletBalance'
+import useCoffinRebases from 'hooks/useCoffinRebases'
 import { useBestTridentTrade } from 'hooks/useBestTridentTrade'
 import { useActiveWeb3React } from 'services/web3'
 import { useAppSelector } from 'state/hooks'
@@ -24,7 +24,7 @@ export const _useSwapPage = () => {
   const {
     currencies: [currencyA, currencyB],
   } = useCurrenciesFromURL()
-  const { rebases, loading: rebasesLoading } = useBentoRebases([currencyA, currencyB])
+  const { rebases, loading: rebasesLoading } = useCoffinRebases([currencyA, currencyB])
 
   const inputCurrencyAmount = useMemo(() => {
     return tryParseAmount(value, typedField === TypedField.A ? currencyA : currencyB)
@@ -74,7 +74,7 @@ export const _useSwapPage = () => {
     return undefined
   }, [rebases, rebasesLoading, trade])
 
-  const balance = useBentoOrWalletBalance(account ?? undefined, currencyA, spendFromWallet)
+  const balance = useCoffinOrWalletBalance(account ?? undefined, currencyA, spendFromWallet)
 
   const formattedAmounts = useMemo(() => {
     if (isWrap) return [value, value]

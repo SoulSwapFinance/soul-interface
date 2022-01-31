@@ -22,9 +22,9 @@ import {
   toShare,
   validateChainlinkOracleData,
 } from 'functions'
-import { useBentoBoxContract, useBoringHelperContract } from 'hooks'
+import { useCoffinBoxContract, useBoringHelperContract } from 'hooks'
 import { useAllTokens } from 'hooks/Tokens'
-import { useBentoStrategies, useClones } from 'services/graph'
+import { useCoffinStrategies, useClones } from 'services/graph'
 import { useActiveWeb3React, useQueryFilter } from 'services/web3'
 import { useSingleCallResult } from 'state/multicall/hooks'
 import { useMemo } from 'react'
@@ -35,15 +35,15 @@ const BLACKLISTED_TOKENS = ['0xC6d54D2f624bc83815b49d9c2203b1330B841cA0']
 const BLACKLISTED_ORACLES = ['0x8f2CC3376078568a04eBC600ae5F0a036DBfd812']
 
 export function useUnderworldPairAddresses(): string[] {
-  const bentoBoxContract = useBentoBoxContract()
+  const coffinBoxContract = useCoffinBoxContract()
   const { chainId } = useActiveWeb3React()
   const useEvents = chainId && chainId !== ChainId.BSC 
 //   && chainId !== ChainId.MATIC && chainId !== ChainId.ARBITRUM
   const allTokens = useAllTokens()
   const events = useQueryFilter({
     chainId,
-    contract: bentoBoxContract,
-    event: bentoBoxContract && bentoBoxContract.filters.LogDeploy(UNDERWORLD_ADDRESS[chainId]),
+    contract: coffinBoxContract,
+    event: coffinBoxContract && coffinBoxContract.filters.LogDeploy(UNDERWORLD_ADDRESS[chainId]),
     shouldFetch: useEvents 
     // && featureEnabled(Feature.UNDERWORLD, chainId),
   })
@@ -97,7 +97,7 @@ export function useUnderworldPairs(addresses = []) {
     )
   }, [allTokens, currency, pollKashiPairs])
 
-  const strategies = useBentoStrategies({ chainId })
+  const strategies = useCoffinStrategies({ chainId })
   
   const getBalancesArgs = useMemo(() => [account, tokens.map((token) => token?.address)], [account, tokens])
 
@@ -125,8 +125,8 @@ export function useUnderworldPairs(addresses = []) {
           ...currentValue,
           ...balance,
           address: currentValue.address,
-          elastic: balance.bentoAmount,
-          base: balance.bentoShare,
+          elastic: balance.coffinAmount,
+          base: balance.coffinShare,
           strategy,
           usd,
           symbol,

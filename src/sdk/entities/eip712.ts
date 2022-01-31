@@ -18,7 +18,7 @@ export interface Message {
     oracleAddress: string;
     oracleData: string;
 }
-export interface BentoApprovalMessage {
+export interface CoffinApprovalMessage {
     warning: string;
     user: string;
     masterContract: string;
@@ -45,7 +45,7 @@ export declare const getTypedData: (message: Message, chainId: ChainId) => {
     domain: Domain;
     message: Message;
 };
-export declare const getTypedDataBento: (message: BentoApprovalMessage, chainId: ChainId) => {
+export declare const getTypedDataCoffin: (message: CoffinApprovalMessage, chainId: ChainId) => {
     types: {
         EIP712Domain: {
             name: string;
@@ -58,7 +58,7 @@ export declare const getTypedDataBento: (message: BentoApprovalMessage, chainId:
     };
     primaryType: string;
     domain: Domain;
-    message: BentoApprovalMessage;
+    message: CoffinApprovalMessage;
 };
 export declare const getTypeHash: (typedData: any) => string;
 export declare const getSignatureWithProvider: (message: Message, chainId: ChainId, provider: Web3Provider) => Promise<{
@@ -66,12 +66,12 @@ export declare const getSignatureWithProvider: (message: Message, chainId: Chain
     r: string;
     s: string;
 }>;
-export declare const getSignatureWithProviderBentobox: (message: BentoApprovalMessage, chainId: ChainId, provider: Web3Provider) => Promise<{
+export declare const getSignatureWithProviderCoffinbox: (message: CoffinApprovalMessage, chainId: ChainId, provider: Web3Provider) => Promise<{
     v: number;
     r: string;
     s: string;
 }>;
-export declare const getSignatureBento: (bentoApproval: BentoApprovalMessage, chainId: ChainId, privateKey: string) => Promise<{
+export declare const getSignatureCoffin: (coffinApproval: CoffinApprovalMessage, chainId: ChainId, privateKey: string) => Promise<{
     v: number;
     r: string;
     s: string;

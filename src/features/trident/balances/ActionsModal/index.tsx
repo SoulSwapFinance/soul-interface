@@ -3,8 +3,8 @@ import { CurrencyLogo } from 'components/CurrencyLogo'
 import BottomSlideIn from 'components/Dialog/BottomSlideIn'
 import Typography from 'components/Typography'
 import { selectTridentBalances, setBalancesActiveModal } from 'features/trident/balances/balancesSlice'
-import BentoActions from 'features/trident/balances/BentoActions'
-import DepositToBentoBoxModal from 'features/trident/balances/DepositToBentoBoxModal'
+import CoffinActions from 'features/trident/balances/CoffinActions'
+import DepositToCoffinBoxModal from 'features/trident/balances/DepositToCoffinBoxModal'
 import { useBalancesSelectedCurrency } from 'features/trident/balances/useBalancesDerivedState'
 import WalletActions from 'features/trident/balances/WalletActions'
 import WithdrawToWalletModal from 'features/trident/balances/WithdrawToWalletModal'
@@ -42,7 +42,7 @@ const _ActionsModal: FC = ({ children }) => {
   )
 }
 
-export const BentoActionsModal: FC = () => {
+export const CoffinActionsModal: FC = () => {
   const isDesktop = useDesktopMediaQuery()
   const dispatch = useAppDispatch()
   const { activeModal } = useAppSelector(selectTridentBalances)
@@ -50,7 +50,7 @@ export const BentoActionsModal: FC = () => {
   return (
     <>
       <_ActionsModal>
-        <BentoActions />
+        <CoffinActions />
       </_ActionsModal>
       <WithdrawToWalletModal
         open={activeModal === ActiveModal.WITHDRAW}
@@ -72,7 +72,7 @@ export const WalletActionsModal: FC = () => {
       <_ActionsModal>
         <WalletActions />
       </_ActionsModal>
-      <DepositToBentoBoxModal
+      <DepositToCoffinBoxModal
         open={activeModal === ActiveModal.DEPOSIT}
         onClose={() =>
           isDesktop ? dispatch(setBalancesActiveModal(ActiveModal.MENU)) : dispatch(setBalancesActiveModal(undefined))

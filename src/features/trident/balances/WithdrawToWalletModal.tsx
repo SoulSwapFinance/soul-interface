@@ -10,9 +10,9 @@ import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
 import Typography from 'components/Typography'
 import { useBalancesSelectedCurrency } from 'features/trident/balances/useBalancesDerivedState'
 import { tryParseAmount } from 'functions'
-import { useBentoBox } from 'hooks'
+import { useCoffinBox } from 'hooks'
 import { useActiveWeb3React } from 'services/web3'
-import { useBentoBalanceV2 } from 'state/bentobox/hooks'
+import { useCoffinBalanceV2 } from 'state/coffinbox/hooks'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import React, { FC, useCallback, useState } from 'react'
 
@@ -26,8 +26,8 @@ const WithdrawToWalletModal: FC<WithdrawToWalletModalProps> = ({ open, onClose }
   const currency = useBalancesSelectedCurrency()
   const [attemptingTxn, setAttemptingTxn] = useState<boolean>(false)
   const walletBalance = useCurrencyBalance(account ?? undefined, currency)
-  const bentoBalance = useBentoBalanceV2(currency ? currency.wrapped.address : undefined)
-  const { withdraw } = useBentoBox()
+  const coffinBalance = useCoffinBalanceV2(currency ? currency.wrapped.address : undefined)
+  const { withdraw } = useCoffinBox()
   const [value, setValue] = useState<string>()
   const { i18n } = useLingui()
 
@@ -51,9 +51,9 @@ const WithdrawToWalletModal: FC<WithdrawToWalletModalProps> = ({ open, onClose }
     ? i18n._(t`Connect Wallet`)
     : !valueCA?.greaterThan(ZERO)
     ? i18n._(t`Enter Amount`)
-    : !bentoBalance
+    : !coffinBalance
     ? i18n._(t`Loading Balance`)
-    : valueCA?.greaterThan(bentoBalance)
+    : valueCA?.greaterThan(coffinBalance)
     ? i18n._(t`Insufficient ${valueCA.currency.symbol} Balance`)
     : ''
 
