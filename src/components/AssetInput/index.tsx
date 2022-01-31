@@ -192,7 +192,8 @@ const AssetInputPanel = ({
 
   // const pairValue = useUSDCValue(tryParseAmount(Number(value) === 0 ? '1' : value, currency))
   const usdcValue = useUSDCValue(tryParseAmount(Number(value) === 0 ? '1' : value, currency))
-
+  const tokenPrice = usePrice(currency.address)
+ 
   // const usdValue = usePrice(currency.toString())
   const span = useRef<HTMLSpanElement | null>(null)
   const [width, setWidth] = useState(0)
@@ -270,7 +271,10 @@ const AssetInputPanel = ({
             variant="xs"
             className={error ? 'text-red' : usdcValue && value ? 'text-green' : 'text-low-emphesis'}
           >
-            ≈{usdcValue ? usdcValue.toSignificant(4) : formatCurrency(pairPrice * Number(value), 2)}
+            ≈{usdcValue ? usdcValue.toSignificant(4) : ( 
+              currency.symbol == 'SOUL' ? formatCurrency(tokenPrice * Number(value), 2) :
+              formatCurrency(pairPrice * Number(value), 2))            
+            }
           </Typography>
         </div>
         {error ? (
@@ -295,7 +299,7 @@ const AssetInputPanel = ({
         'flex-1 rounded bg-dark-900 flex flex-col overflow-hidden'
       )}
     >
-      {/*This acts as a reference to get input width*/}
+      {/* Acts as a reference to get input width */}
       <Typography variant="h3" weight={700} className="relative flex flex-row items-baseline">
         <span ref={span} className="opacity-0 absolute pointer-events-none tracking-[0]">
           {`${value ? value : '0.00'}`}

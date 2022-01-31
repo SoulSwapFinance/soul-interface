@@ -512,22 +512,6 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
     }
   }
 
-  // const fetchFusdValue = useCallback(async (lpToken) => {
-  //   try {
-  //     // return total amount of lp tokens locked in summoner contract
-  //     const netLpTokens = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[chainId])
-
-  //     // how many ftm tokens held in the lpTokenContract account
-  //     const fusdOrFtmAmount = isFusd ? await wftmContract.balanceOf(lpToken) : await fusdContract.balanceOf(lpToken)
-
-  //     return fusdOrFtmAmount
-  //   } catch (e) {
-  //     console.log(e)
-  //     alert(e.message)
-  //     return e
-  //   }
-  // }, [bondContract])
-
   /**
    * Value of SOUL in FUSD
    */
