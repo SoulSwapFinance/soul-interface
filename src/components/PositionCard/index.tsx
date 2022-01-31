@@ -18,7 +18,7 @@ import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
 import { useCurrencyBalance, useTokenBalance } from '../../state/wallet/hooks'
 import { useTotalSupply } from '../../hooks/useTotalSupply'
-import { classNames, formatNumberScale } from '../../functions'
+import { classNames, formatNumber, formatNumberScale } from '../../functions'
 import { Transition } from '@headlessui/react'
 import { useSingleCallResult } from 'state/multicall/hooks'
 import { useCurrency } from 'hooks/Tokens'
@@ -277,9 +277,9 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
             </div>
 
             <div className="flex items-center justify-between">
-              <div>{i18n._(t`Deposited Value`)}:</div>
+              <div>{i18n._(t`Pooled Value`)}:</div>
               <div className="font-semibold">
-                ${userPoolBalance ? pooledAmountFiatValueRaw?.toPrecision(4)
+                {userPoolBalance ? formatNumber(pooledAmountFiatValueRaw, true)
                   // ? pooledAmountFiatValue
                 // ?.toSignificant(6, { groupSeparator: ',' }) // ?.toSignificant(4) */}
                   : 0}
