@@ -14,8 +14,6 @@ import useSWR from 'swr'
 
 import { GraphProps } from '../interfaces'
 
-// TODO: Fix shouldFetch //
-
 export function useClones({ chainId, shouldFetch = true, swrConfig = undefined }) {
   const { data } = useSWR(shouldFetch ? () => ['clones', chainId] : null, (_, chainId) => getClones(chainId), swrConfig)
   return data
@@ -49,11 +47,11 @@ export function useCoffinBox({ chainId = ChainId.FANTOM, variables, shouldFetch 
 export function useCoffinStrategies({
   chainId = ChainId.FANTOM,
   variables,
-  // shouldFetch = featureEnabled(Feature.COFFINBOX, chainId),
+  shouldFetch = featureEnabled(Feature.COFFINBOX, chainId),
   swrConfig = undefined,
 }: GraphProps) {
   const { data } = useSWR(
-    // shouldFetch ? ['coffinStrategies', chainId, stringify(variables)] : 
+    shouldFetch ? ['coffinStrategies', chainId, stringify(variables)] : 
     null,
     () => getCoffinStrategies(chainId, variables),
     swrConfig
@@ -65,11 +63,11 @@ export function useCoffinStrategies({
 export function useCoffinTokens({
   chainId,
   variables,
-  // shouldFetch = featureEnabled(Feature.COFFINBOX, chainId),
+  shouldFetch = featureEnabled(Feature.COFFINBOX, chainId),
   swrConfig = undefined,
 }: GraphProps) {
   const { data } = useSWR(
-    // shouldFetch ? ['coffinTokens', chainId, stringify(variables)] :
+    shouldFetch ? ['coffinTokens', chainId, stringify(variables)] :
     null,
     () => getCoffinTokens(chainId, variables),
     swrConfig
@@ -80,11 +78,11 @@ export function useCoffinTokens({
 export function useCoffinUserTokens({
   chainId,
   variables,
-  // shouldFetch = featureEnabled(Feature.COFFINBOX, chainId),
+  shouldFetch = featureEnabled(Feature.COFFINBOX, chainId),
   swrConfig = undefined,
 }: GraphProps) {
   return useSWR<CurrencyAmount<Token>[]>(
-    // shouldFetch ? ['coffinUserTokens', chainId, stringify(variables)] : 
+    shouldFetch ? ['coffinUserTokens', chainId, stringify(variables)] : 
     null,
     () => getCoffinUserTokens(chainId, variables),
     swrConfig
