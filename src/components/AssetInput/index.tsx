@@ -12,7 +12,7 @@ import NumericalInput from 'components/Input/Numeric'
 import Switch from 'components/Switch'
 import Typography from 'components/Typography'
 import BentoBoxFundingSourceModal from 'features/trident/add/BentoBoxFundingSourceModal'
-import { classNames, maxAmountSpend, tryParseAmount } from 'functions'
+import { classNames, formatNumber, maxAmountSpend, tryParseAmount } from 'functions'
 import { useBentoOrWalletBalance } from 'hooks/useBentoOrWalletBalance'
 import useDesktopMediaQuery from 'hooks/useDesktopMediaQuery'
 import { useUSDCValue } from 'hooks/useUSDCPrice'
@@ -270,8 +270,7 @@ const AssetInputPanel = ({
             variant="xs"
             className={error ? 'text-red' : usdcValue && value ? 'text-green' : 'text-low-emphesis'}
           >
-            {/* ≈${fiatValue ? fiatValue : '0.00'} */}
-            ≈{usdcValue ? formatCurrency(Number(usdcValue), 2) : formatCurrency(pairPrice * Number(value), 2)}
+            ≈{usdcValue ? usdcValue.toSignificant(4) : formatCurrency(pairPrice * Number(value), 2)}
           </Typography>
         </div>
         {error ? (
