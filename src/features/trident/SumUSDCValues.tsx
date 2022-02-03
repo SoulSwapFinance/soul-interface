@@ -1,7 +1,8 @@
 import { AddressZero } from '@ethersproject/constants'
-import { Currency, CurrencyAmount } from 'sdk'
+import { Currency, CurrencyAmount, Token } from 'sdk'
 import { useUSDCValue } from 'hooks/useUSDCPrice'
 import { FC, ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
+// import { formatNumber, tryParseAmount } from 'functions'
 
 // Dummy component that fetches usdcValue
 const USDCValue: FC<{
@@ -25,7 +26,7 @@ const USDCValue: FC<{
 
 interface SumUSDCValuesProps {
   amounts?: (CurrencyAmount<Currency> | undefined)[]
-  children: ({ amount }: { amount: CurrencyAmount<Currency> | undefined }) => ReactNode
+  children: ({ amount }: { amount: CurrencyAmount<Currency | Token> | undefined }) => ReactNode
 }
 
 const SumUSDCValues: FC<SumUSDCValuesProps> = ({ amounts, children }) => {
@@ -37,15 +38,15 @@ const SumUSDCValues: FC<SumUSDCValuesProps> = ({ amounts, children }) => {
     }))
   }, [])
 
-  const values = useMemo(() => Object.values(state).filter(Boolean) as CurrencyAmount<Currency>[], [state])
-  const amount = useMemo(() => (values.length > 0 ? values.reduce((acc, cur) => acc.add(cur)) : undefined), [values])
+  const values = useMemo(() => Object.values(state).filter(Boolean) as CurrencyAmount<Currency | Token>[], [state])
+  // const amount = useMemo(() => (values.length > 0 ? values.reduce((acc, cur) => acc.add(cur)) : undefined), [values])
 
   return (
     <>
       {amounts?.map((el, index) => (
         <USDCValue amount={el} key={index} update={update} />
       ))}
-      {children({ amount })}
+      {/* {children({ amount })} */}
     </>
   )
 }

@@ -144,8 +144,8 @@ module.exports = withBundleAnalyzer(
           destination: '/trident/balances/wallet',
         },
         {
-          source: '/trident/balances',
-          destination: '/trident/balances/wallet',
+          source: '/balances/coffinbox',
+          destination: '/trident/balances/coffinbox',
         },
         {
           source: '/farm',
