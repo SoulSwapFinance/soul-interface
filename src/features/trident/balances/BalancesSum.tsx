@@ -26,11 +26,11 @@ export const LiquidityPositionsBalancesSum = () => {
 
   const tvlInfo = useTVL()
 
-  const valueStaked = positions.reduce((previousValue, currentValue) => {
-    const pool = farmingPools.find((r) => parseInt(r.id.toString()) == parseInt(currentValue.id))
-    const poolTvl = tvlInfo.find((r) => getAddress(r.lpToken) == getAddress(pool?.lpToken))
-    return previousValue + (currentValue.amount / 1e18) * poolTvl?.lpPrice
-  }, 0)
+  // const valueStaked = positions.reduce((previousValue, currentValue) => {
+  //   const pool = farmingPools.find((r) => parseInt(r.id.toString()) == parseInt(currentValue.id))
+  //   const poolTvl = tvlInfo.find((r) => getAddress(r.lpToken) == getAddress(pool?.lpToken))
+  //   return previousValue + (currentValue.amount / 1e18) * poolTvl?.lpPrice
+  // }, 0)
 
   return (
     <div className="flex gap-14">
@@ -38,7 +38,7 @@ export const LiquidityPositionsBalancesSum = () => {
         <Typography variant="sm">{i18n._(t`Total Value`)}</Typography>
         <Typography variant="lg" weight={700} className="text-high-emphesis">
           {/* ${sum?.toFixed(2) || '0.00'} */}
-          { formatNumberScale(valueStaked, true) }
+          {/* { formatNumberScale(valueStaked, true) } */}
         </Typography>
       </div>
       <div className="flex flex-col gap-1">

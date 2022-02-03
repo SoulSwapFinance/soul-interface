@@ -6,7 +6,6 @@ import { FC, ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
 // Dummy component that fetches usdcValue
 const USDCValue: FC<{
   amount?: CurrencyAmount<Currency>
-  // @ts-ignore TYPE NEEDS FIXING
   update(address: string, value?: CurrencyAmount<Currency>)
 }> = ({ amount, update }) => {
   const usdcValue = useUSDCValue(amount)
@@ -15,7 +14,6 @@ const USDCValue: FC<{
   useEffect(() => {
     if (!address) return
 
-    // @ts-ignore TYPE NEEDS FIXING
     update(address, usdcValue)
     return () => {
       update(address, undefined)

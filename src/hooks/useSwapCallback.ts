@@ -8,8 +8,15 @@ import { AddressZero } from '@ethersproject/constants'
 import { t } from '@lingui/macro'
 import {
   Currency,
+  ComplexPathParams,
   CurrencyAmount,
+  ExactInputSingleParams,
+  ExactInputParams,
+  InitialPath,
+  Path,
   Percent,
+  PercentagePath,
+  RouteType,
   Router as LegacyRouter,
   SwapParameters,
   toHex,
@@ -18,15 +25,6 @@ import {
   TradeType,
 } from 'sdk'
 import { getBigNumber, MultiRoute } from '@sushiswap/tines'
-import {
-  ComplexPathParams,
-  ExactInputParams,
-  ExactInputSingleParams,
-  InitialPath,
-  Path,
-  PercentagePath,
-  RouteType,
-} from '@sushiswap/trident-sdk'
 import { EIP_1559_ACTIVATION_BLOCK } from '../constants'
 import { Feature } from 'enums'
 import { approveMasterContractAction, batchAction, unwrapWETHAction } from 'features/trident/actions'
