@@ -246,7 +246,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
       return new Price(currency, stablecoin, denominator, numerator)
     }
     return undefined
-  }, [currency, stablecoin, usdt, soul, seance, luxor, wlum, weth, wbtc, bnb, v2USDCTrade])
+  }, [currency, stablecoin, v2USDCTrade])
 }
 
 export function useUSDCValue(currencyAmount: CurrencyAmount<Currency> | undefined | null) {
@@ -272,7 +272,7 @@ export function useStablecoinAmountFromFiatValue(fiatValue: string | null | unde
   const stablecoin = chainId ? STABLECOIN_AMOUNT_OUT[chainId]?.currency : undefined
 
   if (fiatValue === null || fiatValue === undefined || !chainId || !stablecoin) {
-    return usePrice(STABLECOIN_AMOUNT_OUT[chainId]?.currency)
+    return undefined
   }
 
   // trim for decimal precision when parsing

@@ -30,6 +30,7 @@ import { formatCurrency } from 'modals/TokensStatsModal'
 interface AssetInputProps {
   value?: string
   currency?: Currency
+  currencyAddress?: string
   token0?: string,
   token1?: string,
   onChange: (x: string | undefined) => void
@@ -165,6 +166,7 @@ interface AssetInputPanelProps extends AssetInputProps {
 const AssetInputPanel = ({
   value,
   currency,
+  currencyAddress,
   token0,
   token1,
   onChange,
@@ -192,7 +194,7 @@ const AssetInputPanel = ({
 
   // const pairValue = useUSDCValue(tryParseAmount(Number(value) === 0 ? '1' : value, currency))
   const usdcValue = useUSDCValue(tryParseAmount(Number(value) === 0 ? '1' : value, currency))
-  const tokenPrice = usePrice(currency.address)
+  const tokenPrice = usePrice(currencyAddress)
  
   // const usdValue = usePrice(currency.toString())
   const span = useRef<HTMLSpanElement | null>(null)
