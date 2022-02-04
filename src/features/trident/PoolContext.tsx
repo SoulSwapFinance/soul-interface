@@ -67,12 +67,10 @@ const PoolContext: FC = ({ children }) => {
       // Convert from shares to amount
       return [
         toAmountCurrencyAmount(
-          // @ts-ignore TYPE NEEDS FIXING
           rebases[poolWithState.pool.token0.wrapped.address],
           poolWithState.pool.getLiquidityValue(poolWithState.pool.token0, totalSupply.wrapped, poolBalance.wrapped)
         ),
         toAmountCurrencyAmount(
-          // @ts-ignore TYPE NEEDS FIXING
           rebases[poolWithState.pool.token1.wrapped.address],
           poolWithState.pool.getLiquidityValue(poolWithState.pool.token1, totalSupply.wrapped, poolBalance.wrapped)
         ),
@@ -84,7 +82,6 @@ const PoolContext: FC = ({ children }) => {
 
   return (
     <Context.Provider
-      // @ts-ignore TYPE NEEDS FIXING
       value={useMemo(
         () => ({
           poolWithState,

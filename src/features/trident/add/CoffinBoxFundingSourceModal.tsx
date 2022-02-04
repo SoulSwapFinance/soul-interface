@@ -21,7 +21,7 @@ const CoffinBoxFundingSourceModal: FC = () => {
         </div>
       }
     >
-      {/*@ts-ignore TYPE NEEDS FIXING*/}
+
       {({ setOpen }) => (
         <div className="flex flex-col gap-4">
           <HeadlessUiModal.Header header={i18n._(t`About CoffinBox Funding`)} onClose={() => setOpen(false)} />

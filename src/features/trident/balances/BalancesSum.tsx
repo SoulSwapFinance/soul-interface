@@ -9,7 +9,7 @@ import { usePositions } from 'hooks/usePositions'
 // import { useTridentLiquidityPositions } from 'services/graph'
 import { useActiveWeb3React } from 'services/web3'
 import { useCoffinBalancesV2 } from 'state/coffinbox/hooks'
-import { useAllTokenBalances, useAllTokenBalancesWithLoadingIndicator, useCurrencyBalance } from 'state/wallet/hooks'
+import { useAllTokenBalances, useCurrencyBalance } from 'state/wallet/hooks'
 import React, { FC, useMemo } from 'react'
 
 export const LiquidityPositionsBalancesSum = () => {
@@ -22,8 +22,6 @@ export const LiquidityPositionsBalancesSum = () => {
   //   variables: { where: { user: account?.toLowerCase(), balance_gt: 0 } },
   //   shouldFetch: !!chainId && !!account,
   // })
-
-  // const sum = positions?.reduce((acc, cur) => acc + cur.value, 0)
 
   const sum = positions?.reduce((acc, cur) => acc + cur.amount, 0)
   
