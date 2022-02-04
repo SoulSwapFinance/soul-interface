@@ -294,6 +294,6 @@ export const REAPER_ADDRESS: AddressMap = {
 export const STOP_LIMIT_ORDER_ADDRESS: AddressMap = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x0dd184Bec9e43701F76d75D5FFfE246B2DC8d4EA', // TODO
+  [ChainId.FANTOM]: '0x6AaC28444cB227EC5D5cebe696882DeCcD50ee83', // TODO
   [ChainId.FANTOM_TESTNET]: '',
 }
