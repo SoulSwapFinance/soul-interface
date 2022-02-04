@@ -83,7 +83,7 @@ export function useVaultTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
   const priceHelperContract = usePriceHelperContract()
 
-  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'])?.result
+  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'])?.result
   // console.log(Number(rawFtmPrice))
   const ftmPrice = Number(rawFtmPrice) / 1E18
   // console.log(ftmPrice)
@@ -227,7 +227,7 @@ export function useTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
   const priceHelperContract = usePriceHelperContract()
 
-  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'])?.result
+  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'])?.result
   // console.log(Number(rawFtmPrice))
   const ftmPrice = Number(rawFtmPrice) / 1E18
   // console.log(ftmPrice)
@@ -385,7 +385,7 @@ export function useBondTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
   const priceHelperContract = usePriceHelperContract()
 
-  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'])?.result
+  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'])?.result
   // console.log(Number(rawFtmPrice))
   const ftmPrice = Number(rawFtmPrice) / 1E18
   // console.log(ftmPrice)
@@ -521,7 +521,7 @@ export function useSoulTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
   const priceHelperContract = usePriceHelperContract()
 
-  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'])?.result
+  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'])?.result
   // console.log(Number(rawFtmPrice))
   const ftmPrice = Number(rawFtmPrice) / 1E18
   // console.log(ftmPrice)
@@ -658,7 +658,7 @@ export function useLuxTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
   const priceHelperContract = usePriceHelperContract()
 
-  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'])?.result
+  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'])?.result
   // console.log(Number(rawFtmPrice))
   const ftmPrice = Number(rawFtmPrice) / 1E18
   // console.log(ftmPrice)
@@ -802,7 +802,7 @@ export function useV2PairsWithPrice(
   const soulPrice = Number(rawSoulPrice) / 1E18
   // console.log('soul price:%s', soulPrice)
 
-  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'])?.result
+  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'])?.result
   // console.log(Number(rawFtmPrice))
   const ftmPrice = Number(rawFtmPrice) / 1E18
   // console.log(ftmPrice)
