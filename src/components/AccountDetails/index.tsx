@@ -67,7 +67,7 @@ const AccountDetails: FC<AccountDetailsProps> = ({
         <HeadlessUiModal.BorderedContent className="flex flex-col gap-3">
           <div className="flex items-center justify-between">
             {connectorName}
-            <Button variant="outlined" color="blue" size="xs" onClick={deactivate}>
+            <Button variant="outlined" color="purple" size="xs" onClick={deactivate}>
               {i18n._(t`Disconnect`)}
             </Button>
           </div>
@@ -90,18 +90,29 @@ const AccountDetails: FC<AccountDetailsProps> = ({
             <div className="flex items-center gap-2 space-x-3">
               {chainId && account && (
                 <ExternalLink
-                  color="blue"
+                  color="purple"
                   startIcon={<LinkIcon size={16} />}
                   href={chainId && getExplorerLink(chainId, ENSName || account, 'address')}
                 >
                   <Typography variant="xs" weight={700}>
-                    {i18n._(t`View on Explorer`)}
+                    {i18n._(t`View Explorer`)}
+                  </Typography>
+                </ExternalLink>
+              )}
+              {chainId && account && (
+                <ExternalLink
+                  color="purple"
+                  startIcon={<LinkIcon size={16} />}
+                  href={'/balances'}
+                >
+                  <Typography variant="xs" weight={700}>
+                    {i18n._(t`View Balances`)}
                   </Typography>
                 </ExternalLink>
               )}
               {account && (
-                <Copy toCopy={account}>
-                  <Typography variant="xs" weight={700}>
+                <Copy className="text-purple" toCopy={account}>
+                  <Typography color="purple" variant="xs" weight={700}>
                     {i18n._(t`Copy Address`)}
                   </Typography>
                 </Copy>
@@ -114,8 +125,8 @@ const AccountDetails: FC<AccountDetailsProps> = ({
             <Typography variant="xs" weight={700} className="text-secondary">
               {i18n._(t`Recent Transactions`)}
             </Typography>
-            <Button variant="outlined" color="blue" size="xs" onClick={clearAllTransactionsCallback}>
-              {i18n._(t`Clear all`)}
+            <Button variant="outlined" color="purple" size="xs" onClick={clearAllTransactionsCallback}>
+              {i18n._(t`Clear All`)}
             </Button>
           </div>
           <div className="flex flex-col divide-y divide-dark-800">

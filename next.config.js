@@ -119,6 +119,10 @@ module.exports = withBundleAnalyzer(
           destination: '/exchange/pool',
         },
         {
+          source: '/user',
+          destination: '/balances',
+        },
+        {
           source: '/find',
           destination: '/exchange/find',
         },
