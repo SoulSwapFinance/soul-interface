@@ -1,5 +1,5 @@
 import { AddressZero } from '@ethersproject/constants'
-import { Currency, CurrencyAmount, Token } from 'sdk'
+import { Currency, CurrencyAmount } from 'sdk'
 import { useUSDCValue } from 'hooks/useUSDCPrice'
 import { FC, ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
 
@@ -25,7 +25,7 @@ const USDCValue: FC<{
 
 interface SumUSDCValuesProps {
   amounts?: (CurrencyAmount<Currency> | undefined)[]
-  children: ({ amount }: { amount: CurrencyAmount<Currency | Token> | undefined }) => ReactNode
+  children: ({ amount }: { amount: CurrencyAmount<Currency> | undefined }) => ReactNode
 }
 
 const SumUSDCValues: FC<SumUSDCValuesProps> = ({ amounts, children }) => {
@@ -37,7 +37,7 @@ const SumUSDCValues: FC<SumUSDCValuesProps> = ({ amounts, children }) => {
     }))
   }, [])
 
-  const values = useMemo(() => Object.values(state).filter(Boolean) as CurrencyAmount<Currency | Token>[], [state])
+  const values = useMemo(() => Object.values(state).filter(Boolean) as CurrencyAmount<Currency>[], [state])
   // const amount = useMemo(() => (values.length > 0 ? values.reduce((acc, cur) => acc.add(cur)) : undefined), [values])
 
   return (

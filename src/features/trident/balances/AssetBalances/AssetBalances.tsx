@@ -68,7 +68,7 @@ const AssetBalances: FC<AssetBalancesProps> = ({ config, loading, error, onSelec
                   onClick={() => onSelect && onSelect(row)}
                   className={TABLE_TBODY_TR_CLASSNAME}
                 >
-                  {/*@ts-ignore TYPE NEEDS FIXING*/}
+
                   {row.cells.map((cell, i) => {
                     return (
                       <td key={i} {...cell.getCellProps()} className={TABLE_TBODY_TD_CLASSNAME(i, row.cells.length)}>

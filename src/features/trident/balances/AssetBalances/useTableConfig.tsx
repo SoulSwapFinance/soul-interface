@@ -14,7 +14,7 @@ export const useTableConfig = (assets?: Assets[], balancesLoading?: boolean) => 
         accessor: 'asset',
         minWidth: 100,
         className: 'text-left',
-        // @ts-ignore TYPE NEEDS FIXING
+
         Cell: (props) => {
           const { price, loading } = useUSDCPriceWithLoadingIndicator(
             balancesLoading ? undefined : props.cell.value.currency
@@ -55,7 +55,7 @@ export const useTableConfig = (assets?: Assets[], balancesLoading?: boolean) => 
         accessor: 'asset',
         maxWidth: 100,
         className: 'text-right flex justify-end',
-        // @ts-ignore TYPE NEEDS FIXING
+
         Cell: (props) => {
           const { value, loading } = useUSDCValueWithLoadingIndicator(balancesLoading ? undefined : props.cell.value)
           if (loading || balancesLoading) {

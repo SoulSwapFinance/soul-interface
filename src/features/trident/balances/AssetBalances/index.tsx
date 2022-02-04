@@ -76,7 +76,7 @@ export const WalletBalances = () => {
 
   const balances = useMemo(() => {
     const res = Object.values(_balances).reduce<Assets[]>((acc, cur) => {
-      // if (cur.greaterThan(ZERO)) acc.push({ asset: cur })
+      if (cur.greaterThan(ZERO)) acc.push({ asset: cur })
 
       return acc
     }, [])
