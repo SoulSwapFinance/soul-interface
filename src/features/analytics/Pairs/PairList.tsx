@@ -83,13 +83,13 @@ const allColumns = [
     align: 'right',
   },
   {
-    Header: 'Annual APY',
+    Header: 'APY',
     accessor: (row) => <div className="text-high-emphesis">{getApy(row.volume1w, row.liquidity)}</div>,
     align: 'right',
     sortType: (a, b) => a.original.volume1w / a.original.liquidity - b.original.volume1w / b.original.liquidity,
   },
   {
-    Header: 'Daily / Weekly Volume',
+    Header: 'Volume',
     accessor: (row) => (
       <div>
         <div className="font-medium text-high-emphesis">{formatNumber(row.volume1d, true, false)}</div>
@@ -99,7 +99,7 @@ const allColumns = [
     align: 'right',
   },
   {
-    Header: 'Daily / Weekly Fees',
+    Header: 'Fees',
     accessor: (row) => (
       <div>
         <div className="font-medium text-high-emphesis">{formatNumber(row.volume1d * 0.003, true, false)}</div>
@@ -119,7 +119,7 @@ const gainersColumns = [
     align: 'left',
   },
   {
-    Header: 'Daily / Weekly Liquidity Change',
+    Header: 'Liquidity',
     id: 'liquidity',
     accessor: (row) => (
       <div className="inline-flex flex-col">
@@ -133,7 +133,7 @@ const gainersColumns = [
     sortType: (a, b) => a.original.liquidityChangeNumber1d - b.original.liquidityChangeNumber1d,
   },
   {
-    Header: '%',
+    Header: '% Change',
     accessor: (row) => (
       <div className="inline-flex">
         <div>
@@ -146,7 +146,7 @@ const gainersColumns = [
     sortType: (a, b) => a.original.liquidityChangePercent1d - b.original.liquidityChangePercent1d,
   },
   {
-    Header: 'Daily / Weekly Volume Change',
+    Header: 'Volume',
     accessor: (row) => (
       <div className="inline-flex flex-col">
         <div className="font-medium text-high-emphesis">
@@ -159,7 +159,7 @@ const gainersColumns = [
     sortType: (a, b) => a.original.volumeChangeNumber1d - b.original.volumeChangeNumber1d,
   },
   {
-    Header: ' %',
+    Header: ' % Change',
     accessor: (row) => (
       <div className="inline-flex">
         <div>
