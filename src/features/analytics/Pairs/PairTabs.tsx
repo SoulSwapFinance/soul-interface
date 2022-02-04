@@ -81,7 +81,6 @@ const tabs = [
   },
 ]
 
-// @ts-ignore TYPE NEEDS FIXING
 export default function PairTabs({ currentType, setType }): JSX.Element {
   return (
     <>

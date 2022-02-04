@@ -8,7 +8,6 @@ import useLimitOrders from 'features/limit-order/hooks/useLimitOrders'
 import { featureEnabled } from 'functions'
 import useCoffinMasterApproveCallback, { CoffinApprovalState } from 'hooks/useCoffinMasterApproveCallback'
 import { useActiveWeb3React } from 'services/web3'
-// @ts-ignore
 import cookie from 'cookie-cutter'
 import React, { FC, useState } from 'react'
 import { STOP_LIMIT_ORDER_ADDRESS } from 'constants/addresses'
