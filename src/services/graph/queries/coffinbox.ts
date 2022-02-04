@@ -167,7 +167,7 @@ export const coffinBoxQuery = gql`
 `
 
 export const coffinStrategiesQuery = gql`
-  query coffinStrategies($first: Int = 1000, $firstHarvests: Int = 3, $block: Block_height, $where: Strategy_filter!) {
+  query coffinStrategies($first: Int = 1000, $firstHarvests: Int = 3, $block: Block_height, $where: Strategy_filter) {
     strategies(first: $first, block: $block, where: $where) {
       token {
         id

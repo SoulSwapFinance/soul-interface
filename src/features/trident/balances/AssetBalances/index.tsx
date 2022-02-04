@@ -47,7 +47,7 @@ const positions = usePositions()
 export const CoffinBalances = () => {
   const dispatch = useAppDispatch()
   const selected = useBalancesSelectedCurrency()
-  const balances = useCoffinBalancesV2()
+  const { data: balances, loading } = useCoffinBalancesV2()
   const assets = balances.reduce<Assets[]>((acc, el) => {
     if (el) acc.push({ asset: el })
     return acc

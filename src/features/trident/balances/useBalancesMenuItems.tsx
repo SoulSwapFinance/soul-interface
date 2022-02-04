@@ -16,7 +16,7 @@ const useBalancesMenuItems = () => {
       key: 'coffinbox',
       label: i18n._(t`CoffinBox`),
       icon: <CoffinboxIcon width={20} height={20} />,
-      link: '/coffinbox',
+      link: '/balances/coffinbox',
     },
     // {
     //   key: 'liquidity',

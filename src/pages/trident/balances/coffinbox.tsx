@@ -15,7 +15,7 @@ const CoffinBox = () => {
   return (
     <>
       <TridentHeader pattern="bg-chevron">
-        <HeaderDropdown label={i18n._(t`My CoffinBox`)} />
+        <HeaderDropdown label={i18n._(t`CoffinBox`)} />
         <CoffinBalancesSum />
       </TridentHeader>
       <TridentBody>

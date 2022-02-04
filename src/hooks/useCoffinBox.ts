@@ -6,7 +6,7 @@ import { useCoffinBoxContract } from './useContract'
 import { useCallback } from 'react'
 import { useTransactionAdder } from '../state/transactions/hooks'
 
-function useBentoBox() {
+function useCoffinBox() {
   const { account, chainId } = useActiveWeb3React()
 
   const addTransaction = useTransactionAdder()
@@ -63,4 +63,4 @@ function useBentoBox() {
   return { deposit, withdraw }
 }
 
-export default useBentoBox
+export default useCoffinBox

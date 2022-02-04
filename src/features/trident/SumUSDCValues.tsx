@@ -2,7 +2,6 @@ import { AddressZero } from '@ethersproject/constants'
 import { Currency, CurrencyAmount, Token } from 'sdk'
 import { useUSDCValue } from 'hooks/useUSDCPrice'
 import { FC, ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
-// import { formatNumber, tryParseAmount } from 'functions'
 
 // Dummy component that fetches usdcValue
 const USDCValue: FC<{

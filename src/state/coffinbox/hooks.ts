@@ -13,9 +13,9 @@ export interface CoffinBalance {
   symbol: string
   decimals: number
   balance: any
-  coffinBalance: any
+  bentoBalance: any
   wallet: any
-  coffin: any
+  bento: any
 }
 
 const BLACKLISTED = [
@@ -34,29 +34,46 @@ export function useCoffinMasterContractAllowed(masterContract?: string, user?: s
   return useMemo(() => (allowed ? allowed[0] : undefined), [allowed])
 }
 
-export const useCoffinBalancesV2 = (tokenAddresses?: string[]): CurrencyAmount<Token>[] => {
+export const useCoffinBalancesV2 = (tokenAddresses?: string[]): { data: CurrencyAmount<Token>[]; loading: boolean } => {
   const { chainId, account } = useActiveWeb3React()
-  const { error, data } = useCoffinUserTokens({
+  const {
+    error,
+    data,
+    isValidating: loading,
+  } = useCoffinUserTokens({
     chainId,
     shouldFetch: !!chainId && !!account,
     variables: { user: account?.toLowerCase() },
   })
-  const userTokensFallback = useCoffinBalancesSubGraph({ shouldFetch: !!error, tokenAddresses })
+  const { data: userTokensFallback, loading: fallbackLoading } = useCoffinBalancesSubGraph({
+    shouldFetch: !!error,
+    tokenAddresses,
+  })
 
   if (!error && !!data) {
     if (tokenAddresses) {
-      return data.filter((el) => tokenAddresses.includes(el.currency.wrapped.address))
+      return {
+        data: data.filter((el) => tokenAddresses.includes(el.currency.wrapped.address)),
+        loading: false,
+      }
     }
 
-    return data || []
+    return { data, loading } || { data: [], loading: false }
   }
 
-  return userTokensFallback || []
+  return { data: userTokensFallback, loading: fallbackLoading } || { data: [], loading: false }
 }
 
-export const useCoffinBalanceV2 = (tokenAddress?: string): CurrencyAmount<Token> | undefined => {
+export const useCoffinBalanceV2 = (
+  tokenAddress?: string
+): { data: CurrencyAmount<Token> | undefined; loading: boolean } => {
   const addresses = useMemo(() => (tokenAddress ? [tokenAddress] : []), [tokenAddress])
-  return useCoffinBalancesV2(addresses)?.[0]
+  const { data, loading } = useCoffinBalancesV2(addresses)
+
+  return {
+    data: data?.[0],
+    loading,
+  }
 }
 
 export const useCoffinBalancesSubGraph = ({
@@ -106,19 +123,22 @@ export const useCoffinBalancesSubGraph = ({
 
   const balances = useSingleContractMultipleData(contract, 'balanceOf', balanceInput)
   return useMemo(() => {
-    return balances.reduce<CurrencyAmount<Token>[]>((acc, el, i) => {
-      if (baseTotals[i] && tokens[i] && el.result?.[0]) {
-        const amount = toAmountCurrencyAmount(
-          baseTotals[i],
-          CurrencyAmount.fromRawAmount(tokens[i], JSBI.BigInt(el.result[0]))
-        )
+    return {
+      data: balances.reduce<CurrencyAmount<Token>[]>((acc, el, i) => {
+        if (baseTotals[i] && tokens[i] && el.result?.[0]) {
+          const amount = toAmountCurrencyAmount(
+            baseTotals[i],
+            CurrencyAmount.fromRawAmount(tokens[i], JSBI.BigInt(el.result[0]))
+          )
 
-        if (amount.greaterThan(ZERO)) {
-          acc.push(amount)
+          if (amount.greaterThan(ZERO)) {
+            acc.push(amount)
+          }
         }
-      }
 
-      return acc
-    }, [])
-  }, [balances, baseTotals, tokens])
+        return acc
+      }, []),
+      loading: anyLoading,
+    }
+  }, [anyLoading, balances, baseTotals, tokens])
 }

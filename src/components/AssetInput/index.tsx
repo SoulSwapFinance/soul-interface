@@ -33,7 +33,7 @@ interface AssetInputProps {
   currencyAddress?: string
   token0?: string,
   token1?: string,
-  onChange: (x: string | undefined) => void
+  onChange: (x: string | undefined, max?: boolean) => void
   spendFromWallet?: boolean
   title?: string
   onSelect?: (x: Token) => void

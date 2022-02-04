@@ -59,7 +59,6 @@ export const useLPTableConfig = (positions) => {
               accessor: 'value',
               maxWidth: 100,
               className: 'text-right flex justify-end',
-              // @ts-ignore TYPE NEEDS FIXING
               Cell: (props) => {
                 return (
                   <Typography weight={700} className="text-high-emphesis text-right w-full">
