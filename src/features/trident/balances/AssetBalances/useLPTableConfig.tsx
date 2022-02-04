@@ -6,7 +6,7 @@ import Typography from 'components/Typography'
 import { PoolCell } from 'features/trident/pools/PoolCell'
 import { feeTiersFilter, filterForSearchQueryAndTWAP } from 'features/trident/pools/poolTableFilters'
 import { chipPoolColorMapper, poolTypeNameMapper } from 'features/trident/types'
-import { formatPercent } from 'functions'
+// import { formatPercent } from 'functions'
 // import { TridentPositionRow } from 'services/graph'
 // import { useRollingPoolStats } from 'services/graph/hooks/pools'
 import { useActiveWeb3React } from 'services/web3'
@@ -93,7 +93,8 @@ export const useLPTableConfig = (positions) => {
                 return (
                   <Link
                     href={{
-                      pathname: `/trident/pool`,
+                      pathname: `/pool`,
+                      // pathname: `/trident/pool`,
                       query: {
                         tokens: original.assets.map((el) => el.address),
                         fee: original.swapFeePercent * 100,

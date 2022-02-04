@@ -14,7 +14,6 @@ const USDCValue: FC<{
   useEffect(() => {
     if (!address) return
 
-    // @ts-ignore TYPE NEEDS FIXING
     update(address, usdcValue)
     return () => {
       update(address, undefined)

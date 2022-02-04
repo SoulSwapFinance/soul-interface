@@ -85,7 +85,6 @@ const Swap = () => {
       value = ''
       typedField = TypedField.A
     } catch (e) {
-      // @ts-ignore TYPE NEEDS FIXING
       error = e.message
     }
 

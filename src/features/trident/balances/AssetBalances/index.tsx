@@ -46,7 +46,7 @@ export const CoffinBalances = () => {
       dispatch(
         setBalancesState({
           currency: currency.isNative ? 'FTM' : row.values.asset.currency.address,
-          activeModal: ActiveModal.MENU,
+          activeModal: ActiveModal.WITHDRAW, // MENU
         })
       )
     },
@@ -94,7 +94,7 @@ export const WalletBalances = () => {
       dispatch(
         setBalancesState({
           currency: currency.isNative ? 'FTM' : row.values.asset.currency.address,
-          activeModal: ActiveModal.MENU,
+          activeModal: ActiveModal.DEPOSIT, // MENU
         })
       )
     },
