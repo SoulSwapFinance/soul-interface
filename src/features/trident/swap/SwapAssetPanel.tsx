@@ -8,13 +8,13 @@ import NumericalInput from 'components/Input/Numeric'
 import QuestionHelper from 'components/QuestionHelper'
 import Typography from 'components/Typography'
 import { classNames, formatNumber, maxAmountSpend, tryParseAmount, warningSeverity } from 'functions'
-import { useBentoOrWalletBalance } from 'hooks/useBentoOrWalletBalance'
+import { useCoffinOrWalletBalance } from 'hooks/useCoffinOrWalletBalance'
 import { useUSDCValue } from 'hooks/useUSDCPrice'
 import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
 import { useActiveWeb3React } from 'services/web3'
 import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-import BentoBoxFundingSourceModal from '../add/BentoBoxFundingSourceModal'
+import CoffinBoxFundingSourceModal from '../add/CoffinBoxFundingSourceModal'
 
 interface SwapAssetPanel {
   error?: boolean
@@ -109,9 +109,9 @@ const WalletSwitch: FC<
         component="span"
         className="flex items-center gap-1 px-2 py-1 rounded-full cursor-pointer text-high-emphesis hover:text-white hover:shadow bg-dark-800 hover:bg-dark-700"
       >
-        {spendFromWallet ? i18n._(t`Wallet`) : i18n._(t`BentoBox`)}
+        {spendFromWallet ? i18n._(t`Wallet`) : i18n._(t`Coffin`)}
       </Typography>
-      <BentoBoxFundingSourceModal />
+      <CoffinBoxFundingSourceModal />
     </Typography>
   )
 
@@ -184,7 +184,7 @@ const BalancePanel: FC<Pick<SwapAssetPanel, 'disabled' | 'currency' | 'onChange'
 }) => {
   const { i18n } = useLingui()
   const { account } = useActiveWeb3React()
-  const balance = useBentoOrWalletBalance(account ? account : undefined, currency, spendFromWallet)
+  const balance = useCoffinOrWalletBalance(account ? account : undefined, currency, spendFromWallet)
 
   const handleClick = useCallback(() => {
     if (disabled || !balance || !onChange) return

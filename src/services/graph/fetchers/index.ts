@@ -1,4 +1,4 @@
-export * from './bentobox'
+export * from './coffinbox'
 export * from './blocks'
 export * from './spell'
 export * from './exchange'

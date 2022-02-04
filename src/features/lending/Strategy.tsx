@@ -4,11 +4,11 @@ import React from 'react'
 
 import { Button } from '../../components/Button'
 import { formatPercent } from '../../functions'
-import { useBentoBox } from '../../hooks'
+import { useCoffinBox } from '../../hooks'
 
 export default function Strategy({ token }) {
     //   todo: enable harvest   //
-//   const { harvest } = useBentoBox()
+//   const { harvest } = useCoffinBox()
 
   return (
     <>

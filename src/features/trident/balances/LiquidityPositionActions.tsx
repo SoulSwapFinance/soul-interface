@@ -1,7 +1,7 @@
 import { SwitchHorizontalIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { BentoboxIcon } from 'components/Icon'
+import { CoffinboxIcon } from 'components/Icon'
 import Typography from 'components/Typography'
 import ActionItem from 'features/trident/balances/ActionsModal/ActionItem'
 import { setBalancesActiveModal } from 'features/trident/balances/balancesSlice'
@@ -30,7 +30,7 @@ const WalletActions: FC = () => {
         </Typography>
         <ActionItem svg={<SwitchHorizontalIcon width={24} />} label={i18n._(t`Swap`)} onClick={swapActionHandler} />
         <ActionItem
-          svg={<BentoboxIcon width={20} height={20} />}
+          svg={<CoffinboxIcon width={20} height={20} />}
           label={i18n._(t`Deposit to CoffinBox`)}
           onClick={() => dispatch(setBalancesActiveModal(ActiveModal.DEPOSIT))}
         />

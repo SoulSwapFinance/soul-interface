@@ -225,7 +225,7 @@ export const SoulTokenIcon = (props: React.ComponentProps<'svg'>) => {
   )
 }
 
-export const BentoboxIcon = (props: React.ComponentProps<'svg'>) => {
+export const CoffinboxIcon = (props: React.ComponentProps<'svg'>) => {
   return (
     <svg {...props} viewBox="0 0 43 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
       <path

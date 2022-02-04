@@ -117,7 +117,7 @@ const LimitOrderReviewModal: FC<LimitOrderReviewModal> = ({ parsedAmounts, trade
           </div>
         </HeadlessUiModal.BorderedContent>
         <Typography variant="xs" className="text-secondary text-center">
-          {i18n._(t`Please note that after order execution, your tokens will be received in your BentoBox`)}
+          {i18n._(t`Please note that after order execution, your tokens will be received in your CoffinBox`)}
         </Typography>
         <Button loading={attemptingTxn} color="gradient" disabled={attemptingTxn} onClick={_execute}>
           {i18n._(t`Create Limit Order`)}

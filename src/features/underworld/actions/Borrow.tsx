@@ -7,7 +7,7 @@ import { Button } from 'components/Button'
 import KashiCooker from 'entities/KashiCooker'
 import { TransactionReview } from 'entities/TransactionReview'
 import { Warning, Warnings } from 'entities/Warnings'
-import { toShare } from 'functions/bentobox'
+import { toShare } from 'functions/coffinbox'
 import { e10, maximum, minimum, ZERO } from 'functions/math'
 import { tryParseAmount } from 'functions/parse'
 import { computeRealizedLPFeePercent, warningSeverity } from 'functions/prices'
@@ -38,8 +38,8 @@ export default function Borrow({ pair }: BorrowProps) {
   const { account, chainId } = useActiveWeb3React()
 
   // State
-  const [useBentoCollateral, setUseBentoCollateral] = useState<boolean>(pair.collateral.bentoBalance.gt(0))
-  const [useBentoBorrow, setUseBentoBorrow] = useState<boolean>(true)
+  const [useCoffinCollateral, setUseCoffinCollateral] = useState<boolean>(pair.collateral.coffinBalance.gt(0))
+  const [useCoffinBorrow, setUseCoffinBorrow] = useState<boolean>(true)
   const [collateralValue, setCollateralValue] = useState('')
   const [borrowValue, setBorrowValue] = useState('')
   const [swapBorrowValue, setSwapBorrowValue] = useState('')
@@ -54,8 +54,8 @@ export default function Borrow({ pair }: BorrowProps) {
 
   const ethBalance = useETHBalances(assetNative ? [account] : [])
 
-  const collateralBalance = useBentoCollateral
-    ? pair.collateral.bentoBalance
+  const collateralBalance = useCoffinCollateral
+    ? pair.collateral.coffinBalance
     : assetNative
     ? BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
     : pair.collateral.balance
@@ -154,7 +154,7 @@ export default function Borrow({ pair }: BorrowProps) {
       new BigNumber(collateralValue, pair.collateral.tokenInfo.decimals)),
       // .toBigNumber(pair.collateral.tokenInfo.decimals)),
     `Please make sure your ${
-      useBentoCollateral ? 'BentoBox' : 'wallet'
+      useCoffinCollateral ? 'Coffin' : 'wallet'
     } balance is sufficient to deposit and then try again.`,
     true
   )
@@ -279,8 +279,8 @@ export default function Borrow({ pair }: BorrowProps) {
         cooker.updateExchangeRate(true, ZERO, ZERO)
       }
 
-      if (swap && !useBentoCollateral) {
-        cooker.bentoDepositCollateral(
+      if (swap && !useCoffinCollateral) {
+        cooker.coffinDepositCollateral(
           new BigNumber(collateralValue, pair.collateral.tokenInfo.decimals))
           // .toBigNumber(pair.collateral.tokenInfo.decimals))
       }
@@ -288,7 +288,7 @@ export default function Borrow({ pair }: BorrowProps) {
       cooker.borrow(
         new BigNumber(borrowValue, pair.asset.tokenInfo.decimals),
         // .toBigNumber(pair.asset.tokenInfo.decimals),
-        swap || useBentoBorrow,
+        swap || useCoffinBorrow,
         swap ? SOULSWAP_MULTISWAPPER_ADDRESS[chainId || 1] : ''
       )
     }
@@ -342,7 +342,7 @@ export default function Borrow({ pair }: BorrowProps) {
         swap ? BigNumber.from(-1) : 
         new BigNumber(collateralValue, pair.collateral.tokenInfo.decimals),
         // .toBigNumber(pair.collateral.tokenInfo.decimals),
-        useBentoCollateral || swap
+        useCoffinCollateral || swap
       )
     }
 
@@ -350,10 +350,10 @@ export default function Borrow({ pair }: BorrowProps) {
       if (borrowValueSet) {
         summary = trade ? 'Borrow, swap and add collateral' : 'Add collateral and borrow'
       } else {
-        summary = 'Add collateral'
+        summary = 'Add Collateral'
       }
     } else if (borrowValueSet) {
-      summary = trade ? 'Borrow, swap and add as collateral' : 'Borrow'
+      summary = trade ? 'Borrow, Swap and Collateralize' : 'Borrow'
     }
 
     return summary
@@ -406,10 +406,10 @@ export default function Borrow({ pair }: BorrowProps) {
         token={pair.collateral}
         value={collateralValue}
         setValue={setCollateralValue}
-        useBentoTitleDirection="down"
-        useBentoTitle={`Add ${pair.collateral.tokenInfo.symbol} collateral from`}
-        useBento={useBentoCollateral}
-        setUseBento={setUseBentoCollateral}
+        useCoffinTitleDirection="down"
+        useCoffinTitle={`Add ${pair.collateral.tokenInfo.symbol} collateral from`}
+        useCoffin={useCoffinCollateral}
+        setUseCoffin={setUseCoffinCollateral}
         maxTitle="Balance"
         max={collateralBalance}
         showMax={true}
@@ -420,10 +420,10 @@ export default function Borrow({ pair }: BorrowProps) {
         token={pair.asset}
         value={borrowValue}
         setValue={setBorrowValue}
-        useBentoTitleDirection="up"
-        useBentoTitle={`Borrow ${pair.asset.tokenInfo.symbol} to`}
-        useBento={useBentoBorrow}
-        setUseBento={setUseBentoBorrow}
+        useCoffinTitleDirection="up"
+        useCoffinTitle={`Borrow ${pair.asset.tokenInfo.symbol} to`}
+        useCoffin={useCoffinBorrow}
+        setUseCoffin={setUseCoffinBorrow}
         maxTitle="Max"
         max={nextMaxBorrowPossible}
       />
@@ -503,7 +503,7 @@ export default function Borrow({ pair }: BorrowProps) {
       <UnderworldApproveButton
         color="pink"
         content={(onCook: any) => (
-          <TokenApproveButton value={collateralValue} token={collateralToken} needed={!useBentoCollateral}>
+          <TokenApproveButton value={collateralValue} token={collateralToken} needed={!useCoffinCollateral}>
             <Button onClick={() => onCook(pair, onExecute)} disabled={actionDisabled}>
               {actionName}
             </Button>

@@ -483,7 +483,7 @@
                   },
                   {
                     "internalType": "address",
-                    "name": "_bento",
+                    "name": "_coffin",
                     "type": "address"
                   }
                 ],
@@ -640,7 +640,7 @@
               },
               {
                 "inputs": [],
-                "name": "bento",
+                "name": "coffin",
                 "outputs": [
                   {
                     "internalType": "address",
@@ -824,8 +824,8 @@
               {
                 "inputs": [
                   {
-                    "internalType": "contract IBentoBoxMinimal",
-                    "name": "_bento",
+                    "internalType": "contract ICoffinBoxMinimal",
+                    "name": "_coffin",
                     "type": "address"
                   },
                   {
@@ -943,10 +943,10 @@
               },
               {
                 "inputs": [],
-                "name": "bento",
+                "name": "coffin",
                 "outputs": [
                   {
-                    "internalType": "contract IBentoBoxMinimal",
+                    "internalType": "contract ICoffinBoxMinimal",
                     "name": "",
                     "type": "address"
                   }
@@ -1099,7 +1099,7 @@
                           },
                           {
                             "internalType": "bool",
-                            "name": "unwrapBento",
+                            "name": "unwrapCoffin",
                             "type": "bool"
                           },
                           {
@@ -1495,7 +1495,7 @@
                     "type": "address"
                   }
                 ],
-                "name": "sweepBentoBoxToken",
+                "name": "sweepCoffinBoxToken",
                 "outputs": [],
                 "stateMutability": "nonpayable",
                 "type": "function"
@@ -1581,7 +1581,7 @@
         "name": "localhost",
         "chainId": "31337",
         "contracts": {
-          "BentoBoxV1": {
+          "CoffinBoxV1": {
             "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
             "abi": [
               {
@@ -3217,7 +3217,7 @@
                   },
                   {
                     "internalType": "address",
-                    "name": "_bento",
+                    "name": "_coffin",
                     "type": "address"
                   }
                 ],
@@ -3374,7 +3374,7 @@
               },
               {
                 "inputs": [],
-                "name": "bento",
+                "name": "coffin",
                 "outputs": [
                   {
                     "internalType": "address",
@@ -3558,8 +3558,8 @@
               {
                 "inputs": [
                   {
-                    "internalType": "contract IBentoBoxMinimal",
-                    "name": "_bento",
+                    "internalType": "contract ICoffinBoxMinimal",
+                    "name": "_coffin",
                     "type": "address"
                   },
                   {
@@ -3677,10 +3677,10 @@
               },
               {
                 "inputs": [],
-                "name": "bento",
+                "name": "coffin",
                 "outputs": [
                   {
-                    "internalType": "contract IBentoBoxMinimal",
+                    "internalType": "contract ICoffinBoxMinimal",
                     "name": "",
                     "type": "address"
                   }
@@ -3833,7 +3833,7 @@
                           },
                           {
                             "internalType": "bool",
-                            "name": "unwrapBento",
+                            "name": "unwrapCoffin",
                             "type": "bool"
                           },
                           {
@@ -4205,7 +4205,7 @@
                     "type": "address"
                   }
                 ],
-                "name": "sweepBentoBoxToken",
+                "name": "sweepCoffinBoxToken",
                 "outputs": [],
                 "stateMutability": "nonpayable",
                 "type": "function"

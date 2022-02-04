@@ -46,6 +46,12 @@ msgstr ""
 msgid "/ DAY"
 msgstr ""
 
+msgid "0.055% of each swap goes to burning SOUL."
+msgstr ""
+
+msgid "0.25% of each swap goes to liquidity providers."
+msgstr ""
+
 msgid "1 Hour"
 msgstr ""
 
@@ -68,6 +74,9 @@ msgid "ALL"
 msgstr ""
 
 msgid "APR"
+msgstr ""
+
+msgid "APY (Annualized)"
 msgstr ""
 
 msgid "About CoffinBox Funding"
@@ -169,6 +178,9 @@ msgstr ""
 msgid "Approving {contractName} Master Contract"
 msgstr ""
 
+msgid "Assets"
+msgstr ""
+
 msgid "Auto"
 msgstr ""
 
@@ -179,6 +191,9 @@ msgid "Available Actions"
 msgstr ""
 
 msgid "Available Networks"
+msgstr ""
+
+msgid "Available actions"
 msgstr ""
 
 msgid "Avg. APY"
@@ -197,9 +212,6 @@ msgid "Balance USD"
 msgstr ""
 
 msgid "Balance:"
-msgstr ""
-
-msgid "BentoBox"
 msgstr ""
 
 msgid "Bonds"
@@ -227,6 +239,9 @@ msgid "Bridge"
 msgstr ""
 
 msgid "Browse"
+msgstr ""
+
+msgid "Burn Fee"
 msgstr ""
 
 msgid "Buy"
@@ -289,6 +304,9 @@ msgid ""
 msgstr ""
 
 msgid "Close"
+msgstr ""
+
+msgid "Coffin"
 msgstr ""
 
 msgid "CoffinBox"
@@ -423,10 +441,16 @@ msgstr ""
 msgid "Deposit your SOUL-LP to earn $SOUL rewards."
 msgstr ""
 
+msgid "Deposit {0} to CoffinBox"
+msgstr ""
+
 msgid "Deposited"
 msgstr ""
 
-msgid "Depositing"
+msgid "Depositing with Zap Mode involves swapping your asset for the assets in the pool - this makes your transaction subject to swap-related fees."
+msgstr ""
+
+msgid "Deposits"
 msgstr ""
 
 msgid "Disable Multihops"
@@ -462,9 +486,6 @@ msgstr ""
 msgid "Either return to the {link}, or change to an available network."
 msgstr ""
 
-msgid "Email Us."
-msgstr ""
-
 msgid "Enable Expert Mode"
 msgstr ""
 
@@ -493,6 +514,9 @@ msgid "Error connecting"
 msgstr ""
 
 msgid "Error connecting. Try refreshing the page."
+msgstr ""
+
+msgid "Estimated network Fee"
 msgstr ""
 
 msgid "Everytime you stake or claim rewards your lock time renews."
@@ -561,6 +585,9 @@ msgid "Faucet"
 msgstr ""
 
 msgid "Fees"
+msgstr ""
+
+msgid "Fees:"
 msgstr ""
 
 msgid "Find Pool"
@@ -682,6 +709,9 @@ msgstr ""
 msgid "Inactive"
 msgstr ""
 
+msgid "Including fees"
+msgstr ""
+
 msgid "Input is estimated. You will sell at most"
 msgstr ""
 
@@ -692,9 +722,6 @@ msgid "Insufficient balance to cover for fees"
 msgstr ""
 
 msgid "Insufficient liquidity for this trade."
-msgstr ""
-
-msgid "Insufficient {0} Balance"
 msgstr ""
 
 msgid "Insufficient {0} balance"
@@ -785,6 +812,9 @@ msgstr ""
 msgid "Liquidity Positions"
 msgstr ""
 
+msgid "Liquidity Provider Fee"
+msgstr ""
+
 msgid "Liquidity provider fee"
 msgstr ""
 
@@ -795,6 +825,9 @@ msgid "Loading"
 msgstr ""
 
 msgid "Loading Balance"
+msgstr ""
+
+msgid "Loading balance"
 msgstr ""
 
 msgid "Loading your {exchange} liquidity positions"
@@ -878,10 +911,10 @@ msgstr ""
 msgid "Mint SOUL with Liquidity"
 msgstr ""
 
-msgid "My CoffinBox"
+msgid "N"
 msgstr ""
 
-msgid "N"
+msgid "Net Worth"
 msgstr ""
 
 msgid "Never"
@@ -923,7 +956,7 @@ msgstr ""
 msgid "Not available for legacy route"
 msgstr ""
 
-msgid "Number of Farms"
+msgid "Number of Assets"
 msgstr ""
 
 msgid "ONLY USE THIS MODE IF YOU KNOW WHAT YOU ARE DOING."
@@ -1006,16 +1039,13 @@ msgstr ""
 msgid "Please make sure your {0} balance is sufficient to withdraw and then try again."
 msgstr ""
 
-msgid "Please note that after order execution, your tokens will be received in your BentoBox"
+msgid "Please note that after order execution, your tokens will be received in your CoffinBox"
 msgstr ""
 
 msgid "Please note the recipient address is different from the connected wallet address."
 msgstr ""
 
 msgid "Please refer to the"
-msgstr ""
-
-msgid "Please select an asset to view available actions"
 msgstr ""
 
 msgid "Please try again"
@@ -1138,6 +1168,9 @@ msgstr ""
 msgid "Rewards"
 msgstr ""
 
+msgid "Rewards:"
+msgstr ""
+
 msgid "Roll it back - this feature is not yet supported on {0}."
 msgstr ""
 
@@ -1256,9 +1289,6 @@ msgstr ""
 msgid "SoulSwap utilizes a token vault called CoffinBox that has balances separate from your wallet."
 msgstr ""
 
-msgid "SoulSwapFinance@gmail.com"
-msgstr ""
-
 msgid "Spanish"
 msgstr ""
 
@@ -1348,6 +1378,9 @@ msgstr ""
 msgid "Swap to:"
 msgstr ""
 
+msgid "Swap {0}"
+msgstr ""
+
 msgid "Swapping"
 msgstr ""
 
@@ -1366,6 +1399,9 @@ msgstr ""
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""
 
+msgid "The difference between market price and estimated price due to the proportional makeup of the assets deposited."
+msgstr ""
+
 msgid "The difference between the market price and estimated price due to trade size."
 msgstr ""
 
@@ -1373,6 +1409,9 @@ msgid "The input token cannot be transferred. There may be an issue with the inp
 msgstr ""
 
 msgid "The isn't enough liquidity available at the moment to withdraw this amount. Please try withdrawing less or later."
+msgstr ""
+
+msgid "The minimum amount you’ll receive from your transaction, or else the transaction will revert."
 msgstr ""
 
 msgid "The onchain oracle that tracks the pricing for this pair"
@@ -1391,6 +1430,9 @@ msgid "Things you can do with your SOUL"
 msgstr ""
 
 msgid "Things you may do with your SOUL"
+msgstr ""
+
+msgid "This is our estimate of how much the gas cost for your transaction will be. Your wallet will give the true and final gas cost, which may be different from what is quoted."
 msgstr ""
 
 msgid "This token doesn't appear on the active token list(s). Make sure this is the token that you want to trade."
@@ -1422,12 +1464,6 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-msgid "Total Assets"
-msgstr ""
-
-msgid "Total Deposits"
-msgstr ""
-
 msgid "Total Locked: Connect Wallet"
 msgstr ""
 
@@ -1438,6 +1474,9 @@ msgid "Total in CoffinBox"
 msgstr ""
 
 msgid "Trade"
+msgstr ""
+
+msgid "Transaction Details"
 msgstr ""
 
 msgid "Transaction Hash"
@@ -1554,9 +1593,6 @@ msgstr ""
 msgid "Wallet"
 msgstr ""
 
-msgid "Wallet Assets"
-msgstr ""
-
 msgid "Wallet Balance"
 msgstr ""
 
@@ -1575,13 +1611,10 @@ msgstr ""
 msgid "Withdraw from locker {id}"
 msgstr ""
 
-msgid "Withdraw to Wallet"
-msgstr ""
-
 msgid "Withdraw to wallet"
 msgstr ""
 
-msgid "Withdrawing"
+msgid "Withdraw {0} to Wallet"
 msgstr ""
 
 msgid "Wrap"

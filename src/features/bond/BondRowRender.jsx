@@ -22,6 +22,7 @@ import {
   Input,
   SubmitButton,
 } from './BondStyles'
+import { formatNumber } from 'functions/format'
 
 import { Wrap, ClickableText, Heading, Text, ExternalLink } from '../../components/ReusableStyles'
 import Modal from '../../components/DefaultModal'
@@ -118,7 +119,6 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   useEffect(() => {
     getAprAndLiquidity()
     // getYearlyPoolRewards()
-    fetchPending()
     fetchPendingValue()
     fetchUserBondAlloc()
   }, [account])
@@ -129,7 +129,6 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   useEffect(() => {
     if (account) {
       const timer = setTimeout(() => {
-        fetchPending()
         fetchPendingValue()
         // getAprAndLiquidity()
         fetchUserBondAlloc()
@@ -274,28 +273,12 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
 
   /**
     * Checks the user's alloc of the total staked in the farm
-    */
+  */
   const fetchUserBondAlloc = async () => {
     const ownership = await fetchUserLpTokenAllocInBond(pid, account)
     const userStakedPercOfSummoner = Number(ownership?.[4])
     if (userStakedPercOfSummoner) setPercOfBond(Number(userStakedPercOfSummoner).toFixed(2))
     else setPercOfBond(0)
-  }
-  /**
-   * Fetches connected user pending soul
-   */
-  const fetchPending = async () => {
-    if (!account) {
-      // alert('connect wallet')
-    } else {
-      try {
-        const pendingResult = await pendingSoul(pid, account)
-        const formatted = ethers.utils.formatUnits(pendingResult?.[0].toString())
-        setPending(Number(formatted).toFixed(2).toString())
-      } catch (err) {
-        console.warn(err)
-      }
-    }
   }
 
   /**

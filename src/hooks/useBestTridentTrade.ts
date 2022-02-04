@@ -21,7 +21,7 @@ import {
 
 import { PoolUnion } from 'features/trident/types'
 import { toShareCurrencyAmount } from 'functions'
-import { useBentoRebase } from 'hooks/useBentoRebases'
+import { useCoffinRebase } from 'hooks/useCoffinRebases'
 import { PairState, useV2Pairs } from 'hooks/useV2Pairs'
 import { useActiveWeb3React } from 'services/web3'
 import { useBlockNumber } from 'state/application/hooks'
@@ -90,7 +90,7 @@ export function useBestTridentTrade(
   const { chainId, library } = useActiveWeb3React()
   const blockNumber = useBlockNumber()
   const setRoutingInfo = useSetRecoilState(routingInfo)
-  const { rebase } = useBentoRebase(amountSpecified?.currency)
+  const { rebase } = useCoffinRebase(amountSpecified?.currency)
   const [gasPrice, setGasPrice] = useState<number>()
   const [currencyIn, currencyOut] = useMemo(
     () => (tradeType === TradeType.EXACT_INPUT ? [mainCurrency, otherCurrency] : [otherCurrency, mainCurrency]),

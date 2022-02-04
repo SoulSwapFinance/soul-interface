@@ -12,7 +12,7 @@ import { ChainId } from '../../../sdk'
 import concat from 'lodash/concat'
 import { useActiveWeb3React } from 'services/web3'
 
-export * from './bentobox'
+export * from './coffinbox'
 export * from './blocks'
 export * from './exchange'
 export * from './seconds'

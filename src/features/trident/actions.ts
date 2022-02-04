@@ -57,12 +57,12 @@ interface BurnLiquidityAction {
 }
 
 /**
- * Burn liquidity tokens to get back `bento` tokens.
+ * Burn liquidity tokens to get back `coffin` tokens.
  * @param router Router contract
  * @param address address of liquidity token
  * @param amount amount of SLP to burn
  * @param recipient receiver of underlying SLP tokens
- * @param receiveToWallet true if underlying SLP tokens should be send to wallet instead of bentobox
+ * @param receiveToWallet true if underlying SLP tokens should be send to wallet instead of coffinbox
  * @param liquidityOutput array with minimum output amounts for underlying tokens
  */
 export const burnLiquidityAction = ({
@@ -166,7 +166,6 @@ export interface ApproveSLPActionProps {
  */
 export const approveSLPAction = ({ router, signatureData }: ApproveSLPActionProps) => {
   if (!signatureData) return undefined
-
   const { tokenAddress, amount, deadline, v, r, s } = signatureData
   return router.interface.encodeFunctionData('permitThis', [tokenAddress, amount, deadline, v, r, s])
 }

@@ -9,7 +9,6 @@ import {
   TABLE_WRAPPER_DIV_CLASSNAME,
 } from 'features/trident/constants'
 import React, { FC } from 'react'
-// @ts-ignore TYPE NEEDS FIXING
 import { useFlexLayout, usePagination, useSortBy, useTable } from 'react-table'
 
 interface AssetBalancesProps {
@@ -23,7 +22,6 @@ interface AssetBalancesProps {
 const AssetBalances: FC<AssetBalancesProps> = ({ config, loading, error, onSelect, selected }) => {
   const { i18n } = useLingui()
 
-  // @ts-ignore TYPE NEEDS FIXING
   const { getTableProps, getTableBodyProps, headerGroups, prepareRow, page } = useTable(
     config,
     useSortBy,
@@ -39,7 +37,6 @@ const AssetBalances: FC<AssetBalancesProps> = ({ config, loading, error, onSelec
             <tr {...headerGroup.getHeaderGroupProps()} key={i}>
               {headerGroup.headers.map((column, i) => (
                 <th
-                  // @ts-ignore TYPE NEEDS FIXING
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                   key={i}
                   className={TABLE_TR_TH_CLASSNAME(i, headerGroup.headers.length)}
@@ -62,7 +59,6 @@ const AssetBalances: FC<AssetBalancesProps> = ({ config, loading, error, onSelec
         </thead>
         <tbody {...getTableBodyProps()}>
           {page.length > 0 ? (
-            // @ts-ignore TYPE NEEDS FIXING
             page.map((row, i) => {
               prepareRow(row)
               return (
@@ -72,7 +68,7 @@ const AssetBalances: FC<AssetBalancesProps> = ({ config, loading, error, onSelec
                   onClick={() => onSelect && onSelect(row)}
                   className={TABLE_TBODY_TR_CLASSNAME}
                 >
-                  {/*@ts-ignore TYPE NEEDS FIXING*/}
+
                   {row.cells.map((cell, i) => {
                     return (
                       <td key={i} {...cell.getCellProps()} className={TABLE_TBODY_TD_CLASSNAME(i, row.cells.length)}>

@@ -5,12 +5,12 @@ import { Contract } from '@ethersproject/contracts'
 import { useActiveWeb3React } from "services/web3"
 import { Currency } from "sdk"
 
-export function usePrice(tokenAddress: string | Currency | undefined | null) {
+export function usePrice(tokenAddress: string | undefined | null) {
     const priceHelperContract = usePriceHelperContract()
     const rawPrice = useSingleCallResult(
         priceHelperContract,
         'currentTokenUsdcPrice',
-        [tokenAddress.toString()]
+        [tokenAddress]
     ).result
 
     const price =  Number(rawPrice) / 1E18

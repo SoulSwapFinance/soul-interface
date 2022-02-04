@@ -10,7 +10,7 @@ import useLimitOrders from 'features/limit-order/hooks/useLimitOrders'
 import NetworkGuard from 'guards/Network'
 import { TridentBody } from 'layouts/Trident'
 import { useActiveWeb3React } from 'services/web3'
-import { useBentoMasterContractAllowed } from 'state/bentobox/hooks'
+import { useCoffinMasterContractAllowed } from 'state/coffinbox/hooks'
 import React from 'react'
 import { STOP_LIMIT_ORDER_ADDRESS } from 'sdk'
 
@@ -19,7 +19,7 @@ function OpenOrdersPage() {
   const { i18n } = useLingui()
   const { pending } = useLimitOrders()
   const masterContract = chainId && STOP_LIMIT_ORDER_ADDRESS[chainId]
-  const allowed = useBentoMasterContractAllowed(masterContract, account ?? undefined)
+  const allowed = useCoffinMasterContractAllowed(masterContract, account ?? undefined)
 
   return (
     <>

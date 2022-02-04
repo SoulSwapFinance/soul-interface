@@ -26,7 +26,7 @@ import { GraphProps } from '../interfaces'
 import { ethPriceQuery } from '../queries'
 
 export function useFactory({
-  chainId = ChainId.MAINNET,
+  chainId = ChainId.FANTOM,
   variables,
   shouldFetch = true,
   swrConfig = undefined,
@@ -41,7 +41,7 @@ export function useFactory({
 }
 
 export function useNativePrice({
-  chainId = ChainId.MAINNET,
+  chainId = ChainId.FANTOM,
   variables,
   shouldFetch = true,
   swrConfig = undefined,
@@ -87,7 +87,7 @@ export function useFantomPrice(swrConfig: SWRConfiguration = undefined) {
 // @ts-ignore TYPE NEEDS FIXING
 export function useRulerPrice(swrConfig: SWRConfiguration = undefined) {
   const { chainId } = useActiveWeb3React()
-  const shouldFetch = chainId && chainId === ChainId.MAINNET
+  const shouldFetch = chainId && chainId === ChainId.FANTOM
   const { data } = useSWR(shouldFetch ? ['rulerPrice'] : null, () => getRulerPrice(), swrConfig)
   return data
 }
@@ -95,14 +95,14 @@ export function useRulerPrice(swrConfig: SWRConfiguration = undefined) {
 // @ts-ignore TYPE NEEDS FIXING
 export function useTruPrice(swrConfig: SWRConfiguration = undefined) {
   const { chainId } = useActiveWeb3React()
-  const { data } = useSWR(chainId && chainId === ChainId.MAINNET ? ['truPrice'] : null, () => getTruPrice(), swrConfig)
+  const { data } = useSWR(chainId && chainId === ChainId.FANTOM ? ['truPrice'] : null, () => getTruPrice(), swrConfig)
   return data
 }
 
 // @ts-ignore TYPE NEEDS FIXING
 export function useAlcxPrice(swrConfig: SWRConfiguration = undefined) {
   const { chainId } = useActiveWeb3React()
-  const shouldFetch = chainId && chainId === ChainId.MAINNET
+  const shouldFetch = chainId && chainId === ChainId.FANTOM
   const { data } = useSWR(shouldFetch ? ['aclxPrice'] : null, () => getAlcxPrice(), swrConfig)
   return data
 }
@@ -110,7 +110,7 @@ export function useAlcxPrice(swrConfig: SWRConfiguration = undefined) {
 // @ts-ignore TYPE NEEDS FIXING
 export function useCvxPrice(swrConfig: SWRConfiguration = undefined) {
   const { chainId } = useActiveWeb3React()
-  const shouldFetch = chainId && chainId === ChainId.MAINNET
+  const shouldFetch = chainId && chainId === ChainId.FANTOM
   const { data } = useSWR(shouldFetch ? ['cvxPrice'] : null, () => getCvxPrice(), swrConfig)
   return data
 }
@@ -136,7 +136,7 @@ export function useBundle(variables = undefined, swrConfig: SWRConfiguration = u
 }
 
 export function useLiquidityPositions({
-  chainId = ChainId.MAINNET,
+  chainId = ChainId.FANTOM,
   variables,
   shouldFetch = true,
   swrConfig = undefined,
@@ -150,14 +150,13 @@ export function useLiquidityPositions({
 }
 
 export function useSoulPairs({
-  chainId = ChainId.MAINNET,
+  chainId = ChainId.FANTOM,
   variables,
   shouldFetch = true,
   swrConfig = undefined,
 }: GraphProps) {
   const { data } = useSWR(
     shouldFetch ? ['soulPairs', chainId, stringify(variables)] : null,
-    // @ts-ignore TYPE NEEDS FIXING
     (_, chainId) => getPairs(chainId, variables),
     swrConfig
   )
@@ -165,7 +164,7 @@ export function useSoulPairs({
 }
 
 export function useTokens({
-  chainId = ChainId.MAINNET,
+  chainId = ChainId.FANTOM,
   variables,
   shouldFetch = true,
   swrConfig = undefined,
@@ -179,7 +178,7 @@ export function useTokens({
 }
 
 export function usePairDayData({
-  chainId = ChainId.MAINNET,
+  chainId = ChainId.FANTOM,
   variables,
   shouldFetch = true,
   swrConfig = undefined,
@@ -216,7 +215,7 @@ export function useDayData({ chainId, variables, shouldFetch = true, swrConfig =
 }
 
 export function useTokenPairs({
-  chainId = ChainId.MAINNET,
+  chainId = ChainId.FANTOM,
   variables,
   shouldFetch = true,
   swrConfig = undefined,

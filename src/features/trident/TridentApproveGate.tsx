@@ -4,7 +4,7 @@ import { useLingui } from '@lingui/react'
 import { Currency, CurrencyAmount, ZERO } from 'sdk'
 import { Button } from 'components/Button'
 import { ApprovalState, useApproveCallback } from 'hooks/useApproveCallback'
-import useBentoMasterApproveCallback, { BentoApprovalState, BentoPermit } from 'hooks/useCoffinMasterApproveCallback'
+import useCoffinMasterApproveCallback, { CoffinApprovalState, CoffinPermit } from 'hooks/useCoffinMasterApproveCallback'
 import { StandardSignatureData, useTridentLiquidityTokenPermit } from 'hooks/useERC20Permit'
 import { useActiveWeb3React } from 'services/web3'
 import { useWalletModalToggle } from 'state/application/hooks'
@@ -86,7 +86,7 @@ const TokenApproveButton: FC<TokenApproveButtonProps> = memo(
 
 interface TridentApproveGateCommonProps {
   inputAmounts: (CurrencyAmount<Currency> | undefined)[]
-  children: ({ approved, loading }: { approved: boolean; loading: boolean; permit?: BentoPermit }) => ReactNode
+  children: ({ approved, loading }: { approved: boolean; loading: boolean; permit?: CoffinPermit }) => ReactNode
   tokenApproveOn?: string
   masterContractAddress?: string
   onSLPPermit?(x: StandardSignatureData): void
@@ -126,18 +126,18 @@ const TridentApproveGate = ({
   const [status, setStatus] = useState<Record<string, ApprovalState>>({})
   const [permitError, setPermitError] = useState(false)
 
-  const { approve, approvalState, getPermit, permit } = useBentoMasterApproveCallback(
+  const { approve, approvalState, getPermit, permit } = useCoffinMasterApproveCallback(
     withPermit ? masterContractAddress : undefined,
     {}
   )
 
   const loading =
     Object.values(status).some((el) => el === ApprovalState.UNKNOWN) ||
-    (withPermit ? approvalState === BentoApprovalState.UNKNOWN : false)
+    (withPermit ? approvalState === CoffinApprovalState.UNKNOWN : false)
 
   const approved =
     Object.values(status).every((el) => el === ApprovalState.APPROVED) &&
-    (withPermit ? approvalState === BentoApprovalState.APPROVED : true)
+    (withPermit ? approvalState === CoffinApprovalState.APPROVED : true)
 
   // If we have a permitError, use the approveCallback as a fallback
   const onClick = useCallback(async () => {
@@ -157,10 +157,10 @@ const TridentApproveGate = ({
 
   return (
     <div className="flex flex-col gap-3">
-      {/*hide bentobox approval if not every inputAmount is greater than than zero*/}
+      {/*hide coffinbox approval if not every inputAmount is greater than than zero*/}
       {inputAmounts.every((el) => el?.greaterThan(ZERO)) &&
-        [BentoApprovalState.NOT_APPROVED, BentoApprovalState.PENDING].includes(approvalState) && (
-          <Button color="blue" loading={approvalState === BentoApprovalState.PENDING} id={`btn-approve`} onClick={onClick}>
+        [CoffinApprovalState.NOT_APPROVED, CoffinApprovalState.PENDING].includes(approvalState) && (
+          <Button color="blue" loading={approvalState === CoffinApprovalState.PENDING} id={`btn-approve`} onClick={onClick}>
             {i18n._(t`Approve CoffinBox`)}
           </Button>
         )}

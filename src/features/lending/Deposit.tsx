@@ -23,23 +23,23 @@ export default function Deposit({ pair }: any): JSX.Element {
   // console.log({ pair })
 
   // State
-  const [useBento, setUseBento] = useState<boolean>(pair.asset.bentoBalance.gt(0))
+  const [useCoffin, setUseCoffin] = useState<boolean>(pair.asset.coffinBalance.gt(0))
   const [value, setValue] = useState('')
 
   const info = useKashiInfo()
 
   // Calculated
   const assetNative = WNATIVE[chainId || 1].address === pair.asset.address
-  const balance = useBento ? pair.asset.bentoBalance : assetNative ? info?.ethBalance : pair.asset.balance
+  const balance = useCoffin ? pair.asset.coffinBalance : assetNative ? info?.ethBalance : pair.asset.balance
 
-  const max = useBento ? pair.asset.bentoBalance : assetNative ? info?.ethBalance : pair.asset.balance
+  const max = useCoffin ? pair.asset.coffinBalance : assetNative ? info?.ethBalance : pair.asset.balance
 
   const warnings = new Warnings()
 
   warnings.add(
     balance?.lt(value),
       // .toBigNumber(pair.asset.tokenInfo.decimals)),
-    `Please make sure your ${useBento ? 'CoffinBox' : 'wallet'} balance is sufficient to deposit and then try again.`,
+    `Please make sure your ${useCoffin ? 'CoffinBox' : 'wallet'} balance is sufficient to deposit and then try again.`,
     true
   )
 
@@ -76,7 +76,7 @@ export default function Deposit({ pair }: any): JSX.Element {
     }
     cooker.addAsset(new BigNumber(value, ''),
       // .toBigNumber(pair.asset.tokenInfo.decimals), 
-      useBento)
+      useCoffin)
     return `Deposit ${pair.asset.tokenInfo.symbol}`
   }
 
@@ -89,10 +89,10 @@ export default function Deposit({ pair }: any): JSX.Element {
         token={pair.asset}
         value={value}
         setValue={setValue}
-        useBentoTitleDirection="down"
-        useBentoTitle="from"
-        useBento={useBento}
-        setUseBento={setUseBento}
+        useCoffinTitleDirection="down"
+        useCoffinTitle="from"
+        useCoffin={useCoffin}
+        setUseCoffin={setUseCoffin}
         maxTitle="Balance"
         max={max}
         showMax={true}
@@ -104,7 +104,7 @@ export default function Deposit({ pair }: any): JSX.Element {
       <KashiApproveButton
         color="blue"
         content={(onCook: any) => (
-          <TokenApproveButton value={value} token={assetToken} needed={!useBento}>
+          <TokenApproveButton value={value} token={assetToken} needed={!useCoffin}>
             <Button
               onClick={() => onCook(pair, onExecute)}
               disabled={value

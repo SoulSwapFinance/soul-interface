@@ -7,7 +7,7 @@ const features: FeatureMap = {
   [ChainId.MAINNET]: [
     Feature.AMM,
     // Feature.LIQUIDITY_MINING,
-    // Feature.BENTOBOX,
+    // Feature.COFFINBOX,
     // Feature.KASHI,
     // Feature.MIGRATE,
     // Feature.ANALYTICS,
@@ -22,7 +22,7 @@ const features: FeatureMap = {
     Feature.STAKING,
     Feature.ANALYTICS,
     Feature.LIQUIDITY_MINING,
-    // Feature.LIMIT_ORDERS,
+    Feature.LIMIT_ORDERS,
     Feature.COFFINBOX],
 
   [ChainId.FANTOM_TESTNET]: [Feature.AMM],

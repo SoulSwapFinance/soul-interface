@@ -12,7 +12,7 @@ export interface AddState {
   showReview: boolean
   attemptingTxn: boolean
   txHash?: string
-  bentoPermit?: Signature
+  coffinPermit?: Signature
   spendFromWallet: [boolean, boolean]
 }
 
@@ -25,7 +25,7 @@ const initialState: AddState = {
   attemptingTxn: false,
   spendFromWallet: [true, true],
   txHash: undefined,
-  bentoPermit: undefined,
+  coffinPermit: undefined,
 }
 
 export const addSlice = createSlice({
@@ -68,8 +68,8 @@ export const addSlice = createSlice({
     setAddNormalInput: (state, action: PayloadAction<[string, string]>) => {
       state.normalInput = action.payload
     },
-    setAddBentoPermit: (state, action: PayloadAction<Signature | undefined>) => {
-      state.bentoPermit = action.payload
+    setAddCoffinPermit: (state, action: PayloadAction<Signature | undefined>) => {
+      state.coffinPermit = action.payload
     },
   },
 })
@@ -83,7 +83,7 @@ export const {
   setAddTxHash,
   setAddAttemptingTxn,
   setAddNormalInput,
-  setAddBentoPermit,
+  setAddCoffinPermit,
 } = addSlice.actions
 
 type selectTridentAdd = (state: AppState) => AddState

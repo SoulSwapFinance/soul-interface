@@ -8,7 +8,7 @@ Home repository for the SoulSwap Decentralized Finance Application.
   - #### [dashboard](./src/pages/analytics/dashboard/[[...type]].tsx)
   - #### [pairs](./src/pages/analytics/dashboard/[[...type]].tsx)
   - #### [tokens](./src/pages/analytics/dashboard/[[...type]].tsx)
-- ### [Coffinbox](./src/pages/bentobox/index.tsx)
+- ### [Coffinbox](./src/pages/coffinbox/index.tsx)
 - ### [Chains](./src/pages/chains/index.tsx)
 - ### [Exchange](./src/pages/exchange)
 - ### [Farm](./src/pages/farm)

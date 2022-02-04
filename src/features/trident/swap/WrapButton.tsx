@@ -5,7 +5,7 @@ import { Button } from 'components/Button'
 import Dots from 'components/Dots'
 import { useDerivedTridentSwapContext } from 'features/trident/swap/DerivedTradeContext'
 import { selectTridentSwap } from 'features/trident/swap/swapSlice'
-import { useBentoBox, useBentoBoxContract, useWETH9Contract } from 'hooks'
+import { useCoffinBox, useCoffinBoxContract, useWETH9Contract } from 'hooks'
 import { useActiveWeb3React } from 'services/web3'
 import { useAppSelector } from 'state/hooks'
 import { useTransactionAdder } from 'state/transactions/hooks'
@@ -17,8 +17,8 @@ const WrapButton: FC = () => {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const wethContract = useWETH9Contract()
-  const bentoBox = useBentoBoxContract()
-  const { deposit, withdraw } = useBentoBox()
+  const coffinBox = useCoffinBoxContract()
+  const { deposit, withdraw } = useCoffinBox()
   const addTransaction = useTransactionAdder()
   const { spendFromWallet, receiveToWallet, attemptingTxn } = useAppSelector(selectTridentSwap)
   const { parsedAmounts, error } = useDerivedTridentSwapContext()
@@ -57,7 +57,7 @@ const WrapButton: FC = () => {
   }
 
   return (
-    <TridentApproveGate inputAmounts={[parsedAmounts?.[0]]} tokenApproveOn={bentoBox?.address}>
+    <TridentApproveGate inputAmounts={[parsedAmounts?.[0]]} tokenApproveOn={coffinBox?.address}>
       {({ approved, loading }) => {
         let disabled = !!error || !approved || loading || attemptingTxn
         let buttonTextParts = [parsedAmounts?.[0]?.currency.isNative ? i18n._(t`Wrap`) : i18n._(t`Unwrap`)]

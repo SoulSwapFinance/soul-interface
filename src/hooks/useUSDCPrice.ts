@@ -246,7 +246,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
       return new Price(currency, stablecoin, denominator, numerator)
     }
     return undefined
-  }, [currency, stablecoin, usdt, soul, seance, luxor, wlum, weth, wbtc, bnb, v2USDCTrade])
+  }, [currency, stablecoin, v2USDCTrade])
 }
 
 export function useUSDCValue(currencyAmount: CurrencyAmount<Currency> | undefined | null) {
@@ -262,6 +262,32 @@ export function useUSDCValue(currencyAmount: CurrencyAmount<Currency> | undefine
   }, [currencyAmount, price])
 }
 
+
+export function useUSDCPriceWithLoadingIndicator(currency?: Currency) {
+  const price = useUSDCPrice(currency)
+  return useMemo(() => {
+    if (!price || !currency) return { price: undefined, loading: false }
+    try {
+      return { price, loading: false }
+    } catch (error) {
+      return { price: undefined, loading: false }
+    }
+  }, [currency, price])
+}
+
+export function useUSDCValueWithLoadingIndicator(currencyAmount: CurrencyAmount<Currency> | undefined) {
+  const price = useUSDCPrice(currencyAmount?.currency)
+  return useMemo(() => {
+    if (!price || !currencyAmount) return { value: undefined, loading: false }
+    try {
+      return { value: price.quote(currencyAmount), loading: false }
+    } catch (error) {
+      return { value: undefined, loading: false }
+    }
+  }, [currencyAmount, price])
+
+}
+
 /**
  *
  * @param fiatValue string representation of a USD amount
@@ -272,7 +298,7 @@ export function useStablecoinAmountFromFiatValue(fiatValue: string | null | unde
   const stablecoin = chainId ? STABLECOIN_AMOUNT_OUT[chainId]?.currency : undefined
 
   if (fiatValue === null || fiatValue === undefined || !chainId || !stablecoin) {
-    return usePrice(STABLECOIN_AMOUNT_OUT[chainId]?.currency)
+    return undefined
   }
 
   // trim for decimal precision when parsing
@@ -285,3 +311,4 @@ export function useStablecoinAmountFromFiatValue(fiatValue: string | null | unde
     return undefined
   }
 }
+

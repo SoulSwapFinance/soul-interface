@@ -1,5 +1,5 @@
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
-import useKashiApproveCallback, { BentoApprovalState } from '../../hooks/useKashiApproveCallback'
+import useKashiApproveCallback, { CoffinApprovalState } from '../../hooks/useKashiApproveCallback'
 
 import Alert from '../../components/Alert'
 import { COFFIN_BOX_ADDRESS } from '../../constants/kashi'
@@ -16,9 +16,9 @@ export function KashiApproveButton({ content, color }: any): any {
   const { i18n } = useLingui()
   const [kashiApprovalState, approveKashiFallback, kashiPermit, onApprove, onCook] = useKashiApproveCallback()
   const showApprove =
-    (kashiApprovalState === BentoApprovalState.NOT_APPROVED || kashiApprovalState === BentoApprovalState.PENDING) &&
+    (kashiApprovalState === CoffinApprovalState.NOT_APPROVED || kashiApprovalState === CoffinApprovalState.PENDING) &&
     !kashiPermit
-  const showChildren = kashiApprovalState === BentoApprovalState.APPROVED || kashiPermit
+  const showChildren = kashiApprovalState === CoffinApprovalState.APPROVED || kashiPermit
 
   return (
     <>

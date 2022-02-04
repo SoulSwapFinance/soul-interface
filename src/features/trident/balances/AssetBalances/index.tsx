@@ -1,53 +1,40 @@
+import { t } from '@lingui/macro'
+import { useLingui } from '@lingui/react'
 import { NATIVE, ZERO } from 'sdk'
+import Typography from 'components/Typography'
 import AssetBalances from 'features/trident/balances/AssetBalances/AssetBalances'
 import { Assets } from 'features/trident/balances/AssetBalances/types'
 import { useLPTableConfig } from 'features/trident/balances/AssetBalances/useLPTableConfig'
 import { setBalancesState } from 'features/trident/balances/balancesSlice'
-import { useBalancesSelectedCurrency } from 'features/trident/balances/useBalancesDerivedState'
 import { ActiveModal } from 'features/trident/types'
 // import { useTridentLiquidityPositions } from 'services/graph'
 import { useActiveWeb3React } from 'services/web3'
-import { useBentoBalancesV2 } from 'state/bentobox/hooks'
+import { useCoffinBalancesV2 } from 'state/coffinbox/hooks'
 import { useAppDispatch } from 'state/hooks'
-import { useAllTokenBalances, useCurrencyBalance } from 'state/wallet/hooks'
+import { useAllTokenBalances, useAllTokenBalancesWithLoadingIndicator, useCurrencyBalance } from 'state/wallet/hooks'
 import React, { useCallback, useMemo } from 'react'
 
 import { useTableConfig } from './useTableConfig'
-import { POOLS } from 'constants/farms'
-import { useSoulPositions } from 'features/mines/hooks'
-import { useSoulSummonerContract } from 'hooks/useContract'
+import { usePositions } from 'hooks/usePositions'
 
 export const LiquidityPositionsBalances = () => {
-  // const { account, chainId } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
+  const positions = usePositions()
+  // const { data: positions } = useTridentLiquidityPositions({
+  //   chainId,
+  //   variables: { where: { user: account?.toLowerCase(), balance_gt: 0 } },
+  //   shouldFetch: !!chainId && !!account,
+  // })
 
-  // const {
-  //   data: positions,
-  //   isValidating,
-  //   error,
-  // } 
-// = 
-//   useTridentLiquidityPositions({
-//     chainId,
-//     variables: { where: { user: account?.toLowerCase(), balance_gt: 0 } },
-//     shouldFetch: !!chainId && !!account,
-//   })
-
-function usePositions() {
-  return useSoulPositions(useSoulSummonerContract())
-}
-
-const positions = usePositions()
-// const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
-//   return { ...POOLS[chainId][key], lpToken: key }
-// })
   const { config } = useLPTableConfig(positions)
   return <AssetBalances config={config} />
 }
 
-export const BentoBalances = () => {
+export const CoffinBalances = () => {
+  const { account } = useActiveWeb3React()
+  const { i18n } = useLingui()
   const dispatch = useAppDispatch()
-  const selected = useBalancesSelectedCurrency()
-  const balances = useBentoBalancesV2()
+  const { data: balances, loading } = useCoffinBalancesV2()
   const assets = balances.reduce<Assets[]>((acc, el) => {
     if (el) acc.push({ asset: el })
     return acc
@@ -59,31 +46,32 @@ export const BentoBalances = () => {
       dispatch(
         setBalancesState({
           currency: currency.isNative ? 'FTM' : row.values.asset.currency.address,
-          activeModal: ActiveModal.MENU,
+          activeModal: ActiveModal.WITHDRAW, // MENU
         })
       )
     },
     [dispatch]
   )
 
-  const { config } = useTableConfig(assets)
+  const { config } = useTableConfig(assets, loading)
 
   return (
-    <AssetBalances
-      config={config}
-      selected={(row) => row.values.asset.currency === selected}
-      onSelect={handleRowClick}
-    />
+    <div className="flex flex-col gap-3">
+      <Typography weight={700} variant="lg" className="px-2 text-high-emphesis">
+        {i18n._(t`CoffinBox`)}
+      </Typography>
+      <AssetBalances config={config} onSelect={handleRowClick} />
+    </div>
   )
 }
 
 export const WalletBalances = () => {
+  const { i18n } = useLingui()
   const { chainId, account } = useActiveWeb3React()
   const dispatch = useAppDispatch()
-  const selected = useBalancesSelectedCurrency()
-
+  // const { data: _balances, loading } = useAllTokenBalancesWithLoadingIndicator()
   const _balances = useAllTokenBalances()
-  // @ts-ignore TYPE NEEDS FIXING
+
   const ethBalance = useCurrencyBalance(account ? account : undefined, chainId ? NATIVE[chainId] : undefined)
 
   const balances = useMemo(() => {
@@ -106,7 +94,7 @@ export const WalletBalances = () => {
       dispatch(
         setBalancesState({
           currency: currency.isNative ? 'FTM' : row.values.asset.currency.address,
-          activeModal: ActiveModal.MENU,
+          activeModal: ActiveModal.DEPOSIT, // MENU
         })
       )
     },
@@ -114,10 +102,11 @@ export const WalletBalances = () => {
   )
 
   return (
-    <AssetBalances
-      config={config}
-      selected={(row) => row.values.asset.currency === selected}
-      onSelect={handleRowClick}
-    />
+    <div className="flex flex-col gap-3">
+      <Typography weight={700} variant="lg" className="px-2 text-high-emphesis">
+        {i18n._(t`Wallet`)}
+      </Typography>
+      <AssetBalances config={config} onSelect={handleRowClick} />
+    </div>
   )
 }

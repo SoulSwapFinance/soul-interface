@@ -8,7 +8,7 @@ import { Direction, TransactionReview } from 'entities/TransactionReview'
 import { Warnings } from 'entities/Warnings'
 import { formatNumber } from 'functions/format'
 import { e10, ZERO } from 'functions/math'
-import { useBentoBoxContract } from 'hooks'
+import { useCoffinBoxContract } from 'hooks'
 import { useCurrency } from 'hooks/Tokens'
 import { useActiveWeb3React } from 'services/web3'
 import { useETHBalances } from 'state/wallet/hooks'
@@ -24,12 +24,12 @@ export default function Deposit({ pair }: any): JSX.Element {
 
   const assetToken = useCurrency(pair.asset.address) || undefined
 
-  const bentoBoxContract = useBentoBoxContract()
+  const coffinBoxContract = useCoffinBoxContract()
 
   const { i18n } = useLingui()
 
   // State
-  const [useBento, setUseBento] = useState<boolean>(pair.asset.bentoBalance.gt(0))
+  const [useCoffin, setUseCoffin] = useState<boolean>(pair.asset.coffinBalance.gt(0))
   const [value, setValue] = useState('')
 
   // Calculated
@@ -39,15 +39,15 @@ export default function Deposit({ pair }: any): JSX.Element {
   // @ts-ignore TYPE NEEDS FIXING
   const ethBalance = useETHBalances(assetNative ? [account] : [])
 
-  const balance = useBento
-    ? pair.asset.bentoBalance
+  const balance = useCoffin
+    ? pair.asset.coffinBalance
     : assetNative
     ? //  @ts-ignore TYPE NEEDS FIXING
       BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
     : pair.asset.balance
 
-  const max = useBento
-    ? pair.asset.bentoBalance
+  const max = useCoffin
+    ? pair.asset.coffinBalance
     : assetNative
     ? // @ts-ignore TYPE NEEDS FIXING
       BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
@@ -60,7 +60,7 @@ export default function Deposit({ pair }: any): JSX.Element {
       // .toBigNumber(pair.asset.tokenInfo.decimals
       ),
     i18n._(
-      t`Please make sure your ${useBento ? 'BentoBox' : 'wallet'} balance is sufficient to deposit and then try again.`
+      t`Please make sure your ${useCoffin ? 'Coffin' : 'wallet'} balance is sufficient to deposit and then try again.`
     ),
     true
   )
@@ -104,12 +104,12 @@ export default function Deposit({ pair }: any): JSX.Element {
     // .toBigNumber(pair.asset.tokenInfo.decimals)
 
     // @ts-ignore TYPE NEEDS FIXING
-    const deadBalance = await bentoBoxContract.balanceOf(
+    const deadBalance = await coffinBoxContract.balanceOf(
       pair.asset.address,
       '0x000000000000000000000000000000000000dead'
     )
 
-    cooker.addAsset(amount, useBento 
+    cooker.addAsset(amount, useCoffin
       // deadBalance.isZero()
     )
 
@@ -125,10 +125,10 @@ export default function Deposit({ pair }: any): JSX.Element {
         token={pair.asset}
         value={value}
         setValue={setValue}
-        useBentoTitleDirection="down"
-        useBentoTitle="from"
-        useBento={useBento}
-        setUseBento={setUseBento}
+        useCoffinTitleDirection="down"
+        useCoffinTitle="from"
+        useCoffin={useCoffin}
+        setUseCoffin={setUseCoffin}
         maxTitle="Balance"
         max={max}
         showMax={true}
@@ -140,7 +140,7 @@ export default function Deposit({ pair }: any): JSX.Element {
       <UnderworldApproveButton
         color="blue"
         content={(onCook: any) => (
-          <TokenApproveButton value={value} token={assetToken} needed={!useBento}>
+          <TokenApproveButton value={value} token={assetToken} needed={!useCoffin}>
             <Button
               onClick={() => onCook(pair, onExecute)}
               disabled={value

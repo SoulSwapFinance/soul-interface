@@ -7,13 +7,13 @@ import selectCoinAnimation from 'animation/select-coin.json'
 import { Button } from 'components/Button'
 import Chip from 'components/Chip'
 import { CurrencyLogo } from 'components/CurrencyLogo'
-import { BentoboxIcon, WalletIcon } from 'components/Icon'
+import { CoffinboxIcon, WalletIcon } from 'components/Icon'
 import NumericalInput from 'components/Input/Numeric'
 import Switch from 'components/Switch'
 import Typography from 'components/Typography'
-import BentoBoxFundingSourceModal from 'features/trident/add/BentoBoxFundingSourceModal'
+import CoffinBoxFundingSourceModal from 'features/trident/add/CoffinBoxFundingSourceModal'
 import { classNames, formatNumber, maxAmountSpend, tryParseAmount } from 'functions'
-import { useBentoOrWalletBalance } from 'hooks/useBentoOrWalletBalance'
+import { useCoffinOrWalletBalance } from 'hooks/useCoffinOrWalletBalance'
 import useDesktopMediaQuery from 'hooks/useDesktopMediaQuery'
 import { useUSDCValue } from 'hooks/useUSDCPrice'
 import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
@@ -30,9 +30,10 @@ import { formatCurrency } from 'modals/TokensStatsModal'
 interface AssetInputProps {
   value?: string
   currency?: Currency
+  currencyAddress?: string
   token0?: string,
   token1?: string,
-  onChange: (x: string | undefined) => void
+  onChange: (x: string | undefined, max?: boolean) => void
   spendFromWallet?: boolean
   title?: string
   onSelect?: (x: Token) => void
@@ -72,12 +73,12 @@ const AssetInput: AssetInput<AssetInputProps> = ({
   const { account } = useActiveWeb3React()
   const [open, setOpen] = useState(false)
 
-  const bentoOrWalletBalance = useBentoOrWalletBalance(
+  const coffinOrWalletBalance = useCoffinOrWalletBalance(
     account && !balanceProp ? account : undefined,
     props.currency,
     spendFromWallet
   )
-  const balance = balanceProp || bentoOrWalletBalance
+  const balance = balanceProp || coffinOrWalletBalance
 
   const maxSpend = maxAmountSpend(balance)?.toExact()
   const maxSpendAsFraction = maxAmountSpend(balance)?.asFraction
@@ -165,6 +166,7 @@ interface AssetInputPanelProps extends AssetInputProps {
 const AssetInputPanel = ({
   value,
   currency,
+  currencyAddress,
   token0,
   token1,
   onChange,
@@ -192,7 +194,7 @@ const AssetInputPanel = ({
 
   // const pairValue = useUSDCValue(tryParseAmount(Number(value) === 0 ? '1' : value, currency))
   const usdcValue = useUSDCValue(tryParseAmount(Number(value) === 0 ? '1' : value, currency))
-  const tokenPrice = usePrice(currency.address)
+  const tokenPrice = usePrice(currencyAddress)
  
   // const usdValue = usePrice(currency.toString())
   const span = useRef<HTMLSpanElement | null>(null)
@@ -329,7 +331,7 @@ const AssetInputPanelBalance: FC<AssetInputPanelBalanceProps> = ({ balance, onCl
   )
   if (!spendFromWallet) {
     icon = (
-      <BentoboxIcon
+      <CoffinboxIcon
         width={16}
         height={16}
         className={classNames(balance ? 'text-high-emphesis' : 'text-low-emphesis', 'truncate')}
@@ -371,7 +373,7 @@ const AssetInputWalletSwitch: FC<AssetInputWalletSwitchProps> = ({ checked, onCh
   const isDesktop = useDesktopMediaQuery()
   const { i18n } = useLingui()
 
-  const helper = <BentoBoxFundingSourceModal />
+  const helper = <CoffinBoxFundingSourceModal />
 
   return (
     <div
@@ -390,7 +392,7 @@ const AssetInputWalletSwitch: FC<AssetInputWalletSwitchProps> = ({ checked, onCh
             weight={700}
             className="text-right text-high-emphesis lg:text-center lg:flex lg:gap-1 lg:items-center lg:justify-center"
           >
-            {checked ? i18n._(t`Wallet`) : i18n._(t`BentoBox`)} {isDesktop && helper}
+            {checked ? i18n._(t`Wallet`) : i18n._(t`CoffinBox`)} {isDesktop && helper}
           </Typography>
         </div>
         <div className="order-2 lg:order-1">
@@ -405,7 +407,7 @@ const AssetInputWalletSwitch: FC<AssetInputWalletSwitchProps> = ({ checked, onCh
             }
             uncheckedIcon={
               <div className="flex items-center justify-center w-full h-full text-dark-700">
-                <BentoboxIcon width={16} height={16} />
+                <CoffinboxIcon width={16} height={16} />
               </div>
             }
           />

@@ -8,8 +8,15 @@ import { AddressZero } from '@ethersproject/constants'
 import { t } from '@lingui/macro'
 import {
   Currency,
+  ComplexPathParams,
   CurrencyAmount,
+  ExactInputSingleParams,
+  ExactInputParams,
+  InitialPath,
+  Path,
   Percent,
+  PercentagePath,
+  RouteType,
   Router as LegacyRouter,
   SwapParameters,
   toHex,
@@ -18,16 +25,6 @@ import {
   TradeType,
 } from 'sdk'
 import { getBigNumber, MultiRoute } from '@sushiswap/tines'
-import {
-  ComplexPathParams,
-  ExactInputParams,
-  ExactInputSingleParams,
-  InitialPath,
-  Output,
-  Path,
-  PercentagePath,
-  RouteType,
-} from '@sushiswap/trident-sdk'
 import { EIP_1559_ACTIVATION_BLOCK } from '../constants'
 import { Feature } from 'enums'
 import { approveMasterContractAction, batchAction, unwrapWETHAction } from 'features/trident/actions'
@@ -36,7 +33,7 @@ import approveAmountCalldata from 'functions/approveAmountCalldata'
 import { shortenAddress } from 'functions/format'
 import { calculateGasMargin } from 'functions/trade'
 import { isAddress, isZero } from 'functions/validate'
-import { useBentoRebase } from 'hooks/useBentoRebases'
+import { useCoffinRebase } from 'hooks/useCoffinRebases'
 import { useActiveWeb3React } from 'services/web3'
 import { useBlockNumber } from 'state/application/hooks'
 import { TransactionResponseLight, useTransactionAdder } from 'state/transactions/hooks'
@@ -48,6 +45,13 @@ import { useRouterContract, useTridentRouterContract } from './useContract'
 import useENS from './useENS'
 import { SignatureData } from './useERC20Permit'
 import useTransactionDeadline from './useTransactionDeadline'
+
+export interface Output {
+  token: string;
+  to: string;
+  unwrapCoffin: boolean;
+  minAmount: BigNumber;
+}
 
 export enum SwapCallbackState {
   INVALID,
@@ -78,8 +82,8 @@ interface FailedCall extends SwapCallEstimate {
 interface TridentTradeContext {
   fromWallet: boolean
   receiveToWallet: boolean
-  bentoPermit?: Signature
-  resetBentoPermit?: () => void
+  coffinPermit?: Signature
+  resetCoffinPermit?: () => void
   parsedAmounts?: (CurrencyAmount<Currency> | undefined)[]
 }
 
@@ -222,7 +226,7 @@ function getComplexPathParams(
   const output: Output = {
     token: (multiRoute.toToken as Currency).wrapped.address,
     to: senderAddress,
-    unwrapBento: receiveToWallet,
+    unwrapCoffin: receiveToWallet,
     minAmount: getBigNumber(multiRoute.amountOut * slippage),
   }
   outputs.push(output)
@@ -339,7 +343,7 @@ export function useSwapCallArguments(
   const tridentRouterContract = useTridentRouterContract()
 
   const argentWalletContract = useArgentWalletContract()
-  const { rebase } = useBentoRebase(trade?.inputAmount.currency)
+  const { rebase } = useCoffinRebase(trade?.inputAmount.currency)
 
   return useMemo<SwapCall[]>(() => {
     let result: SwapCall[] = []
@@ -407,7 +411,7 @@ export function useSwapCallArguments(
     } else if (trade instanceof TridentTrade) {
       if (!tridentTradeContext) return result
 
-      const { parsedAmounts, receiveToWallet, fromWallet, bentoPermit } = tridentTradeContext
+      const { parsedAmounts, receiveToWallet, fromWallet, coffinPermit } = tridentTradeContext
       if (!tridentRouterContract || !trade.route || !parsedAmounts?.[0]) return result
 
       const { routeType, ...rest } = getTridentRouterParams(
@@ -433,7 +437,7 @@ export function useSwapCallArguments(
       }
 
       const actions = [
-        approveMasterContractAction({ router: tridentRouterContract, signature: bentoPermit }),
+        approveMasterContractAction({ router: tridentRouterContract, signature: coffinPermit }),
         // @ts-ignore TYPE NEEDS FIXING
         tridentRouterContract.interface.encodeFunctionData(method[routeType], [rest]),
       ]
@@ -755,8 +759,8 @@ export function useSwapCallback(
               }`
             }
 
-            if (tridentTradeContext?.bentoPermit && tridentTradeContext?.resetBentoPermit) {
-              tridentTradeContext.resetBentoPermit()
+            if (tridentTradeContext?.coffinPermit && tridentTradeContext?.resetCoffinPermit) {
+              tridentTradeContext.resetCoffinPermit()
             }
 
             const withRecipient =

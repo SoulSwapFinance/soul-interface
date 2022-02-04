@@ -321,10 +321,10 @@
     },
     {
       "inputs": [],
-      "name": "bento",
+      "name": "coffin",
       "outputs": [
         {
-          "internalType": "contract IBentoBoxMinimal",
+          "internalType": "contract ICoffinBoxMinimal",
           "name": "",
           "type": "address"
         }

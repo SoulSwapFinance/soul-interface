@@ -5,13 +5,13 @@ import { UNDERWORLD_ADDRESS } from '../constants/kashi'
 import { ethers } from 'ethers'
 import { setKashiApprovalPending } from '../state/application/actions'
 import { useActiveWeb3React } from 'services/web3'
-import { useBentoBoxContract } from '../hooks/useContract'
-import { useBentoMasterContractAllowed } from '../state/bentobox/hooks'
+import { useCoffinBoxContract } from '../hooks/useContract'
+import { useCoffinMasterContractAllowed } from '../state/coffinbox/hooks'
 import { useDispatch } from 'react-redux'
 import { useKashiApprovalPending } from '../state/application/hooks'
 import { useTransactionAdder } from '../state/transactions/hooks'
 
-export enum BentoApprovalState {
+export enum CoffinApprovalState {
   UNKNOWN,
   NOT_APPROVED,
   PENDING,
@@ -27,21 +27,21 @@ export interface KashiPermit {
   s: string
 }
 
-export enum BentoApproveOutcome {
+export enum CoffinApproveOutcome {
   SUCCESS,
   REJECTED,
   FAILED,
   NOT_READY,
 }
 
-export type BentoApproveResult = {
-  outcome: BentoApproveOutcome
+export type CoffinApproveResult = {
+  outcome: CoffinApproveOutcome
   permit?: KashiPermit
 }
 
 // returns a variable indicating the state of the approval and a function which approves if necessary or early returns
 function useKashiApproveCallback(): [
-  BentoApprovalState,
+  CoffinApprovalState,
   boolean,
   KashiPermit | undefined,
   () => void,
@@ -59,46 +59,46 @@ function useKashiApproveCallback(): [
   const masterContract = chainId && UNDERWORLD_ADDRESS[chainId]
 
   const pendingApproval = useKashiApprovalPending()
-  const currentAllowed = useBentoMasterContractAllowed(masterContract, account || ethers.constants.AddressZero)
+  const currentAllowed = useCoffinMasterContractAllowed(masterContract, account || ethers.constants.AddressZero)
   const addTransaction = useTransactionAdder()
 
   // check the current approval status
-  const approvalState: BentoApprovalState = useMemo(() => {
-    if (!masterContract) return BentoApprovalState.UNKNOWN
-    if (!currentAllowed && pendingApproval) return BentoApprovalState.PENDING
+  const approvalState: CoffinApprovalState = useMemo(() => {
+    if (!masterContract) return CoffinApprovalState.UNKNOWN
+    if (!currentAllowed && pendingApproval) return CoffinApprovalState.PENDING
 
-    return currentAllowed ? BentoApprovalState.APPROVED : BentoApprovalState.NOT_APPROVED
+    return currentAllowed ? CoffinApprovalState.APPROVED : CoffinApprovalState.NOT_APPROVED
   }, [masterContract, currentAllowed, pendingApproval])
 
-  const bentoBoxContract = useBentoBoxContract()
+  const coffinBoxContract = useCoffinBoxContract()
 
-  const approve = useCallback(async (): Promise<BentoApproveResult> => {
-    if (approvalState !== BentoApprovalState.NOT_APPROVED) {
+  const approve = useCallback(async (): Promise<CoffinApproveResult> => {
+    if (approvalState !== CoffinApprovalState.NOT_APPROVED) {
       console.error('approve was called unnecessarily')
-      return { outcome: BentoApproveOutcome.NOT_READY }
+      return { outcome: CoffinApproveOutcome.NOT_READY }
     }
     if (!masterContract) {
       console.error('no token')
-      return { outcome: BentoApproveOutcome.NOT_READY }
+      return { outcome: CoffinApproveOutcome.NOT_READY }
     }
 
-    if (!bentoBoxContract) {
+    if (!coffinBoxContract) {
       console.error('no coffinbox contract')
-      return { outcome: BentoApproveOutcome.NOT_READY }
+      return { outcome: CoffinApproveOutcome.NOT_READY }
     }
 
     if (!account) {
       console.error('no account')
-      return { outcome: BentoApproveOutcome.NOT_READY }
+      return { outcome: CoffinApproveOutcome.NOT_READY }
     }
     if (!library) {
       console.error('no library')
-      return { outcome: BentoApproveOutcome.NOT_READY }
+      return { outcome: CoffinApproveOutcome.NOT_READY }
     }
 
     try {
       const signature = await signMasterContractApproval(
-        bentoBoxContract,
+        coffinBoxContract,
         masterContract,
         account,
         library,
@@ -107,26 +107,26 @@ function useKashiApproveCallback(): [
       )
       const { v, r, s } = ethers.utils.splitSignature(signature)
       return {
-        outcome: BentoApproveOutcome.SUCCESS,
+        outcome: CoffinApproveOutcome.SUCCESS,
         permit: { account, masterContract, v, r, s },
       }
     } catch (e) {
       return {
-        outcome: e.code === 4001 ? BentoApproveOutcome.REJECTED : BentoApproveOutcome.FAILED,
+        outcome: e.code === 4001 ? CoffinApproveOutcome.REJECTED : CoffinApproveOutcome.FAILED,
       }
     }
-  }, [approvalState, account, library, chainId, bentoBoxContract, masterContract])
+  }, [approvalState, account, library, chainId, coffinBoxContract, masterContract])
 
   const onApprove = async function () {
     if (!approveKashiFallback) {
       const result = await approve()
-      if (result.outcome === BentoApproveOutcome.SUCCESS) {
+      if (result.outcome === CoffinApproveOutcome.SUCCESS) {
         setKashiPermit(result.permit)
-      } else if (result.outcome === BentoApproveOutcome.FAILED) {
+      } else if (result.outcome === CoffinApproveOutcome.FAILED) {
         setApproveKashiFallback(true)
       }
     } else {
-      const tx = await bentoBoxContract?.setMasterContractApproval(
+      const tx = await coffinBoxContract?.setMasterContractApproval(
         account,
         masterContract,
         true,
@@ -143,7 +143,7 @@ function useKashiApproveCallback(): [
   const onCook = async function (pair: any, execute: (cooker: KashiCooker) => Promise<string>) {
     const cooker = new KashiCooker(pair, account, library, chainId)
     let summary
-    if (approvalState === BentoApprovalState.NOT_APPROVED && kashiPermit) {
+    if (approvalState === CoffinApprovalState.NOT_APPROVED && kashiPermit) {
       cooker.approve(kashiPermit)
       summary = 'Approve Kashi and ' + (await execute(cooker))
     } else {

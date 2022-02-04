@@ -1,6 +1,6 @@
 export { useApproveCallback, useApproveCallbackFromTrade, ApprovalState } from './useApproveCallback'
-export { default as useBentoBox } from './useBentoBox'
-export { default as useBentoBoxAllowance } from './useBentoBoxAllowance'
+export { default as useCoffinBox } from './useCoffinBox'
+export { default as useCoffinBoxAllowance } from './useCoffinBoxAllowance'
 export { useColor, useListColor } from './useColor'
 export * from './useContract'
 export { default as useFuse } from './useFuse'

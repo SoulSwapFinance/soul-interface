@@ -66,7 +66,7 @@ module.exports = withBundleAnalyzer(
           permanent: true,
         },
         // {
-        //   source: '/bento/kashi',
+        //   source: '/coffin/kashi',
         //   destination: '/lend',
         //   permanent: true,
         // },
@@ -119,6 +119,10 @@ module.exports = withBundleAnalyzer(
           destination: '/exchange/pool',
         },
         {
+          source: '/user',
+          destination: '/balances',
+        },
+        {
           source: '/find',
           destination: '/exchange/find',
         },
@@ -141,11 +145,7 @@ module.exports = withBundleAnalyzer(
         // },
         {
           source: '/balances',
-          destination: '/trident/balances/wallet',
-        },
-        {
-          source: '/trident/balances',
-          destination: '/trident/balances/wallet',
+          destination: '/trident/balances',
         },
         {
           source: '/farm',

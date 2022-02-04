@@ -6,7 +6,7 @@ import Typography from 'components/Typography'
 import { Feature } from 'enums'
 import useLimitOrders from 'features/limit-order/hooks/useLimitOrders'
 import { featureEnabled } from 'functions'
-import useBentoMasterApproveCallback, { BentoApprovalState } from 'hooks/useCoffinMasterApproveCallback'
+import useCoffinMasterApproveCallback, { CoffinApprovalState } from 'hooks/useCoffinMasterApproveCallback'
 import { useActiveWeb3React } from 'services/web3'
 // @ts-ignore
 import cookie from 'cookie-cutter'
@@ -17,12 +17,12 @@ const LimitOrderApprovalCheck: FC = () => {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const { pending } = useLimitOrders()
-  const { approve, approvalState } = useBentoMasterApproveCallback(chainId && STOP_LIMIT_ORDER_ADDRESS[chainId], {})
+  const { approve, approvalState } = useCoffinMasterApproveCallback(chainId && STOP_LIMIT_ORDER_ADDRESS[chainId], {})
   const [dismissed, setDismissed] = useState<boolean>()
 
   const isOpen =
     pending.totalOrders > 0 &&
-    approvalState === BentoApprovalState.NOT_APPROVED &&
+    approvalState === CoffinApprovalState.NOT_APPROVED &&
     !cookie.get('disableLimitOrderGuard') &&
     typeof dismissed !== 'undefined' &&
     !dismissed
@@ -43,7 +43,7 @@ const LimitOrderApprovalCheck: FC = () => {
           <Button color="blue" size="sm" variant="empty" onClick={() => cookie.set('disableLimitOrderGuard', true)}>
             {i18n._(t`Do not show again`)}
           </Button>
-          <Button loading={approvalState === BentoApprovalState.PENDING} color="blue" size="sm" onClick={approve}>
+          <Button loading={approvalState === CoffinApprovalState.PENDING} color="blue" size="sm" onClick={approve}>
             {i18n._(t`Approve`)}
           </Button>
         </div>

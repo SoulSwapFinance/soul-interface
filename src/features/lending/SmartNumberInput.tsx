@@ -12,10 +12,10 @@ type SmartNumberInputProps = {
   value: string
   setValue: any
 
-  useBentoTitleDirection: 'up' | 'down'
-  useBentoTitle: string
-  useBento: boolean
-  setUseBento: any
+  useCoffinTitleDirection: 'up' | 'down'
+  useCoffinTitle: string
+  useCoffin: boolean
+  setUseCoffin: any
 
   maxTitle?: string
   max: BigNumber
@@ -32,10 +32,10 @@ export default function SmartNumberInput({
   value,
   setValue,
 
-  useBentoTitleDirection = 'down',
-  useBentoTitle = '',
-  useBento,
-  setUseBento,
+  useCoffinTitleDirection = 'down',
+  useCoffinTitle = '',
+  useCoffin,
+  setUseCoffin,
 
   maxTitle = 'Max',
   max,
@@ -50,13 +50,13 @@ export default function SmartNumberInput({
       <div className="flex items-center justify-between my-4">
         <div className="flex items-center text-base text-secondary">
           <span>
-            {useBentoTitleDirection == 'down' ? (
+            {useCoffinTitleDirection == 'down' ? (
               <ArrowDownRight size="1rem" style={{ display: 'inline' }} />
             ) : (
               <ArrowUpRight size="1rem" style={{ display: 'inline' }} />
             )}
           </span>
-          <span className="mx-2">{useBentoTitle}</span>
+          <span className="mx-2">{useCoffinTitle}</span>
           <span>
             <Button
               variant="outlined"
@@ -64,11 +64,11 @@ export default function SmartNumberInput({
               color={color}
               className={'disabled:cursor-not-allowed focus:ring focus:ring-' + color}
               onClick={() => {
-                setUseBento(!useBento)
+                setUseCoffin(!useCoffin)
               }}
               disabled={switchDisabled}
             >
-              {useBento ? 'CoffinBox' : 'Wallet'}
+              {useCoffin ? 'CoffinBox' : 'Wallet'}
             </Button>
           </span>
         </div>

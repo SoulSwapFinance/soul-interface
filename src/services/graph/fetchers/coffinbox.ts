@@ -3,46 +3,41 @@ import { aprToApy, getFraction, toAmount, toAmountCurrencyAmount } from 'functio
 import { GRAPH_HOST } from 'services/graph/constants'
 import { getTokenSubset } from 'services/graph/fetchers'
 import {
-  bentoBoxQuery,
-  bentoStrategiesQuery,
-  bentoTokensQuery,
-  bentoUserTokensQuery,
+  coffinBoxQuery,
+  coffinStrategiesQuery,
+  coffinTokensQuery,
+  coffinUserTokensQuery,
   clonesQuery,
-  kashiPairsQuery,
-  kashiUserPairsQuery,
-} from 'services/graph/queries/bentobox'
+  underworldPairsQuery,
+  underworldUserPairsQuery,
+} from 'services/graph/queries/coffinbox'
 
 import { pager } from './pager'
 
-export const BENTOBOX = {
-  [ChainId.MAINNET]: 'sushiswap/bentobox',
-  // [ChainId.XDAI]: 'sushiswap/xdai-bentobox',
-  // [ChainId.MATIC]: 'lufycz/matic-bentobox',
-  [ChainId.FANTOM]: 'sushiswap/fantom-bentobox',
-  [ChainId.BSC]: 'sushiswap/bsc-bentobox',
-  // [ChainId.ARBITRUM]: 'sushiswap/arbitrum-bentobox',
+export const COFFINBOX = {
+  [ChainId.FANTOM]: 'soulswapfinance/coffinbox'
 }
-const fetcher = async (chainId = ChainId.MAINNET, query, variables = undefined) =>
-  pager(`${GRAPH_HOST[chainId]}/subgraphs/name/${BENTOBOX[chainId]}`, query, variables)
+const fetcher = async (chainId = ChainId.FANTOM, query, variables = undefined) =>
+  pager(`${GRAPH_HOST[chainId]}/subgraphs/name/${COFFINBOX[chainId]}`, query, variables)
 
-export const getClones = async (chainId = ChainId.MAINNET) => {
+export const getClones = async (chainId = ChainId.FANTOM) => {
   const { clones } = await fetcher(chainId, clonesQuery)
   return clones
 }
 
-export const getKashiPairs = async (chainId = ChainId.MAINNET, variables = undefined) => {
-  const { kashiPairs } = await fetcher(chainId, kashiPairsQuery, variables)
+export const getUnderworldPairs = async (chainId = ChainId.FANTOM, variables = undefined) => {
+  const { underworldPairs } = await fetcher(chainId, underworldPairsQuery, variables)
 
   const tokens = await getTokenSubset(chainId, {
     tokenAddresses: Array.from(
-      kashiPairs.reduce(
+      underworldPairs.reduce(
         (previousValue, currentValue) => previousValue.add(currentValue.asset.id, currentValue.collateral.id),
         new Set() // use set to avoid duplicates
       )
     ),
   })
 
-  return kashiPairs.map((pair) => ({
+  return underworldPairs.map((pair) => ({
     ...pair,
     token0: {
       ...pair.asset,
@@ -70,10 +65,10 @@ export const getKashiPairs = async (chainId = ChainId.MAINNET, variables = undef
   }))
 }
 
-export const getUserKashiPairs = async (chainId = ChainId.MAINNET, variables) => {
-  const { userKashiPairs } = await fetcher(chainId, kashiUserPairsQuery, variables)
+export const getUserUnderworldPairs = async (chainId = ChainId.FANTOM, variables) => {
+  const { userUnderworldPairs } = await fetcher(chainId, underworldUserPairsQuery, variables)
 
-  return userKashiPairs.map((userPair) => ({
+  return userUnderworldPairs.map((userPair) => ({
     ...userPair,
     assetAmount: Math.floor(
       userPair.assetFraction / getFraction({ ...userPair.pair, token0: userPair.pair.asset })
@@ -95,8 +90,8 @@ export const getUserKashiPairs = async (chainId = ChainId.MAINNET, variables) =>
   }))
 }
 
-export const getBentoUserTokens = async (chainId = ChainId.MAINNET, variables): Promise<CurrencyAmount<Token>[]> => {
-  const { userTokens } = await fetcher(chainId, bentoUserTokensQuery, variables)
+export const getCoffinUserTokens = async (chainId = ChainId.FANTOM, variables): Promise<CurrencyAmount<Token>[]> => {
+  const { userTokens } = await fetcher(chainId, coffinUserTokensQuery, variables)
   return userTokens.map(({ share, token: { decimals, id, name, symbol, totalSupplyElastic, totalSupplyBase } }) => {
     return toAmountCurrencyAmount(
       {
@@ -108,14 +103,14 @@ export const getBentoUserTokens = async (chainId = ChainId.MAINNET, variables): 
   })
 }
 
-export const getBentoBox = async (chainId = ChainId.MAINNET, variables) => {
-  const { bentoBoxes } = await fetcher(chainId, bentoBoxQuery, variables)
+export const getCoffinBox = async (chainId = ChainId.FANTOM, variables) => {
+  const { coffinBoxes } = await fetcher(chainId, coffinBoxQuery, variables)
 
-  return bentoBoxes[0]
+  return coffinBoxes[0]
 }
 
-export const getBentoStrategies = async (chainId = ChainId.MAINNET, variables) => {
-  const { strategies } = await fetcher(chainId, bentoStrategiesQuery, variables)
+export const getCoffinStrategies = async (chainId = ChainId.FANTOM, variables) => {
+  const { strategies } = await fetcher(chainId, coffinStrategiesQuery, variables)
 
   const SECONDS_IN_YEAR = 60 * 60 * 24 * 365
 
@@ -148,8 +143,8 @@ export const getBentoStrategies = async (chainId = ChainId.MAINNET, variables) =
   })
 }
 
-export const getBentoTokens = async (chainId = ChainId.MAINNET, variables) => {
-  const { tokens } = await fetcher(chainId, bentoTokensQuery, variables)
+export const getCoffinTokens = async (chainId = ChainId.FANTOM, variables) => {
+  const { tokens } = await fetcher(chainId, coffinTokensQuery, variables)
 
   return tokens
 }

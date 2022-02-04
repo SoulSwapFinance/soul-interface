@@ -3,10 +3,10 @@ import { PoolType } from '@sushiswap/tines'
 import { Button } from 'components/Button'
 import Chip from 'components/Chip'
 import Typography from 'components/Typography'
-// import { PoolCell } from 'features/trident/pools/PoolCell'
-// import { feeTiersFilter, filterForSearchQueryAndTWAP } from 'features/trident/pools/poolTableFilters'
+import { PoolCell } from 'features/trident/pools/PoolCell'
+import { feeTiersFilter, filterForSearchQueryAndTWAP } from 'features/trident/pools/poolTableFilters'
 import { chipPoolColorMapper, poolTypeNameMapper } from 'features/trident/types'
-import { formatPercent } from 'functions'
+// import { formatPercent } from 'functions'
 // import { TridentPositionRow } from 'services/graph'
 // import { useRollingPoolStats } from 'services/graph/hooks/pools'
 import { useActiveWeb3React } from 'services/web3'
@@ -25,11 +25,10 @@ export const useLPTableConfig = (positions) => {
               Header: 'Assets',
               accessor: 'assets',
               className: 'text-left',
-              // @ts-ignore TYPE NEEDS FIXING
               Cell: ({ value, row: { original } }) => {
-                // return <PoolCell assets={value} twapEnabled={original.twapEnabled} />
+                return <PoolCell assets={value} twapEnabled={original.twapEnabled} />
               },
-            //   filter: filterForSearchQueryAndTWAP,
+              filter: filterForSearchQueryAndTWAP,
             },
             {
               Header: 'Pool Type',
@@ -39,9 +38,7 @@ export const useLPTableConfig = (positions) => {
               Cell: (props: { value: PoolType }) => {
                 return <Chip label={poolTypeNameMapper[props.value]} color={chipPoolColorMapper[props.value]} />
               },
-              // @ts-ignore TYPE NEEDS FIXING
               filter: (rows, id, filterValue) =>
-                // @ts-ignore TYPE NEEDS FIXING
                 rows.filter((row) => !filterValue.length || filterValue.includes(row.values.type)),
             },
             {
@@ -49,9 +46,8 @@ export const useLPTableConfig = (positions) => {
               accessor: 'swapFeePercent',
               maxWidth: 100,
               className: 'text-left hidden lg:flex',
-              // @ts-ignore TYPE NEEDS FIXING
               Cell: (props) => <span>{props.value}%</span>,
-            //   filter: feeTiersFilter,
+              filter: feeTiersFilter,
             },
             {
               id: 'value',
@@ -59,7 +55,6 @@ export const useLPTableConfig = (positions) => {
               accessor: 'value',
               maxWidth: 100,
               className: 'text-right flex justify-end',
-              // @ts-ignore TYPE NEEDS FIXING
               Cell: (props) => {
                 return (
                   <Typography weight={700} className="text-high-emphesis text-right w-full">
@@ -73,7 +68,6 @@ export const useLPTableConfig = (positions) => {
               accessor: 'apy',
               maxWidth: 100,
               className: 'text-right flex justify-end',
-              // @ts-ignore TYPE NEEDS FIXING
               Cell: ({ row }) => {
                 // const { data: stats } = useRollingPoolStats({
                 //   chainId,
@@ -95,14 +89,13 @@ export const useLPTableConfig = (positions) => {
               maxWidth: 100,
               className: 'text-right flex justify-end',
               cellClassName: 'justify-end',
-              // @ts-ignore TYPE NEEDS FIXING
               Cell: ({ row: { original } }) => {
                 return (
                   <Link
                     href={{
-                      pathname: `/trident/pool`,
+                      pathname: `/pool`,
+                      // pathname: `/trident/pool`,
                       query: {
-                        // @ts-ignore TYPE NEEDS FIXING
                         tokens: original.assets.map((el) => el.address),
                         fee: original.swapFeePercent * 100,
                         twap: original.twapEnabled,

@@ -10,7 +10,7 @@ import {
     useEthPrice,
     useFantomPrice,
     // useFarms,
-    useKashiPairs,
+    useUnderworldPairs,
     useOneDayBlock,
     useSoulPrice,
     useSoulPairs,
@@ -47,7 +47,6 @@ export function useSoulFarms(contract?: Contract | null) {
         allocPoint: data[0].result?.['allocPoint'] || '',
         lastRewardTime: data[0].result?.['lastRewardTime'] || '',
         accSoulPerShare: data[0].result?.['accSoulPerShare'] || '',
-        // harvestInterval: data[0].result?.['harvestInterval'] || '',
         totalLp: data[0].result?.['totalLp'] || '',
       }))
     }, [args, poolInfo])
@@ -90,7 +89,7 @@ export default function useFarmRewards() {
         shouldFetch: !!block1d && !!farmAddresses,
     })
 
-    const kashiPairs = useKashiPairs({
+    const kashiPairs = useUnderworldPairs({
         chainId,
         variables: { where: { id_in: farmAddresses.map(toLower) } },
         shouldFetch: !!farmAddresses,

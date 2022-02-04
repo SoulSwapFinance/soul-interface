@@ -7,8 +7,8 @@
         "type": "uint256"
       },
       {
-        "internalType": "contract IBentoBoxV1",
-        "name": "_bentoBox",
+        "internalType": "contract ICoffinBoxV1",
+        "name": "_coffinBox",
         "type": "address"
       }
     ],
