@@ -5,7 +5,7 @@ import { AddressZero } from '@ethersproject/constants'
 import { Percent, WNATIVE } from 'sdk'
 
 import { Button } from 'components/Button'
-import { KashiCooker } from 'entities'
+import { UnderworldCooker } from 'entities'
 import { TransactionReview } from 'entities/TransactionReview'
 import { Warning, Warnings } from 'entities/Warnings'
 import { toAmount, toShare } from 'functions/coffinbox'
@@ -25,13 +25,13 @@ import SmartNumberInput from '../components/SmartNumberInput'
 import TradeReview from '../components/TradeReview'
 import TransactionReviewView from '../components/TransactionReview'
 import WarningsView from '../components/WarningsList'
-import { SOULSWAP_MULTI_EXACT_SWAPPER_ADDRESS } from 'constants/kashi'
+import { SOULSWAP_MULTI_EXACT_SWAPPER_ADDRESS } from 'constants/underworld'
 
 interface RepayProps {
   pair: any
 }
 
-const DEFAULT_KASHI_REPAY_SLIPPAGE_TOLERANCE = new Percent(10, 1000)
+const DEFAULT_UNDERWORLD_REPAY_SLIPPAGE_TOLERANCE = new Percent(10, 1000)
 
 const DEFAULT_UPDATE_ORACLE = true
 
@@ -96,7 +96,7 @@ export default function Repay({ pair }: RepayProps) {
 
   // Swap
   // const [allowedSlippage] = useUserSlippageTolerance(); // 10 = 0.1%
-  const allowedSlippage = useUserSlippageToleranceWithDefault(DEFAULT_KASHI_REPAY_SLIPPAGE_TOLERANCE)
+  const allowedSlippage = useUserSlippageToleranceWithDefault(DEFAULT_UNDERWORLD_REPAY_SLIPPAGE_TOLERANCE)
 
   const parsedAmount = tryParseAmount(pair.currentUserBorrowAmount.string, assetToken)
 
@@ -261,7 +261,7 @@ export default function Repay({ pair }: RepayProps) {
   }
 
   // Handlers
-  async function onExecute(cooker: KashiCooker) {
+  async function onExecute(cooker: UnderworldCooker) {
     let summary = ''
 
     if (swap && trade) {

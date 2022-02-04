@@ -62,7 +62,7 @@ export default function BenotBox() {
           <Card className="flex items-center justify-center w-full col-span-2 space-y-1 rounded cursor-pointer md:col-span-1 bg-dark-800 hover:bg-dark-900 shadow-pink-glow hover:shadow-pink-glow-hovered">
             <Image
               src={soulSwapHero}
-              // src="/kashi-neon.png"
+              // src="/underworld-neon.png"
               alt="Underworld Logo"
               objectFit="scale-down"
               layout="responsive"

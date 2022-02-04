@@ -279,4 +279,4 @@ const PairLayout = ({ children }) => {
   ) : null
 }
 
-// Pair.Guard = NetworkGuard(Feature.KASHI)
+Pair.Guard = NetworkGuard(Feature.UNDERWORLD)

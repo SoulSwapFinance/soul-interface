@@ -120,7 +120,7 @@ export default function Dashboard(): JSX.Element {
 //             token1: farm.pair.token1,
 //             id: farm.pair.id,
 //             name: farm.pair.symbol ?? `${farm.pair.token0.symbol}-${farm.pair.token1.symbol}`,
-//             type: farm.pair.symbol ? 'Kashi Farm' : 'Soul Farm',
+//             type: farm.pair.symbol ? 'Underworld Farm' : 'Soul Farm',
 //           },
 //           rewards: farm.rewards,
 //           liquidity: farm.tvl,

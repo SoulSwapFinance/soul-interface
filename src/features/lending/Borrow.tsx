@@ -4,7 +4,7 @@ import { hexConcat, hexlify } from '@ethersproject/bytes'
 import { AddressZero } from '@ethersproject/constants'
 import { JSBI, Percent, WNATIVE } from 'sdk'
 import { Button } from 'components/Button'
-import KashiCooker from 'entities/KashiCooker'
+import UnderworldCooker from 'entities/UnderworldCooker'
 import { TransactionReview } from 'entities/TransactionReview'
 import { Warning, Warnings } from 'entities/Warnings'
 import { toShare } from 'functions/coffinbox'
@@ -18,13 +18,13 @@ import { useExpertModeManager, useUserSlippageToleranceWithDefault } from 'state
 import { useETHBalances } from 'state/wallet/hooks'
 import React, { useMemo, useState } from 'react'
 
-import { KashiApproveButton, TokenApproveButton } from './Button'
+import { UnderworldApproveButton, TokenApproveButton } from './Button'
 import { SwapCheckbox } from './Checkbox'
 import SmartNumberInput from './SmartNumberInput'
 import TradeReview from './TradeReview'
 import TransactionReviewView from './TransactionReview'
 import WarningsView from './WarningsList'
-import { SOULSWAP_MULTISWAPPER_ADDRESS } from 'constants/kashi'
+import { SOULSWAP_MULTISWAPPER_ADDRESS } from 'constants/underworld'
 
 interface BorrowProps {
   pair: any
@@ -259,7 +259,7 @@ export default function Borrow({ pair }: BorrowProps) {
     (pair.userCollateralAmount.value.isZero() && !collateralValueSet)
 
   // Handlers
-  async function onExecute(cooker: KashiCooker): Promise<string> {
+  async function onExecute(cooker: UnderworldCooker): Promise<string> {
     let summary = ''
 
     if (borrowValueSet) {
@@ -483,7 +483,7 @@ export default function Borrow({ pair }: BorrowProps) {
         <TransactionReviewView transactionReview={transactionReview} />
       )}
 
-      <KashiApproveButton
+      <UnderworldApproveButton
         color="pink"
         content={(onCook: any) => (
           <TokenApproveButton value={collateralValue} token={collateralToken} needed={!useCoffinCollateral}>

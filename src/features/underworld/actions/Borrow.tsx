@@ -4,7 +4,7 @@ import { hexConcat, hexlify } from '@ethersproject/bytes'
 import { AddressZero } from '@ethersproject/constants'
 import { Percent, WNATIVE } from 'sdk'
 import { Button } from 'components/Button'
-import KashiCooker from 'entities/KashiCooker'
+import UnderworldCooker from 'entities/UnderworldCooker'
 import { TransactionReview } from 'entities/TransactionReview'
 import { Warning, Warnings } from 'entities/Warnings'
 import { toShare } from 'functions/coffinbox'
@@ -24,7 +24,7 @@ import SmartNumberInput from '../components/SmartNumberInput'
 import TradeReview from '../components/TradeReview'
 import TransactionReviewView from '../components/TransactionReview'
 import WarningsView from '../components/WarningsList'
-import { SOULSWAP_MULTISWAPPER_ADDRESS } from 'constants/kashi'
+import { SOULSWAP_MULTISWAPPER_ADDRESS } from 'constants/underworld'
 
 interface BorrowProps {
   pair: any
@@ -271,7 +271,7 @@ export default function Borrow({ pair }: BorrowProps) {
     (pair.userCollateralAmount.value.isZero() && !collateralValueSet)
 
   // Handlers
-  async function onExecute(cooker: KashiCooker): Promise<string> {
+  async function onExecute(cooker: UnderworldCooker): Promise<string> {
     let summary = ''
 
     if (borrowValueSet) {

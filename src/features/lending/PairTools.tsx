@@ -4,22 +4,22 @@ import { t } from '@lingui/macro'
 
 import { Button } from '../../components/Button'
 import QuestionHelper from '../../components/QuestionHelper'
-import { KashiCooker } from '../../entities'
+import { UnderworldCooker } from '../../entities'
 import { formatPercent } from '../../functions'
 import { ZERO } from '../../functions/math'
-import useKashiApproveCallback from '../../hooks/useKashiApproveCallback'
+import useUnderworldApproveCallback from '../../hooks/useUnderworldApproveCallback'
 
 const ACTION_ACCRUE = 8;
 
 export default function PairTools({ pair }) {
-  const [, , , , onCook] = useKashiApproveCallback()
+  const [, , , , onCook] = useUnderworldApproveCallback()
 
-  async function onUpdatePrice(cooker: KashiCooker): Promise<string> {
+  async function onUpdatePrice(cooker: UnderworldCooker): Promise<string> {
     cooker.updateExchangeRate(false, ZERO, ZERO)
     return `${i18n._(t`Update Price`)} ${pair.asset.tokenInfo.symbol}/${pair.collateral.tokenInfo.symbol}`
   }
 
-  async function onAccrue(cooker: KashiCooker): Promise<string> {
+  async function onAccrue(cooker: UnderworldCooker): Promise<string> {
     cooker.add(ACTION_ACCRUE, '0x00')
     return `${i18n._(t`Accrue`)} ${pair.asset.tokenInfo.symbol}/${pair.collateral.tokenInfo.symbol}`
   }

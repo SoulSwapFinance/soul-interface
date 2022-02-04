@@ -1,8 +1,8 @@
 import { ExchangeRateCheckBox, SwapCheckbox } from './Checkbox'
-import { KashiApproveButton, TokenApproveButton } from './Button'
+import { UnderworldApproveButton, TokenApproveButton } from './Button'
 import { Percent, WNATIVE } from '../../sdk'
 import React, { useMemo, useState } from 'react'
-import { SOULSWAP_MULTISWAPPER_ADDRESS, SOULSWAP_MULTI_EXACT_SWAPPER_ADDRESS } from '../../constants/kashi'
+import { SOULSWAP_MULTISWAPPER_ADDRESS, SOULSWAP_MULTI_EXACT_SWAPPER_ADDRESS } from '../../constants/underworld'
 import { Warning, Warnings } from '../../entities/Warnings'
 import { ZERO, e10, maximum, minimum } from '../../functions/math'
 import { computeRealizedLPFeePercent, warningSeverity } from '../../functions/prices'
@@ -17,7 +17,7 @@ import { useV2TradeExactOut } from '../../hooks/useV2Trades'
 import { BigNumber } from '@ethersproject/bignumber'
 import { Button } from '../../components/Button'
 // import { Field } from '../../state/swap/actions'
-import { KashiCooker } from '../../entities'
+import { UnderworldCooker } from '../../entities'
 import SmartNumberInput from './SmartNumberInput'
 import TradeReview from './TradeReview'
 import { TransactionReview } from '../../entities/TransactionReview'
@@ -28,17 +28,17 @@ import { ethers } from 'ethers'
 import { tryParseAmount } from '../../functions/parse'
 import { useActiveWeb3React } from 'services/web3'
 import { useCurrency } from '../../hooks/Tokens'
-import { useKashiInfo } from './context'
+import { useUnderworldInfo } from './context'
 
 interface RepayProps {
   pair: any
 }
 
-const DEFAULT_KASHI_REPAY_SLIPPAGE_TOLERANCE = new Percent(5, 100)
+const DEFAULT_UNDERWORLD_REPAY_SLIPPAGE_TOLERANCE = new Percent(5, 100)
 
 export default function Repay({ pair }: RepayProps) {
   const { account, chainId } = useActiveWeb3React()
-  const info = useKashiInfo()
+  const info = useUnderworldInfo()
 
   // State
   const [useCoffinRepay, setUseCoffinRepay] = useState<boolean>(pair.asset.coffinBalance.gt(0))
@@ -94,7 +94,7 @@ export default function Repay({ pair }: RepayProps) {
 
   // Swap
   // const [allowedSlippage] = useUserSlippageTolerance(); // 10 = 0.1%
-  const allowedSlippage = useUserSlippageToleranceWithDefault(DEFAULT_KASHI_REPAY_SLIPPAGE_TOLERANCE)
+  const allowedSlippage = useUserSlippageToleranceWithDefault(DEFAULT_UNDERWORLD_REPAY_SLIPPAGE_TOLERANCE)
 
   const parsedAmount = tryParseAmount(pair.currentUserBorrowAmount.string, assetToken)
 
@@ -253,7 +253,7 @@ export default function Repay({ pair }: RepayProps) {
   }
 
   // Handlers
-  async function onExecute(cooker: KashiCooker) {
+  async function onExecute(cooker: UnderworldCooker) {
     let summary = ''
 
     if (swap && trade) {
@@ -417,7 +417,7 @@ export default function Repay({ pair }: RepayProps) {
         <TransactionReviewView transactionReview={transactionReview} />
       )}
 
-      <KashiApproveButton
+      <UnderworldApproveButton
         color="pink"
         content={(onCook: any) => (
           <TokenApproveButton value={displayRepayValue} token={assetToken} needed={!useCoffinRepay}>

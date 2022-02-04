@@ -7,7 +7,7 @@ import {
   removePopup,
   setChainConnectivityWarning,
   setImplements3085,
-  setKashiApprovalPending,
+  setUnderworldApprovalPending,
   setOpenModal,
   updateBlockNumber,
   updateBlockTimestamp,
@@ -29,7 +29,7 @@ export interface ApplicationState {
   readonly implements3085: boolean
   readonly popupList: PopupList
   readonly openModal: ApplicationModal | null
-  readonly kashiApprovalPending: string
+  readonly underworldApprovalPending: string
 }
 
 const initialState: ApplicationState = {
@@ -40,7 +40,7 @@ const initialState: ApplicationState = {
   implements3085: false,
   popupList: [],
   openModal: null,
-  kashiApprovalPending: '',
+  underworldApprovalPending: '',
 }
 
 export default createReducer(initialState, (builder) =>
@@ -93,7 +93,7 @@ export default createReducer(initialState, (builder) =>
         }
       })
     })
-    .addCase(setKashiApprovalPending, (state, action) => {
-      state.kashiApprovalPending = action.payload
+    .addCase(setUnderworldApprovalPending, (state, action) => {
+      state.underworldApprovalPending = action.payload
     })
 )

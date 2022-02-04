@@ -115,6 +115,9 @@ msgstr "Add {0} to MetaMask"
 msgid "Add {0} {1} and {2} {3}"
 msgstr "Add {0} {1} and {2} {3}"
 
+msgid "Add {0} {1} and {2} {3} into {4}/{5}"
+msgstr "Add {0} {1} and {2} {3} into {4}/{5}"
+
 msgid "Added"
 msgstr "Added"
 
@@ -193,9 +196,6 @@ msgstr "Available Actions"
 msgid "Available Networks"
 msgstr "Available Networks"
 
-msgid "Available actions"
-msgstr "Available actions"
-
 msgid "Avg. APY"
 msgstr "Avg. APY"
 
@@ -213,6 +213,9 @@ msgstr "Balance USD"
 
 msgid "Balance:"
 msgstr "Balance:"
+
+msgid "Balanced Mode is an optional UI setting to maintain the traditional style of equal-value adds and removes."
+msgstr "Balanced Mode is an optional UI setting to maintain the traditional style of equal-value adds and removes."
 
 msgid "Bonds"
 msgstr "Bonds"
@@ -294,6 +297,9 @@ msgstr "Claimed"
 
 msgid "Claims are executed within the guidelines outlined in"
 msgstr "Claims are executed within the guidelines outlined in"
+
+msgid "Clear All"
+msgstr "Clear All"
 
 msgid "Clear History"
 msgstr "Clear History"
@@ -600,6 +606,9 @@ msgstr "Fees:"
 msgid "Find Pool"
 msgstr "Find Pool"
 
+msgid "Fixed ratio"
+msgstr "Fixed ratio"
+
 msgid "Forum"
 msgstr "Forum"
 
@@ -646,11 +655,11 @@ msgstr "Harvest Redistribution"
 msgid "Harvest SOUL"
 msgstr "Harvest SOUL"
 
-msgid "Harvest rewards and unstake your KMP tokens at any time. You can then withdraw your lent"
-msgstr "Harvest rewards and unstake your KMP tokens at any time. You can then withdraw your lent"
-
 msgid "Harvest rewards and unstake your LP tokens at any time. You can then remove your liquidity to receive your base investment tokens back in your wallet."
 msgstr "Harvest rewards and unstake your LP tokens at any time. You can then remove your liquidity to receive your base investment tokens back in your wallet."
+
+msgid "Harvest rewards and unstake your UMP tokens at any time. You can then withdraw your lent"
+msgstr "Harvest rewards and unstake your UMP tokens at any time. You can then withdraw your lent"
 
 msgid "Harvest {0} SOUL"
 msgstr "Harvest {0} SOUL"
@@ -744,6 +753,9 @@ msgstr "Invalid Recipient"
 
 msgid "Invalid pair"
 msgstr "Invalid pair"
+
+msgid "Invalid pool"
+msgstr "Invalid pool"
 
 msgid "Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency."
 msgstr "Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency."
@@ -857,6 +869,9 @@ msgstr "Locked"
 
 msgid "Lockup"
 msgstr "Lockup"
+
+msgid "Lower price impacts. The closer to equilibrium you interact with a pool, the lower price impact there is on your investment."
+msgstr "Lower price impacts. The closer to equilibrium you interact with a pool, the lower price impact there is on your investment."
 
 msgid "Luxor"
 msgstr "Luxor"
@@ -1098,6 +1113,13 @@ msgstr "Positions"
 
 msgid "Previous"
 msgstr "Previous"
+
+msgid ""
+"Previously, adding and removing liquidity had to be done with equal amounts of all assets. With the Trident\n"
+"update, this is no longer mandatory."
+msgstr ""
+"Previously, adding and removing liquidity had to be done with equal amounts of all assets. With the Trident\n"
+"update, this is no longer mandatory."
 
 msgid "Price Impact"
 msgstr "Price Impact"
@@ -1586,8 +1608,14 @@ msgstr "Vesting is executed within the guidelines selected by the community in"
 msgid "Vietnamese"
 msgstr "Vietnamese"
 
+msgid "View Balances"
+msgstr "View Balances"
+
 msgid "View Charts"
 msgstr "View Charts"
+
+msgid "View Explorer"
+msgstr "View Explorer"
 
 msgid "View Liquidity Positions"
 msgstr "View Liquidity Positions"
@@ -1621,6 +1649,12 @@ msgstr "Wallet Balance"
 
 msgid "Wallet address or ENS name"
 msgstr "Wallet address or ENS name"
+
+msgid "What do these mean?"
+msgstr "What do these mean?"
+
+msgid "Why use Balance Mode?"
+msgstr "Why use Balance Mode?"
 
 msgid "Withdraw"
 msgstr "Withdraw"
@@ -1711,6 +1745,12 @@ msgstr "Your Claimable SOUL this Week"
 
 msgid "Your Liquidity"
 msgstr "Your Liquidity"
+
+msgid "Your Pool Share"
+msgstr "Your Pool Share"
+
+msgid "Your Pool Tokens"
+msgstr "Your Pool Tokens"
 
 msgid "Your Position"
 msgstr "Your Position"

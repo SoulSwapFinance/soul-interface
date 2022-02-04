@@ -6,17 +6,17 @@ import { Button } from 'components/Button'
 import Dots from 'components/Dots'
 import { tryParseAmount } from 'functions/parse'
 import { ApprovalState, useApproveCallback } from 'hooks/useApproveCallback'
-import useUnderworldApproveCallback, { CoffinApprovalState } from 'hooks/useKashiApproveCallback'
+import useUnderworldApproveCallback, { CoffinApprovalState } from 'hooks/useUnderworldApproveCallback'
 import { useActiveWeb3React } from 'services/web3'
 import React from 'react'
 
 export function UnderworldApproveButton({ content, color }: any): any {
   const { i18n } = useLingui()
-  const [kashiApprovalState, approveUnderworldFallback, kashiPermit, onApprove, onCook] = useUnderworldApproveCallback()
+  const [underworldApprovalState, approveUnderworldFallback, underworldPermit, onApprove, onCook] = useUnderworldApproveCallback()
   const showApprove =
-    (kashiApprovalState === CoffinApprovalState.NOT_APPROVED || kashiApprovalState === CoffinApprovalState.PENDING) &&
-    !kashiPermit
-  const showChildren = kashiApprovalState === CoffinApprovalState.APPROVED || kashiPermit
+    (underworldApprovalState === CoffinApprovalState.NOT_APPROVED || underworldApprovalState === CoffinApprovalState.PENDING) &&
+    !underworldPermit
+  const showChildren = underworldApprovalState === CoffinApprovalState.APPROVED || underworldPermit
 
   return (
     <>

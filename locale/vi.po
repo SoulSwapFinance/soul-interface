@@ -115,6 +115,9 @@ msgstr ""
 msgid "Add {0} {1} and {2} {3}"
 msgstr ""
 
+msgid "Add {0} {1} and {2} {3} into {4}/{5}"
+msgstr ""
+
 msgid "Added"
 msgstr ""
 
@@ -193,9 +196,6 @@ msgstr ""
 msgid "Available Networks"
 msgstr ""
 
-msgid "Available actions"
-msgstr ""
-
 msgid "Avg. APY"
 msgstr ""
 
@@ -212,6 +212,9 @@ msgid "Balance USD"
 msgstr ""
 
 msgid "Balance:"
+msgstr ""
+
+msgid "Balanced Mode is an optional UI setting to maintain the traditional style of equal-value adds and removes."
 msgstr ""
 
 msgid "Bonds"
@@ -290,6 +293,9 @@ msgid "Claimed"
 msgstr ""
 
 msgid "Claims are executed within the guidelines outlined in"
+msgstr ""
+
+msgid "Clear All"
 msgstr ""
 
 msgid "Clear History"
@@ -593,6 +599,9 @@ msgstr ""
 msgid "Find Pool"
 msgstr ""
 
+msgid "Fixed ratio"
+msgstr ""
+
 msgid "Forum"
 msgstr ""
 
@@ -637,10 +646,10 @@ msgstr ""
 msgid "Harvest SOUL"
 msgstr ""
 
-msgid "Harvest rewards and unstake your KMP tokens at any time. You can then withdraw your lent"
+msgid "Harvest rewards and unstake your LP tokens at any time. You can then remove your liquidity to receive your base investment tokens back in your wallet."
 msgstr ""
 
-msgid "Harvest rewards and unstake your LP tokens at any time. You can then remove your liquidity to receive your base investment tokens back in your wallet."
+msgid "Harvest rewards and unstake your UMP tokens at any time. You can then withdraw your lent"
 msgstr ""
 
 msgid "Harvest {0} SOUL"
@@ -734,6 +743,9 @@ msgid "Invalid Recipient"
 msgstr ""
 
 msgid "Invalid pair"
+msgstr ""
+
+msgid "Invalid pool"
 msgstr ""
 
 msgid "Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency."
@@ -843,6 +855,9 @@ msgid "Locked"
 msgstr ""
 
 msgid "Lockup"
+msgstr ""
+
+msgid "Lower price impacts. The closer to equilibrium you interact with a pool, the lower price impact there is on your investment."
 msgstr ""
 
 msgid "Luxor"
@@ -1082,6 +1097,11 @@ msgid "Positions"
 msgstr ""
 
 msgid "Previous"
+msgstr ""
+
+msgid ""
+"Previously, adding and removing liquidity had to be done with equal amounts of all assets. With the Trident\n"
+"update, this is no longer mandatory."
 msgstr ""
 
 msgid "Price Impact"
@@ -1563,7 +1583,13 @@ msgstr ""
 msgid "Vietnamese"
 msgstr ""
 
+msgid "View Balances"
+msgstr ""
+
 msgid "View Charts"
+msgstr ""
+
+msgid "View Explorer"
 msgstr ""
 
 msgid "View Liquidity Positions"
@@ -1597,6 +1623,12 @@ msgid "Wallet Balance"
 msgstr ""
 
 msgid "Wallet address or ENS name"
+msgstr ""
+
+msgid "What do these mean?"
+msgstr ""
+
+msgid "Why use Balance Mode?"
 msgstr ""
 
 msgid "Withdraw"
@@ -1687,6 +1719,12 @@ msgid "Your Claimable SOUL this Week"
 msgstr ""
 
 msgid "Your Liquidity"
+msgstr ""
+
+msgid "Your Pool Share"
+msgstr ""
+
+msgid "Your Pool Tokens"
 msgstr ""
 
 msgid "Your Position"

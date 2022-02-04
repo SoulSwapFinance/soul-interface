@@ -126,8 +126,8 @@ export function useActivePopups(): AppState['application']['popupList'] {
   return useMemo(() => list.filter((item) => item.show), [list])
 }
 
-export function useKashiApprovalPending(): string {
-  return useSelector((state: AppState) => state.application.kashiApprovalPending)
+export function useUnderworldApprovalPending(): string {
+  return useSelector((state: AppState) => state.application.underworldApprovalPending)
 }
 
 export function useToggleNetworkModal(): () => void {

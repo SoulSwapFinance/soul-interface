@@ -1,10 +1,10 @@
 import { Direction, TransactionReview } from '../../entities/TransactionReview'
-import { KashiApproveButton, TokenApproveButton } from './Button'
+import { UnderworldApproveButton, TokenApproveButton } from './Button'
 import React, { useState } from 'react'
 import { ZERO, e10 } from '../../functions/math'
 
 import { Button } from '../../components/Button'
-import KashiCooker from '../../entities/KashiCooker'
+import UnderworldCooker from '../../entities/UnderworldCooker'
 import SmartNumberInput from './SmartNumberInput'
 import TransactionReviewList from './TransactionReview'
 import { WNATIVE } from '../../sdk'
@@ -13,7 +13,7 @@ import WarningsList from './WarningsList'
 import { formatNumber } from '../../functions/format'
 import { useActiveWeb3React } from 'services/web3'
 import { useCurrency } from '../../hooks/Tokens'
-import { useKashiInfo } from './context'
+import { useUnderworldInfo } from './context'
 import { BigNumber } from '@ethersproject/bignumber'
 
 export default function Deposit({ pair }: any): JSX.Element {
@@ -26,7 +26,7 @@ export default function Deposit({ pair }: any): JSX.Element {
   const [useCoffin, setUseCoffin] = useState<boolean>(pair.asset.coffinBalance.gt(0))
   const [value, setValue] = useState('')
 
-  const info = useKashiInfo()
+  const info = useUnderworldInfo()
 
   // Calculated
   const assetNative = WNATIVE[chainId || 1].address === pair.asset.address
@@ -70,7 +70,7 @@ export default function Deposit({ pair }: any): JSX.Element {
   }
 
   // Handlers
-  async function onExecute(cooker: KashiCooker): Promise<string> {
+  async function onExecute(cooker: UnderworldCooker): Promise<string> {
     if (pair.currentExchangeRate.isZero()) {
       cooker.updateExchangeRate(false, ZERO, ZERO)
     }
@@ -101,7 +101,7 @@ export default function Deposit({ pair }: any): JSX.Element {
       <WarningsList warnings={warnings} />
       <TransactionReviewList transactionReview={transactionReview} />
 
-      <KashiApproveButton
+      <UnderworldApproveButton
         color="blue"
         content={(onCook: any) => (
           <TokenApproveButton value={value} token={assetToken} needed={!useCoffin}>

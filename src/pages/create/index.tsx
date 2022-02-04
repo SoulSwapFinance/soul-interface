@@ -20,7 +20,9 @@ import { useTransactionAdder } from 'state/transactions/hooks'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useCallback } from 'react'
-import { CHAINLINK_ORACLE_ADDRESS } from 'constants/kashi'
+import { CHAINLINK_ORACLE_ADDRESS } from 'constants/underworld'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums'
 
 // TODO : UPDATE ADDRESSES //
 const UNDERWORLD_ADDRESS = '0x0A497d994E18c581fbdCE5d51A3438D53e3540d6'
@@ -248,4 +250,4 @@ const CreateLayout = ({ children }) => {
   )
 }
 
-// Create.Guard = NetworkGuard(Feature.KASHI)
+Create.Guard = NetworkGuard(Feature.UNDERWORLD)

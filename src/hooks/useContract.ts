@@ -44,7 +44,7 @@ import {
   // SOUL_GUIDE_ADDRESS,
   SOULSWAP_TWAP_0_ORACLE_ADDRESS,
   SOULSWAP_TWAP_1_ORACLE_ADDRESS,
-} from '../constants/kashi'
+} from '../constants/underworld'
 import { MERKLE_DISTRIBUTOR_ADDRESS } from '../constants'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from '../constants/multicall'
 import ALCX_REWARDER_ABI from '../constants/abis/alcx-rewarder.json'
@@ -65,8 +65,7 @@ import { ERC20_BYTES32_ABI } from '../constants/abis/erc20'
 import FACTORY_ABI from '../constants/abis/factory.json'
 // import IUniswapV2PairABI from '../constants/abis/uniswap-v2-pair.json'
 import ISoulSwapPairABI from '../constants/abis/soulswap/ISoulSwapPair.json'
-import UNDERWORLD_ABI from '../constants/abis/kashipair.json'
-import KASHIPAIR_ABI from '../constants/abis/kashipair.json'
+import UNDERWORLD_ABI from '../constants/abis/underworldpair.json'
 import MAKER_ABI from '../constants/abis/maker.json'
 
 // soul
@@ -396,13 +395,13 @@ export function useCoffinBoxContract(withSignerIfPossible?: boolean): Contract |
   return useContract(chainId && COFFIN_BOX_ADDRESS[chainId], COFFIN_BOX_ABI, withSignerIfPossible)
 }
 
-export function useKashiPairContract(withSignerIfPossible?: boolean): Contract | null {
+export function useUnderworldPairContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && UNDERWORLD_ADDRESS[chainId], UNDERWORLD_ABI, withSignerIfPossible)
 }
 
-export function useKashiPairCloneContract(address: string, withSignerIfPossible?: boolean): Contract | null {
-  return useContract(address, KASHIPAIR_ABI, withSignerIfPossible)
+export function useUnderworldPairCloneContract(address: string, withSignerIfPossible?: boolean): Contract | null {
+  return useContract(address, UNDERWORLD_ABI, withSignerIfPossible)
 }
 
 // export function useSoulSwapSwapper(): Contract | null {

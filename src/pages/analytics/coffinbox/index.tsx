@@ -121,7 +121,7 @@ export default function CoffinBox(): JSX.Element {
           />
           <InfoCard text="Total Users" number={formatNumber(coffinBox?.totalUsers)} />
           <InfoCard text="Total Tokens" number={coffinBox?.totalTokens} />
-          <InfoCard text="Total Kashi Pairs" number={coffinBox?.totalKashiPairs} />
+          <InfoCard text="Total Underworld Pairs" number={coffinBox?.totalUnderworldPairs} />
         </div>
       </div>
       <div className="py-6 space-y-4 text-2xl font-bold text-high-emphesis lg:px-14">Tokens</div>

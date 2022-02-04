@@ -82,20 +82,20 @@ export function useUnderworldPairs(addresses = []) {
   const pollArgs = useMemo(() => [account, addresses], [account, addresses])
 
   // TODO: Replace
-  const pollKashiPairs = useSingleCallResult(boringHelperContract, 'pollKashiPairs', pollArgs)?.result?.[0]
+  const pollUnderworldPairs = useSingleCallResult(boringHelperContract, 'pollUnderworldPairs', pollArgs)?.result?.[0]
 
   const tokens = useMemo<Token[]>(() => {
-    if (!pollKashiPairs) {
+    if (!pollUnderworldPairs) {
       return []
     }
     return Array.from(
-      pollKashiPairs?.reduce((previousValue, currentValue) => {
+      pollUnderworldPairs?.reduce((previousValue, currentValue) => {
         const asset = allTokens[currentValue.asset]
         const collateral = allTokens[currentValue.collateral]
         return previousValue.add(asset).add(collateral)
       }, new Set([currency]))
     )
-  }, [allTokens, currency, pollKashiPairs])
+  }, [allTokens, currency, pollUnderworldPairs])
 
   const strategies = useCoffinStrategies({ chainId })
   
@@ -135,13 +135,13 @@ export function useUnderworldPairs(addresses = []) {
     }, {})
 
   return useMemo(() => {
-    if (!addresses || !tokens || !pollKashiPairs) {
+    if (!addresses || !tokens || !pollUnderworldPairs) {
       return []
     }
     return addresses.reduce((previousValue, currentValue, i) => {
       if (chainId && pairTokens && balances) {
         // Hack until we instantiate entity here...
-        const pair = Object.assign({}, pollKashiPairs?.[i])
+        const pair = Object.assign({}, pollUnderworldPairs?.[i])
 
         pair.address = currentValue
         pair.oracle = getOracle(chainId, pair.oracle, pair.oracle.data)
@@ -311,7 +311,7 @@ export function useUnderworldPairs(addresses = []) {
 
       return previousValue
     }, [])
-  }, [addresses, tokens, pollKashiPairs, chainId, pairTokens, balances])
+  }, [addresses, tokens, pollUnderworldPairs, chainId, pairTokens, balances])
 
     // return useMemo(
     //   () =>

@@ -259,9 +259,9 @@
   {
     "inputs": [
       { "internalType": "address", "name": "who", "type": "address" },
-      { "internalType": "contract IKashiPair[]", "name": "pairsIn", "type": "address[]" }
+      { "internalType": "contract IUnderworldPair[]", "name": "pairsIn", "type": "address[]" }
     ],
-    "name": "pollKashiPairs",
+    "name": "pollUnderworldPairs",
     "outputs": [
       {
         "components": [
@@ -305,7 +305,7 @@
             "type": "tuple"
           }
         ],
-        "internalType": "struct BoringHelperV1.KashiPairPoll[]",
+        "internalType": "struct BoringHelperV1.UnderworldPairPoll[]",
         "name": "",
         "type": "tuple[]"
       }
