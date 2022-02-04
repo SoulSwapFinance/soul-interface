@@ -89,12 +89,12 @@ export const BalancesSum = () => {
         <_BalancesSum amounts={balances} label={i18n._(t`Net Worth`)} size="h3" loading={bLoading} />
       </div>
       <div className="flex gap-10">
-        <_BalancesSum amounts={walletBalances} label={i18n._(t`Wallet`)} loading={false} />
+        <_BalancesSum amounts={walletBalances} label={i18n._(t`Wallet`)} loading={bLoading} />
         <_BalancesSum amounts={coffinBalances} label={i18n._(t`CoffinBox`)} loading={bLoading} />
-        <div className="flex flex-col gap-1">
+        {/* <div className="flex flex-col gap-1">
           <Typography variant="sm">{i18n._(t`Assets`)}</Typography>
           <Typography variant="lg">{balances.length}</Typography>
-        </div>
+        </div> */}
       </div>
     </div>
   )
