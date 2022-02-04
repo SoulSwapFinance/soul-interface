@@ -17,7 +17,7 @@ Home repository for the SoulSwap Decentralized Finance Application.
 - ### [Status](./src/pages/status)
 - ### [Tokens](./src/pages/tokens)
 - ### [Tools](./src/pages/tools)
-- ### [Underworld](./src/pages/kashi)
+- ### [Underworld](./src/pages/underworld)
 - ### [User](./src/pages/user)
   - #### [balance](./src/pages/user/balance.tsx)
   - #### [index](./src/pages/user/index.tsx)

@@ -66,7 +66,7 @@ module.exports = withBundleAnalyzer(
           permanent: true,
         },
         // {
-        //   source: '/coffin/kashi',
+        //   source: '/coffin/underworld',
         //   destination: '/lend',
         //   permanent: true,
         // },
@@ -126,22 +126,22 @@ module.exports = withBundleAnalyzer(
           source: '/find',
           destination: '/exchange/find',
         },
-        // Kashi
+        // Underworld
         // {
         //   source: '/borrow',
-        //   destination: '/kashi/borrow',
+        //   destination: '/underworld/borrow',
         // },
         // {
         //   source: '/borrow/:token*',
-        //   destination: '/kashi/borrow/:token*',
+        //   destination: '/underworld/borrow/:token*',
         // },
         // {
         //   source: '/lend',
-        //   destination: '/kashi/lend',
+        //   destination: '/underworld/lend',
         // },
         // {
         //   source: '/lend/:token*',
-        //   destination: '/kashi/lend/:token*',
+        //   destination: '/underworld/lend/:token*',
         // },
         {
           source: '/balances',

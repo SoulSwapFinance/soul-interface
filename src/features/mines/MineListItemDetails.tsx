@@ -12,7 +12,7 @@ import { MineModalView, PairType } from './enum'
 import InformationDisclosure from './components/InformationDisclosure'
 import InvestmentDetails from './components/InvestmentDetails'
 import ManageBar from './utils/ManageBar'
-// import ManageKashiPair from './ManageKashiPair'
+// import ManageUnderworldPair from './ManageUnderworldPair'
 import ManageSwapPair from './utils/ManageSwapPair'
 
 const COLUMN_CONTAINER = 'flex flex-col flex-grow gap-4'
@@ -58,7 +58,7 @@ const MineListItemDetails = ({ farm, onDismiss }) => {
 
             {farm.pair.token1 && (
               <ToggleButtonGroup.Button value={MineModalView.Liquidity}>
-                {farm.pair.type === PairType.KASHI ? i18n._(t`Lending`) : i18n._(t`Liquidity`)}
+                {farm.pair.type === PairType.UNDERWORLD ? i18n._(t`Lending`) : i18n._(t`Liquidity`)}
               </ToggleButtonGroup.Button>
             )}
             <ToggleButtonGroup.Button value={MineModalView.Staking}>{i18n._(t`Staking`)}</ToggleButtonGroup.Button>
@@ -75,7 +75,7 @@ const MineListItemDetails = ({ farm, onDismiss }) => {
             </div>
           }
           {/* <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Liquidity ? 'block' : 'hidden')}>
-            {farm.pair.type === PairType.KASHI ? <ManageKashiPair farm={farm} /> : <ManageSwapPair farm={farm} />}
+            {farm.pair.type === PairType.UNDERWORLD ? <ManageUnderworldPair farm={farm} /> : <ManageSwapPair farm={farm} />}
           </div> */}
           <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Staking ? 'block' : 'hidden')}>
             <ManageBar farm={farm} />

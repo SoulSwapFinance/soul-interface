@@ -277,7 +277,7 @@ const computeOracleData = (collateral: Currency, asset: Currency) => {
   return defaultAbiCoder.encode(['address', 'address', 'uint256'], [multiply, divide, e10(decimals)])
 }
 
-export const computeKashiPairAddress = ({
+export const computeUnderworldPairAddress = ({
   collateral,
   asset,
   oracle,
@@ -315,7 +315,7 @@ export const computeKashiPairAddress = ({
  * @param tokenA one of the two tokens
  * @param tokenB the other token
  */
-export function toKashiLiquidityToken([collateral, asset]: [Token, Token]): Token {
+export function toUnderworldLiquidityToken([collateral, asset]: [Token, Token]): Token {
   if (collateral.chainId !== asset.chainId) throw new Error('Not matching chain IDs')
   if (collateral.equals(asset)) throw new Error('Tokens cannot be equal')
   if (!COFFIN_BOX_ADDRESS[collateral.chainId]) throw new Error('No CoffinBox factory address on this chain')
@@ -331,7 +331,7 @@ export function toKashiLiquidityToken([collateral, asset]: [Token, Token]): Toke
   if (!oracleData) return
   return new Token(
     collateral.chainId,
-    computeKashiPairAddress({
+    computeUnderworldPairAddress({
       collateral,
       asset,
       oracle: CHAINLINK_ORACLE_ADDRESS[collateral.chainId],

@@ -11,7 +11,7 @@ export interface AccrueInfo {
   feesEarnedFraction: BigNumber
 }
 
-export interface KashiPollPair {
+export interface UnderworldPollPair {
   address: string
   collateral: string
   asset: string
@@ -29,7 +29,7 @@ export interface KashiPollPair {
   accrueInfo: AccrueInfo
 }
 
-export default class KashiPair {
+export default class UnderworldPair {
   address: string
   collateral: string
   asset: string

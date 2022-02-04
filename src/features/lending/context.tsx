@@ -8,13 +8,13 @@ import {
   getUSDValue,
   interestAccrue,
   takeFee,
-} from '../../functions/kashi'
+} from '../../functions/underworld'
 import { toAmount, toShare } from '../../functions/coffinbox'
 import { useCoffinBoxContract, useSoulGuideContract } from '../../hooks/useContract'
 
 import { BigNumber } from '@ethersproject/bignumber'
 import { Fraction } from '../../entities/bignumber/Fraction'
-import { UNDERWORLD_ADDRESS } from '../../constants/kashi'
+import { UNDERWORLD_ADDRESS } from '../../constants/underworld'
 // import { USDC } from '../../hooks'
 import { bentobox as coffinbox } from '@soulswap/soul-data'
 import { ethers } from 'ethers'
@@ -77,17 +77,17 @@ const initialState: State = {
   pairs: [],
 }
 
-export interface KashiContextProps {
+export interface UnderworldContextProps {
   state: State
   dispatch: React.Dispatch<any>
 }
 
-type KashiProviderProps = {
+type UnderworldProviderProps = {
   state: State
   dispatch: React.Dispatch<any>
 }
 
-export const KashiContext = createContext<{
+export const UnderworldContext = createContext<{
   state: State
   dispatch: React.Dispatch<any>
 }>({
@@ -181,7 +181,7 @@ export function rpcToObj(rpc_obj: any, obj?: any) {
   return rpc_obj
 }
 
-export function KashiProvider({ children }) {
+export function UnderworldProvider({ children }) {
   const [state, dispatch] = useReducer<React.Reducer<State, Reducer>>(reducer, initialState)
   const blockNumber = useBlockNumber()
 
@@ -243,7 +243,7 @@ export function KashiProvider({ children }) {
       console.log('invalidOracles', invalidOracles)
 
       // Get full info on all the verified pairs
-      const pairs = rpcToObj(await soulGuideContract.pollKashiPairs(account, allPairAddresses))
+      const pairs = rpcToObj(await soulGuideContract.pollUnderworldPairs(account, allPairAddresses))
 
       // Get a list of all tokens in the pairs
       const pairTokens = new Tokens()
@@ -456,41 +456,41 @@ export function KashiProvider({ children }) {
   }, [blockNumber, previousBlockNumber, updatePairs])
 
   return (
-    <KashiContext.Provider
+    <UnderworldContext.Provider
       value={{
         state,
         dispatch,
       }}
     >
       {children}
-    </KashiContext.Provider>
+    </UnderworldContext.Provider>
   )
 }
 
-export function useKashiInfo() {
-  const context = useContext(KashiContext)
+export function useUnderworldInfo() {
+  const context = useContext(UnderworldContext)
   if (context === undefined) {
-    throw new Error('useKashiInfo must be used within a KashiProvider')
+    throw new Error('useUnderworldInfo must be used within a UnderworldProvider')
   }
   return context.state.info
 }
 
-export function useKashiPairs() {
-  const context = useContext(KashiContext)
+export function useUnderworldPairs() {
+  const context = useContext(UnderworldContext)
   if (context === undefined) {
-    throw new Error('useKashiPairs must be used within a KashiProvider')
+    throw new Error('useUnderworldPairs must be used within a UnderworldProvider')
   }
   return context.state.pairs
 }
 
-export function useKashiPair(address: string) {
-  const context = useContext(KashiContext)
+export function useUnderworldPair(address: string) {
+  const context = useContext(UnderworldContext)
   if (context === undefined) {
-    throw new Error('useKashiPair must be used within a KashiProvider')
+    throw new Error('useUnderworldPair must be used within a UnderworldProvider')
   }
   return context.state.pairs.find((pair) => {
     return ethers.utils.getAddress(pair.address) === ethers.utils.getAddress(address)
   })
 }
 
-export default KashiProvider
+export default UnderworldProvider

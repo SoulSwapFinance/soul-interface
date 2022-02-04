@@ -30,7 +30,7 @@ export default function Pair() {
     <PairLayout>
       <Head>
         <title>Lend {pair.asset.tokenInfo.symbol} | Soul</title>
-        <meta key="description" name="description" content={`Lend ${pair.asset.tokenInfo.symbol} on Kashi`} />
+        <meta key="description" name="description" content={`Lend ${pair.asset.tokenInfo.symbol} in the Underworld`} />
       </Head>
       <Card
         className="bg-dark-900"

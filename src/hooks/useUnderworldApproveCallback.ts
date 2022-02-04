@@ -1,14 +1,14 @@
-import KashiCooker, { signMasterContractApproval } from '../entities/KashiCooker'
+import UnderworldCooker, { signMasterContractApproval } from '../entities/UnderworldCooker'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { UNDERWORLD_ADDRESS } from '../constants/kashi'
+import { UNDERWORLD_ADDRESS } from '../constants/underworld'
 import { ethers } from 'ethers'
-import { setKashiApprovalPending } from '../state/application/actions'
+import { setUnderworldApprovalPending } from '../state/application/actions'
 import { useActiveWeb3React } from 'services/web3'
-import { useCoffinBoxContract } from '../hooks/useContract'
+import { useCoffinBoxContract } from './useContract'
 import { useCoffinMasterContractAllowed } from '../state/coffinbox/hooks'
 import { useDispatch } from 'react-redux'
-import { useKashiApprovalPending } from '../state/application/hooks'
+import { useUnderworldApprovalPending } from '../state/application/hooks'
 import { useTransactionAdder } from '../state/transactions/hooks'
 
 export enum CoffinApprovalState {
@@ -19,7 +19,7 @@ export enum CoffinApprovalState {
   APPROVED,
 }
 
-export interface KashiPermit {
+export interface UnderworldPermit {
   account: string
   masterContract: string
   v: number
@@ -36,29 +36,29 @@ export enum CoffinApproveOutcome {
 
 export type CoffinApproveResult = {
   outcome: CoffinApproveOutcome
-  permit?: KashiPermit
+  permit?: UnderworldPermit
 }
 
 // returns a variable indicating the state of the approval and a function which approves if necessary or early returns
-function useKashiApproveCallback(): [
+function useUnderworldApproveCallback(): [
   CoffinApprovalState,
   boolean,
-  KashiPermit | undefined,
+  UnderworldPermit | undefined,
   () => void,
-  (pair: any, execute: (cooker: KashiCooker) => Promise<string>) => void
+  (pair: any, execute: (cooker: UnderworldCooker) => Promise<string>) => void
 ] {
   const { account, library, chainId } = useActiveWeb3React()
   const dispatch = useDispatch()
-  const [approveKashiFallback, setApproveKashiFallback] = useState<boolean>(false)
-  const [kashiPermit, setKashiPermit] = useState<KashiPermit | undefined>(undefined)
+  const [approveUnderworldFallback, setApproveUnderworldFallback] = useState<boolean>(false)
+  const [underworldPermit, setUnderworldPermit] = useState<UnderworldPermit | undefined>(undefined)
 
   useEffect(() => {
-    setKashiPermit(undefined)
+    setUnderworldPermit(undefined)
   }, [account, chainId])
 
   const masterContract = chainId && UNDERWORLD_ADDRESS[chainId]
 
-  const pendingApproval = useKashiApprovalPending()
+  const pendingApproval = useUnderworldApprovalPending()
   const currentAllowed = useCoffinMasterContractAllowed(masterContract, account || ethers.constants.AddressZero)
   const addTransaction = useTransactionAdder()
 
@@ -118,12 +118,12 @@ function useKashiApproveCallback(): [
   }, [approvalState, account, library, chainId, coffinBoxContract, masterContract])
 
   const onApprove = async function () {
-    if (!approveKashiFallback) {
+    if (!approveUnderworldFallback) {
       const result = await approve()
       if (result.outcome === CoffinApproveOutcome.SUCCESS) {
-        setKashiPermit(result.permit)
+        setUnderworldPermit(result.permit)
       } else if (result.outcome === CoffinApproveOutcome.FAILED) {
-        setApproveKashiFallback(true)
+        setApproveUnderworldFallback(true)
       }
     } else {
       const tx = await coffinBoxContract?.setMasterContractApproval(
@@ -134,30 +134,30 @@ function useKashiApproveCallback(): [
         ethers.constants.HashZero,
         ethers.constants.HashZero
       )
-      dispatch(setKashiApprovalPending('Approve Kashi'))
+      dispatch(setUnderworldApprovalPending('Approve the Underworld'))
       await tx.wait()
-      dispatch(setKashiApprovalPending(''))
+      dispatch(setUnderworldApprovalPending(''))
     }
   }
 
-  const onCook = async function (pair: any, execute: (cooker: KashiCooker) => Promise<string>) {
-    const cooker = new KashiCooker(pair, account, library, chainId)
+  const onCook = async function (pair: any, execute: (cooker: UnderworldCooker) => Promise<string>) {
+    const cooker = new UnderworldCooker(pair, account, library, chainId)
     let summary
-    if (approvalState === CoffinApprovalState.NOT_APPROVED && kashiPermit) {
-      cooker.approve(kashiPermit)
-      summary = 'Approve Kashi and ' + (await execute(cooker))
+    if (approvalState === CoffinApprovalState.NOT_APPROVED && underworldPermit) {
+      cooker.approve(underworldPermit)
+      summary = 'Approve the Underworld and ' + (await execute(cooker))
     } else {
       summary = await execute(cooker)
     }
     const result = await cooker.cook()
     if (result.success) {
       addTransaction(result.tx, { summary })
-      setKashiPermit(undefined)
+      setUnderworldPermit(undefined)
       await result.tx.wait()
     }
   }
 
-  return [approvalState, approveKashiFallback, kashiPermit, onApprove, onCook]
+  return [approvalState, approveUnderworldFallback, underworldPermit, onApprove, onCook]
 }
 
-export default useKashiApproveCallback
+export default useUnderworldApproveCallback

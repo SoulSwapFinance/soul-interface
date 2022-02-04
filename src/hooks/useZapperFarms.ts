@@ -16,7 +16,7 @@ const useZapperFarms = () => {
   const soulGuideContract = useSoulGuideContract()
 
   const fetchAllFarms = useCallback(async () => {
-    let [pools, liquidityPositions, averageBlockTime, soulPrice, kashiPairs, soulPairs, masterChef] = await Promise.all(
+    let [pools, liquidityPositions, averageBlockTime, soulPrice, underworldPairs, soulPairs, masterChef] = await Promise.all(
       [
         soulData.masterchef.pools(), // results[1]
         soulData.exchange.userPositions({
@@ -36,22 +36,22 @@ const useZapperFarms = () => {
       })
       .sort()
 
-    kashiPairs = kashiPairs.filter((result) => result !== undefined) // filter out undefined (not in onsen) from all kashiPairs
+    underworldPairs = underworldPairs.filter((result) => result !== undefined) // filter out undefined (not in onsen) from all underworldPairs
     soulPairs = soulPairs.filter((pair) => pairAddresses.includes(pair.id))
 
-    const KASHI_PAIRS = range(190, 230, 1) // kashiPair pids 189-229
+    const UNDERWORLD_PAIRS = range(190, 230, 1) // underworldPair pids 189-229
 
     const farms = pools
       .filter((pool: any) => {
-        // console.log(KASHI_PAIRS.includes(Number(pool.id)), pool, Number(pool.id))
+        // console.log(UNDERWORLD_PAIRS.includes(Number(pool.id)), pool, Number(pool.id))
         return (
           !POOL_DENY.includes(pool?.id) &&
-          (soulPairs.find((pair: any) => pair?.id === pool?.pair) || KASHI_PAIRS.includes(Number(pool?.id)))
+          (soulPairs.find((pair: any) => pair?.id === pool?.pair) || UNDERWORLD_PAIRS.includes(Number(pool?.id)))
         )
       })
       .map((pool) => {
-        if (KASHI_PAIRS.includes(Number(pool?.id))) {
-          const pair = kashiPairs.find((pair) => pair?.id === pool?.pair)
+        if (UNDERWORLD_PAIRS.includes(Number(pool?.id))) {
+          const pair = underworldPairs.find((pair) => pair?.id === pool?.pair)
           // console.log('kpair:', pair, pool)
           return {
             ...pool,

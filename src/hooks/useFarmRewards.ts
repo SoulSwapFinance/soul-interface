@@ -89,7 +89,7 @@ export default function useFarmRewards() {
         shouldFetch: !!block1d && !!farmAddresses,
     })
 
-    const kashiPairs = useUnderworldPairs({
+    const underworldPairs = useUnderworldPairs({
         chainId,
         variables: { where: { id_in: farmAddresses.map(toLower) } },
         shouldFetch: !!farmAddresses,
@@ -121,11 +121,11 @@ export default function useFarmRewards() {
         // @ts-ignore TYPE NEEDS FIXING
         const swapPair1d = swapPairs1d?.find((pair) => pair.id === pool.pair)
         // @ts-ignore TYPE NEEDS FIXING
-        // const kashiPair = kashiPairs?.find((pair) => pair.id === pool.pair)
+        // const underworldPair = underworldPairs?.find((pair) => pair.id === pool.pair)
 
-        const pair = swapPair || kashiPair
+        const pair = swapPair || underworldPair
 
-        const type = swapPair ? PairType.SWAP : PairType.KASHI
+        const type = swapPair ? PairType.SWAP : PairType.UNDERWORLD
 
         const blocksPerHour = 3600 / averageBlockTime
 
@@ -347,12 +347,12 @@ export default function useFarmRewards() {
         const tvl = (balance / Number(swapPair.totalSupply)) * Number(swapPair.reserveUSD)
 
 
-        // const balance = swapPair ? Number(pool.balance / 1e18) : pool.balance / 10 ** kashiPair.token0.decimals
+        // const balance = swapPair ? Number(pool.balance / 1e18) : pool.balance / 10 ** underworldPair.token0.decimals
 
         // const tvl =
         // swapPair
         //   ? (balance / Number(swapPair.totalSupply)) * Number(swapPair.reserveUSD)
-        //   : balance * kashiPair.token0.derivedETH * ethPrice
+        //   : balance * underworldPair.token0.derivedETH * ethPrice
 
         const feeApyPerYear =
             swapPair && swapPair1d
@@ -386,7 +386,7 @@ export default function useFarmRewards() {
             ...position,
             pair: {
                 ...pair,
-                decimals: pair.type === PairType.KASHI ? Number(pair.asset.tokenInfo.decimals) : 18,
+                decimals: pair.type === PairType.UNDERWORLD ? Number(pair.asset.tokenInfo.decimals) : 18,
                 type,
             },
             balance,
@@ -414,7 +414,7 @@ export default function useFarmRewards() {
                 // @ts-ignore TYPE NEEDS FIXING
                 (swapPairs && swapPairs.find((pair) => pair.id === farm.pair)) ||
                 // @ts-ignore TYPE NEEDS FIXING
-                (kashiPairs && kashiPairs.find((pair) => pair.id === farm.pair))
+                (underworldPairs && underworldPairs.find((pair) => pair.id === farm.pair))
             )
         })
         .map(map)

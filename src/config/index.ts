@@ -13,15 +13,15 @@ const config = {
   // Network specific configuration
   [ChainId.MAINNET]: {
     averageBlockTimeInSeconds: 13,
-    kashi: { blacklistedTokens: [], blacklistedOracles: ['0x8f2CC3376078568a04eBC600ae5F0a036DBfd812'] },
+    underworld: { blacklistedTokens: [], blacklistedOracles: ['0x8f2CC3376078568a04eBC600ae5F0a036DBfd812'] },
   },
   [ChainId.FANTOM]: {
     averageBlockTimeInSeconds: 1,
-    kashi: { blacklistedTokens: [], blacklistedOracles: [] },
+    underworld: { blacklistedTokens: [], blacklistedOracles: [] },
   },
   // [ChainId.MATIC]: {
   //   averageBlockTimeInSeconds: 13,
-  //   kashi: { blacklistedTokens: ['0xC6d54D2f624bc83815b49d9c2203b1330B841cA0'], blacklistedOracles: [] },
+  //   underworld: { blacklistedTokens: ['0xC6d54D2f624bc83815b49d9c2203b1330B841cA0'], blacklistedOracles: [] },
   // },
 }
 

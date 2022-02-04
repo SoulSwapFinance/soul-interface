@@ -1,16 +1,16 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Button } from 'components/Button'
-import KashiCooker from 'entities/KashiCooker'
+import UnderworldCooker from 'entities/UnderworldCooker'
 import { TransactionReview } from 'entities/TransactionReview'
 import { Warnings } from 'entities/Warnings'
 import { e10, minimum } from 'functions/math'
-import useKashiApproveCallback from 'hooks/useKashiApproveCallback'
+import useUnderworldApproveCallback from 'hooks/useUnderworldApproveCallback'
 import { useActiveWeb3React } from 'services/web3'
-import { useKashiApprovalPending } from 'state/application/hooks'
+import { useUnderworldApprovalPending } from 'state/application/hooks'
 import React, { useState } from 'react'
 
-import { KashiApproveButton } from './Button'
+import { UnderworldApproveButton } from './Button'
 import SmartNumberInput from './SmartNumberInput'
 import TransactionReviewView from './TransactionReview'
 import WarningsView from './WarningsList'
@@ -18,7 +18,7 @@ import { JSBI } from 'sdk'
 
 export default function Withdraw({ pair }: any): JSX.Element {
   const { account } = useActiveWeb3React()
-  const pendingApprovalMessage = useKashiApprovalPending()
+  const pendingApprovalMessage = useUnderworldApprovalPending()
 
   const { i18n } = useLingui()
 
@@ -27,7 +27,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
   const [value, setValue] = useState('')
   const [pinMax, setPinMax] = useState(false)
 
-  const [underworldApprovalState, approveKashiFallback, kashiPermit, onApprove, onCook] = useKashiApproveCallback()
+  const [underworldApprovalState, approveUnderworldFallback, underworldPermit, onApprove, onCook] = useUnderworldApproveCallback()
 
   // Calculated
   const max = minimum(pair.maxAssetAvailable, pair.currentUserAssetAmount.value)
@@ -79,7 +79,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
   }
 
   // Handlers
-  async function onExecute(cooker: KashiCooker) {
+  async function onExecute(cooker: UnderworldCooker) {
     const fraction = pinMax
       ? minimum(pair.userAssetFraction, pair.maxAssetAvailableFraction)
       : Number(value) * pair.currencyTotalAsset.base / pair.currentAllAssets.value
@@ -114,7 +114,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
       <WarningsView warnings={warnings} />
       <TransactionReviewView transactionReview={transactionReview}></TransactionReviewView>
 
-      <KashiApproveButton
+      <UnderworldApproveButton
         color="blue"
         content={(onCook: any) => (
           <Button

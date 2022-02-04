@@ -67,7 +67,7 @@ const InformationDisclosure = ({ farm }) => {
         <Typography variant="xs">
           {i18n._(t`Approve and then deposit your`)}
           {` `}
-          {farm.pair.type === PairType.KASHI ? `KMP` : `LP`}
+          {farm.pair.type === PairType.UNDERWORLD ? `UMP` : `LP`}
           {` `}
           {i18n._(t`tokens into the farm to start earning rewards.`)}
         </Typography>
@@ -82,9 +82,9 @@ const InformationDisclosure = ({ farm }) => {
             )}
           </Typography>
         {/* )} */}
-        {farm.pair.type === PairType.KASHI && (
+        {farm.pair.type === PairType.UNDERWORLD && (
           <Typography variant="xs">
-            {i18n._(t`Harvest rewards and unstake your KMP tokens at any time. You can then withdraw your lent`)}
+            {i18n._(t`Harvest rewards and unstake your UMP tokens at any time. You can then withdraw your lent`)}
             {` `}
             {farm.pair.token0.symbol}
             {` `}

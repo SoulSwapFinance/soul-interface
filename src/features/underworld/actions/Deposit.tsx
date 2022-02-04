@@ -3,7 +3,7 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { WNATIVE } from 'sdk'
 import { Button } from 'components/Button'
-import KashiCooker from 'entities/KashiCooker'
+import UnderworldCooker from 'entities/UnderworldCooker'
 import { Direction, TransactionReview } from 'entities/TransactionReview'
 import { Warnings } from 'entities/Warnings'
 import { formatNumber } from 'functions/format'
@@ -96,7 +96,7 @@ export default function Deposit({ pair }: any): JSX.Element {
   }
 
   // Handlers
-  async function onExecute(cooker: KashiCooker): Promise<string> {
+  async function onExecute(cooker: UnderworldCooker): Promise<string> {
     if (pair.currentExchangeRate.isZero()) {
       cooker.updateExchangeRate(false, ZERO, ZERO)
     }

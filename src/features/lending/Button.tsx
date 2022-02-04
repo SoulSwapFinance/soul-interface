@@ -1,8 +1,8 @@
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
-import useKashiApproveCallback, { CoffinApprovalState } from '../../hooks/useKashiApproveCallback'
+import useUnderworldApproveCallback, { CoffinApprovalState } from '../../hooks/useUnderworldApproveCallback'
 
 import Alert from '../../components/Alert'
-import { COFFIN_BOX_ADDRESS } from '../../constants/kashi'
+import { COFFIN_BOX_ADDRESS } from '../../constants/underworld'
 import { Button } from '../../components/Button'
 import Dots from '../../components/Dots'
 import React from 'react'
@@ -12,17 +12,17 @@ import { tryParseAmount } from '../../functions/parse'
 import { useActiveWeb3React } from 'services/web3'
 import { useLingui } from '@lingui/react'
 
-export function KashiApproveButton({ content, color }: any): any {
+export function UnderworldApproveButton({ content, color }: any): any {
   const { i18n } = useLingui()
-  const [kashiApprovalState, approveKashiFallback, kashiPermit, onApprove, onCook] = useKashiApproveCallback()
+  const [underworldApprovalState, approveUnderworldFallback, underworldPermit, onApprove, onCook] = useUnderworldApproveCallback()
   const showApprove =
-    (kashiApprovalState === CoffinApprovalState.NOT_APPROVED || kashiApprovalState === CoffinApprovalState.PENDING) &&
-    !kashiPermit
-  const showChildren = kashiApprovalState === CoffinApprovalState.APPROVED || kashiPermit
+    (underworldApprovalState === CoffinApprovalState.NOT_APPROVED || underworldApprovalState === CoffinApprovalState.PENDING) &&
+    !underworldPermit
+  const showChildren = underworldApprovalState === CoffinApprovalState.APPROVED || underworldPermit
 
   return (
     <>
-      {approveKashiFallback && (
+      {approveUnderworldFallback && (
         <Alert
           message={i18n._(
             t`Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used`

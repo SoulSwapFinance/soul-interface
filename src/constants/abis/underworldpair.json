@@ -291,7 +291,7 @@
   {
     "inputs": [],
     "name": "masterContract",
-    "outputs": [{ "internalType": "contract KashiPairMediumRiskV1", "name": "", "type": "address" }],
+    "outputs": [{ "internalType": "contract UnderworldPairMediumRiskV1", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },

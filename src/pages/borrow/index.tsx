@@ -18,6 +18,8 @@ import React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { RecoilRoot } from 'recoil'
 import MarketHeader from 'features/underworld/components/MarketHeader'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums'
 
 
 export default function Borrow() {
@@ -296,7 +298,7 @@ const BorrowLayout = ({ children }) => {
       left={
         <Card
           className="h-full bg-dark-900"
-          backgroundImage="/images/kashi/borrow.png"
+          backgroundImage="/images/underworld/borrow.png"
           title={i18n._(t`Borrow assets and leverage up`)}
           description={i18n._(
             t`Borrowing allows you to obtain liquidity without selling. Your borrow limit depends on the amount of deposited collateral. You will be able to borrow up to 75% of your collateral and repay at any time with accrued interest.`
@@ -309,4 +311,4 @@ const BorrowLayout = ({ children }) => {
   )
 }
 
-// Borrow.Guard = NetworkGuard(Feature.KASHI)
+Borrow.Guard = NetworkGuard(Feature.UNDERWORLD)

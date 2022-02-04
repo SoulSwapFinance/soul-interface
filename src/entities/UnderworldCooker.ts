@@ -4,8 +4,8 @@ import { Contract, ethers } from 'ethers'
 import { ZERO, e10, maximum, minimum } from '../functions/math'
 import { getProviderOrSigner, getSigner } from '../functions/contract'
 
-import KASHIPAIR_ABI from '../constants/abis/kashipair.json'
-import { KashiPermit } from '../hooks/useKashiApproveCallback'
+import UNDERWORLD_ABI from '../constants/abis/underworldpair.json'
+import { UnderworldPermit } from '../hooks/useUnderworldApproveCallback'
 import { defaultAbiCoder } from '@ethersproject/abi'
 import { toElastic } from '../functions/rebase'
 import { toShare } from '../functions/coffinbox'
@@ -75,7 +75,7 @@ enum Action {
   CALL = 30,
 }
 
-export default class KashiCooker {
+export default class UnderworldCooker {
   private pair: any
   private account: string
   private library: ethers.providers.Web3Provider | undefined
@@ -107,7 +107,7 @@ export default class KashiCooker {
     this.values.push(BigNumber.from(value))
   }
 
-  approve(permit: KashiPermit): void {
+  approve(permit: UnderworldPermit): void {
     if (permit) {
       this.add(
         Action.COFFIN_SETAPPROVAL,
@@ -119,7 +119,7 @@ export default class KashiCooker {
     }
   }
 
-  updateExchangeRate(mustUpdate = false, minRate = ZERO, maxRate = ZERO): KashiCooker {
+  updateExchangeRate(mustUpdate = false, minRate = ZERO, maxRate = ZERO): UnderworldCooker {
     this.add(
       Action.UPDATE_EXCHANGE_RATE,
       ethers.utils.defaultAbiCoder.encode(['bool', 'uint256', 'uint256'], [mustUpdate, minRate, maxRate])
@@ -127,7 +127,7 @@ export default class KashiCooker {
     return this
   }
 
-  coffinDepositCollateral(amount: BigNumber): KashiCooker {
+  coffinDepositCollateral(amount: BigNumber): UnderworldCooker {
     const useNative = this.pair.collateral.address === WNATIVE[this.chainId].address
 
     this.add(
@@ -142,7 +142,7 @@ export default class KashiCooker {
     return this
   }
 
-  coffinWithdrawCollateral(amount: BigNumber, share: BigNumber): KashiCooker {
+  coffinWithdrawCollateral(amount: BigNumber, share: BigNumber): UnderworldCooker {
     const useNative = this.pair.collateral.address === WNATIVE[this.chainId].address
 
     this.add(
@@ -157,7 +157,7 @@ export default class KashiCooker {
     return this
   }
 
-  coffinTransferCollateral(share: BigNumber, toAddress: string): KashiCooker {
+  coffinTransferCollateral(share: BigNumber, toAddress: string): UnderworldCooker {
     this.add(
       Action.COFFIN_TRANSFER,
       defaultAbiCoder.encode(['address', 'address', 'int256'], [this.pair.collateral.address, toAddress, share])
@@ -166,13 +166,13 @@ export default class KashiCooker {
     return this
   }
 
-  repayShare(part: BigNumber): KashiCooker {
+  repayShare(part: BigNumber): UnderworldCooker {
     this.add(Action.GET_REPAY_SHARE, defaultAbiCoder.encode(['int256'], [part]))
 
     return this
   }
 
-  addCollateral(amount: BigNumber, fromCoffin: boolean): KashiCooker {
+  addCollateral(amount: BigNumber, fromCoffin: boolean): UnderworldCooker {
     let share: BigNumber
     if (fromCoffin) {
       share = amount.lt(0) ? amount : toShare(this.pair.collateral, amount)
@@ -194,7 +194,7 @@ export default class KashiCooker {
     return this
   }
 
-  addAsset(amount: BigNumber, fromCoffin: boolean): KashiCooker {
+  addAsset(amount: BigNumber, fromCoffin: boolean): UnderworldCooker {
     let share: BigNumber
     if (fromCoffin) {
       share = toShare(this.pair.asset, amount)
@@ -216,7 +216,7 @@ export default class KashiCooker {
     return this
   }
 
-  removeAsset(fraction: BigNumber, toCoffin: boolean): KashiCooker {
+  removeAsset(fraction: BigNumber, toCoffin: boolean): UnderworldCooker {
     this.add(Action.REMOVE_ASSET, ethers.utils.defaultAbiCoder.encode(['int256', 'address'], [fraction, this.account]))
     if (!toCoffin) {
       const useNative = this.pair.asset.address === WNATIVE[this.chainId].address
@@ -232,7 +232,7 @@ export default class KashiCooker {
     return this
   }
 
-  removeCollateral(share: BigNumber, toCoffin: boolean): KashiCooker {
+  removeCollateral(share: BigNumber, toCoffin: boolean): UnderworldCooker {
     this.add(
       Action.REMOVE_COLLATERAL,
       ethers.utils.defaultAbiCoder.encode(['int256', 'address'], [share, this.account])
@@ -251,7 +251,7 @@ export default class KashiCooker {
     return this
   }
 
-  removeCollateralFraction(fraction: BigNumber, toCoffin: boolean): KashiCooker {
+  removeCollateralFraction(fraction: BigNumber, toCoffin: boolean): UnderworldCooker {
     this.add(
       Action.REMOVE_COLLATERAL,
       ethers.utils.defaultAbiCoder.encode(['int256', 'address'], [fraction, this.account])
@@ -270,7 +270,7 @@ export default class KashiCooker {
     return this
   }
 
-  borrow(amount: BigNumber, toCoffin: boolean, toAddress = ''): KashiCooker {
+  borrow(amount: BigNumber, toCoffin: boolean, toAddress = ''): UnderworldCooker {
     this.add(
       Action.BORROW,
       defaultAbiCoder.encode(['int256', 'address'], [amount, toAddress && toCoffin ? toAddress : this.account])
@@ -289,7 +289,7 @@ export default class KashiCooker {
     return this
   }
 
-  repay(amount: BigNumber, fromCoffin: boolean): KashiCooker {
+  repay(amount: BigNumber, fromCoffin: boolean): UnderworldCooker {
     if (!fromCoffin) {
       const useNative = this.pair.asset.address === WNATIVE[this.chainId].address
 
@@ -307,7 +307,7 @@ export default class KashiCooker {
     return this
   }
 
-  repayPart(part: BigNumber, fromCoffin: boolean): KashiCooker {
+  repayPart(part: BigNumber, fromCoffin: boolean): UnderworldCooker {
     if (!fromCoffin) {
       const useNative = this.pair.asset.address === WNATIVE[this.chainId].address
 
@@ -351,21 +351,21 @@ export default class KashiCooker {
       }
     }
 
-    const kashiPairCloneContract = new Contract(
+    const underworldPairCloneContract = new Contract(
       this.pair.address,
-      KASHIPAIR_ABI,
+      UNDERWORLD_ABI,
       getProviderOrSigner(this.library, this.account) as any
     )
 
     try {
       return {
         success: true,
-        tx: await kashiPairCloneContract.cook(this.actions, this.values, this.datas, {
+        tx: await underworldPairCloneContract.cook(this.actions, this.values, this.datas, {
           value: this.values.reduce((a, b) => a.add(b), ZERO),
         }),
       }
     } catch (error) {
-      console.error('KashiCooker Error: ', error)
+      console.error('UnderworldCooker Error: ', error)
       return {
         success: false,
         error: error,
