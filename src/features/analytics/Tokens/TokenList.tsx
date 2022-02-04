@@ -40,7 +40,6 @@ function TokenListName({ token }: TokenListNameProps): JSX.Element {
   return (
     <>
       <div className="flex items-center">
-        {/*@ts-ignore TYPE NEEDS FIXING*/}
         <CurrencyLogo className="rounded-full" currency={currency} size={40} />
         <div className="ml-4 text-lg font-bold text-high-emphesis">{token.symbol}</div>
       </div>
@@ -89,7 +88,7 @@ const TokenListColumns: Record<TokenListColumnType, Column> = {
     align: 'right',
   },
   priceChange: {
-    Header: 'Daily / Weekly % Change',
+    Header: '% Change',
     accessor: (row) => (
       <div>
         <ColoredNumber className="font-medium" number={row.change1d} percent={true} />
@@ -103,7 +102,7 @@ const TokenListColumns: Record<TokenListColumnType, Column> = {
     sortType: (a, b) => a.original.change1d - b.original.change1d,
   },
   volumeChange: {
-    Header: 'Daily / Weekly Volume',
+    Header: 'Volume',
     accessor: (row) => (
       <div>
         <div className="font-medium text-high-emphesis">{formatNumber(row.volume1d, true, false)}</div>

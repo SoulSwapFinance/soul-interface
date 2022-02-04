@@ -26,20 +26,20 @@
         },
         {
           "name": "Wrapped Fantom",
-          "address": "0xf1277d1Ed8AD466beddF92ef448A132661956621",
+          "address": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
           "symbol": "WFTM",
           "decimals": 18,
-          "chainId": 4002,
+          "chainId": 250,
           "logoURI": "https://cryptologos.cc/logos/fantom-ftm-logo.svg?v=003"
         }
       ],
       [
         {
           "name": "Wrapped Fantom",
-          "address": "0xf1277d1Ed8AD466beddF92ef448A132661956621",
+          "address": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
           "symbol": "WFTM",
           "decimals": 18,
-          "chainId": 4002,
+          "chainId": 250,
           "logoURI": "https://cryptologos.cc/logos/fantom-ftm-logo.svg?v=003"
         },
         {

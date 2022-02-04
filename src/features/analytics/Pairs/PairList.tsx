@@ -49,9 +49,7 @@ function PairListName({ pair }: PairListNameProps): JSX.Element {
         <DoubleCurrencyLogo
         //   className="-space-x-3"
         //   logoClassName="rounded-full"
-          // @ts-ignore TYPE NEEDS FIXING
           currency0={token0}
-          // @ts-ignore TYPE NEEDS FIXING
           currency1={token1}
           size={40}
         />
@@ -65,7 +63,6 @@ function PairListName({ pair }: PairListNameProps): JSX.Element {
   )
 }
 
-// @ts-ignore TYPE NEEDS FIXING
 const getApy = (volume, liquidity) => {
   const apy = aprToApy((((volume / 7) * 365 * 0.0025) / liquidity) * 100, 3650)
   if (apy > 1000) return '>10,000%'
@@ -76,28 +73,23 @@ const allColumns = [
   {
     Header: 'Pair',
     accessor: 'pair',
-    // @ts-ignore TYPE NEEDS FIXING
     Cell: (props) => <PairListName pair={props.value} />,
     align: 'left',
   },
   {
     Header: 'TVL',
     accessor: 'liquidity',
-    // @ts-ignore TYPE NEEDS FIXING
     Cell: (props) => formatNumberScale(props.value, true),
     align: 'right',
   },
   {
-    Header: 'Annual APY',
-    // @ts-ignore TYPE NEEDS FIXING
+    Header: 'APY',
     accessor: (row) => <div className="text-high-emphesis">{getApy(row.volume1w, row.liquidity)}</div>,
     align: 'right',
-    // @ts-ignore TYPE NEEDS FIXING
     sortType: (a, b) => a.original.volume1w / a.original.liquidity - b.original.volume1w / b.original.liquidity,
   },
   {
-    Header: 'Daily / Weekly Volume',
-    // @ts-ignore TYPE NEEDS FIXING
+    Header: 'Volume',
     accessor: (row) => (
       <div>
         <div className="font-medium text-high-emphesis">{formatNumber(row.volume1d, true, false)}</div>
@@ -107,7 +99,7 @@ const allColumns = [
     align: 'right',
   },
   {
-    Header: 'Daily / Weekly Fees',
+    Header: 'Fees',
     accessor: (row) => (
       <div>
         <div className="font-medium text-high-emphesis">{formatNumber(row.volume1d * 0.003, true, false)}</div>
@@ -122,15 +114,13 @@ const gainersColumns = [
   {
     Header: 'Pair',
     accessor: 'pair',
-    // @ts-ignore TYPE NEEDS FIXING
     Cell: (props) => <PairListName pair={props.value} />,
     disableSortBy: true,
     align: 'left',
   },
   {
-    Header: 'Daily / Weekly Liquidity Change',
+    Header: 'Liquidity',
     id: 'liquidity',
-    // @ts-ignore TYPE NEEDS FIXING
     accessor: (row) => (
       <div className="inline-flex flex-col">
         <div className="font-medium text-high-emphesis">
@@ -140,12 +130,10 @@ const gainersColumns = [
       </div>
     ),
     align: 'right',
-    // @ts-ignore TYPE NEEDS FIXING
     sortType: (a, b) => a.original.liquidityChangeNumber1d - b.original.liquidityChangeNumber1d,
   },
   {
-    Header: '%',
-    // @ts-ignore TYPE NEEDS FIXING
+    Header: '% Change',
     accessor: (row) => (
       <div className="inline-flex">
         <div>
@@ -155,12 +143,10 @@ const gainersColumns = [
       </div>
     ),
     align: 'right',
-    // @ts-ignore TYPE NEEDS FIXING
     sortType: (a, b) => a.original.liquidityChangePercent1d - b.original.liquidityChangePercent1d,
   },
   {
-    Header: 'Daily / Weekly Volume Change',
-    // @ts-ignore TYPE NEEDS FIXING
+    Header: 'Volume',
     accessor: (row) => (
       <div className="inline-flex flex-col">
         <div className="font-medium text-high-emphesis">
@@ -170,12 +156,10 @@ const gainersColumns = [
       </div>
     ),
     align: 'right',
-    // @ts-ignore TYPE NEEDS FIXING
     sortType: (a, b) => a.original.volumeChangeNumber1d - b.original.volumeChangeNumber1d,
   },
   {
-    Header: ' %',
-    // @ts-ignore TYPE NEEDS FIXING
+    Header: ' % Change',
     accessor: (row) => (
       <div className="inline-flex">
         <div>
@@ -185,7 +169,6 @@ const gainersColumns = [
       </div>
     ),
     align: 'right',
-    // @ts-ignore TYPE NEEDS FIXING
     sortType: (a, b) => a.original.volumeChangePercent1d - b.original.volumeChangePercent1d,
   },
 ]

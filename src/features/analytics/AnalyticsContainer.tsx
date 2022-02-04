@@ -40,10 +40,10 @@ export default function AnalyticsContainer({ children }): JSX.Element {
                 text: 'Tokens',
                 href: '/analytics/tokens',
               },
-              // {
-              //   text: 'CoffinBox',
-              //   href: '/analytics/coffinbox',
-              // },
+              {
+                text: 'CoffinBox',
+                href: '/analytics/coffinbox',
+              },
             ]}
           />
         </div>

@@ -56,7 +56,6 @@ export default function TopFarmsList({ farms }: TopFarmsListProps): JSX.Element 
       {
         Header: 'Token Pair',
         accessor: 'pair',
-        // @ts-ignore TYPE NEEDS FIXING
         Cell: (props) => <FarmListname pair={props.value} />,
         disableSortBy: true,
         align: 'left',
@@ -64,14 +63,12 @@ export default function TopFarmsList({ farms }: TopFarmsListProps): JSX.Element 
       {
         Header: 'ROI (1Y)',
         accessor: 'roi',
-        // @ts-ignore TYPE NEEDS FIXING
         Cell: (props) => formatPercent(props.value),
         align: 'right',
       },
       {
         Header: 'Rewards',
         accessor: 'rewards',
-        // @ts-ignore TYPE NEEDS FIXING
         Cell: (props) => props.value,
       },
     ],

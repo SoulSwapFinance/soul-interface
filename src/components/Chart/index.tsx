@@ -107,8 +107,8 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
   const [candlestickSeries, setCandlestickSeries] = useState<{ data: NumericalCandlestickDatum[] }[]>([{ data: [] }])
 
   const MAJOR_HIERARCHY = [
-    '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'.toLowerCase(), // WFTM
-    '0x04068da6c83afcfa0e13ba15a6696662335d5b75'.toLowerCase(), // USDC
+    '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'.toLowerCase(), // WFTM
+    '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75'.toLowerCase(), // USDC
   ]
 
   const inputAddress = inputCurrency?.isToken
@@ -306,7 +306,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
             />
             :             <iframe
             frameBorder={"none"}
-            src={'https://kek.tools/t/0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83/chart?&accent=B026FF'}
+            src={'https://kek.tools/t/0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83/chart?&accent=B026FF'}
             height={"480"}
             width={"100%"}
           />
