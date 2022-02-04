@@ -13,9 +13,9 @@ export interface CoffinBalance {
   symbol: string
   decimals: number
   balance: any
-  bentoBalance: any
+  coffinBalance: any
   wallet: any
-  bento: any
+  coffin: any
 }
 
 const BLACKLISTED = [

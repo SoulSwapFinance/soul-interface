@@ -1,7 +1,7 @@
 import { SwitchHorizontalIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { NATIVE } from '@sushiswap/core-sdk'
+import { NATIVE } from 'sdk'
 import { CoffinboxIcon, WalletIcon } from 'components/Icon'
 import { Feature } from 'enums/Feature'
 import ActionItem from 'features/trident/balances/ActionsModal/ActionItem'

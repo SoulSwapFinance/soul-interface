@@ -14,7 +14,7 @@ export const useCoffinOrWalletBalances = (
   )
 
   const balance = useCurrencyBalances(account, currencies)
-  const coffinBalance = useCoffinBalancesV2(tokenAddresses)
+  const { data: coffinBalance } = useCoffinBalancesV2(tokenAddresses)
 
   return useMemo(() => {
     if (!currencies.every((el) => !!el) || !coffinBalance) {
