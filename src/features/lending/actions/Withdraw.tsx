@@ -10,11 +10,10 @@ import { useActiveWeb3React } from 'services/web3'
 import { useUnderworldApprovalPending } from 'state/application/hooks'
 import React, { useState } from 'react'
 
-import { UnderworldApproveButton } from './Button'
-import SmartNumberInput from './SmartNumberInput'
-import TransactionReviewView from './TransactionReview'
-import WarningsView from './WarningsList'
-import { JSBI } from 'sdk'
+import { UnderworldApproveButton } from '../components/Button'
+import SmartNumberInput from '../components/SmartNumberInput'
+import TransactionReviewView from '../components/TransactionReview'
+import WarningsView from '../components/WarningsList'
 
 export default function Withdraw({ pair }: any): JSX.Element {
   const { account } = useActiveWeb3React()
@@ -31,19 +30,15 @@ export default function Withdraw({ pair }: any): JSX.Element {
 
   // Calculated
   const max = minimum(pair.maxAssetAvailable, pair.currentUserAssetAmount.value)
-  const displayValue = pinMax ? max : value
-  // .toFixed(pair.asset.tokenInfo.decimals) : value
+  const displayValue = pinMax ? max.toFixed(pair.asset.tokenInfo.decimals) : value
 
   const fraction = pinMax
     ? minimum(pair.userAssetFraction, pair.maxAssetAvailableFraction)
-    : Number(value) * pair.currentTotalAsset.base * pair.currentTotalAsset.value
-    // .toBigNumber(pair.asset.tokenInfo.decimals)
-    // .mulDiv(pair.currentTotalAsset.base, pair.currentAllAssets.value)
+    : value.toBigNumber(pair.asset.tokenInfo.decimals).mulDiv(pair.currentTotalAsset.base, pair.currentAllAssets.value)
 
   const warnings = new Warnings()
     .add(
-      pair.currentUserAssetAmount.value.lt(value),
-        // .toBigNumber(pair.asset.tokenInfo.decimals)),
+      pair.currentUserAssetAmount.value.lt(value.toBigNumber(pair.asset.tokenInfo.decimals)),
       i18n._(
         t`Please make sure your ${
           useCoffin ? 'CoffinBox' : 'wallet'
@@ -61,8 +56,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
 
   const transactionReview = new TransactionReview()
   if (displayValue && !warnings.broken) {
-    const amount = displayValue
-    // .toBigNumber(pair.asset.tokenInfo.decimals)
+    const amount = displayValue.toBigNumber(pair.asset.tokenInfo.decimals)
     const newUserAssetAmount = pair.currentUserAssetAmount.value.sub(amount)
     transactionReview.addTokenAmount(
       i18n._(t`Balance`),
@@ -72,21 +66,19 @@ export default function Withdraw({ pair }: any): JSX.Element {
     )
     transactionReview.addUSD(i18n._(t`Balance USD`), pair.currentUserAssetAmount.value, newUserAssetAmount, pair.asset)
 
-    const newUtilization = Number(e10(18)) * pair.currentBorrowAmount.value / pair.currentAllAssets.value - Number(amount)
-    // .mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.sub(amount))
-    transactionReview + pair.utilization.value + newUtilization
-    // .addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
+    const newUtilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.sub(amount))
+    transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
   }
 
   // Handlers
   async function onExecute(cooker: UnderworldCooker) {
     const fraction = pinMax
       ? minimum(pair.userAssetFraction, pair.maxAssetAvailableFraction)
-      : Number(value) * pair.currencyTotalAsset.base / pair.currentAllAssets.value
-          // .toBigNumber(pair.asset.tokenInfo.decimals)
-          // .mulDiv(pair.currentTotalAsset.base, pair.currentAllAssets.value)
+      : value
+          .toBigNumber(pair.asset.tokenInfo.decimals)
+          .mulDiv(pair.currentTotalAsset.base, pair.currentAllAssets.value)
 
-    // cooker.removeAsset(fraction, useCoffin)
+    cooker.removeAsset(fraction, useCoffin)
     return `${i18n._(t`Withdraw`)} ${pair.asset.tokenInfo.symbol}`
   }
 
@@ -99,7 +91,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
       <SmartNumberInput
         color="blue"
         token={pair.asset}
-        value={Number(displayValue).toString()}
+        value={displayValue}
         setValue={setValue}
         useCoffinTitleDirection="up"
         useCoffinTitle="to"
@@ -119,9 +111,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
         content={(onCook: any) => (
           <Button
             onClick={() => onCook(pair, onExecute)}
-            disabled={displayValue
-              // .toBigNumber(pair.asset.tokenInfo.decimals).lte(0) 
-              || warnings.broken}
+            disabled={displayValue.toBigNumber(pair.asset.tokenInfo.decimals).lte(0) || warnings.broken}
             fullWidth={true}
           >
             {i18n._(t`Withdraw`)}

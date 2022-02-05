@@ -1,8 +1,8 @@
 import React from 'react'
 import { Search } from 'react-feather'
 
-import Card from 'components/Card'
-import { classNames } from 'functions'
+import Card from '../../../components/Card'
+import { classNames } from '../../../functions'
 
 function MarketHeader({ type = 'Borrow', lists }: any) {
   if (lists.setTerm) {
@@ -33,7 +33,7 @@ function MarketHeader({ type = 'Borrow', lists }: any) {
               onChange={(e) => onSearch(e.target.value)}
               style={{ background: '#161522' }}
               value={lists[0].term}
-              placeholder="Search by Symbol"
+              placeholder="Search by symbol"
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-6 pointer-events-none">
               <Search size={16} />

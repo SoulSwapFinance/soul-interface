@@ -2,13 +2,12 @@ import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
 import React from 'react'
 
-import { Button } from '../../components/Button'
-import { formatPercent } from '../../functions'
-import { useCoffinBox } from '../../hooks'
+import { Button } from 'components/Button'
+import { formatPercent } from 'functions'
+import { useCoffinBox } from 'hooks'
 
 export default function Strategy({ token }) {
-    //   todo: enable harvest   //
-//   const { harvest } = useCoffinBox()
+  const { harvest } = useCoffinBox()
 
   return (
     <>
@@ -41,7 +40,7 @@ export default function Strategy({ token }) {
               variant="outlined"
               size="xs"
               className="w-full"
-            //   onClick={() => harvest(token.address, true)}
+              onClick={() => harvest(token.address, true)}
             >
               Rebalance
             </Button>

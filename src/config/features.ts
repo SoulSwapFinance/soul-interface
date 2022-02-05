@@ -16,7 +16,11 @@ const features: FeatureMap = {
     // Feature.INARI,
     // Feature.VESTING,
   ],
-  [ChainId.BSC]: [Feature.AMM, Feature.ANALYTICS],
+  [ChainId.BSC]: [
+    Feature.AMM, 
+    Feature.ANALYTICS,
+    Feature.UNDERWORLD
+  ],
 
   [ChainId.FANTOM]: [
     Feature.AMM,
@@ -24,8 +28,8 @@ const features: FeatureMap = {
     Feature.ANALYTICS,
     Feature.LIQUIDITY_MINING,
     Feature.LIMIT_ORDERS,
-    // Feature.COFFINBOX,
-    // Feature.UNDERWORLD
+    Feature.COFFINBOX,
+    Feature.UNDERWORLD
   ],
 
   [ChainId.FANTOM_TESTNET]: [Feature.AMM],

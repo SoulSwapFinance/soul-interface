@@ -25,6 +25,7 @@ import {
   ChainId,
   REAPER_ADDRESS,
   FACTORY_ADDRESS,
+  BORING_HELPER_ADDRESS,
   ENCHANT_ADDRESS,
   ENCHANT_HELPER_ADDRESS,
   ROUTER_ADDRESS,
@@ -258,9 +259,17 @@ export function useSoulFtmContract(withSignerIfPossible?: boolean): Contract | n
   return useContract(chainId && SOUL_FTM_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
 }
 
-export function useBoringHelperContract(withSignerIfPossible?: boolean): Contract | null {
-  // const { chainId } = useActiveWeb3React()
-  return useContract('0x26bbB91Ade07f995E1c5D1F4A050639763F4C44b', BORING_HELPER_ABI, withSignerIfPossible)
+export function useBoringHelperContract(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(
+    chainId
+      ? chainId === ChainId.FANTOM
+        ? '0x26bbB91Ade07f995E1c5D1F4A050639763F4C44b'
+        : BORING_HELPER_ADDRESS[chainId]
+      : undefined,
+    BORING_HELPER_ABI,
+    false
+  )
 }
 
 export function useSoulUsdcContract(withSignerIfPossible?: boolean): Contract | null {
