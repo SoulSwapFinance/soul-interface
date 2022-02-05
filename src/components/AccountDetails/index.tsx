@@ -88,6 +88,13 @@ const AccountDetails: FC<AccountDetailsProps> = ({
               </Typography>
             </div>
             <div className="flex items-center gap-2 space-x-3">
+              {account && (
+                <Copy className="text-purple" toCopy={account}>
+                  <Typography color="purple" variant="xs" weight={700}>
+                    {i18n._(t`Copy`)}
+                  </Typography>
+                </Copy>
+              )}
               {chainId && account && (
                 <ExternalLink
                   color="purple"
@@ -95,7 +102,7 @@ const AccountDetails: FC<AccountDetailsProps> = ({
                   href={chainId && getExplorerLink(chainId, ENSName || account, 'address')}
                 >
                   <Typography variant="xs" weight={700}>
-                    {i18n._(t`View Explorer`)}
+                    {i18n._(t`Explorer`)}
                   </Typography>
                 </ExternalLink>
               )}
@@ -106,16 +113,9 @@ const AccountDetails: FC<AccountDetailsProps> = ({
                   href={'/balances'}
                 >
                   <Typography variant="xs" weight={700}>
-                    {i18n._(t`View Balances`)}
+                    {i18n._(t`Balances`)}
                   </Typography>
                 </ExternalLink>
-              )}
-              {account && (
-                <Copy className="text-purple" toCopy={account}>
-                  <Typography color="purple" variant="xs" weight={700}>
-                    {i18n._(t`Copy Address`)}
-                  </Typography>
-                </Copy>
               )}
             </div>
           </div>
