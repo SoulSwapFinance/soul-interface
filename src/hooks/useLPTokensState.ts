@@ -87,10 +87,10 @@ const useLPTokensState = () => {
 
         // MAINNET
       } else 
-      if (chainId && [ChainId.MAINNET].includes(chainId)) {
+      if (chainId && [ChainId.ETHEREUM].includes(chainId)) {
         const requests: any = {
-          [ChainId.MAINNET]: [
-            `https://api.covalenthq.com/v1/${ChainId.MAINNET}/address/${String(
+          [ChainId.ETHEREUM]: [
+            `https://api.covalenthq.com/v1/${ChainId.ETHEREUM}/address/${String(
               account
             ).toLowerCase()}/stacks/uniswap_v2/balances/?key=ckey_cba3674f2ce5450f9d5dd290589`,
           ],
@@ -100,7 +100,7 @@ const useLPTokensState = () => {
 
         let userLP = []
 
-        if (chainId === ChainId.MAINNET) {
+        if (chainId === ChainId.ETHEREUM) {
           const { data } = await responses[0].json()
           userLP = data?.['uniswap_v2']?.balances
             ?.filter((balance: any) => balance.pool_token.balance !== '0')

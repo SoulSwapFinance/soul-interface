@@ -68,15 +68,12 @@ export default function SmartNumberInput({
               }}
               disabled={switchDisabled}
             >
-              {useCoffin ? 'Coffin' : 'Wallet'}
+              {useCoffin ? 'CoffinBox' : 'Wallet'}
             </Button>
           </span>
         </div>
         <div className="text-base text-right text-secondary" style={{ display: 'inline', cursor: 'pointer' }}>
-          {maxTitle} {formatNumber(
-            Number(max)
-            .toFixed(token.tokenInfo.decimals))
-            }
+          {maxTitle} {formatNumber(max.toFixed(token.tokenInfo.decimals))}
         </div>
       </div>
 
@@ -107,7 +104,7 @@ export default function SmartNumberInput({
               if (setPinMax) {
                 setPinMax(true)
               } else {
-                setValue(Number(max).toFixed(token.tokenInfo.decimals))
+                setValue(max.toFixed(token.tokenInfo.decimals))
               }
             }}
             className={'absolute right-4 focus:ring focus:ring-' + color}

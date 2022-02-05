@@ -19,7 +19,7 @@ export * from './seconds'
 
 export function useMasterChefV2Farms(swrConfig: SWRConfiguration = undefined) {
   const { chainId } = useActiveWeb3React()
-  const shouldFetch = chainId && chainId === ChainId.MAINNET
+  const shouldFetch = chainId && chainId === ChainId.ETHEREUM
   const { data } = useSWR(shouldFetch ? 'masterChefV2Farms' : null, () => getMasterChefV2Farms(), swrConfig)
   return useMemo(() => {
     if (!data) return []
@@ -29,7 +29,7 @@ export function useMasterChefV2Farms(swrConfig: SWRConfiguration = undefined) {
 
 export function useSoulSummonerFarms(swrConfig: SWRConfiguration = undefined) {
   const { chainId } = useActiveWeb3React()
-  const shouldFetch = chainId && chainId === ChainId.MAINNET
+  const shouldFetch = chainId && chainId === ChainId.ETHEREUM
   const { data } = useSWR(shouldFetch ? 'masterChefV2Farms' : null, () => getSoulSummonerFarms(), swrConfig) // TODO: update
   return useMemo(() => {
     if (!data) return []
@@ -51,7 +51,7 @@ export function useFarms(swrConfig: SWRConfiguration = undefined) {
 
 export function useMasterChefV2PairAddresses() {
   const { chainId } = useActiveWeb3React()
-  const shouldFetch = chainId && chainId === ChainId.MAINNET
+  const shouldFetch = chainId && chainId === ChainId.ETHEREUM
   const { data } = useSWR(shouldFetch ? ['masterChefV2PairAddresses', chainId] : null, (_) =>
     getMasterChefV2PairAddreses()
   )

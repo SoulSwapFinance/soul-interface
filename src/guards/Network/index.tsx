@@ -9,7 +9,6 @@ import { NETWORK_ICON, NETWORK_LABEL } from 'config/networks'
 import { Feature } from 'enums'
 import { SUPPORTED_NETWORKS } from 'modals/NetworkModal'
 import { useActiveWeb3React } from 'services/web3'
-// @ts-ignore TYPE NEEDS FIXING
 import cookie from 'cookie-cutter'
 import Image from 'next/image'
 import React, { FC, Fragment } from 'react'
@@ -39,15 +38,12 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
   return (
     <>
       <HeadlessUIModal.Controlled
-        // @ts-ignore TYPE NEEDS FIXING
         isOpen={!!account && !features[chainId].includes(feature)}
         onDismiss={() => null}
         transparent={true}
       >
         <div className="flex flex-col gap-7 justify-center p-4 mt-10 lg:mt-0">
-          <Typography variant="h1" className="max-w-2xl text-white text-center" weight={700}>
-            {/*@ts-ignore TYPE NEEDS FIXING*/}
-            {i18n._(t`Roll it back - this feature is not yet supported on ${NETWORK_LABEL[chainId]}.`)}
+          <Typography variant="h1" className="max-w-2xl text-white text-center" weight={700}>            {i18n._(t`Roll it back - this feature is not yet supported on ${NETWORK_LABEL[chainId]}.`)}
           </Typography>
           <Typography className="text-center">
             <Trans
@@ -65,12 +61,11 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
                 className="text-primary hover:text-white flex items-center flex-col gap-2 justify-start"
                 key={idx}
                 onClick={() => {
-                  // @ts-ignore TYPE NEEDS FIXING
                   const params = SUPPORTED_NETWORKS[key]
                   cookie.set('chainId', key)
                   if (key === ChainId.FANTOM.toString()) {
                     library?.send('wallet_switchEthereumChain', [{ chainId: '0xFA' }, account])
-                  } else if (key === ChainId.MAINNET.toString()) {
+                  } else if (key === ChainId.ETHEREUM.toString()) {
                     library?.send('wallet_switchEthereumChain', [{ chainId: '0x1' }, account])
                   } else {
                     library?.send('wallet_addEthereumChain', [params, account])
@@ -79,7 +74,6 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
               >
                 <div className="w-[40px] h-[40px]">
                   <Image
-                    // @ts-ignore TYPE NEEDS FIXING
                     src={NETWORK_ICON[key]}
                     alt="Switch Network"
                     className="rounded-md filter drop-shadow-currencyLogo"
@@ -87,7 +81,6 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
                     height="40px"
                   />
                 </div>
-                {/*@ts-ignore TYPE NEEDS FIXING*/}
                 <Typography className="text-sm">{NETWORK_LABEL[key]}</Typography>
               </button>
             ))}
@@ -100,7 +93,6 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
 }
 
 const NetworkGuard = (feature: Feature) => {
-  // @ts-ignore TYPE NEEDS FIXING
   return ({ children }) => <Component feature={feature}>{children}</Component>
 }
 

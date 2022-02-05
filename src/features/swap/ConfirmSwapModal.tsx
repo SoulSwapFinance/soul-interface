@@ -96,7 +96,7 @@ export default function ConfirmSwapModal({
     } for ${formatNumberScale(trade?.outputAmount?.toSignificant(6))} ${trade?.outputAmount?.currency?.symbol}`
 
   const pendingText2 = minerBribe
-    ? `Plus ${CurrencyAmount.fromRawAmount(Ether.onChain(ChainId.MAINNET), minerBribe).toSignificant(6)} ETH Miner Tip`
+    ? `Plus ${CurrencyAmount.fromRawAmount(Ether.onChain(ChainId.ETHEREUM), minerBribe).toSignificant(6)} ETH Miner Tip`
     : undefined
 
   const confirmationContent = useCallback(

@@ -1,16 +1,14 @@
-import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
-import useUnderworldApproveCallback, { CoffinApprovalState } from '../../hooks/useUnderworldApproveCallback'
-
-import Alert from '../../components/Alert'
-import { COFFIN_BOX_ADDRESS } from '../../constants/underworld'
-import { Button } from '../../components/Button'
-import Dots from '../../components/Dots'
-import React from 'react'
-import { WNATIVE } from '../../sdk'
 import { t } from '@lingui/macro'
-import { tryParseAmount } from '../../functions/parse'
-import { useActiveWeb3React } from 'services/web3'
 import { useLingui } from '@lingui/react'
+import { COFFIN_BOX_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
+import Alert from 'components/Alert'
+import { Button } from 'components/Button'
+import Dots from 'components/Dots'
+import { tryParseAmount } from 'functions/parse'
+import { ApprovalState, useApproveCallback } from 'hooks/useApproveCallback'
+import useUnderworldApproveCallback, { CoffinApprovalState } from 'hooks/useUnderworldApproveCallback'
+import { useActiveWeb3React } from 'services/web3'
+import React from 'react'
 
 export function UnderworldApproveButton({ content, color }: any): any {
   const { i18n } = useLingui()
@@ -32,7 +30,7 @@ export function UnderworldApproveButton({ content, color }: any): any {
       )}
 
       {showApprove && (
-        <Button color={color} onClick={onApprove} className="mb-4">
+        <Button color={color} onClick={onApprove} className="mb-4" fullWidth={true}>
           {i18n._(t`Approve Underworld`)}
         </Button>
       )}
@@ -53,16 +51,20 @@ export function TokenApproveButton({ children, value, token, needed, color }: an
   const showApprove =
     chainId &&
     token &&
-    token.address !== WNATIVE[chainId].address &&
+    token.address !== WNATIVE_ADDRESS[chainId] &&
     needed &&
     value &&
     (approvalState === ApprovalState.NOT_APPROVED || approvalState === ApprovalState.PENDING)
 
   return showApprove ? (
-    <Button color={color} onClick={approve} className="mb-4">
-      <Dots pending={approvalState === ApprovalState.PENDING} pendingTitle={`Approving ${token.symbol}`}>
-        {i18n._(t`Approve`)} {token.symbol}
-      </Dots>
+    <Button color={color} onClick={approve} className="mb-4" fullWidth={true}>
+      {approvalState === ApprovalState.PENDING ? (
+        <Dots>{`Approving ${token.symbol}`}</Dots>
+      ) : (
+        <>
+          {i18n._(t`Approve`)} {token.symbol}
+        </>
+      )}
     </Button>
   ) : (
     React.cloneElement(children, { color })

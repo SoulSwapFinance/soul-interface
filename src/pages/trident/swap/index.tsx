@@ -102,7 +102,7 @@ const Swap = () => {
           <div className="flex items-center justify-between py-2 pl-4 pr-2">
             <Typography weight={700}>{i18n._(t`Swap`)}</Typography>
             <div className="flex items-center justify-end gap-3">
-              {chainId === ChainId.MAINNET && (
+              {chainId === ChainId.ETHEREUM && (
                 <div className="items-center hidden h-full px-3 py-1 space-x-3 border border-transparent rounded cursor-pointer text-green md:flex hover:bg-dark-800 hover:border-dark-700">
                   <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path

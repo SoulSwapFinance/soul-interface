@@ -7,7 +7,7 @@ function useBridge() {
   const ethToFtm = useAnyswapEthOperaBridge()
   
   const swapOut = useCallback(async (amount, to) => {
-    if (ChainId.MAINNET) {
+    if (ChainId.ETHEREUM) {
       try {
         const result = await ethToFtm?.Swapout(amount, to)
         return result

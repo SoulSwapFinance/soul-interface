@@ -139,7 +139,7 @@ export default function useFarmRewards() {
             const rewardPerBlock = (pool.allocPoint / pool.owner.totalAllocPoint) * soulPerBlock
 
             const defaultReward = {
-                currency: SOUL_ADDRESS[ChainId.MAINNET],
+                currency: SOUL_ADDRESS[ChainId.ETHEREUM],
                 rewardPerBlock,
                 rewardPerDay: rewardPerBlock * blocksPerDay,
                 rewardPrice: soulPrice,
@@ -189,7 +189,7 @@ export default function useFarmRewards() {
 
                     const reward = {
                         currency: new Token(
-                            ChainId.MAINNET,
+                            ChainId.ETHEREUM,
                             getAddress(pool.rewardToken.id),
                             Number(pool.rewardToken.decimals),
                             pool.rewardToken.symbol,

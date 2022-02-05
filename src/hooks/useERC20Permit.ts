@@ -1,12 +1,22 @@
-import { Currency, CurrencyAmount, JSBI, MaxUint256, Percent, Token, TradeType, Trade as V2Trade } from '../sdk'
-import { DAI, SOUL, USDC } from '../constants/tokens'
+import { splitSignature } from '@ethersproject/bytes'
+import {
+  Currency,
+  CurrencyAmount,
+  JSBI,
+  MaxUint256,
+  Percent,
+  SOUL_ADDRESS,
+  Token,
+  Trade as V2Trade,
+  TradeType,
+} from 'sdk'
+import { DAI, USDC } from 'config/tokens'
+import { useActiveWeb3React } from 'services/web3'
 import { useMemo, useState } from 'react'
 
-import { splitSignature } from 'ethers/lib/utils'
-import { useActiveWeb3React } from 'services/web3'
+import { useSingleCallResult } from '../state/multicall/hooks'
 import { useEIP2612Contract } from './useContract'
 import useIsArgentWallet from './useIsArgentWallet'
-import { useSingleCallResult } from '../state/multicall/hooks'
 import useTransactionDeadline from './useTransactionDeadline'
 
 enum PermitType {
@@ -37,35 +47,16 @@ const PERMITTABLE_TOKENS: {
       name: 'Dai Stablecoin',
       version: '1',
     },
-    // [SOUL[1].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
+    // @ts-ignore TYPE NEEDS FIXING
+    [SOUL_ADDRESS[1].address]: { type: PermitType.AMOUNT, name: 'Soul Power' },
   },
-  // [4]: {
-  //   ['0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735']: {
-  //     type: PermitType.ALLOWED,
-  //     name: 'Dai Stablecoin',
-  //     version: '1',
-  //   },
-  //   // [SOUL[4].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
-  // },
-  // [3]: {
-  //   [SOUL[3].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
-  //   ['0x07865c6E87B9F70255377e024ace6630C1Eaa37F']: {
-  //     type: PermitType.AMOUNT,
-  //     name: 'USD Coin',
-  //     version: '2',
-  //   },
-  // },
-  // [5]: {
-  //   [SOUL[5].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
-  // },
-  // [42]: {
-  //   [SOUL[42].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
-  // },
   [250]: {
-    [SOUL[250].address]: { type: PermitType.AMOUNT, name: 'Soul Power' },
+    // @ts-ignore TYPE NEEDS FIXING
+    [SOUL_ADDRESS[250].address]: { type: PermitType.AMOUNT, name: 'Soul Power' },
   },
   [4002]: {
-    [SOUL[4002].address]: { type: PermitType.AMOUNT, name: 'Soul Power' },
+    // @ts-ignore TYPE NEEDS FIXING
+    [SOUL_ADDRESS[4002].address]: { type: PermitType.AMOUNT, name: 'Soul Power' },
   },
 }
 
@@ -145,6 +136,7 @@ export function useERC20Permit(
   const isArgentWallet = useIsArgentWallet()
   const nonceInputs = useMemo(() => [account ?? undefined], [account])
   const tokenNonceState = useSingleCallResult(eip2612Contract, 'nonces', nonceInputs)
+
   const permitInfo =
     overridePermitInfo ?? (chainId && tokenAddress ? PERMITTABLE_TOKENS[chainId]?.[tokenAddress] : undefined)
 
@@ -255,16 +247,16 @@ export function useERC20Permit(
       },
     }
   }, [
+    isArgentWallet,
     currencyAmount,
     eip2612Contract,
     account,
     chainId,
-    isArgentWallet,
     transactionDeadline,
     library,
-    tokenNonceState.loading,
     tokenNonceState.valid,
     tokenNonceState.result,
+    tokenNonceState.loading,
     tokenAddress,
     spender,
     permitInfo,
@@ -285,6 +277,22 @@ export function useV2LiquidityTokenPermit(
   return useERC20Permit(liquidityAmount, spender, REMOVE_V2_LIQUIDITY_PERMIT_INFO)
 }
 
+export function useTridentLiquidityTokenPermit(liquidityAmount?: CurrencyAmount<Token>, spender?: string) {
+  const eip2612Contract = useEIP2612Contract(liquidityAmount?.currency.address)
+  const name = useSingleCallResult(eip2612Contract, 'name')
+  const parsedName = useMemo<string | undefined>(() => (name?.result?.length ? name?.result[0] : undefined), [name])
+
+  return useERC20Permit(
+    liquidityAmount ? CurrencyAmount.fromRawAmount(liquidityAmount.currency, MaxUint256) : undefined,
+    spender,
+    {
+      version: '1',
+      name: parsedName ?? '',
+      type: PermitType.AMOUNT,
+    }
+  )
+}
+
 export function useERC20PermitFromTrade(
   trade: V2Trade<Currency, Currency, TradeType> | undefined,
   allowedSlippage: Percent
@@ -301,19 +309,5 @@ export function useERC20PermitFromTrade(
     // v2 router does not support
     trade instanceof V2Trade ? undefined : trade,
     null
-  )
-}
-
-const REMOVE_TRIDENT_LIQUIDITY_PERMIT_INFO: PermitInfo = {
-  version: '1',
-  name: 'SoulSwap LP Token',
-  type: PermitType.AMOUNT,
-}
-
-export function useTridentLiquidityTokenPermit(liquidityAmount?: CurrencyAmount<Token>, spender?: string) {
-  return useERC20Permit(
-    liquidityAmount ? CurrencyAmount.fromRawAmount(liquidityAmount.currency, MaxUint256) : undefined,
-    spender,
-    REMOVE_TRIDENT_LIQUIDITY_PERMIT_INFO
   )
 }

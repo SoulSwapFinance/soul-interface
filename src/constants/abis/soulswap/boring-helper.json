@@ -42,8 +42,8 @@
                 "type": "address"
             },
             {
-                "internalType": "contract ICoffinBox",
-                "name": "coffinBox_",
+                "internalType": "contract IBentoBox",
+                "name": "bentoBox_",
                 "type": "address"
             }
         ],
@@ -91,10 +91,10 @@
     },
     {
         "inputs": [],
-        "name": "coffinBox",
+        "name": "bentoBox",
         "outputs": [
             {
-                "internalType": "contract ICoffinBox",
+                "internalType": "contract IBentoBox",
                 "name": "",
                 "type": "address"
             }
@@ -144,7 +144,7 @@
                     },
                     {
                         "internalType": "uint256",
-                        "name": "coffinBalance",
+                        "name": "bentoBalance",
                         "type": "uint256"
                     }
                 ],
@@ -226,12 +226,12 @@
                     },
                     {
                         "internalType": "uint256",
-                        "name": "coffinBalance",
+                        "name": "bentoBalance",
                         "type": "uint256"
                     },
                     {
                         "internalType": "uint256",
-                        "name": "coffinAllowance",
+                        "name": "bentoAllowance",
                         "type": "uint256"
                     },
                     {
@@ -241,12 +241,12 @@
                     },
                     {
                         "internalType": "uint128",
-                        "name": "coffinAmount",
+                        "name": "bentoAmount",
                         "type": "uint128"
                     },
                     {
                         "internalType": "uint128",
-                        "name": "coffinShare",
+                        "name": "bentoShare",
                         "type": "uint128"
                     },
                     {
@@ -614,12 +614,12 @@
                 "type": "address"
             },
             {
-                "internalType": "contract IUnderworldPair[]",
+                "internalType": "contract IKashiPair[]",
                 "name": "pairsIn",
                 "type": "address[]"
             }
         ],
-        "name": "pollUnderworldPairs",
+        "name": "pollKashiPairs",
         "outputs": [
             {
                 "components": [
@@ -735,7 +735,7 @@
                         "type": "tuple"
                     }
                 ],
-                "internalType": "struct BoringHelperV1.UnderworldPairPoll[]",
+                "internalType": "struct BoringHelperV1.KashiPairPoll[]",
                 "name": "",
                 "type": "tuple[]"
             }
@@ -913,8 +913,8 @@
                 "type": "address"
             },
             {
-                "internalType": "contract ICoffinBox",
-                "name": "coffinBox_",
+                "internalType": "contract IBentoBox",
+                "name": "bentoBox_",
                 "type": "address"
             }
         ],

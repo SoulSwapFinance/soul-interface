@@ -14,7 +14,7 @@ const useSushiRoll = (version: 'v1' | 'v2' = 'v2') => {
 
   let from = ''
 
-  if (chainId === ChainId.MAINNET) {
+  if (chainId === ChainId.ETHEREUM) {
     from = 'Uniswap'
   }
 

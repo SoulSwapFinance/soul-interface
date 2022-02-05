@@ -302,7 +302,7 @@ export default function Migrate() {
 
   let exchange
 
-  if (chainId === ChainId.MAINNET) {
+  if (chainId === ChainId.ETHEREUM) {
     exchange = 'Uniswap'
   } else if (chainId === ChainId.FANTOM) {
     exchange = 'SpookySwap'

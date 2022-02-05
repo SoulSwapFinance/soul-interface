@@ -26,7 +26,7 @@ export const SUPPORTED_NETWORKS: {
     blockExplorerUrls: string[]
   }
 } = {
-  [ChainId.MAINNET]: {
+  [ChainId.ETHEREUM]: {
     chainId: '0x1',
     chainName: 'Ethereum',
     nativeCurrency: {
@@ -223,7 +223,7 @@ const NetworkModal: FC = () => {
         <HeadlessUiModal.Header header={i18n._(t`Select Network`)} onClose={toggleNetworkModal} />
         <div className="grid grid-flow-row-dense grid-cols-1 gap-4 overflow-y-auto md:grid-cols-2">
           {[
-            ChainId.MAINNET,
+            ChainId.ETHEREUM,
             // ChainId.MATIC,
             // ChainId.ARBITRUM,
             // ChainId.AVALANCHE,

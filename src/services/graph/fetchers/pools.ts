@@ -12,7 +12,7 @@ import {
 
 import { pager } from './pager'
 
-export const fetcher = async (chainId = ChainId.MAINNET, query, variables = undefined) =>
+export const fetcher = async (chainId = ChainId.ETHEREUM, query, variables = undefined) =>
   pager(`${GRAPH_HOST[chainId]}/subgraphs/name/${GRAPH_HOST[chainId]}`, query, variables)
 
 const gqlPoolTypeMap: Record<string, PoolType> = {
@@ -82,7 +82,7 @@ interface TridentPoolQueryResult {
 }
 
 export const getTridentPools = async (
-  chainId: ChainId = ChainId.MAINNET,
+  chainId: ChainId = ChainId.ETHEREUM,
   variables: {} = undefined
 ): Promise<TridentPool[]> => {
   const result: TridentPoolQueryResult = await fetcher(chainId, getTridentPoolsQuery, variables)
@@ -115,14 +115,14 @@ const formatBuckets = (buckets: PoolBucketQueryResult[]): PoolBucket[] =>
     transactionCount: Number(bucket.transactionCount),
   }))
 
-export const getPoolHourBuckets = async (chainId: ChainId = ChainId.MAINNET, variables): Promise<PoolBucket[]> => {
+export const getPoolHourBuckets = async (chainId: ChainId = ChainId.ETHEREUM, variables): Promise<PoolBucket[]> => {
   const result: PoolBucketQueryResult[] = Object.values(
     await fetcher(chainId, poolHourSnapshotsQuery, variables)
   )?.[0] as PoolBucketQueryResult[]
   return formatBuckets(result)
 }
 
-export const getPoolDayBuckets = async (chainId: ChainId = ChainId.MAINNET, variables): Promise<PoolBucket[]> => {
+export const getPoolDayBuckets = async (chainId: ChainId = ChainId.ETHEREUM, variables): Promise<PoolBucket[]> => {
   const result: PoolBucketQueryResult[] = Object.values(
     await fetcher(chainId, poolDaySnapshotsQuery, variables)
   )?.[0] as PoolBucketQueryResult[]

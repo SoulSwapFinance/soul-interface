@@ -16,7 +16,7 @@ export function getOracle(chainId: ChainId, address: string, data: string): IOra
   }
 }
 
-export function validateChainlinkOracleData(chainId = ChainId.MAINNET, collateral, asset, data) {
+export function validateChainlinkOracleData(chainId = ChainId.ETHEREUM, collateral, asset, data) {
   const mapping = CHAINLINK_PRICE_FEED_MAP[chainId]
   if (!mapping) {
     return false

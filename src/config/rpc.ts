@@ -1,7 +1,7 @@
 import { ChainId } from '../sdk'
 
 const rpc = {
-  [ChainId.MAINNET]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
+  [ChainId.ETHEREUM]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
   [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
   [ChainId.FANTOM]: 'https://rpc.fantom.network/',
   // [ChainId.FANTOM]: 'https://rpc.fantom.network',

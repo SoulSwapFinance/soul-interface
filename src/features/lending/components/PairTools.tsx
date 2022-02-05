@@ -1,15 +1,14 @@
-import React, { useMemo } from 'react'
 import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
+import { ACTION_ACCRUE } from 'sdk'
+import React, { useMemo } from 'react'
 
-import { Button } from '../../components/Button'
-import QuestionHelper from '../../components/QuestionHelper'
-import { UnderworldCooker } from '../../entities'
-import { formatPercent } from '../../functions'
-import { ZERO } from '../../functions/math'
-import useUnderworldApproveCallback from '../../hooks/useUnderworldApproveCallback'
-
-const ACTION_ACCRUE = 8;
+import { Button } from 'components/Button'
+import QuestionHelper from 'components/QuestionHelper'
+import { UnderworldCooker } from 'entities'
+import { formatPercent } from 'functions'
+import { ZERO } from 'functions/math'
+import useUnderworldApproveCallback from 'hooks/useUnderworldApproveCallback'
 
 export default function PairTools({ pair }) {
   const [, , , , onCook] = useUnderworldApproveCallback()

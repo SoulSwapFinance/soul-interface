@@ -158,6 +158,7 @@
     "@sentry/nextjs": "^6.17.1",
     "@sentry/tracing": "6.15.0",
     "@storybook/react": "6.3.0",
+    "@sushiswap/kashi-sdk": "^1.0.0-canary.10",
     "@sushiswap/limit-order-sdk": "^1.0.0-canary.20",
     "@sushiswap/sdk": "^5.0.0-canary.116",
     "@sushiswap/tines": "^1.0.0-canary.17",

@@ -5,9 +5,9 @@ import Dots from 'components/Dots'
 import Image from 'components/Image'
 import QuestionHelper from 'components/QuestionHelper'
 import { Feature } from 'enums'
-import { useUnderworldPairAddresses, useUnderworldPairs } from 'features/underworld/hooks'
-import ListHeaderWithSort from 'features/underworld/components/ListHeaderWithSort'
-import MarketHeader from 'features/underworld/components/MarketHeader'
+import { useUnderworldPairAddresses, useUnderworldPairs } from 'features/lending/hooks'
+import ListHeaderWithSort from 'features/lending/components/ListHeaderWithSort'
+import MarketHeader from 'features/lending/components/MarketHeader'
 import { formatNumber, formatPercent } from 'functions/format'
 import NetworkGuard from 'guards/Network'
 import { useInfiniteScroll } from 'hooks/useInfiniteScroll'
@@ -23,7 +23,10 @@ export default function Lend() {
   const { i18n } = useLingui()
 
   const addresses = useUnderworldPairAddresses()
+
   const pairs = useUnderworldPairs(addresses)
+
+  console.log('UNDERWORLD pairs', pairs)
 
   const positions = useSearchAndSort(
     pairs.filter((pair) => pair.userAssetFraction.gt(0)),
@@ -45,6 +48,16 @@ export default function Lend() {
         <meta
           key="description"
           name="description"
+          content="Underworld is a lending and margin trading platform, built upon CoffinBox, which allows for anyone to create customized and gas-efficient markets for lending, borrowing, and collateralizing a variety of DeFi tokens, stable coins, and synthetic assets."
+        />
+        <meta
+          key="twitter:description"
+          name="twitter:description"
+          content="Underworld is a lending and margin trading platform, built upon CoffinBox, which allows for anyone to create customized and gas-efficient markets for lending, borrowing, and collateralizing a variety of DeFi tokens, stable coins, and synthetic assets."
+        />
+        <meta
+          key="og:description"
+          property="og:description"
           content="Underworld is a lending and margin trading platform, built upon CoffinBox, which allows for anyone to create customized and gas-efficient markets for lending, borrowing, and collateralizing a variety of DeFi tokens, stable coins, and synthetic assets."
         />
       </Head>
@@ -163,6 +176,7 @@ export default function Lend() {
   )
 }
 
+// @ts-ignore TYPE NEEDS FIXING
 const LendEntry = ({ pair, userPosition = false }) => {
   return (
     <Link href={'/lend/' + pair.address}>
@@ -232,6 +246,7 @@ const LendEntry = ({ pair, userPosition = false }) => {
 
 Lend.Provider = RecoilRoot
 
+// @ts-ignore TYPE NEEDS FIXING
 const LendLayout = ({ children }) => {
   const { i18n } = useLingui()
   return (
@@ -239,7 +254,7 @@ const LendLayout = ({ children }) => {
       left={
         <Card
           className="h-full bg-dark-900"
-          backgroundImage="/images/kashi/deposit.png"
+          backgroundImage="/images/underworld/deposit.png"
           title={i18n._(t`Lend your assets, earn yield with no impermanent loss`)}
           description={i18n._(
             t`Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency.`

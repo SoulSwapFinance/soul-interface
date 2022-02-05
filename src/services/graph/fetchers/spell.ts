@@ -3,8 +3,8 @@ import { ChainId } from '../../../sdk'
 import { request } from 'graphql-request'
 
 const SPELL = {
-  [ChainId.MAINNET]: 'matthewlilley/bar',
+  [ChainId.ETHEREUM]: 'matthewlilley/bar',
 }
 
-export const spell = async (query, chainId = ChainId.MAINNET) =>
+export const spell = async (query, chainId = ChainId.ETHEREUM) =>
   request(`https://api.thegraph.com/subgraphs/name/${SPELL[chainId]}`, query)

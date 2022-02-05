@@ -15,15 +15,17 @@ import {
   SOUL_USDC_PAIR,
   LUX_ADDRESS,
   WLUM_ADDRESS,
+  STOP_LIMIT_ORDER_ADDRESS,
 } from '../constants/addresses'
 import {
   ARGENT_WALLET_DETECTOR_ABI,
-  ARGENT_WALLET_DETECTOR_MAINNET_ADDRESS,
+  ARGENT_WALLET_DETECTOR_ETHEREUM_ADDRESS,
 } from '../constants/abis/argent-wallet-detector'
 import {
   ChainId,
   REAPER_ADDRESS,
   FACTORY_ADDRESS,
+  BORING_HELPER_ADDRESS,
   ENCHANT_ADDRESS,
   ENCHANT_HELPER_ADDRESS,
   ROUTER_ADDRESS,
@@ -153,7 +155,7 @@ export function useWETH9Contract(withSignerIfPossible?: boolean): Contract | nul
 export function useArgentWalletDetectorContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(
-    chainId === ChainId.MAINNET ? ARGENT_WALLET_DETECTOR_MAINNET_ADDRESS : undefined,
+    chainId === ChainId.ETHEREUM ? ARGENT_WALLET_DETECTOR_ETHEREUM_ADDRESS : undefined,
     ARGENT_WALLET_DETECTOR_ABI,
     false
   )
@@ -164,7 +166,7 @@ export function useENSRegistrarContract(withSignerIfPossible?: boolean): Contrac
   let address: string | undefined
   if (chainId) {
     switch (chainId) {
-      case ChainId.MAINNET:
+      case ChainId.ETHEREUM:
         address = '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e'
         break
     }
@@ -257,9 +259,17 @@ export function useSoulFtmContract(withSignerIfPossible?: boolean): Contract | n
   return useContract(chainId && SOUL_FTM_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
 }
 
-export function useBoringHelperContract(withSignerIfPossible?: boolean): Contract | null {
-  // const { chainId } = useActiveWeb3React()
-  return useContract('0x26bbB91Ade07f995E1c5D1F4A050639763F4C44b', BORING_HELPER_ABI, withSignerIfPossible)
+export function useBoringHelperContract(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(
+    chainId
+      ? chainId === ChainId.FANTOM
+        ? '0x26bbB91Ade07f995E1c5D1F4A050639763F4C44b'
+        : BORING_HELPER_ADDRESS[chainId]
+      : undefined,
+    BORING_HELPER_ABI,
+    false
+  )
 }
 
 export function useSoulUsdcContract(withSignerIfPossible?: boolean): Contract | null {
@@ -317,7 +327,6 @@ export function useMasterChefContract(withSignerIfPossible?: boolean): Contract 
 
 export function useConstantProductPoolFactory(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  // @ts-ignore TYPE NEEDS FIXING // TODO
   return useContract(chainId && TRIDENT[chainId], FACTORY_ABI, withSignerIfPossible)
   // const factory = TRIDENT[chainId]?.[CHAIN_KEY[chainId]]?.contracts.ConstantProductPoolFactory
   // return useContract(factory?.address, factory?.abi, withSignerIfPossible)
@@ -325,7 +334,6 @@ export function useConstantProductPoolFactory(withSignerIfPossible?: boolean): C
 
 export function useStablePoolFactory(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  // @ts-ignore TYPE NEEDS FIXING
   return useContract(chainId && TRIDENT[chainId], FACTORY_ABI, withSignerIfPossible)
   // const factory = TRIDENT[chainId]?.[CHAIN_KEY[chainId]]?.contracts.HybridPoolFactory
   // return useContract(factory?.address, factory?.abi, withSignerIfPossible)
@@ -400,10 +408,6 @@ export function useUnderworldPairContract(withSignerIfPossible?: boolean): Contr
   return useContract(chainId && UNDERWORLD_ADDRESS[chainId], UNDERWORLD_ABI, withSignerIfPossible)
 }
 
-export function useUnderworldPairCloneContract(address: string, withSignerIfPossible?: boolean): Contract | null {
-  return useContract(address, UNDERWORLD_ABI, withSignerIfPossible)
-}
-
 // export function useSoulSwapSwapper(): Contract | null {
 //   const { chainId } = useActiveWeb3React()
 //   return useContract(chainId && SOULSWAP_SWAPPER_ADDRESS[chainId], BASE_SWAPPER_ABI, false)
@@ -427,7 +431,7 @@ export function useSushiRollContract(version: 'v1' | 'v2' = 'v2'): Contract | nu
   let address: string | undefined
   if (chainId) {
     switch (chainId) {
-      case ChainId.MAINNET:
+      case ChainId.ETHEREUM:
         address = '0x16E58463eb9792Bc236d8860F5BC69A81E26E32B'
         break
     }
@@ -440,7 +444,7 @@ export function useDashboardContract(): Contract | null {
   let address: string | undefined
   if (chainId) {
     switch (chainId) {
-      case ChainId.MAINNET:
+      case ChainId.ETHEREUM:
         address = '0xD132Ce8eA8865348Ac25E416d95ab1Ba84D216AF'
         break
     }
@@ -491,7 +495,7 @@ export function useCloneRewarderContract(address, withSignerIfPossibe?: boolean)
 
 export function useLimitOrderContract(withSignerIfPossibe?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(getVerifyingContract(chainId), LIMIT_ORDER_ABI, withSignerIfPossibe)
+  return useContract(STOP_LIMIT_ORDER_ADDRESS[chainId], LIMIT_ORDER_ABI, withSignerIfPossibe)
 }
 
 export function useLimitOrderHelperContract(withSignerIfPossible?: boolean): Contract | null {

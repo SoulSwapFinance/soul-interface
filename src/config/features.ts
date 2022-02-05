@@ -4,7 +4,7 @@ import { Feature } from 'enums'
 type FeatureMap = { readonly [chainId in ChainId]?: Feature[] }
 
 const features: FeatureMap = {
-  [ChainId.MAINNET]: [
+  [ChainId.ETHEREUM]: [
     Feature.AMM,
     // Feature.LIQUIDITY_MINING,
     // Feature.COFFINBOX,
@@ -16,14 +16,21 @@ const features: FeatureMap = {
     // Feature.INARI,
     // Feature.VESTING,
   ],
-  [ChainId.BSC]: [Feature.AMM, Feature.ANALYTICS],
+  [ChainId.BSC]: [
+    Feature.AMM, 
+    Feature.ANALYTICS,
+    // Feature.UNDERWORLD
+  ],
 
-  [ChainId.FANTOM]: [Feature.AMM,
+  [ChainId.FANTOM]: [
+    Feature.AMM,
     Feature.STAKING,
     Feature.ANALYTICS,
     Feature.LIQUIDITY_MINING,
-    Feature.LIMIT_ORDERS,
-    Feature.COFFINBOX],
+    // Feature.LIMIT_ORDERS,
+    Feature.COFFINBOX,
+    // Feature.UNDERWORLD
+  ],
 
   [ChainId.FANTOM_TESTNET]: [Feature.AMM],
   

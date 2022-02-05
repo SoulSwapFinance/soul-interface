@@ -43,7 +43,7 @@ const useMigrateState: () => MigrateState = () => {
 
       let exchange
 
-      if (chainId === ChainId.MAINNET) {
+      if (chainId === ChainId.ETHEREUM) {
         exchange = 'Uniswap'
       }
 

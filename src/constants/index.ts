@@ -5,7 +5,7 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 import { BigNumber } from 'ethers'
 
 export const RPC = {
-  [ChainId.MAINNET]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
+  [ChainId.ETHEREUM]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
   [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
   [ChainId.FANTOM]: 'https://rpc.fantom.network/',
   [ChainId.FANTOM_TESTNET]: 'https://rpc.testnet.fantom.network',
@@ -33,17 +33,17 @@ export const POOL_DENY = []
 export const AVERAGE_BLOCK_TIME_IN_SECS = 1
 
 export const AVERAGE_BLOCK_TIME = {
-  [ChainId.MAINNET]: 12,
+  [ChainId.ETHEREUM]: 12,
   [ChainId.FANTOM]: 1,
   [ChainId.BSC]: 3
 }
 
 export const ARCHER_RELAY_URI: { [chainId in ChainId]?: string } = {
-  [ChainId.MAINNET]: 'https://api.archerdao.io/v1/transaction',
+  [ChainId.ETHEREUM]: 'https://api.archerdao.io/v1/transaction',
 }
 
 export const ARCHER_GAS_URI: { [chainId in ChainId]?: string } = {
-  [ChainId.MAINNET]: 'https://api.archerdao.io/v1/gas',
+  [ChainId.ETHEREUM]: 'https://api.archerdao.io/v1/gas',
 }
 
 // export const COMMON_CONTRACT_NAMES: { [address: string]: string } = {
@@ -64,9 +64,9 @@ export const MERKLE_ROOT =
 // export const CUSTOM_BASES: {
 //     [chainId in ChainId]?: { [tokenAddress: string]: Token[] }
 // } = {
-//     [ChainId.MAINNET]: {
-//         [AMPL.address]: [DAI, WETH[ChainId.MAINNET]],
-//         [XSUSHI_CALL.address]: [XSUSHI, WETH[ChainId.MAINNET]],
+//     [ChainId.ETHEREUM]: {
+//         [AMPL.address]: [DAI, WETH[ChainId.ETHEREUM]],
+//         [XSUSHI_CALL.address]: [XSUSHI, WETH[ChainId.ETHEREUM]],
 //     },
 // }
 
@@ -237,14 +237,14 @@ export const BLOCKED_ADDRESSES: string[] = [
 
 // CoffinBox Swappers
 export const BASE_SWAPPER: { [chainId in ChainId]?: string } = {
-  [ChainId.MAINNET]: '0x0',
+  [ChainId.ETHEREUM]: '0x0',
 }
 
 // Boring Helper
 // export const BORING_HELPER_ADDRESS = '0x11Ca5375AdAfd6205E41131A4409f182677996E6'
 
 export const ANALYTICS_URL: { [chainId in ChainId]?: string } = {
-  [ChainId.MAINNET]: 'https://analytics.soulswap.finance',
+  [ChainId.ETHEREUM]: 'https://analytics.soulswap.finance',
   [ChainId.BSC]: 'https://analytics.soulswap.finance',
   [ChainId.FANTOM]: 'https://analytics.soulswap.finance',
   [ChainId.FANTOM_TESTNET]: 'https://analytics.soulswap.finance',

@@ -10,7 +10,7 @@ import { useActiveWeb3React } from 'services/web3'
 import { useBlockNumber } from '../../state/application/hooks'
 
 const REWARDERS = {
-  [ChainId.MAINNET]: 'some'
+  [ChainId.ETHEREUM]: 'some'
 }
 
 // const useRewarderContract = (farm) => {
@@ -37,7 +37,7 @@ const usePending = (farm) => {
 
   const contract = useMemo(
     () => ({
-      [ChainId.MAINNET]: aclxRewarder
+      [ChainId.ETHEREUM]: aclxRewarder
     }),
     [aclxRewarder]
   )

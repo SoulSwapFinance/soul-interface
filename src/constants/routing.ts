@@ -79,7 +79,7 @@ const MIRROR_ADDITIONAL_BASES: { [tokenAddress: string]: Token[] } = {
 
 // TODO: SDK should have two maps, WETH map and WNATIVE map.
 const WRAPPED_NATIVE_ONLY: ChainTokenList = {
-  [ChainId.MAINNET]: [WNATIVE[ChainId.MAINNET]],
+  [ChainId.ETHEREUM]: [WNATIVE[ChainId.ETHEREUM]],
    [ChainId.BSC]: [WNATIVE[ChainId.BSC]],
   [ChainId.FANTOM]: [WNATIVE[ChainId.FANTOM]],
   [ChainId.FANTOM_TESTNET]: [WNATIVE[ChainId.FANTOM_TESTNET]]
@@ -88,7 +88,7 @@ const WRAPPED_NATIVE_ONLY: ChainTokenList = {
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WRAPPED_NATIVE_ONLY,
-  // [ChainId.MAINNET]: [...WRAPPED_NATIVE_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC, RUNE, NFTX, STETH],
+  // [ChainId.ETHEREUM]: [...WRAPPED_NATIVE_ONLY[ChainId.ETHEREUM], DAI, USDC, USDT, WBTC, RUNE, NFTX, STETH],
   // [ChainId.MATIC]: [...WRAPPED_NATIVE_ONLY[ChainId.MATIC], MATIC.USDC, MATIC.WBTC, MATIC.DAI, MATIC.WETH, MATIC.USDT],
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], 
@@ -107,10 +107,10 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
 // export const ADDITIONAL_BASES: {
 //   [chainId: number]: { [tokenAddress: string]: Token[] }
 // } = {
-//   [ChainId.MAINNET]: {
+//   [ChainId.ETHEREUM]: {
 //     ...MIRROR_ADDITIONAL_BASES,
 //     '0xF16E4d813f4DcfDe4c5b44f305c908742De84eF0': [ETH2X_FLI],
-//     '0xb5083b964a0B6A447564657285AeE1E76524B3Db': [ENCHANT[ChainId.MAINNET]], // XSUSHI 25 Call [30 June 2021] // JUL 27th
+//     '0xb5083b964a0B6A447564657285AeE1E76524B3Db': [ENCHANT[ChainId.ETHEREUM]], // XSUSHI 25 Call [30 June 2021] // JUL 27th
 //     '0xB46F57e7Ce3a284d74b70447Ef9352B5E5Df8963': [UMA], // UMA 25 Call [30 June 2021]
 //     [FEI.address]: [TRIBE],
 //     [TRIBE.address]: [FEI],
@@ -142,8 +142,8 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
 export const CUSTOM_BASES: {
   [chainId: number]: { [tokenAddress: string]: Token[] }
 } = {
-  [ChainId.MAINNET]: {
-    [AMPL.address]: [DAI, WNATIVE[ChainId.MAINNET]],
+  [ChainId.ETHEREUM]: {
+    [AMPL.address]: [DAI, WNATIVE[ChainId.ETHEREUM]],
   },
 }
 
@@ -151,7 +151,7 @@ export const CUSTOM_BASES: {
  * Shows up in the currency select for swap and add liquidity
  */
 // export const COMMON_BASES: ChainCurrencyList = {
-//     [ChainId.MAINNET]: [ExtendedEther.onChain(1), DAI, USDC, USDT, WBTC, WETH9_EXTENDED[1]],
+//     [ChainId.ETHEREUM]: [ExtendedEther.onChain(1), DAI, USDC, USDT, WBTC, WETH9_EXTENDED[1]],
 //     [3]: [ExtendedEther.onChain(3), WETH9_EXTENDED[3]],
 //     [4]: [ExtendedEther.onChain(4), WETH9_EXTENDED[4]],
 //     [5]: [ExtendedEther.onChain(5), WETH9_EXTENDED[5]],
@@ -170,7 +170,7 @@ export const CUSTOM_BASES: {
  * Shows up in the currency select for swap and add liquidity
  */
 export const COMMON_BASES: ChainTokenList = {
-  // [ChainId.MAINNET]: [...WRAPPED_NATIVE_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC],
+  // [ChainId.ETHEREUM]: [...WRAPPED_NATIVE_ONLY[ChainId.ETHEREUM], DAI, USDC, USDT, WBTC],
 
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], 
@@ -197,7 +197,7 @@ export const COMMON_BASES: ChainTokenList = {
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WRAPPED_NATIVE_ONLY,
-  // [ChainId.MAINNET]: [...WRAPPED_NATIVE_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC],
+  // [ChainId.ETHEREUM]: [...WRAPPED_NATIVE_ONLY[ChainId.ETHEREUM], DAI, USDC, USDT, WBTC],
   [ChainId.FANTOM]: [...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], FANTOM.SOUL, FANTOM.DAI, FANTOM.USDC, FANTOM.FUSDT, FANTOM.WBTC, FANTOM.WETH],
   [ChainId.BSC]: [...WRAPPED_NATIVE_ONLY[ChainId.BSC], BSC.DAI, BSC.USD, BSC.USDC, BSC.USDT, BSC.BTCB, BSC.WETH],
 
@@ -206,11 +206,11 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
 export const PINNED_PAIRS: {
   readonly [chainId in ChainId]?: [Token, Token][]
 } = {
-  [ChainId.MAINNET]: [
-    [SOUL[ChainId.MAINNET] as Token, WNATIVE[ChainId.MAINNET]],
+  [ChainId.ETHEREUM]: [
+    [SOUL[ChainId.ETHEREUM] as Token, WNATIVE[ChainId.ETHEREUM]],
     [
-      new Token(ChainId.MAINNET, '0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643', 8, 'cDAI', 'Compound Dai'),
-      new Token(ChainId.MAINNET, '0x39AA39c021dfbaE8faC545936693aC917d5E7563', 8, 'cUSDC', 'Compound USD Coin'),
+      new Token(ChainId.ETHEREUM, '0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643', 8, 'cDAI', 'Compound Dai'),
+      new Token(ChainId.ETHEREUM, '0x39AA39c021dfbaE8faC545936693aC917d5E7563', 8, 'cUSDC', 'Compound USD Coin'),
     ],
     // [USDC, USDT],
     // [DAI, USDT],
