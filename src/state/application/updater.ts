@@ -17,7 +17,7 @@ export default function Updater(): null {
 
   useEffect(() => {
     if (chainId != ChainId.FANTOM 
-      && chainId != ChainId.MAINNET
+      && chainId != ChainId.ETHEREUM
       && chainId != ChainId.BSC
       ) {
       // @ts-ignore TYPE NEEDS FIXING
@@ -36,7 +36,7 @@ export default function Updater(): null {
     return () => {
       // if (chainId === ChainId.CELO) {
       if (chainId != ChainId.FANTOM 
-        && chainId != ChainId.MAINNET
+        && chainId != ChainId.ETHEREUM
         && chainId != ChainId.BSC
         ) {     
         // @ts-ignore TYPE NEEDS FIXING

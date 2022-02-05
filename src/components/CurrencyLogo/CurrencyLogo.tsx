@@ -7,7 +7,7 @@ import Logo from '../Logo'
 // import Logo, { UNKNOWN_ICON } from '../Logo'
 
 const BLOCKCHAIN = {
-  [ChainId.MAINNET]: 'ethereum',
+  [ChainId.ETHEREUM]: 'ethereum',
   [ChainId.BSC]: 'binance',
 //   [ChainId.CELO]: 'celo',
   [ChainId.FANTOM]: 'fantom',
@@ -71,7 +71,7 @@ const BinanceLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/mas
 // const TelosLogo = 'https://raw.githubusercontent.com/sushiswap/logos/main/token/telos.jpg'
 
 const LOGO: Record<ChainId, string> = {
-  [ChainId.MAINNET]: EthereumLogo,
+  [ChainId.ETHEREUM]: EthereumLogo,
 //   [ChainId.KOVAN]: EthereumLogo,
 //   [ChainId.RINKEBY]: EthereumLogo,
 //   [ChainId.ROPSTEN]: EthereumLogo,

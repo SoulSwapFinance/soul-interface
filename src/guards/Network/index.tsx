@@ -70,7 +70,7 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
                   cookie.set('chainId', key)
                   if (key === ChainId.FANTOM.toString()) {
                     library?.send('wallet_switchEthereumChain', [{ chainId: '0xFA' }, account])
-                  } else if (key === ChainId.MAINNET.toString()) {
+                  } else if (key === ChainId.ETHEREUM.toString()) {
                     library?.send('wallet_switchEthereumChain', [{ chainId: '0x1' }, account])
                   } else {
                     library?.send('wallet_addEthereumChain', [params, account])

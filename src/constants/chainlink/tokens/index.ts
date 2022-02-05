@@ -1,6 +1,6 @@
 import { ChainId } from '../../../sdk'
 
-import MAINNET from './mainnet'
+import ETHEREUM from './mainnet'
 
 export type ChainlinkToken = {
   symbol: string
@@ -10,5 +10,5 @@ export type ChainlinkToken = {
 }
 
 export const CHAINLINK_TOKENS: { [chainId in ChainId]?: ChainlinkToken[] } = {
-  [ChainId.MAINNET]: MAINNET
+  [ChainId.ETHEREUM]: ETHEREUM
 }

@@ -11,14 +11,14 @@ import { Web3Provider } from '@ethersproject/providers'
 import { CloverConnector } from '@clover-network/clover-connector'
 
 enum ChainId { // TODO
-  MAINNET = 1,
+  ETHEREUM = 1,
   BSC = 56,
   FANTOM = 250,
   // FANTOM_TESTNET = 4002
 }
 
 export const RPC = {
-  [ChainId.MAINNET]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
+  [ChainId.ETHEREUM]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
   [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
   [ChainId.FANTOM]: 'https://rpcapi.fantom.network',
   // [ChainId.FANTOM]: 'https://rpcapi.fantom.network/',
@@ -121,7 +121,7 @@ export const portis = new PortisConnector({
 
 // mainnet only
 export const walletlink = new WalletLinkConnector({
-  url: RPC[ChainId.MAINNET],
+  url: RPC[ChainId.ETHEREUM],
   appName: 'SoulSwap',
   appLogoUrl:
   'https://raw.github.com/SoulSwapFinance/icons/master/token/soul.jpg',

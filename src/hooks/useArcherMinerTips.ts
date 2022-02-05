@@ -21,7 +21,7 @@ export default function useArcherMinerTips(): { status: string; data: T } {
   useEffect(() => {
     const fetchData = async () => {
       setStatus('fetching')
-      const response = await fetch(ARCHER_GAS_URI[ChainId.MAINNET], {
+      const response = await fetch(ARCHER_GAS_URI[ChainId.ETHEREUM], {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ export default function useArcherMinerTips(): { status: string; data: T } {
       setData(json.data as T)
       setStatus('fetched')
     }
-    if (chainId == ChainId.MAINNET) fetchData()
+    if (chainId == ChainId.ETHEREUM) fetchData()
   }, [])
 
   return { status, data }

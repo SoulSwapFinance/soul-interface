@@ -8,9 +8,9 @@ import Card from 'components/Card'
 import Container from 'components/Container'
 import CurrencyInputPanel from 'components/CurrencyInputPanel'
 import { CHAINLINK_PRICE_FEED_MAP } from 'config/oracles/chainlink'
-// import { Feature } from 'enums'
+import { Feature } from 'enums'
 import { e10 } from 'functions/math'
-// import NetworkGuard from 'guards/Network'
+import NetworkGuard from 'guards/Network'
 import { useCoffinBoxContract } from 'hooks/useContract'
 import Layout from 'layouts/Underworld'
 import { useActiveWeb3React } from 'services/web3'
@@ -20,12 +20,7 @@ import { useTransactionAdder } from 'state/transactions/hooks'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useCallback } from 'react'
-import { CHAINLINK_ORACLE_ADDRESS } from 'constants/underworld'
-import NetworkGuard from 'guards/Network'
-import { Feature } from 'enums'
-
-// TODO : UPDATE ADDRESSES //
-const UNDERWORLD_ADDRESS = '0x0A497d994E18c581fbdCE5d51A3438D53e3540d6'
+import { CHAINLINK_ORACLE_ADDRESS, UNDERWORLD_ADDRESS } from 'constants/underworld'
 
 export type ChainlinkToken = {
   symbol: string

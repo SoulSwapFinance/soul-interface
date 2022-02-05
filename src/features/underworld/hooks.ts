@@ -29,7 +29,7 @@ import { useActiveWeb3React, useQueryFilter } from 'services/web3'
 import { useSingleCallResult } from 'state/multicall/hooks'
 import { useMemo } from 'react'
 
-const UNDERWORLD_ADDRESS = '0x0A497d994E18c581fbdCE5d51A3438D53e3540d6'
+const UNDERWORLD_ADDRESS = '0x94f2ae18250507506C77cefc14EE7B4b95d323B1'
 
 const BLACKLISTED_TOKENS = ['0xC6d54D2f624bc83815b49d9c2203b1330B841cA0']
 const BLACKLISTED_ORACLES = ['0x8f2CC3376078568a04eBC600ae5F0a036DBfd812']

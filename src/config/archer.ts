@@ -3,11 +3,11 @@ import { ChainId, JSBI } from '../sdk'
 import { BigNumber } from '@ethersproject/bignumber'
 
 export const ARCHER_RELAY_URI: { [chainId in ChainId]?: string } = {
-  [ChainId.MAINNET]: 'https://api.archerdao.io/v1/transaction',
+  [ChainId.ETHEREUM]: 'https://api.archerdao.io/v1/transaction',
 }
 
 export const ARCHER_GAS_URI: { [chainId in ChainId]?: string } = {
-  [ChainId.MAINNET]: 'https://api.archerdao.io/v1/gas',
+  [ChainId.ETHEREUM]: 'https://api.archerdao.io/v1/gas',
 }
 
 // default archer gas estimate, 250k wei

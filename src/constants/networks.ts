@@ -20,7 +20,7 @@ const Bsc = '/images/networks/bsc.png'
 // const Celo = '/images/networks/celo-network.jpg'
 
 export const NETWORK_ICON = {
-  [ChainId.MAINNET]: Mainnet,
+  [ChainId.ETHEREUM]: Mainnet,
   [ChainId.BSC]: Bsc,
   [ChainId.FANTOM]: Fantom,
   [ChainId.FANTOM_TESTNET]: Fantom,
@@ -46,7 +46,7 @@ export const NETWORK_ICON = {
 }
 
 export const NETWORK_LABEL: { [chainId in ChainId]?: string } = {
-  [ChainId.MAINNET]: 'Ethereum',
+  [ChainId.ETHEREUM]: 'Ethereum',
   [ChainId.BSC]: 'Binance',
   [ChainId.FANTOM]: 'Fantom',
   [ChainId.FANTOM_TESTNET]: 'Fantom Testnet',

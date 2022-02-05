@@ -1,5 +1,7 @@
 import { Currency, PoolState, TradeType, TridentTrade, Trade as LegacyTrade  } from 'sdk'
 
+export * from './AddressMap'
+
 export type TradeUnion =
   | TridentTrade<Currency, Currency, TradeType.EXACT_INPUT | TradeType.EXACT_OUTPUT>
   | LegacyTrade<Currency, Currency, TradeType.EXACT_INPUT | TradeType.EXACT_OUTPUT>

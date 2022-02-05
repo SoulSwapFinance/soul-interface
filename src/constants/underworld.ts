@@ -64,7 +64,7 @@ export const PROTOCOL_FEE_DIVISOR = BigNumber.from('100000')
 export const COFFIN_BOX_ADDRESS: {
   [chainId in ChainId]: string
 } = {
-  [ChainId.MAINNET]: '',
+  [ChainId.ETHEREUM]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xF539C37275e947F24480fAb9f7e302aE827570b2', // TODO: REVIEW
   [ChainId.FANTOM_TESTNET]: ''
@@ -73,18 +73,16 @@ export const COFFIN_BOX_ADDRESS: {
 export const UNDERWORLD_ADDRESS: {
   [chainId in ChainId]: string
 } = {
-  [ChainId.MAINNET]: '',
+  [ChainId.ETHEREUM]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x0A497d994E18c581fbdCE5d51A3438D53e3540d6', // TODO: REVIEW
+  [ChainId.FANTOM]: '0x94f2ae18250507506C77cefc14EE7B4b95d323B1', // TODO: REVIEW
   [ChainId.FANTOM_TESTNET]: '',
 }
-
-// export const UNDERWORLD_ADDRESS = ''
 
 export const SOULSWAP_SWAPPER_ADDRESS: {
   [chainId in ChainId]: string
 } = {
-  [ChainId.MAINNET]: '',
+  [ChainId.ETHEREUM]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '',
   [ChainId.FANTOM_TESTNET]: '',
@@ -93,14 +91,14 @@ export const SOULSWAP_SWAPPER_ADDRESS: {
 export const SOULSWAP_MULTISWAPPER_ADDRESS: {
   [chainId in ChainId]: string
 } = {
-  [ChainId.MAINNET]: '',
+  [ChainId.ETHEREUM]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '',
   [ChainId.FANTOM_TESTNET]: '',
 }
 
 export const SOULSWAP_MULTI_EXACT_SWAPPER_ADDRESS = {
-  [ChainId.MAINNET]: '',
+  [ChainId.ETHEREUM]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '',
   [ChainId.FANTOM_TESTNET]: '',
@@ -115,7 +113,7 @@ export const SOULSWAP_TWAP_1_ORACLE_ADDRESS = '0x0D51b575591F8f74a2763Ade75D3CDC
 export const CHAINLINK_ORACLE_ADDRESS = '0x00632CFe43d8F9f8E6cD0d39Ffa3D4fa7ec73CFB'
 
 export const SOUL_GUIDE_ADDRESS = {
-  [ChainId.MAINNET]: '',
+  [ChainId.ETHEREUM]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '',
   [ChainId.FANTOM_TESTNET]: '0x5A6B3Ce2736E9B731Fba73262884016b50c39184',

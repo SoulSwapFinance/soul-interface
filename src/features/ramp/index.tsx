@@ -6,11 +6,11 @@ import { useCallback } from 'react'
 import { useLingui } from '@lingui/react'
 
 const DEFAULT_NETWORK = {
-  [ChainId.MAINNET]: 'ethereum'
+  [ChainId.ETHEREUM]: 'ethereum'
 }
 
 const DEFAULT_CRYPTO_CURRENCY = {
-  [ChainId.MAINNET]: 'ETH'
+  [ChainId.ETHEREUM]: 'ETH'
 }
 
 export default function Buy() {

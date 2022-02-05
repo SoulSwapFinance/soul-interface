@@ -24,7 +24,7 @@ export abstract class AbstractOracle implements Oracle {
   data = ''
   warning = ''
   error = ''
-  chainId = ChainId.MAINNET
+  chainId = ChainId.ETHEREUM
   pair: any
   tokens: Token[]
   valid

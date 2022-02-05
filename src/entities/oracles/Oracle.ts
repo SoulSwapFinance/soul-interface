@@ -1,7 +1,7 @@
 import { ChainId } from 'sdk'
 
 export abstract class Oracle {
-  chainId = ChainId.MAINNET
+  chainId = ChainId.ETHEREUM
   address = ''
   data = ''
   name = ''

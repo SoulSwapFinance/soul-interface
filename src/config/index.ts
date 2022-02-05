@@ -11,7 +11,7 @@ const config = {
     '0xA7e5d5A720f06526557c513402f2e6B5fA20b008',
   ],
   // Network specific configuration
-  [ChainId.MAINNET]: {
+  [ChainId.ETHEREUM]: {
     averageBlockTimeInSeconds: 13,
     underworld: { blacklistedTokens: [], blacklistedOracles: ['0x8f2CC3376078568a04eBC600ae5F0a036DBfd812'] },
   },

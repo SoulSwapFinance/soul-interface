@@ -210,7 +210,7 @@ export function UnderworldProvider({ children }) {
     if (
       !account ||
       !chainId ||
-      ![ChainId.MAINNET, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId)
+      ![ChainId.ETHEREUM, ChainId.FANTOM, ChainId.FANTOM_TESTNET].includes(chainId)
     ) {
       return
     }

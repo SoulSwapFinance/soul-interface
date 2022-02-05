@@ -6,7 +6,7 @@ import BSC from './mappings/bsc'
 // import HECO from './mappings/heco'
 import FANTOM from './mappings/fantom'
 // import KOVAN from './mappings/kovan'
-import MAINNET from './mappings/mainnet'
+import ETHEREUM from './mappings/ethereum'
 // import MATIC from './mappings/matic'
 // import XDAI from './mappings/xdai'
 
@@ -25,7 +25,7 @@ export type ChainlinkPriceFeedMap = {
 export const CHAINLINK_PRICE_FEED_MAP: {
   [chainId in ChainId]?: ChainlinkPriceFeedMap
 } = {
-  [ChainId.MAINNET]: MAINNET,
+  [ChainId.ETHEREUM]: ETHEREUM,
   [ChainId.BSC]: BSC,
   [ChainId.FANTOM]: FANTOM,
   // [ChainId.KOVAN]: KOVAN,
