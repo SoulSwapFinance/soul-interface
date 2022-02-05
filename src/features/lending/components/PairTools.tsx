@@ -10,7 +10,6 @@ import { formatPercent } from 'functions'
 import { ZERO } from 'functions/math'
 import useUnderworldApproveCallback from 'hooks/useUnderworldApproveCallback'
 
-// @ts-ignore TYPE NEEDS FIXING
 export default function PairTools({ pair }) {
   const [, , , , onCook] = useUnderworldApproveCallback()
 

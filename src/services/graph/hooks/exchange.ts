@@ -128,7 +128,6 @@ export function useSoulPrice(swrConfig: SWRConfiguration = undefined) {
 }
 
 
-// @ts-ignore TYPE NEEDS FIXING
 export function useBundle(variables = undefined, swrConfig: SWRConfiguration = undefined) {
   const { chainId } = useActiveWeb3React()
   const { data } = useSWR(chainId ? [chainId, ethPriceQuery, stringify(variables)] : null, () => getBundle(), swrConfig)

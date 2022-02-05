@@ -19,7 +19,7 @@ const features: FeatureMap = {
   [ChainId.BSC]: [
     Feature.AMM, 
     Feature.ANALYTICS,
-    Feature.UNDERWORLD
+    // Feature.UNDERWORLD
   ],
 
   [ChainId.FANTOM]: [
@@ -27,9 +27,9 @@ const features: FeatureMap = {
     Feature.STAKING,
     Feature.ANALYTICS,
     Feature.LIQUIDITY_MINING,
-    Feature.LIMIT_ORDERS,
+    // Feature.LIMIT_ORDERS,
     Feature.COFFINBOX,
-    Feature.UNDERWORLD
+    // Feature.UNDERWORLD
   ],
 
   [ChainId.FANTOM_TESTNET]: [Feature.AMM],
