@@ -95,7 +95,7 @@ export default function Pair() {
           </div>
           <div className="text-right">
             <div>
-              <div className="text-lg text-secondary">{i18n._(t`Supply APR`)}</div>
+              <div className="text-lg text-secondary">{i18n._(t`APR`)}</div>
               <div className="text-2xl text-high-emphesis">{formatPercent(pair.supplyAPR.string)}</div>
             </div>
           </div>

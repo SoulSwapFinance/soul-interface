@@ -35,7 +35,7 @@ const OrdersTableToggle = () => {
               weight={700}
               className={classNames(
                 `/limit-order/${key}` === asPath
-                  ? 'bg-gradient-to-r from-blue to-pink bg-clip-text text-transparent'
+                  ? 'bg-gradient-to-r from-blue to-purple bg-clip-text text-transparent'
                   : '',
                 'font-bold text-sm text-high-emphesis'
               )}
@@ -44,7 +44,7 @@ const OrdersTableToggle = () => {
             </Typography>
             <div
               className={classNames(
-                `/limit-order/${key}` === asPath ? 'relative bg-gradient-to-r from-blue to-pink h-[3px] w-full' : ''
+                `/limit-order/${key}` === asPath ? 'relative bg-gradient-to-r from-blue to-purple h-[3px] w-full' : ''
               )}
             />
           </div>

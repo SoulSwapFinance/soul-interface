@@ -137,7 +137,7 @@ const VaultListItem = ({ farm }) => {
                 {account && (
                   <Button
                     variant="outlined"
-                    color="pink"
+                    color="purple"
                     size="xs"
                     onClick={() => {
                       if (!balance.equalTo(ZERO)) {
@@ -227,7 +227,7 @@ const VaultListItem = ({ farm }) => {
                 {account && (
                   <Button
                     variant="outlined"
-                    color="pink"
+                    color="purple"
                     size="xs"
                     onClick={() => {
                       if (!amount.equalTo(ZERO)) {

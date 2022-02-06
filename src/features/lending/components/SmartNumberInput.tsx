@@ -7,7 +7,7 @@ import Input from 'components/Input'
 import { formatNumber } from 'functions/format'
 
 type SmartNumberInputProps = {
-  color: 'blue' | 'pink'
+  color: 'blue' | 'purple'
   token: any
   value: string
   setValue: any

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Search } from 'react-feather'
 
-import Card from '../../../components/Card'
-import { classNames } from '../../../functions'
+import Card from 'components/Card'
+import { classNames } from 'functions'
 
 function MarketHeader({ type = 'Borrow', lists }: any) {
   if (lists.setTerm) {
@@ -17,7 +17,7 @@ function MarketHeader({ type = 'Borrow', lists }: any) {
 
   return (
     <Card.Header
-      className={classNames('border-b-8', type === 'Borrow' ? 'bg-dark-pink border-pink' : 'bg-dark-blue border-blue')}
+      className={classNames('border-b-8', type === 'Borrow' ? 'bg-dark-purple border-purple' : 'bg-dark-blue border-blue')}
     >
       <div className="flex flex-col items-center justify-between w-full md:flex-row">
         <div className="flex items-center">
@@ -25,10 +25,10 @@ function MarketHeader({ type = 'Borrow', lists }: any) {
         </div>
 
         <div className="flex justify-end w-full py-4 md:py-0">
-          <div className="relative w-full max-w-md">
+          {/* <div className="relative w-full max-w-md">
             <input
               className={`py-3 pl-4 pr-14 rounded w-full focus:outline-none focus:ring ${
-                type === 'Borrow' ? 'focus:ring-pink' : 'focus:ring-blue'
+                type === 'Borrow' ? 'focus:ring-purple' : 'focus:ring-blue'
               }`}
               onChange={(e) => onSearch(e.target.value)}
               style={{ background: '#161522' }}
@@ -38,7 +38,7 @@ function MarketHeader({ type = 'Borrow', lists }: any) {
             <div className="absolute inset-y-0 right-0 flex items-center pr-6 pointer-events-none">
               <Search size={16} />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </Card.Header>

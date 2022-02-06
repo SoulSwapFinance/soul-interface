@@ -225,13 +225,14 @@ export function useUnderworldPairs(addresses = []) {
           / Number(pair.currentAllAssets.value)
 
         // The percentage of assets that is borrowed out right now
-        pair.utilization = Number(e10(18)) * pair.currentBorrowAmount / pair.currentAllAssets.value
+        pair.utilization = Number(1e18) * pair.currentBorrowAmount / pair.currentAllAssets.value
 
         // Interest per year received by lenders as of now
         pair.supplyAPR = takeFee(
           Number(pair.interestPerYear)
           * Number(pair.utilization) 
-          / Number(1e18))
+          / 1e18
+          )
   
         // Interest payable by borrowers per year as of now
         pair.currentInterestPerYear = interestAccrue(pair, pair.interestPerYear)
@@ -240,14 +241,16 @@ export function useUnderworldPairs(addresses = []) {
         pair.currentSupplyAPR = takeFee(
           pair.currentInterestPerYear
           * pair.utilization
-          / 1e18)
+          / 1e18
+          )
 
         // The user's amount of collateral (stable, doesn't accrue)
         pair.userCollateralAmount = easyAmount(toAmount(pair.collateral, pair.userCollateralShare), pair.collateral)
 
         // The user's amount of assets (stable, doesn't accrue)
         pair.currentUserAssetAmount = easyAmount(
-          pair.userAssetFraction.mulDiv(pair.currentAllAssets.value, pair.totalAsset.base),
+          pair.userAssetFraction
+          * pair.currentAllAssets.value / pair.totalAsset.base,
           pair.asset
         )
 
@@ -295,7 +298,7 @@ export function useUnderworldPairs(addresses = []) {
         pair.maxBorrowable.safe < pair.maxAssetAvailable ?
         pair.maxBorrowable.safe : pair.maxAssetAvailable
 
-        pair.safeMaxRemovable = Zero
+        pair.safeMaxRemovable = 0
 
         pair.health =
          pair.currentUserBorrowAmount.value

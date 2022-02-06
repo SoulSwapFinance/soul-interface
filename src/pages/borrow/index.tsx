@@ -21,7 +21,7 @@ import MarketHeader from 'features/lending/components/MarketHeader'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
 
-
+const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
 export default function Borrow() {
   const { i18n } = useLingui()
   const addresses = useUnderworldPairAddresses()
@@ -106,7 +106,7 @@ export default function Borrow() {
                     <div key={pair.address}>
                       <Link href={'/borrow/' + pair.address}>
                         <a className="block text-high-emphesis">
-                          <div className="grid items-center grid-cols-4 gap-4 px-4 py-4 text-sm rounded md:grid-cols-6 lg:grid-cols-7 align-center bg-dark-800 hover:bg-dark-pink">
+                          <div className="grid items-center grid-cols-4 gap-4 px-4 py-4 text-sm rounded md:grid-cols-6 lg:grid-cols-7 align-center bg-dark-800 hover:bg-dark-purple">
                             <div className="hidden space-x-2 md:flex">
                               <Image
                                 height={48}
@@ -217,7 +217,7 @@ export default function Borrow() {
               <div key={pair.address}>
                 <Link href={'/borrow/' + String(pair.address).toLowerCase()}>
                   <a className="block text-high-emphesis">
-                    <div className="grid items-center grid-cols-4 gap-4 px-4 py-4 text-sm rounded md:grid-cols-6 lg:grid-cols-7 align-center bg-dark-800 hover:bg-dark-pink">
+                    <div className="grid items-center grid-cols-4 gap-4 px-4 py-4 text-sm rounded md:grid-cols-6 lg:grid-cols-7 align-center bg-dark-800 hover:bg-dark-purple">
                       <div className="flex flex-col items-start sm:flex-row sm:items-center">
                         <div className="hidden space-x-2 md:flex">
                           <Image
@@ -298,7 +298,7 @@ const BorrowLayout = ({ children }) => {
       left={
         <Card
           className="h-full bg-dark-900"
-          backgroundImage="/images/underworld/borrow.png"
+          backgroundImage= {BORROW_IMG}
           title={i18n._(t`Borrow assets and leverage up`)}
           description={i18n._(
             t`Borrowing allows you to obtain liquidity without selling. Your borrow limit depends on the amount of deposited collateral. You will be able to borrow up to 75% of your collateral and repay at any time with accrued interest.`
