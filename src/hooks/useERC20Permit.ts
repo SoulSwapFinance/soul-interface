@@ -47,17 +47,15 @@ const PERMITTABLE_TOKENS: {
       name: 'Dai Stablecoin',
       version: '1',
     },
-    // @ts-ignore TYPE NEEDS FIXING
-    [SOUL_ADDRESS[1].address]: { type: PermitType.AMOUNT, name: 'Soul Power' },
+    [SOUL_ADDRESS[1]]: { type: PermitType.AMOUNT, name: 'Soul Power' },
   },
   [250]: {
-    // @ts-ignore TYPE NEEDS FIXING
-    [SOUL_ADDRESS[250].address]: { type: PermitType.AMOUNT, name: 'Soul Power' },
+    [DAI.address]: { type: PermitType.ALLOWED, name: 'Dai Stablecoin', version: '1' },
+    [SOUL_ADDRESS[250]]: { type: PermitType.AMOUNT, name: 'Soul Power' },
   },
-  [4002]: {
-    // @ts-ignore TYPE NEEDS FIXING
-    [SOUL_ADDRESS[4002].address]: { type: PermitType.AMOUNT, name: 'Soul Power' },
-  },
+  // [4002]: {
+    // [SOUL[4002].address]: { type: PermitType.AMOUNT, name: 'Soul Power' },
+  // },
 }
 
 export enum UseERC20PermitState {
