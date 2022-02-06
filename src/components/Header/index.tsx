@@ -47,12 +47,12 @@ function AppBar(): JSX.Element {
             <div className="px-4 py-1">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <NavLink href="/exchange/swap">
+                  <NavLink href="/landing">
                     <Image src="/logo.png" alt="Soul" width="40" height="40" />
                   </NavLink>
 
                   <div className="flex space-x-2">
-                    <div className="flex space-x-2">
+                    <div className="flex space-x-3">
                       <NavLink href="/exchange/swap">
                         <a
                           id={`swap-nav-link`}
@@ -68,7 +68,7 @@ function AppBar(): JSX.Element {
                             id={`pool-nav-link`}
                             className="w-full relative ml-6 md:p-2"
                           >
-                            {i18n._(t`POOL`)}
+                            {i18n._(t`LIQUIDITY`)}
                           </a>
                         </NavLink>
                       )}
@@ -98,20 +98,20 @@ function AppBar(): JSX.Element {
                           {i18n._(t`DATA`)}
                         </a>
                       </NavLink>
-                      <NavLink href={'/lend'}>
-                        <a
-                          id={`lend-nav-link`}
-                          className="md:block w-full relative ml-6 md:p-2"
-                        >
-                          {i18n._(t`LEND`)}
-                        </a>
-                      </NavLink>
                       <NavLink href={'/launchpad'}>
                         <a
                           id={`launchpad-nav-link`}
                           className="hidden md:block w-full relative ml-6 md:p-2"
                         >
                           {i18n._(t`LAUNCH`)}
+                        </a>
+                      </NavLink>
+                      <NavLink href={'/luxor'}>
+                        <a
+                          id={`luxor-nav-link`}
+                          className="hidden md:block w-full relative ml-6 md:p-2"
+                        >
+                          {i18n._(t`LUXOR`)}
                         </a>
                       </NavLink>
 

@@ -115,6 +115,12 @@ export function useCvxPrice(swrConfig: SWRConfiguration = undefined) {
   return data
 }
 
+// @ts-ignore TYPE NEEDS FIXING
+// export function useSushiPrice(swrConfig: SWRConfiguration = undefined) {
+//   const { data } = useSWR(['sushiPrice'], () => getSushiPrice(), swrConfig)
+//   return data
+// }
+
 export function useSoulPrice(swrConfig: SWRConfiguration = undefined) {
   const { data } = useSWR(['soulPrice'], () => getSoulPrice(), swrConfig)
   return data

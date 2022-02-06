@@ -1,6 +1,6 @@
 import { ChainId } from '../sdk'
 
-const RPC = {
+const rpc = {
   [ChainId.ETHEREUM]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
   [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
   [ChainId.FANTOM]: 'https://rpc.fantom.network/',
@@ -28,4 +28,4 @@ const RPC = {
 //   [ChainId.CELO]: 'https://forno.celo.org',
 }
 
-export default RPC
+export default rpc
