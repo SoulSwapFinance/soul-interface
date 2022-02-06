@@ -196,7 +196,7 @@ const useLimitOrderExecute: UseLimitOrderExecute = () => {
       try {
         dispatch(setLimitOrderAttemptingTxn(true))
         // await order?
-        //     .signOrderWithProvider(chainId || 250, library)
+            // .signOrderWithProvider(chainId || 1, library)
 
         // const resp = await order?.send()
         // if (resp.success) {
@@ -214,6 +214,7 @@ const useLimitOrderExecute: UseLimitOrderExecute = () => {
         addPopup({
           txn: {
             hash: '',
+            // @ts-ignore TYPE NEEDS FIXING
             summary: `Error: ${e?.response?.data?.data}`,
             success: false,
           },
