@@ -79,11 +79,12 @@ export function getUSDValue(amount: number, token: any): number {
   : null
 }
 
-export function getUSDString(amount: BigNumberish, token: any): string {
-  return amount ? BigNumber.from(amount)
-    .mul(token.usd)
-    .div(e10(token?.decimals ? token.decimals : token.tokenInfo.decimals))
-    .toFixed(USD[token?.chainId ? token.chainId : token.tokenInfo.chainId].decimals)
+export function getUSDString(amount: number, token: any): string {
+  let decimals = token?.decimals ? token.decimals : token.tokenInfo.decimals
+  return amount ? (Number(amount)
+    * Number(token.usd)
+    / 10 ** decimals).toString()
+    // .toFixed(USD[token?.chainId ? token.chainId : token.tokenInfo.chainId].decimals)
   : null
 }
 

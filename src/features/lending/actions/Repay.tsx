@@ -35,6 +35,7 @@ const DEFAULT_UPDATE_ORACLE = true
 
 export default function Repay({ pair }: RepayProps) {
   const { account, chainId } = useActiveWeb3React()
+  let multiplier = 1e16 * 75
 
   // State
   const [useCoffinRepay, setUseCoffinRepay] = useState<boolean>(pair.asset.coffinBalance > 0)
@@ -62,28 +63,40 @@ export default function Repay({ pair }: RepayProps) {
     ? BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
     : pair.asset.balance
 
-  const displayUpdateOracle = pair.currentExchangeRate.gt(0) ? updateOracle : true
+  const displayUpdateOracle = pair.currentExchangeRate > 0 ? updateOracle : true
 
   const displayRepayValue = pinRepayMax
     ? minimum(pair.currentUserBorrowAmount.value, balance).toFixed(pair.asset.tokenInfo.decimals)
     : repayValue
 
-  const nextUserBorrowAmount = pair.currentUserBorrowAmount.value.sub(
-    displayRepayValue.toBigNumber(pair.asset.tokenInfo.decimals)
-  )
+  const nextUserBorrowAmount = pair.currentUserBorrowAmount.value - Number(displayRepayValue)
 
-  const nextMinCollateralOracle = nextUserBorrowAmount.mulDiv(pair.oracleExchangeRate, e10(16).mul('75'))
-  const nextMinCollateralSpot = nextUserBorrowAmount.mulDiv(pair.spotExchangeRate, e10(16).mul('75'))
-  const nextMinCollateralStored = nextUserBorrowAmount.mulDiv(
-    displayUpdateOracle ? pair.oracleExchangeRate : pair.currentExchangeRate,
-    e10(16).mul('75')
-  )
-  const nextMinCollateralMinimum = maximum(nextMinCollateralOracle, nextMinCollateralSpot, nextMinCollateralStored)
-  const nextMaxRemoveCollateral = maximum(
-    pair.userCollateralAmount.value.sub(nextMinCollateralMinimum.mul(100).div(95)),
-    ZERO
-  )
-  const maxRemoveCollateral = nextMaxRemoveCollateral.toFixed(pair.collateral.tokenInfo.decimals)
+  const nextMinCollateralOracle 
+    = nextUserBorrowAmount * pair.oracleExchangeRate / multiplier
+
+  const nextMinCollateralSpot 
+    = nextUserBorrowAmount * pair.spotExchangeRate / multiplier
+  
+  const nextMinCollateralStored 
+    = nextUserBorrowAmount *
+      Number(displayUpdateOracle) ? pair.oracleExchangeRate : pair.currentExchangeRate
+      / multiplier
+
+  const nextMinCollateralMinimum 
+    // = maximum(nextMinCollateralOracle, nextMinCollateralSpot, nextMinCollateralStored)
+    = nextMinCollateralOracle > nextMinCollateralSpot
+    && nextMinCollateralOracle > nextMinCollateralStored
+    ? nextMinCollateralOracle
+    : nextMinCollateralSpot > nextMinCollateralOracle
+    && nextMinCollateralSpot > nextMinCollateralStored
+    ? nextMinCollateralSpot
+    : nextMinCollateralStored
+
+  let removeCollatoral = pair.userCollateralAmount.value - Number(nextMinCollateralMinimum) * 100 / 95
+  const nextMaxRemoveCollateral = removeCollatoral > 0 ? removeCollatoral : 0
+
+  const maxRemoveCollateral 
+    = nextMaxRemoveCollateral
 
   const displayRemoveValue = pinRemoveMax ? maxRemoveCollateral : removeValue
 
@@ -118,25 +131,40 @@ export default function Repay({ pair }: RepayProps) {
           .toBigNumber(pair.collateral.tokenInfo.decimals)
       : ZERO
 
-  // const nextUserCollateralValue = pair.userCollateralAmount.value.add(collateralValue.toBigNumber(pair.collateral.tokenInfo.decimals)).add(extraCollateral)
+  // const nextUserCollateralValue = pair.userCollateralAmount.value + Number(collateralValue) + Number(extraCollateral)
 
-  const nextUserCollateralAmount = pair.userCollateralAmount.value.sub(
-    displayRemoveValue.toBigNumber(pair.collateral.tokenInfo.decimals)
-  )
+  const nextUserCollateralAmount 
+  = pair.userCollateralAmount.value 
+    - Number(displayRemoveValue)
 
-  const nextMaxBorrowableOracle = nextUserCollateralAmount.mulDiv(e10(16).mul('75'), pair.oracleExchangeRate)
-  const nextMaxBorrowableSpot = nextUserCollateralAmount.mulDiv(e10(16).mul('75'), pair.spotExchangeRate)
-  const nextMaxBorrowableStored = nextUserCollateralAmount.mulDiv(
-    e10(16).mul('75'),
-    displayUpdateOracle ? pair.oracleExchangeRate : pair.currentExchangeRate
-  )
-  const nextMaxBorrowMinimum = minimum(nextMaxBorrowableOracle, nextMaxBorrowableSpot, nextMaxBorrowableStored)
-  const nextMaxBorrowSafe = nextMaxBorrowMinimum.mulDiv('95', '100').sub(pair.currentUserBorrowAmount.value)
-  const nextMaxBorrowPossible = maximum(minimum(nextMaxBorrowSafe, pair.maxAssetAvailable), ZERO)
+  const nextMaxBorrowableOracle 
+    = nextUserCollateralAmount * multiplier / pair.oracleExchangeRate
+  
+  const nextMaxBorrowableSpot 
+    = nextUserCollateralAmount * multiplier / pair.spotExchangeRate
+  
+  const nextMaxBorrowableStored 
+    = nextUserCollateralAmount * multiplier / 
+    Number(displayUpdateOracle) ? pair.oracleExchangeRate : pair.currentExchangeRate
+
+  const nextMaxBorrowMinimum 
+    // = minimum(nextMaxBorrowableOracle, nextMaxBorrowableSpot, nextMaxBorrowableStored)
+    = nextMaxBorrowableOracle < nextMaxBorrowableSpot
+    && nextMaxBorrowableOracle < nextMaxBorrowableStored ? nextMaxBorrowableOracle
+    : nextMaxBorrowableSpot < nextMaxBorrowableOracle
+    && nextMaxBorrowableSpot < nextMaxBorrowableStored ? nextMaxBorrowableSpot
+    : nextMaxBorrowableStored
+
+  const nextMaxBorrowSafe 
+    = nextMaxBorrowMinimum * 95 / 100 - pair.currentUserBorrowAmount.value
+
+  let minBorrow = nextMaxBorrowSafe < pair.maxAssetAvailable ? nextMaxBorrowSafe : pair.maxAssetAvailable
+  const nextMaxBorrowPossible = minBorrow > 0 ? minBorrow : 0
 
   const nextHealth = pair.currentUserBorrowAmount.value
-    .sub(displayRepayValue.toBigNumber(pair.asset.tokenInfo.decimals))
-    .mulDiv(BigNumber.from('1000000000000000000'), nextMaxBorrowMinimum)
+    - Number(displayRepayValue)
+    * 1000000000000000000 
+    / nextMaxBorrowMinimum
 
   const transactionReview = new TransactionReview()
 
@@ -150,20 +178,25 @@ export default function Repay({ pair }: RepayProps) {
     transactionReview.addPercentage('Health', pair.health.value, nextHealth)
   }
 
+  let maxCollatoral 
+    // = maximum(pair.userCollateralAmount.value.sub(nextMinCollateralMinimum), ZERO)
+    = pair.userCollatoralAmount - Number(nextMinCollateralMinimum) > 0 ?
+    pair.userCollatoralAmount - Number(nextMinCollateralMinimum) : 0
+
   const warnings = new Warnings()
     .addError(
       assetNative && !useCoffinRepay && pinRepayMax,
       `You cannot MAX repay ${pair.asset.tokenInfo.symbol} directly from your wallet. Please deposit your ${pair.asset.tokenInfo.symbol} into the CoffinBox first, then repay. Because your debt is slowly accrueing interest we can't predict how much it will be once your transaction gets mined.`
     )
     .addError(
-      displayRemoveValue.toBigNumber(pair.collateral.tokenInfo.decimals).gt(pair.userCollateralAmount.value),
+      displayRemoveValue > (pair.userCollateralAmount.value),
       'You have insufficient collateral. Please enter a smaller amount or repay more.'
     )
     .addError(
-      displayRepayValue.toBigNumber(pair.asset.tokenInfo.decimals).gt(pair.currentUserBorrowAmount.value),
+      displayRepayValue > pair.currentUserBorrowAmount.value,
       "You can't repay more than you owe. To fully repay, please click the 'max' button.",
       new Warning(
-        balance?.lt(displayRepayValue.toBigNumber(pair.asset.tokenInfo.decimals)),
+        balance < displayRepayValue,
         `Please make sure your ${
           useCoffinRepay ? 'CoffinBox' : 'wallet'
         } balance is sufficient to repay and then try again.`,
@@ -171,18 +204,16 @@ export default function Repay({ pair }: RepayProps) {
       )
     )
     .addError(
-      displayRemoveValue
-        .toBigNumber(pair.collateral.tokenInfo.decimals)
-        .gt(maximum(pair.userCollateralAmount.value.sub(nextMinCollateralMinimum), ZERO)),
+      Number(displayRemoveValue) > maxCollatoral,
       'Removing this much collateral would put you into insolvency.',
       new Warning(
-        displayRemoveValue.toBigNumber(pair.collateral.tokenInfo.decimals).gt(nextMaxRemoveCollateral),
+        Number(displayRemoveValue) > Number(nextMaxRemoveCollateral),
         'Removing this much collateral would put you very close to insolvency.'
       )
     )
 
   const removeValueSet =
-    !displayRemoveValue.toBigNumber(pair.collateral.tokenInfo.decimals).isZero() ||
+    displayRemoveValue != 0 ||
     (pinRemoveMax && pair.userCollateralShare.gt(ZERO))
 
   const repayValueSet = !displayRepayValue.toBigNumber(pair.asset.tokenInfo.decimals).isZero()
@@ -215,8 +246,8 @@ export default function Repay({ pair }: RepayProps) {
   const actionDisabled =
     (!swap &&
       !trade &&
-      displayRepayValue.toBigNumber(pair.asset.tokenInfo.decimals).lte(0) &&
-      displayRemoveValue.toBigNumber(pair.collateral.tokenInfo.decimals).lte(0) &&
+      Number(displayRepayValue) <= 0 &&
+      displayRemoveValue <= 0 &&
       (!pinRemoveMax || pair.userCollateralShare.isZero())) ||
     warnings.some((warning) => warning.breaking)
 
@@ -280,7 +311,7 @@ export default function Repay({ pair }: RepayProps) {
 
       summary = 'Repay All'
     } else {
-      if (pinRepayMax && pair.userBorrowPart.gt(0) && balance.gte(pair.currentUserBorrowAmount.value)) {
+      if (pinRepayMax && pair.userBorrowPart > 0 && balance >= pair.currentUserBorrowAmount.value) {
         cooker.repayPart(pair.userBorrowPart, useCoffinRepay)
         summary = 'Repay Max'
       } else if (displayRepayValue.toBigNumber(pair.asset.tokenInfo.decimals).gt(0)) {
@@ -288,13 +319,13 @@ export default function Repay({ pair }: RepayProps) {
         summary = 'Repay'
       }
       if (
-        displayRemoveValue.toBigNumber(pair.collateral.tokenInfo.decimals).gt(0) ||
+        displayRemoveValue > 0 ||
         (pinRemoveMax && pair.userCollateralShare > 0)
       ) {
         const share =
           pinRemoveMax &&
-          (nextUserBorrowAmount.isZero() ||
-            (pinRepayMax && pair.userBorrowPart.gt(0) && balance.gte(pair.currentUserBorrowAmount.value)))
+          (nextUserBorrowAmount == 0 ||
+            (pinRepayMax && pair.userBorrowPart > 0 && balance >= pair.currentUserBorrowAmount.value))
             ? pair.userCollateralShare
             : toShare(pair.collateral, 
               Number(displayRemoveValue))
@@ -332,7 +363,7 @@ export default function Repay({ pair }: RepayProps) {
       <SmartNumberInput
         color="pink"
         token={pair.collateral}
-        value={displayRemoveValue}
+        value={displayRemoveValue.toString()}
         setValue={setRemoveCollateralValue}
         useCoffinTitleDirection="up"
         useCoffinTitle={`Remove ${pair.collateral.tokenInfo.symbol} to`}
@@ -345,8 +376,8 @@ export default function Repay({ pair }: RepayProps) {
           pair.currentUserBorrowAmount.value.eq(displayRepayValue.toBigNumber(pair.asset.tokenInfo.decimals)) ||
           pair.currentUserBorrowAmount.value.isZero()
         }
-        disabled={swap || pair.userCollateralAmount.value.isZero()}
-        switchDisabled={pair.userCollateralAmount.value.isZero()}
+        disabled={swap || pair.userCollateralAmount.value == 0}
+        switchDisabled={pair.userCollateralAmount.value == 0}
       />
 
       {!pair.currentUserBorrowAmount.value.isZero() && (

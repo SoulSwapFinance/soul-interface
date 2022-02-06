@@ -255,12 +255,12 @@ export default function Borrow({ pair }: BorrowProps) {
   }
 
   const actionDisabled =
-    (collateralValue.toBigNumber(pair.collateral.tokenInfo.decimals).lte(0) &&
-      borrowValue.toBigNumber(pair.asset.tokenInfo.decimals).lte(0)) ||
+    (Number(collateralValue) <= 0 &&
+      Number(borrowValue) <= 0) ||
     collateralWarnings.broken ||
     (borrowValue.length > 0 && borrowWarnings.broken) ||
     (swap && priceImpactSeverity > 3 && !isExpertMode) ||
-    (pair.userCollateralAmount.value.isZero() && !collateralValueSet)
+    (pair.userCollateralAmount.value == 0 && !collateralValueSet)
 
   // Handlers
   async function onExecute(cooker: UnderworldCooker): Promise<string> {

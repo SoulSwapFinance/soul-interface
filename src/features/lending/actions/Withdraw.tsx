@@ -38,11 +38,12 @@ export default function Withdraw({ pair }: any): JSX.Element {
 
   const fraction = pinMax
     ? minimum(pair.userAssetFraction, pair.maxAssetAvailableFraction)
-    : value.toBigNumber(pair.asset.tokenInfo.decimals).mulDiv(pair.currentTotalAsset.base, pair.currentAllAssets.value)
+    // : value.toBigNumber(pair.asset.tokenInfo.decimals).mulDiv(pair.currentTotalAsset.base, pair.currentAllAssets.value)
+    : Number(value) * pair.currentTotalAsset.base / pair.currentAllAssets.value
 
   const warnings = new Warnings()
     .add(
-      pair.currentUserAssetAmount.value.lt(value.toBigNumber(pair.asset.tokenInfo.decimals)),
+      pair.currentUserAssetAmount.value < value,
       i18n._(
         t`Please make sure your ${
           useCoffin ? 'CoffinBox' : 'wallet'
@@ -51,7 +52,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
       true
     )
     .add(
-      pair.maxAssetAvailableFraction.lt(fraction),
+      pair.maxAssetAvailableFraction < fraction,
       i18n._(
         t`The isn't enough liquidity available at the moment to withdraw this amount. Please try withdrawing less or later.`
       ),
@@ -75,7 +76,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
       = Number(1e18)
       * pair.currentBorrowAmount.value
       / (pair.currentAllAssets.value - amount)
-      
+
     transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
   }
 
