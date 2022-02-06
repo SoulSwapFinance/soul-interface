@@ -56,19 +56,19 @@ const LimitOrderReviewModal: FC<LimitOrderReviewModal> = ({ parsedAmounts, trade
     >
       <div className="flex flex-col gap-4">
         <HeadlessUiModal.Header
-          header={i18n._(t`Confirm order`)}
+          header={i18n._(t`Confirm Order`)}
           onClose={() => dispatch(setLimitOrderShowReview(false))}
         />
         <HeadlessUiModal.BorderedContent className="flex flex-col gap-2 bg-dark-1000/40">
           <Typography weight={700} variant="sm" className="text-secondary">
-            {i18n._(t`You'll pay`)}
+            {i18n._(t`Pay`)}
           </Typography>
           <ListPanel items={[<ListPanel.CurrencyAmountItem amount={parsedAmounts?.inputAmount} key={0} />]} />
           <div className="flex justify-center mt-2 -mb-2">
             <ArrowDownIcon width={14} className="text-secondary" />
           </div>
           <Typography weight={700} variant="sm" className="text-secondary justify-end">
-            {i18n._(t`You'll receive`)}
+            {i18n._(t`Receive`)}
           </Typography>
           <ListPanel items={[<ListPanel.CurrencyAmountItem amount={parsedAmounts?.outputAmount} key={0} />]} />
         </HeadlessUiModal.BorderedContent>

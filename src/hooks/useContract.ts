@@ -95,7 +95,6 @@ import anyswapEthOperaBridge_ABI from '../constants/abis/soulswap/bridge/anyswap
 import ROUTER_ACTION_ABI from '../constants/abis/soulswap/bridge/router-action.json'
 
 // unused
-import MEOWSHI_ABI from '../constants/abis/meowshi.json'
 import MERKLE_DISTRIBUTOR_ABI from '../constants/abis/merkle-distributor.json'
 import MULTICALL2_ABI from '../constants/abis/multicall2.json'
 import PENDING_ABI from '../constants/abis/pending.json'
