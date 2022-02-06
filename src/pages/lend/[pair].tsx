@@ -200,7 +200,7 @@ const PairLayout = ({ children }) => {
                 </div>
               </div>
             </div>
-            {pair?.utilization.value.gt(0) && (
+            {pair?.utilization.value > 0 && (
               <div className="flex justify-between">
                 <div className="text-lg text-secondary">{i18n._(t`Health`)}</div>
                 <div className="flex items-center">

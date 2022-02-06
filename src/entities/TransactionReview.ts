@@ -26,42 +26,42 @@ export class TransactionReview extends Array<Line> {
     return this
   }
 
-  public addTokenAmount(name: string, from: BigNumber, to: BigNumber, token: any): this {
+  public addTokenAmount(name: string, from: number, to: number, token: any): this {
     this.add(
       name,
-      formatNumber(from.toFixed(token.tokenInfo.decimals)) + ' ' + token.tokenInfo.symbol,
-      formatNumber(to.toFixed(token.tokenInfo.decimals)) + ' ' + token.tokenInfo.symbol,
-      from.eq(to) ? Direction.FLAT : from.lt(to) ? Direction.UP : Direction.DOWN
+      formatNumber(token.tokenInfo.decimals) + ' ' + token.tokenInfo.symbol,
+      formatNumber(token.tokenInfo.decimals) + ' ' + token.tokenInfo.symbol,
+      from = to ? Direction.FLAT : from < to ? Direction.UP : Direction.DOWN
     )
     return this
   }
 
-  public addUSD(name: string, from: BigNumber, to: BigNumber, token: any): this {
+  public addUSD(name: string, from: number, to: number, token: any): this {
     this.add(
       name,
       formatNumber(getUSDString(from, token), true),
       formatNumber(getUSDString(to, token), true),
-      from.eq(to) ? Direction.FLAT : from.lt(to) ? Direction.UP : Direction.DOWN
+      from = to ? Direction.FLAT : from < to ? Direction.UP : Direction.DOWN
     )
     return this
   }
 
-  public addPercentage(name: string, from: BigNumber, to: BigNumber): this {
+  public addPercentage(name: string, from: number, to: number): this {
     this.add(
       name,
       formatPercent(from.toFixed(16)),
       formatPercent(to.toFixed(16)),
-      from.eq(to) ? Direction.FLAT : from.lt(to) ? Direction.UP : Direction.DOWN
+      from = to ? Direction.FLAT : from < to ? Direction.UP : Direction.DOWN
     )
     return this
   }
 
-  public addRate(name: string, from: BigNumber, to: BigNumber, pair: any): this {
+  public addRate(name: string, from: number, to: number, pair: any): this {
     this.add(
       name,
       formatNumber(from.toFixed(18 + pair.collateral.tokenInfo.decimals - pair.asset.tokenInfo.decimals)),
       formatNumber(to.toFixed(18 + pair.collateral.tokenInfo.decimals - pair.asset.tokenInfo.decimals)),
-      from.eq(to) ? Direction.FLAT : from.lt(to) ? Direction.UP : Direction.DOWN
+      from = (to) ? Direction.FLAT : from < to ? Direction.UP : Direction.DOWN
     )
     return this
   }

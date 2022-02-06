@@ -236,13 +236,13 @@ export default function Borrow({ pair }: BorrowProps) {
     transactionReview.addPercentage('Borrow APR', pair.interestPerYear.value, pair.currentInterestPerYear.value)
   }
 
-  let actionName = 'Nothing to do'
+  let actionName = 'Enter Amount'
 
   if (collateralValueSet) {
     if (borrowValueSet) {
       actionName = trade ? 'Borrow, swap and add collateral' : 'Add collateral and borrow'
     } else {
-      actionName = 'Add collateral'
+      actionName = 'Add Collateral'
     }
   } else if (borrowValueSet) {
     actionName = trade ? 'Borrow, swap and add as collateral' : 'Borrow'

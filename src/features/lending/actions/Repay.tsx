@@ -37,7 +37,7 @@ export default function Repay({ pair }: RepayProps) {
   const { account, chainId } = useActiveWeb3React()
 
   // State
-  const [useCoffinRepay, setUseCoffinRepay] = useState<boolean>(pair.asset.coffinBalance.gt(0))
+  const [useCoffinRepay, setUseCoffinRepay] = useState<boolean>(pair.asset.coffinBalance > 0)
   const [useCoffinRemove, setUseCoffinRemoveCollateral] = useState<boolean>(true)
 
   const [repayValue, setRepayAssetValue] = useState('')
@@ -144,7 +144,7 @@ export default function Repay({ pair }: RepayProps) {
     transactionReview.addTokenAmount(
       'Borrow Limit',
       pair.maxBorrowable.safe.value,
-      nextMaxBorrowSafe.add(displayRepayValue.toBigNumber(pair.asset.tokenInfo.decimals)),
+      Number(nextMaxBorrowSafe) + Number(displayRepayValue),
       pair.asset
     )
     transactionReview.addPercentage('Health', pair.health.value, nextHealth)
@@ -196,18 +196,18 @@ export default function Repay({ pair }: RepayProps) {
 
   const priceImpactSeverity = warningSeverity(priceImpact)
 
-  let actionName = 'Nothing to do'
+  let actionName = 'Enter Amount'
 
   if (removeValueSet) {
     if (repayValueSet) {
       actionName = 'Repay and remove collateral'
     } else {
-      actionName = 'Remove collateral'
+      actionName = 'Remove Collateral'
     }
   } else if (repayValueSet) {
     actionName = 'Repay'
   } else if (swap) {
-    actionName = 'Automatic repay'
+    actionName = 'Automatic Repay'
   }
 
   // const actionDisabled = false
@@ -289,22 +289,21 @@ export default function Repay({ pair }: RepayProps) {
       }
       if (
         displayRemoveValue.toBigNumber(pair.collateral.tokenInfo.decimals).gt(0) ||
-        (pinRemoveMax && pair.userCollateralShare.gt(0))
+        (pinRemoveMax && pair.userCollateralShare > 0)
       ) {
         const share =
           pinRemoveMax &&
           (nextUserBorrowAmount.isZero() ||
             (pinRepayMax && pair.userBorrowPart.gt(0) && balance.gte(pair.currentUserBorrowAmount.value)))
             ? pair.userCollateralShare
-            : toShare(pair.collateral, displayRemoveValue.toBigNumber(pair.collateral.tokenInfo.decimals))
-
+            : toShare(pair.collateral, 
+              Number(displayRemoveValue))
         cooker.removeCollateral(share, useCoffinRemove)
         summary += (summary ? ' and ' : '') + 'Remove Collateral'
       }
     }
 
     resetRepayState()
-
     return summary
   }
 
