@@ -1,6 +1,6 @@
 import { ChainId, CurrencyAmount, Price, Token, validateAndParseAddress } from 'sdk'
-import { LAMBDA_URL, STOP_LIMIT_ORDER_ADDRESS } from '../constants'
-import { Message, getSignature, getSignatureWithProvider, getTypeHash, getTypedData } from '../interfaces'
+import { LAMBDA_URL, STOP_LIMIT_ORDER_ADDRESS } from './constants'
+import { Message, getSignature, getSignatureWithProvider, getTypeHash, getTypedData } from './eip712'
 
 import { BigNumber } from '@ethersproject/bignumber'
 import { Contract } from '@ethersproject/contracts'

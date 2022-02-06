@@ -1,7 +1,7 @@
 import { COFFIN_BOX_ADDRESS, ChainId } from 'sdk'
-import { coffinTypes, name, types } from '../types'
+import { coffinTypes, name, types } from './types'
 
-import { STOP_LIMIT_ORDER_ADDRESS } from '../constants'
+import { STOP_LIMIT_ORDER_ADDRESS } from './constants'
 import { SigningKey } from '@ethersproject/signing-key'
 import { Web3Provider } from '@ethersproject/providers'
 import { getMessage } from 'eip-712'
