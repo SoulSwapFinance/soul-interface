@@ -22,23 +22,28 @@ export default function Withdraw({ pair }: any): JSX.Element {
   const { i18n } = useLingui()
 
   // State
-  const [useCoffin, setUseCoffin] = useState<boolean>(pair.asset.coffinBalance.gt(0))
+  const [useCoffin, setUseCoffin] = useState<boolean>(pair.asset.coffinBalance > 0)
   const [value, setValue] = useState('')
   const [pinMax, setPinMax] = useState(false)
 
   const [underworldApprovalState, approveUnderworldFallback, underworldPermit, onApprove, onCook] = useUnderworldApproveCallback()
 
   // Calculated
-  const max = minimum(pair.maxAssetAvailable, pair.currentUserAssetAmount.value)
+  const max 
+    // = minimum(pair.maxAssetAvailable, pair.currentUserAssetAmount.value)
+    = pair.maxAssetAvailable < pair.currentUserAssetAmount.value
+    ? pair.maxAssetAvailable : pair.currentUserAssetAmount.value
+
   const displayValue = pinMax ? max.toFixed(pair.asset.tokenInfo.decimals) : value
 
   const fraction = pinMax
     ? minimum(pair.userAssetFraction, pair.maxAssetAvailableFraction)
-    : value.toBigNumber(pair.asset.tokenInfo.decimals).mulDiv(pair.currentTotalAsset.base, pair.currentAllAssets.value)
+    // : value.toBigNumber(pair.asset.tokenInfo.decimals).mulDiv(pair.currentTotalAsset.base, pair.currentAllAssets.value)
+    : Number(value) * pair.currentTotalAsset.base / pair.currentAllAssets.value
 
   const warnings = new Warnings()
     .add(
-      pair.currentUserAssetAmount.value.lt(value.toBigNumber(pair.asset.tokenInfo.decimals)),
+      pair.currentUserAssetAmount.value < value,
       i18n._(
         t`Please make sure your ${
           useCoffin ? 'CoffinBox' : 'wallet'
@@ -47,7 +52,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
       true
     )
     .add(
-      pair.maxAssetAvailableFraction.lt(fraction),
+      pair.maxAssetAvailableFraction < fraction,
       i18n._(
         t`The isn't enough liquidity available at the moment to withdraw this amount. Please try withdrawing less or later.`
       ),
@@ -66,7 +71,12 @@ export default function Withdraw({ pair }: any): JSX.Element {
     )
     transactionReview.addUSD(i18n._(t`Balance USD`), pair.currentUserAssetAmount.value, newUserAssetAmount, pair.asset)
 
-    const newUtilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.sub(amount))
+    const newUtilization 
+      // = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.sub(amount))
+      = Number(1e18)
+      * pair.currentBorrowAmount.value
+      / (pair.currentAllAssets.value - amount)
+
     transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
   }
 

@@ -135,7 +135,7 @@ export default function Create() {
       //   return
       // }
 
-      const oracleAddress = CHAINLINK_ORACLE_ADDRESS[chainId]
+      const oracleAddress = CHAINLINK_ORACLE_ADDRESS[chainId | 250]
 
       const underworldData = defaultAbiCoder.encode(
         ['address', 'address', 'address', 'bytes'],
@@ -169,7 +169,7 @@ export default function Create() {
   return (
     <CreateLayout>
       <Head>
-        <title>Create Lending Pair | Underworld by Soul</title>
+        <title>Create Pair | Underworld by Soul</title>
         <meta key="description" name="description" content="Create Lending Pair on Underworld by Soul" />
       </Head>
       <Card

@@ -102,7 +102,7 @@ export const COFFIN_BOX_ADDRESS: { [chainId in ChainId]: string } = {
 export const CHAINLINK_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '0x00632CFe43d8F9f8E6cD0d39Ffa3D4fa7ec73CFB',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x00632CFe43d8F9f8E6cD0d39Ffa3D4fa7ec73CFB', // TODO: update
+  [ChainId.FANTOM]: '0xCDd5Df7146B278c90c572b6c6F933C6b7ce2b41e', // FEB22
   [ChainId.FANTOM_TESTNET]: ''
 }
 
@@ -159,17 +159,21 @@ export const SOUL_GUIDE_ADDRESS: { [chainId in ChainId]: string } = {
 export const SOULSWAP_SWAPPER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x1766733112408b95239aD1951925567CB1203084',
   [ChainId.BSC]: '0x1766733112408b95239aD1951925567CB1203084',
+  [ChainId.FANTOM]: '0xb2b22549F6586Cd81054677C6b9413Cea9587fd7', // FEB22
 }
 
 export const SOULSWAP_MULTISWAPPER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x545820d5Cc05248da112419fEfb18522c63C8e12',
   [ChainId.BSC]: '0x86c655cAc122e9A2fd9Ae1f79Df27b30E357968c',
+  [ChainId.FANTOM]: '0xbA1d9DdC58bD750ab05217b1eDD864FDb495Ab57', // FEB22
 }
 
 export const SOULSWAP_MULTI_EXACT_SWAPPER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0xB527C5295c4Bc348cBb3a2E96B2494fD292075a7',
   [ChainId.BSC]: '0x1B16149Edaf1EFa6ADE6aEEF33e63C6e08c9bB1B',
+  [ChainId.FANTOM]: '0xb988D44aF0065649E05e61B7d35b6121ff2b537E', // FEB22
 }
+
 export const PRICE_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.BSC]: '',

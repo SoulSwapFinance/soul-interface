@@ -3,22 +3,25 @@ import { CurrencyAmount, JSBI, Rebase, Token, ZERO } from 'sdk'
 
 // export function toAmount(token, shares: BigNumber): BigNumber {
 //   // console.log('toAmount', token, shares)
-//   return shares.mulDiv(token.coffinAmount, token.coffinShare)
+//   return shares.mulDiv(token.bentoAmount, token.bentoShare)
 // }
 
 // export function toShare(token, amount: BigNumber): BigNumber {
 //   // console.log('toShare', token, shares)
-//   return amount.mulDiv(token.coffinShare, token.coffinAmount)
+//   return amount.mulDiv(token.bentoShare, token.bentoAmount)
 // }
 
-export function toAmount(rebase: Rebase, shares: BigNumber): BigNumber {
+export function toAmount(rebase: Rebase, shares: number): number {
   // console.log('toAmount', token, shares)
-  return shares.mulDiv(BigNumber.from(rebase.elastic.toString()), BigNumber.from(rebase.base.toString()))
+  return Number(shares) * Number(rebase.elastic) / Number(rebase.base)
+  // return shares.mul(BigNumber.from(rebase.elastic)).div(BigNumber.from(rebase.base))
+  // return shares.mulDiv(BigNumber.from(rebase.elastic.toString()), BigNumber.from(rebase.base.toString()))
 }
 
-export function toShare(rebase: Rebase, amount: BigNumber): BigNumber {
+export function toShare(rebase: Rebase, amount: number): number {
   // console.log('toShare', token, shares)
-  return amount.mulDiv(BigNumber.from(rebase.base.toString()), BigNumber.from(rebase.elastic.toString()))
+  return Number(amount) * Number(rebase.base) / Number(rebase.elastic)
+  // return amount.mulDiv(BigNumber.from(rebase.base.toString()), BigNumber.from(rebase.elastic.toString()))
 }
 
 export function toAmountJSBI(token: Rebase, shares: JSBI): JSBI {

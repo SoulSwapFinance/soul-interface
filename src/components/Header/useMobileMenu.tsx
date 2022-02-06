@@ -165,25 +165,25 @@ const useMobileMenu: UseMobileMenu = () => {
       mainItems.push(farmItems)
     }
 
-    // if (featureEnabled(Feature.UNDERWORLD, chainId)) {
-    //   mainItems.push({
-    //     key: 'lending',
-    //     title: i18n._(t`Lending`),
-    //     icon: <SwitchVerticalIcon width={16} className="rotate-90 filter" />,
-    //     items: [
-    //       {
-    //         key: 'lend',
-    //         title: i18n._(t`Lend`),
-    //         link: '/lend',
-    //       },
-    //       {
-    //         key: 'borrow',
-    //         title: i18n._(t`Borrow`),
-    //         link: '/borrow',
-    //       },
-    //     ],
-    //   })
-    // }
+    if (featureEnabled(Feature.UNDERWORLD, chainId)) {
+      mainItems.push({
+        key: 'lending',
+        title: i18n._(t`Lending`),
+        icon: <SwitchVerticalIcon width={16} className="rotate-90 filter" />,
+        items: [
+          {
+            key: 'lend',
+            title: i18n._(t`Lend`),
+            link: '/lend',
+          },
+          {
+            key: 'borrow',
+            title: i18n._(t`Borrow`),
+            link: '/borrow',
+          },
+        ],
+      })
+    }
 
     // if (featureEnabled(Feature.MISO, chainId)) {
     //   mainItems.push({

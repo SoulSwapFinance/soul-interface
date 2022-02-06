@@ -8,7 +8,7 @@ const ActionItem: FC<{ svg: ReactNode; label: string; onClick?(): void }> = ({ s
       onClick={onClick}
     >
       <div className="flex gap-3 items-center">
-        <div className="w-10 h-10 rounded-full border-[3px] border-transparent border-gradient-r-blue-pink-dark-900 flex items-center justify-center">
+        <div className="w-10 h-10 rounded-full border-[3px] border-transparent border-gradient-r-blue-purple-dark-900 flex items-center justify-center">
           {svg}
         </div>
         <Typography variant="lg" className="text-high-emphesis" weight={700}>

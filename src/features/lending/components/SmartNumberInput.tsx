@@ -7,7 +7,7 @@ import Input from 'components/Input'
 import { formatNumber } from 'functions/format'
 
 type SmartNumberInputProps = {
-  color: 'blue' | 'pink'
+  color: 'blue' | 'purple'
   token: any
   value: string
   setValue: any
@@ -18,7 +18,7 @@ type SmartNumberInputProps = {
   setUseCoffin: any
 
   maxTitle?: string
-  max: BigNumber
+  max: number
   pinMax?: boolean
   setPinMax?: any
   showMax?: boolean
@@ -73,7 +73,7 @@ export default function SmartNumberInput({
           </span>
         </div>
         <div className="text-base text-right text-secondary" style={{ display: 'inline', cursor: 'pointer' }}>
-          {maxTitle} {formatNumber(max.toFixed(token.tokenInfo.decimals))}
+          {maxTitle} {formatNumber(max / 1e18)}
         </div>
       </div>
 
@@ -95,7 +95,7 @@ export default function SmartNumberInput({
           }}
           disabled={disabled}
         />
-        {showMax && max.gt(0) && (
+        {showMax && Number(max) > 0 && (
           <Button
             variant="outlined"
             size="xs"

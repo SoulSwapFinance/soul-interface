@@ -194,10 +194,13 @@ export function useUnderworldPairs(addresses = []) {
         pair.currentBorrowAmount = easyAmount(accrue(pair, pair.totalBorrow.elastic, true), pair.asset)
 
         // The total amount of assets, both borrowed and still available right now
-        pair.currentAllAssets = easyAmount(pair.totalAssetAmount.value.add(pair.currentBorrowAmount.value), pair.asset)
+        pair.currentAllAssets = easyAmount(
+          pair.totalAssetAmount.value
+          + Number(pair.currentBorrowAmount.value), 
+          pair.asset)
 
-        pair.marketHealth = pair.totalCollateralAmount.value
-          .mulDiv(e10(18), maximum(pair.currentExchangeRate, pair.oracleExchangeRate, pair.spotExchangeRate))
+        pair.marketHealth = Number(pair.totalCollateralAmount.value) * Number(e10) / 18,
+          maximum(pair.currentExchangeRate, pair.oracleExchangeRate, pair.spotExchangeRate)
           .mulDiv(e10(18), pair.currentBorrowAmount.value)
 
         pair.currentTotalAsset = accrueTotalAssetWithFee(pair)
@@ -205,34 +208,49 @@ export function useUnderworldPairs(addresses = []) {
         pair.currentAllAssetShares = toShare(pair.asset, pair.currentAllAssets.value)
 
         // Maximum amount of assets available for withdrawal or borrow
-        pair.maxAssetAvailable = minimum(
-          pair.totalAsset.elastic.mulDiv(pair.currentAllAssets.value, pair.currentAllAssetShares),
-          toAmount(pair.asset, toElastic(pair.currentTotalAsset, pair.totalAsset.base.sub(1000), false))
-        )
+        pair.maxAssetAvailable =
+        pair.totalAsset.elastic * Number(pair.currentAllAssets.value) / pair.currentAllAssetShares
+        > toAmount(pair.asset, toElastic(pair.currentTotalAsset, pair.totalAsset.base - 1000, false)) ?
+        pair.totalAsset.elastic * Number(pair.currentAllAssets.value) / pair.currentAllAssetShares :
+        toAmount(pair.asset, toElastic(pair.currentTotalAsset, pair.totalAsset.base - 1000, false))
 
-        pair.maxAssetAvailableFraction = pair.maxAssetAvailable.mulDiv(
-          pair.currentTotalAsset.base,
-          pair.currentAllAssets.value
-        )
+        // minimum(
+        //   pair.totalAsset.elastic.mulDiv(pair.currentAllAssets.value, pair.currentAllAssetShares),
+        //   toAmount(pair.asset, toElastic(pair.currentTotalAsset, pair.totalAsset.base - 1000, false))
+        // )
+
+        pair.maxAssetAvailableFraction = 
+        pair.maxAssetAvailable
+          * Number(pair.currentTotalAsset.base)
+          / Number(pair.currentAllAssets.value)
 
         // The percentage of assets that is borrowed out right now
-        pair.utilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value)
+        pair.utilization = Number(1e18) * pair.currentBorrowAmount / pair.currentAllAssets.value
 
         // Interest per year received by lenders as of now
-        pair.supplyAPR = takeFee(pair.interestPerYear.mulDiv(pair.utilization, e10(18)))
-
+        pair.supplyAPR = takeFee(
+          Number(pair.interestPerYear)
+          * Number(pair.utilization) 
+          / 1e18
+          )
+  
         // Interest payable by borrowers per year as of now
         pair.currentInterestPerYear = interestAccrue(pair, pair.interestPerYear)
 
         // Interest per year received by lenders as of now
-        pair.currentSupplyAPR = takeFee(pair.currentInterestPerYear.mulDiv(pair.utilization, e10(18)))
+        pair.currentSupplyAPR = takeFee(
+          pair.currentInterestPerYear
+          * pair.utilization
+          / 1e18
+          )
 
         // The user's amount of collateral (stable, doesn't accrue)
         pair.userCollateralAmount = easyAmount(toAmount(pair.collateral, pair.userCollateralShare), pair.collateral)
 
         // The user's amount of assets (stable, doesn't accrue)
         pair.currentUserAssetAmount = easyAmount(
-          pair.userAssetFraction.mulDiv(pair.currentAllAssets.value, pair.totalAsset.base),
+          pair.userAssetFraction
+          * pair.currentAllAssets.value / pair.totalAsset.base,
           pair.asset
         )
 
@@ -250,35 +268,47 @@ export function useUnderworldPairs(addresses = []) {
 
         // Value of protocol fees
         pair.feesEarned = easyAmount(
-          pair.accrueInfo.feesEarnedFraction.mulDiv(pair.currentAllAssets.value, pair.totalAsset.base),
+          pair.accrueInfo.feesEarnedFraction
+          * pair.currentAllAssets
+          / pair.totalAsset.base,
           pair.asset
         )
 
         // The user's maximum borrowable amount based on the collateral provided, using all three oracle values
         pair.maxBorrowable = {
-          oracle: pair.userCollateralAmount.value.mulDiv(e10(16).mul('75'), pair.oracleExchangeRate),
-          spot: pair.userCollateralAmount.value.mulDiv(e10(16).mul('75'), pair.spotExchangeRate),
-          stored: pair.userCollateralAmount.value.mulDiv(e10(16).mul('75'), pair.currentExchangeRate),
+          oracle: pair.userCollateralAmount * (1e16 * 75) / pair.oracleExchangeRate,
+          spot: pair.userCollatoralAmount * (1e16 * 75) / pair.spotExchangeRate,
+          stored: pair.userCollatoralAmount * (1e16 * 75) / pair.currentExchangeRate,
         }
 
-        pair.maxBorrowable.minimum = minimum(
-          pair.maxBorrowable.oracle,
-          pair.maxBorrowable.spot,
-          pair.maxBorrowable.stored
-        )
+        pair.maxBorrowable.minimum = 
+        pair.maxBorrowable.oracle < pair.maxBorrowable.spot
+        && pair.maxBorrowable.oracle < pair.maxBorrowable.stored ?
+        pair.maxBorrowable.oracle :
+        pair.maxBorrowable.spot < pair.maxBorrowable.oracle
+        && pair.maxBorrowable.spot < pair.maxBorrowable.stored ?
+        pair.maxBorrowable.spot : pair.maxBorrowable.stored
 
-        pair.maxBorrowable.safe = pair.maxBorrowable.minimum.mulDiv('95', '100').sub(pair.currentUserBorrowAmount.value)
+        pair.maxBorrowable.safe = 
+          pair.maxBorrowable.minimum
+          * (95 / 100)
+          - pair.currentUserBorrowAmount.value
 
-        pair.maxBorrowable.possible = minimum(pair.maxBorrowable.safe, pair.maxAssetAvailable)
+        pair.maxBorrowable.possible = 
+        pair.maxBorrowable.safe < pair.maxAssetAvailable ?
+        pair.maxBorrowable.safe : pair.maxAssetAvailable
 
-        pair.safeMaxRemovable = Zero
+        pair.safeMaxRemovable = 0
 
-        pair.health = pair.currentUserBorrowAmount.value.mulDiv(e10(18), pair.maxBorrowable.minimum)
+        pair.health =
+         pair.currentUserBorrowAmount.value
+          * 1e18
+          / pair.maxBorrowable.minimum
 
         pair.netWorth = getUSDValue(
-          pair.currentUserAssetAmount.value.sub(pair.currentUserBorrowAmount.value),
+          pair.currentUserAssetAmount.value - pair.currentUserBorrowAmount.value,
           pair.asset
-        ).add(getUSDValue(pair.userCollateralAmount.value, pair.collateral))
+        ) + (getUSDValue(pair.userCollateralAmount.value, pair.collateral))
 
         pair.search = pair.asset.symbol + '/' + pair.collateral.symbol
 
@@ -299,30 +329,34 @@ export function useUnderworldPairs(addresses = []) {
         }
         pair.supplyAPR = {
           value: pair.supplyAPR,
-          valueWithStrategy: pair.supplyAPR.add(pair.strategyAPY.asset.value),
-          string: Fraction.from(pair.supplyAPR, e10(16)).toString(),
-          stringWithStrategy: Fraction.from(pair.strategyAPY.asset.value.add(pair.supplyAPR), e10(16)).toString(),
+          valueWithStrategy: pair.supplyAPR + pair.strategyAPY.asset.value,
+          string: pair.supplyAPR.toString(),
+          // Fraction.from(pair.supplyAPR, e10(16)).toString(),
+          // stringWithStrategy: Fraction.from(pair.strategyAPY.asset.value.add(pair.supplyAPR), e10(16)).toString(),
+          stringWithStrategy: (pair.strategyAPY.asset.value + pair.supplyAPR).toString(),
         }
         pair.currentSupplyAPR = {
           value: pair.currentSupplyAPR,
-          valueWithStrategy: pair.currentSupplyAPR.add(pair.strategyAPY.asset.value),
-          string: Fraction.from(pair.currentSupplyAPR, e10(16)).toString(),
-          stringWithStrategy: Fraction.from(
-            pair.currentSupplyAPR.add(pair.strategyAPY.asset.value),
-            e10(16)
-          ).toString(),
+          valueWithStrategy: pair.currentSupplyAPR + pair.strategyAPY.asset.value,
+          // string: Fraction.from(pair.currentSupplyAPR, e10(16)).toString(),
+          string: pair.currentSupplyAPR.toString(),
+          // stringWithStrategy: Fraction.from(pair.currentSupplyAPR.add(pair.strategyAPY.asset.value), e10(16)).toString(),
+          stringWithStrategy: (pair.currentSupplyAPR + pair.strategyAPY.asset.value).toString(),
         }
         pair.currentInterestPerYear = {
           value: pair.currentInterestPerYear,
-          string: Fraction.from(pair.currentInterestPerYear, BigNumber.from(10).pow(16)).toString(),
+          // string: Fraction.from(pair.currentInterestPerYear, BigNumber.from(10).pow(16)).toString(),
+          string: Number(pair.currentInterestPerYear).toString(),
         }
         pair.utilization = {
           value: pair.utilization,
-          string: Fraction.from(pair.utilization, BigNumber.from(10).pow(16)).toString(),
+          // string: Fraction.from(pair.utilization, BigNumber.from(10).pow(16)).toString(),
+          string: pair.utilization.toString(),
         }
         pair.health = {
           value: pair.health,
-          string: Fraction.from(pair.health, e10(16)),
+          // string: Fraction.from(pair.health, e10(16)),
+          string: pair.health / 1e16,
         }
         pair.maxBorrowable = {
           oracle: easyAmount(pair.maxBorrowable.oracle, pair.asset),
@@ -335,7 +369,6 @@ export function useUnderworldPairs(addresses = []) {
 
         pair.safeMaxRemovable = easyAmount(pair.safeMaxRemovable, pair.collateral)
 
-        // @ts-ignore TYPE NEEDS FIXING
         previousValue = [...previousValue, pair]
       }
 
@@ -355,6 +388,5 @@ export function useUnderworldPairs(addresses = []) {
 }
 
 export function useUnderworldPair(address: string) {
-  // @ts-ignore TYPE NEEDS FIXING
   return useUnderworldPairs([getAddress(address)])[0]
 }

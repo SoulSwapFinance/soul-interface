@@ -24,7 +24,7 @@ export abstract class AbstractOracle implements Oracle {
   data = ''
   warning = ''
   error = ''
-  chainId = ChainId.ETHEREUM
+  chainId = ChainId.FANTOM
   pair: any
   tokens: Token[]
   valid
@@ -39,7 +39,7 @@ export abstract class AbstractOracle implements Oracle {
   }
 }
 
-export class SushiSwapTWAP0Oracle extends AbstractOracle {
+export class SoulSwapTWAP0Oracle extends AbstractOracle {
   constructor(pair: any, chainId: ChainId, tokens?: Token[]) {
     super(pair, chainId, tokens)
     this.name = 'Soul Power'
@@ -92,7 +92,7 @@ export class ChainlinkOracle extends AbstractOracle {
           to = mapping![params[1]].from
         } else {
           this.error =
-            "The Chainlink oracles used don't match up with eachother. If 2 oracles are used, they should have a common token, such as WBTC/ETH and LINK/ETH, where ETH is the common link."
+            "The Chainlink oracles used don't match up with each other. If 2 oracles are used, they should have a common token, such as WBTC/ETH and LINK/ETH, where ETH is the common link."
           return false
         }
       }
@@ -125,10 +125,10 @@ function lowerEqual(value1: string, value2: string) {
 }
 
 export function getOracle(pair: any, chainId: ChainId, tokens: any): Oracle {
-  if (lowerEqual(pair.oracle, CHAINLINK_ORACLE_ADDRESS)) {
+  if (lowerEqual(pair.oracle, CHAINLINK_ORACLE_ADDRESS[chainId])) {
     return new ChainlinkOracle(pair, chainId, tokens)
   } else if (pair.oracle === SOULSWAP_TWAP_0_ORACLE_ADDRESS) {
-    return new SushiSwapTWAP0Oracle(pair, chainId, tokens)
+    return new SoulSwapTWAP0Oracle(pair, chainId, tokens)
   } else if (pair.oracle === SOULSWAP_TWAP_1_ORACLE_ADDRESS) {
     return new SushiSwapTWAP1Oracle(pair, chainId, tokens)
   }

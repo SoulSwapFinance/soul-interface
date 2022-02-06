@@ -77,7 +77,7 @@ const WithdrawView: FC<WithdrawViewProps> = ({ onClose, onBack }) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <HeadlessUiModal.Header header={i18n._(t`Withdraw to wallet`)} onClose={onClose} onBack={onBack} />
+      <HeadlessUiModal.Header header={i18n._(t`Withdraw to Wallet`)} onClose={onClose} onBack={onBack} />
       <AssetInput
         title={''}
         currency={currency}

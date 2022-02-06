@@ -306,7 +306,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                   <TokenPair
                     fontSize="1.2rem"
                     target="_blank"
-                    // color="pink"
+                    // color="purple"
                     // href={`https://exchange.soulswap.finance/add/${farm.token1Address[chainId]}/${farm.token2Address[chainId]}`}
                   >
                     {lpSymbol}

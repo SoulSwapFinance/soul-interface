@@ -129,7 +129,7 @@ export default class UnderworldCooker {
     return this
   }
 
-  coffinDepositAssetShare(share: BigNumber): UnderworldCooker {
+  coffinDepositAssetShare(share: number): UnderworldCooker {
     const useNative = this.pair.asset.address === WNATIVE[this.chainId].address
 
     this.add(
@@ -159,7 +159,7 @@ export default class UnderworldCooker {
     return this
   }
 
-  coffinWithdrawCollateral(amount: BigNumber, share: BigNumber): UnderworldCooker {
+  coffinWithdrawCollateral(amount: number, share: number): UnderworldCooker {
     const useNative = this.pair.collateral.address === WNATIVE[this.chainId].address
 
     this.add(
@@ -174,7 +174,7 @@ export default class UnderworldCooker {
     return this
   }
 
-  coffinTransfer(share: BigNumber, toAddress: string): UnderworldCooker {
+  coffinTransfer(share: number, toAddress: string): UnderworldCooker {
     this.add(
       Action.COFFIN_TRANSFER,
       defaultAbiCoder.encode(['address', 'address', 'int256'], [COFFIN_BOX_ADDRESS[this.chainId], toAddress, share])
@@ -183,7 +183,7 @@ export default class UnderworldCooker {
     return this
   }
 
-  coffinTransferCollateral(share: BigNumber, toAddress: string): UnderworldCooker {
+  coffinTransferCollateral(share: number, toAddress: string): UnderworldCooker {
     this.add(
       Action.COFFIN_TRANSFER,
       defaultAbiCoder.encode(['address', 'address', 'int256'], [this.pair.collateral.address, toAddress, share])
@@ -192,7 +192,7 @@ export default class UnderworldCooker {
     return this
   }
 
-  coffinTransferAsset(share: BigNumber, toAddress: string): UnderworldCooker {
+  coffinTransferAsset(share: number, toAddress: string): UnderworldCooker {
     this.add(
       Action.COFFIN_TRANSFER,
       defaultAbiCoder.encode(['address', 'address', 'int256'], [this.pair.asset.address, toAddress, share])
@@ -207,10 +207,10 @@ export default class UnderworldCooker {
     return this
   }
 
-  addCollateral(amount: BigNumber, fromCoffin: boolean): UnderworldCooker {
-    let share: BigNumber
+  addCollateral(amount: number, fromCoffin: boolean): UnderworldCooker {
+    let share: number
     if (fromCoffin) {
-      share = amount.lt(0) ? amount : toShare(this.pair.collateral, amount)
+      share = amount < 0 ? amount : toShare(this.pair.collateral, amount)
     } else {
       const useNative = this.pair.collateral.address === WNATIVE[this.chainId].address
 
@@ -222,15 +222,15 @@ export default class UnderworldCooker {
         ),
         useNative ? amount : ZERO
       )
-      share = BigNumber.from(-2)
+      share = -2
     }
 
     this.add(Action.ADD_COLLATERAL, defaultAbiCoder.encode(['int256', 'address', 'bool'], [share, this.account, false]))
     return this
   }
 
-  addAsset(amount: BigNumber, fromCoffin: boolean, burnShare: boolean = false): UnderworldCooker {
-    let share: BigNumber
+  addAsset(amount: number, fromCoffin: boolean, burnShare: boolean = false): UnderworldCooker {
+    let share: number
     if (fromCoffin) {
       share = toShare(this.pair.asset, amount)
     } else {
@@ -244,14 +244,14 @@ export default class UnderworldCooker {
         ),
         useNative ? amount : ZERO
       )
-      share = BigNumber.from(-2)
+      share = -2
     }
 
     this.add(Action.ADD_ASSET, defaultAbiCoder.encode(['int256', 'address', 'bool'], [share, this.account, false]))
 
     if (burnShare) {
       this.removeAsset(BigNumber.from(1), true)
-      this.coffinTransferAsset(BigNumber.from(1), '0x000000000000000000000000000000000000dead')
+      this.coffinTransferAsset(1, '0x000000000000000000000000000000000000dead')
     }
 
     return this
@@ -273,7 +273,7 @@ export default class UnderworldCooker {
     return this
   }
 
-  removeCollateral(share: BigNumber, toCoffin: boolean): UnderworldCooker {
+  removeCollateral(share: number, toCoffin: boolean): UnderworldCooker {
     this.add(Action.REMOVE_COLLATERAL, defaultAbiCoder.encode(['int256', 'address'], [share, this.account]))
     if (!toCoffin) {
       const useNative = this.pair.collateral.address === WNATIVE[this.chainId].address
@@ -342,7 +342,7 @@ export default class UnderworldCooker {
     return this
   }
 
-  repayPart(part: BigNumber, fromCoffin: boolean): UnderworldCooker {
+  repayPart(part: number, fromCoffin: boolean): UnderworldCooker {
     if (!fromCoffin) {
       const useNative = this.pair.asset.address === WNATIVE[this.chainId].address
 
@@ -354,7 +354,7 @@ export default class UnderworldCooker {
           [useNative ? AddressZero : this.pair.asset.address, this.account, 0, -1]
         ),
         // TODO: Put some warning in the UI or not allow repaying ETH directly from wallet, because this can't be pre-calculated
-        useNative ? toShare(this.pair.asset, toElastic(this.pair.totalBorrow, part, true)).mul(1001).div(1000) : ZERO
+        useNative ? toShare(this.pair.asset, toElastic(this.pair.totalBorrow, part, true)) * 1001 / 1000 : 0
       )
     }
     this.add(Action.REPAY, defaultAbiCoder.encode(['int256', 'address', 'bool'], [part, this.account, false]))

@@ -29,7 +29,7 @@ export default function Deposit({ pair }: any): JSX.Element {
   const { i18n } = useLingui()
 
   // State
-  const [useCoffin, setUseCoffin] = useState<boolean>(pair.asset.coffinBalance.gt(0))
+  const [useCoffin, setUseCoffin] = useState<boolean>(pair.asset.coffinBalance > 0)
   const [value, setValue] = useState('')
 
   // Calculated
@@ -62,16 +62,23 @@ export default function Deposit({ pair }: any): JSX.Element {
   const transactionReview = new TransactionReview()
 
   if (value && !warnings.broken) {
-    const amount = value.toBigNumber(pair.asset.tokenInfo.decimals)
-    const newUserAssetAmount = pair.currentUserAssetAmount.value.add(amount)
+    const amount = value
+    const newUserAssetAmount = pair.currentUserAssetAmount.value + amount
     transactionReview.addTokenAmount(
       i18n._(t`Balance`),
       pair.currentUserAssetAmount.value,
-      newUserAssetAmount,
+      Number(newUserAssetAmount),
       pair.asset
     )
-    transactionReview.addUSD(i18n._(t`Balance USD`), pair.currentUserAssetAmount.value, newUserAssetAmount, pair.asset)
-    const newUtilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.add(amount))
+    transactionReview.addUSD(i18n._(t`Balance USD`), pair.currentUserAssetAmount.value, Number(newUserAssetAmount), pair.asset)
+    const newUtilization 
+      // 
+      // = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.add(amount))
+      = Number(1e18) 
+      * pair.currentBorrowAmount.value
+      / (pair.currentAllAssets.value
+      + Number(amount))
+
     transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
     if (pair.currentExchangeRate.isZero()) {
       transactionReview.add(
@@ -93,14 +100,14 @@ export default function Deposit({ pair }: any): JSX.Element {
     if (pair.currentExchangeRate.isZero()) {
       cooker.updateExchangeRate(false, ZERO, ZERO)
     }
-    const amount = value.toBigNumber(pair.asset.tokenInfo.decimals)
+    const amount = value
 
     const deadBalance = await coffinBoxContract.balanceOf(
       pair.asset.address,
       '0x000000000000000000000000000000000000dead'
     )
 
-    cooker.addAsset(amount, useCoffin, deadBalance.isZero())
+    cooker.addAsset(Number(amount), useCoffin, deadBalance.isZero())
 
     return `${i18n._(t`Deposit`)} ${pair.asset.tokenInfo.symbol}`
   }

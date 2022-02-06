@@ -44,7 +44,7 @@ export default function Pair() {
       <Card
         className="h-full bg-dark-900"
         header={
-          <Card.Header className="border-b-8 bg-dark-pink border-pink">
+          <Card.Header className="border-b-8 bg-dark-purple border-purple">
             <div className="flex items-center">
               <div className="flex items-center mr-4 space-x-2">
                 {pair && (
@@ -92,7 +92,7 @@ export default function Pair() {
           </div>
           <div>
             <div className="text-lg text-secondary">{i18n._(t`Borrowed`)}</div>
-            <div className="text-2xl text-pink">
+            <div className="text-2xl text-purple">
               {formatNumber(pair.currentUserBorrowAmount.string)} {pair.asset.tokenInfo.symbol}
             </div>
             <div className="flex items-center text-lg text-high-emphesis">
