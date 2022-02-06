@@ -135,7 +135,7 @@ export default function Create() {
       //   return
       // }
 
-      const oracleAddress = CHAINLINK_ORACLE_ADDRESS[chainId]
+      const oracleAddress = CHAINLINK_ORACLE_ADDRESS[chainId | 250]
 
       const underworldData = defaultAbiCoder.encode(
         ['address', 'address', 'address', 'bytes'],

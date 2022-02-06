@@ -76,7 +76,6 @@ const AccountDetails: FC<AccountDetailsProps> = ({
               <div className="overflow-hidden rounded-full">
                 <Davatar
                   size={48}
-                  // @ts-ignore TYPE NEEDS FIXING
                   address={account}
                   defaultComponent={<Image src="/logo.png" 
                   alt="Soul Icon" width={48} height={48} />}

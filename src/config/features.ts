@@ -29,7 +29,7 @@ const features: FeatureMap = {
     Feature.LIQUIDITY_MINING,
     // Feature.LIMIT_ORDERS,
     Feature.COFFINBOX,
-    // Feature.UNDERWORLD
+    Feature.UNDERWORLD
   ],
 
   [ChainId.FANTOM_TESTNET]: [Feature.AMM],

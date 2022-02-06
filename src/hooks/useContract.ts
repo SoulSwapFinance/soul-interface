@@ -43,9 +43,9 @@ import {
   COFFIN_BOX_ADDRESS,
   CHAINLINK_ORACLE_ADDRESS,
   UNDERWORLD_ADDRESS,
-  // SOUL_GUIDE_ADDRESS,
   SOULSWAP_TWAP_0_ORACLE_ADDRESS,
   SOULSWAP_TWAP_1_ORACLE_ADDRESS,
+  SOULSWAP_SWAPPER_ADDRESS,
 } from '../constants/underworld'
 import { MERKLE_DISTRIBUTOR_ADDRESS } from '../constants'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from '../constants/multicall'
@@ -408,13 +408,14 @@ export function useUnderworldPairContract(withSignerIfPossible?: boolean): Contr
   return useContract(chainId && UNDERWORLD_ADDRESS[chainId], UNDERWORLD_ABI, withSignerIfPossible)
 }
 
-// export function useSoulSwapSwapper(): Contract | null {
-//   const { chainId } = useActiveWeb3React()
-//   return useContract(chainId && SOULSWAP_SWAPPER_ADDRESS[chainId], BASE_SWAPPER_ABI, false)
-// }
+export function useSoulSwapSwapper(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOULSWAP_SWAPPER_ADDRESS[chainId], BASE_SWAPPER_ABI, false)
+}
 
 export function useChainlinkOracle(): Contract | null {
-  return useContract(CHAINLINK_ORACLE_ADDRESS, CHAINLINK_ORACLE_ABI, false)
+  const { chainId } = useActiveWeb3React()
+  return useContract(CHAINLINK_ORACLE_ADDRESS[chainId], CHAINLINK_ORACLE_ABI, false)
 }
 
 // experimental:

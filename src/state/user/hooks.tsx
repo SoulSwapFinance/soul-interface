@@ -327,7 +327,6 @@ export function toUnderworldLiquidityToken([collateral, asset]: [Token, Token]):
   //   oracleData: computeOracleData(collateral, asset),
   // })
   const oracleData = computeOracleData(collateral, asset)
-  // @ts-ignore TYPE NEEDS FIXING
   if (!oracleData) return
   return new Token(
     collateral.chainId,

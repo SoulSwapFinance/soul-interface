@@ -6,9 +6,7 @@ import { ChainlinkOracle } from 'entities/oracles'
 import { IOracle } from 'interfaces'
 
 import { e10 } from './math'
-
-// TODO: UPDATE -- BELOW IS MAINNET-ONLY //
-const CHAINLINK_ORACLE_ADDRESS = '0x00632CFe43d8F9f8E6cD0d39Ffa3D4fa7ec73CFB'
+import { CHAINLINK_ORACLE_ADDRESS } from 'constants/underworld'
 
 export function getOracle(chainId: ChainId, address: string, data: string): IOracle {
   if (address.toLowerCase() === CHAINLINK_ORACLE_ADDRESS[chainId].toLowerCase()) {

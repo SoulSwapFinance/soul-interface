@@ -26,7 +26,7 @@ export default function Lend() {
 
   const pairs = useUnderworldPairs(addresses)
 
-  console.log('UNDERWORLD pairs', pairs)
+  console.log('Underworld Pairs', pairs)
 
   const positions = useSearchAndSort(
     pairs.filter((pair) => pair.userAssetFraction.gt(0)),
@@ -176,7 +176,6 @@ export default function Lend() {
   )
 }
 
-// @ts-ignore TYPE NEEDS FIXING
 const LendEntry = ({ pair, userPosition = false }) => {
   return (
     <Link href={'/lend/' + pair.address}>
@@ -246,7 +245,6 @@ const LendEntry = ({ pair, userPosition = false }) => {
 
 Lend.Provider = RecoilRoot
 
-// @ts-ignore TYPE NEEDS FIXING
 const LendLayout = ({ children }) => {
   const { i18n } = useLingui()
   return (

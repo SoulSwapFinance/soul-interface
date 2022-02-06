@@ -121,7 +121,6 @@ export function useCvxPrice(swrConfig: SWRConfiguration = undefined) {
 //   return data
 // }
 
-// @ts-ignore TYPE NEEDS FIXING
 export function useSoulPrice(swrConfig: SWRConfiguration = undefined) {
   const { data } = useSWR(['soulPrice'], () => getSoulPrice(), swrConfig)
   return data
@@ -192,7 +191,6 @@ export function usePairDayData({
 
 export function useTokenDayData(
   { chainId, variables, shouldFetch = true }: GraphProps,
-  // @ts-ignore TYPE NEEDS FIXING
   swrConfig: SWRConfiguration = undefined
 ) {
   const { data } = useSWR(
@@ -206,7 +204,6 @@ export function useTokenDayData(
 export function useDayData({ chainId, variables, shouldFetch = true, swrConfig = undefined }: GraphProps) {
   const { data } = useSWR(
     shouldFetch && !!chainId ? ['dayData', chainId, stringify(variables)] : null,
-    // @ts-ignore TYPE NEEDS FIXING
     (_, chainId) => getDayData(chainId, variables),
     swrConfig
   )
@@ -221,7 +218,6 @@ export function useTokenPairs({
 }: GraphProps) {
   const { data } = useSWR(
     shouldFetch ? ['tokenPairs', chainId, stringify(variables)] : null,
-    // @ts-ignore TYPE NEEDS FIXING
     (_, chainId) => getTokenPairs(chainId, variables),
     swrConfig
   )

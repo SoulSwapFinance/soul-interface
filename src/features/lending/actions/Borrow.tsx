@@ -37,7 +37,7 @@ export default function Borrow({ pair }: BorrowProps) {
   const { account, chainId } = useActiveWeb3React()
 
   // State
-  const [useUnderworldCollateral, setUseUnderworldCollateral] = useState<boolean>(pair.collateral.coffinBalance.gt(0))
+  const [useUnderworldCollateral, setUseUnderworldCollateral] = useState<boolean>(pair.collateral.coffinBalance > 0)
   const [useUnderworldBorrow, setUseUnderworldBorrow] = useState<boolean>(true)
   const [collateralValue, setCollateralValue] = useState('')
   const [borrowValue, setBorrowValue] = useState('')
@@ -94,24 +94,43 @@ export default function Borrow({ pair }: BorrowProps) {
   const swapCollateral = collateralValue.toBigNumber(pair.collateral.tokenInfo.decimals)
 
   const nextUserCollateralValue = pair.userCollateralAmount.value
-    .add(collateralValue.toBigNumber(pair.collateral.tokenInfo.decimals))
-    .add(extraCollateral)
+    + (collateralValue.toBigNumber(pair.collateral.tokenInfo.decimals))
+    + (extraCollateral)
 
   // Calculate max borrow
-  const nextMaxBorrowableOracle = nextUserCollateralValue.mulDiv(e10(16).mul('75'), pair.oracleExchangeRate)
+  const nextMaxBorrowableOracle 
+    = nextUserCollateralValue
+    * (1e16 * 75) 
+    / pair.oracleExchangeRate
 
-  const nextMaxBorrowableSpot = nextUserCollateralValue.mulDiv(e10(16).mul('75'), pair.spotExchangeRate)
+  const nextMaxBorrowableSpot 
+    = nextUserCollateralValue
+    * (1e16 * 75)
+    / pair.spotExchangeRate
 
-  const nextMaxBorrowableStored = nextUserCollateralValue.mulDiv(
-    e10(16).mul('75'),
-    displayUpdateOracle ? pair.oracleExchangeRate : pair.currentExchangeRate
-  )
+  const nextMaxBorrowableStored 
+    = nextUserCollateralValue
+    * (1e16 * 75)
+    / Number(displayUpdateOracle) ? pair.oracleExchangeRate : pair.currentExchangeRate
 
-  const nextMaxBorrowMinimum = minimum(nextMaxBorrowableOracle, nextMaxBorrowableSpot, nextMaxBorrowableStored)
+  const nextMaxBorrowMinimum 
+    // = minimum(nextMaxBorrowableOracle, nextMaxBorrowableSpot, nextMaxBorrowableStored)
+    = nextMaxBorrowableOracle < nextMaxBorrowableSpot
+      && nextMaxBorrowableOracle < nextMaxBorrowableStored ?
+      nextMaxBorrowableOracle 
+      : nextMaxBorrowableSpot < nextMaxBorrowableOracle
+      && nextMaxBorrowableSpot < nextMaxBorrowableStored ?
+      nextMaxBorrowableSpot 
+      : nextMaxBorrowableStored
+
 
   const nextMaxBorrowSafe = nextMaxBorrowMinimum.mulDiv('95', '100').sub(pair.currentUserBorrowAmount.value)
 
-  const nextMaxBorrowPossible = maximum(minimum(nextMaxBorrowSafe, pair.maxAssetAvailable), ZERO)
+  const nextMaxBorrowPossible = 
+    // maximum(minimum(nextMaxBorrowSafe, pair.maxAssetAvailable), ZERO)
+    nextMaxBorrowSafe < pair.maxAssetAvailable
+    && nextMaxBorrowSafe > 0 ? nextMaxBorrowSafe
+    : pair.maxAssetAvailable > 0 ? pair.maxAssetAvailable : 0
 
   const maxBorrow = nextMaxBorrowPossible.toFixed(pair.asset.tokenInfo.decimals)
 
@@ -276,7 +295,8 @@ export default function Borrow({ pair }: BorrowProps) {
         path.length > 2 ? path[1] : AddressZero,
         path.length > 3 ? path[2] : AddressZero,
         account,
-        toShare(pair.collateral, collateralValue.toBigNumber(pair.collateral.tokenInfo.decimals)),
+        toShare(pair.collateral, 
+          Number(collateralValue)),
         borrowValue.toBigNumber(pair.asset.tokenInfo.decimals),
       ])
 
@@ -289,12 +309,13 @@ export default function Borrow({ pair }: BorrowProps) {
           path.length > 2 ? path[1] : AddressZero,
           path.length > 3 ? path[2] : AddressZero,
           account,
-          toShare(pair.collateral, collateralValue.toBigNumber(pair.collateral.tokenInfo.decimals)),
+          toShare(pair.collateral, 
+            Number(collateralValue)),
         ]
       )
 
       cooker.action(
-        SOULSWAP_MULTISWAPPER_ADDRESS[chainId || 1],
+        SOULSWAP_MULTISWAPPER_ADDRESS[chainId || 250],
         ZERO,
         hexConcat([hexlify('0x3087d742'), data]),
         false,
