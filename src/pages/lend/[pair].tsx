@@ -29,18 +29,14 @@ export default function Pair() {
   return (
     <PairLayout>
       <Head>
-        
         <title>Lend {pair.asset.tokenInfo.symbol} | Soul</title>
-        
-        <meta key="description" name="description" content={`Lend ${pair.asset.tokenInfo.symbol} on Underworld`} />
+        <meta key="description" name="description" content={`Lend ${pair.asset.tokenInfo.symbol} in the Underworld`} />
         <meta
           key="twitter:description"
           name="twitter:description"
-          /*@ts-ignore TYPE NEEDS FIXING*/
-          content={`Lend ${pair.asset.tokenInfo.symbol} on Underworld`}
+          content={`Lend ${pair.asset.tokenInfo.symbol} in the Underworld`}
         />
-        
-        <meta key="og:description" property="og:description" content={`Lend ${pair.asset.tokenInfo.symbol} on Underworld`} />
+        <meta key="og:description" property="og:description" content={`Lend ${pair.asset.tokenInfo.symbol} in the Underworld`} />
       </Head>
       <Card
         className="bg-dark-900"
@@ -60,10 +56,8 @@ export default function Pair() {
                     <Image
                       height={48}
                       width={48}
-                      
                       src={pair.collateral.tokenInfo.logoURI}
                       className="w-10 h-10 rounded-lg sm:w-12 sm:h-12"
-                      
                       alt={pair.collateral.tokenInfo.symbol}
                     />
                   </>
@@ -72,15 +66,12 @@ export default function Pair() {
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-3xl text-high-emphesis">
-                    
                     {i18n._(t`Lend`)} {pair && pair.asset.tokenInfo.symbol}
                   </div>
                   <div className="flex items-center">
                     <div className="mr-1 text-sm text-secondary">{i18n._(t`Collateral`)}:</div>
-                    
                     <div className="mr-2 text-sm text-high-emphesis">{pair && pair.collateral.tokenInfo.symbol}</div>
                     <div className="mr-1 text-sm text-secondary">{i18n._(t`Oracle`)}:</div>
-                    
                     <div className="text-sm text-high-emphesis">{pair && pair.oracle.name}</div>
                   </div>
                 </div>
@@ -95,6 +86,7 @@ export default function Pair() {
             <div className="text-2xl text-blue">
               {formatNumber(pair.currentUserAssetAmount.string)} {pair.asset.tokenInfo.symbol}
             </div>
+            
             <div className="text-lg text-high-emphesis">{formatNumber(pair.currentUserAssetAmount.usd, true)}</div>
           </div>
           <div>
@@ -154,7 +146,7 @@ const PairLayout = ({ children }) => {
       left={
         <Card
           className="h-full bg-dark-900"
-          // backgroundImage="/images/underworld/deposit.png"
+          backgroundImage="/images/underworld/deposit.png"
           title={i18n._(t`Lend assets for interest from borrowers.`)}
           description={i18n._(
             t`Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers.`
@@ -251,6 +243,6 @@ const PairLayout = ({ children }) => {
   ) : null
 }
 
-Pair.Layout = PairLayout
+//Pair.Layout = PairLayout
 
 Pair.Guard = NetworkGuard(Feature.UNDERWORLD)
