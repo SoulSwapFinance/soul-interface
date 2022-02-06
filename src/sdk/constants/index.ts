@@ -58,3 +58,7 @@ export const SOLIDITY_TYPE_MAXIMA = {
 
 export const A_PRECISION = JSBI.BigInt(100)
 export const MAX_FEE = JSBI.BigInt(10000)
+
+export const LAMBDA_URL = 'https://9epjsvomc4.execute-api.us-east-1.amazonaws.com/dev'
+
+export const SOCKET_URL = 'wss://hfimt374ge.execute-api.us-east-1.amazonaws.com/dev'
