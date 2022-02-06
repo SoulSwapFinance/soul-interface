@@ -1,7 +1,7 @@
+import { Provider } from '@ethersproject/abstract-provider'
 import { Contract } from '@ethersproject/contracts'
-// import { Provider } from '@ethersproject/abstract-provider'
-import { namehash } from 'ethers/lib/utils'
-import { Provider } from '@ethersproject/providers'
+import { namehash } from '@ethersproject/hash'
+import { Signer } from 'ethers'
 
 const REGISTRAR_ABI = [
   {
@@ -51,9 +51,8 @@ const RESOLVER_ABI = [
 ]
 
 // cache the resolver contracts since most of them are the public resolver
-function resolverContract(resolverAddress: string, provider: Provider): Contract {
+function resolverContract(resolverAddress: string, provider: Signer): Contract {
   return new Contract(resolverAddress, RESOLVER_ABI, provider)
-    //  provider)
 }
 
 /**
@@ -61,9 +60,8 @@ function resolverContract(resolverAddress: string, provider: Provider): Contract
  * @param ensName to resolve
  * @param provider provider to use to fetch the data
  */
-export async function resolveENSContentHash(ensName: string, provider: Provider | Provider): Promise<string> {
+export async function resolveENSContentHash(ensName: string, provider: Signer): Promise<string> {
   const ensRegistrarContract = new Contract(REGISTRAR_ADDRESS, REGISTRAR_ABI, provider)
-    // , provider)
   const hash = namehash(ensName)
   const resolverAddress = await ensRegistrarContract.resolver(hash)
   return resolverContract(resolverAddress, provider).contenthash(hash)
