@@ -1,40 +1,11 @@
 import {
-  ALPHA,
   AMPL,
-  BAB,
-  BAC,
   BSC,
-  CREAM,
-  CRV,
-  CVXCRV,
   DAI,
-  DOUGH,
-  DUCK,
-  ENCHANT,
-  ETH2X_FLI,
   FANTOM,
   FANTOM_TESTNET,
-  FEI,
-  FRAX,
-  FXS,
-  HBTC,
-  IBETH,
-  LFBTC,
-  LIFT,
   MIR,
-  NFTX,
-  PLAY,
-  PONT,
-  PWING,
-  RENBTC,
-  RUNE,
   SOUL,
-  STETH,
-  TRIBE,
-  UMA,
-  USDC,
-  USDP,
-  USDT,
   UST,
   WBTC,
 } from './tokens'
@@ -104,37 +75,6 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
 
 }
 
-// export const ADDITIONAL_BASES: {
-//   [chainId: number]: { [tokenAddress: string]: Token[] }
-// } = {
-//   [ChainId.ETHEREUM]: {
-//     ...MIRROR_ADDITIONAL_BASES,
-//     '0xF16E4d813f4DcfDe4c5b44f305c908742De84eF0': [ETH2X_FLI],
-//     '0xb5083b964a0B6A447564657285AeE1E76524B3Db': [ENCHANT[ChainId.ETHEREUM]], // XSUSHI 25 Call [30 June 2021] // JUL 27th
-//     '0xB46F57e7Ce3a284d74b70447Ef9352B5E5Df8963': [UMA], // UMA 25 Call [30 June 2021]
-//     [FEI.address]: [TRIBE],
-//     [TRIBE.address]: [FEI],
-//     [FRAX.address]: [FXS],
-//     [FXS.address]: [FRAX],
-//     [RENBTC.address]: [WBTC],
-//     [PONT.address]: [PWING],
-//     [PWING.address]: [PONT],
-//     [PLAY.address]: [DOUGH],
-//     [DOUGH.address]: [PLAY],
-//     [IBETH.address]: [ALPHA],
-//     [ALPHA.address]: [IBETH],
-//     [HBTC.address]: [CREAM],
-//     [CREAM.address]: [HBTC],
-//     [DUCK.address]: [USDP],
-//     [USDP.address]: [DUCK],
-//     [BAB.address]: [BAC],
-//     [BAC.address]: [BAB],
-//     [LIFT.address]: [LFBTC],
-//     [LFBTC.address]: [LIFT],
-//     [CVXCRV.address]: [CRV],
-//   },
-// }
-
 /**
  * Some tokens can only be swapped via certain pairs, so we override the list of bases that are considered for these
  * tokens.
@@ -146,25 +86,6 @@ export const CUSTOM_BASES: {
     [AMPL.address]: [DAI, WNATIVE[ChainId.ETHEREUM]],
   },
 }
-
-/**
- * Shows up in the currency select for swap and add liquidity
- */
-// export const COMMON_BASES: ChainCurrencyList = {
-//     [ChainId.ETHEREUM]: [ExtendedEther.onChain(1), DAI, USDC, USDT, WBTC, WETH9_EXTENDED[1]],
-//     [3]: [ExtendedEther.onChain(3), WETH9_EXTENDED[3]],
-//     [4]: [ExtendedEther.onChain(4), WETH9_EXTENDED[4]],
-//     [5]: [ExtendedEther.onChain(5), WETH9_EXTENDED[5]],
-//     [42]: [ExtendedEther.onChain(42), WETH9_EXTENDED[42]],
-//     [SupportedChainId.ARBITRUM_KOVAN]: [
-//         ExtendedEther.onChain(SupportedChainId.ARBITRUM_KOVAN),
-//         WETH9_EXTENDED[SupportedChainId.ARBITRUM_KOVAN],
-//     ],
-//     [SupportedChainId.ARBITRUM_ONE]: [
-//         ExtendedEther.onChain(SupportedChainId.ARBITRUM_ONE),
-//         WETH9_EXTENDED[SupportedChainId.ARBITRUM_ONE],
-//     ],
-// }
 
 /**
  * Shows up in the currency select for swap and add liquidity

@@ -110,18 +110,14 @@ export default function useFarmRewards() {
 
     const blocksPerDay = 86400 / Number(averageBlockTime)
 
-    // @ts-ignore TYPE NEEDS FIXING
     const map = (pool) => {
         // TODO: Deal with inconsistencies between properties on subgraph
         pool.owner = pool?.owner || pool?.masterChef || pool?.miniChef
         pool.balance = pool?.balance || pool?.slpBalance
 
-        // @ts-ignore TYPE NEEDS FIXING
         const swapPair = swapPairs?.find((pair) => pair.id === pool.pair)
-        // @ts-ignore TYPE NEEDS FIXING
         const swapPair1d = swapPairs1d?.find((pair) => pair.id === pool.pair)
-        // @ts-ignore TYPE NEEDS FIXING
-        // const underworldPair = underworldPairs?.find((pair) => pair.id === pool.pair)
+        const underworldPair = underworldPairs?.find((pair) => pair.id === pool.pair)
 
         const pair = swapPair || underworldPair
 
@@ -135,20 +131,18 @@ export default function useFarmRewards() {
                 pool?.owner?.soulPerBlock / 1e18 ||
                 (pool?.owner?.soulPerSecond / 1e18) * averageBlockTime
 
-            // @ts-ignore TYPE NEEDS FIXING
             const rewardPerBlock = (pool.allocPoint / pool.owner.totalAllocPoint) * soulPerBlock
 
             const defaultReward = {
-                currency: SOUL_ADDRESS[ChainId.ETHEREUM],
+                currency: SOUL_ADDRESS[ChainId.FANTOM],
                 rewardPerBlock,
                 rewardPerDay: rewardPerBlock * blocksPerDay,
                 rewardPrice: soulPrice,
             }
 
-            let rewards: { currency: Currency; rewardPerBlock: number; rewardPerDay: number; rewardPrice: number }[] = [
-                // @ts-ignore TYPE NEEDS FIXING
-                defaultReward,
-            ]
+            // let rewards: { currency: Currency; rewardPerBlock: number; rewardPerDay: number; rewardPrice: number }[] = [
+            //     defaultReward,
+            // ]
 
             if (pool.chef === Chef.MASTERCHEF_V2) {
                 // override for mcv2...
@@ -189,7 +183,7 @@ export default function useFarmRewards() {
 
                     const reward = {
                         currency: new Token(
-                            ChainId.ETHEREUM,
+                            ChainId.FANTOM,
                             getAddress(pool.rewardToken.id),
                             Number(pool.rewardToken.decimals),
                             pool.rewardToken.symbol,

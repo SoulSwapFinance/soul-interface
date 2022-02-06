@@ -1,7 +1,7 @@
 import { Provider } from '@ethersproject/abstract-provider'
+import { Signer } from '@ethersproject/abstract-signer'
 import { Contract } from '@ethersproject/contracts'
 import { namehash } from '@ethersproject/hash'
-import { Signer } from 'ethers'
 
 const REGISTRAR_ABI = [
   {
@@ -51,8 +51,8 @@ const RESOLVER_ABI = [
 ]
 
 // cache the resolver contracts since most of them are the public resolver
-function resolverContract(resolverAddress: string, provider: Signer): Contract {
-  return new Contract(resolverAddress, RESOLVER_ABI, provider)
+function resolverContract(resolverAddress: string, signerOrProvider?: Signer | Provider): Contract {
+  return new Contract(resolverAddress, RESOLVER_ABI)
 }
 
 /**
@@ -60,11 +60,11 @@ function resolverContract(resolverAddress: string, provider: Signer): Contract {
  * @param ensName to resolve
  * @param provider provider to use to fetch the data
  */
-export async function resolveENSContentHash(ensName: string, provider: Signer): Promise<string> {
-  const ensRegistrarContract = new Contract(REGISTRAR_ADDRESS, REGISTRAR_ABI, provider)
+export async function resolveENSContentHash(ensName: string, signerOrProvider?: Signer | Provider): Promise<string> {
+  const ensRegistrarContract = new Contract(REGISTRAR_ADDRESS, REGISTRAR_ABI)
   const hash = namehash(ensName)
   const resolverAddress = await ensRegistrarContract.resolver(hash)
-  return resolverContract(resolverAddress, provider).contenthash(hash)
+  return resolverContract(resolverAddress, signerOrProvider).contenthash(hash)
 }
 
 const ENS_NAME_REGEX = /^(([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.)+)eth(\/.*)?$/
