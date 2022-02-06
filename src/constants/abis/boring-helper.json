@@ -261,7 +261,7 @@
       { "internalType": "address", "name": "who", "type": "address" },
       { "internalType": "contract IUnderworldPair[]", "name": "pairsIn", "type": "address[]" }
     ],
-    "name": "pollKashiPairs",
+    "name": "pollUnderworldPairs",
     "outputs": [
       {
         "components": [

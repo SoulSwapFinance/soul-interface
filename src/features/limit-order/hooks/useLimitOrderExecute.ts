@@ -193,7 +193,7 @@ const useLimitOrderExecute: UseLimitOrderExecute = () => {
 
       try {
         dispatch(setLimitOrderAttemptingTxn(true))
-        await order?.signOrderWithProvider(chainId || 250, library)
+        await order?.signOrderWithProvider(chainId || 1, library)
 
         const resp = await order?.send()
         if (resp.success) {
