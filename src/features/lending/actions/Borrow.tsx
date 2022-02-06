@@ -183,7 +183,7 @@ export default function Borrow({ pair }: BorrowProps) {
       )
     )
     .add(
-      borrowValue.length > 0 && pair.maxAssetAvailable.lt(borrowValue.toBigNumber(pair.asset.tokenInfo.decimals)),
+      borrowValue.length > 0 && pair.maxAssetAvailable < borrowValue,
       'Not enough liquidity in this pair.',
       true
     )
@@ -325,7 +325,7 @@ export default function Borrow({ pair }: BorrowProps) {
     }
     if (collateralValueSet) {
       cooker.addCollateral(
-        swap ? BigNumber.from(-1) : collateralValue.toBigNumber(pair.collateral.tokenInfo.decimals),
+        swap ? -1 : Number(collateralValue),
         useUnderworldCollateral || swap
       )
     }

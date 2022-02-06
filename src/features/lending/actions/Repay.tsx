@@ -306,7 +306,7 @@ export default function Repay({ pair }: RepayProps) {
       cooker.repayPart(pair.userBorrowPart, true)
 
       if (!useCoffinRemove) {
-        cooker.coffinWithdrawCollateral(ZERO, BigNumber.from(-1))
+        cooker.coffinWithdrawCollateral(0, -1)
       }
 
       summary = 'Repay All'

@@ -217,6 +217,9 @@ msgstr "Balance:"
 msgid "Balanced Mode is an optional UI setting to maintain the traditional style of equal-value adds and removes."
 msgstr "Balanced Mode is an optional UI setting to maintain the traditional style of equal-value adds and removes."
 
+msgid "Balances"
+msgstr "Balances"
+
 msgid "Bonds"
 msgstr "Bonds"
 
@@ -392,8 +395,8 @@ msgstr "Considerations"
 msgid "Copied"
 msgstr "Copied"
 
-msgid "Copy Address"
-msgstr "Copy Address"
+msgid "Copy"
+msgstr "Copy"
 
 msgid "Create Limit Order"
 msgstr "Create Limit Order"
@@ -503,9 +506,6 @@ msgstr "Enable Expert Mode"
 msgid "English"
 msgstr "English"
 
-msgid "Enter"
-msgstr "Enter"
-
 msgid "Enter Amount"
 msgstr "Enter Amount"
 
@@ -572,6 +572,9 @@ msgstr "Explore More"
 
 msgid "Explore our Protocol."
 msgstr "Explore our Protocol."
+
+msgid "Explorer"
+msgstr "Explorer"
 
 msgid "FARM"
 msgstr "FARM"
@@ -923,9 +926,6 @@ msgstr "Migrating"
 
 msgid "Migration is done in one-click using your signature (permit)"
 msgstr "Migration is done in one-click using your signature (permit)"
-
-msgid "Min. Received"
-msgstr "Min. Received"
 
 msgid "Minimum Received"
 msgstr "Minimum Received"
@@ -1318,9 +1318,6 @@ msgstr "Soul Vault"
 msgid "SoulSwap"
 msgstr "SoulSwap"
 
-msgid "SoulSwap Apps"
-msgstr "SoulSwap Apps"
-
 msgid "SoulSwap Farms"
 msgstr "SoulSwap Farms"
 
@@ -1608,14 +1605,8 @@ msgstr "Vesting is executed within the guidelines selected by the community in"
 msgid "Vietnamese"
 msgstr "Vietnamese"
 
-msgid "View Balances"
-msgstr "View Balances"
-
 msgid "View Charts"
 msgstr "View Charts"
-
-msgid "View Explorer"
-msgstr "View Explorer"
 
 msgid "View Liquidity Positions"
 msgstr "View Liquidity Positions"
@@ -1668,8 +1659,8 @@ msgstr "Withdraw from Scarab {id}"
 msgid "Withdraw from locker {id}"
 msgstr "Withdraw from locker {id}"
 
-msgid "Withdraw to wallet"
-msgstr "Withdraw to wallet"
+msgid "Withdraw to Wallet"
+msgstr "Withdraw to Wallet"
 
 msgid "Withdraw {0} to Wallet"
 msgstr "Withdraw {0} to Wallet"

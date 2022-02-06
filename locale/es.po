@@ -217,6 +217,9 @@ msgstr ""
 msgid "Balanced Mode is an optional UI setting to maintain the traditional style of equal-value adds and removes."
 msgstr ""
 
+msgid "Balances"
+msgstr ""
+
 msgid "Bonds"
 msgstr ""
 
@@ -387,7 +390,7 @@ msgstr ""
 msgid "Copied"
 msgstr ""
 
-msgid "Copy Address"
+msgid "Copy"
 msgstr ""
 
 msgid "Create Limit Order"
@@ -498,9 +501,6 @@ msgstr ""
 msgid "English"
 msgstr ""
 
-msgid "Enter"
-msgstr ""
-
 msgid "Enter Amount"
 msgstr ""
 
@@ -564,6 +564,9 @@ msgid "Explore More"
 msgstr ""
 
 msgid "Explore our Protocol."
+msgstr ""
+
+msgid "Explorer"
 msgstr ""
 
 msgid "FARM"
@@ -909,9 +912,6 @@ msgid "Migrating"
 msgstr ""
 
 msgid "Migration is done in one-click using your signature (permit)"
-msgstr ""
-
-msgid "Min. Received"
 msgstr ""
 
 msgid "Minimum Received"
@@ -1297,9 +1297,6 @@ msgstr ""
 msgid "SoulSwap"
 msgstr ""
 
-msgid "SoulSwap Apps"
-msgstr ""
-
 msgid "SoulSwap Farms"
 msgstr ""
 
@@ -1583,13 +1580,7 @@ msgstr ""
 msgid "Vietnamese"
 msgstr ""
 
-msgid "View Balances"
-msgstr ""
-
 msgid "View Charts"
-msgstr ""
-
-msgid "View Explorer"
 msgstr ""
 
 msgid "View Liquidity Positions"
@@ -1643,7 +1634,7 @@ msgstr ""
 msgid "Withdraw from locker {id}"
 msgstr ""
 
-msgid "Withdraw to wallet"
+msgid "Withdraw to Wallet"
 msgstr ""
 
 msgid "Withdraw {0} to Wallet"
