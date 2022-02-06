@@ -101,7 +101,7 @@ function AppBar(): JSX.Element {
                       <NavLink href={'/lend'}>
                         <a
                           id={`lend-nav-link`}
-                          className="hidden md:block w-full relative ml-6 md:p-2"
+                          className="w-full relative ml-6 md:p-2"
                         >
                           {i18n._(t`LEND`)}
                         </a>
