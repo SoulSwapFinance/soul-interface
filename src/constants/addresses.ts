@@ -297,3 +297,65 @@ export const STOP_LIMIT_ORDER_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x6AaC28444cB227EC5D5cebe696882DeCcD50ee83', // TODO
   [ChainId.FANTOM_TESTNET]: '',
 }
+
+export const COFFIN_BOX_ADDRESS: {
+  [chainId in ChainId]: string
+} = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xF539C37275e947F24480fAb9f7e302aE827570b2', // FEB22
+  [ChainId.FANTOM_TESTNET]: ''
+}
+
+export const UNDERWORLD_ADDRESS: {
+  [chainId in ChainId]: string
+} = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x94f2ae18250507506C77cefc14EE7B4b95d323B1', // FEB22
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
+export const SOULSWAP_SWAPPER_ADDRESS: {
+  [chainId in ChainId]: string
+} = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xb2b22549F6586Cd81054677C6b9413Cea9587fd7', // FEB22
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
+export const SOULSWAP_MULTISWAPPER_ADDRESS: {
+  [chainId in ChainId]: string
+} = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xbA1d9DdC58bD750ab05217b1eDD864FDb495Ab57', // FEB22
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
+export const SOULSWAP_MULTI_EXACT_SWAPPER_ADDRESS = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xb988D44aF0065649E05e61B7d35b6121ff2b537E', // FEB22
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
+export const PEGGED_ORACLE_ADDRESS = '0x287928938FC9c11c7D138778fB74c83223ca5CeA' // FEB22
+
+export const SOULSWAP_TWAP_0_ORACLE_ADDRESS = '0x7a6d653B8248dA8d2DED372Ae6b3669bA1d81cFC' // FEB22
+
+export const SOULSWAP_TWAP_1_ORACLE_ADDRESS = '0x7b00f395e20d07eD50f03FC61eE1e72Fd0D331d9' // FEB22
+
+export const CHAINLINK_ORACLE_ADDRESS = {
+  [ChainId.ETHEREUM]: '0x00632CFe43d8F9f8E6cD0d39Ffa3D4fa7ec73CFB',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xCDd5Df7146B278c90c572b6c6F933C6b7ce2b41e', // FEB22
+}
+
+export const SOUL_GUIDE_ADDRESS = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '',
+  [ChainId.FANTOM_TESTNET]: '0x5A6B3Ce2736E9B731Fba73262884016b50c39184',
+}

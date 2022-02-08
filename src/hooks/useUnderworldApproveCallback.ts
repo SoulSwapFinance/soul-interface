@@ -1,7 +1,7 @@
 import UnderworldCooker, { signMasterContractApproval } from '../entities/UnderworldCooker'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { UNDERWORLD_ADDRESS } from '../constants/underworld'
+import { UNDERWORLD_ADDRESS } from '../constants'
 import { ethers } from 'ethers'
 import { setUnderworldApprovalPending } from '../state/application/actions'
 import { useActiveWeb3React } from 'services/web3'

@@ -776,6 +776,9 @@ msgstr ""
 msgid "LAUNCH"
 msgstr ""
 
+msgid "LEND"
+msgstr ""
+
 msgid "LIQUIDITY"
 msgstr ""
 
@@ -1596,6 +1599,12 @@ msgid "View your Dashboard."
 msgstr ""
 
 msgid "View your Trades."
+msgstr ""
+
+msgid "View {0} Open Order"
+msgstr ""
+
+msgid "View {0} Open Orders"
 msgstr ""
 
 msgid "WALLET"

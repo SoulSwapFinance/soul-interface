@@ -187,7 +187,7 @@ const AssetInputPanel = ({
   let tokenA = useCurrency(token0)
   let tokenB = useCurrency(token1)
 
-  console.log('token0: ', token0)
+  // console.log('token0: ', token0)
 
   let [data] = useV2PairsWithPrice([[tokenA, tokenB]])
   let [state, pair, pairPrice] = data

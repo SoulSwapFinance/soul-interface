@@ -46,7 +46,7 @@ import {
   SOULSWAP_TWAP_0_ORACLE_ADDRESS,
   SOULSWAP_TWAP_1_ORACLE_ADDRESS,
   SOULSWAP_SWAPPER_ADDRESS,
-} from '../constants/underworld'
+} from '../constants'
 import { MERKLE_DISTRIBUTOR_ADDRESS } from '../constants'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from '../constants/multicall'
 import ALCX_REWARDER_ABI from '../constants/abis/alcx-rewarder.json'

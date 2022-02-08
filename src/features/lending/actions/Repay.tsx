@@ -92,8 +92,8 @@ export default function Repay({ pair }: RepayProps) {
     ? nextMinCollateralSpot
     : nextMinCollateralStored
 
-  let removeCollatoral = pair.userCollateralAmount.value - Number(nextMinCollateralMinimum) * 100 / 95
-  const nextMaxRemoveCollateral = removeCollatoral > 0 ? removeCollatoral : 0
+  let removeCollatoral = pair.userCollateralAmount.value.sub(nextMinCollateralMinimum.mulDiv(100, 95))
+  const nextMaxRemoveCollateral = removeCollatoral.gt(0) ? removeCollatoral : ZERO
 
   const maxRemoveCollateral 
     = nextMaxRemoveCollateral
