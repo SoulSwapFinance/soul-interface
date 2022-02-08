@@ -1,5 +1,5 @@
 import { ChainId, Percent } from '../../sdk'
-import React, { useRef, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import { CheckIcon, CogIcon } from '@heroicons/react/outline'
 import {
   useExpertModeManager,
@@ -40,7 +40,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
   // show confirmation view before turning on
   const [showConfirmation, setShowConfirmation] = useState(false)
 
-  useOnClickOutside(node, open ? toggle : undefined)
+  useOnClickOutside(node, toggle);
 
   const [ttl, setTtl] = useUserTransactionTTL()
 
@@ -70,6 +70,9 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
               {i18n._(t`Interface Settings`)}
             </Typography>
 
+            {/*
+              Removing the expert mode as it doesn't work with a modal already opened, and closing the modal doesn't make sense
+
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <Typography variant="sm" className="text-primary">
@@ -95,6 +98,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
                 }
               />
             </div>
+            */}
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <Typography variant="sm" className="text-primary">
