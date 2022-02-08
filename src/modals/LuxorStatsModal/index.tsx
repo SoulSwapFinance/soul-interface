@@ -91,11 +91,8 @@ export default function LuxorStatsModal(): JSX.Element | null {
     >
       <div className="space-y-8">
         <div className="space-y-4">
-          <ModalHeader header={''} onClose={toggleLuxorStatsModal} />
-          {/* <Wrapper className="flex flex-col-2 justify-between" > */}
-          <div className="flex flex-col-2 w-full py-4">
-            {/* <div className="block"> */}
-            {/* <QuestionHelper text={`Add to MetaMask`}> */}
+          <div className="flex flex-col-2 w-full">
+            <ModalHeader header={''} onClose={toggleLuxorStatsModal} />
             <div
               className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
               onClick={() => {
@@ -128,8 +125,8 @@ export default function LuxorStatsModal(): JSX.Element | null {
               <Image
                 src="/images/tokens/LUX-transparent.png"
                 alt="LUX"
-                width="1200px"
-                height="1200px"
+                width="1600px"
+                height="1600px"
                 objectFit="contain"
                 className="rounded-md"
               />
@@ -166,8 +163,8 @@ export default function LuxorStatsModal(): JSX.Element | null {
               <Image
                 src="/images/tokens/wlumens-transparent.png"
                 alt="WLUM"
-                width="1200px"
-                height="1200px"
+                width="1600px"
+                height="1600px"
                 objectFit="contain"
                 className="rounded-md"
               />
@@ -270,7 +267,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
             luxTvl, true)
             ,
             ` (${((luxTvl / tvl * 100).toFixed(0))}%)`)
-          )}
+        )}
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Luxor Market Price`}

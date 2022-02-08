@@ -49,7 +49,6 @@ export async function getServerSideProps() {
   }
 }
 
-/* @ts-ignore TYPE NEEDS FIXING */
 const Swap = () => {
   const { i18n } = useLingui()
   const loadedUrlParams = useDefaultsFromURLSearch()
@@ -457,6 +456,7 @@ const Swap = () => {
               {approvalState !== ApprovalState.APPROVED && (
                 <Button
                   fullWidth
+                  color = "purple"
                   loading={approvalState === ApprovalState.PENDING}
                   onClick={handleApprove}
                   disabled={approvalState !== ApprovalState.NOT_APPROVED || approvalSubmitted}

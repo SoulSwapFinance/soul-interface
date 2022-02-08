@@ -89,9 +89,9 @@ export default function SoulStatsModal(): JSX.Element | null {
     >
       <div className="space-y-8">
         <div className="space-y-4">
-          <ModalHeader header={''} onClose={toggleSoulStatsModal} />
           {/* <Wrapper className="flex flex-col-2 justify-between" > */}
-          <div className="flex justify-between flex-col-2 w-full py-4">
+          <div className="flex justify-between flex-col-2 w-full">
+          <ModalHeader header={''} onClose={toggleSoulStatsModal} />
             {/* <div className="block"> */}
             {/* <QuestionHelper text={`Add to MetaMask`}/> */}
             <div
@@ -126,8 +126,8 @@ export default function SoulStatsModal(): JSX.Element | null {
               <Image
                 src="https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png"
                 alt="SOUL"
-                width="1200px"
-                height="1200px"
+                width="1600px"
+                height="1600px"
                 objectFit="contain"
                 className="rounded-md"
               />
@@ -164,8 +164,8 @@ export default function SoulStatsModal(): JSX.Element | null {
               <Image
                 src="https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x124B06C5ce47De7A6e9EFDA71a946717130079E6/logo.png"
                 alt="SEANCE"
-                width="1200px"
-                height="1200px"
+                width="1600px"
+                height="1600px"
                 objectFit="contain"
                 className="rounded-md"
               />
