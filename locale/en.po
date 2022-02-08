@@ -789,6 +789,9 @@ msgstr "Korean"
 msgid "LAUNCH"
 msgstr "LAUNCH"
 
+msgid "LEND"
+msgstr "LEND"
+
 msgid "LIQUIDITY"
 msgstr "LIQUIDITY"
 
@@ -1622,6 +1625,12 @@ msgstr "View your Dashboard."
 
 msgid "View your Trades."
 msgstr "View your Trades."
+
+msgid "View {0} Open Order"
+msgstr "View {0} Open Order"
+
+msgid "View {0} Open Orders"
+msgstr "View {0} Open Orders"
 
 msgid "WALLET"
 msgstr "WALLET"

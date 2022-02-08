@@ -20,7 +20,7 @@ import { useTransactionAdder } from 'state/transactions/hooks'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useCallback } from 'react'
-import { CHAINLINK_ORACLE_ADDRESS, UNDERWORLD_ADDRESS } from 'constants/underworld'
+import { CHAINLINK_ORACLE_ADDRESS, UNDERWORLD_ADDRESS } from '../../constants'
 
 export type ChainlinkToken = {
   symbol: string

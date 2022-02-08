@@ -78,8 +78,8 @@ export default function Withdraw({ pair }: any): JSX.Element {
       * pair.currentBorrowAmount.value
       / (pair.currentAllAssets.value - amount)
 
-    transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, BigNumber.from(newUtilization))
-  }
+      transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
+    }
 
   // Handlers
   async function onExecute(cooker: UnderworldCooker) {

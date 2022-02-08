@@ -2,7 +2,7 @@ import {
   CHAINLINK_ORACLE_ADDRESS,
   SOULSWAP_TWAP_0_ORACLE_ADDRESS,
   SOULSWAP_TWAP_1_ORACLE_ADDRESS,
-} from '../constants/underworld'
+} from '../constants'
 import { ChainId, Token } from '../sdk'
 
 import { CHAINLINK_MAPPING } from '../constants/chainlink'
