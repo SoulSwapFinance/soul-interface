@@ -210,7 +210,7 @@ export default class UnderworldCooker {
   addCollateral(amount: BigNumber, fromCoffin: boolean): UnderworldCooker {
     let share: BigNumber
     if (fromCoffin) {
-      amount.lt(0) ? share = amount : share = toShare(this.pair.collateral, Number(amount))
+      amount.lt(0) ? share = amount : share = BigNumber.from(toShare(this.pair.collateral, Number(amount)))
     } else {
       const useNative = this.pair.collateral.address === WNATIVE[this.chainId].address
 
@@ -232,7 +232,7 @@ export default class UnderworldCooker {
   addAsset(amount: BigNumber, fromCoffin: boolean, burnShare: boolean = false): UnderworldCooker {
     let share: BigNumber
     if (fromCoffin) {
-      share = toShare(this.pair.asset, Number(amount))
+      share = BigNumber.from(toShare(this.pair.asset, Number(amount)))
     } else {
       const useNative = this.pair.asset.address === WNATIVE[this.chainId].address
 

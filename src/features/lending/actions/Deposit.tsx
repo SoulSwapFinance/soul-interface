@@ -63,14 +63,14 @@ export default function Deposit({ pair }: any): JSX.Element {
 
   if (value && !warnings.broken) {
     const amount = value
-    const newUserAssetAmount = pair.currentUserAssetAmount.value + amount
+    const newUserAssetAmount = Number(pair.currentUserAssetAmount.value) + Number(amount)
     transactionReview.addTokenAmount(
       i18n._(t`Balance`),
       pair.currentUserAssetAmount.value,
-      Number(newUserAssetAmount),
+      newUserAssetAmount,
       pair.asset
     )
-    transactionReview.addUSD(i18n._(t`Balance USD`), pair.currentUserAssetAmount.value, Number(newUserAssetAmount), pair.asset)
+    transactionReview.addUSD(i18n._(t`Balance USD`), pair.currentUserAssetAmount.value, newUserAssetAmount, pair.asset)
     const newUtilization 
       // 
       // = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.add(amount))
