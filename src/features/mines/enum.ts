@@ -16,9 +16,11 @@ export enum PairType {
   UNDERWORLD,
 }
 
+
 export enum MineModalView {
   Liquidity,
   Staking,
   Position,
   AddLiquidityConfirm,
+  Rewards
 }
