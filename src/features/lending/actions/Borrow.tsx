@@ -325,7 +325,7 @@ export default function Borrow({ pair }: BorrowProps) {
     }
     if (collateralValueSet) {
       cooker.addCollateral(
-        swap ? -1 : Number(collateralValue),
+        swap ? BigNumber.from(-1) : BigNumber.from(collateralValue),
         useUnderworldCollateral || swap
       )
     }

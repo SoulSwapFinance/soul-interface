@@ -107,7 +107,7 @@ export default function Deposit({ pair }: any): JSX.Element {
       '0x000000000000000000000000000000000000dead'
     )
 
-    cooker.addAsset(Number(amount), useCoffin, deadBalance.isZero())
+    cooker.addAsset(BigNumber.from(amount), useCoffin, deadBalance.isZero())
 
     return `${i18n._(t`Deposit`)} ${pair.asset.tokenInfo.symbol}`
   }

@@ -210,9 +210,9 @@ export function useUnderworldPairs(addresses = []) {
         // Maximum amount of assets available for withdrawal or borrow
         pair.maxAssetAvailable =
         pair.totalAsset.elastic * Number(pair.currentAllAssets.value) / pair.currentAllAssetShares
-        > toAmount(pair.asset, toElastic(pair.currentTotalAsset, pair.totalAsset.base - 1000, false)) ?
+        > toAmount(pair.asset, Number(toElastic(pair.currentTotalAsset, pair.totalAsset.base.sub(1000), false))) ?
         pair.totalAsset.elastic * Number(pair.currentAllAssets.value) / pair.currentAllAssetShares :
-        toAmount(pair.asset, toElastic(pair.currentTotalAsset, pair.totalAsset.base - 1000, false))
+        toAmount(pair.asset, Number(toElastic(pair.currentTotalAsset, pair.totalAsset.base.sub(1000), false)))
 
         // minimum(
         //   pair.totalAsset.elastic.mulDiv(pair.currentAllAssets.value, pair.currentAllAssetShares),

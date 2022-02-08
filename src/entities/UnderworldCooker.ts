@@ -207,10 +207,10 @@ export default class UnderworldCooker {
     return this
   }
 
-  addCollateral(amount: number, fromCoffin: boolean): UnderworldCooker {
-    let share: number
+  addCollateral(amount: BigNumber, fromCoffin: boolean): UnderworldCooker {
+    let share: BigNumber
     if (fromCoffin) {
-      share = amount < 0 ? amount : toShare(this.pair.collateral, amount)
+      amount.lt(0) ? share = amount : share = toShare(this.pair.collateral, Number(amount))
     } else {
       const useNative = this.pair.collateral.address === WNATIVE[this.chainId].address
 
@@ -222,17 +222,17 @@ export default class UnderworldCooker {
         ),
         useNative ? amount : ZERO
       )
-      share = -2
+      share.eq(-2)
     }
 
     this.add(Action.ADD_COLLATERAL, defaultAbiCoder.encode(['int256', 'address', 'bool'], [share, this.account, false]))
     return this
   }
 
-  addAsset(amount: number, fromCoffin: boolean, burnShare: boolean = false): UnderworldCooker {
-    let share: number
+  addAsset(amount: BigNumber, fromCoffin: boolean, burnShare: boolean = false): UnderworldCooker {
+    let share: BigNumber
     if (fromCoffin) {
-      share = toShare(this.pair.asset, amount)
+      share = toShare(this.pair.asset, Number(amount))
     } else {
       const useNative = this.pair.asset.address === WNATIVE[this.chainId].address
 
@@ -244,7 +244,7 @@ export default class UnderworldCooker {
         ),
         useNative ? amount : ZERO
       )
-      share = -2
+      share.eq(-2)
     }
 
     this.add(Action.ADD_ASSET, defaultAbiCoder.encode(['int256', 'address', 'bool'], [share, this.account, false]))
@@ -342,7 +342,7 @@ export default class UnderworldCooker {
     return this
   }
 
-  repayPart(part: number, fromCoffin: boolean): UnderworldCooker {
+  repayPart(part: BigNumber, fromCoffin: boolean): UnderworldCooker {
     if (!fromCoffin) {
       const useNative = this.pair.asset.address === WNATIVE[this.chainId].address
 
@@ -354,7 +354,9 @@ export default class UnderworldCooker {
           [useNative ? AddressZero : this.pair.asset.address, this.account, 0, -1]
         ),
         // TODO: Put some warning in the UI or not allow repaying ETH directly from wallet, because this can't be pre-calculated
-        useNative ? toShare(this.pair.asset, toElastic(this.pair.totalBorrow, part, true)) * 1001 / 1000 : 0
+        // TODO: FIX BELOW
+        // useNative ? toShare(this.pair.asset, toElastic(
+        //   this.pair.totalBorrow, part, true).mulDiv(1001,1000)) : 0
       )
     }
     this.add(Action.REPAY, defaultAbiCoder.encode(['int256', 'address', 'bool'], [part, this.account, false]))
