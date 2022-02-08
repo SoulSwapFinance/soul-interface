@@ -99,7 +99,7 @@ const FarmList = ({ farms, term }) => {
                   setSelectedFarm(farm)
                   dispatch(
                     setMinesModalState({
-                      view: positionIds.includes(farm.id) ? MineModalView.Position : MineModalView.Liquidity,
+                      view: farm.id === "0" || positionIds.includes(farm.id) ? MineModalView.Position : MineModalView.Liquidity,
                       open: true,
                     })
                   )
