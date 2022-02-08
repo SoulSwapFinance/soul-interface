@@ -283,8 +283,8 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
       const fixedPidTvl = Number(pidTvl).toFixed(0)
       const fixedApr = Number(apr).toFixed(0)
 
-      console.log('SOUL', '- fixedPidTvl', fixedPidTvl)
-      console.log('SOUL', '- fixedApr', fixedApr)
+      // console.log('SOUL', '- fixedPidTvl', fixedPidTvl)
+      // console.log('SOUL', '- fixedApr', fixedApr)
 
       return [fixedPidTvl, fixedApr]
     } catch (e) {
@@ -363,10 +363,10 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   const userInfo = async (pid, account) => {
     try {
       const result = await bondContract?.userInfo(pid, account)
-      console.log('userInfoResult:', result)
+      // console.log('userInfoResult:', result)
       const amount = result?.[0].toString()
       const rewardDebt = result?.[1].toString()
-      console.log(amount, 'lp deposited')
+      // console.log(amount, 'lp deposited')
       return [amount, rewardDebt]
     } catch (e) {
       console.log(e)
@@ -622,16 +622,16 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
       // SOUL held by summoner
       const rawSummonerBal = await lpTokenContract?.balanceOf(SoulBondAddress)
       const summonerBalance = BigNumber.from(ethers.utils.formatUnits(rawSummonerBal))
-      console.log('summonerBalance', ethers.utils.formatUnits(summonerBalance))
+      // console.log('summonerBalance', ethers.utils.formatUnits(summonerBalance))
 
       // summonerBal * soulPrice = TVL
 
       const rawSoulPrice = await fusdPerSoul()
       const soulPrice = BigNumber.from(ethers.utils.formatUnits(rawSoulPrice))
-      console.log('soulPrice', soulPrice)
+      // console.log('soulPrice', soulPrice)
 
       const totalLpValue = summonerBalance.mul(soulPrice)
-      console.log('totalLpValue', totalLpValue)
+      // console.log('totalLpValue', totalLpValue)
 
       return totalLpValue
     } catch (e) {

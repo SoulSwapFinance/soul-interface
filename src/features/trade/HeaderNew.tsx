@@ -13,10 +13,8 @@ const getQuery = (input?: Currency, output?: Currency) => {
   if (!input && !output) return
 
   if (input && !output) {
-    // @ts-ignore
     return { inputCurrency: input.address || 'FTM' }
   } else if (input && output) {
-    // @ts-ignore
     return { inputCurrency: input.address, outputCurrency: output.address }
   }
 }
@@ -77,7 +75,7 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
         </NavLink>
       </div>
       <div className="flex gap-4">
-        {isLimitOrder && <MyOrders />}
+        {/* {isLimitOrder && <MyOrders />} */}
         <Settings
         // className="!w-6 !h-6" 
         />

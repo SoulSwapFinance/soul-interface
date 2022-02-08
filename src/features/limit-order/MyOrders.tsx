@@ -22,7 +22,7 @@ const MyOrders: FC = () => {
   return (
     <div onClick={() => router.push('/limit-order/open')}>
       {pending.totalOrders > 0 ? (
-        <Badge color="blue" value={pending.totalOrders}>
+        <Badge color="purple" value={pending.totalOrders}>
           {content}
         </Badge>
       ) : (

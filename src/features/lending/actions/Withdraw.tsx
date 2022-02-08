@@ -14,6 +14,7 @@ import { UnderworldApproveButton } from '../components/Button'
 import SmartNumberInput from '../components/SmartNumberInput'
 import TransactionReviewView from '../components/TransactionReview'
 import WarningsView from '../components/WarningsList'
+import { BigNumber } from '@ethersproject/bignumber'
 
 export default function Withdraw({ pair }: any): JSX.Element {
   const { account } = useActiveWeb3React()
@@ -77,7 +78,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
       * pair.currentBorrowAmount.value
       / (pair.currentAllAssets.value - amount)
 
-    transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
+    transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, BigNumber.from(newUtilization))
   }
 
   // Handlers

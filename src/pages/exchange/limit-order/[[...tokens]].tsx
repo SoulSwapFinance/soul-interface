@@ -28,6 +28,10 @@ import useLimitOrderDerivedCurrencies, {
 } from 'state/limit-order/hooks'
 import { useExpertModeManager } from 'state/user/hooks'
 import React, { useMemo } from 'react'
+import NavLink from 'components/NavLink'
+import Badge from 'components/Badge'
+import useLimitOrders from 'features/limit-order/hooks/useLimitOrders'
+
 
 const LimitOrder = () => {
   const { i18n } = useLingui()
@@ -36,6 +40,7 @@ const LimitOrder = () => {
   const [isExpertMode] = useExpertModeManager()
   const { typedField, typedValue, fromCoffinBalance, recipient } = useLimitOrderState()
   const { inputCurrency, outputCurrency } = useLimitOrderDerivedCurrencies()
+  const { pending } = useLimitOrders()
   const trade = useLimitOrderDerivedTrade()
   const rate = useLimitOrderDerivedLimitPrice()
   const parsedAmounts = useLimitOrderDerivedParsedAmounts({ rate, trade })
@@ -144,6 +149,16 @@ const LimitOrder = () => {
       <Typography variant="xs" className="px-10 mt-5 italic text-center text-low-emphesis">
         {i18n._(t`Limit orders use funds from CoffinBox, to create a limit order depositing into CoffinBox is required.`)}
       </Typography>
+      <div className="flex items-center px-4">
+          <NavLink href="/limit-order/open">
+            <a className="flex items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
+              {pending.totalOrders == 1 ?
+              <span>{i18n._(t`View ${pending.totalOrders} Open Order`)}</span>
+              : <span>{i18n._(t`View ${pending.totalOrders} Open Orders`)}</span>
+              }
+            </a>
+          </NavLink>
+        </div>
     </>
   )
 }
