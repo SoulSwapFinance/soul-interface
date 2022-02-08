@@ -1,5 +1,5 @@
 import { ChainId, Percent } from '../../sdk'
-import React, { useRef, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import { CheckIcon, CogIcon } from '@heroicons/react/outline'
 import {
   useExpertModeManager,
