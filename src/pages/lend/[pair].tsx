@@ -87,7 +87,7 @@ export default function Pair() {
               {formatNumber(pair.currentUserAssetAmount.string)} {pair.asset.tokenInfo.symbol}
             </div>
             
-            <div className="text-lg text-high-emphesis">{formatNumber(pair.currentUserAssetAmount.usd, true)}</div>
+            <div className="text-lg text-high-emphesis">{formatNumber(Number(pair.currentUserAssetAmount.usd), true)}</div>
           </div>
           <div>
             <div className="text-lg text-secondary">{i18n._(t`Borrowed`)}</div>
