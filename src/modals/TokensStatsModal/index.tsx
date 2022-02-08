@@ -91,7 +91,6 @@ export default function SoulStatsModal(): JSX.Element | null {
         <div className="space-y-4">
           <ModalHeader header={''} onClose={toggleSoulStatsModal} />
           {/* <Wrapper className="flex flex-col-2 justify-between" > */}
-
           <div className="flex justify-between flex-col-2 w-full py-4">
             {/* <div className="block"> */}
             {/* <QuestionHelper text={`Add to MetaMask`}/> */}
@@ -171,25 +170,7 @@ export default function SoulStatsModal(): JSX.Element | null {
                 className="rounded-md"
               />
             </div>
-
-            {/* </div> */}
-            {/* <div className="flex flex-1 flex-col"> */}
-            {/* <div className="flex mt-4 flex-row justify-center"> */}
-            {/* <div className="mt-6 flex justify-center text-3xl">{'SOUL & SEANCE'}</div> */}
-            {/* <div className="flex items-center text-purple justify-between"> */}
           </div>
-          {/* </div> */}
-          {/* <div className="flex flex-col justify-between">
-            <div className="flex items-center text-primary text-bold">
-                <div className="text-primary text-base text-secondary text-2xl">{`${soulPrice}`}</div>
-                <div className="text-primary text-base text-secondary text-2xl">{`${seancePrice}`}</div> */}
-          {/* <div className="flex items-center text-primary text-bold">
-              <div className="text-primary text-base text-secondary text-2xl">{`${soulPrice}`}</div>
-              </div>
-                  <div className="text-primary text-base text-secondary text-2xl">{`${seancePrice}`}</div> */}
-          {/* </div> */}
-          {/* </div> */}
-          {/* </div> */}
         </div>
       </div>
       <div className="space-y-0">
@@ -199,11 +180,18 @@ export default function SoulStatsModal(): JSX.Element | null {
       </div>
       <div className="flex flex-col mt-2 mb-2 flex-nowrap gap-1.5 -m-1">
         {getSummaryLine(
-          <div className="flex items-center">
+          <Typography variant="sm" className="flex items-center py-0.5">
+            {`Maximum Supply`}
+          </Typography>,
+          formatNumberScale(
+            Number(250_000_000), false)
+            )}
+          {getSummaryLine(
+            <div className="flex items-center">
             <Typography variant="sm" className="flex items-center py-0.5">
               {`Circulating Supply`}
             </Typography>
-            <QuestionHelper
+            {/* <QuestionHelper
               text={
                 <div className="flex flex-col gap-2 py-1 px-3 w-full">
                   <div className="flex items-center justify-between">
@@ -245,7 +233,7 @@ export default function SoulStatsModal(): JSX.Element | null {
                   </div>
                 </div>
               }
-            />
+            /> */}
           </div>,
           formatNumberScale(
             Number(tokenInfo?.totalSupply)
@@ -253,27 +241,20 @@ export default function SoulStatsModal(): JSX.Element | null {
             - (Number(tokenInfo?.totalSupply) * 0.125)
             , false)
         )}
-        {/* {getSummaryLine(
-          <Typography variant="sm" className="flex items-center py-0.5">
-            {`Maximum Supply`}
-          </Typography>,
-          formatNumberScale(
-            Number(250_000_000), false, 0)
-        )} */}
-
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Total Market Cap`}
           </Typography>,
           formatCurrency(
-            Number(tokenInfo?.totalSupply) * soulPrice)
-        )}
+            Number(tokenInfo?.totalSupply) * soulPrice
+          // +  Number(seanceInfo?.totalSupply) * seancePrice
+        ))}
         {getSummaryLine(
           <div className="flex items-center">
             <Typography variant="sm" className="flex items-center py-0.5">
               {`Total Value Locked`}
             </Typography>
-            <QuestionHelper
+            {/* <QuestionHelper
               text={
                 <div className="flex flex-col gap-2 py-1 px-3 w-full">
                   <div className="flex items-center justify-between">
@@ -281,7 +262,7 @@ export default function SoulStatsModal(): JSX.Element | null {
                       Farming
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      {formatNumberScale(farmsTvl, true)}
+                      {formatNumberScale(farmsTvl - vaultsTvl, true)}
                     </Typography>
                   </div>
                   <div className="flex items-center justify-between">
@@ -308,25 +289,25 @@ export default function SoulStatsModal(): JSX.Element | null {
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
                       {formatNumberScale(
-                        Number(farmsTvl)
-                        + Number(vaultsTvl)
-                        + Number(bondsTvl)
+                        Number(farmsTvl-vaultsTvl) // FARMS ONLY
+                        + Number(vaultsTvl) // STAKED ONLY
+                        + Number(bondsTvl) // BONDS ONLY
                         , true)}
                     </Typography>
                   </div>
                 </div>
               }
-            />
+            /> */}
           </div>,
           formatCurrency(
-            Number(farmsTvl + vaultsTvl + bondsTvl), 0)
+            Number(farmsTvl + bondsTvl), 0)
         )}
         {getSummaryLine(
           <div className="flex items-center">
             <Typography variant="sm" className="flex items-center py-0.5">
               {`Protocol Liquidity`}
             </Typography>
-            <QuestionHelper
+            {/* <QuestionHelper
               text={
                 <div className="flex flex-col gap-2 py-1 px-3 w-full">
                   <div className="flex items-center justify-between">
@@ -354,13 +335,13 @@ export default function SoulStatsModal(): JSX.Element | null {
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
                       {formatNumberScale(
                         Number(bondsTvl)
-                        + Number(soulTvl)
+                        // + Number(soulTvl)
                         , true)}
                     </Typography>
                   </div>
                 </div>
               }
-            />
+            /> */}
           </div>,
           concat(formatNumberScale(
             Number(bondsTvl + soulTvl), true)

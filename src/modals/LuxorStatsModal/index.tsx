@@ -205,7 +205,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
             <Typography variant="sm" className="flex items-center py-0.5">
               {`Circulating Supply`}
             </Typography>
-            <QuestionHelper
+            {/* <QuestionHelper
               text={
                 <div className="flex flex-col gap-2 py-1 px-3 w-full">
                   <div className="flex items-center justify-between">
@@ -221,19 +221,17 @@ export default function LuxorStatsModal(): JSX.Element | null {
                       DAO Treasury
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold py-0.5">
-                      {/* TODO: make exact */}
                       - {formatNumberScale(Number(tokenInfo?.totalSupply) * 0.19, false)}
                     </Typography>
                   </div>
-                  {/* TODO: make exact */}
-                  {/* <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between">
                     <Typography variant="sm" className="flex items-center font-bold py-0.5">
                       Total Staked
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold py-0.5">
                       - {formatNumberScale(wrappedLumensInfo?.circulatingSupply, false, 2)}
                     </Typography>
-                  </div> */}
+                  </div>
                   <hr></hr>
                   <div className="flex items-center justify-between">
                     <Typography variant="sm" className="flex items-center font-bold py-0.5">
@@ -249,7 +247,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
                   </div>
                 </div>
               }
-            />
+            /> */}
           </div>,
           formatNumberScale(
             Number(tokenInfo?.totalSupply)
