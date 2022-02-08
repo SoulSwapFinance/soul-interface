@@ -50,12 +50,15 @@ const allowedSlippage = useUserSlippageToleranceWithDefault(DEFAULT_ADD_V2_SLIPP
 
   return (
     <>
-      <div className={classNames(toggle ? 'flex flex-col flex-grow gap-4' : 'hidden')}>
-        <PoolAddLiquidity currencyA={token0} currencyB={token1} header={header} />
-      </div>
-      <div className={classNames(!toggle ? 'flex flex-col flex-grow gap-4' : 'hidden')}>
-        <PoolRemoveLiquidity currencyA={token0} currencyB={token1} header={header} />
-      </div>
+      {toggle ? (
+        <div className={classNames('flex flex-col flex-grow gap-4')}>
+          <PoolAddLiquidity currencyA={token0} currencyB={token1} header={header} />
+        </div>
+      ) : (
+        <div className={classNames('flex flex-col flex-grow gap-4')}>
+          <PoolRemoveLiquidity currencyA={token0} currencyB={token1} header={header} />
+        </div>
+      )}
     </>
   )
 }
