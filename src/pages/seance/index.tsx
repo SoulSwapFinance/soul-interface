@@ -24,10 +24,10 @@ import { ethers } from 'ethers'
 import { useSoulSummonerContract } from '../../hooks'
 import Typography from '../../components/Typography'
 import { SubmitButton } from '../../features/seance/SeanceStyles'
-import { HeadlessUiModal } from 'components/Modal'
-import Header from 'features/mines/components/Header'
+// import Header from 'features/mines/components/Header'
 import ModalHeader from 'components/Modal/Header'
 import NavLink from 'components/NavLink'
+import Modal from 'components/DefaultModal'
 
 const INPUT_CHAR_LIMIT = 18
 
@@ -430,7 +430,7 @@ export default function SoulStake() {
                                 activeTab == 0 ?
                                   handleClickMax
                                   : hasMoreSeance ?
-                                    setShowConfirmation
+                                  setShowConfirmation
                                     : handleClickMax
                               }
                             >
@@ -601,7 +601,7 @@ export default function SoulStake() {
         </div>
         </div>
       {/* </DoubleGlowShadowV2> */}
-      <HeadlessUiModal.Controlled isOpen={showConfirmation} onDismiss={
+      <Modal isOpen={showConfirmation} onDismiss={
         () => setShowConfirmation(false)}>
         <div className="space-y-4">
           <ModalHeader header={`Please Read and Confirm`} onClose={() => setShowConfirmation(false)} />
@@ -627,7 +627,7 @@ export default function SoulStake() {
             I UNDERSTAND THESE TERMS
           </SubmitButton>
         </div>
-      </HeadlessUiModal.Controlled>
+      </Modal>
     </div>
   )
 }
