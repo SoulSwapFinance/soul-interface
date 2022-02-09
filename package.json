@@ -200,6 +200,7 @@
     "tiny-invariant": "^1.1.0",
     "toformat": "^2.0.0",
     "web3": "^1.7.0",
-    "web3-eth-abi": "^1.7.0"
+    "web3-eth-abi": "^1.7.0",
+    "yup": "^0.32.11"
   }
 }
