@@ -7,13 +7,19 @@ import {
   MAXIMUM_TARGET_UTILIZATION,
   MINIMUM_INTEREST_PER_YEAR,
   MINIMUM_TARGET_UTILIZATION,
-  PROTOCOL_FEE,
-  PROTOCOL_FEE_DIVISOR,
-  STARTING_INTEREST_PER_YEAR,
+  // PROTOCOL_FEE,
+  // PROTOCOL_FEE_DIVISOR,
+  // STARTING_INTEREST_PER_YEAR,
   USD,
 } from 'sdk'
 
 import { e10, ZERO } from './math'
+
+const PROTOCOL_FEE = BigNumber.from('10000') // 10%
+export const PROTOCOL_FEE_DIVISOR = BigNumber.from('100000')
+export const STARTING_INTEREST_PER_YEAR 
+  // = JSBI.multiply(JSBI.BigInt(317097920), JSBI.BigInt(60 * 60 * 24 * 365))
+  = 317097920 //* 60 * 60 * 24 * 365
 
 export function accrue(pair: any, amount: BigNumber, includePrincipal = false): BigNumber {
   return amount
@@ -27,15 +33,21 @@ export function accrueTotalAssetWithFee(pair: any): {
   elastic: BigNumber
   base: BigNumber
 } {
-  const extraAmount = pair.totalBorrow.elastic
+  const extraAmount = BigNumber.from(pair.totalBorrow.elastic)
     .mul(pair.accrueInfo.interestPerSecond)
     .mul(pair.elapsedSeconds.add('3600')) // Project an hour into the future
     .div(e10(18))
-  const feeAmount = extraAmount.mul(PROTOCOL_FEE).div(PROTOCOL_FEE_DIVISOR) // % of interest paid goes to fee
-  const feeFraction = feeAmount.mulDiv(pair.totalAsset.base, pair.currentAllAssets.value)
+  const feeAmount 
+    // = extraAmount?.mul(BigNumber.from(PROTOCOL_FEE || 0)).div(BigNumber.from(PROTOCOL_FEE_DIVISOR)) // % of interest paid goes to fee
+    = Number(extraAmount) * Number(PROTOCOL_FEE) / Number(PROTOCOL_FEE_DIVISOR) // % of interest paid goes to fee
+  // const feeAmount = extraAmount?.mul(BigNumber.from(PROTOCOL_FEE || 0)).div(BigNumber.from(PROTOCOL_FEE_DIVISOR)) // % of interest paid goes to fee
+  const feeFraction 
+    // = feeAmount.mulDiv(pair.totalAsset.base, pair.currentAllAssets.value)
+    = feeAmount * pair.totalAsset.base / pair.currentAllAssets.value
   return {
     elastic: pair.totalAsset.elastic,
-    base: pair.totalAsset.base.add(feeFraction),
+    // base: pair.totalAsset.base.add(feeFraction),
+    base: pair.totalAsset.base + feeFraction,
   }
 }
 
@@ -71,34 +83,37 @@ export function interestAccrue(pair: any, interest: BigNumber): BigNumber {
   return currentInterest
 }
 
-export function getUSDValue(amount: BigNumberish, token: any): BigNumber {
-  return BigNumber.from(amount)
-    .mul(token.usd)
-    .div(e10(token?.decimals ? token.decimals : token.tokenInfo.decimals))
+export function getUSDValue(amount: number, token: any): number {
+  return amount
+    * token.usd
+    / 1e18
+    // e10(token?.decimals ? token.decimals : token.tokenInfo.decimals))
 }
 
-export function getUSDString(amount: BigNumberish, token: any): string {
-  return BigNumber.from(amount)
-    .mul(token.usd)
-    .div(e10(token?.decimals ? token.decimals : token.tokenInfo.decimals))
-    .toFixed(USD[token?.chainId ? token.chainId : token.tokenInfo.chainId].decimals)
+export function getUSDString(amount: number, token: any): string {
+  return (amount
+    * token.usd
+    / 1e18).toString()
+    // .div(e10(token?.decimals ? token.decimals : token.tokenInfo.decimals))
+    // .toFixed(USD[token?.chainId ? token.chainId : token.tokenInfo.chainId].decimals)
 }
 
 export function easyAmount(
-  amount: BigNumber,
+  amount: number,
   token: any
-): { value: BigNumber; string: string; usdValue: BigNumber; usd: string } {
+): { value: number; string: string; usdValue: number; usd: string } {
   // console.log('easyAmount', token)
   return {
     value: amount,
-    string: amount.toFixed(token?.decimals ? token.decimals : token.tokenInfo.decimals),
+    string: amount.toString(),
     usdValue: getUSDValue(amount, token),
     usd: getUSDString(amount, token),
   }
 }
 
-export function takeFee(amount: BigNumber): BigNumber {
-  return amount.mul(BigNumber.from(9)).div(BigNumber.from(10))
+export function takeFee(amount: number): string {
+  // return amount.mul(BigNumber.from(9)).div(BigNumber.from(10))
+  return (amount * 9 / 10).toString()
 }
 
 export function addBorrowFee(amount: BigNumber): BigNumber {
