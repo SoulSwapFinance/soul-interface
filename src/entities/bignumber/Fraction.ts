@@ -20,13 +20,12 @@ export class Fraction {
     return new Fraction(BigNumber.from(numerator), BigNumber.from(denominator))
   }
 
-  static parse(value: BigNumber): Fraction {
-    return value === new BigNumber(0, '')
+  static parse(value: string): Fraction {
+    return value === ''
       ? Fraction.NAN
-      : isEmptyValue(value.toString())
+      : isEmptyValue(value)
       ? Fraction.ZERO
-      : new Fraction(value, Fraction.BASE)
-      // : new Fraction(parseBalance(value, 18), Fraction.BASE)
+      : new Fraction(parseBalance(value, 18), Fraction.BASE)
   }
 
   numerator: BigNumber

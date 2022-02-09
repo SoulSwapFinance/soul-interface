@@ -288,7 +288,7 @@ export class UnderworldCooker {
       }
     }
 
-    const kashiPairCloneContract = new Contract(
+    const underworldPairCloneContract = new Contract(
       this.pair.address,
       UNDERWORLD_PAIR_ABI,
       getProviderOrSigner(this.library, this.account) as any
@@ -297,7 +297,7 @@ export class UnderworldCooker {
     try {
       return {
         success: true,
-        tx: await kashiPairCloneContract.cook(this.actions, this.values, this.datas, {
+        tx: await underworldPairCloneContract.cook(this.actions, this.values, this.datas, {
           value: this.values.reduce((a, b) => JSBI.add(a, b), ZERO),
         }),
       }
