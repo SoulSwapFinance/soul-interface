@@ -36,16 +36,16 @@ const PoolAddLiquidityReviewContent: FC<PoolAddLiquidityReviewContentProps> = ({
   return !txHash ? (
     <div className="flex flex-col gap-4">
       <HeadlessUIModal.Header
-        header={noLiquidity ? i18n._(t`Confirm create pool`) : i18n._(t`Confirm add liquidity`)}
+        header={noLiquidity ? i18n._(t`Confirm create pool`) : i18n._(t`Confirm Add Liquidity`)}
         onBack={() => setContent(undefined)}
         onClose={() => dispatch(setMinesModalOpen(false))}
       />
       <Typography variant="sm">
-        {i18n._(t`Output is estimated. If the price changes by more than 0.5% your transaction will revert.`)}
+        {i18n._(t`Output is estimated. If the price changes by more than your chosen slippage it'll revert.`)}
       </Typography>
       <HeadlessUIModal.BorderedContent className="flex flex-col gap-3 bg-dark-1000/40">
         <Typography weight={700} variant="sm" className="text-secondary">
-          {i18n._(t`You are depositing:`)}
+          {i18n._(t`Depositing:`)}
         </Typography>
         <ListPanel
           items={Object.values(parsedAmounts).map((cur, index) => (
@@ -55,7 +55,7 @@ const PoolAddLiquidityReviewContent: FC<PoolAddLiquidityReviewContentProps> = ({
       </HeadlessUIModal.BorderedContent>
       <HeadlessUIModal.BorderedContent className="flex flex-col gap-3 bg-dark-1000/40">
         <Typography weight={700} variant="sm" className="text-secondary">
-          {i18n._(t`You'll receive (at least):`)}
+          {i18n._(t`Receive (minimum):`)}
         </Typography>
         <Typography weight={700} variant="lg" className="text-high-emphesis">
           {liquidityMinted?.toSignificant(6)} SLP

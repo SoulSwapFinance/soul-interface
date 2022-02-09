@@ -51,9 +51,9 @@ export const useAddLiquidityDerivedInputError: UseAddLiquidityDerivedInputError 
   return !account
     ? i18n._(t`Connect Wallet`)
     : poolWithState?.state === PoolState.INVALID
-    ? i18n._(t`Invalid pool`)
+    ? i18n._(t`Invalid Pool`)
     : !parsedAmounts[0]?.greaterThan(ZERO) && !parsedAmounts[1]?.greaterThan(ZERO)
-    ? i18n._(t`Enter an amount`)
+    ? i18n._(t`Enter Amount`)
     : insufficientBalance
     ? i18n._(t`Insufficient Balance`)
     : ''
@@ -66,7 +66,6 @@ export const useAddLiquidityDerivedInput = () => {
 
   // Similar to setState(prevState => newState) if a function is passed as value to setInputs, pass previous state
   const setInputs = useMemo(
-    // @ts-ignore TYPE NEEDS FIXING
     () => (values) => dispatch(setAddNormalInput(typeof values === 'function' ? values(normalInput) : values)),
     [dispatch, normalInput]
   )

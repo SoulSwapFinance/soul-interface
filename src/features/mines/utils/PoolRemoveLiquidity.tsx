@@ -295,17 +295,15 @@ const PoolWithdraw = ({ currencyA, currencyB, header }) => {
           value={typedValue}
           token0={pair?.token0.address}
           token1={pair?.token1.address}
-          // @ts-ignore TYPE NEEDS FIXING
           onChange={onLiquidityInput}
         />
         <div className="flex justify-between mx-2 mt-2">
           <Typography weight={700} variant="sm" className="text-secondary">
-            {i18n._(t`You'll receive (at least):`)}
+            {i18n._(t`Receive (minimum):`)}
           </Typography>
           {(oneCurrencyIsETH || oneCurrencyIsWETH) && (
-            <Button size="xs" variant="empty" color="blue" className="rounded-none" onClick={() => setUseETH(!useETH)}>
+            <Button size="xs" variant="outlined" color="blue" className="rounded-none" onClick={() => setUseETH(!useETH)}>
               {i18n._(t`Receive`)} {useETH && 'W'}
-              {/* @ts-ignore TYPE NEEDS FIXING */}
               {NATIVE[chainId].symbol}
             </Button>
           )}

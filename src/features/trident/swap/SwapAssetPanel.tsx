@@ -7,7 +7,7 @@ import { CurrencyLogo } from 'components/CurrencyLogo'
 import NumericalInput from 'components/Input/Numeric'
 import QuestionHelper from 'components/QuestionHelper'
 import Typography from 'components/Typography'
-import { classNames, formatNumber, maxAmountSpend, tryParseAmount, warningSeverity } from 'functions'
+import { classNames, formatNumber, halfAmountSpend, maxAmountSpend, tryParseAmount, warningSeverity } from 'functions'
 import { useCoffinOrWalletBalance } from 'hooks/useCoffinOrWalletBalance'
 import { useUSDCValue } from 'hooks/useUSDCPrice'
 import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
@@ -18,9 +18,7 @@ import CoffinBoxFundingSourceModal from '../add/CoffinBoxFundingSourceModal'
 
 interface SwapAssetPanel {
   error?: boolean
-  // @ts-ignore TYPE NEEDS FIXING
   header: (x) => React.ReactNode
-  // @ts-ignore TYPE NEEDS FIXING
   walletToggle?: (x) => React.ReactNode
   currency?: Currency
   currencies?: string[]
@@ -186,15 +184,32 @@ const BalancePanel: FC<Pick<SwapAssetPanel, 'disabled' | 'currency' | 'onChange'
   const { account } = useActiveWeb3React()
   const balance = useCoffinOrWalletBalance(account ? account : undefined, currency, spendFromWallet)
 
-  const handleClick = useCallback(() => {
+  const handleHalfClick = useCallback(() => {
+    if (disabled || !balance || !onChange) return
+    onChange(halfAmountSpend(balance)?.toExact())
+  }, [balance, disabled, onChange])
+
+  const handleMaxClick = useCallback(() => {
     if (disabled || !balance || !onChange) return
     onChange(maxAmountSpend(balance)?.toExact())
   }, [balance, disabled, onChange])
 
   return (
-    <Typography role="button" onClick={handleClick} variant="sm" className="flex text-secondary whitespace-nowrap">
-      {i18n._(t`Balance:`)} {balance ? balance.toSignificant(6) : '0.00'}
-    </Typography>
+    <>
+    {/* <Typography role="button" onClick={handleMaxClick} variant="sm" className="flex text-primary whitespace-nowrap">
+      {/* {i18n._(t`Balance: `)}  */}
+      {/* {balance ? balance.toSignificant(6) : '0.00'} */}
+    {/* </Typography> */}
+    <Typography role="button" onClick={handleHalfClick} variant="sm" className="flex text-secondary whitespace-nowrap">
+        {balance ? '50%' : '0'} 
+        {/* (balance.divide(2)).toSignificant(2) : '0.00'} */}
+      </Typography>
+    <Typography role="button" onClick={handleMaxClick} variant="sm" className="flex text-primary whitespace-nowrap">
+      {/* {i18n._(t`Balance:`)}  */}
+      {balance ? balance.toSignificant(6) : '0.00'
+       }
+     </Typography>
+      </>
   )
 }
 

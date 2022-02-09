@@ -68,7 +68,6 @@ export const _useSwapPage = () => {
       trade.outputAmount?.currency.wrapped.address &&
       rebases[trade?.outputAmount?.currency.wrapped.address]
     )
-      // @ts-ignore TYPE NEEDS FIXING
       return toAmountCurrencyAmount(rebases[trade.outputAmount?.currency.wrapped.address], trade.outputAmount.wrapped)
 
     return undefined
@@ -97,11 +96,10 @@ export const _useSwapPage = () => {
         ? i18n._(t`Connect Wallet`)
         : maxAmountSpend(balance)?.equalTo(ZERO)
         ? i18n._(t`Insufficient balance to cover for fees`)
-        : // @ts-ignore TYPE NEEDS FIXING
-        !trade?.inputAmount[0]?.greaterThan(ZERO) && !parsedAmounts[1]?.greaterThan(ZERO)
-        ? i18n._(t`Enter an amount`)
+        : !trade?.inputAmount[0]?.greaterThan(ZERO) && !parsedAmounts[1]?.greaterThan(ZERO)
+        ? i18n._(t`Enter Amount`)
         : trade === undefined && !isWrap
-        ? i18n._(t`No route found`)
+        ? i18n._(t`No Route Found`)
         : balance && trade && inputCurrencyAmount && maxAmountSpend(balance)?.lessThan(inputCurrencyAmount)
         ? i18n._(t`Insufficient Balance`)
         : '',

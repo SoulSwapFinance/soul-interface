@@ -129,7 +129,3 @@ export function useActivePopups(): AppState['application']['popupList'] {
 export function useUnderworldApprovalPending(): string {
   return useSelector((state: AppState) => state.application.underworldApprovalPending)
 }
-
-export function useToggleNetworkModal(): () => void {
-  return useToggleModal(ApplicationModal.NETWORK)
-}

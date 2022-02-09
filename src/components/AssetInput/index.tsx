@@ -2,7 +2,7 @@ import { ExclamationCircleIcon } from '@heroicons/react/outline'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Currency, CurrencyAmount, Token } from 'sdk'
+import { Currency, CurrencyAmount, SOUL_ADDRESS, Token } from 'sdk'
 import selectCoinAnimation from 'animation/select-coin.json'
 import { Button } from 'components/Button'
 import Chip from 'components/Chip'
@@ -12,7 +12,7 @@ import NumericalInput from 'components/Input/Numeric'
 import Switch from 'components/Switch'
 import Typography from 'components/Typography'
 import CoffinBoxFundingSourceModal from 'features/trident/add/CoffinBoxFundingSourceModal'
-import { classNames, formatNumber, maxAmountSpend, tryParseAmount } from 'functions'
+import { classNames, formatNumber, halfAmountSpend, maxAmountSpend, tryParseAmount } from 'functions'
 import { useCoffinOrWalletBalance } from 'hooks/useCoffinOrWalletBalance'
 import useDesktopMediaQuery from 'hooks/useDesktopMediaQuery'
 import { useUSDCValue } from 'hooks/useUSDCPrice'
@@ -79,9 +79,14 @@ const AssetInput: AssetInput<AssetInputProps> = ({
     spendFromWallet
   )
   const balance = balanceProp || coffinOrWalletBalance
-
+  
+  const halfSpend =
+    halfAmountSpend(balance)?.toExact()
+  // const halfSpendAsFraction = maxAmountSpend(balance.divide(2))?.asFraction
+  
   const maxSpend = maxAmountSpend(balance)?.toExact()
   const maxSpendAsFraction = maxAmountSpend(balance)?.asFraction
+  
   const parsedInput = tryParseAmount(props.value, props.currency)
   const error = balance ? parsedInput?.greaterThan(balance) : false
 
@@ -134,6 +139,7 @@ const AssetInput: AssetInput<AssetInputProps> = ({
             size={size}
             currencyLogo={currencyLogo}
             spendFromWallet={spendFromWallet}
+            onHalf={() => props.onChange(halfSpend)}
             onMax={() => props.onChange(maxSpend)}
             showMax={
               showMax && balance && maxSpendAsFraction && balance.greaterThan('0')
@@ -143,7 +149,8 @@ const AssetInput: AssetInput<AssetInputProps> = ({
             footer={
               <AssetInputPanel.Balance
                 balance={balance}
-                onClick={() => props.onChange(maxSpend)}
+                onHalfClick={() => props.onChange(halfSpend)}
+                onMaxClick={() => props.onChange(maxSpend)}
                 spendFromWallet={spendFromWallet}
                 id={props.id + '-balance'}
               />
@@ -157,6 +164,7 @@ const AssetInput: AssetInput<AssetInputProps> = ({
 }
 
 interface AssetInputPanelProps extends AssetInputProps {
+  onHalf: () => void
   onMax: () => void
   footer?: ReactNode
   showMax?: boolean
@@ -171,6 +179,7 @@ const AssetInputPanel = ({
   token1,
   onChange,
   onSelect,
+  onHalf,
   onMax,
   footer,
   disabled,
@@ -315,14 +324,19 @@ const AssetInputPanel = ({
 
 interface AssetInputPanelBalanceProps {
   balance?: CurrencyAmount<Currency>
-  onClick: (x: CurrencyAmount<Currency> | undefined) => void
+  onMaxClick: (x: CurrencyAmount<Currency> | undefined) => void
+  onHalfClick: (x: CurrencyAmount<Currency> | undefined) => void
   spendFromWallet?: boolean
   id?: string
 }
 
 // This component seems to occur quite frequently which is why I gave it it's own component.
 // It's a child of AssetInputPanel so only use together with an AssetInputPanel
-const AssetInputPanelBalance: FC<AssetInputPanelBalanceProps> = ({ balance, onClick, spendFromWallet = true, id }) => {
+const AssetInputPanelBalance: FC<AssetInputPanelBalanceProps> = ({ 
+  balance, 
+  onHalfClick, 
+  onMaxClick, 
+  spendFromWallet = true, id }) => {
   const { i18n } = useLingui()
   const error = useAssetInputContextError()
 
@@ -347,15 +361,28 @@ const AssetInputPanelBalance: FC<AssetInputPanelBalanceProps> = ({ balance, onCl
           {i18n._(t`Balance:`)}
         </Typography>
       </div>
+      <div className="flex items-center">
+      <Typography
+        variant="sm"
+        weight={700}
+        onClick={() => onHalfClick(balance)}
+        className={classNames(balance ? 'text-high-emphesis' : 'text-low-emphesis', 'truncate')}
+        id={id}
+      >
+        {balance ? `50%` : '0.0000'}
+      </Typography>
+      </div>
+      <div className="flex items-center">
       <Typography
         variant="sm"
         weight={700}
         className={classNames(balance ? 'text-high-emphesis' : 'text-low-emphesis', 'truncate')}
-        onClick={() => onClick(balance)}
+        onClick={() => onMaxClick(balance)}
         id={id}
       >
         {balance ? `${balance.toSignificant(6)} ${balance.currency.symbol}` : '0.0000'}
       </Typography>
+      </div>
     </div>
   )
 }

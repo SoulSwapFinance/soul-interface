@@ -6,9 +6,9 @@ import { Button } from 'components/Button'
 import ListPanel from 'components/ListPanel'
 import { HeadlessUiModal } from 'components/Modal'
 import Typography from 'components/Typography'
-import useLimitOrderExecute from 'features/limit-order/useLimitOrderExecute'
+import useLimitOrderExecute from 'features/limit-order/hooks/useLimitOrderExecute'
 import TradePrice from 'features/swap/TradePrice'
-import { shortenAddress } from 'functions'
+import { isAddress, shortenAddress } from 'functions'
 import { useAppDispatch } from 'state/hooks'
 import { setLimitOrderShowReview } from 'state/limit-order/actions'
 import { useLimitOrderState } from 'state/limit-order/hooks'
@@ -56,19 +56,19 @@ const LimitOrderReviewModal: FC<LimitOrderReviewModal> = ({ parsedAmounts, trade
     >
       <div className="flex flex-col gap-4">
         <HeadlessUiModal.Header
-          header={i18n._(t`Confirm order`)}
+          header={i18n._(t`Confirm Order`)}
           onClose={() => dispatch(setLimitOrderShowReview(false))}
         />
         <HeadlessUiModal.BorderedContent className="flex flex-col gap-2 bg-dark-1000/40">
           <Typography weight={700} variant="sm" className="text-secondary">
-            {i18n._(t`You'll pay`)}
+            {i18n._(t`Pay`)}
           </Typography>
           <ListPanel items={[<ListPanel.CurrencyAmountItem amount={parsedAmounts?.inputAmount} key={0} />]} />
           <div className="flex justify-center mt-2 -mb-2">
             <ArrowDownIcon width={14} className="text-secondary" />
           </div>
-          <Typography weight={700} variant="sm" className="text-secondary justify-end">
-            {i18n._(t`You'll receive`)}
+          <Typography weight={700} variant="sm" className="justify-end text-secondary">
+            {i18n._(t`Receive`)}
           </Typography>
           <ListPanel items={[<ListPanel.CurrencyAmountItem amount={parsedAmounts?.outputAmount} key={0} />]} />
         </HeadlessUiModal.BorderedContent>
@@ -79,7 +79,7 @@ const LimitOrderReviewModal: FC<LimitOrderReviewModal> = ({ parsedAmounts, trade
                 {i18n._(t`Recipient`)}
               </Typography>
               <Typography variant="sm" weight={700}>
-                {shortenAddress(recipient)}
+                {isAddress(recipient) && shortenAddress(recipient)}
               </Typography>
             </div>
           )}
@@ -116,7 +116,7 @@ const LimitOrderReviewModal: FC<LimitOrderReviewModal> = ({ parsedAmounts, trade
             )}
           </div>
         </HeadlessUiModal.BorderedContent>
-        <Typography variant="xs" className="text-secondary text-center">
+        <Typography variant="xs" className="text-center text-secondary">
           {i18n._(t`Please note that after order execution, your tokens will be received in your CoffinBox`)}
         </Typography>
         <Button loading={attemptingTxn} color="gradient" disabled={attemptingTxn} onClick={_execute}>

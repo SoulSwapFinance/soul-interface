@@ -2,8 +2,8 @@ import { getAddress } from '@ethersproject/address'
 import { Signature } from '@ethersproject/bytes'
 import { AddressZero } from '@ethersproject/constants'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Currency, CurrencyAmount, LimitOrder } from 'sdk'
-import useLimitOrders from 'features/limit-order/hooks/useLimitOrders'
+import { Currency, CurrencyAmount, LimitOrder, STOP_LIMIT_ORDER_ADDRESS } from 'sdk'
+import useLimitOrders from './useLimitOrders'
 import { calculateGasMargin, ZERO } from 'functions'
 import { useCoffinBoxContract, useLimitOrderHelperContract } from 'hooks'
 import { useActiveWeb3React } from 'services/web3'
@@ -13,7 +13,6 @@ import { clear, setLimitOrderAttemptingTxn, setLimitOrderCoffinPermit } from 'st
 import { OrderExpiration } from 'state/limit-order/reducer'
 import { useTransactionAdder } from 'state/transactions/hooks'
 import { useCallback } from 'react'
-import { STOP_LIMIT_ORDER_ADDRESS } from 'constants/addresses'
 
 const getEndTime = (orderExpiration: OrderExpiration | string): number => {
   switch (orderExpiration) {

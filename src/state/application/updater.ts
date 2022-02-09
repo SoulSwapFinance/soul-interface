@@ -20,9 +20,7 @@ export default function Updater(): null {
       && chainId != ChainId.ETHEREUM
       && chainId != ChainId.BSC
       ) {
-      // @ts-ignore TYPE NEEDS FIXING
       const originalBlockFormatter = library.formatter._block
-      // @ts-ignore TYPE NEEDS FIXING
       library.formatter._block = (value, format) => {
         return originalBlockFormatter(
           {
@@ -34,23 +32,19 @@ export default function Updater(): null {
       }
     }
     return () => {
-      // if (chainId === ChainId.CELO) {
-      if (chainId != ChainId.FANTOM 
-        && chainId != ChainId.ETHEREUM
-        && chainId != ChainId.BSC
-        ) {     
-        // @ts-ignore TYPE NEEDS FIXING
-        library.formatter._block = (value: any, format: any): Block => {
-          if (value.author != null && value.miner == null) {
-            value.miner = value.author
-          }
-          // The difficulty may need to come from _difficulty in recursed blocks
-          const difficulty = value._difficulty != null ? value._difficulty : value.difficulty
-          const result = Formatter.check(format, value)
-          result._difficulty = difficulty == null ? null : BigNumber.from(difficulty)
-          return result
-        }
-      }
+      // if (chainId === ChainId.CELO) {     
+      //   // @ts-ignore TYPE NEEDS FIXING
+      //   library.formatter._block = (value: any, format: any): Block => {
+      //     if (value.author != null && value.miner == null) {
+      //       value.miner = value.author
+      //     }
+      //     // The difficulty may need to come from _difficulty in recursed blocks
+      //     const difficulty = value._difficulty != null ? value._difficulty : value.difficulty
+      //     const result = Formatter.check(format, value)
+      //     result._difficulty = difficulty == null ? null : BigNumber.from(difficulty)
+      //     return result
+      //   }
+      // }
     }
   }, [chainId, library])
 
@@ -74,9 +68,7 @@ export default function Updater(): null {
             return { chainId, blockNumber: block.number, blockTimestamp: block.timestamp }
           return {
             chainId,
-            // @ts-ignore TYPE NEEDS FIXING
             blockNumber: Math.max(block.number, state.blockNumber),
-            // @ts-ignore TYPE NEEDS FIXING
             blockTimestamp: Math.max(block.timestamp, state.blockTimestamp),
           }
         }

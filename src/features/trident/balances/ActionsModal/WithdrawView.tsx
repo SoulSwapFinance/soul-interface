@@ -65,9 +65,9 @@ const WithdrawView: FC<WithdrawViewProps> = ({ onClose, onBack }) => {
   const error = !account
     ? i18n._(t`Connect Wallet`)
     : !valueCA?.greaterThan(ZERO)
-    ? i18n._(t`Enter an amount`)
+    ? i18n._(t`Enter Amount`)
     : !coffinBalance
-    ? i18n._(t`Loading balance`)
+    ? i18n._(t`Loading Balance`)
     : valueCA?.greaterThan(coffinBalance)
     ? i18n._(t`Insufficient ${valueCA.currency.symbol} balance`)
     : ''

@@ -40,7 +40,7 @@ const OrderExpirationDropdown: FC = () => {
     <>
       <div className="flex items-center gap-3 cursor-pointer text-secondary">
         <div className="flex flex-row items-center">
-          <span className="text-sm">{i18n._(t`Order Expiration`)}:</span>
+          <span className="text-sm">{i18n._(t`Expiration`)}:</span>
           <QuestionHelper text={i18n._(t`Expiration is the time at which the order will become invalid`)} />
         </div>
         <NeonSelect value={orderExpiration.label}>

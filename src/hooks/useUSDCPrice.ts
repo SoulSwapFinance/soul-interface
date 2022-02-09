@@ -29,9 +29,9 @@ const USDT_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(USDT[ChainId.FANTOM], 100_000e6),
 }
 
-const MIM_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(MIM[ChainId.FANTOM], 100_000e6),
-}
+// const MIM_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
+//   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(MIM[ChainId.FANTOM], 100_000e6),
+// }
 
 const FUSD_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(FUSD[ChainId.FANTOM], 100_000e6),
@@ -111,7 +111,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   const amountOut = chainId ? STABLECOIN_AMOUNT_OUT[chainId] : undefined
   const usdtAmountOut = chainId ? USDT_AMOUNT_OUT[chainId] : undefined
   const fusdAmountOut = chainId ? FUSD_AMOUNT_OUT[chainId] : undefined
-  const mimAmountOut = chainId ? MIM_AMOUNT_OUT[chainId] : undefined
+  // const mimAmountOut = chainId ? MIM_AMOUNT_OUT[chainId] : undefined
   
   const soulAmountOut = chainId ? SOUL_AMOUNT_OUT[chainId] : undefined
   const seanceAmountOut = chainId ? SEANCE_AMOUNT_OUT[chainId] : undefined
@@ -132,7 +132,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   const stablecoin = amountOut?.currency
   const usdt = usdtAmountOut?.currency
   const fusd = fusdAmountOut?.currency
-  const mim = mimAmountOut?.currency
+  // const mim = mimAmountOut?.currency
   const soul = soulAmountOut?.currency
   const seance = seanceAmountOut?.currency
   const luxor = luxorAmountOut?.currency
@@ -171,9 +171,9 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
     }
 
     // handle mim
-    if (currency?.wrapped.equals(mim)) {
-      return new Price(mim, mim, '1', '1')
-    }
+    // if (currency?.wrapped.equals(mim)) {
+    //   return new Price(mim, mim, '1', '1')
+    // }
 
     // handle fusd
     if (currency?.wrapped.equals(fusd)) {
