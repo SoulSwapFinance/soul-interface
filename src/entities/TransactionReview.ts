@@ -49,8 +49,8 @@ export class TransactionReview extends Array<Line> {
   public addPercentage(name: string, from: BigNumber, to: BigNumber): this {
     this.add(
       name,
-      formatPercent(from.toFixed(16)),
-      formatPercent(to.toFixed(16)),
+      formatPercent(from.toString()),
+      formatPercent(to.toString()),
       from == to ? Direction.FLAT : from < to ? Direction.UP : Direction.DOWN
     )
     return this
