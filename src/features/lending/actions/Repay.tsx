@@ -370,7 +370,7 @@ export default function Repay({ pair }: RepayProps) {
         useCoffinTitle={`Remove ${pair.collateral.tokenInfo.symbol} to`}
         useCoffin={useCoffinRemove}
         setUseCoffin={setUseCoffinRemoveCollateral}
-        max={nextMaxRemoveCollateral}
+        max={Number(nextMaxRemoveCollateral)}
         pinMax={pinRemoveMax}
         setPinMax={setPinRemoveMax}
         showMax={
