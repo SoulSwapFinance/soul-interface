@@ -1,5 +1,6 @@
 export { computeConstantProductPoolAddress } from './computeConstantProductPoolAddress'
 export { computePairAddress } from './computePairAddress'
+export { computeLendingPairAddress } from './computeLendingPairAddress'
 export { computePriceImpact } from './computePriceImpact'
 export * from './math'
 export { sortedInsert } from './sortedInsert'
