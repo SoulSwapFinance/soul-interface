@@ -17,4 +17,5 @@ export { findSingleRouteExactIn } from './findSingleRouteExactIn'
 export { findSingleRouteExactOut } from './findSingleRouteExactOut'
 export { computeHybridLiquidity } from './computeHybridLiquidity'
 export { computeHybridPoolAddress } from './computeHybridPoolAddress'
+export * from './underworldHooks'
 
