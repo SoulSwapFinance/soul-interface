@@ -92,8 +92,8 @@ export default function Repay({ pair }: RepayProps) {
     ? nextMinCollateralSpot
     : nextMinCollateralStored
 
-  let removeCollatoral = pair.userCollateralAmount.value.sub(nextMinCollateralMinimum.mulDiv(100, 95))
-  const nextMaxRemoveCollateral = removeCollatoral.gt(0) ? removeCollatoral : ZERO
+  let removeCollatoral = pair.userCollateralAmount.value - nextMinCollateralMinimum * 100 / 95
+  const nextMaxRemoveCollateral = removeCollatoral > 0 ? removeCollatoral : ZERO
 
   const maxRemoveCollateral 
     = nextMaxRemoveCollateral
@@ -162,10 +162,10 @@ export default function Repay({ pair }: RepayProps) {
   const nextMaxBorrowPossible = minBorrow > 0 ? minBorrow : 0
 
   const nextHealth =
-   BigNumber.from(pair.currentUserBorrowAmount.value
+   Number(pair.currentUserBorrowAmount.value)
     - Number(displayRepayValue)
     * 1000000000000000000 
-    / nextMaxBorrowMinimum)
+    / Number(nextMaxBorrowMinimum)
 
   const transactionReview = new TransactionReview()
 
@@ -176,7 +176,7 @@ export default function Repay({ pair }: RepayProps) {
       BigNumber.from(nextMaxBorrowSafe).add(BigNumber.from(displayRepayValue)),
       pair.asset
     )
-    transactionReview.addPercentage('Health', pair.health.value, nextHealth)
+    transactionReview.addPercentage('Health', pair.health.value, BigNumber.from(nextHealth))
   }
 
   let maxCollatoral 
@@ -329,7 +329,7 @@ export default function Repay({ pair }: RepayProps) {
             (pinRepayMax && pair.userBorrowPart > 0 && balance >= pair.currentUserBorrowAmount.value))
             ? pair.userCollateralShare
             : toShare(pair.collateral, 
-              displayRemoveValue)
+              BigNumber.from(displayRemoveValue))
         cooker.removeCollateral(share, useCoffinRemove)
         summary += (summary ? ' and ' : '') + 'Remove Collateral'
       }
@@ -370,7 +370,7 @@ export default function Repay({ pair }: RepayProps) {
         useCoffinTitle={`Remove ${pair.collateral.tokenInfo.symbol} to`}
         useCoffin={useCoffinRemove}
         setUseCoffin={setUseCoffinRemoveCollateral}
-        max={nextMaxRemoveCollateral}
+        max={BigNumber.from(nextMaxRemoveCollateral)}
         pinMax={pinRemoveMax}
         setPinMax={setPinRemoveMax}
         showMax={
