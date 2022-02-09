@@ -93,7 +93,7 @@ export default function Repay({ pair }: RepayProps) {
     : nextMinCollateralStored
 
   let removeCollatoral = pair.userCollateralAmount.value - nextMinCollateralMinimum * 100 / 95
-  const nextMaxRemoveCollateral = removeCollatoral > 0 ? removeCollatoral : ZERO
+  const nextMaxRemoveCollateral = BigNumber.from(removeCollatoral).lt(0) ? BigNumber.from(removeCollatoral) : ZERO
 
   const maxRemoveCollateral 
     = nextMaxRemoveCollateral
@@ -214,7 +214,7 @@ export default function Repay({ pair }: RepayProps) {
     )
 
   const removeValueSet =
-    displayRemoveValue != 0 ||
+    Number(displayRemoveValue) != 0 ||
     (pinRemoveMax && pair.userCollateralShare.gt(ZERO))
 
   const repayValueSet = !displayRepayValue.toBigNumber(pair.asset.tokenInfo.decimals).isZero()
@@ -248,7 +248,7 @@ export default function Repay({ pair }: RepayProps) {
     (!swap &&
       !trade &&
       Number(displayRepayValue) <= 0 &&
-      displayRemoveValue <= 0 &&
+      Number(displayRemoveValue) <= 0 &&
       (!pinRemoveMax || pair.userCollateralShare.isZero())) ||
     warnings.some((warning) => warning.breaking)
 
@@ -320,7 +320,7 @@ export default function Repay({ pair }: RepayProps) {
         summary = 'Repay'
       }
       if (
-        displayRemoveValue > 0 ||
+        Number(displayRemoveValue) > 0 ||
         (pinRemoveMax && pair.userCollateralShare > 0)
       ) {
         const share =
@@ -370,7 +370,7 @@ export default function Repay({ pair }: RepayProps) {
         useCoffinTitle={`Remove ${pair.collateral.tokenInfo.symbol} to`}
         useCoffin={useCoffinRemove}
         setUseCoffin={setUseCoffinRemoveCollateral}
-        max={BigNumber.from(nextMaxRemoveCollateral)}
+        max={nextMaxRemoveCollateral}
         pinMax={pinRemoveMax}
         setPinMax={setPinRemoveMax}
         showMax={
