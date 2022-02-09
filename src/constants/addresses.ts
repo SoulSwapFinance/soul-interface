@@ -294,7 +294,7 @@ export const REAPER_ADDRESS: AddressMap = {
 export const STOP_LIMIT_ORDER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x6AaC28444cB227EC5D5cebe696882DeCcD50ee83', // TODO
+  [ChainId.FANTOM]: '0x6AaC28444cB227EC5D5cebe696882DeCcD50ee83', // FEB22
   [ChainId.FANTOM_TESTNET]: '',
 }
 

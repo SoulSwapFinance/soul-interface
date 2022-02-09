@@ -104,7 +104,7 @@ const ConfirmLimitOrderBottomContent: FC<ConfirmLimitOrderBottomContentProps> = 
           </span>
         </div>
         <div className="flex items-center justify-between">
-          <span className="text-secondary">{i18n._(t`Order Expiration`)}</span>
+          <span className="text-secondary">{i18n._(t`Expiration`)}</span>
           <span className="font-bold text-high-emphesis">{orderExpiration.label}</span>
         </div>
         {recipient && (

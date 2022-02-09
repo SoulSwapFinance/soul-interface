@@ -67,7 +67,7 @@ export function useLimitOrderActionHandlers(): {
 
   const onChangeRecipient = useCallback(
     (recipient?: string) => {
-      dispatch(setRecipient({ recipient }))
+      dispatch(setRecipient(recipient))
     },
     [dispatch]
   )
@@ -124,9 +124,8 @@ function validatedRecipient(recipient: any): string | undefined {
 export function queryParametersToSwapState(chainId: ChainId, parsedQs: ParsedQs) {
   let inputCurrency = parseCurrencyFromURLParameter(parsedQs.inputCurrency)
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
-  const eth = 
-  // chainId === ChainId.CELO ? WNATIVE_ADDRESS[chainId] :
-    'FTM'
+  const eth = 'FTM'
+  // chainId === ChainId.CELO ? WNATIVE_ADDRESS[chainId] : 'FTM'
   const soul = SOUL_ADDRESS[chainId]
   if (inputCurrency === '' && outputCurrency === '') {
     inputCurrency = eth
@@ -179,7 +178,6 @@ export function useDefaultsFromURLSearch() {
       outputCurrencyId: parsed.outputCurrencyId,
     })
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, chainId, parsedQs])
 
   return result
@@ -189,8 +187,10 @@ type UseLimitOrderDerivedCurrencies = () => { inputCurrency?: Currency; outputCu
 export const useLimitOrderDerivedCurrencies: UseLimitOrderDerivedCurrencies = () => {
   const { chainId } = useActiveWeb3React()
   const { inputCurrencyId, outputCurrencyId } = useLimitOrderState()
-  const inputCurrency = useCurrency(inputCurrencyId || 'FTM') ?? undefined
-  const outputCurrency = useCurrency(outputCurrencyId || SOUL_ADDRESS[chainId || 250]) ?? undefined
+  const inputCurrency =
+    useCurrency(inputCurrencyId === 'SOUL' ? SOUL_ADDRESS[chainId || 250] : inputCurrencyId) ?? undefined
+  const outputCurrency =
+    useCurrency(outputCurrencyId === 'SOUL' ? SOUL_ADDRESS[chainId || 250] : outputCurrencyId) ?? undefined
 
   return useMemo(() => {
     return {
@@ -263,18 +263,19 @@ export const useLimitOrderDerivedTypedInputAmount: UseLimitOrderDerivedTypedInpu
 
 type UseLimitOrderDerivedInputError = ({ trade }: { trade?: Trade<Currency, Currency, TradeType> }) => string
 export const useLimitOrderDerivedInputError: UseLimitOrderDerivedInputError = ({ trade }) => {
-  const { recipient, orderExpiration, fromCoffinBalance, limitPrice } = useLimitOrderState()
+  const { recipient, orderExpiration, fromCoffinBalance, limitPrice, typedValue } = useLimitOrderState()
   const { account } = useActiveWeb3React()
   const { inputCurrency, outputCurrency } = useLimitOrderDerivedCurrencies()
   const recipientLookup = useENS(recipient)
   const to = !recipient ? account : recipientLookup.address
   const parsedRate = useLimitOrderDerivedLimitPrice()
   const balance = useCoffinOrWalletBalance(account ?? undefined, inputCurrency, !fromCoffinBalance)
+  const [expertMode] = useExpertModeManager()
 
   return useMemo(() => {
     return !account
       ? 'Connect Wallet'
-      : !trade?.inputAmount.greaterThan(ZERO)
+      : !trade?.inputAmount.greaterThan(ZERO) || !typedValue
       ? i18n._(t`Enter Amount`)
       : !inputCurrency || !outputCurrency
       ? i18n._(t`Select Token`)
@@ -286,10 +287,22 @@ export const useLimitOrderDerivedInputError: UseLimitOrderDerivedInputError = ({
       ? i18n._(t`Select Order Expiration`)
       : !balance
       ? i18n._(t`Loading Balance`)
-      : balance && trade?.inputAmount && balance.lessThan(trade.inputAmount)
+      : !expertMode && balance && trade?.inputAmount && balance.lessThan(trade.inputAmount)
       ? i18n._(t`Insufficient Balance`)
       : ''
-  }, [account, balance, inputCurrency, limitPrice, orderExpiration, outputCurrency, parsedRate, to, trade?.inputAmount])
+  }, [
+    account,
+    balance,
+    expertMode,
+    inputCurrency,
+    limitPrice,
+    orderExpiration,
+    outputCurrency,
+    parsedRate,
+    to,
+    trade?.inputAmount,
+    typedValue,
+  ])
 }
 
 type UseLimitOrderDerivedTrade = () => Trade<Currency, Currency, TradeType> | undefined

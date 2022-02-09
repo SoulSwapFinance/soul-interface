@@ -132,7 +132,6 @@ const useLimitOrders = () => {
 
     const init = async () => {
       const openOrders = await Promise.all<DerivedOrder>(
-        // @ts-ignore TYPE NEEDS FIXING
         ordersData.pendingOrders.orders.map((el, i) =>
           transform({ ...el, filledAmount: ordersData.pendingOrders.filledAmounts[i] })
         )

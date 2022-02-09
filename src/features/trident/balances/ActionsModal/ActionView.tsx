@@ -28,10 +28,10 @@ const ActionView: FC<ActionViewProps> = ({ onClose }) => {
   const router = useRouter()
 
   const swapActionHandler = useCallback(async () => {
-    // if (featureEnabled(Feature.TRIDENT, chainId)) {
-    //   if (currency?.isNative) return router.push('/swap')
-    //   return router.push(`/trident/swap?&tokens=${NATIVE[chainId].symbol}&tokens=${currency?.wrapped.address}`)
-    // }
+    if (featureEnabled(Feature.TRIDENT, chainId)) {
+      if (currency?.isNative) return router.push('/swap')
+      return router.push(`/trident/swap?&tokens=${NATIVE[chainId].symbol}&tokens=${currency?.wrapped.address}`)
+    }
 
     if (currency?.isNative) return router.push('/swap')
 
