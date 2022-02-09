@@ -51,7 +51,7 @@ export default function Deposit({ pair }: any): JSX.Element {
   const warnings = new Warnings()
 
   warnings.add(
-    balance?.lt(BigNumber.from(value)),
+    balance < value,
     i18n._(
       t`Please make sure your ${useCoffin ? 'CoffinBox' : 'wallet'} balance is sufficient to deposit and then try again.`
     ),
@@ -62,7 +62,7 @@ export default function Deposit({ pair }: any): JSX.Element {
 
   if (value && !warnings.broken) {
     const amount = value
-    const newUserAssetAmount = BigNumber.from(pair.currentUserAssetAmount.value || 0)?.add(amount)
+    const newUserAssetAmount = pair.currentUserAssetAmount.value + amount
     transactionReview.addTokenAmount(
       i18n._(t`Balance`),
       pair.currentUserAssetAmount.value,
@@ -70,7 +70,11 @@ export default function Deposit({ pair }: any): JSX.Element {
       pair.asset
     )
     transactionReview.addUSD(i18n._(t`Balance USD`), pair.currentUserAssetAmount.value, newUserAssetAmount, pair.asset)
-    const newUtilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value || 0).add(amount)
+    let newUtilization
+    pair.currentBorrowAmount.value > 0 ?
+    newUtilization 
+      // = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value || 0).add(amount)
+      = e10(18).mul(pair.currentBorrowAmount.value)?.div(pair.currentAllAssets.value).add(amount) : 0
     transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
     if (pair.currentExchangeRate.isZero()) {
       transactionReview.add(
