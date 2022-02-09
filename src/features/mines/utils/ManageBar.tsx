@@ -139,10 +139,9 @@ const ManageBar = ({ farm }) => {
           token0={ pair?.token0.address }
           token1={ pair?.token1.address }
           value={ toggle ? depositValue : withdrawValue }
-          // fiatValue={balanceFiatValue}
           onChange={ toggle ? setDepositValue : setWithdrawValue }
           balance={ toggle ? balance : stakedAmount }
-          showMax={ true }
+          showMax={ false }
         />
           {/* <CurrencyInputPanel
             value={depositValue}

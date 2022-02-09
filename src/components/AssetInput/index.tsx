@@ -271,7 +271,7 @@ const AssetInputPanel = ({
           <Typography
             id={currency.symbol + '-usdc-value'}
             variant="xs"
-            className={error ? 'text-red' : usdcValue && value ? 'text-green' : 'text-low-emphesis'}
+            className={error ? 'text-red' : value ? 'text-green' : 'text-low-emphesis'}
           >
             ≈{usdcValue ? usdcValue.toSignificant(4) : ( 
               currency.symbol == 'SOUL' ? formatCurrency(tokenPrice * Number(value), 2) :

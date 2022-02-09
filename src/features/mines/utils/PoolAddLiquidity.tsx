@@ -179,6 +179,7 @@ const PoolDeposit = ({ currencyA, currencyB, header }) => {
           value={formattedAmounts[Field.CURRENCY_A]}
           currency={currencyA}
           onChange={onFieldAInput}
+          showMax={false}
         />
         <div className="z-10 flex justify-center -mt-6 -mb-6">
           <div className="p-1.5 rounded-full bg-dark-800 border border-dark-800 shadow-md border-dark-700">
@@ -192,6 +193,7 @@ const PoolDeposit = ({ currencyA, currencyB, header }) => {
           currency={currencyB}
           onChange={onFieldBInput}
           className="!mt-0"
+          showMax={false}
         />
         {(oneCurrencyIsETH || oneCurrencyIsWETH) && (
         /* {(oneCurrencyIsETH || oneCurrencyIsWETH) && chainId != ChainId.CELO && ( */
@@ -201,9 +203,7 @@ const PoolDeposit = ({ currencyA, currencyB, header }) => {
             }
               >
               {i18n._(t`Use`)} {useETH && 'W'}
-              {/* @ts-ignore TYPE NEEDS FIXING */}
               {NATIVE[chainId].symbol} instead of {!useETH && 'W'}
-              {/* @ts-ignore TYPE NEEDS FIXING */}
               {NATIVE[chainId].symbol}
             </Button>
           </div>
