@@ -70,35 +70,35 @@ const initialState: LimitOrderState = {
 
 export default createReducer<LimitOrderState>(initialState, (builder) =>
   builder
-  .addCase(
-    // @ts-ignore TYPE NEEDS FIXING
-    replaceLimitOrderState,
-    (
-      state,
-      {
-        payload: {
-          typedValue,
-          recipient,
-          independentField,
-          inputCurrencyId,
-          outputCurrencyId,
-          fromCoffinBalance,
-          limitPrice,
-          orderExpiration,
-        },
-      }
-    ) => ({
-      inputCurrencyId,
-      outputCurrencyId,
-      independentField,
-      typedValue: typedValue,
-      recipient,
-      fromCoffinBalance,
-      limitPrice,
-      orderExpiration,
-      limitOrderApprovalPending: state.limitOrderApprovalPending,
-    })
-  )
+  // .addCase(
+  //   // @ts-ignore TYPE NEEDS FIXING
+  //   replaceLimitOrderState,
+  //   (
+  //     state,
+  //     {
+  //       payload: {
+  //         typedValue,
+  //         recipient,
+  //         independentField,
+  //         inputCurrencyId,
+  //         outputCurrencyId,
+  //         fromCoffinBalance,
+  //         limitPrice,
+  //         orderExpiration,
+  //       },
+  //     }
+  //   ) => ({
+  //     inputCurrencyId,
+  //     outputCurrencyId,
+  //     independentField,
+  //     typedValue: typedValue,
+  //     recipient,
+  //     fromCoffinBalance,
+  //     limitPrice,
+  //     orderExpiration,
+  //     limitOrderApprovalPending: state.limitOrderApprovalPending,
+  //   })
+  // )
     .addCase(setLimitPrice, (state, { payload: limitPrice }) => {
       // @ts-ignore TYPE NEEDS FIXING
       state.limitPrice = limitPrice
