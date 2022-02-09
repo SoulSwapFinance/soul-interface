@@ -161,10 +161,11 @@ export default function Repay({ pair }: RepayProps) {
   let minBorrow = nextMaxBorrowSafe < pair.maxAssetAvailable ? nextMaxBorrowSafe : pair.maxAssetAvailable
   const nextMaxBorrowPossible = minBorrow > 0 ? minBorrow : 0
 
-  const nextHealth = pair.currentUserBorrowAmount.value
+  const nextHealth =
+   BigNumber.from(pair.currentUserBorrowAmount.value
     - Number(displayRepayValue)
     * 1000000000000000000 
-    / nextMaxBorrowMinimum
+    / nextMaxBorrowMinimum)
 
   const transactionReview = new TransactionReview()
 
@@ -172,7 +173,7 @@ export default function Repay({ pair }: RepayProps) {
     transactionReview.addTokenAmount(
       'Borrow Limit',
       pair.maxBorrowable.safe.value,
-      Number(nextMaxBorrowSafe) + Number(displayRepayValue),
+      BigNumber.from(nextMaxBorrowSafe).add(BigNumber.from(displayRepayValue)),
       pair.asset
     )
     transactionReview.addPercentage('Health', pair.health.value, nextHealth)
@@ -306,7 +307,7 @@ export default function Repay({ pair }: RepayProps) {
       cooker.repayPart(pair.userBorrowPart, true)
 
       if (!useCoffinRemove) {
-        cooker.coffinWithdrawCollateral(0, -1)
+        cooker.coffinWithdrawCollateral(BigNumber.from(0), BigNumber.from(-1))
       }
 
       summary = 'Repay All'
@@ -328,7 +329,7 @@ export default function Repay({ pair }: RepayProps) {
             (pinRepayMax && pair.userBorrowPart > 0 && balance >= pair.currentUserBorrowAmount.value))
             ? pair.userCollateralShare
             : toShare(pair.collateral, 
-              Number(displayRemoveValue))
+              displayRemoveValue)
         cooker.removeCollateral(share, useCoffinRemove)
         summary += (summary ? ' and ' : '') + 'Remove Collateral'
       }

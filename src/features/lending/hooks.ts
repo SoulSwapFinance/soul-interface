@@ -185,13 +185,13 @@ export function useUnderworldPairs(addresses = []) {
         pair.interestPerYear = pair.accrueInfo.interestPerSecond.mul('60').mul('60').mul('24').mul('365')
 
         // The total collateral in the market (stable, doesn't accrue)
-        pair.totalCollateralAmount = easyAmount(toAmount(pair.collateral, pair.totalCollateralShare), pair.collateral)
+        pair.totalCollateralAmount = easyAmount(Number(toAmount(pair.collateral, pair.totalCollateralShare)), pair.collateral)
 
         // The total assets unborrowed in the market (stable, doesn't accrue)
-        pair.totalAssetAmount = easyAmount(toAmount(pair.asset, pair.totalAsset.elastic), pair.asset)
+        pair.totalAssetAmount = easyAmount(Number(toAmount(pair.asset, pair.totalAsset.elastic)), pair.asset)
 
         // The total assets borrowed in the market right now
-        pair.currentBorrowAmount = easyAmount(accrue(pair, pair.totalBorrow.elastic, true), pair.asset)
+        pair.currentBorrowAmount = easyAmount(Number(accrue(pair, pair.totalBorrow.elastic, true)), pair.asset)
 
         // The total amount of assets, both borrowed and still available right now
         pair.currentAllAssets = easyAmount(
@@ -209,15 +209,15 @@ export function useUnderworldPairs(addresses = []) {
 
         // Maximum amount of assets available for withdrawal or borrow
         pair.maxAssetAvailable =
-        pair.totalAsset.elastic * Number(pair.currentAllAssets.value) / pair.currentAllAssetShares
-        > toAmount(pair.asset, Number(toElastic(pair.currentTotalAsset, pair.totalAsset.base.sub(1000), false))) ?
-        pair.totalAsset.elastic * Number(pair.currentAllAssets.value) / pair.currentAllAssetShares :
-        toAmount(pair.asset, Number(toElastic(pair.currentTotalAsset, pair.totalAsset.base.sub(1000), false)))
+        // pair.totalAsset.elastic * Number(pair.currentAllAssets.value) / pair.currentAllAssetShares
+        // > toAmount(pair.asset, Number(toElastic(pair.currentTotalAsset, pair.totalAsset.base.sub(1000), false))) ?
+        // pair.totalAsset.elastic * Number(pair.currentAllAssets.value) / pair.currentAllAssetShares :
+        // toAmount(pair.asset, Number(toElastic(pair.currentTotalAsset, pair.totalAsset.base.sub(1000), false)))
 
-        // minimum(
-        //   pair.totalAsset.elastic.mulDiv(pair.currentAllAssets.value, pair.currentAllAssetShares),
-        //   toAmount(pair.asset, toElastic(pair.currentTotalAsset, pair.totalAsset.base - 1000, false))
-        // )
+        minimum(
+          pair.totalAsset.elastic.mulDiv(pair.currentAllAssets.value, pair.currentAllAssetShares),
+          toAmount(pair.asset, toElastic(pair.currentTotalAsset, pair.totalAsset.base.sub(1000), false))
+        )
 
         pair.maxAssetAvailableFraction = 
         pair.maxAssetAvailable
@@ -229,10 +229,7 @@ export function useUnderworldPairs(addresses = []) {
 
         // Interest per year received by lenders as of now
         pair.supplyAPR = takeFee(
-          Number(pair.interestPerYear)
-          * Number(pair.utilization) 
-          / 1e18
-          )
+          pair.interestPerYear * pair.utilization / 1e18)
   
         // Interest payable by borrowers per year as of now
         pair.currentInterestPerYear = interestAccrue(pair, pair.interestPerYear)
@@ -245,12 +242,12 @@ export function useUnderworldPairs(addresses = []) {
           )
 
         // The user's amount of collateral (stable, doesn't accrue)
-        pair.userCollateralAmount = easyAmount(toAmount(pair.collateral, pair.userCollateralShare), pair.collateral)
+        pair.userCollateralAmount = easyAmount(Number(toAmount(pair.collateral, pair.userCollateralShare)), pair.collateral)
 
         // The user's amount of assets (stable, doesn't accrue)
         pair.currentUserAssetAmount = easyAmount(
-          pair.userAssetFraction
-          * pair.currentAllAssets.value / pair.totalAsset.base,
+          Number(pair.userAssetFraction
+          * pair.currentAllAssets.value / pair.totalAsset.base),
           pair.asset
         )
 
@@ -268,9 +265,9 @@ export function useUnderworldPairs(addresses = []) {
 
         // Value of protocol fees
         pair.feesEarned = easyAmount(
-          pair.accrueInfo.feesEarnedFraction
+          Number(pair.accrueInfo.feesEarnedFraction
           * pair.currentAllAssets
-          / pair.totalAsset.base,
+          / pair.totalAsset.base),
           pair.asset
         )
 
@@ -306,7 +303,7 @@ export function useUnderworldPairs(addresses = []) {
           / pair.maxBorrowable.minimum
 
         pair.netWorth = getUSDValue(
-          pair.currentUserAssetAmount.value - pair.currentUserBorrowAmount.value,
+          (pair.currentUserAssetAmount.value - pair.currentUserBorrowAmount.value),
           pair.asset
         ) + (getUSDValue(pair.userCollateralAmount.value, pair.collateral))
 

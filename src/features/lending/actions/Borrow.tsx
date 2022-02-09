@@ -296,7 +296,7 @@ export default function Borrow({ pair }: BorrowProps) {
         path.length > 3 ? path[2] : AddressZero,
         account,
         toShare(pair.collateral, 
-          Number(collateralValue)),
+          BigNumber.from(collateralValue)),
         borrowValue.toBigNumber(pair.asset.tokenInfo.decimals),
       ])
 
@@ -310,7 +310,7 @@ export default function Borrow({ pair }: BorrowProps) {
           path.length > 3 ? path[2] : AddressZero,
           account,
           toShare(pair.collateral, 
-            Number(collateralValue)),
+            BigNumber.from(collateralValue)),
         ]
       )
 
@@ -353,18 +353,18 @@ export default function Borrow({ pair }: BorrowProps) {
 
     const multipliedBorrow = multipliedCollateral.mulDiv(e10(16).mul('75'), pair.currentExchangeRate)
 
-    // console.log({
-    //     original: swapCollateral.toFixed(pair.collateral.tokenInfo.decimals),
-    //     multiplied: swapCollateral
-    //         .add(
-    //             swapCollateral.mulDiv(
-    //                 multiplier.toBigNumber(pair.collateral.tokenInfo.decimals),
-    //                 '1'.toBigNumber(pair.collateral.tokenInfo.decimals)
-    //             )
-    //         )
-    //         .toFixed(pair.collateral.tokenInfo.decimals),
-    //     borrow: multipliedBorrow.toFixed(pair.asset.tokenInfo.decimals),
-    // })
+    console.log({
+        original: swapCollateral.toFixed(pair.collateral.tokenInfo.decimals),
+        multiplied: swapCollateral
+            .add(
+                swapCollateral.mulDiv(
+                    multiplier.toBigNumber(pair.collateral.tokenInfo.decimals),
+                    '1'.toBigNumber(pair.collateral.tokenInfo.decimals)
+                )
+            )
+            .toFixed(pair.collateral.tokenInfo.decimals),
+        borrow: multipliedBorrow.toFixed(pair.asset.tokenInfo.decimals),
+    })
 
     // console.log('multipliedBorrow:', multipliedBorrow)
 
