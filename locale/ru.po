@@ -103,10 +103,10 @@ msgstr ""
 msgid "Add Liquidity & Earn Fees (0.25%)"
 msgstr ""
 
-msgid "Add collateral in order to borrow assets"
+msgid "Add Recipient"
 msgstr ""
 
-msgid "Add recipient"
+msgid "Add collateral in order to borrow assets"
 msgstr ""
 
 msgid "Add {0} to MetaMask"
@@ -336,6 +336,9 @@ msgstr ""
 msgid "Confirm"
 msgstr ""
 
+msgid "Confirm Add Liquidity"
+msgstr ""
+
 msgid "Confirm Adding Liquidity"
 msgstr ""
 
@@ -346,6 +349,9 @@ msgid "Confirm Enchantment"
 msgstr ""
 
 msgid "Confirm Limit Order"
+msgstr ""
+
+msgid "Confirm Order"
 msgstr ""
 
 msgid "Confirm Remove Liquidity"
@@ -366,13 +372,7 @@ msgstr ""
 msgid "Confirm Withdrawal"
 msgstr ""
 
-msgid "Confirm add liquidity"
-msgstr ""
-
 msgid "Confirm create pool"
-msgstr ""
-
-msgid "Confirm order"
 msgstr ""
 
 msgid "Confirm this transaction in your wallet"
@@ -457,6 +457,9 @@ msgid "Deposited"
 msgstr ""
 
 msgid "Depositing with Zap Mode involves swapping your asset for the assets in the pool - this makes your transaction subject to swap-related fees."
+msgstr ""
+
+msgid "Depositing:"
 msgstr ""
 
 msgid "Deposits"
@@ -742,13 +745,13 @@ msgstr ""
 msgid "Interface Settings"
 msgstr ""
 
+msgid "Invalid Pool"
+msgstr ""
+
 msgid "Invalid Recipient"
 msgstr ""
 
 msgid "Invalid pair"
-msgstr ""
-
-msgid "Invalid pool"
 msgstr ""
 
 msgid "Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency."
@@ -950,6 +953,9 @@ msgstr ""
 msgid "No Liquidity found"
 msgstr ""
 
+msgid "No Route Found"
+msgstr ""
+
 msgid "No liquidity found to do swap"
 msgstr ""
 
@@ -960,9 +966,6 @@ msgid "No pool found"
 msgstr ""
 
 msgid "No results found"
-msgstr ""
-
-msgid "No route found"
 msgstr ""
 
 msgid "Non-hardware Wallet"
@@ -998,16 +1001,13 @@ msgstr ""
 msgid "Oracle"
 msgstr ""
 
-msgid "Order Expiration"
-msgstr ""
-
 msgid "Orders"
 msgstr ""
 
 msgid "Our Resources."
 msgstr ""
 
-msgid "Output is estimated. If the price changes by more than 0.5% your transaction will revert."
+msgid "Output is estimated. If the price changes by more than your chosen slippage it'll revert."
 msgstr ""
 
 msgid ""
@@ -1031,6 +1031,9 @@ msgid "Pair your SOUL and add to Bonds for more SOUL at record-high returns."
 msgstr ""
 
 msgid "Pair your SOUL with FTM and add to Farms for more SOUL and an enhanced AURA."
+msgstr ""
+
+msgid "Pay"
 msgstr ""
 
 msgid "Pay from"
@@ -1141,6 +1144,9 @@ msgid "Read the Documentation."
 msgstr ""
 
 msgid "Receive"
+msgstr ""
+
+msgid "Receive (minimum):"
 msgstr ""
 
 msgid "Receive to"
@@ -1676,9 +1682,6 @@ msgstr ""
 msgid "You are creating a pool"
 msgstr ""
 
-msgid "You are depositing:"
-msgstr ""
-
 msgid "You are on the wrong network"
 msgstr ""
 
@@ -1698,15 +1701,6 @@ msgid "You pay"
 msgstr ""
 
 msgid "You receive"
-msgstr ""
-
-msgid "You'll pay"
-msgstr ""
-
-msgid "You'll receive"
-msgstr ""
-
-msgid "You'll receive (at least):"
 msgstr ""
 
 msgid "Your"

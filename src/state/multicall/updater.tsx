@@ -35,7 +35,6 @@ async function fetchChunk(
     )
 
     if (process.env.NODE_ENV === 'development') {
-      // @ts-ignore TYPE NEEDS FIXING
       returnData.forEach(({ gasUsed, returnData, success }, i) => {
         if (
           !success &&
@@ -227,18 +226,18 @@ export default function Updater(): null {
             }
           })
           .catch((error: any) => {
-            if (error.isCancelledError) {
-              console.debug('Cancelled fetch for blockNumber', latestBlockNumber, chunk, chainId)
-              return
-            }
-            console.error('Failed to fetch multicall chunk', chunk, chainId, error)
-            dispatch(
-              errorFetchingMulticallResults({
-                calls: chunk,
-                chainId,
-                fetchingBlockNumber: latestBlockNumber,
-              })
-            )
+          //   if (error.isCancelledError) {
+          //     console.debug('Cancelled fetch for blockNumber', latestBlockNumber, chunk, chainId)
+          //     return
+          //   }
+          //   console.error('Failed to fetch multicall chunk', chunk, chainId, error)
+          //   dispatch(
+          //     errorFetchingMulticallResults({
+          //       calls: chunk,
+          //       chainId,
+          //       fetchingBlockNumber: latestBlockNumber,
+          //     })
+          //   )
           })
         return cancel
       }),

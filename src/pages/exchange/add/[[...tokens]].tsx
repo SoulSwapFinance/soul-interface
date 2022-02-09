@@ -6,7 +6,7 @@ import { ZERO_PERCENT } from '../../../constants'
 import React, { useCallback, useState } from 'react'
 import TransactionConfirmationModal, { ConfirmationModalContent } from 'modals/TransactionConfirmationModal'
 import { calculateGasMargin, calculateSlippageAmount } from 'functions/trade'
-import { currencyId, maxAmountSpend } from 'functions/currency'
+import { currencyId, halfAmountSpend, maxAmountSpend } from 'functions/currency'
 import { useDerivedMintInfo, useMintActionHandlers, useMintState } from 'state/mint/hooks'
 import { useExpertModeManager, useUserSlippageToleranceWithDefault } from 'state/user/hooks'
 import MainHeader from 'features/swap/MainHeader'
@@ -113,6 +113,17 @@ export default function Add() {
       return {
         ...accumulator,
         [field]: maxAmountSpend(currencyBalances[field]),
+      }
+    },
+    {}
+  )
+
+  // get the max amounts user can add
+  const halfAmounts: { [field in Field]?: CurrencyAmount<Currency> } = [Field.CURRENCY_A, Field.CURRENCY_B].reduce(
+    (accumulator, field) => {
+      return {
+        ...accumulator,
+        [field]: halfAmountSpend(currencyBalances[field]),
       }
     },
     {}
@@ -390,6 +401,9 @@ export default function Add() {
                 <CurrencyInputPanel
                   value={formattedAmounts[Field.CURRENCY_A]}
                   onUserInput={onFieldAInput}
+                  onHalf={() => {
+                    onFieldAInput(halfAmounts[Field.CURRENCY_A]?.toExact() ?? '')
+                  }}
                   onMax={() => {
                     onFieldAInput(maxAmounts[Field.CURRENCY_A]?.toExact() ?? '')
                   }}
@@ -414,6 +428,9 @@ export default function Add() {
                   value={formattedAmounts[Field.CURRENCY_B]}
                   onUserInput={onFieldBInput}
                   onCurrencySelect={handleCurrencyBSelect}
+                  onHalf={() => {
+                    onFieldBInput(halfAmounts[Field.CURRENCY_B]?.toExact() ?? '')
+                  }}
                   onMax={() => {
                     onFieldBInput(maxAmounts[Field.CURRENCY_B]?.toExact() ?? '')
                   }}

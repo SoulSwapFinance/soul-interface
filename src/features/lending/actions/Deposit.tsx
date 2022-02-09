@@ -1,7 +1,7 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { WNATIVE } from 'sdk'
+import { WNATIVE } from '@sushiswap/core-sdk'
 import { Button } from 'components/Button'
 import UnderworldCooker from 'entities/UnderworldCooker'
 import { Direction, TransactionReview } from 'entities/TransactionReview'
@@ -30,11 +30,10 @@ export default function Deposit({ pair }: any): JSX.Element {
 
   // State
   const [useCoffin, setUseCoffin] = useState<boolean>(pair.asset.coffinBalance > 0)
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState(ZERO)
 
   // Calculated
   const assetNative = WNATIVE[chainId].address === pair.asset.address
-
   const ethBalance = useETHBalances(assetNative ? [account] : [])
 
   const balance = useCoffin
@@ -52,7 +51,7 @@ export default function Deposit({ pair }: any): JSX.Element {
   const warnings = new Warnings()
 
   warnings.add(
-    balance?.lt(value.toBigNumber(pair.asset.tokenInfo.decimals)),
+    balance < value,
     i18n._(
       t`Please make sure your ${useCoffin ? 'CoffinBox' : 'wallet'} balance is sufficient to deposit and then try again.`
     ),
@@ -63,7 +62,7 @@ export default function Deposit({ pair }: any): JSX.Element {
 
   if (value && !warnings.broken) {
     const amount = value
-    const newUserAssetAmount = Number(pair.currentUserAssetAmount.value) + Number(amount)
+    const newUserAssetAmount = pair.currentUserAssetAmount.value + amount
     transactionReview.addTokenAmount(
       i18n._(t`Balance`),
       pair.currentUserAssetAmount.value,
@@ -71,14 +70,11 @@ export default function Deposit({ pair }: any): JSX.Element {
       pair.asset
     )
     transactionReview.addUSD(i18n._(t`Balance USD`), pair.currentUserAssetAmount.value, newUserAssetAmount, pair.asset)
-    const newUtilization 
-      // 
-      // = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.add(amount))
-      = Number(1e18) 
-      * pair.currentBorrowAmount.value
-      / (pair.currentAllAssets.value
-      + Number(amount))
-
+    let newUtilization
+    pair.currentBorrowAmount.value > 0 ?
+    newUtilization 
+      // = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value || 0).add(amount)
+      = e10(18).mul(pair.currentBorrowAmount.value)?.div(pair.currentAllAssets.value).add(amount) : 0
     transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
     if (pair.currentExchangeRate.isZero()) {
       transactionReview.add(
@@ -107,7 +103,7 @@ export default function Deposit({ pair }: any): JSX.Element {
       '0x000000000000000000000000000000000000dead'
     )
 
-    cooker.addAsset(BigNumber.from(amount), useCoffin, deadBalance.isZero())
+    cooker.addAsset(amount, useCoffin, deadBalance.isZero())
 
     return `${i18n._(t`Deposit`)} ${pair.asset.tokenInfo.symbol}`
   }
@@ -119,7 +115,7 @@ export default function Deposit({ pair }: any): JSX.Element {
       <SmartNumberInput
         color="blue"
         token={pair.asset}
-        value={value}
+        value={value.toString()}
         setValue={setValue}
         useCoffinTitleDirection="down"
         useCoffinTitle="from"
@@ -139,7 +135,7 @@ export default function Deposit({ pair }: any): JSX.Element {
           <TokenApproveButton value={value} token={assetToken} needed={!useCoffin}>
             <Button
               onClick={() => onCook(pair, onExecute)}
-              disabled={value.toBigNumber(pair.asset.tokenInfo.decimals).lte(0) || warnings.broken}
+              disabled={value <= ZERO || warnings.broken}
               fullWidth={true}
             >
               {i18n._(t`Deposit`)}

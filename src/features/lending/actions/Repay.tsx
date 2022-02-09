@@ -92,8 +92,8 @@ export default function Repay({ pair }: RepayProps) {
     ? nextMinCollateralSpot
     : nextMinCollateralStored
 
-  let removeCollatoral = pair.userCollateralAmount.value.sub(nextMinCollateralMinimum.mulDiv(100, 95))
-  const nextMaxRemoveCollateral = removeCollatoral.gt(0) ? removeCollatoral : ZERO
+  let removeCollatoral = pair.userCollateralAmount.value - nextMinCollateralMinimum * 100 / 95
+  const nextMaxRemoveCollateral = BigNumber.from(removeCollatoral).lt(0) ? BigNumber.from(removeCollatoral) : ZERO
 
   const maxRemoveCollateral 
     = nextMaxRemoveCollateral
@@ -161,10 +161,11 @@ export default function Repay({ pair }: RepayProps) {
   let minBorrow = nextMaxBorrowSafe < pair.maxAssetAvailable ? nextMaxBorrowSafe : pair.maxAssetAvailable
   const nextMaxBorrowPossible = minBorrow > 0 ? minBorrow : 0
 
-  const nextHealth = pair.currentUserBorrowAmount.value
+  const nextHealth =
+   Number(pair.currentUserBorrowAmount.value)
     - Number(displayRepayValue)
     * 1000000000000000000 
-    / nextMaxBorrowMinimum
+    / Number(nextMaxBorrowMinimum)
 
   const transactionReview = new TransactionReview()
 
@@ -172,10 +173,10 @@ export default function Repay({ pair }: RepayProps) {
     transactionReview.addTokenAmount(
       'Borrow Limit',
       pair.maxBorrowable.safe.value,
-      Number(nextMaxBorrowSafe) + Number(displayRepayValue),
+      nextMaxBorrowSafe + Number(displayRepayValue),
       pair.asset
     )
-    transactionReview.addPercentage('Health', pair.health.value, nextHealth)
+    transactionReview.addPercentage('Health', pair.health.value, BigNumber.from(nextHealth))
   }
 
   let maxCollatoral 
@@ -213,7 +214,7 @@ export default function Repay({ pair }: RepayProps) {
     )
 
   const removeValueSet =
-    displayRemoveValue != 0 ||
+    Number(displayRemoveValue) != 0 ||
     (pinRemoveMax && pair.userCollateralShare.gt(ZERO))
 
   const repayValueSet = !displayRepayValue.toBigNumber(pair.asset.tokenInfo.decimals).isZero()
@@ -247,7 +248,7 @@ export default function Repay({ pair }: RepayProps) {
     (!swap &&
       !trade &&
       Number(displayRepayValue) <= 0 &&
-      displayRemoveValue <= 0 &&
+      Number(displayRemoveValue) <= 0 &&
       (!pinRemoveMax || pair.userCollateralShare.isZero())) ||
     warnings.some((warning) => warning.breaking)
 
@@ -306,7 +307,7 @@ export default function Repay({ pair }: RepayProps) {
       cooker.repayPart(pair.userBorrowPart, true)
 
       if (!useCoffinRemove) {
-        cooker.coffinWithdrawCollateral(0, -1)
+        cooker.coffinWithdrawCollateral(BigNumber.from(0), BigNumber.from(-1))
       }
 
       summary = 'Repay All'
@@ -319,7 +320,7 @@ export default function Repay({ pair }: RepayProps) {
         summary = 'Repay'
       }
       if (
-        displayRemoveValue > 0 ||
+        Number(displayRemoveValue) > 0 ||
         (pinRemoveMax && pair.userCollateralShare > 0)
       ) {
         const share =
@@ -328,7 +329,7 @@ export default function Repay({ pair }: RepayProps) {
             (pinRepayMax && pair.userBorrowPart > 0 && balance >= pair.currentUserBorrowAmount.value))
             ? pair.userCollateralShare
             : toShare(pair.collateral, 
-              Number(displayRemoveValue))
+              BigNumber.from(displayRemoveValue))
         cooker.removeCollateral(share, useCoffinRemove)
         summary += (summary ? ' and ' : '') + 'Remove Collateral'
       }
@@ -369,7 +370,7 @@ export default function Repay({ pair }: RepayProps) {
         useCoffinTitle={`Remove ${pair.collateral.tokenInfo.symbol} to`}
         useCoffin={useCoffinRemove}
         setUseCoffin={setUseCoffinRemoveCollateral}
-        max={nextMaxRemoveCollateral}
+        max={Number(nextMaxRemoveCollateral)}
         pinMax={pinRemoveMax}
         setPinMax={setPinRemoveMax}
         showMax={

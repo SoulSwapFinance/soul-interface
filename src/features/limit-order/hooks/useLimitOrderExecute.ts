@@ -164,7 +164,7 @@ const useLimitOrderExecute: UseLimitOrderExecute = () => {
         })
 
         await tx.wait()
-        addTransaction(tx, { summary: 'Create limit order' })
+        addTransaction(tx, { summary: 'Create Limit Order' })
 
         dispatch(setLimitOrderAttemptingTxn(false))
         dispatch(setLimitOrderCoffinPermit(undefined))

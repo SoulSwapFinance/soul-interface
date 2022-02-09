@@ -19,6 +19,7 @@ import { FiatValue } from './FiatValue'
 interface CurrencyInputPanelProps {
   value?: string
   onUserInput?: (value: string) => void
+  onHalf?: () => void
   onMax?: () => void
   showMaxButton: boolean
   label?: string
@@ -43,6 +44,7 @@ interface CurrencyInputPanelProps {
 export default function CurrencyInputPanel({
   value,
   onUserInput,
+  onHalf,
   onMax,
   showMaxButton,
   label = 'Input',
@@ -143,11 +145,11 @@ export default function CurrencyInputPanel({
             )}
           >
             <>
-              {showMaxButton && selectedCurrencyBalance && (
-                <Button variant="flexed" color="greydient" onClick={onMax} size="xs">
-                  {i18n._(t`MAX`)}
+              {/* {showMaxButton && selectedCurrencyBalance && (
+                <Button variant="flexed" color="purple" onClick={onHalf} size="xs">
+                  {i18n._(t`50%`)}
                 </Button>
-              )}
+              )} */}
               <Input.Numeric
                 id="token-amount-input"
                 value={value}
@@ -157,6 +159,19 @@ export default function CurrencyInputPanel({
               />
               {!hideBalance && currency && selectedCurrencyBalance ? (
                 <div className="flex flex-col">
+                  <div onClick={onHalf} className="text-xs font-medium text-right cursor-pointer text-low-emphesis">
+                    {renderBalance ? (
+                      renderBalance(selectedCurrencyBalance)
+                    ) : (           
+
+                      <>
+                        {/* {i18n._(t`Balance:`)}  */}
+                        {/* {i18n._(t`Balance:`)}  */}
+                        {formatCurrencyAmount(selectedCurrencyBalance.divide(2), 4)} {currency.symbol}
+                        {/* {selectedCurrencyBalance?.toSignificant(6, { groupSeparator: ',' }) || '0'} {currency?.symbol} */}
+                      </>
+                    )}
+                  </div>
                   <div onClick={onMax} className="text-xs font-medium text-right cursor-pointer text-low-emphesis">
                     {renderBalance ? (
                       renderBalance(selectedCurrencyBalance)
@@ -164,7 +179,8 @@ export default function CurrencyInputPanel({
 
                       <>
                         {/* {i18n._(t`Balance:`)}  */}
-                        {i18n._(t`Balance:`)} {formatCurrencyAmount(selectedCurrencyBalance, 4)} {currency.symbol}
+                        {/* {i18n._(t`Balance:`)}  */}
+                        {formatCurrencyAmount(selectedCurrencyBalance, 4)} {currency.symbol}
                         {/* {selectedCurrencyBalance?.toSignificant(6, { groupSeparator: ',' }) || '0'} {currency?.symbol} */}
                       </>
                     )}

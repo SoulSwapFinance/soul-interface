@@ -1,25 +1,24 @@
-// import { BigNumber } from '@ethersproject/bignumber'
+import { BigNumber } from '@ethersproject/bignumber'
 
 interface Rebase {
-  base: number
-  elastic: number
+  base: BigNumber
+  elastic: BigNumber
 }
 
-export function rebase(value: number, from: number, to: number): number {
-  return Number(from) ? Number(value) * Number(to) / Number(from) : 0
+export function rebase(value: BigNumber, from: BigNumber, to: BigNumber): BigNumber {
+  return from ? value.mul(to).div(from) : BigNumber.from(0)
 }
 
-export function toElastic(total: Rebase, base: number, roundUp: boolean): number {
-  let elastic: number
-  if (total.base = 0) {
+export function toElastic(total: Rebase, base: BigNumber, roundUp: boolean): BigNumber {
+  let elastic: BigNumber
+  if (total.base = BigNumber.from(0)) {
     elastic = base
   } else {
-    elastic = Number(base) * Number(total.elastic) / Number(total.base)
-    // elastic = base.mul(total.elastic).div(total.base)
-    if (roundUp && elastic * Number(total.base) / Number(total.elastic) < (base)) {
-      elastic = elastic + 1
+    elastic = base.mul(total.elastic).div(total.base)
+    if (roundUp && elastic.mul(total.base).div(total.elastic).lt(base)) {
+      elastic = elastic.add(1)
     }
   }
 
-  return Number(elastic)
+  return elastic
 }
