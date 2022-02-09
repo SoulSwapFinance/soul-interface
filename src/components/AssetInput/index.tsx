@@ -2,7 +2,7 @@ import { ExclamationCircleIcon } from '@heroicons/react/outline'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Currency, CurrencyAmount, Token } from 'sdk'
+import { Currency, CurrencyAmount, SOUL_ADDRESS, Token } from 'sdk'
 import selectCoinAnimation from 'animation/select-coin.json'
 import { Button } from 'components/Button'
 import Chip from 'components/Chip'
@@ -12,7 +12,7 @@ import NumericalInput from 'components/Input/Numeric'
 import Switch from 'components/Switch'
 import Typography from 'components/Typography'
 import CoffinBoxFundingSourceModal from 'features/trident/add/CoffinBoxFundingSourceModal'
-import { classNames, formatNumber, maxAmountSpend, tryParseAmount } from 'functions'
+import { classNames, formatNumber, halfAmountSpend, maxAmountSpend, tryParseAmount } from 'functions'
 import { useCoffinOrWalletBalance } from 'hooks/useCoffinOrWalletBalance'
 import useDesktopMediaQuery from 'hooks/useDesktopMediaQuery'
 import { useUSDCValue } from 'hooks/useUSDCPrice'
@@ -79,8 +79,9 @@ const AssetInput: AssetInput<AssetInputProps> = ({
     spendFromWallet
   )
   const balance = balanceProp || coffinOrWalletBalance
-
-  const halfSpend = maxAmountSpend(balance.divide(2))?.toExact()
+  
+  const halfSpend =
+    halfAmountSpend(balance)?.toExact()
   // const halfSpendAsFraction = maxAmountSpend(balance.divide(2))?.asFraction
   
   const maxSpend = maxAmountSpend(balance)?.toExact()

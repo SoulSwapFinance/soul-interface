@@ -35,9 +35,9 @@ const PoolRemoveLiquidityReviewContent: FC<PoolRemoveLiquidityReviewContentProps
         onBack={() => setContent(undefined)}
         onClose={() => dispatch(setMinesModalOpen(false))}
       />
-      {/* <Typography variant="sm"> */}
-        {/* {i18n._(t`Output is estimated. If the price changes by more than 0.5% your transaction will revert.`)} */}
-      {/* </Typography> */}
+      <Typography variant="sm">
+      {i18n._(t`Output is estimated. If the price changes by more than your chosen slippage it'll revert.`)}
+      </Typography>
       <HeadlessUIModal.BorderedContent className="flex flex-col gap-3 bg-dark-1000/40">
         <Typography weight={700} variant="sm" className="text-secondary">
           {i18n._(t`Remove:`)}
