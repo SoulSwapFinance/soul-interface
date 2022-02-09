@@ -42,8 +42,8 @@ const RecipientField: FC<RecipientField> = ({ recipient, action }) => {
 
   return !use ? (
     <div className="flex justify-center">
-      <Button size="xs" color="blue" variant="empty" className="flex gap-1 py-1.5" onClick={() => setUse(true)}>
-        {i18n._(t`Add recipient`)}
+      <Button size="xs" color="purple" variant="filled" className="flex gap-1 py-1.5" onClick={() => setUse(true)}>
+        {i18n._(t`Add Recipient`)}
       </Button>
     </div>
   ) : (

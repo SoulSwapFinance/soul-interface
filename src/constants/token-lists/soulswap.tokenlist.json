@@ -111,14 +111,6 @@
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b/logo.png"
       },
       {
-        "name": "Magic Internet Money",
-        "address": "0x82f0B8B456c1A451378467398982d4834b6829c1",
-        "symbol": "MIM",
-        "decimals": 18,
-        "chainId": 250,
-        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/prod/blockchains/fantom/assets/0x82f0B8B456c1A451378467398982d4834b6829c1/logo.png"
-      },
-      {
         "name": "ReaperToken",
         "address": "0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb",
         "symbol": "REAPER",
