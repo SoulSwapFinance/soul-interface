@@ -173,7 +173,7 @@ export default function Repay({ pair }: RepayProps) {
     transactionReview.addTokenAmount(
       'Borrow Limit',
       pair.maxBorrowable.safe.value,
-      BigNumber.from(nextMaxBorrowSafe).add(BigNumber.from(displayRepayValue)),
+      nextMaxBorrowSafe + Number(displayRepayValue),
       pair.asset
     )
     transactionReview.addPercentage('Health', pair.health.value, BigNumber.from(nextHealth))

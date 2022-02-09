@@ -103,7 +103,7 @@ export default function Deposit({ pair }: any): JSX.Element {
       '0x000000000000000000000000000000000000dead'
     )
 
-    cooker.addAsset(BigNumber.from(amount), useCoffin, deadBalance.isZero())
+    cooker.addAsset(amount, useCoffin, deadBalance.isZero())
 
     return `${i18n._(t`Deposit`)} ${pair.asset.tokenInfo.symbol}`
   }
@@ -135,7 +135,7 @@ export default function Deposit({ pair }: any): JSX.Element {
           <TokenApproveButton value={value} token={assetToken} needed={!useCoffin}>
             <Button
               onClick={() => onCook(pair, onExecute)}
-              disabled={BigNumber.from(value).lte(ZERO) || warnings.broken}
+              disabled={value <= ZERO || warnings.broken}
               fullWidth={true}
             >
               {i18n._(t`Deposit`)}

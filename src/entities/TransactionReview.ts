@@ -26,17 +26,17 @@ export class TransactionReview extends Array<Line> {
     return this
   }
 
-  public addTokenAmount(name: string, from: BigNumber, to: BigNumber, token: any): this {
+  public addTokenAmount(name: string, from: number, to: number, token: any): this {
     this.add(
       name,
       formatNumber(from) + ' ' + token.tokenInfo.symbol,
       formatNumber(to) + ' ' + token.tokenInfo.symbol,
-      Number(from)==Number(to) ? Direction.FLAT : from < to ? Direction.UP : Direction.DOWN
+      from == to ? Direction.FLAT : from < to ? Direction.UP : Direction.DOWN
     )
     return this
   }
 
-  public addUSD(name: string, from: BigNumber, to: BigNumber, token: any): this {
+  public addUSD(name: string, from: number, to: number, token: any): this {
     this.add(
       name,
       formatNumber(getUSDString(Number(from), token), true),
