@@ -17,6 +17,7 @@ import limitOrder from './limit-order/reducer'
 import lists from './lists/reducer'
 import mint from './mint/reducer'
 import multicall from './multicall/reducer'
+import slippage from './slippage/slippageSlice'
 import swap from './swap/reducer'
 import transactions from './transactions/reducer'
 import user from './user/reducer'
@@ -35,7 +36,7 @@ const reducer = combineReducers({
   create,
   // inari,
   mines,
-  zap,
+  slippage,
   tridentSwap,
   tridentAdd,
   // tridentRemove,
@@ -44,6 +45,7 @@ const reducer = combineReducers({
   // tridentCreate,
   // tridentMigrations,
   web3Context,
+  zap,
 })
 
 export default reducer
