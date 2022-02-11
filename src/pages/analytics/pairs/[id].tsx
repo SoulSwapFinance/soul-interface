@@ -152,16 +152,12 @@ export default function Pair() {
               <div className="text-xs text-secondary">Liquidity Pool</div>
             </div>
             <div className="rounded-3xl text-sm bg-[#414a6c] py-px px-2 flex items-center space-x-1">
-              <div>{shortenAddress(id)}</div>
-              <div className="cursor-pointer" onClick={() => setCopied(id)}>
-                {isCopied ? <CheckIcon height={16} /> : <DuplicateIcon height={16} className="scale-x-[-1]" />}
-              </div>
-                </div>
-                </div>
-                                    <div className="overflow-hidden overflow-ellipsis whitespace-nowrap">View Gecko Terminal</div>
+                        <div className="overflow-hidden overflow-ellipsis whitespace-nowrap">View Gecko Terminal</div>
                       <a href={`https://geckoterminal.com/ftm/pools/${pair?.id}`} target="_blank" rel="noreferrer">
                         <LinkIcon size={16} />
               </a>
+                </div>
+                </div>
         </div>
       </Background>
       <div className="px-4 pt-4 space-y-4 lg:px-14">
