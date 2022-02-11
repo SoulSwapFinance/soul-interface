@@ -156,8 +156,9 @@ export default function Pair() {
               <div className="cursor-pointer" onClick={() => setCopied(id)}>
                 {isCopied ? <CheckIcon height={16} /> : <DuplicateIcon height={16} className="scale-x-[-1]" />}
               </div>
+              <br />
                                     <div className="overflow-hidden overflow-ellipsis whitespace-nowrap">View Gecko Terminal</div>
-                      <a href={'https://geckoterminal.com/ftm/pools/${pair?.id}'} target="_blank" rel="noreferrer">
+                      <a href={`https://geckoterminal.com/ftm/pools/${pair?.id}`} target="_blank" rel="noreferrer">
                         <LinkIcon size={16} />
               </a>
             </div>
