@@ -152,7 +152,7 @@ export default function Pair() {
               <div className="text-xs text-secondary">Liquidity Pool</div>
             </div>
             <div className="rounded-3xl text-sm bg-[#414a6c] py-px px-2 flex items-center space-x-1">
-                        <div className="overflow-hidden overflow-ellipsis whitespace-nowrap">View Gecko Terminal</div>
+                        <div className="overflow-hidden overflow-ellipsis whitespace-nowrap">View Terminal</div>
                       <a href={`https://geckoterminal.com/ftm/pools/${pair?.id}`} target="_blank" rel="noreferrer">
                         <LinkIcon size={16} />
               </a>
