@@ -369,7 +369,7 @@ const AssetInputPanelBalance: FC<AssetInputPanelBalanceProps> = ({
         className={classNames(balance ? 'text-high-emphesis' : 'text-low-emphesis', 'truncate')}
         id={id}
       >
-        {balance ? `50%` : '0.0000'}
+        {balance ? `50%` : '0'}
       </Typography>
       </div>
       <div className="flex items-center">
@@ -380,7 +380,7 @@ const AssetInputPanelBalance: FC<AssetInputPanelBalanceProps> = ({
         onClick={() => onMaxClick(balance)}
         id={id}
       >
-        {balance ? `${balance.toSignificant(6)} ${balance.currency.symbol}` : '0.0000'}
+        { balance ? 'MAX' : '0' }
       </Typography>
       </div>
     </div>

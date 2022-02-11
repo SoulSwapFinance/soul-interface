@@ -205,7 +205,9 @@ const BalancePanel: FC<Pick<SwapAssetPanel, 'disabled' | 'currency' | 'onChange'
         {/* (balance.divide(2)).toSignificant(2) : '0.00'} */}
       </Typography>
     <Typography role="button" onClick={handleMaxClick} variant="sm" className="flex text-primary whitespace-nowrap">
-      { balance ? 'MAX' : '0' }
+       {/* {i18n._(t`Balance:`)}  */}
+      {balance ? balance.toSignificant(6) : '0.00'
+       }
      </Typography>
       </>
   )
