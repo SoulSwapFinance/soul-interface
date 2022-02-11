@@ -159,7 +159,7 @@ export default function Pair() {
                                     <div className="overflow-hidden overflow-ellipsis whitespace-nowrap">View Gecko Terminal</div>
                       <a href={'https://geckoterminal.com/ftm/pools/${pair?.id}'} target="_blank" rel="noreferrer">
                         <LinkIcon size={16} />
-              
+              </a>
             </div>
           </div>
         </div>
