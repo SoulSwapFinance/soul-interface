@@ -157,12 +157,11 @@ export default function Pair() {
                 {isCopied ? <CheckIcon height={16} /> : <DuplicateIcon height={16} className="scale-x-[-1]" />}
               </div>
                 </div>
-              <br />
+                </div>
                                     <div className="overflow-hidden overflow-ellipsis whitespace-nowrap">View Gecko Terminal</div>
                       <a href={`https://geckoterminal.com/ftm/pools/${pair?.id}`} target="_blank" rel="noreferrer">
                         <LinkIcon size={16} />
               </a>
-          </div>
         </div>
       </Background>
       <div className="px-4 pt-4 space-y-4 lg:px-14">
