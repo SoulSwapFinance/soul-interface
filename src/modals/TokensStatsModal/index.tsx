@@ -189,8 +189,7 @@ export default function SoulStatsModal(): JSX.Element | null {
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Voting Power`}
           </Typography>,
-          formatNumberScale(
-            auraBalance, false)
+      auraBalance?.toSignificant(4).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             )}
          {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
