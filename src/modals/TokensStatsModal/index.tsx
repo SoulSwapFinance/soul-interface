@@ -11,6 +11,8 @@ import { useSeanceContract, useSoulContract } from 'hooks'
 import { formatNumber, formatNumberScale, formatPercent } from 'functions'
 import { SOUL_ADDRESS, SEANCE_ADDRESS } from 'constants/addresses'
 import { useSingleCallResult } from 'state/multicall/hooks'
+import { useTokenBalance } from '../../state/wallet/hooks'
+import { AURA } from '../../constants'
 import { usePriceHelperContract } from 'features/bond/hooks/useContract'
 import QuestionHelper from '../../components/QuestionHelper'
 import { useBondTVL, useTVL, useSoulTVL, useVaultTVL } from 'hooks/useV2Pairs'
@@ -41,7 +43,11 @@ export default function SoulStatsModal(): JSX.Element | null {
   const toggleSoulStatsModal = useToggleTokenStatsModal()
   let tokenInfo = useTokenInfo(useSoulContract())
   let seanceInfo = useTokenInfo(useSeanceContract())
-  const soulPrice = usePrice(SOUL_ADDRESS[chainId])
+  // let auraInfo = useTokenInfo(useAuraContract())
+    
+   const auraBalance = useTokenBalance(account ??    undefined, AURA[chainId])
+   
+    const soulPrice = usePrice(SOUL_ADDRESS[chainId])
   const seancePrice = usePrice(SEANCE_ADDRESS[chainId])
   const tvlInfo = useTVL()
   const bondInfo = useBondTVL()
@@ -180,6 +186,12 @@ export default function SoulStatsModal(): JSX.Element | null {
       </div>
       <div className="flex flex-col mt-2 mb-2 flex-nowrap gap-1.5 -m-1">
         {getSummaryLine(
+          <Typography variant="sm" className="flex items-center py-0.5">
+            {`Voting Power`}
+          </Typography>,
+      auraBalance?.toSignificant(4).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+            )}
+         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Maximum Supply`}
           </Typography>,
