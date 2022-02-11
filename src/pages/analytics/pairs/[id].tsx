@@ -149,22 +149,26 @@ export default function Pair() {
               <div className="text-lg font-bold text-high-emphesis">
                 {pair?.token0?.symbol}-{pair?.token1?.symbol}
               </div>
-              <div className="text-xs text-secondary">Soul Liquidity Pool</div>
+              <div className="text-xs text-secondary">Liquidity Pool</div>
             </div>
             <div className="rounded-3xl text-sm bg-[#414a6c] py-px px-2 flex items-center space-x-1">
               <div>{shortenAddress(id)}</div>
               <div className="cursor-pointer" onClick={() => setCopied(id)}>
                 {isCopied ? <CheckIcon height={16} /> : <DuplicateIcon height={16} className="scale-x-[-1]" />}
               </div>
-            </div>
-          </div>
+                </div>
+                </div>
+                                    <div className="overflow-hidden overflow-ellipsis whitespace-nowrap">View Gecko Terminal</div>
+                      <a href={`https://geckoterminal.com/ftm/pools/${pair?.id}`} target="_blank" rel="noreferrer">
+                        <LinkIcon size={16} />
+              </a>
         </div>
       </Background>
       <div className="px-4 pt-4 space-y-4 lg:px-14">
         <div className="relative h-12">
           <div className="absolute w-full h-full">
             <div className="h-1/3" />
-            <div className="opacity-50 w-[210px] h-1/3 bg-gradient-to-r from-blue to-pink" />
+            <div className="opacity-50 w-[210px] h-1/3 bg-gradient-to-r from-blue to-purple" />
           </div>
           <div className="absolute text-3xl font-bold text-high-emphesis">Pool Overview</div>
         </div>
