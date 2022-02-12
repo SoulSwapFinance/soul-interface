@@ -58,8 +58,8 @@ export default function Deposit({ pair }: any): JSX.Element {
   const transactionReview = new TransactionReview()
 
   if (value && !warnings.broken) {
-    const amount = value.toBigNumber(pair.asset.tokenInfo.decimals)
-    const newUserAssetAmount = pair.currentUserAssetAmount.value.add(amount)
+    const amount = Math.floor(Number(value)).toString()
+    const newUserAssetAmount = pair.currentUserAssetAmount.value.add(Number(amount))
     transactionReview.addTokenAmount(
       i18n._(t`Balance`),
       pair.currentUserAssetAmount.value,
