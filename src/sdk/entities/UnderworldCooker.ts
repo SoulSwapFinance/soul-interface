@@ -62,7 +62,7 @@ export class UnderworldCooker {
     return this
   }
 
-  bentoDepositCollateral(amount: JSBI): UnderworldCooker {
+  coffinDepositCollateral(amount: JSBI): UnderworldCooker {
     const useNative = this.pair.collateral.address === WNATIVE_ADDRESS[this.chainId]
 
     this.add(
@@ -77,7 +77,7 @@ export class UnderworldCooker {
     return this
   }
 
-  bentoWithdrawCollateral(amount: JSBI, share: JSBI): UnderworldCooker {
+  coffinWithdrawCollateral(amount: JSBI, share: JSBI): UnderworldCooker {
     const useNative = this.pair.collateral.address === WNATIVE_ADDRESS[this.chainId]
 
     this.add(
@@ -92,7 +92,7 @@ export class UnderworldCooker {
     return this
   }
 
-  bentoTransferCollateral(share: JSBI, toAddress: string): UnderworldCooker {
+  coffinTransferCollateral(share: JSBI, toAddress: string): UnderworldCooker {
     this.add(
       UnderworldAction.COFFIN_TRANSFER,
       defaultAbiCoder.encode(['address', 'address', 'int256'], [this.pair.collateral.address, toAddress, share])
@@ -107,9 +107,9 @@ export class UnderworldCooker {
     return this
   }
 
-  addCollateral(amount: JSBI, fromBento: boolean): UnderworldCooker {
+  addCollateral(amount: JSBI, fromCoffin: boolean): UnderworldCooker {
     let share: JSBI
-    if (fromBento) {
+    if (fromCoffin) {
       share = JSBI.lessThan(amount, ZERO) ? amount : toShare(this.pair.collateral, amount)
     } else {
       const useNative = this.pair.collateral.address === WNATIVE_ADDRESS[this.chainId]
@@ -132,9 +132,9 @@ export class UnderworldCooker {
     return this
   }
 
-  addAsset(amount: JSBI, fromBento: boolean): UnderworldCooker {
+  addAsset(amount: JSBI, fromCoffin: boolean): UnderworldCooker {
     let share: JSBI
-    if (fromBento) {
+    if (fromCoffin) {
       share = toShare(this.pair.asset, amount)
     } else {
       const useNative = this.pair.asset.address === WNATIVE_ADDRESS[this.chainId]
@@ -154,9 +154,9 @@ export class UnderworldCooker {
     return this
   }
 
-  removeAsset(fraction: JSBI, toBento: boolean): UnderworldCooker {
+  removeAsset(fraction: JSBI, toCoffin: boolean): UnderworldCooker {
     this.add(UnderworldAction.REMOVE_ASSET, defaultAbiCoder.encode(['int256', 'address'], [fraction, this.account]))
-    if (!toBento) {
+    if (!toCoffin) {
       const useNative = this.pair.asset.address === WNATIVE_ADDRESS[this.chainId]
 
       this.add(
@@ -170,9 +170,9 @@ export class UnderworldCooker {
     return this
   }
 
-  removeCollateral(share: JSBI, toBento: boolean): UnderworldCooker {
+  removeCollateral(share: JSBI, toCoffin: boolean): UnderworldCooker {
     this.add(UnderworldAction.REMOVE_COLLATERAL, defaultAbiCoder.encode(['int256', 'address'], [share, this.account]))
-    if (!toBento) {
+    if (!toCoffin) {
       const useNative = this.pair.collateral.address === WNATIVE_ADDRESS[this.chainId]
 
       this.add(
@@ -186,9 +186,9 @@ export class UnderworldCooker {
     return this
   }
 
-  removeCollateralFraction(fraction: JSBI, toBento: boolean): UnderworldCooker {
+  removeCollateralFraction(fraction: JSBI, toCoffin: boolean): UnderworldCooker {
     this.add(UnderworldAction.REMOVE_COLLATERAL, defaultAbiCoder.encode(['int256', 'address'], [fraction, this.account]))
-    if (!toBento) {
+    if (!toCoffin) {
       const useNative = this.pair.collateral.address === WNATIVE_ADDRESS[this.chainId]
 
       this.add(
@@ -202,12 +202,12 @@ export class UnderworldCooker {
     return this
   }
 
-  borrow(amount: JSBI, toBento: boolean, toAddress = ''): UnderworldCooker {
+  borrow(amount: JSBI, toCoffin: boolean, toAddress = ''): UnderworldCooker {
     this.add(
       UnderworldAction.BORROW,
-      defaultAbiCoder.encode(['int256', 'address'], [amount, toAddress && toBento ? toAddress : this.account])
+      defaultAbiCoder.encode(['int256', 'address'], [amount, toAddress && toCoffin ? toAddress : this.account])
     )
-    if (!toBento) {
+    if (!toCoffin) {
       const useNative = this.pair.asset.address === WNATIVE_ADDRESS[this.chainId]
 
       this.add(
@@ -221,8 +221,8 @@ export class UnderworldCooker {
     return this
   }
 
-  repay(amount: JSBI, fromBento: boolean): UnderworldCooker {
-    if (!fromBento) {
+  repay(amount: JSBI, fromCoffin: boolean): UnderworldCooker {
+    if (!fromCoffin) {
       const useNative = this.pair.asset.address === WNATIVE_ADDRESS[this.chainId]
 
       this.add(
@@ -234,13 +234,13 @@ export class UnderworldCooker {
         useNative ? amount : ZERO
       )
     }
-    this.add(UnderworldAction.GET_REPAY_PART, defaultAbiCoder.encode(['int256'], [fromBento ? amount : -1]))
+    this.add(UnderworldAction.GET_REPAY_PART, defaultAbiCoder.encode(['int256'], [fromCoffin ? amount : -1]))
     this.add(UnderworldAction.REPAY, defaultAbiCoder.encode(['int256', 'address', 'bool'], [-1, this.account, false]))
     return this
   }
 
-  repayPart(part: JSBI, fromBento: boolean): UnderworldCooker {
-    if (!fromBento) {
+  repayPart(part: JSBI, fromCoffin: boolean): UnderworldCooker {
+    if (!fromCoffin) {
       const useNative = this.pair.asset.address === WNATIVE_ADDRESS[this.chainId]
 
       this.add(UnderworldAction.GET_REPAY_SHARE, defaultAbiCoder.encode(['int256'], [part]))

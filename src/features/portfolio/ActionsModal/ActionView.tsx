@@ -50,7 +50,7 @@ const ActionView: FC<ActionViewProps> = ({ onClose }) => {
         onClick={swapActionHandler}
       />
       {/*@ts-ignore TYPE NEEDS FIXING*/}
-      {featureEnabled(Feature.BENTOBOX, chainId) && (
+      {featureEnabled(Feature.COFFINBOX, chainId) && (
         <>
           <ActionItem
             svg={<CoffinboxIcon width={20} height={20} />}
