@@ -1,6 +1,6 @@
 import { Tab } from '@headlessui/react'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
+// import { t } from '@lingui/macro'
+// import { useLingui } from '@lingui/react'
 import Card from 'components/Card'
 import Image from 'components/Image'
 import QuestionHelper from 'components/QuestionHelper'
@@ -20,7 +20,7 @@ export default function Pair() {
   useRedirectOnChainId('/lend')
 
   const router = useRouter()
-  const { i18n } = useLingui()
+  // const { i18n } = useLingui()
 
   const pair = useUnderworldPair(router.query.pair as string)
 
@@ -66,12 +66,12 @@ export default function Pair() {
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-3xl text-high-emphesis">
-                    {i18n._(t`Lend`)} {pair && pair.asset.tokenInfo.symbol}
+                    {`Lend`} {pair && pair.asset.tokenInfo.symbol}
                   </div>
                   <div className="flex items-center">
-                    <div className="mr-1 text-sm text-secondary">{i18n._(t`Collateral`)}:</div>
+                    <div className="mr-1 text-sm text-secondary">{`Collateral`}:</div>
                     <div className="mr-2 text-sm text-high-emphesis">{pair && pair.collateral.tokenInfo.symbol}</div>
-                    <div className="mr-1 text-sm text-secondary">{i18n._(t`Oracle`)}:</div>
+                    <div className="mr-1 text-sm text-secondary">{`Oracle`}:</div>
                     <div className="text-sm text-high-emphesis">{pair && pair.oracle.name}</div>
                   </div>
                 </div>
@@ -90,12 +90,12 @@ export default function Pair() {
             <div className="text-lg text-high-emphesis">{formatNumber(Number(pair.currentUserAssetAmount.usd), true)}</div>
           </div>
           <div>
-            <div className="text-lg text-secondary">{i18n._(t`Borrowed`)}</div>
+            <div className="text-lg text-secondary">{`Borrowed`}</div>
             <div className="text-2xl text-high-emphesis">{formatPercent(pair.utilization.string)}</div>
           </div>
           <div className="text-right">
             <div>
-              <div className="text-lg text-secondary">{i18n._(t`APR`)}</div>
+              <div className="text-lg text-secondary">{`APR`}</div>
               <div className="text-2xl text-high-emphesis">{formatPercent(pair.supplyAPR.string)}</div>
             </div>
           </div>
@@ -110,7 +110,7 @@ export default function Pair() {
                 } flex items-center justify-center flex-1 px-3 py-4 text-lg rounded cursor-pointer select-none text-secondary hover:text-primary focus:outline-none`
               }
             >
-              {i18n._(t`Deposit`)} {pair.asset.tokenInfo.symbol}
+              {`Deposit`} {pair.asset.tokenInfo.symbol}
             </Tab>
             <Tab
               className={({ selected }) =>
@@ -119,7 +119,7 @@ export default function Pair() {
                 } flex items-center justify-center flex-1 px-3 py-4 text-lg rounded cursor-pointer select-none text-secondary hover:text-primary focus:outline-none`
               }
             >
-              {i18n._(t`Withdraw`)} {pair.asset.tokenInfo.symbol}
+              {`Withdraw`} {pair.asset.tokenInfo.symbol}
             </Tab>
           </Tab.List>
           <Tab.Panel>
@@ -138,7 +138,7 @@ Pair.Provider = RecoilRoot
 
 const PairLayout = ({ children }) => {
   const router = useRouter()
-  const { i18n } = useLingui()
+  // const { i18n } = useLingui()
   const pair = useUnderworldPair(router.query.pair as string)
 
   return pair ? (
@@ -147,45 +147,45 @@ const PairLayout = ({ children }) => {
         <Card
           className="h-full bg-dark-900"
           backgroundImage="/images/underworld/deposit.png"
-          title={i18n._(t`Lend assets for interest from borrowers.`)}
-          description={i18n._(
-            t`Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers.`
-          )}
+          title={`Lend assets for interest from borrowers.`}
+          description={
+            `Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers.`
+          }
         />
       }
       right={
         <Card className="h-full p-4 bg-dark-900 xl:p-0">
           <div className="flex-col space-y-2">
             <div className="flex justify-between">
-              <div className="text-xl text-high-emphesis">{i18n._(t`Market`)}</div>
+              <div className="text-xl text-high-emphesis">{`Market`}</div>
             </div>
             <div className="flex justify-between">
-              <div className="text-lg text-secondary">{i18n._(t`APR`)}</div>
+              <div className="text-lg text-secondary">{`APR`}</div>
               <div className="flex items-center">
                 <div className="text-lg text-high-emphesis">{formatPercent(pair?.currentSupplyAPR.string)}</div>
               </div>
             </div>
 
             <div className="flex justify-between">
-              <div className="text-lg text-secondary">{i18n._(t`Total`)}</div>
+              <div className="text-lg text-secondary">{`Total`}</div>
               <div className="text-lg text-high-emphesis">
                 {formatNumber(pair?.currentAllAssets.string)} {pair?.asset.tokenInfo.symbol}
               </div>
             </div>
             <div className="flex justify-between">
-              <div className="text-lg text-secondary">{i18n._(t`Available`)}</div>
+              <div className="text-lg text-secondary">{`Available`}</div>
               <div className="text-lg text-high-emphesis">
                 {formatNumber(pair?.totalAssetAmount.string)} {pair?.asset.tokenInfo.symbol}
               </div>
             </div>
             <div className="flex justify-between">
-              <div className="text-lg text-secondary">{i18n._(t`Borrowed`)}</div>
+              <div className="text-lg text-secondary">{`Borrowed`}</div>
               <div className="flex items-center">
                 <div className="text-lg text-high-emphesis">{formatPercent(pair?.utilization.string)}</div>
               </div>
             </div>
             <div className="flex justify-between">
-              <div className="text-lg text-secondary">{i18n._(t`Collateral`)}</div>
+              <div className="text-lg text-secondary">{`Collateral`}</div>
               <div className="flex items-center">
                 <div className="text-lg text-high-emphesis">
                   {formatNumber(pair?.totalCollateralAmount.string)} {pair?.collateral.tokenInfo.symbol}
@@ -194,7 +194,7 @@ const PairLayout = ({ children }) => {
             </div>
             {pair?.utilization.value > 0 && (
               <div className="flex justify-between">
-                <div className="text-lg text-secondary">{i18n._(t`Health`)}</div>
+                <div className="text-lg text-secondary">{`Health`}</div>
                 <div className="flex items-center">
                   <div className="text-lg text-high-emphesis">{formatPercent(pair?.marketHealth.toFixed(16))}</div>
                 </div>
@@ -204,7 +204,7 @@ const PairLayout = ({ children }) => {
             <PairTools pair={pair} />
 
             <div className="flex justify-between pt-3">
-              <div className="text-xl text-high-emphesis">{i18n._(t`Oracle`)}</div>
+              <div className="text-xl text-high-emphesis">{`Oracle`}</div>
             </div>
 
             <div className="flex justify-between">
@@ -213,20 +213,20 @@ const PairLayout = ({ children }) => {
             </div>
 
             <div className="flex justify-between pt-3">
-              <div className="text-xl text-high-emphesis">{i18n._(t`CoffinBox`)}</div>
+              <div className="text-xl text-high-emphesis">{`CoffinBox`}</div>
             </div>
             <div className="flex justify-between">
-              <div className="text-lg text-secondary">{i18n._(t`${pair?.asset.tokenInfo.symbol} Strategy`)}</div>
+              <div className="text-lg text-secondary">{`${pair?.asset.tokenInfo.symbol} Strategy`}</div>
               <div className="flex flex-row text-lg text-high-emphesis">
                 {pair.asset.strategy ? (
-                  i18n._(t`Active`)
+                  `Active`
                 ) : (
                   <>
-                    {i18n._(t`None`)}
+                    {`None`}
                     <QuestionHelper
-                      text={i18n._(
-                        t`CoffinBox strategies can create yield for your liquidity while it is not lent out. This token does not yet have a strategy in the CoffinBox.`
-                      )}
+                      text={
+                        `CoffinBox strategies can create yield for your liquidity while it is not lent out. This token does not yet have a strategy in the CoffinBox.`
+                      }
                     />{' '}
                   </>
                 )}

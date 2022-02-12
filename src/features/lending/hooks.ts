@@ -237,7 +237,10 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
         pair.currentInterestPerYear = interestAccrue(pair, pair.interestPerYear)
 
         // Interest per year received by lenders as of now
-        pair.currentSupplyAPR = takeFee(pair.currentInterestPerYear.mulDiv(pair.utilization, e10(18)))
+        pair.currentSupplyAPR = takeFee(
+          BigNumber.from(pair.currentInterestPerYear)
+          .mulDiv(pair.utilization, e10(18))
+          )
 
         // The user's amount of collateral (stable, doesn't accrue)
         pair.userCollateralAmount = easyAmount(
@@ -313,46 +316,54 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
           },
         }
 
-        pair.utilization = {
-          value: pair.utilization,
-          string: Fraction.from(
-            BigNumber.from(pair.utilization),
-            BigNumber.from(10).pow(16)
-          ),
-        }
+        // pair.utilization = {
+        //   value: pair.utilization,
+        //   string: Fraction.from(
+        //     pair.utilization,
+        //     BigNumber.from(10).pow(16)
+        //   ),
+        // }
 
         pair.supplyAPR = {
           value: pair.supplyAPR,
-          valueWithStrategy: pair.supplyAPR.add(pair.strategyAPY.asset.value.mulDiv(pair.utilization.value, e10(18))),
-          string: Fraction.from(pair.supplyAPR, e10(16)).toString(),
-          stringWithStrategy: Fraction.from(
-            pair.strategyAPY.asset.value.add(
-              pair.supplyAPR.add(pair.strategyAPY.asset.value.mulDiv(pair.utilization.value, e10(18)))
-            ),
-            e10(16)
-          ).toString(),
+          valueWithStrategy: pair.supplyAPR.add(pair.strategyAPY.asset.value),
+            //.mulDiv(pair.utilization.value, e10(18))),
+          // string: Fraction.from(pair.supplyAPR, e10(16)).toString(),
+          string: pair.currentSupplyAPR.toString(),
+          // stringWithStrategy: Fraction.from(
+          //   pair.strategyAPY.asset.value.add(
+          //     pair.supplyAPR.add(pair.strategyAPY.asset.value.mulDiv(pair.utilization.value, e10(18)))
+          //   ),
+          //   e10(16)
+          // ).toString(),
+          stringWithStrategy: (pair.strategyAPY.asset.value + pair.supplyAPR).toString()
         }
 
         pair.currentSupplyAPR = {
           value: pair.currentSupplyAPR,
           valueWithStrategy: pair.currentSupplyAPR.add(
-            pair.strategyAPY.asset.value.mulDiv(pair.utilization.value, e10(18))
+            pair.strategyAPY.asset.value
+            //.mulDiv(pair.utilization.value, e10(18))
           ),
-          string: Fraction.from(pair.currentSupplyAPR, e10(16)).toString(),
-          stringWithStrategy: Fraction.from(
-            pair.currentSupplyAPR.add(pair.strategyAPY.asset.value.mulDiv(pair.utilization.value, e10(18))),
-            e10(16)
-          ).toString(),
+          // string: Fraction.from(pair.currentSupplyAPR, e10(16)).toString(),
+          string: pair.currentSupplyAPR.toString(),
+          // stringWithStrategy: Fraction.from(
+          //   pair.currentSupplyAPR.add(pair.strategyAPY.asset.value.mulDiv(pair.utilization.value, e10(18))),
+          //   e10(16)
+          // ).toString(),
+          stringWithStrategy: pair.currentSupplyAPR.add(pair.strategyAPY.asset.value)
         }
 
         pair.currentInterestPerYear = {
           value: pair.currentInterestPerYear,
-          string: Fraction.from(pair.currentInterestPerYear, BigNumber.from(10).pow(16)).toString(),
+          // string: Fraction.from(pair.currentInterestPerYear, BigNumber.from(10).pow(16)).toString(),
+          string: (pair.currentInterestPerYear / 1e16).toString(),
         }
 
         pair.health = {
           value: pair.health,
-          string: Fraction.from(pair.health, e10(16)),
+          // string: Fraction.from(pair.health, e10(16)),
+          string: (pair.health / 1e16).toString(),
         }
 
         pair.maxBorrowable = {

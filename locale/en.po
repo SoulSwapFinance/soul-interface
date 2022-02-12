@@ -19,6 +19,12 @@ msgstr "% Share"
 msgid "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies."
 msgstr "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies."
 
+msgid "(collateral minus borrowed)"
+msgstr "(collateral minus borrowed)"
+
+msgid "(lent assets)"
+msgstr "(lent assets)"
+
 msgid "+ Add Recipient (optional)"
 msgstr "+ Add Recipient (optional)"
 
@@ -195,6 +201,9 @@ msgstr "Available Actions"
 
 msgid "Available Networks"
 msgstr "Available Networks"
+
+msgid "Available actions"
+msgstr "Available actions"
 
 msgid "Avg. APY"
 msgstr "Avg. APY"
@@ -673,12 +682,6 @@ msgstr "Harvest {0} SOUL"
 msgid "Harvest {0}/{1}"
 msgstr "Harvest {0}/{1}"
 
-msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
-msgstr "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
-
-msgid "Health"
-msgstr "Health"
-
 msgid "Historical Total Locked: Connect Wallet"
 msgstr "Historical Total Locked: Connect Wallet"
 
@@ -809,9 +812,6 @@ msgstr "Learn About Wallets"
 
 msgid "Lend"
 msgstr "Lend"
-
-msgid "Lend assets for interest from borrowers."
-msgstr "Lend assets for interest from borrowers."
 
 msgid "Lend your assets, earn yield with no impermanent loss"
 msgstr "Lend your assets, earn yield with no impermanent loss"
@@ -969,6 +969,9 @@ msgstr "No Liquidity found"
 msgid "No Route Found"
 msgstr "No Route Found"
 
+msgid "No balances"
+msgstr "No balances"
+
 msgid "No liquidity found to do swap"
 msgstr "No liquidity found to do swap"
 
@@ -1068,9 +1071,6 @@ msgstr "Place a limit order or check the status of your past orders"
 
 msgid "Please connect to the appropriate Ethereum network."
 msgstr "Please connect to the appropriate Ethereum network."
-
-msgid "Please make sure your {0} balance is sufficient to deposit and then try again."
-msgstr "Please make sure your {0} balance is sufficient to deposit and then try again."
 
 msgid "Please make sure your {0} balance is sufficient to withdraw and then try again."
 msgstr "Please make sure your {0} balance is sufficient to withdraw and then try again."
@@ -1385,6 +1385,9 @@ msgstr "Step Three"
 msgid "Step Two"
 msgstr "Step Two"
 
+msgid "Submit"
+msgstr "Submit"
+
 msgid "Success"
 msgstr "Success"
 
@@ -1676,6 +1679,9 @@ msgstr "Withdraw from locker {id}"
 
 msgid "Withdraw to Wallet"
 msgstr "Withdraw to Wallet"
+
+msgid "Withdraw to wallet"
+msgstr "Withdraw to wallet"
 
 msgid "Withdraw {0} to Wallet"
 msgstr "Withdraw {0} to Wallet"

@@ -19,6 +19,12 @@ msgstr ""
 msgid "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies."
 msgstr ""
 
+msgid "(collateral minus borrowed)"
+msgstr ""
+
+msgid "(lent assets)"
+msgstr ""
+
 msgid "+ Add Recipient (optional)"
 msgstr ""
 
@@ -194,6 +200,9 @@ msgid "Available Actions"
 msgstr ""
 
 msgid "Available Networks"
+msgstr ""
+
+msgid "Available actions"
 msgstr ""
 
 msgid "Avg. APY"
@@ -664,12 +673,6 @@ msgstr ""
 msgid "Harvest {0}/{1}"
 msgstr ""
 
-msgid "Have assets you want to earn additional interest on? Lend them in isolated markets and earn interest from borrowers."
-msgstr ""
-
-msgid "Health"
-msgstr ""
-
 msgid "Historical Total Locked: Connect Wallet"
 msgstr ""
 
@@ -795,9 +798,6 @@ msgid "Learn About Wallets"
 msgstr ""
 
 msgid "Lend"
-msgstr ""
-
-msgid "Lend assets for interest from borrowers."
 msgstr ""
 
 msgid "Lend your assets, earn yield with no impermanent loss"
@@ -956,6 +956,9 @@ msgstr ""
 msgid "No Route Found"
 msgstr ""
 
+msgid "No balances"
+msgstr ""
+
 msgid "No liquidity found to do swap"
 msgstr ""
 
@@ -1052,9 +1055,6 @@ msgid "Place a limit order or check the status of your past orders"
 msgstr ""
 
 msgid "Please connect to the appropriate Ethereum network."
-msgstr ""
-
-msgid "Please make sure your {0} balance is sufficient to deposit and then try again."
 msgstr ""
 
 msgid "Please make sure your {0} balance is sufficient to withdraw and then try again."
@@ -1362,6 +1362,9 @@ msgstr ""
 msgid "Step Two"
 msgstr ""
 
+msgid "Submit"
+msgstr ""
+
 msgid "Success"
 msgstr ""
 
@@ -1650,6 +1653,9 @@ msgid "Withdraw from locker {id}"
 msgstr ""
 
 msgid "Withdraw to Wallet"
+msgstr ""
+
+msgid "Withdraw to wallet"
 msgstr ""
 
 msgid "Withdraw {0} to Wallet"

@@ -63,7 +63,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
   const transactionReview = new TransactionReview()
   if (displayValue && !warnings.broken) {
     const amount = BigNumber.from(displayValue)
-    const newUserAssetAmount = pair.currentUserAssetAmount.value - Number(amount)
+    const newUserAssetAmount = pair.currentUserAssetAmount.value.sub(amount)
     transactionReview.addTokenAmount(
       i18n._(t`Balance`),
       pair.currentUserAssetAmount.value,
