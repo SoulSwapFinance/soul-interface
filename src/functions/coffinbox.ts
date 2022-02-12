@@ -3,7 +3,7 @@ import { CurrencyAmount, JSBI, Rebase, Token, ZERO } from 'sdk'
 
 // export function toAmount(token, shares: BigNumber): BigNumber {
 //   // console.log('toAmount', token, shares)
-//   return shares.mulDiv(token.bentoAmount, token.coffinShare)
+//   return shares.mulDiv(token.coffinAmount, token.coffinShare)
 // }
 
 // export function toShare(token, amount: BigNumber): BigNumber {

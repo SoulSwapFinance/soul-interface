@@ -47,78 +47,96 @@ function AppBar(): JSX.Element {
             <div className="px-4 py-1">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                    <NavLink href="/exchange/swap">
+                    <NavLink 
+                    activeClassName="text-purple text-high-emphesis"
+                    href="/exchange/swap">
                     <Image src="/logo.png" alt="Soul" width="40" height="40" />
                   </NavLink>
 
                   <div className="flex space-x-2">
                     <div className="flex space-x-2">
-                      <NavLink href="/exchange/swap">
+                      <NavLink 
+                      activeClassName="text-purple text-high-emphesis"
+                      href="/exchange/swap">
                         <a
                           id={`swap-nav-link`}
-                          className="w-full relative ml-2 sm:ml-6 md:p-2"
+                          className="w-full relative ml-2 sm:ml-6 md:p-2 hover:text-purple text-high-emphesis"
                         >
 
                           {i18n._(t`SWAP`)}
                         </a>
                       </NavLink>
                       {chainId && [ChainId.FANTOM].includes(chainId) && (
-                        <NavLink href="/pool">
+                        <NavLink
+                        activeClassName="text-purple text-high-emphesis"
+                        href="/pool">
                           <a
                             id={`pool-nav-link`}
-                            className="w-full relative ml-6 md:p-2"
+                            className="w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
                           >
                             {i18n._(t`POOL`)}
                           </a>
                         </NavLink>
                       )}
                       {chainId && [ChainId.FANTOM].includes(chainId) && (
-                        <NavLink href={'/mines?filter=active'}>
+                        <NavLink 
+                        activeClassName="text-purple text-high-emphesis"
+                        href={'/mines?filter=active'}>
                           <a
                             id={`farm-nav-link`}
-                            className="w-full relative ml-6 md:p-2"
+                            className="w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
                           >
                             {i18n._(t`FARM`)}
                           </a>
                         </NavLink>
                       )}
-                      <NavLink href={'/bonds'}>
+                      <NavLink 
+                      activeClassName="text-purple text-high-emphesis"
+                      href={'/bonds'}>
                         <a
                           id={`bond-nav-link`}
-                          className="w-full relative ml-6 md:p-2"
+                          className="w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
                         >
                           {i18n._(t`BOND`)}
                         </a>
                       </NavLink>
-                      <NavLink href={'/analytics'}>
+                      <NavLink 
+                      activeClassName="text-purple text-high-emphesis"
+                      href={'/analytics'}>
                         <a
                           id={`analytics-nav-link`}
-                          className="w-full relative ml-6 md:p-2"
+                          className="w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
                         >
                           {i18n._(t`DATA`)}
                         </a>
                       </NavLink>
-                      <NavLink href={'/lend'}>
+                      <NavLink
+                      activeClassName="text-purple text-high-emphesis"
+                      href={'/lend'}>
                         <a
                           id={`lend-nav-link`}
-                          className="w-full relative ml-6 md:p-2"
+                          className="w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
                         >
                           {i18n._(t`LEND`)}
                         </a>
                       </NavLink>
-                      <NavLink href={'/launchpad'}>
+                      <NavLink 
+                      activeClassName="text-purple text-high-emphesis"
+                      href={'/launchpad'}>
                         <a
                           id={`launch-nav-link`}
-                          className="hidden md:block w-full relative ml-6 md:p-2"
+                          className="hidden md:block w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
                         >
                           {i18n._(t`LAUNCH`)}
                         </a>
                       </NavLink>
 
-                      <NavLink href={'/claims'}>
+                      <NavLink
+                      activeClassName="text-purple text-high-emphesis"
+                      href={'/claims'}>
                         <a
                           id={`claims-nav-link`}
-                          className="hidden md:block w-full relative ml-6 md:p-2"
+                          className="hidden md:block w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
                         >
                           {i18n._(t`CLAIM`)}
                         </a>

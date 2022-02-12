@@ -10,7 +10,7 @@ const features: FeatureMap = {
     // Feature.COFFINBOX,
     // Feature.UNDERWORLD,
     // Feature.MIGRATE,
-    // Feature.ANALYTICS,
+    Feature.ANALYTICS,
     // Feature.STAKING,
     // Feature.MISO,
     // Feature.INARI,
@@ -27,8 +27,8 @@ const features: FeatureMap = {
     Feature.STAKING,
     Feature.ANALYTICS,
     Feature.LIQUIDITY_MINING,
-    // Feature.LIMIT_ORDERS,
     Feature.COFFINBOX,
+    // Feature.LIMIT_ORDERS,
     // Feature.UNDERWORLD
   ],
 

@@ -1,4 +1,6 @@
+import { Web3Provider } from '@ethersproject/providers'
 import { CurrencyAmount, JSBI, Rebase, Token, ZERO } from 'sdk'
+import { Web3ReactContextInterface } from '@web3-react/core/dist/types'
 import { isAddress, toAmountCurrencyAmount } from 'functions'
 import { useAllTokens } from 'hooks/Tokens'
 import { useCoffinBoxContract } from 'hooks/useContract'
@@ -35,7 +37,15 @@ export function useCoffinMasterContractAllowed(masterContract?: string, user?: s
 }
 
 export const useCoffinBalancesV2 = (tokenAddresses?: string[]): { data: CurrencyAmount<Token>[]; loading: boolean } => {
-  const { chainId, account } = useActiveWeb3React()
+  const { account } = useActiveWeb3React()
+  return useCoffinBalancesV2ForAccount(account, tokenAddresses)
+}
+
+export const useCoffinBalancesV2ForAccount = (
+  account: Web3ReactContextInterface<Web3Provider>['account'],
+  tokenAddresses?: string[]
+): { data: CurrencyAmount<Token>[]; loading: boolean } => {
+  const { chainId } = useActiveWeb3React()
   const {
     error,
     data,

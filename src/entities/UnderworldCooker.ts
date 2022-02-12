@@ -95,7 +95,7 @@ export default class UnderworldCooker {
     this.pair = pair
     this.account = account || AddressZero
     this.library = library
-    this.chainId = chainId || 1
+    this.chainId = chainId || 250
 
     this.actions = []
     this.values = []

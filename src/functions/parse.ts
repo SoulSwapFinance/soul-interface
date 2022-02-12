@@ -1,7 +1,5 @@
-import { Currency, CurrencyAmount, JSBI } from 'sdk'
-
-// import { BigNumber } from '@ethersproject/bignumber'
 import { parseUnits } from '@ethersproject/units'
+import { Currency, CurrencyAmount, JSBI } from 'sdk'
 
 export function parseBalance(value: string, decimals = 18) {
   return parseUnits(value || '0', decimals)

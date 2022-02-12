@@ -1,7 +1,8 @@
+import React, { useState } from 'react'
 import { BigNumber } from '@ethersproject/bignumber'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { WNATIVE } from '@sushiswap/core-sdk'
+import { WNATIVE } from 'sdk'
 import { Button } from 'components/Button'
 import UnderworldCooker from 'entities/UnderworldCooker'
 import { Direction, TransactionReview } from 'entities/TransactionReview'
@@ -12,7 +13,6 @@ import { useCoffinBoxContract } from 'hooks'
 import { useCurrency } from 'hooks/Tokens'
 import { useActiveWeb3React } from 'services/web3'
 import { useETHBalances } from 'state/wallet/hooks'
-import React, { useState } from 'react'
 
 import { UnderworldApproveButton, TokenApproveButton } from '../components/Button'
 import SmartNumberInput from '../components/SmartNumberInput'
@@ -29,13 +29,12 @@ export default function Deposit({ pair }: any): JSX.Element {
   const { i18n } = useLingui()
 
   // State
-  const [useCoffin, setUseCoffin] = useState<boolean>(pair.asset.coffinBalance > 0)
-  const [value, setValue] = useState(ZERO)
+  const [useCoffin, setUseCoffin] = useState<boolean>(pair.asset.coffinBalance > (0))
+  const [value, setValue] = useState('')
 
   // Calculated
   const assetNative = WNATIVE[chainId].address === pair.asset.address
   const ethBalance = useETHBalances(assetNative ? [account] : [])
-
   const balance = useCoffin
     ? pair.asset.coffinBalance
     : assetNative
@@ -51,18 +50,16 @@ export default function Deposit({ pair }: any): JSX.Element {
   const warnings = new Warnings()
 
   warnings.add(
-    balance < value,
-    i18n._(
-      t`Please make sure your ${useCoffin ? 'CoffinBox' : 'wallet'} balance is sufficient to deposit and then try again.`
-    ),
+    balance?.lt(value.toBigNumber(pair.asset.tokenInfo.decimals)),
+    `Please make sure your ${useCoffin ? 'CoffinBox' : 'wallet'} balance is sufficient to deposit and then try again.`,
     true
   )
 
   const transactionReview = new TransactionReview()
 
   if (value && !warnings.broken) {
-    const amount = value
-    const newUserAssetAmount = pair.currentUserAssetAmount.value + amount
+    const amount = value.toBigNumber(pair.asset.tokenInfo.decimals)
+    const newUserAssetAmount = pair.currentUserAssetAmount.value.add(amount)
     transactionReview.addTokenAmount(
       i18n._(t`Balance`),
       pair.currentUserAssetAmount.value,
@@ -70,20 +67,21 @@ export default function Deposit({ pair }: any): JSX.Element {
       pair.asset
     )
     transactionReview.addUSD(i18n._(t`Balance USD`), pair.currentUserAssetAmount.value, newUserAssetAmount, pair.asset)
-    let newUtilization
-    pair.currentBorrowAmount.value > 0 ?
-    newUtilization 
-      // = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value || 0).add(amount)
-      = e10(18).mul(pair.currentBorrowAmount.value)?.div(pair.currentAllAssets.value).add(amount) : 0
+    const newUtilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.add(amount))
     transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
     if (pair.currentExchangeRate.isZero()) {
       transactionReview.add(
         'Exchange Rate',
         formatNumber(
-          pair.currentExchangeRate.toFixed(18 + pair.collateral.tokenInfo.decimals - pair.asset.tokenInfo.decimals)
-        ),
+          pair.currentExchangeRate,
+          false,
+          true,
+          ),
         formatNumber(
-          pair.oracleExchangeRate.toFixed(18 + pair.collateral.tokenInfo.decimals - pair.asset.tokenInfo.decimals)
+          pair.oracleExchangeRate,
+          false,
+          true,
+          18 + pair.collateral.tokenInfo.decimals - pair.asset.tokenInfo.decimals
         ),
         Direction.UP
       )
@@ -96,7 +94,7 @@ export default function Deposit({ pair }: any): JSX.Element {
     if (pair.currentExchangeRate.isZero()) {
       cooker.updateExchangeRate(false, ZERO, ZERO)
     }
-    const amount = value
+    const amount = value.toBigNumber(pair.asset.tokenInfo.decimals)
 
     const deadBalance = await coffinBoxContract.balanceOf(
       pair.asset.address,
@@ -115,7 +113,7 @@ export default function Deposit({ pair }: any): JSX.Element {
       <SmartNumberInput
         color="blue"
         token={pair.asset}
-        value={value.toString()}
+        value={value}
         setValue={setValue}
         useCoffinTitleDirection="down"
         useCoffinTitle="from"
@@ -135,7 +133,7 @@ export default function Deposit({ pair }: any): JSX.Element {
           <TokenApproveButton value={value} token={assetToken} needed={!useCoffin}>
             <Button
               onClick={() => onCook(pair, onExecute)}
-              disabled={value <= ZERO || warnings.broken}
+              disabled={value.toBigNumber(pair.asset.tokenInfo.decimals).lte(0) || warnings.broken}
               fullWidth={true}
             >
               {i18n._(t`Deposit`)}
