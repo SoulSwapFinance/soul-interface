@@ -29,7 +29,7 @@ export default function Deposit({ pair }: any): JSX.Element {
   const { i18n } = useLingui()
 
   // State
-  const [useCoffin, setUseCoffin] = useState<boolean>(pair.asset.coffinBalance > (0))
+  const [useCoffin, setUseCoffin] = useState<boolean>(false) // (pair.asset.coffinBalance.gt(0))
   const [value, setValue] = useState('')
 
   // Calculated
@@ -58,15 +58,19 @@ export default function Deposit({ pair }: any): JSX.Element {
   const transactionReview = new TransactionReview()
 
   if (value && !warnings.broken) {
-    const amount = Math.floor(Number(value)).toString()
-    const newUserAssetAmount = pair.currentUserAssetAmount.value.add(Number(amount))
+    const amount = Math.floor(Number(value)) // Math.floor(Number(value)).toString()
+    const newUserAssetAmount = BigNumber.from(pair.currentUserAssetAmount.value).add(Number(amount))
     transactionReview.addTokenAmount(
       i18n._(t`Balance`),
       pair.currentUserAssetAmount.value,
       newUserAssetAmount,
       pair.asset
     )
-    transactionReview.addUSD(i18n._(t`Balance USD`), pair.currentUserAssetAmount.value, newUserAssetAmount, pair.asset)
+    transactionReview.addUSD(i18n._(t`Balance USD`), 
+      pair.currentUserAssetAmount.value, 
+      newUserAssetAmount, 
+      pair.asset)
+      
     const newUtilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.add(amount))
     transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
     if (pair.currentExchangeRate.isZero()) {
@@ -74,14 +78,14 @@ export default function Deposit({ pair }: any): JSX.Element {
         'Exchange Rate',
         formatNumber(
           pair.currentExchangeRate,
-          false,
-          true,
+          // false,
+          // true,
           ),
         formatNumber(
-          pair.oracleExchangeRate,
-          false,
-          true,
-          18 + pair.collateral.tokenInfo.decimals - pair.asset.tokenInfo.decimals
+          pair.oracleExchangeRate / 10**(18 + Number(pair.collateral.tokenInfo.decimals) - Number(pair.asset.tokenInfo.decimals)),
+          // false,
+          // true,
+          // 18 + Number(pair.collateral.tokenInfo.decimals) - Number(pair.asset.tokenInfo.decimals)
         ),
         Direction.UP
       )
