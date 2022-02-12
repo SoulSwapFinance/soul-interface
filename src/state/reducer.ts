@@ -1,4 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit'
+import portfolio from 'features/portfolio/portfolioSlice'
 
 import mines from 'features/mines/minesSlice'
 import tridentAdd from '../features/trident/add/addSlice'
@@ -36,6 +37,7 @@ const reducer = combineReducers({
   create,
   // inari,
   mines,
+  portfolio,
   slippage,
   tridentSwap,
   tridentAdd,
