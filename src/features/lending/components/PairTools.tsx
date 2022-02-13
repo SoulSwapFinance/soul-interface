@@ -43,7 +43,7 @@ export default function PairTools({ pair }) {
         text={
           <div>
             <div>Update the exchange rate</div>
-            <div>Current deviation: {formatPercent(priceChange)}</div>
+            <div>Current Deviation: {formatPercent(priceChange)}</div>
           </div>
         }
       >

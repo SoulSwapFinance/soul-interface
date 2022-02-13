@@ -1,15 +1,17 @@
-import UnderworldCooker, { signMasterContractApproval } from '../entities/UnderworldCooker'
-import { useCallback, useEffect, useMemo, useState } from 'react'
-
-import { UNDERWORLD_ADDRESS } from '../constants'
-import { ethers } from 'ethers'
-import { setUnderworldApprovalPending } from '../state/application/actions'
+import { splitSignature } from '@ethersproject/bytes'
+import { AddressZero, HashZero } from '@ethersproject/constants'
+import { UNDERWORLD_ADDRESS } from 'sdk'
+import UnderworldCooker, { signMasterContractApproval } from 'entities/UnderworldCooker'
 import { useActiveWeb3React } from 'services/web3'
-import { useCoffinBoxContract } from './useContract'
-import { useCoffinMasterContractAllowed } from '../state/coffinbox/hooks'
+import { USER_REJECTED_TX } from 'services/web3/WalletError'
+import { setUnderworldApprovalPending } from 'state/application/actions'
+import { useUnderworldApprovalPending } from 'state/application/hooks'
+import { useCoffinMasterContractAllowed } from 'state/coffinbox/hooks'
+import { useTransactionAdder } from 'state/transactions/hooks'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { useUnderworldApprovalPending } from '../state/application/hooks'
-import { useTransactionAdder } from '../state/transactions/hooks'
+
+import { useCoffinBoxContract } from './useContract'
 
 export enum CoffinApprovalState {
   UNKNOWN,
@@ -59,7 +61,7 @@ function useUnderworldApproveCallback(): [
   const masterContract = chainId && UNDERWORLD_ADDRESS[chainId]
 
   const pendingApproval = useUnderworldApprovalPending()
-  const currentAllowed = useCoffinMasterContractAllowed(masterContract, account || ethers.constants.AddressZero)
+  const currentAllowed = useCoffinMasterContractAllowed(masterContract, account || AddressZero)
   const addTransaction = useTransactionAdder()
 
   // check the current approval status
@@ -105,14 +107,15 @@ function useUnderworldApproveCallback(): [
         true,
         chainId
       )
-      const { v, r, s } = ethers.utils.splitSignature(signature)
+      const { v, r, s } = splitSignature(signature)
       return {
         outcome: CoffinApproveOutcome.SUCCESS,
         permit: { account, masterContract, v, r, s },
       }
     } catch (e) {
       return {
-        outcome: e.code === 4001 ? CoffinApproveOutcome.REJECTED : CoffinApproveOutcome.FAILED,
+        // @ts-ignore TYPE NEEDS FIXING
+        outcome: e.code === USER_REJECTED_TX ? CoffinApproveOutcome.REJECTED : CoffinApproveOutcome.FAILED,
       }
     }
   }, [approvalState, account, library, chainId, coffinBoxContract, masterContract])
@@ -126,15 +129,8 @@ function useUnderworldApproveCallback(): [
         setApproveUnderworldFallback(true)
       }
     } else {
-      const tx = await coffinBoxContract?.setMasterContractApproval(
-        account,
-        masterContract,
-        true,
-        0,
-        ethers.constants.HashZero,
-        ethers.constants.HashZero
-      )
-      dispatch(setUnderworldApprovalPending('Approve the Underworld'))
+      const tx = await coffinBoxContract?.setMasterContractApproval(account, masterContract, true, 0, HashZero, HashZero)
+      dispatch(setUnderworldApprovalPending('Approve Underworld'))
       await tx.wait()
       dispatch(setUnderworldApprovalPending(''))
     }
@@ -145,7 +141,7 @@ function useUnderworldApproveCallback(): [
     let summary
     if (approvalState === CoffinApprovalState.NOT_APPROVED && underworldPermit) {
       cooker.approve(underworldPermit)
-      summary = 'Approve the Underworld and ' + (await execute(cooker))
+      summary = 'Approve Underworld and ' + (await execute(cooker))
     } else {
       summary = await execute(cooker)
     }

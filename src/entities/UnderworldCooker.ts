@@ -41,12 +41,13 @@ export async function signMasterContractApproval(
     },
     primaryType: 'SetMasterContractApproval',
     domain: {
-      name: 'CoffinBox',
+      name: 'CoffinBox V1',
       chainId: chainId,
       verifyingContract: coffinBoxContract?.address,
     },
     message: message,
   }
+  // @ts-ignore TYPE NEEDS FIXING
   const signer = getSigner(library, user)
   return signer._signTypedData(typedData.domain, typedData.types, typedData.message)
 }
@@ -353,12 +354,7 @@ export default class UnderworldCooker {
           [useNative ? AddressZero : this.pair.asset.address, this.account, 0, -1]
         ),
         // TODO: Put some warning in the UI or not allow repaying ETH directly from wallet, because this can't be pre-calculated
-        useNative ? 
-        toShare(
-          this.pair.asset, 
-          toElastic(this.pair.totalBorrow, part, true))
-          .mul(BigNumber.from(1001)).div(BigNumber.from(1000))
-          : BigNumber.from(ZERO)
+        useNative ? toShare(this.pair.asset, toElastic(this.pair.totalBorrow, part, true)).mul(1001).div(1000) : ZERO
       )
     }
     this.add(Action.REPAY, defaultAbiCoder.encode(['int256', 'address', 'bool'], [part, this.account, false]))
