@@ -255,7 +255,7 @@ const LendLayout = ({ children }) => {
         <Card
           className="h-full bg-dark-900"
           backgroundImage= { BORROW_IMG }
-          title={i18n._(t`Lend your assets, earn yield with no impermanent loss`)}
+          title={i18n._(t`Lend your assets, earn yield with ZERO impermanent loss`)}
           description={i18n._(
             t`Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency.`
           )}
