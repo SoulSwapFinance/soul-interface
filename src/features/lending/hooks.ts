@@ -238,9 +238,9 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
 
         // Interest per year received by lenders as of now
         pair.currentSupplyAPR = takeFee(
-          BigNumber.from(pair.currentInterestPerYear)
-          .mulDiv(pair.utilization, e10(18))
-          )
+          BigNumber.from(pair.currentInterestPerYear
+          * pair.utilization / 1e18
+          ))
 
         // The user's amount of collateral (stable, doesn't accrue)
         pair.userCollateralAmount = easyAmount(

@@ -13,9 +13,9 @@ const getQuery = (input?: Currency, output?: Currency) => {
   if (!input && !output) return
 
   if (input && !output) {
-    return { inputCurrency: input.address || 'FTM' }
+    return { inputCurrency: input || 'FTM' }
   } else if (input && output) {
-    return { inputCurrency: input.address, outputCurrency: output.address }
+    return { inputCurrency: input, outputCurrency: output }
   }
 }
 

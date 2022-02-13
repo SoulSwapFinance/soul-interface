@@ -3,7 +3,6 @@ import {
   FACTOR_PRECISION,
   FULL_UTILIZATION_MINUS_MAX,
   INTEREST_ELASTICITY,
-  JSBI,
   MAXIMUM_INTEREST_PER_YEAR,
   MAXIMUM_TARGET_UTILIZATION,
   MINIMUM_INTEREST_PER_YEAR,
@@ -41,11 +40,10 @@ export function accrueTotalAssetWithFee(pair: any): {
   }
 }
 
+
 export function interestAccrue(pair: any, interest: BigNumber): number {
   if (pair.totalBorrow.base.eq(0)) {
-    // return STARTING_INTEREST_PER_YEAR
-    // return BigNumber.from(8062976009313225)
-    return 8062976009313225
+    return Number(STARTING_INTEREST_PER_YEAR)
   }
   if (pair.elapsedSeconds.lte(0)) {
     return Number(interest)
@@ -55,21 +53,21 @@ export function interestAccrue(pair: any, interest: BigNumber): number {
   if (pair.utilization.lt(MINIMUM_TARGET_UTILIZATION)) {
     const underFactor = BigNumber.from(MINIMUM_TARGET_UTILIZATION)
       .sub(pair.utilization)
-      .mulDiv(BigNumber.from(FACTOR_PRECISION), BigNumber.from(MINIMUM_TARGET_UTILIZATION))
-      const scale = BigNumber.from(INTEREST_ELASTICITY).add(underFactor.mul(underFactor).mul(pair.elapsedSeconds))
-      currentInterest = currentInterest.mul(BigNumber.from(INTEREST_ELASTICITY)).div(scale)
+      .mulDiv(FACTOR_PRECISION, MINIMUM_TARGET_UTILIZATION)
+    const scale = BigNumber.from(INTEREST_ELASTICITY).add(underFactor.mul(underFactor).mul(pair.elapsedSeconds))
+    currentInterest = currentInterest.mul(INTEREST_ELASTICITY).div(scale)
 
-      if (currentInterest.lt(BigNumber.from(MINIMUM_INTEREST_PER_YEAR))) {
-        currentInterest = BigNumber.from(MINIMUM_INTEREST_PER_YEAR) // 0.25% APR minimum
+    if (currentInterest.lt(MINIMUM_INTEREST_PER_YEAR)) {
+      currentInterest = BigNumber.from(MINIMUM_INTEREST_PER_YEAR) // 0.25% APR minimum
     }
   } else if (pair.utilization.gt(MAXIMUM_TARGET_UTILIZATION)) {
     const overFactor = pair.utilization
       .sub(MAXIMUM_TARGET_UTILIZATION)
-      .mul(BigNumber.from(FACTOR_PRECISION).div(BigNumber.from(FULL_UTILIZATION_MINUS_MAX)))
-      const scale = BigNumber.from(INTEREST_ELASTICITY).add(overFactor.mul(overFactor).mul(pair.elapsedSeconds))
-      currentInterest = currentInterest.mul(scale).div(BigNumber.from(INTEREST_ELASTICITY))
-      if (currentInterest.gt(BigNumber.from(MAXIMUM_INTEREST_PER_YEAR))) {
-        currentInterest = BigNumber.from(MAXIMUM_INTEREST_PER_YEAR) // 1000% APR maximum
+      .mul(BigNumber.from(FACTOR_PRECISION).div(FULL_UTILIZATION_MINUS_MAX))
+    const scale = BigNumber.from(INTEREST_ELASTICITY).add(overFactor.mul(overFactor).mul(pair.elapsedSeconds))
+    currentInterest = currentInterest.mul(scale).div(INTEREST_ELASTICITY)
+    if (currentInterest.gt(MAXIMUM_INTEREST_PER_YEAR)) {
+      currentInterest = BigNumber.from(MAXIMUM_INTEREST_PER_YEAR) // 1000% APR maximum
     }
   }
   return Number(currentInterest)
@@ -95,8 +93,7 @@ export function easyAmount(
   // console.log('easyAmount', token)
   return {
     value: amount,
-    string: amount.toString(),
-    //.toFixed(token?.decimals ? token.decimals : token.tokenInfo.decimals),
+    string: amount.toFixed(token?.decimals ? token.decimals : token.tokenInfo.decimals),
     usdValue: getUSDValue(amount, token),
     usd: getUSDString(amount, token),
   }
@@ -111,9 +108,13 @@ export function addBorrowFee(amount: BigNumber): BigNumber {
 }
 
 export function getFraction({
+  // @ts-ignore TYPE NEEDS FIXING
   totalAssetBase,
+  // @ts-ignore TYPE NEEDS FIXING
   totalAssetElastic,
+  // @ts-ignore TYPE NEEDS FIXING
   totalBorrowElastic,
+  // @ts-ignore TYPE NEEDS FIXING
   token0: { totalSupplyBase, totalSupplyElastic },
 }) {
   return totalAssetBase / (Number(totalAssetElastic) + (totalBorrowElastic * totalSupplyBase) / totalSupplyElastic)

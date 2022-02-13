@@ -1,9 +1,9 @@
-import { BASES_TO_CHECK_TRADES_AGAINST, CUSTOM_BASES } from '../constants/routing'
-import { Currency, Token } from '../sdk'
-
+import { Currency, Token } from 'sdk'
+import { useActiveWeb3React } from 'services/web3'
 import flatMap from 'lodash/flatMap'
 import { useMemo } from 'react'
-import { useActiveWeb3React } from 'services/web3'
+
+import { ADDITIONAL_BASES, BASES_TO_CHECK_TRADES_AGAINST, CUSTOM_BASES } from '../config/routing'
 
 export function useAllCurrencyCombinations(currencyA?: Currency, currencyB?: Currency): [Token, Token][] {
   const { chainId } = useActiveWeb3React()
@@ -14,14 +14,10 @@ export function useAllCurrencyCombinations(currencyA?: Currency, currencyB?: Cur
     if (!chainId) return []
 
     const common = BASES_TO_CHECK_TRADES_AGAINST[chainId] ?? []
-    // const additionalA = tokenA ? ADDITIONAL_BASES[chainId]?.[tokenA.address] ?? [] : []
-    // const additionalB = tokenB ? ADDITIONAL_BASES[chainId]?.[tokenB.address] ?? [] : []
+    const additionalA = tokenA ? ADDITIONAL_BASES[chainId]?.[tokenA.address] ?? [] : []
+    const additionalB = tokenB ? ADDITIONAL_BASES[chainId]?.[tokenB.address] ?? [] : []
 
-    return [
-      ...common, 
-      // ...additionalA, 
-      // ...additionalB
-    ]
+    return [...common, ...additionalA, ...additionalB]
   }, [chainId, tokenA, tokenB])
 
   const basePairs: [Token, Token][] = useMemo(

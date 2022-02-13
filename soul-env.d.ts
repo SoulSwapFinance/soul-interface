@@ -45,10 +45,15 @@ declare module 'formatic'
 
 declare module '@ethersproject/bignumber' {
   interface BigNumber {
-    mulDiv(multiplier: BigNumberish, divisor: BigNumberish): BigNumber
-    toFixed(decimals: BigNumberish): string
-    toFraction(decimals: BigNumberish, base: BigNumberish): Fraction
+    mulDiv(multiplier: BigNumberish | JSBI, divisor: BigNumberish | JSBI): BigNumber
+    toFixed(decimals: BigNumberish | JSBI): string
+    toFraction(decimals: BigNumberish | JSBI, base: BigNumberish | JSBI): Fraction
     min(...values: BigNumberish[]): BigNumber
     max(...values: BigNumberish[]): BigNumber
+    lt(other: BigNumberish | JSBI): boolean
+    gt(other: BigNumberish | JSBI): boolean
+    div(other: BigNumberish | JSBI): BigNumber
+    add(other: BigNumberish | JSBI): BigNumber
+    mul(other: BigNumberish | JSBI): BigNumber   
   }
 }
