@@ -76,7 +76,7 @@ const AssetBalances: FC<AssetBalancesProps> = ({ config, onSelect }) => {
               variant="xs"
               className="text-center text-low-emphesis h-[60px] flex items-center justify-center"
             >
-              {i18n._(t`No balances`)}
+              {i18n._(t`No Balances`)}
             </Typography>
           )}
         </tbody>

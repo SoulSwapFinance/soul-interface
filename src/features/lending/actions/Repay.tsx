@@ -386,7 +386,7 @@ export default function Repay({ pair }: RepayProps) {
       )}
 
       <UnderworldApproveButton
-        color="purple"
+        color="pink"
         content={(onCook: any) => (
           <TokenApproveButton value={displayRepayValue} token={assetToken} needed={!useCoffinRepay}>
             <Button onClick={() => onCook(pair, onExecute)} disabled={actionDisabled} fullWidth={true}>
