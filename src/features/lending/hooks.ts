@@ -47,13 +47,18 @@ export function useUnderworldTokens(): { [address: string]: Token } {
     () =>
       Object.values(allTokens).reduce((previousValue, currentValue) => {
         if (
+          // @ts-ignore TYPE NEEDS FIXING
           CHAINLINK_PRICE_FEED_MAP?.[chainId] &&
+          // @ts-ignore TYPE NEEDS FIXING
           Object.values(CHAINLINK_PRICE_FEED_MAP?.[chainId])?.some(
+            // @ts-ignore TYPE NEEDS FIXING
             (value) => {
+              // @ts-ignore TYPE NEEDS FIXING
               return currentValue.address === value.from || currentValue.address === value.to
             }
           )
         ) {
+          // @ts-ignore TYPE NEEDS FIXING
           previousValue[currentValue.address] = currentValue
         }
         return previousValue
@@ -66,13 +71,15 @@ export function useUnderworldPairAddresses(): string[] {
   const coffinBoxContract = useCoffinBoxContract()
   const { chainId } = useActiveWeb3React()
   // const useEvents = false
-  const useEvents = chainId && chainId !== ChainId.BSC 
+  const useEvents = chainId && chainId !== ChainId.BSC
   // && chainId !== ChainId.MATIC && chainId !== ChainId.ARBITRUM
   const allTokens = useUnderworldTokens()
   const events = useQueryFilter({
     chainId,
     contract: coffinBoxContract,
+    // @ts-ignore TYPE NEEDS FIXING
     event: coffinBoxContract && coffinBoxContract.filters.LogDeploy(UNDERWORLD_ADDRESS[chainId]),
+    // @ts-ignore TYPE NEEDS FIXING
     shouldFetch: useEvents && featureEnabled(Feature.UNDERWORLD, chainId),
   })
   const clones = useClones({ chainId, shouldFetch: !useEvents })
@@ -80,12 +87,15 @@ export function useUnderworldPairAddresses(): string[] {
     (
       useEvents
         ? events?.map((event) => ({
-            address:
-              event.args.cloneAddress,
-            data: event.args.data,
-          }))
+          address:
+            // @ts-ignore TYPE NEEDS FIXING
+            event.args.cloneAddress,
+          // @ts-ignore TYPE NEEDS FIXING
+          data: event.args.data,
+        }))
         : clones
     )
+      // @ts-ignore TYPE NEEDS FIXING
       ?.reduce((previousValue, currentValue) => {
         try {
           const [collateral, asset, oracle, oracleData] = defaultAbiCoder.decode(
@@ -96,6 +106,7 @@ export function useUnderworldPairAddresses(): string[] {
             BLACKLISTED_TOKENS.includes(collateral) ||
             BLACKLISTED_TOKENS.includes(asset) ||
             BLACKLISTED_ORACLES.includes(oracle) ||
+            // @ts-ignore TYPE NEEDS FIXING
             !validateChainlinkOracleData(chainId, allTokens[collateral], allTokens[asset], oracleData)
           ) {
             return previousValue
@@ -117,20 +128,21 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
   const { chainId } = useActiveWeb3React()
 
   const boringHelperContract = useBoringHelperContract()
-
   const wnative = WNATIVE_ADDRESS[chainId]
   const currency: Token = USD[chainId]
 
   const allTokens = useUnderworldTokens()
-
   const pollArgs = useMemo(() => [account, addresses], [account, addresses])
 
   // TODO: Replace
+  // @ts-ignore TYPE NEEDS FIXING
   const pollUnderworldPairs = useSingleCallResult(boringHelperContract, 'pollKashiPairs', pollArgs, { blocksPerFetch: 0 })
     ?.result?.[0]
 
   const strategies = useCoffinStrategies({ chainId })
+
   const tokenAddresses = Object.keys(allTokens)
+
   const getBalancesArgs = useMemo(() => [account, tokenAddresses], [account, tokenAddresses])
 
   // TODO: Replace
@@ -191,16 +203,10 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
         pair.interestPerYear = pair.accrueInfo.interestPerSecond.mul('60').mul('60').mul('24').mul('365')
 
         // The total collateral in the market (stable, doesn't accrue)
-        pair.totalCollateralAmount = easyAmount(
-          BigNumber.from(toAmount(pair.collateral, 
-            pair.totalCollateralShare)), 
-            pair.collateral)
+        pair.totalCollateralAmount = easyAmount(toAmount(pair.collateral, pair.totalCollateralShare), pair.collateral)
 
         // The total assets unborrowed in the market (stable, doesn't accrue)
-        pair.totalAssetAmount = easyAmount(
-          BigNumber.from(toAmount(pair.asset, 
-            pair.totalAsset.elastic)), 
-            pair.asset)
+        pair.totalAssetAmount = easyAmount(toAmount(pair.asset, pair.totalAsset.elastic), pair.asset)
 
         // The total assets borrowed in the market right now
         pair.currentBorrowAmount = easyAmount(accrue(pair, pair.totalBorrow.elastic, true), pair.asset)
@@ -239,14 +245,10 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
         // Interest per year received by lenders as of now
         pair.currentSupplyAPR = takeFee(
           BigNumber.from(pair.currentInterestPerYear
-          * pair.utilization / 1e18
-          ))
-
+            * Number(pair.utilization) / 1e18)
+        )
         // The user's amount of collateral (stable, doesn't accrue)
-        pair.userCollateralAmount = easyAmount(
-          BigNumber.from(toAmount(pair.collateral, 
-            pair.userCollateralShare)), 
-            pair.collateral)
+        pair.userCollateralAmount = easyAmount(toAmount(pair.collateral, pair.userCollateralShare), pair.collateral)
 
         // The user's amount of assets (stable, doesn't accrue)
         pair.currentUserAssetAmount = easyAmount(
@@ -315,57 +317,41 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
             string: String(pair.collateral.strategy?.apy ?? 0),
           },
         }
-
-        // pair.utilization = {
-        //   value: pair.utilization,
-        //   string: Fraction.from(
-        //     pair.utilization,
-        //     BigNumber.from(10).pow(16)
-        //   ),
-        // }
+        pair.utilization = {
+          value: pair.utilization,
+          // string: Fraction.from(pair.utilization, BigNumber.from(10).pow(16)).toString(),
+          string: (pair.utilization / 1e16).toString(),
+        }
 
         pair.supplyAPR = {
           value: pair.supplyAPR,
-          valueWithStrategy: pair.supplyAPR.add(pair.strategyAPY.asset.value),
-            //.mulDiv(pair.utilization.value, e10(18))),
-          // string: Fraction.from(pair.supplyAPR, e10(16)).toString(),
-          string: pair.currentSupplyAPR.toString(),
-          // stringWithStrategy: Fraction.from(
-          //   pair.strategyAPY.asset.value.add(
-          //     pair.supplyAPR.add(pair.strategyAPY.asset.value.mulDiv(pair.utilization.value, e10(18)))
-          //   ),
-          //   e10(16)
-          // ).toString(),
-          stringWithStrategy: (pair.strategyAPY.asset.value + pair.supplyAPR).toString()
+          valueWithStrategy: pair.supplyAPR.add(pair.strategyAPY.asset.value.mulDiv(pair.utilization.value, e10(18))),
+          string: (pair.supplyAPR / 1e16).toString(),
+          stringWithStrategy:
+            (pair.strategyAPY.asset.value.add(
+              pair.supplyAPR.add(pair.strategyAPY.asset.value.mulDiv(pair.utilization.value, e10(18)))
+            ) / 1e16
+            ).toString(),
         }
-
         pair.currentSupplyAPR = {
           value: pair.currentSupplyAPR,
           valueWithStrategy: pair.currentSupplyAPR.add(
-            pair.strategyAPY.asset.value
-            //.mulDiv(pair.utilization.value, e10(18))
+            pair.strategyAPY.asset.value.mulDiv(pair.utilization.value, e10(18))
           ),
-          // string: Fraction.from(pair.currentSupplyAPR, e10(16)).toString(),
-          string: pair.currentSupplyAPR.toString(),
-          // stringWithStrategy: Fraction.from(
-          //   pair.currentSupplyAPR.add(pair.strategyAPY.asset.value.mulDiv(pair.utilization.value, e10(18))),
-          //   e10(16)
-          // ).toString(),
-          stringWithStrategy: pair.currentSupplyAPR.add(pair.strategyAPY.asset.value)
+          string: (pair.currentSupplyAPR / 1e16).toString(),
+          stringWithStrategy:
+            (pair.currentSupplyAPR.add(pair.strategyAPY.asset.value.mulDiv(pair.utilization.value, e10(18)))
+              / 1e16
+            ).toString(),
         }
-
         pair.currentInterestPerYear = {
           value: pair.currentInterestPerYear,
-          // string: Fraction.from(pair.currentInterestPerYear, BigNumber.from(10).pow(16)).toString(),
           string: (pair.currentInterestPerYear / 1e16).toString(),
         }
-
         pair.health = {
           value: pair.health,
-          // string: Fraction.from(pair.health, e10(16)),
-          string: (pair.health / 1e16).toString(),
+          string: (pair.health / 1e16).toString,
         }
-
         pair.maxBorrowable = {
           oracle: easyAmount(pair.maxBorrowable.oracle, pair.asset),
           spot: easyAmount(pair.maxBorrowable.spot, pair.asset),
@@ -377,6 +363,7 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
 
         pair.safeMaxRemovable = easyAmount(pair.safeMaxRemovable, pair.collateral)
 
+        // @ts-ignore TYPE NEEDS FIXING
         previousValue = [...previousValue, pair]
       }
 
@@ -396,5 +383,6 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
 }
 
 export function useUnderworldPair(address: string) {
+  // @ts-ignore TYPE NEEDS FIXING
   return useUnderworldPairs([getAddress(address)])[0]
 }

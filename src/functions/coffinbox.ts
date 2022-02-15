@@ -11,10 +11,10 @@ import { CurrencyAmount, JSBI, Rebase, Token, ZERO } from 'sdk'
 //   return amount.mulDiv(token.coffinShare, token.coffinAmount)
 // }
 
-export function toAmount(rebase: Rebase, shares: BigNumber): string {
+export function toAmount(rebase: Rebase, shares: BigNumber): BigNumber {
   // console.log('toAmount', token, shares)
-  // return shares.mulDiv(BigNumber.from(rebase.elastic || 0), BigNumber.from(rebase.base || 0))
-  return BigNumber.from(Number(shares) * Number(rebase.elastic) / Number(rebase.base) || 0).toString()
+  return shares.mulDiv(BigNumber.from(rebase.elastic || 0), BigNumber.from(rebase.base || 0))
+  // return BigNumber.from(Number(shares) * Number(rebase.elastic) / Number(rebase.base) || 0).toString()
 }
 
 export function toShare(rebase: Rebase, amount: BigNumber): BigNumber {

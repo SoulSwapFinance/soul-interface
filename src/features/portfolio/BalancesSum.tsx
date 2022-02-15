@@ -2,7 +2,7 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Currency, CurrencyAmount, NATIVE, ZERO } from 'sdk'
 import Typography, { TypographyVariant } from 'components/Typography'
-import { reduceBalances, useUnderworldPositions } from 'features/portfolio/AssetBalances/underworld/hooks'
+import { reduceBalances } from 'features/portfolio/AssetBalances/underworld/hooks' // useUnderworldPositions
 import SumUSDCValues from 'features/trident/SumUSDCValues'
 import { currencyFormatter } from 'functions'
 // import { useTridentLiquidityPositions } from 'services/graph'
@@ -69,22 +69,22 @@ export const BalancesSum: FC<{ account: string }> = ({ account }) => {
   const { i18n } = useLingui()
   const { data: walletBalances, loading: wLoading } = useWalletBalances(account)
   const { data: coffinBalances, loading: bLoading } = useCoffinBalancesV2ForAccount(account)
-  const { borrowed, collateral, lent } = useUnderworldPositions(account)
+  // const { borrowed, collateral, lent } = useUnderworldPositions(account)
 
   const allAssets = useMemo(() => {
-    const combined = [...walletBalances, ...coffinBalances, ...collateral, ...lent]
+    const combined = [...walletBalances, ...coffinBalances] // ...collateral, ...lent
     return {
       total: combined.length,
       balances: reduceBalances(combined),
     }
-  }, [coffinBalances, collateral, lent, walletBalances])
+  }, [coffinBalances, walletBalances]) // collateral, lent, 
 
   return (
     <div className="flex lg:flex-row flex-col gap-10 justify-between lg:items-end w-full">
       <div className="flex gap-10">
         <_BalancesSum
           assetAmounts={allAssets.balances}
-          liabilityAmounts={borrowed}
+          // liabilityAmounts={borrowed}
           label={i18n._(t`Net Worth`)}
           size="h3"
           loading={wLoading || bLoading}

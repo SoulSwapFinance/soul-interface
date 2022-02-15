@@ -32,46 +32,67 @@ export function accrueTotalAssetWithFee(pair: any): {
     .mul(pair.accrueInfo.interestPerSecond)
     .mul(pair.elapsedSeconds.add('3600')) // Project an hour into the future
     .div(e10(18)))
-  const feeAmount = BigNumber.from(Number(extraAmount) * Number(PROTOCOL_FEE) / Number(PROTOCOL_FEE_DIVISOR)) // % of interest paid goes to fee
+  const feeAmount = BigNumber.from(extraAmount).mul(Number(PROTOCOL_FEE)).div(Number(PROTOCOL_FEE_DIVISOR)) // % of interest paid goes to fee
   const feeFraction = feeAmount.mulDiv(pair.totalAsset.base, pair.currentAllAssets.value)
   return {
     elastic: pair.totalAsset.elastic,
-    base: pair.totalAsset.base.add(feeFraction),
+    base: BigNumber.from(pair.totalAsset.base).add(feeFraction),
   }
 }
 
 
-export function interestAccrue(pair: any, interest: BigNumber): number {
+export function interestAccrue(pair: any, interest: BigNumber): string {
   if (pair.totalBorrow.base.eq(0)) {
-    return Number(STARTING_INTEREST_PER_YEAR)
+    return BigNumber.from(Math.floor(Number(STARTING_INTEREST_PER_YEAR) / 1e16)).toString()
   }
   if (pair.elapsedSeconds.lte(0)) {
-    return Number(interest)
+    return interest.toString()
   }
 
   let currentInterest = interest
-  if (pair.utilization.lt(MINIMUM_TARGET_UTILIZATION)) {
-    const underFactor = BigNumber.from(MINIMUM_TARGET_UTILIZATION)
-      .sub(pair.utilization)
-      .mulDiv(FACTOR_PRECISION, MINIMUM_TARGET_UTILIZATION)
-    const scale = BigNumber.from(INTEREST_ELASTICITY).add(underFactor.mul(underFactor).mul(pair.elapsedSeconds))
-    currentInterest = currentInterest.mul(INTEREST_ELASTICITY).div(scale)
+  if (Number(pair.utilization) < Number(MINIMUM_TARGET_UTILIZATION)) {
+    const underFactor = BigNumber.from(
+      Number(MINIMUM_TARGET_UTILIZATION)
+      - pair.utilization
+      * Number(FACTOR_PRECISION)
+      / Number(MINIMUM_TARGET_UTILIZATION))
+      // / 1e18)
+      
+      
+      const scale = BigNumber.from(INTEREST_ELASTICITY).add(BigNumber.from(underFactor).mul(underFactor).mul(pair.elapsedSeconds))
+      currentInterest = currentInterest.mul(BigNumber.from(INTEREST_ELASTICITY)).div(scale)
+      
+      // console logs
+      console.log('underFactor:%s', underFactor)
+      console.log('scale:%s', scale)
+      console.log('currentInterest:%s', currentInterest)
 
-    if (currentInterest.lt(MINIMUM_INTEREST_PER_YEAR)) {
-      currentInterest = BigNumber.from(MINIMUM_INTEREST_PER_YEAR) // 0.25% APR minimum
+    if (currentInterest.lt(Number(MINIMUM_INTEREST_PER_YEAR))) {
+      currentInterest = BigNumber.from(Number(MINIMUM_INTEREST_PER_YEAR)) // 0.25% APR minimum
     }
-  } else if (pair.utilization.gt(MAXIMUM_TARGET_UTILIZATION)) {
-    const overFactor = pair.utilization
-      .sub(MAXIMUM_TARGET_UTILIZATION)
-      .mul(BigNumber.from(FACTOR_PRECISION).div(FULL_UTILIZATION_MINUS_MAX))
-    const scale = BigNumber.from(INTEREST_ELASTICITY).add(overFactor.mul(overFactor).mul(pair.elapsedSeconds))
-    currentInterest = currentInterest.mul(scale).div(INTEREST_ELASTICITY)
-    if (currentInterest.gt(MAXIMUM_INTEREST_PER_YEAR)) {
+
+  } else if (Number(pair.utilization) > Number(MAXIMUM_TARGET_UTILIZATION)) {
+    // const overFactor = BigNumber.from(
+     const overFactor = Number(pair.utilization)
+      - Number(MAXIMUM_TARGET_UTILIZATION)
+      * Number(FACTOR_PRECISION)
+      / Number(FULL_UTILIZATION_MINUS_MAX)
+      / 1e16
+      
+      // console logs
+      console.log('utilization:%s', pair.utilization)
+      console.log('MAXIMUM_TARGET_UTILIZATION:%s', MAXIMUM_TARGET_UTILIZATION)
+      // console.log('currentInterest:%s', currentInterest)
+    
+    const scale = Number(INTEREST_ELASTICITY) + overFactor * overFactor * Number(pair.elapsedSeconds) / 1e16
+    currentInterest = BigNumber.from(Math.floor(Number(currentInterest) * (scale) / Number(INTEREST_ELASTICITY) / 1e16))
+    if (Number(currentInterest) > Number(MAXIMUM_INTEREST_PER_YEAR)) {
       currentInterest = BigNumber.from(MAXIMUM_INTEREST_PER_YEAR) // 1000% APR maximum
     }
   }
-  return Number(currentInterest)
+  return currentInterest.toString()
 }
+
 
 export function getUSDValue(amount: BigNumberish, token: any): BigNumber {
   return BigNumber.from(amount)
