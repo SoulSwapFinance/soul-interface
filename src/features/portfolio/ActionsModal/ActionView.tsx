@@ -31,7 +31,7 @@ const ActionView: FC<ActionViewProps> = ({ onClose }) => {
     if (featureEnabled(Feature.TRIDENT, chainId)) {
       if (currency?.isNative) return router.push('/trident/swap')
       // @ts-ignore TYPE NEEDS FIXING
-      return router.push(`/trident/swap?&tokens=${NATIVE[chainId].symbol}&tokens=${currency?.wrapped.address}`)
+      return router.push(`/exchange/swap?&tokens=${NATIVE[chainId].symbol}&tokens=${currency?.wrapped.address}`)
     }
 
     if (currency?.isNative) return router.push('/swap')

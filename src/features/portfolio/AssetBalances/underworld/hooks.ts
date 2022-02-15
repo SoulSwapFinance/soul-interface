@@ -1,6 +1,5 @@
 import { AddressZero } from '@ethersproject/constants'
-import JSBI from 'jsbi'
-import { Currency, CurrencyAmount, Token } from 'sdk'
+import { Currency, CurrencyAmount, JSBI, Token } from 'sdk'
 import { useUnderworldPairAddresses, useUnderworldPairsForAccount } from 'features/lending/hooks'
 import useSearchAndSort from 'hooks/useSearchAndSort'
 import { useActiveWeb3React } from 'services/web3'

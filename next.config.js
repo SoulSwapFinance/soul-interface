@@ -121,7 +121,7 @@ module.exports = withBundleAnalyzer(
         },
         {
           source: '/user',
-          destination: '/balances',
+          destination: '/portfolio',
         },
         {
           source: '/find',
@@ -146,7 +146,7 @@ module.exports = withBundleAnalyzer(
         // },
         {
           source: '/balances',
-          destination: '/trident/balances',
+          destination: '/portfolio',
         },
         {
           source: '/farm',
