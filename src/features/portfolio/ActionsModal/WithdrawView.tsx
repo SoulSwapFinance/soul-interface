@@ -2,7 +2,8 @@ import { parseUnits } from '@ethersproject/units'
 import { ArrowDownIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { JSBI, Rebase, ZERO } from 'sdk'
+import { Rebase, ZERO } from 'sdk'
+import JSBI from 'jsbi'
 import AssetInput from 'components/AssetInput'
 import { Button } from 'components/Button'
 import { WalletIcon } from 'components/Icon'
@@ -65,7 +66,7 @@ const WithdrawView: FC<WithdrawViewProps> = ({ onClose, onBack }) => {
   const error = !account
     ? i18n._(t`Connect Wallet`)
     : !valueCA?.greaterThan(ZERO)
-    ? i18n._(t`Enter an amount`)
+    ? i18n._(t`Enter Amount`)
     : !coffinBalance
     ? i18n._(t`Loading balance`)
     : valueCA?.greaterThan(coffinBalance)
@@ -77,7 +78,7 @@ const WithdrawView: FC<WithdrawViewProps> = ({ onClose, onBack }) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <HeadlessUiModal.Header header={i18n._(t`Withdraw to wallet`)} onClose={onClose} onBack={onBack} />
+      <HeadlessUiModal.Header header={i18n._(t`Withdraw to Wallet`)} onClose={onClose} onBack={onBack} />
       <AssetInput
         title={''}
         currency={currency}

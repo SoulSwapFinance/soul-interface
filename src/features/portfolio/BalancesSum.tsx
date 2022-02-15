@@ -8,7 +8,7 @@ import { currencyFormatter } from 'functions'
 // import { useTridentLiquidityPositions } from 'services/graph'
 import { useActiveWeb3React } from 'services/web3'
 import { useCoffinBalancesV2ForAccount } from 'state/coffinbox/hooks'
-import { useAllTokenBalances, useAllTokenBalancesWithLoadingIndicator, useCurrencyBalance } from 'state/wallet/hooks'
+import { useAllTokenBalancesWithLoadingIndicator, useCurrencyBalance } from 'state/wallet/hooks'
 import React, { FC, useMemo } from 'react'
 import { usePositions } from 'hooks/usePositions'
 
@@ -21,11 +21,12 @@ export const LiquidityPositionsBalancesSum = () => {
   //   variables: { where: { user: account?.toLowerCase(), balance_gt: 0 } },
   //   shouldFetch: !!chainId && !!account,
   // })
-
+  
   const positions = usePositions()
 
   // const sum = positions?.reduce((acc, cur) => acc + cur.value, 0)
   const sum = positions?.reduce((acc, cur) => acc + cur.amount, 0)
+
 
   return (
     <div className="flex gap-14">
@@ -47,8 +48,8 @@ export const LiquidityPositionsBalancesSum = () => {
 
 const useWalletBalances = (account: string) => {
   const { chainId } = useActiveWeb3React()
-  // const { data: tokenBalances, loading } = useAllTokenBalancesWithLoadingIndicator()
-  const tokenBalances = useAllTokenBalances()
+  const { data: tokenBalances, loading } = useAllTokenBalancesWithLoadingIndicator()
+  // @ts-ignore TYPE NEEDS FIXING
   const ethBalance = useCurrencyBalance(account ? account : undefined, chainId ? NATIVE[chainId] : undefined)
   return useMemo(() => {
     const res: CurrencyAmount<Currency>[] = Object.values(tokenBalances).filter((cur) => cur.greaterThan(ZERO))
@@ -59,14 +60,14 @@ const useWalletBalances = (account: string) => {
 
     return {
       data: res,
-      // loading,
+      loading,
     }
-  }, [tokenBalances, ethBalance]) // loading
+  }, [tokenBalances, ethBalance, loading])
 }
 
 export const BalancesSum: FC<{ account: string }> = ({ account }) => {
   const { i18n } = useLingui()
-  const { data: walletBalances } = useWalletBalances(account) // loading, wLoading
+  const { data: walletBalances, loading: wLoading } = useWalletBalances(account)
   const { data: coffinBalances, loading: bLoading } = useCoffinBalancesV2ForAccount(account)
   const { borrowed, collateral, lent } = useUnderworldPositions(account)
 
@@ -86,12 +87,11 @@ export const BalancesSum: FC<{ account: string }> = ({ account }) => {
           liabilityAmounts={borrowed}
           label={i18n._(t`Net Worth`)}
           size="h3"
-          loading = {false}
-          // loading={wLoading || bLoading}
+          loading={wLoading || bLoading}
         />
       </div>
       <div className="flex gap-10">
-        <_BalancesSum assetAmounts={walletBalances} label={i18n._(t`Wallet`)} loading={false} />
+        <_BalancesSum assetAmounts={walletBalances} label={i18n._(t`Wallet`)} loading={wLoading} />
         <_BalancesSum assetAmounts={coffinBalances} label={i18n._(t`CoffinBox`)} loading={bLoading} />
         <div className="flex flex-col gap-1">
           <Typography variant="sm">{i18n._(t`Assets`)}</Typography>
