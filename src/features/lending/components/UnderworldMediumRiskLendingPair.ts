@@ -9,8 +9,7 @@ import {
   interestAccrue,
   takeFee,
 } from 'sdk'
-
-import { Oracle } from '../oracles'
+import { Oracle } from 'entities/oracles/Oracle'
 
 export class UnderworldMediumRiskLendingPair {
   public readonly address: string
