@@ -44,7 +44,7 @@ function AppBar(): JSX.Element {
       <Popover as="nav" className="z-10 w-full bg-transparent header-border-b">
         {({ open }) => (
           <>
-            <div className="md:px-4 sm:px-2 px-1 py-1">
+            <div className="px-4 py-1">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                     <NavLink 
@@ -125,7 +125,7 @@ function AppBar(): JSX.Element {
                       href={'/vote'}>
                         <a
                           id={`claims-nav-link`}
-                          className="w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
+                          className="hidden sm:block w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
                         >
                           {i18n._(t`VOTE`)}
                         </a>
@@ -135,7 +135,7 @@ function AppBar(): JSX.Element {
                       href={'/launchpad'}>
                         <a
                           id={`launch-nav-link`}
-                          className="hidden md:block w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
+                          className="hidden sm:block w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
                         >
                           {i18n._(t`LAUNCH`)}
                         </a>
@@ -146,7 +146,7 @@ function AppBar(): JSX.Element {
                       href={'/claims'}>
                         <a
                           id={`claims-nav-link`}
-                          className="hidden md:block w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
+                          className="hidden sm:block w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
                         >
                           {i18n._(t`CLAIM`)}
                         </a>
@@ -158,12 +158,12 @@ function AppBar(): JSX.Element {
                 <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-4 xl:w-auto bg-dark-1000 xl:relative xl:p-0 xl:bg-transparent">
                   <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
                     {library && library.provider.isMetaMask && (
-                      <div className="sm:inline-block">
+                      <div className="inline-block">
                         <LuxorStats />
                       </div>
                     )}
                     {library && library.provider.isMetaMask && (
-                      <div className="sm:inline-block">
+                      <div className="inline-block">
                         <TokenStats />
                       </div>
                     )}

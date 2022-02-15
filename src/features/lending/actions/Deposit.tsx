@@ -29,7 +29,7 @@ export default function Deposit({ pair }: any): JSX.Element {
   const { i18n } = useLingui()
 
   // State
-  const [useCoffin, setUseCoffin] = useState<boolean>(pair.asset.coffinBalance > 0)
+  const [useCoffin, setUseCoffin] = useState<boolean>(Number(pair.asset.coffinBalance) > 0)
   // const [useCoffin, setUseCoffin] = useState<boolean>(false)
   const [value, setValue] = useState('')
 
