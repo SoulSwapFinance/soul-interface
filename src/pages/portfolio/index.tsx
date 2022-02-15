@@ -26,7 +26,7 @@ const Portfolio = () => {
         />
       </Head>
       <div className="flex flex-col items-center gap-4 mt-32">
-        <div>{i18n._(t`Connect to your wallet ↗`)}</div>
+        <div>{i18n._(t`Connect Wallet ↗`)}</div>
 
         {/*
           At the moment, there is an RPC issue if you are not connected to your wallet.
