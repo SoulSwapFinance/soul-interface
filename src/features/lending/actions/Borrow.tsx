@@ -213,8 +213,8 @@ export default function Borrow({ pair }: BorrowProps) {
       nextMaxBorrowSafe.sub(borrowValue.toBigNumber(pair.asset.tokenInfo.decimals)),
       pair.asset
     )
-    transactionReview.addPercentage('Limit Used', pair.health.value, nextHealth)
-    transactionReview.addPercentage('Borrow APR', pair.interestPerYear.value, pair.currentInterestPerYear.value)
+    transactionReview.addPercentage('Limit Used', BigNumber.from(pair.health.value), BigNumber.from(nextHealth))
+    transactionReview.addPercentage('Borrow APR', BigNumber.from(pair.interestPerYear.value), BigNumber.from(pair.currentInterestPerYear.value))
   }
 
   let actionName = 'Nothing to do'

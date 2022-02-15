@@ -85,10 +85,10 @@ export default function Deposit({ pair }: any): JSX.Element {
       transactionReview.add(
         'Exchange Rate',
         formatNumber(
-          pair.currentExchangeRate //.toFixed(18 + pair.collateral.tokenInfo.decimals - pair.asset.tokenInfo.decimals)
+          pair.currentExchangeRate.toFixed(18 + pair.collateral.tokenInfo.decimals - pair.asset.tokenInfo.decimals)
         ),
         formatNumber(
-          pair.oracleExchangeRate //.toFixed(18 + pair.collateral.tokenInfo.decimals - pair.asset.tokenInfo.decimals)
+          pair.oracleExchangeRate.toFixed(18 + pair.collateral.tokenInfo.decimals - pair.asset.tokenInfo.decimals)
         ),
         Direction.UP
       )
