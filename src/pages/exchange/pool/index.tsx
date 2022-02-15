@@ -30,12 +30,14 @@ import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
 import { chain } from 'lodash'
 import MainHeader from 'features/swap/MainHeader'
 import NavLink from 'components/NavLink'
+import { useV2PairsWithLiquidity } from 'features/trident/migrate/context/useV2PairsWithLiquidity'
 // import SoulLogo from '../../../components/SoulLogo'
 
 export default function Pool() {
   const { i18n } = useLingui()
   const router = useRouter()
   const { account, chainId } = useActiveWeb3React()
+  const { loading, pairs } = useV2PairsWithLiquidity()
 
   // fetch the user's balances of all tracked V2 LP tokens
   const trackedTokenPairs = useTrackedTokenPairs()
@@ -54,25 +56,25 @@ export default function Pool() {
     () => tokenPairsWithLiquidityTokens.map((tpwlt) => tpwlt.liquidityToken),
     [tokenPairsWithLiquidityTokens]
   )
-  const [v2PairsBalances, fetchingV2PairBalances] = useTokenBalancesWithLoadingIndicator(
-    account ?? undefined,
-    liquidityTokens
-  )
+  // const [v2PairsBalances, fetchingV2PairBalances] = useTokenBalancesWithLoadingIndicator(
+  //   account ?? undefined,
+  //   liquidityTokens
+  // )
 
   // fetch the reserves for all V2 pools in which the user has a balance
-  const liquidityTokensWithBalances = useMemo(
-    () =>
-      tokenPairsWithLiquidityTokens.filter(({ liquidityToken }) =>
-        v2PairsBalances[liquidityToken?.address]?.greaterThan('0')
-      ),
-    [tokenPairsWithLiquidityTokens, v2PairsBalances]
-  )
+  // const liquidityTokensWithBalances = useMemo(
+  //   () =>
+  //     tokenPairsWithLiquidityTokens.filter(({ liquidityToken }) =>
+  //       v2PairsBalances[liquidityToken?.address]?.greaterThan('0')
+  //     ),
+  //   [tokenPairsWithLiquidityTokens, v2PairsBalances]
+  // )
 
-  const v2Pairs = useV2Pairs(liquidityTokensWithBalances.map(({ tokens }) => tokens))
-  const v2IsLoading =
-    fetchingV2PairBalances || v2Pairs?.length < liquidityTokensWithBalances.length || v2Pairs?.some((V2Pair) => !V2Pair)
+  // const v2Pairs = useV2Pairs(liquidityTokensWithBalances.map(({ tokens }) => tokens))
+  // const v2IsLoading =
+  //   fetchingV2PairBalances || v2Pairs?.length < liquidityTokensWithBalances.length || v2Pairs?.some((V2Pair) => !V2Pair)
 
-  const allV2PairsWithLiquidity = v2Pairs.map(([, pair]) => pair).filter((v2Pair): v2Pair is Pair => Boolean(v2Pair))
+  // const allV2PairsWithLiquidity = v2Pairs.map(([, pair]) => pair).filter((v2Pair): v2Pair is Pair => Boolean(v2Pair))
 
   // TODO: Replicate this!
   // show liquidity even if its deposited in rewards contract
@@ -135,21 +137,26 @@ export default function Pool() {
               </div>
             <div className="grid grid-flow-row gap-3">
                   <div className="mb-1 mt-1" />
-              {!account ? (
-                <Web3Connect size="lg" color="gradient" className="w-full" />
-              ) : v2IsLoading ? (
-                <Empty>
-                  <Dots>{i18n._(t`Loading`)}</Dots>
-                </Empty>
-              ) : allV2PairsWithLiquidity?.length > 0 ? (
-                <>
-                  {allV2PairsWithLiquidity.map((v2Pair) => (
-                    <FullPositionCard
-                      key={v2Pair.liquidityToken.address}
-                      pair={v2Pair}
-                      stakedBalance={CurrencyAmount.fromRawAmount(v2Pair.liquidityToken, '0')}
-                    />
-                  ))}
+                  {loading ? (
+              <Empty>
+                <Dots>{i18n._(t`Loading`)}</Dots>
+              </Empty>
+            ) : pairs?.length > 0 ? (
+              <>
+                {/* <div className="flex items-center justify-center">
+                  <ExternalLink
+                    href={"https://analytics.sushi.com/user/" + account}
+                  >
+                    Account analytics and accrued fees <span> ↗</span>
+                  </ExternalLink>
+                </div> */}
+                {pairs.map((v2Pair) => (
+                  <FullPositionCard
+                    key={v2Pair.liquidityToken.address}
+                    pair={v2Pair}
+                    stakedBalance={CurrencyAmount.fromRawAmount(v2Pair.liquidityToken, '0')}
+                  />
+                ))}
                 </>
               ) : (
                 <Empty className="flex text-lg text-center text-low-emphesis">
