@@ -37,8 +37,8 @@ export default function Borrow({ pair }: BorrowProps) {
   const { account, chainId } = useActiveWeb3React()
 
   // State
-  // const [useCoffinCollateral, setUseCoffinCollateral] = useState<boolean>(pair.collateral.coffinBalance.gt(0))
-  const [useCoffinCollateral, setUseCoffinCollateral] = useState<boolean>(false)
+  const [useCoffinCollateral, setUseCoffinCollateral] = useState<boolean>(pair.collateral.coffinBalance > 0)
+  // const [useCoffinCollateral, setUseCoffinCollateral] = useState<boolean>(false)
   const [useCoffinBorrow, setUseCoffinBorrow] = useState<boolean>(true)
   const [collateralValue, setCollateralValue] = useState('')
   const [borrowValue, setBorrowValue] = useState('')
@@ -384,7 +384,7 @@ export default function Borrow({ pair }: BorrowProps) {
       {collateralValueSet && (
         <SwapCheckbox
           trade={trade}
-          color="pink"
+          color="purple"
           swap={swap}
           setSwap={setSwap}
           title={`Swap borrowed ${pair.asset.tokenInfo.symbol} for ${pair.collateral.tokenInfo.symbol} collateral`}
@@ -408,13 +408,13 @@ export default function Borrow({ pair }: BorrowProps) {
               <Button
                 variant="outlined"
                 size="xs"
-                color="pink"
+                color="purple"
                 key={i}
                 onClick={() => {
                   onMultiply(multipler)
                   setSwap(true)
                 }}
-                className="mr-4 text-md focus:ring-pink"
+                className="mr-4 text-md focus:ring-purple"
               >
                 {multipler}x
               </Button>
@@ -454,7 +454,7 @@ export default function Borrow({ pair }: BorrowProps) {
       )}
 
       <UnderworldApproveButton
-        color="pink"
+        color="purple"
         content={(onCook: any) => (
           <TokenApproveButton value={collateralValue} token={collateralToken} needed={!useCoffinCollateral}>
             <Button onClick={() => onCook(pair, onExecute)} disabled={actionDisabled} fullWidth={true}>

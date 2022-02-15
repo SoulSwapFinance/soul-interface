@@ -22,9 +22,8 @@ export const UnderworldCollateral = ({ account }: { account: string }) => {
     <CategorySum
       title="Underworld"
       subtitle={i18n._(t`(collateral minus borrowed)`)}
-      // assetAmounts={[]}      // TODO: Change to new borrow page when ready
       assetAmounts={collateral}
-      // liabilityAmounts={borrowed}
+      liabilityAmounts={borrowed}
       route={`/borrow`}
       // route={`/portfolio/${account}/lend`}
     />

@@ -72,7 +72,6 @@ export function interestAccrue(pair: any, interest: BigNumber): string {
     }
 
   } else if (Number(pair.utilization) > Number(MAXIMUM_TARGET_UTILIZATION)) {
-    // const overFactor = BigNumber.from(
      const overFactor = Number(pair.utilization)
       - Number(MAXIMUM_TARGET_UTILIZATION)
       * Number(FACTOR_PRECISION)
@@ -82,7 +81,6 @@ export function interestAccrue(pair: any, interest: BigNumber): string {
       // console logs
       console.log('utilization:%s', pair.utilization)
       console.log('MAXIMUM_TARGET_UTILIZATION:%s', MAXIMUM_TARGET_UTILIZATION)
-      // console.log('currentInterest:%s', currentInterest)
     
     const scale = Number(INTEREST_ELASTICITY) + overFactor * overFactor * Number(pair.elapsedSeconds) / 1e16
     currentInterest = BigNumber.from(Math.floor(Number(currentInterest) * (scale) / Number(INTEREST_ELASTICITY) / 1e16))
@@ -129,13 +127,9 @@ export function addBorrowFee(amount: BigNumber): BigNumber {
 }
 
 export function getFraction({
-  // @ts-ignore TYPE NEEDS FIXING
   totalAssetBase,
-  // @ts-ignore TYPE NEEDS FIXING
   totalAssetElastic,
-  // @ts-ignore TYPE NEEDS FIXING
   totalBorrowElastic,
-  // @ts-ignore TYPE NEEDS FIXING
   token0: { totalSupplyBase, totalSupplyElastic },
 }) {
   return totalAssetBase / (Number(totalAssetElastic) + (totalBorrowElastic * totalSupplyBase) / totalSupplyElastic)
