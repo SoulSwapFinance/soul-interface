@@ -68,7 +68,7 @@ export default function Lend() {
               <div className="grid grid-flow-col grid-cols-4 gap-4 px-4 pb-4 text-sm md:grid-cols-6 lg:grid-cols-7 text-secondary">
                 <ListHeaderWithSort sort={positions} sortKey="search">
                   <>
-                    <span className="hidden md:inline-block">{i18n._(t`Your`)}</span> {i18n._(t`Positions`)}
+                    <span className="hidden md:inline-block">{i18n._(t``)}</span> {i18n._(t`Positions`)}
                   </>
                 </ListHeaderWithSort>
                 <ListHeaderWithSort className="hidden md:flex" sort={positions} sortKey="asset.tokenInfo.symbol">
