@@ -3,7 +3,8 @@ const Dashboard = () => {
       <iframe 
 			frameBorder={"none"}
     		title={"USER"}
-    		src="https://board.soulswap.finance"
+    		src="https://soulswap.hellonext.co/"
+    		// src="https://board.soulswap.finance"
     		height={"100%" }
     		width={"100%"}
     />
