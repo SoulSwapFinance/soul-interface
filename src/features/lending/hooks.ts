@@ -346,7 +346,7 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
         }
         pair.currentInterestPerYear = {
           value: pair.currentInterestPerYear,
-          string: (pair.currentInterestPerYear / 1e16).toString(),
+          string: (pair.currentInterestPerYear).toString(),
         }
         pair.health = {
           value: pair.health,
