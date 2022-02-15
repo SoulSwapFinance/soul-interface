@@ -44,7 +44,7 @@ function AppBar(): JSX.Element {
       <Popover as="nav" className="z-10 w-full bg-transparent header-border-b">
         {({ open }) => (
           <>
-            <div className="px-4 py-1">
+            <div className="md:px-4 sm:px-2 px-1 py-1">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                     <NavLink 
@@ -118,6 +118,16 @@ function AppBar(): JSX.Element {
                           className="w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
                         >
                           {i18n._(t`LEND`)}
+                        </a>
+                      </NavLink>
+                      <NavLink
+                      activeClassName="text-purple text-high-emphesis"
+                      href={'/vote'}>
+                        <a
+                          id={`claims-nav-link`}
+                          className="w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
+                        >
+                          {i18n._(t`VOTE`)}
                         </a>
                       </NavLink>
                       <NavLink 
