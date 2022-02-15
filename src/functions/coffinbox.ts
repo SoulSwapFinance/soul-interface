@@ -14,7 +14,7 @@ import { CurrencyAmount, JSBI, Rebase, Token, ZERO } from 'sdk'
 export function toAmount(rebase: Rebase, shares: BigNumber): BigNumber {
   // console.log('toAmount', token, shares)
   return shares.mulDiv(BigNumber.from(rebase.elastic || 0), BigNumber.from(rebase.base || 0))
-  // return BigNumber.from(Number(shares) * Number(rebase.elastic) / Number(rebase.base) || 0).toString()
+  // return BigNumber.from(Number(shares) * Number(rebase.elastic) / Number(rebase.base) || 0)
 }
 
 export function toShare(rebase: Rebase, amount: BigNumber): BigNumber {

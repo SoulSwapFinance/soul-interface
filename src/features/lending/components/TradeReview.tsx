@@ -34,7 +34,7 @@ function TradeReview({
         <div className="py-4 mb-4">
           <div className="flex items-center justify-between">
             <div className="flex text-lg text-secondary">
-              {i18n._(t`Minimum received`)}
+              {i18n._(t`Minimum Received`)}
               <QuestionHelper
                 text={i18n._(
                   t`Your transaction will revert if there is a large, unfavorable price movement before it is confirmed.`
@@ -54,7 +54,8 @@ function TradeReview({
               />
             </div>
             <div className="text-lg">
-              <FormattedPriceImpact priceImpact={priceImpact} />
+              {/* <FormattedPriceImpact priceImpact={priceImpact} /> */}
+              {priceImpact ? `${priceImpact.multiply(100).toSignificant(4)}%` : '-'}
             </div>
           </div>
           <div className="flex items-center justify-between">

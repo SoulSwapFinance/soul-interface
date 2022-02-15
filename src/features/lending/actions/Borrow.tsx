@@ -37,8 +37,7 @@ export default function Borrow({ pair }: BorrowProps) {
   const { account, chainId } = useActiveWeb3React()
 
   // State
-  const [useCoffinCollateral, setUseCoffinCollateral] = useState<boolean>(pair.collateral.coffinBalance > 0)
-  // const [useCoffinCollateral, setUseCoffinCollateral] = useState<boolean>(false)
+  const [useCoffinCollateral, setUseCoffinCollateral] = useState<boolean>(Number(pair.collateral.coffinBalance) > 0)
   const [useCoffinBorrow, setUseCoffinBorrow] = useState<boolean>(true)
   const [collateralValue, setCollateralValue] = useState('')
   const [borrowValue, setBorrowValue] = useState('')
@@ -50,17 +49,14 @@ export default function Borrow({ pair }: BorrowProps) {
   const collateralToken = useCurrency(pair.collateral.address) || undefined
 
   // Calculated
-  // @ts-ignore TYPE NEEDS FIXING
-  const assetNative = WNATIVE[chainId].address === pair.collateral.address
+  const assetNative = WNATIVE[chainId] === pair.collateral.address
 
-  // @ts-ignore TYPE NEEDS FIXING
   const ethBalance = useETHBalances(assetNative ? [account] : [])
 
   const collateralBalance = useCoffinCollateral
     ? pair.collateral.coffinBalance
     : assetNative
-    ? // @ts-ignore TYPE NEEDS FIXING
-      BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
+    ? BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
     : pair.collateral.balance
 
   const displayUpdateOracle = pair.currentExchangeRate.gt(0) ? updateOracle : true
@@ -75,9 +71,7 @@ export default function Borrow({ pair }: BorrowProps) {
     if (!foundTrade) return { realizedLPFee: undefined, priceImpact: undefined }
 
     const realizedLpFeePercent = computeRealizedLPFeePercent(foundTrade)
-    // @ts-ignore TYPE NEEDS FIXING
     const realizedLPFee = foundTrade.inputAmount.multiply(realizedLpFeePercent)
-    // @ts-ignore TYPE NEEDS FIXING
     const priceImpact = foundTrade.priceImpact.subtract(realizedLpFeePercent)
     return { priceImpact, realizedLPFee }
   }, [foundTrade])
@@ -144,8 +138,8 @@ export default function Borrow({ pair }: BorrowProps) {
 
   const borrowWarnings = new Warnings()
     .add(
-      nextMaxBorrowMinimum.lt(pair.currentUserBorrowAmount.value),
-      'You have surpassed your borrow limit and may be liquidated at any moment. Repay now or add collateral!',
+      Number(nextMaxBorrowMinimum) < Number(pair.currentUserBorrowAmount.value),
+      'You have surpassed your borrow limit and may be liquidated at any moment. Repay now or add collateral.',
       true,
       new Warning(
         nextMaxBorrowSafe.lt(0),
@@ -213,15 +207,15 @@ export default function Borrow({ pair }: BorrowProps) {
       nextMaxBorrowSafe.sub(borrowValue.toBigNumber(pair.asset.tokenInfo.decimals)),
       pair.asset
     )
-    transactionReview.addPercentage('Limit Used', BigNumber.from(pair.health.value), BigNumber.from(nextHealth))
-    transactionReview.addPercentage('Borrow APR', BigNumber.from(pair.interestPerYear.value), BigNumber.from(pair.currentInterestPerYear.value))
+    transactionReview.addPercentage('Limit Used', pair.health.value, nextHealth)
+    transactionReview.addPercentage('Borrow APR', pair.interestPerYear.value, pair.currentInterestPerYear.value)
   }
 
   let actionName = 'Nothing to do'
 
   if (collateralValueSet) {
     if (borrowValueSet) {
-      actionName = trade ? 'Borrow, swap and add collateral' : 'Add Collateral and borrow'
+      actionName = trade ? 'Borrow, Swap and Add Collateral' : 'Add Collateral and Borrow'
     } else {
       actionName = 'Add Collateral'
     }
@@ -311,9 +305,9 @@ export default function Borrow({ pair }: BorrowProps) {
 
     if (collateralValueSet) {
       if (borrowValueSet) {
-        summary = trade ? 'Borrow, swap and add collateral' : 'Add Collateral and borrow'
+        summary = trade ? 'Borrow, swap and add collateral' : 'Add collateral and borrow'
       } else {
-        summary = 'Add Collateral'
+        summary = 'Add collateral'
       }
     } else if (borrowValueSet) {
       summary = trade ? 'Borrow, swap and add as collateral' : 'Borrow'
@@ -379,6 +373,7 @@ export default function Borrow({ pair }: BorrowProps) {
         setUseCoffin={setUseCoffinBorrow}
         maxTitle="Max"
         max={Number(nextMaxBorrowPossible)}
+        showMax={true}
       />
 
       {collateralValueSet && (
@@ -387,7 +382,7 @@ export default function Borrow({ pair }: BorrowProps) {
           color="purple"
           swap={swap}
           setSwap={setSwap}
-          title={`Swap borrowed ${pair.asset.tokenInfo.symbol} for ${pair.collateral.tokenInfo.symbol} collateral`}
+          title={`Swap borrowed ${pair.asset.tokenInfo.symbol} for collateral.`}
           help="Swapping your borrowed tokens for collateral allows for opening long/short positions with leverage in a single transaction."
         />
       )}
@@ -414,30 +409,30 @@ export default function Borrow({ pair }: BorrowProps) {
                   onMultiply(multipler)
                   setSwap(true)
                 }}
-                className="mr-4 text-md focus:ring-purple"
+                className="text-md focus:ring-purple"
               >
                 {multipler}x
               </Button>
             ))}
-
+            </div>
             {/* <div className="mb-4">
-                                <input
-                                    type="range"
-                                    onChange={e => {
-                                        onMultiply(e.target.value)
-                                    }}
-                                    min="0"
-                                    max="2"
-                                    step="0.01"
-                                    className="w-full slider"
-                                />
-                                <div className="flex justify-between w-full px-2 text-center">
-                                    <div className="font-semibold">1x</div>
-                                    <div className="font-semibold">2x</div>
-                                    <div className="font-semibold">3x</div>
-                                </div>
-                            </div> */}
-          </div>
+              <input
+                  type="range"
+                  onChange={e => {
+                      onMultiply(e.target.value)
+                  }}
+                  min="0"
+                  max="2"
+                  step="0.01"
+                  className="w-full slider"
+                  color="purple"
+              />
+              <div className="flex justify-between w-full px-2 text-center">
+                  <div className="font-semibold">1.5x</div>
+                  <div className="font-semibold">3x</div>
+                  <div className="font-semibold">4.5x</div>
+              </div>
+          </div> */}
         </>
       )}
 

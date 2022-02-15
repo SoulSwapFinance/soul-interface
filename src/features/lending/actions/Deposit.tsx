@@ -67,8 +67,8 @@ export default function Deposit({ pair }: any): JSX.Element {
   const transactionReview = new TransactionReview()
 
   if (value && !warnings.broken) {
-    const amount = Number(value).toFixed(0)// Math.floor(Number(value)).toString()
-    const newUserAssetAmount = pair.currentUserAssetAmount.value.add(amount)
+    const amount = Number(value).toFixed(0)
+    const newUserAssetAmount = pair.currentUserAssetAmount.value.div(pair.asset.tokenInfo.decimals).add(amount.toBigNumber(pair.asset.tokenInfo.decimals))
     transactionReview.addTokenAmount(
       i18n._(t`Balance`),
       pair.currentUserAssetAmount.value,
@@ -103,7 +103,6 @@ export default function Deposit({ pair }: any): JSX.Element {
     }
     const amount = value.toBigNumber(pair.asset.tokenInfo.decimals)
 
-    // @ts-ignore TYPE NEEDS FIXING
     const deadBalance = await coffinBoxContract.balanceOf(
       pair.asset.address,
       '0x000000000000000000000000000000000000dead'
