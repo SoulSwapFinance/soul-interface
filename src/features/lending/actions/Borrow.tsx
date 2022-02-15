@@ -307,7 +307,7 @@ export default function Borrow({ pair }: BorrowProps) {
       if (borrowValueSet) {
         summary = trade ? 'Borrow, swap and add collateral' : 'Add collateral and borrow'
       } else {
-        summary = 'Add collateral'
+        summary = 'Add Collateral'
       }
     } else if (borrowValueSet) {
       summary = trade ? 'Borrow, swap and add as collateral' : 'Borrow'

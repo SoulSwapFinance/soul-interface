@@ -2,7 +2,7 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Currency, CurrencyAmount, NATIVE, ZERO } from 'sdk'
 import Typography, { TypographyVariant } from 'components/Typography'
-import { reduceBalances } from 'features/portfolio/AssetBalances/underworld/hooks' // useUnderworldPositions
+import { reduceBalances, useUnderworldPositions } from 'features/portfolio/AssetBalances/underworld/hooks'
 import SumUSDCValues from 'features/trident/SumUSDCValues'
 import { currencyFormatter } from 'functions'
 // import { useTridentLiquidityPositions } from 'services/graph'
@@ -10,23 +10,20 @@ import { useActiveWeb3React } from 'services/web3'
 import { useCoffinBalancesV2ForAccount } from 'state/coffinbox/hooks'
 import { useAllTokenBalancesWithLoadingIndicator, useCurrencyBalance } from 'state/wallet/hooks'
 import React, { FC, useMemo } from 'react'
-import { usePositions } from 'hooks/usePositions'
+import { useLiquidityPositions } from 'services/graph'
 
 export const LiquidityPositionsBalancesSum = () => {
   const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
 
   // const { data: positions } = useTridentLiquidityPositions({
-  //   chainId,
-  //   variables: { where: { user: account?.toLowerCase(), balance_gt: 0 } },
-  //   shouldFetch: !!chainId && !!account,
-  // })
-  
-  const positions = usePositions()
+  const { data: positions } = useLiquidityPositions({
+    chainId,
+    variables: { where: { user: account?.toLowerCase(), balance_gt: 0 } },
+    shouldFetch: !!chainId && !!account,
+  })
 
-  // const sum = positions?.reduce((acc, cur) => acc + cur.value, 0)
-  const sum = positions?.reduce((acc, cur) => acc + cur.amount, 0)
-
+  const sum = positions?.reduce((acc, cur) => acc + cur.value, 0)
 
   return (
     <div className="flex gap-14">
@@ -69,22 +66,23 @@ export const BalancesSum: FC<{ account: string }> = ({ account }) => {
   const { i18n } = useLingui()
   const { data: walletBalances, loading: wLoading } = useWalletBalances(account)
   const { data: coffinBalances, loading: bLoading } = useCoffinBalancesV2ForAccount(account)
-  // const { borrowed, collateral, lent } = useUnderworldPositions(account)
+  const { borrowed, collateral, lent } = useUnderworldPositions()
 
   const allAssets = useMemo(() => {
-    const combined = [...walletBalances, ...coffinBalances] // ...collateral, ...lent
+    const combined = [...walletBalances, ...coffinBalances, ...collateral, ...lent]
+    // const combined = [...walletBalances, ...coffinBalances]
     return {
       total: combined.length,
       balances: reduceBalances(combined),
     }
-  }, [coffinBalances, walletBalances]) // collateral, lent, 
+  }, [coffinBalances, walletBalances, collateral, lent])
 
   return (
     <div className="flex lg:flex-row flex-col gap-10 justify-between lg:items-end w-full">
       <div className="flex gap-10">
         <_BalancesSum
           assetAmounts={allAssets.balances}
-          // liabilityAmounts={borrowed}
+          liabilityAmounts={borrowed}
           label={i18n._(t`Net Worth`)}
           size="h3"
           loading={wLoading || bLoading}

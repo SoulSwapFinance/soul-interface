@@ -2,10 +2,11 @@ import { defaultAbiCoder } from '@ethersproject/abi'
 import { getAddress } from '@ethersproject/address'
 import { BigNumber } from '@ethersproject/bignumber'
 import { Zero } from '@ethersproject/constants'
-import { ChainId, UNDERWORLD_ADDRESS, NATIVE, Token, USD, WNATIVE_ADDRESS } from 'sdk'
-import { CHAINLINK_PRICE_FEED_MAP } from 'config/oracles/chainlink'
+import { ChainId, UNDERWORLD_ADDRESS, NATIVE, Token, USD, WNATIVE_ADDRESS, ZERO } from 'sdk'
+import { CHAINLINK_PRICE_FEED_MAP, ChainlinkPriceFeedEntry } from 'config/oracles/chainlink'
 import { Fraction } from 'entities'
 import { Feature } from 'enums'
+import { UnderworldMarket } from 'features/lending/types'
 import {
   accrue,
   accrueTotalAssetWithFee,
@@ -25,10 +26,13 @@ import {
 } from 'functions'
 import { useCoffinBoxContract, useBoringHelperContract } from 'hooks'
 import { useTokens } from 'hooks/Tokens'
+import useCoffinRebases from 'hooks/useCoffinRebases'
 import { useCoffinStrategies, useClones } from 'services/graph'
 import { useActiveWeb3React, useQueryFilter } from 'services/web3'
-import { useSingleCallResult } from 'state/multicall/hooks'
+import { NEVER_RELOAD, useSingleCallResult } from 'state/multicall/hooks'
 import { useMemo } from 'react'
+
+// import UnderworldMediumRiskLendingPair from './components/UnderworldMediumRiskLendingPair'
 
 const BLACKLISTED_TOKENS = ['0xC6d54D2f624bc83815b49d9c2203b1330B841cA0']
 
@@ -40,25 +44,35 @@ const BLACKLISTED_ORACLES = [
 
 const BLACKLISTED_PAIRS = ['0xF71e398B5CBb473a3378Bf4335256295A8eD713d']
 
+// export const useUnderworldMediumRiskLendingPositions = (account: string): UnderworldMediumRiskLendingPair[] => {
+//   const addresses = useUnderworldPairAddresses()
+//   const markets = useUnderworldMediumRiskLendingPairs(account, addresses)
+//   return markets.filter((pair: UnderworldMediumRiskLendingPair) => JSBI.greaterThan(pair.userAssetFraction, ZERO))
+// }
+
+// export const useUnderworldMediumRiskBorrowingPositions = (account: string): UnderworldMediumRiskLendingPair[] => {
+//   const addresses = useUnderworldPairAddresses()
+//   const markets = useUnderworldMediumRiskLendingPairs(account, addresses)
+//   return markets.filter(
+//     (pair: UnderworldMediumRiskLendingPair) =>
+//       JSBI.greaterThan(pair.userCollateralShare, ZERO) || JSBI.greaterThan(pair.userBorrowPart, ZERO)
+//   )
+// }
+
+// Reduce all tokens down to only those which are found in the Oracle mapping
 export function useUnderworldTokens(): { [address: string]: Token } {
   const { chainId } = useActiveWeb3React()
   const allTokens = useTokens()
   return useMemo(
     () =>
-      Object.values(allTokens).reduce((previousValue, currentValue) => {
+      Object.values(allTokens).reduce((previousValue: Record<string, Token>, currentValue: Token) => {
         if (
-          // @ts-ignore TYPE NEEDS FIXING
+          chainId &&
           CHAINLINK_PRICE_FEED_MAP?.[chainId] &&
-          // @ts-ignore TYPE NEEDS FIXING
-          Object.values(CHAINLINK_PRICE_FEED_MAP?.[chainId])?.some(
-            // @ts-ignore TYPE NEEDS FIXING
-            (value) => {
-              // @ts-ignore TYPE NEEDS FIXING
-              return currentValue.address === value.from || currentValue.address === value.to
-            }
-          )
+          Object.values(CHAINLINK_PRICE_FEED_MAP?.[chainId])?.some((value: ChainlinkPriceFeedEntry) => {
+            return currentValue.address === value.from || currentValue.address === value.to
+          })
         ) {
-          // @ts-ignore TYPE NEEDS FIXING
           previousValue[currentValue.address] = currentValue
         }
         return previousValue
@@ -70,29 +84,28 @@ export function useUnderworldTokens(): { [address: string]: Token } {
 export function useUnderworldPairAddresses(): string[] {
   const coffinBoxContract = useCoffinBoxContract()
   const { chainId } = useActiveWeb3React()
-  // const useEvents = false
-  const useEvents = chainId && chainId !== ChainId.BSC
-  // && chainId !== ChainId.MATIC && chainId !== ChainId.ARBITRUM
-  const allTokens = useUnderworldTokens()
+  const useEvents = Boolean(
+    chainId && chainId !== ChainId.BSC 
+    // && chainId !== ChainId.MATIC && chainId !== ChainId.ARBITRUM
+  )
+  const tokens = useUnderworldTokens()
   const events = useQueryFilter({
     chainId,
     contract: coffinBoxContract,
-    // @ts-ignore TYPE NEEDS FIXING
-    event: coffinBoxContract && coffinBoxContract.filters.LogDeploy(UNDERWORLD_ADDRESS[chainId]),
-    // @ts-ignore TYPE NEEDS FIXING
-    shouldFetch: useEvents && featureEnabled(Feature.UNDERWORLD, chainId),
+    event: chainId && coffinBoxContract && coffinBoxContract.filters.LogDeploy(UNDERWORLD_ADDRESS[chainId]),
+    shouldFetch: chainId && useEvents && featureEnabled(Feature.UNDERWORLD, chainId),
   })
   const clones = useClones({ chainId, shouldFetch: !useEvents })
   return (
     (
       useEvents
         ? events?.map((event) => ({
-          address:
+            address:
+              // @ts-ignore TYPE NEEDS FIXING
+              event.args.cloneAddress,
             // @ts-ignore TYPE NEEDS FIXING
-            event.args.cloneAddress,
-          // @ts-ignore TYPE NEEDS FIXING
-          data: event.args.data,
-        }))
+            data: event.args.data,
+          }))
         : clones
     )
       // @ts-ignore TYPE NEEDS FIXING
@@ -106,8 +119,7 @@ export function useUnderworldPairAddresses(): string[] {
             BLACKLISTED_TOKENS.includes(collateral) ||
             BLACKLISTED_TOKENS.includes(asset) ||
             BLACKLISTED_ORACLES.includes(oracle) ||
-            // @ts-ignore TYPE NEEDS FIXING
-            !validateChainlinkOracleData(chainId, allTokens[collateral], allTokens[asset], oracleData)
+            !validateChainlinkOracleData(chainId, tokens[collateral], tokens[asset], oracleData)
           ) {
             return previousValue
           }
@@ -119,29 +131,129 @@ export function useUnderworldPairAddresses(): string[] {
   )
 }
 
-export const useUnderworldPairs = (addresses: string[] = []) => {
-  const { account } = useActiveWeb3React()
-  return useUnderworldPairsForAccount(account, addresses)
-}
+// export function useUnderworldMediumRiskLendingPairs(
+//   account: string | null | undefined,
+//   addresses: string[] = []
+// ): UnderworldMediumRiskLendingPair[] {
+//   const { chainId } = useActiveWeb3React()
+//   const boringHelperContract = useBoringHelperContract()
+//   const tokens = useUnderworldTokens()
+//   const args = useMemo(() => [account ? account : AddressZero, addresses], [account, addresses])
+//   const { result } = useSingleCallResult(boringHelperContract, 'pollKashiPairs', args, NEVER_RELOAD)
+//   const { rebases } = useCoffinRebases(Object.values(tokens))
 
-export function useUnderworldPairsForAccount(account: string | null | undefined, addresses: string[] = []) {
-  const { chainId } = useActiveWeb3React()
+//   // TODO: for skeleton loading
+//   // const underworldRepositoryContract = useUnderworldRepositoryContract()
+//   // const callStates = useSingleContractMultipleData(kashiRepositoryContract, 'getPair', args, NEVER_RELOAD)
+
+//   return useMemo(() => {
+//     if (!chainId || !result || !rebases) {
+//       return []
+//     }
+
+//     return result?.[0].map((pair: any) => {
+//       if (!rebases[pair.collateral] || !rebases[pair.asset]) return undefined
+
+//       return new UnderworldMediumRiskLendingPair({
+//         accrueInfo: {
+//           feesEarnedFraction: JSBI.BigInt(pair.accrueInfo.feesEarnedFraction.toString()),
+//           lastAccrued: JSBI.BigInt(pair.accrueInfo.lastAccrued),
+//           interestPerSecond: JSBI.BigInt(pair.accrueInfo.interestPerSecond.toString()),
+//         },
+//         // @ts-ignore
+//         collateral: rebases[pair.collateral],
+//         // @ts-ignore
+//         asset: rebases[pair.asset],
+//         oracle: getOracle(chainId, pair.oracle, pair.oracleData),
+//         totalCollateralShare: JSBI.BigInt(pair.totalCollateralShare.toString()),
+//         totalAsset: {
+//           elastic: JSBI.BigInt(pair.totalAsset.elastic.toString()),
+//           base: JSBI.BigInt(pair.totalAsset.base.toString()),
+//         },
+//         totalBorrow: {
+//           elastic: JSBI.BigInt(pair.totalBorrow.elastic.toString()),
+//           base: JSBI.BigInt(pair.totalBorrow.base.toString()),
+//         },
+//         exchangeRate: JSBI.BigInt(pair.currentExchangeRate.toString()),
+//         oracleExchangeRate: JSBI.BigInt(pair.oracleExchangeRate.toString()),
+//         spotExchangeRate: JSBI.BigInt(pair.spotExchangeRate.toString()),
+//         userCollateralShare: JSBI.BigInt(pair.userCollateralShare.toString()),
+//         userAssetFraction: JSBI.BigInt(pair.userAssetFraction.toString()),
+//         userBorrowPart: JSBI.BigInt(pair.userBorrowPart.toString()),
+//       })
+//     })
+//   }, [chainId, result, rebases])
+// }
+
+// export function useUnderworldMediumRiskLendingPair(
+//   account: string | null | undefined,
+//   address: string
+// ): UnderworldMediumRiskLendingPair {
+//   return useUnderworldMediumRiskLendingPairs(account, [getAddress(address)])[0]
+// }
+
+export function useUnderworldPairs(addresses: string[] = []): UnderworldMarket[] {
+  const { chainId, account } = useActiveWeb3React()
 
   const boringHelperContract = useBoringHelperContract()
+
+  // @ts-ignore TYPE NEEDS FIXING
   const wnative = WNATIVE_ADDRESS[chainId]
+
+  // @ts-ignore TYPE NEEDS FIXING
   const currency: Token = USD[chainId]
 
-  const allTokens = useUnderworldTokens()
+  const tokens = useUnderworldTokens()
+
   const pollArgs = useMemo(() => [account, addresses], [account, addresses])
 
   // TODO: Replace
   // @ts-ignore TYPE NEEDS FIXING
   const pollUnderworldPairs = useSingleCallResult(boringHelperContract, 'pollKashiPairs', pollArgs, { blocksPerFetch: 0 })
-    ?.result?.[0]
+  ?.result?.[0]
+
+  // const pollUnderworldPairs: any[] = useSingleCallResult(boringHelperContract, 'pollKashiPairs', pollArgs, {
+  //   blocksPerFetch: 0,
+  // })?.result?.[0]
+
+  // const { rebases } = useCoffinRebases(Object.values(tokens))
+
+  // const entities =
+  //   chainId &&
+  //   pollUnderworldPairs?.map(
+  //     (pair: any) =>
+  //       new UnderworldMediumRiskLendingPair({
+  //         accrueInfo: {
+  //           feesEarnedFraction: JSBI.BigInt(pair.accrueInfo.feesEarnedFraction.toString()),
+  //           lastAccrued: JSBI.BigInt(pair.accrueInfo.lastAccrued),
+  //           interestPerSecond: JSBI.BigInt(pair.accrueInfo.interestPerSecond.toString()),
+  //         },
+  //         // @ts-ignore
+  //         collateral: rebases[pair.collateral],
+  //         // @ts-ignore
+  //         asset: rebases[pair.asset],
+  //         oracle: getOracle(chainId, pair.oracle.address, pair.oracleData.address),
+  //         totalCollateralShare: JSBI.BigInt(pair.totalCollateralShare.toString()),
+  //         totalAsset: {
+  //           elastic: JSBI.BigInt(pair.totalAsset.elastic.toString()),
+  //           base: JSBI.BigInt(pair.totalAsset.base.toString()),
+  //         },
+  //         totalBorrow: {
+  //           elastic: JSBI.BigInt(pair.totalBorrow.elastic.toString()),
+  //           base: JSBI.BigInt(pair.totalBorrow.base.toString()),
+  //         },
+  //         exchangeRate: JSBI.BigInt(pair.currentExchangeRate.toString()),
+  //         oracleExchangeRate: JSBI.BigInt(pair.oracleExchangeRate.toString()),
+  //         spotExchangeRate: JSBI.BigInt(pair.spotExchangeRate.toString()),
+  //         userCollateralShare: JSBI.BigInt(pair.userCollateralShare.toString()),
+  //         userAssetFraction: JSBI.BigInt(pair.userAssetFraction.toString()),
+  //         userBorrowPart: JSBI.BigInt(pair.userBorrowPart.toString()),
+  //       })
+  //   )
 
   const strategies = useCoffinStrategies({ chainId })
 
-  const tokenAddresses = Object.keys(allTokens)
+  const tokenAddresses = Object.keys(tokens)
 
   const getBalancesArgs = useMemo(() => [account, tokenAddresses], [account, tokenAddresses])
 
@@ -158,7 +270,7 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
   )
 
   // TODO: Disgusting but until final refactor this will have to remain...
-  const pairTokens = Object.values(allTokens)
+  const pairTokens = Object.values(tokens)
     .filter((token) => balances?.[token.address])
     .reduce((previousValue, currentValue) => {
       const balance = balances[currentValue.address]
@@ -181,7 +293,7 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
       }
     }, {})
 
-  return useMemo(() => {
+  const pairs = useMemo<any[]>(() => {
     if (!addresses || !tokenAddresses || !pollUnderworldPairs) {
       return []
     }
@@ -244,9 +356,11 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
 
         // Interest per year received by lenders as of now
         pair.currentSupplyAPR = takeFee(
-          BigNumber.from(pair.currentInterestPerYear
-            * Number(pair.utilization) / 1e18)
-        )
+          BigNumber.from(pair.currentInterestPerYear)
+            .mul(pair.utilization
+            .div(e10(18)))
+          )
+
         // The user's amount of collateral (stable, doesn't accrue)
         pair.userCollateralAmount = easyAmount(toAmount(pair.collateral, pair.userCollateralShare), pair.collateral)
 
@@ -370,6 +484,9 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
       return previousValue
     }, [])
   }, [addresses, tokenAddresses, pollUnderworldPairs, chainId, pairTokens, balances])
+
+  // console.log(entities?.[0], pairs?.[0])
+  return pairs
 
   //   return useMemo(
   //     () =>
