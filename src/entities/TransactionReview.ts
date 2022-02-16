@@ -50,8 +50,8 @@ export class TransactionReview extends Array<Line> {
     this.add(
       name,
       formatPercent(from.toFixed(16)),
-      formatPercent(to),
-      from.eq(to) ? Direction.FLAT : from < to ? Direction.UP : Direction.DOWN
+      formatPercent(to.toFixed(16)),
+      from.eq(to) ? Direction.FLAT : from.gt(to) ? Direction.UP : Direction.DOWN
     )
     return this
   }

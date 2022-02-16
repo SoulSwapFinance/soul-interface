@@ -71,7 +71,7 @@ export default function Borrow() {
                   sortKey="search"
                 >
                   <>
-                    <span className="hidden md:inline-block">{i18n._(t`Your`)}</span> {i18n._(t`Positions`)}
+                    <span className="hidden md:inline-block">{i18n._(t``)}</span> {i18n._(t`Positions`)}
                   </>
                 </ListHeaderWithSort>
                 <ListHeaderWithSort
@@ -149,7 +149,7 @@ export default function Borrow() {
                             </div>
                             <div className="hidden text-right md:block">
                               <div>
-                                {formatNumber(pair.userCollateralAmount.string, false)}{' '}
+                                {formatNumber(pair?.userCollateralAmount.string, false)}{' '}
                                 {pair.collateral.tokenInfo.symbol}
                               </div>
                               <div className="text-sm text-secondary">
