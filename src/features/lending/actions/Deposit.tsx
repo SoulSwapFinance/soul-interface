@@ -56,13 +56,13 @@ export default function Deposit({ pair }: any): JSX.Element {
 
   const warnings = new Warnings()
 
-  warnings.add(
-    balance?.lt(value.toBigNumber(pair.asset.tokenInfo.decimals)),
-    i18n._(
-      t`Please make sure your ${useCoffin ? 'CoffinBox' : 'wallet'} balance is sufficient to deposit and then try again.`
-    ),
-    true
-  )
+  // warnings.add(
+  //   balance?.lt(value.toBigNumber(pair.asset.tokenInfo.decimals)),
+  //   i18n._(
+  //     t`Please make sure your ${useCoffin ? 'CoffinBox' : 'wallet'} balance is sufficient to deposit and then try again.`
+  //   ),
+  //   true
+  // )
 
   const transactionReview = new TransactionReview()
 
@@ -79,7 +79,7 @@ export default function Deposit({ pair }: any): JSX.Element {
     pair.currentUserAssetAmount.value, 
     newUserAssetAmount, 
     pair.asset)
-    const newUtilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.add(amount))
+    const newUtilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value).add(amount)
     transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
     if (pair.currentExchangeRate.isZero()) {
       transactionReview.add(

@@ -13,13 +13,16 @@ import { CurrencyAmount, JSBI, Rebase, Token, ZERO } from 'sdk'
 
 export function toAmount(rebase: Rebase, shares: BigNumber): BigNumber {
   // console.log('toAmount', token, shares)
-  return shares.mulDiv(BigNumber.from(rebase.elastic || 0), BigNumber.from(rebase.base || 0))
-  // return BigNumber.from(Number(shares) * Number(rebase.elastic) / Number(rebase.base) || 0)
+  return shares.mul(BigNumber.from(Number(rebase.elastic) / Number(rebase.base) || 0))
+  // return shares.mulDiv(BigNumber.from(rebase.elastic || 0), BigNumber.from(rebase.base || 0))
 }
 
 export function toShare(rebase: Rebase, amount: BigNumber): BigNumber {
   // console.log('toShare', token, shares)
   return BigNumber.from(Number(amount) * Number(rebase.base) / Number(rebase.elastic) || 0)
+  // return BigNumber.from(amount)?.mul(Number(rebase.base) / (Number(rebase.elastic)) || BigNumber.from(0))
+  // return BigNumber.from(Number(amount) * Number(rebase.base) / Number(rebase.elastic) || 0)
+
 }
 
 export function toAmountJSBI(token: Rebase, shares: JSBI): JSBI {

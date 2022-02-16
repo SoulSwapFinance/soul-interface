@@ -84,7 +84,7 @@ export default function Pair() {
           <div>
             <div className="text-lg text-secondary">Lent</div>
             <div className="text-2xl text-blue">
-              {formatNumber(pair.currentUserAssetAmount.string)} {pair.asset.tokenInfo.symbol}
+              {formatNumber(pair.currentUserLentAmount.string)} {pair.asset.tokenInfo.symbol}
             </div>
             
             <div className="text-lg text-high-emphesis">{formatNumber(Number(pair.currentUserAssetAmount.usd), true)}</div>
@@ -162,7 +162,7 @@ const PairLayout = ({ children }) => {
             <div className="flex justify-between">
               <div className="text-lg text-secondary">{`APR`}</div>
               <div className="flex items-center">
-              <div className="text-lg text-high-emphesis">{(`${pair?.currentSupplyAPR.string}%`)}</div>
+              <div className="text-lg text-high-emphesis">{formatPercent(pair.currentSupplyAPR.string)}</div>
               </div>
             </div>
 

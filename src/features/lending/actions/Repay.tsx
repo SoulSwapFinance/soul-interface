@@ -151,7 +151,7 @@ export default function Repay({ pair }: RepayProps) {
       nextMaxBorrowSafe.add(displayRepayValue.toBigNumber(pair.asset.tokenInfo.decimals)),
       pair.asset
     )
-    transactionReview.addPercentage('Health', pair.health.value, nextHealth)
+    transactionReview.addPercentage('Health', BigNumber.from(pair.health.value), BigNumber.from(nextHealth))
   }
 
   const warnings = new Warnings()
@@ -200,7 +200,7 @@ export default function Repay({ pair }: RepayProps) {
 
   const priceImpactSeverity = warningSeverity(priceImpact)
 
-  let actionName = 'Nothing to do'
+  let actionName = 'Nothing Borrowed'
 
   if (removeValueSet) {
     if (repayValueSet) {
