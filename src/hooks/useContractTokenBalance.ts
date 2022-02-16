@@ -1,14 +1,13 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { Contract } from '@ethersproject/contracts'
-import { WNATIVE_ADDRESS } from 'sdk'
+import { WNATIVE } from 'sdk'
 import ERC20_ABI from 'constants/abis/erc20.json'
-import { isAddress } from 'functions/validate'
+import { isAddress } from 'functions'
+import { useContract } from 'hooks/useContract'
+import useTransactionStatus from 'hooks/useTransactionStatus'
 import { useActiveWeb3React } from 'services/web3'
 import { useBlockNumber } from 'state/application/hooks'
 import { useCallback, useEffect, useState } from 'react'
-
-import { useContract } from './useContract'
-import useTransactionStatus from './useTransactionStatus'
 
 export interface BalanceProps {
   value: BigNumber
@@ -18,12 +17,12 @@ export interface BalanceProps {
 // Do NOT use this hook, use the generic wallet hook for useTokenBalance
 // Prefer import { useTokenBalance } from 'state/wallet/hooks' and use appropriately.
 
-function useTokenBalance(tokenAddress: string): BalanceProps {
+function useContractTokenBalance(tokenAddress: string, contractAddress: string): BalanceProps {
   const [balance, setBalance] = useState<BalanceProps>({
     value: BigNumber.from(0),
     decimals: 18,
   })
-  const { account, chainId, library } = useActiveWeb3React()
+  const { chainId, library } = useActiveWeb3React()
   const currentBlockNumber = useBlockNumber()
   const currentTransactionStatus = useTransactionStatus()
   const addressCheckSum = isAddress(tokenAddress)
@@ -31,8 +30,8 @@ function useTokenBalance(tokenAddress: string): BalanceProps {
   const fetchBalance = useCallback(async () => {
     async function getBalance(contract: Contract | null, owner: string | null | undefined): Promise<BalanceProps> {
       try {
-        if (account && chainId && contract?.address === WNATIVE_ADDRESS[chainId]) {
-          const ethBalance = await library?.getBalance(account)
+        if (contractAddress && chainId && contract?.address === WNATIVE[chainId].address) {
+          const ethBalance = await library?.getBalance(contractAddress)
           return { value: BigNumber.from(ethBalance), decimals: 18 }
         }
 
@@ -45,17 +44,25 @@ function useTokenBalance(tokenAddress: string): BalanceProps {
         return { value: BigNumber.from(0), decimals: 18 }
       }
     }
-    const balance = await getBalance(tokenContract, account)
+    const balance = await getBalance(tokenContract, contractAddress)
     setBalance(balance)
-  }, [account, chainId, library, tokenContract])
+  }, [contractAddress, chainId, library, tokenContract])
 
   useEffect(() => {
-    if (account && tokenContract) {
+    if (contractAddress && tokenContract) {
       fetchBalance()
     }
-  }, [account, setBalance, currentBlockNumber, currentTransactionStatus, tokenAddress, fetchBalance, tokenContract])
+  }, [
+    contractAddress,
+    setBalance,
+    currentBlockNumber,
+    currentTransactionStatus,
+    tokenAddress,
+    fetchBalance,
+    tokenContract,
+  ])
 
   return balance
 }
 
-export default useTokenBalance
+export default useContractTokenBalance

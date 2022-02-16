@@ -2,7 +2,7 @@ import { defaultAbiCoder } from '@ethersproject/abi'
 import { BigNumber } from '@ethersproject/bignumber'
 import { hexConcat, hexlify } from '@ethersproject/bytes'
 import { AddressZero } from '@ethersproject/constants'
-import { Percent, SOULSWAP_MULTISWAPPER_ADDRESS, WNATIVE } from 'sdk'
+import { SOULSWAP_MULTISWAPPER_ADDRESS, WNATIVE } from 'sdk'
 import { Button } from 'components/Button'
 import UnderworldCooker from 'entities/UnderworldCooker'
 import { TransactionReview } from 'entities/TransactionReview'
@@ -14,7 +14,9 @@ import { computeRealizedLPFeePercent, warningSeverity } from 'functions/prices'
 import { useCurrency } from 'hooks/Tokens'
 import { useV2TradeExactIn } from 'hooks/useV2Trades'
 import { useActiveWeb3React } from 'services/web3'
-import { useExpertModeManager, useUserSlippageToleranceWithDefault } from 'state/user/hooks'
+import { useAppSelector } from 'state/hooks'
+import { selectSlippage } from 'state/slippage/slippageSlice'
+import { useExpertModeManager } from 'state/user/hooks'
 import { useETHBalances } from 'state/wallet/hooks'
 import React, { useMemo, useState } from 'react'
 
@@ -29,16 +31,14 @@ interface BorrowProps {
   pair: any
 }
 
-const DEFAULT_BORROW_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
-
 const DEFAULT_UPDATE_ORACLE = true
 
 export default function Borrow({ pair }: BorrowProps) {
   const { account, chainId } = useActiveWeb3React()
 
   // State
-  const [useUnderworldCollateral, setUseUnderworldCollateral] = useState<boolean>(pair.collateral.coffinBalance > 0)
-  const [useUnderworldBorrow, setUseUnderworldBorrow] = useState<boolean>(true)
+  const [useCoffinCollateral, setUseCoffinCollateral] = useState<boolean>(Number(pair.collateral.coffinBalance) > 0)
+  const [useCoffinBorrow, setUseCoffinBorrow] = useState<boolean>(true)
   const [collateralValue, setCollateralValue] = useState('')
   const [borrowValue, setBorrowValue] = useState('')
   const [swapBorrowValue, setSwapBorrowValue] = useState('')
@@ -49,25 +49,19 @@ export default function Borrow({ pair }: BorrowProps) {
   const collateralToken = useCurrency(pair.collateral.address) || undefined
 
   // Calculated
-  // @ts-ignore TYPE NEEDS FIXING
-  const assetNative = WNATIVE[chainId].address === pair.collateral.address
+  const assetNative = WNATIVE[chainId] === pair.collateral.address
 
-  // @ts-ignore TYPE NEEDS FIXING
   const ethBalance = useETHBalances(assetNative ? [account] : [])
 
-  const collateralBalance = useUnderworldCollateral
-    ? pair.collateral.coffinBalance
+  const collateralBalance = useCoffinCollateral
+    ? BigNumber.from(pair.collateral.coffinBalance?.quotient.toString() || 0)
     : assetNative
-    ? // @ts-ignore TYPE NEEDS FIXING
-      BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
+    ? BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
     : pair.collateral.balance
 
   const displayUpdateOracle = pair.currentExchangeRate.gt(0) ? updateOracle : true
 
-  // Swap
-  // const [allowedSlippage] = useUserSlippageTolerance(); // 10 = 0.1%
-
-  const allowedSlippage = useUserSlippageToleranceWithDefault(DEFAULT_BORROW_SLIPPAGE_TOLERANCE) // custom from users
+  const allowedSlippage = useAppSelector(selectSlippage)
 
   const parsedAmount = tryParseAmount(borrowValue, assetToken)
 
@@ -94,48 +88,35 @@ export default function Borrow({ pair }: BorrowProps) {
   const swapCollateral = collateralValue.toBigNumber(pair.collateral.tokenInfo.decimals)
 
   const nextUserCollateralValue = pair.userCollateralAmount.value
-    + (collateralValue.toBigNumber(pair.collateral.tokenInfo.decimals))
-    + (extraCollateral)
+    .add(collateralValue.toBigNumber(pair.collateral.tokenInfo.decimals))
+    .add(extraCollateral)
 
   // Calculate max borrow
-  const nextMaxBorrowableOracle 
-    = nextUserCollateralValue
-    * (1e16 * 75) 
-    / pair.oracleExchangeRate
+  const nextMaxBorrowableOracle = nextUserCollateralValue.mulDiv(e10(16).mul('75'), pair.oracleExchangeRate)
 
-  const nextMaxBorrowableSpot 
-    = nextUserCollateralValue
-    * (1e16 * 75)
-    / pair.spotExchangeRate
+  const nextMaxBorrowableSpot = nextUserCollateralValue.mulDiv(e10(16).mul('75'), pair.spotExchangeRate)
 
-  const nextMaxBorrowableStored 
-    = nextUserCollateralValue
-    * (1e16 * 75)
-    / Number(displayUpdateOracle) ? pair.oracleExchangeRate : pair.currentExchangeRate
+  const nextMaxBorrowableStored = nextUserCollateralValue.mulDiv(
+    e10(16).mul('75'),
+    displayUpdateOracle ? pair.oracleExchangeRate : pair.currentExchangeRate
+  )
 
-  const nextMaxBorrowMinimum 
-    // = minimum(nextMaxBorrowableOracle, nextMaxBorrowableSpot, nextMaxBorrowableStored)
-    = nextMaxBorrowableOracle < nextMaxBorrowableSpot
-      && nextMaxBorrowableOracle < nextMaxBorrowableStored ?
-      nextMaxBorrowableOracle 
-      : nextMaxBorrowableSpot < nextMaxBorrowableOracle
-      && nextMaxBorrowableSpot < nextMaxBorrowableStored ?
-      nextMaxBorrowableSpot 
-      : nextMaxBorrowableStored
-
+  const nextMaxBorrowMinimum = minimum(nextMaxBorrowableOracle, nextMaxBorrowableSpot, nextMaxBorrowableStored)
 
   const nextMaxBorrowSafe = nextMaxBorrowMinimum.mulDiv('95', '100').sub(pair.currentUserBorrowAmount.value)
 
-  const nextMaxBorrowPossible = 
-    // maximum(minimum(nextMaxBorrowSafe, pair.maxAssetAvailable), ZERO)
-    nextMaxBorrowSafe < pair.maxAssetAvailable
-    && nextMaxBorrowSafe > 0 ? nextMaxBorrowSafe
-    : pair.maxAssetAvailable > 0 ? pair.maxAssetAvailable : 0
+  const nextMaxBorrowPossible = maximum(minimum(nextMaxBorrowSafe, pair.maxAssetAvailable), ZERO)
 
-  const maxBorrow = nextMaxBorrowPossible.toFixed(pair.asset.tokenInfo.decimals)
+  const maxBorrow = nextMaxBorrowPossible //.toFixed(pair.asset.tokenInfo.decimals)
 
   const nextBorrowValue = pair.currentUserBorrowAmount.value.add(borrowValue.toBigNumber(pair.asset.tokenInfo.decimals))
   const nextHealth = nextBorrowValue.mulDiv('1000000000000000000', nextMaxBorrowMinimum)
+
+  // console logs
+  console.log('nextUserCollateralValue:%s', Number(nextUserCollateralValue))
+  // console.log('nextMaxBorrowableOracle:%s', nextMaxBorrowableOracle)
+  console.log('nextMaxBorrowMinimum:%s', Number(nextMaxBorrowMinimum))
+  // console.log('nextMaxBorrowableSpot:%s', nextMaxBorrowableSpot)
 
   const collateralValueSet = !collateralValue.toBigNumber(pair.collateral.tokenInfo.decimals).isZero()
 
@@ -156,38 +137,42 @@ export default function Borrow({ pair }: BorrowProps) {
   collateralWarnings.add(
     collateralBalance?.lt(collateralValue.toBigNumber(pair.collateral.tokenInfo.decimals)),
     `Please make sure your ${
-      useUnderworldCollateral ? 'UnderworldBox' : 'wallet'
+      useCoffinCollateral ? 'coffin' : 'wallet'
     } balance is sufficient to deposit and then try again.`,
     true
   )
 
-  const borrowWarnings = new Warnings()
-    .add(
-      nextMaxBorrowMinimum.lt(pair.currentUserBorrowAmount.value),
-      'You have surpassed your borrow limit and may be liquidated at any moment. Repay now or add collateral!',
-      true,
-      new Warning(
-        nextMaxBorrowSafe.lt(0),
-        'You have surpassed your borrow limit and assets are at a high risk of liquidation.',
-        true,
-        new Warning(
-          borrowValue.length > 0 && borrowAmount.gt(nextMaxBorrowMinimum.sub(pair.currentUserBorrowAmount.value)),
-          "You don't have enough collateral to borrow this amount.",
-          true,
-          new Warning(
-            borrowValue.length > 0 && borrowAmount.gt(nextMaxBorrowSafe),
-            'You will surpass your borrow limit and assets will be at a high risk of liquidation.',
-            false
-          )
-        )
-      )
-    )
-    .add(
-      borrowValue.length > 0 && pair.maxAssetAvailable < borrowValue,
-      'Not enough liquidity in this pair.',
-      true
-    )
-
+  // const borrowWarnings = new Warnings()
+  //   .add(
+  //     Number(nextMaxBorrowMinimum) < Number(pair.currentUserBorrowAmount.value),
+  //     'You have surpassed your borrow limit and may be liquidated at any moment. Repay now or add collateral.',
+  //     true,
+  //     new Warning(
+  //       nextMaxBorrowSafe.lt(0),
+  //       'You have surpassed your borrow limit and assets are at a high risk of liquidation.',
+  //       true,
+  //       new Warning(
+  //         borrowValue.length > 0 && borrowAmount.gt(nextMaxBorrowMinimum.sub(pair.currentUserBorrowAmount.value)),
+  //         "You don't have enough collateral to borrow this amount.",
+  //         true,
+  //         new Warning(
+  //           borrowValue.length > 0 && borrowAmount.gt(nextMaxBorrowSafe),
+  //           'You will surpass your borrow limit and assets will be at a high risk of liquidation.',
+  //           false
+  //         )
+  //       )
+  //     )
+  //   )
+  //   .add(
+  //     borrowValue.length > 0 && pair.maxAssetAvailable.lt(borrowValue.toBigNumber(pair.asset.tokenInfo.decimals)),
+  //     'Not enough liquidity in this pair.',
+  //     true
+  //   )
+      // console.log('borrowValue:%s', borrowValue)
+      // console.log('borrowAmount:%s', Number(borrowAmount) / 1e18)
+      // console.log('nextMaxBorrowMinimum:%s', Number(nextMaxBorrowMinimum) / 1e18)
+      // console.log('maxAvailable:%s', Number(pair.maxAssetAvailable))
+      // console.log('userBorrowAmount:%s', Number(pair.currentUserBorrowAmount.value) / 1e18)
   // console.log('Oracle Discrepancy', {
   //     name: pair.asset.tokenInfo.symbol + '-' + pair.collateral.tokenInfo.symbol,
   //     borrowValueSet: borrowValueSet,
@@ -204,18 +189,19 @@ export default function Borrow({ pair }: BorrowProps) {
   // })
 
   const transactionReview = new TransactionReview()
-  if ((collateralValue || borrowValue) && !collateralWarnings.broken && (!borrowWarnings.broken || !borrowValue)) {
+  if ((collateralValue || borrowValue) && !collateralWarnings.broken) {
+  //&& (!borrowWarnings.broken || !borrowValue)) {
     if (collateralValueSet) {
       transactionReview.addTokenAmount(
         'Collateral',
-        pair.userCollateralAmount.value,
-        nextUserCollateralValue,
+        BigNumber.from(pair.userCollateralAmount.value),
+        BigNumber.from(nextUserCollateralValue),
         pair.collateral
       )
       transactionReview.addUSD(
         'Collateral USD',
-        pair.userCollateralAmount.value,
-        nextUserCollateralValue,
+        BigNumber.from(pair.userCollateralAmount.value),
+        BigNumber.from(nextUserCollateralValue),
         pair.collateral
       )
     }
@@ -228,19 +214,19 @@ export default function Borrow({ pair }: BorrowProps) {
     }
     transactionReview.addTokenAmount(
       'Borrow Limit',
-      pair.maxBorrowable.safe.value,
+      maximum(BigNumber.from(pair.maxBorrowable.safe.value), BigNumber.from(0)),
       nextMaxBorrowSafe.sub(borrowValue.toBigNumber(pair.asset.tokenInfo.decimals)),
       pair.asset
     )
-    transactionReview.addPercentage('Limit Used', pair.health.value, nextHealth)
-    transactionReview.addPercentage('Borrow APR', pair.interestPerYear.value, pair.currentInterestPerYear.value)
+    transactionReview.addPercentage('Limit Used', BigNumber.from(pair.health.value), BigNumber.from(nextHealth))
+    transactionReview.addPercentage('Borrow APR', BigNumber.from(pair.interestPerYear.value), BigNumber.from(pair.currentInterestPerYear.value))
   }
 
-  let actionName = 'Enter Amount'
+  let actionName = 'Enter Amounts'
 
   if (collateralValueSet) {
     if (borrowValueSet) {
-      actionName = trade ? 'Borrow, swap and add collateral' : 'Add collateral and borrow'
+      actionName = trade ? 'Borrow, Swap and Add Collateral' : 'Add Collateral and Borrow'
     } else {
       actionName = 'Add Collateral'
     }
@@ -254,13 +240,18 @@ export default function Borrow({ pair }: BorrowProps) {
     actionName = actionName + ' anyway'
   }
 
-  const actionDisabled =
-    (Number(collateralValue) <= 0 &&
-      Number(borrowValue) <= 0) ||
-    collateralWarnings.broken ||
-    (borrowValue.length > 0 && borrowWarnings.broken) ||
-    (swap && priceImpactSeverity > 3 && !isExpertMode) ||
-    (pair.userCollateralAmount.value == 0 && !collateralValueSet)
+  const actionDisabled = false
+  // (Number(collateralValue) <= 0 && Number(borrowValue) <= 0) ||
+  // collateralWarnings.broken || (Number(borrowValue) > 0 && borrowWarnings.broken) ||
+  // (swap && priceImpactSeverity > 3 && !isExpertMode) ||
+  // (Number(pair.userCollateralAmount.value) == 0 && !collateralValueSet)
+
+    // (collateralValue.toBigNumber(pair.collateral.tokenInfo.decimals).lte(0) &&
+    //   borrowValue.toBigNumber(pair.asset.tokenInfo.decimals).lte(0)) ||
+    // collateralWarnings.broken ||
+    // (borrowValue.length > 0 && borrowWarnings.broken) ||
+    // (swap && priceImpactSeverity > 3 && !isExpertMode) ||
+    // (pair.userCollateralAmount.value.isZero() && !collateralValueSet)
 
   // Handlers
   async function onExecute(cooker: UnderworldCooker): Promise<string> {
@@ -271,14 +262,14 @@ export default function Borrow({ pair }: BorrowProps) {
         cooker.updateExchangeRate(true, ZERO, ZERO)
       }
 
-      if (swap && !useUnderworldCollateral) {
+      if (swap && !useCoffinCollateral) {
         cooker.coffinDepositCollateral(collateralValue.toBigNumber(pair.collateral.tokenInfo.decimals))
       }
 
       cooker.borrow(
         borrowValue.toBigNumber(pair.asset.tokenInfo.decimals),
-        swap || useUnderworldBorrow,
-        swap ? SOULSWAP_MULTISWAPPER_ADDRESS[chainId || 1] : ''
+        swap || useCoffinBorrow,
+        swap ? SOULSWAP_MULTISWAPPER_ADDRESS[chainId || 250] : ''
       )
     }
     if (borrowValueSet && trade) {
@@ -295,8 +286,7 @@ export default function Borrow({ pair }: BorrowProps) {
         path.length > 2 ? path[1] : AddressZero,
         path.length > 3 ? path[2] : AddressZero,
         account,
-        toShare(pair.collateral, 
-          BigNumber.from(collateralValue)),
+        toShare(pair.collateral, collateralValue.toBigNumber(pair.collateral.tokenInfo.decimals)),
         borrowValue.toBigNumber(pair.asset.tokenInfo.decimals),
       ])
 
@@ -309,13 +299,12 @@ export default function Borrow({ pair }: BorrowProps) {
           path.length > 2 ? path[1] : AddressZero,
           path.length > 3 ? path[2] : AddressZero,
           account,
-          toShare(pair.collateral, 
-            BigNumber.from(collateralValue)),
+          toShare(pair.collateral, collateralValue.toBigNumber(pair.collateral.tokenInfo.decimals)),
         ]
       )
 
       cooker.action(
-        SOULSWAP_MULTISWAPPER_ADDRESS[chainId || 250],
+        SOULSWAP_MULTISWAPPER_ADDRESS[chainId || 1],
         ZERO,
         hexConcat([hexlify('0x3087d742'), data]),
         false,
@@ -325,8 +314,8 @@ export default function Borrow({ pair }: BorrowProps) {
     }
     if (collateralValueSet) {
       cooker.addCollateral(
-        swap ? BigNumber.from(-1) : BigNumber.from(collateralValue),
-        useUnderworldCollateral || swap
+        swap ? BigNumber.from(-1) : collateralValue.toBigNumber(pair.collateral.tokenInfo.decimals),
+        useCoffinCollateral || swap
       )
     }
 
@@ -334,7 +323,7 @@ export default function Borrow({ pair }: BorrowProps) {
       if (borrowValueSet) {
         summary = trade ? 'Borrow, swap and add collateral' : 'Add collateral and borrow'
       } else {
-        summary = 'Add collateral'
+        summary = 'Add Collateral'
       }
     } else if (borrowValueSet) {
       summary = trade ? 'Borrow, swap and add as collateral' : 'Borrow'
@@ -353,18 +342,18 @@ export default function Borrow({ pair }: BorrowProps) {
 
     const multipliedBorrow = multipliedCollateral.mulDiv(e10(16).mul('75'), pair.currentExchangeRate)
 
-    console.log({
-        original: swapCollateral.toFixed(pair.collateral.tokenInfo.decimals),
-        multiplied: swapCollateral
-            .add(
-                swapCollateral.mulDiv(
-                    multiplier.toBigNumber(pair.collateral.tokenInfo.decimals),
-                    '1'.toBigNumber(pair.collateral.tokenInfo.decimals)
-                )
-            )
-            .toFixed(pair.collateral.tokenInfo.decimals),
-        borrow: multipliedBorrow.toFixed(pair.asset.tokenInfo.decimals),
-    })
+    // console.log({
+    //     original: swapCollateral.toFixed(pair.collateral.tokenInfo.decimals),
+    //     multiplied: swapCollateral
+    //         .add(
+    //             swapCollateral.mulDiv(
+    //                 multiplier.toBigNumber(pair.collateral.tokenInfo.decimals),
+    //                 '1'.toBigNumber(pair.collateral.tokenInfo.decimals)
+    //             )
+    //         )
+    //         .toFixed(pair.collateral.tokenInfo.decimals),
+    //     borrow: multipliedBorrow.toFixed(pair.asset.tokenInfo.decimals),
+    // })
 
     // console.log('multipliedBorrow:', multipliedBorrow)
 
@@ -382,8 +371,8 @@ export default function Borrow({ pair }: BorrowProps) {
         setValue={setCollateralValue}
         useCoffinTitleDirection="down"
         useCoffinTitle={`Add ${pair.collateral.tokenInfo.symbol} collateral from`}
-        useCoffin={useUnderworldCollateral}
-        setUseCoffin={setUseUnderworldCollateral}
+        useCoffin={useCoffinCollateral}
+        setUseCoffin={setUseCoffinCollateral}
         maxTitle="Balance"
         max={collateralBalance}
         showMax={true}
@@ -396,10 +385,11 @@ export default function Borrow({ pair }: BorrowProps) {
         setValue={setBorrowValue}
         useCoffinTitleDirection="up"
         useCoffinTitle={`Borrow ${pair.asset.tokenInfo.symbol} to`}
-        useCoffin={useUnderworldBorrow}
-        setUseCoffin={setUseUnderworldBorrow}
+        useCoffin={useCoffinBorrow}
+        setUseCoffin={setUseCoffinBorrow}
         maxTitle="Max"
-        max={nextMaxBorrowPossible}
+        max={Number(nextMaxBorrowPossible)}
+        showMax={true}
       />
 
       {collateralValueSet && (
@@ -408,7 +398,7 @@ export default function Borrow({ pair }: BorrowProps) {
           color="purple"
           swap={swap}
           setSwap={setSwap}
-          title={`Swap borrowed ${pair.asset.tokenInfo.symbol} for ${pair.collateral.tokenInfo.symbol} collateral`}
+          title={`Swap borrowed ${pair.asset.tokenInfo.symbol} for collateral.`}
           help="Swapping your borrowed tokens for collateral allows for opening long/short positions with leverage in a single transaction."
         />
       )}
@@ -435,41 +425,41 @@ export default function Borrow({ pair }: BorrowProps) {
                   onMultiply(multipler)
                   setSwap(true)
                 }}
-                className="mr-4 text-md focus:ring-purple"
+                className="text-md focus:ring-purple"
               >
                 {multipler}x
               </Button>
             ))}
-
+            </div>
             {/* <div className="mb-4">
-                                <input
-                                    type="range"
-                                    onChange={e => {
-                                        onMultiply(e.target.value)
-                                    }}
-                                    min="0"
-                                    max="2"
-                                    step="0.01"
-                                    className="w-full slider"
-                                />
-                                <div className="flex justify-between w-full px-2 text-center">
-                                    <div className="font-semibold">1x</div>
-                                    <div className="font-semibold">2x</div>
-                                    <div className="font-semibold">3x</div>
-                                </div>
-                            </div> */}
-          </div>
+              <input
+                  type="range"
+                  onChange={e => {
+                      onMultiply(e.target.value)
+                  }}
+                  min="0"
+                  max="2"
+                  step="0.01"
+                  className="w-full slider"
+                  color="purple"
+              />
+              <div className="flex justify-between w-full px-2 text-center">
+                  <div className="font-semibold">1.5x</div>
+                  <div className="font-semibold">3x</div>
+                  <div className="font-semibold">4.5x</div>
+              </div>
+          </div> */}
         </>
       )}
 
-      <WarningsView warnings={collateralWarnings}></WarningsView>
+      {/* <WarningsView warnings={collateralWarnings}></WarningsView> */}
 
-      <WarningsView warnings={borrowWarnings}></WarningsView>
+      {/* <WarningsView warnings={borrowWarnings}></WarningsView> */}
 
       {swap && trade && <TradeReview trade={trade} allowedSlippage={allowedSlippage} />}
 
       {(collateralValueSet ||
-        (borrowValueSet && pair.userCollateralAmount.value != 0) ||
+        (borrowValueSet && !pair.userCollateralAmount.value.isZero()) ||
         (swap && (priceImpactSeverity < 3 || isExpertMode))) && (
         <TransactionReviewView transactionReview={transactionReview} />
       )}
@@ -477,7 +467,7 @@ export default function Borrow({ pair }: BorrowProps) {
       <UnderworldApproveButton
         color="purple"
         content={(onCook: any) => (
-          <TokenApproveButton value={collateralValue} token={collateralToken} needed={!useUnderworldCollateral}>
+          <TokenApproveButton value={collateralValue} token={collateralToken} needed={!useCoffinCollateral}>
             <Button onClick={() => onCook(pair, onExecute)} disabled={actionDisabled} fullWidth={true}>
               {actionName}
             </Button>

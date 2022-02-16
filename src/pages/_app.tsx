@@ -9,6 +9,7 @@ import Dots from 'components/Dots'
 import Portals from 'components/Portals'
 import { SyncWithRedux } from 'components/SyncWithRedux'
 import Web3ReactManager from 'components/Web3ReactManager'
+// import { MultichainExploitAlertModal } from 'features/user/MultichainExploitAlertModal'
 import getLibrary from 'functions/getLibrary'
 import { exception, GOOGLE_ANALYTICS_TRACKING_ID, pageview } from 'functions/gtag'
 import DefaultLayout from 'layouts/Default'
@@ -31,12 +32,14 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 const Web3ProviderNetwork = dynamic(() => import('../components/Web3ProviderNetwork'), { ssr: false })
 
+// const PersistGate = dynamic(() => import('redux-persist/integration/react'), { ssr: false })
+
 if (typeof window !== 'undefined' && !!window.ethereum) {
   window.ethereum.autoRefreshOnNetworkChange = false
 }
 
 // @ts-ignore TYPE NEEDS FIXING
-function MyApp({ Component, pageProps, fallback }) {
+function MyApp({ Component, pageProps, fallback, err }) {
   const router = useRouter()
   const { locale, events } = router
 
@@ -131,6 +134,7 @@ function MyApp({ Component, pageProps, fallback }) {
         <Web3ReactProvider getLibrary={getLibrary}>
           <Web3ProviderNetwork getLibrary={getLibrary}>
             <Web3ReactManager>
+              {/*@ts-ignore TYPE NEEDS FIXING*/}
               <ReduxProvider store={store}>
                 <PersistGate loading={<Dots>loading</Dots>} persistor={persistor}>
                   <>
@@ -144,7 +148,10 @@ function MyApp({ Component, pageProps, fallback }) {
                     <Provider>
                       <Layout>
                         <Guard>
-                          <Component {...pageProps} />
+                          {/* TODO: Added alert Jan 25. Delete component after a few months. */}
+                          {/* <MultichainExploitAlertModal /> */}
+                          {/*@ts-ignore TYPE NEEDS FIXING*/}
+                          <Component {...pageProps} err={err} />
                         </Guard>
                         <Portals />
                       </Layout>

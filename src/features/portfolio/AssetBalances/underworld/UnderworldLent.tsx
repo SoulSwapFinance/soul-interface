@@ -1,25 +1,33 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { useUnderworldPositions } from 'features/portfolio/AssetBalances/underworld/hooks'
-import { CategorySum } from 'features/portfolio/CategorySum'
+import Typography from 'components/Typography'
+import AssetBalances from 'features/portfolio/AssetBalances/AssetBalances'
+import { useLendPositionAmounts } from 'features/portfolio/AssetBalances/underworld/hooks'
+import { useBasicTableConfig } from 'features/portfolio/AssetBalances/useBasicTableConfig'
+import { useRouter } from 'next/router'
 import React from 'react'
 
-interface UnderworldLentProps {
-  account: string
-}
-
-export const UnderworldLent = ({ account }: UnderworldLentProps) => {
+export const UnderworldLent = () => {
   const { i18n } = useLingui()
-  const { lent } = useUnderworldPositions(account)
+  const router = useRouter()
+
+  const lentPositions = useLendPositionAmounts()
+  const { config } = useBasicTableConfig(
+    lentPositions.map((p) => ({ asset: p.amount, pair: p.pair })),
+    false
+  )
 
   return (
-    <CategorySum
-      title="Underworld"
-      subtitle={i18n._(t`(lent assets)`)}
-      assetAmounts={lent}
-      route={`/lend`}
-      // TODO: Change to new lend page when ready
-      // route={`/portfolio/${account}/lend`}
-    />
+    <div className="flex flex-col gap-3">
+      <div className="flex items-center gap-2">
+        <Typography weight={700} variant="lg" className="text-high-emphesis">
+          {i18n._(t`Underworld`)}
+        </Typography>
+        <Typography weight={700} variant="sm" className="text-low-emphesis">
+          {i18n._(t`(Lent)`)}
+        </Typography>
+      </div>
+      <AssetBalances config={config} onSelect={(row) => router.push(`/lend/${row.original.pair.address}`)} />
+    </div>
   )
 }

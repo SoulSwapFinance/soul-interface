@@ -1057,6 +1057,9 @@ msgstr ""
 msgid "Please connect to the appropriate Ethereum network."
 msgstr ""
 
+msgid "Please make sure your {0} balance is sufficient to deposit and then try again."
+msgstr ""
+
 msgid "Please make sure your {0} balance is sufficient to withdraw and then try again."
 msgstr ""
 

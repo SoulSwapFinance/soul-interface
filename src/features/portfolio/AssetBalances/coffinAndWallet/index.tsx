@@ -9,7 +9,7 @@ import { ActiveModal } from 'features/trident/types'
 import { useActiveWeb3React } from 'services/web3'
 import { useCoffinBalancesV2ForAccount } from 'state/coffinbox/hooks'
 import { useAppDispatch } from 'state/hooks'
-import { useAllTokenBalances, useAllTokenBalancesWithLoadingIndicator, useCurrencyBalance } from 'state/wallet/hooks'
+import { useAllTokenBalancesWithLoadingIndicator, useCurrencyBalance } from 'state/wallet/hooks'
 import React, { FC, useCallback, useMemo } from 'react'
 
 import { useBasicTableConfig } from '../useBasicTableConfig'
@@ -29,7 +29,7 @@ export const CoffinBalances = ({ account }: { account: string }) => {
       dispatch(
         setBalancesState({
           currency: currency.isNative ? 'FTM' : row.values.asset.currency.address,
-          activeModal: ActiveModal.MENU,
+          activeModal: ActiveModal.WITHDRAW,
         })
       )
     },
@@ -52,9 +52,9 @@ export const WalletBalances: FC<{ account: string }> = ({ account }) => {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const dispatch = useAppDispatch()
-  // const { data: _balances, loading } = useAllTokenBalancesWithLoadingIndicator()
-  const _balances = useAllTokenBalances()
+  const { data: _balances, loading } = useAllTokenBalancesWithLoadingIndicator()
 
+  // @ts-ignore TYPE NEEDS FIXING
   const ethBalance = useCurrencyBalance(account ? account : undefined, chainId ? NATIVE[chainId] : undefined)
 
   const balances = useMemo(() => {
@@ -69,7 +69,7 @@ export const WalletBalances: FC<{ account: string }> = ({ account }) => {
     }
     return res
   }, [_balances, ethBalance])
-  const { config } = useBasicTableConfig(balances) // loading
+  const { config } = useBasicTableConfig(balances, loading)
 
   const handleRowClick = useCallback(
     (row) => {
@@ -77,7 +77,7 @@ export const WalletBalances: FC<{ account: string }> = ({ account }) => {
       dispatch(
         setBalancesState({
           currency: currency.isNative ? 'FTM' : row.values.asset.currency.address,
-          activeModal: ActiveModal.MENU,
+          activeModal: ActiveModal.DEPOSIT,
         })
       )
     },

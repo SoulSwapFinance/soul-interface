@@ -1,8 +1,7 @@
-import { Currency, Token } from '../sdk'
-import { useCallback, useState } from 'react'
+import { Currency, Token } from 'sdk'
+import { getCurrencyLogoUrls } from 'components/CurrencyLogo/CurrencyLogo'
 import { useActiveWeb3React } from 'services/web3'
-
-// import { getTokenLogoURL } from './../components/CurrencyLogo'
+import { useCallback, useState } from 'react'
 
 export default function useAddTokenToMetaMask(currencyToAdd: Currency | undefined): {
   addToken: () => void
@@ -20,14 +19,13 @@ export default function useAddTokenToMetaMask(currencyToAdd: Currency | undefine
         .request({
           method: 'wallet_watchAsset',
           params: {
-            //@ts-ignore // need this for incorrect ethers provider type
+            // @ts-ignore // need this for incorrect ethers provider type
             type: 'ERC20',
             options: {
               address: token.address,
               symbol: token.symbol,
               decimals: token.decimals,
-              image: `https://raw.githubusercontent.com/soulswapfinance/assets/analytics/blockchains/fantom/assets/${token.address}/logo.png`
-              // image: getTokenLogoURL(token.address, chainId),
+              image: getCurrencyLogoUrls(token),
             },
           },
         })
@@ -38,7 +36,7 @@ export default function useAddTokenToMetaMask(currencyToAdd: Currency | undefine
     } else {
       setSuccess(false)
     }
-  }, [chainId, library, token])
+  }, [library, token])
 
   return { addToken, success }
 }

@@ -20,18 +20,17 @@ import { RecoilRoot } from 'recoil'
 import MarketHeader from 'features/lending/components/MarketHeader'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
+import { useUnderworldBorrowPositions } from 'features/portfolio/AssetBalances/underworld/hooks'
 
 const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
+
 export default function Borrow() {
   const { i18n } = useLingui()
   const addresses = useUnderworldPairAddresses()
+  // @ts-ignore TYPE NEEDS FIXING
   const pairs = useUnderworldPairs(addresses)
 
-  const positions = useSearchAndSort(
-    pairs.filter((pair: any) => pair.userCollateralShare.gt(0) || pair.userBorrowPart.gt(0)),
-    { keys: ['search'], threshold: 0.1 },
-    { key: 'health.value', direction: 'descending' }
-  )
+  const positions = useUnderworldBorrowPositions(pairs)
 
   const data = useSearchAndSort(
     pairs,
@@ -50,6 +49,16 @@ export default function Borrow() {
           name="description"
           content="Underworld is a lending and margin trading platform, built upon CoffinBox, which allows for anyone to create customized and gas-efficient markets for lending, borrowing, and collateralizing a variety of DeFi tokens, stable coins, and synthetic assets."
         />
+        <meta
+          key="twitter:description"
+          name="twitter:description"
+          content="Underworld is a lending and margin trading platform, built upon CoffinBox, which allows for anyone to create customized and gas-efficient markets for lending, borrowing, and collateralizing a variety of DeFi tokens, stable coins, and synthetic assets."
+        />
+        <meta
+          key="og:description"
+          property="og:description"
+          content="Underworld is a lending and margin trading platform, built upon CoffinBox, which allows for anyone to create customized and gas-efficient markets for lending, borrowing, and collateralizing a variety of DeFi tokens, stable coins, and synthetic assets."
+        />
       </Head>
       <Card className="h-full bg-dark-900" header={<MarketHeader type="Borrow" lists={[pairs, positions]} />}>
         {positions.items && positions.items.length > 0 && (
@@ -62,7 +71,7 @@ export default function Borrow() {
                   sortKey="search"
                 >
                   <>
-                    <span className="hidden md:inline-block">{i18n._(t`Your`)}</span> {i18n._(t`Positions`)}
+                    <span className="hidden md:inline-block">{i18n._(t``)}</span> {i18n._(t`Positions`)}
                   </>
                 </ListHeaderWithSort>
                 <ListHeaderWithSort
@@ -140,7 +149,7 @@ export default function Borrow() {
                             </div>
                             <div className="hidden text-right md:block">
                               <div>
-                                {formatNumber(pair.userCollateralAmount.string, false)}{' '}
+                                {formatNumber(pair?.userCollateralAmount.string, false)}{' '}
                                 {pair.collateral.tokenInfo.symbol}
                               </div>
                               <div className="text-sm text-secondary">
@@ -291,6 +300,7 @@ export default function Borrow() {
 
 Borrow.Provider = RecoilRoot
 
+// @ts-ignore TYPE NEEDS FIXING
 const BorrowLayout = ({ children }) => {
   const { i18n } = useLingui()
   return (

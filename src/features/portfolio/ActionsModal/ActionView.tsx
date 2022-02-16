@@ -29,10 +29,8 @@ const ActionView: FC<ActionViewProps> = ({ onClose }) => {
   const swapActionHandler = useCallback(async () => {
     // @ts-ignore TYPE NEEDS FIXING
     if (featureEnabled(Feature.TRIDENT, chainId)) {
-      // if (currency?.isNative) return router.push('/trident/swap')
-      if (currency?.isNative) return router.push('/exchange/swap')
+      if (currency?.isNative) return router.push('/trident/swap')
       // @ts-ignore TYPE NEEDS FIXING
-      // return router.push(`/trident/swap?&tokens=${NATIVE[chainId].symbol}&tokens=${currency?.wrapped.address}`)
       return router.push(`/exchange/swap?&tokens=${NATIVE[chainId].symbol}&tokens=${currency?.wrapped.address}`)
     }
 
@@ -43,7 +41,7 @@ const ActionView: FC<ActionViewProps> = ({ onClose }) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <HeadlessUiModal.Header header={i18n._(t`Available actions`)} onClose={onClose} />
+      <HeadlessUiModal.Header header={i18n._(t`Available Actions`)} onClose={onClose} />
       <ActionItem
         svg={<SwitchHorizontalIcon width={24} />}
         label={i18n._(t`Swap ${currency?.symbol}`)}

@@ -7,9 +7,7 @@ import { isEmptyValue } from 'functions/validate'
 
 export class Fraction {
   static BASE = BigNumber.from(10).pow(18)
-
   static NAN = new Fraction(Zero, Zero)
-
   static ZERO = new Fraction(Zero, One)
 
   static convert(sdk: SDKFraction): Fraction {

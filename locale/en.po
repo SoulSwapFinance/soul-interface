@@ -1072,6 +1072,9 @@ msgstr "Place a limit order or check the status of your past orders"
 msgid "Please connect to the appropriate Ethereum network."
 msgstr "Please connect to the appropriate Ethereum network."
 
+msgid "Please make sure your {0} balance is sufficient to deposit and then try again."
+msgstr "Please make sure your {0} balance is sufficient to deposit and then try again."
+
 msgid "Please make sure your {0} balance is sufficient to withdraw and then try again."
 msgstr "Please make sure your {0} balance is sufficient to withdraw and then try again."
 

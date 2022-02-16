@@ -1,32 +1,47 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Currency, CurrencyAmount } from 'sdk'
+import Typography from 'components/Typography'
 import { Fraction } from 'entities'
-import { UnderworldMarket } from 'features/lending/types'
-import { useUnderworldPositions } from 'features/portfolio/AssetBalances/underworld/hooks'
-import { CategorySum } from 'features/portfolio/CategorySum'
+import AssetBalances from 'features/portfolio/AssetBalances/AssetBalances'
+import { useCollateralPositionAmounts } from 'features/portfolio/AssetBalances/underworld/hooks'
+import { useCollateralTableConfig } from 'features/portfolio/AssetBalances/underworld/useCollateralTableConfig'
+import { useRouter } from 'next/router'
 import React from 'react'
 
 export interface CollateralData {
   collateral: CurrencyAmount<Currency>
   value: CurrencyAmount<Currency>
   limit: Fraction
-  pair: UnderworldMarket
+  pair: any
 }
 
-export const UnderworldCollateral = ({ account }: { account: string }) => {
+const useGetCollateralTableData = (): CollateralData[] =>
+  useCollateralPositionAmounts().map((p) => ({
+    collateral: p.amount,
+    value: p.amount,
+    limit: p.pair.health.string as Fraction,
+    pair: p.pair,
+  }))
+
+export const UnderworldCollateral = () => {
   const { i18n } = useLingui()
-  const { borrowed, collateral } = useUnderworldPositions(account)
+  const router = useRouter()
+
+  const data = useGetCollateralTableData()
+  const config = useCollateralTableConfig(data)
 
   return (
-    <CategorySum
-      title="Underworld"
-      subtitle={i18n._(t`(collateral minus borrowed)`)}
-      assetAmounts={collateral}
-      liabilityAmounts={borrowed}
-      route={`/borrow`}
-      // TODO: Change to new borrow page when ready
-      // route={`/portfolio/${account}/lend`}
-    />
+    <div className="flex flex-col w-full gap-3">
+      <div className="flex items-center gap-2">
+        <Typography weight={700} variant="lg" className="text-high-emphesis">
+          {i18n._(t`Underworld`)}
+        </Typography>
+        <Typography weight={700} variant="sm" className="text-low-emphesis">
+          {i18n._(t`(Collateral)`)}
+        </Typography>
+      </div>
+      <AssetBalances config={config} onSelect={(row) => router.push(`/borrow/${row.original.pair.address}`)} />
+    </div>
   )
 }

@@ -5,6 +5,7 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { signMasterContractApproval } from 'entities/UnderworldCooker'
 import { useActiveWeb3React } from 'services/web3'
+import { USER_REJECTED_TX } from 'services/web3/WalletError'
 import { useCoffinMasterContractAllowed } from 'state/coffinbox/hooks'
 import { useAllTransactions, useTransactionAdder } from 'state/transactions/hooks'
 import { useCallback, useMemo, useState } from 'react'
@@ -19,14 +20,14 @@ export enum CoffinApprovalState {
   APPROVED,
 }
 
-export enum CoffinBoxApproveOutcome {
+export enum CoffinApproveOutcome {
   SUCCESS,
   REJECTED,
   FAILED,
   NOT_READY,
 }
 
-const useCoffinBoxHasPendingApproval = (masterContract?: string, account?: string, contractName?: string) => {
+const useCoffinHasPendingApproval = (masterContract?: string, account?: string, contractName?: string) => {
   const allTransactions = useAllTransactions()
   return useMemo(
     () =>
@@ -48,7 +49,7 @@ const useCoffinBoxHasPendingApproval = (masterContract?: string, account?: strin
 }
 
 export interface CoffinPermit {
-  outcome: CoffinBoxApproveOutcome
+  outcome: CoffinApproveOutcome
   signature?: Signature
   data?: string
 }
@@ -66,7 +67,7 @@ export interface CoffinMasterApproveCallbackOptions {
   functionFragment?: string
 }
 
-const useCoffinBoxMasterApproveCallback = (
+const useCoffinMasterApproveCallback = (
   masterContract: string | undefined,
   { otherCoffinBoxContract, contractName, functionFragment }: CoffinMasterApproveCallbackOptions
 ): CoffinMasterApproveCallback => {
@@ -75,7 +76,7 @@ const useCoffinBoxMasterApproveCallback = (
   const coffinBoxContract = useCoffinBoxContract()
   const addTransaction = useTransactionAdder()
   const currentAllowed = useCoffinMasterContractAllowed(masterContract, account || AddressZero)
-  const pendingApproval = useCoffinBoxHasPendingApproval(masterContract, account ? account : undefined, contractName)
+  const pendingApproval = useCoffinHasPendingApproval(masterContract, account ? account : undefined, contractName)
   const [permit, setPermit] = useState<CoffinPermit | undefined>()
 
   const approvalState: CoffinApprovalState = useMemo(() => {
@@ -118,7 +119,7 @@ const useCoffinBoxMasterApproveCallback = (
 
       const signature = splitSignature(signatureString)
       const permit = {
-        outcome: CoffinBoxApproveOutcome.SUCCESS,
+        outcome: CoffinApproveOutcome.SUCCESS,
         signature: splitSignature(signature),
         data: (otherCoffinBoxContract || coffinBoxContract)?.interface?.encodeFunctionData(
           functionFragment || 'setMasterContractApproval',
@@ -131,7 +132,7 @@ const useCoffinBoxMasterApproveCallback = (
     } catch (e) {
       return {
         // @ts-ignore TYPE NEEDS FIXING
-        outcome: e.code === 4001 ? CoffinBoxApproveOutcome.REJECTED : CoffinBoxApproveOutcome.FAILED,
+        outcome: e.code === USER_REJECTED_TX ? CoffinApproveOutcome.REJECTED : CoffinApproveOutcome.FAILED,
         signature: undefined,
         data: undefined,
       }
@@ -174,4 +175,4 @@ const useCoffinBoxMasterApproveCallback = (
   }
 }
 
-export default useCoffinBoxMasterApproveCallback
+export default useCoffinMasterApproveCallback

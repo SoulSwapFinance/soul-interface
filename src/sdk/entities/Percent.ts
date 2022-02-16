@@ -35,21 +35,11 @@ export class Percent extends Fraction {
     return toPercent(super.divide(other))
   }
 
-  public toSignificant(
-    significantDigits: number = 5,
-    format?: object,
-    rounding?: Rounding
-  ): string {
-    return super
-      .multiply(ONE_HUNDRED)
-      .toSignificant(significantDigits, format, rounding)
+  public toSignificant(significantDigits: number = 5, format?: object, rounding?: Rounding): string {
+    return super.multiply(ONE_HUNDRED).toSignificant(significantDigits, format, rounding)
   }
 
-  public toFixed(
-    decimalPlaces: number = 2,
-    format?: object,
-    rounding?: Rounding
-  ): string {
+  public toFixed(decimalPlaces: number = 2, format?: object, rounding?: Rounding): string {
     return super.multiply(ONE_HUNDRED).toFixed(decimalPlaces, format, rounding)
   }
 }

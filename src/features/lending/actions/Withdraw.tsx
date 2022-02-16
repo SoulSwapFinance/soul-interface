@@ -14,7 +14,6 @@ import { UnderworldApproveButton } from '../components/Button'
 import SmartNumberInput from '../components/SmartNumberInput'
 import TransactionReviewView from '../components/TransactionReview'
 import WarningsView from '../components/WarningsList'
-import { BigNumber } from '@ethersproject/bignumber'
 
 export default function Withdraw({ pair }: any): JSX.Element {
   const { account } = useActiveWeb3React()
@@ -24,27 +23,23 @@ export default function Withdraw({ pair }: any): JSX.Element {
 
   // State
   const [useCoffin, setUseCoffin] = useState<boolean>(pair.asset.coffinBalance > 0)
+  // const [useCoffin, setUseCoffin] = useState<boolean>(false)
   const [value, setValue] = useState('')
   const [pinMax, setPinMax] = useState(false)
 
   const [underworldApprovalState, approveUnderworldFallback, underworldPermit, onApprove, onCook] = useUnderworldApproveCallback()
 
   // Calculated
-  const max 
-    // = minimum(pair.maxAssetAvailable, pair.currentUserAssetAmount.value)
-    = pair.maxAssetAvailable < pair.currentUserAssetAmount.value
-    ? pair.maxAssetAvailable : pair.currentUserAssetAmount.value
-
+  const max = minimum(pair.maxAssetAvailable, pair.currentUserAssetAmount.value)
   const displayValue = pinMax ? max.toFixed(pair.asset.tokenInfo.decimals) : value
 
   const fraction = pinMax
     ? minimum(pair.userAssetFraction, pair.maxAssetAvailableFraction)
-    // : value.toBigNumber(pair.asset.tokenInfo.decimals).mulDiv(pair.currentTotalAsset.base, pair.currentAllAssets.value)
-    : Number(value) * pair.currentTotalAsset.base / pair.currentAllAssets.value
+    : value.toBigNumber(pair.asset.tokenInfo.decimals).mulDiv(pair.currentTotalAsset.base, pair.currentAllAssets.value)
 
   const warnings = new Warnings()
     .add(
-      pair.currentUserAssetAmount.value < value,
+      pair.currentUserAssetAmount.value.lt(value.toBigNumber(pair.asset.tokenInfo.decimals)),
       i18n._(
         t`Please make sure your ${
           useCoffin ? 'CoffinBox' : 'wallet'
@@ -53,7 +48,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
       true
     )
     .add(
-      pair.maxAssetAvailableFraction < fraction,
+      pair.maxAssetAvailableFraction.lt(fraction),
       i18n._(
         t`The isn't enough liquidity available at the moment to withdraw this amount. Please try withdrawing less or later.`
       ),
@@ -62,7 +57,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
 
   const transactionReview = new TransactionReview()
   if (displayValue && !warnings.broken) {
-    const amount = BigNumber.from(displayValue)
+    const amount = displayValue.toBigNumber(pair.asset.tokenInfo.decimals)
     const newUserAssetAmount = pair.currentUserAssetAmount.value.sub(amount)
     transactionReview.addTokenAmount(
       i18n._(t`Balance`),
@@ -70,19 +65,11 @@ export default function Withdraw({ pair }: any): JSX.Element {
       newUserAssetAmount,
       pair.asset
     )
-    transactionReview.addUSD(i18n._(t`Balance USD`), 
-    pair.currentUserAssetAmount.value, 
-    newUserAssetAmount, pair.asset)
+    transactionReview.addUSD(i18n._(t`Balance USD`), pair.currentUserAssetAmount.value, newUserAssetAmount, pair.asset)
 
-    const newUtilization 
-      // = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.sub(amount))
-      = BigNumber.from(Number(1e18)
-      * pair.currentBorrowAmount.value
-      / (pair.currentAllAssets.value - Number(amount))
-      )
-
-      transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
-    }
+    const newUtilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.sub(amount))
+    transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
+  }
 
   // Handlers
   async function onExecute(cooker: UnderworldCooker) {
@@ -111,7 +98,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
         useCoffinTitle="to"
         useCoffin={useCoffin}
         setUseCoffin={setUseCoffin}
-        max={max}
+        max={Number(max)}
         pinMax={pinMax}
         setPinMax={setPinMax}
         showMax={true}

@@ -151,13 +151,14 @@ const PairLayout = ({ children }) => {
   const [pairState, liquidityPair] = useV2Pair(asset, collateral)
   const assetPrice = useUSDCPrice(asset)
   const collateralPrice = useUSDCPrice(collateral)
+  const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
 
   return pair ? (
     <Layout
       left={
         <Card
           className="h-full bg-dark-900"
-          backgroundImage="/borrow-graphic.png"
+          backgroundImage={ BORROW_IMG }
           title={i18n._(t`Add collateral in order to borrow assets`)}
           description={i18n._(
             t`Gain exposure to tokens without reducing your assets. Leverage will enable you to take short positions against assets and earn from downside movements.`
@@ -173,7 +174,7 @@ const PairLayout = ({ children }) => {
             <div className="flex justify-between">
               <div className="text-lg text-secondary">{i18n._(t`APR`)}</div>
               <div className="flex items-center">
-                <div className="text-lg text-high-emphesis">{formatPercent(pair?.currentInterestPerYear.string)}</div>
+                <div className="text-lg text-high-emphesis">{formatPercent(pair?.interestPerYear.string)}</div>
               </div>
             </div>
             <div className="flex justify-between">

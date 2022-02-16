@@ -1,6 +1,6 @@
 import { AddressZero } from '@ethersproject/constants'
 import { Currency, CurrencyAmount, JSBI, Token } from 'sdk'
-import { useUnderworldPairAddresses, useUnderworldPairsForAccount } from 'features/lending/hooks'
+import { useUnderworldPairAddresses, useUnderworldPairs } from 'features/lending/hooks'
 import useSearchAndSort from 'hooks/useSearchAndSort'
 import { useActiveWeb3React } from 'services/web3'
 import { useMemo } from 'react'
@@ -35,10 +35,10 @@ export const useUnderworldLendPositions = (pairs: any[]) =>
     { key: 'currentUserAssetAmount.usdValue', direction: 'descending' }
   )
 
-const useBorrowPositionAmounts = (account: string) => {
+const useBorrowPositionAmounts = () => {
   const { chainId } = useActiveWeb3React()
   const addresses = useUnderworldPairAddresses()
-  const pairs = useUnderworldPairsForAccount(account, addresses)
+  const pairs = useUnderworldPairs(addresses)
 
   return useUnderworldBorrowPositions(pairs)
     .items.map((item) => {
@@ -51,10 +51,15 @@ const useBorrowPositionAmounts = (account: string) => {
     .filter(Boolean) as CurrencyAmount<Token>[]
 }
 
-export const useLendPositionAmounts = (account: string): CurrencyAmount<Token>[] => {
+type PairWithAmount = {
+  pair: any
+  amount: CurrencyAmount<Token>
+}
+
+export const useLendPositionAmounts = (): PairWithAmount[] => {
   const { chainId } = useActiveWeb3React()
   const addresses = useUnderworldPairAddresses()
-  const pairs = useUnderworldPairsForAccount(account, addresses)
+  const pairs = useUnderworldPairs(addresses)
 
   return useUnderworldLendPositions(pairs)
     .items.map((item) => {
@@ -62,15 +67,18 @@ export const useLendPositionAmounts = (account: string): CurrencyAmount<Token>[]
 
       const lentAsset = new Token(chainId, item.asset.address, item.asset.tokenInfo.decimals, item.asset.symbol)
       const lentAssetAmount = JSBI.BigInt(item.currentUserAssetAmount.value.toString())
-      return CurrencyAmount.fromRawAmount(lentAsset, lentAssetAmount)
+      return {
+        pair: item,
+        amount: CurrencyAmount.fromRawAmount(lentAsset, lentAssetAmount),
+      }
     })
-    .filter(Boolean) as CurrencyAmount<Token>[]
+    .filter(Boolean) as PairWithAmount[]
 }
 
-export const useCollateralPositionAmounts = (account: string): CurrencyAmount<Token>[] => {
+export const useCollateralPositionAmounts = (): PairWithAmount[] => {
   const { chainId } = useActiveWeb3React()
   const addresses = useUnderworldPairAddresses()
-  const pairs = useUnderworldPairsForAccount(account, addresses)
+  const pairs = useUnderworldPairs(addresses)
 
   return useUnderworldBorrowPositions(pairs)
     .items.map((item) => {
@@ -83,15 +91,21 @@ export const useCollateralPositionAmounts = (account: string): CurrencyAmount<To
         item.collateral.symbol
       )
       const collateralAssetAmount = JSBI.BigInt(item.userCollateralAmount.value.toString())
-      return CurrencyAmount.fromRawAmount(collateralAsset, collateralAssetAmount)
+      return {
+        pair: item,
+        amount: CurrencyAmount.fromRawAmount(collateralAsset, collateralAssetAmount),
+      }
     })
-    .filter(Boolean) as CurrencyAmount<Token>[]
+    .filter(Boolean) as PairWithAmount[]
 }
 
-export function useUnderworldPositions(account: string) {
-  const borrowPositionAmounts = useBorrowPositionAmounts(account)
-  const lentPositionAmounts = useLendPositionAmounts(account)
-  const collateralPositionAmounts = useCollateralPositionAmounts(account)
+export function useUnderworldPositions() {
+  const borrowPositionAmounts = useBorrowPositionAmounts()
+  const lentPositions = useLendPositionAmounts()
+  const lentPositionAmounts = lentPositions.map((p) => p.amount)
+
+  const collateralPositions = useCollateralPositionAmounts()
+  const collateralPositionAmounts = collateralPositions.map((p) => p.amount)
 
   const underworldBalances = useMemo(
     () => reduceBalances([...collateralPositionAmounts, ...lentPositionAmounts]),

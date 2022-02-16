@@ -18,8 +18,8 @@ const WalletActions: FC = () => {
   const router = useRouter()
 
   const swapActionHandler = useCallback(async () => {
-    if (currency?.isNative) return router.push('/trident/swap')
-    return router.push(`/trident/swap?type=classic&tokens=ETH&tokens=${currency?.wrapped.address}`)
+    if (currency?.isNative) return router.push('/exchange/swap')
+    return router.push(`/exchange/swap?inputCurrency=FTM&tokens=${currency?.wrapped.address}`)
   }, [currency?.isNative, currency?.wrapped.address, router])
 
   return (

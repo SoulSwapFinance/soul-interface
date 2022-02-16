@@ -51,7 +51,7 @@ const DepositView: FC<DepositViewProps> = ({ onClose, onBack }) => {
   const error = !account
     ? i18n._(t`Connect Wallet`)
     : !valueCA?.greaterThan(ZERO)
-    ? i18n._(t`Enter an amount`)
+    ? i18n._(t`Enter Amount`)
     : !walletBalance
     ? i18n._(t`Loading balance`)
     : valueCA?.greaterThan(walletBalance)

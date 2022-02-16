@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { BigNumber } from '@ethersproject/bignumber'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
@@ -13,6 +12,7 @@ import { useCoffinBoxContract } from 'hooks'
 import { useCurrency } from 'hooks/Tokens'
 import { useActiveWeb3React } from 'services/web3'
 import { useETHBalances } from 'state/wallet/hooks'
+import React, { useState } from 'react'
 
 import { UnderworldApproveButton, TokenApproveButton } from '../components/Button'
 import SmartNumberInput from '../components/SmartNumberInput'
@@ -29,59 +29,66 @@ export default function Deposit({ pair }: any): JSX.Element {
   const { i18n } = useLingui()
 
   // State
-  const [useCoffin, setUseCoffin] = useState<boolean>(pair.asset.coffinBalance > (0))
+  const [useCoffin, setUseCoffin] = useState<boolean>(Number(pair.asset.coffinBalance) > 0)
+  // const [useCoffin, setUseCoffin] = useState<boolean>(false)
   const [value, setValue] = useState('')
 
   // Calculated
+  // @ts-ignore TYPE NEEDS FIXING
   const assetNative = WNATIVE[chainId].address === pair.asset.address
+
+  // @ts-ignore TYPE NEEDS FIXING
   const ethBalance = useETHBalances(assetNative ? [account] : [])
+
   const balance = useCoffin
     ? pair.asset.coffinBalance
     : assetNative
-    ? BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
+    ? //  @ts-ignore TYPE NEEDS FIXING
+      BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
     : pair.asset.balance
 
   const max = useCoffin
     ? pair.asset.coffinBalance
     : assetNative
-    ? BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
+    ? // @ts-ignore TYPE NEEDS FIXING
+      BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
     : pair.asset.balance
 
   const warnings = new Warnings()
 
-  warnings.add(
-    balance?.lt(value.toBigNumber(pair.asset.tokenInfo.decimals)),
-    `Please make sure your ${useCoffin ? 'CoffinBox' : 'wallet'} balance is sufficient to deposit and then try again.`,
-    true
-  )
+  // warnings.add(
+  //   balance?.lt(value.toBigNumber(pair.asset.tokenInfo.decimals)),
+  //   i18n._(
+  //     t`Please make sure your ${useCoffin ? 'CoffinBox' : 'wallet'} balance is sufficient to deposit and then try again.`
+  //   ),
+  //   true
+  // )
 
   const transactionReview = new TransactionReview()
 
   if (value && !warnings.broken) {
-    const amount = value.toBigNumber(pair.asset.tokenInfo.decimals)
-    const newUserAssetAmount = pair.currentUserAssetAmount.value.add(amount)
+    const amount = Number(value).toFixed(0)
+    const newUserAssetAmount = pair.currentUserAssetAmount.value.div(pair.asset.tokenInfo.decimals).add(amount.toBigNumber(pair.asset.tokenInfo.decimals))
     transactionReview.addTokenAmount(
       i18n._(t`Balance`),
       pair.currentUserAssetAmount.value,
       newUserAssetAmount,
       pair.asset
     )
-    transactionReview.addUSD(i18n._(t`Balance USD`), pair.currentUserAssetAmount.value, newUserAssetAmount, pair.asset)
-    const newUtilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.add(amount))
+    transactionReview.addUSD(i18n._(t`Balance USD`), 
+    pair.currentUserAssetAmount.value, 
+    newUserAssetAmount, 
+    pair.asset)
+    const newUtilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value).add(amount)
     transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
     if (pair.currentExchangeRate.isZero()) {
       transactionReview.add(
         'Exchange Rate',
         formatNumber(
-          pair.currentExchangeRate,
-          false,
-          true,
-          ),
+          pair.currentExchangeRate.toFixed(18 + pair.collateral.tokenInfo.decimals - pair.asset.tokenInfo.decimals)
+        ),
         formatNumber(
-          pair.oracleExchangeRate,
-          false,
-          true,
-          18 + pair.collateral.tokenInfo.decimals - pair.asset.tokenInfo.decimals
+          pair.oracleExchangeRate.toFixed(18 + pair.collateral.tokenInfo.decimals - pair.asset.tokenInfo.decimals)
         ),
         Direction.UP
       )
@@ -133,7 +140,7 @@ export default function Deposit({ pair }: any): JSX.Element {
           <TokenApproveButton value={value} token={assetToken} needed={!useCoffin}>
             <Button
               onClick={() => onCook(pair, onExecute)}
-              disabled={value.toBigNumber(pair.asset.tokenInfo.decimals).lte(0) || warnings.broken}
+              disabled={Number(value) <= 0 || warnings.broken}
               fullWidth={true}
             >
               {i18n._(t`Deposit`)}

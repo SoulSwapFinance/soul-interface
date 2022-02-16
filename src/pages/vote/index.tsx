@@ -28,7 +28,8 @@ const Vote = () => {
 					title={"Board"}
 					height={"100%"}
 					width={'99%'}
-					src='https://board.soulswap.finance/embed/roadmap'
+					src='https://soulswap.hellonext.co/'
+					// src='https://board.soulswap.finance/embed/roadmap'
 				/>
 			<br/>
 			<br/>
