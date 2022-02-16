@@ -11,7 +11,7 @@ import { CurrencyAmount, JSBI, Rebase, Token, ZERO } from 'sdk'
 //   return amount.mulDiv(token.coffinShare, token.coffinAmount)
 // }
 
-export function toAmount(rebase: Rebase, shares: number): BigNumber {
+export function toAmount(rebase: Rebase, shares: number | BigNumber): BigNumber {
   // console.log('toAmount', token, shares)
   return Number(rebase.elastic) > 0 
   ? BigNumber.from(Number(shares) * Number(rebase.elastic) / Number(rebase.base))
