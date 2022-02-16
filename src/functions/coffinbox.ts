@@ -1,30 +1,30 @@
 import { BigNumber } from '@ethersproject/bignumber'
-import { CurrencyAmount, JSBI, Rebase, Token, ZERO } from 'sdk'
+import { CurrencyAmount, JSBI, Rebase, Token, ZERO } from '@sushiswap/core-sdk'
 
 // export function toAmount(token, shares: BigNumber): BigNumber {
 //   // console.log('toAmount', token, shares)
-//   return shares.mulDiv(token.coffinAmount, token.coffinShare)
+//   return shares.mulDiv(token.bentoAmount, token.bentoShare)
 // }
 
 // export function toShare(token, amount: BigNumber): BigNumber {
 //   // console.log('toShare', token, shares)
-//   return amount.mulDiv(token.coffinShare, token.coffinAmount)
+//   return amount.mulDiv(token.bentoShare, token.bentoAmount)
 // }
 
-export function toAmount(rebase: Rebase, shares: number | BigNumber): BigNumber {
+export function toAmount(rebase: Rebase, shares: BigNumber): BigNumber {
   // console.log('toAmount', token, shares)
+  // return shares.mulDiv(BigNumber.from(rebase.elastic.toString()), BigNumber.from(rebase.base.toString()))
   return Number(rebase.elastic) > 0 
   ? BigNumber.from(Number(shares) * Number(rebase.elastic) / Number(rebase.base))
   : BigNumber.from(0)
-  // return shares.mulDiv(BigNumber.from(rebase.elastic || 0), BigNumber.from(rebase.base || 0))
 }
 
 export function toShare(rebase: Rebase, amount: BigNumber): BigNumber {
   // console.log('toShare', token, shares)
-  return BigNumber.from(Number(amount) * Number(rebase.base) / Number(rebase.elastic) || 0)
-  // return BigNumber.from(amount)?.mul(Number(rebase.base) / (Number(rebase.elastic)) || BigNumber.from(0))
-  // return BigNumber.from(Number(amount) * Number(rebase.base) / Number(rebase.elastic) || 0)
-
+  // return amount.mulDiv(BigNumber.from(rebase.base.toString()), BigNumber.from(rebase.elastic.toString()))
+  return Number(rebase.elastic) > 0
+  ? amount.mulDiv(BigNumber.from(rebase.base), BigNumber.from(rebase.elastic))
+  : BigNumber.from(0)
 }
 
 export function toAmountJSBI(token: Rebase, shares: JSBI): JSBI {
