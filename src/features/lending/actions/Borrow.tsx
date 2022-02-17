@@ -211,7 +211,7 @@ export default function Borrow({ pair }: BorrowProps) {
         true,
         new Warning(
           Number(borrowValue) > 0 
-          && Number(userBorrowValue) < Number(nextMaxBorrowMinimum.sub(pair.currentUserBorrowAmount.value)),
+          && Number(userBorrowValue) < Number(nextMaxBorrowMinimum?.sub(pair.currentUserBorrowAmount.value)),
           "You don't have enough collateral to borrow this amount.",
           true,
           new Warning(
@@ -225,7 +225,7 @@ export default function Borrow({ pair }: BorrowProps) {
     )
     .add(
       Number(borrowValue) > 0
-      && nextMaxBorrowMinimum.add(collateralBalance.mulDiv('75','100')).lt(borrowValue.toBigNumber(pair.asset.tokenInfo.decimals)),
+      && nextMaxBorrowMinimum?.add(collateralBalance.mulDiv('75','100')).lt(borrowValue.toBigNumber(pair.asset.tokenInfo.decimals)),
       'Not enough liquidity in this pair.',
       true
     )
@@ -250,8 +250,8 @@ export default function Borrow({ pair }: BorrowProps) {
   // })
 
   const transactionReview = new TransactionReview()
-  // if ((collateralValue || borrowValue) && !collateralWarnings.broken) {
-  // && (!borrowWarnings.broken || !borrowValue)) {
+  if ((collateralValue || borrowValue) && !collateralWarnings.broken
+  && (!borrowWarnings.broken || !borrowValue))
   { if (collateralValueSet) {
       transactionReview.addTokenAmount(
         'Collateral',
@@ -310,8 +310,8 @@ export default function Borrow({ pair }: BorrowProps) {
   }
 
   const actionDisabled =
-    (userCollateralValue < 0 && //.toString().toBigNumber(pair.collateral.tokenInfo.decimals).lte(0) &&
-      userBorrowValue <= 0) //.toString().toBigNumber(pair.asset.tokenInfo.decimals).lte(0)) ||
+    (userCollateralValue.toString().toBigNumber(pair.collateral.tokenInfo.decimals).lte(0) &&
+      userBorrowValue.toString().toBigNumber(pair.asset.tokenInfo.decimals).lte(0))
     || collateralWarnings.broken
     || (borrowValue.length > 0 && borrowWarnings.broken)
     || (swap && priceImpactSeverity > 3 && !isExpertMode)

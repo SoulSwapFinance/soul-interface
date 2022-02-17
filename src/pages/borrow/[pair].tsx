@@ -1,3 +1,4 @@
+import { BigNumber } from '@ethersproject/bignumber'
 import { Tab } from '@headlessui/react'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
@@ -28,6 +29,7 @@ export default function Pair() {
   const { i18n } = useLingui()
 
   const pair = useUnderworldPair(router.query.pair as string)
+  const userCollateralBalance = Number(pair?.userCollateralShare / 1e18) // √
 
   if (!pair) return <div />
 
@@ -86,7 +88,7 @@ export default function Pair() {
           <div>
             <div className="text-lg text-secondary">{i18n._(t`Collateral`)}</div>
             <div className="text-2xl text-blue">
-              {formatNumber(pair.userCollateralAmount.string)} {pair.collateral.tokenInfo.symbol}
+              {formatNumber(userCollateralBalance)} {pair.collateral.tokenInfo.symbol}
             </div>
             <div className="text-lg text-high-emphesis">{formatNumber(pair.userCollateralAmount.usd, true)}</div>
           </div>
