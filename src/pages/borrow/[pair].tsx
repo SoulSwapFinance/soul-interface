@@ -1,7 +1,9 @@
+import React from 'react'
 import { BigNumber } from '@ethersproject/bignumber'
 import { Tab } from '@headlessui/react'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
+// import styled from 'styled-components'
 import Card from 'components/Card'
 import Dots from 'components/Dots'
 import GradientDot from 'components/GradientDot'
@@ -19,7 +21,6 @@ import { useV2Pair } from 'hooks/useV2Pairs'
 import Layout from 'layouts/Underworld'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import React from 'react'
 import { RecoilRoot } from 'recoil'
 
 export default function Pair() {
@@ -86,26 +87,26 @@ export default function Pair() {
       >
         <div className="flex justify-between p-4 mb-8 xl:p-0">
           <div>
-            <div className="text-lg text-secondary">{i18n._(t`Collateral`)}</div>
-            <div className="text-2xl text-blue">
+            <div className="text-center text-md sm:text-lg text-secondary">{i18n._(t`Collateral`)}</div>
+            <div className="text-center text-lg sm:text-2xl text-blue">
               {formatNumber(userCollateralBalance)} {pair.collateral.tokenInfo.symbol}
             </div>
-            <div className="text-lg text-high-emphesis">{formatNumber(pair.userCollateralAmount.usd, true)}</div>
+            <div className="text-center text-md sm:text-lg text-high-emphesis">{formatNumber(pair.userCollateralAmount.usd, true)}</div>
           </div>
           <div>
-            <div className="text-lg text-secondary">{i18n._(t`Borrowed`)}</div>
-            <div className="text-2xl text-purple">
-              {formatNumber(pair.currentUserBorrowAmount.string)} {pair.asset.tokenInfo.symbol}
+            <div className="text-center text-md sm:text-lg text-secondary">{i18n._(t`Borrowed`)}</div>
+            <div className="text-center texl-lg sm:text-2xl text-purple">
+            {formatNumber(pair.currentUserBorrowAmount.string)} {pair.asset.tokenInfo.symbol}
             </div>
-            <div className="flex items-center text-lg text-high-emphesis">
+            <div className="items-center text-center flex justify-center text-md sm:text-lg text-high-emphesis">
               {formatPercent(pair.health.string)}
               <GradientDot percent={pair.health.string}></GradientDot>
             </div>
           </div>
           <div className="text-right">
             <div>
-              <div className="text-lg text-secondary">{i18n._(t`APR`)}</div>
-              <div className="text-2xl text-high-emphesis">{formatPercent(pair.interestPerYear.string)}</div>
+              <div className="text-center text-md sm:text-lg text-secondary">{i18n._(t`APR`)}</div>
+              <div className="text-lg sm:text-2xl text-high-emphesis">{formatPercent(pair.interestPerYear.string)}</div>
             </div>
           </div>
         </div>
@@ -114,8 +115,8 @@ export default function Pair() {
             <Tab
               className={({ selected }) =>
                 `${
-                  selected ? 'bg-dark-900 text-high-emphesis' : ''
-                } flex items-center justify-center flex-1 px-3 py-4 text-lg rounded cursor-pointer select-none text-secondary hover:text-primary focus:outline-none`
+                  selected ? 'bg-purple text-high-emphesis' : ''
+                } flex items-center justify-center flex-1 px-1 py-1 text-lg rounded cursor-pointer select-none text-secondary hover:text-primary hover:bg-dark-700 focus:outline-none`
               }
             >
               {i18n._(t`Borrow`)}
@@ -123,8 +124,8 @@ export default function Pair() {
             <Tab
               className={({ selected }) =>
                 `${
-                  selected ? 'bg-dark-900 text-high-emphesis' : ''
-                } flex items-center justify-center flex-1 px-3 py-4 text-lg rounded cursor-pointer select-none text-secondary hover:text-primary focus:outline-none`
+                  selected ? 'bg-purple text-high-emphesis' : ''
+                } flex items-center justify-center flex-1 px-1 py-1 text-lg rounded cursor-pointer select-none text-secondary hover:text-primary hover:bg-dark-700 focus:outline-none`
               }
             >
               {i18n._(t`Repay`)}

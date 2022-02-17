@@ -82,21 +82,21 @@ export default function Pair() {
       >
         <div className="flex justify-between p-4 mb-8 xl:p-0">
           <div>
-            <div className="text-lg text-secondary">Lent</div>
-            <div className="text-2xl text-blue">
+            <div className="text-center text-md sm:text-lg text-secondary">Lent</div>
+            <div className="text-lg sm:text-2xl text-blue">
               {formatNumber(pair.currentUserLentAmount.string)} {pair.asset.tokenInfo.symbol}
             </div>
             
-            <div className="text-lg text-high-emphesis">{formatNumber(Number(pair.currentUserAssetAmount.usd), true)}</div>
+            <div className="text-center text-md sm:text-lg text-high-emphesis">{formatNumber(Number(pair.currentUserAssetAmount.usd), true)}</div>
           </div>
           <div>
-            <div className="text-lg text-secondary">{`Borrowed`}</div>
-            <div className="text-2xl text-high-emphesis">{formatPercent(pair.utilization.string)}</div>
+            <div className="text-center text-md sm:text-lg text-secondary">{`Borrowed`}</div>
+            <div className="text-center text-lg sm:text-2xl text-high-emphesis">{formatPercent(pair.utilization.string)}</div>
           </div>
           <div className="text-right">
             <div>
-              <div className="text-lg text-secondary">{`APR`}</div>
-              <div className="text-2xl text-high-emphesis">{formatPercent(pair.supplyAPR.string)}</div>
+              <div className="text-center text-md sm:text-lg text-secondary">{`APR`}</div>
+              <div className="text-center text-lg sm:text-2xl text-high-emphesis">{formatPercent(pair.supplyAPR.string)}</div>
             </div>
           </div>
         </div>
@@ -106,8 +106,8 @@ export default function Pair() {
             <Tab
               className={({ selected }) =>
                 `${
-                  selected ? 'bg-dark-900 text-high-emphesis' : ''
-                } flex items-center justify-center flex-1 px-3 py-4 text-lg rounded cursor-pointer select-none text-secondary hover:text-primary focus:outline-none`
+                  selected ? 'bg-blue text-high-emphesis' : ''
+                } flex items-center justify-center flex-1 px-1 py-1 text-lg rounded cursor-pointer select-none text-secondary hover:text-primary focus:outline-none`
               }
             >
               {`Deposit`} {pair.asset.tokenInfo.symbol}
@@ -115,8 +115,8 @@ export default function Pair() {
             <Tab
               className={({ selected }) =>
                 `${
-                  selected ? 'bg-dark-900 text-high-emphesis' : ''
-                } flex items-center justify-center flex-1 px-3 py-4 text-lg rounded cursor-pointer select-none text-secondary hover:text-primary focus:outline-none`
+                  selected ? 'bg-blue text-high-emphesis' : ''
+                } flex items-center justify-center flex-1 px-1 py-1 text-lg rounded cursor-pointer select-none text-secondary hover:text-primary focus:outline-none`
               }
             >
               {`Withdraw`} {pair.asset.tokenInfo.symbol}
