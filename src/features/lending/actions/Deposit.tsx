@@ -115,7 +115,9 @@ export default function Deposit({ pair }: any): JSX.Element {
   }
 
   return (
-    <>      <AssetInput
+    <>
+      <div className="mt-6 text-3xl text-high-emphesis" />
+      <AssetInput
         size="sm"
         id="add-collateral-input"
         value={value}
