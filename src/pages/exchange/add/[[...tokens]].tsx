@@ -15,7 +15,8 @@ import { AutoColumn } from 'components/Column'
 import { BigNumber } from '@ethersproject/bignumber'
 import { ConfirmAddModalBottom } from 'features/liquidity/ConfirmAddModalBottom'
 import Container from 'components/Container'
-import CurrencyInputPanel from 'components/CurrencyInputPanel'
+import CurrencyAssetInput from 'components/AssetInput'
+// import CurrencyInputPanel from 'components/CurrencyInputPanel'
 import Dots from 'components/Dots'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 // import ExchangeHeader from 'components/ExchangeHeader'
@@ -44,6 +45,8 @@ import { useWalletModalToggle } from 'state/application/hooks'
 import { LiquidityHeader } from 'features/liquidity'
 // import SwapBanner from 'components/SwapBanner'
 import { useActiveWeb3React } from 'services/web3'
+import AssetInput from 'components/AssetInput'
+import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
 // import SoulLogo from 'components/SoulLogo'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
@@ -60,8 +63,8 @@ export default function Add() {
 
   const oneCurrencyIsWETH = Boolean(
     chainId &&
-      ((currencyA && currencyEquals(currencyA, WNATIVE[chainId])) ||
-        (currencyB && currencyEquals(currencyB, WNATIVE[chainId])))
+    ((currencyA && currencyEquals(currencyA, WNATIVE[chainId])) ||
+      (currencyB && currencyEquals(currencyB, WNATIVE[chainId])))
   )
 
   const toggleWalletModal = useWalletModalToggle() // toggle wallet when disconnected
@@ -205,9 +208,8 @@ export default function Add() {
 
           addTransaction(response, {
             summary: i18n._(
-              t`Add ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${
-                currencies[Field.CURRENCY_A]?.symbol
-              } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencies[Field.CURRENCY_B]?.symbol}`
+              t`Add ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${currencies[Field.CURRENCY_A]?.symbol
+                } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencies[Field.CURRENCY_B]?.symbol}`
             ),
           })
 
@@ -231,9 +233,8 @@ export default function Add() {
 
             addTransaction(response, {
               summary: i18n._(
-                t`Add ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${
-                  currencies[Field.CURRENCY_A]?.symbol
-                } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencies[Field.CURRENCY_B]?.symbol}`
+                t`Add ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${currencies[Field.CURRENCY_A]?.symbol
+                  } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencies[Field.CURRENCY_B]?.symbol}`
               ),
             })
 
@@ -307,9 +308,8 @@ export default function Add() {
   }
 
   const pendingText = i18n._(
-    t`Supplying ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${
-      currencies[Field.CURRENCY_A]?.symbol
-    } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencies[Field.CURRENCY_B]?.symbol}`
+    t`Supplying ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${currencies[Field.CURRENCY_A]?.symbol
+      } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencies[Field.CURRENCY_B]?.symbol}`
   )
 
   const handleCurrencyASelect = useCallback(
@@ -361,44 +361,58 @@ export default function Add() {
         />
       </Head>
       <MainHeader
-            input={currencyA}
-            output={currencyB}
-            allowedSlippage={allowedSlippage}
+        input={currencyA}
+        output={currencyB}
+        allowedSlippage={allowedSlippage}
       />
       {/* <SoulLogo /> */}
-      <div className="mb-4"/>
+      <div className="mb-4" />
       <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
-      {/* <SwapBanner /> */}
-      {/* <DoubleGlowShadowV2 opacity="0.6"> */}
-          <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
-            <SwapHeader
-              inputCurrency={currencies[Field.CURRENCY_A]}
-              outputCurrency={currencies[Field.CURRENCY_B]}
-              // allowedSlippage={allowedSlippage}
-            />
-            <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
-            <TransactionConfirmationModal
-              isOpen={showConfirm}
-              onDismiss={handleDismissConfirmation}
-              attemptingTxn={attemptingTxn}
-              hash={txHash}
-              content={() => (
-                <ConfirmationModalContent
-                  title={noLiquidity ? i18n._(t`You are creating a pool`) : i18n._(t`Receive`)}
-                  onDismiss={handleDismissConfirmation}
-                  topContent={modalHeader}
-                  bottomContent={modalBottom}
-                />
-              )}
-              pendingText={pendingText}
-            />
-            <div className="flex flex-col space-y-4">
-              {/* {pair && pairState !== PairState.INVALID && (
+        {/* <SwapBanner /> */}
+        {/* <DoubleGlowShadowV2 opacity="0.6"> */}
+        <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
+          <SwapHeader
+            inputCurrency={currencies[Field.CURRENCY_A]}
+            outputCurrency={currencies[Field.CURRENCY_B]}
+          // allowedSlippage={allowedSlippage}
+          />
+          <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
+          <TransactionConfirmationModal
+            isOpen={showConfirm}
+            onDismiss={handleDismissConfirmation}
+            attemptingTxn={attemptingTxn}
+            hash={txHash}
+            content={() => (
+              <ConfirmationModalContent
+                title={noLiquidity ? i18n._(t`You are creating a pool`) : i18n._(t`Receive`)}
+                onDismiss={handleDismissConfirmation}
+                topContent={modalHeader}
+                bottomContent={modalBottom}
+              />
+            )}
+            pendingText={pendingText}
+          />
+          <div className="flex flex-col space-y-4">
+            {/* {pair && pairState !== PairState.INVALID && (
                 <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
               )} */}
-
-              <div>
-                <CurrencyInputPanel
+            <SwapAssetPanel
+              spendFromWallet={true}
+              header={(props) => (
+                <SwapAssetPanel.Header
+                  {...props}
+                  label={
+                    independentField === Field.CURRENCY_A ? i18n._(t`Swap from:`) : i18n._(t`Swap from:`)
+                  }
+                />
+              )}
+              currency={currencies[Field.CURRENCY_A]}
+              value={formattedAmounts[Field.CURRENCY_A]}
+              onChange={onFieldAInput}
+            // onSelect={handleInputSelect}
+            />
+            <div>
+              {/* <CurrencyInputPanel
                   value={formattedAmounts[Field.CURRENCY_A]}
                   onUserInput={onFieldAInput}
                   onHalf={() => {
@@ -412,19 +426,38 @@ export default function Add() {
                   currency={currencies[Field.CURRENCY_A]}
                   id="add-liquidity-input-tokena"
                   showCommonBases
-                />
-
-                <AutoColumn justify="space-between" className="py-2.5">
-                  <AutoRow justify={isExpertMode ? 'space-between' : 'flex-start'} style={{ padding: '0 1rem' }}>
+                /> */}
+              {/* <AssetInput
+                currencyLogo={true}
+                currency={currencies[Field.CURRENCY_A]}
+                value={formattedAmounts[Field.CURRENCY_A]}
+                onChange={onFieldAInput}
+                balance={maxAmounts.CURRENCY_A}
+                showMax={false}
+              /> */}
+              {/* <AutoColumn justify="center" className="mt-3">
+                  <AutoRow justify={isExpertMode ? 'space-between' : 'flex-end'} style={{ padding: '0 1rem' }}>
                     <button className="z-10 -mt-6 -mb-6 rounded-full cursor-default bg-dark-900 p-3px">
                       <div className="p-3 rounded-full bg-dark-800">
-                        <Plus size="32" />
+                        <Plus size="18" />
                       </div>
+
                     </button>
                   </AutoRow>
-                </AutoColumn>
-
-                <CurrencyInputPanel
+                </AutoColumn> */}
+              <div className="flex justify-center -mt-6 -mb-6 z-0">
+                <div
+                  role="button"
+                  className="p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-dark-600"
+                  onClick={() => {
+                    // setApprovalSubmitted(false) // reset 2 step UI for approvals
+                    // onSwitchTokens()
+                  }}
+                >
+                  <Plus width={14} className="text-high-emphesis hover:text-white" />
+                </div>
+              </div>
+              {/* <CurrencyInputPanel
                   value={formattedAmounts[Field.CURRENCY_B]}
                   onUserInput={onFieldBInput}
                   onCurrencySelect={handleCurrencyBSelect}
@@ -438,107 +471,122 @@ export default function Add() {
                   currency={currencies[Field.CURRENCY_B]}
                   id="add-liquidity-input-tokenb"
                   showCommonBases
-                />
-              </div>
-
-              {currencies[Field.CURRENCY_A] && currencies[Field.CURRENCY_B] && pairState !== PairState.INVALID && (
-                <div className="p-1 rounded bg-dark-800">
-                  <LiquidityPrice
-                    currencies={currencies}
-                    price={price}
-                    noLiquidity={noLiquidity}
-                    poolTokenPercentage={poolTokenPercentage}
-                    className="bg-dark-900"
-                  />
-                </div>
-              )}
-
-              {addIsUnsupported ? (
-                <Button color="gradient" size="lg" disabled>
-                  {i18n._(t`Unsupported Asset`)}
-                </Button>
-              ) : !account ? (
-                <Web3Connect size="lg" color="gradient" className="w-full" />
-              ) : !isValid ? (
-                <Button size="lg" color="gray" className="w-full" disabled>
-                  {i18n._(t`Enter Amount`)}
-                </Button>
-              ) : (
-                (approvalA === ApprovalState.NOT_APPROVED ||
-                  approvalA === ApprovalState.PENDING ||
-                  approvalB === ApprovalState.NOT_APPROVED ||
-                  approvalB === ApprovalState.PENDING ||
-                  isValid) && (
-                  <AutoColumn gap={'md'}>
-                    {
-                      <RowBetween>
-                        {approvalA !== ApprovalState.APPROVED && (
-                          <Button
-                            color="gradient"
-                            size="lg"
-                            onClick={approveACallback}
-                            disabled={approvalA === ApprovalState.PENDING}
-                            style={{
-                              width: approvalB !== ApprovalState.APPROVED ? '48%' : '100%',
-                            }}
-                          >
-                            {approvalA === ApprovalState.PENDING ? (
-                              <Dots>{i18n._(t`Approving ${currencies[Field.CURRENCY_A]?.symbol}`)}</Dots>
-                            ) : (
-                              i18n._(t`Approve ${currencies[Field.CURRENCY_A]?.symbol}`)
-                            )}
-                          </Button>
-                        )}
-                        {approvalB !== ApprovalState.APPROVED && (
-                          <Button
-                            color="gradient"
-                            size="lg"
-                            onClick={approveBCallback}
-                            disabled={approvalB === ApprovalState.PENDING}
-                            style={{
-                              width: approvalA !== ApprovalState.APPROVED ? '48%' : '100%',
-                            }}
-                          >
-                            {approvalB === ApprovalState.PENDING ? (
-                              <Dots>{i18n._(t`Approving ${currencies[Field.CURRENCY_B]?.symbol}`)}</Dots>
-                            ) : (
-                              i18n._(t`Approve ${currencies[Field.CURRENCY_B]?.symbol}`)
-                            )}
-                          </Button>
-                        )}
-                      </RowBetween>
+                /> */}
+              <SwapAssetPanel
+                spendFromWallet={true}
+                header={(props) => (
+                  <SwapAssetPanel.Header
+                    {...props}
+                    label={
+                      independentField === Field.CURRENCY_B ? i18n._(t`Swap from:`) : i18n._(t`Swap from:`)
                     }
-
-                    {approvalA === ApprovalState.APPROVED && approvalB === ApprovalState.APPROVED && (
-                      <ButtonError
-                        onClick={() => {
-                          isExpertMode ? onAdd() : setShowConfirm(true)
-                        }}
-                        disabled={
-                          !isValid || approvalA !== ApprovalState.APPROVED || approvalB !== ApprovalState.APPROVED
-                        }
-                        error={!isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B]}
-                      >
-                        {error ?? i18n._(t`Confirm Adding Liquidity`)}
-                      </ButtonError>
-                    )}
-                  </AutoColumn>
-                )
-              )}
+                  />
+                )}
+                currency={currencies[Field.CURRENCY_B]}
+                value={formattedAmounts[Field.CURRENCY_B]}
+                onChange={onFieldAInput}
+              // onSelect={handleInputSelect}
+              />
             </div>
 
-            {!addIsUnsupported ? (
-              pair && !noLiquidity && pairState !== PairState.INVALID ? (
-                <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} />
-              ) : null
+            {currencies[Field.CURRENCY_A] && currencies[Field.CURRENCY_B] && pairState !== PairState.INVALID && (
+              <div className="p-1 rounded bg-dark-800">
+                <LiquidityPrice
+                  currencies={currencies}
+                  price={price}
+                  noLiquidity={noLiquidity}
+                  poolTokenPercentage={poolTokenPercentage}
+                  className="bg-dark-900"
+                />
+              </div>
+            )}
+
+            {addIsUnsupported ? (
+              <Button color="gradient" size="lg" disabled>
+                {i18n._(t`Unsupported Asset`)}
+              </Button>
+            ) : !account ? (
+              <Web3Connect size="lg" color="gradient" className="w-full" />
+            ) : !isValid ? (
+              <Button size="lg" color="gray" className="w-full" disabled>
+                {i18n._(t`Enter Amount`)}
+              </Button>
             ) : (
-              <UnsupportedCurrencyFooter
-                show={addIsUnsupported}
-                currencies={[currencies.CURRENCY_A, currencies.CURRENCY_B]}
-              />
+              (approvalA === ApprovalState.NOT_APPROVED ||
+                approvalA === ApprovalState.PENDING ||
+                approvalB === ApprovalState.NOT_APPROVED ||
+                approvalB === ApprovalState.PENDING ||
+                isValid) && (
+                <AutoColumn gap={'md'}>
+                  {
+                    <RowBetween>
+                      {approvalA !== ApprovalState.APPROVED && (
+                        <Button
+                          color="gradient"
+                          size="lg"
+                          onClick={approveACallback}
+                          disabled={approvalA === ApprovalState.PENDING}
+                          style={{
+                            width: approvalB !== ApprovalState.APPROVED ? '48%' : '100%',
+                          }}
+                        >
+                          {approvalA === ApprovalState.PENDING ? (
+                            <Dots>{i18n._(t`Approving ${currencies[Field.CURRENCY_A]?.symbol}`)}</Dots>
+                          ) : (
+                            i18n._(t`Approve ${currencies[Field.CURRENCY_A]?.symbol}`)
+                          )}
+                        </Button>
+                      )}
+                      {approvalB !== ApprovalState.APPROVED && (
+                        <Button
+                          color="gradient"
+                          size="lg"
+                          onClick={approveBCallback}
+                          disabled={approvalB === ApprovalState.PENDING}
+                          style={{
+                            width: approvalA !== ApprovalState.APPROVED ? '48%' : '100%',
+                          }}
+                        >
+                          {approvalB === ApprovalState.PENDING ? (
+                            <Dots>{i18n._(t`Approving ${currencies[Field.CURRENCY_B]?.symbol}`)}</Dots>
+                          ) : (
+                            i18n._(t`Approve ${currencies[Field.CURRENCY_B]?.symbol}`)
+                          )}
+                        </Button>
+                      )}
+                    </RowBetween>
+                  }
+
+                  {approvalA === ApprovalState.APPROVED && approvalB === ApprovalState.APPROVED && (
+                    <ButtonError
+                      onClick={() => {
+                        isExpertMode ? onAdd() : setShowConfirm(true)
+                      }}
+                      disabled={
+                        !isValid || approvalA !== ApprovalState.APPROVED || approvalB !== ApprovalState.APPROVED
+                      }
+                      error={!isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B]}
+                    >
+                      {error ?? i18n._(t`Confirm Adding Liquidity`)}
+                    </ButtonError>
+                  )}
+                </AutoColumn>
+              )
             )}
           </div>
-          {/* <DoubleGlowShadowV2 opacity="0.6"> */}
+
+          {!addIsUnsupported ? (
+            pair && !noLiquidity && pairState !== PairState.INVALID ? (
+              <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} />
+            ) : null
+          ) : (
+            <UnsupportedCurrencyFooter
+              show={addIsUnsupported}
+              currencies={[currencies.CURRENCY_A, currencies.CURRENCY_B]}
+            />
+          )}
+        </div>
+        {/* <DoubleGlowShadowV2 opacity="0.6"> */}
         <div className="flex items-center px-4">
           <NavLink href="/pool">
             <a className="flex items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
@@ -546,7 +594,7 @@ export default function Add() {
             </a>
           </NavLink>
         </div>
-          {/* </DoubleGlowShadowV2> */}
+        {/* </DoubleGlowShadowV2> */}
         {/* </DoubleGlowShadowV2> */}
       </Container>
     </>
