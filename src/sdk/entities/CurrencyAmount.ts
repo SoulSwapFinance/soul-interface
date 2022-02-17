@@ -1,7 +1,7 @@
 import { BigintIsh } from '../types'
 import { Currency } from './Currency'
 import { Fraction } from './Fraction'
-import JSBI from 'jsbi'
+import { JSBI } from 'sdk'
 import { MaxUint256 } from '../constants'
 import { Rounding } from '../enums'
 import { Token } from './Token'

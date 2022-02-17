@@ -1,3 +1,4 @@
+import { JSBI } from '@sushiswap/core-sdk'
 export * from './AbstractCurrency'
 export * from './Currency'
 export * from './CurrencyAmount'
@@ -21,3 +22,4 @@ export * from './Native'
 export * from './eip712'
 export * from './UnderworldCooker'
 export * from './UnderworldMediumRiskLendingPair'
+export { JSBI }

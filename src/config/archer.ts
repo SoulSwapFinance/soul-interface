@@ -1,4 +1,4 @@
-import { ChainId, JSBI } from '../sdk'
+import { ChainId, JSBI } from 'sdk'
 
 import { BigNumber } from '@ethersproject/bignumber'
 

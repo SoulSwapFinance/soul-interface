@@ -47,18 +47,13 @@ export function useUnderworldTokens(): { [address: string]: Token } {
     () =>
       Object.values(allTokens).reduce((previousValue, currentValue) => {
         if (
-          // @ts-ignore TYPE NEEDS FIXING
           CHAINLINK_PRICE_FEED_MAP?.[chainId] &&
-          // @ts-ignore TYPE NEEDS FIXING
           Object.values(CHAINLINK_PRICE_FEED_MAP?.[chainId])?.some(
-            // @ts-ignore TYPE NEEDS FIXING
             (value) => {
-              // @ts-ignore TYPE NEEDS FIXING
               return currentValue.address === value.from || currentValue.address === value.to
             }
           )
         ) {
-          // @ts-ignore TYPE NEEDS FIXING
           previousValue[currentValue.address] = currentValue
         }
         return previousValue
@@ -132,7 +127,6 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
   // @ts-ignore TYPE NEEDS FIXING
   const wnative = WNATIVE_ADDRESS[chainId]
 
-  // @ts-ignore TYPE NEEDS FIXING
   const currency: Token = USD[chainId]
 
   const allTokens = useUnderworldTokens()
@@ -222,6 +216,11 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
         pair.marketHealth = pair.totalCollateralAmount.value
           .mulDiv(e10(18), maximum(pair.currentExchangeRate, pair.oracleExchangeRate, pair.spotExchangeRate))
           .mulDiv(e10(18), pair.currentBorrowAmount.value)
+        
+          // √ ACCURATE
+        console.log('currentAllAssets:%s', Number(pair.currentAllAssets.value))
+        console.log('pair.totalCollateralAmount.value:%s', Number(pair.totalCollateralAmount.value))
+        console.log('marketHealth:%s', Number(pair.marketHealth))
 
         pair.currentTotalAsset = accrueTotalAssetWithFee(pair)
 
