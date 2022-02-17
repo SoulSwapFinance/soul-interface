@@ -285,7 +285,8 @@ export default function Borrow() {
                           <div className="text-secondary">{formatNumber(pair.totalAssetAmount.usd, true)}</div>
                         </div>
                       </div>
-                      <div className="text-right">{formatPercent(pair.currentInterestPerYear.string)}</div>
+                      <div className="text-right">{formatNumber(pair.currentInterestPerYear.value / 1e18 * 100, false, true, 2)}%</div>
+                      {/* <div className="text-right">{formatPercent(pair.currentInterestPerYear.value)}</div> */}
                     </div>
                   </a>
                 </Link>

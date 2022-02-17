@@ -19,10 +19,10 @@ msgstr ""
 msgid "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies."
 msgstr ""
 
-msgid "(collateral minus borrowed)"
+msgid "(Collateral)"
 msgstr ""
 
-msgid "(lent assets)"
+msgid "(Lent)"
 msgstr ""
 
 msgid "+ Add Recipient (optional)"
@@ -68,6 +68,9 @@ msgid "24 Hours"
 msgstr ""
 
 msgid "30 Days"
+msgstr ""
+
+msgid "50%"
 msgstr ""
 
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
@@ -202,9 +205,6 @@ msgstr ""
 msgid "Available Networks"
 msgstr ""
 
-msgid "Available actions"
-msgstr ""
-
 msgid "Avg. APY"
 msgstr ""
 
@@ -272,6 +272,9 @@ msgid "Bypasses confirmation modals and allows high slippage trades. Use at your
 msgstr ""
 
 msgid "CLAIM"
+msgstr ""
+
+msgid "COFFIN"
 msgstr ""
 
 msgid "Calculated based on current rates. Rates are estimates for your convenience, they do not represent guaranteed returns."
@@ -381,6 +384,9 @@ msgstr ""
 msgid "Confirm Withdrawal"
 msgstr ""
 
+msgid "Confirm add liquidity"
+msgstr ""
+
 msgid "Confirm create pool"
 msgstr ""
 
@@ -391,6 +397,9 @@ msgid "Confirm {0}"
 msgstr ""
 
 msgid "Connect Wallet"
+msgstr ""
+
+msgid "Connect Wallet ↗"
 msgstr ""
 
 msgid "Considerations"
@@ -451,6 +460,9 @@ msgid "Deposit Liquidity"
 msgstr ""
 
 msgid "Deposit SOUL into CoffinBox"
+msgstr ""
+
+msgid "Deposit assets in equal amounts"
 msgstr ""
 
 msgid "Deposit to CoffinBox"
@@ -520,9 +532,6 @@ msgid "Enter Recipient"
 msgstr ""
 
 msgid "Enter a valid slippage percentage"
-msgstr ""
-
-msgid "Enter an amount"
 msgstr ""
 
 msgid "Error"
@@ -800,7 +809,7 @@ msgstr ""
 msgid "Lend"
 msgstr ""
 
-msgid "Lend your assets, earn yield with no impermanent loss"
+msgid "Lend your assets, earn yield with ZERO impermanent loss"
 msgstr ""
 
 msgid "Lending"
@@ -923,9 +932,6 @@ msgstr ""
 msgid "Minimum Received"
 msgstr ""
 
-msgid "Minimum received"
-msgstr ""
-
 msgid "Minimum received after slippage"
 msgstr ""
 
@@ -954,9 +960,6 @@ msgid "No Liquidity found"
 msgstr ""
 
 msgid "No Route Found"
-msgstr ""
-
-msgid "No balances"
 msgstr ""
 
 msgid "No liquidity found to do swap"
@@ -1010,6 +1013,9 @@ msgstr ""
 msgid "Our Resources."
 msgstr ""
 
+msgid "Output is estimated. If the price changes by more than 0.5% your transaction will revert."
+msgstr ""
+
 msgid "Output is estimated. If the price changes by more than your chosen slippage it'll revert."
 msgstr ""
 
@@ -1055,9 +1061,6 @@ msgid "Place a limit order or check the status of your past orders"
 msgstr ""
 
 msgid "Please connect to the appropriate Ethereum network."
-msgstr ""
-
-msgid "Please make sure your {0} balance is sufficient to deposit and then try again."
 msgstr ""
 
 msgid "Please make sure your {0} balance is sufficient to withdraw and then try again."
@@ -1541,6 +1544,9 @@ msgstr ""
 msgid "Turn On Expert Mode"
 msgstr ""
 
+msgid "Underworld"
+msgstr ""
+
 msgid "Unknown Source"
 msgstr ""
 
@@ -1584,6 +1590,9 @@ msgid "Use the toggle to switch between balances when interacting with our platf
 msgstr ""
 
 msgid "Used"
+msgstr ""
+
+msgid "VOTE"
 msgstr ""
 
 msgid "Version"
@@ -1658,9 +1667,6 @@ msgstr ""
 msgid "Withdraw to Wallet"
 msgstr ""
 
-msgid "Withdraw to wallet"
-msgstr ""
-
 msgid "Withdraw {0} to Wallet"
 msgstr ""
 
@@ -1691,6 +1697,9 @@ msgstr ""
 msgid "You are creating a pool"
 msgstr ""
 
+msgid "You are depositing:"
+msgstr ""
+
 msgid "You are on the wrong network"
 msgstr ""
 
@@ -1712,7 +1721,7 @@ msgstr ""
 msgid "You receive"
 msgstr ""
 
-msgid "Your"
+msgid "You'll receive (at least):"
 msgstr ""
 
 msgid "Your Claimable SOUL"

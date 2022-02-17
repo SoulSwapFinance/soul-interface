@@ -14,7 +14,7 @@ import { Borrow, PairTools, Repay, Strategy } from 'features/lending'
 import { useUnderworldPair } from 'features/lending/hooks'
 import { formatNumber, formatPercent } from 'functions/format'
 import NetworkGuard from 'guards/Network'
-import { useUSDCPrice } from 'hooks'
+import { usePrice, useUSDCPrice } from 'hooks'
 import { useToken } from 'hooks/Tokens'
 import { useRedirectOnChainId } from 'hooks/useRedirectOnChainId'
 import { useV2Pair } from 'hooks/useV2Pairs'
@@ -31,6 +31,8 @@ export default function Pair() {
 
   const pair = useUnderworldPair(router.query.pair as string)
   const userCollateralBalance = Number(pair?.userCollateralShare / 1e18) // √
+  const collateralPrice = usePrice(pair?.collateral.address)
+  const userCollateralValue = userCollateralBalance * collateralPrice
 
   if (!pair) return <div />
 
@@ -91,7 +93,7 @@ export default function Pair() {
             <div className="text-center text-lg sm:text-2xl text-blue">
               {formatNumber(userCollateralBalance)} {pair.collateral.tokenInfo.symbol}
             </div>
-            <div className="text-center text-md sm:text-lg text-high-emphesis">{formatNumber(pair.userCollateralAmount.usd, true)}</div>
+            <div className="text-center text-md sm:text-lg text-high-emphesis">{formatNumber(userCollateralValue, true)}</div>
           </div>
           <div>
             <div className="text-center text-md sm:text-lg text-secondary">{i18n._(t`Borrowed`)}</div>
