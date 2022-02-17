@@ -83,7 +83,8 @@ export default function CurrencyInputPanel({
               {!hideBalance && currency && currencyBalance ? (
                 <div className="flex flex-col">
                   <div onClick={onMax} className="text-xs font-medium text-right cursor-pointer text-low-emphesis">
-                    {formatCurrencyAmount(currencyBalance, 4)} {currency?.symbol}
+                    {/* {formatCurrencyAmount(Number(currencyBalance), 4)} {currency?.symbol} */}
+                    {currencyBalance?.toSignificant(6, { groupSeparator: ',' }) || '0'} {currency?.symbol}
                   </div>
                   <FiatValue fiatValue={fiatValue} priceImpact={priceImpact} />
                 </div>
