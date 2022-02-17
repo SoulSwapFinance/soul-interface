@@ -22,7 +22,7 @@ type ExecutePayload = {
   parsedAmounts: (CurrencyAmount<Currency> | undefined)[]
   spendFromWallet: [boolean, boolean]
   liquidityMinted?: CurrencyAmount<Token>
-  coffinPermit?: Signature
+  bentoPermit?: Signature
 }
 
 type UseAddLiquidityExecute = () => (x: ExecutePayload) => Promise<TransactionResponse | undefined>
@@ -36,7 +36,7 @@ export const useAddLiquidityExecute: UseAddLiquidityExecute = () => {
   const router = useTridentRouterContract()
 
   return useCallback(
-    async ({ parsedAmounts, spendFromWallet, liquidityMinted, coffinPermit }) => {
+    async ({ parsedAmounts, spendFromWallet, liquidityMinted, bentoPermit }) => {
       const [parsedAmountA, parsedAmountB] = parsedAmounts
       const [nativeA, nativeB] = spendFromWallet
 
@@ -57,6 +57,7 @@ export const useAddLiquidityExecute: UseAddLiquidityExecute = () => {
           native: nativeA,
           amount: nativeA
             ? parsedAmountA.quotient.toString()
+            // @ts-ignore TYPE NEEDS FIXING
             : toShareJSBI(rebases[parsedAmountA.wrapped.currency.address], parsedAmountA.quotient).toString(),
         })
       }
@@ -71,6 +72,7 @@ export const useAddLiquidityExecute: UseAddLiquidityExecute = () => {
           native: nativeB,
           amount: nativeB
             ? parsedAmountB.quotient.toString()
+          // @ts-ignore TYPE NEEDS FIXING
             : toShareJSBI(rebases[parsedAmountB.wrapped.currency.address], parsedAmountB.quotient).toString(),
         })
       }
@@ -85,7 +87,7 @@ export const useAddLiquidityExecute: UseAddLiquidityExecute = () => {
           data: batchAction({
             contract: router,
             actions: [
-              approveMasterContractAction({ router, signature: coffinPermit }),
+              approveMasterContractAction({ router, signature: bentoPermit }),
               getAsEncodedAction({
                 contract: router,
                 fn: 'addLiquidity',
