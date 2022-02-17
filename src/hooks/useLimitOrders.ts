@@ -4,7 +4,7 @@ import useSWR, { SWRResponse } from 'swr'
 import { LAMBDA_URL, OrderStatus } from 'limitorderv2-sdk'
 import { BigNumber } from 'ethers'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { JSBI, LimitOrder, Percent, Token } from '../sdk'
+import { JSBI, LimitOrder, Percent, Token } from 'sdk'
 import { useAllTokens } from './Tokens'
 
 interface State {

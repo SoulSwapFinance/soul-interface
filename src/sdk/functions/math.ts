@@ -1,6 +1,6 @@
 import { ONE, TWO, ZERO } from '../constants/numbers'
 
-import JSBI from 'jsbi'
+import { JSBI } from '@sushiswap/core-sdk'
 import invariant from 'tiny-invariant'
 
 export const MAX_SAFE_INTEGER = JSBI.BigInt(Number.MAX_SAFE_INTEGER)

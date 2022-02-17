@@ -3,12 +3,12 @@ import { InsufficientInputAmountError, InsufficientReservesError } from '../erro
 
 import { BigintIsh } from '../types'
 import { CurrencyAmount } from './CurrencyAmount'
-import JSBI from 'jsbi'
 import { Price } from './Price'
 import { Token } from './Token'
 import { computePairAddress } from '../functions/computePairAddress'
 import invariant from 'tiny-invariant'
 import { sqrt } from '../functions/math'
+import { JSBI } from 'sdk'
 
 export class Pair {
   public readonly liquidityToken: Token

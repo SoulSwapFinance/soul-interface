@@ -10,9 +10,9 @@ import {
   Token,
   ZERO,
   sqrt,
+  JSBI,
 } from 'sdk'
 import { Fee } from '../enums/Fee'
-import JSBI from 'jsbi'
 import { MAX_FEE } from '../constants'
 import EXPORTS from '../abis/all.json'
 import { computeConstantProductPoolAddress } from '../functions/computeConstantProductPoolAddress'

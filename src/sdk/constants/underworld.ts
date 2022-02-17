@@ -1,4 +1,4 @@
-import JSBI from 'jsbi'
+import { JSBI } from 'sdk'
 
 // Functions that need accrue to be called
 export const ACTION_ADD_ASSET = 1
