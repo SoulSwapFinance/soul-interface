@@ -24,13 +24,13 @@ const FANTON_CHAINLINK_MAPPING = {
     toDecimals: 8, // USD
   },
   // USDC / USD
- // '0x2553f4eeb82d5A26427b8d1106C51499CBa5D99c': {
-    // from: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
-    // to: '0x0000000000000000000000000000000000000001', // USD
-    // decimals: 8, // USD
-    // fromDecimals: 6, // USDC
-    // toDecimals: 8, // USD
-  // },
+  '0x2553f4eeb82d5A26427b8d1106C51499CBa5D99c': {
+     from: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
+     to: '0x0000000000000000000000000000000000000001', // USD
+     decimals: 8, // USD
+     fromDecimals: 6, // USDC
+     toDecimals: 8, // USD
+  },
   // DAI / USD
   '0x91d5DEFAFfE2854C7D02F50c80FA1fdc8A721e52': {
     from: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
