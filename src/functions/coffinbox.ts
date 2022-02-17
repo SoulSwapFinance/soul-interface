@@ -3,12 +3,12 @@ import { CurrencyAmount, JSBI, Rebase, Token, ZERO } from '@sushiswap/core-sdk'
 
 // export function toAmount(token, shares: BigNumber): BigNumber {
 //   // console.log('toAmount', token, shares)
-//   return shares.mulDiv(token.bentoAmount, token.bentoShare)
+//   return shares.mulDiv(token.coffinAmount, token.coffinShare)
 // }
 
 // export function toShare(token, amount: BigNumber): BigNumber {
 //   // console.log('toShare', token, shares)
-//   return amount.mulDiv(token.bentoShare, token.bentoAmount)
+//   return amount.mulDiv(token.coffinShare, token.coffinAmount)
 // }
 
 export function toAmount(rebase: Rebase, shares: BigNumber): BigNumber {

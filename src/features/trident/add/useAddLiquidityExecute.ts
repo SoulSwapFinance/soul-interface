@@ -22,7 +22,7 @@ type ExecutePayload = {
   parsedAmounts: (CurrencyAmount<Currency> | undefined)[]
   spendFromWallet: [boolean, boolean]
   liquidityMinted?: CurrencyAmount<Token>
-  bentoPermit?: Signature
+  coffinPermit?: Signature
 }
 
 type UseAddLiquidityExecute = () => (x: ExecutePayload) => Promise<TransactionResponse | undefined>
@@ -36,7 +36,7 @@ export const useAddLiquidityExecute: UseAddLiquidityExecute = () => {
   const router = useTridentRouterContract()
 
   return useCallback(
-    async ({ parsedAmounts, spendFromWallet, liquidityMinted, bentoPermit }) => {
+    async ({ parsedAmounts, spendFromWallet, liquidityMinted, coffinPermit }) => {
       const [parsedAmountA, parsedAmountB] = parsedAmounts
       const [nativeA, nativeB] = spendFromWallet
 
@@ -87,7 +87,7 @@ export const useAddLiquidityExecute: UseAddLiquidityExecute = () => {
           data: batchAction({
             contract: router,
             actions: [
-              approveMasterContractAction({ router, signature: bentoPermit }),
+              approveMasterContractAction({ router, signature: coffinPermit }),
               getAsEncodedAction({
                 contract: router,
                 fn: 'addLiquidity',
