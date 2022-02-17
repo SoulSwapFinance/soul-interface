@@ -14,6 +14,7 @@ import { UnderworldApproveButton } from '../components/Button'
 import SmartNumberInput from '../components/SmartNumberInput'
 import TransactionReviewView from '../components/TransactionReview'
 import WarningsView from '../components/WarningsList'
+import { BigNumber } from '@ethersproject/bignumber'
 
 export default function Withdraw({ pair }: any): JSX.Element {
   const { account } = useActiveWeb3React()
@@ -22,15 +23,21 @@ export default function Withdraw({ pair }: any): JSX.Element {
   const { i18n } = useLingui()
 
   // State
-  const [useCoffin, setUseCoffin] = useState<boolean>(pair.asset.coffinBalance > 0)
+  const [useCoffin, setUseCoffin] = useState<boolean>(BigNumber.from(pair.asset.balance).lt(0))
   // const [useCoffin, setUseCoffin] = useState<boolean>(false)
   const [value, setValue] = useState('')
-  const [pinMax, setPinMax] = useState(false)
+  const [pinMax, setPinMax] = useState(true)
 
   const [underworldApprovalState, approveUnderworldFallback, underworldPermit, onApprove, onCook] = useUnderworldApproveCallback()
 
   // Calculated
-  const max = minimum(pair.maxAssetAvailable, pair.currentUserAssetAmount.value)
+  // const max = pair.currentUserAssetAmount.value
+  const max = 
+    // minimum(pair.maxAssetAvailable, pair.currentUserAssetAmount.value)
+    pair.maxAssetAvailable > pair.currentUserAssetAmount.value 
+      ? pair.maxAssetAvailable
+      : pair.currentUserAssetAmount.value
+
   const displayValue = pinMax ? max.toFixed(pair.asset.tokenInfo.decimals) : value
 
   const fraction = pinMax
@@ -98,7 +105,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
         useCoffinTitle="to"
         useCoffin={useCoffin}
         setUseCoffin={setUseCoffin}
-        max={Number(max)}
+        max={max}
         pinMax={pinMax}
         setPinMax={setPinMax}
         showMax={true}
