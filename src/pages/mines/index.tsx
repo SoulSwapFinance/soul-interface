@@ -191,14 +191,14 @@ export default function Mines(): JSX.Element {
   
   return (
     <>
-      <TridentHeader className="sm:!flex-row justify-left items-center" pattern="bg-bubble">
+      <TridentHeader className="sm:!flex-row justify-center items-center" pattern="bg-bubble">
         <div>
-          <Typography variant="h2" className="text-high-emphesis" weight={700}>
+          {/* <Typography variant="h2" className="text-high-emphesis" weight={700}>
             {i18n._(t`SoulSwap Farms`)}
-          </Typography>
-          <Typography variant="sm" weight={400}>
+          </Typography> */}
+          {/* <Typography variant="sm" weight={400}>
             {i18n._(t`Earn fees and rewards by depositing and staking your liquidity tokens (LP) to the platform.`)}
-          </Typography>
+          </Typography> */}
         </div>
        <div className={`flex items-center justify-between px-2 py-2`}>
         <div className="flex gap-0">
