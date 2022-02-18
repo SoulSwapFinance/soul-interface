@@ -355,7 +355,7 @@ const AssetInputPanelBalance: FC<AssetInputPanelBalanceProps> = ({
 
   return (
     <div className={classNames(error ? 'bg-red/10' : '', 'flex justify-between py-2 px-3')}>
-      <div className="flex items-center gap-1.5 mr-1">
+      <div className="flex items-center gap-2.5 mr-1">
         {icon}
         <Typography variant="sm" className={classNames(balance ? 'text-high-emphesis' : 'text-low-emphesis')}>
           {i18n._(t`Balance:`)}
@@ -380,7 +380,7 @@ const AssetInputPanelBalance: FC<AssetInputPanelBalanceProps> = ({
         onClick={() => onMaxClick(balance)}
         id={id}
       >
-        { balance ? 'MAX' : '0' }
+        {balance ? `${balance.toSignificant(4)} ${balance.currency.symbol == 'SOUL-LP' ? 'LP' : balance.currency.symbol}` : '0.00'}
       </Typography>
       </div>
     </div>

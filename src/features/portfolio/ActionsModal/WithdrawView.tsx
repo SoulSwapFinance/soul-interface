@@ -46,8 +46,10 @@ const WithdrawView: FC<WithdrawViewProps> = ({ onClose, onBack }) => {
         await withdraw(
           currency?.wrapped.address,
           inputState.value.toBigNumber(currency?.decimals),
+          // @ts-ignore
           rebases?.[currency.wrapped.address]
             ? toShareJSBI(
+                // @ts-ignore
                 rebases[currency.wrapped.address] as Rebase,
                 JSBI.BigInt(parseUnits(inputState.value, currency?.decimals))
               )

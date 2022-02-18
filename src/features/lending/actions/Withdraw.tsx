@@ -14,15 +14,19 @@ import { UnderworldApproveButton } from '../components/Button'
 import SmartNumberInput from '../components/SmartNumberInput'
 import TransactionReviewView from '../components/TransactionReview'
 import WarningsView from '../components/WarningsList'
+import { BigNumber } from '@ethersproject/bignumber'
+import AssetInput from 'components/AssetInput'
+import { useCurrency } from 'hooks/Tokens'
 
 export default function Withdraw({ pair }: any): JSX.Element {
   const { account } = useActiveWeb3React()
   const pendingApprovalMessage = useUnderworldApprovalPending()
+  const assetToken = useCurrency(pair.asset.address) || undefined
 
   const { i18n } = useLingui()
 
   // State
-  const [useCoffin, setUseCoffin] = useState<boolean>(pair.asset.coffinBalance > 0)
+  const [useCoffin, setUseCoffin] = useState<boolean>(BigNumber.from(pair.asset.balance).lt(0))
   // const [useCoffin, setUseCoffin] = useState<boolean>(false)
   const [value, setValue] = useState('')
   const [pinMax, setPinMax] = useState(false)
@@ -30,7 +34,13 @@ export default function Withdraw({ pair }: any): JSX.Element {
   const [underworldApprovalState, approveUnderworldFallback, underworldPermit, onApprove, onCook] = useUnderworldApproveCallback()
 
   // Calculated
-  const max = minimum(pair.maxAssetAvailable, pair.currentUserAssetAmount.value)
+  // const max = pair.currentUserAssetAmount.value
+  const max = 
+    // minimum(pair.maxAssetAvailable, pair.currentUserAssetAmount.value)
+    pair.maxAssetAvailable > pair.currentUserAssetAmount.value 
+      ? pair.maxAssetAvailable
+      : pair.currentUserAssetAmount.value
+
   const displayValue = pinMax ? max.toFixed(pair.asset.tokenInfo.decimals) : value
 
   const fraction = pinMax
@@ -65,9 +75,14 @@ export default function Withdraw({ pair }: any): JSX.Element {
       newUserAssetAmount,
       pair.asset
     )
-    transactionReview.addUSD(i18n._(t`Balance USD`), pair.currentUserAssetAmount.value, newUserAssetAmount, pair.asset)
+    transactionReview.addUSD(i18n._(t`Balance USD`), 
+      pair.currentUserAssetAmount.value, 
+      newUserAssetAmount, 
+      pair.asset)
 
-    const newUtilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.sub(amount))
+    const newUtilization 
+      = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.sub(amount))
+      // = pair.currentBorrowAmount.value.mul(pair.currentAllAssets.value).sub(newUserAssetAmount)
     transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
   }
 
@@ -86,10 +101,10 @@ export default function Withdraw({ pair }: any): JSX.Element {
   return (
     <>
       <div className="mt-6 text-3xl text-high-emphesis">
-        {i18n._(t`Withdraw`)} {pair.asset.tokenInfo.symbol}
+        {/* {i18n._(t`Withdraw`)} {pair.asset.tokenInfo.symbol} */}
       </div>
 
-      <SmartNumberInput
+      {/* <SmartNumberInput
         color="blue"
         token={pair.asset}
         value={displayValue}
@@ -98,10 +113,20 @@ export default function Withdraw({ pair }: any): JSX.Element {
         useCoffinTitle="to"
         useCoffin={useCoffin}
         setUseCoffin={setUseCoffin}
-        max={Number(max)}
+        max={max}
         pinMax={pinMax}
         setPinMax={setPinMax}
         showMax={true}
+      /> */}
+       <AssetInput
+        size="sm"
+        id="add-collateral-input"
+        value={displayValue}
+        currency={assetToken}
+        onChange={setValue}
+        className="!mt-0"
+        showMax={true}
+        spendFromWallet={false}
       />
 
       <WarningsView warnings={warnings} />

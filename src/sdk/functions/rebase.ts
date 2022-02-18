@@ -1,4 +1,4 @@
-import JSBI from 'jsbi'
+import { JSBI } from '@sushiswap/core-sdk'
 
 import { ONE, ZERO } from '../constants'
 import { Rebase } from '../interfaces'

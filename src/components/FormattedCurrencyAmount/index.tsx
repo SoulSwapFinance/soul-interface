@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Fraction, JSBI } from '../../sdk'
+import { Currency, CurrencyAmount, Fraction, JSBI } from 'sdk'
 
 import React from 'react'
 

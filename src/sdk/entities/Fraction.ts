@@ -1,7 +1,7 @@
 import _Big from 'big.js'
 
 import { BigintIsh } from '../types'
-import { JSBI } from '..'
+import { JSBI } from 'sdk'
 import { Rounding } from '../enums'
 import _Decimal from 'decimal.js-light'
 import invariant from 'tiny-invariant'

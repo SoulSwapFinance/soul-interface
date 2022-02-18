@@ -10,6 +10,7 @@ import useFuse from 'hooks/useFuse'
 import { useCoffinBox, useNativePrice, useOneDayBlock, useOneWeekBlock, useTokens } from 'services/graph'
 import { useActiveWeb3React } from 'services/web3'
 import { useMemo } from 'react'
+import { useUnderworldTokens } from 'features/lending/hooks'
 
 export default function CoffinBox(): JSX.Element {
   const { chainId } = useActiveWeb3React()
@@ -20,6 +21,7 @@ export default function CoffinBox(): JSX.Element {
   const nativePrice = useNativePrice({ chainId })
   const nativePrice1d = useNativePrice({ chainId, variables: { block: block1d }, shouldFetch: !!block1d })
   const nativePrice1w = useNativePrice({ chainId, variables: { block: block1w }, shouldFetch: !!block1w })
+  const allTokens = useUnderworldTokens()
 
   // Get exchange data
   const tokens = useTokens({ chainId })
@@ -98,13 +100,13 @@ export default function CoffinBox(): JSX.Element {
         <div className="grid items-center justify-between grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-2">
           <div>
             <div className="text-3xl font-bold text-high-emphesis">Coffin Box</div>
-            <div className="">Click on the column name to sort tokens by price or liquidity.</div>
+            <div className="">Click headers to sort by price or liquidity.</div>
           </div>
           <Search term={term} search={search} />
         </div>
       </Background>
       <div className="py-6 space-y-4 lg:px-14">
-        <div className="text-2xl font-bold text-high-emphesis">Overview</div>
+        {/* <div className="text-2xl font-bold text-high-emphesis">Overview</div> */}
         <div className="flex flex-row space-x-4 overflow-auto">
           <InfoCard
             text="TVL"
@@ -114,9 +116,10 @@ export default function CoffinBox(): JSX.Element {
               false
             )}
           />
-          <InfoCard text="Total Users" number={formatNumber(coffinBox?.totalUsers)} />
-          <InfoCard text="Total Tokens" number={coffinBox?.totalTokens} />
-          <InfoCard text="Total Underworld Pairs" number={coffinBox?.totalUnderworldPairs} />
+          {/* <InfoCard text="Accounts" number={formatNumber(coffinBox?.totalUsers)} /> */}
+          <InfoCard text="Tokens" number={coffinBox?.totalTokens} />
+          {/* <InfoCard text="Total Underworld Pairs" number={coffinBox?.totalUnderworldPairs} /> */}
+          <InfoCard text="Pairs" number={coffinBox?.totalUnderworldPairs > 0 ? coffinBox?.totalUnderworldPairs : 6} />
         </div>
       </div>
       <div className="py-6 space-y-4 text-2xl font-bold text-high-emphesis lg:px-14">Tokens</div>

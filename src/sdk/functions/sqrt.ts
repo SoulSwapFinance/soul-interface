@@ -1,4 +1,4 @@
-import JSBI from 'jsbi'
+import { JSBI } from 'sdk'
 import invariant from 'tiny-invariant'
 
 export const MAX_SAFE_INTEGER = JSBI.BigInt(Number.MAX_SAFE_INTEGER)

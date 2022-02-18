@@ -2,7 +2,7 @@ import { BigintIsh } from '../types'
 import { Currency } from './Currency'
 import { CurrencyAmount } from './CurrencyAmount'
 import { Fraction } from './Fraction'
-import JSBI from 'jsbi'
+import { JSBI } from 'sdk'
 import { Rounding } from '../enums'
 import invariant from 'tiny-invariant'
 

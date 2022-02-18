@@ -21,6 +21,7 @@ import MarketHeader from 'features/lending/components/MarketHeader'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
 import { useUnderworldBorrowPositions } from 'features/portfolio/AssetBalances/underworld/hooks'
+import { usePrice } from 'hooks'
 
 const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
 
@@ -39,7 +40,8 @@ export default function Borrow() {
   )
 
   const [numDisplayed, setNumDisplayed] = useInfiniteScroll(data.items)
-
+  let pairPrice = '0'
+  
   return (
     <BorrowLayout>
       <Head>
@@ -149,11 +151,14 @@ export default function Borrow() {
                             </div>
                             <div className="hidden text-right md:block">
                               <div>
-                                {formatNumber(pair?.userCollateralAmount.string, false)}{' '}
+
+  {/* const userCollateralValue = userCollateralBalance * collateralPrice */}
+
+                                {formatNumber(Number(pair?.userCollateralShare / 1e18), false)}{' '}
                                 {pair.collateral.tokenInfo.symbol}
                               </div>
                               <div className="text-sm text-secondary">
-                                {formatNumber(pair.userCollateralAmount.usd, true)}
+                                {/* {formatNumber(pair?.userCollateralShare / 1e18 * (Number(usePrice(pair?.collateral.address))), true) } */}
                               </div>
                             </div>
                             <div className="flex items-center justify-end">
@@ -285,7 +290,8 @@ export default function Borrow() {
                           <div className="text-secondary">{formatNumber(pair.totalAssetAmount.usd, true)}</div>
                         </div>
                       </div>
-                      <div className="text-right">{formatPercent(pair.currentInterestPerYear.string)}</div>
+                      <div className="text-right">{formatNumber(pair.currentInterestPerYear.value / 1e18 * 100, false, true, 2)}%</div>
+                      {/* <div className="text-right">{formatPercent(pair.currentInterestPerYear.value)}</div> */}
                     </div>
                   </a>
                 </Link>

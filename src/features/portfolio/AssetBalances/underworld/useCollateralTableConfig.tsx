@@ -28,7 +28,7 @@ export const useCollateralTableConfig = (data: CollateralData[]) => {
               Cell: (props: CellProps) => ValueCell(props.cell.value),
             },
             {
-              Header: 'Limit used',
+              Header: 'Limit Used',
               accessor: 'limit',
               maxWidth: 100,
               className: 'text-left',

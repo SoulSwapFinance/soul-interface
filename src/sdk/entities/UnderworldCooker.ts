@@ -2,7 +2,7 @@ import { ChainId, WNATIVE_ADDRESS, ZERO, getProviderOrSigner, toElastic } from '
 
 import { AddressZero } from '@ethersproject/constants'
 import { Contract } from '@ethersproject/contracts'
-import JSBI from 'jsbi'
+import { JSBI } from 'sdk'
 import UNDERWORLD_PAIR_ABI from 'constants/abis/underworldpair.json'
 import { UnderworldAction } from '../enums'
 import { UnderworldPermit } from '../interfaces'

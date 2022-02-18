@@ -1,6 +1,6 @@
 import { BigintIsh } from '../types'
 import { Fraction } from './Fraction'
-import JSBI from 'jsbi'
+import { JSBI } from 'sdk'
 import { Rounding } from '../enums'
 
 const ONE_HUNDRED = new Fraction(JSBI.BigInt(100))

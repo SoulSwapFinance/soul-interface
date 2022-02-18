@@ -1,4 +1,4 @@
-import { ConstantProductPool, Currency, CurrencyAmount, JSBI, PoolState, Percent, Rebase, Token, ZERO } from 'sdk'
+import { ConstantProductPool, Currency, CurrencyAmount, PoolState, Percent, Token, ZERO, Rebase } from 'sdk'
 import useCurrenciesFromURL from 'features/trident/useCurrenciesFromURL'
 import { toAmountCurrencyAmount } from 'functions'
 import useCoffinRebases from 'hooks/useCoffinRebases'
@@ -36,10 +36,13 @@ const PoolContext: FC = ({ children }) => {
   const noLiquidity = useMemo(() => {
     return (
       poolWithState.state === PoolState.NOT_EXISTS ||
+      // @ts-ignore
       Boolean(totalSupply && JSBI.equal(totalSupply.quotient, ZERO)) ||
       Boolean(
         poolWithState.pool &&
+          // @ts-ignore
           JSBI.equal(poolWithState.pool.reserve0.quotient, ZERO) &&
+          // @ts-ignore
           JSBI.equal(poolWithState.pool.reserve1.quotient, ZERO)
       )
     )
@@ -67,10 +70,12 @@ const PoolContext: FC = ({ children }) => {
       // Convert from shares to amount
       return [
         toAmountCurrencyAmount(
+          // @ts-ignore
           rebases[poolWithState.pool.token0.wrapped.address],
           poolWithState.pool.getLiquidityValue(poolWithState.pool.token0, totalSupply.wrapped, poolBalance.wrapped)
         ),
         toAmountCurrencyAmount(
+          // @ts-ignore
           rebases[poolWithState.pool.token1.wrapped.address],
           poolWithState.pool.getLiquidityValue(poolWithState.pool.token1, totalSupply.wrapped, poolBalance.wrapped)
         ),
@@ -82,6 +87,7 @@ const PoolContext: FC = ({ children }) => {
 
   return (
     <Context.Provider
+      // @ts-ignore
       value={useMemo(
         () => ({
           poolWithState,

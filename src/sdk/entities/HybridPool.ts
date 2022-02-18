@@ -6,12 +6,12 @@ import {
     Price,
     Token,
     ZERO,
+    JSBI
   } from 'sdk'
   import { computeHybridLiquidity, computeHybridPoolAddress } from '../functions'
   
   import { A_PRECISION } from '../constants'
   import { Fee } from '../enums'
-  import JSBI from 'jsbi'
   import EXPORTS from 'sdk/abis/all.json'
   import invariant from 'tiny-invariant'
   import { Pool } from './Pool'

@@ -102,7 +102,7 @@ export default function Pairs() {
         <div className="grid items-center justify-between grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-2">
           <div>
             <div className="text-3xl font-bold text-high-emphesis">Pairs</div>
-            <div className="">Click on the column name to sort pairs by its TVL, volume or fees gained.</div>
+            <div className="">Click headers to sort by TVL, volume, or fees.</div>
           </div>
           <Search term={term} search={search} />
         </div>

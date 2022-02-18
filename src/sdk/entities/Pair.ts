@@ -3,12 +3,12 @@ import { InsufficientInputAmountError, InsufficientReservesError } from '../erro
 
 import { BigintIsh } from '../types'
 import { CurrencyAmount } from './CurrencyAmount'
-import JSBI from 'jsbi'
 import { Price } from './Price'
 import { Token } from './Token'
 import { computePairAddress } from '../functions/computePairAddress'
 import invariant from 'tiny-invariant'
 import { sqrt } from '../functions/math'
+import { JSBI } from 'sdk'
 
 export class Pair {
   public readonly liquidityToken: Token
@@ -160,13 +160,13 @@ export class Pair {
       const amount1 = JSBI.divide(JSBI.multiply(tokenAmounts[1].quotient, totalSupply.quotient), this.reserve1.quotient)
       liquidity = JSBI.lessThanOrEqual(amount0, amount1) ? amount0 : amount1
 
-      console.log({
-        amount0: amount0.toString(),
-        amount1: amount1.toString(),
-        liquidity: liquidity.toString(),
-        totalSupply: totalSupply.quotient.toString(),
-        kLast: sqrt(JSBI.multiply(this.tokenAmounts[0].quotient, this.tokenAmounts[1].quotient)),
-      })
+      // console.log({
+      //   amount0: amount0.toString(),
+      //   amount1: amount1.toString(),
+      //   liquidity: liquidity.toString(),
+      //   totalSupply: totalSupply.quotient.toString(),
+      //   kLast: sqrt(JSBI.multiply(this.tokenAmounts[0].quotient, this.tokenAmounts[1].quotient)),
+      // })
     }
     if (!JSBI.greaterThan(liquidity, ZERO)) {
       throw new InsufficientInputAmountError()

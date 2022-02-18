@@ -1,5 +1,5 @@
 import { ChainId } from '../enums'
-import JSBI from 'jsbi'
+import { JSBI } from 'sdk'
 
 export * from './addresses'
 export * from './underworld'

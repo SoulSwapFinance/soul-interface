@@ -158,7 +158,7 @@ export default function CurrencyInputPanel({
                 }}
               />
               {!hideBalance && currency && selectedCurrencyBalance ? (
-                <div className="flex flex-col">
+                <div className="flex flex-cols-2">
                   <div onClick={onHalf} className="text-xs font-medium text-right cursor-pointer text-low-emphesis">
                     {renderBalance ? (
                       renderBalance(selectedCurrencyBalance)
@@ -166,12 +166,13 @@ export default function CurrencyInputPanel({
 
                       <>
                         {/* {i18n._(t`Balance:`)}  */}
-                        {/* {i18n._(t`Balance:`)}  */}
-                        {formatCurrencyAmount(selectedCurrencyBalance.divide(2), 4)} {currency.symbol}
+                        {i18n._(t`50%`)} 
+                        {/* {formatCurrencyAmount(selectedCurrencyBalance.divide(2), 4)} {currency.symbol} */}
                         {/* {selectedCurrencyBalance?.toSignificant(6, { groupSeparator: ',' }) || '0'} {currency?.symbol} */}
                       </>
                     )}
                   </div>
+                  <br/>
                   <div onClick={onMax} className="text-xs font-medium text-right cursor-pointer text-low-emphesis">
                     {renderBalance ? (
                       renderBalance(selectedCurrencyBalance)
@@ -180,8 +181,8 @@ export default function CurrencyInputPanel({
                       <>
                         {/* {i18n._(t`Balance:`)}  */}
                         {/* {i18n._(t`Balance:`)}  */}
-                        {formatCurrencyAmount(selectedCurrencyBalance, 4)} {currency.symbol}
-                        {/* {selectedCurrencyBalance?.toSignificant(6, { groupSeparator: ',' }) || '0'} {currency?.symbol} */}
+                        {/* {formatCurrencyAmount(selectedCurrencyBalance, 4)} {currency.symbol} */}
+                        {selectedCurrencyBalance?.toSignificant(6, { groupSeparator: ',' }) || '0'} {currency?.symbol}
                       </>
                     )}
                   </div>

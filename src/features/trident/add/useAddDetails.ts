@@ -34,6 +34,7 @@ export const useAddDetails = (defaultSlippage: Percent = DEFAULT_ADD_V2_SLIPPAGE
       rebases?.[currencies[1].wrapped.address]
     ) {
       const amountA = toShareCurrencyAmount(
+        // @ts-ignore FIX TYPE
         rebases[currencies[0].wrapped.address],
         parsedAmounts && parsedAmounts[0]
           ? parsedAmounts[0].wrapped
@@ -41,6 +42,7 @@ export const useAddDetails = (defaultSlippage: Percent = DEFAULT_ADD_V2_SLIPPAGE
       )
 
       const amountB = toShareCurrencyAmount(
+        // @ts-ignore FIX TYPE
         rebases[currencies[1].wrapped.address],
         parsedAmounts && parsedAmounts[1]
           ? parsedAmounts[1].wrapped
@@ -48,9 +50,10 @@ export const useAddDetails = (defaultSlippage: Percent = DEFAULT_ADD_V2_SLIPPAGE
       )
 
       // Both can't be zero
-      if (amountA.equalTo(ZERO) && amountB.equalTo(ZERO)) return undefined
+      if (amountA.equalTo(0) && amountB.equalTo(0)) return undefined
 
       try {
+        // @ts-ignore FIX TYPE
         const slp = poolWithState.pool.getLiquidityMinted(totalSupply, amountA, amountB)
         const minSLP = calculateSlippageAmount(slp, noLiquidity ? ZERO_PERCENT : slippage)[0]
         return CurrencyAmount.fromRawAmount(slp.currency, minSLP.toString())

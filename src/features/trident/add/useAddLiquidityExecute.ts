@@ -57,6 +57,7 @@ export const useAddLiquidityExecute: UseAddLiquidityExecute = () => {
           native: nativeA,
           amount: nativeA
             ? parsedAmountA.quotient.toString()
+            // @ts-ignore TYPE NEEDS FIXING
             : toShareJSBI(rebases[parsedAmountA.wrapped.currency.address], parsedAmountA.quotient).toString(),
         })
       }
@@ -71,6 +72,7 @@ export const useAddLiquidityExecute: UseAddLiquidityExecute = () => {
           native: nativeB,
           amount: nativeB
             ? parsedAmountB.quotient.toString()
+          // @ts-ignore TYPE NEEDS FIXING
             : toShareJSBI(rebases[parsedAmountB.wrapped.currency.address], parsedAmountB.quotient).toString(),
         })
       }
