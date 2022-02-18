@@ -409,7 +409,7 @@ export default function Add() {
               currency={currencies[Field.CURRENCY_A]}
               value={formattedAmounts[Field.CURRENCY_A]}
               onChange={onFieldAInput}
-            // onSelect={handleInputSelect}
+            onSelect={handleCurrencyASelect}
             />
             <div>
               {/* <CurrencyInputPanel
@@ -484,8 +484,8 @@ export default function Add() {
                 )}
                 currency={currencies[Field.CURRENCY_B]}
                 value={formattedAmounts[Field.CURRENCY_B]}
-                onChange={onFieldAInput}
-              // onSelect={handleInputSelect}
+                onChange={onFieldBInput}
+              onSelect={handleCurrencyBSelect}
               />
             </div>
 
