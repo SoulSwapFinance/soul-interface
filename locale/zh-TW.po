@@ -760,9 +760,6 @@ msgstr ""
 msgid "Invalid Pool"
 msgstr ""
 
-msgid "Invalid Recipient"
-msgstr ""
-
 msgid "Invalid pair"
 msgstr ""
 
