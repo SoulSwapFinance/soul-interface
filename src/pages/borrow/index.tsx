@@ -158,7 +158,7 @@ export default function Borrow() {
                                 {pair.collateral.tokenInfo.symbol}
                               </div>
                               <div className="text-sm text-secondary">
-                                { formatNumber(pair?.userCollateralShare / 1e18 * (Number(usePrice(pair?.collateral.address))), true) }
+                                {/* {formatNumber(pair?.userCollateralShare / 1e18 * (Number(usePrice(pair?.collateral.address))), true) } */}
                               </div>
                             </div>
                             <div className="flex items-center justify-end">
@@ -290,7 +290,7 @@ export default function Borrow() {
                           <div className="text-secondary">{formatNumber(pair.totalAssetAmount.usd, true)}</div>
                         </div>
                       </div>
-                      <div className="text-right">{formatPercent(pair.currentInterestPerYear.value / 1e18 * 100)}</div>
+                      <div className="text-right">{formatNumber(pair.currentInterestPerYear.value / 1e18 * 100, false, true, 2)}%</div>
                       {/* <div className="text-right">{formatPercent(pair.currentInterestPerYear.value)}</div> */}
                     </div>
                   </a>
