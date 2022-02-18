@@ -116,7 +116,7 @@ export default function CoffinBox(): JSX.Element {
               false
             )}
           />
-          <InfoCard text="Accounts" number={formatNumber(coffinBox?.totalUsers)} />
+          {/* <InfoCard text="Accounts" number={formatNumber(coffinBox?.totalUsers)} /> */}
           <InfoCard text="Tokens" number={coffinBox?.totalTokens} />
           {/* <InfoCard text="Total Underworld Pairs" number={coffinBox?.totalUnderworldPairs} /> */}
           <InfoCard text="Pairs" number={coffinBox?.totalUnderworldPairs > 0 ? coffinBox?.totalUnderworldPairs : 6} />

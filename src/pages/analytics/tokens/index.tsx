@@ -26,7 +26,7 @@ export default function Tokens() {
         <div className="grid items-center justify-between grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-2">
           <div>
             <div className="text-3xl font-bold text-high-emphesis">Tokens</div>
-            <div>Click on the column name to sort tokens by it&apos;s price or trading volume.</div>
+            <div>Click headers to sort by price, liquidity, or volume.</div>
           </div>
           <Search term={term} search={search} />
         </div>
