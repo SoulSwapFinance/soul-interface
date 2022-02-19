@@ -42,7 +42,7 @@ export default function PairTools({ pair }) {
       <QuestionHelper
         text={
           <div>
-            <div>Update the exchange rate</div>
+            <div>Update Exchange Rate</div>
             <div>Current Deviation: {formatPercent(priceChange)}</div>
           </div>
         }
