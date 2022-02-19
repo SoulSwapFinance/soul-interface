@@ -20,7 +20,7 @@ const Vote = () => {
 	return (
 
 		<>
-			<Typography variant="hero" className={'md:hidden text-center font-bold mt-5 text-purple'}>
+			{/* <Typography variant="hero" className={'md:hidden text-center font-bold mt-5 text-purple'}>
 			Requests
 		</Typography>
 			<div className='sm:flex md:flex w-full h-full'>
@@ -35,7 +35,7 @@ const Vote = () => {
 			<br/>
 			<Typography variant="hero" className={'md:hidden text-center font-bold mt-5 text-purple'}>
 			Proposals
-		</Typography>				
+		</Typography>				 */}
 		<iframe
 					frameBorder={"none"}
 					title={"Vote"}
@@ -43,7 +43,7 @@ const Vote = () => {
 					height={"100%"}
 					width={"99%"}
 				/>
-			</div>
+			{/* </div> */}
 		</>
 	);
 };
