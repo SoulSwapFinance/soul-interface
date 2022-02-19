@@ -66,7 +66,7 @@ export const useLendPositionAmounts = (): PairWithAmount[] => {
       if (!chainId) return undefined
 
       const lentAsset = new Token(chainId, item.asset.address, item.asset.tokenInfo.decimals, item.asset.symbol)
-      const lentAssetAmount = JSBI.BigInt(item.currentUserAssetAmount.value.toString())
+      const lentAssetAmount = JSBI.BigInt(item.userAssetFraction.toString())
       return {
         pair: item,
         amount: CurrencyAmount.fromRawAmount(lentAsset, lentAssetAmount),
@@ -90,7 +90,7 @@ export const useCollateralPositionAmounts = (): PairWithAmount[] => {
         item.collateral.tokenInfo.decimals,
         item.collateral.symbol
       )
-      const collateralAssetAmount = JSBI.BigInt(item.userCollateralAmount.value.toString())
+      const collateralAssetAmount = JSBI.BigInt(item.userCollateralShare.toString())
       return {
         pair: item,
         amount: CurrencyAmount.fromRawAmount(collateralAsset, collateralAssetAmount),
@@ -108,8 +108,8 @@ export function useUnderworldPositions() {
   const collateralPositionAmounts = collateralPositions.map((p) => p.amount)
 
   const underworldBalances = useMemo(
-    () => reduceBalances([...collateralPositionAmounts, ...lentPositionAmounts]),
-    [collateralPositionAmounts, lentPositionAmounts]
+    () => reduceBalances([...borrowPositionAmounts, ...collateralPositionAmounts, ...lentPositionAmounts]),
+    [borrowPositionAmounts, collateralPositionAmounts, lentPositionAmounts]
   )
 
   return useMemo(

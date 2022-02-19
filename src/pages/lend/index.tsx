@@ -73,7 +73,7 @@ export default function Lend() {
                   </>
                 </ListHeaderWithSort>
                 <ListHeaderWithSort className="hidden justify-center md:flex" sort={positions} sortKey="asset.tokenInfo.symbol">
-                  {i18n._(t`Lending`)}
+                  {i18n._(t`Asset`)}
                 </ListHeaderWithSort>
                 <ListHeaderWithSort className="hidden justify-center md:flex" sort={positions} sortKey="collateral.tokenInfo.symbol">
                   {i18n._(t`Collateral`)}
@@ -87,7 +87,7 @@ export default function Lend() {
                   sortKey="currentUserAssetAmount.usdValue"
                   direction="descending"
                 >
-                  {i18n._(t`Lent`)}
+                  {i18n._(t`Provided`)}
                 </ListHeaderWithSort>
                 <ListHeaderWithSort
                   className="justify-center"
@@ -103,7 +103,7 @@ export default function Lend() {
                   sortKey="supplyAPR.valueWithStrategy"
                   direction="descending"
                 >
-                  {i18n._(t`APR`)}
+                  {i18n._(t`Interest`)}
                 </ListHeaderWithSort>
               </div>
               <div className="flex-col space-y-2">
@@ -120,7 +120,7 @@ export default function Lend() {
               {i18n._(t`Markets`)}
             </ListHeaderWithSort>
             <ListHeaderWithSort className="hidden justify-center md:flex" sort={data} sortKey="asset.tokenInfo.symbol">
-              {i18n._(t`Lending`)}
+              {i18n._(t`Asset`)}
             </ListHeaderWithSort>
             <ListHeaderWithSort className="hidden justify-center md:flex" sort={data} sortKey="collateral.tokenInfo.symbol">
               {i18n._(t`Collateral`)}
@@ -143,7 +143,7 @@ export default function Lend() {
               sortKey="currentSupplyAPR.valueWithStrategy"
               direction="descending"
             >
-              {i18n._(t`APR`)}
+              {i18n._(t`Interest`)}
             </ListHeaderWithSort>
             <ListHeaderWithSort
               className="justify-center sm:flex"

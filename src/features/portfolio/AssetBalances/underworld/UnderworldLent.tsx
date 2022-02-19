@@ -1,5 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
+import { Button } from 'components/Button'
 import Typography from 'components/Typography'
 import AssetBalances from 'features/portfolio/AssetBalances/AssetBalances'
 import { useLendPositionAmounts } from 'features/portfolio/AssetBalances/underworld/hooks'
@@ -20,9 +21,11 @@ export const UnderworldLent = () => {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex justify-center items-center gap-2">
-        <Typography weight={700} variant="lg" className="text-high-emphesis">
+      <Button color="purple" >
+      <Typography weight={700} variant="lg" className="text-high-emphesis">
           {i18n._(t`Underworld Assets`)}
         </Typography>
+        </Button>
         {/* <Typography weight={700} variant="sm" className="text-low-emphesis">
           {i18n._(t`(Provided)`)}
         </Typography> */}

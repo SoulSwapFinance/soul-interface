@@ -8,6 +8,7 @@ import { useCollateralPositionAmounts } from 'features/portfolio/AssetBalances/u
 import { useCollateralTableConfig } from 'features/portfolio/AssetBalances/underworld/useCollateralTableConfig'
 import { useRouter } from 'next/router'
 import React from 'react'
+import { Button } from 'components/Button'
 
 export interface CollateralData {
   collateral: CurrencyAmount<Currency>
@@ -34,9 +35,11 @@ export const UnderworldCollateral = () => {
   return (
     <div className="flex flex-col w-full gap-3">
       <div className="flex justify-center items-center gap-2">
-        <Typography weight={700} variant="lg" className="text-high-emphesis">
+      <Button color="purple" >
+<Typography weight={700} variant="lg" className="text-high-emphesis">
           {i18n._(t`Underworld Collateral`)}
         </Typography>
+        </Button>
         {/* <Typography weight={700} variant="sm" className="text-low-emphesis">
           {i18n._(t`(Collateral)`)}
         </Typography> */}

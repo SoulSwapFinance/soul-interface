@@ -13,6 +13,7 @@ import { useAllTokenBalancesWithLoadingIndicator, useCurrencyBalance } from 'sta
 import React, { FC, useCallback, useMemo } from 'react'
 
 import { useBasicTableConfig } from '../useBasicTableConfig'
+import { Button } from 'components/Button'
 
 export const CoffinBalances = ({ account }: { account: string }) => {
   const { i18n } = useLingui()
@@ -40,9 +41,12 @@ export const CoffinBalances = ({ account }: { account: string }) => {
 
   return (
     <div className="flex flex-col gap-3">
-      <Typography weight={700} variant="lg" className="px-2 text-center text-high-emphesis">
+      <Button color="blue" >
+      <Typography weight={700} variant="lg" 
+        className="px-2 text-center text-high-emphesis">
         {i18n._(t`CoffinBox Balances`)}
       </Typography>
+      </Button>
       <AssetBalances config={config} onSelect={handleRowClick} />
     </div>
   )
@@ -86,9 +90,11 @@ export const WalletBalances: FC<{ account: string }> = ({ account }) => {
 
   return (
     <div className="flex flex-col gap-3">
+      <Button color="blue" >
       <Typography weight={700} variant="lg" className="px-2 text-center text-high-emphesis">
         {i18n._(t`Wallet Balances`)}
       </Typography>
+      </Button>
       <AssetBalances config={config} onSelect={handleRowClick} />
     </div>
   )
