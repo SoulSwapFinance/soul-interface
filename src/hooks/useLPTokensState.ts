@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import LPToken from '../types/LPToken'
 import { getAddress } from '@ethersproject/address'
 import { useActiveWeb3React } from 'services/web3'
+import { FACTORY_ADDRESS } from 'constants/addresses'
 
 export interface LPTokensState {
   updateLPTokens: () => Promise<void>
@@ -39,7 +40,7 @@ const useLPTokensState = () => {
           await Promise.all(
             pages.map((page) =>
               soulGuideContract?.getPairs(
-                '0x1120e150dA9def6Fe930f4fEDeD18ef57c0CA7eF', // Factory address
+                FACTORY_ADDRESS[chainId], //'0x1120e150dA9def6Fe930f4fEDeD18ef57c0CA7eF', // Factory address
                 page,
                 Math.min(page + LP_TOKENS_LIMIT, length.toNumber())
               )
