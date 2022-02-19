@@ -211,9 +211,14 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM],
     FANTOM.DAI,
+    FANTOM.SOUL,
+    FANTOM.SEANCE,
     FANTOM.USDC,
     FANTOM.WBTC,
     FANTOM.WETH,
+    FANTOM.BNB,
+    FANTOM.LUX,
+    FANTOM.WLUM,
     FANTOM.MIM,
   ],
   [ChainId.BSC]: [
@@ -231,14 +236,14 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
 export const PINNED_PAIRS: {
   readonly [chainId in ChainId]?: [Token, Token][]
 } = {
-  [ChainId.ETHEREUM]: [
+  [ChainId.FANTOM]: [
     // @ts-ignore TYPE NEEDS FIXING
-    [SOUL[ChainId.ETHEREUM], WNATIVE[ChainId.ETHEREUM]],
+    [SOUL[ChainId.FANTOM], WNATIVE[ChainId.FANTOM]],
     [
-      new Token(ChainId.ETHEREUM, '0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643', 8, 'cDAI', 'Compound Dai'),
-      new Token(ChainId.ETHEREUM, '0x39AA39c021dfbaE8faC545936693aC917d5E7563', 8, 'cUSDC', 'Compound USD Coin'),
+      new Token(ChainId.FANTOM, '0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643', 8, 'cDAI', 'Compound Dai'),
+      new Token(ChainId.FANTOM, '0x39AA39c021dfbaE8faC545936693aC917d5E7563', 8, 'cUSDC', 'Compound USD Coin'),
     ],
-    [ETHEREUM.USDC, ETHEREUM.USDT],
-    [ETHEREUM.DAI, ETHEREUM.USDT],
+    [FANTOM.USDC, FANTOM.USDT],
+    [FANTOM.DAI, FANTOM.USDT],
   ],
 }
