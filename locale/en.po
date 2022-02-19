@@ -518,9 +518,6 @@ msgstr "EXIT"
 msgid "Earn"
 msgstr "Earn"
 
-msgid "Earn fees and rewards by depositing and staking your liquidity tokens (LP) to the platform."
-msgstr "Earn fees and rewards by depositing and staking your liquidity tokens (LP) to the platform."
-
 msgid "Either return to the {link}, or change to an available network."
 msgstr "Either return to the {link}, or change to an available network."
 
@@ -1329,9 +1326,6 @@ msgstr "Soul Vault"
 
 msgid "SoulSwap"
 msgstr "SoulSwap"
-
-msgid "SoulSwap Farms"
-msgstr "SoulSwap Farms"
 
 msgid "SoulSwap Vault is a set of high incentivized pools. Long term supporters can choose to lock SOUL for a determined period for higher rewards."
 msgstr "SoulSwap Vault is a set of high incentivized pools. Long term supporters can choose to lock SOUL for a determined period for higher rewards."
