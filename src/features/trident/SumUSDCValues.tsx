@@ -40,14 +40,14 @@ const SumUSDCValues: FC<SumUSDCValuesProps> = ({ amounts, children }) => {
   }, [])
 
   const values = useMemo(() => Object.values(state).filter(Boolean) as CurrencyAmount<Currency>[], [state])
-  const amount = useMemo(() => (values.length > 0 ? values.reduce((acc, cur) => acc.add(cur)) : undefined), [values])
+  // const amount = useMemo(() => (values.length > 0 ? values.reduce((acc, cur) => acc.add(cur)) : undefined), [values])
 
   return (
     <>
       {amounts?.map((el, index) => (
         <USDCValue amount={el} key={index} update={update} />
       ))}
-      {children({ amount })}
+      {/* {children({ amount })} */}
     </>
   )
 }
