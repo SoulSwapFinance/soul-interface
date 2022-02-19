@@ -22,6 +22,7 @@ import Layout from 'layouts/Underworld'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { RecoilRoot } from 'recoil'
+import { e10 } from 'functions/math'
 
 export default function Pair() {
   useRedirectOnChainId('/borrow')
@@ -189,25 +190,32 @@ const PairLayout = ({ children }) => {
             <div className="flex justify-between">
               <div className="text-lg text-secondary">{i18n._(t`Total`)}</div>
               <div className="text-lg text-high-emphesis">
-                {formatNumber(pair?.currentAllAssets.string)} {pair?.asset.tokenInfo.symbol}
+              {formatNumber(pair?.totalAsset.base.div(e10(18)))} {pair?.asset.tokenInfo.symbol}
               </div>
             </div>
             <div className="flex justify-between">
               <div className="text-lg text-secondary">{i18n._(t`Available`)}</div>
               <div className="flex items-center">
                 <div className="text-lg text-high-emphesis">
-                  {formatNumber(pair?.totalAssetAmount.string)} {pair?.asset.tokenInfo.symbol}
+                  {/* Subtract Borrowed Amount */}
+                {formatNumber(pair?.totalAsset.base.sub(pair?.totalBorrow.base).div(e10(18)))} {pair?.asset.tokenInfo.symbol}
                 </div>
               </div>
             </div>
             <div className="flex justify-between">
               <div className="text-lg text-secondary">{i18n._(t`Borrowed`)}</div>
               <div className="flex items-center">
-                <div className="text-lg text-high-emphesis">{formatPercent(pair?.utilization.string)}</div>
+                <div className="text-lg text-high-emphesis">
+                  {/* AVAILABLE - TOTAL / TOTAL * 100 */}
+                {formatPercent(
+                ((pair?.totalAsset.base.div(e10(18))) -
+                  (pair?.totalAsset.base.sub(pair?.totalBorrow.base).div(e10(18))))
+                  / (pair?.totalAsset.base.div(e10(18))) * 100
+                )}</div>
               </div>
             </div>
 
-            <PairTools pair={pair} />
+            {/* <PairTools pair={pair} /> */}
 
             <div className="flex justify-between pt-3">
               <div className="text-xl text-high-emphesis">{i18n._(t`Oracle`)}</div>
