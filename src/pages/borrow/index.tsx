@@ -21,7 +21,8 @@ import MarketHeader from 'features/lending/components/MarketHeader'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
 import { useUnderworldBorrowPositions } from 'features/portfolio/AssetBalances/underworld/hooks'
-import { usePrice } from 'hooks'
+import { usePrice, useUSDCPrice } from 'hooks'
+import { e10 } from 'functions/math'
 
 const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
 
@@ -41,7 +42,7 @@ export default function Borrow() {
 
   const [numDisplayed, setNumDisplayed] = useInfiniteScroll(data.items)
   let pairPrice = '0'
-  
+
   return (
     <BorrowLayout>
       <Head>
@@ -77,7 +78,8 @@ export default function Borrow() {
                   </>
                 </ListHeaderWithSort>
                 <ListHeaderWithSort
-                  className="justify-end"
+                  // className="justify-end"
+                  className="justify-center"
                   sort={positions}
                   sortKey="currentUserBorrowAmount.usdValue"
                   direction="descending"
@@ -85,25 +87,26 @@ export default function Borrow() {
                   {i18n._(t`Borrowed`)}
                 </ListHeaderWithSort>
                 <ListHeaderWithSort
-                  className="justify-end hidden md:flex"
+                  className="justify-center"
                   sort={positions}
                   sortKey="userCollateralAmount.usdValue"
                   direction="descending"
                 >
                   {i18n._(t`Collateral`)}
                 </ListHeaderWithSort>
-                <ListHeaderWithSort
-                  className="justify-end hidden lg:flex"
+                {/* <ListHeaderWithSort
+                  className="justify-center lg:flex"
                   sort={positions}
                   sortKey="health.value"
                   direction="descending"
                 >
                   <>
-                    {i18n._(t`Limit`)} <span className="hidden md:inline-block">{i18n._(t`Used`)}</span>
+                    {i18n._(t`Limit`)} <span className="hidden md:inline-block">{i18n._(t` Used`)}</span>
                   </>
-                </ListHeaderWithSort>
+                </ListHeaderWithSort> */}
                 <ListHeaderWithSort
-                  className="justify-end"
+                  // className="justify-end"
+                  className="justify-center"
                   sort={positions}
                   sortKey="interestPerYear.value"
                   direction="descending"
@@ -141,7 +144,7 @@ export default function Borrow() {
                               </div>
                               <div>{pair.oracle.name}</div>
                             </div>
-                            <div className="text-right">
+                            <div className="text-center">
                               <div>
                                 {formatNumber(pair.currentUserBorrowAmount.string, false)} {pair.asset.tokenInfo.symbol}
                               </div>
@@ -149,23 +152,21 @@ export default function Borrow() {
                                 {formatNumber(pair.currentUserBorrowAmount.usd, true)}
                               </div>
                             </div>
-                            <div className="hidden text-right md:block">
+                            <div className="text-center md:block">
                               <div>
-
-  {/* const userCollateralValue = userCollateralBalance * collateralPrice */}
-
                                 {formatNumber(Number(pair?.userCollateralShare / 1e18), false)}{' '}
-                                {pair.collateral.tokenInfo.symbol}
+                              {pair.collateral.tokenInfo.symbol}
                               </div>
-                              <div className="text-sm text-secondary">
+                              {/* <div className="text-center text-sm text-secondary"> */}
+                                {/* {formatNumber(Number(pair?.userCollateralShare) * Number(pair?.collateralPrice / 1e18), true)} */}
                                 {/* {formatNumber(pair?.userCollateralShare / 1e18 * (Number(usePrice(pair?.collateral.address))), true) } */}
-                              </div>
+                              {/* </div> */}
                             </div>
-                            <div className="flex items-center justify-end">
+                            {/* <div className="flex items-center justify-end">
                               {formatPercent(pair.health.string)}
                               <GradientDot percent={pair.health.string} />
-                            </div>
-                            <div className="text-right">{formatPercent(pair.interestPerYear.string)}</div>
+                            </div> */}
+                            <div className="text-center">{formatPercent(pair.interestPerYear.string)}</div>
                           </div>
                         </a>
                       </Link>
@@ -252,7 +253,7 @@ export default function Borrow() {
                         <div className="sm:items-end md:hidden">
                           <div className="flex flex-col md:flex-row">
                             <div className="font-semibold">{pair.asset.tokenInfo.symbol} / </div>
-                            <div>{pair.collateral.tokenInfo.symbol}</div>
+                            <div> {pair.collateral.tokenInfo.symbol}</div>
                           </div>
                           <div className="block mt-0 text-xs text-left text-white-500 lg:hidden">
                             {pair.oracle.name}
@@ -262,17 +263,17 @@ export default function Borrow() {
                       <div className="hidden text-white md:block">
                         <strong>{pair.asset.tokenInfo.symbol}</strong>
                       </div>
-                      <div className="hidden md:block">{pair.collateral.tokenInfo.symbol}</div>
+                      <div className="hidden md:block">
+                        {formatNumber(pair?.totalCollateralShare.div(e10(18)), false)}{' '}
+                        {pair.collateral.tokenInfo.symbol}</div>
                       <div className="hidden lg:block">{pair.oracle.name}</div>
                       <div className="text-left md:text-right">
                         <div className="md:hidden">
                           <div className="flex flex-col">
-                            <div>{formatNumber(pair.currentBorrowAmount.string)}</div>
-                            <div>{pair.asset.tokenInfo.symbol}</div>
-                          </div>
-                          <div className="text-secondary">{formatNumber(pair.currentBorrowAmount.usd, true)}</div>
-                        </div>
-                        <div className="hidden md:block">
+                            {/* <div>{formatNumber(pair.currentAllAssets)}</div> */}
+                            {/* <div>{formatNumber(pair.currentAllAssets)}</div> */}
+                          </div>                        </div>
+                        <div className="text-center md:block">
                           {formatNumber(pair.currentBorrowAmount.string)} {pair.asset.tokenInfo.symbol}
                           <div className="text-secondary">{formatNumber(pair.currentBorrowAmount.usd, true)}</div>
                         </div>
@@ -286,11 +287,11 @@ export default function Borrow() {
                           <div className="text-secondary">{formatNumber(pair.totalAssetAmount.usd, true)}</div>
                         </div>
                         <div className="hidden md:block">
-                          {formatNumber(pair.totalAssetAmount.string)} {pair.asset.tokenInfo.symbol}
-                          <div className="text-secondary">{formatNumber(pair.totalAssetAmount.usd, true)}</div>
+                          {formatNumber(pair.totalAsset.base.div(e10(18)))} {pair.asset.tokenInfo.symbol}
+                          {/* <div className="text-secondary">{formatNumber(pair.totalAsset.base.usd, true)}</div> */}
                         </div>
                       </div>
-                      <div className="text-right">{formatNumber(pair.currentInterestPerYear.value / 1e18 * 100, false, true, 2)}%</div>
+                      <div className="text-right">{formatPercent(pair.currentInterestPerYear.value / 1e18 * 100)}</div>
                       {/* <div className="text-right">{formatPercent(pair.currentInterestPerYear.value)}</div> */}
                     </div>
                   </a>
@@ -314,7 +315,7 @@ const BorrowLayout = ({ children }) => {
       left={
         <Card
           className="h-full bg-dark-900"
-          backgroundImage= {BORROW_IMG}
+          backgroundImage={BORROW_IMG}
           title={i18n._(t`Borrow assets and leverage up`)}
           description={i18n._(
             t`Borrowing allows you to obtain liquidity without selling. Your borrow limit depends on the amount of deposited collateral. You will be able to borrow up to 75% of your collateral and repay at any time with accrued interest.`
