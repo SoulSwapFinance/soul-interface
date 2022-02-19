@@ -40,8 +40,8 @@ export const CoffinBalances = ({ account }: { account: string }) => {
 
   return (
     <div className="flex flex-col gap-3">
-      <Typography weight={700} variant="lg" className="px-2 text-high-emphesis">
-        {i18n._(t`CoffinBox`)}
+      <Typography weight={700} variant="lg" className="px-2 text-center text-high-emphesis">
+        {i18n._(t`CoffinBox Balances`)}
       </Typography>
       <AssetBalances config={config} onSelect={handleRowClick} />
     </div>
@@ -86,8 +86,8 @@ export const WalletBalances: FC<{ account: string }> = ({ account }) => {
 
   return (
     <div className="flex flex-col gap-3">
-      <Typography weight={700} variant="lg" className="px-2 text-high-emphesis">
-        {i18n._(t`Wallet`)}
+      <Typography weight={700} variant="lg" className="px-2 text-center text-high-emphesis">
+        {i18n._(t`Wallet Balances`)}
       </Typography>
       <AssetBalances config={config} onSelect={handleRowClick} />
     </div>

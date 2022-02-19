@@ -27,20 +27,20 @@ export const useCollateralTableConfig = (data: CollateralData[]) => {
               className: 'text-left',
               Cell: (props: CellProps) => ValueCell(props.cell.value),
             },
-            {
-              Header: 'Limit Used',
-              accessor: 'limit',
-              maxWidth: 100,
-              className: 'text-left',
-              Cell: (props: { cell: { value: Fraction } }) => {
-                return (
-                  <div className="flex items-center justify-end">
-                    {formatPercent(props.cell.value)}
-                    <GradientDot percent={props.cell.value} />
-                  </div>
-                )
-              },
-            },
+            // {
+            //   Header: 'Limit Used',
+            //   accessor: 'limit',
+            //   maxWidth: 100,
+            //   className: 'text-left',
+            //   Cell: (props: { cell: { value: Fraction } }) => {
+            //     return (
+            //       <div className="flex items-center justify-end">
+            //         {formatPercent(props.cell.value)}
+            //         <GradientDot percent={props.cell.value} />
+            //       </div>
+            //     )
+            //   },
+            // },
           ]
         : [],
     [chainId]
