@@ -155,9 +155,16 @@ export default function Repay({ pair }: RepayProps) {
   }
 
   const warnings = new Warnings()
+    // .addError(
+    //   assetNative && !useCoffinRepay && pinRepayMax,
+    //   `You cannot MAX repay ${pair.asset.tokenInfo.symbol} directly from your wallet. 
+    //   Please deposit your ${pair.asset.tokenInfo.symbol} into the CoffinBox first, then repay. 
+    //   Because your debt is slowly accrueing interest we can't predict how much it will be once your transaction gets mined.`
+    // )
     .addError(
       assetNative && !useCoffinRepay && pinRepayMax,
-      `You cannot MAX repay ${pair.asset.tokenInfo.symbol} directly from your wallet. Please deposit your ${pair.asset.tokenInfo.symbol} into the CoffinBox first, then repay. Because your debt is slowly accrueing interest we can't predict how much it will be once your transaction gets mined.`
+      `You cannot MAX repay ${pair.asset.tokenInfo.symbol} directly from your wallet. 
+      Please enter a balance slighlty below the MAX.`
     )
     .addError(
       displayRemoveValue.toBigNumber(pair.collateral.tokenInfo.decimals).gt(pair.userCollateralAmount.value),

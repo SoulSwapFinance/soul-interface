@@ -17,6 +17,7 @@ import WarningsView from '../components/WarningsList'
 import { BigNumber } from '@ethersproject/bignumber'
 import AssetInput from 'components/AssetInput'
 import { useCurrency } from 'hooks/Tokens'
+import { formatPercent } from 'functions'
 
 export default function Withdraw({ pair }: any): JSX.Element {
   const { account } = useActiveWeb3React()
@@ -26,8 +27,8 @@ export default function Withdraw({ pair }: any): JSX.Element {
   const { i18n } = useLingui()
 
   // State
-  const [useCoffin, setUseCoffin] = useState<boolean>(BigNumber.from(pair.asset.balance).lt(0))
-  // const [useCoffin, setUseCoffin] = useState<boolean>(false)
+  // const [useCoffin, setUseCoffin] = useState<boolean>(BigNumber.from(pair.asset.balance).lt(0))
+  const [useCoffin, setUseCoffin] = useState<boolean>(false)
   const [value, setValue] = useState('')
   const [pinMax, setPinMax] = useState(false)
 
@@ -37,7 +38,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
   // const max = pair.currentUserAssetAmount.value
   const max = 
     // minimum(pair.maxAssetAvailable, pair.currentUserAssetAmount.value)
-    pair.maxAssetAvailable > pair.currentUserAssetAmount.value 
+    pair.maxAssetAvailable.gte(pair.currentUserAssetAmount.value)
       ? pair.maxAssetAvailable
       : pair.currentUserAssetAmount.value
 
@@ -83,7 +84,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
     const newUtilization 
       = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.sub(amount))
       // = pair.currentBorrowAmount.value.mul(pair.currentAllAssets.value).sub(newUserAssetAmount)
-    transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
+      // transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
   }
 
   // Handlers
@@ -104,30 +105,32 @@ export default function Withdraw({ pair }: any): JSX.Element {
         {/* {i18n._(t`Withdraw`)} {pair.asset.tokenInfo.symbol} */}
       </div>
 
-      {/* <SmartNumberInput
+      <SmartNumberInput
         color="blue"
         token={pair.asset}
         value={displayValue}
         setValue={setValue}
         useCoffinTitleDirection="up"
         useCoffinTitle="to"
-        useCoffin={useCoffin}
+        // useCoffin={useCoffin}
+        useCoffin={false}
+        // setUseCoffin={setUseCoffin}
         setUseCoffin={setUseCoffin}
         max={max}
         pinMax={pinMax}
         setPinMax={setPinMax}
         showMax={true}
-      /> */}
-       <AssetInput
+      />
+       {/* <AssetInput
         size="sm"
         id="add-collateral-input"
-        value={displayValue}
+        value={value}
         currency={assetToken}
         onChange={setValue}
         className="!mt-0"
-        showMax={true}
+        // showMax={true}
         spendFromWallet={false}
-      />
+      /> */}
 
       <WarningsView warnings={warnings} />
       <TransactionReviewView transactionReview={transactionReview}></TransactionReviewView>
