@@ -33,13 +33,13 @@ export const UnderworldCollateral = () => {
 
   return (
     <div className="flex flex-col w-full gap-3">
-      <div className="flex items-center gap-2">
+      <div className="flex justify-center items-center gap-2">
         <Typography weight={700} variant="lg" className="text-high-emphesis">
-          {i18n._(t`Underworld`)}
+          {i18n._(t`Underworld Collateral`)}
         </Typography>
-        <Typography weight={700} variant="sm" className="text-low-emphesis">
+        {/* <Typography weight={700} variant="sm" className="text-low-emphesis">
           {i18n._(t`(Collateral)`)}
-        </Typography>
+        </Typography> */}
       </div>
       <AssetBalances config={config} onSelect={(row) => router.push(`/borrow/${row.original.pair.address}`)} />
     </div>
