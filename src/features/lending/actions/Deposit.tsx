@@ -67,21 +67,21 @@ export default function Deposit({ pair }: any): JSX.Element {
 
   if (value && !warnings.broken) {
     const amount = Number(value).toString().toBigNumber(pair.asset.tokenInfo.decimals) //.toFixed(4)
-    const newUserAssetAmount = pair.currentUserAssetAmount.value.div(pair.asset.tokenInfo.decimals).add(amount)//.toBigNumber(pair.asset.tokenInfo.decimals))
+    const newUserAssetAmount = pair.userAssetFraction.add(amount)//.toBigNumber(pair.asset.tokenInfo.decimals))
     transactionReview.addTokenAmount(
       i18n._(t`Balance`),
-      pair.currentUserAssetAmount.value,
-      BigNumber.from(pair.currentUserAssetAmount.value).add(amount),
+      pair.userAssetFraction,
+      BigNumber.from(pair.userAssetFraction).add(amount),
       pair.asset
     )
     transactionReview.addUSD(i18n._(t`Balance USD`),
-      pair.currentUserAssetAmount.value,
-      newUserAssetAmount.add(pair.currentUserAssetAmount.value),
+      pair.userAssetFraction,
+      newUserAssetAmount, //.add(pair.userAssetFraction),
       pair.asset)
     const newUtilization
       // = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value).add(amount)
       = 1e18 * Number(pair.currentBorrowAmount.value) / Number(pair.currentAllAssets.value) + Number(amount) //.toString()
-    //transactionReview.addPercentage(i18n._(t`Borrowed`), BigNumber.from(pair.utilization.value || 0), BigNumber.from(newUtilization))
+    // transactionReview.addPercentage(i18n._(t`Borrowed`), BigNumber.from(pair.utilization.value || 0), BigNumber.from(newUtilization))
     if (pair.currentExchangeRate.isZero()) {
       transactionReview.add(
         'Exchange Rate',
@@ -94,7 +94,7 @@ export default function Deposit({ pair }: any): JSX.Element {
         Direction.UP
       )
     }
-    transactionReview.addPercentage(i18n._(t`Supply APR`), pair.supplyAPR.value, pair.currentSupplyAPR.value)
+    // transactionReview.addPercentage(i18n._(t`Supply APR`), pair.supplyAPR.value, pair.currentSupplyAPR.value)
   }
 
   // Handlers

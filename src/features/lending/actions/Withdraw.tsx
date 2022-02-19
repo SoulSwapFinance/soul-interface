@@ -34,12 +34,14 @@ export default function Withdraw({ pair }: any): JSX.Element {
 
   const [underworldApprovalState, approveUnderworldFallback, underworldPermit, onApprove, onCook] = useUnderworldApproveCallback()
 
+
   // Calculated
-  // const max = pair.currentUserAssetAmount.value
+  // const max = minimum(pair.maxAssetAvailable, pair.currentUserAssetAmount.value)
   const max = 
     // minimum(pair.maxAssetAvailable, pair.currentUserAssetAmount.value)
-    pair.maxAssetAvailable.gte(pair.currentUserAssetAmount.value)
-      ? pair.maxAssetAvailable
+    pair.maxAssetAvailable.lte(pair.currentUserAssetAmount.value)
+      // ? pair.maxAssetAvailable
+      ? pair.userAssetFraction
       : pair.currentUserAssetAmount.value
 
   const displayValue = pinMax ? max.toFixed(pair.asset.tokenInfo.decimals) : value
@@ -69,22 +71,20 @@ export default function Withdraw({ pair }: any): JSX.Element {
   const transactionReview = new TransactionReview()
   if (displayValue && !warnings.broken) {
     const amount = displayValue.toBigNumber(pair.asset.tokenInfo.decimals)
-    const newUserAssetAmount = pair.currentUserAssetAmount.value.sub(amount)
+    const newUserAssetAmount = pair.userAssetFraction.sub(amount)
     transactionReview.addTokenAmount(
       i18n._(t`Balance`),
-      pair.currentUserAssetAmount.value,
+      pair.userAssetFraction,
       newUserAssetAmount,
       pair.asset
     )
     transactionReview.addUSD(i18n._(t`Balance USD`), 
-      pair.currentUserAssetAmount.value, 
+      pair.userAssetFraction, 
       newUserAssetAmount, 
       pair.asset)
 
-    const newUtilization 
-      = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.sub(amount))
-      // = pair.currentBorrowAmount.value.mul(pair.currentAllAssets.value).sub(newUserAssetAmount)
-      // transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
+    const newUtilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.sub(amount))
+    // transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
   }
 
   // Handlers
@@ -112,16 +112,14 @@ export default function Withdraw({ pair }: any): JSX.Element {
         setValue={setValue}
         useCoffinTitleDirection="up"
         useCoffinTitle="to"
-        // useCoffin={useCoffin}
         useCoffin={false}
-        // setUseCoffin={setUseCoffin}
         setUseCoffin={setUseCoffin}
         max={max}
         pinMax={pinMax}
         setPinMax={setPinMax}
         showMax={true}
       />
-       {/* <AssetInput
+{/* <AssetInput
         size="sm"
         id="add-collateral-input"
         value={value}
