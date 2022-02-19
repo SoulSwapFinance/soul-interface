@@ -85,16 +85,21 @@ export default function Pair() {
       >
         <div className="flex justify-between p-4 mb-8 xl:p-0">
           <div>
-            <div className="text-center text-md sm:text-lg text-secondary">Lent</div>
+            <div className="text-center text-md sm:text-lg text-secondary">Deposited</div>
             <div className="text-lg sm:text-2xl text-blue">
-              {formatNumber(pair.currentUserLentAmount.string)} {pair.asset.tokenInfo.symbol}
+              {formatNumber(pair.userAssetFraction.div(e10(18)))} {pair.asset.tokenInfo.symbol}
             </div>
-
-            <div className="text-center text-md sm:text-lg text-high-emphesis">{formatNumber(Number(pair.currentUserAssetAmount.usd), true)}</div>
+            {/* <div className="text-center text-md sm:text-lg text-high-emphesis">{formatNumber(Number(pair.userAssetFraction.usd), true)}</div> */}
           </div>
           <div>
-            <div className="text-center text-md sm:text-lg text-secondary">{`Borrowed`}</div>
-            <div className="text-center text-lg sm:text-2xl text-high-emphesis">{formatPercent(pair.utilization.string)}</div>
+            <div className="text-center text-md sm:text-lg text-secondary">{`Utilization`}</div>
+            <div className="text-center text-lg sm:text-2xl text-high-emphesis">{
+                formatPercent(
+                  ((pair?.userAssetFraction.div(e10(18))) -
+                    (pair?.userAssetFraction.sub(pair?.currentUserLentAmount.value).div(e10(18))))
+                  / (pair?.userAssetFraction.div(e10(18))) * 100
+                )
+              }</div>
           </div>
           <div className="text-right">
             <div>
