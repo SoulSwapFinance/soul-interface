@@ -87,7 +87,7 @@ export default function Lend() {
                   sortKey="currentUserAssetAmount.usdValue"
                   direction="descending"
                 >
-                  {i18n._(t`Provided`)}
+                  {i18n._(t`Deposited`)}
                 </ListHeaderWithSort>
                 <ListHeaderWithSort
                   className="justify-center"
@@ -217,7 +217,7 @@ const LendEntry = ({ pair, userPosition = false }) => {
             <>
               <div className="text-center">
                 <div>
-                  {formatNumber(pair.currentUserAssetAmount.string, false)} {pair.asset.tokenInfo.symbol}
+                  {formatNumber(Number(pair.userAssetFraction) / 10**(pair.asset.tokenInfo.decimals), false)} {pair.asset.tokenInfo.symbol}
                 </div>
                 <div className="text-center text-sm text-secondary">{formatNumber(pair.currentUserAssetAmount.usd, true)}</div>
               </div>
