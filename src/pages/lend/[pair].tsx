@@ -87,7 +87,7 @@ export default function Pair() {
           <div>
             <div className="text-center text-md sm:text-lg text-secondary">Deposited</div>
             <div className="text-lg sm:text-2xl text-blue">
-              {formatNumber(pair.userAssetFraction.div(e10(18)))} {pair.asset.tokenInfo.symbol}
+              {formatNumber(pair.userAssetFraction.div(e10(pair.asset.tokenInfo.decimals)))} {pair.asset.tokenInfo.symbol}
             </div>
             {/* <div className="text-center text-md sm:text-lg text-high-emphesis">{formatNumber(Number(pair.userAssetFraction.usd), true)}</div> */}
           </div>
@@ -95,9 +95,9 @@ export default function Pair() {
             <div className="text-center text-md sm:text-lg text-secondary">{`Utilization`}</div>
             <div className="text-center text-lg sm:text-2xl text-high-emphesis">{
                 formatPercent(
-                  ((pair?.userAssetFraction.div(e10(18))) -
-                    (pair?.userAssetFraction.sub(pair?.currentUserLentAmount.value).div(e10(18))))
-                  / (pair?.userAssetFraction.div(e10(18))) * 100
+                  ((pair?.userAssetFraction.div(e10(pair.asset.tokenInfo.decimals))) -
+                    (pair?.userAssetFraction.sub(pair?.currentUserLentAmount.value).div(e10(pair.asset.tokenInfo.decimals))))
+                  / (pair?.userAssetFraction.div(e10(pair.asset.tokenInfo.decimals))) * 100
                 )
               }</div>
           </div>
@@ -178,7 +178,7 @@ const PairLayout = ({ children }) => {
             <div className="flex justify-between">
               <div className="text-lg text-secondary">{`Total Assets`}</div>
               <div className="text-lg text-high-emphesis">
-              {formatNumber(pair?.totalAsset.base.div(e10(18)))} {pair?.asset.tokenInfo.symbol}
+              {formatNumber(pair?.totalAsset.base.div(e10(pair.asset.tokenInfo.decimals)))} {pair?.asset.tokenInfo.symbol}
               </div>
             </div>
             <div className="flex justify-between">
@@ -186,9 +186,9 @@ const PairLayout = ({ children }) => {
               <div className="flex items-center">
                 <div className="text-green text-lg text-high-emphesis">
                 {formatPercent(100-
-                ((pair?.totalAsset.base.div(e10(18))) -
-                  (pair?.totalAsset.base.sub(pair?.totalBorrow.base).div(e10(18))))
-                  / (pair?.totalAsset.base.div(e10(18))) * 100
+                ((pair?.totalAsset.base.div(e10(pair.asset.tokenInfo.decimals))) -
+                  (pair?.totalAsset.base.sub(pair?.totalBorrow.base).div(e10(pair.asset.tokenInfo.decimals))))
+                  / (pair?.totalAsset.base.div(e10(pair.asset.tokenInfo.decimals))) * 100
                 )}</div>
               </div>
             </div>
