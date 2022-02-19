@@ -232,7 +232,7 @@ const LendEntry = ({ pair, userPosition = false }) => {
             <>
               <div>
                 <div className="text-center">
-                  {formatNumber(pair?.totalAsset.base.div(e10(18)))} {pair?.asset.tokenInfo.symbol}
+                  {formatNumber(pair?.totalAsset.base /  10**(pair.asset.tokenInfo.decimals))} {pair?.asset.tokenInfo.symbol}
                   {/* <div className="text-secondary">{formatNumber(pair.currentAllAssets.usd, true)}</div> */}
                 </div>
               </div>
@@ -241,9 +241,9 @@ const LendEntry = ({ pair, userPosition = false }) => {
               </div>
               <div className="text-center sm:block">{
                 formatPercent(
-                  ((pair?.totalAsset.base.div(e10(18))) -
-                    (pair?.totalAsset.base.sub(pair?.totalBorrow.base).div(e10(18))))
-                  / (pair?.totalAsset.base.div(e10(18))) * 100
+                  ((pair?.totalAsset.base / 10**(pair.asset.tokenInfo.decimals)) -
+                    (pair?.totalAsset.base.sub(pair?.totalBorrow.base) / 10**(pair.asset.tokenInfo.decimals)))
+                  / (pair?.totalAsset.base / 10**(pair.asset.tokenInfo.decimals)) * 100
                 )}
               </div>
             </>
