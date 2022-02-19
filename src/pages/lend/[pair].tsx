@@ -8,13 +8,16 @@ import { Feature } from 'enums'
 import { Deposit, PairTools, Strategy, Withdraw } from 'features/lending'
 import { useUnderworldPair } from 'features/lending/hooks'
 import { formatNumber, formatPercent } from 'functions/format'
+import { e10, ZERO } from 'functions/math'
 import NetworkGuard from 'guards/Network'
+import useContractTokenBalance from 'hooks/useContractTokenBalance'
 import { useRedirectOnChainId } from 'hooks/useRedirectOnChainId'
 import Layout from 'layouts/Underworld'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { RecoilRoot } from 'recoil'
+import { useSingleCallResult } from 'state/multicall/hooks'
 
 export default function Pair() {
   useRedirectOnChainId('/lend')
@@ -86,7 +89,7 @@ export default function Pair() {
             <div className="text-lg sm:text-2xl text-blue">
               {formatNumber(pair.currentUserLentAmount.string)} {pair.asset.tokenInfo.symbol}
             </div>
-            
+
             <div className="text-center text-md sm:text-lg text-high-emphesis">{formatNumber(Number(pair.currentUserAssetAmount.usd), true)}</div>
           </div>
           <div>
@@ -105,8 +108,7 @@ export default function Pair() {
           <Tab.List className="flex p-1 rounded bg-dark-800">
             <Tab
               className={({ selected }) =>
-                `${
-                  selected ? 'bg-blue text-high-emphesis' : ''
+                `${selected ? 'bg-blue text-high-emphesis' : ''
                 } flex items-center justify-center flex-1 px-1 py-1 text-lg rounded cursor-pointer select-none text-secondary hover:text-primary focus:outline-none`
               }
             >
@@ -114,8 +116,7 @@ export default function Pair() {
             </Tab>
             <Tab
               className={({ selected }) =>
-                `${
-                  selected ? 'bg-blue text-high-emphesis' : ''
+                `${selected ? 'bg-blue text-high-emphesis' : ''
                 } flex items-center justify-center flex-1 px-1 py-1 text-lg rounded cursor-pointer select-none text-secondary hover:text-primary focus:outline-none`
               }
             >
@@ -156,59 +157,50 @@ const PairLayout = ({ children }) => {
       right={
         <Card className="h-full p-4 bg-dark-900 xl:p-0">
           <div className="flex-col space-y-2">
-            <div className="flex justify-between">
+          <div className="flex justify-between">
               <div className="text-xl text-high-emphesis">{`Market`}</div>
             </div>
             <div className="flex justify-between">
-              <div className="text-lg text-secondary">{`APR`}</div>
+              <div className="text-lg text-secondary">{`% APR`}</div>
               <div className="flex items-center">
-              <div className="text-lg text-high-emphesis">{formatPercent(pair.currentSupplyAPR.string)}</div>
+                <div className="text-lg text-high-emphesis">{formatPercent(pair?.interestPerYear.string)}</div>
               </div>
             </div>
-
             <div className="flex justify-between">
-              <div className="text-lg text-secondary">{`Total`}</div>
+              <div className="text-lg text-secondary">{`% LTV`}</div>
+              <div className="text-lg text-high-emphesis">75%</div>
+            </div>
+            <div className="flex justify-between">
+              <div className="text-lg text-secondary">{`Total Assets`}</div>
               <div className="text-lg text-high-emphesis">
-                {formatNumber(pair?.currentAllAssets.string)} {pair?.asset.tokenInfo.symbol}
+              {formatNumber(pair?.totalAsset.base.div(e10(18)))} {pair?.asset.tokenInfo.symbol}
               </div>
             </div>
             <div className="flex justify-between">
               <div className="text-green text-lg text-secondary">{`Available`}</div>
-                <div className="text-green text-lg text-high-emphesis">{`${formatPercent(
-                  100-(100 * pair?.currentUserLentAmount.string / pair?.currentAllAssets.string))}`}
-                </div>
-                <div className="text-green text-lg text-high-emphesis">{`
-                ${formatNumber(pair?.currentAllAssets.string - pair?.currentUserLentAmount.string, false)} ${pair?.asset.tokenInfo.symbol}`}
+              <div className="flex items-center">
+                <div className="text-green text-lg text-high-emphesis">
+                {formatPercent(100-
+                ((pair?.totalAsset.base.div(e10(18))) -
+                  (pair?.totalAsset.base.sub(pair?.totalBorrow.base).div(e10(18))))
+                  / (pair?.totalAsset.base.div(e10(18))) * 100
+                )}</div>
               </div>
-              </div>
-              <div className="flex justify-between">
-              <div className="text-red text-lg text-secondary">{`Borrowed`}</div>
-                <div className="text-red text-lg text-high-emphesis">{`${formatPercent(
-                  (100 * pair?.currentUserLentAmount.string / pair?.currentAllAssets.string))}`}</div>
-                <div className="text-green text-lg text-high-emphesis">{`
-                ${formatNumber(pair?.currentUserLentAmount.string, false)} ${pair?.asset.tokenInfo.symbol}`}
-              </div>
-              </div>
-            <div className="flex justify-between">
-              {/* <div className="text-lg text-secondary">{`Collateral`}</div> */}
-              {/* <div className="flex items-center"> */}
-                {/* <div className="text-lg text-high-emphesis"> */}
-                  {/* {formatNumber(pair?.totalCollateralAmount.string)} {pair?.collateral.tokenInfo.symbol} */}
-                {/* </div> */}
-              {/* </div> */}
             </div>
-            {pair?.utilization.value.gt(0) && (
-              <div className="flex justify-between">
-                {/* <div className="text-lg text-secondary">{`Health`}</div> */}
-                {/* <div className="flex items-center"> */}
-                  {/* <div className="text-lg text-high-emphesis">{formatPercent(pair?.marketHealth.toFixed(16))}</div> */}
-                  {/* HEALTH = borrowed / available */}
-                  {/* <div className="text-lg text-high-emphesis">{formatPercent(pair?.marketHealth.toFixed(16))}</div> */}
-                {/* </div> */}
+            {/* <div className="flex justify-between">
+              <div className="text-lg text-secondary">{`Borrowed`}</div>
+              <div className="flex items-center">
+                <div className="text-lg text-high-emphesis"> */}
+                  {/* AVAILABLE - TOTAL / TOTAL * 100 */}
+                {/* {formatPercent(
+                ((pair?.totalAsset.base.div(e10(18))) -
+                  (pair?.totalAsset.base.sub(pair?.totalBorrow.base).div(e10(18))))
+                  / (pair?.totalAsset.base.div(e10(18))) * 100
+                )}</div>
               </div>
-            )}
+            </div> */}
 
-            <PairTools pair={pair} />
+            {/* <PairTools pair={pair} /> */}
 
             <div className="flex justify-between pt-3">
               <div className="text-xl text-high-emphesis">{`Oracle`}</div>
