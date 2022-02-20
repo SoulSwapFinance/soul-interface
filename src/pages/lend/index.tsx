@@ -66,11 +66,9 @@ export default function Lend() {
         {positions.items && positions.items.length > 0 && (
           <div className="pb-4">
             <div>
-              <div className="grid grid-flow-col grid-cols-4 gap-4 px-4 pb-4 text-sm md:grid-cols-6 lg:grid-cols-7 text-secondary">
-                <ListHeaderWithSort sort={positions} sortKey="search">
-                  <>
-                    <span className="justify-center md:inline-block">{i18n._(t``)}</span> {i18n._(t`Positions`)}
-                  </>
+              <div className="grid grid-flow-col grid-cols-4 gap-4 px-2 pb-4 text-sm md:grid-cols-6 lg:grid-cols-7 text-secondary">
+              <ListHeaderWithSort className="justify-center"sort={data} sortKey="search">
+              <span className="justify-center md:flex">{i18n._(t`Positions`)}</span> 
                 </ListHeaderWithSort>
                 <ListHeaderWithSort className="hidden justify-center md:flex" sort={positions} sortKey="asset.tokenInfo.symbol">
                   {i18n._(t`Asset`)}
@@ -103,6 +101,14 @@ export default function Lend() {
                   sortKey="supplyAPR.valueWithStrategy"
                   direction="descending"
                 >
+                  {i18n._(t`Utilized`)}
+                </ListHeaderWithSort>
+                <ListHeaderWithSort
+                  className="hidden sm:justify-center"
+                  sort={positions}
+                  sortKey="supplyAPR.valueWithStrategy"
+                  direction="descending"
+                >
                   {i18n._(t`Interest`)}
                 </ListHeaderWithSort>
               </div>
@@ -117,7 +123,7 @@ export default function Lend() {
         <div>
           <div className="grid grid-flow-col grid-cols-4 gap-4 px-4 pb-4 text-sm sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 text-secondary">
             <ListHeaderWithSort className="justify-center"sort={data} sortKey="search">
-              {i18n._(t`Markets`)}
+              <span className="justify-center md:flex">{i18n._(t`Markets`)}</span> 
             </ListHeaderWithSort>
             <ListHeaderWithSort className="hidden justify-center md:flex" sort={data} sortKey="asset.tokenInfo.symbol">
               {i18n._(t`Asset`)}
@@ -183,7 +189,7 @@ const LendEntry = ({ pair, userPosition = false }) => {
     <Link href={'/lend/' + pair.address}>
       <a className="block text-high-emphesis">
         <div className="grid items-center grid-flow-col grid-cols-4 gap-4 px-4 py-4 text-sm rounded md:grid-cols-6 lg:grid-cols-7 align-center bg-dark-800 hover:bg-dark-blue">
-          <div className="flex flex-col items-start sm:flex-row sm:items-center">
+          <div className="flex flex-col items-start md:flex-row items-center">
             <div className="hidden space-x-2 md:flex">
               <Image
                 height={48}
@@ -201,11 +207,31 @@ const LendEntry = ({ pair, userPosition = false }) => {
                 alt={pair.collateral.tokenInfo.symbol}
               />
             </div>
-            <div className="sm:items-end md:hidden">
+            <div className="hidden sm:items-end md:hidden">
               <div>
                 <strong>{pair.asset.tokenInfo.symbol}</strong> / {pair.collateral.tokenInfo.symbol}
               </div>
-              <div className="block mt-0 text-xs text-left text-white-500 lg:hidden">{pair.oracle.name}</div>
+              <div className="block mt-0 text-xs text-left text-white-500 hidden">{pair.oracle.name}</div>
+            </div>
+            <div className="text-center justify-center items-center md:hidden">
+            <div className="grid items-center grid-cols-2">
+                {/* <strong>{pair.collateral.tokenInfo.symbol}</strong> */}
+                <Image
+                height={36}
+                width={36}
+                src={pair.asset.tokenInfo.logoURI}
+                className="w-2 h-2 p-2 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
+                alt={pair.asset.tokenInfo.symbol}
+              />
+                <Image
+                height={36}
+                width={36}
+                src={pair.collateral.tokenInfo.logoURI}
+                className="w-2 h-2 p-2 rounded-sm md:w-10 md:h-10 lg:w-12 lg:h-12"
+                alt={pair.collateral.tokenInfo.symbol}
+              />
+              </div>
+              <div className="block mt-0 text-xs text-left text-white-500 hidden">{pair.oracle.name}</div>
             </div>
           </div>
           <div className="hidden text-center text-white md:block">
@@ -222,11 +248,20 @@ const LendEntry = ({ pair, userPosition = false }) => {
                 {/* <div className="text-center text-sm text-secondary">{formatNumber(pair.currentUserAssetAmount.usd, true)}</div> */}
               </div>
               <div className="text-center">
-                <div>{formatNumber(pair.currentUserBorrowAmount.string)} {pair.asset.tokenInfo.symbol}</div>
+                <div>{formatNumber(pair.currentUserLentAmount.string)} {pair.asset.tokenInfo.symbol}</div>
                 {/* <div>{formatPercent(pair.utilization.string)}</div> */}
-                {/* <div className="text-center text-secondary text-sm">{formatNumber(pair.currentUserBorrowAmount.usd, true)}</div> */}
+                <div className="text-center text-secondary text-sm">{formatNumber(pair.currentUserLentAmount.usd, true)}</div>
               </div>
-              <div className="text-center">{formatPercent(pair.supplyAPR.stringWithStrategy)}</div>{' '}
+              <div className="text-center">
+              {
+                formatPercent(
+                  ((pair?.userAssetFraction.div(e10(pair.asset.tokenInfo.decimals))) -
+                    (pair?.userAssetFraction.sub(pair?.currentUserLentAmount.value).div(e10(pair.asset.tokenInfo.decimals))))
+                  / (pair?.userAssetFraction.div(e10(pair.asset.tokenInfo.decimals))) * 100
+                )
+              }
+                </div>{' '}
+              <div className="hidden sm:text-center">{formatPercent(pair.supplyAPR.stringWithStrategy)}</div>{' '}
             </>
           ) : (
             <>
@@ -239,7 +274,7 @@ const LendEntry = ({ pair, userPosition = false }) => {
               <div className="text-center">
                 {formatPercent(pair.currentSupplyAPR.stringWithStrategy)}
               </div>
-              <div className="text-center sm:block">{
+              <div className="text-center">{
                 formatPercent(
                   ((pair?.totalAsset.base / 10**(pair.asset.tokenInfo.decimals)) -
                     (pair?.totalAsset.base.sub(pair?.totalBorrow.base) / 10**(pair.asset.tokenInfo.decimals)))
