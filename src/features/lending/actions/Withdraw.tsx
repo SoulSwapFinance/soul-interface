@@ -28,8 +28,8 @@ export default function Withdraw({ pair }: any): JSX.Element {
   const { i18n } = useLingui()
 
   // State
-  const [useCoffin, setUseCoffin] = useState<boolean>(BigNumber.from(pair.asset.balance).gt(0))
-  // const [useCoffin, setUseCoffin] = useState<boolean>(false)
+  // const [useCoffin, setUseCoffin] = useState<boolean>(BigNumber.from(pair.asset.balance).gt(0))
+  const [useCoffin, setUseCoffin] = useState<boolean>(true)
   const [value, setValue] = useState('')
   const [pinMax, setPinMax] = useState(false)
 
@@ -92,7 +92,8 @@ export default function Withdraw({ pair }: any): JSX.Element {
   // Handlers
   async function onExecute(cooker: UnderworldCooker) {
     const fraction = pinMax
-      ? minimum(pair.userAssetFraction, pair.maxAssetAvailableFraction)
+      // ? minimum(pair.userAssetFraction, pair.maxAssetAvailableFraction)
+      ? pair.userAssetFraction
       : value
         .toBigNumber(pair.asset.tokenInfo.decimals)
         // .mulDiv(pair.currentTotalAsset.base, pair.currentAllAssets.value)
@@ -107,7 +108,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
         {/* {i18n._(t`Withdraw`)} {pair.asset.tokenInfo.symbol} */}
       </div>
 
-      <SmartNumberInput
+      {/* <SmartNumberInput
         color="blue"
         token={pair.asset}
         value={displayValue}
@@ -120,8 +121,8 @@ export default function Withdraw({ pair }: any): JSX.Element {
         pinMax={pinMax}
         setPinMax={setPinMax}
         showMax={true}
-      />
-      {/* <LendAssetInput
+      /> */}
+      <LendAssetInput
         size="sm"
         id="add-collateral-input"
         value={value}
@@ -131,8 +132,8 @@ export default function Withdraw({ pair }: any): JSX.Element {
         // balance={Number(displayValue)}
         // maxSpend={displayValue}
         showMax={true}
-        spendFromWallet={useCoffin} 
-      />*/}
+        // spendFromWallet={useCoffin} 
+      />
 
       <WarningsView warnings={warnings} />
       <TransactionReviewView transactionReview={transactionReview}></TransactionReviewView>
