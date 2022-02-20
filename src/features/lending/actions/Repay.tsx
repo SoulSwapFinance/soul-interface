@@ -208,7 +208,7 @@ export default function Repay({ pair }: RepayProps) {
 
   const priceImpactSeverity = warningSeverity(priceImpact)
 
-  let actionName = 'Nothing Borrowed'
+  let actionName = 'Enter Amounts'
 
   if (removeValueSet) {
     if (repayValueSet) {
