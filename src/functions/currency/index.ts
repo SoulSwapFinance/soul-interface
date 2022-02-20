@@ -1,5 +1,6 @@
 export * from './currencyId'
 export * from './halfAmountSpend'
 export * from './getCurrency'
+export * from './maxAmountWithdraw'
 export * from './maxAmountSpend'
 export * from './wrappedCurrency'
