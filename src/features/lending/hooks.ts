@@ -162,7 +162,11 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
     .reduce((previousValue, currentValue) => {
       const balance = balances[currentValue.address]
       const strategy = strategies?.find((strategy) => strategy.token === currentValue.address.toLowerCase())
-      const usd = e10(currentValue.decimals).mulDiv(balances[currency.address].rate, balance.rate)
+      let usd = BigNumber.from(0)
+      balances[currency.address]?.rate > 0 ?
+      usd = e10(currentValue.decimals).mulDiv(balances[currency.address].rate, balance.rate)
+      : usd = BigNumber.from(0)
+      
       // @ts-ignore TYPE NEEDS FIXING
       const symbol = currentValue.address === wnative ? NATIVE[chainId].symbol : currentValue.symbol
       return {
