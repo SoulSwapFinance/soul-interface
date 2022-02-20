@@ -6,7 +6,7 @@ import GradientDot from 'components/GradientDot'
 import Image from 'components/Image'
 // import { Feature } from 'enums/Feature'
 import ListHeaderWithSort from 'features/lending/components/ListHeaderWithSort'
-import { useUnderworldPairAddresses, useUnderworldPairs } from 'features/lending/hooks'
+import { useUnderworldPair, useUnderworldPairAddresses, useUnderworldPairs } from 'features/lending/hooks'
 import { formatNumber, formatPercent } from 'functions/format'
 // import NetworkGuard from 'guards/Network'
 import { useInfiniteScroll } from 'hooks/useInfiniteScroll'
@@ -23,6 +23,7 @@ import { Feature } from 'enums'
 import { useUnderworldBorrowPositions } from 'features/portfolio/AssetBalances/underworld/hooks'
 import { usePrice, useUSDCPrice } from 'hooks'
 import { e10 } from 'functions/math'
+import router from 'next/router'
 
 const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
 
@@ -116,6 +117,15 @@ export default function Borrow() {
               </div>
               <div className="flex-col space-y-2">
                 {positions.items.map((pair: any) => {
+                    const userCollateralBalance = pair?.userCollateralShare // √
+                    // const userBorrowBalance = Number(pair?.currentUserBorrowAmount.string / 1e18) // √
+                    const collateralPrice = pair?.collateral.usd / (10**pair.collateral.tokenInfo.decimals) * 1e12
+                    // const borrowPrice = usePrice(pair?.asset.address)
+                    const userCollateralValue 
+                    = userCollateralBalance 
+                      * collateralPrice 
+                      / 10**pair.collateral.tokenInfo.decimals
+                    // const userBorrowValue = userBorrowBalance * borrowPrice
                   return (
                     <div key={pair.address}>
                       <Link href={'/borrow/' + pair.address}>
@@ -182,8 +192,13 @@ export default function Borrow() {
                             </div>
                             <div className="text-center md:block">
                               <div>
-                                {formatNumber(Number(pair?.userCollateralShare / 1e18), false)}{' '}
-                                {pair.collateral.tokenInfo.symbol}
+                                {formatNumber(Number(pair?.userCollateralShare / 1e18), false)} {pair.collateral.tokenInfo.symbol}
+                              </div>
+                              <div className="text-sm text-secondary">
+                                {formatNumber(
+                                  userCollateralValue,
+                                  true
+                                )}
                               </div>
                               {/* <div className="text-center text-sm text-secondary"> */}
                               {/* {formatNumber(Number(pair?.userCollateralShare) * Number(pair?.collateralPrice / 1e18), true)} */}
@@ -194,9 +209,12 @@ export default function Borrow() {
                               {formatPercent(pair.health.string)}
                               <GradientDot percent={pair.health.string} />
                             </div> */}
-                            <div className="text-center">{formatPercent(pair?.userCollateralShare
-                              / Number(pair?.currentUserBorrowAmount.string)
-                              / 10 ** (pair?.collateral.tokenInfo.decimals))}</div>
+                            <div className="text-center">{
+                            formatPercent(
+                              pair?.currentUserBorrowAmount.usd
+                              / userCollateralValue /// userCollateralValue
+                              * 100
+                            )}</div>
                           <div className="hidden text-center md:block">{formatPercent(pair.interestPerYear.string)}</div>
                           </div>
                         </a>

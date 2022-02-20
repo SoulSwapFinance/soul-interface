@@ -32,8 +32,13 @@ export default function Pair() {
 
   const pair = useUnderworldPair(router.query.pair as string)
   const userCollateralBalance = Number(pair?.userCollateralShare / 1e18) // √
+  const userBorrowBalance = Number(pair?.currentUserBorrowAmount.string / 1e18) // √
   const collateralPrice = usePrice(pair?.collateral.address)
+  const borrowPrice = usePrice(pair?.asset.address)
   const userCollateralValue = userCollateralBalance * collateralPrice
+  const userBorrowValue = userBorrowBalance * borrowPrice
+  const pairUtilization = userBorrowValue * 10**(pair?.collateral.tokenInfo.decimals) / Number(userCollateralValue) * 100
+  const pairHealth = pairUtilization
 
   if (!pair) return <div />
 
@@ -102,15 +107,19 @@ export default function Pair() {
             {formatNumber(pair.currentUserBorrowAmount.string)} {pair.asset.tokenInfo.symbol}
             </div>
             <div className="items-center text-center flex justify-center text-md sm:text-lg text-high-emphesis">
-              {formatPercent(pair.health.string)}
-              <GradientDot percent={pair.health.string}></GradientDot>
+              { formatPercent(pairHealth) }
+              <GradientDot percent={pairHealth}></GradientDot>
             </div>
           </div>
           <div className="text-right">
             <div>
+              <div className="text-center text-md sm:text-lg text-secondary">{i18n._(t`Available`)}</div>
+              <div className="text-lg sm:text-2xl text-high-emphesis">{formatPercent(75-pairUtilization)}</div>
+            </div>
+            {/* <div>
               <div className="text-center text-md sm:text-lg text-secondary">{i18n._(t`APR`)}</div>
               <div className="text-lg sm:text-2xl text-high-emphesis">{formatPercent(pair.interestPerYear.string)}</div>
-            </div>
+            </div> */}
           </div>
         </div>
         <Tab.Group>
