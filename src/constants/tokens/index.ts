@@ -238,6 +238,14 @@ export const WETH9_EXTENDED: { [chainId: number]: Token } = {
   ...WETH9,
   // 
 
+  // [SupportedChainId.ETHEREUM]: new Token(
+  //   ChainId.ETHEREUM,
+  //   '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
+  //   18,
+  //   'WETH',
+  //   'Wrapped Ethereum'
+  // ),
+
   [SupportedChainId.FANTOM]: new Token(
     ChainId.FANTOM,
     '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',

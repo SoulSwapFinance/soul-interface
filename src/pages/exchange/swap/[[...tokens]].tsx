@@ -4,7 +4,7 @@ import { useLingui } from '@lingui/react'
 import { Currency, JSBI, Token, Trade as V2Trade, TradeType } from 'sdk'
 import Banner from 'components/Banner'
 import { Button } from 'components/Button'
-// import RecipientField from 'components/RecipientField'
+import RecipientField from 'components/RecipientField'
 import Typography from 'components/Typography'
 import Web3Connect from 'components/Web3Connect'
 import ConfirmSwapModal from 'features/swap/ConfirmSwapModal'
@@ -84,7 +84,7 @@ const Swap = () => {
     inputError: wrapInputError,
   } = useWrapCallback(currencies[Field.INPUT], currencies[Field.OUTPUT], typedValue)
   const showWrap: boolean = wrapType !== WrapType.NOT_APPLICABLE
-  // const { address: recipientAddress } = useENSAddress(recipient)
+  const { address: recipientAddress } = useENSAddress(recipient)
 
   const trade = showWrap ? undefined : v2Trade
 
@@ -230,8 +230,7 @@ const Swap = () => {
           action:
             recipient === null
               ? 'Swap w/o Send'
-              // @ts-ignore TYPE NEEDS FIXING
-              : (recipientAddress ? recipient : account)
+              : (recipientAddress ?? recipient) === account
                 ? 'Swap w/o Send + recipient'
                 : 'Swap w/ Send',
           label: [
@@ -261,8 +260,7 @@ const Swap = () => {
     tradeToConfirm,
     showConfirm,
     recipient,
-    // @ts-ignore TYPE NEEDS FIXING
-    // recipientAddress,
+    recipientAddress,
     account,
     trade?.inputAmount?.currency?.symbol,
     trade?.outputAmount?.currency?.symbol,
@@ -415,7 +413,7 @@ const Swap = () => {
             priceImpact={priceImpact}
             priceImpactCss={priceImpactCss}
           />
-          {/* {isExpertMode && <RecipientField recipient={recipient} action={setRecipient} />} */}
+          {isExpertMode && <RecipientField recipient={recipient} action={setRecipient} />}
           {Boolean(trade) && (
             <SwapDetails
               inputCurrency={currencies[Field.INPUT]}

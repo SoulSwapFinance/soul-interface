@@ -179,19 +179,19 @@ export function useDerivedSwapInfo(): {
     inputError = inputError ?? i18n._(t`Select Token`)
   }
 
-  // const formattedTo = isAddress(to)
-  // if (!to || !formattedTo) {
-  //   inputError = inputError ?? i18n._(t`Enter Recipient`)
-  // } else {
-  //   if (
-  //     // @ts-ignore TYPE NEEDS FIXING
-  //     BAD_RECIPIENT_ADDRESSES?.[chainId]?.[formattedTo] ||
-  //     (bestTradeExactIn && involvesAddress(bestTradeExactIn, formattedTo)) ||
-  //     (bestTradeExactOut && involvesAddress(bestTradeExactOut, formattedTo))
-  //   ) {
-  //     inputError = inputError ?? i18n._(t`Invalid Recipient`)
-  //   }
-  // }
+  const formattedTo = isAddress(to)
+  if (!to || !formattedTo) {
+    inputError = inputError ?? i18n._(t`Enter Recipient`)
+  } else {
+    if (
+      // @ts-ignore TYPE NEEDS FIXING
+      BAD_RECIPIENT_ADDRESSES?.[chainId]?.[formattedTo] ||
+      (bestTradeExactIn && involvesAddress(bestTradeExactIn, formattedTo)) ||
+      (bestTradeExactOut && involvesAddress(bestTradeExactOut, formattedTo))
+    ) {
+      inputError = inputError ?? i18n._(t`Invalid Recipient`)
+    }
+  }
 
   // @ts-ignore TYPE NEEDS FIXING
   const allowedSlippage = useSwapSlippageTolerance(v2Trade)

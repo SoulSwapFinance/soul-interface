@@ -6,7 +6,7 @@ export default function Blocklist({ children }: { children: ReactNode }) {
   const { account } = useActiveWeb3React()
   const blocked: boolean = useMemo(() => Boolean(account && config.blockedAddresses.indexOf(account) !== -1), [account])
   if (blocked) {
-    return <div>Blocked address</div>
+    return <div>Blocked Address</div>
   }
   return <>{children}</>
 }

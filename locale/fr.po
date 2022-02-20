@@ -19,12 +19,6 @@ msgstr ""
 msgid "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies."
 msgstr ""
 
-msgid "(Collateral)"
-msgstr ""
-
-msgid "(Lent)"
-msgstr ""
-
 msgid "+ Add Recipient (optional)"
 msgstr ""
 
@@ -190,6 +184,9 @@ msgstr ""
 msgid "Approving {contractName} Master Contract"
 msgstr ""
 
+msgid "Asset"
+msgstr ""
+
 msgid "Assets"
 msgstr ""
 
@@ -333,6 +330,9 @@ msgstr ""
 msgid "CoffinBox"
 msgstr ""
 
+msgid "CoffinBox Balances"
+msgstr ""
+
 msgid "CoffinBox strategies can create yield for your liquidity while it is not lent out. This token does not yet have a strategy in the CoffinBox."
 msgstr ""
 
@@ -364,6 +364,9 @@ msgid "Confirm Limit Order"
 msgstr ""
 
 msgid "Confirm Order"
+msgstr ""
+
+msgid "Confirm Removal"
 msgstr ""
 
 msgid "Confirm Remove Liquidity"
@@ -511,9 +514,6 @@ msgid "EXIT"
 msgstr ""
 
 msgid "Earn"
-msgstr ""
-
-msgid "Earn fees and rewards by depositing and staking your liquidity tokens (LP) to the platform."
 msgstr ""
 
 msgid "Either return to the {link}, or change to an available network."
@@ -754,10 +754,16 @@ msgstr ""
 msgid "Insufficient {0} balance"
 msgstr ""
 
+msgid "Interest"
+msgstr ""
+
 msgid "Interface Settings"
 msgstr ""
 
 msgid "Invalid Pool"
+msgstr ""
+
+msgid "Invalid Recipient"
 msgstr ""
 
 msgid "Invalid pair"
@@ -794,9 +800,6 @@ msgstr ""
 msgid "LIQUIDITY"
 msgstr ""
 
-msgid "LTV"
-msgstr ""
-
 msgid "LUXOR"
 msgstr ""
 
@@ -810,9 +813,6 @@ msgid "Lend your assets, earn yield with ZERO impermanent loss"
 msgstr ""
 
 msgid "Lending"
-msgstr ""
-
-msgid "Lent"
 msgstr ""
 
 msgid "Limit"
@@ -900,9 +900,6 @@ msgid "Manage Token Lists"
 msgstr ""
 
 msgid "Manage this pool"
-msgstr ""
-
-msgid "Market"
 msgstr ""
 
 msgid "Markets"
@@ -1176,6 +1173,9 @@ msgstr ""
 msgid "Remove recipient"
 msgstr ""
 
+msgid "Remove to Wallet"
+msgstr ""
+
 msgid "Remove {0} {1} and {2} {3}"
 msgstr ""
 
@@ -1309,9 +1309,6 @@ msgstr ""
 msgid "SoulSwap"
 msgstr ""
 
-msgid "SoulSwap Farms"
-msgstr ""
-
 msgid "SoulSwap Vault is a set of high incentivized pools. Long term supporters can choose to lock SOUL for a determined period for higher rewards."
 msgstr ""
 
@@ -1390,9 +1387,6 @@ msgid "Summon Souls with Liquidity."
 msgstr ""
 
 msgid "Summon an Empire."
-msgstr ""
-
-msgid "Supply APR"
 msgstr ""
 
 msgid "Supplying {0} {1} and {2} {3}"
@@ -1541,7 +1535,10 @@ msgstr ""
 msgid "Turn On Expert Mode"
 msgstr ""
 
-msgid "Underworld"
+msgid "Underworld Assets"
+msgstr ""
+
+msgid "Underworld Collateral"
 msgstr ""
 
 msgid "Unknown Source"
@@ -1586,7 +1583,10 @@ msgstr ""
 msgid "Use the toggle to switch between balances when interacting with our platform."
 msgstr ""
 
-msgid "Used"
+msgid "Utilization"
+msgstr ""
+
+msgid "Utilized"
 msgstr ""
 
 msgid "VOTE"
@@ -1638,6 +1638,9 @@ msgid "Wallet"
 msgstr ""
 
 msgid "Wallet Balance"
+msgstr ""
+
+msgid "Wallet Balances"
 msgstr ""
 
 msgid "Wallet address or ENS name"

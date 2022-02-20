@@ -2,14 +2,14 @@ import { AddressMap } from '../types'
 import { ChainId } from '../enums/ChainId'
 
 export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.ETHEREUM]: '',
+  [ChainId.ETHEREUM]: '0x794d858b0b152fb68a5CE465451D729EFfA67f08', // FEB22
   [ChainId.BSC]: '0xa9EC396a1b709689e98DaB9eAf4f18A913775d39',
   [ChainId.FANTOM]: '0x1120e150dA9def6Fe930f4fEDeD18ef57c0CA7eF',
   [ChainId.FANTOM_TESTNET]: ''
 }
 
 export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.ETHEREUM]: '',
+  [ChainId.ETHEREUM]: '0x2a8B48a8B8a8a8E4a184280333c418BcdcE72dE9', // FEB22
   [ChainId.BSC]: '0x1b4df4D7E63B125f3a01fd5598E8E8458e519255',
   [ChainId.FANTOM]: '0x6b3d631B87FE27aF29efeC61d2ab8CE4d621cCBF',
   [ChainId.FANTOM_TESTNET]: ''

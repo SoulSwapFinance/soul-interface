@@ -22,6 +22,7 @@ import Layout from 'layouts/Underworld'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { RecoilRoot } from 'recoil'
+import { e10 } from 'functions/math'
 
 export default function Pair() {
   useRedirectOnChainId('/borrow')
@@ -31,8 +32,13 @@ export default function Pair() {
 
   const pair = useUnderworldPair(router.query.pair as string)
   const userCollateralBalance = Number(pair?.userCollateralShare / 1e18) // √
+  const userBorrowBalance = Number(pair?.currentUserBorrowAmount.string / 1e18) // √
   const collateralPrice = usePrice(pair?.collateral.address)
+  const borrowPrice = usePrice(pair?.asset.address)
   const userCollateralValue = userCollateralBalance * collateralPrice
+  const userBorrowValue = userBorrowBalance * borrowPrice
+  const pairUtilization = userBorrowValue * 10**(pair?.collateral.tokenInfo.decimals) / Number(userCollateralValue) * 100
+  const pairHealth = pairUtilization
 
   if (!pair) return <div />
 
@@ -101,15 +107,19 @@ export default function Pair() {
             {formatNumber(pair.currentUserBorrowAmount.string)} {pair.asset.tokenInfo.symbol}
             </div>
             <div className="items-center text-center flex justify-center text-md sm:text-lg text-high-emphesis">
-              {formatPercent(pair.health.string)}
-              <GradientDot percent={pair.health.string}></GradientDot>
+              { formatPercent(pairHealth) }
+              <GradientDot percent={pairHealth}></GradientDot>
             </div>
           </div>
           <div className="text-right">
             <div>
+              <div className="text-center text-md sm:text-lg text-secondary">{i18n._(t`Available`)}</div>
+              <div className="text-lg sm:text-2xl text-high-emphesis">{formatPercent(75-pairUtilization)}</div>
+            </div>
+            {/* <div>
               <div className="text-center text-md sm:text-lg text-secondary">{i18n._(t`APR`)}</div>
               <div className="text-lg sm:text-2xl text-high-emphesis">{formatPercent(pair.interestPerYear.string)}</div>
-            </div>
+            </div> */}
           </div>
         </div>
         <Tab.Group>
@@ -174,40 +184,49 @@ const PairLayout = ({ children }) => {
         <Card className="h-full p-4 bg-dark-900 xl:p-0">
           <div className="flex-col space-y-2">
             <div className="flex justify-between">
-              <div className="text-xl text-high-emphesis">{i18n._(t`Market`)}</div>
+            <div className="text-xl text-high-emphesis">{`Market`}</div>
             </div>
             <div className="flex justify-between">
-              <div className="text-lg text-secondary">{i18n._(t`APR`)}</div>
+              <div className="text-lg text-secondary">{`% APR`}</div>
               <div className="flex items-center">
                 <div className="text-lg text-high-emphesis">{formatPercent(pair?.interestPerYear.string)}</div>
               </div>
             </div>
             <div className="flex justify-between">
-              <div className="text-lg text-secondary">{i18n._(t`LTV`)}</div>
+              <div className="text-lg text-secondary">{`% LTV`}</div>
               <div className="text-lg text-high-emphesis">75%</div>
             </div>
             <div className="flex justify-between">
-              <div className="text-lg text-secondary">{i18n._(t`Total`)}</div>
+              <div className="text-lg text-secondary">{`Total Assets`}</div>
               <div className="text-lg text-high-emphesis">
-                {formatNumber(pair?.currentAllAssets.string)} {pair?.asset.tokenInfo.symbol}
+              {formatNumber(pair?.totalAsset.base.div(e10(18)))} {pair?.asset.tokenInfo.symbol}
               </div>
             </div>
             <div className="flex justify-between">
-              <div className="text-lg text-secondary">{i18n._(t`Available`)}</div>
+              <div className="text-green text-lg text-secondary">{`Available`}</div>
               <div className="flex items-center">
-                <div className="text-lg text-high-emphesis">
-                  {formatNumber(pair?.totalAssetAmount.string)} {pair?.asset.tokenInfo.symbol}
-                </div>
+                <div className="text-green text-lg text-high-emphesis">
+                {formatPercent(100-
+                ((pair?.totalAsset.base.div(e10(18))) -
+                  (pair?.totalAsset.base.sub(pair?.totalBorrow.base).div(e10(18))))
+                  / (pair?.totalAsset.base.div(e10(18))) * 100
+                )}</div>
               </div>
             </div>
-            <div className="flex justify-between">
-              <div className="text-lg text-secondary">{i18n._(t`Borrowed`)}</div>
+            {/* <div className="flex justify-between">
+              <div className="text-lg text-secondary">{`Borrowed`}</div>
               <div className="flex items-center">
-                <div className="text-lg text-high-emphesis">{formatPercent(pair?.utilization.string)}</div>
+                <div className="text-lg text-high-emphesis"> */}
+                  {/* AVAILABLE - TOTAL / TOTAL * 100 */}
+                {/* {formatPercent(
+                ((pair?.totalAsset.base.div(e10(18))) -
+                  (pair?.totalAsset.base.sub(pair?.totalBorrow.base).div(e10(18))))
+                  / (pair?.totalAsset.base.div(e10(18))) * 100
+                )}</div>
               </div>
-            </div>
+            </div> */}
 
-            <PairTools pair={pair} />
+            {/* <PairTools pair={pair} /> */}
 
             <div className="flex justify-between pt-3">
               <div className="text-xl text-high-emphesis">{i18n._(t`Oracle`)}</div>

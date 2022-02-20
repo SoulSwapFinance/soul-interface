@@ -17,6 +17,8 @@ import WarningsView from '../components/WarningsList'
 import { BigNumber } from '@ethersproject/bignumber'
 import AssetInput from 'components/AssetInput'
 import { useCurrency } from 'hooks/Tokens'
+import { formatPercent } from 'functions'
+import LendAssetInput from 'components/LendAssetInput'
 
 export default function Withdraw({ pair }: any): JSX.Element {
   const { account } = useActiveWeb3React()
@@ -26,19 +28,21 @@ export default function Withdraw({ pair }: any): JSX.Element {
   const { i18n } = useLingui()
 
   // State
-  const [useCoffin, setUseCoffin] = useState<boolean>(BigNumber.from(pair.asset.balance).lt(0))
+  const [useCoffin, setUseCoffin] = useState<boolean>(BigNumber.from(pair.asset.balance).gt(0))
   // const [useCoffin, setUseCoffin] = useState<boolean>(false)
   const [value, setValue] = useState('')
   const [pinMax, setPinMax] = useState(false)
 
   const [underworldApprovalState, approveUnderworldFallback, underworldPermit, onApprove, onCook] = useUnderworldApproveCallback()
 
+
   // Calculated
-  // const max = pair.currentUserAssetAmount.value
-  const max = 
+  // const max = minimum(pair.maxAssetAvailable, pair.currentUserAssetAmount.value)
+  const max =
     // minimum(pair.maxAssetAvailable, pair.currentUserAssetAmount.value)
-    pair.maxAssetAvailable > pair.currentUserAssetAmount.value 
-      ? pair.maxAssetAvailable
+    pair.maxAssetAvailable.lte(pair.currentUserAssetAmount.value)
+      // DEPOSITED AMOUNT - LENT AMOUNT
+      ? pair.userAssetFraction.sub(pair.currentUserLentAmount.value)
       : pair.currentUserAssetAmount.value
 
   const displayValue = pinMax ? max.toFixed(pair.asset.tokenInfo.decimals) : value
@@ -48,12 +52,13 @@ export default function Withdraw({ pair }: any): JSX.Element {
     : value.toBigNumber(pair.asset.tokenInfo.decimals).mulDiv(pair.currentTotalAsset.base, pair.currentAllAssets.value)
 
   const warnings = new Warnings()
+    // CHECKS: WITHDRAW AMOUNT !> DEPOSITED AMOUNT - LENT AMOUNT
     .add(
-      pair.currentUserAssetAmount.value.lt(value.toBigNumber(pair.asset.tokenInfo.decimals)),
+      pair.userAssetFraction.sub(pair.currentUserLentAmount.value)
+        .lt(value.toBigNumber(pair.asset.tokenInfo.decimals)),
       i18n._(
-        t`Please make sure your ${
-          useCoffin ? 'CoffinBox' : 'wallet'
-        } balance is sufficient to withdraw and then try again.`
+        t`Please make sure your ${useCoffin ? 'CoffinBox' : 'wallet'
+          } balance is sufficient to withdraw and then try again.`
       ),
       true
     )
@@ -68,22 +73,20 @@ export default function Withdraw({ pair }: any): JSX.Element {
   const transactionReview = new TransactionReview()
   if (displayValue && !warnings.broken) {
     const amount = displayValue.toBigNumber(pair.asset.tokenInfo.decimals)
-    const newUserAssetAmount = pair.currentUserAssetAmount.value.sub(amount)
+    const newUserAssetAmount = pair.userAssetFraction.sub(amount)
     transactionReview.addTokenAmount(
       i18n._(t`Balance`),
-      pair.currentUserAssetAmount.value,
+      pair.userAssetFraction,
       newUserAssetAmount,
       pair.asset
     )
-    transactionReview.addUSD(i18n._(t`Balance USD`), 
-      pair.currentUserAssetAmount.value, 
-      newUserAssetAmount, 
+    transactionReview.addUSD(i18n._(t`Balance USD`),
+      pair.userAssetFraction,
+      newUserAssetAmount,
       pair.asset)
 
-    const newUtilization 
-      = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.sub(amount))
-      // = pair.currentBorrowAmount.value.mul(pair.currentAllAssets.value).sub(newUserAssetAmount)
-    transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
+    const newUtilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.sub(amount))
+    // transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
   }
 
   // Handlers
@@ -91,8 +94,8 @@ export default function Withdraw({ pair }: any): JSX.Element {
     const fraction = pinMax
       ? minimum(pair.userAssetFraction, pair.maxAssetAvailableFraction)
       : value
-          .toBigNumber(pair.asset.tokenInfo.decimals)
-          .mulDiv(pair.currentTotalAsset.base, pair.currentAllAssets.value)
+        .toBigNumber(pair.asset.tokenInfo.decimals)
+        // .mulDiv(pair.currentTotalAsset.base, pair.currentAllAssets.value)
 
     cooker.removeAsset(fraction, useCoffin)
     return `${i18n._(t`Withdraw`)} ${pair.asset.tokenInfo.symbol}`
@@ -104,30 +107,32 @@ export default function Withdraw({ pair }: any): JSX.Element {
         {/* {i18n._(t`Withdraw`)} {pair.asset.tokenInfo.symbol} */}
       </div>
 
-      {/* <SmartNumberInput
+      <SmartNumberInput
         color="blue"
         token={pair.asset}
         value={displayValue}
         setValue={setValue}
         useCoffinTitleDirection="up"
         useCoffinTitle="to"
-        useCoffin={useCoffin}
+        useCoffin={true}
         setUseCoffin={setUseCoffin}
         max={max}
         pinMax={pinMax}
         setPinMax={setPinMax}
         showMax={true}
-      /> */}
-       <AssetInput
+      />
+      {/* <LendAssetInput
         size="sm"
         id="add-collateral-input"
-        value={displayValue}
+        value={value}
         currency={assetToken}
         onChange={setValue}
         className="!mt-0"
+        // balance={Number(displayValue)}
+        // maxSpend={displayValue}
         showMax={true}
-        spendFromWallet={false}
-      />
+        spendFromWallet={useCoffin} 
+      />*/}
 
       <WarningsView warnings={warnings} />
       <TransactionReviewView transactionReview={transactionReview}></TransactionReviewView>

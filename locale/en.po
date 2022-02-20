@@ -19,12 +19,6 @@ msgstr "% Share"
 msgid "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies."
 msgstr "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies."
 
-msgid "(Collateral)"
-msgstr "(Collateral)"
-
-msgid "(Lent)"
-msgstr "(Lent)"
-
 msgid "+ Add Recipient (optional)"
 msgstr "+ Add Recipient (optional)"
 
@@ -190,6 +184,9 @@ msgstr "Approving {0}"
 msgid "Approving {contractName} Master Contract"
 msgstr "Approving {contractName} Master Contract"
 
+msgid "Asset"
+msgstr "Asset"
+
 msgid "Assets"
 msgstr "Assets"
 
@@ -338,6 +335,9 @@ msgstr "Coffin"
 msgid "CoffinBox"
 msgstr "CoffinBox"
 
+msgid "CoffinBox Balances"
+msgstr "CoffinBox Balances"
+
 msgid "CoffinBox strategies can create yield for your liquidity while it is not lent out. This token does not yet have a strategy in the CoffinBox."
 msgstr "CoffinBox strategies can create yield for your liquidity while it is not lent out. This token does not yet have a strategy in the CoffinBox."
 
@@ -370,6 +370,9 @@ msgstr "Confirm Limit Order"
 
 msgid "Confirm Order"
 msgstr "Confirm Order"
+
+msgid "Confirm Removal"
+msgstr "Confirm Removal"
 
 msgid "Confirm Remove Liquidity"
 msgstr "Confirm Remove Liquidity"
@@ -517,9 +520,6 @@ msgstr "EXIT"
 
 msgid "Earn"
 msgstr "Earn"
-
-msgid "Earn fees and rewards by depositing and staking your liquidity tokens (LP) to the platform."
-msgstr "Earn fees and rewards by depositing and staking your liquidity tokens (LP) to the platform."
 
 msgid "Either return to the {link}, or change to an available network."
 msgstr "Either return to the {link}, or change to an available network."
@@ -763,11 +763,17 @@ msgstr "Insufficient liquidity for this trade."
 msgid "Insufficient {0} balance"
 msgstr "Insufficient {0} balance"
 
+msgid "Interest"
+msgstr "Interest"
+
 msgid "Interface Settings"
 msgstr "Interface Settings"
 
 msgid "Invalid Pool"
 msgstr "Invalid Pool"
+
+msgid "Invalid Recipient"
+msgstr "Invalid Recipient"
 
 msgid "Invalid pair"
 msgstr "Invalid pair"
@@ -807,9 +813,6 @@ msgstr "LEND"
 msgid "LIQUIDITY"
 msgstr "LIQUIDITY"
 
-msgid "LTV"
-msgstr "LTV"
-
 msgid "LUXOR"
 msgstr "LUXOR"
 
@@ -824,9 +827,6 @@ msgstr "Lend your assets, earn yield with ZERO impermanent loss"
 
 msgid "Lending"
 msgstr "Lending"
-
-msgid "Lent"
-msgstr "Lent"
 
 msgid "Limit"
 msgstr "Limit"
@@ -914,9 +914,6 @@ msgstr "Manage Token Lists"
 
 msgid "Manage this pool"
 msgstr "Manage this pool"
-
-msgid "Market"
-msgstr "Market"
 
 msgid "Markets"
 msgstr "Markets"
@@ -1193,6 +1190,9 @@ msgstr "Remove liquidity of Soul"
 msgid "Remove recipient"
 msgstr "Remove recipient"
 
+msgid "Remove to Wallet"
+msgstr "Remove to Wallet"
+
 msgid "Remove {0} {1} and {2} {3}"
 msgstr "Remove {0} {1} and {2} {3}"
 
@@ -1330,9 +1330,6 @@ msgstr "Soul Vault"
 msgid "SoulSwap"
 msgstr "SoulSwap"
 
-msgid "SoulSwap Farms"
-msgstr "SoulSwap Farms"
-
 msgid "SoulSwap Vault is a set of high incentivized pools. Long term supporters can choose to lock SOUL for a determined period for higher rewards."
 msgstr "SoulSwap Vault is a set of high incentivized pools. Long term supporters can choose to lock SOUL for a determined period for higher rewards."
 
@@ -1414,9 +1411,6 @@ msgstr "Summon Souls with Liquidity."
 
 msgid "Summon an Empire."
 msgstr "Summon an Empire."
-
-msgid "Supply APR"
-msgstr "Supply APR"
 
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "Supplying {0} {1} and {2} {3}"
@@ -1566,8 +1560,11 @@ msgstr "Try enabling multi-hop trades"
 msgid "Turn On Expert Mode"
 msgstr "Turn On Expert Mode"
 
-msgid "Underworld"
-msgstr "Underworld"
+msgid "Underworld Assets"
+msgstr "Underworld Assets"
+
+msgid "Underworld Collateral"
+msgstr "Underworld Collateral"
 
 msgid "Unknown Source"
 msgstr "Unknown Source"
@@ -1611,8 +1608,11 @@ msgstr "Use one of the buttons to set a percentage or enter a value manually usi
 msgid "Use the toggle to switch between balances when interacting with our platform."
 msgstr "Use the toggle to switch between balances when interacting with our platform."
 
-msgid "Used"
-msgstr "Used"
+msgid "Utilization"
+msgstr "Utilization"
+
+msgid "Utilized"
+msgstr "Utilized"
 
 msgid "VOTE"
 msgstr "VOTE"
@@ -1664,6 +1664,9 @@ msgstr "Wallet"
 
 msgid "Wallet Balance"
 msgstr "Wallet Balance"
+
+msgid "Wallet Balances"
+msgstr "Wallet Balances"
 
 msgid "Wallet address or ENS name"
 msgstr "Wallet address or ENS name"

@@ -6,6 +6,7 @@ import Popups from 'components/Popups'
 import Link from 'next/link'
 import React, { FC } from 'react'
 import { useRouter } from 'next/router'
+import { Button } from 'components/Button'
 
 interface LayoutProps {
   left?: JSX.Element
@@ -38,31 +39,35 @@ const Layout: FC<LayoutProps> = ({ left, children, right }) => {
           <div className="flex items-end col-span-12 xl:col-span-9">
             <nav className="flex items-center justify-between w-full">
               <div className="flex">
+              <Button color="blue" variant="outlined" size="small">
                 <NavLink href="/lend">
                   <a
                     className={
                       'px-2 sm:px-4 flex items-center font-medium ' +
                       (router.pathname.startsWith('/lend')
                         ? 'text-high-emphesis text-blue'
-                        : 'text-secondary hover:text-primary')
+                        : 'text-secondary hover:text-primary hover:text-blue')
                     }
                   >
                     <div className="text-base whitespace-nowrap">Lend</div>
                   </a>
                 </NavLink>
+              </Button>
+              <Button color="purple" variant="outlined" size="small">
                 <NavLink href="/borrow">
                   <a
                     className={
                       'px-2 sm:px-4 flex items-center font-medium ' +
                       (router.pathname.startsWith('/borrow')
                         ? 'text-high-emphesis text-purple'
-                        : 'text-secondary hover:text-primary')
+                        : 'text-secondary hover:text-primary hover:text-purple')
                     }
                   >
                     <div className="text-base whitespace-nowrap">Borrow</div>
                   </a>
                 </NavLink>
-                <NavLink href="/create">
+              </Button>
+                {/* <NavLink href="/create">
                   <a
                     className={
                       'px-2 sm:px-4 flex items-center font-medium ' +
@@ -73,7 +78,7 @@ const Layout: FC<LayoutProps> = ({ left, children, right }) => {
                   >
                     <div className="text-base whitespace-nowrap">Create</div>
                   </a>
-                </NavLink>
+                </NavLink> */}
               </div>
             </nav>
           <div className="flex items-end col-span-12 xl:col-span-9">
