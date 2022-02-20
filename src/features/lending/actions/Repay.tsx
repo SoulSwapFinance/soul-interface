@@ -21,7 +21,7 @@ import { useETHBalances } from 'state/wallet/hooks'
 import React, { useMemo, useState } from 'react'
 
 import { UnderworldApproveButton, TokenApproveButton } from '../components/Button'
-import { SwapCheckbox } from '../components/Checkbox'
+import { ExchangeRateCheckBox, SwapCheckbox } from '../components/Checkbox'
 import SmartNumberInput from '../components/SmartNumberInput'
 import TradeReview from '../components/TradeReview'
 import TransactionReviewView from '../components/TransactionReview'
@@ -39,8 +39,9 @@ export default function Repay({ pair }: RepayProps) {
   const { account, chainId } = useActiveWeb3React()
 
   // State
-  const [useCoffinRepay, setUseCoffinRepay] = useState<boolean>(pair.asset.coffinBalance > 0)
-  const [useCoffinRemove, setUseCoffinRemoveCollateral] = useState<boolean>(true)
+  // const [useCoffinRepay, setUseCoffinRepay] = useState<boolean>(pair.asset.coffinBalance > 0)
+  const [useCoffinRepay, setUseCoffinRepay] = useState<boolean>(false)
+  const [useCoffinRemove, setUseCoffinRemoveCollateral] = useState<boolean>(false)
 
   const [repayValue, setRepayAssetValue] = useState('')
   const [removeValue, setRemoveCollateralValue] = useState('')
@@ -124,7 +125,7 @@ export default function Repay({ pair }: RepayProps) {
 
   // const nextUserCollateralValue = pair.userCollateralAmount.value.add(collateralValue.toBigNumber(pair.collateral.tokenInfo.decimals)).add(extraCollateral)
 
-  const nextUserCollateralAmount = pair.userCollateralAmount.value.sub(
+  const nextUserCollateralAmount = pair.userCollateralShare.sub(
     displayRemoveValue.toBigNumber(pair.collateral.tokenInfo.decimals)
   )
 
@@ -167,7 +168,7 @@ export default function Repay({ pair }: RepayProps) {
       Please enter a balance slighlty below the MAX.`
     )
     .addError(
-      displayRemoveValue.toBigNumber(pair.collateral.tokenInfo.decimals).gt(pair.userCollateralAmount.value),
+      displayRemoveValue.toBigNumber(pair.collateral.tokenInfo.decimals).gt(pair.userCollateralShare),
       'You have insufficient collateral. Please enter a smaller amount or repay more.'
     )
     .addError(
@@ -184,11 +185,11 @@ export default function Repay({ pair }: RepayProps) {
     .addError(
       displayRemoveValue
         .toBigNumber(pair.collateral.tokenInfo.decimals)
-        .gt(maximum(pair.userCollateralAmount.value.sub(nextMinCollateralMinimum), ZERO)),
+        .gt(maximum(pair.userCollateralShare.sub(nextMinCollateralMinimum), ZERO)),
       'Removing this much collateral would put you into insolvency.',
       new Warning(
         displayRemoveValue.toBigNumber(pair.collateral.tokenInfo.decimals).gt(nextMaxRemoveCollateral),
-        'Removing this much collateral would put you very close to insolvency.'
+        'Removing this much collateral may put you very close to insolvency.'
       )
     )
 
@@ -211,9 +212,9 @@ export default function Repay({ pair }: RepayProps) {
 
   if (removeValueSet) {
     if (repayValueSet) {
-      actionName = 'Repay and remove collateral'
+      actionName = 'Repay and Remove Collateral'
     } else {
-      actionName = 'Remove collateral'
+      actionName = 'Remove Collateral'
     }
   } else if (repayValueSet) {
     actionName = 'Repay'
@@ -299,7 +300,7 @@ export default function Repay({ pair }: RepayProps) {
         summary = 'Repay'
       }
       if (
-        displayRemoveValue.toBigNumber(pair.collateral.tokenInfo.decimals).gt(0) ||
+        Number(displayRemoveValue) > 0 ||
         (pinRemoveMax && pair.userCollateralShare.gt(0))
       ) {
         const share =
@@ -309,7 +310,7 @@ export default function Repay({ pair }: RepayProps) {
             ? pair.userCollateralShare
             : toShare(pair.collateral, displayRemoveValue.toBigNumber(pair.collateral.tokenInfo.decimals))
 
-        cooker.removeCollateral(share, useCoffinRemove)
+        cooker.removeCollateral(displayRemoveValue.toBigNumber(pair.collateral.tokenInfo.decimals), useCoffinRemove)
         summary += (summary ? ' and ' : '') + 'Remove Collateral'
       }
     }
@@ -348,7 +349,7 @@ export default function Repay({ pair }: RepayProps) {
         setValue={setRemoveCollateralValue}
         useCoffinTitleDirection="up"
         useCoffinTitle={`Remove ${pair.collateral.tokenInfo.symbol} to`}
-        useCoffin={useCoffinRemove}
+        useCoffin={true}
         setUseCoffin={setUseCoffinRemoveCollateral}
         max={nextMaxRemoveCollateral}
         pinMax={pinRemoveMax}
@@ -357,8 +358,8 @@ export default function Repay({ pair }: RepayProps) {
           pair.currentUserBorrowAmount.value.eq(displayRepayValue.toBigNumber(pair.asset.tokenInfo.decimals)) ||
           pair.currentUserBorrowAmount.value.isZero()
         }
-        disabled={swap || pair.userCollateralAmount.value.isZero()}
-        switchDisabled={pair.userCollateralAmount.value.isZero()}
+        disabled={swap || pair.userCollateralShare.isZero()}
+        switchDisabled={pair.userCollateralShare.isZero()}
       />
 
       {!pair.currentUserBorrowAmount.value.isZero() && (
@@ -375,14 +376,14 @@ export default function Repay({ pair }: RepayProps) {
         />
       )}
 
-      {/* {removeValueSet && (
+      {removeValueSet && (
         <ExchangeRateCheckBox
           pair={pair}
           updateOracle={updateOracle}
           setUpdateOracle={setUpdateOracle}
           desiredDirection="up"
         />
-      )} */}
+      )}
 
       <WarningsView warnings={warnings} />
 
