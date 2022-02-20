@@ -117,7 +117,20 @@ export default function Deposit({ pair }: any): JSX.Element {
   return (
     <>
       <div className="mt-6 text-3xl text-high-emphesis" />
-      <AssetInput
+      <SmartNumberInput
+        color="blue"
+        token={pair.asset}
+        value={value}
+        setValue={setValue}
+        useCoffinTitleDirection="down"
+        useCoffinTitle="from"
+        useCoffin={useCoffin}
+        setUseCoffin={setUseCoffin}
+        maxTitle="Balance"
+        max={max}
+        showMax={true}
+      />
+      {/* <AssetInput
         size="sm"
         id="add-collateral-input"
         value={value}
@@ -126,7 +139,7 @@ export default function Deposit({ pair }: any): JSX.Element {
         className="!mt-0"
         showMax={true}
         spendFromWallet={!useCoffin}
-      />
+      /> */}
       <WarningsList warnings={warnings} />
       <TransactionReviewList transactionReview={transactionReview} />
       <UnderworldApproveButton
