@@ -219,12 +219,12 @@ const LendEntry = ({ pair, userPosition = false }) => {
                 <div>
                   {formatNumber(Number(pair.userAssetFraction) / 10**(pair.asset.tokenInfo.decimals), false)} {pair.asset.tokenInfo.symbol}
                 </div>
-                <div className="text-center text-sm text-secondary">{formatNumber(pair.currentUserAssetAmount.usd, true)}</div>
+                {/* <div className="text-center text-sm text-secondary">{formatNumber(pair.currentUserAssetAmount.usd, true)}</div> */}
               </div>
               <div className="text-center">
                 <div>{formatNumber(pair.currentUserBorrowAmount.string)} {pair.asset.tokenInfo.symbol}</div>
                 {/* <div>{formatPercent(pair.utilization.string)}</div> */}
-                <div className="text-center text-secondary text-sm">{formatNumber(pair.currentUserBorrowAmount.usd, true)}</div>
+                {/* <div className="text-center text-secondary text-sm">{formatNumber(pair.currentUserBorrowAmount.usd, true)}</div> */}
               </div>
               <div className="text-center">{formatPercent(pair.supplyAPR.stringWithStrategy)}</div>{' '}
             </>
