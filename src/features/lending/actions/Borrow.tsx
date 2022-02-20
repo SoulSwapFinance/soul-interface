@@ -61,6 +61,16 @@ export default function Borrow({ pair }: BorrowProps) {
   const collateralAssetPrice = usePrice(pair.collateral.address) || undefined // √
   const userCollateralValue = userCollateralBalance * collateralAssetPrice / 1e18
 
+  // const userBorrowBalance = Number(pair?.currentUserBorrowAmount.string / 1e18) // √
+  // const collateralPrice = usePrice(pair?.collateral.address)
+  // const borrowPrice = usePrice(pair?.asset.address)
+  const pairUtilization = (Number(userBorrowValue) 
+  / Number(userCollateralValue) 
+  / 10**pair.collateral.tokenInfo.decimals
+  ).toString().toBigNumber(pair.collateral.tokenInfo.decimals)
+
+  // const pairHealth = pairUtilization.toString().toBigNumber(pair.collateral.tokenInfo.decimals)
+
   // √ CORRECT (displays borrowed amount)
   // console.log('userBorrowAmount:%s',Number(userBorrowAmount))
   // √ CORRECT (displays borrowed price)
@@ -127,9 +137,8 @@ export default function Borrow({ pair }: BorrowProps) {
     .add(collateralValue.toString().toBigNumber(pair.collateral.tokenInfo.decimals))
     .add(extraCollateral)
 
-  const nextUserBorrowValue = userBorrowAmount
-    .add(borrowValue.toString().toBigNumber(pair.collateral.tokenInfo.decimals))
-  // .add(extraCollateral)
+    const nextUserBorrowValue = userBorrowAmount
+    .add(borrowValue.toString().toBigNumber(pair.collateral.tokenInfo.decimals)).add(extraCollateral)
 
   const nextUserCollateralAmount = userCollateralBalance.add(BigNumber.from(nextUserCollateralValue))
   const nextUserBorrowAmount = userBorrowAmount.add(BigNumber.from(nextUserBorrowValue))
@@ -159,7 +168,13 @@ export default function Borrow({ pair }: BorrowProps) {
   const maxBorrow = nextMaxBorrowPossible.toFixed(pair.asset.tokenInfo.decimals)
   const nextUserMaxBorrowAmount = (pair.maxBorrowable.safe.value).mul(-1)
   const nextBorrowValue = pair.currentUserBorrowAmount.value.add(userBorrowValue.toString().toBigNumber(pair.asset.tokenInfo.decimals))
-  const nextHealth = nextBorrowValue.mulDiv('1000000000000000000', nextMaxBorrowMinimum)
+  const nextHealth 
+  = Number(nextUserBorrowValue / pair.collateral.tokenInfo.decimals)
+    / Number(
+      nextUserCollateralValue
+      )
+      / pair.collateral.tokenInfo.decimals
+    
 
   // console logs
   // √ COLLATERAL INPUT
@@ -290,7 +305,11 @@ export default function Borrow({ pair }: BorrowProps) {
         .add((nextMaxBorrowSafe).toString().toBigNumber(pair.asset.tokenInfo.decimals)),
       pair.asset
     )
-    transactionReview.addPercentage('Limit Used', pair.health.value, nextHealth)
+    transactionReview.addPercentage(
+      'Limit Used',
+      pairUtilization,
+      nextHealth.toString().toBigNumber(pair.collateral.tokenInfo.decimals)
+    )
     transactionReview.addPercentage('Borrow APR', pair.interestPerYear.value, pair.currentInterestPerYear.value)
   }
 
