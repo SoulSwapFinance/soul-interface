@@ -81,7 +81,7 @@ const AssetInput: AssetInput<AssetInputProps> = ({
   const balance = balanceProp || Number(coffinOrWalletBalance)
   
   // const halfSpend =
-    // halfAmountSpend(balance)?.toExact()
+  //   halfAmountSpend(balance)?.toExact()
   // const halfSpendAsFraction = maxAmountSpend(balance.divide(2))?.asFraction
   
   const maxSpend = maxAmountWithdraw(Number(balance)) //?.toExact()
@@ -318,6 +318,7 @@ const AssetInputPanel = ({
 
 interface AssetInputPanelBalanceProps {
   balance?: number
+  manu?: number
   onMaxClick: (x: number | undefined) => void
   spendFromWallet?: boolean
   id?: string
@@ -347,13 +348,13 @@ const AssetInputPanelBalance: FC<AssetInputPanelBalanceProps> = ({
 
   return (
     <div className={classNames(error ? 'bg-red/10' : '', 'flex justify-between py-2 px-3')}>
-      <div className="flex items-center gap-2.5 mr-1">
+      {/* <div className="flex items-center gap-2.5 mr-1">
         {icon}
         <Typography variant="sm" className={classNames(balance ? 'text-high-emphesis' : 'text-low-emphesis')}>
           {i18n._(t`Balance:`)}
         </Typography>
-      </div>
-      <div className="flex items-center">
+      </div> */}
+      {/* <div className="flex items-center">
       <Typography
         variant="sm"
         weight={700}
@@ -363,7 +364,7 @@ const AssetInputPanelBalance: FC<AssetInputPanelBalanceProps> = ({
       >
         {balance ? `${balance}` : '0.00'}
       </Typography>
-      </div>
+      </div> */}
     </div>
   )
 }
