@@ -36,6 +36,7 @@ export default function Lend() {
 
   const data = useSearchAndSort(
     pairs,
+    // pairs.filter((pair: any) => pair.userCollateralShare.gt(0) || pair.userBorrowPart.gt(0)),
     { keys: ['search'], threshold: 0.1 },
     { key: 'currentSupplyAPR.valueWithStrategy', direction: 'descending' }
   )
@@ -185,6 +186,15 @@ export default function Lend() {
 
 // @ts-ignore TYPE NEEDS FIXING
 const LendEntry = ({ pair, userPosition = false }) => {
+
+  const userDepositedBalance = pair?.userAssetFraction // √
+  const assetPrice = pair?.collateral.usdValue /// (10**pair.asset.tokenInfo.decimals)
+  // const borrowPrice = usePrice(pair?.asset.address)
+  const userDepositedValue 
+  = userDepositedBalance 
+    * assetPrice 
+    / 10**pair.asset.tokenInfo.decimals
+
   return (
     <Link href={'/lend/' + pair.address}>
       <a className="block text-high-emphesis">
@@ -245,12 +255,12 @@ const LendEntry = ({ pair, userPosition = false }) => {
                 <div>
                   {formatNumber(Number(pair.userAssetFraction) / 10**(pair.asset.tokenInfo.decimals), false)} {pair.asset.tokenInfo.symbol}
                 </div>
-                {/* <div className="text-center text-sm text-secondary">{formatNumber(pair.currentUserAssetAmount.usd, true)}</div> */}
+                {/* <div className="text-center text-sm text-secondary">{formatNumber(assetPrice, true)}</div> */}
               </div>
               <div className="text-center">
                 <div>{formatNumber(pair.currentUserLentAmount.string)} {pair.asset.tokenInfo.symbol}</div>
                 {/* <div>{formatPercent(pair.utilization.string)}</div> */}
-                <div className="text-center text-secondary text-sm">{formatNumber(pair.currentUserLentAmount.usd, true)}</div>
+                {/* <div className="text-center text-secondary text-sm">{formatNumber(pair.currentUserLentAmount.usd, true)}</div> */}
               </div>
               <div className="text-center">
               {

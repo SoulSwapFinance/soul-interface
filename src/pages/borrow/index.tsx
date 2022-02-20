@@ -187,19 +187,19 @@ export default function Borrow() {
                                 {formatNumber(pair.currentUserBorrowAmount.string, false)} {pair.asset.tokenInfo.symbol}
                               </div>
                               <div className="text-sm text-secondary">
-                                {formatNumber(pair.currentUserBorrowAmount.usd, true)}
+                                {/* {formatNumber(pair.currentUserBorrowAmount.usd, true)} */}
                               </div>
                             </div>
                             <div className="text-center md:block">
                               <div>
                                 {formatNumber(Number(pair?.userCollateralShare / 1e18), false)} {pair.collateral.tokenInfo.symbol}
                               </div>
-                              <div className="text-sm text-secondary">
+                              {/* <div className="text-sm text-secondary">
                                 {formatNumber(
                                   userCollateralValue,
                                   true
                                 )}
-                              </div>
+                              </div> */}
                               {/* <div className="text-center text-sm text-secondary"> */}
                               {/* {formatNumber(Number(pair?.userCollateralShare) * Number(pair?.collateralPrice / 1e18), true)} */}
                               {/* {formatNumber(pair?.userCollateralShare / 1e18 * (Number(usePrice(pair?.collateral.address))), true) } */}
@@ -343,7 +343,7 @@ export default function Borrow() {
                         {/* </div> */}
                         <div className="text-center md:block">
                           {formatNumber(pair.currentBorrowAmount.string)} {pair.asset.tokenInfo.symbol}
-                          <div className="text-secondary">{formatNumber(pair.currentBorrowAmount.usd, true)}</div>
+                          {/* <div className="text-secondary">{formatNumber(pair.currentBorrowAmount.usdValue, true)}</div> */}
                         </div>
                       </div>
                       <div className="text-center">
