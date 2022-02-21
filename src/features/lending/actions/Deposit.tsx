@@ -55,6 +55,15 @@ export default function Deposit({ pair }: any): JSX.Element {
 
   const warnings = new Warnings()
 
+  const assetPrice = pair.asset.usd / (10**pair.asset.tokenInfo.decimals)
+  const userDepositAmount = pair.userAssetFraction / 10**(pair?.asset.tokenInfo.decimals)
+  const userDepositValue = userDepositAmount * assetPrice
+
+  const totalDepositedValue 
+  = Number(pair.totalAsset.base) 
+    * assetPrice
+    / 10**pair.asset.tokenInfo.decimals
+
   // warnings.add(
   //   balance?.lt(value.toBigNumber(pair.asset.tokenInfo.decimals)),
   //   i18n._(
@@ -68,6 +77,7 @@ export default function Deposit({ pair }: any): JSX.Element {
   if (value && !warnings.broken) {
     const amount = Number(value).toString().toBigNumber(pair.asset.tokenInfo.decimals) //.toFixed(4)
     const newUserAssetAmount = pair.userAssetFraction.add(amount)//.toBigNumber(pair.asset.tokenInfo.decimals))
+      
     transactionReview.addTokenAmount(
       i18n._(t`Balance`),
       pair.userAssetFraction,
@@ -75,8 +85,8 @@ export default function Deposit({ pair }: any): JSX.Element {
       pair.asset
     )
     transactionReview.addUSD(i18n._(t`Balance USD`),
-      pair.userAssetFraction,
-      newUserAssetAmount, //.add(pair.userAssetFraction),
+      pair.userAssetFraction.div(e10(12)),//.toString().toBigNumber(pair.asset.tokenInfo.decimals),
+      BigNumber.from(pair.userAssetFraction).add(amount).div(e10(12)),
       pair.asset)
     const newUtilization
       // = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value).add(amount)

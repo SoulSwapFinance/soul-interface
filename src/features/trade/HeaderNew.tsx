@@ -40,7 +40,7 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
             query: getQuery(inputCurrency, outputCurrency),
           }}
         >
-          <Typography weight={700} className="text-secondary hover:text-white">
+          <Typography weight={700} className="text-secondary ml-3 hover:text-white">
             {i18n._(t`Swap`)}
           </Typography>
         </NavLink>

@@ -26,8 +26,11 @@ export default function Pair() {
   // const { i18n } = useLingui()
 
   const pair = useUnderworldPair(router.query.pair as string)
-
   if (!pair) return <div />
+
+  const assetPrice = pair.asset.usd / (10**pair.asset.tokenInfo.decimals)
+  const userDepositAmount = pair.userAssetFraction / 10**(pair?.asset.tokenInfo.decimals)
+  const userDepositValue = userDepositAmount * assetPrice
 
   return (
     <PairLayout>
@@ -89,8 +92,8 @@ export default function Pair() {
             <div className="text-lg sm:text-2xl text-blue">
               {formatNumber(pair.userAssetFraction / 10**(pair?.asset.tokenInfo.decimals))} {pair.asset.tokenInfo.symbol}
             </div>
-            {/* <div className="text-center text-md sm:text-lg text-high-emphesis">{formatNumber(pair.currentUserAssetAmount.value)}</div> */}
-          </div>
+            <div className="text-center text-md sm:text-lg text-high-emphesis">{formatNumber(userDepositValue, true)}</div>
+            </div>
           <div>
             <div className="text-center text-md sm:text-lg text-secondary">{`Utilization`}</div>
             <div className="text-center text-lg sm:text-2xl text-high-emphesis">{

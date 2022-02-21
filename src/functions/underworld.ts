@@ -9,9 +9,9 @@ import {
   MINIMUM_TARGET_UTILIZATION,
   PROTOCOL_FEE,
   PROTOCOL_FEE_DIVISOR,
-  STARTING_INTEREST_PER_YEAR,
-  USD
+  STARTING_INTEREST_PER_YEAR
 } from '@sushiswap/sdk'
+import { USD } from 'sdk'
 
 import { e10, ZERO } from './math'
 
