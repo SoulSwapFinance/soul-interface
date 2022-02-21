@@ -279,20 +279,20 @@ export default function Borrow({ pair }: BorrowProps) {
       )
       transactionReview.addUSD(
         'Collateral USD',
-        userCollateralValue.toString().toBigNumber(pair.collateral.tokenInfo.decimals),
-        nextUserCollateralValue
-          .add((userCollateralValue).toString().toBigNumber(pair.collateral.tokenInfo.decimals)),
-        pair.collateral
+        userCollateralBalance.div(e10(12)),
+        // userCollateralValue.toString().toBigNumber(pair.collateral.tokenInfo.decimals),
+        nextUserCollateralAmount.div(e10(12)),        pair.collateral
       )
     }
     if (borrowValueSet) {
       transactionReview.addTokenAmount('Borrowed',
-        pair.currentUserBorrowAmount.value,
-        nextUserBorrowAmount,
+      pair.currentUserBorrowAmount.value,
+      nextUserBorrowAmount.sub(pair.currentUserBorrowAmount.value),
+      // (Number(nextUserBorrowAmount) / 1e18).toString().toBigNumber(pair.asset.tokenInfo.decimals),
         pair.asset)
       transactionReview.addUSD('Borrowed USD',
-        pair.currentUserBorrowAmount.value,
-        nextUserBorrowValue,
+      pair.currentUserBorrowAmount.value.div(e10(12)),
+      nextUserBorrowAmount.sub(pair.currentUserBorrowAmount.value).div(e10(12)),
         pair.asset)
     }
     if (displayUpdateOracle) {
