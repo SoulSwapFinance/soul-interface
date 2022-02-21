@@ -28,6 +28,7 @@ import TransactionReviewView from '../components/TransactionReview'
 import WarningsView from '../components/WarningsList'
 import { usePrice } from 'hooks'
 import AssetInput from 'components/AssetInput'
+import LendAssetInput from 'components/LendAssetInput'
 
 
 interface BorrowProps {
@@ -464,7 +465,7 @@ export default function Borrow({ pair }: BorrowProps) {
         showMax={true}
       /> */}
       <div className="text-left text-purple text-primary mt-1 mb-1">{pair.collateral.tokenInfo.symbol} Collateral</div>
-      <AssetInput
+      <LendAssetInput
         size="sm"
         id="add-collateral-input-tokena"
         value={collateralValue}
@@ -475,7 +476,7 @@ export default function Borrow({ pair }: BorrowProps) {
         spendFromWallet={!useCoffinCollateral}
       />
       <div className="text-left text-purple text-primary mt-1 mb-1">Borrow {pair.asset.tokenInfo.symbol}</div>
-      <AssetInput
+      <LendAssetInput
         size="sm"
         id="add-collateral-input-tokenb"
         value={borrowValue}
