@@ -54,7 +54,7 @@ function AppBar(): JSX.Element {
                   </NavLink>
 
                   <div className="flex space-x-2">
-                    <div className="flex space-x-2">
+                    <div className="flex space-x-2 sm:space-x-3">
                       <NavLink 
                       activeClassName="text-purple text-high-emphesis"
                       href="/exchange/swap">
