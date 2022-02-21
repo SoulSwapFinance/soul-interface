@@ -112,12 +112,12 @@ function AppBar(): JSX.Element {
                       </NavLink>
                       <NavLink
                       activeClassName="text-purple text-high-emphesis"
-                      href={'/lend'}>
+                      href={'/borrow'}>
                         <a
                           id={`lend-nav-link`}
                           className="w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
                         >
-                          {i18n._(t`LEND`)}
+                          {i18n._(t`BORROW`)}
                         </a>
                       </NavLink>
                       <NavLink
@@ -143,6 +143,16 @@ function AppBar(): JSX.Element {
 
                       <NavLink
                       activeClassName="text-purple text-high-emphesis"
+                      href={'/lend'}>
+                        <a
+                          id={`lend-nav-link`}
+                          className="hidden sm:block w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
+                        >
+                          {i18n._(t`LEND`)}
+                        </a>
+                      </NavLink>
+                      {/* <NavLink
+                      activeClassName="text-purple text-high-emphesis"
                       href={'/claims'}>
                         <a
                           id={`claims-nav-link`}
@@ -150,7 +160,7 @@ function AppBar(): JSX.Element {
                         >
                           {i18n._(t`CLAIM`)}
                         </a>
-                      </NavLink>
+                      </NavLink> */}
                     </div>
                   </div>
                 </div>
@@ -197,7 +207,7 @@ function AppBar(): JSX.Element {
                     <More />
                   </div>
                 </div>
-                <div className="flex -mr-2 xl:hidden">
+                <div className="hidden sm:flex -mr-2 xl:hidden">
                   {/* Mobile Menu Button */}
                   <Popover.Button className="inline-flex items-center justify-center p-2 rounded-md text-primary hover:text-high-emphesis focus:outline-none">
                     <span className="sr-only">{i18n._(t`Open Main Menu`)}</span>
