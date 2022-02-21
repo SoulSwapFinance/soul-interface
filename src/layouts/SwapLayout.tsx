@@ -10,7 +10,7 @@ export interface Layout {
 
 export const SwapLayoutCard: FC = ({ children }) => {
   return (
-    <div className="flex flex-col gap-3 p-2 md:p-4 pt-4 rounded-[18px] bg-dark-800 shadow-md shadow-dark-1000">
+    <div className="flex flex-col gap-3 p-2 pt-4 rounded-[18px] bg-dark-800 shadow-md shadow-dark-1000">
       {children}
     </div>
   )
@@ -19,7 +19,7 @@ export const SwapLayoutCard: FC = ({ children }) => {
 export const Layout: FC<Layout> = ({ children, id }) => {
   return (
     <DefaultLayout>
-      <Container id={id} className="py-6 lg:py-[120px] px-2" maxWidth="3xl">
+      <Container id={id} className="justify-center py-4" maxWidth="2xl">
         <DoubleGlowShadow>{children}</DoubleGlowShadow>
       </Container>
     </DefaultLayout>
