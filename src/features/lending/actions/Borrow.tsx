@@ -170,9 +170,7 @@ export default function Borrow({ pair }: BorrowProps) {
   const nextBorrowValue = pair.currentUserBorrowAmount.value.add(userBorrowValue.toString().toBigNumber(pair.asset.tokenInfo.decimals))
   const nextHealth 
   = Number(nextUserBorrowValue / pair.collateral.tokenInfo.decimals)
-    / Number(
-      nextUserCollateralValue
-      )
+    / Number(nextUserCollateralValue)
       / pair.collateral.tokenInfo.decimals
     
 
@@ -309,7 +307,7 @@ export default function Borrow({ pair }: BorrowProps) {
     //   pairUtilization,
     //   (nextHealth - (Number(pairUtilization) / 1e18)).toString().toBigNumber(pair.collateral.tokenInfo.decimals)
     // )
-    transactionReview.addPercentage('Borrow APR', pair.interestPerYear.value, pair.currentInterestPerYear.value)
+    // transactionReview.addPercentage('Borrow APR', pair.interestPerYear.value, pair.currentInterestPerYear.value)
   }
 
   let actionName = 'Enter Amounts'
@@ -336,7 +334,7 @@ export default function Borrow({ pair }: BorrowProps) {
     || collateralWarnings.broken
     || (borrowValue.length > 0 && borrowWarnings.broken)
     || (swap && priceImpactSeverity > 3 && !isExpertMode)
-    || (pair.userCollateralAmount.value.isZero() && !collateralValueSet)
+    || (userCollateralValue == 0  && !collateralValueSet)
 
   // Handlers
   async function onExecute(cooker: UnderworldCooker): Promise<string> {
@@ -399,7 +397,8 @@ export default function Borrow({ pair }: BorrowProps) {
     }
     if (collateralValueSet) {
       cooker.addCollateral(
-        swap ? BigNumber.from(-1) : collateralValue.toString().toBigNumber(pair.collateral.tokenInfo.decimals),
+        swap ? BigNumber.from(-1) 
+          : collateralValue.toString().toBigNumber(pair.collateral.tokenInfo.decimals),
         useCoffinCollateral || swap
       )
     }
