@@ -369,7 +369,7 @@ export default function Borrow() {
                             )}
                             {/* <div>{pair.asset.tokenInfo.symbol}</div> */}
                           </div>
-                          {/* <div className="text-secondary">{formatNumber(pair.totalAssetAmount.usd, true)}</div> */}
+                          <div className="text-secondary">{formatNumber(pair.asset.usd / 1e18 * Number(pair?.totalAsset.base) / 1e18, true)}</div>
                         </div>
                         <div className="hidden md:block">
                           {formatNumber(pair.totalAsset.base.div(e10(18)))} {pair.asset.tokenInfo.symbol}
