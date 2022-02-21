@@ -5,6 +5,8 @@ import Container from '../../components/Container'
 import Head from 'next/head'
 import React from 'react'
 import BondList from '../../features/bond/BondList'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums'
 
 const Bonds = () => {
   return (
@@ -25,3 +27,5 @@ const Bonds = () => {
 }
 
 export default Bonds
+
+Bonds.Guard = NetworkGuard(Feature.BONDS)

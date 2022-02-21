@@ -19,10 +19,12 @@ import {
 import { pager } from './pager'
 
 export const EXCHANGE = {
-  [ChainId.ETHEREUM]: 'sushiswap/exchange',
+  // [ChainId.ETHEREUM]: 'sushiswap/exchange',
+  [ChainId.ETHEREUM]: 'soulswapfinance/fantom-exchange',
   [ChainId.FANTOM]: 'soulswapfinance/fantom-exchange',
   // [ChainId.FANTOM]: 'sushiswap/fantom-exchange',
-  [ChainId.BSC]: 'sushiswap/bsc-exchange',
+  // [ChainId.BSC]: 'sushiswap/bsc-exchange',
+  [ChainId.BSC]: 'soulswapfinance/fantom-exchange',
 }
 
 export const exchange = async (chainId = ChainId.ETHEREUM, query, variables = {}) =>

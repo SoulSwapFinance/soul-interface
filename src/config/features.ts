@@ -27,6 +27,7 @@ const features: FeatureMap = {
     Feature.STAKING,
     Feature.ANALYTICS,
     Feature.LIQUIDITY_MINING,
+    Feature.BONDS,
     Feature.COFFINBOX,
     // Feature.LIMIT_ORDERS,
     Feature.UNDERWORLD
