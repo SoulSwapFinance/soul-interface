@@ -29,6 +29,7 @@ import { useCoffinStrategies, useClones } from 'services/graph'
 import { useActiveWeb3React, useQueryFilter } from 'services/web3'
 import { useSingleCallResult } from 'state/multicall/hooks'
 import { useMemo } from 'react'
+import { DAI } from 'constants/tokens'
 
 const BLACKLISTED_TOKENS = ['0xC6d54D2f624bc83815b49d9c2203b1330B841cA0']
 
@@ -127,7 +128,7 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
   // @ts-ignore TYPE NEEDS FIXING
   const wnative = WNATIVE_ADDRESS[chainId]
 
-  const currency: Token = USD[chainId]
+  const currency: Token = DAI[chainId]
 
   const allTokens = useUnderworldTokens()
 
@@ -162,10 +163,10 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
     .reduce((previousValue, currentValue) => {
       const balance = balances[currentValue.address]
       const strategy = strategies?.find((strategy) => strategy.token === currentValue.address.toLowerCase())
-      let usd = BigNumber.from(0)
-      balances[currency.address]?.rate > 0 ?
-      usd = e10(currentValue.decimals).mulDiv(balances[currency.address].rate, balance.rate)
-      : usd = BigNumber.from(0)
+      // let usd = BigNumber.from(0)
+      // balances[currency.address]?.rate > 0 ? 
+      const usd = e10(currentValue.decimals).mulDiv((balances[currency.address]?.rate || 0), balance.rate)
+      // : usd = BigNumber.from(0)
       
       // @ts-ignore TYPE NEEDS FIXING
       const symbol = currentValue.address === wnative ? NATIVE[chainId].symbol : currentValue.symbol
