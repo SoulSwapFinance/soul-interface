@@ -30,7 +30,7 @@ const PERMITTABLE_TOKENS: {
     [checksummedTokenAddress: string]: PermitInfo
   }
 } = {
-  [1]: {
+/*  [1]: {
     [USDC.address]: { type: PermitType.AMOUNT, name: 'USD Coin', version: '2' },
     [DAI.address]: {
       type: PermitType.ALLOWED,
@@ -38,7 +38,7 @@ const PERMITTABLE_TOKENS: {
       version: '1',
     },
     // [SOUL[1].address]: { type: PermitType.AMOUNT, name: 'SoulPower' },
-  },
+  }, */
   // [4]: {
   //   ['0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735']: {
   //     type: PermitType.ALLOWED,
