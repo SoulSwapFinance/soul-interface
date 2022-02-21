@@ -45,8 +45,8 @@ const Layout: FC<LayoutProps> = ({ left, children, right }) => {
                     className={
                       'px-2 sm:px-4 flex items-center font-medium ' +
                       (router.pathname.startsWith('/lend')
-                        ? 'text-high-emphesis text-blue'
-                        : 'text-secondary hover:text-primary hover:text-blue')
+                        ? 'text-high-emphesis text-white'
+                        : 'text-secondary text-blue hover:text-primary hover:text-blue')
                     }
                   >
                     <div className="text-base whitespace-nowrap">Lend</div>
@@ -59,8 +59,8 @@ const Layout: FC<LayoutProps> = ({ left, children, right }) => {
                     className={
                       'px-2 sm:px-4 flex items-center font-medium ' +
                       (router.pathname.startsWith('/borrow')
-                        ? 'text-high-emphesis text-purple'
-                        : 'text-secondary hover:text-primary hover:text-purple')
+                        ? 'text-high-emphesis text-white'
+                        : 'text-secondary text-purple hover:text-primary hover:text-purple')
                     }
                   >
                     <div className="text-base whitespace-nowrap">Borrow</div>
