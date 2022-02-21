@@ -226,19 +226,19 @@ export default function Borrow() {
           </div>
         )}
 
-        <div className="grid grid-flow-col grid-cols-4 gap-4 px-2 pb-4 text-sm md:grid-cols-6 lg:grid-cols-7 text-secondary">
+        <div className="grid grid-flow-col grid-cols-4 gap-4 px-2 pb-4 text-sm md:grid-cols-5 lg:grid-cols-5 text-secondary">
           <ListHeaderWithSort className="justify-center" sort={data} sortKey="search">
             {i18n._(t`Markets`)}
           </ListHeaderWithSort>
-          <ListHeaderWithSort className="hidden justify-center md:flex" sort={data} sortKey="asset.tokenInfo.symbol">
+          {/* <ListHeaderWithSort className="hidden justify-center md:flex" sort={data} sortKey="asset.tokenInfo.symbol">
             {i18n._(t`Borrow`)}
-          </ListHeaderWithSort>
+          </ListHeaderWithSort> */}
           <ListHeaderWithSort className="hidden justify-center md:flex" sort={data} sortKey="collateral.tokenInfo.symbol">
             {i18n._(t`Collateral`)}
           </ListHeaderWithSort>
-          <ListHeaderWithSort className="hidden justify-center  lg:flex" sort={data} sortKey="oracle.name">
+          {/* <ListHeaderWithSort className="hidden justify-center  lg:flex" sort={data} sortKey="oracle.name">
             {i18n._(t`Oracle`)}
-          </ListHeaderWithSort>
+          </ListHeaderWithSort> */}
           <ListHeaderWithSort
             className="justify-center"
             sort={data}
@@ -280,9 +280,9 @@ export default function Borrow() {
               <div key={pair.address}>
                 <Link href={'/borrow/' + String(pair.address).toLowerCase()}>
                   <a className="block text-high-emphesis">
-                    <div className="grid items-center text-center grid-cols-4 gap-4 px-4 py-4 text-sm rounded md:grid-cols-6 lg:grid-cols-7 align-center bg-dark-800 hover:bg-dark-purple">
-                      <div className="flex flex-col items-start md:flex-row items-center">
-                        <div className="hidden space-x-2 sm:flex">
+                  <div className="grid items-center grid-cols-4 gap-2 px-2 py-4 text-sm md:grid-cols-5 lg:grid-cols-5 align-center bg-dark-800 hover:bg-dark-purple">
+                          <div className="flex justify-center flex-col md:flex-row items-center">
+                        <div className="hidden justify-center text-center items-center space-x-2 sm:flex">
                           <Image
                             height={48}
                             width={48}
@@ -326,16 +326,16 @@ export default function Borrow() {
                           <div className="block mt-0 text-xs text-left text-white-500 hidden">{pair.oracle.name}</div>
                         </div>
                       </div>
-                      <div className="hidden text-white md:block">
+                      {/* <div className="hidden text-white md:block">
                         <strong>{pair.asset.tokenInfo.symbol}</strong>
-                      </div>
-                      <div className="hidden md:block">
+                      </div> */}
+                      <div className="hidden text-center md:block">
                         {formatNumber(pair?.totalCollateralShare.div(e10(18)), false)}{' '}
                         {pair.collateral.tokenInfo.symbol}
                         <div className="text-secondary">{formatNumber(pair.totalCollateralShare / 1e18 * pair.collateral.usd / 1e18, true)}
                         </div>
                       </div>
-                      <div className="hidden lg:block">{pair.oracle.name}</div>
+                      {/* <div className="hidden lg:block">{pair.oracle.name}</div> */}
                       <div className="text-center md:text-right">
                         {/* <div className="md:hidden"> */}
                         {/* <div className="flex flex-col"> */}
