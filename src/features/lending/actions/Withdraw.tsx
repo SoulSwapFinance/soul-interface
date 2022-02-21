@@ -81,8 +81,8 @@ export default function Withdraw({ pair }: any): JSX.Element {
       pair.asset
     )
     transactionReview.addUSD(i18n._(t`Balance USD`),
-      pair.userAssetFraction,
-      newUserAssetAmount,
+      pair.userAssetFraction.div(e10(12)),
+      newUserAssetAmount.div(e10(12)),
       pair.asset)
 
     const newUtilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.sub(amount))

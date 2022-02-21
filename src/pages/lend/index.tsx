@@ -134,7 +134,7 @@ export default function Lend() {
             </ListHeaderWithSort>
             <ListHeaderWithSort className="hidden justify-center lg:flex" sort={data} sortKey="oracle.name">
               {i18n._(t`Oracle`)}
-              <QuestionHelper text={i18n._(t`The onchain oracle that tracks the pricing for this pair `)} />
+              <QuestionHelper text={i18n._(t`Onchain oracle that tracks pricing for this pair.`)} />
             </ListHeaderWithSort>
             <ListHeaderWithSort
               className="justify-center"
@@ -188,11 +188,16 @@ export default function Lend() {
 const LendEntry = ({ pair, userPosition = false }) => {
 
   const userDepositedBalance = pair?.userAssetFraction // √
-  const assetPrice = pair?.collateral.usdValue /// (10**pair.asset.tokenInfo.decimals)
-  // const borrowPrice = usePrice(pair?.asset.address)
+  const assetPrice = pair?.asset.usd / (10**pair.asset.tokenInfo.decimals)
+  const borrowPrice = pair?.collateral.usd / (10**pair.asset.tokenInfo.decimals)
   const userDepositedValue 
   = userDepositedBalance 
     * assetPrice 
+    / 10**pair.asset.tokenInfo.decimals
+  
+  const totalDepositedValue 
+  = Number(pair.totalAsset.base) 
+    * assetPrice
     / 10**pair.asset.tokenInfo.decimals
 
   return (
@@ -255,12 +260,12 @@ const LendEntry = ({ pair, userPosition = false }) => {
                 <div>
                   {formatNumber(Number(pair.userAssetFraction) / 10**(pair.asset.tokenInfo.decimals), false)} {pair.asset.tokenInfo.symbol}
                 </div>
-                {/* <div className="text-center text-sm text-secondary">{formatNumber(assetPrice, true)}</div> */}
+                <div className="text-center text-sm text-secondary">{formatNumber(userDepositedValue, true)}</div>
               </div>
               <div className="text-center">
                 <div>{formatNumber(pair.currentUserLentAmount.string)} {pair.asset.tokenInfo.symbol}</div>
                 {/* <div>{formatPercent(pair.utilization.string)}</div> */}
-                {/* <div className="text-center text-secondary text-sm">{formatNumber(pair.currentUserLentAmount.usd, true)}</div> */}
+                <div className="text-center text-secondary text-sm">{formatNumber(Number(pair.currentUserLentAmount.usd) / 1e12 , true)}</div>
               </div>
               <div className="text-center">
               {
@@ -277,8 +282,8 @@ const LendEntry = ({ pair, userPosition = false }) => {
             <>
               <div>
                 <div className="text-center">
-                  {formatNumber(pair?.totalAsset.base /  10**(pair.asset.tokenInfo.decimals))} {pair?.asset.tokenInfo.symbol}
-                  {/* <div className="text-secondary">{formatNumber(pair.currentAllAssets.usd, true)}</div> */}
+                  {formatNumber(pair?.totalAsset.base / 10**(pair.asset.tokenInfo.decimals))} {pair?.asset.tokenInfo.symbol}
+                  <div className="text-secondary">{formatNumber(totalDepositedValue, true)}</div>
                 </div>
               </div>
               <div className="text-center">

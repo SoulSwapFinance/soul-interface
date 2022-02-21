@@ -143,7 +143,7 @@ export const CUSTOM_BASES: {
   [chainId: number]: { [tokenAddress: string]: Token[] }
 } = {
   [ChainId.ETHEREUM]: {
-    [AMPL.address]: [DAI, WNATIVE[ChainId.ETHEREUM]],
+    [AMPL.address]: [WNATIVE[ChainId.ETHEREUM]],
   },
 }
 

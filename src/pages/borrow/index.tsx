@@ -120,8 +120,7 @@ export default function Borrow() {
                     const userCollateralBalance = pair?.userCollateralShare // √
                     // const userBorrowBalance = Number(pair?.currentUserBorrowAmount.string / 1e18) // √
                     const collateralPrice = pair?.collateral.usd / (10**pair.collateral.tokenInfo.decimals) * 1e12
-                    // const borrowPrice = usePrice(pair?.asset.address)
-                    const userCollateralValue 
+                     const userCollateralValue 
                     = userCollateralBalance 
                       * collateralPrice 
                       / 10**pair.collateral.tokenInfo.decimals
@@ -134,16 +133,16 @@ export default function Borrow() {
                           <div className="flex justify-center flex-col md:flex-row items-center">
                         <div className="hidden justify-center text-center items-center space-x-2 sm:flex">
                           <Image
-                            height={56}
-                            width={56}
+                            height={48}
+                            width={48}
                             src={pair.asset.tokenInfo.logoURI}
                             className="w-6 h-6 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
                             alt={pair.asset.tokenInfo.symbol}
                           />
 
                           <Image
-                            height={56}
-                            width={56}
+                            height={48}
+                            width={48}
                             src={pair.collateral.tokenInfo.logoURI}
                             className="w-6 h-6 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
                             alt={pair.collateral.tokenInfo.symbol}
@@ -187,19 +186,19 @@ export default function Borrow() {
                                 {formatNumber(pair.currentUserBorrowAmount.string, false)} {pair.asset.tokenInfo.symbol}
                               </div>
                               <div className="text-sm text-secondary">
-                                {/* {formatNumber(pair.currentUserBorrowAmount.usd, true)} */}
+                                {formatNumber(pair.currentUserBorrowAmount.usd / 1e12, true)}
                               </div>
                             </div>
                             <div className="text-center md:block">
                               <div>
                                 {formatNumber(Number(pair?.userCollateralShare / 1e18), false)} {pair.collateral.tokenInfo.symbol}
                               </div>
-                              {/* <div className="text-sm text-secondary">
+                              <div className="text-sm text-secondary">
                                 {formatNumber(
-                                  userCollateralValue,
+                                  userCollateralValue / 1e12,
                                   true
                                 )}
-                              </div> */}
+                              </div>
                               {/* <div className="text-center text-sm text-secondary"> */}
                               {/* {formatNumber(Number(pair?.userCollateralShare) * Number(pair?.collateralPrice / 1e18), true)} */}
                               {/* {formatNumber(pair?.userCollateralShare / 1e18 * (Number(usePrice(pair?.collateral.address))), true) } */}
@@ -227,19 +226,19 @@ export default function Borrow() {
           </div>
         )}
 
-        <div className="grid grid-flow-col grid-cols-4 gap-4 px-2 pb-4 text-sm md:grid-cols-6 lg:grid-cols-7 text-secondary">
+        <div className="grid grid-flow-col grid-cols-4 gap-4 px-2 pb-4 text-sm md:grid-cols-5 lg:grid-cols-5 text-secondary">
           <ListHeaderWithSort className="justify-center" sort={data} sortKey="search">
             {i18n._(t`Markets`)}
           </ListHeaderWithSort>
-          <ListHeaderWithSort className="hidden justify-center md:flex" sort={data} sortKey="asset.tokenInfo.symbol">
+          {/* <ListHeaderWithSort className="hidden justify-center md:flex" sort={data} sortKey="asset.tokenInfo.symbol">
             {i18n._(t`Borrow`)}
-          </ListHeaderWithSort>
+          </ListHeaderWithSort> */}
           <ListHeaderWithSort className="hidden justify-center md:flex" sort={data} sortKey="collateral.tokenInfo.symbol">
             {i18n._(t`Collateral`)}
           </ListHeaderWithSort>
-          <ListHeaderWithSort className="hidden justify-center  lg:flex" sort={data} sortKey="oracle.name">
+          {/* <ListHeaderWithSort className="hidden justify-center  lg:flex" sort={data} sortKey="oracle.name">
             {i18n._(t`Oracle`)}
-          </ListHeaderWithSort>
+          </ListHeaderWithSort> */}
           <ListHeaderWithSort
             className="justify-center"
             sort={data}
@@ -281,9 +280,9 @@ export default function Borrow() {
               <div key={pair.address}>
                 <Link href={'/borrow/' + String(pair.address).toLowerCase()}>
                   <a className="block text-high-emphesis">
-                    <div className="grid items-center text-center grid-cols-4 gap-4 px-4 py-4 text-sm rounded md:grid-cols-6 lg:grid-cols-7 align-center bg-dark-800 hover:bg-dark-purple">
-                      <div className="flex flex-col items-start md:flex-row items-center">
-                        <div className="hidden space-x-2 sm:flex">
+                  <div className="grid items-center grid-cols-4 gap-2 px-2 py-4 text-sm md:grid-cols-5 lg:grid-cols-5 align-center bg-dark-800 hover:bg-dark-purple">
+                          <div className="flex justify-center flex-col md:flex-row items-center">
+                        <div className="hidden justify-center text-center items-center space-x-2 sm:flex">
                           <Image
                             height={48}
                             width={48}
@@ -327,13 +326,16 @@ export default function Borrow() {
                           <div className="block mt-0 text-xs text-left text-white-500 hidden">{pair.oracle.name}</div>
                         </div>
                       </div>
-                      <div className="hidden text-white md:block">
+                      {/* <div className="hidden text-white md:block">
                         <strong>{pair.asset.tokenInfo.symbol}</strong>
-                      </div>
-                      <div className="hidden md:block">
+                      </div> */}
+                      <div className="hidden text-center md:block">
                         {formatNumber(pair?.totalCollateralShare.div(e10(18)), false)}{' '}
-                        {pair.collateral.tokenInfo.symbol}</div>
-                      <div className="hidden lg:block">{pair.oracle.name}</div>
+                        {pair.collateral.tokenInfo.symbol}
+                        <div className="text-secondary">{formatNumber(pair.totalCollateralShare / 1e18 * pair.collateral.usd / 1e18, true)}
+                        </div>
+                      </div>
+                      {/* <div className="hidden lg:block">{pair.oracle.name}</div> */}
                       <div className="text-center md:text-right">
                         {/* <div className="md:hidden"> */}
                         {/* <div className="flex flex-col"> */}
@@ -343,7 +345,7 @@ export default function Borrow() {
                         {/* </div> */}
                         <div className="text-center md:block">
                           {formatNumber(pair.currentBorrowAmount.string)} {pair.asset.tokenInfo.symbol}
-                          {/* <div className="text-secondary">{formatNumber(pair.currentBorrowAmount.usdValue, true)}</div> */}
+                          <div className="text-secondary">{formatNumber(pair.currentBorrowAmount.usdValue.div(e10(18)), true)}</div>
                         </div>
                       </div>
                       <div className="text-center">
@@ -361,10 +363,10 @@ export default function Borrow() {
                         </div>
                         <div className="hidden md:block">
                           {formatNumber(pair.totalAsset.base.div(e10(18)))} {pair.asset.tokenInfo.symbol}
-                          {/* <div className="text-secondary">{formatNumber(pair.totalAsset.base.usd, true)}</div> */}
+                          <div className="text-secondary">{formatNumber(Number(pair.asset.usd) / 1e18 * Number(pair.totalAsset.base / 1e18), true)}</div>
                         </div>
                       </div>
-                      <div className="text-center">{formatPercent(pair.currentInterestPerYear.value / 1e18 * 100)}</div>
+                      <div className="text-center">{formatPercent(pair.currentInterestPerYear.value / 1e16)}</div>
                       {/* <div className="text-right">{formatPercent(pair.currentInterestPerYear.value)}</div> */}
                     </div>
                   </a>

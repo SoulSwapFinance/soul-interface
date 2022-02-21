@@ -46,7 +46,6 @@ export const AMPL = new Token(ChainId.ETHEREUM, '0xD46bA6D942050d489DBd938a2C909
 export const BAB = new Token(ChainId.ETHEREUM, '0xC36824905dfF2eAAEE7EcC09fCC63abc0af5Abc5', 18, 'BAB', 'BAB')
 export const BAC = new Token(ChainId.ETHEREUM, '0x3449FC1Cd036255BA1EB19d65fF4BA2b8903A69a', 18, 'BAC', 'Basis Cash')
 export const CREAM = new Token(ChainId.ETHEREUM, '0x2ba592F78dB6436527729929AAf6c908497cB200', 18, 'CREAM', 'Cream')
-export const DAI = new Token(ChainId.ETHEREUM, '0x6B175474E89094C44Da98b954EedeAC495271d0F', 18, 'DAI', 'Dai Stablecoin')
 export const DOUGH = new Token(
   ChainId.ETHEREUM,
   '0xad32A8e6220741182940c5aBF610bDE99E737b2D',
@@ -215,6 +214,11 @@ export const WFTM: ChainTokenMap = {
 // USDT
 export const USDT: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x049d68029688eAbF473097a2fC38ef61633A3C7A', 6, 'FUSDT', 'Frapped USDT')
+}
+
+// DAI
+export const DAI: ChainTokenMap = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', 18, 'DAI', 'Dai Stablecoin')
 }
 
 // SEANCE

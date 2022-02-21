@@ -28,6 +28,7 @@ import TransactionReviewView from '../components/TransactionReview'
 import WarningsView from '../components/WarningsList'
 import { usePrice } from 'hooks'
 import AssetInput from 'components/AssetInput'
+import LendAssetInput from 'components/LendAssetInput'
 
 
 interface BorrowProps {
@@ -279,20 +280,20 @@ export default function Borrow({ pair }: BorrowProps) {
       )
       transactionReview.addUSD(
         'Collateral USD',
-        userCollateralValue.toString().toBigNumber(pair.collateral.tokenInfo.decimals),
-        nextUserCollateralValue
-          .add((userCollateralValue).toString().toBigNumber(pair.collateral.tokenInfo.decimals)),
-        pair.collateral
+        userCollateralBalance.div(e10(12)),
+        // userCollateralValue.toString().toBigNumber(pair.collateral.tokenInfo.decimals),
+        nextUserCollateralAmount.div(e10(12)),        pair.collateral
       )
     }
     if (borrowValueSet) {
       transactionReview.addTokenAmount('Borrowed',
-        pair.currentUserBorrowAmount.value,
-        nextUserBorrowAmount,
+      pair.currentUserBorrowAmount.value,
+      nextUserBorrowAmount.sub(pair.currentUserBorrowAmount.value),
+      // (Number(nextUserBorrowAmount) / 1e18).toString().toBigNumber(pair.asset.tokenInfo.decimals),
         pair.asset)
       transactionReview.addUSD('Borrowed USD',
-        pair.currentUserBorrowAmount.value,
-        nextUserBorrowValue,
+      pair.currentUserBorrowAmount.value.div(e10(12)),
+      nextUserBorrowAmount.sub(pair.currentUserBorrowAmount.value).div(e10(12)),
         pair.asset)
     }
     if (displayUpdateOracle) {
@@ -305,11 +306,11 @@ export default function Borrow({ pair }: BorrowProps) {
         .add((nextMaxBorrowSafe).toString().toBigNumber(pair.asset.tokenInfo.decimals)),
       pair.asset
     )
-    transactionReview.addPercentage(
-      'Limit Used',
-      pairUtilization,
-      nextHealth.toString().toBigNumber(pair.collateral.tokenInfo.decimals)
-    )
+    // transactionReview.addPercentage(
+    //   'Limit Used',
+    //   pairUtilization,
+    //   (nextHealth - (Number(pairUtilization) / 1e18)).toString().toBigNumber(pair.collateral.tokenInfo.decimals)
+    // )
     transactionReview.addPercentage('Borrow APR', pair.interestPerYear.value, pair.currentInterestPerYear.value)
   }
 
@@ -464,7 +465,7 @@ export default function Borrow({ pair }: BorrowProps) {
         showMax={true}
       /> */}
       <div className="text-left text-purple text-primary mt-1 mb-1">{pair.collateral.tokenInfo.symbol} Collateral</div>
-      <AssetInput
+      <LendAssetInput
         size="sm"
         id="add-collateral-input-tokena"
         value={collateralValue}
@@ -475,7 +476,7 @@ export default function Borrow({ pair }: BorrowProps) {
         spendFromWallet={!useCoffinCollateral}
       />
       <div className="text-left text-purple text-primary mt-1 mb-1">Borrow {pair.asset.tokenInfo.symbol}</div>
-      <AssetInput
+      <LendAssetInput
         size="sm"
         id="add-collateral-input-tokenb"
         value={borrowValue}

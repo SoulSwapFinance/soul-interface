@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 import { useV2TradeExactOut } from './useV2Trades'
 
 import { tryParseAmount } from 'functions'
-import { ANY, BNB, CRV, LUXOR, MIM, SEANCE, SOUL, FUSD, USDT, UNIDX, WBTC, WETH, WLUM, REAPER, GRIM } from 'constants/tokens'
+import { ANY, BNB, CRV, LUXOR, MIM, SEANCE, SOUL, FUSD, USDT, UNIDX, WBTC, WETH, WLUM, REAPER, GRIM, DAI } from 'constants/tokens'
 import { ANY_ADDRESS, BNB_ADDRESS, CRV_ADDRESS, FUSD_ADDRESS, GRIM_ADDRESS, LUX_ADDRESS, REAPER_ADDRESS, SEANCE_ADDRESS, SOUL_ADDRESS, UNIDX_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS } from 'constants/addresses'
 import { usePrice } from 'hooks/usePrice'
 // import { SupportedChainId } from '../constants/chains'
@@ -27,6 +27,10 @@ const STABLECOIN_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
 
 const USDT_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(USDT[ChainId.FANTOM], 100_000e6),
+}
+
+const DAI_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(DAI[ChainId.FANTOM], 100_000e18),
 }
 
 // const MIM_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
@@ -110,6 +114,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   
   const amountOut = chainId ? STABLECOIN_AMOUNT_OUT[chainId] : undefined
   const usdtAmountOut = chainId ? USDT_AMOUNT_OUT[chainId] : undefined
+  const daiAmountOut = chainId ? DAI_AMOUNT_OUT[chainId] : undefined
   const fusdAmountOut = chainId ? FUSD_AMOUNT_OUT[chainId] : undefined
   // const mimAmountOut = chainId ? MIM_AMOUNT_OUT[chainId] : undefined
   
@@ -131,6 +136,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   // TOKENS
   const stablecoin = amountOut?.currency
   const usdt = usdtAmountOut?.currency
+  const dai = daiAmountOut?.currency
   const fusd = fusdAmountOut?.currency
   // const mim = mimAmountOut?.currency
   const soul = soulAmountOut?.currency
@@ -168,6 +174,11 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
     // handle usdt
     if (currency?.wrapped.equals(usdt)) {
       return new Price(usdt, usdt, '1', '1')
+    }
+
+    // handle dai
+    if (currency?.wrapped.equals(dai)) {
+      return new Price(dai, dai, '1', '1')
     }
 
     // handle mim
