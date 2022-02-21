@@ -306,11 +306,11 @@ export default function Borrow({ pair }: BorrowProps) {
         .add((nextMaxBorrowSafe).toString().toBigNumber(pair.asset.tokenInfo.decimals)),
       pair.asset
     )
-    transactionReview.addPercentage(
-      'Limit Used',
-      pairUtilization,
-      (nextHealth - (Number(pairUtilization) / 1e18)).toString().toBigNumber(pair.collateral.tokenInfo.decimals)
-    )
+    // transactionReview.addPercentage(
+    //   'Limit Used',
+    //   pairUtilization,
+    //   (nextHealth - (Number(pairUtilization) / 1e18)).toString().toBigNumber(pair.collateral.tokenInfo.decimals)
+    // )
     transactionReview.addPercentage('Borrow APR', pair.interestPerYear.value, pair.currentInterestPerYear.value)
   }
 
