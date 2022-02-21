@@ -309,7 +309,7 @@ export default function Borrow({ pair }: BorrowProps) {
     transactionReview.addPercentage(
       'Limit Used',
       pairUtilization,
-      nextHealth.toString().toBigNumber(pair.collateral.tokenInfo.decimals)
+      (nextHealth - (Number(pairUtilization) / 1e18)).toString().toBigNumber(pair.collateral.tokenInfo.decimals)
     )
     transactionReview.addPercentage('Borrow APR', pair.interestPerYear.value, pair.currentInterestPerYear.value)
   }
