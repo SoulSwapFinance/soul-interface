@@ -40,16 +40,16 @@ const PERMITTABLE_TOKENS: {
     [checksummedTokenAddress: string]: PermitInfo
   }
 } = {
-  [1]: {
+/*  [1]: {
     [USDC.address]: { type: PermitType.AMOUNT, name: 'USD Coin', version: '2' },
     [DAI.address]: {
       type: PermitType.ALLOWED,
       name: 'Dai Stablecoin',
       version: '1',
-    },
+    }, 
     // @ts-ignore TYPE NEEDS FIXING
     [SOUL_ADDRESS[1].address]: { type: PermitType.AMOUNT, name: 'Soul Power' },
-  },
+  }, */
   [250]: {
     // @ts-ignore TYPE NEEDS FIXING
     [SOUL_ADDRESS[250].address]: { type: PermitType.AMOUNT, name: 'Soul Power' },
