@@ -68,7 +68,7 @@ export default function Borrow() {
         {positions.items && positions.items.length > 0 && (
           <div className="pb-4">
             <div>
-              <div className="grid grid-cols-4 gap-2 px-2 pb-4 text-md md:grid-cols-5 lg:grid-cols-5 text-secondary">
+              <div className="grid grid-cols-4 gap-2 px-2 pb-4 text-sm md:grid-cols-5 lg:grid-cols-5 text-secondary">
               <ListHeaderWithSort className="justify-center" sort={data} sortKey="search">
             {i18n._(t`Positions`)}
           </ListHeaderWithSort>
@@ -104,7 +104,7 @@ export default function Borrow() {
                   sortKey="interestPerYear.value"
                   direction="descending"
                 >
-                  {i18n._(t`Utilization`)}
+                  {i18n._(t`Health`)}
                 </ListHeaderWithSort>
                 <ListHeaderWithSort
                   className="hidden md:flex md:justify-center"
@@ -125,6 +125,15 @@ export default function Borrow() {
                       * collateralPrice 
                       / 10**pair.collateral.tokenInfo.decimals
                     // const userBorrowValue = userBorrowBalance * borrowPrice
+
+                    // const userCollateralBalance = Number(pair?.userCollateralShare / 1e18) // √
+                    const userBorrowBalance = Number(pair?.currentUserBorrowAmount.string / 1e18) // √
+                    const borrowPrice = pair?.asset.usd
+                    // const userCollateralValue = userCollateralBalance * collateralPrice
+                    const userBorrowValue = userBorrowBalance * borrowPrice
+                    const pairUtilization = userBorrowValue * 10**(pair?.collateral.tokenInfo.decimals) / Number(userCollateralValue) * 100
+                    const pairHealth = pairUtilization / 1e6
+                  
                   return (
                     <div key={pair.address}>
                       <Link href={'/borrow/' + pair.address}>
@@ -204,16 +213,17 @@ export default function Borrow() {
                               {/* {formatNumber(pair?.userCollateralShare / 1e18 * (Number(usePrice(pair?.collateral.address))), true) } */}
                               {/* </div> */}
                             </div>
-                            {/* <div className="flex items-center justify-end">
-                              {formatPercent(pair.health.string)}
-                              <GradientDot percent={pair.health.string} />
-                            </div> */}
-                            <div className="text-center">{
+                            <div className="flex items-center justify-center">
+                              {formatPercent(pairHealth)}
+                              <GradientDot percent={pairHealth} />
+                            </div>
+                            {/* <div className="items-center text-center flex justify-center text-md sm:text-lg text-high-emphesis"> */}
+                            {/* <div className="text-center">{
                             formatPercent(
                               pair?.currentUserBorrowAmount.usd
                               / userCollateralValue /// userCollateralValue
                               * 100
-                            )}</div>
+                            )}</div> */}
                           <div className="hidden text-center md:block">{formatPercent(pair.interestPerYear.string)}</div>
                           </div>
                         </a>
