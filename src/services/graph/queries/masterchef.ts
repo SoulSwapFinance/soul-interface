@@ -12,7 +12,7 @@ export const poolsQuery = gql`
       userCount
       owner {
         id
-        soulPerBlock
+        soulPerSecond
         totalAllocPoint
       }
     }
