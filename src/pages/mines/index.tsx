@@ -32,9 +32,11 @@ import { Button } from 'components/Button'
 import { formatNumberScale } from 'functions'
 import { addTransaction } from 'state/transactions/actions'
 import useSummoner from 'features/mines/hooks/useMasterChef'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums'
 
 export default function Mines(): JSX.Element {
-  const { chainId } = useActiveWeb3React()
+  // const { chainId } = useActiveWeb3React()
   const router = useRouter()
   const [pendingTx, setPendingTx] = useState(false)
 
@@ -49,8 +51,8 @@ export default function Mines(): JSX.Element {
 
   const { harvest } = useSummoner()
 
-  const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
-    return { ...POOLS[chainId][key], lpToken: key }
+  const farmingPools = Object?.keys(POOLS[250])?.map((key) => {
+    return { ...POOLS[250][key], lpToken: key }
   })
 
   const tvlInfo = useTVL()
@@ -58,14 +60,14 @@ export default function Mines(): JSX.Element {
   const summonerInfo = useSummonerInfo()
   const positions = usePositions()
 
-  const soulPrice = usePrice(SOUL_ADDRESS[chainId])
-  // const ftmPrice = usePrice(WNATIVE[chainId])
+  const soulPrice = usePrice(SOUL_ADDRESS[250])
+  // const ftmPrice = usePrice(WNATIVE[250])
 
   const map = (pool) => {
     pool.owner = 'SoulSwap'
     pool.balance = 0
 
-    const pair = POOLS[chainId][pool.lpToken]
+    const pair = POOLS[250][pool.lpToken]
 
   //   const secondsPerHour = 60 * 60
 
@@ -258,3 +260,5 @@ export default function Mines(): JSX.Element {
     </>
   )
 }
+
+Mines.Guard = NetworkGuard(Feature.LIQUIDITY_MINING)
