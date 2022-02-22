@@ -709,7 +709,7 @@ export const POOLS: AddressMap = {
         },
       },
       '0x475a63154C3e85ac0F2CB453f0b5c63e4370333c': {  // LUX-SOUL
-        id: 46, // 500
+        id: 46, // 0
         token0: {
           id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
           name: 'Soul Power',
@@ -724,7 +724,7 @@ export const POOLS: AddressMap = {
         },
       },
       '0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99': {  // FTM-WLUM
-        id: 47, // 500
+        id: 47, // 1000
         token0: {
           id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
           name: 'Wrapped Fantom',
@@ -736,6 +736,21 @@ export const POOLS: AddressMap = {
           name: 'Wrapped Lumens',
           symbol: 'wLUM',
           decimals: 9,
+        },
+      },
+      '0x857107e8F42023F7623C7ca413811DB1853F7f4b': {  // GRIM EVO-FTM
+        id: 48, // 1000
+        token0: {
+          id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+          name: 'Wrapped Fantom',
+          symbol: 'FTM',
+          decimals: 18,
+        },
+        token1: {
+          id: '0x0a77866C01429941BFC7854c0c0675dB1015218b', // GRIM EVO
+          name: 'Grim EVO',
+          symbol: 'GRIM EVO',
+          decimals: 18,
         },
       }
     }

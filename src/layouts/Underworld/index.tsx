@@ -49,7 +49,7 @@ const Layout: FC<LayoutProps> = ({ left, children, right }) => {
                         : 'text-secondary text-blue hover:text-primary hover:text-blue')
                     }
                   >
-                    <div className="text-base whitespace-nowrap">Lend</div>
+                    <div className="text-base whitespace-nowrap">Supply</div>
                   </a>
                 </NavLink>
               </Button>
