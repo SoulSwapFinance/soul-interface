@@ -31,7 +31,6 @@ const UnderworldWithdraw = ({ pair, header }) => {
   const onWithdraw = useCallback(
     async (cooker: UnderworldCooker) => {
       const maxFraction = minimum(pair.userAssetFraction, pair.maxAssetAvailableFraction)
-      // @ts-ignore TYPE NEEDS FIXING
       const fraction = BigNumber.from(parsedWithdrawValue?.quotient.toString()).mulDiv(
         pair.currentTotalAsset.base,
         pair.currentAllAssets.value
