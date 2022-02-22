@@ -752,6 +752,37 @@ export const POOLS: AddressMap = {
           symbol: 'GRIM EVO',
           decimals: 18,
         },
+      },
+      '0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd': {  // DAI-FTM [LEND]
+        id: 49, // 600
+        token0: {
+          id: '0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd', // DAI
+          name: 'Dai Stablecoin',
+          symbol: 'DAI',
+          decimals: 18,
+        },
+        token1: {
+          id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+          name: 'Wrapped Fantom',
+          symbol: 'FTM',
+          decimals: 18,
+        },
+      },
+        '0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61': {  // FTM-DAI [LEND]
+          id: 50, // 600
+        token0: {
+          id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+          name: 'Wrapped Fantom',
+          symbol: 'FTM',
+          decimals: 18,
+        },
+        token1: {
+          id: '0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd', // DAI
+          name: 'Dai Stablecoin',
+          symbol: 'DAI',
+          decimals: 18,
+        },
+          
       }
     }
 }
