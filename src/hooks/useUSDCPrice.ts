@@ -5,8 +5,8 @@ import { useMemo } from 'react'
 import { useV2TradeExactOut } from './useV2Trades'
 
 import { tryParseAmount } from 'functions'
-import { ANY, BNB, CRV, LUXOR, MIM, SEANCE, SOUL, FUSD, USDT, UNIDX, WBTC, WETH, WLUM, REAPER, GRIM, DAI } from 'constants/tokens'
-import { ANY_ADDRESS, BNB_ADDRESS, CRV_ADDRESS, FUSD_ADDRESS, GRIM_ADDRESS, LUX_ADDRESS, REAPER_ADDRESS, SEANCE_ADDRESS, SOUL_ADDRESS, UNIDX_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS } from 'constants/addresses'
+import { ANY, BNB, CRV, LUXOR, MIM, SEANCE, SOUL, FUSD, USDT, UNIDX, WBTC, WETH, WLUM, REAPER, GRIM, GRIMEVO, DAI } from 'constants/tokens'
+import { ANY_ADDRESS, BNB_ADDRESS, CRV_ADDRESS, FUSD_ADDRESS, GRIM_ADDRESS, GRIMEVO_ADDRESS, LUX_ADDRESS, REAPER_ADDRESS, SEANCE_ADDRESS, SOUL_ADDRESS, UNIDX_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS } from 'constants/addresses'
 import { usePrice } from 'hooks/usePrice'
 // import { SupportedChainId } from '../constants/chains'
 // import { useBestV2Trade } from './useBestV2Trade'
@@ -89,6 +89,10 @@ const GRIM_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(GRIM[ChainId.FANTOM], 100_000e6)
 }
 
+const GRIMEVO_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(GRIMEVO[ChainId.FANTOM], 100_000e6)
+}
+
 /**
  * Returns the price in USDC of the input currency
  * @param currency currency to compute the USDC price of
@@ -111,6 +115,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   const unidxPrice = usePrice(UNIDX_ADDRESS[250])
   const reaperPrice = usePrice(REAPER_ADDRESS[250])
   const grimPrice = usePrice(GRIM_ADDRESS[250])
+  const grimEvoPrice = usePrice(GRIMEVO_ADDRESS[250])
   
   const amountOut = chainId ? STABLECOIN_AMOUNT_OUT[chainId] : undefined
   const usdtAmountOut = chainId ? USDT_AMOUNT_OUT[chainId] : undefined
@@ -131,6 +136,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   const crvAmountOut = chainId ? CRV_AMOUNT_OUT[chainId] : undefined
   const unidxAmountOut = chainId ? UNIDX_AMOUNT_OUT[chainId] : undefined
   const grimAmountOut = chainId ? GRIM_AMOUNT_OUT[chainId] : undefined
+  const grimEVOAmountOut = chainId ? GRIMEVO_AMOUNT_OUT[chainId] : undefined
   const reaperAmountOut = chainId ? REAPER_AMOUNT_OUT[chainId] : undefined
 
   // TOKENS
@@ -150,6 +156,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   const crv = crvAmountOut?.currency
   const unidx = unidxAmountOut?.currency
   const grim = grimAmountOut?.currency
+  const grimEVO = grimEVOAmountOut?.currency
   const reaper = reaperAmountOut?.currency
 
   // TODO(#2808): remove dependency on useBestV2Trade
@@ -244,6 +251,11 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
     // handle grim
     if (currency?.wrapped.equals(grim)) {
       return new Price(grim, grim, '10', Number(grimPrice * 10).toFixed())
+    }
+
+    // handle grimEVO
+    if (currency?.wrapped.equals(grimEVO)) {
+      return new Price(grimEVO, grimEVO, '10', Number(grimEvoPrice * 10).toFixed())
     }
 
     // handle reaper
