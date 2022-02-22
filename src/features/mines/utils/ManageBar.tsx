@@ -27,7 +27,6 @@ import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 import { useCurrency } from 'hooks/Tokens'
 import { SOUL_ADDRESS } from 'constants/addresses'
 import { usePrice } from 'hooks/usePrice'
-import { PairType } from '../enum'
 
 const ManageBar = ({ farm }) => {
   const dispatch = useAppDispatch()
@@ -46,13 +45,17 @@ const ManageBar = ({ farm }) => {
   farm.pair.token1 ? new Token(
     250,
     getAddress(farm.lpToken),
-    farm.pair.type === PairType.UNDERWORLD ? Number(farm.pair.asset.decimals) : 18,
-    farm.pair.type === PairType.UNDERWORLD ? 'MP' : 'LP'
+    18,
+    'SOUL-LP'
+    // farm.pair.type === PairType.UNDERWORLD ? Number(farm.pair.asset.decimals) : 18,
+    // farm.pair.type === PairType.UNDERWORLD ? 'UMP' : 'SLP'
   ) : new Token(
     250,
     getAddress(farm.lpToken),
     18,
     'SOUL'
+    // farm.pair.type === PairType.UNDERWORLD ? Number(farm.pair.asset.decimals) : 18,
+    // farm.pair.type === PairType.UNDERWORLD ? 'UMP' : 'SLP'
   )
 
   const balance = useCurrencyBalance(account ?? undefined, liquidityToken)
@@ -172,7 +175,7 @@ const ManageBar = ({ farm }) => {
             color={!isDepositValid && !!parsedDepositValue ? 'red' : 'blue'}
             onClick={async () => {
               try {
-                // MP decimals depend on asset, SLP is always 18
+                // UMP decimals depend on asset, SLP is always 18
                 const tx = await deposit(farm.id, BigNumber.from(parsedDepositValue?.quotient.toString()))
                 if (tx?.hash) {
                   setContent(
@@ -201,7 +204,7 @@ const ManageBar = ({ farm }) => {
             color={!isDepositValid && !!parsedDepositValue ? 'red' : 'blue'}
             onClick={async () => {
               try {
-                // MP decimals depend on asset, SLP is always 18
+                // UMP decimals depend on asset, SLP is always 18
                 const tx = await enterStaking(BigNumber.from(parsedDepositValue?.quotient.toString()))
                 if (tx?.hash) {
                   setContent(
@@ -235,7 +238,7 @@ const ManageBar = ({ farm }) => {
           color={!isWithdrawValid && !!parsedWithdrawValue ? 'red' : 'blue'}
           onClick={async () => {
             try {
-              // MP decimals depend on asset, SLP is always 18
+              // UMP decimals depend on asset, SLP is always 18
               // @ts-ignore TYPE NEEDS FIXING
               const tx = await withdraw(farm.id, BigNumber.from(parsedWithdrawValue?.quotient.toString()))
               if (tx?.hash) {
@@ -265,7 +268,7 @@ const ManageBar = ({ farm }) => {
       color={!isWithdrawValid && !!parsedWithdrawValue ? 'red' : 'blue'}
       onClick={async () => {
         try {
-          // MP decimals depend on asset, SLP is always 18
+          // UMP decimals depend on asset, SLP is always 18
           // @ts-ignore TYPE NEEDS FIXING
           const tx = await leaveStaking(BigNumber.from(parsedWithdrawValue?.quotient.toString()))
           if (tx?.hash) {
