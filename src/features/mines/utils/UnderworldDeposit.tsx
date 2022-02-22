@@ -25,7 +25,6 @@ const UnderworldDeposit = ({ pair, header }) => {
   const assetToken = useCurrency(pair?.asset.address) || undefined
   const [depositValue, setDepositValue] = useState('')
   const assetNative = WNATIVE[chainId || 250].address === pair?.asset.address
-  // @ts-ignore TYPE NEEDS FIXING
   const ethBalance = useETHBalances(assetNative ? [account ?? undefined] : [])
 
   const balanceAmount = useCoffin
@@ -63,9 +62,9 @@ const UnderworldDeposit = ({ pair, header }) => {
   )
 
   const error = !parsedDepositValue
-    ? 'Enter an amount'
+    ? 'Enter Amount'
     : balance?.lessThan(parsedDepositValue)
-    ? 'Insufficient balance'
+    ? 'Insufficient Balance'
     : undefined
 
   const isValid = !error

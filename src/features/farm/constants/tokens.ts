@@ -35,6 +35,10 @@ export const tokens = {
     4002: '',
     250: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E',
   },
+  GRIMEVO: {
+    4002: '',
+    250: '0x0a77866C01429941BFC7854c0c0675dB1015218b',
+  },
   ICE: {
     4002: '',
     250: '0xf16e81dce15B08F326220742020379B855B87DF9',

@@ -14,7 +14,9 @@ import UnderworldWithdraw from './UnderworldWithdraw'
 const ManageUnderworldPair = ({ farm }) => {
   const { i18n } = useLingui()
 
-  const underworldPair = useUnderworldPair(farm?.pair?.id)
+//   const underworldPair = useUnderworldPair('0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd')
+  const underworldPair = useUnderworldPair(farm?.lpToken)
+
   const [toggle, setToggle] = useState(true)
 
   const header = useMemo(

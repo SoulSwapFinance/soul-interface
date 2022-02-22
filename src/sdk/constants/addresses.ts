@@ -215,6 +215,10 @@ export const DAI_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E'
 }
 
+export const GRIMEVO_ADDRESS: AddressMap = {
+  [ChainId.FANTOM]: '0x0a77866C01429941BFC7854c0c0675dB1015218b'
+}
+
 export const USD_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: USDC_ADDRESS[ChainId.ETHEREUM],
   [ChainId.FANTOM]: USDC_ADDRESS[ChainId.FANTOM],

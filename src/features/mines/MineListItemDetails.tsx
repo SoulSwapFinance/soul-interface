@@ -12,8 +12,9 @@ import { MineModalView, PairType } from './enum'
 import InformationDisclosure from './components/InformationDisclosure'
 import InvestmentDetails from './components/InvestmentDetails'
 import ManageBar from './utils/ManageBar'
-import ManageUnderworldPair from './utils/ManageUnderworldPair'
+// import ManageUnderworldPair from './ManageUnderworldPair'
 import ManageSwapPair from './utils/ManageSwapPair'
+import ManageUnderworldPair from './utils/ManageUnderworldPair'
 
 const COLUMN_CONTAINER = 'flex flex-col flex-grow gap-4'
 
@@ -55,26 +56,32 @@ const MineListItemDetails = ({ farm, onDismiss }) => {
             onChange={(view: MineModalView) => dispatch(setMineModalView(view))}
             variant="filled"
           >
+
             {farm.pair.token1 && (
               <ToggleButtonGroup.Button value={MineModalView.Liquidity}>
-                {farm.pair.type === PairType.UNDERWORLD ? i18n._(t`Lending`) : i18n._(t`Liquidity`)}
+                {
+                  (farm.pair?.id == "48" || farm.pair?.id == "49") ? i18n._(t`Lending`) : i18n._(t`Liquidity`)}
               </ToggleButtonGroup.Button>
             )}
             <ToggleButtonGroup.Button value={MineModalView.Staking}>{i18n._(t`Staking`)}</ToggleButtonGroup.Button>
             <ToggleButtonGroup.Button value={MineModalView.Position}>{i18n._(t`Rewards`)}</ToggleButtonGroup.Button>
           </ToggleButtonGroup>
 
-          {/*Do not unmount following components to make modal react faster*/}
+          {/*Dont unmount following components to make modal more react faster*/}
           <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Position ? 'block' : 'hidden')}>
             <InvestmentDetails farm={farm} />
           </div>
           {/* {farm.pair.token1 && */}
             <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Liquidity ? 'block' : 'hidden')}>
-          {farm.pair.type === PairType.UNDERWORLD ? <ManageUnderworldPair farm={farm} /> : <ManageSwapPair farm={farm} />}
+              {
+              (farm.pair?.id == "48" || farm.pair?.id == "49") ? <ManageUnderworldPair farm={farm} />
+              : <ManageSwapPair farm={farm} />
+              }
             </div>
           {/* } */}
-          <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Liquidity ? 'block' : 'hidden')}>
-          </div>
+          {/* <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Liquidity ? 'block' : 'hidden')}>
+            {farm.pair.type === PairType.UNDERWORLD ? <ManageUnderworldPair farm={farm} /> : <ManageSwapPair farm={farm} />}
+          </div> */}
           <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Staking ? 'block' : 'hidden')}>
             <ManageBar farm={farm} />
           </div>
