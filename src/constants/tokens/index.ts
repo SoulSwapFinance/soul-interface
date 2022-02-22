@@ -202,6 +202,11 @@ export const GRIM: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x7eC94C4327dC757601B4273cD67014d7760Be97E', 18, 'GRIM', 'GrimToken'),
 }
 
+// GRIM EVO
+export const GRIMEVO: ChainTokenMap = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x0a77866C01429941BFC7854c0c0675dB1015218b', 18, 'GRIM EVO', 'Grim EVO'),
+}
+
 // REAPER
 export const REAPER: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb', 18, 'REAPER', 'ReaperToken'),
