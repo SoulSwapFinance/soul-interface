@@ -221,6 +221,13 @@ export const WLUM_ADDRESS: AddressMap = {
   [ChainId.FANTOM_TESTNET]: '',
 }
 
+export const EVO_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x0a77866C01429941BFC7854c0c0675dB1015218b', // GRIM EVO
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
 export const USDC_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.BSC]: '',
