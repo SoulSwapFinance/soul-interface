@@ -412,7 +412,7 @@ const AssetInputWalletSwitch: FC<AssetInputWalletSwitchProps> = ({ checked, onCh
       <div className="flex items-center gap-3 lg:flex-col">
         <div className="flex flex-col order-1 lg:order-2">
           <Typography variant="xxs" weight={700} className="text-right text-secondary lg:text-center">
-            {label || i18n._(t`Funding source:`)}
+            {/* {label || i18n._(t`Funding source:`)} */}
           </Typography>
           <Typography
             variant="sm"
