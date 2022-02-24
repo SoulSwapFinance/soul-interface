@@ -104,7 +104,7 @@ export default function Borrow() {
                   sortKey="interestPerYear.value"
                   direction="descending"
                 >
-                  {i18n._(t`Health`)}
+                  {i18n._(t`Utilized`)}
                 </ListHeaderWithSort>
                 <ListHeaderWithSort
                   className="hidden md:flex md:justify-center"
