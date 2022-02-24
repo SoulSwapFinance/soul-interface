@@ -16,13 +16,13 @@ const FANTON_CHAINLINK_MAPPING = {
   //   toDecimals: 8, // USD
   // },
   // ETH / USD
- // '0x11DdD3d147E5b83D01cee7070027092397d63658': {
-    // from: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // WETH
-    // to: '0x0000000000000000000000000000000000000001', // USD
-    // decimals: 8, // USD
-    // fromDecimals: 18, // ETH
-    // toDecimals: 8, // USD
-  // },
+  '0x11DdD3d147E5b83D01cee7070027092397d63658': {
+    from: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // WETH
+    to: '0x0000000000000000000000000000000000000001', // USD
+    decimals: 8, // USD
+    fromDecimals: 18, // ETH
+    toDecimals: 8, // USD
+  },
   // USDC / USD
   // '0x2553f4eeb82d5A26427b8d1106C51499CBa5D99c': {
   //    from: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
