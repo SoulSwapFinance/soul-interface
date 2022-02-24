@@ -13,7 +13,7 @@ const FANTON_CHAINLINK_MAPPING = {
   // to: '0x0000000000000000000000000000000000000001', // USD
   // decimals: 8, // USD
   // fromDecimals: 8, // WBTC
-  toDecimals: 8, // USD
+  // toDecimals: 8, // USD
   // },
   // ETH / USD
   '0x11DdD3d147E5b83D01cee7070027092397d63658': {
