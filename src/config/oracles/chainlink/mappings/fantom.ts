@@ -8,13 +8,13 @@ const FANTON_CHAINLINK_MAPPING = {
     toDecimals: 8, // USD
   },
   // BTC / USD
-  // '0x8e94C22142F4A64b99022ccDd994f4e9EC86E4B4': {
-  //   from: '0x321162Cd933E2Be498Cd2267a90534A804051b11', // WBTC
-  //   to: '0x0000000000000000000000000000000000000001', // USD
-  //   decimals: 8, // USD
-  //   fromDecimals: 8, // WBTC
-  //   toDecimals: 8, // USD
-  // },
+  '0x8e94C22142F4A64b99022ccDd994f4e9EC86E4B4': {
+  from: '0x321162Cd933E2Be498Cd2267a90534A804051b11', // WBTC
+  to: '0x0000000000000000000000000000000000000001', // USD
+  decimals: 8, // USD
+  fromDecimals: 8, // WBTC
+  toDecimals: 8, // USD
+  },
   // ETH / USD
   '0x11DdD3d147E5b83D01cee7070027092397d63658': {
     from: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // WETH
