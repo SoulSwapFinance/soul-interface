@@ -8,7 +8,6 @@ import { classNames } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
 import { ApplicationModal } from 'state/application/actions'
 import { useModalOpen, useNetworkModalToggle } from 'state/application/hooks'
-// @ts-ignore TYPE NEEDS FIXING
 import cookie from 'cookie-cutter'
 import Image from 'next/image'
 import React, { FC } from 'react'
@@ -45,7 +44,7 @@ export const SUPPORTED_NETWORKS: {
       symbol: 'FTM',
       decimals: 18,
     },
-    rpcUrls: ['https://rpc.fantom.network', 'https://ftmrpc.ultimatenodes.io'],
+    rpcUrls: ['https://rpc.ftm.tools', 'https://rpc.fantom.network', 'https://ftmrpc.ultimatenodes.io'],
     blockExplorerUrls: ['https://ftmscan.com'],
   },
   [ChainId.BSC]: {

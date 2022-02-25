@@ -28,6 +28,7 @@ import { SOUL, SOUL_ADDRESS } from '../../constants'
 
 import styled from 'styled-components'
 import usePendingReward from './hooks/usePendingReward'
+import { useActiveWeb3React } from 'services/web3/hooks'
 
 const HideOnMobile = styled.div`
 @media screen and (max-width: 500px) {
@@ -42,12 +43,13 @@ interface MineListItem {
 
 // @ts-ignore TYPE NEEDS FIXING
 const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
+  const { chainId } = useActiveWeb3React()
   const { i18n } = useLingui()
   const token0 = useCurrency(farm.pair?.token0?.id) ?? undefined
   const token1 = useCurrency(farm.pair.token1?.id) ?? undefined
-  // const tvlInfo = useTVL()
+  const tvlInfo = useTVL()
   const harvestHelperContract = useHarvestHelperContract()
-  const soulPrice = usePrice(SOUL_ADDRESS[250]) // to avoid RPC call
+  const soulPrice = usePrice(SOUL_ADDRESS[chainId]) // to avoid RPC call
 
   const pendingSoul = usePendingSoul(farm)
   const pendingReward = usePendingReward(farm)
@@ -65,8 +67,8 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   // }
 
   // const positions = usePositions()
-  // const farmingPools = Object.keys(POOLS[250]).map((key) => {
-  //   return { ...POOLS[250][key], lpToken: key }
+  // const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
+  //   return { ...POOLS[chainId][key], lpToken: key }
   // })
 
   // BALANCES AND TVL //
@@ -177,7 +179,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
             component="span"
           >
             {formatNumber(reward.rewardPerDay)}
-            <CurrencyLogo currency={SOUL[250]} size={isMobile ? 32 : 50} />
+            <CurrencyLogo currency={SOUL[chainId]} size={isMobile ? 32 : 50} />
           </Typography>
         ))}
       </div>
@@ -199,8 +201,8 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
               }
             </div>
           ))}
-          {/* {!!farm?.feeApyPerYear && ( */}
-          {/* <QuestionHelper
+          {!!farm?.feeApyPerYear && (
+          <QuestionHelper
             text={
               <div className="flex flex-col">
                 <div>
@@ -227,7 +229,8 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
                 </div>
               </div>
             }
-          /> */}
+          />
+          )}
         </Typography>
         <Typography variant="xs" className="text-low-emphesis">
           {i18n._(t`annualized`)}

@@ -20,7 +20,7 @@ enum ChainId { // TODO
 export const RPC = {
   [ChainId.ETHEREUM]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
   [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
-  [ChainId.FANTOM]: 'https://rpcapi.fantom.network/',
+  [ChainId.FANTOM]: 'https://rpc.ftm.tools/',
   // [ChainId.FANTOM]: 'https://rpcapi.fantom.network/',
   // [ChainId.FANTOM_TESTNET]: 'https://rpc.testnet.fantom.network',
   // [ChainId.ROPSTEN]: 'https://eth-ropsten.alchemyapi.io/v2/cidKix2Xr-snU3f6f6Zjq_rYdalKKHmW',
@@ -66,8 +66,8 @@ export function getNetworkLibrary(): Web3Provider {
 }
 
 const supportedChainIds = [
-  1, // mainnet
-  56, // binance smart chain
+  // 1, // mainnet
+  // 56, // binance smart chain
   250, // fantom
   // 4002, // fantom testnet
   // 3, // ropsten
@@ -121,7 +121,7 @@ export const portis = new PortisConnector({
 
 // mainnet only
 export const walletlink = new WalletLinkConnector({
-  url: RPC[ChainId.ETHEREUM],
+  url: RPC[ChainId.FANTOM],
   appName: 'SoulSwap',
   appLogoUrl:
   'https://raw.github.com/SoulSwapFinance/icons/master/token/soul.jpg',

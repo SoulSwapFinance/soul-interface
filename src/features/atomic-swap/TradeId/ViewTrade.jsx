@@ -161,13 +161,13 @@ const ViewTrade = () => {
           const approvedAmount = await erc20Allowance(
             trade.user2Details[i].token,
             address,
-            AtomicSwapAddress[250]
+            AtomicSwapAddress[chainId]
           );
 
           if (approvedAmount < trade.user2Details[i].amounts[0]) {
             const tx = await erc20Approve(
               trade.user2Details[i].token,
-              AtomicSwapAddress[250],
+              AtomicSwapAddress[chainId],
               MaxUint256
             );
             await tx.wait();
@@ -177,14 +177,14 @@ const ViewTrade = () => {
         else if (trade.user2Details[i].ercType === 721) {
           const approved = await erc721IsApprovedForAll(
             trade.user2Details[i].token,
-            AtomicSwapAddress[250],
+            AtomicSwapAddress[chainId],
             true
           );
 
           if (!approved) {
             const tx = await erc721SetApprovalForAll(
               trade.user2Details[i].token,
-              AtomicSwapAddress[250],
+              AtomicSwapAddress[chainId],
               true
             );
             await tx.wait();
@@ -194,14 +194,14 @@ const ViewTrade = () => {
         else if (trade.user2Details[i].ercType === 1155) {
           const approved = await erc1155IsApprovedForAll(
             trade.user2Details[i].token,
-            AtomicSwapAddress[250],
+            AtomicSwapAddress[chainId],
             true
           );
 
           if (!approved) {
             const tx = await erc1155SetApprovalForAll(
               trade.user2Details[i].token,
-              AtomicSwapAddress[250],
+              AtomicSwapAddress[chainId],
               true
             );
             await tx.wait();

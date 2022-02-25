@@ -15,7 +15,7 @@ export function getParameterCaseInsensitive(object, key) {
 }
 
 export const getFarms = async (farmsToFetch, soulSummonerAddress, prices = {}, earningToken) => {
-  const [[totalAllocPointsRes], [rewardsPerSecondRes]] = await useMulticallContract[250](soulSummonerAbi, [
+  const [[totalAllocPointsRes], [rewardsPerSecondRes]] = await useMulticallContract[chainId](soulSummonerAbi, [
     {
       address: soulSummonerAddress,
       name: 'totalAllocPoint',

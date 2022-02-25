@@ -322,7 +322,7 @@ const StakeRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                   <TokenPair
                     fontSize="1.2rem"
                     target="_blank"
-                    href={`https://app.soulswap.finance/add/${farm.token1Address[250]}/${farm.token2Address[250]}`}
+                    href={`https://app.soulswap.finance/add/${farm.token1Address[chainId]}/${farm.token2Address[chainId]}`}
                   >
                     {lpSymbol}
                   </TokenPair>

@@ -51,12 +51,10 @@ const PERMITTABLE_TOKENS: {
     [SOUL_ADDRESS[1].address]: { type: PermitType.AMOUNT, name: 'Soul Power' },
   }, */
   [250]: {
-    // @ts-ignore TYPE NEEDS FIXING
-    [SOUL_ADDRESS[250].address]: { type: PermitType.AMOUNT, name: 'Soul Power' },
+    [SOUL_ADDRESS[250]]: { type: PermitType.AMOUNT, name: 'Soul Power' },
   },
   [4002]: {
-    // @ts-ignore TYPE NEEDS FIXING
-    [SOUL_ADDRESS[4002].address]: { type: PermitType.AMOUNT, name: 'Soul Power' },
+    [SOUL_ADDRESS[4002]]: { type: PermitType.AMOUNT, name: 'Soul Power' },
   },
 }
 
