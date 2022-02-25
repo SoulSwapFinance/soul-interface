@@ -208,6 +208,9 @@ msgstr "Avg. APY"
 msgid "BOND"
 msgstr "BOND"
 
+msgid "BORROW"
+msgstr "BORROW"
+
 msgid "Back to Farms"
 msgstr "Back to Farms"
 
@@ -639,9 +642,6 @@ msgstr "Forum"
 msgid "French"
 msgstr "French"
 
-msgid "Funding source:"
-msgstr "Funding source:"
-
 msgid "Gain exposure to tokens without reducing your assets. Leverage will enable you to take short positions against assets and earn from downside movements."
 msgstr "Gain exposure to tokens without reducing your assets. Leverage will enable you to take short positions against assets and earn from downside movements."
 
@@ -691,6 +691,9 @@ msgstr "Harvest {0} SOUL"
 msgid "Harvest {0}/{1}"
 msgstr "Harvest {0}/{1}"
 
+msgid "Health"
+msgstr "Health"
+
 msgid "Historical Total Locked: Connect Wallet"
 msgstr "Historical Total Locked: Connect Wallet"
 
@@ -717,6 +720,9 @@ msgstr "If you purchase a token from this list, you may not be able to sell it b
 
 msgid "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
 msgstr "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
+
+msgid "If your KMP is staked, you cannot withdraw your lent tokens. You must unstake first."
+msgstr "If your KMP is staked, you cannot withdraw your lent tokens. You must unstake first."
 
 msgid "Import"
 msgstr "Import"
@@ -995,6 +1001,9 @@ msgstr "Number of Assets"
 
 msgid "ONLY USE THIS MODE IF YOU KNOW WHAT YOU ARE DOING."
 msgstr "ONLY USE THIS MODE IF YOU KNOW WHAT YOU ARE DOING."
+
+msgid "Onchain oracle that tracks pricing for this pair."
+msgstr "Onchain oracle that tracks pricing for this pair."
 
 msgid "Only use this mode if you know what you are doing."
 msgstr "Only use this mode if you know what you are doing."
@@ -1463,9 +1472,6 @@ msgstr "The isn't enough liquidity available at the moment to withdraw this amou
 msgid "The minimum amount you’ll receive from your transaction, or else the transaction will revert."
 msgstr "The minimum amount you’ll receive from your transaction, or else the transaction will revert."
 
-msgid "The onchain oracle that tracks the pricing for this pair"
-msgstr "The onchain oracle that tracks the pricing for this pair"
-
 msgid "The output token cannot be transferred. There may be an issue with the output token."
 msgstr "The output token cannot be transferred. There may be an issue with the output token."
 
@@ -1607,9 +1613,6 @@ msgstr "Use one of the buttons to set a percentage or enter a value manually usi
 
 msgid "Use the toggle to switch between balances when interacting with our platform."
 msgstr "Use the toggle to switch between balances when interacting with our platform."
-
-msgid "Utilization"
-msgstr "Utilization"
 
 msgid "Utilized"
 msgstr "Utilized"

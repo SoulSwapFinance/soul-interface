@@ -329,12 +329,13 @@ export default function Borrow({ pair }: BorrowProps) {
   }
 
   const actionDisabled =
-    (userCollateralValue.toString().toBigNumber(pair.collateral.tokenInfo.decimals).lte(0) &&
-      userBorrowValue.toString().toBigNumber(pair.asset.tokenInfo.decimals).lte(0))
-    || collateralWarnings.broken
+    // (userCollateralValue.toString().toBigNumber(pair.collateral.tokenInfo.decimals).lte(0) &&
+    //   userBorrowValue.toString().toBigNumber(pair.asset.tokenInfo.decimals).lte(0))
+    // || 
+    collateralWarnings.broken
     || (borrowValue.length > 0 && borrowWarnings.broken)
     || (swap && priceImpactSeverity > 3 && !isExpertMode)
-    || (userCollateralValue == 0  && !collateralValueSet)
+    // || (userCollateralValue == 0  && !collateralValueSet)
 
   // Handlers
   async function onExecute(cooker: UnderworldCooker): Promise<string> {
@@ -576,7 +577,10 @@ export default function Borrow({ pair }: BorrowProps) {
         color="purple"
         content={(onCook: any) => (
           <TokenApproveButton value={collateralValue} token={collateralToken} needed={!useCoffinCollateral}>
-            <Button onClick={() => onCook(pair, onExecute)} disabled={actionDisabled} fullWidth={true}>
+            <Button onClick={() => onCook(pair, onExecute)} 
+            disabled={actionDisabled} 
+            fullWidth={true}
+            >
               {actionName}
             </Button>
           </TokenApproveButton>
