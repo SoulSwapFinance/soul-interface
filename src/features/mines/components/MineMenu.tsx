@@ -47,6 +47,7 @@ enum FarmFilter {
   Active = 'Active',
   Deposited = 'Deposited',
   Staking = 'Staking',
+  Lending = 'Lending',
   Fantom = 'Fantom',
   SoulSwap = 'SoulSwap',
   Stables = 'Stables',
@@ -57,6 +58,7 @@ const filters: Record<string, FarmFilter> = {
   active: FarmFilter.Active,
   deposited: FarmFilter.Deposited,
   staking: FarmFilter.Staking,
+  lending: FarmFilter.Lending,
   fantom: FarmFilter.Fantom,
   soulswap: FarmFilter.SoulSwap,
   stables: FarmFilter.Stables,
@@ -81,6 +83,9 @@ const MineMenu = () => {
       ),
       [FarmFilter.Staking]: (
         <MenuLink href={'/seance'} label={i18n._(t`Staking`)} />
+      ),
+      [FarmFilter.Lending]: (
+        <MenuLink href={'/mines?filter=lending'} label={i18n._(t`Lending`)} />
       ),
       [FarmFilter.Fantom]: (
           <MenuLink href={'/mines?filter=fantom'} label={i18n._(t`Fantom`)} />

@@ -47,9 +47,6 @@ const MineHeader: FC<MineHeaderProps> = ({ input, output, search }) => {
               />
           </div>
         }
-      {/* <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
-            {i18n._(t`TYPE`)}
-          </a> */}
       <div className="grid grid-cols-4 rounded p-3px bg-dark-800 h-[46px]">
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
@@ -83,52 +80,7 @@ const MineHeader: FC<MineHeaderProps> = ({ input, output, search }) => {
             {i18n._(t`RETIRED`)}
           </a>
         </NavLink>
-        {/* <NavLink
-          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
-          href={"/mines?filter=single"}
-          >
-          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-            {i18n._(t`STAKE`)}
-          </a>
-        </NavLink> */}
-        {/* <NavLink
-          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
-          href={"/mines?filter=fantom"}
-          >
-          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-            {i18n._(t`STABLES`)}
-          </a>
-        </NavLink> */}
         </div>
-        {/* <br/> */}
-      {/* <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
-      <NavLink
-          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
-          href={"/mines?filter=inactive"}
-          >
-            <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-            {i18n._(t`INACTIVE`)}
-          </a>
-            </NavLink>
-          </a> */}
-      {/* <div className="grid grid-cols-2 rounded p-3px bg-dark-800 h-[46px]">
-        <NavLink
-          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
-          href={"/mines?filter=active"}
-          >
-          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
-            {i18n._(t`Y`)}
-          </a>
-        </NavLink>
-        <NavLink
-          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
-          href={"/mines?filter=inactive"}
-          >
-          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-            {i18n._(t`N`)}
-          </a>
-        </NavLink>
-      </div> */}
     </div>
   )
 

@@ -1,31 +1,16 @@
-// import { InformationCircleIcon } from '@heroicons/react/solid'
 import { SOUL_ADDRESS } from 'sdk'
-import Container from 'components/Container'
-// import ExternalLink from 'components/ExternalLink'
 import Search from 'components/Search'
 import MineList from 'features/mines/MineList'
 import Menu from 'features/mines/components/MineMenu'
-// import Header from 'features/mines/components/Header'
-// import { classNames } from 'functions/styling'
 import useFuse from 'hooks/useFuse'
 import { useActiveWeb3React } from 'services/web3'
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { POOLS } from 'constants/farms'
-// import { useSoulSummonerContract } from 'hooks/useContract'
-// import { Button } from 'components/Button'
-// import { formatNumberScale } from 'functions'
-// import { addTransaction } from 'state/transactions/actions'
 import { getAddress } from '@ethersproject/address'
 import { useTVL } from 'hooks/useV2Pairs'
 import { usePrice, useFarms, useSummonerInfo } from 'hooks'
-// import { SEANCE_ADDRESS, WNATIVE } from 'constants/addresses'
 import { TridentBody, TridentHeader } from 'layouts/Trident'
-import Typography from 'components/Typography'
-// import ExternalLink from 'comp/onents/ExternalLink'
-import { i18n } from '@lingui/core'
-import { t } from '@lingui/macro'
 import useFarmRewards from 'hooks/useFarmRewards'
 import { usePositions } from 'features/mines/hooks'
 import { Button } from 'components/Button'
@@ -42,10 +27,6 @@ export default function Mines(): JSX.Element {
 
   const type = router.query.filter === null ? 'active' : (router.query.filter as string)
   const rewards = useFarmRewards()
-
-  // function useFarms() {
-  //   return useSoulFarms(useSoulSummonerContract())
-  // }
 
   const farms = useFarms()
 
@@ -89,26 +70,26 @@ export default function Mines(): JSX.Element {
 
     const rewards = getRewards()
 
-  //   // const tvl = getTvl()
-  //   const tvl = pool.pair?.token1
-  //   ? Number(pool.pairPrice) * Number(pool.lpBalance) / 1e18
-  //   : Number(soulPrice) * Number(pool.lpBalance) / 1e18
+    // const tvl = getTvl()
+    // const tvl = pool.pair?.token1
+    // ? Number(pool.pairPrice) * Number(pool.lpBalance) / 1e18
+    // : Number(soulPrice) * Number(pool.lpBalance) / 1e18
 
-  //   const rewardPerSec =
-  //     ((pool.allocPoint / Number(summonerInfo.totalAllocPoint)) * Number(summonerInfo.soulPerSecond)) / 1e18
+    // const rewardPerSec =
+    //   ((pool.allocPoint / Number(summonerInfo.totalAllocPoint)) * Number(summonerInfo.soulPerSecond)) / 1e18
 
-  //   const rewardPrice = soulPrice
+    // const rewardPrice = soulPrice
 
-  //   const roiPerSecond =
-  //     farms.reduce((previousValue, currentValue) => {
-  //       return previousValue + rewardPerSec * rewardPrice
-  //     }, 0) / Number(tvl)
+    // const roiPerSecond =
+    //   farms.reduce((previousValue, currentValue) => {
+    //     return previousValue + rewardPerSec * rewardPrice
+    //   }, 0) / Number(tvl)
 
-  //   // const roiPerSecond = Number(tvl)
-  //   const roiPerHour = roiPerSecond * 60 * 60
-  //   const roiPerDay = roiPerHour * 24
-  //   const roiPerMonth = roiPerDay * 30
-  //   const roiPerYear = roiPerDay * 365
+    // const roiPerSecond = Number(tvl)
+    // const roiPerHour = roiPerSecond * 60 * 60
+    // const roiPerDay = roiPerHour * 24
+    // const roiPerMonth = roiPerDay * 30
+    // const roiPerYear = roiPerDay * 365
 
     const position = positions.find((position) => position.id === pool.id)
 
@@ -147,6 +128,7 @@ export default function Mines(): JSX.Element {
         || farm.pair.token1?.symbol == 'wLUM'
       ),
     single: (farm) => farm.pair.token0 && !farm.pair.token1,
+    lending: (farm) => farm.pair.id == '48' || farm.pair.id == "49" || farm.pair.id == "51" || farm.pair.id == "52",
     fantom: (farm) => farm.allocPoint > 0 && (farm.pair.token0?.symbol == 'FTM' || farm.pair.token1?.symbol == 'FTM'),
     stables: (farm) => farm.allocPoint == 200 // since all [active] stables have 200 AP <3
   }
