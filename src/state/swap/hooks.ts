@@ -5,7 +5,7 @@ import {
   Currency,
   CurrencyAmount,
   Percent,
-  SOUL_ADDRESS,
+  SOUL,
   Trade as V2Trade,
   TradeType,
   WNATIVE_ADDRESS,
@@ -184,7 +184,6 @@ export function useDerivedSwapInfo(): {
     inputError = inputError ?? i18n._(t`Enter Recipient`)
   } else {
     if (
-      // @ts-ignore TYPE NEEDS FIXING
       BAD_RECIPIENT_ADDRESSES?.[chainId]?.[formattedTo] ||
       (bestTradeExactIn && involvesAddress(bestTradeExactIn, formattedTo)) ||
       (bestTradeExactOut && involvesAddress(bestTradeExactOut, formattedTo))
@@ -244,10 +243,9 @@ function validatedRecipient(recipient: any): string | undefined {
 export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId = ChainId.ETHEREUM): SwapState {
   let inputCurrency = parseCurrencyFromURLParameter(parsedQs.inputCurrency)
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
-  const eth = 
+  const eth = 'FTM'
   //chainId === ChainId.CELO ? WNATIVE_ADDRESS[chainId] : 
-  'FTM'
-  const soul = SOUL_ADDRESS[chainId]
+  const soul = SOUL[chainId].address
   if (inputCurrency === '' && outputCurrency === '') {
     inputCurrency = eth
     outputCurrency = soul

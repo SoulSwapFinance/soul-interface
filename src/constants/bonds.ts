@@ -28,12 +28,12 @@ export const BONDS: AddressMap = {
       token0: {
         id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
         name: 'Wrapped Fantom',
-        symbol: 'FTM',
+        symbol: 'WFTM',
         decimals: 18,
       },
       token1: {
         id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
-        name: 'SoulPower',
+        name: 'Soul Power',
         symbol: 'SOUL',
         decimals: 18,
       },
@@ -42,7 +42,7 @@ export const BONDS: AddressMap = {
       id: 1, //
       token0: {
         id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
-        name: 'SoulPower',
+        name: 'Soul Power',
         symbol: 'SOUL',
         decimals: 18,
       },
@@ -64,7 +64,7 @@ export const BONDS: AddressMap = {
       token1: {
         id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
         name: 'Wrapped Fantom',
-        symbol: 'FTM',
+        symbol: 'WFTM',
         decimals: 18,
       },
     },
@@ -79,7 +79,7 @@ export const BONDS: AddressMap = {
       token1: {
         id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
         name: 'Wrapped Fantom',
-        symbol: 'FTM',
+        symbol: 'WFTM',
         decimals: 18,
       },
     },
@@ -87,8 +87,8 @@ export const BONDS: AddressMap = {
       id: 4, // 600
       token0: {
         id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
-        name: 'Wrapped FTM',
-        symbol: 'FTM',
+        name: 'Wrapped Fantom',
+        symbol: 'WFTM',
         decimals: 18,
       },
       token1: {
@@ -108,8 +108,8 @@ export const BONDS: AddressMap = {
       },
       token1: {
         id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
-        name: 'Wrapped FTM',
-        symbol: 'FTM',
+        name: 'Wrapped Fantom',
+        symbol: 'WFTM',
         decimals: 18,
       },
     },
@@ -118,7 +118,7 @@ export const BONDS: AddressMap = {
       token0: {
         id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
         name: 'Wrapped Fantom',
-        symbol: 'FTM',
+        symbol: 'WFTM',
         decimals: 18,
       },
       token1: {
@@ -133,7 +133,7 @@ export const BONDS: AddressMap = {
       token0: {
         id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
         name: 'Wrapped Fantom',
-        symbol: 'FTM',
+        symbol: 'WFTM',
         decimals: 18,
       },
       token1: {

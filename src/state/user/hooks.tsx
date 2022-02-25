@@ -15,7 +15,7 @@ import {
   Token,
 } from 'sdk'
 import { CHAINLINK_PRICE_FEED_MAP } from 'config/oracles/chainlink'
-import { BASES_TO_TRACK_LIQUIDITY_FOR, PINNED_PAIRS } from 'config/routing'
+import { BASES_TO_TRACK_LIQUIDITY_FOR } from 'config/routing'
 import { e10 } from 'functions'
 import { useAllTokens } from 'hooks/Tokens'
 import { useActiveWeb3React } from 'services/web3'
@@ -350,7 +350,7 @@ export function useTrackedTokenPairs(): [Token, Token][] {
   const tokens = useAllTokens()
 
   // pinned pairs
-  const pinnedPairs = useMemo(() => (chainId ? PINNED_PAIRS[chainId] ?? [] : []), [chainId])
+  const pinnedPairs = useMemo(() => (chainId ? [chainId] ?? [] : []), [chainId])
 
   // pairs for every token against every base
   const generatedPairs: [Token, Token][] = useMemo(
@@ -391,7 +391,7 @@ export function useTrackedTokenPairs(): [Token, Token][] {
   }, [savedSerializedPairs, chainId])
 
   const combinedList = useMemo(
-    () => userPairs.concat(generatedPairs).concat(pinnedPairs),
+    () => userPairs.concat(generatedPairs).concat(),
     [generatedPairs, pinnedPairs, userPairs]
   )
 

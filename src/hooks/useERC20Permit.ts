@@ -1,5 +1,6 @@
 import { splitSignature } from '@ethersproject/bytes'
 import {
+  ChainId,
   Currency,
   CurrencyAmount,
   JSBI,
@@ -36,20 +37,22 @@ interface PermitInfo {
 
 // todo: read this information from extensions on token lists or elsewhere (permit registry?)
 const PERMITTABLE_TOKENS: {
-  [chainId: number]: {
+  [chainId in ChainId]: {
     [checksummedTokenAddress: string]: PermitInfo
   }
 } = {
-/*  [1]: {
-    [USDC.address]: { type: PermitType.AMOUNT, name: 'USD Coin', version: '2' },
-    [DAI.address]: {
-      type: PermitType.ALLOWED,
-      name: 'Dai Stablecoin',
-      version: '1',
-    }, 
-    // @ts-ignore TYPE NEEDS FIXING
-    [SOUL_ADDRESS[1].address]: { type: PermitType.AMOUNT, name: 'Soul Power' },
-  }, */
+  [1]: {
+      [USDC.address]: { type: PermitType.AMOUNT, name: 'USD Coin', version: '2' },
+      [DAI.address]: {
+        type: PermitType.ALLOWED,
+        name: 'Dai Stablecoin',
+        version: '1',
+      },
+      [SOUL_ADDRESS[1]]: { type: PermitType.AMOUNT, name: 'Soul Power' },
+    },
+  [56]: {
+    [SOUL_ADDRESS[56]]: { type: PermitType.AMOUNT, name: 'Soul Power' },
+  },
   [250]: {
     [SOUL_ADDRESS[250]]: { type: PermitType.AMOUNT, name: 'Soul Power' },
   },

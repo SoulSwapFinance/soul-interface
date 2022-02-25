@@ -6,7 +6,7 @@ import * as ETHEREUM from './tokens/ethereum'
 import * as FANTOM from './tokens/fantom'
 
 type ChainTokenList = {
-  readonly [chainId: number]: Token[]
+  readonly [chainId in ChainId]: Token[]
 }
 
 // List of all mirror's assets addresses.
@@ -52,7 +52,6 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     ETHEREUM.OHM_V1,
     ETHEREUM.OHM_V2,
     ETHEREUM.MIM,
-    SOUL[ChainId.ETHEREUM],
   ],
 
   [ChainId.FANTOM]: [
@@ -61,7 +60,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     FANTOM.USDC,
     FANTOM.WBTC,
     FANTOM.WETH,
-    FANTOM.MIM,
+    FANTOM.SOUL
   ],
   [ChainId.BSC]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.BSC],
@@ -72,6 +71,9 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     BSC.BTCB,
     BSC.WETH,
     BSC.MIM,
+  ],
+  [ChainId.FANTOM_TESTNET]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM_TESTNET]
   ],
 }
 
@@ -126,7 +128,6 @@ export const CUSTOM_BASES: {
 export const COMMON_BASES: ChainTokenList = {
   [ChainId.ETHEREUM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.ETHEREUM],
-    SOUL[ChainId.ETHEREUM],
     ETHEREUM.WBTC,
     ETHEREUM.MIM,
     ETHEREUM.SPELL,
@@ -137,7 +138,7 @@ export const COMMON_BASES: ChainTokenList = {
   ],
 
   [ChainId.FANTOM]: [
-    ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM],
+    // ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM],
     SOUL[ChainId.FANTOM],
     FANTOM.WETH,
     FANTOM.WBTC,
@@ -149,7 +150,6 @@ export const COMMON_BASES: ChainTokenList = {
 
   [ChainId.BSC]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.BSC],
-    SOUL[ChainId.BSC],
     BSC.WETH,
     BSC.BTCB,
     BSC.MIM,
@@ -160,7 +160,9 @@ export const COMMON_BASES: ChainTokenList = {
     BSC.USDT,
     BSC.USD,
   ],
-}
+  [ChainId.FANTOM_TESTNET]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM_TESTNET]
+  ],}
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
@@ -200,16 +202,16 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ],
 }
 
-export const PINNED_PAIRS: {
-  readonly [chainId in ChainId]?: [Token, Token][]
-} = {
-  [ChainId.FANTOM]: [
-    [SOUL[ChainId.FANTOM], WNATIVE[ChainId.FANTOM]],
-    [
-      new Token(ChainId.FANTOM, '0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643', 8, 'cDAI', 'Compound Dai'),
-      new Token(ChainId.FANTOM, '0x39AA39c021dfbaE8faC545936693aC917d5E7563', 8, 'cUSDC', 'Compound USD Coin'),
-    ],
-    [FANTOM.USDC, FANTOM.USDT],
-    [FANTOM.DAI, FANTOM.USDT],
-  ],
-}
+// export const PINNED_PAIRS: {
+//   readonly [chainId in ChainId]?: [Token, Token][]
+// } = {
+//   [ChainId.FANTOM]: [
+//     [SOUL[ChainId.FANTOM], WNATIVE[ChainId.FANTOM]],
+//     [
+//       new Token(ChainId.FANTOM, '0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643', 8, 'cDAI', 'Compound Dai'),
+//       new Token(ChainId.FANTOM, '0x39AA39c021dfbaE8faC545936693aC917d5E7563', 8, 'cUSDC', 'Compound USD Coin'),
+//     ],
+//     [FANTOM.USDC, FANTOM.USDT],
+//     [FANTOM.DAI, FANTOM.USDT],
+//   ],
+// }

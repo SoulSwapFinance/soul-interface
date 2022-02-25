@@ -1,4 +1,5 @@
 import Typography from 'components/Typography'
+import { SUPPORTED_WALLETS } from '../../constants'
 import { classNames } from 'functions'
 import Image from 'next/image'
 import React from 'react'
@@ -9,7 +10,6 @@ export default function Option({
   onClick = null,
   header,
   subheader = null,
-  icon,
   active = false,
   clickable = true,
 }: {
@@ -19,14 +19,12 @@ export default function Option({
   onClick?: null | (() => void)
   header: React.ReactNode
   subheader: React.ReactNode | null
-  icon: string
   active?: boolean
   clickable?: boolean
 }) {
   const content = (
     <div
       role="button"
-      // @ts-ignore TYPE NEEDS FIXING
       onClick={onClick}
       className={classNames(
         clickable ? 'cursor-pointer' : '',
@@ -41,7 +39,7 @@ export default function Option({
         </div>
         {subheader && <Typography variant="xs">{subheader}</Typography>}
       </div>
-      <Image src={icon} alt={'Icon'} width="32px" height="32px" />
+      <Image src={'/images/tokens/soul.png'} alt={'Icon'} width="32px" height="32px" />
     </div>
   )
 

@@ -44,14 +44,14 @@ export const SUPPORTED_NETWORKS: {
       symbol: 'FTM',
       decimals: 18,
     },
-    rpcUrls: ['https://rpc.ftm.tools', 'https://rpc.fantom.network', 'https://ftmrpc.ultimatenodes.io'],
+    rpcUrls: ['https://rpc.ftm.tools'],
     blockExplorerUrls: ['https://ftmscan.com'],
   },
   [ChainId.BSC]: {
     chainId: '0x38',
     chainName: 'Binance Smart Chain',
     nativeCurrency: {
-      name: 'Binance Coin',
+      name: 'Binance',
       symbol: 'BNB',
       decimals: 18,
     },
@@ -62,7 +62,7 @@ export const SUPPORTED_NETWORKS: {
     chainId: '0xFA2',
     chainName: 'Fantom Testnet',
     nativeCurrency: {
-      name: 'Fantom Testnet',
+      name: 'Fantom',
       symbol: 'FTM',
       decimals: 18,
     },
@@ -223,21 +223,9 @@ const NetworkModal: FC = () => {
         <div className="grid grid-flow-row-dense grid-cols-1 gap-4 overflow-y-auto md:grid-cols-2">
           {[
             ChainId.ETHEREUM,
-            // ChainId.MATIC,
-            // ChainId.ARBITRUM,
-            // ChainId.AVALANCHE,
-            // ChainId.MOONRIVER,
             ChainId.FANTOM,
             ChainId.BSC,
             ChainId.FANTOM_TESTNET,
-            // ChainId.XDAI,
-            // ChainId.HARMONY,
-            // ChainId.TELOS,
-            // ChainId.CELO,
-            // ChainId.FUSE,
-            // ChainId.OKEX,
-            // ChainId.HECO,
-            // ChainId.PALM,
           ].map((key: ChainId, i: number) => {
             if (chainId === key) {
               return (
@@ -246,7 +234,6 @@ const NetworkModal: FC = () => {
                   className="bg-[rgba(0,0,0,0.2)] focus:outline-none flex items-center gap-4 w-full px-4 py-3 rounded border border-purple cursor-default"
                 >
                   <Image
-                    // @ts-ignore TYPE NEEDS FIXING
                     src={NETWORK_ICON[key]}
                     alt="Switch Network"
                     className="rounded-md"

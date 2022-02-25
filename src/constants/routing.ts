@@ -43,17 +43,13 @@ import { ChainId, Currency, Token, WNATIVE } from '../sdk'
 
 // import { SupportedChainId } from './chains'
 
+// // a list of tokens by chain
 type ChainTokenList = {
-  readonly [chainId: number]: Token[]
+    readonly [chainId in ChainId]: Token[]
 }
 
-// // a list of tokens by chain
-// type ChainTokenList = {
-//     readonly [chainId in ChainId]: Token[]
-// }
-
 type ChainCurrencyList = {
-  readonly [chainId: number]: Currency[]
+  readonly [chainId in ChainId]: Currency[]
 }
 
 // List of all mirror's assets addresses.
@@ -139,13 +135,13 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
  * Some tokens can only be swapped via certain pairs, so we override the list of bases that are considered for these
  * tokens.
  */
-export const CUSTOM_BASES: {
-  [chainId: number]: { [tokenAddress: string]: Token[] }
-} = {
-  [ChainId.ETHEREUM]: {
-    [AMPL.address]: [WNATIVE[ChainId.ETHEREUM]],
-  },
-}
+// export const CUSTOM_BASES: {
+//   [chainId: number]: { [tokenAddress: string]: Token[] }
+// } = {
+//   [ChainId.ETHEREUM]: {
+//     [AMPL.address]: [DAI, WNATIVE[ChainId.ETHEREUM]],
+//   },
+// }
 
 /**
  * Shows up in the currency select for swap and add liquidity
@@ -170,10 +166,11 @@ export const CUSTOM_BASES: {
  * Shows up in the currency select for swap and add liquidity
  */
 export const COMMON_BASES: ChainTokenList = {
-  // [ChainId.ETHEREUM]: [...WRAPPED_NATIVE_ONLY[ChainId.ETHEREUM], DAI, USDC, USDT, WBTC],
-
+  [ChainId.ETHEREUM]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.ETHEREUM], 
+  ],
   [ChainId.FANTOM]: [
-    ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], 
+    ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM],
     FANTOM.SOUL,
     FANTOM.SEANCE,
     FANTOM.LUX,
@@ -191,7 +188,6 @@ export const COMMON_BASES: ChainTokenList = {
     FANTOM_TESTNET.FETH,
   ],
   [ChainId.BSC]: [...WRAPPED_NATIVE_ONLY[ChainId.BSC], BSC.DAI, BSC.USD, BSC.USDC, BSC.USDT, BSC.BTCB, BSC.WETH],
-
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
@@ -203,16 +199,12 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
 
 }
 
-export const PINNED_PAIRS: {
-  readonly [chainId in ChainId]?: [Token, Token][]
-} = {
-  [ChainId.ETHEREUM]: [
-    [SOUL[ChainId.ETHEREUM] as Token, WNATIVE[ChainId.ETHEREUM]],
-    [
-      new Token(ChainId.ETHEREUM, '0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643', 8, 'cDAI', 'Compound Dai'),
-      new Token(ChainId.ETHEREUM, '0x39AA39c021dfbaE8faC545936693aC917d5E7563', 8, 'cUSDC', 'Compound USD Coin'),
-    ],
-    // [USDC, USDT],
-    // [DAI, USDT],
-  ],
-}
+// export const PINNED_PAIRS: {
+//   readonly [chainId in ChainId]?: [Token, Token][]
+// } = {
+//   [ChainId.FANTOM]: [
+//     [SOUL[ChainId.FANTOM] as Token, WNATIVE[ChainId.FANTOM]],
+//     // [USDC, USDT],
+//     // [DAI, USDT],
+//   ],
+// }

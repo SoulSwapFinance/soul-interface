@@ -100,22 +100,22 @@ const GRIMEVO_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
 export default function useUSDCPrice(currency?: Currency): Price<Currency, Token> | undefined {
   const chainId = currency?.chainId
 
-  const soulPrice = usePrice(SOUL_ADDRESS[250])
-  const seancePrice = usePrice(SEANCE_ADDRESS[250])
+  const soulPrice = usePrice(SOUL[chainId]?.address)
+  const seancePrice = usePrice(SEANCE_ADDRESS[chainId])
 
-  const luxorPrice = usePrice(LUX_ADDRESS[250])
-  const wLumensPrice = usePrice(WLUM_ADDRESS[250])
+  const luxorPrice = usePrice(LUX_ADDRESS[chainId])
+  const wLumensPrice = usePrice(WLUM_ADDRESS[chainId])
 
-  const wethPrice = usePrice(WETH_ADDRESS[250])
-  const wbtcPrice = usePrice(WBTC_ADDRESS[250])
-  const bnbPrice = usePrice(BNB_ADDRESS[250])
-  const anyPrice = usePrice(ANY_ADDRESS[250])
-  const crvPrice = usePrice(CRV_ADDRESS[250])
-  const fusdPrice = usePrice(FUSD_ADDRESS[250])
-  const unidxPrice = usePrice(UNIDX_ADDRESS[250])
-  const reaperPrice = usePrice(REAPER_ADDRESS[250])
-  const grimPrice = usePrice(GRIM_ADDRESS[250])
-  const grimEvoPrice = usePrice(GRIMEVO_ADDRESS[250])
+  const wethPrice = usePrice(WETH_ADDRESS[chainId])
+  const wbtcPrice = usePrice(WBTC_ADDRESS[chainId])
+  const bnbPrice = usePrice(BNB_ADDRESS[chainId])
+  const anyPrice = usePrice(ANY_ADDRESS[chainId])
+  const crvPrice = usePrice(CRV_ADDRESS[chainId])
+  const fusdPrice = usePrice(FUSD_ADDRESS[chainId])
+  const unidxPrice = usePrice(UNIDX_ADDRESS[chainId])
+  const reaperPrice = usePrice(REAPER_ADDRESS[chainId])
+  const grimPrice = usePrice(GRIM_ADDRESS[chainId])
+  const grimEvoPrice = usePrice(GRIMEVO_ADDRESS[chainId])
   
   const amountOut = chainId ? STABLECOIN_AMOUNT_OUT[chainId] : undefined
   const usdtAmountOut = chainId ? USDT_AMOUNT_OUT[chainId] : undefined
