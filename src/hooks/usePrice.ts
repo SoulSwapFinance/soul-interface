@@ -13,7 +13,7 @@ export function usePrice(tokenAddress: string | undefined | null) {
         [tokenAddress]
     ).result
 
-    const price =  Number(rawPrice) / 1E18
+    const price =  Number(rawPrice) / 1e18
   
     return useMemo(() => {
       if (!price) return null
