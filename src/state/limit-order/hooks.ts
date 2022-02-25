@@ -6,7 +6,7 @@ import {
   CurrencyAmount,
   JSBI,
   Price,
-  SOUL_ADDRESS,
+  SOUL,
   Trade,
   TradeType,
   WNATIVE_ADDRESS,
@@ -126,7 +126,7 @@ export function queryParametersToSwapState(chainId: ChainId, parsedQs: ParsedQs)
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
   const eth = 'FTM'
   // chainId === ChainId.CELO ? WNATIVE_ADDRESS[chainId] : 'FTM'
-  const soul = SOUL_ADDRESS[chainId]
+  const soul = SOUL[chainId].address
   if (inputCurrency === '' && outputCurrency === '') {
     inputCurrency = eth
     outputCurrency = soul
@@ -188,9 +188,9 @@ export const useLimitOrderDerivedCurrencies: UseLimitOrderDerivedCurrencies = ()
   const { chainId } = useActiveWeb3React()
   const { inputCurrencyId, outputCurrencyId } = useLimitOrderState()
   const inputCurrency =
-    useCurrency(inputCurrencyId === 'SOUL' ? SOUL_ADDRESS[chainId || 250] : inputCurrencyId) ?? undefined
+    useCurrency(inputCurrencyId === 'SOUL' ? SOUL[chainId].address : inputCurrencyId) ?? undefined
   const outputCurrency =
-    useCurrency(outputCurrencyId === 'SOUL' ? SOUL_ADDRESS[chainId || 250] : outputCurrencyId) ?? undefined
+    useCurrency(outputCurrencyId === 'SOUL' ? SOUL[chainId].address : outputCurrencyId) ?? undefined
 
   return useMemo(() => {
     return {

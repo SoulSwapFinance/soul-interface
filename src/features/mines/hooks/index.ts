@@ -77,7 +77,7 @@ export function usePendingSoul(farm) {
 
   const amount = value ? JSBI.BigInt(value.toString()) : undefined
 
-  return amount ? CurrencyAmount.fromRawAmount(SOUL[250], amount) : undefined
+  return amount ? CurrencyAmount.fromRawAmount(SOUL[chainId], amount) : undefined
 }
 
 export function usePendingToken(farm, contract) {

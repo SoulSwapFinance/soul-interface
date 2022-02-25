@@ -1,6 +1,6 @@
 import { ChainId } from '../sdk'
 
-type AddressMap = { [chainId: number]: string }
+type AddressMap = { [chainId in ChainId]: string }
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
@@ -14,6 +14,9 @@ export const TIMELOCK_ADDRESS = '0x1a9C8182C09F50C8318d769245beA52c32BE35BC'
 
 export const ARCHER_ROUTER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x9917C083FF9FbD29Df1367FBF7F2388A9a202431',
+  56: undefined,
+  250: undefined,
+  4002: undefined
 }
 
 export const FACTORY_ADDRESS = {
@@ -120,12 +123,16 @@ export const ZAPPER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0xcff6eF0B9916682B37D80c19cFF8949bc1886bC2',
   // [ChainId.ROPSTEN]: '0xcff6eF0B9916682B37D80c19cFF8949bc1886bC2',
   [ChainId.FANTOM]: '',
+  56: undefined,
+  4002: undefined
 }
 
 // TODO: specify merkle distributor for mainnet
 export const MERKLE_DISTRIBUTOR_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '0xcBE6B83e77cdc011Cc18F6f0Df8444E5783ed982', // TODO: UPDATE
-  [ChainId.FANTOM]: '0xA121b64fd62a99869767650879C5bEc776415a45', // JAN 6TH 2022
+  [ChainId.ETHEREUM]: '0xcBE6B83e77cdc011Cc18F6f0Df8444E5783ed982',
+  [ChainId.FANTOM]: '0xA121b64fd62a99869767650879C5bEc776415a45',
+  56: undefined,
+  4002: undefined
 }
 
 export const MULTICALL2_ADDRESS: AddressMap = {

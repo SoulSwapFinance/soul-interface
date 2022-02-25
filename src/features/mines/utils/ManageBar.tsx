@@ -30,7 +30,7 @@ import { usePrice } from 'hooks/usePrice'
 
 const ManageBar = ({ farm }) => {
   const dispatch = useAppDispatch()
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const { setContent } = useMineListItemDetailsModal()
   const [toggle, setToggle] = useState(true)
   // const [value, setValue] = useState<string>()
@@ -43,14 +43,14 @@ const ManageBar = ({ farm }) => {
   const liquidityToken = 
   
   farm.pair.token1 ? new Token(
-    250,
+    chainId,
     getAddress(farm.lpToken),
     18,
     'SOUL-LP'
     // farm.pair.type === PairType.UNDERWORLD ? Number(farm.pair.asset.decimals) : 18,
     // farm.pair.type === PairType.UNDERWORLD ? 'UMP' : 'SLP'
   ) : new Token(
-    250,
+    chainId,
     getAddress(farm.lpToken),
     18,
     'SOUL'
@@ -63,7 +63,7 @@ const ManageBar = ({ farm }) => {
   // const parsedValue = tryParseAmount(value, liquidityToken)
   const parsedDepositValue = tryParseAmount(depositValue, liquidityToken)
   const parsedWithdrawValue = tryParseAmount(withdrawValue, liquidityToken)
-  const [approvalState, approve] = useApproveCallback(parsedDepositValue, SOUL_SUMMONER_ADDRESS[250])
+  const [approvalState, approve] = useApproveCallback(parsedDepositValue, SOUL_SUMMONER_ADDRESS[chainId])
   
   let token0 = useCurrency(farm.pair.token0?.id)
   let token1 = useCurrency(farm.pair.token1?.id)
@@ -84,7 +84,7 @@ const ManageBar = ({ farm }) => {
     : undefined
   const isWithdrawValid = !withdrawError
 
-  const soulPrice = usePrice(SOUL_ADDRESS[250])
+  const soulPrice = usePrice(SOUL_ADDRESS[chainId])
 
   return (
     <>

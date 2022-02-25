@@ -79,7 +79,6 @@ export function useSearchInactiveTokenLists(search: string | undefined, minResul
       if (!list) continue
       for (const tokenInfo of list.tokens) {
         if (tokenInfo.chainId === chainId && tokenFilter(tokenInfo)) {
-          // @ts-ignore TYPE NEEDS FIXING
           const wrapped = new WrappedTokenInfo(tokenInfo, list)
           if (!(wrapped.address in activeTokens) && !addressSet[wrapped.address]) {
             addressSet[wrapped.address] = true
@@ -186,22 +185,19 @@ export function useCurrency(currencyId: string | undefined): Currency | null | u
 
   const isETH = currencyId?.toUpperCase() === 'FTM'
 
-  // @ts-ignore TYPE NEEDS FIXING
-  const isDual = false
+  // const isDual = false
   // = [ChainId.CELO].includes(chainId)
 
-  const useNative = isETH && !isDual
+  const useNative = isETH // && !isDual
 
-  if (isETH && isDual) {
-    // @ts-ignore TYPE NEEDS FIXING
-    currencyId = WNATIVE_ADDRESS[chainId]
-  }
+  // if (isETH && isDual) {
+  //   currencyId = WNATIVE_ADDRESS[chainId]
+  // }
 
   const token = useToken(useNative ? undefined : currencyId)
 
   const { native, wnative } = useMemo(
     () => ({
-      // @ts-ignore TYPE NEEDS FIXING
       native: chainId && chainId in NATIVE ? NATIVE[chainId] : undefined,
       wnative: chainId && chainId in WNATIVE ? WNATIVE[chainId] : undefined,
     }),

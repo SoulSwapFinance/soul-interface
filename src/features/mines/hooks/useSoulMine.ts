@@ -558,9 +558,9 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
       // check token1 && token2 name for base pair + fetch total value
       if (token1Name === 'FUSD' || token2Name === 'FUSD') {
         totalLpValue = token1Name === 'FUSD' ? ethers.utils.formatUnits(token1Bal) : ethers.utils.formatUnits(token2Bal)
-      } else if (token1Name === 'FTM' || token2Name === 'FTM') {
+      } else if (token1Name === 'FTM' || token2Name === 'FTM' || token1Name === 'WFTM' || token2Name === 'WFTM') {
         totalLpValue =
-          token1Name === 'FTM' ? ethers.utils.formatUnits(token1Bal) : ethers.utils.formatUnits(token2Bal.mul(2))
+          (token1Name === 'FTM' || token1Name === 'WFTM') ? ethers.utils.formatUnits(token1Bal) : ethers.utils.formatUnits(token2Bal.mul(2))
       } else if (token1Name === 'SOUL' || token2Name === 'SOUL') {
         const soulPrice = await fusdPerSoul()
         totalLpValue =

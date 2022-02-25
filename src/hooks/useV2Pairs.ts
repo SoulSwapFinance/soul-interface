@@ -1,10 +1,10 @@
-import { ChainId, computePairAddress, Currency, CurrencyAmount, Pair, Token } from '../sdk'
+import { ChainId, computePairAddress, Currency, CurrencyAmount, Pair, SOUL, Token } from '../sdk'
 
 import ISoulSwapPair from '../constants/abis/soulswap/ISoulSwapPair.json'
 import { Interface } from '@ethersproject/abi'
 import { useContext, useMemo } from 'react'
 import { useMultipleContractSingleData, useSingleCallResult } from '../state/multicall/hooks'
-import { SOUL_ADDRESS, FACTORY_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS, SOUL_DAO_ADDRESS, LUX_TREASURY_ADDRESS } from '../constants'
+import { FACTORY_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS, SOUL_DAO_ADDRESS, LUX_TREASURY_ADDRESS } from '../constants'
 import { PriceContext } from '../contexts/priceContext'
 import { POOLS, TokenInfo } from '../constants/farms'
 import { concat } from 'lodash'
@@ -119,7 +119,7 @@ export function useVaultTVL(): TVLInfo[] {
   return useMemo(() => {
     function isKnownToken(token: TokenInfo) {
       return (
-        token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
+        token.id.toLowerCase() == SOUL[chainId].address.toLowerCase() ||
         token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' || token.symbol == 'FTM' ||
         token.symbol == 'SEANCE' ||
@@ -128,7 +128,7 @@ export function useVaultTVL(): TVLInfo[] {
     }
 
     function getPrice(token: TokenInfo) {
-      if (token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase()) {
+      if (token.id.toLowerCase() == SOUL[chainId].address.toLowerCase()) {
         return soulPrice
       }
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {
@@ -268,7 +268,7 @@ export function useTVL(): TVLInfo[] {
   return useMemo(() => {
     function isKnownToken(token: TokenInfo) {
       return (
-        token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
+        token.id.toLowerCase() == SOUL[chainId].address.toLowerCase() ||
         token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' ||
         token.symbol == 'LUX' ||
@@ -426,7 +426,7 @@ export function useBondTVL(): TVLInfo[] {
   return useMemo(() => {
     function isKnownToken(token: TokenInfo) {
       return (
-        token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
+        token.id.toLowerCase() == SOUL[chainId].address.toLowerCase() ||
         token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' ||
         token.symbol == 'LUX' ||
@@ -562,11 +562,12 @@ export function useSoulTVL(): TVLInfo[] {
   return useMemo(() => {
     function isKnownToken(token: TokenInfo) {
       return (
-        token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
+        token.id.toLowerCase() == SOUL[chainId].address.toLowerCase() ||
         token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' ||
         token.symbol == 'LUX' ||
         token.symbol == 'FTM' ||
+        token.symbol == 'WFTM' ||
         token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
         token.symbol == 'fUSDT' ||
@@ -577,7 +578,9 @@ export function useSoulTVL(): TVLInfo[] {
     }
 
     function getPrice(token: TokenInfo) {
-      if (token.symbol == 'SOUL') {
+      
+      if (token.symbol == 'SOUL' || token.id.toLowerCase() == SOUL[chainId].address.toLowerCase())
+      {
         return soulPrice
       }
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {
@@ -699,7 +702,7 @@ export function useLuxTVL(): TVLInfo[] {
   return useMemo(() => {
     function isKnownToken(token: TokenInfo) {
       return (
-        token.id.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
+        token.id.toLowerCase() == SOUL[chainId].address.toLowerCase() ||
         token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' ||
         token.symbol == 'LUX' ||
@@ -843,22 +846,17 @@ export function useV2PairsWithPrice(
   const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
   const totalSupply = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'totalSupply')
 
-  // const priceData = useContext(PriceContext)
-  // const soulPrice = priceData?.['soul']
-  // const ftmPrice = priceData?.['ftm']
-  // const seancePrice = priceData?.['seance']
-
   return useMemo(() => {
     function isKnownToken(token: Token) {
       return (
-        token.address.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() ||
+        token.address.toLowerCase() == SOUL[chainId].address.toLowerCase() ||
         token.symbol == 'WFTM' || token.symbol == 'FTM' || token.symbol == 'SEANCE' || token.symbol == 'WETH' ||
         token.symbol == 'USDC' || token.symbol == 'fUSDT' || token.symbol == 'DAI'
       )
     }
 
     function getPrice(token: Token) {
-      if (token.address.toLowerCase() == SOUL_ADDRESS[chainId].toLowerCase() || token.symbol == 'SOUL') {
+      if (token.address.toLowerCase() == SOUL[chainId].address.toLowerCase() || token.symbol == 'SOUL') {
         return soulPrice
       }
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {

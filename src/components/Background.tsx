@@ -32,7 +32,7 @@ const IMAGE_URL = {
   },
   'bg-bubble': {
     type: ImageType.REPEAT,
-    url: 'i/mages/trident/bubble-pattern.png',
+    url: '/images/trident/bubble-pattern.png',
   },
   'bg-dots': {
     type: ImageType.REPEAT,

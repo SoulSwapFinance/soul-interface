@@ -27,7 +27,7 @@ export const POOLS: AddressMap = {
       id: 0,
       token0: {
         id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
-        name: 'SoulPower',
+        name: 'Soul Power',
         symbol: 'SOUL',
         decimals: 18,
       },
@@ -42,7 +42,7 @@ export const POOLS: AddressMap = {
       },
       token1: {
         id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
-        name: 'SoulPower',
+        name: 'Soul Power',
         symbol: 'SOUL',
         decimals: 18,
       },
@@ -72,7 +72,7 @@ export const POOLS: AddressMap = {
       },
       token1: {
         id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
-        name: 'SoulPower',
+        name: 'Soul Power',
         symbol: 'SOUL',
         decimals: 18,
       },
@@ -96,14 +96,14 @@ export const POOLS: AddressMap = {
       id: 5, // 600
       token0: {
         id: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', // SEANCE
-        name: 'SeanceCircle',
+        name: 'Seance Circle',
         symbol: 'SEANCE',
         decimals: 18,
 
       },
       token1: {
         id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
-        name: 'SoulPower',
+        name: 'Soul Power',
         symbol: 'SOUL',
         decimals: 18,
       },
@@ -133,7 +133,7 @@ export const POOLS: AddressMap = {
       },
       token1: { // SEANCE
         id: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', // SEANCE
-        name: 'SeaceCircle',
+        name: 'Seance Circle',
         symbol: 'SEANCE',
         decimals: 18,
       },
@@ -172,7 +172,7 @@ export const POOLS: AddressMap = {
       id: 10, // 1200
       token0: {
         id: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', // SEANCE
-        name: 'SeaceCircle',
+        name: 'Seance Circle',
         symbol: 'SEANCE',
         decimals: 18,
       },
@@ -352,7 +352,7 @@ export const POOLS: AddressMap = {
       id: 22, // 600
       token0: {
         id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
-        name: 'SoulPower',
+        name: 'Soul Power',
         symbol: 'SOUL',
         decimals: 18,
       },

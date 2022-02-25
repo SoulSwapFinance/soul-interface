@@ -12,15 +12,15 @@ export const BSC: { [key: string]: Token } = {
 }
   
 export const FANTOM: { [key: string]: Token } = {
-
-  SOUL: new Token(ChainId.FANTOM, '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', 18, 'SOUL', 'SoulPower'), // 27 AUG
-  SEANCE: new Token(ChainId.FANTOM, '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', 18, 'SEANCE', 'SeanceCircle'), // 27 AUG
+  SOUL: new Token(ChainId.FANTOM, '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', 18, 'SOUL', 'Soul Power'), // 27 AUG
+  WFTM: new Token(ChainId.FANTOM, '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', 18, 'WFTM', 'Wrapped Fantom'), // 27 AUG
+  SEANCE: new Token(ChainId.FANTOM, '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', 18, 'SEANCE', 'Seance Circle'), // 27 AUG
   LUX: new Token(ChainId.FANTOM, '0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b', 9, 'LUX', 'Luxor Money'),
   WLUM: new Token(ChainId.FANTOM, '0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208', 9, 'WLUM', 'Wrapped Lumens'),
   USDC: new Token(ChainId.FANTOM, '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6, 'USDC', 'USD Coin'),
   WBTC: new Token(ChainId.FANTOM, '0x321162Cd933E2Be498Cd2267a90534A804051b11', 8, 'WBTC', 'Wrapped Bitcoin'),
   DAI: new Token(ChainId.FANTOM, '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', 18, 'DAI', 'Dai Stablecoin'),
-  GRIMEVO: new Token(ChainId.FANTOM, '0x0a77866C01429941BFC7854c0c0675dB1015218b', 18, 'GRIM EVO', 'Grim EVO'),
+  GRIMEVO: new Token(ChainId.FANTOM, '0x0a77866C01429941BFC7854c0c0675dB1015218b', 18, 'GRIMEVO', 'Grim EVO'),
   USDT: new Token(ChainId.FANTOM, '0x049d68029688eAbF473097a2fC38ef61633A3C7A', 6, 'fUSDT', 'Frapped USDT'),
   fUSDT: new Token(ChainId.FANTOM, '0x049d68029688eAbF473097a2fC38ef61633A3C7A', 6, 'fUSDT', 'Frapped USDT'),
   gFUSDT: new Token(ChainId.FANTOM, '0x940F41F0ec9ba1A34CF001cc03347ac092F5F6B5', 6, 'gFUSDT', 'Geist fUSDT'),
@@ -29,13 +29,11 @@ export const FANTOM: { [key: string]: Token } = {
   MIM: new Token(ChainId.FANTOM, '0x82f0B8B456c1A451378467398982d4834b6829c1', 18, 'MIM', 'Magic Internet Money'),
   ENCHANT: new Token(ChainId.FANTOM, '0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a', 18, 'ENCHANT', 'Enchantment'),
   SPELL: new Token(ChainId.FANTOM, '0x468003B688943977e6130F4F68F23aad939a1040', 18, 'SPELL', 'Spell Token'),
-  
-  
 }
 
 export const FANTOM_TESTNET: { [key: string]: Token } = {
-  SOUL: new Token(ChainId.FANTOM_TESTNET, '0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5', 18, 'SOUL', 'SoulPower'), // 30 JUL
-  SEANCE: new Token(ChainId.FANTOM_TESTNET, '0xD858E1a257Cb595Ba395520daD4c9C9592307734', 18, 'SEANCE', 'SeanceCircle'), // 30 JUL
+  SOUL: new Token(ChainId.FANTOM_TESTNET, '0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5', 18, 'SOUL', 'Soul Power'), // 30 JUL
+  SEANCE: new Token(ChainId.FANTOM_TESTNET, '0xD858E1a257Cb595Ba395520daD4c9C9592307734', 18, 'SEANCE', 'Seance Circle'), // 30 JUL
   FUSD: new Token(ChainId.FANTOM_TESTNET, '0x306557358e20AEa124b16a548597897858D13cb2', 18, 'FUSD', 'Fantom USD'), // 31 JUL
   FETH: new Token(ChainId.FANTOM_TESTNET, '0x910a38cE2a26278c3493A95fe83e092aE821dF26', 18, 'fETH', 'Fantom Synthetic ETH'), // 31 JUL
   WBTC: new Token(ChainId.FANTOM_TESTNET, '0x2Eb4Ee20d9816Bd6810F69166dD046F09C737201', 18, 'fBTC', 'Fantom Synthetic BTC'),
@@ -143,7 +141,7 @@ type ChainTokenMap = {
 
 // SOUL
 export const SOUL: ChainTokenMap = {
-  // [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, SOUL_ADDRESS[ChainId.ETHEREUM], 18, 'SOUL', 'SoulPower'),
+  // [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, SOUL_ADDRESS[ChainId.ETHEREUM], 18, 'SOUL', 'Soul Power'),
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', 18, 'SOUL', 'Soul Power'), // 27 AUG
   [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5', 18, 'SOUL', 'Soul Power'), // 31 JUL
 }
@@ -214,7 +212,7 @@ export const REAPER: ChainTokenMap = {
 
 // WFTM
 export const WFTM: ChainTokenMap = {
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', 18, 'FTM', 'Wrapped Fantom')
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', 18, 'WFTM', 'Wrapped Fantom')
 }
 
 // USDT
@@ -230,7 +228,7 @@ export const DAI: ChainTokenMap = {
 // SEANCE
 export const SEANCE: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', 18, 'SEANCE', 'Seance Circle'),  // 31 JUL
-  [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '0xD54Cf31D5653F4a062f5DA4C83170A5867d04442', 18, 'SEANCE', 'SeanceCircle'),  // 31 JUL
+  [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '0xD54Cf31D5653F4a062f5DA4C83170A5867d04442', 18, 'SEANCE', 'Seance Circle'),  // 31 JUL
 }
 
 // AURA
@@ -247,22 +245,22 @@ export const ENCHANT: ChainTokenMap = {
 export const WETH9_EXTENDED: { [chainId: number]: Token } = {
   ...WETH9,
   // 
-
-  // [SupportedChainId.ETHEREUM]: new Token(
-  //   ChainId.ETHEREUM,
-  //   '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
-  //   18,
-  //   'WETH',
-  //   'Wrapped Ethereum'
-  // ),
-
-  [SupportedChainId.FANTOM]: new Token(
-    ChainId.FANTOM,
-    '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
+  [SupportedChainId.ETHEREUM]: new Token(
+    ChainId.ETHEREUM,
+    '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
     18,
-    'WFTM',
-    'Wrapped Fantom'
+    'WETH',
+    'Wrapped Ethereum'
   ),
+  // [SupportedChainId.FANTOM]: new Token(
+  //   ChainId.FANTOM,
+  //   '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
+  //   18,
+  //   'WFTM',
+  //   'Wrapped Fantom'
+  // ),
+  // 56: undefined,
+  // 4002: undefined
 }
 
 export class ExtendedEther extends Ether {

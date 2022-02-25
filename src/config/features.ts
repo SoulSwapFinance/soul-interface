@@ -34,19 +34,6 @@ const features: FeatureMap = {
   ],
 
   [ChainId.FANTOM_TESTNET]: [Feature.AMM],
-  
-//   [ChainId.MATIC_TESTNET]: [Feature.AMM],
-//   [ChainId.HARMONY]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.ANALYTICS],
-//   [ChainId.HARMONY_TESTNET]: [Feature.AMM],
-//   [ChainId.AVALANCHE]: [Feature.AMM, Feature.COFFINBOX, Feature.UNDERWORLD, Feature.LIMIT_ORDERS],
-//   [ChainId.AVALANCHE_TESTNET]: [Feature.AMM],
-//   [ChainId.OKEX]: [Feature.AMM],
-//   [ChainId.OKEX_TESTNET]: [Feature.AMM],
-//   [ChainId.XDAI]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.ANALYTICS, Feature.COFFINBOX, Feature.UNDERWORLD],
-//   [ChainId.MOONRIVER]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.ANALYTICS],
-//   [ChainId.CELO]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.ANALYTICS],
-//   [ChainId.ARBITRUM]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.ANALYTICS, Feature.COFFINBOX, Feature.UNDERWORLD],
-//   [ChainId.FUSE]: [Feature.AMM, Feature.LIQUIDITY_MINING, Feature.ANALYTICS],
 }
 
 export default features

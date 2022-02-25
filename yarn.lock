@@ -13356,9 +13356,9 @@ graph-results-pager@^1.0.3:
   dependencies:
     node-fetch "2.6.1"
 
-"graph-results-pager@git+https://github.com/LufyCZ/graph-results-pager.git":
+"graph-results-pager@https://github.com/LufyCZ/graph-results-pager":
   version "1.0.3"
-  resolved "git+https://github.com/LufyCZ/graph-results-pager.git#9b230f05b8d79aeedc9e167ac5a1fea33e04d51f"
+  resolved "https://github.com/LufyCZ/graph-results-pager#9b230f05b8d79aeedc9e167ac5a1fea33e04d51f"
   dependencies:
     node-fetch "2.6.1"
 

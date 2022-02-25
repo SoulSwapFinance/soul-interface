@@ -66,7 +66,7 @@ const TokenLogo = styled(Image)`
 `
 
 const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
-  const { account, chainId } = useActiveWeb3React() // chainId
+  const { account, chainId } = useActiveWeb3React()
 
   const {
     // helper contract
@@ -393,12 +393,12 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     fontSize="1.2rem"
                     target="_blank"
                     color="#F36FFE" // neon purple
-                    href={`https://exchange.soulswap.finance/add/${bond.token1Address[250]}/${bond.token2Address[250]}`}
+                    href={`https://exchange.soulswap.finance/add/${bond.token1Address[chainId]}/${bond.token2Address[chainId]}`}
                   >
                     <TokenLogo
                       src={
                         'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
-                        bond.token1Address[250] +
+                        bond.token1Address[chainId] +
                         '/logo.png'
                       }
                       alt="LOGO"
@@ -410,7 +410,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     <TokenLogo
                       src={
                         'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
-                        bond.token2Address[250] +
+                        bond.token2Address[chainId] +
                         '/logo.png'
                       }
                       alt="LOGO"
@@ -530,8 +530,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                             color="#F36FFE" // neon purple
                             href=
                             {bond.token1 == 'FTM' ?
-                              `https://exchange.soulswap.finance/add/FTM/${bond.token2Address[250]}`
-                              : `https://exchange.soulswap.finance/add/FTM/${bond.token1Address[250]}`
+                              `https://exchange.soulswap.finance/add/FTM/${bond.token2Address[chainId]}`
+                              : `https://exchange.soulswap.finance/add/FTM/${bond.token1Address[chainId]}`
                             }
                           >
                             CLICK HERE TO CREATE {bond.token1}-{bond.token2} PAIR
@@ -542,7 +542,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                             rel="noopener"
                             text-color="#F36FFE" // neon purple
                             href=
-                            {`https://exchange.soulswap.finance/add/${bond.token1Address[250]}/${bond.token2Address[250]}`}
+                            {`https://exchange.soulswap.finance/add/${bond.token1Address[chainId]}/${bond.token2Address[chainId]}`}
                           >
                             CREATE {bond.token1}-{bond.token2} PAIR
                           </TokenPairLink>
