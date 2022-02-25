@@ -41,29 +41,17 @@ const WRAPPED_NATIVE_ONLY: ChainTokenList = {
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WRAPPED_NATIVE_ONLY,
   [ChainId.ETHEREUM]: [
-    // @ts-ignore TYPE NEEDS FIXING
     ...WRAPPED_NATIVE_ONLY[ChainId.ETHEREUM],
-    // @ts-ignore TYPE NEEDS FIXING
     ETHEREUM.DAI,
-    // @ts-ignore TYPE NEEDS FIXING
     ETHEREUM.USDC,
-    // @ts-ignore TYPE NEEDS FIXING
     ETHEREUM.USDT,
-    // @ts-ignore TYPE NEEDS FIXING
     ETHEREUM.WBTC,
-    // @ts-ignore TYPE NEEDS FIXING
     ETHEREUM.RUNE,
-    // @ts-ignore TYPE NEEDS FIXING
     ETHEREUM.NFTX,
-    // @ts-ignore TYPE NEEDS FIXING
     ETHEREUM.STETH,
-    // @ts-ignore TYPE NEEDS FIXING
     ETHEREUM.OHM_V1,
-    // @ts-ignore TYPE NEEDS FIXING
     ETHEREUM.OHM_V2,
-    // @ts-ignore TYPE NEEDS FIXING
     ETHEREUM.MIM,
-    // @ts-ignore TYPE NEEDS FIXING
     SOUL[ChainId.ETHEREUM],
   ],
 
@@ -137,28 +125,18 @@ export const CUSTOM_BASES: {
  */
 export const COMMON_BASES: ChainTokenList = {
   [ChainId.ETHEREUM]: [
-    // @ts-ignore TYPE NEEDS FIXING
     ...WRAPPED_NATIVE_ONLY[ChainId.ETHEREUM],
-    // @ts-ignore TYPE NEEDS FIXING
     SOUL[ChainId.ETHEREUM],
-    // @ts-ignore TYPE NEEDS FIXING
     ETHEREUM.WBTC,
-    // @ts-ignore TYPE NEEDS FIXING
     ETHEREUM.MIM,
-    // @ts-ignore TYPE NEEDS FIXING
     ETHEREUM.SPELL,
-    // @ts-ignore TYPE NEEDS FIXING
     ETHEREUM.ICE,
-    // @ts-ignore TYPE NEEDS FIXING
     ETHEREUM.USDC,
-    // @ts-ignore TYPE NEEDS FIXING
     ETHEREUM.USDT,
-    // @ts-ignore TYPE NEEDS FIXING
     ETHEREUM.DAI,
   ],
 
   [ChainId.FANTOM]: [
-    // @ts-ignore TYPE NEEDS FIXING
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM],
     SOUL[ChainId.FANTOM],
     FANTOM.WETH,
@@ -170,27 +148,16 @@ export const COMMON_BASES: ChainTokenList = {
   ],
 
   [ChainId.BSC]: [
-    // @ts-ignore TYPE NEEDS FIXING
     ...WRAPPED_NATIVE_ONLY[ChainId.BSC],
-    // @ts-ignore TYPE NEEDS FIXING
     SOUL[ChainId.BSC],
-    // @ts-ignore TYPE NEEDS FIXING
     BSC.WETH,
-    // @ts-ignore TYPE NEEDS FIXING
     BSC.BTCB,
-    // @ts-ignore TYPE NEEDS FIXING
     BSC.MIM,
-    // @ts-ignore TYPE NEEDS FIXING
     BSC.SPELL,
-    // @ts-ignore TYPE NEEDS FIXING
     BSC.ICE,
-    // @ts-ignore TYPE NEEDS FIXING
     BSC.DAI,
-    // @ts-ignore TYPE NEEDS FIXING
     BSC.USDC,
-    // @ts-ignore TYPE NEEDS FIXING
     BSC.USDT,
-    // @ts-ignore TYPE NEEDS FIXING
     BSC.USD,
   ],
 }
@@ -237,7 +204,6 @@ export const PINNED_PAIRS: {
   readonly [chainId in ChainId]?: [Token, Token][]
 } = {
   [ChainId.FANTOM]: [
-    // @ts-ignore TYPE NEEDS FIXING
     [SOUL[ChainId.FANTOM], WNATIVE[ChainId.FANTOM]],
     [
       new Token(ChainId.FANTOM, '0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643', 8, 'cDAI', 'Compound Dai'),
