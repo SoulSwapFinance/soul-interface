@@ -208,6 +208,9 @@ msgstr ""
 msgid "BOND"
 msgstr ""
 
+msgid "BORROW"
+msgstr ""
+
 msgid "Back to Farms"
 msgstr ""
 
@@ -632,9 +635,6 @@ msgstr ""
 msgid "French"
 msgstr ""
 
-msgid "Funding source:"
-msgstr ""
-
 msgid "Gain exposure to tokens without reducing your assets. Leverage will enable you to take short positions against assets and earn from downside movements."
 msgstr ""
 
@@ -682,6 +682,9 @@ msgstr ""
 msgid "Harvest {0}/{1}"
 msgstr ""
 
+msgid "Health"
+msgstr ""
+
 msgid "Historical Total Locked: Connect Wallet"
 msgstr ""
 
@@ -707,6 +710,9 @@ msgid "If you purchase a token from this list, you may not be able to sell it ba
 msgstr ""
 
 msgid "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
+msgstr ""
+
+msgid "If your KMP is staked, you cannot withdraw your lent tokens. You must unstake first."
 msgstr ""
 
 msgid "Import"
@@ -981,6 +987,9 @@ msgid "Number of Assets"
 msgstr ""
 
 msgid "ONLY USE THIS MODE IF YOU KNOW WHAT YOU ARE DOING."
+msgstr ""
+
+msgid "Onchain oracle that tracks pricing for this pair."
 msgstr ""
 
 msgid "Only use this mode if you know what you are doing."
@@ -1440,9 +1449,6 @@ msgstr ""
 msgid "The minimum amount you’ll receive from your transaction, or else the transaction will revert."
 msgstr ""
 
-msgid "The onchain oracle that tracks the pricing for this pair"
-msgstr ""
-
 msgid "The output token cannot be transferred. There may be an issue with the output token."
 msgstr ""
 
@@ -1581,9 +1587,6 @@ msgid "Use one of the buttons to set a percentage or enter a value manually usin
 msgstr ""
 
 msgid "Use the toggle to switch between balances when interacting with our platform."
-msgstr ""
-
-msgid "Utilization"
 msgstr ""
 
 msgid "Utilized"
