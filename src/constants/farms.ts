@@ -779,7 +779,7 @@ export const POOLS: AddressMap = {
         token1: {
           id: '0x0a77866C01429941BFC7854c0c0675dB1015218b', // GRIM EVO
           name: 'Grim EVO',
-          symbol: 'GRIM EVO',
+          symbol: 'GRIMEVO',
           decimals: 18,
         },
       },

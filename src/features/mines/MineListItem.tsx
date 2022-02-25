@@ -112,18 +112,19 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   // console.log('feeApyPerYear: ', farm.feeApyPerYear)
 
   return (
-    <div className={classNames(TABLE_TBODY_TR_CLASSNAME, 'grid grid-cols-4')} onClick={onClick}>
-      <div className={classNames('flex gap-2', TABLE_TBODY_TD_CLASSNAME(0, 4))}>
+    <div className={classNames(TABLE_TBODY_TR_CLASSNAME, 'grid grid-cols-3 sm:grid-cols-4')} onClick={onClick}>
+      {/* <div className={classNames('flex gap-2', TABLE_TBODY_TD_CLASSNAME(0, 4))}> */}
+      <div className="flex gap-2 items-center">
 
         { /* TOKEN-LOGO */}
 
-        {token1 ? <CurrencyLogoArray currencies={[token0, token1]} dense size={32} />
+        {token1 ? <CurrencyLogoArray currencies={[token0, token1]} dense size={36} />
           : <CurrencyLogo currency={token0} size={54} />
         }
 
         { /* LP-TOKEN */}
         <div className="flex flex-col items-start">
-          <Typography weight={700} className="flex gap-1 text-high-emphesis">
+          <Typography weight={700} className="hidden sm:flex sm:gap-1 sm:text-high-emphesis">
             {farm.pair.token1 ?
               farm?.pair?.token0?.symbol
               : farm?.pair?.token0?.symbol
@@ -132,20 +133,16 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
               <span className="text-low-emphesis">/</span>
             }
             {farm?.pair?.token1?.symbol}
-
-            { /* PENDING REWARDS (SUBTITLE) */}
-
           </Typography>
           {farm?.rewards?.map((reward, i) => (
             <Typography variant="xs" className="text-low-emphesis">
-              Claimable: {' '}
+              {/* Claimable: {' '} */}
               {formatNumber(rewardValue, true)}
               {/* {formatNumber(pendingSoul?.toSignificant(4) ?? 0)} */}
             </Typography>
           ))}
 
           { /* DAILY REWARDS (SUBTITLE) */}
-
           {/*
           </Typography>
           {farm?.rewards?.map((reward, i) => (
@@ -158,7 +155,9 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
 
         </div>
       </div>
-      <div className={TABLE_TBODY_TD_CLASSNAME(1, 4)}>
+      {/* <div className={TABLE_TBODY_TD_CLASSNAME(1, 4)}> */}
+      <div className="flex justify-center sm:justify-center items-center">
+      {/* <div className="flex flex-col items-start sm:items-center justify-center"> */}
         <Typography weight={700} className="text-high-emphesis">
           {formatNumber(
             // PRICE PER TOKEN * TOKEN BALANCE
@@ -167,8 +166,9 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
           }
         </Typography>
       </div>
-      <div className={classNames('flex flex-col !items-end !justify-center', TABLE_TBODY_TD_CLASSNAME(2, 4))}>
-        {farm?.rewards?.map((reward, i) => (
+      {/* </div> */}
+      <div className={classNames('hidden sm:flex flex-col !items-end !justify-center', TABLE_TBODY_TD_CLASSNAME(2, 4))}>
+      {farm?.rewards?.map((reward, i) => (
           <Typography
             variant="sm"
             weight={700}
