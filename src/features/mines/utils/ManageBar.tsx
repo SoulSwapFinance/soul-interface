@@ -5,6 +5,7 @@ import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
 import { CurrencyAmount, JSBI, SOUL_SUMMONER_ADDRESS, Token, USD } from 'sdk'
 import AssetInput from 'components/AssetInput'
+import CurrencyInputPanel from '../components/CurrencyInputPanel'
 import { Button } from 'components/Button'
 import { HeadlessUiModal } from 'components/Modal'
 import Switch from 'components/Switch'
@@ -136,6 +137,7 @@ const ManageBar = ({ farm }) => {
         <AssetInput
           currencyLogo={ false }
           currency={ liquidityToken }
+          currencyAddress={liquidityToken.address}
           token0={ pair?.token0.address }
           token1={ pair?.token1.address }
           value={ toggle ? depositValue : withdrawValue }
@@ -150,7 +152,7 @@ const ManageBar = ({ farm }) => {
             hideIcon
             onUserInput={(value) => setDepositValue(value)}
             currencyBalance={toggle ? undefined : stakedAmount}
-            fiatValue={balanceFiatValue}
+            // fiatValue={depositValue}
             showMaxButton={false}
           /> */}
       </HeadlessUiModal.BorderedContent>

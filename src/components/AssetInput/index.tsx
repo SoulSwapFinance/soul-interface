@@ -26,6 +26,7 @@ import { FiatValue } from './FiatValue'
 import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 import { useCurrency } from 'hooks/Tokens'
 import { formatCurrency } from 'modals/TokensStatsModal'
+import { WETH_ADDRESS } from 'constants/addresses'
 
 interface AssetInputProps {
   value?: string
@@ -284,6 +285,8 @@ const AssetInputPanel = ({
           >
             ≈{usdcValue ? usdcValue.toSignificant(4) : ( 
               currency.symbol == 'SOUL' ? formatCurrency(tokenPrice * Number(value), 2) :
+              currency.symbol == 'WETH' ? formatCurrency(tokenPrice * Number(value), 2) :
+              currencyAddress == WETH_ADDRESS[250] ? formatCurrency(tokenPrice * Number(value), 2) :
               formatCurrency(pairPrice * Number(value), 2))            
             }
           </Typography>
