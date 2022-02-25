@@ -192,7 +192,6 @@ export function useDerivedSwapInfo(): {
     }
   }
 
-  // @ts-ignore TYPE NEEDS FIXING
   const allowedSlippage = useSwapSlippageTolerance(v2Trade)
 
   // compare input balance to max input based on version

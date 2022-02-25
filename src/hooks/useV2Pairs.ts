@@ -567,6 +567,7 @@ export function useSoulTVL(): TVLInfo[] {
         token.symbol == 'WFTM' ||
         token.symbol == 'LUX' ||
         token.symbol == 'FTM' ||
+        token.symbol == 'WFTM' ||
         token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
         token.symbol == 'fUSDT' ||
@@ -577,7 +578,9 @@ export function useSoulTVL(): TVLInfo[] {
     }
 
     function getPrice(token: TokenInfo) {
-      if (token.symbol == 'SOUL') {
+      
+      if (token.symbol == 'SOUL' || token.id.toLowerCase() == SOUL[chainId].address.toLowerCase())
+      {
         return soulPrice
       }
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {

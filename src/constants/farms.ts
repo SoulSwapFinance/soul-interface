@@ -96,7 +96,7 @@ export const POOLS: AddressMap = {
       id: 5, // 600
       token0: {
         id: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', // SEANCE
-        name: 'SeanceCircle',
+        name: 'Seance Circle',
         symbol: 'SEANCE',
         decimals: 18,
 
@@ -133,7 +133,7 @@ export const POOLS: AddressMap = {
       },
       token1: { // SEANCE
         id: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', // SEANCE
-        name: 'SeaceCircle',
+        name: 'Seance Circle',
         symbol: 'SEANCE',
         decimals: 18,
       },
@@ -172,7 +172,7 @@ export const POOLS: AddressMap = {
       id: 10, // 1200
       token0: {
         id: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', // SEANCE
-        name: 'SeaceCircle',
+        name: 'Seance Circle',
         symbol: 'SEANCE',
         decimals: 18,
       },

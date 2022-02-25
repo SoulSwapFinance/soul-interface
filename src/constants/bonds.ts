@@ -57,7 +57,7 @@ export const BONDS: AddressMap = {
       id: 2, // 1200
       token0: {
         id: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', // SEANCE
-        name: 'SeaceCircle',
+        name: 'Seance Circle',
         symbol: 'SEANCE',
         decimals: 18,
       },

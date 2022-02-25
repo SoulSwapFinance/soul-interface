@@ -247,13 +247,13 @@ const WalletModal: FC<WalletModal> = ({ pendingTransactions, confirmedTransactio
           />
           {walletView === WALLET_VIEWS.PENDING ? (
             <PendingView
-              // @ts-ignore TYPE NEEDS FIXING
               id={pendingWallet.id}
-              // @ts-ignore TYPE NEEDS FIXING
-              connector={pendingWallet.connector}
-              error={pendingError}
-              setPendingError={setPendingError}
-              tryActivation={tryActivation}
+              connector={pendingWallet.connector} 
+              header={''} 
+              subheader={''}              
+              // error={pendingError}
+              // setPendingError={setPendingError}
+              // tryActivation={tryActivation}
             />
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 overflow-y-auto">{options}</div>

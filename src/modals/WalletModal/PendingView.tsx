@@ -3,10 +3,12 @@ import { SUPPORTED_WALLETS } from '../../constants'
 import { classNames } from 'functions'
 import Image from 'next/image'
 import React from 'react'
+import { AbstractConnector } from '@web3-react/abstract-connector'
 
 export default function Option({
   id,
   link = null,
+  connector = null,
   onClick = null,
   header,
   subheader = null,
@@ -15,6 +17,7 @@ export default function Option({
 }: {
   id: string
   link?: string | null
+  connector?: AbstractConnector | null
   size?: number | null
   onClick?: null | (() => void)
   header: React.ReactNode
