@@ -47,9 +47,9 @@ const ManageBar = ({ farm }) => {
     chainId,
     getAddress(farm.lpToken),
     18,
-    'SOUL-LP'
     // farm.pair.type === PairType.UNDERWORLD ? Number(farm.pair.asset.decimals) : 18,
-    // farm.pair.type === PairType.UNDERWORLD ? 'UMP' : 'SLP'
+    farm.id === '48' || farm.id === '49' || farm.id === '51' || farm.id === '52' 
+    ? 'MP' : 'SOUL-LP'
   ) : new Token(
     chainId,
     getAddress(farm.lpToken),
@@ -241,7 +241,6 @@ const ManageBar = ({ farm }) => {
           onClick={async () => {
             try {
               // UMP decimals depend on asset, SLP is always 18
-              // @ts-ignore TYPE NEEDS FIXING
               const tx = await withdraw(farm.id, BigNumber.from(parsedWithdrawValue?.quotient.toString()))
               if (tx?.hash) {
                 setContent(
@@ -271,7 +270,6 @@ const ManageBar = ({ farm }) => {
       onClick={async () => {
         try {
           // UMP decimals depend on asset, SLP is always 18
-          // @ts-ignore TYPE NEEDS FIXING
           const tx = await leaveStaking(BigNumber.from(parsedWithdrawValue?.quotient.toString()))
           if (tx?.hash) {
             setContent(
