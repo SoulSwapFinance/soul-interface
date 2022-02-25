@@ -12,7 +12,6 @@ import { MineModalView, PairType } from './enum'
 import InformationDisclosure from './components/InformationDisclosure'
 import InvestmentDetails from './components/InvestmentDetails'
 import ManageBar from './utils/ManageBar'
-// import ManageUnderworldPair from './ManageUnderworldPair'
 import ManageSwapPair from './utils/ManageSwapPair'
 import ManageUnderworldPair from './utils/ManageUnderworldPair'
 
@@ -25,7 +24,6 @@ interface MineListItemDetailsModal {
 
 const Context = createContext<MineListItemDetailsModal | undefined>(undefined)
 
-// @ts-ignore TYPE NEEDS FIXING
 const MineListItemDetails = ({ farm, onDismiss }) => {
   const { i18n } = useLingui()
   const { view } = useAppSelector(selectMines)
