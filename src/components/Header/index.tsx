@@ -49,7 +49,7 @@ function AppBar(): JSX.Element {
                 <div className="flex items-center">
                     <NavLink 
                     activeClassName="text-purple text-high-emphesis"
-                    href="/exchange/swap">
+                    href="/landing">
                     <Image src="/logo.png" alt="Soul" width="40" height="40" />
                   </NavLink>
 
