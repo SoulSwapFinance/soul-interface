@@ -20,15 +20,18 @@ import React, { useCallback, useState } from 'react'
 const UnderworldDeposit = ({ pair, header }) => {
   const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
-  const [useCoffin, setUseCoffin] = useState<boolean>(false)
+  // const [useCoffin, setUseCoffin] = useState<boolean>(false)
   const assetToken = useCurrency(pair?.asset.address) || undefined
   const [depositValue, setDepositValue] = useState('')
   const assetNative = WNATIVE[chainId || 250].address === pair?.asset.address
   const ethBalance = useETHBalances(assetNative ? [account ?? undefined] : [])
 
-  const balanceAmount = useCoffin
-    ? pair?.asset.coffinBalance
-    : assetNative
+  const balanceAmount 
+  = 
+  // useCoffin
+  //   ? pair?.asset.coffinBalance
+  //   : 
+    assetNative
     ? account
       ? BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
       : undefined
@@ -51,10 +54,12 @@ const UnderworldDeposit = ({ pair, header }) => {
       if (pair?.currentExchangeRate.isZero()) {
         cooker.updateExchangeRate(false, ZERO, ZERO)
       }
-      cooker.addAsset(BigNumber.from(parsedDepositValue?.quotient.toString()), useCoffin)
-      return `${i18n._(t`Deposit`)} ${pair?.asset.tokenInfo.symbol}`
+      // cooker.addAsset(BigNumber.from(parsedDepositValue?.quotient.toString()), useCoffin)
+      cooker.addAsset(BigNumber.from(parsedDepositValue?.quotient.toString()), false)
+      return `${i18n._(t`Deposit`)} ${pair?.token1.symbol}`
     },
-    [i18n, pair?.asset.tokenInfo.symbol, pair?.currentExchangeRate, parsedDepositValue?.quotient, useCoffin]
+    // [i18n, pair?.asset.tokenInfo.symbol, pair?.currentExchangeRate, parsedDepositValue?.quotient, useCoffin]
+    [i18n, pair?.asset.tokenInfo.symbol, pair?.currentExchangeRate, parsedDepositValue?.quotient, false]
   )
 
   const error = !parsedDepositValue
@@ -81,7 +86,8 @@ const UnderworldDeposit = ({ pair, header }) => {
           //     id="switch-spend-from-wallet-a"
           //   />
           // }
-          spendFromWallet={useCoffin}
+          // spendFromWallet={useCoffin}
+          spendFromWallet={true}
           id="add-liquidity-input-tokenb"
         />
       </HeadlessUiModal.BorderedContent>
@@ -109,7 +115,7 @@ const UnderworldDeposit = ({ pair, header }) => {
           {i18n._(t`Approve Underworld`)}
         </Button>
       ) : isValid &&
-        !useCoffin &&
+        // !useCoffin &&
         (tokenApprovalState === ApprovalState.NOT_APPROVED || tokenApprovalState === ApprovalState.PENDING) ? (
         <Button
           loading={tokenApprovalState === ApprovalState.PENDING}

@@ -247,6 +247,11 @@ export function useTVL(): TVLInfo[] {
   const luxPrice = Number(rawLuxPrice) / 1E18
   // console.log(luxPrice)
 
+  const rawEthPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x74b23882a30290451A17c44f4F05243b6b58C76d'])?.result
+  // console.log(Number(rawEthPrice))
+  const wethPrice = Number(rawEthPrice) / 1E18
+  // console.log(wethPrice)
+
   const farmingPools = Object.keys(POOLS[ChainId.FANTOM]).map((key) => {
     return { ...POOLS[ChainId.FANTOM][key], lpToken: key }
   })
@@ -268,7 +273,6 @@ export function useTVL(): TVLInfo[] {
   return useMemo(() => {
     function isKnownToken(token: TokenInfo) {
       return (
-        token.id.toLowerCase() == SOUL[chainId].address.toLowerCase() ||
         token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' ||
         token.symbol == 'LUX' ||
@@ -278,7 +282,8 @@ export function useTVL(): TVLInfo[] {
         token.symbol == 'fUSDT' ||
         token.symbol == 'FUSDT' ||
         token.symbol == 'MIM' ||
-        token.symbol == 'DAI'
+        token.symbol == 'DAI' ||
+        token.symbol == 'WETH'
       )
     }
 
@@ -294,6 +299,9 @@ export function useTVL(): TVLInfo[] {
       }
       if (token.symbol == 'LUX') {
         return luxPrice
+      }
+      if (token.symbol == 'WETH') {
+        return wethPrice
       }
       if (
         token.symbol == 'USDC' || token.symbol == 'fUSDT' || token.symbol == 'DAI' ||
@@ -405,6 +413,11 @@ export function useBondTVL(): TVLInfo[] {
   const luxPrice = Number(rawLuxPrice) / 1E18
   // console.log(luxPrice)
 
+  const rawEthPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x74b23882a30290451A17c44f4F05243b6b58C76d'])?.result
+  // console.log(Number(rawEthPrice))
+  const wethPrice = Number(rawEthPrice) / 1E18
+  // console.log(wethPrice)
+
   const bondingPools = Object.keys(BONDS[ChainId.FANTOM]).map((key) => {
     return { ...BONDS[ChainId.FANTOM][key], lpToken: key }
   })
@@ -436,7 +449,8 @@ export function useBondTVL(): TVLInfo[] {
         token.symbol == 'fUSDT' ||
         token.symbol == 'FUSDT' ||
         token.symbol == 'MIM' ||
-        token.symbol == 'DAI'
+        token.symbol == 'DAI' ||
+        token.symbol == 'WETH'
       )
     }
 
@@ -452,6 +466,9 @@ export function useBondTVL(): TVLInfo[] {
       }
       if (token.symbol == 'LUX') {
         return luxPrice
+      }
+      if (token.symbol == 'WETH') {
+        return wethPrice
       }
       if (
         token.symbol == 'USDC' || token.symbol == 'fUSDT' || token.symbol == 'DAI' ||
@@ -541,6 +558,11 @@ export function useSoulTVL(): TVLInfo[] {
   const luxPrice = Number(rawLuxPrice) / 1E18
   // console.log(luxPrice)
 
+  const rawEthPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x74b23882a30290451A17c44f4F05243b6b58C76d'])?.result
+  // console.log(Number(rawEthPrice))
+  const wethPrice = Number(rawEthPrice) / 1E18
+  // console.log(wethPrice)
+
   const liquidityPools = Object.keys(POOLS[ChainId.FANTOM]).map((key) => {
     return { ...POOLS[ChainId.FANTOM][key], lpToken: key }
   })
@@ -573,7 +595,8 @@ export function useSoulTVL(): TVLInfo[] {
         token.symbol == 'fUSDT' ||
         token.symbol == 'FUSDT' ||
         token.symbol == 'MIM' ||
-        token.symbol == 'DAI'
+        token.symbol == 'DAI' ||
+        token.symbol == 'WETH'
       )
     }
 
@@ -591,6 +614,9 @@ export function useSoulTVL(): TVLInfo[] {
       }
       if (token.symbol == 'LUX') {
         return luxPrice
+      }
+      if (token.symbol == 'WETH') {
+        return wethPrice
       }
       if (
         token.symbol == 'USDC' || token.symbol == 'fUSDT' || token.symbol == 'DAI' ||
@@ -650,6 +676,8 @@ export function useSoulTVL(): TVLInfo[] {
     soulPrice,
     ftmPrice,
     seancePrice,
+    luxPrice,
+    wethPrice,
     totalSupply,
     daoBalanceSingle,
     lpPools,
@@ -680,6 +708,11 @@ export function useLuxTVL(): TVLInfo[] {
   // console.log(Number(rawLuxPrice))
   const luxPrice = Number(rawLuxPrice) / 1E18
   // console.log(luxPrice)
+
+  const rawEthPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x74b23882a30290451A17c44f4F05243b6b58C76d'])?.result
+  // console.log(Number(rawEthPrice))
+  const wethPrice = Number(rawEthPrice) / 1E18
+  // console.log(wethPrice)
 
   const liquidityPools = Object.keys(POOLS[ChainId.FANTOM]).map((key) => {
     return { ...POOLS[ChainId.FANTOM][key], lpToken: key }
@@ -712,7 +745,8 @@ export function useLuxTVL(): TVLInfo[] {
         token.symbol == 'fUSDT' ||
         token.symbol == 'FUSDT' ||
         token.symbol == 'MIM' ||
-        token.symbol == 'DAI'
+        token.symbol == 'DAI' ||
+        token.symbol == 'WETH' 
       )
     }
 
@@ -728,6 +762,9 @@ export function useLuxTVL(): TVLInfo[] {
       }
       if (token.symbol == 'LUX') {
         return luxPrice
+      }
+      if (token.symbol == 'WETH') {
+        return wethPrice
       }
       if (
         token.symbol == 'USDC' || token.symbol == 'fUSDT' || token.symbol == 'DAI' ||
@@ -787,6 +824,8 @@ export function useLuxTVL(): TVLInfo[] {
     soulPrice,
     ftmPrice,
     seancePrice,
+    luxPrice,
+    wethPrice,
     totalSupply,
     daoBalanceSingle,
     lpPools,
@@ -815,10 +854,15 @@ export function useV2PairsWithPrice(
   const seancePrice = Number(rawSeancePrice) / 1E18
   // console.log(seancePrice)
 
+  const rawLuxPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'])?.result
+  // console.log(Number(rawLuxPrice))
+  const luxPrice = Number(rawLuxPrice) / 1E18
+  // console.log(luxPrice)
+
   const rawEthPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x74b23882a30290451A17c44f4F05243b6b58C76d'])?.result
   // console.log(Number(rawEthPrice))
-  const ethPrice = Number(rawEthPrice) / 1E18
-  // console.log(ethPrice)
+  const wethPrice = Number(rawEthPrice) / 1E18
+  // console.log(wethPrice)
 
   const tokens = useMemo(
     () => currencies.map(([currencyA, currencyB]) => [currencyA?.wrapped, currencyB?.wrapped]),
@@ -851,7 +895,7 @@ export function useV2PairsWithPrice(
       return (
         token.address.toLowerCase() == SOUL[chainId].address.toLowerCase() ||
         token.symbol == 'WFTM' || token.symbol == 'FTM' || token.symbol == 'SEANCE' || token.symbol == 'WETH' ||
-        token.symbol == 'USDC' || token.symbol == 'fUSDT' || token.symbol == 'DAI'
+        token.symbol == 'USDC' || token.symbol == 'fUSDT' || token.symbol == 'DAI' || token.symbol == 'LUX' 
       )
     }
 
@@ -863,10 +907,13 @@ export function useV2PairsWithPrice(
         return ftmPrice
       }
       if (token.symbol == 'WETH' || token.symbol == 'ETH') {
-        return ethPrice
+        return wethPrice
       }
-      if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
+      if (token.symbol == 'SEANCE') {
         return seancePrice
+      }
+      if (token.symbol == 'LUX') {
+        return luxPrice
       }
       if (token.symbol == 'USDC' || token.symbol == 'fUSDT' || token.symbol == 'DAI') {
         return 1
@@ -912,7 +959,7 @@ export function useV2PairsWithPrice(
         lpPrice,
       ]
     })
-  }, [results, chainId, soulPrice, ftmPrice, seancePrice, tokens, totalSupply, ethPrice])
+  }, [results, chainId, soulPrice, ftmPrice, luxPrice, seancePrice, tokens, totalSupply, wethPrice])
 }
 
 export function useV2Pair(tokenA?: Currency, tokenB?: Currency): [PairState, Pair | null] {
