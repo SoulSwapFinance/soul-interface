@@ -178,12 +178,12 @@ export default function Borrow({ pair }: BorrowProps) {
   // √ COLLATERAL INPUT
   // console.log('nextUserCollateralValue: %s', Number(nextUserCollateralValue))
   // √ COLLATERAL INPUT
-  console.log('nextUserCollateralAmount: %s', Number(nextUserCollateralAmount))
-  console.log('userCollateralBalance: %s', Number(userCollateralBalance))
-  console.log('userCollateralValue: %s', Number(userCollateralValue))
-  console.log('collateralBalance: %s', Number(collateralBalance))
-  console.log('nextMaxBorrowSafe: %s', Number(nextMaxBorrowSafe))
-  console.log('pair.currentUserBorrowAmount.value: %s', Number(pair.currentUserBorrowAmount.value))
+  // console.log('nextUserCollateralAmount: %s', Number(nextUserCollateralAmount))
+  // console.log('userCollateralBalance: %s', Number(userCollateralBalance))
+  // console.log('userCollateralValue: %s', Number(userCollateralValue))
+  // console.log('collateralBalance: %s', Number(collateralBalance))
+  // console.log('nextMaxBorrowSafe: %s', Number(nextMaxBorrowSafe))
+  // console.log('pair.currentUserBorrowAmount.value: %s', Number(pair.currentUserBorrowAmount.value))
   // console.log('nextMaxBorrowableOracle:%s', nextMaxBorrowableOracle)
   // console.log('nextMaxBorrowMinimum:%s', Number(nextMaxBorrowMinimum))
   // console.log('nextMaxBorrowableSpot:%s', nextMaxBorrowableSpot)

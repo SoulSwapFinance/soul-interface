@@ -187,7 +187,7 @@ export default function TokenStatsStandalone({
         }
 
         if (option.mobile) {
-        // if (!window.web3 && !window.ethereum && option.mobile) {
+        if (!window.web3 && !window.ethereum && option.mobile) {
           return (
             <Option
               onClick={() => {
@@ -210,7 +210,7 @@ export default function TokenStatsStandalone({
       // overwrite injected when needed
       if (option.connector === injected) {
         // don't show injected if there's no injected provider
-        // if (!(window.web3 || window.ethereum)) {
+        if (!(window.web3 || window.ethereum)) {
           if (option.name === 'MetaMask') {
             return (
               <Option
@@ -239,14 +239,15 @@ export default function TokenStatsStandalone({
             return null // dont want to return install twice
           }
         }
-        // don't return metamask if injected provider isn't metamask
-        else if (option.name === 'MetaMask' && !isMetamask) {
-          return null
+          // don't return metamask if injected provider isn't metamask
+          else if (option.name === 'MetaMask' && !isMetamask) {
+            return null
+          }
+          // likewise for generic
+          else if (option.name === 'Injected' && isMetamask) {
+            return null
+          }
         }
-        // likewise for generic
-        else if (option.name === 'Injected' && isMetamask) {
-          return null
-        // }
       }
 
       // return rest of options
@@ -334,7 +335,7 @@ export default function TokenStatsStandalone({
           {walletView !== WALLET_VIEWS.PENDING && (
             <Blurb>
               <span>New to Crypto? &nbsp;</span>{' '}
-              <ExternalLink href="https://ethereum.org/wallets/">Learn more about wallets</ExternalLink>
+              <ExternalLink href="https://docs.fantom.foundation/tutorials/set-up-metamask/">Learn more about wallets</ExternalLink>
             </Blurb>
           )}
         </ContentWrapper>

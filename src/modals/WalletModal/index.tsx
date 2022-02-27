@@ -135,7 +135,7 @@ const WalletModal: FC<WalletModal> = ({ pendingTransactions, confirmedTransactio
 
         if
           (
-          // !window.web3 && !window.ethereum && 
+          !window.web3 && !window.ethereum && 
           option.mobile
         ) {
           return (
