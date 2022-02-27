@@ -71,7 +71,7 @@ const MineListItemDetails = ({ farm, onDismiss }) => {
           <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Position ? 'block' : 'hidden')}>
             <InvestmentDetails farm={farm} />
           </div>
-          {/* {farm.pair.token1 && */}
+          {farm.pair.token1 &&
             <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Liquidity ? 'block' : 'hidden')}>
               {
               (farm.pair?.id == "48" || farm.pair?.id == "49" ||
@@ -80,10 +80,7 @@ const MineListItemDetails = ({ farm, onDismiss }) => {
               : <ManageSwapPair farm={farm} />
               }
             </div>
-          {/* } */}
-          {/* <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Liquidity ? 'block' : 'hidden')}>
-            {farm.pair.type === PairType.UNDERWORLD ? <ManageUnderworldPair farm={farm} /> : <ManageSwapPair farm={farm} />}
-          </div> */}
+          }
           <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Staking ? 'block' : 'hidden')}>
             <ManageBar farm={farm} />
           </div>
