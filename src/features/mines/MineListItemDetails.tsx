@@ -55,7 +55,7 @@ const MineListItemDetails = ({ farm, onDismiss }) => {
             variant="filled"
           >
 
-            {farm.pair.token1 && (
+            {farm.pair.token1 && farm.pair.type !== "underworld" && (
               <ToggleButtonGroup.Button value={MineModalView.Liquidity}>
                 {
                   (farm.pair?.id == "48" || farm.pair?.id == "49" ||
@@ -71,13 +71,14 @@ const MineListItemDetails = ({ farm, onDismiss }) => {
           <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Position ? 'block' : 'hidden')}>
             <InvestmentDetails farm={farm} />
           </div>
-          {farm.pair.token1 &&
+          {farm.pair.token1 && farm.pair.type !== "underworld" &&
             <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Liquidity ? 'block' : 'hidden')}>
               {
-              (farm.pair?.id == "48" || farm.pair?.id == "49" ||
-              farm.pair?.id == "51" || farm.pair?.id == "52"
-              ) ? <ManageUnderworldPair farm={farm} />
-              : <ManageSwapPair farm={farm} />
+              // (farm.pair?.id == "48" || farm.pair?.id == "49" ||
+              // farm.pair?.id == "51" || farm.pair?.id == "52"
+              // ) ? <ManageUnderworldPair farm={farm} />
+              // : 
+               <ManageSwapPair farm={farm} />
               }
             </div>
           }

@@ -79,7 +79,7 @@ const InformationDisclosure = ({ farm }) => {
           </Typography>
         </>
         )}
-        {farm.pair.id === "0" && (
+        {farm.id === "0" && (
         <>
           <Typography variant="xs">
             {i18n._(t`Deposit`)}
