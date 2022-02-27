@@ -59,7 +59,7 @@ const UnderworldDeposit = ({ pair, header }) => {
       return `${i18n._(t`Deposit`)} ${pair?.token1.symbol}`
     },
     // [i18n, pair?.asset.tokenInfo.symbol, pair?.currentExchangeRate, parsedDepositValue?.quotient, useCoffin]
-    [i18n, pair?.asset.tokenInfo.symbol, pair?.currentExchangeRate, parsedDepositValue?.quotient, false]
+    [i18n, pair?.asset.tokenInfo.symbol, pair?.currentExchangeRate, parsedDepositValue?.quotient]
   )
 
   const error = !parsedDepositValue
@@ -87,7 +87,7 @@ const UnderworldDeposit = ({ pair, header }) => {
           //   />
           // }
           // spendFromWallet={useCoffin}
-          spendFromWallet={true}
+          // spendFromWallet={}
           id="add-liquidity-input-tokenb"
         />
       </HeadlessUiModal.BorderedContent>

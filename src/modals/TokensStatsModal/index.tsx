@@ -46,10 +46,10 @@ export default function SoulStatsModal(): JSX.Element | null {
   let seanceInfo = useTokenInfo(useSeanceContract())
   // let auraInfo = useTokenInfo(useAuraContract())
     
-   const auraBalance = useTokenBalance(account ??    undefined, AURA[chainId])
+  const auraBalance = useTokenBalance(account ?? undefined, AURA[250])
    
-    const soulPrice = usePrice(SOUL[chainId]?.address)
-  const seancePrice = usePrice(SEANCE_ADDRESS[chainId])
+  const soulPrice = usePrice(SOUL[250]?.address)
+  const seancePrice = usePrice(SEANCE_ADDRESS[250])
   const tvlInfo = useTVL()
   const bondInfo = useBondTVL()
   const vaultInfo = useVaultTVL()
@@ -145,7 +145,7 @@ export default function SoulStatsModal(): JSX.Element | null {
                 const params: any = {
                   type: 'ERC20',
                   options: {
-                    address: SEANCE_ADDRESS[chainId],
+                    address: SEANCE_ADDRESS[250],
                     symbol: 'SEANCE',
                     decimals: 18,
                     image: 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x124B06C5ce47De7A6e9EFDA71a946717130079E6/logo.png',
@@ -190,7 +190,7 @@ export default function SoulStatsModal(): JSX.Element | null {
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Voting Power`}
           </Typography>,
-      auraBalance?.toSignificant(4).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        auraBalance?.toSignificant(4).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             )}
          {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
