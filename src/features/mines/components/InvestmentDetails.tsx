@@ -33,7 +33,7 @@ const InvestmentDetails = ({ farm }) => {
   let token0 = useCurrency(farm.pair.token0?.id)
   let token1 = useCurrency(farm.pair.token1?.id)
 
-  const soulPrice = usePrice(SOUL_ADDRESS[chainId])
+  const tokenPrice = usePrice(farm.pair.token0.id)
 
   const liquidityToken = new Token(
     chainId,
@@ -135,19 +135,19 @@ const InvestmentDetails = ({ farm }) => {
         <div className="flex justify-between">
           <div className="flex flex-col justify-center space-y-2">
             <div className="flex items-center space-x-2">
-              <CurrencyLogo currency={token0} size="30px" />
+              <CurrencyLogo currency={ token0 } size="30px" />
               {/* {(
                 <Typography>
                 {formatNumber((farm.pair?.reserve0 * Number(stakedAmount?.toExact() ?? 0)) / farm.pair?.totalSupply)}
                 </Typography>
               )} */}
-              <Typography>{token0?.symbol}</Typography>
+              <Typography>{ token0.symbol }</Typography>
                { token1?.symbol ?
               <Typography>{' ('}{formatNumber(Number(pairPrice) / 2 * Number(stakedAmount?.toSignificant(2)), true)}{') '}</Typography>
-              : <Typography>{' ('}{formatNumber(Number(soulPrice) * Number(stakedAmount?.toSignificant(2)), true)}{') '}</Typography>
+              : <Typography>{' ('}{formatNumber(Number(tokenPrice) * Number(stakedAmount?.toSignificant(2)), true)}{') '}</Typography>
               }
             </div>
-            {token1?.symbol ?
+            {token1?.symbol && farm.pair.type !== "underworld" ?
              <div className="flex items-center space-x-2">
            <CurrencyLogo currency={token1} size="30px" />
                {/* <Typography>
@@ -160,10 +160,9 @@ const InvestmentDetails = ({ farm }) => {
           </div>
 
           {/* MULTIPLY PRICE PER ASSET * AMOUNT LP */}
-          { pair?.token1 ?
+          { pair?.token1 && farm.pair.type !== "underworld" ?
           <Typography>{formatNumber(Number(pairPrice) * Number(stakedAmount?.toSignificant(2)), true)}</Typography>
-          :
-          <Typography>{formatNumber(Number(soulPrice) * Number(stakedAmount?.toSignificant(2)), true)}</Typography> 
+          : <Typography>{formatNumber(Number(tokenPrice) * Number(stakedAmount?.toSignificant(2)), true)}</Typography> 
           }
           </div>
       </div>

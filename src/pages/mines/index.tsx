@@ -26,7 +26,7 @@ export default function Mines(): JSX.Element {
   const [pendingTx, setPendingTx] = useState(false)
 
   const type = router.query.filter === null ? 'active' : (router.query.filter as string)
-  const rewards = useFarmRewards()
+  // const rewards = useFarmRewards()
 
   const farms = useFarms()
 
@@ -36,7 +36,7 @@ export default function Mines(): JSX.Element {
     return { ...POOLS[chainId][key], lpToken: key }
   })
 
-  const tvlInfo = useTVL()
+  const tvl = useTVL()
 
   const summonerInfo = useSummonerInfo()
   const positions = usePositions()
@@ -106,7 +106,7 @@ export default function Mines(): JSX.Element {
       // roiPerMonth,
       // roiPerYear,
       rewards,
-      // tvl,
+      tvl,
       // secondsPerHour,
     }
   }
@@ -139,7 +139,7 @@ export default function Mines(): JSX.Element {
   //   return type in FILTER ? FILTER[type](farm) : true
   // })
 
-  let summTvl = tvlInfo.reduce((previousValue, currentValue) => {
+  let summTvl = tvl.reduce((previousValue, currentValue) => {
     return previousValue + currentValue.tvl
   }, 0)
 
@@ -168,7 +168,7 @@ export default function Mines(): JSX.Element {
 
   const valueStaked = positions.reduce((previousValue, currentValue) => {
     const pool = farmingPools.find((r) => parseInt(r.id.toString()) == parseInt(currentValue.id))
-    const poolTvl = tvlInfo.find((r) => getAddress(r.lpToken) == getAddress(pool?.lpToken))
+    const poolTvl = tvl.find((r) => getAddress(r.lpToken) == getAddress(pool?.lpToken))
     return previousValue + (currentValue.amount / 1e18) * poolTvl?.lpPrice
   }, 0)
   

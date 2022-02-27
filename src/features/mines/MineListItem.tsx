@@ -50,6 +50,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   const tvlInfo = useTVL()
   const harvestHelperContract = useHarvestHelperContract()
   const soulPrice = usePrice(SOUL_ADDRESS[chainId]) // to avoid RPC call
+  const tokenPrice = usePrice(farm.pair?.token0.id)
 
   const pendingSoul = usePendingSoul(farm)
   const pendingReward = usePendingReward(farm)
@@ -75,9 +76,9 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
 
   const lpBalance = useSingleCallResult(harvestHelperContract, 'fetchBals', [farm?.id])?.result
 
-  const tvl = farm.pair?.token1
+  const tvl = farm.pair?.token1 && farm.pair.type !== "underworld"
     ? Number(pairPrice) * Number(lpBalance) / 1e18
-    : Number(soulPrice) * Number(lpBalance) / 1e18
+    : Number(tokenPrice) * Number(lpBalance) / 1e18
 
   const volume = farm.pair?.token1
     ? Number(lpBalance) / 1e18
