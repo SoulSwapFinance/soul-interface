@@ -222,7 +222,7 @@ const WalletModal: FC<WalletModal> = ({ pendingTransactions, confirmedTransactio
           <HeadlessUiModal.BorderedContent>
             <Typography variant="xs" weight={700}>
               {error instanceof UnsupportedChainIdError
-                ? i18n._(t`Please connect to the appropriate Ethereum network.`)
+                ? i18n._(t`Please connect to the appropriate network.`)
                 : i18n._(t`Error connecting. Try refreshing the page.`)}
             </Typography>
           </HeadlessUiModal.BorderedContent>
