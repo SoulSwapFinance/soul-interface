@@ -128,7 +128,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
         { /* LP-TOKEN */}
         <div className="flex flex-col items-start">
           <Typography weight={700} className="hidden sm:flex sm:gap-1 sm:text-high-emphesis">
-             { farm?.pair?.token0?.symbol && farm.pair.type !== "underworld"}
+             { farm.pair.type !== "underworld" && farm?.pair?.token0?.symbol }
             {farm.pair.token1 && farm.pair.type !== "underworld" &&
               <span className="text-low-emphesis">/</span>
             }
