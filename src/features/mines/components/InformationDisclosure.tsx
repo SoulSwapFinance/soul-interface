@@ -18,8 +18,7 @@ const InformationDisclosure = ({ farm }) => {
         <Typography variant="xs" weight={700} className="text-white">
           {i18n._(t`Step One`)}
         </Typography>
-        {/* {farm.pair.type === PairType.SWAP && ( */}
-        { farm.pair.token1 && (
+        {farm.pair.token1 && farm.pair.type !== "underworld" && (
         <>
           <Typography variant="xs">
             {i18n._(t`Provide liquidity to the`)}
@@ -59,6 +58,48 @@ const InformationDisclosure = ({ farm }) => {
           </Typography>
         </>
         )}
+        {farm.pair.type === "underworld" && (
+        <>
+          <Typography variant="xs">
+            {i18n._(t`Deposit`)}
+            {` `}
+                <NavLink href={`/lend/${farm.lpToken}`}>
+                  <a className="text-sm text-blue">
+                    {farm.pair.token0.symbol}
+                  </a>
+                </NavLink>
+            {` `}
+            {i18n._(t`to lending pool.`)}
+            {/* {i18n._(t`pool (or`)} */}
+            {` `}
+            {/* <NavLink href={`/migrate`}>
+              <a className="text-sm text-blue">migrate liquidity</a>
+            </NavLink>
+            {i18n._(t`) to receive LP tokens.`)} */}
+          </Typography>
+        </>
+        )}
+        {farm.pair.id === "0" && (
+        <>
+          <Typography variant="xs">
+            {i18n._(t`Deposit`)}
+            {` `}
+                <NavLink href={`/stake`}>
+                  <a className="text-sm text-blue">
+                    {farm.pair.token0.symbol}
+                  </a>
+                </NavLink>
+            {` `}
+            {i18n._(t`to staking pool.`)}
+            {/* {i18n._(t`pool (or`)} */}
+            {` `}
+            {/* <NavLink href={`/migrate`}>
+              <a className="text-sm text-blue">migrate liquidity</a>
+            </NavLink>
+            {i18n._(t`) to receive LP tokens.`)} */}
+          </Typography>
+        </>
+        )}
       </div>
       <div className="flex flex-col gap-1">
         <Typography variant="xs" weight={700} className="text-white">
@@ -67,7 +108,7 @@ const InformationDisclosure = ({ farm }) => {
         <Typography variant="xs">
           {i18n._(t`Approve and then deposit your`)}
           {` `}
-          {farm.pair.type === PairType.UNDERWORLD ? `UMP` : `LP`}
+          {farm.pair.type === "underworld" ? `MP` : `LP`}
           {` `}
           {i18n._(t`tokens into the farm to start earning rewards.`)}
         </Typography>
@@ -76,15 +117,15 @@ const InformationDisclosure = ({ farm }) => {
         <Typography variant="xs" weight={700} className="text-white">
           {i18n._(t`Step Three`)}
         </Typography>
-        {/* {farm.pair.type === PairType.SWAP && ( */}
+        {farm.pair.type !== "underworld" && (
           <Typography variant="xs">
             {i18n._(t`Harvest rewards and unstake your LP tokens at any time. You can then remove your liquidity to receive your base investment tokens back in your wallet.`
             )}
           </Typography>
-        {/* )} */}
-        {farm.pair.type === PairType.UNDERWORLD && (
+        )}
+        {farm.pair.type === "underworld" && (
           <Typography variant="xs">
-            {i18n._(t`Harvest rewards and unstake your UMP tokens at any time. You can then withdraw your lent`)}
+            {i18n._(t`Harvest rewards and unstake your MP tokens at any time. You can then withdraw your lent`)}
             {` `}
             {farm.pair.token0.symbol}
             {` `}

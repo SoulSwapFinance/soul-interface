@@ -13,6 +13,7 @@ type PairInfo = {
   token1?: TokenInfo
   name?: string
   symbol?: string
+  type?: string
 }
 
 type AddressMap = {
@@ -739,32 +740,34 @@ export const POOLS: AddressMap = {
       },
     },
     '0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd': {  // DAI-FTM [LEND]
-      id: 48, // 600
+      id: 48, // 420
+      type: 'underworld',
       token0: {
-        id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
-        name: 'Dai Stablecoin',
-        symbol: 'DAI',
-        decimals: 18,
-      },
-      token1: {
         id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
         name: 'Wrapped Fantom',
         symbol: 'FTM',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
+        name: 'Dai Stablecoin',
+        symbol: 'DAI',
         decimals: 18,
       },
     },
     '0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61': {  // FTM-DAI [LEND]
-      id: 49, // 600
+      id: 49, // 420
+      type: 'underworld',
       token0: {
-        id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
-        name: 'Wrapped Fantom',
-        symbol: 'FTM',
-        decimals: 18,
-      },
-      token1: {
         id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
         name: 'Dai Stablecoin',
         symbol: 'DAI',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+        name: 'Wrapped Fantom',
+        symbol: 'FTM',
         decimals: 18,
       },
     },
@@ -784,32 +787,34 @@ export const POOLS: AddressMap = {
       },
     },
     '0x9fA5de19495331E13b443F787B90CdD22B32263d': {  // DAI/WETH
-      id: 51, // 400
+      id: 51, // 420
+      type: 'underworld',
       token0: {
+        id: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // WETH
+        name: 'Wrapped ETH',
+        symbol: 'WETH',
+        decimals: 18,
+      },
+      token1: {
         id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
         name: 'Dai Stablecoin',
         symbol: 'DAI',
         decimals: 18,
       },
-      token1: {
+    },
+    '0x4224b2870875df7f693dEB5Fc6560ee50C8B602d': {  // FTM/WETH
+      id: 52, // 420
+      type: 'underworld',
+      token0: {
         id: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // WETH
         name: 'Wrapped ETH',
         symbol: 'WETH',
         decimals: 18,
       },
-    },
-    '0x4224b2870875df7f693dEB5Fc6560ee50C8B602d': {  // FTM/WETH
-      id: 52, // 400
-      token0: {
+      token1: {
         id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
         name: 'Wrapped Fantom',
         symbol: 'FTM',
-        decimals: 18,
-      },
-      token1: {
-        id: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // WETH
-        name: 'Wrapped ETH',
-        symbol: 'WETH',
         decimals: 18,
       },
     },
