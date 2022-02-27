@@ -29,10 +29,10 @@ export const farmMap = (summonerInfo: any, soulPrice: number, chainId: ChainId) 
 
   const rewards = getRewards()
 
-//   // const tvl = getTvl()
-//   const tvl = pool.pair?.token1
-//   ? Number(pool.pairPrice) * Number(pool.lpBalance) / 1e18
-//   : Number(soulPrice) * Number(pool.lpBalance) / 1e18
+  // const tvl = getTvl()
+  const tvl = pool.pair?.token1
+  ? Number(pool.pairPrice) * Number(pool.lpBalance) / 1e18
+  : Number(soulPrice) * Number(pool.lpBalance) / 1e18
 
 //   const rewardPerSec =
 //     ((pool.allocPoint / Number(summonerInfo.totalAllocPoint)) * Number(summonerInfo.soulPerSecond)) / 1e18
@@ -66,7 +66,7 @@ export const farmMap = (summonerInfo: any, soulPrice: number, chainId: ChainId) 
     // roiPerMonth,
     // roiPerYear,
     rewards,
-    // tvl,
+    tvl,
     // secondsPerHour,
   }
 }
