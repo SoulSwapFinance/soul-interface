@@ -30,7 +30,6 @@ const SortIcon: FC<{ id?: string; direction?: 'ascending' | 'descending'; active
   return <></>
 }
 
-// @ts-ignore TYPE NEEDS FIXING
 const FarmList = ({ farms, term }) => {
   const { items, requestSort, sortConfig } = useSortableData(farms, { key: 'tvl', direction: 'descending' })
   const positions = usePositions()
@@ -63,21 +62,23 @@ const FarmList = ({ farms, term }) => {
           </div>
           <div
             className={classNames('flex gap-1 items-center cursor-pointer justify-center', TABLE_TR_TH_CLASSNAME(1, 4))}
-            onClick={() => requestSort('tvl')}
-          >
+            onClick={() => requestSort('allocPoint')}
+            >
             <Typography variant="sm" weight={700}>
               {i18n._(t`TVL`)}
             </Typography>
             {/* <SortIcon id={sortConfig.key} direction={sortConfig.direction} active={sortConfig.key === 'tvl'} /> */}
           </div>
-          <div className={classNames("hidden sm:block", TABLE_TR_TH_CLASSNAME(2, 4))}>
+          <div className={classNames("hidden sm:block", TABLE_TR_TH_CLASSNAME(2, 4))}
+            onClick={() => requestSort('allocPoint')}
+            >
             <Typography variant="sm" weight={700}>
               {i18n._(t`Rewards`)}
             </Typography>
           </div>
           <div
             className={classNames('flex gap-1 items-center cursor-pointer justify-end', TABLE_TR_TH_CLASSNAME(3, 4))}
-            onClick={() => requestSort('roiPerYear')}
+            onClick={() => requestSort('allocPoint')}
           >
             <Typography variant="sm" weight={700}>
               {i18n._(t`APR`)}

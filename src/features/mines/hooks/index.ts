@@ -131,7 +131,6 @@ export function useChefPositions(contract?: Contract | null, rewarder?: Contract
         id: args[i][0],
         pendingSoul: data[0].result?.[0] || Zero,
         amount: data[1].result?.[0] || Zero,
-        // pendingTokens: data?.[2]?.result,
       }))
       .filter(({ pendingSoul, amount }) => {
         return (pendingSoul && !pendingSoul.isZero()) || (amount && !amount.isZero())
@@ -148,7 +147,6 @@ export function useSoulPositions(contract?: Contract | null) {
     if (!account || !numberOfPools) {
       return
     }
-    // return [...Array(numberOfPools).keys()].map((pid) => [String(pid), String(account)])
     return [...Array(Number(numberOfPools)).keys()].map((pid) => [String(pid), String(account)])
   }, [numberOfPools, account])
 
