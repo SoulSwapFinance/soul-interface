@@ -41,7 +41,6 @@ interface MineListItem {
   onClick(x: ReactNode): void
 }
 
-// @ts-ignore TYPE NEEDS FIXING
 const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   const { chainId } = useActiveWeb3React()
   const { i18n } = useLingui()
@@ -80,9 +79,9 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
     ? Number(pairPrice) * Number(lpBalance) / 1e18
     : Number(tokenPrice) * Number(lpBalance) / 1e18
 
-  const volume = farm.pair?.token1
-    ? Number(lpBalance) / 1e18
-    : 0 // 0 for SOUL SAS
+  // const volume = farm.pair?.token1
+  //   ? Number(lpBalance) / 1e18
+  //   : 0 // 0 for SOUL SAS
 
   // REWARD RATE CALCULATIONS //
   const rewardPerSecond =
@@ -95,22 +94,22 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
 
   // ROI CALCULATIONS //
 
-  const roiPerYear  // = roiPerMonth * 12
-    = rewardPerYear
-    * soulPrice // value of the rewards
-    / tvl // div by liq. balance (TVL)
+  // const roiPerYear  // = roiPerMonth * 12
+  //   = rewardPerYear
+  //   * soulPrice // value of the rewards
+  //   / tvl // div by liq. balance (TVL)
 
-  const roiPerMonth = roiPerYear / 12
-  const roiPerDay = roiPerMonth / 30
-  const roiPerHour = roiPerDay / 24
+  // const roiPerMonth = roiPerYear / 12
+  // const roiPerDay = roiPerMonth / 30
+  // const roiPerHour = roiPerDay / 24
 
   // use vol, liq to getApy 
-  const getApy = (volume, liquidity) => {
-    const apy = aprToApy((((volume / 7) * 365 * 0.0025) / liquidity) * 100, 3650)
-    if (apy > 1000) return '>10,000%'
-    return formatPercent(apy)
-  }
-  console.log('volume1d: ', farm.pair.volume1d)
+  // const getApy = (volume, liquidity) => {
+  //   const apy = aprToApy((((volume / 7) * 365 * 0.0025) / liquidity) * 100, 3650)
+  //   if (apy > 1000) return '>10,000%'
+  //   return formatPercent(apy)
+  // }
+  // console.log('volume1d: ', farm.pair.volume1d)
 
   // console.log('feeApyPerYear: ', farm.feeApyPerYear)
 
@@ -204,7 +203,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
               }
             </div>
           ))}
-          {!!farm?.feeApyPerYear && (
+          {/* {!!farm?.feeApyPerYear && (
           <QuestionHelper
             text={
               <div className="flex flex-col">
@@ -233,7 +232,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
               </div>
             }
           />
-          )}
+          )} */}
         </Typography>
         <Typography variant="xs" className="text-low-emphesis">
           {i18n._(t`annualized`)}
