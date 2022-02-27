@@ -45,7 +45,7 @@ const ManageBar = ({ farm }) => {
   
   farm.pair.token1 ? new Token(
     chainId,
-    farm.pair.type === "underworld" ? getAddress(farm.pair.token0.id) : getAddress(farm.lpToken),
+    getAddress(farm.lpToken),
     farm.pair.type === "underworld" ? Number(farm.pair.token0.decimals) : 18,
     farm.pair.type === "underworld" ? farm.pair.token0.symbol : 'SOUL-LP'
   ) : new Token(

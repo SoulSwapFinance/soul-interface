@@ -121,18 +121,15 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
 
         { /* TOKEN-LOGO */}
 
-        {token1 ? <CurrencyLogoArray currencies={[token0, token1]} dense size={36} />
+        {token1 && farm.pair.type !== "underworld" ? <CurrencyLogoArray currencies={[token0, token1]} dense size={36} />
           : <CurrencyLogo currency={token0} size={54} />
         }
 
         { /* LP-TOKEN */}
         <div className="flex flex-col items-start">
           <Typography weight={700} className="hidden sm:flex sm:gap-1 sm:text-high-emphesis">
-            {farm.pair.token1 ?
-              farm?.pair?.token0?.symbol
-              : farm?.pair?.token0?.symbol
-            }
-            {farm.pair.token1 &&
+             { farm?.pair?.token0?.symbol }
+            {farm.pair.token1 && farm.pair.type !== "underworld" &&
               <span className="text-low-emphesis">/</span>
             }
             {farm?.pair?.token1?.symbol}
