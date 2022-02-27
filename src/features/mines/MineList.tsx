@@ -54,7 +54,7 @@ const FarmList = ({ farms, term }) => {
         {/* <div className="grid grid-cols-4"> */}
           <div
             className={classNames('flex gap-1 sm:justify-center sm:items-center cursor-pointer', TABLE_TR_TH_CLASSNAME(0, 4))}
-            onClick={() => requestSort('pair.token1.symbol')}
+            onClick={() => requestSort('pair.token0.symbol')}
           >
             <Typography variant="sm" weight={700}>
             {i18n._(t`Farms`)}
