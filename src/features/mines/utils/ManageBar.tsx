@@ -45,17 +45,14 @@ const ManageBar = ({ farm }) => {
   
   farm.pair.token1 ? new Token(
     chainId,
-    getAddress(farm.lpToken),
-    18,
-    // farm.pair.type === PairType.UNDERWORLD ? Number(farm.pair.asset.decimals) : 18,
-    farm.pair.type === "underworld" ? 'LEND' : 'SOUL-LP'
+    farm.pair.type === "underworld" ? getAddress(farm.pair.token0.id) : getAddress(farm.lpToken),
+    farm.pair.type === "underworld" ? Number(farm.pair.asset.decimals) : 18,
+    farm.pair.type === "underworld" ? farm.pair.token0.symbol : 'SOUL-LP'
   ) : new Token(
     chainId,
     getAddress(farm.lpToken),
     18,
     'SOUL'
-    // farm.pair.type === PairType.UNDERWORLD ? Number(farm.pair.asset.decimals) : 18,
-    // farm.pair.type === PairType.UNDERWORLD ? 'UMP' : 'SLP'
   )
 
   const balance = useCurrencyBalance(account ?? undefined, liquidityToken)
