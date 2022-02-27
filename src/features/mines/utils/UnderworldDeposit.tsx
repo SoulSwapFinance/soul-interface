@@ -17,7 +17,6 @@ import { useActiveWeb3React } from 'services/web3'
 import { useETHBalances } from 'state/wallet/hooks'
 import React, { useCallback, useState } from 'react'
 
-// @ts-ignore TYPE NEEDS FIXING
 const UnderworldDeposit = ({ pair, header }) => {
   const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
@@ -31,15 +30,13 @@ const UnderworldDeposit = ({ pair, header }) => {
     ? pair?.asset.coffinBalance
     : assetNative
     ? account
-      ? // @ts-ignore TYPE NEEDS FIXING
-        BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
+      ? BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
       : undefined
     : pair?.asset.balance
 
   const balance =
     assetToken &&
     balanceAmount &&
-    // @ts-ignore TYPE NEEDS FIXING
     CurrencyAmount.fromRawAmount(assetNative ? WNATIVE[chainId || 250] : assetToken, balanceAmount)
 
   const parsedDepositValue = tryParseAmount(depositValue, assetToken)
@@ -54,7 +51,6 @@ const UnderworldDeposit = ({ pair, header }) => {
       if (pair?.currentExchangeRate.isZero()) {
         cooker.updateExchangeRate(false, ZERO, ZERO)
       }
-      // @ts-ignore TYPE NEEDS FIXING
       cooker.addAsset(BigNumber.from(parsedDepositValue?.quotient.toString()), useCoffin)
       return `${i18n._(t`Deposit`)} ${pair?.asset.tokenInfo.symbol}`
     },
@@ -78,13 +74,13 @@ const UnderworldDeposit = ({ pair, header }) => {
           value={depositValue}
           currency={assetToken}
           onChange={(val) => setDepositValue(val || '')}
-          headerRight={
-            <AssetInput.WalletSwitch
-              onChange={() => setUseCoffin(!useCoffin)}
-              checked={useCoffin}
-              id="switch-spend-from-wallet-a"
-            />
-          }
+          // headerRight={
+          //   <AssetInput.WalletSwitch
+          //     onChange={() => setUseCoffin(!useCoffin)}
+          //     checked={useCoffin}
+          //     id="switch-spend-from-wallet-a"
+          //   />
+          // }
           spendFromWallet={useCoffin}
           id="add-liquidity-input-tokenb"
         />

@@ -14,42 +14,43 @@ import UnderworldWithdraw from './UnderworldWithdraw'
 const ManageUnderworldPair = ({ farm }) => {
   const { i18n } = useLingui()
 
-//   const underworldPair = useUnderworldPair('0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd')
   const underworldPair = useUnderworldPair(farm?.lpToken)
 
-  const [toggle, setToggle] = useState(true)
+  // const [toggle, setToggle] = useState(true)
 
   const header = useMemo(
     () => (
       <div className="flex flex-col gap-2">
         <div className="flex justify-between items-center">
           <Typography weight={700} className="text-high-emphesis">
-            {toggle ? i18n._(t`Deposit`) : i18n._(t`Withdraw`)}
+            {/* {toggle ? i18n._(t`Deposit`) : i18n._(t`Withdraw`)} */}
+            {i18n._(t`Lend Asset`)}
           </Typography>
           <div className="flex gap-4">
-            <Switch
+            {/* <Switch
               size="sm"
               checked={toggle}
               onChange={() => setToggle(!toggle)}
               checkedIcon={<PlusIcon className="text-dark-1000" />}
               uncheckedIcon={<MinusIcon className="text-dark-1000" />}
-            />
+            /> */}
             <Settings />
           </div>
         </div>
       </div>
     ),
-    [i18n, toggle]
+    [i18n] // toggle
   )
 
   return (
     <>
-      <div className={classNames(toggle ? 'flex flex-col flex-grow gap-4' : 'hidden')}>
+      {/* <div className={classNames(toggle ? 'flex flex-col flex-grow gap-4' : 'hidden')}> */}
+      <div className={classNames('flex flex-col flex-grow gap-4')}>
         <UnderworldDeposit pair={underworldPair} header={header} />
       </div>
-      <div className={classNames(!toggle ? 'flex flex-col flex-grow gap-4' : 'hidden')}>
+      {/* <div className={classNames(!toggle ? 'flex flex-col flex-grow gap-4' : 'hidden')}>
         <UnderworldWithdraw pair={underworldPair} header={header} />
-      </div>
+      </div> */}
     </>
   )
 }
