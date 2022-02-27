@@ -142,7 +142,7 @@ const InvestmentDetails = ({ farm }) => {
                 </Typography>
               )} */}
               <Typography>{ token0.symbol }</Typography>
-               { token1?.symbol ?
+               { token1?.symbol && farm.pair.type !== "underworld" ?
               <Typography>{' ('}{formatNumber(Number(pairPrice) / 2 * Number(stakedAmount?.toSignificant(2)), true)}{') '}</Typography>
               : <Typography>{' ('}{formatNumber(Number(tokenPrice) * Number(stakedAmount?.toSignificant(2)), true)}{') '}</Typography>
               }
