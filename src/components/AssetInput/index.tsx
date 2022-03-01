@@ -290,6 +290,7 @@ const AssetInputPanel = ({
               currency.symbol == 'WETH' ? formatCurrency(tokenPrice * Number(value), 2) :
               currency.symbol == 'DAI' ? formatCurrency(1 * Number(value), 2) :
               currency.symbol == 'FTM' ? formatCurrency(ftmPrice * Number(value), 2) :
+              currency.symbol == 'WFTM' ? formatCurrency(ftmPrice * Number(value), 2) :
               currency.symbol == 'WBTC' ? formatCurrency(wbtcPrice * Number(value), 2) :
               formatCurrency(pairPrice * Number(value), 2))            
             }
@@ -300,7 +301,7 @@ const AssetInputPanel = ({
         ) : (
           showMax && (
             <Button size="xs" variant="outlined" color="gray" className="!border" onClick={() => onMax()}>
-              Max
+              MAX
             </Button>
           )
         )}
