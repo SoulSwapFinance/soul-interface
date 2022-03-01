@@ -16,6 +16,7 @@ import { useCircleStakingContract } from 'features/farm/hooks/useContract'
 import { useHelperContract } from 'features/bond/hooks/useContract'
 import { SoulSummonerAddress } from 'features/farm/constants'
 import { AllPids } from 'features/farm/Pids'
+import { useEnchantPrice, useFantomPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice } from 'hooks/getPrices'
 
 // const helperContract = useHelperContract()
 
@@ -30,7 +31,12 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
   const token2Contract = useTokenContract(token2Address[chainId])
   const soulContract = useTokenContract(AllPids[0].token1Address[chainId])
   const fusdContract = useTokenContract(AllPids[0].token2Address[chainId])
-
+  const soulPrice = useSoulPrice()
+  const ethPrice = useWrappedEthPrice()
+  const ftmPrice = useFantomPrice()
+  const seancePrice = useSeancePrice()
+  const enchantPrice = useEnchantPrice()
+  
   // ----------------------------------------------
   //                  Farm Helper
   // ----------------------------------------------
@@ -86,26 +92,19 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
    */
   const fetchTokenRateBals = async () => {
     try {
-      const result = await helperContract?.fetchTokenRateBals()
 
-      const ftmPrice = result?.[1] / (result?.[0] / 10 ** 12)
-      const soulPrice = (result?.[2] / result?.[3]) * ftmPrice
-      const seancePrice = (result?.[4] / result?.[5]) * ftmPrice
-      const enchantPrice = (result?.[6] / result?.[7]) * ftmPrice
-      const ethPrice = (result?.[8] / result?.[9]) * ftmPrice
-
-      console.log(
-        'usdcPerFtm:',
-        ftmPrice,
-        'soulPrice:',
-        soulPrice,
-        'seancePrice:',
-        seancePrice,
-        'enchantPrice:',
-        enchantPrice,
-        'ethPrice:',
-        ethPrice
-      )
+      // console.log(
+      //   'usdcPerFtm:',
+      //   ftmPrice,
+      //   'soulPrice:',
+      //   soulPrice,
+      //   'seancePrice:',
+      //   seancePrice,
+      //   'enchantPrice:',
+      //   enchantPrice,
+      //   'ethPrice:',
+      //   ethPrice
+      // )
 
       return [ftmPrice, soulPrice, seancePrice, enchantPrice, ethPrice]
     } catch (e) {
@@ -119,12 +118,6 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
   //  */
   // const fetchLpValue = async (pid, token1Name, token2Name, lpAmount) => {
   //   try {
-  //     const rates = await fetchTokenRateBals()
-  //     const ftmPrice = rates?.[0]
-  //     const soulPrice = rates?.[1]
-  //     const seancePrice = rates?.[2]
-  //     const enchantPrice = rates?.[3]
-  //     const ethPrice = rates?.[4]
 
   //     const result = await helperContract?.fetchPidDetails(pid)
 
@@ -175,12 +168,6 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
    */
   const fetchFarmStats = async (pid, token1Name, token2Name) => {
     try {
-      const rates = await fetchTokenRateBals()
-      const ftmPrice = rates?.[0]
-      const soulPrice = rates?.[1]
-      const seancePrice = rates?.[2]
-      const enchantPrice = rates?.[3]
-      const ethPrice = rates?.[4]
 
       const result = await helperContract?.fetchPidDetails(pid)
 
@@ -244,9 +231,6 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
 
   const fetchStakeStats = async () => {
     try {
-      const rates = await fetchTokenRateBals()
-      const soulPrice = rates?.[1]
-
       // summonerBal, totalSupply
       const result = await helperContract?.fetchPercOfSupply(0)
 
@@ -583,7 +567,6 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
         totalLpValue =
           token1Name === 'FTM' ? ethers.utils.formatUnits(token1Bal) : ethers.utils.formatUnits(token2Bal.mul(2))
       } else if (token1Name === 'SOUL' || token2Name === 'SOUL') {
-        const soulPrice = await fusdPerSoul()
         totalLpValue =
           token1Name === 'SOUL'
             ? ethers.utils.formatUnits(token1Bal)
@@ -660,31 +643,12 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
 
       // summonerBal * soulPrice = TVL
 
-      const rawSoulPrice = await fusdPerSoul()
-      const soulPrice = BigNumber.from(ethers.utils.formatUnits(rawSoulPrice))
-      console.log('soulPrice', soulPrice)
+      // console.log('soulPrice', soulPrice)
 
       const totalLpValue = summonerBalance.mul(soulPrice)
       console.log('totalLpValue', totalLpValue)
 
       return totalLpValue
-    } catch (e) {
-      console.log(e)
-      // alert(e.message);
-      return e
-    }
-  }
-
-  /**
-   * Soul Price
-   */
-  const fetchSoulPrice = async () => {
-    try {
-      // summonerBal * soulPrice = TVL
-      const soulPrice = await fusdPerSoul()
-      console.log('soulPrice', soulPrice)
-
-      return soulPrice
     } catch (e) {
       console.log(e)
       // alert(e.message);
