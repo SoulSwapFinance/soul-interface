@@ -132,7 +132,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   // console.log('feeApyPerYear: ', farm.feeApyPerYear)
 
   return (
-    <div className={classNames(TABLE_TBODY_TR_CLASSNAME, 'grid grid-cols-3 sm:grid-cols-4')} onClick={onClick}>
+    <div className={classNames(TABLE_TBODY_TR_CLASSNAME, 'grid grid-cols-3 sm:grid-cols-3')} onClick={onClick}>
       {/* <div className={classNames('flex gap-2', TABLE_TBODY_TD_CLASSNAME(0, 4))}> */}
       <div className="flex gap-2 items-center">
 
@@ -176,7 +176,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
         </div>
       </div>
       {/* <div className={TABLE_TBODY_TD_CLASSNAME(1, 4)}> */}
-      <div className="flex justify-center sm:justify-center items-center">
+      <div className="flex justify-center items-center">
       {/* <div className="flex flex-col items-start sm:items-center justify-center"> */}
       {farm?.rewards?.map((reward, i) => (
         <Typography weight={700} className="text-high-emphesis">
@@ -189,7 +189,8 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
       ))}
       </div>
       {/* </div> */}
-      <div className={classNames('hidden sm:flex flex-col !items-end !justify-center', TABLE_TBODY_TD_CLASSNAME(2, 4))}>
+      {/* <div className={classNames('hidden sm:flex flex-col !items-end !justify-center', TABLE_TBODY_TD_CLASSNAME(2, 4))}> */}
+      <div className={classNames('hidden', TABLE_TBODY_TD_CLASSNAME(2, 4))}>
       {farm?.rewards?.map((reward, i) => (
           <Typography
             variant="sm"
