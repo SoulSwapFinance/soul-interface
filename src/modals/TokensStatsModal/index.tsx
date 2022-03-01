@@ -319,7 +319,7 @@ export default function SoulStatsModal(): JSX.Element | null {
             <Typography variant="sm" className="flex items-center py-0.5">
               {`Protocol Liquidity`}
             </Typography>
-            {/* <QuestionHelper
+            <QuestionHelper
               text={
                 <div className="flex flex-col gap-2 py-1 px-3 w-full">
                   <div className="flex items-center justify-between">
@@ -353,7 +353,7 @@ export default function SoulStatsModal(): JSX.Element | null {
                   </div>
                 </div>
               }
-            /> */}
+            />
           </div>,
           concat(formatNumberScale(
             Number(bondsTvl + soulTvl), true)
