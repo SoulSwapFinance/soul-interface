@@ -73,7 +73,7 @@ export default function SmartNumberInput({
           </span>
         </div>
         <div className="text-base text-right text-secondary" style={{ display: 'inline', cursor: 'pointer' }}>
-          {maxTitle} {formatNumber(Number(max) / 10**token.tokenInfo.decimals)}
+          {maxTitle} {formatNumber(Number(max) / 10**token?.tokenInfo.decimals)}
         </div>
       </div>
 

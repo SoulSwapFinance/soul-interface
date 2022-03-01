@@ -53,7 +53,7 @@ const UnderworldWithdraw = ({ pair, header }) => {
   const error = !parsedWithdrawValue
     ? 'Enter Amount'
     : available?.lessThan(parsedWithdrawValue)
-    ? 'Insufficient balance'
+    ? 'Insufficient Balance'
     : undefined
 
   const isValid = !error
