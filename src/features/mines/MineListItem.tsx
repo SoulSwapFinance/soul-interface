@@ -10,7 +10,6 @@ import { useCurrency } from 'hooks/Tokens'
 import React, { FC, ReactNode } from 'react'
 
 // HOOKS //
-import { useTVL } from 'hooks/useV2Pairs'
 import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 import { useSingleCallResult } from 'state/multicall/hooks'
 import { usePendingSoul } from 'features/mines/hooks'
@@ -19,7 +18,6 @@ import { usePendingSoul } from 'features/mines/hooks'
 
 import { useSoulPositions } from './hooks'
 import { usePrice } from 'hooks/usePrice'
-import useFarms from 'hooks/useFarmRewards'
 import { useHarvestHelperContract } from 'hooks/useContract'
 import useTokenAnalytics from 'features/analytics/hooks/useTokensAnalytics'
 import { PairType } from './enum'

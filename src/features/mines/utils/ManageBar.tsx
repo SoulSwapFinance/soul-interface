@@ -81,8 +81,6 @@ const ManageBar = ({ farm }) => {
     : undefined
   const isWithdrawValid = !withdrawError
 
-  const soulPrice = usePrice(SOUL_ADDRESS[chainId])
-
   return (
     <>
       <HeadlessUiModal.BorderedContent className="flex flex-col gap-4 bg-dark-1000/40">

@@ -26,6 +26,7 @@ import { FiatValue } from './FiatValue'
 import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 import { useCurrency } from 'hooks/Tokens'
 import { formatCurrency } from 'modals/TokensStatsModal'
+import { useFantomPrice, useWrappedBtcPrice } from 'hooks/getPrices'
 
 interface AssetInputProps {
   value?: string
@@ -203,7 +204,9 @@ const AssetInputPanel = ({
 
   // const pairValue = useUSDCValue(tryParseAmount(Number(value) === 0 ? '1' : value, currency))
   const usdcValue = useUSDCValue(tryParseAmount(Number(value) === 0 ? '1' : value, currency))
-  const tokenPrice = usePrice(currencyAddress)
+  const tokenPrice = usePrice(token0)
+  const ftmPrice = useFantomPrice()
+  const wbtcPrice = useWrappedBtcPrice()
  
   // const usdValue = usePrice(currency.toString())
   const span = useRef<HTMLSpanElement | null>(null)
@@ -284,6 +287,10 @@ const AssetInputPanel = ({
           >
             ≈{usdcValue ? usdcValue.toSignificant(4) : ( 
               currency.symbol == 'SOUL' ? formatCurrency(tokenPrice * Number(value), 2) :
+              currency.symbol == 'WETH' ? formatCurrency(tokenPrice * Number(value), 2) :
+              currency.symbol == 'DAI' ? formatCurrency(1 * Number(value), 2) :
+              currency.symbol == 'FTM' ? formatCurrency(ftmPrice * Number(value), 2) :
+              currency.symbol == 'WBTC' ? formatCurrency(wbtcPrice * Number(value), 2) :
               formatCurrency(pairPrice * Number(value), 2))            
             }
           </Typography>
