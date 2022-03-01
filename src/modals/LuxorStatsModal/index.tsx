@@ -12,7 +12,6 @@ import { useWrappedLumensContract, useLuxorContract } from 'hooks'
 import { formatNumberScale } from 'functions'
 import { LUX_ADDRESS, WLUM_ADDRESS } from 'constants/addresses'
 import { useSingleCallResult } from 'state/multicall/hooks'
-import { usePriceHelperContract } from 'features/bond/hooks/useContract'
 // import QuestionHelper from '../../components/QuestionHelper'
 import { useLuxTVL, useTVL, useVaultTVL } from 'hooks/useV2Pairs'
 // import { Wrapper } from 'features/swap/styleds'
@@ -22,6 +21,7 @@ import { useActiveWeb3React } from 'services/web3'
 import QuestionHelper from 'components/QuestionHelper'
 import ModalHeader from 'components/Modal/Header'
 import { concat } from 'lodash'
+import { useLuxorPrice, useWrappedLumPrice } from 'hooks/getPrices'
 
 const cache: { [key: string]: number } = {};
 
@@ -39,18 +39,10 @@ export default function LuxorStatsModal(): JSX.Element | null {
   const { chainId, library, account } = useActiveWeb3React()
   const luxorStatsModalOpen = useModalOpen(ApplicationModal.LUXOR_STATS)
   const toggleLuxorStatsModal = useToggleLuxorStatsModal()
-  const priceHelperContract = usePriceHelperContract()
   let tokenInfo = useTokenInfo(useLuxorContract())
   let wrappedLumensInfo = useTokenInfo(useWrappedLumensContract())
-  const rawLuxorPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'])?.result
-  // console.log(Number(rawLuxorPrice))
-  const luxorPrice = formatCurrency(Number(rawLuxorPrice) / 1E18, 2)
-  // console.log(luxorPrice)
-
-  const rawWrappedLumensPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208'])?.result
-  // console.log(Number(rawWrappedLumensPrice))
-  const wrappedLumensPrice = formatCurrency(Number(rawWrappedLumensPrice) / 1E18, 2)
-  // console.log(wrappedLumensPrice)
+  const luxorPrice = useLuxorPrice()
+  const wLumPrice = useWrappedLumPrice()
 
   const farmInfo = useTVL()
   const vaultInfo = useVaultTVL()
@@ -257,7 +249,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
             {`Total Market Cap`}
           </Typography>,
           formatCurrency(
-            Number(tokenInfo?.totalSupply) * Number(rawLuxorPrice) / 1E18, 0)
+            Number(tokenInfo?.totalSupply) * Number(luxorPrice))
         )}
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
@@ -273,14 +265,14 @@ export default function LuxorStatsModal(): JSX.Element | null {
             {`Luxor Market Price`}
           </Typography>,
           formatCurrency(
-            Number(rawLuxorPrice) / 1E18, 2)
+            luxorPrice)
         )}
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`wLumens Market Price`}
           </Typography>,
           formatCurrency(
-            Number(rawWrappedLumensPrice) / 1E18, 2)
+           wLumPrice)
         )}
         <div className="flex mt-3" />
         {/* <div className="flex"> */}

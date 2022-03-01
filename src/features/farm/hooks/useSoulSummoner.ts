@@ -14,6 +14,7 @@ import { SoulSummonerAddress, SUMMONER_HELPER_ADDRESS as SummonerHelperAddress }
 
 import { AllPids } from '../Pids'
 import { useActiveWeb3React } from 'services/web3'
+import { useEnchantPrice, useFantomPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice } from 'hooks/getPrices'
 
 // const helperContract = useHelperContract()
 
@@ -29,6 +30,12 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
   const soulContract = useTokenContract(AllPids[0].token1Address[chainId])
   const fusdContract = useTokenContract(AllPids[0].token2Address[chainId])
 
+  const soulPrice = useSoulPrice()
+  const seancePrice = useSeancePrice()
+  const ftmPrice = useFantomPrice()
+  const ethPrice = useWrappedEthPrice()
+  const enchantPrice = useEnchantPrice()
+  
   // ----------------------------------------------
   //                  Farm Helper
   // ----------------------------------------------
@@ -84,26 +91,20 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
    */
   const fetchTokenRateBals = async () => {
     try {
-      const result = await helperContract?.fetchTokenRateBals()
+      // const result = await helperContract?.fetchTokenRateBals()
 
-      const ftmPrice = result?.[1] / (result?.[0] / 10 ** 12)
-      const soulPrice = (result?.[2] / result?.[3]) * ftmPrice
-      const seancePrice = (result?.[4] / result?.[5]) * ftmPrice
-      const enchantPrice = (result?.[6] / result?.[7]) * ftmPrice
-      const ethPrice = (result?.[8] / result?.[9]) * ftmPrice
-
-      console.log(
-        'usdcPerFtm:',
-        ftmPrice,
-        'soulPrice:',
-        soulPrice,
-        'seancePrice:',
-        seancePrice,
-        'enchantPrice:',
-        enchantPrice,
-        'ethPrice:',
-        ethPrice
-      )
+      // console.log(
+      //   'usdcPerFtm:',
+      //   ftmPrice,
+      //   'soulPrice:',
+      //   soulPrice,
+      //   'seancePrice:',
+      //   seancePrice,
+      //   'enchantPrice:',
+      //   enchantPrice,
+      //   'ethPrice:',
+      //   ethPrice
+      // )
 
       return [ftmPrice, soulPrice, seancePrice, enchantPrice, ethPrice]
     } catch (e) {
@@ -117,12 +118,6 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
   //  */
   // const fetchLpValue = async (pid, token1Name, token2Name, lpAmount) => {
   //   try {
-  //     const rates = await fetchTokenRateBals()
-  //     const ftmPrice = rates?.[0]
-  //     const soulPrice = rates?.[1]
-  //     const seancePrice = rates?.[2]
-  //     const enchantPrice = rates?.[3]
-  //     const ethPrice = rates?.[4]
 
   //     const result = await helperContract?.fetchPidDetails(pid)
 
@@ -173,13 +168,6 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
    */
   const fetchFarmStats = async (pid, token1Name, token2Name) => {
     try {
-      const rates = await fetchTokenRateBals()
-      const ftmPrice = rates?.[0]
-      const soulPrice = rates?.[1]
-      const seancePrice = rates?.[2]
-      const enchantPrice = rates?.[3]
-      const ethPrice = rates?.[4]
-
       const result = await helperContract?.fetchPidDetails(pid)
 
       // console.log(token1Name, '/', token2Name, '- result', result)
@@ -672,33 +660,10 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
       const summonerBalance = BigNumber.from(ethers.utils.formatUnits(rawSummonerBal))
       console.log('summonerBalance', ethers.utils.formatUnits(summonerBalance))
 
-      // summonerBal * soulPrice = TVL
-
-      const rawSoulPrice = await fusdPerSoul()
-      const soulPrice = BigNumber.from(ethers.utils.formatUnits(rawSoulPrice))
-      console.log('soulPrice', soulPrice)
-
       const totalLpValue = summonerBalance.mul(soulPrice)
       console.log('totalLpValue', totalLpValue)
 
       return totalLpValue
-    } catch (e) {
-      console.log(e)
-      // alert(e.message);
-      return e
-    }
-  }
-
-  /**
-   * Soul Price
-   */
-  const fetchSoulPrice = async () => {
-    try {
-      // summonerBal * soulPrice = TVL
-      const soulPrice = await fusdPerSoul()
-      console.log('soulPrice', soulPrice)
-
-      return soulPrice
     } catch (e) {
       console.log(e)
       // alert(e.message);

@@ -21916,6 +21916,23 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
+soul-data@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/soul-data/-/soul-data-2.5.0.tgz#87c028d57cd161b7b221341cdf1f970545ac7f90"
+  integrity sha512-Osn2u0qJ/6oiqxT6FHNI3P+0QtBEbHJjgv6lxA82P7fsQpfiuMg9AU0SGRcCiVIl3j/RzSL9kZXQk0qb+qWyrg==
+  dependencies:
+    bluebird "^3.7.2"
+    commander "^8.0.0"
+    csv-stringify "^5.6.2"
+    date-fns "^2.22.1"
+    graph-results-pager "^1.0.3"
+    graphql "^15.5.1"
+    graphql-request "^3.4.0"
+    isomorphic-ws "^4.0.1"
+    node-fetch "^2.6.1"
+    subscriptions-transport-ws "^0.9.19"
+    ws "^7.5.3"
+
 source-list-map@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-2.0.1.tgz#3993bd873bfc48479cca9ea3a547835c7c154b34"

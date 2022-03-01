@@ -13,10 +13,8 @@ import { SOUL_ADDRESS, SEANCE_ADDRESS } from 'constants/addresses'
 import { useSingleCallResult } from 'state/multicall/hooks'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { AURA } from '../../constants'
-import { usePriceHelperContract } from 'features/bond/hooks/useContract'
 import QuestionHelper from '../../components/QuestionHelper'
 import { useBondTVL, useTVL, useSoulTVL, useVaultTVL } from 'hooks/useV2Pairs'
-// import { Wrapper } from 'features/swap/styleds'
 import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
@@ -25,6 +23,7 @@ import { usePrice } from 'hooks/usePrice'
 import { HeadlessUiModal } from 'components/Modal'
 import { concat } from 'lodash'
 import { SOUL } from 'sdk'
+import { useSeancePrice, useSoulPrice } from 'hooks/getPrices'
 
 const cache: { [key: string]: number } = {};
 
@@ -48,8 +47,8 @@ export default function SoulStatsModal(): JSX.Element | null {
     
   const auraBalance = useTokenBalance(account ?? undefined, AURA[250])
    
-  const soulPrice = usePrice(SOUL[250]?.address)
-  const seancePrice = usePrice(SEANCE_ADDRESS[250])
+  const soulPrice = useSoulPrice()
+  const seancePrice = useSeancePrice()
   const tvlInfo = useTVL()
   const bondInfo = useBondTVL()
   const vaultInfo = useVaultTVL()

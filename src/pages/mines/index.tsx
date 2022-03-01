@@ -1,11 +1,11 @@
-import { SOUL_ADDRESS } from 'sdk'
+import { SOUL_ADDRESS, WNATIVE } from 'sdk'
 import Search from 'components/Search'
 import MineList from 'features/mines/MineList'
 import Menu from 'features/mines/components/MineMenu'
 import useFuse from 'hooks/useFuse'
 import { useActiveWeb3React } from 'services/web3'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { POOLS } from 'constants/farms'
 import { getAddress } from '@ethersproject/address'
 import { useTVL } from 'hooks/useV2Pairs'
@@ -19,11 +19,15 @@ import { addTransaction } from 'state/transactions/actions'
 import useSummoner from 'features/mines/hooks/useMasterChef'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
+import { useFantomPrice, useSoulPrice } from 'hooks/getPrices'
 
 export default function Mines(): JSX.Element {
   const { chainId } = useActiveWeb3React()
   const router = useRouter()
   const [pendingTx, setPendingTx] = useState(false)
+
+  const soulPrice = useSoulPrice()
+  const ftmPrice = useFantomPrice()
 
   const type = router.query.filter === null ? 'active' : (router.query.filter as string)
   // const rewards = useFarmRewards()
@@ -36,13 +40,11 @@ export default function Mines(): JSX.Element {
     return { ...POOLS[chainId][key], lpToken: key }
   })
 
-  const tvl = useTVL()
-
+  
   const summonerInfo = useSummonerInfo()
   const positions = usePositions()
-
-  const soulPrice = usePrice(SOUL_ADDRESS[chainId])
-
+  const tvl = useTVL()
+  
   const map = (pool) => {
     pool.owner = 'SoulSwap'
     pool.balance = 0
@@ -70,10 +72,27 @@ export default function Mines(): JSX.Element {
 
     const rewards = getRewards()
 
-    // const tvl = getTvl()
-    // const tvl = pool.pair?.token1
-    // ? Number(pool.pairPrice) * Number(pool.lpBalance) / 1e18
-    // : Number(soulPrice) * Number(pool.lpBalance) / 1e18
+    // function getTvl(pool) {
+    //   // const pair = POOLS[chainId][pool.id]
+    //   let lpPrice = 0
+    //   let decimals = 18
+    //   if (pool.lpToken == SOUL_ADDRESS[chainId]) {
+    //     lpPrice = soulPrice
+    //     decimals = pair.token0?.decimals
+    //   } else if (pool.lpToken.toLowerCase() 
+    //     == WNATIVE[chainId].address.toLowerCase()) {
+    //     lpPrice = ftmPrice
+    //   } else {
+    //     lpPrice = 0
+    //   }
+      
+    //   return Number(pool.totalLp / 10 ** decimals) * lpPrice
+    // }
+
+    // const tvl = getTvl(pool)
+    const tvl = pool.pair?.token1
+    ? Number(pool.pairPrice) * Number(pool.lpBalance) / 1e18
+    : Number(soulPrice) * Number(pool.lpBalance) / 1e18
 
     // const rewardPerSec =
     //   ((pool.allocPoint / Number(summonerInfo.totalAllocPoint)) * Number(summonerInfo.soulPerSecond)) / 1e18

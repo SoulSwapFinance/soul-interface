@@ -6,7 +6,7 @@ import { NEVER_RELOAD, useSingleCallResult } from "state/multicall/hooks"
 import { useToken } from "./Tokens"
 
 export function useTokenInfo(tokenContract?: Contract | null) {
-    const { account, chainId } = useActiveWeb3React()
+    // const { account, chainId } = useActiveWeb3React()
     // const vaults = useVaults()
   
     const _totalSupply = useSingleCallResult(tokenContract ? tokenContract : null, 'totalSupply')?.result

@@ -3,12 +3,9 @@ import LuxorStatsModal, { formatCurrency } from 'modals/LuxorStatsModal'
 import React from 'react'
 import { useModalOpen, useToggleLuxorStatsModal } from 'state/application/hooks'
 import { ApplicationModal } from 'state/application/actions'
-import { useSingleCallResult } from 'state/multicall/hooks'
-import { usePriceHelperContract } from 'features/bond/hooks/useContract'
 import styled from 'styled-components'
 import { useActiveWeb3React } from 'services/web3'
 import { useLuxorPrice, useWrappedLumPrice } from 'hooks/getPrices'
-import { formatNumber } from 'functions'
 
 const HideOnMobile = styled.div`
 @media screen and (max-width: 500px) {
@@ -23,8 +20,6 @@ function LuxorStats(): JSX.Element | null {
   const open = useModalOpen(ApplicationModal.LUXOR_STATS)
   const wLumPrice = useWrappedLumPrice()
   const luxPrice = useLuxorPrice()
-  // const wLumPrice = useWlumPrice()
-  // useSoulPrice()
 
   if (!chainId) return null
 

@@ -112,6 +112,13 @@ export const getSoulPrice = async (variables = {}) => {
   })
 }
 
+export const getEnchantPrice = async (variables = {}) => {
+  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
+    id: '0x6a1a8368d607c7a808f7bba4f7aed1d9ebde147a',
+    ...variables,
+  })
+}
+
 export const getLuxorPrice = async (variables = {}) => {
   return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
     id: '0x6671e20b83ba463f270c8c75dae57e3cc246cb2b',
@@ -135,7 +142,13 @@ export const getSeancePrice = async (variables = {}) => {
 
 export const getFantomPrice = async () => {
   return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
-    id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
+    id: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83',
+  })
+}
+
+export const getWrappedEthPrice = async () => {
+  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
+    id: '0x74b23882a30290451a17c44f4f05243b6b58c76d',
   })
 }
 
@@ -191,8 +204,24 @@ export function useWrappedLumPrice(swrConfig: SWRConfiguration = undefined) {
   return data
 }
 
+
 export function useLuxorPrice(swrConfig: SWRConfiguration = undefined) {
   const { data } = useSWR(['luxorPrice'], () => getLuxorPrice(), swrConfig)
+  return data
+}
+
+export function useEnchantPrice(swrConfig: SWRConfiguration = undefined) {
+  const { data } = useSWR(['enchantPrice'], () => getEnchantPrice(), swrConfig)
+  return data
+}
+
+export function useFantomPrice(swrConfig: SWRConfiguration = undefined) {
+  const { data } = useSWR(['fantomPrice'], () => getFantomPrice(), swrConfig)
+  return data
+}
+
+export function useWrappedEthPrice(swrConfig: SWRConfiguration = undefined) {
+  const { data } = useSWR(['wethPrice'], () => getWrappedEthPrice(), swrConfig)
   return data
 }
 

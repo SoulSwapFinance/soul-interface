@@ -2,7 +2,6 @@ import { useCallback } from 'react'
 import { ethers, BigNumber } from 'ethers'
 // import { formatNumber } from '../../functions'
 
-
 import {
   useHelperContract,
   usePriceHelperContract,
@@ -17,6 +16,7 @@ import { SoulBondAddress, BOND_HELPER_ADDRESS as BondHelperAddress } from '../co
 
 import { AllPids } from '../Pids'
 import { useActiveWeb3React } from 'services/web3'
+import { useFantomPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice } from 'hooks/getPrices'
 
 // const helperContract = useHelperContract()
 
@@ -33,6 +33,11 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   const token2Contract = useTokenContract(token2Address[chainId])
   const soulContract = useTokenContract(AllPids[1].token1Address[chainId])
   const fusdContract = useTokenContract(AllPids[1].token2Address[chainId])
+
+  const soulPrice = useSoulPrice()
+  const seancePrice = useSeancePrice()
+  const ftmPrice = useFantomPrice()
+  const ethPrice = useWrappedEthPrice()
 
   // ----------------------------------------------
   //                  Bond Helper
@@ -102,13 +107,6 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
    */
   const fetchTokenRateBals = async () => {
     try {
-      const result = await farmHelperContract?.fetchTokenRateBals()
-
-      const ftmPrice = result?.[1] / (result?.[0] / 10 ** 12)
-      const soulPrice = (result?.[2] / result?.[3]) * ftmPrice
-      const seancePrice = (result?.[4] / result?.[5]) * ftmPrice
-      const ethPrice = (result?.[8] / result?.[9]) * ftmPrice
-
       // console.log(
       //   'usdcPerFtm:',
       //   ftmPrice,
@@ -139,12 +137,6 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
    */
    const fetchUserLpValue = async (pid, token1Name, token2Name, lpAmount) => {
     try {
-      const rates = await fetchTokenRateBals()
-      const ftmPrice = rates?.[0]
-      const soulPrice = rates?.[1]
-      const seancePrice = rates?.[2]
-      const ethPrice = rates?.[3]
-
       const result = await helperContract?.fetchPidDetails(pid)
 
       // ------ TVL ------
@@ -195,12 +187,6 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
    */
   const fetchBondStats = async (pid, token1Name, token2Name) => {
     try {
-      const rates = await fetchTokenRateBals()
-      const ftmPrice = rates?.[0]
-      const soulPrice = rates?.[1]
-      const seancePrice = rates?.[2]
-      const ethPrice = rates?.[3]
-
       const result = await helperContract?.fetchPidDetails(pid)
 
       // console.log(token1Name, '/', token2Name, '- result', result)
@@ -388,8 +374,6 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   // amount of soul pending for redemption
   const pendingSoul = async (pid, user) => {
     try {
-      const prices = await fetchTokenRateBals()
-      const soulPrice = prices?.[1]
       const soulAmount = await bondContract?.pendingSoul(pid, user)
       // console.log('soulAmount', soulAmount, 'soulprice', soulPrice)
       return [soulAmount, soulPrice]
@@ -625,9 +609,6 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
       // console.log('summonerBalance', ethers.utils.formatUnits(summonerBalance))
 
       // summonerBal * soulPrice = TVL
-
-      const rawSoulPrice = await fusdPerSoul()
-      const soulPrice = BigNumber.from(ethers.utils.formatUnits(rawSoulPrice))
       // console.log('soulPrice', soulPrice)
 
       const totalLpValue = summonerBalance.mul(soulPrice)
