@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { Contract } from '@ethersproject/contracts'
-import { WNATIVE_ADDRESS } from 'sdk'
+import { NATIVE, WNATIVE_ADDRESS } from 'sdk'
 import ERC20_ABI from 'constants/abis/erc20.json'
 import { isAddress } from 'functions/validate'
 import { useActiveWeb3React } from 'services/web3'
@@ -31,7 +31,13 @@ function useTokenBalance(tokenAddress: string): BalanceProps {
   const fetchBalance = useCallback(async () => {
     async function getBalance(contract: Contract | null, owner: string | null | undefined): Promise<BalanceProps> {
       try {
-        if (account && chainId && contract?.address === WNATIVE_ADDRESS[chainId]) {
+        if (account && chainId 
+          && 
+          (
+            contract?.address === WNATIVE_ADDRESS[chainId]
+            || contract?.isNative)
+          )
+        {
           const ethBalance = await library?.getBalance(account)
           return { value: BigNumber.from(ethBalance), decimals: 18 }
         }
