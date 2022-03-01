@@ -128,6 +128,15 @@ export const pairQuery = gql`
   ${pairFieldsQuery}
 `
 
+export const pairReserveQuery = gql`
+  query pairReserveQuery($id: String!) {
+    pair(id: $id) {
+      id
+      reserveUSD
+    }
+  }
+`
+
 export const pairIdsQuery = gql`
   query pairIdsQuery($skip: Int) {
     pairs(first: 1000, skip: $skip) {

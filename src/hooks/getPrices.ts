@@ -1,12 +1,15 @@
 import { ChainId } from 'sdk'
 import { GRAPH_HOST } from 'services/graph/constants'
 import { pager } from 'services/graph/fetchers/pager'
+import { GraphProps } from 'services/graph/interfaces'
 import {
   dayDatasQuery,
   ethPriceQuery,
   factoryQuery,
   liquidityPositionsQuery,
   pairDayDatasQuery,
+  pairReserveQuery,
+  pairQuery,
   pairsQuery,
   tokenDayDatasQuery,
   tokenPairsQuery,
@@ -16,8 +19,9 @@ import {
   tokenSubsetQuery,
   transactionsQuery,
 } from 'services/graph/queries'
-import { useActiveWeb3React } from 'services/web3'
+// import { useActiveWeb3React } from 'services/web3'
 import useSWR, { SWRConfiguration } from 'swr'
+import stringify from 'fast-json-stable-stringify'
 
 export const EXCHANGE = {
   [ChainId.ETHEREUM]: 'soulswapfinance/fantom-exchange',
@@ -58,6 +62,12 @@ export const getToken = async (chainId = ChainId.FANTOM, query = tokenQuery, var
   return token
 }
 
+export const getPair = async (chainId = ChainId.FANTOM, query = pairQuery, variables) => {
+  // console.log('getTokens')
+  const { pair } = await exchange(chainId, query, variables)
+  return pair
+}
+
 // @ts-ignore TYPE NEEDS FIXING
 export const getTokenDayData = async (chainId = ChainId.FANTOM, variables) => {
   // console.log('getTokens')
@@ -81,6 +91,20 @@ export const getTokenPrice = async (chainId = ChainId.FANTOM, query, variables) 
   const { token } = await exchange(chainId, query, variables)
   return token?.derivedETH * nativePrice
 }
+
+export const getPairPrice = async (chainId = ChainId.FANTOM, query, variables) => {
+  const { pair } = await exchange(chainId, query, variables)
+  return pair?.reserveUSD
+}
+
+// @ts-ignore TYPE NEEDS FIXING
+// export const getPairPrice = async (chainId = ChainId.FANTOM, query, variables) => {
+//   // console.log('getPairPrice')
+//   const nativePrice = await getNativePrice(chainId)
+
+//   const { pair } = await exchange(chainId, query, variables)
+//   return pair?.reserveETH * nativePrice
+// }
 
 export const getNativePrice = async (chainId = ChainId.FANTOM, variables = undefined) => {
   const data = await getBundle(chainId, undefined, variables)
@@ -152,6 +176,30 @@ export const getWrappedEthPrice = async () => {
   })
 }
 
+export const getWrappedBtcPrice = async () => {
+  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
+    id: '0x321162cd933e2be498cd2267a90534a804051b11',
+  })
+}
+
+export function getTokensPrice(address: string) {
+  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
+    id: address,
+  })
+}
+
+export function getPairsPrice(address: string) {
+  return getPairPrice(ChainId.FANTOM, pairReserveQuery, {
+    id: address,
+  })
+}
+
+// export function getPairsPrice(address: string) {
+//   return getPairPrice(ChainId.FANTOM, pairReserveQuery, {
+//     id: address,
+//   })
+// }
+
 export const getBundle = async (
   chainId = ChainId.FANTOM,
   query = ethPriceQuery,
@@ -163,7 +211,7 @@ export const getBundle = async (
 }
 
 // @ts-ignore TYPE NEEDS FIXING
-export const getLiquidityPositions = async (chainId = ChainId.ETHEREUM, variables) => {
+export const getLiquidityPositions = async (chainId = ChainId.FANTOM, variables) => {
   const { liquidityPositions } = await exchange(chainId, liquidityPositionsQuery, variables)
   return liquidityPositions
 }
@@ -188,9 +236,35 @@ export const getTokenPairs = async (chainId = ChainId.FANTOM, variables = undefi
   return pairs0 || pairs1 ? [...(pairs0 ? pairs0 : []), ...(pairs1 ? pairs1 : [])] : undefined
 }
 
+// USE HOOKS
+
+export function useLiquidityPositions({
+  chainId = ChainId.FANTOM,
+  variables,
+  shouldFetch = true,
+  swrConfig = undefined,
+}: GraphProps) {
+  const { data } = useSWR(
+    shouldFetch ? ['liquidityPositions', chainId, stringify(variables)] : null,
+    (_, chainId) => getLiquidityPositions(chainId, variables),
+    swrConfig
+  )
+  return data
+}
 
 export function useSoulPrice(swrConfig: SWRConfiguration = undefined) {
   const { data } = useSWR(['soulPrice'], () => getSoulPrice(), swrConfig)
+  return data
+}
+
+export function useTokenPrice(tokenAddress: string, swrConfig: SWRConfiguration = undefined) {
+  const { data } = useSWR(['tokenPrice'], () => getTokensPrice(tokenAddress), swrConfig)
+  return data
+}
+
+// reserveUSD
+export function usePairPrice(pairAddress: string, swrConfig: SWRConfiguration = undefined) {
+  const { data } = useSWR(['pairPrice'], () => getPairsPrice(pairAddress), swrConfig)
   return data
 }
 
@@ -203,7 +277,6 @@ export function useWrappedLumPrice(swrConfig: SWRConfiguration = undefined) {
   const { data } = useSWR(['wLumPrice'], () => getWrappedLumPrice(), swrConfig)
   return data
 }
-
 
 export function useLuxorPrice(swrConfig: SWRConfiguration = undefined) {
   const { data } = useSWR(['luxorPrice'], () => getLuxorPrice(), swrConfig)
@@ -224,6 +297,18 @@ export function useWrappedEthPrice(swrConfig: SWRConfiguration = undefined) {
   const { data } = useSWR(['wethPrice'], () => getWrappedEthPrice(), swrConfig)
   return data
 }
+
+export function useWrappedBtcPrice(swrConfig: SWRConfiguration = undefined) {
+  const { data } = useSWR(['btcPrice'], () => getWrappedBtcPrice(), swrConfig)
+  return data
+}
+
+// PAIR PRICES //
+
+// export function usePairPrice(swrConfig: SWRConfiguration = undefined) {
+//   const { data } = useSWR(['pairPrice'], () => getPairsPrice(), swrConfig)
+//   return data
+// }
 
 // @ts-ignore TYPE NEEDS FIXING
 // export function useSeancePrice(swrConfig: SWRConfiguration = undefined) {

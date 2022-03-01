@@ -11,7 +11,7 @@ import { VAULTS } from '../constants/vaults'
 import { useActiveWeb3React } from 'services/web3'
 import { SOUL_BOND_ADDRESS } from 'features/bond/constants'
 import { BONDS } from 'constants/bonds'
-import { useFantomPrice, useLuxorPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice } from './getPrices'
+import { useFantomPrice, useLuxorPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice, useWrappedLumPrice } from './getPrices'
 
 const PAIR_INTERFACE = new Interface(ISoulSwapPair)
 
@@ -484,6 +484,7 @@ export function useSoulTVL(): TVLInfo[] {
   const seancePrice = useSeancePrice()
   const luxPrice = useLuxorPrice()
   const wethPrice = useWrappedEthPrice()
+  const wlumPrice = useWrappedLumPrice()
 
   const liquidityPools = Object.keys(POOLS[ChainId.FANTOM]).map((key) => {
     return { ...POOLS[ChainId.FANTOM][key], lpToken: key }
@@ -524,8 +525,7 @@ export function useSoulTVL(): TVLInfo[] {
 
     function getPrice(token: TokenInfo) {
       
-      if (token.symbol == 'SOUL' || token.id.toLowerCase() == SOUL[chainId].address.toLowerCase())
-      {
+      if (token.symbol == 'SOUL') {
         return soulPrice
       }
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {
@@ -537,7 +537,10 @@ export function useSoulTVL(): TVLInfo[] {
       if (token.symbol == 'LUX') {
         return luxPrice
       }
-      if (token.symbol == 'WETH') {
+      if (token.symbol == 'WLUM') {
+        return wlumPrice
+      }
+      if (token.symbol == 'WETH' || token.symbol == "ETH") {
         return wethPrice
       }
       if (
@@ -777,8 +780,8 @@ export function useV2PairsWithPrice(
         token.symbol == 'WFTM' || token.symbol == 'FTM' || 
         token.symbol == 'WETH' || token.symbol == 'ETH' ||
         token.symbol == 'USDC' || token.symbol == 'fUSDT' || 
-        token.symbol == 'DAI' || 
-        token.symbol == 'LUX' || token.symbol == 'WLUM' 
+        token.symbol == 'DAI' || token.symbol == 'LUX' 
+        || token.symbol == 'WLUM' 
       )
     }
 

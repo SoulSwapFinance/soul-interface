@@ -26,11 +26,8 @@ export default function Pairs() {
 
   const pairsFormatted = useMemo(() => {
     return type === 'all'
-      ? // @ts-ignore TYPE NEEDS FIXING
-        pairs?.map((pair) => {
-          // @ts-ignore TYPE NEEDS FIXING
+      ? pairs?.map((pair) => {
           const pair1d = pairs1d?.find((p) => pair.id === p.id) ?? pair
-          // @ts-ignore TYPE NEEDS FIXING
           const pair1w = pairs1w?.find((p) => pair.id === p.id) ?? pair1d
 
           return {
@@ -45,15 +42,10 @@ export default function Pairs() {
           }
         })
       : pairs
-          // @ts-ignore TYPE NEEDS FIXING
           ?.map((pair) => {
-            // @ts-ignore TYPE NEEDS FIXING
             const pair1d = pairs1d?.find((p) => pair.id === p.id) ?? pair
-            // @ts-ignore TYPE NEEDS FIXING
             const pair2d = pairs2d?.find((p) => pair.id === p.id) ?? pair1d
-            // @ts-ignore TYPE NEEDS FIXING
             const pair1w = pairs1w?.find((p) => pair.id === p.id) ?? pair2d
-            // @ts-ignore TYPE NEEDS FIXING
             const pair2w = pairs2w?.find((p) => pair.id === p.id) ?? pair1w
 
             return {
@@ -75,7 +67,6 @@ export default function Pairs() {
                 ((pair.volumeUSD - pair1w.volumeUSD) / (pair1w.volumeUSD - pair2w.volumeUSD)) * 100 - 100,
             }
           })
-          // @ts-ignore TYPE NEEDS FIXING
           .sort((a, b) => b.liquidityChangeNumber1d - a.liquidityChangeNumber1d)
   }, [type, pairs, pairs1d, pairs2d, pairs1w, pairs2w])
 

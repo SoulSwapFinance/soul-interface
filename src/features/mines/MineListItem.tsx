@@ -29,6 +29,9 @@ import { SOUL, SOUL_ADDRESS } from '../../constants'
 import styled from 'styled-components'
 import usePendingReward from './hooks/usePendingReward'
 import { useActiveWeb3React } from 'services/web3/hooks'
+import { useFantomPrice, usePairPrice, useSoulPrice, useTokenPrice, useWrappedBtcPrice, useWrappedEthPrice } from 'hooks/getPrices'
+import { useSoulPairs } from 'services/graph'
+import { getAddress } from '@ethersproject/address'
 
 const HideOnMobile = styled.div`
 @media screen and (max-width: 500px) {
@@ -46,21 +49,36 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   const { i18n } = useLingui()
   const token0 = useCurrency(farm.pair?.token0?.id) ?? undefined
   const token1 = useCurrency(farm.pair.token1?.id) ?? undefined
-  const tvlInfo = useTVL()
+  // const tvlInfo = useTVL()
+  // const lpToken = farm.pair?.address
   const harvestHelperContract = useHarvestHelperContract()
-  const soulPrice = usePrice(SOUL_ADDRESS[chainId]) // to avoid RPC call
-  const tokenPrice = usePrice(farm.pair?.token0.id)
+  // const soulPrice = usePrice(SOUL_ADDRESS[chainId]) // to avoid RPC call
+  const soulPrice = useSoulPrice() // to avoid RPC call
+  const tokenPrice 
+    = farm.pair?.token0.symbol == "WETH" ? useWrappedEthPrice()
+    : farm.pair?.token0.symbol == "SOUL" ? useSoulPrice()
+    : farm.pair?.token0.symbol == "WFTM" ? useFantomPrice()
+    : farm.pair?.token0.symbol == "WBTC" ? useWrappedBtcPrice()
+    : farm.pair?.token0.symbol == "DAI" ? 1
+    : usePrice(farm.pair?.token0.id)
 
   const pendingSoul = usePendingSoul(farm)
   const pendingReward = usePendingReward(farm)
-
+  // const lpTokenAddress = getAddress(farm.lpToken)
   let [data] = useV2PairsWithPrice([[token0, token1]])
   let [state, pair, pairPrice] = data
+  // let pairPriceV2
+  // = usePairPrice(farm.pair.token0.id.toLowerCase())
+  //   // = farm.pair?.token0?.symbol == "WFTM" ? useFantomPrice()
+  //   // : 0
 
+  // let pairPriceV2 
+  //   = usePairPrice(lpToken?.toLowerCase())
+  
   const rewardValue =
-  (farm?.rewards?.[0]?.rewardPrice ?? 0) * Number(pendingSoul?.toExact() ?? 0) +
-  (farm?.rewards?.[1]?.rewardPrice ?? 0) * Number(pendingReward ?? 0)
-
+  (farm?.rewards?.[0]?.rewardPrice ?? 0) * Number(pendingSoul?.toExact() ?? 0)
+  // + (farm?.rewards?.[1]?.rewardPrice ?? 0) * Number(pendingReward ?? 0)
+  // const pairs = useSoulPairs({ chainId, variables: { where: { lpToken } }, shouldFetch: !!chainId })?.[0]
 
   // function usePositions() {
   //   return useSoulPositions(useSoulSummonerContract())
@@ -75,7 +93,9 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
 
   const lpBalance = useSingleCallResult(harvestHelperContract, 'fetchBals', [farm?.id])?.result
 
-  const tvl = farm.pair?.token1 && farm.pair.type !== "underworld"
+  const tvl 
+  = farm.pair?.token1 && farm.pair.type !== "underworld"
+    // ? Number(usePairPrice(farm.pair.id))
     ? Number(pairPrice) * Number(lpBalance) / 1e18
     : Number(tokenPrice) * Number(lpBalance) / 1e18
 
@@ -119,9 +139,8 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
       <div className="flex gap-2 items-center">
 
         { /* TOKEN-LOGO */}
-
         {token1 && farm.pair.type !== "underworld" ? <CurrencyLogoArray currencies={[token0, token1]} dense size={36} />
-          : <CurrencyLogo currency={token0} size={54} />
+          : <CurrencyLogo currency={token0} size={46} />
         }
 
         { /* LP-TOKEN */}
@@ -135,14 +154,13 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
               farm?.pair?.token1?.symbol
             }
             {farm.pair.type == "underworld" &&
-              'LEND' + ' ' + farm?.pair?.token0?.symbol
+              farm?.pair?.token0?.symbol
             }
           </Typography>
           {farm?.rewards?.map((reward, i) => (
             <Typography variant="xs" className="text-low-emphesis">
               {/* Claimable: {' '} */}
               {formatNumber(rewardValue, true)}
-              {/* {formatNumber(pendingSoul?.toSignificant(4) ?? 0)} */}
             </Typography>
           ))}
 
@@ -162,6 +180,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
       {/* <div className={TABLE_TBODY_TD_CLASSNAME(1, 4)}> */}
       <div className="flex justify-center sm:justify-center items-center">
       {/* <div className="flex flex-col items-start sm:items-center justify-center"> */}
+      {farm?.rewards?.map((reward, i) => (
         <Typography weight={700} className="text-high-emphesis">
           {formatNumber(
             // PRICE PER TOKEN * TOKEN BALANCE
@@ -169,6 +188,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
             true)
           }
         </Typography>
+      ))}
       </div>
       {/* </div> */}
       <div className={classNames('hidden sm:flex flex-col !items-end !justify-center', TABLE_TBODY_TD_CLASSNAME(2, 4))}>

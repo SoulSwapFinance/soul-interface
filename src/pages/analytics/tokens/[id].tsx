@@ -102,9 +102,7 @@ export default function Token() {
     () =>
       /* @ts-ignore TYPE NEEDS FIXING */
       tokenPairs?.map((pair) => {
-        /* @ts-ignore TYPE NEEDS FIXING */
         const pair1d = tokenPairs1d?.find((p) => pair.id === p.id) ?? pair
-        /* @ts-ignore TYPE NEEDS FIXING */
         const pair1w = tokenPairs1w?.find((p) => pair.id === p.id) ?? pair1d
 
         return {

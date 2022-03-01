@@ -8,6 +8,7 @@ import { tryParseAmount } from 'functions'
 import { ANY, BNB, CRV, LUXOR, MIM, SEANCE, SOUL, FUSD, USDT, UNIDX, WBTC, WETH, WLUM, REAPER, GRIM, GRIMEVO, DAI } from 'constants/tokens'
 import { ANY_ADDRESS, BNB_ADDRESS, CRV_ADDRESS, FUSD_ADDRESS, GRIM_ADDRESS, GRIMEVO_ADDRESS, LUX_ADDRESS, REAPER_ADDRESS, SEANCE_ADDRESS, SOUL_ADDRESS, UNIDX_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS } from 'constants/addresses'
 import { usePrice } from 'hooks/usePrice'
+import { useLuxorPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice, useWrappedLumPrice } from './getPrices'
 // import { SupportedChainId } from '../constants/chains'
 // import { useBestV2Trade } from './useBestV2Trade'
 
@@ -200,12 +201,12 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
 
     // handle soul
     if (currency?.wrapped.equals(soul)) {
-      return new Price(soul, soul, '100', Number(soulPrice * 100).toFixed())
+      return new Price(soul, soul, '1000', Number(soulPrice * 1000).toFixed())
     }
 
     // handle seance
     if (currency?.wrapped.equals(seance)) {
-      return new Price(seance, seance, '100', Number(seancePrice * 100).toFixed())
+      return new Price(seance, seance, '1000', Number(seancePrice * 1000).toFixed())
     }
 
     // handle luxor
@@ -215,7 +216,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
 
     // handle wlum
     if (currency?.wrapped.equals(wlum)) {
-      return new Price(wlum, wlum, '1', Number(wLumensPrice * 1).toFixed())
+      return new Price(wlum, wlum, '100', Number(wLumensPrice * 100).toFixed())
     }
 
     // handle weth
