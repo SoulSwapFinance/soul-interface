@@ -55,12 +55,11 @@ const MineListItemDetails = ({ farm, onDismiss }) => {
             variant="filled"
           >
 
-            {farm.pair.token1 && farm.pair.type !== "underworld" && (
+            {farm.pair.token1 && (
               <ToggleButtonGroup.Button value={MineModalView.Liquidity}>
                 {
-                  (farm.pair?.id == "48" || farm.pair?.id == "49" ||
-                  farm.pair?.id == "51" || farm.pair?.id == "52"
-                  ) ? i18n._(t`Lending`) : i18n._(t`Liquidity`)}
+                  farm.pair?.type == "underworld"
+                  ? i18n._(t`Lending`) : i18n._(t`Liquidity`)}
               </ToggleButtonGroup.Button>
             )}
             <ToggleButtonGroup.Button value={MineModalView.Staking}>{i18n._(t`Staking`)}</ToggleButtonGroup.Button>
@@ -71,14 +70,11 @@ const MineListItemDetails = ({ farm, onDismiss }) => {
           <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Position ? 'block' : 'hidden')}>
             <InvestmentDetails farm={farm} />
           </div>
-          {farm.pair.token1 && farm.pair.type !== "underworld" &&
+          {farm.pair.token1 && // farm.pair.type !== "underworld" &&
             <div className={classNames(COLUMN_CONTAINER, view === MineModalView.Liquidity ? 'block' : 'hidden')}>
-              {
-              // (farm.pair?.id == "48" || farm.pair?.id == "49" ||
-              // farm.pair?.id == "51" || farm.pair?.id == "52"
-              // ) ? <ManageUnderworldPair farm={farm} />
-              // : 
-               <ManageSwapPair farm={farm} />
+              { farm.pair?.type == "underworld"
+              ? <ManageUnderworldPair farm={farm} />
+              : <ManageSwapPair farm={farm} />
               }
             </div>
           }

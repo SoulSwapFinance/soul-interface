@@ -94,7 +94,7 @@ const UnderworldWithdraw = ({ pair, header }) => {
       {!amountAvailable?.eq(0) && (
         <HeadlessUiModal.BorderedContent className="flex flex-col gap-4 border !border-blue/40 bg-dark-1000/40">
           <Typography variant="sm">
-            {i18n._(t`If your KMP is staked, you cannot withdraw your lent tokens. You must unstake first.`)}
+            {i18n._(t`If your asset is staked, you cannot withdraw your lent tokens. You must unstake first.`)}
           </Typography>
         </HeadlessUiModal.BorderedContent>
       )}

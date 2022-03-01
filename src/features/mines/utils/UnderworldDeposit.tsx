@@ -17,29 +17,30 @@ import { useActiveWeb3React } from 'services/web3'
 import { useETHBalances } from 'state/wallet/hooks'
 import React, { useCallback, useState } from 'react'
 
+// @ts-ignore TYPE NEEDS FIXING
 const UnderworldDeposit = ({ pair, header }) => {
   const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
-  // const [useCoffin, setUseCoffin] = useState<boolean>(false)
+  const [useCoffin, setUseCoffin] = useState<boolean>(false)
   const assetToken = useCurrency(pair?.asset.address) || undefined
   const [depositValue, setDepositValue] = useState('')
   const assetNative = WNATIVE[chainId || 250].address === pair?.asset.address
+  // @ts-ignore TYPE NEEDS FIXING
   const ethBalance = useETHBalances(assetNative ? [account ?? undefined] : [])
 
-  const balanceAmount 
-  = 
-  // useCoffin
-  //   ? pair?.asset.coffinBalance
-  //   : 
-    assetNative
+  const balanceAmount = useCoffin
+    ? pair?.asset.coffinBalance
+    : assetNative
     ? account
-      ? BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
+      ? // @ts-ignore TYPE NEEDS FIXING
+        BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
       : undefined
     : pair?.asset.balance
 
   const balance =
     assetToken &&
     balanceAmount &&
+    // @ts-ignore TYPE NEEDS FIXING
     CurrencyAmount.fromRawAmount(assetNative ? WNATIVE[chainId || 250] : assetToken, balanceAmount)
 
   const parsedDepositValue = tryParseAmount(depositValue, assetToken)
@@ -54,18 +55,17 @@ const UnderworldDeposit = ({ pair, header }) => {
       if (pair?.currentExchangeRate.isZero()) {
         cooker.updateExchangeRate(false, ZERO, ZERO)
       }
-      // cooker.addAsset(BigNumber.from(parsedDepositValue?.quotient.toString()), useCoffin)
-      cooker.addAsset(BigNumber.from(parsedDepositValue?.quotient.toString()), false)
-      return `${i18n._(t`Deposit`)} ${pair?.token1.symbol}`
+      // @ts-ignore TYPE NEEDS FIXING
+      cooker.addAsset(BigNumber.from(parsedDepositValue?.quotient.toString()), useCoffin)
+      return `${i18n._(t`Deposit`)} ${pair?.asset.tokenInfo.symbol}`
     },
-    // [i18n, pair?.asset.tokenInfo.symbol, pair?.currentExchangeRate, parsedDepositValue?.quotient, useCoffin]
-    [i18n, pair?.asset.tokenInfo.symbol, pair?.currentExchangeRate, parsedDepositValue?.quotient]
+    [i18n, pair?.asset.tokenInfo.symbol, pair?.currentExchangeRate, parsedDepositValue?.quotient, useCoffin]
   )
 
   const error = !parsedDepositValue
     ? 'Enter Amount'
-    : balance?.lessThan(parsedDepositValue)
-    ? 'Insufficient Balance'
+    : balance.lessThan(parsedDepositValue)
+    ? 'Insufficient balance'
     : undefined
 
   const isValid = !error
@@ -78,16 +78,17 @@ const UnderworldDeposit = ({ pair, header }) => {
           title={''}
           value={depositValue}
           currency={assetToken}
+          token0={pair.token0.id}
+          token1={pair.token1.id}
           onChange={(val) => setDepositValue(val || '')}
-          // headerRight={
-          //   <AssetInput.WalletSwitch
-          //     onChange={() => setUseCoffin(!useCoffin)}
-          //     checked={useCoffin}
-          //     id="switch-spend-from-wallet-a"
-          //   />
-          // }
-          // spendFromWallet={useCoffin}
-          // spendFromWallet={}
+          headerRight={
+            <AssetInput.WalletSwitch
+              onChange={() => setUseCoffin(!useCoffin)}
+              checked={useCoffin}
+              id="switch-spend-from-wallet-a"
+            />
+          }
+          spendFromWallet={useCoffin}
           id="add-liquidity-input-tokenb"
         />
       </HeadlessUiModal.BorderedContent>
@@ -102,7 +103,9 @@ const UnderworldDeposit = ({ pair, header }) => {
         </HeadlessUiModal.BorderedContent>
       )}
       {!account ? (
-        <Web3Connect />
+        <Web3Connect 
+        // fullWidth 
+        />
       ) : isValid &&
         !underworldPermit &&
         (underworldApprovalState === CoffinApprovalState.NOT_APPROVED ||
@@ -115,7 +118,7 @@ const UnderworldDeposit = ({ pair, header }) => {
           {i18n._(t`Approve Underworld`)}
         </Button>
       ) : isValid &&
-        // !useCoffin &&
+        !useCoffin &&
         (tokenApprovalState === ApprovalState.NOT_APPROVED || tokenApprovalState === ApprovalState.PENDING) ? (
         <Button
           loading={tokenApprovalState === ApprovalState.PENDING}
