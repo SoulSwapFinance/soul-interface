@@ -203,7 +203,7 @@ export default function SoulStatsModal(): JSX.Element | null {
             <Typography variant="sm" className="flex items-center py-0.5">
               {`Circulating Supply`}
             </Typography>
-            {/* <QuestionHelper
+            <QuestionHelper
               text={
                 <div className="flex flex-col gap-2 py-1 px-3 w-full">
                   <div className="flex items-center justify-between">
@@ -245,7 +245,7 @@ export default function SoulStatsModal(): JSX.Element | null {
                   </div>
                 </div>
               }
-            /> */}
+            />
           </div>,
           formatNumberScale(
             Number(tokenInfo?.totalSupply)
@@ -266,7 +266,7 @@ export default function SoulStatsModal(): JSX.Element | null {
             <Typography variant="sm" className="flex items-center py-0.5">
               {`Total Value Locked`}
             </Typography>
-            {/* <QuestionHelper
+            <QuestionHelper
               text={
                 <div className="flex flex-col gap-2 py-1 px-3 w-full">
                   <div className="flex items-center justify-between">
@@ -309,7 +309,7 @@ export default function SoulStatsModal(): JSX.Element | null {
                   </div>
                 </div>
               }
-            /> */}
+            />
           </div>,
           formatCurrency(
             Number(farmsTvl + bondsTvl), 0)
