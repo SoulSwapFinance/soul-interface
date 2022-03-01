@@ -75,7 +75,7 @@ export default function ChartCard({
         {chartFiltered && (
           <LineGraph
             data={chartFiltered}
-            stroke={{ gradient: { from: '#27B0E6', to: '#FA52A0' } }}
+            stroke={{ gradient: { from: '#8644DB', to: '#B485FF' } }}
             setSelectedIndex={setSelectedIndex}
           />
         )}

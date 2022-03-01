@@ -787,7 +787,7 @@ export const POOLS: AddressMap = {
       },
     },
     '0x9fA5de19495331E13b443F787B90CdD22B32263d': {  // DAI/WETH
-      id: 51, // 420
+      id: 51, // 0
       type: 'underworld',
       token0: {
         id: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // WETH
