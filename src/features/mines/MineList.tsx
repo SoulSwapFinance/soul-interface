@@ -49,10 +49,10 @@ const FarmList = ({ farms, term }) => {
   return items ? (
     <>
       <div className={classNames(TABLE_WRAPPER_DIV_CLASSNAME)}>
-        <div className="grid grid-cols-3 sm:grid-cols-4 min-w-[340px]">
+        <div className="grid grid-cols-3 sm:grid-cols-3 min-w-[340px]">
         {/* <div className="grid grid-cols-4"> */}
           <div
-            className={classNames('flex gap-1 sm:justify-center sm:items-center cursor-pointer', TABLE_TR_TH_CLASSNAME(0, 4))}
+            className={classNames('flex gap-1 sm:justify-start sm:items-center cursor-pointer', TABLE_TR_TH_CLASSNAME(0, 4))}
             onClick={() => requestSort('pair.token0.symbol')}
           >
             <Typography variant="sm" weight={700}>
@@ -69,7 +69,7 @@ const FarmList = ({ farms, term }) => {
             </Typography>
             {/* <SortIcon id={sortConfig.key} direction={sortConfig.direction} active={sortConfig.key === 'tvl'} /> */}
           </div>
-          <div className={classNames("hidden sm:block", TABLE_TR_TH_CLASSNAME(2, 4))}
+          <div className={classNames("hidden", TABLE_TR_TH_CLASSNAME(2, 4))}
             onClick={() => requestSort('allocPoint')}
             >
             <Typography variant="sm" weight={700}>
