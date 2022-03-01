@@ -8,6 +8,7 @@ import { HeadlessUiModal } from 'components/Modal'
 import Typography from 'components/Typography'
 import Web3Connect from 'components/Web3Connect'
 import { UnderworldCooker } from 'entities'
+import SmartNumberInput from 'features/lending/components/SmartNumberInput'
 import { ZERO } from 'functions/math'
 import { tryParseAmount } from 'functions/parse'
 import { useCurrency } from 'hooks/Tokens'
@@ -17,30 +18,28 @@ import { useActiveWeb3React } from 'services/web3'
 import { useETHBalances } from 'state/wallet/hooks'
 import React, { useCallback, useState } from 'react'
 
+// @ts-ignore TYPE NEEDS FIXING
 const UnderworldDeposit = ({ pair, header }) => {
   const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
-  // const [useCoffin, setUseCoffin] = useState<boolean>(false)
+  const [useCoffin, setUseCoffin] = useState<boolean>(false)
   const assetToken = useCurrency(pair?.asset.address) || undefined
   const [depositValue, setDepositValue] = useState('')
-  const assetNative = WNATIVE[chainId || 250].address === pair?.asset.address
+  const assetNative = WNATIVE[chainId].address === pair?.asset.address
   const ethBalance = useETHBalances(assetNative ? [account ?? undefined] : [])
+  const balance = useCoffin
+    ? pair?.asset.coffinBalance
+    : assetNative
+      ? //  @ts-ignore TYPE NEEDS FIXING
+      BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
+      : pair?.asset.balance
 
-  const balanceAmount 
-  = 
-  // useCoffin
-  //   ? pair?.asset.coffinBalance
-  //   : 
-    assetNative
-    ? account
-      ? BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
-      : undefined
-    : pair?.asset.balance
-
-  const balance =
-    assetToken &&
-    balanceAmount &&
-    CurrencyAmount.fromRawAmount(assetNative ? WNATIVE[chainId || 250] : assetToken, balanceAmount)
+  const max = useCoffin
+    ? pair?.asset.coffinBalance
+    : assetNative
+      ? // @ts-ignore TYPE NEEDS FIXING
+      BigNumber.from(ethBalance[account]?.quotient.toString() || 0)
+      : pair?.asset.balance
 
   const parsedDepositValue = tryParseAmount(depositValue, assetToken)
   const [underworldApprovalState, approveUnderworldFallback, underworldPermit, onApproveUnderworld, onCook] = useUnderworldApproveCallback()
@@ -54,21 +53,20 @@ const UnderworldDeposit = ({ pair, header }) => {
       if (pair?.currentExchangeRate.isZero()) {
         cooker.updateExchangeRate(false, ZERO, ZERO)
       }
-      // cooker.addAsset(BigNumber.from(parsedDepositValue?.quotient.toString()), useCoffin)
-      cooker.addAsset(BigNumber.from(parsedDepositValue?.quotient.toString()), false)
-      return `${i18n._(t`Deposit`)} ${pair?.token1.symbol}`
+      // @ts-ignore TYPE NEEDS FIXING
+      cooker.addAsset(BigNumber.from(parsedDepositValue?.quotient.toString()), useCoffin)
+      return `${i18n._(t`Deposit`)} ${pair?.asset.tokenInfo.symbol}`
     },
-    // [i18n, pair?.asset.tokenInfo.symbol, pair?.currentExchangeRate, parsedDepositValue?.quotient, useCoffin]
-    [i18n, pair?.asset.tokenInfo.symbol, pair?.currentExchangeRate, parsedDepositValue?.quotient]
+    [i18n, pair?.asset.tokenInfo.symbol, pair?.currentExchangeRate, parsedDepositValue?.quotient, useCoffin]
   )
 
-  const error = !parsedDepositValue
-    ? 'Enter Amount'
-    : balance?.lessThan(parsedDepositValue)
-    ? 'Insufficient Balance'
-    : undefined
+  // const error = !parsedDepositValue
+  //   ? 'Enter Amount'
+  //   : balance < parsedDepositValue
+  //   ? 'Insufficient Balance'
+  //   : undefined
 
-  const isValid = !error
+  const isValid = true //!error
 
   return (
     <>
@@ -86,8 +84,7 @@ const UnderworldDeposit = ({ pair, header }) => {
           //     id="switch-spend-from-wallet-a"
           //   />
           // }
-          // spendFromWallet={useCoffin}
-          // spendFromWallet={}
+          spendFromWallet={!useCoffin}
           id="add-liquidity-input-tokenb"
         />
       </HeadlessUiModal.BorderedContent>
@@ -102,7 +99,9 @@ const UnderworldDeposit = ({ pair, header }) => {
         </HeadlessUiModal.BorderedContent>
       )}
       {!account ? (
-        <Web3Connect />
+        <Web3Connect 
+        // fullWidth 
+        />
       ) : isValid &&
         !underworldPermit &&
         (underworldApprovalState === CoffinApprovalState.NOT_APPROVED ||
@@ -115,7 +114,7 @@ const UnderworldDeposit = ({ pair, header }) => {
           {i18n._(t`Approve Underworld`)}
         </Button>
       ) : isValid &&
-        // !useCoffin &&
+        !useCoffin &&
         (tokenApprovalState === ApprovalState.NOT_APPROVED || tokenApprovalState === ApprovalState.PENDING) ? (
         <Button
           loading={tokenApprovalState === ApprovalState.PENDING}
@@ -130,7 +129,8 @@ const UnderworldDeposit = ({ pair, header }) => {
           disabled={!isValid}
           color={!isValid && !!parsedDepositValue ? 'red' : 'blue'}
         >
-          {error || i18n._(t`Confirm Deposit`)}
+          {/* {error || i18n._(t`Confirm Deposit`)} */}
+          {i18n._(t`Confirm Deposit`)}
         </Button>
       )}
     </>
