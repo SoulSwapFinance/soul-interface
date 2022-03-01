@@ -2,18 +2,16 @@ import { ChainId, computePairAddress, Currency, CurrencyAmount, Pair, SOUL, Toke
 
 import ISoulSwapPair from '../constants/abis/soulswap/ISoulSwapPair.json'
 import { Interface } from '@ethersproject/abi'
-import { useContext, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useMultipleContractSingleData, useSingleCallResult } from '../state/multicall/hooks'
 import { FACTORY_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS, SOUL_DAO_ADDRESS, LUX_TREASURY_ADDRESS } from '../constants'
-import { PriceContext } from '../contexts/priceContext'
 import { POOLS, TokenInfo } from '../constants/farms'
 import { concat } from 'lodash'
 import { VAULTS } from '../constants/vaults'
-import { usePriceHelperContract } from '../features/bond/hooks/useContract'
-import { formatCurrency } from '../modals/TokensStatsModal'
 import { useActiveWeb3React } from 'services/web3'
 import { SOUL_BOND_ADDRESS } from 'features/bond/constants'
 import { BONDS } from 'constants/bonds'
+import { useFantomPrice, useLuxorPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice } from './getPrices'
 
 const PAIR_INTERFACE = new Interface(ISoulSwapPair)
 
@@ -81,22 +79,9 @@ export interface TVLInfo {
 
 export function useVaultTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
-  const priceHelperContract = usePriceHelperContract()
-
-  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'])?.result
-  // console.log(Number(rawFtmPrice))
-  const ftmPrice = Number(rawFtmPrice) / 1E18
-  // console.log(ftmPrice)
-
-  const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6'])?.result
-  // console.log(Number(rawSeancePrice))
-  const seancePrice = Number(rawSeancePrice) / 1E18
-  // console.log(seancePrice)
-
-  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
-  // console.log(Number(rawSoulPrice))
-  const soulPrice = Number(rawSoulPrice) / 1E18
-  // console.log(soulPrice)
+  const ftmPrice = useFantomPrice()
+  const soulPrice = useSoulPrice()
+  const seancePrice = useSeancePrice()
 
   const farmingPools = Object.keys(VAULTS[ChainId.FANTOM]).map((key) => {
     return { ...VAULTS[ChainId.FANTOM][key] }
@@ -225,32 +210,11 @@ export function useVaultTVL(): TVLInfo[] {
 
 export function useTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
-  const priceHelperContract = usePriceHelperContract()
-
-  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'])?.result
-  // console.log(Number(rawFtmPrice))
-  const ftmPrice = Number(rawFtmPrice) / 1E18
-  // console.log(ftmPrice)
-
-  const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6'])?.result
-  // console.log(Number(rawSeancePrice))
-  const seancePrice = Number(rawSeancePrice) / 1E18
-  // console.log(seancePrice)
-
-  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
-  // console.log(Number(rawSoulPrice))
-  const soulPrice = Number(rawSoulPrice) / 1E18
-  // console.log(soulPrice)
-
-  const rawLuxPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'])?.result
-  // console.log(Number(rawLuxPrice))
-  const luxPrice = Number(rawLuxPrice) / 1E18
-  // console.log(luxPrice)
-
-  const rawEthPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x74b23882a30290451A17c44f4F05243b6b58C76d'])?.result
-  // console.log(Number(rawEthPrice))
-  const wethPrice = Number(rawEthPrice) / 1E18
-  // console.log(wethPrice)
+  const ftmPrice = useFantomPrice()
+  const soulPrice = useSoulPrice()
+  const seancePrice = useSeancePrice()
+  const luxPrice = useLuxorPrice()
+  const wethPrice = useWrappedEthPrice()
 
   const farmingPools = Object.keys(POOLS[ChainId.FANTOM]).map((key) => {
     return { ...POOLS[ChainId.FANTOM][key], lpToken: key }
@@ -391,32 +355,11 @@ export function useTVL(): TVLInfo[] {
 }
 export function useBondTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
-  const priceHelperContract = usePriceHelperContract()
-
-  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'])?.result
-  // console.log(Number(rawFtmPrice))
-  const ftmPrice = Number(rawFtmPrice) / 1E18
-  // console.log(ftmPrice)
-
-  const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6'])?.result
-  // console.log(Number(rawSeancePrice))
-  const seancePrice = Number(rawSeancePrice) / 1E18
-  // console.log(seancePrice)
-
-  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
-  // console.log(Number(rawSoulPrice))
-  const soulPrice = Number(rawSoulPrice) / 1E18
-  // console.log(soulPrice)
-
-  const rawLuxPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'])?.result
-  // console.log(Number(rawLuxPrice))
-  const luxPrice = Number(rawLuxPrice) / 1E18
-  // console.log(luxPrice)
-
-  const rawEthPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x74b23882a30290451A17c44f4F05243b6b58C76d'])?.result
-  // console.log(Number(rawEthPrice))
-  const wethPrice = Number(rawEthPrice) / 1E18
-  // console.log(wethPrice)
+  const ftmPrice = useFantomPrice()
+  const soulPrice = useSoulPrice()
+  const seancePrice = useSeancePrice()
+  const luxPrice = useLuxorPrice()
+  const wethPrice = useWrappedEthPrice()
 
   const bondingPools = Object.keys(BONDS[ChainId.FANTOM]).map((key) => {
     return { ...BONDS[ChainId.FANTOM][key], lpToken: key }
@@ -536,32 +479,11 @@ export function useBondTVL(): TVLInfo[] {
 
 export function useSoulTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
-  const priceHelperContract = usePriceHelperContract()
-
-  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'])?.result
-  // console.log(Number(rawFtmPrice))
-  const ftmPrice = Number(rawFtmPrice) / 1E18
-  // console.log(ftmPrice)
-
-  const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6'])?.result
-  // console.log(Number(rawSeancePrice))
-  const seancePrice = Number(rawSeancePrice) / 1E18
-  // console.log(seancePrice)
-
-  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
-  // console.log(Number(rawSoulPrice))
-  const soulPrice = Number(rawSoulPrice) / 1E18
-  // console.log(soulPrice)
-
-  const rawLuxPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'])?.result
-  // console.log(Number(rawLuxPrice))
-  const luxPrice = Number(rawLuxPrice) / 1E18
-  // console.log(luxPrice)
-
-  const rawEthPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x74b23882a30290451A17c44f4F05243b6b58C76d'])?.result
-  // console.log(Number(rawEthPrice))
-  const wethPrice = Number(rawEthPrice) / 1E18
-  // console.log(wethPrice)
+  const ftmPrice = useFantomPrice()
+  const soulPrice = useSoulPrice()
+  const seancePrice = useSeancePrice()
+  const luxPrice = useLuxorPrice()
+  const wethPrice = useWrappedEthPrice()
 
   const liquidityPools = Object.keys(POOLS[ChainId.FANTOM]).map((key) => {
     return { ...POOLS[ChainId.FANTOM][key], lpToken: key }
@@ -687,32 +609,11 @@ export function useSoulTVL(): TVLInfo[] {
 
 export function useLuxTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
-  const priceHelperContract = usePriceHelperContract()
-
-  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'])?.result
-  // console.log(Number(rawFtmPrice))
-  const ftmPrice = Number(rawFtmPrice) / 1E18
-  // console.log(ftmPrice)
-
-  const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6'])?.result
-  // console.log(Number(rawSeancePrice))
-  const seancePrice = Number(rawSeancePrice) / 1E18
-  // console.log(seancePrice)
-
-  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
-  // console.log(Number(rawSoulPrice))
-  const soulPrice = Number(rawSoulPrice) / 1E18
-  // console.log(soulPrice)
-
-  const rawLuxPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'])?.result
-  // console.log(Number(rawLuxPrice))
-  const luxPrice = Number(rawLuxPrice) / 1E18
-  // console.log(luxPrice)
-
-  const rawEthPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x74b23882a30290451A17c44f4F05243b6b58C76d'])?.result
-  // console.log(Number(rawEthPrice))
-  const wethPrice = Number(rawEthPrice) / 1E18
-  // console.log(wethPrice)
+  const ftmPrice = useFantomPrice()
+  const soulPrice = useSoulPrice()
+  const seancePrice = useSeancePrice()
+  const luxPrice = useLuxorPrice()
+  const wethPrice = useWrappedEthPrice()
 
   const liquidityPools = Object.keys(POOLS[ChainId.FANTOM]).map((key) => {
     return { ...POOLS[ChainId.FANTOM][key], lpToken: key }
@@ -837,32 +738,11 @@ export function useV2PairsWithPrice(
   currencies: [Currency | undefined, Currency | undefined][]
 ): [PairState, Pair | null, number][] {
   const { chainId } = useActiveWeb3React()
-  const priceHelperContract = usePriceHelperContract()
-
-  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
-  // console.log(Number(rawSoulPrice))
-  const soulPrice = Number(rawSoulPrice) / 1E18
-  // console.log('soul price:%s', soulPrice)
-
-  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'])?.result
-  // console.log(Number(rawFtmPrice))
-  const ftmPrice = Number(rawFtmPrice) / 1E18
-  // console.log(ftmPrice)
-
-  const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6'])?.result
-  // console.log(Number(rawSeancePrice))
-  const seancePrice = Number(rawSeancePrice) / 1E18
-  // console.log(seancePrice)
-
-  const rawLuxPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'])?.result
-  // console.log(Number(rawLuxPrice))
-  const luxPrice = Number(rawLuxPrice) / 1E18
-  // console.log(luxPrice)
-
-  const rawEthPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x74b23882a30290451A17c44f4F05243b6b58C76d'])?.result
-  // console.log(Number(rawEthPrice))
-  const wethPrice = Number(rawEthPrice) / 1E18
-  // console.log(wethPrice)
+  const ftmPrice = useFantomPrice()
+  const soulPrice = useSoulPrice()
+  const seancePrice = useSeancePrice()
+  const luxPrice = useLuxorPrice()
+  const wethPrice = useWrappedEthPrice()
 
   const tokens = useMemo(
     () => currencies.map(([currencyA, currencyB]) => [currencyA?.wrapped, currencyB?.wrapped]),
@@ -893,14 +773,17 @@ export function useV2PairsWithPrice(
   return useMemo(() => {
     function isKnownToken(token: Token) {
       return (
-        token.address.toLowerCase() == SOUL[chainId].address.toLowerCase() ||
-        token.symbol == 'WFTM' || token.symbol == 'FTM' || token.symbol == 'SEANCE' || token.symbol == 'WETH' ||
-        token.symbol == 'USDC' || token.symbol == 'fUSDT' || token.symbol == 'DAI' || token.symbol == 'LUX' 
+        token.symbol == 'SOUL' || token.symbol == 'SEANCE' ||
+        token.symbol == 'WFTM' || token.symbol == 'FTM' || 
+        token.symbol == 'WETH' || token.symbol == 'ETH' ||
+        token.symbol == 'USDC' || token.symbol == 'fUSDT' || 
+        token.symbol == 'DAI' || 
+        token.symbol == 'LUX' || token.symbol == 'WLUM' 
       )
     }
 
     function getPrice(token: Token) {
-      if (token.address.toLowerCase() == SOUL[chainId].address.toLowerCase() || token.symbol == 'SOUL') {
+      if (token.symbol == 'SOUL') {
         return soulPrice
       }
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {

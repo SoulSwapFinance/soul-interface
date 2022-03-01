@@ -25,6 +25,7 @@ import { useCurrency } from 'hooks/Tokens'
 import { usePriceHelperContract } from 'features/bond/hooks/useContract'
 import { useUserInfo } from 'features/mines/hooks'
 import { useActiveWeb3React } from 'services/web3'
+import { useSoulPrice } from 'hooks/getPrices'
 
 interface PositionCardProps {
   pair: Pair
@@ -159,14 +160,8 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
 
   const [depositValue, setDepositValue] = useState('')
   const [withdrawValue, setWithdrawValue] = useState('')  
-  
-  const priceHelperContract = usePriceHelperContract()
-  
-  const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
-  // console.log(Number(rawSoulPrice))
-  const soulPrice = Number(rawSoulPrice) / 1E18
-  // console.log('soul price:%s', soulPrice)
-  
+  const soulPrice = useSoulPrice()
+
   const balance = userPoolBalance
   // const stakedAmount = useUserInfo(farm, liquidityToken)
   

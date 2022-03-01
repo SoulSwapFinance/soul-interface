@@ -11,13 +11,19 @@ import {
   usePairContract,
   useTokenContract,
 } from '../farm/hooks/useContract'
+import { useEnchantPrice, useFantomPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice } from 'hooks/getPrices'
 
 function useSoulCircle() {
   const { account, chainId } = useActiveWeb3React()
 
   const helperContract = useHelperContract()
   const circlesContract = useCircleStakingContract()
-
+  const soulPrice = useSoulPrice()
+  const ethPrice = useWrappedEthPrice()
+  const ftmPrice = useFantomPrice()
+  const seancePrice = useSeancePrice()
+  const enchantPrice = useEnchantPrice()
+  
   // ----------------------------------------------
   //                  Farm Helper
   // ----------------------------------------------
@@ -36,26 +42,19 @@ function useSoulCircle() {
    */
    const fetchTokenRateBals = async () => {
     try {
-      const result = await helperContract?.fetchTokenRateBals()
 
-      const ftmPrice = result?.[1] / (result?.[0] / 10 ** 12)
-      const soulPrice = (result?.[2] / result?.[3]) * ftmPrice
-      const seancePrice = (result?.[4] / result?.[5]) * ftmPrice
-      const enchantPrice = (result?.[6] / result?.[7]) * ftmPrice
-      const ethPrice = (result?.[8] / result?.[9]) * ftmPrice
-
-      console.log(
-        'usdcPerFtm:',
-        ftmPrice,
-        'soulPrice:',
-        soulPrice,
-        'seancePrice:',
-        seancePrice,
-        'enchantPrice:',
-        enchantPrice,
-        'ethPrice:',
-        ethPrice
-      )
+      // console.log(
+      //   'usdcPerFtm:',
+      //   ftmPrice,
+      //   'soulPrice:',
+      //   soulPrice,
+      //   'seancePrice:',
+      //   seancePrice,
+      //   'enchantPrice:',
+      //   enchantPrice,
+      //   'ethPrice:',
+      //   ethPrice
+      // )
 
       return [ftmPrice, soulPrice, seancePrice, enchantPrice, ethPrice]
     } catch (e) {
