@@ -1,5 +1,6 @@
 import { ChainId } from 'sdk'
 import { GRAPH_HOST } from 'services/graph/constants'
+import { pager } from 'services/graph/fetchers/pager'
 import {
   dayDatasQuery,
   ethPriceQuery,
@@ -15,15 +16,12 @@ import {
   tokenSubsetQuery,
   transactionsQuery,
 } from 'services/graph/queries'
-
-import { pager } from './pager'
+import { useActiveWeb3React } from 'services/web3'
+import useSWR, { SWRConfiguration } from 'swr'
 
 export const EXCHANGE = {
-  // [ChainId.ETHEREUM]: 'sushiswap/exchange',
   [ChainId.ETHEREUM]: 'soulswapfinance/fantom-exchange',
   [ChainId.FANTOM]: 'soulswapfinance/fantom-exchange',
-  // [ChainId.FANTOM]: 'sushiswap/fantom-exchange',
-  // [ChainId.BSC]: 'sushiswap/bsc-exchange',
   [ChainId.BSC]: 'soulswapfinance/fantom-exchange',
 }
 
@@ -85,56 +83,8 @@ export const getTokenPrice = async (chainId = ChainId.FANTOM, query, variables) 
 }
 
 export const getNativePrice = async (chainId = ChainId.FANTOM, variables = undefined) => {
-  // console.log('getEthPrice')
   const data = await getBundle(chainId, undefined, variables)
   return data?.bundles[0]?.ethPrice
-}
-
-export const getEthPrice = async (variables = undefined) => {
-  return getNativePrice(ChainId.ETHEREUM, variables)
-}
-
-export const getYggPrice = async (variables = {}) => {
-  return getTokenPrice(ChainId.ETHEREUM, tokenPriceQuery, {
-    id: '0x25f8087ead173b73d6e8b84329989a8eea16cf73',
-    ...variables,
-  })
-}
-
-export const getRulerPrice = async (variables = {}) => {
-  return getTokenPrice(ChainId.ETHEREUM, tokenPriceQuery, {
-    id: '0x2aeccb42482cc64e087b6d2e5da39f5a7a7001f8',
-    ...variables,
-  })
-}
-
-export const getTruPrice = async (variables = {}) => {
-  return getTokenPrice(ChainId.ETHEREUM, tokenPriceQuery, {
-    id: '0x4c19596f5aaff459fa38b0f7ed92f11ae6543784',
-    ...variables,
-  })
-}
-
-export const getCvxPrice = async (variables = {}) => {
-  return getTokenPrice(ChainId.ETHEREUM, tokenPriceQuery, {
-    id: '0x4e3fbd56cd56c3e72c1403e103b45db9da5b9d2b',
-    ...variables,
-  })
-}
-
-export const getAlcxPrice = async (variables = {}) => {
-  // console.log('getAlcxPrice')
-  return getTokenPrice(ChainId.ETHEREUM, tokenPriceQuery, {
-    id: '0xdbdb4d16eda451d0503b854cf79d55697f90c8df',
-    ...variables,
-  })
-}
-
-export const getPicklePrice = async (variables = {}) => {
-  return getTokenPrice(ChainId.ETHEREUM, tokenPriceQuery, {
-    id: '0x429881672b9ae42b8eba0e26cd9c73711b891ca5',
-    ...variables,
-  })
 }
 
 // export const getPrice = (tokenAddress: string) => async (variables = {}) => {
@@ -144,25 +94,41 @@ export const getPicklePrice = async (variables = {}) => {
 //   })
 // }
 
-export const getMphPrice = async (variables = {}) => {
-  return getTokenPrice(ChainId.ETHEREUM, tokenPriceQuery, {
-    id: '0x8888801af4d980682e47f1a9036e589479e835c5',
+// export function useTokenPrice(id: string) {
+//   const price = async (variables = {}) => {
+//     return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
+//       id,
+//       ...variables,
+//     })
+//   }
+
+//   return price
+// }
+
+export const getSoulPrice = async (variables = {}) => {
+  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
+    id: '0xe2fb177009ff39f52c0134e8007fa0e4baacbd07',
     ...variables,
   })
 }
 
-// export const getSushiPrice = async (variables = {}) => {
-//   // console.log('getSushiPrice')
-//   return getTokenPrice(ChainId.ETHEREUM, tokenPriceQuery, {
-//     id: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
-//     ...variables,
-//   })
-// }
-
-export const getSoulPrice = async (variables = {}) => {
-  // console.log('getSoulPrice')
+export const getLuxorPrice = async (variables = {}) => {
   return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
-    id: '0xe2fb177009ff39f52c0134e8007fa0e4baacbd07',
+    id: '0x6671e20b83ba463f270c8c75dae57e3cc246cb2b',
+    ...variables,
+  })
+}
+
+export const getWrappedLumPrice = async (variables = {}) => {
+  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
+    id: '0xa69557e01b0a6b86e5b29be66d730c0bfff68208',
+    ...variables,
+  })
+}
+
+export const getSeancePrice = async (variables = {}) => {
+  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
+    id: '0x124b06c5ce47de7a6e9efda71a946717130079e6',
     ...variables,
   })
 }
@@ -170,12 +136,6 @@ export const getSoulPrice = async (variables = {}) => {
 export const getFantomPrice = async () => {
   return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
     id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
-  })
-}
-
-export const getSpellPrice = async () => {
-  return getTokenPrice(ChainId.ETHEREUM, tokenPriceQuery, {
-    id: '0x090185f2135308bad17527004364ebcc2d37e5f6',
   })
 }
 
@@ -214,3 +174,32 @@ export const getTokenPairs = async (chainId = ChainId.FANTOM, variables = undefi
   const { pairs0, pairs1 } = await exchange(chainId, tokenPairsQuery, variables)
   return pairs0 || pairs1 ? [...(pairs0 ? pairs0 : []), ...(pairs1 ? pairs1 : [])] : undefined
 }
+
+
+export function useSoulPrice(swrConfig: SWRConfiguration = undefined) {
+  const { data } = useSWR(['soulPrice'], () => getSoulPrice(), swrConfig)
+  return data
+}
+
+export function useSeancePrice(swrConfig: SWRConfiguration = undefined) {
+  const { data } = useSWR(['seancePrice'], () => getSeancePrice(), swrConfig)
+  return data
+}
+
+export function useWrappedLumPrice(swrConfig: SWRConfiguration = undefined) {
+  const { data } = useSWR(['wLumPrice'], () => getWrappedLumPrice(), swrConfig)
+  return data
+}
+
+export function useLuxorPrice(swrConfig: SWRConfiguration = undefined) {
+  const { data } = useSWR(['luxorPrice'], () => getLuxorPrice(), swrConfig)
+  return data
+}
+
+// @ts-ignore TYPE NEEDS FIXING
+// export function useSeancePrice(swrConfig: SWRConfiguration = undefined) {
+//   const { chainId } = useActiveWeb3React()
+//   const { data } = useSWR(chainId && chainId === ChainId.FANTOM 
+//     ? ['seancePrice'] : null, () => getSeancePrice(), swrConfig)
+//   return data
+// }

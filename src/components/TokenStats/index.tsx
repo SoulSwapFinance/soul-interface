@@ -1,16 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Image from 'next/image'
 // import NetworkModel from 'modals/NetworkModal'
 import TokensStatsModal, { formatCurrency } from 'modals/TokensStatsModal'
 import { useModalOpen, useToggleTokenStatsModal } from 'state/application/hooks'
 import { ApplicationModal } from 'state/application/actions'
 import { useSingleCallResult } from 'state/multicall/hooks'
-import { usePriceHelperContract } from 'features/bond/hooks/useContract'
+// import { usePriceHelperContract } from 'features/bond/hooks/useContract'
 import styled from 'styled-components'
 import { useActiveWeb3React } from 'services/web3'
-import { usePriceApi } from 'features/vault/hooks'
-import { SEANCE_ADDRESS, SOUL_ADDRESS } from 'constants/addresses'
-import { usePrice } from 'hooks/usePrice'
+import { useSeancePrice, useSoulPrice } from 'hooks/getPrices'
+
 const HideOnMobile = styled.div`
 @media screen and (max-width: 500px) {
   display: none;
@@ -18,12 +17,11 @@ const HideOnMobile = styled.div`
 `;
 
 function TokenStats(): JSX.Element | null {
-
   const { chainId } = useActiveWeb3React()
   const toggleTokenStatsModal = useToggleTokenStatsModal()
   const open = useModalOpen(ApplicationModal.SOUL_STATS)
-  const soulPrice = usePrice(SOUL_ADDRESS[chainId])
-  const seancePrice = usePrice(SEANCE_ADDRESS[chainId])
+  const soulPrice = useSoulPrice()
+  const seancePrice = useSeancePrice()
 
   if (!chainId) return null
 

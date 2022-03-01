@@ -200,6 +200,7 @@
     "rebass": "^4.0.7",
     "recharts": "^2.1.9",
     "recoil": "^0.5.2",
+    "soul-data": "^2.5.0",
     "tiny-invariant": "^1.1.0",
     "toformat": "^2.0.0",
     "web3": "^1.7.0",
