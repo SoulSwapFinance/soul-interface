@@ -78,8 +78,6 @@ const UnderworldDeposit = ({ pair, header }) => {
           title={''}
           value={depositValue}
           currency={assetToken}
-          token0={pair.token0.id}
-          token1={pair.token1.id}
           onChange={(val) => setDepositValue(val || '')}
           headerRight={
             <AssetInput.WalletSwitch
