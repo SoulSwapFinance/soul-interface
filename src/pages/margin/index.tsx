@@ -27,6 +27,7 @@ import router from 'next/router'
 import SwapHeader from '../../features/trade/HeaderNew'
 import MainHeader from 'features/swap/MainHeader'
 import { i18n } from '@lingui/core'
+import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 // import { formatNumber } from 'functions'
 
 // import MainHeader from 'features/swap/MainHeader'
@@ -58,7 +59,7 @@ const Margin = () => {
   return ( 
   <>
   <MainHeader />
-    {/* <DoubleGlowShadowV2 opacity="0.6"> */}
+    <DoubleGlowShadowV2 opacity="0.6">
     <div id="margin-page" className="mt-4 w-full max-w-2xl p-4 space-y-4 rounded bg-dark-900 z-1">
       {/* <Container id="charts-page" maxWidth="2xl" className="space-y-4"> */}
         {/* <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
@@ -69,7 +70,7 @@ const Margin = () => {
             src={'https://soul.sh/borrow'}
             height={'720'}
             width={"100%"} /> */}
-                <BorrowLayout>
+      {/* <BorrowLayout> */}
       <Head>
         <title>{i18n._(t`Borrow`)} | Soul</title>
         <meta
@@ -406,11 +407,9 @@ const Margin = () => {
           </div>
         </InfiniteScroll>
       </Card>
-    </BorrowLayout>
-    
       </div>
-      
-    {/* </DoubleGlowShadowV2> */}
+    {/* </BorrowLayout> */}
+    </DoubleGlowShadowV2>
     </>
     
 
@@ -418,24 +417,24 @@ const Margin = () => {
   
 }
 // @ts-ignore TYPE NEEDS FIXING
-const BorrowLayout = ({ children }) => {
-  const { i18n } = useLingui()
-  return (
-    <Layout
-      left={
-        <Card
-          className="h-full bg-dark-900"
-          backgroundImage={BORROW_IMG}
-          title={i18n._(t`Borrow assets and leverage up`)}
-          description={i18n._(
-            t`Borrowing allows you to obtain liquidity without selling. Your borrow limit depends on the amount of deposited collateral. You will be able to borrow up to 75% of your collateral and repay at any time with accrued interest.`
-          )}
-        />
-      }
-    >
-      {children}
-    </Layout>
-  )
-}
+// const BorrowLayout = ({ children }) => {
+//   const { i18n } = useLingui()
+//   return (
+//     <Layout
+//       // left={
+//       //   <Card
+//       //     className="h-full bg-dark-900"
+//       //     backgroundImage={BORROW_IMG}
+//       //     title={i18n._(t`Borrow assets and leverage up`)}
+//       //     description={i18n._(
+//       //       t`Borrowing allows you to obtain liquidity without selling. Your borrow limit depends on the amount of deposited collateral. You will be able to borrow up to 75% of your collateral and repay at any time with accrued interest.`
+//       //     )}
+//       //   />
+//       // }
+//     >
+//       {children}
+//     </Layout>
+//   )
+// }
 
 export default Margin
