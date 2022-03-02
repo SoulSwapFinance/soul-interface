@@ -682,17 +682,14 @@ msgstr "Harvest SOUL"
 msgid "Harvest rewards and unstake your LP tokens at any time. You can then remove your liquidity to receive your base investment tokens back in your wallet."
 msgstr "Harvest rewards and unstake your LP tokens at any time. You can then remove your liquidity to receive your base investment tokens back in your wallet."
 
-msgid "Harvest rewards and unstake your UMP tokens at any time. You can then withdraw your lent"
-msgstr "Harvest rewards and unstake your UMP tokens at any time. You can then withdraw your lent"
+msgid "Harvest rewards and unstake your MP tokens at any time. You can then withdraw your lent"
+msgstr "Harvest rewards and unstake your MP tokens at any time. You can then withdraw your lent"
 
 msgid "Harvest {0} SOUL"
 msgstr "Harvest {0} SOUL"
 
 msgid "Harvest {0}/{1}"
 msgstr "Harvest {0}/{1}"
-
-msgid "Health"
-msgstr "Health"
 
 msgid "Historical Total Locked: Connect Wallet"
 msgstr "Historical Total Locked: Connect Wallet"
@@ -721,8 +718,8 @@ msgstr "If you purchase a token from this list, you may not be able to sell it b
 msgid "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
 msgstr "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
 
-msgid "If your KMP is staked, you cannot withdraw your lent tokens. You must unstake first."
-msgstr "If your KMP is staked, you cannot withdraw your lent tokens. You must unstake first."
+msgid "If your asset is staked, you cannot withdraw your lent tokens. You must unstake first."
+msgstr "If your asset is staked, you cannot withdraw your lent tokens. You must unstake first."
 
 msgid "Import"
 msgstr "Import"
@@ -851,9 +848,6 @@ msgstr "Links"
 
 msgid "Liquidity"
 msgstr "Liquidity"
-
-msgid "Liquidity Pools"
-msgstr "Liquidity Pools"
 
 msgid "Liquidity Positions"
 msgstr "Liquidity Positions"
@@ -1078,8 +1072,8 @@ msgstr "Pending Treasury Transfer"
 msgid "Place a limit order or check the status of your past orders"
 msgstr "Place a limit order or check the status of your past orders"
 
-msgid "Please connect to the appropriate Ethereum network."
-msgstr "Please connect to the appropriate Ethereum network."
+msgid "Please connect to the appropriate network."
+msgstr "Please connect to the appropriate network."
 
 msgid "Please make sure your {0} balance is sufficient to withdraw and then try again."
 msgstr "Please make sure your {0} balance is sufficient to withdraw and then try again."
@@ -1303,11 +1297,11 @@ msgstr "Select Rate"
 msgid "Select Token"
 msgstr "Select Token"
 
+msgid "Select Wallet"
+msgstr "Select Wallet"
+
 msgid "Select a token to find your liquidity"
 msgstr "Select a token to find your liquidity"
-
-msgid "Select a wallet"
-msgstr "Select a wallet"
 
 msgid "Send to:"
 msgstr "Send to:"
@@ -1838,6 +1832,12 @@ msgstr "minutes"
 
 msgid "or the transaction will revert."
 msgstr "or the transaction will revert."
+
+msgid "to lending pool."
+msgstr "to lending pool."
+
+msgid "to staking pool."
+msgstr "to staking pool."
 
 msgid "tokens into the farm to start earning rewards."
 msgstr "tokens into the farm to start earning rewards."

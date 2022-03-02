@@ -673,16 +673,13 @@ msgstr ""
 msgid "Harvest rewards and unstake your LP tokens at any time. You can then remove your liquidity to receive your base investment tokens back in your wallet."
 msgstr ""
 
-msgid "Harvest rewards and unstake your UMP tokens at any time. You can then withdraw your lent"
+msgid "Harvest rewards and unstake your MP tokens at any time. You can then withdraw your lent"
 msgstr ""
 
 msgid "Harvest {0} SOUL"
 msgstr ""
 
 msgid "Harvest {0}/{1}"
-msgstr ""
-
-msgid "Health"
 msgstr ""
 
 msgid "Historical Total Locked: Connect Wallet"
@@ -712,7 +709,7 @@ msgstr ""
 msgid "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
 msgstr ""
 
-msgid "If your KMP is staked, you cannot withdraw your lent tokens. You must unstake first."
+msgid "If your asset is staked, you cannot withdraw your lent tokens. You must unstake first."
 msgstr ""
 
 msgid "Import"
@@ -837,9 +834,6 @@ msgid "Links"
 msgstr ""
 
 msgid "Liquidity"
-msgstr ""
-
-msgid "Liquidity Pools"
 msgstr ""
 
 msgid "Liquidity Positions"
@@ -1063,7 +1057,7 @@ msgstr ""
 msgid "Place a limit order or check the status of your past orders"
 msgstr ""
 
-msgid "Please connect to the appropriate Ethereum network."
+msgid "Please connect to the appropriate network."
 msgstr ""
 
 msgid "Please make sure your {0} balance is sufficient to withdraw and then try again."
@@ -1282,10 +1276,10 @@ msgstr ""
 msgid "Select Token"
 msgstr ""
 
-msgid "Select a token to find your liquidity"
+msgid "Select Wallet"
 msgstr ""
 
-msgid "Select a wallet"
+msgid "Select a token to find your liquidity"
 msgstr ""
 
 msgid "Send to:"
@@ -1812,6 +1806,12 @@ msgid "minutes"
 msgstr ""
 
 msgid "or the transaction will revert."
+msgstr ""
+
+msgid "to lending pool."
+msgstr ""
+
+msgid "to staking pool."
 msgstr ""
 
 msgid "tokens into the farm to start earning rewards."

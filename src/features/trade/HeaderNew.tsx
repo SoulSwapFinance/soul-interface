@@ -44,7 +44,20 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Swap`)}
           </Typography>
         </NavLink>
+
         <NavLink
+          activeClassName="text-high-emphesis"
+          href={{
+            pathname: '/margin',
+            // query: getQuery(inputCurrency, outputCurrency),
+          }}
+        >
+          <Typography weight={700} className="text-secondary hover:text-white">
+            {i18n._(t`Margin`)}
+          </Typography>
+        </NavLink>
+
+        {/* <NavLink
           activeClassName="text-high-emphesis"
           href={{
             pathname: '/limit-order',
@@ -54,7 +67,7 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
           <Typography weight={700} className="text-secondary hover:text-white">
             {i18n._(t`Limit`)}
           </Typography>
-        </NavLink>
+        </NavLink> */}
         <NavLink
           activeClassName="text-high-emphesis"
           href={`/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : '/FTM'}${
