@@ -107,7 +107,7 @@ export default function Pool() {
       {/* <MainHeader /> */}
       {/* <SoulLogo /> */}
       {/* <br /> <br /> */}
-      {/* <DoubleGlowShadowV2 opacity="0.6"> */}
+      <DoubleGlowShadowV2 opacity="0.6">
         <Container maxWidth="2xl" className="space-y-3">
         {/* <Alert
           title={i18n._(t`Liquidity Provider Rewards`)}
@@ -142,14 +142,7 @@ export default function Pool() {
               </Empty>
             ) : pairs?.length > 0 ? (
               <>
-                {/* <div className="flex items-center justify-center">
-                  <ExternalLink
-                    href={"https://analytics.sushi.com/user/" + account}
-                  >
-                    Account analytics and accrued fees <span> ↗</span>
-                  </ExternalLink>
-                </div> */}
-                {pairs.map((v2Pair) => (
+                {pairs?.map((v2Pair) => (
                   <FullPositionCard
                     key={v2Pair.liquidityToken.address}
                     pair={v2Pair}
@@ -182,17 +175,17 @@ export default function Pool() {
                     {i18n._(t`Import`)}
                   </Button>
 
-                  {migrationSupported && (
+                  {/* {migrationSupported && (
                     <Button id="create-pool-button" color="gray" onClick={() => router.push(`/migrate`)}>
                       {i18n._(t`Migrate`)}
                     </Button>
-                  )}
+                  )} */}
                 </div>
               )}
             </div>
           </div>
         </Container>
-      {/* </DoubleGlowShadowV2> */}
+      </DoubleGlowShadowV2>
     </>
   )
 }

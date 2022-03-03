@@ -8,7 +8,6 @@ import { tryParseAmount } from 'functions'
 import { ANY, BNB, CRV, LUXOR, MIM, SEANCE, SOUL, FUSD, USDT, UNIDX, WBTC, WETH, WLUM, REAPER, GRIM, GRIMEVO, DAI } from 'constants/tokens'
 import { ANY_ADDRESS, BNB_ADDRESS, CRV_ADDRESS, FUSD_ADDRESS, GRIM_ADDRESS, GRIMEVO_ADDRESS, LUX_ADDRESS, REAPER_ADDRESS, SEANCE_ADDRESS, SOUL_ADDRESS, UNIDX_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS } from 'constants/addresses'
 import { usePrice } from 'hooks/usePrice'
-import { useLuxorPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice, useWrappedLumPrice } from './getPrices'
 // import { SupportedChainId } from '../constants/chains'
 // import { useBestV2Trade } from './useBestV2Trade'
 
