@@ -25,7 +25,6 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/pages/farm/index.jsx",
     "src/features/bond/BondRowRender.tsx"
   ],
   "exclude": [
