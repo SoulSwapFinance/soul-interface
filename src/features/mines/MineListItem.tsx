@@ -58,7 +58,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
     : farm.pair?.token0.symbol == "WFTM" ? useFantomPrice()
     : farm.pair?.token0.symbol == "WBTC" ? useWrappedBtcPrice()
     : farm.pair?.token0.symbol == "DAI" ? 1
-    : usePrice(farm.pair?.token0.id)
+    : usePrice(farm.pair?.token0?.id)
 
   const pendingSoul = usePendingSoul(farm)
   const pendingReward = usePendingReward(farm)
