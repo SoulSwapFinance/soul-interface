@@ -47,14 +47,6 @@
         "logoURI": "https://cryptologos.cc/logos/fantom-ftm-logo.svg?v=003"
       },
       {
-        "name": "Anyswap",
-        "address": "0xdDcb3fFD12750B45d32E084887fdf1aABAb34239",
-        "symbol": "ANY",
-        "decimals": 18,
-        "chainId": 250,
-        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xdDcb3fFD12750B45d32E084887fdf1aABAb34239/logo.png"
-      },
-      {
         "name": "Binance",
         "address": "0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454",
         "symbol": "BNB",

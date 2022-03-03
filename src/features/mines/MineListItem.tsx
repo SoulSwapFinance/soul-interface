@@ -17,7 +17,7 @@ import { usePendingSoul } from 'features/mines/hooks'
 // FETCH PENDING REWARDS //
 
 import { useSoulPositions } from './hooks'
-import { usePrice } from 'hooks/usePrice'
+import usePriceApi from 'hooks/usePriceApi'
 import { useHarvestHelperContract } from 'hooks/useContract'
 import useTokenAnalytics from 'features/analytics/hooks/useTokensAnalytics'
 import { PairType } from './enum'
@@ -52,12 +52,10 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   const harvestHelperContract = useHarvestHelperContract()
   const soulPrice = useSoulPrice() // to avoid RPC call
   const tokenPrice 
-    = farm.pair?.token0.symbol == "WETH" ? useWrappedEthPrice()
-    : farm.pair?.token0.symbol == "SOUL" ? useSoulPrice()
-    : farm.pair?.token0.symbol == "WFTM" ? useFantomPrice()
+    = farm.pair?.token0?.symbol == "SOUL" ? useSoulPrice()
     : farm.pair?.token0.symbol == "WBTC" ? useWrappedBtcPrice()
     : farm.pair?.token0.symbol == "DAI" ? 1
-    : usePrice(farm.pair?.token0?.id)
+    : usePriceApi(farm?.pair?.token0?.id)
 
   const pendingSoul = usePendingSoul(farm)
   const pendingReward = usePendingReward(farm)

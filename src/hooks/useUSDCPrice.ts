@@ -33,9 +33,9 @@ const DAI_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(DAI[ChainId.FANTOM], 100_000e18),
 }
 
-// const MIM_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-//   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(MIM[ChainId.FANTOM], 100_000e6),
-// }
+const MIM_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(MIM[ChainId.FANTOM], 100_000e6),
+}
 
 const FUSD_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(FUSD[ChainId.FANTOM], 100_000e6),
@@ -121,7 +121,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   const usdtAmountOut = chainId ? USDT_AMOUNT_OUT[chainId] : undefined
   const daiAmountOut = chainId ? DAI_AMOUNT_OUT[chainId] : undefined
   const fusdAmountOut = chainId ? FUSD_AMOUNT_OUT[chainId] : undefined
-  // const mimAmountOut = chainId ? MIM_AMOUNT_OUT[chainId] : undefined
+  const mimAmountOut = chainId ? MIM_AMOUNT_OUT[chainId] : undefined
   
   const soulAmountOut = chainId ? SOUL_AMOUNT_OUT[chainId] : undefined
   const seanceAmountOut = chainId ? SEANCE_AMOUNT_OUT[chainId] : undefined
