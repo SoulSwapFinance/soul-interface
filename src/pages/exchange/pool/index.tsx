@@ -121,7 +121,6 @@ export default function Pool() {
             <div className="p-4 mb-00 space-y-3">
               <div className="text-center">
                 <Typography component="h1" variant="h2">
-                  {i18n._(t``)}
                   {i18n._(t`Liquidity Positions`)}
                 </Typography>
               </div>
@@ -130,7 +129,7 @@ export default function Pool() {
                   <Button variant="filled" color="purple" size="lg">
                   <NavLink href={'/info/dashboard'}>
                         <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                        Account Analytics and Accrued Fees <span> ↗</span>
+                        View Account Analytics <span> ↗</span>
                         </a>
                   </NavLink>
                   </Button>
