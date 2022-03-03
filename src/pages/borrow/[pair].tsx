@@ -14,7 +14,7 @@ import { Borrow, PairTools, Repay, Strategy } from 'features/lending'
 import { useUnderworldPair } from 'features/lending/hooks'
 import { formatNumber, formatPercent } from 'functions/format'
 import NetworkGuard from 'guards/Network'
-import { usePrice, useUSDCPrice } from 'hooks'
+import { useUSDCPrice } from 'hooks'
 import { useToken } from 'hooks/Tokens'
 import { useRedirectOnChainId } from 'hooks/useRedirectOnChainId'
 import { useV2Pair } from 'hooks/useV2Pairs'
@@ -23,6 +23,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { RecoilRoot } from 'recoil'
 import { e10 } from 'functions/math'
+import usePriceApi from 'hooks/usePriceApi'
 
 export default function Pair() {
   useRedirectOnChainId('/borrow')
@@ -33,8 +34,8 @@ export default function Pair() {
   const pair = useUnderworldPair(router.query.pair as string)
   const userCollateralBalance = Number(pair?.userCollateralShare / 1e18) // √
   const userBorrowBalance = Number(pair?.currentUserBorrowAmount.string / 1e18) // √
-  const collateralPrice = usePrice(pair?.collateral.address)
-  const borrowPrice = usePrice(pair?.asset.address)
+  const collateralPrice = usePriceApi(pair?.collateral.address)
+  const borrowPrice = usePriceApi(pair?.asset.address)
   const userCollateralValue = userCollateralBalance * collateralPrice
   const userBorrowValue = userBorrowBalance * borrowPrice
   const pairUtilization = userBorrowValue * 10**(pair?.collateral.tokenInfo.decimals) / Number(userCollateralValue) * 100
@@ -164,8 +165,8 @@ const PairLayout = ({ children }) => {
   const asset = useToken(pair?.asset.address)
   const collateral = useToken(pair?.collateral.address)
   const [pairState, liquidityPair] = useV2Pair(asset, collateral)
-  const assetPrice = useUSDCPrice(asset)
-  const collateralPrice = useUSDCPrice(collateral)
+  const assetPrice = usePriceApi(asset?.address)
+  const collateralPrice = usePriceApi(collateral?.address)
   const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
 
   return pair ? (
@@ -282,8 +283,8 @@ const PairLayout = ({ children }) => {
                       <div className="text-lg text-high-emphesis">
                         {formatNumber(
                           liquidityPair?.reserve1
-                            .multiply(assetPrice?.quotient)
-                            .add(liquidityPair?.reserve1.multiply(collateralPrice?.quotient))
+                            .multiply(assetPrice)
+                            .add(liquidityPair?.reserve1.multiply(collateralPrice))
                             .toSignificant(4),
                           true
                         )}

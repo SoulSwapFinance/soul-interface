@@ -70,9 +70,6 @@ msgstr "50%"
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
 msgstr "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
 
-msgid "ACTIVE"
-msgstr "ACTIVE"
-
 msgid "ALL"
 msgstr "ALL"
 
@@ -825,14 +822,14 @@ msgstr "Learn About Wallets"
 msgid "Lend"
 msgstr "Lend"
 
+msgid "Lend Asset"
+msgstr "Lend Asset"
+
 msgid "Lend your assets, earn yield with ZERO impermanent loss"
 msgstr "Lend your assets, earn yield with ZERO impermanent loss"
 
 msgid "Lending"
 msgstr "Lending"
-
-msgid "Limit"
-msgstr "Limit"
 
 msgid "Limit Orders"
 msgstr "Limit Orders"
@@ -915,6 +912,9 @@ msgstr "Manage Token Lists"
 msgid "Manage this pool"
 msgstr "Manage this pool"
 
+msgid "Margin"
+msgstr "Margin"
+
 msgid "Markets"
 msgstr "Markets"
 
@@ -944,9 +944,6 @@ msgstr "Minimum received after slippage"
 
 msgid "Mint SOUL with Liquidity"
 msgstr "Mint SOUL with Liquidity"
-
-msgid "N"
-msgstr "N"
 
 msgid "Net Worth"
 msgstr "Net Worth"
@@ -1700,9 +1697,6 @@ msgstr "Wrap {0} {1} to {2}"
 
 msgid "Wrong Network"
 msgstr "Wrong Network"
-
-msgid "Y"
-msgstr "Y"
 
 msgid "YOURS"
 msgstr "YOURS"

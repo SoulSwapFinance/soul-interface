@@ -57,10 +57,14 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM],
     FANTOM.DAI,
+    FANTOM.USDT,
     FANTOM.USDC,
     FANTOM.WBTC,
     FANTOM.WETH,
-    FANTOM.SOUL
+    FANTOM.SOUL,
+    FANTOM.SEANCE,
+    FANTOM.LUX,
+    FANTOM.WLUM,
   ],
   [ChainId.BSC]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.BSC],
@@ -70,7 +74,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     BSC.USDT,
     BSC.BTCB,
     BSC.WETH,
-    BSC.MIM,
+    // BSC.MIM,
   ],
   [ChainId.FANTOM_TESTNET]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM_TESTNET]
@@ -142,8 +146,11 @@ export const COMMON_BASES: ChainTokenList = {
     SOUL[ChainId.FANTOM],
     FANTOM.WETH,
     FANTOM.WBTC,
+    FANTOM.SOUL,
     FANTOM.SEANCE,
     FANTOM.USDC,
+    FANTOM.LUX,
+    FANTOM.WLUM,
     FANTOM.DAI,
     FANTOM.USDT,
   ],
@@ -152,7 +159,7 @@ export const COMMON_BASES: ChainTokenList = {
     ...WRAPPED_NATIVE_ONLY[ChainId.BSC],
     BSC.WETH,
     BSC.BTCB,
-    BSC.MIM,
+    // BSC.MIM,
     BSC.SPELL,
     BSC.ICE,
     BSC.DAI,
@@ -198,7 +205,7 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
     BSC.USDT,
     BSC.BTCB,
     BSC.WETH,
-    BSC.MIM,
+    // BSC.MIM,
   ],
 }
 

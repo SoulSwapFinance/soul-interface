@@ -12,11 +12,10 @@ import {
 
 import SUMMONER_HELPER_ADDRESS from 'constants'
 
-import { useCircleStakingContract } from 'features/farm/hooks/useContract'
+import { useCircleStakingContract } from 'hooks/useContract'
 import { useHelperContract } from 'features/bond/hooks/useContract'
-import { SoulSummonerAddress } from 'features/farm/constants'
-import { AllPids } from 'features/farm/Pids'
 import { useEnchantPrice, useFantomPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice } from 'hooks/getPrices'
+import { SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS } from 'sdk'
 
 // const helperContract = useHelperContract()
 
@@ -29,8 +28,6 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
   const lpTokenContract = usePairContract(lpToken)
   const token1Contract = useTokenContract(token1Address[chainId])
   const token2Contract = useTokenContract(token2Address[chainId])
-  const soulContract = useTokenContract(AllPids[0].token1Address[chainId])
-  const fusdContract = useTokenContract(AllPids[0].token2Address[chainId])
   const soulPrice = useSoulPrice()
   const ethPrice = useWrappedEthPrice()
   const ftmPrice = useFantomPrice()
@@ -438,7 +435,7 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
    */
   const fetchUserLpTokenAlloc = async (account) => {
     try {
-      const contractBal = await lpTokenContract?.balanceOf(SoulSummonerAddress)
+      const contractBal = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[chainId])
       const userBal = await lpTokenContract?.balanceOf(account)
 
       const alloc = userBal / contractBal
@@ -462,7 +459,7 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
       const totalSupply = await lpTokenContract?.totalSupply()
 
       // get how many lpTokens held by Summoner
-      const heldBySummoner = await lpTokenContract?.balanceOf(SoulSummonerAddress)
+      const heldBySummoner = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[chainId])
 
       // get how many lpTokens held by user
       const heldByUser = await lpTokenContract?.balanceOf(account)
@@ -529,24 +526,6 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
       return e
     }
   }
-  
-  /**
-   * Value of SOUL in FUSD
-   */
-  const fusdPerSoul = async () => {
-    try {
-      const totalSoul = await soulContract.balanceOf(AllPids[0].lpAddresses[chainId])
-      const totalFusd = await fusdContract.balanceOf(AllPids[3].lpAddresses[chainId])
-
-      const fusdPerSoul = totalFusd / totalSoul
-
-      return fusdPerSoul
-    } catch (e) {
-      console.log(e)
-      // alert(e.message)
-      return e
-    }
-  }
 
   // ------- FARMS -------
 
@@ -575,7 +554,7 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
 
       // lp tokens held by summoner
       const totalLpTokens = await lpTokenContract?.totalSupply()
-      const summonerLpTokens = await lpTokenContract?.balanceOf(SoulSummonerAddress)
+      const summonerLpTokens = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[chainId])
       const supplyHeldBySummoner = summonerLpTokens / totalLpTokens
 
       // value of lp tokens held by summoner
@@ -637,7 +616,7 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
   const fetchPid0LiquidityValue = async (lpToken) => {
     try {
       // SOUL held by summoner
-      const rawSummonerBal = await lpTokenContract?.balanceOf(SoulSummonerAddress)
+      const rawSummonerBal = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[chainId])
       const summonerBalance = BigNumber.from(ethers.utils.formatUnits(rawSummonerBal))
       console.log('summonerBalance', ethers.utils.formatUnits(summonerBalance))
 

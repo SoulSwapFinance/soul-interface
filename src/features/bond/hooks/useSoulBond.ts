@@ -6,7 +6,6 @@ import {
   useHelperContract,
   usePriceHelperContract,
   useBondHelperContract,
-  // useSoulSummonerContract,
   useSoulBondContract,
   usePairContract,
   useTokenContract,
@@ -26,7 +25,6 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   const farmHelperContract = useHelperContract()
   const helperContract = useBondHelperContract()
   const priceHelperContract = usePriceHelperContract()
-  // const summonerContract = useSoulSummonerContract()
   const bondContract = useSoulBondContract()
   const lpTokenContract = usePairContract(lpToken)
   const token1Contract = useTokenContract(token1Address[chainId])

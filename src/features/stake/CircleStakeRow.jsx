@@ -3,12 +3,10 @@ import styled from 'styled-components'
 
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
-
-import useSoulCircle from './useSoulCircle'
+import { SOUL_CIRCLE_ADDRESS } from 'sdk'
+import { useSoulCircle } from './useSoulCircle'
 // import useMulticall from "../../hooks/useMulticall";
-import useApprove from '../../features/farm/hooks/useApprove'
-
-import { SoulCircleAddress } from '../farm/constants'
+import useApprove from 'features/bond/hooks/useApprove'
 
 import {
   FlexText,
@@ -223,7 +221,7 @@ const CircleStakeRow = ({ pid, lpSymbol, lpToken, token1, token2, farm, startTim
   // Checks if the user has approved contract to move lpTokens
   const fetchApproval = async () => {
     // Checks if SoulSummoner can move tokens
-    const amount = await erc20Allowance(account, SoulCircleAddress)
+    const amount = await erc20Allowance(account, SOUL_CIRCLE_ADDRESS[chainId])
     if (amount > 0) setApproved(true)
     return amount
   }
@@ -231,7 +229,7 @@ const CircleStakeRow = ({ pid, lpSymbol, lpToken, token1, token2, farm, startTim
   // Approves contract to move lpTokens
   const handleApprove = async () => {
     try {
-      const tx = await erc20Approve(SoulCircleAddress)
+      const tx = await erc20Approve(SOUL_CIRCLE_ADDRESS[chainId])
     } catch (e) {
       alert(e.message)
       console.log(e)

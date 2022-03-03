@@ -21,7 +21,6 @@ import MarketHeader from 'features/lending/components/MarketHeader'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
 import { useUnderworldBorrowPositions } from 'features/portfolio/AssetBalances/underworld/hooks'
-import { usePrice, useUSDCPrice } from 'hooks'
 import { e10 } from 'functions/math'
 import router from 'next/router'
 

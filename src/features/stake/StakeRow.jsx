@@ -5,8 +5,8 @@ import { ethers } from "ethers";
 
 import { useActiveWeb3React } from 'services/web3'
 
-import useSoulSummoner from "../../features/farm/hooks/useSoulSummoner";
-import useApprove from "../../features/farm/hooks/useApprove";
+import useSoulSummoner from "features/mines/hooks/useSoulSummoner";
+import useApprove from "features/bond/hooks/useApprove";
 
 import {
   SOUL_SUMMONER_ADDRESS,

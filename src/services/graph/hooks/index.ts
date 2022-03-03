@@ -8,7 +8,6 @@ import { useEffect, useMemo } from 'react'
 import useSWR, { SWRConfiguration } from 'swr'
 
 import { ChainId } from '../../../sdk'
-// import { Chef } from '../../../features/farm/enum'
 import concat from 'lodash/concat'
 import { useActiveWeb3React } from 'services/web3'
 

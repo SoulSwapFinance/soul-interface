@@ -29,6 +29,7 @@ import WarningsView from '../components/WarningsList'
 import { usePrice } from 'hooks'
 import AssetInput from 'components/AssetInput'
 import LendAssetInput from 'components/LendAssetInput'
+import usePriceApi from 'hooks/usePriceApi'
 
 
 interface BorrowProps {
@@ -55,11 +56,11 @@ export default function Borrow({ pair }: BorrowProps) {
   // const coffinBoxContract = useCoffinBoxContract()
 
   const userBorrowAmount = pair.currentUserBorrowAmount.value // √
-  const borrowAssetPrice = usePrice(pair.asset.address) || undefined // √
+  const borrowAssetPrice = usePriceApi(pair?.asset.address) || undefined // √
   const userBorrowValue = userBorrowAmount * borrowAssetPrice // √
 
   const userCollateralBalance = pair.userCollateralShare // √
-  const collateralAssetPrice = usePrice(pair.collateral.address) || undefined // √
+  const collateralAssetPrice = usePriceApi(pair?.collateral.address) || undefined // √
   const userCollateralValue = userCollateralBalance * collateralAssetPrice / 1e18
 
   const userCollateralAmount = Number(pair?.currentUserBorrowAmount.string / 1e18) // √

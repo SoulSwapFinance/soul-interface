@@ -11,7 +11,7 @@ import {
   SOUL_GUIDE_ADDRESS,
   // TIMELOCK_ADDRESS,
   WNATIVE,
-} from '../../../sdk'
+} from 'sdk'
 
 import { Contract } from '@ethersproject/contracts'
 import ERC20_ABI from '../constants/abis/tokens/erc20.json'
