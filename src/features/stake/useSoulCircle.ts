@@ -10,7 +10,7 @@ import {
   useCircleStakingContract,
   usePairContract,
   useTokenContract,
-} from '../farm/hooks/useContract'
+} from 'hooks/useContract'
 import { useEnchantPrice, useFantomPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice } from 'hooks/getPrices'
 
 function useSoulCircle() {
