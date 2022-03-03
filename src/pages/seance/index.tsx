@@ -18,7 +18,6 @@ import useSoulStakeManual from '../../hooks/useSoulStakeManual'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import useSoulVault from '../../hooks/useSoulVault'
-import useSoulSummoner from '../../features/farm/hooks/useSoulSummoner'
 
 import { ethers } from 'ethers'
 import { useSoulSummonerContract } from '../../hooks'
@@ -28,6 +27,7 @@ import { SubmitButton } from '../../features/seance/SeanceStyles'
 import ModalHeader from 'components/Modal/Header'
 import NavLink from 'components/NavLink'
 import Modal from 'components/DefaultModal'
+import useSoulMine from 'features/mines/hooks/useSoulMine'
 
 const INPUT_CHAR_LIMIT = 18
 
@@ -68,7 +68,7 @@ export default function SoulStake() {
   const { withdraw } = useSoulVault()
   const { enter, leave, harvest } = useSoulStakeManual()
 
-  const { userInfo, fetchStakeStats } = useSoulSummoner(0, '', '', '')
+  const { userInfo, fetchStakeStats } = useSoulMine(0, '', '', '')
 
   const [stakedBal, setStakedBal] = useState('0')
   const soulBalance = useTokenBalance(account ?? undefined, SOUL[chainId])

@@ -23,8 +23,6 @@ import useEnchant from '../../hooks/useEnchant'
 // import useEnchantHelper from '../../hooks/useEnchant'
 import { ethers } from 'ethers'
 
-// import useApprove from '../../features/farm/hooks/useApprove'
-
 const INPUT_CHAR_LIMIT = 18
 
 const sendTx = async (txFunc: () => Promise<any>): Promise<boolean> => {

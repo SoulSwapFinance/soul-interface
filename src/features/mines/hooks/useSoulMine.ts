@@ -14,7 +14,6 @@ import {
 
 import { SOUL_SUMMONER_ADDRESS as SoulSummonerAddress, SUMMONER_HELPER_ADDRESS as SummonerHelperAddress } from '../../../constants/addresses'
 
-import { AllPids } from 'features/farm/Pids'
 import { useFantomPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice } from 'hooks/getPrices'
 
 // const helperContract = useHelperContract()
@@ -29,8 +28,6 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
   const lpTokenContract = usePairContract(lpToken)
   const token1Contract = useTokenContract(token1Address[chainId])
   const token2Contract = useTokenContract(token2Address[chainId])
-  const soulContract = useTokenContract(AllPids[1].token1Address[chainId])
-  const fusdContract = useTokenContract(AllPids[1].token2Address[chainId])
 
   const soulPrice = useSoulPrice()
   const ethPrice = useWrappedEthPrice()
@@ -475,24 +472,6 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
   //   }
   // }, [summonerContract])
 
-  /**
-   * Value of SOUL in FUSD
-   */
-  const fusdPerSoul = async () => {
-    try {
-      const totalSoul = await soulContract.balanceOf(AllPids[1].lpAddresses[chainId])
-      const totalFusd = await fusdContract.balanceOf(AllPids[1].lpAddresses[chainId])
-
-      const fusdPerSoul = totalFusd / totalSoul
-
-      return fusdPerSoul
-    } catch (e) {
-      console.log(e)
-      // alert(e.message)
-      return e
-    }
-  }
-
   // ------- BONDS -------
 
   /**
@@ -512,7 +491,6 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
         totalLpValue =
           (token1Name === 'FTM' || token1Name === 'WFTM') ? ethers.utils.formatUnits(token1Bal) : ethers.utils.formatUnits(token2Bal.mul(2))
       } else if (token1Name === 'SOUL' || token2Name === 'SOUL') {
-        const soulPrice = await fusdPerSoul()
         totalLpValue =
           token1Name === 'SOUL'
             ? ethers.utils.formatUnits(token1Bal)

@@ -127,9 +127,9 @@ export default function Pool() {
               </div>
             </div>
             <div className="flex mb-4 items-center justify-center">
-                  <Button variant="outlined" color="gradient" size="lg">
+                  <Button variant="filled" color="purple" size="lg">
                   <NavLink href={'/info/dashboard'}>
-                        <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                        <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                         Account Analytics and Accrued Fees <span> ↗</span>
                         </a>
                   </NavLink>

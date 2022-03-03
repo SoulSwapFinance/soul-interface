@@ -6,7 +6,7 @@ import { useActiveWeb3React } from 'services/web3'
 
 import useSoulCircle from './useSoulCircle'
 // import useMulticall from "../../hooks/useMulticall";
-import useApprove from '../../features/farm/hooks/useApprove'
+import useApprove from 'hooks/useApprove'
 
 import { SoulCircleAddress } from '../farm/constants'
 

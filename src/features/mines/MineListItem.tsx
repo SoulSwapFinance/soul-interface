@@ -46,11 +46,10 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   const { chainId } = useActiveWeb3React()
   const { i18n } = useLingui()
   const token0 = useCurrency(farm.pair?.token0?.id) ?? undefined
-  const token1 = useCurrency(farm.pair.token1?.id) ?? undefined
+  const token1 = useCurrency(farm.pair?.token1?.id) ?? undefined
   // const tvlInfo = useTVL()
   // const lpToken = farm.pair?.address
   const harvestHelperContract = useHarvestHelperContract()
-  // const soulPrice = usePrice(SOUL_ADDRESS[chainId]) // to avoid RPC call
   const soulPrice = useSoulPrice() // to avoid RPC call
   const tokenPrice 
     = farm.pair?.token0.symbol == "WETH" ? useWrappedEthPrice()
@@ -134,11 +133,11 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   return (
     <div className={classNames(TABLE_TBODY_TR_CLASSNAME, 'grid grid-cols-3 sm:grid-cols-3')} onClick={onClick}>
       {/* <div className={classNames('flex gap-2', TABLE_TBODY_TD_CLASSNAME(0, 4))}> */}
-      <div className="flex gap-2 items-center">
+      <div className="flex gap-2 text-items-center">
 
         { /* TOKEN-LOGO */}
         {token1 && farm.pair.type !== "underworld" ? <CurrencyLogoArray currencies={[token0, token1]} dense size={36} />
-          : <CurrencyLogo currency={token0} size={46} />
+          : <CurrencyLogo currency={token0} size={48} />
         }
 
         { /* LP-TOKEN */}
@@ -156,7 +155,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
             }
           </Typography>
           {farm?.rewards?.map((reward, i) => (
-            <Typography variant="xs" className="text-low-emphesis">
+            <Typography variant="xs" className="text-blue text-bold text-high-emphesis">
               {/* Claimable: {' '} */}
               {formatNumber(rewardValue, true)}
             </Typography>

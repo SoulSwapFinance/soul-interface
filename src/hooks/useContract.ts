@@ -38,6 +38,7 @@ import {
   HARVEST_HELPER_ADDRESS,
   TIMELOCK_ADDRESS,
   WNATIVE,
+  SOUL_CIRCLE_ADDRESS,
 } from 'sdk'
 import {
   COFFIN_BOX_ADDRESS,
@@ -55,6 +56,7 @@ import ARCHER_ROUTER_ABI from '../constants/abis/archer-router.json'
 import BASE_SWAPPER_ABI from '../constants/abis/swapper.json'
 import ANYSWAP_ERC20_ABI from '../constants/abis/anyswap_erc20.json'
 import COFFINBOX_ABI from '../constants/abis/coffinbox.json'
+import SOUL_CIRCLE_ABI from 'constants/abis/soulswap/soulcircle.json' 
 import CHAINLINK_ORACLE_ABI from '../constants/abis/chainlink-oracle.json'
 import COMPLEX_REWARDER_ABI from '../constants/abis/complex-rewarder.json'
 import { Contract } from '@ethersproject/contracts'
@@ -323,6 +325,12 @@ export function useMasterChefContract(withSignerIfPossible?: boolean): Contract 
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible) // 31 JUL (SOUL SUMMONER)
 }
+
+export function useCircleStakingContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOUL_CIRCLE_ADDRESS[chainId], SOUL_CIRCLE_ABI, withSignerIfPossible)
+}
+
 
 export function useConstantProductPoolFactory(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
