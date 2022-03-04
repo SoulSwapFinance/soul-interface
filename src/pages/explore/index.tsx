@@ -29,9 +29,9 @@ const EXPLORE = (i18n: I18n) => [
   },
   {
     id: 4,
-    name: 'ENCHANTED BUYBACKS',
-    description: 'Deposit $SEANCE and earn protocol fee-shares.',
-    href: './enchant'
+    name: 'LEND & BORROW',
+    description: 'Lend assets and farm or borrow for more.',
+    href: './borrow'
   },
   {
     id: 5,
