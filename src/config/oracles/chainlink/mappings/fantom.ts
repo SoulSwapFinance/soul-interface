@@ -39,6 +39,14 @@ const FANTON_CHAINLINK_MAPPING = {
     fromDecimals: 18, // DAI
     toDecimals: 8, // USD
   },
+  // BNB / USD
+  '0x6dE70f4791C4151E00aD02e969bD900DC961f92a': {
+    from: '0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454', // BNB
+    to: '0x0000000000000000000000000000000000000001', // USD
+    decimals: 8, // USD
+    fromDecimals: 18, // DAI
+    toDecimals: 8, // USD
+  },
   // CRV / USD
 // '0xa141D7E3B44594cc65142AE5F2C7844Abea66D2B': {
 //     from: '0x1E4F97b9f9F913c46F1632781732927B9019C68b', // CRV
