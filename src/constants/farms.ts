@@ -872,5 +872,22 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
     },
+    '0xbDa9204e6D596feCf9bd48108723F9BDAa2019f6': {  // BNB/FTM
+      id: 53, // 420
+      address: '0x74b23882a30290451a17c44f4f05243b6b58c76d',
+      type: 'underworld',
+      token0: {
+        id: '0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454', // BNB
+        name: 'Binance',
+        symbol: 'BNB',
+        decimals: 18,
+      },
+      token1: {
+        id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+        name: 'Wrapped Fantom',
+        symbol: 'FTM',
+        decimals: 18,
+      },
+    },
   }
 }

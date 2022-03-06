@@ -55,6 +55,7 @@ import CLONE_REWARDER_ABI from '../constants/abis/clone-rewarder.json'
 import ARCHER_ROUTER_ABI from '../constants/abis/archer-router.json'
 import BASE_SWAPPER_ABI from '../constants/abis/swapper.json'
 import ANYSWAP_ERC20_ABI from '../constants/abis/anyswap_erc20.json'
+import SPOOKY_FACTORY_ABI from '../constants/abis/spookyswap-factory.json'
 import COFFINBOX_ABI from '../constants/abis/coffinbox.json'
 import SOUL_CIRCLE_ABI from 'constants/abis/soulswap/soulcircle.json' 
 import CHAINLINK_ORACLE_ABI from '../constants/abis/chainlink-oracle.json'
@@ -517,9 +518,15 @@ export function useAnyswapEthOperaBridge(withSignerIfPossible?: boolean): Contra
   return useContract('0x5cbe98480a790554403694b98bff71a525907f5d', anyswapEthOperaBridge_ABI, withSignerIfPossible)
 }
 
+
 // ------- Atomic Swap --------
 
 export function useAtomicSwapContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(ATOMIC_SWAP_ADDRESS[chainId], ATOMIC_SWAP_ABI, withSignerIfPossible)
+}
+
+// SoulSwap 
+export function useSpookySwapFactoryContract(withSignerIfPossible?: boolean): Contract | null {
+return useContract('0x152eE697f2E276fA89E96742e9bB9aB1F2E61bE3', SPOOKY_FACTORY_ABI, withSignerIfPossible)
 }

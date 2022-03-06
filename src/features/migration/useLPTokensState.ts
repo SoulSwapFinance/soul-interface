@@ -1,11 +1,11 @@
-import { ChainId, CurrencyAmount, Token } from '../sdk'
-import { useSoulGuideContract, useDashboardContract, useFactoryContract } from '../hooks/useContract'
+import { getAddress } from '@ethersproject/address'
+import { ChainId, CurrencyAmount, Token } from 'sdk'
+import { useAllTokens } from 'hooks/Tokens'
+import { useBoringHelperContract, useDashboardContract, useSpookySwapFactoryContract } from 'hooks/useContract'
+import { useActiveWeb3React } from 'services/web3'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import LPToken from '../types/LPToken'
-import { getAddress } from '@ethersproject/address'
-import { useActiveWeb3React } from 'services/web3'
-import { FACTORY_ADDRESS } from 'constants/addresses'
+import LPToken from './LPToken'
 
 export interface LPTokensState {
   updateLPTokens: () => Promise<void>
@@ -20,27 +20,28 @@ export interface LPTokensState {
 
 const useLPTokensState = () => {
   const { account, chainId } = useActiveWeb3React()
-  const soulGuideContract = useSoulGuideContract()
+  const boringHelperContract = useBoringHelperContract()
   const dashboardContract = useDashboardContract()
-  const soulSwapFactoryContract = useFactoryContract()
+  const spookySwapFactoryContract = useSpookySwapFactoryContract()
   const [lpTokens, setLPTokens] = useState<LPToken[]>([])
   const [selectedLPToken, setSelectedLPToken] = useState<LPToken>()
   const [selectedLPTokenAllowed, setSelectedLPTokenAllowed] = useState(false)
   const [loading, setLoading] = useState(true)
+  const tokens = useAllTokens()
   const updatingLPTokens = useRef(false)
   const updateLPTokens = useCallback(async () => {
     try {
       updatingLPTokens.current = true
       if (ChainId.FANTOM === chainId) {
-        const LP_TOKENS_LIMIT = 500
-        const length = await soulSwapFactoryContract?.totalPairs()
+        const LP_TOKENS_LIMIT = 15000
+        const length = await spookySwapFactoryContract?.allPairsLength()
         const pages: number[] = []
         for (let i = 0; i < length; i += LP_TOKENS_LIMIT) pages.push(i)
         const pairs = (
           await Promise.all(
             pages.map((page) =>
-              soulGuideContract?.getPairs(
-                FACTORY_ADDRESS[chainId], //'0x1120e150dA9def6Fe930f4fEDeD18ef57c0CA7eF', // Factory address
+              boringHelperContract?.getPairs(
+                '0x152eE697f2E276fA89E96742e9bB9aB1F2E61bE3', // Factory address
                 page,
                 Math.min(page + LP_TOKENS_LIMIT, length.toNumber())
               )
@@ -48,14 +49,14 @@ const useLPTokensState = () => {
           )
         )
           .flat()
-          .filter((pair) => pair.token0 !== '')
+          .filter((pair) => pair.token0 !== '0x1f6c3E047f529f82f743a7378A212a3d62fAA390')
 
         const pairAddresses = pairs.map((pair) => pair[0])
-        const pollPairs = await soulGuideContract?.pollPairs(account, pairAddresses)
+        const pollPairs = await boringHelperContract?.pollPairs(account, pairAddresses)
         const tokenAddresses = Array.from(
           new Set(pairs.reduce((a: any, b: any) => a.push(b.token, b.token0, b.token1) && a, []))
         ).flat()
-        const tokenDetails = (await soulGuideContract?.getTokenInfo(tokenAddresses)).reduce((acc: any, cur: any) => {
+        const tokenDetails = (await boringHelperContract?.getTokenInfo(tokenAddresses)).reduce((acc: any, cur: any) => {
           acc[cur[0]] = cur
           return acc
         }, {})
@@ -86,18 +87,28 @@ const useLPTokensState = () => {
 
         if (data) setLPTokens(data)
 
-        // MAINNET
+        // MAINNET, BSC
       } else 
-      if (chainId && [ChainId.ETHEREUM].includes(chainId)) {
+      if (chainId && [ChainId.ETHEREUM, ChainId.BSC, ChainId.FANTOM].includes(chainId)) {
         const requests: any = {
           [ChainId.ETHEREUM]: [
             `https://api.covalenthq.com/v1/${ChainId.ETHEREUM}/address/${String(
               account
-            ).toLowerCase()}/stacks/uniswap_v2/balances/?key=ckey_cba3674f2ce5450f9d5dd290589`,
+            ).toLowerCase()}/stacks/uniswap_v2/balances/?key=ckey_cba3674f2ce5450f9d5dd290589&page-size=1000`,
+          ],
+          [ChainId.BSC]: [
+            `https://api.covalenthq.com/v1/${ChainId.BSC}/address/${String(
+              account
+            ).toLowerCase()}/stacks/pancakeswap/balances/?key=ckey_cba3674f2ce5450f9d5dd290589&page-size=1000`,
+            `https://api.covalenthq.com/v1/${ChainId.BSC}/address/${String(
+              account
+            ).toLowerCase()}/stacks/pancakeswap_v2/balances/?key=ckey_cba3674f2ce5450f9d5dd290589&page-size=1000`,
           ],
         }
 
         const responses: any = await Promise.all(requests[chainId].map((request: any) => fetch(request)))
+
+        console.log({ responses })
 
         let userLP = []
 
@@ -109,6 +120,24 @@ const useLPTokensState = () => {
               ...balance,
               version: 'v2',
             }))
+        } else if (chainId === ChainId.BSC) {
+          const { data: dataV1 } = await responses[0].json()
+          const { data: dataV2 } = await responses[1].json()
+
+          userLP = [
+            // ...dataV1?.['pancakeswap']?.balances
+            //   ?.filter((balance: any) => balance.pool_token.balance !== '0')
+            //   .map((balance: any) => ({
+            //     ...balance,
+            //     version: 'v1',
+            //   })),
+            ...dataV2?.['pancakeswap']?.balances
+              ?.filter((balance: any) => balance.pool_token.balance !== '0')
+              .map((balance: any) => ({
+                ...balance,
+                version: 'v2',
+              })),
+          ]
         }
 
         const tokenDetails = (
@@ -124,11 +153,12 @@ const useLPTokensState = () => {
             )
           )
         )?.reduce((acc: any, cur: any) => {
-          acc[cur[0]] = cur
+          acc[cur[0]] = { ...cur }
+          acc[cur[0]].decimals = acc[cur[0]].decimals.toNumber()
           return acc
         }, {})
 
-        const lpTokens = userLP?.map((pair: any, index: number) => {
+        const lpTokens = userLP?.map((pair: any) => {
           const token = new Token(
             chainId as ChainId,
             getAddress(pair.pool_token.contract_address),
@@ -146,8 +176,24 @@ const useLPTokensState = () => {
             symbol: `${tokenA.symbol}-${tokenB.symbol}`,
             balance: CurrencyAmount.fromRawAmount(token, pair.pool_token.balance),
             totalSupply: pair.pool_token.total_supply,
-            tokenA: new Token(chainId as ChainId, tokenA.token, tokenA.decimals, tokenA.symbol, tokenA.name),
-            tokenB: new Token(chainId as ChainId, tokenB.token, tokenB.decimals, tokenB.symbol, tokenB.name),
+            tokenA:
+              tokens[getAddress(pair.token_0.contract_address)] ||
+              new Token(
+                chainId as ChainId,
+                tokenA.address || tokenA.token,
+                tokenA.decimals,
+                tokenA.symbol,
+                tokenA.name
+              ),
+            tokenB:
+              tokens[getAddress(pair.token_1.contract_address)] ||
+              new Token(
+                chainId as ChainId,
+                tokenB.address || tokenB.token,
+                tokenB.decimals,
+                tokenB.symbol,
+                tokenB.name
+              ),
             version: pair.version,
           } as LPToken
         })
@@ -159,13 +205,13 @@ const useLPTokensState = () => {
       setLoading(false)
       updatingLPTokens.current = false
     }
-  }, [chainId, account, dashboardContract])
+  }, [chainId, spookySwapFactoryContract, boringHelperContract, account, dashboardContract, tokens])
 
   useEffect(() => {
-    if (chainId && account && soulGuideContract && !updatingLPTokens.current) {
+    if (chainId && account && boringHelperContract && !updatingLPTokens.current) {
       updateLPTokens()
     }
-  }, [account, chainId, soulGuideContract, updateLPTokens])
+  }, [account, chainId, boringHelperContract, updateLPTokens])
 
   return {
     updateLPTokens,

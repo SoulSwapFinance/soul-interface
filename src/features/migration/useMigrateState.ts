@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useState } from 'react'
-import { useIsTransactionPending, useTransactionAdder } from '../state/transactions/hooks'
-import useLPTokensState, { LPTokensState } from './useLPTokensState'
-
-import { ChainId } from '../sdk'
 import { parseUnits } from '@ethersproject/units'
+import { ChainId } from '@sushiswap/core-sdk'
 import { useActiveWeb3React } from 'services/web3'
-import useSushiRoll from './useSushiRoll'
+import { useIsTransactionPending, useTransactionAdder } from 'state/transactions/hooks'
+import { useCallback, useEffect, useState } from 'react'
+
+import useLPTokensState, { LPTokensState } from './useLPTokensState'
+import useSushiRoll from './useSoulSwap'
 
 export type MigrateMode = 'permit' | 'approve'
 
@@ -45,10 +45,14 @@ const useMigrateState: () => MigrateState = () => {
 
       if (chainId === ChainId.ETHEREUM) {
         exchange = 'Uniswap'
+      } else if (chainId === ChainId.BSC) {
+        exchange = 'PancakeSwap'
+      } else if (chainId === ChainId.FANTOM) {
+        exchange = 'SpookySwap'
       }
 
       addTransaction(tx, {
-        summary: `Migrate ${exchange} ${state.selectedLPToken.symbol} liquidity to SoulSwap`,
+        summary: `Migrate ${exchange} ${state.selectedLPToken.symbol} liquidity to SushiSwap`,
       })
       setPendingMigrationHash(tx.hash)
 

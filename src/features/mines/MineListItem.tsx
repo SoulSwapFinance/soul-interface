@@ -21,15 +21,20 @@ import usePriceApi from 'hooks/usePriceApi'
 import { useHarvestHelperContract } from 'hooks/useContract'
 import useTokenAnalytics from 'features/analytics/hooks/useTokensAnalytics'
 import { PairType } from './enum'
-
+// import { usePairBalance, usePairVolume } from 'hooks/usePairData'
 import { SOUL, SOUL_ADDRESS } from '../../constants'
 
 import styled from 'styled-components'
 import usePendingReward from './hooks/usePendingReward'
 import { useActiveWeb3React } from 'services/web3/hooks'
 import { useFantomPrice, usePairPrice, useSoulPrice, useTokenPrice, useWrappedBtcPrice, useWrappedEthPrice } from 'hooks/getPrices'
-import { useSoulPairs } from 'services/graph'
+import { useOneDayBlock, usePairDayData, useSoulPairs, useTwoDayBlock } from 'services/graph'
 import { getAddress } from '@ethersproject/address'
+import { SOUL_SUMMONER_ADDRESS } from 'sdk'
+import { usePositions } from 'hooks/usePositions'
+import liquidity from 'pages/portfolio/[account]/liquidity'
+import Pair from 'pages/analytics/pairs/[id]'
+import { useRouter } from 'next/router'
 
 const HideOnMobile = styled.div`
 @media screen and (max-width: 500px) {
@@ -43,7 +48,7 @@ interface MineListItem {
 }
 
 const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
-  const { chainId } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const { i18n } = useLingui()
   const token0 = useCurrency(farm.pair?.token0?.id) ?? undefined
   const token1 = useCurrency(farm.pair?.token1?.id) ?? undefined
@@ -58,7 +63,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
     : usePriceApi(farm?.pair?.token0?.id)
 
   const pendingSoul = usePendingSoul(farm)
-  const pendingReward = usePendingReward(farm)
+  // const pendingReward = usePendingReward(farm)
   // const lpTokenAddress = getAddress(farm.lpToken)
   let [data] = useV2PairsWithPrice([[token0, token1]])
   let [state, pair, pairPrice] = data
@@ -87,25 +92,58 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   // BALANCES AND TVL //
 
   const lpBalance = useSingleCallResult(harvestHelperContract, 'fetchBals', [farm?.id])?.result
-
+  // const lpBalance = usePairBalance(SOUL_SUMMONER_ADDRESS[chainId], farm?.lpToken)
+  // console.log('lpBal:%s', Number(lpBalance) | 0)
+  
   const tvl 
-  = farm.pair?.token1 && farm.pair.type !== "underworld"
+  = farm.pair?.token1 && farm.pair?.type !== "underworld"
     // ? Number(usePairPrice(farm.pair.id))
     ? Number(pairPrice) * Number(lpBalance) / 1e18
     : Number(tokenPrice) * Number(lpBalance) / 1e18
 
-  // const volume = farm.pair?.token1
-  //   ? Number(lpBalance) / 1e18
-  //   : 0 // 0 for SOUL SAS
+  // const router = useRouter()
+  const id = farm?.lpToken
+  // const block1d = useOneDayBlock({ chainId, shouldFetch: !!chainId })
+  // const block2d = useTwoDayBlock({ chainId, shouldFetch: !!chainId })
+  // const swapPair = useSoulPairs({ chainId, variables: { where: { id } }, shouldFetch: !!chainId })?.[0]
+  // const pair1d = useSoulPairs({
+  //   chainId,
+  //   variables: { block: block1d, where: { id } },
+  //   shouldFetch: !!chainId && !!block1d,
+  // })?.[0]
+  // const pair2d = useSoulPairs({
+  //   chainId,
+  //   variables: { block: block2d, where: { id } },
+  //   shouldFetch: !!chainId && !!block2d,
+  // })?.[0]
+
+  const pairDayData = usePairDayData({
+    chainId,
+    variables: { where: { swapPair: id?.toLowerCase() } },
+    shouldFetch: !!chainId && !!id,
+  })
+
+  // const volumeUSD1d = swapPair?.volumeUSD - pair1d?.volumeUSD
+  // console.log('volumeUSD1d:%s', volumeUSD1d)
+  // const volumeUSD2d = pair1d?.volumeUSD - pair2d?.volumeUSD
+
+    // const volume1d = usePairDayData(farm?.lpToken)
+    // const volume1d = Pair?.volume
+  const volume = farm.pair?.token1
+    ? Number(lpBalance) / 1e18
+    : 0 // 0 for SOUL SAS
+
+    // console.log('vol:%s', volume1d)
+    // console.log('liquidity:%s', tvl)
 
   // REWARD RATE CALCULATIONS //
-  const rewardPerSecond =
-    farm?.rewards?.reduce((previousValue, currentValue) => {
-      return previousValue + currentValue.rewardPerSecond
-    }, 0)
+  // const rewardPerSecond =
+  //   farm.rewards?.reduce((previousValue, currentValue) => {
+  //     return previousValue + currentValue.rewardPerSecond
+  //   }, 0)
 
-  const rewardPerDay = rewardPerSecond * 86_400
-  const rewardPerYear = rewardPerDay * 365
+  // const rewardPerDay = rewardPerSecond * 86_400
+  // const rewardPerYear = rewardPerDay * 365
 
   // ROI CALCULATIONS //
 
@@ -119,14 +157,15 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   // const roiPerHour = roiPerDay / 24
 
   // use vol, liq to getApy 
-  // const getApy = (volume, liquidity) => {
-  //   const apy = aprToApy((((volume / 7) * 365 * 0.0025) / liquidity) * 100, 3650)
-  //   if (apy > 1000) return '>10,000%'
-  //   return formatPercent(apy)
-  // }
-  // console.log('volume1d: ', farm.pair.volume1d)
-
-  // console.log('feeApyPerYear: ', farm.feeApyPerYear)
+  const getApy = (volume, tvl) => {
+    const apy = aprToApy(((
+      (volume / 7) * 365 * 0.0025) / tvl) * 100, 3650)
+    if (apy > 1000) return '>10,000%'
+    return formatPercent(apy)
+  }
+  // console.log('volume:%s', volume)
+  // console.log('volume1d: ', farm.pair?.volume1d)
+  // console.log('feeApyPerYear: ', Number(farm?.id.getApy))
 
   return (
     <div className={classNames(TABLE_TBODY_TR_CLASSNAME, 'grid grid-cols-3 sm:grid-cols-3')} onClick={onClick}>
@@ -219,7 +258,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
               }
             </div>
           ))}
-          {/* {!!farm?.feeApyPerYear && (
+          {!!farm?.feeApyPerYear && (
           <QuestionHelper
             text={
               <div className="flex flex-col">
@@ -228,7 +267,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
                   {farm?.rewards?.map((reward, i) => (
                     <div key={i} className="text-xs md:text-sm whitespace-nowrap">
                       {
-                        reward.rewardPerDay > 0
+                        reward?.rewardPerDay > 0
                           ? formatNumber(
                             reward?.rewardPerDay * 365 // rewards per year (annualized)
                             * soulPrice // value of the rewards
@@ -243,12 +282,12 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
                   ))}
                 </div>
                 <div>
-                  Fee APR: {getApy(volume, tvl)}
+                Fee APR: {getApy(volume, tvl)}
                 </div>
               </div>
             }
           />
-          )} */}
+          )}
         </Typography>
         <Typography variant="xs" className="text-low-emphesis">
           {i18n._(t`annualized`)}
