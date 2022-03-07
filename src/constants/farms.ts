@@ -874,7 +874,11 @@ export const POOLS: AddressMap = {
     },
     '0xbDa9204e6D596feCf9bd48108723F9BDAa2019f6': {  // BNB/FTM
       id: 53, // 420
+<<<<<<< HEAD
       address: '0xd67de0e0a0fd7b15dc8348bb9be742f3c5850454',
+=======
+      address: '0xbda9204e6d596fecf9bd48108723f9bdaa2019f6',
+>>>>>>> 09cfce9999b34775fbc28fd32ee3a8a1625a0f91
       type: 'underworld',
       token0: {
         id: '0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454', // BNB
