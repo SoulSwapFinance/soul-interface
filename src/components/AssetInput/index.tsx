@@ -286,9 +286,10 @@ const AssetInputPanel = ({
               currency.symbol == 'SOUL' ? formatCurrency(tokenPrice * Number(value), 2) :
               currency.symbol == 'WETH' ? formatCurrency(tokenPrice * Number(value), 2) :
               currency.symbol == 'DAI' ? formatCurrency(1 * Number(value), 2) :
-              // currency.symbol == 'FTM' ? formatCurrency(ftmPrice * Number(value), 2) :
-              // currency.symbol == 'WFTM' ? formatCurrency(ftmPrice * Number(value), 2) :
-              // currency.symbol == 'WBTC' ? formatCurrency(wbtcPrice * Number(value), 2) :
+              currency.symbol == 'BNB' ? formatCurrency(tokenPrice * Number(value), 2) :
+              currency.symbol == 'FTM' ? formatCurrency(tokenPrice * Number(value), 2) :
+              currency.symbol == 'WFTM' ? formatCurrency(tokenPrice * Number(value), 2) :
+              currency.symbol == 'WBTC' ? formatCurrency(tokenPrice * Number(value), 2) :
               formatCurrency(pairPrice * Number(value), 2))            
             }
           </Typography>

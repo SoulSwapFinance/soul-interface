@@ -29,7 +29,7 @@ export default function Mines(): JSX.Element {
   const soulPrice = useSoulPrice()
   const ftmPrice = useFantomPrice()
 
-  const type = router.query.filter === null ? 'active' : (router.query.filter as string)
+  const type = router.query?.filter === null ? 'active' : (router.query?.filter as string)
   // const rewards = useFarmRewards()
 
   const farms = useFarms()
@@ -91,7 +91,7 @@ export default function Mines(): JSX.Element {
 
     // const tvl = getTvl(pool)
     const tvl = pool.pair?.token1
-    ? Number(pool.pairPrice) * Number(pool.lpBalance) / 1e18
+    ? Number(pool?.pairPrice) * Number(pool.lpBalance) / 1e18
     : Number(soulPrice) * Number(pool.lpBalance) / 1e18
 
     // const rewardPerSec =
@@ -133,7 +133,7 @@ export default function Mines(): JSX.Element {
   const FILTER = {
     deposited: (farm) => farm.amount,
     active: (farm) => farm.allocPoint > 0,
-    inactive: (farm) => farm.allocPoint == 0,
+    inactive: (farm) => farm?.allocPoint == 0,
     soulswap: (farm) => farm.allocPoint > 0
       && (
         farm.pair.token0?.symbol == 'SOUL'
@@ -147,7 +147,7 @@ export default function Mines(): JSX.Element {
         || farm.pair.token1?.symbol == 'wLUM'
       ),
     single: (farm) => farm.pair.token0 && !farm.pair.token1,
-    lending: (farm) => farm.pair.id == '48' || farm.pair.id == "49" || farm.pair.id == "51" || farm.pair.id == "52",
+    lending: (farm) => farm.allocPoint > 0 && farm.pair.type == 'underworld',
     fantom: (farm) => farm.allocPoint > 0 && (farm.pair.token0?.symbol == 'FTM' || farm.pair.token1?.symbol == 'FTM'),
     stables: (farm) => farm.allocPoint == 200 // since all [active] stables have 200 AP <3
   }
