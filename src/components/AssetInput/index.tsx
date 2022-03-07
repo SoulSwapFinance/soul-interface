@@ -21,11 +21,11 @@ import { useActiveWeb3React } from 'services/web3'
 import Lottie from 'lottie-react'
 
 import React, { createContext, FC, ReactNode, useContext, useEffect, useMemo, useRef, useState } from 'react'
-import { usePrice } from 'hooks/usePrice'
 import { FiatValue } from './FiatValue'
 import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 import { useCurrency } from 'hooks/Tokens'
 import { formatCurrency } from 'modals/TokensStatsModal'
+import { useBinancePrice, usePairPrice, useFantomPrice, useTokenPrice, useWrappedBtcPrice } from 'hooks/getPrices'
 
 interface AssetInputProps {
   value?: string
@@ -201,9 +201,13 @@ const AssetInputPanel = ({
   let [data] = useV2PairsWithPrice([[tokenA, tokenB]])
   let [state, pair, pairPrice] = data
 
-  // const pairValue = useUSDCValue(tryParseAmount(Number(value) === 0 ? '1' : value, currency))
+  // const pairPrice = usePairPrice(currencyAddress)
   const usdcValue = useUSDCValue(tryParseAmount(Number(value) === 0 ? '1' : value, currency))
-  const tokenPrice = usePrice(token0)
+  const tokenPrice = useTokenPrice(token0)
+  const ftmPrice = useFantomPrice()
+  const btcPrice = useWrappedBtcPrice()
+  const bnbPrice = useBinancePrice()
+  // const ftmPrice = useBinancePrice()
  
   // const usdValue = usePrice(currency.toString())
   const span = useRef<HTMLSpanElement | null>(null)
@@ -286,10 +290,10 @@ const AssetInputPanel = ({
               currency.symbol == 'SOUL' ? formatCurrency(tokenPrice * Number(value), 2) :
               currency.symbol == 'WETH' ? formatCurrency(tokenPrice * Number(value), 2) :
               currency.symbol == 'DAI' ? formatCurrency(1 * Number(value), 2) :
-              currency.symbol == 'BNB' ? formatCurrency(tokenPrice * Number(value), 2) :
-              currency.symbol == 'FTM' ? formatCurrency(tokenPrice * Number(value), 2) :
-              currency.symbol == 'WFTM' ? formatCurrency(tokenPrice * Number(value), 2) :
-              currency.symbol == 'WBTC' ? formatCurrency(tokenPrice * Number(value), 2) :
+              currency.symbol == 'BNB' ? formatCurrency(bnbPrice * Number(value), 2) :
+              currency.symbol == 'FTM' ? formatCurrency(ftmPrice * Number(value), 2) :
+              currency.symbol == 'WFTM' ? formatCurrency(ftmPrice * Number(value), 2) :
+              currency.symbol == 'WBTC' ? formatCurrency(btcPrice * Number(value), 2) :
               formatCurrency(pairPrice * Number(value), 2))            
             }
           </Typography>

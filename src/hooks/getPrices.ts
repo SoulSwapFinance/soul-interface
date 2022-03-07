@@ -170,6 +170,12 @@ export const getFantomPrice = async () => {
   })
 }
 
+export const getBinancePrice = async () => {
+  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
+    id: '0xd67de0e0a0fd7b15dc8348bb9be742f3c5850454',
+  })
+}
+
 export const getWrappedEthPrice = async () => {
   return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
     id: '0x74b23882a30290451a17c44f4f05243b6b58c76d',
@@ -290,6 +296,11 @@ export function useEnchantPrice(swrConfig: SWRConfiguration = undefined) {
 
 export function useFantomPrice(swrConfig: SWRConfiguration = undefined) {
   const { data } = useSWR(['fantomPrice'], () => getFantomPrice(), swrConfig)
+  return data
+}
+
+export function useBinancePrice(swrConfig: SWRConfiguration = undefined) {
+  const { data } = useSWR(['binancePrice'], () => getBinancePrice(), swrConfig)
   return data
 }
 
