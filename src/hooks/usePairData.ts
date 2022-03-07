@@ -33,9 +33,9 @@ export function usePairPrice(pairAddress: string) {
   const liquidityValue = Number(data?.pair?.reserveUSD)
   const totalSupply = Number(data?.pair?.totalSupply)
   const price = Number(liquidityValue) / Number(totalSupply)
-  console.log('liquidityValue:%s', liquidityValue)
-  console.log('totalSupply:%s', totalSupply)
-  console.log('price:%s', Number(price))
+//   console.log('liquidityValue:%s', liquidityValue)
+//   console.log('totalSupply:%s', totalSupply)
+//   console.log('price:%s', Number(price))
   return price
 }
 
