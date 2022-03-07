@@ -26,6 +26,7 @@ import { FiatValue } from './FiatValue'
 import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 import { useCurrency } from 'hooks/Tokens'
 import { formatCurrency } from 'modals/TokensStatsModal'
+import { usePairPrice } from 'hooks/usePairData'
 
 interface AssetInputProps {
   value?: string
@@ -191,9 +192,7 @@ const AssetInputPanel = ({
   let tokenB = useCurrency(token1)
 
   // console.log('token0: ', token0)
-
-  let [data] = useV2PairsWithPrice([[tokenA, tokenB]])
-  let [state, pair, pairPrice] = data
+  const pairPrice = usePairPrice(currencyAddress)
 
   // const pairValue = useUSDCValue(tryParseAmount(Number(value) === 0 ? '1' : value, currency))
   const usdcValue = useUSDCValue(tryParseAmount(Number(value) === 0 ? '1' : value, currency))

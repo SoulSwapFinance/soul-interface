@@ -25,7 +25,8 @@ import { FiatValue } from './FiatValue'
 import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 import { useCurrency } from 'hooks/Tokens'
 import { formatCurrency } from 'modals/TokensStatsModal'
-import { useBinancePrice, usePairPrice, useFantomPrice, useTokenPrice, useWrappedBtcPrice } from 'hooks/getPrices'
+import { useBinancePrice, useFantomPrice, useTokenPrice, useWrappedBtcPrice } from 'hooks/getPrices'
+import { usePairPrice } from 'hooks/usePairData'
 
 interface AssetInputProps {
   value?: string
@@ -197,11 +198,8 @@ const AssetInputPanel = ({
   let tokenB = useCurrency(token1)
 
   // console.log('token0: ', token0)
-
-  let [data] = useV2PairsWithPrice([[tokenA, tokenB]])
-  let [state, pair, pairPrice] = data
-
-  // const pairPrice = usePairPrice(currencyAddress)
+  
+  const pairPrice = usePairPrice(currencyAddress)
   const usdcValue = useUSDCValue(tryParseAmount(Number(value) === 0 ? '1' : value, currency))
   const tokenPrice = useTokenPrice(token0)
   const ftmPrice = useFantomPrice()
