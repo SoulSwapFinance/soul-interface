@@ -27,7 +27,7 @@ import { SOUL, SOUL_ADDRESS } from '../../constants'
 import styled from 'styled-components'
 import usePendingReward from './hooks/usePendingReward'
 import { useActiveWeb3React } from 'services/web3/hooks'
-import { useFantomPrice, usePairPrice, useSoulPrice, useTokenPrice, useWrappedBtcPrice, useWrappedEthPrice } from 'hooks/getPrices'
+import { useBinancePrice, useFantomPrice, useSoulPrice, useTokenPrice, useWrappedBtcPrice, useWrappedEthPrice } from 'hooks/getPrices'
 import { useOneDayBlock, usePairDayData, useSoulPairs, useTwoDayBlock } from 'services/graph'
 import { getAddress } from '@ethersproject/address'
 import { SOUL_SUMMONER_ADDRESS } from 'sdk'
@@ -35,6 +35,7 @@ import { usePositions } from 'hooks/usePositions'
 import liquidity from 'pages/portfolio/[account]/liquidity'
 import Pair from 'pages/analytics/pairs/[id]'
 import { useRouter } from 'next/router'
+import { usePairBalance, usePairPrice } from 'hooks/usePairData'
 
 const HideOnMobile = styled.div`
 @media screen and (max-width: 500px) {
@@ -53,28 +54,21 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   const token0 = useCurrency(farm.pair?.token0?.id) ?? undefined
   const token1 = useCurrency(farm.pair?.token1?.id) ?? undefined
   // const tvlInfo = useTVL()
-  // const lpToken = farm.pair?.address
+  const lpToken = farm.pair?.address
   const harvestHelperContract = useHarvestHelperContract()
   const soulPrice = useSoulPrice() // to avoid RPC call
   const tokenPrice 
     = farm.pair?.token0?.symbol == "SOUL" ? useSoulPrice()
-    : farm.pair?.token0.symbol == "WBTC" ? useWrappedBtcPrice()
-    : farm.pair?.token0.symbol == "DAI" ? 1
+    : farm.pair?.token0?.symbol == "WBTC" ? useWrappedBtcPrice()
+    : farm.pair?.token0?.symbol == "FTM" ? useFantomPrice()
+    : farm.pair?.token0?.symbol == "BNB" ? useBinancePrice()
+    : farm.pair?.token0?.symbol == "DAI" ? 1
     : usePriceApi(farm?.pair?.token0?.id)
 
+  const pairPrice
+    = usePairPrice(farm?.pair?.address)
   const pendingSoul = usePendingSoul(farm)
-  // const pendingReward = usePendingReward(farm)
-  // const lpTokenAddress = getAddress(farm.lpToken)
-  let [data] = useV2PairsWithPrice([[token0, token1]])
-  let [state, pair, pairPrice] = data
-  // let pairPriceV2
-  // = usePairPrice(farm.pair.token0.id.toLowerCase())
-  //   // = farm.pair?.token0?.symbol == "WFTM" ? useFantomPrice()
-  //   // : 0
 
-  // let pairPriceV2 
-  //   = usePairPrice(lpToken?.toLowerCase())
-  
   const rewardValue =
   (farm?.rewards?.[0]?.rewardPrice ?? 0) * Number(pendingSoul?.toExact() ?? 0)
   // + (farm?.rewards?.[1]?.rewardPrice ?? 0) * Number(pendingReward ?? 0)
@@ -92,7 +86,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   // BALANCES AND TVL //
 
   const lpBalance = useSingleCallResult(harvestHelperContract, 'fetchBals', [farm?.id])?.result
-  // const lpBalance = usePairBalance(SOUL_SUMMONER_ADDRESS[chainId], farm?.lpToken)
+  // const lpBalance = usePairBalance(SOUL_SUMMONER_ADDRESS[chainId], farm?.id)?.[0]
   // console.log('lpBal:%s', Number(lpBalance) | 0)
   
   const tvl 
@@ -103,25 +97,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
 
   // const router = useRouter()
   const id = farm?.lpToken
-  // const block1d = useOneDayBlock({ chainId, shouldFetch: !!chainId })
-  // const block2d = useTwoDayBlock({ chainId, shouldFetch: !!chainId })
-  // const swapPair = useSoulPairs({ chainId, variables: { where: { id } }, shouldFetch: !!chainId })?.[0]
-  // const pair1d = useSoulPairs({
-  //   chainId,
-  //   variables: { block: block1d, where: { id } },
-  //   shouldFetch: !!chainId && !!block1d,
-  // })?.[0]
-  // const pair2d = useSoulPairs({
-  //   chainId,
-  //   variables: { block: block2d, where: { id } },
-  //   shouldFetch: !!chainId && !!block2d,
-  // })?.[0]
 
-  const pairDayData = usePairDayData({
-    chainId,
-    variables: { where: { swapPair: id?.toLowerCase() } },
-    shouldFetch: !!chainId && !!id,
-  })
 
   // const volumeUSD1d = swapPair?.volumeUSD - pair1d?.volumeUSD
   // console.log('volumeUSD1d:%s', volumeUSD1d)

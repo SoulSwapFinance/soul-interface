@@ -269,7 +269,7 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
 
   // -----------------------
   //  Read Functions
-  // ---------------------- -
+  // -----------------------
 
   // Pool length
   const poolLength = async () => {

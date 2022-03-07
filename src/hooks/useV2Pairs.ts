@@ -119,7 +119,7 @@ export function useVaultTVL(): TVLInfo[] {
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {
         return ftmPrice
       }
-      if (token.symbol == 'SEANCE' || token.symbol == 'SEANCE') {
+      if (token.symbol == 'SEANCE') {
         return seancePrice
       }
       if (token.symbol == 'USDC' || token.symbol == 'fUSDT') {
