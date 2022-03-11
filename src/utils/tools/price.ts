@@ -3,7 +3,7 @@ import { useContract } from 'hooks/useContract'
 import { getMedian, getMean } from './math'
 import ISoulSwapPairABI from 'constants/abis/soulswap/ISoulSwapPair.json'
 import { Token, TokenAmount, TradeType } from 'sdk'
-import { BigNumber } from 'bignumber.js'
+import { BigNumber } from '@ethersproject/bignumber'
 
 const DAI = 'DAI'
 const USDC = 'USDC'

@@ -1,4 +1,4 @@
-import { BigNumber } from 'bignumber.js'
+import { BigNumber } from '@ethersproject/bignumber'
 
 // returns a deep copied + sorted list of values, as well as a sortmap
 export function sortBigNumbers(values) {
