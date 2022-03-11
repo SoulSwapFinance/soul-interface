@@ -16,6 +16,7 @@ import {
   LUX_ADDRESS,
   WLUM_ADDRESS,
   STOP_LIMIT_ORDER_ADDRESS,
+  SOULSWAPEX_ADDRESSES,
 } from '../constants/addresses'
 import {
   ARGENT_WALLET_DETECTOR_ABI,
@@ -90,6 +91,7 @@ import SUMMONER_HELPER_ABI from '../constants/abis/soulswap/helper.json'
 import PRICE_HELPER_ABI from '../constants/abis/soulswap/pricehelper.json'
 import BORING_HELPER_ABI from '../constants/abis/soulswap/boring-helper.json'
 import HARVEST_HELPER_ABI from '../constants/abis/soulswap/harvest-helper.json'
+import SOULSWAP_EX_ABI from '../constants/abis/soulswap/soulswap-ex.json'
 import COFFIN_BOX_ABI from '../constants/abis/soulswap/coffinbox.json'
 
 // bridge
@@ -161,6 +163,12 @@ export function useArgentWalletDetectorContract(): Contract | null {
     ARGENT_WALLET_DETECTOR_ABI,
     false
   )
+}
+
+// account is optional
+export function useSoulSwapExContract(address?: string | undefined, withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(SOULSWAPEX_ADDRESSES[chainId], SOULSWAP_EX_ABI, withSignerIfPossible)
 }
 
 export function useENSRegistrarContract(withSignerIfPossible?: boolean): Contract | null {
