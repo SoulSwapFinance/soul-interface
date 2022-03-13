@@ -3,7 +3,7 @@ const plugin = require('tailwindcss/plugin')
 
 module.exports = {
   // important: '#__next',
-  // darkMode: true,
+  darkMode: true,
   mode: 'jit',
   future: {
     purgeLayersByDefault: true,

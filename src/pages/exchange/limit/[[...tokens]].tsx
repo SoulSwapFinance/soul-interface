@@ -15,7 +15,7 @@ import LimitPriceInputPanel from 'features/limit/LimitPriceInputPanel'
 import HeaderNew from 'features/trade/HeaderNew'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
 import NetworkGuard from 'guards/Network'
-import { LimitLayout, LimitLayoutCard } from 'layouts/LimitLayout'
+import { SwapLayout, SwapLayoutCard } from 'layouts/SwapLayout'
 import { useActiveWeb3React } from 'services/web3'
 import { useAppDispatch } from 'state/hooks'
 import { Field, setRecipient } from 'state/limit-order/actions'
@@ -88,14 +88,13 @@ const LimitOrder = () => {
   }, [inputCurrency, pairs])
 
   return (
-    <div id="limit-page" className="w-full max-w-2xl space-y-3 rounded bg-dark-900 z-1">
-      <LimitLayoutCard>
+      <SwapLayoutCard>
+    <div id="limit-page" className="w-full h-full max-w-2xl space-y-3 rounded bg-dark-900 z-1">
         <div className="px-2">
           <HeaderNew inputCurrency={inputCurrency} outputCurrency={outputCurrency} />
         </div>
         <div className="ml-0 mb-4 sm:ml-20">
         <GelatoLimitOrderPanel />
-        <div className="sm:hidden">
         <GelatoLimitOrdersHistoryPanel />
         {/* <div className */}
           {/* <SwapAssetPanel
@@ -132,7 +131,6 @@ const LimitOrder = () => {
             priceImpactCss={inputPanelHelperText?.greaterThan(ZERO_PERCENT) ? 'text-green' : 'text-red'}
           /> */}
         </div>
-        </div>
         {/* {isExpertMode && <RecipientField recipient={recipient} action={setRecipient} />} */}
         {/* <LimitOrderButton trade={trade} parsedAmounts={parsedAmounts} /> */}
         {/* <LimitOrderReviewModal
@@ -140,31 +138,31 @@ const LimitOrder = () => {
           trade={trade}
           limitPrice={!!rate ? rate : trade?.executionPrice}
         /> */}
-      </LimitLayoutCard>
       {/* <Typography variant="xs" className="px-10 mt-5 italic text-center text-low-emphesis">
         {i18n._(t`Limit orders use funds from CoffinBox, to create a limit order depositing into CoffinBox is required.`)}
       </Typography> */}
-      <div className="sm:flex items-center px-4">
+      {/* <div className="sm:flex items-center px-4">
           <NavLink href="/exchange/limit/open">
-            <a className="flex text-blue items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
-              <span>{i18n._(t`View Open Orders`)}</span>
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
+          <a className="flex text-blue items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
+          <span>{i18n._(t`View Open Orders`)}</span>
+          <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-4 h-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+          </svg>
+          </a>
           </NavLink>
-        </div>
+        </div> */}
       </div>
+        </SwapLayoutCard>
   )
 }
 
 LimitOrder.Guard = NetworkGuard(Feature.LIMIT)
-LimitOrder.Layout = LimitLayout('limit-order-page')
+LimitOrder.Layout = SwapLayout('limit-order-page')
 
 export default LimitOrder

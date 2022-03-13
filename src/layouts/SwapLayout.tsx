@@ -1,5 +1,5 @@
 import Container from 'components/Container'
-import DoubleGlowShadow from 'components/DoubleGlowShadow'
+import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import React, { FC } from 'react'
 
 import DefaultLayout from './Default'
@@ -20,7 +20,7 @@ export const Layout: FC<Layout> = ({ children, id }) => {
   return (
     <DefaultLayout>
       <Container id={id} className="justify-center py-4" maxWidth="2xl">
-        <DoubleGlowShadow>{children}</DoubleGlowShadow>
+        <DoubleGlowShadowV2>{children}</DoubleGlowShadowV2>
       </Container>
     </DefaultLayout>
   )
