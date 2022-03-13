@@ -6,10 +6,7 @@ import { useActiveWeb3React } from 'services/web3'
 
 import {
   useHelperContract,
-  useSoulSummonerContract,
   useCircleStakingContract,
-  usePairContract,
-  useTokenContract,
 } from 'hooks/useContract'
 import { useEnchantPrice, useFantomPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice } from 'hooks/getPrices'
 

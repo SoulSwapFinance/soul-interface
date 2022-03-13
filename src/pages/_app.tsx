@@ -29,13 +29,13 @@ import React, { Fragment, useEffect } from 'react'
 import { Provider as ReduxProvider } from 'react-redux'
 import { RecoilRoot } from 'recoil'
 import { PersistGate } from 'redux-persist/integration/react'
+import { GelatoProvider } from 'soulswap-limit-orders-react'
+import { useActiveWeb3React } from 'services/web3'
 
-const Web3ProviderNetwork = dynamic(() => import('../components/Web3ProviderNetwork'), { ssr: false })
-
-// const PersistGate = dynamic(() => import('redux-persist/integration/react'), { ssr: false })
+const Web3ProviderNetwork = dynamic(() => import('components/Web3ProviderNetwork'), { ssr: false })
 
 if (typeof window !== 'undefined' && !!window.ethereum) {
-  window.ethereum.autoRefreshOnNetworkChange = false
+  window.ethereum.autoRefreshOnNetworkChange = true
 }
 
 // @ts-ignore TYPE NEEDS FIXING
@@ -103,6 +103,14 @@ function MyApp({ Component, pageProps, fallback, err }) {
   // Allows for conditionally setting a guard to be hoisted per page
   const Guard = Component.Guard || Fragment
 
+  function Gelato({ children }: { children?: React.ReactNode }) {
+  const { library, chainId, account } = useActiveWeb3React()
+  return (
+    <GelatoProvider library={library} chainId={chainId} account={account ?? undefined}>
+      {children}
+    </GelatoProvider>
+  )
+}
   return (
     <>
       <Head>Soul</Head>
@@ -147,6 +155,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
                     <SyncWithRedux />
                     <Provider>
                       <Layout>
+              <Gelato>
                         <Guard>
                           {/* TODO: Added alert Jan 25. Delete component after a few months. */}
                           {/* <MultichainExploitAlertModal /> */}
@@ -154,6 +163,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
                           <Component {...pageProps} err={err} />
                         </Guard>
                         <Portals />
+                </Gelato>
                       </Layout>
                     </Provider>
                     <TransactionUpdater />

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
 import { SOUL_CIRCLE_ADDRESS } from 'sdk'
-import { useSoulCircle } from './useSoulCircle'
+import useSoulCircle from './useSoulCircle'
 // import useMulticall from "../../hooks/useMulticall";
 import useApprove from 'features/bond/hooks/useApprove'
 
@@ -47,7 +47,7 @@ const CircleStakeRow = ({ pid, lpSymbol, lpToken, token1, token2, farm, startTim
   const { chainId, account } = useActiveWeb3React()
 
   const { circlePoolInfo, circleUserInfo, circleDeposit, circleWithdraw, circlePendingRewards, fetchTokenRateBals } =
-    useSoulCircle()
+  useSoulCircle()
 
   // const { getTimestamp } = useMulticall();
   const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)

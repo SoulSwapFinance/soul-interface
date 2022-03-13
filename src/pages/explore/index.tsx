@@ -17,7 +17,7 @@ const EXPLORE = (i18n: I18n) => [
   },
   {
     id: 2,
-    name: 'BORROW & EARN',
+    name: 'STAKE SOUL',
     description: 'Borrow $SEANCE with $SOUL and earn rewards.',
     href: './seance'
   },

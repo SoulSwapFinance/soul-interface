@@ -23,6 +23,7 @@ import swap from './swap/reducer'
 import transactions from './transactions/reducer'
 import user from './user/reducer'
 import zap from './zap/reducer'
+import { gelatoReducers } from 'soulswap-limit-orders-react'
 
 const reducer = combineReducers({
   application,
@@ -48,6 +49,7 @@ const reducer = combineReducers({
   // tridentMigrations,
   web3Context,
   zap,
+  ...gelatoReducers,
 })
 
 export default reducer
