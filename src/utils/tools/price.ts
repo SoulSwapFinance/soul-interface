@@ -9,9 +9,6 @@ const DAI = 'DAI'
 const USDC = 'USDC'
 const TUSD = 'TUSD'
 
-const ZERO = BigNumber.from(0).pow(18)
-const ONE = BigNumber.from(1).pow(18)
-
 const USD_STABLECOINS = [DAI, USDC, TUSD]
 
 const USD_STABLECOIN_ADDRESSES = [
@@ -76,14 +73,14 @@ export async function getUSDPrice(library) {
       const ethPrices = forEachStablecoin((i) => marketDetails[i].marketRate.rateInverted)
 
       const [median, medianWeights] = getMedian(ethPrices)
-      const [mean, meanWeights] = getMean(ethPrices, ONE)
+      const [mean, meanWeights] = getMean(ethPrices, new BigNumber(1))
       const [weightedMean, weightedMeanWeights] = getMean(ethPrices, ethReserves)
 
       const ethPrice = getMean([median, mean, weightedMean], 1)[0]
       const _stablecoinWeights = [
-        getMean([medianWeights[0], meanWeights[0], weightedMeanWeights[0]], ONE)[0],
-        getMean([medianWeights[1], meanWeights[1], weightedMeanWeights[1]], ONE)[0],
-        getMean([medianWeights[2], meanWeights[2], weightedMeanWeights[2]], ONE)[0],
+        getMean([medianWeights[0], meanWeights[0], weightedMeanWeights[0]], new BigNumber(1))[0],
+        getMean([medianWeights[1], meanWeights[1], weightedMeanWeights[1]], new BigNumber(1))[0],
+        getMean([medianWeights[2], meanWeights[2], weightedMeanWeights[2]], new BigNumber(1))[0],
       ]
       const stablecoinWeights = forEachStablecoin((i, stablecoin) => ({
         [stablecoin]: _stablecoinWeights[i],
