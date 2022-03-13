@@ -1,14 +1,18 @@
 import { ChainId } from '../sdk'
+import { ethers } from 'ethers'
 
 type AddressMap = { [chainId in ChainId]: string }
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
+
+export const GENERIC_GAS_LIMIT_ORDER_EXECUTE = ethers.BigNumber.from(400000)
 
 export const CONTRACT_SCAN = {
   [ChainId.ETHEREUM]: 'https://etherscan.io/address/',
   [ChainId.FANTOM]: 'https://ftmscan.com/address/',
   [ChainId.FANTOM_TESTNET]: 'https://testnet.ftmscan.com/address/',
 }
+export const ETH_ADDRESS = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
 
 export const TIMELOCK_ADDRESS = '0x1a9C8182C09F50C8318d769245beA52c32BE35BC'
 
@@ -17,6 +21,15 @@ export const ARCHER_ROUTER_ADDRESS: AddressMap = {
   56: undefined,
   250: undefined,
   4002: undefined
+}
+
+export const SOULSWAPEX_ADDRESSES = {
+  [ChainId.ETHEREUM]: '0x36049D479A97CdE1fC6E2a5D2caE30B666Ebf92B',
+}
+
+export const LIMIT_ORDER_MODULE_ADDRESSES = {
+  [ChainId.ETHEREUM]: '0x037fc8e71445910e1E0bBb2a0896d5e9A7485318',
+  [ChainId.FANTOM]: "0xf2253BF9a0BD002300cFe6f4E630d755669f6DCa",
 }
 
 export const FACTORY_ADDRESS = {

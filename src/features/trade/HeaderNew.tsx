@@ -8,6 +8,7 @@ import Typography from 'components/Typography'
 import MyOrders from 'features/limit-order/MyOrders'
 import { useRouter } from 'next/router'
 import { currencyId } from '../../functions'
+import ExternalLink from 'components/ExternalLink'
 
 const getQuery = (input?: Currency, output?: Currency) => {
   if (!input && !output) return
@@ -41,19 +42,18 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
           }}
         >
           <Typography weight={700} className="text-secondary ml-3 hover:text-white">
-            {i18n._(t`Swap`)}
+            {i18n._(t`Exchange`)}
           </Typography>
         </NavLink>
-
+        
         <NavLink
           activeClassName="text-high-emphesis"
-          href={{
-            pathname: '/margin',
-            // query: getQuery(inputCurrency, outputCurrency),
-          }}
+          href={`/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : '/FTM'}${
+            outputCurrency ? `/${currencyId(outputCurrency)}` : '/0xe2fb177009ff39f52c0134e8007fa0e4baacbd07'
+          }`}
         >
           <Typography weight={700} className="text-secondary hover:text-white">
-            {i18n._(t`Margin`)}
+            {i18n._(t`+/-`)}
           </Typography>
         </NavLink>
 
@@ -68,24 +68,37 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Limit`)}
           </Typography>
         </NavLink> */}
-        <NavLink
-          activeClassName="text-high-emphesis"
-          href={`/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : '/FTM'}${
-            outputCurrency ? `/${currencyId(outputCurrency)}` : '/0xe2fb177009ff39f52c0134e8007fa0e4baacbd07'
-          }`}
+        <ExternalLink
+          href="https://limit.soulswap.finance"
+          // activeClassName="text-high-emphesis"
+          // href={{
+          //   pathname: '/limit-order',
+          //   query: getQuery(inputCurrency, outputCurrency),
+          // }}
         >
           <Typography weight={700} className="text-secondary hover:text-white">
-            {i18n._(t`Liquidity`)}
+            {i18n._(t`Limit`)}
           </Typography>
-        </NavLink>
-        <NavLink
-          activeClassName="text-high-emphesis"
-          href={"/bridge"}
+        </ExternalLink>
+          <NavLink
+            activeClassName="text-high-emphesis"
+            href={{
+              pathname: '/margin',
+            }}
+          >
+            <Typography weight={700} className="text-secondary hover:text-white">
+              {i18n._(t`Margin`)}
+            </Typography>
+          </NavLink>
+        <ExternalLink
+          // activeClassName="text-high-emphesis"
+          // href={"/bridge"}
+          href={"https://bridge.soulswap.finance"}
         >
           <Typography weight={700} className="text-secondary hover:text-white">
             {i18n._(t`Bridge`)}
           </Typography>
-        </NavLink>
+        </ExternalLink>
       </div>
       <div className="flex gap-4">
         {/* {isLimitOrder && <MyOrders />} */}
