@@ -88,9 +88,7 @@ const LimitOrder = () => {
   }, [inputCurrency, pairs])
 
   return (
-      <DoubleGlowShadowV2 opacity="0.6">
-    <div id="margin-page" className="w-full max-w-2xl space-y-3 rounded bg-dark-900 z-1">
-        {/* <LimitOrderApprovalCheck /> */}
+    <div id="limit-page" className="w-full max-w-2xl space-y-3 rounded bg-dark-900 z-1">
       <LimitLayoutCard>
         <div className="px-2">
           <HeaderNew inputCurrency={inputCurrency} outputCurrency={outputCurrency} />
@@ -99,6 +97,7 @@ const LimitOrder = () => {
         <GelatoLimitOrderPanel />
         <div className="sm:hidden">
         <GelatoLimitOrdersHistoryPanel />
+        {/* <div className */}
           {/* <SwapAssetPanel
             error={false}
             header={(props) => <SwapAssetPanel.Header {...props} />}
@@ -145,7 +144,7 @@ const LimitOrder = () => {
       {/* <Typography variant="xs" className="px-10 mt-5 italic text-center text-low-emphesis">
         {i18n._(t`Limit orders use funds from CoffinBox, to create a limit order depositing into CoffinBox is required.`)}
       </Typography> */}
-      <div className="hidden sm:flex items-center px-4">
+      <div className="sm:flex items-center px-4">
           <NavLink href="/exchange/limit/open">
             <a className="flex text-blue items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
               <span>{i18n._(t`View Open Orders`)}</span>
@@ -162,7 +161,6 @@ const LimitOrder = () => {
           </NavLink>
         </div>
       </div>
-                </DoubleGlowShadowV2>
   )
 }
 

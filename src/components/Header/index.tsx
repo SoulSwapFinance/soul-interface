@@ -165,7 +165,7 @@ function AppBar(): JSX.Element {
                   </div>
                 </div>
 
-                <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-4 xl:w-auto bg-dark-1000 xl:relative xl:p-0 xl:bg-transparent">
+                <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-1 xl:w-auto bg-dark-1000 xl:relative xl:p-0 xl:bg-transparent">
                   <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
                     {library && library.provider.isMetaMask && (
                       <div className="inline-block">
