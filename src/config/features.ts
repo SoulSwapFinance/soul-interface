@@ -29,6 +29,7 @@ const features: FeatureMap = {
     Feature.LIQUIDITY_MINING,
     Feature.BONDS,
     Feature.COFFINBOX,
+    Feature.LIMIT,
     // Feature.LIMIT_ORDERS,
     Feature.UNDERWORLD
   ],

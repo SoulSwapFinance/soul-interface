@@ -127,23 +127,6 @@ module.exports = withBundleAnalyzer(
           source: '/find',
           destination: '/exchange/find',
         },
-        // Underworld
-        // {
-        //   source: '/borrow',
-        //   destination: '/underworld/borrow',
-        // },
-        // {
-        //   source: '/borrow/:token*',
-        //   destination: '/underworld/borrow/:token*',
-        // },
-        // {
-        //   source: '/lend',
-        //   destination: '/underworld/lend',
-        // },
-        // {
-        //   source: '/lend/:token*',
-        //   destination: '/underworld/lend/:token*',
-        // },
         {
           source: '/balances',
           destination: '/portfolio',
