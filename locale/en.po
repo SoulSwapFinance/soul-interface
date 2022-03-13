@@ -22,6 +22,9 @@ msgstr "(COMING SOON) Accrue automatic yield through flash loans and SOUL strate
 msgid "+ Add Recipient (optional)"
 msgstr "+ Add Recipient (optional)"
 
+msgid "+/-"
+msgstr "+/-"
+
 msgid "- 0.1 FTM to lock"
 msgstr "- 0.1 FTM to lock"
 
@@ -831,6 +834,9 @@ msgstr "Lend your assets, earn yield with ZERO impermanent loss"
 msgid "Lending"
 msgstr "Lending"
 
+msgid "Limit"
+msgstr "Limit"
+
 msgid "Limit Orders"
 msgstr "Limit Orders"
 
@@ -929,9 +935,6 @@ msgstr "Migrate"
 
 msgid "Migrate {exchange} Liquidity"
 msgstr "Migrate {exchange} Liquidity"
-
-msgid "Migrating"
-msgstr "Migrating"
 
 msgid "Migration is done in one-click using your signature (permit)"
 msgstr "Migration is done in one-click using your signature (permit)"
@@ -1625,6 +1628,9 @@ msgstr "View Charts"
 
 msgid "View Liquidity Positions"
 msgstr "View Liquidity Positions"
+
+msgid "View Open Orders"
+msgstr "View Open Orders"
 
 msgid "View on Explorer"
 msgstr "View on Explorer"

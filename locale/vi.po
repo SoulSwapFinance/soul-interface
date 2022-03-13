@@ -22,6 +22,9 @@ msgstr ""
 msgid "+ Add Recipient (optional)"
 msgstr ""
 
+msgid "+/-"
+msgstr ""
+
 msgid "- 0.1 FTM to lock"
 msgstr ""
 
@@ -818,6 +821,9 @@ msgstr ""
 msgid "Lending"
 msgstr ""
 
+msgid "Limit"
+msgstr ""
+
 msgid "Limit Orders"
 msgstr ""
 
@@ -915,9 +921,6 @@ msgid "Migrate"
 msgstr ""
 
 msgid "Migrate {exchange} Liquidity"
-msgstr ""
-
-msgid "Migrating"
 msgstr ""
 
 msgid "Migration is done in one-click using your signature (permit)"
@@ -1599,6 +1602,9 @@ msgid "View Charts"
 msgstr ""
 
 msgid "View Liquidity Positions"
+msgstr ""
+
+msgid "View Open Orders"
 msgstr ""
 
 msgid "View on Explorer"
