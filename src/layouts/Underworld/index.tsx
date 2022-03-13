@@ -13,7 +13,7 @@ interface LayoutProps {
   right?: JSX.Element
 }
 
-const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
+// const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
 
 const Layout: FC<LayoutProps> = ({ left, children, right }) => {
   const router = useRouter()
@@ -22,7 +22,7 @@ const Layout: FC<LayoutProps> = ({ left, children, right }) => {
       <Main>
         <Container className="px-4 py-4 md:py-8 lg:py-12" maxWidth="7xl">
           <div className={`mb-2 grid grid-cols-12 gap-4`}>
-            <div className="flex justify-center col-span-12 md:hidden">
+            {/* <div className="flex justify-center col-span-12 md:hidden">
               <Link href="/borrow">
                 <a className="flex justify-center xl:justify-start xl:mx-8">
                   <Image 
@@ -34,7 +34,7 @@ const Layout: FC<LayoutProps> = ({ left, children, right }) => {
                   />
                 </a>
               </Link>
-            </div>
+            </div> */}
           </div>
           <div className="flex items-end col-span-12 xl:col-span-9">
             <nav className="flex items-center justify-between w-full">

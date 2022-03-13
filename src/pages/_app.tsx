@@ -104,13 +104,13 @@ function MyApp({ Component, pageProps, fallback, err }) {
   const Guard = Component.Guard || Fragment
 
   function Gelato({ children }: { children?: React.ReactNode }) {
-  const { library, chainId, account } = useActiveWeb3React()
-  return (
-    <GelatoProvider library={library} chainId={chainId} account={account ?? undefined}>
-      {children}
-    </GelatoProvider>
-  )
-}
+    const { library, chainId, account } = useActiveWeb3React()
+    return (
+      <GelatoProvider library={library} chainId={chainId} account={account ?? undefined}>
+        {children}
+      </GelatoProvider>
+    )
+  }
   return (
     <>
       <Head>Soul</Head>
@@ -155,15 +155,15 @@ function MyApp({ Component, pageProps, fallback, err }) {
                     <SyncWithRedux />
                     <Provider>
                       <Layout>
-              <Gelato>
                         <Guard>
                           {/* TODO: Added alert Jan 25. Delete component after a few months. */}
                           {/* <MultichainExploitAlertModal /> */}
                           {/*@ts-ignore TYPE NEEDS FIXING*/}
-                          <Component {...pageProps} err={err} />
+                          <Gelato>
+                            <Component {...pageProps} err={err} />
+                          </Gelato>
                         </Guard>
                         <Portals />
-                </Gelato>
                       </Layout>
                     </Provider>
                     <TransactionUpdater />

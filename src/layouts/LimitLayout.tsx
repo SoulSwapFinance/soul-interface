@@ -10,7 +10,7 @@ export interface Layout {
 
 export const LimitLayoutCard: FC = ({ children }) => {
   return (
-    <div className="flex flex-col gap- p-2 pt-4 rounded-[18px] bg-dark-900 shadow-md shadow-dark-1000">
+    <div className="flex flex-col p-2 pt-4 rounded-[18px] bg-dark-900 shadow-md shadow-dark-1000">
       {children}
     </div>
   )
