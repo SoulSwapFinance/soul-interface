@@ -399,6 +399,14 @@ const Swap = () => {
             </div>
           </div>
           <SwapAssetPanel
+            // walletToggle={(props) => (
+            //   <SwapAssetPanel.Switch
+            //     id={`switch-classic-withdraw-from-0}`}
+            //     {...props}
+            //     label={i18n._(t`Pay from`)}
+            //     onChange={() => dispatch(setFromCoffinBalance(!fromCoffinBalance))}
+            //   />
+            // )}
             spendFromWallet={true}
             header={(props) => (
               <SwapAssetPanel.Header
@@ -456,7 +464,7 @@ const Swap = () => {
               {approvalState !== ApprovalState.APPROVED && (
                 <Button
                   fullWidth
-                  color = "purple"
+                  color="purple"
                   loading={approvalState === ApprovalState.PENDING}
                   onClick={handleApprove}
                   disabled={approvalState !== ApprovalState.NOT_APPROVED || approvalSubmitted}
@@ -529,11 +537,11 @@ const Swap = () => {
           {isExpertMode && swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}
           {swapIsUnsupported ? <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} show={false} /> : null}
         </div>
-      <div className={`xl:max-w-7xl mt-6 w-full lg:grid-cols-1 order-last space-y-4 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
-        <div className={`w-full flex flex-col order-last mt-6 mb-20 sm:mb-0 lg:mt-0 p-6 rounded rounded-lg bg-light-glass`}>
-          <Chart inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+        <div className={`xl:max-w-7xl mt-6 w-full lg:grid-cols-1 order-last space-y-4 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
+          <div className={`w-full flex flex-col order-last mt-6 mb-20 sm:mb-0 lg:mt-0 p-6 rounded rounded-lg bg-light-glass`}>
+            <Chart inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+          </div>
         </div>
-      </div>
       </SwapLayoutCard>
       {/* <Banner banners={banners} /> */}
     </>

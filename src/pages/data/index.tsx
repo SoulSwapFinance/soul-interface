@@ -1,7 +1,6 @@
 import Container from 'components/Container'
 import Typography from 'components/Typography'
 import usePriceApi from 'hooks/usePriceApi'
-import Head from 'next/head'
 import React from 'react'
 
 export default function Status({ fallbackData }) {

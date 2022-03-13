@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { persistReducer, persistStore } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+import { GELATO_PERSISTED_KEYS } from 'soulswap-limit-orders-react'
 
 import reducer from './reducer'
 
-const PERSISTED_KEYS: string[] = ['user', 'transactions', 'lists']
+const PERSISTED_KEYS: string[] = ['user', 'transactions', 'lists', 
+...GELATO_PERSISTED_KEYS]
 
 const persistConfig = {
   key: 'root',

@@ -42,7 +42,7 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
           }}
         >
           <Typography weight={700} className="text-secondary ml-3 hover:text-white">
-            {i18n._(t`Exchange`)}
+            {i18n._(t`Swap`)}
           </Typography>
         </NavLink>
         
@@ -68,18 +68,18 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Limit`)}
           </Typography>
         </NavLink> */}
-        <ExternalLink
-          href="https://limit.soulswap.finance"
-          // activeClassName="text-high-emphesis"
-          // href={{
-          //   pathname: '/limit-order',
-          //   query: getQuery(inputCurrency, outputCurrency),
-          // }}
+        <NavLink
+          // href="/exchange/limit"
+          activeClassName="text-high-emphesis"
+          href={{
+            pathname: '/exchange/limit',
+            query: getQuery(inputCurrency, outputCurrency),
+          }}
         >
           <Typography weight={700} className="text-secondary hover:text-white">
             {i18n._(t`Limit`)}
           </Typography>
-        </ExternalLink>
+        </NavLink>
           <NavLink
             activeClassName="text-high-emphesis"
             href={{
