@@ -4,7 +4,7 @@ import { useLingui } from '@lingui/react'
 import { ChainId, TradeVersion } from 'sdk'
 import Chip from 'components/Chip'
 import Container from 'components/Container'
-import DoubleGlowShadow from 'components/DoubleGlowShadow'
+import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import Gas from 'components/Gas'
 import SettingsTab from 'components/TridentSettings'
 import Typography from 'components/Typography'
@@ -97,7 +97,7 @@ const Swap = () => {
 
   return (
     <Container className="px-2 py-4 md:py-8 lg:py-20" maxWidth="lg">
-      <DoubleGlowShadow>
+      <DoubleGlowShadowV2>
         <div className="shadow rounded-[20px] bg-dark-900 pb-3">
           <div className="flex items-center justify-between py-2 pl-4 pr-2">
             <Typography weight={700}>{i18n._(t`Swap`)}</Typography>
@@ -227,7 +227,7 @@ const Swap = () => {
               onDismiss={handleDismiss} trade={undefined} originalTrade={undefined}            />
           </div>
         </div>
-      </DoubleGlowShadow>
+      </DoubleGlowShadowV2>
     </Container>
   )
 }

@@ -41,7 +41,7 @@ import usePool from '../../hooks/usePool'
 import { useRouterContract } from '../../hooks/useContract'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import useZapper from '../../hooks/useZapper'
-import DoubleGlowShadow from '../../components/DoubleGlowShadow'
+import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 
 const PoolAllocationWrapper = styled.div`
   margin-top: 1rem;
@@ -270,7 +270,7 @@ export default function Zap() {
       {!poolAddress ? (
         <PoolList />
       ) : (
-        <DoubleGlowShadow>
+        <DoubleGlowShadowV2>
           <div className="w-full max-w-xl p-4 rounded bg-dark-900">
             <CardHeader />
             <AutoColumn>
@@ -522,7 +522,7 @@ export default function Zap() {
               </>
             </AutoColumn>
           </div>
-        </DoubleGlowShadow>
+        </DoubleGlowShadowV2>
       )}
     </>
   )

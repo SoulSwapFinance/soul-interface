@@ -6,7 +6,7 @@ import Popups from 'components/Popups'
 // @ts-ignore TYPE NEEDS FIXING
 const Layout = ({ children }) => {
   return (
-    <div className="z-0 flex flex-col items-center w-full h-screen">
+    <div className="z-0 flex flex-col items-center w-full h-full">
       <Header />
       <Main>{children}</Main>
       <Popups />
