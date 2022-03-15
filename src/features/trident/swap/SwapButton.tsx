@@ -53,7 +53,7 @@ const SwapButton: FC<SwapButton> = ({ onClick }) => {
               fullWidth
               id="swap-button"
               loading={loading}
-              color="gradient"
+              color="deepPurple"
               disabled={disabled}
               onClick={handleClick}
             >

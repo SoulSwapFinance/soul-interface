@@ -38,6 +38,7 @@ module.exports = {
       },
       colors: {
         purple: '#a755dd',
+        deepPurple: '#9756F7',
         blue: '#0993ec',
         pink: '#f338c3',
         green: '#7cff6b',

@@ -443,11 +443,11 @@ const Swap = () => {
               {i18n._(t`Unsupported Asset`)}
             </Button>
           ) : !account ? (
-            <Web3Connect color="blue" variant="filled" className="rounded-2xl md:rounded" />
+            <Web3Connect color="purple" variant="filled" className="rounded-2xl md:rounded" />
           ) : showWrap ? (
             <Button
               fullWidth
-              color="blue"
+              color="deepPurple"
               disabled={Boolean(wrapInputError)}
               onClick={onWrap}
               className="rounded-2xl md:rounded"
@@ -464,7 +464,7 @@ const Swap = () => {
               {approvalState !== ApprovalState.APPROVED && (
                 <Button
                   fullWidth
-                  color="purple"
+                  color="deepPurple"
                   loading={approvalState === ApprovalState.PENDING}
                   onClick={handleApprove}
                   disabled={approvalState !== ApprovalState.NOT_APPROVED || approvalSubmitted}
@@ -475,7 +475,7 @@ const Swap = () => {
               )}
               {approvalState === ApprovalState.APPROVED && (
                 <Button
-                  color={isValid && priceImpactSeverity > 2 ? 'red' : 'gradient'}
+                  color={isValid && priceImpactSeverity > 2 ? 'red' : 'purple'}
                   onClick={() => {
                     if (isExpertMode) {
                       handleSwap()
@@ -506,7 +506,7 @@ const Swap = () => {
             </div>
           ) : (
             <Button
-              color={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'red' : 'gradient'}
+              color={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'red' : 'deepPurple'}
               fullWidth
               onClick={() => {
                 if (isExpertMode) {
