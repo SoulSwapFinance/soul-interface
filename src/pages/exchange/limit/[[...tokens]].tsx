@@ -43,57 +43,16 @@ const LimitOrder = () => {
   const [isExpertMode] = useExpertModeManager()
   const { typedField, typedValue, fromCoffinBalance, recipient } = useLimitOrderState()
   const { inputCurrency, outputCurrency } = useLimitOrderDerivedCurrencies()
-  const { pending } = useLimitOrders()
   const trade = useLimitOrderDerivedTrade()
   const rate = useLimitOrderDerivedLimitPrice()
-  const parsedAmounts = useLimitOrderDerivedParsedAmounts({ rate, trade })
-  const { onSwitchTokens, onCurrencySelection, onUserInput } = useLimitOrderActionHandlers()
-
-  const pairs = useMemo(
-    () => (limitOrderPairList.pairs[chainId || 1] || []).map(([token0, token1]) => [token0.address, token1.address]),
-    [chainId]
-  )
-
-  const inputPanelHelperText = useMemo(() => {
-    if (rate && trade) {
-      const { numerator, denominator } = rate.subtract(trade.executionPrice).divide(trade.executionPrice)
-      return new Percent(numerator, denominator)
-    }
-  }, [rate, trade])
-
-  const inputTokenList = useMemo(() => {
-    if (pairs.length === 0) return []
-    return pairs.reduce((acc, [token0, token1]) => {
-      acc.push(token0)
-      acc.push(token1)
-      return acc
-    }, [])
-  }, [pairs])
-
-  const outputTokenList = useMemo(() => {
-    if (pairs.length === 0) return []
-    if (inputCurrency) {
-
-      return pairs.reduce((acc, [token0, token1]) => {
-        if (inputCurrency.wrapped.address === token0) acc.push(token1)
-        if (inputCurrency.wrapped.address === token1) acc.push(token0)
-        return acc
-      }, [])
-    }
-    return pairs.reduce((acc, [token0, token1]) => {
-      acc.push(token0)
-      acc.push(token1)
-      return acc
-    }, [])
-  }, [inputCurrency, pairs])
 
   return (
       <SwapLayoutCard>
-    <div id="limit-page" className="w-full h-full max-w-2xl space-y-3 rounded bg-dark-900 z-1">
+    <div id="limit-page" className="w-full h-full max-w-2xl space-y-3 rounded bg-dark-1200 z-1">
         <div className="px-2">
           <HeaderNew inputCurrency={inputCurrency} outputCurrency={outputCurrency} />
         </div>
-        <div className="ml-0 mb-4 sm:ml-20">
+        <div className="ml-0 mb-4 sm:ml-0">
         <GelatoLimitOrderPanel />
         <GelatoLimitOrdersHistoryPanel />
         {/* <div className */}
