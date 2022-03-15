@@ -5,8 +5,11 @@ import { useMemo } from 'react'
 import { useV2TradeExactOut } from './useV2Trades'
 
 import { tryParseAmount } from 'functions'
-import { ANY, BNB, CRV, LUXOR, MIM, SEANCE, SOUL, FUSD, USDT, UNIDX, WBTC, WETH, WLUM, REAPER, GRIM, GRIMEVO, DAI } from 'constants/tokens'
-import { ANY_ADDRESS, BNB_ADDRESS, CRV_ADDRESS, FUSD_ADDRESS, GRIM_ADDRESS, GRIMEVO_ADDRESS, LUX_ADDRESS, REAPER_ADDRESS, SEANCE_ADDRESS, SOUL_ADDRESS, UNIDX_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS } from 'constants/addresses'
+import { ANY, BNB, CRV, LUXOR, MIM, SEANCE, SOUL, FUSD, USDT, UNIDX, WBTC, WETH, WFTM, WLUM, REAPER, GRIM, GRIMEVO, DAI } from 'constants/tokens'
+import { ANY_ADDRESS, BNB_ADDRESS, CRV_ADDRESS, FUSD_ADDRESS, GRIM_ADDRESS, 
+  GRIMEVO_ADDRESS, LUX_ADDRESS, REAPER_ADDRESS, SEANCE_ADDRESS, 
+  WFTM_ADDRESS, SOUL_ADDRESS, UNIDX_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS } 
+  from 'constants/addresses'
 import { usePrice } from 'hooks/usePrice'
 // import { SupportedChainId } from '../constants/chains'
 // import { useBestV2Trade } from './useBestV2Trade'
@@ -65,6 +68,10 @@ const WBTC_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WBTC[ChainId.FANTOM], 100_000e6)
 }
 
+const WFTM_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WFTM[ChainId.FANTOM], 100_000e6)
+}
+
 const BNB_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(BNB[ChainId.FANTOM], 100_000e6)
 }
@@ -100,7 +107,7 @@ const GRIMEVO_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
 export default function useUSDCPrice(currency?: Currency): Price<Currency, Token> | undefined {
   const chainId = currency?.chainId
 
-  const soulPrice = usePrice(SOUL[chainId]?.address)
+  const soulPrice = usePrice(SOUL_ADDRESS[chainId])
   const seancePrice = usePrice(SEANCE_ADDRESS[chainId])
 
   const luxorPrice = usePrice(LUX_ADDRESS[chainId])
@@ -108,6 +115,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
 
   const wethPrice = usePrice(WETH_ADDRESS[chainId])
   const wbtcPrice = usePrice(WBTC_ADDRESS[chainId])
+  const wftmPrice = usePrice(WFTM_ADDRESS[chainId])
   const bnbPrice = usePrice(BNB_ADDRESS[chainId])
   const anyPrice = usePrice(ANY_ADDRESS[chainId])
   const crvPrice = usePrice(CRV_ADDRESS[chainId])
@@ -128,6 +136,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   
   const luxorAmountOut = chainId ? LUXOR_AMOUNT_OUT[chainId] : undefined
   const wlumAmountOut = chainId ? WLUM_AMOUNT_OUT[chainId] : undefined
+  const wftmAmountOut = chainId ? WFTM_AMOUNT_OUT[chainId] : undefined
 
   const wethAmountOut = chainId ? WETH_AMOUNT_OUT[chainId] : undefined
   const wbtcAmountOut = chainId ? WBTC_AMOUNT_OUT[chainId] : undefined
@@ -144,12 +153,13 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   const usdt = usdtAmountOut?.currency
   const dai = daiAmountOut?.currency
   const fusd = fusdAmountOut?.currency
-  // const mim = mimAmountOut?.currency
+  const mim = mimAmountOut?.currency
   const soul = soulAmountOut?.currency
   const seance = seanceAmountOut?.currency
   const luxor = luxorAmountOut?.currency
   const wlum = wlumAmountOut?.currency
   const weth = wethAmountOut?.currency
+  const wftm = wftmAmountOut?.currency
   const wbtc = wbtcAmountOut?.currency
   const bnb = bnbAmountOut?.currency
   const any = anyAmountOut?.currency
@@ -189,9 +199,9 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
     }
 
     // handle mim
-    // if (currency?.wrapped.equals(mim)) {
-    //   return new Price(mim, mim, '1', '1')
-    // }
+    if (currency?.wrapped.equals(mim)) {
+      return new Price(mim, mim, '1', '1')
+    }
 
     // handle fusd
     if (currency?.wrapped.equals(fusd)) {
@@ -216,6 +226,11 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
     // handle wlum
     if (currency?.wrapped.equals(wlum)) {
       return new Price(wlum, wlum, '100', Number(wLumensPrice * 100).toFixed())
+    }
+
+    // handle wftm
+    if (currency?.wrapped.equals(wftm)) {
+      return new Price(wftm, wftm, '100', Number(wftmPrice * 100).toFixed())
     }
 
     // handle weth
