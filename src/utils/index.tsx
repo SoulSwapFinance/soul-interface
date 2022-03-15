@@ -1,7 +1,9 @@
 import { BigNumber } from "@ethersproject/bignumber";
-
+import Notify from 'bnc-notify'
+import ethers from 'ethers'
 export * from './tools/axios'
 export * from './tools/getPrice'
+export * from './tools/rate'
 
 
 export function ASSERT(f: () => boolean, t?: string) {
@@ -73,3 +75,93 @@ export function ASSERT(f: () => boolean, t?: string) {
     return value > 0 ? res : res.mul(-1);
   }
   
+  // amount must be a BigNumber, {base,display}Decimals must be Numbers
+export function amountFormatter(amount, baseDecimals = 18, displayDecimals = 3, useLessThan = true) {
+  try {
+    // if balance is falsy, return undefined
+    if (!amount) {
+      return undefined
+    }
+
+    if (displayDecimals > baseDecimals) {
+      return amountFormatter(amount, baseDecimals, baseDecimals, useLessThan)
+    }
+
+    const zero = ethers.constants.Zero
+    if (baseDecimals > 18 || displayDecimals > 18 || displayDecimals > baseDecimals) {
+      throw Error(`Invalid combination of baseDecimals '${baseDecimals}' and displayDecimals '${displayDecimals}.`)
+    }
+    // if amount is 0, return
+    else if (amount.isZero()) {
+      return '0'
+    }
+    // amount is negative
+    else if (amount.lt(zero)) {
+      return `-${amountFormatter(zero.sub(amount), baseDecimals, displayDecimals, useLessThan)}`
+    }
+    // amount > 0
+    else {
+      // amount of 'wei' in 1 'ether'
+      const baseAmount = ethers.BigNumber.from(10).pow(ethers.BigNumber.from(baseDecimals))
+
+      const minimumDisplayAmount = baseAmount.div(ethers.BigNumber.from(10).pow(ethers.BigNumber.from(displayDecimals)))
+
+      // if balance is less than the minimum display amount
+      if (amount.lt(minimumDisplayAmount)) {
+        return useLessThan
+          ? `<${ethers.utils.formatUnits(minimumDisplayAmount, baseDecimals)}`
+          : `${ethers.utils.formatUnits(amount, baseDecimals)}`
+      }
+      // if the balance is greater than the minimum display amount
+      else {
+        const stringAmount = ethers.utils.formatUnits(amount, baseDecimals)
+
+        // if there isn't a decimal portion
+        if (!stringAmount.match(/\./)) {
+          return stringAmount
+        }
+        // if there is a decimal portion
+        else {
+          const [wholeComponent, decimalComponent] = stringAmount.split('.')
+          const roundUpAmount = minimumDisplayAmount.div(ethers.constants.Two)
+          const roundedDecimalComponent = ethers.BigNumber.from(decimalComponent.padEnd(baseDecimals, '0'))
+            .add(roundUpAmount)
+            .toString()
+            .padStart(baseDecimals, '0')
+            .substring(0, displayDecimals)
+
+          // decimals are too small to show
+          if (roundedDecimalComponent === '0'.repeat(displayDecimals)) {
+            return wholeComponent
+          }
+          // decimals are not too small to show
+          else {
+            return `${wholeComponent}.${roundedDecimalComponent.toString().replace(/0*$/, '')}`
+          }
+        }
+      }
+    }
+  } catch {
+    return undefined
+  }
+}
+
+export const trackTx = (hash, chainId) => {
+  if (process.env.REACT_APP_BLOCK_NATIVE) {
+    const notify = Notify({
+      dappId: process.env.REACT_APP_BLOCK_NATIVE, // [String] The API key created by step one above
+      networkId: chainId, // [Integer] The Ethereum network ID your Dapp uses.
+    })
+    // Track Tx progress
+    notify.hash(hash)
+  }
+}
+
+export function safeAccess(object, path) {
+  return object
+    ? path.reduce(
+        (accumulator, currentValue) => (accumulator && accumulator[currentValue] ? accumulator[currentValue] : null),
+        object
+      )
+    : null
+}
