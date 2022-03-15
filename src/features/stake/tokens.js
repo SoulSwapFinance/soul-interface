@@ -63,7 +63,7 @@ export const tokens = {
   },
   WBNB: {
     4002: '',
-    250: "0x27f26f00e1605903645bbabc0a73e35027dccd45", // 18 dec; FBNB
+    250: "0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454", // 18 dec; FBNB
     1: "0xB8c77482e45F1F44dE1745F52C74426C631bDD52",
     56: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
   },
