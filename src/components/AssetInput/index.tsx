@@ -229,7 +229,7 @@ const AssetInputPanel = ({
               <div className="inline-flex items-center">
                 <Button
                   disabled={disabled}
-                  color="blue"
+                  color="purple"
                   size="sm"
                   variant="filled"
                   className="!rounded-full"

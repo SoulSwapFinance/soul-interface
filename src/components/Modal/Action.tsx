@@ -7,7 +7,7 @@ export interface ModalActionProps extends ButtonProps {
 
 const ModalAction: FC<ModalActionProps> = ({ children, disabled, main = false, ...props }) => {
   return (
-    <Button {...props} size="sm" color="blue" disabled={disabled} variant={main ? 'filled' : 'empty'}>
+    <Button {...props} size="sm" color="purple" disabled={disabled} variant={main ? 'filled' : 'empty'}>
       {children}
     </Button>
   )

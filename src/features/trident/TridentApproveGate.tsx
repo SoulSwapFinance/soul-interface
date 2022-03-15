@@ -182,7 +182,7 @@ const TridentApproveGate = ({
       }, [])}
 
       {!account ? (
-        <Button color="gradient" onClick={toggleWalletModal}>
+        <Button color="deepPurple" onClick={toggleWalletModal}>
           {i18n._(t`Connect Wallet`)}
         </Button>
       ) : (
