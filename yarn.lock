@@ -2096,7 +2096,7 @@
   resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-1.4.0.tgz#c6d424d8ab10ac925e4423d7f3cbab02c30d736a"
   integrity sha512-C+FmBVF6YGvqcEI5fa2dfVbEaXr2RGR6Kw1E5HXIISIZEfsrH/yuCgsjWw5nlRF9vbCxmQ/EKs64GAdKeb8gCw==
 
-"@heroicons/react@^1.0.4":
+"@heroicons/react@^1.0.4", "@heroicons/react@^1.0.6":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@heroicons/react/-/react-1.0.6.tgz#35dd26987228b39ef2316db3b1245c42eb19e324"
   integrity sha512-JJCXydOFWMDpCP4q13iEplA503MQO3xLoZiKum+955ZCtHINWnx26CUxVxxFQu/uLb4LW3ge15ZpzIkXKkJ8oQ==
@@ -21266,12 +21266,13 @@ soulswap-limit-orders-lib@^1.1.0:
     graphql-request "^3.5.0"
     tslib "^2.3.1"
 
-soulswap-limit-orders-react@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/soulswap-limit-orders-react/-/soulswap-limit-orders-react-1.8.0.tgz#0ecefa710be965138fbf3f47ae2d648330567674"
-  integrity sha512-CAhkltBlXAQYvo2qc17vBIq+WKCpBuM01OkQK9dST309esGFl3Qn7O6SZMQtXLZYb0ZKYrxHRdrIPBZq//chcQ==
+soulswap-limit-orders-react@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/soulswap-limit-orders-react/-/soulswap-limit-orders-react-2.3.0.tgz#1e70b41e693b1986e611f35c8af88ebe08f89a99"
+  integrity sha512-16RXPJ6wY5UVbmb5ZZnitg4ZNj3n88gjF+aGNCshjz7V7rkVlDKIpRdtydvy6Hnsv8cA4Wj8kVoMFVkNlKEJSQ==
   dependencies:
     "@ethersproject/units" "^5.6.0"
+    "@heroicons/react" "^1.0.6"
     "@popperjs/core" "^2.9.2"
     "@reach/dialog" "^0.15.0"
     "@uniswap/default-token-list" "^2.0.0"

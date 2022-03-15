@@ -1,8 +1,8 @@
 import {
-  ChainId,
+  // ChainId,
   Currency,
-  CurrencyAmount,
-  Ether,
+  // CurrencyAmount,
+  // Ether,
   Percent,
   TradeType,
   Trade,
@@ -46,7 +46,7 @@ export default function ConfirmSwapModal({
   isOpen,
   attemptingTxn,
   txHash,
-  minerBribe,
+  // minerBribe,
 }: {
   isOpen: boolean
   trade: Trade<Currency, Currency, TradeType> | undefined
@@ -95,9 +95,9 @@ export default function ConfirmSwapModal({
     `Swapping ${formatNumberScale(trade?.inputAmount?.toSignificant(6))} ${trade?.inputAmount?.currency?.symbol
     } for ${formatNumberScale(trade?.outputAmount?.toSignificant(6))} ${trade?.outputAmount?.currency?.symbol}`
 
-  const pendingText2 = minerBribe
-    ? `Plus ${CurrencyAmount.fromRawAmount(Ether.onChain(ChainId.ETHEREUM), minerBribe).toSignificant(6)} ETH Miner Tip`
-    : undefined
+  // const pendingText2 = minerBribe
+  //   ? `Plus ${CurrencyAmount.fromRawAmount(Ether.onChain(ChainId.ETHEREUM), minerBribe).toSignificant(6)} ETH Miner Tip`
+  //   : undefined
 
   const confirmationContent = useCallback(
     () =>
@@ -122,7 +122,7 @@ export default function ConfirmSwapModal({
       hash={txHash}
       content={confirmationContent}
       pendingText={pendingText}
-      pendingText2={pendingText2}
+      // pendingText2={pendingText2}
       currencyToAdd={trade?.outputAmount.currency}
     />
   )

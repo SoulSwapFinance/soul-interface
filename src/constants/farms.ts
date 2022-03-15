@@ -319,7 +319,7 @@ export const POOLS: AddressMap = {
       },
       token1: {
         id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
-        name: 'Wrapped FTM',
+        name: 'Wrapped Fantom',
         symbol: 'FTM',
         decimals: 18,
       },
@@ -335,7 +335,7 @@ export const POOLS: AddressMap = {
       },
       token1: {
         id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
-        name: 'Wrapped FTM',
+        name: 'Wrapped Fantom',
         symbol: 'FTM',
         decimals: 18,
       },
@@ -393,7 +393,7 @@ export const POOLS: AddressMap = {
       address: '0xf3d6e8ecece8647b456d57375ce0b51b8f0cd40b',
       token0: {
         id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
-        name: 'Wrapped FTM',
+        name: 'Wrapped Fantom',
         symbol: 'FTM',
         decimals: 18,
       },
@@ -409,7 +409,7 @@ export const POOLS: AddressMap = {
       address: '0xb4d6ff768f409e4d102bad80f9a8ac105453ccdd',
       token0: {
         id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
-        name: 'Wrapped FTM',
+        name: 'Wrapped Fantom',
         symbol: 'FTM',
         decimals: 18,
       },
