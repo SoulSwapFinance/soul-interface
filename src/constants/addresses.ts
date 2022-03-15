@@ -290,6 +290,13 @@ export const WFTM_ADDRESS: AddressMap = {
   [ChainId.FANTOM_TESTNET]: '',
 }
 
+export const WNATIVE_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
 export const ANY_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.BSC]: '',
