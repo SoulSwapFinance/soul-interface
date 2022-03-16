@@ -1604,9 +1604,6 @@ msgstr ""
 msgid "View Liquidity Positions"
 msgstr ""
 
-msgid "View Open Orders"
-msgstr ""
-
 msgid "View on Explorer"
 msgstr ""
 

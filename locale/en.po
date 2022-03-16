@@ -1629,9 +1629,6 @@ msgstr "View Charts"
 msgid "View Liquidity Positions"
 msgstr "View Liquidity Positions"
 
-msgid "View Open Orders"
-msgstr "View Open Orders"
-
 msgid "View on Explorer"
 msgstr "View on Explorer"
 
