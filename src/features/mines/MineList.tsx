@@ -12,7 +12,6 @@ import { TABLE_TR_TH_CLASSNAME, TABLE_WRAPPER_DIV_CLASSNAME } from 'features/tri
 import { classNames } from 'functions'
 import { useInfiniteScroll } from 'hooks/useInfiniteScroll'
 import useSortableData from 'hooks/useSortableData'
-import { useActiveWeb3React } from 'services/web3'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
 import React, { FC, useCallback, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
