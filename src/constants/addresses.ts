@@ -23,6 +23,14 @@ export const ARCHER_ROUTER_ADDRESS: AddressMap = {
   4002: undefined
 }
 
+export const SOR_ADDRESS = {
+  [ChainId.FANTOM]: "0xB16785cD12188Fbb19342Ead72fDd3d12538F2A1" 
+}
+
+export const LUX_SOR_ADDRESS = {
+  [ChainId.FANTOM]: "" 
+}
+
 export const SOULSWAPEX_ADDRESSES = {
   [ChainId.ETHEREUM]: '0x36049D479A97CdE1fC6E2a5D2caE30B666Ebf92B',
 }

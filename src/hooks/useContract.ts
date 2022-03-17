@@ -15,6 +15,7 @@ import {
   SOUL_USDC_PAIR,
   LUX_ADDRESS,
   WLUM_ADDRESS,
+  LUX_SOR_ADDRESS,
   STOP_LIMIT_ORDER_ADDRESS,
 } from '../constants/addresses'
 import {
@@ -92,6 +93,7 @@ import BORING_HELPER_ABI from '../constants/abis/soulswap/boring-helper.json'
 import HARVEST_HELPER_ABI from '../constants/abis/soulswap/harvest-helper.json'
 import COFFIN_BOX_ABI from '../constants/abis/soulswap/coffinbox.json'
 import LUXOR_BOND_CONTRACT_ABI from '../constants/abis/soulswap/bond.json'
+import LUX_SOR_ABI from '../constants/abis/soulswap/bond.json'
 
 // bridge
 import anyswapEthOperaBridge_ABI from '../constants/abis/soulswap/bridge/anyswapEthOperaBridge.json'
@@ -356,6 +358,12 @@ export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contrac
 export function useSummonerContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible)
+}
+
+// TODO: FIX ADDRESS
+export function useLuxorSorContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && LUX_SOR_ADDRESS[chainId], LUX_SOR_ABI, withSignerIfPossible)
 }
 
 export function useFactoryContract(): Contract | null {
