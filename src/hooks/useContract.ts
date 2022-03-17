@@ -91,6 +91,7 @@ import PRICE_HELPER_ABI from '../constants/abis/soulswap/pricehelper.json'
 import BORING_HELPER_ABI from '../constants/abis/soulswap/boring-helper.json'
 import HARVEST_HELPER_ABI from '../constants/abis/soulswap/harvest-helper.json'
 import COFFIN_BOX_ABI from '../constants/abis/soulswap/coffinbox.json'
+import LUXOR_BOND_CONTRACT_ABI from '../constants/abis/soulswap/bond.json'
 
 // bridge
 import anyswapEthOperaBridge_ABI from '../constants/abis/soulswap/bridge/anyswapEthOperaBridge.json'
@@ -529,4 +530,9 @@ export function useAtomicSwapContract(withSignerIfPossible?: boolean): Contract 
 // SoulSwap 
 export function useSpookySwapFactoryContract(withSignerIfPossible?: boolean): Contract | null {
 return useContract('0x152eE697f2E276fA89E96742e9bB9aB1F2E61bE3', SPOOKY_FACTORY_ABI, withSignerIfPossible)
+}
+
+export function useLuxorBondContract(withSignerIfPossible = true): Contract | null {
+  // const { chainId } = useActiveWeb3React()
+  return useContract('0x152eE697f2E276fA89E96742e9bB9aB1F2E61bE3', LUXOR_BOND_CONTRACT_ABI, withSignerIfPossible)
 }

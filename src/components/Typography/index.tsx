@@ -1,10 +1,13 @@
 import { classNames } from 'functions'
 import React, { FC, forwardRef } from 'react'
 
-export type TypographyWeight = 400 | 500 | 700
+export type TypographyWeight = 300 | 400 | 500 | 600 | 700
 
 const WEIGHTS = {
+  300: 'font-light',
   400: 'font-medium',
+  500: 'font-medium',
+  600: 'font-semibold',
   700: 'font-bold',
 }
 
@@ -22,9 +25,32 @@ const VARIANTS = {
   xxs: 'text-[0.625rem] leading-[1.2]',
 }
 
+export type TypographyLineHeight = 14 | 16 | 20 | 24 | 28 | 32 | 36 | 48
+
+const LINE_HEIGHTS = {
+  14: 'leading-14',
+  16: 'leading-4',
+  20: 'leading-5',
+  24: 'leading-6',
+  28: 'leading-7',
+  32: 'leading-8',
+  36: 'leading-9',
+  48: 'leading-48',
+}
+
+export type TypographyFontFamily = 'regular' | 'medium' | 'semi-bold' | 'bold'
+
+const FONT_FAMILIES = {
+  regular: '',
+  medium: 'medium',
+  'semi-bold': 'semi-bold',
+  bold: 'bold',
+}
 export interface TypographyProps extends React.AllHTMLAttributes<React.ReactHTML> {
   variant?: TypographyVariant
+  fontFamily?: TypographyFontFamily
   weight?: TypographyWeight
+  lineHeight?: TypographyLineHeight
   component?: keyof React.ReactHTML
   className?: string
   clickable?: boolean
@@ -35,6 +61,8 @@ const Typography: FC<TypographyProps> = forwardRef(
     {
       variant = 'base',
       weight = 400,
+      lineHeight = 20,
+      fontFamily='regular',
       component = 'div',
       className = 'currentColor',
       clickable = false,
@@ -49,7 +77,9 @@ const Typography: FC<TypographyProps> = forwardRef(
       {
         className: classNames(
           VARIANTS[variant],
+          FONT_FAMILIES[fontFamily],
           WEIGHTS[weight],
+          LINE_HEIGHTS[lineHeight],
           onClick ? 'cursor-pointer select-none' : '',
           className
         ),
