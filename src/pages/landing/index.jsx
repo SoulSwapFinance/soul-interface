@@ -4,7 +4,7 @@ const Landing = () => {
 			frameBorder={"none"}
     		title={"HOME"}
     		src="https://soulswap.finance"
-    		height={"100%" }
+    		height={"720px”}
     		width={"100%"}
     />
 	);
