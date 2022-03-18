@@ -35,7 +35,7 @@ import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 // import Container from '../../components/Container'
 // import { useIsSwapUnsupported } from '../../hooks/useIsSwapUnsupported'
 // const addIsUnsupported = useIsSwapUnsupported(currencies?.CURRENCY_A, currencies?.CURRENCY_B)
-const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
+// const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
 
 const Margin = () => {
   const { i18n } = useLingui()

@@ -22,12 +22,11 @@ import { useUnderworldBorrowPositions } from 'features/portfolio/AssetBalances/u
 import { e10 } from 'functions/math'
 import router from 'next/router'
 
-const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
+// const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
 
 export default function Borrow() {
   const { i18n } = useLingui()
   const addresses = useUnderworldPairAddresses()
-  // @ts-ignore TYPE NEEDS FIXING
   const pairs = useUnderworldPairs(addresses)
 
   const positions = useUnderworldBorrowPositions(pairs)
@@ -39,7 +38,7 @@ export default function Borrow() {
   )
 
   const [numDisplayed, setNumDisplayed] = useInfiniteScroll(data.items)
-  let pairPrice = '0'
+  // let pairPrice = '0'
 
   return (
     <BorrowLayout>
@@ -397,7 +396,7 @@ const BorrowLayout = ({ children }) => {
       left={
         <Card
           className="h-full bg-dark-900"
-          backgroundImage={BORROW_IMG}
+          // backgroundImage={BORROW_IMG}
           title={i18n._(t`Borrow assets and leverage up`)}
           description={i18n._(
             t`Borrowing allows you to obtain liquidity without selling. Your borrow limit depends on the amount of deposited collateral. You will be able to borrow up to 75% of your collateral and repay at any time with accrued interest.`
