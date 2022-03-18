@@ -50,7 +50,6 @@ export default function Stablecoin() {
 
   const daiToken = new Token(chainId, getAddress(DAI_ADDRESS[chainId]), 18, 'DAI')
   const sorToken = new Token(chainId, getAddress(SOR_ADDRESS[chainId]), 18, 'SOR')
-
   const stakeClaimAmount = useStakeClaimAmount(sorToken)
   const redeemClaimAmount = useRedeemClaimAmount(sorToken)
 
@@ -76,6 +75,7 @@ export default function Stablecoin() {
     SOR_MASTER_ADDRESS[chainId]
   )
 
+// TODO: RE-INCORPORATE
   const stakeError = !parsedStakeValue
     ? 'Enter Amount'
     : daiBalance?.lessThan(parsedStakeValue)
@@ -83,6 +83,7 @@ export default function Stablecoin() {
     : maxStakeAmount?.lessThan(parsedStakeValue)
     ? 'Exceeds Maximum'
     : undefined
+  
   const isStakeValid = !stakeError
 
   const redeemError = !parsedRedeemValue
@@ -93,24 +94,25 @@ export default function Stablecoin() {
     ? 'Exceeds Maximum'
     : undefined
   const isRedeemValid = !redeemError
+    
+    // const stakeError = false
+    // const isStakeValid = !stakeError
+    // const redeemError = false
+    // const isRedeemValid = !redeemError
 
   return (
-    chainId &&
-    chainId !== ChainId.ETHEREUM && ( // DELETE
       <Container id="stablecoin-page" className="py-4 md:py-8 lg:py-12">
         <Head>
           <title>Stablecoin | Soul</title>
           <meta key="description" name="description" />
         </Head>
-
-        {/*
       <Alert
         message={
           <div className="flex flex-col space-y-3">
             <div className="flex flex-col">
               <div className="text-sm font-normal leading-5 leading-5">
                 <p>
-                  <strong className="text-accent bold">Mint (2 Steps):&nbsp;</strong>
+                  <strong className="text-accent bold">How to Mint:&nbsp;</strong>
                 </p>
                 <p>1. Enter in the amount of DAI you would like to deposit and press MINT.</p>
                 <p>2. Claim your SOR tokens.</p>
@@ -119,7 +121,7 @@ export default function Stablecoin() {
             <div className="flex flex-col">
               <div className="text-sm font-normal leading-5 leading-5">
                 <p>
-                  <strong className="text-accent bold">Redeem (2 Steps):&nbsp;</strong>
+                  <strong className="text-accent bold">How to Redeem:&nbsp;</strong>
                 </p>
                 <p>1. Enter in the amount of SOR you would like to redeem and press Redeem.</p>
                 <p>2. Claim your DAI tokens.</p>
@@ -128,14 +130,14 @@ export default function Stablecoin() {
             <div className="flex flex-col">
               <div className="text-sm font-normal leading-5">
                 <strong className="text-accent bold">Note:&nbsp;</strong>
-                The &ldquo;Approve&ldquo; is only needed when minting for the first time.
+                Approval is only needed when minting for the first time.
               </div>
             </div>
           </div>
         }
         type="information"
       />
-      */}
+     
         <DoubleGlowShadow>
           <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">
             <Tab.Group>
@@ -168,7 +170,7 @@ export default function Stablecoin() {
                       <div className="flex flex-col space-y-2">
                         <div className="flex flex-col">
                           <p>
-                            <strong className="text-accent bold">Mint (2 Steps):&nbsp;</strong>
+                            <strong className="text-accent bold">Mint:&nbsp;</strong>
                           </p>
                           <p>
                             <strong className="text-accent bold">1.</strong> Enter in the amount of DAI you would
@@ -181,7 +183,7 @@ export default function Stablecoin() {
                         <div className="flex flex-col">
                           <div className="text-sm font-normal leading-5">
                             <strong className="text-accent bold">Note:&nbsp;</strong>
-                            The &ldquo;Approve&ldquo; is only needed when minting for the first time.
+                            Approval is only needed when minting for the first time.
                           </div>
                         </div>
                       </div>
@@ -230,7 +232,7 @@ export default function Stablecoin() {
                 <CurrencyInputPanel
                   label={i18n._(t`Output`)}
                   value={stakeValue}
-                  showMaxButton={false}
+                  showMaxButton={true}
                   currency={sorToken}
                   disableCurrencySelect={true}
                   locked={true}
@@ -298,7 +300,7 @@ export default function Stablecoin() {
                     </Button>
                   ) : Number(stakeClaimAmount.toExact()) === 0 ? (
                     <ButtonError
-                      // type={"filled"}
+                      type={"filled"}
                       onClick={async () => {
                         try {
                           const tx = await stake(BigNumber.from(parsedStakeValue.quotient.toString()))
@@ -327,7 +329,7 @@ export default function Stablecoin() {
                     </Button>
                   )}
                   <Button
-                  // color="purple"
+                    variant="filled" color="purple"
                     onClick={async () => {
                       try {
                         const tx = await claimSor()
@@ -375,7 +377,7 @@ export default function Stablecoin() {
                       <div className="flex flex-col space-y-2">
                         <div className="flex flex-col">
                           <p>
-                            <strong className="text-accent bold">Redeem (2 Steps):&nbsp;</strong>
+                            <strong className="text-accent bold">Redeem:&nbsp;</strong>
                           </p>
                           <p>
                             <strong className="text-accent bold">1.</strong> Enter in the amount of SOR you would
@@ -388,7 +390,7 @@ export default function Stablecoin() {
                         <div className="flex flex-col">
                           <div className="text-sm font-normal leading-5">
                             <strong className="text-accent bold">Note:&nbsp;</strong>
-                            The &ldquo;Approve&ldquo; is only needed when redeeming for the first time.
+                            Approval is only needed when redeeming for the first time.
                           </div>
                         </div>
                       </div>
@@ -397,7 +399,7 @@ export default function Stablecoin() {
                 </Button>
 
                 <CurrencyInputPanel
-                  label={i18n._(t`Input`)}
+                  // label={i18n._(t`Input`)}
                   value={redeemValue}
                   showMaxButton={true}
                   onUserInput={(value) => setRedeemValue(value)}
@@ -440,7 +442,7 @@ export default function Stablecoin() {
                   </div>
                 </AutoColumn>
                 <CurrencyInputPanel
-                  // label={i18n._(t`Output`)}
+                  label={i18n._(t`Output`)}
                   value={redeemValue !== '' ? (Number(redeemValue) * data?.pegPrice).toString() : ''}
                   showMaxButton={false}
                   currency={daiToken}
@@ -506,6 +508,8 @@ export default function Stablecoin() {
                   (redeemApprovalState === ApprovalState.NOT_APPROVED ||
                     redeemApprovalState === ApprovalState.PENDING) ? (
                     <Button
+                    variant="filled"
+                    color="purple"
                       onClick={redeemApprove}
                       disabled={redeemApprovalState !== ApprovalState.NOT_APPROVED}
                       style={{ width: '50%' }}
@@ -520,7 +524,7 @@ export default function Stablecoin() {
                     <ButtonError
                       onClick={async () => {
                         try {
-                          const tx = await redeem(BigNumber.from(parsedRedeemValue.quotient.toString()))
+                          const tx = await redeem(BigNumber.from(parsedRedeemValue?.quotient.toString()))
                           addTransaction(tx, {
                             summary: `Redeem SOR`,
                           })
@@ -535,7 +539,7 @@ export default function Stablecoin() {
                       {redeemError || i18n._(t`Redeem`)}
                     </ButtonError>
                   ) : (
-                    <Button variant="link" color="purple" className="flex-1 flex items-center gap-1 justify-center">
+                    <Button variant="filled" color="purple" className="flex-1 flex items-center gap-1 justify-center">
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                           d="M8.99991 16.17L5.53492 12.705C5.14515 12.3152 4.51356 12.3141 4.12242 12.7025C3.72932 13.0928 3.7282 13.7283 4.11992 14.12L8.99991 19L20.2947 7.70513C20.6842 7.31568 20.6842 6.68425 20.2947 6.2948C19.9054 5.90548 19.2743 5.90533 18.8847 6.29447L8.99991 16.17Z"
@@ -546,6 +550,8 @@ export default function Stablecoin() {
                     </Button>
                   )}
                   <Button
+                  variant="filled"
+                  color="purple"
                     onClick={async () => {
                       try {
                         const tx = await claimDai()
@@ -569,7 +575,7 @@ export default function Stablecoin() {
                       : ''}
                   </Button>
 
-                  {/* <Button variant="link" color="green" className="flex-1 flex items-center gap-1 justify-center">
+                  {/* <Button variant="filled" color="purple" className="flex-1 flex items-center gap-1 justify-center">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                     d="M8.99991 16.17L5.53492 12.705C5.14515 12.3152 4.51356 12.3141 4.12242 12.7025C3.72932 13.0928 3.7282 13.7283 4.11992 14.12L8.99991 19L20.2947 7.70513C20.6842 7.31568 20.6842 6.68425 20.2947 6.2948C19.9054 5.90548 19.2743 5.90533 18.8847 6.29447L8.99991 16.17Z"
@@ -578,7 +584,7 @@ export default function Stablecoin() {
                     </svg>
                     {i18n._(t`Redeemed`)}
                     </Button>
-                    <Button variant="filled" color="default" disabled={true} className="flex-1">
+                    <Button variant="filled" color="purple" disabled={true} className="flex-1">
                     {i18n._(t`Claim 100 DAI`)}
                     </Button> */}
                 </div>
@@ -588,5 +594,4 @@ export default function Stablecoin() {
         </DoubleGlowShadow>
       </Container>
     )
-  )
 }
