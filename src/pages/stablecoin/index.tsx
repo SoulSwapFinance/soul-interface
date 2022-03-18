@@ -23,8 +23,7 @@ import {
   JSBI,
 } from 'sdk'
 import { SOR_ADDRESS,
-    LUX_SOR_ADDRESS } from 'constants/addresses'
-import useStableStablecoin from 'hooks/useStablecoin'
+    SOR_MASTER_ADDRESS } from 'constants/addresses'
 import { tryParseAmount, formatCurrencyAmount, formatNumberScale, formatPercent, formatNumber } from '../../functions'
 import { useCurrencyBalance } from '../../state/wallet/hooks'
 import { useTransactionAdder } from '../../state/transactions/hooks'
@@ -70,11 +69,11 @@ export default function Stablecoin() {
 
   const [stakeApprovalState, stakeApprove] = useApproveCallback(
     parsedStakeValue,
-    LUX_SOR_ADDRESS[chainId]
+    SOR_MASTER_ADDRESS[chainId]
   )
   const [redeemApprovalState, redeemApprove] = useApproveCallback(
     parsedRedeemValue,
-    LUX_SOR_ADDRESS[chainId]
+    SOR_MASTER_ADDRESS[chainId]
   )
 
   const stakeError = !parsedStakeValue
@@ -137,16 +136,15 @@ export default function Stablecoin() {
         type="information"
       />
       */}
-
         <DoubleGlowShadow>
-          <div className="p-6 space-y-6 rounded z-1 relative">
+          <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">
             <Tab.Group>
-              <Tab.List className="flex items-center mb-3 space-x-2 p-3px text-black-70">
+              <Tab.List className="flex items-center mb-3 space-x-2 p-3px text-white">
                 <Tab
                   className={({ selected }) =>
                     `${
-                      selected ? 'border-b-2 border-accent text-black dark:text-white-10' : ''
-                    } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border-transparent border-1 hover:text-black dark:hover:text-white-10`
+                      selected ? 'border-b-2 border-accent text-purple' : 'text-white'
+                    } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border-transparent border-1 hover:text-purple`
                   }
                 >
                   {i18n._(t`Mint`)}
@@ -154,15 +152,15 @@ export default function Stablecoin() {
                 <Tab
                   className={({ selected }) =>
                     `${
-                      selected ? 'border-b-2 border-accent text-black dark:text-white-10' : ''
-                    } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border-transparent border-1 hover:text-black dark:hover:text-white-10`
+                      selected ? 'border-b-2 border-accent text-purple' : 'text-white'
+                    } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border-transparent border-1 hover:text-purple`
                   }
                 >
                   {i18n._(t`Redeem`)}
                 </Tab>
               </Tab.List>
               <Tab.Panel className={'outline-none'}>
-                <Button variant={'link'} color={'gray'} className="absolute top-6 right-4 flex">
+                <Button variant={'link'} color={'purple'} className="absolute top-6 right-4 flex">
                   <QuestionHelper
                     // title={i18n._(t`How it works`)}
                     // width={'small'}
@@ -192,7 +190,6 @@ export default function Stablecoin() {
                 </Button>
 
                 <CurrencyInputPanel
-                  label={i18n._(t`Input`)}
                   value={stakeValue}
                   showMaxButton={true}
                   onUserInput={(value) => setStakeValue(value)}
@@ -210,9 +207,9 @@ export default function Stablecoin() {
                 />
                 <AutoColumn justify="space-between" className="py-0 -my-2 sm:py-4">
                   <div className={'flex-start px-4 flex-wrap w-full flex'}>
-                    <button className="rounded-full border-2 border-transparent swap-button-shadow dark:shadow-none">
-                      <div className="rounded-full p-3px leading-0">
-                        <div className="p-4">
+                    <Button className="rounded-full border-2 border-purple bg-dark-1000">
+                      <div className="rounded-full p-0px leading-0">
+                        <div className="p-0">
                           <svg
                             width="20"
                             height="20"
@@ -222,12 +219,12 @@ export default function Stablecoin() {
                           >
                             <path
                               d="M16.6255 11.0884C16.9501 10.7638 16.9501 10.2375 16.6255 9.91289C16.301 9.58848 15.7752 9.58824 15.4505 9.91236L11.3799 13.9756V4.66732C11.3799 4.20708 11.0068 3.83398 10.5465 3.83398C10.0863 3.83398 9.71322 4.20708 9.71322 4.66732V13.9756L5.65462 9.90978C5.32808 9.58266 4.79811 9.58242 4.47128 9.90925C4.14466 10.2359 4.14466 10.7654 4.47128 11.0921L9.94049 16.5613C10.2752 16.896 10.8179 16.896 11.1526 16.5613L16.6255 11.0884Z"
-                              fill="#24FFCA"
+                              fill="#EE82EE"
                             />
                           </svg>
                         </div>
                       </div>
-                    </button>
+                    </Button>
                   </div>
                 </AutoColumn>
                 <CurrencyInputPanel
@@ -239,46 +236,46 @@ export default function Stablecoin() {
                   locked={true}
                   id="stablecoin-currency-output"
                 />
-                <div className="h-px my-6 bg-black-80 dark:bg-black-30"></div>
-                <div className="flex flex-col w-full space-y-1">
+                <div className="h-px my-6 bg-dark-900"></div>
+                <div className="flex flex-col bg-dark-900 w-full space-y-1">
                   <div className="flex justify-between">
-                    <Typography className="text-black-60 dark:text-black-70" fontFamily={'medium'}>
-                      {i18n._(t`Max mint per tx`)}
+                    <Typography className="text-white" fontFamily={'medium'}>
+                      {i18n._(t`Max Mint`)}
                     </Typography>
-                    <Typography className="text-black-30 dark:text-white-30" weight={600} fontFamily={'semi-bold'}>
+                    <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                       {formatCurrencyAmount(maxStakeAmount, 4)} USDC
                     </Typography>
                   </div>
                   <div className="flex justify-between">
-                    <Typography className="text-black-60 dark:text-black-70" fontFamily={'medium'}>
+                    <Typography className="text-white" fontFamily={'medium'}>
                       {i18n._(t`Rate`)}
                     </Typography>
-                    <Typography className="text-black-30 dark:text-white-30" weight={600} fontFamily={'semi-bold'}>
+                    <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                       1 USDC = 1 SOR
                     </Typography>
                   </div>
                   <div className="flex justify-between">
-                    <Typography className="text-black-60 dark:text-black-70" fontFamily={'medium'}>
-                      {i18n._(t`Minting fee`)} ({data?.mintPermille / 10}%)
+                    <Typography className="text-white" fontFamily={'medium'}>
+                      {i18n._(t`Mint Fee`)} ({data?.mintPermille / 10}%)
                     </Typography>
-                    <Typography className="text-black-30 dark:text-white-30" weight={600} fontFamily={'semi-bold'}>
+                    <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                       {formatNumber((Number(stakeValue) * data?.mintPermille) / 1000, false)} USDC
                     </Typography>
                   </div>
                   <div className="flex justify-between">
                     {/* <Typography className="text-black-60 dark:text-black-70" fontFamily={'medium'}> */}
-                      {i18n._(t`You will receive`)}
+                      {i18n._(t`You Receive`)}
                     {/* </Typography> */}
-                    <Typography className="text-black-30 dark:text-white-30" weight={600} fontFamily={'semi-bold'}>
+                    <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                       {formatNumber(Number(stakeValue) - (Number(stakeValue) * data?.mintPermille) / 1000, false)}{' '}
                       SOR
                     </Typography>
                   </div>
                   <div className="flex justify-between">
                     <Typography className="text-black-60 dark:text-black-70" fontFamily={'medium'}>
-                      {i18n._(t`Claimable amount`)}
+                      {i18n._(t`Claimable Amount`)}
                     </Typography>
-                    <Typography className="text-black-30 dark:text-white-30" weight={600} fontFamily={'semi-bold'}>
+                    <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                       {formatCurrencyAmount(stakeClaimAmount, 4)} SOR
                     </Typography>
                   </div>
@@ -288,6 +285,7 @@ export default function Stablecoin() {
                   (stakeApprovalState === ApprovalState.NOT_APPROVED ||
                     stakeApprovalState === ApprovalState.PENDING) ? (
                     <Button
+                      color="purple"
                       onClick={stakeApprove}
                       disabled={stakeApprovalState !== ApprovalState.NOT_APPROVED}
                       style={{ width: '50%' }}
@@ -300,6 +298,7 @@ export default function Stablecoin() {
                     </Button>
                   ) : Number(stakeClaimAmount.toExact()) === 0 ? (
                     <ButtonError
+                      // type={"filled"}
                       onClick={async () => {
                         try {
                           const tx = await stake(BigNumber.from(parsedStakeValue.quotient.toString()))
@@ -317,7 +316,7 @@ export default function Stablecoin() {
                       {stakeError || i18n._(t`Mint`)}
                     </ButtonError>
                   ) : (
-                    <Button variant="link" color="green" className="flex-1 flex items-center gap-1 justify-center">
+                    <Button variant="link" color="purple" className="flex-1 flex items-center gap-1 justify-center">
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                           d="M8.99991 16.17L5.53492 12.705C5.14515 12.3152 4.51356 12.3141 4.12242 12.7025C3.72932 13.0928 3.7282 13.7283 4.11992 14.12L8.99991 19L20.2947 7.70513C20.6842 7.31568 20.6842 6.68425 20.2947 6.2948C19.9054 5.90548 19.2743 5.90533 18.8847 6.29447L8.99991 16.17Z"
@@ -328,6 +327,7 @@ export default function Stablecoin() {
                     </Button>
                   )}
                   <Button
+                  // color="purple"
                     onClick={async () => {
                       try {
                         const tx = await claimSor()
@@ -363,11 +363,11 @@ export default function Stablecoin() {
                     </Button>
                     <Button variant="filled" color="default" className="flex-1">
                     {i18n._(t`Claim 1200 SOR`)}
-                    </Button> */}
+                  </Button> */}
                 </div>
               </Tab.Panel>
               <Tab.Panel className={'outline-none'}>
-                <Button variant={'link'} color={'gray'} className="absolute top-6 right-4 flex">
+                <Button variant={'link'} color={'purple'} className="absolute top-6 right-4 flex">
                   <QuestionHelper
                     // title={i18n._(t`How it works`)}
                     // width={'small'}
@@ -416,12 +416,12 @@ export default function Stablecoin() {
 
                 <AutoColumn justify="space-between" className="py-0 -my-2 sm:py-4">
                   <div className={'flex-start px-4 flex-wrap w-full flex'}>
-                    <button
-                      className="rounded-full border-2 border-transparent swap-button-shadow dark:shadow-none"
+                    <Button
+                      className="rounded-full border-2 border-purple bg-dark-1000"
                       onClick={() => {}}
                     >
                       <div className="rounded-full p-3px leading-0">
-                        <div className="p-4">
+                        <div className="p-0">
                           <svg
                             width="20"
                             height="20"
@@ -431,12 +431,12 @@ export default function Stablecoin() {
                           >
                             <path
                               d="M16.6255 11.0884C16.9501 10.7638 16.9501 10.2375 16.6255 9.91289C16.301 9.58848 15.7752 9.58824 15.4505 9.91236L11.3799 13.9756V4.66732C11.3799 4.20708 11.0068 3.83398 10.5465 3.83398C10.0863 3.83398 9.71322 4.20708 9.71322 4.66732V13.9756L5.65462 9.90978C5.32808 9.58266 4.79811 9.58242 4.47128 9.90925C4.14466 10.2359 4.14466 10.7654 4.47128 11.0921L9.94049 16.5613C10.2752 16.896 10.8179 16.896 11.1526 16.5613L16.6255 11.0884Z"
-                              fill="#24FFCA"
+                              fill="#EE82EE"
                             />
                           </svg>
                         </div>
                       </div>
-                    </button>
+                    </Button>
                   </div>
                 </AutoColumn>
                 <CurrencyInputPanel
@@ -454,7 +454,7 @@ export default function Stablecoin() {
                     <Typography className="text-black-60 dark:text-black-70" fontFamily={'medium'}>
                       {i18n._(t`Max redeem per tx`)}
                     </Typography>
-                    <Typography className="text-black-30 dark:text-white-30" weight={600} fontFamily={'semi-bold'}>
+                    <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                       {formatCurrencyAmount(maxRedeemAmount, 4)} SOR
                     </Typography>
                   </div>
@@ -462,7 +462,7 @@ export default function Stablecoin() {
                     <Typography className="text-black-60 dark:text-black-70" fontFamily={'medium'}>
                       {i18n._(t`Rate`)}
                     </Typography>
-                    <Typography className="text-black-30 dark:text-white-30" weight={600} fontFamily={'semi-bold'}>
+                    <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                       1 SOR = {formatNumber(data?.pegPrice)} USDC
                     </Typography>
                   </div>
@@ -470,7 +470,7 @@ export default function Stablecoin() {
                     <Typography className="text-black-60 dark:text-black-70" fontFamily={'medium'}>
                       {i18n._(t`Redemption fee`)} ({data?.redeemPermille / 10}%)
                     </Typography>
-                    <Typography className="text-black-30 dark:text-white-30" weight={600} fontFamily={'semi-bold'}>
+                    <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                       {formatNumber((Number(redeemValue) * data?.redeemPermille) / 1000, false)} USDC
                     </Typography>
                   </div>
@@ -478,7 +478,7 @@ export default function Stablecoin() {
                     <Typography className="text-black-60 dark:text-black-70" fontFamily={'medium'}>
                       {i18n._(t`You will receive`)}
                     </Typography>
-                    <Typography className="text-black-30 dark:text-white-30" weight={600} fontFamily={'semi-bold'}>
+                    <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                       {formatNumber(
                         Number(redeemValue) * data?.pegPrice - (Number(redeemValue) * data?.redeemPermille) / 1000,
                         false
@@ -488,9 +488,9 @@ export default function Stablecoin() {
                   </div>
                   <div className="flex justify-between">
                     <Typography className="text-black-60 dark:text-black-70" fontFamily={'medium'}>
-                      {i18n._(t`Claimable amount`)}
+                      {i18n._(t`Claimable Amount`)}
                     </Typography>
-                    <Typography className="text-black-30 dark:text-white-30" weight={600} fontFamily={'semi-bold'}>
+                    <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                       {Number(redeemClaimAmount.toExact()) !== 0
                         ? formatNumber(
                             Number(redeemClaimAmount.toExact()) * data?.pegPrice -
@@ -535,7 +535,7 @@ export default function Stablecoin() {
                       {redeemError || i18n._(t`Redeem`)}
                     </ButtonError>
                   ) : (
-                    <Button variant="link" color="green" className="flex-1 flex items-center gap-1 justify-center">
+                    <Button variant="link" color="purple" className="flex-1 flex items-center gap-1 justify-center">
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                           d="M8.99991 16.17L5.53492 12.705C5.14515 12.3152 4.51356 12.3141 4.12242 12.7025C3.72932 13.0928 3.7282 13.7283 4.11992 14.12L8.99991 19L20.2947 7.70513C20.6842 7.31568 20.6842 6.68425 20.2947 6.2948C19.9054 5.90548 19.2743 5.90533 18.8847 6.29447L8.99991 16.17Z"

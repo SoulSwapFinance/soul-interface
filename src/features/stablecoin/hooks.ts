@@ -1,4 +1,4 @@
-import { useLuxorSorContract } from '../../hooks/useContract'
+import { useSorMasterContract } from '../../hooks/useContract'
 import { useMemo, useCallback } from 'react'
 import { useSingleCallResult } from '../../state/multicall/hooks'
 import { CurrencyAmount, JSBI } from 'sdk'
@@ -8,7 +8,7 @@ import { useActiveWeb3React } from 'services/web3/hooks'
 export function useStakeClaimAmount(token) {
   const { account } = useActiveWeb3React()
 
-  const contract = useLuxorSorContract()
+  const contract = useSorMasterContract()
 
   const args = useMemo(() => {
     if (!account) {
@@ -26,7 +26,7 @@ export function useStakeClaimAmount(token) {
 export function useRedeemClaimAmount(token) {
   const { account } = useActiveWeb3React()
 
-  const contract = useLuxorSorContract()
+  const contract = useSorMasterContract()
 
   const args = useMemo(() => {
     if (!account) {
@@ -44,7 +44,7 @@ export function useRedeemClaimAmount(token) {
 export function useSorContract() {
   const { account } = useActiveWeb3React()
 
-  const contract = useLuxorSorContract()
+  const contract = useSorMasterContract()
 
   const stake = useCallback(
     async (amount: BigNumber) => {

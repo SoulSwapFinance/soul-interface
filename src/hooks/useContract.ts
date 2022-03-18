@@ -15,8 +15,10 @@ import {
   SOUL_USDC_PAIR,
   LUX_ADDRESS,
   WLUM_ADDRESS,
-  LUX_SOR_ADDRESS,
+  SOR_MASTER_ADDRESS,
+  SOR_MINTER_ADDRESS,
   STOP_LIMIT_ORDER_ADDRESS,
+  LOTTERY_ADDRESS,
 } from '../constants/addresses'
 import {
   ARGENT_WALLET_DETECTOR_ABI,
@@ -78,6 +80,7 @@ import SOUL_SCARAB_ABI from '../constants/abis/soulswap/scarab.json'
 import SOUL_SAFE_ABI from '../constants/abis/soulswap/safe.json'
 import SOUL_GUIDE_ABI from '../constants/abis/soul-guide.json' // TODO: update abi
 import SOUL_SUMMONER_ABI from '../constants/abis/soulswap/soulsummoner.json' // 28 JUL
+import LOTTERY_ABI from '../constants/abis/soulswap/lottery.json' // 28 JUL
 import SOULVAULT_ABI from '../constants/abis/soulswap/soulvault.json' // 31 JUL
 import LUXOR_ABI from '../constants/abis/soulswap/luxor.json'
 import WLUM_ABI from '../constants/abis/soulswap/wlumens.json'
@@ -93,7 +96,8 @@ import BORING_HELPER_ABI from '../constants/abis/soulswap/boring-helper.json'
 import HARVEST_HELPER_ABI from '../constants/abis/soulswap/harvest-helper.json'
 import COFFIN_BOX_ABI from '../constants/abis/soulswap/coffinbox.json'
 import LUXOR_BOND_CONTRACT_ABI from '../constants/abis/soulswap/bond.json'
-import LUX_SOR_ABI from '../constants/abis/soulswap/bond.json'
+import SOR_MASTER_ABI from '../constants/abis/soulswap/sor-master.json'
+import SOR_MINTER_ABI from '../constants/abis/soulswap/sor-minter.json'
 
 // bridge
 import anyswapEthOperaBridge_ABI from '../constants/abis/soulswap/bridge/anyswapEthOperaBridge.json'
@@ -355,15 +359,24 @@ export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contrac
   return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible)
 }
 
+export function useLotteryContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && LOTTERY_ADDRESS[chainId], LOTTERY_ABI, withSignerIfPossible)
+}
+
 export function useSummonerContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible)
 }
 
-// TODO: FIX ADDRESS
-export function useLuxorSorContract(withSignerIfPossible?: boolean): Contract | null {
+export function useSorMasterContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && LUX_SOR_ADDRESS[chainId], LUX_SOR_ABI, withSignerIfPossible)
+  return useContract(chainId && SOR_MASTER_ADDRESS[chainId], SOR_MASTER_ABI, withSignerIfPossible)
+}
+
+export function useSorMinterContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOR_MINTER_ADDRESS[chainId], SOR_MINTER_ABI, withSignerIfPossible)
 }
 
 export function useFactoryContract(): Contract | null {

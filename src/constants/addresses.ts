@@ -23,12 +23,24 @@ export const ARCHER_ROUTER_ADDRESS: AddressMap = {
   4002: undefined
 }
 
-export const SOR_ADDRESS = {
-  [ChainId.FANTOM]: "0xB16785cD12188Fbb19342Ead72fDd3d12538F2A1" 
+export const LOTTERY_ADDRESS = {
+  [ChainId.FANTOM]: "0x13A3Ff943CcA097C5eD90E1a15AF744ED89C77FE" 
 }
 
-export const LUX_SOR_ADDRESS = {
-  [ChainId.FANTOM]: "" 
+export const SOR_ADDRESS = {
+  [ChainId.FANTOM]: "0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A" 
+}
+
+export const SOR_MASTER_ADDRESS = {
+  [ChainId.FANTOM]: "0x2a8852A62a5Df3BcDc82D9592f6A326360C4cfD6" 
+}
+
+export const SOR_MINTER_ADDRESS = {
+  [ChainId.FANTOM]: "0x046050f879E2fa5f60dd472da61d542B443B0603" 
+}
+
+export const LUX_MINTER_ADDRESS = {
+  [ChainId.FANTOM]: "0xCc801658bD51Fe42Ac07078572112630a868c1eb" 
 }
 
 export const SOULSWAPEX_ADDRESSES = {
