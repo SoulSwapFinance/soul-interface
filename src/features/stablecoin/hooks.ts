@@ -52,7 +52,7 @@ export function useSorContract() {
         let tx
 
         tx = await contract?.stake(amount, BigNumber.from(0), BigNumber.from(0), {
-          /*gasLimit: 500000*/
+          /* gasLimit: 500000 */
         })
 
         return tx
@@ -70,7 +70,7 @@ export function useSorContract() {
         let tx
 
         tx = await contract?.redeem(amount, {
-          /*gasLimit: 500000*/
+          /* gasLimit: 500000 */
         })
 
         return tx
@@ -87,7 +87,7 @@ export function useSorContract() {
       let tx
 
       tx = await contract?.claimSor({
-        /*gasLimit: 500000*/
+        /* gasLimit: 500000 */
       })
 
       return tx
@@ -97,12 +97,12 @@ export function useSorContract() {
     }
   }, [account, contract])
 
-  const claimUsdc = useCallback(async () => {
+  const claimDai = useCallback(async () => {
     try {
       let tx
 
-      tx = await contract?.claimUsdc(BigNumber.from(0), BigNumber.from(0), {
-        /*gasLimit: 500000*/
+      tx = await contract?.claimDai(BigNumber.from(0), BigNumber.from(0), {
+        /* gasLimit: 500000 */
       })
 
       return tx
@@ -112,5 +112,5 @@ export function useSorContract() {
     }
   }, [account, contract])
 
-  return { stake, redeem, claimSor, claimUsdc }
+  return { stake, redeem, claimSor, claimDai }
 }

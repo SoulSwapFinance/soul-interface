@@ -41,30 +41,30 @@ export default function Stablecoin() {
   const [redeemValue, setRedeemValue] = useState('')
 
   const { account, chainId } = useActiveWeb3React()
-  const { stake, redeem, claimSor, claimUsdc } = useSorContract()
+  const { stake, redeem, claimSor, claimDai } = useSorContract()
   const { data } = useStablecoin()
 
   if (chainId && chainId === ChainId.ETHEREUM)
     //DELETE
     window.location.href = '/swap'
 
-  const usdcToken = new Token(chainId, getAddress(DAI_ADDRESS[chainId]), 6, 'DAI')
+  const daiToken = new Token(chainId, getAddress(DAI_ADDRESS[chainId]), 18, 'DAI')
   const sorToken = new Token(chainId, getAddress(SOR_ADDRESS[chainId]), 18, 'SOR')
 
   const stakeClaimAmount = useStakeClaimAmount(sorToken)
   const redeemClaimAmount = useRedeemClaimAmount(sorToken)
 
   const maxStakeAmount = data
-    ? CurrencyAmount.fromRawAmount(usdcToken, data?.maxStakeAmount)
-    : CurrencyAmount.fromRawAmount(usdcToken, JSBI.BigInt('0'))
+    ? CurrencyAmount.fromRawAmount(daiToken, data?.maxStakeAmount)
+    : CurrencyAmount.fromRawAmount(daiToken, JSBI.BigInt('0'))
   const maxRedeemAmount = data
     ? CurrencyAmount.fromRawAmount(sorToken, data?.maxRedeemAmount)
     : CurrencyAmount.fromRawAmount(sorToken, JSBI.BigInt('0'))
 
-  const usdcBalance = useCurrencyBalance(account, usdcToken)
+  const daiBalance = useCurrencyBalance(account, daiToken)
   const sorBalance = useCurrencyBalance(account, sorToken)
 
-  const parsedStakeValue = tryParseAmount(stakeValue, usdcToken)
+  const parsedStakeValue = tryParseAmount(stakeValue, daiToken)
   const parsedRedeemValue = tryParseAmount(redeemValue, sorToken)
 
   const [stakeApprovalState, stakeApprove] = useApproveCallback(
@@ -77,26 +77,26 @@ export default function Stablecoin() {
   )
 
   const stakeError = !parsedStakeValue
-    ? 'Enter an amount'
-    : usdcBalance?.lessThan(parsedStakeValue)
-    ? 'Insufficient balance'
+    ? 'Enter Amount'
+    : daiBalance?.lessThan(parsedStakeValue)
+    ? 'Insufficient Balance'
     : maxStakeAmount?.lessThan(parsedStakeValue)
-    ? 'Amount exceeds maximum'
+    ? 'Exceeds Maximum'
     : undefined
   const isStakeValid = !stakeError
 
   const redeemError = !parsedRedeemValue
-    ? 'Enter an amount'
+    ? 'Enter Amount'
     : sorBalance?.lessThan(parsedRedeemValue)
-    ? 'Insufficient balance'
+    ? 'Insufficient Balance'
     : maxRedeemAmount?.lessThan(parsedRedeemValue)
-    ? 'Amount exceeding maximum'
+    ? 'Exceeds Maximum'
     : undefined
   const isRedeemValid = !redeemError
 
   return (
     chainId &&
-    chainId !== ChainId.ETHEREUM && ( //DELETE
+    chainId !== ChainId.ETHEREUM && ( // DELETE
       <Container id="stablecoin-page" className="py-4 md:py-8 lg:py-12">
         <Head>
           <title>Stablecoin | Soul</title>
@@ -195,12 +195,12 @@ export default function Stablecoin() {
                   onUserInput={(value) => setStakeValue(value)}
                   onMax={() =>
                     setStakeValue(
-                      Number(usdcBalance.toExact()) > Number(maxStakeAmount.toExact())
+                      Number(daiBalance.toExact()) > Number(maxStakeAmount.toExact())
                         ? maxStakeAmount.toExact()
-                        : usdcBalance.toExact()
+                        : daiBalance.toExact()
                     )
                   }
-                  currency={usdcToken}
+                  currency={daiToken}
                   disableCurrencySelect={true}
                   locked={!account}
                   id="stablecoin-currency-input"
@@ -443,7 +443,7 @@ export default function Stablecoin() {
                   // label={i18n._(t`Output`)}
                   value={redeemValue !== '' ? (Number(redeemValue) * data?.pegPrice).toString() : ''}
                   showMaxButton={false}
-                  currency={usdcToken}
+                  currency={daiToken}
                   disableCurrencySelect={true}
                   locked={true}
                   id="stablecoin-currency-output"
@@ -452,7 +452,7 @@ export default function Stablecoin() {
                 <div className="flex flex-col w-full space-y-1">
                   <div className="flex justify-between">
                     <Typography className="text-black-60 dark:text-black-70" fontFamily={'medium'}>
-                      {i18n._(t`Max redeem per tx`)}
+                      {i18n._(t`Max Redeem`)}
                     </Typography>
                     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                       {formatCurrencyAmount(maxRedeemAmount, 4)} SOR
@@ -468,7 +468,7 @@ export default function Stablecoin() {
                   </div>
                   <div className="flex justify-between">
                     <Typography className="text-black-60 dark:text-black-70" fontFamily={'medium'}>
-                      {i18n._(t`Redemption fee`)} ({data?.redeemPermille / 10}%)
+                      {i18n._(t`Redemption Fee`)} ({data?.redeemPermille / 10}%)
                     </Typography>
                     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                       {formatNumber((Number(redeemValue) * data?.redeemPermille) / 1000, false)} DAI
@@ -476,7 +476,7 @@ export default function Stablecoin() {
                   </div>
                   <div className="flex justify-between">
                     <Typography className="text-black-60 dark:text-black-70" fontFamily={'medium'}>
-                      {i18n._(t`You will receive`)}
+                      {i18n._(t`Receive`)}
                     </Typography>
                     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                       {formatNumber(
@@ -548,7 +548,7 @@ export default function Stablecoin() {
                   <Button
                     onClick={async () => {
                       try {
-                        const tx = await claimUsdc()
+                        const tx = await claimDai()
                         addTransaction(tx, {
                           summary: `Claim DAI`,
                         })
