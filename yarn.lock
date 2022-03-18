@@ -2708,7 +2708,7 @@
   resolved "https://registry.yarnpkg.com/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-12.1.0.tgz#d27e7e76c87a460a4da99c5bfdb1618dcd6cd064"
   integrity sha512-aBvcbMwuanDH4EMrL2TthNJy+4nP59Bimn8egqv6GHMVj0a44cU6Au4PjOhLNqEh9l+IpRGBqMTzec94UdC5xg==
 
-"@ngraveio/bc-ur@^1.0.0", "@ngraveio/bc-ur@^1.1.5":
+"@ngraveio/bc-ur@^1.0.0", "@ngraveio/bc-ur@^1.1.5", "@ngraveio/bc-ur@^1.1.6":
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/@ngraveio/bc-ur/-/bc-ur-1.1.6.tgz#8f8c75fff22f6a5e4dfbc5a6b540d7fe8f42cd39"
   integrity sha512-G+2XgjXde2IOcEQeCwR250aS43/Swi7gw0FuETgJy2c3HqF8f88SXDMsIGgJlZ8jXd0GeHR4aX0MfjXf523UZg==
@@ -6749,6 +6749,11 @@ assert-plus@1.0.0, assert-plus@^1.0.0:
   resolved "https://registry.yarnpkg.com/assert-plus/-/assert-plus-1.0.0.tgz#f12e0f3c5d77b0b1cdd9146942e4e96c1e4dd525"
   integrity sha1-8S4PPF13sLHN2RRpQuTpbB5N1SU=
 
+assert.js@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/assert.js/-/assert.js-0.5.0.tgz#e7f33fca3129609573ad5b05caf89f67852ace39"
+  integrity sha1-5/M/yjEpYJVzrVsFyvifZ4Uqzjk=
+
 assert@^1.1.1:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/assert/-/assert-1.5.0.tgz#55c109aaf6e0aefdb3dc4b71240c70bf574b18eb"
@@ -6940,6 +6945,13 @@ axios@^0.21.0, axios@^0.21.1:
   integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
   dependencies:
     follow-redirects "^1.14.0"
+
+axios@^0.22.0:
+  version "0.22.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.22.0.tgz#bf702c41fb50fbca4539589d839a077117b79b25"
+  integrity sha512-Z0U3uhqQeg1oNcihswf4ZD57O3NrR1+ZXhxaROaWpDmsDTx7T2HNBV2ulBtie2hwJptu8UvgnJoK+BIqdzh/1w==
+  dependencies:
+    follow-redirects "^1.14.4"
 
 axios@^0.24.0:
   version "0.24.0"
@@ -20676,6 +20688,16 @@ rtcpeerconnection-shim@^1.2.15:
   dependencies:
     sdp "^2.6.0"
 
+rubik-sdk@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/rubik-sdk/-/rubik-sdk-1.0.0.tgz#c2d738cf02d86ed8939f730e1991f2d98737d3ec"
+  integrity sha512-x3Ix06t2/xbxrY4ke0MThrVfx4ImCfLG74t4ekidmjidM0ddiach5BjYAuEj0o4KzDTZsTsb0RYQuvJD2lrZBQ==
+  dependencies:
+    assert "^2.0.0"
+    axios "^0.22.0"
+    bignumber.js "^9.0.1"
+    web3 "~1.5.3"
+
 run-async@^2.4.0:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/run-async/-/run-async-2.4.1.tgz#8440eccf99ea3e70bd409d49aab88e10c189a455"
@@ -24247,7 +24269,7 @@ web3@1.2.11:
     web3-shh "1.2.11"
     web3-utils "1.2.11"
 
-web3@1.5.3:
+web3@1.5.3, web3@~1.5.3:
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/web3/-/web3-1.5.3.tgz#11882679453c645bf33620fbc255a243343075aa"
   integrity sha512-eyBg/1K44flfv0hPjXfKvNwcUfIVDI4NX48qHQe6wd7C8nPSdbWqo9vLy6ksZIt9NLa90HjI8HsGYgnMSUxn6w==

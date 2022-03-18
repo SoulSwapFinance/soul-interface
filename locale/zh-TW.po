@@ -229,6 +229,9 @@ msgstr ""
 msgid "Balances"
 msgstr ""
 
+msgid "Bond"
+msgstr ""
+
 msgid "Bonds"
 msgstr ""
 
@@ -260,6 +263,9 @@ msgid "Burn Fee"
 msgstr ""
 
 msgid "Buy"
+msgstr ""
+
+msgid "Buy Tickets"
 msgstr ""
 
 msgid ""
@@ -295,10 +301,22 @@ msgstr ""
 msgid "Choose an Asset"
 msgstr ""
 
+msgid "Claim"
+msgstr ""
+
 msgid "Claim SOUL"
 msgstr ""
 
 msgid "Claim Scarabs"
+msgstr ""
+
+msgid "Claim and Autostake"
+msgstr ""
+
+msgid "Claimable Amount"
+msgstr ""
+
+msgid "Claimable amount"
 msgstr ""
 
 msgid "Claimable: Fetching Claimable Amount"
@@ -454,6 +472,9 @@ msgid "DATA"
 msgstr ""
 
 msgid "DEPOSIT"
+msgstr ""
+
+msgid "DEPOSIT LUX"
 msgstr ""
 
 msgid "Dashboard"
@@ -742,6 +763,9 @@ msgstr ""
 msgid "Including fees"
 msgstr ""
 
+msgid "Input"
+msgstr ""
+
 msgid "Input is estimated. You will sell at most"
 msgstr ""
 
@@ -801,6 +825,9 @@ msgid "LEND"
 msgstr ""
 
 msgid "LIQUIDITY"
+msgstr ""
+
+msgid "LUX Market Price"
 msgstr ""
 
 msgid "LUXOR"
@@ -914,6 +941,12 @@ msgstr ""
 msgid "Max"
 msgstr ""
 
+msgid "Max Mint"
+msgstr ""
+
+msgid "Max redeem per tx"
+msgstr ""
+
 msgid "Me"
 msgstr ""
 
@@ -932,7 +965,16 @@ msgstr ""
 msgid "Minimum received after slippage"
 msgstr ""
 
+msgid "Mint"
+msgstr ""
+
 msgid "Mint SOUL with Liquidity"
+msgstr ""
+
+msgid "Minted"
+msgstr ""
+
+msgid "Minting Fee"
 msgstr ""
 
 msgid "Net Worth"
@@ -1008,6 +1050,9 @@ msgid "Orders"
 msgstr ""
 
 msgid "Our Resources."
+msgstr ""
+
+msgid "Output"
 msgstr ""
 
 msgid "Output is estimated. If the price changes by more than 0.5% your transaction will revert."
@@ -1164,6 +1209,15 @@ msgstr ""
 msgid "Recipient"
 msgstr ""
 
+msgid "Redeem"
+msgstr ""
+
+msgid "Redeemed"
+msgstr ""
+
+msgid "Redemption fee"
+msgstr ""
+
 msgid "Remove"
 msgstr ""
 
@@ -1195,6 +1249,9 @@ msgid "Resources"
 msgstr ""
 
 msgid "Restricts swaps to direct pairs only."
+msgstr ""
+
+msgid "Results"
 msgstr ""
 
 msgid "Review Limit Order"
@@ -1449,6 +1506,9 @@ msgstr ""
 msgid "The participants receive various benefits such as higher rewards according to lock duration, higher allocations in Soul Launchpad and more."
 msgstr ""
 
+msgid "The time remaining until the LUX bond fully matures and 100% of the vested LUX is claimable.  Vesting is linear, with a portion of vested tokens released every second."
+msgstr ""
+
 msgid "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
 msgstr ""
 
@@ -1524,6 +1584,9 @@ msgid "Transaction deadline"
 msgstr ""
 
 msgid "Transactions"
+msgstr ""
+
+msgid "Treasury Balance"
 msgstr ""
 
 msgid "Tribute"
@@ -1715,6 +1778,9 @@ msgstr ""
 msgid "You receive"
 msgstr ""
 
+msgid "You will receive"
+msgstr ""
+
 msgid "You'll receive (at least):"
 msgstr ""
 
@@ -1743,6 +1809,9 @@ msgid "Your Staked"
 msgstr ""
 
 msgid "Your Wallet"
+msgstr ""
+
+msgid "Your net return over the total investment."
 msgstr ""
 
 msgid "Your transaction got rejected"

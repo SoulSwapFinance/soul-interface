@@ -229,6 +229,9 @@ msgstr "Balanced Mode is an optional UI setting to maintain the traditional styl
 msgid "Balances"
 msgstr "Balances"
 
+msgid "Bond"
+msgstr "Bond"
+
 msgid "Bonds"
 msgstr "Bonds"
 
@@ -261,6 +264,9 @@ msgstr "Burn Fee"
 
 msgid "Buy"
 msgstr "Buy"
+
+msgid "Buy Tickets"
+msgstr "Buy Tickets"
 
 msgid ""
 "By adding this list you are implicitly trusting that the data is correct. Anyone can create a list,\n"
@@ -298,11 +304,23 @@ msgstr "Chinese"
 msgid "Choose an Asset"
 msgstr "Choose an Asset"
 
+msgid "Claim"
+msgstr "Claim"
+
 msgid "Claim SOUL"
 msgstr "Claim SOUL"
 
 msgid "Claim Scarabs"
 msgstr "Claim Scarabs"
+
+msgid "Claim and Autostake"
+msgstr "Claim and Autostake"
+
+msgid "Claimable Amount"
+msgstr "Claimable Amount"
+
+msgid "Claimable amount"
+msgstr "Claimable amount"
 
 msgid "Claimable: Fetching Claimable Amount"
 msgstr "Claimable: Fetching Claimable Amount"
@@ -460,6 +478,9 @@ msgstr "DATA"
 
 msgid "DEPOSIT"
 msgstr "DEPOSIT"
+
+msgid "DEPOSIT LUX"
+msgstr "DEPOSIT LUX"
 
 msgid "Dashboard"
 msgstr "Dashboard"
@@ -751,6 +772,9 @@ msgstr "Inactive"
 msgid "Including fees"
 msgstr "Including fees"
 
+msgid "Input"
+msgstr "Input"
+
 msgid "Input is estimated. You will sell at most"
 msgstr "Input is estimated. You will sell at most"
 
@@ -815,6 +839,9 @@ msgstr "LEND"
 
 msgid "LIQUIDITY"
 msgstr "LIQUIDITY"
+
+msgid "LUX Market Price"
+msgstr "LUX Market Price"
 
 msgid "LUXOR"
 msgstr "LUXOR"
@@ -927,6 +954,12 @@ msgstr "Markets"
 msgid "Max"
 msgstr "Max"
 
+msgid "Max Mint"
+msgstr "Max Mint"
+
+msgid "Max redeem per tx"
+msgstr "Max redeem per tx"
+
 msgid "Me"
 msgstr "Me"
 
@@ -945,8 +978,17 @@ msgstr "Minimum Received"
 msgid "Minimum received after slippage"
 msgstr "Minimum received after slippage"
 
+msgid "Mint"
+msgstr "Mint"
+
 msgid "Mint SOUL with Liquidity"
 msgstr "Mint SOUL with Liquidity"
+
+msgid "Minted"
+msgstr "Minted"
+
+msgid "Minting Fee"
+msgstr "Minting Fee"
 
 msgid "Net Worth"
 msgstr "Net Worth"
@@ -1022,6 +1064,9 @@ msgstr "Orders"
 
 msgid "Our Resources."
 msgstr "Our Resources."
+
+msgid "Output"
+msgstr "Output"
 
 msgid "Output is estimated. If the price changes by more than 0.5% your transaction will revert."
 msgstr "Output is estimated. If the price changes by more than 0.5% your transaction will revert."
@@ -1181,6 +1226,15 @@ msgstr "Recent Transactions"
 msgid "Recipient"
 msgstr "Recipient"
 
+msgid "Redeem"
+msgstr "Redeem"
+
+msgid "Redeemed"
+msgstr "Redeemed"
+
+msgid "Redemption fee"
+msgstr "Redemption fee"
+
 msgid "Remove"
 msgstr "Remove"
 
@@ -1213,6 +1267,9 @@ msgstr "Resources"
 
 msgid "Restricts swaps to direct pairs only."
 msgstr "Restricts swaps to direct pairs only."
+
+msgid "Results"
+msgstr "Results"
 
 msgid "Review Limit Order"
 msgstr "Review Limit Order"
@@ -1472,6 +1529,9 @@ msgstr "The output token cannot be transferred. There may be an issue with the o
 msgid "The participants receive various benefits such as higher rewards according to lock duration, higher allocations in Soul Launchpad and more."
 msgstr "The participants receive various benefits such as higher rewards according to lock duration, higher allocations in Soul Launchpad and more."
 
+msgid "The time remaining until the LUX bond fully matures and 100% of the vested LUX is claimable.  Vesting is linear, with a portion of vested tokens released every second."
+msgstr "The time remaining until the LUX bond fully matures and 100% of the vested LUX is claimable.  Vesting is linear, with a portion of vested tokens released every second."
+
 msgid "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
 msgstr "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
 
@@ -1550,6 +1610,9 @@ msgstr "Transaction deadline"
 
 msgid "Transactions"
 msgstr "Transactions"
+
+msgid "Treasury Balance"
+msgstr "Treasury Balance"
 
 msgid "Tribute"
 msgstr "Tribute"
@@ -1740,6 +1803,9 @@ msgstr "You pay"
 msgid "You receive"
 msgstr "You receive"
 
+msgid "You will receive"
+msgstr "You will receive"
+
 msgid "You'll receive (at least):"
 msgstr "You'll receive (at least):"
 
@@ -1769,6 +1835,9 @@ msgstr "Your Staked"
 
 msgid "Your Wallet"
 msgstr "Your Wallet"
+
+msgid "Your net return over the total investment."
+msgstr "Your net return over the total investment."
 
 msgid "Your transaction got rejected"
 msgstr "Your transaction got rejected"
