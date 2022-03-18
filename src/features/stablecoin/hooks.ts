@@ -35,7 +35,7 @@ export function useRedeemClaimAmount(token) {
     return [String(account)]
   }, [account])
 
-  const info = useSingleCallResult(args ? contract : null, 'usdcClaimAmount', args)?.result
+  const info = useSingleCallResult(args ? contract : null, 'daiClaimAmount', args)?.result
   const amount = info?.[0]
 
   return amount ? CurrencyAmount.fromRawAmount(token, amount) : CurrencyAmount.fromRawAmount(token, JSBI.BigInt('0'))

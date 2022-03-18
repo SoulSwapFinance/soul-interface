@@ -32,7 +32,7 @@ export const SOR_ADDRESS = {
 }
 
 export const SOR_MASTER_ADDRESS = {
-  [ChainId.FANTOM]: "0x2a8852A62a5Df3BcDc82D9592f6A326360C4cfD6" 
+  [ChainId.FANTOM]: "0xfF1157CaCB174c012f68CDb0B7700597aae3D5A8" 
 }
 
 export const SOR_MINTER_ADDRESS = {

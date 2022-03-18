@@ -18,7 +18,7 @@ import { getAddress } from '@ethersproject/address'
 import {
   ChainId,
   Token,
-  USDC_ADDRESS,
+  DAI_ADDRESS,
   CurrencyAmount,
   JSBI,
 } from 'sdk'
@@ -48,7 +48,7 @@ export default function Stablecoin() {
     //DELETE
     window.location.href = '/swap'
 
-  const usdcToken = new Token(chainId, getAddress(USDC_ADDRESS[chainId]), 6, 'USDC')
+  const usdcToken = new Token(chainId, getAddress(DAI_ADDRESS[chainId]), 6, 'DAI')
   const sorToken = new Token(chainId, getAddress(SOR_ADDRESS[chainId]), 18, 'SOR')
 
   const stakeClaimAmount = useStakeClaimAmount(sorToken)
@@ -112,7 +112,7 @@ export default function Stablecoin() {
                 <p>
                   <strong className="text-accent bold">Mint (2 Steps):&nbsp;</strong>
                 </p>
-                <p>1. Enter in the amount of USDC you would like to deposit and press MINT.</p>
+                <p>1. Enter in the amount of DAI you would like to deposit and press MINT.</p>
                 <p>2. Claim your SOR tokens.</p>
               </div>
             </div>
@@ -122,7 +122,7 @@ export default function Stablecoin() {
                   <strong className="text-accent bold">Redeem (2 Steps):&nbsp;</strong>
                 </p>
                 <p>1. Enter in the amount of SOR you would like to redeem and press Redeem.</p>
-                <p>2. Claim your USDC tokens.</p>
+                <p>2. Claim your DAI tokens.</p>
               </div>
             </div>
             <div className="flex flex-col">
@@ -171,7 +171,7 @@ export default function Stablecoin() {
                             <strong className="text-accent bold">Mint (2 Steps):&nbsp;</strong>
                           </p>
                           <p>
-                            <strong className="text-accent bold">1.</strong> Enter in the amount of USDC you would
+                            <strong className="text-accent bold">1.</strong> Enter in the amount of DAI you would
                             like to deposit and press MINT.
                           </p>
                           <p>
@@ -243,7 +243,7 @@ export default function Stablecoin() {
                       {i18n._(t`Max Mint`)}
                     </Typography>
                     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                      {formatCurrencyAmount(maxStakeAmount, 4)} USDC
+                      {formatCurrencyAmount(maxStakeAmount, 4)} DAI
                     </Typography>
                   </div>
                   <div className="flex justify-between">
@@ -251,7 +251,7 @@ export default function Stablecoin() {
                       {i18n._(t`Rate`)}
                     </Typography>
                     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                      1 USDC = 1 SOR
+                      1 DAI = 1 SOR
                     </Typography>
                   </div>
                   <div className="flex justify-between">
@@ -259,7 +259,7 @@ export default function Stablecoin() {
                       {i18n._(t`Mint Fee`)} ({data?.mintPermille / 10}%)
                     </Typography>
                     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                      {formatNumber((Number(stakeValue) * data?.mintPermille) / 1000, false)} USDC
+                      {formatNumber((Number(stakeValue) * data?.mintPermille) / 1000, false)} DAI
                     </Typography>
                   </div>
                   <div className="flex justify-between">
@@ -382,7 +382,7 @@ export default function Stablecoin() {
                             like to redeem and press Redeem.
                           </p>
                           <p>
-                            <strong className="text-accent bold">2.</strong> Claim your USDC tokens.
+                            <strong className="text-accent bold">2.</strong> Claim your DAI tokens.
                           </p>
                         </div>
                         <div className="flex flex-col">
@@ -440,7 +440,7 @@ export default function Stablecoin() {
                   </div>
                 </AutoColumn>
                 <CurrencyInputPanel
-                  label={i18n._(t`Output`)}
+                  // label={i18n._(t`Output`)}
                   value={redeemValue !== '' ? (Number(redeemValue) * data?.pegPrice).toString() : ''}
                   showMaxButton={false}
                   currency={usdcToken}
@@ -463,7 +463,7 @@ export default function Stablecoin() {
                       {i18n._(t`Rate`)}
                     </Typography>
                     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                      1 SOR = {formatNumber(data?.pegPrice)} USDC
+                      1 SOR = {formatNumber(data?.pegPrice)} DAI
                     </Typography>
                   </div>
                   <div className="flex justify-between">
@@ -471,7 +471,7 @@ export default function Stablecoin() {
                       {i18n._(t`Redemption fee`)} ({data?.redeemPermille / 10}%)
                     </Typography>
                     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                      {formatNumber((Number(redeemValue) * data?.redeemPermille) / 1000, false)} USDC
+                      {formatNumber((Number(redeemValue) * data?.redeemPermille) / 1000, false)} DAI
                     </Typography>
                   </div>
                   <div className="flex justify-between">
@@ -483,7 +483,7 @@ export default function Stablecoin() {
                         Number(redeemValue) * data?.pegPrice - (Number(redeemValue) * data?.redeemPermille) / 1000,
                         false
                       )}{' '}
-                      USDC
+                      DAI
                     </Typography>
                   </div>
                   <div className="flex justify-between">
@@ -496,8 +496,8 @@ export default function Stablecoin() {
                             Number(redeemClaimAmount.toExact()) * data?.pegPrice -
                               (Number(redeemClaimAmount.toExact()) * data?.redeemPermille) / 1000,
                             false
-                          ) + ' USDC'
-                        : '0.00 USDC'}
+                          ) + ' DAI'
+                        : '0.00 DAI'}
                     </Typography>
                   </div>
                 </div>
@@ -550,7 +550,7 @@ export default function Stablecoin() {
                       try {
                         const tx = await claimUsdc()
                         addTransaction(tx, {
-                          summary: `Claim USDC`,
+                          summary: `Claim DAI`,
                         })
                       } catch (error) {
                         console.error(error)
@@ -579,7 +579,7 @@ export default function Stablecoin() {
                     {i18n._(t`Redeemed`)}
                     </Button>
                     <Button variant="filled" color="default" disabled={true} className="flex-1">
-                    {i18n._(t`Claim 100 USDC`)}
+                    {i18n._(t`Claim 100 DAI`)}
                     </Button> */}
                 </div>
               </Tab.Panel>

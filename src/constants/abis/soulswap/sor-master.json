@@ -8,7 +8,7 @@
             },
             {
                 "internalType": "contract IERC20",
-                "name": "_usdc",
+                "name": "_dai",
                 "type": "address"
             },
             {
@@ -44,6 +44,38 @@
         ],
         "stateMutability": "nonpayable",
         "type": "constructor"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "DaiClaim",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "DaiWithdrawn",
+        "type": "event"
     },
     {
         "anonymous": false,
@@ -283,38 +315,6 @@
             {
                 "indexed": true,
                 "internalType": "address",
-                "name": "user",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-            }
-        ],
-        "name": "UsdcClaim",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-            }
-        ],
-        "name": "UsdcWithdrawn",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": true,
-                "internalType": "address",
                 "name": "previousWithdrawer",
                 "type": "address"
             },
@@ -329,13 +329,6 @@
         "type": "event"
     },
     {
-        "inputs": [],
-        "name": "claimSor",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
         "inputs": [
             {
                 "internalType": "uint256",
@@ -344,18 +337,76 @@
             },
             {
                 "internalType": "uint256",
-                "name": "usdcAmountOutMin",
+                "name": "daiAmountOutMin",
                 "type": "uint256"
             }
         ],
-        "name": "claimUsdc",
+        "name": "claimDai",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
         "inputs": [],
-        "name": "emergencyClaimUsdcAll",
+        "name": "claimSor",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "dai",
+        "outputs": [
+            {
+                "internalType": "contract IERC20",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "daiClaimAmount",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "daiClaimSecond",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "emergencyClaimDaiAll",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -748,7 +799,7 @@
     },
     {
         "inputs": [],
-        "name": "totalUsdcClaimAmount",
+        "name": "totalDaiClaimAmount",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -819,57 +870,6 @@
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "usdc",
-        "outputs": [
-            {
-                "internalType": "contract IERC20",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "name": "usdcClaimAmount",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "name": "usdcClaimSecond",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
         "inputs": [
             {
                 "internalType": "uint256",
@@ -877,7 +877,7 @@
                 "type": "uint256"
             }
         ],
-        "name": "withdrawLuxor",
+        "name": "withdrawDai",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -890,7 +890,7 @@
                 "type": "uint256"
             }
         ],
-        "name": "withdrawUsdc",
+        "name": "withdrawLuxor",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
