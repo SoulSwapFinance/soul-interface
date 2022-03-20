@@ -188,7 +188,7 @@ const LendEntry = ({ pair, userPosition = false }) => {
 
   const userDepositedBalance = pair?.userAssetFraction // √
   const assetPrice = pair?.asset.usd / (10**pair.asset.tokenInfo.decimals)
-  const borrowPrice = pair?.collateral.usd / (10**pair.asset.tokenInfo.decimals)
+  // const borrowPrice = pair?.collateral.usd / (10**pair.asset.tokenInfo.decimals)
   const userDepositedValue 
   = userDepositedBalance 
     * assetPrice 
