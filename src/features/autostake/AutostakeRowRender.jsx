@@ -42,11 +42,11 @@ const TokenLogo = styled(Image)`
 
 const StakeRowRender = ({ pid, stakeToken, pool }) => {
     const { account, chainId } = useActiveWeb3React()
-    const {
-        poolInfo,
-        fetchStakeStats,
-        userInfo,
-    } = useAutoStake(pid, stakeToken, pool)
+    // const {
+    //     poolInfo,
+    //     fetchStakeStats,
+    //     userInfo,
+    // } = useAutoStake(pid, stakeToken, pool)
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(stakeToken)
     const soulPrice = useSoulPrice()
     const [showing, setShowing] = useState(false)
@@ -73,6 +73,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
      */
     useEffect(() => {
         getApyAndLiquidity()
+        fetchBals()
     }, [account])
 
     /**
@@ -83,6 +84,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
             const timer = setTimeout(() => {
                 if (showing) {
                     fetchBals()
+                    getApyAndLiquidity()
                     fetchEarnedAmount()
                     fetchApproval()
                 }
@@ -154,31 +156,32 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                 const stakedBal = staked / 1e18
                 setStakedBal(Number(stakedBal))
                 console.log('staked:%s', Number(stakedBal))
-
+                
                 // get total SOUL for pid from user bal
                 const result2 = await erc20BalanceOf(account)
                 const unstaked = ethers.utils.formatUnits(result2)
                 setUnstakedBal(Number(unstaked))
-
+                
                 return [stakedBal, unstaked]
-            } catch (err) {
+              } catch (err) {
                 console.warn(err)
+              }
             }
-        }
-    }
-
-    /**
-     * Gets the earned amount of the user for each pool
-     */
-    const fetchEarnedAmount = async () => {
-        if (!account) {
-            // alert('connect wallet')
-        } else {
-            try {
+          }
+          
+          /**
+           * Gets the earned amount of the user for each pool
+           */
+          const fetchEarnedAmount = async () => {
+            if (!account) {
+              // alert('connect wallet')
+            } else {
+              try {
                 // get SOUL earned
                 const result = await AutoStakeContract?.calculateTotalPendingSoulRewards()
-                const earnedAmount = ethers.utils.formatUnits(result?.[1])
+                const earnedAmount = result / 1e18
                 setEarnedAmount(Number(earnedAmount))
+                console.log('earnedAmount:%s', Number(earnedAmount))
 
                 return [earnedAmount]
             } catch (err) {
@@ -228,6 +231,21 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
             tx = await withdraw(amount, sharePrice)
             // await tx?.wait().then(await setPending(pid))
             await tx?.wait()
+        } catch (e) {
+            // alert(e.message)
+            console.log(e)
+        }
+    }
+
+    // /**
+    //  * Harvest Shares
+    //  */
+    const handleHarvest = async () => {
+        try {
+            let tx
+            tx = await AutoStakeContract?.harvest()
+            // await tx?.wait().then(await setPending(pid))
+            await tx?.wait().then(await fetchEarnedAmount())
         } catch (e) {
             // alert(e.message)
             console.log(e)
@@ -286,13 +304,13 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                             </StakeItemBox>
 
                             <StakeItemBox desktopOnly={true}>
-                                {pending.toString() === '0.00' ? (
+                                {earnedAmount.toString() === '0.00' ? (
                                     <Text padding="0" fontSize="1rem" color="#666">
                                         0
                                     </Text>
                                 ) : (
                                     <Text padding="0" fontSize="1rem" color="#F36FFE">
-                                        {pending}
+                                        {earnedAmount.toFixed(4)}
                                     </Text>
                                 )}
                             </StakeItemBox>
@@ -417,12 +435,12 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                             color="black"
                                             margin=".5rem 0 .5rem 0"
                                             onClick={() =>
-                                                handleWithdraw()
+                                              handleHarvest()
                                             }
                                         >
                                           {/* TODO: fix below */}
                                             CLAIM SOUL
-                                          {/* {earnings !== 0 ? `($${earnings})` : ''} */}
+                                          {earnedAmount !== 0 ? `($${(earnedAmount * soulPrice).toFixed(4)})` : ''}
                                         </SubmitButton>
                                     </Wrap>
                                 </FunctionBox>
