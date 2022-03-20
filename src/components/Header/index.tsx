@@ -48,7 +48,7 @@ function AppBar(): JSX.Element {
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                     <NavLink 
-                    activeClassName="text-purple text-high-emphesis"
+                    activeClassName="text-dark-600 text-high-emphesis"
                     href="/landing">
                     <Image src="/logo.png" alt="Soul" width="40" height="40" />
                   </NavLink>
@@ -56,107 +56,118 @@ function AppBar(): JSX.Element {
                   <div className="flex space-x-2">
                     <div className="flex space-x-2 sm:space-x-3">
                       <NavLink 
-                      activeClassName="text-purple text-high-emphesis"
+                      activeClassName="text-dark-600 text-high-emphesis"
                       href="/exchange/swap">
                         <a
                           id={`swap-nav-link`}
-                          className="w-full relative ml-2 sm:ml-6 md:p-2 hover:text-purple text-high-emphesis"
+                          className="w-full relative ml-2 sm:ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
                         >
-
                           {i18n._(t`SWAP`)}
                         </a>
                       </NavLink>
                       {chainId && [ChainId.FANTOM].includes(chainId) && (
                         <NavLink
-                        activeClassName="text-purple text-high-emphesis"
+                        activeClassName="text-dark-600 text-high-emphesis"
+                        href="/stablecoin">
+                          <a
+                            id={`stable-nav-link`}
+                            className="w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
+                          >
+                            {i18n._(t`STABLE`)}
+                          </a>
+                        </NavLink>
+                      )}
+                      {/* {chainId && [ChainId.FANTOM].includes(chainId) && (
+                        <NavLink
+                        activeClassName="text-dark-600 text-high-emphesis"
                         href="/pool">
                           <a
                             id={`pool-nav-link`}
-                            className="w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
+                            className="w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
                           >
                             {i18n._(t`POOL`)}
                           </a>
                         </NavLink>
-                      )}
+                      )} */}
                       {chainId && [ChainId.FANTOM].includes(chainId) && (
                         <NavLink 
-                        activeClassName="text-purple text-high-emphesis"
+                        activeClassName="text-dark-600 text-high-emphesis"
                         href={'/mines?filter=active'}>
                           <a
                             id={`farm-nav-link`}
-                            className="w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
+                            className="w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
                           >
                             {i18n._(t`FARM`)}
                           </a>
                         </NavLink>
                       )}
                       <NavLink 
-                      activeClassName="text-purple text-high-emphesis"
+                      activeClassName="text-dark-600 text-high-emphesis"
                       href={'/bonds'}>
                         <a
                           id={`bond-nav-link`}
-                          className="w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
+                          className="w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
                         >
                           {i18n._(t`BOND`)}
                         </a>
                       </NavLink>
                       <NavLink 
-                      activeClassName="text-purple text-high-emphesis"
+                      activeClassName="text-dark-600 text-high-emphesis"
                       href={'/analytics'}>
                         <a
                           id={`analytics-nav-link`}
-                          className="w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
+                          className="w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
                         >
                           {i18n._(t`DATA`)}
                         </a>
                       </NavLink>
                       <NavLink
-                      activeClassName="text-purple text-high-emphesis"
+                      activeClassName="text-dark-600 text-high-emphesis"
                       href={'/borrow'}>
                         <a
                           id={`lend-nav-link`}
-                          className="w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
+                          className="w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
                         >
                           {i18n._(t`BORROW`)}
                         </a>
                       </NavLink>
                       <NavLink
-                      activeClassName="text-purple text-high-emphesis"
+                      activeClassName="text-dark-600 text-high-emphesis"
                       href={'/vote'}>
                         <a
                           id={`claims-nav-link`}
-                          className="hidden sm:block w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
+                          className="hidden sm:block w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
                         >
                           {i18n._(t`VOTE`)}
                         </a>
                       </NavLink>
                       <NavLink 
-                      activeClassName="text-purple text-high-emphesis"
+                      activeClassName="text-dark-600 text-high-emphesis"
                       href={'/launchpad'}>
                         <a
                           id={`launch-nav-link`}
-                          className="hidden sm:block w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
+                          className="hidden sm:block w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
                         >
                           {i18n._(t`LAUNCH`)}
                         </a>
                       </NavLink>
 
                       <NavLink
-                      activeClassName="text-purple text-high-emphesis"
+                      activeClassName="text-dark-600 text-high-emphesis"
                       href={'/lend'}>
                         <a
                           id={`lend-nav-link`}
-                          className="hidden sm:block w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
+                          className="hidden sm:block w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
                         >
                           {i18n._(t`LEND`)}
                         </a>
                       </NavLink>
                       {/* <NavLink
-                      activeClassName="text-purple text-high-emphesis"
+                      activeClassName="text-dark-600 text-high-emphesis"
                       href={'/claims'}>
                         <a
                           id={`claims-nav-link`}
-                          className="hidden sm:block w-full relative ml-6 md:p-2 hover:text-purple text-high-emphesis"
+                          className="hidden sm:block w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
                         >
                           {i18n._(t`CLAIM`)}
                         </a>
