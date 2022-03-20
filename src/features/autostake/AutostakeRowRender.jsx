@@ -3,26 +3,28 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
 import { ethers } from 'ethers'
+import { getAddress } from '@ethersproject/address'
 
 import { useActiveWeb3React } from 'services/web3'
-
+import { Token } from 'sdk'
 import useAutoStake from './useAutoStake'
-import { useStakeContract } from './hooks'
+import { SOUL_ADDRESS } from 'constants/addresses'
+import { useStakeRecentProfit } from './hooks'
 import useApprove from 'features/bond/hooks/useApprove'
 import { SoulBondAddress } from 'features/bond/constants'
 import {
-  BondContainer,
+  StakeContainer,
   Row,
-  BondContentWrapper,
+  StakeContentWrapper,
   TokenPairBox,
-  BondItemBox,
-  BondItem,
+  StakeItemBox,
+  StakeItem,
   DetailsContainer,
   DetailsWrapper,
   FunctionBox,
   Input,
   SubmitButton,
-} from 'features/bond/BondStyles'
+} from './StakeStyles'
 
 import { Wrap, ClickableText, Text, ExternalLink } from '../../components/ReusableStyles'
 import Modal from '../../components/DefaultModal'
@@ -36,7 +38,7 @@ import ModalHeader from 'components/Modal/Header'
 //    - amount (in pool)
 //    - rewardDebt (owed)
 
-const HideOnMobile = styled(BondItemBox)`
+const HideOnMobile = styled(StakeItemBox)`
   @media screen and (max-width: 900px) {
     display: none;
   }
@@ -64,7 +66,7 @@ const TokenLogo = styled(Image)`
   }
 `
 
-const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
+const StakeRowRender = ({ pid, lpSymbol, lpToken, token1, token2, pool }) => {
   const { account, chainId } = useActiveWeb3React()
 
   const {
@@ -75,16 +77,15 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
     pendingSoul,
     userInfo,
     fetchUserLpValue,
-  } = useAutoStake(pid, lpToken, bond.token1Address, bond.token2Address)
+  } = useAutoStake(pid, lpToken, pool.token1Address, pool.token2Address)
   const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
-  
-//   const { withdraw } = useStakeContract()
+  const stakeToken = new Token(chainId, getAddress(SOUL_ADDRESS[chainId]), 18, 'SOUL')
+  const recentProfit = useStakeRecentProfit(stakeToken)
 
   const [showing, setShowing] = useState(false)
 
   const [approved, setApproved] = useState(false)
   const [confirmed, setConfirmed] = useState(false)
-
   const [receiving, setReceiving] = useState(0)
 
   const [stakedBal, setStakedBal] = useState(0)
@@ -138,7 +139,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
     }
   })
 
-  // const isWFTM = bond.token1Address == '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'
+  // const isWFTM = pool.token1Address == '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'
 
   // const term
   //   = (365 / dailyRoi)
@@ -166,12 +167,12 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   /**
    * Checks the amount of lpTokens the SoulSummoner contract holds
    * 
-   * bond <Object> : the bond object
-   * lpToken : the bond lpToken address
+   * pool <Object> : the pool object
+   * lpToken : the pool lpToken address
    */
   const getAprAndLiquidity = async () => {
     try {
-      const result = await fetchBondStats(pid, bond.token1, bond.token2)
+      const result = await fetchBondStats(pid, pool.token1, pool.token2)
       const tvl = result[0]
       const apr = result[1]
 
@@ -244,7 +245,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
       // alert('connect wallet')
     } else {
     try {
-        const pendingResult = await pendingSoul()
+        // const pendingResult = await pendingSoul()
+        const recentProfit = await useStakeRecentProfit(stakeToken)
         const formatted = ethers.utils.formatUnits(pendingResult?.[0].toString())
         setPending(Number(formatted).toFixed(2).toString())
 
@@ -289,27 +291,14 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   }
 
   // /**
-  //  * Harvests rewards from SoulSummoner bond
+  //  * Withdraw Shares
   //  */
-  // const handleHarvest = async () => {
-  //   try {
-  //     const tx = await deposit(pid, 0)
-  //     await tx?.wait().then(await fetchPending(pid))
-  //   } catch (e) {
-  //     // alert(e.message)
-  //     console.log(e)
-  //   }
-  // }
-
-  /**
-   * Mints SOUL Bond
-   */
-  const handleWithdraw = async () => {
+  const handleWithdraw = async (amount, sharePrice) => {
     try {
-      // console.log('minting', amount.toString())
-      const tx = await withdraw(pid)
-      // await tx.wait()
-      // await fetchBals(pid)
+        let tx
+        let shares = sharesFromSoul(amount, sharePrice)
+        tx = await withdraw(shares)
+        await tx?.wait().then(await fetchPending(pid))
     } catch (e) {
       // alert(e.message)
       console.log(e)
@@ -317,11 +306,11 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   }
 
   /**
-   * Deposits/stakes lpTokens into bond
+   * Deposits Soul
    */
   const handleDeposit = async (amount) => {
     try {
-      const tx = await deposit(pid, amount)
+      const tx = await deposit(account, amount)
       await tx.wait()
       await fetchBals()
     } catch (e) {
@@ -333,9 +322,9 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   return (
     <>
       <Wrap padding="0" display="flex" justifyContent="center">
-        <BondContainer>
+        <StakeContainer>
           <Row onClick={() => handleShow()}>
-            <BondContentWrapper>
+            <StakeContentWrapper>
               <TokenPairBox>
                 {/* 2 token logo combined ? */}
                 <Wrap>
@@ -346,19 +335,19 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     fontSize="1rem"
                     // target="_blank"
                     color="#F36FFE" // neon purple
-                    // href={`https://exchange.soulswap.finance/add/${bond.token1Address[chainId]}/${bond.token2Address[chainId]}`}
+                    // href={`https://exchange.soulswap.finance/add/${pool.token1Address[chainId]}/${pool.token2Address[chainId]}`}
                   > */}
                     <TokenLogo
                       src={
                         'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
-                        bond.token1Address[chainId] +
+                        pool.token1Address[chainId] +
                         '/logo.png'
                       }
                       alt="LOGO"
-                      width="44px"
-                      height="44px"
+                      width="64px"
+                      height="64px"
                       objectFit="contain"
-                      className="rounded-full"
+                      className="rounded-full items-center justify-center text-center"
                     />
                     {/* <Text fontWeight="bold" textAlign="center" padding="0" fontSize="1rem" color="#F36FFE">
                       {lpSymbol}
@@ -367,8 +356,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                 </Wrap>
               </TokenPairBox>
 
-              <BondItemBox>
-                <BondItem>
+              <StakeItemBox>
+                <StakeItem>
                 {Number(apr).toString() === '0.00' ? (
                   <Text padding="0" fontSize="1rem" color="#666">
                     0
@@ -378,10 +367,10 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     {apr}
                   </Text>
                 )}                
-                </BondItem>
-              </BondItemBox>
+                </StakeItem>
+              </StakeItemBox>
 
-              <BondItemBox desktopOnly={true}>
+              <StakeItemBox desktopOnly={true}>
                 {pending.toString() === '0.00' ? (
                   <Text padding="0" fontSize="1rem" color="#666">
                     0
@@ -391,7 +380,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     {pending}
                   </Text>
                 )}
-              </BondItemBox>
+              </StakeItemBox>
               {/* <HideOnMobile> */}
                 {liquidity === '0' ? (
                   <Text padding="0" fontSize="1rem" color="#666">
@@ -404,12 +393,12 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                 )}
               {/* </HideOnMobile> */}
 
-              {/* <BondItemBox>
+              {/* <StakeItemBox>
                 <ShowBtn onClick={() => handleShow()}>{showing ? `HIDE` : `SHOW`}</ShowBtn>
-              </BondItemBox> */}
-            </BondContentWrapper>
+              </StakeItemBox> */}
+            </StakeContentWrapper>
           </Row>
-        </BondContainer>
+        </StakeContainer>
       </Wrap>
 
       {showing ? (
@@ -445,28 +434,14 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   <Wrap padding="0" margin="0" display="flex">
                     {(approved && Number(unstakedBal) == 0) ?
                       (
-                        (bond.token1 == 'FTM' || bond.token2 == 'FTM') ? (
-                          <TokenPairLink
-                            target="_blank"
-                            rel="noopener"
-                            color="#F36FFE" // neon purple
-                            href=
-                            {bond.token1 == 'FTM' ?
-                              `https://exchange.soulswap.finance/add/FTM/${bond.token2Address[chainId]}`
-                              : `https://exchange.soulswap.finance/add/FTM/${bond.token1Address[chainId]}`
-                            }
-                          >
-                            CLICK HERE TO CREATE {bond.token1}-{bond.token2} PAIR
-                          </TokenPairLink>
-                        ) :
                           <TokenPairLink
                             target="_blank"
                             rel="noopener"
                             text-color="#F36FFE" // neon purple
                             href=
-                            {`https://exchange.soulswap.finance/add/${bond.token1Address[chainId]}/${bond.token2Address[chainId]}`}
+                            {`https://exchange.soulswap.finance/swap}`}
                           >
-                            CREATE {bond.token1}-{bond.token2} PAIR
+                            BUY SOUL
                           </TokenPairLink>
                       ) :
                       approved ?
@@ -477,7 +452,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                               handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))
                             }
                           >
-                            DEPOSIT {bond.token1}-{bond.token2} LP
+                            DEPOSIT SOUL
                           </SubmitButton>
                         ) :
                         (
@@ -555,7 +530,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
           <Typography variant="lg">
             Minting claims your pending rewards and sends your LP tokens to the Treasury.
             <br /><br />
-            You may only mint once and you may not add more to an open bond.
+            You may only mint once and you may not add more to an open pool.
           </Typography>
           <Typography variant="sm" className="font-medium">
             QUESTIONS OR CONCERNS?
@@ -594,4 +569,4 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   )
 }
 
-export default BondRowRender
+export default StakeRowRender

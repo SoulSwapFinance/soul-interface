@@ -6,18 +6,18 @@ import AutostakeRowRender from './AutostakeRowRender'
 import { AllPids } from './Pids'
 import { useActiveWeb3React } from 'services/web3'
 
-const BondList = () => {
+const AutostakeList = () => {
   const { chainId } = useActiveWeb3React() // account
 
-  const stakeList = AllPids.map((bond) => (
+  const stakeList = AllPids.map((pool) => (
     <AutostakeRowRender
-      key={bond.pid}
-      pid={bond.pid}
-      lpSymbol={bond.lpSymbol}
-      lpToken={bond.lpAddresses[chainId]}
-      token1={bond.token1}
-      token2={bond.token2}
-      bond={bond}
+      key={pool.pid}
+      pid={pool.pid}
+      lpSymbol={pool.lpSymbol}
+      lpToken={pool.lpAddresses[chainId]}
+      token1={pool.token1}
+      token2={pool.token2}
+      pool={pool}
     />
   ))
 
@@ -30,4 +30,4 @@ const BondList = () => {
   )
 }
 
-export default BondList
+export default AutostakeList
