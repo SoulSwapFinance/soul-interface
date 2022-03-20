@@ -60,7 +60,7 @@ export default function Stablecoin() {
   // previously data imports //
   const mintPermille = 10
   const redeemPermille = 50
-  const pegPrice = 0.95
+  const pegPrice = 0.985
   // const luxorPermille = 200
   const maxStakeAmount = CurrencyAmount.fromRawAmount(daiToken, 8000000000000000000000)
   const maxRedeemAmount = CurrencyAmount.fromRawAmount(daiToken, 20000000000000000000000)
@@ -86,7 +86,7 @@ export default function Stablecoin() {
     : daiBalance?.lessThan(parsedStakeValue)
       ? 'Insufficient Balance'
       : maxStakeAmount?.lessThan(parsedStakeValue)
-        ? 'Exceeds Maximum'
+        ? 'Exceeds Max'
         : undefined
 
   const isStakeValid = !stakeError
@@ -96,7 +96,7 @@ export default function Stablecoin() {
     : sorBalance?.lessThan(parsedRedeemValue)
       ? 'Insufficient Balance'
       : maxRedeemAmount?.lessThan(parsedRedeemValue)
-        ? 'Exceeds Maximum'
+        ? 'Exceeds Max'
         : undefined
   const isRedeemValid = !redeemError
 
@@ -319,13 +319,13 @@ export default function Stablecoin() {
                     {stakeError || i18n._(t`Mint`)}
                   </ButtonError>
                 ) : (
-                  <Button variant="link" color="purple" 
+                  <Button variant="filled" color="gray" 
                   className="flex-1 flex items-center gap-1 justify-center"
                   >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M8.99991 16.17L5.53492 12.705C5.14515 12.3152 4.51356 12.3141 4.12242 12.7025C3.72932 13.0928 3.7282 13.7283 4.11992 14.12L8.99991 19L20.2947 7.70513C20.6842 7.31568 20.6842 6.68425 20.2947 6.2948C19.9054 5.90548 19.2743 5.90533 18.8847 6.29447L8.99991 16.17Z"
-                        fill="#3CC13B"
+                        fill="#EE82EE"
                       />
                     </svg>
                     {i18n._(t`Minted`)}
@@ -357,11 +357,11 @@ export default function Stablecoin() {
                     {i18n._(t`Claim`)}
                     </Button> */}
 
-                {/* <Button variant="link" color="green" className="flex-1 flex items-center gap-1 justify-center">
+                {/* <Button variant="filled" color="gray" className="flex-1 flex items-center gap-1 justify-center">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                     d="M8.99991 16.17L5.53492 12.705C5.14515 12.3152 4.51356 12.3141 4.12242 12.7025C3.72932 13.0928 3.7282 13.7283 4.11992 14.12L8.99991 19L20.2947 7.70513C20.6842 7.31568 20.6842 6.68425 20.2947 6.2948C19.9054 5.90548 19.2743 5.90533 18.8847 6.29447L8.99991 16.17Z"
-                    fill="#3CC13B"
+                    fill="#EE82EE"
                     />
                     </svg>
                     {i18n._(t`Minted`)}
