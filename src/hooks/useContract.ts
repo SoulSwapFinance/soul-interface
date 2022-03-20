@@ -35,6 +35,7 @@ import {
   SOUL_ADDRESS,
   SEANCE_ADDRESS,
   SOUL_SUMMONER_ADDRESS,
+  AUTO_STAKE_ADDRESS,
   SOUL_VAULT_ADDRESS,
   SOUL_GUIDE_ADDRESS,
   PRICE_HELPER_ADDRESS,
@@ -72,6 +73,7 @@ import ERC20_ABI from '../constants/abis/erc20.json'
 import { ERC20_BYTES32_ABI } from '../constants/abis/erc20'
 import FACTORY_ABI from '../constants/abis/factory.json'
 import ISoulSwapPairABI from '../constants/abis/soulswap/ISoulSwapPair.json'
+import AUTO_STAKE_ABI from '../constants/abis/soulswap/autostake.json'
 import UNDERWORLD_ABI from '../constants/abis/underworldpair.json'
 import MAKER_ABI from '../constants/abis/maker.json'
 
@@ -367,6 +369,11 @@ export function useLotteryContract(withSignerIfPossible?: boolean): Contract | n
 export function useSummonerContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible)
+}
+
+export function useAutoStakeContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && AUTO_STAKE_ADDRESS[chainId], AUTO_STAKE_ABI, withSignerIfPossible)
 }
 
 export function useSorMasterContract(withSignerIfPossible?: boolean): Contract | null {
