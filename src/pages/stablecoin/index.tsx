@@ -59,8 +59,8 @@ export default function Stablecoin() {
 
   // previously data imports //
   const mintPermille = 10
-  const redeemPermille = 19
-  const pegPrice = 0.9710
+  const redeemPermille = 50
+  const pegPrice = 0.95
   // const luxorPermille = 200
   const maxStakeAmount = CurrencyAmount.fromRawAmount(daiToken, 8000000000000000000000)
   const maxRedeemAmount = CurrencyAmount.fromRawAmount(daiToken, 20000000000000000000000)
@@ -81,7 +81,6 @@ export default function Stablecoin() {
     SOR_MASTER_ADDRESS[chainId]
   )
 
-  // TODO: RE-INCORPORATE
   const stakeError = !parsedStakeValue
     ? 'Enter Amount'
     : daiBalance?.lessThan(parsedStakeValue)
@@ -303,8 +302,6 @@ export default function Stablecoin() {
                   </Button>
                 ) : Number(stakeClaimAmount.toExact()) === 0 ? (
                   <ButtonError
-                    type={"filled"}
-                    color={"purple"}
                     onClick={async () => {
                       try {
                         const tx = await stake(BigNumber.from(parsedStakeValue.quotient.toString()))
@@ -317,13 +314,13 @@ export default function Stablecoin() {
                     }}
                     disabled={!isStakeValid || !account}
                     error={!isStakeValid && !!parsedStakeValue}
-                    // style={{ width: '50%' }}
+                    style={{ width: '50%' }}
                   >
                     {stakeError || i18n._(t`Mint`)}
                   </ButtonError>
                 ) : (
                   <Button variant="link" color="purple" 
-                  // className="flex-1 flex items-center gap-1 justify-center"
+                  className="flex-1 flex items-center gap-1 justify-center"
                   >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -347,7 +344,7 @@ export default function Stablecoin() {
                     }
                   }}
                   disabled={!account || Number(stakeClaimAmount.toExact()) === 0}
-                  // style={{ width: '50%' }}
+                  style={{ width: '50%' }}
                 >
                   {i18n._(t`Claim`)}{' '}
                   {Number(stakeClaimAmount.toExact()) !== 0 ? formatCurrencyAmount(stakeClaimAmount, 4) : ''}
