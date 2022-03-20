@@ -17,14 +17,14 @@ import { useAutoStakeContract } from 'hooks/useContract'
 
 // const helperContract = useHelperContract()
 
-function useAutoStake(pid, lpToken, token1Address, token2Address) {
-  const { account, chainId } = useActiveWeb3React()
+function useAutoStake(pid, stakeToken) {
+  const { account } = useActiveWeb3React()
   
   const helperContract = useBondHelperContract()
   const priceHelperContract = usePriceHelperContract()
   const bondContract = useSoulBondContract()
   const stakeContract = useAutoStakeContract()
-  const lpTokenContract = usePairContract(lpToken)
+  const lpTokenContract = usePairContract(stakeToken)
 
   const soulPrice = useSoulPrice()
   const seancePrice = useSeancePrice()
@@ -68,56 +68,6 @@ function useAutoStake(pid, lpToken, token1Address, token2Address) {
       // [2] multiply usdcPrice per LP [1] by stakedAmount
       const stakedValue = usdcValue 
       return stakedValue
-    } catch (e) {
-      console.log(e)
-      return e
-    }
-  }
-
-  /**
-   * Fetches the LP value of a user
-   * 
-   * [0] : summonerLpTokens
-   * [1] : lpTokenSupply
-   * [2] : pidAlloc
-   * [3] : totalAlloc
-   * [4] : soulPerYear
-   * [5] : tvl (token balance)
-   */
-   const fetchUserLpValue = async (pid, token1Name, token2Name, lpAmount) => {
-    try {
-      const result = await helperContract?.fetchPidDetails(pid)
-
-      // ------ TVL ------
-
-      const userPercOfSupply = lpAmount / result?.[1] // i.e, 10 / 100 = 0.1
-      const rawPidValue = (userPercOfSupply * result?.[5]) / 10 ** 18 // i.e. 0.1 * 100,000 = 10,000
-
-      let lpValue = rawPidValue
-
-      if (
-        token1Name === 'USDC' ||
-        token2Name === 'USDC' ||
-        token1Name === 'fUSDT' ||
-        token2Name === 'fUSDT' ||
-        token1Name === 'gFUSDT' ||
-        token2Name === 'gFUSDT'
-      ) {
-        if (token1Name !== 'DAI') {
-          lpValue = (userPercOfSupply * result?.[5]) / 10 ** 6
-        } else {}
-      } else if (token1Name === 'FUSD' || token2Name === 'FUSD' || token1Name === 'DAI' || token2Name === 'DAI') {
-      } else if (token1Name === 'FTM' || token2Name === 'FTM') {
-        lpValue = rawPidValue * ftmPrice
-      } else if (token1Name === 'SOUL' || token2Name === 'SOUL') {
-        lpValue = rawPidValue * soulPrice
-      } else if (token1Name === 'SEANCE' || token2Name === 'SEANCE') {
-        lpValue = rawPidValue * seancePrice
-      } else if (token1Name === 'WETH' || token2Name === 'WETH') {
-        lpValue = rawPidValue * ethPrice
-      }
-
-      return lpValue
     } catch (e) {
       console.log(e)
       return e
@@ -459,10 +409,8 @@ const withdraw =
     withdraw,
     pendingSoul,
     userInfo,
-    fetchUserLpValue,
     
     // //
-    fetchYearlyRewards,
     fetchStakedValue,
     
     fetchPid0LiquidityValue,

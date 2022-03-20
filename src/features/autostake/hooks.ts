@@ -1,5 +1,5 @@
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
-import { useAutoStakeContract, useSoulSummonerContract } from 'hooks/useContract'
+import { useAutoStakeContract } from 'hooks/useContract'
 import { useMemo, useCallback, useState } from 'react'
 import { useSingleCallResult } from '../../state/multicall/hooks'
 import { CurrencyAmount, JSBI, SOUL } from 'sdk'
@@ -10,7 +10,7 @@ function soulFromShares(shares: BigNumber, sharePrice: BigNumber) {
   return shares.mul(sharePrice).div(DECIMALS)
 }
 
-function sharesFromSoul(amount: BigNumber, sharePrice: BigNumber) {
+export function sharesFromSoul(amount: BigNumber, sharePrice: BigNumber) {
   const DECIMALS = BigNumber.from(10).pow(18)
   return amount.mul(DECIMALS).div(sharePrice)
 }

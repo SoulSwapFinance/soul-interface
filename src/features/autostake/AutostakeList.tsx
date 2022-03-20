@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-// import { ethers } from 'ethers'
+import React, { useEffect, useState } from 'react'
 
 import StakeKey from './StakeKey'
 import AutostakeRowRender from './AutostakeRowRender'
@@ -13,10 +12,7 @@ const AutostakeList = () => {
     <AutostakeRowRender
       key={pool.pid}
       pid={pool.pid}
-      lpSymbol={pool.lpSymbol}
-      lpToken={pool.lpAddresses[chainId]}
-      token1={pool.token1}
-      token2={pool.token2}
+      stakeToken={pool.lpAddresses[chainId]}
       pool={pool}
     />
   ))

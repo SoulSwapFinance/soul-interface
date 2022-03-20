@@ -1,35 +1,32 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
 import { ethers } from 'ethers'
 import { getAddress } from '@ethersproject/address'
-
+import { useSoulPrice } from 'hooks/getPrices'
 import { useActiveWeb3React } from 'services/web3'
 import { Token } from 'sdk'
+import { AUTO_STAKE_ADDRESS } from 'sdk'
 import useAutoStake from './useAutoStake'
-import { SOUL_ADDRESS } from 'constants/addresses'
-import { useStakeRecentProfit } from './hooks'
+import { useAutoStakeContract } from 'hooks/useContract'
+import { useStakeContract, useStakeSharePrice, useStakeRecentProfit, sharesFromSoul } from './hooks'
 import useApprove from 'features/bond/hooks/useApprove'
-import { SoulBondAddress } from 'features/bond/constants'
 import {
-  StakeContainer,
-  Row,
-  StakeContentWrapper,
-  TokenPairBox,
-  StakeItemBox,
-  StakeItem,
-  DetailsContainer,
-  DetailsWrapper,
-  FunctionBox,
-  Input,
-  SubmitButton,
+    StakeContainer,
+    Row,
+    StakeContentWrapper,
+    TokenPairBox,
+    StakeItemBox,
+    StakeItem,
+    DetailsContainer,
+    DetailsWrapper,
+    FunctionBox,
+    Input,
+    FlexText,
+    SubmitButton,
 } from './StakeStyles'
-
 import { Wrap, ClickableText, Text, ExternalLink } from '../../components/ReusableStyles'
-import Modal from '../../components/DefaultModal'
-import Typography from '../../components/Typography'
-import ModalHeader from 'components/Modal/Header'
+
 
 // params to render bond with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)
@@ -37,22 +34,6 @@ import ModalHeader from 'components/Modal/Header'
 // 3. userInfo:
 //    - amount (in pool)
 //    - rewardDebt (owed)
-
-const HideOnMobile = styled(StakeItemBox)`
-  @media screen and (max-width: 900px) {
-    display: none;
-  }
-`
-
-const TokenPair = styled(ExternalLink)`
-  font-size: 1.15rem;
-  padding: 0;
-
-  @media screen and (max-width: 400px) {
-    font-size: 1rem;
-    padding-right: 10px;
-  }
-`
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -66,507 +47,352 @@ const TokenLogo = styled(Image)`
   }
 `
 
-const StakeRowRender = ({ pid, lpSymbol, lpToken, token1, token2, pool }) => {
-  const { account, chainId } = useActiveWeb3React()
+const StakeRowRender = ({ pid, stakeToken, pool }) => {
+    const { account, chainId } = useActiveWeb3React()
+    const {
+        fetchBondStats,
+        userInfo,
+    } = useAutoStake(pid, stakeToken, pool)
+    const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(stakeToken)
+    const soulPrice = useSoulPrice()
+    const [showing, setShowing] = useState(false)
+    // const AutoStakeContract = useAutoStakeContract()
+    const AutoStakeAddress =  AUTO_STAKE_ADDRESS[chainId]
+    const [approved, setApproved] = useState(false)
+    //   const [confirmed, setConfirmed] = useState(false)
+    //   const [receiving, setReceiving] = useState(0)
 
-  const {
-    fetchUserLpTokenAllocInBond,
-    fetchBondStats,
-    deposit,
-    withdraw,
-    pendingSoul,
-    userInfo,
-    fetchUserLpValue,
-  } = useAutoStake(pid, lpToken, pool.token1Address, pool.token2Address)
-  const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
-  const stakeToken = new Token(chainId, getAddress(SOUL_ADDRESS[chainId]), 18, 'SOUL')
-  const recentProfit = useStakeRecentProfit(stakeToken)
+    const [stakedBal, setStakedBal] = useState(0)
+    const [unstakedBal, setUnstakedBal] = useState(0)
+    const [pending, setPending] = useState(0)
 
-  const [showing, setShowing] = useState(false)
+    // show confirmation view before minting SOUL
+    const [apr, setApr] = useState()
+    const [liquidity, setLiquidity] = useState()
+    const { deposit, withdraw } = useStakeContract()
 
-  const [approved, setApproved] = useState(false)
-  const [confirmed, setConfirmed] = useState(false)
-  const [receiving, setReceiving] = useState(0)
+    /**
+     * Runs only on initial render/mount
+     */
+    useEffect(() => {
+        getAprAndLiquidity()
+    }, [account])
 
-  const [stakedBal, setStakedBal] = useState(0)
-  const [unstakedBal, setUnstakedBal] = useState(0)
-  const [pending, setPending] = useState(0)
-
-  const [availableValue, setAvailableValue] = useState(0)
-  const [stakedLpValue, setStakedLpValue] = useState(0)
-  const [pendingValue, setPendingValue] = useState(0)
-
-  // show confirmation view before minting SOUL
-  const [showConfirmation, setShowConfirmation] = useState(false)
-
-  // const [earningPerDay, setEarningPerDay] = useState();
-  const [percOfBond, setPercOfBond] = useState()
-  // const [poolRate, setPoolRate] = useState()
-
-  // const [yearlySoulRewards, setYearlySoulRewards] = useState()
-  const [apr, setApr] = useState()
-  const [liquidity, setLiquidity] = useState()
-  // const [stakedValue, setLiquidityShare] = useState()
-
-  // const moment = new Date()
-  /**
-   * Runs only on initial render/mount
-   */
-  useEffect(() => {
-    getAprAndLiquidity()
-    // getYearlyPoolRewards()
-    fetchPendingValue()
-    fetchUserBondAlloc()
-  }, [account])
-
-  /**
-   * Runs on initial render/mount and reruns every 2 seconds
-   */
-  useEffect(() => {
-    if (account) {
-      const timer = setTimeout(() => {
-        fetchPendingValue()
-        // getAprAndLiquidity()
-        fetchUserBondAlloc()
-
-        if (showing) {
-          fetchBals()
-          fetchApproval()
+    /**
+     * Runs on initial render/mount and reruns every 2 seconds
+     */
+    useEffect(() => {
+        if (account) {
+            const timer = setTimeout(() => {
+                if (showing) {
+                    fetchBals()
+                    fetchApproval()
+                }
+            }, 3000)
+            // Clear timeout if the component is unmounted
+            return () => clearTimeout(timer)
         }
-      }, 3000)
-      // Clear timeout if the component is unmounted
-      return () => clearTimeout(timer)
-    }
-  })
+    })
 
-  // const isWFTM = pool.token1Address == '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'
-
-  // const term
-  //   = (365 / dailyRoi)
-  //     .toFixed(2)
-  //     .toString()
-  //     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-
-  // const elapsed
-  //   = (dailyRoi / reached) // Return Per Day / % Acheived = Days Elapsed
-  //     .toFixed(2)
-  //     .toString()
-  //     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-
-  /**
-   * Opens the function panel dropdown
-   */
-  const handleShow = () => {
-    setShowing(!showing)
-    if (!showing) {
-      fetchBals()
-      fetchApproval()
-    }
-  }
-
-  /**
-   * Checks the amount of lpTokens the SoulSummoner contract holds
-   * 
-   * pool <Object> : the pool object
-   * lpToken : the pool lpToken address
-   */
-  const getAprAndLiquidity = async () => {
-    try {
-      const result = await fetchBondStats(pid, pool.token1, pool.token2)
-      const tvl = result[0]
-      const apr = result[1]
-
-      setLiquidity(tvl)
-      setApr(apr)
-    } catch (e) {
-      console.warn(e)
-    }
-  }
-
-  /**
-   * Gets the lpToken balance of the user for each pool
-   */
-  const fetchBals = async () => {
-    if (!account) {
-      // alert('connect wallet')
-    } else {
-      try {
-        // get total lp tokens staked in contract for pid from user
-        const result1 = await userInfo(pid, account)
-        const staked = ethers.utils.formatUnits(result1?.[0])
-        setStakedBal(Number(staked))
-
-        // get total lp tokens for pid from user bal
-        const result2 = await erc20BalanceOf(account)
-        const unstaked = ethers.utils.formatUnits(result2)
-        setUnstakedBal(Number(staked))
-
-        // const tvlShare = tvl
-        // const stakedValue = staked * tvlShare
-        // const aValue = stakedValue * tvlShare
-        // setAvailableValue(aValue.toString())
-
-        // how many much of tokenA there is 
-        // ...
-
-        // get value of available, unstaked lp
-        const aLpValue = await fetchUserLpValue(pid, token1, token2, result2)
-        // const f_aLpValue = Number(aLpValue)
-        setAvailableValue(aLpValue)
-
-        // get value of staked lp (bonded lp)
-        // const sLpValue = await fetchLpValue(token1, token2, result1?.[0]); 
-        const sLpValue = await fetchUserLpValue(pid, token1, token2, result1?.[0])
-        // const f_sLpValue = Number(sLpValue) // format to 2 decimals + commas
-        setStakedLpValue(Number(sLpValue))
-
-        return [staked, unstaked]
-      } catch (err) {
-        console.warn(err)
-      }
-    }
-  }
-
-  /**
-    * Checks the user's alloc of the total staked in the farm
-  */
-    const fetchUserBondAlloc = async () => {
-        const ownership = await fetchUserLpTokenAllocInBond(pid, account)
-        const userStakedPercOfSummoner = Number(ownership?.[4])
-        if (userStakedPercOfSummoner) setPercOfBond(Number(userStakedPercOfSummoner).toFixed(2))
-        else setPercOfBond(0)
-    }
-
-  /**
-   * Fetches connected user pending soul
-   */
-  const fetchPendingValue = async () => {
-    if (!account) {
-      // alert('connect wallet')
-    } else {
-    try {
-        // const pendingResult = await pendingSoul()
-        const recentProfit = await useStakeRecentProfit(stakeToken)
-        const formatted = ethers.utils.formatUnits(pendingResult?.[0].toString())
-        setPending(Number(formatted).toFixed(2).toString())
-
-        const pendingValue = pending * pendingResult?.[1]
-        setPendingValue(Number(pendingValue).toFixed(2).toString())
-        } catch (err) {
-        console.warn(err)
+    /**
+     * Opens the function panel dropdown
+     */
+    const handleShow = () => {
+        setShowing(!showing)
+        if (!showing) {
+            fetchBals()
+            fetchApproval()
         }
     }
-  }
 
-  /**
-   * Checks if the user has approved SoulSummoner to move lpTokens
-   */
-  const fetchApproval = async () => {
-    if (!account) {
-      alert('Connect Wallet')
-    } else {
-      // Checks if SoulSummoner can move tokens
-      const amount = await erc20Allowance(account, SoulBondAddress)
-      if (amount > 0) setApproved(true)
-      return amount
+    /**
+     * Checks the amount of lpTokens the AutoStakeContract contract holds
+     * 
+     * pool <Object> : the pool object
+     * lpToken : the pool lpToken address
+     */
+    const getAprAndLiquidity = async () => {
+        try {
+            const result = await fetchBondStats(pid, pool.token1, pool.token2)
+            const tvl = result[0]
+            const apr = result[1]
+
+            setLiquidity(tvl)
+            setApr(apr)
+        } catch (e) {
+            console.warn(e)
+        }
     }
-  }
 
-  /**
-   * Approves SoulSummoner to move lpTokens
-   */
-  const handleApprove = async () => {
-    if (!account) {
-      alert('Connect Wallet')
-    } else {
-      try {
-        const tx = await erc20Approve(SoulBondAddress)
-        await tx?.wait().then(await fetchApproval())
-      } catch (e) {
-        // alert(e.message)
-        console.log(e)
-        return
-      }
-    }
-  }
+    /**
+     * Gets the lpToken balance of the user for each pool
+     */
+    const fetchBals = async () => {
+        if (!account) {
+            // alert('connect wallet')
+        } else {
+            try {
+                // get total SOUL staked in contract for pid from user
+                const result1 = await userInfo(pid, account)
+                const staked = ethers.utils.formatUnits(result1?.[0])
+                setStakedBal(Number(staked))
 
-  // /**
-  //  * Withdraw Shares
-  //  */
-  const handleWithdraw = async (amount, sharePrice) => {
-    try {
-        let tx
-        let shares = sharesFromSoul(amount, sharePrice)
-        tx = await withdraw(shares)
-        await tx?.wait().then(await fetchPending(pid))
-    } catch (e) {
-      // alert(e.message)
-      console.log(e)
-    }
-  }
+                // get total SOUL for pid from user bal
+                const result2 = await erc20BalanceOf(account)
+                const unstaked = ethers.utils.formatUnits(result2)
+                setUnstakedBal(Number(unstaked))
 
-  /**
-   * Deposits Soul
-   */
-  const handleDeposit = async (amount) => {
-    try {
-      const tx = await deposit(account, amount)
-      await tx.wait()
-      await fetchBals()
-    } catch (e) {
-      // alert(e.message)
-      console.log(e)
-    }
-  }
-
-  return (
-    <>
-      <Wrap padding="0" display="flex" justifyContent="center">
-        <StakeContainer>
-          <Row onClick={() => handleShow()}>
-            <StakeContentWrapper>
-              <TokenPairBox>
-                {/* 2 token logo combined ? */}
-                <Wrap>
-                  {/* <Text padding="0" fontSize=".7rem" color="#bbb">
-                    Token Pair
-                  </Text> */}
-                  {/* <TokenPair
-                    fontSize="1rem"
-                    // target="_blank"
-                    color="#F36FFE" // neon purple
-                    // href={`https://exchange.soulswap.finance/add/${pool.token1Address[chainId]}/${pool.token2Address[chainId]}`}
-                  > */}
-                    <TokenLogo
-                      src={
-                        'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
-                        pool.token1Address[chainId] +
-                        '/logo.png'
-                      }
-                      alt="LOGO"
-                      width="64px"
-                      height="64px"
-                      objectFit="contain"
-                      className="rounded-full items-center justify-center text-center"
-                    />
-                    {/* <Text fontWeight="bold" textAlign="center" padding="0" fontSize="1rem" color="#F36FFE">
-                      {lpSymbol}
-                    </Text> */}
-                  {/* </TokenPair> */}
-                </Wrap>
-              </TokenPairBox>
-
-              <StakeItemBox>
-                <StakeItem>
-                {Number(apr).toString() === '0.00' ? (
-                  <Text padding="0" fontSize="1rem" color="#666">
-                    0
-                  </Text>
-                ) : (
-                  <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                    {apr}
-                  </Text>
-                )}                
-                </StakeItem>
-              </StakeItemBox>
-
-              <StakeItemBox desktopOnly={true}>
-                {pending.toString() === '0.00' ? (
-                  <Text padding="0" fontSize="1rem" color="#666">
-                    0
-                  </Text>
-                ) : (
-                  <Text padding="0" fontSize="1rem" color="#F36FFE">
-                    {pending}
-                  </Text>
-                )}
-              </StakeItemBox>
-              {/* <HideOnMobile> */}
-                {liquidity === '0' ? (
-                  <Text padding="0" fontSize="1rem" color="#666">
-                    $0
-                  </Text>
-                ) : (
-                  <Text padding="0" fontSize="1rem">
-                    ${liquidity}
-                  </Text>
-                )}
-              {/* </HideOnMobile> */}
-
-              {/* <StakeItemBox>
-                <ShowBtn onClick={() => handleShow()}>{showing ? `HIDE` : `SHOW`}</ShowBtn>
-              </StakeItemBox> */}
-            </StakeContentWrapper>
-          </Row>
-        </StakeContainer>
-      </Wrap>
-
-      {showing ? (
-        <Wrap padding="0" display="flex" justifyContent="center">
-          <DetailsContainer>
-            <DetailsWrapper>
-              {stakedBal == 0 ? (
-                <FunctionBox>
-                  {/* <button >Max</button> */}
-                  <Wrap padding="0" display="flex" justifyContent="space-between">
-                    <Text padding="0" fontSize="1rem" color="#bbb">
-                      Available:&nbsp;
-                      {Number(unstakedBal) === 0
-                        ? '0.000'
-                        : Number(unstakedBal) < 0.001
-                          ? '<0.001'
-                          : Number(unstakedBal)
-                            .toFixed(3)
-                            .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                      &nbsp;LP &nbsp; {Number(availableValue) !== 0 ? `($${availableValue})` : ''}
-                    </Text>
-                    <ClickableText
-                      padding="0"
-                      fontSize=".9rem"
-                      color="#aaa"
-                      onClick={() => (document.getElementById('stake').value = unstakedBal)}
-                    >
-                      MAX
-                    </ClickableText>
-                  </Wrap>
-                  <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
-                  <Wrap padding="0" margin="0" display="flex">
-                    {(approved && Number(unstakedBal) == 0) ?
-                      (
-                          <TokenPairLink
-                            target="_blank"
-                            rel="noopener"
-                            text-color="#F36FFE" // neon purple
-                            href=
-                            {`https://exchange.soulswap.finance/swap}`}
-                          >
-                            BUY SOUL
-                          </TokenPairLink>
-                      ) :
-                      approved ?
-                        (
-                          <SubmitButton
-                            height="2.5rem"
-                            onClick={() =>
-                              handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))
-                            }
-                          >
-                            DEPOSIT SOUL
-                          </SubmitButton>
-                        ) :
-                        (
-                          <SubmitButton height="2.5rem" onClick={() => handleApprove()}>
-                            APPROVE
-                          </SubmitButton>
-                        )
-
-                    }
-                  </Wrap>
-                </FunctionBox>
-              ) : (
-                <FunctionBox>
-                  {/* <FlexText> */}
-                  {/* <ClickableText
-                    padding="0"
-                    fontSize=".9rem"
-                    color="#aaa"
-                    onClick={() => {
-                      document.getElementById('unstake').value = stakedBal
-                      getWithdrawable()
-                    }}
-                  >
-                    MAX
-                  </ClickableText>
-                </FlexText>
-                <Input
-                  name="unstake"
-                  id="unstake"
-                  type="number"
-                  placeholder="0.0"
-                  min="0"
-                  onChange={() => getWithdrawable()}
-                /> */}
-                  <Wrap padding="0" margin="0" display="flex" justifyContent="space-between">
-                  <Text fontSize=".9rem" padding="0" textAlign="left" color="#aaa">
-                    STAKED:&nbsp;
-                    {Number(stakedBal) === 0
-                      ? '0.000'
-                      : Number(stakedBal) < 0.001
-                        ? '<0.001'
-                        : Number(stakedBal)
-                          .toFixed(3)
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                    }&nbsp;
-                    <br/>
-                    VALUE:&nbsp;{Number(stakedLpValue) !== 0 ? `$${stakedLpValue.toFixed(3)}` : '0'}
-                  </Text>
-                  </Wrap>
-                  <Wrap padding="0" margin="0" display="flex">
-                    <SubmitButton
-                      height="2.5rem"
-                      primaryColour="#bbb"
-                      color="black"
-                      margin=".5rem 0 .5rem 0"
-                      onClick={() =>
-                        setShowConfirmation(true)
-                        // handleWithdraw()
-                      }
-                    >
-                      CLAIM SOUL {pendingValue !== 0 ? `($${pendingValue})` : ''}
-                    </SubmitButton>
-                  </Wrap>
-                </FunctionBox>
-              )}
-            </DetailsWrapper>
-          </DetailsContainer>
-        </Wrap>
-      ) : null}
-      <Modal isOpen={showConfirmation} onDismiss={
-        () => setShowConfirmation(false)}>
-        <div className="space-y-4">
-          <ModalHeader header={`Are you sure?`} onClose={() => setShowConfirmation(false)} />
-          <Typography variant="lg">
-            Minting claims your pending rewards and sends your LP tokens to the Treasury.
-            <br /><br />
-            You may only mint once and you may not add more to an open pool.
-          </Typography>
-          <Typography variant="sm" className="font-medium">
-            QUESTIONS OR CONCERNS?
-            <a href="mailto:soulswapfinance@gmail.com">
-              {' '} CONTACT US
-            </a>
-          </Typography>
-          <SubmitButton
-            height="2.5rem"
-            // onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
-            onClick={() =>
-              // setShowConfirmation(true)
-              handleWithdraw()
+                return [staked, unstaked]
+            } catch (err) {
+                console.warn(err)
             }
-          >
-            I UNDERSTAND THESE TERMS
-          </SubmitButton>
-          {/* <Button
-            color="red"
-            size="lg"
-            onClick={() => {
-              if (window.prompt(`Please type the word "confirm" to enable expert mode.`) === 'confirm') {
-                setShowConfirmation(false)
-              }
-              setShowConfirmation(false)
-            }}
-          >
-            <Typography variant="lg" id="confirm-expert-mode">
-              { `I UNDERSTAND THESE TERMS` }
-            </Typography> */}
+        }
+    }
 
-          {/* </Button> */}
-        </div>
-      </Modal>
-    </>
-  )
+    /**
+     * Checks if the user has approved AutoStakeContract to move lpTokens
+     */
+    const fetchApproval = async () => {
+        if (!account) {
+            alert('Connect Wallet')
+        } else {
+            // Checks if AutoStakeContract can move tokens
+            const amount = await erc20Allowance(account, AutoStakeAddress)
+            if (amount > 0) setApproved(true)
+            return amount
+        }
+    }
+
+    /**
+     * Approves AutoStakeContract to move lpTokens
+     */
+    const handleApprove = async () => {
+        if (!account) {
+            alert('Connect Wallet')
+        } else {
+            try {
+                const tx = await erc20Approve(AutoStakeAddress)
+                await tx?.wait().then(await fetchApproval())
+            } catch (e) {
+                // alert(e.message)
+                console.log(e)
+                return
+            }
+        }
+    }
+
+    // /**
+    //  * Withdraw Shares
+    //  */
+    const handleWithdraw = async (amount, sharePrice) => {
+        try {
+            let tx
+            tx = await withdraw(amount, sharePrice)
+            // await tx?.wait().then(await setPending(pid))
+            await tx?.wait()
+        } catch (e) {
+            // alert(e.message)
+            console.log(e)
+        }
+    }
+
+    /**
+     * Deposits Soul
+     */
+    const handleDeposit = async (amount) => {
+        try {
+            const tx = await deposit(amount)
+            await tx.wait()
+            await fetchBals()
+        } catch (e) {
+            // alert(e.message)
+            console.log(e)
+        }
+    }
+
+    return (
+        <>
+            <Wrap padding="0" display="flex" justifyContent="center">
+                <StakeContainer>
+                    <Row onClick={() => handleShow()}>
+                        <StakeContentWrapper>
+                            <TokenPairBox>
+                                <Wrap>
+                                    <TokenLogo
+                                        src={
+                                            'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
+                                            pool.token1Address[chainId] +
+                                            '/logo.png'
+                                        }
+                                        alt="LOGO"
+                                        width="64px"
+                                        height="64px"
+                                        objectFit="contain"
+                                        className="rounded-full items-center justify-center text-center"
+                                    />
+                                </Wrap>
+                            </TokenPairBox>
+
+                            <StakeItemBox>
+                                <StakeItem>
+                                    {Number(apr).toString() === '0.00' ? (
+                                        <Text padding="0" fontSize="1rem" color="#666">
+                                            0
+                                        </Text>
+                                    ) : (
+                                        <Text padding="0" fontSize="1rem" color="#FFFFFF">
+                                            {apr}
+                                        </Text>
+                                    )}
+                                </StakeItem>
+                            </StakeItemBox>
+
+                            <StakeItemBox desktopOnly={true}>
+                                {pending.toString() === '0.00' ? (
+                                    <Text padding="0" fontSize="1rem" color="#666">
+                                        0
+                                    </Text>
+                                ) : (
+                                    <Text padding="0" fontSize="1rem" color="#F36FFE">
+                                        {pending}
+                                    </Text>
+                                )}
+                            </StakeItemBox>
+                            {liquidity === '0' ? (
+                                <Text padding="0" fontSize="1rem" color="#666">
+                                    $0
+                                </Text>
+                            ) : (
+                                <Text padding="0" fontSize="1rem">
+                                    ${liquidity}
+                                </Text>
+                            )}
+                        </StakeContentWrapper>
+                    </Row>
+                </StakeContainer>
+            </Wrap>
+
+            {showing && (
+                <Wrap padding="0" display="flex" justifyContent="center">
+                    <DetailsContainer>
+                        <DetailsWrapper>
+                            {stakedBal == 0 ? (
+                                <FunctionBox>
+                                    {/* <button >Max</button> */}
+                                    <Wrap padding="0" display="flex" justifyContent="space-between">
+                                        <Text padding="0" fontSize="1rem" color="#bbb">
+                                            Available:&nbsp;
+                                            {Number(unstakedBal) === 0
+                                                ? '0.000'
+                                                : Number(unstakedBal) < 0.001
+                                                    ? '<0.001'
+                                                    : Number(unstakedBal)
+                                                        .toFixed(3)
+                                                        .toString()
+                                                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                            &nbsp;LP &nbsp; {Number(unstakedBal * soulPrice) !== 0 ? `($${(unstakedBal * soulPrice).toFixed(3)})` : ''}
+                                        </Text>
+                                        <ClickableText
+                                            padding="0"
+                                            fontSize=".9rem"
+                                            color="#aaa"
+                                            onClick={() => (document.getElementById('stake').value = unstakedBal)}
+                                        >
+                                            MAX
+                                        </ClickableText>
+                                    </Wrap>
+                                    <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
+                                    <Wrap padding="0" margin="0" display="flex">
+                                        {(approved && Number(unstakedBal) == 0) ?
+                                            (
+                                                <TokenPairLink
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    text-color="#F36FFE" // neon purple
+                                                    href=
+                                                    {`https://exchange.soulswap.finance/swap}`}
+                                                >
+                                                    BUY SOUL
+                                                </TokenPairLink>
+                                            ) :
+                                            approved ?
+                                                (
+                                                    <SubmitButton
+                                                        height="2.5rem"
+                                                        onClick={() =>
+                                                            handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))
+                                                        }
+                                                    >
+                                                        DEPOSIT SOUL
+                                                    </SubmitButton>
+                                                ) :
+                                                (
+                                                    <SubmitButton height="2.5rem" onClick={() => handleApprove()}>
+                                                        APPROVE
+                                                    </SubmitButton>
+                                                )
+                                        }
+                                    </Wrap>
+                                </FunctionBox>
+                            ) : (
+                                <FunctionBox>
+                                    <FlexText>
+                                        <ClickableText
+                                            padding="0"
+                                            fontSize=".9rem"
+                                            color="#aaa"
+                                            onClick={() => {
+                                                document.getElementById('unstake').value = stakedBal
+                                            }}
+                                        >
+                                            MAX
+                                        </ClickableText>
+                                    </FlexText>
+                                    <Input
+                                        name="unstake"
+                                        id="unstake"
+                                        type="number"
+                                        placeholder="0.0"
+                                        min="0"
+                                        onChange={() => stakedBal}
+                                    />
+                                    <Wrap padding="0" margin="0" display="flex" justifyContent="space-between">
+                                        <Text fontSize=".9rem" padding="0" textAlign="left" color="#aaa">
+                                            STAKED:&nbsp;
+                                            {Number(stakedBal) === 0
+                                                ? '0.000'
+                                                : Number(stakedBal) < 0.001
+                                                    ? '<0.001'
+                                                    : Number(stakedBal)
+                                                        .toFixed(3)
+                                                        .toString()
+                                                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                                            }&nbsp;
+                                            <br />
+                                            VALUE:&nbsp;{Number(stakedLpValue) !== 0 ? `$${stakedLpValue.toFixed(3)}` : '0'}
+                                        </Text>
+                                    </Wrap>
+                                    <Wrap padding="0" margin="0" display="flex">
+                                        <SubmitButton
+                                            height="2.5rem"
+                                            primaryColour="#bbb"
+                                            color="black"
+                                            margin=".5rem 0 .5rem 0"
+                                            onClick={() =>
+                                                handleWithdraw()
+                                            }
+                                        >
+                                            CLAIM SOUL {pendingValue !== 0 ? `($${pendingValue})` : ''}
+                                        </SubmitButton>
+                                    </Wrap>
+                                </FunctionBox>
+                            )}
+                        </DetailsWrapper>
+                    </DetailsContainer>
+                </Wrap>
+            )}
+        </>
+    )
 }
 
 export default StakeRowRender
