@@ -99,7 +99,7 @@ const BondItem = ({ bond, ...rest }) => {
     : balance?.lessThan(parsedDepositValue)
     ? 'Insufficient Balance'
     : luxorAvailableAmount.lessThan(luxorFromParsedAmount)
-    ? 'Exceeds Maximum'
+    ? 'Exceeds Max'
     : undefined
   const isDepositValid = !depositError
 
