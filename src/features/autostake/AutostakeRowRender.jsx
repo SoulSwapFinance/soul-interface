@@ -64,7 +64,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     const [pending, setPending] = useState(0)
 
     // show confirmation view before minting SOUL
-    const [apr, setApr] = useState()
+    const [apy, setApy] = useState()
     const [liquidity, setLiquidity] = useState()
     const { deposit, withdraw } = useStakeContract()
 
@@ -72,7 +72,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
      * Runs only on initial render/mount
      */
     useEffect(() => {
-        getAprAndLiquidity()
+        getApyAndLiquidity()
     }, [account])
 
     /**
@@ -83,6 +83,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
             const timer = setTimeout(() => {
                 if (showing) {
                     fetchBals()
+                    fetchEarnedAmount()
                     fetchApproval()
                 }
             }, 3000)
@@ -98,6 +99,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
         setShowing(!showing)
         if (!showing) {
             fetchBals()
+            fetchEarnedAmount()
             fetchApproval()
         }
     }
@@ -108,7 +110,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
      * pool <Object> : the pool object
      * lpToken : the pool lpToken address
      */
-    const getAprAndLiquidity = async () => {
+    const getApyAndLiquidity = async () => {
         try {
             const autoStakeBalance = await AutoStakeContract?.soulBalanceOf()
             const totalSoul = ethers.utils.formatUnits(autoStakeBalance)
@@ -126,14 +128,14 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
             const dailySoul = soulPerDiem * percAlloc
             const annualSoul = dailySoul * 365
             const annualRewardsValue = annualSoul * soulPrice
-            const SECONDS_IN_YEAR = 60 * 60 * 24 * 365
+            // const SECONDS_IN_YEAR = 60 * 60 * 24 * 365
             const apr = (annualRewardsValue / summonerTvl) * 100
             const apy = aprToApy(apr * 6) // assumes reinvestments every 4hrs
 
             setLiquidity(Number(tvl).toFixed(2))
-            setApr(Number(apy).toFixed(2))
-            console.log('tvl:%s', Number(tvl))
-            console.log('apr:%s', Number(apy))
+            setApy(Number(apy).toFixed(2))
+            // console.log('tvl:%s', Number(tvl))
+            // console.log('apy:%s', Number(apy))
         } catch (e) {
             console.warn(e)
         }
@@ -148,16 +150,17 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
         } else {
             try {
                 // get total SOUL staked in contract for pid from user
-                const result1 = await userInfo(pid, account)
-                const staked = ethers.utils.formatUnits(result1?.[0])
-                setStakedBal(Number(staked))
+                const staked = await AutoStakeContract?.balanceOf(account)
+                const stakedBal = staked / 1e18
+                setStakedBal(Number(stakedBal))
+                console.log('staked:%s', Number(stakedBal))
 
                 // get total SOUL for pid from user bal
                 const result2 = await erc20BalanceOf(account)
                 const unstaked = ethers.utils.formatUnits(result2)
                 setUnstakedBal(Number(unstaked))
 
-                return [staked, unstaked]
+                return [stakedBal, unstaked]
             } catch (err) {
                 console.warn(err)
             }
@@ -165,24 +168,19 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     }
 
     /**
-     * Gets the lpToken balance of the user for each pool
+     * Gets the earned amount of the user for each pool
      */
     const fetchEarnedAmount = async () => {
         if (!account) {
             // alert('connect wallet')
         } else {
             try {
-                // get total SOUL staked in contract for pid from user
-                const result1 = await userInfo(pid, account)
-                const staked = ethers.utils.formatUnits(result1?.[0])
-                setStakedBal(Number(staked))
+                // get SOUL earned
+                const result = await AutoStakeContract?.calculateTotalPendingSoulRewards()
+                const earnedAmount = ethers.utils.formatUnits(result?.[1])
+                setEarnedAmount(Number(earnedAmount))
 
-                // get total SOUL for pid from user bal
-                const result2 = await erc20BalanceOf(account)
-                const unstaked = ethers.utils.formatUnits(result2)
-                setUnstakedBal(Number(unstaked))
-
-                return [staked, unstaked]
+                return [earnedAmount]
             } catch (err) {
                 console.warn(err)
             }
@@ -275,13 +273,13 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
 
                             <StakeItemBox>
                                 <StakeItem>
-                                    {Number(apr).toString() === '0.00' ? (
+                                    {Number(apy).toString() === '0.00' ? (
                                         <Text padding="0" fontSize="1rem" color="#666">
                                             0
                                         </Text>
                                     ) : (
                                         <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                            {apr}
+                                            {Number(apy).toFixed()}%
                                         </Text>
                                     )}
                                 </StakeItem>
@@ -423,7 +421,8 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                             }
                                         >
                                           {/* TODO: fix below */}
-                                            CLAIM SOUL {earnedAmount !== 0 ? `($${earnedAmount})` : ''}
+                                            CLAIM SOUL
+                                          {/* {earnings !== 0 ? `($${earnings})` : ''} */}
                                         </SubmitButton>
                                     </Wrap>
                                 </FunctionBox>
