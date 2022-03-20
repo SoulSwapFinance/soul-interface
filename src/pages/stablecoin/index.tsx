@@ -31,7 +31,7 @@ import Dots from '../../components/Dots'
 import { BigNumber } from '@ethersproject/bignumber'
 import { useStakeClaimAmount, useRedeemClaimAmount, useSorContract } from 'features/stablecoin/hooks'
 import { useActiveWeb3React } from 'services/web3/hooks'
-import useStablecoin from 'hooks/useStablecoin'
+// import useStablecoin from 'hooks/useStablecoin'
 
 export default function Stablecoin() {
   const addTransaction = useTransactionAdder()
@@ -42,23 +42,26 @@ export default function Stablecoin() {
 
   const { account, chainId } = useActiveWeb3React()
   const { stake, redeem, claimSor, claimDai } = useSorContract()
-  const { data } = useStablecoin()
+  // const { data } = useStablecoin()
 
   if (chainId && chainId === ChainId.ETHEREUM)
-    //DELETE
+    // DELETE
     window.location.href = '/swap'
 
   const daiToken = new Token(chainId, getAddress(DAI_ADDRESS[chainId]), 18, 'DAI')
   const sorToken = new Token(chainId, getAddress(SOR_ADDRESS[chainId]), 18, 'SOR')
+
   const stakeClaimAmount = useStakeClaimAmount(sorToken)
   const redeemClaimAmount = useRedeemClaimAmount(sorToken)
 
-  const maxStakeAmount = data
-    ? CurrencyAmount.fromRawAmount(daiToken, data?.maxStakeAmount)
-    : CurrencyAmount.fromRawAmount(daiToken, JSBI.BigInt('0'))
-  const maxRedeemAmount = data
-    ? CurrencyAmount.fromRawAmount(sorToken, data?.maxRedeemAmount)
-    : CurrencyAmount.fromRawAmount(sorToken, JSBI.BigInt('0'))
+  // previously data imports //
+  const mintPermille = 10
+  const redeemPermille = 19
+  const pegPrice = 0.9710
+  // const luxorPermille = 200
+  const maxStakeAmount = CurrencyAmount.fromRawAmount(daiToken, 8000000000000000000000)
+  const maxRedeemAmount = CurrencyAmount.fromRawAmount(daiToken, 20000000000000000000000)
+  // //
 
   const daiBalance = useCurrencyBalance(account, daiToken)
   const sorBalance = useCurrencyBalance(account, sorToken)
@@ -258,10 +261,10 @@ export default function Stablecoin() {
                   </div>
                   <div className="flex justify-between">
                     <Typography className="text-white" fontFamily={'medium'}>
-                      {i18n._(t`Mint Fee`)} ({data?.mintPermille / 10}%)
+                      {i18n._(t`Mint Fee`)} ({mintPermille / 10}%)
                     </Typography>
                     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                      {formatNumber((Number(stakeValue) * data?.mintPermille) / 1000, false)} DAI
+                      {formatNumber((Number(stakeValue) * mintPermille) / 1000, false)} DAI
                     </Typography>
                   </div>
                   <div className="flex justify-between">
@@ -269,7 +272,7 @@ export default function Stablecoin() {
                       {i18n._(t`You Receive`)}
                     {/* </Typography> */}
                     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                      {formatNumber(Number(stakeValue) - (Number(stakeValue) * data?.mintPermille) / 1000, false)}{' '}
+                      {formatNumber(Number(stakeValue) - (Number(stakeValue) * mintPermille) / 1000, false)}{' '}
                       SOR
                     </Typography>
                   </div>
@@ -443,7 +446,7 @@ export default function Stablecoin() {
                 </AutoColumn>
                 <CurrencyInputPanel
                   label={i18n._(t`Output`)}
-                  value={redeemValue !== '' ? (Number(redeemValue) * data?.pegPrice).toString() : ''}
+                  value={redeemValue !== '' ? (Number(redeemValue) * pegPrice).toString() : ''}
                   showMaxButton={false}
                   currency={daiToken}
                   disableCurrencySelect={true}
@@ -465,15 +468,15 @@ export default function Stablecoin() {
                       {i18n._(t`Rate`)}
                     </Typography>
                     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                      1 SOR = {formatNumber(data?.pegPrice)} DAI
+                      1 SOR = {formatNumber(pegPrice)} DAI
                     </Typography>
                   </div>
                   <div className="flex justify-between">
                     <Typography className="text-black-60 dark:text-black-70" fontFamily={'medium'}>
-                      {i18n._(t`Redemption Fee`)} ({data?.redeemPermille / 10}%)
+                      {i18n._(t`Redemption Fee`)} ({redeemPermille / 10}%)
                     </Typography>
                     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                      {formatNumber((Number(redeemValue) * data?.redeemPermille) / 1000, false)} DAI
+                      {formatNumber((Number(redeemValue) * redeemPermille) / 1000, false)} DAI
                     </Typography>
                   </div>
                   <div className="flex justify-between">
@@ -482,7 +485,7 @@ export default function Stablecoin() {
                     </Typography>
                     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                       {formatNumber(
-                        Number(redeemValue) * data?.pegPrice - (Number(redeemValue) * data?.redeemPermille) / 1000,
+                        Number(redeemValue) * pegPrice - (Number(redeemValue) * redeemPermille) / 1000,
                         false
                       )}{' '}
                       DAI
@@ -495,8 +498,8 @@ export default function Stablecoin() {
                     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                       {Number(redeemClaimAmount.toExact()) !== 0
                         ? formatNumber(
-                            Number(redeemClaimAmount.toExact()) * data?.pegPrice -
-                              (Number(redeemClaimAmount.toExact()) * data?.redeemPermille) / 1000,
+                            Number(redeemClaimAmount.toExact()) * pegPrice -
+                              (Number(redeemClaimAmount.toExact()) * redeemPermille) / 1000,
                             false
                           ) + ' DAI'
                         : '0.00 DAI'}
@@ -568,8 +571,8 @@ export default function Stablecoin() {
                     {i18n._(t`Claim`)}{' '}
                     {Number(redeemClaimAmount.toExact()) !== 0
                       ? formatNumber(
-                          Number(redeemClaimAmount.toExact()) * data?.pegPrice -
-                            (Number(redeemClaimAmount.toExact()) * data?.redeemPermille) / 1000,
+                          Number(redeemClaimAmount.toExact()) * pegPrice -
+                            (Number(redeemClaimAmount.toExact()) * redeemPermille) / 1000,
                           false
                         )
                       : ''}
