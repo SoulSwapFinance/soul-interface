@@ -10,38 +10,38 @@ import { useCurrency } from 'hooks/Tokens'
 import React, { FC, ReactNode } from 'react'
 
 // HOOKS //
-import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
+// import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 import { useSingleCallResult } from 'state/multicall/hooks'
 import { usePendingSoul } from 'features/mines/hooks'
 
 // FETCH PENDING REWARDS //
 
-import { useSoulPositions } from './hooks'
+// import { useSoulPositions } from './hooks'
 import usePriceApi from 'hooks/usePriceApi'
 import { useHarvestHelperContract } from 'hooks/useContract'
-import useTokenAnalytics from 'features/analytics/hooks/useTokensAnalytics'
-import { PairType } from './enum'
+// import useTokenAnalytics from 'features/analytics/hooks/useTokensAnalytics'
+// import { PairType } from './enum'
 // import { usePairBalance, usePairVolume } from 'hooks/usePairData'
-import { SOUL, SOUL_ADDRESS } from '../../constants'
+import { SOUL } from '../../constants'
 
 import styled from 'styled-components'
-import usePendingReward from './hooks/usePendingReward'
+// import usePendingReward from './hooks/usePendingReward'
 import { useActiveWeb3React } from 'services/web3/hooks'
 import { useBinancePrice, useFantomPrice, useSoulPrice, useTokenPrice, useWrappedBtcPrice, useWrappedEthPrice } from 'hooks/getPrices'
-import { useOneDayBlock, usePairDayData, useSoulPairs, useTwoDayBlock } from 'services/graph'
-import { getAddress } from '@ethersproject/address'
-import { SOUL_SUMMONER_ADDRESS } from 'sdk'
-import { usePositions } from 'hooks/usePositions'
-import liquidity from 'pages/portfolio/[account]/liquidity'
-import Pair from 'pages/analytics/pairs/[id]'
-import { useRouter } from 'next/router'
-import { usePairBalance, usePairPrice } from 'hooks/usePairData'
+// import { useOneDayBlock, usePairDayData, useSoulPairs, useTwoDayBlock } from 'services/graph'
+// import { getAddress } from '@ethersproject/address'
+// import { SOUL_SUMMONER_ADDRESS } from 'sdk'
+// import { usePositions } from 'hooks/usePositions'
+// import liquidity from 'pages/portfolio/[account]/liquidity'
+// import Pair from 'pages/analytics/pairs/[id]'
+// import { useRouter } from 'next/router'
+import { usePairPrice } from 'hooks/usePairData'
 
-const HideOnMobile = styled.div`
-@media screen and (max-width: 500px) {
-  display: none;
-}
-`;
+// const HideOnMobile = styled.div`
+// @media screen and (max-width: 500px) {
+//   display: none;
+// }
+// `;
 
 interface MineListItem {
   farm: any
@@ -58,11 +58,11 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   const harvestHelperContract = useHarvestHelperContract()
   const soulPrice = useSoulPrice() // to avoid RPC call
   const tokenPrice 
-    = farm.pair?.token0?.symbol == "SOUL" ? useSoulPrice()
-    : farm.pair?.token0?.symbol == "WBTC" ? useWrappedBtcPrice()
-    : farm.pair?.token0?.symbol == "FTM" ? useFantomPrice()
-    : farm.pair?.token0?.symbol == "BNB" ? useBinancePrice()
-    : farm.pair?.token0?.symbol == "DAI" ? 1
+    = farm.pair?.token0.symbol == "SOUL" ? useSoulPrice()
+    : farm.pair?.token0.symbol == "WBTC" ? useWrappedBtcPrice()
+    : farm.pair?.token0.symbol == "FTM" ? useFantomPrice()
+    : farm.pair?.token0.symbol == "BNB" ? useBinancePrice()
+    : farm.pair?.token0.symbol == "DAI" ? 1
     : usePriceApi(farm?.pair?.token0?.id)
 
   const pairPrice
@@ -167,12 +167,12 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
               farm?.pair?.token0?.symbol
             }
           </Typography>
-          {farm?.rewards?.map((reward, i) => (
+          {/* {farm?.rewards?.map((reward, i) => ( */}
             <Typography variant="xs" className="text-blue text-bold text-high-emphesis">
               {/* Claimable: {' '} */}
               {formatNumber(rewardValue, true)}
             </Typography>
-          ))}
+          {/* ))} */}
 
           { /* DAILY REWARDS (SUBTITLE) */}
           {/*
@@ -234,7 +234,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
               }
             </div>
           ))}
-          {!!farm?.feeApyPerYear && (
+          {/* {!!farm?.feeApyPerYear && (
           <QuestionHelper
             text={
               <div className="flex flex-col">
@@ -263,7 +263,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
               </div>
             }
           />
-          )}
+          )} */}
         </Typography>
         <Typography variant="xs" className="text-low-emphesis">
           {i18n._(t`annualized`)}

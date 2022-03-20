@@ -45,7 +45,8 @@ const SumUSDCValues: FC<SumUSDCValuesProps> = ({ amounts, children }) => {
       {amounts?.map((el, index) => (
         <USDCValue amount={el} key={index} update={update} />
       ))}
-      {children({ amount })}
+      { amounts }
+      {/* {children({ amount })} */}
     </>
   )
 }
