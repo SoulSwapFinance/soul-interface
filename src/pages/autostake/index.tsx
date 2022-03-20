@@ -1,5 +1,4 @@
 import { Wrap } from '../../components/ReusableStyles'
-import BondsBanner from '../../components/BondsBanner'
 import Container from '../../components/Container'
 import Head from 'next/head'
 import React from 'react'
@@ -11,7 +10,6 @@ const Autostake = () => {
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">
       <Container id="farm-page">
-        <BondsBanner/>
         <br/>
         <Head>
           <title>Autostake | Soul</title>

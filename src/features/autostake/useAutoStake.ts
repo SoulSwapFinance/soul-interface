@@ -84,7 +84,7 @@ function useAutoStake(pid, stakeToken) {
    * [4] : soulPerYear
    * [5] : tvl (token balance)
    */
-  const fetchBondStats = async (pid, token1Name, token2Name) => {
+  const fetchStakeStats = async (pid, token1Name, token2Name) => {
     try {
       const result = await helperContract?.fetchPidDetails(pid)
 
@@ -95,30 +95,8 @@ function useAutoStake(pid, stakeToken) {
       const summonerPidPercOfSupply = result?.[0] / result?.[1] // i.e. 1/10 = 0.1
       const rawPidValue = (summonerPidPercOfSupply * result?.[5]) / 10 ** 18 // i.e. 0.1 * 100,000 = 10,000
 
-      let pidTvl = rawPidValue
-
-      if (
-        token1Name === 'USDC' ||
-        token2Name === 'USDC' ||
-        token1Name === 'fUSDT' ||
-        token2Name === 'fUSDT' ||
-        token1Name === 'gFUSDT' ||
-        token2Name === 'gFUSDT'
-      ) {
-        if (token1Name !== 'DAI') {
-          pidTvl = (summonerPidPercOfSupply * result?.[5]) / 10 ** 6
-        } else {}
-      } else if (token1Name === 'FUSD' || token2Name === 'FUSD' || token1Name === 'DAI' || token2Name === 'DAI') {
-      } else if (token1Name === 'FTM' || token2Name === 'FTM') {
-        pidTvl = rawPidValue * ftmPrice
-      } else if (token1Name === 'SOUL' || token2Name === 'SOUL') {
-        pidTvl = rawPidValue * soulPrice
-      } else if (token1Name === 'SEANCE' || token2Name === 'SEANCE') {
-        pidTvl = rawPidValue * seancePrice
-      } else if (token1Name === 'WETH' || token2Name === 'WETH') {
-        pidTvl = rawPidValue * ethPrice
-      }
-
+      const pidTvl = rawPidValue * soulPrice
+     
       // ------ APR ------
 
       // weight * soulPerYear
@@ -192,18 +170,17 @@ const withdraw =
   // ---------------------- -
 
   // pool info:
-  // [0] lpToken,
+  // [0] callFee,
   // [1] allocPoint,
-  // [2] lastRewardTime,
-  // [3] accSoulPerShare
-  const poolInfo = async (pid) => {
+  // [2] withdrawFee,
+  // [3] soulBalance,
+  const poolInfo = async () => {
     try {
-      const result = await bondContract?.poolInfo(pid)
-      const lpTokenUsed = result?.[0].toString()
-      const allocPoint = BigNumber.from(result?.[1])
-      const lastRewardTime = BigNumber.from(result?.[2])
-      const accSoulPerShare = BigNumber.from(result?.[3])
-      return [lpTokenUsed, allocPoint, lastRewardTime, accSoulPerShare]
+      const callFee = await stakeContract?.callFee()
+      const allocPoint = await BigNumber.from(bondContract?.poolInfo?.[1])
+      const withdrawFee = await stakeContract?.withdrawFee()
+      const soulBalance = await stakeContract?.soulBalanceOf()
+      return [callFee, allocPoint, withdrawFee, soulBalance]
     } catch (e) {
       console.log(e)
       return e
@@ -376,7 +353,7 @@ const withdraw =
   const fetchPid0AprAndLiquidity = async (lpToken) => {
     try {
       // pool weight
-      const alloc = await poolInfo(0)
+      const alloc = await poolInfo()
       const totalAlloc = await totalAllocPoint()
       const poolWeight = alloc?.[1].div(totalAlloc)
 
@@ -388,7 +365,7 @@ const withdraw =
       // amount of soul allocated to this pool per year
       const yearlySoulBondAlloc = formattedSps.mul(secPerYear).mul(poolWeight)
 
-      // value of lp tokens held by summoner
+      // value of soul held by summoner
       const fetchedLiquidity = await fetchPid0LiquidityValue(lpToken)
 
       // farm apr
@@ -404,13 +381,13 @@ const withdraw =
 
   return {
     fetchUserLpTokenAllocInBond,
-    fetchBondStats,
+    fetchStakeStats,
     deposit,
     withdraw,
     pendingSoul,
     userInfo,
     
-    // //
+    // // // 
     fetchStakedValue,
     
     fetchPid0LiquidityValue,

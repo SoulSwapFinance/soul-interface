@@ -6,9 +6,10 @@ import { getAddress } from '@ethersproject/address'
 import { useSoulPrice } from 'hooks/getPrices'
 import { useActiveWeb3React } from 'services/web3'
 import { Token } from 'sdk'
-import { AUTO_STAKE_ADDRESS } from 'sdk'
+import { AUTO_STAKE_ADDRESS, SOUL_SUMMONER_ADDRESS } from 'sdk'
 import useAutoStake from './useAutoStake'
-import { useAutoStakeContract } from 'hooks/useContract'
+import { aprToApy } from 'functions/convert'
+import { useAutoStakeContract, useSoulSummonerContract } from 'hooks/useContract'
 import { useStakeContract, useStakeSharePrice, useStakeRecentProfit, sharesFromSoul } from './hooks'
 import useApprove from 'features/bond/hooks/useApprove'
 import {
@@ -27,14 +28,6 @@ import {
 } from './StakeStyles'
 import { Wrap, ClickableText, Text, ExternalLink } from '../../components/ReusableStyles'
 
-
-// params to render bond with:
-// 1. LpToken + the 2 token addresses (fetch icon from folder in)
-// 2. totalAlloc / poolAlloc
-// 3. userInfo:
-//    - amount (in pool)
-//    - rewardDebt (owed)
-
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
   padding-left: 10;
@@ -50,19 +43,23 @@ const TokenLogo = styled(Image)`
 const StakeRowRender = ({ pid, stakeToken, pool }) => {
     const { account, chainId } = useActiveWeb3React()
     const {
-        fetchBondStats,
+        poolInfo,
+        fetchStakeStats,
         userInfo,
     } = useAutoStake(pid, stakeToken, pool)
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(stakeToken)
     const soulPrice = useSoulPrice()
     const [showing, setShowing] = useState(false)
-    // const AutoStakeContract = useAutoStakeContract()
+    const AutoStakeContract = useAutoStakeContract()
+    const SoulSummonerContract = useSoulSummonerContract()
+    const SoulSummonerAddress = SOUL_SUMMONER_ADDRESS[chainId]
     const AutoStakeAddress =  AUTO_STAKE_ADDRESS[chainId]
     const [approved, setApproved] = useState(false)
     //   const [confirmed, setConfirmed] = useState(false)
     //   const [receiving, setReceiving] = useState(0)
 
     const [stakedBal, setStakedBal] = useState(0)
+    const [earnedAmount, setEarnedAmount] = useState(0)
     const [unstakedBal, setUnstakedBal] = useState(0)
     const [pending, setPending] = useState(0)
 
@@ -113,12 +110,30 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
      */
     const getAprAndLiquidity = async () => {
         try {
-            const result = await fetchBondStats(pid, pool.token1, pool.token2)
-            const tvl = result[0]
-            const apr = result[1]
+            const autoStakeBalance = await AutoStakeContract?.soulBalanceOf()
+            const totalSoul = ethers.utils.formatUnits(autoStakeBalance)
+            const tvl = soulPrice * totalSoul
+            
+            // APR CALCULATION //
+            const rawSummonerBal = await erc20BalanceOf(SoulSummonerAddress)
+            const summonerTvl = soulPrice * rawSummonerBal / 1e18
+            const soulPerSec = await SoulSummonerContract?.soulPerSecond()
+            const soulPerDiem = soulPerSec / 1e18 * 86_400
+            const poolInfo = await SoulSummonerContract?.poolInfo(0)
+            const alloc = poolInfo?.[1]
+            const totalAlloc = await SoulSummonerContract?.totalAllocPoint()
+            const percAlloc = alloc / totalAlloc
+            const dailySoul = soulPerDiem * percAlloc
+            const annualSoul = dailySoul * 365
+            const annualRewardsValue = annualSoul * soulPrice
+            const SECONDS_IN_YEAR = 60 * 60 * 24 * 365
+            const apr = (annualRewardsValue / summonerTvl) * 100
+            const apy = aprToApy(apr * 6) // assumes reinvestments every 4hrs
 
-            setLiquidity(tvl)
-            setApr(apr)
+            setLiquidity(Number(tvl).toFixed(2))
+            setApr(Number(apy).toFixed(2))
+            console.log('tvl:%s', Number(tvl))
+            console.log('apr:%s', Number(apy))
         } catch (e) {
             console.warn(e)
         }
@@ -128,6 +143,31 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
      * Gets the lpToken balance of the user for each pool
      */
     const fetchBals = async () => {
+        if (!account) {
+            // alert('connect wallet')
+        } else {
+            try {
+                // get total SOUL staked in contract for pid from user
+                const result1 = await userInfo(pid, account)
+                const staked = ethers.utils.formatUnits(result1?.[0])
+                setStakedBal(Number(staked))
+
+                // get total SOUL for pid from user bal
+                const result2 = await erc20BalanceOf(account)
+                const unstaked = ethers.utils.formatUnits(result2)
+                setUnstakedBal(Number(unstaked))
+
+                return [staked, unstaked]
+            } catch (err) {
+                console.warn(err)
+            }
+        }
+    }
+
+    /**
+     * Gets the lpToken balance of the user for each pool
+     */
+    const fetchEarnedAmount = async () => {
         if (!account) {
             // alert('connect wallet')
         } else {
@@ -369,7 +409,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                                         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                                             }&nbsp;
                                             <br />
-                                            VALUE:&nbsp;{Number(stakedLpValue) !== 0 ? `$${stakedLpValue.toFixed(3)}` : '0'}
+                                            VALUE:&nbsp;{Number(stakedBal * soulPrice) !== 0 ? `$${Number(stakedBal * soulPrice).toFixed(3)}` : '0'}
                                         </Text>
                                     </Wrap>
                                     <Wrap padding="0" margin="0" display="flex">
@@ -382,7 +422,8 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                                 handleWithdraw()
                                             }
                                         >
-                                            CLAIM SOUL {pendingValue !== 0 ? `($${pendingValue})` : ''}
+                                          {/* TODO: fix below */}
+                                            CLAIM SOUL {earnedAmount !== 0 ? `($${earnedAmount})` : ''}
                                         </SubmitButton>
                                     </Wrap>
                                 </FunctionBox>

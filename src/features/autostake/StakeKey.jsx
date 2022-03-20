@@ -32,7 +32,7 @@ export default function StakeKey() {
 
               <StakeItemBox>
                 <Text padding="0" fontSize=".8" color="#bbb">
-                % APR
+                % APY
                 </Text>
               </StakeItemBox>
 
