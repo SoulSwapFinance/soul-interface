@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
 import { ethers } from 'ethers'
-import { useSoulPrice } from 'hooks/getPrices'
+import { getLuxorPrice, useSoulPrice } from 'hooks/getPrices'
 import { useActiveWeb3React } from 'services/web3'
 import QuestionHelper from '../../components/QuestionHelper'
 import { AUTO_STAKE_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL, LUX_HELPER_ADDRESS } from 'sdk'
-import { aprToApy } from 'functions/convert'
 import AssetInput from 'components/AssetInput'
-import { useAutoStakeContract, useSoulSummonerContract } from 'hooks/useContract'
+import { useAutoStakeContract, useLuxorBondContract, useSoulSummonerContract } from 'hooks/useContract'
 import { useBondContract, useStakeSharePrice, useStakeRecentProfit, sharesFromSoul } from './useBonds'
 import useApprove from 'features/bond/hooks/useApprove'
 import {
@@ -52,17 +51,18 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
     const soulPrice = useSoulPrice()
     const [showing, setShowing] = useState(false)
     const AutoStakeContract = useAutoStakeContract()
+    const BondContract = useLuxorBondContract()
     const SoulSummonerContract = useSoulSummonerContract()
     const SoulSummonerAddress = SOUL_SUMMONER_ADDRESS[chainId]
     const AutoStakeAddress = AUTO_STAKE_ADDRESS[chainId]
     const HelperContractAddress = LUX_HELPER_ADDRESS[chainId]
     const [approved, setApproved] = useState(false)
-    const [withdrawValue, setWithdrawValue] = useState('')
+    // const [withdrawValue, setWithdrawValue] = useState('')
     const [depositValue, setDepositValue] = useState('')
     //   const [confirmed, setConfirmed] = useState(false)
     //   const [receiving, setReceiving] = useState(0)
     const parsedDepositValue = tryParseAmount(depositValue, SOUL[250])
-    const parsedWithdrawValue = tryParseAmount(withdrawValue, SOUL[250])
+    // const parsedWithdrawValue = tryParseAmount(withdrawValue, SOUL[250])
 
     const [stakedBal, setStakedBal] = useState(0)
     const [earnedAmount, setEarnedAmount] = useState(0)
@@ -74,7 +74,7 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
     const harvestFee = performanceFee + callFee
 
     // show confirmation view before minting SOUL
-    const [apy, setApy] = useState(0)
+    const [discount, setDiscount] = useState(0)
     const [liquidity, setLiquidity] = useState(0)
     const { deposit, withdraw } = useBondContract()
     // const balance = useCurrencyBalance(account, SOUL[250])
@@ -84,7 +84,7 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
      * Runs only on initial render/mount
      */
     useEffect(() => {
-        getApyAndLiquidity()
+        fetchDiscount()
         fetchBals()
     }, [account])
 
@@ -96,7 +96,7 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
             const timer = setTimeout(() => {
                 if (showing) {
                     fetchBals()
-                    getApyAndLiquidity()
+                    fetchDiscount()
                     fetchEarnings()
                     fetchApproval()
                     fetchPerformanceFee()
@@ -128,32 +128,15 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
      * pool <Object> : the pool object
      * lpToken : the pool lpToken address
      */
-    const getApyAndLiquidity = async () => {
+    const fetchDiscount = async () => {
         try {
-            const autoStakeBalance = await AutoStakeContract?.soulBalanceOf()
-            const totalSoul = ethers.utils.formatUnits(autoStakeBalance)
-            const tvl = (Number(soulPrice) * Number(totalSoul)).toFixed(0)
-
-            // APR CALCULATION //
-            const rawSummonerBal = await erc20BalanceOf(SoulSummonerAddress)
-            const summonerTvl = soulPrice * rawSummonerBal / 1e18
-            const soulPerSec = await SoulSummonerContract?.soulPerSecond()
-            const soulPerDiem = soulPerSec / 1e18 * 86_400
-            const poolInfo = await SoulSummonerContract?.poolInfo(0)
-            const alloc = poolInfo?.[1]
-            const totalAlloc = await SoulSummonerContract?.totalAllocPoint()
-            const percAlloc = alloc / totalAlloc
-            const dailySoul = soulPerDiem * percAlloc
-            const annualSoul = dailySoul * 365
-            const annualRewardsValue = annualSoul * soulPrice
-            // const SECONDS_IN_YEAR = 60 * 60 * 24 * 365
-            const apr = (annualRewardsValue / summonerTvl) * 100
-            const apy = aprToApy(apr * 6) // assumes reinvestments every 4hrs
-
-            setLiquidity(Number(tvl))
-            setApy(Number(apy))
-            // console.log('tvl:%s', Number(tvl))
-            // console.log('apy:%s', Number(apy))
+            const luxPrice = getLuxorPrice()
+            const bondPrice = await BondContract?.bondPrice()
+            console.log('luxPrice:%s', luxPrice)
+            console.log('bondPrice:%s', bondPrice)
+            const discountedPrice = Number(luxPrice) - Number(bondPrice)
+            console.log('discountedPrice:%s', discountedPrice)
+            setDiscount(Number(discountedPrice))
         } catch (e) {
             console.warn(e)
         }
@@ -338,7 +321,7 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
                     <Row onClick={() => handleShow()}>
                         <StakeContentWrapper>
                             <TokenPairBox>
-                                { bond.token2 && <Wrap className="flex-cols-2">
+                                { bond.token2Address && <Wrap className="flex-cols-2">
                                     <TokenLogo
                                         src={
                                             'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
@@ -364,7 +347,7 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
                                         className="rounded-full items-center justify-center text-center"
                                     />
                                 </Wrap>}
-                                { !bond.token2 && <Wrap>
+                                { !bond.token2Address && <Wrap>
                                     <TokenLogo
                                         src={
                                             'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
@@ -382,13 +365,13 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
 
                             <StakeItemBox>
                                 <StakeItem>
-                                    {Number(apy).toString() === '0.00' ? (
+                                    {Number(discount).toString() === '0.00' ? (
                                         <Text padding="0" fontSize="1rem" color="#666">
                                             0
                                         </Text>
                                     ) : (
                                         <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                            {Number(apy).toFixed()}%
+                                            {Number(discount).toFixed()}%
                                         </Text>
                                     )}
                                 </StakeItem>
