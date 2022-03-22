@@ -166,6 +166,11 @@ export const WLUM: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208', 9, 'WLUM', 'Wrapped Lumens'),
 }
 
+// SOR
+export const SOR: ChainTokenMap = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A', 9, 'SOR', 'SOR'),
+}
+
 // WETH
 export const WETH: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x74b23882a30290451A17c44f4F05243b6b58C76d', 18, 'WETH', 'Wrapped ETH'),

@@ -68,12 +68,12 @@ function AppBar(): JSX.Element {
                       {chainId && [ChainId.FANTOM].includes(chainId) && (
                         <NavLink
                         activeClassName="text-dark-600 text-high-emphesis"
-                        href="/stablecoin">
+                        href="/sor">
                           <a
                             id={`stable-nav-link`}
                             className="w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
                           >
-                            {i18n._(t`STABLE`)}
+                            {i18n._(t`SOR`)}
                           </a>
                         </NavLink>
                       )}
