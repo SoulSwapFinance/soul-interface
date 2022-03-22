@@ -1,5 +1,6 @@
 import styled from "styled-components";
-
+import { Button } from 'components/Button'
+import QuestionHelper from 'components/QuestionHelper'
 import {
   Wrap,
   StakeContainer,
@@ -48,7 +49,11 @@ export default function StakeKey() {
                 </Text>
               {/* </HideOnMobile> */}
             </StakeContentWrapper>
+            
           </Row>
+          {/* <Button variant={'link'} color={'purple'} className="absolute top-[5%] right-[10%]"> */}
+ 
+              {/* </Button> */}
         </StakeContainer>
       </Wrap>
     </>

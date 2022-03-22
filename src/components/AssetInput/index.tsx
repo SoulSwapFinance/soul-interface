@@ -47,6 +47,7 @@ interface AssetInputProps {
   currencyLogo?: boolean
   size?: 'sm' | 'md'
   balance?: CurrencyAmount<Currency>
+  showBalance?: boolean
   showMax?: boolean
 }
 
@@ -64,6 +65,7 @@ const AssetInput: AssetInput<AssetInputProps> = ({
   spendFromWallet = true,
   currencyLogo = true,
   className,
+  showBalance = true,
   size = 'md',
   balance: balanceProp,
   showMax = true,
@@ -133,6 +135,7 @@ const AssetInput: AssetInput<AssetInputProps> = ({
             {!isDesktop && props.headerRight && props.headerRight}
           </div>
         )}
+
         <div className="flex flex-col gap-4 lg:flex-row lg:gap-0">
           <AssetInputPanel
             {...props}
@@ -146,8 +149,9 @@ const AssetInput: AssetInput<AssetInputProps> = ({
                 ? !parsedInput?.equalTo(maxSpendAsFraction)
                 : false
             }
-            footer={
-              <AssetInputPanel.Balance
+            footer=
+            { showBalance &&
+               <AssetInputPanel.Balance
                 balance={balance}
                 onHalfClick={() => props.onChange(halfSpend)}
                 onMaxClick={() => props.onChange(maxSpend)}
