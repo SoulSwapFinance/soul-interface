@@ -6,7 +6,7 @@ const Landing = () => {
       <iframe 
 			frameBorder={"none"}
     		title={"LANDING"}
-    		src="https://app.luxor.money"
+    		src="https://soulswap.finance"
     		height={"900px"}
     		width={"100%"}
     />
