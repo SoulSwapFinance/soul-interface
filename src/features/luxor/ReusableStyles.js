@@ -133,9 +133,9 @@ export const RemoveBtn = styled.button`
 
   &:hover {
     cursor: pointer;
-    background-color: ${({ hoverBg }) => (hoverBg ? `${hoverBg}` : "#ea3030")};
+    background-color: ${({ hoverBg }) => (hoverBg ? `${hoverBg}` : "#B485FF")};
     box-shadow: ${({ hoverBoxShadow }) =>
-      hoverBoxShadow ? `${hoverBoxShadow}` : `0 0 10px 0 #ea3030`};
+      hoverBoxShadow ? `${hoverBoxShadow}` : `0 0 10px 0 #B485FF`};
   }
 `;
 

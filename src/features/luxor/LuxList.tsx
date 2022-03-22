@@ -11,6 +11,8 @@ const LuxList = () => {
     <LuxorRowRender
       key={bond.pid}
       pid={bond.pid}
+      assetAddress={bond.assetAddress}
+      assetName={bond.assetName}
       stakeToken={bond.assetAddress}
       bondAddress={bond.bondAddress}
       term={bond.term}
