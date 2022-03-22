@@ -79,7 +79,7 @@ function AppBar(): JSX.Element {
                       activeClassName="text-dark-600 text-high-emphesis"
                       href="/sor">
                         <a
-                          id={`stable-nav-link`}
+                          id={`sor-nav-link`}
                           className="w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
                         >
                           {i18n._(t`SOR`)}
@@ -89,10 +89,10 @@ function AppBar(): JSX.Element {
                       activeClassName="text-dark-600 text-high-emphesis"
                       href="/autostake">
                         <a
-                          id={`stable-nav-link`}
+                          id={`vault-nav-link`}
                           className="w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
                         >
-                          {i18n._(t`STAKE`)}
+                          {i18n._(t`VAULT`)}
                         </a>
                       </NavLink>
                       {/* {chainId && [ChainId.FANTOM].includes(chainId) && (
