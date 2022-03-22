@@ -5,8 +5,7 @@ import { ethers } from 'ethers'
 import { useSoulPrice } from 'hooks/getPrices'
 import { useActiveWeb3React } from 'services/web3'
 import QuestionHelper from '../../components/QuestionHelper'
-import { REDEEM_ADDRESS, SOUL } from 'sdk'
-import { AUTO_STAKE_ADDRESS, SOUL_SUMMONER_ADDRESS } from 'sdk'
+import { AUTO_STAKE_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL, LUX_HELPER_ADDRESS } from 'sdk'
 import { aprToApy } from 'functions/convert'
 import AssetInput from 'components/AssetInput'
 import { useAutoStakeContract, useSoulSummonerContract } from 'hooks/useContract'
@@ -56,7 +55,7 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
     const SoulSummonerContract = useSoulSummonerContract()
     const SoulSummonerAddress = SOUL_SUMMONER_ADDRESS[chainId]
     const AutoStakeAddress = AUTO_STAKE_ADDRESS[chainId]
-    const RedeemContractAddress = REDEEM_ADDRESS[chainId]
+    const HelperContractAddress = LUX_HELPER_ADDRESS[chainId]
     const [approved, setApproved] = useState(false)
     const [withdrawValue, setWithdrawValue] = useState('')
     const [depositValue, setDepositValue] = useState('')

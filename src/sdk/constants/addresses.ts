@@ -94,7 +94,7 @@ export const AUTO_STAKE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.FANTOM_TESTNET]: ''
 }
 
-export const REDEEM_ADDRESS: { [chainId in ChainId]: string } = {
+export const LUX_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xc7c9A5789759C61c1469b81990e1380C8fB84e5D',
