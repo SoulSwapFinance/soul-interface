@@ -13,13 +13,15 @@ export const AllBonds = [
     bondAddress: '0xCf994423b39A6991e82443a8011Bf6749e19434b',
     assetAddress: DAI,
     token1Address: DAI,
+    term: '5D',
   },
   {
     pid: 1,
     id: 1,
-    bondAddress: ' 0x80C61168e1F02e1835b541e9Ca6Bb3416a36Af6F',
+    bondAddress: '0x80C61168e1F02e1835b541e9Ca6Bb3416a36Af6F',
     assetAddress: DAI,
     token1Address: DAI,
+    term: '1W',
   },
   {
     pid: 2,
@@ -27,6 +29,7 @@ export const AllBonds = [
     bondAddress: '0x73eE5Fcd1336246C74f6448B1d528aeacF5404f2',
     assetAddress: DAI,
     token1Address: DAI,
+    term: '2W',
   },
   {
     pid: 3,
@@ -34,6 +37,7 @@ export const AllBonds = [
     bondAddress: '0x1a7bA76b2A421E0E730809C40bE4a685dE29307c',
     assetAddress: DAI,
     token1Address: DAI,
+    term: '4W',
   },
   {
     pid: 4,
@@ -41,6 +45,7 @@ export const AllBonds = [
     bondAddress: '0x13729e99A7b77469f7FD204495a7b49e25e8444a',
     assetAddress: FTM,
     token1Address: FTM,
+    term: '5D',
   },
   {
     pid: 5,
@@ -48,6 +53,7 @@ export const AllBonds = [
     bondAddress: '0x376969e00621Ebf685fC3D1F216C00d19B162923',
     assetAddress: FTM,
     token1Address: FTM,
+    term: '1W',
   },
   {
     pid: 6,
@@ -55,6 +61,7 @@ export const AllBonds = [
     bondAddress: '0xc421072646C51FF8983714F28e4253ad8B44bb1E',
     assetAddress: FTM,
     token1Address: FTM,
+    term: '2W',
   },
   {
     pid: 7,
@@ -62,6 +69,7 @@ export const AllBonds = [
     bondAddress: '0x89EA4331183730F289DEAfc926cF0541364F169D',
     assetAddress: FTM,
     token1Address: FTM,
+    term: '4W',
   },
   {
     pid: 8,
@@ -70,6 +78,7 @@ export const AllBonds = [
     assetAddress: LUX_DAI,
     token1Address: LUX,
     token2Address: DAI,
+    term: '5D',
   },
   {
     pid: 9,
@@ -78,6 +87,7 @@ export const AllBonds = [
     assetAddress: LUX_DAI,
     token1Address: LUX,
     token2Address: DAI,
+    term: '1W',
   },
   {
     pid: 10,
@@ -86,6 +96,7 @@ export const AllBonds = [
     assetAddress: LUX_DAI,
     token1Address: LUX,
     token2Address: DAI,
+    term: '2W',
   },
   {
     pid: 11,
@@ -94,6 +105,7 @@ export const AllBonds = [
     assetAddress: LUX_DAI,
     token1Address: LUX,
     token2Address: DAI,
+    term: '4W',
   },
   {
     pid: 12,
@@ -102,6 +114,7 @@ export const AllBonds = [
     assetAddress: LUX_FTM,
     token1Address: LUX,
     token2Address: FTM,
+    term: '5D',
   },
   {
     pid: 13,
@@ -110,6 +123,7 @@ export const AllBonds = [
     assetAddress: LUX_FTM,
     token1Address: LUX,
     token2Address: FTM,
+    term: '1W',
   },
   {
     pid: 14,
@@ -118,6 +132,7 @@ export const AllBonds = [
     assetAddress: LUX_FTM,
     token1Address: LUX,
     token2Address: FTM,
+    term: '2W',
   },
   {
     pid: 15,
@@ -126,5 +141,6 @@ export const AllBonds = [
     assetAddress: LUX_FTM,
     token1Address: LUX,
     token2Address: FTM,
+    term: '4W',
   },
 ]

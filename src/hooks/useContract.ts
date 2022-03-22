@@ -378,7 +378,7 @@ export function useAutoStakeContract(withSignerIfPossible?: boolean): Contract |
   return useContract(chainId && AUTO_STAKE_ADDRESS[chainId], AUTO_STAKE_ABI, withSignerIfPossible)
 }
 
-export function useLuxHelperContract(withSignerIfPossible?: boolean): Contract | null {
+export function useLuxorBondContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && LUX_HELPER_ADDRESS[chainId], LUX_HELPER_ABI, withSignerIfPossible)
 }
@@ -565,9 +565,4 @@ export function useAtomicSwapContract(withSignerIfPossible?: boolean): Contract 
 // SoulSwap 
 export function useSpookySwapFactoryContract(withSignerIfPossible?: boolean): Contract | null {
 return useContract('0x152eE697f2E276fA89E96742e9bB9aB1F2E61bE3', SPOOKY_FACTORY_ABI, withSignerIfPossible)
-}
-
-export function useLuxorBondContract(withSignerIfPossible = true): Contract | null {
-  // const { chainId } = useActiveWeb3React()
-  return useContract('0x152eE697f2E276fA89E96742e9bB9aB1F2E61bE3', LUXOR_BOND_CONTRACT_ABI, withSignerIfPossible)
 }

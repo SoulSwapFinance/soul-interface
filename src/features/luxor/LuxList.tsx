@@ -12,6 +12,8 @@ const LuxList = () => {
       key={bond.pid}
       pid={bond.pid}
       stakeToken={bond.assetAddress}
+      bondAddress={bond.bondAddress}
+      term={bond.term}
       bond={bond}
     />
   ))

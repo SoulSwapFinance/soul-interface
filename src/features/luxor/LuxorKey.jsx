@@ -39,7 +39,7 @@ export default function LuxorKey() {
               </StakeItemBox>
 
                 <Text padding="0" fontSize=".8" color="#bbb">
-                  TERM
+                TERM
                 </Text>
             </StakeContentWrapper>
             

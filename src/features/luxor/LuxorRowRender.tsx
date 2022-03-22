@@ -40,7 +40,7 @@ const TokenLogo = styled(Image)`
   }
 `
 
-const LuxorRowRender = ({ pid, stakeToken, bond }) => {
+const LuxorRowRender = ({ pid, stakeToken, term, bondAddress, bond }) => {
     const { account, chainId } = useActiveWeb3React()
     // const {
     //     poolInfo,
@@ -52,11 +52,13 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
     const [showing, setShowing] = useState(false)
     const AutoStakeContract = useAutoStakeContract()
     const BondContract = useLuxorBondContract()
+    const BondAddress = bondAddress
     const SoulSummonerContract = useSoulSummonerContract()
     const SoulSummonerAddress = SOUL_SUMMONER_ADDRESS[chainId]
     const AutoStakeAddress = AUTO_STAKE_ADDRESS[chainId]
     const HelperContractAddress = LUX_HELPER_ADDRESS[chainId]
     const [approved, setApproved] = useState(false)
+    // const [term, setTerm] = useState(0)
     // const [withdrawValue, setWithdrawValue] = useState('')
     const [depositValue, setDepositValue] = useState('')
     //   const [confirmed, setConfirmed] = useState(false)
@@ -85,6 +87,7 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
      */
     useEffect(() => {
         fetchDiscount()
+        // fetchTerm()
         fetchBals()
     }, [account])
 
@@ -247,7 +250,7 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
      */
     const fetchApproval = async () => {
         if (!account) {
-            alert('Connect Wallet')
+            // alert('Connect Wallet')
         } else {
             // Checks if AutoStakeContract can move tokens
             const amount = await erc20Allowance(account, AutoStakeAddress)
@@ -255,6 +258,22 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
             return amount
         }
     }
+
+    /**
+     * Fetches the term for the bond.
+     */
+    // const fetchTerm = async () => {
+        
+    //     try {
+    //         const term = await BondContract?.vestingDays(BondAddress)
+    //         console.log('term:%s', Number(term))
+    //         setTerm(Number(term))
+
+    //         return [term]
+    //     } catch (err) {
+    //         console.warn(err)
+    //     }
+    // }
 
     /**
      * Approves AutoStakeContract to move lpTokens
@@ -389,15 +408,12 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
                                 )}
                             </StakeItemBox>
                             <StakeItemBox className="flex" >
-                                {liquidity === 0 ? (
-                                    <Text padding="0" fontSize="1rem" color="#666">
-                                        $0
-                                    </Text>
-                                ) : (
+                                { 
                                     <Text padding="0" fontSize="1rem">
-                                        ${liquidity}
+                                        {/* {BondContract?.vestingDays(bond.bondAddress)} */}
+                                        {term}
                                     </Text>
-                                )}
+                                }
 
                             </StakeItemBox>
 
