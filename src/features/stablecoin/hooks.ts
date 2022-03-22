@@ -23,6 +23,22 @@ export function useStakeClaimAmount(token) {
   return amount ? CurrencyAmount.fromRawAmount(token, amount) : CurrencyAmount.fromRawAmount(token, JSBI.BigInt('0'))
 }
 
+export function useFee() {
+  const contract = useSorMasterContract()
+  const info = useSingleCallResult(contract, 'feePermille')?.result
+  const amount = info?.[0]
+
+  return amount ? amount : 20
+}
+
+export function useRedeemFee() {
+  const contract = useSorMasterContract()
+  const info = useSingleCallResult(contract, 'treasuryPermille')?.result
+  const amount = info?.[0]
+
+  return amount ? amount : 50
+}
+
 export function useRedeemClaimAmount(token) {
   const { account } = useActiveWeb3React()
 

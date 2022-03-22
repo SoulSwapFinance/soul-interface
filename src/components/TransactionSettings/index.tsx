@@ -108,7 +108,7 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
                 : tooLow || tooHigh
                 ? 'border-yellow/60'
                 : userSlippageTolerance !== 'auto'
-                ? 'border-blue'
+                ? 'border-purple'
                 : 'border-dark-800',
               'border-2 h-[36px] flex items-center px-2 rounded bg-dark-1000/40'
             )}
@@ -143,7 +143,7 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
           <div>
             <Button
               size="sm"
-              color={userSlippageTolerance === 'auto' ? 'blue' : 'gray'}
+              color={userSlippageTolerance === 'auto' ? 'purple' : 'gray'}
               variant="outlined"
               onClick={() => parseSlippageInput('')}
             >

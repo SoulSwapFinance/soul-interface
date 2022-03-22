@@ -9,12 +9,12 @@ import React from 'react'
 export const LiquidityPositionsBalances = () => {
   const { account, chainId } = useActiveWeb3React()
 
-  const { data: positions } = useLiquidityPositions({
+  const liquidityPositions = useLiquidityPositions({
     chainId,
     variables: { where: { user: account?.toLowerCase(), balance_gt: 0 } },
     shouldFetch: !!chainId && !!account,
   })
 
-  const { config } = useLPTableConfig(positions)
+  const { config } = useLPTableConfig(liquidityPositions)
   return <AssetBalances config={config} />
 }

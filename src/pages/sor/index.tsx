@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useCallback, useState } from 'react'
 import Container from '../../components/Container'
 import Head from 'next/head'
 import Typography from '../../components/Typography'
@@ -15,7 +15,7 @@ import { useSwapState } from '../../state/swap/hooks'
 import { AutoColumn } from '../../components/Column'
 import QuestionHelper from '../../components/QuestionHelper'
 import Alert from '../../components/Alert'
-import { ApprovalState, useApproveCallback } from '../../hooks'
+import { ApprovalState, useApproveCallback, useSorMasterContract } from '../../hooks'
 import { getAddress } from '@ethersproject/address'
 import {
   ChainId,
@@ -32,8 +32,9 @@ import { useCurrencyBalance } from '../../state/wallet/hooks'
 import { useTransactionAdder } from '../../state/transactions/hooks'
 import Dots from '../../components/Dots'
 import { BigNumber } from '@ethersproject/bignumber'
-import { useStakeClaimAmount, useRedeemClaimAmount, useSorContract } from 'features/stablecoin/hooks'
+import { useStakeClaimAmount, useRedeemClaimAmount, useSorContract, useFee, useRedeemFee } from 'features/stablecoin/hooks'
 import { useActiveWeb3React } from 'services/web3/hooks'
+import { useSingleCallResult } from 'state/multicall/hooks'
 // import useStablecoin from 'hooks/useStablecoin'
 
 export default function Stablecoin() {
@@ -49,22 +50,20 @@ export default function Stablecoin() {
 
   if (chainId && chainId === ChainId.ETHEREUM)
     // DELETE
-    window.location.href = '/swap'
+  window.location.href = '/swap'
 
   const daiToken = new Token(chainId, getAddress(DAI_ADDRESS[chainId]), 18, 'DAI')
   const sorToken = new Token(chainId, getAddress(SOR_ADDRESS[chainId]), 18, 'SOR')
-
+  const sorMasterContract = useSorMasterContract()
   const stakeClaimAmount = useStakeClaimAmount(sorToken)
   const redeemClaimAmount = useRedeemClaimAmount(sorToken)
 
   // previously data imports //
-  const mintPermille = 10
-  const redeemPermille = 50
+  const mintPermille = useFee()
+  const redeemPermille = useRedeemFee()
   const pegPrice = 0.985
-  // const luxorPermille = 200
   const maxStakeAmount = CurrencyAmount.fromRawAmount(daiToken, 8000000000000000000000)
   const maxRedeemAmount = CurrencyAmount.fromRawAmount(daiToken, 20000000000000000000000)
-  // //
 
   const daiBalance = useCurrencyBalance(account, daiToken)
   const sorBalance = useCurrencyBalance(account, sorToken)
@@ -72,6 +71,7 @@ export default function Stablecoin() {
   const parsedStakeValue = tryParseAmount(stakeValue, daiToken)
   const parsedRedeemValue = tryParseAmount(redeemValue, sorToken)
 
+  
   const [stakeApprovalState, stakeApprove] = useApproveCallback(
     parsedStakeValue,
     SOR_MASTER_ADDRESS[chainId]
@@ -374,8 +374,6 @@ export default function Stablecoin() {
             <Tab.Panel className={'outline-none'}>
               <Button variant={'link'} color={'purple'} className="absolute top-0 right-0 flex">
                 <QuestionHelper
-                  // title={i18n._(t`How it works`)}
-                  // width={'small'}
                   text={
                     <div className="flex flex-col space-y-2">
                       <div className="flex flex-col">
