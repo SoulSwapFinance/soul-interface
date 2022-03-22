@@ -36,7 +36,6 @@ import {
   SEANCE_ADDRESS,
   SOUL_SUMMONER_ADDRESS,
   AUTO_STAKE_ADDRESS,
-  REDEEM_ADDRESS,
   SOUL_VAULT_ADDRESS,
   SOUL_GUIDE_ADDRESS,
   PRICE_HELPER_ADDRESS,
@@ -44,6 +43,7 @@ import {
   TIMELOCK_ADDRESS,
   WNATIVE,
   SOUL_CIRCLE_ADDRESS,
+  LUX_HELPER_ADDRESS,
 } from 'sdk'
 import {
   COFFIN_BOX_ADDRESS,
@@ -63,7 +63,7 @@ import ANYSWAP_ERC20_ABI from '../constants/abis/anyswap_erc20.json'
 import SPOOKY_FACTORY_ABI from '../constants/abis/spookyswap-factory.json'
 import COFFINBOX_ABI from '../constants/abis/coffinbox.json'
 import SOUL_CIRCLE_ABI from 'constants/abis/soulswap/soulcircle.json' 
-import REDEEM_ABI from 'constants/abis/redeem.json' 
+import LUX_HELPER_ABI from 'constants/abis/lux-bond-helper.json' 
 import CHAINLINK_ORACLE_ABI from '../constants/abis/chainlink-oracle.json'
 import COMPLEX_REWARDER_ABI from '../constants/abis/complex-rewarder.json'
 import { Contract } from '@ethersproject/contracts'
@@ -378,9 +378,9 @@ export function useAutoStakeContract(withSignerIfPossible?: boolean): Contract |
   return useContract(chainId && AUTO_STAKE_ADDRESS[chainId], AUTO_STAKE_ABI, withSignerIfPossible)
 }
 
-export function useRedeemContract(withSignerIfPossible?: boolean): Contract | null {
+export function useLuxorBondContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && REDEEM_ADDRESS[chainId], REDEEM_ABI, withSignerIfPossible)
+  return useContract(chainId && LUX_HELPER_ADDRESS[chainId], LUX_HELPER_ABI, withSignerIfPossible)
 }
 
 export function useSorMasterContract(withSignerIfPossible?: boolean): Contract | null {
@@ -565,9 +565,4 @@ export function useAtomicSwapContract(withSignerIfPossible?: boolean): Contract 
 // SoulSwap 
 export function useSpookySwapFactoryContract(withSignerIfPossible?: boolean): Contract | null {
 return useContract('0x152eE697f2E276fA89E96742e9bB9aB1F2E61bE3', SPOOKY_FACTORY_ABI, withSignerIfPossible)
-}
-
-export function useLuxorBondContract(withSignerIfPossible = true): Contract | null {
-  // const { chainId } = useActiveWeb3React()
-  return useContract('0x152eE697f2E276fA89E96742e9bB9aB1F2E61bE3', LUXOR_BOND_CONTRACT_ABI, withSignerIfPossible)
 }

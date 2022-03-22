@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
 import { ethers } from 'ethers'
-import { useSoulPrice } from 'hooks/getPrices'
+import { useLuxorPrice, useSoulPrice, useTokenPrice } from 'hooks/getPrices'
 import { useActiveWeb3React } from 'services/web3'
 import QuestionHelper from '../../components/QuestionHelper'
-import { REDEEM_ADDRESS, SOUL } from 'sdk'
-import { AUTO_STAKE_ADDRESS, SOUL_SUMMONER_ADDRESS } from 'sdk'
-import { aprToApy } from 'functions/convert'
+import { AUTO_STAKE_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL, LUX_HELPER_ADDRESS, Token } from 'sdk'
 import AssetInput from 'components/AssetInput'
-import { useAutoStakeContract, useSoulSummonerContract } from 'hooks/useContract'
+import { useAutoStakeContract, useLuxorBondContract, useSoulSummonerContract } from 'hooks/useContract'
 import { useBondContract, useStakeSharePrice, useStakeRecentProfit, sharesFromSoul } from './useBonds'
 import useApprove from 'features/bond/hooks/useApprove'
 import {
@@ -26,9 +24,8 @@ import {
     SubmitButton,
 } from './Styles'
 import { Wrap, Text, ExternalLink } from '../../components/ReusableStyles'
-// import { formatCurrencyAmount } from 'functions/format'
-// import { useCurrencyBalance } from 'state/wallet/hooks'
-import { tryParseAmount } from 'functions'
+import { formatCurrencyAmount, tryParseAmount } from 'functions'
+import { useCurrencyBalance, useTokenBalance } from 'state/wallet/hooks'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -42,51 +39,36 @@ const TokenLogo = styled(Image)`
   }
 `
 
-const LuxorRowRender = ({ pid, stakeToken, bond }) => {
+const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAddress, bond }) => {
     const { account, chainId } = useActiveWeb3React()
-    // const {
-    //     poolInfo,
-    //     fetchStakeStats,
-    //     userInfo,
-    // } = useAutoStake(pid, stakeToken, pool)
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(stakeToken)
     const soulPrice = useSoulPrice()
     const [showing, setShowing] = useState(false)
     const AutoStakeContract = useAutoStakeContract()
-    const SoulSummonerContract = useSoulSummonerContract()
-    const SoulSummonerAddress = SOUL_SUMMONER_ADDRESS[chainId]
-    const AutoStakeAddress = AUTO_STAKE_ADDRESS[chainId]
-    const RedeemContractAddress = REDEEM_ADDRESS[chainId]
+    const BondContract = useLuxorBondContract()
     const [approved, setApproved] = useState(false)
-    const [withdrawValue, setWithdrawValue] = useState('')
     const [depositValue, setDepositValue] = useState('')
-    //   const [confirmed, setConfirmed] = useState(false)
-    //   const [receiving, setReceiving] = useState(0)
     const parsedDepositValue = tryParseAmount(depositValue, SOUL[250])
-    const parsedWithdrawValue = tryParseAmount(withdrawValue, SOUL[250])
 
-    const [stakedBal, setStakedBal] = useState(0)
+    const [payout, setStakedBal] = useState(0)
     const [earnedAmount, setEarnedAmount] = useState(0)
-    const [performanceFee, setPerformanceFee] = useState(0)
-    const [callFee, setCallFee] = useState(0)
     const [unstakedBal, setUnstakedBal] = useState(0)
-    const [pending, setPending] = useState(0)
-
-    const harvestFee = performanceFee + callFee
 
     // show confirmation view before minting SOUL
-    const [apy, setApy] = useState(0)
+    const [discount, setDiscount] = useState(0)
     const [liquidity, setLiquidity] = useState(0)
     const { deposit, withdraw } = useBondContract()
-    // const balance = useCurrencyBalance(account, SOUL[250])
-    const stakedBalance = AutoStakeContract?.balanceOf(account)
+    const luxPrice = useLuxorPrice()
+    const assetToken = new Token(250, assetAddress, 18, assetName)
+    const tokenPrice = useTokenPrice(assetAddress)
 
     /**
      * Runs only on initial render/mount
      */
     useEffect(() => {
-        getApyAndLiquidity()
-        fetchBals()
+        fetchDiscount()
+        fetchEarnings()
+        fetchPayout()
     }, [account])
 
     /**
@@ -96,12 +78,9 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
         if (account) {
             const timer = setTimeout(() => {
                 if (showing) {
-                    fetchBals()
-                    getApyAndLiquidity()
+                    fetchPayout()
+                    fetchDiscount()
                     fetchEarnings()
-                    fetchApproval()
-                    fetchPerformanceFee()
-                    fetchCallFee()
                 }
             }, 3000)
             // Clear timeout if the component is unmounted
@@ -115,46 +94,27 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
     const handleShow = () => {
         setShowing(!showing)
         if (!showing) {
-            fetchBals()
+            fetchPayout()
             fetchEarnings()
+            fetchDiscount()
             fetchApproval()
-            fetchPerformanceFee()
-            fetchCallFee()
         }
     }
 
     /**
-     * Checks the amount of lpTokens the AutoStakeContract contract holds
-     * 
-     * pool <Object> : the pool object
-     * lpToken : the pool lpToken address
+     * Checks the Discount Amount
      */
-    const getApyAndLiquidity = async () => {
+    const fetchDiscount = async () => {
         try {
-            const autoStakeBalance = await AutoStakeContract?.soulBalanceOf()
-            const totalSoul = ethers.utils.formatUnits(autoStakeBalance)
-            const tvl = (Number(soulPrice) * Number(totalSoul)).toFixed(0)
-
-            // APR CALCULATION //
-            const rawSummonerBal = await erc20BalanceOf(SoulSummonerAddress)
-            const summonerTvl = soulPrice * rawSummonerBal / 1e18
-            const soulPerSec = await SoulSummonerContract?.soulPerSecond()
-            const soulPerDiem = soulPerSec / 1e18 * 86_400
-            const poolInfo = await SoulSummonerContract?.poolInfo(0)
-            const alloc = poolInfo?.[1]
-            const totalAlloc = await SoulSummonerContract?.totalAllocPoint()
-            const percAlloc = alloc / totalAlloc
-            const dailySoul = soulPerDiem * percAlloc
-            const annualSoul = dailySoul * 365
-            const annualRewardsValue = annualSoul * soulPrice
-            // const SECONDS_IN_YEAR = 60 * 60 * 24 * 365
-            const apr = (annualRewardsValue / summonerTvl) * 100
-            const apy = aprToApy(apr * 6) // assumes reinvestments every 4hrs
-
-            setLiquidity(Number(tvl))
-            setApy(Number(apy))
-            // console.log('tvl:%s', Number(tvl))
-            // console.log('apy:%s', Number(apy))
+            const result = await BondContract?.bondPriceUsd(bondAddress)
+            const bondPrice = result / 1e18
+            // console.log('luxPrice:%s', luxPrice)
+            // console.log('bondPrice:%s', bondPrice)
+            const diff = Number(luxPrice) - Number(bondPrice)
+            const disc = diff / luxPrice * 100
+            const discount = diff <= 0 ? 0 : disc
+            // console.log('discount:%s', discount)
+            setDiscount(Number(discount))
         } catch (e) {
             console.warn(e)
         }
@@ -163,69 +123,34 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
     /**
      * Gets the lpToken balance of the user for each pool
      */
-    const fetchBals = async () => {
+    const fetchPayout = async () => {
         if (!account) {
             // alert('connect wallet')
         } else {
             try {
-                // get total SOUL staked in contract for pid from user
-                const staked = await AutoStakeContract?.balanceOf(account)
-                const stakedBal = staked / 1e18
-                setStakedBal(Number(stakedBal))
-                console.log('staked:%s', Number(stakedBal))
+                const result = await BondContract?.bondInfo(bondAddress)
+                const payout = result[0] / 1e9
+                setStakedBal(Number(payout))
+                // console.log('payout:%s', Number(payout))
+                const asset = await BondContract.principle(bondAddress)
+                // const TokenContract = new Token(250, asset, assetName)
 
-                // get total SOUL for pid from user bal
-                const result2 = await erc20BalanceOf(account)
-                const unstaked = ethers.utils.formatUnits(result2)
-                setUnstakedBal(Number(unstaked))
+                // const erc20BalanceOf = async (address) => {
+                //     try {
+                //     const result = await asset.balanceOf(address)
+                //     return result
+                //     } catch (e) {
+                //     console.log(e)
+                //     // alert(e.message)
+                //     }
+                // }
+                const balance = await erc20BalanceOf(account)
+                const userBal = balance / 1e18
+                console.log('unstaked:%s', Number(userBal))
 
-                return [stakedBal, unstaked]
-            } catch (err) {
-                console.warn(err)
-            }
-        }
-    }
+                setUnstakedBal(Number(userBal))
 
-    /**
-     * Gets the performance fee.
-     */
-    const fetchPerformanceFee = async () => {
-        if (!account) {
-            alert('connect wallet')
-        } else {
-            try {
-                // get performance
-                const performanceFee = await AutoStakeContract?.performanceFee()
-                // const  = result / 10000
-                const available = await AutoStakeContract?.available()
-                const fee = performanceFee * available / 10000 / 1e18
-                setPerformanceFee(Number(fee))
-                console.log('fee:%s', Number(fee))
-
-                return [fee]
-            } catch (err) {
-                console.warn(err)
-            }
-        }
-    }
-
-    /**
-     * Gets the call fee.
-     */
-    const fetchCallFee = async () => {
-        if (!account) {
-            alert('connect wallet')
-        } else {
-            try {
-                // get performance
-                const performanceFee = await AutoStakeContract?.performanceFee()
-                // const  = result / 10000
-                const available = await AutoStakeContract?.available()
-                const fee = performanceFee * available / 10000 / 1e18
-                setCallFee(Number(fee))
-                console.log('fee:%s', Number(fee))
-
-                return [fee]
+                return [payout, userBal]
             } catch (err) {
                 console.warn(err)
             }
@@ -240,20 +165,14 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
             // alert('connect wallet')
         } else {
             try {
-                // get SOUL earned
-                const result = await AutoStakeContract?.getPricePerFullShare()
-                const price = result / 1e18
-                const staked = await AutoStakeContract?.balanceOf(account)
-                const stakedBal = staked / 1e18
+                const result = await BondContract?.pendingPayout(bondAddress)
+                const payout = result / 1e9
+                console.log('profit:%s', payout)
 
-                const shareValue = price * stakedBal
-                const profit = shareValue - stakedBal
-                console.log('profit:%s', profit)
+                setEarnedAmount(Number(payout))
+                console.log('payout:%s', Number(payout))
 
-                setEarnedAmount(Number(profit))
-                console.log('profit:%s', Number(profit))
-
-                return [profit]
+                return [payout]
             } catch (err) {
                 console.warn(err)
             }
@@ -265,10 +184,10 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
      */
     const fetchApproval = async () => {
         if (!account) {
-            alert('Connect Wallet')
+            // alert('Connect Wallet')
         } else {
             // Checks if AutoStakeContract can move tokens
-            const amount = await erc20Allowance(account, AutoStakeAddress)
+            const amount = await erc20Allowance(account, bondAddress)
             if (amount > 0) setApproved(true)
             return amount
         }
@@ -282,7 +201,7 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
             alert('Connect Wallet')
         } else {
             try {
-                const tx = await erc20Approve(AutoStakeAddress)
+                const tx = await erc20Approve(bondAddress)
                 await tx?.wait().then(await fetchApproval())
             } catch (e) {
                 // alert(e.message)
@@ -292,10 +211,10 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
         }
     }
 
-    const handleWithdrawAll = async () => {
+    const handleHarvestAll = async () => {
         try {
             let tx
-            tx = await AutoStakeContract.withdrawAll()
+            tx = await BondContract.harvestAll(false)
             // await tx?.wait().then(await setPending(pid))
             await tx?.wait()
         } catch (e) {
@@ -310,7 +229,7 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
     const handleClaim = async () => {
         try {
             let tx
-            tx = await AutoStakeContract?.harvest()
+            tx = await BondContract?.harvest(bondAddress, true)
             await tx?.wait().then(await fetchEarnings())
         } catch (e) {
             // alert(e.message)
@@ -325,7 +244,7 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
         try {
             const tx = await AutoStakeContract?.deposit(account, parsedDepositValue?.quotient.toString())
             await tx.wait()
-            await fetchBals()
+            await fetchPayout()
         } catch (e) {
             // alert(e.message)
             console.log(e)
@@ -339,7 +258,7 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
                     <Row onClick={() => handleShow()}>
                         <StakeContentWrapper>
                             <TokenPairBox>
-                                { bond.token2 && <Wrap className="flex-cols-2">
+                                { bond.token2Address && <Wrap className="flex-cols-2">
                                     <TokenLogo
                                         src={
                                             'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
@@ -365,7 +284,7 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
                                         className="rounded-full items-center justify-center text-center"
                                     />
                                 </Wrap>}
-                                { !bond.token2 && <Wrap>
+                                { !bond.token2Address && <Wrap>
                                     <TokenLogo
                                         src={
                                             'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
@@ -383,13 +302,13 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
 
                             <StakeItemBox>
                                 <StakeItem>
-                                    {Number(apy).toString() === '0.00' ? (
+                                    {Number(discount).toString() === '0.00' ? (
                                         <Text padding="0" fontSize="1rem" color="#666">
                                             0
                                         </Text>
                                     ) : (
                                         <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                            {Number(apy).toFixed()}%
+                                            {Number(discount).toFixed()}%
                                         </Text>
                                     )}
                                 </StakeItem>
@@ -407,15 +326,12 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
                                 )}
                             </StakeItemBox>
                             <StakeItemBox className="flex" >
-                                {liquidity === 0 ? (
-                                    <Text padding="0" fontSize="1rem" color="#666">
-                                        $0
-                                    </Text>
-                                ) : (
+                                { 
                                     <Text padding="0" fontSize="1rem">
-                                        ${liquidity}
+                                        {/* {BondContract?.vestingDays(bond.bondAddress)} */}
+                                        {term}
                                     </Text>
-                                )}
+                                }
 
                             </StakeItemBox>
 
@@ -428,11 +344,21 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
                 <Wrap padding="0" display="flex" justifyContent="center">
                     <DetailsContainer>
                         <DetailsWrapper>
-                    {stakedBal == 0 ? (
+                    {payout == 0 ? (
                         <FunctionBox>
-                            <Wrap padding="0" display="flex" justifyContent="space-between">
+                            <AssetInput
+                                currencyLogo={false}
+                                currency={assetToken}
+                                currencyAddress={assetAddress}
+                                value={depositValue}
+                                // balance={tryParseAmount(account, assetToken)}
+                                showBalance={false}
+                                onChange={setDepositValue}
+                                showMax={false}
+                            />
+                             <Wrap padding="0" display="flex" justifyContent="space-between">
                                 <Text padding="0" fontSize="1rem" color="#bbb">
-                                    {Number(unstakedBal) === 0
+                                    BALANCE:&nbsp;{Number(unstakedBal) === 0
                                         ? '0.000'
                                         : Number(unstakedBal) < 0
                                         ? '<0'
@@ -440,17 +366,10 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
                                             .toFixed(0)
                                             .toString()
                                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                    &nbsp;SOUL &nbsp; {Number(unstakedBal * soulPrice) !== 0 ? `($${(unstakedBal * soulPrice).toFixed(0)})` : ''}
+                                    &nbsp;{assetName}&nbsp;
+                                    {/* {Number(unstakedBal * soulPrice) !== 0 ? `($${(unstakedBal * soulPrice).toFixed(0)})` : ''} */}
                                 </Text>
                             </Wrap>
-                            <AssetInput
-                            currencyLogo={true}
-                                currency={SOUL[250]}
-                                currencyAddress={SOUL[250].address}
-                                value={depositValue}
-                                onChange={setDepositValue}
-                                showMax={false}
-                            />
                             <Wrap padding="0" margin="0" display="flex">
                                 {(approved && Number(unstakedBal) == 0) ?
                         (
@@ -459,21 +378,28 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
                                 rel="noopener"
                                 text-color="#F36FFE" // neon purple
                                 href=
-                                {`https://exchange.soulswap.finance/swap}`}
+                                {`https://exchange.soulswap.finance/swap`}
                             >
-                                ACQUIRE SOUL
+                            <div className="text-purple justify-center items-center text-center">
+                            CLICK HERE TO ACQUIRE BOND ASSETS</div>
                             </TokenPairLink>
                         ) :
                                 approved ?
                                     (
                                         <SubmitButton
+                                            primaryColour="#B485FF"
+                                            color="black"
                                             height="2rem"
                                         >
-                                            DEPOSIT SOUL
+                                            DEPOSIT {assetName}
                                         </SubmitButton>
                                     ) :
                                     (
-                                        <SubmitButton height="2rem" onClick={() => handleApprove()}>
+                                        <SubmitButton 
+                                        height="2rem" 
+                                        primaryColour="#B485FF"
+                                        color="black"
+                                        onClick={() => handleApprove()}>
                                             APPROVE
                                         </SubmitButton>
                                     )
@@ -483,7 +409,7 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
                             ) : (
                                 <FunctionBox>
                                 <Wrap padding="0" display="flex" justifyContent="space-between">
-                                { 'Read Full Details' }
+                                {/* { 'Read Full Details' }
                                     <FlexText>
                                     <QuestionHelper
                                     text={
@@ -505,10 +431,10 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
                                     </div>
                                     }
                                     />
-                                    </FlexText>
+                                    </FlexText> */}
                                     </Wrap>
                                     <AssetInput
-                                        currencyLogo={true}
+                                        currencyLogo={false}
                                         currency={SOUL[250]}
                                         currencyAddress={SOUL[250].address}
                                         value={depositValue}
@@ -518,21 +444,20 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
                                     />
                                     <Wrap padding="0" margin="0" display="flex" justifyContent="space-between">
                                         <Text fontSize=".9rem" padding="0" textAlign="left" color="#FFFFFF">
-                                            STAKED:&nbsp;
-                                    {Number(stakedBal) === 0
+                                            PAYOUT:&nbsp;
+                                    {Number(payout) === 0
                                         ? '0'
-                                        : Number(stakedBal) < 0
+                                        : Number(payout) < 0
                                             ? '<0'
-                                            : Number(stakedBal)
+                                            : Number(payout)
                                                 .toFixed(0)
                                                 .toString()
                                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
-                                                ({(Number(stakedBal * soulPrice) !== 0 ? `$${Number(stakedBal * soulPrice).toFixed(0)}` : '0')})
-                                            {/* <br /> */}
+                                                ({(Number(payout * luxPrice) !== 0 ? `$${Number(payout * luxPrice).toFixed(0)}` : '0')})
                                         </Text>
                                         
                                         <Text fontSize=".9rem" padding="0" textAlign="left" color="#FFFFFF">
-                                            BAL:&nbsp;
+                                            BALANCE:&nbsp;
                                     {Number(unstakedBal) === 0
                                         ? '0'
                                         : Number(unstakedBal) < 0
@@ -541,7 +466,7 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
                                                 .toFixed(0)
                                                 .toString()
                                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
-                                                ({(Number(unstakedBal * soulPrice) !== 0 ? `$${Number(unstakedBal * soulPrice).toFixed(0)}` : '0')})
+                                                {/* ({(Number(unstakedBal * soulPrice) !== 0 ? `$${Number(unstakedBal * soulPrice).toFixed(0)}` : '0')}) */}
                                             <br />
                                         </Text>
                                     </Wrap>
@@ -555,7 +480,7 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
                                                 handleDeposit(depositValue)
                                             }
                                         >
-                                            DEPOSIT SOUL
+                                            DEPOSIT {bond?.assetName}
                                         </SubmitButton>
                                     </Wrap>
                                     <Wrap padding="0" margin="0" display="flex">
@@ -572,29 +497,6 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
                                             {/* {earnedAmount !== 0 ? `($${(earnedAmount * soulPrice).toFixed(2)})` : ''} */}
                                         </SubmitButton>
                                     </Wrap>
-                                    {/* <AssetInput
-                                        currencyLogo={true}
-                                        currency={SOUL[250]}
-                                        currencyAddress={SOUL[250].address}
-                                        value={withdrawValue}
-                                        onChange={setWithdrawValue}
-                                        showMax={false}
-                                        showBalance={false}
-                                    /> */}
-                                    
-                                    {/* <Wrap padding="0" margin="0" display="flex">
-                                        <SubmitButton
-                                            height="2rem"
-                                            primaryColour="#B485FF"
-                                            color="black"
-                                            margin=".5rem 0 .5rem 0"
-                                            onClick={() =>
-                                                handleWithdraw(withdrawValue)
-                                            }
-                                        >
-                                            WITHDRAW
-                                        </SubmitButton>
-                                    </Wrap> */}
                                 <Wrap padding="0" margin="0" display="flex">
                                     <SubmitButton
                                         height="2rem"
@@ -602,10 +504,10 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
                                         color="black"
                                         margin=".5rem 0 .5rem 0"
                                         onClick={() =>
-                                            handleWithdrawAll()
+                                            handleHarvestAll()
                                         }
                                     >
-                                        WITHDRAW ALL
+                                        HARVEST ALL
                                     </SubmitButton>
                                 </Wrap>
 
