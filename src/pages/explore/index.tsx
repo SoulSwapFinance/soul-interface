@@ -12,38 +12,50 @@ const EXPLORE = (i18n: I18n) => [
   {
     id: 1,
     name: 'SUMMON SOUL',
-    description: i18n._(t`Deposit your SOUL-LP to earn $SOUL rewards.`),
+    description: i18n._(t`Deposit liquidity or lent asset. Earn SOUL rewards.`),
     href: './farms',
   },
   {
     id: 2,
     name: 'STAKE SOUL',
-    description: 'Borrow $SEANCE with $SOUL and earn rewards.',
+    description: 'Stake SOUL for SEANCE. Use SEANCE to earn more.',
     href: './seance'
   },
   {
     id: 3,
-    name: 'SEANCE CIRCLES',
-    description: 'Deposit $SEANCE to earn $WFTM and $UNIDX.',
-    href: './circles'
+    name: 'AUTO-STAKE SOUL',
+    description: 'Deposit SOUL. Auto-magically compound rewards.',
+    href: './autostake'
   },
   {
     id: 4,
-    name: 'LEND & BORROW',
-    description: 'Lend assets and farm or borrow for more.',
-    href: './borrow'
+    name: 'LUXOR BONDS',
+    description: 'Access Luxor Money bonds. Natively on SoulSwap.',
+    href: './luxor'
   },
   {
     id: 5,
-    name: 'SHARE YOUR SOUL',
-    description: 'Send $SOUL for a small sacrifice of $SEANCE.',
-    href: './scarab/create'
+    name: 'SOR STABLECOIN',
+    description: 'Honor God(dess) Shai. Stake DAI for SOR and more.',
+    href: './sor'
   },
   {
     id: 6,
+    name: 'LEND & BORROW',
+    description: 'Lend, Leverage, and Farm. Enter the Underworld.',
+    href: './borrow'
+  },
+  {
+    id: 7,
+    name: 'SHARE YOUR SOUL',
+    description: 'Send your SOUL. Only claimable via Seance Circles.',
+    href: './scarab/create'
+  },
+  {
+    id: 8,
     name: 'BRIDGE ASSETS',
-    description: 'Bridge from Binance, Ethereum, Huobi, and more.',
-    href: 'https://bridge.soul.sh'
+    description: 'Bridge from BSC, ETH, AVAX, MATIC, HECO, and more.',
+    href: 'https://bridge.soulswap.finance'
   },
 ]
 
@@ -52,18 +64,18 @@ export default function Tools() {
   const features = useMemo(() => EXPLORE(i18n), [i18n])
 
   return (
-    <Container id="features-page" className="py-4 space-y-4 md:py-8 lg:py-12" maxWidth="xl">
+    <Container id="features-page" className="py-4 space-y-5 md:py-8 lg:py-12" maxWidth="xl">
       <Head>
         <title>Explore | Soul</title>
         <meta key="description" name="description" content="SoulSwap Tools..." />
       </Head>
-      <Typography variant="h1" component="h1">
+      <Typography variant="h1" className="text-center" component="h1">
         OUR ECOSYSTEM
       </Typography>
       <ul className="space-y-4 divide-y-0">
         {features.map((feature) => (
-          <li key={feature.id} className="relative w-full p-4 rounded bg-dark-900 hover:bg-dark-800">
-            <div className="flex justify-between space-x-4">
+          <li key={feature.id} className="relative border gap-4 border-dark-800 hover:border-dark-600 w-full p-5 rounded bg-dark-900 hover:bg-dark-800">
+            <div className="flex justify-between space-y-4 space-x-4">
               <div className="flex-1 min-w-0">
                 <Link href={feature.href}>
                   <a className="flex items-center justify-between focus:outline-none">
