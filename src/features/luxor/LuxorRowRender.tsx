@@ -5,7 +5,7 @@ import { ethers } from 'ethers'
 import { useSoulPrice } from 'hooks/getPrices'
 import { useActiveWeb3React } from 'services/web3'
 import QuestionHelper from '../../components/QuestionHelper'
-import { SOUL } from 'sdk'
+import { REDEEM_ADDRESS, SOUL } from 'sdk'
 import { AUTO_STAKE_ADDRESS, SOUL_SUMMONER_ADDRESS } from 'sdk'
 import { aprToApy } from 'functions/convert'
 import AssetInput from 'components/AssetInput'
@@ -56,6 +56,7 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
     const SoulSummonerContract = useSoulSummonerContract()
     const SoulSummonerAddress = SOUL_SUMMONER_ADDRESS[chainId]
     const AutoStakeAddress = AUTO_STAKE_ADDRESS[chainId]
+    const RedeemContractAddress = REDEEM_ADDRESS[chainId]
     const [approved, setApproved] = useState(false)
     const [withdrawValue, setWithdrawValue] = useState('')
     const [depositValue, setDepositValue] = useState('')
@@ -306,7 +307,7 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
     // /**
     //  * Harvest Shares
     //  */
-    const handleHarvest = async () => {
+    const handleClaim = async () => {
         try {
             let tx
             tx = await AutoStakeContract?.harvest()
@@ -564,11 +565,11 @@ const LuxorRowRender = ({ pid, stakeToken, bond }) => {
                                             color="black"
                                             margin=".5rem 0 .5rem 0"
                                             onClick={() =>
-                                                handleHarvest()
+                                                handleClaim()
                                             }
                                         >
-                                            HARVEST SOUL
-                                            {earnedAmount !== 0 ? `($${(earnedAmount * soulPrice).toFixed(2)})` : ''}
+                                            CLAIM {`&`} STAKE
+                                            {/* {earnedAmount !== 0 ? `($${(earnedAmount * soulPrice).toFixed(2)})` : ''} */}
                                         </SubmitButton>
                                     </Wrap>
                                     {/* <AssetInput
