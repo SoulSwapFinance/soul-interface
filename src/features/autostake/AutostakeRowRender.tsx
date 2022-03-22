@@ -92,6 +92,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     useEffect(() => {
         getApyAndLiquidity()
         fetchBals()
+        fetchApproval()
     }, [account])
 
     /**
@@ -270,7 +271,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
      */
     const fetchApproval = async () => {
         if (!account) {
-            alert('Connect Wallet')
+            // alert('Connect Wallet')
         } else {
             // Checks if AutoStakeContract can move tokens
             const amount = await erc20Allowance(account, AutoStakeAddress)
@@ -284,7 +285,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
      */
     const handleApprove = async () => {
         if (!account) {
-            alert('Connect Wallet')
+            // alert('Connect Wallet')
         } else {
             try {
                 const tx = await erc20Approve(AutoStakeAddress)
@@ -460,7 +461,13 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                 approved ?
                                     (
                                         <SubmitButton
-                                            height="2rem"
+                                        height="2rem"
+                                        primaryColour="#B485FF"
+                                        color="black"
+                                        margin=".5rem 0 .5rem 0"
+                                        onClick={() =>
+                                            handleDeposit(depositValue)
+                                        }
                                         >
                                             DEPOSIT SOUL
                                         </SubmitButton>
