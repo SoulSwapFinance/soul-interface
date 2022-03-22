@@ -452,7 +452,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                 rel="noopener"
                                 text-color="#F36FFE" // neon purple
                                 href=
-                                {`https://exchange.soulswap.finance/swap}`}
+                                {`https://exchange.soulswap.finance/swap`}
                             >
                                 ACQUIRE SOUL
                             </TokenPairLink>
