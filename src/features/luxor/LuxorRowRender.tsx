@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
 import { ethers } from 'ethers'
-import { getLuxorPrice, useSoulPrice } from 'hooks/getPrices'
+import { useLuxorPrice, useSoulPrice } from 'hooks/getPrices'
 import { useActiveWeb3React } from 'services/web3'
 import QuestionHelper from '../../components/QuestionHelper'
 import { AUTO_STAKE_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL, LUX_HELPER_ADDRESS } from 'sdk'
@@ -24,8 +24,6 @@ import {
     SubmitButton,
 } from './Styles'
 import { Wrap, Text, ExternalLink } from '../../components/ReusableStyles'
-// import { formatCurrencyAmount } from 'functions/format'
-// import { useCurrencyBalance } from 'state/wallet/hooks'
 import { tryParseAmount } from 'functions'
 
 const TokenPairLink = styled(ExternalLink)`
@@ -42,27 +40,15 @@ const TokenLogo = styled(Image)`
 
 const LuxorRowRender = ({ pid, stakeToken, term, bondAddress, bond }) => {
     const { account, chainId } = useActiveWeb3React()
-    // const {
-    //     poolInfo,
-    //     fetchStakeStats,
-    //     userInfo,
-    // } = useAutoStake(pid, stakeToken, pool)
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(stakeToken)
     const soulPrice = useSoulPrice()
     const [showing, setShowing] = useState(false)
     const AutoStakeContract = useAutoStakeContract()
     const BondContract = useLuxorBondContract()
-    const BondAddress = bondAddress
-    const SoulSummonerContract = useSoulSummonerContract()
-    const SoulSummonerAddress = SOUL_SUMMONER_ADDRESS[chainId]
     const AutoStakeAddress = AUTO_STAKE_ADDRESS[chainId]
-    const HelperContractAddress = LUX_HELPER_ADDRESS[chainId]
     const [approved, setApproved] = useState(false)
-    // const [term, setTerm] = useState(0)
     // const [withdrawValue, setWithdrawValue] = useState('')
     const [depositValue, setDepositValue] = useState('')
-    //   const [confirmed, setConfirmed] = useState(false)
-    //   const [receiving, setReceiving] = useState(0)
     const parsedDepositValue = tryParseAmount(depositValue, SOUL[250])
     // const parsedWithdrawValue = tryParseAmount(withdrawValue, SOUL[250])
 
@@ -81,13 +67,14 @@ const LuxorRowRender = ({ pid, stakeToken, term, bondAddress, bond }) => {
     const { deposit, withdraw } = useBondContract()
     // const balance = useCurrencyBalance(account, SOUL[250])
     const stakedBalance = AutoStakeContract?.balanceOf(account)
+    const luxPrice = useLuxorPrice()
 
     /**
      * Runs only on initial render/mount
      */
     useEffect(() => {
         fetchDiscount()
-        // fetchTerm()
+        fetchEarnings()
         fetchBals()
     }, [account])
 
@@ -101,9 +88,6 @@ const LuxorRowRender = ({ pid, stakeToken, term, bondAddress, bond }) => {
                     fetchBals()
                     fetchDiscount()
                     fetchEarnings()
-                    fetchApproval()
-                    fetchPerformanceFee()
-                    fetchCallFee()
                 }
             }, 3000)
             // Clear timeout if the component is unmounted
@@ -120,26 +104,23 @@ const LuxorRowRender = ({ pid, stakeToken, term, bondAddress, bond }) => {
             fetchBals()
             fetchEarnings()
             fetchApproval()
-            fetchPerformanceFee()
-            fetchCallFee()
         }
     }
 
     /**
-     * Checks the amount of lpTokens the AutoStakeContract contract holds
-     * 
-     * pool <Object> : the pool object
-     * lpToken : the pool lpToken address
+     * Checks the Discount Amount
      */
     const fetchDiscount = async () => {
         try {
-            const luxPrice = getLuxorPrice()
-            const bondPrice = await BondContract?.bondPrice()
+            const result = await BondContract?.bondPriceUsd(bondAddress)
+            const bondPrice = result / 1e18
             console.log('luxPrice:%s', luxPrice)
             console.log('bondPrice:%s', bondPrice)
-            const discountedPrice = Number(luxPrice) - Number(bondPrice)
-            console.log('discountedPrice:%s', discountedPrice)
-            setDiscount(Number(discountedPrice))
+            const diff = Number(luxPrice) - Number(bondPrice)
+            const disc = diff / luxPrice * 100
+            const discount = diff <= 0 ? 0 : disc
+            console.log('discount:%s', discount)
+            setDiscount(Number(discount))
         } catch (e) {
             console.warn(e)
         }
@@ -172,52 +153,6 @@ const LuxorRowRender = ({ pid, stakeToken, term, bondAddress, bond }) => {
     }
 
     /**
-     * Gets the performance fee.
-     */
-    const fetchPerformanceFee = async () => {
-        if (!account) {
-            alert('connect wallet')
-        } else {
-            try {
-                // get performance
-                const performanceFee = await AutoStakeContract?.performanceFee()
-                // const  = result / 10000
-                const available = await AutoStakeContract?.available()
-                const fee = performanceFee * available / 10000 / 1e18
-                setPerformanceFee(Number(fee))
-                console.log('fee:%s', Number(fee))
-
-                return [fee]
-            } catch (err) {
-                console.warn(err)
-            }
-        }
-    }
-
-    /**
-     * Gets the call fee.
-     */
-    const fetchCallFee = async () => {
-        if (!account) {
-            alert('connect wallet')
-        } else {
-            try {
-                // get performance
-                const performanceFee = await AutoStakeContract?.performanceFee()
-                // const  = result / 10000
-                const available = await AutoStakeContract?.available()
-                const fee = performanceFee * available / 10000 / 1e18
-                setCallFee(Number(fee))
-                console.log('fee:%s', Number(fee))
-
-                return [fee]
-            } catch (err) {
-                console.warn(err)
-            }
-        }
-    }
-
-    /**
     * Gets the earned amount of the user for each pool
     */
     const fetchEarnings = async () => {
@@ -225,20 +160,14 @@ const LuxorRowRender = ({ pid, stakeToken, term, bondAddress, bond }) => {
             // alert('connect wallet')
         } else {
             try {
-                // get SOUL earned
-                const result = await AutoStakeContract?.getPricePerFullShare()
-                const price = result / 1e18
-                const staked = await AutoStakeContract?.balanceOf(account)
-                const stakedBal = staked / 1e18
+                const result = await BondContract?.pendingPayout(bondAddress)
+                const payout = result / 1e9
+                console.log('profit:%s', payout)
 
-                const shareValue = price * stakedBal
-                const profit = shareValue - stakedBal
-                console.log('profit:%s', profit)
+                setEarnedAmount(Number(payout))
+                console.log('payout:%s', Number(payout))
 
-                setEarnedAmount(Number(profit))
-                console.log('profit:%s', Number(profit))
-
-                return [profit]
+                return [payout]
             } catch (err) {
                 console.warn(err)
             }
