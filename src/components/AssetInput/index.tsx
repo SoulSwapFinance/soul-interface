@@ -21,9 +21,9 @@ import { useActiveWeb3React } from 'services/web3'
 import Lottie from 'lottie-react'
 
 import React, { createContext, FC, ReactNode, useContext, useEffect, useMemo, useRef, useState } from 'react'
-import { FiatValue } from './FiatValue'
-import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
-import { useCurrency } from 'hooks/Tokens'
+// import { FiatValue } from './FiatValue'
+// import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
+// import { useCurrency } from 'hooks/Tokens'
 import { formatCurrency } from 'modals/TokensStatsModal'
 import { useBinancePrice, useFantomPrice, useTokenPrice, useWrappedBtcPrice } from 'hooks/getPrices'
 import { usePairPrice } from 'hooks/usePairData'
@@ -81,8 +81,7 @@ const AssetInput: AssetInput<AssetInputProps> = ({
   )
   const balance = balanceProp || coffinOrWalletBalance
   
-  const halfSpend =
-    halfAmountSpend(balance)?.toExact()
+  const halfSpend = halfAmountSpend(balance)?.toExact()
   // const halfSpendAsFraction = maxAmountSpend(balance.divide(2))?.asFraction
   
   const maxSpend = maxAmountSpend(balance)?.toExact()
@@ -177,7 +176,7 @@ const AssetInputPanel = ({
   currency,
   currencyAddress,
   token0,
-  token1,
+  // token1,
   onChange,
   onSelect,
   onHalf,
@@ -194,8 +193,8 @@ const AssetInputPanel = ({
   const isDesktop = useDesktopMediaQuery()
   const { i18n } = useLingui()
 
-  let tokenA = useCurrency(token0)
-  let tokenB = useCurrency(token1)
+  // let tokenA = useCurrency(token0)
+  // let tokenB = useCurrency(token1)
 
   // console.log('token0: ', token0)
   
@@ -289,6 +288,7 @@ const AssetInputPanel = ({
               currency.symbol == 'WETH' ? formatCurrency(tokenPrice * Number(value), 2) :
               currency.symbol == 'DAI' ? formatCurrency(1 * Number(value), 2) :
               currency.symbol == 'BNB' ? formatCurrency(bnbPrice * Number(value), 2) :
+              currency.isNative ? formatCurrency(ftmPrice * Number(value), 2) :
               currency.symbol == 'FTM' ? formatCurrency(ftmPrice * Number(value), 2) :
               currency.symbol == 'WFTM' ? formatCurrency(ftmPrice * Number(value), 2) :
               currency.symbol == 'WBTC' ? formatCurrency(btcPrice * Number(value), 2) :

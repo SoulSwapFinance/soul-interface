@@ -178,12 +178,12 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
             } else {
               try {
                 // get SOUL earned
-                const result = await AutoStakeContract?.calculateTotalPendingSoulRewards()
-                const earnedAmount = result / 1e18
-                setEarnedAmount(Number(earnedAmount))
-                console.log('earnedAmount:%s', Number(earnedAmount))
+                const result = await AutoStakeContract?.available()
+                const available = result / 1e18
+                setEarnedAmount(Number(available))
+                console.log('available:%s', Number(available))
 
-                return [earnedAmount]
+                return [available]
             } catch (err) {
                 console.warn(err)
             }
@@ -237,6 +237,18 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
         }
     }
 
+    const handleWithdrawAll = async () => {
+        try {
+            let tx
+            tx = await AutoStakeContract.withdrawAll()
+            await tx?.wait().then(await setPending(pid))
+            // await tx?.wait()
+        } catch (e) {
+            // alert(e.message)
+            console.log(e)
+        }
+    }
+
     // /**
     //  * Harvest Shares
     //  */
@@ -257,7 +269,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
      */
     const handleDeposit = async (amount) => {
         try {
-            const tx = await deposit(amount)
+            const tx = await AutoStakeContract?.deposit(account, amount)
             await tx.wait()
             await fetchBals()
         } catch (e) {
@@ -334,10 +346,8 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                         <DetailsWrapper>
                             {stakedBal == 0 ? (
                                 <FunctionBox>
-                                    {/* <button >Max</button> */}
                                     <Wrap padding="0" display="flex" justifyContent="space-between">
                                         <Text padding="0" fontSize="1rem" color="#bbb">
-                                            Available:&nbsp;
                                             {Number(unstakedBal) === 0
                                                 ? '0.000'
                                                 : Number(unstakedBal) < 0.001
@@ -346,7 +356,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                                         .toFixed(3)
                                                         .toString()
                                                         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                            &nbsp;LP &nbsp; {Number(unstakedBal * soulPrice) !== 0 ? `($${(unstakedBal * soulPrice).toFixed(3)})` : ''}
+                                            &nbsp;SOUL &nbsp; {Number(unstakedBal * soulPrice) !== 0 ? `($${(unstakedBal * soulPrice).toFixed(3)})` : ''}
                                         </Text>
                                         <ClickableText
                                             padding="0"
@@ -441,6 +451,20 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                           {/* TODO: fix below */}
                                             CLAIM SOUL
                                           {earnedAmount !== 0 ? `($${(earnedAmount * soulPrice).toFixed(4)})` : ''}
+                                        </SubmitButton>
+                                    </Wrap>
+                                    <Wrap padding="0" margin="0" display="flex">
+                                        <SubmitButton
+                                            height="2.5rem"
+                                            primaryColour="#bbb"
+                                            color="black"
+                                            margin=".5rem 0 .5rem 0"
+                                            onClick={() =>
+                                             handleWithdrawAll()
+                                            }
+                                        >
+                                          {/* TODO: fix below */}
+                                            WITHDRAW ALL
                                         </SubmitButton>
                                     </Wrap>
                                 </FunctionBox>
