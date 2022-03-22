@@ -12,38 +12,50 @@ const EXPLORE = (i18n: I18n) => [
   {
     id: 1,
     name: 'SUMMON SOUL',
-    description: i18n._(t`Deposit your SOUL-LP to earn $SOUL rewards.`),
+    description: i18n._(t`Deposit liquidity or lent asset. Earn SOUL rewards.`),
     href: './farms',
   },
   {
     id: 2,
     name: 'STAKE SOUL',
-    description: 'Borrow $SEANCE with $SOUL and earn rewards.',
+    description: 'Stake SOUL for SEANCE. Use SEANCE to earn more.',
     href: './seance'
   },
   {
     id: 3,
-    name: 'SEANCE CIRCLES',
-    description: 'Deposit $SEANCE to earn $WFTM and $UNIDX.',
-    href: './circles'
+    name: 'AUTO-STAKE SOUL',
+    description: 'Deposit SOUL. Auto-magically compound rewards.',
+    href: './autostake'
   },
   {
     id: 4,
-    name: 'LEND & BORROW',
-    description: 'Lend assets and farm or borrow for more.',
-    href: './borrow'
+    name: 'LUXOR BONDS',
+    description: 'Access Luxor Money bonds. Now, native on SoulSwap.',
+    href: './luxor'
   },
   {
     id: 5,
-    name: 'SHARE YOUR SOUL',
-    description: 'Send $SOUL for a small sacrifice of $SEANCE.',
-    href: './scarab/create'
+    name: 'SOR STABLECOIN',
+    description: 'Honor God(dess) Shai. Stake DAI for SOR and more.',
+    href: './sor'
   },
   {
     id: 6,
+    name: 'LEND & BORROW',
+    description: 'Lend, Leverage, and Farm. Venture into the Underworld.',
+    href: './borrow'
+  },
+  {
+    id: 7,
+    name: 'SHARE YOUR SOUL',
+    description: 'Send your SOUL. Only claimable via Seance Circles.',
+    href: './scarab/create'
+  },
+  {
+    id: 8,
     name: 'BRIDGE ASSETS',
-    description: 'Bridge from Binance, Ethereum, Huobi, and more.',
-    href: 'https://bridge.soul.sh'
+    description: 'Bridge from BSC, ETH, AVAX, MATIC, HECO, and more.',
+    href: 'https://bridge.soulswap.finance'
   },
 ]
 
