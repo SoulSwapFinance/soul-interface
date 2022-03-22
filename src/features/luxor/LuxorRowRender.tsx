@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
-import { ethers } from 'ethers'
-import { useLuxorPrice, useSoulPrice, useTokenPrice } from 'hooks/getPrices'
+// import { ethers } from 'ethers'
+import { useLuxorPrice } from 'hooks/getPrices'
 import { useActiveWeb3React } from 'services/web3'
-import QuestionHelper from '../../components/QuestionHelper'
-import { AUTO_STAKE_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL, LUX_HELPER_ADDRESS, Token } from 'sdk'
+// import QuestionHelper from '../../components/QuestionHelper'
+import { SOUL, Token } from 'sdk'
 import AssetInput from 'components/AssetInput'
-import { useAutoStakeContract, useLuxorBondContract, useSoulSummonerContract } from 'hooks/useContract'
-import { useBondContract, useStakeSharePrice, useStakeRecentProfit, sharesFromSoul } from './useBonds'
+import { useLuxorBondContract } from 'hooks/useContract'
+// import { useBondContract, useStakeSharePrice, useStakeRecentProfit, sharesFromSoul } from './useBonds'
 import useApprove from 'features/bond/hooks/useApprove'
 import {
     StakeContainer,
@@ -20,12 +20,15 @@ import {
     DetailsContainer,
     DetailsWrapper,
     FunctionBox,
-    FlexText,
     SubmitButton,
 } from './Styles'
 import { Wrap, Text, ExternalLink } from '../../components/ReusableStyles'
-import { formatCurrencyAmount, tryParseAmount } from 'functions'
-import { useCurrencyBalance, useTokenBalance } from 'state/wallet/hooks'
+import { tryParseAmount } from 'functions'
+// import { useCurrencyBalance, useTokenBalance } from 'state/wallet/hooks'
+import { useApproveCallback } from 'hooks/useApproveCallback'
+import Modal from 'components/Modal/DefaultModal'
+import Typography from 'components/Typography'
+import ModalHeader from 'components/Modal/Header'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -42,33 +45,37 @@ const TokenLogo = styled(Image)`
 const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAddress, bond }) => {
     const { account, chainId } = useActiveWeb3React()
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(stakeToken)
-    const soulPrice = useSoulPrice()
     const [showing, setShowing] = useState(false)
-    const AutoStakeContract = useAutoStakeContract()
     const BondContract = useLuxorBondContract()
+    const BondContractAddress = BondContract.address
     const [approved, setApproved] = useState(false)
     const [depositValue, setDepositValue] = useState('')
-    const parsedDepositValue = tryParseAmount(depositValue, SOUL[250])
+    const token = new Token(chainId, assetAddress, 18)
+    const parsedDepositValue = tryParseAmount(depositValue, token)
 
     const [payout, setStakedBal] = useState(0)
     const [earnedAmount, setEarnedAmount] = useState(0)
     const [unstakedBal, setUnstakedBal] = useState(0)
 
-    // show confirmation view before minting SOUL
     const [discount, setDiscount] = useState(0)
-    const [liquidity, setLiquidity] = useState(0)
-    const { deposit, withdraw } = useBondContract()
+    const [bondPrice, setBondPrice] = useState(0)
+    const [available, setAvailabile] = useState(false)
+    // const { deposit, withdraw } = useBondContract()
     const luxPrice = useLuxorPrice()
     const assetToken = new Token(250, assetAddress, 18, assetName)
-    const tokenPrice = useTokenPrice(assetAddress)
+    const [approvalState, approve] = useApproveCallback(parsedDepositValue, bond?.address)
+    const [showConfirmation, setShowConfirmation] = useState(false)
+    const [showAvailabilityMsg, setShowAvailabilityMsg] = useState(false)
 
     /**
      * Runs only on initial render/mount
      */
     useEffect(() => {
         fetchDiscount()
+        fetchAvailability()
         fetchEarnings()
         fetchPayout()
+        fetchApproval()
     }, [account])
 
     /**
@@ -81,6 +88,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                     fetchPayout()
                     fetchDiscount()
                     fetchEarnings()
+                    fetchApproval()
                 }
             }, 3000)
             // Clear timeout if the component is unmounted
@@ -110,11 +118,32 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
             const bondPrice = result / 1e18
             // console.log('luxPrice:%s', luxPrice)
             // console.log('bondPrice:%s', bondPrice)
+            setBondPrice(bondPrice)
             const diff = Number(luxPrice) - Number(bondPrice)
             const disc = diff / luxPrice * 100
             const discount = diff <= 0 ? 0 : disc
             // console.log('discount:%s', discount)
             setDiscount(Number(discount))
+        } catch (e) {
+            console.warn(e)
+        }
+    }
+
+    /**
+     * Checks the Availability Amount
+     */
+    const fetchAvailability = async () => {
+        try {
+            const result1 = await BondContract?.totalDebt(bondAddress)
+            const totalDebt = result1 / 1e18
+            const result2 = await BondContract?.maximumDebt(bondAddress)
+            const maxDebt = result2 / 1e18
+            // console.log('luxPrice:%s', luxPrice)
+            // console.log('bondPrice:%s', bondPrice)
+            const diff = Number(maxDebt) - Number(totalDebt)
+            const available = diff <= 0 ? false : true
+            // console.log('discount:%s', discount)
+            setAvailabile(available)
         } catch (e) {
             console.warn(e)
         }
@@ -180,28 +209,28 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     }
 
     /**
-     * Checks if the user has approved AutoStakeContract to move lpTokens
+     * Checks if the user has approved BondContractAddress to move lpTokens
      */
-    const fetchApproval = async () => {
+     const fetchApproval = async () => {
         if (!account) {
             // alert('Connect Wallet')
         } else {
-            // Checks if AutoStakeContract can move tokens
-            const amount = await erc20Allowance(account, bondAddress)
+            // Checks if BondContractAddress can move tokens
+            const amount = await erc20Allowance(account, BondContractAddress)
             if (amount > 0) setApproved(true)
             return amount
         }
     }
 
     /**
-     * Approves AutoStakeContract to move lpTokens
+     * Approves BondContractAddress to move lpTokens
      */
     const handleApprove = async () => {
         if (!account) {
-            alert('Connect Wallet')
+            // alert('Connect Wallet')
         } else {
             try {
-                const tx = await erc20Approve(bondAddress)
+                const tx = await erc20Approve(BondContractAddress)
                 await tx?.wait().then(await fetchApproval())
             } catch (e) {
                 // alert(e.message)
@@ -238,11 +267,11 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     }
 
     /**
-     * Deposits Soul
+     * Handles Deposit
      */
     const handleDeposit = async (amount) => {
         try {
-            const tx = await AutoStakeContract?.deposit(account, parsedDepositValue?.quotient.toString())
+            const tx = await BondContract?.deposit(parsedDepositValue?.quotient.toString(), 2, bondAddress)
             await tx.wait()
             await fetchPayout()
         } catch (e) {
@@ -300,7 +329,21 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                 </Wrap>}
                             </TokenPairBox>
 
-                            <StakeItemBox>
+                            <StakeItemBox className="flex">
+                                <StakeItem>
+                                    {Number(bondPrice).toString() === '0.00' ? (
+                                        <Text padding="0" fontSize="1rem" color="#666">
+                                            0
+                                        </Text>
+                                    ) : (
+                                        <Text padding="0" fontSize="1rem" color="#FFFFFF">
+                                            ${Number(bondPrice).toFixed(2)}
+                                        </Text>
+                                    )}
+                                </StakeItem>
+                            </StakeItemBox>
+
+                            <StakeItemBox className="flex">
                                 <StakeItem>
                                     {Number(discount).toString() === '0.00' ? (
                                         <Text padding="0" fontSize="1rem" color="#666">
@@ -371,8 +414,8 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                 </Text>
                             </Wrap>
                             <Wrap padding="0" margin="0" display="flex">
-                                {(approved && Number(unstakedBal) == 0) ?
-                        (
+                                {(approved &&
+                                 Number(unstakedBal) == 0) ? (
                             <TokenPairLink
                                 target="_blank"
                                 rel="noopener"
@@ -384,17 +427,25 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                             CLICK HERE TO ACQUIRE BOND ASSETS</div>
                             </TokenPairLink>
                         ) :
-                                approved ?
+                                approved && available ?
                                     (
                                         <SubmitButton
                                             primaryColour="#B485FF"
                                             color="black"
                                             height="2rem"
-                                        >
+                                            onClick={() => handleDeposit(depositValue)}>
                                             DEPOSIT {assetName}
                                         </SubmitButton>
-                                    ) :
-                                    (
+                                    ) : !available ?
+                                    (    <SubmitButton
+                                        height="2rem" 
+                                        primaryColour="#FF3E3E"
+                                        color="black"
+                                        onClick={() => setShowAvailabilityMsg(true)}
+                                        >
+                                            MAXIMUM REACHED
+                                        </SubmitButton> 
+                                    ) : (
                                         <SubmitButton 
                                         height="2rem" 
                                         primaryColour="#B485FF"
@@ -470,23 +521,40 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                             <br />
                                         </Text>
                                     </Wrap>
-                                    <Wrap padding="0" margin="0" display="flex">
+                                    {available &&
+                                        <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
                                             primaryColour="#B485FF"
                                             color="black"
                                             margin=".5rem 0 .5rem 0"
                                             onClick={() =>
-                                                handleDeposit(depositValue)
+                                                setShowConfirmation(true)
                                             }
                                         >
                                             DEPOSIT {bond?.assetName}
                                         </SubmitButton>
                                     </Wrap>
+                                    }
+                                    {!available &&
+                                        <Wrap padding="0" margin="0" display="flex">
+                                        <SubmitButton
+                                            height="2rem"
+                                            primaryColour="#FF3E3E"
+                                            color="black"
+                                            margin=".5rem 0 .5rem 0"
+                                            onClick={() =>
+                                                setShowAvailabilityMsg(true)
+                                            }
+                                        >
+                                            MAXIMUM REACHED
+                                        </SubmitButton>
+                                    </Wrap>
+                                    }
                                     <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
-                                            primaryColour="#bbb"
+                                            primaryColour="#3Eff3E"
                                             color="black"
                                             margin=".5rem 0 .5rem 0"
                                             onClick={() =>
@@ -500,7 +568,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                 <Wrap padding="0" margin="0" display="flex">
                                     <SubmitButton
                                         height="2rem"
-                                        primaryColour="#B485FF"
+                                        primaryColour="#A03EFF"
                                         color="black"
                                         margin=".5rem 0 .5rem 0"
                                         onClick={() =>
@@ -517,6 +585,80 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                     </DetailsContainer>
                 </Wrap>
             )}
+            <Modal isOpen={showConfirmation} onDismiss={
+        () => setShowConfirmation(false)}>
+        <div className="space-y-4">
+          <ModalHeader header={`Do you still wish to proceed?`} onClose={() => setShowConfirmation(false)} />
+          <Typography variant="lg">
+          You have an existing mint. Minting will reset your vesting period and forfeit any pending claimable rewards.
+            <br /><br />
+            We recommend claiming rewards first or using a fresh wallet. 
+          </Typography>
+          <Typography variant="sm" className="font-medium">
+            QUESTIONS OR CONCERNS?
+            <a href="mailto:soulswapfinance@gmail.com">
+              {' '} CONTACT US
+            </a>
+          </Typography>
+          <SubmitButton
+            height="2.5rem"
+            primaryColour="#3Eff3E"
+            color="black"
+            onClick={() =>
+              handleClaim()
+            }
+          >
+            CLAIM REWARDS
+          </SubmitButton>
+          <SubmitButton
+            height="2.5rem"
+            primaryColour="#B485FF"
+            color="black"
+            onClick={() =>
+              handleDeposit(depositValue)
+            }
+          >
+            DEPOSIT {assetName}
+          </SubmitButton>
+        </div>
+      </Modal>
+            <Modal isOpen={showAvailabilityMsg} onDismiss={
+        () => setShowAvailabilityMsg(false)}>
+        <div className="space-y-4">
+          <ModalHeader header={`Bonding Unavailable`} onClose={() => setShowAvailabilityMsg(false)} />
+          <Typography variant="lg">
+          We have set limits on each bond in order to manage the inflation rate.
+            <br /><br />
+            Please select another option to process a bond or harvest rewards, if you have any.
+          </Typography>
+          <Typography variant="sm" className="font-medium">
+            QUESTIONS OR CONCERNS?
+            <a href="mailto:soulswapfinance@gmail.com">
+              {' '} CONTACT US
+            </a>
+          </Typography>
+          <SubmitButton
+            height="2.5rem"
+            primaryColour="#3Eff3E"
+            color="black"
+            onClick={() =>
+              handleClaim()
+            }
+          >
+            CLAIM REWARDS
+          </SubmitButton>
+          <SubmitButton
+            height="2.5rem"
+            primaryColour="#FF3E3E"
+            color="white"
+            onClick={() =>
+                setShowAvailabilityMsg(false)
+            }
+          >
+            CLOSE MESSAGE
+          </SubmitButton>
+        </div>
+      </Modal>
         </>
     )
 }

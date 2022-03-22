@@ -35,6 +35,7 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { useStakeClaimAmount, useRedeemClaimAmount, useSorContract, useFee, useRedeemFee } from 'features/stablecoin/hooks'
 import { useActiveWeb3React } from 'services/web3/hooks'
 import { useSingleCallResult } from 'state/multicall/hooks'
+import NavLink from 'components/NavLink'
 // import useStablecoin from 'hooks/useStablecoin'
 
 export default function Stablecoin() {
@@ -579,6 +580,27 @@ export default function Stablecoin() {
             </Tab.Panel>
           </Tab.Group>
         </div>
+          <Button variant="filled" color="gradient">
+          <NavLink href={'/luxor'}>
+                        {/* <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                        View Account Analytics <span> ↗</span>
+                        </a> */}
+         <div className="flex justify-center py-2 px-4">
+            <a className="flex text-white text-lg items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
+              <span>{i18n._(t`Mint Luxor Money`)}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+        </div>
+        </NavLink>
+          </Button>
       </DoubleGlowShadow>
     </Container>
   )

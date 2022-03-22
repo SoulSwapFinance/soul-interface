@@ -44,13 +44,13 @@ function AppBar(): JSX.Element {
       <Popover as="nav" className="z-10 w-full bg-transparent header-border-b">
         {({ open }) => (
           <>
-            <div className="px-4 py-1">
+            <div className="px-3 justify-center sm:px-4 py-0.5">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                     <NavLink 
                     activeClassName="text-dark-600 text-high-emphesis"
                     href="/landing">
-                    <Image src="/logo.png" alt="Soul" width="40" height="40" />
+                    <Image src="/logo.png" alt="Soul" width="36" height="36" />
                   </NavLink>
 
                   <div className="flex space-x-2">
@@ -65,30 +65,36 @@ function AppBar(): JSX.Element {
                           {i18n._(t`SWAP`)}
                         </a>
                       </NavLink>
-                      {chainId && [ChainId.FANTOM].includes(chainId) && (
-                        <NavLink
-                        activeClassName="text-dark-600 text-high-emphesis"
-                        href="/sor">
-                          <a
-                            id={`stable-nav-link`}
-                            className="w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
-                          >
-                            {i18n._(t`SOR`)}
-                          </a>
-                        </NavLink>
-                      )}
-                      {chainId && [ChainId.FANTOM].includes(chainId) && (
-                        <NavLink
-                        activeClassName="text-dark-600 text-high-emphesis"
-                        href="/autostake">
-                          <a
-                            id={`stable-nav-link`}
-                            className="w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
-                          >
-                            {i18n._(t`STAKE`)}
-                          </a>
-                        </NavLink>
-                      )}
+                      <NavLink 
+                      activeClassName="text-dark-600 text-high-emphesis"
+                      href={'/luxor'}>
+                        <a
+                          id={`luxor-nav-link`}
+                          className="w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
+                        >
+                          {i18n._(t`LUX`)}
+                        </a>
+                      </NavLink>
+                      <NavLink
+                      activeClassName="text-dark-600 text-high-emphesis"
+                      href="/sor">
+                        <a
+                          id={`stable-nav-link`}
+                          className="w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
+                        >
+                          {i18n._(t`SOR`)}
+                        </a>
+                      </NavLink>
+                      <NavLink
+                      activeClassName="text-dark-600 text-high-emphesis"
+                      href="/autostake">
+                        <a
+                          id={`stable-nav-link`}
+                          className="w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
+                        >
+                          {i18n._(t`STAKE`)}
+                        </a>
+                      </NavLink>
                       {/* {chainId && [ChainId.FANTOM].includes(chainId) && (
                         <NavLink
                         activeClassName="text-dark-600 text-high-emphesis"
@@ -128,7 +134,7 @@ function AppBar(): JSX.Element {
                       href={'/analytics'}>
                         <a
                           id={`analytics-nav-link`}
-                          className="w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
+                          className="hidden sm:block w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
                         >
                           {i18n._(t`DATA`)}
                         </a>
@@ -158,7 +164,7 @@ function AppBar(): JSX.Element {
                       href={'/launchpad'}>
                         <a
                           id={`launch-nav-link`}
-                          className="hidden sm:block w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
+                          className="hidden md:block w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
                         >
                           {i18n._(t`LAUNCH`)}
                         </a>
@@ -169,7 +175,7 @@ function AppBar(): JSX.Element {
                       href={'/borrow'}>
                         <a
                           id={`borrow-nav-link`}
-                          className="hidden sm:block w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
+                          className="hidden lg:block w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
                         >
                           {i18n._(t`BORROW`)}
                         </a>
@@ -188,7 +194,7 @@ function AppBar(): JSX.Element {
                   </div>
                 </div>
 
-                <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-1 xl:w-auto bg-dark-1000 xl:relative xl:p-0 xl:bg-transparent">
+                <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-1 2xl:w-auto bg-dark-1000 2xl:relative 2xl:p-0 2xl:bg-transparent">
                   <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
                     {library && library.provider.isMetaMask && (
                       <div className="inline-block">
@@ -230,7 +236,7 @@ function AppBar(): JSX.Element {
                     <More />
                   </div>
                 </div>
-                <div className="hidden sm:flex -mr-2 xl:hidden">
+                <div className="flex mr-1 sm:mr-1 2xl:hidden">
                   {/* Mobile Menu Button */}
                   <Popover.Button className="inline-flex items-center justify-center p-2 rounded-md text-primary hover:text-high-emphesis focus:outline-none">
                     <span className="sr-only">{i18n._(t`Open Main Menu`)}</span>
@@ -266,7 +272,7 @@ function AppBar(): JSX.Element {
               </div>
             </div>
 
-            <Popover.Panel className="xl:hidden">
+            <Popover.Panel className="2xl:hidden">
               <div className="flex flex-col px-10 pt-2 pb-3 space-y-4">
 
                 <ExternalLink href={'https://app.luxor.money'}>

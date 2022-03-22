@@ -245,33 +245,6 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   }
 
   /**
-   * Gets the emissions rate for a given pool
-   */
-
-  // const fetchPoolRate = async () => {
-  //   if (!account) {
-  //     // alert('connect wallet')
-  //   } else {
-  //     try {
-  //       const allocationPoints = await poolInfo(pid)
-  //       const totalAllocation = await totalAllocPoint()
-
-  //       const allocation = ethers.utils.formatUnits(allocationPoints?.[1])
-  //       const totalAllocationPoints = ethers.utils.formatUnits(totalAllocation)
-
-  //       const poolRate = Number(250000 / totalAllocationPoints / allocationPoints)
-
-  //       setRate(poolRate.toString())
-
-  //       return [poolRate]
-
-  //     } catch (err) {
-  //       console.warn(err)
-  //     }
-  //   }
-  // }
-
-  /**
     * Checks the user's alloc of the total staked in the farm
   */
   const fetchUserBondAlloc = async () => {

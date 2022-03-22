@@ -18,7 +18,7 @@ export default function LuxorKey() {
         alignContent="center"
       >
         <StakeContainer>
-          <Row padding=".25rem 1rem">
+          <Row padding=".25rem 1.25rem">
             <StakeContentWrapper>
                 <Wrap>
                   <Text padding ="0" fontSize=".8" color="#bbb">
@@ -28,19 +28,27 @@ export default function LuxorKey() {
 
               <StakeItemBox>
                 <Text padding="0" fontSize=".8" color="#bbb">
-                DISCOUNT
+                PRICE
+                </Text>
+              </StakeItemBox>
+
+              <StakeItemBox>
+                <Text padding="0" fontSize=".8" color="#bbb">
+                ROI
                 </Text>
               </StakeItemBox>
 
               <StakeItemBox desktopOnly={true}>
                 <Text padding="0" fontSize=".8" color="#bbb">
-                EARNED
+                CLAIM
                 </Text>
               </StakeItemBox>
-
+              <StakeItemBox>
                 <Text padding="0" fontSize=".8" color="#bbb">
                 TERM
                 </Text>
+              </StakeItemBox>
+
             </StakeContentWrapper>
             
           </Row>
