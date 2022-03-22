@@ -162,17 +162,6 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                 setStakedBal(Number(payout))
                 // console.log('payout:%s', Number(payout))
                 const asset = await BondContract.principle(bondAddress)
-                // const TokenContract = new Token(250, asset, assetName)
-
-                // const erc20BalanceOf = async (address) => {
-                //     try {
-                //     const result = await asset.balanceOf(address)
-                //     return result
-                //     } catch (e) {
-                //     console.log(e)
-                //     // alert(e.message)
-                //     }
-                // }
                 const balance = await erc20BalanceOf(account)
                 const userBal = balance / 1e18
                 console.log('unstaked:%s', Number(userBal))
@@ -213,7 +202,6 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
      */
      const fetchApproval = async () => {
         if (!account) {
-            // alert('Connect Wallet')
         } else {
             // Checks if BondContractAddress can move tokens
             const amount = await erc20Allowance(account, BondContractAddress)
