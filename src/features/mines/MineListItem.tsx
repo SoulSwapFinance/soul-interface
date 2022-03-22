@@ -2,10 +2,10 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { isMobile } from 'react-device-detect'
 import { CurrencyLogo, CurrencyLogoArray } from 'components/CurrencyLogo'
-import QuestionHelper from 'components/QuestionHelper'
+// import QuestionHelper from 'components/QuestionHelper'
 import Typography from 'components/Typography'
 import { TABLE_TBODY_TD_CLASSNAME, TABLE_TBODY_TR_CLASSNAME } from 'features/trident/constants'
-import { aprToApy, classNames, formatNumber, formatPercent } from 'functions'
+import { classNames, formatNumber } from 'functions'
 import { useCurrency } from 'hooks/Tokens'
 import React, { FC, ReactNode } from 'react'
 
@@ -19,22 +19,10 @@ import { usePendingSoul } from 'features/mines/hooks'
 // import { useSoulPositions } from './hooks'
 import usePriceApi from 'hooks/usePriceApi'
 import { useHarvestHelperContract } from 'hooks/useContract'
-// import useTokenAnalytics from 'features/analytics/hooks/useTokensAnalytics'
-// import { PairType } from './enum'
-// import { usePairBalance, usePairVolume } from 'hooks/usePairData'
 import { SOUL } from '../../constants'
 
-import styled from 'styled-components'
-// import usePendingReward from './hooks/usePendingReward'
 import { useActiveWeb3React } from 'services/web3/hooks'
-import { useBinancePrice, useFantomPrice, useSoulPrice, useTokenPrice, useWrappedBtcPrice, useWrappedEthPrice } from 'hooks/getPrices'
-// import { useOneDayBlock, usePairDayData, useSoulPairs, useTwoDayBlock } from 'services/graph'
-// import { getAddress } from '@ethersproject/address'
-// import { SOUL_SUMMONER_ADDRESS } from 'sdk'
-// import { usePositions } from 'hooks/usePositions'
-// import liquidity from 'pages/portfolio/[account]/liquidity'
-// import Pair from 'pages/analytics/pairs/[id]'
-// import { useRouter } from 'next/router'
+import { useBinancePrice, useFantomPrice, useSoulPrice, useTokenPrice, useWrappedBtcPrice } from 'hooks/getPrices'
 import { usePairPrice } from 'hooks/usePairData'
 
 // const HideOnMobile = styled.div`
@@ -49,12 +37,11 @@ interface MineListItem {
 }
 
 const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
-  const { account, chainId } = useActiveWeb3React()
+  const { chainId } = useActiveWeb3React()
   const { i18n } = useLingui()
   const token0 = useCurrency(farm.pair?.token0?.id) ?? undefined
   const token1 = useCurrency(farm.pair?.token1?.id) ?? undefined
-  // const tvlInfo = useTVL()
-  const lpToken = farm.pair?.address
+
   const harvestHelperContract = useHarvestHelperContract()
   const soulPrice = useSoulPrice() // to avoid RPC call
   const tokenPrice 
@@ -95,54 +82,6 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
     ? Number(pairPrice) * Number(lpBalance) / 1e18
     : Number(tokenPrice) * Number(lpBalance) / 1e18
 
-  // const router = useRouter()
-  const id = farm?.lpToken
-
-
-  // const volumeUSD1d = swapPair?.volumeUSD - pair1d?.volumeUSD
-  // console.log('volumeUSD1d:%s', volumeUSD1d)
-  // const volumeUSD2d = pair1d?.volumeUSD - pair2d?.volumeUSD
-
-    // const volume1d = usePairDayData(farm?.lpToken)
-    // const volume1d = Pair?.volume
-  const volume = farm.pair?.token1
-    ? Number(lpBalance) / 1e18
-    : 0 // 0 for SOUL SAS
-
-    // console.log('vol:%s', volume1d)
-    // console.log('liquidity:%s', tvl)
-
-  // REWARD RATE CALCULATIONS //
-  // const rewardPerSecond =
-  //   farm.rewards?.reduce((previousValue, currentValue) => {
-  //     return previousValue + currentValue.rewardPerSecond
-  //   }, 0)
-
-  // const rewardPerDay = rewardPerSecond * 86_400
-  // const rewardPerYear = rewardPerDay * 365
-
-  // ROI CALCULATIONS //
-
-  // const roiPerYear  // = roiPerMonth * 12
-  //   = rewardPerYear
-  //   * soulPrice // value of the rewards
-  //   / tvl // div by liq. balance (TVL)
-
-  // const roiPerMonth = roiPerYear / 12
-  // const roiPerDay = roiPerMonth / 30
-  // const roiPerHour = roiPerDay / 24
-
-  // use vol, liq to getApy 
-  const getApy = (volume, tvl) => {
-    const apy = aprToApy(((
-      (volume / 7) * 365 * 0.0025) / tvl) * 100, 3650)
-    if (apy > 1000) return '>10,000%'
-    return formatPercent(apy)
-  }
-  // console.log('volume:%s', volume)
-  // console.log('volume1d: ', farm.pair?.volume1d)
-  // console.log('feeApyPerYear: ', Number(farm?.id.getApy))
-
   return (
     <div className={classNames(TABLE_TBODY_TR_CLASSNAME, 'grid grid-cols-3 sm:grid-cols-3')} onClick={onClick}>
       {/* <div className={classNames('flex gap-2', TABLE_TBODY_TD_CLASSNAME(0, 4))}> */}
@@ -175,7 +114,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
           {/* ))} */}
 
           { /* DAILY REWARDS (SUBTITLE) */}
-          {/*
+{/*           
           </Typography>
           {farm?.rewards?.map((reward, i) => (
   <Typography variant="xs" className="text-low-emphesis">
@@ -190,7 +129,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
       {/* <div className={TABLE_TBODY_TD_CLASSNAME(1, 4)}> */}
       <div className="flex justify-center items-center">
       {/* <div className="flex flex-col items-start sm:items-center justify-center"> */}
-      {farm?.rewards?.map((reward, i) => (
+      {/* {farm?.rewards?.map((reward, i) => ( */}
         <Typography weight={700} className="text-high-emphesis">
           {formatNumber(
             // PRICE PER TOKEN * TOKEN BALANCE
@@ -198,7 +137,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
             true)
           }
         </Typography>
-      ))}
+      {/* ))} */}
       </div>
       {/* </div> */}
       {/* <div className={classNames('hidden sm:flex flex-col !items-end !justify-center', TABLE_TBODY_TD_CLASSNAME(2, 4))}> */}

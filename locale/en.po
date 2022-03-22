@@ -265,9 +265,6 @@ msgstr "Burn Fee"
 msgid "Buy"
 msgstr "Buy"
 
-msgid "Buy Tickets"
-msgstr "Buy Tickets"
-
 msgid ""
 "By adding this list you are implicitly trusting that the data is correct. Anyone can create a list,\n"
 "including creating fake versions of existing lists and lists that claim to represent projects that do not\n"
@@ -318,9 +315,6 @@ msgstr "Claim and Autostake"
 
 msgid "Claimable Amount"
 msgstr "Claimable Amount"
-
-msgid "Claimable amount"
-msgstr "Claimable amount"
 
 msgid "Claimable: Fetching Claimable Amount"
 msgstr "Claimable: Fetching Claimable Amount"
@@ -772,9 +766,6 @@ msgstr "Inactive"
 msgid "Including fees"
 msgstr "Including fees"
 
-msgid "Input"
-msgstr "Input"
-
 msgid "Input is estimated. You will sell at most"
 msgstr "Input is estimated. You will sell at most"
 
@@ -957,8 +948,8 @@ msgstr "Max"
 msgid "Max Mint"
 msgstr "Max Mint"
 
-msgid "Max redeem per tx"
-msgstr "Max redeem per tx"
+msgid "Max Redeem"
+msgstr "Max Redeem"
 
 msgid "Me"
 msgstr "Me"
@@ -981,14 +972,14 @@ msgstr "Minimum received after slippage"
 msgid "Mint"
 msgstr "Mint"
 
+msgid "Mint Fee"
+msgstr "Mint Fee"
+
 msgid "Mint SOUL with Liquidity"
 msgstr "Mint SOUL with Liquidity"
 
 msgid "Minted"
 msgstr "Minted"
-
-msgid "Minting Fee"
-msgstr "Minting Fee"
 
 msgid "Net Worth"
 msgstr "Net Worth"
@@ -1064,9 +1055,6 @@ msgstr "Orders"
 
 msgid "Our Resources."
 msgstr "Our Resources."
-
-msgid "Output"
-msgstr "Output"
 
 msgid "Output is estimated. If the price changes by more than 0.5% your transaction will revert."
 msgstr "Output is estimated. If the price changes by more than 0.5% your transaction will revert."
@@ -1232,8 +1220,8 @@ msgstr "Redeem"
 msgid "Redeemed"
 msgstr "Redeemed"
 
-msgid "Redemption fee"
-msgstr "Redemption fee"
+msgid "Redemption Fee"
+msgstr "Redemption Fee"
 
 msgid "Remove"
 msgstr "Remove"
@@ -1267,9 +1255,6 @@ msgstr "Resources"
 
 msgid "Restricts swaps to direct pairs only."
 msgstr "Restricts swaps to direct pairs only."
-
-msgid "Results"
-msgstr "Results"
 
 msgid "Review Limit Order"
 msgstr "Review Limit Order"
@@ -1311,6 +1296,9 @@ msgstr "SELF"
 
 msgid "SLP"
 msgstr "SLP"
+
+msgid "SOR"
+msgstr "SOR"
 
 msgid "SOUL"
 msgstr "SOUL"
@@ -1802,9 +1790,6 @@ msgstr "You pay"
 
 msgid "You receive"
 msgstr "You receive"
-
-msgid "You will receive"
-msgstr "You will receive"
 
 msgid "You'll receive (at least):"
 msgstr "You'll receive (at least):"

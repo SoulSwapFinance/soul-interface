@@ -75,7 +75,7 @@ export const StakeContentWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 1rem 0 0;
+  padding: 0 4rem 0 0;
 
   &:last-child {
     justify-content: space-between;
@@ -107,7 +107,7 @@ export const StakeItem = styled.h2`
 `
 
 export const TokenPairBox = styled.div`
-  width: 100px;
+  width: 150px;
   display: flex;
   justify-content: left;
   align-items: center;
@@ -115,7 +115,7 @@ export const TokenPairBox = styled.div`
 
 export const TokenPair = styled.a`
   overflow-wrap: break-wordWRA;
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: white;
 
   transition: all 0.2s ease-in-out;

@@ -28,7 +28,7 @@ import { useTransactionAdder } from '../../state/transactions/hooks'
 import { ApprovalState, useApproveCallback } from '../../hooks'
 import Dots from '../../components/Dots'
 import { BigNumber } from '@ethersproject/bignumber'
-import { usePendingAmount, useClaimableAmount, useBondContract, useRemainingVesting } from 'features/bonds/hooks'
+import { usePendingAmount, useClaimableAmount, useBondContract, useRemainingVesting } from './hooks'
 import { getExplorerLink } from '../../functions/explorer'
 import { useActiveWeb3React } from 'services/web3'
 import { LUX_ADDRESS } from 'constants/addresses'
@@ -294,13 +294,13 @@ const BondItem = ({ bond, ...rest }) => {
                           <Tab
                             className={({ selected }) =>
                               `${
-                                selected ? 'bg-transparent text-black dark:text-white-10' : ''
+                                selected ? 'bg-transparent text-white dark:text-white-10' : ''
                               } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border-transparent border-1 rounded-8 hover:text-black dark:hover:text-white-10`
                             }
                           >
                             {/* {i18n._(t`Bond`)} */}
                           </Tab>
-                          {/*
+{/*                           
                               <Tab
                               className={({ selected }) =>
                               `${
