@@ -27,6 +27,7 @@ import {
     SubmitButton,
 } from './StakeStyles'
 import { Wrap, ClickableText, Text, ExternalLink } from '../../components/ReusableStyles'
+import { formatCurrencyAmount } from 'functions/format'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -57,12 +58,16 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     const [approved, setApproved] = useState(false)
     //   const [confirmed, setConfirmed] = useState(false)
     //   const [receiving, setReceiving] = useState(0)
-
+    
     const [stakedBal, setStakedBal] = useState(0)
     const [earnedAmount, setEarnedAmount] = useState(0)
+    const [pricePerShare, setPricePerShare] = useState(0)
     const [unstakedBal, setUnstakedBal] = useState(0)
     const [pending, setPending] = useState(0)
-
+    
+    // const recentProfit = useStakeRecentProfit()
+    // const earnedAmount = formatCurrencyAmount(recentProfit, 6)
+    // console.log('earnedAmount:%s', earnedAmount)
     // show confirmation view before minting SOUL
     const [apy, setApy] = useState()
     const [liquidity, setLiquidity] = useState()
@@ -85,8 +90,9 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                 if (showing) {
                     fetchBals()
                     getApyAndLiquidity()
-                    fetchEarnedAmount()
+                    fetchEarnings()
                     fetchApproval()
+                    // fetchSharePrice()
                 }
             }, 3000)
             // Clear timeout if the component is unmounted
@@ -101,8 +107,9 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
         setShowing(!showing)
         if (!showing) {
             fetchBals()
-            fetchEarnedAmount()
+            fetchEarnings()
             fetchApproval()
+            // fetchSharePrice()
         }
     }
 
@@ -170,25 +177,53 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
           }
           
           /**
+           * Gets the price per share.
+           */
+        //   const fetchSharePrice = async () => {
+            // if (!account) {
+              // alert('connect wallet')
+            // } else {
+            //     try {
+            //         // get price per share
+            //         const result = await AutoStakeContract?.getPricePerFullShare()
+            //         const price = result / 1e18
+            //         setPricePerShare(Number(price))
+            //         console.log('price:%s', Number(price))
+
+            //         return [price]
+            //     } catch (err) {
+            //             console.warn(err)
+            //         }
+            //     }
+            // }
+
+           /**
            * Gets the earned amount of the user for each pool
            */
-          const fetchEarnedAmount = async () => {
+          const fetchEarnings = async (price) => {
             if (!account) {
               // alert('connect wallet')
             } else {
-              try {
-                // get SOUL earned
-                const result = await AutoStakeContract?.available()
-                const available = result / 1e18
-                setEarnedAmount(Number(available))
-                console.log('available:%s', Number(available))
+                try {
+                    // get SOUL earned
+                    const result = await AutoStakeContract?.getPricePerFullShare()
+                    const price = result / 1e18
+                    const staked = await AutoStakeContract?.balanceOf(account)
+                    const stakedBal = staked / 1e18
 
-                return [available]
-            } catch (err) {
-                console.warn(err)
+                    const shareValue = price * stakedBal
+                    const profit = shareValue - stakedBal
+                    console.log('profit:%s', profit)
+
+                    setEarnedAmount(Number(profit))
+                    console.log('profit:%s', Number(profit))
+
+                    return [profit]
+                } catch (err) {
+                        console.warn(err)
+                    }
+                }
             }
-        }
-    }
 
     /**
      * Checks if the user has approved AutoStakeContract to move lpTokens
@@ -256,8 +291,9 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
         try {
             let tx
             tx = await AutoStakeContract?.harvest()
+            // await tx
             // await tx?.wait().then(await setPending(pid))
-            await tx?.wait().then(await fetchEarnedAmount())
+            await tx?.wait().then(await fetchEarnings())
         } catch (e) {
             // alert(e.message)
             console.log(e)
@@ -436,6 +472,20 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                             }&nbsp;
                                             <br />
                                             VALUE:&nbsp;{Number(stakedBal * soulPrice) !== 0 ? `$${Number(stakedBal * soulPrice).toFixed(3)}` : '0'}
+                                        </Text>
+                                        <Text fontSize=".9rem" padding="0" textAlign="left" color="#aaa">
+                                            FEE:&nbsp;
+                                            {Number(stakedBal) === 0
+                                                ? '0.000'
+                                                : Number(stakedBal) < 0.001
+                                                    ? '<0.001'
+                                                    : Number(stakedBal)
+                                                        .toFixed(3)
+                                                        .toString()
+                                                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                                            }&nbsp;
+                                            <br />
+                                            PERIOD:&nbsp;{'72H'}
                                         </Text>
                                     </Wrap>
                                     <Wrap padding="0" margin="0" display="flex">

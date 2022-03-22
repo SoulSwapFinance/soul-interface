@@ -5,7 +5,7 @@ import { useSingleCallResult } from '../../state/multicall/hooks'
 import { CurrencyAmount, JSBI, SOUL } from 'sdk'
 import { BigNumber } from '@ethersproject/bignumber'
 
-function soulFromShares(shares: BigNumber, sharePrice: BigNumber) {
+export function soulFromShares(shares: BigNumber, sharePrice: BigNumber) {
   const DECIMALS = BigNumber.from(10).pow(18)
   return shares.mul(sharePrice).div(DECIMALS)
 }
@@ -15,7 +15,7 @@ export function sharesFromSoul(amount: BigNumber, sharePrice: BigNumber) {
   return amount.mul(DECIMALS).div(sharePrice)
 }
 
-export function useStakeUserInfo(token) {
+export function useStakeUserInfo() {
   const { account } = useActiveWeb3React()
   const contract = useAutoStakeContract()
 
@@ -33,7 +33,7 @@ export function useStakeUserInfo(token) {
 
   const amount = shares && sharePrice ? JSBI.BigInt(soulFromShares(shares, sharePrice).toString()) : undefined
 
-  return amount ? CurrencyAmount.fromRawAmount(token, amount) : CurrencyAmount.fromRawAmount(token, JSBI.BigInt('0'))
+  return amount ? CurrencyAmount.fromRawAmount(SOUL[250], amount) : CurrencyAmount.fromRawAmount(SOUL[250], JSBI.BigInt('0'))
 }
 
 export function useStakeSharePrice() {
@@ -44,7 +44,7 @@ export function useStakeSharePrice() {
   return sharePrice ? sharePrice : undefined
 }
 
-export function useStakeRecentProfit(token) {
+export function useStakeRecentProfit() {
   const { account } = useActiveWeb3React()
 
   const contract = useAutoStakeContract()
@@ -66,8 +66,8 @@ export function useStakeRecentProfit(token) {
   const oldAmount = info3?.[1]
 
   return amount && oldAmount
-    ? CurrencyAmount.fromRawAmount(token, JSBI.BigInt(amount.sub(oldAmount).toString()))
-    : CurrencyAmount.fromRawAmount(token, JSBI.BigInt('0'))
+    ? CurrencyAmount.fromRawAmount(SOUL[250], JSBI.BigInt(amount.sub(oldAmount).toString()))
+    : CurrencyAmount.fromRawAmount(SOUL[250], JSBI.BigInt('0'))
 }
 
 export function useStakeContract() {
@@ -82,7 +82,7 @@ export function useStakeContract() {
         let tx
 
         tx = await contract?.deposit(account, amount, {
-          /*gasLimit: 500000*/
+          /* gasLimit: 500000 */
         })
 
         return tx
@@ -102,7 +102,7 @@ export function useStakeContract() {
         let shares = sharesFromSoul(amount, sharePrice)
 
         tx = await contract?.withdraw(shares, {
-          /*gasLimit: 500000*/
+          /* gasLimit: 500000 */
         })
 
         return tx
