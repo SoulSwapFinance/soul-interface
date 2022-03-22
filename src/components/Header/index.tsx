@@ -77,6 +77,18 @@ function AppBar(): JSX.Element {
                           </a>
                         </NavLink>
                       )}
+                      {chainId && [ChainId.FANTOM].includes(chainId) && (
+                        <NavLink
+                        activeClassName="text-dark-600 text-high-emphesis"
+                        href="/autostake">
+                          <a
+                            id={`stable-nav-link`}
+                            className="w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
+                          >
+                            {i18n._(t`STAKE`)}
+                          </a>
+                        </NavLink>
+                      )}
                       {/* {chainId && [ChainId.FANTOM].includes(chainId) && (
                         <NavLink
                         activeClassName="text-dark-600 text-high-emphesis"
@@ -123,12 +135,12 @@ function AppBar(): JSX.Element {
                       </NavLink>
                       <NavLink
                       activeClassName="text-dark-600 text-high-emphesis"
-                      href={'/borrow'}>
+                      href={'/lend'}>
                         <a
                           id={`lend-nav-link`}
                           className="w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
                         >
-                          {i18n._(t`BORROW`)}
+                          {i18n._(t`LEND`)}
                         </a>
                       </NavLink>
                       <NavLink
@@ -154,12 +166,12 @@ function AppBar(): JSX.Element {
 
                       <NavLink
                       activeClassName="text-dark-600 text-high-emphesis"
-                      href={'/lend'}>
+                      href={'/borrow'}>
                         <a
-                          id={`lend-nav-link`}
+                          id={`borrow-nav-link`}
                           className="hidden sm:block w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
                         >
-                          {i18n._(t`LEND`)}
+                          {i18n._(t`BORROW`)}
                         </a>
                       </NavLink>
                       {/* <NavLink
