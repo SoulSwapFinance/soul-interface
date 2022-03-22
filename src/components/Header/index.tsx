@@ -141,10 +141,20 @@ function AppBar(): JSX.Element {
                       </NavLink>
                       <NavLink
                       activeClassName="text-dark-600 text-high-emphesis"
+                      href={'/explore'}>
+                        <a
+                          id={`explore-nav-link`}
+                          className="w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
+                        >
+                          {i18n._(t`EXPLORE`)}
+                        </a>
+                      </NavLink>
+                      <NavLink
+                      activeClassName="text-dark-600 text-high-emphesis"
                       href={'/lend'}>
                         <a
                           id={`lend-nav-link`}
-                          className="w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
+                          className="hidden sm:block w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"
                         >
                           {i18n._(t`LEND`)}
                         </a>

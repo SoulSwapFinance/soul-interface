@@ -30,7 +30,7 @@ const EXPLORE = (i18n: I18n) => [
   {
     id: 4,
     name: 'LUXOR BONDS',
-    description: 'Access Luxor Money bonds. Now, native on SoulSwap.',
+    description: 'Access Luxor Money bonds. Natively on SoulSwap.',
     href: './luxor'
   },
   {
@@ -42,7 +42,7 @@ const EXPLORE = (i18n: I18n) => [
   {
     id: 6,
     name: 'LEND & BORROW',
-    description: 'Lend, Leverage, and Farm. Venture into the Underworld.',
+    description: 'Lend, Leverage, and Farm. Enter the Underworld.',
     href: './borrow'
   },
   {
@@ -64,18 +64,18 @@ export default function Tools() {
   const features = useMemo(() => EXPLORE(i18n), [i18n])
 
   return (
-    <Container id="features-page" className="py-4 space-y-4 md:py-8 lg:py-12" maxWidth="xl">
+    <Container id="features-page" className="py-4 space-y-5 md:py-8 lg:py-12" maxWidth="xl">
       <Head>
         <title>Explore | Soul</title>
         <meta key="description" name="description" content="SoulSwap Tools..." />
       </Head>
-      <Typography variant="h1" component="h1">
+      <Typography variant="h1" className="text-center" component="h1">
         OUR ECOSYSTEM
       </Typography>
       <ul className="space-y-4 divide-y-0">
         {features.map((feature) => (
-          <li key={feature.id} className="relative w-full p-4 rounded bg-dark-900 hover:bg-dark-800">
-            <div className="flex justify-between space-x-4">
+          <li key={feature.id} className="relative border gap-4 border-dark-800 hover:border-dark-600 w-full p-5 rounded bg-dark-900 hover:bg-dark-800">
+            <div className="flex justify-between space-y-4 space-x-4">
               <div className="flex-1 min-w-0">
                 <Link href={feature.href}>
                   <a className="flex items-center justify-between focus:outline-none">
