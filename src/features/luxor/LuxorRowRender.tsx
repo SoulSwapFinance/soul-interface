@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
-import { ethers } from 'ethers'
-import { useLuxorPrice, useSoulPrice, useTokenPrice } from 'hooks/getPrices'
+// import { ethers } from 'ethers'
+import { useLuxorPrice } from 'hooks/getPrices'
 import { useActiveWeb3React } from 'services/web3'
-import QuestionHelper from '../../components/QuestionHelper'
-import { AUTO_STAKE_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL, LUX_HELPER_ADDRESS, Token } from 'sdk'
+// import QuestionHelper from '../../components/QuestionHelper'
+import { SOUL, Token } from 'sdk'
 import AssetInput from 'components/AssetInput'
-import { useAutoStakeContract, useLuxorBondContract, useSoulSummonerContract } from 'hooks/useContract'
+import { useLuxorBondContract } from 'hooks/useContract'
 // import { useBondContract, useStakeSharePrice, useStakeRecentProfit, sharesFromSoul } from './useBonds'
 import useApprove from 'features/bond/hooks/useApprove'
 import {
@@ -20,12 +20,11 @@ import {
     DetailsContainer,
     DetailsWrapper,
     FunctionBox,
-    FlexText,
     SubmitButton,
 } from './Styles'
 import { Wrap, Text, ExternalLink } from '../../components/ReusableStyles'
-import { formatCurrencyAmount, tryParseAmount } from 'functions'
-import { useCurrencyBalance, useTokenBalance } from 'state/wallet/hooks'
+import { tryParseAmount } from 'functions'
+// import { useCurrencyBalance, useTokenBalance } from 'state/wallet/hooks'
 import { useApproveCallback } from 'hooks/useApproveCallback'
 import Modal from 'components/Modal/DefaultModal'
 import Typography from 'components/Typography'
@@ -59,6 +58,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     const [unstakedBal, setUnstakedBal] = useState(0)
 
     const [discount, setDiscount] = useState(0)
+    const [bondPrice, setBondPrice] = useState(0)
     const [available, setAvailabile] = useState(false)
     // const { deposit, withdraw } = useBondContract()
     const luxPrice = useLuxorPrice()
@@ -118,6 +118,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
             const bondPrice = result / 1e18
             // console.log('luxPrice:%s', luxPrice)
             // console.log('bondPrice:%s', bondPrice)
+            setBondPrice(bondPrice)
             const diff = Number(luxPrice) - Number(bondPrice)
             const disc = diff / luxPrice * 100
             const discount = diff <= 0 ? 0 : disc
@@ -328,7 +329,21 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                 </Wrap>}
                             </TokenPairBox>
 
-                            <StakeItemBox>
+                            <StakeItemBox className="flex">
+                                <StakeItem>
+                                    {Number(bondPrice).toString() === '0.00' ? (
+                                        <Text padding="0" fontSize="1rem" color="#666">
+                                            0
+                                        </Text>
+                                    ) : (
+                                        <Text padding="0" fontSize="1rem" color="#FFFFFF">
+                                            ${Number(bondPrice).toFixed(2)}
+                                        </Text>
+                                    )}
+                                </StakeItem>
+                            </StakeItemBox>
+
+                            <StakeItemBox className="flex">
                                 <StakeItem>
                                     {Number(discount).toString() === '0.00' ? (
                                         <Text padding="0" fontSize="1rem" color="#666">
