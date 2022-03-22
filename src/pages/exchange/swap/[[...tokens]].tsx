@@ -35,6 +35,7 @@ import ReactGA from 'react-ga'
 
 import { fetchAPI } from '../../../lib/api'
 import Chart from 'components/Chart'
+import NavLink from 'components/NavLink'
 
 export async function getServerSideProps() {
   try {
@@ -537,8 +538,24 @@ const Swap = () => {
           {isExpertMode && swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}
           {swapIsUnsupported ? <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} show={false} /> : null}
         </div>
-        <div className={`xl:max-w-7xl mt-6 w-full lg:grid-cols-1 order-last space-y-4 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
-          <div className={`w-full flex flex-col order-last mt-6 mb-20 sm:mb-0 lg:mt-0 p-6 rounded rounded-lg bg-light-glass`}>
+        <div className="flex border-dark-900 mt-3 mb-0 gap-1 items-center justify-center">
+                <Button variant="filled" color="gradient" size="lg">
+                  <NavLink href={'/analytics'}>
+                        <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                        <span>View Analytics</span>
+                        </a>
+                  </NavLink>
+                </Button>
+                <Button variant="filled" color="gradient" size="lg">
+                  <NavLink href={'/pool'}>
+                        <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                        <span>View Pools</span>
+                        </a>
+                  </NavLink>
+                </Button>
+              </div>
+        <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-4 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
+          <div className={`w-full flex flex-col order-last mt-2 mb-20 sm:mb-0 lg:mt-0 p-6 rounded rounded-lg bg-light-glass`}>
             <Chart inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
           </div>
         </div>
