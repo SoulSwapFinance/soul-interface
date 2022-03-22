@@ -87,7 +87,7 @@ export const StakeContentWrapper = styled.div`
 `
 
 export const StakeItemBox = styled.div`
-  width: ${({ width }) => (width ? `${width}` : `125px`)};
+  width: ${({ width }) => (width ? `${width}` : `100px`)};
   display: grid;
   justify-content: center;
   align-items: center;
