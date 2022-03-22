@@ -5,10 +5,10 @@ import { useMemo } from 'react'
 import { useV2TradeExactOut } from './useV2Trades'
 
 import { tryParseAmount } from 'functions'
-import { ANY, BNB, CRV, LUXOR, MIM, SEANCE, SOUL, FUSD, USDT, UNIDX, WBTC, WETH, WFTM, WLUM, REAPER, GRIM, GRIMEVO, DAI } from 'constants/tokens'
+import { ANY, BNB, CRV, LUXOR, MIM, SEANCE, SOUL, FUSD, USDT, UNIDX, WBTC, WETH, WFTM, WLUM, REAPER, GRIM, GRIMEVO, DAI, SOR } from 'constants/tokens'
 import { ANY_ADDRESS, BNB_ADDRESS, CRV_ADDRESS, FUSD_ADDRESS, GRIM_ADDRESS, 
   GRIMEVO_ADDRESS, LUX_ADDRESS, REAPER_ADDRESS, SEANCE_ADDRESS, 
-  WFTM_ADDRESS, SOUL_ADDRESS, UNIDX_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS } 
+  WFTM_ADDRESS, SOR_ADDRESS, SOUL_ADDRESS, UNIDX_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS } 
   from 'constants/addresses'
 import { usePrice } from 'hooks/usePrice'
 // import { SupportedChainId } from '../constants/chains'
@@ -33,7 +33,11 @@ const USDT_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
 }
 
 const DAI_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(DAI[ChainId.FANTOM], 100_000e18),
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(DAI[ChainId.FANTOM], 100_000e6),
+}
+
+const SOR_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(SOR[ChainId.FANTOM], 100_000e6),
 }
 
 const MIM_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
@@ -45,7 +49,7 @@ const FUSD_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
 }
 
 const SOUL_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(SOUL[ChainId.FANTOM], 100_000e18)
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(SOUL[ChainId.FANTOM], 100_000e6)
 }
 
 const SEANCE_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
@@ -127,6 +131,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   
   const amountOut = chainId ? STABLECOIN_AMOUNT_OUT[chainId] : undefined
   const usdtAmountOut = chainId ? USDT_AMOUNT_OUT[chainId] : undefined
+  const sorAmountOut = chainId ? SOR_AMOUNT_OUT[chainId] : undefined
   const daiAmountOut = chainId ? DAI_AMOUNT_OUT[chainId] : undefined
   const fusdAmountOut = chainId ? FUSD_AMOUNT_OUT[chainId] : undefined
   const mimAmountOut = chainId ? MIM_AMOUNT_OUT[chainId] : undefined
@@ -151,6 +156,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   // TOKENS
   const stablecoin = amountOut?.currency
   const usdt = usdtAmountOut?.currency
+  const sor = sorAmountOut?.currency
   const dai = daiAmountOut?.currency
   const fusd = fusdAmountOut?.currency
   const mim = mimAmountOut?.currency
@@ -196,6 +202,11 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
     // handle dai
     if (currency?.wrapped.equals(dai)) {
       return new Price(dai, dai, '1', '1')
+    }
+
+    // handle sor
+    if (currency?.wrapped.equals(sor)) {
+      return new Price(sor, sor, '1', '1')
     }
 
     // handle mim

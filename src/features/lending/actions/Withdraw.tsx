@@ -11,14 +11,11 @@ import { useUnderworldApprovalPending } from 'state/application/hooks'
 import React, { useState } from 'react'
 
 import { UnderworldApproveButton } from '../components/Button'
-import SmartNumberInput from '../components/SmartNumberInput'
 import TransactionReviewView from '../components/TransactionReview'
 import WarningsView from '../components/WarningsList'
-import { BigNumber } from '@ethersproject/bignumber'
-import AssetInput from 'components/AssetInput'
 import { useCurrency } from 'hooks/Tokens'
-import { formatPercent } from 'functions'
 import LendAssetInput from 'components/LendAssetInput'
+import SmartNumberInput from '../components/SmartNumberInput'
 
 export default function Withdraw({ pair }: any): JSX.Element {
   const { account } = useActiveWeb3React()
@@ -108,7 +105,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
         {/* {i18n._(t`Withdraw`)} {pair.asset.tokenInfo.symbol} */}
       </div>
 
-      {/* <SmartNumberInput
+      <SmartNumberInput
         color="blue"
         token={pair.asset}
         value={displayValue}
@@ -121,8 +118,8 @@ export default function Withdraw({ pair }: any): JSX.Element {
         pinMax={pinMax}
         setPinMax={setPinMax}
         showMax={true}
-      /> */}
-      <LendAssetInput
+      />
+      {/* <LendAssetInput
         size="sm"
         id="add-collateral-input"
         value={value}
@@ -133,7 +130,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
         // maxSpend={displayValue}
         showMax={true}
         // spendFromWallet={useCoffin} 
-      />
+      /> */}
 
       <WarningsView warnings={warnings} />
       <TransactionReviewView transactionReview={transactionReview}></TransactionReviewView>

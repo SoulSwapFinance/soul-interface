@@ -2,6 +2,7 @@ import { combineReducers } from '@reduxjs/toolkit'
 import portfolio from 'features/portfolio/portfolioSlice'
 
 import mines from 'features/mines/minesSlice'
+// import markets from 'features/markets/marketsSlice'
 import tridentAdd from '../features/trident/add/addSlice'
 // import tridentBalances from '../features/trident/balances/balancesSlice'
 // import tridentCreate from '../features/trident/create/createSlice'
@@ -13,7 +14,6 @@ import application from './application/reducer'
 import burn from './burn/reducer'
 import create from './create/reducer'
 import web3Context from './global/web3ContextSlice'
-// import inari from './inari/reducer'
 import limitOrder from './limit-order/reducer'
 import lists from './lists/reducer'
 import mint from './mint/reducer'
@@ -36,8 +36,8 @@ const reducer = combineReducers({
   lists,
   limitOrder,
   create,
-  // inari,
   mines,
+  // markets,
   portfolio,
   slippage,
   tridentSwap,

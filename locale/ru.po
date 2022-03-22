@@ -229,6 +229,9 @@ msgstr ""
 msgid "Balances"
 msgstr ""
 
+msgid "Bond"
+msgstr ""
+
 msgid "Bonds"
 msgstr ""
 
@@ -295,10 +298,19 @@ msgstr ""
 msgid "Choose an Asset"
 msgstr ""
 
+msgid "Claim"
+msgstr ""
+
 msgid "Claim SOUL"
 msgstr ""
 
 msgid "Claim Scarabs"
+msgstr ""
+
+msgid "Claim and Autostake"
+msgstr ""
+
+msgid "Claimable Amount"
 msgstr ""
 
 msgid "Claimable: Fetching Claimable Amount"
@@ -454,6 +466,9 @@ msgid "DATA"
 msgstr ""
 
 msgid "DEPOSIT"
+msgstr ""
+
+msgid "DEPOSIT LUX"
 msgstr ""
 
 msgid "Dashboard"
@@ -803,6 +818,9 @@ msgstr ""
 msgid "LIQUIDITY"
 msgstr ""
 
+msgid "LUX Market Price"
+msgstr ""
+
 msgid "LUXOR"
 msgstr ""
 
@@ -914,6 +932,12 @@ msgstr ""
 msgid "Max"
 msgstr ""
 
+msgid "Max Mint"
+msgstr ""
+
+msgid "Max Redeem"
+msgstr ""
+
 msgid "Me"
 msgstr ""
 
@@ -932,7 +956,16 @@ msgstr ""
 msgid "Minimum received after slippage"
 msgstr ""
 
+msgid "Mint"
+msgstr ""
+
+msgid "Mint Fee"
+msgstr ""
+
 msgid "Mint SOUL with Liquidity"
+msgstr ""
+
+msgid "Minted"
 msgstr ""
 
 msgid "Net Worth"
@@ -1164,6 +1197,15 @@ msgstr ""
 msgid "Recipient"
 msgstr ""
 
+msgid "Redeem"
+msgstr ""
+
+msgid "Redeemed"
+msgstr ""
+
+msgid "Redemption Fee"
+msgstr ""
+
 msgid "Remove"
 msgstr ""
 
@@ -1232,6 +1274,9 @@ msgid "SELF"
 msgstr ""
 
 msgid "SLP"
+msgstr ""
+
+msgid "SOR"
 msgstr ""
 
 msgid "SOUL"
@@ -1449,6 +1494,9 @@ msgstr ""
 msgid "The participants receive various benefits such as higher rewards according to lock duration, higher allocations in Soul Launchpad and more."
 msgstr ""
 
+msgid "The time remaining until the LUX bond fully matures and 100% of the vested LUX is claimable.  Vesting is linear, with a portion of vested tokens released every second."
+msgstr ""
+
 msgid "The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low."
 msgstr ""
 
@@ -1524,6 +1572,9 @@ msgid "Transaction deadline"
 msgstr ""
 
 msgid "Transactions"
+msgstr ""
+
+msgid "Treasury Balance"
 msgstr ""
 
 msgid "Tribute"
@@ -1743,6 +1794,9 @@ msgid "Your Staked"
 msgstr ""
 
 msgid "Your Wallet"
+msgstr ""
+
+msgid "Your net return over the total investment."
 msgstr ""
 
 msgid "Your transaction got rejected"

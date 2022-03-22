@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
+import Image from 'next/image'
 
 const TitleBox = styled.div`
   ${({ theme }) => theme.flexBC}
@@ -192,7 +193,7 @@ export default function Title({ title, tabList = [] , isNavLink = false, current
                 {
                   iconActiveUrl && iconUrl ? (
                     <div className='icon'>
-                      <img alt={''} src={pathname.match(regex) ? iconActiveUrl : iconUrl}/>
+                      <Image alt={''} src={pathname.match(regex) ? iconActiveUrl : iconUrl}/>
                     </div>
                   ) : ''
                 }
@@ -225,8 +226,8 @@ export default function Title({ title, tabList = [] , isNavLink = false, current
                   item.iconActiveUrl && item.iconUrl ? (
                     <div className="icon">
                       {
-                        !isNaN(currentTab) && Number(currentTab) === index ? <img alt={''} src={item.iconActiveUrl} /> :
-                        (tabIndex === index && isNaN(currentTab) ? <img alt={''} src={item.iconActiveUrl} /> : <img alt={''} src={item.iconUrl} />)
+                        !isNaN(currentTab) && Number(currentTab) === index ? <Image alt={''} src={item.iconActiveUrl} /> :
+                        (tabIndex === index && isNaN(currentTab) ? <Image alt={''} src={item.iconActiveUrl} /> : <Image alt={''} src={item.iconUrl} />)
                       }
                     </div>
                     ) : (

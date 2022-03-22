@@ -21,14 +21,13 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import { RecoilRoot } from 'recoil'
 import { e10 } from 'functions/math'
 
-const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
+// const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
 
 export default function Lend() {
   const { i18n } = useLingui()
 
   const addresses = useUnderworldPairAddresses()
 
-  // @ts-ignore TYPE NEEDS FIXING
   const pairs = useUnderworldPairs(addresses)
 
   const positions = useUnderworldLendPositions(pairs)
@@ -189,7 +188,7 @@ const LendEntry = ({ pair, userPosition = false }) => {
 
   const userDepositedBalance = pair?.userAssetFraction // √
   const assetPrice = pair?.asset.usd / (10**pair.asset.tokenInfo.decimals)
-  const borrowPrice = pair?.collateral.usd / (10**pair.asset.tokenInfo.decimals)
+  // const borrowPrice = pair?.collateral.usd / (10**pair.asset.tokenInfo.decimals)
   const userDepositedValue 
   = userDepositedBalance 
     * assetPrice 
@@ -314,7 +313,7 @@ const LendLayout = ({ children }) => {
       left={
         <Card
           className="h-full bg-dark-900"
-          backgroundImage={BORROW_IMG}
+          // backgroundImage={BORROW_IMG}
           title={i18n._(t`Lend your assets, earn yield with ZERO impermanent loss`)}
           description={i18n._(
             t`Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency.`

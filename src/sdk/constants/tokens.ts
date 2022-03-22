@@ -1,4 +1,4 @@
-import { USDC_ADDRESS, DAI_ADDRESS, USD_ADDRESS, WETH9_ADDRESS, WNATIVE_ADDRESS, SOUL_ADDRESS } from './addresses'
+import { USDC_ADDRESS, CHANT_ADDRESS, DAI_ADDRESS, USD_ADDRESS, WETH9_ADDRESS, WNATIVE_ADDRESS, SOUL_ADDRESS } from './addresses'
 
 import { ChainId } from '../enums'
 import { Token } from '../entities/Token'
@@ -30,4 +30,9 @@ export const WNATIVE: TokenMap = {
 export const SOUL: TokenMap = {
   [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, SOUL_ADDRESS[ChainId.FANTOM], 18, 'SOUL', 'Soul Power'),
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, SOUL_ADDRESS[ChainId.FANTOM], 18, 'SOUL', 'Soul Power'),
+}
+
+export const CHANT: TokenMap = {
+  [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, SOUL_ADDRESS[ChainId.FANTOM], 18, 'SOUL', 'Soul Power'),
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, CHANT_ADDRESS[ChainId.FANTOM], 18, 'SOUL', 'Soul Power'),
 }

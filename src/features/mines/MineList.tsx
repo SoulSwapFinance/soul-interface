@@ -29,7 +29,7 @@ const SortIcon: FC<{ id?: string; direction?: 'ascending' | 'descending'; active
   return <></>
 }
 
-const FarmList = ({ farms, term }) => {
+const MineList = ({ farms, term }) => {
   const { items, requestSort, sortConfig } = useSortableData(farms, { key: 'tvl', direction: 'descending' })
   const positions = usePositions()
   const { i18n } = useLingui()
@@ -130,4 +130,4 @@ const FarmList = ({ farms, term }) => {
   )
 }
 
-export default FarmList
+export default MineList

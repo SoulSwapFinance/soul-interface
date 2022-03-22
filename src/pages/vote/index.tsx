@@ -40,7 +40,7 @@ const Vote = () => {
 					frameBorder={"none"}
 					title={"Vote"}
 					src="https://enchant.soulswap.finance"
-					height={"100%"}
+					height={"900px"}
 					width={"99%"}
 				/>
 			{/* </div> */}

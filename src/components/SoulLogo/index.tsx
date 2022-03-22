@@ -13,7 +13,7 @@ const SoulLogo = () => {
         {/* <Image src="/title-logo-purple.png" alt="SoulPower" width={600} height={100} /> */}
         {/* <Image src="/title-soul-halfs.png" alt="SoulPower" width={1020} height={360} /> */}
         {/* <Image src="/offering.gif" alt="offering soul" width={600} height={300} /> */}
-        <Image src="/sliced.gif" alt="offering soul" width={1080} height={200} />
+        {/* <Image src="/sliced.gif" alt="offering soul" width={1080} height={200} /> */}
 
         {/* <iframe src="https://media.giphy.com/media/26wdcnG8UP85vOtGw/giphy-downsized-large.gif" width="1080" height="360" frameBorder="0" allowFullScreen></iframe><p></p> */}
 

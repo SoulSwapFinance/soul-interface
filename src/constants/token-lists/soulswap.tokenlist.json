@@ -135,6 +135,14 @@
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x04068DA6C83AFCFA0e13ba15A6696662335D5B75/logo.png"
       },
       {
+        "name": "SOR",
+        "address": "0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A",
+        "symbol": "SOR",
+        "decimals": 18,
+        "chainId": 250,
+        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A/logo.png"
+      },
+      {
         "name": "Wrapped Bitcoin",
         "address": "0x321162Cd933E2Be498Cd2267a90534A804051b11",
         "symbol": "WBTC",

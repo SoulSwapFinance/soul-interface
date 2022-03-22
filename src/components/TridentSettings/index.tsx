@@ -143,7 +143,7 @@ const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className, tri
           </HeadlessUiModal.BorderedContent>
           <Button
             id="confirm-expert-mode"
-            color="blue"
+            color="purple"
             variant="filled"
             onClick={() => {
               toggleExpertMode()

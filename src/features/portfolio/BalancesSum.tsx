@@ -6,24 +6,25 @@ import { reduceBalances, useUnderworldPositions } from 'features/portfolio/Asset
 import SumUSDCValues from 'features/trident/SumUSDCValues'
 import { currencyFormatter } from 'functions'
 // import { useTridentLiquidityPositions } from 'services/graph'
-import { useActiveWeb3React } from 'services/web3'
+// import { useActiveWeb3React } from 'services/web3'
 import { useCoffinBalancesV2ForAccount } from 'state/coffinbox/hooks'
 import { useAllTokenBalancesWithLoadingIndicator, useCurrencyBalance } from 'state/wallet/hooks'
 import React, { FC, useMemo } from 'react'
 import { useLiquidityPositions } from 'services/graph'
+import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
 
 export const LiquidityPositionsBalancesSum = () => {
   const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
 
   // const { data: positions } = useTridentLiquidityPositions({
-  const { data: positions } = useLiquidityPositions({
+  const liquidityPositions = useLiquidityPositions({
     chainId,
     variables: { where: { user: account?.toLowerCase(), balance_gt: 0 } },
     shouldFetch: !!chainId && !!account,
   })
 
-  const sum = positions?.reduce((acc, cur) => acc + cur.value, 0)
+  const sum = liquidityPositions?.reduce((acc, cur) => acc + cur.value, 0)
 
   return (
     <div className="flex gap-14">
@@ -36,7 +37,7 @@ export const LiquidityPositionsBalancesSum = () => {
       <div className="flex flex-col gap-1">
         <Typography variant="sm">{i18n._(t`Number of Assets`)}</Typography>
         <Typography variant="lg" weight={700} className="text-high-emphesis">
-          {positions?.length}
+          {liquidityPositions?.length}
         </Typography>
       </div>
     </div>

@@ -1,0 +1,371 @@
+{
+    "filename": "moonriver",
+    "chainId": 1285,
+    "name": "Moonriver",
+    "longName": "Moonriver",
+    "color": "#53CBC9",
+    "rpc": [
+        "https://rpc.moonriver.moonbeam.network",
+        "https://moonriver.api.onfinality.io/public"
+    ],
+    "explorers": [
+        "https://moonriver.moonscan.io/"
+    ],
+    "isFavortite": false,
+    "tokens": [
+        {
+            "id": "moonriver",
+            "name": "Moonriver",
+            "rank": 48,
+            "logo": "https://assets.coingecko.com/coins/images/17984/small/9285.png?1630028620",
+            "symbol": "MOVR",
+            "address": "0x98878b06940ae243284ca214f92bb71a2b032b8a",
+            "isNative": true,
+            "decimals": 18
+        },
+        {
+            "id": "avalanche-2",
+            "name": "Avalanche",
+            "rank": 11,
+            "logo": "https://assets.coingecko.com/coins/images/12559/small/coin-round-red.png?1604021818",
+            "symbol": "AVAX",
+            "address": "0x14a0243c333a5b238143068dc3a7323ba4c30ecb"
+        },
+        {
+            "id": "fantom",
+            "name": "Fantom",
+            "rank": 25,
+            "logo": "https://assets.coingecko.com/coins/images/4001/small/Fantom.png?1558015016",
+            "symbol": "FTM",
+            "address": "0xad12dab5959f30b9ff3c2d6709f53c335dc39908"
+        },
+        {
+            "id": "matic-network",
+            "name": "Polygon",
+            "rank": 47,
+            "logo": "https://assets.coingecko.com/coins/images/4713/small/matic-token-icon.png?1624446912",
+            "symbol": "MATIC",
+            "address": "0x682f81e57eaa716504090c3ecba8595fb54561d8"
+        },
+        {
+            "id": "usd-coin",
+            "name": "USD Coin",
+            "rank": 56,
+            "logo": "https://assets.coingecko.com/coins/images/6319/small/USD_Coin_icon.png?1547042389",
+            "symbol": "USDC",
+            "address": "0xe3f5a90f9cb311505cd691a46596599aa1a0ad7d"
+        },
+        {
+            "id": "beefy-finance",
+            "name": "Beefy.Finance",
+            "rank": 81,
+            "logo": "https://assets.coingecko.com/coins/images/12704/small/token.png?1601876182",
+            "symbol": "BIFI",
+            "address": "0x173fd7434b8b50df08e3298f173487ebdb35fd14"
+        },
+        {
+            "id": "ankr",
+            "name": "Ankr",
+            "rank": 142,
+            "logo": "https://assets.coingecko.com/coins/images/4324/small/U85xTl2.png?1608111978",
+            "symbol": "ANKR",
+            "address": "0xfd301ca82d007880e678bb750a771550c5104ff2"
+        },
+        {
+            "id": "tether",
+            "name": "Tether",
+            "rank": 146,
+            "logo": "https://assets.coingecko.com/coins/images/325/small/Tether-logo.png?1598003707",
+            "symbol": "USDT",
+            "address": "0xb44a9b6905af7c801311e8f4e76932ee959c663c"
+        },
+        {
+            "id": "dai",
+            "name": "Dai",
+            "rank": 169,
+            "logo": "https://assets.coingecko.com/coins/images/9956/small/4943.png?1636636734",
+            "symbol": "DAI",
+            "address": "0x80a16016cc4a2e6a2caca8a4a498b1699ff0f844"
+        },
+        {
+            "id": "binance-usd",
+            "name": "Binance USD",
+            "rank": 222,
+            "logo": "https://assets.coingecko.com/coins/images/9576/small/BUSD.png?1568947766",
+            "symbol": "BUSD",
+            "address": "0x5d9ab5522c64e1f6ef5e3627eccc093f56167818"
+        },
+        {
+            "id": "magic-internet-money",
+            "name": "Magic Internet Money",
+            "rank": 385,
+            "logo": "https://assets.coingecko.com/coins/images/16786/small/mimlogopng.png?1624979612",
+            "symbol": "MIM",
+            "address": "0x0cae51e1032e8461f4806e26332c030e34de3adb"
+        },
+        {
+            "id": "wrapped-bitcoin",
+            "name": "Wrapped Bitcoin",
+            "rank": 393,
+            "logo": "https://assets.coingecko.com/coins/images/7598/small/wrapped_bitcoin_wbtc.png?1548822744",
+            "symbol": "WBTC",
+            "address": "0x6ab6d61428fde76768d7b45d8bfeec19c6ef91a8"
+        },
+        {
+            "id": "frax",
+            "name": "Frax",
+            "rank": 570,
+            "logo": "https://assets.coingecko.com/coins/images/13422/small/frax_logo.png?1608476506",
+            "symbol": "FRAX",
+            "address": "0x1a93b23281cc1cde4c4741353f3064709a16197d"
+        },
+        {
+            "id": "frax-share",
+            "name": "Frax Share",
+            "rank": 784,
+            "logo": "https://assets.coingecko.com/coins/images/13423/small/frax_share.png?1608478989",
+            "symbol": "FXS",
+            "address": "0x6f1d1ee50846fcbc3de91723e61cb68cfa6d0e98"
+        },
+        {
+            "id": "mimatic",
+            "name": "MAI",
+            "rank": 938,
+            "logo": "https://assets.coingecko.com/coins/images/15264/small/mimatic-red.png?1620281018",
+            "symbol": "MIMATIC",
+            "address": "0x7f5a79576620c046a293f54ffcdbd8f2468174f1"
+        },
+        {
+            "id": "rome",
+            "name": "Rome",
+            "rank": 987,
+            "logo": "https://assets.coingecko.com/coins/images/21078/small/rome-dao.jpeg?1638291936",
+            "symbol": "ROME",
+            "address": "0x4a436073552044d5f2f49b176853ad3ad473d9d6"
+        },
+        {
+            "id": "idia",
+            "name": "Impossible Decentralized Incubator Access",
+            "rank": 1723,
+            "logo": "https://assets.coingecko.com/coins/images/17803/small/IDIA.png?1629292292",
+            "symbol": "IDIA",
+            "address": "0x2d28aa28fa1e5e6bf121cf688309bf3faaae3c70"
+        },
+        {
+            "id": "moonscape",
+            "name": "Moonscape",
+            "rank": 1823,
+            "logo": "https://assets.coingecko.com/coins/images/21142/small/14522.png?1638396270",
+            "symbol": "MSCP",
+            "address": "0x5c22ba65f65adffadfc0947382f2e7c286a0fe45"
+        },
+        {
+            "id": "impermax",
+            "name": "Impermax",
+            "rank": 2008,
+            "logo": "https://assets.coingecko.com/coins/images/15126/small/Copy_of_200px.png?1619761475",
+            "symbol": "IMX",
+            "address": "0x900f1ec5819fa087d368877cd03b265bf1802667"
+        },
+        {
+            "id": "weth",
+            "name": "WETH",
+            "rank": 2375,
+            "logo": "https://assets.coingecko.com/coins/images/2518/small/weth.png?1628852295",
+            "symbol": "WETH",
+            "address": "0x639a647fbe20b6c8ac19e48e2de44ea792c62c5c"
+        },
+        {
+            "id": "solarbeam",
+            "name": "Solarbeam",
+            "rank": 2376,
+            "logo": "https://assets.coingecko.com/coins/images/18260/small/solarbeamlogo.png?1636080005",
+            "symbol": "SOLAR",
+            "address": "0x6bd193ee6d2104f14f94e2ca6efefae561a4334b"
+        },
+        {
+            "id": "huckleberry",
+            "name": "Huckleberry",
+            "rank": 2646,
+            "logo": "https://assets.coingecko.com/coins/images/19642/small/Finn_1_%28200x200%29.png?1635726736",
+            "symbol": "FINN",
+            "address": "0x9a92b5ebf1f6f6f7d93696fcd44e5cf75035a756"
+        },
+        {
+            "id": "wbnb",
+            "name": "Wrapped BNB",
+            "rank": 2651,
+            "logo": "https://assets.coingecko.com/coins/images/12591/small/binance-coin-logo.png?1600947313",
+            "symbol": "WBNB",
+            "address": "0x2bf9b864cdc97b08b6d79ad4663e71b8ab65c45c"
+        },
+        {
+            "id": "relay-token",
+            "name": "Relay Token",
+            "rank": 2733,
+            "logo": "https://assets.coingecko.com/coins/images/17816/small/relay-logo-200.png?1629339288",
+            "symbol": "RELAY",
+            "address": "0xad7f1844696652dda7959a49063bffccafafefe7"
+        },
+        {
+            "id": "riverboat",
+            "name": "RiverBoat",
+            "rank": 3190,
+            "logo": "https://assets.coingecko.com/coins/images/19007/small/rib.png?1636446895",
+            "symbol": "RIB",
+            "address": "0xbd90a6125a84e5c512129d622a75cdde176ade5e"
+        },
+        {
+            "id": "multichain",
+            "name": "Multichain",
+            "rank": 4716,
+            "logo": "https://assets.coingecko.com/coins/images/22087/small/1_Wyot-SDGZuxbjdkaOeT2-A.png?1640764238",
+            "symbol": "MULTI",
+            "address": "0x9fb9a33956351cf4fa040f65a13b835a3c8764e3"
+        },
+        {
+            "id": "alpha-dex",
+            "name": "Alpha DEX",
+            "rank": 4728,
+            "logo": "https://assets.coingecko.com/coins/images/23127/small/61f1198172efd5000109e2bf_MicrosoftTeams-image_%28160%29.png?1643268545",
+            "symbol": "ROAR",
+            "address": "0x8e7cd893d8f371051a39aa65976bca22d7b02a60"
+        },
+        {
+            "id": "zenlink-network-token",
+            "name": "Zenlink Network Token",
+            "rank": 6788,
+            "logo": "https://assets.coingecko.com/coins/images/20884/small/zenlink.PNG?1637824309",
+            "symbol": "ZLK",
+            "address": "0x0f47ba9d9bde3442b42175e51d6a367928a1173b"
+        },
+        {
+            "id": "polkapet-world",
+            "name": "PolkaPet World",
+            "rank": 7303,
+            "logo": "https://assets.coingecko.com/coins/images/19409/small/pets_polka.PNG?1635211453",
+            "symbol": "PETS",
+            "address": "0x1e0f2a75be02c025bd84177765f89200c04337da"
+        },
+        {
+            "id": "voucher-eth",
+            "name": "Voucher ETH",
+            "rank": 7743,
+            "logo": "https://assets.coingecko.com/coins/images/14484/small/veth_logo_uniswap_200x200.png?1616471309",
+            "symbol": "VETH",
+            "address": "0x3b25bc1dc591d24d60560d0135d6750a561d4764"
+        },
+        {
+            "id": "alpha-rome",
+            "name": "Alpha Rome",
+            "rank": 8125,
+            "logo": "https://assets.coingecko.com/coins/images/20646/small/vBTjYltu_400x400.jpg?1637485496",
+            "symbol": "AROME",
+            "address": "0x3d2d044e8c6dad46b4f7896418d3d4dfaad902be"
+        },
+        {
+            "id": "laika-protocol",
+            "name": "Laika Protocol",
+            "rank": 9247,
+            "logo": "https://assets.coingecko.com/coins/images/15833/small/laika.PNG?1622067228",
+            "symbol": "LAIKA",
+            "address": "0x65e66a61d0a8f1e686c2d6083ad611a10d84d97a"
+        },
+        {
+            "id": "kukafe-finance",
+            "name": "Kafe Finance [Moonriver]",
+            "rank": 9305,
+            "logo": "https://assets.coingecko.com/coins/images/18510/small/btG_wQof_400x400.png?1632216622",
+            "symbol": "KAFE",
+            "address": "0x52f04c806eb82930f40d410259b7af8e18d3bdc9"
+        },
+        {
+            "id": "bitcoin-br",
+            "name": "Bitcoin BR",
+            "rank": 9564,
+            "logo": "https://assets.coingecko.com/coins/images/21205/small/200x200.png?1638551617",
+            "symbol": "BTCBR",
+            "address": "0xe57425f1598f9b0d6219706b77f4b3da573a3695"
+        },
+        {
+            "id": "1swap",
+            "name": "1Swap",
+            "rank": 9929,
+            "logo": "https://assets.coingecko.com/coins/images/19851/small/1SWAP.png?1636061481",
+            "symbol": "1SWAP",
+            "address": "0x3516a7588c2e6ffa66c9507ef51853eb85d76e5b"
+        },
+        {
+            "id": "rivrdoge",
+            "name": "RivrDoge",
+            "rank": 10344,
+            "logo": "https://assets.coingecko.com/coins/images/19885/small/logo_-_2021-11-05T133734.950.png?1636090662",
+            "symbol": "RIVRDOGE",
+            "address": "0x5d4360f1be94bd6f182f09cfe5ef9832e65eb1ac"
+        },
+        {
+            "id": "rivrshiba",
+            "name": "RivrShiba",
+            "rank": 10407,
+            "logo": "https://assets.coingecko.com/coins/images/19755/small/rivrshiba.jpg?1635824889",
+            "symbol": "RIVRSHIB",
+            "address": "0x3d593056f3e34db7a4720d7f171447c489cfa195"
+        },
+        {
+            "id": "rivrkitty",
+            "name": "RivrKitty",
+            "rank": 10471,
+            "logo": "https://assets.coingecko.com/coins/images/20364/small/RKitty_Logo.jpg?1636948214",
+            "symbol": "RKITTY",
+            "address": "0xc2b0435276139731d82ae2fa8928c9b9de0761c1"
+        },
+        {
+            "id": "owl-share",
+            "name": "Owl Share",
+            "rank": 10669,
+            "logo": "https://assets.coingecko.com/coins/images/23253/small/OSHARE.png?1643359503",
+            "symbol": "OSHARE",
+            "address": "0xbecc61601c59d5afffe750d201ec98cdc70db796"
+        },
+        {
+            "id": "hydro-h2o",
+            "name": "Hydro H2O",
+            "rank": 10767,
+            "logo": "https://assets.coingecko.com/coins/images/21748/small/H_Round.png?1639981900",
+            "symbol": "H2O",
+            "address": "0xdc151bc48a5f77288cde9ddbff2e32e6bcf4791f"
+        },
+        {
+            "id": "athena-money",
+            "name": "Athena Money",
+            "rank": 10820,
+            "logo": "https://assets.coingecko.com/coins/images/22501/small/athena-Logo.png?1641953576",
+            "symbol": "ATH",
+            "address": "0xa8e472b1446e6d9fb97a9478e5bc13ff1815e730"
+        },
+        {
+            "id": "rivrfloki",
+            "name": "RivrFloki",
+            "rank": 12077,
+            "logo": "https://assets.coingecko.com/coins/images/20113/small/logo_-_2021-11-10T111356.559.png?1636514051",
+            "symbol": "RIVRFLOKI",
+            "address": "0xae762762d5e40669af789c8c996451449ef40c71"
+        },
+        {
+            "id": "moondao-2",
+            "name": "MoonDao",
+            "rank": 12083,
+            "logo": "https://assets.coingecko.com/coins/images/20667/small/moon.png?1637546624",
+            "symbol": "MD",
+            "address": "0x761cb807bfbf14a4f4ba980f29f43f009f6a18c0"
+        },
+        {
+            "id": "apetoken",
+            "name": "APEToken",
+            "rank": 12174,
+            "logo": "https://assets.coingecko.com/coins/images/22221/small/imgbin-chimpanzee-logo-monkey-ape-png.png?1641216352",
+            "symbol": "APET",
+            "address": "0x9457c50d14381e36bb4bd7d63b57f260f16a19e7"
+        }
+    ]
+}

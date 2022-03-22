@@ -40,7 +40,7 @@ const AnalyticsHeaderNew: FC<AnalyticsHeaderProps> = ({ input, output, allowedSl
     <div className="flex items-center justify-center mb-6 space-x-3">
       <div className="grid mt-4 grid-cols-4 rounded p-3px bg-dark-800 h-[46px]">
         <NavLink
-          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
+          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple"
           href={{
             pathname: '/analytics/dashboard',
             query: getQuery(input, output),
@@ -51,7 +51,7 @@ const AnalyticsHeaderNew: FC<AnalyticsHeaderProps> = ({ input, output, allowedSl
           </a>
         </NavLink>
         <NavLink
-          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
+          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple"
           href={"/analytics/coffinbox"}
           // href={`/${!isRemove ? 'add' : 'remove'}${input ? `/${currencyId(input)}` : ''}${
           //   output ? `/${currencyId(output)}` : ''
@@ -62,7 +62,7 @@ const AnalyticsHeaderNew: FC<AnalyticsHeaderProps> = ({ input, output, allowedSl
           </a>
         </NavLink>
         <NavLink
-          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
+          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple"
           href={"/analytics/tokens"}
           // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
         >
@@ -71,7 +71,7 @@ const AnalyticsHeaderNew: FC<AnalyticsHeaderProps> = ({ input, output, allowedSl
           </a>
         </NavLink>
         <NavLink
-          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
+          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple"
           href={"/analytics/pairs"}
           // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
         >

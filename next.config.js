@@ -23,6 +23,7 @@ module.exports = withBundleAnalyzer(
       domains: [
         'ftmscan.com',
         'assets.soulswap.finance',
+        'assets.coingecko.com',
         'media.giphy.com',
         'app.soulswap.finance',
         'exchange.soulswap.finance',

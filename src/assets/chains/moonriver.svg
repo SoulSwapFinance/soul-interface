@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 630 538">
+  <path fill="#fff" fill-rule="evenodd" d="M560.7 208c6.17 0 11.3-4.83 11.3-11C572 88.2 483.8 0 375 0S178 88.2 178 197c0 6.17 5.13 11 11.3 11h371.4Z" clip-rule="evenodd"/>
+  <circle cx="105" cy="254" r="12" fill="#fff"/>
+  <circle cx="12" cy="308" r="12" fill="#fff"/>
+  <circle cx="184" cy="526" r="12" fill="#fff"/>
+  <circle cx="309" cy="472" r="12" fill="#fff"/>
+  <circle cx="105" cy="363" r="12" fill="#fff"/>
+  <circle cx="36" cy="417" r="12" fill="#fff"/>
+  <rect width="478" height="24" x="136" y="242" fill="#fff" rx="12"/>
+  <rect width="356" height="24" x="44" y="296" fill="#fff" rx="12"/>
+  <rect width="425" height="24" x="136" y="351" fill="#fff" rx="12"/>
+  <rect width="182" height="24" x="67" y="405" fill="#fff" rx="12"/>
+  <rect width="356" height="24" x="274" y="405" fill="#fff" rx="12"/>
+  <rect width="228" height="24" x="340" y="460" fill="#fff" rx="12"/>
+  <rect width="228" height="24" x="215" y="514" fill="#fff" rx="12"/>
+</svg>

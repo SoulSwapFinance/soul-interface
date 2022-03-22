@@ -167,14 +167,14 @@ const PairLayout = ({ children }) => {
   const [pairState, liquidityPair] = useV2Pair(asset, collateral)
   const assetPrice = usePriceApi(asset?.address)
   const collateralPrice = usePriceApi(collateral?.address)
-  const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
+  // const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
 
   return pair ? (
     <Layout
       left={
         <Card
           className="h-full bg-dark-900"
-          backgroundImage={ BORROW_IMG }
+          // backgroundImage={ BORROW_IMG }
           title={i18n._(t`Add collateral in order to borrow assets`)}
           description={i18n._(
             t`Gain exposure to tokens without reducing your assets. Leverage will enable you to take short positions against assets and earn from downside movements.`
