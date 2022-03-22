@@ -107,7 +107,7 @@ export const StakeItem = styled.h2`
 `
 
 export const TokenPairBox = styled.div`
-  width: 100px;
+  width: 125px;
   display: flex;
   justify-content: center;
   align-items: center;
