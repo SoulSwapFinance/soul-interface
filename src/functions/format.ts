@@ -3,7 +3,7 @@
 import { getAddress } from '@ethersproject/address'
 import { BigNumberish } from '@ethersproject/bignumber'
 import { formatUnits } from '@ethersproject/units'
-import { Currency, CurrencyAmount, Fraction, JSBI, Price } from 'sdk'
+import { Currency, CurrencyAmount, Fraction, JSBI, Price } from '@sushiswap/core-sdk'
 // @ts-ignore TYPE NEEDS FIXING
 import Numeral from 'numeral'
 
@@ -209,11 +209,3 @@ export const formatDate = (date: Date) =>
     '20',
     ''
   )}`
-
-export function formatUnixTimestampToDay(timestamp: number) {
-  const date = new Date(timestamp * 1000)
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-
-  return `${date.getDate()} ${months[date.getMonth()]}`
-}
-  
