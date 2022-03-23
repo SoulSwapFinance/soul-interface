@@ -2,21 +2,17 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
 import { ethers } from 'ethers'
-import { getAddress } from '@ethersproject/address'
 import { useSoulPrice } from 'hooks/getPrices'
 import { useActiveWeb3React } from 'services/web3'
-import { Button } from 'components/Button'
 import QuestionHelper from '../../components/QuestionHelper'
-import { SOUL, CHANT, Token } from 'sdk'
+import { SOUL } from 'sdk'
 import { AUTO_STAKE_ADDRESS, SOUL_SUMMONER_ADDRESS } from 'sdk'
-import useAutoStake from './useAutoStake'
 import { aprToApy } from 'functions/convert'
 import AssetInput from 'components/AssetInput'
 import { useAutoStakeContract, useSoulSummonerContract } from 'hooks/useContract'
-import { useStakeContract, useStakeSharePrice, useStakeRecentProfit, sharesFromSoul } from './hooks'
 import useApprove from 'features/bond/hooks/useApprove'
 import {
-    StakeContainer,
+    FarmContainer,
     Row,
     StakeContentWrapper,
     TokenPairBox,
@@ -25,13 +21,10 @@ import {
     DetailsContainer,
     DetailsWrapper,
     FunctionBox,
-    Input,
     FlexText,
     SubmitButton,
-} from './StakeStyles'
+} from './Styles'
 import { Wrap, ClickableText, Text, ExternalLink } from '../../components/ReusableStyles'
-import { formatCurrencyAmount } from 'functions/format'
-import { useCurrencyBalance } from 'state/wallet/hooks'
 import { tryParseAmount } from 'functions'
 
 const TokenPairLink = styled(ExternalLink)`
@@ -46,14 +39,14 @@ const TokenLogo = styled(Image)`
   }
 `
 
-const StakeRowRender = ({ pid, stakeToken, pool }) => {
+const FarmRowRender = ({ pid, token1, token2, farm, lpToken, lpSymbol }) => {
     const { account, chainId } = useActiveWeb3React()
     // const {
     //     poolInfo,
     //     fetchStakeStats,
     //     userInfo,
-    // } = useAutoStake(pid, stakeToken, pool)
-    const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(stakeToken)
+    // } = useAutoStake(pid, pool)
+    const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
     const soulPrice = useSoulPrice()
     const [showing, setShowing] = useState(false)
     const AutoStakeContract = useAutoStakeContract()
@@ -82,7 +75,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     // show confirmation view before minting SOUL
     const [apy, setApy] = useState(0)
     const [liquidity, setLiquidity] = useState(0)
-    const { deposit, withdraw } = useStakeContract()
     // const balance = useCurrencyBalance(account, SOUL[250])
     const stakedBalance = AutoStakeContract?.balanceOf(account)
 
@@ -355,7 +347,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     return (
         <>
             <Wrap padding="0" display="flex" justifyContent="center">
-                <StakeContainer>
+                <FarmContainer>
                     <Row onClick={() => handleShow()}>
                         <StakeContentWrapper>
                             <TokenPairBox>
@@ -363,7 +355,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                     <TokenLogo
                                         src={
                                             'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
-                                            pool.token1Address[chainId] +
+                                            farm.token1Address[chainId] +
                                             '/logo.png'
                                         }
                                         alt="LOGO"
@@ -407,7 +399,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                     </Text>
                                 ) : (
                                     <Text padding="0" fontSize="1rem">
-                                        ${Number(liquidity).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                        ${liquidity}
                                     </Text>
                                 )}
 
@@ -415,7 +407,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
 
                         </StakeContentWrapper>
                     </Row>
-                </StakeContainer>
+                </FarmContainer>
             </Wrap>
 
             {showing && (
@@ -619,4 +611,4 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     )
 }
 
-export default StakeRowRender
+export default FarmRowRender

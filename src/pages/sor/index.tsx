@@ -112,7 +112,7 @@ export default function Stablecoin() {
         <title>Stablecoin | Soul</title>
         <meta key="description" name="description" />
       </Head>
-      {/* <Alert
+      <Alert
         message={
           <div className="flex flex-col space-y-3">
             <div className="flex flex-col">
@@ -136,13 +136,13 @@ export default function Stablecoin() {
             <div className="flex flex-col">
               <div className="text-sm font-normal leading-5">
                 <strong className="text-accent bold">Note:&nbsp;</strong>
-                Approval is only needed when minting for the first time.
+                Approval is only needed once.
               </div>
             </div>
           </div>
         }
         type="information"
-      /> */}
+      />
 
       <DoubleGlowShadow>
         <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">
@@ -191,13 +191,13 @@ export default function Stablecoin() {
                       <div className="flex flex-col">
                         <div className="text-sm font-normal leading-5">
                           <strong className="text-accent bold">Note:&nbsp;</strong>
-                          Approval is only needed when minting for the first time.
+                          Approval is only needed once.
                         </div>
                       </div>
                       {/* <div className="flex flex-col">
                           <div className="text-sm font-normal leading-5">
                             <strong className="text-accent bold">Note:&nbsp;</strong>
-                            Approval is only needed when minting for the first time.
+                            Approval is only needed once.
                           </div>
                         </div> */}
                     </div>
@@ -394,7 +394,7 @@ export default function Stablecoin() {
                       <div className="flex flex-col">
                         <div className="text-sm font-normal leading-5">
                           <strong className="text-accent bold">Note:&nbsp;</strong>
-                          Approval is only needed when minting for the first time.
+                          Approval is only needed once.
                         </div>
                       </div>
                     </div>

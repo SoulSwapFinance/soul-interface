@@ -72,7 +72,6 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
      */
     useEffect(() => {
         fetchDiscount()
-        fetchAvailability()
         fetchEarnings()
         fetchPayout()
         fetchApproval()
@@ -106,6 +105,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
             fetchEarnings()
             fetchDiscount()
             fetchApproval()
+            fetchAvailability()
         }
     }
 
