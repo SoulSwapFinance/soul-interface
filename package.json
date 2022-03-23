@@ -202,6 +202,7 @@
     "react-inlinesvg": "^2.3.0",
     "react-responsive": "^9.0.0-beta.4",
     "react-router-dom": "^6.2.1",
+    "react-vis": "^1.11.7",
     "rebass": "^4.0.7",
     "recharts": "^2.1.9",
     "recoil": "^0.5.2",
