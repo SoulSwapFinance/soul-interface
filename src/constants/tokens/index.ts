@@ -168,7 +168,7 @@ export const WLUM: ChainTokenMap = {
 
 // SOR
 export const SOR: ChainTokenMap = {
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A', 9, 'SOR', 'SOR'),
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A', 18, 'SOR', 'SOR'),
 }
 
 // WETH
