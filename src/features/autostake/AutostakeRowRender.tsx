@@ -407,7 +407,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                     </Text>
                                 ) : (
                                     <Text padding="0" fontSize="1rem">
-                                        ${liquidity}
+                                        ${Number(liquidity).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                                     </Text>
                                 )}
 

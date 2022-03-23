@@ -112,7 +112,7 @@ export default function Stablecoin() {
         <title>Stablecoin | Soul</title>
         <meta key="description" name="description" />
       </Head>
-      {/* <Alert
+      <Alert
         message={
           <div className="flex flex-col space-y-3">
             <div className="flex flex-col">
@@ -142,7 +142,7 @@ export default function Stablecoin() {
           </div>
         }
         type="information"
-      /> */}
+      />
 
       <DoubleGlowShadow>
         <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">
