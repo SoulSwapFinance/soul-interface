@@ -136,7 +136,7 @@ export default function Stablecoin() {
             <div className="flex flex-col">
               <div className="text-sm font-normal leading-5">
                 <strong className="text-accent bold">Note:&nbsp;</strong>
-                Approval is only needed when minting for the first time.
+                Approval is only needed once.
               </div>
             </div>
           </div>
@@ -191,13 +191,13 @@ export default function Stablecoin() {
                       <div className="flex flex-col">
                         <div className="text-sm font-normal leading-5">
                           <strong className="text-accent bold">Note:&nbsp;</strong>
-                          Approval is only needed when minting for the first time.
+                          Approval is only needed once.
                         </div>
                       </div>
                       {/* <div className="flex flex-col">
                           <div className="text-sm font-normal leading-5">
                             <strong className="text-accent bold">Note:&nbsp;</strong>
-                            Approval is only needed when minting for the first time.
+                            Approval is only needed once.
                           </div>
                         </div> */}
                     </div>
@@ -394,7 +394,7 @@ export default function Stablecoin() {
                       <div className="flex flex-col">
                         <div className="text-sm font-normal leading-5">
                           <strong className="text-accent bold">Note:&nbsp;</strong>
-                          Approval is only needed when minting for the first time.
+                          Approval is only needed once.
                         </div>
                       </div>
                     </div>
