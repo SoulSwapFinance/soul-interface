@@ -286,7 +286,7 @@ const useMobileMenu: UseMobileMenu = () => {
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const learnItems = {
         key: 'Learn',
-        title: i18n._(t`Tutorials`),
+        title: i18n._(t`Learn`),
         items: [
           {
             key: 'explore',
