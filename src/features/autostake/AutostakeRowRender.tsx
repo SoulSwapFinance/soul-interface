@@ -495,8 +495,8 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                 </FunctionBox>
                             ) : (
                                 <FunctionBox>
-                                <Wrap padding="0" display="flex" justifyContent="space-between">
-                                { 'Read Full Details' }
+                                <Wrap padding="0" display="flex" justifyContent="end">
+                                {/* { 'Review Details' } */}
                                     <FlexText>
                                     <QuestionHelper
                                     text={
