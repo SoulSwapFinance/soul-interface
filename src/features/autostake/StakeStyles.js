@@ -183,7 +183,7 @@ export const DetailsWrapper = styled.div`
 
   @media screen and (max-width: 720px) {
     display: block;
-    width: 28rem
+    width: 24rem
   }
 
   @media screen and (max-width: 400px) {

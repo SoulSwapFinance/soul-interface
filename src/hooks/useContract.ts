@@ -19,6 +19,7 @@ import {
   SOR_MINTER_ADDRESS,
   STOP_LIMIT_ORDER_ADDRESS,
   LOTTERY_ADDRESS,
+  SOR_ADDRESS,
 } from '../constants/addresses'
 import {
   ARGENT_WALLET_DETECTOR_ABI,
@@ -220,6 +221,11 @@ export function usePendingContract(): Contract | null {
 export function usePriceHelperContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && PRICE_HELPER_ADDRESS[chainId], PRICE_HELPER_ABI, false)
+}
+
+export function useSorContract(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOR_ADDRESS[chainId], ERC20_ABI, false)
 }
 
 export function useHarvestHelperContract(): Contract | null {

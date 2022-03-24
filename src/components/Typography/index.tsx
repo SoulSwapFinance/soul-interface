@@ -52,6 +52,7 @@ export interface TypographyProps extends React.AllHTMLAttributes<React.ReactHTML
   weight?: TypographyWeight
   lineHeight?: TypographyLineHeight
   component?: keyof React.ReactHTML
+  textColor?: string
   className?: string
   clickable?: boolean
 }
@@ -65,6 +66,7 @@ const Typography: FC<TypographyProps> = forwardRef(
       fontFamily='regular',
       component = 'div',
       className = 'currentColor',
+      textColor = '',
       clickable = false,
       children = [],
       onClick = undefined,
@@ -80,6 +82,7 @@ const Typography: FC<TypographyProps> = forwardRef(
           FONT_FAMILIES[fontFamily],
           WEIGHTS[weight],
           LINE_HEIGHTS[lineHeight],
+          textColor,
           onClick ? 'cursor-pointer select-none' : '',
           className
         ),
