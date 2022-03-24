@@ -40,11 +40,11 @@ const Mobile: FC = () => {
 
   return (
     <>      
-      <header className="w-full flex items-center text-white text-center justify-center min-h-[48px] h-[48px] px-0 mr-2 ml-2 sm:px-2">
+      <header className="w-full flex mt-1 items-center text-white text-center justify-center min-h-[48px] h-[48px] px-0 mr-2 ml-2 sm:px-2">
       <div className="flex justify-between flex-grow">
-      <div className="p-1 bg-dark-700 ml-2 rounded-full hover:bg-white/10">
+      <div className="p-1 bg-dark-600 ml-2 rounded-full hover:bg-white/10">
         {/* <div className="flex p-2 justify-between"> */}
-            <MenuIcon width={18} className="hover:text-purple text-white cursor-pointer" onClick={() => setOpen(true)} />
+            <MenuIcon width={18} className="hover:text-purple text-dark-800 cursor-pointer" onClick={() => setOpen(true)} />
             </div>
                 {/* <div className="flex w-6 mr-4 items-center">
                   <NavLink href="/landing">
