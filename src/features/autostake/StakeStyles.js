@@ -43,8 +43,8 @@ export const StakeContainer = styled.div`
 
 export const Row = styled.div`
   background-color: #18191A;
-  padding: ${({ padding }) => (padding ? `${padding}` : `1rem 1rem`)};
-  margin: ${({ width }) => (width ? `${width}` : `4px`)};
+  padding: ${({ padding }) => (padding ? `${padding}` : `1.5rem 1rem`)};
+  margin: ${({ width }) => (width ? `${width}` : `2px`)};
   width: 55rem;
   border-radius: 18px;
   border: 2px solid #18191A; // original .8px solid #333;
@@ -107,15 +107,15 @@ export const StakeItem = styled.h2`
 `
 
 export const TokenPairBox = styled.div`
-  width: 100px;
+  width: 150px;
   display: flex;
-  justify-content: left;
+  justify-content: center;
   align-items: center;
 `
 
 export const TokenPair = styled.a`
   overflow-wrap: break-wordWRA;
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: white;
 
   transition: all 0.2s ease-in-out;
