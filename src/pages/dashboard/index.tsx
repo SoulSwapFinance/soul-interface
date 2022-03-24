@@ -2,30 +2,31 @@ import React, { useEffect, useState } from 'react'
 import Container from 'components/Container'
 import Head from 'next/head'
 import Typography from 'components/Typography'
-import { ethers } from 'ethers'
+// import { ethers } from 'ethers'
 
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { formatNumber, formatPercent } from 'functions'
-import DashboardLineGraph from 'components/Dashboard/LineGraph'
+import { formatNumber } from 'functions'
+// import DashboardLineGraph from 'components/Dashboard/LineGraph'
 import DashboardDonutChart from 'components/Dashboard/DonutChart'
 import DashboardChartLegend from 'components/Dashboard/ChartLegend'
-import QuestionHelper from 'components/QuestionHelper/Helper'
+// import QuestionHelper from 'components/QuestionHelper/Helper'
 // import useLuxorDashboard from 'hooks/useLuxorDashboard'
 // import { AutoSizer } from 'react-virtualized'
 // import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
-import { useFantomPrice, useLuxorPrice, useTokenPrice, useWrappedLumPrice } from 'hooks/getPrices'
-import { usePairBalance, usePairPrice } from 'hooks/usePairData'
+import { useFantomPrice, useLuxorPrice, useWrappedLumPrice } from 'hooks/getPrices'
+import { usePairPrice } from 'hooks/usePairData'
 // import { useLuxTVL } from 'hooks/useV2Pairs'
 import { useSorContract, useLuxorContract, useWrappedLumensContract,  useLuxorStakingContract, useLuxorTreasuryContract, useSorMasterContract } from 'hooks/useContract'
-import { useTokenBalance } from 'state/wallet/hooks' 
 // import { LUX_TREASURY_ADDRESS, WFTM_ADDRESS } from 'constants/addresses'
-import { WFTM } from 'constants/tokens'
-import { DAI_ADDRESS, LUM_ADDRESS, Token } from 'sdk'
+import { DAI_ADDRESS, LUM_ADDRESS } from 'sdk'
 // import useApprove from 'hooks/useApprove'
 // import { LUX_ADDRESS } from 'constants/addresses'
 import { usePairContract, useTokenContract } from 'hooks/useTokenContract'
-import { LUXOR_WARMUP_ADDRESS, FTM_DAI_ADDRESS, WFTM_ADDRESS } from 'constants/addresses'
+import { LUXOR_WARMUP_ADDRESS, WFTM_ADDRESS } from 'constants/addresses'
+import NavLink from 'components/NavLink'
+import { Button } from 'components/Button'
+import ExternalLink from 'components/ExternalLink'
 
 export default function Dashboard() {
   const { i18n } = useLingui()
@@ -40,8 +41,8 @@ export default function Dashboard() {
   const [sorLuxCollateral, setSorLuxCollateral] = useState(0)
   const [sorSorCollateral, setSorSorCollateral] = useState(0)
   // const [pooledLux, setPooledLuxor] = useState(0)
-  const [treasuryLuxFtmBalance, setTreasuryLuxFtmBalance] = useState(0)
-  const [treasuryLuxDaiBalance, setTreasuryLuxDaiBalance] = useState(0)
+  // const [treasuryLuxFtmBalance, setTreasuryLuxFtmBalance] = useState(0)
+  // const [treasuryLuxDaiBalance, setTreasuryLuxDaiBalance] = useState(0)
   const [treasuryFtmDaiBalance, setTreasuryFtmDaiBalance] = useState(0)
   const [treasuryLiquidityBalance, setTreasuryLiquidityBalance] = useState(0)
   const [treasuryDaiBalance, setTreasuryDaiBalance] = useState(0)
@@ -212,7 +213,7 @@ export default function Dashboard() {
             // get treasury balance of LUX-DAI
             const luxDaiBal = await LuxDaiContract.balanceOf(LuxorTreasuryAddress)
             const luxDaiBalance = luxDaiBal * luxDaiPrice / 1e18
-            setTreasuryLuxDaiBalance(Number(luxDaiBalance))
+            // setTreasuryLuxDaiBalance(Number(luxDaiBalance))
             // console.log('luxFtmBalance:%s', Number(luxFtmBalance))
             
             // get treasury balance of FTM-DAI
@@ -380,11 +381,7 @@ export default function Dashboard() {
         <title>Dashboard | Luxor</title>
         <meta key="description" name="description" />
       </Head>
-
-      {/* <div className="block"> */}
-        {/* <Link href= ad_location} passHref>
-          <AdSection />
-        </Link>
+      {/* <div className="block">
       </div>
       <div className="inline-block column-count-1 xl:column-count-2">
         <div className="p-6 shadow-4 bg-dark-1000 rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 mb-6 xl:mr-1.5">
@@ -459,8 +456,8 @@ export default function Dashboard() {
             <AutoSizer disableHeight>
               {({ width }) => <DashboardLineGraph width={width} height={110} data={marketCapData} theme={'dark'} />}
             </AutoSizer>
-              </div> */}
-        {/* </div>  */}
+              </div>
+         </div>  */}
         <div className="grid grid-cols justify-center">
         <div className="p-1 shadow-4 bg-[#FFF300] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
         <div className="bg-dark-1000 p-4">
@@ -477,9 +474,9 @@ export default function Dashboard() {
           <div className="h-px my-4 bg-[#FFF300]" />
           <div>
             <Typography 
-              className={'flex text-lg justify-center items-baseline'}
+              className={'flex text-xl justify-center items-baseline'}
               fontFamily={'medium'} textColor={'text-white'}>
-              {i18n._(t`Market Capitalization`)}
+              Market Capitalization
             </Typography>
             <div className="h-px my-1 mb-3 bg-dark-1000" />
             <Typography
@@ -488,22 +485,22 @@ export default function Dashboard() {
                {formatNumber(luxorPrice * totalLuxorSupply, true, false, 0)}
             </Typography>
           </div>
-            <div className="h-px my-4 mb-3 bg-dark-1000" />
+            <div className="md:hidden h-px my-4 mb-3 bg-dark-1000" />
             <div>
-              <div className="grid grid-cols-2 space-between-3">
+              <div className="md:hidden grid grid-cols-2 space-between-3">
                 <Typography
-                  className="flex gap-1 text-lg justify-center items-center"
+                  className="flex gap-1 text-xl justify-center items-center"
                   lineHeight={48} fontFamily={'medium'}>
-                  Market Price
+                  Luxor Price
                 </Typography>
                 <Typography
-                  className="flex gap-1 text-lg justify-center items-center"
+                  className="md:hidden flex gap-1 text-lg justify-center items-center"
                   lineHeight={48} fontFamily={'medium'}>
                   Backing Price
                 </Typography>
               </div>
               <div className="h-px my-1 mb-3 bg-dark-1000" />
-              <div className="grid grid-cols-2 space-between-3">
+              <div className="md:hidden grid grid-cols-2 space-between-3">
                 <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
@@ -516,9 +513,9 @@ export default function Dashboard() {
                 </Typography>
               </div>
             </div>
-          <div className="h-px my-4 bg-dark-1000" />
           <div>
-            <div className="grid grid-cols-2 space-between-3">
+          <div className="md:hidden h-px my-4 bg-dark-1000" />
+            <div className="md:hidden grid grid-cols-2 space-between-3">
             <Typography 
               className="flex gap-1 text-lg justify-center items-center"
               lineHeight={48} fontFamily={'medium'}>
@@ -530,8 +527,8 @@ export default function Dashboard() {
                Emissions Rate
             </Typography>
             </div>
-            <div className="h-px my-1 mb-3 bg-dark-1000" />
-            <div className="grid grid-cols-2 space-between-3">
+            <div className="md:hidden h-px my-1 mb-3 bg-dark-1000" />
+            <div className="md:hidden grid grid-cols-2 space-between-3">
             <Typography 
             className={'flex justify-center items-baseline'}
             variant={'h1'} lineHeight={48} fontFamily={'medium'}>
@@ -541,21 +538,76 @@ export default function Dashboard() {
             className={'flex justify-center items-baseline'}
             variant={'h1'} lineHeight={48} fontFamily={'medium'}>
                {luxorPerDay.toFixed()}
-               <span className="text-sm leading-5 text-black-50 ml-2">{i18n._(t`DAILY`).toUpperCase()}</span>
+               <span className="text-xs leading-5 text-black-50 ml-1">{i18n._(t`/ DAY`).toUpperCase()}</span>
             </Typography>
             </div>
+            </div>
+
             <div className="h-px my-4 bg-dark-1000" />
             <div>
-            <Typography
-              className="flex text-lg justify-center gap-1 items-center"
-              fontFamily={'medium'}
-              textColor={'text-white'}
-            >
-              {i18n._(t`Luxor Supply Distribution`)}
-            </Typography>
-            <div className="h-px my-2 bg-dark-1000" />
-          </div>
-            <div className="flex justify-center flex-col sm:flex-row">
+              <div className="hidden md:grid md:grid-cols-4 space-between-3">
+                <Typography
+                  className="flex gap-1 text-xl justify-center items-center"
+                  lineHeight={48} fontFamily={'medium'}>
+                  Luxor Price
+                </Typography>
+                <Typography
+                  className="hidden md:flex gap-1 text-lg justify-center items-center"
+                  lineHeight={48} fontFamily={'medium'}>
+                  Backing Price
+                </Typography>
+                <Typography
+                  className="flex gap-1 text-lg justify-center items-center"
+                  lineHeight={48} fontFamily={'medium'}>
+                  Luxor Supply
+                </Typography>
+                <Typography
+                  className="flex gap-1 text-lg justify-center items-center"
+                  lineHeight={48} fontFamily={'medium'}>
+                  Emissions Rate
+                </Typography>
+              </div>
+            </div>
+            <div>
+              <div className="h-px my-2 mb-3 bg-dark-1000" />
+              <div className="hidden md:grid md:grid-cols-4 space-between-3">
+              <Typography
+                  className={'flex justify-center items-baseline'}
+                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                  {formatNumber(luxorPrice, true, false, 0)}
+                </Typography>
+                <Typography
+                  className={'flex justify-center items-baseline'}
+                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                  {formatNumber(luxorFloorPrice, true, false, 0)}
+                </Typography>
+                <Typography
+                  className={'flex justify-center items-baseline'}
+                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                  {formatNumber(totalLuxorSupply, false)}
+                </Typography>
+                <Typography
+                  className={'flex justify-center items-baseline'}
+                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                  {luxorPerDay.toFixed()}
+                  <span className="text-xs leading-5 text-black-50 ml-1">{i18n._(t`/ DAY`).toUpperCase()}</span>
+                </Typography>
+              </div>
+              <div className="h-px my-4 bg-dark-1000" />
+              <div>
+                <Typography
+                  className="flex text-2xl justify-center gap-1 items-center"
+                  fontFamily={'medium'}
+                  textColor={'text-white'}
+                >
+                  {i18n._(t`Supply Distribution`)}
+                </Typography>
+                <div className="h-px my-4 bg-dark-1000" />
+              </div>
+
+          {/* LUXOR DISTRIBUTION CHART */}
+
+          <div className="flex justify-center flex-col sm:flex-row">
               <DashboardDonutChart width={200} data={luxorSupplyData} />
               <DashboardChartLegend
                 data={luxorSupplyData}
@@ -583,13 +635,13 @@ export default function Dashboard() {
           <div className="h-px my-4 bg-[#FFF300]" />
           <div>
             <Typography
-              className="flex justify-center gap-1 items-center"
+              className="flex text-2xl justify-center gap-1 items-center"
               fontFamily={'medium'}
               textColor={'text-white'}
             >
-              {i18n._(t`Protocol Balance`)}
+              Protocol Balance
             </Typography>
-            <div className="h-px my-1 bg-dark-1000" />
+            <div className="h-px my-2 bg-dark-1000" />
             <Typography 
               className="flex justify-center gap-1 items-center"
               variant={'h1'} lineHeight={48} fontFamily={'medium'}>
@@ -608,13 +660,13 @@ export default function Dashboard() {
 
           <div>
             <Typography
-              className="flex text-lg justify-center gap-1 items-center"
+              className="flex text-2xl justify-center gap-1 items-center"
               fontFamily={'medium'}
               textColor={'text-white'}
             >
-              {i18n._(t`Luxor Treasury Distribution`)}
+              {i18n._(t`Treasury Distribution`)}
             </Typography>
-            <div className="h-px my-2 bg-dark-1000" />
+            <div className="h-px my-4 bg-dark-1000" />
           </div>
           <div className="flex justify-center flex-col gap-3 sm:flex-row">
             <DashboardDonutChart width={200} data={treasuryBalanceData} />
@@ -722,7 +774,7 @@ export default function Dashboard() {
             <Typography 
               className="flex gap-1 text-lg justify-center items-center"
               lineHeight={48} fontFamily={'medium'}>
-              Market Rate
+              Market Price
             </Typography>
             <Typography 
               className="flex gap-1 text-lg justify-center items-center"
@@ -749,14 +801,14 @@ export default function Dashboard() {
           <div className="h-px my-4 bg-dark-1000" />
           <div>
             <Typography
-              className="flex text-lg justify-center gap-1 items-center"
+              className="flex text-2xl justify-center gap-1 items-center"
               fontFamily={'medium'}
               textColor={'text-white'}
             >
-              {i18n._(t`Sor Collateral Data`)}
+              {i18n._(t`Collateral Distribution`)}
             </Typography>
           </div>
-          <div className="h-px my-2 bg-dark-1000" />
+          <div className="h-px my-4 bg-dark-1000" />
 
           <div className="flex justify-center flex-col gap-3 sm:flex-row">
             <DashboardDonutChart width={200} data={sorCollateralData} />
@@ -787,12 +839,13 @@ export default function Dashboard() {
           <div className="h-px my-4 bg-[#FFF300]" />
 
           <div>
+          <div className="h-px my-1 justify-center bg-dark-1000" />
             <Typography
-              className="flex gap-1 justify-center items-center"
+              className="flex text-xl gap-1 justify-center items-center"
               fontFamily={'medium'}
               textColor={'text-white'}
             >
-              {i18n._(t`Market Capitalization`)}
+              Market Capitalization
             </Typography>
             <div className="h-px my-1 justify-center bg-dark-1000" />
             <Typography 
@@ -807,7 +860,7 @@ export default function Dashboard() {
             <Typography 
               className="flex gap-1 text-lg justify-center items-center"
               lineHeight={48} fontFamily={'medium'}>
-              Market Price
+              Wrapped Price
             </Typography>
             <Typography 
               className="flex gap-1 text-lg justify-center items-center"
@@ -826,7 +879,7 @@ export default function Dashboard() {
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
                {formatNumber(wlumPrice / luxorPrice, false, false)}
-              <span className="text-sm leading-5 text-black-50 ml-2">{i18n._(t`PER WLUM`).toUpperCase()}</span>
+              <span className="text-xs leading-5 text-black-50 ml-1">{i18n._(t`/ WLUM`).toUpperCase()}</span>
             </Typography>
                
           </div>
@@ -864,7 +917,29 @@ export default function Dashboard() {
           </div>
         </div>
         </div>
-    {/* </div> */}
+      <div className="flex mb-4 gap-3 items-center justify-center">
+        <Button variant="outlined" color="yellow" size="lg">
+          <NavLink href={'/luxor'}>
+            <a className="block text-lg md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Bond Luxor </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="outlined" color="yellow" size="lg">
+          <NavLink href={'/sor'}>
+            <a className="block text-lg md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Stablecoin </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="outlined" color="yellow" size="lg">
+          <ExternalLink href={'https://app.luxor.money'}>
+            <a className="block text-lg sm:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Stake Luxor </span>
+            </a>
+          </ExternalLink>
+        </Button>
+      </div>
   </Container>
   )
 }

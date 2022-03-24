@@ -271,6 +271,11 @@ const useMobileMenu: UseMobileMenu = () => {
           link: '/info/dashboard',
         },
         {
+          key: 'luxor-dashboard',
+          title: 'Luxor',
+          link: '/dashboard',
+        },
+        {
           key: 'dashboard',
           title: 'Review',
           link: '/analytics/dashboard',
