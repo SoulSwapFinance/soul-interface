@@ -33,6 +33,9 @@ import { Wrap, ClickableText, Text, ExternalLink } from '../../components/Reusab
 import { formatCurrencyAmount } from 'functions/format'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import { tryParseAmount } from 'functions'
+import Modal from 'components/Modal/DefaultModal'
+import ModalHeader from 'components/Modal/Header'
+import Typography from 'components/Typography'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -62,6 +65,8 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     const AutoStakeAddress = AUTO_STAKE_ADDRESS[chainId]
     const [approved, setApproved] = useState(false)
     const [withdrawValue, setWithdrawValue] = useState('')
+    const [showWithdrawConfirmation, setShowWithdrawConfirmation] = useState(false)
+    const [showHarvestConfirmation, setShowHarvestConfirmation] = useState(false)
     const [depositValue, setDepositValue] = useState('')
     //   const [confirmed, setConfirmed] = useState(false)
     //   const [receiving, setReceiving] = useState(0)
@@ -301,16 +306,16 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     // /**
     //  * Withdraw Shares
     //  */
-    const handleWithdraw = async (amount) => {
-        try {
-            const tx = await AutoStakeContract?.withdraw(account, parsedWithdrawValue?.quotient.toString())
-            // await tx?.wait().then(await setPending(pid))
-            await tx?.wait()
-        } catch (e) {
-            // alert(e.message)
-            console.log(e)
-        }
-    }
+    // const handleWithdraw = async (amount) => {
+    //     try {
+    //         const tx = await AutoStakeContract?.withdraw(account, parsedWithdrawValue?.quotient.toString())
+    //         // await tx?.wait().then(await setPending(pid))
+    //         await tx?.wait()
+    //     } catch (e) {
+    //         // alert(e.message)
+    //         console.log(e)
+    //     }
+    // }
 
     const handleWithdrawAll = async () => {
         try {
@@ -360,18 +365,18 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                     <StakeContentWrapper>
                         <TokenPairBox>
                             <Wrap>
-                                <TokenLogo
-                                    src={
-                                        'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
-                                        pool.token1Address[chainId] +
-                                        '/logo.png'
-                                    }
-                                    alt="LOGO"
-                                    width="44px"
-                                    height="44px"
-                                    objectFit="contain"
-                                    className="rounded-full items-center justify-center text-center"
-                                />
+                            <TokenLogo
+                                src={
+                                    'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
+                                    pool.token1Address[chainId] +
+                                    '/logo.png'
+                                }
+                                alt="LOGO"
+                                width="44px"
+                                height="44px"
+                                objectFit="contain"
+                                className="rounded-full items-center justify-center text-center"
+                            />
                             </Wrap>
                         </TokenPairBox>
                 <StakeItemBox>
@@ -495,31 +500,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                 </FunctionBox>
                             ) : (
                                 <FunctionBox>
-                                <Wrap padding="0" display="flex" justifyContent="end">
-                                {/* { 'Review Details' } */}
-                                    <FlexText>
-                                    <QuestionHelper
-                                    text={
-                                    <div className="flex space-x-2">
-                                    <div className="flex flex-col">
-                                        <p>
-                                            <strong className="text-accent bold">Fee Details:&nbsp;</strong>
-                                        </p>
-                                        <p>
-                                            <strong className="text-accent bold">1.</strong> Harvest Fee: {harvestFee === 0 ? 0 : harvestFee.toFixed(2) === "0.00" ? "<0.00" : harvestFee.toFixed(2)} SOUL
-                                        </p>
-                                        <p>
-                                            <strong className="text-accent bold">2.</strong> Withdraw Fee: {100 / 10000}%
-                                        </p>
-                                        <p>
-                                            <strong className="text-accent bold">3.</strong> Exit Fee Period: 72H
-                                        </p>
-                                    </div>
-                                    </div>
-                                    }
-                                    />
-                                    </FlexText>
-                                    </Wrap>
                                     <AssetInput
                                         currencyLogo={false}
                                         currency={SOUL[250]}
@@ -587,7 +567,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                             color="black"
                                             margin=".5rem 0 .5rem 0"
                                             onClick={() =>
-                                                handleHarvest()
+                                                setShowHarvestConfirmation(true)
                                             }
                                         >
                                             HARVEST SOUL
@@ -624,7 +604,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                         color="black"
                                         margin=".5rem 0 .5rem 0"
                                         onClick={() =>
-                                            handleWithdrawAll()
+                                            setShowWithdrawConfirmation(true)
                                         }
                                     >
                                         WITHDRAW ALL
@@ -637,6 +617,109 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                     </DetailsContainer>
                 </Wrap>
             )}
+            <Modal isOpen={showHarvestConfirmation} onDismiss={
+        () => setShowHarvestConfirmation(false)}>
+        <div className="space-y-4">
+          <ModalHeader header={`Are you sure?`} onClose={() => setShowHarvestConfirmation(false)} />
+          <Typography variant="lg">
+            Harvesting incurs a {harvestFee === 0 ? 0 : harvestFee.toFixed(0) === "0.00" ? "<0.00" : harvestFee.toFixed(2)} SOUL fee, which goes towards the development of the SoulSwap ecosystem.
+          </Typography>
+          <Typography variant="sm" className="font-medium">
+            QUESTIONS OR CONCERNS?
+            <a href="mailto:soulswapfinance@gmail.com">
+              {' '} CONTACT US
+            </a>
+          </Typography>
+          <SubmitButton
+            height="2.5rem"
+            primaryColour="#3Eff3E"
+            color="black"
+            // onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
+            onClick={() =>
+              // setShowConfirmation(true)
+              handleHarvest()
+            }
+          >
+           ACCEPT {`&`} HARVEST
+          </SubmitButton>
+          <SubmitButton
+            height="2.5rem"
+            primaryColour="#FF3E3E"
+            color="white"
+            onClick={() =>
+                setShowHarvestConfirmation(false)
+            }
+          >
+            CLOSE MESSAGE
+          </SubmitButton>
+          {/* <Button
+            color="red"
+            size="lg"
+            onClick={() => {
+              if (window.prompt(`Please type the word "confirm" to enable expert mode.`) === 'confirm') {
+                setShowConfirmation(false)
+              }
+              setShowConfirmation(false)
+            }}
+          >
+            <Typography variant="lg" id="confirm-expert-mode">
+              { `I UNDERSTAND THESE TERMS` }
+            </Typography> */}
+
+          {/* </Button> */}
+        </div>
+      </Modal>
+            <Modal isOpen={showWithdrawConfirmation} onDismiss={
+        () => setShowWithdrawConfirmation(false)}>
+        <div className="space-y-4">
+          <ModalHeader header={`Are you sure?`} onClose={() => setShowWithdrawConfirmation(false)} />
+          <Typography variant="lg">
+            Withdrawing prior to a 72H period incurs a {100 / 10000}% SOUL fee, which goes towards the development of the SoulSwap ecosystem.
+          </Typography>
+          <Typography variant="sm" className="font-medium">
+            QUESTIONS OR CONCERNS?
+            <a href="mailto:soulswapfinance@gmail.com">
+              {' '} CONTACT US
+            </a>
+          </Typography>
+          <SubmitButton
+            height="2.5rem"
+            primaryColour="#3Eff3E"
+            color="black"
+            onClick={() =>
+              // setShowConfirmation(true)
+              handleWithdrawAll()
+            }
+          >
+           ACCEPT {`&`} WITHDRAW
+          </SubmitButton>
+          <SubmitButton
+            height="2.5rem"
+            primaryColour="#FF3E3E"
+            color="white"
+            onClick={() =>
+                setShowWithdrawConfirmation(false)
+            }
+          >
+            CLOSE MESSAGE
+          </SubmitButton>
+          {/* <Button
+            color="red"
+            size="lg"
+            onClick={() => {
+              if (window.prompt(`Please type the word "confirm" to enable expert mode.`) === 'confirm') {
+                setShowConfirmation(false)
+              }
+              setShowConfirmation(false)
+            }}
+          >
+            <Typography variant="lg" id="confirm-expert-mode">
+              { `I UNDERSTAND THESE TERMS` }
+            </Typography> */}
+
+          {/* </Button> */}
+        </div>
+      </Modal>
         </>
     )
 }
