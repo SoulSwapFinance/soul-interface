@@ -28,7 +28,7 @@ export default function LendKey() {
 
               <LendItemBox>
                 <Text padding="0" fontSize=".8rem" color="#bbb">
-                STAKED
+                COLLATERAL
                 </Text>
               </LendItemBox>
 
@@ -40,7 +40,7 @@ export default function LendKey() {
 
               <LendItemBox desktopOnly={true}>
                 <Text padding="0" fontSize=".8rem" color="#bbb">
-                CLAIMABLE
+                SUPPLIED
                 </Text>
               </LendItemBox>
               <LendItemBox>

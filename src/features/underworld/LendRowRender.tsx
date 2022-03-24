@@ -49,14 +49,14 @@ const TokenLogo = styled(Image)`
   }
 `
 
-const StakeRowRender = ({ pid, stakeToken, pool }) => {
+const StakeRowRender = ({ mid, supplyAddress, market, marketAddresses }) => {
     const { account, chainId } = useActiveWeb3React()
     // const {
     //     poolInfo,
     //     fetchStakeStats,
     //     userInfo,
     // } = useAutoStake(pid, stakeToken, pool)
-    const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(stakeToken)
+    const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(marketAddresses)
     const soulPrice = useSoulPrice()
     const [showing, setShowing] = useState(false)
     const AutoStakeContract = useAutoStakeContract()
@@ -368,8 +368,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                             <TokenLogo
                                 src={
                                     'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
-                                    pool.token1Address[chainId] +
-                                    '/logo.png'
+                                    market.supplyAddress + '/logo.png'
                                 }
                                 alt="LOGO"
                                 width="44px"
