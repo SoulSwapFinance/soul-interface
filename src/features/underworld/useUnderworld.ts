@@ -106,7 +106,15 @@ function useAutoStake(pid, stakeToken) {
 
       const fixedPidTvl = Number(pidTvl).toFixed(0)
       const fixedApr = Number(apr).toFixed(0)
-      
+
+      // console.log(token1Name, '/', token2Name, '- summonerPidPercOfSupply', summonerPidPercOfSupply)
+      // console.log(token1Name, '/', token2Name, '- tokenBal', Number(result?.[5]) / 10 ** 18)
+      // console.log(token1Name, '/', token2Name, '- rawPidValue', rawPidValue)
+
+      // console.log(token1Name, '/', token2Name, '- pidTvl', pidTvl)
+      // console.log(token1Name, '/', token2Name, '- fixedPidTvl', fixedPidTvl)
+      // console.log(token1Name, '/', token2Name, '- fixedApr', fixedApr)
+
       return [fixedPidTvl, fixedApr]
     } catch (e) {
       console.log(e)

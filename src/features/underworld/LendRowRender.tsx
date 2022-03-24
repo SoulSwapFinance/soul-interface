@@ -9,18 +9,18 @@ import { Button } from 'components/Button'
 import QuestionHelper from '../../components/QuestionHelper'
 import { SOUL, CHANT, Token } from 'sdk'
 import { AUTO_STAKE_ADDRESS, SOUL_SUMMONER_ADDRESS } from 'sdk'
-import useAutoStake from './useAutoStake'
+import useAutoStake from './useUnderworld'
 import { aprToApy } from 'functions/convert'
 import AssetInput from 'components/AssetInput'
 import { useAutoStakeContract, useSoulSummonerContract } from 'hooks/useContract'
 import { useStakeContract, useStakeSharePrice, useStakeRecentProfit, sharesFromSoul } from './hooks'
 import useApprove from 'features/bond/hooks/useApprove'
 import {
-    StakeContainer,
+    LendContainer,
     Row,
-    StakeContentWrapper,
+    LendContentWrapper,
     TokenPairBox,
-    StakeItemBox,
+    LendItemBox,
     StakeItem,
     DetailsContainer,
     DetailsWrapper,
@@ -28,7 +28,7 @@ import {
     Input,
     FlexText,
     SubmitButton,
-} from './StakeStyles'
+} from './LendStyles'
 import { Wrap, ClickableText, Text, ExternalLink } from '../../components/ReusableStyles'
 import { formatCurrencyAmount } from 'functions/format'
 import { useCurrencyBalance } from 'state/wallet/hooks'
@@ -49,14 +49,14 @@ const TokenLogo = styled(Image)`
   }
 `
 
-const StakeRowRender = ({ pid, stakeToken, pool }) => {
+const StakeRowRender = ({ mid, supplyAddress, market, marketAddresses }) => {
     const { account, chainId } = useActiveWeb3React()
     // const {
     //     poolInfo,
     //     fetchStakeStats,
     //     userInfo,
     // } = useAutoStake(pid, stakeToken, pool)
-    const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(stakeToken)
+    const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(marketAddresses)
     const soulPrice = useSoulPrice()
     const [showing, setShowing] = useState(false)
     const AutoStakeContract = useAutoStakeContract()
@@ -160,7 +160,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
             const annualRewardsValue = annualSoul * soulPrice
             // const SECONDS_IN_YEAR = 60 * 60 * 24 * 365
             const apr = (annualRewardsValue / summonerTvl) * 100
-            const apy = aprToApy(apr * 4) // assumes reinvestments every 6hrs
+            const apy = aprToApy(apr * 6) // assumes reinvestments every 4hrs
 
             setLiquidity(Number(tvl))
             setApy(Number(apy))
@@ -360,16 +360,15 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     return (
         <>
         <Wrap padding="0" display="flex" justifyContent="center">
-            <StakeContainer>
+            <LendContainer>
                 <Row onClick={() => handleShow()}>
-                    <StakeContentWrapper>
+                    <LendContentWrapper>
                         <TokenPairBox>
                             <Wrap>
                             <TokenLogo
                                 src={
                                     'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
-                                    pool.token1Address[chainId] +
-                                    '/logo.png'
+                                    market.supplyAddress + '/logo.png'
                                 }
                                 alt="LOGO"
                                 width="44px"
@@ -379,7 +378,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                             />
                             </Wrap>
                         </TokenPairBox>
-                <StakeItemBox>
+                <LendItemBox>
                     <StakeItem>
                         {Number(stakedBal).toString() === '0.00' ? (
                             <Text padding="0" fontSize="1rem" color="#666">
@@ -392,8 +391,8 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                         </Text>
                         )}
                     </StakeItem>
-                </StakeItemBox>
-                <StakeItemBox>
+                </LendItemBox>
+                <LendItemBox>
                     <StakeItem>
                         {Number(apy).toString() === '0.00' ? (
                             <Text padding="0" fontSize="1rem" color="#666">
@@ -405,9 +404,9 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                             </Text>
                         )}
                     </StakeItem>
-                </StakeItemBox>
+                </LendItemBox>
 
-                <StakeItemBox className="flex">
+                <LendItemBox className="flex">
                     {earnedAmount.toFixed(2).toString() === '0.00' ? (
                         <Text padding="0" fontSize="1rem" color="#666">
                             0
@@ -417,8 +416,8 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                             {earnedAmount.toFixed(2)}
                         </Text>
                     )}
-                </StakeItemBox>
-                <StakeItemBox className="flex" >
+                </LendItemBox>
+                <LendItemBox className="flex" >
                     {liquidity === 0 ? (
                         <Text padding="0" fontSize="1rem" color="#666">
                             $0
@@ -429,11 +428,11 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                         </Text>
                     )}
 
-                </StakeItemBox>
+                </LendItemBox>
 
-            </StakeContentWrapper>
+            </LendContentWrapper>
                     </Row>
-                </StakeContainer>
+                </LendContainer>
             </Wrap>
 
             {showing && (
