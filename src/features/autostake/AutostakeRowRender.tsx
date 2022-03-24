@@ -73,7 +73,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     const [performanceFee, setPerformanceFee] = useState(0)
     const [callFee, setCallFee] = useState(0)
     const [unstakedBal, setUnstakedBal] = useState(0)
-    const [pending, setPending] = useState(0)
+    // const [pending, setPending] = useState(0)
 
     const harvestFee = performanceFee + callFee
     // const recentProfit = useStakeRecentProfit()
@@ -82,7 +82,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     // show confirmation view before minting SOUL
     const [apy, setApy] = useState(0)
     const [liquidity, setLiquidity] = useState(0)
-    const { deposit, withdraw } = useStakeContract()
+    // const { deposit, withdraw } = useStakeContract()
     // const balance = useCurrencyBalance(account, SOUL[250])
     const stakedBalance = AutoStakeContract?.balanceOf(account)
 
@@ -178,7 +178,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                 const staked = await AutoStakeContract?.balanceOf(account)
                 const stakedBal = staked / 1e18
                 setStakedBal(Number(stakedBal))
-                console.log('staked:%s', Number(stakedBal))
+                // console.log('staked:%s', Number(stakedBal))
 
                 // get total SOUL for pid from user bal
                 const result2 = await erc20BalanceOf(account)
@@ -197,7 +197,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
      */
     const fetchPerformanceFee = async () => {
         if (!account) {
-            alert('connect wallet')
+            // alert('connect wallet')
         } else {
             try {
                 // get performance
@@ -220,7 +220,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
      */
     const fetchCallFee = async () => {
         if (!account) {
-            alert('connect wallet')
+            // alert('connect wallet')
         } else {
             try {
                 // get performance
@@ -354,66 +354,79 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
 
     return (
         <>
-            <Wrap padding="0" display="flex" justifyContent="center">
-                <StakeContainer>
-                    <Row onClick={() => handleShow()}>
-                        <StakeContentWrapper>
-                            <TokenPairBox>
-                                <Wrap>
-                                    <TokenLogo
-                                        src={
-                                            'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
-                                            pool.token1Address[chainId] +
-                                            '/logo.png'
-                                        }
-                                        alt="LOGO"
-                                        width="64px"
-                                        height="64px"
-                                        objectFit="contain"
-                                        className="rounded-full items-center justify-center text-center"
-                                    />
-                                </Wrap>
-                            </TokenPairBox>
+        <Wrap padding="0" display="flex" justifyContent="center">
+            <StakeContainer>
+                <Row onClick={() => handleShow()}>
+                    <StakeContentWrapper>
+                        <TokenPairBox>
+                            <Wrap>
+                                <TokenLogo
+                                    src={
+                                        'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
+                                        pool.token1Address[chainId] +
+                                        '/logo.png'
+                                    }
+                                    alt="LOGO"
+                                    width="44px"
+                                    height="44px"
+                                    objectFit="contain"
+                                    className="rounded-full items-center justify-center text-center"
+                                />
+                            </Wrap>
+                        </TokenPairBox>
+                <StakeItemBox>
+                    <StakeItem>
+                        {Number(stakedBal).toString() === '0.00' ? (
+                            <Text padding="0" fontSize="1rem" color="#666">
+                                0
+                            </Text>
+                        ) : (
+                        <Text padding="0" fontSize="1rem" color="#FFFFFF">
+                            {stakedBal.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                            }
+                        </Text>
+                        )}
+                    </StakeItem>
+                </StakeItemBox>
+                <StakeItemBox>
+                    <StakeItem>
+                        {Number(apy).toString() === '0.00' ? (
+                            <Text padding="0" fontSize="1rem" color="#666">
+                                0
+                            </Text>
+                        ) : (
+                            <Text padding="0" fontSize="1rem" color="#FFFFFF">
+                                {Number(apy).toFixed()}%
+                            </Text>
+                        )}
+                    </StakeItem>
+                </StakeItemBox>
 
-                            <StakeItemBox>
-                                <StakeItem>
-                                    {Number(apy).toString() === '0.00' ? (
-                                        <Text padding="0" fontSize="1rem" color="#666">
-                                            0
-                                        </Text>
-                                    ) : (
-                                        <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                            {Number(apy).toFixed()}%
-                                        </Text>
-                                    )}
-                                </StakeItem>
-                            </StakeItemBox>
+                <StakeItemBox className="flex">
+                    {earnedAmount.toFixed(2).toString() === '0.00' ? (
+                        <Text padding="0" fontSize="1rem" color="#666">
+                            0
+                        </Text>
+                    ) : (
+                        <Text padding="0" fontSize="1rem" color="#F36FFE">
+                            {earnedAmount.toFixed(2)}
+                        </Text>
+                    )}
+                </StakeItemBox>
+                <StakeItemBox className="flex" >
+                    {liquidity === 0 ? (
+                        <Text padding="0" fontSize="1rem" color="#666">
+                            $0
+                        </Text>
+                    ) : (
+                        <Text padding="0" fontSize="1rem">
+                            ${Number(liquidity).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                        </Text>
+                    )}
 
-                            <StakeItemBox className="flex">
-                                {earnedAmount.toFixed(2).toString() === '0.00' ? (
-                                    <Text padding="0" fontSize="1rem" color="#666">
-                                        0
-                                    </Text>
-                                ) : (
-                                    <Text padding="0" fontSize="1rem" color="#F36FFE">
-                                        {earnedAmount.toFixed(2)}
-                                    </Text>
-                                )}
-                            </StakeItemBox>
-                            <StakeItemBox className="flex" >
-                                {liquidity === 0 ? (
-                                    <Text padding="0" fontSize="1rem" color="#666">
-                                        $0
-                                    </Text>
-                                ) : (
-                                    <Text padding="0" fontSize="1rem">
-                                        ${Number(liquidity).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                    </Text>
-                                )}
+                </StakeItemBox>
 
-                            </StakeItemBox>
-
-                        </StakeContentWrapper>
+            </StakeContentWrapper>
                     </Row>
                 </StakeContainer>
             </Wrap>
