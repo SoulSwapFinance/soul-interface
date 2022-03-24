@@ -73,6 +73,11 @@ const useMenu: UseMenu = () => {
             link: '/swap',
           },
           {
+            key: 'pool',
+            title: i18n._(t`Pool`),
+            link: '/pool',
+          },
+          {
             key: 'bridge',
             title: i18n._(t`Bridge`),
             link: 'https://bridge.soulswap.finance',
@@ -122,32 +127,46 @@ const useMenu: UseMenu = () => {
       })
     }
 
-    const exploreMenu: MenuItemLeaf[] = []
-    if (featureEnabled(Feature.VESTING, chainId)) {
-      exploreMenu.push({
-        key: 'stake',
-        title: i18n._(t`Stake`),
-        link: '/stake',
-      })
-    }
-
     const mainItems: Menu = [tradeMenu]
 
-    if (poolMenu.length > 0)
-      mainItems.push({
-        key: 'pool',
-        title: i18n._(t`Liquidity`),
-        items: poolMenu,
-        icon: <PoolIcon width={20} />,
-      })
+    // if (poolMenu.length > 0)
+    //   mainItems.push({
+    //     key: 'pool',
+    //     title: i18n._(t`Liquidity`),
+    //     items: poolMenu,
+    //     icon: <PoolIcon width={20} />,
+    //   })
 
-    if (exploreMenu.length > 0)
-      mainItems.push({
-        key: 'explore',
+    if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
+      const learnItems = {
+        key: 'Learn',
         title: i18n._(t`Explore`),
-        items: exploreMenu,
-        icon: <GlobeIcon width={20} />,
-      })
+        icon: <GlobeIcon width={20} className="rotate-90 filter" />,
+        items: [
+          {
+            key: 'explore',
+            title: i18n._(t`Explore`),
+            link: '/explore',
+          },
+          {
+            key: 'soul-docs',
+            title: i18n._(t`Swap`),
+            link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
+          },
+          {
+            key: 'borrow-docs',
+            title: i18n._(t`Borrow`),
+            link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
+          },
+          {
+            key: 'lux-docs',
+            title: i18n._(t`Bond`),
+            link: 'https://docs.luxor.money',
+          },
+        ],
+      }
+      mainItems.push(learnItems)
+      }
 
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const farmItems = {
@@ -158,26 +177,31 @@ const useMenu: UseMenu = () => {
           {
             key: 'farm',
             title: i18n._(t`Farm`),
-            link: '/mines?filter=deposited',
+            link: '/mines?filter=active',
           },
           {
             key: 'vault',
             title: i18n._(t`Vault`),
             link: '/autostake',
           },
-          // {
-          //   key: 'staking',
-          //   title: i18n._(t`Stake`),
-          //   link: '/seance',
-          // },
+          {
+            key: 'staking',
+            title: i18n._(t`Stake`),
+            link: '/seance',
+          },
           {
             key: 'luxor',
             title: i18n._(t`Luxor`),
             link: '/luxor',
           },
           {
+            key: 'sor',
+            title: i18n._(t`Stable`),
+            link: '/sor',
+          },
+          {
             key: 'bonds',
-            title: i18n._(t`Bonds`),
+            title: i18n._(t`Bond`),
             link: '/bonds',
           },
         ],
@@ -233,15 +257,15 @@ const useMenu: UseMenu = () => {
       icon: <TrendingUpIcon width={20} />,
       items: [
         {
+          key: 'balances',
+          title: 'Coffin',
+          link: '/balances',
+        },
+        {
           key: 'wallet',
           title: 'Wallet',
           link: '/info/dashboard',
         },
-        // {
-        //   key: 'balances',
-        //   title: 'Coffin',
-        //   link: '/balances',
-        // },
         {
           key: 'dashboard',
           title: 'Data',
