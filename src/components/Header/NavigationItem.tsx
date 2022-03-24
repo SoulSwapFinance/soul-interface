@@ -81,7 +81,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
-              <Popover.Panel className="z-10 w-full justify-center absolute w-20 translate-y-[-10px] translate-x-[-10px]">
+              <Popover.Panel className="z-10 w-full justify-center absolute w-24 sm:w-32 translate-y-[-10px] sm:translate-x-[-10px] translate-x-[-21px]">
                 <div
                   className={classNames(
                     'shadow-md shadow-black/40 border border-dark-600 rounded overflow-hidden',
