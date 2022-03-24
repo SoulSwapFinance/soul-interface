@@ -262,6 +262,11 @@ const useMenu: UseMenu = () => {
           link: '/balances',
         },
         {
+          key: 'luxor-dashboard',
+          title: 'Luxor',
+          link: '/dashboard',
+        },
+        {
           key: 'wallet',
           title: 'Wallet',
           link: '/info/dashboard',
