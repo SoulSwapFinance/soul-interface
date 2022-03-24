@@ -160,7 +160,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
             const annualRewardsValue = annualSoul * soulPrice
             // const SECONDS_IN_YEAR = 60 * 60 * 24 * 365
             const apr = (annualRewardsValue / summonerTvl) * 100
-            const apy = aprToApy(apr * 6) // assumes reinvestments every 4hrs
+            const apy = aprToApy(apr * 4) // assumes reinvestments every 6hrs
 
             setLiquidity(Number(tvl))
             setApy(Number(apy))
