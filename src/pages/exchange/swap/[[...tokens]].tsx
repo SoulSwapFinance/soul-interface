@@ -539,14 +539,14 @@ const Swap = () => {
           {swapIsUnsupported ? <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} show={false} /> : null}
         </div>
         <div className="flex border-dark-900 mt-3 mb-0 gap-1 items-center justify-center">
-                <Button variant="filled" color="gradientBluePurple" size="lg">
+                <Button variant="filled" color="gradientPurpleBlue" size="lg">
                   <NavLink href={'/analytics'}>
                         <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                         <span>View Analytics</span>
                         </a>
                   </NavLink>
                 </Button>
-                <Button variant="filled" color="gradientPurpleBlue" size="lg">
+                <Button variant="filled" color="gradientBluePurple" size="lg">
                   <NavLink href={'/pool'}>
                         <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                         <span>View Pools</span>
