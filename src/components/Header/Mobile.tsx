@@ -40,29 +40,29 @@ const Mobile: FC = () => {
 
   return (
     <>      
-      <header className="w-full flex mt-1 items-center text-white text-center justify-center min-h-[48px] h-[48px] px-4 sm:px-2">
+      <header className="w-full mt-2 flex text-center justify-between min-h-[36px] h-[36px] px-4">
       <div className="flex justify-between flex-grow">
-      {/* <div className="p-1 bg-dark-600 mt-3 rounded-full hover:bg-white/10"> */}
+      <div className="p-1 w-[36px] justify-center bg-dark-600 rounded-full hover:bg-white/10">
         {/* <div className="flex p-2 justify-between"> */}
-            {/* <MenuIcon width={14} className="hover:text-purple text-dark-800 cursor-pointer" onClick={() => setOpen(true)} /> */}
-            {/* </div> */}
-            {/* <div className="flex items-center w-6 mr-1">
+            <MenuIcon width={26} className="hover:text-purple text-dark-800 cursor-pointer" onClick={() => setOpen(true)} />
+            </div>
+            <div className="flex h-auto w-auto justify-center items-center w-16">
                   <NavLink href="/landing">
-                    <Image src="/logo.png" alt="Soul" width="24" height="24" />
+                    <Image src="/logo.png" alt="Soul" width="44" height="44" />
                   </NavLink>
-                </div> */}
+                </div>
         </div>
 
-           <nav className={NAV_CLASS}>
+           {/* <nav className={NAV_CLASS}>
           <Container maxWidth="xl" className="mx-auto">
             <div className="flex gap-1 px-1 mr-1 sm:gap-4 md:gap-18 justify-between justify-center items-center">
                 {mobileMenu.map((node) => {
                   return <NavigationItem node={node} key={node.key} />
                 })}
-                   {/* <LanguageSwitch /> */}
+                   <LanguageSwitch />
                </div>
           </Container>
-        </nav>
+        </nav> */}
         <Transition.Root show={open} as={Fragment}>
           <Dialog as="div" className="fixed inset-0 overflow-hidden z-20" onClose={setOpen}>
             <div className="absolute inset-0 overflow-hidden">
