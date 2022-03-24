@@ -280,7 +280,7 @@ const useMenu: UseMenu = () => {
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const learnItems = {
         key: 'Learn',
-        title: i18n._(t`Explore`),
+        title: i18n._(t`Tutorials`),
         icon: <GlobeIcon width={20} className="rotate-90 text-dark-600 filter" />,
         items: [
           {

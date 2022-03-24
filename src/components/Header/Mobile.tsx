@@ -1,70 +1,44 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { MenuIcon } from '@heroicons/react/outline'
 import { NATIVE } from 'sdk'
-import { InjectedConnector } from '@web3-react/injected-connector'
-import { WalletLinkConnector } from '@web3-react/walletlink-connector'
+import useMenu from 'components/Header/useMenu'
 import Web3Network from 'components/Web3Network'
 import Web3Status from 'components/Web3Status'
+import useIsCoinbaseWallet from 'hooks/useIsCoinbaseWallet'
 import { useActiveWeb3React } from 'services/web3'
-import { useETHBalances, useTokenBalance } from 'state/wallet/hooks'
+import { useETHBalances } from 'state/wallet/hooks'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { FC, Fragment, useState } from 'react'
 
 import { NavigationItem } from './NavigationItem'
-import TokenStats from 'components/TokenStats'
 import LuxorStats from 'components/LuxorStats'
+import TokenStats from 'components/TokenStats'
 import More from './More'
-import NavLink from 'components/NavLink'
-import { AURA } from 'constants/tokens'
-import Container from 'components/Container'
-import LanguageSwitch from 'components/LanguageSwitch'
-import { NAV_CLASS } from './styles'
-import useMenu from 'components/Header/useMenu'
-import useMobileMenu from './useMobileMenu'
-
-const HEADER_HEIGHT = 64
+// const HEADER_HEIGHT=24
 
 const Mobile: FC = () => {
   const menu = useMenu()
-  const mobileMenu = useMobileMenu()
-  const { account, chainId, library, connector } = useActiveWeb3React()
+  const { account, chainId, library } = useActiveWeb3React()
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
-  
   const [open, setOpen] = useState(false)
-
-  const isCbWallet =
-    connector instanceof WalletLinkConnector ||
-    (connector instanceof InjectedConnector && window.walletLinkExtension) ||
-    window?.ethereum?.isCoinbaseWallet
+  const isCoinbaseWallet = useIsCoinbaseWallet()
 
   return (
-    <>      
-      <header className="w-full flex mt-1 items-center text-white text-center justify-center min-h-[48px] h-[48px] px-0 sm:px-2">
-      <div className="flex justify-between flex-grow">
-      <div className="p-1 bg-dark-600 ml-2 rounded-full hover:bg-white/10">
-        {/* <div className="flex p-2 justify-between"> */}
-            <MenuIcon width={18} className="hover:text-purple text-dark-800 cursor-pointer" onClick={() => setOpen(true)} />
-            </div>
-                {/* <div className="flex w-6 mr-4 items-center">
-                  <NavLink href="/landing">
-                    <Image src="/logo.png" alt="Soul" width="48" height="48" />
-                  </NavLink>
-                </div> */}
+    <>
+      <header className="w-full flex mt-3 items-center justify-between min-h-[48px] h-[48px] px-4">
+        <div className="flex justify-between flex-grow">
+          <div className="p-2 rounded-full hover:bg-white/10">
+            <MenuIcon width={28} className="hover:text-purple text-white cursor-pointer hover:text-white" onClick={() => setOpen(true)} />
+          </div>
+          <div className="flex items-center w-12 mr-1">
+            <Link href="/landing" passHref={true}>
+              <Image src="/logo.png" alt="logo" width="44px" height="44px" />
+            </Link>
+          </div>
         </div>
-
-           <nav className={NAV_CLASS}>
-          <Container maxWidth="xl" className="mx-auto">
-            <div className="flex gap-1 px-1 mr-1 sm:gap-4 md:gap-18 justify-between justify-center items-center">
-                {mobileMenu.map((node) => {
-                  return <NavigationItem node={node} key={node.key} />
-                })}
-                   {/* <LanguageSwitch /> */}
-               </div>
-          </Container>
-        </nav>
         <Transition.Root show={open} as={Fragment}>
-          <Dialog as="div" className="fixed inset-0 overflow-hidden z-20" onClose={setOpen}>
+          <Dialog as="div" className="fixed inset-0 z-20 overflow-hidden" onClose={setOpen} unmount={false}>
             <div className="absolute inset-0 overflow-hidden">
               <Transition.Child
                 as={Fragment}
@@ -91,11 +65,33 @@ const Mobile: FC = () => {
                 >
                   <div className="w-screen max-w-sm">
                     <div className="flex flex-col h-full py-2 overflow-x-hidden overflow-y-scroll shadow-xl bg-dark-600">
-                      <nav className="flex-1 py-12 bg-dark-1000 pl-6" aria-label="Sidebar">
+                    <nav className="flex-1 bg-dark-1000 pl-6" aria-label="Sidebar">
                         {menu.map((node) => {
                           return <NavigationItem node={node} key={node.key} />
                         })}
                       </nav>
+
+                      <div className="flex flex-col mt-2 gap-4 px-6">
+                        {library && (library.provider.isMetaMask || isCoinbaseWallet) && (
+                          <div className="hidden sm:flex">
+                            <Web3Network />
+                          </div>
+                        )}
+
+                        {/* <div className="flex items-center justify-start gap-2">
+                          <div className="flex items-center w-auto text-sm font-bold border-2 rounded shadow cursor-pointer pointer-events-auto select-none border-dark-800 hover:border-dark-700 bg-dark-900 whitespace-nowrap">
+                            {account && chainId && userEthBalance && (
+                              <Link href={`/account/${account}`} passHref={true}>
+                                <a className="hidden px-3 text-high-emphesis text-bold md:block">
+                                  @ts-ignore
+                                  {userEthBalance?.toSignificant(4)} {NATIVE[chainId || 250].symbol}
+                                </a>
+                              </Link>
+                            )}
+                            <Web3Status />
+                          </div>
+                        </div> */}
+                      </div>
                     </div>
                   </div>
                 </Transition.Child>
@@ -140,6 +136,7 @@ const Mobile: FC = () => {
     </>
   )
 }
-<div style={{ height: HEADER_HEIGHT, minHeight: HEADER_HEIGHT }} />
+{/* <div style={{ height: HEADER_HEIGHT, minHeight: HEADER_HEIGHT }} /> */}
+
 
 export default Mobile
