@@ -90,7 +90,7 @@ const Mobile: FC = () => {
                   unmount={false}
                 >
                   <div className="w-screen max-w-sm">
-                    <div className="flex flex-col h-full py-2 overflow-x-hidden overflow-y-scroll shadow-xl bg-dark-600">
+                    <div className="flex flex-col h-full py-2 overflow-x-hidden overflow-y-hidden shadow-xl bg-dark-600">
                       <nav className="flex-1 bg-dark-1000 pl-6" aria-label="Sidebar">
                         {menu.map((node) => {
                           return <NavigationItem node={node} key={node.key} />
