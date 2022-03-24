@@ -19,7 +19,7 @@ export default function Dashboard() {
   			frameBorder={"none"}
     		title={"INFO"}
     		src={"https://info.soulswap.finance/account/" + `${account}`}
-    		height={"100%" }
+    		height={"800px"}
     		width={"100%"}
       />
         </div>

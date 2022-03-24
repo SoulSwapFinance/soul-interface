@@ -19,7 +19,7 @@ export default function Pairs() {
   			frameBorder={"none"}
     		title={"INFO"}
     		src={"https://info.soulswap.finance/tokens"}
-    		height={"100%" }
+    		height={"800px"}
     		width={"100%"}
       />
         </div>

@@ -5,7 +5,7 @@ const Docs = () => {
     		title={"DOCS"}
     		src="https://protocol.soulswap.finance"
     		// src="https://protocol.soulswap.finance"
-    		height={"100%" }
+    		height={"800px"}
     		width={"100%"}
     />
 	);
