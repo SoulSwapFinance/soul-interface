@@ -62,7 +62,7 @@ export const Row = styled.div`
     }
 
   @media screen and (max-width: 720px) {
-      width: 28rem;
+      width: 24rem;
       padding: auto;
     }
 
