@@ -381,6 +381,29 @@ export default function Dashboard() {
         <title>Dashboard | Luxor</title>
         <meta key="description" name="description" />
       </Head>
+      <div className="flex mt-2 mb-4 gap-3 items-center justify-center">
+        <Button variant="filled" color="yellow" size="lg">
+          <NavLink href={'/luxor'}>
+            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Bond Luxor </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="yellow" size="lg">
+          <NavLink href={'/sor'}>
+            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Stablecoin </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="yellow" size="lg">
+          <ExternalLink href={'https://app.luxor.money'}>
+            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Stake Luxor </span>
+            </a>
+          </ExternalLink>
+        </Button>
+      </div>
       {/* <div className="block">
       </div>
       <div className="inline-block column-count-1 xl:column-count-2">
@@ -881,7 +904,6 @@ export default function Dashboard() {
                {formatNumber(wlumPrice / luxorPrice, false, false)}
               <span className="text-xs leading-5 text-black-50 ml-1">{i18n._(t`/ WLUM`).toUpperCase()}</span>
             </Typography>
-               
           </div>
           {/* <div>
             <Typography
@@ -917,29 +939,6 @@ export default function Dashboard() {
           </div>
         </div>
         </div>
-      <div className="flex mb-4 gap-3 items-center justify-center">
-        <Button variant="outlined" color="yellow" size="lg">
-          <NavLink href={'/luxor'}>
-            <a className="block text-lg md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Bond Luxor </span>
-            </a>
-          </NavLink>
-        </Button>
-        <Button variant="outlined" color="yellow" size="lg">
-          <NavLink href={'/sor'}>
-            <a className="block text-lg md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Stablecoin </span>
-            </a>
-          </NavLink>
-        </Button>
-        <Button variant="outlined" color="yellow" size="lg">
-          <ExternalLink href={'https://app.luxor.money'}>
-            <a className="block text-lg sm:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Stake Luxor </span>
-            </a>
-          </ExternalLink>
-        </Button>
-      </div>
   </Container>
   )
 }

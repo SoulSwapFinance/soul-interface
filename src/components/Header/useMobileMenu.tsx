@@ -36,7 +36,7 @@ const useMobileMenu: UseMobileMenu = () => {
     // By default show just a swap button
     let tradeMenu: MenuItem = {
       key: 'swap',
-      title: i18n._(t`Swap`),
+      title: i18n._(t`Exchange`),
       link: '/swap',
       // icon: <SwitchVerticalIcon width={16} />,
     }
@@ -188,7 +188,7 @@ const useMobileMenu: UseMobileMenu = () => {
     if (featureEnabled(Feature.UNDERWORLD, chainId)) {
       mainItems.push({
         key: 'lending',
-        title: i18n._(t`Borrow`),
+        title: i18n._(t`Lend`),
         // icon: <SwitchVerticalIcon width={16} className="rotate-90 filter" />,
         items: [
           {
