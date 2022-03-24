@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
-import Mobile from 'components/Header/Mobile'
 import useDesktopHeaderMediaQuery from 'hooks/useDesktopHeaderMediaQuery'
-
+import Mobile from 'components/Header/Mobile'
 import Desktop from './Desktop'
 
 const Header: FC = () => {

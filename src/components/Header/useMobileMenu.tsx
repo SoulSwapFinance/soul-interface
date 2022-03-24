@@ -36,7 +36,7 @@ const useMobileMenu: UseMobileMenu = () => {
     // By default show just a swap button
     let tradeMenu: MenuItem = {
       key: 'swap',
-      title: i18n._(t`SWAP`),
+      title: i18n._(t`Swap`),
       link: '/swap',
       // icon: <SwitchVerticalIcon width={16} />,
     }
@@ -64,7 +64,7 @@ const useMobileMenu: UseMobileMenu = () => {
     if (featureEnabled(Feature.TRIDENT, chainId)) {
       tradeMenu = {
         key: 'trade',
-        title: i18n._(t`SWAP`),
+        title: i18n._(t`Swap`),
         // icon: <SwitchVerticalIcon width={16} />,
         items: [
           {
@@ -148,7 +148,7 @@ const useMobileMenu: UseMobileMenu = () => {
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const farmItems = {
         key: 'Rewards',
-        title: i18n._(t`EARN`),
+        title: i18n._(t`Rewards`),
         items: [
           {
             key: 'farm',
@@ -188,7 +188,7 @@ const useMobileMenu: UseMobileMenu = () => {
     if (featureEnabled(Feature.UNDERWORLD, chainId)) {
       mainItems.push({
         key: 'lending',
-        title: i18n._(t`LEND`),
+        title: i18n._(t`Borrow`),
         // icon: <SwitchVerticalIcon width={16} className="rotate-90 filter" />,
         items: [
           {
@@ -228,7 +228,7 @@ const useMobileMenu: UseMobileMenu = () => {
 
     let analyticsMenu: MenuItem = {
       key: 'analytics',
-      title: i18n._(t`DATA`),
+      title: i18n._(t`Data`),
       // icon: <TrendingUpIcon width={16} />,
       items: [
         {
@@ -286,7 +286,7 @@ const useMobileMenu: UseMobileMenu = () => {
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const learnItems = {
         key: 'Learn',
-        title: i18n._(t`LEARN`),
+        title: i18n._(t`Tutorials`),
         items: [
           {
             key: 'explore',

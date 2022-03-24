@@ -1,5 +1,5 @@
 import React, { ReactNode, useMemo } from 'react'
-import { GlobeIcon, SwitchVerticalIcon, TrendingUpIcon } from '@heroicons/react/outline'
+import { GlobeIcon, SwitchVerticalIcon, TrendingUpIcon, CurrencyDollarIcon } from '@heroicons/react/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { SOUL_ADDRESS } from 'sdk'
@@ -38,7 +38,7 @@ const useMenu: UseMenu = () => {
       key: 'swap',
       title: i18n._(t`Exchange`),
       link: '/swap',
-      icon: <SwitchVerticalIcon width={20} />,
+      icon: <SwitchVerticalIcon width={20} className="text-dark-600" />,
     }
  // If AMM is enabled, replace swap button with a submenu under trade
  /* if (featureEnabled(Feature.AMM, chainId)) {
@@ -61,11 +61,11 @@ const useMenu: UseMenu = () => {
   }
 } */
     // If limit orders is enabled, replace swap button with a submenu under trade
-    if (featureEnabled(Feature.AMM, chainId)) {
+    if (featureEnabled(Feature.TRIDENT, chainId)) {
       tradeMenu = {
         key: 'trade',
         title: i18n._(t`Exchange`),
-        icon: <SwitchVerticalIcon width={20} />,
+        icon: <SwitchVerticalIcon width={20} className="text-dark-600" />,
         items: [
           {
             key: 'swap',
@@ -141,7 +141,7 @@ const useMenu: UseMenu = () => {
       const farmItems = {
         key: 'Rewards',
         title: i18n._(t`Accumulate`),
-        icon: <SwitchVerticalIcon width={20} className="rotate-90 filter" />,
+        icon: <CurrencyDollarIcon width={20} className="text-dark-600 filter" />,
         items: [
           {
             key: 'farm',
@@ -183,7 +183,7 @@ const useMenu: UseMenu = () => {
       mainItems.push({
         key: 'lending',
         title: i18n._(t`Borrow`),
-        icon: <SwitchVerticalIcon width={20} className="rotate-90 filter" />,
+        icon: <SwitchVerticalIcon width={20} className="rotate-90 text-dark-600 filter" />,
         items: [
           {
             key: 'lend',
@@ -223,7 +223,7 @@ const useMenu: UseMenu = () => {
     let analyticsMenu: MenuItem = {
       key: 'analytics',
       title: i18n._(t`Analytics`),
-      icon: <TrendingUpIcon width={20} />,
+      icon: <TrendingUpIcon width={20} className="text-dark-600" />,
       items: [
         {
           key: 'balances',
@@ -280,8 +280,8 @@ const useMenu: UseMenu = () => {
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const learnItems = {
         key: 'Learn',
-        title: i18n._(t`Tutorials`),
-        icon: <GlobeIcon width={20} className="rotate-90 filter" />,
+        title: i18n._(t`Explore`),
+        icon: <GlobeIcon width={20} className="rotate-90 text-dark-600 filter" />,
         items: [
           {
             key: 'explore',
