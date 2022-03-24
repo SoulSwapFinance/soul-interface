@@ -42,10 +42,10 @@ const Mobile: FC = () => {
     <>      
       <header className="w-full flex mt-1 items-center text-white text-center justify-center min-h-[48px] h-[48px] px-4 sm:px-2">
       <div className="flex justify-between flex-grow">
-      <div className="p-1 bg-dark-600 mt-3 rounded-full hover:bg-white/10">
+      {/* <div className="p-1 bg-dark-600 mt-3 rounded-full hover:bg-white/10"> */}
         {/* <div className="flex p-2 justify-between"> */}
-            <MenuIcon width={14} className="hover:text-purple text-dark-800 cursor-pointer" onClick={() => setOpen(true)} />
-            </div>
+            {/* <MenuIcon width={14} className="hover:text-purple text-dark-800 cursor-pointer" onClick={() => setOpen(true)} /> */}
+            {/* </div> */}
             {/* <div className="flex items-center w-6 mr-1">
                   <NavLink href="/landing">
                     <Image src="/logo.png" alt="Soul" width="24" height="24" />
