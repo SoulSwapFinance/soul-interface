@@ -17,7 +17,7 @@ import QuestionHelper from 'components/QuestionHelper/Helper'
 import { useFantomPrice, useLuxorPrice, useTokenPrice, useWrappedLumPrice } from 'hooks/getPrices'
 import { usePairBalance, usePairPrice } from 'hooks/usePairData'
 // import { useLuxTVL } from 'hooks/useV2Pairs'
-import { useSorContract, useLuxorContract, useWrappedLumensContract,  useLuxorStakingContract, useLuxorTreasuryContract } from 'hooks/useContract'
+import { useSorContract, useLuxorContract, useWrappedLumensContract,  useLuxorStakingContract, useLuxorTreasuryContract, useSorMasterContract } from 'hooks/useContract'
 import { useTokenBalance } from 'state/wallet/hooks' 
 // import { LUX_TREASURY_ADDRESS, WFTM_ADDRESS } from 'constants/addresses'
 import { WFTM } from 'constants/tokens'
@@ -33,8 +33,12 @@ export default function Dashboard() {
 
   const [totalLuxorSupply, setTotalLuxorSupply] = useState(0)
   const [totalSorSupply, setTotalSorSupply] = useState(0)
+  const [totalWlumSupply, setTotalWlumSupply] = useState(0)
   const [stakedLuxor, setStakedLuxor] = useState(0)
   const [lockedLuxor, setLockedLuxor] = useState(0)
+  const [sorDaiCollateral, setSorDaiCollateral] = useState(0)
+  const [sorLuxCollateral, setSorLuxCollateral] = useState(0)
+  const [sorSorCollateral, setSorSorCollateral] = useState(0)
   // const [pooledLux, setPooledLuxor] = useState(0)
   const [treasuryLuxFtmBalance, setTreasuryLuxFtmBalance] = useState(0)
   const [treasuryLuxDaiBalance, setTreasuryLuxDaiBalance] = useState(0)
@@ -50,6 +54,7 @@ export default function Dashboard() {
   
   // KEY CONTRACTS //
   const LuxorStakingContract = useLuxorStakingContract()
+  const SorStakingContract = useSorMasterContract()
   const LuxorTreasuryContract = useLuxorTreasuryContract()
   const SorContract = useSorContract()
   const LuxorContract = useLuxorContract()
@@ -67,8 +72,9 @@ export default function Dashboard() {
 
   const LuxorStakingAddress = LuxorStakingContract?.address
   const LuxorWarmupAddress = LUXOR_WARMUP_ADDRESS[250]
+  const DaiContractAddress = DaiContract?.address
   const WrappedLumensAddress = WrappedLumensContract?.address
-  const SorContractAddress = SorContract?.address
+  const SorStakingContractAddress = SorStakingContract?.address
   const LuxorTreasuryAddress = LuxorTreasuryContract?.address
   const LuxorFtmAddress = LuxFtmContract.address
 
@@ -78,20 +84,19 @@ export default function Dashboard() {
   const WrappedLumFantomAddress = WlumFtmContract.address
 
   // Calculate Minting Rate
-  // const startTime = 1638424800000
-  // const nowTime = new Date().getTime()
+  const startTime = 1638424800000
+  const nowTime = new Date().getTime()
   
   // // daysAgo in (recall: nowTime is in ms)
-  // const daysAgo = (nowTime - startTime) / 8_640_0000 // ~111 Days √
+  const daysAgo = (nowTime - startTime) / 8_640_0000 // ~111 Days √
   // const secondsAgo = daysAgo * 86_400
-  const luxorPerDay = 600 // totalLuxorSupply / daysAgo
+  const luxorPerDay = totalLuxorSupply / daysAgo
   
   // DUMMIES //
-  // let luxorMarketCap = 500_000
-  // let luxorPriceChange = 0.0071200042256847704
-  // let sorMarketPriceChange = 0.013886744994020045
-  // let sorPegPriceChange = 0.011618569751303138
   // let volume = 640774.2467250191
+  // let sorAvailableCollateral = 100
+  // let sorDaiCollateral = 100
+  // let sorLuxCollateral = 100
 
   const luxFtmPrice = usePairPrice(LuxorFtmAddress) // ~190_000 // √
   // console.log('luxorVolume:%s', luxData?.result[1])
@@ -101,6 +106,10 @@ export default function Dashboard() {
   const ftmDaiPrice = usePairPrice(FtmDaiAddress) 
 
   const luxorCirculatingSupply = totalLuxorSupply - stakedLuxor - lockedLuxor
+  
+  // enable damped sor collateral rate
+  const sorSorCollateralAdjusted = sorSorCollateral * 0.1
+  const totalSorCollateral = sorDaiCollateral + sorLuxCollateral + sorSorCollateralAdjusted
 
   // calculate Treasury Balances
   const treasuryInvestmentBalance = treasuryLendBalance
@@ -117,11 +126,9 @@ export default function Dashboard() {
   // get the price of key treasury investments
 
   // Prices //
-  const luxPrice = useLuxorPrice()
   const luxorPrice = useLuxorPrice()
   const ftmPrice = useFantomPrice()
   const wlumPrice = useWrappedLumPrice()
-  // const tvl = luxorPrice
 
 /**
  * Runs only on initial render/mount
@@ -158,6 +165,25 @@ export default function Dashboard() {
             setTotalSorSupply(Number(totalSorSupply))
             // console.log('totalSorSupply:%s', Number(totalSorSupply))
 
+            const sorDaiBal = await DaiContract?.balanceOf(SorStakingContractAddress)
+            const sorLuxBal = await LuxorContract?.balanceOf(SorStakingContractAddress)
+            const sorSorBal = await SorContract?.balanceOf(SorStakingContractAddress)
+            
+            const sorDaiCollateral = sorDaiBal / 1e18
+            const sorLuxCollateral = sorLuxBal * luxorPrice / 1e9
+            const sorSorCollateral = sorSorBal / 1e18
+            
+            setSorDaiCollateral(Number(sorDaiCollateral))
+            setSorLuxCollateral(Number(sorLuxCollateral))
+            setSorSorCollateral(Number(sorSorCollateral))
+
+            console.log('sorDaiCollateral:%s', Number(sorDaiCollateral))
+
+            const wlumSupply = await WrappedLumensContract?.totalSupply()
+            const totalWlumSupply = wlumSupply / 1e9
+            setTotalWlumSupply(Number(totalWlumSupply))
+            // console.log('totalSorSupply:%s', Number(totalSorSupply))
+
             const daiBal = await DaiContract.balanceOf(LuxorTreasuryAddress)
             const daiBalance = daiBal / 1e18
             const ftmBal = await FtmContract.balanceOf(LuxorTreasuryAddress)
@@ -180,7 +206,7 @@ export default function Dashboard() {
             // get treasury balance of LUX-FTM
             const luxFtmBal = await LuxFtmContract.balanceOf(LuxorTreasuryAddress)
             const luxFtmBalance = luxFtmBal * luxFtmPrice / 1e18
-            setTreasuryLuxFtmBalance(Number(luxFtmBalance))
+            // setTreasuryLuxFtmBalance(Number(luxFtmBalance))
             // console.log('luxFtmBalance:%s', Number(luxFtmBalance))
 
             // get treasury balance of LUX-DAI
@@ -210,7 +236,7 @@ export default function Dashboard() {
             setLockedLuxor(Number(warmupBalance))
             // console.log('warmupBalance:%s', Number(warmupBalance))
 
-            return [totalSorSupply, totalSupply, daiBalance, ftmBalance, luxFtmBalance, totalReserveBalance, luxBalance, warmupBalance, ftmDaiBalance, LiquidityBalance]
+            return [totalSorSupply, totalWlumSupply, totalSupply, sorDaiCollateral, sorLuxCollateral, sorSorCollateral, daiBalance, ftmBalance, luxFtmBalance, totalReserveBalance, luxBalance, warmupBalance, ftmDaiBalance, LiquidityBalance]
         } catch (err) {
             console.warn(err)
         }
@@ -238,37 +264,32 @@ export default function Dashboard() {
         // }
     // ]
 
-  //   "sorColateralData": [
-  //     {
-  //         "angle": 772965.715703,
-  //         "color": "#4B5164",
-  //         "label": "Available Collateral"
-  //     },
-  //     {
-  //         "angle": 610000,
-  //         "color": "#9BA9D2",
-  //         "label": "Platypus"
-  //     },
-  //     {
-  //         "angle": 102884.14698452654,
-  //         "color": "#343846",
-  //         "label": "Impermax"
-  //     }
-  // ],
-  // "sorColateralDataDark": [
-  //     {
-  //         "angle": 772965.715703,
-  //         "color": "#9BA9D2",
-  //         "label": "Available collateral",
-  //         "percent": "52"
-  //     },
-  //     {
-  //         "angle": 610000,
-  //         "color": "#607298",
-  //         "label": "Others",
-  //         "percent": "41"
-  //     },
-  // ],
+    const sorCollateralData = [
+      // {
+      //     "angle": sorAvailableCollateral,
+      //     "color": "#FFA300",
+      //     "label": "Available Collateral"
+      // },
+      {
+          "angle": sorDaiCollateral,
+          "color": "#FFB300",
+          "label": "Dai Collateral",
+          "percent": (sorDaiCollateral / totalSorCollateral * 100).toFixed()
+      },
+      {
+          "angle": sorLuxCollateral,
+          "color": "#FFD300",
+          "label": "Luxor Collateral",
+          "percent": (sorLuxCollateral / totalSorCollateral * 100).toFixed()
+      },
+      {
+          "angle": sorSorCollateralAdjusted,
+          "color": "#FFF300",
+          "label": "Sor Collateral",
+          "percent": (sorSorCollateralAdjusted / totalSorCollateral * 100).toFixed()
+      }
+  ]
+
   const treasuryBalanceData = [
     // {
     //     "label": "LUX-FTM",
@@ -291,9 +312,9 @@ export default function Dashboard() {
     // },
     {
         "label": "LIQUIDITY",
-        "angle": treasuryLuxFtmBalance + treasuryLuxDaiBalance,
-        "color": "#FFB300",
-        "percent": (((treasuryLuxFtmBalance + treasuryLuxDaiBalance) / treasuryBalance) * 100).toFixed()
+        "angle": treasuryLiquidityBalance,
+        "color": "#FFF300",
+        "percent": ((treasuryLiquidityBalance / treasuryBalance) * 100).toFixed()
     },
     {
       "label": "RESERVES",
@@ -304,7 +325,7 @@ export default function Dashboard() {
     {
         "label": "INVESTMENTS",
         "angle": treasuryFtmDaiBalance + treasuryLendBalance,
-        "color": "#FFF300",
+        "color": "#FFB300",
         "percent": (((treasuryFtmDaiBalance + treasuryLendBalance) / treasuryBalance) * 100).toFixed()
     },
     // {
@@ -330,14 +351,14 @@ export default function Dashboard() {
   const luxorSupplyData = [
     {
       angle: luxorCirculatingSupply,
-      color: '#FFB300',
+      color: '#FFA300',
       label: 'CIRCULATING',
       percent: ((luxorCirculatingSupply / totalLuxorSupply) * 100).toFixed(),
       text: 'The combined number of LUX tokens being traded or in public wallets.',
     },
     {
       angle: stakedLuxor,
-      color: '#FFD300',
+      color: '#FFB300',
       label: 'STAKED',
       text: 'The portion of supply that is not in circulation as it is currently staking.',
       percent: ((stakedLuxor / totalLuxorSupply) * 100).toFixed()
@@ -345,7 +366,7 @@ export default function Dashboard() {
     },
     {
       angle: lockedLuxor,
-      color: '#FFF300',
+      color: '#FFD300',
       label: 'WARM-UP',
       text: 'The portion of supply that is not in circulation as it is currently in the warm-up period.',
       percent: ((lockedLuxor/ totalLuxorSupply) * 100).toFixed()
@@ -440,28 +461,25 @@ export default function Dashboard() {
             </AutoSizer>
               </div> */}
         {/* </div>  */}
-
-        <div className="p-6 shadow-4 bg-dark-800 rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 mr-3.5 mb-6">
-        <div className="bg-dark-1000">
+        <div className="grid grid-cols justify-center">
+        <div className="p-1 shadow-4 bg-[#FFF300] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
+        <div className="bg-dark-1000 p-4">
           <Typography
             className="text-2xl flex gap-1 justify-center items-center"
             // variant="md"
             weight={600}
             lineHeight={48}
-            textColor="text-accent text-[#FFE300]"
+            textColor="text-accent text-[#FFFFFF]"
             fontFamily={'semi-bold'}
           >
             {i18n._(t`LUXOR ECONOMY`).toUpperCase()}
-            {/* <QuestionHelper
-              width={'small'}
-              text={<div className="flex flex-col space-y-2">LUX is the foundational token of Luxor.</div>}
-            /> */}
           </Typography>
+          <div className="h-px my-4 bg-[#FFF300]" />
           <div>
             <Typography 
               className={'flex text-lg justify-center items-baseline'}
               fontFamily={'medium'} textColor={'text-white'}>
-              {i18n._(t`Luxor Market Cap`)}
+              {i18n._(t`Market Capitalization`)}
             </Typography>
             <div className="h-px my-1 mb-3 bg-dark-1000" />
             <Typography
@@ -470,114 +488,35 @@ export default function Dashboard() {
                {formatNumber(luxorPrice * totalLuxorSupply, true, false, 0)}
             </Typography>
           </div>
-
-            <div className="h-px my-1 mb-3 bg-dark-1000" />
+            <div className="h-px my-4 mb-3 bg-dark-1000" />
             <div>
-            <div className="grid grid-cols-2 space-between-3">
-            <Typography 
-              className="flex gap-1 text-lg justify-center items-center"
-              lineHeight={48} fontFamily={'medium'}>
-              Market Price
-            </Typography>
-            <Typography 
-              className="flex gap-1 text-lg justify-center items-center"
-              lineHeight={48} fontFamily={'medium'}>
-               Backing Price
-            </Typography>
+              <div className="grid grid-cols-2 space-between-3">
+                <Typography
+                  className="flex gap-1 text-lg justify-center items-center"
+                  lineHeight={48} fontFamily={'medium'}>
+                  Market Price
+                </Typography>
+                <Typography
+                  className="flex gap-1 text-lg justify-center items-center"
+                  lineHeight={48} fontFamily={'medium'}>
+                  Backing Price
+                </Typography>
+              </div>
+              <div className="h-px my-1 mb-3 bg-dark-1000" />
+              <div className="grid grid-cols-2 space-between-3">
+                <Typography
+                  className={'flex justify-center items-baseline'}
+                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                  {formatNumber(luxorPrice, true, false, 0)}
+                </Typography>
+                <Typography
+                  className={'flex justify-center items-baseline'}
+                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                  {formatNumber(luxorFloorPrice, true, false, 0)}
+                </Typography>
+              </div>
             </div>
-            <div className="h-px my-1 mb-3 bg-dark-1000" />
-            <div className="grid grid-cols-2 space-between-3">
-            <Typography 
-            className={'flex justify-center items-baseline'}
-            variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               {formatNumber(luxorPrice, true, false, 0)}
-            </Typography>
-            <Typography 
-            className={'flex justify-center items-baseline'}
-            variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               {formatNumber(luxorFloorPrice, true, false, 0)}
-            </Typography>
-            </div>
-            </div>
-            {/* {luxorPriceChange > 0 ? (
-              <Typography fontFamily={'medium'} textColor={'text-green'} weight={600} className="flex items-center">
-                <span>
-                  <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5.21387 9.83333L8.5472 6.5L11.8805 9.83333H5.21387Z" fill="#3CC13B" />
-                  </svg>
-                </span>
-                <span>{formatPercent(luxorPriceChange * 100)}</span>
-              </Typography>
-            ) : (
-              <Typography fontFamily={'medium'} textColor={'text-red'} weight={600} className="flex items-center">
-                <span>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4.66699 6.6665L8.00033 9.99984L11.3337 6.6665H4.66699Z" fill="#F03738" />
-                  </svg>
-                </span>
-                <span>{formatPercent(-(luxorPriceChange * 100))}</span>
-              </Typography>
-            )} 
-          </div>
-
-          <div className="h-px my-1 mb-3 bg-dark-1000" />
-          
-         {<div>
-          <Typography
-              className="flex gap-1 justify-center items-center"
-              fontFamily={'medium'}
-              textColor={'text-white'}
-            >
-              {i18n._(t`Backed Price`)}
-              <QuestionHelper
-                width={'small'}
-                text={
-                  <div className="flex flex-col space-y-2">
-                    The backed price of LUX is ensured by the Treasury and rises with the growth of the Treasury.
-                    Whenever the price of LUX falls below the backed price, the Treasury will start to buy back LUX.
-                  </div>
-                }
-              />
-            </Typography>
-
-            <div className="h-px my-1 justify-center bg-dark-1000" />
-
-            <Typography
-            className={'flex justify-center items-baseline'}
-            variant={'h1'} 
-            lineHeight={48} 
-            fontFamily={'medium'}>
-               {formatNumber(luxorFloorPrice, true, false)}
-            </Typography>
-          </div>
-
-           <div className="h-px my-1 bg-dark-1000" />
-
-         <div>
-            <Typography
-              className="flex justify-center gap-1 items-center"
-              fontFamily={'medium'}
-              textColor={'text-white'}
-            >
-              {i18n._(t`Current Emission Rate`)}
-              <QuestionHelper
-                width={'small'}
-                text={<div className="flex justify-center flex-col space-y-2">The current mint rate per day.</div>}
-              />
-            </Typography>
-
-            <div className="h-px my-1 bg-dark-1000" />
-
-            <Typography variant={'h1'} 
-            lineHeight={48} fontFamily={'medium'} 
-            className={'flex justify-center items-baseline'}>
-               ~{luxorPerDay.toFixed()}{' '}
-              <span className="text-sm leading-5 text-black-50 ml-2">{i18n._(t`LUX/DAY`).toUpperCase()}</span>
-            </Typography>
-          </div> */}
-
           <div className="h-px my-4 bg-dark-1000" />
-
           <div>
             <div className="grid grid-cols-2 space-between-3">
             <Typography 
@@ -597,7 +536,6 @@ export default function Dashboard() {
             className={'flex justify-center items-baseline'}
             variant={'h1'} lineHeight={48} fontFamily={'medium'}>
                {formatNumber(totalLuxorSupply, false)}
-               {/* <span className="text-sm leading-5 text-black-50 ml-2">{i18n._(t`LUX`).toUpperCase()}</span> */}
             </Typography>
             <Typography 
             className={'flex justify-center items-baseline'}
@@ -606,17 +544,18 @@ export default function Dashboard() {
                <span className="text-sm leading-5 text-black-50 ml-2">{i18n._(t`DAILY`).toUpperCase()}</span>
             </Typography>
             </div>
-
-            <div className="h-px my-1 bg-dark-1000" />
-
-            {/* <Typography variant={'h1'} lineHeight={48} fontFamily={'medium'} className={'flex justify-center items-baseline'}>
-               {formatNumber(, false)}{' '}
-              <span className="text-sm leading-5 text-black-50 ml-2">{i18n._(t`LUX`).toUpperCase()}</span>
-            </Typography> */}
-            
-            <div className="h-px my-1 bg-dark-1000" />
-
-            <div className="flex justify-center mt-8 flex-col sm:flex-row">
+            <div className="h-px my-4 bg-dark-1000" />
+            <div>
+            <Typography
+              className="flex text-lg justify-center gap-1 items-center"
+              fontFamily={'medium'}
+              textColor={'text-white'}
+            >
+              {i18n._(t`Luxor Supply Distribution`)}
+            </Typography>
+            <div className="h-px my-2 bg-dark-1000" />
+          </div>
+            <div className="flex justify-center flex-col sm:flex-row">
               <DashboardDonutChart width={200} data={luxorSupplyData} />
               <DashboardChartLegend
                 data={luxorSupplyData}
@@ -628,20 +567,20 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="p-6 shadow-4 bg-dark-800 rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 mr-3.5 mb-6">
-        <div className="bg-dark-1000">
-        <Typography
+      <div className="p-1 shadow-4 bg-[#FFF300] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
+        <div className="bg-dark-1000 p-4">
+          <Typography
             className="text-2xl flex gap-1 justify-center items-center"
-            // variant="md"
             weight={600}
             lineHeight={48}
-            textColor="text-accent text-[#FFE300]"
+            textColor="text-accent text-[#FFFFFF]"
             fontFamily={'semi-bold'}
           >
             {i18n._(t`LUXOR TREASURY`).toUpperCase()}
           </Typography>
-
+          <div className="h-px my-4 bg-[#FFF300]" />
           <div>
             <Typography
               className="flex justify-center gap-1 items-center"
@@ -649,10 +588,6 @@ export default function Dashboard() {
               textColor={'text-white'}
             >
               {i18n._(t`Protocol Balance`)}
-              {/* <QuestionHelper
-                width={'small'}
-                text={<div className="flex flex-col space-y-2">The amount of Protocol Owned Liquidity(POL).</div>}
-              /> */}
             </Typography>
             <div className="h-px my-1 bg-dark-1000" />
             <Typography 
@@ -669,7 +604,7 @@ export default function Dashboard() {
             </AutoSizer> */}
           </div>
 
-          <div className="h-px my-1 bg-dark-1000" />
+          <div className="h-px my-4 bg-dark-1000" />
 
           <div>
             <Typography
@@ -678,23 +613,8 @@ export default function Dashboard() {
               textColor={'text-white'}
             >
               {i18n._(t`Luxor Treasury Distribution`)}
-              
-                  {/* <QuestionHelper
-                  width={'small'}
-                  text={
-                  <div className="flex flex-col space-y-2">
-                  Total liquidity held by the treasury.
-                  </div>
-                  }
-                  /> */}
             </Typography>
-            <div className="h-px my-1 bg-dark-1000" />
-
-            {/*
-                <Typography variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                ${formatNumberScale('0').toLowerCase()}{' '}
-                </Typography>
-                */}
+            <div className="h-px my-2 bg-dark-1000" />
           </div>
           <div className="flex justify-center flex-col gap-3 sm:flex-row">
             <DashboardDonutChart width={200} data={treasuryBalanceData} />
@@ -706,8 +626,8 @@ export default function Dashboard() {
               leadingCurrency={true}
               theme={'dark'}
             />
-          </div>
-          </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -768,28 +688,26 @@ export default function Dashboard() {
           </div>
         </div> */}
 
-        <div className="p-6 shadow-4 bg-dark-800 rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 mr-3.5 mb-6">
-        <div className="bg-dark-1000">
-          <Typography
-            className="flex gap-1 justify-center items-center"
+        <div className="p-1 shadow-4 bg-[#FFF300] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
+        <div className="bg-dark-1000 p-4">
+        <Typography
+            className="text-2xl flex gap-1 justify-center items-center"
+            // variant="md"
             weight={600}
-            lineHeight={28}
-            textColor="text-accent"
+            lineHeight={48}
+            textColor="text-accent text-[#FFFFFF]"
             fontFamily={'semi-bold'}
           >
-            {i18n._(t`SOR Stablecoin`).toUpperCase()}
-            <QuestionHelper
-              width={'small'}
-              text={<div className="flex flex-col space-y-2">SOR is the stable-coin of Luxor.</div>}
-            />
+            {i18n._(t`SOR STABLECOIN`).toUpperCase()}
           </Typography>
+          <div className="h-px my-4 bg-[#FFF300]" />
           <div>
             <Typography
               className="flex gap-1 justify-center items-center"
               fontFamily={'medium'}
               textColor={'text-white'}
             >
-              {i18n._(t`Market Cap`)}
+              Market Capitalization
             </Typography>
             <div className="h-px my-1 justify-center bg-dark-1000" />
             <Typography 
@@ -797,129 +715,52 @@ export default function Dashboard() {
               variant={'h1'} lineHeight={48} fontFamily={'medium'}>
                {formatNumber(sorMarketPrice * totalSorSupply, true, false)}
             </Typography>
-            {/* <Typography
-              className="flex gap-1 items-center"
-              fontFamily={'medium'}
-              textColor={'text-white'}
-            >
-              {i18n._(t`Market Price`)}
-            </Typography>
-            <Typography variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               {formatNumber(sorMarketPrice, true, false)}
-            </Typography> */}
-            {/* {sorMarketPriceChange > 0 ? (
-              <Typography fontFamily={'medium'} textColor={'text-green'} weight={600} className="flex items-center">
-                <span>
-                  <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5.21387 9.83333L8.5472 6.5L11.8805 9.83333H5.21387Z" fill="#3CC13B" />
-                  </svg>
-                </span>
-                <span>{formatPercent(sorMarketPriceChange * 100)}</span>
-              </Typography>
-            ) : (
-              <Typography fontFamily={'medium'} textColor={'text-red'} weight={600} className="flex items-center">
-                <span>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4.66699 6.6665L8.00033 9.99984L11.3337 6.6665H4.66699Z" fill="#F03738" />
-                  </svg>
-                </span>
-                <span>{formatPercent(-sorMarketPriceChange * 100)}</span>
-              </Typography>
-            )} */}
           </div>
 
-          <div className="h-px my-1 bg-dark-1000" />
-
-          <div>
-            <Typography
-              className="flex gap-1 justify-center items-center"
-              fontFamily={'medium'}
-              textColor={'text-white'}
-            >
-              {i18n._(t`Peg Price`)}
-              <QuestionHelper
-                width={'small'}
-                text={<div className="flex flex-col space-y-2">The current SOR pegged value in dollars.</div>}
-              />
-            </Typography>
-            <div className="h-px my-1 bg-dark-1000" />
+          <div className="h-px my-4 bg-dark-1000" />
+          <div className="grid grid-cols-2 space-between-3">
             <Typography 
-              className="flex gap-1 justify-center items-center"
-              variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               {formatNumber(sorPegPrice, true, false)}
+              className="flex gap-1 text-lg justify-center items-center"
+              lineHeight={48} fontFamily={'medium'}>
+              Market Rate
             </Typography>
-            {/* {sorPegPriceChange > 0 ? (
-              <Typography fontFamily={'medium'} textColor={'text-green'} weight={600} className="flex items-center">
-                <span>
-                  <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5.21387 9.83333L8.5472 6.5L11.8805 9.83333H5.21387Z" fill="#3CC13B" />
-                  </svg>
-                </span>
-                <span>{formatPercent(sorPegPriceChange * 100)}</span>
-              </Typography>
-            ) : (
-              <Typography fontFamily={'medium'} textColor={'text-red'} weight={600} className="flex items-center">
-                <span>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4.66699 6.6665L8.00033 9.99984L11.3337 6.6665H4.66699Z" fill="#F03738" />
-                  </svg>
-                </span>
-                <span>{formatPercent(-sorPegPriceChange * 100)}</span>
-              </Typography>
-            )} */}
-          </div>
-
-          <div className="h-px my-1 bg-dark-1000" />
-
-          <div>
-            <Typography
-              className="flex gap-1 justify-center items-center"
-              fontFamily={'medium'}
-              textColor={'text-white'}
-            >
-              {i18n._(t`Total Supply`)}
-              {/* <QuestionHelper
-                width={'small'}
-                text={
-                  <div className="flex flex-col space-y-2">
-                    Total Supply is the amount of SOR tokens currently in existence.
-                  </div>
-                }
-              /> */}
-            </Typography>
-            <div className="h-px my-1 bg-dark-1000" />
             <Typography 
-              className="flex gap-1 justify-center items-center"
-              variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               {totalSorSupply.toFixed()}{' '}
+              className="flex gap-1 text-lg justify-center items-center"
+              lineHeight={48} fontFamily={'medium'}>
+              Total Supply
+            </Typography>
+            </div>
+
+            <div className="h-px my-1 mb-3 bg-dark-1000" />
+
+          <div className="grid grid-cols-2 space-between-3">
+                <Typography
+                  className={'flex justify-center items-baseline'}
+                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+               {formatNumber(totalSorCollateral / totalSorSupply, true, false)}
+                </Typography>
+                <Typography 
+                  className={'flex justify-center items-baseline'}
+                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+               {totalSorSupply.toFixed(2)}{' '}
               <span className="text-sm leading-5 text-black-50 ml-2">{i18n._(t`SOR`).toUpperCase()}</span>
             </Typography>
           </div>
-
-          <div className="h-px my-1 bg-dark-1000" />
-
-          {/* <div>
+          <div className="h-px my-4 bg-dark-1000" />
+          <div>
             <Typography
-              className="flex gap-1 items-center"
+              className="flex text-lg justify-center gap-1 items-center"
               fontFamily={'medium'}
               textColor={'text-white'}
             >
-              {i18n._(t`Total Collateral`)}
-              <QuestionHelper
-                width={'small'}
-                text={
-                  <div className="flex flex-col space-y-2">
-                    The DAI in the SOR Contract, which is also used to earn yields from external protocols.
-                  </div>
-                }
-              />
+              {i18n._(t`Sor Collateral Data`)}
             </Typography>
-            <Typography variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               {formatNumber(sorTotalCollateral, true)}
-            </Typography>
-          </div> */}
-          {/* <div className="flex flex-col sm:flex-row">
+          </div>
+          <div className="h-px my-2 bg-dark-1000" />
+
+          <div className="flex justify-center flex-col gap-3 sm:flex-row">
             <DashboardDonutChart width={200} data={sorCollateralData} />
+          <div className="flex justify-center flex-col gap-3 sm:flex-row">
             <DashboardChartLegend
               data={sorCollateralData}
               hasInfo={false}
@@ -927,32 +768,69 @@ export default function Dashboard() {
               leadingCurrency={true}
               theme={'dark'}
             />
-          </div> */}
-        </div>
-        </div>
+              </div>
+            </div>
+            </div>
+          </div>
 
-        <div className="p-6 shadow-4 bg-dark-800 rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 mr-3.5 mb-6">
-        <div className="bg-dark-1000">
-          <Typography
-              className="flex gap-1 justify-center items-center"
-              // variant="md"
+        <div className="p-1 shadow-4 bg-[#FFF300] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
+        <div className="bg-dark-1000 p-4">
+        <Typography
+            className="text-2xl flex gap-1 justify-center items-center"
             weight={600}
-            lineHeight={28}
-            textColor="text-accent"
+            lineHeight={48}
+            textColor="text-accent text-[#FFFFFF]"
             fontFamily={'semi-bold'}
           >
-            {i18n._(t`WRAPPED LUM`)}
-            <QuestionHelper
-              width={'small'}
-              text={
-                <div className="flex flex-col space-y-2">
-                  Wrapped Lumens (WLUM) is the wrapped variant of the receipt (LUM) for staking LUX. WLUM may also be traded or used to earn additional yields.
-                </div>
-              }
-            />
+            {i18n._(t`WRAPPED LUMENS`).toUpperCase()}
           </Typography>
+          <div className="h-px my-4 bg-[#FFF300]" />
 
           <div>
+            <Typography
+              className="flex gap-1 justify-center items-center"
+              fontFamily={'medium'}
+              textColor={'text-white'}
+            >
+              {i18n._(t`Market Capitalization`)}
+            </Typography>
+            <div className="h-px my-1 justify-center bg-dark-1000" />
+            <Typography 
+              className="flex gap-1 justify-center items-center"
+              variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+               {formatNumber(wlumPrice * totalWlumSupply, true, false)}
+            </Typography>
+          </div>
+
+          <div className="h-px my-4 bg-dark-1000" />
+          <div className="grid grid-cols-2 space-between-3">
+            <Typography 
+              className="flex gap-1 text-lg justify-center items-center"
+              lineHeight={48} fontFamily={'medium'}>
+              Market Price
+            </Typography>
+            <Typography 
+              className="flex gap-1 text-lg justify-center items-center"
+              lineHeight={48} fontFamily={'medium'}>
+              Wrapped Ratio
+            </Typography>
+            </div>
+            <div className="h-px my-2 bg-dark-1000" />
+            <div className="grid grid-cols-2 space-between-3">
+                <Typography
+                  className={'flex justify-center items-baseline'}
+                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+               {formatNumber(wlumPrice, true, false)}
+                </Typography>
+                <Typography 
+                  className={'flex justify-center items-baseline'}
+                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+               {formatNumber(wlumPrice / luxorPrice, false, false)}
+              <span className="text-sm leading-5 text-black-50 ml-2">{i18n._(t`PER WLUM`).toUpperCase()}</span>
+            </Typography>
+               
+          </div>
+          {/* <div>
             <Typography
               className="flex gap-1 justify-center items-center"
               fontFamily={'medium'}
@@ -982,10 +860,11 @@ export default function Dashboard() {
               variant={'h1'} lineHeight={48} fontFamily={'medium'}>
                {formatNumber(wlumPrice / luxorPrice, false, false)}
             </Typography>
-            </div>
+            </div> */}
           </div>
         </div>
-      </div>
-    </Container>
+        </div>
+    {/* </div> */}
+  </Container>
   )
 }
