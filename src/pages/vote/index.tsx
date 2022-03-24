@@ -26,7 +26,7 @@ const Vote = () => {
 			<div className='sm:flex md:flex w-full h-full'>
 				<iframe frameBorder="none"
 					title={"Board"}
-					height={"100%"}
+    				height={"800px"}
 					width={'99%'}
 					src='https://soulswap.hellonext.co/'
 					// src='https://board.soulswap.finance/embed/roadmap'

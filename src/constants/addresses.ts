@@ -138,6 +138,13 @@ export const LUX_TREASURY_ADDRESS: AddressMap = {
   [ChainId.FANTOM_TESTNET]: '',
 }
 
+export const LUXOR_WARMUP_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x2B6Fe815F3D0b8C13E8F908A2501cdDC23D4Ed48',
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
 export const ATOMIC_SWAP_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.BSC]: '',
@@ -188,6 +195,13 @@ export const SOUL_FTM_PAIR: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57', // 01 OCT
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
+export const FTM_DAI_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xF3d6E8Ecece8647B456d57375Ce0B51B8F0cD40b', // 01 OCT
   [ChainId.FANTOM_TESTNET]: '',
 }
 

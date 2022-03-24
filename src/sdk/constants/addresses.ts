@@ -247,6 +247,10 @@ export const GRIMEVO_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x0a77866C01429941BFC7854c0c0675dB1015218b'
 }
 
+export const LUM_ADDRESS: AddressMap = {
+  [ChainId.FANTOM]: '0x4290b33158F429F40C0eDc8f9b9e5d8C5288800c'
+}
+
 export const USD_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: USDC_ADDRESS[ChainId.ETHEREUM],
   [ChainId.FANTOM]: USDC_ADDRESS[ChainId.FANTOM],

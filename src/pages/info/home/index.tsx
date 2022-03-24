@@ -16,7 +16,7 @@ export default function Home() {
   			frameBorder={"none"}
     		title={"INFO"}
     		src="https://info.soulswap.finance/home"
-    		height={"100%" }
+    		height={"800px"}
     		width={"100%"}
       />
         </div>

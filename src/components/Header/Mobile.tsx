@@ -20,8 +20,8 @@ import { AURA } from 'constants/tokens'
 import Container from 'components/Container'
 import LanguageSwitch from 'components/LanguageSwitch'
 import { NAV_CLASS } from './styles'
-import useMobileMenu from 'components/Header/useMobileMenu'
 import useMenu from 'components/Header/useMenu'
+import useMobileMenu from './useMobileMenu'
 
 const HEADER_HEIGHT = 64
 
@@ -40,18 +40,26 @@ const Mobile: FC = () => {
 
   return (
     <>      
-    <header className="flex flex-row mr-4 ml-4 justify-center w-screen flex-nowrap">
-    {/* <div className="flex items-center justify-between">
-          </div> */}
-      {/*  <div className="flex p-2 justify-between"> */}
+      <header className="w-full flex items-center justify-center min-h-[64px] h-[64px] px-4">
+      <div className="flex justify-between flex-grow">
+      <div className="p-2 rounded-full hover:bg-white/10">
+        {/* <div className="flex p-2 justify-between"> */}
             <MenuIcon width={20} className="hover:text-white text-white cursor-pointer" onClick={() => setOpen(true)} />
-          <nav className={NAV_CLASS}>
+            </div>
+                {/* <div className="flex w-6 mr-4 items-center">
+                  <NavLink href="/landing">
+                    <Image src="/logo.png" alt="Soul" width="48" height="48" />
+                  </NavLink>
+                </div> */}
+        </div>
+
+           <nav className={NAV_CLASS}>
           <Container maxWidth="xl" className="mx-auto">
-            <div className="flex gap-1 px-1 items-center">
+            <div className="flex gap-1 px-1 sm:gap-4 md:gap-18 justify-between justify-center items-center">
                 {mobileMenu.map((node) => {
                   return <NavigationItem node={node} key={node.key} />
                 })}
-                  {/* <LanguageSwitch /> */}
+                   {/* <LanguageSwitch /> */}
                </div>
           </Container>
         </nav>
@@ -67,7 +75,7 @@ const Mobile: FC = () => {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <Dialog.Overlay className="absolute inset-0 bg-dark-1000 bg-opacity-80 transition-opacity" />
+                <Dialog.Overlay className="absolute inset-0 transition-opacity bg-dark-1000 bg-opacity-80" />
               </Transition.Child>
 
               <div className="fixed inset-y-0 left-0 pr-10 max-w-[260px] flex">
@@ -79,10 +87,11 @@ const Mobile: FC = () => {
                   leave="transform transition ease-in-out duration-300"
                   leaveFrom="translate-x-0"
                   leaveTo="translate-x-[-100%]"
+                  unmount={false}
                 >
                   <div className="w-screen max-w-sm">
-                    <div className="h-full flex flex-col py-6 bg-dark-800 shadow-xl overflow-y-scroll overflow-x-hidden">
-                      <nav className="flex-1 pl-6" aria-label="Sidebar">
+                    <div className="flex flex-col h-full py-2 overflow-x-hidden overflow-y-scroll shadow-xl bg-dark-600">
+                      <nav className="flex-1 py-12 bg-dark-1000 pl-6" aria-label="Sidebar">
                         {menu.map((node) => {
                           return <NavigationItem node={node} key={node.key} />
                         })}
@@ -94,7 +103,7 @@ const Mobile: FC = () => {
             </div>
           </Dialog>
         </Transition.Root>
-        <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-4 xl:w-auto bg-dark-1000 xl:relative xl:p-0 xl:bg-transparent">
+        <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-4 xl:w-auto bg-dark-1000 hover-bg-dark-900 xl:relative xl:p-0 xl:bg-transparent">
           <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
             {library && library.provider.isMetaMask && (
               <div className="sm:inline-block">
