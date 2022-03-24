@@ -138,37 +138,6 @@ const useMenu: UseMenu = () => {
     //   })
 
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
-      const learnItems = {
-        key: 'Learn',
-        title: i18n._(t`Explore`),
-        icon: <GlobeIcon width={20} className="rotate-90 filter" />,
-        items: [
-          {
-            key: 'explore',
-            title: i18n._(t`Explore`),
-            link: '/explore',
-          },
-          {
-            key: 'soul-docs',
-            title: i18n._(t`Swap`),
-            link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
-          },
-          {
-            key: 'borrow-docs',
-            title: i18n._(t`Borrow`),
-            link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
-          },
-          {
-            key: 'lux-docs',
-            title: i18n._(t`Bond`),
-            link: 'https://docs.luxor.money',
-          },
-        ],
-      }
-      mainItems.push(learnItems)
-      }
-
-    if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const farmItems = {
         key: 'Rewards',
         title: i18n._(t`Accumulate`),
@@ -308,6 +277,37 @@ const useMenu: UseMenu = () => {
     //   icon: <WalletIcon width={20} />,
     // })
 
+    if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
+      const learnItems = {
+        key: 'Learn',
+        title: i18n._(t`Tutorials`),
+        icon: <GlobeIcon width={20} className="rotate-90 filter" />,
+        items: [
+          {
+            key: 'explore',
+            title: i18n._(t`Explore`),
+            link: '/explore',
+          },
+          {
+            key: 'soul-docs',
+            title: i18n._(t`Swap`),
+            link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
+          },
+          {
+            key: 'borrow-docs',
+            title: i18n._(t`Borrow`),
+            link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
+          },
+          {
+            key: 'lux-docs',
+            title: i18n._(t`Bond`),
+            link: 'https://docs.luxor.money',
+          },
+        ],
+      }
+      mainItems.push(learnItems)
+      }
+      
     return mainItems.filter((el) => Object.keys(el).length > 0)
   }, [chainId, i18n])
 }

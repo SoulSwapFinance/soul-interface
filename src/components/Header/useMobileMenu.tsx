@@ -64,7 +64,7 @@ const useMobileMenu: UseMobileMenu = () => {
     if (featureEnabled(Feature.AMM, chainId)) {
       tradeMenu = {
         key: 'trade',
-        title: i18n._(t`SWAP`),
+        title: i18n._(t`EXCHANGE`),
         // icon: <SwitchVerticalIcon width={16} />,
         items: [
           {
@@ -144,35 +144,6 @@ const useMobileMenu: UseMobileMenu = () => {
     //     title: i18n._(t`POOL`),
     //     items: poolMenu,
     //   })
-    if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
-      const learnItems = {
-        key: 'Learn',
-        title: i18n._(t`HOW-TO`),
-        items: [
-          {
-            key: 'explore',
-            title: i18n._(t`Explore`),
-            link: '/explore',
-          },
-          {
-            key: 'soul-docs',
-            title: i18n._(t`Swap`),
-            link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
-          },
-          {
-            key: 'borrow-docs',
-            title: i18n._(t`Borrow`),
-            link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
-          },
-          {
-            key: 'lux-docs',
-            title: i18n._(t`Bond`),
-            link: 'https://docs.luxor.money',
-          },
-        ],
-      }
-      mainItems.push(learnItems)
-      }
 
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const farmItems = {
@@ -311,6 +282,36 @@ const useMobileMenu: UseMobileMenu = () => {
     //   link: '/balances',
     //   // icon: <WalletIcon width={16} />,
     // })
+
+    if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
+      const learnItems = {
+        key: 'Learn',
+        title: i18n._(t`LEARN`),
+        items: [
+          {
+            key: 'explore',
+            title: i18n._(t`Explore`),
+            link: '/explore',
+          },
+          {
+            key: 'soul-docs',
+            title: i18n._(t`Swap`),
+            link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
+          },
+          {
+            key: 'borrow-docs',
+            title: i18n._(t`Borrow`),
+            link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
+          },
+          {
+            key: 'lux-docs',
+            title: i18n._(t`Bond`),
+            link: 'https://docs.luxor.money',
+          },
+        ],
+      }
+      mainItems.push(learnItems)
+      }
 
     return mainItems.filter((el) => Object.keys(el).length > 0)
   }, [chainId, i18n])
