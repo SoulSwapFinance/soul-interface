@@ -140,7 +140,7 @@ const useMenu: UseMenu = () => {
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const farmItems = {
         key: 'Rewards',
-        title: i18n._(t`Accumulate`),
+        title: i18n._(t`Rewards`),
         icon: <CurrencyDollarIcon width={20} className="text-dark-600 filter" />,
         items: [
           {
