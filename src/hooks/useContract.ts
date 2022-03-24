@@ -20,6 +20,7 @@ import {
   STOP_LIMIT_ORDER_ADDRESS,
   LOTTERY_ADDRESS,
   SOR_ADDRESS,
+  LUX_TREASURY_ADDRESS,
 } from '../constants/addresses'
 import {
   ARGENT_WALLET_DETECTOR_ABI,
@@ -89,6 +90,7 @@ import SOUL_SUMMONER_ABI from '../constants/abis/soulswap/soulsummoner.json' // 
 import LOTTERY_ABI from '../constants/abis/soulswap/lottery.json' // 28 JUL
 import SOULVAULT_ABI from '../constants/abis/soulswap/soulvault.json' // 31 JUL
 import LUXOR_ABI from '../constants/abis/soulswap/luxor.json'
+import LUXOR_TREASURY_ABI from '../constants/abis/soulswap/luxor-treasury.json'
 import LUXOR_STAKING_ABI from '../constants/abis/soulswap/luxor-staking.json'
 import WLUM_ABI from '../constants/abis/soulswap/wlumens.json'
 import ENCHANT_ABI from '../constants/abis/soulswap/enchant.json' // 30 OCT
@@ -321,6 +323,11 @@ export function useEnchantContract(withSignerIfPossible = true): Contract | null
 export function useLuxorContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && LUX_ADDRESS[chainId], LUXOR_ABI, withSignerIfPossible)
+}
+
+export function useLuxorTreasuryContract(withSignerIfPossible = true): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && LUX_TREASURY_ADDRESS[chainId], LUXOR_TREASURY_ABI, withSignerIfPossible)
 }
 
 export function useLuxorStakingContract(withSignerIfPossible = true): Contract | null {
