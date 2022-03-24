@@ -44,7 +44,7 @@ const Mobile: FC = () => {
       <div className="flex justify-between flex-grow">
       <div className="p-1 bg-dark-600 rounded-full hover:bg-white/10">
         {/* <div className="flex p-2 justify-between"> */}
-            <MenuIcon width={24} className="hover:text-purple text-dark-800 cursor-pointer" onClick={() => setOpen(true)} />
+            <MenuIcon width={20} className="hover:text-purple text-dark-800 cursor-pointer" onClick={() => setOpen(true)} />
             </div>
                 {/* <div className="flex w-6 mr-4 items-center">
                   <NavLink href="/landing">
