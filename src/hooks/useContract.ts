@@ -45,6 +45,7 @@ import {
   WNATIVE,
   SOUL_CIRCLE_ADDRESS,
   LUX_HELPER_ADDRESS,
+  LUXOR_STAKING_ADDRESS,
 } from 'sdk'
 import {
   COFFIN_BOX_ADDRESS,
@@ -88,6 +89,7 @@ import SOUL_SUMMONER_ABI from '../constants/abis/soulswap/soulsummoner.json' // 
 import LOTTERY_ABI from '../constants/abis/soulswap/lottery.json' // 28 JUL
 import SOULVAULT_ABI from '../constants/abis/soulswap/soulvault.json' // 31 JUL
 import LUXOR_ABI from '../constants/abis/soulswap/luxor.json'
+import LUXOR_STAKING_ABI from '../constants/abis/soulswap/luxor-staking.json'
 import WLUM_ABI from '../constants/abis/soulswap/wlumens.json'
 import ENCHANT_ABI from '../constants/abis/soulswap/enchant.json' // 30 OCT
 import ENCHANT_HELPER_ABI from '../constants/abis/soulswap/enchant-helper.json' // 30 OCT
@@ -321,6 +323,11 @@ export function useLuxorContract(withSignerIfPossible = true): Contract | null {
   return useContract(chainId && LUX_ADDRESS[chainId], LUXOR_ABI, withSignerIfPossible)
 }
 
+export function useLuxorStakingContract(withSignerIfPossible = true): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && LUXOR_STAKING_ADDRESS[chainId], LUXOR_STAKING_ABI, withSignerIfPossible)
+}
+
 export function useWrappedLumensContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && WLUM_ADDRESS[chainId], WLUM_ABI, withSignerIfPossible)
@@ -348,7 +355,6 @@ export function useCircleStakingContract(withSignerIfPossible?: boolean): Contra
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SOUL_CIRCLE_ADDRESS[chainId], SOUL_CIRCLE_ABI, withSignerIfPossible)
 }
-
 
 export function useConstantProductPoolFactory(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
