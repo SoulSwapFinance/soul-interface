@@ -1,3 +1,4 @@
+import React, { ReactNode, useMemo } from 'react'
 import { GlobeIcon, SwitchVerticalIcon, TrendingUpIcon } from '@heroicons/react/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
@@ -6,7 +7,6 @@ import { PoolIcon, RocketIcon, WalletIcon } from 'components/Icon'
 import { Feature } from 'enums'
 import { featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
-import { ReactNode, useMemo } from 'react'
 
 export interface MenuItemLeaf {
   key: string
@@ -41,30 +41,30 @@ const useMenu: UseMenu = () => {
       icon: <SwitchVerticalIcon width={20} />,
     }
  // If AMM is enabled, replace swap button with a submenu under trade
-//  if (featureEnabled(Feature.AMM, chainId)) {
-//   tradeMenu = {
-//     key: 'exchange',
-//     title: i18n._(t`Exchange`),
-//     // icon: <SwitchVerticalIcon width={20} />,
-//     items: [
-//       {
-//         key: 'swap',
-//         title: i18n._(t`Swap`),
-//         link: '/swap',
-//       },
-//       {
-//         key: 'bridge',
-//         title: i18n._(t`Bridge`),
-//         link: '/bridge',
-//       },
-//     ],
-//   }
-// }
+ /* if (featureEnabled(Feature.AMM, chainId)) {
+  tradeMenu = {
+    key: 'exchange',
+    title: i18n._(t`SWAP`),
+    icon: <SwitchVerticalIcon width={16} />,
+    items: [
+      {
+        key: 'swap',
+        title: i18n._(t`Swap`),
+        link: '/swap',
+      },
+      {
+        key: 'bridge',
+        title: i18n._(t`Bridge`),
+        link: '/bridge',
+      },
+    ],
+  }
+} */
     // If limit orders is enabled, replace swap button with a submenu under trade
-    if (featureEnabled(Feature.LIMIT_ORDERS, chainId)) {
+    if (featureEnabled(Feature.AMM, chainId)) {
       tradeMenu = {
         key: 'trade',
-        title: i18n._(t`Trade`),
+        title: i18n._(t`Exchange`),
         icon: <SwitchVerticalIcon width={20} />,
         items: [
           {
@@ -73,9 +73,19 @@ const useMenu: UseMenu = () => {
             link: '/swap',
           },
           {
+            key: 'bridge',
+            title: i18n._(t`Bridge`),
+            link: 'https://bridge.soulswap.finance',
+          },
+          {
             key: 'limit',
-            title: i18n._(t`Limit order`),
-            link: '/limit-order',
+            title: i18n._(t`Limit`),
+            link: '/limit',
+          },
+          {
+            key: 'margin',
+            title: i18n._(t`Margin`),
+            link: '/margin',
           },
         ],
       }
@@ -142,18 +152,28 @@ const useMenu: UseMenu = () => {
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const farmItems = {
         key: 'Rewards',
-        title: i18n._(t`Rewards`),
+        title: i18n._(t`Accumulate`),
         icon: <SwitchVerticalIcon width={20} className="rotate-90 filter" />,
         items: [
           {
-            key: 'your-farms',
-            title: i18n._(t`Farms`),
+            key: 'farm',
+            title: i18n._(t`Farm`),
             link: '/mines?filter=deposited',
           },
           {
-            key: 'staking',
-            title: i18n._(t`Staking`),
-            link: '/seance',
+            key: 'vault',
+            title: i18n._(t`Vault`),
+            link: '/autostake',
+          },
+          // {
+          //   key: 'staking',
+          //   title: i18n._(t`Stake`),
+          //   link: '/seance',
+          // },
+          {
+            key: 'luxor',
+            title: i18n._(t`Luxor`),
+            link: '/luxor',
           },
           {
             key: 'bonds',
@@ -165,10 +185,11 @@ const useMenu: UseMenu = () => {
       mainItems.push(farmItems)
     }
 
-    if (featureEnabled(Feature.UNDERWORLD, chainId)) {
+    if (featureEnabled(Feature.UNDERWORLD, chainId))
+     {
       mainItems.push({
         key: 'lending',
-        title: i18n._(t`Lending`),
+        title: i18n._(t`Borrow`),
         icon: <SwitchVerticalIcon width={20} className="rotate-90 filter" />,
         items: [
           {
@@ -183,6 +204,7 @@ const useMenu: UseMenu = () => {
           },
         ],
       })
+      
     }
 
     // if (featureEnabled(Feature.MISO, chainId)) {
@@ -215,14 +237,14 @@ const useMenu: UseMenu = () => {
           title: 'Wallet',
           link: '/info/dashboard',
         },
-        {
-          key: 'balances',
-          title: 'Balances',
-          link: '/balances',
-        },
+        // {
+        //   key: 'balances',
+        //   title: 'Coffin',
+        //   link: '/balances',
+        // },
         {
           key: 'dashboard',
-          title: 'Dashboard',
+          title: 'Data',
           link: '/analytics/dashboard',
         },
         {
@@ -250,12 +272,12 @@ const useMenu: UseMenu = () => {
       mainItems.push(analyticsMenu)
     }
 
-    mainItems.push({
-      key: 'balances',
-      title: i18n._(t`Portfolio`),
-      link: '/balances',
-      icon: <WalletIcon width={20} />,
-    })
+    // mainItems.push({
+    //   key: 'balances',
+    //   title: i18n._(t`Portfolio`),
+    //   link: '/balances',
+    //   icon: <WalletIcon width={20} />,
+    // })
 
     return mainItems.filter((el) => Object.keys(el).length > 0)
   }, [chainId, i18n])

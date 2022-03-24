@@ -1,12 +1,12 @@
+import React, { ReactNode, useMemo } from 'react'
 import { GlobeIcon, SwitchVerticalIcon, TrendingUpIcon } from '@heroicons/react/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { SOUL_ADDRESS } from 'sdk'
-import { PoolIcon, RocketIcon, WalletIcon } from 'components/Icon'
+// import { PoolIcon, RocketIcon, WalletIcon } from 'components/Icon'
 import { Feature } from 'enums'
 import { featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
-import { ReactNode, useMemo } from 'react'
 
 export interface MenuItemLeaf {
   key: string
@@ -38,7 +38,7 @@ const useMobileMenu: UseMobileMenu = () => {
       key: 'swap',
       title: i18n._(t`SWAP`),
       link: '/swap',
-      icon: <SwitchVerticalIcon width={16} />,
+      // icon: <SwitchVerticalIcon width={16} />,
     }
  // If AMM is enabled, replace swap button with a submenu under trade
  /* if (featureEnabled(Feature.AMM, chainId)) {
@@ -61,11 +61,11 @@ const useMobileMenu: UseMobileMenu = () => {
   }
 } */
     // If limit orders is enabled, replace swap button with a submenu under trade
-    if (featureEnabled(Feature.LIMIT_ORDERS, chainId)) {
+    if (featureEnabled(Feature.AMM, chainId)) {
       tradeMenu = {
         key: 'trade',
-        title: i18n._(t`Trade`),
-        icon: <SwitchVerticalIcon width={16} />,
+        title: i18n._(t`SWAP`),
+        // icon: <SwitchVerticalIcon width={16} />,
         items: [
           {
             key: 'swap',
@@ -73,9 +73,19 @@ const useMobileMenu: UseMobileMenu = () => {
             link: '/swap',
           },
           {
+            key: 'bridge',
+            title: i18n._(t`Bridge`),
+            link: 'https://bridge.soulswap.finance',
+          },
+          {
             key: 'limit',
-            title: i18n._(t`Limit order`),
-            link: '/limit-order',
+            title: i18n._(t`Limit`),
+            link: '/limit',
+          },
+          {
+            key: 'margin',
+            title: i18n._(t`Margin`),
+            link: '/margin',
           },
         ],
       }
@@ -128,7 +138,6 @@ const useMobileMenu: UseMobileMenu = () => {
         key: 'pool',
         title: i18n._(t`POOL`),
         items: poolMenu,
-        icon: <PoolIcon width={16} />,
       })
 
     if (exploreMenu.length > 0)
@@ -136,24 +145,37 @@ const useMobileMenu: UseMobileMenu = () => {
         key: 'explore',
         title: i18n._(t`Explore`),
         items: exploreMenu,
-        icon: <GlobeIcon width={16} />,
       })
 
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const farmItems = {
         key: 'Rewards',
         title: i18n._(t`EARN`),
-        icon: <SwitchVerticalIcon width={16} className="rotate-90 filter" />,
         items: [
           {
-            key: 'your-farms',
-            title: i18n._(t`Farms`),
+            key: 'farm',
+            title: i18n._(t`Farm`),
             link: '/mines?filter=deposited',
           },
           {
-            key: 'staking',
-            title: i18n._(t`Staking`),
-            link: '/seance',
+            key: 'vault',
+            title: i18n._(t`Vault`),
+            link: '/autostake',
+          },
+          // {
+          //   key: 'staking',
+          //   title: i18n._(t`Stake`),
+          //   link: '/seance',
+          // },
+          {
+            key: 'sor',
+            title: i18n._(t`Stable`),
+            link: '/sor',
+          },
+          {
+            key: 'luxor',
+            title: i18n._(t`Luxor`),
+            link: '/luxor',
           },
           {
             key: 'bonds',
@@ -168,8 +190,8 @@ const useMobileMenu: UseMobileMenu = () => {
     if (featureEnabled(Feature.UNDERWORLD, chainId)) {
       mainItems.push({
         key: 'lending',
-        title: i18n._(t`Lending`),
-        icon: <SwitchVerticalIcon width={16} className="rotate-90 filter" />,
+        title: i18n._(t`LEND`),
+        // icon: <SwitchVerticalIcon width={16} className="rotate-90 filter" />,
         items: [
           {
             key: 'lend',
@@ -183,6 +205,7 @@ const useMobileMenu: UseMobileMenu = () => {
           },
         ],
       })
+      
     }
 
     // if (featureEnabled(Feature.MISO, chainId)) {
@@ -208,7 +231,7 @@ const useMobileMenu: UseMobileMenu = () => {
     let analyticsMenu: MenuItem = {
       key: 'analytics',
       title: i18n._(t`DATA`),
-      icon: <TrendingUpIcon width={16} />,
+      // icon: <TrendingUpIcon width={16} />,
       items: [
         {
           key: 'wallet',
@@ -217,7 +240,7 @@ const useMobileMenu: UseMobileMenu = () => {
         },
         {
           key: 'dashboard',
-          title: 'Overview',
+          title: 'Review',
           link: '/analytics/dashboard',
         },
         {
