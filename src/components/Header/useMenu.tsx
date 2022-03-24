@@ -197,7 +197,7 @@ const useMenu: UseMenu = () => {
           },
           {
             key: 'luxor-bonds',
-            title: i18n._(t`Bond`),
+            title: i18n._(t`Bonds`),
             link: '/luxor',
           },
           {
