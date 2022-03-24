@@ -40,7 +40,7 @@ const Mobile: FC = () => {
 
   return (
     <>      
-      <header className="w-full flex mt-1 items-center text-white text-center justify-center min-h-[48px] h-[48px] px-0 sm:px-2">
+      <header className="w-full flex mt-1 items-center text-white text-center justify-center min-h-[48px] h-[48px] px-4 sm:px-2">
       <div className="flex justify-between flex-grow">
       <div className="p-1 bg-dark-600 ml-2 rounded-full hover:bg-white/10">
         {/* <div className="flex p-2 justify-between"> */}
