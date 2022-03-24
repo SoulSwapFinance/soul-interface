@@ -508,7 +508,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                     </FlexText>
                                     </Wrap>
                                     <AssetInput
-                                        currencyLogo={true}
+                                        currencyLogo={false}
                                         currency={SOUL[250]}
                                         currencyAddress={SOUL[250].address}
                                         value={depositValue}
@@ -518,37 +518,40 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                     />
                                     <Wrap padding="0" margin="0" display="flex" justifyContent="space-between">
                                         <Text fontSize=".9rem" padding="0" textAlign="left" color="#FFFFFF">
-                                            STAKED:&nbsp;
-                                    {Number(stakedBal) === 0
-                                        ? '0'
-                                        : Number(stakedBal) < 0
-                                            ? '<0'
-                                            : Number(stakedBal)
-                                                .toFixed(0)
-                                                .toString()
-                                                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
-                                                ({(Number(stakedBal * soulPrice) !== 0 ? `$${Number(stakedBal * soulPrice).toFixed(0)}` : '0')})
-                                            {/* <br /> */}
-                                        </Text>
-                                        
-                                        <Text fontSize=".9rem" padding="0" textAlign="left" color="#FFFFFF">
-                                            BAL:&nbsp;
-                                    {Number(unstakedBal) === 0
-                                        ? '0'
-                                        : Number(unstakedBal) < 0
-                                            ? '<0'
-                                            : Number(unstakedBal)
-                                                .toFixed(0)
-                                                .toString()
-                                                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
-                                                ({(Number(unstakedBal * soulPrice) !== 0 ? `$${Number(unstakedBal * soulPrice).toFixed(0)}` : '0')})
-                                            <br />
-                                        </Text>
-                                    </Wrap>
-                                    <Wrap padding="0" margin="0" display="flex">
+                                                &nbsp;
+                                                {Number(stakedBal) === 0
+                                                    ? '0'
+                                                    : Number(stakedBal) < 0
+                                                        ? '<0'
+                                                        : Number(stakedBal)
+                                                            .toFixed(0)
+                                                            .toString()
+                                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
+                                                ({(Number(stakedBal * soulPrice) !== 0
+                                                    ? `$${Number(stakedBal * soulPrice)
+                                                        .toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}` : '0')})
+                                            </Text>
+
+                                            <Text fontSize=".9rem" padding="0" textAlign="left" color="#FFFFFF">
+                                                MAX:&nbsp;
+                                                {Number(unstakedBal) === 0
+                                                    ? '0'
+                                                    : Number(unstakedBal) < 0
+                                                        ? '<0'
+                                                        : Number(unstakedBal)
+                                                            .toFixed(0)
+                                                            .toString()
+                                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
+                                                ({(Number(unstakedBal * soulPrice) !== 0
+                                                    ? `$${Number(unstakedBal * soulPrice)
+                                                        .toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}` : '0')})
+                                                <br />
+                                            </Text>
+                                        </Wrap>
+                                    <Wrap padding="0" margin="0" display="flex flex-cols">
                                         <SubmitButton
                                             height="2rem"
-                                            primaryColour="#B485FF"
+                                            primaryColour="#A285FF"
                                             color="black"
                                             margin=".5rem 0 .5rem 0"
                                             onClick={() =>
@@ -557,11 +560,17 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                         >
                                             DEPOSIT SOUL
                                         </SubmitButton>
+                                        {/* <SubmitButton height="2rem" 
+                                        primaryColour="#3Eff3E"
+                                        color="black"
+                                        onClick={() => handleApprove()}>
+                                        APPROVE MORE
+                                        </SubmitButton> */}
                                     </Wrap>
                                     <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
-                                            primaryColour="#bbb"
+                                            primaryColour="#3Eff3E"
                                             color="black"
                                             margin=".5rem 0 .5rem 0"
                                             onClick={() =>
@@ -598,7 +607,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                 <Wrap padding="0" margin="0" display="flex">
                                     <SubmitButton
                                         height="2rem"
-                                        primaryColour="#B485FF"
+                                        primaryColour="#fa4600"
                                         color="black"
                                         margin=".5rem 0 .5rem 0"
                                         onClick={() =>
