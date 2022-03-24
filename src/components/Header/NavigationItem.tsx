@@ -81,12 +81,12 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
-              <Popover.Panel className="z-10 w-full justify-center absolute w-20 translate-y-[-10px] translate-x-[-12px]">
+              <Popover.Panel className="z-10 w-full justify-center absolute w-20 translate-y-[-10px] translate-x-[-10px]">
                 <div
                   className={classNames(
                     'shadow-md shadow-black/40 border border-dark-600 rounded overflow-hidden',
                     !touchDevice
-                      ? "backdrop-blur-fallback before:z-[-1] before:rounded before:absolute before:w-full before:h-full before:content-[''] before:backdrop-blur-[20px] bg-white bg-opacity-[0.02]"
+                      ? "backdrop-blur-fallback before:z-[-1] before:rounded before:absolute before:w-full before:h-full before:content-[''] before:backdrop-blur-[20px] bg-dark-900 bg-opacity-[0.02]"
                       : 'bg-dark-800 inset-0'
                   )}
                 >
@@ -99,7 +99,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
                           onClick={() => {
                             router.push(leaf.link).then(() => buttonRef?.current?.click())
                           }}
-                          className="relative px-3 py-2 m-1 rounded-lg hover:cursor-pointer hover:text-white hover:bg-white/10"
+                          className="relative px-3 text-center py-2 m-1 rounded-lg hover:cursor-pointer hover:text-white hover:bg-white/10"
                         >
                           {leaf.title}
                         </Typography>

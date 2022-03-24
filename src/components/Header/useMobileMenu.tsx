@@ -73,6 +73,11 @@ const useMobileMenu: UseMobileMenu = () => {
             link: '/swap',
           },
           {
+            key: 'pool',
+            title: i18n._(t`Pool`),
+            link: '/pool',
+          },
+          {
             key: 'bridge',
             title: i18n._(t`Bridge`),
             link: 'https://bridge.soulswap.finance',
@@ -122,30 +127,52 @@ const useMobileMenu: UseMobileMenu = () => {
       })
     }
 
-    const exploreMenu: MenuItemLeaf[] = []
-    if (featureEnabled(Feature.VESTING, chainId)) {
-      exploreMenu.push({
-        key: 'stake',
-        title: i18n._(t`Stake`),
-        link: '/stake',
-      })
-    }
+    // const exploreMenu: MenuItemLeaf[] = []
+    // if (featureEnabled(Feature.VESTING, chainId)) {
+      // exploreMenu.push({
+      //   key: 'all',
+      //   title: i18n._(t`More`),
+      //   link: '/explore',
+      // })
+    // }
 
     const mainItems: MobileMenu = [tradeMenu]
 
-    if (poolMenu.length > 0)
-      mainItems.push({
-        key: 'pool',
-        title: i18n._(t`POOL`),
-        items: poolMenu,
-      })
-
-    if (exploreMenu.length > 0)
-      mainItems.push({
-        key: 'explore',
-        title: i18n._(t`Explore`),
-        items: exploreMenu,
-      })
+    // if (poolMenu.length > 0)
+    //   mainItems.push({
+    //     key: 'pool',
+    //     title: i18n._(t`POOL`),
+    //     items: poolMenu,
+    //   })
+    if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
+      const learnItems = {
+        key: 'Learn',
+        title: i18n._(t`HOW-TO`),
+        items: [
+          {
+            key: 'explore',
+            title: i18n._(t`Explore`),
+            link: '/explore',
+          },
+          {
+            key: 'soul-docs',
+            title: i18n._(t`Swap`),
+            link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
+          },
+          {
+            key: 'borrow-docs',
+            title: i18n._(t`Borrow`),
+            link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
+          },
+          {
+            key: 'lux-docs',
+            title: i18n._(t`Bond`),
+            link: 'https://docs.luxor.money',
+          },
+        ],
+      }
+      mainItems.push(learnItems)
+      }
 
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const farmItems = {
@@ -155,18 +182,18 @@ const useMobileMenu: UseMobileMenu = () => {
           {
             key: 'farm',
             title: i18n._(t`Farm`),
-            link: '/mines?filter=deposited',
+            link: '/mines?filter=active',
           },
           {
             key: 'vault',
             title: i18n._(t`Vault`),
             link: '/autostake',
           },
-          // {
-          //   key: 'staking',
-          //   title: i18n._(t`Stake`),
-          //   link: '/seance',
-          // },
+          {
+            key: 'staking',
+            title: i18n._(t`Stake`),
+            link: '/seance',
+          },
           {
             key: 'sor',
             title: i18n._(t`Stable`),
@@ -179,7 +206,7 @@ const useMobileMenu: UseMobileMenu = () => {
           },
           {
             key: 'bonds',
-            title: i18n._(t`Bonds`),
+            title: i18n._(t`Bond`),
             link: '/bonds',
           },
         ],
@@ -233,6 +260,11 @@ const useMobileMenu: UseMobileMenu = () => {
       title: i18n._(t`DATA`),
       // icon: <TrendingUpIcon width={16} />,
       items: [
+        {
+          key: 'portfolio',
+          title: 'Coffin',
+          link: '/balances',
+        },
         {
           key: 'wallet',
           title: 'Wallet',
