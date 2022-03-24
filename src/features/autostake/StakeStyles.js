@@ -43,7 +43,7 @@ export const StakeContainer = styled.div`
 
 export const Row = styled.div`
   background-color: #18191A;
-  padding: ${({ padding }) => (padding ? `${padding}` : `1.5rem 1rem`)};
+  padding: ${({ padding }) => (padding ? `${padding}` : `.25rem 0rem`)};
   margin: ${({ width }) => (width ? `${width}` : `2px`)};
   width: 55rem;
   border-radius: 18px;
@@ -75,7 +75,7 @@ export const StakeContentWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 1rem 0 0;
+  padding: 0 2rem 0 0;
 
   &:last-child {
     justify-content: space-between;
@@ -107,7 +107,7 @@ export const StakeItem = styled.h2`
 `
 
 export const TokenPairBox = styled.div`
-  width: 150px;
+  width: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -212,8 +212,6 @@ export const Input = styled.input`
 
   &:focus {
     border-color: white;
-    /* y axis, x axis, blur, spread, colour */
-    /* box-shadow: 0 0 10px 0 white; */
     outline: 0;
   }
 `

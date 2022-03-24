@@ -1,6 +1,3 @@
-import styled from "styled-components";
-import { Button } from 'components/Button'
-import QuestionHelper from 'components/QuestionHelper'
 import {
   Wrap,
   StakeContainer,
@@ -21,39 +18,40 @@ export default function StakeKey() {
         alignContent="center"
       >
         <StakeContainer>
-          <Row padding=".25rem 2rem">
+          <Row padding="0.25rem 1rem">
             <StakeContentWrapper>
-              <TokenPairBox>
                 <Wrap>
-                  <Text padding ="0" fontSize=".8" color="#bbb">
-                  TOKEN
+                  <Text padding ="0" fontSize=".8rem" color="#bbb">
+                  ASSET
                   </Text>
                 </Wrap>
-              </TokenPairBox>
 
               <StakeItemBox>
-                <Text padding="0" fontSize=".8" color="#bbb">
+                <Text padding="0" fontSize=".8rem" color="#bbb">
+                STAKED
+                </Text>
+              </StakeItemBox>
+
+              <StakeItemBox>
+                <Text padding="0" fontSize=".8rem" color="#bbb">
                 % APY
                 </Text>
               </StakeItemBox>
 
               <StakeItemBox desktopOnly={true}>
-                <Text padding="0" fontSize=".8" color="#bbb">
-                EARNED
+                <Text padding="0" fontSize=".8rem" color="#bbb">
+                CLAIMABLE
+                </Text>
+              </StakeItemBox>
+              <StakeItemBox>
+                <Text padding="0" fontSize=".8rem" color="#bbb">
+                TVL
                 </Text>
               </StakeItemBox>
 
-              {/* <HideOnMobile> */}
-                <Text padding="0" fontSize=".8" color="#bbb">
-                  TVL
-                </Text>
-              {/* </HideOnMobile> */}
             </StakeContentWrapper>
             
           </Row>
-          {/* <Button variant={'link'} color={'purple'} className="absolute top-[5%] right-[10%]"> */}
- 
-              {/* </Button> */}
         </StakeContainer>
       </Wrap>
     </>
