@@ -1,5 +1,5 @@
 import React, { ReactNode, useMemo } from 'react'
-import { GlobeIcon, SwitchVerticalIcon, TrendingUpIcon, CurrencyDollarIcon } from '@heroicons/react/outline'
+import { GlobeIcon, SwitchVerticalIcon, TrendingUpIcon, SunIcon, CurrencyDollarIcon } from '@heroicons/react/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { SOUL_ADDRESS } from 'sdk'
@@ -40,12 +40,13 @@ const useMenu: UseMenu = () => {
       link: '/swap',
       icon: <SwitchVerticalIcon width={20} className="text-dark-600" />,
     }
+  
  // If AMM is enabled, replace swap button with a submenu under trade
  /* if (featureEnabled(Feature.AMM, chainId)) {
   tradeMenu = {
     key: 'exchange',
     title: i18n._(t`SWAP`),
-    icon: <SwitchVerticalIcon width={16} />,
+    icon: <SwitchVerticalIcon width={20} />,
     items: [
       {
         key: 'swap',
@@ -139,13 +140,18 @@ const useMenu: UseMenu = () => {
 
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const farmItems = {
-        key: 'Rewards',
-        title: i18n._(t`Rewards`),
+        key: 'SoulSwap',
+        title: i18n._(t`SoulSwap`),
         icon: <CurrencyDollarIcon width={20} className="text-dark-600 filter" />,
         items: [
           {
+            key: 'soul-docs',
+            title: i18n._(t`How-To`),
+            link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
+          },
+          {
             key: 'farm',
-            title: i18n._(t`Farm`),
+            title: i18n._(t`Farms`),
             link: '/mines?filter=active',
           },
           {
@@ -159,8 +165,39 @@ const useMenu: UseMenu = () => {
             link: '/seance',
           },
           {
-            key: 'luxor',
-            title: i18n._(t`Luxor`),
+            key: 'bonds',
+            title: i18n._(t`Bonds`),
+            link: '/bonds',
+          },
+          {
+            key: 'soul-follow',
+            title: i18n._(t`Follow`),
+            link: 'https://twitter.com/SoulSwapFinance',
+          },
+        ],
+      }
+      mainItems.push(farmItems)
+    }
+
+    if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
+      const learnItems = {
+        key: 'Luxor',
+        title: i18n._(t`Luxor`),
+        icon: <SunIcon width={20} className="rotate-90 text-dark-600 filter" />,
+        items: [
+          {
+            key: 'lux-docs',
+            title: i18n._(t`How-To`),
+            link: 'https://docs.luxor.money',
+          },
+          {
+            key: 'luxor-dashboard',
+            title: i18n._(t`Overview`),
+            link: '/dashboard',
+          },
+          {
+            key: 'luxor-bonds',
+            title: i18n._(t`Bond`),
             link: '/luxor',
           },
           {
@@ -169,22 +206,33 @@ const useMenu: UseMenu = () => {
             link: '/sor',
           },
           {
-            key: 'bonds',
-            title: i18n._(t`Bond`),
-            link: '/bonds',
+            key: 'rebase',
+            title: i18n._(t`Rebase`),
+            link: 'https://app.luxor.money',
+          },
+          {
+            key: 'luxor-follow',
+            title: i18n._(t`Follow`),
+            link: 'https://twitter.com/LuxorMoney',
           },
         ],
       }
-      mainItems.push(farmItems)
-    }
+      mainItems.push(learnItems)
+      }
+      
 
     if (featureEnabled(Feature.UNDERWORLD, chainId))
      {
       mainItems.push({
         key: 'lending',
-        title: i18n._(t`Borrow`),
+        title: i18n._(t`Lending`),
         icon: <SwitchVerticalIcon width={20} className="rotate-90 text-dark-600 filter" />,
         items: [
+          {
+            key: 'borrow-docs',
+            title: i18n._(t`How-To`),
+            link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
+          },
           {
             key: 'lend',
             title: i18n._(t`Lend`),
@@ -194,6 +242,16 @@ const useMenu: UseMenu = () => {
             key: 'borrow',
             title: i18n._(t`Borrow`),
             link: '/borrow',
+          },
+          {
+            key: 'underworld-farms',
+            title: i18n._(t`Mines`),
+            link: '/mines?filter=lending',
+          },
+          {
+            key: 'balances',
+            title: 'Coffinbox',
+            link: '/balances',
           },
         ],
       })
@@ -225,16 +283,11 @@ const useMenu: UseMenu = () => {
       title: i18n._(t`Analytics`),
       icon: <TrendingUpIcon width={20} className="text-dark-600" />,
       items: [
-        {
-          key: 'balances',
-          title: 'Coffin',
-          link: '/balances',
-        },
-        {
-          key: 'luxor-dashboard',
-          title: 'Luxor',
-          link: '/dashboard',
-        },
+        // {
+        //   key: 'luxor-dashboard',
+        //   title: 'Luxor',
+        //   link: '/dashboard',
+        // },
         {
           key: 'wallet',
           title: 'Wallet',
@@ -242,7 +295,7 @@ const useMenu: UseMenu = () => {
         },
         {
           key: 'dashboard',
-          title: 'Data',
+          title: 'Overview',
           link: '/analytics/dashboard',
         },
         {
@@ -276,38 +329,17 @@ const useMenu: UseMenu = () => {
     //   link: '/balances',
     //   icon: <WalletIcon width={20} />,
     // })
+    
+  // By default show just a swap button
+  let exploreMenu: MenuItem = {
+    key: 'explore',
+    title: i18n._(t`Explore`),
+    link: '/explore',
+    icon: <GlobeIcon width={20} className="text-dark-600" />,
+  }
+    mainItems.push(exploreMenu)
 
-    if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
-      const learnItems = {
-        key: 'Learn',
-        title: i18n._(t`Tutorials`),
-        icon: <GlobeIcon width={20} className="rotate-90 text-dark-600 filter" />,
-        items: [
-          {
-            key: 'explore',
-            title: i18n._(t`Explore`),
-            link: '/explore',
-          },
-          {
-            key: 'soul-docs',
-            title: i18n._(t`Swap`),
-            link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
-          },
-          {
-            key: 'borrow-docs',
-            title: i18n._(t`Borrow`),
-            link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
-          },
-          {
-            key: 'lux-docs',
-            title: i18n._(t`Bond`),
-            link: 'https://docs.luxor.money',
-          },
-        ],
-      }
-      mainItems.push(learnItems)
-      }
-      
+    
     return mainItems.filter((el) => Object.keys(el).length > 0)
   }, [chainId, i18n])
 }
