@@ -80,25 +80,24 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Limit`)}
           </Typography>
         </NavLink>
-          <NavLink
+        {/* <NavLink
             activeClassName="text-high-emphesis"
             href={{
               pathname: '/margin',
             }}
           >
             <Typography weight={700} className="text-secondary hover:text-white">
-              {i18n._(t`Margin`)}
+             Margin
             </Typography>
           </NavLink>
-        <ExternalLink
-          // activeClassName="text-high-emphesis"
-          // href={"/bridge"}
-          href={"https://bridge.soulswap.finance"}
-        >
+         <ExternalLink
+           activeClassName="text-high-emphesis"
+           href={"/bridge"}
+          href={"https://bridge.soulswap.finance"}>
           <Typography weight={700} className="text-secondary hover:text-white">
-            {i18n._(t`Bridge`)}
+            Bridge
           </Typography>
-        </ExternalLink>
+        </ExternalLink> */}
       </div>
       <div className="flex gap-4">
         {/* {isLimitOrder && <MyOrders />} */}
