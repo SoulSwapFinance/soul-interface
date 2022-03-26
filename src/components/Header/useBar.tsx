@@ -219,9 +219,45 @@ const useMenu: UseBar = () => {
       }
       mainItems.push(learnItems)
       }
-      
+    
+      if (featureEnabled(Feature.UNDERWORLD, chainId))
+      {
+       mainItems.push({
+         key: 'lending',
+         title: i18n._(t`Lending`),
+         icon: <SwitchVerticalIcon width={20} className="rotate-90 text-dark-600 filter" />,
+         items: [
+           {
+             key: 'borrow-docs',
+             title: i18n._(t`How-To`),
+             link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
+           },
+           {
+             key: 'lend',
+             title: i18n._(t`Lend`),
+             link: '/lend',
+           },
+           {
+             key: 'borrow',
+             title: i18n._(t`Borrow`),
+             link: '/borrow',
+           },
+           {
+             key: 'underworld-farms',
+             title: i18n._(t`Mines`),
+             link: '/mines?filter=lending',
+           },
+           {
+             key: 'balances',
+             title: 'Coffinbox',
+             link: '/balances',
+           },
+         ],
+       })
+       
+     }
 
-    if (featureEnabled(Feature.UNDERWORLD, chainId))
+    if (featureEnabled(Feature.AMM, chainId))
      {
       mainItems.push({
         key: 'analytics',
