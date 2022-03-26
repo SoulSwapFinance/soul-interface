@@ -291,7 +291,7 @@ const useMenu: UseMenu = () => {
         {
           key: 'wallet',
           title: 'Wallet',
-          link: '/info/dashboard',
+          link: '/balances',
         },
         {
           key: 'dashboard',
