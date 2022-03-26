@@ -381,7 +381,7 @@ export default function Dashboard() {
       </Head>
       <div className="flex mt-2 mb-4 gap-3 items-center justify-center">
         <Button variant="filled" color="yellow" size="lg">
-          <NavLink href={'/luxor'}>
+          <NavLink href={'/luxor/bonds'}>
             <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Bond Luxor </span>
             </a>
