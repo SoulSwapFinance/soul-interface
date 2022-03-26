@@ -1,42 +1,45 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { MenuIcon } from '@heroicons/react/outline'
+import { MenuAlt1Icon } from '@heroicons/react/outline'
 import { NATIVE } from 'sdk'
-import { InjectedConnector } from '@web3-react/injected-connector'
-import { WalletLinkConnector } from '@web3-react/walletlink-connector'
+// import { InjectedConnector } from '@web3-react/injected-connector'
+// import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 import Web3Network from 'components/Web3Network'
 import Web3Status from 'components/Web3Status'
 import { useActiveWeb3React } from 'services/web3'
 import { useETHBalances, useTokenBalance } from 'state/wallet/hooks'
-import Image from 'next/image'
-import Link from 'next/link'
 import React, { FC, Fragment, useState } from 'react'
+import Image from 'next/image'
 
 import { NavigationItem } from './NavigationItem'
+import { SidebarItem } from './SidebarItem'
 import TokenStats from 'components/TokenStats'
 import LuxorStats from 'components/LuxorStats'
 import More from './More'
-import NavLink from 'components/NavLink'
-import { AURA } from 'constants/tokens'
+// import NavLink from 'components/NavLink'
+// import { AURA } from 'constants/tokens'
 import Container from 'components/Container'
-import LanguageSwitch from 'components/LanguageSwitch'
+// import LanguageSwitch from 'components/LanguageSwitch'
 import { NAV_CLASS } from './styles'
-import useMenu from 'components/Header/useMenu'
-import useMobileMenu from './useMobileMenu'
+import useMenu from './useMenu'
+import useBar from './useBar'
+import NavLink from 'components/NavLink'
+// import useMobileMenu from './useMobileMenu'
 
 const HEADER_HEIGHT = 64
 
-const Mobile: FC = () => {
+const Desktop: FC = () => {
   const menu = useMenu()
-  // const mobileMenu = useMobileMenu()
+  const bar = useBar()
+  // const mobile = useMobileMenu()
   const { account, chainId, library, connector } = useActiveWeb3React()
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   
   const [open, setOpen] = useState(false)
 
-  const isCbWallet =
-    connector instanceof WalletLinkConnector ||
-    (connector instanceof InjectedConnector && window.walletLinkExtension) ||
-    window?.ethereum?.isCoinbaseWallet
+  // const isCbWallet =
+  //   connector instanceof WalletLinkConnector ||
+  //   (connector instanceof InjectedConnector && window.walletLinkExtension) ||
+  //   window?.ethereum?.isCoinbaseWallet
 
   return (
     <>      
@@ -44,7 +47,7 @@ const Mobile: FC = () => {
       <div className="flex justify-between flex-grow">
       <div className="p-2 bg-dark-900 rounded-full hover:bg-white/10">
         {/* <div className="flex p-2 justify-between"> */}
-            <MenuIcon width={24} className="hover:text-purple text-white cursor-pointer" onClick={() => setOpen(true)} />
+            <MenuAlt1Icon width={24} className="hover:text-purple text-white cursor-pointer" onClick={() => setOpen(true)} />
             </div>
                 {/* <div className="flex w-6 mr-4 items-center">
                   <NavLink href="/landing">
@@ -93,8 +96,8 @@ const Mobile: FC = () => {
                   <div className="w-screen max-w-sm">
                     <div className="flex flex-col h-full py-2 overflow-x-hidden overflow-y-scroll shadow-xl bg-dark-600">
                       <nav className="flex-1 py-12 bg-dark-1000 pl-6" aria-label="Sidebar">
-                        {menu.map((node) => {
-                          return <NavigationItem node={node} key={node.key} />
+                        {bar.map((node) => {
+                          return <SidebarItem node={node} key={node.key} />
                         })}
                       </nav>
                     </div>
@@ -143,4 +146,4 @@ const Mobile: FC = () => {
 }
 <div style={{ height: HEADER_HEIGHT, minHeight: HEADER_HEIGHT }} />
 
-export default Mobile
+export default Desktop

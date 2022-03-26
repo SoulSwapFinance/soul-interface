@@ -1,7 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { MenuIcon } from '@heroicons/react/outline'
+import { MenuAlt1Icon } from '@heroicons/react/outline'
 import { NATIVE } from 'sdk'
-import useMenu from 'components/Header/useMenu'
+// import useMenu from 'components/Header/useMenu'
 import Web3Network from 'components/Web3Network'
 import Web3Status from 'components/Web3Status'
 import useIsCoinbaseWallet from 'hooks/useIsCoinbaseWallet'
@@ -11,14 +11,17 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { FC, Fragment, useState } from 'react'
 
-import { NavigationItem } from './NavigationItem'
+import { SidebarItem } from './SidebarItem'
+// import { NavigationItem } from './NavigationItem'
 import LuxorStats from 'components/LuxorStats'
 import TokenStats from 'components/TokenStats'
 import More from './More'
+import useBar from './useBar'
 // const HEADER_HEIGHT=24
 
 const Mobile: FC = () => {
-  const menu = useMenu()
+  // const menu = useMenu()
+  const bar = useBar()
   const { account, chainId, library } = useActiveWeb3React()
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   const [open, setOpen] = useState(false)
@@ -29,7 +32,7 @@ const Mobile: FC = () => {
       <header className="w-full flex mt-3 items-center justify-between min-h-[48px] h-[48px] px-4">
         <div className="flex justify-between flex-grow">
           <div className="p-2 rounded-full hover:bg-white/10">
-            <MenuIcon width={28} className="hover:text-purple text-white cursor-pointer hover:text-white" onClick={() => setOpen(true)} />
+            <MenuAlt1Icon width={28} className="hover:text-purple text-white cursor-pointer hover:text-white" onClick={() => setOpen(true)} />
           </div>
           <div className="flex items-center w-12 mr-1">
             <Link href="/landing" passHref={true}>
@@ -66,8 +69,8 @@ const Mobile: FC = () => {
                   <div className="w-screen max-w-sm">
                     <div className="flex flex-col h-full py-2 overflow-x-hidden overflow-y-scroll shadow-xl bg-dark-600">
                     <nav className="flex-1 bg-dark-1000 pl-6" aria-label="Sidebar">
-                        {menu.map((node) => {
-                          return <NavigationItem node={node} key={node.key} />
+                        {bar.map((node) => {
+                          return <SidebarItem node={node} key={node.key} />
                         })}
                       </nav>
 
