@@ -507,9 +507,9 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                         value={depositValue}
                                         onChange={setDepositValue}
                                         showMax={false}
-                                        showBalance={false}
+                                        showBalance={true}
                                     />
-                                    <Wrap padding="0" margin="0" display="flex" justifyContent="space-between">
+                                    {/* <Wrap padding="0" margin="0" display="flex" justifyContent="space-between">
                                         <Text fontSize=".9rem" padding="0" textAlign="left" color="#FFFFFF">
                                                 &nbsp;
                                                 {Number(stakedBal) === 0
@@ -540,7 +540,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                                         .toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}` : '0')})
                                                 <br />
                                             </Text>
-                                        </Wrap>
+                                        </Wrap> */}
                                     <Wrap padding="0" margin="0" display="flex flex-cols">
                                         <SubmitButton
                                             height="2rem"
