@@ -92,7 +92,7 @@ function AppBar(): JSX.Element {
                           {i18n._(t`LAUNCH`)}
                         </a>
                       </NavLink>
-                      <NavLink href={'/luxor'}>
+                      <NavLink href={'/luxor/bonds'}>
                         <a
                           id={`luxor-nav-link`}
                           className="hidden md:block w-full relative ml-6 md:p-2"

@@ -290,7 +290,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
           size='xs'
           className="text-white"
         >
-          <NavLink href={'/luxor'}>
+          <NavLink href={'/luxor/bonds'}>
             <a className="flex justify-center text-black text-xl transition rounded-md hover:pink">
               MINT LUX<span> ↗</span>
             </a>

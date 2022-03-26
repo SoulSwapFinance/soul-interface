@@ -193,12 +193,12 @@ const useMenu: UseMenu = () => {
           {
             key: 'luxor-dashboard',
             title: i18n._(t`Overview`),
-            link: '/dashboard',
+            link: '/luxor/dashboard',
           },
           {
             key: 'luxor-bonds',
             title: i18n._(t`Bonds`),
-            link: '/luxor',
+            link: '/luxor/bonds',
           },
           {
             key: 'sor',
@@ -283,11 +283,6 @@ const useMenu: UseMenu = () => {
       title: i18n._(t`Analytics`),
       icon: <TrendingUpIcon width={20} className="text-dark-600" />,
       items: [
-        // {
-        //   key: 'luxor-dashboard',
-        //   title: 'Luxor',
-        //   link: '/dashboard',
-        // },
         {
           key: 'wallet',
           title: 'Wallet',
