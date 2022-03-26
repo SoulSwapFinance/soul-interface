@@ -25,7 +25,7 @@ import { usePairContract, useTokenContract } from 'hooks/useTokenContract'
 import { LUXOR_WARMUP_ADDRESS, WFTM_ADDRESS } from 'constants/addresses'
 import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
-import ExternalLink from 'components/ExternalLink'
+// import ExternalLink from 'components/ExternalLink'
 import LuxorGlowShadow from 'components/LuxorGlowShadow'
 
 export default function Dashboard() {

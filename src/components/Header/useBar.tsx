@@ -193,12 +193,12 @@ const useMenu: UseBar = () => {
           {
             key: 'luxor-dashboard',
             title: i18n._(t`Overview`),
-            link: '/dashboard',
+            link: '/luxor/dashboard',
           },
           {
             key: 'luxor-bonds',
             title: i18n._(t`Bonds`),
-            link: '/luxor',
+            link: '/luxor/bonds',
           },
           {
             key: 'sor',

@@ -173,7 +173,7 @@ const useMobileMenu: UseMobileMenu = () => {
           {
             key: 'luxor',
             title: i18n._(t`Luxor`),
-            link: '/luxor',
+            link: '/luxor/bonds',
           },
           {
             key: 'bonds',
@@ -244,7 +244,7 @@ const useMobileMenu: UseMobileMenu = () => {
         {
           key: 'luxor-dashboard',
           title: 'Luxor',
-          link: '/dashboard',
+          link: '/luxor/dashboard',
         },
         {
           key: 'dashboard',
