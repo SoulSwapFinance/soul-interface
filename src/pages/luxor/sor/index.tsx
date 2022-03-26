@@ -1,21 +1,21 @@
 import React, { Fragment, useCallback, useState } from 'react'
-import Container from '../../components/Container'
+import Container from 'components/Container'
 import Head from 'next/head'
-import Typography from '../../components/Typography'
+import Typography from 'components/Typography'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { ArrowDownIcon } from '@heroicons/react/solid'
-// import Image from '../../components/Image'
+// import Image from 'components/Image'
 import { Tab } from '@headlessui/react'
 // import { Popover, Tab, Transition } from '@headlessui/react'
-import DoubleGlowShadow from 'components/DoubleGlowShadowV2'
-import { Button, ButtonError } from '../../components/Button'
-import StableInputPanel from '../../components/StableInputPanel'
-import { useSwapState } from '../../state/swap/hooks'
-import { AutoColumn } from '../../components/Column'
-import QuestionHelper from '../../components/QuestionHelper'
-import Alert from '../../components/Alert'
-import { ApprovalState, useApproveCallback, useSorMasterContract } from '../../hooks'
+import LuxorGlowShadow from 'components/LuxorGlowShadow'
+import { Button, ButtonError } from 'components/Button'
+import StableInputPanel from 'components/StableInputPanel'
+import { useSwapState } from 'state/swap/hooks'
+import { AutoColumn } from 'components/Column'
+import QuestionHelper from 'components/QuestionHelper'
+import Alert from 'components/Alert'
+import { ApprovalState, useApproveCallback, useSorMasterContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
 import {
   ChainId,
@@ -27,14 +27,14 @@ import {
   SOR_ADDRESS,
   SOR_MASTER_ADDRESS
 } from 'constants/addresses'
-import { tryParseAmount, formatCurrencyAmount, formatNumberScale, formatPercent, formatNumber } from '../../functions'
-import { useCurrencyBalance } from '../../state/wallet/hooks'
-import { useTransactionAdder } from '../../state/transactions/hooks'
-import Dots from '../../components/Dots'
+import { tryParseAmount, formatCurrencyAmount, formatNumberScale, formatPercent, formatNumber } from 'functions'
+import { useCurrencyBalance } from 'state/wallet/hooks'
+import { useTransactionAdder } from 'state/transactions/hooks'
+import Dots from 'components/Dots'
 import { BigNumber } from '@ethersproject/bignumber'
 import { useStakeClaimAmount, useRedeemClaimAmount, useSorContract, useFee, useRedeemFee } from 'features/stablecoin/hooks'
 import { useActiveWeb3React } from 'services/web3/hooks'
-import { useSingleCallResult } from 'state/multicall/hooks'
+// import { useSingleCallResult } from 'state/multicall/hooks'
 import NavLink from 'components/NavLink'
 // import useStablecoin from 'hooks/useStablecoin'
 
@@ -112,7 +112,23 @@ export default function Stablecoin() {
         <title>Stablecoin | Soul</title>
         <meta key="description" name="description" />
       </Head>
-      <Alert
+      <div className="flex mb-4 gap-1 items-center justify-center">
+        <Button variant="filled" color="yellow" size="lg">
+          <NavLink href={'/dashboard'}>
+            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Dashboard </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="yellow" size="lg">
+          <NavLink href={'/luxor/stake'}>
+            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Stake </span>
+            </a>
+          </NavLink>
+        </Button>
+      </div>
+      {/* <Alert
         message={
           <div className="flex flex-col space-y-3">
             <div className="flex flex-col">
@@ -142,25 +158,25 @@ export default function Stablecoin() {
           </div>
         }
         type="information"
-      />
+      /> */}
 
-      <DoubleGlowShadow>
+      <LuxorGlowShadow>
         <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">
           <Tab.Group>
             <Tab.List className="flex items-center justify-center mb-1 space-x-2 p-3px text-white">
             <div className="grid grid-cols-2 w-[95%] rounded-md p-2px bg-dark-900">
             <Tab
                 className={({ selected }) =>
-                  `${selected ? 'border-b-2 border-accent p-2 border-dark-600 text-white' : 'bg-dark-900 text-white'
-                  } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-dark-600`
+                  `${selected ? 'border-b-2 border-accent p-2 border-yellow text-white' : 'bg-dark-900 text-white'
+                  } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-yellow`
                 }
               >
                 {i18n._(t`Mint`)}
               </Tab>
               <Tab
                 className={({ selected }) =>
-                  `${selected ? 'border-b-2 border-accent p-2 border-dark-600 text-white' : 'bg-dark-900 text-white'
-                  } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-dark-600`
+                  `${selected ? 'border-b-2 border-accent p-2 border-yellow text-white' : 'bg-dark-900 text-white'
+                  } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-yellow`
                 }
               >
                 {i18n._(t`Redeem`)}
@@ -168,16 +184,13 @@ export default function Stablecoin() {
           </div>
             </Tab.List>
             <Tab.Panel className={'outline-none'}>
-              <Button variant={'link'} color={'purple'} className="absolute top-0 right-0 flex">
+              <Button variant={'link'} color={'yellow'} className="absolute top-0 right-0 flex">
                 <QuestionHelper
                   // title={i18n._(t`How it works`)}
                   // width={'small'}
                   text={
                     <div className="flex flex-col space-y-2">
                       <div className="flex flex-col">
-                        {/* <p>
-                            <strong className="text-accent bold">Mint:&nbsp;</strong>
-                          </p> */}
                         <p>
                           <strong className="text-accent bold">1.</strong> Enter DAI to deposit.
                         </p>
@@ -225,7 +238,7 @@ export default function Stablecoin() {
                 <div className="flex justify-center -mt-0 -mb-0 z-0">
                   <div
                     role="button"
-                    className="p-1.5 rounded-full bg-dark-1000 border shadow-md border-dark-700 hover:border-dark-600"
+                    className="p-1.5 rounded-full bg-dark-1000 border shadow-md border-dark-700 hover:border-yellow"
                   >
                     <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
                   </div>
@@ -241,7 +254,7 @@ export default function Stablecoin() {
                 id="stablecoin-currency-output"
               />
               <div className="h-px my-6 bg-dark-1000"></div>
-              <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-dark-600 w-full space-y-1">
+              <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1">
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
                     {i18n._(t`Max Mint`)}
@@ -289,7 +302,7 @@ export default function Stablecoin() {
                   (stakeApprovalState === ApprovalState.NOT_APPROVED ||
                     stakeApprovalState === ApprovalState.PENDING) ? (
                   <Button
-                    color="purple"
+                    color="yellow"
                     type="filled"
                     onClick={stakeApprove}
                     disabled={stakeApprovalState !== ApprovalState.NOT_APPROVED}
@@ -303,6 +316,8 @@ export default function Stablecoin() {
                   </Button>
                 ) : Number(stakeClaimAmount.toExact()) === 0 ? (
                   <ButtonError
+                    variant="filled" color="yellow"
+                    className="text-black"
                     onClick={async () => {
                       try {
                         const tx = await stake(BigNumber.from(parsedStakeValue.quotient.toString()))
@@ -333,7 +348,8 @@ export default function Stablecoin() {
                   </Button>
                 )}
                 <Button
-                  variant="filled" color="purple"
+                  variant="filled" color="yellow"
+                  className="text-black"
                   onClick={async () => {
                     try {
                       const tx = await claimSor()
@@ -373,7 +389,7 @@ export default function Stablecoin() {
               </div>
             </Tab.Panel>
             <Tab.Panel className={'outline-none'}>
-              <Button variant={'link'} color={'purple'} className="absolute top-0 right-0 flex">
+              <Button variant={'link'} color={'yellow'} className="absolute top-0 right-0 flex">
                 <QuestionHelper
                   text={
                     <div className="flex flex-col space-y-2">
@@ -424,7 +440,7 @@ export default function Stablecoin() {
                 <div className="flex justify-center -mt-0 -mb-0 z-0">
                   <div
                     role="button"
-                    className="p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-dark-600"
+                    className="p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-yellow"
                   >
                     <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
                   </div>
@@ -440,7 +456,7 @@ export default function Stablecoin() {
                 id="stablecoin-currency-output"
               />
               <div className="h-px my-6 bg-dark-1000"></div>
-              <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-dark-600 w-full space-y-1">
+              <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1">
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
                     {i18n._(t`Max Redeem`)}
@@ -497,8 +513,8 @@ export default function Stablecoin() {
                   (redeemApprovalState === ApprovalState.NOT_APPROVED ||
                     redeemApprovalState === ApprovalState.PENDING) ? (
                   <Button
-                    variant="filled"
-                    color="purple"
+                    variant="filled" color="yellow"
+                    className="text-black"
                     onClick={redeemApprove}
                     disabled={redeemApprovalState !== ApprovalState.NOT_APPROVED}
                     style={{ width: '50%' }}
@@ -511,6 +527,8 @@ export default function Stablecoin() {
                   </Button>
                 ) : Number(redeemClaimAmount.toExact()) === 0 ? (
                   <ButtonError
+                  variant="filled" color="yellow"
+                  className="text-black"
                     onClick={async () => {
                       try {
                         const tx = await redeem(BigNumber.from(parsedRedeemValue?.quotient.toString()))
@@ -528,7 +546,7 @@ export default function Stablecoin() {
                     {redeemError || i18n._(t`Redeem`)}
                   </ButtonError>
                 ) : (
-                  <Button variant="filled" color="purple" className="flex-1 flex items-center gap-1 justify-center">
+                  <Button variant="filled" color="yellow" className="flex-1 flex items-center gap-1 justify-center">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M8.99991 16.17L5.53492 12.705C5.14515 12.3152 4.51356 12.3141 4.12242 12.7025C3.72932 13.0928 3.7282 13.7283 4.11992 14.12L8.99991 19L20.2947 7.70513C20.6842 7.31568 20.6842 6.68425 20.2947 6.2948C19.9054 5.90548 19.2743 5.90533 18.8847 6.29447L8.99991 16.17Z"
@@ -539,8 +557,8 @@ export default function Stablecoin() {
                   </Button>
                 )}
                 <Button
-                  variant="filled"
-                  color="purple"
+                  variant="filled" color="yellow"
+                  className="text-black"
                   onClick={async () => {
                     try {
                       const tx = await claimDai()
@@ -564,7 +582,7 @@ export default function Stablecoin() {
                     : ''}
                 </Button>
 
-                {/* <Button variant="filled" color="purple" className="flex-1 flex items-center gap-1 justify-center">
+                {/* <Button variant="filled" color="yellow" className="flex-1 flex items-center gap-1 justify-center">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                     d="M8.99991 16.17L5.53492 12.705C5.14515 12.3152 4.51356 12.3141 4.12242 12.7025C3.72932 13.0928 3.7282 13.7283 4.11992 14.12L8.99991 19L20.2947 7.70513C20.6842 7.31568 20.6842 6.68425 20.2947 6.2948C19.9054 5.90548 19.2743 5.90533 18.8847 6.29447L8.99991 16.17Z"
@@ -573,35 +591,14 @@ export default function Stablecoin() {
                     </svg>
                     {i18n._(t`Redeemed`)}
                     </Button>
-                    <Button variant="filled" color="purple" disabled={true} className="flex-1">
+                    <Button variant="filled" color="yellow" disabled={true} className="text-black flex-1">
                     {i18n._(t`Claim 100 DAI`)}
                     </Button> */}
               </div>
             </Tab.Panel>
           </Tab.Group>
         </div>
-          <Button variant="filled" color="gradient">
-          <NavLink href={'/luxor'}>
-                        {/* <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                        View Account Analytics <span> ↗</span>
-                        </a> */}
-         <div className="flex justify-center py-2 px-4">
-            <a className="flex text-white text-lg items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
-              <span>{i18n._(t`Mint Luxor Money`)}</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="white"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
-        </div>
-        </NavLink>
-          </Button>
-      </DoubleGlowShadow>
+      </LuxorGlowShadow>
     </Container>
   )
 }

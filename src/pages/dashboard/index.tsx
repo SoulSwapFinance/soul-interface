@@ -3,7 +3,6 @@ import Container from 'components/Container'
 import Head from 'next/head'
 import Typography from 'components/Typography'
 // import { ethers } from 'ethers'
-
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { formatNumber } from 'functions'
@@ -27,11 +26,11 @@ import { LUXOR_WARMUP_ADDRESS, WFTM_ADDRESS } from 'constants/addresses'
 import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
 import ExternalLink from 'components/ExternalLink'
+import LuxorGlowShadow from 'components/LuxorGlowShadow'
 
 export default function Dashboard() {
   const { i18n } = useLingui()
   // const { luxData } = useLuxorDashboard()
-
   const [totalLuxorSupply, setTotalLuxorSupply] = useState(0)
   const [totalSorSupply, setTotalSorSupply] = useState(0)
   const [totalWlumSupply, setTotalWlumSupply] = useState(0)
@@ -51,7 +50,7 @@ export default function Dashboard() {
   const LuxFtmContract = usePairContract('0x951BBB838e49F7081072895947735b0892cCcbCD')
   const LuxDaiContract = usePairContract('0x46729c2AeeabE7774a0E710867df80a6E19Ef851')
   const FtmDaiContract = usePairContract('0xf3d6e8ecece8647b456d57375ce0b51b8f0cd40b')
-  const WlumFtmContract = usePairContract('0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99')
+  // const WlumFtmContract = usePairContract('0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99')
   
   // KEY CONTRACTS //
   const LuxorStakingContract = useLuxorStakingContract()
@@ -67,14 +66,13 @@ export default function Dashboard() {
   const FtmContract = useTokenContract(WFTM_ADDRESS[250])
 
   // const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(LuxorContract[250])
-  let sorPegPrice = 1
+  // let sorPegPrice = 1
   let sorMarketPrice = 1.0
   // const sorMarketPrice = useSorPrice()
-
   const LuxorStakingAddress = LuxorStakingContract?.address
   const LuxorWarmupAddress = LUXOR_WARMUP_ADDRESS[250]
-  const DaiContractAddress = DaiContract?.address
-  const WrappedLumensAddress = WrappedLumensContract?.address
+  // const DaiContractAddress = DaiContract?.address
+  // const WrappedLumensAddress = WrappedLumensContract?.address
   const SorStakingContractAddress = SorStakingContract?.address
   const LuxorTreasuryAddress = LuxorTreasuryContract?.address
   const LuxorFtmAddress = LuxFtmContract.address
@@ -82,12 +80,11 @@ export default function Dashboard() {
 // let luxorCirculatingSupply = 100
   const LuxorDaiAddress = LuxDaiContract.address
   const FtmDaiAddress = FtmDaiContract.address
-  const WrappedLumFantomAddress = WlumFtmContract.address
+  // const WrappedLumFantomAddress = WlumFtmContract.address
 
   // Calculate Minting Rate
   const startTime = 1638424800000
   const nowTime = new Date().getTime()
-  
   // // daysAgo in (recall: nowTime is in ms)
   const daysAgo = (nowTime - startTime) / 8_640_0000 // ~111 Days √
   // const secondsAgo = daysAgo * 86_400
@@ -103,7 +100,7 @@ export default function Dashboard() {
   // console.log('luxorVolume:%s', luxData?.result[1])
   // get the price of key treasury reserves
   const luxDaiPrice = usePairPrice(LuxorDaiAddress) // ~160_000 // √
-  const wLumFtmPrice = usePairPrice(WrappedLumFantomAddress) // ~1_6M // √
+  // const wLumFtmPrice = usePairPrice(WrappedLumFantomAddress) // ~1_6M // √
   const ftmDaiPrice = usePairPrice(FtmDaiAddress) 
 
   const luxorCirculatingSupply = totalLuxorSupply - stakedLuxor - lockedLuxor
@@ -169,7 +166,7 @@ export default function Dashboard() {
             const sorDaiBal = await DaiContract?.balanceOf(SorStakingContractAddress)
             const sorLuxBal = await LuxorContract?.balanceOf(SorStakingContractAddress)
             const sorSorBal = await SorContract?.balanceOf(SorStakingContractAddress)
-            
+
             const sorDaiCollateral = sorDaiBal / 1e18
             const sorLuxCollateral = sorLuxBal * luxorPrice / 1e9
             const sorSorCollateral = sorSorBal / 1e18
@@ -215,13 +212,13 @@ export default function Dashboard() {
             const luxDaiBalance = luxDaiBal * luxDaiPrice / 1e18
             // setTreasuryLuxDaiBalance(Number(luxDaiBalance))
             // console.log('luxFtmBalance:%s', Number(luxFtmBalance))
-            
+
             // get treasury balance of FTM-DAI
             const ftmDaiBal = await FtmDaiContract.balanceOf(LuxorTreasuryAddress)
             const ftmDaiBalance = ftmDaiBal * ftmDaiPrice / 1e18
             setTreasuryFtmDaiBalance(Number(ftmDaiBalance))
             // console.log('luxFtmBalance:%s', Number(luxFtmBalance))
-            
+
             const LiquidityBalance = luxDaiBalance + luxFtmBalance
             setTreasuryLiquidityBalance(LiquidityBalance)
 
@@ -377,6 +374,7 @@ export default function Dashboard() {
 
   return (
     <Container id="dashboard-page" className="py-4 space-y-4 md:py-8 max-w-min">
+      <LuxorGlowShadow>
       <Head>
         <title>Dashboard | Luxor</title>
         <meta key="description" name="description" />
@@ -390,18 +388,18 @@ export default function Dashboard() {
           </NavLink>
         </Button>
         <Button variant="filled" color="yellow" size="lg">
-          <NavLink href={'/sor'}>
+          <NavLink href={'/luxor/sor'}>
             <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Stablecoin </span>
             </a>
           </NavLink>
         </Button>
         <Button variant="filled" color="yellow" size="lg">
-          <ExternalLink href={'https://app.luxor.money'}>
+          <NavLink href={'/luxor/stake'}>
             <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Stake Luxor </span>
             </a>
-          </ExternalLink>
+          </NavLink>
         </Button>
       </div>
       {/* <div className="block">
@@ -939,6 +937,7 @@ export default function Dashboard() {
           </div>
         </div>
         </div>
+        </LuxorGlowShadow>
   </Container>
   )
 }

@@ -168,7 +168,7 @@ const useMobileMenu: UseMobileMenu = () => {
           {
             key: 'sor',
             title: i18n._(t`Stable`),
-            link: '/sor',
+            link: '/luxor/sor',
           },
           {
             key: 'luxor',

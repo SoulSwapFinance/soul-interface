@@ -203,12 +203,12 @@ const useMenu: UseBar = () => {
           {
             key: 'sor',
             title: i18n._(t`Stable`),
-            link: '/sor',
+            link: '/luxor/sor',
           },
           {
             key: 'rebase',
             title: i18n._(t`Rebase`),
-            link: 'https://app.luxor.money',
+            link: '/luxor/stake',
           },
           {
             key: 'luxor-follow',
@@ -264,11 +264,6 @@ const useMenu: UseBar = () => {
         title: i18n._(t`Analytics`),
         icon: <TrendingUpIcon width={20} className="text-dark-600" />,
         items: [
-          // {
-          //   key: 'luxor-dashboard',
-          //   title: 'Luxor',
-          //   link: '/dashboard',
-          // },
           {
             key: 'wallet',
             title: 'Wallet',

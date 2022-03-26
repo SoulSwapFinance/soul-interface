@@ -75,7 +75,7 @@ export default function StableInputPanel({
   }, [setModalOpen])
 
   return (
-    <div id={id} className={classNames(hideInput ? 'p-4' : 'p-5', 'rounded bg-dark-1000 border border-dark-700 border hover:border-dark-600')}>
+    <div id={id} className={classNames(hideInput ? 'p-4' : 'p-5', 'rounded bg-dark-1000 border border-dark-700 border hover:border-yellow')}>
       <div className="flex flex-row justify-between space-y-0 sm:space-y-0 sm:flex-row">
         <div className={classNames('w-3/4')}>
           <button
@@ -98,8 +98,8 @@ export default function StableInputPanel({
                   <CurrencyLogo currency={currency} size={'54px'} />
                 </div>
               ) : (
-                <div className="rounded bg-dark-1000" style={{ maxWidth: 54, maxHeight: 54 }}>
-                  <div style={{ width: 54, height: 54 }}>
+                <div className="rounded bg-dark-1000 max-w-[54px] max-h-[54px]">
+                  <div className={"w-[54px] h-[54px]"}>
                     <Lottie animationData={selectCoinAnimation} autoplay loop />
                   </div>
                 </div>

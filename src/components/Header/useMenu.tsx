@@ -203,12 +203,12 @@ const useMenu: UseMenu = () => {
           {
             key: 'sor',
             title: i18n._(t`Stable`),
-            link: '/sor',
+            link: '/luxor/sor',
           },
           {
             key: 'rebase',
             title: i18n._(t`Rebase`),
-            link: 'https://app.luxor.money',
+            link: '/luxor/stake',
           },
           {
             key: 'luxor-follow',
