@@ -29,7 +29,7 @@ import { ApprovalState, useApproveCallback } from '../../hooks'
 import Dots from '../../components/Dots'
 import { BigNumber } from '@ethersproject/bignumber'
 import { usePendingAmount, useClaimableAmount, useBondContract, useRemainingVesting } from './hooks'
-import { getExplorerLink } from '../../functions/explorer'
+// import { getExplorerLink } from '../../functions/explorer'
 import { useActiveWeb3React } from 'services/web3'
 import { LUX_ADDRESS } from 'constants/addresses'
 import { DAI } from 'constants/tokens'
@@ -44,7 +44,7 @@ const BondItem = ({ bond, ...rest }) => {
   const addTransaction = useTransactionAdder()
 
   const remainingVesting = bond ? useRemainingVesting : ''
-  const principal = useCurrency(bond?.principal)
+  // const principal = useCurrency(bond?.principal)
   const principalToken = DAI[250]
   // const principalToken = new Token(250, getAddress(bond?.principal), bond?.decimals, bond?.symbol)
   const luxorToken = new Token(250, getAddress(LUX_ADDRESS[250]), 18, 'LUX')
@@ -539,7 +539,7 @@ const BondItem = ({ bond, ...rest }) => {
                                 text={
                                   <div className="flex flex-col space-y-2">
                                     The claimed amount will be staked and autocompounded on the Staking page
-                                    https://app.luxor.fi/stake
+                                    https://app.soulswap.finance/luxor/stake
                                   </div>
                                 }
                               />

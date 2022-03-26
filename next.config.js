@@ -116,6 +116,10 @@ module.exports = withBundleAnalyzer(
           source: '/open-order',
           destination: '/exchange/open-order',
         },
+        {
+          source: '/sor',
+          destination: '/luxor/sor',
+        },
         // {
         //   source: '/migrate',
         //   destination: '/exchange/migrate',
