@@ -30,6 +30,7 @@ import { useStakeContract, useWarmupValue } from 'features/luxor/stake/hooks'
 import { useActiveWeb3React } from 'services/web3/hooks'
 import NavLink from 'components/NavLink'
 import { useTokenContract } from 'hooks/useTokenContract'
+import { useLuxorPrice } from 'hooks/getPrices'
 
 export default function Stablecoin() {
   const addTransaction = useTransactionAdder()
@@ -41,7 +42,7 @@ export default function Stablecoin() {
   const [warmupExpiry, setWarmupExpiry] = useState('0')
   // const [warmupPeriod, setWarmupPeriod] = useState(0)
   // const [nextRebase, setNextRebase] = useState(0)
-
+  const luxorPrice = useLuxorPrice()
   const { account, chainId } = useActiveWeb3React()
   const { stake, unstake, claim, forfeit } = useStakeContract()
   // const warmupValue = useWarmupValue()
@@ -165,6 +166,15 @@ export default function Stablecoin() {
         <title>Stablecoin | Soul</title>
         <meta key="description" name="description" />
       </Head>
+      <div className="mt-2 mb-2">
+        <Button variant="filled" color="yellow" size="lg">
+          <NavLink href={'/swap?inputCurrency=&outputCurrency=0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'}>
+            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span>Market Price: ${luxorPrice.toFixed(2)}</span>
+            </a>
+          </NavLink>
+        </Button>
+        </div>
       <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/dashboard'}>
@@ -174,16 +184,16 @@ export default function Stablecoin() {
           </NavLink>
         </Button>
         <Button variant="filled" color="yellow" size="lg">
-          <NavLink href={'/luxor'}>
+          <NavLink href={'/luxor/sor'}>
             <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Bonds </span>
+            <span> Stablecoin </span>
             </a>
           </NavLink>
         </Button>
         <Button variant="filled" color="yellow" size="lg">
-          <NavLink href={'/luxor/sor'}>
+          <NavLink href={'/luxor'}>
             <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Stablecoin </span>
+            <span> Bonds </span>
             </a>
           </NavLink>
         </Button>
