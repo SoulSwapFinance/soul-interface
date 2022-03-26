@@ -165,11 +165,18 @@ export default function Stablecoin() {
         <title>Stablecoin | Soul</title>
         <meta key="description" name="description" />
       </Head>
-      <div className="flex mb-4 gap-1 items-center justify-center">
+      <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/dashboard'}>
             <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Dashboard </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="yellow" size="lg">
+          <NavLink href={'/luxor'}>
+            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Bonds </span>
             </a>
           </NavLink>
         </Button>

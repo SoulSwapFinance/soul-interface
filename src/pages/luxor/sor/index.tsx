@@ -108,15 +108,23 @@ export default function Stablecoin() {
 
   return (
     <Container id="stablecoin-page" className="py-4 md:py-8 lg:py-12">
+      <LuxorGlowShadow>
       <Head>
         <title>Stablecoin | Soul</title>
         <meta key="description" name="description" />
       </Head>
-      <div className="flex mb-4 gap-1 items-center justify-center">
+      <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/dashboard'}>
             <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Dashboard </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="yellow" size="lg">
+          <NavLink href={'/luxor'}>
+            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Bonds </span>
             </a>
           </NavLink>
         </Button>
@@ -160,7 +168,6 @@ export default function Stablecoin() {
         type="information"
       /> */}
 
-      <LuxorGlowShadow>
         <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">
           <Tab.Group>
             <Tab.List className="flex items-center justify-center mb-1 space-x-2 p-3px text-white">
