@@ -409,7 +409,7 @@ export default function Stablecoin() {
                 showMaxButton={true}
                 onUserInput={(value) => setRedeemValue(value)}
                 onMax={ () => setRedeemValue(lumensBalance.toExact()) }
-                currency={luxorToken}
+                currency={lumensToken}
                 disableCurrencySelect={true}
                 locked={!account}
                 id="stablecoin-currency-input"
@@ -446,7 +446,11 @@ export default function Stablecoin() {
                     {i18n._(t`Warmup Remaining`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    {(Number(warmupExpiry) - Number(epoch)) * 8 + ' hours'}
+                    {
+                      (Number(warmupExpiry) - Number(epoch)) * 8 < 0
+                      ? 0 : (Number(warmupExpiry) - Number(epoch)) * 8
+                      + ' hours'
+                    }
                   </Typography>
                 </div>
                 {/* <div className="flex justify-between">
