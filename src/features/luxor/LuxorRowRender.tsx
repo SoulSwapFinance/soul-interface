@@ -85,7 +85,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
             const timer = setTimeout(() => {
                 if (showing) {
                     fetchPayout()
-                    fetchDiscount()
+                    // fetchDiscount()
                     fetchEarnings()
                     fetchApproval()
                 }
@@ -103,7 +103,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
         if (!showing) {
             fetchPayout()
             fetchEarnings()
-            fetchDiscount()
+            // fetchDiscount()
             fetchApproval()
             fetchAvailability()
         }
