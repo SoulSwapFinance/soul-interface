@@ -27,6 +27,7 @@ interface StableInputPanelProps {
   currency?: Currency | null
   disableCurrencySelect?: boolean
   hideBalance?: boolean
+  showLogo?: boolean
   pair?: Pair | null
   hideInput?: boolean
   otherCurrency?: Currency | null
@@ -58,6 +59,7 @@ export default function StableInputPanel({
   fiatValue,
   priceImpact,
   hideBalance = false,
+  showLogo = true,
   pair = null, // used for double token logo
   hideInput = false,
   // locked = false,
@@ -91,13 +93,13 @@ export default function StableInputPanel({
             }}
           >
             <div className="flex">
-              {pair ? (
+              {pair && showLogo ? (
                 <DoubleCurrencyLogo currency0={pair.token0} currency1={pair.token1} size={54} margin={true} />
               ) : currency ? (
                 <div className="flex items-center bg-dark-1000">
                   <CurrencyLogo currency={currency} size={'54px'} />
                 </div>
-              ) : (
+              ) : showLogo && (
                 <div className="rounded bg-dark-1000 max-w-[54px] max-h-[54px]">
                   <div className={"w-[54px] h-[54px]"}>
                     <Lottie animationData={selectCoinAnimation} autoplay loop />
