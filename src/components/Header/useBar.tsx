@@ -170,6 +170,11 @@ const useMenu: UseBar = () => {
             link: '/bonds',
           },
           {
+            key: 'bridge',
+            title: i18n._(t`Bridge`),
+            link: 'https://bridge.soulswap.finance',
+          },
+          {
             key: 'soul-follow',
             title: i18n._(t`Follow`),
             link: 'https://twitter.com/SoulSwapFinance',
