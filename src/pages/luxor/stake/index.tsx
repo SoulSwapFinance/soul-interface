@@ -420,7 +420,7 @@ export default function Stablecoin() {
                             currencyLogo={false}
                                 currency={lumensToken}
                                 currencyAddress={lumensToken.address}
-                                value={value}
+                                value={redeemValue}
                                 onChange={setRedeemValue}
                                 showMax={false}
                             />
