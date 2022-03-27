@@ -356,7 +356,7 @@ export default function Dashboard() {
     },
     {
       angle: stakedLuxor,
-      color: '#FFB300',
+      color: '#FFC300',
       label: 'STAKED',
       text: 'The portion of supply that is not in circulation as it is currently staking.',
       percent: ((stakedLuxor / totalLuxorSupply) * 100).toFixed()
@@ -364,7 +364,7 @@ export default function Dashboard() {
     },
     {
       angle: lockedLuxor,
-      color: '#FFD300',
+      color: '#FFE300',
       label: 'WARM-UP',
       text: 'The portion of supply that is not in circulation as it is currently in the warm-up period.',
       percent: ((lockedLuxor/ totalLuxorSupply) * 100).toFixed()
