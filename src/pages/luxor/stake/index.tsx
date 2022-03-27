@@ -409,9 +409,10 @@ export default function Stablecoin() {
                 showMaxButton={true}
                 onUserInput={(value) => setRedeemValue(value)}
                 onMax={ () => setRedeemValue(lumensBalance.toExact()) }
-                currency={lumensToken}
+                // currency={lumensToken}
                 disableCurrencySelect={true}
                 locked={!account}
+                show
                 id="stablecoin-currency-input"
               />
               <div className="h-px my-6 bg-dark-1000"></div>
