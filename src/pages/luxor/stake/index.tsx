@@ -412,7 +412,6 @@ export default function Stablecoin() {
                 // currency={lumensToken}
                 disableCurrencySelect={true}
                 locked={!account}
-                show
                 id="stablecoin-currency-input"
               />
               <div className="h-px my-6 bg-dark-1000"></div>
