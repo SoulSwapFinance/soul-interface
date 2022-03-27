@@ -57,6 +57,12 @@ const EXPLORE = (i18n: I18n) => [
     description: 'Bridge from BSC, ETH, AVAX, MATIC, HECO, and more.',
     href: 'https://bridge.soulswap.finance'
   },
+  {
+    id: 9,
+    name: 'EXPLORE DEFI',
+    description: 'Explore informative DeFi docs, updates and more.'
+    href: './academy'
+  },
 ]
 
 export default function Tools() {

@@ -18,7 +18,7 @@ const EXPLORE = (i18n: I18n) => [
   {
     id: 2,
     name: 'FLASH BOTS',
-    description: 'Permissionless, transparent, and fair ecosystem for MEV extraction.',
+    description: 'Fair ecosystem for MEV extraction.',
     href: './academy/mev'
   },
   {
@@ -26,12 +26,6 @@ const EXPLORE = (i18n: I18n) => [
     name: 'COINTELEGRAPH',
     description: 'Digital media resource covering blockchain tech.',
     href: './academy/telegraph'
-  },
-  {
-    id: 4,
-    name: 'COINDESK',
-    description: 'CoinDesk is an integrated platform for crypto media.',
-    href: './academy/deak'
   },
 ]
 
@@ -43,10 +37,10 @@ export default function Academy() {
     <Container id="features-page" className="py-4 space-y-5 md:py-8 lg:py-12" maxWidth="xl">
       <Head>
         <title>Academy | Soul</title>
-        <meta key="description" name="description" content="SoulSwap Tools..." />
+        <meta key="description" name="description" content="Learn how to make the most out of Web3 technology." />
       </Head>
       <Typography variant="h1" className="text-center" component="h1">
-        WEB3 ACADEMY
+        EXPLORE DEFI
       </Typography>
       <ul className="space-y-4 divide-y-0">
         {features.map((feature) => (
