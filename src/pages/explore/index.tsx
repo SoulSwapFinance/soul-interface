@@ -60,7 +60,7 @@ const EXPLORE = (i18n: I18n) => [
   {
     id: 9,
     name: 'EXPLORE DEFI',
-    description: 'Explore informative DeFi docs, updates and more.'
+    description: 'Explore informative DeFi docs, updates and more.',
     href: './academy'
   },
 ]

@@ -13,7 +13,7 @@ const EXPLORE = (i18n: I18n) => [
     id: 1,
     name: 'DEV GUIDE',
     description: i18n._(t`Public good blockchain development guide.`),
-    href: './academy/guide',
+    href: './academy/guide'
   },
   {
     id: 2,
