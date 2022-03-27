@@ -11,72 +11,36 @@ import { useMemo } from 'react'
 const EXPLORE = (i18n: I18n) => [
   {
     id: 1,
-    name: 'SUMMON SOUL',
-    description: i18n._(t`Deposit liquidity or lent asset. Earn SOUL rewards.`),
-    href: './farms',
+    name: 'DEV GUIDE',
+    description: i18n._(t`Public good blockchain development guide.`),
+    href: './academy/guide',
   },
   {
     id: 2,
-    name: 'STAKE SOUL',
-    description: 'Stake SOUL for SEANCE. Use SEANCE to earn more.',
-    href: './seance'
+    name: 'FLASH BOTS',
+    description: 'Fair ecosystem for MEV extraction.',
+    href: './academy/mev'
   },
   {
     id: 3,
-    name: 'AUTO-STAKE SOUL',
-    description: 'Deposit SOUL. Auto-magically compound rewards.',
-    href: './autostake'
-  },
-  {
-    id: 4,
-    name: 'LUXOR BONDS',
-    description: 'Access Luxor Money bonds. Natively on SoulSwap.',
-    href: './luxor/bonds'
-  },
-  {
-    id: 5,
-    name: 'SOR STABLECOIN',
-    description: 'Honor God(dess) Shai. Stake DAI for SOR and more.',
-    href: './luxor/sor'
-  },
-  {
-    id: 6,
-    name: 'LEND & BORROW',
-    description: 'Lend, Leverage, and Farm. Enter the Underworld.',
-    href: './borrow'
-  },
-  {
-    id: 7,
-    name: 'SHARE YOUR SOUL',
-    description: 'Send your SOUL. Only claimable via Seance Circles.',
-    href: './scarab/create'
-  },
-  {
-    id: 8,
-    name: 'BRIDGE ASSETS',
-    description: 'Bridge from BSC, ETH, AVAX, MATIC, HECO, and more.',
-    href: 'https://bridge.soulswap.finance'
-  },
-  {
-    id: 9,
-    name: 'EXPLORE DEFI',
-    description: 'Explore informative DeFi docs, updates and more.'
-    href: './academy'
+    name: 'COINTELEGRAPH',
+    description: 'Digital media resource covering blockchain tech.',
+    href: './academy/telegraph'
   },
 ]
 
-export default function Tools() {
+export default function Academy() {
   const { i18n } = useLingui()
   const features = useMemo(() => EXPLORE(i18n), [i18n])
 
   return (
     <Container id="features-page" className="py-4 space-y-5 md:py-8 lg:py-12" maxWidth="xl">
       <Head>
-        <title>Explore | Soul</title>
-        <meta key="description" name="description" content="SoulSwap Tools..." />
+        <title>Academy | Soul</title>
+        <meta key="description" name="description" content="Learn how to make the most out of Web3 technology." />
       </Head>
       <Typography variant="h1" className="text-center" component="h1">
-        OUR ECOSYSTEM
+        EXPLORE DEFI
       </Typography>
       <ul className="space-y-4 divide-y-0">
         {features.map((feature) => (
