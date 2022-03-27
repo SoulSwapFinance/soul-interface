@@ -50,7 +50,12 @@ function StatusIcon({ connector }: { connector: AbstractConnector; account: stri
   } else if (connector.constructor.name === 'LatticeConnector') {
     return (
       <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
-        <Image src="https://exchange.soulswap.finance/images/wallets/lattice.png" alt={'Lattice'} width="16px" height="16px" />
+        <Image
+          src="https://exchange.soulswap.finance/images/wallets/lattice.png"
+          alt={'Lattice'}
+          width="16px"
+          height="16px"
+        />
       </div>
     )
   } else if (connector.constructor.name === 'WalletLinkConnector') {
@@ -67,25 +72,45 @@ function StatusIcon({ connector }: { connector: AbstractConnector; account: stri
   } else if (connector.constructor.name === 'FortmaticConnector') {
     return (
       <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
-        <Image src="https://exchange.soulswap.finance/images/wallets/fortmatic.png" alt={'Fortmatic'} width="16px" height="16px" />
+        <Image
+          src="https://exchange.soulswap.finance/images/wallets/fortmatic.png"
+          alt={'Fortmatic'}
+          width="16px"
+          height="16px"
+        />
       </div>
     )
   } else if (connector.constructor.name === 'PortisConnector') {
     return (
       <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
-        <Image src="https://exchange.soulswap.finance/images/wallets/portis.png" alt={'Portis'} width="16px" height="16px" />
+        <Image
+          src="https://exchange.soulswap.finance/images/wallets/portis.png"
+          alt={'Portis'}
+          width="16px"
+          height="16px"
+        />
       </div>
     )
   } else if (connector.constructor.name === 'KeystoneConnector') {
     return (
       <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
-        <Image src="https://exchange.soulswap.finance/images/wallets/keystone.png" alt={'Keystone'} width="16px" height="16px" />
+        <Image
+          src="https://exchange.soulswap.finance/images/wallets/keystone.png"
+          alt={'Keystone'}
+          width="16px"
+          height="16px"
+        />
       </div>
     )
   } else if (connector.constructor.name === 'CloverConnector') {
     return (
       <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
-        <Image src="https://exchange.soulswap.finance/images/wallets/clover.svg" alt={'Clover'} width="16px" height="16px" />
+        <Image
+          src="https://exchange.soulswap.finance/images/wallets/clover.svg"
+          alt={'Clover'}
+          width="16px"
+          height="16px"
+        />
       </div>
     )
   }
@@ -146,7 +171,7 @@ function Web3StatusInner() {
     )
   } else {
     return (
-      <Web3Connect className="!bg-dark-900 bg-gradient-to-r from-pink/80 hover:from-pink to-purple/80 hover:to-purple text-white h-[38px]" />
+      <Web3Connect className="!bg-dark-900 bg-gradient-to-r from-pink/80 hover:from-pink to-purple/80 hover:to-purple !text-white h-[38px]" />
     )
   }
 }

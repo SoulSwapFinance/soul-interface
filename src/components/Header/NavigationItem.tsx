@@ -10,10 +10,10 @@ import React, { FC, Fragment, useCallback, useRef } from 'react'
 import styled from 'styled-components'
 
 const HideOnMobile = styled.div`
-@media screen and (max-width: 600px) {
-  display: none;
-}
-`;
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
+`
 
 interface NavigationItem {
   node: MenuItem
@@ -42,7 +42,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
         variant="sm"
         className={classNames(
           router.asPath === link ? 'text-white' : '',
-          'hover:text-white font-bold py-5 px-2 rounded flex gap-3'
+          'hover:text-purple font-bold py-5 px-2 rounded flex gap-3'
         )}
       >
         {!isDesktop && node.icon}
@@ -68,7 +68,9 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
             >
               {!isDesktop && node.icon}
               {node.title}
-              <HideOnMobile><ChevronDownIcon strokeWidth={5} width={12} /></HideOnMobile>
+              <HideOnMobile>
+                <ChevronDownIcon strokeWidth={5} width={12} />
+              </HideOnMobile>
             </Typography>
           </Popover.Button>
           {node.hasOwnProperty('items') && (
