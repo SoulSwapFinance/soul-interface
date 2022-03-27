@@ -40,7 +40,7 @@ export default function StakeKey() {
 
               <StakeItemBox desktopOnly={true}>
                 <Text padding="0" fontSize=".8rem" color="#bbb">
-                CLAIMABLE
+                REWARDS
                 </Text>
               </StakeItemBox>
               <StakeItemBox>
