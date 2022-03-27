@@ -2,18 +2,17 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
 import { ethers } from 'ethers'
-import { getAddress } from '@ethersproject/address'
+// import { getAddress } from '@ethersproject/address'
 import { useSoulPrice } from 'hooks/getPrices'
 import { useActiveWeb3React } from 'services/web3'
-import { Button } from 'components/Button'
-import QuestionHelper from '../../components/QuestionHelper'
+// import { Button } from 'components/Button'
+// import QuestionHelper from '../../components/QuestionHelper'
 import { SOUL, CHANT, Token } from 'sdk'
 import { AUTO_STAKE_ADDRESS, SOUL_SUMMONER_ADDRESS } from 'sdk'
-import useAutoStake from './useAutoStake'
 import { aprToApy } from 'functions/convert'
 import AssetInput from 'components/AssetInput'
 import { useAutoStakeContract, useSoulSummonerContract } from 'hooks/useContract'
-import { useStakeContract, useStakeSharePrice, useStakeRecentProfit, sharesFromSoul } from './hooks'
+// import { useStakeContract, useStakeSharePrice, useStakeRecentProfit, sharesFromSoul } from './hooks'
 import useApprove from 'features/bond/hooks/useApprove'
 import {
     StakeContainer,
@@ -507,9 +506,9 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                         value={depositValue}
                                         onChange={setDepositValue}
                                         showMax={false}
-                                        showBalance={false}
+                                        showBalance={true}
                                     />
-                                    <Wrap padding="0" margin="0" display="flex" justifyContent="space-between">
+                                    {/* <Wrap padding="0" margin="0" display="flex" justifyContent="space-between">
                                         <Text fontSize=".9rem" padding="0" textAlign="left" color="#FFFFFF">
                                                 &nbsp;
                                                 {Number(stakedBal) === 0
@@ -540,7 +539,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                                         .toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}` : '0')})
                                                 <br />
                                             </Text>
-                                        </Wrap>
+                                        </Wrap> */}
                                     <Wrap padding="0" margin="0" display="flex flex-cols">
                                         <SubmitButton
                                             height="2rem"

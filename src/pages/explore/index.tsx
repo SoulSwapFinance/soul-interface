@@ -31,13 +31,13 @@ const EXPLORE = (i18n: I18n) => [
     id: 4,
     name: 'LUXOR BONDS',
     description: 'Access Luxor Money bonds. Natively on SoulSwap.',
-    href: './luxor'
+    href: './luxor/bonds'
   },
   {
     id: 5,
     name: 'SOR STABLECOIN',
     description: 'Honor God(dess) Shai. Stake DAI for SOR and more.',
-    href: './sor'
+    href: './luxor/sor'
   },
   {
     id: 6,

@@ -383,11 +383,11 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                 currencyAddress={assetAddress}
                                 value={depositValue}
                                 // balance={tryParseAmount(account, assetToken)}
-                                showBalance={false}
+                                showBalance={true}
                                 onChange={setDepositValue}
                                 showMax={false}
                             />
-                             <Wrap padding="0" display="flex" justifyContent="space-between">
+                             {/* <Wrap padding="0" display="flex" justifyContent="space-between">
                                 <Text padding="0" fontSize="1rem" color="#bbb">
                                     BALANCE:&nbsp;{Number(unstakedBal) === 0
                                         ? '0.000'
@@ -398,27 +398,27 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                             .toString()
                                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                                     &nbsp;{assetName}&nbsp;
-                                    {/* {Number(unstakedBal * soulPrice) !== 0 ? `($${(unstakedBal * soulPrice).toFixed(0)})` : ''} */}
+                                    {Number(unstakedBal * soulPrice) !== 0 ? `($${(unstakedBal * soulPrice).toFixed(0)})` : ''}
                                 </Text>
-                            </Wrap>
-                            <Wrap padding="0" margin="0" display="flex">
-                                {(approved &&
-                                 Number(unstakedBal) == 0) ? (
-                            <TokenPairLink
-                                target="_blank"
-                                rel="noopener"
-                                text-color="#F36FFE" // neon purple
-                                href=
-                                {`https://exchange.soulswap.finance/swap`}
-                            >
-                            <div className="text-purple justify-center items-center text-center">
-                            CLICK HERE TO ACQUIRE BOND ASSETS</div>
-                            </TokenPairLink>
+                            </Wrap> */}
+                            <Wrap padding="0" margin="0" display="flex" justifyContent="center">
+                            {(approved &&
+                                Number(unstakedBal) == 0) ? (
+                                <TokenPairLink
+                                    target="_blank"
+                                    rel="noopener"
+                                    text-color="#FFB857" // golden orange/yellow
+                                    href=
+                                    {`https://exchange.soulswap.finance/swap`}
+                                >
+                                <div className="text-yellow justify-center items-center text-center">
+                                CLICK HERE TO ACQUIRE BOND ASSETS</div>
+                                </TokenPairLink>
                         ) :
                                 approved && available ?
                                     (
                                         <SubmitButton
-                                            primaryColour="#B485FF"
+                                            primaryColour="#EDC100"
                                             color="black"
                                             height="2rem"
                                             onClick={() => handleDeposit(depositValue)}>
@@ -436,7 +436,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                     ) : (
                                         <SubmitButton 
                                         height="2rem" 
-                                        primaryColour="#B485FF"
+                                        primaryColour="#EDC100"
                                         color="black"
                                         onClick={() => handleApprove()}>
                                             APPROVE
@@ -474,12 +474,12 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                     </Wrap>
                                     <AssetInput
                                         currencyLogo={false}
-                                        currency={SOUL[250]}
-                                        currencyAddress={SOUL[250].address}
+                                        currency={assetToken}
+                                        currencyAddress={assetAddress}
                                         value={depositValue}
                                         onChange={setDepositValue}
                                         showMax={false}
-                                        showBalance={false}
+                                        showBalance={true}
                                     />
                                     <Wrap padding="0" margin="0" display="flex" justifyContent="space-between">
                                         <Text fontSize=".9rem" padding="0" textAlign="left" color="#FFFFFF">
@@ -494,26 +494,22 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
                                                 ({(Number(payout * luxPrice) !== 0 ? `$${Number(payout * luxPrice).toFixed(0)}` : '0')})
                                         </Text>
-                                        
-                                        <Text fontSize=".9rem" padding="0" textAlign="left" color="#FFFFFF">
-                                            BALANCE:&nbsp;
-                                    {Number(unstakedBal) === 0
-                                        ? '0'
-                                        : Number(unstakedBal) < 0
-                                            ? '<0'
-                                            : Number(unstakedBal)
-                                                .toFixed(0)
-                                                .toString()
-                                                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
-                                                {/* ({(Number(unstakedBal * soulPrice) !== 0 ? `$${Number(unstakedBal * soulPrice).toFixed(0)}` : '0')}) */}
-                                            <br />
-                                        </Text>
+                                        <TokenPairLink
+                                                target="_blank"
+                                                rel="noopener"
+                                                // text-color="yellow"
+                                                href=
+                                                {`https://ftmscan.com/address/${bond.bondAddress}/#code`}
+                                                >
+                                            <div className="text-yellow justify-center items-center text-center">
+                                            VIEW CONTRACT</div>
+                                        </TokenPairLink>
                                     </Wrap>
                                     {available &&
                                         <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
-                                            primaryColour="#B485FF"
+                                            primaryColour="#EDC100"
                                             color="black"
                                             margin=".5rem 0 .5rem 0"
                                             onClick={() =>
@@ -556,7 +552,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                 <Wrap padding="0" margin="0" display="flex">
                                     <SubmitButton
                                         height="2rem"
-                                        primaryColour="#A03EFF"
+                                        primaryColour="#F4A703"
                                         color="black"
                                         margin=".5rem 0 .5rem 0"
                                         onClick={() =>
@@ -600,7 +596,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
           </SubmitButton>
           <SubmitButton
             height="2.5rem"
-            primaryColour="#B485FF"
+            primaryColour="#EDC100"
             color="black"
             onClick={() =>
               handleDeposit(depositValue)

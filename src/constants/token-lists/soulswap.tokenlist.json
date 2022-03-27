@@ -95,6 +95,14 @@
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b/logo.png"
       },
       {
+        "name": "Lumens",
+        "address": "0x4290b33158F429F40C0eDc8f9b9e5d8C5288800c",
+        "symbol": "LUM",
+        "decimals": 9,
+        "chainId": 250,
+        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208/logo.png"
+      },
+      {
         "name": "ReaperToken",
         "address": "0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb",
         "symbol": "REAPER",

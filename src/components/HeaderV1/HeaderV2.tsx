@@ -67,7 +67,7 @@ function AppBar(): JSX.Element {
                       </NavLink>
                       <NavLink 
                       activeClassName="text-dark-600 text-high-emphesis"
-                      href={'/luxor'}>
+                      href={'/luxor/bonds'}>
                         <a
                           id={`luxor-nav-link`}
                           className="w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"

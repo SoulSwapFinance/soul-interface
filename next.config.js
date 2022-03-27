@@ -67,6 +67,16 @@ module.exports = withBundleAnalyzer(
           destination: '/enchant',
           permanent: true,
         },
+        {
+          source: '/luxor',
+          destination: '/luxor/bonds',
+          permanent: true,
+        },
+        {
+          source: '/dashboard',
+          destination: '/luxor/dashboard',
+          permanent: true,
+        },
         // {
         //   source: '/coffin/underworld',
         //   destination: '/lend',
@@ -116,6 +126,14 @@ module.exports = withBundleAnalyzer(
           source: '/open-order',
           destination: '/exchange/open-order',
         },
+        {
+          source: '/luxor',
+          destination: '/luxor/bonds',
+        },
+        {
+          source: '/sor',
+          destination: '/luxor/sor',
+        },
         // {
         //   source: '/migrate',
         //   destination: '/exchange/migrate',
@@ -151,6 +169,10 @@ module.exports = withBundleAnalyzer(
         {
           source: '/analytics',
           destination: '/analytics/dashboard',
+        },
+        {
+          source: '/dashboard',
+          destination: '/luxor/dashboard',
         },
         {
           source: '/bond',

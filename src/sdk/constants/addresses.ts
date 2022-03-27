@@ -108,6 +108,13 @@ export const LUXOR_STAKING_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.FANTOM_TESTNET]: ''
 }
 
+export const LUXOR_STAKING_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x2Dd0D30f525e65641962904470660507e80940e4',
+  [ChainId.FANTOM_TESTNET]: ''
+}
+
 export const CHANT_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.BSC]: '',

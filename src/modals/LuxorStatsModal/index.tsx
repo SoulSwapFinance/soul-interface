@@ -18,6 +18,7 @@ import QuestionHelper from 'components/QuestionHelper'
 import ModalHeader from 'components/Modal/Header'
 import { concat } from 'lodash'
 import { useLuxorPrice, useWrappedLumPrice } from 'hooks/getPrices'
+import NavLink from 'components/NavLink'
 
 const cache: { [key: string]: number } = {};
 
@@ -289,11 +290,11 @@ export default function LuxorStatsModal(): JSX.Element | null {
           size='xs'
           className="text-white"
         >
-          <ExternalLink href={'https://app.luxor.money/#/mints'}>
+          <NavLink href={'/luxor/bonds'}>
             <a className="flex justify-center text-black text-xl transition rounded-md hover:pink">
               MINT LUX<span> ↗</span>
             </a>
-          </ExternalLink>
+          </NavLink>
         </Button>
         <Button
           color='yellow'
@@ -301,11 +302,11 @@ export default function LuxorStatsModal(): JSX.Element | null {
           size='xs'
           className="text-white"
         >
-          <ExternalLink href={'https://app.luxor.money/#/stake'}>
+          <NavLink href={'/luxor/stake'}>
             <a className="flex justify-center text-black text-xl transition rounded-md hover:pink">
               STAKE LUX<span> ↗</span>
             </a>
-          </ExternalLink>
+          </NavLink>
         </Button>
       </div>
     </HeadlessUiModal.Controlled>

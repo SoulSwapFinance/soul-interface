@@ -47,6 +47,7 @@ import {
   SOUL_CIRCLE_ADDRESS,
   LUX_HELPER_ADDRESS,
   LUXOR_STAKING_ADDRESS,
+  LUXOR_STAKING_HELPER_ADDRESS,
 } from 'sdk'
 import {
   COFFIN_BOX_ADDRESS,
@@ -92,6 +93,7 @@ import SOULVAULT_ABI from '../constants/abis/soulswap/soulvault.json' // 31 JUL
 import LUXOR_ABI from '../constants/abis/soulswap/luxor.json'
 import LUXOR_TREASURY_ABI from '../constants/abis/soulswap/luxor-treasury.json'
 import LUXOR_STAKING_ABI from '../constants/abis/soulswap/luxor-staking.json'
+import LUXOR_STAKING_HELPER_ABI from '../constants/abis/soulswap/luxor-staking-helper.json'
 import WLUM_ABI from '../constants/abis/soulswap/wlumens.json'
 import ENCHANT_ABI from '../constants/abis/soulswap/enchant.json' // 30 OCT
 import ENCHANT_HELPER_ABI from '../constants/abis/soulswap/enchant-helper.json' // 30 OCT
@@ -333,6 +335,11 @@ export function useLuxorTreasuryContract(withSignerIfPossible = true): Contract 
 export function useLuxorStakingContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && LUXOR_STAKING_ADDRESS[chainId], LUXOR_STAKING_ABI, withSignerIfPossible)
+}
+
+export function useLuxorStakeHelperContract(withSignerIfPossible = true): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && LUXOR_STAKING_HELPER_ADDRESS[chainId], LUXOR_STAKING_HELPER_ABI, withSignerIfPossible)
 }
 
 export function useWrappedLumensContract(withSignerIfPossible = true): Contract | null {

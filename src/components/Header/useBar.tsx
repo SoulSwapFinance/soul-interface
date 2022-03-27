@@ -3,30 +3,30 @@ import { GlobeIcon, SwitchVerticalIcon, TrendingUpIcon, SunIcon, CurrencyDollarI
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { SOUL_ADDRESS } from 'sdk'
-// import { PoolIcon, RocketIcon, WalletIcon } from 'components/Icon'
+import { PoolIcon, RocketIcon, WalletIcon } from 'components/Icon'
 import { Feature } from 'enums'
 import { featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
 
-export interface MenuItemLeaf {
+export interface BarItemLeaf {
   key: string
   title: string
   link: string
   icon?: ReactNode
 }
 
-export interface MenuItemNode {
+export interface BarItemNode {
   key: string
   title: string
-  items: MenuItemLeaf[]
+  items: BarItemLeaf[]
   icon: ReactNode
 }
 
-export type MenuItem = MenuItemLeaf | MenuItemNode
-export type Menu = MenuItem[]
+export type BarItem = BarItemLeaf | BarItemNode
+export type Bar = BarItem[]
 
-type UseMenu = () => Menu
-const useMenu: UseMenu = () => {
+type UseBar = () => Bar
+const useMenu: UseBar = () => {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
 
@@ -34,11 +34,11 @@ const useMenu: UseMenu = () => {
     if (!chainId) return []
 
     // By default show just a swap button
-    let tradeMenu: MenuItem = {
+    let tradeMenu: BarItem = {
       key: 'swap',
       title: i18n._(t`Exchange`),
       link: '/swap',
-      icon: <SwitchVerticalIcon width={20} className="text-dark-600" />,
+      icon: <SwitchVerticalIcon width={20} className="text-white" />,
     }
   
  // If AMM is enabled, replace swap button with a submenu under trade
@@ -62,40 +62,40 @@ const useMenu: UseMenu = () => {
   }
 } */
     // If limit orders is enabled, replace swap button with a submenu under trade
-    if (featureEnabled(Feature.TRIDENT, chainId)) {
-      tradeMenu = {
-        key: 'trade',
-        title: i18n._(t`Exchange`),
-        icon: <SwitchVerticalIcon width={20} className="text-dark-600" />,
-        items: [
-          {
-            key: 'swap',
-            title: i18n._(t`Swap`),
-            link: '/swap',
-          },
-          {
-            key: 'pool',
-            title: i18n._(t`Pool`),
-            link: '/pool',
-          },
-          {
-            key: 'bridge',
-            title: i18n._(t`Bridge`),
-            link: 'https://bridge.soulswap.finance',
-          },
-          {
-            key: 'limit',
-            title: i18n._(t`Limit`),
-            link: '/limit',
-          },
-          {
-            key: 'margin',
-            title: i18n._(t`Margin`),
-            link: '/margin',
-          },
-        ],
-      }
-    }
+    // if (featureEnabled(Feature.AMM, chainId)) {
+    //   tradeMenu = {
+    //     key: 'trade',
+    //     title: i18n._(t`Exchange`),
+    //     icon: <SwitchVerticalIcon width={20} className="text-dark-600" />,
+    //     items: [
+    //       {
+    //         key: 'swap',
+    //         title: i18n._(t`Swap`),
+    //         link: '/swap',
+    //       },
+    //       {
+    //         key: 'pool',
+    //         title: i18n._(t`Pool`),
+    //         link: '/pool',
+    //       },
+    //       {
+    //         key: 'bridge',
+    //         title: i18n._(t`Bridge`),
+    //         link: 'https://bridge.soulswap.finance',
+    //       },
+    //       {
+    //         key: 'limit',
+    //         title: i18n._(t`Limit`),
+    //         link: '/limit',
+    //       },
+    //       {
+    //         key: 'margin',
+    //         title: i18n._(t`Margin`),
+    //         link: '/margin',
+    //       },
+    //     ],
+    //   }
+    // }
 
     const poolMenu = [
       {
@@ -128,21 +128,21 @@ const useMenu: UseMenu = () => {
       })
     }
 
-    const mainItems: Menu = [tradeMenu]
+    const mainItems: Bar = [tradeMenu]
 
-    // if (poolMenu.length > 0)
-    //   mainItems.push({
-    //     key: 'pool',
-    //     title: i18n._(t`Liquidity`),
-    //     items: poolMenu,
-    //     icon: <PoolIcon width={20} />,
-    //   })
+    if (poolMenu.length > 0)
+      mainItems.push({
+        key: 'pool',
+        title: i18n._(t`Liquidity`),
+        items: poolMenu,
+        icon: <PoolIcon width={20} className="text-blue" />,
+      })
 
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const farmItems = {
         key: 'SoulSwap',
         title: i18n._(t`SoulSwap`),
-        icon: <CurrencyDollarIcon width={20} className="text-dark-600 filter" />,
+        icon: <CurrencyDollarIcon width={20} className="text-deepPurple filter" />,
         items: [
           {
             key: 'soul-docs',
@@ -170,6 +170,11 @@ const useMenu: UseMenu = () => {
             link: '/bonds',
           },
           {
+            key: 'bridge',
+            title: i18n._(t`Bridge`),
+            link: 'https://bridge.soulswap.finance',
+          },
+          {
             key: 'soul-follow',
             title: i18n._(t`Follow`),
             link: 'https://twitter.com/SoulSwapFinance',
@@ -183,7 +188,7 @@ const useMenu: UseMenu = () => {
       const learnItems = {
         key: 'Luxor',
         title: i18n._(t`Luxor`),
-        icon: <SunIcon width={20} className="rotate-90 text-dark-600 filter" />,
+        icon: <SunIcon width={20} className="rotate-90 text-yellow filter" />,
         items: [
           {
             key: 'lux-docs',
@@ -219,45 +224,85 @@ const useMenu: UseMenu = () => {
       }
       mainItems.push(learnItems)
       }
-      
+    
+      if (featureEnabled(Feature.UNDERWORLD, chainId))
+      {
+       mainItems.push({
+         key: 'lending',
+         title: i18n._(t`Lending`),
+         icon: <SwitchVerticalIcon width={20} className="rotate-90 text-pink filter" />,
+         items: [
+           {
+             key: 'borrow-docs',
+             title: i18n._(t`How-To`),
+             link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
+           },
+           {
+             key: 'lend',
+             title: i18n._(t`Lend`),
+             link: '/lend',
+           },
+           {
+             key: 'borrow',
+             title: i18n._(t`Borrow`),
+             link: '/borrow',
+           },
+           {
+             key: 'underworld-farms',
+             title: i18n._(t`Mines`),
+             link: '/mines?filter=lending',
+           },
+           {
+             key: 'balances',
+             title: 'Coffinbox',
+             link: '/balances',
+           },
+         ],
+       })
+       
+     }
 
-    if (featureEnabled(Feature.UNDERWORLD, chainId))
+    if (featureEnabled(Feature.AMM, chainId))
      {
       mainItems.push({
-        key: 'lending',
-        title: i18n._(t`Lending`),
-        icon: <SwitchVerticalIcon width={20} className="rotate-90 text-dark-600 filter" />,
+        key: 'analytics',
+        title: i18n._(t`Analytics`),
+        icon: <TrendingUpIcon width={20} className="text-red" />,
         items: [
           {
-            key: 'borrow-docs',
-            title: i18n._(t`How-To`),
-            link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
+            key: 'wallet',
+            title: 'Wallet',
+            link: '/info/dashboard',
           },
           {
-            key: 'lend',
-            title: i18n._(t`Lend`),
-            link: '/lend',
+            key: 'dashboard',
+            title: 'Overview',
+            link: '/analytics/dashboard',
           },
           {
-            key: 'borrow',
-            title: i18n._(t`Borrow`),
-            link: '/borrow',
+            key: 'tokens',
+            title: 'Tokens',
+            link: '/analytics/tokens',
           },
           {
-            key: 'underworld-farms',
-            title: i18n._(t`Mines`),
-            link: '/mines?filter=lending',
-          },
-          {
-            key: 'balances',
-            title: 'Coffinbox',
-            link: '/balances',
+            key: 'pairs',
+            title: 'Pairs',
+            link: '/analytics/pairs',
           },
         ],
       })
       
     }
 
+    let exploreMenu: BarItem = {
+      key: 'explore',
+      title: i18n._(t`Explore`),
+      link: '/explore',
+      icon: <GlobeIcon width={20} className="text-green" />,
+    }
+      mainItems.push(exploreMenu)
+
+      
     // if (featureEnabled(Feature.MISO, chainId)) {
     //   mainItems.push({
     //     key: 'launchpad',
@@ -278,63 +323,34 @@ const useMenu: UseMenu = () => {
     //   })
     // }
 
-    let analyticsMenu: MenuItem = {
-      key: 'analytics',
-      title: i18n._(t`Analytics`),
-      icon: <TrendingUpIcon width={20} className="text-dark-600" />,
-      items: [
-        {
-          key: 'wallet',
-          title: 'Wallet',
-          link: '/balances',
-        },
-        {
-          key: 'dashboard',
-          title: 'Overview',
-          link: '/analytics/dashboard',
-        },
-        {
-          key: 'tokens',
-          title: 'Tokens',
-          link: '/analytics/tokens',
-        },
-        {
-          key: 'pairs',
-          title: 'Pairs',
-          link: '/analytics/pairs',
-        },
-      ],
-    }
+    // Balances
+    mainItems.push({
+      key: 'balances',
+      title: i18n._(t`Portfolio`),
+      link: '/balances',
+      icon: <WalletIcon width={20} className="text-dark-600" />,
+    })
+    
 
-    // if (featureEnabled(Feature.COFFINBOX, chainId)) {
-    //   analyticsMenu.items.push({
-    //     key: 'coffinbox',
-    //     title: 'CoffinBox',
-    //     link: '/analytics/coffinbox',
+    // if (featureEnabled(Feature.AMM, chainId)) {
+    //   mainItems.push({
+    //     key: 'academy',
+    //     title: i18n._(t`Academy`),
+    //     icon: <RocketIcon width={20} className="text-dark-600" />,
+    //     items: [
+    //       {
+    //         key: 'marketplace',
+    //         title: i18n._(t`Marketplace`),
+    //         link: '/miso',
+    //       },
+    //       {
+    //         key: 'factory',
+    //         title: i18n._(t`Factory`),
+    //         link: '/miso/auction',
+    //       },
+    //     ],
     //   })
     // }
-
-    if (featureEnabled(Feature.ANALYTICS, chainId)) {
-      mainItems.push(analyticsMenu)
-    }
-
-    // mainItems.push({
-    //   key: 'balances',
-    //   title: i18n._(t`Portfolio`),
-    //   link: '/balances',
-    //   icon: <WalletIcon width={20} />,
-    // })
-    
-  // By default show just a swap button
-  let exploreMenu: MenuItem = {
-    key: 'explore',
-    title: i18n._(t`Explore`),
-    link: '/explore',
-    icon: <GlobeIcon width={20} className="text-dark-600" />,
-  }
-    mainItems.push(exploreMenu)
-
-    
     return mainItems.filter((el) => Object.keys(el).length > 0)
   }, [chainId, i18n])
 }
