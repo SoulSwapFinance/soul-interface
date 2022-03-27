@@ -565,8 +565,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                             primaryColour="#3Eff3E"
                                             color="black"
                                             margin=".5rem 0 .5rem 0"
-                                            onClick={() =>
-                                                setShowHarvestConfirmation(true)
+                                            onClick={() => handleHarvest()
                                             }
                                         >
                                             HARVEST SOUL
