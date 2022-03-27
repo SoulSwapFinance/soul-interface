@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/link-passhref */
 import {
     ApprovalState,
-    useActiveWeb3React,
     useApproveCallback,
   } from '../../../hooks'
   
@@ -17,7 +16,7 @@ import {
   import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
   import { LOCKER_ADDRESS } from '../../../constants'
   import { useTransactionAdder } from '../../../state/transactions/hooks'
-  import Button, { ButtonConfirmed, ButtonError } from '../../../components/Button'
+  import { Button, ButtonConfirmed, ButtonError } from '../../../components/Button'
   import NumericalInput from '../../../components/NumericalInput'
   import { AutoRow, RowBetween } from '../../../components/Row'
   import { isAddress } from '@ethersproject/address'
@@ -30,6 +29,8 @@ import {
   import useLocker from '../../../features/locker/useLocker'
   import { ethers } from 'ethers'
   import { useAddPopup } from '../../../state/application/hooks'
+import { BigNumber } from '@ethersproject/bignumber'
+import { useActiveWeb3React } from 'services/web3'
   
   export default function CreateLocker(): JSX.Element {
     const { i18n } = useLingui()
@@ -78,7 +79,7 @@ import {
       await approve()
     }, [approve])
   
-    const handleLock = useCallback(async () => {
+    const handleLock = useCallback(async () => {``
       if (allInfoSubmitted) {
         setPendingTx(true)
   
@@ -86,7 +87,8 @@ import {
           const tx = await lockerContract.lockTokens(
             tokenAddress,
             withdrawer,
-            value.toBigNumber(assetToken?.decimals),
+            new BigNumber(value, assetToken?.decimals.toString()),
+            // .toBigNumber(assetToken?.decimals),
             moment.default(unlockDate).unix().toString()
           )
   

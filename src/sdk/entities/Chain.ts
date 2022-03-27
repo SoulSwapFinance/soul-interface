@@ -8,9 +8,9 @@ export type Chain = {
 }
 
 export const DEFAULT_CHAIN_FROM: Chain = {
-  id: ChainId.MAINNET,
-  icon: NETWORK_ICON[ChainId.MAINNET],
-  name: NETWORK_LABEL[ChainId.MAINNET],
+  id: ChainId.ETHEREUM,
+  icon: NETWORK_ICON[ChainId.ETHEREUM],
+  name: NETWORK_LABEL[ChainId.ETHEREUM],
 }
 
 export const DEFAULT_CHAIN_TO: Chain = {

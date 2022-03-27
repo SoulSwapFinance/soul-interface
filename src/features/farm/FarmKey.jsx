@@ -1,36 +1,17 @@
 import styled from "styled-components";
-
-import {
-  FarmContainer,
-  Row,
-  FarmContentWrapper,
-  TokenPairBox,
-  FarmItemBox,
-} from "./FarmStyles";
-
+import { Button } from 'components/Button'
+import QuestionHelper from 'components/QuestionHelper'
 import {
   Wrap,
-  Text,
-  ExternalLink,
-} from "./ReusableStyles";
+  StakeContainer,
+  Row,
+  StakeContentWrapper,
+  TokenPairBox,
+  StakeItemBox,
+  Text
+} from "./Styles";
 
-const HideOnMobile = styled(FarmItemBox)`
-  @media screen and (max-width: 620px) {
-    display: none;
-  }
-`;
-
-const TokenPair = styled(ExternalLink)`
-  font-size: 1.2rem;
-  padding: 0;
-
-  @media screen and (max-width: 400px) {
-    font-size: 1rem;
-    padding-right: 10px;
-  }
-`;
-
-export default function FarmKey(withdraw) {
+export default function StakeKey() {
   return (
     <>
       <Wrap
@@ -39,50 +20,41 @@ export default function FarmKey(withdraw) {
         justifyContent="center"
         alignContent="center"
       >
-        <FarmContainer>
-          <Row padding=".5rem 1rem">
-            <FarmContentWrapper>
+        <StakeContainer>
+          <Row padding=".25rem 2rem">
+            <StakeContentWrapper>
               <TokenPairBox>
-                {/* 2 token logo combined ? */}
                 <Wrap>
-                  <Text padding ="0" fontSize=".9rem" color="#bbb">
-                  LP TOKEN PAIR
+                  <Text padding ="0" fontSize=".8" color="#bbb">
+                  TOKEN
                   </Text>
                 </Wrap>
               </TokenPairBox>
 
-              <FarmItemBox>
-                <Text padding="0" fontSize=".9rem" color="#bbb">
-                % APR
+              <StakeItemBox>
+                <Text padding="0" fontSize=".8" color="#bbb">
+                % APY
                 </Text>
-              </FarmItemBox>
+              </StakeItemBox>
 
-              <FarmItemBox desktopOnly={true}>
-                <Text padding="0" fontSize=".9rem" color="#bbb">
+              <StakeItemBox desktopOnly={true}>
+                <Text padding="0" fontSize=".8" color="#bbb">
                 EARNED
                 </Text>
-              </FarmItemBox>
+              </StakeItemBox>
 
-              {/* <HideOnMobile desktopOnly={true}>
-                <Text padding="0" fontSize=".9rem" color="#bbb">
-                REWARDS P/D
+              {/* <HideOnMobile> */}
+                <Text padding="0" fontSize=".8" color="#bbb">
+                  TVL
                 </Text>
-              </HideOnMobile> */}
-
-              <HideOnMobile desktopOnly={true}>
-                <Text padding="0" fontSize=".9rem" color="#bbb">
-                OWNERSHIP
-                </Text>
-              </HideOnMobile>
-
-              <HideOnMobile>
-                <Text padding="0" fontSize=".9rem" color="#bbb">
-                  VALUE (TVL)
-                </Text>
-              </HideOnMobile>
-            </FarmContentWrapper>
+              {/* </HideOnMobile> */}
+            </StakeContentWrapper>
+            
           </Row>
-        </FarmContainer>
+          {/* <Button variant={'link'} color={'purple'} className="absolute top-[5%] right-[10%]"> */}
+ 
+              {/* </Button> */}
+        </StakeContainer>
       </Wrap>
     </>
   );

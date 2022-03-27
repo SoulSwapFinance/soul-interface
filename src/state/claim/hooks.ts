@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 
 import { TransactionResponse } from '@ethersproject/providers'
 import { calculateGasMargin } from '../../functions/trade'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useMerkleDistributorContract } from '../../hooks/useContract'
 import { useSingleCallResult } from '../multicall/hooks'
 import { useTransactionAdder } from '../transactions/hooks'
@@ -15,7 +15,6 @@ interface UserClaimData {
   amount: string
   proof: string[]
   flags?: {
-    isSOCKS: boolean
     isLP: boolean
     isUser: boolean
   }
@@ -46,7 +45,7 @@ function fetchClaim(account: string, chainId: ChainId): Promise<any | UserClaimD
       .catch((error) => console.error('Failed to get claim data', error)))
 }
 
-// parse summonerContract blob and detect if user has claim data
+// parse soulDistributorContract blob and detect if user has claim data
 // null means we know it does not
 export function useUserClaimData(account: string | null | undefined): UserClaimData | null | undefined {
   const { chainId } = useActiveWeb3React()
@@ -75,8 +74,8 @@ export function useUserClaimData(account: string | null | undefined): UserClaimD
 // check if user is in blob and has not yet claimed UNI
 export function useUserHasAvailableClaim(account: string | null | undefined): boolean {
   const userClaimData = useUserClaimData(account)
-  const summonerContract = useMerkleDistributorContract()
-  const isClaimedResult = useSingleCallResult(summonerContract, 'isClaimed', [userClaimData?.index])
+  const soulDistributorContract = useMerkleDistributorContract()
+  const isClaimedResult = useSingleCallResult(soulDistributorContract, 'isClaimed', [userClaimData?.index])
   // user is in blob and contract marks as unclaimed
   return Boolean(userClaimData && !isClaimedResult.loading && isClaimedResult.result?.[0] === false)
 }
@@ -88,11 +87,11 @@ export function useUserUnclaimedAmount(account: string | null | undefined): Curr
 
   const soul = chainId ? SOUL[chainId] : undefined
 
-  // console.log('claimStats:', {
-  //   canClaim: canClaim,
-  //   userClaimData: userClaimData,
-  //   soul: soul
-  // })
+  console.log('claimStats:', {
+    canClaim: canClaim,
+    userClaimData: userClaimData,
+    soul: soul
+  })
 
   if (!soul) return undefined
   if (!canClaim || !userClaimData) {
@@ -111,15 +110,15 @@ export function useClaimCallback(account: string | null | undefined): {
   // used for popup summary
   const unClaimedAmount: CurrencyAmount<Currency> | undefined = useUserUnclaimedAmount(account)
   const addTransaction = useTransactionAdder()
-  const summonerContract = useMerkleDistributorContract()
+  const soulDistributorContract = useMerkleDistributorContract()
 
   const claimCallback = async function () {
-    if (!claimData || !account || !library || !chainId || !summonerContract) return
+    if (!claimData || !account || !library || !chainId || !soulDistributorContract) return
 
     const args = [claimData.index, account, claimData.amount, claimData.proof]
 
-    return summonerContract.estimateGas['claim'](...args, {}).then((estimatedGasLimit) => {
-      return summonerContract
+    return soulDistributorContract.estimateGas['claim'](...args, {}).then((estimatedGasLimit) => {
+      return soulDistributorContract
         .claim(...args, {
           value: null,
           gasLimit: calculateGasMargin(estimatedGasLimit),

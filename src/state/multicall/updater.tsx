@@ -1,17 +1,17 @@
-import { Call, parseCallKey } from './utils'
-import { RetryableError, retry } from '../../functions/retry'
-import { errorFetchingMulticallResults, fetchingMulticallResults, updateMulticallResults } from './actions'
-import { useAppDispatch, useAppSelector } from '../hooks'
+import { Contract } from '@ethersproject/contracts'
+import { chunkArray } from 'functions/array'
+import { retry, RetryableError } from 'functions/retry'
+import { useMulticall2Contract } from 'hooks/useContract'
+import useDebounce from 'hooks/useDebounce'
+import { useActiveWeb3React } from 'services/web3'
+import { AppState } from 'state'
+import { useBlockNumber } from 'state/application/hooks'
+import { useAppDispatch, useAppSelector } from 'state/hooks'
 import { useEffect, useMemo, useRef } from 'react'
 
-import { AppState } from '../index'
-import { Contract } from '@ethersproject/contracts'
-import { chunkArray } from '../../functions/array'
-import { updateBlockNumber } from '../application/actions'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
-import { useBlockNumber } from '../application/hooks'
-import useDebounce from '../../hooks/useDebounce'
-import { useMulticall2Contract } from '../../hooks/useContract'
+// import { constants, default as chunkCalls } from '../../functions/calls'
+import { errorFetchingMulticallResults, fetchingMulticallResults, updateMulticallResults } from './actions'
+import { Call, parseCallKey } from './utils'
 
 const DEFAULT_GAS_REQUIRED = 1_000_000
 
@@ -52,6 +52,7 @@ async function fetchChunk(
     }
     return returnData
   } catch (error) {
+    // @ts-ignore TYPE NEEDS FIXING
     if (error.code === -32000 || error.message?.indexOf('header not found') !== -1) {
       throw new RetryableError(`header not found for block number ${blockNumber}`)
     }
@@ -156,6 +157,7 @@ export default function Updater(): null {
     const calls = outdatedCallKeys.map((key) => parseCallKey(key))
 
     const chunkedCalls = chunkArray(calls)
+    // const chunkedCalls = chunkCalls(calls, constants.CHUNK_GAS_LIMIT)
 
     if (cancellations.current && cancellations.current.blockNumber !== latestBlockNumber) {
       cancellations.current.cancellations.forEach((c) => c())
@@ -224,18 +226,18 @@ export default function Updater(): null {
             }
           })
           .catch((error: any) => {
-            if (error.isCancelledError) {
-              console.debug('Cancelled fetch for blockNumber', latestBlockNumber, chunk, chainId)
-              return
-            }
-            console.error('Failed to fetch multicall chunk', chunk, chainId, error)
-            dispatch(
-              errorFetchingMulticallResults({
-                calls: chunk,
-                chainId,
-                fetchingBlockNumber: latestBlockNumber,
-              })
-            )
+          //   if (error.isCancelledError) {
+          //     console.debug('Cancelled fetch for blockNumber', latestBlockNumber, chunk, chainId)
+          //     return
+          //   }
+          //   console.error('Failed to fetch multicall chunk', chunk, chainId, error)
+          //   dispatch(
+          //     errorFetchingMulticallResults({
+          //       calls: chunk,
+          //       chainId,
+          //       fetchingBlockNumber: latestBlockNumber,
+          //     })
+          //   )
           })
         return cancel
       }),

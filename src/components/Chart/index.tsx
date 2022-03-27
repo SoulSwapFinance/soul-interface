@@ -1,11 +1,10 @@
-
 import dynamic from 'next/dynamic'
 import { ChainId, Currency, FACTORY_ADDRESS, Token, WNATIVE } from '../../sdk'
-import useDexCandles from '../../hooks/useDexCandles'
+// import useDexCandles from '../../hooks/useDexCandles'
 import { CandlePeriod, NumericalCandlestickDatum } from './types/Candle'
 import React, { useEffect, useState } from 'react'
 import { RowFixed } from '../Row'
-import CurrencyLogo from '../CurrencyLogo'
+// import { CurrencyLogo } from '../CurrencyLogo'
 import NavLink from '../NavLink'
 import { classNames } from '../../functions'
 import Lottie from 'lottie-react'
@@ -108,8 +107,8 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
   const [candlestickSeries, setCandlestickSeries] = useState<{ data: NumericalCandlestickDatum[] }[]>([{ data: [] }])
 
   const MAJOR_HIERARCHY = [
-    '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'.toLowerCase(), // WFTM
-    '0x04068da6c83afcfa0e13ba15a6696662335d5b75'.toLowerCase(), // USDC
+    '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'.toLowerCase(), // WFTM
+    '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75'.toLowerCase(), // USDC
   ]
 
   const inputAddress = inputCurrency?.isToken
@@ -134,7 +133,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
   const token0LCase = token0Index < token1Index ? inputAddress.toLowerCase() : outputAddress.toLowerCase()
   const token1LCase = token0Index < token1Index ? outputAddress.toLowerCase() : inputAddress.toLowerCase()
 
-  let { isLoading, candleData } = useDexCandles(token0LCase, token1LCase, candlePeriod)
+  // let { isLoading, candleData } = useDexCandles(token0LCase, token1LCase, candlePeriod)
 
   const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
 
@@ -284,7 +283,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
   return (
     <>
 
-      <div className="flex items-center justify-between flex-col lg:flex-row space-x-4 min-h-[40px] xl:ml-24 xl:mr-24 lg:mt-4 mb-0 ">
+      <div className="flex items-center justify-between flex-col lg:flex-row space-x-4 min-h-[40px] xl:ml-4 xl:mr-4 mb-0">
         {/* <div className="text-4xl font-black text-gray-200">{(lastClose || 0).toFixed(2)}</div>
         <PeriodChooser period={candlePeriod} onChoose={(period) => setCandlePeriod(period)} />
       </div> */}
@@ -292,20 +291,26 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
         {inputCurrency?.isToken ?
           <iframe
             frameBorder={"none"}
-            src={`https://kek.tools/t/${inputCurrency.address}/chart?pair=${pairAddress}&accent=7B48BE`}
+            src={`https://kek.tools/t/${inputCurrency?.address}/chart?pair=${pairAddress}&accent=7B48BE`}
             height={"480"}
             width={"100%"}
           />
           :
-          inputCurrency?.isNative ?
+          inputCurrency?.isNative && outputCurrency?.isToken ?
             // outputCurrency?.isNative ?
             <iframe
               frameBorder={"none"}
-              src={`https://kek.tools/t/${outputCurrency.address}/chart?currencyType=native&pair=${pairAddress}&accent=7B48BE`}
+              src={`https://kek.tools/t/${outputCurrency?.address}/chart?currencyType=native&pair=${pairAddress}&accent=7B48BE`}
               height={"480"}
               width={"100%"}
             />
-            : 'https://kek.tools/t/0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83/chart?&accent=B026FF'
+            :             <iframe
+            frameBorder={"none"}
+            src={'https://kek.tools/t/0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83/chart?&accent=B026FF'}
+            height={"480"}
+            width={"100%"}
+          />
+            
         }
         {/* <div className={'flex flex-1 h-[300px]'}>
         {isLoading ? (
@@ -322,7 +327,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
               </div>
             )} */}
       </div>
-      <div className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2">
+      {/* <div className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2">
       <div className="hidden sm:flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2">
       <CurrencyLogo currency={outputCurrency} size={'30px'} className={'shadow'} />
       <div className="text-lg font-medium text-h">/</div>
@@ -337,11 +342,11 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
         <div className="flex items-center space-x-2">
         <div className="text-lg font-medium text-h">ANALYTICS</div>
         </div>
-      </a>
+      </a> */}
 
       {/* CREATE PAIR OPTION  */}
 
-      {inputCurrency?.isNative ?
+      {/* {inputCurrency?.isNative ?
         <a
           href={`https://app.soulswap.finance/add/FTM/${outputCurrency.address}`}
           target="_blank"
@@ -375,15 +380,8 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
             </div>
           </a>
         :   'https://app.soulswap.finance/add/FTM/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'
-    }
-
-      </div>
-
-
-
-
-
-
+    } */}
+      {/* </div> */}
     </>
   )
 }

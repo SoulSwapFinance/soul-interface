@@ -1,0 +1,56 @@
+{
+  "name": "SoulSwap Pairs",
+  "timestamp": "2022-01-16T17:06:40.558Z",
+  "version": {
+    "major": 0,
+    "minor": 1,
+    "patch": 1
+  },
+  "tags": {},
+  "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/soul.jpg",
+  "keywords": [
+    "soulswap",
+    "limit-order",
+    "pairs"
+  ],
+  "pairs": {
+    "250": [
+      [
+        {
+          "name": "Wrapped Fantom",
+          "address": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+          "symbol": "WFTM",
+          "decimals": 18,
+          "chainId": 250,
+          "logoURI": "https://cryptologos.cc/logos/fantom-ftm-logo.svg?v=003"
+        },
+        {
+          "name": "USD Coin",
+          "address": "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75",
+          "symbol": "USDC",
+          "decimals": 6,
+          "chainId": 250,
+          "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x04068DA6C83AFCFA0e13ba15A6696662335D5B75/logo.png"
+        }
+      ],
+      [
+        {
+          "name": "Wrapped Fantom",
+          "address": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+          "symbol": "WFTM",
+          "decimals": 18,
+          "chainId": 250,
+          "logoURI": "https://cryptologos.cc/logos/fantom-ftm-logo.svg?v=003"
+        },
+        {
+          "name": "Soul Power",
+          "address": "0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07",
+          "symbol": "SOUL",
+          "decimals": 18,
+          "chainId": 250,
+          "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009ff39f52c0134e8007fa0e4baacbd07/logo.png"
+        }
+    ]
+  ]
+  }
+}

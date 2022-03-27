@@ -1,6 +1,6 @@
 import { CurrencyAmount, Token, SOUL_VAULT_ADDRESS } from '../../../sdk'
 // import { Fraction } from '../entities'
-import { useActiveWeb3React } from '../../../hooks'
+import { useActiveWeb3React } from 'services/web3'
 import { useCallback } from 'react'
 import { useSoulVaultContract } from './useContract'
 import { useTransactionAdder } from '../../../state/transactions/hooks'

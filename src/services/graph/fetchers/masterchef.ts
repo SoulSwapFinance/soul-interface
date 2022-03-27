@@ -8,9 +8,10 @@ import { GRAPH_HOST } from '../constants'
 import { request } from 'graphql-request'
 
 export const MASTERCHEF_V2 = {
-  [ChainId.MAINNET]: 'sushiswap/master-chefv2',
+  [ChainId.ETHEREUM]: 'sushiswap/master-chefv2',
+  [ChainId.FANTOM]: 'soulswapfinance/soul-summoner',
 }
-export const masterChefV2 = async (query, chainId = ChainId.MAINNET) =>
+export const masterChefV2 = async (query, chainId = ChainId.ETHEREUM) =>
   request(`${GRAPH_HOST[chainId]}/subgraphs/name/${MASTERCHEF_V2[chainId]}`, query)
 
 export const getMasterChefV2Farms = async () => {

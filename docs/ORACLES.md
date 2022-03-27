@@ -21,7 +21,7 @@ https://docs.chain.link/docs/huobi-eco-chain-price-feeds/
 
 https://docs.chain.link/docs/avalanche-price-feeds/
 
-Each price feed has a pair token0/token1, SOUL/ETH or SOUL/USD for example, decimals, and proxy. We use this information to construct mappings of the price feed to their respectful pair tokens.
+Each price feed has a pair token0/token1, SOUL/FTM or SOUL/USD for example, decimals, and proxy. We use this information to construct mappings of the price feed to their respectful pair tokens.
 
 Chainlink tokens can be found in src/constants/chainlink/mappings, they are seperated by network.
 

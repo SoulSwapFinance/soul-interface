@@ -1,18 +1,23 @@
-import _ from 'lodash'
+import DoubleCurrencyLogo from 'components/DoubleLogo'
+import Table from 'components/Table'
+import ColoredNumber from 'features/analytics/ColoredNumber'
+import { formatNumber, formatNumberScale, formatPercent } from 'functions'
+import { aprToApy } from 'functions/convert/apyApr'
+import { useCurrency } from 'hooks/Tokens'
 import React from 'react'
-import { formatNumber, formatNumberScale, formatPercent } from '../../../functions'
-import Table from '../../../components/Table'
-import ColoredNumber from '../../../features/analytics/ColoredNumber'
-import DoubleCurrencyLogo from '../../../components/DoubleLogo'
-import { useCurrency } from '../../../hooks/Tokens'
 
 interface PairListProps {
   pairs: {
     pair: {
-      address0: string
-      address1: string
-      symbol0: string
-      symbol1: string
+      token0: {
+        id: string
+        symbol: string
+      }
+      token1: {
+        id: string
+        symbol: string
+      }
+      id: string
     }
     liquidity: number
     volume1d: number
@@ -23,27 +28,45 @@ interface PairListProps {
 
 interface PairListNameProps {
   pair: {
-    address0: string
-    address1: string
-    symbol0: string
-    symbol1: string
+    token0: {
+      id: string
+      symbol: string
+    }
+    token1: {
+      id: string
+      symbol: string
+    }
   }
 }
 
 function PairListName({ pair }: PairListNameProps): JSX.Element {
-  const token0 = useCurrency(pair.address0)
-  const token1 = useCurrency(pair.address1)
+  const token0 = useCurrency(pair?.token0?.id)
+  const token1 = useCurrency(pair?.token1?.id)
 
   return (
     <>
       <div className="flex items-center">
-        <DoubleCurrencyLogo currency0={token0} currency1={token1} size={28} />
-        <div className="ml-3 font-bold text-high-emphesis">
-          {pair.symbol0}-{pair.symbol1}
+        <DoubleCurrencyLogo
+        //   className="-space-x-3"
+        //   logoClassName="rounded-full"
+          currency0={token0}
+          currency1={token1}
+          size={40}
+        />
+        <div className="flex flex-col ml-3 whitespace-nowrap">
+          <div className="font-bold text-high-emphesis">
+            {pair?.token0?.symbol}-{pair?.token1?.symbol}
+          </div>
         </div>
       </div>
     </>
   )
+}
+
+const getApy = (volume, liquidity) => {
+  const apy = aprToApy((((volume / 7) * 365 * 0.0025) / liquidity) * 100, 3650)
+  if (apy > 1000) return '>10,000%'
+  return formatPercent(apy)
 }
 
 const allColumns = [
@@ -54,38 +77,35 @@ const allColumns = [
     align: 'left',
   },
   {
-    Header: 'Liquidity',
+    Header: 'TVL',
     accessor: 'liquidity',
     Cell: (props) => formatNumberScale(props.value, true),
     align: 'right',
   },
   {
-    Header: 'Volume (24H)',
-    HideHeader: '(7D)',
-    accessor: 'volume1d',
-    Cell: (props) => formatNumber(props.value, true),
+    Header: 'APY',
+    accessor: (row) => <div className="text-high-emphesis">{getApy(row.volume1w, row.liquidity)}</div>,
+    align: 'right',
+    sortType: (a, b) => a.original.volume1w / a.original.liquidity - b.original.volume1w / b.original.liquidity,
+  },
+  {
+    Header: 'Volume',
+    accessor: (row) => (
+      <div>
+        <div className="font-medium text-high-emphesis">{formatNumber(row.volume1d, true, false)}</div>
+        <div className="font-normal text-primary">{formatNumber(row.volume1w, true, false)}</div>
+      </div>
+    ),
     align: 'right',
   },
   {
-    Header: 'Volume (7D)',
-    accessor: 'volume1w',
-    Cell: (props) => formatNumber(props.value, true),
-    align: 'right',
-  },
-  {
-    Header: 'Fees (24H)',
-    HideHeader: '(7D)',
-    accessor: (row) => formatNumber(row.volume1d * 0.003, true),
-    align: 'right',
-  },
-  {
-    Header: 'Fees (7D)',
-    accessor: (row) => formatNumber(row.volume1w * 0.003, true),
-    align: 'right',
-  },
-  {
-    Header: 'Fees (Yearly)',
-    accessor: (row) => formatPercent((((row.volume1w / 7) * 365) / row.liquidity) * 100 * 0.03),
+    Header: 'Fees',
+    accessor: (row) => (
+      <div>
+        <div className="font-medium text-high-emphesis">{formatNumber(row.volume1d * 0.003, true, false)}</div>
+        <div className="font-normal text-primary">{formatNumber(row.volume1w * 0.003, true, false)}</div>
+      </div>
+    ),
     align: 'right',
   },
 ]
@@ -99,60 +119,57 @@ const gainersColumns = [
     align: 'left',
   },
   {
-    Header: '△ Liquidity (24H)',
-    accessor: 'liquidityChangeNumber1d',
-    Cell: (props) => <ColoredNumber number={props.value} />,
+    Header: 'Liquidity',
+    id: 'liquidity',
+    accessor: (row) => (
+      <div className="inline-flex flex-col">
+        <div className="font-medium text-high-emphesis">
+          <ColoredNumber number={row.liquidityChangeNumber1d} scaleNumber={false} />
+        </div>
+        <div>{formatNumber(row.liquidityChangeNumber1w, true, false)}</div>
+      </div>
+    ),
     align: 'right',
-    sortType: 'basic',
+    sortType: (a, b) => a.original.liquidityChangeNumber1d - b.original.liquidityChangeNumber1d,
   },
   {
-    Header: '△ Liquidity % (24H)',
-    accessor: 'liquidityChangePercent1d',
-    Cell: (props) => <ColoredNumber number={props.value} percent={true} />,
+    Header: '% Change',
+    accessor: (row) => (
+      <div className="inline-flex">
+        <div>
+          <div className="font-medium text-high-emphesis">{formatPercent(row.liquidityChangePercent1d)}</div>
+          <div>{formatPercent(row.liquidityChangePercent1w)}</div>
+        </div>
+      </div>
+    ),
     align: 'right',
-    sortType: 'basic',
+    sortType: (a, b) => a.original.liquidityChangePercent1d - b.original.liquidityChangePercent1d,
   },
   {
-    Header: '△ Liquidity (7D)',
-    accessor: 'liquidityChangeNumber1w',
-    Cell: (props) => <ColoredNumber number={props.value} />,
+    Header: 'Volume',
+    accessor: (row) => (
+      <div className="inline-flex flex-col">
+        <div className="font-medium text-high-emphesis">
+          <ColoredNumber number={row.volumeChangeNumber1d} scaleNumber={false} />
+        </div>
+        <div>{formatNumber(row.volumeChangeNumber1w, true, false)}</div>
+      </div>
+    ),
     align: 'right',
-    sortType: 'basic',
+    sortType: (a, b) => a.original.volumeChangeNumber1d - b.original.volumeChangeNumber1d,
   },
   {
-    Header: '△ Liquidity % (7D)',
-    accessor: 'liquidityChangePercent1w',
-    Cell: (props) => <ColoredNumber number={props.value} percent={true} />,
+    Header: ' % Change',
+    accessor: (row) => (
+      <div className="inline-flex">
+        <div>
+          <div className="font-medium text-high-emphesis">{formatPercent(row.volumeChangePercent1d)}</div>
+          <div>{formatPercent(row.volumeChangePercent1w)}</div>
+        </div>
+      </div>
+    ),
     align: 'right',
-    sortType: 'basic',
-  },
-  {
-    Header: '△ Volume (24H)',
-    accessor: 'volumeChangeNumber1d',
-    Cell: (props) => <ColoredNumber number={props.value} />,
-    align: 'right',
-    sortType: 'basic',
-  },
-  {
-    Header: '△ Volume % (24H)',
-    accessor: 'volumeChangePercent1d',
-    Cell: (props) => <ColoredNumber number={props.value} percent={true} />,
-    align: 'right',
-    sortType: 'basic',
-  },
-  {
-    Header: '△ Volume (7D)',
-    accessor: 'volumeChangeNumber1w',
-    Cell: (props) => <ColoredNumber number={props.value} />,
-    align: 'right',
-    sortType: 'basic',
-  },
-  {
-    Header: '△ Volume % (7D)',
-    accessor: 'volumeChangePercent1w',
-    Cell: (props) => <ColoredNumber number={props.value} percent={true} />,
-    align: 'right',
-    sortType: 'basic',
+    sortType: (a, b) => a.original.volumeChangePercent1d - b.original.volumeChangePercent1d,
   },
 ]
 
@@ -162,9 +179,9 @@ export default function PairList({ pairs, type }: PairListProps): JSX.Element {
       case 'all':
         return { id: 'liquidity', desc: true }
       case 'gainers':
-        return { id: 'liquidityChangeNumber1d', desc: true }
+        return { id: 'liquidity', desc: true }
       case 'losers':
-        return { id: 'liquidityChangeNumber1d', desc: false }
+        return { id: 'liquidity', desc: false }
     }
   }, [type])
 
@@ -179,5 +196,16 @@ export default function PairList({ pairs, type }: PairListProps): JSX.Element {
     }
   }, [type])
 
-  return <>{pairs && <Table columns={columns} data={pairs} defaultSortBy={defaultSortBy} />}</>
+  return (
+    <>
+      {pairs && (
+        <Table
+          columns={columns}
+          data={pairs}
+          defaultSortBy={defaultSortBy}
+          link={{ href: '/analytics/pairs/', id: 'pair.id' }}
+        />
+      )}
+    </>
+  )
 }

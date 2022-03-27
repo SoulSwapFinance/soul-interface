@@ -1,6 +1,7 @@
 import {
   ARCHER_ROUTER_ADDRESS,
   MULTICALL2_ADDRESS,
+  TRIDENT,
   ZAPPER_ADDRESS,
   ETH_USD_PAIR,
   SOUL_SEANCE_PAIR,
@@ -12,35 +13,50 @@ import {
   ATOMIC_SWAP_ADDRESS,
   LOCKER_ADDRESS,
   SOUL_USDC_PAIR,
+  LUX_ADDRESS,
+  WLUM_ADDRESS,
+  SOR_MASTER_ADDRESS,
+  SOR_MINTER_ADDRESS,
+  STOP_LIMIT_ORDER_ADDRESS,
+  LOTTERY_ADDRESS,
+  SOR_ADDRESS,
+  LUX_TREASURY_ADDRESS,
 } from '../constants/addresses'
 import {
   ARGENT_WALLET_DETECTOR_ABI,
-  ARGENT_WALLET_DETECTOR_MAINNET_ADDRESS,
+  ARGENT_WALLET_DETECTOR_ETHEREUM_ADDRESS,
 } from '../constants/abis/argent-wallet-detector'
 import {
   ChainId,
   REAPER_ADDRESS,
   FACTORY_ADDRESS,
+  BORING_HELPER_ADDRESS,
   ENCHANT_ADDRESS,
   ENCHANT_HELPER_ADDRESS,
   ROUTER_ADDRESS,
   SOUL_ADDRESS,
   SEANCE_ADDRESS,
   SOUL_SUMMONER_ADDRESS,
+  AUTO_STAKE_ADDRESS,
   SOUL_VAULT_ADDRESS,
   SOUL_GUIDE_ADDRESS,
-  // SOULSWAP_SWAPPER_ADDRESS,
+  PRICE_HELPER_ADDRESS,
+  HARVEST_HELPER_ADDRESS,
   TIMELOCK_ADDRESS,
   WNATIVE,
-} from '../sdk'
+  SOUL_CIRCLE_ADDRESS,
+  LUX_HELPER_ADDRESS,
+  LUXOR_STAKING_ADDRESS,
+  LUXOR_STAKING_HELPER_ADDRESS,
+} from 'sdk'
 import {
   COFFIN_BOX_ADDRESS,
   CHAINLINK_ORACLE_ADDRESS,
   UNDERWORLD_ADDRESS,
-  // SOUL_GUIDE_ADDRESS,
   SOULSWAP_TWAP_0_ORACLE_ADDRESS,
   SOULSWAP_TWAP_1_ORACLE_ADDRESS,
-} from '../constants/kashi'
+  SOULSWAP_SWAPPER_ADDRESS,
+} from '../constants'
 import { MERKLE_DISTRIBUTOR_ADDRESS } from '../constants'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from '../constants/multicall'
 import ALCX_REWARDER_ABI from '../constants/abis/alcx-rewarder.json'
@@ -48,7 +64,10 @@ import CLONE_REWARDER_ABI from '../constants/abis/clone-rewarder.json'
 import ARCHER_ROUTER_ABI from '../constants/abis/archer-router.json'
 import BASE_SWAPPER_ABI from '../constants/abis/swapper.json'
 import ANYSWAP_ERC20_ABI from '../constants/abis/anyswap_erc20.json'
-import BENTOBOX_ABI from '../constants/abis/bentobox.json'
+import SPOOKY_FACTORY_ABI from '../constants/abis/spookyswap-factory.json'
+import COFFINBOX_ABI from '../constants/abis/coffinbox.json'
+import SOUL_CIRCLE_ABI from 'constants/abis/soulswap/soulcircle.json' 
+import LUX_HELPER_ABI from 'constants/abis/lux-bond-helper.json' 
 import CHAINLINK_ORACLE_ABI from '../constants/abis/chainlink-oracle.json'
 import COMPLEX_REWARDER_ABI from '../constants/abis/complex-rewarder.json'
 import { Contract } from '@ethersproject/contracts'
@@ -59,9 +78,9 @@ import ENS_PUBLIC_RESOLVER_ABI from '../constants/abis/ens-public-resolver.json'
 import ERC20_ABI from '../constants/abis/erc20.json'
 import { ERC20_BYTES32_ABI } from '../constants/abis/erc20'
 import FACTORY_ABI from '../constants/abis/factory.json'
-// import IUniswapV2PairABI from '../constants/abis/uniswap-v2-pair.json'
 import ISoulSwapPairABI from '../constants/abis/soulswap/ISoulSwapPair.json'
-import KASHIPAIR_ABI from '../constants/abis/kashipair.json'
+import AUTO_STAKE_ABI from '../constants/abis/soulswap/autostake.json'
+import UNDERWORLD_ABI from '../constants/abis/underworldpair.json'
 import MAKER_ABI from '../constants/abis/maker.json'
 
 // soul
@@ -69,17 +88,31 @@ import SOUL_SCARAB_ABI from '../constants/abis/soulswap/scarab.json'
 import SOUL_SAFE_ABI from '../constants/abis/soulswap/safe.json'
 import SOUL_GUIDE_ABI from '../constants/abis/soul-guide.json' // TODO: update abi
 import SOUL_SUMMONER_ABI from '../constants/abis/soulswap/soulsummoner.json' // 28 JUL
+import LOTTERY_ABI from '../constants/abis/soulswap/lottery.json' // 28 JUL
 import SOULVAULT_ABI from '../constants/abis/soulswap/soulvault.json' // 31 JUL
-// import SPELL_ABI from '../constants/abis/soulswap/spell.json' // 28 JUL
+import LUXOR_ABI from '../constants/abis/soulswap/luxor.json'
+import LUXOR_TREASURY_ABI from '../constants/abis/soulswap/luxor-treasury.json'
+import LUXOR_STAKING_ABI from '../constants/abis/soulswap/luxor-staking.json'
+import LUXOR_STAKING_HELPER_ABI from '../constants/abis/soulswap/luxor-staking-helper.json'
+import WLUM_ABI from '../constants/abis/soulswap/wlumens.json'
 import ENCHANT_ABI from '../constants/abis/soulswap/enchant.json' // 30 OCT
 import ENCHANT_HELPER_ABI from '../constants/abis/soulswap/enchant-helper.json' // 30 OCT
 import SOUL_ABI from '../constants/abis/soulswap/soulpower.json' // 28 JUL
 import SEANCE_ABI from '../constants/abis/soulswap/seance.json' // 28 JUL
 import ATOMIC_SWAP_ABI from '../constants/abis/soulswap/atomic-swap.json'
 import LAUNCHPAD_ABI from '../constants/abis/soulswap/launchpad.json'
+import SUMMONER_HELPER_ABI from '../constants/abis/soulswap/helper.json'
+import PRICE_HELPER_ABI from '../constants/abis/soulswap/pricehelper.json'
+import BORING_HELPER_ABI from '../constants/abis/soulswap/boring-helper.json'
+import HARVEST_HELPER_ABI from '../constants/abis/soulswap/harvest-helper.json'
+import COFFIN_BOX_ABI from '../constants/abis/soulswap/coffinbox.json'
+import LUXOR_BOND_CONTRACT_ABI from '../constants/abis/soulswap/bond.json'
+import SOR_MASTER_ABI from '../constants/abis/soulswap/sor-master.json'
+import SOR_MINTER_ABI from '../constants/abis/soulswap/sor-minter.json'
 
 // bridge
 import anyswapEthOperaBridge_ABI from '../constants/abis/soulswap/bridge/anyswapEthOperaBridge.json'
+import ROUTER_ACTION_ABI from '../constants/abis/soulswap/bridge/router-action.json'
 
 // unused
 import MEOWSHI_ABI from '../constants/abis/meowshi.json'
@@ -101,7 +134,7 @@ import LIMIT_ORDER_ABI from '../constants/abis/limit-order.json'
 import LIMIT_ORDER_HELPER_ABI from '../constants/abis/limit-order-helper.json'
 
 import { getContract } from '../functions/contract'
-import { useActiveWeb3React } from './useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useMemo } from 'react'
 import { getVerifyingContract } from 'limitorderv2-sdk'
 
@@ -142,7 +175,7 @@ export function useWETH9Contract(withSignerIfPossible?: boolean): Contract | nul
 export function useArgentWalletDetectorContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(
-    chainId === ChainId.MAINNET ? ARGENT_WALLET_DETECTOR_MAINNET_ADDRESS : undefined,
+    chainId === ChainId.ETHEREUM ? ARGENT_WALLET_DETECTOR_ETHEREUM_ADDRESS : undefined,
     ARGENT_WALLET_DETECTOR_ABI,
     false
   )
@@ -153,7 +186,7 @@ export function useENSRegistrarContract(withSignerIfPossible?: boolean): Contrac
   let address: string | undefined
   if (chainId) {
     switch (chainId) {
-      case ChainId.MAINNET:
+      case ChainId.ETHEREUM:
         address = '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e'
         break
     }
@@ -167,6 +200,10 @@ export function useENSResolverContract(address: string | undefined, withSignerIf
 
 export function useBytes32TokenContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {
   return useContract(tokenAddress, ERC20_BYTES32_ABI, withSignerIfPossible)
+}
+
+export function useBridgeContract(routerToken?:any, withSignerIfPossible?: boolean): Contract | null {
+  return useContract(routerToken ? routerToken : undefined, ROUTER_ACTION_ABI, withSignerIfPossible)
 }
 
 export function usePairContract(pairAddress?: string, withSignerIfPossible?: boolean): Contract | null {
@@ -185,6 +222,21 @@ export function useSoulGuideContract(): Contract | null {
 
 export function usePendingContract(): Contract | null {
   return useContract('0x9aeadfE6cd03A2b5730474bF6dd79802d5bCD029', PENDING_ABI, false)
+}
+
+export function usePriceHelperContract(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && PRICE_HELPER_ADDRESS[chainId], PRICE_HELPER_ABI, false)
+}
+
+export function useSorContract(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOR_ADDRESS[chainId], ERC20_ABI, false)
+}
+
+export function useHarvestHelperContract(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && HARVEST_HELPER_ADDRESS[chainId], HARVEST_HELPER_ABI, false)
 }
 
 export function useMulticallContract(): Contract | null {
@@ -232,6 +284,19 @@ export function useSoulFtmContract(withSignerIfPossible?: boolean): Contract | n
   return useContract(chainId && SOUL_FTM_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
 }
 
+export function useBoringHelperContract(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(
+    chainId
+      ? chainId === ChainId.FANTOM
+        ? '0x26bbB91Ade07f995E1c5D1F4A050639763F4C44b'
+        : BORING_HELPER_ADDRESS[chainId]
+      : undefined,
+    BORING_HELPER_ABI,
+    false
+  )
+}
+
 export function useSoulUsdcContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SOUL_USDC_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
@@ -257,9 +322,42 @@ export function useEnchantContract(withSignerIfPossible = true): Contract | null
   return useContract(chainId && ENCHANT_ADDRESS[chainId], ENCHANT_ABI, withSignerIfPossible)
 }
 
+export function useLuxorContract(withSignerIfPossible = true): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && LUX_ADDRESS[chainId], LUXOR_ABI, withSignerIfPossible)
+}
+
+export function useLuxorTreasuryContract(withSignerIfPossible = true): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && LUX_TREASURY_ADDRESS[chainId], LUXOR_TREASURY_ABI, withSignerIfPossible)
+}
+
+export function useLuxorStakingContract(withSignerIfPossible = true): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && LUXOR_STAKING_ADDRESS[chainId], LUXOR_STAKING_ABI, withSignerIfPossible)
+}
+
+export function useLuxorStakeHelperContract(withSignerIfPossible = true): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && LUXOR_STAKING_HELPER_ADDRESS[chainId], LUXOR_STAKING_HELPER_ABI, withSignerIfPossible)
+}
+
+export function useWrappedLumensContract(withSignerIfPossible = true): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && WLUM_ADDRESS[chainId], WLUM_ABI, withSignerIfPossible)
+}
+
 export function useEnchantHelperContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && ENCHANT_HELPER_ADDRESS[chainId], ENCHANT_HELPER_ABI, withSignerIfPossible)
+}
+
+export function useTridentRouterContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  // @ts-ignore TYPE NEEDS FIXING
+  return useContract(chainId && TRIDENT[chainId], FACTORY_ABI, withSignerIfPossible)
+  // const router = TRIDENT[chainId]?.[CHAIN_KEY[chainId]]?.contracts.TridentRouter
+  // return useContract(router?.address, router?.abi, withSignerIfPossible)
 }
 
 export function useMasterChefContract(withSignerIfPossible?: boolean): Contract | null {
@@ -267,9 +365,33 @@ export function useMasterChefContract(withSignerIfPossible?: boolean): Contract 
   return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible) // 31 JUL (SOUL SUMMONER)
 }
 
+export function useCircleStakingContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOUL_CIRCLE_ADDRESS[chainId], SOUL_CIRCLE_ABI, withSignerIfPossible)
+}
+
+export function useConstantProductPoolFactory(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && TRIDENT[chainId], FACTORY_ABI, withSignerIfPossible)
+  // const factory = TRIDENT[chainId]?.[CHAIN_KEY[chainId]]?.contracts.ConstantProductPoolFactory
+  // return useContract(factory?.address, factory?.abi, withSignerIfPossible)
+}
+
+export function useStablePoolFactory(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && TRIDENT[chainId], FACTORY_ABI, withSignerIfPossible)
+  // const factory = TRIDENT[chainId]?.[CHAIN_KEY[chainId]]?.contracts.HybridPoolFactory
+  // return useContract(factory?.address, factory?.abi, withSignerIfPossible)
+}
+
 export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible)
+}
+
+export function useLotteryContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && LOTTERY_ADDRESS[chainId], LOTTERY_ABI, withSignerIfPossible)
 }
 
 export function useSummonerContract(withSignerIfPossible?: boolean): Contract | null {
@@ -277,9 +399,34 @@ export function useSummonerContract(withSignerIfPossible?: boolean): Contract | 
   return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible)
 }
 
+export function useAutoStakeContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && AUTO_STAKE_ADDRESS[chainId], AUTO_STAKE_ABI, withSignerIfPossible)
+}
+
+export function useLuxorBondContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && LUX_HELPER_ADDRESS[chainId], LUX_HELPER_ABI, withSignerIfPossible)
+}
+
+export function useSorMasterContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOR_MASTER_ADDRESS[chainId], SOR_MASTER_ABI, withSignerIfPossible)
+}
+
+export function useSorMinterContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOR_MINTER_ADDRESS[chainId], SOR_MINTER_ABI, withSignerIfPossible)
+}
+
 export function useFactoryContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && FACTORY_ADDRESS[chainId], FACTORY_ABI, false)
+}
+
+export function useHelperContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && '0xa224a5D96E58E3dae89D0e4775444A329E67774c', SUMMONER_HELPER_ABI, withSignerIfPossible)
 }
 
 export function useLockerContract(withSignerIfPossible?: boolean): Contract | null {
@@ -321,27 +468,24 @@ export function useTimelockContract(): Contract | null {
   return useContract(chainId && TIMELOCK_ADDRESS[chainId], TIMELOCK_ABI, false)
 }
 
-export function useBentoBoxContract(withSignerIfPossible?: boolean): Contract | null {
+export function useCoffinBoxContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && COFFIN_BOX_ADDRESS[chainId], BENTOBOX_ABI, withSignerIfPossible)
+  return useContract(chainId && COFFIN_BOX_ADDRESS[chainId], COFFIN_BOX_ABI, withSignerIfPossible)
 }
 
-export function useKashiPairContract(withSignerIfPossible?: boolean): Contract | null {
+export function useUnderworldPairContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && UNDERWORLD_ADDRESS[chainId], KASHIPAIR_ABI, withSignerIfPossible)
+  return useContract(chainId && UNDERWORLD_ADDRESS[chainId], UNDERWORLD_ABI, withSignerIfPossible)
 }
 
-export function useKashiPairCloneContract(address: string, withSignerIfPossible?: boolean): Contract | null {
-  return useContract(address, KASHIPAIR_ABI, withSignerIfPossible)
+export function useSoulSwapSwapper(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOULSWAP_SWAPPER_ADDRESS[chainId], BASE_SWAPPER_ABI, false)
 }
-
-// export function useSoulSwapSwapper(): Contract | null {
-//   const { chainId } = useActiveWeb3React()
-//   return useContract(chainId && SOULSWAP_SWAPPER_ADDRESS[chainId], BASE_SWAPPER_ABI, false)
-// }
 
 export function useChainlinkOracle(): Contract | null {
-  return useContract(CHAINLINK_ORACLE_ADDRESS, CHAINLINK_ORACLE_ABI, false)
+  const { chainId } = useActiveWeb3React()
+  return useContract(CHAINLINK_ORACLE_ADDRESS[chainId], CHAINLINK_ORACLE_ABI, false)
 }
 
 // experimental:
@@ -358,7 +502,7 @@ export function useSushiRollContract(version: 'v1' | 'v2' = 'v2'): Contract | nu
   let address: string | undefined
   if (chainId) {
     switch (chainId) {
-      case ChainId.MAINNET:
+      case ChainId.ETHEREUM:
         address = '0x16E58463eb9792Bc236d8860F5BC69A81E26E32B'
         break
     }
@@ -371,7 +515,7 @@ export function useDashboardContract(): Contract | null {
   let address: string | undefined
   if (chainId) {
     switch (chainId) {
-      case ChainId.MAINNET:
+      case ChainId.ETHEREUM:
         address = '0xD132Ce8eA8865348Ac25E416d95ab1Ba84D216AF'
         break
     }
@@ -404,154 +548,8 @@ export function useZapperContract(withSignerIfPossible?: boolean): Contract | nu
   return useContract(address, ZAPPER_ABI, withSignerIfPossible)
 }
 
-export function useQuickSwapFactoryContract(): Contract | null {
-  return useContract(
-    '0x5757371414417b8C6CAad45bAeF941aBc7d3Ab32',
-    [
-      {
-        type: 'constructor',
-        stateMutability: 'nonpayable',
-        payable: false,
-        inputs: [
-          {
-            type: 'address',
-            name: '_feeToSetter',
-            internalType: 'address',
-          },
-        ],
-      },
-      {
-        type: 'event',
-        name: 'PairCreated',
-        inputs: [
-          {
-            type: 'address',
-            name: 'token0',
-            internalType: 'address',
-            indexed: true,
-          },
-          {
-            type: 'address',
-            name: 'token1',
-            internalType: 'address',
-            indexed: true,
-          },
-          {
-            type: 'address',
-            name: 'pair',
-            internalType: 'address',
-            indexed: false,
-          },
-          {
-            type: 'uint256',
-            name: '',
-            internalType: 'uint256',
-            indexed: false,
-          },
-        ],
-        anonymous: false,
-      },
-      {
-        type: 'function',
-        stateMutability: 'view',
-        payable: false,
-        outputs: [{ type: 'address', name: '', internalType: 'address' }],
-        name: 'allPairs',
-        inputs: [{ type: 'uint256', name: '', internalType: 'uint256' }],
-        constant: true,
-      },
-      {
-        type: 'function',
-        stateMutability: 'view',
-        payable: false,
-        outputs: [{ type: 'uint256', name: '', internalType: 'uint256' }],
-        name: 'allPairsLength',
-        inputs: [],
-        constant: true,
-      },
-      {
-        type: 'function',
-        stateMutability: 'nonpayable',
-        payable: false,
-        outputs: [{ type: 'address', name: 'pair', internalType: 'address' }],
-        name: 'createPair',
-        inputs: [
-          {
-            type: 'address',
-            name: 'tokenA',
-            internalType: 'address',
-          },
-          {
-            type: 'address',
-            name: 'tokenB',
-            internalType: 'address',
-          },
-        ],
-        constant: false,
-      },
-      {
-        type: 'function',
-        stateMutability: 'view',
-        payable: false,
-        outputs: [{ type: 'address', name: '', internalType: 'address' }],
-        name: 'feeTo',
-        inputs: [],
-        constant: true,
-      },
-      {
-        type: 'function',
-        stateMutability: 'view',
-        payable: false,
-        outputs: [{ type: 'address', name: '', internalType: 'address' }],
-        name: 'feeToSetter',
-        inputs: [],
-        constant: true,
-      },
-      {
-        type: 'function',
-        stateMutability: 'view',
-        payable: false,
-        outputs: [{ type: 'address', name: '', internalType: 'address' }],
-        name: 'getPair',
-        inputs: [
-          { type: 'address', name: '', internalType: 'address' },
-          { type: 'address', name: '', internalType: 'address' },
-        ],
-        constant: true,
-      },
-      {
-        type: 'function',
-        stateMutability: 'nonpayable',
-        payable: false,
-        outputs: [],
-        name: 'setFeeTo',
-        inputs: [
-          {
-            type: 'address',
-            name: '_feeTo',
-            internalType: 'address',
-          },
-        ],
-        constant: false,
-      },
-      {
-        type: 'function',
-        stateMutability: 'nonpayable',
-        payable: false,
-        outputs: [],
-        name: 'setFeeToSetter',
-        inputs: [
-          {
-            type: 'address',
-            name: '_feeToSetter',
-            internalType: 'address',
-          },
-        ],
-        constant: false,
-      },
-    ],
-    false
-  )
+export function useSwapUnderlyingContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {
+  return useContract(tokenAddress, ROUTER_ACTION_ABI, withSignerIfPossible)
 }
 
 export function useComplexRewarderContract(address, withSignerIfPossible?: boolean): Contract | null {
@@ -566,17 +564,13 @@ export function useCloneRewarderContract(address, withSignerIfPossibe?: boolean)
   return useContract(address, CLONE_REWARDER_ABI, withSignerIfPossibe)
 }
 
-export function useMeowshiContract(withSignerIfPossible?: boolean): Contract | null {
-  return useContract('0x650F44eD6F1FE0E1417cb4b3115d52494B4D9b6D', MEOWSHI_ABI, withSignerIfPossible)
-}
-
 export function useLimitOrderContract(withSignerIfPossibe?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(getVerifyingContract(chainId), LIMIT_ORDER_ABI, withSignerIfPossibe)
+  return useContract(STOP_LIMIT_ORDER_ADDRESS[chainId], LIMIT_ORDER_ABI, withSignerIfPossibe)
 }
 
 export function useLimitOrderHelperContract(withSignerIfPossible?: boolean): Contract | null {
-  return useContract('0xe2f736B7d1f6071124CBb5FC23E93d141CD24E12', LIMIT_ORDER_HELPER_ABI, withSignerIfPossible)
+  return useContract('0xd63E7D4eB9aB59bf85975c7100a5D92919C4E7E5', LIMIT_ORDER_HELPER_ABI, withSignerIfPossible)
 }
 
 
@@ -586,9 +580,15 @@ export function useAnyswapEthOperaBridge(withSignerIfPossible?: boolean): Contra
   return useContract('0x5cbe98480a790554403694b98bff71a525907f5d', anyswapEthOperaBridge_ABI, withSignerIfPossible)
 }
 
+
 // ------- Atomic Swap --------
 
 export function useAtomicSwapContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(ATOMIC_SWAP_ADDRESS[chainId], ATOMIC_SWAP_ABI, withSignerIfPossible)
+}
+
+// SoulSwap 
+export function useSpookySwapFactoryContract(withSignerIfPossible?: boolean): Contract | null {
+return useContract('0x152eE697f2E276fA89E96742e9bB9aB1F2E61bE3', SPOOKY_FACTORY_ABI, withSignerIfPossible)
 }

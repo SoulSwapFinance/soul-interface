@@ -1,42 +1,44 @@
-import Popover, { PopoverProps } from '../Popover'
+import { classNames } from 'functions'
 import React, { ReactNode, useCallback, useState } from 'react'
 
-import styled from 'styled-components/macro'
-
-const TooltipContainer = styled.div`
-  width: 256px;
-  padding: 0.6rem 1rem;
-  font-weight: 400;
-  word-break: break-word;
-`
+import Popover, { PopoverProps } from '../Popover'
 
 interface TooltipProps extends Omit<PopoverProps, 'content'> {
   text: ReactNode
+  className?: string
 }
 
 interface TooltipContentProps extends Omit<PopoverProps, 'content'> {
   content: ReactNode
 }
 
-export default function Tooltip({ text, ...rest }: TooltipProps) {
+export default function Tooltip({ text, children, className, ...rest }: TooltipProps) {
   return (
     <Popover
+      placement="bottom"
       content={
-        <div className="w-[228px] px-2 py-1 font-medium bg-dark-700 border border-gray-600 rounded text-sm">{text}</div>
+        <div
+          className={classNames(
+            className,
+            'w-full max-w-[228px] px-3 py-2 font-bold bg-dark-900 border border-dark-700 rounded text-sm shadow-lg'
+          )}
+        >
+          {text}
+        </div>
       }
       {...rest}
-    />
+    >
+      {children}
+    </Popover>
   )
 }
 
-// export default function Tooltip({ text, ...rest }: TooltipProps) {
-//   return (
-//     <Popover content={<TooltipContainer>{text}</TooltipContainer>} {...rest} />
-//   );
-// }
-
-export function TooltipContent({ content, ...rest }: TooltipContentProps) {
-  return <Popover content={<TooltipContainer>{content}</TooltipContainer>} {...rest} />
+export function TooltipContent({ content, children, ...rest }: TooltipContentProps) {
+  return (
+    <Popover content={<div className="w-64 py-[0.6rem] px-4 break-words">{content}</div>} {...rest}>
+      {children}
+    </Popover>
+  )
 }
 
 export function MouseoverTooltip({ children, ...rest }: Omit<TooltipProps, 'show'>) {

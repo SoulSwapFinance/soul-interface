@@ -1,25 +1,31 @@
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/outline'
-import { CurrencyAmount, JSBI, Pair, Percent, Token } from '../../sdk'
+import { CurrencyAmount, JSBI, Pair, Percent, Token, USD } from '../../sdk'
 import React, { useState } from 'react'
 import { RowBetween, RowFixed } from '../Row'
 import { currencyId, unwrappedToken } from '../../functions/currency'
+import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 
 import Alert from '../Alert'
 import { AutoColumn } from '../Column'
 import { BIG_INT_ZERO } from '../../constants'
-import Button from '../Button'
-import CurrencyLogo from '../CurrencyLogo'
+import { Button } from '../Button'
+import { CurrencyLogo } from '../CurrencyLogo'
 import Dots from '../Dots'
 import DoubleCurrencyLogo from '../DoubleLogo'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useColor } from '../../hooks'
 import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
-import { useTokenBalance } from '../../state/wallet/hooks'
+import { useCurrencyBalance, useTokenBalance } from '../../state/wallet/hooks'
 import { useTotalSupply } from '../../hooks/useTotalSupply'
-import { classNames, formatNumberScale } from '../../functions'
+import { classNames, formatNumber, formatNumberScale } from '../../functions'
 import { Transition } from '@headlessui/react'
+import { useSingleCallResult } from 'state/multicall/hooks'
+import { useCurrency } from 'hooks/Tokens'
+import { usePriceHelperContract } from 'features/bond/hooks/useContract'
+import { useUserInfo } from 'features/mines/hooks'
+import { useActiveWeb3React } from 'services/web3'
+import { useSoulPrice } from 'hooks/getPrices'
 
 interface PositionCardProps {
   pair: Pair
@@ -112,10 +118,11 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
   )
 }
 
+
 export default function FullPositionCard({ pair, border, stakedBalance }: PositionCardProps) {
   const { i18n } = useLingui()
   const router = useRouter()
-  const { account, chainId } = useActiveWeb3React()
+  const { account } = useActiveWeb3React()
 
   const currency0 = unwrappedToken(pair.token0)
   const currency1 = unwrappedToken(pair.token1)
@@ -126,6 +133,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
 
   const totalPoolTokens = useTotalSupply(pair.liquidityToken)
 
+  
   // if staked balance balance provided, add to standard liquidity amount
   const userPoolBalance = stakedBalance ? userDefaultPoolBalance?.add(stakedBalance) : userDefaultPoolBalance
 
@@ -150,6 +158,40 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
 
   const backgroundColor = useColor(pair?.token0)
 
+  const [depositValue, setDepositValue] = useState('')
+  const [withdrawValue, setWithdrawValue] = useState('')  
+  const soulPrice = useSoulPrice()
+
+  const balance = userPoolBalance
+  // const stakedAmount = useUserInfo(farm, liquidityToken)
+  
+  let [data] = useV2PairsWithPrice([[currency0, currency1]])
+  let [state, liquidityToken, pairPrice] = data
+  
+  // const balanceFiatValueRaw
+  //   = pair?.token1 ? Number(pairPrice) * Number(balance?.toSignificant())
+  //   : Number(soulPrice) * Number(balance?.toSignificant())
+  
+  const pooledAmountFiatValueRaw
+    = pair?.token1 ? Number(pairPrice) * Number(userPoolBalance?.toSignificant())
+    : Number(soulPrice) * Number(userPoolBalance?.toSignificant())
+  
+  // const balanceFiatValue
+  //   = CurrencyAmount.fromRawAmount(
+  //     USD[chainId],
+  //     JSBI.BigInt(balanceFiatValueRaw.toFixed(USD[chainId].decimals)
+  //     // .toBigNumber(USD[chainId].decimals)
+  //     )
+  //   )
+  
+  // const pooledAmountFiatValue
+  //   = CurrencyAmount.fromRawAmount(
+  //     USD[chainId],
+  //     JSBI.BigInt(pooledAmountFiatValueRaw.toFixed(USD[chainId].decimals)
+  //     // .toBigNumber(USD[chainId].decimals)
+  //     )
+  //   )
+  
   return (
     <div
       className="rounded bg-dark-800"
@@ -206,7 +248,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
               {token0Deposited ? (
                 <div className="flex items-center space-x-2">
                   <div className="font-semibold" title={token0Deposited.toSignificant(6)}>
-                    {formatNumberScale(token0Deposited?.toSignificant(6), false, 4)}
+                    {token0Deposited?.toSignificant(6)}
                   </div>
                   <CurrencyLogo size="20px" currency={currency0} />
                 </div>
@@ -220,7 +262,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
               {token1Deposited ? (
                 <div className="flex items-center space-x-2">
                   <div className="font-semibold" title={token1Deposited.toSignificant(6)}>
-                    {formatNumberScale(token1Deposited?.toSignificant(6), false, 4)}
+                    {token1Deposited?.toSignificant(6)}
                   </div>
                   <CurrencyLogo size="20px" currency={currency1} />
                 </div>
@@ -229,6 +271,15 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
               )}
             </div>
 
+            <div className="flex items-center justify-between">
+              <div>{i18n._(t`Pooled Value`)}:</div>
+              <div className="font-semibold">
+                {userPoolBalance ? formatNumber(pooledAmountFiatValueRaw, true)
+                  // ? pooledAmountFiatValue
+                // ?.toSignificant(6, { groupSeparator: ',' }) // ?.toSignificant(4) */}
+                  : 0}
+              </div>
+            </div>
             <div className="flex items-center justify-between">
               <div>{i18n._(t`% Share`)}:</div>
               <div className="font-semibold">
@@ -241,8 +292,8 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
           {userDefaultPoolBalance && JSBI.greaterThan(userDefaultPoolBalance.quotient, BIG_INT_ZERO) && (
             <div className="grid grid-cols-2 gap-4">
               <Button
-                color="purple"
-                variant="link"
+                color="blue"
+                variant="filled"
                 onClick={() => {
                   router.push(`/exchange/add/${currencyId(currency0)}/${currencyId(currency1)}`)
                 }}
@@ -250,8 +301,8 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
                 {i18n._(t`Add`)}
               </Button>
               <Button
-                color="purple"
-                variant="link"
+                color="blue"
+                variant="filled"
                 onClick={() => {
                   router.push(`/exchange/remove/${currencyId(currency0)}/${currencyId(currency1)}`)
                 }}

@@ -1,21 +1,22 @@
 import { AlertTriangle, ArrowUpCircle, CheckCircle } from 'react-feather'
-import { ChainId, Currency } from '../../sdk'
+import { ChainId, Currency } from 'sdk'
 import React, { FC } from 'react'
 import { Trans, t } from '@lingui/macro'
 
-import Button from '../../components/Button'
-import CloseIcon from '../../components/CloseIcon'
-import ExternalLink from '../../components/ExternalLink'
-import Image from '../../components/Image'
+import { Button } from 'components/Button'
+import CloseIcon from 'components/CloseIcon'
+import ExternalLink from 'components/ExternalLink'
+import Image from 'components/Image'
 import Lottie from 'lottie-react'
-import Modal from '../../components/Modal'
-import ModalHeader from '../../components/ModalHeader'
-import { RowFixed } from '../../components/Row'
-import { getExplorerLink } from '../../functions/explorer'
-import loadingRollingCircle from '../../animation/loading-rolling-circle.json'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
-import useAddTokenToMetaMask from '../../hooks/useAddTokenToMetaMask'
+import Modal from 'components/DefaultModal'
+import { RowFixed } from 'components/Row'
+import { getExplorerLink } from 'functions/explorer'
+import loadingRollingCircle from 'animation/loading-purple-rolling-circle.json'
+import { useActiveWeb3React } from 'services/web3'
+import useAddTokenToMetaMask from 'hooks/useAddTokenToMetaMask'
 import { useLingui } from '@lingui/react'
+import { HeadlessUiModal } from 'components/Modal'
+import ModalHeader from 'components/Modal/Header'
 
 interface ConfirmationPendingContentProps {
   onDismiss: () => void
@@ -123,7 +124,7 @@ export const ConfirmationModalContent: FC<ConfirmationModelContentProps> = ({
 }) => {
   return (
     <div className="grid gap-4">
-      <ModalHeader title={title} onClose={onDismiss} />
+      <ModalHeader header={title} onClose={onDismiss} />
       {topContent()}
       {bottomContent()}
     </div>
@@ -186,7 +187,7 @@ const TransactionConfirmationModal: FC<ConfirmationModalProps> = ({
 
   // confirmation screen
   return (
-    <Modal isOpen={isOpen} onDismiss={onDismiss} maxHeight={90}>
+    <HeadlessUiModal.Controlled isOpen={isOpen} onDismiss={onDismiss}>
       {attemptingTxn ? (
         <ConfirmationPendingContent onDismiss={onDismiss} pendingText={pendingText} pendingText2={pendingText2} />
       ) : hash ? (
@@ -199,7 +200,7 @@ const TransactionConfirmationModal: FC<ConfirmationModalProps> = ({
       ) : (
         content()
       )}
-    </Modal>
+    </HeadlessUiModal.Controlled>
   )
 }
 

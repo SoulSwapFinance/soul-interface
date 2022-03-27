@@ -1,9 +1,12 @@
 const withPWA = require('next-pwa')
 const runtimeCaching = require('next-pwa/cache')
+const { ChainId } = require('@soulswap/sdk')
 
 const linguiConfig = require('./lingui.config.js')
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 const { locales, sourceLocale } = linguiConfig
+const { screens } = defaultTheme
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -18,8 +21,12 @@ module.exports = withBundleAnalyzer(
     },
     images: {
       domains: [
+        'ftmscan.com',
         'assets.soulswap.finance',
+        'assets.coingecko.com',
         'media.giphy.com',
+        'app.soulswap.finance',
+        'exchange.soulswap.finance',
         'assets.sushi.com',
         'res.cloudinary.com',
         'raw.githubusercontent.com',
@@ -47,7 +54,7 @@ module.exports = withBundleAnalyzer(
         },
         {
           source: '/farm',
-          destination: '/farms',
+          destination: '/mines',
           permanent: true,
         },        
         {
@@ -60,8 +67,18 @@ module.exports = withBundleAnalyzer(
           destination: '/enchant',
           permanent: true,
         },
+        {
+          source: '/luxor',
+          destination: '/luxor/bonds',
+          permanent: true,
+        },
+        {
+          source: '/dashboard',
+          destination: '/luxor/dashboard',
+          permanent: true,
+        },
         // {
-        //   source: '/bento/kashi',
+        //   source: '/coffin/underworld',
         //   destination: '/lend',
         //   permanent: true,
         // },
@@ -93,18 +110,30 @@ module.exports = withBundleAnalyzer(
           source: '/swap/:token*',
           destination: '/exchange/swap/:token*',
         },
-        // {
-        //   source: '/limit-order',
-        //   destination: '/exchange/limit-order',
-        // },
-        // {
-        //   source: '/limit-order/:token*',
-        //   destination: '/exchange/limit-order/:token*',
-        // },
-        // {
-        //   source: '/open-order',
-        //   destination: '/exchange/open-order',
-        // },
+        {
+          source: '/limit',
+          destination: '/exchange/limit',
+        },
+        {
+          source: '/limit-order',
+          destination: '/exchange/limit-order',
+        },
+        {
+          source: '/limit-order/:token*',
+          destination: '/exchange/limit-order/:token*',
+        },
+        {
+          source: '/open-order',
+          destination: '/exchange/open-order',
+        },
+        {
+          source: '/luxor',
+          destination: '/luxor/bonds',
+        },
+        {
+          source: '/sor',
+          destination: '/luxor/sor',
+        },
         // {
         //   source: '/migrate',
         //   destination: '/exchange/migrate',
@@ -114,63 +143,67 @@ module.exports = withBundleAnalyzer(
           destination: '/exchange/pool',
         },
         {
+          source: '/user',
+          destination: '/portfolio',
+        },
+        {
           source: '/find',
           destination: '/exchange/find',
         },
-        // Kashi
-        // {
-        //   source: '/borrow',
-        //   destination: '/kashi/borrow',
-        // },
-        // {
-        //   source: '/borrow/:token*',
-        //   destination: '/kashi/borrow/:token*',
-        // },
-        // {
-        //   source: '/lend',
-        //   destination: '/kashi/lend',
-        // },
-        // {
-        //   source: '/lend/:token*',
-        //   destination: '/kashi/lend/:token*',
-        // },
-        // Onsen
-        // {
-        //   source: '/farm',
-        //   destination: '/onsen',
-        // },
-        // {
-        //   source: '/farm/:type*',
-        //   destination: '/onsen/:type*',
-        // },
+        {
+          source: '/balances',
+          destination: '/portfolio',
+        },
         {
           source: '/farm',
-          destination: '/farms',
+          destination: '/mines?filter=active',
+        },
+        {
+          source: '/farms',
+          destination: '/mines?filter=active',
+        },
+        {
+          source: '/mines',
+          destination: '/mines?filter=active',
+        },
+        {
+          source: '/analytics',
+          destination: '/analytics/dashboard',
+        },
+        {
+          source: '/dashboard',
+          destination: '/luxor/dashboard',
         },
         {
           source: '/bond',
           destination: '/bonds',
         },
-        // {
-        // source: '/summoner',
-        //  destination: '/summoner',
-        // },
         {
           source: '/me',
           destination: '/user',
         },
-        {
-          source: '/balances',
-          destination: '/user/balances',
-        },
       ]
     },
     i18n: {
+      // localeDetection: true,
       locales,
       defaultLocale: sourceLocale,
+    },
+    network: {
+      chainIds: [ChainId.FANTOM],
+      defaultChainId: ChainId.FANTOM,
+      domains: [
+        {
+          domain: 'soulswap.finance',
+          defaultChainId: ChainId.FANTOM,
+        },
+      ],
+    },
+    publicRuntimeConfig: {
+      breakpoints: screens,
     },
   })
 )
 
 // Don't delete this console log, useful to see the config in Vercel deployments
-console.log('next.config.js', JSON.stringify(module.exports, null, 2))
+console.log('next.config.s', JSON.stringify(module.exports, null, 2))

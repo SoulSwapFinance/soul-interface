@@ -185,7 +185,7 @@ interface ChainObject {
 }
 
 const chains: ChainObject = {
-  [ChainId.MAINNET]: {
+  [ChainId.ETHEREUM]: {
     // chainName: '',
     builder: builders.etherscan,
   },

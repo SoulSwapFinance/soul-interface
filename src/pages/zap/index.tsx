@@ -1,21 +1,21 @@
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
 import { AutoRow, RowBetween, RowFixed } from '../../components/Row'
 import { BIPS_BASE, INITIAL_ALLOWED_SLIPPAGE } from '../../constants'
-import Button, { ButtonError } from '../../components/Button'
+import { Button, ButtonError } from '../../components/Button'
 import { ROUTER_ADDRESS } from '../../sdk'
 import { ChainId, Currency, Ether, JSBI, NATIVE, Percent, Trade, WNATIVE } from '../../sdk'
 import Column, { AutoColumn } from '../../components/Column'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { computeRealizedLPFeePercent, warningSeverity } from '../../functions/prices'
 import styled, { keyframes } from 'styled-components'
-import { useDerivedZapInfo, useZapActionHandlers, useZapState } from '../../state/zap/hooks'
+import { useDerivedZapInfo, useZapActionHandlers } from '../../state/zap/hooks'
 import { useUserSlippageTolerance, useUserSlippageToleranceWithDefault } from '../../state/user/hooks'
 
 import Alert from '../../components/Alert'
 import { AppDispatch } from '../../state'
 import { ArrowLeft } from 'react-feather'
 import CurrencyInputPanel from '../../components/CurrencyInputPanel'
-import CurrencyLogo from '../../components/CurrencyLogo'
+import { CurrencyLogo } from '../../components/CurrencyLogo'
 import DoubleCurrencyLogo from '../../components/DoubleLogo'
 import FormattedPriceImpact from '../../features/swap/FormattedPriceImpact'
 import Head from 'next/head'
@@ -32,7 +32,7 @@ import { currencyId as getCurrencyId } from '../../functions/currency/currencyId
 import { maxAmountSpend } from '../../functions/currency/maxAmountSpend'
 import { resetZapState } from '../../state/zap/actions'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useCurrency } from '../../hooks/Tokens'
 import { useDefaultsFromURLSearch } from '../../state/zap/hooks'
 import { useDispatch } from 'react-redux'
@@ -41,7 +41,7 @@ import usePool from '../../hooks/usePool'
 import { useRouterContract } from '../../hooks/useContract'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import useZapper from '../../hooks/useZapper'
-import DoubleGlowShadow from '../../components/DoubleGlowShadow'
+import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 
 const PoolAllocationWrapper = styled.div`
   margin-top: 1rem;
@@ -133,7 +133,7 @@ const CardHeader = () => {
   )
 }
 
-const DEFAULT_ZAP_SLIPPAGE_TOLERANCE = new Percent(5, 100)
+const DEFAULT_ZAP_SLIPPAGE_TOLERANCE = new Percent(10, 1000)
 
 export default function Zap() {
   const { i18n } = useLingui()
@@ -270,7 +270,7 @@ export default function Zap() {
       {!poolAddress ? (
         <PoolList />
       ) : (
-        <DoubleGlowShadow>
+        <DoubleGlowShadowV2>
           <div className="w-full max-w-xl p-4 rounded bg-dark-900">
             <CardHeader />
             <AutoColumn>
@@ -360,13 +360,17 @@ export default function Zap() {
                   <div>
                     <div style={{ fontSize: '14px' }}>Est. Pool Allocation</div>
                     <PoolTokenRow>
-                      <CurrencyLogo size="22px" currency={currency0 ?? undefined} style={{ marginRight: '6px' }} />
+                      <CurrencyLogo size="22px" currency={currency0 ?? undefined} 
+                      className={'mr-6px'} 
+                      />
                       <div style={{ fontSize: '14px' }}>
                         {currencyZeroOutput?.toSignificant(6) || 0} {currency0?.symbol}
                       </div>
                     </PoolTokenRow>
                     <PoolTokenRow>
-                      <CurrencyLogo size="22px" currency={currency1 ?? undefined} style={{ marginRight: '6px' }} />
+                      <CurrencyLogo size="22px" currency={currency1 ?? undefined} 
+                      className={'mr-6px'} 
+                      />
                       <div style={{ fontSize: '14px' }}>
                         {currencyOneOutput?.toSignificant(6) || 0} {currency1?.symbol}
                       </div>
@@ -518,7 +522,7 @@ export default function Zap() {
               </>
             </AutoColumn>
           </div>
-        </DoubleGlowShadow>
+        </DoubleGlowShadowV2>
       )}
     </>
   )

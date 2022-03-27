@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/link-passhref */
 import {
   ApprovalState,
-  useActiveWeb3React,
   useApproveCallback,
 } from '../../../hooks'
 
@@ -18,7 +17,7 @@ import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
 import { SCARAB_ADDRESS } from '../../../constants'
 // import SoulLogo from '../../../components/SoulLogo'
 import { useTransactionAdder } from '../../../state/transactions/hooks'
-import Button, { ButtonConfirmed, ButtonError } from '../../../components/Button'
+import { Button, ButtonConfirmed, ButtonError } from '../../../components/Button'
 import NumericalInput from '../../../components/NumericalInput'
 import { AutoRow, RowBetween } from '../../../components/Row'
 import { isAddress } from '@ethersproject/address'
@@ -32,6 +31,8 @@ import useScarab from '../../../features/scarab/useScarab'
 import { ethers } from 'ethers'
 import { useAddPopup } from '../../../state/application/hooks'
 import { result } from 'lodash'
+import { BigNumber } from '@ethersproject/bignumber'
+import { useActiveWeb3React } from 'services/web3'
 
 export default function CreateScarab(): JSX.Element {
   const { i18n } = useLingui()
@@ -90,7 +91,8 @@ export default function CreateScarab(): JSX.Element {
         const tx = await scarabContract.lockSouls(
           // tokenAddress,
           recipient,
-          value.toBigNumber(assetToken?.decimals),
+          new BigNumber(value, '18'),
+          // .toBigNumber(assetToken?.decimals),
           moment.default(unlockDate).unix().toString()
         )
 

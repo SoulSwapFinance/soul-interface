@@ -5,10 +5,10 @@ import { Contract } from 'ethers'
 import ERC20_ABI from '../constants/abis/tokens/erc20.json'
 import { WNATIVE } from '../../../sdk'
 import { isAddress } from '../../../functions/validate'
-import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
 import { useBlockNumber } from '../../../state/application/hooks'
 import { useContract } from './useContract'
 import useTransactionStatus from '../../../hooks/useTransactionStatus'
+import { useActiveWeb3React } from 'services/web3'
 
 export interface BalanceProps {
   value: BigNumber

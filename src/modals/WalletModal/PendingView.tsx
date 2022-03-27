@@ -1,123 +1,54 @@
-// import { injected } from '../../config/wallet'
-// import SUPPORTED_WALLETS from '../../config'
-import { AbstractConnector } from '@web3-react/abstract-connector'
-import Dots from '../../components/Dots'
-import Loader from '../../components/Loader'
-import Option from './Option'
-import React from 'react'
+import Typography from 'components/Typography'
 import { SUPPORTED_WALLETS } from '../../constants'
-import { darken } from 'polished'
-import { injected } from '../../connectors'
-import styled from 'styled-components'
+import { classNames } from 'functions'
+import Image from 'next/image'
+import React from 'react'
+import { AbstractConnector } from '@web3-react/abstract-connector'
 
-const PendingSection = styled.div`
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  & > * {
-    width: 100%;
-  }
-`
-
-const StyledLoader = styled(Loader)`
-  margin-right: 1rem;
-`
-
-const LoadingMessage = styled.div<{ error?: boolean }>`
-  align-items: center;
-  justify-content: flex-start;
-  margin-bottom: 20px;
-  & > * {
-    padding: 1rem;
-  }
-`
-
-const ErrorGroup = styled.div`
-  align-items: center;
-  justify-content: flex-start;
-`
-
-const ErrorButton = styled.div`
-  border-radius: 8px;
-  font-size: 12px;
-  background-color: ${({ theme }) => theme.bg4};
-  margin-left: 1rem;
-  padding: 0.5rem;
-  font-weight: 600;
-  user-select: none;
-
-  &:hover {
-    cursor: pointer;
-    background-color: ${({ theme }) => theme.darken}
-    /* background-color: ${({ theme }) => darken(0.1, theme.text4)}; */
-  }
-`
-
-const LoadingWrapper = styled.div`
-  align-items: center;
-  justify-content: center;
-`
-
-export default function PendingView({
-  connector,
-  error = false,
-  setPendingError,
-  tryActivation,
+export default function Option({
+  id,
+  link = null,
+  connector = null,
+  onClick = null,
+  header,
+  subheader = null,
+  active = false,
+  clickable = true,
 }: {
-  connector?: AbstractConnector
-  error?: boolean
-  setPendingError: (error: boolean) => void
-  tryActivation: (connector: AbstractConnector) => void
+  id: string
+  link?: string | null
+  connector?: AbstractConnector | null
+  size?: number | null
+  onClick?: null | (() => void)
+  header: React.ReactNode
+  subheader: React.ReactNode | null
+  active?: boolean
+  clickable?: boolean
 }) {
-  const isMetamask = window?.ethereum?.isMetaMask
-
-  return (
-    <PendingSection>
-    <LoadingMessage error={error}>
-      <LoadingWrapper>
-        {error ? (
-          // <ErrorGroup>
-          //   <div>Error Connecting.</div>
-          //   <ErrorButton
-          //     onClick={() => {
-          //       setPendingError(false)
-          //       connector && tryActivation(connector)
-          //     }}
-          //   >
-          //     Try Again
-          //   </ErrorButton>
-          // </ErrorGroup>
-        // ) : (
-        null) : (
-          <Dots>Initializing</Dots>
-        )}
-      </LoadingWrapper>
-    </LoadingMessage>
-      {Object.keys(SUPPORTED_WALLETS).map((key) => {
-        const option = SUPPORTED_WALLETS[key]
-        if (option.connector === connector) {
-          if (option.connector === injected) {
-            if (isMetamask && option.name !== 'MetaMask') {
-              return null
-            }
-            if (!isMetamask && option.name === 'MetaMask') {
-              return null
-            }
-          }
-          return (
-            <Option
-              id={`connect-${key}`}
-              key={key}
-              clickable={false}
-              color={option.color}
-              header={option.name}
-              subheader={option.description}
-              icon={'/images/wallets/' + option.iconName}
-            />
-          )
-        }
-        return null
-      })}
-    </PendingSection>
+  const content = (
+    <div
+      role="button"
+      onClick={onClick}
+      className={classNames(
+        clickable ? 'cursor-pointer' : '',
+        'bg-[rgba(0,0,0,0.2)] focus:outline-none flex items-center gap-4 justify-between w-full px-4 py-3 rounded border border-dark-700 hover:border-blue'
+      )}
+    >
+      <div className="flex flex-col gap-1">
+        <div id={`wallet-option-${header}`} className="flex items-center">
+          <Typography variant="sm" weight={700} className="text-high-emphesis">
+            {header}
+          </Typography>
+        </div>
+        {subheader && <Typography variant="xs">{subheader}</Typography>}
+      </div>
+      <Image src={'/images/tokens/soul.png'} alt={'Icon'} width="32px" height="32px" />
+    </div>
   )
+
+  if (link) {
+    return <a href={link}>{content}</a>
+  }
+
+  return content
 }

@@ -1,19 +1,20 @@
-import { Currency, CurrencyAmount, JSBI, NATIVE, Token } from '../../sdk'
-import { useMultipleContractSingleData, useSingleContractMultipleData } from '../multicall/hooks'
-
-import ERC20_ABI from '../../constants/abis/erc20.json'
 import { Interface } from '@ethersproject/abi'
-import { isAddress } from '../../functions/validate'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
-import { useAllTokens } from '../../hooks/Tokens'
+import { Currency, CurrencyAmount, JSBI, NATIVE, Token } from 'sdk'
+import ERC20_ABI from 'constants/abis/erc20.json'
+import { isAddress } from 'functions/validate'
+import { useAllTokens } from 'hooks/Tokens'
+import { useMulticall2Contract } from 'hooks/useContract'
+import { useActiveWeb3React } from 'services/web3'
+import { useMultipleContractSingleData, useSingleContractMultipleData } from 'state/multicall/hooks'
 import { useMemo } from 'react'
-import { useMulticall2Contract } from '../../hooks/useContract'
+
 import { TokenBalancesMap } from './types'
 
 /**
  * Returns a map of the given addresses to their eventually consistent ETH balances.
  */
-export function useETHBalances(uncheckedAddresses?: (string | undefined)[]): {
+export function 
+useETHBalances(uncheckedAddresses?: (string | undefined)[]): {
   [address: string]: CurrencyAmount<Currency> | undefined
 } {
   const { chainId } = useActiveWeb3React()
@@ -41,7 +42,7 @@ export function useETHBalances(uncheckedAddresses?: (string | undefined)[]): {
       addresses.reduce<{ [address: string]: CurrencyAmount<Currency> }>((memo, address, i) => {
         const value = results?.[i]?.result?.[0]
         if (value && chainId)
-          memo[address] = CurrencyAmount.fromRawAmount(NATIVE[chainId], JSBI.BigInt(value.toString()))
+          memo[address] = CurrencyAmount.fromRawAmount(NATIVE[250], JSBI.BigInt(value.toString()))
         return memo
       }, {}),
     [addresses, chainId, results]
@@ -54,7 +55,7 @@ export function useETHBalances(uncheckedAddresses?: (string | undefined)[]): {
 export function useTokenBalancesWithLoadingIndicator(
   address?: string,
   tokens?: (Token | undefined)[]
-): [TokenBalancesMap, boolean] {
+): { data: TokenBalancesMap; loading: boolean } {
   const validatedTokens: Token[] = useMemo(
     () => tokens?.filter((t?: Token): t is Token => isAddress(t?.address) !== false) ?? [],
     [tokens]
@@ -73,9 +74,9 @@ export function useTokenBalancesWithLoadingIndicator(
 
   const anyLoading: boolean = useMemo(() => balances.some((callState) => callState.loading), [balances])
 
-  return [
-    useMemo(
-      () =>
+  return useMemo(
+    () => ({
+      data:
         address && validatedTokens.length > 0
           ? validatedTokens.reduce<TokenBalancesMap>((memo, token, i) => {
               const value = balances?.[i]?.result?.[0]
@@ -86,10 +87,10 @@ export function useTokenBalancesWithLoadingIndicator(
               return memo
             }, {})
           : {},
-      [address, validatedTokens, balances]
-    ),
-    anyLoading,
-  ]
+      loading: anyLoading,
+    }),
+    [address, validatedTokens, anyLoading, balances]
+  )
 }
 
 export const serializeBalancesMap = (mapping: Record<string, CurrencyAmount<Token>>): string => {
@@ -99,9 +100,7 @@ export const serializeBalancesMap = (mapping: Record<string, CurrencyAmount<Toke
 }
 
 export function useTokenBalances(address?: string, tokens?: (Token | undefined)[]): TokenBalancesMap {
-  const balances = useTokenBalancesWithLoadingIndicator(address, tokens)[0]
-  const memoizedBalances = useMemo(() => serializeBalancesMap(balances), [balances])
-  return useMemo(() => balances, [memoizedBalances])
+  return useTokenBalancesWithLoadingIndicator(address, tokens).data
 }
 
 // get the balance for a single token/account combo
@@ -128,8 +127,8 @@ export function useCurrencyBalances(
     () =>
       currencies?.map((currency) => {
         if (!account || !currency) return undefined
-        if (currency.isToken) return tokenBalances[currency.address]
-        if (currency.isNative) return ethBalance[account]
+        if (currency?.isToken) return tokenBalances[currency.address]
+        if (currency?.isNative) return ethBalance[account]
         return undefined
       }) ?? [],
     [account, currencies, ethBalance, tokenBalances]
@@ -146,6 +145,13 @@ export function useAllTokenBalances(): TokenBalancesMap {
   const allTokens = useAllTokens()
   const allTokensArray = useMemo(() => Object.values(allTokens ?? {}), [allTokens])
   return useTokenBalances(account ?? undefined, allTokensArray)
+}
+
+export function useAllTokenBalancesWithLoadingIndicator() {
+  const { account } = useActiveWeb3React()
+  const allTokens = useAllTokens()
+  const allTokensArray = useMemo(() => Object.values(allTokens ?? {}), [allTokens])
+  return useTokenBalancesWithLoadingIndicator(account ?? undefined, allTokensArray)
 }
 
 // TODO: Replace

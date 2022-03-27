@@ -3,12 +3,12 @@ import styled from 'styled-components'
 
 import { ethers } from 'ethers'
 
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 
-import useSoulSummoner from '../farm/hooks/useSoulSummoner'
-import useApprove from '../farm/hooks/useApprove'
+import { useSoulSummonerContract } from 'hooks/useContract'
+import useApprove from 'features/bond/hooks/useApprove'
 
-import { SoulSummonerAddress } from '../farm/constants'
+import { SOUL_SUMMONER_ADDRESS } from 'constants/addresses'
 
 import {
   FlexText,
@@ -228,7 +228,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       alert('Connect Wallet')
     } else {
       // Checks if SoulSummoner can move tokens
-      const amount = await erc20Allowance(account, SoulSummonerAddress)
+      const amount = await erc20Allowance(account, SOUL_SUMMONER_ADDRESS[chainId | 250])
       if (amount > 0) setApproved(true)
       return amount
     }
@@ -242,7 +242,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       alert('Connect Wallet')
     } else {
       try {
-        const tx = await erc20Approve(SoulSummonerAddress)
+        const tx = await erc20Approve(SOUL_SUMMONER_ADDRESS[chainId | 250])
         await tx?.wait().then(await fetchApproval())
       } catch (e) {
         // alert(e.message)
@@ -306,7 +306,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                   <TokenPair
                     fontSize="1.2rem"
                     target="_blank"
-                    // color="pink"
+                    // color="purple"
                     // href={`https://exchange.soulswap.finance/add/${farm.token1Address[chainId]}/${farm.token2Address[chainId]}`}
                   >
                     {lpSymbol}

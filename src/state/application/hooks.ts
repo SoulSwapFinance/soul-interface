@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { AppDispatch, AppState } from '../index'
 import { addPopup, ApplicationModal, PopupContent, removePopup, setOpenModal } from './actions'
 
@@ -92,6 +92,10 @@ export function useToggleTokenStatsModal(): () => void {
   return useToggleModal(ApplicationModal.SOUL_STATS) 
 }
 
+export function useToggleLuxorStatsModal(): () => void {
+  return useToggleModal(ApplicationModal.LUXOR_STATS) 
+}
+
 
 // returns a function that allows adding a popup
 export function useAddPopup(): (content: PopupContent, key?: string) => void {
@@ -122,6 +126,6 @@ export function useActivePopups(): AppState['application']['popupList'] {
   return useMemo(() => list.filter((item) => item.show), [list])
 }
 
-export function useKashiApprovalPending(): string {
-  return useSelector((state: AppState) => state.application.kashiApprovalPending)
+export function useUnderworldApprovalPending(): string {
+  return useSelector((state: AppState) => state.application.underworldApprovalPending)
 }

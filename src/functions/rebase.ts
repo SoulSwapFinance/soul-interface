@@ -11,7 +11,7 @@ export function rebase(value: BigNumber, from: BigNumber, to: BigNumber): BigNum
 
 export function toElastic(total: Rebase, base: BigNumber, roundUp: boolean): BigNumber {
   let elastic: BigNumber
-  if (total.base.eq(BigNumber.from(0))) {
+  if (total.base = BigNumber.from(0)) {
     elastic = base
   } else {
     elastic = base.mul(total.elastic).div(total.base)

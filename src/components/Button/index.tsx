@@ -1,5 +1,10 @@
 import React from 'react'
+import styled from 'styled-components'
+import { RowBetween } from '../Row'
+import { darken, lighten } from 'polished'
+
 import { classNames } from '../../functions'
+import { Button as RebassButton, ButtonProps } from 'rebass/styled-components'
 
 const SIZE = {
   xs: 'px-2 py-1 text-xs',
@@ -15,8 +20,11 @@ const FLEXED = {
   blue: 'bg-blue bg-opacity-80 flex rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   pink: 'bg-gradient-to-r from-pink to-opaque-pink flex rounded text-high-emphesis opacity-80 hover:opacity-100 disabled:bg-opacity-80',
   purple: 'bg-gradient-to-r from-purple to-opaque-purple flex rounded text-high-emphesis opacity-80 hover:opacity-100 disabled:bg-opacity-80',
+  deepPurple: 'bg-gradient-to-r from-deepPurple to-opaque-purple flex rounded text-high-emphesis opacity-80 hover:opacity-100 disabled:bg-opacity-80',
+  yellow: 'bg-gradient-to-r from-yellow to-opaque-yellow flex rounded text-high-emphesis opacity-80 hover:opacity-100 disabled:bg-opacity-80',
   gray: 'border rounded shadow-sm focus:ring-2 focus:ring-offset-2 bg-dark-700 bg-opacity-80 flex text-primary border-dark-800 hover:bg-opacity-100 focus:ring-offset-dark-700 focus:ring-dark-800 disabled:bg-opacity-80',
-  green: 'bg-green bg-opacity-80 flex rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
+  greydient: 'bg-gradient-to-r from-purple to-opaque-blue to-purple flex text-center rounded text-high-emphesis opacity-80 hover:opacity-100 disabled:bg-opacity-80',
+  green: 'bg-green bg-opacity-80 flex rounded text-high-emphesis hover:bg-opacity-160 disabled:bg-opacity-80',
   'light-green': 'bg-yellow bg-opacity-80 flex rounded text-dark-900 hover:bg-opacity-100 disabled:bg-opacity-80',
   gradient:
     'flex text-high-emphesis transition duration-1000 ease-in-out text-high-emphesis bg-gradient-to-r from-light-purple via-dark-purple to-purple opacity-80 hover:opacity-100 disabled:bg-opacity-80',
@@ -26,12 +34,18 @@ const FILLED = {
   default: 'bg-transparent opacity-80 hover:opacity-100',
   red: 'bg-red bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   blue: 'bg-blue bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
-  pink: 'bg-gradient-to-r from-pink to-opaque-pink w-full rounded text-high-emphesis opacity-80 hover:opacity-100 disabled:bg-opacity-80',
-  purple: 'bg-gradient-to-r from-purple to-opaque-purple w-full rounded text-high-emphesis opacity-80 hover:opacity-100 disabled:bg-opacity-80',
+  pink: 'bg-pink bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
+  purple: 'bg-purple bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
+  deepPurple: 'bg-deepPurple bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
+  yellow: 'bg-yellow bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   gray: 'border rounded shadow-sm focus:ring-2 focus:ring-offset-2 bg-dark-700 bg-opacity-80 w-full text-primary border-dark-800 hover:bg-opacity-100 focus:ring-offset-dark-700 focus:ring-dark-800 disabled:bg-opacity-80',
   green: 'bg-green bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   gradient:
     'w-full text-high-emphesis bg-gradient-to-r from-blue to-purple opacity-80 hover:opacity-100 disabled:bg-opacity-80',
+  gradientBluePurple:
+    'w-full text-high-emphesis bg-gradient-to-r from-blue to-purple opacity-80 hover:opacity-100 disabled:bg-opacity-80',
+    gradientPurpleBlue:
+    'w-full text-high-emphesis bg-gradient-to-r from-purple to-blue opacity-80 hover:opacity-100 disabled:bg-opacity-80',
 }
 
 const OUTLINED = {
@@ -40,6 +54,8 @@ const OUTLINED = {
   blue: 'bg-blue bg-opacity-20 outline-blue rounded text-blue hover:bg-opacity-40 disabled:bg-opacity-20',
   pink: 'bg-pink bg-opacity-20 outline-pink rounded text-pink hover:bg-opacity-40 disabled:bg-opacity-20',
   purple: 'bg-purple bg-opacity-20 outline-purple rounded text-purple hover:bg-opacity-40 disabled:bg-opacity-20',
+  deepPurple: 'bg-deepPurple bg-opacity-20 outline-purple rounded text-purple hover:bg-opacity-40 disabled:bg-opacity-20',
+  yellow: 'bg-yellow bg-opacity-20 outline-purple rounded text-yellow hover:bg-opacity-40 disabled:bg-opacity-20',
   gray: 'bg-dark-700 bg-opacity-20 outline-gray rounded text-gray hover:bg-opacity-40 disabled:bg-opacity-20',
   green: 'bg-green bg-opacity-20 border border-green rounded text-green hover:bg-opacity-40 disabled:bg-opacity-20',
   gradient:
@@ -64,7 +80,7 @@ const VARIANT = {
   flexed: FLEXED,
 }
 
-export type ButtonColor = 'blue' | 'pink' | 'purple' | 'gradient' | 'gray' | 'default' | 'red' | 'green'
+export type ButtonColor = 'blue' | 'pink' | 'purple' | 'gradient' | 'gray' | 'default' | 'red' | 'green' | 'yellow'
 
 export type ButtonSize = 'xs' | 'sm' | 'lg' | 'default' | 'none' | 'nobase'
 
@@ -77,7 +93,91 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   ref?: React.Ref<HTMLButtonElement>
 }
 
-function Button({
+const Base = styled(RebassButton)<{
+  padding?: string
+  width?: string
+  height?: string
+  maxWidth?: string
+  borderRadius?: string
+  altDisabledStyle?: boolean
+}>`
+  padding: ${({ padding }) => (padding ? padding : '1rem')};
+  width: ${({ width }) => (width ? width : '100%')};
+  height: ${({ height }) => (height ? height : '54px')};
+  max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : '320px')};
+  font-weight: 500;
+  text-align: center;
+  border-radius: 12px;
+  border-radius: ${({ borderRadius }) => borderRadius && borderRadius};
+  outline: none;
+  border: 1px solid transparent;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  &:disabled {
+    cursor: auto;
+  }
+  > * {
+    user-select: none;
+  }
+`
+
+export const ButtonPrimary = styled(Base)`
+  background: ${({ theme }) => theme.primary1};
+  color: white;
+  &:focus {
+    opacity: 0.91;
+  }
+  &:hover {
+    opacity: 0.92;
+  }
+  &:active {
+    opacity: 0.93;
+  }
+  &:disabled {
+    background-color: ${({ theme, altDisabledStyle }) => (altDisabledStyle ? theme.primary1 : theme.bg3)};
+    color: ${({ theme, altDisabledStyle }) => (altDisabledStyle ? 'white' : theme.text3)};
+    cursor: auto;
+    box-shadow: none;
+    border: 1px solid transparent;
+    outline: none;
+    opacity: ${({ altDisabledStyle }) => (altDisabledStyle ? '0.5' : '0.5')};
+  }
+`
+
+export const ButtonLight = styled(Base)`
+  background-color: ${({ theme }) => theme.primary5};
+  color: ${({ theme }) => theme.primaryText1};
+  font-size: 16px;
+  font-weight: 500;
+  &:focus {
+    opacity: 0.91;
+  }
+  &:hover {
+    opacity: 0.92;
+  }
+  &:active {
+    opacity: 0.93;
+  }
+  :disabled {
+    opacity: 0.4;
+    :hover {
+      cursor: auto;
+      background-color: ${({ theme }) => theme.primary5};
+      box-shadow: none;
+      border: 1px solid transparent;
+      outline: none;
+    }
+  }
+`
+
+export function Button({
   children,
   className = undefined,
   color = 'default',
@@ -101,8 +201,6 @@ function Button({
   )
 }
 
-export default Button
-
 export function ButtonConfirmed({
   confirmed,
   disabled,
@@ -120,21 +218,22 @@ export function ButtonConfirmed({
       />
     )
   } else {
-    return <Button color={disabled ? 'gray' : 'gradient'} size="lg" disabled={disabled} {...rest} />
+    return <Button color={disabled ? 'gray' : 'purple'} size="lg" disabled={disabled} {...rest} />
   }
 }
 
 export function ButtonError({
   error,
   disabled,
+  size = 'default',
   ...rest
 }: {
   error?: boolean
   disabled?: boolean
 } & ButtonProps) {
   if (error) {
-    return <Button disabled={disabled} color="red" size="lg" {...rest} />
+    return <Button disabled={disabled} color="red" {...rest} />
   } else {
-    return <Button color={disabled ? 'gray' : 'gradient'} disabled={disabled} size="lg" {...rest} />
+    return <Button color={disabled ? 'gray' : 'purple'} disabled={disabled} {...rest} />
   }
 }

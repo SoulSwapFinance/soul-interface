@@ -1,6 +1,6 @@
 import { getAverageBlock, getOneDay, getOneWeek, getCustomDay } from '../fetchers'
 
-import { useActiveWeb3React } from '../../../hooks'
+import { useActiveWeb3React } from 'services/web3'
 import useSWR from 'swr'
 
 export function useOneDay(swrConfig = undefined) {

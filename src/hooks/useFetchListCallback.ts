@@ -1,23 +1,22 @@
-import { AppDispatch } from '../state'
-import { TokenList } from '@uniswap/token-lists'
-import { fetchTokenList } from '../state/lists/actions'
-import { getTokenList } from '../functions/list'
 import { nanoid } from '@reduxjs/toolkit'
-import { resolveENSContentHash } from '../functions/ens'
-import { useActiveWeb3React } from './useActiveWeb3React'
+import { ChainId } from 'sdk'
+import { TokenList } from '@uniswap/token-lists'
+import { resolveENSContentHash } from 'functions/ens'
+import { getNetworkLibrary } from 'functions/getNetworkLibrary'
+import { getTokenList } from 'functions/list'
+import { useActiveWeb3React } from 'services/web3'
+import { useAppDispatch } from 'state/hooks'
+import { fetchTokenList } from 'state/lists/actions'
 import { useCallback } from 'react'
-import { useDispatch } from 'react-redux'
-import { ChainId } from '../sdk'
-import { getNetworkLibrary } from '../connectors'
 
 export function useFetchListCallback(): (listUrl: string, sendDispatch?: boolean) => Promise<TokenList> {
   const { chainId, library } = useActiveWeb3React()
-  const dispatch = useDispatch<AppDispatch>()
+  const dispatch = useAppDispatch()
 
   const ensResolver = useCallback(
     (ensName: string) => {
-      if (!library || chainId !== ChainId.MAINNET) {
-        if (chainId === ChainId.MAINNET) {
+      if (!library || chainId !== ChainId.ETHEREUM) {
+        if (chainId === ChainId.ETHEREUM) {
           const networkLibrary = getNetworkLibrary()
           if (networkLibrary) {
             return resolveENSContentHash(ensName, networkLibrary)

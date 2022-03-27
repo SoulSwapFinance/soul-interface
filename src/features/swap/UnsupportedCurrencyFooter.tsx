@@ -3,15 +3,15 @@ import { Currency, Token } from '../../sdk'
 import React, { useState } from 'react'
 
 import { AutoColumn } from '../../components/Column'
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import CloseIcon from '../../components/CloseIcon'
-import CurrencyLogo from '../../components/CurrencyLogo'
+import { CurrencyLogo } from '../../components/CurrencyLogo'
 import ExternalLink from '../../components/ExternalLink'
-import Modal from '../../components/Modal'
 import { getExplorerLink } from '../../functions/explorer'
 import styled from 'styled-components'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useUnsupportedTokens } from '../../hooks/Tokens'
+import { HeadlessUiModal } from 'components/Modal'
 
 const DetailsFooter = styled.div<{ show: boolean }>`
   padding-top: calc(16px + 2rem);
@@ -29,9 +29,6 @@ const DetailsFooter = styled.div<{ show: boolean }>`
 
 const AddressText = styled.div`
   font-size: 12px;
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    font-size: 10px;
-`}
 `
 
 export default function UnsupportedCurrencyFooter({
@@ -55,7 +52,7 @@ export default function UnsupportedCurrencyFooter({
 
   return (
     <DetailsFooter show={show}>
-      <Modal isOpen={showDetails} onDismiss={() => setShowDetails(false)}>
+      <HeadlessUiModal.Controlled isOpen={showDetails} onDismiss={() => setShowDetails(false)}>
         <div style={{ padding: '2rem' }}>
           <AutoColumn gap="lg">
             <RowBetween>
@@ -92,7 +89,7 @@ export default function UnsupportedCurrencyFooter({
             </AutoColumn>
           </AutoColumn>
         </div>
-      </Modal>
+      </HeadlessUiModal.Controlled>
       <Button variant="empty" style={{ padding: '0px' }} onClick={() => setShowDetails(true)}>
         <div>Read more about unsupported assets</div>
       </Button>

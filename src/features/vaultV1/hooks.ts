@@ -12,7 +12,7 @@ import {
 
 import { Contract } from '@ethersproject/contracts'
 import { Zero } from '@ethersproject/constants'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import zip from 'lodash/zip'
 import { useToken } from '../../hooks/Tokens'
 const { default: axios } = require('axios')

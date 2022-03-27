@@ -1,12 +1,5 @@
-import { useMemo, useState } from 'react'
-
 import { BigNumber } from '@ethersproject/bignumber'
-
-export enum SortableOptions {
-  // 'tvl' = 'TVL',
-  // 'roiPerYear' = 'APY',
-  'rewards' = 'SOUL'
-}
+import { useMemo, useState } from 'react'
 
 function getNested(theObject: any, path: string, separator = '.') {
   try {
@@ -22,12 +15,8 @@ function getNested(theObject: any, path: string, separator = '.') {
   }
 }
 
-const useSortableData = (
-  items: any,
-  config: any = { key: 'rewards', direction: 'descending', value: SortableOptions.rewards }
-) => {
+const useSortableData = (items: any, config: any = null) => {
   const [sortConfig, setSortConfig] = useState(config)
-
   const sortedItems = useMemo(() => {
     if (items && items.length > 0) {
       const sortableItems = [...items]
@@ -35,6 +24,7 @@ const useSortableData = (
         sortableItems.sort((a, b) => {
           const aValue = getNested(a, sortConfig.key)
           const bValue = getNested(b, sortConfig.key)
+
           if (aValue instanceof BigNumber && bValue instanceof BigNumber) {
             if (aValue.lt(bValue)) {
               return sortConfig.direction === 'ascending' ? -1 : 1
@@ -42,6 +32,10 @@ const useSortableData = (
             if (aValue.gt(bValue)) {
               return sortConfig.direction === 'ascending' ? 1 : -1
             }
+          } else if (aValue === Infinity) {
+            return sortConfig.direction === 'ascending' ? -1 : 1
+          } else if (bValue === Infinity) {
+            return sortConfig.direction === 'ascending' ? 1 : -1
           } else {
             if (aValue < bValue) {
               return sortConfig.direction === 'ascending' ? -1 : 1
@@ -58,16 +52,16 @@ const useSortableData = (
     return []
   }, [items, sortConfig])
 
-  const requestSort = (key: any, direction = 'descending') => {
+  const requestSort = (key: any, direction = 'ascending') => {
     if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
       direction = 'descending'
     } else if (sortConfig && sortConfig.key === key && sortConfig.direction === 'descending') {
       direction = 'ascending'
     }
-    setSortConfig({ key, direction, value: SortableOptions[key] })
+    setSortConfig({ key, direction })
   }
 
-  return { items: sortedItems, requestSort, sortConfig, SortableOptions }
+  return { items: sortedItems, requestSort, sortConfig }
 }
 
 export default useSortableData

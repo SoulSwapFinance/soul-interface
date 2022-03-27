@@ -1,6 +1,6 @@
 export enum ONSEN_CATEGORY {
   ALL,
-  KASHI,
+  UNDERWORLD,
   NFT_INDEX,
   BLUE_CHIP,
   NEWLY_ADDED,

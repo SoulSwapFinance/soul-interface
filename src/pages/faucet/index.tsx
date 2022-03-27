@@ -13,7 +13,7 @@ import Container from '../../components/Container'
 import Typography from '../../components/Typography'
 import { i18n } from '@lingui/core'
 import Image from '../../components/Image'
-import { useActiveWeb3React } from '../../hooks'
+import { useActiveWeb3React } from 'services/web3'
 import Web3Connect from '../../components/Web3Connect'
 import { Loader } from 'react-feather'
 import { useETHBalances } from '../../state/wallet/hooks'
@@ -92,7 +92,7 @@ export default function Faucet(): JSX.Element {
             <div className="p-4 mb-3 space-y-1 text-center">
               <Typography component="h1" variant="base">
                 Faucet Balance:{' '}
-                {formatNumberScale(tokenBalance[FAUCET_ADDRESS[chainId]]?.toSignificant(4, undefined, 2) ?? 0, false, 4)} FTM
+                {formatNumberScale(tokenBalance[FAUCET_ADDRESS[chainId]]?.toSignificant(4, undefined, 2) ?? 0, false)} FTM
               </Typography>
               <Typography component="h1" variant="base">
                 Faucet Address: {FAUCET_ADDRESS}

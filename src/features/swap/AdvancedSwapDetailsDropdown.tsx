@@ -1,4 +1,5 @@
-import { AdvancedSwapDetails, AdvancedSwapDetailsProps } from './AdvancedSwapDetails'
+import { AdvancedSwapDetailsProps } from './AdvancedSwapDetails'
+import AdvancedSwapDetails from './AdvancedSwapDetails'
 
 import React from 'react'
 import styled from 'styled-components'

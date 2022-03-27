@@ -1,19 +1,14 @@
-import Button, { ButtonProps } from '../Button'
-import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
-
-import { Activity } from 'react-feather'
-import React from 'react'
-import styled from 'styled-components'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { useWalletModalToggle } from '../../state/application/hooks'
+import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
+import { classNames } from 'functions'
+import { useWalletModalToggle } from 'state/application/hooks'
+import React from 'react'
+import { Activity } from 'react-feather'
 
-const NetworkIcon = styled(Activity)`
-  width: 16px;
-  height: 16px;
-`
+import { Button, ButtonProps } from '../Button'
 
-export default function Web3Connect({ color = 'gray', size = 'sm', className = '', ...rest }: ButtonProps) {
+export default function Web3Connect({ color = 'purple', size = 'sm', className = '', ...rest }: ButtonProps) {
   const { i18n } = useLingui()
   const toggleWalletModal = useWalletModalToggle()
   const { error } = useWeb3React()
@@ -23,9 +18,9 @@ export default function Web3Connect({ color = 'gray', size = 'sm', className = '
       onClick={toggleWalletModal}
     >
       <div className="mr-1">
-        <NetworkIcon />
+        <Activity className="w-4 h-4" />
       </div>
-      {error instanceof UnsupportedChainIdError ? i18n._(t`Wrong Network`) : i18n._(t`Error`)}
+      {error instanceof UnsupportedChainIdError ? i18n._(t`You are on the wrong network`) : i18n._(t`Error`)}
     </div>
   ) : (
     <Button
@@ -33,7 +28,7 @@ export default function Web3Connect({ color = 'gray', size = 'sm', className = '
       onClick={toggleWalletModal}
       variant="outlined"
       color={color}
-      className={className}
+      className={classNames(className, '!border-none')}
       size={size}
       {...rest}
     >

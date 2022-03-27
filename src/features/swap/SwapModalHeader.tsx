@@ -1,127 +1,141 @@
-import { AlertTriangle, ArrowDown } from 'react-feather'
-import { Currency, Percent, TradeType, Trade } from '../../sdk'
-import React, { useState } from 'react'
-import { formatNumberScale, isAddress, shortenAddress } from '../../functions'
-
-import { AdvancedSwapDetails } from './AdvancedSwapDetails'
-import CurrencyLogo from '../../components/CurrencyLogo'
-import TradePrice from './TradePrice'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { useUSDCValue } from '../../hooks/useUSDCPrice'
-import { warningSeverity } from '../../functions'
+import { Percent, TradeType, ZERO } from 'sdk'
+import { Button } from 'components/Button'
+import { CurrencyLogo } from 'components/CurrencyLogo'
+import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
+import Typography from 'components/Typography'
+import SwapDetails from 'features/swap/SwapDetails'
+import { useUSDCValue } from 'hooks/useUSDCPrice'
+import { TradeUnion } from 'types'
+import React, { FC } from 'react'
+import { ArrowDown } from 'react-feather'
 
-// import Card from '../../components/Card'
-// import { Field } from '../../state/swap/actions'
-// import { RowBetween } from '../../components/Row'
-// import Typography from '../../components/Typography'
-// import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+interface SwapModalHeader {
+  trade?: TradeUnion
+  allowedSlippage: Percent
+  recipient?: string
+  showAcceptChanges: boolean
+  onAcceptChanges: () => void
+}
 
-export default function SwapModalHeader({
+const SwapModalHeader: FC<SwapModalHeader> = ({
   trade,
   allowedSlippage,
   recipient,
   showAcceptChanges,
   onAcceptChanges,
-  minerBribe,
-}: {
-  trade: Trade<Currency, Currency, TradeType>
-  allowedSlippage: Percent
-  recipient: string | null
-  showAcceptChanges: boolean
-  onAcceptChanges: () => void
-  minerBribe?: string
-}) {
+}) => {
   const { i18n } = useLingui()
+  const fiatValueInput = useUSDCValue(trade?.inputAmount)
+  const fiatValueOutput = useUSDCValue(trade?.outputAmount)
 
-  const [showInverted, setShowInverted] = useState<boolean>(false)
-
-  // const fiatValueInput = useUSDCValue(trade.inputAmount)
-  // const fiatValueOutput = useUSDCValue(trade.outputAmount)
-
-  const priceImpactSeverity = warningSeverity(trade.priceImpact)
+  const change =
+    ((Number(fiatValueOutput?.toExact()) - Number(fiatValueInput?.toExact())) / Number(fiatValueInput?.toExact())) * 100
 
   return (
-    <div className="grid gap-4">
-      <div className="grid gap-2">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <CurrencyLogo currency={trade.inputAmount.currency} size={48} />
-            <div className="overflow-ellipsis w-[220px] overflow-hidden font-bold text-2xl text-high-emphesis">
-              {formatNumberScale(trade.inputAmount.toSignificant(6), false, 4)}
+    <div className="grid gap-2">
+      <div className="flex flex-col">
+        <HeadlessUiModal.BorderedContent className="bg-dark-1000/40 border !border-dark-800 rounded-2xl">
+          <div className="flex items-start justify-between">
+            <div className="flex items-start gap-3">
+              <div className="flex flex-col gap-1">
+                <Typography variant="h3" weight={700} className="text-high-emphesis">
+                  {trade?.inputAmount.toSignificant(6)}{' '}
+                </Typography>
+                {fiatValueInput?.greaterThan(ZERO) && (
+                  <Typography className="text-secondary">${fiatValueInput.toFixed(2)}</Typography>
+                )}
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <CurrencyLogo
+                currency={trade?.inputAmount.currency}
+                size={18}
+                className="!rounded-full overflow-hidden"
+              />
+              <Typography variant="lg" weight={700} className="text-high-emphesis">
+                {trade?.inputAmount.currency.symbol}
+              </Typography>
             </div>
           </div>
-          <div className="ml-3 text-2xl font-medium text-high-emphesis">{trade.inputAmount.currency.symbol}</div>
+        </HeadlessUiModal.BorderedContent>
+        <div className="flex justify-center -mt-3 -mb-3">
+          <div className="border-2 border-dark-800 shadow-md rounded-full p-1 backdrop-blur-[20px] z-10">
+            <ArrowDown size={18} />
+          </div>
         </div>
-        <div className="ml-3 mr-3 min-w-[24px]">
-          <ArrowDown size={24} />
-        </div>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <CurrencyLogo currency={trade.outputAmount.currency} size={48} />
-            <div
-              className={`overflow-ellipsis w-[220px] overflow-hidden font-bold text-2xl ${
-                priceImpactSeverity > 2 ? 'text-red' : 'text-high-emphesis'
-              }`}
-            >
-              {formatNumberScale(trade.outputAmount.toSignificant(6), false, 4)}
+        <HeadlessUiModal.BorderedContent className="bg-dark-1000/40 border !border-dark-800">
+          <div className="flex items-start justify-between">
+            <div className="flex items-start gap-3">
+              <div className="flex flex-col gap-1">
+                <Typography variant="h3" weight={700} className="text-high-emphesis">
+                  {trade?.outputAmount.toSignificant(6)}{' '}
+                </Typography>
+                {fiatValueOutput?.greaterThan(ZERO) && (
+                  <Typography className="text-secondary">
+                    ${fiatValueOutput?.toFixed(2)}{' '}
+                    <Typography variant="xs" component="span">
+                      ({change.toFixed(2)}%)
+                    </Typography>
+                  </Typography>
+                )}
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <CurrencyLogo
+                currency={trade?.outputAmount.currency}
+                size={18}
+                className="!rounded-full overflow-hidden"
+              />
+              <Typography variant="lg" weight={700} className="text-high-emphesis">
+                {trade?.outputAmount.currency.symbol}
+              </Typography>
             </div>
           </div>
-          <div className="ml-3 text-2xl font-medium text-high-emphesis">{trade.outputAmount.currency.symbol}</div>
-        </div>
+        </HeadlessUiModal.BorderedContent>
       </div>
-
-      <TradePrice
-        price={trade.executionPrice}
-        showInverted={showInverted}
-        setShowInverted={setShowInverted}
-        className="px-0"
+      <SwapDetails
         trade={trade}
+        recipient={recipient}
+        inputCurrency={trade?.inputAmount.currency}
+        outputCurrency={trade?.outputAmount.currency}
+        className="!border-dark-800"
       />
 
-      <AdvancedSwapDetails trade={trade} allowedSlippage={allowedSlippage} minerBribe={minerBribe} />
-
-      {showAcceptChanges ? (
-        <div className="flex items-center justify-between p-2 px-3 border border-dark-600 rounded">
-          <div className="flex items-center justify-start text-sm font-bold uppercase text-high-emphesis">
-            <div className="mr-3 min-w-[24px]">
-              <AlertTriangle size={24} />
-            </div>
-            <span>{i18n._(t`Price Updated`)}</span>
+      {showAcceptChanges && (
+        <HeadlessUiModal.BorderedContent className="border !border-dark-800">
+          <div className="flex items-center justify-between">
+            <Typography variant="sm" weight={700}>
+              {i18n._(t`Price Updated`)}
+            </Typography>
+            <Button variant="outlined" size="xs" color="blue" onClick={onAcceptChanges}>
+              {i18n._(t`Accept`)}
+            </Button>
           </div>
-          <span className="text-sm cursor-pointer text-purple" onClick={onAcceptChanges}>
-            {i18n._(t`Accept`)}
-          </span>
-        </div>
-      ) : null}
-      <div className="justify-start text-sm text-secondary">
-        {trade.tradeType === TradeType.EXACT_INPUT ? (
-          <>
+        </HeadlessUiModal.BorderedContent>
+      )}
+      <div className="justify-start text-sm text-center text-secondary py-2">
+        {trade?.tradeType === TradeType.EXACT_INPUT ? (
+          <Typography variant="xs" className="text-secondary">
             {i18n._(t`Output is estimated. You will receive at least`)}{' '}
-            <b>
+            <Typography variant="xs" className="text-high-emphesis" weight={700} component="span">
               {trade.minimumAmountOut(allowedSlippage).toSignificant(6)} {trade.outputAmount.currency.symbol}
-            </b>{' '}
+            </Typography>{' '}
             {i18n._(t`or the transaction will revert.`)}
-          </>
+          </Typography>
         ) : (
-          <>
+          <Typography variant="xs" className="text-secondary">
             {i18n._(t`Input is estimated. You will sell at most`)}{' '}
-            <b>
-              {trade.maximumAmountIn(allowedSlippage).toSignificant(6)} {trade.inputAmount.currency.symbol}
-            </b>{' '}
+            <Typography variant="xs" className="text-high-emphesis" weight={700} component="span">
+              {trade?.maximumAmountIn(allowedSlippage).toSignificant(6)} {trade?.inputAmount.currency.symbol}
+            </Typography>{' '}
             {i18n._(t`or the transaction will revert.`)}
-          </>
+          </Typography>
         )}
       </div>
-
-      {recipient !== null ? (
-        <div className="flex-start">
-          <>
-            {i18n._(t`Output will be sent to`)}{' '}
-            <b title={recipient}>{isAddress(recipient) ? shortenAddress(recipient) : recipient}</b>
-          </>
-        </div>
-      ) : null}
     </div>
   )
 }
+
+export default SwapModalHeader

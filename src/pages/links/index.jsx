@@ -4,7 +4,7 @@ const Links = () => {
 			frameBorder={"none"}
     		title={"LINKS"}
     		src="https://links.soulswap.finance"
-    		height={"100%" }
+    		height={"800px"}
     		width={"100%"}
     />
 	);

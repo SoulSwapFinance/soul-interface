@@ -1,7 +1,7 @@
-import _Big, { RoundingMode } from 'big.js'
+import _Big from 'big.js'
 
 import { BigintIsh } from '../types'
-import JSBI from 'jsbi'
+import { JSBI } from 'sdk'
 import { Rounding } from '../enums'
 import _Decimal from 'decimal.js-light'
 import invariant from 'tiny-invariant'
@@ -12,19 +12,38 @@ const Big = toFormat(_Big)
 
 Big.strict = true
 
+export const enum RoundingMode {
+  /**
+   * Rounds towards zero.
+   * I.e. truncate, no rounding.
+   */
+  RoundDown = 0,
+  /**
+   * Rounds towards nearest neighbour.
+   * If equidistant, rounds away from zero.
+   */
+  RoundHalfUp = 1,
+  /**
+   * Rounds towards nearest neighbour.
+   * If equidistant, rounds towards even neighbour.
+   */
+  RoundHalfEven = 2,
+  /**
+   * Rounds away from zero.
+   */
+  RoundUp = 3,
+}
+
 const toSignificantRounding = {
   [Rounding.ROUND_DOWN]: Decimal.ROUND_DOWN,
   [Rounding.ROUND_HALF_UP]: Decimal.ROUND_HALF_UP,
-  [Rounding.ROUND_UP]: Decimal.ROUND_UP
+  [Rounding.ROUND_UP]: Decimal.ROUND_UP,
 }
 
 const toFixedRounding = {
-  // [Rounding.ROUND_DOWN]: RoundingMode.RoundDown,
-  // [Rounding.ROUND_HALF_UP]: RoundingMode.RoundHalfUp,
-  // [Rounding.ROUND_UP]: RoundingMode.RoundUp
-  [Rounding.ROUND_DOWN]: Rounding.ROUND_DOWN,
-  [Rounding.ROUND_HALF_UP]: Rounding.ROUND_HALF_UP,
-  [Rounding.ROUND_UP]: Rounding.ROUND_UP
+  [Rounding.ROUND_DOWN]: RoundingMode.RoundDown,
+  [Rounding.ROUND_HALF_UP]: RoundingMode.RoundHalfUp,
+  [Rounding.ROUND_UP]: RoundingMode.RoundUp,
 }
 
 export class Fraction {
@@ -136,7 +155,7 @@ export class Fraction {
 
     Decimal.set({
       precision: significantDigits + 1,
-      rounding: toSignificantRounding[rounding]
+      rounding: toSignificantRounding[rounding],
     })
     const quotient = new Decimal(this.numerator.toString())
       .div(this.denominator.toString())

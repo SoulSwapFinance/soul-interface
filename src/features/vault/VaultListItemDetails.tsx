@@ -3,7 +3,7 @@ import { Token, ZERO } from '../../sdk'
 import { Disclosure, Transition } from '@headlessui/react'
 import React, { useState } from 'react'
 import { usePendingSoul, useUserInfo } from './hooks'
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import Dots from '../../components/Dots'
 import { SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS } from '../../constants/addresses'
 import { Input as NumericalInput } from '../../components/NumericalInput'
@@ -11,17 +11,18 @@ import { formatNumber, formatNumberScale, formatPercent } from '../../functions'
 import { getAddress } from '@ethersproject/address'
 import { t } from '@lingui/macro'
 import { tryParseAmount } from '../../functions/parse'
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import { useLingui } from '@lingui/react'
 import useMasterChef from './useSummoner'
 import usePendingReward from './usePendingReward'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { useTransactionAdder } from '../../state/transactions/hooks'
 import { isMobile } from 'react-device-detect'
-import Modal from '../../components/Modal'
-import ModalHeader from '../../components/ModalHeader'
+import Modal from 'components/DefaultModal'
 import Typography from '../../components/Typography'
 import moment from 'moment'
+import { BigNumber } from '@ethersproject/bignumber'
+import { useActiveWeb3React } from 'services/web3'
+import ModalHeader from 'components/Modal/Header'
 
 const VaultListItem = ({ farm }) => {
   const { i18n } = useLingui()
@@ -63,7 +64,7 @@ const VaultListItem = ({ farm }) => {
       <Modal isOpen={showConfirmation} onDismiss={() => setShowConfirmation(false)}>
         <div className="space-y-4">
           <ModalHeader
-            title={i18n._(t`Confirm ${currentAction.action == 'deposit' ? 'Staking' : 'Harvesting'}`)}
+            header={i18n._(t`Confirm ${currentAction.action == 'deposit' ? 'Staking' : 'Harvesting'}`)}
             onClose={() => setShowConfirmation(false)}
           />
           {/* <Typography variant="lg" className="font-medium pt-4">
@@ -121,9 +122,9 @@ const VaultListItem = ({ farm }) => {
               {account && (
                 <div className="pr-4 mb-2 text-left cursor-pointer text-secondary">
                   {i18n._(t`Wallet Balance`)}:{' '}
-                  {formatNumberScale(balance?.toSignificant(4, undefined, 2) ?? 0, false, 4)}
+                  {formatNumberScale(balance?.toSignificant(4, undefined, 2) ?? 0, false)}
                   {farm.lpPrice && balance
-                    ? ` (` + formatNumberScale(farm.lpPrice * Number(balance?.toFixed(18) ?? 0), true, 2) + `)`
+                    ? ` (` + formatNumberScale(farm.lpPrice * Number(balance?.toFixed(18) ?? 0), true) + `)`
                     : ``}
                 </div>
               )}
@@ -136,7 +137,7 @@ const VaultListItem = ({ farm }) => {
                 {account && (
                   <Button
                     variant="outlined"
-                    color="pink"
+                    color="purple"
                     size="xs"
                     onClick={() => {
                       if (!balance.equalTo(ZERO)) {
@@ -172,7 +173,9 @@ const VaultListItem = ({ farm }) => {
                       setPendingTx(true)
                       try {
                         // KMP decimals depend on asset, SLP is always 18
-                        const tx = await deposit(farm?.id, depositValue.toBigNumber(liquidityToken?.decimals))
+                        const tx = await deposit(farm?.id, 
+                          new BigNumber(depositValue, liquidityToken?.decimals.toString()))
+                          // .toBigNumber(liquidityToken?.decimals))
 
                         addTransaction(tx, {
                           summary: `${i18n._(t`Deposit`)} ${
@@ -211,7 +214,7 @@ const VaultListItem = ({ farm }) => {
                 <div className="pr-4 mb-2 text-left cursor-pointer text-secondary">
                   {i18n._(t`Your Staked`)}: {formatNumberScale(amount?.toSignificant(6)) ?? 0}
                   {farm.lpPrice && amount
-                    ? ` (` + formatNumberScale(farm.lpPrice * Number(amount?.toSignificant(18) ?? 0), true, 2) + `)`
+                    ? ` (` + formatNumberScale(farm.lpPrice * Number(amount?.toSignificant(18) ?? 0), true) + `)`
                     : ``}
                 </div>
               )}
@@ -224,7 +227,7 @@ const VaultListItem = ({ farm }) => {
                 {account && (
                   <Button
                     variant="outlined"
-                    color="pink"
+                    color="purple"
                     size="xs"
                     onClick={() => {
                       if (!amount.equalTo(ZERO)) {
@@ -254,7 +257,9 @@ const VaultListItem = ({ farm }) => {
                   setPendingTx(true)
                   try {
                     // KMP decimals depend on asset, SLP is always 18
-                    const tx = await withdraw(farm?.id, withdrawValue.toBigNumber(liquidityToken?.decimals))
+                    const tx = await withdraw(farm?.id, 
+                      new BigNumber(withdrawValue, liquidityToken?.decimals.toString()))
+                      // .toBigNumber(liquidityToken?.decimals))
                     addTransaction(tx, {
                       summary: `${i18n._(t`Withdraw`)} ${
                         farm.pair.token1

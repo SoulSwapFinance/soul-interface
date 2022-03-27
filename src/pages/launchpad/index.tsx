@@ -70,7 +70,7 @@ export default function Launchpad(): JSX.Element {
                 </Typography>
                 <br />
                 <Typography variant="base" className={'max-w-xl text-gray-400'}>
-                  Interested in launching your project with us?
+                  Interested in launching with us?
                   <br />
                   <a
                     href="https://forms.gle/oDFKZAvC8jRbAfw29"
@@ -178,7 +178,7 @@ export default function Launchpad(): JSX.Element {
                               <div className="flex flex-col">
                                 <Typography variant="base">Total Raise</Typography>
                                 <Typography variant="lg" className="font-bold text-right">
-                                  {formatNumberScale(p.raise, true, 2)}
+                                  {formatNumberScale(p.raise, true)}
                                 </Typography>
                               </div>
                             </div>

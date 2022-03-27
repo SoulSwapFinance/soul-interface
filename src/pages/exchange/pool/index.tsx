@@ -6,7 +6,7 @@ import { toV2LiquidityToken, useTrackedTokenPairs } from '../../../state/user/ho
 import Alert from '../../../components/Alert'
 import { BIG_INT_ZERO } from '../../../constants'
 import Back from '../../../components/Back'
-import Button from '../../../components/Button'
+import { Button } from '../../../components/Button'
 import Card from '../../../components/Card'
 import Container from '../../../components/Container'
 import Dots from '../../../components/Dots'
@@ -20,7 +20,7 @@ import { MigrationSupported } from '../../../features/migration'
 import Typography from '../../../components/Typography'
 import Web3Connect from '../../../components/Web3Connect'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useETHBalances } from '../../../state/wallet/hooks'
 import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
@@ -28,12 +28,16 @@ import { useTokenBalancesWithLoadingIndicator } from '../../../state/wallet/hook
 import { useV2Pairs } from '../../../hooks/useV2Pairs'
 import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
 import { chain } from 'lodash'
+import MainHeader from 'features/swap/MainHeader'
+import NavLink from 'components/NavLink'
+import { useV2PairsWithLiquidity } from 'features/trident/migrate/context/useV2PairsWithLiquidity'
 // import SoulLogo from '../../../components/SoulLogo'
 
 export default function Pool() {
   const { i18n } = useLingui()
   const router = useRouter()
   const { account, chainId } = useActiveWeb3React()
+  const { loading, pairs } = useV2PairsWithLiquidity()
 
   // fetch the user's balances of all tracked V2 LP tokens
   const trackedTokenPairs = useTrackedTokenPairs()
@@ -52,25 +56,25 @@ export default function Pool() {
     () => tokenPairsWithLiquidityTokens.map((tpwlt) => tpwlt.liquidityToken),
     [tokenPairsWithLiquidityTokens]
   )
-  const [v2PairsBalances, fetchingV2PairBalances] = useTokenBalancesWithLoadingIndicator(
-    account ?? undefined,
-    liquidityTokens
-  )
+  // const [v2PairsBalances, fetchingV2PairBalances] = useTokenBalancesWithLoadingIndicator(
+  //   account ?? undefined,
+  //   liquidityTokens
+  // )
 
   // fetch the reserves for all V2 pools in which the user has a balance
-  const liquidityTokensWithBalances = useMemo(
-    () =>
-      tokenPairsWithLiquidityTokens.filter(({ liquidityToken }) =>
-        v2PairsBalances[liquidityToken?.address]?.greaterThan('0')
-      ),
-    [tokenPairsWithLiquidityTokens, v2PairsBalances]
-  )
+  // const liquidityTokensWithBalances = useMemo(
+  //   () =>
+  //     tokenPairsWithLiquidityTokens.filter(({ liquidityToken }) =>
+  //       v2PairsBalances[liquidityToken?.address]?.greaterThan('0')
+  //     ),
+  //   [tokenPairsWithLiquidityTokens, v2PairsBalances]
+  // )
 
-  const v2Pairs = useV2Pairs(liquidityTokensWithBalances.map(({ tokens }) => tokens))
-  const v2IsLoading =
-    fetchingV2PairBalances || v2Pairs?.length < liquidityTokensWithBalances.length || v2Pairs?.some((V2Pair) => !V2Pair)
+  // const v2Pairs = useV2Pairs(liquidityTokensWithBalances.map(({ tokens }) => tokens))
+  // const v2IsLoading =
+  //   fetchingV2PairBalances || v2Pairs?.length < liquidityTokensWithBalances.length || v2Pairs?.some((V2Pair) => !V2Pair)
 
-  const allV2PairsWithLiquidity = v2Pairs.map(([, pair]) => pair).filter((v2Pair): v2Pair is Pair => Boolean(v2Pair))
+  // const allV2PairsWithLiquidity = v2Pairs.map(([, pair]) => pair).filter((v2Pair): v2Pair is Pair => Boolean(v2Pair))
 
   // TODO: Replicate this!
   // show liquidity even if its deposited in rewards contract
@@ -99,51 +103,52 @@ export default function Pool() {
           content="Soul liquidity pools are markets for trades between the two tokens, you can provide these tokens and become a liquidity provider to earn 0.25% of fees from trades."
         />
       </Head>
+
+      {/* <MainHeader /> */}
       {/* <SoulLogo /> */}
-      <br /> <br />
+      {/* <br /> <br /> */}
       <DoubleGlowShadowV2 opacity="0.6">
-        <Container maxWidth="2xl" className="space-y-6">
-          <Alert
+        <Container maxWidth="2xl" className="space-y-3">
+        {/* <Alert
           title={i18n._(t`Liquidity Provider Rewards`)}
           message={i18n._(t`Liquidity providers earn a 0.25% fee on all trades proportional to their share of
                         the pool. Fees are added to the pool, accrue in real time and can be claimed by
                         withdrawing your liquidity at any time.`)}
           type="information"
-        />
+        /> */}
 
-          <div className="p-4 space-y-4 rounded bg-dark-900">
-            <div className="p-4 mb-3 space-y-3">
+          <div className="p-4 space-y-2 rounded bg-dark-1200">
+            <div className="p-4 mb-00 space-y-3">
               <div className="text-center">
                 <Typography component="h1" variant="h2">
-                  {i18n._(t``)}
                   {i18n._(t`Liquidity Positions`)}
                 </Typography>
               </div>
             </div>
-
+            <div className="flex mb-4 items-center justify-center">
+                  <Button variant="filled" color="purple" size="lg">
+                  <NavLink href={'/info/dashboard'}>
+                        <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                        View Account Analytics <span> ↗</span>
+                        </a>
+                  </NavLink>
+                  </Button>
+              </div>
             <div className="grid grid-flow-row gap-3">
-              {!account ? (
-                <Web3Connect size="lg" color="gradient" className="w-full" />
-              ) : v2IsLoading ? (
-                <Empty>
-                  <Dots>{i18n._(t`Loading`)}</Dots>
-                </Empty>
-              ) : allV2PairsWithLiquidity?.length > 0 ? (
-                <>
-                  <div className="flex items-center justify-center">
-                  <ExternalLink
-                      href={'/analytics/dashboard'}
-                  >
-                    Account Analytics and Accrued Fees <span> ↗</span>
-                  </ExternalLink>
-                </div>
-                  {allV2PairsWithLiquidity.map((v2Pair) => (
-                    <FullPositionCard
-                      key={v2Pair.liquidityToken.address}
-                      pair={v2Pair}
-                      stakedBalance={CurrencyAmount.fromRawAmount(v2Pair.liquidityToken, '0')}
-                    />
-                  ))}
+                  <div className="mb-1 mt-1" />
+                  {loading ? (
+              <Empty>
+                <Dots>{i18n._(t`Loading`)}</Dots>
+              </Empty>
+            ) : pairs?.length > 0 ? (
+              <>
+                {pairs?.map((v2Pair) => (
+                  <FullPositionCard
+                    key={v2Pair.liquidityToken.address}
+                    pair={v2Pair}
+                    stakedBalance={CurrencyAmount.fromRawAmount(v2Pair.liquidityToken, '0')}
+                  />
+                ))}
                 </>
               ) : (
                 <Empty className="flex text-lg text-center text-low-emphesis">
@@ -154,21 +159,27 @@ export default function Pool() {
                 <div className={classNames('grid gap-4', migrationSupported ? 'grid-cols-3' : 'grid-cols-2')}>
                   <Button
                     id="add-pool-button"
+                    variant="filled"
                     color="gradient"
                     className="grid items-center justify-center grid-flow-col gap-2 whitespace-nowrap"
                     onClick={() => router.push(`/exchange/add/${currencyId(NATIVE[chainId])}/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07`)}
                   >
                     {i18n._(t`Add`)}
                   </Button>
-                  <Button id="add-pool-button" color="gray" onClick={() => router.push(`/exchange/find`)}>
+                  <Button 
+                    id="add-pool-button"
+                    variant="filled"
+                    color="gradient" 
+                    onClick={() => router.push(`/exchange/find`)}
+                  >
                     {i18n._(t`Import`)}
                   </Button>
 
-                  {migrationSupported && (
+                  {/* {migrationSupported && (
                     <Button id="create-pool-button" color="gray" onClick={() => router.push(`/migrate`)}>
                       {i18n._(t`Migrate`)}
                     </Button>
-                  )}
+                  )} */}
                 </div>
               )}
             </div>

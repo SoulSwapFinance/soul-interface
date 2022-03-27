@@ -1,23 +1,21 @@
-import { Currency } from '../../sdk'
-import Button from '../../components/Button'
-import { COMMON_BASES } from '../../constants/routing'
-import CurrencyLogo from '../../components/CurrencyLogo'
-import QuestionHelper from '../../components/QuestionHelper'
-import React from 'react'
-import Typography from '../../components/Typography'
-import { currencyId } from '../../functions'
+import { Currency } from 'sdk'
+import { Button } from 'components/Button'
+import { COMMON_BASES } from 'constants/routing'
+import { CurrencyLogo } from 'components/CurrencyLogo'
+import QuestionHelper from 'components/QuestionHelper'
+import { currencyId } from 'functions'
+import { useCurrencyModalContext } from 'modals/SearchModal/CurrencySearchModal'
+import { useActiveWeb3React } from 'services/web3'
+import React, { FC } from 'react'
 
-export default function CommonBases({
-  chainId,
-  onSelect,
-  selectedCurrency,
-}: {
-  chainId?: number
-  selectedCurrency?: Currency | null
-  onSelect: (currency: Currency) => void
-}) {
+const CommonBases: FC = () => {
+  const { chainId } = useActiveWeb3React()
+  const { currency: selectedCurrency, onSelect } = useCurrencyModalContext()
+
   const bases = typeof chainId !== 'undefined' ? COMMON_BASES[chainId] ?? [] : []
 
+  if (bases.length === 0) return <></>
+  
   return (
     <div className="flex items-center flex-col space-y-2 mb-2">
       <div className="flex flex-row">
@@ -47,3 +45,5 @@ export default function CommonBases({
     </div>
   )
 }
+
+export default CommonBases

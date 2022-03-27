@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/link-passhref */
-import { useActiveWeb3React } from '../../hooks'
+import { useActiveWeb3React } from 'services/web3'
 import Head from 'next/head'
 import React, { useCallback, useEffect, useState } from 'react'
 import Search from '../../components/Search'
@@ -17,7 +17,7 @@ import { Disclosure } from '@headlessui/react'
 import moment from 'moment'
 import { useToken } from '../../hooks/Tokens'
 import { CurrencyAmount } from '../../sdk'
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import { getAddress } from '@ethersproject/address'
 
 export default function Locker(): JSX.Element {

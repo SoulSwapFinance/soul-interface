@@ -24,8 +24,10 @@ export class Token extends AbstractCurrency {
    * Returns true if the two tokens are equivalent, i.e. have the same chainId and address.
    * @param other other token to compare
    */
-  public equals(other: Currency): boolean {
-    return other.isToken && this.chainId === other.chainId && this.address === other.address
+
+  // note: added to include Token
+  public equals(other: Currency | Token): boolean {
+    return other?.isToken && this.chainId === other.chainId && this.address === other.address
   }
 
   /**

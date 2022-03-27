@@ -10,7 +10,6 @@ const YEARN_LIST = 'https://yearn.science/static/tokenlist.json'
 const NFTX_LIST_V1 = 'https://nftx.ethereumdb.com/v1/tokenlist/'
 const NFTX_LIST_V2 = 'https://nftx.ethereumdb.com/v2/tokenlist/'
 const SYNTHETIX_LIST = 'synths.snx.eth'
-const OPYN_LIST = 'https://raw.githubusercontent.com/opynfinance/opyn-tokenlist/master/opyn-v1.tokenlist.json'
 const AAVE_LIST = 'tokenlist.aave.eth'
 const CMC_ALL_LIST = 'defi.cmc.eth'
 const CMC_STABLECOIN = 'stablecoin.cmc.eth'
@@ -39,7 +38,6 @@ export const DEFAULT_LIST_OF_LISTS: string[] = [
   ROLL_LIST,
   // COINGECKO_LIST,
   KLEROS_LIST,
-  OPYN_LIST,
   NFTX_LIST_V1,
   NFTX_LIST_V2,
   OPTIMISM_LIST,

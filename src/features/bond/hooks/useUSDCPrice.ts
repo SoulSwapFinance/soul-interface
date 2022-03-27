@@ -1,20 +1,20 @@
 import { ChainId, Currency, CurrencyAmount, Price, Token } from '../../../sdk'
 
-import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
 import { useMemo } from 'react'
 import { useV2TradeExactOut } from '../../../hooks/useV2Trades'
+import { useActiveWeb3React } from 'services/web3'
 
 // import { wrappedCurrency } from "../functions/currency/wrappedCurrency";
 
 export const USDC = {
-  [ChainId.MAINNET]: new Token(ChainId.MAINNET, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD Coin'),
+  [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD Coin'),
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6, 'USDC', 'USD Coin'),
 }
 
 // Stablecoin amounts used when calculating spot price for a given currency.
 // The amount is large enough to filter low liquidity pairs.
 const STABLECOIN_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.MAINNET]: CurrencyAmount.fromRawAmount(USDC[ChainId.MAINNET], 100_000e6),
+  [ChainId.ETHEREUM]: CurrencyAmount.fromRawAmount(USDC[ChainId.ETHEREUM], 100_000e6),
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(USDC[ChainId.FANTOM], 100_000e6)
 }
 

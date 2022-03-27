@@ -3,7 +3,7 @@ const plugin = require('tailwindcss/plugin')
 
 module.exports = {
   // important: '#__next',
-  // darkMode: true,
+  darkMode: true,
   mode: 'jit',
   future: {
     purgeLayersByDefault: true,
@@ -26,7 +26,7 @@ module.exports = {
         background: {
           'dark-1000': '#0D0415',
           'dark-900': '#161522',
-          'dark-800': '#202231',
+          'dark-800': '#360069',
           'dark-pink-red': '#4e3034',
         },
         border: {
@@ -38,11 +38,12 @@ module.exports = {
       },
       colors: {
         purple: '#a755dd',
+        deepPurple: '#9756F7',
         blue: '#0993ec',
         pink: '#f338c3',
         green: '#7cff6b',
         red: '#ff3838',
-        yellow: '#ffd166',
+        yellow: '#fff300',
 
         'opaque-blue': '#0993ec80',
         'opaque-purple': '#B993EC',
@@ -59,7 +60,7 @@ module.exports = {
         'dark-850': '#1d1e2c',
         'dark-800': '#202231',
         'dark-700': '#2E3348',
-        'dark-600': '#1C2D49',
+        'dark-600': '#B485FF',
         'dark-500': '#223D5E',
         'low-emphesis': '#575757',
         primary: '#BFBFBF',

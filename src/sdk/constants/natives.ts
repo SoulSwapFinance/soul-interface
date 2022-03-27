@@ -7,7 +7,7 @@ import {
 import { ChainId } from '../enums'
 
 export const NATIVE = {
-  [ChainId.MAINNET]: Ether.onChain(ChainId.MAINNET),
+  [ChainId.ETHEREUM]: Ether.onChain(ChainId.ETHEREUM),
   [ChainId.BSC]: Binance.onChain(ChainId.BSC),
   [ChainId.FANTOM]: Fantom.onChain(ChainId.FANTOM),
   [ChainId.FANTOM_TESTNET]: Fantom.onChain(ChainId.FANTOM_TESTNET)

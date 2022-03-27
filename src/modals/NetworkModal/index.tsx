@@ -1,13 +1,16 @@
-import { NETWORK_ICON, NETWORK_LABEL } from '../../constants/networks'
-import { useModalOpen, useNetworkModalToggle } from '../../state/application/hooks'
-import { ApplicationModal } from '../../state/application/actions'
-import { ChainId } from '../../sdk'
-import Image from 'next/image'
-import Modal from '../../components/Modal'
-import ModalHeader from '../../components/ModalHeader'
-import React from 'react'
+import { t } from '@lingui/macro'
+import { useLingui } from '@lingui/react'
+import { ChainId } from 'sdk'
+import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
+import Typography from 'components/Typography'
+import { NETWORK_ICON, NETWORK_LABEL } from 'config/networks'
+import { classNames } from 'functions'
+import { useActiveWeb3React } from 'services/web3'
+import { ApplicationModal } from 'state/application/actions'
+import { useModalOpen, useNetworkModalToggle } from 'state/application/hooks'
 import cookie from 'cookie-cutter'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import Image from 'next/image'
+import React, { FC } from 'react'
 
 export const SUPPORTED_NETWORKS: {
   [chainId in ChainId]?: {
@@ -22,7 +25,7 @@ export const SUPPORTED_NETWORKS: {
     blockExplorerUrls: string[]
   }
 } = {
- [ChainId.MAINNET]: {
+  [ChainId.ETHEREUM]: {
     chainId: '0x1',
     chainName: 'Ethereum',
     nativeCurrency: {
@@ -32,31 +35,28 @@ export const SUPPORTED_NETWORKS: {
     },
     rpcUrls: ['https://mainnet.infura.io/v3'],
     blockExplorerUrls: ['https://etherscan.com'],
-    },
-    
-      [ChainId.BSC]: {
-    chainId: '0x38',
-    chainName: 'Binance Smart Chain',
-    nativeCurrency: {
-      name: 'Binance Coin',
-      symbol: 'BNB',
-      decimals: 18,
-    },
-    rpcUrls: ['https://bsc-dataseed.binance.org'],
-    blockExplorerUrls: ['https://bscscan.com'],
-    
   },
-  
   [ChainId.FANTOM]: {
-    chainId: '0xFA',
+    chainId: '0xfa',
     chainName: 'Fantom',
     nativeCurrency: {
       name: 'Fantom',
       symbol: 'FTM',
       decimals: 18,
     },
-    rpcUrls: ['https://rpc.ftm.tools'],
+    rpcUrls: ['https://rpc.ftm.tools', 'https://rpcapi.fantom.network'],
     blockExplorerUrls: ['https://ftmscan.com'],
+  },
+  [ChainId.BSC]: {
+    chainId: '0x38',
+    chainName: 'Binance Smart Chain',
+    nativeCurrency: {
+      name: 'Binance',
+      symbol: 'BNB',
+      decimals: 18,
+    },
+    rpcUrls: ['https://bsc-dataseed.binance.org'],
+    blockExplorerUrls: ['https://bscscan.com'],
   },
   [ChainId.FANTOM_TESTNET]: {
     chainId: '0xFA2',
@@ -77,8 +77,8 @@ export const SUPPORTED_NETWORKS: {
   //     symbol: 'MATIC',
   //     decimals: 18,
   //   },
-  //   rpcUrls: ['https://rpc-mainnet.maticvigil.com'], // ['https://matic-mainnet.chainstacklabs.com/'],
-  //   blockExplorerUrls: ['https://explorer-mainnet.maticvigil.com'],
+  //   rpcUrls: ['https://polygon-rpc.com'], // ['https://matic-mainnet.chainstacklabs.com/'],
+  //   blockExplorerUrls: ['https://polygonscan.com'],
   // },
   // [ChainId.HECO]: {
   //   chainId: '0x80',
@@ -120,14 +120,14 @@ export const SUPPORTED_NETWORKS: {
   // },
   // [ChainId.AVALANCHE]: {
   //   chainId: '0xA86A',
-  //   chainName: 'Avalanche',
+  //   chainName: 'Avalanche Mainnet C-Chain',
   //   nativeCurrency: {
   //     name: 'Avalanche Token',
   //     symbol: 'AVAX',
   //     decimals: 18,
   //   },
   //   rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
-  //   blockExplorerUrls: ['https://cchain.explorer.avax.network'],
+  //   blockExplorerUrls: ['https://snowtrace.io'],
   // },
   // [ChainId.OKEX]: {
   //   chainId: '0x42',
@@ -149,7 +149,7 @@ export const SUPPORTED_NETWORKS: {
   //     decimals: 18,
   //   },
   //   rpcUrls: ['https://arb1.arbitrum.io/rpc'],
-  //   blockExplorerUrls: ['https://mainnet-arb-explorer.netlify.app'],
+  //   blockExplorerUrls: ['https://arbiscan.io'],
   // },
   // [ChainId.CELO]: {
   //   chainId: '0xA4EC',
@@ -162,9 +162,54 @@ export const SUPPORTED_NETWORKS: {
   //   rpcUrls: ['https://forno.celo.org'],
   //   blockExplorerUrls: ['https://explorer.celo.org'],
   // },
+  // [ChainId.MOONRIVER]: {
+  //   chainId: '0x505',
+  //   chainName: 'Moonriver',
+  //   nativeCurrency: {
+  //     name: 'Moonriver',
+  //     symbol: 'MOVR',
+  //     decimals: 18,
+  //   },
+  //   rpcUrls: ['https://rpc.moonriver.moonbeam.network'],
+  //   blockExplorerUrls: ['https://moonriver.moonscan.io'],
+  // },
+  // [ChainId.FUSE]: {
+  //   chainId: '0x7A',
+  //   chainName: 'Fuse',
+  //   nativeCurrency: {
+  //     name: 'Fuse',
+  //     symbol: 'FUSE',
+  //     decimals: 18,
+  //   },
+  //   rpcUrls: ['https://rpc.fuse.io'],
+  //   blockExplorerUrls: ['https://explorer.fuse.io'],
+  // },
+  // [ChainId.TELOS]: {
+  //   chainId: '0x28',
+  //   chainName: 'Telos',
+  //   nativeCurrency: {
+  //     name: 'Telos',
+  //     symbol: 'TLOS',
+  //     decimals: 18,
+  //   },
+  //   rpcUrls: ['https://mainnet.telos.net/evm'],
+  //   blockExplorerUrls: ['https://rpc1.us.telos.net/v2/explore'],
+  // },
+  // [ChainId.PALM]: {
+  //   chainId: '0x2A15C308D',
+  //   chainName: 'Palm',
+  //   nativeCurrency: {
+  //     name: 'Palm',
+  //     symbol: 'PALM',
+  //     decimals: 18,
+  //   },
+  //   rpcUrls: ['https://palm-mainnet.infura.io/v3/da5fbfafcca14b109e2665290681e267'],
+  //   blockExplorerUrls: ['https://explorer.palm.io'],
+  // },
 }
 
-export default function NetworkModal(): JSX.Element | null {
+const NetworkModal: FC = () => {
+  const { i18n } = useLingui()
   const { chainId, library, account } = useActiveWeb3React()
   const networkModalOpen = useModalOpen(ApplicationModal.NETWORK)
   const toggleNetworkModal = useNetworkModalToggle()
@@ -172,80 +217,76 @@ export default function NetworkModal(): JSX.Element | null {
   if (!chainId) return null
 
   return (
-    <Modal isOpen={networkModalOpen} onDismiss={toggleNetworkModal} maxWidth={672}>
-      <ModalHeader onClose={toggleNetworkModal} title="Select Network" />
-      <div className="mb-6 text-lg text-primary">
-        You are browsing <span className="font-bold text-pink">SOUL</span> on <span className="font-bold text-blue">{NETWORK_LABEL[chainId]}</span>.
-        <br /> More chains coming soon!
-      </div>
-
-      <div className="grid grid-flow-row-dense grid-cols-1 gap-5 overflow-y-auto md:grid-cols-2">
-        {[
-          ChainId.MAINNET,
-          ChainId.BSC,
-          // ChainId.MATIC,
-          ChainId.FANTOM,
-          ChainId.FANTOM_TESTNET,
-          // ChainId.ARBITRUM,
-          // ChainId.OKEX,
-          // ChainId.HECO,
-          // ChainId.XDAI,
-          // ChainId.HARMONY,
-          // ChainId.AVALANCHE,
-          // ChainId.CELO,
-        ].map((key: ChainId, i: number) => {
-          if (chainId === key) {
-            return (
-              <button key={i} className="w-full col-span-1 p-px rounded bg-gradient-to-r from-blue to-pink">
-                <div className="flex items-center w-full h-full p-3 space-x-3 rounded bg-dark-1000">
+    <HeadlessUiModal.Controlled isOpen={networkModalOpen} onDismiss={toggleNetworkModal}>
+      <div className="flex flex-col gap-4">
+        <HeadlessUiModal.Header header={i18n._(t`Select Network`)} onClose={toggleNetworkModal} />
+        <div className="grid grid-flow-row-dense grid-cols-1 gap-4 overflow-y-auto md:grid-cols-2">
+          {[
+            ChainId.ETHEREUM,
+            ChainId.FANTOM,
+            ChainId.BSC,
+            ChainId.FANTOM_TESTNET,
+          ].map((key: ChainId, i: number) => {
+            if (chainId === key) {
+              return (
+                <div
+                  key={i}
+                  className="bg-[rgba(0,0,0,0.2)] focus:outline-none flex items-center gap-4 w-full px-4 py-3 rounded border border-purple cursor-default"
+                >
                   <Image
                     src={NETWORK_ICON[key]}
-                    alt={`Switch to ${NETWORK_LABEL[key]} Network`}
+                    alt="Switch Network"
                     className="rounded-md"
                     width="32px"
                     height="32px"
                   />
-                  <div className="font-bold text-primary">{NETWORK_LABEL[key]}</div>
+                  <Typography weight={700} className="text-high-emphesis">
+                    {NETWORK_LABEL[key]}
+                  </Typography>
                 </div>
+              )
+            }
+            return (
+              <button
+                key={i}
+                onClick={async () => {
+                  console.debug(`Switching to chain ${key}`, SUPPORTED_NETWORKS[key])
+                  toggleNetworkModal()
+                  const params = SUPPORTED_NETWORKS[key]
+                  cookie.set('chainId', key, params)
+
+                  try {
+                    await library?.send('wallet_switchEthereumChain', [{ chainId: `0x${key.toString(16)}` }, account])
+                  } catch (switchError) {
+                    // This error code indicates that the chain has not been added to MetaMask.
+                    // @ts-ignore TYPE NEEDS FIXING
+                    if (switchError.code === 4902) {
+                      try {
+                        await library?.send('wallet_addEthereumChain', [params, account])
+                      } catch (addError) {
+                        // handle "add" error
+                        console.error(`Add chain error ${addError}`)
+                      }
+                    }
+                    console.error(`Switch chain error ${switchError}`)
+                    // handle other "switch" errors
+                  }
+                }}
+                className={classNames(
+                  'bg-[rgba(0,0,0,0.2)] focus:outline-none flex items-center gap-4 w-full px-4 py-3 rounded border border-dark-700 hover:border-blue'
+                )}
+              >
+                <Image src={NETWORK_ICON[key]} alt="Switch Network" className="rounded-md" width="32px" height="32px" />
+                <Typography weight={700} className="text-high-emphesis">
+                  {NETWORK_LABEL[key]}
+                </Typography>
               </button>
             )
-          }
-          return (
-            <button
-              key={i}
-              onClick={() => {
-                toggleNetworkModal()
-                const params = SUPPORTED_NETWORKS[key]
-                cookie.set('chainId', key)
-                if (key === ChainId.MAINNET) {
-                  library?.send('wallet_switchEthereumChain', [{ chainId: '0x1' }, account])
-                } else {
-                  library?.send('wallet_addEthereumChain', [params, account])
-                }
-              }}
-              className="flex items-center w-full col-span-1 p-3 space-x-3 rounded cursor-pointer bg-dark-800 hover:bg-dark-700"
-            >
-              <Image src={NETWORK_ICON[key]} alt="Switch Network" className="rounded-md" width="32px" height="32px" />
-              <div className="font-bold text-primary">{NETWORK_LABEL[key]}</div>
-            </button>
-          )
-        })}
-        {/* {['Clover', 'Telos', 'Optimism'].map((network, i) => (
-          <button
-            key={i}
-            className="flex items-center w-full col-span-1 p-3 space-x-3 rounded cursor-pointer bg-dark-800 hover:bg-dark-700"
-          >
-            <Image
-              src="/images/tokens/unknown.png"
-              alt="Switch Network"
-              className="rounded-md"
-              width="32px"
-              height="32px"
-            />
-            <div className="font-bold text-primary">{network} (Coming Soon)</div>
-          </button>
-        ))} */}
+          })}
+        </div>
       </div>
-    </Modal>
+    </HeadlessUiModal.Controlled>
   )
 }
+
+export default NetworkModal

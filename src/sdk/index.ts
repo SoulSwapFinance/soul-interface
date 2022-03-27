@@ -1,4 +1,4 @@
-import JSBI from 'jsbi'
+import { JSBI } from '@sushiswap/core-sdk'
 
 // Export JSBI
 export { JSBI }
@@ -6,10 +6,11 @@ export { JSBI }
 export * from './constants'
 export * from './errors'
 export * from './entities'
+export * from './interfaces'
 export * from './functions'
 export * from './router'
 export * from './enums'
 export * from './router'
-export * from './types'
-export * from './utils/MultiRouterMath'
-// export * from './limitorder'
+export * from '../utils'
+export * from '../types'
+export * from '../utils'

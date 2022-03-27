@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "target": "es5",
     "lib": [
       "dom",
@@ -17,12 +18,15 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "incremental": true
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx", "src/pages/farm/index.jsx", "src/features/bond/BondRowRender.tsx"],
+    "**/*.tsx",
+    "src/features/bond/BondRowRender.tsx"
+  ],
   "exclude": [
     "node_modules"
   ]

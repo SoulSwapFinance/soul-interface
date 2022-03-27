@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Image from 'next/image'
 import { ethers } from 'ethers'
 
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 
 import useSoulBond from './hooks/useSoulBond'
 import useApprove from './hooks/useApprove'
@@ -22,12 +22,13 @@ import {
   Input,
   SubmitButton,
 } from './BondStyles'
+import { formatNumber } from 'functions/format'
 
 import { Wrap, ClickableText, Heading, Text, ExternalLink } from '../../components/ReusableStyles'
-import Modal from '../../components/Modal'
-import ModalHeader from '../../components/ModalHeader'
+import Modal from '../../components/DefaultModal'
 import Typography from '../../components/Typography'
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
+import ModalHeader from 'components/Modal/Header'
 
 // params to render bond with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)
@@ -65,7 +66,7 @@ const TokenLogo = styled(Image)`
 `
 
 const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
-  const { account, chainId } = useActiveWeb3React() // chainId
+  const { account, chainId } = useActiveWeb3React()
 
   const {
     // helper contract
@@ -94,7 +95,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const [stakedBal, setStakedBal] = useState(0)
   const [unstakedBal, setUnstakedBal] = useState(0)
   const [pending, setPending] = useState(0)
-  
+
   const [availableValue, setAvailableValue] = useState(0)
   const [stakedLpValue, setStakedLpValue] = useState(0)
   const [pendingValue, setPendingValue] = useState(0)
@@ -111,13 +112,13 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const [liquidity, setLiquidity] = useState()
   // const [stakedValue, setLiquidityShare] = useState()
 
+  // const moment = new Date()
   /**
    * Runs only on initial render/mount
    */
   useEffect(() => {
     getAprAndLiquidity()
     // getYearlyPoolRewards()
-    fetchPending()
     fetchPendingValue()
     fetchUserBondAlloc()
   }, [account])
@@ -128,7 +129,6 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   useEffect(() => {
     if (account) {
       const timer = setTimeout(() => {
-        fetchPending()
         fetchPendingValue()
         // getAprAndLiquidity()
         fetchUserBondAlloc()
@@ -137,14 +137,38 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
           fetchBals()
           fetchApproval()
         }
-      }, 1200)
+      }, 3000)
       // Clear timeout if the component is unmounted
       return () => clearTimeout(timer)
     }
   })
 
-  const isWFTM = bond.token1Address == '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'
-  
+  // const isWFTM = bond.token1Address == '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'
+
+  const dailyRoi
+    = (apr / 365)
+    //   .toFixed(2)
+    //   .toString()
+    //   .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+  const reached
+    = (100 * pendingValue / stakedLpValue)
+      .toFixed(2)
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+  // const term
+  //   = (365 / dailyRoi)
+  //     .toFixed(2)
+  //     .toString()
+  //     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+  // const elapsed
+  //   = (dailyRoi / reached) // Return Per Day / % Acheived = Days Elapsed
+  //     .toFixed(2)
+  //     .toString()
+  //     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
   /**
    * Opens the function panel dropdown
    */
@@ -169,7 +193,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
       const apr = result[1]
 
       setLiquidity(Number(tvl).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
-      setApr(Number(apr).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
+      setApr(Number(apr))
+      // setApr(Number(apr).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
     } catch (e) {
       console.warn(e)
     }
@@ -190,9 +215,9 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
 
         // get total lp tokens for pid from user bal
         const result2 = await erc20BalanceOf(account)
-        const unstaked = ethers.utils.formatUnits(result2) 
+        const unstaked = ethers.utils.formatUnits(result2)
         setUnstakedBal(unstaked.toString())
-        
+
         // const tvlShare = tvl
         // const stakedValue = staked * tvlShare
         // const aValue = stakedValue * tvlShare
@@ -204,13 +229,13 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
         // get value of available, unstaked lp
         const aLpValue = await fetchUserLpValue(pid, token1, token2, result2)
         const f_aLpValue = Number(aLpValue).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') // format to 2 decimals + commas
-        setAvailableValue(f_aLpValue)
+        setAvailableValue(Number(aLpValue).toFixed(2).toString())
 
         // get value of staked lp (bonded lp)
         // const sLpValue = await fetchLpValue(token1, token2, result1?.[0]); 
         const sLpValue = await fetchUserLpValue(pid, token1, token2, result1?.[0])
         const f_sLpValue = Number(sLpValue).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') // format to 2 decimals + commas
-        setStakedLpValue(f_sLpValue);
+        setStakedLpValue(Number(sLpValue).toFixed(2).toString())
 
         return [staked, unstaked]
       } catch (err) {
@@ -220,56 +245,13 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   }
 
   /**
-   * Gets the emissions rate for a given pool
-   */
-
-  // const fetchPoolRate = async () => {
-  //   if (!account) {
-  //     // alert('connect wallet')
-  //   } else {
-  //     try {
-  //       const allocationPoints = await poolInfo(pid)
-  //       const totalAllocation = await totalAllocPoint()
-
-  //       const allocation = ethers.utils.formatUnits(allocationPoints?.[1])
-  //       const totalAllocationPoints = ethers.utils.formatUnits(totalAllocation)
-
-  //       const poolRate = Number(250000 / totalAllocationPoints / allocationPoints)
-
-  //       setRate(poolRate.toString())
-
-  //       return [poolRate]
-
-  //     } catch (err) {
-  //       console.warn(err)
-  //     }
-  //   }
-  // }
-
- /**
-   * Checks the user's alloc of the total staked in the farm
-   */
+    * Checks the user's alloc of the total staked in the farm
+  */
   const fetchUserBondAlloc = async () => {
     const ownership = await fetchUserLpTokenAllocInBond(pid, account)
     const userStakedPercOfSummoner = Number(ownership?.[4])
     if (userStakedPercOfSummoner) setPercOfBond(Number(userStakedPercOfSummoner).toFixed(2))
     else setPercOfBond(0)
-  }
-  /**
-   * Fetches connected user pending soul
-   */
-  const fetchPending = async () => {
-    if (!account) {
-      // alert('connect wallet')
-    } else {
-      try {
-        const pendingResult = await pendingSoul(pid, account)
-        const formatted = ethers.utils.formatUnits(pendingResult?.[0].toString())
-        setPending(Number(formatted).toFixed(2).toString())
-      } catch (err) {
-        console.warn(err)
-      }
-    }
   }
 
   /**
@@ -355,7 +337,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   /**
    * Deposits/stakes lpTokens into bond
    */
-   const handleDeposit = async (amount) => {
+  const handleDeposit = async (amount) => {
     try {
       // console.log('depositing', amount.toString())
       const tx = await deposit(pid, amount)
@@ -367,7 +349,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
     }
   }
 
-  
+
   return (
     <>
       <Wrap padding="0" display="flex" justifyContent="center">
@@ -384,12 +366,12 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     fontSize="1.2rem"
                     target="_blank"
                     color="#F36FFE" // neon purple
-                    href={`https://exchange.soulswap.finance/add/${bond.token1Address[250]}/${bond.token2Address[250]}`}
+                    href={`https://exchange.soulswap.finance/add/${bond.token1Address[chainId]}/${bond.token2Address[chainId]}`}
                   >
                     <TokenLogo
                       src={
                         'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
-                        bond.token1Address[250] +
+                        bond.token1Address[chainId] +
                         '/logo.png'
                       }
                       alt="LOGO"
@@ -401,7 +383,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     <TokenLogo
                       src={
                         'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
-                        bond.token2Address[250] +
+                        bond.token2Address[chainId] +
                         '/logo.png'
                       }
                       alt="LOGO"
@@ -418,7 +400,11 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
               </TokenPairBox>
 
               <BondItemBox>
-                <BondItem>{apr ? (apr === 'Infinity' ? '∞%' : apr + '%') : '?'}</BondItem>
+                <BondItem>{
+                apr 
+                ? (apr === 'Infinity' ? '∞%' 
+                : apr + '%') 
+                : '?'}</BondItem>
               </BondItemBox>
 
               <BondItemBox desktopOnly={true}>
@@ -490,8 +476,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                       {Number(unstakedBal) === 0
                         ? '0.000'
                         : Number(unstakedBal) < 0.001
-                        ? '<0.001'
-                        : Number(unstakedBal)
+                          ? '<0.001'
+                          : Number(unstakedBal)
                             .toFixed(3)
                             .toString()
                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
@@ -508,59 +494,56 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   </Wrap>
                   <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" />
                   <Wrap padding="0" margin="0" display="flex">
-                      {(approved && Number(unstakedBal) == 0) ? 
+                    {(approved && Number(unstakedBal) == 0) ?
                       (
                         (bond.token1 == 'FTM' || bond.token2 == 'FTM') ? (
-                        <TokenPairLink
-                        target="_blank"
-                        rel="noopener"
-                        color="#F36FFE" // neon purple
-                        href=
-                        {bond.token1 == 'FTM' ?
-                        `https://exchange.soulswap.finance/add/FTM/${
-                          bond.token2Address[250]}`
-                          : `https://exchange.soulswap.finance/add/FTM/${
-                            bond.token1Address[250]}`
-                          }
-                        >
-                          CLICK HERE TO CREATE {bond.token1}-{bond.token2} PAIR
-                        </TokenPairLink>
-                        ) :                      
-                        <TokenPairLink
-                        target="_blank"
-                        rel="noopener"
-                        text-color="#F36FFE" // neon purple
-                        href=
-                        {`https://exchange.soulswap.finance/add/${
-                          bond.token1Address[250]}/${bond.token2Address[250]}`}
-                        >
-                          CREATE {bond.token1}-{bond.token2} PAIR
-                        </TokenPairLink>
+                          <TokenPairLink
+                            target="_blank"
+                            rel="noopener"
+                            color="#F36FFE" // neon purple
+                            href=
+                            {bond.token1 == 'FTM' ?
+                              `https://exchange.soulswap.finance/add/FTM/${bond.token2Address[chainId]}`
+                              : `https://exchange.soulswap.finance/add/FTM/${bond.token1Address[chainId]}`
+                            }
+                          >
+                            CLICK HERE TO CREATE {bond.token1}-{bond.token2} PAIR
+                          </TokenPairLink>
+                        ) :
+                          <TokenPairLink
+                            target="_blank"
+                            rel="noopener"
+                            text-color="#F36FFE" // neon purple
+                            href=
+                            {`https://exchange.soulswap.finance/add/${bond.token1Address[chainId]}/${bond.token2Address[chainId]}`}
+                          >
+                            CREATE {bond.token1}-{bond.token2} PAIR
+                          </TokenPairLink>
                       ) :
-                      approved ? 
-                      (
-                        <SubmitButton
-                        height="2.5rem"
-                        onClick={() => 
-                          handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))
-                        }
-                        >                        
-                          DEPOSIT {bond.token1}-{bond.token2} LP
-                        </SubmitButton>
-                      ) :
-                      (
-                        <SubmitButton height="2.5rem" onClick={() => handleApprove()}>
-                          APPROVE LP
-                        </SubmitButton>
-                      )
-                    
+                      approved ?
+                        (
+                          <SubmitButton
+                            height="2.5rem"
+                            onClick={() =>
+                              handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))
+                            }
+                          >
+                            DEPOSIT {bond.token1}-{bond.token2} LP
+                          </SubmitButton>
+                        ) :
+                        (
+                          <SubmitButton height="2.5rem" onClick={() => handleApprove()}>
+                            APPROVE LP
+                          </SubmitButton>
+                        )
+
                     }
                   </Wrap>
                 </FunctionBox>
-              ):(
-              <FunctionBox>
-                {/* <FlexText> */}
-                {/* <ClickableText
+              ) : (
+                <FunctionBox>
+                  {/* <FlexText> */}
+                  {/* <ClickableText
                     padding="0"
                     fontSize=".9rem"
                     color="#aaa"
@@ -580,64 +563,76 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   min="0"
                   onChange={() => getWithdrawable()}
                 /> */}
-
-                <Text fontSize=".9rem" padding="0" color="#aaa">
-                  Bonded:&nbsp;
-                      {Number(stakedBal) === 0
-                        ? '0.000'
-                        : Number(stakedBal) < 0.001
+                  <Wrap padding="0" margin="0" display="flex" justifyContent="space-between">
+                  <Text fontSize=".9rem" padding="0" textAlign="left" color="#aaa">
+                    BONDED:&nbsp;
+                    {Number(stakedBal) === 0
+                      ? '0.000'
+                      : Number(stakedBal) < 0.001
                         ? '<0.001'
                         : Number(stakedBal)
-                            .toFixed(3)
-                            .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                          .toFixed(3)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                    }&nbsp;LP
+                    <br/>
+                    VALUE:&nbsp;{Number(stakedLpValue) !== 0 ? `$${stakedLpValue}` : '0'}
+                  </Text>
+                  <Text fontSize=".9rem" padding="0" color="#F36FFE" textAlign="right">
+                    
+                    YTD:&nbsp;{Number(reached) > 0 ? `${reached}` : '<0.0'}%
+                
+                    <br/>
+                    {/* <br/> */}
+                    { dailyRoi > 0 
+                    ? 'DAILY: ' + dailyRoi.toFixed(2) : 0                    }%
+                    
+                  </Text>
+                  </Wrap>
+                  <Wrap padding="0" margin="0" display="flex">
+                    <SubmitButton
+                      height="2.5rem"
+                      primaryColour="#bbb"
+                      color="black"
+                      margin=".5rem 0 .5rem 0"
+                      onClick={() =>
+                        setShowConfirmation(true)
+                        // handleMint()
                       }
-                    &nbsp;LP &nbsp;{Number(stakedLpValue) !== 0 ? `($${stakedLpValue})` : ''}
-                </Text>
-                <Wrap padding="0" margin="0" display="flex">
-                  <SubmitButton
-                    height="2.5rem"
-                    primaryColour="#bbb"
-                    color="black"
-                    margin=".5rem 0 .5rem 0"
-                    onClick={() =>
-                      setShowConfirmation(true)
-                      // handleMint()
-                    }
-                  >
-                    MINT SOUL {pendingValue !== 0 ? `($${pendingValue})` : ''}
-                  </SubmitButton>
-                </Wrap>
-              </FunctionBox>
+                    >
+                      MINT SOUL {pendingValue !== 0 ? `($${pendingValue})` : ''}
+                    </SubmitButton>
+                  </Wrap>
+                </FunctionBox>
               )}
             </DetailsWrapper>
-            </DetailsContainer>
-            </Wrap>
+          </DetailsContainer>
+        </Wrap>
       ) : null}
       <Modal isOpen={showConfirmation} onDismiss={
-          () => setShowConfirmation(false)          }>
+        () => setShowConfirmation(false)}>
         <div className="space-y-4">
-          <ModalHeader title={`Are you sure?`} onClose={() => setShowConfirmation(false)} />
+          <ModalHeader header={`Are you sure?`} onClose={() => setShowConfirmation(false)} />
           <Typography variant="lg">
             Minting claims your pending rewards and sends your LP tokens to the Treasury.
-            <br/><br/>
+            <br /><br />
             You may only mint once and you may not add more to an open bond.
           </Typography>
           <Typography variant="sm" className="font-medium">
             QUESTIONS OR CONCERNS?
             <a href="mailto:soulswapfinance@gmail.com">
-            {' '} CONTACT US
+              {' '} CONTACT US
             </a>
           </Typography>
           <SubmitButton
             height="2.5rem"
             // onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
-            onClick={() => 
+            onClick={() =>
               // setShowConfirmation(true)
               handleMint()
-              }              
-            >
-              I UNDERSTAND THESE TERMS
+            }
+          >
+            I UNDERSTAND THESE TERMS
           </SubmitButton>
           {/* <Button
             color="red"

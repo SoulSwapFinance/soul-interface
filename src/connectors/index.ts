@@ -1,8 +1,8 @@
 import { BscConnector } from '@binance-chain/bsc-connector'
-// import { ChainId } from '../sdk'
-import { FortmaticConnector } from '../entities/FortmaticConnector'
+// import { ChainId } from 'sdk'
+import { FortmaticConnector } from 'entities/connectors/FortmaticConnector'
 import { InjectedConnector } from '@web3-react/injected-connector'
-import { NetworkConnector } from '../entities/NetworkConnector'
+import { NetworkConnector } from 'entities/connectors/NetworkConnector'
 import { PortisConnector } from '@web3-react/portis-connector'
 import { TorusConnector } from '@web3-react/torus-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
@@ -11,16 +11,17 @@ import { Web3Provider } from '@ethersproject/providers'
 import { CloverConnector } from '@clover-network/clover-connector'
 
 enum ChainId { // TODO
-  MAINNET = 1,
+  ETHEREUM = 1,
   BSC = 56,
   FANTOM = 250,
   // FANTOM_TESTNET = 4002
 }
 
 export const RPC = {
-  [ChainId.MAINNET]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
+  [ChainId.ETHEREUM]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
   [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
-  [ChainId.FANTOM]: 'https://rpc.ftm.tools',
+  // [ChainId.FANTOM]: 'https://rpc.ftm.tools/',
+  [ChainId.FANTOM]: 'https://rpcapi.fantom.network',
   // [ChainId.FANTOM_TESTNET]: 'https://rpc.testnet.fantom.network',
   // [ChainId.ROPSTEN]: 'https://eth-ropsten.alchemyapi.io/v2/cidKix2Xr-snU3f6f6Zjq_rYdalKKHmW',
   // [ChainId.RINKEBY]: 'https://eth-rinkeby.alchemyapi.io/v2/XVLwDlhGP6ApBXFz_lfv0aZ6VmurWhYD',
@@ -99,11 +100,11 @@ export const injected = new InjectedConnector({
 
 // mainnet only
 export const walletconnect = new WalletConnectConnector({
-  rpc: { [ChainId.MAINNET]: RPC[ChainId.MAINNET] },
+  rpc: RPC,
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   supportedChainIds,
-  pollingInterval: 15000,
+  // pollingInterval: 5000,
 })
 
 // mainnet only
@@ -120,7 +121,7 @@ export const portis = new PortisConnector({
 
 // mainnet only
 export const walletlink = new WalletLinkConnector({
-  url: RPC[ChainId.MAINNET],
+  url: RPC[ChainId.FANTOM],
   appName: 'SoulSwap',
   appLogoUrl:
   'https://raw.github.com/SoulSwapFinance/icons/master/token/soul.jpg',
@@ -134,4 +135,4 @@ export const torus = new TorusConnector({
 // binance only
 export const binance = new BscConnector({ supportedChainIds: [56] })
 
-export const clover = new CloverConnector({ supportedChainIds: [250] })
+export const clover = new CloverConnector({ supportedChainIds: [1, 250] })

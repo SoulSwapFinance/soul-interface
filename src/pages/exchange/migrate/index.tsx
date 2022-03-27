@@ -1,28 +1,29 @@
-import { ApprovalState, useApproveCallback } from '../../../hooks/useApproveCallback'
-import Button, { ButtonConfirmed } from '../../../components/Button'
-import { ChainId, JSBI } from '../../../sdk'
-import { ChevronDownIcon, XIcon } from '@heroicons/react/outline'
-import React, { useCallback, useEffect, useState } from 'react'
-import { formatUnits, parseUnits } from '@ethersproject/units'
-import useMigrateState, { MigrateState } from '../../../hooks/useMigrateState'
-
 import { AddressZero } from '@ethersproject/constants'
-import Badge from '../../../components/Badge'
+import { formatUnits, parseUnits } from '@ethersproject/units'
+import { ChevronDownIcon, XIcon } from '@heroicons/react/outline'
+import { t } from '@lingui/macro'
+import { useLingui } from '@lingui/react'
+import { ChainId, JSBI } from 'sdk'
+import Back from 'components/Back'
+import Chip from 'components/Chip'
+import { USER_REJECTED_TX } from 'services/web3/WalletError'
+import Head from 'next/head'
+import React, { useCallback, useEffect, useState } from 'react'
+
+import { Button } from '../../../components/Button'
 import Container from '../../../components/Container'
 import Dots from '../../../components/Dots'
 import DoubleCurrencyLogo from '../../../components/DoubleLogo'
-import DoubleGlowShadow from '../../../components/DoubleGlowShadow'
 import Empty from '../../../components/Empty'
-import Head from 'next/head'
-import LPToken from '../../../types/LPToken'
-import MetamaskError from '../../../types/MetamaskError'
-import { Input as NumericalInput } from '../../../components/NumericalInput'
+import Input from '../../../components/Input'
 import Typography from '../../../components/Typography'
 import Web3Connect from '../../../components/Web3Connect'
-import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
-import { useLingui } from '@lingui/react'
-import { useSushiRollContract } from '../../../hooks/useContract'
+import LPToken from '../../../features/migration/LPToken'
+// import MetamaskError from '../../../features/migration/MetamaskError'
+import useMigrateState, { MigrateState } from '../../../features/migration/useMigrateState'
+import { ApprovalState, useApproveCallback } from '../../../hooks/useApproveCallback'
+import { useSushiRollContract } from 'hooks/useContract'
+import { useActiveWeb3React } from '../../../services/web3'
 
 const ZERO = JSBI.BigInt(0)
 
@@ -73,7 +74,7 @@ const AmountInput = ({ state }: { state: MigrateState }) => {
       </Typography>
 
       <div className="relative flex items-center w-full mb-4">
-        <NumericalInput
+        <Input.Numeric
           className="w-full p-3 rounded bg-dark-700 focus:ring focus:ring-pink"
           value={state.amount}
           onUserInput={(val) => state.setAmount(val)}
@@ -113,7 +114,7 @@ const LPTokenSelect = ({ lpToken, onToggle, isSelected, updating, exchange }: Po
           variant="lg"
           className="text-primary"
         >{`${lpToken.tokenA.symbol}/${lpToken.tokenB.symbol}`}</Typography>
-        {lpToken.version && <Badge color="pink">{lpToken.version}</Badge>}
+        {lpToken.version && <Chip color="purple" label={lpToken.version} />}
       </div>
       {isSelected ? <XIcon width={16} height={16} /> : <ChevronDownIcon width={16} height={16} />}
     </div>
@@ -171,7 +172,7 @@ const MigrateModeSelect = ({ state }: { state: MigrateState }) => {
 const MigrateButtons = ({ state, exchange }: { state: MigrateState; exchange: string | undefined }) => {
   const { i18n } = useLingui()
 
-  const [error, setError] = useState<MetamaskError>({})
+  // const [error, setError] = useState<MetamaskError>({})
   const sushiRollContract = useSushiRollContract(
     state.selectedLPToken?.version ? state.selectedLPToken?.version : undefined
   )
@@ -187,11 +188,15 @@ const MigrateButtons = ({ state, exchange }: { state: MigrateState; exchange: st
   const isButtonDisabled = !state.amount
 
   useEffect(() => {
-    setError({})
+    // setError({})
   }, [state.selectedLPToken])
 
   if (!state.mode || state.lpTokens.length === 0 || !state.selectedLPToken || !state.amount) {
-    return <ButtonConfirmed disabled={true}>Migrate</ButtonConfirmed>
+    return (
+      <Button fullWidth disabled={true}>
+        Migrate
+      </Button>
+    )
   }
 
   const insufficientAmount = JSBI.lessThan(
@@ -200,12 +205,13 @@ const MigrateButtons = ({ state, exchange }: { state: MigrateState; exchange: st
   )
 
   const onPress = async () => {
-    setError({})
+    // setError({})
     try {
       await state.onMigrate()
-    } catch (e) {
-      console.log(e)
-      setError(e)
+    } catch (error) {
+      console.log(error)
+      // @ts-ignore TYPE NEEDS FIXING
+      setError(error)
     }
   }
 
@@ -224,31 +230,30 @@ const MigrateButtons = ({ state, exchange }: { state: MigrateState; exchange: st
             </div>
           </div>
           {state.mode === 'approve' && (
-            <ButtonConfirmed
+            <Button
+              fullWidth
+              loading={approval === ApprovalState.PENDING}
               onClick={approve}
-              confirmed={approval === ApprovalState.APPROVED}
               disabled={approval !== ApprovalState.NOT_APPROVED || isButtonDisabled}
             >
-              {approval === ApprovalState.PENDING ? (
-                <Dots>{i18n._(t`Approving`)}</Dots>
-              ) : approval === ApprovalState.APPROVED ? (
-                i18n._(t`Approved`)
-              ) : (
-                i18n._(t`Approve`)
-              )}
-            </ButtonConfirmed>
+              {approval === ApprovalState.APPROVED ? i18n._(t`Approved`) : i18n._(t`Approve`)}
+            </Button>
           )}
           {((state.mode === 'approve' && approval === ApprovalState.APPROVED) || state.mode === 'permit') && (
-            <ButtonConfirmed
+            <Button
+              fullWidth
+              loading={state.isMigrationPending}
               disabled={noLiquidityTokens || state.isMigrationPending || isButtonDisabled}
               onClick={onPress}
             >
-              {state.isMigrationPending ? <Dots>{i18n._(t`Migrating`)}</Dots> : i18n._(t`Migrate`)}
-            </ButtonConfirmed>
+              {i18n._(t`Migrate`)}
+            </Button>
           )}
         </>
       )}
-      {error.message && error.code !== 4001 && <div className="font-medium text-center text-red">{error.message}</div>}
+      {/* {error.message && error.code !== USER_REJECTED_TX && ( */}
+        {/* <div className="font-medium text-center text-red">{error.message}</div> */}
+      {/* )} */}
       <div className="text-sm text-center text-low-emphesis">
         {i18n._(
           t`Your ${exchange} ${state.selectedLPToken.tokenA.symbol}/${state.selectedLPToken.tokenB.symbol} liquidity will become SoulSwap ${state.selectedLPToken.tokenA.symbol}/${state.selectedLPToken.tokenB.symbol} liquidity.`
@@ -302,26 +307,36 @@ export default function Migrate() {
 
   let exchange
 
-  if (chainId === ChainId.MAINNET) {
+  if (chainId === ChainId.ETHEREUM) {
     exchange = 'Uniswap'
-  // } else if (chainId === ChainId.MATIC) {
-  //   exchange = 'QuickSwap'
+  } else if (chainId === ChainId.BSC) {
+    exchange = 'PancakeSwap'
+  } else if (chainId === ChainId.FANTOM) {
+    exchange = 'SpookySwap'
   }
 
   return (
-    <Container id="migrate-page" className="py-4 space-y-6 md:py-8 lg:py-12" maxWidth="lg">
+    <Container id="migrate-page" className="py-4 space-y-6 md:py-8 lg:py-12" maxWidth="2xl">
       <Head>
         <title>Migrate | Soul</title>
         <meta key="description" name="description" content="Migrate your liquidity to SoulSwap." />
+        <meta key="twitter:description" name="twitter:description" content="Migrate your liquidity to SoulSwap." />
+        <meta key="og:description" property="og:description" content="Migrate your liquidity to SoulSwap." />
       </Head>
 
-      <div className="mb-8 text-2xl text-center">{i18n._(t`Migrate ${exchange} Liquidity`)}</div>
+      <div className="p-4 mb-3 space-y-3">
+        <Back />
 
-      <DoubleGlowShadow>
+        <Typography component="h1" variant="h2">
+          {i18n._(t`Migrate ${exchange} Liquidity`)}
+        </Typography>
+      </div>
+
+      {!account ? (
+        <Web3Connect className="w-full !bg-dark-900 bg-gradient-to-r from-pink/80 hover:from-pink to-purple/80 hover:to-purple text-white h-[38px]" />
+      ) : (
         <div className="p-4 space-y-4 rounded bg-dark-900">
-          {!account ? (
-            <Web3Connect color="blue" className="w-full" />
-          ) : state.loading ? (
+          {state.loading ? (
             <Typography variant="lg" className="p-4 text-center text-primary">
               <Dots>{i18n._(t`Loading your ${exchange} liquidity positions`)}</Dots>
             </Typography>
@@ -334,7 +349,7 @@ export default function Migrate() {
                   <Typography variant="lg">{i18n._(t`Your Liquidity`)}</Typography>
                   <Typography variant="sm" className="text-secondary">
                     {t`Click on a pool below, input the amount you wish to migrate or select max, and click
-                        migrate`}
+                      migrate`}
                   </Typography>
                 </div>
               )}
@@ -344,7 +359,7 @@ export default function Migrate() {
             </>
           )}
         </div>
-      </DoubleGlowShadow>
+      )}
     </Container>
   )
 }

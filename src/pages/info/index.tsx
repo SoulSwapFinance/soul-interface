@@ -1,27 +1,29 @@
-import SwapHeader from '../../features/trade/Header'
-import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
-import Container from '../../components/Container'
-// import { useIsSwapUnsupported } from '../../hooks/useIsSwapUnsupported'
+import Container from 'components/Container'
+import Head from 'next/head'
+import AnalyticsHeader from 'features/analytics/Header'
+import { useActiveWeb3React } from 'services/web3'
 
-// const addIsUnsupported = useIsSwapUnsupported(currencies?.CURRENCY_A, currencies?.CURRENCY_B)
+export default function Tokens() {
+  const { account } = useActiveWeb3React()
 
-const Info = () => {
-	return (
-    <DoubleGlowShadowV2 opacity="0.6">
-        <Container id="charts-page" maxWidth="2xl" className="space-y-4">
-          <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
-            <SwapHeader />     
-            <iframe 
-              frameBorder={"none"}
-              title={"INFO"}
-              src="https://info.soulswap.finance"
-              height={ '720' }
-              width={ "100%" }
-            />
-	        </div>
-        </Container>
-      </DoubleGlowShadowV2>
-
-)}
-
-export default Info
+  return (
+    <>
+      <Head>
+        <title>SoulSwap Liquidity Pair (LP) Analytics | Soul</title>
+        <meta name="description" content="SoulSwap Liquidity Pair (SLP) Analytics by Soul" />
+      </Head>
+      <AnalyticsHeader />   
+      <Container maxWidth="full" className="grid h-full grid-flow-col grid-cols-5 mx-auto gap-9">
+        <div className="col-span-6 space-y-6 lg:col-span-6">
+      <iframe 
+  			frameBorder={"none"}
+    		title={"INFO"}
+    		src={"https://info.soulswap.finance/home"}
+    		height={"800px"}
+    		width={"100%"}
+      />
+        </div>
+      </Container>
+    </>
+  )
+}

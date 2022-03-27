@@ -5,9 +5,10 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 import { BigNumber } from 'ethers'
 
 export const RPC = {
-  [ChainId.MAINNET]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
+  [ChainId.ETHEREUM]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
   [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
-  [ChainId.FANTOM]: 'https://rpc.ftm.tools',
+  [ChainId.FANTOM]: 'https://rpcapi.fantom.network',
+  // [ChainId.FANTOM]: 'https://rpc.ftm.tools/',
   [ChainId.FANTOM_TESTNET]: 'https://rpc.testnet.fantom.network',
   // [ChainId.ROPSTEN]: 'https://eth-ropsten.alchemyapi.io/v2/cidKix2Xr-snU3f6f6Zjq_rYdalKKHmW',
   // [ChainId.RINKEBY]: 'https://eth-rinkeby.alchemyapi.io/v2/XVLwDlhGP6ApBXFz_lfv0aZ6VmurWhYD',
@@ -33,17 +34,17 @@ export const POOL_DENY = []
 export const AVERAGE_BLOCK_TIME_IN_SECS = 1
 
 export const AVERAGE_BLOCK_TIME = {
-  [ChainId.MAINNET]: 12,
+  [ChainId.ETHEREUM]: 12,
   [ChainId.FANTOM]: 1,
   [ChainId.BSC]: 3
 }
 
 export const ARCHER_RELAY_URI: { [chainId in ChainId]?: string } = {
-  [ChainId.MAINNET]: 'https://api.archerdao.io/v1/transaction',
+  [ChainId.ETHEREUM]: 'https://api.archerdao.io/v1/transaction',
 }
 
 export const ARCHER_GAS_URI: { [chainId in ChainId]?: string } = {
-  [ChainId.MAINNET]: 'https://api.archerdao.io/v1/gas',
+  [ChainId.ETHEREUM]: 'https://api.archerdao.io/v1/gas',
 }
 
 // export const COMMON_CONTRACT_NAMES: { [address: string]: string } = {
@@ -51,10 +52,11 @@ export const ARCHER_GAS_URI: { [chainId in ChainId]?: string } = {
 //     [TIMELOCK_ADDRESS]: 'Timelock',
 // }
 
-// TODO: update weekly with new constant
+// TODO: update weekly with new constant (if vesting)
 export const MERKLE_ROOT =
   //'https://raw.githubusercontent.com/sushiswap/sushi-vesting/master/merkle/week-13/merkle-10959148-11550728.json'
-  'https://raw.githubusercontent.com/sushiswap/sushi-vesting/master/merkle/week-14/merkle-10959148-11596364.json'
+  // 'https://raw.githubusercontent.com/sushiswap/sushi-vesting/master/merkle/week-14/merkle-10959148-11596364.json'
+  'https://raw.githubusercontent.com/SoulSwapFinance/soul-claims/main/scripts/results/prod.json'
 
 // /**
 //  * Some tokens can only be swapped via certain pairs, so we override the list of bases that are considered for these
@@ -63,9 +65,9 @@ export const MERKLE_ROOT =
 // export const CUSTOM_BASES: {
 //     [chainId in ChainId]?: { [tokenAddress: string]: Token[] }
 // } = {
-//     [ChainId.MAINNET]: {
-//         [AMPL.address]: [DAI, WETH[ChainId.MAINNET]],
-//         [XSUSHI_CALL.address]: [XSUSHI, WETH[ChainId.MAINNET]],
+//     [ChainId.ETHEREUM]: {
+//         [AMPL.address]: [DAI, WETH[ChainId.ETHEREUM]],
+//         [XSUSHI_CALL.address]: [XSUSHI, WETH[ChainId.ETHEREUM]],
 //     },
 // }
 
@@ -180,7 +182,7 @@ export const BridgeContextName = 'BRIDGE'
 export const FAUCET_ADDRESS = ''
 
 // default allowed slippage, in bips
-export const INITIAL_ALLOWED_SLIPPAGE = 50
+export const INITIAL_ALLOWED_SLIPPAGE = 150 // 1.5%
 // 30 minutes, denominated in seconds
 export const DEFAULT_DEADLINE_FROM_NOW = 60 * 30
 
@@ -210,15 +212,15 @@ export const BIG_INT_ZERO = JSBI.BigInt(0)
 export const ONE_BIPS = new Percent(JSBI.BigInt(1), JSBI.BigInt(10000))
 export const BIPS_BASE = JSBI.BigInt(10000)
 // used for warning states
-export const ALLOWED_PRICE_IMPACT_LOW: Percent = new Percent(JSBI.BigInt(100), BIPS_BASE) // 1%
-export const ALLOWED_PRICE_IMPACT_MEDIUM: Percent = new Percent(JSBI.BigInt(300), BIPS_BASE) // 3%
+export const ALLOWED_PRICE_IMPACT_LOW: Percent = new Percent(JSBI.BigInt(200), BIPS_BASE) // 2%
+export const ALLOWED_PRICE_IMPACT_MEDIUM: Percent = new Percent(JSBI.BigInt(350), BIPS_BASE) // 3.5%
 export const ALLOWED_PRICE_IMPACT_HIGH: Percent = new Percent(JSBI.BigInt(500), BIPS_BASE) // 5%
 // if the price slippage exceeds this number, force the user to type 'confirm' to execute
 export const PRICE_IMPACT_WITHOUT_FEE_CONFIRM_MIN: Percent = new Percent(JSBI.BigInt(1000), BIPS_BASE) // 10%
 // for non expert mode disable swaps above this
 export const BLOCKED_PRICE_IMPACT_NON_EXPERT: Percent = new Percent(JSBI.BigInt(1500), BIPS_BASE) // 15%
 
-// used to ensure the user doesn't send so much ETH so they end up with <.01
+// used to ensure the user doesn't send so much FTM so they end up with <.01
 export const MIN_ETH: JSBI = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(16)) // .01 ETH
 
 export const BETTER_TRADE_LESS_HOPS_THRESHOLD = new Percent(JSBI.BigInt(50), JSBI.BigInt(10000))
@@ -236,14 +238,14 @@ export const BLOCKED_ADDRESSES: string[] = [
 
 // CoffinBox Swappers
 export const BASE_SWAPPER: { [chainId in ChainId]?: string } = {
-  [ChainId.MAINNET]: '0x0',
+  [ChainId.ETHEREUM]: '0x0',
 }
 
 // Boring Helper
 // export const BORING_HELPER_ADDRESS = '0x11Ca5375AdAfd6205E41131A4409f182677996E6'
 
 export const ANALYTICS_URL: { [chainId in ChainId]?: string } = {
-  [ChainId.MAINNET]: 'https://analytics.soulswap.finance',
+  [ChainId.ETHEREUM]: 'https://analytics.soulswap.finance',
   [ChainId.BSC]: 'https://analytics.soulswap.finance',
   [ChainId.FANTOM]: 'https://analytics.soulswap.finance',
   [ChainId.FANTOM_TESTNET]: 'https://analytics.soulswap.finance',

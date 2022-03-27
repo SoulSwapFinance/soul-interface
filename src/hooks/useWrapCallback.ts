@@ -1,10 +1,10 @@
-import { ChainId, Currency, NATIVE, WNATIVE } from '../sdk'
-
-import { tryParseAmount } from '../functions/parse'
-import { useActiveWeb3React } from './useActiveWeb3React'
-import { useCurrencyBalance } from '../state/wallet/hooks'
+import { ChainId, Currency, NATIVE, WNATIVE } from 'sdk'
+import { tryParseAmount } from 'functions/parse'
+import { useActiveWeb3React } from 'services/web3'
+import { useTransactionAdder } from 'state/transactions/hooks'
+import { useCurrencyBalance } from 'state/wallet/hooks'
 import { useMemo } from 'react'
-import { useTransactionAdder } from '../state/transactions/hooks'
+
 import { useWETH9Contract } from './useContract'
 
 export enum WrapType {
@@ -38,6 +38,7 @@ export default function useWrapCallback(
 
   return useMemo(() => {
     if (!wethContract || !chainId || !inputCurrency || !outputCurrency)
+      // || chainId === ChainId.CELO)
       return NOT_APPLICABLE
     const weth = WNATIVE[chainId]
     if (!weth) return NOT_APPLICABLE
@@ -56,6 +57,7 @@ export default function useWrapCallback(
                     value: `0x${inputAmount.quotient.toString(16)}`,
                   })
                   addTransaction(txReceipt, {
+                    // @ts-ignore TYPE NEEDS FIXING
                     summary: `Wrap ${inputAmount.toSignificant(6)} ${NATIVE[chainId].symbol} to ${
                       WNATIVE[chainId].symbol
                     }`,
@@ -81,6 +83,7 @@ export default function useWrapCallback(
                   const txReceipt = await wethContract.withdraw(`0x${inputAmount.quotient.toString(16)}`)
                   addTransaction(txReceipt, {
                     summary: `Unwrap ${inputAmount.toSignificant(6)} ${WNATIVE[chainId].symbol} to ${
+                      // @ts-ignore TYPE NEEDS FIXING
                       NATIVE[chainId].symbol
                     }`,
                   })

@@ -3,8 +3,8 @@ import { ChainId } from '../../sdk'
 import ExternalLink from '../ExternalLink'
 import Polling from '../Polling'
 import { t } from '@lingui/macro'
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import { useLingui } from '@lingui/react'
+import { useActiveWeb3React } from 'services/web3'
 
 const Footer = () => {
   const { chainId } = useActiveWeb3React()
@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     // <footer className="absolute bottom-0 flex items-center justify-between w-screen h-20 p-4 mx-auto text-center text-low-emphesis">
     <footer className="flex-shrink-0 w-full">
-      <div className="flex items-center justify-between h-20 px-4">
+      <div className="flex bottom-0 items-center justify-between h-20 px-4 bg-dark-1200">
         {chainId && chainId in ANALYTICS_URL && (
           <ExternalLink
             id={`analytics-nav-link`}

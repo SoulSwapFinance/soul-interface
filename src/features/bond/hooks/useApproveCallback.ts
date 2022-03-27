@@ -6,9 +6,9 @@ import { useHasPendingApproval, useTransactionAdder } from '../../../state/trans
 import { MaxUint256 } from '@ethersproject/constants'
 import { TransactionResponse } from '@ethersproject/providers'
 import { calculateGasMargin } from '../../../functions/trade'
-import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
 import { useTokenAllowance } from './useTokenAllowance'
 import { useTokenContract } from './useContract'
+import { useActiveWeb3React } from 'services/web3'
 
 export enum ApprovalState {
   UNKNOWN = 'UNKNOWN',

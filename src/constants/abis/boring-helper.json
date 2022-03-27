@@ -9,7 +9,7 @@
       { "internalType": "contract IFactory", "name": "sushiFactory_", "type": "address" },
       { "internalType": "contract IFactory", "name": "uniV2Factory_", "type": "address" },
       { "internalType": "contract IERC20", "name": "bar_", "type": "address" },
-      { "internalType": "contract IBentoBox", "name": "bentoBox_", "type": "address" }
+      { "internalType": "contract ICoffinBox", "name": "coffinBox_", "type": "address" }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
@@ -37,8 +37,8 @@
   },
   {
     "inputs": [],
-    "name": "bentoBox",
-    "outputs": [{ "internalType": "contract IBentoBox", "name": "", "type": "address" }],
+    "name": "coffinBox",
+    "outputs": [{ "internalType": "contract ICoffinBox", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -60,7 +60,7 @@
         "components": [
           { "internalType": "contract IERC20", "name": "token", "type": "address" },
           { "internalType": "uint256", "name": "balance", "type": "uint256" },
-          { "internalType": "uint256", "name": "bentoBalance", "type": "uint256" }
+          { "internalType": "uint256", "name": "coffinBalance", "type": "uint256" }
         ],
         "internalType": "struct BoringHelperV1.Balance[]",
         "name": "",
@@ -102,11 +102,11 @@
           { "internalType": "contract IERC20", "name": "token", "type": "address" },
           { "internalType": "uint256", "name": "totalSupply", "type": "uint256" },
           { "internalType": "uint256", "name": "balance", "type": "uint256" },
-          { "internalType": "uint256", "name": "bentoBalance", "type": "uint256" },
-          { "internalType": "uint256", "name": "bentoAllowance", "type": "uint256" },
+          { "internalType": "uint256", "name": "coffinBalance", "type": "uint256" },
+          { "internalType": "uint256", "name": "coffinAllowance", "type": "uint256" },
           { "internalType": "uint256", "name": "nonce", "type": "uint256" },
-          { "internalType": "uint128", "name": "bentoAmount", "type": "uint128" },
-          { "internalType": "uint128", "name": "bentoShare", "type": "uint128" },
+          { "internalType": "uint128", "name": "coffinAmount", "type": "uint128" },
+          { "internalType": "uint128", "name": "coffinShare", "type": "uint128" },
           { "internalType": "uint256", "name": "rate", "type": "uint256" }
         ],
         "internalType": "struct BoringHelperV1.BalanceFull[]",
@@ -259,9 +259,9 @@
   {
     "inputs": [
       { "internalType": "address", "name": "who", "type": "address" },
-      { "internalType": "contract IKashiPair[]", "name": "pairsIn", "type": "address[]" }
+      { "internalType": "contract IUnderworldPair[]", "name": "pairsIn", "type": "address[]" }
     ],
-    "name": "pollKashiPairs",
+    "name": "pollUnderworldPairs",
     "outputs": [
       {
         "components": [
@@ -305,7 +305,7 @@
             "type": "tuple"
           }
         ],
-        "internalType": "struct BoringHelperV1.KashiPairPoll[]",
+        "internalType": "struct BoringHelperV1.UnderworldPairPoll[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -374,7 +374,7 @@
       { "internalType": "contract IFactory", "name": "sushiFactory_", "type": "address" },
       { "internalType": "contract IFactory", "name": "uniV2Factory_", "type": "address" },
       { "internalType": "contract IERC20", "name": "bar_", "type": "address" },
-      { "internalType": "contract IBentoBox", "name": "bentoBox_", "type": "address" }
+      { "internalType": "contract ICoffinBox", "name": "coffinBox_", "type": "address" }
     ],
     "name": "setContracts",
     "outputs": [],

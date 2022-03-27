@@ -7,7 +7,7 @@ import { useCallback, useEffect, useMemo } from 'react'
 
 import { ChainId } from '../../sdk'
 import { updateBlockNumber } from '../application/actions'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 
 interface TxInterface {
   addedTime: number

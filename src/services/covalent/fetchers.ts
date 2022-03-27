@@ -54,5 +54,5 @@ export const getChainsStatus = () =>
   fetch(`https://api.covalenthq.com/v1/chains/status/?key=ckey_cba3674f2ce5450f9d5dd290589`).then((res) => res.json())
 
 // TODO: CLASS B
-export const getSushiSwapLiquidityTransactions = (chainId = ChainId.FANTOM, address) =>
+export const getSoulSwapLiquidityTransactions = (chainId = ChainId.FANTOM, address) =>
   fetch(`https://api.covalenthq.com/v1/${chainId}/address/${address}/stacks/sushiswap/acts/`).then((res) => res.json())

@@ -1,8 +1,8 @@
 import { ChainId } from '../enums'
-import JSBI from 'jsbi'
+import { JSBI } from 'sdk'
 
 export * from './addresses'
-// export * from './kashi'
+export * from './underworld'
 export * from './natives'
 export * from './numbers'
 export * from './tokens'
@@ -15,32 +15,10 @@ export const MaxUint256 = JSBI.BigInt(
 //   '0xf3dcc3c6c6e34d3981dd429ac942301b9ebdd05de1be17f646b55476c44dc951' // 1 OCT 
 
 export const INIT_CODE_HASH: { [chainId: number]: string } = {
-  [ChainId.MAINNET]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
-  // [ChainId.ROPSTEN]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
-  // [ChainId.RINKEBY]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
-  // [ChainId.GÖRLI]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
-  // [ChainId.KOVAN]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
+  [ChainId.ETHEREUM]: '0x2d2a1a6740caa0c2e9da78939c9ca5c8ff259bf16e2b9dcbbec714720587df90', // JUN22
   [ChainId.FANTOM]: '0xf3dcc3c6c6e34d3981dd429ac942301b9ebdd05de1be17f646b55476c44dc951',
-  // [ChainId.MATIC]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
-  // [ChainId.MATIC_TESTNET]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
-  // [ChainId.XDAI]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
   [ChainId.BSC]: '0x2d2a1a6740caa0c2e9da78939c9ca5c8ff259bf16e2b9dcbbec714720587df90',
-  // [ChainId.BSC_TESTNET]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
-  // [ChainId.ARBITRUM]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
-  // [ChainId.MOONBEAM_TESTNET]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
-  // [ChainId.AVALANCHE]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
-  // [ChainId.AVALANCHE_TESTNET]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
-  // [ChainId.HECO]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
-  // [ChainId.HECO_TESTNET]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
-  // [ChainId.HARMONY]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
-  // [ChainId.HARMONY_TESTNET]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
-  // [ChainId.OKEX]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
-  // [ChainId.OKEX_TESTNET]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
-  // [ChainId.CELO]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
-  // [ChainId.PALM]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
-  // [ChainId.MOONRIVER]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
-  // [ChainId.FUSE]: '0x1901958ef8b470f2c0a3875a79ee0bd303866d85102c0f1ea820d317024d50b5'
-}
+ }
 
 export const MINIMUM_LIQUIDITY = JSBI.BigInt(1000)
 
@@ -55,6 +33,9 @@ export const SOLIDITY_TYPE_MAXIMA = {
     '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
   ),
 }
+
+export const A_PRECISION = JSBI.BigInt(100)
+export const MAX_FEE = JSBI.BigInt(10000)
 
 export const LAMBDA_URL = 'https://9epjsvomc4.execute-api.us-east-1.amazonaws.com/dev'
 

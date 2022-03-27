@@ -1,5 +1,2 @@
-import JSBI from 'jsbi'
-
-// exports for external consumption
-// export type BigintIsh = JSBI | bigint | string
+import { JSBI } from '@sushiswap/core-sdk'
 export type BigintIsh = JSBI | number | string

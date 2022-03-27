@@ -1,27 +1,25 @@
-
 /* eslint-disable @next/next/link-passhref */
-import { useActiveWeb3React, useFuse, useSoulSummonerContract } from '../../hooks'
+import { useFuse, useSoulSummonerContract } from '../../hooks'
 
 import Head from 'next/head'
 import React, { useContext, useState } from 'react'
 import { formatNumberScale } from '../../functions'
 // import { usePositions, useSoulVaultInfo, useVaults } from '../../features/vault/hooks'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
+// import Link from 'next/link'
 import Card from '../../components/Card'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 import { SOUL_ADDRESS, AVERAGE_BLOCK_TIME, WNATIVE } from '../../constants'
 import { VAULTS } from '../../constants/vaults'
-// import SoulSwapLogo from '../../components/SoulSwapLogo'
 import { PriceContext } from '../../contexts/priceContext'
 import { useTVL } from '../../hooks/useV2Pairs'
-import { getAddress } from '@ethersproject/address'
 import VaultList from '../../features/vault/VaultList'
-import useSummoner from '../../features/summoner/useSummoner'
-import { useFarms, usePositions, useSoulSummonerInfo } from '../../features/summoner/hooks'
-import useSoulSummoner from '../../features/farm/hooks/useSoulSummoner'
+import { useFarms } from 'hooks/useFarmRewards'
+import { usePositions } from 'hooks/usePositions'
+import { useSoulSummonerInfo } from 'hooks/useSummonerInfo'
+import { useActiveWeb3React } from 'services/web3'
 
 export default function Vault(): JSX.Element {
   const { i18n } = useLingui()
@@ -172,14 +170,14 @@ export default function Vault(): JSX.Element {
                     </div>
                     <div className={`flex flex-col items-center justify-between px-6 py-6 `}>
                       {/* <div className="flex items-center justify-between py-2 text-emphasis">
-                        Total Value Locked: {formatNumberScale(summTvl + summTvlVaults, true, 2)}
+                        Total Value Locked: {formatNumberScale(summTvl + summTvlVaults, true)}
                       </div> */}
                       {/* <div className="flex items-center justify-between py-2 text-emphasis">
-                        Vaults TVL: {formatNumberScale(summTvlVaults, true, 2)}
+                        Vaults TVL: {formatNumberScale(summTvlVaults, true)}
                       </div> */}
                       {positions.length > 0 && (
                         <div className="flex items-center justify-between py-2 text-emphasis">
-                          My Holdings: {formatNumberScale(valueStaked, true, 2)}
+                          My Holdings: {formatNumberScale(valueStaked, true)}
                         </div>
                       )}
                     </div>

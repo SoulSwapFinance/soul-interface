@@ -9,10 +9,10 @@ import React, { useContext, useState } from 'react'
 import { useCurrency } from '../../hooks/Tokens'
 import { useV2PairsWithPrice } from '../../hooks/useV2Pairs'
 import { SOUL } from '../../constants/tokens'
-import { useActiveWeb3React } from '../../hooks'
+import { useActiveWeb3React } from 'services/web3'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import CurrencyLogo from '../../components/CurrencyLogo'
+import { CurrencyLogo } from '../../components/CurrencyLogo'
 import { isMobile } from 'react-device-detect'
 import YieldDetails from '../../components/YieldDetails'
 import IconWrapper from '../../components/IconWrapper'
@@ -20,7 +20,7 @@ import { WNATIVE } from '../../constants'
 import { PriceContext } from '../../contexts/priceContext'
 import { Info } from 'react-feather'
 import moment from 'moment'
-import { formatCurrency } from '../../modals/TokenStatsModal'
+import { formatCurrency } from '../../modals/TokensStatsModal'
 import { usePriceHelperContract } from '../bond/hooks/useContract'
 import { useSingleCallResult } from '../../state/multicall/hooks'
 
@@ -38,7 +38,7 @@ const VaultListItem = ({ farm, ...rest }) => {
   const soulPrice = formatCurrency(Number(rawSoulPrice) / 1E18, 3)
   console.log(soulPrice)
 
-  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'])?.result
+  const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'])?.result
   console.log(Number(rawFtmPrice))
   const ftmPrice = formatCurrency(Number(rawFtmPrice) / 1E18, 2)
   console.log(ftmPrice)
@@ -115,7 +115,7 @@ const VaultListItem = ({ farm, ...rest }) => {
                 <div className="flex flex-col justify-center font-bold">
                   {farm?.lockupDuration == 0 ? 'No lockup' : `${farm?.lockupDuration / 86400} days`}
                 </div>
-                <div className="flex flex-col justify-center font-bold">{formatNumberScale(tvl, true, 2)}</div>
+                <div className="flex flex-col justify-center font-bold">{formatNumberScale(tvl, true)}</div>
                 <div className="flex-row items-center hidden space-x-4 lg:flex">
                   <div className="flex items-center space-x-2">
                     {farm?.rewards?.map((reward, i) => (
@@ -165,6 +165,7 @@ const VaultListItem = ({ farm, ...rest }) => {
           key={farm.id}
           isOpen={selectedFarm == farm.id}
           onDismiss={() => setSelectedFarm(null)}
+          roiPerHour={roiPerHour}
           roiPerDay={roiPerDay}
           roiPerMonth={roiPerMonth}
           roiPerYear={roiPerYear}

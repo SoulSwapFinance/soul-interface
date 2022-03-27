@@ -27,7 +27,7 @@ import { ZAPPER_ADDRESS } from '../../constants/addresses'
 import { basisPointsToPercent } from '../../functions'
 import { ethers } from 'ethers'
 import { tryParseAmount } from '../../functions/parse'
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useCurrency } from '../../hooks/Tokens'
 import { useCurrencyBalances } from '../wallet/hooks'
 import useParsedQueryString from '../../hooks/useParsedQueryString'
@@ -40,9 +40,9 @@ import { useV2TradeExactIn } from '../../hooks/useV2Trades'
 
 const ZERO = JSBI.BigInt(0)
 
-export function useZapState(): AppState['zap'] {
-  return useSelector<AppState, AppState['zap']>((state) => state.zap)
-}
+// export function useZapState(): AppState['zap'] {
+//   return useSelector<AppState, AppState['zap']>((state) => state.zap)
+// }
 
 export function useZapActionHandlers(noLiquidity: boolean | undefined): {
   onFieldInput: (typedValue: string) => void
@@ -67,7 +67,7 @@ export function useZapActionHandlers(noLiquidity: boolean | undefined): {
   }
 }
 
-const DEFAULT_ZAP_SLIPPAGE_TOLERANCE = new Percent(5, 100)
+const DEFAULT_ZAP_SLIPPAGE_TOLERANCE = new Percent(10, 1000)
 
 export function useDerivedZapInfo(
   currency: Currency | undefined,
@@ -125,10 +125,10 @@ export function useDerivedZapInfo(
   // Two trades if providing neither
   const isTradingCurrency0 =
     currency?.symbol === currency0?.symbol ||
-    (currency0?.symbol === WNATIVE[ChainId.MAINNET].symbol && currency === Ether.onChain(ChainId.MAINNET))
+    (currency0?.symbol === WNATIVE[ChainId.ETHEREUM].symbol && currency === Ether.onChain(ChainId.ETHEREUM))
   const isTradingCurrency1 =
     currency?.symbol === currency1?.symbol ||
-    (currency1?.symbol === WNATIVE[ChainId.MAINNET].symbol && currency === Ether.onChain(ChainId.MAINNET))
+    (currency1?.symbol === WNATIVE[ChainId.ETHEREUM].symbol && currency === Ether.onChain(ChainId.ETHEREUM))
 
   const currencyZeroTrade = useV2TradeExactIn(tradeAmount, currency0 ?? undefined)
   const currencyOneTrade = useV2TradeExactIn(tradeAmount, currency1 ?? undefined)
@@ -282,3 +282,7 @@ export function useDefaultsFromURLSearch():
 
   return result
 }
+function useZapState(): { typedValue: any } {
+  throw new Error('Function not implemented.')
+}
+

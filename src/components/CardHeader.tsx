@@ -8,7 +8,7 @@ export default function CardHeader({ className, children }: any) {
 }
 
 export function BorrowCardHeader({ children }: any) {
-  return <CardHeader className="border-b-8 bg-dark-pink border-pink">{children}</CardHeader>
+  return <CardHeader className="border-b-8 bg-dark-purple border-purple">{children}</CardHeader>
 }
 
 export function LendCardHeader({ children }: any) {

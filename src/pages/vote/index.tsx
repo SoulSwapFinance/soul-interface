@@ -20,29 +20,30 @@ const Vote = () => {
 	return (
 
 		<>
-			<Typography variant="hero" className={'md:hidden text-center font-bold mt-5 text-purple'}>
+			{/* <Typography variant="hero" className={'md:hidden text-center font-bold mt-5 text-purple'}>
 			Requests
 		</Typography>
 			<div className='sm:flex md:flex w-full h-full'>
 				<iframe frameBorder="none"
 					title={"Board"}
-					height={"100%"}
+    				height={"800px"}
 					width={'99%'}
-					src='https://board.soulswap.finance/embed/roadmap'
+					src='https://soulswap.hellonext.co/'
+					// src='https://board.soulswap.finance/embed/roadmap'
 				/>
 			<br/>
 			<br/>
 			<Typography variant="hero" className={'md:hidden text-center font-bold mt-5 text-purple'}>
 			Proposals
-		</Typography>				
+		</Typography>				 */}
 		<iframe
 					frameBorder={"none"}
 					title={"Vote"}
 					src="https://enchant.soulswap.finance"
-					height={"100%"}
+					height={"900px"}
 					width={"99%"}
 				/>
-			</div>
+			{/* </div> */}
 		</>
 	);
 };

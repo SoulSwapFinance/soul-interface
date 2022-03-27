@@ -28,3 +28,16 @@ public/workbox*.js.map
 lokalise.yaml
 locale/*.po
 locale/*
+locale/de.po
+locale/en.po
+locale/es-AR.po
+locale/es.po
+locale/fr.po
+locale/it.po
+locale/ja.po
+locale/ko.po
+locale/ro.po
+locale/ru.po
+locale/vi.po
+locale/zh-CN.po
+locale/zh-TW.po

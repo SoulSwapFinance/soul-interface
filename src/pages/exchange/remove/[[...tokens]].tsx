@@ -8,24 +8,25 @@ import TransactionConfirmationModal, { ConfirmationModalContent } from '../../..
 import { calculateGasMargin, calculateSlippageAmount } from '../../../functions/trade'
 import { useBurnActionHandlers, useBurnState, useDerivedBurnInfo } from '../../../state/burn/hooks'
 import { usePairContract, useRouterContract } from '../../../hooks/useContract'
+import MainHeader from 'features/swap/MainHeader'
 
 import { AddRemoveTabs } from '../../../components/NavigationTabs'
 import Alert from '../../../components/Alert'
 import { ArrowDownIcon } from '@heroicons/react/solid'
 import { AutoColumn } from '../../../components/Column'
 import { BigNumber } from '@ethersproject/bignumber'
-import Button from '../../../components/Button'
+import { Button } from '../../../components/Button'
 import Container from '../../../components/Container'
 import { Contract } from '@ethersproject/contracts'
-import CurrencyLogo from '../../../components/CurrencyLogo'
+import { CurrencyLogo } from '../../../components/CurrencyLogo'
 import Dots from '../../../components/Dots'
 import { Field } from '../../../state/burn/actions'
 import Head from 'next/head'
-import Header from '../../../components/ExchangeHeader'
+// import Header from '../../../components/ExchangeHeader'
 import Link from 'next/link'
-import SwapHeader from '../../../features/trade/Header'
+import SwapHeader from '../../../features/trade/HeaderNew'
 import LiquidityHeader from '../../../features/liquidity/LiquidityHeader'
-import LiquidityPrice from '../../../features/liquidity/LiquidityPrice'
+// import LiquidityPrice from '../../../features/liquidity/LiquidityPrice'
 import { MinimalPositionCard } from '../../../components/PositionCard'
 import NavLink from '../../../components/NavLink'
 import PercentInputPanel from '../../../components/PercentInputPanel'
@@ -36,7 +37,7 @@ import Web3Connect from '../../../components/Web3Connect'
 import { currencyId } from '../../../functions/currency'
 import { splitSignature } from '@ethersproject/bytes'
 import { t } from '@lingui/macro'
-import { useActiveWeb3React } from '../../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useCurrency } from '../../../hooks/Tokens'
 import useDebouncedChangeHandler from '../../../hooks/useDebouncedChangeHandler'
 import { useDerivedMintInfo } from '../../../state/mint/hooks'
@@ -48,9 +49,10 @@ import useTransactionDeadline from '../../../hooks/useTransactionDeadline'
 import { useUserSlippageToleranceWithDefault } from '../../../state/user/hooks'
 import { useV2LiquidityTokenPermit } from '../../../hooks/useERC20Permit'
 import { useWalletModalToggle } from '../../../state/application/hooks'
-import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
+// import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
+import SwapBanner from 'components/SwapBanner'
 
-const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(5, 100)
+const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(10, 1000) // 1%
 
 const REMOVE_TIPS = {}
 
@@ -251,10 +253,21 @@ export default function Remove() {
           .then(calculateGasMargin)
           .catch((error) => {
             console.error(`estimateGas failed`, methodName, args, error)
-            return BigNumber.from('1000000')
+            return undefined
           })
       )
     )
+    
+    // const safeGasEstimates: (BigNumber | undefined)[] = await Promise.all(
+    //   methodNames.map((methodName) =>
+    //     routerContract.estimateGas[methodName](...args)
+    //       .then(calculateGasMargin)
+    //       .catch((error) => {
+    //         console.error(`estimateGas failed`, methodName, args, error)
+    //         return BigNumber.from('1000000')
+    //       })
+    //   )
+    // )
 
     const indexOfSuccessfulEstimation = safeGasEstimates.findIndex((safeGasEstimate) =>
       BigNumber.isBigNumber(safeGasEstimate)
@@ -517,16 +530,16 @@ export default function Remove() {
   //     );
   //   }
 
-  //   const safeGasEstimates: (BigNumber | undefined)[] = await Promise.all(
-  //     methodNames.map((methodName) =>
-  //       router.estimateGas[methodName](...args)
-  //         .then(calculateGasMargin)
-  //         .catch((error) => {
-  //           console.error(`estimateGas failed`, methodName, args, error);
-  //           return undefined;
-  //         })
-  //     )
-  //   );
+    // const safeGasEstimates: (BigNumber | undefined)[] = await Promise.all(
+    //   methodNames.map((methodName) =>
+    //     router.estimateGas[methodName](...args)
+    //       .then(calculateGasMargin)
+    //       .catch((error) => {
+    //         console.error(`estimateGas failed`, methodName, args, error);
+    //         return undefined;
+    //       })
+    //   )
+    // );
 
   //   const indexOfSuccessfulEstimation = safeGasEstimates.findIndex(
   //     (safeGasEstimate) => BigNumber.isBigNumber(safeGasEstimate)
@@ -718,13 +731,21 @@ export default function Remove() {
         <title>{i18n._(t`Remove Liquidity`)} | Soul </title>
         <meta key="description" name="description" content={i18n._(t`Remove liquidity of Soul`)} />
         </Head>
+          <MainHeader
+            input={currencyA}
+            output={currencyB}
+            allowedSlippage={allowedSlippage}
+          />
+                <div className="mb-4"/>
+
       <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
-      <DoubleGlowShadowV2 opacity="0.6">
+        {/* <SwapBanner /> */}
+      {/* <DoubleGlowShadowV2 opacity="0.6"> */}
           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>          
             <SwapHeader
-              input={currencyA}
-              output={currencyB}
-              allowedSlippage={allowedSlippage}
+              inputCurrency={currencyA}
+              outputCurrency={currencyB}
+              // allowedSlippage={allowedSlippage}
             />
             {/* <Header input={currencyA} output={currencyB} allowedSlippage={allowedSlippage} /> */}
             <div>
@@ -735,7 +756,7 @@ export default function Remove() {
                 hash={txHash ? txHash : ''}
                 content={() => (
                   <ConfirmationModalContent
-                    title={i18n._(t`You Will Receive`)}
+                    title={i18n._(t`Receive`)}
                     onDismiss={handleDismissConfirmation}
                     topContent={modalHeader}
                     bottomContent={modalBottom}
@@ -766,7 +787,7 @@ export default function Remove() {
                     <div className="flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row">
                       <div className="w-full text-white sm:w-2/5" style={{ margin: 'auto 0px' }}>
                         <AutoColumn>
-                          <div>{i18n._(t`You Will Receive`)}</div>
+                          <div>{i18n._(t`Receive`)}</div>
                           {chainId && (oneCurrencyIsWETH || oneCurrencyIsETH) ? (
                             <RowBetween className="text-sm">
                               {oneCurrencyIsETH ? (
@@ -786,7 +807,7 @@ export default function Remove() {
                                   }`}
                                 >
                                   <a className="text-baseline text-blue opacity-80 hover:opacity-100 whitespace-nowrap">
-                                    Receive W{NATIVE[chainId].symbol}
+                                    Receive {NATIVE[chainId].symbol}
                                   </a>
                                 </Link>
                               ) : null}
@@ -850,7 +871,7 @@ export default function Remove() {
 
             {pair ? <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} /> : null}
           </div>
-        </DoubleGlowShadowV2>
+        {/* </DoubleGlowShadowV2> */}
         <div className="flex items-center px-4">
           <NavLink href="/pool">
             <a className="flex items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">

@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 import { ethers } from "ethers";
 
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 
-import useSoulSummoner from "../../features/farm/hooks/useSoulSummoner";
-import useApprove from "../../features/farm/hooks/useApprove";
+import useSoulSummoner from "features/mines/hooks/useSoulSummoner";
+import useApprove from "features/bond/hooks/useApprove";
 
 import {
   SOUL_SUMMONER_ADDRESS,
@@ -322,7 +322,7 @@ const StakeRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                   <TokenPair
                     fontSize="1.2rem"
                     target="_blank"
-                    href={`https://app.soulswap.finance/add/${farm.token1Address[250]}/${farm.token2Address[250]}`}
+                    href={`https://app.soulswap.finance/add/${farm.token1Address[chainId]}/${farm.token2Address[chainId]}`}
                   >
                     {lpSymbol}
                   </TokenPair>

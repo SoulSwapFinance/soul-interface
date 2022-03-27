@@ -1,4 +1,4 @@
-import { ChainId } from '../sdk'
+import { ChainId, WNATIVE_ADDRESS } from '../sdk'
 
 const Fantom = '/images/networks/fantom-network.jpg'
 const Mainnet = '/images/networks/mainnet-network.jpg'
@@ -20,7 +20,7 @@ const Bsc = '/images/networks/bsc.png'
 // const Celo = '/images/networks/celo-network.jpg'
 
 export const NETWORK_ICON = {
-  [ChainId.MAINNET]: Mainnet,
+  [ChainId.ETHEREUM]: Mainnet,
   [ChainId.BSC]: Bsc,
   [ChainId.FANTOM]: Fantom,
   [ChainId.FANTOM_TESTNET]: Fantom,
@@ -46,7 +46,7 @@ export const NETWORK_ICON = {
 }
 
 export const NETWORK_LABEL: { [chainId in ChainId]?: string } = {
-  [ChainId.MAINNET]: 'Ethereum',
+  [ChainId.ETHEREUM]: 'Ethereum',
   [ChainId.BSC]: 'Binance',
   [ChainId.FANTOM]: 'Fantom',
   [ChainId.FANTOM_TESTNET]: 'Fantom Testnet',
@@ -69,4 +69,15 @@ export const NETWORK_LABEL: { [chainId in ChainId]?: string } = {
   // [ChainId.OKEX]: 'OKEx',
   // [ChainId.OKEX_TESTNET]: 'OKEx',
   // [ChainId.CELO]: 'Celo',
+}
+
+export const NATIVE_TOKEN_TICKER = {
+  [ChainId.ETHEREUM]: 'ETH',
+  [ChainId.BSC]: 'BNB',
+  [ChainId.FANTOM]: 'FTM',
+}
+
+export const NATIVE_WRAPPED_TOKEN_ADDRESS = {
+  [ChainId.ETHEREUM]: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+  [ChainId.FANTOM]: WNATIVE_ADDRESS[250],
 }

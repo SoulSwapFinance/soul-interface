@@ -2,17 +2,17 @@ import { ENCHANT_ADDRESS, ZERO } from '../../sdk'
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
 import React, { useEffect, useState } from 'react'
 import { ENCHANT, SEANCE } from '../../constants'
-import Button from '../../components/Button'
+import { Button } from '../../components/Button'
 import { ChainId } from '../../sdk'
 import Head from 'next/head'
 import Dots from '../../components/Dots'
 import Image from 'next/image'
 import { Input as NumericalInput } from '../../components/NumericalInput'
-import TransactionFailedModal from '../../components/TransactionFailedModal'
+// import TransactionFailedModal from '../../components/TransactionFailedModal'
 import styled from 'styled-components'
 import { t } from '@lingui/macro'
 import { tryParseAmount } from '../../functions/parse'
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useLingui } from '@lingui/react'
 import useSeanceStakeManual from '../../hooks/useSeanceStakeManual'
 import { useTokenBalance } from '../../state/wallet/hooks'
@@ -22,8 +22,6 @@ import EnchantBanner from '../../components/EnchantBanner'
 import useEnchant from '../../hooks/useEnchant'
 // import useEnchantHelper from '../../hooks/useEnchant'
 import { ethers } from 'ethers'
-
-// import useApprove from '../../features/farm/hooks/useApprove'
 
 const INPUT_CHAR_LIMIT = 18
 
@@ -165,7 +163,7 @@ export default function Enchant() {
     if (account) {
       const timer = setTimeout(() => {
         setPending(account)
-      }, 3000)
+      }, 10000)
 
       // Clear timeout if the component is unmounted
       return () => clearTimeout(timer)
@@ -282,7 +280,7 @@ export default function Enchant() {
           <div className="flex flex-col justify-center md:flex-row">
             <div className="flex flex-col w-full max-w-xl mx-auto mb-4 md:m-0">
               <div>
-                <TransactionFailedModal isOpen={modalOpen} onDismiss={() => setModalOpen(false)} />
+                {/* <TransactionFailedModal isOpen={modalOpen} onDismiss={() => setModalOpen(false)} /> */}
                 <div className="w-full max-w-xl px-3 pt-2 pb-6 rounded bg-dark-900 md:pb-9 md:pt-4 md:px-8">
                 <br />
                   {/* STAKING OR UNSTAKING */}

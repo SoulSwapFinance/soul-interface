@@ -1,10 +1,9 @@
-import { Currency, CurrencyAmount, Fraction, Percent } from '../../sdk'
-
-import Button from '../../components/Button'
-import { Field } from '../../state/mint/actions'
-import React from 'react'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
+import { Currency, CurrencyAmount, Fraction, Percent } from 'sdk'
+import { Button } from 'components/Button'
+import { Field } from 'state/mint/actions'
+import React from 'react'
 
 export function ConfirmAddModalBottom({
   noLiquidity,
@@ -65,7 +64,7 @@ export function ConfirmAddModalBottom({
         </div>
       </div>
 
-      <Button color="gradient" size="lg" onClick={onAdd}>
+      <Button color="deepPurple" size="lg" onClick={onAdd}>
         {noLiquidity ? i18n._(t`Create Pool & Supply`) : i18n._(t`Confirm Supply`)}
       </Button>
     </div>

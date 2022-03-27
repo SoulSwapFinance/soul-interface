@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from 'react'
 
 import { BigNumber } from '@ethersproject/bignumber'
-import Fraction from '../entities/Fraction'
+import { Fraction } from 'entities/bignumber/Fraction'
 import { POOL_DENY } from '../constants'
 import orderBy from 'lodash/orderBy'
 import range from 'lodash/range'
-import soulData from '@soulswap/soul-data'
-import { useActiveWeb3React } from './useActiveWeb3React'
+import soulData from 'soul-data'
+import { useActiveWeb3React } from 'services/web3'
 import { useSoulGuideContract } from './useContract'
 
 // Todo: Rewrite in terms of web3 as opposed to subgraph
@@ -16,17 +16,19 @@ const useZapperFarms = () => {
   const soulGuideContract = useSoulGuideContract()
 
   const fetchAllFarms = useCallback(async () => {
-    let [pools, liquidityPositions, averageBlockTime, soulPrice, kashiPairs, soulPairs, masterChef] = await Promise.all(
+    let [pools, liquidityPositions, averageBlockTime, 
+      soulPrice, soulPairs, summoner] 
+      = await Promise.all(
       [
-        soulData.masterchef.pools(), // results[1]
+        soulData.summoner.pools(), // results[1]
         soulData.exchange.userPositions({
           user_address: '0xc2edad668740f1aa35e4d8f227fb8e17dca888cd',
         }), // results[1]
         soulData.utils.getAverageBlockTime(), // results[2]
         soulData.soul.priceUSD(), // results[3]
-        soulData.bentobox.kashiStakedInfo(), // results[4]
+        // soulData.coffinbox.kashiStakedInfo(), // results[4]
         soulData.exchange.pairs(), // results[5]
-        soulData.masterchef.info(), // results[6]
+        soulData.summoner.info(), // results[6]
       ]
     )
 
@@ -36,47 +38,48 @@ const useZapperFarms = () => {
       })
       .sort()
 
-    kashiPairs = kashiPairs.filter((result) => result !== undefined) // filter out undefined (not in onsen) from all kashiPairs
+    // underworldPairs = underworldPairs.filter((result) => result !== undefined) // filter out undefined (not in onsen) from all underworldPairs
     soulPairs = soulPairs.filter((pair) => pairAddresses.includes(pair.id))
 
-    const KASHI_PAIRS = range(190, 230, 1) // kashiPair pids 189-229
+    const UNDERWORLD_PAIRS = range(190, 230, 1) // underworldPair pids 189-229
 
     const farms = pools
       .filter((pool: any) => {
-        // console.log(KASHI_PAIRS.includes(Number(pool.id)), pool, Number(pool.id))
+        // console.log(UNDERWORLD_PAIRS.includes(Number(pool.id)), pool, Number(pool.id))
         return (
           !POOL_DENY.includes(pool?.id) &&
-          (soulPairs.find((pair: any) => pair?.id === pool?.pair) || KASHI_PAIRS.includes(Number(pool?.id)))
+          (soulPairs.find((pair: any) => pair?.id === pool?.pair) || UNDERWORLD_PAIRS.includes(Number(pool?.id)))
         )
       })
       .map((pool) => {
-        if (KASHI_PAIRS.includes(Number(pool?.id))) {
-          const pair = kashiPairs.find((pair) => pair?.id === pool?.pair)
-          // console.log('kpair:', pair, pool)
-          return {
-            ...pool,
-            ...pair,
-            type: 'KMP',
-            pid: Number(pool.id),
-            pairAddress: pair?.id,
-            pairSymbol: pair?.symbol,
-            liquidityPair: {
-              token0: {
-                id: pair?.collateral,
-                symbol: pair?.collateralSymbol,
-                decimals: pair?.collateralDecimals,
-              },
-              token1: {
-                id: pair?.asset,
-                symbol: pair?.assetSymbol,
-                decimals: pair?.assetDecimals,
-              },
-            },
-            roiPerYear: pair?.roiPerYear,
-            totalAssetStaked: pair?.totalAssetStaked ? pair?.totalAssetStaked / Math.pow(10, pair?.assetDecimals) : 0,
-            tvl: pair?.balanceUSD ? pair?.balanceUSD : 0,
-          }
-        } else {
+        // if (UNDERWORLD_PAIRS.includes(Number(pool?.id))) {
+        //   const pair = underworldPairs.find((pair) => pair?.id === pool?.pair)
+        //   // console.log('kpair:', pair, pool)
+        //   return {
+        //     ...pool,
+        //     ...pair,
+        //     type: 'KMP',
+        //     pid: Number(pool.id),
+        //     pairAddress: pair?.id,
+        //     pairSymbol: pair?.symbol,
+        //     liquidityPair: {
+        //       token0: {
+        //         id: pair?.collateral,
+        //         symbol: pair?.collateralSymbol,
+        //         decimals: pair?.collateralDecimals,
+        //       },
+        //       token1: {
+        //         id: pair?.asset,
+        //         symbol: pair?.assetSymbol,
+        //         decimals: pair?.assetDecimals,
+        //       },
+        //     },
+        //     roiPerYear: pair?.roiPerYear,
+        //     totalAssetStaked: pair?.totalAssetStaked ? pair?.totalAssetStaked / Math.pow(10, pair?.assetDecimals) : 0,
+        //     tvl: pair?.balanceUSD ? pair?.balanceUSD : 0,
+        //   }
+        // } else 
+        {
           const pair = soulPairs.find((pair) => pair.id === pool.pair)
           const liquidityPosition = liquidityPositions.find(
             (liquidityPosition: any) => liquidityPosition.pair.id === pair.id
@@ -86,7 +89,7 @@ const useZapperFarms = () => {
           const totalSupply = pair.totalSupply > 0 ? pair.totalSupply : 0.1
           const reserveUSD = pair.reserveUSD > 0 ? pair.reserveUSD : 0.1
           const balanceUSD = (balance / Number(totalSupply)) * Number(reserveUSD)
-          const rewardPerSecond = ((pool.allocPoint / masterChef.totalAllocPoint) * masterChef.soulPerSecond) / 1e18
+          const rewardPerSecond = ((pool.allocPoint / summoner.totalAllocPoint) * summoner.soulPerSecond) / 1e18
           const roiPerSecond = (rewardPerSecond * soulPrice) / balanceUSD
           const roiPerHour = roiPerSecond * secondsPerHour
           const roiPerDay = roiPerHour * 24
