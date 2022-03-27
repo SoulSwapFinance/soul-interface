@@ -404,16 +404,24 @@ export default function Stablecoin() {
                 />
               </Button> */}
 
-              <StableInputPanel
+             {/* <StableInputPanel
                 value={redeemValue}
                 showMaxButton={true}
                 onUserInput={(value) => setRedeemValue(value)}
                 onMax={ () => setRedeemValue(lumensBalance.toExact()) }
-                // currency={lumensToken}
+                currency={lumensToken}
                 disableCurrencySelect={true}
                 locked={!account}
                 id="stablecoin-currency-input"
-              />
+              /> */}
+               <AssetInput
+                            currencyLogo={false}
+                                currency={lumensToken}
+                                currencyAddress={lumensToken.address}
+                                value={value}
+                                onChange={setRedeemValue}
+                                showMax={false}
+                            />
               <div className="h-px my-6 bg-dark-1000"></div>
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1">
               <div className="flex justify-between">
