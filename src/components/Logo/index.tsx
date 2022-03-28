@@ -17,11 +17,11 @@ export type LogoProps = {
 /**
  * Renders an image by sequentially trying a list of URIs, and then eventually a fallback triangle alert
  */
-const Logo: FC<LogoProps> = ({ srcs, width, height, style, alt = '', className, ...rest }) => {
+const Logo: FC<LogoProps> = ({ srcs, width, height, alt = '', className, ...rest }) => {
   const [, refresh] = useState<number>(0)
   const src = srcs.find((src) => !BAD_SRCS[src])
   return (
-    <div className="rounded" style={{ width, height }}>
+    <div className="rounded">
       <Image
         unoptimized
         src={src || 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/unknown.png'}
@@ -35,7 +35,6 @@ const Logo: FC<LogoProps> = ({ srcs, width, height, style, alt = '', className, 
         alt={alt}
         layout="fixed"
         className={classNames('rounded', className)}
-        style={style}
         {...rest}
       />
     </div>

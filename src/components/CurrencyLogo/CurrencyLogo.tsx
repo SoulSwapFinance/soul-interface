@@ -61,7 +61,7 @@ export interface CurrencyLogoProps {
   className?: string
 }
 
-const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({ currency, size = '24px', className, style }) => {
+const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({ currency, size = '24px', className }) => {
   const uriLocations = useHttpLocations(
     currency instanceof WrappedTokenInfo ? currency.logoURI || currency.tokenInfo.logoURI : undefined
   )
@@ -82,7 +82,7 @@ const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({ currency, size = '
     return [UNKNOWN_ICON]
   }, [currency, uriLocations])
 
-  return <Logo srcs={srcs} width={size} height={size} alt={currency?.symbol} className={className} style={style} />
+  return <Logo srcs={srcs} width={size} height={size} alt={currency?.symbol} className={className} />
 }
 
 export default CurrencyLogo

@@ -4,9 +4,7 @@ import stringify from 'fast-json-stable-stringify'
 import useSWR, { SWRConfiguration } from 'swr'
 
 import {
-  getAlcxPrice,
   getBundle,
-  getCvxPrice,
   getDayData,
   getFactory,
   getFantomPrice,
@@ -14,13 +12,10 @@ import {
   getNativePrice,
   getPairDayData,
   getPairs,
-  getRulerPrice,
   getSoulPrice,
-  getSpellPrice,
   getTokenDayData,
   getTokenPairs,
   getTokens,
-  getTruPrice,
 } from '../fetchers'
 import { GraphProps } from '../interfaces'
 import { ethPriceQuery } from '../queries'
@@ -63,12 +58,6 @@ export function useEthPrice(variables = undefined, swrConfig: SWRConfiguration =
 }
 
 // @ts-ignore TYPE NEEDS FIXING
-export function useSpellPrice(swrConfig: SWRConfiguration = undefined) {
-  const { data } = useSWR('spellPrice', () => getSpellPrice(), swrConfig)
-  return data
-}
-
-// @ts-ignore TYPE NEEDS FIXING
 export function useFantomPrice(swrConfig: SWRConfiguration = undefined) {
   const { chainId } = useActiveWeb3React()
   const shouldFetch = chainId && chainId === ChainId.FANTOM
@@ -76,56 +65,10 @@ export function useFantomPrice(swrConfig: SWRConfiguration = undefined) {
   return data
 }
 
-// @ts-ignore TYPE NEEDS FIXING
-// export function useMovrPrice(swrConfig: SWRConfiguration = undefined) {
-//   const { chainId } = useActiveWeb3React()
-//   const shouldFetch = chainId && chainId === ChainId.MOONRIVER
-//   const { data } = useSWR(shouldFetch ? 'movrPrice' : null, () => getMovrPrice(), swrConfig)
-//   return data
-// }
-
-// @ts-ignore TYPE NEEDS FIXING
-export function useRulerPrice(swrConfig: SWRConfiguration = undefined) {
-  const { chainId } = useActiveWeb3React()
-  const shouldFetch = chainId && chainId === ChainId.FANTOM
-  const { data } = useSWR(shouldFetch ? ['rulerPrice'] : null, () => getRulerPrice(), swrConfig)
-  return data
-}
-
-// @ts-ignore TYPE NEEDS FIXING
-export function useTruPrice(swrConfig: SWRConfiguration = undefined) {
-  const { chainId } = useActiveWeb3React()
-  const { data } = useSWR(chainId && chainId === ChainId.FANTOM ? ['truPrice'] : null, () => getTruPrice(), swrConfig)
-  return data
-}
-
-// @ts-ignore TYPE NEEDS FIXING
-export function useAlcxPrice(swrConfig: SWRConfiguration = undefined) {
-  const { chainId } = useActiveWeb3React()
-  const shouldFetch = chainId && chainId === ChainId.FANTOM
-  const { data } = useSWR(shouldFetch ? ['aclxPrice'] : null, () => getAlcxPrice(), swrConfig)
-  return data
-}
-
-// @ts-ignore TYPE NEEDS FIXING
-export function useCvxPrice(swrConfig: SWRConfiguration = undefined) {
-  const { chainId } = useActiveWeb3React()
-  const shouldFetch = chainId && chainId === ChainId.FANTOM
-  const { data } = useSWR(shouldFetch ? ['cvxPrice'] : null, () => getCvxPrice(), swrConfig)
-  return data
-}
-
-// @ts-ignore TYPE NEEDS FIXING
-// export function useSushiPrice(swrConfig: SWRConfiguration = undefined) {
-//   const { data } = useSWR(['sushiPrice'], () => getSushiPrice(), swrConfig)
-//   return data
-// }
-
 export function useSoulPrice(swrConfig: SWRConfiguration = undefined) {
   const { data } = useSWR(['soulPrice'], () => getSoulPrice(), swrConfig)
   return data
 }
-
 
 export function useBundle(variables = undefined, swrConfig: SWRConfiguration = undefined) {
   const { chainId } = useActiveWeb3React()

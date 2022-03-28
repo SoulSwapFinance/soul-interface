@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
 import Container from '../../components/Container'
-import Sidebar from 'components/Sidebar'
+// import Sidebar from 'components/Sidebar'
 import AnalyticsHeaderNew from 'features/analytics/HeaderNew'
 
 // @ts-ignore TYPE NEEDS FIXING
