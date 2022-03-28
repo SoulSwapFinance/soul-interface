@@ -13,7 +13,7 @@ export default function Data() {
   const { chainId, account } = useWeb3React()
   const soulPrice = usePriceApi('0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07')
   // const { data } = useArcherMinerTips()
-  const { info } = useTokenInfo('0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07')
+  const { tokenInfo } = useTokenInfo('0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07')
   // const { price }= usePriceUSD('0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07')
   // const { supply }= useTotalSupply('0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07')
   
@@ -26,9 +26,9 @@ export default function Data() {
         </Typography>
       <div className="grid grid-col mx-auto ">
       <Typography className="text-center">
-        Price: ${Number(info.price).toFixed(4)} <br/>
-        Supply: {formatNumber((Number(info.supply) / (10**Number(info.decimals))), false, false, 2)} <br/>
-        MCap: ${formatNumber(Number(info.mcap), false, false, 2)} <br/>
+        Price: ${Number(tokenInfo.price).toFixed(4)} <br/>
+        Supply: {formatNumber((Number(tokenInfo.supply) / (10**Number(tokenInfo.decimals))), false, false, 2)} <br/>
+        MCap: ${formatNumber(Number(tokenInfo.mcap), false, false, 2)} <br/>
       </Typography>
       </div>
       </div>

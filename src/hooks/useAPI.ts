@@ -64,6 +64,69 @@ export function usePriceUSD(tokenAddress): { status: string; price: T } {
     return { status, price }
 }
 
+export function useLuxorBondInfo(bondAddress): { status: string; luxorBondInfo: T } {
+    const { account, chainId } = useActiveWeb3React()
+    const [status, setStatus] = useState<string>('idle')
+    const [luxorBondInfo, setInfo] = useState<T>({
+        name: '',
+        asset: '',
+        price: '0',
+        status: '',
+        discount: '0',
+    })  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus('fetching')
+        const response = await fetch(`https://api.soulswap.finance/luxor/${bondAddress}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referrer-Policy': 'no-referrer',
+          },
+        })
+        const json = await response.json()
+        setInfo(json as T)
+        setStatus('fetched')
+      }
+      if (chainId == ChainId.FANTOM) fetchData()
+    }, [])
+  
+    return { status, luxorBondInfo }
+}
+
+export function useLuxorInfo(): { status: string; luxorInfo: T } {
+    const { account, chainId } = useActiveWeb3React()
+    const [status, setStatus] = useState<string>('idle')
+    const [luxorInfo, setInfo] = useState<T>({
+        name: '',
+        price: '0',
+        value: '0',
+        epoch: '0',
+        decimals: '18',
+        supply: '0',
+        mcap: '0',
+        img:''
+    })  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus('fetching')
+        const response = await fetch(`https://api.soulswap.finance/luxor`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referrer-Policy': 'no-referrer',
+          },
+        })
+        const json = await response.json()
+        setInfo(json as T)
+        setStatus('fetched')
+      }
+      if (chainId == ChainId.FANTOM) fetchData()
+    }, [])
+  
+    return { status, luxorInfo }
+}
+
 export function useTotalSupply(tokenAddress): { status: string; supply: T } {
     const { chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
@@ -90,10 +153,10 @@ export function useTotalSupply(tokenAddress): { status: string; supply: T } {
     return { status, supply }
 }
 
-export function useTokenInfo(tokenAddress): { status: string; info: T } {
+export function useTokenInfo(tokenAddress): { status: string; tokenInfo: T } {
     const { chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
-    const [info, setInfo] = useState<T>({
+    const [tokenInfo, setTokenInfo] = useState<T>({
         name: '',
         price: '0',
         decimals: '18',
@@ -112,11 +175,44 @@ export function useTokenInfo(tokenAddress): { status: string; info: T } {
           },
         })
         const json = await response.json()
+        setTokenInfo(json as T)
+        setStatus('fetched')
+      }
+      if (chainId == ChainId.FANTOM) fetchData()
+    }, [])
+  
+    return { status, tokenInfo }
+}
+
+export function useUserInfo(tokenAddress): { status: string; userInfo: T } {
+    const { account, chainId } = useActiveWeb3React()
+    const [status, setStatus] = useState<string>('idle')
+    const [userInfo, setInfo] = useState<T>({
+        name: '',
+        price: '0',
+        value: '0',
+        balance: '0',
+        decimals: '18',
+        supply: '0',
+        mcap: '0',
+        img:''
+    })  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus('fetching')
+        const response = await fetch(`https://api.soulswap.finance/user/${account}/${tokenAddress}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referrer-Policy': 'no-referrer',
+          },
+        })
+        const json = await response.json()
         setInfo(json as T)
         setStatus('fetched')
       }
       if (chainId == ChainId.FANTOM) fetchData()
     }, [])
   
-    return { status, info }
+    return { status, userInfo }
 }

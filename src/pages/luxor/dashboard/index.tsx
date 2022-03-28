@@ -27,11 +27,12 @@ import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
 // import ExternalLink from 'components/ExternalLink'
 import LuxorGlowShadow from 'components/LuxorGlowShadow'
+import { useTokenInfo } from 'hooks/useAPI'
 
 export default function Dashboard() {
   const { i18n } = useLingui()
   // const { luxData } = useLuxorDashboard()
-  const [totalLuxorSupply, setTotalLuxorSupply] = useState(0)
+  // const [totalLuxorSupply, setTotalLuxorSupply] = useState(0)
   const [totalSorSupply, setTotalSorSupply] = useState(0)
   const [totalWlumSupply, setTotalWlumSupply] = useState(0)
   const [stakedLuxor, setStakedLuxor] = useState(0)
@@ -84,6 +85,12 @@ export default function Dashboard() {
   const LuxorDaiAddress = LuxDaiContract.address
   const FtmDaiAddress = FtmDaiContract.address
   const WrappedLumFantomAddress = WlumFtmContract.address
+  const LuxorAddress = LuxorContract.address
+  
+  const { tokenInfo } = useTokenInfo(LuxorAddress)
+  const luxorSupply = Number(tokenInfo.supply) / 1e9
+  // const luxSupply = formatNumber((Number(info.supply) / (10**Number(info.decimals))), false, false, 2)
+  // console.log('luxorSupply:%s', luxorSupply)
 
   // Calculate Minting Rate
   const startTime = 1638424800000
@@ -91,7 +98,7 @@ export default function Dashboard() {
   // // daysAgo in (recall: nowTime is in ms)
   const daysAgo = (nowTime - startTime) / 8_640_0000 // ~111 Days √
   // const secondsAgo = daysAgo * 86_400
-  const luxorPerDay = totalLuxorSupply / daysAgo
+  const luxorPerDay = luxorSupply / daysAgo
   
   // DUMMIES //
   // let volume = 640774.2467250191
@@ -106,7 +113,7 @@ export default function Dashboard() {
   const wLumFtmPrice = usePairPrice(WrappedLumFantomAddress) // ~1_6M // √
   const ftmDaiPrice = usePairPrice(FtmDaiAddress) 
 
-  const luxorCirculatingSupply = totalLuxorSupply - stakedLuxor - lockedLuxor
+  const luxorCirculatingSupply = luxorSupply - stakedLuxor - lockedLuxor
   
   // enable damped sor collateral rate
   const sorSorCollateralAdjusted = sorSorCollateral * 0.1
@@ -116,7 +123,7 @@ export default function Dashboard() {
   const treasuryBalance = treasuryLiquidityBalance + treasuryReserveBalance + treasuryInvestmentBalance
   
   // calculate floor price
-  const luxorFloorPrice = treasuryReserveBalance / (totalLuxorSupply)
+  const luxorFloorPrice = treasuryReserveBalance / (luxorSupply)
 
   // const result = useCurrencyBalance(LUX_TREASURY_ADDRESS, LUX_FTM)
   // const luxFtmBalance = result
@@ -140,11 +147,11 @@ export default function Dashboard() {
     try {
       const timer = setTimeout(() => {
         fetchBals()
-      }, 3000)
+      }, 10000)
       // Clear timeout if the component is unmounted
       return () => clearTimeout(timer)
     } catch (err) {
-      console.warn(err)
+      // console.warn(err)
     }
   })
 
@@ -154,13 +161,13 @@ export default function Dashboard() {
     const fetchBals = async () => {
         try {
             // get treasury balance of Luxor
-            const data = await LuxorContract?.totalSupply()
-            const totalSupply = data / 1e9
-            setTotalLuxorSupply(Number(totalSupply))
-            console.log('totalSupply:%s', Number(totalSupply))
+            // const data = await LuxorContract?.totalSupply()
+            // const totalSupply = data / 1e9
+            // setTotalLuxorSupply(Number(totalSupply))
+            // console.log('totalSupply:%s', Number(totalSupply))
 
             const sorSupply = await SorContract?.totalSupply()
-            const totalSorSupply = sorSupply / 1e18
+            const totalSorSupply = Number(sorSupply) / 1e18
             setTotalSorSupply(Number(totalSorSupply))
             // console.log('totalSorSupply:%s', Number(totalSorSupply))
 
@@ -221,7 +228,7 @@ export default function Dashboard() {
             const ftmDaiBal = await FtmDaiContract.balanceOf(LuxorTreasuryAddress)
             const ftmDaiBalance = ftmDaiBal * ftmDaiPrice / 1e18
             // console.log('ftmDaiPrice:%s', Number(ftmDaiPrice))
-            console.log('ftmDaiBalance:%s', Number(ftmDaiBalance))
+            // console.log('ftmDaiBalance:%s', Number(ftmDaiBalance))
             
             // get treasury balance of FTM-WLUM
             const wlumFtmBal = await WlumFtmContract.balanceOf(LuxorTreasuryAddress)
@@ -248,7 +255,7 @@ export default function Dashboard() {
             setLockedLuxor(Number(warmupBalance))
             // console.log('warmupBalance:%s', Number(warmupBalance))
 
-            return [totalSorSupply, totalWlumSupply, totalSupply, sorDaiCollateral, sorLuxCollateral, sorSorCollateral, daiBalance, ftmBalance, luxFtmBalance, totalReserveBalance, luxBalance, warmupBalance, ftmDaiBalance, LiquidityBalance]
+            return [totalSorSupply, totalWlumSupply, luxorSupply, sorDaiCollateral, sorLuxCollateral, sorSorCollateral, daiBalance, ftmBalance, luxFtmBalance, totalReserveBalance, luxBalance, warmupBalance, ftmDaiBalance, LiquidityBalance]
         } catch (err) {
             console.warn(err)
         }
@@ -365,7 +372,7 @@ export default function Dashboard() {
       angle: luxorCirculatingSupply,
       color: '#FFA300',
       label: 'CIRCULATING',
-      percent: ((luxorCirculatingSupply / totalLuxorSupply) * 100).toFixed(),
+      percent: ((luxorCirculatingSupply / luxorSupply) * 100).toFixed(),
       text: 'The combined number of LUX tokens being traded or in public wallets.',
     },
     {
@@ -373,7 +380,7 @@ export default function Dashboard() {
       color: '#FFC300',
       label: 'STAKED',
       text: 'The portion of supply that is not in circulation as it is currently staking.',
-      percent: ((stakedLuxor / totalLuxorSupply) * 100).toFixed()
+      percent: ((stakedLuxor / luxorSupply) * 100).toFixed()
       ,
     },
     {
@@ -381,7 +388,7 @@ export default function Dashboard() {
       color: '#FFE300',
       label: 'WARM-UP',
       text: 'The portion of supply that is not in circulation as it is currently in the warm-up period.',
-      percent: ((lockedLuxor/ totalLuxorSupply) * 100).toFixed()
+      percent: ((lockedLuxor/ luxorSupply) * 100).toFixed()
       ,
     },
   ]
@@ -524,7 +531,7 @@ export default function Dashboard() {
             <Typography
               className={'flex justify-center items-baseline'}
               variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               {formatNumber(luxorPrice * totalLuxorSupply, true, false, 0)}
+               {formatNumber(luxorPrice * luxorSupply, true, false, 0)}
             </Typography>
           </div>
             <div className="md:hidden h-px my-4 mb-3 bg-dark-1000" />
@@ -574,7 +581,7 @@ export default function Dashboard() {
             <Typography 
             className={'flex justify-center items-baseline'}
             variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               {formatNumber(totalLuxorSupply, false)}
+               {formatNumber(luxorSupply, false)}
             </Typography>
             <Typography 
             className={'flex justify-center items-baseline'}
@@ -626,7 +633,7 @@ export default function Dashboard() {
                 <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                  {formatNumber(totalLuxorSupply, false)}
+                  {formatNumber(luxorSupply, false)}
                 </Typography>
                 <Typography
                   className={'flex justify-center items-baseline'}
