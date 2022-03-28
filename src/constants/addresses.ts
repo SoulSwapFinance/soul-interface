@@ -400,6 +400,15 @@ export const SOULSWAP_SWAPPER_ADDRESS: {
   [ChainId.FANTOM_TESTNET]: '',
 }
 
+export const SOR_STAKING_REWARDS_ADDRESS: {
+  [chainId in ChainId]: string
+} = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xb2b22549F6586Cd81054677C6b9413Cea9587fd7', // FEB22
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
 export const SOULSWAP_MULTISWAPPER_ADDRESS: {
   [chainId in ChainId]: string
 } = {

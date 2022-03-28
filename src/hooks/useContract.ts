@@ -21,6 +21,7 @@ import {
   LOTTERY_ADDRESS,
   SOR_ADDRESS,
   LUX_TREASURY_ADDRESS,
+  SOR_STAKING_REWARDS_ADDRESS,
 } from '../constants/addresses'
 import {
   ARGENT_WALLET_DETECTOR_ABI,
@@ -93,6 +94,7 @@ import LOTTERY_ABI from '../constants/abis/soulswap/lottery.json' // 28 JUL
 import SOULVAULT_ABI from '../constants/abis/soulswap/soulvault.json' // 31 JUL
 import LUXOR_ABI from '../constants/abis/soulswap/luxor.json'
 import LUXOR_TREASURY_ABI from '../constants/abis/soulswap/luxor-treasury.json'
+import SOR_STAKING_ABI from '../constants/abis/soulswap/sor-staking.json'
 import LUXOR_STAKING_ABI from '../constants/abis/soulswap/luxor-staking.json'
 import LUXOR_STAKING_HELPER_ABI from '../constants/abis/soulswap/luxor-staking-helper.json'
 import WLUM_ABI from '../constants/abis/soulswap/wlumens.json'
@@ -463,6 +465,11 @@ export function useEnchantmentContract(withSignerIfPossible?: boolean): Contract
 export function useMakerContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && REAPER_ADDRESS[chainId], MAKER_ABI, false)
+}
+
+export function useSorStakingContract(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOR_STAKING_REWARDS_ADDRESS[chainId], SOR_STAKING_ABI, false)
 }
 
 export function useReaperContract(): Contract | null {
