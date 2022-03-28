@@ -5,7 +5,7 @@ import { useActiveWeb3React } from 'services/web3'
 
 type T = Record<string, string>
 
-const BASE_URL = 'https://dev.luxor.money
+const BASE_URL = 'https://dev.luxor.money'
 
 export function useArcherMinerTips(): { status: string; data: T } {
   const { chainId } = useActiveWeb3React()
@@ -208,9 +208,6 @@ export function useLuxorTreasuryInfo(): { status: string; luxorTreasuryData: T }
         ftmLendBalance: '0',
         daiLendBalance: '0',
         
-        investBalance: '0',
-        liquidityBalance: '0',
-        reserveBalance: '0'
     })  
     useEffect(() => {
       const fetchData = async () => {
