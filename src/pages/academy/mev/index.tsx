@@ -1,13 +1,20 @@
+import React from 'react'
+
 const Flashbots = () => {
-	return (
-      <iframe 
-			frameBorder={"none"}
-    		title={"Flashbots"}
-    		src="https://docs.flashbots.net/"
-    		height={"800px"}
-    		width={"100%"}
-    />
-	);
-};
+let screenHeight = screen.height
+const frameHeight = `${screenHeight - 132}px`
+console.log('screenHeight:%s', screenHeight)
+const LINK = 'https://docs.flashbots.net'
+
+return (
+			<iframe 
+				frameBorder={"none"}
+				title={"Flashbots"}
+				src={LINK}
+				height={frameHeight}
+				width={"100%"}
+			/>	
+	)
+}
 
 export default Flashbots;
