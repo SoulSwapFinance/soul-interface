@@ -29,18 +29,11 @@ const Luxor = () => {
           </NavLink>
         </Button>
         </div>
-    <div className="flex mb-4 gap-1 items-center justify-center">
+        <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/dashboard'}>
             <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Dashboard </span>
-            </a>
-          </NavLink>
-        </Button>
-        <Button variant="filled" color="yellow" size="lg">
-          <NavLink href={'/luxor/sor'}>
-            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Stablecoin </span>
+            <span> Data </span>
             </a>
           </NavLink>
         </Button>
@@ -48,6 +41,20 @@ const Luxor = () => {
           <NavLink href={'/luxor/stake'}>
             <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Stake </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="yellow" size="lg">
+          <NavLink href={'/luxor/wrap'}>
+            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Wrap </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="yellow" size="lg">
+          <NavLink href={'/luxor/sor'}>
+            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Stable </span>
             </a>
           </NavLink>
         </Button>

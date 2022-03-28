@@ -1,6 +1,6 @@
-import { useSorMasterContract } from '../../hooks/useContract'
+import { useSorMasterContract } from 'hooks/useContract'
 import { useMemo, useCallback } from 'react'
-import { useSingleCallResult } from '../../state/multicall/hooks'
+import { useSingleCallResult } from 'state/multicall/hooks'
 import { CurrencyAmount, JSBI } from 'sdk'
 import { BigNumber } from '@ethersproject/bignumber'
 import { useActiveWeb3React } from 'services/web3/hooks'
