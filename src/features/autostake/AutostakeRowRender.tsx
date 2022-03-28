@@ -543,15 +543,15 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                     <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
-                                            primaryColour="#3Eff3E"
-                                            color="black"
+                                            primaryColour="#A654DC"
+                                            color="white"
                                             margin=".5rem 0 .5rem 0"
                                             // onClick={() => handleHarvest()
                                             onClick={() => setShowHarvestConfirmation(true)
                                             }
                                         >
-                                            HARVEST SOUL
-                                            {earnedAmount !== 0 ? `($${(earnedAmount * soulPrice).toFixed(2)})` : ''}
+                                            COMPOUND REWARDS
+                                            {/* {earnedAmount !== 0 ? `($${(earnedAmount * soulPrice).toFixed(2)})` : ''} */}
                                         </SubmitButton>
                                     </Wrap>
                                     {/* <AssetInput
@@ -580,7 +580,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                 <Wrap padding="0" margin="0" display="flex">
                                     <SubmitButton
                                         height="2rem"
-                                        primaryColour="#fa4600"
+                                        primaryColour="#ee82ee"
                                         color="black"
                                         margin=".5rem 0 .5rem 0"
                                         onClick={() =>
@@ -600,9 +600,9 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
             <Modal isOpen={showHarvestConfirmation} onDismiss={
         () => setShowHarvestConfirmation(false)}>
         <div className="space-y-4">
-          <ModalHeader header={`Are you sure?`} onClose={() => setShowHarvestConfirmation(false)} />
+          <ModalHeader header={`Harvest Bounty Rewards`} onClose={() => setShowHarvestConfirmation(false)} />
           <Typography variant="lg">
-            Harvesting rewards you with a SOUL bounty, which goes to your wallet for triggering a reinvestment.
+            Harvesting rewards you with a {callFee.toFixed(2)} SOUL bounty, which goes to your wallet for triggering a reinvestment.
             You must withdraw in order to claim rewards.
           </Typography>
           <Typography variant="sm" className="font-medium">
@@ -613,8 +613,8 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
           </Typography>
           <SubmitButton
             height="2.5rem"
-            primaryColour="#3Eff3E"
-            color="black"
+            primaryColour="#A654DC"
+            color="white"
             // onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
             onClick={() =>
               // setShowConfirmation(true)
@@ -665,7 +665,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
           </Typography>
           <SubmitButton
             height="2.5rem"
-            primaryColour="#3Eff3E"
+            primaryColour="#EE82EE"
             color="black"
             onClick={() =>
               // setShowConfirmation(true)
