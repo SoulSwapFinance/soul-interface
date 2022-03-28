@@ -147,9 +147,9 @@ export default function Stablecoin() {
           </NavLink>
         </Button>
         <Button variant="filled" color="yellow" size="lg">
-          <NavLink href={'/luxor/sor'}>
+          <NavLink href={'/luxor/stake'}>
             <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Stable </span>
+            <span> Stake </span>
             </a>
           </NavLink>
         </Button>
@@ -196,7 +196,7 @@ export default function Stablecoin() {
                   } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-yellow`
                 }
               >
-                {i18n._(t`Mint`)}
+                {i18n._(t`MINT SOR`)}
               </Tab>
               <Tab
                 className={({ selected }) =>
@@ -204,7 +204,7 @@ export default function Stablecoin() {
                   } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-yellow`
                 }
               >
-                {i18n._(t`Redeem`)}
+                {i18n._(t`REDEEM DAI`)}
               </Tab>
           </div>
             </Tab.List>

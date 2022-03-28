@@ -29,6 +29,7 @@ import { useApproveCallback } from 'hooks/useApproveCallback'
 import Modal from 'components/Modal/DefaultModal'
 import Typography from 'components/Typography'
 import ModalHeader from 'components/Modal/Header'
+import { useLuxorBondInfo } from 'hooks/useAPI'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -57,8 +58,8 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     const [earnedAmount, setEarnedAmount] = useState(0)
     const [unstakedBal, setUnstakedBal] = useState(0)
 
-    const [discount, setDiscount] = useState(0)
-    const [bondPrice, setBondPrice] = useState(0)
+    // const [discount, setDiscount] = useState(0)
+    // const [bondPrice, setBondPrice] = useState(0)
     const [available, setAvailabile] = useState(false)
     // const { deposit, withdraw } = useBondContract()
     const luxPrice = useLuxorPrice()
@@ -67,13 +68,19 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     const [showConfirmation, setShowConfirmation] = useState(false)
     const [showAvailabilityMsg, setShowAvailabilityMsg] = useState(false)
 
+    const { luxorBondInfo } = useLuxorBondInfo(bondAddress)
+    const bondPrice = Number(luxorBondInfo.price) / 1e18
+    const discount = luxorBondInfo.discount
+    // console.log('bondPrice:%s', bondPrice)
+    // console.log('discount:%s', discount)
+
     /**
      * Runs only on initial render/mount
      */
     useEffect(() => {
-        fetchDiscount()
+        // fetchDiscount()
         fetchEarnings()
-        fetchPayout()
+        // fetchPayout()
         fetchApproval()
     }, [account])
 
@@ -84,7 +91,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
         if (account) {
             const timer = setTimeout(() => {
                 if (showing) {
-                    fetchPayout()
+                    // fetchPayout()
                     // fetchDiscount()
                     fetchEarnings()
                     fetchApproval()
@@ -105,49 +112,49 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
             fetchEarnings()
             // fetchDiscount()
             fetchApproval()
-            fetchAvailability()
+            // fetchAvailability()
         }
     }
 
     /**
      * Checks the Discount Amount
      */
-    const fetchDiscount = async () => {
-        try {
-            const result = await BondContract?.bondPriceUsd(bondAddress)
-            const bondPrice = result / 1e18
-            // console.log('luxPrice:%s', luxPrice)
-            // console.log('bondPrice:%s', bondPrice)
-            setBondPrice(bondPrice)
-            const diff = Number(luxPrice) - Number(bondPrice)
-            const disc = diff / luxPrice * 100
-            const discount = diff <= 0 ? 0 : disc
-            // console.log('discount:%s', discount)
-            setDiscount(Number(discount))
-        } catch (e) {
-            console.warn(e)
-        }
-    }
+    // const fetchDiscount = async () => {
+    //     try {
+    //         const result = await BondContract?.bondPriceUsd(bondAddress)
+    //         const bondPrice = result / 1e18
+    //         // console.log('luxPrice:%s', luxPrice)
+    //         // console.log('bondPrice:%s', bondPrice)
+    //         setBondPrice(bondPrice)
+    //         const diff = Number(luxPrice) - Number(bondPrice)
+    //         const disc = diff / luxPrice * 100
+    //         const discount = diff <= 0 ? 0 : disc
+    //         // console.log('discount:%s', discount)
+    //         setDiscount(Number(discount))
+    //     } catch (e) {
+    //         console.warn(e)
+    //     }
+    // }
 
     /**
      * Checks the Availability Amount
      */
-    const fetchAvailability = async () => {
-        try {
-            const result1 = await BondContract?.totalDebt(bondAddress)
-            const totalDebt = result1 / 1e18
-            const result2 = await BondContract?.maximumDebt(bondAddress)
-            const maxDebt = result2 / 1e18
-            // console.log('luxPrice:%s', luxPrice)
-            // console.log('bondPrice:%s', bondPrice)
-            const diff = Number(maxDebt) - Number(totalDebt)
-            const available = diff <= 0 ? false : true
-            // console.log('discount:%s', discount)
-            setAvailabile(available)
-        } catch (e) {
-            console.warn(e)
-        }
-    }
+    // const fetchAvailability = async () => {
+    //     try {
+    //         const result1 = await BondContract?.totalDebt(bondAddress)
+    //         const totalDebt = result1 / 1e18
+    //         const result2 = await BondContract?.maximumDebt(bondAddress)
+    //         const maxDebt = result2 / 1e18
+    //         // console.log('luxPrice:%s', luxPrice)
+    //         // console.log('bondPrice:%s', bondPrice)
+    //         const diff = Number(maxDebt) - Number(totalDebt)
+    //         const available = diff <= 0 ? false : true
+    //         // console.log('discount:%s', discount)
+    //         setAvailabile(available)
+    //     } catch (e) {
+    //         console.warn(e)
+    //     }
+    // }
 
     /**
      * Gets the lpToken balance of the user for each pool

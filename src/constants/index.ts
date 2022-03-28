@@ -47,6 +47,10 @@ export const ARCHER_GAS_URI: { [chainId in ChainId]?: string } = {
   [ChainId.ETHEREUM]: 'https://api.archerdao.io/v1/gas',
 }
 
+export const SOULSWAP_URI: { [chainId in ChainId]?: string } = {
+  [ChainId.FANTOM]: 'https://api.soulswap.finance',
+}
+
 // export const COMMON_CONTRACT_NAMES: { [address: string]: string } = {
 //     // [UNI_ADDRESS]: 'UNI',
 //     [TIMELOCK_ADDRESS]: 'Timelock',
