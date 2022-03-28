@@ -141,7 +141,7 @@ export default function Stablecoin() {
             </NavLink>
           </Button>
           <Button variant="filled" color="yellow" size="lg">
-            <NavLink href={'/luxor/wrap'}>
+            <NavLink href={'/luxor/stake'}>
               <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                 <span> Stake </span>
               </a>
