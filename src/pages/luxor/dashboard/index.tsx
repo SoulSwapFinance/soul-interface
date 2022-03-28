@@ -44,6 +44,7 @@ export default function Dashboard() {
   // const [treasuryLuxDaiBalance, setTreasuryLuxDaiBalance] = useState(0)
   const [treasuryFtmDaiBalance, setTreasuryFtmDaiBalance] = useState(0)
   const [treasuryLiquidityBalance, setTreasuryLiquidityBalance] = useState(0)
+  const [treasuryReserveBalance, setTreasuryReserveBalance] = useState(0)
   const [treasuryDaiBalance, setTreasuryDaiBalance] = useState(0)
   const [treasuryFtmBalance, setTreasuryFtmBalance] = useState(0)
   const [treasuryLendBalance, setTreasuryLendBalance] = useState(0)
@@ -110,8 +111,7 @@ export default function Dashboard() {
   const totalSorCollateral = sorDaiCollateral + sorLuxCollateral + sorSorCollateralAdjusted
 
   // calculate Treasury Balances
-  const treasuryInvestmentBalance = treasuryLendBalance
-  const treasuryReserveBalance = treasuryDaiBalance + treasuryFtmBalance
+  const treasuryInvestmentBalance = treasuryLendBalance + treasuryFtmDaiBalance
   const treasuryBalance = treasuryLiquidityBalance + treasuryReserveBalance + treasuryInvestmentBalance
   
   // calculate floor price
@@ -175,7 +175,7 @@ export default function Dashboard() {
             setSorLuxCollateral(Number(sorLuxCollateral))
             setSorSorCollateral(Number(sorSorCollateral))
 
-            console.log('sorDaiCollateral:%s', Number(sorDaiCollateral))
+            // console.log('sorDaiCollateral:%s', Number(sorDaiCollateral))
 
             const wlumSupply = await WrappedLumensContract?.totalSupply()
             const totalWlumSupply = wlumSupply / 1e9
@@ -187,9 +187,12 @@ export default function Dashboard() {
             const ftmBal = await FtmContract.balanceOf(LuxorTreasuryAddress)
             const ftmBalance = ftmBal / 1e18
             const totalReserveBalance = daiBalance + (ftmBalance * ftmPrice)
+            console.log('ftmPrice:%s', ftmPrice)
+            console.log('ftmBalance:%s', ftmBalance)
+
             setTreasuryDaiBalance(daiBalance)
             setTreasuryFtmBalance(ftmBalance)
-            // setTreasuryReserveBalance(Number(totalReserveBalance))
+            setTreasuryReserveBalance(Number(totalReserveBalance))
             console.log('totalReserveBalance:%s', Number(totalReserveBalance))
  
             // get treasury lend balance (wip)
@@ -199,7 +202,7 @@ export default function Dashboard() {
             const ftmLendBalance = ftmLendBal / 1e18
             const totalLendBalance = daiLendBalance + (ftmLendBalance * ftmPrice)
             setTreasuryLendBalance(Number(totalLendBalance))
-            console.log('totalReserveBalance:%s', Number(totalReserveBalance))
+            console.log('totalLendBalance:%s', Number(totalLendBalance))
 
             // get treasury balance of LUX-FTM
             const luxFtmBal = await LuxFtmContract.balanceOf(LuxorTreasuryAddress)
@@ -316,15 +319,15 @@ export default function Dashboard() {
     },
     {
       "label": "RESERVES",
-      "angle": treasuryFtmBalance + treasuryDaiBalance,
+      "angle": treasuryReserveBalance,
       "color": "#FFD300",
-      "percent": (((treasuryFtmBalance + treasuryDaiBalance) / treasuryBalance) * 100).toFixed()
+      "percent": (((treasuryReserveBalance) / treasuryBalance) * 100).toFixed()
     },
     {
         "label": "INVESTMENTS",
         "angle": treasuryFtmDaiBalance + treasuryLendBalance,
         "color": "#FFB300",
-        "percent": (((treasuryFtmDaiBalance + treasuryLendBalance) / treasuryBalance) * 100).toFixed()
+        "percent": (((treasuryInvestmentBalance) / treasuryBalance) * 100).toFixed()
     },
     // {
     //     "label": "FTM",
