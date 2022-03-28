@@ -34,7 +34,7 @@ import { useTokenContract } from 'hooks/useTokenContract'
 import { useLuxorPrice } from 'hooks/getPrices'
 import { useLuxorInfo } from 'hooks/useAPI'
 
-export default function Stablecoin() {
+export default function Stake() {
   const addTransaction = useTransactionAdder()
   const { i18n } = useLingui()
   const [stakeValue, setStakeValue] = useState('0')
@@ -98,7 +98,7 @@ export default function Stablecoin() {
 
   const redeemError = !parsedRedeemValue
     ? 'Enter Amount'
-    : luxorBalance?.lessThan(parsedRedeemValue)
+    : lumensBalance?.lessThan(parsedRedeemValue)
       ? 'Insufficient Balance'
         : undefined
   const isRedeemValid = !redeemError
@@ -355,7 +355,7 @@ export default function Stablecoin() {
                 currency={lumensToken}
                 disableCurrencySelect={true}
                 locked={!account}
-                id="stablecoin-currency-input"
+                id="stablecoin-currency-output"
               />
              {/*  <AssetInput
                             currencyLogo={false}
