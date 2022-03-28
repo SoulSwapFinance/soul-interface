@@ -5,6 +5,8 @@ import { useActiveWeb3React } from 'services/web3'
 
 type T = Record<string, string>
 
+const BASE_URL = 'https://dev.luxor.money
+
 export function useArcherMinerTips(): { status: string; data: T } {
   const { chainId } = useActiveWeb3React()
   const [status, setStatus] = useState<string>('idle')
@@ -47,7 +49,7 @@ export function usePriceUSD(tokenAddress): { status: string; price: T } {
     useEffect(() => {
       const fetchData = async () => {
         setStatus('fetching')
-        const response = await fetch(`https://api.soulswap.finance/priceusd/${tokenAddress}`, {
+        const response = await fetch(`${BASE_URL}/priceusd/${tokenAddress}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -79,7 +81,7 @@ export function useLuxorBondInfo(bondAddress): { status: string; luxorBondInfo: 
     useEffect(() => {
       const fetchData = async () => {
         setStatus('fetching')
-        const response = await fetch(`https://api.soulswap.finance/luxor/${bondAddress}`, {
+        const response = await fetch(`${BASE_URL}/luxor/${bondAddress}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -113,7 +115,7 @@ export function useLuxorInfo(): { status: string; luxorInfo: T } {
     useEffect(() => {
       const fetchData = async () => {
         setStatus('fetching')
-        const response = await fetch(`https://api.soulswap.finance/luxor`, {
+        const response = await fetch(`${BASE_URL}/luxor`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -139,7 +141,7 @@ export function useTotalSupply(tokenAddress): { status: string; supply: T } {
     useEffect(() => {
       const fetchData = async () => {
         setStatus('fetching')
-        const response = await fetch(`https://api.soulswap.finance/tokens/${tokenAddress}`, {
+        const response = await fetch(`${BASE_URL}/tokens/${tokenAddress}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -172,7 +174,7 @@ export function useTokenInfo(tokenAddress): { status: string; tokenInfo: T } {
     useEffect(() => {
       const fetchData = async () => {
         setStatus('fetching')
-        const response = await fetch(`https://api.soulswap.finance/tokens/${tokenAddress}`, {
+        const response = await fetch(`${BASE_URL}/tokens/${tokenAddress}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -213,7 +215,7 @@ export function useLuxorTreasuryInfo(): { status: string; luxorTreasuryData: T }
     useEffect(() => {
       const fetchData = async () => {
         setStatus('fetching')
-        const response = await fetch(`https://api.soulswap.finance/luxor/treasury`, {
+        const response = await fetch(`${BASE_URL}/luxor/treasury`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -247,7 +249,7 @@ export function useUserInfo(tokenAddress): { status: string; userInfo: T } {
     useEffect(() => {
       const fetchData = async () => {
         setStatus('fetching')
-        const response = await fetch(`https://api.soulswap.finance/user/${account}/${tokenAddress}`, {
+        const response = await fetch(`${BASE_URL}/user/${account}/${tokenAddress}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
