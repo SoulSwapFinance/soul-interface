@@ -57,27 +57,27 @@ const Graph: FC<GraphProps> = ({ data, stroke, strokeWidth, width, height, setSe
     })
   }, [data, height])
 
-  const handleTooltip = useCallback(
-    (event: TouchEvent<SVGRectElement> | MouseEvent<SVGRectElement>) => {
-      const { x } = localPoint(event) || { x: 0 }
-      const x0 = xScale.invert(x)
-      // @ts-ignore TYPE NEEDS FIXING
-      const index = bisect(data, x0, 0)
-      const d = data[index]
+  // const handleTooltip = useCallback(
+  //   (event: TouchEvent<SVGRectElement> | MouseEvent<SVGRectElement>) => {
+  //     const { x } = localPoint(event) || { x: 0 }
+  //     const x0 = xScale.invert(x)
+  //     // @ts-ignore TYPE NEEDS FIXING
+  //     const index = bisect(data, x0, 0)
+  //     const d = data[index]
 
-      // Add check to avoid unnecessary changes and setState to DOM
-      if (d && dRef.current !== index) {
-        dRef.current = index
-        // @ts-ignore TYPE NEEDS FIXING
-        circleRef.current.setAttribute('cx', xScale(d.x).toString())
-        // @ts-ignore TYPE NEEDS FIXING
-        circleRef.current.setAttribute('cy', yScale(d.y).toString())
-        // @ts-ignore TYPE NEEDS FIXING
-        setSelectedIndex(index)
-      }
-    },
-    [data, setSelectedIndex, xScale, yScale]
-  )
+  //     // Add check to avoid unnecessary changes and setState to DOM
+  //     if (d && dRef.current !== index) {
+  //       dRef.current = index
+  //       // @ts-ignore TYPE NEEDS FIXING
+  //       circleRef.current.setAttribute('cx', xScale(d.x).toString())
+  //       // @ts-ignore TYPE NEEDS FIXING
+  //       circleRef.current.setAttribute('cy', yScale(d.y).toString())
+  //       // @ts-ignore TYPE NEEDS FIXING
+  //       setSelectedIndex(index)
+  //     }
+  //   },
+  //   [data, setSelectedIndex, xScale, yScale]
+  // )
 
   const showTooltip = useCallback(() => {
     // @ts-ignore TYPE NEEDS FIXING
@@ -117,10 +117,10 @@ const Graph: FC<GraphProps> = ({ data, stroke, strokeWidth, width, height, setSe
           height={height}
           fill={'transparent'}
           {...(setSelectedIndex && {
-            onTouchStart: handleTooltip,
-            onTouchMove: handleTooltip,
+            // onTouchStart: handleTooltip,
+            // onTouchMove: handleTooltip,
             onMouseEnter: showTooltip,
-            onMouseMove: handleTooltip,
+            // onMouseMove: handleTooltip,
             onMouseLeave: hideTooltip,
           })}
         />
