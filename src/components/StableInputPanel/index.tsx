@@ -156,7 +156,7 @@ export default function StableInputPanel({
               />
               {!hideBalance && currency && selectedCurrencyBalance ? (
                 <div className="flex items-center flex-cols-1">
-                  <div onClick={onMax} className="text-xs text-center hover:text-purple font-medium text-center cursor-pointer text-low-emphesis">
+                  <div onClick={onMax} className="text-xs text-center hover:text-yellow font-medium text-center cursor-pointer text-low-emphesis">
                     {renderBalance ? (
                       renderBalance(selectedCurrencyBalance)
                     ) : (           
