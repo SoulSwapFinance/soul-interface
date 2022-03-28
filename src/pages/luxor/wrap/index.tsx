@@ -12,7 +12,7 @@ import LuxorGlowShadow from 'components/LuxorGlowShadow'
 import { Button, ButtonError } from 'components/Button'
 import StableInputPanel from 'components/StableInputPanel'
 import { AutoColumn } from 'components/Column'
-import { ApprovalState, useApproveCallback, useLumensContract } from 'hooks'
+import { ApprovalState, useApproveCallback, useLumensContract, useWrappedLumensContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
 import {
   ChainId,
@@ -45,11 +45,12 @@ export default function Stablecoin() {
   const { wrap } = useLumensContract()
   // const { data } = useStablecoin()
 
-  const lumensToken = new Token(chainId, getAddress(LUM_ADDRESS[chainId]), 18, 'LUM')
-  const wlumToken = new Token(chainId, getAddress(WLUM_ADDRESS[chainId]), 18, 'WLUM')
+  const lumensToken = new Token(chainId, getAddress(LUM_ADDRESS[chainId]), 9, 'LUM')
+  const wlumToken = new Token(chainId, getAddress(WLUM_ADDRESS[chainId]), 9, 'WLUM')
   // const redeemClaimAmount = useRedeemClaimAmount(wlumToken)
 
   const LumensContract = useLumensContract()
+  const WrappedLumensContract = useWrappedLumensContract()
 
   const lumensBalance = useCurrencyBalance(account, lumensToken)
   const wlumBalance = useCurrencyBalance(account, wlumToken)
@@ -163,7 +164,7 @@ export default function Stablecoin() {
       </div>
         <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">
           <Tab.Group>
-            <Tab.List className="flex items-center justify-center mb-1 space-x-2 p-3px text-white">
+        <Tab.List className="flex items-center justify-center mb-1 space-x-2 p-3px text-white">
             <div className="grid grid-cols-2 w-[95%] rounded-md p-2px bg-dark-900">
             <Tab
                 className={({ selected }) =>
@@ -256,7 +257,7 @@ export default function Stablecoin() {
                     className="text-black"
                     onClick={async () => {
                       try {
-                        const tx = await wrap(BigNumber.from(parsedStakeValue.quotient.toString()))
+                        const tx = await WrappedLumensContract.wrap(BigNumber.from(parsedStakeValue.quotient.toString()))
                         addTransaction(tx, {
                           summary: `Wrap Lumens`,
                         })
