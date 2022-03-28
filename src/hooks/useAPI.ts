@@ -32,7 +32,8 @@ export function useArcherMinerTips(): { status: string; data: T } {
       setData(json.data as T)
       setStatus('fetched')
     }
-    if (chainId == ChainId.FANTOM) fetchData()
+    if (chainId == ChainId.FANTOM) 
+    fetchData()
   }, [])
 
   return { status, data }
@@ -58,7 +59,8 @@ export function usePriceUSD(tokenAddress): { status: string; price: T } {
         setPrice(json as T)
         setStatus('fetched')
       }
-      if (chainId == ChainId.FANTOM) fetchData()
+      if (chainId == ChainId.FANTOM) 
+      fetchData()
     }, [])
   
     return { status, price }
@@ -88,7 +90,8 @@ export function useLuxorBondInfo(bondAddress): { status: string; luxorBondInfo: 
         setInfo(json as T)
         setStatus('fetched')
       }
-      if (chainId == ChainId.FANTOM) fetchData()
+      if (chainId == ChainId.FANTOM) 
+      fetchData()
     }, [])
   
     return { status, luxorBondInfo }
@@ -121,7 +124,8 @@ export function useLuxorInfo(): { status: string; luxorInfo: T } {
         setInfo(json as T)
         setStatus('fetched')
       }
-      if (chainId == ChainId.FANTOM) fetchData()
+      if (chainId == ChainId.FANTOM) 
+      fetchData()
     }, [])
   
     return { status, luxorInfo }
@@ -147,7 +151,8 @@ export function useTotalSupply(tokenAddress): { status: string; supply: T } {
         setSupply(json['supply'] as T)
         setStatus('fetched')
       }
-      if (chainId == ChainId.FANTOM) fetchData()
+      if (chainId == ChainId.FANTOM) 
+      fetchData()
     }, [])
   
     return { status, supply }
@@ -178,10 +183,52 @@ export function useTokenInfo(tokenAddress): { status: string; tokenInfo: T } {
         setTokenInfo(json as T)
         setStatus('fetched')
       }
-      if (chainId == ChainId.FANTOM) fetchData()
+      if (chainId == ChainId.FANTOM) 
+      fetchData()
     }, [])
   
     return { status, tokenInfo }
+}
+
+export function useLuxorTreasuryInfo(): { status: string; luxorTreasuryData: T } {
+    const { account, chainId } = useActiveWeb3React()
+    const [status, setStatus] = useState<string>('idle')
+    const [luxorTreasuryData, setInfo] = useState<T>({
+        ftmBalance: '0',
+        daiBalance: '0',
+        
+        luxFtmBalance: '0',
+        luxDaiBalance: '0',
+        
+        ftmDaiBalance: '0',
+        ftmWlumBalance: '0',
+        
+        ftmLendBalance: '0',
+        daiLendBalance: '0',
+        
+        investBalance: '0',
+        liquidityBalance: '0',
+        reserveBalance: '0'
+    })  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus('fetching')
+        const response = await fetch(`https://api.soulswap.finance/luxor/treasury`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referrer-Policy': 'no-referrer',
+          },
+        })
+        const json = await response.json()
+        setInfo(json as T)
+        setStatus('fetched')
+      }
+      if (chainId == ChainId.FANTOM) 
+      fetchData()
+    }, [])
+  
+    return { status, luxorTreasuryData }
 }
 
 export function useUserInfo(tokenAddress): { status: string; userInfo: T } {
@@ -211,7 +258,8 @@ export function useUserInfo(tokenAddress): { status: string; userInfo: T } {
         setInfo(json as T)
         setStatus('fetched')
       }
-      if (chainId == ChainId.FANTOM) fetchData()
+      if (chainId == ChainId.FANTOM) 
+      fetchData()
     }, [])
   
     return { status, userInfo }
