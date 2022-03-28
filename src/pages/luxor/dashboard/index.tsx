@@ -42,16 +42,18 @@ export default function Dashboard() {
   // const [pooledLux, setPooledLuxor] = useState(0)
   // const [treasuryLuxFtmBalance, setTreasuryLuxFtmBalance] = useState(0)
   // const [treasuryLuxDaiBalance, setTreasuryLuxDaiBalance] = useState(0)
-  const [treasuryFtmDaiBalance, setTreasuryFtmDaiBalance] = useState(0)
+  // const [treasuryFtmDaiBalance, setTreasuryFtmDaiBalance] = useState(0)
+  const [treasuryInvestmentBalance, setTreasuryInvestmentBalance] = useState(0)
   const [treasuryLiquidityBalance, setTreasuryLiquidityBalance] = useState(0)
   const [treasuryReserveBalance, setTreasuryReserveBalance] = useState(0)
-  const [treasuryDaiBalance, setTreasuryDaiBalance] = useState(0)
-  const [treasuryFtmBalance, setTreasuryFtmBalance] = useState(0)
-  const [treasuryLendBalance, setTreasuryLendBalance] = useState(0)
+  // const [treasuryDaiBalance, setTreasuryDaiBalance] = useState(0)
+  // const [treasuryFtmBalance, setTreasuryFtmBalance] = useState(0)
+  // const [treasuryLendBalance, setTreasuryLendBalance] = useState(0)
+  // const [treasuryLendBalance, setTreasuryLendBalance] = useState(0)
   const LuxFtmContract = usePairContract('0x951BBB838e49F7081072895947735b0892cCcbCD')
   const LuxDaiContract = usePairContract('0x46729c2AeeabE7774a0E710867df80a6E19Ef851')
   const FtmDaiContract = usePairContract('0xf3d6e8ecece8647b456d57375ce0b51b8f0cd40b')
-  // const WlumFtmContract = usePairContract('0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99')
+  const WlumFtmContract = usePairContract('0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99')
   
   // KEY CONTRACTS //
   const LuxorStakingContract = useLuxorStakingContract()
@@ -81,7 +83,7 @@ export default function Dashboard() {
 // let luxorCirculatingSupply = 100
   const LuxorDaiAddress = LuxDaiContract.address
   const FtmDaiAddress = FtmDaiContract.address
-  // const WrappedLumFantomAddress = WlumFtmContract.address
+  const WrappedLumFantomAddress = WlumFtmContract.address
 
   // Calculate Minting Rate
   const startTime = 1638424800000
@@ -101,7 +103,7 @@ export default function Dashboard() {
   // console.log('luxorVolume:%s', luxData?.result[1])
   // get the price of key treasury reserves
   const luxDaiPrice = usePairPrice(LuxorDaiAddress) // ~160_000 // √
-  // const wLumFtmPrice = usePairPrice(WrappedLumFantomAddress) // ~1_6M // √
+  const wLumFtmPrice = usePairPrice(WrappedLumFantomAddress) // ~1_6M // √
   const ftmDaiPrice = usePairPrice(FtmDaiAddress) 
 
   const luxorCirculatingSupply = totalLuxorSupply - stakedLuxor - lockedLuxor
@@ -111,11 +113,10 @@ export default function Dashboard() {
   const totalSorCollateral = sorDaiCollateral + sorLuxCollateral + sorSorCollateralAdjusted
 
   // calculate Treasury Balances
-  const treasuryInvestmentBalance = treasuryLendBalance + treasuryFtmDaiBalance
   const treasuryBalance = treasuryLiquidityBalance + treasuryReserveBalance + treasuryInvestmentBalance
   
   // calculate floor price
-  const luxorFloorPrice = treasuryReserveBalance / totalLuxorSupply
+  const luxorFloorPrice = treasuryReserveBalance / (totalLuxorSupply)
 
   // const result = useCurrencyBalance(LUX_TREASURY_ADDRESS, LUX_FTM)
   // const luxFtmBalance = result
@@ -187,21 +188,21 @@ export default function Dashboard() {
             const ftmBal = await FtmContract.balanceOf(LuxorTreasuryAddress)
             const ftmBalance = ftmBal / 1e18
             const totalReserveBalance = daiBalance + (ftmBalance * ftmPrice)
-            console.log('ftmPrice:%s', ftmPrice)
-            console.log('ftmBalance:%s', ftmBalance)
+            // console.log('ftmPrice:%s', ftmPrice)
+            // console.log('ftmBalance:%s', ftmBalance)
 
-            setTreasuryDaiBalance(daiBalance)
-            setTreasuryFtmBalance(ftmBalance)
+            // setTreasuryDaiBalance(daiBalance)
+            // setTreasuryFtmBalance(ftmBalance)
             setTreasuryReserveBalance(Number(totalReserveBalance))
-            console.log('totalReserveBalance:%s', Number(totalReserveBalance))
+            // console.log('totalReserveBalance:%s', Number(totalReserveBalance))
  
-            // get treasury lend balance (wip)
+            // get treasury lend balance //
             const daiLendBal = await DaiFtmLendContract.balanceOf(LuxorTreasuryAddress)
             const daiLendBalance = daiLendBal / 1e18
             const ftmLendBal = await FtmDaiLendContract.balanceOf(LuxorTreasuryAddress)
             const ftmLendBalance = ftmLendBal / 1e18
             const totalLendBalance = daiLendBalance + (ftmLendBalance * ftmPrice)
-            setTreasuryLendBalance(Number(totalLendBalance))
+            // setTreasuryLendBalance(Number(totalLendBalance))
             console.log('totalLendBalance:%s', Number(totalLendBalance))
 
             // get treasury balance of LUX-FTM
@@ -214,13 +215,23 @@ export default function Dashboard() {
             const luxDaiBal = await LuxDaiContract.balanceOf(LuxorTreasuryAddress)
             const luxDaiBalance = luxDaiBal * luxDaiPrice / 1e18
             // setTreasuryLuxDaiBalance(Number(luxDaiBalance))
-            // console.log('luxFtmBalance:%s', Number(luxFtmBalance))
+            // console.log('luxDaiBalance:%s', Number(luxDaiBalance))
 
             // get treasury balance of FTM-DAI
             const ftmDaiBal = await FtmDaiContract.balanceOf(LuxorTreasuryAddress)
             const ftmDaiBalance = ftmDaiBal * ftmDaiPrice / 1e18
-            setTreasuryFtmDaiBalance(Number(ftmDaiBalance))
-            // console.log('luxFtmBalance:%s', Number(luxFtmBalance))
+            // console.log('ftmDaiPrice:%s', Number(ftmDaiPrice))
+            console.log('ftmDaiBalance:%s', Number(ftmDaiBalance))
+            
+            // get treasury balance of FTM-WLUM
+            const wlumFtmBal = await WlumFtmContract.balanceOf(LuxorTreasuryAddress)
+            const wlumFtmBalance = wlumFtmBal * wLumFtmPrice / 1e18
+            // console.log('wLumFtmPrice:%s', Number(wLumFtmPrice))
+            // console.log('wlumFtmBalance:%s', Number(wlumFtmBalance))
+            
+            // total investments balance //
+            const InvestmentBalance = totalLendBalance + ftmDaiBalance + wlumFtmBalance
+            setTreasuryInvestmentBalance(Number(InvestmentBalance))
 
             const LiquidityBalance = luxDaiBalance + luxFtmBalance
             setTreasuryLiquidityBalance(LiquidityBalance)
@@ -325,7 +336,7 @@ export default function Dashboard() {
     },
     {
         "label": "INVESTMENTS",
-        "angle": treasuryFtmDaiBalance + treasuryLendBalance,
+        "angle": treasuryInvestmentBalance,
         "color": "#FFB300",
         "percent": (((treasuryInvestmentBalance) / treasuryBalance) * 100).toFixed()
     },
@@ -382,25 +393,32 @@ export default function Dashboard() {
         <title>Dashboard | Luxor</title>
         <meta key="description" name="description" />
       </Head>
-      <div className="flex mt-2 mb-4 gap-3 items-center justify-center">
+      <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
+        <Button variant="filled" color="yellow" size="lg">
+          <NavLink href={'/luxor/stake'}>
+            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Stake </span>
+            </a>
+          </NavLink>
+        </Button>
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/bonds'}>
             <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Bond Luxor </span>
+            <span> Bond </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="yellow" size="lg">
+          <NavLink href={'/luxor/wrap'}>
+            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Wrap </span>
             </a>
           </NavLink>
         </Button>
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/sor'}>
             <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Stablecoin </span>
-            </a>
-          </NavLink>
-        </Button>
-        <Button variant="filled" color="yellow" size="lg">
-          <NavLink href={'/luxor/stake'}>
-            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Stake Luxor </span>
+            <span> Stable </span>
             </a>
           </NavLink>
         </Button>

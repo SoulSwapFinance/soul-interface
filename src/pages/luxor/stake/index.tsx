@@ -15,8 +15,8 @@ import { Tab } from '@headlessui/react'
 import LuxorGlowShadow from 'components/LuxorGlowShadow'
 import { Button, ButtonError } from 'components/Button'
 import StableInputPanel from 'components/StableInputPanel'
-import AssetInput from 'components/AssetInput'
-import { AutoColumn } from 'components/Column'
+// import AssetInput from 'components/AssetInput'
+// import { AutoColumn } from 'components/Column'
 // import QuestionHelper from 'components/QuestionHelper'
 import { ApprovalState, useApproveCallback, useLuxorStakeHelperContract, useLuxorStakingContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
@@ -180,57 +180,32 @@ export default function Stablecoin() {
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/dashboard'}>
             <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Dashboard </span>
-            </a>
-          </NavLink>
-        </Button>
-        <Button variant="filled" color="yellow" size="lg">
-          <NavLink href={'/luxor/sor'}>
-            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Stablecoin </span>
+            <span> Data </span>
             </a>
           </NavLink>
         </Button>
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/bonds'}>
             <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Bonds </span>
+            <span> Bond </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="yellow" size="lg">
+          <NavLink href={'/luxor/wrap'}>
+            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Wrap </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="yellow" size="lg">
+          <NavLink href={'/luxor/sor'}>
+            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Stable </span>
             </a>
           </NavLink>
         </Button>
       </div>
-      {/* <Alert
-        message={
-          <div className="flex flex-col space-y-3">
-            <div className="flex flex-col">
-              <div className="text-sm font-normal leading-5 leading-5">
-                <p>
-                  <strong className="text-accent bold">How to Mint:&nbsp;</strong>
-                </p>
-                <p>1. Enter in the amount of DAI you would like to deposit and press MINT.</p>
-                <p>2. Claim your SOR tokens.</p>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <div className="text-sm font-normal leading-5 leading-5">
-                <p>
-                  <strong className="text-accent bold">How to Redeem:&nbsp;</strong>
-                </p>
-                <p>1. Enter in the amount of SOR you would like to redeem and press Redeem.</p>
-                <p>2. Claim your DAI tokens.</p>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <div className="text-sm font-normal leading-5">
-                <strong className="text-accent bold">Note:&nbsp;</strong>
-                Approval is only needed once.
-              </div>
-            </div>
-          </div>
-        }
-        type="information"
-      /> */}
-
       <LuxorGlowShadow>
         <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">
           <Tab.Group>
@@ -255,43 +230,6 @@ export default function Stablecoin() {
           </div>
             </Tab.List>
             <Tab.Panel className={'outline-none'}>
-              {/* <Button variant={'link'} color={'yellow'} className="absolute top-0 right-0 flex">
-                <QuestionHelper
-                  // title={i18n._(t`How it works`)}
-                  // width={'small'}
-                  text={
-                    <div className="flex flex-col space-y-2">
-                      <div className="flex flex-col">
-                        <p>
-                            <strong className="text-accent bold">Stake:&nbsp;</strong>
-                          </p>
-                        <p>
-                          <strong className="text-accent bold">1.</strong> Enter DAI to deposit.
-                        </p>
-                        <p>
-                          <strong className="text-accent bold">2.</strong> Click Stake.
-                        </p>
-                        <p>
-                          <strong className="text-accent bold">3.</strong> Claim your SOR tokens.
-                        </p>
-                      </div>
-                      <div className="flex flex-col">
-                        <div className="text-sm font-normal leading-5">
-                          <strong className="text-accent bold">Note:&nbsp;</strong>
-                          Approval is only needed once.
-                        </div>
-                      </div>
-                      <div className="flex flex-col">
-                          <div className="text-sm font-normal leading-5">
-                            <strong className="text-accent bold">Note:&nbsp;</strong>
-                            Approval is only needed once.
-                          </div>
-                        </div>
-                    </div>
-                  }
-                />
-              </Button> */}
-
               <StableInputPanel
                 value={stakeValue}
                 showMaxButton={true}
