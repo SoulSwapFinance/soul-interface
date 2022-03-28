@@ -42,7 +42,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
         variant="sm"
         className={classNames(
           router.asPath === link ? 'text-white' : '',
-          'hover:text-white font-bold py-5 px-2 rounded flex gap-3'
+          'hover:text-purple font-bold py-5 px-2 rounded flex gap-3'
         )}
       >
         {!isDesktop && node.icon}
