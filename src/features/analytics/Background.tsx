@@ -28,7 +28,7 @@ const backgrounds = {
 
 export default function Background({ background, children }: BackgroundProps) {
   return (
-    <div className="h-[200px] md:h-[151px] w-full relative bg-dark-900">
+    <div className="h-[200px] md:h-[151px] w-full relative bg-dark-1000">
       <div
         className={classNames(
           'absolute w-full h-full',

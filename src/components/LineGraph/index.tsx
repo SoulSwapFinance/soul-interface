@@ -1,3 +1,4 @@
+// eslint-disable
 import { localPoint } from '@visx/event'
 import { LinearGradient } from '@visx/gradient'
 import { scaleLinear } from '@visx/scale'
@@ -60,6 +61,7 @@ const Graph: FC<GraphProps> = ({ data, stroke, strokeWidth, width, height, setSe
     (event: TouchEvent<SVGRectElement> | MouseEvent<SVGRectElement>) => {
       const { x } = localPoint(event) || { x: 0 }
       const x0 = xScale.invert(x)
+      // @ts-ignore TYPE NEEDS FIXING
       const index = bisect(data, x0, 0)
       const d = data[index]
 

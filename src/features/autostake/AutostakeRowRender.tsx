@@ -112,7 +112,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                     fetchApproval()
                     fetchFees()
                 }
-            }, 3000)
+            }, 10000)
             // Clear timeout if the component is unmounted
             return () => clearTimeout(timer)
         }

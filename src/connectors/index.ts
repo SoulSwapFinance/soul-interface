@@ -55,7 +55,7 @@ export function getNetwork(defaultChainId, urls = RPC) {
 }
 
 export const network = new NetworkConnector({
-  defaultChainId: 250,
+  defaultChainId: 1,
   urls: RPC,
 })
 
@@ -66,7 +66,7 @@ export function getNetworkLibrary(): Web3Provider {
 }
 
 const supportedChainIds = [
-  // 1, // mainnet
+  1, // mainnet
   // 56, // binance smart chain
   250, // fantom
   // 4002, // fantom testnet
