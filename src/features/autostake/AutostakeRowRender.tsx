@@ -110,8 +110,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                     getApyAndLiquidity()
                     fetchEarnings()
                     fetchApproval()
-                    fetchPerformanceFee()
-                    fetchCallFee()
+                    fetchFees()
                 }
             }, 3000)
             // Clear timeout if the component is unmounted
@@ -128,8 +127,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
             fetchBals()
             fetchEarnings()
             fetchApproval()
-            fetchPerformanceFee()
-            fetchCallFee()
+            fetchFees()
         }
     }
 
@@ -197,45 +195,28 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     }
 
     /**
-     * Gets the performance fee.
+     * Gets the call and performance fees.
      */
-    const fetchPerformanceFee = async () => {
+    const fetchFees = async () => {
         if (!account) {
             // alert('connect wallet')
         } else {
             try {
                 // get performance
-                const performanceFee = await AutoStakeContract?.performanceFee()
+                const performance = await AutoStakeContract?.performanceFee()
+                const call = await AutoStakeContract?.callFee()
                 // const  = result / 10000
                 const available = await AutoStakeContract?.available()
-                const fee = performanceFee * available / 10000 / 1e18
-                setPerformanceFee(Number(fee))
-                console.log('fee:%s', Number(fee))
+                const performanceFee = performance * available / 10000 / 1e18
+                const callFee = call * available / 10000 / 1e18
 
-                return [fee]
-            } catch (err) {
-                console.warn(err)
-            }
-        }
-    }
+                setCallFee(Number(callFee))
+                console.log('callFee:%s', Number(callFee))
 
-    /**
-     * Gets the call fee.
-     */
-    const fetchCallFee = async () => {
-        if (!account) {
-            // alert('connect wallet')
-        } else {
-            try {
-                // get performance
-                const performanceFee = await AutoStakeContract?.performanceFee()
-                // const  = result / 10000
-                const available = await AutoStakeContract?.available()
-                const fee = performanceFee * available / 10000 / 1e18
-                setCallFee(Number(fee))
-                console.log('fee:%s', Number(fee))
+                setPerformanceFee(Number(performanceFee))
+                console.log('performanceFee:%s', Number(performanceFee))
 
-                return [fee]
+                return [callFee, performanceFee]
             } catch (err) {
                 console.warn(err)
             }
@@ -565,7 +546,8 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                             primaryColour="#3Eff3E"
                                             color="black"
                                             margin=".5rem 0 .5rem 0"
-                                            onClick={() => handleHarvest()
+                                            // onClick={() => handleHarvest()
+                                            onClick={() => setShowHarvestConfirmation(true)
                                             }
                                         >
                                             HARVEST SOUL
@@ -620,7 +602,8 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
         <div className="space-y-4">
           <ModalHeader header={`Are you sure?`} onClose={() => setShowHarvestConfirmation(false)} />
           <Typography variant="lg">
-            Harvesting incurs a {harvestFee === 0 ? 0 : harvestFee.toFixed(0) === "0.00" ? "<0.00" : harvestFee.toFixed(2)} SOUL fee, which goes towards the development of the SoulSwap ecosystem.
+            Harvesting rewards you with a SOUL bounty, which goes to your wallet for triggering a reinvestment.
+            You must withdraw in order to claim rewards.
           </Typography>
           <Typography variant="sm" className="font-medium">
             QUESTIONS OR CONCERNS?
@@ -638,7 +621,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
               handleHarvest()
             }
           >
-           ACCEPT {`&`} HARVEST
+           ACCEPT {`&`} COMPOUND
           </SubmitButton>
           <SubmitButton
             height="2.5rem"
