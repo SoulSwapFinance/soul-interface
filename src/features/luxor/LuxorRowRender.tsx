@@ -29,7 +29,7 @@ import { useApproveCallback } from 'hooks/useApproveCallback'
 import Modal from 'components/Modal/DefaultModal'
 import Typography from 'components/Typography'
 import ModalHeader from 'components/Modal/Header'
-import { useLuxorBondInfo } from 'hooks/useAPI'
+import { useLuxorBondInfo, useUserInfo } from 'hooks/useAPI'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;

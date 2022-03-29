@@ -44,9 +44,7 @@ const BondItem = ({ bond, ...rest }) => {
   const addTransaction = useTransactionAdder()
 
   const remainingVesting = bond ? useRemainingVesting : ''
-  // const principal = useCurrency(bond?.principal)
   const principalToken = DAI[250]
-  // const principalToken = new Token(250, getAddress(bond?.principal), bond?.decimals, bond?.symbol)
   const luxorToken = new Token(250, getAddress(LUX_ADDRESS[250]), 18, 'LUX')
 
   const [depositValue, setDepositValue] = useState('')

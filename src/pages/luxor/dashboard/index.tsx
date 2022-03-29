@@ -27,26 +27,26 @@ import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
 // import ExternalLink from 'components/ExternalLink'
 import LuxorGlowShadow from 'components/LuxorGlowShadow'
-import { useTokenInfo } from 'hooks/useAPI'
+import { useTokenInfo, useUserInfo, usePairInfo, useSorInfo } from 'hooks/useAPI'
 
 export default function Dashboard() {
   const { i18n } = useLingui()
   // const { luxData } = useLuxorDashboard()
   // const [totalLuxorSupply, setTotalLuxorSupply] = useState(0)
-  const [totalSorSupply, setTotalSorSupply] = useState(0)
-  const [totalWlumSupply, setTotalWlumSupply] = useState(0)
+  // const [totalSorSupply, setTotalSorSupply] = useState(0)
+  // const [totalWlumSupply, setTotalWlumSupply] = useState(0)
   const [stakedLuxor, setStakedLuxor] = useState(0)
   const [lockedLuxor, setLockedLuxor] = useState(0)
-  const [sorDaiCollateral, setSorDaiCollateral] = useState(0)
-  const [sorLuxCollateral, setSorLuxCollateral] = useState(0)
-  const [sorSorCollateral, setSorSorCollateral] = useState(0)
+  // const [sorDaiCollateral, setSorDaiCollateral] = useState(0)
+  // const [sorLuxCollateral, setSorLuxCollateral] = useState(0)
+  // const [sorSorCollateral, setSorSorCollateral] = useState(0)
   // const [pooledLux, setPooledLuxor] = useState(0)
   // const [treasuryLuxFtmBalance, setTreasuryLuxFtmBalance] = useState(0)
   // const [treasuryLuxDaiBalance, setTreasuryLuxDaiBalance] = useState(0)
   // const [treasuryFtmDaiBalance, setTreasuryFtmDaiBalance] = useState(0)
-  const [treasuryInvestmentBalance, setTreasuryInvestmentBalance] = useState(0)
-  const [treasuryLiquidityBalance, setTreasuryLiquidityBalance] = useState(0)
-  const [treasuryReserveBalance, setTreasuryReserveBalance] = useState(0)
+  // const [treasuryInvestmentBalance, setTreasuryInvestmentBalance] = useState(0)
+  // const [treasuryLiquidityBalance, setTreasuryLiquidityBalance] = useState(0)
+  // const [treasuryReserveBalance, setTreasuryReserveBalance] = useState(0)
   // const [treasuryDaiBalance, setTreasuryDaiBalance] = useState(0)
   // const [treasuryFtmBalance, setTreasuryFtmBalance] = useState(0)
   // const [treasuryLendBalance, setTreasuryLendBalance] = useState(0)
@@ -58,16 +58,16 @@ export default function Dashboard() {
   
   // KEY CONTRACTS //
   const LuxorStakingContract = useLuxorStakingContract()
-  const SorStakingContract = useSorMasterContract()
+  // const SorStakingContract = useSorMasterContract()
   const LuxorTreasuryContract = useLuxorTreasuryContract()
-  const SorContract = useSorContract()
+  // const SorContract = useSorContract()
   const LuxorContract = useLuxorContract()
   const WrappedLumensContract = useWrappedLumensContract()
   const LumensContract = useTokenContract(LUM_ADDRESS[250])
-  const DaiContract = useTokenContract(DAI_ADDRESS[250])
-  const DaiFtmLendContract = useTokenContract('0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd')
-  const FtmDaiLendContract = useTokenContract('0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61')
-  const FtmContract = useTokenContract(WFTM_ADDRESS[250])
+  // const DaiContract = useTokenContract(DAI_ADDRESS[250])
+  const DaiLendFtmContract = useTokenContract('0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd')
+  const FtmLendDaiContract = useTokenContract('0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61')
+  // const FtmContract = useTokenContract(WFTM_ADDRESS[250])
 
   // const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(LuxorContract[250])
   // let sorPegPrice = 1
@@ -76,10 +76,12 @@ export default function Dashboard() {
   const LuxorStakingAddress = LuxorStakingContract?.address
   const LuxorWarmupAddress = LUXOR_WARMUP_ADDRESS[250]
   // const DaiContractAddress = DaiContract?.address
-  // const WrappedLumensAddress = WrappedLumensContract?.address
-  const SorStakingContractAddress = SorStakingContract?.address
+  const WrappedLumensAddress = WrappedLumensContract?.address
+  // const SorStakingContractAddress = SorStakingContract?.address
   const LuxorTreasuryAddress = LuxorTreasuryContract?.address
   const LuxorFtmAddress = LuxFtmContract.address
+  const DaiLendFtmAddress = DaiLendFtmContract.address
+  const FtmLendDaiAddress = FtmLendDaiContract.address
 
 // let luxorCirculatingSupply = 100
   const LuxorDaiAddress = LuxDaiContract.address
@@ -87,10 +89,12 @@ export default function Dashboard() {
   const WrappedLumFantomAddress = WlumFtmContract.address
   const LuxorAddress = LuxorContract.address
   
-  const { tokenInfo } = useTokenInfo(LuxorAddress)
-  const luxorSupply = Number(tokenInfo.supply) / 1e9
-  // const luxSupply = formatNumber((Number(info.supply) / (10**Number(info.decimals))), false, false, 2)
-  // console.log('luxorSupply:%s', luxorSupply)
+  const luxorSupply = Number(useTokenInfo(LuxorAddress).tokenInfo.supply) / 1e9
+  const wlumSupply = Number(useTokenInfo(WrappedLumensAddress).tokenInfo.supply) / 1e9
+  
+  // const { userInfo } = useUserInfo(LuxorTreasuryAddress, WrappedLumFantomAddress)
+  // const ftmWlumBalance = Number(userInfo.value)
+  // console.log('lumensSupply:%s', wlumSupply)
 
   // Calculate Minting Rate
   const startTime = 1638424800000
@@ -99,12 +103,6 @@ export default function Dashboard() {
   const daysAgo = (nowTime - startTime) / 8_640_0000 // ~111 Days √
   // const secondsAgo = daysAgo * 86_400
   const luxorPerDay = luxorSupply / daysAgo
-  
-  // DUMMIES //
-  // let volume = 640774.2467250191
-  // let sorAvailableCollateral = 100
-  // let sorDaiCollateral = 100
-  // let sorLuxCollateral = 100
 
   const luxFtmPrice = usePairPrice(LuxorFtmAddress) // ~190_000 // √
   // console.log('luxorVolume:%s', luxData?.result[1])
@@ -112,18 +110,18 @@ export default function Dashboard() {
   const luxDaiPrice = usePairPrice(LuxorDaiAddress) // ~160_000 // √
   const wLumFtmPrice = usePairPrice(WrappedLumFantomAddress) // ~1_6M // √
   const ftmDaiPrice = usePairPrice(FtmDaiAddress) 
-
+  
   const luxorCirculatingSupply = luxorSupply - stakedLuxor - lockedLuxor
   
+  // GET SOR STATS
+  const sorSorCollateral = Number(useSorInfo().sorInfo.sorSorCollateral)
+  const sorLuxCollateral = Number(useSorInfo().sorInfo.sorLuxCollateral)
+  const sorDaiCollateral = Number(useSorInfo().sorInfo.sorDaiCollateral)
+  const totalSorSupply = Number(useSorInfo().sorInfo.supply)
+
   // enable damped sor collateral rate
   const sorSorCollateralAdjusted = sorSorCollateral * 0.1
   const totalSorCollateral = sorDaiCollateral + sorLuxCollateral + sorSorCollateralAdjusted
-
-  // calculate Treasury Balances
-  const treasuryBalance = treasuryLiquidityBalance + treasuryReserveBalance + treasuryInvestmentBalance
-  
-  // calculate floor price
-  const luxorFloorPrice = treasuryReserveBalance / (luxorSupply)
 
   // const result = useCurrencyBalance(LUX_TREASURY_ADDRESS, LUX_FTM)
   // const luxFtmBalance = result
@@ -136,6 +134,42 @@ export default function Dashboard() {
   const ftmPrice = useFantomPrice()
   const wlumPrice = useWrappedLumPrice()
 
+  // GET RESERVE BALANCES //
+  const FtmBalance = Number(useTokenInfo(WFTM_ADDRESS[250]).tokenInfo.treasuryBalance) / 1e18
+  const FtmValue = FtmBalance * ftmPrice
+  const DaiValue = Number(useTokenInfo(DAI_ADDRESS[250]).tokenInfo.treasuryBalance) / 1e18
+  const treasuryReserveBalance = FtmValue + DaiValue
+
+  // console.log('Ftm Bal:%s', FtmBalance)
+  // console.log('Dai Bal:%s', DaiBalance)
+  
+  // GET LIQUIDITY BALANCES //
+  const LuxFtmBalance = Number(usePairInfo(LuxorFtmAddress).pairInfo.treasuryBalance) / 1e18
+  const LuxDaiBalance = Number(usePairInfo(LuxorDaiAddress).pairInfo.treasuryBalance) / 1e18
+  const LuxFtmValue = LuxFtmBalance * luxFtmPrice
+  const LuxDaiValue = LuxDaiBalance * luxFtmPrice
+  const treasuryLiquidityBalance = LuxFtmValue + LuxDaiValue
+  // console.log('treasuryLiquidityBalance:%s', treasuryLiquidityBalance)
+    
+  // GET INVESTMENT BALANCES //
+  const FtmDaiBalance = Number(usePairInfo(FtmDaiAddress).pairInfo.treasuryBalance) / 1e18
+  const FtmWlumBalance = Number(usePairInfo(WrappedLumFantomAddress).pairInfo.treasuryBalance) / 1e18
+  const FtmLendDaiBalance = Number(usePairInfo(FtmLendDaiAddress).pairInfo.treasuryBalance) / 1e18
+  const DaiLendFtmBalance = Number(usePairInfo(DaiLendFtmAddress).pairInfo.treasuryBalance) / 1e18
+  const FtmDaiValue = FtmDaiBalance * ftmDaiPrice
+  const FtmWlumValue = FtmWlumBalance * wLumFtmPrice
+  const FtmLendDaiValue = FtmLendDaiBalance * 1
+  const DaiLendFtmValue = DaiLendFtmBalance * ftmPrice
+
+  const treasuryInvestmentBalance = FtmDaiValue + FtmWlumValue + FtmLendDaiValue + DaiLendFtmValue
+  console.log('treasuryInvestmentBalance:%s', treasuryInvestmentBalance)
+    
+  // calculate Treasury Balances
+  const treasuryBalance = treasuryLiquidityBalance + treasuryReserveBalance + treasuryInvestmentBalance
+
+  // calculate floor price
+  const luxorFloorPrice = treasuryReserveBalance / (luxorSupply)
+    
 /**
  * Runs only on initial render/mount
  */
@@ -166,82 +200,82 @@ export default function Dashboard() {
             // setTotalLuxorSupply(Number(totalSupply))
             // console.log('totalSupply:%s', Number(totalSupply))
 
-            const sorSupply = await SorContract?.totalSupply()
-            const totalSorSupply = Number(sorSupply) / 1e18
-            setTotalSorSupply(Number(totalSorSupply))
+            // const sorSupply = await SorContract?.totalSupply()
+            // const totalSorSupply = Number(sorSupply) / 1e18
+            // setTotalSorSupply(Number(totalSorSupply))
             // console.log('totalSorSupply:%s', Number(totalSorSupply))
 
-            const sorDaiBal = await DaiContract?.balanceOf(SorStakingContractAddress)
-            const sorLuxBal = await LuxorContract?.balanceOf(SorStakingContractAddress)
-            const sorSorBal = await SorContract?.balanceOf(SorStakingContractAddress)
+            // const sorDaiBal = await DaiContract?.balanceOf(SorStakingContractAddress)
+            // const sorLuxBal = await LuxorContract?.balanceOf(SorStakingContractAddress)
+            // const sorSorBal = await SorContract?.balanceOf(SorStakingContractAddress)
 
-            const sorDaiCollateral = sorDaiBal / 1e18
-            const sorLuxCollateral = sorLuxBal * luxorPrice / 1e9
-            const sorSorCollateral = sorSorBal / 1e18
+            // const sorDaiCollateral = sorDaiBal / 1e18
+            // const sorLuxCollateral = sorLuxBal * luxorPrice / 1e9
+            // const sorSorCollateral = sorSorBal / 1e18
             
-            setSorDaiCollateral(Number(sorDaiCollateral))
-            setSorLuxCollateral(Number(sorLuxCollateral))
-            setSorSorCollateral(Number(sorSorCollateral))
+            // setSorDaiCollateral(Number(sorDaiCollateral))
+            // setSorLuxCollateral(Number(sorLuxCollateral))
+            // setSorSorCollateral(Number(sorSorCollateral))
 
             // console.log('sorDaiCollateral:%s', Number(sorDaiCollateral))
 
-            const wlumSupply = await WrappedLumensContract?.totalSupply()
-            const totalWlumSupply = wlumSupply / 1e9
-            setTotalWlumSupply(Number(totalWlumSupply))
+            // const wlumSupply = await WrappedLumensContract?.totalSupply()
+            // const totalWlumSupply = wlumSupply / 1e9
+            // setTotalWlumSupply(Number(totalWlumSupply))
             // console.log('totalSorSupply:%s', Number(totalSorSupply))
 
-            const daiBal = await DaiContract.balanceOf(LuxorTreasuryAddress)
-            const daiBalance = daiBal / 1e18
-            const ftmBal = await FtmContract.balanceOf(LuxorTreasuryAddress)
-            const ftmBalance = ftmBal / 1e18
-            const totalReserveBalance = daiBalance + (ftmBalance * ftmPrice)
+            // const daiBal = await DaiContract.balanceOf(LuxorTreasuryAddress)
+            // const daiBalance = daiBal / 1e18
+            // const ftmBal = await FtmContract.balanceOf(LuxorTreasuryAddress)
+            // const ftmBalance = ftmBal / 1e18
+            // const totalReserveBalance = daiBalance + (ftmBalance * ftmPrice)
             // console.log('ftmPrice:%s', ftmPrice)
             // console.log('ftmBalance:%s', ftmBalance)
 
             // setTreasuryDaiBalance(daiBalance)
             // setTreasuryFtmBalance(ftmBalance)
-            setTreasuryReserveBalance(Number(totalReserveBalance))
+            // setTreasuryReserveBalance(Number(totalReserveBalance))
             // console.log('totalReserveBalance:%s', Number(totalReserveBalance))
  
             // get treasury lend balance //
-            const daiLendBal = await DaiFtmLendContract.balanceOf(LuxorTreasuryAddress)
-            const daiLendBalance = daiLendBal / 1e18
-            const ftmLendBal = await FtmDaiLendContract.balanceOf(LuxorTreasuryAddress)
-            const ftmLendBalance = ftmLendBal / 1e18
-            const totalLendBalance = daiLendBalance + (ftmLendBalance * ftmPrice)
+            // const daiLendBal = await DaiFtmLendContract.balanceOf(LuxorTreasuryAddress)
+            // const daiLendBalance = daiLendBal / 1e18
+            // const ftmLendBal = await FtmDaiLendContract.balanceOf(LuxorTreasuryAddress)
+            // const ftmLendBalance = ftmLendBal / 1e18
+            // const totalLendBalance = daiLendBalance + (ftmLendBalance * ftmPrice)
             // setTreasuryLendBalance(Number(totalLendBalance))
-            console.log('totalLendBalance:%s', Number(totalLendBalance))
+            // console.log('totalLendBalance:%s', Number(totalLendBalance))
 
             // get treasury balance of LUX-FTM
-            const luxFtmBal = await LuxFtmContract.balanceOf(LuxorTreasuryAddress)
-            const luxFtmBalance = luxFtmBal * luxFtmPrice / 1e18
+            // const luxFtmBal = await LuxFtmContract.balanceOf(LuxorTreasuryAddress)
+            // const luxFtmBalance = luxFtmBal * luxFtmPrice / 1e18
             // setTreasuryLuxFtmBalance(Number(luxFtmBalance))
             // console.log('luxFtmBalance:%s', Number(luxFtmBalance))
 
             // get treasury balance of LUX-DAI
-            const luxDaiBal = await LuxDaiContract.balanceOf(LuxorTreasuryAddress)
-            const luxDaiBalance = luxDaiBal * luxDaiPrice / 1e18
+            // const luxDaiBal = await LuxDaiContract.balanceOf(LuxorTreasuryAddress)
+            // const luxDaiBalance = luxDaiBal * luxDaiPrice / 1e18
             // setTreasuryLuxDaiBalance(Number(luxDaiBalance))
             // console.log('luxDaiBalance:%s', Number(luxDaiBalance))
 
             // get treasury balance of FTM-DAI
-            const ftmDaiBal = await FtmDaiContract.balanceOf(LuxorTreasuryAddress)
-            const ftmDaiBalance = ftmDaiBal * ftmDaiPrice / 1e18
+            // const ftmDaiBal = await FtmDaiContract.balanceOf(LuxorTreasuryAddress)
+            // const ftmDaiBalance = ftmDaiBal * ftmDaiPrice / 1e18
             // console.log('ftmDaiPrice:%s', Number(ftmDaiPrice))
             // console.log('ftmDaiBalance:%s', Number(ftmDaiBalance))
             
             // get treasury balance of FTM-WLUM
-            const wlumFtmBal = await WlumFtmContract.balanceOf(LuxorTreasuryAddress)
-            const wlumFtmBalance = wlumFtmBal * wLumFtmPrice / 1e18
+            // const wlumFtmBal = await WlumFtmContract.balanceOf(LuxorTreasuryAddress)
+            // const wlumFtmBalance = wlumFtmBal * wLumFtmPrice / 1e18
             // console.log('wLumFtmPrice:%s', Number(wLumFtmPrice))
             // console.log('wlumFtmBalance:%s', Number(wlumFtmBalance))
             
             // total investments balance //
-            const InvestmentBalance = totalLendBalance + ftmDaiBalance + wlumFtmBalance
-            setTreasuryInvestmentBalance(Number(InvestmentBalance))
+            // const InvestmentBalance = totalLendBalance + ftmDaiBalance + wlumFtmBalance
+            // setTreasuryInvestmentBalance(Number(InvestmentBalance))
 
-            const LiquidityBalance = luxDaiBalance + luxFtmBalance
-            setTreasuryLiquidityBalance(LiquidityBalance)
+            // const LiquidityBalance = luxDaiBalance + luxFtmBalance
+            // setTreasuryLiquidityBalance(LiquidityBalance)
 
             // get staked balance of Luxor
             const data3 = await LuxorContract.balanceOf(LuxorStakingAddress)
@@ -255,7 +289,7 @@ export default function Dashboard() {
             setLockedLuxor(Number(warmupBalance))
             // console.log('warmupBalance:%s', Number(warmupBalance))
 
-            return [totalSorSupply, totalWlumSupply, luxorSupply, sorDaiCollateral, sorLuxCollateral, sorSorCollateral, daiBalance, ftmBalance, luxFtmBalance, totalReserveBalance, luxBalance, warmupBalance, ftmDaiBalance, LiquidityBalance]
+            return [totalSorSupply, wlumSupply, luxorSupply, sorDaiCollateral, sorLuxCollateral, sorSorCollateral, luxBalance, warmupBalance]
         } catch (err) {
             console.warn(err)
         }
@@ -284,11 +318,6 @@ export default function Dashboard() {
     // ]
 
     const sorCollateralData = [
-      // {
-      //     "angle": sorAvailableCollateral,
-      //     "color": "#FFA300",
-      //     "label": "Available Collateral"
-      // },
       {
           "angle": sorDaiCollateral,
           "color": "#FFB300",
@@ -310,25 +339,6 @@ export default function Dashboard() {
   ]
 
   const treasuryBalanceData = [
-    // {
-    //     "label": "LUX-FTM",
-    //     "angle": treasuryLuxFtmBalance,
-    //     "color": "#FFA300",
-    //     // "text": "",
-    //     "percent": ((treasuryLuxFtmBalance / treasuryBalance) * 100).toFixed()
-    // },
-    // {
-    //     "label": "LUX-DAI",
-    //     "angle": treasuryLuxDaiBalance,
-    //     "color": "#FFB300",
-    //     "percent": ((treasuryLuxDaiBalance / treasuryBalance) * 100).toFixed()
-    // },
-    // {
-    //     "label": "FTM-DAI",
-    //     "angle": treasuryFtmDaiBalance,
-    //     "color": "#FFC300",
-    //     "percent": ((treasuryFtmDaiBalance / treasuryBalance) * 100).toFixed()
-    // },
     {
         "label": "LIQUIDITY",
         "angle": treasuryLiquidityBalance,
@@ -789,7 +799,7 @@ export default function Dashboard() {
           </div>
         </div> */}
 
-        <div className="p-1 shadow-4 bg-[#FFF300] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
+        {/* <div className="p-1 shadow-4 bg-[#FFF300] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
         <div className="bg-dark-1000 p-4">
         <Typography
             className="text-2xl flex gap-1 justify-center items-center"
@@ -872,7 +882,7 @@ export default function Dashboard() {
               </div>
             </div>
             </div>
-          </div>
+          </div> */}
 
         <div className="p-1 shadow-4 bg-[#FFF300] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
         <div className="bg-dark-1000 p-4">
@@ -900,7 +910,7 @@ export default function Dashboard() {
             <Typography 
               className="flex gap-1 justify-center items-center"
               variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               {formatNumber(wlumPrice * totalWlumSupply, true, false)}
+               {formatNumber(wlumPrice * wlumSupply, true, false)}
             </Typography>
           </div>
 
