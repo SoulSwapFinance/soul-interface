@@ -60,7 +60,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
 
     // const [discount, setDiscount] = useState(0)
     // const [bondPrice, setBondPrice] = useState(0)
-    const [available, setAvailabile] = useState(false)
+    // const [available, setAvailabile] = useState(false)
     // const { deposit, withdraw } = useBondContract()
     const luxPrice = useLuxorPrice()
     const assetToken = new Token(250, assetAddress, 18, assetName)
@@ -71,7 +71,9 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     const { luxorBondInfo } = useLuxorBondInfo(bondAddress)
     const bondPrice = Number(luxorBondInfo.price) / 1e18
     const discount = luxorBondInfo.discount
-    // console.log('bondPrice:%s', bondPrice)
+    const remainingDebt = luxorBondInfo.remainingDebt
+    const available = Number(remainingDebt) > 0 ? true : false
+    // console.log('remainingDebt:%s', remainingDebt)
     // console.log('discount:%s', discount)
 
     /**
@@ -576,7 +578,9 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                     </DetailsContainer>
                 </Wrap>
             )}
-            <Modal isOpen={showConfirmation} onDismiss={
+    
+    {/*  MODAL VIEW */}
+    <Modal isOpen={showConfirmation} onDismiss={
         () => setShowConfirmation(false)}>
         <div className="space-y-4">
           <ModalHeader header={`Do you still wish to proceed?`} onClose={() => setShowConfirmation(false)} />

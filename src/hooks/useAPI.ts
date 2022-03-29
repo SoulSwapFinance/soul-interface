@@ -5,7 +5,7 @@ import { useActiveWeb3React } from 'services/web3'
 
 type T = Record<string, string>
 
-const BASE_URL = 'https://dev.luxor.money'
+const BASE_URL = 'https://api.soulswap.finance'
 
 export function useArcherMinerTips(): { status: string; data: T } {
   const { chainId } = useActiveWeb3React()
@@ -192,43 +192,43 @@ export function useTokenInfo(tokenAddress): { status: string; tokenInfo: T } {
     return { status, tokenInfo }
 }
 
-export function useLuxorTreasuryInfo(): { status: string; luxorTreasuryData: T } {
-    const { account, chainId } = useActiveWeb3React()
-    const [status, setStatus] = useState<string>('idle')
-    const [luxorTreasuryData, setInfo] = useState<T>({
-        ftmBalance: '0',
-        daiBalance: '0',
+// export function useLuxorTreasuryInfo(): { status: string; luxorTreasuryData: T } {
+//     const { account, chainId } = useActiveWeb3React()
+//     const [status, setStatus] = useState<string>('idle')
+//     const [luxorTreasuryData, setInfo] = useState<T>({
+//         ftmBalance: '0',
+//         daiBalance: '0',
         
-        luxFtmBalance: '0',
-        luxDaiBalance: '0',
+//         luxFtmBalance: '0',
+//         luxDaiBalance: '0',
         
-        ftmDaiBalance: '0',
-        ftmWlumBalance: '0',
+//         ftmDaiBalance: '0',
+//         ftmWlumBalance: '0',
         
-        ftmLendBalance: '0',
-        daiLendBalance: '0',
+//         ftmLendBalance: '0',
+//         daiLendBalance: '0',
         
-    })  
-    useEffect(() => {
-      const fetchData = async () => {
-        setStatus('fetching')
-        const response = await fetch(`${BASE_URL}/luxor/treasury`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Referrer-Policy': 'no-referrer',
-          },
-        })
-        const json = await response.json()
-        setInfo(json as T)
-        setStatus('fetched')
-      }
-      if (chainId == ChainId.FANTOM) 
-      fetchData()
-    }, [])
+//     })  
+//     useEffect(() => {
+//       const fetchData = async () => {
+//         setStatus('fetching')
+//         const response = await fetch(`${BASE_URL}/luxor/treasury`, {
+//           method: 'GET',
+//           headers: {
+//             'Content-Type': 'application/json',
+//             'Referrer-Policy': 'no-referrer',
+//           },
+//         })
+//         const json = await response.json()
+//         setInfo(json as T)
+//         setStatus('fetched')
+//       }
+//       if (chainId == ChainId.FANTOM) 
+//       fetchData()
+//     }, [])
   
-    return { status, luxorTreasuryData }
-}
+//     return { status, luxorTreasuryData }
+// }
 
 export function useUserInfo(tokenAddress): { status: string; userInfo: T } {
     const { account, chainId } = useActiveWeb3React()
