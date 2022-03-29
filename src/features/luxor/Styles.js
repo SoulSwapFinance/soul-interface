@@ -89,7 +89,7 @@ export const StakeContentWrapper = styled.div`
 export const StakeItemBox = styled.div`
   width: ${({ width }) => (width ? `${width}` : `100px`)};
   display: grid;
-  justify-content: center;
+  justify-content: between;
   align-items: center;
 
 `
@@ -109,7 +109,7 @@ export const StakeItem = styled.h2`
 export const TokenPairBox = styled.div`
   width: 150px;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
 `
 

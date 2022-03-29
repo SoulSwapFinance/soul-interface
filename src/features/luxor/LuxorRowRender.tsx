@@ -23,7 +23,7 @@ import {
     SubmitButton,
 } from './Styles'
 import { Wrap, Text, ExternalLink } from '../../components/ReusableStyles'
-import { tryParseAmount } from 'functions'
+import { formatPercent, tryParseAmount } from 'functions'
 // import { useCurrencyBalance, useTokenBalance } from 'state/wallet/hooks'
 import { useApproveCallback } from 'hooks/useApproveCallback'
 import Modal from 'components/Modal/DefaultModal'
@@ -72,6 +72,8 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     const bondPrice = Number(luxorBondInfo.price) / 1e18
     const discount = luxorBondInfo.discount
     const remainingDebt = luxorBondInfo.remainingDebt
+    const maximumDebt = luxorBondInfo.maximumDebt
+    const availRatio = Number(remainingDebt) <= 0 ? 0 : Number(remainingDebt) / Number(maximumDebt) * 100
     const available = Number(remainingDebt) > 0 ? true : false
     // console.log('remainingDebt:%s', remainingDebt)
     // console.log('discount:%s', discount)
@@ -325,7 +327,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                     />
                                 </Wrap>}
                             </TokenPairBox>
-
+                            
                             <StakeItemBox className="flex">
                                 <StakeItem>
                                     {Number(bondPrice).toString() === '0.00' ? (
@@ -354,7 +356,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                 </StakeItem>
                             </StakeItemBox>
 
-                            <StakeItemBox className="flex">
+                            {/* <StakeItemBox className="flex">
                                 {earnedAmount.toFixed(2).toString() === '0.00' ? (
                                     <Text padding="0" fontSize="1rem" color="#666">
                                         0
@@ -363,6 +365,27 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                     <Text padding="0" fontSize="1rem" color="#F36FFE">
                                         {earnedAmount.toFixed(2)}
                                     </Text>
+                                )}
+                            </StakeItemBox> */}
+                            <StakeItemBox className="flex text-center">
+                                {
+                                // availRatio === 0 ? (
+                                //     <Text padding="0" fontSize="1rem" color="#666">
+                                //         0
+                                //     </Text>
+                                // ) : 
+                                Number(availRatio) >= 65 ? (
+                                    <Text padding="0" fontSize="1rem" color="#4EFF4E">
+                                        {availRatio.toFixed()}%
+                                    </Text>
+                                ) : Number(availRatio) >= 25 ? (
+                                    <Text padding="0" fontSize="1rem" color="#FFF14E">
+                                        {availRatio.toFixed()}%
+                                    </Text>
+                                ) : (
+                                    <Text padding="0" fontSize="1rem" color="#FF4E4E">
+                                        {availRatio.toFixed()}%
+                                    </Text>                                
                                 )}
                             </StakeItemBox>
                             <StakeItemBox className="flex" >
@@ -457,30 +480,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                             ) : (
                                 <FunctionBox>
                                 <Wrap padding="0" display="flex" justifyContent="space-between">
-                                {/* { 'Read Full Details' }
-                                    <FlexText>
-                                    <QuestionHelper
-                                    text={
-                                    <div className="flex space-x-2">
-                                    <div className="flex flex-col">
-                                        <p>
-                                            <strong className="text-accent bold">Fee Details:&nbsp;</strong>
-                                        </p>
-                                        <p>
-                                            <strong className="text-accent bold">1.</strong> Harvest Fee: {harvestFee === 0 ? 0 : harvestFee.toFixed(2) === "0.00" ? "<0.00" : harvestFee.toFixed(2)} SOUL
-                                        </p>
-                                        <p>
-                                            <strong className="text-accent bold">2.</strong> Withdraw Fee: {100 / 10000}%
-                                        </p>
-                                        <p>
-                                            <strong className="text-accent bold">3.</strong> Exit Fee Period: 72H
-                                        </p>
-                                    </div>
-                                    </div>
-                                    }
-                                    />
-                                    </FlexText> */}
-                                    </Wrap>
+                                </Wrap>
                                     <AssetInput
                                         currencyLogo={false}
                                         currency={assetToken}
@@ -578,7 +578,6 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                     </DetailsContainer>
                 </Wrap>
             )}
-    
     {/*  MODAL VIEW */}
     <Modal isOpen={showConfirmation} onDismiss={
         () => setShowConfirmation(false)}>
@@ -654,7 +653,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
           </SubmitButton>
         </div>
       </Modal>
-        </>
+    </>
     )
 }
 

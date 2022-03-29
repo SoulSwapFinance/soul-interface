@@ -20,31 +20,30 @@ export default function LuxorKey() {
         <StakeContainer>
           <Row padding=".25rem 1.25rem">
             <StakeContentWrapper>
-                <Wrap>
-                  <Text padding ="0" fontSize=".8" color="#bbb">
-                  ASSET
-                  </Text>
-                </Wrap>
-
+              <Wrap>
+                <Text padding ="0" fontSize=".9" color="#bbb">
+                ASSET
+                </Text>
+              </Wrap>
               <StakeItemBox>
-                <Text padding="0" fontSize=".8" color="#bbb">
+                <Text padding="0" fontSize=".9" color="#bbb">
                 PRICE
                 </Text>
               </StakeItemBox>
 
               <StakeItemBox>
-                <Text padding="0" fontSize=".8" color="#bbb">
-                ROI
+                <Text padding="0" fontSize=".9" color="#bbb">
+                % ROI
                 </Text>
               </StakeItemBox>
 
               <StakeItemBox desktopOnly={true}>
-                <Text padding="0" fontSize=".8" color="#bbb">
-                CLAIM
+                <Text padding="0" fontSize=".9" color="#bbb">
+                OPEN
                 </Text>
               </StakeItemBox>
               <StakeItemBox>
-                <Text padding="0" fontSize=".8" color="#bbb">
+                <Text padding="0" fontSize=".9" color="#bbb">
                 TERM
                 </Text>
               </StakeItemBox>
