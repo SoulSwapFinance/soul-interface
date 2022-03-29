@@ -165,11 +165,13 @@ export function useTokenInfo(tokenAddress): { status: string; tokenInfo: T } {
     const [status, setStatus] = useState<string>('idle')
     const [tokenInfo, setTokenInfo] = useState<T>({
         name: '',
+        symbol: '',
         price: '0',
+        treasuryBalance: '0',
         decimals: '18',
         supply: '0',
         mcap: '0',
-        img:''
+        img: ''
     })  
     useEffect(() => {
       const fetchData = async () => {
@@ -230,7 +232,7 @@ export function useTokenInfo(tokenAddress): { status: string; tokenInfo: T } {
 //     return { status, luxorTreasuryData }
 // }
 
-export function useUserInfo(tokenAddress): { status: string; userInfo: T } {
+export function useUserInfo(user, tokenAddress): { status: string; userInfo: T } {
     const { account, chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
     const [userInfo, setInfo] = useState<T>({
@@ -241,12 +243,13 @@ export function useUserInfo(tokenAddress): { status: string; userInfo: T } {
         decimals: '18',
         supply: '0',
         mcap: '0',
+        treasuryBalance: '0',
         img:''
     })  
     useEffect(() => {
       const fetchData = async () => {
         setStatus('fetching')
-        const response = await fetch(`${BASE_URL}/user/${account}/${tokenAddress}`, {
+        const response = await fetch(`${BASE_URL}/user/${user}/${tokenAddress}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -262,4 +265,71 @@ export function useUserInfo(tokenAddress): { status: string; userInfo: T } {
     }, [])
   
     return { status, userInfo }
+}
+
+export function usePairInfo(tokenAddress): { status: string; pairInfo: T } {
+    const { account, chainId } = useActiveWeb3React()
+    const [status, setStatus] = useState<string>('idle')
+    const [pairInfo, setInfo] = useState<T>({
+        address: '',
+        supply: '0',
+        treasuryBalance: '0',
+        api: ''
+    })  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus('fetching')
+        const response = await fetch(`${BASE_URL}/pairs/${tokenAddress}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referrer-Policy': 'no-referrer',
+          },
+        })
+        const json = await response.json()
+        setInfo(json as T)
+        setStatus('fetched')
+      }
+      if (chainId == ChainId.FANTOM) 
+      fetchData()
+    }, [])
+  
+    return { status, pairInfo }
+}
+
+export function useSorInfo(): { status: string; sorInfo: T } {
+    const { chainId } = useActiveWeb3React()
+    const [status, setStatus] = useState<string>('idle')
+    const [sorInfo, setInfo] = useState<T>({
+        address: '',
+        supply: '0',
+        treasuryBalance: '0',
+        sorCollateral: '0',
+        daiCollateral: '0',
+        luxorCollateral: '0',
+        luxorCollateralValue: '0',
+        stableCollateral: '0',
+        collateralValue: '0',
+        collateralization: '0',
+        api: ''
+    })  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus('fetching')
+        const response = await fetch(`${BASE_URL}/sor}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referrer-Policy': 'no-referrer',
+          },
+        })
+        const json = await response.json()
+        setInfo(json as T)
+        setStatus('fetched')
+      }
+      if (chainId == ChainId.FANTOM) 
+      fetchData()
+    }, [])
+  
+    return { status, sorInfo }
 }
