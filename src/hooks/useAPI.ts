@@ -109,6 +109,9 @@ export function useLuxorInfo(): { status: string; luxorInfo: T } {
         epoch: '0',
         decimals: '18',
         supply: '0',
+        stakingBalance: '0',
+        warmupBalance: '0',
+        reserveBalance: '0',
         mcap: '0',
         img:''
     })  
