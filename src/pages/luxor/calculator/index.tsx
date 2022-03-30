@@ -19,12 +19,6 @@ import { useLumensContract } from "hooks/useContract";
 
 export default function Calculator() {
   const { account, chainId } = useActiveWeb3React()
-
-    // const [lumensAmount, setLumensAmount] = useState(trimmedLumensBalance);
-    // const [rewardYield, setRewardYield] = useState(trimmedStakingAPY);
-    // const [priceAtPurchase, setPriceAtPurchase] = useState(trimMarketPrice);
-    // const [futureMarketPrice, setFutureMarketPrice] = useState(trimMarketPrice);
-    
     const luxorPrice = useLuxorPrice()
     const btcPrice = useWrappedBtcPrice()
     const trimmedMarketPrice = Number(luxorPrice).toFixed(6);
@@ -34,17 +28,12 @@ export default function Calculator() {
     const circulatingLumens = useLuxorInfo().luxorInfo.circulatingLumens
     const lumensBalance = Number(userInfo.balance) / 1e9
     const trimmedLumensBalance = Number(lumensBalance).toFixed(6);
-    console.log('lumBal:%s', trimmedLumensBalance)
-    // const epoch = await stakingContract.epoch();
     const stakingReward = luxorUserInfo.distribute;
-    console.log('circ:%s', circulatingLumens)
     const stakingRebase = Number(stakingReward) / Number(circulatingLumens);
-    // const fiveDayRate = Math.pow(1 + stakingRebase, 5 * 3) - 1;
     const stakingAPY = Math.pow(1 + stakingRebase, 365 * 3) - 1
-    const trimmedStakingAPY = Number(stakingAPY).toString(4)
+    const trimmedStakingAPY = Number(stakingAPY).toFixed(4)
 
     const [lumensAmount, setLumensAmount] = useState(trimmedLumensBalance);
-    // const [stakingAPY, setStakingApy] = useState('100');
     const [rewardYield, setRewardYield] = useState(trimmedStakingAPY);
     const [priceAtPurchase, setPriceAtPurchase] = useState(trimmedMarketPrice);
     const [futureMarketPrice, setFutureMarketPrice] = useState(trimmedMarketPrice);
@@ -54,14 +43,14 @@ export default function Calculator() {
     const [potentialReturn, setPotentialReturn] = useState('0');
 
     const calcInitialInvestment = () => {
-        const lumens = Number(lumensAmount) || 0;
-        const price = parseFloat(priceAtPurchase.toString()) || 0;
+        const lumens = Number(lumensAmount) || Number(trimmedLumensBalance);
+        const price = parseFloat(priceAtPurchase.toString()) || Number(trimmedMarketPrice);
         const amount = lumens * Number(price);
         return formatNumber(amount, false, true, 2);
     };
 
     const calcCurrentWealth = () => {
-        const lumens = Number(lumensAmount) || 0;
+        const lumens = Number(lumensAmount) || Number(trimmedLumensBalance);
         const price = parseFloat(trimmedMarketPrice.toString());
         const amount = lumens * price;
         return formatNumber(amount, false, false, 2);
@@ -112,14 +101,33 @@ export default function Calculator() {
       width: 100%;
     `;
     
-  const ActionAreaInputWrapTitle = styled.p`
+  const ActionAreaInputWrapTitle = styled.div`
     font-family: Montserrat Medium;
     font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    color: #cc;
+    font-weight: 600;
+    font-size: 18px;
+    color: yellow;
     margin-bottom: 5px;
     margin-left: 10px;
+  `;
+
+  const ActionAreaInputWrap = styled.div`
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 4px solid rgba(255, 243, 0, 0.2);
+    border-radius: 10px;
+    outline: none;
+  `;
+
+  const ActionInputButton = styled.div`
+    cursor: pointer;
+    p{
+      font-family: Montserrat SemiBold;
+      font-weight: 600;
+      font-size: 16px;
+      color: #494949;
+      // color: #5C5C5C;
+    }
   `;
 
   const CalculatorUserData = styled.div`
@@ -132,41 +140,32 @@ export default function Calculator() {
   const DataRow = styled.div`
     display: flex;
     justify-content: space-between;
-    margin: 12px 0px;
+    margin: 4px 0px;
   `;
   
   const DataRowName = styled.p`
       font-family: Montserrat Medium;
       font-style: normal;
       font-weight: 500;
-      font-size: 18px;
+      font-size: 20px;
       color: #FFFFFF;
   `;
   
   const DataRowValue = styled.p`
       font-family: Montserrat;
-      font-size: 18px;
+      font-size: 20px;
       line-height: 32px;
       color: #FFFFFF;
   }`;
 
     return (
-        <div className="w-[89%] max-[w-833px] m-auto">
+        <div className="w-[95%] max-w-[1200px] mt-2 lg:mt-4 m-auto">
                 <CalculatorCard>
                   <div className="mt-2 mb-2">
                   <Button variant="filled" color="yellow" size="lg">
                     <NavLink href={'/swap?inputCurrency=&outputCurrency=0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'}>
                       <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                       <span>Market Price: ${Number(luxorPrice).toFixed(2)}</span>
-                      </a>
-                    </NavLink>
-                  </Button>
-                  </div>
-                  <div className="mt-2 mb-2">
-                  <Button variant="filled" color="yellow" size="lg">
-                    <NavLink href={'/swap?inputCurrency=&outputCurrency=0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'}>
-                      <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                      <span>Lumens Balance: {formatNumber(lumensBalance, false, true)} LUM</span>
                       </a>
                     </NavLink>
                   </Button>
@@ -204,103 +203,102 @@ export default function Calculator() {
               </CalculatorCard>
               <CalculatorCard>
                 <div className="calculator-card-area">
-                      <div className="calculator-card-action-area">
+                      <div className="mt-[12px]">
                           <Grid container spacing={2}>
                               <Grid item xs={12} sm={6}>
-                                  <div className="calculator-card-action-area-inp-wrap text-center">
-                                      <ActionAreaInputWrapTitle>Amount (LUM)</ActionAreaInputWrapTitle>
+                                <ActionAreaInputWrapTitle className="text-center">Lumens Amount</ActionAreaInputWrapTitle>
+                                  <ActionAreaInputWrap>
                                       <OutlinedInput
                                           type="number"
                                           placeholder="Amount"
-                                          className="bg-grey border border-3 border-yellow hover:border-yellow"
+                                          className="bg-darkGrey w-full hover:bg-grey border border-3 border-yellow hover:border-yellow"
                                           value={lumensAmount}
                                           onChange={e => setLumensAmount(e.target.value)}
                                           labelWidth={0}
                                           endAdornment={
                                             <InputAdornment position="end">
-                                                <div 
-                                                  onClick={() => setLumensAmount(Number(trimmedLumensBalance).toFixed(2))} 
-                                                  className="stake-card-action-input-btn">
-                                                    <p>Max</p>
-                                                </div>
+                                                <ActionInputButton 
+                                                  onClick={() => setLumensAmount(Number(trimmedLumensBalance).toFixed(2))} >
+                                                    <p>MAX</p>
+                                                </ActionInputButton>
                                             </InputAdornment>
                                           }
                                       />
-                                  </div>
+                                </ActionAreaInputWrap>
                               </Grid>
                               <Grid item xs={12} sm={6}>
-                                  <div className="calculator-card-action-area-inp-wrap text-center">
-                                      <ActionAreaInputWrapTitle>APY (%)</ActionAreaInputWrapTitle>
+                                  <ActionAreaInputWrapTitle className="text-center">Annual (%) Yield</ActionAreaInputWrapTitle>
+                                    <ActionAreaInputWrap>
+                                        <OutlinedInput
+                                            type="number"
+                                            placeholder="Amount"
+                                            className="bg-darkGrey w-full hover:bg-grey border border-3 border-yellow hover:border-yellow"
+                                            value={rewardYield}
+                                            onChange={e => setRewardYield(e.target.value)}
+                                            labelWidth={0}
+                                            endAdornment={
+                                                <InputAdornment position="end">
+                                                    <ActionInputButton 
+                                                      onClick={() => setRewardYield(Number(trimmedStakingAPY).toFixed(2))}>
+                                                        <p>CURRENT</p>
+                                                    </ActionInputButton>
+                                                </InputAdornment>
+                                            }
+                                        />
+                                    </ActionAreaInputWrap>
+                              </Grid>
+                              <Grid item xs={12} sm={6}>
+                                  <ActionAreaInputWrapTitle className="text-center">Purchase ($) Price</ActionAreaInputWrapTitle>
+                                    <ActionAreaInputWrap>
+                                        <OutlinedInput
+                                            type="number"
+                                            placeholder="Amount"
+                                            className="bg-darkGrey w-full hover:bg-grey border border-3 border-yellow hover:border-yellow"
+                                            value={priceAtPurchase}
+                                            onChange={e => setPriceAtPurchase(e.target.value)}
+                                            labelWidth={0}
+                                            endAdornment={
+                                                <InputAdornment position="end">
+                                                    <ActionInputButton 
+                                                    onClick={() => setPriceAtPurchase(Number(trimmedMarketPrice).toFixed(2))} 
+                                                    className="stake-card-action-input-btn text-sm">
+                                                        <p>CURRENT</p>
+                                                    </ActionInputButton>
+                                                </InputAdornment>
+                                            }
+                                        />
+                                  </ActionAreaInputWrap>
+                              </Grid>
+                              <Grid item xs={12} sm={6}>
+                                <ActionAreaInputWrapTitle className="text-center">Future ($) Price</ActionAreaInputWrapTitle>
+                                  <ActionAreaInputWrap>
                                       <OutlinedInput
                                           type="number"
                                           placeholder="Amount"
-                                          className="bg-grey border border-3 border-yellow hover:border-yellow"
-                                          value={rewardYield}
-                                          onChange={e => setRewardYield(e.target.value)}
-                                          labelWidth={0}
-                                          endAdornment={
-                                              <InputAdornment position="end">
-                                                  <div 
-                                                    onClick={() => setRewardYield(Number(trimmedStakingAPY).toFixed(2))} 
-                                                    className="stake-card-action-input-btn">
-                                                      <p>Current</p>
-                                                  </div>
-                                              </InputAdornment>
-                                          }
-                                      />
-                                  </div>
-                              </Grid>
-                              <Grid item xs={12} sm={6}>
-                                  <div className="calculator-card-action-area-inp-wrap text-center">
-                                      <ActionAreaInputWrapTitle>Purchase Price ($)</ActionAreaInputWrapTitle>
-                                      <OutlinedInput
-                                          type="number"
-                                          placeholder="Amount"
-                                          className="bg-grey border border-3 border-yellow hover:border-yellow"
-                                          value={priceAtPurchase}
-                                          onChange={e => setPriceAtPurchase(e.target.value)}
-                                          labelWidth={0}
-                                          endAdornment={
-                                              <InputAdornment position="end">
-                                                  {<div 
-                                                  onClick={() => setPriceAtPurchase(Number(trimmedMarketPrice).toFixed(2))} 
-                                                  className="stake-card-action-input-btn">
-                                                      <p>Current</p>
-                                                  </div> }
-                                              </InputAdornment>
-                                          }
-                                      />
-                                  </div>
-                              </Grid>
-                              <Grid item xs={12} sm={6}>
-                                  <div className="calculator-card-action-area-inp-wrap text-center">
-                                      <ActionAreaInputWrapTitle>Future Price ($)</ActionAreaInputWrapTitle>
-                                      <OutlinedInput
-                                          type="number"
-                                          placeholder="Amount"
-                                          className="bg-grey border border-3 border-yellow hover:border-yellow"
+                                          className="bg-darkGrey w-full hover:bg-grey border border-3 border-yellow hover:border-yellow"
                                           value={futureMarketPrice}
                                           onChange={e => setFutureMarketPrice(e.target.value)}
                                           labelWidth={0}
                                           endAdornment={
                                             <InputAdornment position="end">
-                                                <div onClick={() => setFutureMarketPrice(Number(trimmedMarketPrice).toFixed(2))} 
-                                                  className="stake-card-action-input-btn">
-                                                    <p>Current</p>
-                                                </div>
+                                                <ActionInputButton onClick={() => setFutureMarketPrice(Number(trimmedMarketPrice).toFixed(2))} 
+                                                  className="stake-card-action-input-btn text-sm"
+                                                  >
+                                                    <p>CURRENT</p>
+                                                </ActionInputButton>
                                             </InputAdornment>
                                           }
                                       />
-                                  </div>
+                                </ActionAreaInputWrap>
                               </Grid>
                           </Grid>
                       </div>
                       </div>
                       <CalculatorUserData>
-                      <div className="grid p-6 w-full grid-cols-1 mt-4 mb-4 bg-dark-1000 border border-2 border-dark-900 hover:border-yellow">
-                      <div className="calculator-days-slider-wrap mb-4 text-center">
+                      <div className="grid p-6 lg:p-16 w-full grid-cols-1 mt-4 mb-4 bg-dark-1200 border border-1 border-yellow hover:border-gold">
+                      <div className="mb-4 text-center">
                           {/* <Slider className="calculator-days-slider" min={1} max={365} value={Number(days)} onChange={(e, newValue: any) => setDays(newValue)} /> */}
-                          {['30', '60', '90', '120', '180', '365'].map((multipler, i) => (
+                          {['30', '90', '180', '365'].map((multipler, i) => (
                             <Button
                               variant="outlined"
                               size="xs"
@@ -309,7 +307,7 @@ export default function Calculator() {
                               onClick={() => {
                                 setDays(multipler)
                               }}
-                              className="mr-0.5 sm:mr-4 text-md focus:ring-yellow"
+                              className="mr-0.5 sm:mr-4 text-md border border-yellow hover:border-gold focus:ring-yellow"
                             >
                               {multipler} DAYS
                             </Button>
@@ -338,7 +336,7 @@ export default function Calculator() {
                           <DataRow>
                               <DataRowName>Total Rewards</DataRowName>
                               <DataRowValue>
-                                {rewardsEstimation} LUX
+                                {formatNumber(rewardsEstimation)} LUX
                               </DataRowValue>
                           </DataRow>
                           <DataRow>
