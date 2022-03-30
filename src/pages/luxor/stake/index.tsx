@@ -4,20 +4,10 @@ import Head from 'next/head'
 import Typography from 'components/Typography'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ArrowDownIcon } from '@heroicons/react/solid'
-import Image from 'components/Image'
-// import { Popover, Tab, Transition } from '@headlessui/react'
-// import { useSwapState } from 'state/swap/hooks'
-// import Alert from 'components/Alert'
-// import { useSingleCallResult } from 'state/multicall/hooks'
-// import useStablecoin from 'hooks/useStablecoin'
 import { Tab } from '@headlessui/react'
 import LuxorGlowShadow from 'components/LuxorGlowShadow'
 import { Button, ButtonError } from 'components/Button'
 import StableInputPanel from 'components/StableInputPanel'
-// import AssetInput from 'components/AssetInput'
-// import { AutoColumn } from 'components/Column'
-// import QuestionHelper from 'components/QuestionHelper'
 import { ApprovalState, useApproveCallback, useLuxorStakeHelperContract, useLuxorStakingContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
 import { ChainId, LUM_ADDRESS, LUXOR_STAKING_ADDRESS, LUXOR_STAKING_HELPER_ADDRESS, Token } from 'sdk'
@@ -374,7 +364,7 @@ export default function Stake() {
                     {i18n._(t`Warmup Balance`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    {warmupValue.toFixed(2)} LUX
+                    {warmupValue.toFixed(2)} LUM
                   </Typography>
 
                 </div>
@@ -433,9 +423,87 @@ export default function Stake() {
                       i18n._(t`Approve`)
                     )}
                   </Button>
-                ) : (
-                // Number(redeemClaimAmount.toExact()) === 0 ? 
-                  <ButtonError
+                ) : Number(warmupExpiry) - Number(epoch) > 0 ? (
+                  <><ButtonError
+                      variant="filled"
+                      color="yellow"
+                      className="text-black"
+                      onClick={async () => {
+                        try {
+                          const tx = await unstake(BigNumber.from(parsedRedeemValue?.quotient.toString()))
+                          addTransaction(tx, {
+                            summary: `Withdraw LUX`,
+                          })
+                        } catch (error) {
+                          console.error(error)
+                        }
+                      } }
+                      disabled={!isRedeemValid || !account}
+                      error={!isRedeemValid && !!parsedRedeemValue}
+                      style={{ width: '100%' }}
+                    >
+                      {redeemError || i18n._(t`Withdraw`)}
+                    </ButtonError>
+                    <Button
+                      variant="filled"
+                      color="red"
+                      className="text-white"
+                      onClick={async () => {
+                        try {
+                          const tx = await forfeit()
+                          addTransaction(tx, {
+                            summary: `Forfeit LUX`,
+                          })
+                        } catch (error) {
+                          console.error(error)
+                        }
+                      } }
+                      disabled={!account}
+                      style={{ width: '100%' }}
+                    >
+                        {i18n._(t`Forfeit`)}
+                      </Button></>
+                ) : Number(warmupExpiry) < Number(epoch) && Number(warmupValue) > 0 ? (
+                  <><ButtonError
+                      variant="filled"
+                      color="yellow"
+                      className="text-black"
+                      onClick={async () => {
+                        try {
+                          const tx = await unstake(BigNumber.from(parsedRedeemValue?.quotient.toString()))
+                          addTransaction(tx, {
+                            summary: `Withdraw LUX`,
+                          })
+                        } catch (error) {
+                          console.error(error)
+                        }
+                      } }
+                      disabled={!isRedeemValid || !account}
+                      error={!isRedeemValid && !!parsedRedeemValue}
+                      style={{ width: '100%' }}
+                    >
+                      {redeemError || i18n._(t`Withdraw`)}
+                    </ButtonError>
+                    <Button
+                      variant="filled"
+                      color="green"
+                      className="text-black"
+                      onClick={async () => {
+                        try {
+                          const tx = await claim()
+                          addTransaction(tx, {
+                            summary: `Claim LUX`,
+                          })
+                        } catch (error) {
+                          console.error(error)
+                        }
+                      } }
+                      disabled={!account}
+                      style={{ width: '100%' }}
+                    >
+                        {i18n._(t`Claim`)}
+                      </Button></>
+                ) : ( <ButtonError
                     variant="filled"
                     color="yellow"
                     className="text-black"
@@ -456,44 +524,6 @@ export default function Stake() {
                     {redeemError || i18n._(t`Withdraw`)}
                   </ButtonError>
                 )}
-                {/* <Button
-                  variant="filled"
-                  color="yellow"
-                  onClick={async () => {
-                    try {
-                      const tx = await claimDai()
-                      addTransaction(tx, {
-                        summary: `Claim LUX`,
-                      })
-                    } catch (error) {
-                      console.error(error)
-                    }
-                  }}
-                  disabled={!account || Number(redeemClaimAmount.toExact()) === 0}
-                  style={{ width: '100%' }}
-                >
-                  {i18n._(t`Claim`)}{' '}
-                  {Number(redeemClaimAmount.toExact()) !== 0
-                    ? formatNumber(
-                      Number(redeemClaimAmount.toExact()) * pegPrice -
-                      (Number(redeemClaimAmount.toExact()) * redeemPermille) / 1000,
-                      false
-                    )
-                    : ''}
-                </Button> */}
-
-                {/* <Button variant="filled" color="yellow" className="flex-1 flex items-center gap-1 justify-center">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                    d="M8.99991 16.17L5.53492 12.705C5.14515 12.3152 4.51356 12.3141 4.12242 12.7025C3.72932 13.0928 3.7282 13.7283 4.11992 14.12L8.99991 19L20.2947 7.70513C20.6842 7.31568 20.6842 6.68425 20.2947 6.2948C19.9054 5.90548 19.2743 5.90533 18.8847 6.29447L8.99991 16.17Z"
-                    fill="#3CC13B"
-                    />
-                    </svg>
-                    {i18n._(t`Redeemed`)}
-                    </Button>
-                    <Button variant="filled" color="yellow" disabled={true} className="flex-1">
-                    {i18n._(t`Claim 100 DAI`)}
-                    </Button> */}
               </div>
             </Tab.Panel>
           </Tab.Group>

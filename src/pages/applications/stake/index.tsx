@@ -390,30 +390,87 @@ export default function Stake() {
                       i18n._(t`Approve`)
                     )}
                   </Button>
-                ) : Number(0) === 0 ? (
-                  <ButtonError
-                    variant="filled"
-                    color="yellow"
-                    className="text-black"
-                    onClick={async () => {
-                      try {
-                        const tx = await unstake(BigNumber.from(parsedRedeemValue?.quotient.toString()))
-                        addTransaction(tx, {
-                          summary: `Withdraw LUX`,
-                        })
-                      } catch (error) {
-                        console.error(error)
-                      }
-                    }}
-                    disabled={!isRedeemValid || !account}
-                    error={!isRedeemValid && !!parsedRedeemValue}
-                    style={{ width: '100%' }}
-                  >
-                    {redeemError || i18n._(t`Withdraw`)}
-                  </ButtonError>
-                ) : (
-                // Number(redeemClaimAmount.toExact()) === 0 ? 
-                  <ButtonError
+                ) : Number(warmupExpiry) - Number(epoch) > 0 ? (
+                  <><ButtonError
+                      variant="filled"
+                      color="yellow"
+                      className="text-black"
+                      onClick={async () => {
+                        try {
+                          const tx = await unstake(BigNumber.from(parsedRedeemValue?.quotient.toString()))
+                          addTransaction(tx, {
+                            summary: `Withdraw LUX`,
+                          })
+                        } catch (error) {
+                          console.error(error)
+                        }
+                      } }
+                      disabled={!isRedeemValid || !account}
+                      error={!isRedeemValid && !!parsedRedeemValue}
+                      style={{ width: '100%' }}
+                    >
+                      {redeemError || i18n._(t`Withdraw`)}
+                    </ButtonError>
+                    <Button
+                      variant="filled"
+                      color="red"
+                      className="text-white"
+                      onClick={async () => {
+                        try {
+                          const tx = await forfeit()
+                          addTransaction(tx, {
+                            summary: `Forfeit LUX`,
+                          })
+                        } catch (error) {
+                          console.error(error)
+                        }
+                      } }
+                      disabled={!account}
+                      style={{ width: '100%' }}
+                    >
+                        {i18n._(t`Forfeit`)}
+                      </Button></>
+                ) : Number(warmupExpiry) < Number(epoch) && Number(warmupValue) > 0 ? (
+                  <><ButtonError
+                      variant="filled"
+                      color="yellow"
+                      className="text-black"
+                      onClick={async () => {
+                        try {
+                          const tx = await unstake(BigNumber.from(parsedRedeemValue?.quotient.toString()))
+                          addTransaction(tx, {
+                            summary: `Withdraw LUX`,
+                          })
+                        } catch (error) {
+                          console.error(error)
+                        }
+                      } }
+                      disabled={!isRedeemValid || !account}
+                      error={!isRedeemValid && !!parsedRedeemValue}
+                      style={{ width: '100%' }}
+                    >
+                      {redeemError || i18n._(t`Withdraw`)}
+                    </ButtonError>
+                    <Button
+                      variant="filled"
+                      color="green"
+                      className="text-black"
+                      onClick={async () => {
+                        try {
+                          const tx = await claim()
+                          addTransaction(tx, {
+                            summary: `Claim LUX`,
+                          })
+                        } catch (error) {
+                          console.error(error)
+                        }
+                      } }
+                      disabled={!account}
+                      style={{ width: '100%' }}
+                    >
+                        {i18n._(t`Claim`)}
+                      </Button></>
+                ) : ( <ButtonError
                     variant="filled"
                     color="yellow"
                     className="text-black"
@@ -438,15 +495,6 @@ export default function Stake() {
             </Tab.Panel>
           </Tab.Group>
         </div>
-            <div className="mt-2 mb-2">
-              <Button variant="filled" color="gold" size="lg">
-                <NavLink href={'/luxor/calculator'}>
-                  <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                    <span>View Calculator &#187;</span>
-                  </a>
-                </NavLink>
-              </Button>
-            </div>
       </LuxorGlowShadow>
     </Container>
   )
