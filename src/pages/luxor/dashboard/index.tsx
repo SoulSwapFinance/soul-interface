@@ -351,7 +351,7 @@ export default function Dashboard() {
       },
       {
           "angle": sorSorCollateralAdjusted,
-          "color": "#FFF300",
+          "color": "#F5C600",
           "label": "Sor Collateral",
           "percent": (sorSorCollateralAdjusted / totalSorCollateral * 100).toFixed()
       }
@@ -361,7 +361,7 @@ export default function Dashboard() {
     {
         "label": "LIQUIDITY",
         "angle": treasuryLiquidityBalance,
-        "color": "#FFF300",
+        "color": "#F5C600",
         "percent": ((treasuryLiquidityBalance / treasuryBalance) * 100).toFixed()
     },
     {
@@ -391,7 +391,7 @@ export default function Dashboard() {
     // {
     //     "label": "LENDING",
     //     "angle": treasuryLendBalance,
-    //     "color": "#FFF300",
+    //     "color": "#F5C600",
     //     "percent": ((treasuryLendBalance / treasuryBalance) * 100).toFixed()
     // }
   ]
@@ -616,7 +616,7 @@ export default function Dashboard() {
               </div>
          </div>  */}
         <div className="grid grid-cols justify-center">
-        <div className="p-1 shadow-4 bg-[#FFF300] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
+        <div className="p-1 shadow-4 bg-[#F5C600] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
         <div className="bg-dark-1000 p-4">
           <Typography
             className="text-2xl flex gap-1 justify-center items-center"
@@ -628,7 +628,7 @@ export default function Dashboard() {
           >
             {i18n._(t`LUXOR ECONOMY`).toUpperCase()}
           </Typography>
-          <div className="h-px my-4 bg-[#FFF300]" />
+          <div className="h-px my-4 bg-[#F5C600]" />
           <div>
             <Typography 
               className={'flex text-xl justify-center items-baseline'}
@@ -778,7 +778,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="p-1 shadow-4 bg-[#FFF300] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
+      <div className="p-1 shadow-4 bg-[#F5C600] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
         <div className="bg-dark-1000 p-4">
           <Typography
             className="text-2xl flex gap-1 justify-center items-center"
@@ -789,7 +789,7 @@ export default function Dashboard() {
           >
             {i18n._(t`LUXOR TREASURY`).toUpperCase()}
           </Typography>
-          <div className="h-px my-4 bg-[#FFF300]" />
+          <div className="h-px my-4 bg-[#F5C600]" />
           <div>
             <Typography
               className="flex text-2xl justify-center gap-1 items-center"
@@ -897,7 +897,7 @@ export default function Dashboard() {
           </div>
         </div> */}
 
-        {/* <div className="p-1 shadow-4 bg-[#FFF300] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
+        {/* <div className="p-1 shadow-4 bg-[#F5C600] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
         <div className="bg-dark-1000 p-4">
         <Typography
             className="text-2xl flex gap-1 justify-center items-center"
@@ -909,7 +909,7 @@ export default function Dashboard() {
           >
             {i18n._(t`SOR STABLECOIN`).toUpperCase()}
           </Typography>
-          <div className="h-px my-4 bg-[#FFF300]" />
+          <div className="h-px my-4 bg-[#F5C600]" />
           <div>
             <Typography
               className="flex gap-1 justify-center items-center"
@@ -982,7 +982,7 @@ export default function Dashboard() {
             </div>
           </div> */}
 
-        <div className="p-1 shadow-4 bg-[#FFF300] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
+        <div className="p-1 shadow-4 bg-[#F5C600] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
         <div className="bg-dark-1000 p-4">
         <Typography
             className="text-2xl flex gap-1 justify-center items-center"
@@ -993,7 +993,7 @@ export default function Dashboard() {
           >
             {i18n._(t`WRAPPED LUMENS`).toUpperCase()}
           </Typography>
-          <div className="h-px my-4 bg-[#FFF300]" />
+          <div className="h-px my-4 bg-[#F5C600]" />
 
           <div>
           <div className="h-px my-1 justify-center bg-dark-1000" />
