@@ -95,12 +95,10 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
         if (account) {
             const timer = setTimeout(() => {
                 if (showing) {
-                    // fetchPayout()
-                    // fetchDiscount()
                     fetchEarnings()
                     fetchApproval()
                 }
-            }, 3000)
+            }, 10000)
             // Clear timeout if the component is unmounted
             return () => clearTimeout(timer)
         }
@@ -114,9 +112,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
         if (!showing) {
             fetchPayout()
             fetchEarnings()
-            // fetchDiscount()
             fetchApproval()
-            // fetchAvailability()
         }
     }
 
@@ -348,8 +344,12 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                         <Text padding="0" fontSize="1rem" color="#666">
                                             0
                                         </Text>
+                                    ) : Number(discount) > 0 ? (
+                                        <Text padding="0" fontSize="1rem" color="#4EFF4E">
+                                            {Number(discount).toFixed()}%
+                                        </Text>
                                     ) : (
-                                        <Text padding="0" fontSize="1rem" color="#FFFFFF">
+                                        <Text padding="0" fontSize="1rem" color="#FF4E4E">
                                             {Number(discount).toFixed()}%
                                         </Text>
                                     )}
@@ -391,7 +391,6 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                             <StakeItemBox className="flex" >
                                 { 
                                     <Text padding="0" fontSize="1rem">
-                                        {/* {BondContract?.vestingDays(bond.bondAddress)} */}
                                         {term}
                                     </Text>
                                 }
@@ -506,7 +505,6 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                         <TokenPairLink
                                                 target="_blank"
                                                 rel="noopener"
-                                                // text-color="yellow"
                                                 href=
                                                 {`https://ftmscan.com/address/${bond.bondAddress}/#code`}
                                                 >

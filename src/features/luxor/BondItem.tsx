@@ -126,7 +126,6 @@ const BondItem = ({ bond, ...rest }) => {
                       <Badge 
                       // size="small"
                         color="gray" value="Boosted" 
-                    //   textColor="yellow" className="uppercase"
                       >
                         Boosted
                       </Badge>
