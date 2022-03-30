@@ -106,7 +106,7 @@ export default function Calculator() {
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
-    color: #F5C600;
+    color: #F5D100;
     margin-bottom: 5px;
     margin-left: 10px;
   `;
