@@ -3,7 +3,6 @@ import {
   StakeContainer,
   Row,
   StakeContentWrapper,
-  TokenPairBox,
   StakeItemBox,
   Text
 } from "./Styles";

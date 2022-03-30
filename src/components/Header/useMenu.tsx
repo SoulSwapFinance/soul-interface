@@ -325,14 +325,13 @@ const useMenu: UseMenu = () => {
     //   icon: <WalletIcon width={20} />,
     // })
     
-  // By default show just a swap button
-  let exploreMenu: MenuItem = {
-    key: 'explore',
-    title: i18n._(t`Explore`),
-    link: '/explore',
-    icon: <GlobeIcon width={20} className="text-dark-600" />,
-  }
-    mainItems.push(exploreMenu)
+  // let exploreMenu: MenuItem = {
+  //   key: 'explore',
+  //   title: i18n._(t`Explore`),
+  //   link: '/explore',
+  //   icon: <GlobeIcon width={20} className="text-dark-600" />,
+  // }
+  //   mainItems.push(exploreMenu)
 
     
     return mainItems.filter((el) => Object.keys(el).length > 0)
