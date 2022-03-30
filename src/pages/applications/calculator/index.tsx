@@ -163,43 +163,11 @@ export default function Calculator() {
                 <CalculatorCard>
                   <div className="mt-2 mb-2">
                   <Button variant="filled" color="yellow" size="lg">
-                    <NavLink href={'/swap?inputCurrency=&outputCurrency=0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'}>
-                      <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                      <div className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                       <span>Market Price: ${Number(luxorPrice).toFixed(2)}</span>
-                      </a>
-                    </NavLink>
+                      </div>
                   </Button>
                   </div>
-                  <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
-                  <Button variant="filled" color="yellow" size="lg">
-                    <NavLink href={'/luxor/dashboard'}>
-                      <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                      <span> Data </span>
-                      </a>
-                    </NavLink>
-                  </Button>
-                  <Button variant="filled" color="yellow" size="lg">
-                    <NavLink href={'/luxor/bonds'}>
-                      <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                      <span> Bonds </span>
-                      </a>
-                    </NavLink>
-                  </Button>
-                  <Button variant="filled" color="yellow" size="lg">
-                    <NavLink href={'/luxor/wrap'}>
-                      <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                      <span> Wrap </span>
-                      </a>
-                    </NavLink>
-                  </Button>
-                  <Button variant="filled" color="yellow" size="lg">
-                    <NavLink href={'/luxor/stake'}>
-                      <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                      <span> Stake </span>
-                      </a>
-                    </NavLink>
-                  </Button>
-                </div>
               </CalculatorCard>
               <CalculatorCard>
                 <div className="calculator-card-area">
@@ -298,7 +266,7 @@ export default function Calculator() {
                       <div className="grid p-6 lg:p-16 w-full grid-cols-1 mt-4 mb-4 bg-dark-1200 border border-1 border-yellow hover:border-gold">
                       <div className="mb-4 text-center">
                           {/* <Slider className="calculator-days-slider" min={1} max={365} value={Number(days)} onChange={(e, newValue: any) => setDays(newValue)} /> */}
-                          {['30', '90', '180', '365'].map((multipler, i) => (
+                          {['30', '180', '365'].map((multipler, i) => (
                             <Button
                               variant="outlined"
                               size="xs"
@@ -314,13 +282,13 @@ export default function Calculator() {
                           ))}
                         </div>
                           <DataRow>
-                              <DataRowName>Days Staked</DataRowName>
+                              <DataRowName>Staked</DataRowName>
                                 <DataRowValue>
                                 <p className="calculator-days-slider-wrap-title">{`${days} Day${Number(days) >= 1 ? "s" : ""}`}</p>
                                 </DataRowValue>
                           </DataRow>
                           <DataRow>
-                              <DataRowName>Initial Investment</DataRowName>
+                              <DataRowName>Initial</DataRowName>
                               {/* <div> */}
                                 <DataRowValue>
                                   ${initialInvestment}
@@ -328,31 +296,31 @@ export default function Calculator() {
                               {/* </div> */}
                           </DataRow>
                           <DataRow>
-                              <DataRowName>Current Wealth</DataRowName>
+                              <DataRowName>Current</DataRowName>
                               <DataRowValue>
                                 ${calcCurrentWealth()}
                               </DataRowValue>
                           </DataRow>
                           <DataRow>
-                              <DataRowName>Total Rewards</DataRowName>
+                              <DataRowName>Rewards</DataRowName>
                               <DataRowValue>
                                 {formatNumber(rewardsEstimation)} LUX
                               </DataRowValue>
                           </DataRow>
                           <DataRow>
-                          <DataRowName>Realized Return</DataRowName>
+                          <DataRowName>Return</DataRowName>
                               <DataRowValue>
                                 {formatCurrency(Number(potentialReturn), 2)}
                               </DataRowValue>
                           </DataRow>
                           <DataRow>
-                              <DataRowName>Yellow Lambos</DataRowName>
+                              <DataRowName>Lambos</DataRowName>
                               <DataRowValue>
                                 {Math.floor(Number(potentialReturn) / 220000)}
                               </DataRowValue>
                           </DataRow>
                           <DataRow>
-                              <DataRowName>Orange Bitcoins</DataRowName>
+                              <DataRowName>Bitcoins</DataRowName>
                               <DataRowValue>
                                 {Math.floor(Number(potentialReturn) / btcPrice)}
                               </DataRowValue>

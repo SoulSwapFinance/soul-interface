@@ -38,7 +38,9 @@ export enum ApplicationModal {
   LUXOR_STATS,
   CALCULATOR,
   STAKE,
-  LUXOR_BONDS
+  LUXOR_BONDS,
+  WRAP,
+  SOR
 }
 
 export const updateBlockNumber = createAction<{

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Container from 'components/Container'
 import Head from 'next/head'
 import Typography from 'components/Typography'
@@ -28,6 +28,19 @@ import { Button } from 'components/Button'
 // import ExternalLink from 'components/ExternalLink'
 import LuxorGlowShadow from 'components/LuxorGlowShadow'
 import { useTokenInfo, useUserInfo, usePairInfo, useSorInfo, useLuxorInfo } from 'hooks/useAPI'
+// import { ArrowRightIcon } from '@heroicons/react/outline'
+import { I18n } from '@lingui/core'
+// import Link from 'next/link'
+import Image from 'next/image'
+// import { t } from '@lingui/macro'
+// import Calculator from 'components/Calculator'
+import { useToggleCalculatorModal, useToggleModal } from 'state/application/hooks'
+import CalculatorModal from 'modals/CalculatorModal'
+import { ApplicationModal } from 'state/application/actions'
+import StakeModal from 'modals/StakeModal'
+import SorModal from 'modals/SorModal'
+import LuxorBondsModal from 'modals/LuxorBondsModal'
+import LuxorWrapModal from 'modals/LuxorWrapModal'
 
 export default function Dashboard() {
   const { i18n } = useLingui()
@@ -409,6 +422,13 @@ export default function Dashboard() {
     },
   ]
 
+  const toggleCalculatorModal = useToggleCalculatorModal()
+  const toggleStakeModal = useToggleModal(ApplicationModal.STAKE)
+  const toggleSorModal = useToggleModal(ApplicationModal.SOR)
+  const toggleLuxorBondsModal = useToggleModal(ApplicationModal.LUXOR_BONDS)
+  const toggleWrapModal = useToggleModal(ApplicationModal.WRAP)
+
+
   return (
     <Container id="dashboard-page" className="py-4 space-y-4 md:py-8 max-w-min">
       <LuxorGlowShadow>
@@ -416,6 +436,7 @@ export default function Dashboard() {
         <title>Dashboard | Luxor</title>
         <meta key="description" name="description" />
       </Head>
+    
       <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/stake'}>
@@ -445,8 +466,80 @@ export default function Dashboard() {
             </a>
           </NavLink>
         </Button>
+        </div>      
+        <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
+
+          <div className="grid grid-cols-5 items-center gap-2">
+    <div className="flex items-center ml-1 mr-1 md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
+      onClick={() => toggleCalculatorModal()}>
+        <div className="grid items-center text-center grid-flow-cols-2 px-[17%] py-6 text-sm rounded-lg pointer-events-auto bg-dark-1000 text-primary border border-yellow">
+          <Image
+              src="/images/calculator.png"
+              width="96px"
+              height="96px"
+              objectFit="contain"
+              className="rounded-md"
+              />
+        </div>
+        <CalculatorModal />
+    </div>
+      <div className="flex items-center ml-1 mr-1 md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
+        onClick={() => toggleStakeModal()}>
+          <div className="grid items-center text-center grid-flow-cols-2 px-[17%] py-6 text-sm rounded-lg pointer-events-auto bg-dark-1000 text-primary border border-yellow">
+              <Image
+                  src="https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x4290b33158F429F40C0eDc8f9b9e5d8C5288800c/logo.png"
+                  width="96px"
+                  height="96px"
+                  objectFit="contain"
+                  className="rounded-md"
+                  />
+            </div>
+            <StakeModal />
       </div>
-      
+      <div className="flex items-center ml-1 mr-1 md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
+        onClick={() => toggleLuxorBondsModal()}>
+          <div className="grid items-center text-center grid-flow-cols-2 px-[17%] py-6 text-sm rounded-lg pointer-events-auto bg-dark-1000 text-primary border border-yellow">
+              <Image
+                  src="https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b/logo.png"
+                  width="96px"
+                  height="96px"
+                  objectFit="contain"
+                  className="rounded-md"
+                  />
+            </div>
+            <LuxorBondsModal />
+      </div>
+      <div className="flex items-center ml-1 mr-1 md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
+        onClick={() => toggleWrapModal()}>
+          <div className="grid items-center text-center grid-flow-cols-2 px-[17%] py-6 text-sm rounded-lg pointer-events-auto bg-dark-1000 text-primary border border-yellow">
+              <Image
+                  src="https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208/logo.png"
+                  width="96px"
+                  height="96px"
+                  objectFit="contain"
+                  className="rounded-md"
+                  />
+            </div>
+            <LuxorWrapModal />
+      </div>
+      <div className="flex items-center ml-1 mr-1 md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
+        onClick={() => toggleSorModal()}>
+          <div className="grid items-center text-center grid-flow-cols-2 px-[17%] py-6 text-sm rounded-lg pointer-events-auto bg-dark-1000 text-primary border border-yellow">
+              <Image
+                  src="https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A/logo.png"
+                  width="96px"
+                  height="96px"
+                  objectFit="contain"
+                  className="rounded-md"
+                  />
+            </div>
+            <SorModal />
+      </div>
+  </div>
+      </div>
+      <div className="flex text-center items-center">
+      {/* <Applications /> */}
+      </div>
       {/* <div className="block">
       </div>
       <div className="inline-block column-count-1 xl:column-count-2">
