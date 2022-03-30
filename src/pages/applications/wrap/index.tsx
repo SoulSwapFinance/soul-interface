@@ -179,10 +179,10 @@ export default function Wrap() {
               />
               <div className="h-px my-6 bg-dark-1000"></div>
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1">
-                <div className="flex justify-between">
-                  <Typography className="text-white" fontFamily={'medium'}>
+                <div className="flex justify-center">
+                  {/* <Typography className="text-white" fontFamily={'medium'}>
                     {i18n._(t`Wrap Rate`)}
-                  </Typography>
+                  </Typography> */}
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     1 LUM = { (1 / Number(wrapIndex)).toFixed(4)} WLUM
                   </Typography>
@@ -269,10 +269,10 @@ export default function Wrap() {
               />
               <div className="h-px my-6 bg-dark-1000"></div>
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1">
-                <div className="flex justify-between">
-                  <Typography className="text-white" fontFamily={'medium'}>
+                <div className="flex justify-center">
+                  {/* <Typography className="text-white" fontFamily={'medium'}>
                     {i18n._(t`Unwrap Rate`)}
-                  </Typography>
+                  </Typography> */}
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     1 WLUM = {Number(wrapIndex).toFixed(2)} LUM
                   </Typography>
