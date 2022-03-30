@@ -27,7 +27,7 @@ import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
 // import ExternalLink from 'components/ExternalLink'
 import LuxorGlowShadow from 'components/LuxorGlowShadow'
-import { useTokenInfo, useUserInfo, usePairInfo, useSorInfo } from 'hooks/useAPI'
+import { useTokenInfo, useUserInfo, usePairInfo, useSorInfo, useLuxorInfo } from 'hooks/useAPI'
 
 export default function Dashboard() {
   const { i18n } = useLingui()
@@ -35,8 +35,8 @@ export default function Dashboard() {
   // const [totalLuxorSupply, setTotalLuxorSupply] = useState(0)
   // const [totalSorSupply, setTotalSorSupply] = useState(0)
   // const [totalWlumSupply, setTotalWlumSupply] = useState(0)
-  const [stakedLuxor, setStakedLuxor] = useState(0)
-  const [lockedLuxor, setLockedLuxor] = useState(0)
+  // const [stakedLuxor, setStakedLuxor] = useState(0)
+  // const [lockedLuxor, setLockedLuxor] = useState(0)
   // const [sorDaiCollateral, setSorDaiCollateral] = useState(0)
   // const [sorLuxCollateral, setSorLuxCollateral] = useState(0)
   // const [sorSorCollateral, setSorSorCollateral] = useState(0)
@@ -110,9 +110,7 @@ export default function Dashboard() {
   const luxDaiPrice = usePairPrice(LuxorDaiAddress) // ~160_000 // √
   const wLumFtmPrice = usePairPrice(WrappedLumFantomAddress) // ~1_6M // √
   const ftmDaiPrice = usePairPrice(FtmDaiAddress) 
-  
-  const luxorCirculatingSupply = luxorSupply - stakedLuxor - lockedLuxor
-  
+    
   // GET SOR STATS
   const sorSorCollateral = Number(useSorInfo().sorInfo.sorSorCollateral)
   const sorLuxCollateral = Number(useSorInfo().sorInfo.sorLuxCollateral)
@@ -139,6 +137,12 @@ export default function Dashboard() {
   const FtmValue = FtmBalance * ftmPrice
   const DaiValue = Number(useTokenInfo(DAI_ADDRESS[250]).tokenInfo.treasuryBalance) / 1e18
   const treasuryReserveBalance = FtmValue + DaiValue
+  
+  // GET LUXOR ECONOMY BALANCES //
+  const stakedLuxor = Number(useLuxorInfo().luxorInfo.stakedLuxor) / 1e9
+  const lockedLuxor = Number(useLuxorInfo().luxorInfo.lockedLuxor) / 1e9
+
+  const luxorCirculatingSupply = luxorSupply - Number(stakedLuxor) - Number(lockedLuxor)
 
   // console.log('Ftm Bal:%s', FtmBalance)
   // console.log('Dai Bal:%s', DaiBalance)
@@ -278,18 +282,18 @@ export default function Dashboard() {
             // setTreasuryLiquidityBalance(LiquidityBalance)
 
             // get staked balance of Luxor
-            const data3 = await LuxorContract.balanceOf(LuxorStakingAddress)
-            const luxBalance = data3 / 1e9
-            setStakedLuxor(Number(luxBalance))
+            // const data3 = await LuxorContract.balanceOf(LuxorStakingAddress)
+            // const luxBalance = data3 / 1e9
+            // setStakedLuxor(Number(luxBalance))
             // console.log('luxBalance:%s', Number(luxBalance))
 
             // get warmup balance of Luxor
-            const lumBalance = await LumensContract.balanceOf(LuxorWarmupAddress)
-            const warmupBalance = lumBalance / 1e9
-            setLockedLuxor(Number(warmupBalance))
+            // const lumBalance = await LumensContract.balanceOf(LuxorWarmupAddress)
+            // const warmupBalance = lumBalance / 1e9
+            // setLockedLuxor(Number(warmupBalance))
             // console.log('warmupBalance:%s', Number(warmupBalance))
 
-            return [totalSorSupply, wlumSupply, luxorSupply, sorDaiCollateral, sorLuxCollateral, sorSorCollateral, luxBalance, warmupBalance]
+            return [totalSorSupply, wlumSupply, luxorSupply, sorDaiCollateral, sorLuxCollateral, sorSorCollateral]
         } catch (err) {
             console.warn(err)
         }
