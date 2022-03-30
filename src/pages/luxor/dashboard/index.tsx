@@ -139,8 +139,10 @@ export default function Dashboard() {
   const treasuryReserveBalance = FtmValue + DaiValue
   
   // GET LUXOR ECONOMY BALANCES //
-  const stakedLuxor = Number(useLuxorInfo().luxorInfo.stakedLuxor) / 1e9
-  const lockedLuxor = Number(useLuxorInfo().luxorInfo.lockedLuxor) / 1e9
+  const stakedLuxor = Number(useLuxorInfo().luxorInfo.stakingBalance)
+  console.log('staked', stakedLuxor)
+  const lockedLuxor = Number(useLuxorInfo().luxorInfo.warmupBalance)
+  console.log('lockedLuxor', lockedLuxor)
 
   const luxorCirculatingSupply = luxorSupply - Number(stakedLuxor) - Number(lockedLuxor)
 
