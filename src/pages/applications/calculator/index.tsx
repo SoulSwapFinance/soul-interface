@@ -30,7 +30,7 @@ export default function Calculator() {
     const trimmedLumensBalance = Number(lumensBalance).toFixed(6);
     const stakingReward = luxorUserInfo.distribute;
     const stakingRebase = Number(stakingReward) / Number(circulatingLumens);
-    const stakingAPY = Math.pow(1 + stakingRebase, 365 * 3) - 1
+    const stakingAPY = (Math.pow(1 + stakingRebase, 365 * 3) - 1) * 100
     const trimmedStakingAPY = Number(stakingAPY).toFixed(4)
 
     const [lumensAmount, setLumensAmount] = useState(trimmedLumensBalance);
