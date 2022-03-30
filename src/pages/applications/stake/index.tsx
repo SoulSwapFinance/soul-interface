@@ -173,6 +173,13 @@ export default function Stake() {
         <title>Staking | Soul</title>
         <meta key="description" name="description" />
       </Head>
+      <div className="mt-2 mb-2">
+        <Button variant="filled" color="yellow" size="lg">
+            <div className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span>Market Price: ${Number(luxorPrice).toFixed(2)}</span>
+            </div>
+        </Button>
+      </div>
       <LuxorGlowShadow>
         <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">
           <Tab.Group>
