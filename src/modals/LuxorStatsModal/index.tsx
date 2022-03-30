@@ -78,10 +78,10 @@ export default function LuxorStatsModal(): JSX.Element | null {
       maxWidth={'md'}
     // maxWidth={672}
     >
-      <div className="space-y-8">
+    <ModalHeader header={''} onClose={toggleLuxorStatsModal} />
+      <div className="mt-2 space-y-8">
         <div className="space-y-4">
-          <div className="flex flex-col-2 w-full">
-            <ModalHeader header={''} onClose={toggleLuxorStatsModal} />
+          <div className="flex justify-between gap-2 flex-col-2 w-full">
             <div
               className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
               onClick={() => {

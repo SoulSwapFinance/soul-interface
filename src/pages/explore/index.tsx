@@ -18,7 +18,7 @@ const EXPLORE = (i18n: I18n) => [
   {
     id: 2,
     name: 'STAKE SOUL',
-    description: 'Stake SOUL for SEANCE. Use SEANCE to earn more.',
+    description: 'Stake SOUL for SEANCE. Use SEANCE, earn more.',
     href: './seance'
   },
   {
@@ -36,7 +36,7 @@ const EXPLORE = (i18n: I18n) => [
   {
     id: 5,
     name: 'SOR STABLECOIN',
-    description: 'Honor God(dess) Shai. Stake DAI for SOR and more.',
+    description: 'Honor God(dess) Shai. Stake DAI for SOR + more.',
     href: './luxor/sor'
   },
   {
@@ -48,13 +48,13 @@ const EXPLORE = (i18n: I18n) => [
   {
     id: 7,
     name: 'SHARE YOUR SOUL',
-    description: 'Send your SOUL. Only claimable via Seance Circles.',
+    description: 'Share SOUL. Only claimable via Seance Circles.',
     href: './scarab/create'
   },
   {
     id: 8,
     name: 'BRIDGE ASSETS',
-    description: 'Bridge from BSC, ETH, AVAX, MATIC, HECO, and more.',
+    description: 'Bridge from BSC, ETH, AVAX, MATIC, and more.',
     href: 'https://bridge.soulswap.finance'
   },
   {

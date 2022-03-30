@@ -25,6 +25,9 @@ export enum ApplicationModal {
   ADDRESS_CLAIM,
   CLAIM_POPUP,
   MENU,
+  MINES,
+  SEANCE,
+  BONDS,
   DELEGATE,
   VOTE,
   LANGUAGE,
@@ -33,7 +36,11 @@ export enum ApplicationModal {
   YIELD_DETAILS,
   SOUL_STATS,
   LUXOR_STATS,
-  CALCULATOR
+  CALCULATOR,
+  STAKE,
+  LUXOR_BONDS,
+  WRAP,
+  SOR
 }
 
 export const updateBlockNumber = createAction<{
