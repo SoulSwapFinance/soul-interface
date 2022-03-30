@@ -14,6 +14,7 @@ import {
   LOCKER_ADDRESS,
   SOUL_USDC_PAIR,
   LUX_ADDRESS,
+  TEAM_WALLET_ADDRESS,
   WLUM_ADDRESS,
   SOR_MASTER_ADDRESS,
   SOR_MINTER_ADDRESS,
@@ -94,6 +95,7 @@ import LOTTERY_ABI from '../constants/abis/soulswap/lottery.json' // 28 JUL
 import SOULVAULT_ABI from '../constants/abis/soulswap/soulvault.json' // 31 JUL
 import LUXOR_ABI from '../constants/abis/soulswap/luxor.json'
 import LUXOR_TREASURY_ABI from '../constants/abis/soulswap/luxor-treasury.json'
+import TEAM_WALLET_ABI from '../constants/abis/soulswap/team-wallet.json'
 import SOR_STAKING_ABI from '../constants/abis/soulswap/sor-staking.json'
 import LUXOR_STAKING_ABI from '../constants/abis/soulswap/luxor-staking.json'
 import LUXOR_STAKING_HELPER_ABI from '../constants/abis/soulswap/luxor-staking-helper.json'
@@ -329,6 +331,11 @@ export function useEnchantContract(withSignerIfPossible = true): Contract | null
 export function useLuxorContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && LUX_ADDRESS[chainId], LUXOR_ABI, withSignerIfPossible)
+}
+
+export function useTeamContract(withSignerIfPossible = true): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && TEAM_WALLET_ADDRESS[chainId], TEAM_WALLET_ABI, withSignerIfPossible)
 }
 
 export function useLuxorTreasuryContract(withSignerIfPossible = true): Contract | null {

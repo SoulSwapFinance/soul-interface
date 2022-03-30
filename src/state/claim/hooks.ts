@@ -71,7 +71,7 @@ export function useUserClaimData(account: string | null | undefined): UserClaimD
   return account && chainId ? claimInfo[key] : undefined
 }
 
-// check if user is in blob and has not yet claimed UNI
+// check if user is in blob and has not yet claimed SOUL
 export function useUserHasAvailableClaim(account: string | null | undefined): boolean {
   const userClaimData = useUserClaimData(account)
   const soulDistributorContract = useMerkleDistributorContract()
