@@ -32,7 +32,7 @@ import { useActiveWeb3React } from 'services/web3/hooks'
 import NavLink from 'components/NavLink'
 import { useTokenContract } from 'hooks/useTokenContract'
 import { useLuxorPrice } from 'hooks/getPrices'
-import { useLuxorInfo } from 'hooks/useAPI'
+import { useLuxorInfo, useLuxorUserInfo } from 'hooks/useAPI'
 
 export default function Stake() {
   const addTransaction = useTransactionAdder()
@@ -78,7 +78,14 @@ export default function Stake() {
   // staking
   const StakingHelperContract = useLuxorStakeHelperContract()
   // const StakingContract = useLuxorStakingContract()
-
+  const { luxorUserInfo } = useLuxorUserInfo(account)
+  const circulatingLumens = useLuxorInfo().luxorInfo.circulatingLumens
+  // const epoch = await stakingContract.epoch();
+  const stakingReward = luxorUserInfo.distribute;
+  const stakingRebase = Number(stakingReward) / Number(circulatingLumens);
+  // const fiveDayRate = Math.pow(1 + stakingRebase, 5 * 3) - 1;
+  const stakingAPY = Math.pow(1 + stakingRebase, 365 * 3) - 1;
+  
   const [stakeApprovalState, stakeApprove] = useApproveCallback(
     parsedStakeValue,
     LUXOR_STAKING_ADDRESS[chainId]
@@ -167,7 +174,7 @@ export default function Stake() {
   return (
     <Container id="stablecoin-page" className="py-4 md:py-8 lg:py-12">
       <Head>
-        <title>Stablecoin | Soul</title>
+        <title>Staking | Soul</title>
         <meta key="description" name="description" />
       </Head>
       <div className="mt-2 mb-2">
@@ -178,7 +185,16 @@ export default function Stake() {
             </a>
           </NavLink>
         </Button>
-        </div>
+      </div>
+      <div className="mt-2 mb-2">
+          <Button variant="filled" color="yellow" size="lg">
+            <NavLink href={'/luxor/calculator'}>
+              <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                <span>View Calculator</span>
+              </a>
+            </NavLink>
+          </Button>
+      </div>
       <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/dashboard'}>
@@ -232,6 +248,7 @@ export default function Stake() {
               </Tab>
           </div>
             </Tab.List>
+            
             <Tab.Panel className={'outline-none'}>
               <StableInputPanel
                 value={stakeValue}
@@ -246,6 +263,13 @@ export default function Stake() {
                 id="stablecoin-currency-input"
               />
               <div className="h-px my-6 bg-dark-1000"></div>
+              <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-yellow w-full space-y-1">
+                <div className="text-white">
+                    <div className="block text-md md:text-xl text-white text-center text-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                      <span> {formatNumber(stakingAPY)}% APY</span>
+                    </div>
+                </div>
+              </div>
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1">
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
@@ -316,36 +340,8 @@ export default function Stake() {
                 )}
               </div>
             </Tab.Panel>
-            <Tab.Panel className={'outline-none'}>
-              {/* <Button variant={'link'} color={'yellow'} className="absolute top-0 right-0 flex">
-                <QuestionHelper
-                  text={
-                    <div className="flex flex-col space-y-2">
-                      <div className="flex flex-col">
-                        <p>
-                            <strong className="text-accent bold">Redeem:&nbsp;</strong>
-                          </p>
-                        <p>
-                          <strong className="text-accent bold">1.</strong> Enter SOR to redeem.
-                        </p>
-                        <p>
-                          <strong className="text-accent bold">2.</strong> Enter SOR to redeem.
-                        </p>
-                        <p>
-                          <strong className="text-accent bold">3.</strong> Claim your DAI.
-                        </p>
-                      </div>
-                      <div className="flex flex-col">
-                        <div className="text-sm font-normal leading-5">
-                          <strong className="text-accent bold">Note:&nbsp;</strong>
-                          Approval is only needed once.
-                        </div>
-                      </div>
-                    </div>
-                  }
-                />
-              </Button> */}
 
+            <Tab.Panel className={'outline-none'}>
              <StableInputPanel
                 value={redeemValue}
                 showLogo={false}
@@ -366,6 +362,13 @@ export default function Stake() {
                                 showMax={false}
                             /> */}
               <div className="h-px my-6 bg-dark-1000"></div>
+                <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-yellow w-full space-y-1">
+                <div className="text-white">
+                    <div className="block text-md md:text-xl text-white text-center text-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                      <span> {formatNumber(stakingAPY)}% APY</span>
+                    </div>
+                </div>
+              </div>
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1">
               <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
@@ -503,6 +506,7 @@ export default function Stake() {
                     </Button> */}
               </div>
             </Tab.Panel>
+            
           </Tab.Group>
         </div>
       </LuxorGlowShadow>
