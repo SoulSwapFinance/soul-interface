@@ -15,7 +15,7 @@ export const AllBonds = [
     assetName: 'DAI',
     assetAddress: DAI,
     token1Address: DAI,
-    term: '5 Days',
+    term: '5D',
   },
   {
     pid: 4,
@@ -24,7 +24,7 @@ export const AllBonds = [
     assetName: 'FTM',
     assetAddress: FTM,
     token1Address: FTM,
-    term: '5 Days',
+    term: '5D',
   },
   {
     pid: 8,
@@ -34,7 +34,7 @@ export const AllBonds = [
     assetAddress: LUX_DAI,
     token1Address: LUX,
     token2Address: DAI,
-    term: '5 Days',
+    term: '5D',
   },
   {
     pid: 12,
@@ -44,7 +44,7 @@ export const AllBonds = [
     assetAddress: LUX_FTM,
     token1Address: LUX,
     token2Address: FTM,
-    term: '5 Days',
+    term: '5D',
   },
 
   // 1 WEEK
@@ -55,7 +55,7 @@ export const AllBonds = [
     assetName: 'DAI',
     assetAddress: DAI,
     token1Address: DAI,
-    term: '1 Week',
+    term: '1W',
   },
   {
     pid: 5,
@@ -64,7 +64,7 @@ export const AllBonds = [
     assetName: 'FTM',
     assetAddress: FTM,
     token1Address: FTM,
-    term: '1 Weeks',
+    term: '1W',
   },
   {
     pid: 9,
@@ -74,7 +74,7 @@ export const AllBonds = [
     assetAddress: LUX_DAI,
     token1Address: LUX,
     token2Address: DAI,
-    term: '1 Weeks',
+    term: '1W',
   },
   {
     pid: 13,
@@ -84,7 +84,7 @@ export const AllBonds = [
     assetAddress: LUX_FTM,
     token1Address: LUX,
     token2Address: FTM,
-    term: '1 Weeks',
+    term: '1W',
   },
 
   // 2 WEEKS
@@ -95,7 +95,7 @@ export const AllBonds = [
     assetName: 'DAI',
     assetAddress: DAI,
     token1Address: DAI,
-    term: '2 Weeks',
+    term: '2W',
   },
   {
     pid: 6,
@@ -104,7 +104,7 @@ export const AllBonds = [
     assetName: 'FTM',
     assetAddress: FTM,
     token1Address: FTM,
-    term: '2 Weeks',
+    term: '2W',
   },
   {
     pid: 10,
@@ -114,7 +114,7 @@ export const AllBonds = [
     assetAddress: LUX_DAI,
     token1Address: LUX,
     token2Address: DAI,
-    term: '2 Weeks',
+    term: '2W',
   },
   {
     pid: 14,
@@ -124,7 +124,7 @@ export const AllBonds = [
     assetAddress: LUX_FTM,
     token1Address: LUX,
     token2Address: FTM,
-    term: '2 Weeks',
+    term: '2W',
   },
 
   // 4 WEEKS
@@ -135,7 +135,7 @@ export const AllBonds = [
     assetName: 'DAI',
     assetAddress: DAI,
     token1Address: DAI,
-    term: '4 Weeks',
+    term: '4W',
   },
   {
     pid: 7,
@@ -144,7 +144,7 @@ export const AllBonds = [
     assetName: 'FTM',
     assetAddress: FTM,
     token1Address: FTM,
-    term: '4 Weeks',
+    term: '4W',
   },
   {
     pid: 11,
@@ -154,7 +154,7 @@ export const AllBonds = [
     assetAddress: LUX_DAI,
     token1Address: LUX,
     token2Address: DAI,
-    term: '4 Weeks',
+    term: '4W',
   },
 
 
@@ -167,6 +167,6 @@ export const AllBonds = [
     assetAddress: LUX_FTM,
     token1Address: LUX,
     token2Address: FTM,
-    term: '4 Weeks',
+    term: '4W',
   },
 ]

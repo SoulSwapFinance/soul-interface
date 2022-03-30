@@ -84,7 +84,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     useEffect(() => {
         // fetchDiscount()
         fetchEarnings()
-        // fetchPayout()
+        fetchPayout()
         fetchApproval()
     }, [account])
 
@@ -98,7 +98,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                     fetchEarnings()
                     fetchApproval()
                 }
-            }, 10000)
+            }, 5000)
             // Clear timeout if the component is unmounted
             return () => clearTimeout(timer)
         }
@@ -332,7 +332,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                         </Text>
                                     ) : (
                                         <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                            ${Number(bondPrice).toFixed(2)}
+                                            ${Number(bondPrice).toFixed(0)}
                                         </Text>
                                     )}
                                 </StakeItem>
@@ -355,7 +355,17 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                     )}
                                 </StakeItem>
                             </StakeItemBox>
-
+                            <StakeItemBox className="flex">
+                                {Number(payout).toFixed(2).toString() === '0.00' ? (
+                                    <Text padding="0" fontSize="1rem" color="#666">
+                                        0
+                                    </Text>
+                                ) : (
+                                    <Text padding="0" fontSize="1rem" color="#4EFF4E">
+                                        ${Number(payout * luxPrice).toFixed(0)}
+                                    </Text>
+                                )}
+                            </StakeItemBox>
                             {/* <StakeItemBox className="flex">
                                 {earnedAmount.toFixed(2).toString() === '0.00' ? (
                                     <Text padding="0" fontSize="1rem" color="#666">
@@ -489,8 +499,8 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                         showMax={false}
                                         showBalance={true}
                                     />
-                                    <Wrap padding="0" margin="0" display="flex" justifyContent="space-between">
-                                        <Text fontSize=".9rem" padding="0" textAlign="left" color="#FFFFFF">
+                                    {/* <Wrap padding="0" margin="0" display="flex" justifyContent="end">
+                                         <Text fontSize=".9rem" padding="0" textAlign="left" color="#FFFFFF">
                                             PAYOUT:&nbsp;
                                     {Number(payout) === 0
                                         ? '0'
@@ -508,10 +518,10 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                                 href=
                                                 {`https://ftmscan.com/address/${bond.bondAddress}/#code`}
                                                 >
-                                            <div className="text-yellow justify-center items-center text-center">
+                                            <div className="text-yellow text-md justify-center items-center text-center">
                                             VIEW CONTRACT</div>
                                         </TokenPairLink>
-                                    </Wrap>
+                                    </Wrap> */}
                                     {/* {available && */}
                                         <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton

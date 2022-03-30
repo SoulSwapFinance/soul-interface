@@ -17,7 +17,7 @@ export default function ModalKey() {
         alignContent="center"
       >
         <StakeContainer>
-          <Row padding=".25rem 1.5rem">
+          <Row padding=".25rem .25rem">
             <StakeContentWrapper>
               <Wrap>
                 <Text padding ="0" fontSize=".9" color="#bbb">
@@ -32,15 +32,15 @@ export default function ModalKey() {
 
               <StakeItemBox>
                 <Text padding="0" fontSize=".9" color="#bbb">
-                DISCOUNT
+                ROI
                 </Text>
               </StakeItemBox>
 
-              {/* <StakeItemBox desktopOnly={true}>
+              <StakeItemBox>
                 <Text padding="0" fontSize=".9" color="#bbb">
-                OPEN
+                PAYOUT
                 </Text>
-              </StakeItemBox> */}
+              </StakeItemBox>
               <StakeItemBox>
                 <Text padding="0" fontSize=".9" color="#bbb">
                 TERM
