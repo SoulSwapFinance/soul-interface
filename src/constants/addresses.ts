@@ -89,6 +89,13 @@ export const SAFE_ADDRESS: AddressMap = {
   [ChainId.FANTOM_TESTNET]: '',
 }
 
+export const TEAM_WALLET_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xd0744f7F9f65db946860B974966f83688D4f4630', // 23 DEC
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
 export const LOCKER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.BSC]: '',
