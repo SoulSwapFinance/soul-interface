@@ -18,8 +18,6 @@ function Calculator(): JSX.Element | null {
   const { chainId } = useActiveWeb3React()
   const toggleTokenStatsModal = useToggleCalculatorModal()
   const open = useModalOpen(ApplicationModal.CALCULATOR)
-  const wLumPrice = useWrappedLumPrice()
-  const luxPrice = useLuxorPrice()
 
   if (!chainId) return null
 

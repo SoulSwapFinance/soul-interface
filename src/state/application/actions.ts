@@ -33,7 +33,9 @@ export enum ApplicationModal {
   YIELD_DETAILS,
   SOUL_STATS,
   LUXOR_STATS,
-  CALCULATOR
+  CALCULATOR,
+  STAKE,
+  LUXOR_BONDS
 }
 
 export const updateBlockNumber = createAction<{

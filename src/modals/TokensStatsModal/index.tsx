@@ -93,11 +93,10 @@ export default function SoulStatsModal(): JSX.Element | null {
       onDismiss={toggleSoulStatsModal}
       maxWidth={'md'}
     >
-      <div className="space-y-8">
+    <ModalHeader header={''} onClose={toggleSoulStatsModal} />
+      <div className="mt-2 space-y-8">
         <div className="space-y-4">
-          {/* <Wrapper className="flex flex-col-2 justify-between" > */}
-          <div className="flex justify-between flex-col-2 w-full">
-          <ModalHeader header={''} onClose={toggleSoulStatsModal} />
+          <div className="flex justify-between gap-2 flex-col-2 w-full">
             {/* <div className="block"> */}
             {/* <QuestionHelper text={`Add to MetaMask`}/> */}
             <div
