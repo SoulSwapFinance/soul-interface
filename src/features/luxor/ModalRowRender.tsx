@@ -332,7 +332,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                         </Text>
                                     ) : (
                                         <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                            ${Number(bondPrice).toFixed(0)}
+                                            ${Number(bondPrice).toFixed(2)}
                                         </Text>
                                     )}
                                 </StakeItem>

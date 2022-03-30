@@ -17,7 +17,7 @@ export default function ModalKey() {
         alignContent="center"
       >
         <StakeContainer>
-          <Row padding=".25rem .25rem">
+          <Row padding=".25rem .5rem">
             <StakeContentWrapper>
               <Wrap>
                 <Text padding ="0" fontSize=".9" color="#bbb">
