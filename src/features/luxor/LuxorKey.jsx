@@ -32,15 +32,15 @@ export default function LuxorKey() {
 
               <StakeItemBox>
                 <Text padding="0" fontSize=".9" color="#bbb">
-                % ROI
+                DISCOUNT
                 </Text>
               </StakeItemBox>
 
-              <StakeItemBox desktopOnly={true}>
+              {/* <StakeItemBox desktopOnly={true}>
                 <Text padding="0" fontSize=".9" color="#bbb">
                 OPEN
                 </Text>
-              </StakeItemBox>
+              </StakeItemBox> */}
               <StakeItemBox>
                 <Text padding="0" fontSize=".9" color="#bbb">
                 TERM

@@ -71,10 +71,10 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     const { luxorBondInfo } = useLuxorBondInfo(bondAddress)
     const bondPrice = Number(luxorBondInfo.price) / 1e18
     const discount = luxorBondInfo.discount
-    const remainingDebt = luxorBondInfo.remainingDebt
-    const maximumDebt = luxorBondInfo.maximumDebt
-    const availRatio = Number(remainingDebt) <= 0 ? 0 : Number(remainingDebt) / Number(maximumDebt) * 100
-    const available = Number(remainingDebt) > 0 ? true : false
+    // const remainingDebt = luxorBondInfo.remainingDebt
+    // const maximumDebt = luxorBondInfo.maximumDebt
+    // const availRatio = Number(remainingDebt) <= 0 ? 0 : Number(remainingDebt) / Number(maximumDebt) * 100
+    // const available = Number(remainingDebt) > 0 ? true : false
     // console.log('remainingDebt:%s', remainingDebt)
     // console.log('discount:%s', discount)
 
@@ -367,7 +367,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                     </Text>
                                 )}
                             </StakeItemBox> */}
-                            <StakeItemBox className="flex text-center">
+                            {/* <StakeItemBox className="flex text-center">
                                 {
                                 // availRatio === 0 ? (
                                 //     <Text padding="0" fontSize="1rem" color="#666">
@@ -387,7 +387,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                         {availRatio.toFixed()}%
                                     </Text>                                
                                 )}
-                            </StakeItemBox>
+                            </StakeItemBox> */}
                             <StakeItemBox className="flex" >
                                 { 
                                     <Text padding="0" fontSize="1rem">
@@ -446,8 +446,8 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                 CLICK HERE TO ACQUIRE BOND ASSETS</div>
                                 </TokenPairLink>
                         ) :
-                                approved && available ?
-                                    (
+                                // approved && available
+                                   approved ? (
                                         <SubmitButton
                                             primaryColour="#EDC100"
                                             color="black"
@@ -455,15 +455,15 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                             onClick={() => handleDeposit(depositValue)}>
                                             DEPOSIT {assetName}
                                         </SubmitButton>
-                                    ) : !available ?
-                                    (    <SubmitButton
-                                        height="2rem" 
-                                        primaryColour="#FF3E3E"
-                                        color="black"
-                                        onClick={() => setShowAvailabilityMsg(true)}
-                                        >
-                                            MAXIMUM REACHED
-                                        </SubmitButton> 
+                                    // ) : !available ?
+                                    // (    <SubmitButton
+                                    //     height="2rem" 
+                                    //     primaryColour="#FF3E3E"
+                                    //     color="black"
+                                    //     onClick={() => setShowAvailabilityMsg(true)}
+                                    //     >
+                                    //         MAXIMUM REACHED
+                                    //     </SubmitButton> 
                                     ) : (
                                         <SubmitButton 
                                         height="2rem" 
@@ -512,7 +512,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                             VIEW CONTRACT</div>
                                         </TokenPairLink>
                                     </Wrap>
-                                    {available &&
+                                    {/* {available && */}
                                         <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
@@ -526,8 +526,8 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                             DEPOSIT {bond?.assetName}
                                         </SubmitButton>
                                     </Wrap>
-                                    }
-                                    {!available &&
+                                    {/* } */}
+                                    {/* {!available &&
                                         <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
@@ -541,7 +541,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                             MAXIMUM REACHED
                                         </SubmitButton>
                                     </Wrap>
-                                    }
+                                    } */}
                                     <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
