@@ -171,7 +171,7 @@ const useMenu: UseBar = () => {
           },
           {
             key: 'soul-docs',
-            title: i18n._(t`Tutorials`),
+            title: i18n._(t`Tutorial`),
             link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
           },
           {
@@ -216,8 +216,13 @@ const useMenu: UseBar = () => {
             link: '/luxor/wrap',
           },
           {
+            key: 'luxor-calculator',
+            title: i18n._(t`Calculator`),
+            link: '/luxor/calculator',
+          },
+          {
             key: 'luxor-docs',
-            title: i18n._(t`Tutorials`),
+            title: i18n._(t`Tutorial`),
             link: 'https://docs.luxor.money',
           },
           {

@@ -186,15 +186,6 @@ export default function Stake() {
           </NavLink>
         </Button>
       </div>
-      <div className="mt-2 mb-2">
-          <Button variant="filled" color="yellow" size="lg">
-            <NavLink href={'/luxor/calculator'}>
-              <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                <span>View Calculator</span>
-              </a>
-            </NavLink>
-          </Button>
-      </div>
       <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/dashboard'}>
@@ -464,8 +455,7 @@ export default function Stake() {
                   >
                     {redeemError || i18n._(t`Withdraw`)}
                   </ButtonError>
-                )
-                }
+                )}
                 {/* <Button
                   variant="filled"
                   color="yellow"
@@ -506,9 +496,17 @@ export default function Stake() {
                     </Button> */}
               </div>
             </Tab.Panel>
-            
           </Tab.Group>
         </div>
+            <div className="mt-2 mb-2">
+              <Button variant="filled" color="gold" size="lg">
+                <NavLink href={'/luxor/calculator'}>
+                  <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                    <span>View Calculator &#187;</span>
+                  </a>
+                </NavLink>
+              </Button>
+            </div>
       </LuxorGlowShadow>
     </Container>
   )

@@ -44,8 +44,10 @@ module.exports = {
         green: '#7cff6b',
         red: '#ff3838',
         yellow: '#fff300',
+        gold: '#FEAC00',
         paleYellow: '#d9d68a',
         grey: '#b5aeb5',
+        darkGrey: '#989898',
 
         'opaque-blue': '#0993ec80',
         'opaque-purple': '#B993EC',
