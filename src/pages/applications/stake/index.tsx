@@ -85,7 +85,7 @@ export default function Stake() {
   const stakingReward = luxorUserInfo.distribute;
   const stakingRebase = Number(stakingReward) / Number(circulatingLumens);
   // const fiveDayRate = Math.pow(1 + stakingRebase, 5 * 3) - 1;
-  const stakingAPY = Math.pow(1 + stakingRebase, 365 * 3) - 1;
+  const stakingAPY = (Math.pow(1 + stakingRebase, 365 * 3) - 1) * 100
   
   const [stakeApprovalState, stakeApprove] = useApproveCallback(
     parsedStakeValue,
