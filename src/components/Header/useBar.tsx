@@ -145,11 +145,6 @@ const useMenu: UseBar = () => {
         icon: <CurrencyDollarIcon width={20} className="text-deepPurple filter" />,
         items: [
           {
-            key: 'soul-docs',
-            title: i18n._(t`How-To`),
-            link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
-          },
-          {
             key: 'farm',
             title: i18n._(t`Farms`),
             link: '/mines?filter=active',
@@ -175,6 +170,11 @@ const useMenu: UseBar = () => {
             link: 'https://bridge.soulswap.finance',
           },
           {
+            key: 'soul-docs',
+            title: i18n._(t`Tutorials`),
+            link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
+          },
+          {
             key: 'soul-follow',
             title: i18n._(t`Follow`),
             link: 'https://twitter.com/SoulSwapFinance',
@@ -191,11 +191,6 @@ const useMenu: UseBar = () => {
         icon: <SunIcon width={20} className="rotate-90 text-yellow filter" />,
         items: [
           {
-            key: 'lux-docs',
-            title: i18n._(t`How-To`),
-            link: 'https://docs.luxor.money',
-          },
-          {
             key: 'luxor-dashboard',
             title: i18n._(t`Overview`),
             link: '/luxor/dashboard',
@@ -211,9 +206,19 @@ const useMenu: UseBar = () => {
             link: '/luxor/sor',
           },
           {
-            key: 'rebase',
-            title: i18n._(t`Rebase`),
+            key: 'luxor-staking',
+            title: i18n._(t`Stake`),
             link: '/luxor/stake',
+          },
+          {
+            key: 'luxor-wrap',
+            title: i18n._(t`Wrap`),
+            link: '/luxor/wrap',
+          },
+          {
+            key: 'luxor-docs',
+            title: i18n._(t`Tutorials`),
+            link: 'https://docs.luxor.money',
           },
           {
             key: 'luxor-follow',

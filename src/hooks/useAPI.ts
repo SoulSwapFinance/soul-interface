@@ -107,6 +107,8 @@ export function useLuxorInfo(): { status: string; luxorInfo: T } {
         price: '0',
         value: '0',
         epoch: '0',
+        index: '0',
+        circulatingLumens: '0',
         decimals: '18',
         supply: '0',
         stakingBalance: '0',
@@ -134,6 +136,39 @@ export function useLuxorInfo(): { status: string; luxorInfo: T } {
     }, [])
   
     return { status, luxorInfo }
+}
+
+export function useLuxorUserInfo(userAddress): { status: string; luxorUserInfo: T } {
+    const { chainId } = useActiveWeb3React()
+    const [status, setStatus] = useState<string>('idle')
+    const [luxorUserInfo, setInfo] = useState<T>({
+        address: '',
+        epochLength: '0',
+        nextRebase: '0',
+        distribute: '0',
+        vestingTerm: '0',
+        warmupExpiry: '0',
+
+    })  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus('fetching')
+        const response = await fetch(`${BASE_URL}/luxor/users/${userAddress}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referrer-Policy': 'no-referrer',
+          },
+        })
+        const json = await response.json()
+        setInfo(json as T)
+        setStatus('fetched')
+      }
+      if (chainId == ChainId.FANTOM) 
+      fetchData()
+    }, [])
+  
+    return { status, luxorUserInfo }
 }
 
 export function useTotalSupply(tokenAddress): { status: string; supply: T } {
@@ -252,7 +287,7 @@ export function useUserInfo(user, tokenAddress): { status: string; userInfo: T }
     useEffect(() => {
       const fetchData = async () => {
         setStatus('fetching')
-        const response = await fetch(`${BASE_URL}/user/${user}/${tokenAddress}`, {
+        const response = await fetch(`${BASE_URL}/users/${user}/${tokenAddress}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
