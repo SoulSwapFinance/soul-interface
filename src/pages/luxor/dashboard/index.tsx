@@ -57,13 +57,13 @@ export default function Dashboard() {
   const WlumFtmContract = usePairContract('0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99')
   
   // KEY CONTRACTS //
-  const LuxorStakingContract = useLuxorStakingContract()
+  // const LuxorStakingContract = useLuxorStakingContract()
   // const SorStakingContract = useSorMasterContract()
-  const LuxorTreasuryContract = useLuxorTreasuryContract()
+  // const LuxorTreasuryContract = useLuxorTreasuryContract()
   // const SorContract = useSorContract()
   const LuxorContract = useLuxorContract()
   const WrappedLumensContract = useWrappedLumensContract()
-  const LumensContract = useTokenContract(LUM_ADDRESS[250])
+  // const LumensContract = useTokenContract(LUM_ADDRESS[250])
   // const DaiContract = useTokenContract(DAI_ADDRESS[250])
   const DaiLendFtmContract = useTokenContract('0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd')
   const FtmLendDaiContract = useTokenContract('0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61')
@@ -71,14 +71,14 @@ export default function Dashboard() {
 
   // const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(LuxorContract[250])
   // let sorPegPrice = 1
-  let sorMarketPrice = 1.0
+  // let sorMarketPrice = 1.0
   // const sorMarketPrice = useSorPrice()
-  const LuxorStakingAddress = LuxorStakingContract?.address
-  const LuxorWarmupAddress = LUXOR_WARMUP_ADDRESS[250]
+  // const LuxorStakingAddress = LuxorStakingContract?.address
+  // const LuxorWarmupAddress = LUXOR_WARMUP_ADDRESS[250]
   // const DaiContractAddress = DaiContract?.address
   const WrappedLumensAddress = WrappedLumensContract?.address
   // const SorStakingContractAddress = SorStakingContract?.address
-  const LuxorTreasuryAddress = LuxorTreasuryContract?.address
+  // const LuxorTreasuryAddress = LuxorTreasuryContract?.address
   const LuxorFtmAddress = LuxFtmContract.address
   const DaiLendFtmAddress = DaiLendFtmContract.address
   const FtmLendDaiAddress = FtmLendDaiContract.address
@@ -107,7 +107,7 @@ export default function Dashboard() {
   const luxFtmPrice = usePairPrice(LuxorFtmAddress) // ~190_000 // √
   // console.log('luxorVolume:%s', luxData?.result[1])
   // get the price of key treasury reserves
-  const luxDaiPrice = usePairPrice(LuxorDaiAddress) // ~160_000 // √
+  // const luxDaiPrice = usePairPrice(LuxorDaiAddress) // ~160_000 // √
   const wLumFtmPrice = usePairPrice(WrappedLumFantomAddress) // ~1_6M // √
   const ftmDaiPrice = usePairPrice(FtmDaiAddress) 
     

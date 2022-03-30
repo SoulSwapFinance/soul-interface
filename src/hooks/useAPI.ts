@@ -252,7 +252,7 @@ export function useUserInfo(user, tokenAddress): { status: string; userInfo: T }
     useEffect(() => {
       const fetchData = async () => {
         setStatus('fetching')
-        const response = await fetch(`${BASE_URL}/user/${user}/${tokenAddress}`, {
+        const response = await fetch(`${BASE_URL}/users/${user}/${tokenAddress}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
