@@ -373,12 +373,16 @@ export function useUnderworldPairInfo(pairAddress): { status: string; underworld
         name: '',
         symbol: '',
         supply: '0',
-        decimals: '',
+        decimals: '18',
 
         exchangeRate: '0',
-        assetAddress: '',
-        assetDecimals: '0',
 
+        assetTicker: '',
+        assetAddress: '',
+        assetDecimals: '18',
+        assetPrice: '0',
+        
+        collateralTicker: '',
         collateralAddress: '',
         collateralDecimals: '18',
         collateralPrice: '0',
@@ -406,34 +410,49 @@ export function useUnderworldPairInfo(pairAddress): { status: string; underworld
     return { status, underworldPairInfo }
 }
 
-// export function useUnderworldUserInfo(pairAddress): { status: string; userInfo: T } {
-//     const { account, chainId } = useActiveWeb3React()
-//     const [status, setStatus] = useState<string>('idle')
-//     const [userInfo, setInfo] = useState<T>({
-//         name: '',
-//         assetAddress: '0',
-//         api: ''
-//     })  
-//     useEffect(() => {
-//       const fetchData = async () => {
-//         setStatus('fetching')
-//         const response = await fetch(`${BASE_URL}/underworld/users/${account}/${pairAddress}`, {
-//           method: 'GET',
-//           headers: {
-//             'Content-Type': 'application/json',
-//             'Referrer-Policy': 'no-referrer',
-//           },
-//         })
-//         const json = await response.json()
-//         setInfo(json as T)
-//         setStatus('fetched')
-//       }
-//       if (chainId == ChainId.FANTOM) 
-//       fetchData()
-//     }, [])
+export function useUnderworldUserInfo(pairAddress): { status: string; underworldUserInfo: T } {
+    const { account, chainId } = useActiveWeb3React()
+    const [status, setStatus] = useState<string>('idle')
+    const [underworldUserInfo, setInfo] = useState<T>({
+        name: '',
+        assetAddress: '',
+        collateralAddress: '',
+        supply: '0',
+        
+        assetTicker: '',
+        assetDecimals: '18',
+        assetPrice: '0',
+        
+        collateralTicker: '',
+        collateralDecimals: '18',
+        collateralPrice: '0',
+
+        userBalance: '0',
+        userBorrowPart: '0',
+        userCollateralShare: '0',
+        
+        api: ''
+    })  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus('fetching')
+        const response = await fetch(`${BASE_URL}/underworld/users/${account}/${pairAddress}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referrer-Policy': 'no-referrer',
+          },
+        })
+        const json = await response.json()
+        setInfo(json as T)
+        setStatus('fetched')
+      }
+      if (chainId == ChainId.FANTOM) 
+      fetchData()
+    }, [])
   
-//     return { status, userInfo }
-// }
+    return { status, underworldUserInfo }
+}
 
 export function useSorInfo(): { status: string; sorInfo: T } {
     const { chainId } = useActiveWeb3React()

@@ -145,11 +145,6 @@ const useMenu: UseMenu = () => {
         icon: <CurrencyDollarIcon width={20} className="text-dark-600 filter" />,
         items: [
           {
-            key: 'soul-docs',
-            title: i18n._(t`How-To`),
-            link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
-          },
-          {
             key: 'farm',
             title: i18n._(t`Farms`),
             link: '/mines?filter=active',
@@ -170,6 +165,11 @@ const useMenu: UseMenu = () => {
             link: '/bonds',
           },
           {
+            key: 'soul-docs',
+            title: i18n._(t`Tutorials`),
+            link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
+          },
+          {
             key: 'soul-follow',
             title: i18n._(t`Follow`),
             link: 'https://twitter.com/SoulSwapFinance',
@@ -185,11 +185,6 @@ const useMenu: UseMenu = () => {
         title: i18n._(t`Luxor`),
         icon: <SunIcon width={20} className="rotate-90 text-dark-600 filter" />,
         items: [
-          {
-            key: 'lux-docs',
-            title: i18n._(t`How-To`),
-            link: 'https://docs.luxor.money',
-          },
           {
             key: 'luxor-dashboard',
             title: i18n._(t`Overview`),
@@ -211,6 +206,11 @@ const useMenu: UseMenu = () => {
             link: '/luxor/stake',
           },
           {
+            key: 'lux-docs',
+            title: i18n._(t`Tutorials`),
+            link: 'https://docs.luxor.money',
+          },
+          {
             key: 'luxor-follow',
             title: i18n._(t`Follow`),
             link: 'https://twitter.com/LuxorMoney',
@@ -228,11 +228,6 @@ const useMenu: UseMenu = () => {
         title: i18n._(t`Lending`),
         icon: <SwitchVerticalIcon width={20} className="rotate-90 text-dark-600 filter" />,
         items: [
-          {
-            key: 'borrow-docs',
-            title: i18n._(t`How-To`),
-            link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
-          },
           {
             key: 'lend',
             title: i18n._(t`Lend`),
@@ -252,6 +247,11 @@ const useMenu: UseMenu = () => {
             key: 'balances',
             title: 'Coffinbox',
             link: '/balances',
+          },
+          {
+            key: 'borrow-docs',
+            title: i18n._(t`Tutorials`),
+            link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
           },
         ],
       })

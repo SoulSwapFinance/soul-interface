@@ -46,6 +46,7 @@ export default function Applications() {
               height="116px"
               objectFit="contain"
               className="rounded-md"
+              alt="calculator"
               />
         </div>
         <CalculatorModal />
@@ -54,11 +55,11 @@ export default function Applications() {
         onClick={() => toggleStakeModal()}>
           <div className="grid items-center text-center grid-flow-cols-2 px-[17%] py-6 text-sm rounded-lg pointer-events-auto bg-dark-1000 text-primary border border-yellow">
               <Image
-                  src="https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x4290b33158F429F40C0eDc8f9b9e5d8C5288800c/logo.png"
-                  width="116px"
+                  src='https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x4290b33158F429F40C0eDc8f9b9e5d8C5288800c/logo.png'                  width="116px"
                   height="116px"
                   objectFit="contain"
                   className="rounded-md"
+                  alt="lum logo (orange/pink sun)"
                   />
             </div>
             <StakeModal />
@@ -72,6 +73,7 @@ export default function Applications() {
                   height="116px"
                   objectFit="contain"
                   className="rounded-md"
+                  alt="luxor logo"
                   />
             </div>
             <LuxorBondsModal />
@@ -85,6 +87,7 @@ export default function Applications() {
                   height="116px"
                   objectFit="contain"
                   className="rounded-md"
+                  alt="sor logo (snake with infinity-shaped tail)"
                   />
             </div>
             <SorModal />

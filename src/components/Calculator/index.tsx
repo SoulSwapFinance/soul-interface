@@ -25,6 +25,7 @@ function Calculator(): JSX.Element | null {
           height="28px"
           objectFit="contain"
           className="rounded-md"
+          alt="calculator"
         />
     </div>
       <CalculatorModal />
