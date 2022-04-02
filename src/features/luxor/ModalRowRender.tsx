@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
 // import { ethers } from 'ethers'
-import { useLuxorPrice } from 'hooks/getPrices'
 import { useActiveWeb3React } from 'services/web3'
 // import QuestionHelper from '../../components/QuestionHelper'
 import { SOUL, Token } from 'sdk'
@@ -10,6 +9,9 @@ import AssetInput from 'components/AssetInput'
 import { useLuxorBondContract } from 'hooks/useContract'
 // import { useBondContract, useStakeSharePrice, useStakeRecentProfit, sharesFromSoul } from './useBonds'
 import useApprove from 'features/bond/hooks/useApprove'
+import { useFantomPrice, useLuxorPrice, useTokenPrice } from 'hooks/getPrices'
+import { usePairPrice } from 'hooks/usePairData'
+
 import {
     StakeContainer,
     Row,
@@ -30,6 +32,7 @@ import Modal from 'components/Modal/DefaultModal'
 import Typography from 'components/Typography'
 import ModalHeader from 'components/Modal/Header'
 import { useLuxorBondInfo, useUserInfo } from 'hooks/useAPI'
+import { WFTM_ADDRESS } from 'constants/addresses'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -53,6 +56,8 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     const [depositValue, setDepositValue] = useState('')
     const token = new Token(chainId, assetAddress, 18)
     const parsedDepositValue = tryParseAmount(depositValue, token)
+    const LUX_DAI_ADDRESS = '0x46729c2AeeabE7774a0E710867df80a6E19Ef851'
+    const LUX_FTM_ADDRESS = '0x951BBB838e49F7081072895947735b0892cCcbCD'
 
     const [payout, setStakedBal] = useState(0)
     const [earnedAmount, setEarnedAmount] = useState(0)
@@ -77,6 +82,19 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     // const available = Number(remainingDebt) > 0 ? true : false
     // console.log('remainingDebt:%s', remainingDebt)
     // console.log('discount:%s', discount)
+    const wftmPrice = useFantomPrice()
+    const luxDaiPrice = usePairPrice(LUX_DAI_ADDRESS) // √
+    console.log('luxDaiPrice:%s', Number(luxDaiPrice))
+    const luxFtmPrice = usePairPrice(LUX_FTM_ADDRESS) // √
+    
+    let assetPrice = 0
+    assetPrice 
+        = assetToken.address == WFTM_ADDRESS[250] ? wftmPrice
+            : assetToken.address == LUX_DAI_ADDRESS ? luxDaiPrice
+            : assetToken.address == LUX_FTM_ADDRESS ? luxFtmPrice
+            : 1
+    // const assetPrice = useTokenPrice(assetToken.address)
+    console.log('assetPrice:%s', assetPrice)
 
     /**
      * Runs only on initial render/mount
@@ -417,6 +435,12 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                 <Wrap padding="0" display="flex" justifyContent="center">
                     <DetailsContainer>
                         <DetailsWrapper>
+                        <Wrap  padding="0" margin="0" justifyContent="center">
+                            <div className="grid mt-2 justify-between grid-cols-2 text-center">
+                                <b>Deposit Value</b> ~${ Number(Number(assetPrice) * Number(depositValue)).toFixed(2) }
+                                <b>Claim Amount</b> ~{ Number(Number(depositValue) * Number(assetPrice) / Number(bondPrice)).toFixed(2) } LUX
+                            </div>
+                        </Wrap>
                     {payout == 0 ? (
                         <FunctionBox>
                             <AssetInput
