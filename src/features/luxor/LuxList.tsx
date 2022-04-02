@@ -28,7 +28,7 @@ export const LuxList = () => {
 }
 
 export const ModalList = () => {
-  const luxorList = AllBonds.map((bond) => (
+  const luxorModalList = AllBonds.map((bond) => (
     <ModalRowRender
       key={bond.pid}
       pid={bond.pid}
@@ -44,7 +44,7 @@ export const ModalList = () => {
   return (
     <>
       <ModalKey />
-      <>{luxorList}</>
+      <>{luxorModalList}</>
     </>
   )
 }
