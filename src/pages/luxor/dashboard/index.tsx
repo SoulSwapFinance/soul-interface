@@ -447,6 +447,7 @@ export default function Dashboard() {
               height="96px"
               objectFit="contain"
               className="rounded-md"
+              alt="calculator"
               />
         </div>
         <CalculatorModal />
@@ -460,6 +461,7 @@ export default function Dashboard() {
                   height="96px"
                   objectFit="contain"
                   className="rounded-md"
+                  alt="lum logo (orange/pink sun)"
                   />
             </div>
             <StakeModal />
@@ -473,6 +475,7 @@ export default function Dashboard() {
                   height="96px"
                   objectFit="contain"
                   className="rounded-md"
+                  alt="luxor logo (yellow sun)"
                   />
             </div>
             <LuxorBondsModal />
@@ -486,6 +489,7 @@ export default function Dashboard() {
                   height="96px"
                   objectFit="contain"
                   className="rounded-md"
+                  alt="wlum logo (purple)"
                   />
             </div>
             <LuxorWrapModal />
@@ -499,6 +503,7 @@ export default function Dashboard() {
                   height="96px"
                   objectFit="contain"
                   className="rounded-md"
+                  alt="sor logo (snake with infinity-shaped tail)"
                   />
             </div>
             <SorModal />

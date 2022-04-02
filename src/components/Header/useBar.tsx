@@ -243,30 +243,30 @@ const useMenu: UseBar = () => {
          icon: <SwitchVerticalIcon width={20} className="rotate-90 text-pink filter" />,
          items: [
            {
-             key: 'borrow-docs',
-             title: i18n._(t`How-To`),
-             link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
-           },
-           {
              key: 'lend',
              title: i18n._(t`Lend`),
              link: '/lend',
-           },
-           {
-             key: 'borrow',
-             title: i18n._(t`Borrow`),
-             link: '/borrow',
-           },
-           {
-             key: 'underworld-farms',
-             title: i18n._(t`Mines`),
-             link: '/mines?filter=lending',
-           },
-           {
-             key: 'balances',
-             title: 'Coffinbox',
-             link: '/balances',
-           },
+            },
+            {
+              key: 'borrow',
+              title: i18n._(t`Borrow`),
+              link: '/borrow',
+            },
+            {
+              key: 'underworld-farms',
+              title: i18n._(t`Mines`),
+              link: '/mines?filter=lending',
+            },
+            {
+              key: 'balances',
+              title: 'Coffinbox',
+              link: '/balances',
+            },
+            {
+              key: 'borrow-docs',
+              title: i18n._(t`Tutorials`),
+              link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
+            },
          ],
        })
        

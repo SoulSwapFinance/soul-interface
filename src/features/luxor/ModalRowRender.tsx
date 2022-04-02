@@ -235,17 +235,17 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
         }
     }
 
-    const handleHarvestAll = async () => {
-        try {
-            let tx
-            tx = await BondContract.harvestAll(false)
-            // await tx?.wait().then(await setPending(pid))
-            await tx?.wait()
-        } catch (e) {
-            // alert(e.message)
-            console.log(e)
-        }
-    }
+    // const handleHarvestAll = async () => {
+    //     try {
+    //         let tx
+    //         tx = await BondContract.harvestAll(false)
+    //         // await tx?.wait().then(await setPending(pid))
+    //         await tx?.wait()
+    //     } catch (e) {
+    //         // alert(e.message)
+    //         console.log(e)
+    //     }
+    // }
 
     // /**
     //  * Harvest Shares
@@ -567,7 +567,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                             {/* {earnedAmount !== 0 ? `($${(earnedAmount * soulPrice).toFixed(2)})` : ''} */}
                                         </SubmitButton>
                                     </Wrap>
-                                <Wrap padding="0" margin="0" display="flex">
+                                {/* <Wrap padding="0" margin="0" display="flex">
                                     <SubmitButton
                                         height="2rem"
                                         primaryColour="#F4A703"
@@ -579,8 +579,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                     >
                                         HARVEST ALL
                                     </SubmitButton>
-                                </Wrap>
-
+                                </Wrap> */}
                                 </FunctionBox>
                             )}
                         </DetailsWrapper>

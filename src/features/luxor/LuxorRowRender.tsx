@@ -30,6 +30,8 @@ import Modal from 'components/Modal/DefaultModal'
 import Typography from 'components/Typography'
 import ModalHeader from 'components/Modal/Header'
 import { useLuxorBondInfo, useUserInfo } from 'hooks/useAPI'
+import NavLink from 'components/NavLink'
+import { Button } from 'components/Button'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -71,8 +73,8 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     const { luxorBondInfo } = useLuxorBondInfo(bondAddress)
     const bondPrice = Number(luxorBondInfo.price) / 1e18
     const discount = luxorBondInfo.discount
-    const remainingDebt = luxorBondInfo.remainingDebt
-    const maximumDebt = luxorBondInfo.maximumDebt
+    // const remainingDebt = luxorBondInfo.remainingDebt
+    // const maximumDebt = luxorBondInfo.maximumDebt
     // const availRatio = Number(remainingDebt) <= 0 ? 0 : Number(remainingDebt) / Number(maximumDebt) * 100
     // const available = Number(remainingDebt) > 0 ? true : false
     // console.log('remainingDebt:%s', remainingDebt)
@@ -235,17 +237,17 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
         }
     }
 
-    const handleHarvestAll = async () => {
-        try {
-            let tx
-            tx = await BondContract.harvestAll(false)
-            // await tx?.wait().then(await setPending(pid))
-            await tx?.wait()
-        } catch (e) {
-            // alert(e.message)
-            console.log(e)
-        }
-    }
+    // const handleHarvestAll = async () => {
+    //     try {
+    //         let tx
+    //         tx = await BondContract.harvestAll(false)
+    //         // await tx?.wait().then(await setPending(pid))
+    //         await tx?.wait()
+    //     } catch (e) {
+    //         // alert(e.message)
+    //         console.log(e)
+    //     }
+    // }
 
     // /**
     //  * Harvest Shares
@@ -566,7 +568,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                             {/* {earnedAmount !== 0 ? `($${(earnedAmount * soulPrice).toFixed(2)})` : ''} */}
                                         </SubmitButton>
                                     </Wrap>
-                                <Wrap padding="0" margin="0" display="flex">
+                                {/* <Wrap padding="0" margin="0" display="flex">
                                     <SubmitButton
                                         height="2rem"
                                         primaryColour="#F4A703"
@@ -578,8 +580,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                     >
                                         HARVEST ALL
                                     </SubmitButton>
-                                </Wrap>
-
+                                </Wrap> */}
                                 </FunctionBox>
                             )}
                         </DetailsWrapper>
@@ -662,6 +663,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
         </div>
       </Modal>
     </>
+    
     )
 }
 
