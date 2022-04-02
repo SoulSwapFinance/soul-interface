@@ -381,11 +381,18 @@ export function useUnderworldPairInfo(pairAddress): { status: string; underworld
         assetAddress: '',
         assetDecimals: '18',
         assetPrice: '0',
+        assetLogoURI: '',
+
+        assetTotalElastic: '0',
+        assetTotalBase: '0',
+        collateralTotalBase: '0',
+        collateralTotalElastic: '0',
         
         collateralTicker: '',
         collateralAddress: '',
         collateralDecimals: '18',
         collateralPrice: '0',
+        collateralLogoURI: '',
 
         api: ''
     })  
