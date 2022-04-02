@@ -60,7 +60,7 @@ export default function ModalKey() {
                   handleHarvestStakeAll()
               }
           >
-              HARVEST {`&`} STAKE
+              STAKE ALL
           </SubmitButton>
       </div>
       <Wrap
