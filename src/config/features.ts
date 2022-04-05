@@ -37,6 +37,7 @@ const features: FeatureMap = {
     Feature.BONDS,
     Feature.COFFINBOX,
     Feature.LIMIT,
+    Feature.EXPLORE,
     // Feature.LIMIT_ORDERS,
     Feature.UNDERWORLD
   ],

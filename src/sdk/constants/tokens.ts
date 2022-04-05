@@ -17,7 +17,7 @@ export const USD: TokenMap = {
 
 export const WETH9: TokenMap = {
   [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, WETH9_ADDRESS[ChainId.ETHEREUM], 18, 'WETH', 'Wrapped Ether'),
-  [ChainId.TELOS]: new Token(ChainId.TELOS, WETH9_ADDRESS[ChainId.TELOS], 18, 'TLOS', 'Telos'),
+  [ChainId.TELOS]: new Token(ChainId.TELOS, WETH9_ADDRESS[ChainId.TELOS], 18, 'WETH', 'Wrapped Ether'),
   [ChainId.BSC]: new Token(ChainId.BSC, WETH9_ADDRESS[ChainId.BSC], 18, 'WETH', 'Wrapped Ether'),
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, WETH9_ADDRESS[ChainId.FANTOM], 18, 'WETH', 'Wrapped Ether')
 }
@@ -37,6 +37,5 @@ export const SOUL: TokenMap = {
 }
 
 export const CHANT: TokenMap = {
-  [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, SOUL_ADDRESS[ChainId.FANTOM], 18, 'SOUL', 'Soul Power'),
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, CHANT_ADDRESS[ChainId.FANTOM], 18, 'SOUL', 'Soul Power'),
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, CHANT_ADDRESS[ChainId.FANTOM], 18, 'CHANT', 'Enchanted Soul'),
 }

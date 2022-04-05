@@ -219,6 +219,12 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
     BSC.WETH,
     // BSC.MIM,
   ],
+  [ChainId.TELOS]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.TELOS],
+    TELOS.USDC,
+    TELOS.SOUL,
+    TELOS.WETH,
+  ],
 }
 
 // export const PINNED_PAIRS: {
