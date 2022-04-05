@@ -3,7 +3,7 @@ import { ChainId } from '../enums/ChainId'
 
 export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '0x794d858b0b152fb68a5CE465451D729EFfA67f08', // FEB22
-  [ChainId.TELOS]: '',
+  [ChainId.TELOS]: '0x81582F803A17a4a454A80600e9185B42E32e0fcF',
   [ChainId.BSC]: '0xa9EC396a1b709689e98DaB9eAf4f18A913775d39',
   [ChainId.FANTOM]: '0x1120e150dA9def6Fe930f4fEDeD18ef57c0CA7eF',
   [ChainId.FANTOM_TESTNET]: ''
@@ -11,7 +11,7 @@ export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
 
 export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '0x2a8B48a8B8a8a8E4a184280333c418BcdcE72dE9', // FEB22
-  [ChainId.TELOS]: '',
+  [ChainId.TELOS]: '0xf9D9b96F213aCC6434f16fff5D932FA85cD179f3',
   [ChainId.BSC]: '0x1b4df4D7E63B125f3a01fd5598E8E8458e519255',
   [ChainId.FANTOM]: '0x6b3d631B87FE27aF29efeC61d2ab8CE4d621cCBF',
   [ChainId.FANTOM_TESTNET]: ''
@@ -255,7 +255,6 @@ export const SOULSWAP_MULTI_EXACT_SWAPPER_ADDRESS: AddressMap = {
 export const PRICE_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
-  [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x51445B73852952128bFCAE65fdd889881D8d87Bd',
   [ChainId.FANTOM_TESTNET]: ''
@@ -264,7 +263,6 @@ export const PRICE_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
 export const HARVEST_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
-  [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xb9e5f6152b797280c8C3427947780ce5c4a55b08',
   [ChainId.FANTOM_TESTNET]: ''
@@ -272,6 +270,7 @@ export const HARVEST_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
 
 export const USDC_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+  [ChainId.TELOS]: '0x818ec0A7Fe18Ff94269904fCED6AE3DaE6d6dC0b',
   [ChainId.FANTOM]: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75',
   [ChainId.BSC]: '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d',
 }
@@ -290,21 +289,23 @@ export const LUM_ADDRESS: AddressMap = {
 
 export const USD_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: USDC_ADDRESS[ChainId.ETHEREUM],
+  [ChainId.TELOS]: USDC_ADDRESS[ChainId.TELOS],
   [ChainId.FANTOM]: USDC_ADDRESS[ChainId.FANTOM],
   [ChainId.BSC]: USDC_ADDRESS[ChainId.BSC],
 }
 
 export const WETH9_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
+  [ChainId.TELOS]: '0xfA9343C3897324496A05fC75abeD6bAC29f8A40f',
   [ChainId.BSC]: '0x2170Ed0880ac9A755fd29B2688956BD959F933F8',
   [ChainId.FANTOM]: '0x74b23882a30290451A17c44f4F05243b6b58C76d',
 }
 
 export const WNATIVE_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: WETH9_ADDRESS[ChainId.ETHEREUM],
+  [ChainId.TELOS]: '0xD102cE6A4dB07D247fcc28F366A623Df0938CA9E',
   [ChainId.FANTOM]: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
   [ChainId.FANTOM_TESTNET]: '0xf1277d1Ed8AD466beddF92ef448A132661956621',
-  [ChainId.TELOS]: '0xD102cE6A4dB07D247fcc28F366A623Df0938CA9E',
   [ChainId.BSC]: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
 }
 

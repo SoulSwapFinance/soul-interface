@@ -10,6 +10,13 @@ export const BSC: { [key: string]: Token } = {
   BTCB: new Token(ChainId.BSC, '0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c', 8, 'BTCB', 'Bitcoin'),
   WETH: new Token(ChainId.BSC, '0x2170Ed0880ac9A755fd29B2688956BD959F933F8', 18, 'WETH', 'Wrapped Ether'),
 }
+
+export const TELOS: { [key: string]: Token } = {
+  USDC: new Token(ChainId.TELOS, '0x818ec0A7Fe18Ff94269904fCED6AE3DaE6d6dC0b', 6, 'USDC', 'USD Coin'),
+  AVAX: new Token(ChainId.TELOS, '0x7C598c96D02398d89FbCb9d41Eab3DF0C16F227D', 18, 'AVAX', 'Avalanche'),
+  FTM: new Token(ChainId.TELOS, '0xC1Be9a4D5D45BeeACAE296a7BD5fADBfc14602C4', 18, 'FTM', 'Fantom Opera'),
+  BNB: new Token(ChainId.TELOS, '0x2C78f1b70Ccf63CDEe49F9233e9fAa99D43AA07e', 18, 'BNB', 'Binance'),
+}
   
 export const FANTOM: { [key: string]: Token } = {
   SOUL: new Token(ChainId.FANTOM, '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', 18, 'SOUL', 'Soul Power'), // 27 AUG
@@ -41,73 +48,9 @@ export const FANTOM_TESTNET: { [key: string]: Token } = {
 }
 
 // Default Ethereum chain tokens
-export const ALPHA = new Token(ChainId.ETHEREUM, '0xa1faa113cbE53436Df28FF0aEe54275c13B40975', 18, 'ALPHA', 'AlphaToken')
-export const AMPL = new Token(ChainId.ETHEREUM, '0xD46bA6D942050d489DBd938a2C909A5d5039A161', 9, 'AMPL', 'Ampleforth')
-export const BAB = new Token(ChainId.ETHEREUM, '0xC36824905dfF2eAAEE7EcC09fCC63abc0af5Abc5', 18, 'BAB', 'BAB')
-export const BAC = new Token(ChainId.ETHEREUM, '0x3449FC1Cd036255BA1EB19d65fF4BA2b8903A69a', 18, 'BAC', 'Basis Cash')
-export const CREAM = new Token(ChainId.ETHEREUM, '0x2ba592F78dB6436527729929AAf6c908497cB200', 18, 'CREAM', 'Cream')
-export const DOUGH = new Token(
-  ChainId.ETHEREUM,
-  '0xad32A8e6220741182940c5aBF610bDE99E737b2D',
-  18,
-  'DOUGH',
-  'PieDAO Dough v2'
-)
-export const DUCK = new Token(ChainId.ETHEREUM, '0x92E187a03B6CD19CB6AF293ba17F2745Fd2357D5', 18, 'DUCK', 'DUCK')
-export const ETH2X_FLI = new Token(
-  ChainId.ETHEREUM,
-  '0xAa6E8127831c9DE45ae56bB1b0d4D4Da6e5665BD',
-  18,
-  'ETH2x-FLI',
-  'ETH 2x Flexible Leverage Index'
-)
-export const FEI = new Token(ChainId.ETHEREUM, '0x956F47F50A910163D8BF957Cf5846D573E7f87CA', 18, 'FEI', 'Fei USD')
-export const FRAX = new Token(ChainId.ETHEREUM, '0x853d955aCEf822Db058eb8505911ED77F175b99e', 18, 'FRAX', 'FRAX')
-export const FXS = new Token(ChainId.ETHEREUM, '0x3432B6A60D23Ca0dFCa7761B7ab56459D9C964D0', 18, 'FXS', 'Frax Share')
-export const HBTC = new Token(ChainId.ETHEREUM, '0x0316EB71485b0Ab14103307bf65a021042c6d380', 18, 'HBTC', 'Huobi BTC')
-export const IBETH = new Token(
-  ChainId.ETHEREUM,
-  '0xeEa3311250FE4c3268F8E684f7C87A82fF183Ec1',
-  8,
-  'ibETHv2',
-  'Interest Bearing Ether v2'
-)
 export const MEOW = new Token(ChainId.ETHEREUM, '0x650F44eD6F1FE0E1417cb4b3115d52494B4D9b6D', 18, 'MEOW', 'Meowshi')
 export const MIR = new Token(ChainId.ETHEREUM, '0x09a3EcAFa817268f77BE1283176B946C4ff2E608', 18, 'MIR', 'Wrapped MIR')
-export const NFTX = new Token(ChainId.ETHEREUM, '0x87d73E916D7057945c9BcD8cdd94e42A6F47f776', 18, 'NFTX', 'NFTX')
-export const PLAY = new Token(
-  ChainId.ETHEREUM,
-  '0x33e18a092a93ff21aD04746c7Da12e35D34DC7C4',
-  18,
-  'PLAY',
-  'Metaverse NFT Index'
-)
-export const PONT = new Token(
-  ChainId.ETHEREUM,
-  '0xcb46C550539ac3DB72dc7aF7c89B11c306C727c2',
-  9,
-  'pONT',
-  'Poly Ontology Token'
-)
-export const PWING = new Token(
-  ChainId.ETHEREUM,
-  '0xDb0f18081b505A7DE20B18ac41856BCB4Ba86A1a',
-  9,
-  'pWING',
-  'Poly Ontology Wing Token'
-)
-export const RENBTC = new Token(1, '0xEB4C2781e4ebA804CE9a9803C67d0893436bB27D', 8, 'renBTC', 'renBTC')
-export const RUNE = new Token(ChainId.ETHEREUM, '0x3155BA85D5F96b2d030a4966AF206230e46849cb', 18, 'RUNE', 'RUNE.ETH')
-export const STETH = new Token(ChainId.ETHEREUM, '0xDFe66B14D37C77F4E9b180cEb433d1b164f0281D', 18, 'stETH', 'stakedETH')
-export const TRIBE = new Token(ChainId.ETHEREUM, '0xc7283b66Eb1EB5FB86327f08e1B5816b0720212B', 18, 'TRIBE', 'Tribe')
-export const UMA = new Token(ChainId.ETHEREUM, '0x04Fa0d235C4abf4BcF4787aF4CF447DE572eF828', 18, 'UMA', 'UMA')
-export const UMA_CALL = new Token(
-  ChainId.ETHEREUM,
-  '0x1062aD0E59fa67fa0b27369113098cC941Dd0D5F',
-  18,
-  'UMA',
-  'UMA 35 Call [30 Apr 2021]'
-)
+
 // export const USDC = new Token(ChainId.ETHEREUM, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD Coin')
 export const USDC = new Token(ChainId.FANTOM, '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6, 'USDC', 'USD Coin')
 export const USDP = new Token(

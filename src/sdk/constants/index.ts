@@ -16,6 +16,7 @@ export const MaxUint256 = JSBI.BigInt(
 
 export const INIT_CODE_HASH: { [chainId: number]: string } = {
   [ChainId.ETHEREUM]: '0x2d2a1a6740caa0c2e9da78939c9ca5c8ff259bf16e2b9dcbbec714720587df90', // JUN22
+  [ChainId.TELOS]: '0x8d5156b1fa4d5924675d6ab8e615754414be695a9ef14a573cdc8069a5ce90ec',
   [ChainId.FANTOM]: '0xf3dcc3c6c6e34d3981dd429ac942301b9ebdd05de1be17f646b55476c44dc951',
   [ChainId.BSC]: '0x2d2a1a6740caa0c2e9da78939c9ca5c8ff259bf16e2b9dcbbec714720587df90',
  }
