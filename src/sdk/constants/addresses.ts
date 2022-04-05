@@ -43,7 +43,7 @@ export const STOP_LIMIT_ORDER_ADDRESS: AddressMap = {
 
 export const SOUL_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
+  [ChainId.TELOS]: '0xef9777827a3581b64f5c7CB8954ccaE3cc2c46C0',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07',
   [ChainId.FANTOM_TESTNET]: ''

@@ -30,7 +30,7 @@ export const WNATIVE: TokenMap = {
 
 export const SOUL: TokenMap = {
   [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, SOUL_ADDRESS[ChainId.FANTOM], 18, 'SOUL', 'Soul Power'),
-  // [ChainId.TELOS]: new Token(ChainId.TELOS, SOUL_ADDRESS[ChainId.TELOS], 18, 'SOUL', 'Soul Power'),
+  [ChainId.TELOS]: new Token(ChainId.TELOS, SOUL_ADDRESS[ChainId.TELOS], 18, 'SOUL', 'Soul Power'),
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, SOUL_ADDRESS[ChainId.FANTOM], 18, 'SOUL', 'Soul Power'),
 }
 
