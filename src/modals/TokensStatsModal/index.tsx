@@ -105,7 +105,7 @@ export default function SoulStatsModal(): JSX.Element | null {
                 const params: any = {
                   type: 'ERC20',
                   options: {
-                    address: SOUL[chainId].address,
+                    address: SOUL[chainId | 250].address,
                     symbol: 'SOUL',
                     decimals: 18,
                     image: 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png',

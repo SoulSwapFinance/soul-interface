@@ -201,7 +201,7 @@ const InvestmentDetails = ({ farm }) => {
           <div className="flex flex-col space-y-2">
             {farm?.rewards?.map((reward, i) => (
               <div key={i} className="flex items-center space-x-2">
-                <CurrencyLogo currency={SOUL[chainId]} size="30px" className="rounded-md" />
+                <CurrencyLogo currency={SOUL[250]} size="30px" className="rounded-md" />
                 {i === 0 && <Typography>{formatNumber(pendingSoul?.toSignificant(4) ?? 0)}</Typography>}
                 {i === 1 && <Typography>{formatNumber(pendingReward)}</Typography>}
                 <Typography>{reward.token}</Typography>

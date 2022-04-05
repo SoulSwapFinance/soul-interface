@@ -7,6 +7,8 @@ import Typography from '../../components/Typography'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { useMemo } from 'react'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums/Feature'
 
 const EXPLORE = (i18n: I18n) => [
   {
@@ -65,7 +67,7 @@ const EXPLORE = (i18n: I18n) => [
   },
 ]
 
-export default function Tools() {
+export default function Explore() {
   const { i18n } = useLingui()
   const features = useMemo(() => EXPLORE(i18n), [i18n])
 
@@ -101,3 +103,5 @@ export default function Tools() {
     </Container>
   )
 }
+
+Explore.Guard = NetworkGuard(Feature.EXPLORE)

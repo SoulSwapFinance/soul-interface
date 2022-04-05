@@ -21,6 +21,17 @@ const builders = {
         return `${prefix}/${type}/${data}`
     }
   },
+
+  teloscan: (data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
+    const prefix = 'https://teloscan.io'
+    switch (type) {
+      case 'transaction':
+        return `${prefix}/tx/${data}`
+      default:
+        return `${prefix}/${type}/${data}`
+    }
+  },
+
   fantomTestnet: (data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
     const prefix = 'https://testnet.ftmscan.com'
     switch (type) {
@@ -188,6 +199,10 @@ const chains: ChainObject = {
   [ChainId.ETHEREUM]: {
     // chainName: '',
     builder: builders.etherscan,
+  },
+  [ChainId.TELOS]: {
+    // chainName: 'testnet',
+    builder: builders.teloscan,
   },
   [ChainId.BSC]: {
     // chainName: 'testnet',

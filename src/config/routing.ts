@@ -3,6 +3,7 @@ import { ChainId, SOUL, Token, WNATIVE } from 'sdk'
 
 import * as BSC from './tokens/bsc'
 import * as ETHEREUM from './tokens/ethereum'
+import * as TELOS from './tokens/telos'
 import * as FANTOM from './tokens/fantom'
 
 type ChainTokenList = {
@@ -32,6 +33,7 @@ const MIRROR_ADDITIONAL_BASES: { [tokenAddress: string]: Token[] } = {
 
 const WRAPPED_NATIVE_ONLY: ChainTokenList = {
   [ChainId.ETHEREUM]: [WNATIVE[ChainId.ETHEREUM]],
+  [ChainId.TELOS]: [WNATIVE[ChainId.TELOS]],
   [ChainId.FANTOM]: [WNATIVE[ChainId.FANTOM]],
   [ChainId.FANTOM_TESTNET]: [WNATIVE[ChainId.FANTOM_TESTNET]],
   [ChainId.BSC]: [WNATIVE[ChainId.BSC]],
@@ -75,6 +77,12 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     BSC.BTCB,
     BSC.WETH,
     // BSC.MIM,
+  ],
+  [ChainId.TELOS]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.TELOS],
+    TELOS.USDC,
+    TELOS.USDT,
+    TELOS.WETH,
   ],
   [ChainId.FANTOM_TESTNET]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM_TESTNET]
@@ -169,7 +177,11 @@ export const COMMON_BASES: ChainTokenList = {
   ],
   [ChainId.FANTOM_TESTNET]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM_TESTNET]
-  ],}
+  ],
+  [ChainId.TELOS]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.TELOS]
+  ],
+}
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {

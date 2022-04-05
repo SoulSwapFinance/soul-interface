@@ -44,10 +44,12 @@ export const getCurrencyLogoUrls = (currency): string[] => {
 const EthereumLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/eth.jpg'
 const FantomLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/ftm.jpg'
 const BinanceLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/ftm.jpg'
+const TelosLogo = '/images/natives/telos.png'
 
 const LOGO: Record<ChainId, string> = {
   [ChainId.ETHEREUM]: EthereumLogo,
   [ChainId.FANTOM]: FantomLogo,
+  [ChainId.TELOS]: TelosLogo,
   [ChainId.FANTOM_TESTNET]: FantomLogo,
   [ChainId.BSC]: BinanceLogo,
 }

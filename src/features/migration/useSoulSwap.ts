@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { Zero } from '@ethersproject/constants'
-import { ChainId } from '@sushiswap/core-sdk'
+import { ChainId } from 'sdk'
 import { useSushiRollContract } from 'hooks/useContract'
 import { useActiveWeb3React } from 'services/web3'
 import { signERC2612Permit } from 'eth-permit'

@@ -16,6 +16,13 @@ const features: FeatureMap = {
     // Feature.INARI,
     // Feature.VESTING,
   ],
+
+  [ChainId.TELOS]: [
+    Feature.AMM, 
+    // Feature.ANALYTICS,
+    // Feature.UNDERWORLD
+  ],
+
   [ChainId.BSC]: [
     Feature.AMM, 
     Feature.ANALYTICS,

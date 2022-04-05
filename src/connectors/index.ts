@@ -10,15 +10,16 @@ import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 import { Web3Provider } from '@ethersproject/providers'
 import { CloverConnector } from '@clover-network/clover-connector'
 
-enum ChainId { // TODO
+enum ChainId {
   ETHEREUM = 1,
+  TELOS = 40,
   BSC = 56,
   FANTOM = 250,
-  // FANTOM_TESTNET = 4002
 }
 
 export const RPC = {
   [ChainId.ETHEREUM]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
+  [ChainId.TELOS]: 'https://rpc1.us.telos.net/evm',
   [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
   // [ChainId.FANTOM]: 'https://rpc.ftm.tools/',
   [ChainId.FANTOM]: 'https://rpcapi.fantom.network',

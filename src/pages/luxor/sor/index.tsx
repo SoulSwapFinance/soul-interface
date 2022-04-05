@@ -18,7 +18,6 @@ import Alert from 'components/Alert'
 import { ApprovalState, useApproveCallback, useSorMasterContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
 import {
-  ChainId,
   Token,
   DAI_ADDRESS,
   CurrencyAmount
@@ -46,16 +45,12 @@ export default function Stablecoin() {
   const [stakeValue, setStakeValue] = useState('')
   const [redeemValue, setRedeemValue] = useState('')
 
-  const { account, chainId } = useActiveWeb3React()
+  const { account } = useActiveWeb3React()
   const { stake, redeem, claimSor, claimDai } = useSorContract()
   // const { data } = useStablecoin()
 
-  if (chainId && chainId === ChainId.ETHEREUM)
-    // DELETE
-  window.location.href = '/swap'
-
-  const daiToken = new Token(chainId, getAddress(DAI_ADDRESS[chainId]), 18, 'DAI')
-  const sorToken = new Token(chainId, getAddress(SOR_ADDRESS[chainId]), 18, 'SOR')
+  const daiToken = new Token(250, getAddress(DAI_ADDRESS[250]), 18, 'DAI')
+  const sorToken = new Token(250, getAddress(SOR_ADDRESS[250]), 18, 'SOR')
   const sorMasterContract = useSorMasterContract()
   const stakeClaimAmount = useStakeClaimAmount(sorToken)
   const redeemClaimAmount = useRedeemClaimAmount(sorToken)
@@ -76,11 +71,11 @@ export default function Stablecoin() {
   
   const [stakeApprovalState, stakeApprove] = useApproveCallback(
     parsedStakeValue,
-    SOR_MASTER_ADDRESS[chainId]
+    SOR_MASTER_ADDRESS[250]
   )
   const [redeemApprovalState, redeemApprove] = useApproveCallback(
     parsedRedeemValue,
-    SOR_MASTER_ADDRESS[chainId]
+    SOR_MASTER_ADDRESS[250]
   )
 
   const stakeError = !parsedStakeValue

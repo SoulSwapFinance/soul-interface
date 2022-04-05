@@ -76,6 +76,7 @@ const MIRROR_ADDITIONAL_BASES: { [tokenAddress: string]: Token[] } = {
 // TODO: SDK should have two maps, WETH map and WNATIVE map.
 const WRAPPED_NATIVE_ONLY: ChainTokenList = {
   [ChainId.ETHEREUM]: [WNATIVE[ChainId.ETHEREUM]],
+   [ChainId.TELOS]: [WNATIVE[ChainId.TELOS]],
    [ChainId.BSC]: [WNATIVE[ChainId.BSC]],
   [ChainId.FANTOM]: [WNATIVE[ChainId.FANTOM]],
   [ChainId.FANTOM_TESTNET]: [WNATIVE[ChainId.FANTOM_TESTNET]]
@@ -168,6 +169,9 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
 export const COMMON_BASES: ChainTokenList = {
   [ChainId.ETHEREUM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.ETHEREUM], 
+  ],
+  [ChainId.TELOS]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.TELOS], 
   ],
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM],
