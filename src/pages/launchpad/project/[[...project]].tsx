@@ -72,7 +72,7 @@ const Pool = ({ project, poolInfo, launchpadInfo }) => {
   const [value, setValue] = useState('')
   const [valueUnstake, setValueUnstake] = useState('')
 
-  const assetToken = useCurrency(SOUL_FTM_PAIR[chainId]) || undefined
+  const assetToken = useCurrency(SOUL_FTM_PAIR[chainId | 250]) || undefined
 
   const typedDepositValue = tryParseAmount(value, assetToken)
 
@@ -681,8 +681,8 @@ export default function LaunchpadProject(): JSX.Element {
   const launchpadPools = useLaunchPools(project.launchpadContract)
   const launchpadUserInfo = useLaunchpadUserInfo(project.launchpadContract)
 
-  let token0 = useCurrency(SOUL_ADDRESS[chainId])
-  let token1 = useCurrency(WNATIVE[chainId])
+  let token0 = useCurrency(SOUL_ADDRESS[chainId | 250])
+  let token1 = useCurrency(WNATIVE[chainId | 250])
   const [data] = useV2PairsWithPrice([[token0, token1]])
   let [state, pair, pairPrice] = data
 

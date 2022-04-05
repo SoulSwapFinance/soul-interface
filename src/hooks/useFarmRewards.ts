@@ -335,7 +335,7 @@ export default function useFarmRewards() {
                 // @ts-ignore TYPE NEEDS FIXING
                 if (chainId in reward) {
                     // @ts-ignore TYPE NEEDS FIXING
-                    rewards[1] = reward[chainId]
+                    rewards[1] = reward[chainId | 250]
                 }
             }
 

@@ -3,7 +3,7 @@ import { Button } from 'components/Button'
 import QuestionHelper from 'components/QuestionHelper'
 import {
   Wrap,
-  StakeContainer,
+  FarmContainer,
   Row,
   StakeContentWrapper,
   TokenPairBox,
@@ -20,7 +20,7 @@ export default function StakeKey() {
         justifyContent="center"
         alignContent="center"
       >
-        <StakeContainer>
+        <FarmContainer>
           <Row padding=".25rem 2rem">
             <StakeContentWrapper>
               <TokenPairBox>
@@ -54,7 +54,7 @@ export default function StakeKey() {
           {/* <Button variant={'link'} color={'purple'} className="absolute top-[5%] right-[10%]"> */}
  
               {/* </Button> */}
-        </StakeContainer>
+        </FarmContainer>
       </Wrap>
     </>
   );

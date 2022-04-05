@@ -272,7 +272,7 @@ export function useETHPairContract(withSignerIfPossible?: boolean): Contract | n
 
 export function useScarabContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SCARAB_ADDRESS[chainId], SOUL_SCARAB_ABI, withSignerIfPossible)
+  return useContract(chainId && SCARAB_ADDRESS[250], SOUL_SCARAB_ABI, withSignerIfPossible)
 }
 
 export function useSafeContract(withSignerIfPossible?: boolean): Contract | null {

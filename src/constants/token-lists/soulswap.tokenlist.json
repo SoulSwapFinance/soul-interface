@@ -15,6 +15,22 @@
   "tokens": 
   [
       {
+        "name": "USD Coin",
+        "address": "0x818ec0A7Fe18Ff94269904fCED6AE3DaE6d6dC0b",
+        "symbol": "USDC",
+        "decimals": 6,
+        "chainId": 40,
+        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/telos/assets/0x818ec0A7Fe18Ff94269904fCED6AE3DaE6d6dC0b/logo.png"
+      },
+      {
+        "name": "Tether USD",
+        "address": "0xeFAeeE334F0Fd1712f9a8cc375f427D9Cdd40d73",
+        "symbol": "USDT",
+        "decimals": 6,
+        "chainId": 40,
+        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/telos/assets/0xeFAeeE334F0Fd1712f9a8cc375f427D9Cdd40d73/logo.png"
+      },
+      {
         "name": "Fantom USD",
         "address": "0x91ea991bd52EE3C40EdA2509701d905e1Ee54074",
         "symbol": "FUSD",

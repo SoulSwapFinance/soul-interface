@@ -36,6 +36,17 @@ export const SUPPORTED_NETWORKS: {
     rpcUrls: ['https://mainnet.infura.io/v3'],
     blockExplorerUrls: ['https://etherscan.com'],
   },
+  [ChainId.TELOS]: {
+    chainId: '0x28',
+    chainName: 'Telos',
+    nativeCurrency: {
+      name: 'Telos',
+      symbol: 'TLOS',
+      decimals: 18,
+    },
+    rpcUrls: ['https://rpc1.us.telos.net/evm'],
+    blockExplorerUrls: ['https://rpc1.us.telos.net/v2/explore'],
+  },
   [ChainId.FANTOM]: {
     chainId: '0xfa',
     chainName: 'Fantom',
@@ -183,17 +194,6 @@ export const SUPPORTED_NETWORKS: {
   //   },
   //   rpcUrls: ['https://rpc.fuse.io'],
   //   blockExplorerUrls: ['https://explorer.fuse.io'],
-  // },
-  // [ChainId.TELOS]: {
-  //   chainId: '0x28',
-  //   chainName: 'Telos',
-  //   nativeCurrency: {
-  //     name: 'Telos',
-  //     symbol: 'TLOS',
-  //     decimals: 18,
-  //   },
-  //   rpcUrls: ['https://mainnet.telos.net/evm'],
-  //   blockExplorerUrls: ['https://rpc1.us.telos.net/v2/explore'],
   // },
   // [ChainId.PALM]: {
   //   chainId: '0x2A15C308D',

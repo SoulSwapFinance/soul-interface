@@ -73,11 +73,13 @@ export const NETWORK_LABEL: { [chainId in ChainId]?: string } = {
 
 export const NATIVE_TOKEN_TICKER = {
   [ChainId.ETHEREUM]: 'ETH',
+  [ChainId.TELOS]: 'TLOS',
   [ChainId.BSC]: 'BNB',
   [ChainId.FANTOM]: 'FTM',
 }
 
 export const NATIVE_WRAPPED_TOKEN_ADDRESS = {
   [ChainId.ETHEREUM]: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+  [ChainId.TELOS]: WNATIVE_ADDRESS[40],
   [ChainId.FANTOM]: WNATIVE_ADDRESS[250],
 }

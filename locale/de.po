@@ -49,6 +49,9 @@ msgstr ""
 msgid "/ DAY"
 msgstr ""
 
+msgid "/ WLUM"
+msgstr ""
+
 msgid "0.055% of each swap goes to burning SOUL."
 msgstr ""
 
@@ -283,6 +286,9 @@ msgstr ""
 msgid "Calculated based on current rates. Rates are estimates for your convenience, they do not represent guaranteed returns."
 msgstr ""
 
+msgid "Calculator"
+msgstr ""
+
 msgid "Cancel Order"
 msgstr ""
 
@@ -310,7 +316,13 @@ msgstr ""
 msgid "Claim and Autostake"
 msgstr ""
 
+msgid "Claimable"
+msgstr ""
+
 msgid "Claimable Amount"
+msgstr ""
+
+msgid "Claimable SOUL"
 msgstr ""
 
 msgid "Claimable: Fetching Claimable Amount"
@@ -474,6 +486,9 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
+msgid "Data"
+msgstr ""
+
 msgid "Deposit"
 msgstr ""
 
@@ -486,6 +501,9 @@ msgstr ""
 msgid "Deposit assets in equal amounts"
 msgstr ""
 
+msgid "Deposit liquidity or lent asset. Earn SOUL rewards."
+msgstr ""
+
 msgid "Deposit to CoffinBox"
 msgstr ""
 
@@ -496,6 +514,9 @@ msgid "Deposit {0} to CoffinBox"
 msgstr ""
 
 msgid "Deposited"
+msgstr ""
+
+msgid "Deposited Amount"
 msgstr ""
 
 msgid "Depositing with Zap Mode involves swapping your asset for the assets in the pool - this makes your transaction subject to swap-related fees."
@@ -522,13 +543,13 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
-msgid "EARN"
-msgstr ""
-
 msgid "ENCHANT"
 msgstr ""
 
 msgid "EXIT"
+msgstr ""
+
+msgid "EXPLORE"
 msgstr ""
 
 msgid "Earn"
@@ -608,6 +629,9 @@ msgstr ""
 msgid "Explorer"
 msgstr ""
 
+msgid "FANTOM"
+msgstr ""
+
 msgid "FARM"
 msgstr ""
 
@@ -632,6 +656,9 @@ msgstr ""
 msgid "Faucet"
 msgstr ""
 
+msgid "Fee"
+msgstr ""
+
 msgid "Fees"
 msgstr ""
 
@@ -642,6 +669,12 @@ msgid "Find Pool"
 msgstr ""
 
 msgid "Fixed ratio"
+msgstr ""
+
+msgid "Follow"
+msgstr ""
+
+msgid "Forfeit"
 msgstr ""
 
 msgid "Forum"
@@ -716,6 +749,9 @@ msgid "How to use"
 msgstr ""
 
 msgid "I understand"
+msgstr ""
+
+msgid "INACTIVE"
 msgstr ""
 
 msgid "If you purchase a token from this list, you may not be able to sell it back."
@@ -818,10 +854,19 @@ msgstr ""
 msgid "LIQUIDITY"
 msgstr ""
 
-msgid "LUX Market Price"
+msgid "LUX"
 msgstr ""
 
 msgid "LUXOR"
+msgstr ""
+
+msgid "LUXOR ECONOMY"
+msgstr ""
+
+msgid "LUXOR TREASURY"
+msgstr ""
+
+msgid "Learn"
 msgstr ""
 
 msgid "Learn About Wallets"
@@ -843,9 +888,6 @@ msgid "Limit"
 msgstr ""
 
 msgid "Limit Orders"
-msgstr ""
-
-msgid "Limit order"
 msgstr ""
 
 msgid "Limit orders use funds from CoffinBox, to create a limit order depositing into CoffinBox is required."
@@ -899,6 +941,9 @@ msgstr ""
 msgid "Luxor"
 msgstr ""
 
+msgid "Luxor Balance"
+msgstr ""
+
 msgid "Luxor Bonds."
 msgstr ""
 
@@ -906,6 +951,9 @@ msgid "Luxor Money"
 msgstr ""
 
 msgid "MAX"
+msgstr ""
+
+msgid "MINT SOR"
 msgstr ""
 
 msgid "Manage"
@@ -948,6 +996,9 @@ msgid "Migrate {exchange} Liquidity"
 msgstr ""
 
 msgid "Migration is done in one-click using your signature (permit)"
+msgstr ""
+
+msgid "Mines"
 msgstr ""
 
 msgid "Minimum Received"
@@ -1060,10 +1111,10 @@ msgstr ""
 msgid "Output is estimated. You will receive at least"
 msgstr ""
 
-msgid "PAIRS"
+msgid "Overview"
 msgstr ""
 
-msgid "POOL"
+msgid "PAIRS"
 msgstr ""
 
 msgid "Pair your SOUL and add to Bonds for more SOUL at record-high returns."
@@ -1164,6 +1215,15 @@ msgstr ""
 msgid "Provide liquidity to the"
 msgstr ""
 
+msgid "Public good blockchain development guide."
+msgstr ""
+
+msgid "REDEEM"
+msgstr ""
+
+msgid "REDEEM DAI"
+msgstr ""
+
 msgid "RETIRED"
 msgstr ""
 
@@ -1177,6 +1237,9 @@ msgid "Rates"
 msgstr ""
 
 msgid "Read the Documentation."
+msgstr ""
+
+msgid "Rebase"
 msgstr ""
 
 msgid "Receive"
@@ -1366,6 +1429,9 @@ msgstr ""
 msgid "Spanish"
 msgstr ""
 
+msgid "Stable"
+msgstr ""
+
 msgid "Stables"
 msgstr ""
 
@@ -1435,6 +1501,9 @@ msgid "Summon Souls with Liquidity."
 msgstr ""
 
 msgid "Summon an Empire."
+msgstr ""
+
+msgid "Supply Distribution"
 msgstr ""
 
 msgid "Supplying {0} {1} and {2} {3}"
@@ -1547,9 +1616,6 @@ msgstr ""
 msgid "Total in CoffinBox"
 msgstr ""
 
-msgid "Trade"
-msgstr ""
-
 msgid "Transaction Details"
 msgstr ""
 
@@ -1574,7 +1640,7 @@ msgstr ""
 msgid "Transactions"
 msgstr ""
 
-msgid "Treasury Balance"
+msgid "Treasury Distribution"
 msgstr ""
 
 msgid "Tribute"
@@ -1584,6 +1650,15 @@ msgid "Try enabling multi-hop trades"
 msgstr ""
 
 msgid "Turn On Expert Mode"
+msgstr ""
+
+msgid "Tutorial"
+msgstr ""
+
+msgid "Tutorials"
+msgstr ""
+
+msgid "UNWRAP"
 msgstr ""
 
 msgid "Underworld Assets"
@@ -1619,6 +1694,9 @@ msgstr ""
 msgid "Unwrap"
 msgstr ""
 
+msgid "Unwrap WLUM"
+msgstr ""
+
 msgid "Unwrap {0} {1} to {2}"
 msgstr ""
 
@@ -1637,7 +1715,13 @@ msgstr ""
 msgid "Utilized"
 msgstr ""
 
+msgid "VAULT"
+msgstr ""
+
 msgid "VOTE"
+msgstr ""
+
+msgid "Vault"
 msgstr ""
 
 msgid "Version"
@@ -1679,6 +1763,12 @@ msgstr ""
 msgid "WITHDRAW"
 msgstr ""
 
+msgid "WRAP"
+msgstr ""
+
+msgid "WRAPPED LUMENS"
+msgstr ""
+
 msgid "Waiting for Confirmation"
 msgstr ""
 
@@ -1692,6 +1782,15 @@ msgid "Wallet Balances"
 msgstr ""
 
 msgid "Wallet address or ENS name"
+msgstr ""
+
+msgid "Warmup Balance"
+msgstr ""
+
+msgid "Warmup Period"
+msgstr ""
+
+msgid "Warmup Remaining"
 msgstr ""
 
 msgid "What do these mean?"
@@ -1719,6 +1818,9 @@ msgid "Withdraw {0} to Wallet"
 msgstr ""
 
 msgid "Wrap"
+msgstr ""
+
+msgid "Wrap LUM"
 msgstr ""
 
 msgid "Wrap {0} {1} to {2}"

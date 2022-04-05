@@ -24,15 +24,13 @@ import {
     SubmitButton,
 } from './Styles'
 import { Wrap, Text, ExternalLink } from '../../components/ReusableStyles'
-import { formatPercent, tryParseAmount } from 'functions'
+import { tryParseAmount } from 'functions'
 // import { useCurrencyBalance, useTokenBalance } from 'state/wallet/hooks'
 import { useApproveCallback } from 'hooks/useApproveCallback'
 import Modal from 'components/Modal/DefaultModal'
 import Typography from 'components/Typography'
 import ModalHeader from 'components/Modal/Header'
-import { useLuxorBondInfo, useUserInfo } from 'hooks/useAPI'
-import NavLink from 'components/NavLink'
-import { Button } from 'components/Button'
+import { useLuxorBondInfo } from 'hooks/useAPI'
 import { WFTM_ADDRESS } from 'constants/addresses'
 
 const TokenPairLink = styled(ExternalLink)`
@@ -383,7 +381,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                     </Text>
                                 ) : (
                                     <Text padding="0" fontSize="1rem" color="#4EFF4E">
-                                        ${Number(payout * luxPrice).toFixed(0)}
+                                        {Number(payout).toFixed(2)}
                                     </Text>
                                 )}
                             </StakeItemBox>
@@ -439,8 +437,8 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                         <DetailsWrapper>
                         <Wrap  padding="0" margin="0" justifyContent="center">
                             <div className="grid mt-2 justify-between grid-cols-2 text-center">
-                                <b>Deposit Value</b> ~${ Number(Number(assetPrice) * Number(depositValue)).toFixed(2) }
-                                <b>Claim Amount</b> ~{ Number(Number(depositValue) * Number(assetPrice) / Number(bondPrice)).toFixed(2) } LUX
+                                <b>Deposit Value</b> ~${ Number(Number(assetPrice) * Number(depositValue)).toFixed(0) }
+                                <b>Claim Amount</b> ~{ Number(Number(depositValue) * Number(assetPrice) / Number(bondPrice)).toFixed(0) } LUX
                             </div>
                         </Wrap>
                     {payout == 0 ? (

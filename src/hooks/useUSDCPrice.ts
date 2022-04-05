@@ -111,47 +111,47 @@ const GRIMEVO_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
 export default function useUSDCPrice(currency?: Currency): Price<Currency, Token> | undefined {
   const chainId = currency?.chainId
 
-  const soulPrice = usePrice(SOUL_ADDRESS[chainId])
-  const seancePrice = usePrice(SEANCE_ADDRESS[chainId])
+  const soulPrice = usePrice(SOUL_ADDRESS[chainId | 250])
+  const seancePrice = usePrice(SEANCE_ADDRESS[chainId | 250])
 
-  const luxorPrice = usePrice(LUX_ADDRESS[chainId])
-  const wLumensPrice = usePrice(WLUM_ADDRESS[chainId])
+  const luxorPrice = usePrice(LUX_ADDRESS[250])
+  const wLumensPrice = usePrice(WLUM_ADDRESS[250])
  
-  const wethPrice = usePrice(WETH_ADDRESS[chainId])
-  const wbtcPrice = usePrice(WBTC_ADDRESS[chainId])
-  const wftmPrice = usePrice(WFTM_ADDRESS[chainId])
-  const bnbPrice = usePrice(BNB_ADDRESS[chainId])
-  const anyPrice = usePrice(ANY_ADDRESS[chainId])
-  const crvPrice = usePrice(CRV_ADDRESS[chainId])
-  const fusdPrice = usePrice(FUSD_ADDRESS[chainId])
-  const unidxPrice = usePrice(UNIDX_ADDRESS[chainId])
-  const reaperPrice = usePrice(REAPER_ADDRESS[chainId])
-  const grimPrice = usePrice(GRIM_ADDRESS[chainId])
-  const grimEvoPrice = usePrice(GRIMEVO_ADDRESS[chainId])
+  const wethPrice = usePrice(WETH_ADDRESS[chainId | 250])
+  const wbtcPrice = usePrice(WBTC_ADDRESS[chainId | 250])
+  const wftmPrice = usePrice(WFTM_ADDRESS[chainId | 250])
+  const bnbPrice = usePrice(BNB_ADDRESS[chainId | 250])
+  const anyPrice = usePrice(ANY_ADDRESS[chainId | 250])
+  const crvPrice = usePrice(CRV_ADDRESS[chainId | 250])
+  const fusdPrice = usePrice(FUSD_ADDRESS[chainId | 250])
+  const unidxPrice = usePrice(UNIDX_ADDRESS[chainId | 250])
+  const reaperPrice = usePrice(REAPER_ADDRESS[chainId | 250])
+  const grimPrice = usePrice(GRIM_ADDRESS[chainId | 250])
+  const grimEvoPrice = usePrice(GRIMEVO_ADDRESS[chainId | 250])
   
-  const amountOut = chainId ? STABLECOIN_AMOUNT_OUT[chainId] : undefined
-  const usdtAmountOut = chainId ? USDT_AMOUNT_OUT[chainId] : undefined
-  const sorAmountOut = chainId ? SOR_AMOUNT_OUT[chainId] : undefined
-  const daiAmountOut = chainId ? DAI_AMOUNT_OUT[chainId] : undefined
-  const fusdAmountOut = chainId ? FUSD_AMOUNT_OUT[chainId] : undefined
-  const mimAmountOut = chainId ? MIM_AMOUNT_OUT[chainId] : undefined
+  const amountOut = chainId ? STABLECOIN_AMOUNT_OUT[chainId | 250] : undefined
+  const usdtAmountOut = chainId ? USDT_AMOUNT_OUT[chainId | 250] : undefined
+  const sorAmountOut = chainId ? SOR_AMOUNT_OUT[chainId | 250] : undefined
+  const daiAmountOut = chainId ? DAI_AMOUNT_OUT[chainId | 250] : undefined
+  const fusdAmountOut = chainId ? FUSD_AMOUNT_OUT[chainId | 250] : undefined
+  const mimAmountOut = chainId ? MIM_AMOUNT_OUT[chainId | 250] : undefined
   
-  const soulAmountOut = chainId ? SOUL_AMOUNT_OUT[chainId] : undefined
-  const seanceAmountOut = chainId ? SEANCE_AMOUNT_OUT[chainId] : undefined
+  const soulAmountOut = chainId ? SOUL_AMOUNT_OUT[chainId | 250] : undefined
+  const seanceAmountOut = chainId ? SEANCE_AMOUNT_OUT[chainId | 250] : undefined
   
-  const luxorAmountOut = chainId ? LUXOR_AMOUNT_OUT[chainId] : undefined
-  const wlumAmountOut = chainId ? WLUM_AMOUNT_OUT[chainId] : undefined
-  const wftmAmountOut = chainId ? WFTM_AMOUNT_OUT[chainId] : undefined
+  const luxorAmountOut = chainId ? LUXOR_AMOUNT_OUT[chainId | 250] : undefined
+  const wlumAmountOut = chainId ? WLUM_AMOUNT_OUT[chainId | 250] : undefined
+  const wftmAmountOut = chainId ? WFTM_AMOUNT_OUT[chainId | 250] : undefined
 
-  const wethAmountOut = chainId ? WETH_AMOUNT_OUT[chainId] : undefined
-  const wbtcAmountOut = chainId ? WBTC_AMOUNT_OUT[chainId] : undefined
-  const bnbAmountOut = chainId ? BNB_AMOUNT_OUT[chainId] : undefined
-  const anyAmountOut = chainId ? ANY_AMOUNT_OUT[chainId] : undefined
-  const crvAmountOut = chainId ? CRV_AMOUNT_OUT[chainId] : undefined
-  const unidxAmountOut = chainId ? UNIDX_AMOUNT_OUT[chainId] : undefined
-  const grimAmountOut = chainId ? GRIM_AMOUNT_OUT[chainId] : undefined
-  const grimEVOAmountOut = chainId ? GRIMEVO_AMOUNT_OUT[chainId] : undefined
-  const reaperAmountOut = chainId ? REAPER_AMOUNT_OUT[chainId] : undefined
+  const wethAmountOut = chainId ? WETH_AMOUNT_OUT[chainId | 250] : undefined
+  const wbtcAmountOut = chainId ? WBTC_AMOUNT_OUT[chainId | 250] : undefined
+  const bnbAmountOut = chainId ? BNB_AMOUNT_OUT[chainId | 250] : undefined
+  const anyAmountOut = chainId ? ANY_AMOUNT_OUT[chainId | 250] : undefined
+  const crvAmountOut = chainId ? CRV_AMOUNT_OUT[chainId | 250] : undefined
+  const unidxAmountOut = chainId ? UNIDX_AMOUNT_OUT[chainId | 250] : undefined
+  const grimAmountOut = chainId ? GRIM_AMOUNT_OUT[chainId | 250] : undefined
+  const grimEVOAmountOut = chainId ? GRIMEVO_AMOUNT_OUT[chainId | 250] : undefined
+  const reaperAmountOut = chainId ? REAPER_AMOUNT_OUT[chainId | 250] : undefined
 
   // TOKENS
   const stablecoin = amountOut?.currency
@@ -344,7 +344,7 @@ export function useUSDCValueWithLoadingIndicator(currencyAmount: CurrencyAmount<
  */
 export function useStablecoinAmountFromFiatValue(fiatValue: string | null | undefined) {
   const { chainId } = useActiveWeb3React()
-  const stablecoin = chainId ? STABLECOIN_AMOUNT_OUT[chainId]?.currency : undefined
+  const stablecoin = chainId ? STABLECOIN_AMOUNT_OUT[chainId | 250]?.currency : undefined
 
   if (fiatValue === null || fiatValue === undefined || !chainId || !stablecoin) {
     return undefined

@@ -10,9 +10,9 @@ import { Button, ButtonError } from 'components/Button'
 import StableInputPanel from 'components/StableInputPanel'
 import { ApprovalState, useApproveCallback, useLuxorStakeHelperContract, useLuxorStakingContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
-import { ChainId, LUM_ADDRESS, LUXOR_STAKING_ADDRESS, LUXOR_STAKING_HELPER_ADDRESS, Token } from 'sdk'
-import { LUXOR_WARMUP_ADDRESS, LUX_ADDRESS } from 'constants/addresses'
-import { tryParseAmount, formatCurrencyAmount, formatNumberScale, formatPercent, formatNumber } from 'functions'
+import { LUM_ADDRESS, LUXOR_STAKING_ADDRESS, Token } from 'sdk'
+import { LUX_ADDRESS } from 'constants/addresses'
+import { tryParseAmount, formatNumber } from 'functions'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import { useTransactionAdder } from 'state/transactions/hooks'
 import Dots from 'components/Dots'
@@ -35,18 +35,14 @@ export default function Stake() {
   // const [warmupPeriod, setWarmupPeriod] = useState(0)
   // const [nextRebase, setNextRebase] = useState(0)
   const luxorPrice = useLuxorPrice()
-  const { account, chainId } = useActiveWeb3React()
+  const { account } = useActiveWeb3React()
   const { stake, unstake, claim, forfeit } = useStakeContract()
   // const warmupValue = useWarmupValue()
   // console.log('warmupAmount:%s', warmupAmount)
 
-  if (chainId && chainId === ChainId.ETHEREUM)
-    // DELETE
-  window.location.href = '/swap'
-
-  // const daiToken = new Token(chainId, getAddress(DAI_ADDRESS[chainId]), 18, 'DAI')
-  const luxorToken = new Token(chainId, getAddress(LUX_ADDRESS[chainId]), 9, 'LUX')
-  const lumensToken = new Token(chainId, getAddress(LUM_ADDRESS[chainId]), 9, 'LUM')
+  // const daiToken = new Token(250, getAddress(DAI_ADDRESS[250]), 18, 'DAI')
+  const luxorToken = new Token(250, getAddress(LUX_ADDRESS[250]), 9, 'LUX')
+  const lumensToken = new Token(250, getAddress(LUM_ADDRESS[250]), 9, 'LUM')
   // const stakeClaimAmount = useStakeClaimAmount(luxorToken)
   // const redeemClaimAmount = useRedeemClaimAmount(luxorToken)
 
@@ -78,11 +74,11 @@ export default function Stake() {
   
   const [stakeApprovalState, stakeApprove] = useApproveCallback(
     parsedStakeValue,
-    LUXOR_STAKING_ADDRESS[chainId]
+    LUXOR_STAKING_ADDRESS[250]
   )
   const [redeemApprovalState, redeemApprove] = useApproveCallback(
     parsedRedeemValue,
-    LUXOR_STAKING_ADDRESS[chainId]
+    LUXOR_STAKING_ADDRESS[250]
   )
 
   const stakeError = !parsedStakeValue

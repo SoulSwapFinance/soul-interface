@@ -8,7 +8,6 @@ import { currencyId } from '../functions'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
-import MyOrders from '../features/limit-order/MyOrders'
 import Typography from '../components/Typography'
 
 const getQuery = (input, output) => {

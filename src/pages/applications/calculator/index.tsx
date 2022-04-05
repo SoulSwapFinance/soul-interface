@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import "./calculator.scss";
 // import { useSelector, useDispatch } from "react-redux";
-import { Grid, InputAdornment, OutlinedInput, Zoom, Slider } from "@material-ui/core";
+import { Grid, InputAdornment, OutlinedInput } from "@material-ui/core";
 // import { IReduxState } from "../../store/slices/state.interface";
 // import { trim } from "../../helpers";
 // import { Skeleton } from "@material-ui/lab";
@@ -13,9 +13,9 @@ import { useActiveWeb3React } from "hooks/useActiveWeb3React";
 import { useLuxorPrice, useWrappedBtcPrice } from "hooks/getPrices";
 import { Button } from "components/Button";
 import { formatCurrency } from "modals/TokensStatsModal";
-import NavLink from "components/NavLink";
-import { useTokenContract } from "hooks/useTokenContract";
-import { useLumensContract } from "hooks/useContract";
+// import NavLink from "components/NavLink";
+// import { useTokenContract } from "hooks/useTokenContract";
+// import { useLumensContract } from "hooks/useContract";
 
 export default function Calculator() {
   const { account, chainId } = useActiveWeb3React()

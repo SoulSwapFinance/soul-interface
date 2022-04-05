@@ -15,7 +15,7 @@ const useCurrenciesFromURL = (): {
   const { chainId } = useActiveWeb3React()
   const router = useRouter()
   const currencyA = useCurrency(router.query.tokens?.[0]) || (chainId && NATIVE[chainId]) || undefined
-  const currencyB = useCurrency(router.query.tokens?.[1]) || (chainId && SOUL[chainId]) || undefined
+  const currencyB = useCurrency(router.query.tokens?.[1]) || (chainId && SOUL[250]) || undefined
 
   const fee = Number(router.query.fee ?? Fee.DEFAULT)
   const twap = router.query.twap !== 'false'

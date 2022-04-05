@@ -1,42 +1,10 @@
 import {
-  ALPHA,
-  AMPL,
-  BAB,
-  BAC,
   BSC,
-  CREAM,
-  CRV,
-  CVXCRV,
-  DAI,
-  DOUGH,
-  DUCK,
-  ENCHANT,
-  ETH2X_FLI,
   FANTOM,
+  TELOS,
   FANTOM_TESTNET,
-  FEI,
-  FRAX,
-  FXS,
-  HBTC,
-  IBETH,
-  LFBTC,
-  LIFT,
   MIR,
-  NFTX,
-  PLAY,
-  PONT,
-  PWING,
-  RENBTC,
-  RUNE,
-  SOUL,
-  STETH,
-  TRIBE,
-  UMA,
-  USDC,
-  USDP,
-  USDT,
   UST,
-  WBTC,
 } from './tokens'
 // a list of tokens by chain
 import { ChainId, Currency, Token, WNATIVE } from '../sdk'
@@ -76,6 +44,7 @@ const MIRROR_ADDITIONAL_BASES: { [tokenAddress: string]: Token[] } = {
 // TODO: SDK should have two maps, WETH map and WNATIVE map.
 const WRAPPED_NATIVE_ONLY: ChainTokenList = {
   [ChainId.ETHEREUM]: [WNATIVE[ChainId.ETHEREUM]],
+   [ChainId.TELOS]: [WNATIVE[ChainId.TELOS]],
    [ChainId.BSC]: [WNATIVE[ChainId.BSC]],
   [ChainId.FANTOM]: [WNATIVE[ChainId.FANTOM]],
   [ChainId.FANTOM_TESTNET]: [WNATIVE[ChainId.FANTOM_TESTNET]]
@@ -85,7 +54,7 @@ const WRAPPED_NATIVE_ONLY: ChainTokenList = {
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WRAPPED_NATIVE_ONLY,
   // [ChainId.ETHEREUM]: [...WRAPPED_NATIVE_ONLY[ChainId.ETHEREUM], DAI, USDC, USDT, WBTC, RUNE, NFTX, STETH],
-  // [ChainId.MATIC]: [...WRAPPED_NATIVE_ONLY[ChainId.MATIC], MATIC.USDC, MATIC.WBTC, MATIC.DAI, MATIC.WETH, MATIC.USDT],
+  [ChainId.TELOS]: [...WRAPPED_NATIVE_ONLY[ChainId.TELOS], TELOS.USDC, TELOS.USDT],
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], 
     FANTOM.SOUL,
@@ -168,6 +137,10 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
 export const COMMON_BASES: ChainTokenList = {
   [ChainId.ETHEREUM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.ETHEREUM], 
+  ],
+  [ChainId.TELOS]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.TELOS], 
+    TELOS.USDC, TELOS.FTM, TELOS.BNB
   ],
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM],

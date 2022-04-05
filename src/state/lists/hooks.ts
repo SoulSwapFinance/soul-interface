@@ -53,6 +53,7 @@ export function useAllLists(): AppState['lists']['byUrl'] {
 function combineMaps(map1: TokenAddressMap, map2: TokenAddressMap): TokenAddressMap {
   return {
     1: { ...map1[1], ...map2[1] }, // mainnet
+    40: { ...map1[40], ...map2[40] }, // telos
     56: { ...map1[56], ...map2[56] }, // bsc
     250: { ...map1[250], ...map2[250] }, // fantom
     4002: { ...map1[4002], ...map2[4002] } // fantom testnet

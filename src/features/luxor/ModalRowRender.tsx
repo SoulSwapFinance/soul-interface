@@ -381,7 +381,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                     </Text>
                                 ) : (
                                     <Text padding="0" fontSize="1rem" color="#F36FFE">
-                                        ${Number(payout * luxPrice).toFixed(0)}
+                                        {Number(payout).toFixed(2)}
                                     </Text>
                                 )}
                             </StakeItemBox>
@@ -437,8 +437,8 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                         <DetailsWrapper>
                         <Wrap  padding="0" margin="0" justifyContent="center">
                             <div className="grid mt-2 justify-between grid-cols-2 text-center">
-                                <b>Deposit Value</b> ~${ Number(Number(assetPrice) * Number(depositValue)).toFixed(2) }
-                                <b>Claim Amount</b> ~{ Number(Number(depositValue) * Number(assetPrice) / Number(bondPrice)).toFixed(2) } LUX
+                                <b>Deposit Value</b> ~${ Number(Number(assetPrice) * Number(depositValue)).toFixed(0) }
+                                <b>Claim Amount</b> ~{ Number(Number(depositValue) * Number(assetPrice) / Number(bondPrice)).toFixed(0) } LUX
                             </div>
                         </Wrap>
                     {payout == 0 ? (
