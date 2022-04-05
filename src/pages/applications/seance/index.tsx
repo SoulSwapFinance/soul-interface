@@ -71,8 +71,8 @@ export default function SoulStake() {
   const { userInfo, fetchStakeStats } = useSoulMine(0, '', '', '')
 
   const [stakedBal, setStakedBal] = useState('0')
-  const soulBalance = useTokenBalance(account ?? undefined, SOUL[chainId])
-  const seanceBalance = useTokenBalance(account ?? undefined, SEANCE[chainId])
+  const soulBalance = useTokenBalance(account, SOUL[250])
+  const seanceBalance = useTokenBalance(account, SEANCE[250])
 
   // show confirmation view before withdrawing SOUL
   const [showConfirmation, setShowConfirmation] = useState(false)

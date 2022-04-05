@@ -6,6 +6,7 @@ const HYPER_GRAPH = 'https://q.hg.network'
 
 export const GRAPH_HOST = {
   [ChainId.ETHEREUM]: THE_GRAPH,
+  [ChainId.TELOS]: THE_GRAPH,
   [ChainId.FANTOM]: THE_GRAPH,
   [ChainId.BSC]: THE_GRAPH,
 }

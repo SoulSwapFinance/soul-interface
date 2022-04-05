@@ -26,6 +26,6 @@ export enum ChainKey {
     // PALM = 'palm',
     // PALM_TESTNET = 'palm-testnet',
     // RINKEBY = 'rinkeby',
-    // TELOS = 'telos',
+    TELOS = 'telos',
     // XDAI = 'xdai',
   }

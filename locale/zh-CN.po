@@ -58,6 +58,18 @@ msgstr ""
 msgid "0.25% of each swap goes to liquidity providers."
 msgstr ""
 
+msgid "1 Hour"
+msgstr ""
+
+msgid "1 Week"
+msgstr ""
+
+msgid "24 Hours"
+msgstr ""
+
+msgid "30 Days"
+msgstr ""
+
 msgid "50%"
 msgstr ""
 
@@ -146,6 +158,9 @@ msgid "Approve"
 msgstr ""
 
 msgid "Approve CoffinBox"
+msgstr ""
+
+msgid "Approve Master Contract"
 msgstr ""
 
 msgid "Approve Underworld"
@@ -274,6 +289,9 @@ msgstr ""
 msgid "Calculator"
 msgstr ""
 
+msgid "Cancel Order"
+msgstr ""
+
 msgid "Cancelled"
 msgstr ""
 
@@ -369,6 +387,12 @@ msgstr ""
 msgid "Confirm Enchantment"
 msgstr ""
 
+msgid "Confirm Limit Order"
+msgstr ""
+
+msgid "Confirm Order"
+msgstr ""
+
 msgid "Confirm Removal"
 msgstr ""
 
@@ -417,7 +441,13 @@ msgstr ""
 msgid "Copy"
 msgstr ""
 
+msgid "Create Limit Order"
+msgstr ""
+
 msgid "Create Lock"
+msgstr ""
+
+msgid "Create Order"
 msgstr ""
 
 msgid "Create Pair"
@@ -507,6 +537,9 @@ msgstr ""
 msgid "Disconnect"
 msgstr ""
 
+msgid "Do not show again"
+msgstr ""
+
 msgid "Documentation"
 msgstr ""
 
@@ -576,6 +609,12 @@ msgstr ""
 msgid ""
 "Expert mode turns off the confirm transaction prompt and allows high slippage trades\n"
 "that often result in bad rates and lost funds."
+msgstr ""
+
+msgid "Expiration"
+msgstr ""
+
+msgid "Expiration is the time at which the order will become invalid"
 msgstr ""
 
 msgid "Explore"
@@ -739,7 +778,13 @@ msgstr ""
 msgid "Import token"
 msgstr ""
 
+msgid "In Coffin:"
+msgstr ""
+
 msgid "In Wallet"
+msgstr ""
+
+msgid "In Wallet:"
 msgstr ""
 
 msgid "Inactive"
@@ -779,6 +824,11 @@ msgid "Invalid pair"
 msgstr ""
 
 msgid "Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency."
+msgstr ""
+
+msgid ""
+"It seems like you have open orders while the limit order master contract is not approved. Please make\n"
+"sure you approved the limit order master contract or the order will not execute"
 msgstr ""
 
 msgid ""
@@ -835,6 +885,9 @@ msgid "Lending"
 msgstr ""
 
 msgid "Limit"
+msgstr ""
+
+msgid "Limit Orders"
 msgstr ""
 
 msgid "Limit orders use funds from CoffinBox, to create a limit order depositing into CoffinBox is required."
@@ -990,6 +1043,9 @@ msgstr ""
 msgid "No liquidity found to do swap"
 msgstr ""
 
+msgid "No open orders"
+msgstr ""
+
 msgid "No pool found"
 msgstr ""
 
@@ -1026,7 +1082,13 @@ msgstr ""
 msgid "Open Main Menu"
 msgstr ""
 
+msgid "Open orders"
+msgstr ""
+
 msgid "Oracle"
+msgstr ""
+
+msgid "Orders"
 msgstr ""
 
 msgid "Our Resources."
@@ -1061,7 +1123,13 @@ msgstr ""
 msgid "Pair your SOUL with FTM and add to Farms for more SOUL and an enhanced AURA."
 msgstr ""
 
+msgid "Pay"
+msgstr ""
+
 msgid "Pay from"
+msgstr ""
+
+msgid "Pay from:"
 msgstr ""
 
 msgid "Pending"
@@ -1070,10 +1138,16 @@ msgstr ""
 msgid "Pending Treasury Transfer"
 msgstr ""
 
+msgid "Place a limit order or check the status of your past orders"
+msgstr ""
+
 msgid "Please connect to the appropriate network."
 msgstr ""
 
 msgid "Please make sure your {0} balance is sufficient to withdraw and then try again."
+msgstr ""
+
+msgid "Please note that after order execution, your tokens will be received in your CoffinBox"
 msgstr ""
 
 msgid "Please note the recipient address is different from the connected wallet address."
@@ -1228,6 +1302,9 @@ msgstr ""
 msgid "Restricts swaps to direct pairs only."
 msgstr ""
 
+msgid "Review Limit Order"
+msgstr ""
+
 msgid "Rewards"
 msgstr ""
 
@@ -1329,6 +1406,9 @@ msgid "Slippage Tolerance"
 msgstr ""
 
 msgid "Slippage tolerance"
+msgstr ""
+
+msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click 'Approve CoffinBox' again for approving using the fallback method"
 msgstr ""
 
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
@@ -1753,6 +1833,9 @@ msgid "YOURS"
 msgstr ""
 
 msgid "Yield Details"
+msgstr ""
+
+msgid "You Pay:"
 msgstr ""
 
 msgid "You Receive"
