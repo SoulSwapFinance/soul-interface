@@ -146,9 +146,9 @@ export default function Dashboard() {
   const wlumPrice = useWrappedLumPrice()
 
   // GET RESERVE BALANCES //
-  const FtmBalance = Number(useTokenInfo(WFTM_ADDRESS[250]).tokenInfo.treasuryBalance) / 1e18
+  const FtmBalance = Number(useTokenInfo(WFTM_ADDRESS[250]).tokenInfo.luxorTreasuryBalance) / 1e18
   const FtmValue = FtmBalance * ftmPrice
-  const DaiValue = Number(useTokenInfo(DAI_ADDRESS[250]).tokenInfo.treasuryBalance) / 1e18
+  const DaiValue = Number(useTokenInfo(DAI_ADDRESS[250]).tokenInfo.luxorTreasuryBalance) / 1e18
   const treasuryReserveBalance = FtmValue + DaiValue
   
   // GET LUXOR ECONOMY BALANCES //
@@ -163,18 +163,18 @@ export default function Dashboard() {
   // console.log('Dai Bal:%s', DaiBalance)
   
   // GET LIQUIDITY BALANCES //
-  const LuxFtmBalance = Number(usePairInfo(LuxorFtmAddress).pairInfo.treasuryBalance) / 1e18
-  const LuxDaiBalance = Number(usePairInfo(LuxorDaiAddress).pairInfo.treasuryBalance) / 1e18
+  const LuxFtmBalance = Number(usePairInfo(LuxorFtmAddress).pairInfo.luxorTreasuryBalance) / 1e18
+  const LuxDaiBalance = Number(usePairInfo(LuxorDaiAddress).pairInfo.luxorTreasuryBalance) / 1e18
   const LuxFtmValue = LuxFtmBalance * luxFtmPrice
   const LuxDaiValue = LuxDaiBalance * luxFtmPrice
   const treasuryLiquidityBalance = LuxFtmValue + LuxDaiValue
   // console.log('treasuryLiquidityBalance:%s', treasuryLiquidityBalance)
     
   // GET INVESTMENT BALANCES //
-  const FtmDaiBalance = Number(usePairInfo(FtmDaiAddress).pairInfo.treasuryBalance) / 1e18
-  const FtmWlumBalance = Number(usePairInfo(WrappedLumFantomAddress).pairInfo.treasuryBalance) / 1e18
-  const FtmLendDaiBalance = Number(usePairInfo(FtmLendDaiAddress).pairInfo.treasuryBalance) / 1e18
-  const DaiLendFtmBalance = Number(usePairInfo(DaiLendFtmAddress).pairInfo.treasuryBalance) / 1e18
+  const FtmDaiBalance = Number(usePairInfo(FtmDaiAddress).pairInfo.luxorTreasuryBalance) / 1e18
+  const FtmWlumBalance = Number(usePairInfo(WrappedLumFantomAddress).pairInfo.luxorTreasuryBalance) / 1e18
+  const FtmLendDaiBalance = Number(usePairInfo(FtmLendDaiAddress).pairInfo.luxorTreasuryBalance) / 1e18
+  const DaiLendFtmBalance = Number(usePairInfo(DaiLendFtmAddress).pairInfo.luxorTreasuryBalance) / 1e18
   const FtmDaiValue = FtmDaiBalance * ftmDaiPrice
   const FtmWlumValue = FtmWlumBalance * wLumFtmPrice
   const FtmLendDaiValue = FtmLendDaiBalance * 1

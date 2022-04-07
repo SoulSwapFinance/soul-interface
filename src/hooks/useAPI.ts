@@ -205,7 +205,7 @@ export function useTokenInfo(tokenAddress): { status: string; tokenInfo: T } {
         name: '',
         symbol: '',
         price: '0',
-        treasuryBalance: '0',
+        luxorTreasuryBalance: '0',
         decimals: '18',
         supply: '0',
         mcap: '0',
@@ -281,7 +281,6 @@ export function useUserInfo(user, tokenAddress): { status: string; userInfo: T }
         decimals: '18',
         supply: '0',
         mcap: '0',
-        treasuryBalance: '0',
         img:''
     })  
     useEffect(() => {
@@ -311,7 +310,7 @@ export function usePairInfo(pairAddress): { status: string; pairInfo: T } {
     const [pairInfo, setInfo] = useState<T>({
         address: '',
         supply: '0',
-        treasuryBalance: '0',
+        luxorTreasuryBalance: '0',
         api: ''
     })  
     useEffect(() => {
