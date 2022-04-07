@@ -27,7 +27,6 @@ export default function Pair() {
   // const { i18n } = useLingui()
 
   const pair = useUnderworldPair(router.query.pair as string)
-  if (!pair) return <div />
 
   const { underworldPairInfo } = useUnderworldPairInfo(pair)
   const assetDecimals = Number(underworldPairInfo.assetDecimals)
@@ -40,6 +39,8 @@ export default function Pair() {
   const assetPrice = pair.asset.usd / (10**assetDecimals)
   const userDepositAmount = pair.userAssetFraction / 10**(assetDecimals)
   const userDepositValue = userDepositAmount * assetPrice
+  
+  if (!pair) return <div />
   
   return (
     <PairLayout>
