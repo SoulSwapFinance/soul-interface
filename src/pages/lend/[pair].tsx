@@ -37,23 +37,18 @@ export default function Pair() {
   const collateralSymbol = underworldPairInfo.collateralTicker
   */
   
-  if (!pair) return <div />
-      const assetPrice = pair.asset.usd / (10**pair.asset.tokenInfo.decimals)
-  const userDepositAmount = pair.userAssetFraction / 10**(pair?.asset.tokenInfo.decimals)
-const assetSymbol = pair?.asset.tokenInfo.symbol
-const collateralSymbol = pair?.collateral.tokenInfo.symbol
-const assetDecimals = pair?.asset.tokenInfo.decimals
-const collateralDecimals = pair?.collateral.tokenInfo.decimals
-const oracle = pair?.oracle.address
+if (!pair) return <div />
+  const assetSymbol = pair?.asset.tokenInfo.symbol
+  const collateralSymbol = pair?.collateral.tokenInfo.symbol
+  const assetDecimals = pair?.asset.tokenInfo.decimals
+  const oracle = pair?.oracle.address
 
-const assetPrice = pair.asset.usd / (10**assetDecimals)
-
-const userDepositAmount = pair.userAssetFraction / 10**(assetDecimals)
-
-const userDepositValue = userDepositAmount * assetPrice
-  
-const assetURL = pair?.asset.tokenInfo.logoURI
-const collateralURL = pair?.collateral.tokenInfo.logoURI
+  const assetPrice = pair?.asset.usd / (10**assetDecimals)
+  const userDepositAmount = pair?.userAssetFraction / 10**(assetDecimals)
+  const userDepositValue = userDepositAmount * assetPrice
+    
+  const assetURL = pair?.asset.tokenInfo.logoURI
+  const collateralURL = pair?.collateral.tokenInfo.logoURI
 
   return (
     <PairLayout>
