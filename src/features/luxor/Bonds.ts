@@ -29,7 +29,7 @@ export const AllBonds = [
   {
     pid: 8,
     id: 6,
-    bondAddress: '0x5612d83dfED9B387c925Ac4D19ED3aeDd71004A8',
+    bondAddress: '0xaC64DC47A1fe52458D3418AC7C568Edc3306130a',
     assetName: 'LUX-DAI',
     assetAddress: LUX_DAI,
     token1Address: LUX,
@@ -69,7 +69,8 @@ export const AllBonds = [
   {
     pid: 9,
     id: 7,
-    bondAddress: '0xaC64DC47A1fe52458D3418AC7C568Edc3306130a',
+    bondAddress: 
+    '0x5612d83dfED9B387c925Ac4D19ED3aeDd71004A8',
     assetName: 'LUX-DAI',
     assetAddress: LUX_DAI,
     token1Address: LUX,

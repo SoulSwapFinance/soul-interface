@@ -365,7 +365,7 @@ export function usePairInfo(pairAddress): { status: string; pairInfo: T } {
 // }
 
 export function useUnderworldPairInfo(pairAddress): { status: string; underworldPairInfo: T } {
-    const { account, chainId } = useActiveWeb3React()
+    // const { chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
     const [underworldPairInfo, setInfo] = useState<T>({
         address: '',
@@ -373,6 +373,8 @@ export function useUnderworldPairInfo(pairAddress): { status: string; underworld
         symbol: '',
         supply: '0',
         decimals: '18',
+        interestPerSecond: '0',
+        lastAccrued: '1649306854',
 
         exchangeRate: '0',
 
@@ -409,7 +411,7 @@ export function useUnderworldPairInfo(pairAddress): { status: string; underworld
         setInfo(json as T)
         setStatus('fetched')
       }
-      if (chainId == ChainId.FANTOM) 
+      // if (chainId == ChainId.FANTOM) 
       fetchData()
     }, [])
   
