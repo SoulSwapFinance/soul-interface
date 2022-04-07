@@ -361,19 +361,19 @@ export default function Dashboard() {
     {
         "label": "LIQUIDITY",
         "angle": treasuryLiquidityBalance,
-        "color": "#F5D100",
+        "color": "#FFA300",
         "percent": ((treasuryLiquidityBalance / treasuryBalance) * 100).toFixed()
     },
     {
       "label": "RESERVES",
       "angle": treasuryReserveBalance,
-      "color": "#FFD300",
+      "color": "#FFC300",
       "percent": (((treasuryReserveBalance) / treasuryBalance) * 100).toFixed()
     },
     {
         "label": "INVESTMENTS",
         "angle": treasuryInvestmentBalance,
-        "color": "#FFB300",
+        "color": "#FFE300",
         "percent": (((treasuryInvestmentBalance) / treasuryBalance) * 100).toFixed()
     },
     // {
