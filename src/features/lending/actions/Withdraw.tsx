@@ -30,7 +30,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
   const [value, setValue] = useState('')
   const [pinMax, setPinMax] = useState(false)
 
-  const [underworldApprovalState, approveUnderworldFallback, underworldPermit, onApprove, onCook] = useUnderworldApproveCallback()
+  // const [underworldApprovalState, approveUnderworldFallback, underworldPermit, onApprove, onCook] = useUnderworldApproveCallback()
 
 
   // Calculated
@@ -39,7 +39,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
     // minimum(pair.maxAssetAvailable, pair.currentUserAssetAmount.value)
     pair.maxAssetAvailable.lte(pair.currentUserAssetAmount.value)
       // DEPOSITED AMOUNT - LENT AMOUNT
-      ? pair.userAssetFraction.sub(pair.currentUserLentAmount.value)
+      ? pair.userAssetFraction //.sub(pair.currentUserLentAmount.value)
       : pair.currentUserAssetAmount.value
 
   const displayValue = pinMax ? max.toFixed(pair.asset.tokenInfo.decimals) : value
