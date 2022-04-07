@@ -49,6 +49,8 @@ const collateralSymbol = pair?.collateral.tokenInfo.symbol
 const assetDecimals = pair?.asset.tokenInfo.decimals
 const collateralDecimals = pair?.collateral.tokenInfo.decimals
 const oracle = pair?.oracle.address
+const assetURL = pair?.asset.tokenInfo.logoURI
+const collateralURL = pair?.collateral.tokenInfo.logoURI
 
   return (
     <PairLayout>
