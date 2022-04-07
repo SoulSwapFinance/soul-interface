@@ -28,7 +28,7 @@ export default function Pair() {
 
   const pair = useUnderworldPair(router.query.pair as string)
 
-  const { underworldPairInfo } = useUnderworldPairInfo(pair)
+  /* const { underworldPairInfo } = useUnderworldPairInfo(pair)
   const assetDecimals = Number(underworldPairInfo.assetDecimals)
   const oracle = underworldPairInfo.oracle
   const assetURL = underworldPairInfo.assetLogoURI
@@ -39,20 +39,23 @@ export default function Pair() {
   const assetPrice = pair.asset.usd / (10**assetDecimals)
   const userDepositAmount = pair.userAssetFraction / 10**(assetDecimals)
   const userDepositValue = userDepositAmount * assetPrice
+  */
   
   if (!pair) return <div />
-  
+      const assetPrice = pair.asset.usd / (10**pair.asset.tokenInfo.decimals)
+  const userDepositAmount = pair.userAssetFraction / 10**(pair?.asset.tokenInfo.decimals)
+const assetSymbol = pair?.asset.tokenInfo.symbol
+const collateralSymbol = pair?.collateral.tokenInfo.symbol
+const assetDecimals = pair?.asset.tokenInfo.decimals
+const collateralDecimals = pair?.collateral.tokenInfo.decimals
+const oracle = pair?.oracle.address
+
   return (
     <PairLayout>
       <Head>
-        <title>Lend {assetSymbol} | Soul</title>
-        <meta key="description" name="description" content={`Lend ${assetSymbol} in the Underworld`} />
-        <meta
-          key="twitter:description"
-          name="twitter:description"
-          content={`Lend ${assetSymbol} in the Underworld`}
-        />
-        <meta key="og:description" property="og:description" content={`Lend ${assetSymbol} in the Underworld`} />
+              <title>Lend {pair.asset.tokenInfo.symbol} | Soul</title>
+        <meta key="description" name="description" content={`Lend ${pair.asset.tokenInfo.symbol} in the Underworld`} />
+        <meta key="og:description" property="og:description" content={`Lend ${pair.asset.tokenInfo.symbol} in the Underworld`} />
       </Head>
       <Card
         className="bg-dark-900"
@@ -159,12 +162,20 @@ const PairLayout = ({ children }) => {
   const router = useRouter()
   // const { i18n } = useLingui()
   const pair = useUnderworldPair(router.query.pair as string)
-  const { underworldPairInfo } = useUnderworldPairInfo(pair)
-  const assetSymbol = underworldPairInfo.assetTicker
-  const oracle = underworldPairInfo.oracle
-  const assetDecimals = Number(underworldPairInfo.assetDecimals)
-  const interestPerSecond = underworldPairInfo.interestPerSecond
-  const interestPerYear = Number(interestPerSecond) * 86_400 * 365 / 1e18
+  // const { underworldPairInfo } = useUnderworldPairInfo(pair)
+  // const assetSymbol = underworldPairInfo.assetTicker
+  // const oracle = underworldPairInfo.oracle
+  // const assetDecimals = Number(underworldPairInfo.assetDecimals)
+  // const interestPerSecond = underworldPairInfo.interestPerSecond
+  // const interestPerYear = Number(interestPerSecond) * 86_400 * 365 / 1e18
+  
+  const assetDecimals = pair?.asset.tokenInfo.decimals
+  
+  const assetSymbol = pair?.asset.tokenInfo.symbol
+  
+  const oracle = pair?.oracle.name
+  
+  const interestPerYear = pair?.interestPerYear.string
   console.log('interestPerYear:%s', interestPerYear)
 
   return pair ? (
