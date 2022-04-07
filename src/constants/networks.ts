@@ -2,6 +2,7 @@ import { ChainId, WNATIVE_ADDRESS } from '../sdk'
 
 const Fantom = '/images/networks/fantom-network.jpg'
 const Mainnet = '/images/networks/mainnet-network.jpg'
+const Telos = '/images/networks/Telos.jpg'
 const Bsc = '/images/networks/bsc.png'
 
 // const Arbitrum = '/images/networks/arbitrum-network.jpg'
@@ -21,9 +22,10 @@ const Bsc = '/images/networks/bsc.png'
 
 export const NETWORK_ICON = {
   [ChainId.ETHEREUM]: Mainnet,
+  [ChainId.TELOS]: Telos,
   [ChainId.BSC]: Bsc,
   [ChainId.FANTOM]: Fantom,
-  [ChainId.FANTOM_TESTNET]: Fantom,
+  // [ChainId.FANTOM_TESTNET]: Fantom,
   // [ChainId.ROPSTEN]: Ropsten,
   // [ChainId.RINKEBY]: Rinkeby,
   // [ChainId.GÖRLI]: Goerli,
@@ -47,9 +49,10 @@ export const NETWORK_ICON = {
 
 export const NETWORK_LABEL: { [chainId in ChainId]?: string } = {
   [ChainId.ETHEREUM]: 'Ethereum',
+  [ChainId.TELOS]: 'Telos',
   [ChainId.BSC]: 'Binance',
   [ChainId.FANTOM]: 'Fantom',
-  [ChainId.FANTOM_TESTNET]: 'Fantom Testnet',
+  // [ChainId.FANTOM_TESTNET]: 'Fantom Testnet',
   // [ChainId.RINKEBY]: 'Rinkeby',
   // [ChainId.ROPSTEN]: 'Ropsten',
   // [ChainId.GÖRLI]: 'Görli',
@@ -80,6 +83,7 @@ export const NATIVE_TOKEN_TICKER = {
 
 export const NATIVE_WRAPPED_TOKEN_ADDRESS = {
   [ChainId.ETHEREUM]: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+  [ChainId.BSC]: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
   [ChainId.TELOS]: WNATIVE_ADDRESS[40],
   [ChainId.FANTOM]: WNATIVE_ADDRESS[250],
 }

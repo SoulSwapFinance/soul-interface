@@ -224,8 +224,9 @@ const NetworkModal: FC = () => {
           {[
             ChainId.ETHEREUM,
             ChainId.FANTOM,
+            ChainId.TELOS,
             ChainId.BSC,
-            ChainId.FANTOM_TESTNET,
+            // ChainId.FANTOM_TESTNET,
           ].map((key: ChainId, i: number) => {
             if (chainId === key) {
               return (

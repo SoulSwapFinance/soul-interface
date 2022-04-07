@@ -67,7 +67,7 @@ export default function Add() {
       (currencyB && currencyEquals(currencyB, WNATIVE[chainId])))
   )
 
-  const toggleWalletModal = useWalletModalToggle() // toggle wallet when disconnected
+  // const toggleWalletModal = useWalletModalToggle() // toggle wallet when disconnected
 
   const [isExpertMode] = useExpertModeManager()
 
