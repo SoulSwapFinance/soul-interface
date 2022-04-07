@@ -29,7 +29,7 @@ export default function Pair() {
   const pair = useUnderworldPair(router.query.pair as string)
   if (!pair) return <div />
 
-  const { underworldPairInfo } = useUnderworldPairInfo(pair.address)
+  const { underworldPairInfo } = useUnderworldPairInfo(pair)
   const assetDecimals = Number(underworldPairInfo.assetDecimals)
   const oracle = underworldPairInfo.oracle
   const assetURL = underworldPairInfo.assetLogoURI
@@ -158,7 +158,7 @@ const PairLayout = ({ children }) => {
   const router = useRouter()
   // const { i18n } = useLingui()
   const pair = useUnderworldPair(router.query.pair as string)
-  const { underworldPairInfo } = useUnderworldPairInfo(pair.address)
+  const { underworldPairInfo } = useUnderworldPairInfo(pair)
   const assetSymbol = underworldPairInfo.assetTicker
   const oracle = underworldPairInfo.oracle
   const assetDecimals = Number(underworldPairInfo.assetDecimals)
