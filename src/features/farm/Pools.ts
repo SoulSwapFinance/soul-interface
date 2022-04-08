@@ -2,6 +2,32 @@ import { tokens } from './Tokens'
 
 export const InactivePids = [
   {
+    // 500
+    pid: 46,
+    token1: 'SOUL',
+    token2: 'LUX',
+    lpSymbol: 'SOUL-LUX',
+    lpAddresses: {
+      4002: '',
+      250: '0x475a63154C3e85ac0F2CB453f0b5c63e4370333c',
+    },
+    token1Address: tokens.SOUL,
+    token2Address: tokens.LUX,
+  },
+  {
+    // 100
+    pid: 12,
+    token1: 'FTM',
+    token2: 'REAPER',
+    lpSymbol: 'FTM-REAPER',
+    lpAddresses: {
+      4002: '',
+      250: '0x7D776489372c8AFC0A1941a1335C9e9f90e0116a',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.REAPER,
+  },
+  {
     // 600
     pid: 44,
     token1: 'FTM',
@@ -175,19 +201,6 @@ export const InactivePids = [
 
 export const AllPids = [
   {
-    // 500
-    pid: 46,
-    token1: 'SOUL',
-    token2: 'LUX',
-    lpSymbol: 'SOUL-LUX',
-    lpAddresses: {
-      4002: '',
-      250: '0x475a63154C3e85ac0F2CB453f0b5c63e4370333c',
-    },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.LUX,
-  },
-  {
     // 1600
     pid: 1,
     token1: 'SOUL',
@@ -199,32 +212,6 @@ export const AllPids = [
     },
     token1Address: tokens.SOUL,
     token2Address: tokens.FTM,
-  },
-  {
-    // 1200
-    pid: 36,
-    token1: 'SOUL',
-    token2: 'WETH',
-    lpSymbol: 'SOUL-ETH',
-    lpAddresses: {
-      4002: '',
-      250: '0x778F0d5515A3E78D1DD191f30835420c0275bde1',
-    },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.WETH,
-  },
-  {
-    // 1200
-    pid: 37,
-    token1: 'SOUL',
-    token2: 'WBTC',
-    lpSymbol: 'SOUL-BTC',
-    lpAddresses: {
-      4002: '',
-      250: '0xDA9D9CB5482EFD10839A676Fe99f05E41F57D885',
-    },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.WBTC,
   },
   {
     // 600
@@ -306,19 +293,6 @@ export const AllPids = [
   },
   {
     // 300
-    pid: 39,
-    token1: 'FTM',
-    token2: 'ICE',
-    lpSymbol: 'FTM-ICE',
-    lpAddresses: {
-      4002: '',
-      250: '0x944Aa704eDaF75dAD30832C6d0f111506a48b1c8',
-    },
-    token1Address: tokens.FTM,
-    token2Address: tokens.ICE,
-  },
-  {
-    // 300
     pid: 38,
     token1: 'FTM',
     token2: 'FUSD',
@@ -355,21 +329,7 @@ export const AllPids = [
     },
     token1Address: tokens.FTM,
     token2Address: tokens.USDC,
-  },
-  {
-    // 400
-    pid: 19,
-    token1: 'FTM',
-    token2: 'MIM',
-    lpSymbol: 'FTM-MIM',
-    lpAddresses: {
-      4002: '',
-      250: '0x34990FC1e6e3169DCf23624049be29782AFc81bd',
-    },
-    token1Address: tokens.FTM,
-    token2Address: tokens.MIM,
-  },
-  
+  },  
   {
     // 600
     pid: 18,
@@ -396,7 +356,6 @@ export const AllPids = [
     token1Address: tokens.FTM,
     token2Address: tokens.WETH,
   },
-  
   {
     // 600
     pid: 13,
@@ -425,19 +384,6 @@ export const AllPids = [
   },
   {
     // 300
-    pid: 40,
-    token1: 'FTM',
-    token2: 'ANY',
-    lpSymbol: 'FTM-ANY',
-    lpAddresses: {
-      4002: '',
-      250: '0xf4199594986E35c49f20beaaCD0f3529D18BF08E',
-    },
-    token1Address: tokens.FTM,
-    token2Address: tokens.ANY,
-  },
-  {
-    // 300
     pid: 41,
     token1: 'FTM',
     token2: 'CRV',
@@ -448,19 +394,6 @@ export const AllPids = [
     },
     token1Address: tokens.FTM,
     token2Address: tokens.CRV,
-  },
-  {
-    // 300
-    pid: 42,
-    token1: 'FTM',
-    token2: 'SPELL',
-    lpSymbol: 'FTM-SPELL',
-    lpAddresses: {
-      4002: '',
-      250: '0x3d24C65201566f17d3Ac48C746919788d27Ee743',
-    },
-    token1Address: tokens.FTM,
-    token2Address: tokens.SPELL,
   },
   {
     // 400
@@ -527,19 +460,7 @@ export const AllPids = [
     token1Address: tokens.FTM,
     token2Address: tokens.GRIM,
   },
-  {
-    // 100
-    pid: 12,
-    token1: 'FTM',
-    token2: 'REAPER',
-    lpSymbol: 'FTM-REAPER',
-    lpAddresses: {
-      4002: '',
-      250: '0x7D776489372c8AFC0A1941a1335C9e9f90e0116a',
-    },
-    token1Address: tokens.FTM,
-    token2Address: tokens.REAPER,
-  },
+
   {
     // 200
     pid: 9,
@@ -894,202 +815,4 @@ export const FantiesPids = [
     token2Address: tokens.REAPER,
   },
 
-]
-
-export const SeancePids = [
-
-  {
-    // 600
-    pid: 5,
-    token1: 'SEANCE',
-    token2: 'SOUL',
-    lpSymbol: 'SEANCE-SOUL',
-    lpAddresses: {
-      4002: '',
-      250: '0x8f1E15cD3d5a0bb85B8189d5c6B61BB64398E19b',
-    },
-    token1Address: tokens.SEANCE,
-    token2Address: tokens.SOUL,
-  },
-  {
-    // 600
-    pid: 10,
-    token1: 'SEANCE',
-    token2: 'FTM',
-    lpSymbol: 'SEANCE-FTM',
-    lpAddresses: {
-      4002: '',
-      250: '0x8542bEAC34282aFe5Bb6951Eb6DCE0B3783b7faB',
-    },
-    token1Address: tokens.SEANCE,
-    token2Address: tokens.FTM,
-  },
-
-  {
-    // 400
-    pid: 27,
-    token1: 'SEANCE',
-    token2: 'UNIDX',
-    lpSymbol: 'SEANCE-UNIDEX',
-    lpAddresses: {
-      4002: '',
-      250: '0x578c7B9A45D9e55246d3036D48db262b9B3CA48e',
-    },
-    token1Address: tokens.SEANCE,
-    token2Address: tokens.UNIDX,
-  },  
-  {
-    // 400
-    pid: 7,
-    token1: 'SEANCE',
-    token2: 'USDC',
-    lpSymbol: 'SEANCE-USDC',
-    lpAddresses: {
-      4002: '',
-      250: '0x98C678d3C7ebeD4a36B84666700d8b5b5Ddc1f79',
-    },
-    token1Address: tokens.SEANCE,
-    token2Address: tokens.USDC,
-  },
-
-]
-
-export const SoulPids = [
-  {
-    // 900
-    pid: 46,
-    token1: 'SOUL',
-    token2: 'LUX',
-    lpSymbol: 'SOUL-LUX',
-    lpAddresses: {
-      4002: '',
-      250: '0x475a63154C3e85ac0F2CB453f0b5c63e4370333c',
-    },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.LUX,
-  },
-  {
-    // 600
-    pid: 5,
-    token1: 'SOUL',
-    token2: 'SEANCE',
-    lpSymbol: 'SOUL-SEANCE',
-    lpAddresses: {
-      4002: '',
-      250: '0x8f1E15cD3d5a0bb85B8189d5c6B61BB64398E19b',
-    },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.SEANCE,
-  },
-  {
-    // 1600
-    pid: 1,
-    token1: 'SOUL',
-    token2: 'FTM',
-    lpSymbol: 'SOUL-FTM',
-    lpAddresses: {
-      4002: '0x10c0AFd7C58916C4025d466E11850c7D79219277',
-      250: '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57',
-    },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.FTM,
-  },
-  {
-    // 1200
-    pid: 36,
-    token1: 'SOUL',
-    token2: 'WETH',
-    lpSymbol: 'SOUL-ETH',
-    lpAddresses: {
-      4002: '',
-      250: '0x778f0d5515a3e78d1dd191f30835420c0275bde1',
-    },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.WETH,
-  },
-  {
-    // 1200
-    pid: 37,
-    token1: 'SOUL',
-    token2: 'WBTC',
-    lpSymbol: 'SOUL-BTC',
-    lpAddresses: {
-      4002: '',
-      250: '0xda9d9cb5482efd10839a676fe99f05e41f57d885',
-    },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.WBTC,
-  },
-
-  {
-    // 600
-    pid: 22,
-    token1: 'SOUL',
-    token2: 'USDC',
-    lpSymbol: 'SOUL-USDC',
-    lpAddresses: {
-      4002: '',
-      250: '0xC0A301f1E5E0Fe37a31657e8F60a41b14d01B0Ef',
-    },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.USDC,
-  }
-]
-
-export const StablePids = [
-  {
-    // 200
-    pid: 9,
-    token1: 'USDC',
-    token2: 'fUSDT',
-    lpSymbol: 'USDC-fUSDT',
-    lpAddresses: {
-      4002: '',
-      250: '0x298c12d6d9d6746dd0ef0a89421288f52d5566ef',
-    },
-    token1Address: tokens.USDC,
-    token2Address: tokens.fUSDT,
-  },
-  {
-    // 200
-    pid: 6,
-    token1: 'USDC',
-    token2: 'FUSD',
-    lpSymbol: 'USDC-FUSD',
-    lpAddresses: {
-      4002: '',
-      250: '0xD5F5E2638d636A98eD4aAEBfd2045441316e0c08',
-    },
-    token1Address: tokens.USDC,
-    token2Address: tokens.FUSD,
-  },
-
-  {
-    // 200
-    pid: 21,
-    token1: 'USDC',
-    token2: 'DAI',
-    lpSymbol: 'USDC-DAI',
-    lpAddresses: {
-      4002: '',
-      250: '0x406de3a93f6b4179e3b21a3d81226b43e1918fd9',
-    },
-    token1Address: tokens.USDC,
-    token2Address: tokens.DAI,
-  },
-
-  {
-    // 200
-    pid: 43,
-    token1: 'fUSDT',
-    token2: 'DAI',
-    lpSymbol: 'fUSDT-DAI',
-    lpAddresses: {
-      4002: '',
-      250: '0xB38508Ed92C4878daE7652d8d46cAE46eEa8aA9A',
-    },
-    token1Address: tokens.fUSDT,
-    token2Address: tokens.DAI,
-  },
-  
 ]

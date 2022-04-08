@@ -7,11 +7,11 @@ import {
   Row,
   StakeContentWrapper,
   TokenPairBox,
-  StakeItemBox,
+  FarmItemBox,
   Text
 } from "./Styles";
 
-export default function StakeKey() {
+export function Active() {
   return (
     <>
       <Wrap
@@ -21,31 +21,31 @@ export default function StakeKey() {
         alignContent="center"
       >
         <FarmContainer>
-          <Row padding=".25rem 2rem">
+          <Row padding=".25rem 1rem">
             <StakeContentWrapper>
               <TokenPairBox>
                 <Wrap>
                   <Text padding ="0" fontSize=".8" color="#bbb">
-                  TOKEN
+                  ASSET
                   </Text>
                 </Wrap>
               </TokenPairBox>
 
-              <StakeItemBox>
+              <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#bbb">
-                % APY
+                % APR
                 </Text>
-              </StakeItemBox>
+              </FarmItemBox>
 
-              <StakeItemBox desktopOnly={true}>
+              <FarmItemBox desktopOnly={true}>
                 <Text padding="0" fontSize=".8" color="#bbb">
-                EARNED
+                YIELD
                 </Text>
-              </StakeItemBox>
+              </FarmItemBox>
 
               {/* <HideOnMobile> */}
                 <Text padding="0" fontSize=".8" color="#bbb">
-                  TVL
+                TVL
                 </Text>
               {/* </HideOnMobile> */}
             </StakeContentWrapper>
@@ -54,6 +54,47 @@ export default function StakeKey() {
           {/* <Button variant={'link'} color={'purple'} className="absolute top-[5%] right-[10%]"> */}
  
               {/* </Button> */}
+        </FarmContainer>
+      </Wrap>
+    </>
+  );
+};
+
+export function Inactive() {
+  return (
+    <>
+      <Wrap
+        padding="0"
+        display="flex"
+        justifyContent="center"
+        alignContent="center"
+      >
+        <FarmContainer>
+          <Row padding=".25rem 1rem">
+            <StakeContentWrapper>
+              <TokenPairBox>
+
+                <Wrap>
+                  <Text padding ="0" fontSize=".8" color="#bbb">
+                    ASSET
+                  </Text>
+                </Wrap>
+
+              </TokenPairBox>
+
+              <FarmItemBox desktopOnly={true}>
+                <Text padding="0" fontSize=".8" color="#bbb">
+                  YIELD
+                </Text>
+              </FarmItemBox>
+
+                <Text padding="0" fontSize=".8" color="#bbb">
+                  TVL
+                </Text>
+            </StakeContentWrapper>
+            
+          </Row>
+
         </FarmContainer>
       </Wrap>
     </>

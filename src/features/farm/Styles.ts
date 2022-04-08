@@ -86,7 +86,7 @@ export const StakeContentWrapper = styled.div`
   }
 `
 
-export const StakeItemBox = styled.div`
+export const FarmItemBox = styled.div`
   width: ${({ width }) => (width ? `${width}` : `100px`)};
   display: grid;
   justify-content: center;
@@ -94,14 +94,14 @@ export const StakeItemBox = styled.div`
 
 `
 
-export const StakeItemHeading = styled.p`
+export const FarmItemHeading = styled.p`
   font-weight: normal;
   font-size: 0.8rem;
   color: white;
   align-items: center;
 `
 
-export const StakeItem = styled.h2`
+export const FarmItem = styled.h2`
   font-size: 1.5rem;
   color: white;
 `
