@@ -38,7 +38,7 @@ const useMenu: UseBar = () => {
       key: 'swap',
       title: i18n._(t`Exchange`),
       link: '/swap',
-      icon: <SwitchVerticalIcon width={20} className="text-white" />,
+      icon: <SwitchVerticalIcon width={20} className="text-dark-600" />,
     }
   
  // If AMM is enabled, replace swap button with a submenu under trade
@@ -135,14 +135,14 @@ const useMenu: UseBar = () => {
         key: 'pool',
         title: i18n._(t`Liquidity`),
         items: poolMenu,
-        icon: <PoolIcon width={20} className="text-blue" />,
+        icon: <PoolIcon width={20} className="text-dark-600" />,
       })
 
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const farmItems = {
         key: 'SoulSwap',
         title: i18n._(t`SoulSwap`),
-        icon: <CurrencyDollarIcon width={20} className="text-deepPurple filter" />,
+        icon: <CurrencyDollarIcon width={20} className="text-dark-600" />,
         items: [
           {
             key: 'farm',
@@ -188,7 +188,7 @@ const useMenu: UseBar = () => {
       const learnItems = {
         key: 'Luxor',
         title: i18n._(t`Luxor`),
-        icon: <SunIcon width={20} className="rotate-90 text-yellow filter" />,
+        icon: <SunIcon width={20} className="rotate-90 text-dark-600" />,
         items: [
           {
             key: 'luxor-dashboard',
@@ -240,7 +240,7 @@ const useMenu: UseBar = () => {
        mainItems.push({
          key: 'lending',
          title: i18n._(t`Lending`),
-         icon: <SwitchVerticalIcon width={20} className="rotate-90 text-pink filter" />,
+         icon: <SwitchVerticalIcon width={20} className="rotate-90 text-dark-600" />,
          items: [
            {
              key: 'lend',
@@ -277,7 +277,7 @@ const useMenu: UseBar = () => {
       mainItems.push({
         key: 'analytics',
         title: i18n._(t`Analytics`),
-        icon: <TrendingUpIcon width={20} className="text-red" />,
+        icon: <TrendingUpIcon width={20} className="text-dark-600" />,
         items: [
           {
             key: 'wallet',
@@ -308,7 +308,7 @@ const useMenu: UseBar = () => {
       key: 'explore',
       title: i18n._(t`Explore`),
       link: '/explore',
-      icon: <GlobeIcon width={20} className="text-green" />,
+      icon: <GlobeIcon width={20} className="text-dark-600" />,
     }
       mainItems.push(exploreMenu)
 

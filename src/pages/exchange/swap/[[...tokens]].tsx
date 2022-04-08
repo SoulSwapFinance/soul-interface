@@ -2,7 +2,7 @@ import { ArrowDownIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Currency, JSBI, Token, Trade as V2Trade, TradeType } from 'sdk'
-import Banner from 'components/Banner'
+import { Global } from 'components/Banner'
 import { Button } from 'components/Button'
 import RecipientField from 'components/RecipientField'
 import Typography from 'components/Typography'
@@ -32,23 +32,8 @@ import { useDefaultsFromURLSearch, useDerivedSwapInfo, useSwapActionHandlers, us
 import { useExpertModeManager, useUserOpenMev, useUserSingleHopOnly } from 'state/user/hooks'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
-
-import { fetchAPI } from '../../../lib/api'
 import Chart from 'components/Chart'
 import NavLink from 'components/NavLink'
-
-export async function getServerSideProps() {
-  try {
-    const { data } = await fetchAPI('/banners?populate=image')
-    return {
-      props: { banners: data || [] },
-    }
-  } catch (e) {
-    return {
-      props: { banners: [] },
-    }
-  }
-}
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -56,6 +41,7 @@ const Swap = () => {
   const { account } = useActiveWeb3React()
   const defaultTokens = useAllTokens()
   const [isExpertMode] = useExpertModeManager()
+
   const { independentField, typedValue, recipient } = useSwapState()
   const { v2Trade, parsedAmount, currencies, inputError: swapInputError, allowedSlippage, to } = useDerivedSwapInfo()
   const [loadedInputCurrency, loadedOutputCurrency] = [
@@ -348,7 +334,7 @@ const Swap = () => {
 
   return (
     <>
-
+      <Global />
       <ConfirmSwapModal
         isOpen={showConfirm}
         trade={trade}
@@ -400,14 +386,6 @@ const Swap = () => {
             </div>
           </div>
           <SwapAssetPanel
-            // walletToggle={(props) => (
-            //   <SwapAssetPanel.Switch
-            //     id={`switch-classic-withdraw-from-0}`}
-            //     {...props}
-            //     label={i18n._(t`Pay from`)}
-            //     onChange={() => dispatch(setFromCoffinBalance(!fromCoffinBalance))}
-            //   />
-            // )}
             spendFromWallet={true}
             header={(props) => (
               <SwapAssetPanel.Header
@@ -560,7 +538,6 @@ const Swap = () => {
           </div>
         </div>
       </SwapLayoutCard>
-      {/* <Banner banners={banners} /> */}
     </>
   )
 }
