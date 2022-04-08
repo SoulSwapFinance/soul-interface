@@ -498,3 +498,134 @@ export function useSorInfo(): { status: string; sorInfo: T } {
   
     return { status, sorInfo }
 }
+
+export function useSummonerInfo(): { status: string; summonerInfo: T } {
+  const { chainId } = useActiveWeb3React()
+  const [status, setStatus] = useState<string>('idle')
+  const [summonerInfo, setInfo] = useState<T>({
+      address: '',
+      dailySoul: '0',
+      soulPerSecond: '0',
+      soulPerYear: '0',
+      startRate: '0',
+      totalAllocPoint: '0',
+      weight: '0',
+      weightTotal: '0',
+      weightShare: '0',
+      api: 'https://api.soulswap.finance',
+      ftmscan: 'https://ftmscan.com',
+  })  
+  useEffect(() => {
+    const fetchData = async () => {
+      setStatus('fetching')
+      const response = await fetch(`${BASE_URL}/summoner`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Referrer-Policy': 'no-referrer',
+        },
+      })
+      const json = await response.json()
+      setInfo(json as T)
+      setStatus('fetched')
+    }
+    if (chainId == ChainId.FANTOM) 
+    fetchData()
+  }, [])
+
+  return { status, summonerInfo }
+}
+
+export function useSummonerPoolInfo(pid): { status: string; summonerPoolInfo: T } {
+  const { chainId } = useActiveWeb3React()
+  const [status, setStatus] = useState<string>('idle')
+  const [summonerPoolInfo, setInfo] = useState<T>({
+      pid: '',
+
+      lpAddress: '',
+      token0Address: '',
+      token1Address: '',
+      
+      allocPoint: '0',
+      allocShare: '0',
+
+      status: '',
+      pairType: '',
+
+      token0Balance: '0',
+      token1Balance: '0',
+      lpBalance: '0',
+
+      lpPrice: '0',
+      annualRewardsValue: '0',
+
+      tvl: '0',
+      apr: '0',
+     
+      api: 'https://api.soulswap.finance',
+      ftmscan: 'https://ftmscan.com',
+  })  
+  useEffect(() => {
+    const fetchData = async () => {
+      setStatus('fetching')
+      const response = await fetch(`${BASE_URL}/summoner/${pid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Referrer-Policy': 'no-referrer',
+        },
+      })
+      const json = await response.json()
+      setInfo(json as T)
+      setStatus('fetched')
+    }
+    if (chainId == ChainId.FANTOM) 
+    fetchData()
+  }, [])
+
+  return { status, summonerPoolInfo }
+}
+
+export function useSummonerUserInfo(pid): { status: string; summonerUserInfo: T } {
+  const { account, chainId } = useActiveWeb3React()
+  const [status, setStatus] = useState<string>('idle')
+  const [summonerUserInfo, setInfo] = useState<T>({
+      userAddress: account,
+      pairAddress: '',
+      stakedBalance: '0',
+      stakedValue: '0',
+      pendingSoul: '0',
+      pendingValue: '0',
+      lpPrice: '0',
+
+      userDelta: '0',
+      timeDelta: '0',
+      firstDepositTime: '0',
+      lastDepositTime: '0',
+      secondsRemaining: '0',
+      rewardDebtAtTimes: '0',
+      currentRate: '0',
+     
+      api: 'https://api.soulswap.finance',
+      ftmscan: 'https://ftmscan.com',
+  })  
+  useEffect(() => {
+    const fetchData = async () => {
+      setStatus('fetching')
+      const response = await fetch(`${BASE_URL}/summoner/users/${account}/${pid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Referrer-Policy': 'no-referrer',
+        },
+      })
+      const json = await response.json()
+      setInfo(json as T)
+      setStatus('fetched')
+    }
+    if (chainId == ChainId.FANTOM) 
+    fetchData()
+  }, [])
+
+  return { status, summonerUserInfo }
+}
