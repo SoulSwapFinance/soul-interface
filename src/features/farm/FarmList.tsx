@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
-import FarmHeader from '../../features/farm/Header'
+// import FarmHeader from '../../features/farm/Header'
 import FarmKey from './FarmKey'
 import FarmRowRender from './FarmRowRender'
 import { AllPids } from './Pools'
@@ -23,7 +23,7 @@ const FarmList = () => {
 
   return (
     <>
-      <FarmHeader/>
+      {/* <FarmHeader/> */}
       <FarmKey />
       <>{farmList}</>
       <br />
