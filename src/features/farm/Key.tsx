@@ -5,7 +5,7 @@ import {
   Wrap,
   FarmContainer,
   Row,
-  StakeContentWrapper,
+  FarmContentWrapper,
   TokenPairBox,
   FarmItemBox,
   Text
@@ -21,8 +21,8 @@ export function Active() {
         alignContent="center"
       >
         <FarmContainer>
-          <Row padding=".25rem 1rem">
-            <StakeContentWrapper>
+          <Row padding=".25rem .75rem">
+            <FarmContentWrapper>
               <TokenPairBox>
                 <Wrap>
                   <Text padding ="0" fontSize=".8" color="#bbb">
@@ -33,7 +33,7 @@ export function Active() {
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#bbb">
-                % APR
+                % RETURN
                 </Text>
               </FarmItemBox>
 
@@ -48,7 +48,7 @@ export function Active() {
                 TVL
                 </Text>
               {/* </HideOnMobile> */}
-            </StakeContentWrapper>
+            </FarmContentWrapper>
             
           </Row>
           {/* <Button variant={'link'} color={'purple'} className="absolute top-[5%] right-[10%]"> */}
@@ -62,20 +62,20 @@ export function Active() {
 
 export function Inactive() {
   return (
-    <>
-      <Wrap
+    <div className="flex justify-between justify-center text-center">
+      {/* <Wrap
         padding="0"
         display="flex"
         justifyContent="center"
         alignContent="center"
-      >
+      > */}
         <FarmContainer>
-          <Row padding=".25rem 1rem">
-            <StakeContentWrapper>
+          <Row padding=".25rem .75rem">
+            <FarmContentWrapper>
               <TokenPairBox>
 
                 <Wrap>
-                  <Text padding ="0" fontSize=".8" color="#bbb">
+                  <Text padding ="0" fontSize=".9" color="#bbb">
                     ASSET
                   </Text>
                 </Wrap>
@@ -83,20 +83,20 @@ export function Inactive() {
               </TokenPairBox>
 
               <FarmItemBox desktopOnly={true}>
-                <Text padding="0" fontSize=".8" color="#bbb">
-                  YIELD
+                <Text padding="0" fontSize=".9" color="#bbb">
+                  PENDING
                 </Text>
               </FarmItemBox>
 
-                <Text padding="0" fontSize=".8" color="#bbb">
+                <Text padding="0" fontSize=".9" color="#bbb">
                   TVL
                 </Text>
-            </StakeContentWrapper>
-            
+            </FarmContentWrapper>
+
           </Row>
 
         </FarmContainer>
-      </Wrap>
-    </>
+      {/* </Wrap> */}
+    </div>
   );
 };

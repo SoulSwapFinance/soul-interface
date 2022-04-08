@@ -71,7 +71,7 @@ export const Row = styled.div`
     }
   `
 
-export const StakeContentWrapper = styled.div`
+export const FarmContentWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -107,6 +107,13 @@ export const FarmItem = styled.h2`
 `
 
 export const TokenPairBox = styled.div`
+  width: 100px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+`
+
+export const InactiveTokenPairBox = styled.div`
   width: 100px;
   display: flex;
   justify-content: left;

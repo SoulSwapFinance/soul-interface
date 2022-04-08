@@ -4,32 +4,27 @@ import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
 // import FarmHeader from '../../features/farm/Header'
 import { Active, Inactive } from './Key'
-import { ActiveRow } from './Row'
-import { AllPids, InactivePids } from './Pools'
+import { ActiveRow, InactiveRow } from './Row'
+import { ActivePools, InactivePools } from './Pools'
+import { Button } from 'components/Button'
 
-const FarmList = () => {
+export const FarmList = () => {
   const { chainId } = useActiveWeb3React() // account
 
-  const farmList = AllPids.map((farm) => (
+  const farmList = ActivePools.map((farm) => (
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
-      // lpSymbol={farm.lpSymbol}
       lpToken={farm.lpAddresses[chainId]}
-      // token1={farm.token1}
-      // token2={farm.token2}
       farm={farm}
     />
   ))
 
-  const inactiveList = InactivePids.map((farm) => (
-    <ActiveRow
+  const inactiveList = InactivePools.map((farm) => (
+    <InactiveRow
       key={farm.pid}
       pid={farm.pid}
-      // lpSymbol={farm.lpSymbol}
       lpToken={farm.lpAddresses[chainId]}
-      // token1={farm.token1}
-      // token2={farm.token2}
       farm={farm}
     />
   ))
@@ -40,9 +35,11 @@ const FarmList = () => {
       <Active />
       <>{farmList}</>
       <br />
-      <Typography className="text-center text-3xl text-dark-600 mb-2 mt-1">
+      <Button varient="filled" color="blue" className="mb-5">
+      <Typography className="text-center text-3xl text-black mb-2 mt-1">
         Retired Farms
       </Typography>
+      </Button>
       <Inactive />
       <>{inactiveList}</>
     </>
