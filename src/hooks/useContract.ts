@@ -23,6 +23,7 @@ import {
   SOR_ADDRESS,
   LUX_TREASURY_ADDRESS,
   SOR_STAKING_REWARDS_ADDRESS,
+  SUMMONER_ASSISTANT_ADDRESS,
 } from '../constants/addresses'
 import {
   ARGENT_WALLET_DETECTOR_ABI,
@@ -108,6 +109,7 @@ import SEANCE_ABI from '../constants/abis/soulswap/seance.json' // 28 JUL
 import ATOMIC_SWAP_ABI from '../constants/abis/soulswap/atomic-swap.json'
 import LAUNCHPAD_ABI from '../constants/abis/soulswap/launchpad.json'
 import SUMMONER_HELPER_ABI from '../constants/abis/soulswap/helper.json'
+import SUMMONER_ASSISTANT_ABI from '../constants/abis/soulswap/assistant.json' 
 import PRICE_HELPER_ABI from '../constants/abis/soulswap/pricehelper.json'
 import BORING_HELPER_ABI from '../constants/abis/soulswap/boring-helper.json'
 import HARVEST_HELPER_ABI from '../constants/abis/soulswap/harvest-helper.json'
@@ -443,6 +445,11 @@ export function useFactoryContract(): Contract | null {
 export function useHelperContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && '0xa224a5D96E58E3dae89D0e4775444A329E67774c', SUMMONER_HELPER_ABI, withSignerIfPossible)
+}
+
+export function useSummonerAssistantContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SUMMONER_ASSISTANT_ADDRESS[chainId], SUMMONER_ASSISTANT_ABI, withSignerIfPossible)
 }
 
 export function useLockerContract(withSignerIfPossible?: boolean): Contract | null {

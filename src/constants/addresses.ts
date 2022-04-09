@@ -119,6 +119,14 @@ export const CLAIM_ADDRESS: AddressMap = {
   [ChainId.FANTOM_TESTNET]: '',
 }
 
+export const SUMMONER_ASSISTANT_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x650e9c6A3c774be0A038294f57C44Fe51E9630d4',
+  [ChainId.FANTOM_TESTNET]: '',
+}
+
 export const SUMMONER_HELPER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',

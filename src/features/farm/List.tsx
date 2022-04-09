@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
 // import FarmHeader from '../../features/farm/Header'
-import { Active, Inactive } from './Key'
-import { ActiveRow, InactiveRow } from './Row'
-import { ActivePools, InactivePools } from './Pools'
+import { Active } from './Key'
+import { ActiveRow } from './Row'
+import { ActivePools } from './Pools'
 import { Button } from 'components/Button'
 
 export const FarmList = () => {
@@ -20,28 +20,11 @@ export const FarmList = () => {
     />
   ))
 
-  const inactiveList = InactivePools.map((farm) => (
-    <InactiveRow
-      key={farm.pid}
-      pid={farm.pid}
-      lpToken={farm.lpAddresses[chainId]}
-      farm={farm}
-    />
-  ))
-
   return (
     <>
       {/* <FarmHeader/> */}
       <Active />
       <>{farmList}</>
-      <br />
-      <Button varient="filled" color="blue" className="mb-5">
-      <Typography className="text-center text-3xl text-black mb-2 mt-1">
-        Retired Farms
-      </Typography>
-      </Button>
-      <Inactive />
-      <>{inactiveList}</>
     </>
   )
 }

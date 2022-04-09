@@ -76,7 +76,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
     // fetchYearlyRewards,
     fetchUserLpTokenAllocInBond,
     fetchBondStats,
-    usdcPrice,
+    // usdcPrice,
     mint,
     deposit,
     pendingSoul,
@@ -88,9 +88,9 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const [showing, setShowing] = useState(false)
 
   const [approved, setApproved] = useState(false)
-  const [confirmed, setConfirmed] = useState(false)
+  // const [confirmed, setConfirmed] = useState(false)
 
-  const [receiving, setReceiving] = useState(0)
+  // const [receiving, setReceiving] = useState(0)
 
   const [stakedBal, setStakedBal] = useState(0)
   const [unstakedBal, setUnstakedBal] = useState(0)

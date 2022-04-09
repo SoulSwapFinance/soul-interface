@@ -1,102 +1,115 @@
+import React from "react";
 import styled from "styled-components";
-import { Button } from 'components/Button'
-import QuestionHelper from 'components/QuestionHelper'
-import {
-  Wrap,
-  FarmContainer,
-  Row,
-  FarmContentWrapper,
-  TokenPairBox,
-  FarmItemBox,
-  Text
-} from "./Styles";
+
+const HideOnSmall = styled.div`
+@media screen and (max-width: 900px) {
+  display: none;
+}
+`
+
+const HideOnMobile = styled.div`
+@media screen and (max-width: 600px) {
+  display: none;
+}
+`
+
+const FarmItemBox = styled.div`
+  width: 100px;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+`
+
+const FarmContainer = styled.div`
+  display: grid;
+  grid-template-rows: 1fr;
+`
+
+const FarmContentWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0rem 0 0;
+
+  &:last-child {
+    justify-content: space-between;
+  }
+
+  @media screen and (max-width: 720px) {
+    padding: 0;
+  }
+`
+
+const Text = styled.p`
+  padding: ${({ padding }) => (padding ? `${padding}` : "0 0.25rem")};
+  margin: ${({ margin }) => (margin ? `${margin}` : "0 0")};
+  color: ${({ color }) => (color ? `${color}` : `white`)};
+  font-size: ${({ fontSize }) => (fontSize ? `${fontSize}` : `1rem`)};
+  font-weight: ${({ fontWeight }) => (fontWeight ? `${fontWeight}` : ``)};
+  text-align: ${({ textAlign }) => (textAlign ? `${textAlign}` : `center`)};
+`;
 
 export function Active() {
   return (
-    <>
-      <Wrap
-        padding="0"
-        display="flex"
-        justifyContent="center"
-        alignContent="center"
-      >
+    <div className="justify-center">
         <FarmContainer>
-          <Row padding=".25rem .75rem">
+          {/* <div className="grid grid-cols-5 ml-24 mr-6 sm:ml-0 bg-dark-1000"> */}
+          <div className="grid grid-cols-1 bg-dark-1200 font-bold mb-2 border border-dark-1000 hover:border-dark-600">
             <FarmContentWrapper>
-              <TokenPairBox>
-                <Wrap>
-                  <Text padding ="0" fontSize=".8" color="#bbb">
+              
+            {/* <HideOnMobile> */}
+              <FarmItemBox>
+                  <Text fontSize=".8" color="#FFFFFF">
                   ASSET
                   </Text>
-                </Wrap>
-              </TokenPairBox>
+              </FarmItemBox>
+            {/* </HideOnMobile> */}
+
+            <HideOnMobile>
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
+                STAKE
+                </Text>
+              </FarmItemBox>
+            </HideOnMobile>
+
+            <HideOnMobile>
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
+                VALUE
+                </Text>
+              </FarmItemBox>
+            </HideOnMobile>
+ 
+            <HideOnSmall>
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
+                SHARE
+                </Text>
+              </FarmItemBox>
+            </HideOnSmall>
 
               <FarmItemBox>
-                <Text padding="0" fontSize=".8" color="#bbb">
-                % RETURN
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
+                APR
                 </Text>
               </FarmItemBox>
 
-              <FarmItemBox desktopOnly={true}>
-                <Text padding="0" fontSize=".8" color="#bbb">
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
                 YIELD
                 </Text>
               </FarmItemBox>
 
-              {/* <HideOnMobile> */}
-                <Text padding="0" fontSize=".8" color="#bbb">
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
                 TVL
-                </Text>
-              {/* </HideOnMobile> */}
-            </FarmContentWrapper>
-            
-          </Row>
-          {/* <Button variant={'link'} color={'purple'} className="absolute top-[5%] right-[10%]"> */}
- 
-              {/* </Button> */}
-        </FarmContainer>
-      </Wrap>
-    </>
-  );
-};
-
-export function Inactive() {
-  return (
-    <div className="flex justify-between justify-center text-center">
-      {/* <Wrap
-        padding="0"
-        display="flex"
-        justifyContent="center"
-        alignContent="center"
-      > */}
-        <FarmContainer>
-          <Row padding=".25rem .75rem">
-            <FarmContentWrapper>
-              <TokenPairBox>
-
-                <Wrap>
-                  <Text padding ="0" fontSize=".9" color="#bbb">
-                    ASSET
-                  </Text>
-                </Wrap>
-
-              </TokenPairBox>
-
-              <FarmItemBox desktopOnly={true}>
-                <Text padding="0" fontSize=".9" color="#bbb">
-                  PENDING
                 </Text>
               </FarmItemBox>
 
-                <Text padding="0" fontSize=".9" color="#bbb">
-                  TVL
-                </Text>
             </FarmContentWrapper>
-
-          </Row>
-
+            </div>
         </FarmContainer>
-      {/* </Wrap> */}
-    </div>
-  );
-};
+      </div>
+  )
+}

@@ -1,21 +1,23 @@
 import styled from 'styled-components'
+import { Button } from 'components/Button'
 
-export const FlexText = styled.div`
-  display: flex;
-  justify-content: space-between;
-`
-export const FlexSocialText = styled.div`
-  display: flex;
-  justify-content: centered;
-`
+export const Text = styled.p`
+  padding: ${({ padding }) => (padding ? `${padding}` : "0 0.5rem")};
+  margin: ${({ margin }) => (margin ? `${margin}` : "0")};
+  color: ${({ color }) => (color ? `${color}` : `white`)};
+  font-size: ${({ fontSize }) => (fontSize ? `${fontSize}` : `1rem`)};
+  font-weight: ${({ fontWeight }) => (fontWeight ? `${fontWeight}` : ``)};
+  text-align: ${({ textAlign }) => (textAlign ? `${textAlign}` : `left`)};
+`;
+
 export const Wrap = styled.div`
   width: ${({ width }) => (width ? `${width}` : "")};
   height: ${({ height }) => (height ? `${height}` : "")};
   margin: ${({ margin }) => (margin ? `${margin}` : "0 0")};
-  padding: ${({ padding }) => (padding ? `${padding}` : "0.25rem 0.5rem")};
+  padding: ${({ padding }) => (padding ? `${padding}` : "0.25rem 0.25rem")};
   display: ${({ display }) => (display ? `${display}` : "block")};
   justify-content: ${({ justifyContent }) => (justifyContent ? `${justifyContent}` : "center")};
-  align-items: ${({ alignItems }) => (alignItems ? `${alignItems}` : "center")};
+  align-items: ${({ alignItems }) => (alignItems ? `${alignItems}` : "center")};;
   overflow: ${({ overflow }) => (overflow ? `${overflow}` : "")}; /* Auto = scrollbar is only inside of text section */
   background-color: ${({ bgColor }) => (bgColor ? `${bgColor}` : ``)};
   border: ${({ border }) => (border ? `${border}` : ``)};
@@ -23,139 +25,38 @@ export const Wrap = styled.div`
   border-radius: ${({ borderRadius }) => (borderRadius ? `${borderRadius}` : ``)};
 `;
 
-export const Text = styled.p`
-  padding: ${({ padding }) => (padding ? `${padding}` : "0 0.25rem")};
-  margin: ${({ margin }) => (margin ? `${margin}` : "0 0")};
-  color: ${({ color }) => (color ? `${color}` : `white`)};
-  font-size: ${({ fontSize }) => (fontSize ? `${fontSize}` : `1rem`)};
-  font-weight: ${({ fontWeight }) => (fontWeight ? `${fontWeight}` : ``)};
-  text-align: ${({ textAlign }) => (textAlign ? `${textAlign}` : `center`)};
-`;
-
-// ---------------------
-//  Row Section
-// ---------------------
-
-export const FarmContainer = styled.div`
-  display: grid;
-  grid-template-rows: 1fr;
-`
-
-export const Row = styled.div`
-  background-color: #18191A;
-  padding: ${({ padding }) => (padding ? `${padding}` : `1rem 1rem`)};
-  margin: ${({ width }) => (width ? `${width}` : `4px`)};
-  width: 55rem;
-  border-radius: 18px;
-  border: 2px solid #18191A; // original .8px solid #333;
-  transition: all 0.2s ease-in-out;
-
-  &:hover {
-    opacity: 75%;
-    cursor: pointer;
-    border: 2px solid #F36FFE;
-  }
-
-  @media screen and (max-width: 900px) {
-      width: 32rem;
-      padding: auto;
-    }
-
-  @media screen and (max-width: 720px) {
-      width: 28rem;
-      padding: auto;
-    }
-
-  @media screen and (max-width: 400px) {
-      width: 20rem;
-    }
-  `
-
-export const FarmContentWrapper = styled.div`
+export const SubmitButton = styled(Button)`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 1rem 0 0;
-
-  &:last-child {
-    justify-content: space-between;
-  }
-
-  @media screen and (max-width: 720px) {
-    padding: 0;
-  }
-`
-
-export const FarmItemBox = styled.div`
-  width: ${({ width }) => (width ? `${width}` : `100px`)};
-  display: grid;
-  justify-content: center;
-  align-items: center;
-
-`
-
-export const FarmItemHeading = styled.p`
-  font-weight: normal;
-  font-size: 0.8rem;
-  color: white;
-  align-items: center;
-`
-
-export const FarmItem = styled.h2`
-  font-size: 1.5rem;
-  color: white;
-`
-
-export const TokenPairBox = styled.div`
-  width: 100px;
-  display: flex;
-  justify-content: left;
-  align-items: center;
-`
-
-export const InactiveTokenPairBox = styled.div`
-  width: 100px;
-  display: flex;
-  justify-content: left;
-  align-items: center;
-`
-
-export const TokenPair = styled.a`
-  overflow-wrap: break-wordWRA;
-  font-size: 1rem;
-  color: white;
-
-  transition: all 0.2s ease-in-out;
-
-  &:hover {
-    color: #3D81DB;
-    opacity: 75%;
-    cursor: pointer;
-  }
-`
-
-export const ShowBtnWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-export const ShowBtn = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  outline: none;
+  width: 100%;
+  height: ${({ height }) => (height ? height : '')};
+  padding: ${({ padding }) => (padding ? padding : '0')};
+  margin: ${({ margin }) => (margin ? margin : '0.5rem 0 0.5rem 0')};
+  outline: 0;
   border: none;
-  color: white;
+  border-radius: 0.25em;
   font-size: 1rem;
-  background-color: transparent;
+  padding: 0.5em;
+  transition: all 0.2s ease-in-out;
+  background: ${({ primaryColour }) => (primaryColour ? primaryColour : '#F36FFE')};
+  color: ${({ color }) => (color ? color : 'white')};
 
-  &:hover, &:active {
-    color: #3D81DB;
-    opacity: 75%;
+  &:hover {
+    opacity: 70%;
     cursor: pointer;
   }
+
+  &:focus {
+    border-color: ${({ hoverColour }) => (hoverColour ? hoverColour : '#F36FFE')};
+  }
+
+  &:disabled { 
+    cursor: not-allowed;
+    opacity: 50%;
+  }
 `
+
 
 // ---------------------
 //  Dropdown Section
@@ -168,6 +69,13 @@ export const DetailsContainer = styled.div`
   @media screen and (max-width: 900px) {
     width: auto;
   }
+`
+
+/// --------------------- ///
+
+export const FunctionBox = styled.div`
+  padding: 0px;
+  width: ${({ width }) => (width ? `${width}` : `100%`)};
 `
 
 export const DetailsWrapper = styled.div`
@@ -198,61 +106,37 @@ export const DetailsWrapper = styled.div`
   }
 `
 
-export const FunctionBox = styled.div`
-  padding: 10px;
-  width: ${({ width }) => (width ? `${width}` : `100%`)};
-`
+// FARM //
 
-export const Input = styled.input`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 0.25rem 0 0.25rem;
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  padding: 0.5em;
-  border-radius: 0.2em;
-  background-color: #333;
+
+export const FarmItem = styled.h2`
+  font-size: 1.5rem;
   color: white;
-
-  &:focus {
-    border-color: white;
-    /* y axis, x axis, blur, spread, colour */
-    /* box-shadow: 0 0 10px 0 white; */
-    outline: 0;
-  }
 `
 
-export const SubmitButton = styled.button`
+export const FarmItemBox = styled.div`
+  width: ${({ width }) => (width ? `${width}` : `100px`)};
+  display: grid;
+  justify-content: center;
+  align-items: center;
+`
+
+export const FarmContentWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: ${({ height }) => (height ? height : '')};
-  padding: ${({ padding }) => (padding ? padding : '0')};
-  margin: ${({ margin }) => (margin ? margin : '0.5rem 0 0.5rem 0')};
-  outline: 0;
-  border: none;
-  border-radius: 0.25em;
-  font-size: 1rem;
-  padding: 0.5em;
-  transition: all 0.2s ease-in-out;
-  background: ${({ primaryColour }) => (primaryColour ? primaryColour : '#F36FFE')};
-  color: ${({ color }) => (color ? color : 'white')};
+  padding: 0 1rem 0 0;
 
-  &:hover {
-    opacity: 70%;
-    cursor: pointer;
+  &:last-child {
+    justify-content: space-between;
   }
 
-  &:focus {
-    border-color: ${({ hoverColour }) => (hoverColour ? hoverColour : '#F36FFE')};
+  @media screen and (max-width: 720px) {
+    padding: 0;
   }
+`
 
-  &:disabled { 
-    cursor: not-allowed;
-    opacity: 50%;
-  }
+export const FarmContainer = styled.div`
+  display: grid;
+  grid-template-rows: 1fr;
 `
