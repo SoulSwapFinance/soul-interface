@@ -49,13 +49,12 @@ const Text = styled.p`
   text-align: ${({ textAlign }) => (textAlign ? `${textAlign}` : `center`)};
 `;
 
-
 export function Active() {
   return (
     <div className="justify-center">
         <FarmContainer>
           {/* <div className="grid grid-cols-5 ml-24 mr-6 sm:ml-0 bg-dark-1000"> */}
-          <div className="grid grid-cols-1 bg-dark-1200 font-bold mb-2">
+          <div className="grid grid-cols-1 bg-dark-1200 font-bold mb-2 border border-dark-1000 hover:border-dark-600">
             <FarmContentWrapper>
               
             {/* <HideOnMobile> */}

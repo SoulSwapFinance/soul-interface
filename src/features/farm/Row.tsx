@@ -232,7 +232,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
         <>
             <div className="flex justify-center w-full">
                 <FarmContainer>
-                    <div className="bg-dark-1200 border border-dark-900 hover:border-dark-600" onClick={() => handleShowOptions()}>
+                    <div className="bg-dark-1200 p-3 border border-dark-1000 hover:border-dark-600" onClick={() => handleShowOptions()}>
                         <FarmContentWrapper>
 
                             <FarmItemBox>
@@ -353,7 +353,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
 
         {showOptions && (
             // <Wrap padding="0" display="flex" justifyContent="center">
-                <div className="flex justify-center w-full mt-2 mb-2 border border-dark-900 hover:border-dark-600">
+                <div className="flex justify-center p-4 w-full mt-2 mb-2 border border-dark-1000 hover:border-dark-600">
                 <HeadlessUIModal.BorderedContent className="bg-dark-1200 w-full">
                     {/* <div className="relative text-lg text-center font-bold mb-4">
                     { ' ' }
@@ -514,7 +514,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         </Button>
                     </div>
                         <FunctionBox>
-                            <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-dark-600 w-full space-y-1">
+                            <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-1000 hover:border-dark-600 w-full space-y-1">
                             <div className="text-xl text-center font-bold mb-3 text-dark-600">
                                 Deposit { farm.lpSymbol }
                             </div>
