@@ -109,7 +109,7 @@ export const FarmItem = styled.h2`
 export const TokenPairBox = styled.div`
   width: 100px;
   display: flex;
-  justify-content: left;
+  justify-content: center;
   align-items: center;
 `
 

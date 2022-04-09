@@ -24,6 +24,7 @@ import { SOUL } from '../../constants'
 import { useActiveWeb3React } from 'services/web3/hooks'
 import { useBinancePrice, useFantomPrice, useSoulPrice, useTokenPrice, useWrappedBtcPrice } from 'hooks/getPrices'
 import { usePairPrice } from 'hooks/usePairData'
+import { useSummonerPoolInfo, useSummonerUserInfo } from 'hooks/useAPI'
 
 // const HideOnMobile = styled.div`
 // @media screen and (max-width: 500px) {
@@ -42,6 +43,12 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   const token0 = useCurrency(farm.pair?.token0?.id) ?? undefined
   const token1 = useCurrency(farm.pair?.token1?.id) ?? undefined
 
+  const { summonerPoolInfo } = useSummonerPoolInfo(farm.pid)
+  const { summonerUserInfo } = useSummonerUserInfo(farm.pid)
+  // const token0 = summonerPoolInfo.token0
+  // console.log('token0:%s', token0)
+  // const token1 = summonerPoolInfo.token1
+
   const harvestHelperContract = useHarvestHelperContract()
   const soulPrice = useSoulPrice() // to avoid RPC call
   const tokenPrice 
@@ -50,14 +57,18 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
     : farm.pair?.token0.symbol == "FTM" ? useFantomPrice()
     : farm.pair?.token0.symbol == "BNB" ? useBinancePrice()
     : farm.pair?.token0.symbol == "DAI" ? 1
-    : usePriceApi(farm?.pair?.token0?.id)
+    : usePriceApi(token0.wrapped.address)
 
   const pairPrice
-    = usePairPrice(farm?.pair?.address)
-  const pendingSoul = usePendingSoul(farm)
+    // = usePairPrice(farm?.pair?.address)
+    = summonerPoolInfo.lpPrice
+    console.log('lpPrice:%s', pairPrice)
+  // const pendingSoul = usePendingSoul(farm)
+  const pendingSoul = summonerUserInfo.pendingSoul
+  const rewardValue = summonerUserInfo.pendingValue
 
-  const rewardValue =
-  (farm?.rewards?.[0]?.rewardPrice ?? 0) * Number(pendingSoul?.toExact() ?? 0)
+  // const rewardValue =
+  // (farm?.rewards?.[0]?.rewardPrice ?? 0) * Number(pendingSoul?.toExact() ?? 0)
   // + (farm?.rewards?.[1]?.rewardPrice ?? 0) * Number(pendingReward ?? 0)
   // const pairs = useSoulPairs({ chainId, variables: { where: { lpToken } }, shouldFetch: !!chainId })?.[0]
 

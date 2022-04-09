@@ -8,95 +8,91 @@ import {
   FarmContentWrapper,
   TokenPairBox,
   FarmItemBox,
-  Text
+  Text,
+  SubmitButton
 } from "./Styles";
+import React from "react";
+import { useSummonerAssistantContract, useSummonerContract } from "hooks";
+import { useSummonerUserInfo } from "hooks/useAPI";
+// import Table from "./Table";
+
+const HideOnSmall = styled.div`
+@media screen and (max-width: 800px) {
+  display: none;
+}
+`
+
+const HideOnMobile = styled.div`
+@media screen and (max-width: 600px) {
+  display: none;
+}
+`
 
 export function Active() {
   return (
-    <>
-      <Wrap
-        padding="0"
-        display="flex"
-        justifyContent="center"
-        alignContent="center"
-      >
+    <Wrap
+    padding="0"
+    display="flex"
+    justifyContent="center"
+    alignContent="center"
+  >
+
         <FarmContainer>
-          <Row padding=".25rem .75rem">
+          {/* <div className="grid grid-cols-5 ml-24 mr-6 sm:ml-0 bg-dark-1000"> */}
+          <div className="grid grid-cols-1 bg-dark-1000">
             <FarmContentWrapper>
-              <TokenPairBox>
-                <Wrap>
-                  <Text padding ="0" fontSize=".8" color="#bbb">
+              
+            {/* <HideOnMobile> */}
+              <FarmItemBox>
+                  <Text fontSize=".8" color="#FFFFFF">
                   ASSET
                   </Text>
-                </Wrap>
-              </TokenPairBox>
+              </FarmItemBox>
+            {/* </HideOnMobile> */}
 
               <FarmItemBox>
-                <Text padding="0" fontSize=".8" color="#bbb">
-                % RETURN
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
+                STAKE
                 </Text>
               </FarmItemBox>
 
-              <FarmItemBox desktopOnly={true}>
-                <Text padding="0" fontSize=".8" color="#bbb">
+            <HideOnMobile>
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
+                VALUE
+                </Text>
+              </FarmItemBox>
+            </HideOnMobile>
+ 
+            <HideOnSmall>
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
+                SHARE
+                </Text>
+              </FarmItemBox>
+            </HideOnSmall>
+
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
+                APR
+                </Text>
+              </FarmItemBox>
+
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
                 YIELD
                 </Text>
               </FarmItemBox>
 
-              {/* <HideOnMobile> */}
-                <Text padding="0" fontSize=".8" color="#bbb">
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
                 TVL
-                </Text>
-              {/* </HideOnMobile> */}
-            </FarmContentWrapper>
-            
-          </Row>
-          {/* <Button variant={'link'} color={'purple'} className="absolute top-[5%] right-[10%]"> */}
- 
-              {/* </Button> */}
-        </FarmContainer>
-      </Wrap>
-    </>
-  );
-};
-
-export function Inactive() {
-  return (
-    <div className="flex justify-between justify-center text-center">
-      {/* <Wrap
-        padding="0"
-        display="flex"
-        justifyContent="center"
-        alignContent="center"
-      > */}
-        <FarmContainer>
-          <Row padding=".25rem .75rem">
-            <FarmContentWrapper>
-              <TokenPairBox>
-
-                <Wrap>
-                  <Text padding ="0" fontSize=".9" color="#bbb">
-                    ASSET
-                  </Text>
-                </Wrap>
-
-              </TokenPairBox>
-
-              <FarmItemBox desktopOnly={true}>
-                <Text padding="0" fontSize=".9" color="#bbb">
-                  PENDING
                 </Text>
               </FarmItemBox>
 
-                <Text padding="0" fontSize=".9" color="#bbb">
-                  TVL
-                </Text>
             </FarmContentWrapper>
-
-          </Row>
-
+            </div>
         </FarmContainer>
-      {/* </Wrap> */}
-    </div>
-  );
-};
+          </Wrap>
+  )
+}
