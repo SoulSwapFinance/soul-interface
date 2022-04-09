@@ -362,7 +362,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                             onClick={() => setShowing(false)}
                             className="inline-flex opacity-80 hover:opacity-100 focused:opacity-100 rounded p-1.5 text-primary hover:text-high-emphesis focus:text-high-emphesis focus:outline-none focus:ring focus:ring-offset focus:ring-offset-purple focus:ring-purple"
                         >
-                            <XIcon className="w-5 h-5" aria-hidden="true" />
+                            <XIcon className="absolute right-0 top-0 w-5 h-5" aria-hidden="true" />
                         </Button>
                     </div>
 
@@ -399,11 +399,16 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                         </SubmitButton>
                                     ) :
                                     (
-                                        <SubmitButton height="2rem" onClick={() => handleApprove()}>
-                                            APPROVE
-                                        </SubmitButton>
+                                        // <div className="text-xl text-center font-bold mb-3 text-dark-600">
+                                        // </div>
+                                        <Button 
+                                            color="purple"
+                                            onClick={() => handleApprove()}>
+                                            STEP ONE: APPROVE { farm.lpSymbol }
+                                        </Button>
                                     )
-                                        }
+                                }
+                                        
                                     </Wrap>
                                 </FunctionBox>
 
