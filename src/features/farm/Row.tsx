@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import Image from 'next/image'
 import { ethers } from 'ethers'
 import { useSoulPrice } from 'hooks/getPrices'
 import { useActiveWeb3React } from 'services/web3'
@@ -9,24 +8,18 @@ import { SOUL, Token } from 'sdk'
 import AssetInput from 'components/AssetInput'
 import { useSoulSummonerContract, useSummonerAssistantContract, useSummonerContract } from 'hooks/useContract'
 import useApprove from 'features/bond/hooks/useApprove'
-import {
-    FarmContainer,
-    Row,
-    FarmContentWrapper,
-    TokenPairBox,
-    FarmItemBox,
-    FarmItem,
-    DetailsContainer,
-    DetailsWrapper,
-    FunctionBox,
-    // FlexText,
-    SubmitButton,
+
+import { DetailsContainer, DetailsWrapper, FarmContentWrapper,
+    FarmContainer, FarmItem, FarmItemBox, FunctionBox, SubmitButton
 } from './Styles'
 import { Wrap, Text, ExternalLink } from '../../components/ReusableStyles'
 import { tryParseAmount } from 'functions'
 import { useSummonerPoolInfo, useSummonerUserInfo } from 'hooks/useAPI'
-import { Button } from 'components/Button'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
+import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
+import Modal from 'components/DefaultModal'
+import { XIcon } from '@heroicons/react/solid'
+import { Button } from 'components/Button'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -61,6 +54,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const [approved, setApproved] = useState(false)
     const [withdrawValue, setWithdrawValue] = useState('')
     const [depositValue, setDepositValue] = useState('')
+    const [showFarm, setShowFarm] = useState(false)
     
     const SoulSummonerContract = useSoulSummonerContract()
     const SoulSummonerAddress = SoulSummonerContract.address
@@ -343,8 +337,30 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
 
             {showing && (
                 <Wrap padding="0" display="flex" justifyContent="center">
-                    <DetailsContainer>
-                        <DetailsWrapper>
+                    <Modal 
+                    isOpen={showing} 
+                    onDismiss={
+                            () => setShowing(false)
+                        }>
+                    {/* <SubmitButton
+                        height="1.5rem"
+                        primaryColour="#FF3E3E"
+                        color="white"
+                        onClick={() =>
+                            setShowFarm(false)
+                        }
+                    >
+                        X
+                    </SubmitButton> */}
+                    <div className="relative justify-right">
+                        <Button
+                            // type="button"
+                            onClick={() => setShowing(false)}
+                            className="inline-flex opacity-80 hover:opacity-100 focused:opacity-100 rounded p-1.5 text-primary hover:text-high-emphesis focus:text-high-emphesis focus:outline-none focus:ring focus:ring-offset focus:ring-offset-purple focus:ring-purple"
+                        >
+                            <XIcon className="w-5 h-5" aria-hidden="true" />
+                        </Button>
+                    </div>
                     {Number(stakedBalance) == 0 ? (
                         <FunctionBox>
                             <AssetInput
@@ -444,8 +460,8 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
 
                                 </FunctionBox>
                             )}
-                        </DetailsWrapper>
-                    </DetailsContainer>
+                        </Modal>
+                    {/* </DetailsContainer> */}
                 </Wrap>
             )}
         </>

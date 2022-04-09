@@ -1,20 +1,5 @@
-import styled from "styled-components";
-import { Button } from 'components/Button'
-import QuestionHelper from 'components/QuestionHelper'
-import {
-  Wrap,
-  FarmContainer,
-  Row,
-  FarmContentWrapper,
-  TokenPairBox,
-  FarmItemBox,
-  Text,
-  SubmitButton
-} from "./Styles";
 import React from "react";
-import { useSummonerAssistantContract, useSummonerContract } from "hooks";
-import { useSummonerUserInfo } from "hooks/useAPI";
-// import Table from "./Table";
+import styled from "styled-components";
 
 const HideOnSmall = styled.div`
 @media screen and (max-width: 800px) {
@@ -28,15 +13,46 @@ const HideOnMobile = styled.div`
 }
 `
 
+const FarmItemBox = styled.div`
+  width: 100px;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+`
+
+const FarmContainer = styled.div`
+  display: grid;
+  grid-template-rows: 1fr;
+`
+
+const FarmContentWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem 0 0;
+
+  &:last-child {
+    justify-content: space-between;
+  }
+
+  @media screen and (max-width: 720px) {
+    padding: 0;
+  }
+`
+
+const Text = styled.p`
+  padding: ${({ padding }) => (padding ? `${padding}` : "0 0.25rem")};
+  margin: ${({ margin }) => (margin ? `${margin}` : "0 0")};
+  color: ${({ color }) => (color ? `${color}` : `white`)};
+  font-size: ${({ fontSize }) => (fontSize ? `${fontSize}` : `1rem`)};
+  font-weight: ${({ fontWeight }) => (fontWeight ? `${fontWeight}` : ``)};
+  text-align: ${({ textAlign }) => (textAlign ? `${textAlign}` : `center`)};
+`;
+
+
 export function Active() {
   return (
-    <Wrap
-    padding="0"
-    display="flex"
-    justifyContent="center"
-    alignContent="center"
-  >
-
+    <div className="justify-center">
         <FarmContainer>
           {/* <div className="grid grid-cols-5 ml-24 mr-6 sm:ml-0 bg-dark-1000"> */}
           <div className="grid grid-cols-1 bg-dark-1000">
@@ -93,6 +109,6 @@ export function Active() {
             </FarmContentWrapper>
             </div>
         </FarmContainer>
-          </Wrap>
+      </div>
   )
 }
