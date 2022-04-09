@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const HideOnSmall = styled.div`
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   display: none;
 }
 `
@@ -29,7 +29,7 @@ const FarmContentWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 1rem 0 0;
+  padding: 0 0rem 0 0;
 
   &:last-child {
     justify-content: space-between;
@@ -55,7 +55,7 @@ export function Active() {
     <div className="justify-center">
         <FarmContainer>
           {/* <div className="grid grid-cols-5 ml-24 mr-6 sm:ml-0 bg-dark-1000"> */}
-          <div className="grid grid-cols-1 bg-dark-1000">
+          <div className="grid grid-cols-1 bg-dark-1200 font-bold mb-2">
             <FarmContentWrapper>
               
             {/* <HideOnMobile> */}
@@ -66,11 +66,13 @@ export function Active() {
               </FarmItemBox>
             {/* </HideOnMobile> */}
 
+            <HideOnMobile>
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
                 STAKE
                 </Text>
               </FarmItemBox>
+            </HideOnMobile>
 
             <HideOnMobile>
               <FarmItemBox>

@@ -1,6 +1,30 @@
 import styled from 'styled-components'
 import { Button } from 'components/Button'
 
+export const Text = styled.p`
+  padding: ${({ padding }) => (padding ? `${padding}` : "0 0.5rem")};
+  margin: ${({ margin }) => (margin ? `${margin}` : "0")};
+  color: ${({ color }) => (color ? `${color}` : `white`)};
+  font-size: ${({ fontSize }) => (fontSize ? `${fontSize}` : `1rem`)};
+  font-weight: ${({ fontWeight }) => (fontWeight ? `${fontWeight}` : ``)};
+  text-align: ${({ textAlign }) => (textAlign ? `${textAlign}` : `left`)};
+`;
+
+export const Wrap = styled.div`
+  width: ${({ width }) => (width ? `${width}` : "")};
+  height: ${({ height }) => (height ? `${height}` : "")};
+  margin: ${({ margin }) => (margin ? `${margin}` : "0 0")};
+  padding: ${({ padding }) => (padding ? `${padding}` : "0.25rem 0.25rem")};
+  display: ${({ display }) => (display ? `${display}` : "block")};
+  justify-content: ${({ justifyContent }) => (justifyContent ? `${justifyContent}` : "center")};
+  align-items: ${({ alignItems }) => (alignItems ? `${alignItems}` : "center")};;
+  overflow: ${({ overflow }) => (overflow ? `${overflow}` : "")}; /* Auto = scrollbar is only inside of text section */
+  background-color: ${({ bgColor }) => (bgColor ? `${bgColor}` : ``)};
+  border: ${({ border }) => (border ? `${border}` : ``)};
+  border-bottom: ${({ borderBot }) => (borderBot ? `${borderBot}` : ``)};;
+  border-radius: ${({ borderRadius }) => (borderRadius ? `${borderRadius}` : ``)};
+`;
+
 export const SubmitButton = styled(Button)`
   display: flex;
   justify-content: center;
@@ -50,7 +74,7 @@ export const DetailsContainer = styled.div`
 /// --------------------- ///
 
 export const FunctionBox = styled.div`
-  padding: 10px;
+  padding: 0px;
   width: ${({ width }) => (width ? `${width}` : `100%`)};
 `
 

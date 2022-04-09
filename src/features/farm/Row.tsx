@@ -9,34 +9,28 @@ import AssetInput from 'components/AssetInput'
 import { useSoulSummonerContract, useSummonerAssistantContract, useSummonerContract } from 'hooks/useContract'
 import useApprove from 'features/bond/hooks/useApprove'
 
-import { DetailsContainer, DetailsWrapper, FarmContentWrapper,
-    FarmContainer, FarmItem, FarmItemBox, FunctionBox, SubmitButton
+import { FarmContentWrapper,
+    FarmContainer, FarmItem, FarmItemBox, Text, FunctionBox, SubmitButton, Wrap
 } from './Styles'
-import { Wrap, Text, ExternalLink, ClickableText } from '../../components/ReusableStyles'
 import { classNames, formatNumber, tryParseAmount } from 'functions'
 import { useSummonerPoolInfo, useSummonerUserInfo } from 'hooks/useAPI'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
-import Modal from 'components/DefaultModal'
+// import Modal from 'components/DefaultModal'
 import { ArrowLeftIcon, XIcon } from '@heroicons/react/solid'
 import { Button } from 'components/Button'
 import Typography from 'components/Typography'
+import Swap from 'pages/exchange/swap/[[...tokens]]'
+// import ManageSwapPair from './modals/ManageSwapPair'
 // import { Deposit } from './modals/Deposit'
 
-const TokenPairLink = styled(ExternalLink)`
-  font-size: .9rem;
-  padding-left: 10;
-`
-
-// const TokenLogo = styled(Image)`
-//   @media screen and (max-width: 400px) {
-//     font-size: 1rem;
-//     padding-right: 10px;
-//   }
+// const TokenPairLink = styled(ExternalLink)`
+//   font-size: .9rem;
+//   padding-left: 10;
 // `
 
 const HideOnSmall = styled.div`
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   display: none;
 }
 `
@@ -51,14 +45,13 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const { account, chainId } = useActiveWeb3React()
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
     const soulPrice = useSoulPrice()
-    const [showing, setShowing] = useState(false)
+    const [showOptions, setShowOptions] = useState(false)
     const [depositing, setDepositing] = useState(false)
 
     const [approved, setApproved] = useState(false)
     const [withdrawValue, setWithdrawValue] = useState('0')
     const [depositValue, setDepositValue] = useState('0')
     const [withdrawable, getWithdrawable] = useState('0')
-    const [showFarm, setShowFarm] = useState(false)
     
     const SoulSummonerContract = useSoulSummonerContract()
     const SoulSummonerAddress = SoulSummonerContract.address
@@ -75,8 +68,11 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const { summonerPoolInfo } = useSummonerPoolInfo(pid)
     const liquidity = summonerPoolInfo.tvl
     const apr = summonerPoolInfo.apr
+
     const [unstakedBal, setUnstakedBal] = useState(0)
     const [openDeposit, setOpenDeposit] = useState(false)
+    const [openSwap, setOpenSwap] = useState(false)
+    
     const { summonerUserInfo } = useSummonerUserInfo(pid)
     const stakedBalance = summonerUserInfo.stakedBalance
     const stakedValue = summonerUserInfo.stakedValue
@@ -84,8 +80,8 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const earnedValue = summonerUserInfo.pendingValue
 
     // ONLY USED FOR LOGO //
-    const tokenA = new Token(chainId, farm.token1Address[chainId], 18)
-    const tokenB = new Token(chainId, farm.token2Address[chainId], 18)
+    const token0 = new Token(chainId, farm.token1Address[chainId], 18)
+    const token1 = new Token(chainId, farm.token2Address[chainId], 18)
     // const pair = new Token(chainId, farm.lpToken.address, 18)
     console.log('lpAddress:%s', farm.lpToken)
     
@@ -117,18 +113,24 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
      * Opens the function panel dropdown
      */
     const handleShowOptions = () => {
-        setShowing(!showing)
-        if (!showing) {
+        setShowOptions(!showOptions)
+        if (!showOptions) {
             fetchBals()
             fetchApproval()
         }
     }
- 
+
     const handleShowDeposit = () => {
         setOpenDeposit(!openDeposit)
         if (!openDeposit) {
             fetchBals()
             fetchApproval()
+        }
+    }
+
+    const handleShowSwap = () => {
+        setOpenSwap(!openSwap)
+        if (!openSwap) {
         }
     }
 
@@ -228,16 +230,16 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
 
     return (
         <>
-            <Wrap padding="0" display="flex" justifyContent="center">
+            <div className="flex justify-center w-full">
                 <FarmContainer>
-                    <div className="bg-dark-900" onClick={() => handleShowOptions()}>
+                    <div className="bg-dark-1200 border border-dark-900 hover:border-dark-600" onClick={() => handleShowOptions()}>
                         <FarmContentWrapper>
-                            {/* <TokenPairBox> */}
-                                {/* <Wrap> */}
-                                <DoubleCurrencyLogo currency0={tokenA} currency1={tokenB} size={40} />
-                                {/* </Wrap> */}
-                            {/* </TokenPairBox> */}
 
+                            <FarmItemBox>
+                                <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
+                            </FarmItemBox>
+
+                        <HideOnMobile>
                             <FarmItemBox>
                                 <FarmItem>
                                     {Number(apr).toString() === '0.00' ? (
@@ -257,6 +259,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                     )}
                                 </FarmItem>
                             </FarmItemBox>
+                        </HideOnMobile>
 
                     {/* STAKED VALUE */}
                         <HideOnMobile>
@@ -346,107 +349,107 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         </FarmContentWrapper>
                     </div>
                 </FarmContainer>
-            </Wrap>
+            </div>
 
-        {showing && (
-            <Wrap padding="0" display="flex" justifyContent="center">
-                <Modal 
-                    isOpen={showing} 
-                    onDismiss={
-                            () => setShowing(false)
-                        }>
-
-                    <div className="relative justify-right">
+        {showOptions && (
+            // <Wrap padding="0" display="flex" justifyContent="center">
+                <div className="flex justify-center w-full mt-2 mb-2 border border-dark-900 hover:border-dark-600">
+                <HeadlessUIModal.BorderedContent className="bg-dark-1200 w-full">
+                    {/* <div className="relative text-lg text-center font-bold mb-4">
+                    { ' ' }
+                    <br />
                         <Button
                             // type="button"
-                            onClick={() => setShowing(false)}
-                            className="inline-flex opacity-80 hover:opacity-100 focused:opacity-100 rounded p-1.5 text-primary hover:text-high-emphesis focus:text-high-emphesis focus:outline-none focus:ring focus:ring-offset focus:ring-offset-purple focus:ring-purple"
+                            onClick={() => setShowOptions(false)}
+                            className="absolute top-0 right-0 opacity-80 hover:opacity-100 
+                            focused:opacity-100 rounded p-1 text-primary hover:text-high-emphesis 
+                            focus:text-high-emphesis focus:outline-none focus:ring focus:ring-offset 
+                            focus:ring-offset-purple focus:ring-purple"
                         >
-                            <XIcon className="absolute right-0 top-0 w-5 h-5" aria-hidden="true" />
+                            <XIcon className="w-5 h-5" aria-hidden="true" />
                         </Button>
-                    </div>
+                    </div> */}
 
-                    {/* USER: NOT STAKED */}
-                    {Number(stakedBalance) == 0 ? (
+                    {/* USER: NOT STAKED & NO BALANCE */}
+                    
+                        {/* <FunctionBox>
+                        <Wrap padding="0" margin="0" display="flex">                         */}
+                    {(Number(stakedBalance) == 0 && Number(unstakedBal) == 0) && (
+                        <FunctionBox>
+                        <Wrap padding="0" margin="0" display="flex">
+                            <SubmitButton
+                                height="2rem"
+                                primaryColour="#B485FF"
+                                color="black"
+                                margin=".5rem 0 .5rem 0"
+                                onClick={() => setOpenSwap(true)}
+                            >
+                                {/* <NavLink
+                                    href=
+                                    {`/swap`}
+                                > */}
+                                    {/* <a>  */}
+                                        ADD LIQUIDITY   
+                                    {/* </a> */}
+                                {/* </NavLink> */}
+                            </SubmitButton>
+                            </Wrap>
+                        </FunctionBox>
+                    )}
+                    {!approved &&  (
                         <FunctionBox>
                             <Wrap padding="0" margin="0" display="flex">
-                                {(approved && Number(unstakedBal) == 0) ?
-                        (
-                            <TokenPairLink
-                                target="_blank"
-                                rel="noopener"
-                                text-color="#F36FFE" // neon purple
-                                href=
-                                {`https://exchange.soulswap.finance/swap`}
-                            >
-                                ACQUIRE SOUL
-                            </TokenPairLink>
-
-                        // USER: APPROVAL //
-                        ) : approved ?
-                                    (
-                                        <SubmitButton
-                                        height="2rem"
-                                        primaryColour="#B485FF"
-                                        color="black"
-                                        margin=".5rem 0 .5rem 0"
-                                        onClick={() =>
-                                            // handleDeposit(depositValue)
-                                            setOpenDeposit(true)
-                                        }
-                                        >
-                                            DEPOSIT SOUL
-                                        </SubmitButton>
-                                    ) :
-                                    (
-                                        // <div className="text-xl text-center font-bold mb-3 text-dark-600">
-                                        // </div>
-                                        <Button 
-                                            color="purple"
-                                            onClick={() => handleApprove()}>
-                                            STEP ONE: APPROVE { farm.lpSymbol }
-                                        </Button>
-                                    )
+                                <SubmitButton 
+                                    height="2rem"
+                                    primaryColour="#B485FF"
+                                    color="black"
+                                    margin=".5rem 0 .5rem 0"
+                                    onClick={() => handleApprove()}>
+                                    APPROVE {farm.lpSymbol}
+                                </SubmitButton>
+                            </Wrap>
+                        </FunctionBox>
+                    )}
+                        
+                    {approved && (
+                        <FunctionBox>
+                            <Wrap padding="0" margin="0" display="flex">
+                                <SubmitButton
+                                height="2rem"
+                                primaryColour="#B485FF"
+                                color="black"
+                                margin=".5rem 0 .5rem 0"
+                                onClick={() =>
+                                    // handleDeposit(depositValue)
+                                    setOpenDeposit(true)
                                 }
-                                        
-                                    </Wrap>
-                                </FunctionBox>
-
-                            // USER: DEPOSITED //
-                            ) : (
-                                <FunctionBox>
-                                    <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-dark-600 w-full space-y-1">
-                                    <div className="flex justify-between">
-                                        <Typography className="text-white" fontFamily={'medium'}>
-                                            Deposited Amount
-                                        </Typography>
-                                        <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                            {Number(stakedBalance).toFixed(2)} LP
-                                        </Typography>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <Typography className="text-white" fontFamily={'medium'}>
-                                            Deposited Amount
-                                        </Typography>
-                                        <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                            {Number(stakedBalance).toFixed(2)} LP
-                                        </Typography>
-                                    </div>
+                                >
+                                    DEPOSIT
+                                </SubmitButton>
+                            </Wrap>
+                        </FunctionBox>
+                    )}
+                        
+                        {Number(stakedBalance) == 0 && (
+                            <FunctionBox>
+                            {/* <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-dark-600 w-full space-y-1"> */}
+                                {/* <div className="flex justify-between">
+                                    <Typography className="text-white" fontFamily={'medium'}>
+                                        Deposited Amount
+                                    </Typography>
+                                    <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                                        {Number(stakedBalance).toFixed(2)} LP
+                                    </Typography>
                                 </div>
-                                    <Wrap padding="0" margin="0" display="flex">
-                                        <SubmitButton
-                                            height="2rem"
-                                            primaryColour="#B485FF"
-                                            color="black"
-                                            margin=".5rem 0 .5rem 0"
-                                            onClick={() =>
-                                                // handleDeposit(depositValue)
-                                                setOpenDeposit(true)
-                                            }
-                                        >
-                                            DEPOSIT SOUL
-                                        </SubmitButton>
-                                    </Wrap>
+                                <div className="flex justify-between">
+                                    <Typography className="text-white" fontFamily={'medium'}>
+                                        Deposited Amount
+                                    </Typography>
+                                    <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                                        {Number(stakedBalance).toFixed(2)} LP
+                                    </Typography>
+                                </div> */}
+                            {/* </div> */}
                                 <Wrap padding="0" margin="0" display="flex">
                                     <SubmitButton
                                         height="2rem"
@@ -454,40 +457,52 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                         color="black"
                                         margin=".5rem 0 .5rem 0"
                                         onClick={() =>
-                                            handleWithdraw(pid, withdrawValue)
+                                            // handleDeposit(depositValue)
+                                            setOpenDeposit(true)
+                                            
                                         }
                                     >
-                                        WITHDRAW
+                                        DEPOSIT { farm.lpSymbol }
                                     </SubmitButton>
                                 </Wrap>
-                                {/* <Wrap padding="0" margin="0" display="flex">
-                                        <SubmitButton
-                                            height="2rem"
-                                            primaryColour="#bbb"
-                                            color="black"
-                                            margin=".5rem 0 .5rem 0"
-                                            onClick={() =>
-                                                handleHarvest(pid)
-                                            }
-                                        >
-                                            HARVEST {Number(earnedAmount).toFixed(0)} SOUL
-                                            // {Number(earnedAmount) !== 0 ? `($${(Number(earnedAmount) * soulPrice).toFixed(0)})` : ''}
-                                        </SubmitButton>
-                                </Wrap> */}
-                                
-                                </FunctionBox>
+                            <Wrap padding="0" margin="0" display="flex">
+                                <SubmitButton
+                                    height="2rem"
+                                    primaryColour="#B485FF"
+                                    color="black"
+                                    margin=".5rem 0 .5rem 0"
+                                    onClick={() =>
+                                        handleWithdraw(pid, withdrawValue)
+                                    }
+                                >
+                                    WITHDRAW { farm.lpSymbol }
+                                </SubmitButton>
+                            </Wrap>
+                            <Wrap padding="0" margin="0" display="flex">
+                                    <SubmitButton
+                                        height="2rem"
+                                        primaryColour="#B485FF"
+                                        color="black"
+                                        margin=".5rem 0 .5rem 0"
+                                        onClick={() =>
+                                            handleHarvest(pid)
+                                        }
+                                    >
+                                        HARVEST {Number(earnedAmount).toFixed(0)} SOUL
+                                    </SubmitButton>
+                            </Wrap>
+                            </FunctionBox>
                             )}
-                    </Modal>
-                {/* </DetailsContainer> */}
-            </Wrap>
+                </HeadlessUIModal.BorderedContent>
+            </div>
         )}
 
 {/* DEPOSIT MODAL */}
 {openDeposit && (
-    <Wrap padding="0" display="flex" justifyContent="center">
-        <Modal
-            isOpen={openDeposit} 
-            onDismiss={ () => setOpenDeposit(false) }
+    // <Wrap padding="0" display="flex" justifyContent="center">
+        <HeadlessUIModal.BorderedContent
+            // isOpen={openDeposit} 
+            // onDismiss={ () => setOpenDeposit(false) }
         >
                     <div className="relative justify-right">
                         <Button
@@ -558,9 +573,27 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                     
                     </FunctionBox>
                 
-                   </Modal>
-                </Wrap>
+                   </HeadlessUIModal.BorderedContent>
+                // </Wrap>
 )}
+
+{openSwap && (
+    <HeadlessUIModal.BorderedContent>
+    {/* //  isOpen={true} onDismiss={() => setOpenSwap(false)}> */}
+        <div className="relative justify-right">
+                        <Button
+                            // type="button"
+                            onClick={() => handleShowSwap()}
+                            className="inline-flex opacity-80 hover:opacity-100 focused:opacity-100 rounded p-1.5 text-primary hover:text-high-emphesis focus:text-high-emphesis focus:outline-none focus:ring focus:ring-offset focus:ring-offset-purple focus:ring-purple"
+                        >
+                            <ArrowLeftIcon className="w-5 h-5" aria-hidden="true" />
+                        </Button>
+        </div>
+        
+        <Swap />
+    
+    </HeadlessUIModal.BorderedContent>
+    )}
         </>
     )
 }
