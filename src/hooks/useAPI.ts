@@ -309,7 +309,24 @@ export function usePairInfo(pairAddress): { status: string; pairInfo: T } {
     const [status, setStatus] = useState<string>('idle')
     const [pairInfo, setInfo] = useState<T>({
         address: '',
+        name: '',
+        symbol: '',
+        pairDecimals: '18',
+        pairType: 'swap',
         supply: '0',
+
+        lpPrice: '0',
+        lpValue: '0',
+
+        token0Decimals: '18',
+        token1Decimals: '18',
+
+        token0Balance: '0',
+        token1Balance: '0',
+
+        token0Price: '0',
+        token1Price: '0',
+
         luxorTreasuryBalance: '0',
         api: ''
     })  
@@ -543,8 +560,8 @@ export function useSummonerPoolInfo(pid): { status: string; summonerPoolInfo: T 
       pid: '',
 
       lpAddress: '',
-      token0Address: '',
-      token1Address: '',
+      token0: '',
+      token1: '',
       
       allocPoint: '0',
       allocShare: '0',
