@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext, createContext, ReactNode, FC } from 'react'
+import ReactGA from 'react-ga'
+import { TransactionResponse } from '@ethersproject/providers'
 import styled from 'styled-components'
 import { BigNumber, ethers } from 'ethers'
 import { useSoulPrice } from 'hooks/getPrices'
 import { useActiveWeb3React } from 'services/web3'
 // import QuestionHelper from '../../components/QuestionHelper'
-import { currencyEquals, NATIVE, SOUL, SOUL_ADDRESS, Token, WNATIVE } from 'sdk'
+import { CurrencyAmount, currencyEquals, NATIVE, Percent, SOUL, SOUL_ADDRESS, Token, WNATIVE } from 'sdk'
 import AssetInput from 'components/AssetInput'
-import { useRouterContract, useSoulSummonerContract, useSummonerAssistantContract, useSummonerContract } from 'hooks/useContract'
+import { useRouterContract, useSoulSummonerContract } from 'hooks/useContract'
 import useApprove from 'features/bond/hooks/useApprove'
 
 import { FarmContentWrapper,
     FarmContainer, FarmItem, FarmItemBox, Text, FunctionBox, SubmitButton, Wrap
 } from './Styles'
-import { classNames, formatNumber, tryParseAmount } from 'functions'
+import { calculateGasMargin, calculateSlippageAmount, classNames, formatNumber, tryParseAmount } from 'functions'
 import { usePairInfo, useSummonerPoolInfo, useSummonerUserInfo } from 'hooks/useAPI'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
@@ -20,29 +22,24 @@ import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
 import { ArrowLeftIcon, PlusIcon, XIcon } from '@heroicons/react/solid'
 import { Button } from 'components/Button'
 import Typography from 'components/Typography'
-import Swap from 'pages/exchange/swap/[[...tokens]]'
 import Modal from 'components/Modal/DefaultModal'
 import ModalHeader from 'components/Modal/Header'
-import HeaderNew from 'features/trade/HeaderNew'
-import Add from 'pages/exchange/add/[[...tokens]]'
 
-import { WFTM_ADDRESS } from 'constants/addresses'
-import NavLink from 'components/NavLink'
-import PoolAddLiquidity from 'features/mines/utils/PoolAddLiquidity'
-import MineListItemDetails from 'features/mines/MineListItemDetails'
-import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
 import { Field } from 'state/mint/actions'
 import { useDerivedMintInfo, useMintActionHandlers, useMintState } from 'state/mint/hooks'
 import Web3Connect from 'components/Web3Connect'
 import { ApprovalState, useApproveCallback } from 'hooks'
-import PoolAddLiquidityReviewContent from 'features/mines/utils/PoolAddLiquidityReviewContent'
-// import ManageSwapPair from './modals/ManageSwapPair'
-// import { Deposit } from './modals/Deposit'
 
-// const TokenPairLink = styled(ExternalLink)`
-//   font-size: .9rem;
-//   padding-left: 10;
-// `
+import { ZERO_PERCENT } from 'constants/index'
+
+import { useExpertModeManager, useUserSlippageToleranceWithDefault } from 'state/user/hooks'
+import ExternalLink from 'components/ExternalLink'
+import NavLink from 'components/NavLink'
+
+const TokenPairLink = styled(ExternalLink)`
+  font-size: .9rem;
+  padding-left: 10;
+`
 
 const HideOnSmall = styled.div`
 @media screen and (max-width: 900px) {
@@ -56,12 +53,29 @@ const HideOnMobile = styled.div`
 }
 `
 
+interface FarmListItemDetailsModal {
+  content: ReactNode
+  setContent: React.Dispatch<React.SetStateAction<React.ReactNode>>
+}
+
+const Context = createContext<FarmListItemDetailsModal | undefined>(undefined)
+
+export const useFarmListItemDetailsModal = () => {
+    const context = useContext(Context)
+    if (!context) {
+      throw new Error('Hook can only be used inside Farm List Item Details Context')
+    }
+  
+    return context
+  }
+
 export const ActiveRow = ({ pid, farm, lpToken }) => {
-    const { account, chainId } = useActiveWeb3React()
+    const { account, chainId, library } = useActiveWeb3React()
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
     const soulPrice = useSoulPrice()
     const [depositing, setDepositing] = useState(false)
-    
+    const [attemptingTxn, setAttemptingTxn] = useState<boolean>(false) // clicked confirm
+
     const [approved, setApproved] = useState(false)
     const [withdrawValue, setWithdrawValue] = useState('0')
     const [depositValue, setDepositValue] = useState('0')
@@ -69,31 +83,37 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const [unstakedBal, setUnstakedBal] = useState(0)
     
     const SoulSummonerContract = useSoulSummonerContract()
+
     const SoulSummonerAddress = SoulSummonerContract.address
     const RouterContract = useRouterContract()
 
-    //   const [confirmed, setConfirmed] = useState(false)
-    //   const [receiving, setReceiving] = useState(0)
+    // const [confirmed, setConfirmed] = useState(false)
+    // const [receiving, setReceiving] = useState(0)
     const parsedDepositValue = tryParseAmount(depositValue, lpToken)
     const parsedWithdrawValue = tryParseAmount(withdrawValue, lpToken)
     // console.log('earnedAmount:%s', earnedAmount)
     // show confirmation view before minting SOUL
-    // const [liquidity, setLiquidity] = useState(0)
     // const balance = useCurrencyBalance(account, lpToken)
-    
+
+    const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(100, 10_000)
+    const allowedSlippage = useUserSlippageToleranceWithDefault(DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE) // custom from users
+
     const { summonerPoolInfo } = useSummonerPoolInfo(pid)
     const liquidity = summonerPoolInfo.tvl
     const apr = summonerPoolInfo.apr
     const lpAddress = summonerPoolInfo.lpAddress
     
     const { pairInfo } = usePairInfo(lpAddress)
-    const pairDecimals = pairInfo.pairDecimals
+    const token0Symbol = pairInfo.token0Symbol
+    const token1Symbol = pairInfo.token1Symbol
+
+    const token0Address = pairInfo.token0Address
+    const token1Address = pairInfo.token1Address
 
     const [showOptions, setShowOptions] = useState(false)
     const [openDeposit, setOpenDeposit] = useState(false)
     const [showConfirmation, setShowConfirmation] = useState(false)
     const [openWithdraw, setOpenWithdraw] = useState(false)
-    const [openSwap, setOpenSwap] = useState(false)
     
     const { summonerUserInfo } = useSummonerUserInfo(pid)
     const stakedBalance = summonerUserInfo.stakedBalance
@@ -107,12 +127,13 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const token1 = new Token(chainId, farm.token2Address[chainId], 18)
     // const pair = new Token(chainId, farm.lpToken.address, 18)
     // console.log('lpAddress:%s', lpAddress)
+
+    // Pair Information //
     
       // mint state
     const { independentField, typedValue, otherTypedValue } = useMintState()
     const { dependentField, currencies, parsedAmounts, noLiquidity, liquidityMinted, poolTokenPercentage, error } =
         useDerivedMintInfo(token0 ?? undefined, token1 ?? undefined)
-    const { onFieldAInput, onFieldBInput } = useMintActionHandlers(noLiquidity)
 
     const isValid = !error
 
@@ -134,6 +155,16 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
           ((token0 && currencyEquals(token0, WNATIVE[chainId])) ||
             (token1 && currencyEquals(token1, WNATIVE[chainId])))
     )
+
+    const minLiquidityMintedJSBI = liquidityMinted
+    ? calculateSlippageAmount(liquidityMinted, noLiquidity ? ZERO_PERCENT : allowedSlippage)[0]
+    : undefined
+
+
+    const minLiquidityCurrencyAmount =
+    liquidityMinted?.currency && minLiquidityMintedJSBI
+      ? CurrencyAmount.fromRawAmount(liquidityMinted.currency, minLiquidityMintedJSBI)
+      : undefined
 
     /**
      * Runs only on initial render/mount
@@ -180,10 +211,6 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
    
     const handleShowWithdraw = () => {
         setOpenWithdraw(!openWithdraw)
-    }
-
-    const handleShowSwap = () => {
-        setOpenSwap(!openSwap)
     }
 
     /**
@@ -239,7 +266,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     }
 
     // // /**
-    // //  * Withdraw Shares
+    // //  * Withdraw Liquidity Asset
     // //  */
     const handleWithdraw = async (pid, parsedWithdrawValue) => {
         try {
@@ -449,18 +476,29 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                 primaryColour="#B485FF"
                                 color="black"
                                 margin=".5rem 0 .5rem 0"
-                                onClick={() => setOpenSwap(true)}
+                                // onClick={() => setOpenSwap(true)}
                             >
-                                ADD {farm.lpSymbol}
-                                {/* <NavLink
-                                    href=
-                                    {`/swap/add`}
-                                >
-                                    <a> 
-                                        ADD LIQUIDITY   
-                                    </a>
-                                </NavLink> */}
+                            {(token0Symbol == 'FTM' || token1Symbol == 'FTM') ? (
+                          <NavLink
+                            href=
+                            {token0Symbol == 'FTM' ?
+                              `https://exchange.soulswap.finance/add/FTM/${token0Address}`
+                              : `https://exchange.soulswap.finance/add/FTM/${token1Address}`
+                            }
+                          >
+                            <a>CREATE {farm.lpSymbol} PAIR</a>
+                          </NavLink>
+                        ) : (
+                          <NavLink
+                            href=
+                            {`https://exchange.soulswap.finance/add/${token0Address}/${token1Address}`}
+                          >
+                            <a>CREATE {farm.lpSymbol} PAIR</a>
+                          </NavLink>
+                        )}
+                      
                             </SubmitButton>
+                        
                             </Wrap>
                         </FunctionBox>
                     )}
@@ -708,125 +746,6 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                     </FunctionBox>
                 </HeadlessUIModal.BorderedContent>
 )}
-      {openSwap && (
-        <HeadlessUIModal.BorderedContent
-            // isOpen={openSwap} onDismiss={() => setOpenSwap(false)}
-        >
-
-        {/* <PoolAddLiquidity currencyA={token0} currencyB={token1} header={''}/> */}
-
-        <HeadlessUiModal.BorderedContent className="flex flex-col gap-4 bg-dark-1000/40">
-        {''}
-        <AssetInput
-          size="sm"
-          id="add-liquidity-input-tokena"
-          value={formattedAmounts[Field.CURRENCY_A]}
-          currency={token0}
-          onChange={onFieldAInput}
-          showMax={false}
-        />
-        <div className="z-10 flex justify-center -mt-6 -mb-6">
-          <div className="p-1.5 rounded-full bg-dark-800 border border-dark-800 shadow-md border-dark-700">
-            <PlusIcon width={14} className="text-high-emphesis" />
-          </div>
-        </div>
-        <AssetInput
-          size="sm"
-          id="add-liquidity-input-tokena"
-          value={formattedAmounts[Field.CURRENCY_B]}
-          currency={token1}
-          onChange={onFieldBInput}
-          className="!mt-0"
-          showMax={false}
-        />
-        {(oneCurrencyIsETH || oneCurrencyIsWETH) && (
-        /* {(oneCurrencyIsETH || oneCurrencyIsWETH) && chainId != ChainId.CELO && ( */
-            <div className="flex justify-center">
-            <Button size="xs" variant="filled" color="purple" className="rounded-none" onClick={() => 
-              setUseETH(!useETH)
-            }
-              >
-              {`Use`} {useETH && 'W'}
-              {NATIVE[chainId].symbol} instead of {!useETH && 'W'}
-              {NATIVE[chainId].symbol}
-            </Button>
-          </div>
-        )}
-      </HeadlessUiModal.BorderedContent>
-      {!account ? (
-        <Web3Connect />
-        // <Web3Connect fullWidth />
-      ) : isValid &&
-        (approvalA === ApprovalState.NOT_APPROVED ||
-          approvalA === ApprovalState.PENDING ||
-          approvalB === ApprovalState.NOT_APPROVED ||
-          approvalB === ApprovalState.PENDING) ? (
-        <div className="flex gap-4">
-          {approvalA !== ApprovalState.APPROVED && (
-            <Button
-              fullWidth
-              loading={approvalA === ApprovalState.PENDING}
-              onClick={approveACallback}
-              disabled={approvalA === ApprovalState.PENDING}
-              style={{
-                width: approvalB !== ApprovalState.APPROVED ? '48%' : '100%',
-              }}
-            >
-              {`Approve ${currencies[Field.CURRENCY_A]?.symbol}`}
-            </Button>
-          )}
-          {approvalB !== ApprovalState.APPROVED && (
-            <Button
-              fullWidth
-              loading={approvalB === ApprovalState.PENDING}
-              onClick={approveBCallback}
-              disabled={approvalB === ApprovalState.PENDING}
-            >
-              {`Approve ${currencies[Field.CURRENCY_B]?.symbol}`}
-            </Button>
-          )}
-        </div>
-      ) : ( null
-        // <Button
-        //   color={!isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B] ? 'red' : 'blue'}
-        //   onClick={() => {
-        //     isExpertMode
-        //       ? onAdd()
-        //       : setContent(
-        //           <PoolAddLiquidityReviewContent
-        //             noLiquidity={noLiquidity}
-        //             liquidityMinted={minLiquidityCurrencyAmount}
-        //             poolShare={poolTokenPercentage}
-        //             parsedAmounts={parsedAmounts}
-        //             execute={onAdd}
-        //           />
-        //         )
-        //   }}
-        //   disabled={!isValid || attemptingTxn}
-        //   fullWidth
-        // >
-        //   {error ?? `Confirm Adding Liquidity`}
-        // </Button>
-      )}
-      </HeadlessUIModal.BorderedContent>
-      )}
-{/* {openSwap && (
-    <HeadlessUIModal.BorderedContent>
-    // isOpen={true} onDismiss={() => setOpenSwap(false)}>
-        <div className="relative justify-right">
-                        <Button
-                            // type="button"
-                            onClick={() => handleShowSwap()}
-                            className="inline-flex opacity-80 hover:opacity-100 focused:opacity-100 rounded p-1.5 text-primary hover:text-high-emphesis focus:text-high-emphesis focus:outline-none focus:ring focus:ring-offset focus:ring-offset-purple focus:ring-purple"
-                        >
-                            <ArrowLeftIcon className="w-5 h-5" aria-hidden="true" />
-                        </Button>
-        </div>
-        
-        <Add />
-    
-    </HeadlessUIModal.BorderedContent>
-)} */}
 
 { showConfirmation && (
 <Modal isOpen={showConfirmation} onDismiss={

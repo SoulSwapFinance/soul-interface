@@ -321,6 +321,9 @@ export function usePairInfo(pairAddress): { status: string; pairInfo: T } {
         token0Decimals: '18',
         token1Decimals: '18',
 
+        token0Symbol: '',
+        token1Symbol: '',
+
         token0Balance: '0',
         token1Balance: '0',
 
