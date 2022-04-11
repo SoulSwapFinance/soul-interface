@@ -65,18 +65,18 @@ export function Active() {
               </FarmItemBox>
             {/* </HideOnMobile> */}
 
-            <HideOnMobile>
+            {/* <HideOnMobile>
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
                 STAKE
                 </Text>
               </FarmItemBox>
-            </HideOnMobile>
+            </HideOnMobile> */}
 
             <HideOnMobile>
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                VALUE
+                DEPOSITED
                 </Text>
               </FarmItemBox>
             </HideOnMobile>
