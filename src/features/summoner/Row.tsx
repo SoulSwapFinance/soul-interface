@@ -446,28 +446,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
             // <Wrap padding="0" display="flex" justifyContent="center">
                 <div className="flex justify-center p-4 w-full mt-2 mb-2 border border-dark-1000 hover:border-dark-600">
                 <HeadlessUIModal.BorderedContent className="bg-dark-1200 w-full">
-                    {/* <div className="relative text-lg text-center font-bold mb-4">
-                    { ' ' }
-                    <br />
-                        <Button
-                            // type="button"
-                            onClick={() => setShowOptions(false)}
-                            className="absolute top-0 right-0 opacity-80 hover:opacity-100 
-                            focused:opacity-100 rounded p-1 text-primary hover:text-high-emphesis 
-                            focus:text-high-emphesis focus:outline-none focus:ring focus:ring-offset 
-                            focus:ring-offset-purple focus:ring-purple"
-                        >
-                            <XIcon className="w-5 h-5" aria-hidden="true" />
-                        </Button>
-                    </div> */}
-
-                    {/* USER: NOT STAKED & NO BALANCE */}
-                    
-                        {/* <FunctionBox>
-                        <Wrap padding="0" margin="0" display="flex">         
-                         */}
-
-                    {/* HOLDS 0 LP TOKENS */}
+                {/* USER: NOT STAKED & NO BALANCE */}
                     {Number(unstakedBal) == 0 && (
                         <FunctionBox>
                         <Wrap padding="0" margin="0" display="flex">
@@ -529,8 +508,9 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                         color="black"
                                         margin=".5rem 0 .5rem 0"
                                         onClick={() =>
-                                            setOpenDeposit(true)
-                                            
+                                            openDeposit 
+                                                ? setOpenDeposit(false)
+                                                : setOpenDeposit(true) 
                                         }
                                     >
                                         DEPOSIT { farm.lpSymbol }
@@ -545,8 +525,11 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                 color="black"
                                 margin=".5rem 0 .5rem 0"
                                 onClick={() =>
-                                    setOpenWithdraw(true)
+                                    openWithdraw 
+                                        ? setOpenWithdraw(false)
+                                        : setOpenWithdraw(true)
                                 }
+                            
                                 >
                                     WITHDRAW { farm.lpSymbol }
                                 </SubmitButton>
@@ -586,7 +569,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
         )}
 
 {/* DEPOSIT MODAL */}
-{openDeposit && (
+{openDeposit && !openWithdraw && (
     // <Wrap padding="0" display="flex" justifyContent="center">
         <HeadlessUIModal.BorderedContent
             // isOpen={openDeposit} 
