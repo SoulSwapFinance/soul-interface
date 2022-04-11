@@ -23,7 +23,7 @@ export default function Calculator() {
     const btcPrice = useWrappedBtcPrice()
     const trimmedMarketPrice = Number(luxorPrice).toFixed(6);
 
-    const { userInfo } = useUserInfo(account, LUM_ADDRESS[250])
+    const { userInfo } = useUserInfo(LUM_ADDRESS[250])
     const { luxorUserInfo } = useLuxorUserInfo(account)
     const circulatingLumens = useLuxorInfo().luxorInfo.circulatingLumens
     const lumensBalance = Number(userInfo.balance) / 1e9
