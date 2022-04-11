@@ -1,12 +1,12 @@
 import { Wrap } from '../../components/ReusableStyles'
-import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
+// import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 // import FarmBanner from '../../components/FarmBanner'
 import Container from '../../components/Container'
 import Head from 'next/head'
 import React from 'react'
-import FarmList from '../../features/farm/List'
-import NavLink from 'components/NavLink'
-import { Button } from 'components/Button'
+import FarmList from '../../features/summoner/List'
+// import NavLink from 'components/NavLink'
+// import { Button } from 'components/Button'
 
 const Summoner = () => {
   return (

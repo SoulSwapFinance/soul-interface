@@ -4,13 +4,10 @@ import { ApplicationModal } from 'state/application/actions'
 import Image from 'next/image'
 import styled from 'styled-components'
 import Typography from 'components/Typography'
-import ExternalLink from 'components/ExternalLink'
-import { ExternalLink as LinkIcon } from 'react-feather'
 import { useTokenInfo } from 'hooks/useTokenInfo'
 import { useSeanceContract, useSoulContract } from 'hooks'
 import { formatNumber, formatNumberScale, formatPercent } from 'functions'
 import { SOUL_ADDRESS, SEANCE_ADDRESS } from 'constants/addresses'
-import { useSingleCallResult } from 'state/multicall/hooks'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { AURA } from '../../constants'
 import QuestionHelper from '../../components/QuestionHelper'
@@ -19,7 +16,6 @@ import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
 import ModalHeader from 'components/Modal/Header'
-import { usePrice } from 'hooks/usePrice'
 import { HeadlessUiModal } from 'components/Modal'
 import { concat } from 'lodash'
 import { SOUL } from 'sdk'
@@ -71,8 +67,8 @@ export default function SoulStatsModal(): JSX.Element | null {
   }, 0)
 
   let podl = bondsTvl + soulTvl
-  let tvl = farmsTvl + vaultsTvl
-  let percPodl = formatPercent(podl / farmsTvl * 100)
+  // let tvl = farmsTvl + vaultsTvl
+  // let percPodl = formatPercent(podl / farmsTvl * 100)
 
   function getSummaryLine(title, value) {
     return (

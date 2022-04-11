@@ -19,6 +19,7 @@ import ModalHeader from 'components/Modal/Header'
 import { concat } from 'lodash'
 import { useLuxorPrice, useWrappedLumPrice } from 'hooks/getPrices'
 import NavLink from 'components/NavLink'
+import { useLuxorInfo } from 'hooks/useAPI'
 
 const cache: { [key: string]: number } = {};
 
@@ -36,20 +37,17 @@ export default function LuxorStatsModal(): JSX.Element | null {
   const { chainId, library, account } = useActiveWeb3React()
   const luxorStatsModalOpen = useModalOpen(ApplicationModal.LUXOR_STATS)
   const toggleLuxorStatsModal = useToggleLuxorStatsModal()
-  let tokenInfo = useTokenInfo(useLuxorContract())
+  // let tokenInfo = useTokenInfo(useLuxorContract())
   let wrappedLumensInfo = useTokenInfo(useWrappedLumensContract())
   const luxorPrice = useLuxorPrice()
   const wLumPrice = useWrappedLumPrice()
 
+  const { luxorInfo } = useLuxorInfo()
   const farmInfo = useTVL()
   const vaultInfo = useVaultTVL()
   const luxInfo = useLuxTVL()
 
   let luxTvl = luxInfo?.reduce((previousValue, currentValue) => {
-    return previousValue + currentValue?.tvl
-  }, 0)
-
-  let vaultsTvl = vaultInfo?.reduce((previousValue, currentValue) => {
     return previousValue + currentValue?.tvl
   }, 0)
 
@@ -191,7 +189,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
             <Typography variant="sm" className="flex items-center py-0.5">
               {`Circulating Supply`}
             </Typography>
-            <QuestionHelper
+            {/* <QuestionHelper
               text={
                 <div className="flex flex-col gap-2 py-1 px-3 w-full">
                   <div className="flex items-center justify-between">
@@ -233,12 +231,12 @@ export default function LuxorStatsModal(): JSX.Element | null {
                   </div>
                 </div>
               }
-            />
+            /> */}
           </div>,
           formatNumberScale(
-            Number(tokenInfo?.totalSupply)
-            - Number(wrappedLumensInfo?.circulatingSupply)
-            - (Number(tokenInfo?.totalSupply) * 0.19) // TODO: make exact
+            Number(luxorInfo?.supply)
+            - Number(luxorInfo?.circulatingLumens)
+            - (Number(luxorInfo?.supply) * 0.19) // TODO: make exact
             , false)
         )}
         {getSummaryLine(
@@ -246,7 +244,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
             {`Total Market Cap`}
           </Typography>,
           formatCurrency(
-            Number(tokenInfo?.totalSupply) * Number(luxorPrice))
+            Number(luxorInfo?.supply) * Number(luxorPrice))
         )}
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
@@ -290,9 +288,21 @@ export default function LuxorStatsModal(): JSX.Element | null {
           size='xs'
           className="text-white"
         >
+          <NavLink href={'/luxor/dashboard'}>
+            <a className="flex justify-center text-black text-xl transition rounded-md hover:pink">
+              <span>VIEW DATA</span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button
+          color='yellow'
+          type='outlined'
+          size='xs'
+          className="text-white"
+        >
           <NavLink href={'/luxor/bonds'}>
             <a className="flex justify-center text-black text-xl transition rounded-md hover:pink">
-              MINT LUX<span> ↗</span>
+            <span>MINT LUX</span>
             </a>
           </NavLink>
         </Button>
@@ -304,7 +314,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
         >
           <NavLink href={'/luxor/stake'}>
             <a className="flex justify-center text-black text-xl transition rounded-md hover:pink">
-              STAKE LUX<span> ↗</span>
+            <span>STAKE LUX</span>
             </a>
           </NavLink>
         </Button>

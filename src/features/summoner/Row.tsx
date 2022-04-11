@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { ethers } from 'ethers'
+import { BigNumber, ethers } from 'ethers'
 import { useSoulPrice } from 'hooks/getPrices'
 import { useActiveWeb3React } from 'services/web3'
 // import QuestionHelper from '../../components/QuestionHelper'
@@ -13,7 +13,7 @@ import { FarmContentWrapper,
     FarmContainer, FarmItem, FarmItemBox, Text, FunctionBox, SubmitButton, Wrap
 } from './Styles'
 import { classNames, formatNumber, tryParseAmount } from 'functions'
-import { useSummonerPoolInfo, useSummonerUserInfo } from 'hooks/useAPI'
+import { usePairInfo, useSummonerPoolInfo, useSummonerUserInfo } from 'hooks/useAPI'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
 // import Modal from 'components/DefaultModal'
@@ -21,6 +21,8 @@ import { ArrowLeftIcon, XIcon } from '@heroicons/react/solid'
 import { Button } from 'components/Button'
 import Typography from 'components/Typography'
 import Swap from 'pages/exchange/swap/[[...tokens]]'
+import Modal from 'components/Modal/DefaultModal'
+import ModalHeader from 'components/Modal/Header'
 // import ManageSwapPair from './modals/ManageSwapPair'
 // import { Deposit } from './modals/Deposit'
 
@@ -45,32 +47,38 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const { account, chainId } = useActiveWeb3React()
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
     const soulPrice = useSoulPrice()
-    const [showOptions, setShowOptions] = useState(false)
     const [depositing, setDepositing] = useState(false)
-
+    
     const [approved, setApproved] = useState(false)
     const [withdrawValue, setWithdrawValue] = useState('0')
     const [depositValue, setDepositValue] = useState('0')
     const [withdrawable, getWithdrawable] = useState('0')
+    const [unstakedBal, setUnstakedBal] = useState(0)
     
     const SoulSummonerContract = useSoulSummonerContract()
     const SoulSummonerAddress = SoulSummonerContract.address
-
+    
     //   const [confirmed, setConfirmed] = useState(false)
     //   const [receiving, setReceiving] = useState(0)
-    const parsedDepositValue = tryParseAmount(depositValue, SOUL[250])
-    const parsedWithdrawValue = tryParseAmount(withdrawValue, SOUL[250])
+    const parsedDepositValue = tryParseAmount(depositValue, lpToken)
+    const parsedWithdrawValue = tryParseAmount(withdrawValue, lpToken)
     // console.log('earnedAmount:%s', earnedAmount)
     // show confirmation view before minting SOUL
     // const [liquidity, setLiquidity] = useState(0)
-    // const balance = useCurrencyBalance(account, SOUL[250])
-
+    // const balance = useCurrencyBalance(account, lpToken)
+    
     const { summonerPoolInfo } = useSummonerPoolInfo(pid)
     const liquidity = summonerPoolInfo.tvl
     const apr = summonerPoolInfo.apr
+    const lpAddress = summonerPoolInfo.lpAddress
+    
+    const { pairInfo } = usePairInfo(lpAddress)
+    const pairDecimals = pairInfo.pairDecimals
 
-    const [unstakedBal, setUnstakedBal] = useState(0)
+    const [showOptions, setShowOptions] = useState(false)
     const [openDeposit, setOpenDeposit] = useState(false)
+    const [showConfirmation, setShowConfirmation] = useState(false)
+    const [openWithdraw, setOpenWithdraw] = useState(false)
     const [openSwap, setOpenSwap] = useState(false)
     
     const { summonerUserInfo } = useSummonerUserInfo(pid)
@@ -78,6 +86,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const stakedValue = summonerUserInfo.stakedValue
     const earnedAmount = summonerUserInfo.pendingSoul
     const earnedValue = summonerUserInfo.pendingValue
+    const parsedWithdrawAllValue = tryParseAmount(stakedBalance, lpToken)
 
     // ONLY USED FOR LOGO //
     const token0 = new Token(chainId, farm.token1Address[chainId], 18)
@@ -110,7 +119,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     })
 
     /**
-     * Opens the function panel dropdown
+     * Opens the function panel dropdowns.
      */
     const handleShowOptions = () => {
         setShowOptions(!showOptions)
@@ -127,11 +136,13 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
             fetchApproval()
         }
     }
+   
+    const handleShowWithdraw = () => {
+        setOpenWithdraw(!openWithdraw)
+    }
 
     const handleShowSwap = () => {
         setOpenSwap(!openSwap)
-        if (!openSwap) {
-        }
     }
 
     /**
@@ -192,6 +203,17 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const handleWithdraw = async (pid, parsedWithdrawValue) => {
         try {
             const tx = await SoulSummonerContract?.withdraw(pid, parsedWithdrawValue?.quotient.toString())
+            // await tx?.wait().then(await setPending(pid))
+            await tx?.wait()
+        } catch (e) {
+            // alert(e.message)
+            console.log(e)
+        }
+    }
+
+    const handleWithdrawAll = async (pid, parsedWithdrawAllValue) => {
+        try {
+            const tx = await SoulSummonerContract?.withdraw(pid, parsedWithdrawAllValue?.quotient.toString())
             // await tx?.wait().then(await setPending(pid))
             await tx?.wait()
         } catch (e) {
@@ -271,7 +293,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                         </Text>
                                     ) : (
                                         <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                        {Number(stakedValue) == 0 ? '0' 
+                                        ${Number(stakedValue) == 0 ? '0' 
                                             : Number(stakedValue).toString(4) == '0.0000' ? '<0.0000'
                                             : Number(stakedValue) < 1 && Number(stakedValue).toString(4)
                                         ? Number(stakedValue).toFixed(4)
@@ -420,7 +442,6 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                 color="black"
                                 margin=".5rem 0 .5rem 0"
                                 onClick={() =>
-                                    // handleDeposit(depositValue)
                                     setOpenDeposit(true)
                                 }
                                 >
@@ -429,8 +450,26 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                             </Wrap>
                         </FunctionBox>
                     )}
+                    
+                    {Number(stakedBalance) > 0 && (
+                        <FunctionBox>
+                            <Wrap padding="0" margin="0" display="flex">
+                                <SubmitButton
+                                height="2rem"
+                                primaryColour="#B485FF"
+                                color="black"
+                                margin=".5rem 0 .5rem 0"
+                                onClick={() =>
+                                    setOpenWithdraw(true)
+                                }
+                                >
+                                    WITHDRAW
+                                </SubmitButton>
+                            </Wrap>
+                        </FunctionBox>
+                    )}
                         
-                        {Number(stakedBalance) == 0 && (
+                        {Number(stakedBalance) > 0 && (
                             <FunctionBox>
                             {/* <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-dark-600 w-full space-y-1"> */}
                                 {/* <div className="flex justify-between">
@@ -457,7 +496,6 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                         color="black"
                                         margin=".5rem 0 .5rem 0"
                                         onClick={() =>
-                                            // handleDeposit(depositValue)
                                             setOpenDeposit(true)
                                             
                                         }
@@ -472,10 +510,10 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                     color="black"
                                     margin=".5rem 0 .5rem 0"
                                     onClick={() =>
-                                        handleWithdraw(pid, withdrawValue)
+                                        setShowConfirmation(true)
                                     }
                                 >
-                                    WITHDRAW { farm.lpSymbol }
+                                    WITHDRAW ALL
                                 </SubmitButton>
                             </Wrap>
                             <Wrap padding="0" margin="0" display="flex">
@@ -577,6 +615,88 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                 // </Wrap>
 )}
 
+{/* WITHDRAW MODAL */}
+{openWithdraw && (
+        <HeadlessUIModal.BorderedContent>
+                    <div className="relative justify-right">
+                        <Button
+                            onClick={() => handleShowWithdraw()}
+                            className="inline-flex opacity-80 hover:opacity-100 focused:opacity-100 rounded p-1.5 text-primary hover:text-high-emphesis focus:text-high-emphesis focus:outline-none focus:ring focus:ring-offset focus:ring-offset-purple focus:ring-purple"
+                        >
+                            <ArrowLeftIcon className="w-5 h-5" aria-hidden="true" />
+                        </Button>
+                    </div>
+                        <FunctionBox>
+                            <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-1000 hover:border-dark-600 w-full space-y-1">
+                            <div className="text-xl text-center font-bold mb-3 text-dark-600">
+                                Withdraw { farm.lpSymbol }
+                            </div>
+                            <div className="flex justify-between">
+                                <Typography className="text-white" fontFamily={'medium'}>
+                                    Deposited Amount
+                                </Typography>
+                                <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                                    {Number(stakedBalance).toFixed(2)} LP
+                                </Typography>
+                            </div>
+                            {/* TODO: WITHDRAWABLE AMOUNT */}
+                            <div className="flex justify-between">
+                                <Typography className="text-white" fontFamily={'medium'}>
+                                    Withdrawable Amount
+                                </Typography>
+                                <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                                    {Number(0).toFixed(2)} LP
+                                </Typography>
+                            </div>
+                            <div className="flex justify-between">
+                                <Typography className="text-white" fontFamily={'medium'}>
+                                    Pending Rewards
+                                </Typography>
+                                <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                                    {Number(earnedAmount).toFixed(2)} SOUL
+                                </Typography>
+                            </div>
+                            <div className="h-px my-6 bg-dark-1000" />
+                        <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
+                            <div className="text-white">
+                                <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                                    <span> {formatNumber(Number(0), false, true)}% FEE</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <Wrap padding="0" margin="0" display="flex">
+                            <SubmitButton
+                                height="2rem"
+                                primaryColour="#B485FF"
+                                color="black"
+                                margin=".5rem 0 .5rem 0"
+                                onClick={() =>
+                                    handleDeposit(depositValue)
+                                }
+                            >
+                                DEPOSIT SOUL
+                            </SubmitButton>
+                        </Wrap>
+                    <Wrap padding="0" margin="0" display="flex">
+                            <SubmitButton
+                                height="2rem"
+                                primaryColour="#bbb"
+                                color="black"
+                                margin=".5rem 0 .5rem 0"
+                                onClick={() =>
+                                    handleHarvest(pid)
+                                }
+                            >
+                                HARVEST {Number(earnedAmount).toFixed(0)} SOUL
+                                {/* {Number(earnedAmount) !== 0 ? `($${(Number(earnedAmount) * soulPrice).toFixed(0)})` : ''} */}
+                            </SubmitButton>
+                    </Wrap>
+                    
+                    </FunctionBox>
+                </HeadlessUIModal.BorderedContent>
+)}
+
 {openSwap && (
     <HeadlessUIModal.BorderedContent>
     {/* //  isOpen={true} onDismiss={() => setOpenSwap(false)}> */}
@@ -593,7 +713,52 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
         <Swap />
     
     </HeadlessUIModal.BorderedContent>
+)}
+
+{ showConfirmation && (
+<Modal isOpen={showConfirmation} onDismiss={
+        () => setShowConfirmation(false)}>
+        <div className="space-y-4">
+          <ModalHeader header={`Are you sure?`} onClose={() => setShowConfirmation(false)} />
+          <Typography variant="lg">
+            Withdrawing prior to a <b>14-Day Period</b> starts with a fee of 14% and 0% (after 14 days) have elapsed
+            (<b>aka 1% less each day</b>).
+            <br /><br />
+            <b>100% of the fee</b> goes towards building our protocol-owned liquidity, which brings about long-term sustainability to our platform.
+          </Typography>
+          <Typography variant="sm" className="font-medium">
+            QUESTIONS OR CONCERNS?
+            <a href="mailto:soulswapfinance@gmail.com">
+              {' '} CONTACT US
+            </a>
+          </Typography>
+          <Button
+            height="2.5rem"
+            color="purple"
+            // onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
+            onClick={() =>
+                handleWithdrawAll(pid, parsedWithdrawValue?.quotient.toString())
+            }
+          >
+            I UNDERSTAND THESE TERMS
+          </Button>
+          {/* <Button
+            color="red"
+            size="lg"
+            onClick={() => {
+              if (window.prompt(`Please type the word "confirm" to enable expert mode.`) === 'confirm') {
+                setShowConfirmation(false)
+              }
+              setShowConfirmation(false)
+            }}
+          >
+            <Typography variant="lg" id="confirm-expert-mode">
+              { `I UNDERSTAND THESE TERMS` }
+            </Typography> */}
+
+          {/* </Button> */}
+        </div>
+      </Modal>
     )}
-        </>
-    )
-}
+</>
+)}

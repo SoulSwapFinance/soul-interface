@@ -88,7 +88,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     const [liquidity, setLiquidity] = useState(0)
     // const { deposit, withdraw } = useStakeContract()
     // const balance = useCurrencyBalance(account, SOUL[250])
-    const stakedBalance = AutoStakeContract?.balanceOf(account)
+    // const stakedBalance = AutoStakeContract?.balanceOf(account)
 
     /**
      * Runs only on initial render/mount
