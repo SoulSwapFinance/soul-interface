@@ -11,7 +11,7 @@ import { getAddress } from '@ethersproject/address'
 import { useTVL } from 'hooks/useV2Pairs'
 import { usePrice, useFarms, useSummonerInfo } from 'hooks'
 import { TridentBody, TridentHeader } from 'layouts/Trident'
-import useFarmRewards from 'hooks/useFarmRewards'
+// import useFarmRewards from 'hooks/useFarmRewards'
 import { usePositions } from 'features/mines/hooks'
 import { Button } from 'components/Button'
 import { formatNumberScale } from 'functions'
@@ -19,7 +19,7 @@ import { addTransaction } from 'state/transactions/actions'
 import useSummoner from 'features/mines/hooks/useMasterChef'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
-import { useFantomPrice, useSoulPrice } from 'hooks/getPrices'
+import { useSoulPrice } from 'hooks/getPrices'
 
 export default function Mines(): JSX.Element {
   const { chainId } = useActiveWeb3React()
@@ -27,7 +27,7 @@ export default function Mines(): JSX.Element {
   const [pendingTx, setPendingTx] = useState(false)
 
   const soulPrice = useSoulPrice()
-  const ftmPrice = useFantomPrice()
+  // const ftmPrice = useFantomPrice()
 
   const type = router.query?.filter === null ? 'active' : (router.query?.filter as string)
   // const rewards = useFarmRewards()
