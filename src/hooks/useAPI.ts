@@ -270,7 +270,7 @@ export function useTokenInfo(tokenAddress): { status: string; tokenInfo: T } {
 //     return { status, luxorTreasuryData }
 // }
 
-export function useUserInfo(user, tokenAddress): { status: string; userInfo: T } {
+export function useUserInfo(tokenAddress): { status: string; userInfo: T } {
     const { account, chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
     const [userInfo, setInfo] = useState<T>({
@@ -286,7 +286,7 @@ export function useUserInfo(user, tokenAddress): { status: string; userInfo: T }
     useEffect(() => {
       const fetchData = async () => {
         setStatus('fetching')
-        const response = await fetch(`${BASE_URL}/users/${user}/${tokenAddress}`, {
+        const response = await fetch(`${BASE_URL}/users/${account}/${tokenAddress}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -344,7 +344,7 @@ export function usePairInfo(pairAddress): { status: string; pairInfo: T } {
         setInfo(json as T)
         setStatus('fetched')
       }
-      if (chainId == ChainId.FANTOM) 
+      // if (chainId == ChainId.FANTOM) 
       fetchData()
     }, [])
   
@@ -521,6 +521,7 @@ export function useSummonerInfo(): { status: string; summonerInfo: T } {
   const [status, setStatus] = useState<string>('idle')
   const [summonerInfo, setInfo] = useState<T>({
       address: '',
+      poolLength: '0',
       dailySoul: '0',
       soulPerSecond: '0',
       soulPerYear: '0',

@@ -256,12 +256,13 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                 <FarmContainer>
                     <div className="bg-dark-1200 p-3 border border-dark-1000 hover:border-dark-600" onClick={() => handleShowOptions()}>
                         <FarmContentWrapper>
+                            <div className="items-center">
+                                <FarmItemBox>
+                                    <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
+                                </FarmItemBox>
+                            </div>
 
-                            <FarmItemBox>
-                                <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
-                            </FarmItemBox>
-
-                        <HideOnMobile>
+                        {/* <HideOnMobile>
                             <FarmItemBox>
                                 <FarmItem>
                                     {Number(apr).toString() === '0.00' ? (
@@ -281,7 +282,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                     )}
                                 </FarmItem>
                             </FarmItemBox>
-                        </HideOnMobile>
+                        </HideOnMobile> */}
 
                     {/* STAKED VALUE */}
                         <HideOnMobile>

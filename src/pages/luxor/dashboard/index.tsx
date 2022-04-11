@@ -120,7 +120,7 @@ export default function Dashboard() {
   const luxFtmPrice = usePairPrice(LuxorFtmAddress) // ~190_000 // √
   // console.log('luxorVolume:%s', luxData?.result[1])
   // get the price of key treasury reserves
-  // const luxDaiPrice = usePairPrice(LuxorDaiAddress) // ~160_000 // √
+  const luxDaiPrice = usePairPrice(LuxorDaiAddress) // ~160_000 // √
   const wLumFtmPrice = usePairPrice(WrappedLumFantomAddress) // ~1_6M // √
   const ftmDaiPrice = usePairPrice(FtmDaiAddress) 
     
@@ -166,7 +166,7 @@ export default function Dashboard() {
   const LuxFtmBalance = Number(usePairInfo(LuxorFtmAddress).pairInfo.luxorTreasuryBalance) / 1e18
   const LuxDaiBalance = Number(usePairInfo(LuxorDaiAddress).pairInfo.luxorTreasuryBalance) / 1e18
   const LuxFtmValue = LuxFtmBalance * luxFtmPrice
-  const LuxDaiValue = LuxDaiBalance * luxFtmPrice
+  const LuxDaiValue = LuxDaiBalance * luxDaiPrice
   const treasuryLiquidityBalance = LuxFtmValue + LuxDaiValue
   // console.log('treasuryLiquidityBalance:%s', treasuryLiquidityBalance)
     

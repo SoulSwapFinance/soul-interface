@@ -19,7 +19,9 @@ import ModalHeader from 'components/Modal/Header'
 import { concat } from 'lodash'
 import { useLuxorPrice, useWrappedLumPrice } from 'hooks/getPrices'
 import NavLink from 'components/NavLink'
-import { useLuxorInfo } from 'hooks/useAPI'
+import { useLuxorInfo, usePairInfo, useSummonerInfo, useSummonerPoolInfo } from 'hooks/useAPI'
+import { usePairPrice } from 'hooks/usePairData'
+import { usePairContract } from 'hooks/useTokenContract'
 
 const cache: { [key: string]: number } = {};
 
@@ -44,9 +46,27 @@ export default function LuxorStatsModal(): JSX.Element | null {
 
   const { luxorInfo } = useLuxorInfo()
   const farmInfo = useTVL()
-  const vaultInfo = useVaultTVL()
+  
+  // const farmsTvl = useTVL()
   const luxInfo = useLuxTVL()
 
+  const LuxFtmContract = usePairContract('0x951BBB838e49F7081072895947735b0892cCcbCD')
+  const LuxDaiContract = usePairContract('0x46729c2AeeabE7774a0E710867df80a6E19Ef851')
+
+  const LuxorFtmAddress = LuxFtmContract.address
+  const LuxorDaiAddress = LuxDaiContract.address
+
+  // Prices //
+  const luxFtmPrice = usePairPrice(LuxorFtmAddress) // ~190_000 // √
+  const luxDaiPrice = usePairPrice(LuxorDaiAddress) // ~160_000 // √
+
+  // GET LIQUIDITY BALANCES //
+  const LuxFtmBalance = Number(usePairInfo(LuxorFtmAddress).pairInfo.luxorTreasuryBalance) / 1e18
+  const LuxDaiBalance = Number(usePairInfo(LuxorDaiAddress).pairInfo.luxorTreasuryBalance) / 1e18
+  const LuxFtmValue = LuxFtmBalance * luxFtmPrice
+  const LuxDaiValue = LuxDaiBalance * luxDaiPrice
+  const treasuryLiquidityBalance = LuxFtmValue + LuxDaiValue
+  
   let luxTvl = luxInfo?.reduce((previousValue, currentValue) => {
     return previousValue + currentValue?.tvl
   }, 0)
@@ -251,9 +271,9 @@ export default function LuxorStatsModal(): JSX.Element | null {
             {`Protocol Liquidity`}
           </Typography>,
           concat(formatNumberScale(
-            luxTvl, true)
+            treasuryLiquidityBalance, true)
             ,
-            ` (${((luxTvl / tvl * 100).toFixed(0))}%)`)
+            ` (${((treasuryLiquidityBalance / tvl * 100).toFixed(0))}%)`)
         )}
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
