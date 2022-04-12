@@ -13,7 +13,7 @@ import { FarmContentWrapper,
     FarmContainer, FarmItem, FarmItemBox, Text, FunctionBox, SubmitButton, Wrap
 } from './Styles'
 import { calculateGasMargin, calculateSlippageAmount, classNames, formatNumber, tryParseAmount } from 'functions'
-import { usePairInfo, useSummonerPoolInfo, useSummonerUserInfo } from 'hooks/useAPI'
+import { usePairInfo, useSummonerPoolInfo, useSummonerUserInfo, useUserPairInfo } from 'hooks/useAPI'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
 // import Modal from 'components/DefaultModal'
@@ -58,7 +58,6 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const [withdrawValue, setWithdrawValue] = useState('0')
     const [depositValue, setDepositValue] = useState('0')
     const [withdrawable, getWithdrawable] = useState('0')
-    const [unstakedBal, setUnstakedBal] = useState(0)
     
     const SoulSummonerContract = useSoulSummonerContract()
 
@@ -81,10 +80,14 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const apr = summonerPoolInfo.apr
     const lpAddress = summonerPoolInfo.lpAddress
     
+    const { pairUserInfo } = useUserPairInfo(lpAddress)
     const { pairInfo } = usePairInfo(lpAddress)
     // const lpSymbol = pairInfo.lpSymbol
     // const assetAddress = pairInfo.address
     const assetDecimals = pairInfo.pairDecimals
+    const unstakedBalance 
+        = Number(pairUserInfo.userBalance) 
+            / 10**Number(assetDecimals)
     // const assetSymbol = pairInfo.symbol
 
     const token0Symbol = pairInfo.token0Symbol
@@ -106,6 +109,8 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const timeDelta = summonerUserInfo.timeDelta
     const secondsRemaining = summonerUserInfo.secondsRemaining
     const withdrawFee = summonerUserInfo.currentRate
+    const hasBalance = Number(unstakedBalance) > 0
+    const isFarmer = Number(stakedBalance) > 0
 
     // ONLY USED FOR LOGO //
 
@@ -120,7 +125,6 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
      * Runs only on initial render/mount
      */
     useEffect(() => {
-        fetchBals()
         fetchApproval()
     }, [account])
 
@@ -131,7 +135,6 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
         if (account) {
             const timer = setTimeout(() => {
                 // if (showing) {
-                    fetchBals()
                     fetchApproval()
                 // }
             }, 3000)
@@ -146,7 +149,6 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const handleShowOptions = () => {
         setShowOptions(!showOptions)
         if (!showOptions) {
-            fetchBals()
             fetchApproval()
         }
     }
@@ -154,33 +156,15 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const handleShowDeposit = () => {
         setOpenDeposit(!openDeposit)
         if (!openDeposit) {
-            fetchBals()
             fetchApproval()
         }
     }
    
     const handleShowWithdraw = () => {
         setOpenWithdraw(!openWithdraw)
-    }
-
-    /**
-     * Gets the lpToken balance of the user for each pool
-     */
-    const fetchBals = async () => {
-        if (!account) {
-            // alert('connect wallet')
-        } else {
-            try {
-                // get total balance for pid from user balancess
-                const result2 = await erc20BalanceOf(account)
-                const unstaked = ethers.utils.formatUnits(result2)
-                setUnstakedBal(Number(unstaked))
-
-                return [unstaked]
-            } catch (err) {
-                // console.warn(err)
-            }
-        }
+        // if (openWithdraw) {
+        //     handleShowDeposit
+        // }
     }
 
     /**
@@ -236,7 +220,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
         try {
             let tx
             tx = await SoulSummonerContract?.deposit(pid, 0)
-            await tx?.wait() // .then(await fetchEarnings())
+            await tx?.wait()
         } catch (e) {
             // alert(e.message)
             console.log(e)
@@ -250,7 +234,6 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
         try {
             const tx = await SoulSummonerContract?.deposit(pid, (Number(depositValue) * 10**Number(assetDecimals)).toString())
             await tx.wait()
-            await fetchBals()
         } catch (e) {
             // alert(e.message)
             console.log(e)
@@ -385,8 +368,8 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
             // <Wrap padding="0" display="flex" justifyContent="center">
                 <div className="flex justify-center p-4 w-full mt-2 mb-2 border border-dark-1000 hover:border-dark-600">
                 <HeadlessUIModal.BorderedContent className="bg-dark-1200 w-full">
-                {/* USER: NOT STAKED & NO BALANCE */}
-                    {Number(unstakedBal) == 0 && (
+                {/* USER: NOT STAKED & NOT FARMER */}
+                    {!hasBalance && !isFarmer && (
                         <FunctionBox>
                         <Wrap padding="0" margin="0" display="flex">
                             <SubmitButton
@@ -438,7 +421,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                     )}
 
                     {/* FARMER WITH APPROVAL */}  
-                        {approved && Number(stakedBalance) > 0 && (
+                        {approved && isFarmer && (
                             <FunctionBox>
                                 <Wrap padding="0" margin="0" display="flex">
                                     <SubmitButton
@@ -457,19 +440,17 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                 </Wrap>
                                 <FunctionBox>
 
-                            <Wrap padding="0" margin="0" display="flex">
-                                <SubmitButton
-                                height="2rem"
-                                primaryColour="#B485FF"
-                                color="black"
-                                margin=".5rem 0 .5rem 0"
-                                onClick={() =>
-                                    openWithdraw 
-                                        ? setOpenWithdraw(false)
-                                        : setOpenWithdraw(true)
-                                }
-                            
-                                >
+                        <Wrap padding="0" margin="0" display="flex">
+                            <SubmitButton
+                            height="2rem"
+                            primaryColour="#B485FF"
+                            color="black"
+                            margin=".5rem 0 .5rem 0"
+                            onClick={() =>
+                                openWithdraw
+                                    ? setOpenWithdraw(false)
+                                    : setOpenWithdraw(true) 
+                            }>
                                     WITHDRAW { farm.lpSymbol }
                                 </SubmitButton>
                             </Wrap>
@@ -517,23 +498,37 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                             </div>
                             <div className="flex justify-between">
                                 <Typography className="text-white" fontFamily={'medium'}>
-                                    Deposited Amount
+                                    Staked (Amount)
                                 </Typography>
                                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                    {formatNumber(stakedBalance, false, true)} LP
+                                    {formatNumber(stakedBalance, false, true)} {farm.lpSymbol}{' '}
+                                   
                                 </Typography>
                             </div>
+                            
                             <div className="flex justify-between">
                                 <Typography className="text-white" fontFamily={'medium'}>
-                                    Deposited Value
+                                    Staked (USD)
                                 </Typography>
                                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                    {formatNumber(stakedValue, true)}
+                                   {formatNumber(stakedValue, true)}
                                 </Typography>
                             </div>
+
+                            { Number(unstakedBalance) > 0 &&
                             <div className="flex justify-between">
                                 <Typography className="text-white" fontFamily={'medium'}>
-                                    Pending Rewards
+                                    Balance
+                                </Typography>
+                                <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                                    {formatNumber(unstakedBalance, false)} {farm.lpSymbol}
+                                </Typography>
+                            </div>
+                            }
+
+                            <div className="flex justify-between">
+                                <Typography className="text-white" fontFamily={'medium'}>
+                                    Rewards
                                 </Typography>
                                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                     {Number(earnedAmount).toFixed(2)} SOUL
@@ -554,9 +549,9 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                             pid={farm.pid}
                             onMax={setDepositValue}
                             value={depositValue}
-                            balance={unstakedBal.toString()}
+                            balance={unstakedBalance.toString()}
                             onUserInput={setDepositValue}
-                            id={''}
+                            id={pid}
                             // pairSymbol={farm.lpSymbol}
                             token0={token0} 
                             token1={token1} 
@@ -618,7 +613,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                     Deposited Amount
                                 </Typography>
                                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                    {Number(stakedBalance).toFixed(2)} LP
+                                    {Number(stakedBalance).toFixed(2)} {farm.lpSymbol}
                                 </Typography>
                             </div>
                             {/* TODO: WITHDRAWABLE AMOUNT */}
@@ -627,7 +622,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                     Withdrawable Amount
                                 </Typography>
                                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                    {Number(0).toFixed(2)} LP
+                                    {Number().toFixed(2)} {farm.lpSymbol}
                                 </Typography>
                             </div>
                             <div className="flex justify-between">
@@ -643,7 +638,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                             <div className="text-white">
                                 <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                                     <span> 
-                                        {Number(withdrawFee).toFixed(0)}% FEE
+                                        {(Number(withdrawFee)).toFixed(0)}% FEE
                                     </span>
                                 </div>
                             </div>
@@ -656,7 +651,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                             value={withdrawValue}
                             balance={stakedBalance.toString()}
                             onUserInput={setWithdrawValue}
-                            id={''}
+                            id={pid}
                             // pairSymbol={farm.lpSymbol}
                             token0={token0}
                             token1={token1} 
