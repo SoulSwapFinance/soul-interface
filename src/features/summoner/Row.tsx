@@ -66,7 +66,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const { pairUserInfo } = useUserPairInfo(lpAddress)
     const { pairInfo } = usePairInfo(lpAddress)
     // const lpSymbol = pairInfo.lpSymbol
-    const assetAddress = pairInfo.address
+    // const assetAddress = pairInfo.address
     // console.log(assetAddress)
     const assetDecimals = pairInfo.pairDecimals
     const unstakedBalance 
@@ -371,6 +371,8 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
             // <Wrap padding="0" display="flex" justifyContent="center">
                 <div className="flex justify-center p-4 w-full mt-2 mb-2 border border-dark-1000 hover:border-dark-600">
                 <HeadlessUIModal.BorderedContent className="bg-dark-1200 w-full">
+                    {/* // isOpen={true} 
+                    // onDismiss={ () => setShowOptions(false) } */}
                 {/* USER: NOT STAKED & NOT FARMER */}
                     {!hasBalance && !isFarmer && !isUnderworldPair && (
                         <FunctionBox>
@@ -481,9 +483,9 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
 {/* DEPOSIT MODAL */}
 {openDeposit && !openWithdraw && (
     // <Wrap padding="0" display="flex" justifyContent="center">
-        <HeadlessUIModal.BorderedContent
-            // isOpen={openDeposit} 
-            // onDismiss={ () => setOpenDeposit(false) }
+        <HeadlessUIModal.Controlled
+            isOpen={openDeposit} 
+            onDismiss={ () => setOpenDeposit(false) }
         >
                     <div className="relative justify-right">
                         <Button
@@ -629,13 +631,17 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         </Wrap>
                     </FunctionBox>
                 
-                   </HeadlessUIModal.BorderedContent>
+                   </HeadlessUIModal.Controlled>
                 // </Wrap>
 )}
 
 {/* WITHDRAW MODAL */}
 {openWithdraw && (
-        <HeadlessUIModal.BorderedContent>
+        <HeadlessUIModal.Controlled
+        isOpen={openWithdraw} 
+        onDismiss={ () => setOpenWithdraw(false) }
+
+        >
                     <div className="relative justify-right">
                         <Button
                             onClick={() => handleShowWithdraw()}
@@ -781,7 +787,9 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         </Wrap>
                     
                     </FunctionBox>
-                </HeadlessUIModal.BorderedContent>
+                </HeadlessUIModal.Controlled
+                
+                >
 )}
 
 { showConfirmation && (
