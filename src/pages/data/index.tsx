@@ -1,6 +1,6 @@
 import Container from 'components/Container'
 import Typography from 'components/Typography'
-import { useArcherMinerTips, usePriceUSD, useTokenInfo, useTotalSupply, } from 'hooks/useAPI'
+import { useArcherMinerTips, useTokenInfo, useTotalSupply, } from 'hooks/useAPI'
 import usePriceApi from 'hooks/usePriceApi'
 import React from 'react'
 import { useWeb3React } from '@web3-react/core'
