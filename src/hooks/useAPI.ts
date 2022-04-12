@@ -304,8 +304,46 @@ export function useUserInfo(tokenAddress): { status: string; userInfo: T } {
     return { status, userInfo }
 }
 
+export function useUserPairInfo(userAddress, pairAddress): { status: string; pairUserInfo: T } {
+    const [status, setStatus] = useState<string>('idle')
+    const [pairUserInfo, setInfo] = useState<T>({
+        name: '',
+        address: '',
+        lpPrice: '0',
+        lpValue: '0',
+
+        token0Address: '',
+        token1Address: '',
+
+        token0Decimals: '',
+        token1Decimals: '',
+
+        userBalance: '0',
+        pairDecimals: '18',
+        pairType: '',
+    })  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus('fetching')
+        const response = await fetch(`${BASE_URL}/pairs/${userAddress}/${pairAddress}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referrer-Policy': 'no-referrer',
+          },
+        })
+        const json = await response.json()
+        setInfo(json as T)
+        setStatus('fetched')
+      }
+      // if (chainId == ChainId.FANTOM) 
+      fetchData()
+    }, [])
+  
+    return { status, pairUserInfo }
+}
+
 export function usePairInfo(pairAddress): { status: string; pairInfo: T } {
-    const { account, chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
     const [pairInfo, setInfo] = useState<T>({
         address: '',
@@ -320,6 +358,9 @@ export function usePairInfo(pairAddress): { status: string; pairInfo: T } {
 
         token0Decimals: '18',
         token1Decimals: '18',
+
+        token0Address: '',
+        token1Address: '',
 
         token0Symbol: '',
         token1Symbol: '',

@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useContext, createContext, ReactNode, FC } from 'react'
 import ReactGA from 'react-ga'
-import { TransactionResponse } from '@ethersproject/providers'
 import styled from 'styled-components'
 import { BigNumber, ethers } from 'ethers'
 import { useSoulPrice } from 'hooks/getPrices'
 import { useActiveWeb3React } from 'services/web3'
 // import QuestionHelper from '../../components/QuestionHelper'
-import { CurrencyAmount, currencyEquals, NATIVE, Percent, SOUL, SOUL_ADDRESS, Token, WNATIVE } from 'sdk'
-import AssetInput from 'components/AssetInput'
+import { Percent, Token } from 'sdk'
 import { useRouterContract, useSoulSummonerContract } from 'hooks/useContract'
 import useApprove from 'features/bond/hooks/useApprove'
 
@@ -25,16 +23,12 @@ import Typography from 'components/Typography'
 import Modal from 'components/Modal/DefaultModal'
 import ModalHeader from 'components/Modal/Header'
 
-import { Field } from 'state/mint/actions'
-import { useDerivedMintInfo, useMintActionHandlers, useMintState } from 'state/mint/hooks'
-import Web3Connect from 'components/Web3Connect'
-import { ApprovalState, useApproveCallback } from 'hooks'
-
-import { ZERO_PERCENT } from 'constants/index'
-
 import { useExpertModeManager, useUserSlippageToleranceWithDefault } from 'state/user/hooks'
 import ExternalLink from 'components/ExternalLink'
 import NavLink from 'components/NavLink'
+import StableInputPanel from 'components/StableInputPanel'
+import CurrencyInputPanel from './Input'
+import FarmInputPanel from './Input'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -52,22 +46,6 @@ const HideOnMobile = styled.div`
   display: none;
 }
 `
-
-interface FarmListItemDetailsModal {
-  content: ReactNode
-  setContent: React.Dispatch<React.SetStateAction<React.ReactNode>>
-}
-
-const Context = createContext<FarmListItemDetailsModal | undefined>(undefined)
-
-export const useFarmListItemDetailsModal = () => {
-    const context = useContext(Context)
-    if (!context) {
-      throw new Error('Hook can only be used inside Farm List Item Details Context')
-    }
-  
-    return context
-  }
 
 export const ActiveRow = ({ pid, farm, lpToken }) => {
     const { account, chainId, library } = useActiveWeb3React()
@@ -104,6 +82,11 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const lpAddress = summonerPoolInfo.lpAddress
     
     const { pairInfo } = usePairInfo(lpAddress)
+    // const lpSymbol = pairInfo.lpSymbol
+    // const assetAddress = pairInfo.address
+    const assetDecimals = pairInfo.pairDecimals
+    // const assetSymbol = pairInfo.symbol
+
     const token0Symbol = pairInfo.token0Symbol
     const token1Symbol = pairInfo.token1Symbol
 
@@ -120,51 +103,18 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const stakedValue = summonerUserInfo.stakedValue
     const earnedAmount = summonerUserInfo.pendingSoul
     const earnedValue = summonerUserInfo.pendingValue
-    const parsedWithdrawAllValue = tryParseAmount(stakedBalance, lpToken)
+    const timeDelta = summonerUserInfo.timeDelta
+    const secondsRemaining = summonerUserInfo.secondsRemaining
+    const withdrawFee = summonerUserInfo.currentRate
 
     // ONLY USED FOR LOGO //
+
     const token0 = new Token(chainId, farm.token1Address[chainId], 18)
+
     const token1 = new Token(chainId, farm.token2Address[chainId], 18)
+
     // const pair = new Token(chainId, farm.lpToken.address, 18)
     // console.log('lpAddress:%s', lpAddress)
-
-    // Pair Information //
-    
-      // mint state
-    const { independentField, typedValue, otherTypedValue } = useMintState()
-    const { dependentField, currencies, parsedAmounts, noLiquidity, liquidityMinted, poolTokenPercentage, error } =
-        useDerivedMintInfo(token0 ?? undefined, token1 ?? undefined)
-
-    const isValid = !error
-
-    // get formatted amounts
-    const formattedAmounts = {
-        [independentField]: typedValue,
-        [dependentField]: noLiquidity ? otherTypedValue : parsedAmounts[dependentField]?.toSignificant(6) ?? '',
-    }
-
-    // check whether the user has approved the router on the tokens
-    const [approvalA, approveACallback] = useApproveCallback(parsedAmounts[Field.CURRENCY_A], RouterContract?.address)
-    const [approvalB, approveBCallback] = useApproveCallback(parsedAmounts[Field.CURRENCY_B], RouterContract?.address)
-
-    const [useETH, setUseETH] = useState(false)
-    const oneCurrencyIsETH = token0?.isNative || token1?.isNative
-
-    const oneCurrencyIsWETH = Boolean(
-        chainId &&
-          ((token0 && currencyEquals(token0, WNATIVE[chainId])) ||
-            (token1 && currencyEquals(token1, WNATIVE[chainId])))
-    )
-
-    const minLiquidityMintedJSBI = liquidityMinted
-    ? calculateSlippageAmount(liquidityMinted, noLiquidity ? ZERO_PERCENT : allowedSlippage)[0]
-    : undefined
-
-
-    const minLiquidityCurrencyAmount =
-    liquidityMinted?.currency && minLiquidityMintedJSBI
-      ? CurrencyAmount.fromRawAmount(liquidityMinted.currency, minLiquidityMintedJSBI)
-      : undefined
 
     /**
      * Runs only on initial render/mount
@@ -268,9 +218,9 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     // // /**
     // //  * Withdraw Liquidity Asset
     // //  */
-    const handleWithdraw = async (pid, parsedWithdrawValue) => {
+    const handleWithdraw = async (pid) => {
         try {
-            const tx = await SoulSummonerContract?.withdraw(pid, parsedWithdrawValue?.quotient.toString())
+            const tx = await SoulSummonerContract?.withdraw(pid, (Number(withdrawValue) * 10**Number(assetDecimals)).toString())
             // await tx?.wait().then(await setPending(pid))
             await tx?.wait()
         } catch (e) {
@@ -278,17 +228,6 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
             console.log(e)
         }
     }
-
-    // const handleWithdrawAll = async (pid, parsedWithdrawAllValue) => {
-    //     try {
-    //         const tx = await SoulSummonerContract?.withdraw(pid, parsedWithdrawAllValue?.quotient.toString())
-    //         // await tx?.wait().then(await setPending(pid))
-    //         await tx?.wait()
-    //     } catch (e) {
-    //         // alert(e.message)
-    //         console.log(e)
-    //     }
-    // }
 
     // // /**
     // //  * Harvest Shares
@@ -307,9 +246,9 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     // /**
     //  * Deposits Soul
     //  */
-    const handleDeposit = async (amount) => {
+    const handleDeposit = async (pid) => {
         try {
-            const tx = await SoulSummonerContract?.deposit(account, parsedDepositValue?.quotient.toString())
+            const tx = await SoulSummonerContract?.deposit(pid, (Number(depositValue) * 10**Number(assetDecimals)).toString())
             await tx.wait()
             await fetchBals()
         } catch (e) {
@@ -537,19 +476,6 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         </FunctionBox>
 
                             <Wrap padding="0" margin="0" display="flex">
-                                <SubmitButton
-                                    height="2rem"
-                                    primaryColour="#B485FF"
-                                    color="black"
-                                    margin=".5rem 0 .5rem 0"
-                                    onClick={() =>
-                                        setShowConfirmation(true)
-                                    }
-                                >
-                                    WITHDRAW ALL
-                                </SubmitButton>
-                            </Wrap>
-                            <Wrap padding="0" margin="0" display="flex">
                                     <SubmitButton
                                         height="2rem"
                                         primaryColour="#B485FF"
@@ -614,6 +540,20 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                             </div>
                         </div>
                     </div>
+
+            {/* DEPOSIT: ASSET PANEL */}
+                    <FarmInputPanel
+                            pid={farm.pid}
+                            onMax={setDepositValue}
+                            value={depositValue}
+                            balance={unstakedBal.toString()}
+                            onUserInput={setDepositValue}
+                            id={''}
+                            // pairSymbol={farm.lpSymbol}
+                            token0={token0} 
+                            token1={token1} 
+                        />
+
                         <Wrap padding="0" margin="0" display="flex">
                             <SubmitButton
                                 height="2rem"
@@ -621,10 +561,10 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                 color="black"
                                 margin=".5rem 0 .5rem 0"
                                 onClick={() =>
-                                    handleDeposit(depositValue)
+                                    handleDeposit(pid)
                                 }
                             >
-                                DEPOSIT SOUL
+                                DEPOSIT {farm.lpSymbol}
                             </SubmitButton>
                         </Wrap>
                     <Wrap padding="0" margin="0" display="flex">
@@ -660,6 +600,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         </Button>
                     </div>
                         <FunctionBox>
+                    
                             <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-1000 hover:border-dark-600 w-full space-y-1">
                             <div className="text-xl text-center font-bold mb-3 text-dark-600">
                                 Withdraw { farm.lpSymbol }
@@ -693,11 +634,25 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
                             <div className="text-white">
                                 <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                                    <span> {formatNumber(Number(0), false, true)}% FEE</span>
+                                    <span> 
+                                        {Number(withdrawFee).toFixed(0)}% FEE
+                                    </span>
                                 </div>
                             </div>
                         </div>
                     </div>
+                {/* WITHDRAW: ASSET PANEL */}
+                    <FarmInputPanel
+                            pid={farm.pid}
+                            onMax={setWithdrawValue}
+                            value={withdrawValue}
+                            balance={stakedBalance.toString()}
+                            onUserInput={setWithdrawValue}
+                            id={''}
+                            // pairSymbol={farm.lpSymbol}
+                            token0={token0}
+                            token1={token1} 
+                    />
                         <Wrap padding="0" margin="0" display="flex">
                             <SubmitButton
                                 height="2rem"
@@ -705,10 +660,11 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                 color="black"
                                 margin=".5rem 0 .5rem 0"
                                 onClick={() =>
-                                    handleDeposit(depositValue)
+                                    // handleWithdraw(pid)
+                                    setShowConfirmation(true)
                                 }
                             >
-                                DEPOSIT SOUL
+                                WITHDRAW { farm.lpSymbol }
                             </SubmitButton>
                         </Wrap>
                     <Wrap padding="0" margin="0" display="flex">
@@ -736,12 +692,15 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
         <div className="space-y-4">
           <ModalHeader header={`Are you sure?`} onClose={() => setShowConfirmation(false)} />
           <Typography variant="lg">
-            Withdrawing prior to a <b>14-Day Period</b> starts with a fee of 14% and 0% (after 14 days) have elapsed
-            (<b>aka 1% less each day</b>).
+            Withdrawing before a <b>14-Day Period</b> incurs a 14% fee of your deposited assets and 0% (after 14 days) have elapsed.
             <br /><br />
-            <b>100% of the fee</b> goes towards building our protocol-owned liquidity, which brings about long-term sustainability to our platform.
+            <li> Fee Rate: {withdrawFee}% </li>
+            <li> Fee Amount: {Number(withdrawFee) / 100 * Number(stakedBalance)} {farm.lpSymbol} </li>
+            <li> Fee Value: ~${Number(withdrawFee) / 100 * Number(stakedValue)} </li>
+
+            {/* <b>100% of the fee</b> goes towards building our protocol-owned liquidity, which brings about long-term sustainability to our platform. */}
           </Typography>
-          <Typography variant="sm" className="font-medium">
+          <Typography variant="sm" className="font-medium text-center">
             QUESTIONS OR CONCERNS?
             <a href="mailto:soulswapfinance@gmail.com">
               {' '} CONTACT US
@@ -750,28 +709,12 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
           <Button
             height="2.5rem"
             color="purple"
-            // onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
             onClick={() =>
-                handleWithdraw(pid, parsedWithdrawValue?.quotient.toString())
+                handleWithdraw(pid) 
             }
           >
             I UNDERSTAND THESE TERMS
           </Button>
-          {/* <Button
-            color="red"
-            size="lg"
-            onClick={() => {
-              if (window.prompt(`Please type the word "confirm" to enable expert mode.`) === 'confirm') {
-                setShowConfirmation(false)
-              }
-              setShowConfirmation(false)
-            }}
-          >
-            <Typography variant="lg" id="confirm-expert-mode">
-              { `I UNDERSTAND THESE TERMS` }
-            </Typography> */}
-
-          {/* </Button> */}
         </div>
       </Modal>
     )}
