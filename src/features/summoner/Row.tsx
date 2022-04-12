@@ -382,7 +382,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         <Wrap padding="0" margin="0" display="flex">
                             <SubmitButton
                                 height="2rem"
-                                primaryColour="#B485FF"
+                                primaryColor="#B485FF"
                                 color="black"
                                 margin=".5rem 0 .5rem 0"
                                 // onClick={() => setOpenSwap(true)}
@@ -418,7 +418,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                             <Wrap padding="0" margin="0" display="flex">
                                 <SubmitButton 
                                     height="2rem"
-                                    primaryColour="#B485FF"
+                                    primaryColor="#B485FF"
                                     color="black"
                                     margin=".5rem 0 .5rem 0"
                                     onClick={() => handleApprove()}>
@@ -434,7 +434,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                 <Wrap padding="0" margin="0" display="flex">
                                     <SubmitButton
                                         height="2rem"
-                                        primaryColour="#B485FF"
+                                        primaryColor="#B485FF"
                                         color="black"
                                         margin=".5rem 0 .5rem 0"
                                         onClick={() =>
@@ -451,7 +451,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         <Wrap padding="0" margin="0" display="flex">
                             <SubmitButton
                             height="2rem"
-                            primaryColour="#B485FF"
+                            primaryColor="#B485FF"
                             color="black"
                             margin=".5rem 0 .5rem 0"
                             onClick={() =>
@@ -467,7 +467,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                             <Wrap padding="0" margin="0" display="flex">
                                     <SubmitButton
                                         height="2rem"
-                                        primaryColour="#B485FF"
+                                        primaryColor="#B485FF"
                                         color="black"
                                         margin=".5rem 0 .5rem 0"
                                         onClick={() =>
@@ -574,7 +574,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         <Wrap padding="0" margin="0" display="flex">
                             <SubmitButton
                                 height="2rem"
-                                primaryColour="#B485FF"
+                                primaryColor="#B485FF"
                                 color="black"
                                 margin=".5rem 0 .5rem 0"
                                 // onClick={() => setOpenSwap(true)}
@@ -607,7 +607,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                     { isUnderworldPair && (
                         <SubmitButton
                             height="2rem"
-                            primaryColour="#B485FF"
+                            primaryColor="#B485FF"
                             color="black"
                             margin=".5rem 0 .5rem 0"
                         >
@@ -622,7 +622,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         <Wrap padding="0" margin="0" display="flex">
                             <SubmitButton
                                 height="2rem"
-                                primaryColour="#B485FF"
+                                primaryColor="#B485FF"
                                 color="black"
                                 margin=".5rem 0 .5rem 0"
                                 onClick={() =>
@@ -741,7 +741,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         <Wrap padding="0" margin="0" display="flex">
                             <SubmitButton
                                 height="2rem"
-                                primaryColour="#B485FF"
+                                primaryColor="#B485FF"
                                 color="black"
                                 margin=".5rem 0 .5rem 0"
                                 onClick={() =>
