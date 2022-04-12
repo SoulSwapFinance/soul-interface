@@ -66,16 +66,17 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const { pairUserInfo } = useUserPairInfo(lpAddress)
     const { pairInfo } = usePairInfo(lpAddress)
     // const lpSymbol = pairInfo.lpSymbol
-    // const assetAddress = pairInfo.address
+    const assetAddress = pairInfo.address
+    // console.log(assetAddress)
     const assetDecimals = pairInfo.pairDecimals
     const unstakedBalance 
-        = Number(pairUserInfo.userBalance) 
-            / 10**Number(assetDecimals)
+    = Number(pairUserInfo.userBalance) 
+    / 10**Number(assetDecimals)
     // const assetSymbol = pairInfo.symbol
-
+    
     const token0Symbol = pairInfo.token0Symbol
     const token1Symbol = pairInfo.token1Symbol
-
+    
     const token0Address = pairInfo.token0Address
     const token1Address = pairInfo.token1Address
 
@@ -105,7 +106,6 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     // ONLY USED FOR LOGO //
     const token0 = new Token(chainId, farm.token1Address[chainId], 18)
     const token1 = new Token(chainId, farm.token2Address[chainId], 18)
-
     // const pair = new Token(chainId, farm.lpToken.address, 18)
     // console.log('lpAddress:%s', lpAddress)
 
@@ -382,12 +382,12 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                 margin=".5rem 0 .5rem 0"
                                 // onClick={() => setOpenSwap(true)}
                             >
-                            {(token0Symbol == 'FTM' || token1Symbol == 'FTM') ? (
+                            {(farm?.token1 == 'FTM' || farm?.token2 == 'FTM') ? (
                           <NavLink
                             href=
-                            {token0Symbol == 'FTM' ?
-                              `/add/FTM/${token0Address}`
-                              : `/add/FTM/${token1Address}`
+                            {farm.token1 == 'FTM' ?
+                              `/exchange/add/FTM/${token1Address}`
+                              : `/exchange/add/FTM/${token0Address}`
                             }
                           >
                             <a>PAIR {farm.lpSymbol}</a>
@@ -395,7 +395,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         ) : (
                           <NavLink
                             href=
-                            {`/add/${token0Address}/${token1Address}`}
+                            {`/add/${farm.token1}/${farm.token2}`}
                           >
                             <a>PAIR {farm.lpSymbol}</a>
                           </NavLink>
@@ -574,12 +574,12 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                 margin=".5rem 0 .5rem 0"
                                 // onClick={() => setOpenSwap(true)}
                             >
-                            {(token0Symbol == 'FTM' || token1Symbol == 'FTM') ? (
+                            {(token0Symbol == 'WFTM' || token1Symbol == 'WFTM') ? (
                           <NavLink
                             href=
-                            {token0Symbol == 'FTM' ?
-                              `/add/FTM/${token0Address}`
-                              : `/add/FTM/${token1Address}`
+                            {token0Symbol == 'WFTM' ?
+                              `/add/FTM/${token1Address}`
+                              : `/add/FTM/${token0Address}`
                             }
                           >
                             <a>PAIR {farm.lpSymbol}</a>
