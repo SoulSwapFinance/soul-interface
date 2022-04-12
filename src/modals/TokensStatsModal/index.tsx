@@ -46,6 +46,7 @@ export default function SoulStatsModal(): JSX.Element | null {
   const { userInfo } = useUserInfo()
   // const { tokenInfo } = useTokenInfo()
   const votingPower = userInfo.votingPower
+  const protocolOwnership = Number(userInfo.protocolOwnership).toFixed(2)
   const totalSeance = Number(useTokenInfo(SEANCE_ADDRESS[250]).tokenInfo.supply) / 1e18
   const totalSoul = Number(useTokenInfo(SOUL_ADDRESS[250]).tokenInfo.supply) / 1e18
   // console.log('votingPower', votingPower)
@@ -191,7 +192,9 @@ export default function SoulStatsModal(): JSX.Element | null {
             {`Voting Power`}
           </Typography>,
         formatNumber(Number(votingPower), false, true)
-            )}
+          + ` (${protocolOwnership}%)` 
+        )}
+      
          {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Maximum Supply`}
