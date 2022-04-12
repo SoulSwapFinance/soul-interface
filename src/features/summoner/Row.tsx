@@ -651,8 +651,8 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                 Withdraw { farm.lpSymbol }
                             </div>
                             <div className="flex justify-between">
-                                <Typography className="text-white" fontFamily={'medium'}>
-                                    Staked Assets
+                            <Typography className="text-white font-bold" fontFamily={'medium'}>
+                                    Staked Balance
                                 </Typography>
                                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                     {formatNumber(stakedBalance, false, true)} {farm.lpSymbol}
@@ -662,7 +662,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                 <Typography className="text-white" fontFamily={'medium'}>
                                     {/* Staked (USD) */}
                                 </Typography>
-                                <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                                <Typography className="text-dark-600" weight={600} fontFamily={'semi-bold'}>
                                    {formatNumber(stakedValue, true)}
                                 </Typography>
                             </div>
@@ -670,8 +670,28 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                             <div className = "p-0.5 space-y-4 bg-dark-800"/>
 
                             <div className="flex justify-between">
+                                <Typography className="text-white font-bold" fontFamily={'medium'}>
+                                    Maximum Fee
+                                </Typography>
+                                <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                                    {formatNumber(Number(stakedBalance) - withdrawable, false, true)} {farm.lpSymbol}
+                                </Typography>
+                            </div>
+
+                            <div className="flex justify-between">
                                 <Typography className="text-white" fontFamily={'medium'}>
-                                    Withdrawable Assets
+                                    {/* Withdrawable (USD) */}
+                                </Typography>
+                                <Typography className="text-dark-600" weight={600} fontFamily={'semi-bold'}>
+                                    {formatNumber(Number(stakedValue) - (withdrawable * Number(lpPrice)), true, true)}
+                                </Typography>
+                            </div>
+                            
+                            <div className = "p-0.5 space-y-4 bg-dark-800"/>
+
+                            {/* <div className="flex justify-between">
+                            <Typography className="text-white font-bold" fontFamily={'medium'}>
+                                    Withdrawable
                                 </Typography>
                                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                     {formatNumber(withdrawable, false, true)} {farm.lpSymbol}
@@ -680,24 +700,33 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
 
                             <div className="flex justify-between">
                                 <Typography className="text-white" fontFamily={'medium'}>
-                                    {/* Withdrawable (USD) */}
+                                    // Withdrawable (USD)
                                 </Typography>
                                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                     {formatNumber(withdrawable * Number(lpPrice), true, true)}
                                 </Typography>
-                            </div>
+                            </div> 
 
-                            <div className = "p-0.5 bg-dark-800"/>
+                            <div className = "p-0.5 space-y-4 mx-[46%] bg-dark-600"/> */}
 
                             <div className="flex justify-between">
-                                <Typography className="text-white" fontFamily={'medium'}>
-                                    Pending Rewards
+                            <Typography className="text-white font-bold" fontFamily={'medium'}>
+                                    Claimable Rewards
                                 </Typography>
                                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                     {Number(earnedAmount).toFixed(2)} SOUL
                                 </Typography>
                             </div>
-                            <div className="h-px my-6 bg-dark-1000" />
+
+                            <div className="flex justify-between">
+                                <Typography className="text-white" fontFamily={'medium'}>
+                                    {/* Pending Rewards */}
+                                </Typography>
+                                <Typography className="text-dark-600" weight={600} fontFamily={'semi-bold'}>
+                                    {formatNumber(earnedValue, true, true)}
+                                </Typography>
+                            </div>
+                            {/* <div className="h-px my-6 bg-dark-1000" /> */}
                         
                         {/* FEE BOX (COLOR-CODED) */}
                         {Number(withdrawFee) > 0 && (
@@ -705,7 +734,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                             <div className="text-white">
                                 <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                                     <span> 
-                                        {(Number(withdrawFee)).toFixed(4)}% FEE
+                                        {(Number(withdrawFee)).toFixed(2)}% FEE
                                     </span>
                                 </div>
                             </div>
@@ -759,19 +788,21 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
 <Modal isOpen={showConfirmation} onDismiss={
         () => setShowConfirmation(false)}>
         <div className="space-y-4">
-          <ModalHeader header={`Are you sure?`} onClose={() => setShowConfirmation(false)} />
-          <Typography variant="lg">
-            {/* Withdrawing prior to a <b>14-Day Period</b> incurs a 14% fee of your deposited assets and 0% (after 14 days) have elapsed. */}
-            <br /><br />
-            <div className="text-2xl mb-2 text-center">
+          <ModalHeader header={`FYI: Early Withdrawal Fee`} onClose={() => setShowConfirmation(false)} />
+          <Typography variant="sm">
+            Since the community proposal passed, a 14-Day Early Withdrawal Fee is now live: <b><a href="https://enchant.soulswap.finance/#/proposal/0xb2ede0a82c5efc57f9c097f11db653fb1155cd313dfedd6c87142a42f68465a6">details here</a></b>.
+            {/* <br/><br/>This means you may withdraw for 0% fees after 14 Days have elapsed.  */}
+            <br/><br/>This <b>reduces by 1% daily</b>, so consider waiting 14 Days prior to withdrawing to avoid fees.
+
+            <div className="text-xl mt-4 mb-4 text-center border p-1.5 border-dark-600">
                 Estimated Fee Outcomes
             </div>
             • <b>Current Rate</b>: {Number(withdrawFee).toFixed(2)}% <br/>
-            • <b>Fee Amount</b>: {formatNumber(Number(withdrawFee)*Number(withdrawValue), false, true)} {farm.lpSymbol}
-            • <b>Fee Value</b>: {formatNumber(Number(withdrawFee)*Number(withdrawValue) * Number(lpPrice), true, true)}
+            • <b>Fee Amount</b>: {formatNumber(Number(withdrawFee)*Number(withdrawValue) / 100, false, true)} {farm.lpSymbol}<br/>
+            • <b>Fee Value</b>: {formatNumber(Number(withdrawFee)*Number(withdrawValue) * Number(lpPrice) / 100, true, true)}
 
             <div className="mt-6 text-center">
-            <i>Do not rely on these estimations</i>.
+            <i><b>Please do not rely on our estimations</b></i>.
             </div>
 
             {/* <b>100% of the fee</b> goes towards building our protocol-owned liquidity, which brings about long-term sustainability to our platform. */}
