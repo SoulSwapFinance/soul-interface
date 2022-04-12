@@ -94,7 +94,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     // const timeDelta = summonerUserInfo.timeDelta
     // const secondsRemaining = summonerUserInfo.secondsRemaining
     const withdrawFee = summonerUserInfo.currentRate
-    const feeAmount = Number(withdrawFee) * Number(stakedBalance)
+    const feeAmount = Number(withdrawFee) * Number(stakedBalance) / 100
     const withdrawable = Number(stakedBalance) - feeAmount
     const feeValue = feeAmount * Number(lpPrice)
 
@@ -650,27 +650,28 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                             <div className="text-xl text-center font-bold mb-3 text-dark-600">
                                 Withdraw { farm.lpSymbol }
                             </div>
-                            {/* <div className="flex justify-between">
+                            <div className="flex justify-between">
                                 <Typography className="text-white" fontFamily={'medium'}>
-                                    Staked (Amount)
+                                    Staked Assets
                                 </Typography>
                                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                     {formatNumber(stakedBalance, false, true)} {farm.lpSymbol}
                                 </Typography>
                             </div>
-                            
                             <div className="flex justify-between">
                                 <Typography className="text-white" fontFamily={'medium'}>
-                                    Staked (USD)
+                                    {/* Staked (USD) */}
                                 </Typography>
                                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                    {formatNumber(stakedValue, true)}
                                 </Typography>
-                            </div> */}
+                            </div>
+
+                            <div className = "p-0.5 space-y-4 bg-dark-800"/>
 
                             <div className="flex justify-between">
                                 <Typography className="text-white" fontFamily={'medium'}>
-                                    Withdrawable (Amount)
+                                    Withdrawable Assets
                                 </Typography>
                                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                     {formatNumber(withdrawable, false, true)} {farm.lpSymbol}
@@ -679,12 +680,14 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
 
                             <div className="flex justify-between">
                                 <Typography className="text-white" fontFamily={'medium'}>
-                                    Withdrawable (USD)
+                                    {/* Withdrawable (USD) */}
                                 </Typography>
                                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                     {formatNumber(withdrawable * Number(lpPrice), true, true)}
                                 </Typography>
                             </div>
+
+                            <div className = "p-0.5 bg-dark-800"/>
 
                             <div className="flex justify-between">
                                 <Typography className="text-white" fontFamily={'medium'}>
@@ -758,7 +761,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
         <div className="space-y-4">
           <ModalHeader header={`Are you sure?`} onClose={() => setShowConfirmation(false)} />
           <Typography variant="lg">
-            Withdrawing prior to a <b>14-Day Period</b> incurs a 14% fee of your deposited assets and 0% (after 14 days) have elapsed.
+            {/* Withdrawing prior to a <b>14-Day Period</b> incurs a 14% fee of your deposited assets and 0% (after 14 days) have elapsed. */}
             <br /><br />
             <div className="text-2xl mb-2 text-center">
                 Estimated Fee Outcomes
