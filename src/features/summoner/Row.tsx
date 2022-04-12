@@ -233,7 +233,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
         <>
             <div className="flex justify-center w-full">
                 <FarmContainer>
-                    <div className={classNames("bg-dark-1200 p-3 border hover:border-dark-600", Number(unstakedBalance) > 0 ? "border-green" : "border-dark-1000")}
+                    <div className={classNames("bg-dark-1200 p-3 border", hasBalance ? " hover:border-dark-600 border-dark-600" : "hover:border-dark-600 border-dark-1000")}
                     onClick={() => handleShowOptions()}>
                         <FarmContentWrapper>
                             <div className="items-center">
