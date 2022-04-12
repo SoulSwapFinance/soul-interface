@@ -148,8 +148,9 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
      */
     const handleShowOptions = () => {
         setShowOptions(!showOptions)
-        if (!showOptions) {
-            fetchApproval()
+        if (showOptions) {
+            setOpenDeposit(false)
+            setOpenWithdraw(false)
         }
     }
 
@@ -162,9 +163,9 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
    
     const handleShowWithdraw = () => {
         setOpenWithdraw(!openWithdraw)
-        // if (openWithdraw) {
-        //     handleShowDeposit
-        // }
+        if (!openWithdraw) {
+            setShowOptions(false)
+        }
     }
 
     /**
