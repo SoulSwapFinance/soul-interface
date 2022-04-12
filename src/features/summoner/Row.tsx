@@ -613,7 +613,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         >
                              <NavLink
                             href=
-                            {`/lend/${farm.lpAddress}`}
+                            {`/lend/${lpAddress}`}
                           >
                             <a>LEND {token0Symbol}</a>
                           </NavLink>
