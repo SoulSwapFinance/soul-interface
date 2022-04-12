@@ -1,32 +1,6 @@
 import { tokens } from './Tokens'
 
 export const InactivePools = [
-  // {
-  //   // 100
-  //   pid: 11,
-  //   token1: 'FTM',
-  //   token2: 'GRIM',
-  //   lpSymbol: 'FTM-GRIM',
-  //   lpAddresses: {
-  //     4002: '',
-  //     250: '0x124D8CA33E29D1090a844e4C896DD16A360B1c96',
-  //   },
-  //   token1Address: tokens.FTM,
-  //   token2Address: tokens.GRIM,
-  // },
-  // {
-  //   // 500
-  //   pid: 46,
-  //   token1: 'SOUL',
-  //   token2: 'LUX',
-  //   lpSymbol: 'SOUL-LUX',
-  //   lpAddresses: {
-  //     4002: '',
-  //     250: '0x475a63154C3e85ac0F2CB453f0b5c63e4370333c',
-  //   },
-  //   token1Address: tokens.SOUL,
-  //   token2Address: tokens.LUX,
-  // },
   {
     // 100
     pid: 12,
@@ -40,32 +14,6 @@ export const InactivePools = [
     token1Address: tokens.FTM,
     token2Address: tokens.REAPER,
   },
-  // {
-  //   // 600
-  //   pid: 26,
-  //   token1: 'SEANCE',
-  //   token2: 'ENCHANT',
-  //   lpSymbol: 'SEANCE-ENCHANT',
-  //   lpAddresses: {
-  //     4002: '',
-  //     250: '0x5695176d085f8f7320507495066ffec940da244c',
-  //   },
-  //   token1Address: tokens.SEANCE,
-  //   token2Address: tokens.ENCHANT,
-  // },
-  // {
-  //   // 1200
-  //   pid: 24,
-  //   token1: 'ENCHANT',
-  //   token2: 'FTM',
-  //   lpSymbol: 'ENCHANT-FTM',
-  //   lpAddresses: {
-  //     4002: '',
-  //     250: '0xb4d6ff768f409e4d102bad80f9a8ac105453ccdd',
-  //   },
-  //   token1Address: tokens.ENCHANT,
-  //   token2Address: tokens.FTM,
-  // },
   {
     // 0
     pid: 16,
@@ -380,7 +328,10 @@ export const ActivePools = [
     },
     token1Address: tokens.FTM,
     token2Address: tokens.EVO,
-  },
+  }
+]
+
+export const LendingPools = [
   {
     // LENDING
     pid: 48,

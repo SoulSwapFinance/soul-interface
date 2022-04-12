@@ -49,7 +49,7 @@ const Text = styled.p`
   text-align: ${({ textAlign }) => (textAlign ? `${textAlign}` : `center`)};
 `;
 
-export function Active() {
+export function SoulSwap() {
   return (
     <div className="justify-center">
         <FarmContainer>
@@ -61,6 +61,71 @@ export function Active() {
               <FarmItemBox>
                   <Text fontSize=".8" color="#FFFFFF">
                   ASSET
+                  </Text>
+              </FarmItemBox>
+            {/* </HideOnMobile> */}
+
+            {/* <HideOnMobile>
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
+                STAKE
+                </Text>
+              </FarmItemBox>
+            </HideOnMobile> */}
+
+            <HideOnMobile>
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
+                DEPOSITED
+                </Text>
+              </FarmItemBox>
+            </HideOnMobile>
+ 
+            <HideOnSmall>
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
+                SHARE
+                </Text>
+              </FarmItemBox>
+            </HideOnSmall>
+
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
+                % RETURN
+                </Text>
+              </FarmItemBox>
+
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
+                YIELD
+                </Text>
+              </FarmItemBox>
+
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
+                LIQUIDITY
+                </Text>
+              </FarmItemBox>
+
+            </FarmContentWrapper>
+            </div>
+        </FarmContainer>
+      </div>
+  )
+}
+
+export function Underworld() {
+  return (
+    <div className="justify-center">
+        <FarmContainer>
+          {/* <div className="grid grid-cols-5 ml-24 mr-6 sm:ml-0 bg-dark-1000"> */}
+          <div className="grid grid-cols-1 bg-dark-1200 font-bold mb-2 mr-4 ml-2 border border-dark-1000 hover:border-dark-600">
+            <FarmContentWrapper>
+              
+            {/* <HideOnMobile> */}
+              <FarmItemBox>
+                  <Text fontSize=".8" color="#FFFFFF">
+                  SUPPLY
                   </Text>
               </FarmItemBox>
             {/* </HideOnMobile> */}

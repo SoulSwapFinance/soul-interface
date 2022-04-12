@@ -29,6 +29,7 @@ import NavLink from 'components/NavLink'
 import StableInputPanel from 'components/StableInputPanel'
 import CurrencyInputPanel from './Input'
 import FarmInputPanel from './Input'
+import { CurrencyLogo } from 'components/CurrencyLogo'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -94,6 +95,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const earnedAmount = summonerUserInfo.pendingSoul
     const earnedValue = summonerUserInfo.pendingValue
     const lpPrice = summonerUserInfo.lpPrice
+    const pairType = summonerUserInfo.pairType
     // const timeDelta = summonerUserInfo.timeDelta
     // const secondsRemaining = summonerUserInfo.secondsRemaining
     const withdrawFee = summonerUserInfo.currentRate
@@ -103,6 +105,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
 
     const hasBalance = Number(unstakedBalance) > 0
     const isFarmer = Number(stakedBalance) > 0
+    const isUnderworldPair = Number(allocPoint) == 420
 
     // ONLY USED FOR LOGO //
     const token0 = new Token(chainId, farm.token1Address[chainId], 18)
@@ -238,7 +241,10 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         <FarmContentWrapper>
                             <div className="items-center">
                                 <FarmItemBox>
-                                    <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
+                                    { Number(allocPoint) != 420 ? <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
+                                    : <CurrencyLogo currency={token0} 
+                                    size = {40} />
+                                    }
                                 </FarmItemBox>
                             </div>
                         {/* <HideOnMobile>
@@ -371,7 +377,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                 <div className="flex justify-center p-4 w-full mt-2 mb-2 border border-dark-1000 hover:border-dark-600">
                 <HeadlessUIModal.BorderedContent className="bg-dark-1200 w-full">
                 {/* USER: NOT STAKED & NOT FARMER */}
-                    {!hasBalance && !isFarmer && (
+                    {!hasBalance && !isFarmer && !isUnderworldPair && (
                         <FunctionBox>
                         <Wrap padding="0" margin="0" display="flex">
                             <SubmitButton
@@ -385,18 +391,18 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                           <NavLink
                             href=
                             {token0Symbol == 'FTM' ?
-                              `https://exchange.soulswap.finance/add/FTM/${token0Address}`
-                              : `https://exchange.soulswap.finance/add/FTM/${token1Address}`
+                              `/add/FTM/${token0Address}`
+                              : `/add/FTM/${token1Address}`
                             }
                           >
-                            <a>CREATE {farm.lpSymbol} PAIR</a>
+                            <a>PAIR {farm.lpSymbol}</a>
                           </NavLink>
                         ) : (
                           <NavLink
                             href=
-                            {`https://exchange.soulswap.finance/add/${token0Address}/${token1Address}`}
+                            {`/add/${token0Address}/${token1Address}`}
                           >
-                            <a>CREATE {farm.lpSymbol} PAIR</a>
+                            <a>PAIR {farm.lpSymbol}</a>
                           </NavLink>
                         )}
                       
@@ -496,7 +502,11 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         <FunctionBox>
                             <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-1000 hover:border-dark-600 w-full space-y-1">
                             <div className="text-xl text-center font-bold mb-3 text-dark-600">
-                                Deposit { farm.lpSymbol }
+                                {
+                                    Number(allocPoint) != 420
+                                    ? `Deposit ${ farm.lpSymbol }`
+                                    : `Deposit Supplied ${ token0Symbol }`
+                                }
                             </div>
                             {/* <div className="flex justify-between">
                                 <Typography className="text-white" fontFamily={'medium'}>
@@ -559,7 +569,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                             token1={token1} 
                         />
             {/* FARMER WITH NO BALANCE */}
-                {!hasBalance && isFarmer && (
+                {!hasBalance && isFarmer && !isUnderworldPair && (
                         <FunctionBox>
                         <Wrap padding="0" margin="0" display="flex">
                             <SubmitButton
@@ -573,18 +583,18 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                           <NavLink
                             href=
                             {token0Symbol == 'FTM' ?
-                              `https://exchange.soulswap.finance/add/FTM/${token0Address}`
-                              : `https://exchange.soulswap.finance/add/FTM/${token1Address}`
+                              `/add/FTM/${token0.address}`
+                              : `/add/FTM/${token1.address}`
                             }
                           >
-                            <a>CREATE {farm.lpSymbol} PAIR</a>
+                            <a>PAIR {farm.lpSymbol}</a>
                           </NavLink>
                         ) : (
                           <NavLink
                             href=
-                            {`https://exchange.soulswap.finance/add/${token0Address}/${token1Address}`}
+                            {`/add/${token0Address}/${token1Address}`}
                           >
-                            <a>CREATE {farm.lpSymbol} PAIR</a>
+                            <a>PAIR {farm.lpSymbol}</a>
                           </NavLink>
                         )}
                       
@@ -592,6 +602,22 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         
                             </Wrap>
                         </FunctionBox>
+                    )}
+
+                    { isUnderworldPair && (
+                        <SubmitButton
+                            height="2rem"
+                            primaryColour="#B485FF"
+                            color="black"
+                            margin=".5rem 0 .5rem 0"
+                        >
+                             <NavLink
+                            href=
+                            {`/lend/${farm.lpAddress}`}
+                          >
+                            <a>LEND {token0Symbol}</a>
+                          </NavLink>
+                            </SubmitButton>
                     )}
                         <Wrap padding="0" margin="0" display="flex">
                             <SubmitButton
