@@ -81,7 +81,7 @@ export default function Calculator() {
     }, [days, rewardYield, futureMarketPrice, lumensAmount]);
 
 
-    // STYLE ///
+    // STYLE 
     const CalculatorCard = styled.div`
       position: relative;
       z-index: 2;

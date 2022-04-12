@@ -24,17 +24,12 @@ import Modal from 'components/Modal/DefaultModal'
 import ModalHeader from 'components/Modal/Header'
 
 import { useExpertModeManager, useUserSlippageToleranceWithDefault } from 'state/user/hooks'
-import ExternalLink from 'components/ExternalLink'
+// import ExternalLink from 'components/ExternalLink'
 import NavLink from 'components/NavLink'
-import StableInputPanel from 'components/StableInputPanel'
-import CurrencyInputPanel from './Input'
+// import StableInputPanel from 'components/StableInputPanel'
+// import CurrencyInputPanel from './Input'
 import FarmInputPanel from './Input'
 import { CurrencyLogo } from 'components/CurrencyLogo'
-
-const TokenPairLink = styled(ExternalLink)`
-  font-size: .9rem;
-  padding-left: 10;
-`
 
 const HideOnSmall = styled.div`
 @media screen and (max-width: 900px) {
@@ -99,7 +94,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     // const timeDelta = summonerUserInfo.timeDelta
     // const secondsRemaining = summonerUserInfo.secondsRemaining
     const withdrawFee = summonerUserInfo.currentRate
-    const feeAmount = Number(withdrawFee) / 100 * Number(stakedBalance)
+    const feeAmount = Number(withdrawFee) * Number(stakedBalance)
     const withdrawable = Number(stakedBalance) - feeAmount
     const feeValue = feeAmount * Number(lpPrice)
 
@@ -583,8 +578,8 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                           <NavLink
                             href=
                             {token0Symbol == 'FTM' ?
-                              `/add/FTM/${token0.address}`
-                              : `/add/FTM/${token1.address}`
+                              `/add/FTM/${token0Address}`
+                              : `/add/FTM/${token1Address}`
                             }
                           >
                             <a>PAIR {farm.lpSymbol}</a>
@@ -707,7 +702,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                             <div className="text-white">
                                 <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                                     <span> 
-                                        {(Number(withdrawFee)).toFixed(0)}% FEE
+                                        {(Number(withdrawFee)).toFixed(4)}% FEE
                                     </span>
                                 </div>
                             </div>
@@ -763,11 +758,18 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
         <div className="space-y-4">
           <ModalHeader header={`Are you sure?`} onClose={() => setShowConfirmation(false)} />
           <Typography variant="lg">
-            Withdrawing before a <b>14-Day Period</b> incurs a 14% fee of your deposited assets and 0% (after 14 days) have elapsed.
+            Withdrawing prior to a <b>14-Day Period</b> incurs a 14% fee of your deposited assets and 0% (after 14 days) have elapsed.
             <br /><br />
-            <li> Fee Rate: {withdrawFee}% </li>
-            <li> Fee Amount: {feeAmount} {farm.lpSymbol} </li>
-            <li> Fee Value: ~${feeValue} </li>
+            <div className="text-2xl mb-2 text-center">
+                Estimated Fee Outcomes
+            </div>
+            • <b>Current Rate</b>: {Number(withdrawFee).toFixed(2)}% <br/>
+            • <b>Fee Amount</b>: {formatNumber(Number(withdrawFee)*Number(withdrawValue), false, true)} {farm.lpSymbol}
+            • <b>Fee Value</b>: {formatNumber(Number(withdrawFee)*Number(withdrawValue) * Number(lpPrice), true, true)}
+
+            <div className="mt-6 text-center">
+            <i>Do not rely on these estimations</i>.
+            </div>
 
             {/* <b>100% of the fee</b> goes towards building our protocol-owned liquidity, which brings about long-term sustainability to our platform. */}
           </Typography>
