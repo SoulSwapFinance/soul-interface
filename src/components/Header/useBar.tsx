@@ -147,7 +147,7 @@ const useMenu: UseBar = () => {
           {
             key: 'farm',
             title: i18n._(t`Farms`),
-            link: '/mines?filter=active',
+            link: '/summoner',
           },
           {
             key: 'vault',
@@ -255,7 +255,7 @@ const useMenu: UseBar = () => {
             {
               key: 'underworld-farms',
               title: i18n._(t`Mines`),
-              link: '/mines?filter=lending',
+              link: '/summoner',
             },
             {
               key: 'balances',

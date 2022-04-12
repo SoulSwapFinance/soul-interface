@@ -316,7 +316,8 @@ export default function SoulStake() {
       <div className="mb-1 md:mb-2" />
         {/* <Header /> */}
         <div className="flex items-right px-4">
-          <NavLink href="/mines?filter=active">
+          {/* <NavLink href="/mines?filter=active"> */}
+          <NavLink href="/summoner">
             <a className="flex items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
               <span>{i18n._(t`Back to Farms`)}</span>
               <svg

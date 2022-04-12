@@ -147,7 +147,7 @@ const useMenu: UseMenu = () => {
           {
             key: 'farm',
             title: i18n._(t`Farms`),
-            link: '/mines?filter=active',
+            link: '/summoner',
           },
           {
             key: 'vault',

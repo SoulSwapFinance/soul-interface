@@ -75,27 +75,27 @@ const MineMenu = () => {
 
   const items = useMemo(() => {
     const map: Record<string, ReactNode> = {
-      [FarmFilter.Active]: <MenuLink href={'/mines?filter=active'} label={i18n._(t`Active`)} />,
-      [FarmFilter.Deposited]: account ? (
-        <MenuLink href={'/mines?filter=deposited'} label={i18n._(t`Deposited`)} />
-      ) : (
-        <MenuLink onClick={toggleWalletModal} label={i18n._(t`Deposited`)} />
-      ),
-      [FarmFilter.Staking]: (
-        <MenuLink href={'/seance'} label={i18n._(t`Staking`)} />
-      ),
-      [FarmFilter.Lending]: (
-        <MenuLink href={'/mines?filter=lending'} label={i18n._(t`Lending`)} />
-      ),
-      [FarmFilter.Fantom]: (
-          <MenuLink href={'/mines?filter=fantom'} label={i18n._(t`Fantom`)} />
-        ),
-      [FarmFilter.SoulSwap]: (
-        <MenuLink href={'/mines?filter=soulswap'} label={i18n._(t`SoulSwap`)} />
-        ),
-      [FarmFilter.Stables]: (
-        <MenuLink href={'/mines?filter=stables'} label={i18n._(t`Stables`)} />
-        ),
+      // [FarmFilter.Active]: <MenuLink href={'/mines?filter=active'} label={i18n._(t`Active`)} />,
+      // [FarmFilter.Deposited]: account ? (
+      //   <MenuLink href={'/mines?filter=deposited'} label={i18n._(t`Deposited`)} />
+      // ) : (
+      //   <MenuLink onClick={toggleWalletModal} label={i18n._(t`Deposited`)} />
+      // ),
+      // [FarmFilter.Staking]: (
+      //   <MenuLink href={'/seance'} label={i18n._(t`Staking`)} />
+      // ),
+      // [FarmFilter.Lending]: (
+      //   <MenuLink href={'/mines?filter=lending'} label={i18n._(t`Lending`)} />
+      // ),
+      // [FarmFilter.Fantom]: (
+      //     <MenuLink href={'/mines?filter=fantom'} label={i18n._(t`Fantom`)} />
+      //   ),
+      // [FarmFilter.SoulSwap]: (
+      //   <MenuLink href={'/mines?filter=soulswap'} label={i18n._(t`SoulSwap`)} />
+      //   ),
+      // [FarmFilter.Stables]: (
+      //   <MenuLink href={'/mines?filter=stables'} label={i18n._(t`Stables`)} />
+      //   ),
       [FarmFilter.Inactive]: (
       <MenuLink href={'/mines?filter=inactive'} label={i18n._(t`Inactive`)} />
       ),
