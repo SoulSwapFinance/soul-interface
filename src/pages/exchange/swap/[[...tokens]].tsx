@@ -2,7 +2,7 @@ import { ArrowDownIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Currency, JSBI, Token, Trade as V2Trade, TradeType } from 'sdk'
-import { Global } from 'components/Banner'
+// import { Global } from 'components/Banner'
 import { Button } from 'components/Button'
 import RecipientField from 'components/RecipientField'
 import Typography from 'components/Typography'
@@ -334,7 +334,7 @@ const Swap = () => {
 
   return (
     <>
-      <Global />
+      {/* <Global /> */}
       <ConfirmSwapModal
         isOpen={showConfirm}
         trade={trade}

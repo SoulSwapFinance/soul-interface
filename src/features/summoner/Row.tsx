@@ -59,20 +59,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const [depositValue, setDepositValue] = useState('0')
     
     const SoulSummonerContract = useSoulSummonerContract()
-
     const SoulSummonerAddress = SoulSummonerContract.address
-    const RouterContract = useRouterContract()
-
-    // const [confirmed, setConfirmed] = useState(false)
-    // const [receiving, setReceiving] = useState(0)
-    const parsedDepositValue = tryParseAmount(depositValue, lpToken)
-    const parsedWithdrawValue = tryParseAmount(withdrawValue, lpToken)
-    // console.log('earnedAmount:%s', earnedAmount)
-    // show confirmation view before minting SOUL
-    // const balance = useCurrencyBalance(account, lpToken)
-
-    const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(100, 10_000)
-    const allowedSlippage = useUserSlippageToleranceWithDefault(DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE) // custom from users
 
     const { summonerPoolInfo } = useSummonerPoolInfo(pid)
     const liquidity = summonerPoolInfo.tvl
@@ -203,9 +190,9 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
         }
     }
 
-    // // /**
-    // //  * Withdraw Liquidity Asset
-    // //  */
+    /**
+     * Withdraw Liquidity Asset
+     */
     const handleWithdraw = async (pid) => {
         try {
             const tx = await SoulSummonerContract?.withdraw(pid, (Number(withdrawValue) * 10**Number(assetDecimals)).toString())
@@ -217,9 +204,9 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
         }
     }
 
-    // // /**
-    // //  * Harvest Shares
-    // //  */
+    /**
+     * Harvest Pending Rewards
+     */
     const handleHarvest = async (pid) => {
         try {
             let tx
