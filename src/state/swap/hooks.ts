@@ -4,7 +4,9 @@ import {
   ChainId,
   Currency,
   CurrencyAmount,
+  FACTORY_ADDRESS,
   Percent,
+  ROUTER_ADDRESS,
   SOUL,
   Trade as V2Trade,
   TradeType,
@@ -21,7 +23,6 @@ import { useActiveWeb3React } from 'services/web3'
 import { AppState } from 'state'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
 import { useExpertModeManager, useUserSingleHopOnly } from 'state/user/hooks'
-import { useCurrencyBalances } from 'state/wallet/hooks'
 import { ParsedQs } from 'qs'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -32,6 +33,7 @@ import { useCallback, useEffect, useState } from 'react'
 // } from "../../hooks/useSwapCallback";
 import { Field, replaceSwapState, selectCurrency, setRecipient, switchCurrencies, typeInput } from './actions'
 import { SwapState } from './reducer'
+import { useCurrencyBalances } from 'state/wallet/hooks'
 
 export function useSwapState(): AppState['swap'] {
   return useAppSelector((state) => state.swap)
@@ -93,6 +95,10 @@ const BAD_RECIPIENT_ADDRESSES: { [chainId: string]: { [address: string]: true } 
     '0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac': true, // v2 factory
     '0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F': true, // v2 router 02
   },
+  [ChainId.FANTOM]: {
+    '0x1120e150dA9def6Fe930f4fEDeD18ef57c0CA7eF': true, // v2 factory
+    '0x6b3d631B87FE27aF29efeC61d2ab8CE4d621cCBF': true, // v2 router 02
+  }
 }
 
 /**
@@ -136,7 +142,9 @@ export function useDerivedSwapInfo(): {
 
   const to = (recipient === null ? account : recipientLookup.address) ?? undefined
 
-  const relevantTokenBalances = useCurrencyBalances(account ?? undefined, [
+  const relevantTokenBalances 
+    = 
+   useCurrencyBalances(account ?? undefined, [
     inputCurrency ?? undefined,
     outputCurrency ?? undefined,
   ])

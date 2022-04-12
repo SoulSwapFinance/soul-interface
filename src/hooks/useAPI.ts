@@ -274,14 +274,11 @@ export function useUserInfo(): { status: string; userInfo: T } {
     const { account, chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
     const [userInfo, setInfo] = useState<T>({
-        name: '',
-        price: '0',
-        value: '0',
-        balance: '0',
-        decimals: '18',
-        supply: '0',
-        mcap: '0',
-        img:''
+        address: '',
+        nativeBalance: '0',
+        votingPower: '0',
+        protocolOwnership: '0',
+        stakedBalance: '0'
     })  
     useEffect(() => {
       const fetchData = async () => {
@@ -297,7 +294,7 @@ export function useUserInfo(): { status: string; userInfo: T } {
         setInfo(json as T)
         setStatus('fetched')
       }
-      if (chainId == ChainId.FANTOM) 
+      // if (chainId == ChainId.FANTOM) 
       fetchData()
     }, [])
   

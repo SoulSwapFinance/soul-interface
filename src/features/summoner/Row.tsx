@@ -520,7 +520,15 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                     Deposited Amount
                                 </Typography>
                                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                    {Number(stakedBalance).toFixed(2)} LP
+                                    {formatNumber(stakedBalance, false, true)} LP
+                                </Typography>
+                            </div>
+                            <div className="flex justify-between">
+                                <Typography className="text-white" fontFamily={'medium'}>
+                                    Deposited Value
+                                </Typography>
+                                <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                                    {formatNumber(stakedValue, true)}
                                 </Typography>
                             </div>
                             <div className="flex justify-between">

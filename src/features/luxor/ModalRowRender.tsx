@@ -31,7 +31,7 @@ import { useApproveCallback } from 'hooks/useApproveCallback'
 import Modal from 'components/Modal/DefaultModal'
 import Typography from 'components/Typography'
 import ModalHeader from 'components/Modal/Header'
-import { useLuxorBondInfo, useUserInfo } from 'hooks/useAPI'
+import { useLuxorBondInfo } from 'hooks/useAPI'
 import { WFTM_ADDRESS } from 'constants/addresses'
 
 const TokenPairLink = styled(ExternalLink)`
