@@ -4,15 +4,25 @@ import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
 import { Active } from './Key'
 import { ActiveRow } from './Row'
-import { ActivePools } from './Pools'
+import { ActivePools, InactivePools } from './Pools'
 import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import { ArrowLeftIcon, XIcon } from '@heroicons/react/outline'
+import Header from 'components/Header'
 
 export const FarmList = () => {
   // const { chainId } = useActiveWeb3React()
 
-  const farmList = ActivePools.map((farm) => (
+  const activeList = ActivePools.map((farm) => (
+    <ActiveRow
+      key={farm.pid}
+      pid={farm.pid}
+      lpToken={farm.lpAddresses[250]}
+      farm={farm}
+    />
+  ))
+
+  const inactiveList = InactivePools.map((farm) => (
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
@@ -23,16 +33,12 @@ export const FarmList = () => {
 
   return (
     <>
-          <Button>
-          <NavLink href="/mines">
-            <a className="flex items-center space-x-2 font-medium text-center text-dark-600 cursor-pointer text-base hover:text-high-emphesis">
-             <ArrowLeftIcon width={18} height={18} className="text-dark-600" />
-              <span>Retired Farms</span>
-            </a>
-          </NavLink>
-        </Button>
-      <Active />
-      <>{farmList}</>
+     <Typography className="text-2xl mb-12 mt-6 border hover:border-green p-3 font-bold text-center">Active Pools</Typography>
+        <Active />
+        <>{activeList}</>
+      <Typography className="text-2xl mb-12 mt-6 border p-3 hover:border-red font-bold text-center">Retired Pools</Typography>
+        <Active />
+        <>{inactiveList}</>
     </>
   )
 }
