@@ -110,7 +110,7 @@ function AppBar(): JSX.Element {
                       {chainId && [ChainId.FANTOM].includes(chainId) && (
                         <NavLink 
                         activeClassName="text-dark-600 text-high-emphesis"
-                        href={'/mines?filter=active'}>
+                        href={'/summoner'}>
                           <a
                             id={`farm-nav-link`}
                             className="w-full relative ml-6 md:p-2 hover:text-dark-600 text-high-emphesis"

@@ -153,7 +153,7 @@ const useMobileMenu: UseMobileMenu = () => {
           {
             key: 'farm',
             title: i18n._(t`Farm`),
-            link: '/mines?filter=active',
+            link: '/summoner',
           },
           {
             key: 'vault',

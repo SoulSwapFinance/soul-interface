@@ -270,10 +270,44 @@ export function useTokenInfo(tokenAddress): { status: string; tokenInfo: T } {
 //     return { status, luxorTreasuryData }
 // }
 
-export function useUserInfo(tokenAddress): { status: string; userInfo: T } {
+export function useUserInfo(): { status: string; userInfo: T } {
     const { account, chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
     const [userInfo, setInfo] = useState<T>({
+        name: '',
+        price: '0',
+        value: '0',
+        balance: '0',
+        decimals: '18',
+        supply: '0',
+        mcap: '0',
+        img:''
+    })  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus('fetching')
+        const response = await fetch(`${BASE_URL}/users/${account}}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referrer-Policy': 'no-referrer',
+          },
+        })
+        const json = await response.json()
+        setInfo(json as T)
+        setStatus('fetched')
+      }
+      if (chainId == ChainId.FANTOM) 
+      fetchData()
+    }, [])
+  
+    return { status, userInfo }
+}
+
+export function useUserTokenInfo(tokenAddress): { status: string; userTokenInfo: T } {
+    const { account, chainId } = useActiveWeb3React()
+    const [status, setStatus] = useState<string>('idle')
+    const [userTokenInfo, setInfo] = useState<T>({
         name: '',
         price: '0',
         value: '0',
@@ -301,10 +335,11 @@ export function useUserInfo(tokenAddress): { status: string; userInfo: T } {
       fetchData()
     }, [])
   
-    return { status, userInfo }
+    return { status, userTokenInfo }
 }
 
-export function useUserPairInfo(userAddress, pairAddress): { status: string; pairUserInfo: T } {
+export function useUserPairInfo(pairAddress): { status: string; pairUserInfo: T } {
+    const { account, chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
     const [pairUserInfo, setInfo] = useState<T>({
         name: '',
@@ -325,7 +360,7 @@ export function useUserPairInfo(userAddress, pairAddress): { status: string; pai
     useEffect(() => {
       const fetchData = async () => {
         setStatus('fetching')
-        const response = await fetch(`${BASE_URL}/pairs/${userAddress}/${pairAddress}`, {
+        const response = await fetch(`${BASE_URL}/pairs/${account}/${pairAddress}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

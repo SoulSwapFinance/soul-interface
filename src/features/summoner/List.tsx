@@ -24,7 +24,7 @@ export const FarmList = () => {
   return (
     <>
           <Button>
-          <NavLink href="/mines?filter=inactive">
+          <NavLink href="/mines">
             <a className="flex items-center space-x-2 font-medium text-center text-dark-600 cursor-pointer text-base hover:text-high-emphesis">
              <ArrowLeftIcon width={18} height={18} className="text-dark-600" />
               <span>Retired Farms</span>
