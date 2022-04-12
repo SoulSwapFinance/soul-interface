@@ -4,13 +4,10 @@ import { ApplicationModal } from 'state/application/actions'
 import Image from 'next/image'
 import styled from 'styled-components'
 import Typography from 'components/Typography'
-import ExternalLink from 'components/ExternalLink'
-import { ExternalLink as LinkIcon } from 'react-feather'
-import { useTokenInfo } from 'hooks/useTokenInfo'
+import { useTokenInfo } from 'hooks/useAPI'
 import { useSeanceContract, useSoulContract } from 'hooks'
 import { formatNumber, formatNumberScale, formatPercent } from 'functions'
 import { SOUL_ADDRESS, SEANCE_ADDRESS } from 'constants/addresses'
-import { useSingleCallResult } from 'state/multicall/hooks'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { AURA } from '../../constants'
 import QuestionHelper from '../../components/QuestionHelper'
@@ -19,11 +16,11 @@ import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
 import ModalHeader from 'components/Modal/Header'
-import { usePrice } from 'hooks/usePrice'
 import { HeadlessUiModal } from 'components/Modal'
 import { concat } from 'lodash'
 import { SOUL } from 'sdk'
-import { useSeancePrice, useSoulPrice } from 'hooks/getPrices'
+// import { useSeancePrice, useSoulPrice } from 'hooks/getPrices'
+import { useUserInfo } from 'hooks/useAPI'
 
 const cache: { [key: string]: number } = {};
 
@@ -41,14 +38,20 @@ export default function SoulStatsModal(): JSX.Element | null {
   const { chainId, library, account } = useActiveWeb3React()
   const soulStatsModalOpen = useModalOpen(ApplicationModal.SOUL_STATS)
   const toggleSoulStatsModal = useToggleTokenStatsModal()
-  let tokenInfo = useTokenInfo(useSoulContract())
+  // let tokenInfo = useTokenInfo(useSoulContract())
   let seanceInfo = useTokenInfo(useSeanceContract())
   // let auraInfo = useTokenInfo(useAuraContract())
     
-  const auraBalance = useTokenBalance(account ?? undefined, AURA[250])
-   
-  const soulPrice = useSoulPrice()
-  const seancePrice = useSeancePrice()
+  // const auraBalance = useTokenBalance(account ?? undefined, AURA[250])
+  const { userInfo } = useUserInfo()
+  // const { tokenInfo } = useTokenInfo()
+  const votingPower = userInfo.votingPower
+  const protocolOwnership = Number(userInfo.protocolOwnership).toFixed(2)
+  const totalSeance = Number(useTokenInfo(SEANCE_ADDRESS[250]).tokenInfo.supply) / 1e18
+  const totalSoul = Number(useTokenInfo(SOUL_ADDRESS[250]).tokenInfo.supply) / 1e18
+  // console.log('votingPower', votingPower)
+  const soulPrice = useTokenInfo(SOUL_ADDRESS[250]).tokenInfo.price
+  const seancePrice = useTokenInfo(SEANCE_ADDRESS[250]).tokenInfo.price
   const tvlInfo = useTVL()
   const bondInfo = useBondTVL()
   const vaultInfo = useVaultTVL()
@@ -71,8 +74,8 @@ export default function SoulStatsModal(): JSX.Element | null {
   }, 0)
 
   let podl = bondsTvl + soulTvl
-  let tvl = farmsTvl + vaultsTvl
-  let percPodl = formatPercent(podl / farmsTvl * 100)
+  // let tvl = farmsTvl + vaultsTvl
+  // let percPodl = formatPercent(podl / farmsTvl * 100)
 
   function getSummaryLine(title, value) {
     return (
@@ -188,8 +191,10 @@ export default function SoulStatsModal(): JSX.Element | null {
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Voting Power`}
           </Typography>,
-        auraBalance?.toSignificant(4).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-            )}
+        formatNumber(Number(votingPower), false, true)
+          + ` (${protocolOwnership}%)` 
+        )}
+      
          {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Maximum Supply`}
@@ -210,7 +215,7 @@ export default function SoulStatsModal(): JSX.Element | null {
                       Total Supply
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      {formatNumberScale(tokenInfo?.totalSupply, false)}
+                      {formatNumberScale(Number(totalSoul), false)}
                     </Typography>
                   </div>
                   <div className="flex items-center justify-between">
@@ -218,7 +223,7 @@ export default function SoulStatsModal(): JSX.Element | null {
                       - {' '} DAO Treasury
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      {formatNumberScale(Number(tokenInfo?.totalSupply) * 0.125, false)}
+                      {formatNumberScale(Number(totalSoul) * 0.125, false)}
                     </Typography>
                   </div>
                   <div className="flex items-center justify-between">
@@ -226,7 +231,7 @@ export default function SoulStatsModal(): JSX.Element | null {
                       - {' '} Total Staked
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      {formatNumberScale(seanceInfo?.totalSupply, false)}
+                      {formatNumberScale(Number(totalSeance), false)}
                     </Typography>
                   </div>
                   <hr></hr>
@@ -236,9 +241,9 @@ export default function SoulStatsModal(): JSX.Element | null {
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
                       {formatNumberScale(
-                        Number(tokenInfo?.totalSupply)
-                        - Number(seanceInfo?.totalSupply)
-                        - (Number(tokenInfo?.totalSupply) * 0.125)
+                        Number(totalSoul)
+                        - Number(totalSeance)
+                        - (Number(totalSoul) * 0.125)
                         , false)}
                     </Typography>
                   </div>
@@ -247,9 +252,9 @@ export default function SoulStatsModal(): JSX.Element | null {
             />
           </div>,
           formatNumberScale(
-            Number(tokenInfo?.totalSupply)
-            - Number(seanceInfo?.totalSupply)
-            - (Number(tokenInfo?.totalSupply) * 0.125)
+            Number(totalSoul)
+            - Number(totalSeance)
+            - (Number(totalSoul) * 0.125)
             , false)
         )}
         {getSummaryLine(
@@ -257,7 +262,7 @@ export default function SoulStatsModal(): JSX.Element | null {
             {`Total Market Cap`}
           </Typography>,
           formatCurrency(
-            Number(tokenInfo?.totalSupply) * soulPrice
+            Number(totalSoul) * Number(soulPrice)
           // +  Number(seanceInfo?.totalSupply) * seancePrice
         ))}
         {getSummaryLine(
@@ -370,14 +375,14 @@ export default function SoulStatsModal(): JSX.Element | null {
             {`Soul Market Price`}
           </Typography>,
           formatCurrency(
-            soulPrice, 2)
+            Number(soulPrice), 3)
         )}
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Seance Market Price`}
           </Typography>,
           formatCurrency(
-            seancePrice, 2)
+            Number(seancePrice), 3)
         )}
         <div className="flex mt-3" />
         <Button

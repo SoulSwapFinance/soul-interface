@@ -201,7 +201,7 @@ export const SubmitButton = styled.button`
   font-size: 1rem;
   padding: 0.5em;
   transition: all 0.2s ease-in-out;
-  background: ${({ primaryColour }) => (primaryColour ? primaryColour : '#F36FFE')};
+  background: ${({ primaryColor }) => (primaryColor ? primaryColor : '#F36FFE')};
   color: ${({ color }) => (color ? color : 'white')};
 
   &:hover {

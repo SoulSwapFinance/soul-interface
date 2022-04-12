@@ -270,10 +270,41 @@ export function useTokenInfo(tokenAddress): { status: string; tokenInfo: T } {
 //     return { status, luxorTreasuryData }
 // }
 
-export function useUserInfo(user, tokenAddress): { status: string; userInfo: T } {
+export function useUserInfo(): { status: string; userInfo: T } {
     const { account, chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
     const [userInfo, setInfo] = useState<T>({
+        address: '',
+        nativeBalance: '0',
+        votingPower: '0',
+        protocolOwnership: '0',
+        stakedBalance: '0'
+    })  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus('fetching')
+        const response = await fetch(`${BASE_URL}/users/${account}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referrer-Policy': 'no-referrer',
+          },
+        })
+        const json = await response.json()
+        setInfo(json as T)
+        setStatus('fetched')
+      }
+      // if (chainId == ChainId.FANTOM) 
+      fetchData()
+    }, [])
+  
+    return { status, userInfo }
+}
+
+export function useUserTokenInfo(tokenAddress): { status: string; userTokenInfo: T } {
+    const { account, chainId } = useActiveWeb3React()
+    const [status, setStatus] = useState<string>('idle')
+    const [userTokenInfo, setInfo] = useState<T>({
         name: '',
         price: '0',
         value: '0',
@@ -286,7 +317,7 @@ export function useUserInfo(user, tokenAddress): { status: string; userInfo: T }
     useEffect(() => {
       const fetchData = async () => {
         setStatus('fetching')
-        const response = await fetch(`${BASE_URL}/users/${user}/${tokenAddress}`, {
+        const response = await fetch(`${BASE_URL}/users/${account}/${tokenAddress}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -301,15 +332,79 @@ export function useUserInfo(user, tokenAddress): { status: string; userInfo: T }
       fetchData()
     }, [])
   
-    return { status, userInfo }
+    return { status, userTokenInfo }
+}
+
+export function useUserPairInfo(pairAddress): { status: string; pairUserInfo: T } {
+    const { account, chainId } = useActiveWeb3React()
+    const [status, setStatus] = useState<string>('idle')
+    const [pairUserInfo, setInfo] = useState<T>({
+        name: '',
+        address: '',
+        lpPrice: '0',
+        lpValue: '0',
+
+        token0Address: '',
+        token1Address: '',
+
+        token0Decimals: '',
+        token1Decimals: '',
+
+        userBalance: '0',
+        pairDecimals: '18',
+        pairType: '',
+    })  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus('fetching')
+        const response = await fetch(`${BASE_URL}/pairs/${account}/${pairAddress}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referrer-Policy': 'no-referrer',
+          },
+        })
+        const json = await response.json()
+        setInfo(json as T)
+        setStatus('fetched')
+      }
+      if (chainId == ChainId.FANTOM) 
+      fetchData()
+    }, [])
+  
+    return { status, pairUserInfo }
 }
 
 export function usePairInfo(pairAddress): { status: string; pairInfo: T } {
-    const { account, chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
+    const { account, chainId } = useActiveWeb3React()
+
     const [pairInfo, setInfo] = useState<T>({
         address: '',
+        name: '',
+        symbol: '',
+        pairDecimals: '18',
+        pairType: 'swap',
         supply: '0',
+
+        lpPrice: '0',
+        lpValue: '0',
+
+        token0Decimals: '18',
+        token1Decimals: '18',
+
+        token0Address: '',
+        token1Address: '',
+
+        token0Symbol: '',
+        token1Symbol: '',
+
+        token0Balance: '0',
+        token1Balance: '0',
+
+        token0Price: '0',
+        token1Price: '0',
+
         luxorTreasuryBalance: '0',
         api: ''
     })  
@@ -504,6 +599,7 @@ export function useSummonerInfo(): { status: string; summonerInfo: T } {
   const [status, setStatus] = useState<string>('idle')
   const [summonerInfo, setInfo] = useState<T>({
       address: '',
+      poolLength: '0',
       dailySoul: '0',
       soulPerSecond: '0',
       soulPerYear: '0',
@@ -543,8 +639,8 @@ export function useSummonerPoolInfo(pid): { status: string; summonerPoolInfo: T 
       pid: '',
 
       lpAddress: '',
-      token0Address: '',
-      token1Address: '',
+      token0: '',
+      token1: '',
       
       allocPoint: '0',
       allocShare: '0',

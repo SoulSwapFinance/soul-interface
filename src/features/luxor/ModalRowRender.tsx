@@ -31,7 +31,7 @@ import { useApproveCallback } from 'hooks/useApproveCallback'
 import Modal from 'components/Modal/DefaultModal'
 import Typography from 'components/Typography'
 import ModalHeader from 'components/Modal/Header'
-import { useLuxorBondInfo, useUserInfo } from 'hooks/useAPI'
+import { useLuxorBondInfo } from 'hooks/useAPI'
 import { WFTM_ADDRESS } from 'constants/addresses'
 
 const TokenPairLink = styled(ExternalLink)`
@@ -484,7 +484,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                 // approved && available
                                    approved ? (
                                         <SubmitButton
-                                            primaryColour="#EDC100"
+                                            primaryColor="#EDC100"
                                             color="black"
                                             height="2rem"
                                             onClick={() => handleDeposit(depositValue)}>
@@ -493,7 +493,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                     // ) : !available ?
                                     // (    <SubmitButton
                                     //     height="2rem" 
-                                    //     primaryColour="#FF3E3E"
+                                    //     primaryColor="#FF3E3E"
                                     //     color="black"
                                     //     onClick={() => setShowAvailabilityMsg(true)}
                                     //     >
@@ -502,7 +502,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                     ) : (
                                         <SubmitButton 
                                         height="2rem" 
-                                        primaryColour="#EDC100"
+                                        primaryColor="#EDC100"
                                         color="black"
                                         onClick={() => handleApprove()}>
                                             APPROVE
@@ -551,7 +551,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                         <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
-                                            primaryColour="#EDC100"
+                                            primaryColor="#EDC100"
                                             color="black"
                                             margin=".5rem 0 .5rem 0"
                                             onClick={() =>
@@ -566,7 +566,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                         <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
-                                            primaryColour="#FF3E3E"
+                                            primaryColor="#FF3E3E"
                                             color="black"
                                             margin=".5rem 0 .5rem 0"
                                             onClick={() =>
@@ -580,7 +580,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                     <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
-                                            primaryColour="#3Eff3E"
+                                            primaryColor="#3Eff3E"
                                             color="black"
                                             margin=".5rem 0 .5rem 0"
                                             onClick={() =>
@@ -594,7 +594,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                 {/* <Wrap padding="0" margin="0" display="flex">
                                     <SubmitButton
                                         height="2rem"
-                                        primaryColour="#F4A703"
+                                        primaryColor="#F4A703"
                                         color="black"
                                         margin=".5rem 0 .5rem 0"
                                         onClick={() =>
@@ -628,7 +628,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
           </Typography>
           <SubmitButton
             height="2.5rem"
-            primaryColour="#3Eff3E"
+            primaryColor="#3Eff3E"
             color="black"
             onClick={() =>
               handleClaim()
@@ -638,7 +638,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
           </SubmitButton>
           <SubmitButton
             height="2.5rem"
-            primaryColour="#EDC100"
+            primaryColor="#EDC100"
             color="black"
             onClick={() =>
               handleDeposit(depositValue)
@@ -665,7 +665,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
           </Typography>
           <SubmitButton
             height="2.5rem"
-            primaryColour="#3Eff3E"
+            primaryColor="#3Eff3E"
             color="black"
             onClick={() =>
               handleClaim()
@@ -675,7 +675,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
           </SubmitButton>
           <SubmitButton
             height="2.5rem"
-            primaryColour="#FF3E3E"
+            primaryColor="#FF3E3E"
             color="white"
             onClick={() =>
                 setShowAvailabilityMsg(false)

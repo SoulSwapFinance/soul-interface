@@ -479,7 +479,7 @@ const StakeRowRender = ({ mid, supplyAddress, market, marketAddresses }) => {
                                     (
                                         <SubmitButton
                                         height="2rem"
-                                        primaryColour="#B485FF"
+                                        primaryColor="#B485FF"
                                         color="black"
                                         margin=".5rem 0 .5rem 0"
                                         onClick={() =>
@@ -543,7 +543,7 @@ const StakeRowRender = ({ mid, supplyAddress, market, marketAddresses }) => {
                                     <Wrap padding="0" margin="0" display="flex flex-cols">
                                         <SubmitButton
                                             height="2rem"
-                                            primaryColour="#A285FF"
+                                            primaryColor="#A285FF"
                                             color="black"
                                             margin=".5rem 0 .5rem 0"
                                             onClick={() =>
@@ -553,7 +553,7 @@ const StakeRowRender = ({ mid, supplyAddress, market, marketAddresses }) => {
                                             DEPOSIT SOUL
                                         </SubmitButton>
                                         {/* <SubmitButton height="2rem" 
-                                        primaryColour="#3Eff3E"
+                                        primaryColor="#3Eff3E"
                                         color="black"
                                         onClick={() => handleApprove()}>
                                         APPROVE MORE
@@ -562,7 +562,7 @@ const StakeRowRender = ({ mid, supplyAddress, market, marketAddresses }) => {
                                     <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
-                                            primaryColour="#3Eff3E"
+                                            primaryColor="#3Eff3E"
                                             color="black"
                                             margin=".5rem 0 .5rem 0"
                                             onClick={() =>
@@ -586,7 +586,7 @@ const StakeRowRender = ({ mid, supplyAddress, market, marketAddresses }) => {
                                     {/* <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
-                                            primaryColour="#B485FF"
+                                            primaryColor="#B485FF"
                                             color="black"
                                             margin=".5rem 0 .5rem 0"
                                             onClick={() =>
@@ -599,7 +599,7 @@ const StakeRowRender = ({ mid, supplyAddress, market, marketAddresses }) => {
                                 <Wrap padding="0" margin="0" display="flex">
                                     <SubmitButton
                                         height="2rem"
-                                        primaryColour="#fa4600"
+                                        primaryColor="#fa4600"
                                         color="black"
                                         margin=".5rem 0 .5rem 0"
                                         onClick={() =>
@@ -631,7 +631,7 @@ const StakeRowRender = ({ mid, supplyAddress, market, marketAddresses }) => {
           </Typography>
           <SubmitButton
             height="2.5rem"
-            primaryColour="#3Eff3E"
+            primaryColor="#3Eff3E"
             color="black"
             // onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
             onClick={() =>
@@ -643,7 +643,7 @@ const StakeRowRender = ({ mid, supplyAddress, market, marketAddresses }) => {
           </SubmitButton>
           <SubmitButton
             height="2.5rem"
-            primaryColour="#FF3E3E"
+            primaryColor="#FF3E3E"
             color="white"
             onClick={() =>
                 setShowHarvestConfirmation(false)
@@ -683,7 +683,7 @@ const StakeRowRender = ({ mid, supplyAddress, market, marketAddresses }) => {
           </Typography>
           <SubmitButton
             height="2.5rem"
-            primaryColour="#3Eff3E"
+            primaryColor="#3Eff3E"
             color="black"
             onClick={() =>
               // setShowConfirmation(true)
@@ -694,7 +694,7 @@ const StakeRowRender = ({ mid, supplyAddress, market, marketAddresses }) => {
           </SubmitButton>
           <SubmitButton
             height="2.5rem"
-            primaryColour="#FF3E3E"
+            primaryColor="#FF3E3E"
             color="white"
             onClick={() =>
                 setShowWithdrawConfirmation(false)

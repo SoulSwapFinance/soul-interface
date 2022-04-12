@@ -49,14 +49,24 @@ module.exports = withBundleAnalyzer(
         // },
         {
           source: '/yield',
-          destination: '/farms',
+          destination: '/summoner',
+          permanent: true,
+        },
+        {
+          source: '/farms',
+          destination: '/summoner',
           permanent: true,
         },
         {
           source: '/farm',
-          destination: '/mines',
+          destination: '/summoner',
           permanent: true,
         },        
+        {
+          source: '/mines',
+          destination: '/summoner',
+          permanent: true,
+        },     
         {
           source: '/bond',
           destination: '/bonds',
@@ -104,7 +114,7 @@ module.exports = withBundleAnalyzer(
         },
         {
           source: '/swap',
-          destination: '/swap',
+          destination: '/exchange/swap',
         },
         {
           source: '/swap/:token*',
@@ -156,15 +166,15 @@ module.exports = withBundleAnalyzer(
         },
         {
           source: '/farm',
-          destination: '/mines?filter=active',
+          destination: '/summoner',
         },
         {
           source: '/farms',
-          destination: '/mines?filter=active',
+          destination: '/summoner',
         },
         {
           source: '/mines',
-          destination: '/mines?filter=active',
+          destination: '/summoner',
         },
         {
           source: '/analytics',

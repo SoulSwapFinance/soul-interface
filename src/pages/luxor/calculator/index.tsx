@@ -8,7 +8,7 @@ import { Grid, InputAdornment, OutlinedInput, Zoom, Slider } from "@material-ui/
 import { formatNumber } from "functions";
 import styled from 'styled-components'
 import { LUM_ADDRESS } from "sdk";
-import { useLuxorInfo, useLuxorUserInfo, useUserInfo } from "hooks/useAPI";
+import { useLuxorInfo, useLuxorUserInfo, useUserInfo, useUserTokenInfo } from "hooks/useAPI";
 import { useActiveWeb3React } from "hooks/useActiveWeb3React";
 import { useLuxorPrice, useWrappedBtcPrice } from "hooks/getPrices";
 import { Button } from "components/Button";
@@ -23,10 +23,10 @@ export default function Calculator() {
     const btcPrice = useWrappedBtcPrice()
     const trimmedMarketPrice = Number(luxorPrice).toFixed(6);
 
-    const { userInfo } = useUserInfo(account, LUM_ADDRESS[250])
+    const { userTokenInfo } = useUserTokenInfo(LUM_ADDRESS[250])
     const { luxorUserInfo } = useLuxorUserInfo(account)
     const circulatingLumens = useLuxorInfo().luxorInfo.circulatingLumens
-    const lumensBalance = Number(userInfo.balance) / 1e9
+    const lumensBalance = Number(userTokenInfo.balance) / 1e9
     const trimmedLumensBalance = Number(lumensBalance).toFixed(6);
     const stakingReward = luxorUserInfo.distribute;
     const stakingRebase = Number(stakingReward) / Number(circulatingLumens);

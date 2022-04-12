@@ -41,7 +41,7 @@ if (!pair) return <div />
   const assetSymbol = pair?.asset.tokenInfo.symbol
   const collateralSymbol = pair?.collateral.tokenInfo.symbol
   const assetDecimals = pair?.asset.tokenInfo.decimals
-  const oracle = pair?.oracle.address
+  // const oracle = pair?.oracle.address
 
   const assetPrice = pair?.asset.usd / (10**assetDecimals)
   const userDepositAmount = pair?.userAssetFraction / 10**(assetDecimals)
@@ -90,8 +90,8 @@ if (!pair) return <div />
                   <div className="flex items-center">
                     <div className="mr-1 text-sm text-secondary">{`Collateral`}:</div>
                     <div className="mr-2 text-sm text-high-emphesis">{pair && collateralSymbol}</div>
-                    <div className="mr-1 text-sm text-secondary">{`Oracle`}:</div>
-                    <div className="text-sm text-high-emphesis">{pair && oracle}</div>
+                    {/* <div className="mr-1 text-sm text-secondary">{`Oracle`}:</div> */}
+                    {/* <div className="text-sm text-high-emphesis">{pair && oracle}</div> */}
                   </div>
                 </div>
               </div>

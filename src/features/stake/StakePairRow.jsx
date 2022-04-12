@@ -468,7 +468,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
                   </SubmitButton>
                   <SubmitButton
                     height="2.5rem"
-                    primaryColour="#bbb"
+                    primaryColor="#bbb"
                     color="black"
                     margin=".5rem 0 .5rem .6rem"
                     onClick={() => handleWithdraw(ethers.utils.parseUnits(document.getElementById('unstake').value))}

@@ -19,6 +19,9 @@ import ModalHeader from 'components/Modal/Header'
 import { concat } from 'lodash'
 import { useLuxorPrice, useWrappedLumPrice } from 'hooks/getPrices'
 import NavLink from 'components/NavLink'
+import { useLuxorInfo, usePairInfo, useSummonerInfo, useSummonerPoolInfo } from 'hooks/useAPI'
+import { usePairPrice } from 'hooks/usePairData'
+import { usePairContract } from 'hooks/useTokenContract'
 
 const cache: { [key: string]: number } = {};
 
@@ -36,20 +39,35 @@ export default function LuxorStatsModal(): JSX.Element | null {
   const { chainId, library, account } = useActiveWeb3React()
   const luxorStatsModalOpen = useModalOpen(ApplicationModal.LUXOR_STATS)
   const toggleLuxorStatsModal = useToggleLuxorStatsModal()
-  let tokenInfo = useTokenInfo(useLuxorContract())
+  // let tokenInfo = useTokenInfo(useLuxorContract())
   let wrappedLumensInfo = useTokenInfo(useWrappedLumensContract())
   const luxorPrice = useLuxorPrice()
   const wLumPrice = useWrappedLumPrice()
 
+  const { luxorInfo } = useLuxorInfo()
   const farmInfo = useTVL()
-  const vaultInfo = useVaultTVL()
+  
+  // const farmsTvl = useTVL()
   const luxInfo = useLuxTVL()
 
-  let luxTvl = luxInfo?.reduce((previousValue, currentValue) => {
-    return previousValue + currentValue?.tvl
-  }, 0)
+  const LuxFtmContract = usePairContract('0x951BBB838e49F7081072895947735b0892cCcbCD')
+  const LuxDaiContract = usePairContract('0x46729c2AeeabE7774a0E710867df80a6E19Ef851')
 
-  let vaultsTvl = vaultInfo?.reduce((previousValue, currentValue) => {
+  const LuxorFtmAddress = LuxFtmContract.address
+  const LuxorDaiAddress = LuxDaiContract.address
+
+  // Prices //
+  const luxFtmPrice = usePairPrice(LuxorFtmAddress) // ~190_000 // √
+  const luxDaiPrice = usePairPrice(LuxorDaiAddress) // ~160_000 // √
+
+  // GET LIQUIDITY BALANCES //
+  const LuxFtmBalance = Number(usePairInfo(LuxorFtmAddress).pairInfo.luxorTreasuryBalance) / 1e18
+  const LuxDaiBalance = Number(usePairInfo(LuxorDaiAddress).pairInfo.luxorTreasuryBalance) / 1e18
+  const LuxFtmValue = LuxFtmBalance * luxFtmPrice
+  const LuxDaiValue = LuxDaiBalance * luxDaiPrice
+  const treasuryLiquidityBalance = LuxFtmValue + LuxDaiValue
+  
+  let luxTvl = luxInfo?.reduce((previousValue, currentValue) => {
     return previousValue + currentValue?.tvl
   }, 0)
 
@@ -191,7 +209,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
             <Typography variant="sm" className="flex items-center py-0.5">
               {`Circulating Supply`}
             </Typography>
-            <QuestionHelper
+            {/* <QuestionHelper
               text={
                 <div className="flex flex-col gap-2 py-1 px-3 w-full">
                   <div className="flex items-center justify-between">
@@ -233,12 +251,12 @@ export default function LuxorStatsModal(): JSX.Element | null {
                   </div>
                 </div>
               }
-            />
+            /> */}
           </div>,
           formatNumberScale(
-            Number(tokenInfo?.totalSupply)
-            - Number(wrappedLumensInfo?.circulatingSupply)
-            - (Number(tokenInfo?.totalSupply) * 0.19) // TODO: make exact
+            Number(luxorInfo?.supply)
+            - Number(luxorInfo?.circulatingLumens)
+            - (Number(luxorInfo?.supply) * 0.19) // TODO: make exact
             , false)
         )}
         {getSummaryLine(
@@ -246,16 +264,16 @@ export default function LuxorStatsModal(): JSX.Element | null {
             {`Total Market Cap`}
           </Typography>,
           formatCurrency(
-            Number(tokenInfo?.totalSupply) * Number(luxorPrice))
+            Number(luxorInfo?.supply) * Number(luxorPrice))
         )}
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Protocol Liquidity`}
           </Typography>,
           concat(formatNumberScale(
-            luxTvl, true)
+            treasuryLiquidityBalance, true)
             ,
-            ` (${((luxTvl / tvl * 100).toFixed(0))}%)`)
+            ` (${((treasuryLiquidityBalance / tvl * 100).toFixed(0))}%)`)
         )}
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
@@ -290,9 +308,21 @@ export default function LuxorStatsModal(): JSX.Element | null {
           size='xs'
           className="text-white"
         >
+          <NavLink href={'/luxor/dashboard'}>
+            <a className="flex justify-center text-black text-xl transition rounded-md hover:pink">
+              <span>VIEW DATA</span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button
+          color='yellow'
+          type='outlined'
+          size='xs'
+          className="text-white"
+        >
           <NavLink href={'/luxor/bonds'}>
             <a className="flex justify-center text-black text-xl transition rounded-md hover:pink">
-              MINT LUX<span> ↗</span>
+            <span>MINT LUX</span>
             </a>
           </NavLink>
         </Button>
@@ -304,7 +334,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
         >
           <NavLink href={'/luxor/stake'}>
             <a className="flex justify-center text-black text-xl transition rounded-md hover:pink">
-              STAKE LUX<span> ↗</span>
+            <span>STAKE LUX</span>
             </a>
           </NavLink>
         </Button>

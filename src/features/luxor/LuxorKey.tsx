@@ -41,7 +41,7 @@ export default function LuxorKey() {
           <SubmitButton
               height="2rem"
               width="50%"
-              primaryColour="#F4A703"
+              primaryColor="#F4A703"
               color="black"
               margin=".5rem 0 .5rem 0"
               onClick={() =>
@@ -54,7 +54,7 @@ export default function LuxorKey() {
           <SubmitButton
               height="2rem"
               width="50%"
-              primaryColour="#F4A703"
+              primaryColor="#F4A703"
               color="black"
               margin=".5rem 0 .5rem 0"
               onClick={() =>

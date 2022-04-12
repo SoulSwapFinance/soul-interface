@@ -88,7 +88,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     const [liquidity, setLiquidity] = useState(0)
     // const { deposit, withdraw } = useStakeContract()
     // const balance = useCurrencyBalance(account, SOUL[250])
-    const stakedBalance = AutoStakeContract?.balanceOf(account)
+    // const stakedBalance = AutoStakeContract?.balanceOf(account)
 
     /**
      * Runs only on initial render/mount
@@ -460,7 +460,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                     (
                                         <SubmitButton
                                         height="2rem"
-                                        primaryColour="#B485FF"
+                                        primaryColor="#B485FF"
                                         color="black"
                                         margin=".5rem 0 .5rem 0"
                                         onClick={() =>
@@ -524,7 +524,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                     <Wrap padding="0" margin="0" display="flex flex-cols">
                                         <SubmitButton
                                             height="2rem"
-                                            primaryColour="#A285FF"
+                                            primaryColor="#A285FF"
                                             color="black"
                                             margin=".5rem 0 .5rem 0"
                                             onClick={() =>
@@ -534,7 +534,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                             DEPOSIT SOUL
                                         </SubmitButton>
                                         {/* <SubmitButton height="2rem" 
-                                        primaryColour="#3Eff3E"
+                                        primaryColor="#3Eff3E"
                                         color="black"
                                         onClick={() => handleApprove()}>
                                         APPROVE MORE
@@ -543,7 +543,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                     <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
-                                            primaryColour="#A654DC"
+                                            primaryColor="#A654DC"
                                             color="white"
                                             margin=".5rem 0 .5rem 0"
                                             // onClick={() => handleHarvest()
@@ -567,7 +567,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                     {/* <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
-                                            primaryColour="#B485FF"
+                                            primaryColor="#B485FF"
                                             color="black"
                                             margin=".5rem 0 .5rem 0"
                                             onClick={() =>
@@ -580,7 +580,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                 <Wrap padding="0" margin="0" display="flex">
                                     <SubmitButton
                                         height="2rem"
-                                        primaryColour="#ee82ee"
+                                        primaryColor="#ee82ee"
                                         color="black"
                                         margin=".5rem 0 .5rem 0"
                                         onClick={() =>
@@ -613,7 +613,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
           </Typography>
           <SubmitButton
             height="2.5rem"
-            primaryColour="#A654DC"
+            primaryColor="#A654DC"
             color="white"
             // onClick={() => handleDeposit(ethers.utils.parseUnits(document.getElementById('stake').value))}
             onClick={() =>
@@ -625,7 +625,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
           </SubmitButton>
           <SubmitButton
             height="2.5rem"
-            primaryColour="#FF3E3E"
+            primaryColor="#FF3E3E"
             color="white"
             onClick={() =>
                 setShowHarvestConfirmation(false)
@@ -665,7 +665,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
           </Typography>
           <SubmitButton
             height="2.5rem"
-            primaryColour="#EE82EE"
+            primaryColor="#EE82EE"
             color="black"
             onClick={() =>
               // setShowConfirmation(true)
@@ -676,7 +676,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
           </SubmitButton>
           <SubmitButton
             height="2.5rem"
-            primaryColour="#FF3E3E"
+            primaryColor="#FF3E3E"
             color="white"
             onClick={() =>
                 setShowWithdrawConfirmation(false)

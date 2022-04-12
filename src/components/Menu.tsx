@@ -11,7 +11,7 @@ const items = (i18n: I18n) => [
   {
     name: i18n._(t`Farm`),
     description: i18n._(t`Summon Souls with Liquidity.`),
-    href: '/mines',
+    href: '/summoner',
   },
   {
     name: i18n._(t`Stake`),
