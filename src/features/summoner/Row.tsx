@@ -64,6 +64,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const { summonerPoolInfo } = useSummonerPoolInfo(pid)
     const liquidity = summonerPoolInfo.tvl
     const apr = summonerPoolInfo.apr
+    const allocPoint = summonerPoolInfo.allocPoint
     const lpAddress = summonerPoolInfo.lpAddress
     
     const { pairUserInfo } = useUserPairInfo(lpAddress)
@@ -93,8 +94,8 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const earnedAmount = summonerUserInfo.pendingSoul
     const earnedValue = summonerUserInfo.pendingValue
     const lpPrice = summonerUserInfo.lpPrice
-    const timeDelta = summonerUserInfo.timeDelta
-    const secondsRemaining = summonerUserInfo.secondsRemaining
+    // const timeDelta = summonerUserInfo.timeDelta
+    // const secondsRemaining = summonerUserInfo.secondsRemaining
     const withdrawFee = summonerUserInfo.currentRate
     const feeAmount = Number(withdrawFee) / 100 * Number(stakedBalance)
     const withdrawable = Number(stakedBalance) - feeAmount
@@ -103,11 +104,8 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const hasBalance = Number(unstakedBalance) > 0
     const isFarmer = Number(stakedBalance) > 0
 
-
     // ONLY USED FOR LOGO //
-
     const token0 = new Token(chainId, farm.token1Address[chainId], 18)
-
     const token1 = new Token(chainId, farm.token2Address[chainId], 18)
 
     // const pair = new Token(chainId, farm.lpToken.address, 18)
@@ -121,7 +119,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     }, [account])
 
     /**
-     * Runs on initial render/mount and reruns every 2 seconds
+     * Runs on initial render/mount and reruns
      */
     useEffect(() => {
         if (account) {
@@ -129,7 +127,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                 // if (showing) {
                     fetchApproval()
                 // }
-            }, 3000)
+            }, 10000)
             // Clear timeout if the component is unmounted
             return () => clearTimeout(timer)
         }
@@ -235,14 +233,14 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
         <>
             <div className="flex justify-center w-full">
                 <FarmContainer>
-                    <div className="bg-dark-1200 p-3 border border-dark-1000 hover:border-dark-600" onClick={() => handleShowOptions()}>
+                    <div className={classNames("bg-dark-1200 p-3 border hover:border-dark-600", Number(unstakedBalance) > 0 ? "border-green" : "border-dark-1000")}
+                    onClick={() => handleShowOptions()}>
                         <FarmContentWrapper>
                             <div className="items-center">
                                 <FarmItemBox>
                                     <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
                                 </FarmItemBox>
                             </div>
-
                         {/* <HideOnMobile>
                             <FarmItemBox>
                                 <FarmItem>
@@ -323,7 +321,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                 </FarmItem>
                             </FarmItemBox>
 
-                            <FarmItemBox className="flex">
+                            {/* <FarmItemBox className="flex">
                                 {Number(earnedValue).toFixed(0).toString() === '0' ? (
                                     <Text padding="0" fontSize="1rem" color="#666">
                                         0
@@ -333,7 +331,20 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                         ${Number(earnedValue).toFixed(0)}
                                     </Text>
                                 )}
+                            </FarmItemBox> */}
+
+                            <FarmItemBox className="flex">
+                                {Number(earnedAmount).toFixed(0).toString() === '0' ? (
+                                    <Text padding="0" fontSize="1rem" color="#666">
+                                        0
+                                    </Text>
+                                ) : (
+                                    <Text padding="0" fontSize="1rem" color="#F36FFE">
+                                        {Number(earnedAmount).toFixed(0)}
+                                    </Text>
+                                )}
                             </FarmItemBox>
+
                             <FarmItemBox className="flex" >
                                 {Number(liquidity) === 0 ? (
                                     <Text padding="0" fontSize="1rem" color="#666">
@@ -457,7 +468,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                             handleHarvest(pid)
                                         }
                                     >
-                                        HARVEST {Number(earnedAmount).toFixed(0)} SOUL
+                                        HARVEST SOUL
                                     </SubmitButton>
                             </Wrap>
                             </FunctionBox>
@@ -487,7 +498,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                             <div className="text-xl text-center font-bold mb-3 text-dark-600">
                                 Deposit { farm.lpSymbol }
                             </div>
-                            <div className="flex justify-between">
+                            {/* <div className="flex justify-between">
                                 <Typography className="text-white" fontFamily={'medium'}>
                                     Staked (Amount)
                                 </Typography>
@@ -504,7 +515,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                    {formatNumber(stakedValue, true)}
                                 </Typography>
-                            </div>
+                            </div> */}
 
                             { Number(unstakedBalance) > 0 &&
                             <div className="flex justify-between">
@@ -547,7 +558,41 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                             token0={token0} 
                             token1={token1} 
                         />
-
+            {/* FARMER WITH NO BALANCE */}
+                {!hasBalance && isFarmer && (
+                        <FunctionBox>
+                        <Wrap padding="0" margin="0" display="flex">
+                            <SubmitButton
+                                height="2rem"
+                                primaryColour="#B485FF"
+                                color="black"
+                                margin=".5rem 0 .5rem 0"
+                                // onClick={() => setOpenSwap(true)}
+                            >
+                            {(token0Symbol == 'FTM' || token1Symbol == 'FTM') ? (
+                          <NavLink
+                            href=
+                            {token0Symbol == 'FTM' ?
+                              `https://exchange.soulswap.finance/add/FTM/${token0Address}`
+                              : `https://exchange.soulswap.finance/add/FTM/${token1Address}`
+                            }
+                          >
+                            <a>CREATE {farm.lpSymbol} PAIR</a>
+                          </NavLink>
+                        ) : (
+                          <NavLink
+                            href=
+                            {`https://exchange.soulswap.finance/add/${token0Address}/${token1Address}`}
+                          >
+                            <a>CREATE {farm.lpSymbol} PAIR</a>
+                          </NavLink>
+                        )}
+                      
+                            </SubmitButton>
+                        
+                            </Wrap>
+                        </FunctionBox>
+                    )}
                         <Wrap padding="0" margin="0" display="flex">
                             <SubmitButton
                                 height="2rem"
@@ -561,21 +606,6 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                 DEPOSIT {farm.lpSymbol}
                             </SubmitButton>
                         </Wrap>
-                    <Wrap padding="0" margin="0" display="flex">
-                            <SubmitButton
-                                height="2rem"
-                                primaryColour="#bbb"
-                                color="black"
-                                margin=".5rem 0 .5rem 0"
-                                onClick={() =>
-                                    handleHarvest(pid)
-                                }
-                            >
-                                HARVEST {Number(earnedAmount).toFixed(0)} SOUL
-                                {/* {Number(earnedAmount) !== 0 ? `($${(Number(earnedAmount) * soulPrice).toFixed(0)})` : ''} */}
-                            </SubmitButton>
-                    </Wrap>
-                    
                     </FunctionBox>
                 
                    </HeadlessUIModal.BorderedContent>
@@ -696,20 +726,6 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                 WITHDRAW { farm.lpSymbol }
                             </SubmitButton>
                         </Wrap>
-                    <Wrap padding="0" margin="0" display="flex">
-                            <SubmitButton
-                                height="2rem"
-                                primaryColour="#bbb"
-                                color="black"
-                                margin=".5rem 0 .5rem 0"
-                                onClick={() =>
-                                    handleHarvest(pid)
-                                }
-                            >
-                                HARVEST {Number(earnedAmount).toFixed(0)} SOUL
-                                {/* {Number(earnedAmount) !== 0 ? `($${(Number(earnedAmount) * soulPrice).toFixed(0)})` : ''} */}
-                            </SubmitButton>
-                    </Wrap>
                     
                     </FunctionBox>
                 </HeadlessUIModal.BorderedContent>

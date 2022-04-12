@@ -54,7 +54,7 @@ export function Active() {
     <div className="justify-center">
         <FarmContainer>
           {/* <div className="grid grid-cols-5 ml-24 mr-6 sm:ml-0 bg-dark-1000"> */}
-          <div className="grid grid-cols-1 bg-dark-1200 font-bold mb-2 border border-dark-1000 hover:border-dark-600">
+          <div className="grid grid-cols-1 bg-dark-1200 font-bold mb-2 mr-4 ml-2 border border-dark-1000 hover:border-dark-600">
             <FarmContentWrapper>
               
             {/* <HideOnMobile> */}
@@ -91,7 +91,7 @@ export function Active() {
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                APR
+                % RETURN
                 </Text>
               </FarmItemBox>
 
@@ -103,7 +103,7 @@ export function Active() {
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                TVL
+                LIQUIDITY
                 </Text>
               </FarmItemBox>
 

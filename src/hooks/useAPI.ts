@@ -283,7 +283,7 @@ export function useUserInfo(): { status: string; userInfo: T } {
     useEffect(() => {
       const fetchData = async () => {
         setStatus('fetching')
-        const response = await fetch(`${BASE_URL}/users/${account}}`, {
+        const response = await fetch(`${BASE_URL}/users/${account}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -368,7 +368,7 @@ export function useUserPairInfo(pairAddress): { status: string; pairUserInfo: T 
         setInfo(json as T)
         setStatus('fetched')
       }
-      // if (chainId == ChainId.FANTOM) 
+      if (chainId == ChainId.FANTOM) 
       fetchData()
     }, [])
   
@@ -377,6 +377,8 @@ export function useUserPairInfo(pairAddress): { status: string; pairUserInfo: T 
 
 export function usePairInfo(pairAddress): { status: string; pairInfo: T } {
     const [status, setStatus] = useState<string>('idle')
+    const { account, chainId } = useActiveWeb3React()
+
     const [pairInfo, setInfo] = useState<T>({
         address: '',
         name: '',
@@ -420,7 +422,7 @@ export function usePairInfo(pairAddress): { status: string; pairInfo: T } {
         setInfo(json as T)
         setStatus('fetched')
       }
-      // if (chainId == ChainId.FANTOM) 
+      if (chainId == ChainId.FANTOM) 
       fetchData()
     }, [])
   
