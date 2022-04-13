@@ -63,10 +63,15 @@ module.exports = withBundleAnalyzer(
           permanent: true,
         },        
         {
+          source: '/mine',
+          destination: '/summoner',
+          permanent: true,
+        },
+        {
           source: '/mines',
           destination: '/summoner',
           permanent: true,
-        },     
+        },
         {
           source: '/bond',
           destination: '/bonds',
