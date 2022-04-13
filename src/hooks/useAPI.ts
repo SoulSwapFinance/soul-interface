@@ -608,7 +608,7 @@ export function useSummonerInfo(): { status: string; summonerInfo: T } {
       weight: '0',
       weightTotal: '0',
       weightShare: '0',
-      api: 'https://api.soulswap.finance',
+      // api: 'https://api.soulswap.finance',
       ftmscan: 'https://ftmscan.com',
   })  
   useEffect(() => {
@@ -688,6 +688,7 @@ export function useSummonerUserInfo(pid): { status: string; summonerUserInfo: T 
   const [summonerUserInfo, setInfo] = useState<T>({
       userAddress: account,
       pairAddress: '',
+      walletBalance: '0',
       stakedBalance: '0',
       stakedValue: '0',
       pendingSoul: '0',

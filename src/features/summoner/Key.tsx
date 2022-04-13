@@ -76,7 +76,7 @@ export function SoulSwap() {
             <HideOnMobile>
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                DEPOSITED
+                STAKED
                 </Text>
               </FarmItemBox>
             </HideOnMobile>
@@ -91,7 +91,7 @@ export function SoulSwap() {
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                % RETURN
+                % APR
                 </Text>
               </FarmItemBox>
 
@@ -141,7 +141,7 @@ export function Underworld() {
             <HideOnMobile>
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                DEPOSITED
+                STAKED
                 </Text>
               </FarmItemBox>
             </HideOnMobile>
@@ -156,7 +156,7 @@ export function Underworld() {
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                % RETURN
+                % APR
                 </Text>
               </FarmItemBox>
 
