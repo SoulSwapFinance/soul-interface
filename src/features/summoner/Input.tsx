@@ -69,11 +69,11 @@ export default function FarmInputPanel({
   return (
     <div id={id} className={classNames('p-1 rounded bg-dark-1000')}>
       <div className="flex flex-row items-center">
-        <div className={classNames('w-2/5 sm:w-1/4 mx-4 sm:mx-12 sm:ml-6')}>
+        <div className={classNames('w-5/5 sm:w-1/4 mx-4 sm:mx-12 sm:ml-6')}>
 
             {/* CURRENCY LOGO */}
-            <div className="flex items-center">
-                <DoubleCurrencyLogo currency0={token0} currency1={token1} size={54} margin={true} />
+            <div className="hidden sm:flex sm:items-center">
+                <DoubleCurrencyLogo currency0={token0} currency1={token1} size={48} margin={true} />
             </div>
 
         </div>
@@ -93,7 +93,7 @@ export default function FarmInputPanel({
                 <Button onClick={() => onMax(balance)}>
                 <div className="flex flex-cols-2">
                   <div className="text-xs font-medium text-right cursor-pointer text-low-emphesis">
-                    {/* {Number(balance)?.toFixed(4) || 0} {' '} */}
+                    {formatNumber(balance, false, true) || 0} {' '}
                     {/* {pairSymbol} */}
                     MAX
                   <br/>
