@@ -28,6 +28,7 @@ import ModalHeader from 'components/Modal/Header'
 import NavLink from 'components/NavLink'
 import Modal from 'components/DefaultModal'
 import useSoulMine from 'features/mines/hooks/useSoulMine'
+import { ArrowLeftIcon } from '@heroicons/react/solid'
 
 const INPUT_CHAR_LIMIT = 18
 
@@ -316,21 +317,14 @@ export default function SoulStake() {
       <div className="mb-1 md:mb-2" />
         {/* <Header /> */}
         <div className="flex items-right px-4">
-          {/* <NavLink href="/mines?filter=active"> */}
+          <Button>
           <NavLink href="/summoner">
-            <a className="flex items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
-              <span>{i18n._(t`Back to Farms`)}</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-              </svg>
+            <a className="flex items-center space-x-2 font-medium text-center text-dark-600 cursor-pointer text-base hover:text-high-emphesis">
+             <ArrowLeftIcon width={18} height={18} className="text-dark-600 hover:text-white" />
+              <span>Farms</span>
             </a>
           </NavLink>
+        </Button>
         </div>
         <div className="mt-2 mb-1" />
         <div className="flex flex-col w-full min-h-full">
