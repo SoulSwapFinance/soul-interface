@@ -69,9 +69,9 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     // const assetAddress = pairInfo.address
     // console.log(assetAddress)
     const assetDecimals = pairInfo.pairDecimals
-    const unstakedBalance 
-    = Number(pairUserInfo.userBalance) 
-    / 10**Number(assetDecimals)
+    // const unstakedBalance 
+    // = Number(pairUserInfo.userBalance) 
+    // / 10**Number(assetDecimals)
     // const assetSymbol = pairInfo.symbol
     
     const token0Symbol = pairInfo.token0Symbol
@@ -98,8 +98,9 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const feeAmount = Number(withdrawFee) * Number(stakedBalance) / 100
     const withdrawable = Number(stakedBalance) - feeAmount
     const feeValue = feeAmount * Number(lpPrice)
+    const walletBalance = summonerUserInfo.walletBalance
 
-    const hasBalance = Number(unstakedBalance) > 0
+    const hasBalance = Number(walletBalance) > 0
     const isFarmer = Number(stakedBalance) > 0
     const isUnderworldPair = Number(allocPoint) == 420
 
@@ -322,6 +323,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                 </FarmItem>
                             </FarmItemBox>
 
+                        {/* REWARDS VALUE */}
                             {/* <FarmItemBox className="flex">
                                 {Number(earnedValue).toFixed(0).toString() === '0' ? (
                                     <Text padding="0" fontSize="1rem" color="#666">
@@ -341,7 +343,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                     </Text>
                                 ) : (
                                     <Text padding="0" fontSize="1rem" color="#F36FFE">
-                                        {Number(earnedAmount).toFixed(0)}
+                                        {formatNumber(Number(earnedAmount), false, true)} SOUL
                                     </Text>
                                 )}
                             </FarmItemBox>
@@ -374,7 +376,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                     {/* // isOpen={true} 
                     // onDismiss={ () => setShowOptions(false) } */}
                 {/* USER: NOT STAKED & NOT FARMER */}
-                    {!hasBalance && !isFarmer && !isUnderworldPair && (
+                    {/* {!hasBalance && !isFarmer && !isUnderworldPair && (
                         <FunctionBox>
                         <Wrap padding="0" margin="0" display="flex">
                             <SubmitButton
@@ -407,7 +409,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         
                             </Wrap>
                         </FunctionBox>
-                    )}
+                    )} */}
 
                     {/* UN-APPROVED */}
                     {!approved &&  (
@@ -524,13 +526,13 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                 </Typography>
                             </div> */}
 
-                            { Number(unstakedBalance) > 0 &&
+                            { Number(walletBalance) > 0 &&
                             <div className="flex justify-between">
                                 <Typography className="text-white" fontFamily={'medium'}>
                                     Balance
                                 </Typography>
                                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                    {formatNumber(unstakedBalance, false)} {farm.lpSymbol}
+                                    {formatNumber(walletBalance, false)} {farm.lpSymbol}
                                 </Typography>
                             </div>
                             }
@@ -558,15 +560,16 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                             pid={farm.pid}
                             onMax={setDepositValue}
                             value={depositValue}
-                            balance={unstakedBalance.toString()}
+                            balance={walletBalance.toString()}
                             onUserInput={setDepositValue}
                             id={pid}
                             // pairSymbol={farm.lpSymbol}
                             token0={token0} 
                             token1={token1} 
                         />
+
             {/* FARMER WITH NO BALANCE */}
-                {!hasBalance && isFarmer && !isUnderworldPair && (
+                {/* {!hasBalance && isFarmer && !isUnderworldPair && (
                         <FunctionBox>
                         <Wrap padding="0" margin="0" display="flex">
                             <SubmitButton
@@ -599,7 +602,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         
                             </Wrap>
                         </FunctionBox>
-                    )}
+                    )} */}
 
                     { isUnderworldPair && (
                         <SubmitButton
@@ -630,9 +633,10 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                             </SubmitButton>
                         </Wrap>
                     </FunctionBox>
-                
+
                    </HeadlessUIModal.Controlled>
                 // </Wrap>
+
 )}
 
 {/* WITHDRAW MODAL */}
@@ -692,7 +696,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                     {formatNumber(Number(stakedValue) - (withdrawable * Number(lpPrice)), true, true)}
                                 </Typography>
                             </div>
-                            
+
                             <div className = "p-0.5 space-y-4 bg-dark-800"/>
 
                             {/* <div className="flex justify-between">
@@ -787,9 +791,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         </Wrap>
                     
                     </FunctionBox>
-                </HeadlessUIModal.Controlled
-                
-                >
+                </HeadlessUIModal.Controlled>
 )}
 
 { showConfirmation && (
