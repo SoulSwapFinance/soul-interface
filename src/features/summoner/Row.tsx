@@ -241,7 +241,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         : "hover:border-dark-600"
                         )}
                         onClick={() => handleShowOptions()}
-                    >
+                        >
                         <FarmContentWrapper>
                             <div className="items-center">
                                 <FarmItemBox>
@@ -356,7 +356,6 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                     </Text>
                                 )}
                             </FarmItemBox>
-
                             <FarmItemBox className="flex" >
                                 {Number(liquidity) === 0 ? (
                                     <Text padding="0" fontSize="1rem" color="#666">
@@ -376,6 +375,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                     </div>
                 </FarmContainer>
             </div>
+
 
 {/*------ DROPDOWN OPTIONS PANEL ------*/}
     {showOptions && (
