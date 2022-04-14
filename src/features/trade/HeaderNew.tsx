@@ -35,69 +35,38 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
     <div className="flex items-center justify-between gap-1">
       <div className="flex gap-4">
         <NavLink
-          activeClassName="text-high-emphesis"
+          activeClassName="text-dark-600"
           href={{
             pathname: '/swap',
             query: getQuery(inputCurrency, outputCurrency),
           }}
         >
-          <Typography weight={700} className="text-secondary ml-3 hover:text-white">
+          <Typography weight={700} className="text-secondary ml-3 hover:text-dark-600">
             {i18n._(t`Swap`)}
           </Typography>
         </NavLink>
         
         <NavLink
-          activeClassName="text-high-emphesis"
+          activeClassName="text-dark-600"
           href={`/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : '/FTM'}${
             outputCurrency ? `/${currencyId(outputCurrency)}` : '/0xe2fb177009ff39f52c0134e8007fa0e4baacbd07'
           }`}
         >
-          <Typography weight={700} className="text-secondary hover:text-white">
+          <Typography weight={700} className="text-secondary hover:text-dark-600">
             {i18n._(t`+/-`)}
           </Typography>
         </NavLink>
-
-        {/* <NavLink
-          activeClassName="text-high-emphesis"
-          href={{
-            pathname: '/limit-order',
-            query: getQuery(inputCurrency, outputCurrency),
-          }}
-        >
-          <Typography weight={700} className="text-secondary hover:text-white">
-            {i18n._(t`Limit`)}
-          </Typography>
-        </NavLink> */}
         <NavLink
-          // href="/exchange/limit"
-          activeClassName="text-high-emphesis"
+          activeClassName="text-dark-600"
           href={{
             pathname: '/exchange/limit',
             query: getQuery(inputCurrency, outputCurrency),
           }}
         >
-          <Typography weight={700} className="text-secondary hover:text-white">
+          <Typography weight={700} className="text-secondary hover:dark-600">
             {i18n._(t`Limit`)}
           </Typography>
         </NavLink>
-        {/* <NavLink
-            activeClassName="text-high-emphesis"
-            href={{
-              pathname: '/margin',
-            }}
-          >
-            <Typography weight={700} className="text-secondary hover:text-white">
-             Margin
-            </Typography>
-          </NavLink>
-         <ExternalLink
-           activeClassName="text-high-emphesis"
-           href={"/bridge"}
-          href={"https://bridge.soulswap.finance"}>
-          <Typography weight={700} className="text-secondary hover:text-white">
-            Bridge
-          </Typography>
-        </ExternalLink> */}
       </div>
       <div className="flex gap-4">
         {/* {isLimitOrder && <MyOrders />} */}
