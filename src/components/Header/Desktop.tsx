@@ -43,11 +43,11 @@ const Desktop: FC = () => {
 
   return (
     <>      
-      <header className="w-full flex items-center text-white justify-center min-h-[64px] h-[64px] px-4">
+      <header className="w-full flex items-center text-white justify-center border border-dark-1000 hover:border-dark-600 min-h-[64px] h-[64px] px-4">
       <div className="flex justify-between flex-grow">
-      <div className="p-2 bg-dark-900 rounded-full hover:bg-white/10">
+      <div className="p-1 bg-dark-900 rounded-full hover:bg-white/10">
         {/* <div className="flex p-2 justify-between"> */}
-            <MenuAlt1Icon width={24} className="hover:text-purple text-white cursor-pointer" onClick={() => setOpen(true)} />
+            <MenuAlt1Icon width={24} className="text-white cursor-pointer" onClick={() => setOpen(true)} />
             </div>
                 {/* <div className="flex w-6 mr-4 items-center">
                   <NavLink href="/landing">
