@@ -68,7 +68,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     // const lpSymbol = pairInfo.lpSymbol
     // const assetAddress = pairInfo.address
     // console.log(assetAddress)
-    const assetDecimals = pairInfo.pairDecimals
+    const assetDecimals = Number(pairInfo.pairDecimals)
     // const assetSymbol = pairInfo.symbol
     
     const token0Symbol = pairInfo.token0Symbol
@@ -191,8 +191,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
      */
     const handleWithdraw = async (pid) => {
         try {
-            const tx = await SoulSummonerContract?.withdraw(pid, (Number(withdrawValue)).toFixed(4).toBigNumber(Number(assetDecimals)))
-            // await tx?.wait().then(await setPending(pid))
+            const tx = await SoulSummonerContract?.withdraw(pid, Number(withdrawValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx?.wait()
         } catch (e) {
             // alert(e.message)
@@ -219,7 +218,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     //  */
     const handleDeposit = async (pid) => {
         try {
-            const tx = await SoulSummonerContract?.deposit(pid, (Number(depositValue)).toFixed(6).toBigNumber(Number(assetDecimals)))
+            const tx = await SoulSummonerContract?.deposit(pid, Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx.wait()
         } catch (e) {
             // alert(e.message)
