@@ -7,18 +7,10 @@ import RPC from './rpc'
 
 const supportedChainIds = Object.values(ChainId) as number[]
 
-// let network: NetworkConnector | undefined
-
 export const network = new NetworkConnector({
   defaultChainId: 250,
   urls: RPC,
 })
-
-export const getNetworkConnector = (): NetworkConnector => {
-  if (network) {
-    return network
-  }
-}
 
 export const injected = new InjectedConnector({
   supportedChainIds,
