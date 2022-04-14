@@ -44,7 +44,7 @@ export const FarmList = () => {
     <>
       <div className="flex justify-end px-4">
         <Button>
-          <NavLink href="/summoner">
+          <NavLink href="/seance">
             <a className="flex items-center space-x-2 font-medium text-center text-dark-600 cursor-pointer text-base hover:text-high-emphesis">
               <span>Stake</span>
              <ArrowRightIcon width={18} height={18} className="text-dark-600 hover:text-white" />
