@@ -4,6 +4,7 @@ import { t } from '@lingui/macro'
 import { XCircleIcon } from '@heroicons/react/outline'
 
 interface ExpertModePanelProps {
+  children?: any
   active: boolean
   onClose: () => void
 }

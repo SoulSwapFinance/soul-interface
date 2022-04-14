@@ -1803,9 +1803,6 @@ msgstr "Warmup Period"
 msgid "Warmup Remaining"
 msgstr "Warmup Remaining"
 
-msgid "What do these mean?"
-msgstr "What do these mean?"
-
 msgid "Why use Balance Mode?"
 msgstr "Why use Balance Mode?"
 

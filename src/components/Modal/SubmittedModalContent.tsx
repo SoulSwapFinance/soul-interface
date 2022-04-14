@@ -15,6 +15,7 @@ import React, { FC, ReactElement } from 'react'
 import { ModalHeaderProps } from './Header'
 
 export interface SubmittedModalContentProps extends ModalHeaderProps {
+  children?: React.ReactChild
   animationData?: Object
   txHash?: string
   onDismiss(): void

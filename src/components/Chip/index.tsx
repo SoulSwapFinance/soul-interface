@@ -29,6 +29,7 @@ export type ChipSize = 'default' | 'sm'
 export type ChipVariant = 'filled'
 
 export interface ChipProps {
+  children?: React.ReactChild
   label: string
   color?: ChipColor
   variant?: ChipVariant
@@ -41,6 +42,7 @@ export interface ChipProps {
 }
 
 const Chip: FC<ChipProps> = ({
+  children,
   label,
   color = 'default',
   variant = 'filled',

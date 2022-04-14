@@ -123,8 +123,8 @@ const ListPanelItemLeft: FC<ListPanelItemLeftProps> = ({ amount, hideCurrencyLog
     </div>
   )
 }
-
-const ListPanelItemRight: FC = ({ children }) => {
+      // @ts-ignore TYPE NEEDS FIXING
+      const ListPanelItemRight: FC = ({ children }) => {
   return (
     <Typography variant="xs" weight={400} className="text-right">
       {children}
@@ -168,6 +168,7 @@ const CurrencyAmountItem: FC<CurrencyAmountItemProps> = ({
             />
           }
           right={
+            // @ts-ignore TYPE NEEDS FIXING
             !hideUSDC && <ListPanel.Item.Right>${usdcValue ? usdcValue?.toFixed(2) : '0.00'}</ListPanel.Item.Right>
           }
           key={0}

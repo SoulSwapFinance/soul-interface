@@ -43,7 +43,7 @@ const BondItem = ({ bond, ...rest }) => {
 
   const addTransaction = useTransactionAdder()
 
-  const remainingVesting = bond ? useRemainingVesting : ''
+  const remainingVesting = bond ? useRemainingVesting() : ''
   const principalToken = DAI[250]
   const luxorToken = new Token(250, getAddress(LUX_ADDRESS[250]), 18, 'LUX')
 

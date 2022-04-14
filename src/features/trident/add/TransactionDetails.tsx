@@ -18,11 +18,11 @@ const TransactionDetails: FC = () => {
         <Typography weight={700} className="text-high-emphesis">
           {i18n._(t`Transaction Details`)}
         </Typography>
-        <TransactionDetailsExplanationModal>
+        {/* <TransactionDetailsExplanationModal>
           <Typography weight={700} variant="sm" className="text-right text-blue">
             {i18n._(t`What do these mean?`)}
           </Typography>
-        </TransactionDetailsExplanationModal>
+        </TransactionDetailsExplanationModal> */}
       </div>
       <div className="flex flex-col gap-1">
         {poolWithState?.pool && (

@@ -4,16 +4,21 @@ import React, { FC } from 'react'
 
 import DefaultLayout from './Default'
 
-export interface Layout {
-  id: string
+export interface Card {
+  children?: any
 }
 
-export const SwapLayoutCard: FC = ({ children }) => {
+export const SwapLayoutCard: FC<Card> = ({ children }) => {
   return (
     <div className="flex flex-col gap-3 p-2 pt-4 rounded-[18px] bg-dark-900 shadow-md shadow-dark-1000">
       {children}
     </div>
   )
+}
+
+export interface Layout {
+  children?: React.ReactChild
+  id: string
 }
 
 export const Layout: FC<Layout> = ({ children, id }) => {

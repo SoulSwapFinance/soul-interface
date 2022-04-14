@@ -8,6 +8,7 @@ import { classNames } from 'functions'
 import React, { FC } from 'react'
 
 interface TridentHeaderProps {
+  children?: any
   className?: string
   pattern?: BackgroundVariant
   maxWidth?: MaxWidth
@@ -35,6 +36,7 @@ export const TridentHeader: FC<TridentHeaderProps> = ({
 }
 
 interface TridentBodyProps {
+  children?: any
   className?: string
   maxWidth?: MaxWidth
 }
@@ -49,7 +51,11 @@ export const TridentBody: FC<TridentBodyProps> = ({ children, className, maxWidt
   )
 }
 
-const TridentLayout: FC = ({ children = [] }) => {
+interface Props {
+  children?: any
+}
+
+const TridentLayout: FC<Props> = ({ children = [] }) => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />

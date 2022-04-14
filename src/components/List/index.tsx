@@ -1,7 +1,8 @@
+import React, { ReactNode } from 'react'
 import { classNames } from '../../functions'
 
 interface ItemProps {
-  item: unknown
+  item: any
   className?: string
 }
 

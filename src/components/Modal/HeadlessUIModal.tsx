@@ -32,6 +32,7 @@ interface TriggerProps {
 }
 
 interface Props {
+  children?: any
   trigger?: (({ open, onClick, setOpen }: TriggerProps) => ReactNode) | ReactNode
 }
 
@@ -46,7 +47,6 @@ type HeadlessUiModalType<P> = FC<P> & {
   SubmittedModalContent: FC<SubmittedModalContentProps>
   Error: FC<ModalActionErrorProps>
 }
-
 const HeadlessUiModal: HeadlessUiModalType<Props> = ({ children: childrenProp, trigger: triggerProp }) => {
   const [open, setOpen] = useState(false)
 

@@ -5,6 +5,7 @@ import { FC, Fragment, ReactNode } from 'react'
 import Typography from '../Typography'
 
 interface BottomSlideInProps {
+  children?: any
   title?: string
   open: boolean
   onClose: () => void

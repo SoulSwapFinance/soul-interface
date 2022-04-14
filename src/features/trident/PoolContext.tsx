@@ -22,6 +22,7 @@ interface PoolContext {
 
 const Context = createContext<PoolContext | undefined>(undefined)
 
+// @ts-ignore TYPE NEEDS FIXING
 const PoolContext: FC = ({ children }) => {
   const { account } = useActiveWeb3React()
   const { currencies, twap, fee } = useCurrenciesFromURL()

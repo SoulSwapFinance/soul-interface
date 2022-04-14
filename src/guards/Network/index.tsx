@@ -14,6 +14,7 @@ import Image from 'next/image'
 import React, { FC, Fragment } from 'react'
 
 interface NetworkGuardProps {
+  children?: React.ReactChild
   feature: Feature
 }
 
@@ -95,6 +96,7 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
 }
 
 const NetworkGuard = (feature: Feature) => {
+  // @ts-ignore TYPE NEEDS FIXING
   return ({ children }) => <Component feature={feature}>{children}</Component>
 }
 

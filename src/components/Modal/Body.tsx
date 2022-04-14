@@ -3,6 +3,7 @@ import React, { FC } from 'react'
 
 export interface ModalBodyProps {
   className?: string
+  children?: any
 }
 
 const ModalBody: FC<ModalBodyProps> = ({ className = '', children }) => {

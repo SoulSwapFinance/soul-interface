@@ -2,6 +2,7 @@ import React, { FC, useCallback, useState } from 'react'
 import Tooltip from '../Tooltip/JustTheTip'
 
 const QuestionHelper: FC<{
+  children?: React.ReactChild
   text?: any
   title?: any
   width?: 'small' | 'large'
