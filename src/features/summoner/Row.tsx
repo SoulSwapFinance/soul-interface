@@ -380,7 +380,12 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
 {/*------ DROPDOWN OPTIONS PANEL ------*/}
     {showOptions && (
         <HeadlessUIModal.Body 
-        className="bg-dark-600 p-4 mt-3 mb-3 sm:p-0.5 w-full"
+        className={classNames(
+            isActive && isSwapPair ? "bg-dark-600"
+            : isUnderworldPair ? "bg-blue"
+            : "bg-pink", 
+            
+            "p-4 mt-3 mb-3 sm:p-0.5 w-full")}
         >
         <div className="p-3 space-y-6 bg-dark-900 rounded z-1 relative">
           <Tab.Group>
@@ -410,7 +415,6 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                       selected && !isUnderworldPair && isActive ? 'border-b-2 border-accent p-2 text-white border-dark-600'
                       : selected && isUnderworldPair ? 'border-b-2 border-accent p-2 text-white border-[#0993EC]' 
                       : selected && !isActive ? 'border-b-2 border-accent p-2 text-white border-pink'
-                  
                   : 'bg-dark-900 text-white'                  
                 } 
                   flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1
@@ -418,8 +422,8 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         isUnderworldPair ? "hover:border-blue" 
                         : !isActive ? "hover:border-pink"
                         : "hover:border-dark-600"
-                        }`
-                    }
+                    }`
+                }
               >
                WITHDRAW
               </Tab>
