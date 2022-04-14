@@ -7,7 +7,7 @@ function Header({ className, children }) {
   )
 }
 
-const Gradient: FC<{ className?: string }> = ({ children, className }) => {
+const Gradient: FC<{ children, className?: string }> = ({ children, className }) => {
   return (
     <div className="relative">
       <div

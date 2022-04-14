@@ -228,6 +228,7 @@ export default function Create() {
 const CreateLayout = ({ children }) => {
   const { i18n } = useLingui()
   return (
+  // @ts-ignore TYPE NEEDS FIXING
     <Layout
       left={
         <Card

@@ -4,12 +4,13 @@ import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
 import Typography from 'components/Typography'
 import React, { FC } from 'react'
 
+// @ts-ignore TYPE NEEDS FIXING
 const TransactionDetailsExplanationModal: FC = ({ children }) => {
   const { i18n } = useLingui()
 
   return (
     <HeadlessUiModal trigger={children}>
-\      {({ setOpen }) => (
+      {({ setOpen }) => (
         <div className="flex flex-col gap-4 lg:max-w-2xl">
           <HeadlessUiModal.Header header={i18n._(t`Transaction Details`)} onClose={() => setOpen(false)} />
           <HeadlessUiModal.BorderedContent className="flex flex-col gap-4 border-dark-800">

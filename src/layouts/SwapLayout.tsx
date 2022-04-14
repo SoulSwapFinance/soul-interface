@@ -8,6 +8,7 @@ export interface Layout {
   id: string
 }
 
+// @ts-ignore TYPE NEEDS FIXING
 export const SwapLayoutCard: FC = ({ children }) => {
   return (
     <div className="flex flex-col gap-3 p-2 pt-4 rounded-[18px] bg-dark-900 shadow-md shadow-dark-1000">
@@ -16,6 +17,7 @@ export const SwapLayoutCard: FC = ({ children }) => {
   )
 }
 
+// @ts-ignore TYPE NEEDS FIXING
 export const Layout: FC<Layout> = ({ children, id }) => {
   return (
     <DefaultLayout>

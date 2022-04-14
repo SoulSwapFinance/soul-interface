@@ -4,6 +4,7 @@ import React, { FC } from 'react'
 
 export interface ModalActionErrorProps {
   className?: string
+  children?: React.ReactNode
 }
 
 const ModalError: FC<ModalActionErrorProps> = ({ className = '', children }) => {

@@ -9,6 +9,7 @@ import { useRouter } from 'next/router'
 import { Button } from 'components/Button'
 
 interface LayoutProps {
+  children?: React.ReactChild
   left?: JSX.Element
   right?: JSX.Element
 }
