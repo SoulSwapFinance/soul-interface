@@ -537,7 +537,7 @@ const Swap = () => {
                   </NavLink>
                 </Button>
               </div>
-            <div className="flex flex-row gap-3 text-blue justify-end">
+            <div className="flex flex-row gap-3 text-dark-600 justify-end">
               Chart 
               <Toggle
                 id="toggle-expert-mode-button"
