@@ -1,7 +1,8 @@
+import React from 'react'
 import Document, { Head, Html, Main, NextScript } from 'next/document'
 
 import { ServerStyleSheet } from 'styled-components'
-
+/* @ts-ignore TYPE NEEDS FIXING */
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheet()

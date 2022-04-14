@@ -1778,9 +1778,6 @@ msgstr ""
 msgid "Warmup Remaining"
 msgstr ""
 
-msgid "What do these mean?"
-msgstr ""
-
 msgid "Why use Balance Mode?"
 msgstr ""
 

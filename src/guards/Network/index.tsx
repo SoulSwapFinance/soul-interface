@@ -14,6 +14,7 @@ import Image from 'next/image'
 import React, { FC, Fragment } from 'react'
 
 interface NetworkGuardProps {
+  children?: React.ReactChild
   feature: Feature
 }
 

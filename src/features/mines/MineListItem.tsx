@@ -83,7 +83,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
     : Number(tokenPrice) * Number(lpBalance) / 1e18
 
   return (
-    <div className={classNames(TABLE_TBODY_TR_CLASSNAME, 'grid grid-cols-3 sm:grid-cols-3')} onClick={onClick}>
+    <div className={classNames(TABLE_TBODY_TR_CLASSNAME, 'grid grid-cols-3 sm:grid-cols-3')} onClick={() => onClick}>
       {/* <div className={classNames('flex gap-2', TABLE_TBODY_TD_CLASSNAME(0, 4))}> */}
       <div className="flex gap-2 text-items-center">
 
