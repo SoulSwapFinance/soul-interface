@@ -379,13 +379,15 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
 
 {/*------ DROPDOWN OPTIONS PANEL ------*/}
     {showOptions && (
-        <HeadlessUIModal.Body 
-        className={classNames(
-            isActive && isSwapPair ? "bg-dark-600"
-            : isUnderworldPair ? "bg-blue"
-            : "bg-pink", 
+        <Modal 
+        isOpen={showOptions}
+        onDismiss={() => handleShowOptions()}
+        // className={classNames(
+        //     isActive && isSwapPair ? "bg-dark-600"
+        //     : isUnderworldPair ? "bg-blue"
+        //     : "bg-pink", 
             
-            "p-4 mt-3 mb-3 sm:p-0.5 w-full")}
+        //     "p-4 mt-3 mb-3 sm:p-0.5 w-full")}
         >
         <div className="p-3 space-y-6 bg-dark-900 rounded z-1 relative">
           <Tab.Group>
@@ -720,7 +722,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
             </Tab.Panel>
           </Tab.Group>
         </div>
-        </HeadlessUIModal.Body>
+        </Modal>
     )}
 
 { showConfirmation && (
