@@ -57,7 +57,7 @@ export function usePriceUSD(tokenAddress): { status: string; price: T } {
           },
         })
         const json = await response.json()
-        console.log('price:%s', json)
+        // console.log('price:%s', json)
         setPrice(json as T)
         setStatus('fetched')
       }
@@ -147,7 +147,7 @@ export function useLuxorUserInfo(userAddress): { status: string; luxorUserInfo: 
         nextRebase: '0',
         distribute: '0',
         vestingTerm: '0',
-        warmupExpiry: '0',
+        warmupExpiry: '0'
 
     })  
     useEffect(() => {
@@ -187,7 +187,7 @@ export function useTotalSupply(tokenAddress): { status: string; supply: T } {
           },
         })
         const json = await response.json()
-        console.log('supply:%s', json)
+        // console.log('supply:%s', json)
         setSupply(json['supply'] as T)
         setStatus('fetched')
       }
@@ -209,7 +209,7 @@ export function useTokenInfo(tokenAddress): { status: string; tokenInfo: T } {
         decimals: '18',
         supply: '0',
         mcap: '0',
-        img: ''
+        image: ''
     })  
     useEffect(() => {
       const fetchData = async () => {
@@ -352,7 +352,7 @@ export function useUserPairInfo(pairAddress): { status: string; pairUserInfo: T 
 
         userBalance: '0',
         pairDecimals: '18',
-        pairType: '',
+        pairType: ''
     })  
     useEffect(() => {
       const fetchData = async () => {
@@ -636,7 +636,7 @@ export function useSummonerPoolInfo(pid): { status: string; summonerPoolInfo: T 
   const { chainId } = useActiveWeb3React()
   const [status, setStatus] = useState<string>('idle')
   const [summonerPoolInfo, setInfo] = useState<T>({
-      pid: '',
+      pid: '1',
 
       lpAddress: '',
       token0: '',
@@ -656,10 +656,8 @@ export function useSummonerPoolInfo(pid): { status: string; summonerPoolInfo: T 
       annualRewardsValue: '0',
 
       tvl: '0',
-      apr: '0',
-     
-      api: 'https://api.soulswap.finance',
-      ftmscan: 'https://ftmscan.com',
+      apr: '0'
+
   })  
   useEffect(() => {
     const fetchData = async () => {
@@ -675,7 +673,7 @@ export function useSummonerPoolInfo(pid): { status: string; summonerPoolInfo: T 
       setInfo(json as T)
       setStatus('fetched')
     }
-    if (chainId == ChainId.FANTOM) 
+    // if (chainId == ChainId.FANTOM) 
     fetchData()
   }, [])
 
