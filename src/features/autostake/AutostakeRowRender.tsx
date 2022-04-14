@@ -29,7 +29,6 @@ import {
     SubmitButton,
 } from './StakeStyles'
 import { Wrap, ClickableText, Text, ExternalLink } from '../../components/ReusableStyles'
-import { formatCurrencyAmount } from 'functions/format'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import { tryParseAmount } from 'functions'
 import Modal from 'components/Modal/DefaultModal'
@@ -81,7 +80,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
 
     const harvestFee = performanceFee + callFee
     // const recentProfit = useStakeRecentProfit()
-    // const earnedAmount = formatCurrencyAmount(recentProfit, 6)
     // console.log('earnedAmount:%s', earnedAmount)
     // show confirmation view before minting SOUL
     const [apy, setApy] = useState(0)

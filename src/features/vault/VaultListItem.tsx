@@ -20,7 +20,6 @@ import { WNATIVE } from '../../constants'
 import { PriceContext } from '../../contexts/priceContext'
 import { Info } from 'react-feather'
 import moment from 'moment'
-import { formatCurrency } from '../../modals/TokensStatsModal'
 import { usePriceHelperContract } from '../bond/hooks/useContract'
 import { useSingleCallResult } from '../../state/multicall/hooks'
 
@@ -35,17 +34,17 @@ const VaultListItem = ({ farm, ...rest }) => {
 
   const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
   console.log(Number(rawSoulPrice))
-  const soulPrice = formatCurrency(Number(rawSoulPrice) / 1E18, 3)
+  const soulPrice = formatNumber(Number(rawSoulPrice) / 1E18, true, true)
   console.log(soulPrice)
 
   const rawFtmPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'])?.result
   console.log(Number(rawFtmPrice))
-  const ftmPrice = formatCurrency(Number(rawFtmPrice) / 1E18, 2)
+  const ftmPrice = formatNumber(Number(rawFtmPrice) / 1E18, true, true)
   console.log(ftmPrice)
 
   const rawSeancePrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0x124B06C5ce47De7A6e9EFDA71a946717130079E6'])?.result
   console.log(Number(rawSeancePrice))
-  const seancePrice = formatCurrency(Number(rawSeancePrice) / 1E18, 3)
+  const seancePrice = formatNumber(Number(rawSeancePrice) / 1E18, true, true)
   console.log(seancePrice)
 
   const [selectedFarm, setSelectedFarm] = useState<string>(null)

@@ -22,20 +22,21 @@ import { useLuxorInfo, usePairInfo, useSummonerInfo, useSummonerPoolInfo } from 
 import { usePairPrice } from 'hooks/usePairData'
 import { usePairContract } from 'hooks/useTokenContract'
 
-const cache: { [key: string]: number } = {};
 
-export function formatCurrency(c: number, precision = 0) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: precision,
-    minimumFractionDigits: precision,
-  }).format(c);
-}
 
 export default function LuxorStatsModal(): JSX.Element | null {
+  const cache: { [key: string]: number } = {};
 
-  const { chainId, library, account } = useActiveWeb3React()
+  function formatCurrency(c: number, precision = 0) {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: precision,
+      minimumFractionDigits: precision,
+    }).format(c);
+  }
+
+  const { chainId, library } = useActiveWeb3React()
   const luxorStatsModalOpen = useModalOpen(ApplicationModal.LUXOR_STATS)
   const toggleLuxorStatsModal = useToggleLuxorStatsModal()
   // let tokenInfo = useTokenInfo(useLuxorContract())

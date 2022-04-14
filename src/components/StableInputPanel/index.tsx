@@ -164,7 +164,6 @@ export default function StableInputPanel({
                       <>
                         {/* {i18n._(t`Balance:`)}  */}
                         {/* {i18n._(t`Balance:`)}  */}
-                        {/* {formatCurrencyAmount(selectedCurrencyBalance, 4)} {currency.symbol} */}
                         {selectedCurrencyBalance?.toSignificant(2, { groupSeparator: ',' }) || '0'} {currency?.symbol}
                       </>
                     )}
