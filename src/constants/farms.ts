@@ -174,9 +174,9 @@ export const POOLS: AddressMap = {
         decimals: 6,
       },
       token1: {
-        id: '0x049d68029688eAbF473097a2fC38ef61633A3C7A', // fUSDT
+        id: '0x049d68029688eAbF473097a2fC38ef61633A3C7A', // USDT
         name: 'Frapped USDT',
-        symbol: 'fUSDT',
+        symbol: 'USDT',
         decimals: 6,
       },
     },
@@ -256,7 +256,7 @@ export const POOLS: AddressMap = {
       token1: {
         id: '0x049d68029688eAbF473097a2fC38ef61633A3C7A', // USDT
         name: 'Frapped USDT',
-        symbol: 'fUSDT',
+        symbol: 'USDT',
         decimals: 6,
       },
     },
@@ -474,7 +474,7 @@ export const POOLS: AddressMap = {
       token0: {
         id: '0x049d68029688eAbF473097a2fC38ef61633A3C7A', // FUSDT
         name: 'Frapped USDT',
-        symbol: 'fUSDT',
+        symbol: 'USDT',
         decimals: 6,
       },
       token1: {
@@ -708,13 +708,13 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
     },
-    '0xB38508Ed92C4878daE7652d8d46cAE46eEa8aA9A': {  // fUSDT-DAI
+    '0xB38508Ed92C4878daE7652d8d46cAE46eEa8aA9A': {  // USDT-DAI
       id: 43, // 200
       address: '0xb38508ed92c4878dae7652d8d46cae46eea8aa9a',
       token0: {
-        id: '0x049d68029688eAbF473097a2fC38ef61633A3C7A', // fUSDT
+        id: '0x049d68029688eAbF473097a2fC38ef61633A3C7A', // USDT
         name: 'Frapped USDT',
-        symbol: 'fUSDT',
+        symbol: 'USDT',
         decimals: 6,
       },
       token1: {

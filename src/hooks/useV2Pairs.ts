@@ -108,7 +108,7 @@ export function useVaultTVL(): TVLInfo[] {
         token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' || token.symbol == 'FTM' ||
         token.symbol == 'SEANCE' ||
-        token.symbol == 'USDC' || token.symbol == 'fUSDT'
+        token.symbol == 'USDC' || token.symbol == 'USDT'
       )
     }
 
@@ -122,7 +122,7 @@ export function useVaultTVL(): TVLInfo[] {
       if (token.symbol == 'SEANCE') {
         return seancePrice
       }
-      if (token.symbol == 'USDC' || token.symbol == 'fUSDT') {
+      if (token.symbol == 'USDC' || token.symbol == 'USDT') {
         return 1
       }
       return 0
@@ -243,7 +243,7 @@ export function useTVL(): TVLInfo[] {
         token.symbol == 'FTM' ||
         token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
-        token.symbol == 'fUSDT' ||
+        token.symbol == 'USDT' ||
         token.symbol == 'FUSDT' ||
         token.symbol == 'MIM' ||
         token.symbol == 'DAI' ||
@@ -268,7 +268,7 @@ export function useTVL(): TVLInfo[] {
         return wethPrice
       }
       if (
-        token.symbol == 'USDC' || token.symbol == 'fUSDT' || token.symbol == 'DAI' ||
+        token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI' ||
         token.symbol == 'FUSDT' || token.symbol == 'USDT' || token.symbol == 'MIM'
       ) {
         return 1
@@ -389,7 +389,7 @@ export function useBondTVL(): TVLInfo[] {
         token.symbol == 'FTM' ||
         token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
-        token.symbol == 'fUSDT' ||
+        token.symbol == 'USDT' ||
         token.symbol == 'FUSDT' ||
         token.symbol == 'MIM' ||
         token.symbol == 'DAI' ||
@@ -414,7 +414,7 @@ export function useBondTVL(): TVLInfo[] {
         return wethPrice
       }
       if (
-        token.symbol == 'USDC' || token.symbol == 'fUSDT' || token.symbol == 'DAI' ||
+        token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI' ||
         token.symbol == 'FUSDT' || token.symbol == 'USDT' || token.symbol == 'MIM'
       ) {
         return 1
@@ -515,7 +515,7 @@ export function useSoulTVL(): TVLInfo[] {
         token.symbol == 'WFTM' ||
         token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
-        token.symbol == 'fUSDT' ||
+        token.symbol == 'USDT' ||
         token.symbol == 'FUSDT' ||
         token.symbol == 'MIM' ||
         token.symbol == 'DAI' ||
@@ -544,7 +544,7 @@ export function useSoulTVL(): TVLInfo[] {
         return wethPrice
       }
       if (
-        token.symbol == 'USDC' || token.symbol == 'fUSDT' || token.symbol == 'DAI' ||
+        token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI' ||
         token.symbol == 'FUSDT' || token.symbol == 'USDT' || token.symbol == 'MIM'
       ) {
         return 1
@@ -646,7 +646,7 @@ export function useLuxTVL(): TVLInfo[] {
         token.symbol == 'FTM' ||
         token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
-        token.symbol == 'fUSDT' ||
+        token.symbol == 'USDT' ||
         token.symbol == 'FUSDT' ||
         token.symbol == 'MIM' ||
         token.symbol == 'DAI' ||
@@ -671,7 +671,7 @@ export function useLuxTVL(): TVLInfo[] {
         return wethPrice
       }
       if (
-        token.symbol == 'USDC' || token.symbol == 'fUSDT' || token.symbol == 'DAI' ||
+        token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI' ||
         token.symbol == 'FUSDT' || token.symbol == 'USDT' || token.symbol == 'MIM'
       ) {
         return 1
@@ -779,7 +779,7 @@ export function useV2PairsWithPrice(
         token.symbol == 'SOUL' || token.symbol == 'SEANCE' ||
         token.symbol == 'WFTM' || token.symbol == 'FTM' || 
         token.symbol == 'WETH' || token.symbol == 'ETH' ||
-        token.symbol == 'USDC' || token.symbol == 'fUSDT' || 
+        token.symbol == 'USDC' || token.symbol == 'USDT' || 
         token.symbol == 'DAI' || token.symbol == 'LUX' 
         || token.symbol == 'WLUM' 
       )
@@ -801,7 +801,7 @@ export function useV2PairsWithPrice(
       if (token.symbol == 'LUX') {
         return luxPrice
       }
-      if (token.symbol == 'USDC' || token.symbol == 'fUSDT' || token.symbol == 'DAI') {
+      if (token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI') {
         return 1
       }
       return 0

@@ -97,7 +97,7 @@
       {
         "name": "Frapped USDT",
         "address": "0x049d68029688eAbF473097a2fC38ef61633A3C7A",
-        "symbol": "fUSDT",
+        "symbol": "USDT",
         "decimals": 6,
         "chainId": 250,
         "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png"

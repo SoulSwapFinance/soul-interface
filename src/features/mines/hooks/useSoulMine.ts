@@ -112,8 +112,8 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
       if (
         token1Name === 'USDC' ||
         token2Name === 'USDC' ||
-        token1Name === 'fUSDT' ||
-        token2Name === 'fUSDT' ||
+        token1Name === 'USDT' ||
+        token2Name === 'USDT' ||
         token1Name === 'gFUSDT' ||
         token2Name === 'gFUSDT'
       ) {
@@ -164,8 +164,8 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
       if (
         token1Name === 'USDC' ||
         token2Name === 'USDC' ||
-        token1Name === 'fUSDT' ||
-        token2Name === 'fUSDT' ||
+        token1Name === 'USDT' ||
+        token2Name === 'USDT' ||
         token1Name === 'gFUSDT' ||
         token2Name === 'gFUSDT'
       ) {

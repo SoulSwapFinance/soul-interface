@@ -39,7 +39,7 @@ export const tokens = {
     4002: '',
     250: '0x940F41F0ec9ba1A34CF001cc03347ac092F5F6B5',
   },
-  fUSDT: {
+  USDT: {
     4002: '',
     250: '0x049d68029688eAbF473097a2fC38ef61633A3C7A',
   },

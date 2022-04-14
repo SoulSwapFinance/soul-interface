@@ -149,7 +149,7 @@ export const COMMON_BASES: ChainTokenList = {
     FANTOM.LUX,
     FANTOM.WLUM,
     FANTOM.DAI,
-    // FANTOM.fUSDT,
+    FANTOM.USDT,
     FANTOM.USDC,
     FANTOM.WBTC,
     FANTOM.WETH,
