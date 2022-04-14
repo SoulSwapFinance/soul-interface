@@ -34,6 +34,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
 import Chart from 'components/Chart'
 import NavLink from 'components/NavLink'
+import Toggle from 'components/Toggle'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -57,6 +58,10 @@ const Swap = () => {
   const handleConfirmTokenWarning = useCallback(() => {
     setDismissTokenWarning(true)
   }, [])
+  
+  const [expertMode, openExpertMode] = useState(false)
+  // const toggle = toggleExpertMode()
+
 
   // dismiss warning if all imported tokens are in active lists
   const importTokensNotInDefault =
@@ -532,11 +537,29 @@ const Swap = () => {
                   </NavLink>
                 </Button>
               </div>
-        <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-4 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
-          <div className={`w-full flex flex-col order-last mt-2 mb-20 sm:mb-0 lg:mt-0 p-6 rounded rounded-lg bg-light-glass`}>
-            <Chart inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
-          </div>
-        </div>
+            <div className="flex flex-row gap-3 text-blue justify-end">
+              Chart 
+              <Toggle
+                id="toggle-expert-mode-button"
+                isActive={expertMode}
+                toggle={
+                  expertMode
+                    ? () => {
+                        openExpertMode(false)
+                      }
+                    : () => {
+                        openExpertMode(true)
+                      }
+                }
+              />
+            </div>
+         {  expertMode &&   
+            <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
+              <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
+                <Chart inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+              </div>
+            </div>
+        }
       </SwapLayoutCard>
     </>
   )
