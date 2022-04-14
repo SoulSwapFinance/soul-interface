@@ -82,6 +82,8 @@ interface ModalProps {
   onDismiss: () => void
   minHeight?: number | false
   maxHeight?: number
+  isCustom?: boolean
+  borderColor?: string
   initialFocusRef?: React.RefObject<any>
   children?: React.ReactNode
   padding?: number
@@ -96,8 +98,10 @@ export default function Modal({
   maxHeight = 90,
   initialFocusRef,
   children,
-  padding = 5,
+  // padding = 5,
   maxWidth = 420,
+  isCustom,
+  borderColor,
 }: ModalProps) {
   const fadeTransition = useTransition(isOpen, null, {
     config: { duration: 200 },
@@ -140,15 +144,32 @@ export default function Modal({
                 minHeight={minHeight}
                 maxHeight={maxHeight}
                 maxWidth={maxWidth}
+                isCustom={isCustom}
+                borderColor={borderColor}
                 mobile={isMobile}
               >
-                <div className="w-full p-px rounded border border-dark-900 hover:border-dark-600">
-                  <div className={`flex flex-col h-full w-full bg-dark-900 rounded p-6 overflow-y-auto`}>
-                    {/* prevents the automatic focusing of inputs on mobile by the reach dialog */}
-                    {!initialFocusRef && isMobile ? <div tabIndex={1} /> : null}
-                    {children}
-                  </div>
-                </div>
+                {
+                  isCustom ? (
+                    <div className={`w-full p-px rounded border ${borderColor}`}>
+                      <div className={`flex flex-col h-full w-full bg-dark-900 rounded p-6 overflow-y-auto`}>
+                        {/* prevents the automatic focusing of inputs on mobile by the reach dialog */}
+                        {!initialFocusRef && isMobile ? <div tabIndex={1} /> : null}
+                        {children}
+                      </div>
+                    </div>
+                  )
+                  : 
+                  (
+                    <div className="w-full p-px rounded border border-dark-900 hover:border-dark-600">
+                    <div className={`flex flex-col h-full w-full bg-dark-900 rounded p-6 overflow-y-auto`}>
+                        {/* prevents the automatic focusing of inputs on mobile by the reach dialog */}
+                        {!initialFocusRef && isMobile ? <div tabIndex={1} /> : null}
+                        {children}
+                      </div>
+                    </div>
+                  )
+                
+                }
               </StyledDialogContent>
             </StyledDialogOverlay>
           )

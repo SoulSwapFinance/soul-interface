@@ -66,6 +66,7 @@ module.exports = {
         'dark-700': '#2E3348',
         'dark-600': '#B485FF',
         'dark-500': '#223D5E',
+        'dark-420': '#B485FF',
         'low-emphesis': '#575757',
         primary: '#BFBFBF',
         secondary: '#7F7F7F',

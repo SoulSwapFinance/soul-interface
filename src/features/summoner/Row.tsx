@@ -16,11 +16,11 @@ import { classNames, formatNumber, tryParseAmount } from 'functions'
 import { usePairInfo, useSummonerPoolInfo, useSummonerUserInfo } from 'hooks/useAPI'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
-// import Modal from 'components/DefaultModal'
+import Modal from 'components/DefaultModal'
 import { ArrowDownIcon, ArrowLeftIcon, PlusIcon, XIcon } from '@heroicons/react/solid'
 import { Button } from 'components/Button'
 import Typography from 'components/Typography'
-import Modal from 'components/Modal/DefaultModal'
+// import Modal from 'components/Modal/DefaultModal'
 import ModalHeader from 'components/Modal/Header'
 
 // import ExternalLink from 'components/ExternalLink'
@@ -379,15 +379,19 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
 
 {/*------ DROPDOWN OPTIONS PANEL ------*/}
     {showOptions && (
-        <Modal 
+        <Modal
+        isCustom={true}
         isOpen={showOptions}
         onDismiss={() => handleShowOptions()}
-        // className={classNames(
-        //     isActive && isSwapPair ? "bg-dark-600"
-        //     : isUnderworldPair ? "bg-blue"
-        //     : "bg-pink", 
-            
-        //     "p-4 mt-3 mb-3 sm:p-0.5 w-full")}
+        borderColor={
+            isUnderworldPair ? 'border-dark-900 hover:border-blue'
+           : !isActive ? 'border-dark-900 hover:border-pink' : 'border-dark-900 hover:border-dark-420'
+        }
+        className={classNames("border",
+            isActive && isSwapPair ? "hover:border-dark-600"
+            : isUnderworldPair ? "hover:border-blue"
+            : "hover:border-pink", 
+            "p-4 mt-3 mb-3 sm:p-0.5 w-full")}
         >
         <div className="p-3 space-y-6 bg-dark-900 rounded z-1 relative">
           <Tab.Group>
