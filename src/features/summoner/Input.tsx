@@ -92,7 +92,7 @@ export default function FarmInputPanel({
                 />
                 <Button onClick={() => onMax(balance)}>
                 <div className="flex flex-cols-2">
-                  <div className="text-xs font-medium text-right cursor-pointer text-low-emphesis">
+                  <div className="text-xs font-medium text-right cursor-pointer text-high-emphesis">
                     {formatNumber(balance, false, true) || 0} {' '}
                     {/* {pairSymbol} */}
                     MAX

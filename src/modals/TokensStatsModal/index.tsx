@@ -17,25 +17,23 @@ import { concat } from 'lodash'
 import { SOUL } from 'sdk'
 import { useUserInfo } from 'hooks/useAPI'
 
-const cache: { [key: string]: number } = {};
-
-export function formatCurrency(c: number, precision = 0) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: precision,
-    minimumFractionDigits: precision,
-  }).format(c);
-}
-
-export default function SoulStatsModal(): JSX.Element | null {
+export default function TokenStatsModal(): JSX.Element | null {
+  
+  const cache: { [key: string]: number } = {};
+  function formatCurrency(c: number, precision = 0) {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: precision,
+      minimumFractionDigits: precision,
+    }).format(c);
+  }
 
   const { chainId, library } = useActiveWeb3React()
   const soulStatsModalOpen = useModalOpen(ApplicationModal.SOUL_STATS)
   const toggleSoulStatsModal = useToggleTokenStatsModal()
-
+  
   const { userInfo } = useUserInfo()
-
   const votingPower = userInfo.votingPower
   const protocolOwnership = Number(userInfo.protocolOwnership).toFixed(2)
   const totalSeance = Number(useTokenInfo(SEANCE_ADDRESS[250]).tokenInfo.supply) / 1e18
@@ -63,8 +61,8 @@ export default function SoulStatsModal(): JSX.Element | null {
   }, 0)
 
   let podl = bondsTvl + soulTvl
-
   function getSummaryLine(title, value) {
+
     return (
       <div className="flex flex-col gap-2 bg-dark-800 rounded py-1 px-3 w-full">
         <div className="flex items-center justify-between">

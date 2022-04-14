@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Image from 'next/image'
-import TokensStatsModal, { formatCurrency } from 'modals/TokensStatsModal'
+import TokensStatsModal from 'modals/TokensStatsModal'
 import { useModalOpen, useToggleTokenStatsModal } from 'state/application/hooks'
 import { ApplicationModal } from 'state/application/actions'
 import styled from 'styled-components'
 import { useActiveWeb3React } from 'services/web3'
 import { useSeancePrice, useSoulPrice } from 'hooks/getPrices'
+import { formatNumber } from 'functions/format'
 
 const HideOnMobile = styled.div`
 @media screen and (max-width: 500px) {
@@ -38,7 +39,7 @@ function TokenStats(): JSX.Element | null {
           className="rounded-md"
         />
         <HideOnMobile>
-          <div className="text-primary">{ formatCurrency(seancePrice, 3) }</div>
+          <div className="text-primary">{ formatNumber(seancePrice, true, true) }</div>
         </HideOnMobile>
       </div>
 
@@ -51,7 +52,7 @@ function TokenStats(): JSX.Element | null {
           objectFit="contain"
           className="rounded-md"
         />
-          <div className="text-primary">{ formatCurrency(soulPrice, 3) }</div>
+          <div className="text-primary">{ formatNumber(soulPrice, true, true) }</div>
       </div>
       <TokensStatsModal />
     </div>

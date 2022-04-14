@@ -43,7 +43,7 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
       const result = await helperContract?.totalPending()
       return result
     } catch (e) {
-      console.log(e)
+      // console.log(e)
       return e
     }
   }
@@ -60,7 +60,7 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
       const poolYearlyRewards = poolWeight * result?.[2]
       return poolYearlyRewards
     } catch (e) {
-      console.log(e)
+      // console.log(e)
       return e
     }
   }
@@ -83,7 +83,7 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
       const stakedValue = usdcValue 
       return stakedValue
     } catch (e) {
-      console.log(e)
+      // console.log(e)
       return e
     }
   }
@@ -193,17 +193,9 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
       const fixedPidTvl = Number(pidTvl).toFixed(0)
       const fixedApr = Number(apr).toFixed(0)
 
-      // console.log(token1Name, '/', token2Name, '- summonerPidPercOfSupply', summonerPidPercOfSupply)
-      // console.log(token1Name, '/', token2Name, '- tokenBal', Number(result?.[5]) / 10 ** 18)
-      // console.log(token1Name, '/', token2Name, '- rawPidValue', rawPidValue)
-
-      // console.log(token1Name, '/', token2Name, '- pidTvl', pidTvl)
-      // console.log(token1Name, '/', token2Name, '- fixedPidTvl', fixedPidTvl)
-      // console.log(token1Name, '/', token2Name, '- fixedApr', fixedApr)
-
       return [fixedPidTvl, fixedApr]
     } catch (e) {
-      console.log(e)
+      // console.log(e)
       return e
     }
   }
@@ -229,8 +221,8 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
       const fixedPidTvl = Number(pidTvl).toFixed(0)
       const fixedApr = Number(apr).toFixed(0)
 
-      console.log('SOUL', '- fixedPidTvl', fixedPidTvl)
-      console.log('SOUL', '- fixedApr', fixedApr)
+      // console.log('SOUL', '- fixedPidTvl', fixedPidTvl)
+      // console.log('SOUL', '- fixedApr', fixedApr)
 
       return [fixedPidTvl, fixedApr]
     } catch (e) {
@@ -309,10 +301,10 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
   const userInfo = async (pid, account) => {
     try {
       const result = await summonerContract?.userInfo(pid, account)
-      console.log('userInfoResult:', result)
+      // console.log('userInfoResult:', result)
       const amount = result?.[0].toString()
       const rewardDebt = result?.[1].toString()
-      console.log(amount, 'lp deposited')
+      // console.log(amount, 'lp deposited')
       return [amount, rewardDebt]
     } catch (e) {
       console.log(e)
@@ -361,7 +353,7 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
 
       return [alloc, allocPerc]
     } catch (e) {
-      console.log(e)
+      // console.log(e)
       // alert(e.message)
       return e
     }
@@ -514,7 +506,7 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
 
       return [totalLpValue, summonerTotalLpValue]
     } catch (e) {
-      console.log(e)
+      // console.log(e)
       // alert(e.message)
       return e
     }
@@ -547,7 +539,7 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
 
       return [farmApr, fetchedLiquidity[0], fetchedLiquidity[1]]
     } catch (e) {
-      console.log(e)
+      // console.log(e)
       // alert(e.message)
       return e
     }
@@ -563,12 +555,12 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
       // SOUL held by summoner
       const rawSummonerBal = await lpTokenContract?.balanceOf(SoulSummonerAddress)
       const summonerBalance = BigNumber.from(ethers.utils.formatUnits(rawSummonerBal))
-      console.log('summonerBalance', ethers.utils.formatUnits(summonerBalance))
+      // console.log('summonerBalance', ethers.utils.formatUnits(summonerBalance))
 
       // summonerBal * soulPrice = TVL
 
       const totalLpValue = summonerBalance.mul(soulPrice)
-      console.log('totalLpValue', totalLpValue)
+      // console.log('totalLpValue', totalLpValue)
 
       return totalLpValue
     } catch (e) {
@@ -621,7 +613,7 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
 
       return [farmApr, fetchedLiquidity]
     } catch (e) {
-      console.log(e)
+      // console.log(e)
       // alert(e.message);
       return e
     }

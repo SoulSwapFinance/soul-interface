@@ -247,8 +247,8 @@ function useSoulSummoner(pid, lpToken, token1Address, token2Address) {
       const fixedPidTvl = Number(pidTvl).toFixed(0)
       const fixedApr = Number(apr).toFixed(0)
 
-      console.log('SOUL', '- fixedPidTvl', fixedPidTvl)
-      console.log('SOUL', '- fixedApr', fixedApr)
+      // console.log('SOUL', '- fixedPidTvl', fixedPidTvl)
+      // console.log('SOUL', '- fixedApr', fixedApr)
 
       return [fixedPidTvl, fixedApr]
     } catch (e) {
