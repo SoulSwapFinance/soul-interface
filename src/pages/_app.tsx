@@ -143,6 +143,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
           {/*@ts-ignore TYPE NEEDS FIXING*/}
           <Web3ProviderNetwork getLibrary={getLibrary}>
             <Web3ReactManager>
+              {/*@ts-ignore TYPE NEEDS FIXING*/}
               <ReduxProvider store={store}>
               {/*@ts-ignore TYPE NEEDS FIXING*/}
                 <PersistGate loading={<Dots>loading</Dots>} persistor={persistor}>
@@ -157,6 +158,9 @@ function MyApp({ Component, pageProps, fallback, err }) {
                     <Provider>
                       <Layout>
                         <Guard>
+                          {/* TODO: Added alert Jan 25. Delete component after a few months. */}
+                          {/* <MultichainExploitAlertModal /> */}
+                          {/*@ts-ignore TYPE NEEDS FIXING*/}
                           <Gelato>
                             <Component {...pageProps} err={err} />
                           </Gelato>
