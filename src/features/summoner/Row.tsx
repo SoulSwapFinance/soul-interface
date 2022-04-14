@@ -101,6 +101,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const hasBalance = Number(walletBalance) > 0
     const isFarmer = Number(stakedBalance) > 0
     const isUnderworldPair = pairType == "underworld"
+    const isSwapPair = pairType == "farm"
     const isActive = pairStatus == "active"
 
     // ONLY USED FOR LOGO //
@@ -232,11 +233,12 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
         <>
             <div className="flex justify-center w-full">
                 <FarmContainer>
-                    <div className={classNames("bg-dark-1200 p-3 border",
-                        hasBalance && isUnderworldPair ? "hover:border-blue border-blue" 
-                        : hasBalance && !isUnderworldPair ? "hover:border-dark-600 border-dark-600" 
+                    <div className={classNames("bg-dark-1200 p-3 border", !hasBalance && "border-dark-1000",
+                        isUnderworldPair ? "hover:border-blue" : !isActive ? "hover:border-pink"
+                        : hasBalance && isUnderworldPair ? "hover:border-blue border-blue" 
+                        : hasBalance && !isUnderworldPair ? "border-dark-600" 
                         : hasBalance && !isActive ? "hover:border-pink border-pink"
-                        : "hover:border-dark-600 border-dark-1000"
+                        : "hover:border-dark-600"
                         )}
                         onClick={() => handleShowOptions()}
                     >
@@ -386,17 +388,38 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
             <div className="grid grid-cols-2 w-[95%] rounded-md p-2px bg-dark-900">
             <Tab
                 className={({ selected }) =>
-                  `${selected ? 'border-b-2 border-accent p-2 border-dark-600 text-white' : 'bg-dark-900 text-white'
-                  } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-dark-600`
+                  `${
+                    selected && !isUnderworldPair && isActive ? 'border-b-2 border-accent p-2 text-white border-dark-600'
+                    : selected && isUnderworldPair ? 'border-b-2 border-accent p-2 text-white border-[#0993EC]' 
+                    : selected && !isActive ? 'border-b-2 border-accent p-2 text-white border-pink'
+                    : 'bg-dark-900 text-white'
+                  }
+                  flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 
+                  ${
+                        isUnderworldPair ? "hover:border-blue" 
+                        : !isActive ? "hover:border-pink"
+                        : "hover:border-dark-600"
+                    }`
                 }
               >
                 DEPOSIT
               </Tab>
               <Tab
                 className={({ selected }) =>
-                  `${selected ? 'border-b-2 border-accent p-2 border-dark-600 text-white' : 'bg-dark-900 text-white'
-                  } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-dark-600`
-                }
+                  `${
+                      selected && !isUnderworldPair && isActive ? 'border-b-2 border-accent p-2 text-white border-dark-600'
+                      : selected && isUnderworldPair ? 'border-b-2 border-accent p-2 text-white border-[#0993EC]' 
+                      : selected && !isActive ? 'border-b-2 border-accent p-2 text-white border-pink'
+                  
+                  : 'bg-dark-900 text-white'                  
+                } 
+                  flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1
+                  ${
+                        isUnderworldPair ? "hover:border-blue" 
+                        : !isActive ? "hover:border-pink"
+                        : "hover:border-dark-600"
+                        }`
+                    }
               >
                WITHDRAW
               </Tab>
@@ -424,7 +447,13 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
               <div className=
               {classNames(
                   "flex flex-col bg-dark-1000 mb-3 p-3 border border-2 border-dark-1000", 
-                  isUnderworldPair ? "hover:border-blue" : "hover:border-dark-600", "w-full space-y-1")}>
+                  isUnderworldPair ? "hover:border-blue"
+                  : !isActive ? "hover:border-pink"
+                  : "hover:border-dark-600",
+                  
+                  "w-full space-y-1")
+                  
+                  }>
                     
                 { Number(walletBalance) > 0 && (
                 <div className="flex justify-between">
@@ -567,7 +596,10 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
               <div className={
                   classNames(
                     "flex flex-col mb-3 bg-dark-1000 p-3 border border-2 border-dark-1000",
-                    isUnderworldPair ? "hover:border-blue" : "hover:border-dark-600", "w-full space-y-1")}>
+                    isUnderworldPair ? "hover:border-blue" 
+                    : !isActive ? "hover:border-pink"
+                    : "hover:border-dark-600",                    
+                    "w-full space-y-1")}>
                     
                 { Number(stakedBalance) > 0 && (
                 <div className="flex justify-between">
