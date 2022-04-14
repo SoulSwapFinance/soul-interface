@@ -9,12 +9,11 @@ import { useTokenInfo } from 'hooks/useTokenInfo'
 import { useWrappedLumensContract, useLuxorContract } from 'hooks'
 import { formatNumberScale } from 'functions'
 import { LUX_ADDRESS, WLUM_ADDRESS } from 'constants/addresses'
-// import QuestionHelper from '../../components/QuestionHelper'
-import { useLuxTVL, useTVL, useVaultTVL } from 'hooks/useV2Pairs'
+import { useTVL } from 'hooks/useV2Pairs'
 // import { Wrapper } from 'features/swap/styleds'
 import { Button } from 'components/Button'
 import { useActiveWeb3React } from 'services/web3'
-import QuestionHelper from 'components/QuestionHelper'
+// import QuestionHelper from 'components/QuestionHelper'
 import ModalHeader from 'components/Modal/Header'
 import { concat } from 'lodash'
 import { useLuxorPrice, useWrappedLumPrice } from 'hooks/getPrices'
@@ -46,10 +45,6 @@ export default function LuxorStatsModal(): JSX.Element | null {
 
   const { luxorInfo } = useLuxorInfo()
   const farmInfo = useTVL()
-  
-  // const farmsTvl = useTVL()
-  const luxInfo = useLuxTVL()
-
   const LuxFtmContract = usePairContract('0x951BBB838e49F7081072895947735b0892cCcbCD')
   const LuxDaiContract = usePairContract('0x46729c2AeeabE7774a0E710867df80a6E19Ef851')
 
@@ -66,10 +61,6 @@ export default function LuxorStatsModal(): JSX.Element | null {
   const LuxFtmValue = LuxFtmBalance * luxFtmPrice
   const LuxDaiValue = LuxDaiBalance * luxDaiPrice
   const treasuryLiquidityBalance = LuxFtmValue + LuxDaiValue
-  
-  let luxTvl = luxInfo?.reduce((previousValue, currentValue) => {
-    return previousValue + currentValue?.tvl
-  }, 0)
 
   let farmsTvl = farmInfo?.reduce((previousValue, currentValue) => {
     return previousValue + currentValue?.tvl
