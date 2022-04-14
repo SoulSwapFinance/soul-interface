@@ -38,19 +38,16 @@ if (typeof window !== 'undefined' && !!window.ethereum) {
   window.ethereum.autoRefreshOnNetworkChange = true
 }
 
-// @ts-ignore TYPE NEEDS FIXING
 function MyApp({ Component, pageProps, fallback, err }) {
   const router = useRouter()
   const { locale, events } = router
 
   useEffect(() => {
-    // @ts-ignore TYPE NEEDS FIXING
     const handleRouteChange = (url) => {
       pageview(url)
     }
     events.on('routeChangeComplete', handleRouteChange)
 
-    // @ts-ignore TYPE NEEDS FIXING
     const handleError = (error) => {
       exception({
         description: `${error.message} @ ${error.filename}:${error.lineno}:${error.colno}`,
@@ -67,9 +64,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
   }, [events])
 
   useEffect(() => {
-    // @ts-ignore TYPE NEEDS FIXING
     async function load(locale) {
-      // @ts-ignore TYPE NEEDS FIXING
       i18n.loadLocaleData(locale, { plurals: plurals[locale.split('_')[0]] })
 
       try {
@@ -143,7 +138,6 @@ function MyApp({ Component, pageProps, fallback, err }) {
         <Web3ReactProvider getLibrary={getLibrary}>
           <Web3ProviderNetwork getLibrary={getLibrary}>
             <Web3ReactManager>
-              {/*@ts-ignore TYPE NEEDS FIXING*/}
               <ReduxProvider store={store}>
                 <PersistGate loading={<Dots>loading</Dots>} persistor={persistor}>
                   <>
