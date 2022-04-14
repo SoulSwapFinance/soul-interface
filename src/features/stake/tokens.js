@@ -37,7 +37,7 @@ export const tokens = {
     1: "",
     56: "",
   },
-  fUSDT: {
+  USDT: {
     4002: "",
     250: "0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E",
     1: "",

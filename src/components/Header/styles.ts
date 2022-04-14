@@ -3,4 +3,4 @@ export const NAV_CLASS =
   h-full before:backdrop-saturate-[1.2] \
   before:backdrop-blur-[20px] before:z-[-1] \
   before:absolute before:w-full before:h-full \
-  border-b border-dark-600 mx-4'
+  border-b border-dark-900 hover:border-dark-600 mx-4'

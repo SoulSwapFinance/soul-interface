@@ -203,14 +203,14 @@ export const ActivePools = [
     // 600
     pid: 14,
     token1: 'FTM',
-    token2: 'fUSDT',
-    lpSymbol: 'FTM-fUSDT',
+    token2: 'USDT',
+    lpSymbol: 'FTM-USDT',
     lpAddresses: {
       4002: '',
       250: '0xdC24814AD654986928F8E4aec48D37fa30bBC5BB',
     },
     token1Address: tokens.FTM,
-    token2Address: tokens.fUSDT,
+    token2Address: tokens.USDT,
   },
   {
     // 300
@@ -294,26 +294,26 @@ export const ActivePools = [
     // 200
     pid: 9,
     token1: 'USDC',
-    token2: 'fUSDT',
-    lpSymbol: 'USDC-fUSDT',
+    token2: 'USDT',
+    lpSymbol: 'USDC-USDT',
     lpAddresses: {
       4002: '',
       250: '0x298c12d6d9d6746dd0ef0a89421288f52d5566ef',
     },
     token1Address: tokens.USDC,
-    token2Address: tokens.fUSDT,
+    token2Address: tokens.USDT,
   },
   {
     // 200
     pid: 43,
-    token1: 'fUSDT',
+    token1: 'USDT',
     token2: 'DAI',
-    lpSymbol: 'fUSDT-DAI',
+    lpSymbol: 'USDT-DAI',
     lpAddresses: {
       4002: '',
       250: '0xB38508Ed92C4878daE7652d8d46cAE46eEa8aA9A',
     },
-    token1Address: tokens.fUSDT,
+    token1Address: tokens.USDT,
     token2Address: tokens.DAI,
   },
   {
