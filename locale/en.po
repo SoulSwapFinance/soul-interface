@@ -214,9 +214,6 @@ msgstr "BOND"
 msgid "BORROW"
 msgstr "BORROW"
 
-msgid "Back to Farms"
-msgstr "Back to Farms"
-
 msgid "Balance"
 msgstr "Balance"
 
@@ -636,17 +633,11 @@ msgstr "Explore our Protocol."
 msgid "Explorer"
 msgstr "Explorer"
 
-msgid "FANTOM"
-msgstr "FANTOM"
-
 msgid "FARM"
 msgstr "FARM"
 
 msgid "Failed"
 msgstr "Failed"
-
-msgid "Fantom"
-msgstr "Fantom"
 
 msgid "Fantom Faucet"
 msgstr "Fantom Faucet"
@@ -759,9 +750,6 @@ msgstr "How to use"
 
 msgid "I understand"
 msgstr "I understand"
-
-msgid "INACTIVE"
-msgstr "INACTIVE"
 
 msgid "If you purchase a token from this list, you may not be able to sell it back."
 msgstr "If you purchase a token from this list, you may not be able to sell it back."
@@ -1452,9 +1440,6 @@ msgstr "Spanish"
 
 msgid "Stable"
 msgstr "Stable"
-
-msgid "Stables"
-msgstr "Stables"
 
 msgid "Stack Yields with SAAVE"
 msgstr "Stack Yields with SAAVE"

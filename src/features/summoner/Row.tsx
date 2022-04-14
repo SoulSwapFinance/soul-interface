@@ -195,6 +195,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
             await tx?.wait()
         } catch (e) {
             // alert(e.message)
+            const tx = await SoulSummonerContract?.withdraw(pid, Number(withdrawValue).toFixed(6).toBigNumber(assetDecimals))
             console.log(e)
         }
     }
@@ -221,6 +222,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
             const tx = await SoulSummonerContract?.deposit(pid, Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx.wait()
         } catch (e) {
+            const tx = await SoulSummonerContract?.deposit(pid, Number(depositValue).toFixed(6).toBigNumber(assetDecimals))
             // alert(e.message)
             console.log(e)
         }
