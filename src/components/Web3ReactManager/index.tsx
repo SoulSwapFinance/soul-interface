@@ -37,7 +37,7 @@ export default function Web3ReactManager({ children }: { children: JSX.Element }
   useEffect(() => {
     const timeout = setTimeout(() => {
       setShowLoader(true)
-    }, 10000)
+    }, 600)
 
     return () => {
       clearTimeout(timeout)
@@ -71,8 +71,7 @@ export default function Web3ReactManager({ children }: { children: JSX.Element }
 
   return (
     <>
-      {/*@ts-ignore TYPE NEEDS FIXING*/}
-      <GnosisManagerNoSSR />
+      {/* <GnosisManagerNoSSR /> */}
       {children}
     </>
   )
