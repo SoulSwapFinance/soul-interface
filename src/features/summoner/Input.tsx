@@ -3,7 +3,7 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Currency, CurrencyAmount, Pair, Percent, Token } from 'sdk'
 import selectCoinAnimation from 'animation/select-coin.json'
-import { classNames, formatCurrencyAmount, formatNumber } from 'functions'
+import { classNames, formatNumber } from 'functions'
 import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
 import { useActiveWeb3React } from 'services/web3'
 import { useCurrencyBalance } from 'state/wallet/hooks'
@@ -92,7 +92,7 @@ export default function FarmInputPanel({
                 />
                 <Button onClick={() => onMax(balance)}>
                 <div className="flex flex-cols-2">
-                  <div className="text-xs font-medium text-right cursor-pointer text-low-emphesis">
+                  <div className="text-xs font-medium text-right cursor-pointer text-high-emphesis">
                     {formatNumber(balance, false, true) || 0} {' '}
                     {/* {pairSymbol} */}
                     MAX

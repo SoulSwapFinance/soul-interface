@@ -1,11 +1,12 @@
 import Image from 'next/image'
-import LuxorStatsModal, { formatCurrency } from 'modals/LuxorStatsModal'
+import LuxorStatsModal from 'modals/LuxorStatsModal'
 import React from 'react'
 import { useModalOpen, useToggleLuxorStatsModal } from 'state/application/hooks'
 import { ApplicationModal } from 'state/application/actions'
 import styled from 'styled-components'
 import { useActiveWeb3React } from 'services/web3'
 import { useLuxorPrice, useWrappedLumPrice } from 'hooks/getPrices'
+import { formatNumber } from 'functions/format'
 
 const HideOnMobile = styled.div`
 @media screen and (max-width: 500px) {
@@ -38,7 +39,7 @@ function LuxorStats(): JSX.Element | null {
           className="rounded-md"
         />
           <HideOnMobile>
-          <div className="text-primary">{ formatCurrency(wLumPrice, 0) }</div>
+          <div className="text-primary">{ formatNumber(wLumPrice, true, true) }</div>
           </HideOnMobile>
       </div>
       <div className="grid items-center grid-flow-col px-1.5 py-1 space-x-2 text-sm rounded-lg pointer-events-auto auto-cols-max bg-dark-1000 text-secondary">
@@ -51,7 +52,7 @@ function LuxorStats(): JSX.Element | null {
           className="rounded-md"
         />
           <HideOnMobile>
-          <div className="text-primary">{ formatCurrency(luxPrice, 0) }</div>
+          <div className="text-primary">{ formatNumber(luxPrice, true, true) }</div>
           </HideOnMobile>
       </div>
       <LuxorStatsModal />

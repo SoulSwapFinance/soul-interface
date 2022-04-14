@@ -6,7 +6,7 @@ import { Button } from 'components/Button'
 import { FiatValue } from 'components/CurrencyInputPanel/FiatValue'
 import { CurrencyLogo } from 'components/CurrencyLogo'
 import Input from 'components/Input'
-import { classNames, formatCurrencyAmount } from 'functions'
+import { classNames } from 'functions'
 import Lottie from 'lottie-react'
 import React, { ReactNode } from 'react'
 
@@ -83,7 +83,6 @@ export default function CurrencyInputPanel({
               {!hideBalance && currency && currencyBalance ? (
                 <div className="flex flex-col">
                   <div onClick={onMax} className="text-xs font-medium text-right cursor-pointer text-low-emphesis">
-                    {/* {formatCurrencyAmount(Number(currencyBalance), 4)} {currency?.symbol} */}
                     {currencyBalance?.toSignificant(6, { groupSeparator: ',' }) || '0'} {currency?.symbol}
                   </div>
                   <FiatValue fiatValue={fiatValue} priceImpact={priceImpact} />

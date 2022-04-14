@@ -24,7 +24,6 @@ import React, { createContext, FC, ReactNode, useContext, useEffect, useMemo, us
 // import { FiatValue } from './FiatValue'
 // import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 // import { useCurrency } from 'hooks/Tokens'
-import { formatCurrency } from 'modals/TokensStatsModal'
 import { useBinancePrice, useFantomPrice, useTokenPrice, useWrappedBtcPrice } from 'hooks/getPrices'
 import { usePairPrice } from 'hooks/usePairData'
 
@@ -288,15 +287,15 @@ const AssetInputPanel = ({
             className={error ? 'text-red' : value ? 'text-green' : 'text-low-emphesis'}
           >
             ≈{usdcValue ? usdcValue?.toSignificant(4) : ( 
-              currency.symbol == 'SOUL' ? formatCurrency(tokenPrice * Number(value), 2) :
-              currency.symbol == 'WETH' ? formatCurrency(tokenPrice * Number(value), 2) :
-              currency.symbol == 'DAI' ? formatCurrency(1 * Number(value), 2) :
-              currency.symbol == 'BNB' ? formatCurrency(bnbPrice * Number(value), 2) :
-              currency.isNative ? formatCurrency(ftmPrice * Number(value), 2) :
-              currency.symbol == 'FTM' ? formatCurrency(ftmPrice * Number(value), 2) :
-              currency.symbol == 'WFTM' ? formatCurrency(ftmPrice * Number(value), 2) :
-              currency.symbol == 'WBTC' ? formatCurrency(btcPrice * Number(value), 2) :
-              formatCurrency(pairPrice * Number(value), 2))            
+              currency.symbol == 'SOUL' ? formatNumber(tokenPrice * Number(value), true, true) :
+              currency.symbol == 'WETH' ? formatNumber(tokenPrice * Number(value), true, true) :
+              currency.symbol == 'DAI' ? formatNumber(1 * Number(value), true, true) :
+              currency.symbol == 'BNB' ? formatNumber(bnbPrice * Number(value), true, true) :
+              currency.isNative ? formatNumber(ftmPrice * Number(value), true, true) :
+              currency.symbol == 'FTM' ? formatNumber(ftmPrice * Number(value), true, true) :
+              currency.symbol == 'WFTM' ? formatNumber(ftmPrice * Number(value), true, true) :
+              currency.symbol == 'WBTC' ? formatNumber(btcPrice * Number(value), true, true) :
+              formatNumber(pairPrice * Number(value), true, true))            
             }
           </Typography>
         </div>

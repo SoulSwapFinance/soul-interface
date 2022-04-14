@@ -12,7 +12,6 @@ import { useLuxorInfo, useLuxorUserInfo, useUserInfo, useUserTokenInfo } from "h
 import { useActiveWeb3React } from "hooks/useActiveWeb3React";
 import { useLuxorPrice, useWrappedBtcPrice } from "hooks/getPrices";
 import { Button } from "components/Button";
-import { formatCurrency } from "modals/TokensStatsModal";
 // import NavLink from "components/NavLink";
 // import { useTokenContract } from "hooks/useTokenContract";
 // import { useLumensContract } from "hooks/useContract";
@@ -310,7 +309,7 @@ export default function Calculator() {
                           <DataRow>
                           <DataRowName>Return</DataRowName>
                               <DataRowValue>
-                                {formatCurrency(Number(potentialReturn), 2)}
+                                {formatNumber(Number(potentialReturn), true, true)}
                               </DataRowValue>
                           </DataRow>
                           <DataRow>

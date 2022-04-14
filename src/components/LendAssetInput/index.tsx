@@ -25,7 +25,6 @@ import { usePrice } from 'hooks/usePrice'
 import { FiatValue } from './FiatValue'
 import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 import { useCurrency } from 'hooks/Tokens'
-import { formatCurrency } from 'modals/TokensStatsModal'
 import { usePairPrice } from 'hooks/usePairData'
 
 interface AssetInputProps {
@@ -276,8 +275,8 @@ const AssetInputPanel = ({
             className={error ? 'text-red' : value ? 'text-green' : 'text-low-emphesis'}
           >
             ≈{usdcValue ? usdcValue.toSignificant(4) : ( 
-              currency.symbol == 'SOUL' ? formatCurrency(tokenPrice * Number(value), 2) :
-              formatCurrency(pairPrice * Number(value), 2))            
+              currency.symbol == 'SOUL' ? formatNumber(tokenPrice * Number(value), true, true) :
+              formatNumber(pairPrice * Number(value), true, true))            
             }
           </Typography>
         </div>

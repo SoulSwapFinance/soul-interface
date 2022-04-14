@@ -3,7 +3,7 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Currency, CurrencyAmount, Pair, Percent, Token } from 'sdk'
 import selectCoinAnimation from 'animation/select-coin.json'
-import { classNames, formatCurrencyAmount } from 'functions'
+import { classNames } from 'functions'
 import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
 import { useActiveWeb3React } from 'services/web3'
 import { useCurrencyBalance } from 'state/wallet/hooks'
@@ -167,7 +167,6 @@ export default function CurrencyInputPanel({
                       <>
                         {/* {i18n._(t`Balance:`)}  */}
                         {i18n._(t`50%`)} 
-                        {/* {formatCurrencyAmount(selectedCurrencyBalance.divide(2), 4)} {currency.symbol} */}
                         {/* {selectedCurrencyBalance?.toSignificant(6, { groupSeparator: ',' }) || '0'} {currency?.symbol} */}
                       </>
                     )}
@@ -180,8 +179,6 @@ export default function CurrencyInputPanel({
 
                       <>
                         {/* {i18n._(t`Balance:`)}  */}
-                        {/* {i18n._(t`Balance:`)}  */}
-                        {/* {formatCurrencyAmount(selectedCurrencyBalance, 4)} {currency.symbol} */}
                         {selectedCurrencyBalance?.toSignificant(6, { groupSeparator: ',' }) || '0'} {currency?.symbol}
                       </>
                     )}

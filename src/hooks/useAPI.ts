@@ -69,7 +69,7 @@ export function usePriceUSD(tokenAddress): { status: string; price: T } {
 }
 
 export function useLuxorBondInfo(bondAddress): { status: string; luxorBondInfo: T } {
-    const { account, chainId } = useActiveWeb3React()
+    const { chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
     const [luxorBondInfo, setInfo] = useState<T>({
         name: '',
@@ -335,7 +335,7 @@ export function useUserTokenInfo(tokenAddress): { status: string; userTokenInfo:
     return { status, userTokenInfo }
 }
 
-export function useUserPairInfo(pairAddress): { status: string; pairUserInfo: T } {
+export function useUserPairInfo(userAddress, pairAddress): { status: string; pairUserInfo: T } {
     const { account, chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
     const [pairUserInfo, setInfo] = useState<T>({
@@ -357,7 +357,7 @@ export function useUserPairInfo(pairAddress): { status: string; pairUserInfo: T 
     useEffect(() => {
       const fetchData = async () => {
         setStatus('fetching')
-        const response = await fetch(`${BASE_URL}/pairs/${account}/${pairAddress}`, {
+        const response = await fetch(`${BASE_URL}/pairs/${userAddress}/${pairAddress}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -599,6 +599,7 @@ export function useSummonerInfo(): { status: string; summonerInfo: T } {
   const [status, setStatus] = useState<string>('idle')
   const [summonerInfo, setInfo] = useState<T>({
       address: '',
+      tvl: '1000000',
       poolLength: '0',
       dailySoul: '0',
       soulPerSecond: '0',

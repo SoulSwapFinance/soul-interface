@@ -11,7 +11,6 @@ import { CurrencyLogo } from '../CurrencyLogo'
 import DoubleLogo from '../DoubleLogo'
 import Typography from '../Typography'
 import { HeadlessUiModal } from 'components/Modal'
-import { formatCurrency } from 'modals/TokensStatsModal'
 import ModalHeader from 'components/Modal/Header'
 
 interface YieldDetailsProps {

@@ -136,7 +136,7 @@ export default function SoulStake() {
         // .toString()
         // .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
       )
-      console.log('tvl:%s', tvl)
+      // console.log('tvl:%s', tvl)
 
       // console.log("apr", farmApr);
       setApr(
@@ -147,7 +147,7 @@ export default function SoulStake() {
         // .toString()
         // .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
       )
-      console.log('tvl:%s', apr)
+      // console.log('tvl:%s', apr)
     } catch (e) {
       console.warn(e)
     }
