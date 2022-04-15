@@ -381,7 +381,7 @@ export const LendingPools = [
       4002: '',
       250: '0xbDa9204e6D596feCf9bd48108723F9BDAa2019f6',
     },
-    token1Address: tokens.DAI,
-    token2Address: tokens.BNB,
+    token1Address: tokens.BNB,
+    token2Address: tokens.DAI,
   },
 ]
