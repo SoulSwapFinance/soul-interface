@@ -170,8 +170,13 @@ const useMenu: UseMenu = () => {
             link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
           },
           {
+            key: 'soul-discord',
+            title: i18n._(t`Discord`),
+            link: 'https://discord.com/invite/DQjChB6Wa6',
+          },
+          {
             key: 'soul-follow',
-            title: i18n._(t`Follow`),
+            title: i18n._(t`Twitter`),
             link: 'https://twitter.com/SoulSwapFinance',
           },
         ],
@@ -202,7 +207,7 @@ const useMenu: UseMenu = () => {
           },
           {
             key: 'rebase',
-            title: i18n._(t`Rebase`),
+            title: i18n._(t`Staking`),
             link: '/luxor/stake',
           },
           {
@@ -211,8 +216,13 @@ const useMenu: UseMenu = () => {
             link: 'https://docs.luxor.money',
           },
           {
+            key: 'luxor-discord',
+            title: i18n._(t`Discord`),
+            link: 'https://discord.com/invite/DQjChB6Wa6',
+          },
+          {
             key: 'luxor-follow',
-            title: i18n._(t`Follow`),
+            title: i18n._(t`Twitter`),
             link: 'https://twitter.com/LuxorMoney',
           },
         ],
