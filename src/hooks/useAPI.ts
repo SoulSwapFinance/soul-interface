@@ -530,6 +530,7 @@ export function useUnderworldUserInfo(pairAddress): { status: string; underworld
         collateralDecimals: '18',
         collateralPrice: '0',
 
+        userAssetBalance: '0',
         userBalance: '0',
         userBorrowPart: '0',
         userCollateralShare: '0',
