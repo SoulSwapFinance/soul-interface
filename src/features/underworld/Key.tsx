@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-const HideOnSmall = styled.div`
-@media screen and (max-width: 900px) {
-  display: none;
-}
-`
+// const HideOnSmall = styled.div`
+// @media screen and (max-width: 900px) {
+//   display: none;
+// }
+// `
 
-const HideOnMobile = styled.div`
-@media screen and (max-width: 600px) {
-  display: none;
-}
-`
+// const HideOnMobile = styled.div`
+// @media screen and (max-width: 600px) {
+//   display: none;
+// }
+// `
 
 const FarmItemBox = styled.div`
   width: 100px;
@@ -57,54 +57,49 @@ export function Underworld() {
           <div className="grid grid-cols-1 bg-dark-1200 font-bold mb-2 mr-4 ml-2 border border-dark-1000 hover:border-dark-600">
             <FarmContentWrapper>
               
-            {/* <HideOnMobile> */}
+              <FarmItemBox>
+                  <Text fontSize="1" color="#FFFFFF">
+                  MARKET
+                  </Text>
+              </FarmItemBox>
+              
               <FarmItemBox>
                   <Text fontSize="1" color="#FFFFFF">
                   ASSET
                   </Text>
               </FarmItemBox>
 
-              <FarmItemBox>
+              {/* <FarmItemBox>
                   <Text fontSize="1" color="#FFFFFF">
                   COLLATERAL
                   </Text>
-              </FarmItemBox>
-            {/* </HideOnMobile> */}
-
-            {/* <HideOnMobile>
-              <FarmItemBox>
-                <Text padding="0" fontSize="1" color="#FFFFFF">
-                STAKE
-                </Text>
-              </FarmItemBox>
-            </HideOnMobile> */}
- 
+              </FarmItemBox> */}
 
               <FarmItemBox>
                 <Text padding="0" fontSize="1" color="#FFFFFF">
-                YOURS
+                SUPPLIED
                 </Text>
               </FarmItemBox>
 
               <FarmItemBox>
                 <Text padding="0" fontSize="1" color="#FFFFFF">
-                % RETURN
+                BORROWED
                 </Text>
               </FarmItemBox>
 
-              <FarmItemBox>
+              {/* <FarmItemBox>
                 <Text padding="0" fontSize="1" color="#FFFFFF">
-                % FEE
+                % APR
                 </Text>
-              </FarmItemBox>
+              </FarmItemBox> */}
 
-            <HideOnSmall>
+            {/* <HideOnSmall>
               <FarmItemBox>
                 <Text padding="0" fontSize="1" color="#FFFFFF">
                  TVL
                 </Text>
               </FarmItemBox>
-            </HideOnSmall>
+            </HideOnSmall> */}
 
             </FarmContentWrapper>
             </div>
@@ -113,67 +108,45 @@ export function Underworld() {
   )
 }
 
-export function Farms() {
-  return (
-    <div className="justify-center">
-        <FarmContainer>
-          {/* <div className="grid grid-cols-5 ml-24 mr-6 sm:ml-0 bg-dark-1000"> */}
-          <div className="grid grid-cols-1 bg-dark-1200 font-bold mb-2 mr-4 ml-2 border border-dark-1000 hover:border-dark-600">
-            <FarmContentWrapper>
+// export function Farms() {
+//   return (
+//     <div className="justify-center">
+//         <FarmContainer>
+//           {/* <div className="grid grid-cols-5 ml-24 mr-6 sm:ml-0 bg-dark-1000"> */}
+//           <div className="grid grid-cols-1 bg-dark-1200 font-bold mb-2 mr-4 ml-2 border border-dark-1000 hover:border-dark-600">
+//             <FarmContentWrapper>
               
-            {/* <HideOnMobile> */}
-              <FarmItemBox>
-                  <Text fontSize=".8" color="#FFFFFF">
-                  ASSET
-                  </Text>
-              </FarmItemBox>
-            {/* </HideOnMobile> */}
+//             {/* <HideOnMobile> */}
+//               <FarmItemBox>
+//                   <Text fontSize=".8" color="#FFFFFF">
+//                   ASSET
+//                   </Text>
+//               </FarmItemBox>
+//             {/* </HideOnMobile> */}
 
-            {/* <HideOnMobile>
-              <FarmItemBox>
-                <Text padding="0" fontSize=".8" color="#FFFFFF">
-                STAKE
-                </Text>
-              </FarmItemBox>
-            </HideOnMobile> */}
+//             <HideOnMobile>
+//               <FarmItemBox>
+//                 <Text padding="0" fontSize=".8" color="#FFFFFF">
+//                 COLLATERAL
+//                 </Text>
+//               </FarmItemBox>
+//             </HideOnMobile>
 
-            <HideOnMobile>
-              <FarmItemBox>
-                <Text padding="0" fontSize=".8" color="#FFFFFF">
-                STAKED
-                </Text>
-              </FarmItemBox>
-            </HideOnMobile>
- 
-            <HideOnSmall>
-              <FarmItemBox>
-                <Text padding="0" fontSize=".8" color="#FFFFFF">
-                SHARE
-                </Text>
-              </FarmItemBox>
-            </HideOnSmall>
+//             <FarmItemBox>
+//                 <Text padding="0" fontSize=".8" color="#FFFFFF">
+//                 BORROWED
+//                 </Text>
+//             </FarmItemBox>
 
-              <FarmItemBox>
-                <Text padding="0" fontSize=".8" color="#FFFFFF">
-                % APR
-                </Text>
-              </FarmItemBox>
+//             <FarmItemBox>
+//                 <Text padding="0" fontSize=".8" color="#FFFFFF">
+//                 % FEE
+//                 </Text>
+//             </FarmItemBox>
 
-              <FarmItemBox>
-                <Text padding="0" fontSize=".8" color="#FFFFFF">
-                YIELD
-                </Text>
-              </FarmItemBox>
-
-              <FarmItemBox>
-                <Text padding="0" fontSize=".8" color="#FFFFFF">
-                LIQUIDITY
-                </Text>
-              </FarmItemBox>
-
-            </FarmContentWrapper>
-            </div>
-        </FarmContainer>
-      </div>
-  )
-}
+//             </FarmContentWrapper>
+//             </div>
+//         </FarmContainer>
+//       </div>
+//   )
+// }

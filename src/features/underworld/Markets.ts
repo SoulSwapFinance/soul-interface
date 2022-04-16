@@ -3,122 +3,72 @@ import { tokens } from './Tokens'
 export const UnderworldMarkets = [
   {
     // LENDING
-    pid: 48,
-    token1: 'FTM',
-    token2: 'DAI',
+    id: 0,
+    asset: 'FTM',
+    collateral: 'DAI',
     lpSymbol: 'DAI-FTM',
-    lpAddresses: {
-      4002: '',
-      250: '0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd',
-    },
-    token1Address: tokens.FTM,
-    token2Address: tokens.DAI,
+    lpAddress: '0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd',
+    assetAddress: tokens.FTM,
+    collateralAddress: tokens.DAI,
   },
   {
     // LENDING
-    pid: 49,
-    token1: 'DAI',
-    token2: 'FTM',
+    id: 1,
+    asset: 'DAI',
+    collateral: 'FTM',
     lpSymbol: 'FTM-DAI',
-    lpAddresses: {
-      4002: '',
-      250: '0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61',
-    },
-    token1Address: tokens.DAI,
-    token2Address: tokens.FTM,
+    lpAddress: '0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61',
+    assetAddress: tokens.DAI,
+    collateralAddress: tokens.FTM,
   },
   {
     // LENDING
-    pid: 51,
-    token1: 'WETH',
-    token2: 'DAI',
+    id: 2,
+    asset: 'WETH',
+    collateral: 'DAI',
     lpSymbol: 'DAI-ETH',
-    lpAddresses: {
-      4002: '',
-      250: '0x9fA5de19495331E13b443F787B90CdD22B32263d',
-    },
-    token1Address: tokens.WETH,
-    token2Address: tokens.DAI,
+    lpAddress: '0x9fA5de19495331E13b443F787B90CdD22B32263d',
+    assetAddress: tokens.WETH,
+    collateralAddress: tokens.DAI,
   },
   {
     // LENDING
-    pid: 53,
-    token1: 'BNB',
-    token2: 'DAI',
+    id: 3,
+    asset: 'BNB',
+    collateral: 'DAI',
     lpSymbol: 'DAI-BNB',
-    lpAddresses: {
-      4002: '',
-      250: '0xbDa9204e6D596feCf9bd48108723F9BDAa2019f6',
-    },
-    token1Address: tokens.BNB,
-    token2Address: tokens.DAI,
+    lpAddress: '0xbDa9204e6D596feCf9bd48108723F9BDAa2019f6',
+    assetAddress: tokens.BNB,
+    collateralAddress: tokens.DAI,
   },
   {
     // LENDING
-    pid: 53,
-    token1: 'WETH',
-    token2: 'FTM',
-    lpSymbol: 'WETH-FTM',
-    lpAddresses: {
-      4002: '',
-      250: '0x4224b2870875df7f693dEB5Fc6560ee50C8B602d',
-    },
-    token1Address: tokens. WETH,
-    token2Address: tokens.FTM,
-  },
-]
-
-export const FarmMarkets = [
-  {
-    // FARM MARKETS
-    pid: 48,
-    token1: 'FTM',
-    token2: 'DAI',
-    lpSymbol: 'DAI-FTM',
-    lpAddresses: {
-      4002: '',
-      250: '0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd',
-    },
-    token1Address: tokens.FTM,
-    token2Address: tokens.DAI,
+    id: 4,
+    asset: 'DAI',
+    collateral: 'BNB',
+    lpSymbol: 'BNB-DAI',
+    lpAddress: '0x60f61a4Ad5aaD5842ABfCee628E97195A0d53af3',
+    assetAddress: tokens.DAI,
+    collateralAddress: tokens.BNB,
   },
   {
-    // FARM MARKETS
-    pid: 49,
-    token1: 'DAI',
-    token2: 'FTM',
-    lpSymbol: 'FTM-DAI',
-    lpAddresses: {
-      4002: '',
-      250: '0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61',
-    },
-    token1Address: tokens.DAI,
-    token2Address: tokens.FTM,
+    // LENDING
+    id: 5,
+    asset: 'WETH',
+    collateral: 'FTM',
+    lpSymbol: 'FTM-ETH',
+    lpAddress: '0x4224b2870875df7f693dEB5Fc6560ee50C8B602d',
+    assetAddress: tokens.WETH,
+    collateralAddress: tokens.FTM,
   },
   {
-    // FARM MARKETS
-    pid: 51,
-    token1: 'WETH',
-    token2: 'DAI',
-    lpSymbol: 'DAI-ETH',
-    lpAddresses: {
-      4002: '',
-      250: '0x9fA5de19495331E13b443F787B90CdD22B32263d',
-    },
-    token1Address: tokens.WETH,
-    token2Address: tokens.DAI,
-  },
-  {
-    // FARM MARKETS
-    pid: 53,
-    token1: 'BNB',
-    token2: 'DAI',
-    lpSymbol: 'DAI-BNB',
-    lpAddresses: {
-      4002: '',
-      250: '0xbDa9204e6D596feCf9bd48108723F9BDAa2019f6',
-    },
-    token1Address: tokens.BNB,
-    token2Address: tokens.DAI,
+    // LENDING
+    id: 6,
+    asset: 'DAI',
+    collateral: 'ETH',
+    lpSymbol: 'ETH-DAI',
+    lpAddress: '0x290DdA59400f86d8E585e0Fa9448CFFAbB19479C',
+    assetAddress: tokens.DAI,
+    collateralAddress: tokens.WETH,
   },
 ]
