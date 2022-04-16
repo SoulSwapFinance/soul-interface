@@ -1,28 +1,22 @@
 import { Wrap } from '../../components/ReusableStyles'
 import Container from '../../components/Container'
-import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 import Head from 'next/head'
 import React from 'react'
+import List from 'features/underworld/List'
 
-import LendList from '../../features/underworld/LendList'
-
-const Underworld = () => {
+const Summoner = () => {
   return (
-    <Wrap padding="4rem 0 0 0" justifyContent="center">
-      <DoubleGlowShadowV2 opacity="0.6">
-
-      <Container id="Underworld-page">
+    <Wrap padding='1rem 0 0 0' justifyContent="center">
+      <Container id="farm-page">
+        <br/>
         <Head>
-          <title>Underworld | Soul</title>
-          <meta key="description" name="description" content="Underworld SOUL" />
+          <title>Underworld Markets</title>
+          <meta key="description" name="description" content="Underworld Markets" />
         </Head>
-
-        <LendList />
+        <List />
       </Container>
-
-      </DoubleGlowShadowV2>
     </Wrap>
   )
 }
 
-export default Underworld
+export default Summoner
