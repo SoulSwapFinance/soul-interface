@@ -83,7 +83,7 @@ export const Row = ({ farm, lpToken }) => {
 
     const hasBalance = Number(assetBalance) > 0
     const assetSymbol = tokenInfo.symbol == 'WFTM' ? 'FTM' : tokenInfo.symbol
-    const isFTM = assetSymbol
+    const isFTM = assetSymbol == 'FTM'
 
     // ONLY USED FOR LOGO //
     const asset = new Token(chainId, farm.assetAddress[chainId], 18)
@@ -433,18 +433,19 @@ export const Row = ({ farm, lpToken }) => {
                                     token1={collateral} /> */}
 
                                 {/* LEND ASSET */}
-                                    <SubmitButton
+                                <NavLink
+                                    href={`/lend/${farm.lpAddress}`}
+                                 >
+                                     <SubmitButton
                                         height="2rem"
                                         primaryColor="#B485FF"
                                         color="black"
                                         margin=".5rem 0 .5rem 0"
                                     >
-                                        <NavLink
-                                            href={`/lend/${farm.lpAddress}`}
-                                        >
-                                            <a>LEND {assetSymbol}</a>
-                                        </NavLink>
+                                       
+                                            LEND {assetSymbol}
                                     </SubmitButton>
+                                </NavLink>
                                     {/* <SubmitButton
                                                 height="2rem"
                                                 primaryColor="#B485FF"
@@ -594,18 +595,19 @@ export const Row = ({ farm, lpToken }) => {
                                     onClick={() => handleShowBorrow()}>
                                     BORROW {assetSymbol}
                                 </SubmitButton> */}
+                                 <NavLink
+                                    href={`/borrow/${farm.lpAddress}`}
+                                 >
                                      <SubmitButton
                                         height="2rem"
                                         primaryColor="#B485FF"
                                         color="black"
                                         margin=".5rem 0 .5rem 0"
                                     >
-                                        <NavLink
-                                            href={`/borrow/${farm.lpAddress}`}
-                                        >
-                                            <a>BORROW {assetSymbol}</a>
-                                        </NavLink>
+                                       
+                                            BORROW {assetSymbol}
                                     </SubmitButton>
+                                </NavLink>
                             </Tab.Panel>
                         </Tab.Group>
                     </div>
