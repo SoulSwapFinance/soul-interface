@@ -48,24 +48,6 @@ export function useWarmupValue() {
   return warmupValue ? warmupValue : 0
 }
 
-export function useRedeemClaimAmount(token) {
-  const { account } = useActiveWeb3React()
-
-  const contract = useSorMasterContract()
-
-  const args = useMemo(() => {
-    if (!account) {
-      return
-    }
-    return [String(account)]
-  }, [account])
-
-  const info = useSingleCallResult(args ? contract : null, 'daiClaimAmount', args)?.result
-  const amount = info?.[0]
-
-  return amount ? CurrencyAmount.fromRawAmount(token, amount) : CurrencyAmount.fromRawAmount(token, JSBI.BigInt('0'))
-}
-
 export function useStakeContract() {
   const { account } = useActiveWeb3React()
 
@@ -91,7 +73,7 @@ export function useStakeContract() {
       try {
         let tx
 
-        tx = await contract?.unstake(amount, 1)
+        tx = await contract?.unstake(amount, 0)
 
         return tx
       } catch (e) {
