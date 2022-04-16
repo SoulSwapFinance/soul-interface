@@ -182,7 +182,7 @@ const useMenu: UseBar = () => {
           {
             key: 'soul-telegram',
             title: i18n._(t`Telegram`),
-            link: 'https:/t.me/SoulSwapFinance',
+            link: 'https://t.me/SoulSwapDeFi',
           },
           {
             key: 'soul-follow',
@@ -243,7 +243,7 @@ const useMenu: UseBar = () => {
           {
             key: 'luxor-telegram',
             title: i18n._(t`Telegram`),
-            link: 'https:/t.me/SoulSwapFinance',
+            link: 'https://t.me/SoulSwapDeFi',
           },
           {
             key: 'luxor-follow',
