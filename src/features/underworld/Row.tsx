@@ -56,6 +56,7 @@ export const Row = ({ farm, lpToken }) => {
     const { underworldPairInfo } = useUnderworldPairInfo(farm.lpAddress)
     const lpDecimals = Number(underworldPairInfo.decimals)
     const assetAddress = underworldPairInfo.assetAddress
+    const assetSymbol = underworldPairInfo.assetTicker
     const collateralAddress = Number(underworldPairInfo.collateralAddress)
     const assetDecimals = Number(underworldPairInfo.assetDecimals)
     const assetPrice = Number(underworldPairInfo.assetPrice)
@@ -82,8 +83,7 @@ export const Row = ({ farm, lpToken }) => {
     const walletValue = Number(assetBalance) * assetPrice
 
     const hasBalance = Number(assetBalance) > 0
-    const assetSymbol = tokenInfo.symbol == 'WFTM' ? 'FTM' : tokenInfo.symbol
-    const isFTM = assetSymbol == 'FTM'
+    // const isFTM = assetSymbol == 'FTM' ? true : false
 
     // ONLY USED FOR LOGO //
     const asset = new Token(chainId, farm.assetAddress[chainId], 18)
@@ -384,9 +384,10 @@ export const Row = ({ farm, lpToken }) => {
                                             </Typography>
                                             <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                                 {
-                                                    isFTM
-                                                        ? formatNumber(nativeBalance, false, true) + ' FTM'
-                                                        : formatNumber(assetBalance, false, true) + ' ' + assetSymbol
+                                                    // isFTM
+                                                    //     ? formatNumber(nativeBalance, false, true) + ' FTM'
+                                                        // : 
+                                                        formatNumber(assetBalance, false, true) + ' ' + assetSymbol
                                                 }
                                             </Typography>
                                         </div>
