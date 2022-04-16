@@ -260,12 +260,15 @@ export const Row = ({ farm, lpToken }) => {
                             {/* <HideOnMobile> */}
                                 <LendItemBox>
                                     <LendItem>
-                                       { formatNumber(suppliedAmount, false, true) }
+                                       { suppliedAmount.toFixed(6).toString() == '0.000000' ? '0'
+                                            : formatNumber(suppliedAmount, false, true)
+                                        } { ' ' }
+                                            { assetSymbol }
                                     </LendItem>
                                 </LendItemBox>
                                 <LendItemBox>
                                     <LendItem>
-                                       { formatNumber(borrowedAmount, false, true) }
+                                       { formatNumber(borrowedAmount, false, true) } { assetSymbol }
                                     </LendItem>
                                 </LendItemBox>
                             {/* </HideOnMobile> */}
