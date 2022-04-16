@@ -90,8 +90,8 @@ export default function Pair() {
                   <div className="flex items-center">
                     <div className="mr-1 text-sm text-secondary">{i18n._(t`Collateral`)}:</div>
                     <div className="mr-2 text-sm text-high-emphesis">{pair.collateral.tokenInfo.symbol}</div>
-                    <div className="mr-1 text-sm text-secondary">{i18n._(t`Oracle`)}:</div>
-                    <div className="text-sm text-high-emphesis">{pair.oracle.name}</div>
+                    {/* <div className="mr-1 text-sm text-secondary">{i18n._(t`Oracle`)}:</div> */}
+                    {/* <div className="text-sm text-high-emphesis">{pair.oracle.name}</div> */}
                   </div>
                 </div>
               </div>

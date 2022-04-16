@@ -251,12 +251,12 @@ const useMenu: UseMenu = () => {
           {
             key: 'lend',
             title: i18n._(t`Lend`),
-            link: '/lend',
+            link: '/underworld',
           },
           {
             key: 'borrow',
             title: i18n._(t`Borrow`),
-            link: '/borrow',
+            link: '/underworld',
           },
           {
             key: 'underworld-farms',

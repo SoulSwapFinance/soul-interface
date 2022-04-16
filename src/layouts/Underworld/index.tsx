@@ -40,7 +40,7 @@ const Layout: FC<LayoutProps> = ({ left, children, right }) => {
           <div className="flex items-end col-span-12 xl:col-span-9">
             <nav className="flex items-center justify-between w-full">
               <div className="flex">
-              <Button color="blue" variant="outlined" size="small">
+              {/* <Button color="blue" variant="outlined" size="small">
                 <NavLink href="/lend">
                   <a
                     className={
@@ -67,7 +67,7 @@ const Layout: FC<LayoutProps> = ({ left, children, right }) => {
                     <div className="text-base whitespace-nowrap">Borrow</div>
                   </a>
                 </NavLink>
-              </Button>
+              </Button> */}
                 {/* <NavLink href="/create">
                   <a
                     className={
