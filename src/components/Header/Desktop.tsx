@@ -43,9 +43,9 @@ const Desktop: FC = () => {
 
   return (
     <>      
-      <header className="w-full flex items-center text-white justify-center border border-dark-1000 hover:border-dark-600 min-h-[64px] h-[64px] px-4">
+      <header className="w-full flex items-center text-white justify-center border border-dark-1000 hover:border-dark-700 min-h-[64px] h-[64px] px-4">
       <div className="flex justify-between flex-grow">
-      <div className="p-1 bg-dark-900 rounded-full hover:bg-white/10">
+      <div className="p-1 bg-dark-900 rounded-full hover:bg-dark-800">
         {/* <div className="flex p-2 justify-between"> */}
             <MenuAlt1Icon width={24} className="text-white cursor-pointer" onClick={() => setOpen(true)} />
             </div>
@@ -94,7 +94,7 @@ const Desktop: FC = () => {
                   unmount={false}
                 >
                   <div className="w-screen max-w-sm">
-                    <div className="flex flex-col h-full py-2 overflow-x-hidden overflow-y-scroll shadow-xl bg-dark-600">
+                    <div className="flex flex-col h-full py-1 overflow-x-hidden overflow-y-scroll shadow-xl bg-dark-600">
                       <nav className="flex-1 py-12 bg-dark-1000 pl-6" aria-label="Sidebar">
                         {bar.map((node) => {
                           return <SidebarItem node={node} key={node.key} />
@@ -107,18 +107,18 @@ const Desktop: FC = () => {
             </div>
           </Dialog>
         </Transition.Root>
-        <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-4 xl:w-auto bg-dark-1000 hover-bg-dark-900 xl:relative xl:p-0 xl:bg-transparent">
+        <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full xl:w-auto bg-dark-1000 hover:bg-dark-900 xl:relative xl:p-0 xl:bg-transparent">
           <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
-            {library && library.provider.isMetaMask && (
+            {/* {library && library.provider.isMetaMask && ( */}
               <div className="sm:inline-block">
                 <LuxorStats />
               </div>
-            )}
-            {library && library.provider.isMetaMask && (
+            {/* )} */}
+            {/* {library && library.provider.isMetaMask && ( */}
               <div className="sm:inline-block">
                 <TokenStats />
               </div>
-            )}
+            {/* )} */}
             <div className="w-auto flex items-center rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto">
               {account && chainId && userEthBalance && (
                 <>

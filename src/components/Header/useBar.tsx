@@ -175,8 +175,13 @@ const useMenu: UseBar = () => {
             link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
           },
           {
+            key: 'soul-discord',
+            title: i18n._(t`Discord`),
+            link: 'https://discord.com/invite/DQjChB6Wa6',
+          },
+          {
             key: 'soul-follow',
-            title: i18n._(t`Follow`),
+            title: i18n._(t`Twitter`),
             link: 'https://twitter.com/SoulSwapFinance',
           },
         ],

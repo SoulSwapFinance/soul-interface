@@ -36,6 +36,9 @@ export default function Pair() {
   const userBorrowBalance = Number(pair?.currentUserBorrowAmount.string / 1e18) // √
   const collateralPrice = usePriceApi(pair?.collateral.address)
   const borrowPrice = usePriceApi(pair?.asset.address)
+  
+  const assetSymbol = pair?.asset.tokenInfo.symbol
+  
   const userCollateralValue = userCollateralBalance * collateralPrice
   const userBorrowValue = userBorrowBalance * borrowPrice
   const pairUtilization = userBorrowValue * 10**(pair?.collateral.tokenInfo.decimals) / Number(userCollateralValue) * 100
@@ -81,7 +84,9 @@ export default function Pair() {
               </div>
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="text-3xl text-high-emphesis">{i18n._(t`Borrow ${pair.asset.tokenInfo.symbol}`)}</div>
+                  <div className="text-3xl text-high-emphesis">
+                        {`Borrow`} {pair && assetSymbol} 
+                  </div>
                   <div className="flex items-center">
                     <div className="mr-1 text-sm text-secondary">{i18n._(t`Collateral`)}:</div>
                     <div className="mr-2 text-sm text-high-emphesis">{pair.collateral.tokenInfo.symbol}</div>
@@ -162,11 +167,12 @@ const PairLayout = ({ children }) => {
   const { i18n } = useLingui()
   const router = useRouter()
   const pair = useUnderworldPair(router.query.pair as string)
-  const asset = useToken(pair?.asset.address)
-  const collateral = useToken(pair?.collateral.address)
+  const asset = useToken(pair?.asset.address) 
+  const collateral = useToken(pair?.collateral.address) 
   const [pairState, liquidityPair] = useV2Pair(asset, collateral)
   const assetPrice = usePriceApi(asset?.address)
   const collateralPrice = usePriceApi(collateral?.address)
+  
   // const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
 
   return pair ? (
