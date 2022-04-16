@@ -177,12 +177,12 @@ const useMenu: UseMenu = () => {
           {
             key: 'soul-telegram',
             title: i18n._(t`Telegram`),
-            link: 'https:/t.me/SoulSwapFinance',
+            link: 'https://t.me/SoulSwapDeFi',
           },
           {
             key: 'soul-follow',
             title: i18n._(t`Twitter`),
-            link: 'https://twitter.com/SoulSwapFinance',
+            link: 'https://twitter.com/SoulSwap',
           },
         ],
       }
@@ -228,7 +228,7 @@ const useMenu: UseMenu = () => {
           {
             key: 'luxor-telegram',
             title: i18n._(t`Telegram`),
-            link: 'https:/t.me/SoulSwapFinance',
+            link: 'https://t.me/SoulSwapDeFi',
           },
           {
             key: 'luxor-follow',
