@@ -7,11 +7,11 @@ import styled from "styled-components";
 // }
 // `
 
-// const HideOnMobile = styled.div`
-// @media screen and (max-width: 600px) {
-//   display: none;
-// }
-// `
+const HideOnMobile = styled.div`
+@media screen and (max-width: 600px) {
+  display: none;
+}
+`
 
 const FarmItemBox = styled.div`
   width: 100px;
@@ -41,7 +41,7 @@ const FarmContentWrapper = styled.div`
 `
 
 const Text = styled.p`
-  padding: ${({ padding }) => (padding ? `${padding}` : "0 0.25rem")};
+  padding: ${({ padding }) => (padding ? `${padding}` : "0 0rem")};
   margin: ${({ margin }) => (margin ? `${margin}` : "0 0")};
   color: ${({ color }) => (color ? `${color}` : `white`)};
   font-size: ${({ fontSize }) => (fontSize ? `${fontSize}` : `1rem`)};
@@ -54,38 +54,42 @@ export function Underworld() {
     <div className="justify-center">
         <FarmContainer>
           {/* <div className="grid grid-cols-5 ml-24 mr-6 sm:ml-0 bg-dark-1000"> */}
-          <div className="grid grid-cols-1 bg-dark-1200 font-bold mb-2 mr-4 ml-2 border border-dark-1000 hover:border-dark-600">
+          <div className="grid grid-cols-1 bg-dark-1200 font-bold mb-2 mr-2 ml-2 border border-dark-1000">
             <FarmContentWrapper>
               
               <FarmItemBox>
-                  <Text fontSize="1" color="#FFFFFF">
+                  <Text padding="0" fontSize=".9rem" color="#FFFFFF">
                   MARKET
                   </Text>
               </FarmItemBox>
-              
-              <FarmItemBox>
-                  <Text fontSize="1" color="#FFFFFF">
-                  ASSET
-                  </Text>
-              </FarmItemBox>
-
-              {/* <FarmItemBox>
-                  <Text fontSize="1" color="#FFFFFF">
-                  COLLATERAL
-                  </Text>
-              </FarmItemBox> */}
 
               <FarmItemBox>
-                <Text padding="0" fontSize="1" color="#FFFFFF">
+                <Text padding="0" fontSize=".9rem" color="#FFFFFF">
                 SUPPLIED
                 </Text>
               </FarmItemBox>
 
               <FarmItemBox>
-                <Text padding="0" fontSize="1" color="#FFFFFF">
+                <Text padding="0" fontSize=".9rem" color="#FFFFFF">
                 BORROWED
                 </Text>
               </FarmItemBox>
+              
+              <HideOnMobile>
+              <FarmItemBox>
+                <Text padding="0" fontSize=".9rem" color="#FFFFFF">
+                COLLATERAL
+                </Text>
+              </FarmItemBox>
+              </HideOnMobile>
+
+              <HideOnMobile>
+              <FarmItemBox>
+                <Text padding="0" fontSize=".9rem" color="#FFFFFF">
+                UTILIZED
+                </Text>
+              </FarmItemBox>
+              </HideOnMobile>
 
               {/* <FarmItemBox>
                 <Text padding="0" fontSize="1" color="#FFFFFF">

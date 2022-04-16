@@ -22,6 +22,7 @@ import FarmInputPanel from './Input'
 import { CurrencyLogo } from 'components/CurrencyLogo'
 import QuestionHelper from 'components/QuestionHelper'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
+import { cp } from 'fs'
 // import Lend from 'pages/lend'
 
 // const HideOnSmall = styled.div`
@@ -30,11 +31,11 @@ import DoubleCurrencyLogo from 'components/DoubleLogo'
 // }
 // `
 
-// const HideOnMobile = styled.div`
-// @media screen and (max-width: 600px) {
-//   display: none;
-// }
-// `
+const HideOnMobile = styled.div`
+@media screen and (max-width: 600px) {
+  display: none;
+}
+`
 
 export const Row = ({ farm, lpToken }) => {
     const { account, chainId, library } = useActiveWeb3React()
@@ -56,35 +57,31 @@ export const Row = ({ farm, lpToken }) => {
     const { underworldPairInfo } = useUnderworldPairInfo(farm.lpAddress)
     const lpDecimals = Number(underworldPairInfo.decimals)
     const assetAddress = underworldPairInfo.assetAddress
+    const assetSymbol = underworldPairInfo.assetTicker
+    const collateralSymbol = underworldPairInfo.collateralTicker
     const collateralAddress = Number(underworldPairInfo.collateralAddress)
     const assetDecimals = Number(underworldPairInfo.assetDecimals)
+    const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
     const assetPrice = Number(underworldPairInfo.assetPrice)
     const collateralPrice = Number(underworldPairInfo.collateralPrice)
     // const interestPerSecond = Number(underworldPairInfo.interestPerSecond) / 1e16
     // const secondsPerYear = 86_400 * 365
     // const apr = interestPerSecond * secondsPerYear
-    const { pairUserInfo } = useUserPairInfo(account, farm.lpAddress)
     const { underworldUserInfo } = useUnderworldUserInfo(farm.lpAddress)
+    const assetBalance = Number(underworldUserInfo.userAssetBalance) // 10**assetDecimals
     const borrowedAmount = Number(underworldUserInfo.userBorrowPart) / 10**assetDecimals
-    const suppliedAmount = Number(pairUserInfo.userBalance) / 10**lpDecimals
+    const suppliedAmount = Number(underworldUserInfo.userBalance) // 10**lpDecimals
+    const collateralAmount = Number(underworldUserInfo.userCollateralShare) / 10**collateralDecimals
+    const walletValue = assetBalance * assetPrice
     const borrowedValue = borrowedAmount * assetPrice
+    const collateralValue = collateralAmount * collateralPrice
     const suppliedValue = suppliedAmount * assetPrice
+    
+    const LTV = (1 - (collateralValue - borrowedValue) / collateralValue) * 100
+    const leeway = (75 - LTV) / 100
+
     // const parsedBalance = tryParseAmount(assetBalance, farm.lpToken)
     // const userBalance = useCurrencyBalance(account, lpToken)
-    
-    const { tokenInfo } = useTokenInfo(assetAddress)
-
-    const { userTokenInfo } = useUserTokenInfo(assetAddress)
-    const { userInfo } = useUserInfo()
-    // const assetDivisor = 10**Number(userTokenInfo.decimals)
-    const assetBalance = Number(userTokenInfo.balance) / 10**assetDecimals
-    const nativeBalance = Number(userInfo.nativeBalance)
-    const walletValue = Number(assetBalance) * assetPrice
-
-    const hasBalance = Number(assetBalance) > 0
-    const assetSymbol = tokenInfo.symbol == 'WFTM' ? 'FTM' : tokenInfo.symbol
-    const isFTM = assetSymbol == 'FTM'
-
     // ONLY USED FOR LOGO //
     const asset = new Token(chainId, farm.assetAddress[chainId], 18)
     const collateral = new Token(chainId, farm.collateralAddress[chainId], 18)
@@ -212,8 +209,8 @@ export const Row = ({ farm, lpToken }) => {
         <div className="flex justify-center w-xl">
 
                 <LendContainer>
-                    <div className={classNames("bg-dark-1200 p-3 border hover:border-blue", !hasBalance && "border-dark-1000",
-                            hasBalance && "border-dark-600"
+                    <div className={classNames("bg-dark-1200 p-3 border hover:border-blue", assetBalance == 0 && "border-dark-1000",
+                            assetBalance > 0 && "border-dark-600"
                     )}
                         onClick={() => handleShowOptions()}
                     >
@@ -224,11 +221,11 @@ export const Row = ({ farm, lpToken }) => {
                                 </LendItemBox>
                             </div>
                           
-                            <div className="items-center">
+                            {/* <div className="items-center">
                                 <LendItemBox>
                                <CurrencyLogo currency={asset} size={40} />
                                 </LendItemBox>
-                            </div>
+                            </div> */}
 
                             {/* <div className="items-center">
                                 <LendItemBox>
@@ -256,8 +253,25 @@ export const Row = ({ farm, lpToken }) => {
             </LendItem>
         </LendItemBox>
     </HideOnMobile> */}
-                            {/* SUPPLIED VALUE */}
-                            {/* <HideOnMobile> */}
+                            {/* 
+                            // ASSET TICKER
+                                <LendItemBox>
+                                    <LendItem>
+                                            { assetSymbol }
+                                    </LendItem>
+                                </LendItemBox>
+
+                            // COLLATERAL TICKER
+                                <HideOnMobile>
+                                <LendItemBox>
+                                    <LendItem>
+                                            { collateralSymbol }
+                                    </LendItem>
+                                </LendItemBox>
+                                </HideOnMobile> 
+                            */}
+
+                            {/* SUPPLIED AMOUNT */}
                                 <LendItemBox>
                                     <LendItem>
                                        { suppliedAmount.toFixed(6).toString() == '0.000000' ? '0'
@@ -266,12 +280,30 @@ export const Row = ({ farm, lpToken }) => {
                                             { assetSymbol }
                                     </LendItem>
                                 </LendItemBox>
+
+                            {/* BORROWED AMOUNT */}
                                 <LendItemBox>
                                     <LendItem>
                                        { formatNumber(borrowedAmount, false, true) } { assetSymbol }
                                     </LendItem>
                                 </LendItemBox>
-                            {/* </HideOnMobile> */}
+
+                            {/* COLLATERAL AMOUNT */}
+                            <HideOnMobile>
+                                <LendItemBox>
+                                    <LendItem>
+                                       { formatNumber(collateralAmount, false, true) } { collateralSymbol }
+                                    </LendItem>
+                                </LendItemBox>
+                            </HideOnMobile>
+
+                            {/* UTILIZATION */}
+                            <HideOnMobile>
+                                <LendItemBox>
+                                    <LendItem>
+                                    { formatNumber(LTV, false, true) }%                                    </LendItem>
+                                </LendItemBox>
+                            </HideOnMobile>
 
                             {/* STAKED OWNERSHIP */}
                             {/* <HideOnSmall>
@@ -377,22 +409,20 @@ export const Row = ({ farm, lpToken }) => {
                                     "flex flex-col bg-dark-1000 mb-3 p-3 border border-2 border-dark-1000",
                                     "hover:border-blue", "w-full space-y-1")}>
 
-                                    {/* {Number(assetBalance) > 0 && ( */}
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
                                                 Wallet Balance
                                             </Typography>
                                             <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                                 {
-                                                    isFTM
-                                                        ? formatNumber(nativeBalance, false, true) + ' FTM'
-                                                        : formatNumber(assetBalance, false, true) + ' ' + assetSymbol
+                                                    // isFTM
+                                                    //     ? formatNumber(nativeBalance, false, true) + ' FTM'
+                                                        // : 
+                                                        formatNumber(assetBalance, false, true) + ' ' + assetSymbol
                                                 }
                                             </Typography>
                                         </div>
-                                    {/* )} */}
 
-                                    {/* {Number(walletValue) > 0 && ( */}
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
                                                 Balance (USD)
@@ -401,7 +431,26 @@ export const Row = ({ farm, lpToken }) => {
                                                 {formatNumber(walletValue, true, true)}
                                             </Typography>
                                         </div>
-                                    {/* )} */}
+                                        
+                                        <div className="h-px my-6 bg-dark-1000" />
+
+                                        <div className="flex justify-between">
+                                            <Typography className="text-white" fontFamily={'medium'}>
+                                                Supplied Assets
+                                            </Typography>
+                                            <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                                                {formatNumber(suppliedAmount, false, true)} {assetSymbol}
+                                            </Typography>
+                                        </div>
+                                        
+                                        <div className="flex justify-between">
+                                            <Typography className="text-white" fontFamily={'medium'}>
+                                                Supplied (USD)
+                                            </Typography>
+                                            <Typography className="text-dark-600" weight={600} fontFamily={'semi-bold'}>
+                                                {formatNumber(suppliedValue, true, true)}
+                                            </Typography>
+                                        </div>
 
                                     {/* {Number(assetBalance) > 0 && (
                                         <div className="h-px my-6 bg-dark-1000" />
@@ -492,18 +541,15 @@ export const Row = ({ farm, lpToken }) => {
                                 <div className={classNames(
                                     "flex flex-col mb-3 bg-dark-1000 p-3 border border-2 border-dark-1000",
                                      "hover:border-blue", "hover:border-dark-600", "w-full space-y-1")}>
-                                    {/* {Number(borrowedAmount) > 0 && ( */}
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
-                                                Borrowed Amount
+                                                Borrowed Assets
                                             </Typography>
                                             <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                                 {formatNumber(borrowedAmount, false, true)} { assetSymbol }
                                             </Typography>
                                         </div>
-                                    {/* )} */}
 
-                                    {/* {Number(borrowedValue) > 0 && ( */}
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
                                                 Borrowed (USD)
@@ -512,31 +558,68 @@ export const Row = ({ farm, lpToken }) => {
                                                 {formatNumber(borrowedValue, true, true)}
                                             </Typography>
                                         </div>
-                                    {/* )} */}
-                                    {/* {Number(suppliedAmount) > 0 && (
-                                        <div className="h-px my-6 bg-dark-1000" />
-                                    )} */}
 
-                                    {/* <div className="flex justify-between">
-                                        <Typography className="text-white" fontFamily={'medium'}>
-                                            Maximum Fee
-                                        </Typography>
-                                        <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                            {formatNumber(Number(stakedBalance) - withdrawable, false, true)} {pairType == "farm" ? 'LP' : assetSymbol}
-                                        </Typography>
-                                    </div>
+                                    <div className="h-px my-6 bg-dark-1000" />
 
                                     <div className="flex justify-between">
-                                        <Typography className="text-white" fontFamily={'medium'}>
-                                            Fee (USD)
-                                        </Typography>
-                                        <Typography className="text-dark-600" weight={600} fontFamily={'semi-bold'}>
-                                            {formatNumber(Number(feeValue), true, true)}
-                                        </Typography>
-                                    </div>
+                                            <Typography className="text-white" fontFamily={'medium'}>
+                                                Collateral Provided
+                                            </Typography>
+                                            <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                                                {formatNumber(collateralAmount, false, true)} { collateralSymbol }
+                                            </Typography>
+                                        </div>
+
+                                        <div className="flex justify-between">
+                                            <Typography className="text-white" fontFamily={'medium'}>
+                                                Collateral (USD)
+                                            </Typography>
+                                            <Typography className="text-dark-600" weight={600} fontFamily={'semi-bold'}>
+                                                {formatNumber(collateralValue, true, true)}
+                                            </Typography>
+                                        </div>
+
+                                        <div className="h-px my-6 bg-dark-1000" />
 
 
-                                    <div className="h-px my-6 bg-dark-1000" /> */}
+                                        
+                                        <div className="flex justify-between">
+                                            <Typography className="text-white" fontFamily={'medium'}>
+                                                Borrow Limit
+                                            </Typography>
+                                            <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                                                {formatNumber(collateralValue * 0.75 / assetPrice, false, true)} { assetSymbol }
+                                            </Typography>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <Typography className="text-white" fontFamily={'medium'}>
+                                                Limit (USD)
+                                            </Typography>
+                                            <Typography className="text-dark-600" weight={600} fontFamily={'semi-bold'}>
+                                                {formatNumber(collateralValue * 0.75, true, true)}
+                                            </Typography>
+                                        </div>
+
+                                        <div className="h-px my-6 bg-dark-1000" />
+
+                                        <div className="flex justify-between">
+                                            <Typography className="text-white" fontFamily={'medium'}>
+                                                Borrow Available
+                                            </Typography>
+                                            <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                                                {formatNumber(100 - LTV, false, true)}%
+                                            </Typography>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <Typography className="text-white" fontFamily={'medium'}>
+                                                Available (USD)                             
+                                            </Typography>
+                                            <Typography className="text-dark-600" weight={600} fontFamily={'semi-bold'}>
+                                                {formatNumber(leeway * collateralValue, true, true)}
+                                            </Typography>
+                                        </div>
+                                        
+
                                     {/* FEE BOX (COLOR-CODED) */}
                                     {/* {Number(withdrawFee) > 0 && (
                                         <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-red border-1 hover:border-dark-600 w-full space-y-1">
