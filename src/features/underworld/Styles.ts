@@ -110,7 +110,7 @@ export const DetailsWrapper = styled.div`
 
 
 export const LendItem = styled.h2`
-  font-size: 1.5rem;
+  font-size: 1rem;
   color: white;
 `
 
