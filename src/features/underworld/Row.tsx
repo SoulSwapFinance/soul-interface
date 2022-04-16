@@ -433,7 +433,7 @@ export const Row = ({ farm, lpToken }) => {
                                     token1={collateral} /> */}
 
                                 {/* LEND ASSET */}
-                                    {/* <SubmitButton
+                                    <SubmitButton
                                         height="2rem"
                                         primaryColor="#B485FF"
                                         color="black"
@@ -444,15 +444,15 @@ export const Row = ({ farm, lpToken }) => {
                                         >
                                             <a>LEND {assetSymbol}</a>
                                         </NavLink>
-                                    </SubmitButton> */}
-                                    <SubmitButton
+                                    </SubmitButton>
+                                    {/* <SubmitButton
                                                 height="2rem"
                                                 primaryColor="#B485FF"
                                                 color="black"
                                                 margin=".5rem 0 .5rem 0"
                                                 onClick={() => handleShowLend()}>
                                                 LEND {assetSymbol}
-                                    </SubmitButton>
+                                    </SubmitButton> */}
 
                                 {/* UN-APPROVED */}
                                 {/* {!approved && (
@@ -586,15 +586,15 @@ export const Row = ({ farm, lpToken }) => {
                                     </SubmitButton>
                                 </Wrap> */}
                                 {/* BORROW ASSET */}
-                                <SubmitButton
+                                {/* <SubmitButton
                                     height="2rem"
                                     primaryColor="#B485FF"
                                     color="black"
                                     margin=".5rem 0 .5rem 0"
                                     onClick={() => handleShowBorrow()}>
                                     BORROW {assetSymbol}
-                                </SubmitButton>
-                                    {/* <SubmitButton
+                                </SubmitButton> */}
+                                     <SubmitButton
                                         height="2rem"
                                         primaryColor="#B485FF"
                                         color="black"
@@ -605,7 +605,7 @@ export const Row = ({ farm, lpToken }) => {
                                         >
                                             <a>BORROW {assetSymbol}</a>
                                         </NavLink>
-                                    </SubmitButton> */}
+                                    </SubmitButton>
                             </Tab.Panel>
                         </Tab.Group>
                     </div>
