@@ -175,6 +175,11 @@ const useMenu: UseMenu = () => {
             link: 'https://discord.com/invite/DQjChB6Wa6',
           },
           {
+            key: 'soul-telegram',
+            title: i18n._(t`Telegram`),
+            link: 'https:/t.me/SoulSwapFinance',
+          },
+          {
             key: 'soul-follow',
             title: i18n._(t`Twitter`),
             link: 'https://twitter.com/SoulSwapFinance',
