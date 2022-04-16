@@ -27,6 +27,21 @@ export const InactivePools = [
     token1Address: tokens.DAI,
     token2Address: tokens.gFUSDT,
   },
+  
+  {
+    // 0
+    pid: 6,
+    token1: 'USDC',
+    token2: 'FUSD',
+    lpSymbol: 'USDC-FUSD',
+    lpAddresses: {
+      4002: '',
+      250: '0xD5F5E2638d636A98eD4aAEBfd2045441316e0c08',
+    },
+    token1Address: tokens.USDC,
+    token2Address: tokens.FUSD,
+  },
+
 ]
 
 export const ActivePools = [
