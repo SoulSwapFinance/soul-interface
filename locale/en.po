@@ -241,9 +241,6 @@ msgstr "Borrow"
 msgid "Borrow assets and leverage up"
 msgstr "Borrow assets and leverage up"
 
-msgid "Borrow {0}"
-msgstr "Borrow {0}"
-
 msgid "Borrow {0}-{1}"
 msgstr "Borrow {0}-{1}"
 
@@ -539,6 +536,9 @@ msgstr "Disable multihops"
 msgid "Disconnect"
 msgstr "Disconnect"
 
+msgid "Discord"
+msgstr "Discord"
+
 msgid "Do not show again"
 msgstr "Do not show again"
 
@@ -668,9 +668,6 @@ msgstr "Find Pool"
 
 msgid "Fixed ratio"
 msgstr "Fixed ratio"
-
-msgid "Follow"
-msgstr "Follow"
 
 msgid "Forfeit"
 msgstr "Forfeit"
@@ -1244,9 +1241,6 @@ msgstr "Rates"
 msgid "Read the Documentation."
 msgstr "Read the Documentation."
 
-msgid "Rebase"
-msgstr "Rebase"
-
 msgid "Receive"
 msgstr "Receive"
 
@@ -1547,6 +1541,9 @@ msgstr "TVL"
 msgid "Target Percentage"
 msgstr "Target Percentage"
 
+msgid "Telegram"
+msgstr "Telegram"
+
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 
@@ -1667,6 +1664,9 @@ msgstr "Tutorial"
 
 msgid "Tutorials"
 msgstr "Tutorials"
+
+msgid "Twitter"
+msgstr "Twitter"
 
 msgid "UNWRAP"
 msgstr "UNWRAP"
