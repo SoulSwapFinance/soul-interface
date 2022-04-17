@@ -229,7 +229,7 @@ export default function Stake() {
             </Tab.List>
             
             <Tab.Panel className={'outline-none'}>
-              <StableInputPanel
+              {/* <StableInputPanel
                 value={stakeValue}
                 showMaxButton={true}
                 onUserInput={(value) => setStakeValue(value)}
@@ -240,7 +240,7 @@ export default function Stake() {
                 disableCurrencySelect={true}
                 locked={!account}
                 id="stablecoin-currency-input"
-              />
+              /> */}
               <div className="h-px my-6 bg-dark-1000"></div>
               <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-yellow w-full space-y-1">
                 <div className="text-white">
