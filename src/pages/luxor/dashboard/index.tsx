@@ -182,7 +182,7 @@ export default function Dashboard() {
   const DaiLendFtmValue = DaiLendFtmBalance * ftmPrice
 
   const treasuryInvestmentBalance = FtmDaiValue + FtmWlumValue + FtmLendDaiValue + DaiLendFtmValue
-  console.log('treasuryInvestmentBalance:%s', treasuryInvestmentBalance)
+  // console.log('treasuryInvestmentBalance:%s', treasuryInvestmentBalance)
     
   // calculate Treasury Balances
   const treasuryBalance = treasuryLiquidityBalance + treasuryReserveBalance + treasuryInvestmentBalance
