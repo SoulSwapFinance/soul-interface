@@ -7,15 +7,15 @@ import { LuxList } from 'features/luxor/LuxList'
 import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import { useLuxorPrice } from 'hooks/getPrices'
-
+import { LuxorBanner } from 'components/Banner'
 
 const Luxor = () => {
   const luxorPrice = useLuxorPrice()
 
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">
+      <LuxorBanner />
       <Container id="luxor-page">
-        <br/>
         <Head>
           <title>Luxor Money | Soul</title>
           <meta key="description" name="description" content="Mint SOUL" />

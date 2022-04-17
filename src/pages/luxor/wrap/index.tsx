@@ -26,6 +26,7 @@ import { useActiveWeb3React } from 'services/web3/hooks'
 import NavLink from 'components/NavLink'
 import { useLuxorPrice } from 'hooks/getPrices'
 // import useStablecoin from 'hooks/useStablecoin'
+import { LuxorBanner } from 'components/Banner'
 
 export default function Stablecoin() {
   const addTransaction = useTransactionAdder()
@@ -111,6 +112,7 @@ export default function Stablecoin() {
 
   return (
     <Container id="stablecoin-page" className="py-4 md:py-8 lg:py-12">
+      <LuxorBanner />
       <LuxorGlowShadow>
         <Head>
           <title>Wrap | Luxor</title>
