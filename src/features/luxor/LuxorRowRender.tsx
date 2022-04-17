@@ -67,7 +67,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     // const [bondPrice, setBondPrice] = useState(0)
     // const [available, setAvailabile] = useState(false)
     // const { deposit, withdraw } = useBondContract()
-    const luxPrice = useLuxorPrice()
+    // const luxPrice = useLuxorPrice()
     const assetToken = new Token(250, assetAddress, 18, assetName)
     const wftmPrice = useFantomPrice()
     const luxDaiPrice = usePairPrice(LUX_DAI_ADDRESS) // √
@@ -303,6 +303,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
         <>
             <Wrap padding="0" display="flex" justifyContent="center">
                 <StakeContainer>
+                    { (Number(earnedAmount) > 0 || available) &&
                     <Row onClick={() => handleShow()}>
                         <StakeContentWrapper>
                             <TokenPairBox>
@@ -401,6 +402,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
 
                         </StakeContentWrapper>
                     </Row>
+                }
                 </StakeContainer>
             </Wrap>
 
