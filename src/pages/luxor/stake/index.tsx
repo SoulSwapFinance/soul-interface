@@ -527,7 +527,7 @@ export default function Stake() {
           </Tab.Group>
         </div>
             <div className="mt-2 mb-2">
-              <Button variant="filled" color="gold" size="lg">
+              <Button variant="filled" color="yellow" size="lg">
                 <NavLink href={'/luxor/calculator'}>
                   <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                     <span>View Calculator &#187;</span>

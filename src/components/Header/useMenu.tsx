@@ -5,8 +5,9 @@ import { useLingui } from '@lingui/react'
 import { SOUL_ADDRESS } from 'sdk'
 // import { PoolIcon, RocketIcon, WalletIcon } from 'components/Icon'
 import { Feature } from 'enums'
-import { featureEnabled } from 'functions'
+import { classNames, featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
+import { useRouter } from 'next/router'
 
 export interface MenuItemLeaf {
   key: string
@@ -29,6 +30,8 @@ type UseMenu = () => Menu
 const useMenu: UseMenu = () => {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
+  const router = useRouter()
+  const isLuxor = router.asPath.startsWith('/luxor')
 
   return useMemo(() => {
     if (!chainId) return []
@@ -38,7 +41,7 @@ const useMenu: UseMenu = () => {
       key: 'swap',
       title: i18n._(t`Exchange`),
       link: '/swap',
-      icon: <SwitchVerticalIcon width={20} className="text-dark-600" />,
+      icon: <SwitchVerticalIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
     }
   
  // If AMM is enabled, replace swap button with a submenu under trade
@@ -66,7 +69,7 @@ const useMenu: UseMenu = () => {
       tradeMenu = {
         key: 'trade',
         title: i18n._(t`Exchange`),
-        icon: <SwitchVerticalIcon width={20} className="text-dark-600" />,
+        icon: <SwitchVerticalIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
           {
             key: 'swap',
@@ -142,7 +145,7 @@ const useMenu: UseMenu = () => {
       const farmItems = {
         key: 'SoulSwap',
         title: i18n._(t`SoulSwap`),
-        icon: <CurrencyDollarIcon width={20} className="text-dark-600 filter" />,
+        icon: <CurrencyDollarIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
           {
             key: 'farm',
@@ -193,7 +196,7 @@ const useMenu: UseMenu = () => {
       const learnItems = {
         key: 'Luxor',
         title: i18n._(t`Luxor`),
-        icon: <SunIcon width={20} className="rotate-90 text-dark-600 filter" />,
+        icon: <SunIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
           {
             key: 'luxor-dashboard',
@@ -246,7 +249,7 @@ const useMenu: UseMenu = () => {
       mainItems.push({
         key: 'lending',
         title: i18n._(t`Lending`),
-        icon: <SwitchVerticalIcon width={20} className="rotate-90 text-dark-600 filter" />,
+        icon: <SwitchVerticalIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
           {
             key: 'lend',
@@ -301,7 +304,7 @@ const useMenu: UseMenu = () => {
     let analyticsMenu: MenuItem = {
       key: 'analytics',
       title: i18n._(t`Analytics`),
-      icon: <TrendingUpIcon width={20} className="text-dark-600" />,
+      icon: <TrendingUpIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
       items: [
         {
           key: 'wallet',
@@ -349,7 +352,7 @@ const useMenu: UseMenu = () => {
   //   key: 'explore',
   //   title: i18n._(t`Explore`),
   //   link: '/explore',
-  //   icon: <GlobeIcon width={20} className="text-dark-600" />,
+  //   icon: <GlobeIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
   // }
   //   mainItems.push(exploreMenu)
 

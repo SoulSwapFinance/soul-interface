@@ -5,8 +5,9 @@ import { useLingui } from '@lingui/react'
 import { SOUL_ADDRESS } from 'sdk'
 import { PoolIcon, RocketIcon, WalletIcon } from 'components/Icon'
 import { Feature } from 'enums'
-import { featureEnabled } from 'functions'
+import { classNames, featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
+import { useRouter } from 'next/router'
 
 export interface BarItemLeaf {
   key: string
@@ -29,6 +30,8 @@ type UseBar = () => Bar
 const useMenu: UseBar = () => {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
+  const router = useRouter()
+  const isLuxor = router.asPath.startsWith('/luxor')
 
   return useMemo(() => {
     if (!chainId) return []
@@ -38,7 +41,7 @@ const useMenu: UseBar = () => {
       key: 'swap',
       title: i18n._(t`Exchange`),
       link: '/swap',
-      icon: <SwitchVerticalIcon width={20} className="text-dark-600" />,
+      icon: <SwitchVerticalIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
     }
   
  // If AMM is enabled, replace swap button with a submenu under trade
@@ -66,7 +69,7 @@ const useMenu: UseBar = () => {
     //   tradeMenu = {
     //     key: 'trade',
     //     title: i18n._(t`Exchange`),
-    //     icon: <SwitchVerticalIcon width={20} className="text-dark-600" />,
+    //     icon: <SwitchVerticalIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
     //     items: [
     //       {
     //         key: 'swap',
@@ -135,14 +138,14 @@ const useMenu: UseBar = () => {
         key: 'pool',
         title: i18n._(t`Liquidity`),
         items: poolMenu,
-        icon: <PoolIcon width={20} className="text-dark-600" />,
+        icon: <PoolIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
       })
 
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const farmItems = {
         key: 'SoulSwap',
         title: i18n._(t`SoulSwap`),
-        icon: <CurrencyDollarIcon width={20} className="text-dark-600" />,
+        icon: <CurrencyDollarIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
           {
             key: 'farm',
@@ -198,7 +201,7 @@ const useMenu: UseBar = () => {
       const learnItems = {
         key: 'Luxor',
         title: i18n._(t`Luxor`),
-        icon: <SunIcon width={20} className="rotate-90 text-dark-600" />,
+        icon: <SunIcon width={20} className={classNames("rotate-90", isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
           {
             key: 'luxor-dashboard',
@@ -260,7 +263,7 @@ const useMenu: UseBar = () => {
        mainItems.push({
          key: 'lending',
          title: i18n._(t`Lending`),
-         icon: <SwitchVerticalIcon width={20} className="rotate-90 text-dark-600" />,
+         icon: <SwitchVerticalIcon width={20} className={classNames("rotate-90", isLuxor ? "text-yellow" : "text-dark-600")} />,
          items: [
            {
              key: 'lend',
@@ -297,7 +300,7 @@ const useMenu: UseBar = () => {
       mainItems.push({
         key: 'analytics',
         title: i18n._(t`Analytics`),
-        icon: <TrendingUpIcon width={20} className="text-dark-600" />,
+        icon: <TrendingUpIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
           {
             key: 'wallet',
@@ -328,7 +331,7 @@ const useMenu: UseBar = () => {
       key: 'explore',
       title: i18n._(t`Explore`),
       link: '/explore',
-      icon: <GlobeIcon width={20} className="text-dark-600" />,
+      icon: <GlobeIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
     }
       mainItems.push(exploreMenu)
 
@@ -358,7 +361,7 @@ const useMenu: UseBar = () => {
       key: 'balances',
       title: i18n._(t`Portfolio`),
       link: '/balances',
-      icon: <WalletIcon width={20} className="text-dark-600" />,
+      icon: <WalletIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
     })
     
 
@@ -366,7 +369,7 @@ const useMenu: UseBar = () => {
     //   mainItems.push({
     //     key: 'academy',
     //     title: i18n._(t`Academy`),
-    //     icon: <RocketIcon width={20} className="text-dark-600" />,
+    //     icon: <RocketIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
     //     items: [
     //       {
     //         key: 'marketplace',
