@@ -15,6 +15,7 @@ import { Button } from "components/Button";
 import NavLink from "components/NavLink";
 import { useTokenContract } from "hooks/useTokenContract";
 import { useLumensContract } from "hooks/useContract";
+import { LuxorBanner } from 'components/Banner'
 
 export default function Calculator() {
   const { account, chainId } = useActiveWeb3React()
@@ -159,6 +160,7 @@ export default function Calculator() {
 
     return (
         <div className="w-[95%] max-w-[1200px] mt-2 lg:mt-4 m-auto">
+          <LuxorBanner />
                 <CalculatorCard>
                   <div className="mt-2 mb-2">
                   <Button variant="filled" color="yellow" size="lg">

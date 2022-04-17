@@ -26,6 +26,8 @@ import {
   SOR_ADDRESS,
   SOR_MASTER_ADDRESS
 } from 'constants/addresses'
+import { LuxorBanner } from 'components/Banner'
+
 import { tryParseAmount, formatCurrencyAmount, formatNumberScale, formatPercent, formatNumber } from 'functions'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import { useTransactionAdder } from 'state/transactions/hooks'
@@ -105,6 +107,7 @@ export default function Stablecoin() {
   
   return (
     <Container id="stablecoin-page" className="py-4 md:py-8 lg:py-12">
+      <LuxorBanner />
       <LuxorGlowShadow>
       <Head>
         <title>Stablecoin | Soul</title>

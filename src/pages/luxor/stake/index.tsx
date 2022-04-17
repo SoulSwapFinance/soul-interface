@@ -5,6 +5,7 @@ import Typography from 'components/Typography'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Tab } from '@headlessui/react'
+import { LuxorBanner } from 'components/Banner'
 import LuxorGlowShadow from 'components/LuxorGlowShadow'
 import { Button, ButtonError } from 'components/Button'
 import StableInputPanel from 'components/StableInputPanel'
@@ -163,6 +164,7 @@ export default function Stake() {
         <title>Staking | Soul</title>
         <meta key="description" name="description" />
       </Head>
+      <LuxorBanner />
       <div className="mt-2 mb-2">
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/swap?inputCurrency=&outputCurrency=0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'}>
