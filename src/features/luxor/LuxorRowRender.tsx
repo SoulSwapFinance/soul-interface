@@ -90,6 +90,9 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     const { luxorBondInfo } = useLuxorBondInfo(bondAddress)
     const bondPrice = Number(luxorBondInfo.price) / 1e18
     const discount = luxorBondInfo.discount
+    const status = luxorBondInfo.status
+    const maxDebt = Number(luxorBondInfo.maximumDebt)
+    const available = maxDebt > 0
     // const remainingDebt = luxorBondInfo.remainingDebt
     // const maximumDebt = luxorBondInfo.maximumDebt
     // const availRatio = Number(remainingDebt) <= 0 ? 0 : Number(remainingDebt) / Number(maximumDebt) * 100
@@ -431,7 +434,39 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                 </StakeContainer>
             </Wrap>
 
-            {showing && (
+            { showing && earnedAmount > 0 && !available &&
+                                    <Wrap padding="0" margin="0" display="flex">
+                                        <SubmitButton
+                                            height="2rem"
+                                            primaryColor="#3Eff3E"
+                                            color="black"
+                                            margin=".5rem 0 .5rem 0"
+                                            onClick={() =>
+                                                handleClaim()
+                                            }
+                                        >
+                                            CLAIM LUXOR
+                                            {/* {earnedAmount !== 0 ? `($${(earnedAmount * soulPrice).toFixed(2)})` : ''} */}
+                                        </SubmitButton>
+                                    </Wrap>
+            }
+            { showing && !available &&
+                                    <Wrap padding="0" margin="0" display="flex">
+                                        <SubmitButton
+                                            height="2rem"
+                                            primaryColor="red"
+                                            color="white"
+                                            margin=".5rem 0 .5rem 0"
+                                            // onClick={() =>
+                                            //     handleClaim()
+                                            // }
+                                        >
+                                            RETIRED BOND
+                                        </SubmitButton>
+                                    </Wrap>
+            }
+
+            {showing && available && (
                 <Wrap padding="0" display="flex" justifyContent="center">
                     <DetailsContainer>
                         <DetailsWrapper>
@@ -453,20 +488,6 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                 onChange={setDepositValue}
                                 showMax={false}
                             />
-                             {/* <Wrap padding="0" display="flex" justifyContent="space-between">
-                                <Text padding="0" fontSize="1rem" color="#bbb">
-                                    BALANCE:&nbsp;{Number(unstakedBal) === 0
-                                        ? '0.000'
-                                        : Number(unstakedBal) < 0
-                                        ? '<0'
-                                        : Number(unstakedBal)
-                                            .toFixed(0)
-                                            .toString()
-                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                    &nbsp;{assetName}&nbsp;
-                                    {Number(unstakedBal * soulPrice) !== 0 ? `($${(unstakedBal * soulPrice).toFixed(0)})` : ''}
-                                </Text>
-                            </Wrap> */}
                             <Wrap padding="0" margin="0" display="flex" justifyContent="center">
                             {(approved &&
                                 Number(unstakedBal) == 0) ? (
@@ -482,7 +503,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                 </TokenPairLink>
                         ) :
                                 // approved && available ?
-                                approved ? (
+                                approved && available ? (
                                         <SubmitButton
                                             primaryColor="#EDC100"
                                             color="black"
@@ -547,7 +568,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                             VIEW CONTRACT</div>
                                         </TokenPairLink>
                                     </Wrap> */}
-                                    {/* {available && */}
+                                    {
                                         <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
@@ -561,7 +582,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                             DEPOSIT {bond?.assetName}
                                         </SubmitButton>
                                     </Wrap>
-                                    {/* } */}
+                                     }
                                     {/* {!available &&
                                         <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
@@ -577,6 +598,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                         </SubmitButton>
                                     </Wrap>
                                     } */}
+                                    { earnedAmount > 0 &&
                                     <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
@@ -587,10 +609,11 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                                 handleClaim()
                                             }
                                         >
-                                            CLAIM {`&`} STAKE
+                                            CLAIM LUXOR
                                             {/* {earnedAmount !== 0 ? `($${(earnedAmount * soulPrice).toFixed(2)})` : ''} */}
                                         </SubmitButton>
                                     </Wrap>
+                                    }
                                 {/* <Wrap padding="0" margin="0" display="flex">
                                     <SubmitButton
                                         height="2rem"
