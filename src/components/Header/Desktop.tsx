@@ -19,10 +19,12 @@ import More from './More'
 // import { AURA } from 'constants/tokens'
 import Container from 'components/Container'
 // import LanguageSwitch from 'components/LanguageSwitch'
-import { NAV_CLASS } from './styles'
+// import { NAV_CLASS } from './styles'
 import useMenu from './useMenu'
 import useBar from './useBar'
 import NavLink from 'components/NavLink'
+import { useRouter } from 'next/router'
+import { classNames } from 'functions'
 // import useMobileMenu from './useMobileMenu'
 
 const HEADER_HEIGHT = 64
@@ -35,6 +37,8 @@ const Desktop: FC = () => {
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   
   const [open, setOpen] = useState(false)
+  const router = useRouter()
+  const isLuxor = router.asPath.startsWith('/luxor')
 
   // const isCbWallet =
   //   connector instanceof WalletLinkConnector ||
@@ -57,7 +61,14 @@ const Desktop: FC = () => {
         </div>
 
 
-           <nav className={NAV_CLASS}>
+           <nav className={classNames(
+             `backdrop-blur-fallback w-full \
+              h-full before:backdrop-saturate-[1.2] \
+              before:backdrop-blur-[20px] before:z-[-1] \
+              before:absolute before:w-full before:h-full \
+              border-b border-dark-900 mx-4`,  
+              isLuxor ? `hover:border-yellow` 
+              : `hover:border-dark-600`)}>
           <Container maxWidth="xl" className="mx-auto">
             <div className="flex gap-1 px-1 sm:gap-4 md:gap-18 justify-between justify-center items-center">
                 {menu.map((node) => {
@@ -94,7 +105,8 @@ const Desktop: FC = () => {
                   unmount={false}
                 >
                   <div className="w-screen max-w-sm">
-                    <div className="flex flex-col h-full py-1 overflow-x-hidden overflow-y-scroll shadow-xl bg-dark-600">
+                    <div className={classNames("flex flex-col h-full py-1 overflow-x-hidden overflow-y-scroll shadow-xl",
+                    isLuxor ? "bg-yellow" : "bg-dark-600")}>
                       <nav className="flex-1 py-12 bg-dark-1000 pl-6" aria-label="Sidebar">
                         {bar.map((node) => {
                           return <SidebarItem node={node} key={node.key} />

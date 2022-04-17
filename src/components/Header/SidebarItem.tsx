@@ -22,6 +22,7 @@ interface SidebarItem {
 export const SidebarItem: FC<SidebarItem> = ({ node }) => {
   const router = useRouter()
   const buttonRef = useRef<HTMLButtonElement>(null)
+  const isLuxor = router.asPath.startsWith('/luxor')
   const isDesktop = useDesktopHeaderMediaQuery()
   const touchDevice = useTouchDeviceMediaQuery()
 
@@ -64,11 +65,11 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
             <Typography
               weight={700}
               variant="sm"
-              className={classNames(open ? 'text-purple' : '', 'font-bold py-5 px-2 rounded flex gap-3 items-center')}
+              className={classNames(open && !isLuxor && 'text-dark-600', open && isLuxor && 'text-yellow', 'font-bold py-5 px-2 rounded flex gap-3 items-center')}
             >
               {node.icon}
               {node.title}
-              <ChevronDownIcon strokeWidth={5} width={12} className="text-dark-600" />
+              <ChevronDownIcon strokeWidth={5} width={12} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />
             </Typography>
           </Popover.Button>
           {node.hasOwnProperty('items') && (
@@ -84,7 +85,7 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
               <Popover.Panel className="z-10 w-full justify-center absolute w-24 sm:w-32 translate-y-[-10px] sm:translate-x-[-10px] translate-x-[-2px]">
                 <div
                   className={classNames(
-                    'shadow-md shadow-black/40 border border-dark-600 rounded overflow-hidden',
+                    'shadow-md shadow-black/40 border', isLuxor ? 'border-yellow' : 'border-dark-600', 'rounded overflow-hidden',
                     !touchDevice
                       ? "backdrop-blur-fallback before:z-[-1] before:rounded before:absolute before:w-full before:h-full before:content-[''] before:backdrop-blur-[20px] bg-dark-900 bg-opacity-[0.02]"
                       : 'bg-dark-800 inset-0'

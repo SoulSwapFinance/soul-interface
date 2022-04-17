@@ -71,7 +71,7 @@ export const LuxorBanner: FC = () => (
         <p className="font-medium text-center text-white">
           {/* <span className="centered md:hidden"><b>Voting Ends Soon!</b> <b>&rarr;</b></span> */}
           {/* <span className="hidden md:inline"> Voting Has Begun <b> &rarr;</b></span> */}
-          <Button variant="filled" color="gold" size="sm">
+          <Button variant="filled" color="yellow" size="sm">
           <span className="justify-center">
             <a href="https://twitter.com/LuxorMoney/status/1515653849490538500?s=20&t=2JuPf_55Fr5zwC27UchGww" target = "_blank" rel="noreferrer"
               className="font-bold text-black text-lg">
