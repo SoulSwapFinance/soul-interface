@@ -277,7 +277,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     const handleClaim = async () => {
         try {
             let tx
-            tx = await BondContract?.harvest(bondAddress, true)
+            tx = await BondContract?.harvest(bondAddress, false)
             await tx?.wait().then(await fetchEarnings())
         } catch (e) {
             // alert(e.message)

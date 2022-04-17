@@ -51,7 +51,7 @@ export default function LuxorKey() {
               HARVEST ALL
           </SubmitButton>
           
-          <SubmitButton
+          {/* <SubmitButton
               height="2rem"
               width="50%"
               primaryColor="#F4A703"
@@ -62,7 +62,7 @@ export default function LuxorKey() {
               }
           >
               HARVEST {`&`} STAKE
-          </SubmitButton>
+          </SubmitButton> */}
       </div>
       <Wrap
         padding="0"

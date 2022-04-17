@@ -426,7 +426,6 @@ export default function Dashboard() {
   const toggleCalculatorModal = useToggleCalculatorModal()
   const toggleStakeModal = useToggleModal(ApplicationModal.STAKE)
   const toggleSorModal = useToggleModal(ApplicationModal.SOR)
-  const toggleLuxorBondsModal = useToggleModal(ApplicationModal.LUXOR_BONDS)
   const toggleWrapModal = useToggleModal(ApplicationModal.WRAP)
 
   return (
@@ -438,14 +437,14 @@ export default function Dashboard() {
         <meta key="description" name="description" />
       </Head>
       <div className="flex mb-4 items-center justify-center">
-          <div className="grid grid-cols-5 items-center gap-2">
+          <div className="grid grid-cols-4 items-center justify-between">
     <div className="flex items-center md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
       onClick={() => toggleCalculatorModal()}>
         <div className="grid items-center text-center grid-flow-cols py-6 text-sm rounded-lg pointer-events-auto bg-dark-1000 text-primary border border-yellow">
           <Image
               src="/images/calculator.png"
-              width="96px"
-              height="96px"
+              width="156px"
+              height="156px"
               objectFit="contain"
               className="rounded-md"
               alt="calculator"
@@ -453,13 +452,14 @@ export default function Dashboard() {
         </div>
         <CalculatorModal />
     </div>
+
       <div className="flex items-center md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
         onClick={() => toggleStakeModal()}>
           <div className="grid items-center text-center grid-flow-cols py-6 text-sm rounded-lg pointer-events-auto bg-dark-1000 text-primary border border-yellow">
               <Image
                   src="https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x4290b33158F429F40C0eDc8f9b9e5d8C5288800c/logo.png"
-                  width="96px"
-                  height="96px"
+                  width="156px"
+                  height="156px"
                   objectFit="contain"
                   className="rounded-md"
                   alt="lum logo (orange/pink sun)"
@@ -467,27 +467,14 @@ export default function Dashboard() {
             </div>
             <StakeModal />
       </div>
-      <div className="flex items-center md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
-        onClick={() => toggleLuxorBondsModal()}>
-          <div className="grid items-center text-center grid-flow-cols py-6 text-sm rounded-lg pointer-events-auto bg-dark-1000 text-primary border border-yellow">
-              <Image
-                  src="https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b/logo.png"
-                  width="96px"
-                  height="96px"
-                  objectFit="contain"
-                  className="rounded-md"
-                  alt="luxor logo (yellow sun)"
-                  />
-            </div>
-            <LuxorBondsModal />
-      </div>
+
       <div className="flex items-center md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
         onClick={() => toggleWrapModal()}>
           <div className="grid items-center text-center grid-flow-cols py-6 text-sm rounded-lg pointer-events-auto bg-dark-1000 text-primary border border-yellow">
               <Image
                   src="https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208/logo.png"
-                  width="96px"
-                  height="96px"
+                  width="156px"
+                  height="156px"
                   objectFit="contain"
                   className="rounded-md"
                   alt="wlum logo (purple)"
@@ -495,13 +482,14 @@ export default function Dashboard() {
             </div>
             <LuxorWrapModal />
       </div>
+
       <div className="flex items-center md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
         onClick={() => toggleSorModal()}>
           <div className="grid items-center text-center grid-flow-cols py-6 text-sm rounded-lg pointer-events-auto bg-dark-1000 text-primary border border-yellow">
               <Image
                   src="https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A/logo.png"
-                  width="96px"
-                  height="96px"
+                  width="156px"
+                  height="156px"
                   objectFit="contain"
                   className="rounded-md"
                   alt="sor logo (snake with infinity-shaped tail)"

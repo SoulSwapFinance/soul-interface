@@ -2,7 +2,6 @@ import React from 'react'
 import { Wrap } from '../../../components/ReusableStyles'
 import Container from '../../../components/Container'
 import Head from 'next/head'
-import { ModalList } from 'features/luxor/LuxList'
 import { Button } from 'components/Button'
 import { useLuxorPrice } from 'hooks/getPrices'
 
@@ -22,7 +21,6 @@ const Luxor = () => {
             <span>Market Price: ${Number(luxorPrice).toFixed(2)}</span>
             </div>
         </Button>
-        <ModalList />
       </Container>
     </Wrap>
   )

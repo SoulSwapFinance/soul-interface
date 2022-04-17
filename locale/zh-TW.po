@@ -241,9 +241,6 @@ msgstr ""
 msgid "Borrow assets and leverage up"
 msgstr ""
 
-msgid "Borrow {0}"
-msgstr ""
-
 msgid "Borrow {0}-{1}"
 msgstr ""
 
@@ -534,6 +531,9 @@ msgstr ""
 msgid "Disconnect"
 msgstr ""
 
+msgid "Discord"
+msgstr ""
+
 msgid "Do not show again"
 msgstr ""
 
@@ -660,9 +660,6 @@ msgid "Find Pool"
 msgstr ""
 
 msgid "Fixed ratio"
-msgstr ""
-
-msgid "Follow"
 msgstr ""
 
 msgid "Forfeit"
@@ -1227,9 +1224,6 @@ msgstr ""
 msgid "Read the Documentation."
 msgstr ""
 
-msgid "Rebase"
-msgstr ""
-
 msgid "Receive"
 msgstr ""
 
@@ -1524,6 +1518,9 @@ msgstr ""
 msgid "Target Percentage"
 msgstr ""
 
+msgid "Telegram"
+msgstr ""
+
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""
 
@@ -1641,6 +1638,9 @@ msgid "Tutorial"
 msgstr ""
 
 msgid "Tutorials"
+msgstr ""
+
+msgid "Twitter"
 msgstr ""
 
 msgid "UNWRAP"
