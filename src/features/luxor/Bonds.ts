@@ -20,6 +20,7 @@ export const AllBonds = [
   {
     pid: 4,
     id: 3,
+    status: 'closed', // manual override
     bondAddress: '0x13729e99A7b77469f7FD204495a7b49e25e8444a',
     assetName: 'WFTM',
     assetAddress: FTM,
@@ -60,6 +61,7 @@ export const AllBonds = [
   {
     pid: 5,
     id: 4,
+    status: 'closed', // manual override
     bondAddress: '0x376969e00621Ebf685fC3D1F216C00d19B162923',
     assetName: 'WFTM',
     assetAddress: FTM,
@@ -101,6 +103,7 @@ export const AllBonds = [
   {
     pid: 6,
     id: 5,
+    status: 'closed',
     bondAddress: '0xc421072646C51FF8983714F28e4253ad8B44bb1E',
     assetName: 'WFTM',
     assetAddress: FTM,
