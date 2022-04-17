@@ -1,4 +1,4 @@
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/outline'
+import { ChevronDownIcon, ChevronUpIcon, MinusIcon, PlusIcon } from '@heroicons/react/outline'
 import { CurrencyAmount, JSBI, Pair, Percent, Token, USD } from '../../sdk'
 import React, { useState } from 'react'
 import { RowBetween, RowFixed } from '../Row'
@@ -120,7 +120,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
 
 
 export default function FullPositionCard({ pair, border, stakedBalance }: PositionCardProps) {
-  const { i18n } = useLingui()
+  // const { i18n } = useLingui()
   const router = useRouter()
   const { account } = useActiveWeb3React()
 
@@ -132,7 +132,6 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
   const userDefaultPoolBalance = useTokenBalance(account ?? undefined, pair.liquidityToken)
 
   const totalPoolTokens = useTotalSupply(pair.liquidityToken)
-
   
   // if staked balance balance provided, add to standard liquidity amount
   const userPoolBalance = stakedBalance ? userDefaultPoolBalance?.add(stakedBalance) : userDefaultPoolBalance
@@ -191,6 +190,8 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
   //     // .toBigNumber(USD[chainId].decimals)
   //     )
   //   )
+
+  console.log('currency0.symbol:%s', currency0.symbol)
   
   return (
     <div
@@ -209,11 +210,11 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
         <div className="flex items-center space-x-4">
           <DoubleCurrencyLogo currency0={currency0} currency1={currency1} size={40} />
           <div className="text-xl font-semibold">
-            {!currency0 || !currency1 ? <Dots>{i18n._(t`Loading`)}</Dots> : `${currency0.symbol}/${currency1.symbol}`}
+            {!currency0 || !currency1 ? <Dots>Loading</Dots> : `${currency0.symbol}/${currency1.symbol}`}
           </div>
         </div>
         <div className="flex items-center space-x-4">
-          {i18n._(t`Manage`)}
+          Manage
           {showMore ? (
             <ChevronUpIcon width="20px" height="20px" className="ml-0" />
           ) : (
@@ -234,7 +235,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
         <div className="p-4 space-y-4">
           <div className="px-4 py-4 space-y-1 text-sm rounded text-high-emphesis bg-dark-900">
             <div className="flex items-center justify-between">
-              <div>{i18n._(t`Pooled Tokens`)}:</div>
+              <div>Pooled LP:</div>
               <div className="font-semibold">{userPoolBalance ? userPoolBalance.toSignificant(4) : '-'}</div>
             </div>
             {/* {stakedBalance && (
@@ -244,7 +245,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
               </div>
             )} */}
             <div className="flex items-center justify-between">
-              <div>{i18n._(t`Pooled ${currency0?.symbol}`)}:</div>
+              <div>Pooled {currency0.symbol}:</div>
               {token0Deposited ? (
                 <div className="flex items-center space-x-2">
                   <div className="font-semibold" title={token0Deposited.toSignificant(6)}>
@@ -258,7 +259,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
             </div>
 
             <div className="flex items-center justify-between">
-              <div>{i18n._(t`Pooled ${currency1?.symbol}`)}:</div>
+              <div>Pooled {currency1.symbol}:</div>
               {token1Deposited ? (
                 <div className="flex items-center space-x-2">
                   <div className="font-semibold" title={token1Deposited.toSignificant(6)}>
@@ -272,7 +273,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
             </div>
 
             <div className="flex items-center justify-between">
-              <div>{i18n._(t`Pooled Value`)}:</div>
+              <div>Pooled (USD):</div>
               <div className="font-semibold">
                 {userPoolBalance ? formatNumber(pooledAmountFiatValueRaw, true)
                   // ? pooledAmountFiatValue
@@ -281,7 +282,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
               </div>
             </div>
             <div className="flex items-center justify-between">
-              <div>{i18n._(t`% Share`)}:</div>
+              <div>% Share:</div>
               <div className="font-semibold">
                 {poolTokenPercentage
                   ? (poolTokenPercentage.toFixed(2) === '0.00' ? '<0.01' : poolTokenPercentage.toFixed(2)) + '%'
@@ -298,7 +299,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
                   router.push(`/exchange/add/${currencyId(currency0)}/${currencyId(currency1)}`)
                 }}
               >
-                {i18n._(t`Add`)}
+                <div className="flex justify-center"><PlusIcon height="16px" /></div>
               </Button>
               <Button
                 color="blue"
@@ -307,7 +308,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
                   router.push(`/exchange/remove/${currencyId(currency0)}/${currencyId(currency1)}`)
                 }}
               >
-                {i18n._(t`Remove`)}
+                <div className="flex justify-center"><MinusIcon height="16px" /></div>
               </Button>
             </div>
           )}
