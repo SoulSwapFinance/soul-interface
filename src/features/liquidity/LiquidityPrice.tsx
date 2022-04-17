@@ -32,14 +32,10 @@ export default function LiquidityPrice({
     <div className={classNames('flex justify-between items-center rounded py-2 px-4 bg-dark-900', className)}>
       <div className="flex flex-col w-full text-secondary">
         <Typography variant="sm" className="select-none">
-          {i18n._(
-            t`${price?.toSignificant(6) ?? '-'} ${ TickerB } per ${ TickerA }`
-          )}
+          {price?.toSignificant(6) ?? '-'} { TickerB } per { TickerA }
         </Typography>
         <Typography variant="sm" className="select-none">
-          {i18n._(
-            t`${price?.invert()?.toSignificant(6) ?? '-'} ${ TickerA } per ${ TickerB }`
-          )}
+          {price?.invert()?.toSignificant(6) ?? '-'} { TickerA } per { TickerB }
         </Typography>
       </div>
 
