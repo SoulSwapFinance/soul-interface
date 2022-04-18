@@ -19,7 +19,7 @@ import { LuxorBanner } from 'components/Banner'
 // import { useLuxTVL } from 'hooks/useV2Pairs'
 import { useSorContract, useLuxorContract, useWrappedLumensContract,  useLuxorStakingContract, useLuxorTreasuryContract, useSorMasterContract } from 'hooks/useContract'
 // import { LUX_TREASURY_ADDRESS, WFTM_ADDRESS } from 'constants/addresses'
-import { DAI_ADDRESS, LUM_ADDRESS } from 'sdk'
+import { DAI_ADDRESS, SOR_ADDRESS, LUM_ADDRESS } from 'sdk'
 // import useApprove from 'hooks/useApprove'
 // import { LUX_ADDRESS } from 'constants/addresses'
 import { usePairContract, useTokenContract } from 'hooks/useTokenContract'
@@ -69,7 +69,8 @@ export default function Dashboard() {
   const LuxDaiContract = usePairContract('0x46729c2AeeabE7774a0E710867df80a6E19Ef851')
   const FtmDaiContract = usePairContract('0xf3d6e8ecece8647b456d57375ce0b51b8f0cd40b')
   const WlumFtmContract = usePairContract('0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99')
-  
+  const LuxSorContract = usePairContract('0x622E69B6785311800B0d55D72fF27D91F5518212')
+
   // KEY CONTRACTS //
   // const LuxorStakingContract = useLuxorStakingContract()
   // const SorStakingContract = useSorMasterContract()
@@ -102,7 +103,7 @@ export default function Dashboard() {
   const FtmDaiAddress = FtmDaiContract.address
   const WrappedLumFantomAddress = WlumFtmContract.address
   const LuxorAddress = LuxorContract.address
-  
+  const LuxSorAddress = LuxSorContract.address
   const luxorSupply = Number(useTokenInfo(LuxorAddress).tokenInfo.supply) / 1e9
   const wlumSupply = Number(useTokenInfo(WrappedLumensAddress).tokenInfo.supply) / 1e9
   
@@ -150,7 +151,8 @@ export default function Dashboard() {
   const FtmBalance = Number(useTokenInfo(WFTM_ADDRESS[250]).tokenInfo.luxorTreasuryBalance) / 1e18
   const FtmValue = FtmBalance * ftmPrice
   const DaiValue = Number(useTokenInfo(DAI_ADDRESS[250]).tokenInfo.luxorTreasuryBalance) / 1e18
-  const treasuryReserveBalance = FtmValue + DaiValue
+  const SorValue = Number(useTokenInfo(SOR_ADDRESS[250]).tokenInfo.luxorTreasuryBalance) / 1e18
+  const treasuryReserveBalance = FtmValue + DaiValue + SorValue
   
   // GET LUXOR ECONOMY BALANCES //
   const stakedLuxor = Number(useLuxorInfo().luxorInfo.stakingBalance)
@@ -165,6 +167,7 @@ export default function Dashboard() {
   
   // GET LIQUIDITY BALANCES //
   const LuxFtmBalance = Number(usePairInfo(LuxorFtmAddress).pairInfo.luxorTreasuryBalance) / 1e18
+  const LuxSorBalance = Number(usePairInfo(LuxSorAddress).pairInfo.luxorTreasuryBalance) / 1e18
   const LuxDaiBalance = Number(usePairInfo(LuxorDaiAddress).pairInfo.luxorTreasuryBalance) / 1e18
   const LuxFtmValue = LuxFtmBalance * luxFtmPrice
   const LuxDaiValue = LuxDaiBalance * luxDaiPrice
@@ -182,7 +185,7 @@ export default function Dashboard() {
   const DaiLendFtmValue = DaiLendFtmBalance * ftmPrice
 
   const treasuryInvestmentBalance = FtmDaiValue + FtmWlumValue + FtmLendDaiValue + DaiLendFtmValue
-  console.log('treasuryInvestmentBalance:%s', treasuryInvestmentBalance)
+  // console.log('treasuryInvestmentBalance:%s', treasuryInvestmentBalance)
     
   // calculate Treasury Balances
   const treasuryBalance = treasuryLiquidityBalance + treasuryReserveBalance + treasuryInvestmentBalance

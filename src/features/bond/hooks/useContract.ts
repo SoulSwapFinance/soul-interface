@@ -56,7 +56,7 @@ export function useContract(address: string | undefined, ABI: any, withSignerIfP
     try {
       return getContract(address, ABI, library, withSignerIfPossible && account ? account : undefined)
     } catch (error) {
-      console.error('Failed to get contract', error)
+      // console.error('Failed to get contract', error)
       return null
     }
   }, [address, ABI, library, withSignerIfPossible, account])
