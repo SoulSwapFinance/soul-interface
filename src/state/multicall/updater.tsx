@@ -39,7 +39,7 @@ async function fetchChunk(
         if (
           !success &&
           returnData.length === 2 &&
-          gasUsed.gte(Math.floor((chunk[i].gasRequired ?? DEFAULT_GAS_REQUIRED) * 0.95))
+          gasUsed >= (Math.floor((chunk[i].gasRequired ?? DEFAULT_GAS_REQUIRED) * 0.95))
         ) {
           console.warn(
             `A call failed due to requiring ${gasUsed.toString()} vs. allowed ${
