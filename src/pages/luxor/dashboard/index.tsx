@@ -123,6 +123,7 @@ export default function Dashboard() {
   // console.log('luxorVolume:%s', luxData?.result[1])
   // get the price of key treasury reserves
   const luxDaiPrice = usePairPrice(LuxorDaiAddress) // ~160_000 // √
+  const luxSorPrice = usePairPrice(LuxSorAddress)
   const wLumFtmPrice = usePairPrice(WrappedLumFantomAddress) // ~1_6M // √
   const ftmDaiPrice = usePairPrice(FtmDaiAddress) 
     
@@ -152,13 +153,16 @@ export default function Dashboard() {
   const FtmValue = FtmBalance * ftmPrice
   const DaiValue = Number(useTokenInfo(DAI_ADDRESS[250]).tokenInfo.luxorTreasuryBalance) / 1e18
   const SorValue = Number(useTokenInfo(SOR_ADDRESS[250]).tokenInfo.luxorTreasuryBalance) / 1e18
+  // console.log('SorValue', SorValue)
   const treasuryReserveBalance = FtmValue + DaiValue + SorValue
+  // console.log('treasuryReserveBalance', treasuryReserveBalance)
   
   // GET LUXOR ECONOMY BALANCES //
   const stakedLuxor = Number(useLuxorInfo().luxorInfo.stakingBalance)
-  console.log('staked', stakedLuxor)
+  // console.log('staked', stakedLuxor)
   const lockedLuxor = Number(useLuxorInfo().luxorInfo.warmupBalance)
-  console.log('lockedLuxor', lockedLuxor)
+  // console.log('lockedLuxor', lockedLuxor)
+  // console.log('SorValue', SorValue)
 
   const luxorCirculatingSupply = luxorSupply - Number(stakedLuxor) - Number(lockedLuxor)
 
@@ -171,7 +175,10 @@ export default function Dashboard() {
   const LuxDaiBalance = Number(usePairInfo(LuxorDaiAddress).pairInfo.luxorTreasuryBalance) / 1e18
   const LuxFtmValue = LuxFtmBalance * luxFtmPrice
   const LuxDaiValue = LuxDaiBalance * luxDaiPrice
-  const treasuryLiquidityBalance = LuxFtmValue + LuxDaiValue
+  const LuxSorValue = LuxSorBalance * luxSorPrice
+  const treasuryLiquidityBalance = LuxFtmValue + LuxDaiValue + LuxSorValue
+  // console.log('LuxSorBalance:%s', LuxSorBalance)
+  // console.log('LuxSorValue:%s', LuxSorValue)
   // console.log('treasuryLiquidityBalance:%s', treasuryLiquidityBalance)
     
   // GET INVESTMENT BALANCES //
