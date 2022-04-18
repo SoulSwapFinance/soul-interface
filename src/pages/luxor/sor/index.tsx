@@ -311,6 +311,7 @@ export default function Stablecoin() {
                     SOR
                   </Typography>
                 </div>
+                {Number(stakeClaimAmount.toExact()) !== 0 &&
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
                     {i18n._(t`Claimable Amount`)}
@@ -319,6 +320,7 @@ export default function Stablecoin() {
                     {formatCurrencyAmount(stakeClaimAmount, 4)} SOR
                   </Typography>
                 </div>
+                  }
               </div>
               <div className="mt-6 flex items-center gap-2">
                 {isStakeValid &&
