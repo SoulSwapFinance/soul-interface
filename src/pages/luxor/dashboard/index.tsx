@@ -835,7 +835,7 @@ export default function Dashboard() {
                 <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                  {formatNumber(totalSorCollateral, false, true)}
+                  {formatNumber(totalSorCollateral, true, true)}
                 </Typography>
             </div>
 
@@ -884,7 +884,7 @@ export default function Dashboard() {
               <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                  {formatNumber(totalSorCollateral, false, true)}
+                  {formatNumber(totalSorCollateral, true, true)}
               </Typography>
             </div>
 
