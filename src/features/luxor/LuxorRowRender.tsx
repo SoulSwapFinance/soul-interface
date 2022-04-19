@@ -62,6 +62,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     
     const LUX_DAI_ADDRESS = '0x46729c2AeeabE7774a0E710867df80a6E19Ef851'
     const LUX_FTM_ADDRESS = '0x951BBB838e49F7081072895947735b0892cCcbCD'
+    const LUX_SOR_ADDRESS = '0x622E69B6785311800B0d55D72fF27D91F5518212'
 
     // const [discount, setDiscount] = useState(0)
     // const [bondPrice, setBondPrice] = useState(0)
@@ -71,17 +72,20 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     const assetToken = new Token(250, assetAddress, 18, assetName)
     const wftmPrice = useFantomPrice()
     const luxDaiPrice = usePairPrice(LUX_DAI_ADDRESS) // √
-    console.log('luxDaiPrice:%s', Number(luxDaiPrice))
+    // console.log('luxDaiPrice:%s', Number(luxDaiPrice))
     const luxFtmPrice = usePairPrice(LUX_FTM_ADDRESS) // √
+    const luxSorPrice = usePairPrice(LUX_SOR_ADDRESS) // √
+    // console.log('luxSorPrice:%s', Number(luxSorPrice))
     
     let assetPrice = 0
     assetPrice 
         = assetToken.address == WFTM_ADDRESS[250] ? wftmPrice
             : assetToken.address == LUX_DAI_ADDRESS ? luxDaiPrice
             : assetToken.address == LUX_FTM_ADDRESS ? luxFtmPrice
+            : assetToken.address == LUX_SOR_ADDRESS ? luxSorPrice
             : 1
     // const assetPrice = useTokenPrice(assetToken.address)
-    console.log('assetPrice:%s', assetPrice)
+    // console.log('assetPrice:%s', assetPrice)
 
     const [approvalState, approve] = useApproveCallback(parsedDepositValue, bond?.address)
     const [showConfirmation, setShowConfirmation] = useState(false)
@@ -195,7 +199,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                 const asset = await BondContract.principle(bondAddress)
                 const balance = await erc20BalanceOf(account)
                 const userBal = balance / 1e18
-                console.log('unstaked:%s', Number(userBal))
+                // console.log('unstaked:%s', Number(userBal))
 
                 setUnstakedBal(Number(userBal))
 
@@ -216,10 +220,10 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
             try {
                 const result = await BondContract?.pendingPayout(bondAddress)
                 const payout = result / 1e9
-                console.log('profit:%s', payout)
+                // console.log('profit:%s', payout)
 
                 setEarnedAmount(Number(payout))
-                console.log('payout:%s', Number(payout))
+                // console.log('payout:%s', Number(payout))
 
                 return [payout]
             } catch (err) {
