@@ -89,6 +89,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
 
     const [approvalState, approve] = useApproveCallback(parsedDepositValue, bond?.address)
     const [showConfirmation, setShowConfirmation] = useState(false)
+    const [showDefaultConfirmation, setShowDefaultConfirmation] = useState(false)
     const [showAvailabilityMsg, setShowAvailabilityMsg] = useState(false)
 
     const { luxorBondInfo } = useLuxorBondInfo(bondAddress)
@@ -483,7 +484,8 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                             primaryColor="#EDC100"
                                             color="black"
                                             height="2rem"
-                                            onClick={() => handleDeposit(depositValue)}>
+                                            // onClick={() => handleDeposit(depositValue)}>
+                                            onClick={() => setShowDefaultConfirmation(true)}>
                                             DEPOSIT {assetName}
                                         </SubmitButton>
                                     // ) : !available ?
@@ -617,7 +619,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
             primaryColor="#EDC100"
             color="black"
             onClick={() =>
-              handleDeposit(depositValue)
+                setShowDefaultConfirmation(true)
             }
           >
             DEPOSIT {assetName}
@@ -662,6 +664,67 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
           </SubmitButton>
         </div>
       </Modal>
+    { showDefaultConfirmation && 
+    <><Modal isOpen={showDefaultConfirmation} onDismiss={() => setShowDefaultConfirmation(false)}>
+                    <div className="space-y-4">
+                        <ModalHeader header={`Do you still wish to proceed?`} onClose={() => setShowDefaultConfirmation(false)} />
+                        <Typography variant="lg">
+                            Given estimates are NOT guarantees. Bond at your own risk. 
+                            <br /><br />
+                            Please verify with your own calculations before confirming.
+                            <br/> <br/>We're only accountable for contract accuracy, however we will  <i>still do our best</i> on the interface.
+                        </Typography>
+                        <Typography variant="sm" className="font-medium">
+                            QUESTIONS OR CONCERNS?
+                            <a href="mailto:soulswapfinance@gmail.com">
+                                {' '} CONTACT US
+                            </a>
+                        </Typography>
+
+                        { available &&
+                            <SubmitButton
+                                height="2.5rem"
+                                primaryColor="#EDC100"
+                                color="black"
+                                onClick={() => handleDeposit(depositValue)}
+                            >
+                            I UNDERSTAND, DEPOSIT { assetName }
+                            </SubmitButton>
+                        }
+                    </div>
+                </Modal><Modal isOpen={showAvailabilityMsg} onDismiss={() => setShowAvailabilityMsg(false)}>
+                        <div className="space-y-4">
+                            <ModalHeader header={`Bonding Unavailable`} onClose={() => setShowAvailabilityMsg(false)} />
+                            <Typography variant="lg">
+                                We have set limits on each bond in order to manage the inflation rate.
+                                <br /><br />
+                                Please select another option to process a bond or harvest rewards, if you have any.
+                            </Typography>
+                            <Typography variant="sm" className="font-medium">
+                                QUESTIONS OR CONCERNS?
+                                <a href="mailto:soulswapfinance@gmail.com">
+                                    {' '} CONTACT US
+                                </a>
+                            </Typography>
+                            <SubmitButton
+                                height="2.5rem"
+                                primaryColor="#3Eff3E"
+                                color="black"
+                                onClick={() => handleClaim()}
+                            >
+                                CLAIM REWARDS
+                            </SubmitButton>
+                            <SubmitButton
+                                height="2.5rem"
+                                primaryColor="#FF3E3E"
+                                color="white"
+                                onClick={() => setShowAvailabilityMsg(false)}
+                            >
+                                CLOSE MESSAGE
+                            </SubmitButton>
+                        </div>
+                    </Modal></>
+    }
     </>
     
     )

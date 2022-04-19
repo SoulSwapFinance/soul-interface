@@ -174,4 +174,12 @@ export const AllBonds = [
     token1Address: SOR,
     term: '5D',
   },
+  {
+    pid: 18,
+    bondAddress: '0x04b65a392F7f2577C7aa78b4cab3BA6F6FD71336',
+    assetName: 'WFTM',
+    assetAddress: FTM,
+    token1Address: FTM,
+    term: '5D',
+  },
 ]
