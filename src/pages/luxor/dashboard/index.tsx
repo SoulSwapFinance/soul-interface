@@ -28,7 +28,7 @@ import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
 // import ExternalLink from 'components/ExternalLink'
 import LuxorGlowShadow from 'components/LuxorGlowShadow'
-import { useTokenInfo, useUserInfo, usePairInfo, useSorInfo, useLuxorInfo, useUserTokenInfo } from 'hooks/useAPI'
+import { useTokenInfo, useUserInfo, usePairInfo, useSorInfo, useLuxorInfo, useUserTokenInfo, usePriceUSD } from 'hooks/useAPI'
 // import { ArrowRightIcon } from '@heroicons/react/outline'
 import { I18n } from '@lingui/core'
 // import Link from 'next/link'
@@ -64,10 +64,6 @@ export default function Dashboard() {
   const DaiLendFtmContract = useTokenContract('0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd')
   const FtmLendDaiContract = useTokenContract('0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61')
   // const FtmContract = useTokenContract(WFTM_ADDRESS[250])
-
-  let sorPegPrice = 1
-  let sorMarketPrice = 1.0
-  // const sorMarketPrice = useSorPrice()
   // const LuxorStakingAddress = LuxorStakingContract?.address
   // const LuxorWarmupAddress = LUXOR_WARMUP_ADDRESS[250]
   // const DaiContractAddress = DaiContract?.address
@@ -110,18 +106,18 @@ export default function Dashboard() {
   // GET SOR STATS
   const { sorInfo } = useSorInfo()
   const { userTokenInfo } = useUserTokenInfo('0x000000000000000000000000000000000000dead', '0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A')
-  const burnedSupply = Number(userTokenInfo.balance) / 1e18 // √ ~100
   // console.log('burned:%s', burnedSupply)
-  const sorSorCollateral = Number(sorInfo.sorCollateral)
+  // const sorSorCollateral = Number(sorInfo.sorCollateral)
+  // console.log('sorSorCollateral:%s', sorSorCollateral)
   const sorLuxCollateral = Number(sorInfo.luxorCollateralValue)
   // console.log('sorLuxCollateral:%s', sorLuxCollateral)
   const sorDaiCollateral = Number(sorInfo.daiCollateral)
   // dampens the value of SOR collateral
-  const sorSorCollateralAdjusted = Number(sorInfo.sorCollateral) * 0.1
-  const totalSorSupply = Number(sorInfo.supply)
+  // const sorSorCollateralAdjusted = Number(sorInfo.sorCollateral) * 0.1
+  const burnedSupply = Number(userTokenInfo.balance) / 1e18 // √ ~100
+  const totalSorSupply = Number(sorInfo.supply) - burnedSupply
   // console.log('sorLuxCollateral:%s', sorLuxCollateral)
-
-  const totalSorCollateral = sorDaiCollateral + sorLuxCollateral + sorSorCollateralAdjusted
+  const totalSorCollateral = sorDaiCollateral + sorLuxCollateral
   // console.log('totalSorCollateral:%s', totalSorCollateral)
 
   // const result = useCurrencyBalance(LUX_TREASURY_ADDRESS, LUX_FTM)
@@ -134,6 +130,12 @@ export default function Dashboard() {
   const luxorPrice = useLuxorPrice()
   const ftmPrice = useFantomPrice()
   const wlumPrice = useWrappedLumPrice()
+  const sorBackingPrice = totalSorCollateral / totalSorSupply
+  const sorMarketPrice = Number(useTokenInfo('0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A').tokenInfo.price)
+  const sorMarketCap
+    = sorMarketPrice >= sorBackingPrice
+    ? sorMarketPrice * totalSorSupply
+    : sorBackingPrice * totalSorSupply
 
   // GET RESERVE BALANCES //
   const FtmBalance = Number(useTokenInfo(WFTM_ADDRESS[250]).tokenInfo.luxorTreasuryBalance) / 1e18
@@ -166,7 +168,7 @@ export default function Dashboard() {
   // console.log('LuxSorBalance:%s', LuxSorBalance)
   // console.log('LuxSorValue:%s', LuxSorValue)
   // console.log('treasuryLiquidityBalance:%s', treasuryLiquidityBalance)
-    
+
   // GET INVESTMENT BALANCES //
   const FtmDaiBalance = Number(usePairInfo(FtmDaiAddress).pairInfo.luxorTreasuryBalance) / 1e18
   const FtmWlumBalance = Number(usePairInfo(WrappedLumFantomAddress).pairInfo.luxorTreasuryBalance) / 1e18
@@ -221,12 +223,12 @@ export default function Dashboard() {
           "label": "Luxor Collateral",
           "percent": (sorLuxCollateral / totalSorCollateral * 100).toFixed()
       },
-      {
-          "angle": sorSorCollateralAdjusted,
-          "color": "#F5D100",
-          "label": "Sor Collateral",
-          "percent": (sorSorCollateralAdjusted / totalSorCollateral * 100).toFixed()
-      }
+      // {
+      //     "angle": sorSorCollateral,
+      //     "color": "#F5D100",
+      //     "label": "Sor Collateral",
+      //     "percent": (sorSorCollateral / totalSorCollateral * 100).toFixed()
+      // }
   ]
 
   const treasuryBalanceData = [
@@ -288,7 +290,7 @@ export default function Dashboard() {
       angle: lockedLuxor,
       color: '#FFE300',
       label: 'WARM-UP',
-      text: 'The portion of supply that is not in circulation as it is currently in the warm-up period.',
+      text: 'The portion of supply not in circulation as it is currently in the warm-up period.',
       percent: ((lockedLuxor/ luxorSupply) * 100).toFixed()
       ,
     },
@@ -511,17 +513,17 @@ export default function Dashboard() {
             <div>
               <div className="md:hidden grid grid-cols-2 space-between-3">
                 <Typography
-                  className="flex gap-1 text-xl justify-center items-center"
+                  className="flex gap-1 text-xl justify-center items-center mb-3"
                   lineHeight={48} fontFamily={'medium'}>
                   Luxor Price
                 </Typography>
                 <Typography
-                  className="md:hidden flex gap-1 text-lg justify-center items-center"
+                  className="md:hidden flex gap-1 text-lg justify-center items-center mb-3"
                   lineHeight={48} fontFamily={'medium'}>
                   Backing Price
                 </Typography>
               </div>
-              <div className="h-px my-1 mb-3 bg-dark-1000" />
+
               <div className="md:hidden grid grid-cols-2 space-between-3">
                 <Typography
                   className={'flex justify-center items-baseline'}
@@ -539,17 +541,16 @@ export default function Dashboard() {
           <div className="md:hidden h-px my-4 bg-dark-1000" />
             <div className="md:hidden grid grid-cols-2 space-between-3">
             <Typography 
-              className="flex gap-1 text-lg justify-center items-center"
+              className="flex gap-1 text-lg justify-center items-center mb-3"
               lineHeight={48} fontFamily={'medium'}>
               Luxor Supply
             </Typography>
             <Typography 
-              className="flex gap-1 text-lg justify-center items-center"
+              className="flex gap-1 text-lg justify-center items-center mb-3"
               lineHeight={48} fontFamily={'medium'}>
                Emissions Rate
             </Typography>
             </div>
-            <div className="md:hidden h-px my-1 mb-3 bg-dark-1000" />
             <div className="md:hidden grid grid-cols-2 space-between-3">
             <Typography 
             className={'flex justify-center items-baseline'}
@@ -569,29 +570,28 @@ export default function Dashboard() {
             <div>
               <div className="hidden md:grid md:grid-cols-4 space-between-3">
                 <Typography
-                  className="flex gap-1 text-xl justify-center items-center"
+                  className="flex gap-1 text-xl justify-center items-center mb-3"
                   lineHeight={48} fontFamily={'medium'}>
-                  Luxor Price
+                  Market Price
                 </Typography>
                 <Typography
-                  className="hidden md:flex gap-1 text-lg justify-center items-center"
+                  className="flex gap-1 text-xl justify-center items-center mb-3"
                   lineHeight={48} fontFamily={'medium'}>
                   Backing Price
                 </Typography>
                 <Typography
-                  className="flex gap-1 text-lg justify-center items-center"
+                  className="flex gap-1 text-lg justify-center items-center mb-3"
                   lineHeight={48} fontFamily={'medium'}>
-                  Luxor Supply
+                  Total Supply
                 </Typography>
                 <Typography
-                  className="flex gap-1 text-lg justify-center items-center"
+                  className="flex gap-1 text-lg justify-center items-center mb-3"
                   lineHeight={48} fontFamily={'medium'}>
                   Emissions Rate
                 </Typography>
               </div>
             </div>
             <div>
-              <div className="h-px my-2 mb-3 bg-dark-1000" />
               <div className="hidden md:grid md:grid-cols-4 space-between-3">
               <Typography
                   className={'flex justify-center items-baseline'}
@@ -766,7 +766,6 @@ export default function Dashboard() {
         <div className="bg-dark-1000 p-4">
         <Typography
             className="text-2xl flex gap-1 justify-center items-center"
-            // variant="md"
             weight={600}
             lineHeight={48}
             textColor="text-accent text-[#FFFFFF]"
@@ -777,7 +776,7 @@ export default function Dashboard() {
           <div className="h-px my-4 bg-[#F5D100]" />
           <div>
             <Typography
-              className="flex gap-1 justify-center items-center"
+              className="flex gap-1 text-xl justify-center items-center"
               fontFamily={'medium'}
               textColor={'text-white'}
             >
@@ -787,31 +786,113 @@ export default function Dashboard() {
             <Typography 
               className="flex gap-1 justify-center items-center"
               variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               {formatNumber(sorMarketPrice * totalSorSupply, true, false)}
+               {formatNumber(sorMarketCap, true, false)}
             </Typography>
           </div>
 
           <div className="h-px my-4 bg-dark-1000" />
-          <div className="grid grid-cols-2 space-between-3">
-            <Typography 
-              className="flex gap-1 text-lg justify-center items-center"
-              lineHeight={48} fontFamily={'medium'}>
-              Market Price
-            </Typography>
-            <Typography 
-              className="flex gap-1 text-lg justify-center items-center"
-              lineHeight={48} fontFamily={'medium'}>
-              Total Supply
-            </Typography>
+          <div>
+            <div className="hidden md:grid md:grid-cols-4 space-between-3">
+                <Typography
+                  className="flex gap-1 text-xl justify-center items-center mb-3"
+                  lineHeight={48} fontFamily={'medium'}>
+                  Market Price
+                </Typography>
+                <Typography
+                  className="flex gap-1 text-xl justify-center items-center mb-3"
+                  lineHeight={48} fontFamily={'medium'}>
+                  Backing Price
+                </Typography>
+                <Typography
+                  className="flex gap-1 text-lg justify-center items-center mb-3"
+                  lineHeight={48} fontFamily={'medium'}>
+                  Total Supply
+                </Typography>
+                <Typography
+                  className="flex gap-1 text-lg justify-center items-center mb-3"
+                  lineHeight={48} fontFamily={'medium'}>
+                  Total Collateral
+                </Typography>
             </div>
 
-            <div className="h-px my-1 mb-3 bg-dark-1000" />
 
-          <div className="grid grid-cols-2 space-between-3">
+            <div className="hidden md:grid md:grid-cols-4 space-between-3">
                 <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               {formatNumber(totalSorCollateral / totalSorSupply, true, false)}
+                  {formatNumber(sorMarketPrice, true, false, 0)}
+                </Typography>
+                <Typography
+                  className={'flex justify-center items-baseline'}
+                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                  {formatNumber(sorBackingPrice, true, false)}
+                </Typography>
+                <Typography
+                className={'flex justify-center items-baseline'}
+                variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                  {formatNumber(totalSorSupply, false, true)}
+                </Typography>
+                <Typography
+                  className={'flex justify-center items-baseline'}
+                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                  {formatNumber(totalSorCollateral, false, true)}
+                </Typography>
+            </div>
+
+            <div className="md:hidden grid grid-cols-2 space-between-3">
+                <Typography
+                  className="flex gap-1 text-xl justify-center items-center mb-2"
+                  lineHeight={48} fontFamily={'medium'}>
+                  Market Price
+                </Typography>
+                <Typography
+                  className="flex gap-1 text-xl justify-center items-center mb-2"
+                  lineHeight={48} fontFamily={'medium'}>
+                  Backing Price
+                </Typography>
+                <Typography
+                  className={'flex justify-center items-baseline'}
+                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                  {formatNumber(sorMarketPrice, true, false, 0)}
+                </Typography>
+                <Typography
+                  className={'flex justify-center items-baseline'}
+                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                  {formatNumber(sorBackingPrice, true, false)}
+                </Typography>
+            </div>
+          </div>
+
+          <div className="md:hidden h-px my-4 bg-dark-1000" />
+            
+            <div className="md:hidden grid grid-cols-2 space-between-3">
+              <Typography
+                  className="flex gap-1 text-lg justify-center items-center mb-2"
+                  lineHeight={48} fontFamily={'medium'}>
+                  Total Supply
+              </Typography>
+              <Typography
+                  className="flex gap-1 text-lg justify-center items-center mb-2"
+                  lineHeight={48} fontFamily={'medium'}>
+                  Total Collateral
+              </Typography>
+              <Typography
+                  className={'flex justify-center items-baseline'}
+                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                  {formatNumber(totalSorSupply, false, true)}
+              </Typography>
+              <Typography
+                  className={'flex justify-center items-baseline'}
+                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                  {formatNumber(totalSorCollateral, false, true)}
+              </Typography>
+            </div>
+
+          {/* <div className="grid grid-cols-2 space-between-3">
+                <Typography
+                  className={'flex justify-center items-baseline'}
+                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+               { formatNumber(sorMarketPrice, true, true) }
                 </Typography>
                 <Typography 
                   className={'flex justify-center items-baseline'}
@@ -819,7 +900,7 @@ export default function Dashboard() {
                {formatNumber(totalSorSupply, false, true)}{' '}
               <span className="text-sm leading-5 text-black-50 ml-2">{i18n._(t`SOR`).toUpperCase()}</span>
             </Typography>
-          </div>
+          </div> */}
           <div className="h-px my-4 bg-dark-1000" />
           <div>
             <Typography
