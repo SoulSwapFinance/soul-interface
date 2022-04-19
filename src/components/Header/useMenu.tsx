@@ -300,7 +300,7 @@ const useMenu: UseMenu = () => {
     {
      mainItems.push({
        key: 'socials',
-       title: i18n._(t`Community`),
+       title: i18n._(t`Social`),
        icon: <TrendingUpIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
        items: [
          {
