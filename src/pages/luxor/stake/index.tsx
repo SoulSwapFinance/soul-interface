@@ -110,7 +110,7 @@ export default function Stake() {
       const timer = setTimeout(() => {
         fetchBals()
         fetchWarmupInfo()
-      }, 3000)
+      }, 10_000)
       // Clear timeout if the component is unmounted
       return () => clearTimeout(timer)
     } catch (err) {
@@ -229,7 +229,7 @@ export default function Stake() {
             </Tab.List>
             
             <Tab.Panel className={'outline-none'}>
-              {/* <StableInputPanel
+              <StableInputPanel
                 value={stakeValue}
                 showMaxButton={true}
                 onUserInput={(value) => setStakeValue(value)}
@@ -240,7 +240,7 @@ export default function Stake() {
                 disableCurrencySelect={true}
                 locked={!account}
                 id="stablecoin-currency-input"
-              /> */}
+              />
               <div className="h-px my-6 bg-dark-1000"></div>
               <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-yellow w-full space-y-1">
                 <div className="text-white">
@@ -271,7 +271,7 @@ export default function Stake() {
                     {i18n._(t`Warmup Period`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    { 0 } Epochs
+                    24 Hours
                   </Typography>
                 </div>
               </div>
