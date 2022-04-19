@@ -28,9 +28,9 @@ import NavLink from 'components/NavLink'
 import FarmInputPanel from './Input'
 import { CurrencyLogo } from 'components/CurrencyLogo'
 import QuestionHelper from 'components/QuestionHelper'
-import { AutoColumn } from 'components/Column'
-import ExternalLink from 'components/ExternalLink'
-import { useCurrencyBalance } from 'state/wallet/hooks'
+// import { AutoColumn } from 'components/Column'
+// import ExternalLink from 'components/ExternalLink'
+// import { useCurrencyBalance } from 'state/wallet/hooks'
 
 const HideOnSmall = styled.div`
 @media screen and (max-width: 900px) {
@@ -104,6 +104,12 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const isSwapPair = pairType == "farm"
     const isActive = pairStatus == "active"
 
+    // COLOR //
+    const buttonColor = isUnderworldPair ? "#0993EC" : !isActive ? "#F338C3" : "#B485FF"
+    const buttonTextColor = isSwapPair && isActive ? "black" : "white"
+    const textColor = isUnderworldPair ? "text-blue" : !isActive ? "text-pink" : "text-dark-600"
+    const tokenSymbol = isUnderworldPair ? token0Symbol : "LP"
+    
     // ONLY USED FOR LOGO //
     const token0 = new Token(chainId, farm.token1Address[chainId], 18)
     const token1 = new Token(chainId, farm.token2Address[chainId], 18)
@@ -471,7 +477,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         Wallet Balance
                     </Typography>
                     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                        {formatNumber(walletBalance, false, true)} { pairType == "farm" ? 'LP' : token0Symbol }
+                        { formatNumber(walletBalance, false, true) } { tokenSymbol }
                     </Typography>
                 </div>
                 )}
@@ -481,8 +487,8 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                     <Typography className="text-white" fontFamily={'medium'}>
                             Balance (USD)
                         </Typography>
-                        <Typography className="text-dark-600" weight={600} fontFamily={'semi-bold'}>
-                            {formatNumber(walletValue, true, true)}
+                        <Typography className={ textColor } weight={600} fontFamily={'semi-bold'}>
+                            { formatNumber(walletValue, true, true) }
                         </Typography>
                     </div>
                 )}
@@ -503,8 +509,8 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                 <Typography className="text-white" fontFamily={'medium'}>
                     Rewards (USD)
                   </Typography>
-                  <Typography className="text-dark-600" weight={600} fontFamily={'semi-bold'}>
-                  {formatNumber(earnedValue, true, true)}
+                  <Typography className={ textColor } weight={600} fontFamily={'semi-bold'}>
+                  { formatNumber(earnedValue, true, true) }
                   </Typography>
                 </div>
 
@@ -514,7 +520,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                 <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
                     <div className="text-white">
                         <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                            <span> {formatNumber(Number(apr), false, true)}% APR</span>
+                            <span> { formatNumber(Number(apr), false, true) }% APR</span>
                         </div>
                     </div>
                 </div>
@@ -538,8 +544,8 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
               { isUnderworldPair && (
                         <SubmitButton
                             height="2rem"
-                            primaryColor="#B485FF"
-                            color="black"
+                            primaryColor={ buttonColor }
+                            color={ buttonTextColor }
                             margin=".5rem 0 .5rem 0"
                         >
                              <NavLink
@@ -556,11 +562,11 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         <Wrap padding="0" margin="0" display="flex">
                             <SubmitButton 
                                 height="2rem"
-                                primaryColor="#B485FF"
-                                color="black"
+                                primaryColor={ buttonColor }
+                                color={ buttonTextColor }
                                 margin=".5rem 0 .5rem 0"
                                 onClick={() => handleApprove()}>
-                                APPROVE {pairType == "farm" ? 'LP' : token0Symbol }
+                                APPROVE { tokenSymbol }
                             </SubmitButton>
                         </Wrap>
                     </FunctionBox>
@@ -570,14 +576,14 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
             {approved && (
                 <SubmitButton
                     height="2rem"
-                    primaryColor="#B485FF"
-                    color="black"
+                    primaryColor={ buttonColor }
+                    color={ buttonTextColor }
                     margin=".5rem 0 0rem 0"
                     onClick={() =>
                         handleDeposit(pid)
                     }
                 >
-                    DEPOSIT {pairType == "farm" ? 'LP' : token0Symbol }
+                    DEPOSIT { tokenSymbol }
                 </SubmitButton>
             )}
 
@@ -586,8 +592,8 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                 <Wrap padding="0" margin="0" display="flex">
                         <SubmitButton
                             height="2rem"
-                            primaryColor="#B485FF"
-                            color="black"
+                            primaryColor={ buttonColor }
+                            color={ buttonTextColor }
                             margin=".5rem 0 .5rem 0"
                             onClick={() =>
                                 handleHarvest(pid)
@@ -617,7 +623,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                             Staked Balance
                         </Typography>
                         <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                            {formatNumber(stakedBalance, false, true)} { pairType == "farm" ? 'LP' : token0Symbol }
+                            {formatNumber(stakedBalance, false, true)} { tokenSymbol }
                         </Typography>
                 </div>
                 )}
@@ -627,7 +633,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                     <Typography className="text-white" fontFamily={'medium'}>
                             Balance (USD)
                         </Typography>
-                        <Typography className="text-dark-600" weight={600} fontFamily={'semi-bold'}>
+                        <Typography className={ textColor } weight={600} fontFamily={'semi-bold'}>
                             {formatNumber(stakedValue, true, true)}
                         </Typography>
                     </div>
@@ -641,7 +647,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                             Maximum Fee
                         </Typography>
                         <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                            {formatNumber(Number(stakedBalance) - withdrawable, false, true)} {pairType == "farm" ? 'LP' : token0Symbol }
+                            { formatNumber(Number(stakedBalance) - withdrawable, false, true) } { tokenSymbol }
                         </Typography>
                 </div>
                 
@@ -649,8 +655,8 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                     <Typography className="text-white" fontFamily={'medium'}>
                             Fee (USD)
                         </Typography>
-                        <Typography className="text-dark-600" weight={600} fontFamily={'semi-bold'}>
-                            {formatNumber(Number(feeValue), true, true)}
+                        <Typography className={ textColor } weight={600} fontFamily={'semi-bold'}>
+                            { formatNumber(Number(feeValue), true, true) }
                         </Typography>
                 </div>
 
@@ -660,9 +666,10 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                 {Number(withdrawFee) > 0 && (
                 <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-red border-1 hover:border-dark-600 w-full space-y-1">
                     <div className="text-white">
-                        <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                        <div className={classNames("block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md",
+                        "hover:bg-dark-300")}>
                             <span> 
-                                {(Number(withdrawFee)).toFixed(2)}% FEE
+                                { (Number(withdrawFee)).toFixed(2) }% FEE
                             </span>
                         </div>
                     </div>
@@ -674,7 +681,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                     <div className="text-white">
                         <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                             <span> 
-                                {(Number(withdrawFee)).toFixed(0)}% FEE
+                                { (Number(withdrawFee)).toFixed(0) }% FEE
                             </span>
                         </div>
                     </div>
@@ -694,26 +701,28 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                 token1={token1} 
             />
             <Wrap padding="0" margin="0" display="flex">
+
                 <SubmitButton
                     height="2rem"
-                    primaryColor="#B485FF"
-                    color="black"
+                    primaryColor={ buttonColor }
+                    color={ buttonTextColor }
                     margin=".5rem 0 0rem 0"
                     onClick={() =>
                         // handleWithdraw(pid)
                         setShowConfirmation(true)
                     }
                 >
-                    WITHDRAW { pairType == "farm" ? "LP" : token0Symbol}
+                    WITHDRAW { token0Symbol }
                 </SubmitButton>
+
             </Wrap>
         {/* EARNED */}
             {Number(earnedAmount) > 0 && (
                 <Wrap padding="0" margin="0" display="flex">
                         <SubmitButton
                             height="2rem"
-                            primaryColor="#B485FF"
-                            color="black"
+                            primaryColor={ buttonColor }
+                            color={ buttonTextColor }
                             margin=".5rem 0 .5rem 0"
                             onClick={() =>
                                 handleHarvest(pid)
@@ -743,7 +752,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                 Estimated Fee Outcomes
             </div>
             • <b>Current Rate</b>: {Number(withdrawFee).toFixed(2)}% <br/>
-            • <b>Fee Amount</b>: {formatNumber(Number(withdrawFee)*Number(withdrawValue) / 100, false, true)} {pairType == "farm" ? 'LP' : token0Symbol }<br/>
+            • <b>Fee Amount</b>: {formatNumber(Number(withdrawFee)*Number(withdrawValue) / 100, false, true)} {tokenSymbol }<br/>
             • <b>Fee Value</b>: {formatNumber(Number(withdrawFee)*Number(withdrawValue) * Number(lpPrice) / 100, true, true)}
 
             <div className="mt-6 text-center">
