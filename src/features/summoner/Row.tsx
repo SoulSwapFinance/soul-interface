@@ -669,7 +669,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         <div className={classNames("block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md",
                         "hover:bg-dark-300")}>
                             <span> 
-                                { (Number(withdrawFee)).toFixed(2) }% FEE
+                                { (Number(withdrawFee)).toFixed(0) }% FEE
                             </span>
                         </div>
                     </div>
@@ -751,7 +751,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
             <div className="text-xl mt-4 mb-4 text-center border p-1.5 border-dark-600">
                 Estimated Fee Outcomes
             </div>
-            • <b>Current Rate</b>: {Number(withdrawFee).toFixed(2)}% <br/>
+            • <b>Current Rate</b>: {Number(withdrawFee).toFixed(0)}% <br/>
             • <b>Fee Amount</b>: {formatNumber(Number(withdrawFee)*Number(withdrawValue) / 100, false, true)} {tokenSymbol }<br/>
             • <b>Fee Value</b>: {formatNumber(Number(withdrawFee)*Number(withdrawValue) * Number(lpPrice) / 100, true, true)}
 
