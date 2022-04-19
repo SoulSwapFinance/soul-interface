@@ -166,4 +166,12 @@ export const AllBonds = [
     token2Address: SOR,
     term: '5D',
   },
+  {
+    pid: 17,
+    bondAddress: '0x4Ac427a4DFF61023c2e84d8316180CF109c5e45C',
+    assetName: 'SOR',
+    assetAddress: SOR,
+    token1Address: SOR,
+    term: '5D',
+  },
 ]
