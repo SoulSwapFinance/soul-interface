@@ -15,7 +15,7 @@ const SwapModalFooter: FC<SwapModalFooter> = ({ onConfirm, swapErrorMessage, dis
   const { i18n } = useLingui()
   return (
     <div className="flex flex-col gap-4">
-      <Button onClick={onConfirm} disabled={disabledConfirm} id="confirm-swap-or-send" color="blue">
+      <Button onClick={onConfirm} disabled={disabledConfirm} id="confirm-swap-or-send" color="purple">
         {i18n._(t`Confirm Swap`)}
       </Button>
 

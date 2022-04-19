@@ -32,7 +32,7 @@ export default function TransactionPopup({
             href={getExplorerLink(chainId, hash, 'transaction')}
           >
             <div className="flex flex-row items-center gap-1">
-              View on Explorer <ExternalLinkIcon width={20} height={20} />
+              View on Explorer <ExternalLinkIcon width={20} height={20} className="text-dark-600" />
             </div>
           </ExternalLink>
         )}
