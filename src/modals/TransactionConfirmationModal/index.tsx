@@ -71,13 +71,13 @@ export const TransactionSubmittedContent: FC<TransactionSubmittedContentProps> =
         <CloseIcon onClick={onDismiss} />
       </div>
       <div className="w-24 pb-4 m-auto">
-        <ArrowUpCircle strokeWidth={0.5} size={90} className="text-blue" />
+        <ArrowUpCircle strokeWidth={0.5} size={90} className="text-dark-600" />
       </div>
       <div className="flex flex-col items-center justify-center gap-1">
         <div className="text-xl font-bold">{i18n._(t`Transaction Submitted`)}</div>
         {chainId && hash && (
           <ExternalLink href={getExplorerLink(chainId, hash, 'transaction')}>
-            <div className="font-bold text-blue">View on Explorer</div>
+            <div className="font-bold text-dark-600">View on Explorer</div>
           </ExternalLink>
         )}
         {currencyToAdd && library?.provider?.isMetaMask && (
