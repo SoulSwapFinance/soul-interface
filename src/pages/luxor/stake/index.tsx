@@ -73,6 +73,15 @@ export default function Stake() {
   // const fiveDayRate = Math.pow(1 + stakingRebase, 5 * 3) - 1;
   const stakingAPY = (Math.pow(1 + stakingRebase, 365 * 3) - 1) * 100
   
+  const nextRebase = Number(luxorInfo.nextRebase) * 1000 // ms (x1000)
+  // console.log('nextRebase:%s', nextRebase)
+  const nowTime = new Date().getTime()
+  // console.log('nowTime:%s', nowTime)
+  const remainingSeconds = nextRebase - Number(nowTime)
+  // console.log('remainingSecs:%s', remainingSeconds)
+  const remainingHours = remainingSeconds / 3_600_000
+  const remainingMinutes = remainingHours * 60
+
   const [stakeApprovalState, stakeApprove] = useApproveCallback(
     parsedStakeValue,
     LUXOR_STAKING_ADDRESS[250]
@@ -241,7 +250,20 @@ export default function Stake() {
                 locked={!account}
                 id="stablecoin-currency-input"
               />
-              <div className="h-px my-6 bg-dark-1000"></div>
+
+              <div className="h-px my-2 bg-dark-1000" />
+
+              <div className="flex justify-between">
+                  <Typography className="text-white" fontFamily={'medium'}>
+                    {i18n._(t`Epoch Remaining`)}
+                  </Typography>
+                  <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                  { (remainingMinutes).toFixed() } mins
+                  </Typography>
+              </div>             
+              
+              <div className="h-px my-2 bg-dark-1000" />
+
               <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-yellow w-full space-y-1">
                 <div className="text-white">
                     <div className="block text-md md:text-xl text-white text-center text-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
@@ -271,7 +293,7 @@ export default function Stake() {
                     {i18n._(t`Warmup Period`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    24 Hours
+                    24 hours
                   </Typography>
                 </div>
               </div>
@@ -332,15 +354,19 @@ export default function Stake() {
                 locked={!account}
                 id="stablecoin-currency-output"
               />
-             {/*  <AssetInput
-                            currencyLogo={false}
-                                currency={lumensToken}
-                                currencyAddress={lumensToken.address}
-                                value={redeemValue}
-                                onChange={setRedeemValue}
-                                showMax={false}
-                            /> */}
-              <div className="h-px my-6 bg-dark-1000"></div>
+<div className="h-px my-2 bg-dark-1000" />
+
+<div className="flex justify-between">
+    <Typography className="text-white" fontFamily={'medium'}>
+      {i18n._(t`Epoch Remaining`)}
+    </Typography>
+    <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+    { (remainingMinutes).toFixed() } mins
+    </Typography>
+</div>             
+
+<div className="h-px my-2 bg-dark-1000" />
+
                 <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-yellow w-full space-y-1">
                 <div className="text-white">
                     <div className="block text-md md:text-xl text-white text-center text-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">

@@ -46,25 +46,6 @@ import LuxorWrapModal from 'modals/LuxorWrapModal'
 export default function Dashboard() {
   const { i18n } = useLingui()
   // const { luxData } = useLuxorDashboard()
-  // const [totalLuxorSupply, setTotalLuxorSupply] = useState(0)
-  // const [totalSorSupply, setTotalSorSupply] = useState(0)
-  // const [totalWlumSupply, setTotalWlumSupply] = useState(0)
-  // const [stakedLuxor, setStakedLuxor] = useState(0)
-  // const [lockedLuxor, setLockedLuxor] = useState(0)
-  // const [sorDaiCollateral, setSorDaiCollateral] = useState(0)
-  // const [sorLuxCollateral, setSorLuxCollateral] = useState(0)
-  // const [sorSorCollateral, setSorSorCollateral] = useState(0)
-  // const [pooledLux, setPooledLuxor] = useState(0)
-  // const [treasuryLuxFtmBalance, setTreasuryLuxFtmBalance] = useState(0)
-  // const [treasuryLuxDaiBalance, setTreasuryLuxDaiBalance] = useState(0)
-  // const [treasuryFtmDaiBalance, setTreasuryFtmDaiBalance] = useState(0)
-  // const [treasuryInvestmentBalance, setTreasuryInvestmentBalance] = useState(0)
-  // const [treasuryLiquidityBalance, setTreasuryLiquidityBalance] = useState(0)
-  // const [treasuryReserveBalance, setTreasuryReserveBalance] = useState(0)
-  // const [treasuryDaiBalance, setTreasuryDaiBalance] = useState(0)
-  // const [treasuryFtmBalance, setTreasuryFtmBalance] = useState(0)
-  // const [treasuryLendBalance, setTreasuryLendBalance] = useState(0)
-  // const [treasuryLendBalance, setTreasuryLendBalance] = useState(0)
   const LuxFtmContract = usePairContract('0x951BBB838e49F7081072895947735b0892cCcbCD')
   const LuxDaiContract = usePairContract('0x46729c2AeeabE7774a0E710867df80a6E19Ef851')
   const FtmDaiContract = usePairContract('0xf3d6e8ecece8647b456d57375ce0b51b8f0cd40b')
@@ -84,7 +65,6 @@ export default function Dashboard() {
   const FtmLendDaiContract = useTokenContract('0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61')
   // const FtmContract = useTokenContract(WFTM_ADDRESS[250])
 
-  // const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(LuxorContract[250])
   let sorPegPrice = 1
   let sorMarketPrice = 1.0
   // const sorMarketPrice = useSorPrice()
@@ -134,7 +114,7 @@ export default function Dashboard() {
   // console.log('burned:%s', burnedSupply)
   const sorSorCollateral = Number(sorInfo.sorCollateral)
   const sorLuxCollateral = Number(sorInfo.luxorCollateralValue)
-  console.log('sorLuxCollateral:%s', sorLuxCollateral)
+  // console.log('sorLuxCollateral:%s', sorLuxCollateral)
   const sorDaiCollateral = Number(sorInfo.daiCollateral)
   // dampens the value of SOR collateral
   const sorSorCollateralAdjusted = Number(sorInfo.sorCollateral) * 0.1
@@ -142,7 +122,7 @@ export default function Dashboard() {
   // console.log('sorLuxCollateral:%s', sorLuxCollateral)
 
   const totalSorCollateral = sorDaiCollateral + sorLuxCollateral + sorSorCollateralAdjusted
-  console.log('totalSorCollateral:%s', totalSorCollateral)
+  // console.log('totalSorCollateral:%s', totalSorCollateral)
 
   // const result = useCurrencyBalance(LUX_TREASURY_ADDRESS, LUX_FTM)
   // const luxFtmBalance = result

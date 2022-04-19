@@ -108,6 +108,7 @@ export function useLuxorInfo(): { status: string; luxorInfo: T } {
         value: '0',
         epoch: '0',
         index: '0',
+        nextRebase: '0',
         circulatingLumens: '0',
         decimals: '18',
         supply: '0',
