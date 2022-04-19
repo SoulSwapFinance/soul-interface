@@ -177,21 +177,6 @@ const useMenu: UseBar = () => {
             title: i18n._(t`Tutorial`),
             link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
           },
-          {
-            key: 'soul-discord',
-            title: i18n._(t`Discord`),
-            link: 'https://discord.com/invite/DQjChB6Wa6',
-          },
-          {
-            key: 'soul-telegram',
-            title: i18n._(t`Telegram`),
-            link: 'https://t.me/SoulSwapDeFi',
-          },
-          {
-            key: 'soul-follow',
-            title: i18n._(t`Twitter`),
-            link: 'https://twitter.com/SoulSwapFinance',
-          },
         ],
       }
       mainItems.push(farmItems)
@@ -237,21 +222,6 @@ const useMenu: UseBar = () => {
             key: 'luxor-docs',
             title: i18n._(t`Tutorial`),
             link: 'https://docs.luxor.money',
-          },
-          {
-            key: 'luxor-discord',
-            title: i18n._(t`Discord`),
-            link: 'https://discord.com/invite/DQjChB6Wa6',
-          },
-          {
-            key: 'luxor-telegram',
-            title: i18n._(t`Telegram`),
-            link: 'https://t.me/SoulSwapDeFi',
-          },
-          {
-            key: 'luxor-follow',
-            title: i18n._(t`Twitter`),
-            link: 'https://twitter.com/LuxorMoney',
           },
         ],
       }
@@ -321,6 +291,48 @@ const useMenu: UseBar = () => {
             key: 'pairs',
             title: 'Pairs',
             link: '/analytics/pairs',
+          },
+        ],
+      })
+      
+    }
+    
+    if (featureEnabled(Feature.AMM, chainId))
+     {
+      mainItems.push({
+        key: 'socials',
+        title: i18n._(t`Community`),
+        icon: <TrendingUpIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+        items: [
+          {
+            key: 'discord',
+            title: 'Discord',
+            link: 'https://discord.com/invite/DQjChB6Wa6',
+          },
+          {
+            key: 'telegram',
+            title: 'Telegram',
+            link: 'https://t.me/SoulSwapDeFi',
+          },
+          {
+            key: 'soul-twitter',
+            title: 'Twitter',
+            link: 'https://twitter.com/SoulSwapFinance',
+          },
+          {
+            key: 'lux-twitter',
+            title: '@LuxorMoney',
+            link: 'https://twitter.com/LuxorMoney',
+          },
+          {
+            key: 'forum',
+            title: 'Forum',
+            link: 'https://forum.soulswap.finance',
+          },
+          {
+            key: 'medium',
+            title: 'Medium',
+            link: 'https://soulswapfinance.medium.com',
           },
         ],
       })
