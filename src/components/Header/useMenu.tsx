@@ -148,6 +148,11 @@ const useMenu: UseMenu = () => {
         icon: <CurrencyDollarIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
           {
+            key: 'pool',
+            title: i18n._(t`Liquidity`),
+            link: '/pool',
+          },
+          {
             key: 'farm',
             title: i18n._(t`Farms`),
             link: '/summoner',
@@ -171,21 +176,6 @@ const useMenu: UseMenu = () => {
             key: 'soul-docs',
             title: i18n._(t`Tutorials`),
             link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
-          },
-          {
-            key: 'soul-discord',
-            title: i18n._(t`Discord`),
-            link: 'https://discord.com/invite/DQjChB6Wa6',
-          },
-          {
-            key: 'soul-telegram',
-            title: i18n._(t`Telegram`),
-            link: 'https://t.me/SoulSwapDeFi',
-          },
-          {
-            key: 'soul-follow',
-            title: i18n._(t`Twitter`),
-            link: 'https://twitter.com/SoulSwap',
           },
         ],
       }
@@ -222,21 +212,6 @@ const useMenu: UseMenu = () => {
             key: 'lux-docs',
             title: i18n._(t`Tutorials`),
             link: 'https://docs.luxor.money',
-          },
-          {
-            key: 'luxor-discord',
-            title: i18n._(t`Discord`),
-            link: 'https://discord.com/invite/DQjChB6Wa6',
-          },
-          {
-            key: 'luxor-telegram',
-            title: i18n._(t`Telegram`),
-            link: 'https://t.me/SoulSwapDeFi',
-          },
-          {
-            key: 'luxor-follow',
-            title: i18n._(t`Twitter`),
-            link: 'https://twitter.com/LuxorMoney',
           },
         ],
       }
@@ -281,26 +256,6 @@ const useMenu: UseMenu = () => {
       
     }
 
-    // if (featureEnabled(Feature.MISO, chainId)) {
-    //   mainItems.push({
-    //     key: 'launchpad',
-    //     title: i18n._(t`Launchpad`),
-    //     icon: <RocketIcon width={20} />,
-    //     items: [
-    //       {
-    //         key: 'marketplace',
-    //         title: i18n._(t`Marketplace`),
-    //         link: '/miso',
-    //       },
-    //       {
-    //         key: 'factory',
-    //         title: i18n._(t`Factory`),
-    //         link: '/miso/auction',
-    //       },
-    //     ],
-    //   })
-    // }
-
     let analyticsMenu: MenuItem = {
       key: 'analytics',
       title: i18n._(t`Analytics`),
@@ -341,6 +296,48 @@ const useMenu: UseMenu = () => {
       mainItems.push(analyticsMenu)
     }
 
+    if (featureEnabled(Feature.AMM, chainId))
+    {
+     mainItems.push({
+       key: 'socials',
+       title: i18n._(t`Community`),
+       icon: <TrendingUpIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+       items: [
+         {
+           key: 'discord',
+           title: 'Discord',
+           link: 'https://discord.com/invite/DQjChB6Wa6',
+         },
+         {
+           key: 'telegram',
+           title: 'Telegram',
+           link: 'https://t.me/SoulSwapDeFi',
+         },
+         {
+           key: 'soul-twitter',
+           title: 'Twitter',
+           link: 'https://twitter.com/SoulSwapFinance',
+         },
+         {
+           key: 'lux-twitter',
+           title: '@LuxorMoney',
+           link: 'https://twitter.com/LuxorMoney',
+         },
+         {
+           key: 'forum',
+           title: 'Forum',
+           link: 'https://forum.soulswap.finance',
+         },
+         {
+           key: 'medium',
+           title: 'Medium',
+           link: 'https://soulswapfinance.medium.com',
+         },
+       ],
+     })
+     
+   }
+   
     // mainItems.push({
     //   key: 'balances',
     //   title: i18n._(t`Portfolio`),
