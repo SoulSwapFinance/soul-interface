@@ -91,7 +91,7 @@ export function useStakeContract() {
       try {
         let tx
 
-        tx = await contract?.unstake(amount, 0)
+        tx = await contract?.unstake(amount, 1)
 
         return tx
       } catch (e) {
