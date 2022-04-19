@@ -321,7 +321,7 @@ const useMenu: UseBar = () => {
           },
           {
             key: 'lux-twitter',
-            title: '@LuxorMoney',
+            title: '@Luxor',
             link: 'https://twitter.com/LuxorMoney',
           },
           {
