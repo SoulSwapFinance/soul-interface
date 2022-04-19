@@ -247,7 +247,7 @@ export default function Stake() {
                     {i18n._(t`Warmup Period`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    { 0 } Epochs
+                  24 Hours
                   </Typography>
                 </div>
               </div>
