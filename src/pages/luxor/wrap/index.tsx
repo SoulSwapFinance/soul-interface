@@ -27,6 +27,7 @@ import NavLink from 'components/NavLink'
 import { useLuxorPrice } from 'hooks/getPrices'
 // import useStablecoin from 'hooks/useStablecoin'
 import { LuxorBanner } from 'components/Banner'
+import { useLuxorInfo } from 'hooks/useAPI'
 
 export default function Stablecoin() {
   const addTransaction = useTransactionAdder()
@@ -34,7 +35,6 @@ export default function Stablecoin() {
   // const { independentField } = useSwapState()
   const [wrapValue, setWrapValue] = useState('')
   const [unwrapValue, setUnwrapValue] = useState('')
-  const [wrapIndex, setWrapIndex] = useState(0)
 
   const { account, chainId } = useActiveWeb3React()
   // const { data } = useStablecoin()
@@ -43,7 +43,7 @@ export default function Stablecoin() {
   const wlumToken = new Token(chainId, getAddress(WLUM_ADDRESS[chainId]), 9, 'WLUM')
   // const redeemClaimAmount = useRedeemClaimAmount(wlumToken)
 
-  const LumensContract = useLumensContract()
+  // const LumensContract = useLumensContract()
   const WrappedLumensContract = useWrappedLumensContract()
 
   const lumensBalance = useCurrencyBalance(account, lumensToken)
@@ -52,6 +52,8 @@ export default function Stablecoin() {
   const parsedStakeValue = tryParseAmount(wrapValue, lumensToken)
   const parsedUnwrapValue = tryParseAmount(unwrapValue, wlumToken)
 
+  const { luxorInfo } = useLuxorInfo()
+  const wrapIndex = Number(luxorInfo.index)
 
   const [wrapApprovalState, wrapApprove] = useApproveCallback(
     parsedStakeValue,
@@ -78,37 +80,6 @@ export default function Stablecoin() {
   const isUnwrapValid = !redeemError
 
   const luxorPrice = useLuxorPrice()
-
-  /**
-   * Runs only on initial render/mount
-   */
-  useEffect(() => {
-    fetchWrapInfo()
-  }, [])
-
-  useEffect(() => {
-    try {
-      const timer = setTimeout(() => {
-        fetchWrapInfo()
-      }, 3000)
-      // Clear timeout if the component is unmounted
-      return () => clearTimeout(timer)
-    } catch (err) {
-      console.warn(err)
-    }
-  })
-
-  const fetchWrapInfo = async () => {
-    try {
-      const index = await LumensContract.index()
-      const wrapIndex = index / 1e9
-      // console.log('wrapIndex:%s', Number(wrapIndex))
-      setWrapIndex(wrapIndex)
-      return [wrapIndex]
-    } catch (err) {
-      console.warn(err)
-    }
-  }
 
   return (
     <Container id="stablecoin-page" className="py-4 md:py-8 lg:py-12">

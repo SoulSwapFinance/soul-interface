@@ -25,6 +25,7 @@ import { useActiveWeb3React } from 'services/web3/hooks'
 // import { useSingleCallResult } from 'state/multicall/hooks'
 import NavLink from 'components/NavLink'
 import { useLuxorPrice } from 'hooks/getPrices'
+import { useLuxorInfo } from 'hooks/useAPI'
 
 export default function Wrap() {
   const addTransaction = useTransactionAdder()
@@ -32,7 +33,6 @@ export default function Wrap() {
   // const { independentField } = useSwapState()
   const [wrapValue, setWrapValue] = useState('')
   const [unwrapValue, setUnwrapValue] = useState('')
-  const [wrapIndex, setWrapIndex] = useState(0)
 
   const { account, chainId } = useActiveWeb3React()
   // const { data } = useStablecoin()
@@ -50,6 +50,8 @@ export default function Wrap() {
   const parsedStakeValue = tryParseAmount(wrapValue, lumensToken)
   const parsedUnwrapValue = tryParseAmount(unwrapValue, wlumToken)
 
+  const { luxorInfo } = useLuxorInfo()
+  const wrapIndex = Number(luxorInfo.index)
 
   const [wrapApprovalState, wrapApprove] = useApproveCallback(
     parsedStakeValue,
@@ -76,37 +78,6 @@ export default function Wrap() {
   const isUnwrapValid = !redeemError
 
   const luxorPrice = useLuxorPrice()
-
-  /**
-   * Runs only on initial render/mount
-   */
-  useEffect(() => {
-    fetchWrapInfo()
-  }, [])
-
-  useEffect(() => {
-    try {
-      const timer = setTimeout(() => {
-        fetchWrapInfo()
-      }, 3000)
-      // Clear timeout if the component is unmounted
-      return () => clearTimeout(timer)
-    } catch (err) {
-      console.warn(err)
-    }
-  })
-
-  const fetchWrapInfo = async () => {
-    try {
-      const index = await LumensContract.index()
-      const wrapIndex = index / 1e9
-      // console.log('wrapIndex:%s', Number(wrapIndex))
-      setWrapIndex(wrapIndex)
-      return [wrapIndex]
-    } catch (err) {
-      console.warn(err)
-    }
-  }
 
   return (
     <Container id="stablecoin-page" className="py-4 md:py-8 lg:py-12">

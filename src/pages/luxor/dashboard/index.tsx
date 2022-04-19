@@ -82,7 +82,6 @@ export default function Dashboard() {
   const LuxSorAddress = LuxSorContract.address
   const luxorSupply = Number(useTokenInfo(LuxorAddress).tokenInfo.supply) / 1e9
   const wlumSupply = Number(useTokenInfo(WrappedLumensAddress).tokenInfo.supply) / 1e9
-  
   // const { userInfo } = useUserInfo(LuxorTreasuryAddress, WrappedLumFantomAddress)
   // const ftmWlumBalance = Number(userInfo.value)
   // console.log('lumensSupply:%s', wlumSupply)
@@ -147,11 +146,13 @@ export default function Dashboard() {
   // console.log('treasuryReserveBalance', treasuryReserveBalance)
   
   // GET LUXOR ECONOMY BALANCES //
-  const stakedLuxor = Number(useLuxorInfo().luxorInfo.stakingBalance)
+  const { luxorInfo } = useLuxorInfo()
+  const stakedLuxor = Number(luxorInfo.stakingBalance)
   // console.log('staked', stakedLuxor)
-  const lockedLuxor = Number(useLuxorInfo().luxorInfo.warmupBalance)
+  const lockedLuxor = Number(luxorInfo.warmupBalance)
   // console.log('lockedLuxor', lockedLuxor)
   // console.log('SorValue', SorValue)
+  const wrapIndex = Number(luxorInfo.index)
 
   const luxorCirculatingSupply = luxorSupply - Number(stakedLuxor) - Number(lockedLuxor)
   // console.log('Ftm Bal:%s', FtmBalance)
@@ -981,9 +982,10 @@ export default function Dashboard() {
                 <Typography 
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               {formatNumber(wlumPrice / luxorPrice, false, false)}
-              <span className="text-xs leading-5 text-black-50 ml-1">{i18n._(t`/ WLUM`).toUpperCase()}</span>
-            </Typography>
+               {/* {formatNumber(wlumPrice / luxorPrice, false, false)} */}
+                  { formatNumber(wrapIndex, false, true) }
+                <span className="text-xs leading-5 text-black-50 ml-1">{i18n._(t`/ WLUM`).toUpperCase()}</span>
+                </Typography>
           </div>
           {/* <div>
             <Typography
