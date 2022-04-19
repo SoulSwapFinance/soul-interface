@@ -27,6 +27,32 @@ export const InactivePools = [
     token1Address: tokens.DAI,
     token2Address: tokens.gFUSDT,
   },
+  {
+    // 0
+    pid: 36,
+    token1: 'SOUL',
+    token2: 'WETH',
+    lpSymbol: 'SOUL-ETH',
+    lpAddresses: {
+      4002: '',
+      250: '0x778F0d5515A3E78D1DD191f30835420c0275bde1',
+    },
+    token1Address: tokens.SOUL,
+    token2Address: tokens.WETH,
+  },
+  {
+    // 0
+    pid: 37,
+    token1: 'SOUL',
+    token2: 'BTC',
+    lpSymbol: 'SOUL-BTC',
+    lpAddresses: {
+      4002: '',
+      250: '0xDA9D9CB5482EFD10839A676Fe99f05E41F57D885',
+    },
+    token1Address: tokens.SOUL,
+    token2Address: tokens.WBTC,
+  },
   
   {
     // 0
