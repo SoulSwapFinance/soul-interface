@@ -24,7 +24,7 @@ import {
     SubmitButton,
 } from './Styles'
 import { Wrap, Text, ExternalLink } from '../../components/ReusableStyles'
-import { tryParseAmount } from 'functions'
+import { formatNumber, tryParseAmount } from 'functions'
 // import { useCurrencyBalance, useTokenBalance } from 'state/wallet/hooks'
 import { useApproveCallback } from 'hooks/useApproveCallback'
 import Modal from 'components/Modal/DefaultModal'
@@ -392,7 +392,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                     </Text>
                                 ) : (
                                     <Text padding="0" fontSize="1rem" color="#4EFF4E">
-                                        {Number(payout).toFixed(2)}
+                                        {formatNumber(payout, false, true)}
                                     </Text>
                                 )}
                             </StakeItemBox>
@@ -505,8 +505,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                         onClick={() => handleApprove()}>
                                             APPROVE
                                         </SubmitButton>
-                                    )
-                                        }
+                                    )}
                                     </Wrap>
                                 </FunctionBox>
                             ) : (
