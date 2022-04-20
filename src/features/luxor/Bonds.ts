@@ -176,7 +176,7 @@ export const AllBonds = [
   },
   {
     pid: 18,
-    bondAddress: '0x04b65a392F7f2577C7aa78b4cab3BA6F6FD71336',
+    bondAddress: '0x2b4ecB35Aa2a5C163675E1b66577E127C38eb911',
     assetName: 'WFTM',
     assetAddress: FTM,
     token1Address: FTM,
