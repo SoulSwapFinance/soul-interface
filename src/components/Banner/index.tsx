@@ -76,7 +76,7 @@ export const LuxorBanner: FC = () => (
             <a href="https://twitter.com/LuxorMoney/status/1515653849490538500?s=20&t=2JuPf_55Fr5zwC27UchGww" target = "_blank" rel="noreferrer"
               className="font-bold text-black text-lg">
               {' '}
-              V2 Migration Live: Click to Read More 
+              Introducing SOR: Click to Learn More 
               {/* Please vote in our LIVE proposals regarding withdrawal fees and governance. <span aria-hidden="true">&rarr;</span> */}
             </a>
           </span>
