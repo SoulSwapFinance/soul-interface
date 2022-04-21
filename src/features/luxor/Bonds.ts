@@ -157,6 +157,9 @@ export const AllBonds = [
     token2Address: FTM,
     term: '4W',
   },
+
+  // 5 DAY | LIVE BONDS
+
   {
     pid: 16,
     bondAddress: '0xF584E92F891e2BCF78Eb7B49D929eae48c2d8B6A',
@@ -181,5 +184,16 @@ export const AllBonds = [
     assetAddress: FTM,
     token1Address: FTM,
     term: '5D',
+  },
+  
+  // 10 DAY | LIVE BONDS
+  {
+  pid: 19,
+  bondAddress: '0xDAF7fE4Db56d8D2080bc8FDd4Ca9F60B2931993B',
+  assetName: 'LUX-SOR',
+  assetAddress: LUX_SOR,
+  token1Address: LUX,
+  token2Address: SOR,
+  term: '10D',
   },
 ]
