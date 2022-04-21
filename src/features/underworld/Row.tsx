@@ -210,7 +210,7 @@ export const Row = ({ farm, lpToken }) => {
 
                 <LendContainer>
                     <div className={classNames("bg-dark-1200 p-3 border hover:border-blue", assetBalance == 0 && "border-dark-1000",
-                            assetBalance > 0 && "border-dark-600"
+                            assetBalance > 0 && "border-blue"
                     )}
                         onClick={() => handleShowOptions()}
                     >
