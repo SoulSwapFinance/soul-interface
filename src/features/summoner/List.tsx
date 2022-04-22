@@ -58,7 +58,7 @@ export const FarmList = () => {
       <Typography className="text-2xl mb-12 mt-6 border border-blue p-3 font-bold text-center">Lending Pools</Typography>
         <Underworld />
         <>{lendingList}</>
-      <Typography className="text-2xl mb-12 mt-6 border border-pink p-3 font-bold text-center">Retired Pools</Typography>
+      <Typography className="text-2xl mb-12 mt-6 border border-pink p-3 font-bold text-center">Inactive Pools</Typography>
         <SoulSwap />
         <>{inactiveList}</>
     </>

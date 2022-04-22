@@ -149,6 +149,19 @@ export const ActivePools = [
     token1Address: tokens.SEANCE,
     token2Address: tokens.USDC,
   },
+  // {
+  //   // 400
+  //   pid: 54,
+  //   token1: 'FTM',
+  //   token2: 'SOR',
+  //   lpSymbol: 'FTM-SOR',
+  //   lpAddresses: {
+  //     4002: '',
+  //     250: '0xdfB2218b48627794711E6cFd72e26c541E456F6F',
+  //   },
+  //   token1Address: tokens.FTM,
+  //   token2Address: tokens.SOR,
+  // },
   {
     // 500
     pid: 47,
