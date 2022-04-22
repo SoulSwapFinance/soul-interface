@@ -430,6 +430,20 @@ export default function Stake() {
                 </div> */}
               </div>
               <div className="mt-6 flex items-center gap-2">
+              <Button
+                    variant="filled"
+                    color="yellow"
+                    className="text-black"
+                    onClick={redeemApprove}
+                    disabled={redeemApprovalState !== ApprovalState.NOT_APPROVED}
+                    style={{ width: '100%' }}
+                  >
+                    {redeemApprovalState === ApprovalState.PENDING ? (
+                      <Dots>{i18n._(t`Approving`)}</Dots>
+                    ) : (
+                      i18n._(t`Approve`)
+                    )}
+                  </Button>
                 {isRedeemValid &&
                   (redeemApprovalState === ApprovalState.NOT_APPROVED ||
                     redeemApprovalState === ApprovalState.PENDING) ? (

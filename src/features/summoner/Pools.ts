@@ -71,8 +71,9 @@ export const InactivePools = [
 ]
 
 export const ActivePools = [
+  // PID: 0 | AP: 25%
   {
-    // 1600
+    // 6000
     pid: 1,
     token1: 'SOUL',
     token2: 'FTM',
@@ -98,7 +99,7 @@ export const ActivePools = [
     token2Address: tokens.USDC,
   },
   {
-    // 600
+    // 400
     pid: 5,
     token1: 'SOUL',
     token2: 'SEANCE',
@@ -111,7 +112,7 @@ export const ActivePools = [
     token2Address: tokens.SEANCE,
   },
   {
-    // 400
+    // 100
     pid: 27,
     token1: 'SEANCE',
     token2: 'UNIDX',
@@ -176,7 +177,7 @@ export const ActivePools = [
     token2Address: tokens.WLUM,
   },
   {
-    // 500
+    // 200
     pid: 44,
     token1: 'FTM',
     token2: 'LUX',
@@ -215,7 +216,7 @@ export const ActivePools = [
     token2Address: tokens.DAI,
   },
   {
-    // 600
+    // 300 √
     pid: 2,
     token1: 'FTM',
     token2: 'USDC',
@@ -267,7 +268,7 @@ export const ActivePools = [
     token2Address: tokens.WBTC,
   },
   {
-    // 600
+    // 400 √
     pid: 14,
     token1: 'FTM',
     token2: 'USDT',
@@ -280,7 +281,7 @@ export const ActivePools = [
     token2Address: tokens.USDT,
   },
   {
-    // 300
+    // 150 √
     pid: 41,
     token1: 'FTM',
     token2: 'CRV',
@@ -345,7 +346,7 @@ export const ActivePools = [
     token2Address: tokens.DAI,
   },
   {
-    // 200
+    // 100 √
     pid: 21,
     token1: 'USDC',
     token2: 'DAI',
@@ -358,7 +359,7 @@ export const ActivePools = [
     token2Address: tokens.DAI,
   },
   {
-    // 200
+    // 125 √
     pid: 9,
     token1: 'USDC',
     token2: 'USDT',
