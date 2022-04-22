@@ -200,6 +200,14 @@ export const AllBonds = [
   // 10 DAY | ACTIVE BONDS
   {
   pid: 20,
+  bondAddress: '0x5b76bE108A44169928cFddFCdE549ab6Af194429',
+  assetName: 'SOR',
+  assetAddress: SOR,
+  token1Address: SOR,
+  term: '10D',
+  },
+  {
+  pid: 21,
   bondAddress: '0xf9a0fA495e0CfaFE40CAb1bDC307f6Fc24889d51',
   assetName: 'LUX-SOR',
   assetAddress: LUX_SOR,
