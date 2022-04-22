@@ -186,10 +186,21 @@ export const AllBonds = [
     term: '5D',
   },
   
-  // 10 DAY | LIVE BONDS
+  // 10 DAY | INACTIVE BONDS
   {
-  pid: 19,
-  bondAddress: '0xDAF7fE4Db56d8D2080bc8FDd4Ca9F60B2931993B',
+    pid: 19,
+    bondAddress: '0xDAF7fE4Db56d8D2080bc8FDd4Ca9F60B2931993B',
+    assetName: 'LUX-SOR',
+    assetAddress: LUX_SOR,
+    token1Address: LUX,
+    token2Address: SOR,
+    term: '10D',
+  },
+
+  // 10 DAY | ACTIVE BONDS
+  {
+  pid: 20,
+  bondAddress: '0xf9a0fA495e0CfaFE40CAb1bDC307f6Fc24889d51',
   assetName: 'LUX-SOR',
   assetAddress: LUX_SOR,
   token1Address: LUX,
