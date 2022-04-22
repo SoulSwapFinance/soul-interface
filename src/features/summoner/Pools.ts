@@ -149,6 +149,19 @@ export const ActivePools = [
     token1Address: tokens.SEANCE,
     token2Address: tokens.USDC,
   },
+  // {
+  //   // 400
+  //   pid: 54,
+  //   token1: 'FTM',
+  //   token2: 'SOR',
+  //   lpSymbol: 'FTM-SOR',
+  //   lpAddresses: {
+  //     4002: '',
+  //     250: '0xdfB2218b48627794711E6cFd72e26c541E456F6F',
+  //   },
+  //   token1Address: tokens.FTM,
+  //   token2Address: tokens.SOR,
+  // },
   {
     // 500
     pid: 47,
@@ -161,6 +174,19 @@ export const ActivePools = [
     },
     token1Address: tokens.FTM,
     token2Address: tokens.WLUM,
+  },
+  {
+    // 500
+    pid: 44,
+    token1: 'FTM',
+    token2: 'LUX',
+    lpSymbol: 'FTM-LUX',
+    lpAddresses: {
+      4002: '',
+      250: '0x951BBB838e49F7081072895947735b0892cCcbCD',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.LUX,
   },
   {
     // 300

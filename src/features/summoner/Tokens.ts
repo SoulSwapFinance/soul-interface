@@ -15,6 +15,10 @@ export const tokens = {
       4002: "",
       250: "0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208",
     },
+    SOR: {
+      4002: "",
+      250: "0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A",
+    },
     ENCHANT: {
       4002: "",
       250: "0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a",
