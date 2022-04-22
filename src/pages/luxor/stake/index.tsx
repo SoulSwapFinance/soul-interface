@@ -11,7 +11,7 @@ import { Button, ButtonError } from 'components/Button'
 import StableInputPanel from 'components/StableInputPanel'
 import { ApprovalState, useApproveCallback, useLuxorStakeHelperContract, useLuxorStakingContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
-import { LUM_ADDRESS, LUXOR_STAKING_ADDRESS, Token } from 'sdk'
+import { LUM_ADDRESS, LUXOR_STAKING_ADDRESS, max, Token } from 'sdk'
 import { LUX_ADDRESS } from 'constants/addresses'
 import { tryParseAmount, formatNumber } from 'functions'
 import { useCurrencyBalance } from 'state/wallet/hooks'
@@ -80,8 +80,9 @@ export default function Stake() {
   const remainingSeconds = nextRebase - Number(nowTime)
   // console.log('remainingSecs:%s', remainingSeconds)
   const remainingHours = remainingSeconds / 3_600_000
-  const remainingMinutes = remainingHours * 60
-
+  const remainingMinutes 
+    = max(remainingHours * 60, 0)
+    
   const [stakeApprovalState, stakeApprove] = useApproveCallback(
     parsedStakeValue,
     LUXOR_STAKING_ADDRESS[250]
@@ -240,6 +241,7 @@ export default function Stake() {
             <Tab.Panel className={'outline-none'}>
               <StableInputPanel
                 value={stakeValue}
+                showLogo={true}
                 showMaxButton={true}
                 onUserInput={(value) => setStakeValue(value)}
                 onMax={() =>
@@ -345,7 +347,7 @@ export default function Stake() {
             <Tab.Panel className={'outline-none'}>
              <StableInputPanel
                 value={redeemValue}
-                showLogo={false}
+                showLogo={true}
                 showMaxButton={true}
                 onUserInput={(value) => setRedeemValue(value)}
                 onMax={ () => setRedeemValue(lumensBalance.toExact()) }

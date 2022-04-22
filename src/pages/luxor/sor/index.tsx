@@ -243,6 +243,7 @@ export default function Stablecoin() {
 
               <StableInputPanel
                 value={stakeValue}
+                showLogo={true}
                 showMaxButton={true}
                 onUserInput={(value) => setStakeValue(value)}
                 onMax={() =>
@@ -268,7 +269,7 @@ export default function Stablecoin() {
                 </div>
               </AutoColumn>
               <StableInputPanel
-                // label={i18n._(t`Output`)}
+                showLogo={true}
                 value={stakeValue}
                 showMaxButton={true}
                 currency={sorToken}
@@ -444,7 +445,7 @@ export default function Stablecoin() {
               </Button>
 
               <StableInputPanel
-                // label={i18n._(t`Input`)}
+                showLogo={true}
                 value={redeemValue}
                 showMaxButton={true}
                 onUserInput={(value) => setRedeemValue(value)}
@@ -472,8 +473,8 @@ export default function Stablecoin() {
                 </div>
               </AutoColumn>
               <StableInputPanel
-                // label={i18n._(t`Output`)}
                 value={redeemValue !== '' ? (Number(redeemValue) * pegPrice).toString() : ''}
+                showLogo={true}
                 showMaxButton={false}
                 currency={daiToken}
                 disableCurrencySelect={true}

@@ -562,7 +562,7 @@ export default function Dashboard() {
             <Typography 
             className={'flex justify-center items-baseline'}
             variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               {luxorPerDay.toFixed()}
+              { formatNumber(luxorPerDay, false, true) }
                <span className="text-xs leading-5 text-black-50 ml-1">{i18n._(t`/ DAY`).toUpperCase()}</span>
             </Typography>
             </div>
@@ -613,7 +613,7 @@ export default function Dashboard() {
                 <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                  {luxorPerDay.toFixed()}
+                  { formatNumber(luxorPerDay, false, true) }
                   <span className="text-xs leading-5 text-black-50 ml-1">{i18n._(t`/ DAY`).toUpperCase()}</span>
                 </Typography>
               </div>

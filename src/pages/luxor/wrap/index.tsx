@@ -155,6 +155,7 @@ export default function Stablecoin() {
             <Tab.Panel className={'outline-none'}>
               <StableInputPanel
                 value={wrapValue}
+                showLogo={true}
                 showMaxButton={true}
                 onUserInput={(value) => setWrapValue(value)}
                 onMax={() =>
@@ -177,6 +178,7 @@ export default function Stablecoin() {
               </AutoColumn>
               <StableInputPanel
                 value={(Number(wrapValue) / wrapIndex).toString()}
+                showLogo={true}
                 showMaxButton={true}
                 currency={wlumToken}
                 disableCurrencySelect={true}
@@ -245,6 +247,7 @@ export default function Stablecoin() {
             <Tab.Panel className={'outline-none'}>
               <StableInputPanel
                 value={unwrapValue}
+                showLogo={true}
                 showMaxButton={true}
                 onUserInput={(value) => setUnwrapValue(value)}
                 onMax={() =>
@@ -267,6 +270,7 @@ export default function Stablecoin() {
               </AutoColumn>
               <StableInputPanel
                 value={(Number(unwrapValue) * wrapIndex).toString()}
+                showLogo={true}
                 showMaxButton={true}
                 currency={lumensToken}
                 disableCurrencySelect={true}
