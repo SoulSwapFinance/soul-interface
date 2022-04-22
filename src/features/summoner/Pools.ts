@@ -176,6 +176,19 @@ export const ActivePools = [
     token2Address: tokens.WLUM,
   },
   {
+    // 500
+    pid: 44,
+    token1: 'FTM',
+    token2: 'LUX',
+    lpSymbol: 'FTM-LUX',
+    lpAddresses: {
+      4002: '',
+      250: '0x951BBB838e49F7081072895947735b0892cCcbCD',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.LUX,
+  },
+  {
     // 300
     pid: 38,
     token1: 'FTM',
