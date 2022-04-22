@@ -435,7 +435,7 @@ export default function Stake() {
                     color="yellow"
                     className="text-black"
                     onClick={redeemApprove}
-                    // disabled={redeemApprovalState !== ApprovalState.NOT_APPROVED}
+                    disabled={redeemApprovalState !== ApprovalState.NOT_APPROVED}
                     style={{ width: '100%' }}
                   >
                     {redeemApprovalState === ApprovalState.PENDING ? (
