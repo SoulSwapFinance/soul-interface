@@ -20,7 +20,7 @@ import StableInputPanel from 'components/StableInputPanel'
 // import QuestionHelper from 'components/QuestionHelper'
 import { ApprovalState, useApproveCallback, useLuxorStakeHelperContract, useLuxorStakingContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
-import { ChainId, LUM_ADDRESS, LUXOR_STAKING_ADDRESS, LUXOR_STAKING_HELPER_ADDRESS, Token } from 'sdk'
+import { ChainId, LUM_ADDRESS, LUXOR_STAKING_ADDRESS, LUXOR_STAKING_HELPER_ADDRESS, max, Token } from 'sdk'
 import { LUXOR_WARMUP_ADDRESS, LUX_ADDRESS } from 'constants/addresses'
 import { tryParseAmount, formatCurrencyAmount, formatNumberScale, formatPercent, formatNumber } from 'functions'
 import { useCurrencyBalance } from 'state/wallet/hooks'
@@ -92,9 +92,11 @@ export default function Stake() {
   const nowTime = new Date().getTime()
   // console.log('nowTime:%s', nowTime)
   const remainingSeconds = nextRebase - Number(nowTime)
-  console.log('remainingSecs:%s', remainingSeconds)
+  // console.log('remainingSecs:%s', remainingSeconds)
   const remainingHours = remainingSeconds / 3_600_000
-  const remainingMinutes = remainingHours * 60
+  const remainingMinutes 
+    = max(remainingHours * 60, 0)
+  // console.log('remainingMinutes:%s', remainingMinutes)
 
   const [stakeApprovalState, stakeApprove] = useApproveCallback(
     parsedStakeValue,
@@ -232,7 +234,7 @@ export default function Stake() {
 
               <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Epoch Remaining`)}
+                    {i18n._(t`Remaining`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                   { (remainingMinutes).toFixed() } mins
@@ -251,7 +253,7 @@ export default function Stake() {
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1">
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Luxor Balance`)}
+                    {i18n._(t`Balance`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     {luxBalance.toFixed(2)} LUX
@@ -259,7 +261,7 @@ export default function Stake() {
                 </div>
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Deposited Amount`)}
+                    {i18n._(t`Deposited`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     {lumBalance.toFixed(2)} LUX
@@ -267,7 +269,7 @@ export default function Stake() {
                 </div>
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Warmup Period`)}
+                    {i18n._(t`Warmup`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                   24 hours
@@ -336,7 +338,7 @@ export default function Stake() {
 
             <div className="flex justify-between">
                 <Typography className="text-white" fontFamily={'medium'}>
-                  {i18n._(t`Epoch Remaining`)}
+                  {i18n._(t`Remaining`)}
                 </Typography>
                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                 { (remainingMinutes).toFixed() } mins
@@ -355,7 +357,7 @@ export default function Stake() {
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1">
               <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Deposited Amount`)}
+                    {i18n._(t`Deposited`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     {lumBalance.toFixed(2)} LUX
@@ -363,7 +365,7 @@ export default function Stake() {
                 </div>
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Warmup Balance`)}
+                    {i18n._(t`Warmup`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     {warmupValue.toFixed(2)} LUX
@@ -380,7 +382,7 @@ export default function Stake() {
                 </div> */}
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Warmup Remaining`)}
+                    {i18n._(t`Remaining`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     {
