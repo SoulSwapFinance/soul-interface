@@ -23,7 +23,6 @@ import { ethers } from 'ethers'
 import { useSoulSummonerContract } from '../../hooks'
 import Typography from '../../components/Typography'
 import { SubmitButton } from '../../features/seance/SeanceStyles'
-// import Header from 'features/mines/components/Header'
 import ModalHeader from 'components/Modal/Header'
 import NavLink from 'components/NavLink'
 import Modal from 'components/DefaultModal'
@@ -316,12 +315,39 @@ export default function SoulStake() {
       {/* <DoubleGlowShadowV2 maxWidth={false} opacity={'0.3'}> */}
       <div className="mb-1 md:mb-2" />
         {/* <Header /> */}
-        <div className="flex items-right px-4">
-          <Button>
-          <NavLink href="/summoner">
-            <a className="flex items-center space-x-2 font-medium text-center text-dark-600 cursor-pointer text-base hover:text-high-emphesis">
-             <ArrowLeftIcon width={18} height={18} className="text-dark-600 hover:text-white" />
-              <span>Farms</span>
+        <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
+        <Button variant="filled" color="deepPurple" size="lg">
+          <NavLink href={'/seance'}>
+            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Stake </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="blue" size="lg">
+          <NavLink href={'/soul/dashboard'}>
+            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Dashboard </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="deepPurple" size="lg">
+          <NavLink href={'/bonds'}>
+            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Bond </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="blue" size="lg">
+          <NavLink href={'/underworld'}>
+            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Lend </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="deepPurple" size="lg">
+          <NavLink href={'/autostake'}>
+            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Vault </span>
             </a>
           </NavLink>
         </Button>
