@@ -234,7 +234,7 @@ const useMenu: UseMenu = () => {
           {
             key: 'underworld-farms',
             title: i18n._(t`Mines`),
-            link: '/mines?filter=lending',
+            link: '/summoner',
           },
           {
             key: 'balances',

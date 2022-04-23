@@ -206,7 +206,7 @@ export default function Claims() {
                 </Link>
               </div>
               <div className="p-4 rounded bg-dark-800">
-                <Link href={`/mines`}>
+                <Link href={`/summoner`}>
                   <a className="flex items-center justify-between gap-3">
                     <div className="flex flex-col gap-1">
                       <div className="font-bold text-white">{i18n._(t`Farm with SOUL-FTM`)}</div>
