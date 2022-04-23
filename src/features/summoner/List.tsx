@@ -1,14 +1,12 @@
+import React from 'react'
 import Typography from 'components/Typography'
-import React, { useEffect, useState } from 'react'
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
-import { SoulSwap, Underworld } from './Key'
+import { Active, Inactive, Underworld } from './Key'
 import { ActiveRow } from './Row'
 import { ActivePools, LendingPools, InactivePools } from './Pools'
 import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
-import { ArrowLeftIcon, ArrowRightIcon, XIcon } from '@heroicons/react/outline'
-import Header from 'components/Header'
+import { ArrowRightIcon } from '@heroicons/react/outline'
 
 export const FarmList = () => {
   // const { chainId } = useActiveWeb3React()
@@ -42,24 +40,51 @@ export const FarmList = () => {
 
   return (
     <>
-      <div className="flex justify-end px-4">
-        <Button>
-          <NavLink href="/seance">
-            <a className="flex items-center space-x-2 font-medium text-center text-dark-600 cursor-pointer text-base hover:text-high-emphesis">
-              <span>Stake</span>
-             <ArrowRightIcon width={18} height={18} className="text-dark-600 hover:text-white" />
+<div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
+        <Button variant="filled" color="deepPurple" size="lg">
+          <NavLink href={'/seance'}>
+            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Stake </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="blue" size="lg">
+          <NavLink href={'/soul/dashboard'}>
+            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Dashboard </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="deepPurple" size="lg">
+          <NavLink href={'/bonds'}>
+            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Bond </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="blue" size="lg">
+          <NavLink href={'/underworld'}>
+            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Lend </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="deepPurple" size="lg">
+          <NavLink href={'/autostake'}>
+            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Vault </span>
             </a>
           </NavLink>
         </Button>
       </div>
-     <Typography className="text-2xl mb-12 mt-6 border border-dark-600 p-3 font-bold text-center">SoulSwap Pools</Typography>
-        <SoulSwap />
+     <Typography className="text-2xl bg-dark-1000 mb-3 mt-6 border border-dark-600 p-3 font-bold text-center">SoulSwap Pools</Typography>
+        <Active />
         <>{activeList}</>
-      <Typography className="text-2xl mb-12 mt-6 border border-blue p-3 font-bold text-center">Lending Pools</Typography>
+      <Typography className="text-2xl bg-dark-1000 mb-3 mt-6 border border-blue p-3 font-bold text-center">Lending Pools</Typography>
         <Underworld />
         <>{lendingList}</>
-      <Typography className="text-2xl mb-12 mt-6 border border-pink p-3 font-bold text-center">Inactive Pools</Typography>
-        <SoulSwap />
+      <Typography className="text-2xl bg-dark-1000 mb-3 mt-6 border border-pink p-3 font-bold text-center">Retired Pools</Typography>
+        <Inactive />
         <>{inactiveList}</>
     </>
   )

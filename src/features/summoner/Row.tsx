@@ -15,9 +15,7 @@ import { FarmContentWrapper,
 import { classNames, formatNumber, tryParseAmount } from 'functions'
 import { usePairInfo, useSummonerPoolInfo, useSummonerUserInfo } from 'hooks/useAPI'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
-import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
 import Modal from 'components/DefaultModal'
-import { ArrowDownIcon, ArrowLeftIcon, PlusIcon, XIcon } from '@heroicons/react/solid'
 import { Button } from 'components/Button'
 import Typography from 'components/Typography'
 // import Modal from 'components/Modal/DefaultModal'
@@ -28,9 +26,6 @@ import NavLink from 'components/NavLink'
 import FarmInputPanel from './Input'
 import { CurrencyLogo } from 'components/CurrencyLogo'
 import QuestionHelper from 'components/QuestionHelper'
-// import { AutoColumn } from 'components/Column'
-// import ExternalLink from 'components/ExternalLink'
-// import { useCurrencyBalance } from 'state/wallet/hooks'
 
 const HideOnSmall = styled.div`
 @media screen and (max-width: 900px) {
@@ -239,7 +234,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
         <>
             <div className="flex justify-center w-full">
                 <FarmContainer>
-                    <div className={classNames("bg-dark-1200 p-3 border", !hasBalance && "border-dark-1000",
+                    <div className={classNames("bg-dark-900 p-3 border", !hasBalance && "border-dark-1000",
                         isUnderworldPair ? "hover:border-blue" : !isActive ? "hover:border-pink"
                         : hasBalance && isUnderworldPair ? "hover:border-blue border-blue" 
                         : hasBalance && !isUnderworldPair ? "border-dark-600" 

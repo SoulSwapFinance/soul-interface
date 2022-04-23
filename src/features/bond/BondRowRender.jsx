@@ -22,8 +22,8 @@ import {
   Input,
   SubmitButton,
 } from './BondStyles'
-import { formatNumber } from 'functions/format'
-
+// import { formatNumber } from 'functions/format'
+import NavLink from 'components/NavLink'
 import { Wrap, ClickableText, Heading, Text, ExternalLink } from '../../components/ReusableStyles'
 import Modal from '../../components/DefaultModal'
 import Typography from '../../components/Typography'
@@ -353,6 +353,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   return (
     <>
       <Wrap padding="0" display="flex" justifyContent="center">
+      
         <BondContainer>
           <Row onClick={() => handleShow()}>
             <BondContentWrapper>
