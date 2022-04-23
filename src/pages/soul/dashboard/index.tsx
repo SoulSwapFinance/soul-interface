@@ -72,7 +72,7 @@ export default function Dashboard() {
       color: '#B485FF',
       label: 'CIRCULATING SUPPLY',
       percent: ((circulatingSupply / totalSupply) * 100).toFixed(),
-      text: 'The combined number of LUX tokens being traded or in public wallets.',
+      text: 'The combined number of SOUL being traded or in public wallets.',
     },
     {
       angle: stakedSoul,
@@ -226,7 +226,7 @@ export default function Dashboard() {
               {i18n._(t`Total Value Locked`)}
               <QuestionHelper
                 width={'small'}
-                text={<div className="flex flex-col space-y-2">The sum of all assets staked in Luxor protocol.</div>}
+                text={<div className="flex flex-col space-y-2">The sum of all assets staked in Soul protocol.</div>}
               />
             </Typography>
             <Typography variant={'h1'} lineHeight={48} fontFamily={'medium'}>
@@ -274,7 +274,7 @@ export default function Dashboard() {
               {i18n._(t`Market Cap`)}
             </Typography>
             <Typography variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               {formatNumber(luxorMarketCap, true)}
+               {formatNumber(soulMarketCap, true)}
             </Typography>
           </div>
           <div>
