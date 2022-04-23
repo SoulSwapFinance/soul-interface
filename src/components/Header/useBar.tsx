@@ -149,7 +149,7 @@ const useMenu: UseBar = () => {
         items: [
           {
             key: 'soul-dashboard',
-            title: i18n._(t`Dashboard`),
+            title: i18n._(t`Overview`),
             link: '/soul/dashboard',
           },
           {
@@ -315,14 +315,9 @@ const useMenu: UseBar = () => {
             link: 'https://t.me/SoulSwapDeFi',
           },
           {
-            key: 'soul-twitter',
+            key: 'twitter',
             title: 'Twitter',
-            link: 'https://twitter.com/SoulSwapFinance',
-          },
-          {
-            key: 'lux-twitter',
-            title: '@Luxor',
-            link: 'https://twitter.com/LuxorMoney',
+            link: `https://twitter.com/${ isLuxor ? 'LuxorMoney' : 'SoulSwapFinance' }`,
           },
           {
             key: 'forum',
