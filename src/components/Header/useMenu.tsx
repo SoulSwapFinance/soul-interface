@@ -148,6 +148,11 @@ const useMenu: UseMenu = () => {
         icon: <CurrencyDollarIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
           {
+            key: 'soul-dashboard',
+            title: i18n._(t`Dashboard`),
+            link: '/soul/dashboard',
+          },
+          {
             key: 'pool',
             title: i18n._(t`Liquidity`),
             link: '/pool',
@@ -233,7 +238,7 @@ const useMenu: UseMenu = () => {
           },
           {
             key: 'underworld-farms',
-            title: i18n._(t`Mines`),
+            title: i18n._(t`Farms`),
             link: '/summoner',
           },
           {
@@ -278,14 +283,6 @@ const useMenu: UseMenu = () => {
         },
       ],
     }
-
-    // if (featureEnabled(Feature.COFFINBOX, chainId)) {
-    //   analyticsMenu.items.push({
-    //     key: 'coffinbox',
-    //     title: 'CoffinBox',
-    //     link: '/analytics/coffinbox',
-    //   })
-    // }
 
     if (featureEnabled(Feature.ANALYTICS, chainId)) {
       mainItems.push(analyticsMenu)

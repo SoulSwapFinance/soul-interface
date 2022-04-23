@@ -40,26 +40,7 @@ const useMobileMenu: UseMobileMenu = () => {
       link: '/swap',
       // icon: <SwitchVerticalIcon width={16} />,
     }
- // If AMM is enabled, replace swap button with a submenu under trade
- /* if (featureEnabled(Feature.AMM, chainId)) {
-  tradeMenu = {
-    key: 'exchange',
-    title: i18n._(t`SWAP`),
-    icon: <SwitchVerticalIcon width={16} />,
-    items: [
-      {
-        key: 'swap',
-        title: i18n._(t`Swap`),
-        link: '/swap',
-      },
-      {
-        key: 'bridge',
-        title: i18n._(t`Bridge`),
-        link: '/bridge',
-      },
-    ],
-  }
-} */
+
     // If limit orders is enabled, replace swap button with a submenu under trade
     if (featureEnabled(Feature.TRIDENT, chainId)) {
       tradeMenu = {
