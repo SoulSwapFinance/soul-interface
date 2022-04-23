@@ -148,6 +148,11 @@ const useMenu: UseBar = () => {
         icon: <CurrencyDollarIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
           {
+            key: 'soul-dashboard',
+            title: i18n._(t`Dashboard`),
+            link: '/soul/dashboard',
+          },
+          {
             key: 'farm',
             title: i18n._(t`Farms`),
             link: '/summoner',
@@ -242,7 +247,7 @@ const useMenu: UseBar = () => {
             },
             {
               key: 'underworld-farms',
-              title: i18n._(t`Mines`),
+              title: i18n._(t`Farms`),
               link: '/summoner',
             },
             {

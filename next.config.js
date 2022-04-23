@@ -88,8 +88,13 @@ module.exports = withBundleAnalyzer(
           permanent: true,
         },
         {
+          source: '/soul',
+          destination: '/soul/dashboard',
+          permanent: true,
+        },
+        {
           source: '/dashboard',
-          destination: '/luxor/dashboard',
+          destination: '/soul/dashboard',
           permanent: true,
         },
         // {
@@ -103,7 +108,7 @@ module.exports = withBundleAnalyzer(
       return [
         // {
         //   source: '/stake',
-        //   destination: '/seance',
+        //   destination: '/soul/seance',
         // },
         {
           source: '/add/:token*',
@@ -140,6 +145,10 @@ module.exports = withBundleAnalyzer(
         {
           source: '/open-order',
           destination: '/exchange/open-order',
+        },
+        {
+          source: '/soul',
+          destination: '/soul/dashboard',
         },
         {
           source: '/luxor',
@@ -187,7 +196,7 @@ module.exports = withBundleAnalyzer(
         },
         {
           source: '/dashboard',
-          destination: '/luxor/dashboard',
+          destination: '/soul/dashboard',
         },
         {
           source: '/bond',

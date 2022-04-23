@@ -110,7 +110,7 @@ export function useLuxorInfo(): { status: string; luxorInfo: T } {
         index: '0',
         nextRebase: '0',
         circulatingLumens: '0',
-        decimals: '18',
+        decimals: '9',
         supply: '0',
         stakingBalance: '0',
         warmupBalance: '0',
@@ -137,6 +137,64 @@ export function useLuxorInfo(): { status: string; luxorInfo: T } {
     }, [])
   
     return { status, luxorInfo }
+}
+
+export function useSoulInfo(): { status: string; soulInfo: T } {
+    const { account, chainId } = useActiveWeb3React()
+    const [status, setStatus] = useState<string>('idle')
+    const [soulInfo, setInfo] = useState<T>({
+        address: '',
+        name: '',
+        mcap: '0',
+        symbol: '',
+        price: '0',
+        decimals: '18',
+        supply: '0',
+        stakedSoul: '0',
+
+        totalReserveValue: '0',
+        totalLiquidityValue: '0',
+        totalValue: '0',
+
+        SoulBalance: '0',
+        NativeBalance: '0',
+        NativeValue: '0',
+        SoulValue: '0',
+  
+        SoulFantomValue: '0',
+        FantomEthereumValue: '0',
+        UsdcDaiValue: '0',
+        FantomUsdcValue: '0',
+        FantomBitcoinValue: '0',
+        FantomDaiValue: '0',
+        FantomBinanceValue: '0',
+        SeanceFantomValue: '0',
+        BitcoinEthereumValue: '0',
+
+        api: "https://api.soulswap.finance/soulswap",
+        ftmscan: 'https://ftmscan.com/address/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07#code',
+        image: 'https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png'
+      })  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus('fetching')
+        const response = await fetch(`${BASE_URL}/soulswap`,
+         {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referrer-Policy': 'no-referrer',
+          },
+        })
+        const json = await response.json()
+        setInfo(json as T)
+        setStatus('fetched')
+      }
+      if (chainId == ChainId.FANTOM) 
+      fetchData()
+    }, [])
+  
+    return { status, soulInfo }
 }
 
 export function useLuxorUserInfo(userAddress): { status: string; luxorUserInfo: T } {
