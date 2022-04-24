@@ -56,14 +56,14 @@ export enum MULTICHAIN_METHODS {
   GET_CHAIN_TOKENS = "/v2/serverInfo",
   GET_STABLE_TOKENS = "/v3/serverinfoV3",
   GET_TX_STATUS = "/v2/history/details",
-  // ANNOUNCE_TX = "/v2/reswaptxns?hash=0xa63e6e3a86718d710658ef1445c6bd604752086ae68908ffac39a686db6b815g&srcChainID=250&destChainID=137",
+  ANNOUNCE_TX = "/v2/reswaptxns?hash=0xa63e6e3a86718d710658ef1445c6bd604752086ae68908ffac39a686db6b815g&srcChainID=250&destChainID=137",
 }
 
 const isNativeForDestChain = (tokenid: string, destChainId: number) => {
   if (tokenid === "FTM" && destChainId === 250) return true;
-  // if (tokenid === "AVAX" && destChainId === 43114) return true;
-  // if (tokenid === "BNB" && destChainId === 56) return true;
-  // if (tokenid === "MATIC" && destChainId === 137) return true;
+  if (tokenid === "AVAX" && destChainId === 43114) return true;
+  if (tokenid === "BNB" && destChainId === 56) return true;
+  if (tokenid === "MATIC" && destChainId === 137) return true;
   if (tokenid === "ETH" && destChainId === 1) return true;
 
   return false;
@@ -76,12 +76,12 @@ const useBridgeApi = () => {
   const isIncluded = (srcChain: string, destChain: string, symbol: string) => {
     const isFTM = srcChain === "250" || destChain === "250";
     const isEth = srcChain === "1" || destChain === "1";
-    // const isBNB = srcChain === "56" || destChain === "56";
-    // const isPolygon = srcChain === "137" || destChain === "137";
+    const isBNB = srcChain === "56" || destChain === "56";
+    const isPolygon = srcChain === "137" || destChain === "137";
 
     if (isFTM && isEth && FTM_ETH.includes(symbol)) return true;
-    // if (isFTM && isBNB && FTM_BNB.includes(symbol)) return true;
-    // if (isFTM && isPolygon && FTM_MATIC.includes(symbol)) return true;
+    if (isFTM && isBNB && FTM_BNB.includes(symbol)) return true;
+    if (isFTM && isPolygon && FTM_MATIC.includes(symbol)) return true;
 
     return false;
   };
@@ -104,20 +104,20 @@ const useBridgeApi = () => {
     });
   };
 
-  // const announceTransaction = (
-  //   hash: string,
-  //   fromChain: number,
-  //   toChain: number
-  // ) => {
-  //   return get({
-  //     path: MULTICHAIN_METHODS.ANNOUNCE_TX,
-  //     queryParams: [
-  //       ["hash", hash],
-  //       ["srcChainID", fromChain],
-  //       ["destChainID", toChain],
-  //     ],
-  //   });
-  // };
+  const announceTransaction = (
+    hash: string,
+    fromChain: number,
+    toChain: number
+  ) => {
+    return get({
+      path: MULTICHAIN_METHODS.ANNOUNCE_TX,
+      queryParams: [
+        ["hash", hash],
+        ["srcChainID", fromChain],
+        ["destChainID", toChain],
+      ],
+    });
+  };
 
   const getTransactionStatus = (hash: string) => {
     return get({
@@ -163,26 +163,26 @@ const useBridgeApi = () => {
 
         const isFantom = chainToId === 250 || chainFromId === 250;
         const isEthereum = chainToId === 1 || chainFromId === 1;
-        // const isBinance = chainToId === 56 || chainFromId === 56;
-        // const isPolygon = chainToId === 137 || chainFromId === 137;
-        // const isAvalanche = chainToId === 43114 || chainFromId === 43114;
-        // const isArbitrum = chainToId === 42161 || chainFromId === 42161;
+        const isBinance = chainToId === 56 || chainFromId === 56;
+        const isPolygon = chainToId === 137 || chainFromId === 137;
+        const isAvalanche = chainToId === 43114 || chainFromId === 43114;
+        const isArbitrum = chainToId === 42161 || chainFromId === 42161;
 
-        // if (isFantom && isPolygon) {
-        //   return FTM_MATIC_STABLE.includes(tokenId);
-        // }
-        // if (isFantom && isAvalanche) {
-        //   return FTM_AVALANCHE_STABLE.includes(tokenId);
-        // }
-        // if (isFantom && isBinance) {
-        //   return FTM_BSC_STABLE.includes(tokenId);
-        // }
+        if (isFantom && isPolygon) {
+          return FTM_MATIC_STABLE.includes(tokenId);
+        }
+        if (isFantom && isAvalanche) {
+          return FTM_AVALANCHE_STABLE.includes(tokenId);
+        }
+        if (isFantom && isBinance) {
+          return FTM_BSC_STABLE.includes(tokenId);
+        }
         if (isFantom && isEthereum) {
           return FTM_ETH_STABLE.includes(tokenId);
         }
-        // if (isFantom && isArbitrum) {
-        //   return FTM_ARBRITRUM_STABLE.includes(tokenId);
-        // }
+        if (isFantom && isArbitrum) {
+          return FTM_ARBRITRUM_STABLE.includes(tokenId);
+        }
 
         return false;
       });
@@ -386,7 +386,7 @@ const useBridgeApi = () => {
   };
 
   return {
-    // announceTransaction,
+    announceTransaction,
     getBridgeTokens,
     getTransactionStatus,
   };

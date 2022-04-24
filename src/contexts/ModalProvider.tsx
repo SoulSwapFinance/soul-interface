@@ -14,8 +14,7 @@ export const Context = createContext<ModalsContext>({
   onDismiss: () => {},
 });
 
-// @ts-ignore
-const ModalProvider: React.FC = ({ children }) => {
+const ModalProvider: React.FC<any> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [content, setContent] = useState<React.ReactNode>();
   const [modalKey, setModalKey] = useState<string>();

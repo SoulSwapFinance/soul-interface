@@ -34,6 +34,8 @@ import { BigNumber } from "@ethersproject/bignumber";
 import Loader from "components/Loader";
 import FadeInOut from "components/AnimationFade";
 import { useActiveWeb3React } from "services/web3";
+import AssetInput from "components/AssetInput";
+import CurrencySearchModal from "modals/SearchModal/CurrencySearchModal";
 
 const SwapImg = "https://raw.githubusercontent.com/Fantom-foundation/fWallet-interface/94af5d96a763acf8ba1693a54df0f0ad2508d989/packages/app/src/assets/img/symbols/Swap.svg"
 // const multichainImg = "https://multichain.org/img/MUL.52a9d64c.png"
@@ -206,7 +208,7 @@ const ChainSelection: React.FC<any> = ({
   const { account, chainId, library } = useActiveWeb3React()
   const [fromChain, setFromChain] = useState(250);
   const [toChain, setToChain] = useState(1);
-  // const { getBridgeTokens } = useBridgeApi();
+  const { getBridgeTokens } = useBridgeApi();
   const { forceSwap, DEFAULT_PROVIDERS } = useMultiChain();
 
   const getBalance = async (address: string, provider: any) => {
@@ -228,60 +230,59 @@ const ChainSelection: React.FC<any> = ({
 
   useEffect(() => {
     setTokenList(null);
-    // todo: fix below
-    // getBridgeTokens(toChain, fromChain).then((tokenList) => {
-    //   if (tokenList?.length) {
-    //     const tokenOrder = [
-    //       "FTM",
-    //       "WFTM",
-    //       "USDC",
-    //       "USDT",
-    //       "fUSDT",
-    //       "DAI",
-    //       "MIM",
-    //       "ETH",
-    //       "WETH",
-    //       "BTC",
-    //       "WBTC",
-    //       "MATIC",
-    //       "AVAX",
-    //       "BNB",
-    //     ];
-    //     if (tokenList?.length && account) {
-    //       const stickyTokens = tokenOrder
-    //         .map((symbol) => {
-    //           return tokenList.find(
-    //             (token: any) =>
-    //               token.symbol.toLowerCase() === symbol.toLowerCase()
-    //           );
-    //         })
-    //         .filter((item: any) => item);
-    //       const restOfTokens = tokenList.filter(
-    //         (token: any) => !stickyTokens.includes(token)
-    //       );
+    getBridgeTokens(toChain, fromChain).then((tokenList) => {
+      if (tokenList?.length) {
+        const tokenOrder = [
+          "FTM",
+          "WFTM",
+          "USDC",
+          "USDT",
+          "fUSDT",
+          "DAI",
+          "MIM",
+          "ETH",
+          "WETH",
+          "BTC",
+          "WBTC",
+          "MATIC",
+          "AVAX",
+          "BNB",
+        ];
+        if (tokenList?.length && account) {
+          const stickyTokens = tokenOrder
+            .map((symbol) => {
+              return tokenList.find(
+                (token: any) =>
+                  token.symbol.toLowerCase() === symbol.toLowerCase()
+              );
+            })
+            .filter((item: any) => item);
+          const restOfTokens = tokenList.filter(
+            (token: any) => !stickyTokens.includes(token)
+          );
 
-    //       const allTokens = [...stickyTokens, ...restOfTokens];
-    //       const fromProvider = DEFAULT_PROVIDERS[fromChain];
-    //       const toProvider = DEFAULT_PROVIDERS[toChain];
-    //       const tokensAndBalances = allTokens.map((token) => {
-    //         return {
-    //           ...token,
-    //           balance: getBalance(
-    //             token.isNative === "true" ? AddressZero : token.ContractAddress,
-    //             fromProvider
-    //           ),
-    //           balanceTo: getBalance(
-    //             token.isNativeTo === "true"
-    //               ? AddressZero
-    //               : token.ContractAddressTo,
-    //             toProvider
-    //           ),
-    //         };
-    //       });
-    //       setTokenList(tokensAndBalances);
-    //     }
-    //   }
-    // });
+          const allTokens = [...stickyTokens, ...restOfTokens];
+          const fromProvider = DEFAULT_PROVIDERS[fromChain];
+          const toProvider = DEFAULT_PROVIDERS[toChain];
+          const tokensAndBalances = allTokens.map((token) => {
+            return {
+              ...token,
+              balance: getBalance(
+                token.isNative === "true" ? AddressZero : token.ContractAddress,
+                fromProvider
+              ),
+              balanceTo: getBalance(
+                token.isNativeTo === "true"
+                  ? AddressZero
+                  : token.ContractAddressTo,
+                toProvider
+              ),
+            };
+          });
+          setTokenList(tokensAndBalances);
+        }
+      }
+    });
   }, [fromChain, toChain, account]);
 
   const handleSetFromChain = (chainId: number) => {
@@ -323,7 +324,6 @@ const ChainSelection: React.FC<any> = ({
       />
       {chainId !== fromChain && (
         <>
-          {/* <Spacer size="xs" /> */}
           <div className="my-2" />
           <OverlayButton
             style={{ textAlign: "start" }}
@@ -336,7 +336,6 @@ const ChainSelection: React.FC<any> = ({
           </OverlayButton>
         </>
       )}
-      {/* <Spacer size="lg" /> */}
       <div className="my-4" />
       <Row style={{ justifyContent: "center", alignItems: "center" }}>
         <div style={{ height: "1px", width: "100%" }} />
@@ -356,7 +355,6 @@ const ChainSelection: React.FC<any> = ({
         </OverlayButton>
         <div style={{ height: "1px", width: "100%" }} />
       </Row>
-      {/* <Spacer size="lg" /> */}
       <div className="my-4" />
       <ChainSelector
         text="To Chain"
@@ -366,7 +364,6 @@ const ChainSelection: React.FC<any> = ({
           (chainId) => chainId !== toChain
         )}
       />
-      {/* <Spacer /> */}
       <div className="my-2" />
     </Column>
   );
@@ -378,6 +375,7 @@ const TokenSelector: React.FC<any> = ({ tokens, selected, selectToken }) => {
     <BridgeTokenSelectModal tokens={tokens} selectToken={selectToken} />,
     "bridge-token-select-modal"
   );
+  const [ open, setOpen ] = useState(false)
 
   return (
     <Column style={{ width: "100%", flex: 1 }}>
@@ -429,7 +427,6 @@ const BridgeTokenSelectModal: React.FC<any> = ({
       onDismiss={onDismiss}
     >
       <ModalTitle text="Select token" />
-      {/* <Spacer /> */}
       <div className="my-2" />
       <ModalContent 
         // style={{ padding: "16px 0px" }}
@@ -534,10 +531,12 @@ const BridgeTokenList: React.FC<any> = ({
   inputError,
   isBridgeTxCompleted,
 }) => {
+  const { account } = useActiveWeb3React()
   const [token, setToken] = useState(null);
   const [fromTokenBalance, setFromTokenBalance] = useState(null);
   const [toTokenBalance, setToTokenBalance] = useState(null);
-  const { account } = useActiveWeb3React()
+  const [ open, setOpen ] = useState(false)
+
 
   const handleSetToken = (value: any) => {
     setFromTokenBalance(null);
@@ -581,12 +580,10 @@ const BridgeTokenList: React.FC<any> = ({
           {inputError ? (
              <InputError error={inputError} fontSize="14px" />
            ) : (
-            // <Spacer />
             <div className="my-2" />
           )}
         </Row>
       </Row>
-      {/* <Spacer size="xs" /> */}
       <div className="my-2" />
       <Row style={{ gap: "1rem" }}>
         <TokenSelector
@@ -594,7 +591,14 @@ const BridgeTokenList: React.FC<any> = ({
           selected={token}
           selectToken={handleSetToken}
         />
+        <div className="flex items-end justify-between gap-2">
+    </div>
         <div style={{ flex: 2 }}>
+          <AssetInput 
+          onChange={ setAmount }     
+          value={amount}
+          currency={token}
+          />
           {/* <InputCurrencyBox
             disabled={!token}
             value={amount}

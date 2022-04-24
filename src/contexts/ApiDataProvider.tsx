@@ -45,7 +45,7 @@ export const ApiDataProvider: React.FC<any> = ({ children }) => {
 
   return (
     <ApiDataContext.Provider value={[state, dispatch]}>
-      {children}
+      { children }
     </ApiDataContext.Provider>
   );
 };

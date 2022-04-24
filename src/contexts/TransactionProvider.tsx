@@ -5,8 +5,7 @@ const initial = {
 } as any;
 export const TransactionContext = React.createContext(null);
 
-// export const TransactionProvider: React.FC = ({ children }) => {
-export const TransactionProvider: React.FC = ({ }) => {
+export const TransactionProvider: React.FC<any> = ({ children }) => {
   const transactionReducer = (state: any, action: any) => {
     switch (action.type) {
       case "transactionPending":
@@ -56,8 +55,7 @@ export const TransactionProvider: React.FC = ({ }) => {
 
   return (
     <TransactionContext.Provider value={[state, dispatch]}>
-      {/* {children} */}
-      {}
+      { children }
     </TransactionContext.Provider>
   );
 };

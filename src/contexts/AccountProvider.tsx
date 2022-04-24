@@ -11,8 +11,7 @@ const initial: { wallets: Wallet[] } = {
 };
 export const AccountContext = React.createContext(null);
 
-// @ts-ignore
-export const AccountProvider: React.FC = ({ children }) => {
+export const AccountProvider: React.FC<any> = ({ children }) => {
   const accountReducer = (state: any, action: any) => {
     switch (action.type) {
       case "addWallet":
@@ -59,7 +58,7 @@ export const AccountProvider: React.FC = ({ children }) => {
 
   return (
     <AccountContext.Provider value={[state, dispatch]}>
-      {children}
+      { children }
     </AccountContext.Provider>
   );
 };
