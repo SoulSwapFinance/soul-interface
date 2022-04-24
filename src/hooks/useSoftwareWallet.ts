@@ -5,16 +5,16 @@ import {
   Web3Provider,
 } from "@ethersproject/providers";
 import config from "config/configurations";
-import useWalletProvider from "./useWalletProvider";
 import useAccounts from "./useAccount";
 import { loadContracts } from "utils/wallet";
 import { useWeb3React } from "@web3-react/core";
 import { wordlists } from "@ethersproject/wordlists";
 import { entropyToMnemonic } from "@ethersproject/hdnode";
 import { randomBytes } from "@ethersproject/random";
+import { useActiveWeb3React } from "services/web3";
 
 export const useSoftwareWallet = () => {
-  const { dispatchWalletContext } = useWalletProvider();
+  const { account, chainId } = useActiveWeb3React()
   const { dispatchAccount } = useAccounts();
   const context = useWeb3React<Web3Provider>();
 
@@ -41,13 +41,13 @@ export const useSoftwareWallet = () => {
       },
     });
 
-    await dispatchWalletContext({
-      type: "setActiveWallet",
-      data: {
-        ...walletProvider,
-        providerType: "software",
-      },
-    });
+    // await dispatchWalletContext({
+    //   type: "setActiveWallet",
+    //   data: {
+    //     ...walletProvider,
+    //     providerType: "software",
+    //   },
+    // });
   };
 
   const generateMnemonic = () => {

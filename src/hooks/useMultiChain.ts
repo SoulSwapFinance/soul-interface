@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import useWalletProvider from "./useWalletProvider";
-import { useSoftwareWallet } from "./useSoftwareWallet";
+// import { useSoftwareWallet } from "./useSoftwareWallet";
 import { bridgeNetworks } from "utils/bridge";
 import config from "config/configurations";
 import { switchToChain } from "utils/events";
 import { getDefaultProvider, JsonRpcProvider } from "@ethersproject/providers";
+import { useActiveWeb3React } from "services/web3";
 
 const SUPPORTED_CHAINS = [250, 1, 56, 137, 43114, 42161];
 const DEFAULT_PROVIDERS = {
@@ -19,31 +19,31 @@ const DEFAULT_PROVIDERS = {
 } as any;
 
 const useMultiChain = () => {
-  const { walletContext } = useWalletProvider();
-  const { changeWalletProvider } = useSoftwareWallet();
+  const { chainId, account, library } = useActiveWeb3React()
+  // const { changeWalletProvider } = useSoftwareWallet();
   const [toChain, setToChain] = useState(null);
 
   const swapToChain = (chainId: number) => {
-    if (walletContext.activeWallet.providerType === "browser") {
-      switchToChain(walletContext.activeWallet.provider, chainId);
-    }
+    // if (walletContext.activeWallet.providerType === "browser") {
+      switchToChain(library.provider, chainId);
+    // }
 
-    if (walletContext.activeWallet.providerType === "software") {
-      changeWalletProvider(
-        walletContext.activeWallet.signer,
-        bridgeNetworks[chainId].rpc
-      );
-    }
+    // if (walletContext.activeWallet.providerType === "software") {
+    //   changeWalletProvider(
+    //     walletContext.activeWallet.signer,
+    //     bridgeNetworks[chainId].rpc
+    //   );
+    // }
   };
 
   useEffect(() => {
     if (!toChain) return;
     if (!SUPPORTED_CHAINS.includes(toChain)) return;
-    if (walletContext.activeWallet.chainId === toChain) return;
+    if (chainId === toChain) return;
     swapToChain(toChain);
 
     // return () => swapToChain(parseInt(config.chainId));
-  }, [toChain, walletContext.activeWallet.address]);
+  }, [toChain, account]);
 
   return {
     setToChain,

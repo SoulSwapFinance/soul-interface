@@ -1,19 +1,19 @@
 import { MaxUint256 } from "@ethersproject/constants";
-import useWalletProvider from "./useWalletProvider";
 import useTransaction from "./useTransaction";
 import { send } from "utils/transactions";
 import { loadERC20Contract } from "utils/wallet";
+import { useActiveWeb3React } from "services/web3";
+import { getSigner } from "sdk";
 
 const useFantomERC20 = () => {
-  const { walletContext } = useWalletProvider();
   const { dispatchTx } = useTransaction();
-
+  const { account, chainId, library } = useActiveWeb3React()
   const approve = async (
     contractAddress: string,
     approveAddress: string,
     amount?: string
   ) => {
-    if (!walletContext.activeWallet.signer) {
+    if (!account) {
       console.error("[sendTransation] signer not found");
       return;
     }
@@ -24,11 +24,11 @@ const useFantomERC20 = () => {
 
     const contract = await loadERC20Contract(
       contractAddress,
-      walletContext.activeWallet.signer
+      getSigner(library, account)
     );
 
     return send(
-      walletContext.activeWallet.provider,
+      library.provider,
       () => contract.approve(approveAddress, amount || MaxUint256),
       dispatchTx
     );
@@ -40,11 +40,11 @@ const useFantomERC20 = () => {
   ) => {
     const contract = await loadERC20Contract(
       contractAddress,
-      walletContext.activeWallet.signer
+      getSigner(library, account)
     );
 
     return contract.allowance(
-      walletContext.activeWallet.address,
+      account,
       approvedAddress
     );
   };
@@ -54,7 +54,7 @@ const useFantomERC20 = () => {
     toAddress: string,
     amount: string
   ) => {
-    if (!walletContext.activeWallet.signer) {
+    if (!getSigner(library, account)) {
       console.error("[sendTransation] signer not found");
       return;
     }
@@ -65,11 +65,11 @@ const useFantomERC20 = () => {
 
     const contract = await loadERC20Contract(
       contractAddress,
-      walletContext.activeWallet.signer
+      getSigner(library, account)
     );
 
     return send(
-      walletContext.activeWallet.provider,
+      library?.provider,
       () => contract.transfer(toAddress, amount),
       dispatchTx
     );
@@ -78,7 +78,7 @@ const useFantomERC20 = () => {
   const getDecimals = async (contractAddress: string) => {
     const contract = await loadERC20Contract(
       contractAddress,
-      walletContext.activeWallet.provider
+      getSigner(library, account)
     );
 
     return contract.decimals();
@@ -91,7 +91,7 @@ const useFantomERC20 = () => {
   ) => {
     const contract = await loadERC20Contract(
       contractAddress,
-      walletContext.activeWallet.signer
+      getSigner(library, account)
     );
 
     return contract.estimateGas[method](...args);
@@ -100,10 +100,10 @@ const useFantomERC20 = () => {
   const getTokenBalance = async (contractAddress: string) => {
     const contract = await loadERC20Contract(
       contractAddress,
-      walletContext.activeWallet.signer
+      getSigner(library, account)
     );
 
-    return contract.balanceOf(walletContext.activeWallet.address);
+    return contract.balanceOf(account);
   };
 
   return {

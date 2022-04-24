@@ -11,7 +11,6 @@ import {
 } from "utils/bridge";
 import DropDownButton from "components/DropDownButton";
 import useBridgeApi from "hooks/useBridgeApi";
-import useWalletProvider from "hooks/useWalletProvider";
 import useMultiChain from "hooks/useMultiChain";
 import InputError from "components/Input/Error";
 import Modal from "components/Modal/Modal"
@@ -28,15 +27,16 @@ import {
 } from "utils/conversion";
 import { formatAddress, loadERC20Contract } from "utils/wallet";
 import useBridge from "hooks/useBridge";
-import useSendTransaction from "hooks/useSendTransaction";
-import useFantomERC20 from "hooks/useFantomERC20";
+// import useSendTransaction from "hooks/useSendTransaction";
+// import useFantomERC20 from "hooks/useFantomERC20";
 import { BigNumber } from "@ethersproject/bignumber";
-import useTransaction from "hooks/useTransaction";
+// import useTransaction from "hooks/useTransaction";
 import Loader from "components/Loader";
 import FadeInOut from "components/AnimationFade";
+import { useActiveWeb3React } from "services/web3";
 
 const SwapImg = "https://raw.githubusercontent.com/Fantom-foundation/fWallet-interface/94af5d96a763acf8ba1693a54df0f0ad2508d989/packages/app/src/assets/img/symbols/Swap.svg"
-const multichainImg = "https://multichain.org/img/MUL.52a9d64c.png"
+// const multichainImg = "https://multichain.org/img/MUL.52a9d64c.png"
 
 export const Typo1 = styled.div`
   font-size: 18px;
@@ -108,7 +108,7 @@ export const Container = styled.div<{ padding?: string }>`
 `;
 
 export const ContentBox = styled.div<{ padding?: string }>`
-  background-color: ${(props) => props.theme.color.secondary.navy()};
+  background-color: ${(props) => "blue"};
   display: inline-flex;
   padding: ${(props) => (props.padding ? props.padding : "2rem")};
   border-radius: 8px;
@@ -200,7 +200,7 @@ const ChainSelection: React.FC<any> = ({
   connectToChain,
   bridgeToChain,
 }) => {
-  const { walletContext } = useWalletProvider();
+  const { account, chainId, library } = useActiveWeb3React()
   const [fromChain, setFromChain] = useState(250);
   const [toChain, setToChain] = useState(1);
   const { getBridgeTokens } = useBridgeApi();
@@ -208,11 +208,11 @@ const ChainSelection: React.FC<any> = ({
 
   const getBalance = async (address: string, provider: any) => {
     if (address === AddressZero || !address) {
-      return provider.getBalance(walletContext.activeWallet.address);
+      return provider.getBalance(account);
     }
 
     const contract = await loadERC20Contract(address, provider);
-    return contract.balanceOf(walletContext.activeWallet.address);
+    return contract.balanceOf(account);
   };
 
   useEffect(() => {
@@ -243,7 +243,7 @@ const ChainSelection: React.FC<any> = ({
           "AVAX",
           "BNB",
         ];
-        if (tokenList?.length && walletContext.activeWallet.address) {
+        if (tokenList?.length && account) {
           const stickyTokens = tokenOrder
             .map((symbol) => {
               return tokenList.find(
@@ -278,7 +278,7 @@ const ChainSelection: React.FC<any> = ({
         }
       }
     });
-  }, [fromChain, toChain, walletContext.activeWallet.address]);
+  }, [fromChain, toChain, account]);
 
   const handleSetFromChain = (chainId: number) => {
     if (chainId !== 250) {
@@ -317,7 +317,7 @@ const ChainSelection: React.FC<any> = ({
           (chainId) => chainId !== fromChain
         )}
       />
-      {walletContext.activeWallet.chainId !== fromChain && (
+      {chainId !== fromChain && (
         <>
           <Spacer size="xs" />
           <OverlayButton
@@ -525,10 +525,10 @@ const BridgeTokenList: React.FC<any> = ({
   inputError,
   isBridgeTxCompleted,
 }) => {
-  const { walletContext } = useWalletProvider();
   const [token, setToken] = useState(null);
   const [fromTokenBalance, setFromTokenBalance] = useState(null);
   const [toTokenBalance, setToTokenBalance] = useState(null);
+  const { account } = useActiveWeb3React()
 
   const handleSetToken = (value: any) => {
     setFromTokenBalance(null);
@@ -562,7 +562,7 @@ const BridgeTokenList: React.FC<any> = ({
       );
       return;
     }
-  }, [token, walletContext.activeWallet.address, isBridgeTxCompleted]);
+  }, [token, account, isBridgeTxCompleted]);
 
   return (
     <Column>
@@ -629,13 +629,12 @@ const BridgeTokenList: React.FC<any> = ({
 };
 
 const Bridge: React.FC<any> = () => {
-  const { walletContext } = useWalletProvider();
   const { color } = useContext(ThemeContext);
   const { setToChain: connectToChain } = useMultiChain();
   const { bridgeStableMethod, bridgeNativeMethod, bridgeMethod } = useBridge();
-  const { getTransactionStatus } = useBridgeApi();
-  const { transaction } = useTransaction();
-  const { approve, getAllowance } = useFantomERC20();
+  // const { getTransactionStatus } = useBridgeApi();
+  // const { transaction } = useTransaction();
+  // const { approve, getAllowance } = useFantomERC20();
   const [tokenList, setTokenList] = useState(null);
   const [fromChain, setFromChain] = useState(250);
   const [toChain, setToChain] = useState(1);
@@ -687,19 +686,19 @@ const Bridge: React.FC<any> = () => {
     validateAmount(amount);
   }, [selectedToken]);
 
-  const isBridgeTxPending =
-    transaction[bridgeTxHash] && transaction[bridgeTxHash].status === "pending";
-  const isBridgeTxCompleted =
-    transaction[bridgeTxHash] &&
-    transaction[bridgeTxHash].status === "completed";
-
-  const {
-    sendTx: handleApproveToken,
-    isPending: isApprovePending,
-    isCompleted: isApproveCompleted,
-  } = useSendTransaction(() =>
-    approve(selectedToken.ContractAddress, selectedToken.router)
-  );
+  const isBridgeTxPending = false // todo: fix
+  //   transaction[bridgeTxHash] && transaction[bridgeTxHash].status === "pending";
+  // const isBridgeTxCompleted =
+  //   transaction[bridgeTxHash] &&
+  //   transaction[bridgeTxHash].status === "completed";
+// todo: fix
+  // const {
+  //   sendTx: handleApproveToken,
+  //   isPending: isApprovePending,
+  //   isCompleted: isApproveCompleted,
+  // } = useSendTransaction(() =>
+  //   approve(selectedToken.ContractAddress, selectedToken.router)
+  // );
 
   const handleBridgeAction = async () => {
     const isStableType =
@@ -747,41 +746,46 @@ const Bridge: React.FC<any> = () => {
   }, [fromChain]);
 
   useEffect(() => {
-    if (walletContext.activeWallet.chainId !== fromChain) {
+    // if (chainId !== fromChain) {
+      // TODO: below
+    if (250 !== fromChain) {
       return;
     }
     if (selectedToken?.needApprove === "true" && amount) {
-      getAllowance(selectedToken.ContractAddress, selectedToken.router).then(
-        (allowance) => {
-          if (
-            allowance.gte(
-              amount
-                ? BigNumber.from(unitToWei(amount, selectedToken.decimals))
-                : selectedToken.balance
-            )
-          )
-            return setIsApproved(true);
-          return setIsApproved(false);
-        }
-      );
+      // getAllowance(selectedToken.ContractAddress, selectedToken.router).then(
+      //   (allowance) => {
+      //     if (
+      //       allowance.gte(
+      //         amount
+      //           ? BigNumber.from(unitToWei(amount, selectedToken.decimals))
+      //           : selectedToken.balance
+      //       )
+      //     )
+      //       return setIsApproved(true);
+      //     return setIsApproved(false);
+      //   }
+      // );
     }
     return setIsApproved(true);
-  }, [selectedToken, isApproveCompleted, walletContext.activeWallet.chainId]);
+    // TODO: below
+  // }, [selectedToken, isApproveCompleted, walletContext.activeWallet.chainId]);
+  // }, [selectedToken, isApproveCompleted, 250]); //chainId]);
+  }, [selectedToken, 250]); //chainId]);
 
   useEffect(() => {
     let interval: any;
     if (bridgeTxHash && !interval) {
       const fetchStatus = () =>
-        getTransactionStatus(bridgeTxHash)
-          .then((response) => {
-            if (!response?.data?.info) {
-              return;
-            }
-            return setBridgeStatus(response.data.info.status);
-          })
-          .catch((err) => console.error(err));
+        // getTransactionStatus(bridgeTxHash)
+          // .then((response) => {
+            // if (!response?.data?.info) {
+              // return;
+            // }
+            // return setBridgeStatus(response.data.info.status);
+          // })
+          // .catch((err) => console.error(err));
 
-      interval = setInterval(() => fetchStatus(), 10000);
+      interval = setInterval(() => fetchStatus(), 10_000);
     }
     if (!bridgeTxHash) {
       clearInterval(interval);
@@ -849,26 +853,27 @@ const Bridge: React.FC<any> = () => {
               <div
                 style={{
                   borderRadius: "34px",
-                  backgroundColor: color.primary.black(),
+                  backgroundColor: "black",
                 }}
               >
                 <Row style={{ justifyContent: "space-between", gap: "1rem" }}>
                   <Typo3
                     style={{ color: "#67748B", padding: ".5rem 0 .5rem 1rem" }}
                   >
-                    Powered by multichain
+                    Powered by MultiChain
                   </Typo3>
-                  <Image src={multichainImg} alt="MULTI logo" />
+                  {/* <Image src={multichainImg} height="25px" width="25px" alt="MULTI logo" /> */}
                 </Row>
               </div>
             </Row>
             <Spacer />
-            {walletContext.activeWallet.providerType === "hardware" ? (
+            {
+            /* {walletContext.activeWallet.providerType === "hardware" ? (
               <Typo1>
                 Hardware wallet is unsupported. Use any of the other wallet
                 types to use the bridge.
               </Typo1>
-            ) : (
+            ) : ( */
               <>
                 <ChainSelection
                   setTokenList={setTokenList}
@@ -886,14 +891,14 @@ const Bridge: React.FC<any> = () => {
                   amount={amount}
                   setAmount={handleSetAmount}
                   inputError={inputError}
-                  isBridgeTxCompleted={isBridgeTxCompleted}
+                  // isBridgeTxCompleted={isBridgeTxCompleted}
                 />
                 <Spacer />
                 <Divider />
                 <Spacer size="lg" />
                 <ContentBox
                   style={{
-                    backgroundColor: color.primary.black(),
+                    backgroundColor: "black",
                     padding: "1.5rem",
                   }}
                 >
@@ -977,7 +982,9 @@ const Bridge: React.FC<any> = () => {
                     disabled={
                       inputError ||
                       !amount ||
-                      walletContext.activeWallet.chainId !== fromChain
+                          // TODO: below
+                      // walletContext.activeWallet.chainId !== fromChain
+                      250 !== fromChain
                     }
                     variant="primary"
                     onClick={handleBridgeAction}
@@ -987,16 +994,20 @@ const Bridge: React.FC<any> = () => {
                       : "Bridge Token"}
                   </Button>
                 ) : (
-                  <Button variant="primary" onClick={handleApproveToken}>
-                    {isApprovePending
+                  <Button variant="primary" 
+                  // todo: fix
+                  // onClick={handleApproveToken}
+                  >
+                    {/* {isApprovePending
                       ? "Approving"
                       : isApproveCompleted
                       ? "Approve successful"
-                      : "Approve Token"}
+                      : "Approve Token"} */}
                   </Button>
                 )}
               </>
-            )}
+            // )
+            }
           </Column>
         </ContentBox>
       </Row>

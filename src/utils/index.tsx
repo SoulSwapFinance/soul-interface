@@ -1,6 +1,6 @@
 import { BigNumber } from "@ethersproject/bignumber";
 import Notify from 'bnc-notify'
-import ethers from 'ethers'
+import { ethers } from 'ethers'
 export * from './tools/axios'
 export * from './tools/getPrice'
 export * from './tools/rate'

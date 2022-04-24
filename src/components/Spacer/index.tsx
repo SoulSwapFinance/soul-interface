@@ -30,7 +30,8 @@ const Spacer: React.FC<SpacerProps> = ({ size = "md" }) => {
       break;
     case "md":
     default:
-      s = spacing[4];
+      "sm" // todo: fix
+      // s = spacing[4];
   }
 
   return <StyledSpacer size={s} />;

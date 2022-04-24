@@ -1,14 +1,15 @@
-import useWalletProvider from "./useWalletProvider";
 import useTransaction from "./useTransaction";
 import { send } from "utils/transactions";
 import { BigNumber } from "@ethersproject/bignumber";
+import { useActiveWeb3React } from "services/web3";
+import { getSigner } from "sdk";
 
 const useFantomNative = () => {
-  const { walletContext } = useWalletProvider();
+  const { account, chainId, library } = useActiveWeb3React()
   const { dispatchTx } = useTransaction();
 
   const sendNativeTokens = async (toAddress: string, amount: string) => {
-    if (!walletContext.activeWallet.signer) {
+    if (!account) {
       console.error("[sendTransation] signer not found");
       return;
     }
@@ -18,9 +19,9 @@ const useFantomNative = () => {
     }
 
     return send(
-      walletContext.activeWallet.provider,
+      library?.provider,
       () =>
-        walletContext.activeWallet.signer.sendTransaction({
+        getSigner(library, account).sendTransaction({
           to: toAddress,
           value: amount,
         }),
@@ -35,7 +36,7 @@ const useFantomNative = () => {
     data: any,
     value: string = null
   ) => {
-    if (!walletContext.activeWallet.signer) {
+    if (!getSigner(library, account)) {
       console.error("[sendTransation] signer not found");
       return;
     }
@@ -45,7 +46,7 @@ const useFantomNative = () => {
       gasLimit,
       gasPrice,
       data,
-      from: walletContext.activeWallet.address,
+      from: account,
     };
 
     if (value) {
@@ -53,9 +54,9 @@ const useFantomNative = () => {
     }
 
     return send(
-      walletContext.activeWallet.provider,
+      library?.provider,
       () =>
-        walletContext.activeWallet.signer.sendTransaction({
+        getSigner(library, account).sendTransaction({
           ...tx,
         }),
       dispatchTx
@@ -63,12 +64,12 @@ const useFantomNative = () => {
   };
 
   const getBalance = (address?: string) => {
-    if (!walletContext.activeWallet.provider) {
+    if (!library?.provider) {
       console.error("[getBalance] provider not found");
       return;
     }
-    return walletContext.activeWallet.provider.getBalance(
-      address || walletContext.activeWallet.address
+    return getBalance(
+      address || account
     );
   };
 

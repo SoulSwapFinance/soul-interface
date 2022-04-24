@@ -1,8 +1,6 @@
 import React from 'react'
 import { useActiveWeb3React } from 'services/web3'
 
-const { chainId, library, account } = useActiveWeb3React()
-
 export const chainToNativeToken = {
     250: {
       name: "Fantom",
@@ -55,6 +53,7 @@ export const chainToNativeToken = {
   } as any;
   
   export const switchToChain = async (provider: any, chainId: number) => {
+    const { library } = useActiveWeb3React()
     const getNetworkDetails = () => {
       if (chainId === 1) {
         return {
@@ -163,6 +162,8 @@ export const chainToNativeToken = {
   };
   
   export const promptWeb3WalletUse = async () => {
+    const { library } = useActiveWeb3React()
+
       await library?.send('wallet_requestPermissions', [{
           params: [
               {
