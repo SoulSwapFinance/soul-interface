@@ -943,7 +943,7 @@ export default function Dashboard() {
           </Typography>
           <div className="h-px my-4 bg-[#F5D100]" />
 
-          <div>
+          {/* <div>
           <div className="h-px my-1 justify-center bg-dark-1000" />
             <Typography
               className="flex text-xl gap-1 justify-center items-center"
@@ -958,9 +958,9 @@ export default function Dashboard() {
               variant={'h1'} lineHeight={48} fontFamily={'medium'}>
                {formatNumber(wlumPrice * wlumSupply, true, false)}
             </Typography>
-          </div>
+          </div> */}
 
-          <div className="h-px my-4 bg-dark-1000" />
+          {/* <div className="h-px my-4 bg-dark-1000" /> */}
           <div className="grid grid-cols-2 space-between-3">
             <Typography 
               className="flex gap-1 text-lg justify-center items-center"

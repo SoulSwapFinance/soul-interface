@@ -88,7 +88,7 @@ export default function TokenStatsModal(): JSX.Element | null {
             {/* <div className="block"> */}
             {/* <QuestionHelper text={`Add to MetaMask`}/> */}
             <div
-              className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
+              className="rounded-md border border-purple cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
               onClick={() => {
                 const params: any = {
                   type: 'ERC20',
@@ -126,7 +126,7 @@ export default function TokenStatsModal(): JSX.Element | null {
               />
             </div>
             <div
-              className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
+              className="rounded-md border border-purple cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
               onClick={() => {
                 const params: any = {
                   type: 'ERC20',
@@ -169,7 +169,7 @@ export default function TokenStatsModal(): JSX.Element | null {
       <div className="space-y-0">
 
         <div className="flex mt-1" />
-        <Typography className='flex justify-center text-2xl leading-[28px] bg-dark-700'>{`Tokenomics Overview`}</Typography>
+        <Typography className='flex justify-center text-2xl leading-[28px] bg-purple'>{`Tokenomics Overview`}</Typography>
       </div>
       <div className="flex flex-col mt-2 mb-2 flex-nowrap gap-1.5 -m-1">
         {getSummaryLine(
@@ -297,7 +297,7 @@ export default function TokenStatsModal(): JSX.Element | null {
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
                       {formatNumberScale(
                         Number(farmsTvl) // FARMS ONLY
-                        + stakedTvl // STAKED ONLY
+                        // + stakedTvl // STAKED ONLY
                         + Number(bondsTvl) // BONDS ONLY
                         , true)}
                     </Typography>
@@ -342,7 +342,7 @@ export default function TokenStatsModal(): JSX.Element | null {
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
                       {formatNumberScale(
                         Number(bondsTvl)
-                        // + Number(soulTvl)
+                       + Number(soulTvl)
                         , true)}
                     </Typography>
                   </div>
@@ -380,10 +380,9 @@ export default function TokenStatsModal(): JSX.Element | null {
           color='purple'
           type='flexed'
           size='xs'
-          className="text-white"
         >
           <NavLink href={'/bonds'}>
-            <a className="flex justify-center text-black text-xl transition rounded-md hover:pink">
+            <a className="flex justify-center text-white text-xl transition rounded-md hover:pink">
               MINT SOUL<span> ↗</span>
             </a>
           </NavLink>
@@ -392,10 +391,9 @@ export default function TokenStatsModal(): JSX.Element | null {
           color='purple'
           type='flexed'
           size='xs'
-          className="text-white"
         >
           <NavLink href={'/seance'}>
-            <a className="flex justify-center text-black text-xl transition rounded-md hover:pink">
+            <a className="flex justify-center text-white text-xl transition rounded-md hover:pink">
               STAKE SOUL<span> ↗</span>
             </a>
           </NavLink>
