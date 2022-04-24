@@ -27,7 +27,7 @@ export default function Dashboard() {
   const stakedSoul = Number(soulInfo.stakedSoul)
   const soulBalance = Number(soulInfo.SoulBalance)
   const totalSupply = Number(soulInfo.supply)
-  const totalSupplyString = Number(soulInfo.supply).toFixed(0).toString().substring(0,2) + 'K'
+  const totalSupplyString = Number(soulInfo.supply).toFixed(0).toString().substring(0,2) + 'M'
   // console.log('totalSupplyString:%s', totalSupplyString)
   const circulatingSupply = totalSupply - soulBalance - stakedSoul
   // console.log('totalSupply:%s', totalSupply)
