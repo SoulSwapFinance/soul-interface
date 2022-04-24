@@ -88,7 +88,7 @@ export default function TokenStatsModal(): JSX.Element | null {
             {/* <div className="block"> */}
             {/* <QuestionHelper text={`Add to MetaMask`}/> */}
             <div
-              className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
+              className="rounded-md border border-purple cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
               onClick={() => {
                 const params: any = {
                   type: 'ERC20',
@@ -126,7 +126,7 @@ export default function TokenStatsModal(): JSX.Element | null {
               />
             </div>
             <div
-              className="rounded-md cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
+              className="rounded-md border border-purple cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
               onClick={() => {
                 const params: any = {
                   type: 'ERC20',
@@ -169,7 +169,7 @@ export default function TokenStatsModal(): JSX.Element | null {
       <div className="space-y-0">
 
         <div className="flex mt-1" />
-        <Typography className='flex justify-center text-2xl leading-[28px] bg-dark-700'>{`Tokenomics Overview`}</Typography>
+        <Typography className='flex justify-center text-2xl leading-[28px] bg-purple'>{`Tokenomics Overview`}</Typography>
       </div>
       <div className="flex flex-col mt-2 mb-2 flex-nowrap gap-1.5 -m-1">
         {getSummaryLine(
