@@ -19,7 +19,6 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "downlevelIteration": true,
-    "strictNullChecks": false,
     "incremental": true
   },
   "include": [

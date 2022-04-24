@@ -4,7 +4,7 @@ import Row from "components/Row";
 import Spacer from "components/Spacer";
 import InputCurrency from "./InputCurrency";
 import { Button } from "components/Button";
-import FtmLogo from "assets/img/tokens/FTM.svg";
+import FtmLogo from "assets/networks/fantom.svg";
 
 export interface Token {
     name: string;

@@ -24,7 +24,7 @@ const initial = {
     isWrongApp: false,
   },
 } as any;
-
+// @ts-ignore
 export const ActiveWalletProvider: React.FC = ({ children }) => {
   const activeWalletReducer = (state: any, action: any) => {
     switch (action.type) {

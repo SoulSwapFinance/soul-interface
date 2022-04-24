@@ -559,7 +559,7 @@ const Swap = () => {
                    {/* <Image src='https://app.soulswap.finance/neon-bg.jpeg' height="400px" width="400px" /> */}
                    {/* <Image src='https://app.soulswap.finance/neon-bg.jpeg' height="400px" width="400px" /> */}
                    {/* <Image src='https://app.soulswap.finance/neon-triangle-lights.jpeg' height="600px" width="600px" /> */}
-                   <Image src='https://app.soulswap.finance/title-soul-halfs.png' height="400px" width="600px" />
+                   <Image src='https://app.soulswap.finance/title-soul-halfs.png' height="400px" width="600px" alt="logo"/>
                  </div>
           }
           { expertMode &&
