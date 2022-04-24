@@ -10,7 +10,7 @@ import {
   transactionStatusMapping,
 } from "utils/bridge";
 import DropDownButton from "components/DropDownButton";
-// import useBridgeApi from "hooks/useBridgeApi";
+import useBridgeApi from "hooks/useBridgeApi";
 import useMultiChain from "hooks/useMultiChain";
 import InputError from "components/Input/Error";
 import Modal from "components/Modal/Modal"
@@ -160,17 +160,17 @@ const ChainSelector: React.FC<any> = ({
   selected,
   selectChain,
 }) => {
-  const { color } = useContext(ThemeContext);
+  // const { color } = useContext(ThemeContext);
   return (
     <Column style={{ width: "100%" }}>
       <Typo2 style={{ color: "#84888d" }}>{text}</Typo2>
       {/* <Spacer size="xs" /> todo: fix */}
       <div className="my-2" />
-      <DropDownButton
-        width="100%"
-        DropDown={() => ChainSelect({ selectChain, chains })}
-        dropdownTop={65}
-      >
+      {/* <DropDownButton */}
+        {/* width="100%" */}
+        {/* // DropDown={() => ChainSelect({ selectChain, chains })} */}
+        {/* dropdownTop={65} */}
+      {/* > */}
         {/*<OverlayButton style={{ padding: 0 }}>*/}
         <ContentBox
           style={{
@@ -183,7 +183,8 @@ const ChainSelector: React.FC<any> = ({
           <Row style={{ gap: "1rem", alignItems: "center" }}>
             <Image
               style={{ height: "30px", width: "30px" }}
-              src={chainToNetworkInfoMap[selected].image}
+              // src={chainToNetworkInfoMap[selected].image}
+              src={chainToNetworkInfoMap[selected]?.image}
               alt="chain to network info"
             />
             <Typo2 style={{ fontWeight: "bold" }}>
@@ -192,7 +193,7 @@ const ChainSelector: React.FC<any> = ({
           </Row>
         </ContentBox>
         {/*</OverlayButton>*/}
-      </DropDownButton>
+      {/* </DropDownButton> */}
     </Column>
   );
 };

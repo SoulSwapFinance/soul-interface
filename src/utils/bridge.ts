@@ -1,20 +1,18 @@
 import ftmImage from "assets/networks/fantom.svg";
 import ethImage from "assets/networks/ethereumMainnet.svg";
-// import bscImage from "assets/networks/binanceSmartChain.svg";
-import polyImage from "assets/networks/polygonMainnet.svg";
-import avaxImage from "assets/networks/avalanche.svg";
-import arbImage from "assets/networks/Arbitrum.png";
+// import bscImage from "assets/networks/binanceSmartChain.png";
+// import polyImage from "assets/networks/polygonMainnet.svg";
+// import avaxImage from "assets/networks/avalanche.svg";
+// import arbImage from "assets/networks/Arbitrum.png";
 
-const bscImage = "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454/logo.png";
-
-export const supportedChainsForBridge = [250, 1, 56, 137, 43114, 42161];
+export const supportedChainsForBridge = [250, 1, 56] //, 137, 43114, 42161];
 export const chainToNetworkInfoMap = {
   250: { symbol: "ftm", name: "Fantom", image: ftmImage },
   1: { symbol: "eth", name: "Ethereum", image: ethImage },
-  56: { symbol: "bsc", name: "BNB Chain", image: bscImage },
-  137: { symbol: "matic", name: "Polygon", image: polyImage },
-  43114: { symbol: "avax", name: "Avalanche", image: avaxImage },
-  42161: { symbol: "arb", name: "Arbitrum", image: arbImage },
+  // 56: { symbol: "bsc", name: "BNB Chain", image: bscImage },
+  // 137: { symbol: "matic", name: "Polygon", image: polyImage },
+  // 43114: { symbol: "avax", name: "Avalanche", image: avaxImage },
+  // 42161: { symbol: "arb", name: "Arbitrum", image: arbImage },
 } as any;
 export const transactionStatusMapping = {
   3: "Failed: exceeded limit",
@@ -36,28 +34,28 @@ export const bridgeNetworks = {
     explorerTransactionPath: "tx/",
     decimals: 18,
   },
-  56: {
-    chainId: 56,
-    network: "BSC",
-    hex: "38",
-    rpc: "https://rpc.ankr.com/bsc",
-    name: "Binance Coin",
-    symbol: "BNB",
-    blockExp: "https://bscscan.com",
-    explorerTransactionPath: "tx/",
-    decimals: 18,
-  },
-  137: {
-    chainId: 137,
-    network: "Polygon",
-    hex: "89",
-    rpc: "https://rpc.ankr.com/polygon",
-    name: "MATIC",
-    symbol: "MATIC",
-    blockExp: "https://polygonscan.com/",
-    explorerTransactionPath: "tx/",
-    decimals: 18,
-  },
+  // 56: {
+  //   chainId: 56,
+  //   network: "BSC",
+  //   hex: "38",
+  //   rpc: "https://rpc.ankr.com/bsc",
+  //   name: "Binance Coin",
+  //   symbol: "BNB",
+  //   blockExp: "https://bscscan.com",
+  //   explorerTransactionPath: "tx/",
+  //   decimals: 18,
+  // },
+  // 137: {
+  //   chainId: 137,
+  //   network: "Polygon",
+  //   hex: "89",
+  //   rpc: "https://rpc.ankr.com/polygon",
+  //   name: "MATIC",
+  //   symbol: "MATIC",
+  //   blockExp: "https://polygonscan.com/",
+  //   explorerTransactionPath: "tx/",
+  //   decimals: 18,
+  // },
   250: {
     chainId: 250,
     network: "Fantom",
@@ -69,29 +67,29 @@ export const bridgeNetworks = {
     explorerTransactionPath: "tx/",
     decimals: 18,
   },
-  43114: {
-    chainId: 43114,
-    network: "Avalanche",
-    hex: "A86A",
-    rpc: "https://api.avax.network/ext/bc/C/rpc",
-    // rpc: "https://rpc.ankr.com/avalanche-c",
-    name: "AVAX",
-    symbol: "AVAX",
-    blockExp: "https://cchain.explorer.avax.network/",
-    explorerTransactionPath: "tx/",
-    decimals: 18,
-  },
-  42161: {
-    chainId: 42161,
-    network: "Arbitrum",
-    hex: "A4B1",
-    rpc: "https://rpc.ankr.com/arbitrum",
-    name: "AETH",
-    symbol: "AETH",
-    blockExp: "https://arbiscan.io",
-    explorerTransactionPath: "tx/",
-    decimals: 18,
-  },
+  // 43114: {
+  //   chainId: 43114,
+  //   network: "Avalanche",
+  //   hex: "A86A",
+  //   rpc: "https://api.avax.network/ext/bc/C/rpc",
+  //   // rpc: "https://rpc.ankr.com/avalanche-c",
+  //   name: "AVAX",
+  //   symbol: "AVAX",
+  //   blockExp: "https://cchain.explorer.avax.network/",
+  //   explorerTransactionPath: "tx/",
+  //   decimals: 18,
+  // },
+  // 42161: {
+  //   chainId: 42161,
+  //   network: "Arbitrum",
+  //   hex: "A4B1",
+  //   rpc: "https://rpc.ankr.com/arbitrum",
+  //   name: "AETH",
+  //   symbol: "AETH",
+  //   blockExp: "https://arbiscan.io",
+  //   explorerTransactionPath: "tx/",
+  //   decimals: 18,
+  // },
   // 100: {
   //   chainId: 100,
   //   network: "xDai",
