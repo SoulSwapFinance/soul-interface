@@ -297,7 +297,7 @@ export default function TokenStatsModal(): JSX.Element | null {
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
                       {formatNumberScale(
                         Number(farmsTvl) // FARMS ONLY
-                        + stakedTvl // STAKED ONLY
+                        // + stakedTvl // STAKED ONLY
                         + Number(bondsTvl) // BONDS ONLY
                         , true)}
                     </Typography>
@@ -342,7 +342,7 @@ export default function TokenStatsModal(): JSX.Element | null {
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
                       {formatNumberScale(
                         Number(bondsTvl)
-                        // + Number(soulTvl)
+                       + Number(soulTvl)
                         , true)}
                     </Typography>
                   </div>
@@ -380,10 +380,9 @@ export default function TokenStatsModal(): JSX.Element | null {
           color='purple'
           type='flexed'
           size='xs'
-          className="text-white"
         >
           <NavLink href={'/bonds'}>
-            <a className="flex justify-center text-black text-xl transition rounded-md hover:pink">
+            <a className="flex justify-center text-white text-xl transition rounded-md hover:pink">
               MINT SOUL<span> ↗</span>
             </a>
           </NavLink>
@@ -392,10 +391,9 @@ export default function TokenStatsModal(): JSX.Element | null {
           color='purple'
           type='flexed'
           size='xs'
-          className="text-white"
         >
           <NavLink href={'/seance'}>
-            <a className="flex justify-center text-black text-xl transition rounded-md hover:pink">
+            <a className="flex justify-center text-white text-xl transition rounded-md hover:pink">
               STAKE SOUL<span> ↗</span>
             </a>
           </NavLink>
