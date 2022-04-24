@@ -9,7 +9,7 @@ import {
   supportedChainsForBridge,
   transactionStatusMapping,
 } from "utils/bridge";
-import DropDownButton from "components/DropDownButton";
+// import DropDownButton from "components/DropDownButton";
 import useBridgeApi from "hooks/useBridgeApi";
 import useMultiChain from "hooks/useMultiChain";
 import InputError from "components/Input/Error";
@@ -51,7 +51,7 @@ export const Typo3 = styled.div`
 `;
 
 export const OverlayButton = styled.button<{ disabled?: boolean }>`
-  background-color: transparent;
+  background-color: white;
   border: none;
   text-decoration: none;
   cursor: ${(props) => !props.disabled && "pointer"};
@@ -74,10 +74,10 @@ export const Button = styled.button<{
   background-color: ${(props) =>
     props.variant === "primary"
       // ? props.theme.color.primary.fantomBlue(props.disabled ? 0.6 : 1)
-      ? "blue"
+      ? "#B485FF"
       : props.variant === "secondary"
       ? "transparent"
-      : props.theme.color.secondary.navy(props.disabled ? 0.6 : 1)};
+      : "white"};
   border: ${(props) =>
     props.variant === "primary" || props.variant === "tertiary"
       ? "none"
@@ -109,7 +109,7 @@ export const Container = styled.div<{ padding?: string }>`
 `;
 
 export const ContentBox = styled.div<{ padding?: string }>`
-  background-color: ${(props) => "blue"};
+  background-color: ${(props) => "#B485FF"};
   display: inline-flex;
   padding: ${(props) => (props.padding ? props.padding : "2rem")};
   border-radius: 8px;
@@ -163,7 +163,7 @@ const ChainSelector: React.FC<any> = ({
   // const { color } = useContext(ThemeContext);
   return (
     <Column style={{ width: "100%" }}>
-      <Typo2 style={{ color: "#84888d" }}>{text}</Typo2>
+      <Typo2 style={{ color: "white" }}>{text}</Typo2>
       {/* <Spacer size="xs" /> todo: fix */}
       <div className="my-2" />
       {/* <DropDownButton */}
@@ -327,7 +327,7 @@ const ChainSelection: React.FC<any> = ({
           <div className="my-2" />
           <OverlayButton
             style={{ textAlign: "start" }}
-            onClick={() => forceSwap(fromChain)}
+            // onClick={() => forceSwap(fromChain)}
           >
             {/* <InputError
               error={"Please switch your web3 wallet to use the above chain"}
@@ -347,7 +347,7 @@ const ChainSelection: React.FC<any> = ({
               justifyContent: "center",
               height: "64px",
               width: "64px",
-              border: "1px solid #67748B",
+              border: "1px solid white",
               borderRadius: "50%",
             }}
           >
@@ -445,7 +445,7 @@ const BridgeTokenSelectModal: React.FC<any> = ({
               style={{
                 textAlign: "left",
                 width: "8rem",
-                color: color.greys.grey(),
+                color: "white",
               }}
             >
               TOKEN NAME
@@ -454,7 +454,7 @@ const BridgeTokenSelectModal: React.FC<any> = ({
               style={{
                 textAlign: "right",
                 width: "8rem",
-                color: color.greys.grey(),
+                color: "white",
               }}
             >
               BALANCE
@@ -576,7 +576,7 @@ const BridgeTokenList: React.FC<any> = ({
   return (
     <Column>
       <Row style={{ gap: "1rem" }}>
-        <Typo2 style={{ flex: 1, color: "#84888d" }}>{"Token to Bridge"}</Typo2>
+        <Typo2 style={{ flex: 1, color: "white" }}>{"Token to Bridge"}</Typo2>
         <Row style={{ flex: 2, paddingLeft: "1rem" }}>
           {inputError ? (
              <InputError error={inputError} fontSize="14px" />
@@ -611,7 +611,7 @@ const BridgeTokenList: React.FC<any> = ({
       {/* <Spacer /> */}
       <div className="my-2" />
       <Row style={{ justifyContent: "space-between" }}>
-        <Typo2 style={{ color: "#84888d" }}>
+        <Typo2 style={{ color: "white" }}>
           Balance on {chainToNetworkInfoMap[fromChain].name}
         </Typo2>
         <Row>
@@ -625,7 +625,7 @@ const BridgeTokenList: React.FC<any> = ({
         </Row>
       </Row>
       <Row style={{ justifyContent: "space-between" }}>
-        <Typo2 style={{ color: "#84888d" }}>
+        <Typo2 style={{ color: "white" }}>
           Balance on {chainToNetworkInfoMap[toChain].name}
         </Typo2>
         <Row>
@@ -872,14 +872,14 @@ const Bridge: React.FC<any> = () => {
                   backgroundColor: "black",
                 }}
               >
-                <Row style={{ justifyContent: "space-between", gap: "1rem" }}>
+                {/* <Row style={{ justifyContent: "space-between", gap: "1rem" }}>
                   <Typo3
                     style={{ color: "#67748B", padding: ".5rem 0 .5rem 1rem" }}
                   >
                     Powered by MultiChain
                   </Typo3>
-                  {/* <Image src={multichainImg} height="25px" width="25px" alt="MULTI logo" /> */}
-                </Row>
+                  <Image src={multichainImg} height="25px" width="25px" alt="MULTI logo" />
+                </Row> */}
               </div>
             </Row>
             {/* <Spacer /> */}
@@ -925,7 +925,7 @@ const Bridge: React.FC<any> = () => {
                 >
                   <Column style={{ width: "100%", gap: ".5rem" }}>
                     <Row style={{ justifyContent: "space-between" }}>
-                      <Typo2 style={{ color: "#84888d" }}>
+                      <Typo2 style={{ color: "white" }}>
                         Current Bridgeable Range
                       </Typo2>
                       <Typo2>
@@ -939,7 +939,7 @@ const Bridge: React.FC<any> = () => {
                       </Typo2>
                     </Row>
                     <Row style={{ justifyContent: "space-between" }}>
-                      <Typo2 style={{ color: "#84888d" }}>
+                      <Typo2 style={{ color: "white" }}>
                         Max bridge amount
                       </Typo2>
                       <Typo2
@@ -958,7 +958,7 @@ const Bridge: React.FC<any> = () => {
                       </Typo2>
                     </Row>
                     <Row style={{ justifyContent: "space-between" }}>
-                      <Typo2 style={{ color: "#84888d" }}>
+                      <Typo2 style={{ color: "white" }}>
                         Min Bridge amount
                       </Typo2>
                       <Typo2
@@ -977,7 +977,7 @@ const Bridge: React.FC<any> = () => {
                       </Typo2>
                     </Row>
                     <Row style={{ justifyContent: "space-between" }}>
-                      <Typo2 style={{ color: "#84888d" }}>Minimum fee</Typo2>
+                      <Typo2 style={{ color: "white" }}>Minimum fee</Typo2>
                       <Typo2>
                         {selectedToken
                           ? `${formatSimpleValue(
@@ -1009,7 +1009,7 @@ const Bridge: React.FC<any> = () => {
                       // walletContext.activeWallet.chainId !== fromChain
                       250 !== fromChain
                     }
-                    variant="primary"
+                    variant="outlined"
                     onClick={handleBridgeAction}
                   >
                     {isBridgeTxPending
