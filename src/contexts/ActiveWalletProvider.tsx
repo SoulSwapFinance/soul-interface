@@ -24,8 +24,7 @@ const initial = {
     isWrongApp: false,
   },
 } as any;
-// @ts-ignore
-export const ActiveWalletProvider: React.FC = ({ children }) => {
+export const ActiveWalletProvider: React.FC = ({ }) => {
   const activeWalletReducer = (state: any, action: any) => {
     switch (action.type) {
       case "setActiveWallet":
@@ -101,7 +100,7 @@ export const ActiveWalletProvider: React.FC = ({ children }) => {
 
   return (
     <ActiveWalletContext.Provider value={[state, dispatch]}>
-      {children}
+      {}
     </ActiveWalletContext.Provider>
   );
 };
