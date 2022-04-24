@@ -1,41 +1,39 @@
-import { loadContract } from "utils/wallet";
+import { loadContract } from "../utils/wallet";
+import useWalletProvider from "./useWalletProvider";
 import { arrayBridgeProps } from "./useBridgeApi";
-// import { send } from "utils/transactions";
-// import useTransaction from "./useTransaction";
-// import useFantomNative from "./useFantomNative";
+import { send } from "../utils/transactions";
+import useTransaction from "./useTransaction";
+import useFantomNative from "./useFantomNative";
 import BridgeABI from 'constants/abis/bridge/bridge.json'
 import RouterABI from 'constants/abis/bridge/bridgeRouter.json'
-import { useActiveWeb3React } from "services/web3";
-import { getProviderOrSigner } from "sdk";
 
 const useBridge = () => {
-  const { account, chainId, library} = useActiveWeb3React()
-  // const { dispatchTx } = useTransaction();
-  // const { sendNativeTokens } = useFantomNative();
+  const { walletContext } = useWalletProvider();
+  const { dispatchTx } = useTransaction();
+  const { sendNativeTokens } = useFantomNative();
 
   const getBridgeContract = async (type: string, contractAddress: string) => {
     if (type === "stable") {
       return loadContract(
         contractAddress,
         RouterABI,
-        library?.getSigner()
+        walletContext.activeWallet.signer
       );
     }
 
     return loadContract(
       contractAddress,
       BridgeABI,
-      library?.getSigner()
-      );
+      walletContext.activeWallet.signer
+    );
   };
 
-  // todo: FIX
   const executeBridgeTransaction = async (callback: any) => {
-    // return send(
-      // getProviderOrSigner(library),
-      // () => callback(),
-      // dispatchTx
-    // );
+    return send(
+      walletContext.activeWallet.provider,
+      () => callback(),
+      dispatchTx
+    );
   };
 
   const bridgeMethod = async (token: arrayBridgeProps, amount: string) => {
@@ -46,7 +44,7 @@ const useBridge = () => {
     if (type === "swapOut") {
       console.info("[bridgeMethod] SwapOut");
       bridgeMethod = () =>
-        bridgeContract.Swapout(amount, account);
+        bridgeContract.Swapout(amount, walletContext.activeWallet.address);
     }
     if (type === "transfer") {
       console.info("[bridgeMethod] transfer");
@@ -68,11 +66,9 @@ const useBridge = () => {
     console.info("[bridgeNativeMethod]");
     const { DepositAddress } = token;
 
-    // TODO: FIX
-    return
-    // return executeBridgeTransaction(() =>
-      // sendNativeTokens(DepositAddress, amount)
-    // );
+    return executeBridgeTransaction(() =>
+      sendNativeTokens(DepositAddress, amount)
+    );
   };
 
   const bridgeStableMethod = async (
@@ -88,7 +84,7 @@ const useBridge = () => {
       bridgeMethod = () =>
         routerContract.anySwapOutNative(
           DepositAddress,
-          account,
+          walletContext.activeWallet.address,
           toChainId,
           { value: amount }
         );
@@ -98,7 +94,7 @@ const useBridge = () => {
       bridgeMethod = () =>
         routerContract["anySwapOut(address,address,uint256,uint256)"](
           DepositAddress,
-          account,
+          walletContext.activeWallet.address,
           amount,
           toChainId
         );
@@ -108,7 +104,7 @@ const useBridge = () => {
       bridgeMethod = () =>
         routerContract.anySwapOutUnderlying(
           DepositAddress,
-          account,
+          walletContext.activeWallet.address,
           amount,
           toChainId
         );
