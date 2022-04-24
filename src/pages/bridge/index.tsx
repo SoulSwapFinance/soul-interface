@@ -3,14 +3,14 @@ import Row from "components/Row";
 import Image from 'next/image'
 import Column from "components/Column";
 import styled, { ThemeContext } from "styled-components";
-import Spacer from "components/Spacer";
+// import Spacer from "components/Spacer";
 import {
   chainToNetworkInfoMap,
   supportedChainsForBridge,
   transactionStatusMapping,
 } from "utils/bridge";
 import DropDownButton from "components/DropDownButton";
-import useBridgeApi from "hooks/useBridgeApi";
+// import useBridgeApi from "hooks/useBridgeApi";
 import useMultiChain from "hooks/useMultiChain";
 import InputError from "components/Input/Error";
 import Modal from "components/Modal/Modal"
@@ -73,14 +73,15 @@ export const Button = styled.button<{
 }>`
   background-color: ${(props) =>
     props.variant === "primary"
-      ? props.theme.color.primary.fantomBlue(props.disabled ? 0.6 : 1)
+      // ? props.theme.color.primary.fantomBlue(props.disabled ? 0.6 : 1)
+      ? "blue"
       : props.variant === "secondary"
       ? "transparent"
       : props.theme.color.secondary.navy(props.disabled ? 0.6 : 1)};
   border: ${(props) =>
     props.variant === "primary" || props.variant === "tertiary"
       ? "none"
-      : `1px solid ${props.theme.color.greys.mediumGray()}`};
+      : `1px solid ${"grey"}`};
   border-radius: 8px;
   color: ${(props) => (!props.disabled ? props.color || "white" : "#6c726c")};
   cursor: ${(props) => (!props.disabled ? "pointer" : "cursor")};
@@ -101,9 +102,9 @@ export const Button = styled.button<{
 `;
 
 export const Container = styled.div<{ padding?: string }>`
-  border: ${(props) => `1px solid ${props.theme.color.greys.mediumGray()}`};
+  border: ${(props) => `1px solid ${"grey"}`};
   padding: ${(props) => (props.padding ? props.padding : "2rem")};
-  background-color: ${(props) => props.theme.color.primary.black()};
+  background-color: ${(props) => "black"};
   border-radius: 8px;
 `;
 
@@ -121,7 +122,7 @@ const ChainSelect: React.FC<any> = ({ selectChain, chains }) => {
       style={{
         width: "100%",
         boxSizing: "border-box",
-        backgroundColor: color.primary.black(),
+        backgroundColor: "black",
         borderRadius: "8px",
         padding: "1rem",
       }}
@@ -163,7 +164,8 @@ const ChainSelector: React.FC<any> = ({
   return (
     <Column style={{ width: "100%" }}>
       <Typo2 style={{ color: "#84888d" }}>{text}</Typo2>
-      <Spacer size="xs" />
+      {/* <Spacer size="xs" /> todo: fix */}
+      <div className="my-2" />
       <DropDownButton
         width="100%"
         DropDown={() => ChainSelect({ selectChain, chains })}
@@ -174,7 +176,7 @@ const ChainSelector: React.FC<any> = ({
           style={{
             boxSizing: "border-box",
             width: "100%",
-            backgroundColor: color.primary.black(),
+            backgroundColor: "black",
             padding: "1rem",
           }}
         >
@@ -203,7 +205,7 @@ const ChainSelection: React.FC<any> = ({
   const { account, chainId, library } = useActiveWeb3React()
   const [fromChain, setFromChain] = useState(250);
   const [toChain, setToChain] = useState(1);
-  const { getBridgeTokens } = useBridgeApi();
+  // const { getBridgeTokens } = useBridgeApi();
   const { forceSwap, DEFAULT_PROVIDERS } = useMultiChain();
 
   const getBalance = async (address: string, provider: any) => {
@@ -225,59 +227,60 @@ const ChainSelection: React.FC<any> = ({
 
   useEffect(() => {
     setTokenList(null);
-    getBridgeTokens(toChain, fromChain).then((tokenList) => {
-      if (tokenList?.length) {
-        const tokenOrder = [
-          "FTM",
-          "WFTM",
-          "USDC",
-          "USDT",
-          "fUSDT",
-          "DAI",
-          "MIM",
-          "ETH",
-          "WETH",
-          "BTC",
-          "WBTC",
-          "MATIC",
-          "AVAX",
-          "BNB",
-        ];
-        if (tokenList?.length && account) {
-          const stickyTokens = tokenOrder
-            .map((symbol) => {
-              return tokenList.find(
-                (token: any) =>
-                  token.symbol.toLowerCase() === symbol.toLowerCase()
-              );
-            })
-            .filter((item: any) => item);
-          const restOfTokens = tokenList.filter(
-            (token: any) => !stickyTokens.includes(token)
-          );
+    // todo: fix below
+    // getBridgeTokens(toChain, fromChain).then((tokenList) => {
+    //   if (tokenList?.length) {
+    //     const tokenOrder = [
+    //       "FTM",
+    //       "WFTM",
+    //       "USDC",
+    //       "USDT",
+    //       "fUSDT",
+    //       "DAI",
+    //       "MIM",
+    //       "ETH",
+    //       "WETH",
+    //       "BTC",
+    //       "WBTC",
+    //       "MATIC",
+    //       "AVAX",
+    //       "BNB",
+    //     ];
+    //     if (tokenList?.length && account) {
+    //       const stickyTokens = tokenOrder
+    //         .map((symbol) => {
+    //           return tokenList.find(
+    //             (token: any) =>
+    //               token.symbol.toLowerCase() === symbol.toLowerCase()
+    //           );
+    //         })
+    //         .filter((item: any) => item);
+    //       const restOfTokens = tokenList.filter(
+    //         (token: any) => !stickyTokens.includes(token)
+    //       );
 
-          const allTokens = [...stickyTokens, ...restOfTokens];
-          const fromProvider = DEFAULT_PROVIDERS[fromChain];
-          const toProvider = DEFAULT_PROVIDERS[toChain];
-          const tokensAndBalances = allTokens.map((token) => {
-            return {
-              ...token,
-              balance: getBalance(
-                token.isNative === "true" ? AddressZero : token.ContractAddress,
-                fromProvider
-              ),
-              balanceTo: getBalance(
-                token.isNativeTo === "true"
-                  ? AddressZero
-                  : token.ContractAddressTo,
-                toProvider
-              ),
-            };
-          });
-          setTokenList(tokensAndBalances);
-        }
-      }
-    });
+    //       const allTokens = [...stickyTokens, ...restOfTokens];
+    //       const fromProvider = DEFAULT_PROVIDERS[fromChain];
+    //       const toProvider = DEFAULT_PROVIDERS[toChain];
+    //       const tokensAndBalances = allTokens.map((token) => {
+    //         return {
+    //           ...token,
+    //           balance: getBalance(
+    //             token.isNative === "true" ? AddressZero : token.ContractAddress,
+    //             fromProvider
+    //           ),
+    //           balanceTo: getBalance(
+    //             token.isNativeTo === "true"
+    //               ? AddressZero
+    //               : token.ContractAddressTo,
+    //             toProvider
+    //           ),
+    //         };
+    //       });
+    //       setTokenList(tokensAndBalances);
+    //     }
+    //   }
+    // });
   }, [fromChain, toChain, account]);
 
   const handleSetFromChain = (chainId: number) => {
@@ -319,7 +322,8 @@ const ChainSelection: React.FC<any> = ({
       />
       {chainId !== fromChain && (
         <>
-          <Spacer size="xs" />
+          {/* <Spacer size="xs" /> */}
+          <div className="my-2" />
           <OverlayButton
             style={{ textAlign: "start" }}
             onClick={() => forceSwap(fromChain)}
@@ -331,7 +335,8 @@ const ChainSelection: React.FC<any> = ({
           </OverlayButton>
         </>
       )}
-      <Spacer size="lg" />
+      {/* <Spacer size="lg" /> */}
+      <div className="my-4" />
       <Row style={{ justifyContent: "center", alignItems: "center" }}>
         <div style={{ height: "1px", width: "100%" }} />
         <OverlayButton style={{ padding: 0 }} onClick={handleSwap}>
@@ -345,12 +350,13 @@ const ChainSelection: React.FC<any> = ({
               borderRadius: "50%",
             }}
           >
-            <Image alt="swap" style={{ height: "20px" }} src={SwapImg} />
+            <Image alt="swap" height="20px" width="20px" src={ SwapImg } />
           </Row>
         </OverlayButton>
         <div style={{ height: "1px", width: "100%" }} />
       </Row>
-      <Spacer size="lg" />
+      {/* <Spacer size="lg" /> */}
+      <div className="my-4" />
       <ChainSelector
         text="To Chain"
         selected={toChain}
@@ -359,7 +365,8 @@ const ChainSelection: React.FC<any> = ({
           (chainId) => chainId !== toChain
         )}
       />
-      <Spacer />
+      {/* <Spacer /> */}
+      <div className="my-2" />
     </Column>
   );
 };
@@ -382,7 +389,7 @@ const TokenSelector: React.FC<any> = ({ tokens, selected, selectToken }) => {
           style={{
             boxSizing: "border-box",
             width: "100%",
-            backgroundColor: color.primary.black(),
+            backgroundColor: "black",
             padding: "1rem",
             height: "64px",
           }}
@@ -421,7 +428,8 @@ const BridgeTokenSelectModal: React.FC<any> = ({
       onDismiss={onDismiss}
     >
       <ModalTitle text="Select token" />
-      <Spacer />
+      {/* <Spacer /> */}
+      <div className="my-2" />
       <ModalContent 
         // style={{ padding: "16px 0px" }}
         >
@@ -572,11 +580,13 @@ const BridgeTokenList: React.FC<any> = ({
           {inputError ? (
              <InputError error={inputError} fontSize="14px" />
            ) : (
-            <Spacer />
+            // <Spacer />
+            <div className="my-2" />
           )}
         </Row>
       </Row>
-      <Spacer size="xs" />
+      {/* <Spacer size="xs" /> */}
+      <div className="my-2" />
       <Row style={{ gap: "1rem" }}>
         <TokenSelector
           tokens={tokenList}
@@ -597,7 +607,8 @@ const BridgeTokenList: React.FC<any> = ({
           /> */}
         </div>
       </Row>
-      <Spacer />
+      {/* <Spacer /> */}
+      <div className="my-2" />
       <Row style={{ justifyContent: "space-between" }}>
         <Typo2 style={{ color: "#84888d" }}>
           Balance on {chainToNetworkInfoMap[fromChain].name}
@@ -608,7 +619,8 @@ const BridgeTokenList: React.FC<any> = ({
               ? weiToUnit(fromTokenBalance, token.Decimals)
               : "-"}
           </Typo2>
-          <Spacer />
+          {/* <Spacer /> */}
+          <div className="my-2" />
         </Row>
       </Row>
       <Row style={{ justifyContent: "space-between" }}>
@@ -621,7 +633,8 @@ const BridgeTokenList: React.FC<any> = ({
               ? weiToUnit(toTokenBalance, token.DecimalsTo)
               : "-"}
           </Typo2>
-          <Spacer />
+          {/* <Spacer /> */}
+          <div className="my-2" />
         </Row>
       </Row>
     </Column>
@@ -812,7 +825,8 @@ const Bridge: React.FC<any> = () => {
         >
           <Column style={{}}>
             <Typo2 style={{ fontWeight: "bold" }}>Bridge transaction</Typo2>
-            <Spacer size="xs" />
+            {/* <Spacer size="xs" /> */}
+            <div className="my-2" />
             <Typo2>
               {"Hash: "}
               <a
@@ -828,7 +842,8 @@ const Bridge: React.FC<any> = () => {
                 {transactionStatusMapping[bridgeStatus] || "Unknown"}
               </Typo2>
             )}
-            <Spacer size="sm" />
+            {/* <Spacer size="sm" /> */}
+            <div className="my-3" />
             <OverlayButton
               style={{ padding: 0 }}
               onClick={() => resetTransactionStatus()}
@@ -866,7 +881,8 @@ const Bridge: React.FC<any> = () => {
                 </Row>
               </div>
             </Row>
-            <Spacer />
+            {/* <Spacer /> */}
+            <div className="my-2" />
             {
             /* {walletContext.activeWallet.providerType === "hardware" ? (
               <Typo1>
@@ -880,9 +896,11 @@ const Bridge: React.FC<any> = () => {
                   connectToChain={setFromChain}
                   bridgeToChain={setToChain}
                 />
-                <Spacer />
+                {/* <Spacer /> */}
+                <div className="my-2" />
                 <Divider />
-                <Spacer size="lg" />
+                {/* <Spacer size="lg" /> */}
+                <div className="my-4" />
                 <BridgeTokenList
                   tokenList={tokenList}
                   setSelectedToken={setSelectedToken}
@@ -893,9 +911,11 @@ const Bridge: React.FC<any> = () => {
                   inputError={inputError}
                   // isBridgeTxCompleted={isBridgeTxCompleted}
                 />
-                <Spacer />
+                {/* <Spacer /> */}
+                <div className="my-2" />
                 <Divider />
-                <Spacer size="lg" />
+                {/* <Spacer size="lg" /> */}
+                <div className="my-4" />
                 <ContentBox
                   style={{
                     backgroundColor: "black",
@@ -967,7 +987,8 @@ const Bridge: React.FC<any> = () => {
                     </Row>
                   </Column>
                 </ContentBox>
-                <Spacer />
+                {/* <Spacer /> */}
+                <div className="my-2" />
                 <Typo3>
                   {selectedToken
                     ? `* Amounts greater than ${formatSimpleValue(
@@ -976,7 +997,8 @@ const Bridge: React.FC<any> = () => {
                   take up to 12 hours`
                     : ""}
                 </Typo3>
-                <Spacer />
+                {/* <Spacer /> */}
+                <div className="my-2" />
                 {isApproved ? (
                   <Button
                     disabled={
@@ -1011,7 +1033,8 @@ const Bridge: React.FC<any> = () => {
           </Column>
         </ContentBox>
       </Row>
-      <Spacer />
+      {/* <Spacer /> */}
+      <div className="my-2" />
     </FadeInOut>
   );
 };
