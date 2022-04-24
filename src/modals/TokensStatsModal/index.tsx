@@ -187,7 +187,7 @@ export default function TokenStatsModal(): JSX.Element | null {
           formatNumberScale(
             Number(250_000_000), false)
             )}
-          {getSummaryLine(
+          {/* {getSummaryLine(
             <div className="flex items-center">
             <Typography variant="sm" className="flex items-center py-0.5">
               {`Circulating Supply`}
@@ -241,7 +241,14 @@ export default function TokenStatsModal(): JSX.Element | null {
             - Number(totalSeance)
             - (Number(totalSoul) * 0.125)
             , false)
-        )}
+        )} */}
+         {getSummaryLine(
+          <Typography variant="sm" className="flex items-center py-0.5">
+            {`Circulating Supply`}
+          </Typography>,
+          formatNumberScale(
+            Number(totalSoul), false
+            ))}
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Total Market Cap`}
@@ -289,7 +296,7 @@ export default function TokenStatsModal(): JSX.Element | null {
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
                       {formatNumberScale(
-                        Number(farmsTvl-stakedTvl) // FARMS ONLY
+                        Number(farmsTvl) // FARMS ONLY
                         + stakedTvl // STAKED ONLY
                         + Number(bondsTvl) // BONDS ONLY
                         , true)}
