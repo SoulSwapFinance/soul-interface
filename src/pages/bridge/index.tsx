@@ -807,6 +807,7 @@ const Bridge: React.FC<any> = () => {
               <a
                 href={`https://anyswap.net/explorer/tx?params=${bridgeTxHash}`}
                 target="_blank"
+                rel="noreferrer"
               >
                 {formatAddress(bridgeTxHash)}
               </a>
