@@ -60,7 +60,7 @@ const ChainSelect: React.FC<any> = ({ selectChain, chains }) => {
                 selectChain(chainId);
               }}
             >
-              <Row style={{ gap: "1rem", alignItems: "center"                 
+              <Row style={{ gap: "1rem", alignItems: "center" }}>                
                 <Image
                   alt="chain logo"
                   height="30px"
