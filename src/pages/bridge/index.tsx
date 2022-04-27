@@ -1,120 +1,42 @@
 import React, { useContext, useEffect, useState } from "react";
-import Row from "components/Row";
-import Image from 'next/image'
-import Column from "components/Column";
+import Row from "../../components/Row";
+import {
+  Button
+} from "components/Button";
+import Column from "../../components/Column";
 import styled, { ThemeContext } from "styled-components";
+import Spacer from "../../components/Spacer";
 import {
   chainToNetworkInfoMap,
   supportedChainsForBridge,
   transactionStatusMapping,
-} from "utils/bridge";
-// import DropDownButton from "components/DropDownButton";
-import useBridgeApi from "hooks/useBridgeApi";
-import useMultiChain from "hooks/useMultiChain";
-import InputError from "components/Input/Error";
-import Modal from "components/Modal/Modal"
-import ModalTitle from "components/Modal/Title";
-import ModalContent from "components/Modal/Content";
-import Scrollbar from "components/Scrollbar";
-import useModal from "hooks/useModal";
-// import InputCurrencyBox from "components/Input/Currency/InputCurrencyBox";
+} from "../../utils/bridge";
+import DropDownButton from "../../components/DropDownButton";
+import useBridgeApi from "../../hooks/useBridgeApi";
+import useMultiChain from "../../hooks/useMultiChain";
+import Modal from "./components/Modal";
+import ModalTitle from "./components/ModalTitle";
+import ModalContent from "./components/ModalContent";
+import Scrollbar from "../../components/Scrollbar";
+import useModal from "../../hooks/useModal";
+import InputCurrencyBox from "./components/InputCurrencyBox";
 import { AddressZero } from "@ethersproject/constants";
 import {
   formatSimpleValue,
   unitToWei,
   weiToUnit,
-} from "utils/conversion";
-import { formatAddress, loadERC20Contract } from "utils/wallet";
-import useBridge from "hooks/useBridge";
-import useSendTransaction from "hooks/useSendTransaction";
-import useFantomERC20 from "hooks/useFantomERC20";
+} from "../../utils/conversion";
+import { formatAddress, loadERC20Contract } from "../../utils/wallet";
+import useBridge from "../../hooks/useBridge";
+import useSendTransaction from "../../hooks/useSendTransaction";
+import useFantomERC20 from "../../hooks/useFantomERC20";
 import { BigNumber } from "@ethersproject/bignumber";
-import useTransaction from "hooks/useTransaction";
-import Loader from "components/Loader";
-import FadeInOut from "components/AnimationFade";
+import useTransaction from "../../hooks/useTransaction";
+import Loader from "../../components/Loader";
+import FadeInOut from "../../components/AnimationFade";
+import { ContentBox, OverlayButton, Typo1, Typo2, Typo3 } from "./components/components";
+import InputError from "components/Input/Error";
 import { useActiveWeb3React } from "services/web3";
-import AssetInput from "components/AssetInput";
-// import CurrencySearchModal from "modals/SearchModal/CurrencySearchModal";
-
-const SwapImg = "https://raw.githubusercontent.com/Fantom-foundation/fWallet-interface/94af5d96a763acf8ba1693a54df0f0ad2508d989/packages/app/src/assets/img/symbols/Swap.svg"
-// const multichainImg = "https://multichain.org/img/MUL.52a9d64c.png"
-
-export const Typo1 = styled.div`
-  font-size: 18px;
-`;
-
-export const Typo2 = styled.div`
-  font-size: 16px;
-`;
-
-export const Typo3 = styled.div`
-  font-size: 14px;
-`;
-
-export const OverlayButton = styled.button<{ disabled?: boolean }>`
-  background-color: white;
-  border: none;
-  text-decoration: none;
-  cursor: ${(props) => !props.disabled && "pointer"};
-  color: inherit;
-  font-family: "proxima-nova", sans-serif;
-  transition: 0.2s all;
-  :active {
-    transform: ${(props) => !props.disabled && "scale(0.98)"};
-  }
-`;
-
-export const Button = styled.button<{
-  variant: "primary" | "secondary" | "tertiary";
-  padding?: string;
-  color?: string;
-  fontSize?: string;
-  disabled?: boolean;
-  width?: string;
-}>`
-  background-color: ${(props) =>
-    props.variant === "primary"
-      // ? props.theme.color.primary.fantomBlue(props.disabled ? 0.6 : 1)
-      ? "#B485FF"
-      : props.variant === "secondary"
-      ? "transparent"
-      : "white"};
-  border: ${(props) =>
-    props.variant === "primary" || props.variant === "tertiary"
-      ? "none"
-      : `1px solid ${"grey"}`};
-  border-radius: 8px;
-  color: ${(props) => (!props.disabled ? props.color || "white" : "#6c726c")};
-  cursor: ${(props) => (!props.disabled ? "pointer" : "cursor")};
-  font-size: ${(props) => (props.fontSize ? props.fontSize : "18px")};
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  padding: ${(props) => (props.padding ? props.padding : "14px 24px")};
-  transition: 0.2s all;
-  width: ${(props) => props.width && props.width};
-  ${(props) => props.hidden && "hidden"} :focus {
-    border: ${(props) => props.variant === "primary" && "none"};
-    outline: none;
-  }
-  :active {
-    transform: ${(props) => !props.disabled && "scale(0.98)"};
-  }
-`;
-
-export const Container = styled.div<{ padding?: string }>`
-  border: ${(props) => `1px solid ${"grey"}`};
-  padding: ${(props) => (props.padding ? props.padding : "2rem")};
-  background-color: ${(props) => "black"};
-  border-radius: 8px;
-`;
-
-export const ContentBox = styled.div<{ padding?: string }>`
-  background-color: ${(props) => "#B485FF"};
-  display: inline-flex;
-  padding: ${(props) => (props.padding ? props.padding : "2rem")};
-  border-radius: 8px;
-`;
 
 const ChainSelect: React.FC<any> = ({ selectChain, chains }) => {
   const { color } = useContext(ThemeContext);
@@ -123,7 +45,7 @@ const ChainSelect: React.FC<any> = ({ selectChain, chains }) => {
       style={{
         width: "100%",
         boxSizing: "border-box",
-        backgroundColor: "black",
+        backgroundColor: color.primary.black(),
         borderRadius: "8px",
         padding: "1rem",
       }}
@@ -138,10 +60,9 @@ const ChainSelect: React.FC<any> = ({ selectChain, chains }) => {
               }}
             >
               <Row style={{ gap: "1rem", alignItems: "center" }}>
-                <Image
+                <img
                   style={{ height: "30px", width: "30px" }}
                   src={chainToNetworkInfoMap[chainId].image}
-                  alt="chain to network info"
                 />
                 <Typo2 style={{ fontWeight: "bold" }}>
                   {chainToNetworkInfoMap[chainId].name}
@@ -161,32 +82,29 @@ const ChainSelector: React.FC<any> = ({
   selected,
   selectChain,
 }) => {
-  // const { color } = useContext(ThemeContext);
+  const { color } = useContext(ThemeContext);
   return (
     <Column style={{ width: "100%" }}>
-      <Typo2 style={{ color: "white" }}>{text}</Typo2>
-      {/* <Spacer size="xs" /> todo: fix */}
-      <div className="my-2" />
-      {/* <DropDownButton */}
-        {/* width="100%" */}
-        {/* // DropDown={() => ChainSelect({ selectChain, chains })} */}
-        {/* dropdownTop={65} */}
-      {/* > */}
+      <Typo2 style={{ color: "#84888d" }}>{text}</Typo2>
+      <Spacer size="xs" />
+      <DropDownButton
+        width="100%"
+        DropDown={() => ChainSelect({ selectChain, chains })}
+        dropdownTop={65}
+      >
         {/*<OverlayButton style={{ padding: 0 }}>*/}
         <ContentBox
           style={{
             boxSizing: "border-box",
             width: "100%",
-            backgroundColor: "black",
+            backgroundColor: color.primary.black(),
             padding: "1rem",
           }}
         >
           <Row style={{ gap: "1rem", alignItems: "center" }}>
-            <Image
+            <img
               style={{ height: "30px", width: "30px" }}
-              // src={chainToNetworkInfoMap[selected].image}
-              src={chainToNetworkInfoMap[selected]?.image}
-              alt="chain to network info"
+              src={chainToNetworkInfoMap[selected].image}
             />
             <Typo2 style={{ fontWeight: "bold" }}>
               {chainToNetworkInfoMap[selected].name}
@@ -194,7 +112,7 @@ const ChainSelector: React.FC<any> = ({
           </Row>
         </ContentBox>
         {/*</OverlayButton>*/}
-      {/* </DropDownButton> */}
+      </DropDownButton>
     </Column>
   );
 };
@@ -204,7 +122,8 @@ const ChainSelection: React.FC<any> = ({
   connectToChain,
   bridgeToChain,
 }) => {
-  const { account, chainId, library } = useActiveWeb3React()
+  const { chainId, account, connector, deactivate, library } = useActiveWeb3React()
+
   const [fromChain, setFromChain] = useState(250);
   const [toChain, setToChain] = useState(1);
   const { getBridgeTokens } = useBridgeApi();
@@ -212,10 +131,12 @@ const ChainSelection: React.FC<any> = ({
 
   const getBalance = async (address: string, provider: any) => {
     if (address === AddressZero || !address) {
+      // return provider.getBalance(walletContext.activeWallet.address);
       return provider.getBalance(account);
     }
 
     const contract = await loadERC20Contract(address, provider);
+    // return contract.balanceOf(walletContext.activeWallet.address);
     return contract.balanceOf(account);
   };
 
@@ -247,6 +168,7 @@ const ChainSelection: React.FC<any> = ({
           "AVAX",
           "BNB",
         ];
+        // if (tokenList?.length && walletContext.activeWallet.address) {
         if (tokenList?.length && account) {
           const stickyTokens = tokenOrder
             .map((symbol) => {
@@ -282,7 +204,7 @@ const ChainSelection: React.FC<any> = ({
         }
       }
     });
-  }, [fromChain, toChain, account]);
+  }, [fromChain, toChain, account]); // walletContext.activeWallet.address
 
   const handleSetFromChain = (chainId: number) => {
     if (chainId !== 250) {
@@ -321,21 +243,22 @@ const ChainSelection: React.FC<any> = ({
           (chainId) => chainId !== fromChain
         )}
       />
+      {/* {walletContext.activeWallet.chainId !== fromChain && ( */}
       {chainId !== fromChain && (
         <>
-          <div className="my-2" />
+          <Spacer size="xs" />
           <OverlayButton
             style={{ textAlign: "start" }}
-            // onClick={() => forceSwap(fromChain)}
+            onClick={() => forceSwap(fromChain)}
           >
-            {/* <InputError
+            <InputError
               error={"Please switch your web3 wallet to use the above chain"}
               fontSize="18px"
-            /> */}
+            />
           </OverlayButton>
         </>
       )}
-      <div className="my-4" />
+      <Spacer size="lg" />
       <Row style={{ justifyContent: "center", alignItems: "center" }}>
         <div style={{ height: "1px", width: "100%" }} />
         <OverlayButton style={{ padding: 0 }} onClick={handleSwap}>
@@ -345,16 +268,16 @@ const ChainSelection: React.FC<any> = ({
               justifyContent: "center",
               height: "64px",
               width: "64px",
-              border: "1px solid white",
+              border: "1px solid #67748B",
               borderRadius: "50%",
             }}
           >
-            <Image alt="swap" height="20px" width="20px" src={ SwapImg } />
+            <img alt="swap" style={{ height: "20px" }} src={"https://raw.githubusercontent.com/BunsDev/fWallet-interface/main/packages/app/src/assets/img/symbols/Swap.svg"} />
           </Row>
         </OverlayButton>
         <div style={{ height: "1px", width: "100%" }} />
       </Row>
-      <div className="my-4" />
+      <Spacer size="lg" />
       <ChainSelector
         text="To Chain"
         selected={toChain}
@@ -363,7 +286,7 @@ const ChainSelection: React.FC<any> = ({
           (chainId) => chainId !== toChain
         )}
       />
-      <div className="my-2" />
+      <Spacer />
     </Column>
   );
 };
@@ -374,7 +297,6 @@ const TokenSelector: React.FC<any> = ({ tokens, selected, selectToken }) => {
     <BridgeTokenSelectModal tokens={tokens} selectToken={selectToken} />,
     "bridge-token-select-modal"
   );
-  const [ open, setOpen ] = useState(false)
 
   return (
     <Column style={{ width: "100%", flex: 1 }}>
@@ -387,7 +309,7 @@ const TokenSelector: React.FC<any> = ({ tokens, selected, selectToken }) => {
           style={{
             boxSizing: "border-box",
             width: "100%",
-            backgroundColor: "black",
+            backgroundColor: color.primary.black(),
             padding: "1rem",
             height: "64px",
           }}
@@ -395,15 +317,14 @@ const TokenSelector: React.FC<any> = ({ tokens, selected, selectToken }) => {
           <Row style={{ gap: "1rem", alignItems: "center" }}>
             {selected ? (
               <>
-                <Image
+                <img
                   style={{ height: "30px", width: "30px" }}
                   src={selected.logoUrl}
-                  alt="logo"
                 />
                 <Typo2 style={{ fontWeight: "bold" }}>{selected.symbol}</Typo2>
               </>
             ) : tokens && tokens.length ? (
-              <Typo1>Select Token </Typo1>
+              <Typo1>Select token </Typo1>
             ) : (
               <Loader />
             )}
@@ -426,10 +347,8 @@ const BridgeTokenSelectModal: React.FC<any> = ({
       onDismiss={onDismiss}
     >
       <ModalTitle text="Select token" />
-      <div className="my-2" />
-      <ModalContent 
-        // style={{ padding: "16px 0px" }}
-        >
+      <Spacer />
+      <ModalContent style={{ padding: "16px 0px" }}>
         <Column>
           <Row
             style={{
@@ -441,7 +360,7 @@ const BridgeTokenSelectModal: React.FC<any> = ({
               style={{
                 textAlign: "left",
                 width: "8rem",
-                color: "white",
+                color: color.greys.grey(),
               }}
             >
               TOKEN NAME
@@ -450,7 +369,7 @@ const BridgeTokenSelectModal: React.FC<any> = ({
               style={{
                 textAlign: "right",
                 width: "8rem",
-                color: "white",
+                color: color.greys.grey(),
               }}
             >
               BALANCE
@@ -476,10 +395,9 @@ const BridgeTokenSelectModal: React.FC<any> = ({
                         }}
                       >
                         <Row style={{ gap: "1rem", alignItems: "center" }}>
-                          <Image
+                          <img
                             style={{ height: "30px", width: "30px" }}
                             src={token.logoUrl}
-                            alt="logo"
                           />
                           <Typo2 style={{ fontWeight: "bold" }}>
                             {token.symbol}
@@ -530,12 +448,10 @@ const BridgeTokenList: React.FC<any> = ({
   inputError,
   isBridgeTxCompleted,
 }) => {
-  const { account } = useActiveWeb3React()
+  const { chainId, account, connector, deactivate, library } = useActiveWeb3React()
   const [token, setToken] = useState(null);
   const [fromTokenBalance, setFromTokenBalance] = useState(null);
   const [toTokenBalance, setToTokenBalance] = useState(null);
-  const [ open, setOpen ] = useState(false)
-
 
   const handleSetToken = (value: any) => {
     setFromTokenBalance(null);
@@ -569,36 +485,29 @@ const BridgeTokenList: React.FC<any> = ({
       );
       return;
     }
-  }, [token, account, isBridgeTxCompleted]);
+  }, [token, account, isBridgeTxCompleted]); // walletContext.activeWallet.address
 
   return (
     <Column>
       <Row style={{ gap: "1rem" }}>
-        <Typo2 style={{ flex: 1, color: "white" }}>{"Token to Bridge"}</Typo2>
+        <Typo2 style={{ flex: 1, color: "#84888d" }}>{"Token to Bridge"}</Typo2>
         <Row style={{ flex: 2, paddingLeft: "1rem" }}>
           {inputError ? (
-             <InputError error={inputError} fontSize="14px" />
-           ) : (
-            <div className="my-2" />
+            <InputError error={inputError} fontSize="14px" />
+          ) : (
+            <Spacer />
           )}
         </Row>
       </Row>
-      <div className="my-2" />
+      <Spacer size="xs" />
       <Row style={{ gap: "1rem" }}>
         <TokenSelector
           tokens={tokenList}
           selected={token}
           selectToken={handleSetToken}
         />
-        <div className="flex items-end justify-between gap-2">
-    </div>
         <div style={{ flex: 2 }}>
-          <AssetInput 
-          onChange={ setAmount }     
-          value={amount}
-          currency={token}
-          />
-          {/* <InputCurrencyBox
+          <InputCurrencyBox
             disabled={!token}
             value={amount}
             setValue={setAmount}
@@ -608,12 +517,12 @@ const BridgeTokenList: React.FC<any> = ({
                 : 0
             }
             variant="new"
-          /> */}
+          />
         </div>
       </Row>
-      <div className="my-2" />
+      <Spacer />
       <Row style={{ justifyContent: "space-between" }}>
-        <Typo2 style={{ color: "white" }}>
+        <Typo2 style={{ color: "#84888d" }}>
           Balance on {chainToNetworkInfoMap[fromChain].name}
         </Typo2>
         <Row>
@@ -622,12 +531,11 @@ const BridgeTokenList: React.FC<any> = ({
               ? weiToUnit(fromTokenBalance, token.Decimals)
               : "-"}
           </Typo2>
-          {/* <Spacer /> */}
-          <div className="my-2" />
+          <Spacer />
         </Row>
       </Row>
       <Row style={{ justifyContent: "space-between" }}>
-        <Typo2 style={{ color: "white" }}>
+        <Typo2 style={{ color: "#84888d" }}>
           Balance on {chainToNetworkInfoMap[toChain].name}
         </Typo2>
         <Row>
@@ -636,7 +544,7 @@ const BridgeTokenList: React.FC<any> = ({
               ? weiToUnit(toTokenBalance, token.DecimalsTo)
               : "-"}
           </Typo2>
-          <div className="my-2" />
+          <Spacer />
         </Row>
       </Row>
     </Column>
@@ -644,10 +552,10 @@ const BridgeTokenList: React.FC<any> = ({
 };
 
 const Bridge: React.FC<any> = () => {
+  const { chainId, account, connector, deactivate, library } = useActiveWeb3React()
   const { color } = useContext(ThemeContext);
   const { setToChain: connectToChain } = useMultiChain();
   const { bridgeStableMethod, bridgeNativeMethod, bridgeMethod } = useBridge();
-  const { chainId } = useActiveWeb3React();
   const { getTransactionStatus } = useBridgeApi();
   const { transaction } = useTransaction();
   const { approve, getAllowance } = useFantomERC20();
@@ -762,9 +670,8 @@ const Bridge: React.FC<any> = () => {
   }, [fromChain]);
 
   useEffect(() => {
+    // if (walletContext.activeWallet.chainId !== fromChain) {
     if (chainId !== fromChain) {
-      // TODO: below
-    // if (250 !== fromChain) {
       return;
     }
     if (selectedToken?.needApprove === "true" && amount) {
@@ -783,10 +690,7 @@ const Bridge: React.FC<any> = () => {
       );
     }
     return setIsApproved(true);
-    // TODO: below
-  }, [selectedToken, isApproveCompleted, chainId]);
-  // }, [selectedToken, isApproveCompleted, 250]); //chainId]);
-  // }, [selectedToken, 250]); //chainId]);
+  }, [selectedToken, isApproveCompleted, chainId]); // walletContext.activeWallet.chainId
 
   useEffect(() => {
     let interval: any;
@@ -828,14 +732,12 @@ const Bridge: React.FC<any> = () => {
         >
           <Column style={{}}>
             <Typo2 style={{ fontWeight: "bold" }}>Bridge transaction</Typo2>
-            {/* <Spacer size="xs" /> */}
-            <div className="my-2" />
+            <Spacer size="xs" />
             <Typo2>
               {"Hash: "}
               <a
                 href={`https://anyswap.net/explorer/tx?params=${bridgeTxHash}`}
                 target="_blank"
-                rel="noreferrer"
               >
                 {formatAddress(bridgeTxHash)}
               </a>
@@ -845,7 +747,7 @@ const Bridge: React.FC<any> = () => {
                 {transactionStatusMapping[bridgeStatus] || "Unknown"}
               </Typo2>
             )}
-            <div className="my-3" />
+            <Spacer size="sm" />
             <OverlayButton
               style={{ padding: 0 }}
               onClick={() => resetTransactionStatus()}
@@ -870,36 +772,35 @@ const Bridge: React.FC<any> = () => {
               <div
                 style={{
                   borderRadius: "34px",
-                  backgroundColor: "black",
+                  backgroundColor: color.primary.black(),
                 }}
               >
                 {/* <Row style={{ justifyContent: "space-between", gap: "1rem" }}>
                   <Typo3
                     style={{ color: "#67748B", padding: ".5rem 0 .5rem 1rem" }}
                   >
-                    Powered by MultiChain
+                    Powered by multichain
                   </Typo3>
-                  <Image src={multichainImg} height="25px" width="25px" alt="MULTI logo" />
+                  <img src={multichainImg} />
                 </Row> */}
               </div>
             </Row>
-            <div className="my-2" />
-            {
-            /* {walletContext.activeWallet.providerType === "hardware" ? (
+            <Spacer />
+            {/* {walletContext.activeWallet.providerType === "hardware" ? (
               <Typo1>
                 Hardware wallet is unsupported. Use any of the other wallet
                 types to use the bridge.
               </Typo1>
-            ) : ( */
+            ) : ( */}
               <>
                 <ChainSelection
                   setTokenList={setTokenList}
                   connectToChain={setFromChain}
                   bridgeToChain={setToChain}
                 />
-                <div className="my-2" />
+                <Spacer />
                 <Divider />
-                <div className="my-4" />
+                <Spacer size="lg" />
                 <BridgeTokenList
                   tokenList={tokenList}
                   setSelectedToken={setSelectedToken}
@@ -908,22 +809,20 @@ const Bridge: React.FC<any> = () => {
                   amount={amount}
                   setAmount={handleSetAmount}
                   inputError={inputError}
-                  // isBridgeTxCompleted={isBridgeTxCompleted}
+                  isBridgeTxCompleted={isBridgeTxCompleted}
                 />
-                {/* <Spacer /> */}
-                <div className="my-2" />
+                <Spacer />
                 <Divider />
-                {/* <Spacer size="lg" /> */}
-                <div className="my-4" />
+                <Spacer size="lg" />
                 <ContentBox
                   style={{
-                    backgroundColor: "black",
+                    backgroundColor: color.primary.black(),
                     padding: "1.5rem",
                   }}
                 >
                   <Column style={{ width: "100%", gap: ".5rem" }}>
                     <Row style={{ justifyContent: "space-between" }}>
-                      <Typo2 style={{ color: "white" }}>
+                      <Typo2 style={{ color: "#84888d" }}>
                         Current Bridgeable Range
                       </Typo2>
                       <Typo2>
@@ -937,7 +836,7 @@ const Bridge: React.FC<any> = () => {
                       </Typo2>
                     </Row>
                     <Row style={{ justifyContent: "space-between" }}>
-                      <Typo2 style={{ color: "white" }}>
+                      <Typo2 style={{ color: "#84888d" }}>
                         Max bridge amount
                       </Typo2>
                       <Typo2
@@ -956,7 +855,7 @@ const Bridge: React.FC<any> = () => {
                       </Typo2>
                     </Row>
                     <Row style={{ justifyContent: "space-between" }}>
-                      <Typo2 style={{ color: "white" }}>
+                      <Typo2 style={{ color: "#84888d" }}>
                         Min Bridge amount
                       </Typo2>
                       <Typo2
@@ -975,7 +874,7 @@ const Bridge: React.FC<any> = () => {
                       </Typo2>
                     </Row>
                     <Row style={{ justifyContent: "space-between" }}>
-                      <Typo2 style={{ color: "white" }}>Minimum fee</Typo2>
+                      <Typo2 style={{ color: "#84888d" }}>Minimum fee</Typo2>
                       <Typo2>
                         {selectedToken
                           ? `${formatSimpleValue(
@@ -986,8 +885,7 @@ const Bridge: React.FC<any> = () => {
                     </Row>
                   </Column>
                 </ContentBox>
-                {/* <Spacer /> */}
-                <div className="my-2" />
+                <Spacer />
                 <Typo3>
                   {selectedToken
                     ? `* Amounts greater than ${formatSimpleValue(
@@ -996,19 +894,16 @@ const Bridge: React.FC<any> = () => {
                   take up to 12 hours`
                     : ""}
                 </Typo3>
-                {/* <Spacer /> */}
-                <div className="my-2" />
+                <Spacer />
                 {isApproved ? (
                   <Button
                     disabled={
                       inputError ||
                       !amount ||
-                          // TODO: below
                       // walletContext.activeWallet.chainId !== fromChain
                       chainId !== fromChain
-                      // 250 !== fromChain
                     }
-                    variant="outlined"
+                    variant="primary"
                     onClick={handleBridgeAction}
                   >
                     {isBridgeTxPending
@@ -1016,25 +911,20 @@ const Bridge: React.FC<any> = () => {
                       : "Bridge Token"}
                   </Button>
                 ) : (
-                  <Button variant="primary" 
-                  // todo: fix
-                  // onClick={handleApproveToken}
-                  >
-                    {/* {isApprovePending
+                  <Button variant="primary" onClick={handleApproveToken}>
+                    {isApprovePending
                       ? "Approving"
                       : isApproveCompleted
                       ? "Approve successful"
-                      : "Approve Token"} */}
+                      : "Approve Token"}
                   </Button>
                 )}
               </>
-            // )
-            }
+            {/* )} */}
           </Column>
         </ContentBox>
       </Row>
-      {/* <Spacer /> */}
-      <div className="my-2" />
+      <Spacer />
     </FadeInOut>
   );
 };
