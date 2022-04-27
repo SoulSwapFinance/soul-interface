@@ -51,12 +51,12 @@ export const FTM_BSC_STABLE = [
   "anyAVAX",
 ];
 
-export const MULTICHAIN_URL = "https://bridgeapi.anyswap.exchange";
+export const MULTICHAIN_URL = "https://bridgeapi.anyswap.exchange/v2/serverInfo";
 export enum MULTICHAIN_METHODS {
   GET_CHAIN_TOKENS = "/v2/serverInfo",
   GET_STABLE_TOKENS = "/v3/serverinfoV3",
   GET_TX_STATUS = "/v2/history/details",
-  ANNOUNCE_TX = "/v2/reswaptxns?hash=0xa63e6e3a86718d710658ef1445c6bd604752086ae68908ffac39a686db6b815g&srcChainID=250&destChainID=137",
+  // ANNOUNCE_TX = "/v2/reswaptxns?hash=0xa63e6e3a86718d710658ef1445c6bd604752086ae68908ffac39a686db6b815g&srcChainID=250&destChainID=137",
 }
 
 const isNativeForDestChain = (tokenid: string, destChainId: number) => {
@@ -104,20 +104,20 @@ const useBridgeApi = () => {
     });
   };
 
-  const announceTransaction = (
-    hash: string,
-    fromChain: number,
-    toChain: number
-  ) => {
-    return get({
-      path: MULTICHAIN_METHODS.ANNOUNCE_TX,
-      queryParams: [
-        ["hash", hash],
-        ["srcChainID", fromChain],
-        ["destChainID", toChain],
-      ],
-    });
-  };
+  // const announceTransaction = (
+  //   hash: string,
+  //   fromChain: number,
+  //   toChain: number
+  // ) => {
+  //   return get({
+  //     path: MULTICHAIN_METHODS.ANNOUNCE_TX,
+  //     queryParams: [
+  //       ["hash", hash],
+  //       ["srcChainID", fromChain],
+  //       ["destChainID", toChain],
+  //     ],
+  //   });
+  // };
 
   const getTransactionStatus = (hash: string) => {
     return get({
@@ -386,7 +386,7 @@ const useBridgeApi = () => {
   };
 
   return {
-    announceTransaction,
+    // announceTransaction,
     getBridgeTokens,
     getTransactionStatus,
   };

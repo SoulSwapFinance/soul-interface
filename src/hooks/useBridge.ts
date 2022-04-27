@@ -1,38 +1,43 @@
 import { loadContract } from "../utils/wallet";
-import useWalletProvider from "./useWalletProvider";
 import { arrayBridgeProps } from "./useBridgeApi";
 import { send } from "../utils/transactions";
-import useTransaction from "./useTransaction";
 import useFantomNative from "./useFantomNative";
 import BridgeABI from 'constants/abis/bridge/bridge.json'
 import RouterABI from 'constants/abis/bridge/bridgeRouter.json'
+import { useActiveWeb3React } from "services/web3";
+import { useAppDispatch } from "state/hooks";
 
 const useBridge = () => {
-  const { walletContext } = useWalletProvider();
-  const { dispatchTx } = useTransaction();
+  const { chainId, account, connector, deactivate, library } = useActiveWeb3React()
+  const dispatch = useAppDispatch()
   const { sendNativeTokens } = useFantomNative();
+  const provider = library.provider
+  const signer = library.getSigner()
 
   const getBridgeContract = async (type: string, contractAddress: string) => {
     if (type === "stable") {
       return loadContract(
         contractAddress,
         RouterABI,
-        walletContext.activeWallet.signer
+        // walletContext.activeWallet.signer
+        signer
       );
     }
 
     return loadContract(
       contractAddress,
       BridgeABI,
-      walletContext.activeWallet.signer
+      // walletContext.activeWallet.signer
+      signer
     );
   };
 
   const executeBridgeTransaction = async (callback: any) => {
     return send(
-      walletContext.activeWallet.provider,
+      // walletContext.activeWallet.provider,
+      provider,
       () => callback(),
-      dispatchTx
+      dispatch
     );
   };
 
@@ -44,7 +49,8 @@ const useBridge = () => {
     if (type === "swapOut") {
       console.info("[bridgeMethod] SwapOut");
       bridgeMethod = () =>
-        bridgeContract.Swapout(amount, walletContext.activeWallet.address);
+        // bridgeContract.Swapout(amount, walletContext.activeWallet.address);
+        bridgeContract.Swapout(amount, account);
     }
     if (type === "transfer") {
       console.info("[bridgeMethod] transfer");
@@ -84,7 +90,8 @@ const useBridge = () => {
       bridgeMethod = () =>
         routerContract.anySwapOutNative(
           DepositAddress,
-          walletContext.activeWallet.address,
+          // walletContext.activeWallet.address,
+          account,
           toChainId,
           { value: amount }
         );
@@ -94,7 +101,8 @@ const useBridge = () => {
       bridgeMethod = () =>
         routerContract["anySwapOut(address,address,uint256,uint256)"](
           DepositAddress,
-          walletContext.activeWallet.address,
+          // walletContext.activeWallet.address,
+          account,
           amount,
           toChainId
         );
@@ -104,7 +112,8 @@ const useBridge = () => {
       bridgeMethod = () =>
         routerContract.anySwapOutUnderlying(
           DepositAddress,
-          walletContext.activeWallet.address,
+          // walletContext.activeWallet.address,
+          account,
           amount,
           toChainId
         );

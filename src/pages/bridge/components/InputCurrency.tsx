@@ -1,34 +1,5 @@
 import React from "react";
-import { styled } from "styled-components";
-
-export const Input = styled.input<{
-    fontSize?: string;
-    fontWeight?: string;
-    disabled?: boolean;
-  }>`
-    flex: 1;
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-size: ${(props) => props.fontSize || "20px"};
-    font-weight: ${(props) => props.fontWeight && props.fontWeight};
-    opacity: ${(props) => props.disabled && 0.6};
-    :focus {
-      outline: none;
-    }
-    ::-webkit-outer-spin-button,
-    ::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-    ::-webkit-input-placeholder {
-      font-size: 16px;
-      line-height: 3;
-    }
-    [type="number"] {
-      -moz-appearance: textfield;
-    }
-  `;
+import { Input } from "./components";
 
 const InputCurrency: React.FC<any> = ({
   value,
@@ -85,6 +56,7 @@ const InputCurrency: React.FC<any> = ({
         const take = value.slice(-3);
         result = result ? `${take},${result}` : take;
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         return doFormat(value.substr(0, value.length - 3));
       }
       result = result

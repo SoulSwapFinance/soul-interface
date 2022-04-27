@@ -3,10 +3,11 @@ import { send } from "utils/transactions";
 import { BigNumber } from "@ethersproject/bignumber";
 import { useActiveWeb3React } from "services/web3";
 import { getSigner } from "sdk";
+import { useAppDispatch } from "state/hooks";
 
 const useFantomNative = () => {
   const { account, chainId, library } = useActiveWeb3React()
-  const { dispatchTx } = useTransaction();
+  const dispatch = useAppDispatch()
 
   const sendNativeTokens = async (toAddress: string, amount: string) => {
     if (!account) {
@@ -25,7 +26,7 @@ const useFantomNative = () => {
           to: toAddress,
           value: amount,
         }),
-      dispatchTx
+      dispatch
     );
   };
 
@@ -59,7 +60,7 @@ const useFantomNative = () => {
         getSigner(library, account).sendTransaction({
           ...tx,
         }),
-      dispatchTx
+      dispatch
     );
   };
 

@@ -1,12 +1,12 @@
 import { MaxUint256 } from "@ethersproject/constants";
-import useTransaction from "./useTransaction";
 import { send } from "utils/transactions";
 import { loadERC20Contract } from "utils/wallet";
 import { useActiveWeb3React } from "services/web3";
 import { getSigner } from "sdk";
+import { useAppDispatch } from "state/hooks";
 
 const useFantomERC20 = () => {
-  const { dispatchTx } = useTransaction();
+  const dispatch = useAppDispatch()
   const { account, chainId, library } = useActiveWeb3React()
   const approve = async (
     contractAddress: string,
@@ -30,7 +30,7 @@ const useFantomERC20 = () => {
     return send(
       library.provider,
       () => contract.approve(approveAddress, amount || MaxUint256),
-      dispatchTx
+      dispatch
     );
   };
 
@@ -71,7 +71,7 @@ const useFantomERC20 = () => {
     return send(
       library?.provider,
       () => contract.transfer(toAddress, amount),
-      dispatchTx
+      dispatch
     );
   };
 

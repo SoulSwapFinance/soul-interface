@@ -1,30 +1,27 @@
 import React, { useContext, useState } from "react";
 import { ThemeContext } from "styled-components";
-import Row from "components/Row";
-import Spacer from "components/Spacer";
 import InputCurrency from "./InputCurrency";
 import { Button } from "components/Button";
-import FtmLogo from "assets/networks/fantom.svg";
+import Spacer from "components/Spacer";
+import Row from "components/Row";
 
 export interface Token {
-    name: string;
-    symbol: string;
-    address: string;
-    decimals: number;
-    logoURL: string;
-    totalSupply?: string;
-    balanceOf?: string;
-  }
-  
-export type FormattedValueType = [string, string];
+  name: string;
+  symbol: string;
+  address: string;
+  decimals: number;
+  logoURL: string;
+  totalSupply?: string;
+  balanceOf?: string;
+}
 
-const FANTOM_NATIVE: Token = {
-    address: null,
-    decimals: 18,
-    name: "Fantom",
-    symbol: "FTM",
-    logoURL: FtmLogo,
-  };
+export const FANTOM_NATIVE: Token = {
+  address: null,
+  decimals: 18,
+  name: "Fantom",
+  symbol: "FTM",
+  logoURL: "https://raw.githubusercontent.com/BunsDev/fWallet-interface/main/packages/app/src/assets/img/chains/Fantom.svg",
+};
 
 const InputCurrencyBox: React.FC<any> = ({
   value,
@@ -58,7 +55,7 @@ const InputCurrencyBox: React.FC<any> = ({
         max={max}
         handleValue={setValue}
         handleError={setError}
-        token={FANTOM_NATIVE}
+        token={ FANTOM_NATIVE }
       />
       <Row style={{ alignItems: "center" }}>
         <Button
