@@ -105,7 +105,7 @@ export const Button = styled.button<{
 }>`
   background-color: ${(props) =>
     props.variant === "primary"
-      ? "blue"
+      ? "black"
       : props.variant === "secondary"
       ? "transparent"
       : "white"
@@ -143,7 +143,7 @@ export const Container = styled.div<{ padding?: string }>`
 `;
 
 export const ContentBox = styled.div<{ padding?: string }>`
-  background-color: ${ "blue" };
+  background-color: ${ "#b365ff" };
   display: inline-flex;
   padding: ${(props) => (props.padding ? props.padding : "2rem")};
   border-radius: 8px;

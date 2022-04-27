@@ -3,7 +3,7 @@ import Row from "../../components/Row";
 import {
   Button
 } from "./components/components";
-import Column from "../../components/Column";
+import Column, { AutoColumn } from "../../components/Column";
 import styled, { ThemeContext } from "styled-components";
 // import Spacer from "../../components/Spacer";
 import {
@@ -36,6 +36,7 @@ import FadeInOut from "../../components/AnimationFade";
 import { ContentBox, OverlayButton, Typo1, Typo2, Typo3 } from "./components/components";
 import InputError from "components/Input/Error";
 import { useActiveWeb3React } from "services/web3";
+import { ArrowDownIcon } from "@heroicons/react/solid";
 
 const ChainSelect: React.FC<any> = ({ selectChain, chains }) => {
   const { color } = useContext(ThemeContext);
@@ -85,7 +86,6 @@ const ChainSelector: React.FC<any> = ({
   return (
     <Column style={{ width: "100%" }}>
       <Typo2 style={{ color: "#84888d" }}>{text}</Typo2>
-      {/* <Spacer size="xs" /> */}
       <div />
       <DropDownButton
         width="100%"
@@ -235,8 +235,9 @@ const ChainSelection: React.FC<any> = ({
   };
   return (
     <Column>
+      <div className="flex ml-24 mr-24 sm:hidden">
       <ChainSelector
-        text="From Chain"
+        // text="From Chain"
         selected={fromChain}
         selectChain={handleSetFromChain}
         chains={supportedChainsForBridge.filter(
@@ -259,38 +260,69 @@ const ChainSelection: React.FC<any> = ({
           </OverlayButton>
         </>
       )}
+      </div>
+      <div className="hidden sm:flex">
+      <ChainSelector
+        // text="From Chain"
+        selected={fromChain}
+        selectChain={handleSetFromChain}
+        chains={supportedChainsForBridge.filter(
+          (chainId) => chainId !== fromChain
+        )}
+      />
+      {/* {walletContext.activeWallet.chainId !== fromChain && ( */}
+      {chainId !== fromChain && (
+        <>
+          {/* <Spacer size="xs" /> */}
+          <div />
+          <OverlayButton
+            style={{ textAlign: "start" }}
+            onClick={() => forceSwap(fromChain)}
+          >
+            <InputError
+              error={"Please switch your web3 wallet to use the above chain"}
+              fontSize="18px"
+            />
+          </OverlayButton>
+        </>
+      )}
+      </div>
       {/* <Spacer size="lg" /> */}
       <div />
       <Row style={{ justifyContent: "center", alignItems: "center" }}>
         <div style={{ height: "1px", width: "100%" }} />
-        <OverlayButton style={{ padding: 0 }} onClick={handleSwap}>
-          <Row
-            style={{
-              alignItems: "center",
-              justifyContent: "center",
-              height: "64px",
-              width: "64px",
-              border: "1px solid #67748B",
-              borderRadius: "50%",
-            }}
-          >
-            <img alt="swap" style={{ height: "20px" }} src={"https://raw.githubusercontent.com/BunsDev/fWallet-interface/main/packages/app/src/assets/img/symbols/Swap.svg"} />
-          </Row>
-        </OverlayButton>
+          <OverlayButton style={{ padding: 0 }} onClick={handleSwap}>
+              <AutoColumn justify="space-between" className="py-2 -my-4 py-4">
+                  <div className="flex justify-center mt-2.5 mb-2.5 z-0">
+                    <div
+                      role="button"
+                      className="p-1.5 rounded-full bg-dark-1000 border shadow-md border-dark-700 hover:border-dark-600"
+                    >
+                      <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
+                    </div>
+                  </div>
+                </AutoColumn>
+          </OverlayButton>
         <div style={{ height: "1px", width: "100%" }} />
       </Row>
-      {/* <Spacer size="lg" /> */}
-      <div />
+      <div className="flex ml-24 mr-24 sm:hidden">
       <ChainSelector
-        text="To Chain"
         selected={toChain}
         selectChain={handleSetToChain}
         chains={supportedChainsForBridge.filter(
           (chainId) => chainId !== toChain
         )}
       />
-      {/* <Spacer /> */}
-      <div />
+      </div>
+      <div className="hidden sm:flex">
+      <ChainSelector
+        selected={toChain}
+        selectChain={handleSetToChain}
+        chains={supportedChainsForBridge.filter(
+          (chainId) => chainId !== toChain
+        )}
+      />
+      </div>
     </Column>
   );
 };
@@ -328,7 +360,7 @@ const TokenSelector: React.FC<any> = ({ tokens, selected, selectToken }) => {
                 <Typo2 style={{ fontWeight: "bold" }}>{selected.symbol}</Typo2>
               </>
             ) : tokens && tokens.length ? (
-              <Typo1>Select token </Typo1>
+              <Typo1>Select Token </Typo1>
             ) : (
               <Loader />
             )}
@@ -350,7 +382,7 @@ const BridgeTokenSelectModal: React.FC<any> = ({
       style={{ padding: "20px 24px", maxHeight: "80vh" }}
       onDismiss={onDismiss}
     >
-      <ModalTitle text="Select token" />
+      <ModalTitle text="Select Token" />
       {/* <Spacer /> */}
       <div />
       <ModalContent style={{ padding: "16px 0px" }}>
@@ -365,7 +397,7 @@ const BridgeTokenSelectModal: React.FC<any> = ({
               style={{
                 textAlign: "left",
                 width: "8rem",
-                color: color.greys.grey(),
+                color: "white",
               }}
             >
               TOKEN NAME
@@ -374,7 +406,7 @@ const BridgeTokenSelectModal: React.FC<any> = ({
               style={{
                 textAlign: "right",
                 width: "8rem",
-                color: color.greys.grey(),
+                color: "white",
               }}
             >
               BALANCE
@@ -495,7 +527,8 @@ const BridgeTokenList: React.FC<any> = ({
   return (
     <Column>
       <Row style={{ gap: "1rem" }}>
-        <Typo2 style={{ flex: 1, color: "#84888d" }}>{"Token to Bridge"}</Typo2>
+        <div className="my-1" />
+        {/* <Typo2 style={{ flex: 1, color: "#84888d" }}>{"Token to Bridge"}</Typo2> */}
         <Row style={{ flex: 2, paddingLeft: "1rem" }}>
           {inputError ? (
             <InputError error={inputError} fontSize="14px" />
@@ -505,8 +538,30 @@ const BridgeTokenList: React.FC<any> = ({
           )}
         </Row>
       </Row>
-      {/* <Spacer size="xs" /> */}
       <div />
+      <div className="sm:hidden ml-24 mr-24">
+      <Row style={{ gap: ".1rem" }}>
+        <TokenSelector
+          tokens={tokenList}
+          selected={token}
+          selectToken={handleSetToken}
+        />
+        <div className="flex">
+          <InputCurrencyBox
+            disabled={!token}
+            value={amount}
+            setValue={setAmount}
+            max={
+              token && fromTokenBalance
+                ? weiToUnit(fromTokenBalance, token?.Decimals)
+                : 0
+            }
+            variant="new"
+          />
+        </div>
+      </Row>
+      </div>
+      <div className="hidden sm:grid">
       <Row style={{ gap: "1rem" }}>
         <TokenSelector
           tokens={tokenList}
@@ -527,11 +582,12 @@ const BridgeTokenList: React.FC<any> = ({
           />
         </div>
       </Row>
+      </div>
       {/* <Spacer /> */}
-      <div />
-      <Row style={{ justifyContent: "space-between" }}>
-        <Typo2 style={{ color: "#84888d" }}>
-          Balance on {chainToNetworkInfoMap[fromChain].name}
+      <div className="my-2" />
+      {/* <Row style={{ justifyContent: "space-between" }}>
+        <Typo2 style={{ color: "white" }}>
+          {chainToNetworkInfoMap[fromChain].name}
         </Typo2>
         <Row>
           <Typo2>
@@ -539,13 +595,13 @@ const BridgeTokenList: React.FC<any> = ({
               ? weiToUnit(fromTokenBalance, token.Decimals)
               : "-"}
           </Typo2>
-          {/* <Spacer /> */}
+          <Spacer />
           <div />
         </Row>
-      </Row>
-      <Row style={{ justifyContent: "space-between" }}>
-        <Typo2 style={{ color: "#84888d" }}>
-          Balance on {chainToNetworkInfoMap[toChain].name}
+      </Row> */}
+      {/* <Row style={{ justifyContent: "space-between" }}>
+        <Typo2 style={{ color: "white" }}>
+          {chainToNetworkInfoMap[toChain].name}
         </Typo2>
         <Row>
           <Typo2>
@@ -553,10 +609,10 @@ const BridgeTokenList: React.FC<any> = ({
               ? weiToUnit(toTokenBalance, token.DecimalsTo)
               : "-"}
           </Typo2>
-          {/* <Spacer /> */}
+          <Spacer />
           <div />
         </Row>
-      </Row>
+      </Row> */}
     </Column>
   );
 };
@@ -622,7 +678,7 @@ const Bridge: React.FC<any> = () => {
 
     // TODO: FIX //
   const isBridgeTxPending = false
-   // transaction[bridgeTxHash] && transaction[bridgeTxHash].status === "pending";
+  //  transaction[bridgeTxHash] && transaction[bridgeTxHash].status === "pending";
   const isBridgeTxCompleted = false
     // transaction[bridgeTxHash] &&
     // transaction[bridgeTxHash].status === "completed";
@@ -774,7 +830,7 @@ const Bridge: React.FC<any> = () => {
       <Row style={{ width: "100%", justifyContent: "center" }}>
         <ContentBox style={{ width: "600px" }}>
           <Column style={{ width: "100%" }}>
-            <Row style={{ justifyContent: "space-between" }}>
+            {/* <Row style={{ justifyContent: "space-between" }}>
               <div
                 style={{
                   fontSize: "20px",
@@ -789,16 +845,8 @@ const Bridge: React.FC<any> = () => {
                   backgroundColor: "black",
                 }}
               >
-                {/* <Row style={{ justifyContent: "space-between", gap: "1rem" }}>
-                  <Typo3
-                    style={{ color: "#67748B", padding: ".5rem 0 .5rem 1rem" }}
-                  >
-                    Powered by multichain
-                  </Typo3>
-                  <img src={multichainImg} />
-                </Row> */}
               </div>
-            </Row>
+            </Row> */}
             {/* <Spacer /> */}
             <div />
             {/* {walletContext.activeWallet.providerType === "hardware" ? (
@@ -813,10 +861,7 @@ const Bridge: React.FC<any> = () => {
                   connectToChain={setFromChain}
                   bridgeToChain={setToChain}
                 />
-                {/* <Spacer /> */}
                 <div />
-                <Divider />
-                {/* <Spacer size="lg" /> */}
                 <div />
                 <BridgeTokenList
                   tokenList={tokenList}
@@ -828,11 +873,9 @@ const Bridge: React.FC<any> = () => {
                   inputError={inputError}
                   isBridgeTxCompleted={isBridgeTxCompleted}
                 />
-                {/* <Spacer /> */}
                 <div />
-                <Divider />
-                {/* <Spacer size="lg" /> */}
                 <div />
+                <div className="sm:hidden grid ml-24 mr-24">
                 <ContentBox
                   style={{
                     backgroundColor: "black",
@@ -842,8 +885,9 @@ const Bridge: React.FC<any> = () => {
                   <Column style={{ width: "100%", gap: ".5rem" }}>
                     <Row style={{ justifyContent: "space-between" }}>
                       <Typo2 style={{ color: "#84888d" }}>
-                        Current Bridgeable Range
+                        Current Range
                       </Typo2>
+                      
                       <Typo2>
                         {selectedToken
                           ? `${formatSimpleValue(
@@ -856,7 +900,7 @@ const Bridge: React.FC<any> = () => {
                     </Row>
                     <Row style={{ justifyContent: "space-between" }}>
                       <Typo2 style={{ color: "#84888d" }}>
-                        Max bridge amount
+                        Max Amount
                       </Typo2>
                       <Typo2
                         style={{
@@ -875,7 +919,82 @@ const Bridge: React.FC<any> = () => {
                     </Row>
                     <Row style={{ justifyContent: "space-between" }}>
                       <Typo2 style={{ color: "#84888d" }}>
-                        Min Bridge amount
+                        Min Amount
+                      </Typo2>
+                      <Typo2
+                        style={{
+                          color:
+                            inputError === "Below minimum amount"
+                              ? "red"
+                              : "inherit",
+                        }}
+                      >
+                        {selectedToken
+                          ? `${
+                            formatSimpleValue(selectedToken.MinimumSwap)} ${
+                              selectedToken.symbol
+                            }`
+                          : "-"}
+                      </Typo2>
+                    </Row>
+                    <Row style={{ justifyContent: "space-between" }}>
+                      <Typo2 style={{ color: "#84888d" }}>Minimum fee</Typo2>
+                      <Typo2>
+                        {selectedToken
+                          ? `${formatSimpleValue(
+                              selectedToken.MinimumSwapFee
+                            )} ${selectedToken.symbol}`
+                          : "-"}
+                      </Typo2>
+                    </Row>
+                  </Column>
+                </ContentBox>
+                </div>
+                <div className="hidden sm:grid">
+                <ContentBox
+                  style={{
+                    backgroundColor: "black",
+                    padding: "1.5rem",
+                  }}
+                >
+                  <Column style={{ width: "100%", gap: ".5rem" }}>
+                    <Row style={{ justifyContent: "space-between" }}>
+                      <Typo2 style={{ color: "#84888d" }}>
+                        Current Range
+                      </Typo2>
+                      
+                      <Typo2>
+                        {selectedToken
+                          ? `${formatSimpleValue(
+                              selectedToken.MinimumSwap
+                            )} - ${formatSimpleValue(
+                              selectedToken.MaximumSwap
+                            )} ${selectedToken.symbol}`
+                          : "-"}
+                      </Typo2>
+                    </Row>
+                    <Row style={{ justifyContent: "space-between" }}>
+                      <Typo2 style={{ color: "#84888d" }}>
+                        Max Amount
+                      </Typo2>
+                      <Typo2
+                        style={{
+                          color:
+                            inputError === "Above maximum amount"
+                              ? "red"
+                              : "inherit",
+                        }}
+                      >
+                        {selectedToken
+                          ? `${formatSimpleValue(selectedToken.MaximumSwap)} ${
+                              selectedToken.symbol
+                            }`
+                          : "-"}
+                      </Typo2>
+                    </Row>
+                    <Row style={{ justifyContent: "space-between" }}>
+                      <Typo2 style={{ color: "#84888d" }}>
+                        Min Amount
                       </Typo2>
                       <Typo2
                         style={{
@@ -940,6 +1059,7 @@ const Bridge: React.FC<any> = () => {
                       : "Approve Token"}
                   </Button>
                 )}
+          </div>
               </>
             {/* )} */}
           </Column>

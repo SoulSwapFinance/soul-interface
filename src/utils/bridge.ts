@@ -1,11 +1,11 @@
-import ftmImage from "assets/networks/fantom.svg";
-import ethImage from "assets/networks/ethereumMainnet.svg";
-import bscImage from "assets/networks/binanceSmartChain.png";
-import polyImage from "assets/networks/polygonMainnet.svg";
-import avaxImage from "assets/networks/avalanche.svg";
-import arbImage from "assets/networks/Arbitrum.png";
+const arbImage = "https://assets-global.website-files.com/5f973c970bea5548ad4287ef/60a320b472858ace6700df76_arb-icon.svg"
+const ftmImage = "https://cryptologos.cc/logos/fantom-ftm-logo.svg?v=003"
+const ethImage = "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x74b23882a30290451A17c44f4F05243b6b58C76d/logo.png"
+const bscImage = "https://cryptologos.cc/logos/bnb-bnb-logo.svg?v=022"
+const polyImage = "https://cryptologos.cc/logos/polygon-matic-logo.svg?v=022"
+const avaxImage = "https://cryptologos.cc/logos/avalanche-avax-logo.svg?v=022"
 
-export const supportedChainsForBridge = [250, 1, 56] //, 137, 43114, 42161];
+export const supportedChainsForBridge = [250, 1, 56, 137, 43114, 42161]
 export const chainToNetworkInfoMap = {
   250: { symbol: "ftm", name: "Fantom", image: ftmImage },
   1: { symbol: "eth", name: "Ethereum", image: ethImage },

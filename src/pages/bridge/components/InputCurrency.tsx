@@ -83,7 +83,8 @@ const InputCurrency: React.FC<any> = ({
       type="text"
       value={formatValue(value)}
       onChange={(event) => handleChange(deformatValue(event.target.value))}
-      placeholder={disabled ? "" : "Enter an amount"}
+      placeholder={disabled ? "" : "Enter Amount"}
+      className="ml-6"
     />
   );
 };

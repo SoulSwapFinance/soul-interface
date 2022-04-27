@@ -20,7 +20,7 @@ export const FANTOM_NATIVE: Token = {
   decimals: 18,
   name: "Fantom",
   symbol: "FTM",
-  logoURL: "https://raw.githubusercontent.com/BunsDev/fWallet-interface/main/packages/app/src/assets/img/chains/Fantom.svg",
+  logoURL: "https://cryptologos.cc/logos/fantom-ftm-logo.svg?v=003",
 };
 
 const InputCurrencyBox: React.FC<any> = ({
@@ -60,10 +60,10 @@ const InputCurrencyBox: React.FC<any> = ({
       />
       <Row style={{ alignItems: "center" }}>
         <Button
-          disabled={disabled}
+          disabled={ disabled }
           fontSize="14px"
-          color={ "blue" }
-          padding="8px"
+          color={ "black" }
+          padding="6px"
           style={{ flex: 1 }}
           variant="tertiary"
           onClick={handleSetMax}
@@ -71,7 +71,7 @@ const InputCurrencyBox: React.FC<any> = ({
           MAX {minus ? "" : ""}
         </Button>
         {/* <Spacer /> */}
-        <div />
+        <div className="mr-2" />
       </Row>
     </Row>
   );
