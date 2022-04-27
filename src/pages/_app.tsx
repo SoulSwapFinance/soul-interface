@@ -13,7 +13,8 @@ import Web3ReactManager from 'components/Web3ReactManager'
 import getLibrary from 'functions/getLibrary'
 import { exception, GOOGLE_ANALYTICS_TRACKING_ID, pageview } from 'functions/gtag'
 import DefaultLayout from 'layouts/Default'
-// @ts-ignore TYPE NEEDS FIXING
+import { FantomApiProvider } from "contexts/FantomApiProvider";
+
 import store, { persistor } from 'state'
 import ApplicationUpdater from 'state/application/updater'
 import ListsUpdater from 'state/lists/updater'
@@ -31,6 +32,7 @@ import { RecoilRoot } from 'recoil'
 import { PersistGate } from 'redux-persist/integration/react'
 import { GelatoProvider } from 'soulswap-limit-orders-react'
 import { useActiveWeb3React } from 'services/web3'
+import { ApiDataProvider } from 'contexts/ApiDataProvider'
 
 const Web3ProviderNetwork = dynamic(() => import('components/Web3ProviderNetwork'), { ssr: false })
 
@@ -136,6 +138,8 @@ function MyApp({ Component, pageProps, fallback, err }) {
       {/*@ts-ignore TYPE NEEDS FIXING*/}
       <I18nProvider i18n={i18n} forceRenderOnLocaleChange={false}>
         <Web3ReactProvider getLibrary={getLibrary}>
+        <ApiDataProvider>
+          <FantomApiProvider>
           <Web3ProviderNetwork getLibrary={getLibrary}>
             <Web3ReactManager>
               <ReduxProvider store={store}>
@@ -168,6 +172,8 @@ function MyApp({ Component, pageProps, fallback, err }) {
               </ReduxProvider>
             </Web3ReactManager>
           </Web3ProviderNetwork>
+          </FantomApiProvider>
+          </ApiDataProvider>
         </Web3ReactProvider>
       </I18nProvider>
     </>

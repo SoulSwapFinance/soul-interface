@@ -13,9 +13,6 @@ msgstr ""
 "POT-Creation-Date: \n"
 "Plural-Forms: \n"
 
-msgid "% Share"
-msgstr ""
-
 msgid "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies."
 msgstr ""
 
@@ -360,7 +357,13 @@ msgstr ""
 msgid "Collateral"
 msgstr ""
 
+msgid "Collateral Distribution"
+msgstr ""
+
 msgid "Come on Over..."
+msgstr ""
+
+msgid "Community"
 msgstr ""
 
 msgid "Community Approval"
@@ -531,9 +534,6 @@ msgstr ""
 msgid "Disconnect"
 msgstr ""
 
-msgid "Discord"
-msgstr ""
-
 msgid "Do not show again"
 msgstr ""
 
@@ -568,6 +568,9 @@ msgid "Enter Recipient"
 msgstr ""
 
 msgid "Enter a valid slippage percentage"
+msgstr ""
+
+msgid "Epoch Remaining"
 msgstr ""
 
 msgid "Error"
@@ -983,9 +986,6 @@ msgstr ""
 msgid "Migration is done in one-click using your signature (permit)"
 msgstr ""
 
-msgid "Mines"
-msgstr ""
-
 msgid "Minimum Received"
 msgstr ""
 
@@ -1156,15 +1156,6 @@ msgstr ""
 msgid "Pool Tokens"
 msgstr ""
 
-msgid "Pooled Tokens"
-msgstr ""
-
-msgid "Pooled Value"
-msgstr ""
-
-msgid "Pooled {0}"
-msgstr ""
-
 msgid "Portfolio"
 msgstr ""
 
@@ -1251,6 +1242,9 @@ msgstr ""
 msgid "Redemption Fee"
 msgstr ""
 
+msgid "Remaining"
+msgstr ""
+
 msgid "Remove"
 msgstr ""
 
@@ -1324,10 +1318,19 @@ msgstr ""
 msgid "SOR"
 msgstr ""
 
+msgid "SOR STABLECOIN"
+msgstr ""
+
 msgid "SOUL"
 msgstr ""
 
 msgid "SOUL / $1K"
+msgstr ""
+
+msgid "SOUL ECONOMY"
+msgstr ""
+
+msgid "SOUL TREASURY"
 msgstr ""
 
 msgid "STAKE"
@@ -1388,6 +1391,9 @@ msgid "Slippage Tolerance"
 msgstr ""
 
 msgid "Slippage tolerance"
+msgstr ""
+
+msgid "Social"
 msgstr ""
 
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click 'Approve CoffinBox' again for approving using the fallback method"
@@ -1518,9 +1524,6 @@ msgstr ""
 msgid "Target Percentage"
 msgstr ""
 
-msgid "Telegram"
-msgstr ""
-
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""
 
@@ -1638,9 +1641,6 @@ msgid "Tutorial"
 msgstr ""
 
 msgid "Tutorials"
-msgstr ""
-
-msgid "Twitter"
 msgstr ""
 
 msgid "UNWRAP"
@@ -1767,6 +1767,9 @@ msgid "Wallet Balances"
 msgstr ""
 
 msgid "Wallet address or ENS name"
+msgstr ""
+
+msgid "Warmup"
 msgstr ""
 
 msgid "Warmup Balance"
@@ -1959,9 +1962,6 @@ msgid "{0} Strategy"
 msgstr ""
 
 msgid "{0} tokens"
-msgstr ""
-
-msgid "{0} {1} per {2}"
 msgstr ""
 
 msgid "{0}/{1} Burned"

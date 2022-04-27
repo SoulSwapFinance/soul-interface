@@ -201,6 +201,7 @@
     "react-blockies": "^1.4.1",
     "react-bootstrap": "^2.1.1",
     "react-countup": "^6.1.1",
+    "react-custom-scrollbars-2": "^4.4.0",
     "react-datetime": "^3.1.1",
     "react-google-recaptcha": "2.1.0",
     "react-google-recaptcha-v3": "^1.9.5",

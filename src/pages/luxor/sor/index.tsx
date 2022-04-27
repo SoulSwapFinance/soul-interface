@@ -14,7 +14,7 @@ import StableInputPanel from 'components/StableInputPanel'
 import { useSwapState } from 'state/swap/hooks'
 import { AutoColumn } from 'components/Column'
 import QuestionHelper from 'components/QuestionHelper'
-import Alert from 'components/Alert'
+// import Alert from 'components/Alert'
 import { ApprovalState, useApproveCallback, useSorMasterContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
 import {
@@ -28,7 +28,7 @@ import {
 } from 'constants/addresses'
 import { LuxorBanner } from 'components/Banner'
 
-import { tryParseAmount, formatCurrencyAmount, formatNumberScale, formatPercent, formatNumber } from 'functions'
+import { tryParseAmount, formatCurrencyAmount, formatNumber } from 'functions'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import { useTransactionAdder } from 'state/transactions/hooks'
 import Dots from 'components/Dots'
@@ -37,13 +37,13 @@ import { useStakeClaimAmount, useRedeemClaimAmount, useSorContract, useFee, useR
 import { useActiveWeb3React } from 'services/web3/hooks'
 // import { useSingleCallResult } from 'state/multicall/hooks'
 import NavLink from 'components/NavLink'
-import { useLuxorPrice } from 'hooks/getPrices'
+import { useLuxorPrice, useTokenPrice } from 'hooks/getPrices'
+import { usePriceUSD } from 'hooks/useAPI'
 // import useStablecoin from 'hooks/useStablecoin'
 
 export default function Stablecoin() {
   const addTransaction = useTransactionAdder()
   const { i18n } = useLingui()
-  const { independentField } = useSwapState()
   const [stakeValue, setStakeValue] = useState('')
   const [redeemValue, setRedeemValue] = useState('')
 
@@ -53,14 +53,15 @@ export default function Stablecoin() {
 
   const daiToken = new Token(250, getAddress(DAI_ADDRESS[250]), 18, 'DAI')
   const sorToken = new Token(250, getAddress(SOR_ADDRESS[250]), 18, 'SOR')
-  const sorMasterContract = useSorMasterContract()
+  // const sorMasterContract = useSorMasterContract()
   const stakeClaimAmount = useStakeClaimAmount(sorToken)
   const redeemClaimAmount = useRedeemClaimAmount(sorToken)
 
   // previously data imports //
   const mintPermille = useFee()
   const redeemPermille = useRedeemFee()
-  const pegPrice = 0.985
+  const pegPrice = Number(usePriceUSD(SOR_ADDRESS[250]).price) / 1e18
+  // console.log('pegPrice:%s', pegPrice)
   const maxStakeAmount = CurrencyAmount.fromRawAmount(daiToken, 8000000000000000000000)
   const maxRedeemAmount = CurrencyAmount.fromRawAmount(daiToken, 20000000000000000000000)
 
@@ -70,7 +71,6 @@ export default function Stablecoin() {
   const parsedStakeValue = tryParseAmount(stakeValue, daiToken)
   const parsedRedeemValue = tryParseAmount(redeemValue, sorToken)
 
-  
   const [stakeApprovalState, stakeApprove] = useApproveCallback(
     parsedStakeValue,
     SOR_MASTER_ADDRESS[250]
@@ -99,10 +99,6 @@ export default function Stablecoin() {
         : undefined
   const isRedeemValid = !redeemError
 
-  // const stakeError = false
-  // const isStakeValid = !stakeError
-  // const redeemError = false
-  // const isRedeemValid = !redeemError
   const luxorPrice = useLuxorPrice()
   
   return (
