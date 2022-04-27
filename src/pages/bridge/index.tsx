@@ -37,6 +37,7 @@ import { ContentBox, OverlayButton, Typo1, Typo2, Typo3 } from "./components/com
 import InputError from "components/Input/Error";
 import { useActiveWeb3React } from "services/web3";
 import { ArrowDownIcon } from "@heroicons/react/solid";
+import Image from 'next/image'
 
 const ChainSelect: React.FC<any> = ({ selectChain, chains }) => {
   const { color } = useContext(ThemeContext);
@@ -59,9 +60,11 @@ const ChainSelect: React.FC<any> = ({ selectChain, chains }) => {
                 selectChain(chainId);
               }}
             >
-              <Row style={{ gap: "1rem", alignItems: "center" }}>
-                <img
-                  style={{ height: "30px", width: "30px" }}
+              <Row style={{ gap: "1rem", alignItems: "center"                 
+                <Image
+                  alt="chain logo"
+                  height="30px"
+                  width="30px"
                   src={chainToNetworkInfoMap[chainId].image}
                 />
                 <Typo2 style={{ fontWeight: "bold" }}>
@@ -102,8 +105,10 @@ const ChainSelector: React.FC<any> = ({
           }}
         >
           <Row style={{ gap: "1rem", alignItems: "center" }}>
-            <img
-              style={{ height: "30px", width: "30px" }}
+            <Image
+              alt="chain logo"
+              height="30px"
+              width="30px"
               src={chainToNetworkInfoMap[selected].image}
             />
             <Typo2 style={{ fontWeight: "bold" }}>
@@ -353,8 +358,10 @@ const TokenSelector: React.FC<any> = ({ tokens, selected, selectToken }) => {
           <Row style={{ gap: "1rem", alignItems: "center" }}>
             {selected ? (
               <>
-                <img
-                  style={{ height: "30px", width: "30px" }}
+                <Image
+                  alt="token logo"
+                  height="30px"
+                  width="30px"
                   src={selected.logoUrl}
                 />
                 <Typo2 style={{ fontWeight: "bold" }}>{selected.symbol}</Typo2>
@@ -432,8 +439,10 @@ const BridgeTokenSelectModal: React.FC<any> = ({
                         }}
                       >
                         <Row style={{ gap: "1rem", alignItems: "center" }}>
-                          <img
-                            style={{ height: "30px", width: "30px" }}
+                         <Image
+                            alt="token logo"
+                            height="30px"
+                            width="30px"
                             src={token.logoUrl}
                           />
                           <Typo2 style={{ fontWeight: "bold" }}>
