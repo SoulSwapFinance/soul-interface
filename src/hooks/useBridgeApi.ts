@@ -51,7 +51,7 @@ export const FTM_BSC_STABLE = [
   "anyAVAX",
 ];
 
-export const MULTICHAIN_URL = "https://bridgeapi.anyswap.exchange/v2/serverInfo";
+export const MULTICHAIN_URL = "https://bridgeapi.anyswap.exchange";
 export enum MULTICHAIN_METHODS {
   GET_CHAIN_TOKENS = "/v2/serverInfo",
   GET_STABLE_TOKENS = "/v3/serverinfoV3",

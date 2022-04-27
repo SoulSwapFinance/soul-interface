@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Header = styled.div`
   font-family: "proxima-nova", sans-serif;
-  background-color: ${(props) => props.theme.color.primary.black()};
+  background-color: ${ "black" };
   height: ${(props) => props.theme.topBarSize}px;
   padding: 0 4rem 0 2rem;
   display: flex;
@@ -14,7 +14,7 @@ export const Header = styled.div`
 
 export const Body = styled.div`
   font-family: "proxima-nova", sans-serif;
-  background-color: ${(props) => props.theme.color.primary.black()};
+  background-color: ${ "black" };
   color: white;
   display: flex;
   font-size: calc(10px + 2vmin);
@@ -47,10 +47,10 @@ export const LinkExt = styled.a.attrs({
   target: "_blank",
   rel: "noopener noreferrer",
 })`
-  color: ${(props) => props.theme.color.primary.semiWhite()};
+  color: ${ "white" };
 
   :visited {
-    color: ${(props) => props.theme.color.greys.darkGrey()};
+    color: ${ "white"};
   }
 `;
 
@@ -105,14 +105,15 @@ export const Button = styled.button<{
 }>`
   background-color: ${(props) =>
     props.variant === "primary"
-      ? props.theme.color.primary.fantomBlue(props.disabled ? 0.6 : 1)
+      ? "blue"
       : props.variant === "secondary"
       ? "transparent"
-      : props.theme.color.secondary.navy(props.disabled ? 0.6 : 1)};
+      : "white"
+  };
   border: ${(props) =>
     props.variant === "primary" || props.variant === "tertiary"
       ? "none"
-      : `1px solid ${props.theme.color.greys.mediumGray()}`};
+      : `1px solid ${"white"}`};
   border-radius: 8px;
   color: ${(props) => (!props.disabled ? props.color || "white" : "#6c726c")};
   cursor: ${(props) => (!props.disabled ? "pointer" : "cursor")};
@@ -135,14 +136,14 @@ export const Button = styled.button<{
 `;
 
 export const Container = styled.div<{ padding?: string }>`
-  border: ${(props) => `1px solid ${props.theme.color.greys.mediumGray()}`};
+  border: ${(props) => `1px solid ${ "white" }`};
   padding: ${(props) => (props.padding ? props.padding : "2rem")};
-  background-color: ${(props) => props.theme.color.primary.black()};
+  background-color: ${ "black" };
   border-radius: 8px;
 `;
 
 export const ContentBox = styled.div<{ padding?: string }>`
-  background-color: ${(props) => props.theme.color.secondary.navy()};
+  background-color: ${ "blue" };
   display: inline-flex;
   padding: ${(props) => (props.padding ? props.padding : "2rem")};
   border-radius: 8px;

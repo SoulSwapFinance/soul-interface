@@ -1,10 +1,11 @@
 import { useState } from "react";
-import useTransaction from "./useTransaction";
+import { useTransactionAdder } from "state/transactions/hooks";
+// import useTransaction from "./useTransaction";
 
 const useSendTransaction = (callback: () => any) => {
   const [txHash, setTxHash] = useState(null);
-  const { transaction } = useTransaction();
-  const tx = transaction[txHash];
+  const addTransaction = useTransactionAdder()
+  const tx = addTransaction[txHash];
   const isPending = tx && tx.status === "pending";
   const isCompleted = tx && tx.status === "completed";
   const isFailed = tx && tx.status === "failed";
