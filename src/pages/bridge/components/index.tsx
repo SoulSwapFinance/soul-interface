@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default const Header = styled.div`
+export const Header = styled.div`
   font-family: "proxima-nova", sans-serif;
   background-color: ${ "black" };
   height: ${(props) => props.theme.topBarSize}px;
