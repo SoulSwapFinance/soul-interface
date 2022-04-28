@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Row from "../../components/Row";
 import {
   Button
-} from "./components/components";
+} from "components/index";
 import Column, { AutoColumn } from "../../components/Column";
 import styled, { ThemeContext } from "styled-components";
 // import Spacer from "../../components/Spacer";
@@ -33,7 +33,7 @@ import useFantomERC20 from "../../hooks/useFantomERC20";
 import { BigNumber } from "@ethersproject/bignumber";
 import Loader from "../../components/Loader";
 import FadeInOut from "../../components/AnimationFade";
-import { ContentBox, OverlayButton, Typo1, Typo2, Typo3 } from "./components/components";
+import { ContentBox, OverlayButton, Typo1, Typo2, Typo3 } from "components/index";
 import InputError from "components/Input/Error";
 import { useActiveWeb3React } from "services/web3";
 import { ArrowDownIcon } from "@heroicons/react/solid";

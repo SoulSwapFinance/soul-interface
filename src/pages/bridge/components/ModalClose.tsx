@@ -1,5 +1,5 @@
 import React from "react";
-import { OverlayButton } from "./components";
+import { OverlayButton } from "components/index";
 // import CrossSymbol from "../../assets/image/symbols/Cross.svg";
 import Image from 'next/image'
 

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 // import { ThemeContext } from "styled-components";
 import InputCurrency from "./InputCurrency";
-import { Button } from "./components";
+import { Button } from "components/index";
 // import Spacer from "components/Spacer";
 import Row from "components/Row";
 
