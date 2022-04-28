@@ -198,3 +198,5 @@ export const TextArea = styled.textarea`
     outline: none;
   }
 `;
+
+export default Components;
