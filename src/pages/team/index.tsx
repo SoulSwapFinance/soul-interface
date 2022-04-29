@@ -95,7 +95,7 @@ export default function Team() {
               {/* <div style={{ display: 'flex', alignItems: 'baseline' }}> */}
               <div className="flex text-center justify-center items-baseline">
                 <div className="flext font-bold text-white text-center justify-center text-[24px]">
-                  { unclaimedBalance.toFixed(2) }
+                  { formatNumber(unclaimedBalance.toFixed(2), false, true) }
                 </div>
                 {/* {account ? (
                   <div className="text-sm text-secondary">
