@@ -87,6 +87,10 @@ export const tokens = {
       4002: "",
       250: "0x0a77866C01429941BFC7854c0c0675dB1015218b",
     },
+    AVAX: {
+      4002: "",
+      250: "0x511D35c52a3C244E7b8bd92c0C297755FbD89212",
+    },
     REAPER: {
       4002: "",
       250: "0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb",

@@ -5,10 +5,10 @@ import { useMemo } from 'react'
 import { useV2TradeExactOut } from './useV2Trades'
 
 import { tryParseAmount } from 'functions'
-import { ANY, BNB, CRV, LUXOR, MIM, SEANCE, SOUL, FUSD, USDT, UNIDX, WBTC, WETH, WFTM, WLUM, REAPER, GRIM, GRIMEVO, DAI, SOR } from 'constants/tokens'
+import { ANY, BNB, CRV, LUXOR, MIM, AVAX, SEANCE, SOUL, FUSD, USDT, UNIDX, WBTC, WETH, WFTM, WLUM, REAPER, GRIM, GRIMEVO, DAI, SOR } from 'constants/tokens'
 import { ANY_ADDRESS, BNB_ADDRESS, CRV_ADDRESS, FUSD_ADDRESS, GRIM_ADDRESS, 
   GRIMEVO_ADDRESS, LUX_ADDRESS, REAPER_ADDRESS, SEANCE_ADDRESS, 
-  WFTM_ADDRESS, SOR_ADDRESS, SOUL_ADDRESS, UNIDX_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS } 
+  WFTM_ADDRESS, SOR_ADDRESS, SOUL_ADDRESS, UNIDX_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS, AVAX_ADDRESS } 
   from 'constants/addresses'
 import { usePrice } from 'hooks/usePrice'
 // import { SupportedChainId } from '../constants/chains'
@@ -104,6 +104,10 @@ const GRIMEVO_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(GRIMEVO[ChainId.FANTOM], 100_000e6)
 }
 
+const AVAX_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(AVAX[ChainId.FANTOM], 100_000e6)
+}
+
 /**
  * Returns the price in USDC of the input currency
  * @param currency currency to compute the USDC price of
@@ -128,6 +132,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   const reaperPrice = usePrice(REAPER_ADDRESS[chainId | 250])
   const grimPrice = usePrice(GRIM_ADDRESS[chainId | 250])
   const grimEvoPrice = usePrice(GRIMEVO_ADDRESS[chainId | 250])
+  const avaxPrice = usePrice(AVAX_ADDRESS[chainId | 250])
   
   const amountOut = chainId ? STABLECOIN_AMOUNT_OUT[chainId | 250] : undefined
   const usdtAmountOut = chainId ? USDT_AMOUNT_OUT[chainId | 250] : undefined
@@ -152,6 +157,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   const grimAmountOut = chainId ? GRIM_AMOUNT_OUT[chainId | 250] : undefined
   const grimEVOAmountOut = chainId ? GRIMEVO_AMOUNT_OUT[chainId | 250] : undefined
   const reaperAmountOut = chainId ? REAPER_AMOUNT_OUT[chainId | 250] : undefined
+  const avaxAmountOut = chainId ? AVAX_AMOUNT_OUT[chainId | 250] : undefined
 
   // TOKENS
   const stablecoin = amountOut?.currency
@@ -174,6 +180,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   const grim = grimAmountOut?.currency
   const grimEVO = grimEVOAmountOut?.currency
   const reaper = reaperAmountOut?.currency
+  const avax = avaxAmountOut?.currency
 
   // TODO(#2808): remove dependency on useBestV2Trade
   /* const v2USDCTrade = useBestV2Trade(TradeType.EXACT_OUTPUT, amountOut, currency, {
@@ -282,6 +289,11 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
     // handle grimEVO
     if (currency?.wrapped.equals(grimEVO)) {
       return new Price(grimEVO, grimEVO, '10', Number(grimEvoPrice * 10).toFixed())
+    }
+    
+    // handle AVAX
+    if (currency?.wrapped.equals(avax)) {
+      return new Price(avax, avax, '10', Number(avaxPrice * 10).toFixed())
     }
 
     // handle reaper

@@ -213,6 +213,14 @@
         "decimals": 18,
         "chainId": 250,
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x0a77866C01429941BFC7854c0c0675dB1015218b/logo.png"
+      },
+      {
+        "name": "Avalanche",
+        "address": "0x511D35c52a3C244E7b8bd92c0C297755FbD89212",
+        "symbol": "AVAX",
+        "decimals": 18,
+        "chainId": 250,
+        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/avalanche/Avalanche.svg"
       }
    ]
 }
