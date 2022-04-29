@@ -221,14 +221,17 @@ const ChainSelection: React.FC<any> = ({
     setFromChain(chainId);
   };
 
+/* // TODO: RE-ENABLE // */
   const handleSetToChain = (chainId: number) => {
-    if (chainId !== 250) {
+    // if (chainId !== 250) {
       setFromChain(250);
-    }
-    if (chainId === fromChain) {
-      setFromChain(chainId === 250 ? 1 : 250);
-    }
-    setToChain(chainId);
+    // }
+    // if (chainId === fromChain) {
+      // setFromChain(chainId === 250 ? 1 : 250);
+    // }
+    // setToChain(chainId);
+    // TODO: DELETE BELOW //
+    setToChain(chainId == 250 ? 1 : chainId);
   };
 
   const handleSwap = () => {
@@ -240,7 +243,8 @@ const ChainSelection: React.FC<any> = ({
   };
   return (
     <Column>
-      <div className="flex">
+  {/* // TODO: RE-ENABLE // */}
+      {/* <div className="flex">
         <ChainSelector
           selected={fromChain}
           selectChain={handleSetFromChain}
@@ -264,9 +268,9 @@ const ChainSelection: React.FC<any> = ({
             </ButtonComponent>
           </>
         )}
-      </div>
+      </div> */}
       <div />
-      <Row style={{ justifyContent: "center", alignItems: "center" }}>
+      {/* <Row style={{ justifyContent: "center", alignItems: "center" }}>
         <div style={{ height: "1px", width: "100%" }} />
           <OverlayButton style={{ padding: 0 }} onClick={handleSwap}>
               <AutoColumn justify="space-between" className="py-2 -my-4 py-4">
@@ -281,7 +285,7 @@ const ChainSelection: React.FC<any> = ({
                 </AutoColumn>
           </OverlayButton>
         <div style={{ height: "1px", width: "100%" }} />
-      </Row>
+      </Row> */}
       <div className="flex">
       <ChainSelector
         selected={toChain}
