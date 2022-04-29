@@ -6,7 +6,8 @@ export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '0x81582F803A17a4a454A80600e9185B42E32e0fcF',
   [ChainId.BSC]: '0xa9EC396a1b709689e98DaB9eAf4f18A913775d39',
   [ChainId.FANTOM]: '0x1120e150dA9def6Fe930f4fEDeD18ef57c0CA7eF',
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
 }
 
 export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
@@ -14,7 +15,8 @@ export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '0xf9D9b96F213aCC6434f16fff5D932FA85cD179f3',
   [ChainId.BSC]: '0x1b4df4D7E63B125f3a01fd5598E8E8458e519255',
   [ChainId.FANTOM]: '0x6b3d631B87FE27aF29efeC61d2ab8CE4d621cCBF',
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
 }
 
 export const BORING_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
@@ -22,7 +24,9 @@ export const BORING_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x26bbB91Ade07f995E1c5D1F4A050639763F4C44b',
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const LIMIT_ORDER_HELPER_ADDRESS: AddressMap = {
@@ -46,7 +50,9 @@ export const SOUL_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '0xef9777827a3581b64f5c7CB8954ccaE3cc2c46C0',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07',
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const SOR_ADDRESS: { [chainId in ChainId]: string } = {
@@ -54,7 +60,9 @@ export const SOR_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A',
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const SEANCE_ADDRESS: { [chainId in ChainId]: string } = {
@@ -62,7 +70,9 @@ export const SEANCE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', // SEANCE
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const MASTERCHEF_ADDRESS: { [chainId in ChainId]: string } = {
@@ -70,7 +80,9 @@ export const MASTERCHEF_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B', // Summoner
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const UNDERWORLD_ADDRESS: { [chainId in ChainId]: string } = {
@@ -78,7 +90,9 @@ export const UNDERWORLD_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x94f2ae18250507506C77cefc14EE7B4b95d323B1', // Updated
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const SUMMONER_ADDRESS: { [chainId in ChainId]: string } = {
@@ -86,7 +100,9 @@ export const SUMMONER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B', // Summoner
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const SOUL_SUMMONER_ADDRESS: { [chainId in ChainId]: string } = {
@@ -94,7 +110,9 @@ export const SOUL_SUMMONER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B', // Summoner
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const SOUL_CIRCLE_ADDRESS: { [chainId in ChainId]: string } = {
@@ -102,7 +120,9 @@ export const SOUL_CIRCLE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x5063Fc9D759B5b03DD5fBC0B882b5F68CF881C32', // Summoner
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const AUTO_STAKE_ADDRESS: { [chainId in ChainId]: string } = {
@@ -110,7 +130,9 @@ export const AUTO_STAKE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x083423C61B9373050e62E2A6Ec170e663F9c7BFa',
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const LUX_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
@@ -118,7 +140,9 @@ export const LUX_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xdC7Bd8bA29ba99A250da6F0820ad9A1a285fE82a',
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const LUXOR_STAKING_ADDRESS: { [chainId in ChainId]: string } = {
@@ -126,7 +150,9 @@ export const LUXOR_STAKING_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xf3F0BCFd430085e198466cdCA4Db8C2Af47f0802',
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const LUXOR_STAKING_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
@@ -134,7 +160,9 @@ export const LUXOR_STAKING_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x2Dd0D30f525e65641962904470660507e80940e4',
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const CHANT_ADDRESS: { [chainId in ChainId]: string } = {
@@ -142,7 +170,9 @@ export const CHANT_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x083423C61B9373050e62E2A6Ec170e663F9c7BFa',
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const SOUL_VAULT_ADDRESS: { [chainId in ChainId]: string } = {
@@ -150,7 +180,9 @@ export const SOUL_VAULT_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B', // Summoner
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const COFFIN_BOX_ADDRESS: { [chainId in ChainId]: string } = {
@@ -158,7 +190,9 @@ export const COFFIN_BOX_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xF539C37275e947F24480fAb9f7e302aE827570b2',
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const CHAINLINK_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
@@ -166,7 +200,9 @@ export const CHAINLINK_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xCDd5Df7146B278c90c572b6c6F933C6b7ce2b41e', // FEB22
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const ENCHANT_ADDRESS: { [chainId in ChainId]: string } = {
@@ -174,7 +210,9 @@ export const ENCHANT_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a',
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const ENCHANT_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
@@ -182,7 +220,9 @@ export const ENCHANT_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x62acBC5E5501374D6e462a095B48003Eaac3593C',
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const AURA_ADDRESS: { [chainId in ChainId]: string } = {
@@ -190,7 +230,9 @@ export const AURA_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x5d8935D0e7b3948dFb7088C127a1CC861445C003',
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const REAPER_ADDRESS: { [chainId in ChainId]: string } = {
@@ -198,7 +240,9 @@ export const REAPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '',
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const TIMELOCK_ADDRESS: { [chainId in ChainId]: string } = {
@@ -206,7 +250,9 @@ export const TIMELOCK_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '',
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const SUMMONER_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
@@ -214,7 +260,9 @@ export const SUMMONER_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xa224a5D96E58E3dae89D0e4775444A329E67774c',
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const SOUL_GUIDE_ADDRESS: { [chainId in ChainId]: string } = {
@@ -222,7 +270,9 @@ export const SOUL_GUIDE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x5A6B3Ce2736E9B731Fba73262884016b50c39184', // JUL 27TH
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
   
 export const DEFAULT_RECEIVER_ADDRESS: AddressMap = {
@@ -265,7 +315,9 @@ export const PRICE_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x51445B73852952128bFCAE65fdd889881D8d87Bd',
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const HARVEST_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
@@ -273,7 +325,9 @@ export const HARVEST_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xb9e5f6152b797280c8C3427947780ce5c4a55b08',
-  [ChainId.FANTOM_TESTNET]: ''
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+
 }
 
 export const USDC_ADDRESS: AddressMap = {
@@ -281,6 +335,7 @@ export const USDC_ADDRESS: AddressMap = {
   [ChainId.TELOS]: '0x818ec0A7Fe18Ff94269904fCED6AE3DaE6d6dC0b',
   [ChainId.FANTOM]: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75',
   [ChainId.BSC]: '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d',
+  [ChainId.AVALANCHE]: '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
 }
 
 export const DAI_ADDRESS: AddressMap = {
@@ -300,6 +355,7 @@ export const USD_ADDRESS: AddressMap = {
   [ChainId.TELOS]: USDC_ADDRESS[ChainId.TELOS],
   [ChainId.FANTOM]: USDC_ADDRESS[ChainId.FANTOM],
   [ChainId.BSC]: USDC_ADDRESS[ChainId.BSC],
+  [ChainId.AVALANCHE]: USDC_ADDRESS[ChainId.AVALANCHE],
 }
 
 export const WETH9_ADDRESS: AddressMap = {
@@ -307,6 +363,7 @@ export const WETH9_ADDRESS: AddressMap = {
   [ChainId.TELOS]: '0xfA9343C3897324496A05fC75abeD6bAC29f8A40f',
   [ChainId.BSC]: '0x2170Ed0880ac9A755fd29B2688956BD959F933F8',
   [ChainId.FANTOM]: '0x74b23882a30290451A17c44f4F05243b6b58C76d',
+  [ChainId.AVALANCHE]: '0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB',
 }
 
 export const WNATIVE_ADDRESS: AddressMap = {
@@ -315,6 +372,7 @@ export const WNATIVE_ADDRESS: AddressMap = {
   [ChainId.BSC]: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
   [ChainId.FANTOM]: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
   [ChainId.FANTOM_TESTNET]: '0xf1277d1Ed8AD466beddF92ef448A132661956621',
+  [ChainId.AVALANCHE]: '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
 }
 
 export const ZAPPER_ADDRESS: AddressMap = {

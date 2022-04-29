@@ -4,10 +4,10 @@ import Loader from '../../components/Loader'
 import Option from './Option'
 import React from 'react'
 import { SUPPORTED_WALLETS } from '../../constants'
-import { darken } from 'polished'
+// import { darken } from 'polished'
 import { injected } from '../../connectors'
 import styled from 'styled-components'
-import { useWeb3React } from '@web3-react/core'
+// import { useWeb3React } from '@web3-react/core'
 
 const PendingSection = styled.div`
   align-items: center;

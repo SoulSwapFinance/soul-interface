@@ -8,9 +8,9 @@ export type Chain = {
 }
 
 export const DEFAULT_CHAIN_FROM: Chain = {
-  id: ChainId.TELOS,
-  icon: NETWORK_ICON[ChainId.TELOS],
-  name: NETWORK_LABEL[ChainId.TELOS],
+  id: ChainId.ETHEREUM,
+  icon: NETWORK_ICON[ChainId.ETHEREUM],
+  name: NETWORK_LABEL[ChainId.ETHEREUM],
 }
 
 export const DEFAULT_CHAIN_TO: Chain = {

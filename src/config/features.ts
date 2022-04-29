@@ -29,6 +29,11 @@ const features: FeatureMap = {
     // Feature.UNDERWORLD
   ],
 
+  [ChainId.AVALANCHE]: [
+    Feature.AMM, 
+    Feature.ANALYTICS,
+  ],
+
   [ChainId.FANTOM]: [
     Feature.AMM,
     Feature.STAKING,

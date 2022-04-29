@@ -10,6 +10,7 @@ import {
   SOUL,
   Trade as V2Trade,
   TradeType,
+  USDC,
   WNATIVE_ADDRESS,
 } from 'sdk'
 import { tryParseAmount } from 'functions/parse'
@@ -252,7 +253,10 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId 
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
   const eth = 'FTM'
   //chainId === ChainId.CELO ? WNATIVE_ADDRESS[chainId] : 
-  const soul = SOUL[chainId].address
+  const soul 
+    = chainId == ChainId.AVALANCHE 
+      ? USDC[chainId].address
+      : SOUL[chainId | 250].address
   if (inputCurrency === '' && outputCurrency === '') {
     inputCurrency = eth
     outputCurrency = soul

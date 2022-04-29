@@ -5,6 +5,7 @@ import * as BSC from './tokens/bsc'
 import * as ETHEREUM from './tokens/ethereum'
 import * as TELOS from './tokens/telos'
 import * as FANTOM from './tokens/fantom'
+import * as AVALANCHE from './tokens/avalanche'
 
 type ChainTokenList = {
   readonly [chainId in ChainId]: Token[]
@@ -37,6 +38,7 @@ const WRAPPED_NATIVE_ONLY: ChainTokenList = {
   [ChainId.FANTOM]: [WNATIVE[ChainId.FANTOM]],
   [ChainId.FANTOM_TESTNET]: [WNATIVE[ChainId.FANTOM_TESTNET]],
   [ChainId.BSC]: [WNATIVE[ChainId.BSC]],
+  [ChainId.AVALANCHE]: [WNATIVE[ChainId.AVALANCHE]],
 }
 
 // used to construct intermediary pairs for trading
@@ -181,6 +183,9 @@ export const COMMON_BASES: ChainTokenList = {
   [ChainId.TELOS]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.TELOS]
   ],
+  [ChainId.AVALANCHE]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.AVALANCHE]
+  ],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
@@ -217,13 +222,17 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
     BSC.USDT,
     BSC.BTCB,
     BSC.WETH,
-    // BSC.MIM,
   ],
   [ChainId.TELOS]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.TELOS],
     TELOS.USDC,
     TELOS.SOUL,
     TELOS.WETH,
+  ],
+  [ChainId.AVALANCHE]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.AVALANCHE],
+    AVALANCHE.USDC,
+    AVALANCHE.WETH,
   ],
 }
 

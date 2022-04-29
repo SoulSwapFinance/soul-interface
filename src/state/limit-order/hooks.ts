@@ -126,7 +126,7 @@ export function queryParametersToSwapState(chainId: ChainId, parsedQs: ParsedQs)
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
   const eth = 'FTM'
   // chainId === ChainId.CELO ? WNATIVE_ADDRESS[chainId] : 'FTM'
-  const soul = SOUL[chainId].address
+  const soul = SOUL[chainId | 250].address
   if (inputCurrency === '' && outputCurrency === '') {
     inputCurrency = eth
     outputCurrency = soul

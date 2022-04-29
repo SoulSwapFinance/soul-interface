@@ -15,6 +15,7 @@ enum ChainId {
   TELOS = 40,
   BSC = 56,
   FANTOM = 250,
+  AVALANCHE = 43114,
 }
 
 export const RPC = {
@@ -36,7 +37,7 @@ export const RPC = {
   // [ChainId.XDAI]: 'https://rpc.xdaichain.com',
   // [ChainId.BSC_TESTNET]: 'https://data-seed-prebsc-2-s3.binance.org:8545',
   // [ChainId.MOONBEAM_TESTNET]: 'https://rpc.testnet.moonbeam.network',
-  // [ChainId.AVALANCHE]: 'https://api.avax.network/ext/bc/C/rpc',
+  [ChainId.AVALANCHE]: 'https://api.avax.network/ext/bc/C/rpc',
   // [ChainId.AVALANCHE_TESTNET]: 'https://api.avax-test.network/ext/bc/C/rpc',
   // [ChainId.HECO]: 'https://http-mainnet.hecochain.com',
   // [ChainId.HECO_TESTNET]: 'https://http-testnet.hecochain.com',
@@ -68,7 +69,7 @@ export function getNetworkLibrary(): Web3Provider {
 
 const supportedChainIds = [
   1, // mainnet
-  // 56, // binance smart chain
+  56, // binance smart chain
   250, // fantom
   // 4002, // fantom testnet
   // 3, // ropsten
@@ -80,7 +81,7 @@ const supportedChainIds = [
   // 100, // xdai
   // 97, // binance smart chain testnet
   // 1287, // moonbase
-  // 43114, // avalanche
+  43114, // avalanche
   // 43113, // fuji
   // 128, // heco
   // 256, // heco testnet

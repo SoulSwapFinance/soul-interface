@@ -36,7 +36,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
     }).format(c);
   }
 
-  const { chainId, library } = useActiveWeb3React()
+  const { library } = useActiveWeb3React()
   const luxorStatsModalOpen = useModalOpen(ApplicationModal.LUXOR_STATS)
   const toggleLuxorStatsModal = useToggleLuxorStatsModal()
   // let tokenInfo = useTokenInfo(useLuxorContract())
@@ -98,7 +98,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
       </div>
     )
   }
-  if (!chainId) return null
+  // if (!chainId) return null
 
   return (
     <HeadlessUiModal.Controlled isOpen={luxorStatsModalOpen} onDismiss={toggleLuxorStatsModal}
@@ -115,7 +115,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
                 const params: any = {
                   type: 'ERC20',
                   options: {
-                    address: LUX_ADDRESS[chainId],
+                    address: LUX_ADDRESS[250],
                     symbol: 'LUX',
                     decimals: 9,
                     image: 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b/logo.png',
@@ -153,7 +153,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
                 const params: any = {
                   type: 'ERC20',
                   options: {
-                    address: WLUM_ADDRESS[chainId],
+                    address: WLUM_ADDRESS[250],
                     symbol: 'WLUM',
                     decimals: 9,
                     image: 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208/logo.png',

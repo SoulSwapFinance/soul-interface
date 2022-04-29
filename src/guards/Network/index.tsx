@@ -68,6 +68,8 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
                     library?.send('wallet_switchEthereumChain', [{ chainId: '0xFA' }, account])
                   } else if (key === ChainId.TELOS.toString()) {
                     library?.send('wallet_switchEthereumChain', [{ chainId: '0x28' }, account])
+                  } else if (key === ChainId.AVALANCHE.toString()) {
+                    library?.send('wallet_switchEthereumChain', [{ chainId: '0x1' }, account])
                   } else if (key === ChainId.ETHEREUM.toString()) {
                     library?.send('wallet_switchEthereumChain', [{ chainId: '0x1' }, account])
                   } else {

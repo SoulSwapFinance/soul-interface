@@ -1,6 +1,7 @@
 import {
   BSC,
   FANTOM,
+  AVALANCHE,
   TELOS,
   FANTOM_TESTNET,
   MIR,
@@ -47,7 +48,8 @@ const WRAPPED_NATIVE_ONLY: ChainTokenList = {
    [ChainId.TELOS]: [WNATIVE[ChainId.TELOS]],
    [ChainId.BSC]: [WNATIVE[ChainId.BSC]],
   [ChainId.FANTOM]: [WNATIVE[ChainId.FANTOM]],
-  [ChainId.FANTOM_TESTNET]: [WNATIVE[ChainId.FANTOM_TESTNET]]
+  [ChainId.FANTOM_TESTNET]: [WNATIVE[ChainId.FANTOM_TESTNET]],
+  [ChainId.AVALANCHE]: [WNATIVE[ChainId.AVALANCHE]]
 }
 
 // used to construct intermediary pairs for trading
@@ -66,6 +68,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     FANTOM.WETH
   ], // 27 AUG
   [ChainId.BSC]: [...WRAPPED_NATIVE_ONLY[ChainId.BSC], BSC.DAI, BSC.USD, BSC.USDC, BSC.USDT, BSC.BTCB, BSC.WETH],
+  [ChainId.AVALANCHE]: [...WRAPPED_NATIVE_ONLY[ChainId.AVALANCHE], AVALANCHE.USDC, AVALANCHE.WETH],
 
 }
 
@@ -161,6 +164,7 @@ export const COMMON_BASES: ChainTokenList = {
     FANTOM_TESTNET.FETH,
   ],
   [ChainId.BSC]: [...WRAPPED_NATIVE_ONLY[ChainId.BSC], BSC.DAI, BSC.USD, BSC.USDC, BSC.USDT, BSC.BTCB, BSC.WETH],
+  [ChainId.AVALANCHE]: [...WRAPPED_NATIVE_ONLY[ChainId.AVALANCHE], AVALANCHE.USDC, AVALANCHE.WETH],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
@@ -169,7 +173,7 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   // [ChainId.ETHEREUM]: [...WRAPPED_NATIVE_ONLY[ChainId.ETHEREUM], DAI, USDC, USDT, WBTC],
   [ChainId.FANTOM]: [...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], FANTOM.SOUL, FANTOM.DAI, FANTOM.USDC, FANTOM.FUSDT, FANTOM.WBTC, FANTOM.WETH],
   [ChainId.BSC]: [...WRAPPED_NATIVE_ONLY[ChainId.BSC], BSC.DAI, BSC.USD, BSC.USDC, BSC.USDT, BSC.BTCB, BSC.WETH],
-
+  [ChainId.AVALANCHE]: [...WRAPPED_NATIVE_ONLY[ChainId.AVALANCHE], AVALANCHE.USDC, AVALANCHE.WETH],
 }
 
 // export const PINNED_PAIRS: {

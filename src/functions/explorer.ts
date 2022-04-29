@@ -110,15 +110,15 @@ const builders = {
   //   }
   // },
 
-  // avalanche: (chainName: string, data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
-  //   const prefix = `https://cchain.explorer.avax${chainName ? `-${chainName}` : ''}.network`
-  //   switch (type) {
-  //     case 'transaction':
-  //       return `${prefix}/tx/${data}`
-  //     default:
-  //       return `${prefix}/${type}/${data}`
-  //   }
-  // },
+  avalanche: (data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
+    const prefix = `https://cchain.explorer.avax`
+    switch (type) {
+      case 'transaction':
+        return `${prefix}/tx/${data}`
+      default:
+        return `${prefix}/${type}/${data}`
+    }
+  },
 
   // heco: (chainName = '', data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
   //   const prefix = `https://${chainName ? `${chainName}.` : ''}hecoinfo.com`
@@ -256,10 +256,10 @@ const chains: ChainObject = {
   //   chainName: '',
   //   builder: builders.moonbase,
   // },
-  // [ChainId.AVALANCHE]: {
-  //   chainName: '',
-  //   builder: builders.avalanche,
-  // },
+  [ChainId.AVALANCHE]: {
+    // chainName: '',
+    builder: builders.avalanche,
+  },
   // [ChainId.AVALANCHE_TESTNET]: {
   //   chainName: 'test',
   //   builder: builders.avalanche,

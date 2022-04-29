@@ -16,11 +16,27 @@
   [
       {
         "name": "USD Coin",
+        "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
+        "symbol": "USDC",
+        "decimals": 6,
+        "chainId": 43114,
+        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x04068DA6C83AFCFA0e13ba15A6696662335D5B75/logo.png"
+      },
+      {
+        "name": "Wrapped Ether",
+        "address": "0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB",
+        "symbol": "WETH",
+        "decimals": 18,
+        "chainId": 43114,
+        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x74b23882a30290451A17c44f4F05243b6b58C76d/logo.png"
+      },
+      {
+        "name": "USD Coin",
         "address": "0x818ec0A7Fe18Ff94269904fCED6AE3DaE6d6dC0b",
         "symbol": "USDC",
         "decimals": 6,
         "chainId": 40,
-        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/telos/assets/0x818ec0A7Fe18Ff94269904fCED6AE3DaE6d6dC0b/logo.png"
+        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x04068DA6C83AFCFA0e13ba15A6696662335D5B75/logo.png"
       },
       {
         "name": "Tether USD",

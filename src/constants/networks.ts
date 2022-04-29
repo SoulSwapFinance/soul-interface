@@ -6,7 +6,7 @@ const Telos = '/images/networks/Telos.jpg'
 const Bsc = '/images/networks/bsc.png'
 
 // const Arbitrum = '/images/networks/arbitrum-network.jpg'
-// const Avalanche = '/images/networks/avalanche-network.jpg'
+const Avalanche = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/Avalanche.svg'
 // const Goerli = '/images/networks/goerli-network.jpg'
 // const Harmony = '/images/networks/harmonyone-network.jpg'
 // const Heco = '/images/networks/heco-network.jpg'
@@ -36,7 +36,7 @@ export const NETWORK_ICON = {
   // [ChainId.ARBITRUM]: Arbitrum,
   // [ChainId.ARBITRUM_TESTNET]: Arbitrum,
   // [ChainId.MOONBEAM_TESTNET]: Moonbeam,
-  // [ChainId.AVALANCHE]: Avalanche,
+  [ChainId.AVALANCHE]: Avalanche,
   // [ChainId.AVALANCHE_TESTNET]: Avalanche,
   // [ChainId.HECO]: Heco,
   // [ChainId.HECO_TESTNET]: Heco,
@@ -63,7 +63,7 @@ export const NETWORK_LABEL: { [chainId in ChainId]?: string } = {
   // [ChainId.ARBITRUM]: 'Arbitrum',
   // [ChainId.ARBITRUM_TESTNET]: 'Arbitrum Testnet',
   // [ChainId.MOONBEAM_TESTNET]: 'Moonbase',
-  // [ChainId.AVALANCHE]: 'Avalanche',
+  [ChainId.AVALANCHE]: 'Avalanche',
   // [ChainId.AVALANCHE_TESTNET]: 'Fuji',
   // [ChainId.HECO]: 'HECO',
   // [ChainId.HECO_TESTNET]: 'HECO Testnet',
@@ -79,6 +79,7 @@ export const NATIVE_TOKEN_TICKER = {
   [ChainId.TELOS]: 'TLOS',
   [ChainId.BSC]: 'BNB',
   [ChainId.FANTOM]: 'FTM',
+  [ChainId.AVALANCHE]: 'AVAX',
 }
 
 export const NATIVE_WRAPPED_TOKEN_ADDRESS = {
@@ -86,4 +87,5 @@ export const NATIVE_WRAPPED_TOKEN_ADDRESS = {
   [ChainId.BSC]: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
   [ChainId.TELOS]: WNATIVE_ADDRESS[40],
   [ChainId.FANTOM]: WNATIVE_ADDRESS[250],
+  [ChainId.AVALANCHE]: WNATIVE_ADDRESS[43114],
 }
