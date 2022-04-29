@@ -183,7 +183,7 @@ export const AllBonds = [
   },
   {
     pid: 18,
-    bondAddress: '',
+    bondAddress: '0x8e10Ee4179C14fCc9deEFa0cEb3E1259e77FEa0d',
     assetName: 'FTM-SOR',
     assetAddress: FTM_SOR,
     token1Address: FTM,
