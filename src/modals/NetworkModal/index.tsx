@@ -232,7 +232,20 @@ const NetworkModal: FC = () => {
               return (
                 <div
                   key={i}
-                  className="bg-[rgba(0,0,0,0.2)] focus:outline-none flex items-center gap-4 w-full px-4 py-3 rounded border border-purple cursor-default"
+                  className
+                    = {
+                      classNames(
+                        "bg-[rgba(0,0,0,0.2)] focus:outline-none flex items-center gap-4 w-full px-4 py-3 rounded border cursor-default", 
+                        chainId == ChainId.FANTOM
+                        ? 'border-ftmBlue'
+                        : chainId == ChainId.ETHEREUM
+                          ? 'border-blue'
+                          : chainId == ChainId.BSC
+                            ? 'border-yellow'
+                            : chainId == ChainId.AVALANCHE
+                            ? 'border-red'
+                              : 'border-purple'
+                      )}
                 >
                   <Image
                     src={NETWORK_ICON[key]}
@@ -274,7 +287,16 @@ const NetworkModal: FC = () => {
                   }
                 }}
                 className={classNames(
-                  'bg-[rgba(0,0,0,0.2)] focus:outline-none flex items-center gap-4 w-full px-4 py-3 rounded border border-dark-700 hover:border-blue'
+                  'bg-[rgba(0,0,0,0.2)] focus:outline-none flex items-center gap-4 w-full px-4 py-3 rounded border border-dark-700',
+                  key == ChainId.FANTOM
+                  ? 'hover:border-ftmBlue'
+                  : key == ChainId.ETHEREUM
+                    ? 'hover:border-blue'
+                    : key == ChainId.BSC
+                      ? 'hover:border-yellow'
+                      : key == ChainId.AVALANCHE
+                      ? 'hover:border-red'
+                        : 'hover:border-purple'
                 )}
               >
                 <Image src={NETWORK_ICON[key]} alt="Switch Network" className="rounded-md" width="32px" height="32px" />
