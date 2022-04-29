@@ -14,10 +14,15 @@ import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { useTokenInfo, useSoulInfo } from 'hooks/useAPI'
+import { useBondTVL } from 'hooks/useV2Pairs'
 
 export default function Dashboard() {
   const { i18n } = useLingui()
+  const bondInfo = useBondTVL()
 
+  let bondsTvl = bondInfo?.reduce((previousValue, currentValue) => {
+    return previousValue + currentValue?.tvl
+  }, 0)
   // Prices //
   const soulPrice = useSoulPrice()
   const seancePrice = useSeancePrice()
@@ -39,29 +44,34 @@ export default function Dashboard() {
 
   // GET LIQUIDITY BALANCES //
   const treasuryLiquidityValue = Number(soulInfo.totalLiquidityValue)
-
+  const bondedValue = Number(bondsTvl)
   // calculate Treasury Balances
   // const treasuryValue = treasuryLiquidityValue + treasuryReserveValue
-  const treasuryValue = Number(soulInfo.totalValue)
-
+  const treasuryValue = Number(soulInfo.totalValue) + bondedValue
 
   const treasuryValueData = [
     {
+        "label": "BONDED (USD)",
+        "angle": bondedValue,
+        "color": "#B485FF",
+        "percent": ((bondedValue / treasuryValue) * 100).toFixed()
+    },
+    {
         "label": "LIQUIDITY (USD)",
         "angle": treasuryLiquidityValue,
-        "color": "#B485FF",
+        "color": "#B465FF",
         "percent": ((treasuryLiquidityValue / treasuryValue) * 100).toFixed()
     },
     {
         "label": "SOUL (USD)",
         "angle": treasurySoulValue,
-        "color": "#B465FF",
+        "color": "#B445FF",
         "percent": ((treasurySoulValue / treasuryValue) * 100).toFixed()
     },
     {
         "label": "FTM (USD)",
         "angle": treasuryFantomValue,
-        "color": "#B445FF",
+        "color": "#B425FF",
         "percent": ((treasuryFantomValue / treasuryValue) * 100).toFixed()
     },
   ]
