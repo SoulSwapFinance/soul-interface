@@ -326,7 +326,7 @@ export default function SoulStake() {
         <Button variant="filled" color="blue" size="lg">
           <NavLink href={'/soul/dashboard'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Dashboard </span>
+            <span> Data </span>
             </a>
           </NavLink>
         </Button>

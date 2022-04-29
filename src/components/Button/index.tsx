@@ -65,6 +65,14 @@ const OUTLINED = {
     'border border-transparent border-gradient-r-blue-purple-dark-900 opacity-80 hover:opacity-100 disabled:bg-opacity-20',
 }
 
+const BORDERED = {
+  default: 'border border-transparent hover:border-purple bg-purple bg-opacity-40 outline-purple rounded text-purple hover:bg-opacity-40 disabled:bg-opacity-20',
+  blue: 'border border-transparent hover:border-blue bg-blue bg-opacity-40 outline-blue rounded text-blue hover:bg-opacity-40 disabled:bg-opacity-20',
+  deepPurple: 'border border-transparent hover:border-deepPurple bg-deepPurple bg-opacity-40 outline-deepPurple rounded text-deepPurple hover:bg-opacity-40 disabled:bg-opacity-20',
+  purple: 'border border-transparent hover:border-purple bg-purple bg-opacity-40 outline-purple rounded text-purple hover:bg-opacity-40 disabled:bg-opacity-20',
+  yellow: 'border border-transparent hover:border-yellow bg-yellow bg-opacity-40 outline-yellow rounded text-yellow hover:bg-opacity-40 disabled:bg-opacity-20',
+}
+
 const EMPTY = {
   default:
     'flex bg-transparent justify-center items-center disabled:opacity-50 disabled:cursor-auto bg-opacity-80 hover:bg-opacity-100',
@@ -77,6 +85,7 @@ const LINK = {
 
 const VARIANT = {
   outlined: OUTLINED,
+  bordered: BORDERED,
   filled: FILLED,
   empty: EMPTY,
   link: LINK,
@@ -87,7 +96,7 @@ export type ButtonColor = 'blue' | 'ftmBlue' | 'pink' | 'purple' | 'gradient' | 
 
 export type ButtonSize = 'xs' | 'sm' | 'lg' | 'default' | 'none' | 'nobase'
 
-export type ButtonVariant = 'outlined' | 'filled' | 'empty' | 'link' | 'flexed'
+export type ButtonVariant = 'outlined' | 'bordered' | 'filled' | 'empty' | 'link' | 'flexed'
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   color?: ButtonColor

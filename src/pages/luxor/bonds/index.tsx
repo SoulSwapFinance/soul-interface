@@ -20,7 +20,7 @@ const Luxor = () => {
           <title>Luxor Money | Soul</title>
           <meta key="description" name="description" content="Mint SOUL" />
         </Head>
-        <div className="mt-2 mb-2">
+        <div className="mt-1 mb-1">
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/swap?inputCurrency=&outputCurrency=0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'}>
             <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
@@ -29,7 +29,7 @@ const Luxor = () => {
           </NavLink>
         </Button>
         </div>
-        <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
+        <div className="flex ml-0 mr-0 mb-1 gap-1 items-center justify-center">
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/dashboard'}>
             <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
