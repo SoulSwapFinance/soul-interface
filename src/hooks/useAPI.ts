@@ -198,6 +198,84 @@ export function useSoulInfo(): { status: string; soulInfo: T } {
     return { status, soulInfo }
 }
 
+export function useBondInfo(): { status: string; bondInfo: T } {
+    const { account, chainId } = useActiveWeb3React()
+    const [status, setStatus] = useState<string>('idle')
+    const [bondInfo, setInfo] = useState<T>({
+        SoulFantomValue: '63800.05964972323',
+        SoulUsdcValue: '46383.88976770467',
+        FantomEthereumValue: '70575.55193664419',
+        UsdcDaiValue: '167461.74443822587',
+        FantomUsdcValue: '58807.66686062403',
+        FantomBitcoinValue: '85187.16125864044',
+        FantomDaiValue: '74995.03629181904',
+        FantomBinanceValue: '62984.619936168485',
+        SeanceFantomValue: '35920.55519306462',
+        totalLiquidityValue: '666116.2853326146',
+        totalValue: '666116.2853326146',
+        api: 'https://api.soulswap.finance/bonds'
+      })  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus('fetching')
+        const response = await fetch(`${BASE_URL}/bonds`,
+         {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referrer-Policy': 'no-referrer',
+          },
+        })
+        const json = await response.json()
+        setInfo(json as T)
+        setStatus('fetched')
+      }
+      if (chainId == ChainId.FANTOM) 
+      fetchData()
+    }, [])
+  
+    return { status, bondInfo }
+}
+
+export function useSoulBondInfo(pid): { status: string; soulBondInfo: T } {
+    const { account, chainId } = useActiveWeb3React()
+    const [status, setStatus] = useState<string>('idle')
+    const [soulBondInfo, setInfo] = useState<T>({
+      address: '',
+      name: 'SoulSwap LP',
+      symbol: 'SOUL-LP',
+      token0: '',
+      token1: '',
+      token0Symbol: '',
+      token1Symbol: '',
+      decimals: '18',
+      supply: '0',
+      mcap: '0',
+      tvl: '0',
+      api: `https://api.soulswap.finance/bonds/${pid}`
+      })  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus('fetching')
+        const response = await fetch(`${BASE_URL}/bonds/${pid}`,
+         {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referrer-Policy': 'no-referrer',
+          },
+        })
+        const json = await response.json()
+        setInfo(json as T)
+        setStatus('fetched')
+      }
+      if (chainId == ChainId.FANTOM) 
+      fetchData()
+    }, [])
+  
+    return { status, soulBondInfo }
+}
+
 export function useLuxorUserInfo(userAddress): { status: string; luxorUserInfo: T } {
     const { chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')

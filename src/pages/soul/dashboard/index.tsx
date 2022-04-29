@@ -13,16 +13,16 @@ import { WFTM_ADDRESS } from 'constants/addresses'
 import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
-import { useTokenInfo, useSoulInfo } from 'hooks/useAPI'
+import { useTokenInfo, useSoulInfo, useBondInfo } from 'hooks/useAPI'
 import { useBondTVL } from 'hooks/useV2Pairs'
 
 export default function Dashboard() {
   const { i18n } = useLingui()
-  const bondInfo = useBondTVL()
+  // const bondInfo = useBondTVL()
 
-  let bondsTvl = bondInfo?.reduce((previousValue, currentValue) => {
-    return previousValue + currentValue?.tvl
-  }, 0)
+  // let bondsTvl = bondInfo?.reduce((previousValue, currentValue) => {
+  //   return previousValue + currentValue?.tvl
+  // }, 0)
   // Prices //
   const soulPrice = useSoulPrice()
   const seancePrice = useSeancePrice()
@@ -36,18 +36,105 @@ export default function Dashboard() {
   // console.log('totalSupplyString:%s', totalSupplyString)
   const circulatingSupply = totalSupply - soulBalance - stakedSoul
   // console.log('totalSupply:%s', totalSupply)
+  const daoLiquidityValue = Number(soulInfo.totalLiquidityValue)
 
   // GET RESERVES BALANCES //
   const treasurySoulValue = soulBalance * soulPrice
   const treasuryFantomValue = Number(soulInfo.NativeValue)
-  const treasuryReserveValue = treasurySoulValue + treasuryFantomValue
-
+  // const treasuryReserveValue = treasurySoulValue + treasuryFantomValue
+  
   // GET LIQUIDITY BALANCES //
+  const { bondInfo } = useBondInfo()
   const treasuryLiquidityValue = Number(soulInfo.totalLiquidityValue)
-  const bondedValue = Number(bondsTvl)
+  // const bondedValue = Number(bondsTvl)
+  const bondedValue = Number(bondInfo.totalValue)
+  // : '21971.090220570382',
+  // : '33226.09911768204',
+  // : '34342.85',
+  // : '37595.70869506188',
+  // FantomBitcoinValue: '25834.553004332465',
+  // FantomDaiValue: '18916.06199394552',
+  // FantomBinanceValue: '12955.353761786479',
+  // SeanceFantomValue: '4700.715198538588',
+  // BitcoinEthereumValue: '10',
+  const SoulFantomValue = Number(soulInfo.SoulFantomValue) + Number(bondInfo.SoulFantomValue)
+  const SoulUsdcValue = Number(soulInfo.SoulUsdcValue) + Number(bondInfo.SoulUsdcValue)
+  const FantomEthereumValue = Number(soulInfo.FantomEthereumValue) + Number(bondInfo.FantomEthereumValue)
+  const UsdcDaiValue = Number(soulInfo.UsdcDaiValue) + Number(bondInfo.UsdcDaiValue)
+  const FantomUsdcValue = Number(soulInfo.FantomUsdcValue) + Number(bondInfo.FantomUsdcValue)
+  const FantomBitcoinValue = Number(soulInfo.FantomBitcoinValue) + Number(bondInfo.FantomBitcoinValue)
+  const FantomDaiValue = Number(soulInfo.FantomDaiValue) + Number(bondInfo.FantomDaiValue)
+  const FantomBinanceValue = Number(soulInfo.FantomBinanceValue) + Number(bondInfo.FantomBinanceValue)
+  const SeanceFantomValue = Number(soulInfo.SeanceFantomValue) + Number(bondInfo.SeanceFantomValue)
+  const OtherValue = SeanceFantomValue + FantomBinanceValue + SoulUsdcValue + FantomDaiValue
+  
   // calculate Treasury Balances
   // const treasuryValue = treasuryLiquidityValue + treasuryReserveValue
   const treasuryValue = Number(soulInfo.totalValue) + bondedValue
+  const liquidityValue = bondedValue + daoLiquidityValue
+
+  const liquidityValueData = [
+    {
+        "label": "SOUL-FTM",
+        "angle": SoulFantomValue,
+        "color": "#B585FF",
+        "percent": ((SoulFantomValue / liquidityValue) * 100).toFixed()
+    },
+    // {
+    //     "label": "SEANCE-FTM",
+    //     "angle": SeanceFantomValue,
+    //     "color": "#B585FF",
+    //     "percent": ((SeanceFantomValue / liquidityValue) * 100).toFixed()
+    // },
+    // {
+    //     "label": "SOUL-USDC",
+    //     "angle": SoulUsdcValue,
+    //     "color": "#B565FF",
+    //     "percent": ((SoulUsdcValue / liquidityValue) * 100).toFixed()
+    // },
+    {
+        "label": "FTM-ETH",
+        "angle": FantomEthereumValue,
+        "color": "#B545FF",
+        "percent": ((FantomEthereumValue / liquidityValue) * 100).toFixed()
+    },
+    {
+        "label": "USDC-DAI",
+        "angle": UsdcDaiValue,
+        "color": "#B505FF",
+        "percent": ((UsdcDaiValue / liquidityValue) * 100).toFixed()
+    },
+    {
+        "label": "FTM-USDC",
+        "angle": FantomUsdcValue,
+        "color": "#B465FF",
+        "percent": ((FantomUsdcValue / liquidityValue) * 100).toFixed()
+    },
+    {
+        "label": "FTM-BTC",
+        "angle": FantomBitcoinValue,
+        "color": "#B445FF",
+        "percent": ((FantomBitcoinValue / liquidityValue) * 100).toFixed()
+    },
+    // {
+    //     "label": "FTM-DAI",
+    //     "angle": FantomDaiValue,
+    //     "color": "#B465FF",
+    //     "percent": ((FantomDaiValue / liquidityValue) * 100).toFixed()
+    // },
+    // {
+    //     "label": "FTM-BNB",
+    //     "angle": FantomBinanceValue,
+    //     "color": "#B445FF",
+    //     "percent": ((FantomBinanceValue / liquidityValue) * 100).toFixed()
+    // },
+    {
+        "label": "OTHERS",
+        "angle": OtherValue,
+        "color": "#B425FF",
+        "percent": ((OtherValue / liquidityValue) * 100).toFixed()
+    },
+  ]
 
   const treasuryValueData = [
     {
@@ -504,6 +591,28 @@ export default function Dashboard() {
             <div className="flex justify-center flex-col gap-3 sm:flex-row">
             <DashboardChartLegend
               data={treasuryValueData}
+              hasInfo={false}
+              currency={'$'}
+              leadingCurrency={true}
+              theme={'dark'}
+            />
+              </div>
+            </div>
+          <div>
+            <Typography
+              className="flex mt-8 text-2xl justify-center gap-1 items-center"
+              fontFamily={'medium'}
+              textColor={'text-white'}
+            >
+              {i18n._(t`Liquidity Distribution`)}
+            </Typography>
+            <div className="h-px my-4 bg-dark-1000" />
+          </div>
+          <div className="flex justify-center flex-col gap-3 sm:flex-row">
+            <DashboardDonutChart width={200} data={liquidityValueData} />
+            <div className="flex justify-center flex-col gap-3 sm:flex-row">
+            <DashboardChartLegend
+              data={liquidityValueData}
               hasInfo={false}
               currency={'$'}
               leadingCurrency={true}
