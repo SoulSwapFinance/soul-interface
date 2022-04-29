@@ -142,9 +142,13 @@ const Desktop: FC = () => {
                   </div>
                 </>
               )}
-              <Web3Status />
               {library && library.provider.isMetaMask && (
-                <div className="hidden sm:inline-block">
+                <div className="inline-block">
+                <Web3Status />
+                </div>
+              )}
+              {library && library.provider.isMetaMask && (
+                <div className="inline-block">
                   <Web3Network />
                 </div>
               )}

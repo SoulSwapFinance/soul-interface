@@ -236,7 +236,11 @@ function AppBar(): JSX.Element {
                           )}
                         </>
                       )}
-                      <Web3Status />
+                      {library && library.provider.isMetaMask && (
+                        <div className="hidden sm:inline-block">
+                        <Web3Status />
+                        </div>
+                      )}
                       {library && library.provider.isMetaMask && (
                         <div className="hidden sm:inline-block">
                           <Web3Network />
