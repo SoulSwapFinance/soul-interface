@@ -25,28 +25,6 @@ export const createWeb3Provider = (provider: any) => {
   return new Web3Provider(provider, "any");
 };
 
-export const createWalletContext = async (provider: Web3Provider) => {
-  if (!provider) {
-    console.error("provider missing");
-    return;
-  }
-  const { chainId } = await provider.getNetwork();
-  const accounts = await provider.listAccounts();
-  const signer = provider.getSigner();
-  const contracts = await loadContracts(signer, chainId);
-
-  // TODO: remove
-  // @ts-ignore
-  window.fWallet = contracts;
-  return {
-    contracts,
-    chainId,
-    address: accounts[0],
-    provider,
-    signer,
-  };
-};
-
 export const loadContracts = async (signer: Signer, chainId: number) => {
   if (!signer) {
     return;
