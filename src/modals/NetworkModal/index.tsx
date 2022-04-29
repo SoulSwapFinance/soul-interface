@@ -80,17 +80,17 @@ export const SUPPORTED_NETWORKS: {
     rpcUrls: ['https://rpc.testnet.fantom.network'],
     blockExplorerUrls: ['https://testnet.ftmscan.com'],
   },
-  // [ChainId.MATIC]: {
-  //   chainId: '0x89',
-  //   chainName: 'Matic',
-  //   nativeCurrency: {
-  //     name: 'Matic',
-  //     symbol: 'MATIC',
-  //     decimals: 18,
-  //   },
-  //   rpcUrls: ['https://polygon-rpc.com'], // ['https://matic-mainnet.chainstacklabs.com/'],
-  //   blockExplorerUrls: ['https://polygonscan.com'],
-  // },
+  [ChainId.MATIC]: {
+    chainId: '0x89',
+    chainName: 'Matic',
+    nativeCurrency: {
+      name: 'Matic',
+      symbol: 'MATIC',
+      decimals: 18,
+    },
+    rpcUrls: ['https://polygon-rpc.com'], // ['https://matic-mainnet.chainstacklabs.com/'],
+    blockExplorerUrls: ['https://polygonscan.com'],
+  },
   // [ChainId.HECO]: {
   //   chainId: '0x80',
   //   chainName: 'Heco',
@@ -151,17 +151,17 @@ export const SUPPORTED_NETWORKS: {
   //   rpcUrls: ['https://exchainrpc.okex.org'],
   //   blockExplorerUrls: ['https://www.oklink.com/okexchain'],
   // },
-  // [ChainId.ARBITRUM]: {
-  //   chainId: '0xA4B1',
-  //   chainName: 'Arbitrum',
-  //   nativeCurrency: {
-  //     name: 'Ethereum',
-  //     symbol: 'ETH',
-  //     decimals: 18,
-  //   },
-  //   rpcUrls: ['https://arb1.arbitrum.io/rpc'],
-  //   blockExplorerUrls: ['https://arbiscan.io'],
-  // },
+  [ChainId.ARBITRUM]: {
+    chainId: '0xA4B1',
+    chainName: 'Arbitrum',
+    nativeCurrency: {
+      name: 'Ethereum',
+      symbol: 'ETH',
+      decimals: 18,
+    },
+    rpcUrls: ['https://arb1.arbitrum.io/rpc'],
+    blockExplorerUrls: ['https://arbiscan.io'],
+  },
   // [ChainId.CELO]: {
   //   chainId: '0xA4EC',
   //   chainName: 'Celo',
@@ -227,6 +227,8 @@ const NetworkModal: FC = () => {
             // ChainId.TELOS,
             ChainId.BSC,
             ChainId.AVALANCHE,
+            ChainId.MATIC,
+            ChainId.ARBITRUM,
           ].map((key: ChainId, i: number) => {
             if (chainId === key) {
               return (
@@ -242,9 +244,11 @@ const NetworkModal: FC = () => {
                           ? 'border-blue'
                           : chainId == ChainId.BSC
                             ? 'border-yellow'
-                            : chainId == ChainId.AVALANCHE
-                            ? 'border-red'
-                              : 'border-purple'
+                              : chainId == ChainId.AVALANCHE
+                              ? 'border-red'
+                                : chainId == ChainId.ARBITRUM
+                                ? 'border-arbitrumBlue'
+                                  : 'border-purple'
                       )}
                 >
                   <Image
@@ -294,9 +298,11 @@ const NetworkModal: FC = () => {
                     ? 'hover:border-blue'
                     : key == ChainId.BSC
                       ? 'hover:border-yellow'
-                      : key == ChainId.AVALANCHE
-                      ? 'hover:border-red'
-                        : 'hover:border-purple'
+                        : key == ChainId.AVALANCHE
+                        ? 'hover:border-red'
+                          : key == ChainId.ARBITRUM
+                          ? 'hover:border-arbitrumBlue'
+                            : 'hover:border-purple'
                 )}
               >
                 <Image src={NETWORK_ICON[key]} alt="Switch Network" className="rounded-md" width="32px" height="32px" />

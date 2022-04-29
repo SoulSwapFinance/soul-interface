@@ -46,6 +46,8 @@ const FantomLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/mast
 const BinanceLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/ftm.jpg'
 const AvalancheLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/Avalanche.svg'
 const TelosLogo = '/images/natives/telos.png'
+const PolygonLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/polygon/Polygon.svg'
+const ArbitrumLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/arbitrum/Arbitrum.png'
 
 const LOGO: Record<ChainId, string> = {
   [ChainId.ETHEREUM]: EthereumLogo,
@@ -54,6 +56,8 @@ const LOGO: Record<ChainId, string> = {
   [ChainId.FANTOM_TESTNET]: FantomLogo,
   [ChainId.BSC]: BinanceLogo,
   [ChainId.AVALANCHE]: AvalancheLogo,
+  [ChainId.MATIC]: PolygonLogo,
+  [ChainId.ARBITRUM]: ArbitrumLogo,
 }
 
 export const UNKNOWN_ICON = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/unknown.png'
