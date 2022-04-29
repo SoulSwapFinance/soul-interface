@@ -223,9 +223,9 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
           .mulDiv(e10(18), pair.currentBorrowAmount.value)
         
           // √ ACCURATE
-        console.log('currentAllAssets:%s', Number(pair.currentAllAssets.value))
-        console.log('pair.totalCollateralAmount.value:%s', Number(pair.totalCollateralAmount.value))
-        console.log('marketHealth:%s', Number(pair.marketHealth))
+        // console.log('currentAllAssets:%s', Number(pair.currentAllAssets.value))
+        // console.log('pair.totalCollateralAmount.value:%s', Number(pair.totalCollateralAmount.value))
+        // console.log('marketHealth:%s', Number(pair.marketHealth))
 
         pair.currentTotalAsset = accrueTotalAssetWithFee(pair)
 

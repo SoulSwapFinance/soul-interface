@@ -36,7 +36,7 @@ export function useRedeemFee() {
   const info = useSingleCallResult(contract, 'treasuryPermille')?.result
   const amount = info?.[0]
 
-  return amount ? amount : 50
+  return amount ? amount : 30
 }
 
 export function useRedeemClaimAmount(token) {

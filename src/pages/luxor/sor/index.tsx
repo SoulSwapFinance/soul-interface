@@ -83,7 +83,7 @@ export default function Stablecoin() {
   const stakeError = !parsedStakeValue
     ? 'Enter Amount'
     : daiBalance?.lessThan(parsedStakeValue)
-      ? 'Insufficient Balance'
+      ? 'Exceeds Balance'
       : maxStakeAmount?.lessThan(parsedStakeValue)
         ? 'Exceeds Max'
         : undefined
@@ -93,7 +93,7 @@ export default function Stablecoin() {
   const redeemError = !parsedRedeemValue
     ? 'Enter Amount'
     : sorBalance?.lessThan(parsedRedeemValue)
-      ? 'Insufficient Balance'
+      ? 'Exceeds Balance'
       : maxRedeemAmount?.lessThan(parsedRedeemValue)
         ? 'Exceeds Max'
         : undefined
