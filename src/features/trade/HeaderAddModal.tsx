@@ -96,7 +96,7 @@ const HeaderAddModal: FC<HeaderNewProps> = ({ isRemove, inputCurrency, outputCur
          <ExternalLink
            activeClassName="text-high-emphesis"
            href={"/bridge"}
-          href={"https://bridge.soulswap.finance"}>
+          href={"/bridge"}>
           <Typography weight={700} className="text-secondary hover:text-white">
             Bridge
           </Typography>

@@ -84,7 +84,7 @@ const useMenu: UseBar = () => {
     //       {
     //         key: 'bridge',
     //         title: i18n._(t`Bridge`),
-    //         link: 'https://bridge.soulswap.finance',
+    //         link: '/bridge',
     //       },
     //       {
     //         key: 'limit',
@@ -141,7 +141,7 @@ const useMenu: UseBar = () => {
         icon: <PoolIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
       })
 
-    if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
+    if (featureEnabled(Feature.AMM, chainId)) {
       const farmItems = {
         key: 'SoulSwap',
         title: i18n._(t`SoulSwap`),
@@ -175,7 +175,7 @@ const useMenu: UseBar = () => {
           {
             key: 'bridge',
             title: i18n._(t`Bridge`),
-            link: 'https://bridge.soulswap.finance',
+            link: '/bridge',
           },
           {
             key: 'soul-docs',

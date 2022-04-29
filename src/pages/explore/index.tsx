@@ -57,7 +57,7 @@ const EXPLORE = (i18n: I18n) => [
     id: 8,
     name: 'BRIDGE ASSETS',
     description: 'Bridge from BSC, ETH, AVAX, MATIC, and more.',
-    href: 'https://bridge.soulswap.finance'
+    href: './bridge'
   },
   {
     id: 9,

@@ -9,7 +9,7 @@ export const supportedChainsForBridge = [250, 1, 56, 137, 43114, 42161]
 export const chainToNetworkInfoMap = {
   250: { symbol: "ftm", name: "Fantom", image: ftmImage },
   1: { symbol: "eth", name: "Ethereum", image: ethImage },
-  56: { symbol: "bsc", name: "BNB Chain", image: bscImage },
+  56: { symbol: "bsc", name: "Binance", image: bscImage },
   137: { symbol: "matic", name: "Polygon", image: polyImage },
   43114: { symbol: "avax", name: "Avalanche", image: avaxImage },
   42161: { symbol: "arb", name: "Arbitrum", image: arbImage },
