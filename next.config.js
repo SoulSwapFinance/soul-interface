@@ -22,6 +22,7 @@ module.exports = withBundleAnalyzer(
     images: {
       domains: [
         'ftmscan.com',
+        'cryptologos.cc',
         'assets.soulswap.finance',
         'assets.coingecko.com',
         'media.giphy.com',
