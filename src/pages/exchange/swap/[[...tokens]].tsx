@@ -541,7 +541,7 @@ const Swap = () => {
             <div className="flex flex-row gap-3 text-dark-600 justify-end">
               Chart 
               <Toggle
-                id="toggle-expert-mode-button"
+                id="toggle-button"
                 isActive={expertMode}
                 toggle={
                   expertMode
