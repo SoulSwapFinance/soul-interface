@@ -56,6 +56,7 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`+/-`)}
           </Typography>
         </NavLink>
+
         <NavLink
           activeClassName="text-dark-600"
           href={{
@@ -67,12 +68,22 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Limit`)}
           </Typography>
         </NavLink>
+
+        <NavLink
+          activeClassName="text-dark-600"
+          href={{
+            pathname: '/bridge',
+            // query: getQuery(inputCurrency, outputCurrency),
+          }}
+        >
+          <Typography weight={700} className="text-secondary hover:text-dark-600">
+            {i18n._(t`Bridge`)}
+          </Typography>
+        </NavLink>
+
       </div>
       <div className="flex gap-4">
-        {/* {isLimitOrder && <MyOrders />} */}
-        <Settings
-        // className="!w-6 !h-6" 
-        />
+        <Settings />
       </div>
     </div>
   )

@@ -1,8 +1,6 @@
 import React, { useContext, useState } from "react";
-// import { ThemeContext } from "styled-components";
 import InputCurrency from "./InputCurrency";
 import { Button } from "components/index";
-// import Spacer from "components/Spacer";
 import Row from "components/Row";
 
 export interface Token {
@@ -20,7 +18,7 @@ export const FANTOM_NATIVE: Token = {
   decimals: 18,
   name: "Fantom",
   symbol: "FTM",
-  logoURL: "https://cryptologos.cc/logos/fantom-ftm-logo.svg?v=003",
+  logoURL: "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/Fantom.svg",
 };
 
 const InputCurrencyBox: React.FC<any> = ({
@@ -31,7 +29,6 @@ const InputCurrencyBox: React.FC<any> = ({
   minus,
   variant = "old",
 }) => {
-  // const { color } = useContext(ThemeContext);
   const [error, setError] = useState(null);
   const handleSetMax = () => {
     setError(null);
@@ -48,7 +45,6 @@ const InputCurrencyBox: React.FC<any> = ({
         alignItems: "center",
       }}
     >
-      {/* <Spacer /> */}
       <div />
       <InputCurrency
         disabled={disabled}
@@ -70,7 +66,6 @@ const InputCurrencyBox: React.FC<any> = ({
         >
           MAX {minus ? "" : ""}
         </Button>
-        {/* <Spacer /> */}
         <div className="mr-2" />
       </Row>
     </Row>

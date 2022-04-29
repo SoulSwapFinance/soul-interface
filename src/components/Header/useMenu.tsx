@@ -84,7 +84,7 @@ const useMenu: UseMenu = () => {
           {
             key: 'bridge',
             title: i18n._(t`Bridge`),
-            link: 'https://bridge.soulswap.finance',
+            link: '/bridge',
           },
           {
             key: 'limit',

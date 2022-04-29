@@ -30,7 +30,7 @@ export const chainToNativeToken = {
       name: "BNB",
       symbol: "BNB", // 2-6 characters long
       decimals: 18,
-      network: "BNB Chain",
+      network: "Binance",
     },
     97: {
       name: "tBNB",
@@ -99,7 +99,7 @@ export const chainToNativeToken = {
       if (chainId === 56) {
         return {
           chainId: "0x38", // A 0x-prefixed hexadecimal string
-          chainName: "BNB Chain",
+          chainName: "Binance",
           nativeCurrency: chainToNativeToken[56],
           rpcUrls: ["https://bsc-dataseed.binance.org/"],
           blockExplorerUrls: ["https://bscscan.com/"],
@@ -108,7 +108,7 @@ export const chainToNativeToken = {
       if (chainId === 97) {
         return {
           chainId: "0x61", // A 0x-prefixed hexadecimal string
-          chainName: "BNB Chain Testnet",
+          chainName: "Binance Testnet",
           nativeCurrency: chainToNativeToken[97],
           rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
           blockExplorerUrls: ["https://testnet.bscscan.com/"],
