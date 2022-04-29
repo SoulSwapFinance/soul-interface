@@ -884,6 +884,14 @@ const Bridge: React.FC<any> = () => {
 
               </div>
               <div className="mt-8" />
+              <ButtonComponent variant="outlined" color="purple" onClick={handleApproveToken} className="mb-2">
+                {isApprovePending
+                  ? "Approving"
+                  : isApproveCompleted
+                    ? "Approve successful"
+                    : "Approve Token"}
+              </ButtonComponent>
+              
               {isApproved && (
 
                 <ButtonComponent
@@ -899,14 +907,6 @@ const Bridge: React.FC<any> = () => {
                     : "Bridge Token"}
                 </ButtonComponent>
               )}
-              
-              <ButtonComponent variant="filled" color="blue" onClick={handleApproveToken} className="mt-2">
-                {isApprovePending
-                  ? "Approving"
-                  : isApproveCompleted
-                    ? "Approve successful"
-                    : "Approve Token"}
-              </ButtonComponent>
             
               <div className="mt-4" />
             </>
