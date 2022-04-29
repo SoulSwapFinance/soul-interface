@@ -33,6 +33,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { GelatoProvider } from 'soulswap-limit-orders-react'
 import { useActiveWeb3React } from 'services/web3'
 import { ApiDataProvider } from 'contexts/ApiDataProvider'
+import ModalProvider from 'contexts/ModalProvider'
 
 const Web3ProviderNetwork = dynamic(() => import('components/Web3ProviderNetwork'), { ssr: false })
 
@@ -154,6 +155,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
                   <RecoilRoot>
                     <SyncWithRedux />
                     <Provider>
+                    <ModalProvider>
                       <Layout>
                         <Guard>
                           {/* TODO: Added alert Jan 25. Delete component after a few months. */}
@@ -165,6 +167,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
                         </Guard>
                         <Portals />
                       </Layout>
+                      </ModalProvider>
                     </Provider>
                     <TransactionUpdater />
                   </RecoilRoot>

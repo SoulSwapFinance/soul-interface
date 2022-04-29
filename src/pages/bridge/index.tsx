@@ -88,7 +88,6 @@ const ChainSelector: React.FC<any> = ({
   selected,
   selectChain,
 }) => {
-  const { color } = useContext(ThemeContext);
   return (
     <Column style={{ width: "100%" }}>
       <Typo2 style={{ color: "#84888d" }}>{text}</Typo2>
@@ -296,7 +295,6 @@ const ChainSelection: React.FC<any> = ({
 };
 
 const TokenSelector: React.FC<any> = ({ tokens, selected, selectToken }) => {
-  const { color } = useContext(ThemeContext);
   const [onPresentSelectTokenModal] = useModal(
     <BridgeTokenSelectModal tokens={tokens} selectToken={selectToken} />,
     "bridge-token-select-modal"
@@ -346,10 +344,9 @@ const BridgeTokenSelectModal: React.FC<any> = ({
   selectToken,
   onDismiss,
 }) => {
-  const { color } = useContext(ThemeContext);
   return (
     <Modal
-      style={{ padding: "20px 24px", maxHeight: "80vh" }}
+      style={{ padding: "2px 2px", maxHeight: "80vh" }}
       onDismiss={onDismiss}
     >
       <ModalTitle text="Select Token" />
@@ -364,16 +361,16 @@ const BridgeTokenSelectModal: React.FC<any> = ({
           >
             <Typo3
               style={{
-                textAlign: "left",
+                textAlign: "center",
                 width: "8rem",
                 color: "white",
               }}
             >
-              TOKEN NAME
+              TOKEN
             </Typo3>
             <Typo3
               style={{
-                textAlign: "right",
+                textAlign: "center",
                 width: "8rem",
                 color: "white",
               }}
@@ -581,7 +578,6 @@ const BridgeTokenList: React.FC<any> = ({
 
 const Bridge: React.FC<any> = () => {
   const { chainId, account, connector, deactivate, library } = useActiveWeb3React()
-  const { color } = useContext(ThemeContext);
   const { setToChain: connectToChain } = useMultiChain();
   const { bridgeStableMethod, bridgeNativeMethod, bridgeMethod } = useBridge();
   // const { getTransactionStatus } = useBridgeApi();
@@ -799,7 +795,7 @@ const Bridge: React.FC<any> = () => {
       )}
       <Row style={{ width: "100%", justifyContent: "center" }}>
         {/* <ContentBox style={{ width: "600px" }}> */}
-        <div className="flex mt-4 border border-dark-900 hover:border-dark-600 bg-dark-1000 p-2 w-full">
+        <div className="flex mt-4 border border-dark-900 hover:border-dark-600 bg-dark-1000 p-2 rounded w-full">
           <Column style={{ width: "100%" }}>
             <div />
             <>
@@ -936,7 +932,7 @@ const Bridge: React.FC<any> = () => {
 
 const StyledOverlayButton = styled(OverlayButton)`
   :hover {
-    background-color: ${(props) => props.theme.color.primary.semiWhite(0.1)};
+    background-color: #b365ff;
   }
 `;
 
