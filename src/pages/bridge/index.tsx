@@ -794,7 +794,6 @@ const Bridge: React.FC<any> = () => {
         </ContentBox>
       )}
       <Row style={{ width: "100%", justifyContent: "center" }}>
-        {/* <ContentBox style={{ width: "600px" }}> */}
         <div className="flex mt-4 border border-dark-900 hover:border-dark-600 bg-dark-900 p-2 rounded w-full">
           <Column style={{ width: "100%" }}>
             <div />
@@ -883,18 +882,18 @@ const Bridge: React.FC<any> = () => {
               <div className="mt-8" />
               {isApproved ? (
 
-                <Button
+                <ButtonComponent
                   disabled={inputError ||
                     !amount ||
                     chainId !== fromChain}
                   variant="filled"
-                  color="#b365ff"
+                  color="purple"
                   onClick={handleBridgeAction}
                 >
                   {isBridgeTxPending
                     ? "Broadcasting Transaction"
                     : "Bridge Token"}
-                </Button>
+                </ButtonComponent>
               ) : (
                 <Button variant="primary" onClick={handleApproveToken}>
                   {isApprovePending
@@ -907,7 +906,6 @@ const Bridge: React.FC<any> = () => {
               <div className="mt-4" />
             </>
           </Column>
-          {/* </ContentBox> */}
         </div>
       </Row>
       <div />
