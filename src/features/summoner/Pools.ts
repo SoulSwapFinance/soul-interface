@@ -226,7 +226,20 @@ export const ActivePools = [
     },
     token1Address: tokens.FTM,
     token2Address: tokens.USDC,
-  },  
+  },
+  // {
+  //   // 600
+  //   pid: 55,
+  //   token1: 'FTM',
+  //   token2: 'AVAX',
+  //   lpSymbol: 'FTM-AVAX',
+  //   lpAddresses: {
+  //     4002: '',
+  //     250: '0x5159Ba92FDC80b3a4B19De279711b1822de06c86',
+  //   },
+  //   token1Address: tokens.FTM,
+  //   token2Address: tokens.AVAX,
+  // },
   {
     // 600
     pid: 18,
@@ -395,7 +408,7 @@ export const ActivePools = [
     },
     token1Address: tokens.FTM,
     token2Address: tokens.EVO,
-  }
+  },
 ]
 
 export const LendingPools = [

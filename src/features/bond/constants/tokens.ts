@@ -19,10 +19,6 @@ export const tokens = {
     4002: "0x306557358e20aea124b16a548597897858d13cb2",
     250: "0xAd84341756Bf337f5a0164515b1f6F993D194E1f",
   },
-  BOO: {
-    4002: "",
-    250: "0x841FAD6EAe12c286d1Fd18d1d525DFfA75C7EFFE",
-  },
   BNB: {
     4002: "",
     250: "0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454",
@@ -34,10 +30,6 @@ export const tokens = {
   ICE: {
     4002: '',
     250: '0xf16e81dce15B08F326220742020379B855B87DF9',
-  },
-  gFUSDT: {
-    4002: '',
-    250: '0x940F41F0ec9ba1A34CF001cc03347ac092F5F6B5',
   },
   USDT: {
     4002: '',
