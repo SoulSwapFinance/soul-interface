@@ -43,6 +43,7 @@ import Typography from "components/Typography";
 import HeaderNew from "features/trade/HeaderNew";
 import { SwapLayoutCard } from "layouts/SwapLayout";
 import Container from "components/Container";
+import NavLink from "components/NavLink";
 
 const ChainSelect: React.FC<any> = ({ selectChain, chains }) => {
   return (
@@ -914,6 +915,13 @@ const Bridge: React.FC<any> = () => {
       </Row>
       <div />
     </FadeInOut>
+  </div>
+  <div className="flex items-center justify-end px-4">
+      <NavLink href="/bridge/faucet">
+        <a className="flex mt-2 text-dark-600 items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
+        &#x2937; &nbsp;<span> View Fantom Faucet </span> 
+        </a>
+      </NavLink>
   </div>
 </DoubleGlowShadowV2>
 </Container>

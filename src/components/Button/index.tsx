@@ -18,6 +18,7 @@ const FLEXED = {
   default: 'bg-transparent opacity-80 hover:opacity-100',
   red: 'bg-red bg-opacity-80 flex rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   blue: 'bg-blue bg-opacity-80 flex rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
+  ftmBlue: 'bg-ftmBlue bg-opacity-80 flex rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   pink: 'bg-gradient-to-r from-pink to-opaque-pink flex rounded text-high-emphesis opacity-80 hover:opacity-100 disabled:bg-opacity-80',
   purple: 'bg-gradient-to-r from-purple to-opaque-purple flex rounded text-high-emphesis opacity-80 hover:opacity-100 disabled:bg-opacity-80',
   deepPurple: 'bg-gradient-to-r from-deepPurple to-opaque-purple flex rounded text-high-emphesis opacity-80 hover:opacity-100 disabled:bg-opacity-80',
@@ -34,6 +35,7 @@ const FILLED = {
   default: 'bg-transparent opacity-80 hover:opacity-100',
   red: 'bg-red bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   blue: 'bg-blue bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
+  ftmBlue: 'bg-ftmBlue bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   pink: 'bg-pink bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   purple: 'bg-purple bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   deepPurple: 'bg-deepPurple bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
@@ -81,7 +83,7 @@ const VARIANT = {
   flexed: FLEXED,
 }
 
-export type ButtonColor = 'blue' | 'pink' | 'purple' | 'gradient' | 'gray' | 'default' | 'red' | 'green' | 'yellow'
+export type ButtonColor = 'blue' | 'ftmBlue' | 'pink' | 'purple' | 'gradient' | 'gray' | 'default' | 'red' | 'green' | 'yellow'
 
 export type ButtonSize = 'xs' | 'sm' | 'lg' | 'default' | 'none' | 'nobase'
 
