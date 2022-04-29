@@ -1,7 +1,7 @@
 export enum ChainKey {
     // ARBITRUM = 'arbitrum',
     // ARBITRUM_TESTNET = 'arbitrum-testnet',
-    // AVALANCHE = 'avalanche',
+    AVALANCHE = 'avalanche',
     // AVALANCHE_TESTNET = 'avalance-testnet',
     BSC = 'bsc',
     // BSC_TESTNET = 'bsc-testnet',

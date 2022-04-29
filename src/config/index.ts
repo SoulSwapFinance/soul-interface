@@ -23,6 +23,10 @@ const config = {
     averageBlockTimeInSeconds: 1,
     underworld: { blacklistedTokens: [], blacklistedOracles: [] },
   },
+  [ChainId.AVALANCHE]: {
+    averageBlockTimeInSeconds: 2,
+    underworld: { blacklistedTokens: [], blacklistedOracles: [] },
+  },
   // [ChainId.MATIC]: {
   //   averageBlockTimeInSeconds: 13,
   //   underworld: { blacklistedTokens: ['0xC6d54D2f624bc83815b49d9c2203b1330B841cA0'], blacklistedOracles: [] },

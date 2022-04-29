@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 // import { useSoftwareWallet } from "./useSoftwareWallet";
 import { bridgeNetworks } from "../utils/bridge";
 import config from "config/configurations";
-import { switchToChain } from "utils/events";
+// import { switchToChain } from "utils/events";
 import { JsonRpcProvider } from "@ethersproject/providers";
 import { useActiveWeb3React } from "services/web3";
 // import { Wallet } from "@ethersproject/wallet";
@@ -24,7 +24,7 @@ const DEFAULT_PROVIDERS = {
 const useMultiChain = () => {
   const { account, chainId, library } = useActiveWeb3React()
   const provider = library.provider
-  const signer = library.getSigner()
+  // const signer = library.getSigner()
   // const { changeWalletProvider } = useSoftwareWallet();
   const [toChain, setToChain] = useState(null);
 

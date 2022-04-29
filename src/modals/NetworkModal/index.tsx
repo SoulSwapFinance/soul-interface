@@ -129,17 +129,17 @@ export const SUPPORTED_NETWORKS: {
   //   ],
   //   blockExplorerUrls: ['https://explorer.harmony.one/'],
   // },
-  // [ChainId.AVALANCHE]: {
-  //   chainId: '0xA86A',
-  //   chainName: 'Avalanche Mainnet C-Chain',
-  //   nativeCurrency: {
-  //     name: 'Avalanche Token',
-  //     symbol: 'AVAX',
-  //     decimals: 18,
-  //   },
-  //   rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
-  //   blockExplorerUrls: ['https://snowtrace.io'],
-  // },
+  [ChainId.AVALANCHE]: {
+    chainId: '0xA86A',
+    chainName: 'Avalanche Mainnet C-Chain',
+    nativeCurrency: {
+      name: 'Avalanche Token',
+      symbol: 'AVAX',
+      decimals: 18,
+    },
+    rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
+    blockExplorerUrls: ['https://snowtrace.io'],
+  },
   // [ChainId.OKEX]: {
   //   chainId: '0x42',
   //   chainName: 'OKEx',
@@ -224,9 +224,9 @@ const NetworkModal: FC = () => {
           {[
             ChainId.ETHEREUM,
             ChainId.FANTOM,
-            ChainId.TELOS,
+            // ChainId.TELOS,
             ChainId.BSC,
-            // ChainId.FANTOM_TESTNET,
+            ChainId.AVALANCHE,
           ].map((key: ChainId, i: number) => {
             if (chainId === key) {
               return (

@@ -9,4 +9,5 @@ export const GRAPH_HOST = {
   [ChainId.TELOS]: THE_GRAPH,
   [ChainId.FANTOM]: THE_GRAPH,
   [ChainId.BSC]: THE_GRAPH,
+  [ChainId.AVALANCHE]: THE_GRAPH,
 }

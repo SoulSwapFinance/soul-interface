@@ -44,6 +44,7 @@ export const getCurrencyLogoUrls = (currency): string[] => {
 const EthereumLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/eth.jpg'
 const FantomLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/ftm.jpg'
 const BinanceLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/ftm.jpg'
+const AvalancheLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/Avalanche.svg'
 const TelosLogo = '/images/natives/telos.png'
 
 const LOGO: Record<ChainId, string> = {
@@ -52,6 +53,7 @@ const LOGO: Record<ChainId, string> = {
   [ChainId.TELOS]: TelosLogo,
   [ChainId.FANTOM_TESTNET]: FantomLogo,
   [ChainId.BSC]: BinanceLogo,
+  [ChainId.AVALANCHE]: AvalancheLogo,
 }
 
 export const UNKNOWN_ICON = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/unknown.png'

@@ -19,7 +19,6 @@ const useBridge = () => {
       return loadContract(
         contractAddress,
         RouterABI,
-        // walletContext.activeWallet.signer
         signer
       );
     }
@@ -27,14 +26,12 @@ const useBridge = () => {
     return loadContract(
       contractAddress,
       BridgeABI,
-      // walletContext.activeWallet.signer
       signer
     );
   };
 
   const executeBridgeTransaction = async (callback: any) => {
     return send(
-      // walletContext.activeWallet.provider,
       provider,
       () => callback(),
       dispatch
@@ -49,7 +46,6 @@ const useBridge = () => {
     if (type === "swapOut") {
       console.info("[bridgeMethod] SwapOut");
       bridgeMethod = () =>
-        // bridgeContract.Swapout(amount, walletContext.activeWallet.address);
         bridgeContract.Swapout(amount, account);
     }
     if (type === "transfer") {
@@ -90,7 +86,6 @@ const useBridge = () => {
       bridgeMethod = () =>
         routerContract.anySwapOutNative(
           DepositAddress,
-          // walletContext.activeWallet.address,
           account,
           toChainId,
           { value: amount }
@@ -101,7 +96,6 @@ const useBridge = () => {
       bridgeMethod = () =>
         routerContract["anySwapOut(address,address,uint256,uint256)"](
           DepositAddress,
-          // walletContext.activeWallet.address,
           account,
           amount,
           toChainId
@@ -112,7 +106,6 @@ const useBridge = () => {
       bridgeMethod = () =>
         routerContract.anySwapOutUnderlying(
           DepositAddress,
-          // walletContext.activeWallet.address,
           account,
           amount,
           toChainId

@@ -56,7 +56,8 @@ function combineMaps(map1: TokenAddressMap, map2: TokenAddressMap): TokenAddress
     40: { ...map1[40], ...map2[40] }, // telos
     56: { ...map1[56], ...map2[56] }, // bsc
     250: { ...map1[250], ...map2[250] }, // fantom
-    4002: { ...map1[4002], ...map2[4002] } // fantom testnet
+    4002: { ...map1[4002], ...map2[4002] }, // fantom testnet
+    43114: { ...map1[43114], ...map2[43114] } // avalanche
   }
 }
 
