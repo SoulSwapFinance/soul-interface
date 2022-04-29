@@ -65,7 +65,7 @@ export const chainToNativeToken = {
           chainId: "0xfa", // A 0x-prefixed hexadecimal string
           chainName: "Fantom",
           nativeCurrency: chainToNativeToken[250],
-          rpcUrls: ["https://rpc.ftm.tools/"],
+          rpcUrls: ["https://rpc.ftm.tools"],
           blockExplorerUrls: ["https://ftmscan.com/"],
         };
       }
@@ -140,25 +140,25 @@ export const chainToNativeToken = {
     }
   
     try {
-    //   await window.ethereum.request({
-        await library?.send('wallet_switchEthereumChain',[{ chainId: networkDetails.chainId }])
-        // ({
-        // method: "wallet_switchEthereumChain",
-        // params: [{ chainId: networkDetails.chainId }],
-    //   });
-    } catch (switchError) {
-      // This error code indicates that the chain has not been added to MetaMask.
-      if (switchError.code === 4902) {
-        try {
-            await library?.send('wallet_addEthereumChain',[{ params: [networkDetails] }])
-        } catch (addError) {
-          console.error(addError);
-          // handle "add" error
+      //   await window.ethereum.request({
+          await library?.send('wallet_switchEthereumChain',[{ chainId: networkDetails.chainId }])
+          // ({
+          // method: "wallet_switchEthereumChain",
+          // params: [{ chainId: networkDetails.chainId }],
+      //   });
+      } catch (switchError) {
+        // This error code indicates that the chain has not been added to MetaMask.
+        if (switchError.code === 4902) {
+          try {
+              await library?.send('wallet_addEthereumChain',[{ params: [networkDetails] }])
+          } catch (addError) {
+            console.error(addError);
+            // handle "add" error
+          }
         }
+        console.error(switchError);
+        // handle other "switch" errors
       }
-      console.error(switchError);
-      // handle other "switch" errors
-    }
   };
   
   export const promptWeb3WalletUse = async () => {
@@ -171,16 +171,3 @@ export const chainToNativeToken = {
               }]
       }])
   };
-  
-  // export const requestWeb3Accounts = async () => {
-  //   const walletAddress = await window.ethereum.request({
-  //     method: "eth_requestAccounts",
-  //     params: [
-  //       {
-  //         eth_accounts: {},
-  //       },
-  //     ],
-  //   });
-  //
-  //   console.log(walletAddress);
-  // };

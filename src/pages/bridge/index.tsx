@@ -41,7 +41,6 @@ import { ArrowDownIcon } from "@heroicons/react/solid";
 import Image from 'next/image'
 import Typography from "components/Typography";
 import HeaderNew from "features/trade/HeaderNew";
-import { SwapLayoutCard } from "layouts/SwapLayout";
 import Container from "components/Container";
 import NavLink from "components/NavLink";
 
@@ -138,12 +137,10 @@ const ChainSelection: React.FC<any> = ({
 
   const getBalance = async (address: string, provider: any) => {
     if (address === AddressZero || !address) {
-      // return provider.getBalance(walletContext.activeWallet.address);
       return provider.getBalance(account);
     }
 
     const contract = await loadERC20Contract(address, provider);
-    // return contract.balanceOf(walletContext.activeWallet.address);
     return contract.balanceOf(account);
   };
 
@@ -223,17 +220,17 @@ const ChainSelection: React.FC<any> = ({
   };
 
 /* // TODO: RE-ENABLE // */
-  const handleSetToChain = (chainId: number) => {
-    // if (chainId !== 250) {
-      setFromChain(250);
-    // }
-    // if (chainId === fromChain) {
-      // setFromChain(chainId === 250 ? 1 : 250);
-    // }
-    // setToChain(chainId);
-    // TODO: DELETE BELOW //
-    setToChain(chainId == 250 ? 1 : chainId);
-  };
+const handleSetToChain = (chainId: number) => {
+  // if (chainId !== 250) {
+    setFromChain(250);
+  // }
+  // if (chainId === fromChain) {
+    // setFromChain(chainId === 250 ? 1 : 250);
+  // }
+  // setToChain(chainId);
+  // TODO: DELETE BELOW //
+  setToChain(chainId == 250 ? 1 : chainId);
+};
 
   const handleSwap = () => {
     const fromChainOld = fromChain;
@@ -245,7 +242,7 @@ const ChainSelection: React.FC<any> = ({
   return (
     <Column>
   {/* // TODO: RE-ENABLE // */}
-      {/* <div className="flex">
+      <div className="flex">
         <ChainSelector
           selected={fromChain}
           selectChain={handleSetFromChain}
@@ -257,7 +254,6 @@ const ChainSelection: React.FC<any> = ({
           <>
             <div className="ml-2" />
             <ButtonComponent
-              // style={{ textAlign: "start" }}
               variant="outlined"
               color="purple"
               onClick={() => forceSwap(fromChain)}
@@ -269,9 +265,9 @@ const ChainSelection: React.FC<any> = ({
             </ButtonComponent>
           </>
         )}
-      </div> */}
+      </div>
       <div />
-      {/* <Row style={{ justifyContent: "center", alignItems: "center" }}>
+      <Row style={{ justifyContent: "center", alignItems: "center" }}>
         <div style={{ height: "1px", width: "100%" }} />
           <OverlayButton style={{ padding: 0 }} onClick={handleSwap}>
               <AutoColumn justify="space-between" className="py-2 -my-4 py-4">
@@ -286,7 +282,7 @@ const ChainSelection: React.FC<any> = ({
                 </AutoColumn>
           </OverlayButton>
         <div style={{ height: "1px", width: "100%" }} />
-      </Row> */}
+      </Row>
       <div className="flex">
       <ChainSelector
         selected={toChain}
@@ -726,7 +722,6 @@ const Bridge: React.FC<any> = () => {
     let interval: any;
     if (bridgeTxHash && !interval) {
       const fetchStatus = () =>
-      //  TODO  //
         getTransactionStatus(bridgeTxHash)
           .then((response) => {
             if (!response?.data?.info) {
@@ -748,7 +743,6 @@ const Bridge: React.FC<any> = () => {
   return (
     <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
       <DoubleGlowShadowV2>
-      {/* <div id="bridge-page" className="w-full h-full max-w-2xl space-y-3 rounded bg-dark-1200 z-1"> */}
       <div className="p-4 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>          
         <div className="px-2">
 
