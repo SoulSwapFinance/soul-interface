@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Row from "../../components/Row";
 import {
   Button
@@ -15,7 +15,7 @@ import DropDownButton from "../../components/DropDownButton";
 import useBridgeApi from "../../hooks/useBridgeApi";
 import useMultiChain from "../../hooks/useMultiChain";
 import Modal from "./components/Modal";
-import ModalTitle from "./components/ModalTitle";
+// import ModalTitle from "./components/ModalTitle";
 import ModalContent from "./components/ModalContent";
 import Scrollbar from "../../components/Scrollbar";
 import useModal from "../../hooks/useModal";
@@ -741,10 +741,10 @@ const Bridge: React.FC<any> = () => {
 
   return (
     <>
-    <SwapLayoutCard />
+    {/* <SwapLayoutCard /> */}
     <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
       {/* <div id="bridge-page" className="w-full h-full max-w-2xl space-y-3 rounded bg-dark-1200 z-1"> */}
-      <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>          
+      <div className="p-4 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>          
         <div className="px-2">
 
     <HeaderNew />
@@ -794,7 +794,7 @@ const Bridge: React.FC<any> = () => {
         </ContentBox>
       )}
       <Row style={{ width: "100%", justifyContent: "center" }}>
-        <div className="flex mt-4 border border-dark-900 hover:border-dark-600 bg-dark-900 p-2 rounded w-full">
+        <div className="flex -4 border border-dark-900 hover:border-dark-600 bg-dark-900 p-2 rounded w-full">
           <Column style={{ width: "100%" }}>
             <div />
             <>
