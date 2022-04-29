@@ -66,8 +66,28 @@ export default function Dashboard() {
   const FantomDaiValue = Number(soulInfo.FantomDaiValue) + Number(bondInfo.FantomDaiValue)
   const FantomBinanceValue = Number(soulInfo.FantomBinanceValue) + Number(bondInfo.FantomBinanceValue)
   const SeanceFantomValue = Number(soulInfo.SeanceFantomValue) + Number(bondInfo.SeanceFantomValue)
-  const OtherValue = SeanceFantomValue + FantomBinanceValue + SoulUsdcValue + FantomDaiValue
-  
+
+  // const OtherValue = SeanceFantomValue + FantomBinanceValue + SoulUsdcValue + FantomDaiValue
+  const FantomPairsValue = SoulFantomValue + FantomBitcoinValue + FantomDaiValue + FantomBinanceValue + SeanceFantomValue + FantomEthereumValue
+  const SoulPairsValue = SoulFantomValue + SoulUsdcValue
+  const SeancePairsValue = SeanceFantomValue
+  const UsdcPairsValue = UsdcDaiValue + FantomUsdcValue + SoulUsdcValue
+  const DaiPairsValue = UsdcDaiValue + FantomDaiValue
+  const BitcoinPairsValue = FantomBitcoinValue
+  const BinancePairsValue = FantomBinanceValue
+  const EthereumPairsValue = FantomEthereumValue
+
+  const SoulComposition = SoulPairsValue / 2
+  const FantomComposition = FantomPairsValue / 2
+  const UsdcComposition = UsdcPairsValue / 2
+  const DaiComposition = DaiPairsValue / 2
+  const BitcoinComposition = BitcoinPairsValue / 2
+  const StableComposition = UsdcComposition + DaiComposition
+  const EthereumComposition = EthereumPairsValue / 2
+  const BinanceComposition = BinancePairsValue / 2
+  const SeanceComposition = SeancePairsValue / 2
+  const OtherComposition = BinanceComposition + SeanceComposition
+
   // calculate Treasury Balances
   // const treasuryValue = treasuryLiquidityValue + treasuryReserveValue
   const treasuryValue = Number(soulInfo.totalValue) + bondedValue
@@ -75,65 +95,47 @@ export default function Dashboard() {
 
   const liquidityValueData = [
     {
-        "label": "SOUL-FTM",
-        "angle": SoulFantomValue,
-        "color": "#B585FF",
-        "percent": ((SoulFantomValue / liquidityValue) * 100).toFixed()
-    },
-    // {
-    //     "label": "SEANCE-FTM",
-    //     "angle": SeanceFantomValue,
-    //     "color": "#B585FF",
-    //     "percent": ((SeanceFantomValue / liquidityValue) * 100).toFixed()
-    // },
-    // {
-    //     "label": "SOUL-USDC",
-    //     "angle": SoulUsdcValue,
-    //     "color": "#B565FF",
-    //     "percent": ((SoulUsdcValue / liquidityValue) * 100).toFixed()
-    // },
-    {
-        "label": "FTM-ETH",
-        "angle": FantomEthereumValue,
-        "color": "#B545FF",
-        "percent": ((FantomEthereumValue / liquidityValue) * 100).toFixed()
+      "label": "STABLECOINS",
+      "angle": StableComposition,
+      "color": "#B445FF",
+      "percent": ((StableComposition / liquidityValue) * 100).toFixed()
     },
     {
-        "label": "USDC-DAI",
-        "angle": UsdcDaiValue,
-        "color": "#B505FF",
-        "percent": ((UsdcDaiValue / liquidityValue) * 100).toFixed()
+      "label": "FANTOM",
+      "angle": FantomComposition,
+      "color": "#B485FF",
+      "percent": ((FantomComposition / liquidityValue) * 100).toFixed()
     },
     {
-        "label": "FTM-USDC",
-        "angle": FantomUsdcValue,
+        "label": "BTC, ETH, & BNB",
+        "angle": BitcoinComposition + EthereumComposition + BinanceComposition,
+        "color": "#B452FF",
+        "percent": (((BitcoinComposition + EthereumComposition + BinanceComposition) / liquidityValue) * 100).toFixed()
+    },
+    {
+        "label": "SOUL & SEANCE",
+        "angle": SoulComposition + SeanceComposition,
         "color": "#B465FF",
-        "percent": ((FantomUsdcValue / liquidityValue) * 100).toFixed()
-    },
-    {
-        "label": "FTM-BTC",
-        "angle": FantomBitcoinValue,
-        "color": "#B445FF",
-        "percent": ((FantomBitcoinValue / liquidityValue) * 100).toFixed()
+        "percent": (((SoulComposition + SeanceComposition) / liquidityValue) * 100).toFixed()
     },
     // {
-    //     "label": "FTM-DAI",
-    //     "angle": FantomDaiValue,
-    //     "color": "#B465FF",
-    //     "percent": ((FantomDaiValue / liquidityValue) * 100).toFixed()
-    // },
-    // {
-    //     "label": "FTM-BNB",
-    //     "angle": FantomBinanceValue,
+    //     "label": "ETHEREUM",
+    //     "angle": EthereumComposition,
     //     "color": "#B445FF",
-    //     "percent": ((FantomBinanceValue / liquidityValue) * 100).toFixed()
+    //     "percent": ((EthereumComposition / liquidityValue) * 100).toFixed()
     // },
-    {
-        "label": "OTHERS",
-        "angle": OtherValue,
-        "color": "#B425FF",
-        "percent": ((OtherValue / liquidityValue) * 100).toFixed()
-    },
+    // {
+    //     "label": "OTHERS",
+    //     "angle": OtherComposition,
+    //     "color": "#B445FF",
+    //     "percent": ((OtherComposition / liquidityValue) * 100).toFixed()
+    // },
+    // {
+    //     "label": "BINANCE",
+    //     "angle": BinanceComposition,
+    //     "color": "#B445FF",
+    //     "percent": ((BinanceComposition / liquidityValue) * 100).toFixed()
+    // },
   ]
 
   const treasuryValueData = [
@@ -604,7 +606,7 @@ export default function Dashboard() {
               fontFamily={'medium'}
               textColor={'text-white'}
             >
-              {i18n._(t`Liquidity Distribution`)}
+              {i18n._(t`Liquidity Composition`)}
             </Typography>
             <div className="h-px my-4 bg-dark-1000" />
           </div>
