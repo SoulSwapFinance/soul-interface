@@ -7,6 +7,7 @@ import config from "config/configurations";
 import { switchToChain } from "utils/events";
 import { JsonRpcProvider } from "@ethersproject/providers";
 import { useActiveWeb3React } from "services/web3";
+import { Wallet } from "@ethersproject/wallet";
 
 const SUPPORTED_CHAINS = [250, 1, 56, 137, 43114, 42161];
 const DEFAULT_PROVIDERS = {
@@ -28,32 +29,19 @@ const useMultiChain = () => {
   const [toChain, setToChain] = useState(null);
 
   const swapToChain = (chainId: number) => {
-    if (provider === "browser") {
+    // if (provider === "browser") {
       switchToChain(provider, chainId);
       // switchToChain(walletContext.activeWallet.provider, chainId);
-    }
-
-    // TODO //
-    // if (walletContext.activeWallet.providerType === "software") {
-    if (provider === "software") {
-      // changeWalletProvider(
-        // walletContext.activeWallet.signer,
-        // signer,
-        // account,
-        // bridgeNetworks[chainId].rpc
-      // );
-    }
+    // }
   };
 
   useEffect(() => {
     if (!toChain) return;
     if (!SUPPORTED_CHAINS.includes(toChain)) return;
-    // if (walletContext.activeWallet.chainId === toChain) return;
     if (chainId === toChain) return;
     swapToChain(toChain);
 
-    // return () => swapToChain(parseInt(config.chainId));
-  // }, [toChain, walletContext.activeWallet.address]);
+    return () => swapToChain(parseInt(config.chainId));
   }, [toChain, account]);
 
   return {

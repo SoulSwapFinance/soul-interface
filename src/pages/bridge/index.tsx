@@ -564,7 +564,7 @@ const BridgeTokenList: React.FC<any> = ({
           </Typography>
           <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
           {token && fromTokenBalance
-            ? ` ${weiToUnit(fromTokenBalance, token.DecimalsFrom) + ' ' + token.symbol}`
+            ? ` ${weiToUnit(fromTokenBalance, token.Decimals) + ' ' + token.symbol}`
             : "-"}
           </Typography>
       </div>
@@ -586,7 +586,7 @@ const Bridge: React.FC<any> = () => {
   const { chainId, account, connector, deactivate, library } = useActiveWeb3React()
   const { setToChain: connectToChain } = useMultiChain();
   const { bridgeStableMethod, bridgeNativeMethod, bridgeMethod } = useBridge();
-  // const { getTransactionStatus } = useBridgeApi();
+  const { getTransactionStatus } = useBridgeApi();
   // const { transaction } = useTransaction();
   const { approve, getAllowance } = useFantomERC20();
   const [tokenList, setTokenList] = useState(null);
@@ -727,14 +727,14 @@ const Bridge: React.FC<any> = () => {
     if (bridgeTxHash && !interval) {
       const fetchStatus = () =>
       //  TODO  //
-        // getTransactionStatus(bridgeTxHash)
-        //   .then((response) => {
-        //     if (!response?.data?.info) {
-        //       return;
-        //     }
-        //     return setBridgeStatus(response.data.info.status);
-        //   })
-        //   .catch((err) => console.error(err));
+        getTransactionStatus(bridgeTxHash)
+          .then((response) => {
+            if (!response?.data?.info) {
+              return;
+            }
+            return setBridgeStatus(response.data.info.status);
+          })
+          .catch((err) => console.error(err));
 
       interval = setInterval(() => fetchStatus(), 10_000);
     }
@@ -787,7 +787,6 @@ const Bridge: React.FC<any> = () => {
                 {transactionStatusMapping[bridgeStatus] || "Unknown"}
               </Typo2>
             )}
-            {/* <Spacer size="sm" /> */}
             <div />
             <OverlayButton
               style={{ padding: 0 }}
@@ -885,7 +884,7 @@ const Bridge: React.FC<any> = () => {
 
               </div>
               <div className="mt-8" />
-              {isApproved ? (
+              {isApproved && (
 
                 <ButtonComponent
                   disabled={inputError ||
@@ -899,15 +898,16 @@ const Bridge: React.FC<any> = () => {
                     ? "Broadcasting Transaction"
                     : "Bridge Token"}
                 </ButtonComponent>
-              ) : (
-                <Button variant="primary" onClick={handleApproveToken}>
-                  {isApprovePending
-                    ? "Approving"
-                    : isApproveCompleted
-                      ? "Approve successful"
-                      : "Approve Token"}
-                </Button>
               )}
+              
+              <ButtonComponent variant="filled" color="blue" onClick={handleApproveToken} className="mt-2">
+                {isApprovePending
+                  ? "Approving"
+                  : isApproveCompleted
+                    ? "Approve successful"
+                    : "Approve Token"}
+              </ButtonComponent>
+            
               <div className="mt-4" />
             </>
           </Column>
