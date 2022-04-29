@@ -53,7 +53,6 @@ export default function Stablecoin() {
 
   const daiToken = new Token(250, getAddress(DAI_ADDRESS[250]), 18, 'DAI')
   const sorToken = new Token(250, getAddress(SOR_ADDRESS[250]), 18, 'SOR')
-  // const sorMasterContract = useSorMasterContract()
   const stakeClaimAmount = useStakeClaimAmount(sorToken)
   const redeemClaimAmount = useRedeemClaimAmount(sorToken)
 
