@@ -209,7 +209,7 @@ export const Row = ({ farm, lpToken }) => {
         <div className="flex justify-center w-xl">
 
                 <LendContainer>
-                    <div className={classNames("bg-dark-1200 p-3 border hover:border-blue", assetBalance == 0 && "border-dark-1000",
+                    <div className={classNames("bg-dark-800 p-4 rounded border hover:border-purple", assetBalance == 0 && "border-dark-1000",
                             assetBalance > 0 && "border-blue"
                     )}
                         onClick={() => handleShowOptions()}
