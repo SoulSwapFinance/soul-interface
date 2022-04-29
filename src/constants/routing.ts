@@ -49,7 +49,9 @@ const WRAPPED_NATIVE_ONLY: ChainTokenList = {
    [ChainId.BSC]: [WNATIVE[ChainId.BSC]],
   [ChainId.FANTOM]: [WNATIVE[ChainId.FANTOM]],
   [ChainId.FANTOM_TESTNET]: [WNATIVE[ChainId.FANTOM_TESTNET]],
-  [ChainId.AVALANCHE]: [WNATIVE[ChainId.AVALANCHE]]
+  [ChainId.AVALANCHE]: [WNATIVE[ChainId.AVALANCHE]],
+  [ChainId.MATIC]: [WNATIVE[ChainId.MATIC]],
+  [ChainId.ARBITRUM]: [WNATIVE[ChainId.ARBITRUM]],
 }
 
 // used to construct intermediary pairs for trading
@@ -140,6 +142,12 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
 export const COMMON_BASES: ChainTokenList = {
   [ChainId.ETHEREUM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.ETHEREUM], 
+  ],
+  [ChainId.MATIC]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.MATIC], 
+  ],
+  [ChainId.ARBITRUM]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.ARBITRUM], 
   ],
   [ChainId.TELOS]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.TELOS], 

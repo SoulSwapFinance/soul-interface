@@ -8,6 +8,7 @@ const MULTICALL_NETWORKS: { [chainId in ChainId]: string } = {
   [ChainId.FANTOM]: '0xf682Cc4468608fC4eFbaD6a06D9BC72e7790075a', // 28 AUG
   [ChainId.FANTOM_TESTNET]: '0xef9777827a3581b64f5c7CB8954ccaE3cc2c46C0', // 7 JUL
   [ChainId.AVALANCHE]: undefined,
-}
+  [ChainId.MATIC]: undefined,
+  [ChainId.ARBITRUM]: undefined,}
 
 export { MULTICALL_ABI, MULTICALL_NETWORKS }

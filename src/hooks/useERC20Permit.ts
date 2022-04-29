@@ -66,6 +66,12 @@ const PERMITTABLE_TOKENS: {
   [43114]: {
     [USDC_ADDRESS[43114]]: { type: PermitType.AMOUNT, name: 'USD Coin' },
   },
+  [137]: {
+    // [USDC_ADDRESS[137]]: { type: PermitType.AMOUNT, name: 'USD Coin' },
+  },
+  [42161]: {
+    // [USDC_ADDRESS[42161]]: { type: PermitType.AMOUNT, name: 'USD Coin' },
+  },
 }
 
 export enum UseERC20PermitState {

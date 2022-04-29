@@ -44,6 +44,7 @@ module.exports = {
         // blue: '#0993ec',
         blue: '#1D5AFF',
         ftmBlue: '#11B5EC',
+        arbitrumBlue: '#4698FA',
         pink: '#f338c3',
         green: '#7cff6b',
         red: '#ff3838',
