@@ -4,6 +4,7 @@ const DAI = '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E'
 const LUX = '0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'
 const SOR = '0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A'
 const FTM = '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'
+const FTM_SOR = '0xdfB2218b48627794711E6cFd72e26c541E456F6F'
 const LUX_DAI = '0x46729c2AeeabE7774a0E710867df80a6E19Ef851'
 const LUX_FTM = '0x951BBB838e49F7081072895947735b0892cCcbCD'
 const LUX_SOR = '0x622E69B6785311800B0d55D72fF27D91F5518212'
@@ -158,37 +159,9 @@ export const AllBonds = [
     term: '4W',
   },
 
-  // 5 DAY | LIVE BONDS
-
-  {
-    pid: 16,
-    bondAddress: '0xF584E92F891e2BCF78Eb7B49D929eae48c2d8B6A',
-    assetName: 'LUX-SOR',
-    assetAddress: LUX_SOR,
-    token1Address: LUX,
-    token2Address: SOR,
-    term: '5D',
-  },
-  {
-    pid: 17,
-    bondAddress: '0x4Ac427a4DFF61023c2e84d8316180CF109c5e45C',
-    assetName: 'SOR',
-    assetAddress: SOR,
-    token1Address: SOR,
-    term: '5D',
-  },
-  {
-    pid: 18,
-    bondAddress: '0x2b4ecB35Aa2a5C163675E1b66577E127C38eb911',
-    assetName: 'WFTM',
-    assetAddress: FTM,
-    token1Address: FTM,
-    term: '5D',
-  },
-  
   // 10 DAY | INACTIVE BONDS
   {
-    pid: 19,
+    pid: 16,
     bondAddress: '0xDAF7fE4Db56d8D2080bc8FDd4Ca9F60B2931993B',
     assetName: 'LUX-SOR',
     assetAddress: LUX_SOR,
@@ -197,9 +170,46 @@ export const AllBonds = [
     term: '10D',
   },
 
+  // 5 DAY | LIVE BONDS
+
+  {
+    pid: 17,
+    bondAddress: '0xF584E92F891e2BCF78Eb7B49D929eae48c2d8B6A',
+    assetName: 'LUX-SOR',
+    assetAddress: LUX_SOR,
+    token1Address: LUX,
+    token2Address: SOR,
+    term: '5D',
+  },
+  {
+    pid: 18,
+    bondAddress: '',
+    assetName: 'FTM-SOR',
+    assetAddress: FTM_SOR,
+    token1Address: FTM,
+    token2Address: SOR,
+    term: '5D',
+  },
+  {
+    pid: 19,
+    bondAddress: '0x4Ac427a4DFF61023c2e84d8316180CF109c5e45C',
+    assetName: 'SOR',
+    assetAddress: SOR,
+    token1Address: SOR,
+    term: '5D',
+  },
+  {
+    pid: 20,
+    bondAddress: '0x2b4ecB35Aa2a5C163675E1b66577E127C38eb911',
+    assetName: 'WFTM',
+    assetAddress: FTM,
+    token1Address: FTM,
+    term: '5D',
+  },
+
   // 10 DAY | ACTIVE BONDS
   {
-  pid: 20,
+  pid: 21,
   bondAddress: '0x5b76bE108A44169928cFddFCdE549ab6Af194429',
   assetName: 'SOR',
   assetAddress: SOR,
@@ -207,7 +217,7 @@ export const AllBonds = [
   term: '10D',
   },
   {
-  pid: 21,
+  pid: 22,
   bondAddress: '0x48F524CDDDC0E2CaC75E2988bDde773b2F9A0AA9',
   assetName: 'WFTM',
   assetAddress: FTM,
@@ -215,7 +225,7 @@ export const AllBonds = [
   term: '10D',
   },
   {
-  pid: 22,
+  pid: 23,
   bondAddress: '0xf9a0fA495e0CfaFE40CAb1bDC307f6Fc24889d51',
   assetName: 'LUX-SOR',
   assetAddress: LUX_SOR,
