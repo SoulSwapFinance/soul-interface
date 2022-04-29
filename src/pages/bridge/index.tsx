@@ -752,7 +752,7 @@ const Bridge: React.FC<any> = () => {
       {bridgeTxHash && (
         <ContentBox
           style={{
-            background: "#b365ff",
+            background: "#821fff",
             color: "white",
             fontFamily: "proxima-nova, sans-serif",
             borderRadius: "8px",
