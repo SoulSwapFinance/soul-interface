@@ -10,6 +10,7 @@ import {
   Token,
   Trade as V2Trade,
   TradeType,
+  USDC_ADDRESS,
 } from 'sdk'
 import { DAI, USDC } from 'config/tokens'
 import { useActiveWeb3React } from 'services/web3'
@@ -61,6 +62,9 @@ const PERMITTABLE_TOKENS: {
   },
   [4002]: {
     [SOUL_ADDRESS[4002]]: { type: PermitType.AMOUNT, name: 'Soul Power' },
+  },
+  [43114]: {
+    [USDC_ADDRESS[43114]]: { type: PermitType.AMOUNT, name: 'USD Coin' },
   },
 }
 
