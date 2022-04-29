@@ -66,11 +66,11 @@ const OUTLINED = {
 }
 
 const BORDERED = {
-  default: 'border border-transparent hover:border-purple bg-purple bg-opacity-40 outline-purple rounded text-purple hover:bg-opacity-40 disabled:bg-opacity-20',
-  blue: 'border border-transparent hover:border-blue bg-blue bg-opacity-40 outline-blue rounded text-blue hover:bg-opacity-40 disabled:bg-opacity-20',
-  deepPurple: 'border border-transparent hover:border-deepPurple bg-deepPurple bg-opacity-40 outline-deepPurple rounded text-deepPurple hover:bg-opacity-40 disabled:bg-opacity-20',
-  purple: 'border border-transparent hover:border-purple bg-purple bg-opacity-40 outline-purple rounded text-purple hover:bg-opacity-40 disabled:bg-opacity-20',
-  yellow: 'border border-transparent hover:border-yellow bg-yellow bg-opacity-40 outline-yellow rounded text-yellow hover:bg-opacity-40 disabled:bg-opacity-20',
+  default: 'border w-full border-transparent hover:border-purple bg-purple bg-opacity-40 outline-purple rounded text-purple hover:bg-opacity-40 disabled:bg-opacity-20',
+  blue: 'border w-full border-transparent hover:border-blue bg-blue bg-opacity-40 outline-blue rounded text-blue hover:bg-opacity-40 disabled:bg-opacity-20',
+  deepPurple: 'border w-full border-transparent hover:border-deepPurple bg-deepPurple bg-opacity-40 outline-deepPurple rounded text-deepPurple hover:bg-opacity-40 disabled:bg-opacity-20',
+  purple: 'border w-full border-transparent hover:border-purple bg-purple bg-opacity-40 outline-purple rounded text-purple hover:bg-opacity-40 disabled:bg-opacity-20',
+  yellow: 'border w-full border-transparent hover:border-yellow bg-yellow bg-opacity-40 outline-yellow rounded text-yellow hover:bg-opacity-40 disabled:bg-opacity-20',
 }
 
 const EMPTY = {
