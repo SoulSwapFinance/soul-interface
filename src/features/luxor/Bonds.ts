@@ -208,6 +208,14 @@ export const AllBonds = [
   },
   {
   pid: 21,
+  bondAddress: '0x48F524CDDDC0E2CaC75E2988bDde773b2F9A0AA9',
+  assetName: 'WFTM',
+  assetAddress: FTM,
+  token1Address: FTM,
+  term: '10D',
+  },
+  {
+  pid: 22,
   bondAddress: '0xf9a0fA495e0CfaFE40CAb1bDC307f6Fc24889d51',
   assetName: 'LUX-SOR',
   assetAddress: LUX_SOR,

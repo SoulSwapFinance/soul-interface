@@ -667,12 +667,25 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     <><Modal isOpen={showDefaultConfirmation} onDismiss={() => setShowDefaultConfirmation(false)}>
                     <div className="space-y-4">
                         <ModalHeader header={`Do you still wish to proceed?`} onClose={() => setShowDefaultConfirmation(false)} />
-                        <Typography variant="lg">
+                        {/* <Typography variant="lg">
                             Given estimates are NOT guarantees. Bond at your own risk. 
                             <br /><br />
                             Please verify with your own calculations before confirming.
                             <br/> <br/>We're only accountable for contract accuracy, however we will  <i>still do our best</i> on the interface.
-                        </Typography>
+                        </Typography> */}
+                                  <Typography variant="sm">
+            <div className="text-xl mt-4 mb-4 text-center border p-1.5 border-yellow">
+                Estimated Outcomes
+            </div>
+            • <b>Deposit Value</b>: ${Number(Number(assetPrice) * Number(depositValue)).toFixed(0)} <br/>
+            • <b>Claim Amount</b>: {Number(Number(depositValue) * Number(assetPrice) * 0.95 / Number(bondPrice)).toFixed(0) } LUX
+
+            <div className="mt-6 text-center">
+            <i><b>Please do not rely on our estimations</b></i>.
+            </div>
+
+            {/* <b>100% of the fee</b> goes towards building our protocol-owned liquidity, which brings about long-term sustainability to our platform. */}
+          </Typography>
                         <Typography variant="sm" className="font-medium">
                             QUESTIONS OR CONCERNS?
                             <a href="mailto:soulswapfinance@gmail.com">
