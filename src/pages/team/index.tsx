@@ -50,7 +50,7 @@ export default function Team() {
   /**
    * Runs only on initial render/mount
    */
-   useEffect(() => {
+  useEffect(() => {
     fetchBals()
   }, [])
 
@@ -66,18 +66,18 @@ export default function Team() {
     }
   })
 
-    const fetchBals = async () => {
-        try {
-            const bal = await TeamContract.userBalance(0)
-            const unclaimedBal = bal / 1e18
-            console.log('unclaimedBal:%s', Number(unclaimedBal))
-            setUnclaimedBalance(unclaimedBal)
+  const fetchBals = async () => {
+    try {
+      const bal = await TeamContract.userBalance(0)
+      const unclaimedBal = bal / 1e18
+      console.log('unclaimedBal:%s', Number(unclaimedBal))
+      setUnclaimedBalance(unclaimedBal)
 
-          return [unclaimedBal]
-        } catch (err) {
-            console.warn(err)
-        }
+      return [unclaimedBal]
+    } catch (err) {
+      console.warn(err)
     }
+  }
 
   return (
     <Container id="claims-page" className="py-4 md:py-8 lg:py-12 m-auto w-full max-w-[900px]">
@@ -92,22 +92,10 @@ export default function Team() {
               <div className="flex flex-row justify-center">
                 <div className="font-bold text-center text-white">{i18n._(t`Claimable SOUL`)}</div>
               </div>
-              {/* <div style={{ display: 'flex', alignItems: 'baseline' }}> */}
               <div className="flex text-center justify-center items-baseline">
                 <div className="flext font-bold text-white text-center justify-center text-[24px]">
-                  { unclaimedBalance.toFixed(2) }
+                  {formatNumber(unclaimedBalance.toFixed(2), false, true)}
                 </div>
-                {/* {account ? (
-                  <div className="text-sm text-secondary">
-                    {unclaimedBalance ? (
-                      i18n._(t`Allocated: ${formatNumber(unclaimedBalance)} SOUL`)
-                    ) : (
-                      <Dots>{i18n._(t`Claimable: Fetching Claimable Amount`)}</Dots>
-                    )}
-                  </div>
-                ) : (
-                  <div className="text-sm text-secondary">{i18n._(t`Total Locked: Connect Wallet`)}</div>
-                )} */}
               </div>
 
               <Button
@@ -117,8 +105,8 @@ export default function Team() {
                 className="inline-flex items-center justify-center"
               >
                 {
-                // claimConfirmed ? i18n._(t`Claimed`) : 
-                i18n._(t`Claim SOUL`)
+                  // claimConfirmed ? i18n._(t`Claimed`) : 
+                  i18n._(t`Claim SOUL`)
                 }
                 {attempting && (
                   <Loader
@@ -130,9 +118,39 @@ export default function Team() {
                 )}
               </Button>
             </div>
+            {/* <div className="flex flex-col gap-3 p-4">
+              <div className="flex flex-row justify-center">
+                <div className="font-bold text-center text-white">{i18n._(t`Claimable SOUL`)}</div>
+              </div>
+              <div className="flex text-center justify-center items-baseline">
+                <div className="flext font-bold text-white text-center justify-center text-[24px]">
+                  {formatNumber(unclaimedBalance.toFixed(2), false, true)}
+                </div>
+              </div>
+
+              <Button
+                color="gradient"
+                size="sm"
+                onClick={onClaim}
+                className="inline-flex items-center justify-center"
+              >
+                {
+                  // claimConfirmed ? i18n._(t`Claimed`) : 
+                  i18n._(t`Claim SOUL`)
+                }
+                {attempting && (
+                  <Loader
+                    stroke="white"
+                    style={{
+                      marginLeft: '10px',
+                    }}
+                  />
+                )}
+              </Button>
+            </div> */}
           </div>
-          </div>
-          </div>
-          </Container>
-          )
-        }
+        </div>
+      </div>
+    </Container>
+  )
+}
