@@ -394,7 +394,6 @@ const BridgeTokenSelectModal: React.FC<any> = ({
       onDismiss={onDismiss}
     >
       <ModalTitle text="Select Token" />
-      {/* <Spacer /> */}
       <div />
       <ModalContent style={{ padding: "16px 0px" }}>
         <Column>
@@ -538,7 +537,8 @@ const BridgeTokenList: React.FC<any> = ({
   }, [token, account, isBridgeTxCompleted]); // walletContext.activeWallet.address
 
   return (
-    <Column>
+    // <Column>
+    <div className="grid justify-center">
       <Row style={{ gap: "1rem" }}>
         <div className="my-1" />
         {/* <Typo2 style={{ flex: 1, color: "#84888d" }}>{"Token to Bridge"}</Typo2> */}
@@ -546,13 +546,12 @@ const BridgeTokenList: React.FC<any> = ({
           {inputError ? (
             <InputError error={inputError} fontSize="14px" />
           ) : (
-            // <Spacer />
             <div />
           )}
         </Row>
       </Row>
       <div />
-      <div className="sm:hidden ml-24 mr-24">
+      <div className="hidden sm:flex">
       <Row style={{ gap: ".1rem" }}>
         <TokenSelector
           tokens={tokenList}
@@ -574,14 +573,14 @@ const BridgeTokenList: React.FC<any> = ({
         </div>
       </Row>
       </div>
-      <div className="hidden sm:grid">
-      <Row style={{ gap: "1rem" }}>
+      <div className="flex sm:hidden">
+      <div className="my-2">
         <TokenSelector
           tokens={tokenList}
           selected={token}
           selectToken={handleSetToken}
         />
-        <div style={{ flex: 2 }}>
+        <div style={{ flex: 2 }} className="mt-2">
           <InputCurrencyBox
             disabled={!token}
             value={amount}
@@ -594,39 +593,36 @@ const BridgeTokenList: React.FC<any> = ({
             variant="new"
           />
         </div>
-      </Row>
       </div>
-      {/* <Spacer /> */}
+      </div>
       <div className="my-2" />
-      {/* <Row style={{ justifyContent: "space-between" }}>
+      <div className="flex flex-row">
         <Typo2 style={{ color: "white" }}>
           {chainToNetworkInfoMap[fromChain].name}
         </Typo2>
         <Row>
           <Typo2>
             {token && fromTokenBalance
-              ? weiToUnit(fromTokenBalance, token.Decimals)
+              ? ` ${': '} ${weiToUnit(fromTokenBalance, token.DecimalsFrom)}`
               : "-"}
           </Typo2>
-          <Spacer />
           <div />
         </Row>
-      </Row> */}
-      {/* <Row style={{ justifyContent: "space-between" }}>
+      </div>
+      <div className="flex flex-row">
         <Typo2 style={{ color: "white" }}>
           {chainToNetworkInfoMap[toChain].name}
         </Typo2>
         <Row>
           <Typo2>
             {token && toTokenBalance
-              ? weiToUnit(toTokenBalance, token.DecimalsTo)
+              ? ` ${': '} ${weiToUnit(toTokenBalance, token.DecimalsTo)}`
               : "-"}
           </Typo2>
-          <Spacer />
           <div />
         </Row>
-      </Row> */}
-    </Column>
+      </div>
+     </div>
   );
 };
 
@@ -750,7 +746,6 @@ const Bridge: React.FC<any> = () => {
   }, [fromChain]);
 
   useEffect(() => {
-    // if (walletContext.activeWallet.chainId !== fromChain) {
     if (chainId !== fromChain) {
       return;
     }
@@ -770,7 +765,7 @@ const Bridge: React.FC<any> = () => {
       );
     }
     return setIsApproved(true);
-  }, [selectedToken, isApproveCompleted, chainId]); // walletContext.activeWallet.chainId
+  }, [selectedToken, isApproveCompleted, chainId]);
 
   useEffect(() => {
     let interval: any;
@@ -800,7 +795,7 @@ const Bridge: React.FC<any> = () => {
       {bridgeTxHash && (
         <ContentBox
           style={{
-            background: "blue",
+            background: "#b365ff",
             color: "white",
             fontFamily: "proxima-nova, sans-serif",
             borderRadius: "8px",
@@ -812,7 +807,7 @@ const Bridge: React.FC<any> = () => {
           }}
         >
           <Column style={{}}>
-            <Typo2 style={{ fontWeight: "bold" }}>Bridge transaction</Typo2>
+            <Typo2 style={{ fontWeight: "bold" }}>Bridge Transaction</Typo2>
             {/* <Spacer size="xs" /> */}
             <div />
             <Typo2>
@@ -964,7 +959,7 @@ const Bridge: React.FC<any> = () => {
                   </Column>
                 </ContentBox>
                 </div>
-                <div className="hidden sm:grid">
+              <div className="hidden sm:grid">
                 <ContentBox
                   style={{
                     backgroundColor: "black",
@@ -1037,17 +1032,18 @@ const Bridge: React.FC<any> = () => {
                     </Row>
                   </Column>
                 </ContentBox>
-                <div />
+              </div>
+              <div className="flex justify-center" >
                 <Typo3>
                   {selectedToken
-                    ? `* Amounts greater than ${formatSimpleValue(
+                    ? `*Amounts above ${formatSimpleValue(
                         selectedToken.BigValueThreshold
-                      )} ${selectedToken.symbol} could
-                  take up to 12 hours`
+                      )} ${selectedToken.symbol} take up to 12 hours.`
                     : ""}
                 </Typo3>
+              </div>
                 <div />
-                {isApproved ? (
+                { isApproved ? (
                   <Button
                     disabled={
                       inputError ||
@@ -1070,8 +1066,7 @@ const Bridge: React.FC<any> = () => {
                       ? "Approve successful"
                       : "Approve Token"}
                   </Button>
-                )}
-          </div>
+                ) }
               </>
           </Column>
         </ContentBox>
