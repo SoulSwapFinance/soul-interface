@@ -3,6 +3,7 @@ import Row from "../../components/Row";
 import {
   Button
 } from "components/index";
+import { Button as ButtonComponent } from 'components/Button'
 import Column, { AutoColumn } from "../../components/Column";
 import styled, { ThemeContext } from "styled-components";
 // import Spacer from "../../components/Spacer";
@@ -252,17 +253,16 @@ const ChainSelection: React.FC<any> = ({
       {/* {walletContext.activeWallet.chainId !== fromChain && ( */}
       {chainId !== fromChain && (
         <>
-          {/* <Spacer size="xs" /> */}
-          <div />
-          <OverlayButton
+          <div className="ml-2" />
+          <Button
             style={{ textAlign: "start" }}
             onClick={() => forceSwap(fromChain)}
           >
             <InputError
-              error={"Please switch your web3 wallet to use the above chain"}
+              error={`Switch to ${fromChain}`}
               fontSize="18px"
             />
-          </OverlayButton>
+          </Button>
         </>
       )}
       </div>
@@ -278,17 +278,21 @@ const ChainSelection: React.FC<any> = ({
       {/* {walletContext.activeWallet.chainId !== fromChain && ( */}
       {chainId !== fromChain && (
         <>
-          {/* <Spacer size="xs" /> */}
-          <div />
-          <OverlayButton
-            style={{ textAlign: "start" }}
+          <div className="ml-2" />
+          <ButtonComponent
+            // style={{ textAlign: "start" }}
+            variant="outlined"
+            color="purple"
             onClick={() => forceSwap(fromChain)}
           >
-            <InputError
-              error={"Please switch your web3 wallet to use the above chain"}
+            <div className="ml-2 mr-2 text-white font-bold">
+              {`${fromChain}`}
+            </div>
+            {/* <InputError
+              error={`${fromChain}`}
               fontSize="18px"
-            />
-          </OverlayButton>
+            /> */}
+          </ButtonComponent>
         </>
       )}
       </div>
@@ -970,7 +974,7 @@ const Bridge: React.FC<any> = () => {
                   <Column style={{ width: "100%", gap: ".5rem" }}>
                     <Row style={{ justifyContent: "space-between" }}>
                       <Typo2 style={{ color: "#84888d" }}>
-                        Current Range
+                        Range
                       </Typo2>
                       
                       <Typo2>
@@ -985,7 +989,7 @@ const Bridge: React.FC<any> = () => {
                     </Row>
                     <Row style={{ justifyContent: "space-between" }}>
                       <Typo2 style={{ color: "#84888d" }}>
-                        Max Amount
+                        Maximum
                       </Typo2>
                       <Typo2
                         style={{
@@ -1004,7 +1008,7 @@ const Bridge: React.FC<any> = () => {
                     </Row>
                     <Row style={{ justifyContent: "space-between" }}>
                       <Typo2 style={{ color: "#84888d" }}>
-                        Min Amount
+                        Minimum
                       </Typo2>
                       <Typo2
                         style={{
@@ -1022,9 +1026,9 @@ const Bridge: React.FC<any> = () => {
                       </Typo2>
                     </Row>
                     <Row style={{ justifyContent: "space-between" }}>
-                      <Typo2 style={{ color: "#84888d" }}>Minimum fee</Typo2>
+                      <Typo2 style={{ color: "#84888d" }}>Fee</Typo2>
                       <Typo2>
-                        {selectedToken
+                        {'~'} {selectedToken
                           ? `${formatSimpleValue(
                               selectedToken.MinimumSwapFee
                             )} ${selectedToken.symbol}`
@@ -1033,7 +1037,6 @@ const Bridge: React.FC<any> = () => {
                     </Row>
                   </Column>
                 </ContentBox>
-                {/* <Spacer /> */}
                 <div />
                 <Typo3>
                   {selectedToken
@@ -1043,7 +1046,6 @@ const Bridge: React.FC<any> = () => {
                   take up to 12 hours`
                     : ""}
                 </Typo3>
-                {/* <Spacer /> */}
                 <div />
                 {isApproved ? (
                   <Button
@@ -1057,7 +1059,7 @@ const Bridge: React.FC<any> = () => {
                     onClick={handleBridgeAction}
                   >
                     {isBridgeTxPending
-                      ? "Broadcasting transaction"
+                      ? "Broadcasting Transaction"
                       : "Bridge Token"}
                   </Button>
                 ) : (
@@ -1071,11 +1073,9 @@ const Bridge: React.FC<any> = () => {
                 )}
           </div>
               </>
-            {/* )} */}
           </Column>
         </ContentBox>
       </Row>
-      {/* <Spacer /> */}
       <div />
     </FadeInOut>
   );
