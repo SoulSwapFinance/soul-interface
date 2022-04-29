@@ -30,6 +30,7 @@ import { formatAddress, loadERC20Contract } from "../../utils/wallet";
 import useBridge from "../../hooks/useBridge";
 import useSendTransaction from "../../hooks/useSendTransaction";
 import useFantomERC20 from "../../hooks/useFantomERC20";
+import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
 import { BigNumber } from "@ethersproject/bignumber";
 import Loader from "../../components/Loader";
 import FadeInOut from "../../components/AnimationFade";
@@ -740,9 +741,8 @@ const Bridge: React.FC<any> = () => {
   }, [bridgeTxHash]);
 
   return (
-    <>
-    {/* <SwapLayoutCard /> */}
     <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
+      <DoubleGlowShadowV2>
       {/* <div id="bridge-page" className="w-full h-full max-w-2xl space-y-3 rounded bg-dark-1200 z-1"> */}
       <div className="p-4 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>          
         <div className="px-2">
@@ -911,8 +911,8 @@ const Bridge: React.FC<any> = () => {
       <div />
     </FadeInOut>
   </div>
+</DoubleGlowShadowV2>
 </Container>
-</>
   );
 };
 

@@ -51,6 +51,7 @@ import { useV2LiquidityTokenPermit } from '../../../hooks/useERC20Permit'
 import { useWalletModalToggle } from '../../../state/application/hooks'
 // import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
 import SwapBanner from 'components/SwapBanner'
+import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 
 const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(10, 1000) // 1%
 
@@ -740,7 +741,7 @@ export default function Remove() {
 
       <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
         {/* <SwapBanner /> */}
-      {/* <DoubleGlowShadowV2 opacity="0.6"> */}
+        <DoubleGlowShadowV2>
           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>          
             <SwapHeader
               inputCurrency={currencyA}
@@ -871,23 +872,14 @@ export default function Remove() {
 
             {pair ? <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} /> : null}
           </div>
-        {/* </DoubleGlowShadowV2> */}
-        <div className="flex items-center px-4">
+          <div className="flex items-center px-4">
           <NavLink href="/pool">
             <a className="flex items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
               <span>{i18n._(t`View Liquidity Positions`)}</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-              </svg>
             </a>
           </NavLink>
         </div>
+        </DoubleGlowShadowV2>
       </Container>
     </>
   )

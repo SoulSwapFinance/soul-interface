@@ -41,7 +41,7 @@ import { useRouterContract } from 'hooks'
 import { useTransactionAdder } from 'state/transactions/hooks'
 import useTransactionDeadline from 'hooks/useTransactionDeadline'
 import { useWalletModalToggle } from 'state/application/hooks'
-// import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
+import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { LiquidityHeader } from 'features/liquidity'
 // import SwapBanner from 'components/SwapBanner'
 import { useActiveWeb3React } from 'services/web3'
@@ -368,8 +368,8 @@ export default function Add() {
       {/* <SoulLogo /> */}
       <div className="mb-4" />
       <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
+          <DoubleGlowShadowV2>
         {/* <SwapBanner /> */}
-        {/* <DoubleGlowShadowV2 opacity="0.6"> */}
         <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
           <SwapHeader
             inputCurrency={currencies[Field.CURRENCY_A]}
@@ -586,7 +586,6 @@ export default function Add() {
             />
           )}
         </div>
-        {/* <DoubleGlowShadowV2 opacity="0.6"> */}
         <div className="flex items-center px-4">
           <NavLink href="/pool">
             <a className="flex items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
@@ -594,8 +593,7 @@ export default function Add() {
             </a>
           </NavLink>
         </div>
-        {/* </DoubleGlowShadowV2> */}
-        {/* </DoubleGlowShadowV2> */}
+        </DoubleGlowShadowV2>
       </Container>
     </>
   )
