@@ -42,6 +42,7 @@ module.exports = {
         deepPurple: '#9756F7',
         // blue: '#0993ec',
         blue: '#1D5AFF',
+        ftmBlue: '#11B5EC',
         pink: '#f338c3',
         green: '#7cff6b',
         red: '#ff3838',
