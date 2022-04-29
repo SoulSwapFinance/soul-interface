@@ -506,7 +506,7 @@ const BridgeTokenList: React.FC<any> = ({
       </Row>
       <div />
       <div className="hidden sm:flex">
-      <div className="grid grid-cols-2 gap-2 bg-dark-600 p-1 w-full">
+      <div className="grid grid-cols-2 gap-1 mt-2 mb-2 rounded p-0 border border-dark-1000 hover:border-dark-600 w-full">
         <TokenSelector
           tokens={tokenList}
           selected={token}
@@ -528,7 +528,7 @@ const BridgeTokenList: React.FC<any> = ({
       </div>
       </div>
       <div className="flex sm:hidden">
-      <div className="my-2">
+      <div className="grid grid-cols gap-1 mt-2 mb-2 rounded p-0 border border-dark-1000 hover:border-dark-600 w-full">
         <TokenSelector
           tokens={tokenList}
           selected={token}
@@ -794,8 +794,7 @@ const Bridge: React.FC<any> = () => {
         </ContentBox>
       )}
       <Row style={{ width: "100%", justifyContent: "center" }}>
-        {/* <ContentBox style={{ width: "600px" }}> */}
-        <div className="flex mt-4 border border-dark-900 hover:border-dark-600 bg-dark-1000 p-2 rounded w-full">
+        <div className="flex mt-4 border border-dark-900 hover:border-dark-600 bg-dark-900 p-2 rounded w-full">
           <Column style={{ width: "100%" }}>
             <div />
             <>
@@ -880,21 +879,21 @@ const Bridge: React.FC<any> = () => {
                 </div>
 
               </div>
-              <div className="mt-2" />
+              <div className="mt-8" />
               {isApproved ? (
 
-                <Button
+                <ButtonComponent
                   disabled={inputError ||
                     !amount ||
                     chainId !== fromChain}
                   variant="filled"
-                  color="#b365ff"
+                  color="purple"
                   onClick={handleBridgeAction}
                 >
                   {isBridgeTxPending
                     ? "Broadcasting Transaction"
                     : "Bridge Token"}
-                </Button>
+                </ButtonComponent>
               ) : (
                 <Button variant="primary" onClick={handleApproveToken}>
                   {isApprovePending
@@ -904,9 +903,9 @@ const Bridge: React.FC<any> = () => {
                       : "Approve Token"}
                 </Button>
               )}
+              <div className="mt-4" />
             </>
           </Column>
-          {/* </ContentBox> */}
         </div>
       </Row>
       <div />
