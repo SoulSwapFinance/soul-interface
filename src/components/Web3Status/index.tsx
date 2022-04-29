@@ -17,6 +17,7 @@ import React, { useMemo } from 'react'
 
 import Loader from '../Loader'
 import Web3Connect from '../Web3Connect'
+import { WalletIcon } from 'components/Icon'
 
 // we want the latest one to come first, so return negative if a is after b
 function newTransactionsFirst(a: TransactionDetails, b: TransactionDetails) {
@@ -126,9 +127,13 @@ function Web3StatusInner() {
             <Loader stroke="white" />
           </div>
         ) : (
-          <div className="flex items-center gap-2">
-            <div>{ENSName || shortenAddress(account)}</div>
-            <Davatar
+          // <div className="flex items-center gap-2">
+            /* <div>{ENSName || shortenAddress(account)}</div> */
+            <div className="grid items-center grid-flow-col items-center justify-center bg-dark-900 h-[24px] w-[24px] text-sm rounded pointer-events-auto auto-cols-max text-secondary">
+
+            <WalletIcon width={25} className="text-dark-600"/>
+
+            {/* <Davatar
               size={20}
               address={account}
               defaultComponent={
@@ -136,7 +141,7 @@ function Web3StatusInner() {
               }
               style={{ borderRadius: 5 }}
               provider={library}
-            />
+            /> */}
           </div>
         )}
         {/* {!hasPendingTransactions && connector && (

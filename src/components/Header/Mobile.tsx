@@ -82,7 +82,7 @@ const Mobile: FC = () => {
                       <div className="flex flex-col mt-2 gap-4 px-6">
                         {library && (library.provider.isMetaMask || isCoinbaseWallet) && (
                           <div className="hidden sm:flex">
-                            <Web3Network />
+                          <Web3Network />
                           </div>
                         )}
 
@@ -130,14 +130,20 @@ const Mobile: FC = () => {
                   </div>
                 </>
               )}
-              <Web3Status />
               {library && library.provider.isMetaMask && (
-                <div className="hidden sm:inline-block">
+                <div className="inline-block">
+                <Web3Status />
+                </div>
+              )}
+              {library && library.provider.isMetaMask && (
+                <div className="inline-block">
                   <Web3Network />
                 </div>
               )}
+                <div className="inline-block">
+                  <More />
+                </div>
             </div>
-            <More />
           </div>
         </div>
       </header>
