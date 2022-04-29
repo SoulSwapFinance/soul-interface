@@ -18,35 +18,35 @@ const Autostake = () => {
           <meta key="description" name="description" content="Mint SOUL" />
         </Head>
         <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
-        <Button variant="filled" color="deepPurple" size="lg">
+        <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/seance'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Stake </span>
             </a>
           </NavLink>
         </Button>
-        <Button variant="filled" color="blue" size="lg">
+        <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/summoner'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Farm </span>
             </a>
           </NavLink>
         </Button>
-        <Button variant="filled" color="deepPurple" size="lg">
+        <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/soul/dashboard'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Dashboard </span>
+            <span> Data </span>
             </a>
           </NavLink>
         </Button>
-        <Button variant="filled" color="blue" size="lg">
+        <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/bonds'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Bond </span>
             </a>
           </NavLink>
         </Button>
-        <Button variant="filled" color="deepPurple" size="lg">
+        <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/underworld'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Lend </span>

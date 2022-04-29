@@ -21,6 +21,7 @@ module.exports = {
         colors: {
           'blue-pink': ['#27B0E6', '#FA52A0'],
           'blue-purple': ['#27B0E6', '#FA52A0'],
+          'yellow-gold': ['#F5D100', '#F7A700'],
           'pink-red-light-brown': ['#FE5A75', '#FEC464'],
         },
         background: {
@@ -46,7 +47,8 @@ module.exports = {
         pink: '#f338c3',
         green: '#7cff6b',
         red: '#ff3838',
-        yellow: '#F5D100',
+        yellow: '#FFFF00',
+        // gold: '#F7A700',
         gold: '#FEAC00',
         paleYellow: '#d9d68a',
         grey: '#b5aeb5',
