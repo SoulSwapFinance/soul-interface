@@ -346,14 +346,14 @@ const BridgeTokenSelectModal: React.FC<any> = ({
 }) => {
   return (
     <Modal
-      style={{ padding: "2px 2px", maxHeight: "80vh" }}
+      style={{ padding: "2px 0.5px", maxHeight: "80vh" }}
       onDismiss={onDismiss}
     >
-      <ModalTitle text="Select Token" />
+      {/* <ModalTitle text="Select Token" /> */}
       <div />
-      <ModalContent style={{ padding: "16px 0px" }}>
+      <ModalContent style={{ padding: "8px 0px" }}>
         <Column>
-          <Row
+          {/* <Row
             style={{
               justifyContent: "space-between",
               padding: "0 1rem .5rem 1rem",
@@ -377,7 +377,7 @@ const BridgeTokenSelectModal: React.FC<any> = ({
             >
               BALANCE
             </Typo3>
-          </Row>
+          </Row> */}
           <Scrollbar style={{ height: "60vh" }}>
             <Column>
               {tokens &&
@@ -389,7 +389,7 @@ const BridgeTokenSelectModal: React.FC<any> = ({
                         selectToken(token);
                         onDismiss();
                       }}
-                      style={{ padding: ".8rem" }}
+                      style={{ padding: ".5rem" }}
                     >
                       <Row
                         style={{
@@ -436,7 +436,7 @@ const BalancePromiseToUnit: React.FC<any> = ({ promise, decimals }) => {
 
   return (
     <Row style={{ alignItems: "center" }}>
-      <Typo2 style={{ width: "5rem", textAlign: "end", paddingRight: ".5rem" }}>
+      <Typo2 style={{ width: "12rem", textAlign: "end", paddingRight: "0rem" }}>
         {value ? weiToUnit(value, decimals) : "..."}
       </Typo2>
     </Row>
@@ -869,11 +869,11 @@ const Bridge: React.FC<any> = () => {
                 </div>
 
                 <div className="flex justify-center">
-                  <Typography className="text-dark-600 text-xs">
+                  <Typography className="text-white text-xs">
                     {selectedToken
                       ? <i>Amounts over {formatSimpleValue(
                         selectedToken.BigValueThreshold
-                      )} {selectedToken.symbol} take ~12hrs.</i>
+                      )} {selectedToken.symbol} may take up to 12hrs.</i>
                       : ""}
                   </Typography>
                 </div>
