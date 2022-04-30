@@ -40,6 +40,12 @@ const items = (i18n: I18n) => [
     href: 'https://links.soul.sh',
     external: true,
   },
+  {
+    name: i18n._(t`Email`),
+    description: i18n._(t`SoulSwapFinance@gmail.com`),
+    href: 'mailto:SoulSwapFinance.com',
+    external: true,
+  },
 ]
 
 export default function Menu() {
