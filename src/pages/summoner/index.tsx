@@ -6,8 +6,6 @@ import Head from 'next/head'
 import React from 'react'
 import FarmList from '../../features/summoner/List'
 import { NewFeature } from 'components/Banner'
-// import NavLink from 'components/NavLink'
-// import { Button } from 'components/Button'
 
 const Summoner = () => {
   return (

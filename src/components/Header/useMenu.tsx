@@ -39,7 +39,7 @@ const useMenu: UseMenu = () => {
     // By default show just a swap button
     let tradeMenu: MenuItem = {
       key: 'swap',
-      title: i18n._(t`Exchange`),
+      title: i18n._(t`SWAP`),
       link: '/swap',
       icon: <SwitchVerticalIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
     }
@@ -144,13 +144,18 @@ const useMenu: UseMenu = () => {
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const farmItems = {
         key: 'SoulSwap',
-        title: i18n._(t`SoulSwap`),
+        title: i18n._(t`SOUL`),
         icon: <CurrencyDollarIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
           {
             key: 'soul-dashboard',
             title: i18n._(t`Overview`),
             link: '/soul/dashboard',
+          },
+          {
+            key: 'bridge',
+            title: i18n._(t`Bridge`),
+            link: '/bridge',
           },
           {
             key: 'pool',
@@ -190,7 +195,7 @@ const useMenu: UseMenu = () => {
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const learnItems = {
         key: 'Luxor',
-        title: i18n._(t`Luxor`),
+        title: i18n._(t`LUXOR`),
         icon: <SunIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
           {
@@ -228,7 +233,7 @@ const useMenu: UseMenu = () => {
      {
       mainItems.push({
         key: 'lending',
-        title: i18n._(t`Lending`),
+        title: i18n._(t`LEND`),
         icon: <SwitchVerticalIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
           {
@@ -258,18 +263,18 @@ const useMenu: UseMenu = () => {
 
     let analyticsMenu: MenuItem = {
       key: 'analytics',
-      title: i18n._(t`Analytics`),
+      title: i18n._(t`DATA`),
       icon: <TrendingUpIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
       items: [
-        {
-          key: 'wallet',
-          title: 'Wallet',
-          link: '/balances',
-        },
         {
           key: 'dashboard',
           title: 'Overview',
           link: '/analytics/dashboard',
+        },
+        {
+          key: 'wallet',
+          title: 'Wallet',
+          link: '/balances',
         },
         {
           key: 'tokens',
@@ -292,7 +297,7 @@ const useMenu: UseMenu = () => {
     {
      mainItems.push({
        key: 'socials',
-       title: i18n._(t`Social`),
+       title: i18n._(t`JOIN`),
        icon: <UserGroupIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
        items: [
          {

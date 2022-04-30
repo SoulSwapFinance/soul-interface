@@ -29,7 +29,7 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
   const { i18n } = useLingui()
   const { asPath } = useRouter()
   const isRemove = asPath.startsWith('/remove')
-  const isLimitOrder = asPath.startsWith('/limit-order')
+  // const isLimitOrder = asPath.startsWith('/limit-order')
 
   return (
     <div className="flex items-center justify-between gap-1">
@@ -41,7 +41,7 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
             query: getQuery(inputCurrency, outputCurrency),
           }}
         >
-          <Typography weight={700} className="text-secondary ml-3 hover:text-dark-600">
+          <Typography weight={700} className="text-secondary ml-3 hover:text-purple">
             {i18n._(t`Swap`)}
           </Typography>
         </NavLink>
@@ -52,7 +52,7 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
             outputCurrency ? `/${currencyId(outputCurrency)}` : '/0xe2fb177009ff39f52c0134e8007fa0e4baacbd07'
           }`}
         >
-          <Typography weight={700} className="text-secondary hover:text-dark-600">
+          <Typography weight={700} className="text-secondary hover:text-purple">
             {i18n._(t`+/-`)}
           </Typography>
         </NavLink>
@@ -64,7 +64,7 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
             query: getQuery(inputCurrency, outputCurrency),
           }}
         >
-          <Typography weight={700} className="text-secondary hover:dark-600">
+          <Typography weight={700} className="text-secondary hover:text-purple">
             {i18n._(t`Limit`)}
           </Typography>
         </NavLink>
@@ -76,7 +76,7 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
             // query: getQuery(inputCurrency, outputCurrency),
           }}
         >
-          <Typography weight={700} className="text-secondary hover:text-dark-600">
+          <Typography weight={700} className="text-secondary hover:text-purple">
             {i18n._(t`Bridge`)}
           </Typography>
         </NavLink>
