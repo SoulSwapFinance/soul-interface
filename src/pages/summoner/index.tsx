@@ -5,6 +5,7 @@ import Container from '../../components/Container'
 import Head from 'next/head'
 import React from 'react'
 import FarmList from '../../features/summoner/List'
+import { NewFeature } from 'components/Banner'
 // import NavLink from 'components/NavLink'
 // import { Button } from 'components/Button'
 
@@ -13,7 +14,7 @@ const Summoner = () => {
     <Wrap padding='1rem 0 0 0' justifyContent="center">
       <DoubleGlowShadowV2 opacity="0.6">
       <Container id="farm-page">
-        {/* <FarmBanner/> */}
+      <NewFeature />
         <br/>
         <Head>
           <title>Farm | All</title>
