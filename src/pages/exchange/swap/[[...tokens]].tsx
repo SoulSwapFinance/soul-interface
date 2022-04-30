@@ -36,6 +36,7 @@ import Chart from 'components/Chart'
 import NavLink from 'components/NavLink'
 import Toggle from 'components/Toggle'
 import Image from 'next/image'
+import { NewFeature } from 'components/Banner'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -340,7 +341,7 @@ const Swap = () => {
 
   return (
     <>
-      {/* <Global /> */}
+      <NewFeature />
       <ConfirmSwapModal
         isOpen={showConfirm}
         trade={trade}
@@ -348,7 +349,6 @@ const Swap = () => {
         onAcceptChanges={handleAcceptChanges}
         attemptingTxn={attemptingTxn}
         txHash={txHash}
-        // @ts-ignore TYPE NEEDS FIXING
         recipient={recipient}
         allowedSlippage={allowedSlippage}
         onConfirm={handleSwap}
