@@ -432,7 +432,7 @@ const Swap = () => {
           ) : showWrap ? (
             <Button
               fullWidth
-              color="deepPurple"
+              color="purple"
               disabled={Boolean(wrapInputError)}
               onClick={onWrap}
               className="rounded-2xl md:rounded"
@@ -449,7 +449,7 @@ const Swap = () => {
               {approvalState !== ApprovalState.APPROVED && (
                 <Button
                   fullWidth
-                  color="deepPurple"
+                  color="purple"
                   loading={approvalState === ApprovalState.PENDING}
                   onClick={handleApprove}
                   disabled={approvalState !== ApprovalState.NOT_APPROVED || approvalSubmitted}
@@ -491,7 +491,7 @@ const Swap = () => {
             </div>
           ) : (
             <Button
-              color={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'red' : 'deepPurple'}
+              color={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'red' : 'purple'}
               fullWidth
               onClick={() => {
                 if (isExpertMode) {
