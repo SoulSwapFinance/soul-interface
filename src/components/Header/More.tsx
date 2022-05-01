@@ -43,7 +43,7 @@ const items = (i18n: I18n) => [
   {
     name: i18n._(t`Email`),
     description: i18n._(t`SoulSwapFinance@gmail.com`),
-    href: 'mailto:SoulSwapFinance.com',
+    href: 'mailto:SoulSwapFinance@gmail.com',
     external: true,
   },
 ]
