@@ -39,7 +39,7 @@ const useMenu: UseBar = () => {
     // By default show just a swap button
     let tradeMenu: BarItem = {
       key: 'swap',
-      title: i18n._(t`Exchange`),
+      title: i18n._(t`Swap`),
       link: '/swap',
       icon: <SwitchVerticalIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
     }
@@ -136,7 +136,7 @@ const useMenu: UseBar = () => {
     if (poolMenu.length > 0)
       mainItems.push({
         key: 'pool',
-        title: i18n._(t`Liquidity`),
+        title: i18n._(t`Pools`),
         items: poolMenu,
         icon: <PoolIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
       })
@@ -144,7 +144,7 @@ const useMenu: UseBar = () => {
     if (featureEnabled(Feature.AMM, chainId)) {
       const farmItems = {
         key: 'SoulSwap',
-        title: i18n._(t`SoulSwap`),
+        title: i18n._(t`Soul`),
         icon: <CurrencyDollarIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
           {
@@ -237,7 +237,7 @@ const useMenu: UseBar = () => {
       {
        mainItems.push({
          key: 'lending',
-         title: i18n._(t`Lending`),
+         title: i18n._(t`Lend`),
          icon: <SwitchVerticalIcon width={20} className={classNames("rotate-90", isLuxor ? "text-yellow" : "text-dark-600")} />,
          items: [
            {
@@ -269,7 +269,7 @@ const useMenu: UseBar = () => {
      {
       mainItems.push({
         key: 'analytics',
-        title: i18n._(t`Analytics`),
+        title: i18n._(t`Data`),
         icon: <TrendingUpIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
           {
@@ -301,7 +301,7 @@ const useMenu: UseBar = () => {
      {
       mainItems.push({
         key: 'socials',
-        title: i18n._(t`Community`),
+        title: i18n._(t`Join`),
         icon: <UserGroupIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
           {
