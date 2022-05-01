@@ -150,11 +150,12 @@ export default function Dashboard() {
   const stakedLuxor = Number(luxorInfo.stakingBalance)
   // console.log('staked', stakedLuxor)
   const lockedLuxor = Number(luxorInfo.warmupBalance)
+  const storedLuxor = Number(sorInfo.luxorCollateral)
   // console.log('lockedLuxor', lockedLuxor)
   // console.log('SorValue', SorValue)
   const wrapIndex = Number(luxorInfo.index)
 
-  const luxorCirculatingSupply = luxorSupply - Number(stakedLuxor) - Number(lockedLuxor)
+  const luxorCirculatingSupply = luxorSupply - Number(stakedLuxor) - Number(lockedLuxor) - storedLuxor
   // console.log('Ftm Bal:%s', FtmBalance)
   // console.log('Dai Bal:%s', DaiBalance)
   
@@ -282,7 +283,7 @@ export default function Dashboard() {
     },
     {
       angle: stakedLuxor,
-      color: '#FFC300',
+      color: '#FFB300',
       label: 'STAKED',
       text: 'The portion of supply that is not in circulation as it is currently staking.',
       percent: ((stakedLuxor / luxorSupply) * 100).toFixed()
@@ -290,10 +291,18 @@ export default function Dashboard() {
     },
     {
       angle: lockedLuxor,
-      color: '#FFE300',
+      color: '#FFC300',
       label: 'WARM-UP',
       text: 'The portion of supply not in circulation as it is currently in the warm-up period.',
-      percent: ((lockedLuxor/ luxorSupply) * 100).toFixed()
+      percent: ((lockedLuxor / luxorSupply) * 100).toFixed()
+      ,
+    },
+    {
+      angle: storedLuxor,
+      color: '#FFD300',
+      label: 'STORED',
+      text: 'The portion of supply not in circulation as it is currently locked into the SOR contract as backing value.',
+      percent: ((storedLuxor / luxorSupply) * 100).toFixed()
       ,
     },
   ]
