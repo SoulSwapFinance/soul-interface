@@ -48,7 +48,7 @@ const useMenu: UseBar = () => {
  /* if (featureEnabled(Feature.AMM, chainId)) {
   tradeMenu = {
     key: 'exchange',
-    title: i18n._(t`SWAP`),
+    title: i18n._(t`Swap`),
     icon: <SwitchVerticalIcon width={20} />,
     items: [
       {

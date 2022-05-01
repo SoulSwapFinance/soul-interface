@@ -381,9 +381,20 @@ export default function TokenStatsModal(): JSX.Element | null {
           type='flexed'
           size='xs'
         >
+          <NavLink href={'/soul/dashboard'}>
+            <a className="flex justify-center text-white text-xl transition rounded-md hover:pink">
+            <span>VIEW DATA</span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button
+          color='purple'
+          type='flexed'
+          size='xs'
+        >
           <NavLink href={'/bonds'}>
             <a className="flex justify-center text-white text-xl transition rounded-md hover:pink">
-              MINT SOUL<span> ↗</span>
+            <span>MINT SOUL</span>
             </a>
           </NavLink>
         </Button>
@@ -394,7 +405,7 @@ export default function TokenStatsModal(): JSX.Element | null {
         >
           <NavLink href={'/seance'}>
             <a className="flex justify-center text-white text-xl transition rounded-md hover:pink">
-              STAKE SOUL<span> ↗</span>
+             <span>STAKE SOUL</span>
             </a>
           </NavLink>
         </Button>
