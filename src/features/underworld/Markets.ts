@@ -71,4 +71,14 @@ export const UnderworldMarkets = [
     assetAddress: tokens.DAI,
     collateralAddress: tokens.WETH,
   },
+  {
+    // LENDING
+    id: 7,
+    asset: 'BTC',
+    collateral: 'FTM',
+    lpSymbol: 'FTM-BTC',
+    lpAddress: '0x146C9a418Cc46ed1B45f61C59816d72aF765af18',
+    assetAddress: tokens.WBTC,
+    collateralAddress: tokens.FTM,
+  },
 ]

@@ -27,23 +27,24 @@ export default function Pair() {
   // const { i18n } = useLingui()
 
   const pair = useUnderworldPair(router.query.pair as string)
-
-  /* const { underworldPairInfo } = useUnderworldPairInfo(pair)
+  
+  /*
+  const { underworldPairInfo } = useUnderworldPairInfo(pair?.address)
   const assetDecimals = Number(underworldPairInfo.assetDecimals)
+  const assetSymbol = underworldPairInfo.assetTicker
   const oracle = underworldPairInfo.oracle
   const assetURL = underworldPairInfo.assetLogoURI
   const collateralURL = underworldPairInfo.collateralLogoURI
-  const assetSymbol = underworldPairInfo.assetTicker
   const collateralSymbol = underworldPairInfo.collateralTicker
   */
-  
+ 
 if (!pair) return <div />
   const assetSymbol = pair?.asset.tokenInfo.symbol
   const collateralSymbol = pair?.collateral.tokenInfo.symbol
   const assetDecimals = pair?.asset.tokenInfo.decimals
   // const oracle = pair?.oracle.address
 
-  const assetPrice = pair?.asset.usd / (10**assetDecimals)
+  const assetPrice = pair?.asset.usd / 1e18
   const userDepositAmount = pair?.userAssetFraction / 10**(assetDecimals)
   const userDepositValue = userDepositAmount * assetPrice
     
