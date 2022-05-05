@@ -42,7 +42,8 @@ export default function LuxorKey() {
               height="2rem"
               width="50%"
               // primaryColor="#F4A703"
-              primaryColor="yellow"
+              // primaryColor="yellow"
+              primaryColor="#E6BD02"
               color="black"
               margin=".5rem 0 .5rem 0"
               onClick={() =>
@@ -52,10 +53,10 @@ export default function LuxorKey() {
               HARVEST ALL
           </SubmitButton>
           
-          {/* <SubmitButton
+          <SubmitButton
               height="2rem"
               width="50%"
-              primaryColor="#F4A703"
+              primaryColor="#E6BD02"
               color="black"
               margin=".5rem 0 .5rem 0"
               onClick={() =>
@@ -63,7 +64,7 @@ export default function LuxorKey() {
               }
           >
               HARVEST {`&`} STAKE
-          </SubmitButton> */}
+          </SubmitButton>
       </div>
       <Wrap
         padding="0"
