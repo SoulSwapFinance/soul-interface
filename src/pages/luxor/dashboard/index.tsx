@@ -150,12 +150,12 @@ export default function Dashboard() {
   const stakedLuxor = Number(luxorInfo.stakingBalance)
   // console.log('staked', stakedLuxor)
   const lockedLuxor = Number(luxorInfo.warmupBalance)
-  const storedLuxor = Number(sorInfo.luxorCollateral)
+  const storedLuxor = Number(sorInfo.luxorCollateral) / 1e9
   // console.log('lockedLuxor', lockedLuxor)
   // console.log('SorValue', SorValue)
   const wrapIndex = Number(luxorInfo.index)
 
-  const luxorCirculatingSupply = luxorSupply - Number(stakedLuxor) - Number(lockedLuxor) - storedLuxor
+  const luxorCirculatingSupply = luxorSupply - stakedLuxor - lockedLuxor - storedLuxor
   // console.log('Ftm Bal:%s', FtmBalance)
   // console.log('Dai Bal:%s', DaiBalance)
   
@@ -300,7 +300,7 @@ export default function Dashboard() {
     {
       angle: storedLuxor,
       color: '#FFD300',
-      label: 'STORED',
+      label: 'SOR BACKING',
       text: 'The portion of supply not in circulation as it is currently locked into the SOR contract as backing value.',
       percent: ((storedLuxor / luxorSupply) * 100).toFixed()
       ,

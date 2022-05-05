@@ -117,7 +117,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
         content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
       />
 
-      {/* Global Site Tag (gtag.js) - Google Analytics
+      {/* Global Site Tag (gtag.js) - Google Analytics */}
       <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_TRACKING_ID}`}
@@ -134,8 +134,8 @@ function MyApp({ Component, pageProps, fallback, err }) {
               page_path: window.location.pathname,
             });
           `,
-        }} 
-      /> */}
+        }}
+      />
       {/*@ts-ignore TYPE NEEDS FIXING*/}
       <I18nProvider i18n={i18n} forceRenderOnLocaleChange={false}>
         <Web3ReactProvider getLibrary={getLibrary}>
