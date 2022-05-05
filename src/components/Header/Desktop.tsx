@@ -138,15 +138,15 @@ const Desktop: FC = () => {
                     {userEthBalance?.toSignificant(4)
                       .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                     }
-                    {NATIVE[chainId].symbol}
+                    {NATIVE[chainId | 250].symbol}
                   </div>
                 </>
               )}
-              {library && library.provider.isMetaMask && (
+              {/* {library && library.provider.isMetaMask && ( */}
                 <div className="inline-block">
                 <Web3Status />
                 </div>
-              )}
+              {/* )} */}
               {library && library.provider.isMetaMask && (
                 <div className="inline-block">
                   <Web3Network />
