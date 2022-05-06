@@ -70,7 +70,7 @@ const TokenLogo = styled(Image)`
   }
 `
 
-const BondRowRender = ({ pid, lpSymbol, lpToken, lpAddresses, token1, token2, bond }) => {
+const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const { account, chainId } = useActiveWeb3React()
 
   const { deposit, mint } = useSoulBond(pid, lpToken, bond.token1Address, bond.token2Address)
@@ -84,7 +84,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, lpAddresses, token1, token2, bo
   // show confirmation view before minting SOUL
   const [showConfirmation, setShowConfirmation] = useState(false)
 
-  const assetAddress = bond.lpAddresses[chainId | 250]
+  const assetAddress = lpToken[chainId | 250]
   const soulPrice = useSoulPrice()
 
   // API DATA
