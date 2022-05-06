@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+// import { useEffect, useState } from 'react'
 // import { ethers } from 'ethers'
 
-import BondKey from '../bond/BondKey'
-import BondRowRender from '../bond/BondRowRender'
-import { AllPids } from '../bond/Pids'
+import { BondKey } from './Key'
+import BondRowRender from './Row'
+import { AllPids } from './Pids'
 import { useActiveWeb3React } from 'services/web3'
 
 const BondList = () => {

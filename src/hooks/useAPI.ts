@@ -252,6 +252,7 @@ export function useSoulBondInfo(pid): { status: string; soulBondInfo: T } {
       supply: '0',
       mcap: '0',
       tvl: '0',
+      apr: '0',
       api: `https://api.soulswap.finance/bonds/${pid}`
       })  
     useEffect(() => {
@@ -274,6 +275,49 @@ export function useSoulBondInfo(pid): { status: string; soulBondInfo: T } {
     }, [])
   
     return { status, soulBondInfo }
+}
+
+export function useBondUserInfo(pid, userAddress): { status: string; soulBondUserInfo: T } {
+    const { chainId } = useActiveWeb3React()
+    const [status, setStatus] = useState<string>('idle')
+    const [soulBondUserInfo, setInfo] = useState<T>({
+      address: '',
+      name: 'SoulSwap LP',
+      symbol: 'SOUL-LP',
+      token0: '',
+      token1: '',
+      token0Symbol: '',
+      token1Symbol: '',
+      decimals: '18',
+      supply: '0',
+      mcap: '0',
+      pairPrice: '0',
+      pendingSoul: '0',
+      stakedBalance: '0',
+      userTvl: '0',
+      tvl: '0',
+      api: `https://api.soulswap.finance/bonds/users/${userAddress}/${pid}`
+      })  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus('fetching')
+        const response = await fetch(`${BASE_URL}/bonds/users/${userAddress}/${pid}`,
+         {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referrer-Policy': 'no-referrer',
+          },
+        })
+        const json = await response.json()
+        setInfo(json as T)
+        setStatus('fetched')
+      }
+      if (chainId == ChainId.FANTOM) 
+      fetchData()
+    }, [])
+  
+    return { status, soulBondUserInfo }
 }
 
 export function useLuxorUserInfo(userAddress): { status: string; luxorUserInfo: T } {
