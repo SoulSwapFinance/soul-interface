@@ -252,6 +252,7 @@ export function useSoulBondInfo(pid): { status: string; soulBondInfo: T } {
       supply: '0',
       mcap: '0',
       tvl: '0',
+      apr: '0',
       api: `https://api.soulswap.finance/bonds/${pid}`
       })  
     useEffect(() => {
@@ -291,7 +292,8 @@ export function useBondUserInfo(pid, userAddress): { status: string; soulBondUse
       supply: '0',
       mcap: '0',
       pairPrice: '0',
-      apr: '0',
+      pendingSoul: '0',
+      stakedBalance: '0',
       userTvl: '0',
       tvl: '0',
       api: `https://api.soulswap.finance/bonds/users/${userAddress}/${pid}`
