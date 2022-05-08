@@ -84,7 +84,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   // show confirmation view before minting SOUL
   const [showConfirmation, setShowConfirmation] = useState(false)
 
-  const assetAddress = lpToken[chainId | 250]
+  const assetAddress = lpToken
+  console.log('asset:%s', assetAddress)
   const soulPrice = useSoulPrice()
 
   // API DATA
