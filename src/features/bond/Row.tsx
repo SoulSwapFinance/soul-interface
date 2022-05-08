@@ -42,21 +42,21 @@ import { Token } from 'sdk'
 //    - amount (in pool)
 //    - rewardDebt (owed)
 
-const HideOnMobile = styled(BondItemBox)`
-  @media screen and (max-width: 900px) {
-    display: none;
-  }
-`
+// const HideOnMobile = styled(BondItemBox)`
+//   @media screen and (max-width: 900px) {
+//     display: none;
+//   }
+// `
 
-const TokenPair = styled(ExternalLink)`
-  font-size: 1.15rem;
-  padding: 0;
+// const TokenPair = styled(ExternalLink)`
+//   font-size: 1.15rem;
+//   padding: 0;
 
-  @media screen and (max-width: 400px) {
-    font-size: 1rem;
-    padding-right: 10px;
-  }
-`
+//   @media screen and (max-width: 400px) {
+//     font-size: 1rem;
+//     padding-right: 10px;
+//   }
+// `
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -93,7 +93,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const apr = Number(soulBondInfo.apr)
   const { soulBondUserInfo } = useBondUserInfo(pid, account)
 
-  const assetName = soulBondUserInfo.name
+  const assetName = soulBondUserInfo.symbol
   const liquidity = Number(soulBondUserInfo.tvl)
   const lpPrice = Number(soulBondUserInfo.pairPrice)
 
