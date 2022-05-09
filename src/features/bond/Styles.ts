@@ -223,18 +223,20 @@ export const Row = styled.div`
     }
 
   @media screen and (max-width: 720px) {
+      width: 36rem;
+      padding: auto;
+    }
+    @media screen and (max-width: 600px) {
       width: 32rem;
       padding: auto;
     }
-
-  @media screen and (max-width: 500px) {
-      width: 28rem;
+    @media screen and (max-width: 500px) {
+      width: 25rem;
       padding: auto;
     }
-    
-    @media screen and (max-width: 400px) {
-      width: 22rem;
-      padding: auto;
+
+  @media screen and (max-width: 400px) {
+      width: 24rem;
     }
   `
 
@@ -350,16 +352,19 @@ export const DetailsWrapper = styled.div`
 
   @media screen and (max-width: 720px) {
     display: block;
-    width: 32rem
+    width: 36rem;
   }
-
+  @media screen and (max-width: 600px) {
+    display: block;
+    width: 32rem;
+  }
   @media screen and (max-width: 500px) {
     display: block;
-    width: 28rem
+    width: 25rem;
   }
 
-  @media screen and (max-width: 400px) {
-    width: 22rem;
+@media screen and (max-width: 400px) {
+    width: 24rem;
   }
 `
 

@@ -2,17 +2,17 @@ import { classNames } from "functions";
 import React from "react";
 import styled from "styled-components";
 
-const HideOnSmall = styled.div`
-@media screen and (max-width: 900px) {
-  display: none;
-}
-`
+// const HideOnSmall = styled.div`
+// @media screen and (max-width: 900px) {
+//   display: none;
+// }
+// `
 
-const HideOnMobile = styled.div`
-@media screen and (max-width: 600px) {
-  display: none;
-}
-`
+// const HideOnMobile = styled.div`
+// @media screen and (max-width: 600px) {
+//   display: none;
+// }
+// `
 
 const FarmItemBox = styled.div`
   width: 100px;

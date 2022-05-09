@@ -85,7 +85,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const [showConfirmation, setShowConfirmation] = useState(false)
 
   const assetAddress = lpToken
-  console.log('asset:%s', assetAddress)
+  // console.log('asset:%s', assetAddress)
   const soulPrice = useSoulPrice()
 
   // API DATA
