@@ -69,27 +69,23 @@ export function BondKey() {
                   </Text>
               </FarmItemBox>
 
-            {/* <HideOnMobile> */}
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
                 % APR
                 </Text>
               </FarmItemBox>
-            {/* </HideOnMobile> */}
  
-            {/* <HideOnSmall> */}
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
                 YIELD
                 </Text>
               </FarmItemBox>
-            {/* </HideOnSmall> */}
 
-              <FarmItemBox>
+              {/* <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
                 OWNED
                 </Text>
-              </FarmItemBox>
+              </FarmItemBox> */}
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">

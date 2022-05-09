@@ -218,7 +218,7 @@ export const Row = styled.div`
     }
 
   @media screen and (max-width: 900px) {
-      width: 38rem;
+      width: 42rem;
       padding: auto;
     }
 
@@ -226,10 +226,12 @@ export const Row = styled.div`
       width: 36rem;
       padding: auto;
     }
+
     @media screen and (max-width: 600px) {
       width: 32rem;
       padding: auto;
     }
+
     @media screen and (max-width: 500px) {
       width: 25rem;
       padding: auto;
@@ -347,7 +349,7 @@ export const DetailsWrapper = styled.div`
 
   @media screen and (max-width: 900px) {
     display: block;
-    width: 38rem
+    width: 42rem
   }
 
   @media screen and (max-width: 720px) {

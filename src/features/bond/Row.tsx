@@ -148,7 +148,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
    */
   const fetchApproval = async () => {
     if (!account) {
-      alert('Connect Wallet')
+      // alert('Connect Wallet')
     } else {
       // Checks if SoulSummoner can move tokens
       const amount = await erc20Allowance(account, SoulBondAddress)
@@ -162,7 +162,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
    */
   const handleApprove = async () => {
     if (!account) {
-      alert('Connect Wallet')
+      // alert('Connect Wallet')
     } else {
       try {
         const tx = await erc20Approve(SoulBondAddress)
@@ -241,31 +241,31 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
               </TokenPairBox>
 
               <BondItemBox>
-                <Text fontSize=".8rem" color="#FFFFFF">
+                <Text fontSize="1rem" color="#FFFFFF">
                   {formatNumber(stakedBal, false, true)}
                 </Text>
               </BondItemBox>
 
               <BondItemBox>
-                <Text fontSize=".8rem" color="#FFFFFF">
+                <Text fontSize="1rem" color="#FFFFFF">
                   {formatPercent(apr)}
                 </Text>
               </BondItemBox>
 
               <BondItemBox>
-                <Text fontSize=".8rem" color="#FFFFFF">
+                <Text fontSize="1rem" color="#FFFFFF">
                   {formatNumber(pending, false, true)}
                 </Text>
               </BondItemBox>
 
-              <BondItemBox>
-                <Text fontSize=".8rem" color="#FFFFFF">
+              {/* <BondItemBox>
+                <Text fontSize="1rem" color="#FFFFFF">
                   {formatPercent(percOfBond)}
                 </Text>
-              </BondItemBox>
+              </BondItemBox> */}
 
               <BondItemBox>
-                <Text fontSize=".8rem">
+                <Text fontSize="1rem">
                   {formatNumber(liquidity, true, true)}
                 </Text>
               </BondItemBox>
