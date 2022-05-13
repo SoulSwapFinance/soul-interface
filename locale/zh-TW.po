@@ -112,9 +112,6 @@ msgstr ""
 msgid "Add collateral in order to borrow assets"
 msgstr ""
 
-msgid "Add {0} to MetaMask"
-msgstr ""
-
 msgid "Add {0} {1} and {2} {3}"
 msgstr ""
 
@@ -274,6 +271,9 @@ msgstr ""
 msgid "COFFIN"
 msgstr ""
 
+msgid "COMING SOON"
+msgstr ""
+
 msgid "Calculated based on current rates. Rates are estimates for your convenience, they do not represent guaranteed returns."
 msgstr ""
 
@@ -361,9 +361,6 @@ msgid "Collateral Distribution"
 msgstr ""
 
 msgid "Come on Over..."
-msgstr ""
-
-msgid "Community"
 msgstr ""
 
 msgid "Community Approval"
@@ -555,6 +552,9 @@ msgstr ""
 msgid "Either return to the {link}, or change to an available network."
 msgstr ""
 
+msgid "Email"
+msgstr ""
+
 msgid "Enable Expert Mode"
 msgstr ""
 
@@ -645,9 +645,6 @@ msgid "Farm with SOUL-FTM"
 msgstr ""
 
 msgid "Farms"
-msgstr ""
-
-msgid "Faucet"
 msgstr ""
 
 msgid "Fee"
@@ -830,6 +827,9 @@ msgstr ""
 msgid "Japanese"
 msgstr ""
 
+msgid "Join"
+msgstr ""
+
 msgid "Korean"
 msgstr ""
 
@@ -885,6 +885,9 @@ msgid "Links"
 msgstr ""
 
 msgid "Liquidity"
+msgstr ""
+
+msgid "Liquidity Composition"
 msgstr ""
 
 msgid "Liquidity Positions"
@@ -1156,6 +1159,9 @@ msgstr ""
 msgid "Pool Tokens"
 msgstr ""
 
+msgid "Pools"
+msgstr ""
+
 msgid "Portfolio"
 msgstr ""
 
@@ -1393,13 +1399,13 @@ msgstr ""
 msgid "Slippage tolerance"
 msgstr ""
 
-msgid "Social"
-msgstr ""
-
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click 'Approve CoffinBox' again for approving using the fallback method"
 msgstr ""
 
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
+msgstr ""
+
+msgid "Soul"
 msgstr ""
 
 msgid "Soul Vault"
@@ -1412,6 +1418,9 @@ msgid "SoulSwap Vault is a set of high incentivized pools. Long term supporters 
 msgstr ""
 
 msgid "SoulSwap utilizes a token vault called CoffinBox that has balances separate from your wallet."
+msgstr ""
+
+msgid "SoulSwapFinance@gmail.com"
 msgstr ""
 
 msgid "Spanish"

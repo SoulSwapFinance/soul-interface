@@ -112,9 +112,6 @@ msgstr "Add Recipient"
 msgid "Add collateral in order to borrow assets"
 msgstr "Add collateral in order to borrow assets"
 
-msgid "Add {0} to MetaMask"
-msgstr "Add {0} to MetaMask"
-
 msgid "Add {0} {1} and {2} {3}"
 msgstr "Add {0} {1} and {2} {3}"
 
@@ -277,6 +274,9 @@ msgstr "CLAIM"
 msgid "COFFIN"
 msgstr "COFFIN"
 
+msgid "COMING SOON"
+msgstr "COMING SOON"
+
 msgid "Calculated based on current rates. Rates are estimates for your convenience, they do not represent guaranteed returns."
 msgstr "Calculated based on current rates. Rates are estimates for your convenience, they do not represent guaranteed returns."
 
@@ -367,9 +367,6 @@ msgstr "Collateral Distribution"
 
 msgid "Come on Over..."
 msgstr "Come on Over..."
-
-msgid "Community"
-msgstr "Community"
 
 msgid "Community Approval"
 msgstr "Community Approval"
@@ -560,6 +557,9 @@ msgstr "Earn"
 msgid "Either return to the {link}, or change to an available network."
 msgstr "Either return to the {link}, or change to an available network."
 
+msgid "Email"
+msgstr "Email"
+
 msgid "Enable Expert Mode"
 msgstr "Enable Expert Mode"
 
@@ -653,9 +653,6 @@ msgstr "Farm with SOUL-FTM"
 
 msgid "Farms"
 msgstr "Farms"
-
-msgid "Faucet"
-msgstr "Faucet"
 
 msgid "Fee"
 msgstr "Fee"
@@ -843,6 +840,9 @@ msgstr "Italian"
 msgid "Japanese"
 msgstr "Japanese"
 
+msgid "Join"
+msgstr "Join"
+
 msgid "Korean"
 msgstr "Korean"
 
@@ -899,6 +899,9 @@ msgstr "Links"
 
 msgid "Liquidity"
 msgstr "Liquidity"
+
+msgid "Liquidity Composition"
+msgstr "Liquidity Composition"
 
 msgid "Liquidity Positions"
 msgstr "Liquidity Positions"
@@ -1171,6 +1174,9 @@ msgstr "Pool Found!"
 msgid "Pool Tokens"
 msgstr "Pool Tokens"
 
+msgid "Pools"
+msgstr "Pools"
+
 msgid "Portfolio"
 msgstr "Portfolio"
 
@@ -1414,14 +1420,14 @@ msgstr "Slippage Tolerance"
 msgid "Slippage tolerance"
 msgstr "Slippage tolerance"
 
-msgid "Social"
-msgstr "Social"
-
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click 'Approve CoffinBox' again for approving using the fallback method"
 msgstr "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click 'Approve CoffinBox' again for approving using the fallback method"
 
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
+
+msgid "Soul"
+msgstr "Soul"
 
 msgid "Soul Vault"
 msgstr "Soul Vault"
@@ -1434,6 +1440,9 @@ msgstr "SoulSwap Vault is a set of high incentivized pools. Long term supporters
 
 msgid "SoulSwap utilizes a token vault called CoffinBox that has balances separate from your wallet."
 msgstr "SoulSwap utilizes a token vault called CoffinBox that has balances separate from your wallet."
+
+msgid "SoulSwapFinance@gmail.com"
+msgstr "SoulSwapFinance@gmail.com"
 
 msgid "Spanish"
 msgstr "Spanish"
