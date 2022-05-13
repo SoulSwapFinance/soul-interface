@@ -63,15 +63,16 @@ export default function Sor() {
   const mintPermille = useFee()
   const redeemPermille = useRedeemFee()
   const pegPrice = 0.985
-  const maxStakeAmount = CurrencyAmount.fromRawAmount(daiToken, 8000000000000000000000)
-  const maxRedeemAmount = CurrencyAmount.fromRawAmount(daiToken, 20000000000000000000000)
+  // const maxStakeAmount = CurrencyAmount.fromRawAmount(daiToken, 8000000000000000000000)
+  // const maxRedeemAmount = CurrencyAmount.fromRawAmount(daiToken, 20000000000000000000000)
+  const maxStakeAmount = CurrencyAmount.fromRawAmount(daiToken, 0)
+  const maxRedeemAmount = CurrencyAmount.fromRawAmount(daiToken, 0)
 
   const daiBalance = useCurrencyBalance(account, daiToken)
   const sorBalance = useCurrencyBalance(account, sorToken)
 
   const parsedStakeValue = tryParseAmount(stakeValue, daiToken)
   const parsedRedeemValue = tryParseAmount(redeemValue, sorToken)
-
   
   const [stakeApprovalState, stakeApprove] = useApproveCallback(
     parsedStakeValue,

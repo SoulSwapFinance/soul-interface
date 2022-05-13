@@ -61,8 +61,10 @@ export default function Stablecoin() {
   const redeemPermille = useRedeemFee()
   const pegPrice = Number(usePriceUSD(SOR_ADDRESS[250]).price) / 1e18
   // console.log('pegPrice:%s', pegPrice)
-  const maxStakeAmount = CurrencyAmount.fromRawAmount(daiToken, 8000000000000000000000)
-  const maxRedeemAmount = CurrencyAmount.fromRawAmount(daiToken, 20000000000000000000000)
+  // const maxStakeAmount = CurrencyAmount.fromRawAmount(daiToken, 8000000000000000000000)
+  // const maxRedeemAmount = CurrencyAmount.fromRawAmount(daiToken, 20000000000000000000000)
+  const maxStakeAmount = CurrencyAmount.fromRawAmount(daiToken, 0)
+  const maxRedeemAmount = CurrencyAmount.fromRawAmount(daiToken, 0)
 
   const daiBalance = useCurrencyBalance(account, daiToken)
   const sorBalance = useCurrencyBalance(account, sorToken)
@@ -567,7 +569,7 @@ export default function Stablecoin() {
                     {redeemError || i18n._(t`Redeem`)}
                   </ButtonError>
                 ) : (
-                  <Button variant="filled" color="yellow" className="flex-1 flex items-center gap-1 justify-center">
+                  <Button variant="filled" color="yellow" className="flex-1 flex items-center gap-1 text-black justify-center">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M8.99991 16.17L5.53492 12.705C5.14515 12.3152 4.51356 12.3141 4.12242 12.7025C3.72932 13.0928 3.7282 13.7283 4.11992 14.12L8.99991 19L20.2947 7.70513C20.6842 7.31568 20.6842 6.68425 20.2947 6.2948C19.9054 5.90548 19.2743 5.90533 18.8847 6.29447L8.99991 16.17Z"
