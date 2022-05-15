@@ -153,7 +153,8 @@ export default function Sor() {
         <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">
           <Tab.Group>
             <Tab.List className="flex items-center justify-center mb-1 space-x-2 p-3px text-white">
-            <div className="grid grid-cols-2 w-[95%] rounded-md p-2px bg-dark-900">
+            {/* <div className="grid grid-cols-2 w-[95%] rounded-md p-2px bg-dark-900"> */}
+            <div className="grid grid-cols w-[95%] rounded-md p-2px bg-dark-900">
             <Tab
                 className={({ selected }) =>
                   `${selected ? 'border-b-2 border-accent p-2 border-yellow text-white' : 'bg-dark-900 text-white'
@@ -162,14 +163,14 @@ export default function Sor() {
               >
                 {i18n._(t`MINT SOR`)}
               </Tab>
-              <Tab
+              {/* <Tab
                 className={({ selected }) =>
                   `${selected ? 'border-b-2 border-accent p-2 border-yellow text-white' : 'bg-dark-900 text-white'
                   } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-yellow`
                 }
               >
                 {i18n._(t`REDEEM`)}
-              </Tab>
+              </Tab> */}
           </div>
             </Tab.List>
             <Tab.Panel className={'outline-none'}>
