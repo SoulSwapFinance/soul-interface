@@ -61,10 +61,10 @@ export default function Stablecoin() {
   const redeemPermille = useRedeemFee()
   const pegPrice = Number(usePriceUSD(SOR_ADDRESS[250]).price) / 1e18
   // console.log('pegPrice:%s', pegPrice)
-  // const maxStakeAmount = CurrencyAmount.fromRawAmount(daiToken, 8000000000000000000000)
-  // const maxRedeemAmount = CurrencyAmount.fromRawAmount(daiToken, 20000000000000000000000)
-  const maxStakeAmount = CurrencyAmount.fromRawAmount(daiToken, 0)
-  const maxRedeemAmount = CurrencyAmount.fromRawAmount(daiToken, 0)
+  const maxStakeAmount = CurrencyAmount.fromRawAmount(daiToken, 8000000000000000000000)
+  const maxRedeemAmount = CurrencyAmount.fromRawAmount(daiToken, 20000000000000000000000)
+  // const maxStakeAmount = CurrencyAmount.fromRawAmount(daiToken, 0)
+  // const maxRedeemAmount = CurrencyAmount.fromRawAmount(daiToken, 0)
 
   const daiBalance = useCurrencyBalance(account, daiToken)
   const sorBalance = useCurrencyBalance(account, sorToken)
