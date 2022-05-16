@@ -61,6 +61,7 @@ export default function TokenStatsModal(): JSX.Element | null {
   }, 0)
 
   let podl = bondsTvl + soulTvl
+  let tvl = bondsTvl + soulTvl + farmsTvl
   function getSummaryLine(title, value) {
 
     return (
@@ -353,7 +354,7 @@ export default function TokenStatsModal(): JSX.Element | null {
           concat(formatNumberScale(
             Number(bondsTvl + soulTvl), true)
             , 
-            ` (${((podl / farmsTvl * 100).toFixed(0))}%)`
+            ` (${((podl / tvl * 100).toFixed(0))}%)`
         ))}
         {/* {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
