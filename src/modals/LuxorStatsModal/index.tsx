@@ -9,7 +9,7 @@ import { useTokenInfo } from 'hooks/useTokenInfo'
 import { useWrappedLumensContract, useLuxorContract } from 'hooks'
 import { formatNumberScale } from 'functions'
 import { LUX_ADDRESS, WLUM_ADDRESS } from 'constants/addresses'
-import { useTVL } from 'hooks/useV2Pairs'
+import { useBondTVL, useSoulTVL, useTVL } from 'hooks/useV2Pairs'
 // import { Wrapper } from 'features/swap/styleds'
 import { Button } from 'components/Button'
 import { useActiveWeb3React } from 'services/web3'
@@ -45,6 +45,11 @@ export default function LuxorStatsModal(): JSX.Element | null {
   const wLumPrice = useWrappedLumPrice()
 
   const { luxorInfo } = useLuxorInfo()
+
+  const tvlInfo = useTVL()
+  const bondInfo = useBondTVL()
+  const soulInfo = useSoulTVL()
+
   const farmInfo = useTVL()
   const LuxFtmContract = usePairContract('0x951BBB838e49F7081072895947735b0892cCcbCD')
   const LuxDaiContract = usePairContract('0x46729c2AeeabE7774a0E710867df80a6E19Ef851')
@@ -79,12 +84,20 @@ export default function LuxorStatsModal(): JSX.Element | null {
   const LuxSorValue = LuxSorBalance * luxSorPrice
 
   const treasuryLiquidityBalance = LuxFtmValue + LuxDaiValue + LuxSorValue
+  
+  let bondsTvl = bondInfo?.reduce((previousValue, currentValue) => {
+    return previousValue + currentValue?.tvl
+  }, 0)
+
+  let soulTvl = soulInfo?.reduce((previousValue, currentValue) => {
+    return previousValue + currentValue?.tvl
+  }, 0)
 
   let farmsTvl = farmInfo?.reduce((previousValue, currentValue) => {
     return previousValue + currentValue?.tvl
   }, 0)
 
-  let tvl = farmsTvl
+  let tvl = farmsTvl + bondsTvl + soulTvl
 
   function getSummaryLine(title, value) {
     return (
