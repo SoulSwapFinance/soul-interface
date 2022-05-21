@@ -531,9 +531,9 @@ const Swap = () => {
                   </NavLink>
                 </Button>
                 <Button variant="filled" color="gradientBluePurple" size="lg">
-                  <NavLink href={'/pool'}>
+                  <NavLink href={'/board'}>
                         <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                        <span>View Pools</span>
+                        <span>Give Feedback</span>
                         </a>
                   </NavLink>
                 </Button>

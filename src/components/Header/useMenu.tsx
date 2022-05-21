@@ -297,7 +297,7 @@ const useMenu: UseMenu = () => {
     {
      mainItems.push({
        key: 'socials',
-       title: i18n._(t`Join`),
+       title: i18n._(t`Chat`),
        icon: <UserGroupIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
        items: [
          {
@@ -315,6 +315,12 @@ const useMenu: UseMenu = () => {
            title: 'Twitter',
            link: `https://twitter.com/${isLuxor ? 'LuxorMoney' : 'SoulSwapFinance' }`,
          },
+         {
+          key: 'feedback',
+          title: 'Feedback',
+          link: '/board',
+          // link: 'https://soulswap.nolt.io',
+        },
          {
            key: 'forum',
            title: 'Forum',
