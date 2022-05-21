@@ -27,7 +27,10 @@ import ModalHeader from 'components/Modal/Header'
 import NavLink from 'components/NavLink'
 import Modal from 'components/DefaultModal'
 import useSoulMine from 'features/mines/hooks/useSoulMine'
-import { ArrowLeftIcon } from '@heroicons/react/solid'
+import { useUserTokenInfo, useStakeInfo } from 'hooks/useAPI'
+import { useSoulPrice } from 'hooks/getPrices'
+import { formatNumber } from 'functions/format'
+// import { ArrowLeftIcon } from '@heroicons/react/solid'
 
 const INPUT_CHAR_LIMIT = 18
 
@@ -70,7 +73,6 @@ export default function SoulStake() {
 
   const { userInfo, fetchStakeStats } = useSoulMine(0, '', '', '')
 
-  const [stakedBal, setStakedBal] = useState('0')
   const soulBalance = useTokenBalance(account ?? undefined, SOUL[250])
   const seanceBalance = useTokenBalance(account ?? undefined, SEANCE[250])
 
@@ -81,7 +83,7 @@ export default function SoulStake() {
 
   const [autoStaking, setAutoStaking] = useState(false)
   const [activeTab, setActiveTab] = useState(0)
-  const [modalOpen, setModalOpen] = useState(false)
+  // const [modalOpen, setModalOpen] = useState(false)
 
   const [input, setInput] = useState<string>('')
   const [usingBalance, setUsingBalance] = useState(false)
@@ -94,97 +96,26 @@ export default function SoulStake() {
   const [approvalStateChef, approveMasterchef] = useApproveCallback(parsedAmount, SOUL_SUMMONER_ADDRESS[ChainId.FANTOM])
   const [approvalStateVault, approveVault] = useApproveCallback(parsedAmount, SOUL_VAULT_ADDRESS[chainId])
 
-  const [apr, setApr] = useState('0')
-  const [liquidity, setLiquidity] = useState('0')
-
-/**
- * Runs only on initial render/mount
- */
-  useEffect(() => {
-    getAprAndLiquidity()
-  }, [account])
-
-  /**
-   * Withdraws SOUL Staked
-   */
-  const handleWithdraw = async () => {
-    try {
-      // console.log('minting', amount.toString())
-      const tx = await withdraw(balance)
-      // await tx.wait()
-      // await fetchBals(pid)
-    } catch (e) {
-      // alert(e.message)
-      console.log(e)
-    }
-  }
-
-/**
- * Checks the amount of lpTokens the SoulSummoner contract holds
- * farm <Object> : the farm object
- * lpToken : the farm lpToken address
- */
-  const getAprAndLiquidity = async () => {
-    try {
-      const result = await fetchStakeStats()
-      const tvl = result[0]
-      const apr = result[1]
-
-      setLiquidity(
-        tvl
-        // .toFixed(0)
-        // .toString()
-        // .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-      )
-      // console.log('tvl:%s', tvl)
-
-      // console.log("apr", farmApr);
-      setApr(
-        // Number(
-        apr
-        // )
-        // .toFixed(0)
-        // .toString()
-        // .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-      )
-      // console.log('tvl:%s', apr)
-    } catch (e) {
-      console.warn(e)
-    }
-  }
-
-  /**
-   * Gets the lpToken balance of the user for each pool
-   */
-  const fetchBals = async () => {
-    if (!account) {
-      // alert('connect wallet')
-    } else {
-      try {
-        const result1 = await userInfo(0, account)
-        const staked = ethers.utils.formatUnits(result1?.[0])
-        setStakedBal(staked.toString())
-      } catch (err) {
-        console.warn(err)
-      }
-    }
-  }
+  // const [apr, setApr] = useState('30')
+  // const [liquidity, setLiquidity] = useState('0')
+  
+  // const soulPrice = useSoulPrice()
+  const stakeInfo = useStakeInfo(account).stakeInfo
+  const apr = Number(stakeInfo.apr)
+  const tvl = Number(stakeInfo.tvl)
+  const stakedBal = Number(stakeInfo.stakedBalance)
+  const seanceBal = Number(stakeInfo.seanceBalance)
 
   // SEANCE > STAKED
   const hasMoreSeance =
-    seanceBalance?.toFixed(2) > Number(stakedBal)?.toFixed(2)
+  seanceBal > stakedBal
 
   // WITHDRAWABLE AMOUNT
   const withdrawable =
     hasMoreSeance ?
-      Number(stakedBal)
-        .toFixed(2)
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      stakedBal
       : !hasMoreSeance ?
-        seanceBalance?.toFixed(2)
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      seanceBal
         // STAKED < SEANCE
         : 0
 
@@ -268,23 +199,6 @@ export default function SoulStake() {
   const { pendingSoul } = useSoulSummonerContract()
 
   const [pending, setPending] = useState('')
-
-  // Runs once (on mount)
-  useEffect(() => {
-    fetchBals()
-  })
-
-  // Runs on render + reruns every second
-  useEffect(() => {
-    if (account) {
-      const timer = setTimeout(() => {
-        fetchPending(0)
-      }, 10000)
-
-      // Clear timeout if the component is unmounted
-      return () => clearTimeout(timer)
-    }
-  })
 
   // Fetches connected user pending soul
   const fetchPending = async (pid) => {
@@ -390,19 +304,6 @@ export default function SoulStake() {
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between w-full mt-6">
-                        <p className="font-bold text-large md:text-2xl text-high-emphesis">
-                          {autoStaking
-                            ? activeTab === 0
-                              ? i18n._(t`Stake Auto Reinvesting SOUL`)
-                              : i18n._(t`Unstake Auto Reinvesting SOUL`)
-                            : activeTab === 0
-                            // ? i18n._(t`Stake`)
-                            // : i18n._(t`Unstake`)
-                          }
-                        </p>
-                      </div>
-
                       <StyledNumericalInput
                         value={input}
                         onUserInput={handleInput}
@@ -411,7 +312,7 @@ export default function SoulStake() {
                         placeholder=" "
                       />
 
-                      {/* input overlay: */}
+                      {/* input overlay */}
                       <div className="relative w-full h-0 pointer-events-none bottom-14">
                         <div
                           className={`flex justify-between items-center h-14 rounded px-3 md:px-5 ${inputError ? ' border border-red' : ''
@@ -507,7 +408,7 @@ export default function SoulStake() {
                         </button>
                       )}
                       <p className="mt-3 text-sm text-purple font-bold text-center md:text-base text-primary">WITHDRAWABLE: {' '}
-                        {withdrawable}
+                        {formatNumber(withdrawable, false, true)}
                       </p>
                     </div>
                   </div>
@@ -581,11 +482,11 @@ export default function SoulStake() {
                           </p>
                           <div className="flex text-center items-center flex-col justify-between">
                             <p className="items-center text-md font-bold md:text-lg text-high-emphesis">
-                              TVL: {' '} ${Number(liquidity) === 0
+                              TVL: {' '} ${Number(tvl) === 0
                                 ? '0'
-                                : Number(liquidity) < 0
+                                : Number(tvl) < 0
                                   ? '<0'
-                                  : Number(liquidity)
+                                  : Number(tvl)
                                     .toFixed(0)
                                     .toString()
                                     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
