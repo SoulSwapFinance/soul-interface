@@ -816,6 +816,39 @@ export function useSummonerInfo(): { status: string; summonerInfo: T } {
   return { status, summonerInfo }
 }
 
+export function useStakeInfo(userAddress): { status: string; stakeInfo: T } {
+  const { chainId } = useActiveWeb3React()
+  const [status, setStatus] = useState<string>('idle')
+  const [stakeInfo, setInfo] = useState<T>({
+      tvl: '125000',
+      stakedBalance: '0',
+      stakedValue: '0',
+      walletBalance: '0',
+      apr: '30',
+      // api: 'https://api.soulswap.finance',
+      ftmscan: 'https://ftmscan.com',
+  })  
+  useEffect(() => {
+    const fetchData = async () => {
+      setStatus('fetching')
+      const response = await fetch(`${BASE_URL}/summoner/stake/users/${userAddress}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Referrer-Policy': 'no-referrer',
+        },
+      })
+      const json = await response.json()
+      setInfo(json as T)
+      setStatus('fetched')
+    }
+    if (chainId == ChainId.FANTOM) 
+    fetchData()
+  }, [])
+
+  return { status, stakeInfo }
+}
+
 export function useSummonerPoolInfo(pid): { status: string; summonerPoolInfo: T } {
   const { chainId } = useActiveWeb3React()
   const [status, setStatus] = useState<string>('idle')
