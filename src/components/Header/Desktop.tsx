@@ -147,11 +147,11 @@ const Desktop: FC = () => {
                 <Web3Status />
                 </div>
               {/* )} */}
-              {library && library.provider.isMetaMask && (
+              {/* {library && library.provider.isMetaMask && ( */}
                 <div className="inline-block">
                   <Web3Network />
                 </div>
-              )}
+              {/* )} */}
             </div>
             <More />
           </div>
