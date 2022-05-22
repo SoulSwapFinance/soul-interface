@@ -138,7 +138,7 @@ const Desktop: FC = () => {
                     {userEthBalance?.toSignificant(4)
                       .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                     }
-                    {NATIVE[chainId | 250].symbol}
+                    {NATIVE[chainId].symbol}
                   </div>
                 </>
               )}
