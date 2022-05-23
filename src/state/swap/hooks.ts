@@ -254,9 +254,9 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId 
   const eth = 'FTM'
   //chainId === ChainId.CELO ? WNATIVE_ADDRESS[chainId] : 
   const soul 
-    = chainId == ChainId.AVALANCHE 
-      ? USDC[chainId].address
-      : SOUL[chainId | 250].address
+    = chainId == ChainId.FANTOM 
+    ? SOUL[250].address
+    : USDC[chainId].address
   if (inputCurrency === '' && outputCurrency === '') {
     inputCurrency = eth
     outputCurrency = soul
