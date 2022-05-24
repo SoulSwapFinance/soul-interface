@@ -105,6 +105,7 @@ export default function SoulStake() {
   const tvl = Number(stakeInfo.tvl)
   const stakedBal = Number(stakeInfo.stakedBalance)
   const seanceBal = Number(stakeInfo.seanceBalance)
+  const pending = Number(stakeInfo.pendingSoul)
 
   // SEANCE > STAKED
   const hasMoreSeance =
@@ -198,24 +199,7 @@ export default function SoulStake() {
 
   const { pendingSoul } = useSoulSummonerContract()
 
-  const [pending, setPending] = useState('')
-
-  // Fetches connected user pending soul
-  const fetchPending = async (pid) => {
-    if (!walletConnected) {
-      toggleWalletModal()
-    } else {
-      try {
-        const pending = ethers.BigNumber.from(await pendingSoul(pid, account)).toString()
-        console.log(pending)
-        const formatted = ethers.utils.formatUnits(pending.toString())
-        console.log(formatted)
-        setPending(Number(formatted).toFixed(1).toString())
-      } catch (err) {
-        console.log(err)
-      }
-    }
-  }
+  // const [pending, setPending] = useState('')
 
   return (
     <div>
