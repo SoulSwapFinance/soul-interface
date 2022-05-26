@@ -21,8 +21,7 @@ import NavLink from 'components/NavLink'
 import { useLuxorInfo, usePairInfo, useSummonerInfo, useSummonerPoolInfo } from 'hooks/useAPI'
 import { usePairPrice } from 'hooks/usePairData'
 import { usePairContract } from 'hooks/useTokenContract'
-
-
+import { formatNumber } from 'functions/format'
 
 export default function LuxorStatsModal(): JSX.Element | null {
   const cache: { [key: string]: number } = {};
@@ -301,15 +300,15 @@ export default function LuxorStatsModal(): JSX.Element | null {
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Luxor Market Price`}
           </Typography>,
-          formatCurrency(
-            luxorPrice)
+          formatNumber(
+            luxorPrice, true, true)
         )}
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`wLumens Market Price`}
           </Typography>,
-          formatCurrency(
-           wLumPrice)
+          formatNumber(
+           wLumPrice, true, true)
         )}
         <div className="flex mt-3" />
         {/* <div className="flex"> */}
