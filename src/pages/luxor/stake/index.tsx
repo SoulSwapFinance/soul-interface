@@ -442,33 +442,15 @@ export default function Stake() {
                 </div> */}
               </div>
               <div className="mt-6 flex items-center gap-2">
-              <Button variant="outlined" color="yellow" onClick={handleApproveToken} className="mb-2">
+              <Button variant="outlined" color="yellow" onClick={handleApproveToken} className="text-black">
                   {isApprovePending
                     ? "Approving"
                     : isApproveCompleted
                       ? "Approved"
                       : "Approve"}
                 </Button>
-                {isRedeemValid &&
-                  (redeemApprovalState === ApprovalState.NOT_APPROVED ||
-                    redeemApprovalState === ApprovalState.PENDING) ? (
-                  <Button
-                    variant="filled"
-                    color="yellow"
-                    className="text-black"
-                    // onClick={redeemApprove}
-                    onClick={LumensContract.approve(LUXOR_STAKING_HELPER_ADDRESS[chainId | 250], 1_000_000*1e9)}
-                    disabled={redeemApprovalState !== ApprovalState.NOT_APPROVED}
-                    style={{ width: '100%' }}
-                  >
-                    {redeemApprovalState === ApprovalState.PENDING ? (
-                      <Dots>{i18n._(t`Approving`)}</Dots>
-                    ) : (
-                      i18n._(t`Approve`)
-                    )}
-                  </Button>
 
-                ) : Number(warmupExpiry) - Number(epoch) > 0 ? (
+                {Number(warmupExpiry) - Number(epoch) > 0 ? (
                   <><ButtonError
                       variant="filled"
                       color="yellow"
