@@ -258,7 +258,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
 
     // handle wbtc
     if (currency?.wrapped.equals(wbtc)) {
-      return new Price(wbtc, wbtc, '10', Number(wbtcPrice * 10).toFixed()) // TODO: fix
+      return new Price(wbtc, wbtc, '10', Number(wbtcPrice * 20).toFixed()) // TODO: fix
     }
     
     // handle bnb
