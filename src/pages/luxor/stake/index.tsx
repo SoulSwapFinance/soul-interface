@@ -11,7 +11,7 @@ import { Button, ButtonError } from 'components/Button'
 import StableInputPanel from 'components/StableInputPanel'
 import { ApprovalState, useApproveCallback, useLuxorStakeHelperContract, useLuxorStakingContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
-import { LUM_ADDRESS, LUXOR_STAKING_ADDRESS, max, Token } from 'sdk'
+import { LUM_ADDRESS, LUXOR_STAKING_ADDRESS, LUXOR_STAKING_HELPER_ADDRESS, max, Token } from 'sdk'
 import { LUX_ADDRESS } from 'constants/addresses'
 import { tryParseAmount, formatNumber } from 'functions'
 import { useCurrencyBalance } from 'state/wallet/hooks'
@@ -24,6 +24,7 @@ import NavLink from 'components/NavLink'
 import { useTokenContract } from 'hooks/useTokenContract'
 import { useLuxorPrice } from 'hooks/getPrices'
 import { useLuxorInfo, useLuxorUserInfo } from 'hooks/useAPI'
+import useSendTransaction from 'hooks/useSendTransaction'
 
 export default function Stake() {
   const addTransaction = useTransactionAdder()
@@ -36,7 +37,7 @@ export default function Stake() {
   // const [warmupPeriod, setWarmupPeriod] = useState(0)
   // const [nextRebase, setNextRebase] = useState(0)
   const luxorPrice = useLuxorPrice()
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const { stake, unstake, claim, forfeit } = useStakeContract()
   // const warmupValue = useWarmupValue()
   // console.log('warmupAmount:%s', warmupAmount)
@@ -89,7 +90,8 @@ export default function Stake() {
   )
   const [redeemApprovalState, redeemApprove] = useApproveCallback(
     parsedRedeemValue,
-    LUXOR_STAKING_ADDRESS[250]
+    // LUXOR_STAKING_ADDRESS[250]
+    LUXOR_STAKING_HELPER_ADDRESS[chainId | 250]
   )
 
   const stakeError = !parsedStakeValue
@@ -107,6 +109,14 @@ export default function Stake() {
         : undefined
   const isRedeemValid = !redeemError
 
+  const {
+    sendTx: handleApproveToken,
+    isPending: isApprovePending,
+    isCompleted: isApproveCompleted,
+  } = useSendTransaction(() =>
+    LumensContract.approve(LUXOR_STAKING_ADDRESS[chainId | 250], (1_000_000*1e9).toString())
+  );
+  
   /**
    * Runs only on initial render/mount
    */
@@ -432,6 +442,13 @@ export default function Stake() {
                 </div> */}
               </div>
               <div className="mt-6 flex items-center gap-2">
+              <Button variant="outlined" color="yellow" onClick={handleApproveToken} className="mb-2">
+                  {isApprovePending
+                    ? "Approving"
+                    : isApproveCompleted
+                      ? "Approved"
+                      : "Approve"}
+                </Button>
                 {isRedeemValid &&
                   (redeemApprovalState === ApprovalState.NOT_APPROVED ||
                     redeemApprovalState === ApprovalState.PENDING) ? (
@@ -439,7 +456,8 @@ export default function Stake() {
                     variant="filled"
                     color="yellow"
                     className="text-black"
-                    onClick={redeemApprove}
+                    // onClick={redeemApprove}
+                    onClick={LumensContract.approve(LUXOR_STAKING_HELPER_ADDRESS[chainId | 250], 1_000_000*1e9)}
                     disabled={redeemApprovalState !== ApprovalState.NOT_APPROVED}
                     style={{ width: '100%' }}
                   >
@@ -449,6 +467,7 @@ export default function Stake() {
                       i18n._(t`Approve`)
                     )}
                   </Button>
+
                 ) : Number(warmupExpiry) - Number(epoch) > 0 ? (
                   <><ButtonError
                       variant="filled"
