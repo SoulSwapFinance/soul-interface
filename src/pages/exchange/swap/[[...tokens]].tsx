@@ -36,7 +36,8 @@ import Chart from 'components/Chart'
 import NavLink from 'components/NavLink'
 import Toggle from 'components/Toggle'
 import Image from 'next/image'
-import { NewFeature } from 'components/Banner'
+import styled from 'styled-components'
+import SocialWidget from 'components/Social'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -341,7 +342,8 @@ const Swap = () => {
 
   return (
     <>
-      <NewFeature />
+      {/* <NewFeature /> */}
+      
       <ConfirmSwapModal
         isOpen={showConfirm}
         trade={trade}
@@ -362,7 +364,9 @@ const Swap = () => {
       />
       {/* <div className="mt-8" /> */}
       <SwapLayoutCard>
+        <SocialWidget />
         <div className="flex flex-col gap-3 justify-center">
+
           <HeaderNew inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
           <SwapAssetPanel
             spendFromWallet={true}
@@ -570,6 +574,7 @@ const Swap = () => {
             </div>
           }
       </SwapLayoutCard>
+
     </>
   )
 }
