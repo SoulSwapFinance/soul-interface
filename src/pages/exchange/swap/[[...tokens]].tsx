@@ -104,7 +104,7 @@ const Swap = () => {
 
   const isValid = !swapInputError
   const dependentField: Field = independentField === Field.INPUT ? Field.OUTPUT : Field.INPUT
-
+        const video = "www.shutterstock.com"
   const handleTypeInput = useCallback(
     (value: string) => {
       onUserInput(Field.INPUT, value)
@@ -118,6 +118,10 @@ const Swap = () => {
     },
     [onUserInput]
   )
+
+  const DESIGN 
+    // = "https://media.giphy.com/media/YgVy0BfAmwaPn9fS3z/giphy.gif"
+    = "https://media.giphy.com/media/ZPJbKvfpD5qBPZDxMG/giphy-downsized-large.gif"
 
   // modal and loading
   const [{ showConfirm, tradeToConfirm, swapErrorMessage, attemptingTxn, txHash }, setSwapState] = useState<{
@@ -362,9 +366,7 @@ const Swap = () => {
         tokens={importTokensNotInDefault}
         onConfirm={handleConfirmTokenWarning}
       />
-      {/* <div className="mt-8" /> */}
       <SwapLayoutCard>
-        <SocialWidget />
         <div className="flex flex-col gap-3 justify-center">
 
           <HeaderNew inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
@@ -559,12 +561,14 @@ const Swap = () => {
               />
             </div>
          {  !expertMode && 
+                   <>
+          <div className="flex mt-3" /><SocialWidget />
                    <div className="grid grid-cols-1">
-                   {/* <Image src='https://app.soulswap.finance/neon-bg.jpeg' height="400px" width="400px" /> */}
-                   {/* <Image src='https://app.soulswap.finance/neon-bg.jpeg' height="400px" width="400px" /> */}
+                                        {/* <Image src='https://app.soulswap.finance/neon-bg.jpeg' height="400px" width="400px" /> */}
                    {/* <Image src='https://app.soulswap.finance/neon-triangle-lights.jpeg' height="600px" width="600px" /> */}
-                   <Image src='https://app.soulswap.finance/title-soul-halfs.png' height="400px" width="600px" alt="logo"/>
-                 </div>
+            <Image src={DESIGN} height="400px" width="480px" alt="logo" />
+          </div>
+          </>
           }
           { expertMode &&
             <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
