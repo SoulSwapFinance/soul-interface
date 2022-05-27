@@ -241,9 +241,19 @@ const useMenu: UseBar = () => {
          icon: <SwitchVerticalIcon width={20} className={classNames("rotate-90", isLuxor ? "text-yellow" : "text-dark-600")} />,
          items: [
            {
-             key: 'lend',
+             key: 'markets',
              title: i18n._(t`Markets`),
              link: '/underworld',
+            },
+           {
+             key: 'lend',
+             title: i18n._(t`Lend`),
+             link: '/lend',
+            },
+           {
+             key: 'borrow',
+             title: i18n._(t`Borrow`),
+             link: '/borrow',
             },
             {
               key: 'underworld-farms',
