@@ -72,7 +72,7 @@ export default function Lend() {
               <span className="justify-center md:flex">{i18n._(t`Positions`)}</span> 
                 </ListHeaderWithSort>
                 <ListHeaderWithSort className="hidden justify-center md:flex" sort={positions} sortKey="asset.tokenInfo.symbol">
-                  {i18n._(t`Supplied`)}
+                  {i18n._(t`Lent`)}
                 </ListHeaderWithSort>
                 <ListHeaderWithSort className="hidden justify-center md:flex" sort={positions} sortKey="collateral.tokenInfo.symbol">
                   {i18n._(t`Collateral`)}
@@ -86,7 +86,7 @@ export default function Lend() {
                   sortKey="currentUserAssetAmount.usdValue"
                   direction="descending"
                 >
-                  {i18n._(t`Deposited`)}
+                  {i18n._(t`Supplied`)}
                 </ListHeaderWithSort>
                 {/* <ListHeaderWithSort
                   className="justify-center"
