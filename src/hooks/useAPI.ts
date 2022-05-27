@@ -648,7 +648,7 @@ export function useUnderworldPairInfo(pairAddress): { status: string; underworld
         address: '',
         name: '',
         symbol: '',
-        supply: '0',
+        supply: '1',
         decimals: '18',
         interestPerSecond: '0',
         lastAccrued: '1649306854',
@@ -658,7 +658,7 @@ export function useUnderworldPairInfo(pairAddress): { status: string; underworld
         assetTicker: '',
         assetAddress: '',
         assetDecimals: '18',
-        assetPrice: '0',
+        assetPrice: '1',
         assetLogoURI: '',
 
         assetTotalElastic: '0',
@@ -669,7 +669,7 @@ export function useUnderworldPairInfo(pairAddress): { status: string; underworld
         collateralTicker: '',
         collateralAddress: '',
         collateralDecimals: '18',
-        collateralPrice: '0',
+        collateralPrice: '1',
         collateralLogoURI: '',
 
         api: ''

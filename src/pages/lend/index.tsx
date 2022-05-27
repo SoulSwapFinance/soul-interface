@@ -20,6 +20,7 @@ import React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { RecoilRoot } from 'recoil'
 import { e10 } from 'functions/math'
+import { useUnderworldPairInfo, useUnderworldUserInfo } from 'hooks/useAPI'
 
 // const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
 
@@ -71,7 +72,7 @@ export default function Lend() {
               <span className="justify-center md:flex">{i18n._(t`Positions`)}</span> 
                 </ListHeaderWithSort>
                 <ListHeaderWithSort className="hidden justify-center md:flex" sort={positions} sortKey="asset.tokenInfo.symbol">
-                  {i18n._(t`Asset`)}
+                  {i18n._(t`Lent`)}
                 </ListHeaderWithSort>
                 <ListHeaderWithSort className="hidden justify-center md:flex" sort={positions} sortKey="collateral.tokenInfo.symbol">
                   {i18n._(t`Collateral`)}
@@ -85,23 +86,31 @@ export default function Lend() {
                   sortKey="currentUserAssetAmount.usdValue"
                   direction="descending"
                 >
-                  {i18n._(t`Deposited`)}
+                  {i18n._(t`Supplied`)}
                 </ListHeaderWithSort>
-                <ListHeaderWithSort
+                {/* <ListHeaderWithSort
                   className="justify-center"
                   sort={positions}
                   sortKey="currentUserLentAmount.usdValue"
                   direction="descending"
                 >
                   {i18n._(t`Borrowed`)}
+                </ListHeaderWithSort> */}
+                <ListHeaderWithSort
+                  className="justify-center"
+                  sort={positions}
+                  sortKey="currentUserLentAmount.usdValue"
+                  direction="descending"
+                >
+                  {i18n._(t`APR`)}
                 </ListHeaderWithSort>
                 <ListHeaderWithSort
                   className="justify-center"
                   sort={positions}
-                  sortKey="supplyAPR.valueWithStrategy"
+                  sortKey="currentSupplyAPR.valueWithStrategy"
                   direction="descending"
                 >
-                  {i18n._(t`Utilized`)}
+                  {i18n._(t`TVL`)}
                 </ListHeaderWithSort>
                 <ListHeaderWithSort
                   className="hidden sm:justify-center"
@@ -126,7 +135,7 @@ export default function Lend() {
               <span className="justify-center md:flex">{i18n._(t`Markets`)}</span> 
             </ListHeaderWithSort>
             <ListHeaderWithSort className="hidden justify-center md:flex" sort={data} sortKey="asset.tokenInfo.symbol">
-              {i18n._(t`Asset`)}
+              {i18n._(t`Lend`)}
             </ListHeaderWithSort>
             <ListHeaderWithSort className="hidden justify-center md:flex" sort={data} sortKey="collateral.tokenInfo.symbol">
               {i18n._(t`Collateral`)}
@@ -185,19 +194,37 @@ export default function Lend() {
 
 // @ts-ignore TYPE NEEDS FIXING
 const LendEntry = ({ pair, userPosition = false }) => {
+  const { underworldUserInfo } = useUnderworldUserInfo(pair.address)
+  const { underworldPairInfo } = useUnderworldPairInfo(pair.address)
 
-  const userDepositedBalance = pair?.userAssetFraction // √
-  const assetPrice = pair?.asset.usd / (10**pair.asset.tokenInfo.decimals)
-  // const borrowPrice = pair?.collateral.usd / (10**pair.asset.tokenInfo.decimals)
-  const userDepositedValue 
-  = userDepositedBalance 
-    * assetPrice 
-    / 10**pair.asset.tokenInfo.decimals
+  const assetDecimals = Number(underworldPairInfo.assetDecimals)
+  const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
+  const assetPrice = Number(underworldPairInfo.assetPrice)
+  const collateralPrice = Number(underworldPairInfo.collateralPrice)
+  const assetBalance = Number(underworldUserInfo.userAssetBalance) // 10**assetDecimals
+  const borrowedAmount = Number(underworldUserInfo.userBorrowPart) / 10**assetDecimals
+  const suppliedAmount = Number(underworldUserInfo.userBalance) // 10**lpDecimals
+  const collateralAmount = Number(underworldUserInfo.userCollateralShare) / 10**collateralDecimals
+  // const walletValue = assetBalance * assetPrice
+  const borrowedValue = borrowedAmount * assetPrice
+  const collateralValue = collateralAmount * collateralPrice
+  const userDepositedValue = suppliedAmount * assetPrice
+  
+  const LTV = (1 - (collateralValue - borrowedValue) / collateralValue) * 100
+  // const leeway = (75 - LTV) / 100
+
+  // const userDepositedBalance = pair?.userAssetFraction // √
+  // const assetPrice = pair?.asset.usd / 1e18 // √
+  // const borrowPrice = pair?.collateral.usd / (10**assetDecimals)
+  // const userDepositedValue 
+  // = userDepositedBalance 
+  //   * assetPrice 
+  //   / 10**assetDecimals
   
   const totalDepositedValue 
   = Number(pair.totalAsset.base) 
     * assetPrice
-    / 10**pair.asset.tokenInfo.decimals
+    / 10**assetDecimals
 
   return (
     <Link href={'/lend/' + pair.address}>
@@ -257,23 +284,29 @@ const LendEntry = ({ pair, userPosition = false }) => {
             <>
               <div className="text-center">
                 <div>
-                  {formatNumber(Number(pair.userAssetFraction) / 10**(pair.asset.tokenInfo.decimals), false)} {pair.asset.tokenInfo.symbol}
+                  {formatNumber(Number(pair.userAssetFraction) / 10**(assetDecimals), false)} {pair.asset.tokenInfo.symbol}
                 </div>
                 <div className="text-center text-sm text-secondary">{formatNumber(userDepositedValue, true)}</div>
               </div>
+              {/* APR */}
               <div className="text-center">
-                <div>{formatNumber(pair.currentUserLentAmount.string)} {pair.asset.tokenInfo.symbol}</div>
+              {formatPercent(pair.currentSupplyAPR.stringWithStrategy)}
+                {/* <div>{formatNumber(pair.currentUserLentAmount.string)} {pair.asset.tokenInfo.symbol}</div> */}
                 {/* <div>{formatPercent(pair.utilization.string)}</div> */}
-                <div className="text-center text-secondary text-sm">{formatNumber(Number(pair.currentUserLentAmount.usd) / 1e12 , true)}</div>
+                {/* <div className="text-center text-secondary text-sm">{formatNumber(Number(pair.currentUserLentAmount.usd) / 1e12 , true)}</div> */}
               </div>
               <div className="text-center">
-              {
+              {/* {
                 formatPercent(
-                  ((pair?.userAssetFraction.div(e10(pair.asset.tokenInfo.decimals))) -
-                    (pair?.userAssetFraction.sub(pair?.currentUserLentAmount.value).div(e10(pair.asset.tokenInfo.decimals))))
-                  / (pair?.userAssetFraction.div(e10(pair.asset.tokenInfo.decimals))) * 100
-                )
-              }
+                  ((pair?.userAssetFraction.div(e10(assetDecimals))) -
+                    (pair?.userAssetFraction.sub(pair?.currentUserLentAmount.value).div(e10(assetDecimals))))
+                  / (pair?.userAssetFraction.div(e10(assetDecimals))) * 100
+                 )
+              } */}
+
+              {/* TOTAL */}
+                 {formatNumber(pair?.totalAsset.base / 10**(assetDecimals))} {pair?.asset.tokenInfo.symbol}
+                  <div className="text-secondary">{formatNumber(totalDepositedValue, true)}</div>
                 </div>{' '}
               <div className="hidden sm:text-center">{formatPercent(pair.supplyAPR.stringWithStrategy)}</div>{' '}
             </>
@@ -281,7 +314,7 @@ const LendEntry = ({ pair, userPosition = false }) => {
             <>
               <div>
                 <div className="text-center">
-                  {formatNumber(pair?.totalAsset.base / 10**(pair.asset.tokenInfo.decimals))} {pair?.asset.tokenInfo.symbol}
+                  {formatNumber(pair?.totalAsset.base / 10**(assetDecimals))} {pair?.asset.tokenInfo.symbol}
                   <div className="text-secondary">{formatNumber(totalDepositedValue, true)}</div>
                 </div>
               </div>
@@ -290,9 +323,9 @@ const LendEntry = ({ pair, userPosition = false }) => {
               </div>
               <div className="text-center">{
                 formatPercent(
-                  ((pair?.totalAsset.base / 10**(pair.asset.tokenInfo.decimals)) -
-                    (pair?.totalAsset.base.sub(pair?.totalBorrow.base) / 10**(pair.asset.tokenInfo.decimals)))
-                  / (pair?.totalAsset.base / 10**(pair.asset.tokenInfo.decimals)) * 100
+                  ((pair?.totalAsset.base / 10**(assetDecimals)) -
+                    (pair?.totalAsset.base.sub(pair?.totalBorrow.base) / 10**(assetDecimals)))
+                  / (pair?.totalAsset.base / 10**(assetDecimals)) * 100
                 )}
               </div>
             </>
