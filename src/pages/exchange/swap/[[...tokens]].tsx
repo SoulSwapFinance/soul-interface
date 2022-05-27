@@ -563,11 +563,11 @@ const Swap = () => {
          {  !expertMode && 
                    <>
           <div className="flex mt-3" /><SocialWidget />
-                   <div className="grid grid-cols-1">
+              {/* <div className="grid grid-cols-1"> */}
                                         {/* <Image src='https://app.soulswap.finance/neon-bg.jpeg' height="400px" width="400px" /> */}
                    {/* <Image src='https://app.soulswap.finance/neon-triangle-lights.jpeg' height="600px" width="600px" /> */}
-            <Image src={DESIGN} height="400px" width="480px" alt="logo" />
-          </div>
+        {/*    <Image src={DESIGN} height="400px" width="480px" alt="logo" /> 
+          </div> */}
           </>
           }
           { expertMode &&
