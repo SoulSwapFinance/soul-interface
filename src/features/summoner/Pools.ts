@@ -464,4 +464,17 @@ export const LendingPools = [
     token1Address: tokens.BNB,
     token2Address: tokens.DAI,
   },
+  {
+    // LENDING
+    pid: 56,
+    token1: 'BTC',
+    token2: 'DAI',
+    lpSymbol: 'DAI-BTC',
+    lpAddresses: {
+      4002: '',
+      250: '0xaf28730165634A56434ca7f0B302CC54F862046F',
+    },
+    token1Address: tokens.WBTC,
+    token2Address: tokens.DAI,
+  },
 ]
