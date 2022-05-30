@@ -19,7 +19,7 @@ import Link from 'next/link'
 import React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { RecoilRoot } from 'recoil'
-import { e10 } from 'functions/math'
+// import { e10 } from 'functions/math'
 import { useUnderworldPairInfo, useUnderworldUserInfo } from 'hooks/useAPI'
 
 // const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"

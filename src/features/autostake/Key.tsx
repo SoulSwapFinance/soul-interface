@@ -3,10 +3,9 @@ import {
   StakeContainer,
   Row,
   StakeContentWrapper,
-  TokenPairBox,
   StakeItemBox,
   Text
-} from "./StakeStyles";
+} from "./Styles";
 
 export default function StakeKey() {
   return (

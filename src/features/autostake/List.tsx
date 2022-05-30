@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
-import StakeKey from './StakeKey'
-import AutostakeRowRender from './AutostakeRowRender'
+import StakeKey from './Key'
+import AutostakeRowRender from './Row'
 import { AllPids } from './Pids'
 import { useActiveWeb3React } from 'services/web3'
 
