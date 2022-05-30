@@ -27,13 +27,14 @@ import {
     Input,
     FlexText,
     SubmitButton,
-} from './StakeStyles'
+} from './Styles'
 import { Wrap, ClickableText, Text, ExternalLink } from '../../components/ReusableStyles'
 import { useCurrencyBalance } from 'state/wallet/hooks'
-import { tryParseAmount } from 'functions'
+import { formatNumber, tryParseAmount } from 'functions'
 import Modal from 'components/Modal/DefaultModal'
 import ModalHeader from 'components/Modal/Header'
 import Typography from 'components/Typography'
+import { useAutoStakeInfo } from 'hooks/useAPI'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -73,17 +74,22 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
 
     const [stakedBal, setStakedBal] = useState(0)
     const [earnedAmount, setEarnedAmount] = useState(0)
-    const [performanceFee, setPerformanceFee] = useState(0)
-    const [callFee, setCallFee] = useState(0)
     const [unstakedBal, setUnstakedBal] = useState(0)
     // const [pending, setPending] = useState(0)
 
-    const harvestFee = performanceFee + callFee
+    const { autoStakeInfo } = useAutoStakeInfo()
+    // const performanceFee = autoStakeInfo.performanceFee
+    // const available = autoStakeInfo.available
+    // const callFeeRate = autoStakeInfo.callFee
+    const bounty = autoStakeInfo.bounty
+    const withdrawFee = autoStakeInfo.withdrawFee
+    const feeHours = autoStakeInfo.withdrawFeeHours
+    const tvl = Number(autoStakeInfo.tvl)
+    // const harvestFee = performanceFee + callFee
     // const recentProfit = useStakeRecentProfit()
     // console.log('earnedAmount:%s', earnedAmount)
     // show confirmation view before minting SOUL
     const [apy, setApy] = useState(0)
-    const [liquidity, setLiquidity] = useState(0)
     // const { deposit, withdraw } = useStakeContract()
     // const balance = useCurrencyBalance(account, SOUL[250])
     // const stakedBalance = AutoStakeContract?.balanceOf(account)
@@ -108,9 +114,8 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                     getApyAndLiquidity()
                     fetchEarnings()
                     fetchApproval()
-                    fetchFees()
                 }
-            }, 10000)
+            }, 10_000)
             // Clear timeout if the component is unmounted
             return () => clearTimeout(timer)
         }
@@ -125,7 +130,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
             fetchBals()
             fetchEarnings()
             fetchApproval()
-            fetchFees()
         }
     }
 
@@ -157,7 +161,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
             const apr = (annualRewardsValue / summonerTvl) * 100
             const apy = aprToApy(apr * 4) // assumes reinvestments every 6hrs
 
-            setLiquidity(Number(tvl))
             setApy(Number(apy))
             // console.log('tvl:%s', Number(tvl))
             // console.log('apy:%s', Number(apy))
@@ -191,36 +194,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
             }
         }
     }
-
-    /**
-     * Gets the call and performance fees.
-     */
-    const fetchFees = async () => {
-        if (!account) {
-            // alert('connect wallet')
-        } else {
-            try {
-                // get performance
-                const performance = await AutoStakeContract?.performanceFee()
-                const call = await AutoStakeContract?.callFee()
-                // const  = result / 10000
-                const available = await AutoStakeContract?.available()
-                const performanceFee = performance * available / 10000 / 1e18
-                const callFee = call * available / 10000 / 1e18
-
-                setCallFee(Number(callFee))
-                console.log('callFee:%s', Number(callFee))
-
-                setPerformanceFee(Number(performanceFee))
-                console.log('performanceFee:%s', Number(performanceFee))
-
-                return [callFee, performanceFee]
-            } catch (err) {
-                console.warn(err)
-            }
-        }
-    }
-
     /**
     * Gets the earned amount of the user for each pool
     */
@@ -237,10 +210,10 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
 
                 const shareValue = price * stakedBal
                 const profit = shareValue - stakedBal
-                console.log('profit:%s', profit)
+                // console.log('profit:%s', profit)
 
                 setEarnedAmount(Number(profit))
-                console.log('profit:%s', Number(profit))
+                // console.log('profit:%s', Number(profit))
 
                 return [profit]
             } catch (err) {
@@ -397,13 +370,13 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                     )}
                 </StakeItemBox>
                 <StakeItemBox className="flex" >
-                    {liquidity === 0 ? (
+                    {tvl === 0 ? (
                         <Text padding="0" fontSize="1rem" color="#666">
                             $0
                         </Text>
                     ) : (
                         <Text padding="0" fontSize="1rem">
-                            ${Number(liquidity).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                            ${Number(tvl).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                         </Text>
                     )}
 
@@ -600,7 +573,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
         <div className="space-y-4">
           <ModalHeader header={`Harvest Bounty Rewards`} onClose={() => setShowHarvestConfirmation(false)} />
           <Typography variant="lg">
-            Harvesting rewards you with a {callFee.toFixed(2)} SOUL bounty, which goes to your wallet for triggering a reinvestment.
+            Harvesting rewards you with a {formatNumber(bounty, false, true)} SOUL bounty, which goes to your wallet for triggering a reinvestment.
             You must withdraw in order to claim rewards.
           </Typography>
           <Typography variant="sm" className="font-medium">
@@ -653,7 +626,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
         <div className="space-y-4">
           <ModalHeader header={`Are you sure?`} onClose={() => setShowWithdrawConfirmation(false)} />
           <Typography variant="lg">
-            Withdrawing prior to a 72H period incurs a {100 / 10000}% SOUL fee, which goes towards the development of the SoulSwap ecosystem.
+            Withdrawing prior to a { feeHours }H period incurs a { withdrawFee }% SOUL fee, which goes towards the development of the SoulSwap ecosystem.
           </Typography>
           <Typography variant="sm" className="font-medium">
             QUESTIONS OR CONCERNS?

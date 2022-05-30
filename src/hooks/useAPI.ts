@@ -557,6 +557,45 @@ export function useUserPairInfo(userAddress, pairAddress): { status: string; pai
     return { status, pairUserInfo }
 }
 
+export function useAutoStakeInfo(): { status: string; autoStakeInfo: T } {
+    const { chainId } = useActiveWeb3React()
+    const [status, setStatus] = useState<string>('idle')
+    const [autoStakeInfo, setInfo] = useState<T>({
+      totalSupply: '7975019.590004936',
+      harvestRewards: '2.7874870645417755',
+      soulTvl: '8407711.327837521',
+      tvl: '63876.77321225582',
+      pendingSoulRewards: '278.826990654351',
+      pricePerShare: '1.054255884007467,',
+      callFee: '100',
+      bounty: '100',
+      performanceFee: '500',
+      withdrawFee: '0.01',
+      withdrawFeePeriod: '259200',
+      withdrawFeeHours: '72'
+    })  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus('fetching')
+        const response = await fetch(`${BASE_URL}/soulswap/vault`
+        , {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referrer-Policy': 'no-referrer',
+          },
+        })
+        const json = await response.json()
+        setInfo(json as T)
+        setStatus('fetched')
+      }
+      if (chainId == ChainId.FANTOM) 
+      fetchData()
+    }, [])
+  
+    return { status, autoStakeInfo }
+}
+
 export function usePairInfo(pairAddress): { status: string; pairInfo: T } {
     const [status, setStatus] = useState<string>('idle')
     const { account, chainId } = useActiveWeb3React()
@@ -642,7 +681,7 @@ export function usePairInfo(pairAddress): { status: string; pairInfo: T } {
 // }
 
 export function useUnderworldPairInfo(pairAddress): { status: string; underworldPairInfo: T } {
-    // const { chainId } = useActiveWeb3React()
+    const { chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
     const [underworldPairInfo, setInfo] = useState<T>({
         address: '',
@@ -688,7 +727,7 @@ export function useUnderworldPairInfo(pairAddress): { status: string; underworld
         setInfo(json as T)
         setStatus('fetched')
       }
-      // if (chainId == ChainId.FANTOM) 
+      if (chainId == ChainId.FANTOM) 
       fetchData()
     }, [])
   
@@ -890,7 +929,7 @@ export function useSummonerPoolInfo(pid): { status: string; summonerPoolInfo: T 
       setInfo(json as T)
       setStatus('fetched')
     }
-    // if (chainId == ChainId.FANTOM) 
+    if (chainId == ChainId.FANTOM)
     fetchData()
   }, [])
 
