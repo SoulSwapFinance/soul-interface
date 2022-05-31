@@ -181,9 +181,6 @@ msgstr "Approving {0}"
 msgid "Approving {contractName} Master Contract"
 msgstr "Approving {contractName} Master Contract"
 
-msgid "Asset"
-msgstr "Asset"
-
 msgid "Assets"
 msgstr "Assets"
 
@@ -291,6 +288,9 @@ msgstr "Cancelled"
 
 msgid "Chart"
 msgstr "Chart"
+
+msgid "Chat"
+msgstr "Chat"
 
 msgid "Chinese"
 msgstr "Chinese"
@@ -840,9 +840,6 @@ msgstr "Italian"
 msgid "Japanese"
 msgstr "Japanese"
 
-msgid "Join"
-msgstr "Join"
-
 msgid "Korean"
 msgstr "Korean"
 
@@ -884,6 +881,9 @@ msgstr "Lend your assets, earn yield with ZERO impermanent loss"
 
 msgid "Lending"
 msgstr "Lending"
+
+msgid "Lent"
+msgstr "Lent"
 
 msgid "Limit"
 msgstr "Limit"
@@ -1217,12 +1217,6 @@ msgstr "Provide liquidity to the"
 msgid "Public good blockchain development guide."
 msgstr "Public good blockchain development guide."
 
-msgid "REDEEM"
-msgstr "REDEEM"
-
-msgid "REDEEM DAI"
-msgstr "REDEEM DAI"
-
 msgid "RETIRED"
 msgstr "RETIRED"
 
@@ -1519,6 +1513,9 @@ msgstr "Summon Souls with Liquidity."
 
 msgid "Summon an Empire."
 msgstr "Summon an Empire."
+
+msgid "Supplied"
+msgstr "Supplied"
 
 msgid "Supply Distribution"
 msgstr "Supply Distribution"

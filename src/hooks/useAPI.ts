@@ -565,6 +565,7 @@ export function useAutoStakeInfo(): { status: string; autoStakeInfo: T } {
       harvestRewards: '2.7874870645417755',
       soulTvl: '8407711.327837521',
       tvl: '63876.77321225582',
+      apy: '202.08453254750358',
       pendingSoulRewards: '278.826990654351',
       pricePerShare: '1.054255884007467,',
       callFee: '100',
@@ -572,7 +573,8 @@ export function useAutoStakeInfo(): { status: string; autoStakeInfo: T } {
       performanceFee: '500',
       withdrawFee: '0.01',
       withdrawFeePeriod: '259200',
-      withdrawFeeHours: '72'
+      withdrawFeeHours: '72',
+      soulPrice: '0.009753108589030435',
     })  
     useEffect(() => {
       const fetchData = async () => {
@@ -596,9 +598,51 @@ export function useAutoStakeInfo(): { status: string; autoStakeInfo: T } {
     return { status, autoStakeInfo }
 }
 
+export function useUserAutoStakeInfo(userAddress): { status: string; userAutoStakeInfo: T } {
+    const { chainId } = useActiveWeb3React()
+    const [status, setStatus] = useState<string>('idle')
+    const [userAutoStakeInfo, setInfo] = useState<T>({
+      userBalance: '0',
+      stakedBalance: '0',
+      totalSupply: '7975019.590004936',
+      harvestRewards: '2.7874870645417755',
+      soulTvl: '8407711.327837521',
+      tvl: '63876.77321225582',
+      pendingSoulRewards: '278.826990654351',
+      pricePerShare: '1.054255884007467,',
+      callFee: '100',
+      bounty: '100',
+      performanceFee: '500',
+      withdrawFee: '0.01',
+      withdrawFeePeriod: '259200',
+      withdrawFeeHours: '72',
+      soulPrice: '0.009753108589030435',
+    })  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus('fetching')
+        const response = await fetch(`${BASE_URL}/soulswap/vault/users/${userAddress}`
+        , {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referrer-Policy': 'no-referrer',
+          },
+        })
+        const json = await response.json()
+        setInfo(json as T)
+        setStatus('fetched')
+      }
+      if (chainId == ChainId.FANTOM) 
+      fetchData()
+    }, [])
+  
+    return { status, userAutoStakeInfo }
+}
+
 export function usePairInfo(pairAddress): { status: string; pairInfo: T } {
     const [status, setStatus] = useState<string>('idle')
-    const { account, chainId } = useActiveWeb3React()
+    const { chainId } = useActiveWeb3React()
 
     const [pairInfo, setInfo] = useState<T>({
         address: '',
