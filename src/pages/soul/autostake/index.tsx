@@ -54,9 +54,12 @@ export default function AutoStake() {
   const stakedBal = Number(userAutoStakeInfo.stakedBalance)
   // const stakedValue = pricePerShare * stakedBal
   const stakedValue = soulPrice * stakedBal
+  
   const userDelta = stakedBal - userBalance
   const totalDeduction = stakedBal + userDelta
   const earnedAmount = (pricePerShare * stakedBal) - totalDeduction
+
+  const earnedValue = soulPrice * earnedAmount
 
     /**
     * Gets the earned amount of the user for each pool
@@ -121,8 +124,20 @@ export default function AutoStake() {
       ? 'Insufficient Balance'
         : undefined
 
-  const isStakeValid = !stakeError  
-
+  const isStakeValid = !stakeError
+  
+  // HANDLE HARVEST //
+    const handleHarvest = async () => {
+        try {
+            let tx
+            tx = await AutoStakeContract?.harvest()
+          await tx?.wait()
+        } catch (e) {
+            // alert(e.message)
+            console.log(e)
+        }
+    }
+    
     // HANDLE DEPOSIT //
      const handleDeposit = async (amount) => {
       try {
@@ -244,10 +259,10 @@ export default function AutoStake() {
 
               <div className="flex justify-between">
                 <Typography className="text-white" fontFamily={'medium'}>
-                  {i18n._(t`Ritual Period`)}
+                  {i18n._(t`Ritual (Fee) Duration`)}
                 </Typography>
                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                  {feeHours} hours
+                  { feeHours } hours
                 </Typography>
               </div>
               
@@ -263,7 +278,7 @@ export default function AutoStake() {
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-purple w-full space-y-1">
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Deposited`)}
+                    {i18n._(t`Staked`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     {formatNumber(stakedBal, false, true)} SOUL ({ formatNumber(stakedValue, true, true) })
@@ -271,10 +286,18 @@ export default function AutoStake() {
                 </div>
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Pending Rewards`)}
+                    {i18n._(t`Earned`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    {formatNumber(earnedAmount, false, true)} SOUL
+                    {formatNumber(earnedAmount, false, true)} SOUL ({ formatNumber(earnedValue, true, true) })
+                  </Typography>
+                </div>
+                  <div className="flex justify-between">
+                  <Typography className="text-white" fontFamily={'medium'}>
+                    {i18n._(t`Bounty`)}
+                  </Typography>
+                  <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                    {formatNumber(harvestRewards, false, true)} SOUL
                   </Typography>
                 </div>
               </div>
@@ -308,6 +331,16 @@ export default function AutoStake() {
                   DEPOSIT
               </SubmitButton>
                 )}
+                <SubmitButton
+                  height="2rem"
+                  primaryColor="#821FFF"
+                  color="white"
+                  margin=".5rem 0 .5rem 0"
+                  onClick={() =>
+                      handleHarvest()}
+                  >
+                  CLAIM BOUNTY
+              </SubmitButton>
               </div>
             </Tab.Panel>
 
