@@ -127,7 +127,7 @@ export default function Sor() {
                   <strong className="text-accent bold">How to Mint:&nbsp;</strong>
                 </p>
                 <p>1. Enter in the amount of DAI you would like to deposit and press MINT.</p>
-                <p>2. Claim your SOR tokens.</p>
+                <p>2. Claim SOR.</p>
               </div>
             </div>
             <div className="flex flex-col">
@@ -136,13 +136,13 @@ export default function Sor() {
                   <strong className="text-accent bold">How to Redeem:&nbsp;</strong>
                 </p>
                 <p>1. Enter in the amount of SOR you would like to redeem and press Redeem.</p>
-                <p>2. Claim your DAI tokens.</p>
+                <p>2. Claim DAI.</p>
               </div>
             </div>
             <div className="flex flex-col">
               <div className="text-sm font-normal leading-5">
                 <strong className="text-accent bold">Note:&nbsp;</strong>
-                Approval is only needed once.
+                Approval needed once.
               </div>
             </div>
           </div>
@@ -188,21 +188,9 @@ export default function Sor() {
                           <strong className="text-accent bold">2.</strong> Click MINT.
                         </p>
                         <p>
-                          <strong className="text-accent bold">3.</strong> Claim your SOR tokens.
+                          <strong className="text-accent bold">3.</strong> Claim SOR.
                         </p>
                       </div>
-                      {/* <div className="flex flex-col">
-                        <div className="text-sm font-normal leading-5">
-                          <strong className="text-accent bold">Note:&nbsp;</strong>
-                          Approval is only needed once.
-                        </div>
-                      </div> */}
-                      {/* <div className="flex flex-col">
-                          <div className="text-sm font-normal leading-5">
-                            <strong className="text-accent bold">Note:&nbsp;</strong>
-                            Approval is only needed once.
-                          </div>
-                        </div> */}
                     </div>
                   }
                 />
@@ -297,6 +285,7 @@ export default function Sor() {
                   <Button
                     color="yellow"
                     type="filled"
+                    className="text-black"
                     onClick={stakeApprove}
                     disabled={stakeApprovalState !== ApprovalState.NOT_APPROVED}
                     style={{ width: '50%' }}
@@ -382,34 +371,6 @@ export default function Sor() {
               </div>
             </Tab.Panel>
             <Tab.Panel className={'outline-none'}>
-              <Button variant={'link'} color={'yellow'} className="absolute top-0 right-0 flex">
-                <QuestionHelper
-                  text={
-                    <div className="flex flex-col space-y-2">
-                      <div className="flex flex-col">
-                        {/* <p>
-                            <strong className="text-accent bold">Redeem:&nbsp;</strong>
-                          </p> */}
-                        <p>
-                          <strong className="text-accent bold">1.</strong> Enter SOR to redeem.
-                        </p>
-                        <p>
-                          <strong className="text-accent bold">2.</strong> Enter SOR to redeem.
-                        </p>
-                        <p>
-                          <strong className="text-accent bold">3.</strong> Claim your DAI.
-                        </p>
-                      </div>
-                      {/* <div className="flex flex-col">
-                        <div className="text-sm font-normal leading-5">
-                          <strong className="text-accent bold">Note:&nbsp;</strong>
-                          Approval is only needed once.
-                        </div>
-                      </div> */}
-                    </div>
-                  }
-                />
-              </Button>
 
               <StableInputPanel
                 // label={i18n._(t`Input`)}

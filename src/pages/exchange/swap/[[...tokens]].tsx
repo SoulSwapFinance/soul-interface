@@ -160,20 +160,7 @@ const Swap = () => {
 
   const handleApprove = useCallback(async () => {
     await approveCallback()
-    // if (signatureState === UseERC20PermitState.NOT_SIGNED && gatherPermitSignature) {
-    //   try {
-    //     await gatherPermitSignature()
-    //   } catch (error) {
-    //     // try to approve if gatherPermitSignature failed for any reason other than the user rejecting it
-    //     if (error?.code !== USER_REJECTED_TRANSACTION) {
-    //       await approveCallback()
-    //     }
-    //   }
-    // } else {
-    //   await approveCallback()
-    // }
   }, [approveCallback])
-  // }, [approveCallback, gatherPermitSignature, signatureState])
 
   // check if user has gone through approval process, used to show two step buttons, reset on token change
   const [approvalSubmitted, setApprovalSubmitted] = useState<boolean>(false)

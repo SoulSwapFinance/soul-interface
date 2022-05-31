@@ -213,27 +213,21 @@ export default function Stablecoin() {
                     <div className="flex flex-col space-y-2">
                       <div className="flex flex-col">
                         <p>
-                          <strong className="text-accent bold">1.</strong> Enter DAI to deposit.
+                          <strong className="text-accent bold">1.</strong> Deposit DAI.
                         </p>
                         <p>
                           <strong className="text-accent bold">2.</strong> Click MINT.
                         </p>
                         <p>
-                          <strong className="text-accent bold">3.</strong> Claim your SOR tokens.
+                          <strong className="text-accent bold">3.</strong> Claim SOR.
                         </p>
                       </div>
                       <div className="flex flex-col">
                         <div className="text-sm font-normal leading-5">
                           <strong className="text-accent bold">Note:&nbsp;</strong>
-                          Approval is only needed once.
+                          Approval needed once.
                         </div>
                       </div>
-                      {/* <div className="flex flex-col">
-                          <div className="text-sm font-normal leading-5">
-                            <strong className="text-accent bold">Note:&nbsp;</strong>
-                            Approval is only needed once.
-                          </div>
-                        </div> */}
                     </div>
                   }
                 />
@@ -329,6 +323,7 @@ export default function Stablecoin() {
                     color="yellow"
                     type="filled"
                     onClick={stakeApprove}
+                    className="text-black"
                     disabled={stakeApprovalState !== ApprovalState.NOT_APPROVED}
                     style={{ width: '50%' }}
                   >
@@ -428,13 +423,13 @@ export default function Stablecoin() {
                           <strong className="text-accent bold">2.</strong> Enter SOR to redeem.
                         </p>
                         <p>
-                          <strong className="text-accent bold">3.</strong> Claim your DAI.
+                          <strong className="text-accent bold">3.</strong> Claim DAI.
                         </p>
                       </div>
                       <div className="flex flex-col">
                         <div className="text-sm font-normal leading-5">
                           <strong className="text-accent bold">Note:&nbsp;</strong>
-                          Approval is only needed once.
+                          Approval needed once.
                         </div>
                       </div>
                     </div>
