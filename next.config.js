@@ -55,6 +55,11 @@ module.exports = withBundleAnalyzer(
           permanent: true,
         },
         {
+          source: '/autostake',
+          destination: '/soul/autostake',
+          permanent: true,
+        },
+        {
           source: '/farms',
           destination: '/summoner',
           permanent: true,
@@ -191,6 +196,10 @@ module.exports = withBundleAnalyzer(
         {
           source: '/mines',
           destination: '/summoner',
+        },
+        {
+          source: '/autostake',
+          destination: '/soul/autostake',
         },
         {
           source: '/analytics',

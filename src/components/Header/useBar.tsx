@@ -1,9 +1,9 @@
 import React, { ReactNode, useMemo } from 'react'
-import { GlobeIcon, SwitchVerticalIcon, TrendingUpIcon, SunIcon, CurrencyDollarIcon, UserGroupIcon } from '@heroicons/react/outline'
+import { GlobeIcon, SwitchVerticalIcon, SparklesIcon, TrendingUpIcon, PresentationChartLineIcon, SunIcon, CurrencyDollarIcon, UserGroupIcon } from '@heroicons/react/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { SOUL_ADDRESS } from 'sdk'
-import { PoolIcon, RocketIcon, WalletIcon } from 'components/Icon'
+import { PoolIcon, WalletIcon } from 'components/Icon'
 import { Feature } from 'enums'
 import { classNames, featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
@@ -173,11 +173,6 @@ const useMenu: UseBar = () => {
             link: '/bonds',
           },
           {
-            key: 'bridge',
-            title: i18n._(t`Bridge`),
-            link: '/bridge',
-          },
-          {
             key: 'soul-docs',
             title: i18n._(t`Tutorial`),
             link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
@@ -280,7 +275,7 @@ const useMenu: UseBar = () => {
       mainItems.push({
         key: 'analytics',
         title: i18n._(t`Data`),
-        icon: <TrendingUpIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+        icon: <PresentationChartLineIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
           {
             key: 'wallet',
@@ -348,6 +343,27 @@ const useMenu: UseBar = () => {
         ],
       })
       
+    }
+
+    if (featureEnabled(Feature.AMM, chainId))
+     {
+      mainItems.push({
+        key: 'tools',
+        title: i18n._(t`Tools`),
+        icon: <SparklesIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+        items: [
+        {
+          key: 'bridge',
+          title: i18n._(t`Bridge`),
+          link: '/bridge',
+        },
+        {
+          key: 'stream',
+          title: i18n._(t`SoulPay`),
+          link: 'https://pay.soulswap.finance',
+        },
+      ]
+    })
     }
 
     let exploreMenu: BarItem = {

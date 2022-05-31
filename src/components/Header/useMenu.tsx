@@ -153,34 +153,14 @@ const useMenu: UseMenu = () => {
             link: '/soul/dashboard',
           },
           {
-            key: 'bridge',
-            title: i18n._(t`Bridge`),
-            link: '/bridge',
+            key: 'earn',
+            title: i18n._(t`Rewards`),
+            link: '/explore'
           },
           {
             key: 'pool',
             title: i18n._(t`Liquidity`),
             link: '/pool',
-          },
-          {
-            key: 'farm',
-            title: i18n._(t`Farms`),
-            link: '/summoner',
-          },
-          {
-            key: 'vault',
-            title: i18n._(t`Vault`),
-            link: '/autostake',
-          },
-          {
-            key: 'staking',
-            title: i18n._(t`Stake`),
-            link: '/seance',
-          },
-          {
-            key: 'bonds',
-            title: i18n._(t`Bonds`),
-            link: '/bonds',
           },
           {
             key: 'soul-docs',
@@ -204,19 +184,14 @@ const useMenu: UseMenu = () => {
             link: '/luxor/dashboard',
           },
           {
-            key: 'luxor-bonds',
-            title: i18n._(t`Bonds`),
-            link: '/luxor/bonds',
+            key: 'earn',
+            title: i18n._(t`Explore`),
+            link: '/explore',
           },
           {
             key: 'sor',
             title: i18n._(t`Stable`),
             link: '/luxor/sor',
-          },
-          {
-            key: 'rebase',
-            title: i18n._(t`Staking`),
-            link: '/luxor/stake',
           },
           {
             key: 'lux-docs',
