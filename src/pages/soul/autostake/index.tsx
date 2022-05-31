@@ -297,7 +297,7 @@ export default function AutoStake() {
                     {i18n._(t`Bounty`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    {formatNumber(harvestRewards, false, true)} SOUL
+                    {formatNumber(bounty, false, true)} SOUL
                   </Typography>
                 </div>
               </div>
