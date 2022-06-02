@@ -401,21 +401,21 @@ export default function Dashboard() {
             </a>
           </NavLink>
         </Button>
-        <Button variant="filled" color="yellow" size="lg">
+        <Button variant="filled" color="gold" size="lg">
           <NavLink href={'/luxor/bonds'}>
             <a className="block text-lg md:text-xl text-black text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Bond </span>
             </a>
           </NavLink>
         </Button>
-        <Button variant="filled" color="yellow" size="lg">
+        <Button variant="filled" color="gold" size="lg">
           <NavLink href={'/luxor/wrap'}>
             <a className="block text-lg md:text-xl text-black text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Wrap </span>
             </a>
           </NavLink>
         </Button>
-        <Button variant="filled" color="yellow" size="lg">
+        <Button variant="filled" color="gold" size="lg">
           <NavLink href={'/luxor/sor'}>
             <a className="block text-lg md:text-xl text-black text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Stable </span>
