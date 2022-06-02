@@ -11,21 +11,9 @@ import NavLink from '../NavLink'
 
 const items = (i18n: I18n) => [
   {
-    name: i18n._(t`Luxor`),
-    description: i18n._(t`Luxor Bonds.`),
-    href: 'https://app.luxor.money',
-    external: true,
-  },
-  {
     name: i18n._(t`Documentation`),
     description: i18n._(t`Read the Documentation.`),
     href: 'https://docs.soulswap.finance',
-    external: true,
-  },
-  {
-    name: i18n._(t`Forum`),
-    description: i18n._(t`Summon an Empire.`),
-    href: 'https://forum.soulswap.finance',
     external: true,
   },
   {
@@ -38,12 +26,6 @@ const items = (i18n: I18n) => [
     name: i18n._(t`Resources`),
     description: i18n._(t`Explore our Protocol.`),
     href: 'https://links.soul.sh',
-    external: true,
-  },
-  {
-    name: i18n._(t`Email`),
-    description: i18n._(t`SoulSwapFinance@gmail.com`),
-    href: 'mailto:SoulSwapFinance@gmail.com',
     external: true,
   },
 ]
@@ -108,7 +90,7 @@ export default function Menu() {
               static
               className="absolute z-50 w-screen max-w-xs px-2 mt-3 transform -translate-x-full bottom-12 lg:top-12 left-full sm:px-0"
             >
-              <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
+              <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 border border-dark-600 border-3">
                 <div className="relative grid gap-6 px-5 py-6 bg-dark-900 sm:gap-8 sm:p-8">
                   {solutions.map((item) =>
                     item.external ? (

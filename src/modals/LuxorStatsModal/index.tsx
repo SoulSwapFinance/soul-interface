@@ -329,18 +329,6 @@ export default function LuxorStatsModal(): JSX.Element | null {
           size='xs'
           className="text-white"
         >
-          <NavLink href={'/luxor/dashboard'}>
-            <a className="flex justify-center text-black text-xl transition rounded-md hover:pink">
-              <span>VIEW DATA</span>
-            </a>
-          </NavLink>
-        </Button>
-        <Button
-          color='yellow'
-          type='outlined'
-          size='xs'
-          className="text-white"
-        >
           <NavLink href={'/luxor/bonds'}>
             <a className="flex justify-center text-black text-xl transition rounded-md hover:pink">
             <span>MINT LUX</span>

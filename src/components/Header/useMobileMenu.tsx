@@ -1,5 +1,5 @@
 import React, { ReactNode, useMemo } from 'react'
-import { GlobeIcon, SwitchVerticalIcon, TrendingUpIcon } from '@heroicons/react/outline'
+import { GlobeIcon, SparklesIcon, SwitchVerticalIcon, TrendingUpIcon } from '@heroicons/react/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { SOUL_ADDRESS } from 'sdk'
@@ -189,6 +189,27 @@ const useMobileMenu: UseMobileMenu = () => {
            },
         ],
       })
+
+    if (featureEnabled(Feature.AMM, chainId))
+     {
+      mainItems.push({
+        key: 'tools',
+        title: i18n._(t`Tools`),
+        // icon: <SparklesIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+        items: [
+        {
+          key: 'bridge',
+          title: i18n._(t`Bridge`),
+          link: '/bridge',
+        },
+        {
+          key: 'stream',
+          title: i18n._(t`SoulPay`),
+          link: 'https://pay.soulswap.finance',
+        },
+      ]
+    })
+    }
       
     }
 

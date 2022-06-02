@@ -189,7 +189,7 @@ export default function Dashboard() {
   const treasuryBalance = treasuryLiquidityBalance + treasuryReserveBalance + treasuryInvestmentBalance
 
   // calculate floor price
-  const luxorFloorPrice = treasuryReserveBalance / (luxorSupply)
+  const luxorFloorPrice = treasuryReserveBalance / (luxorSupply - storedLuxor)
 
     // const treasuryRevenueCollateralDark = [
     //     {
@@ -307,21 +307,21 @@ export default function Dashboard() {
     },
   ]
 
-  const toggleCalculatorModal = useToggleCalculatorModal()
-  const toggleStakeModal = useToggleModal(ApplicationModal.STAKE)
-  const toggleSorModal = useToggleModal(ApplicationModal.SOR)
-  const toggleWrapModal = useToggleModal(ApplicationModal.WRAP)
+  // const toggleCalculatorModal = useToggleCalculatorModal()
+  // const toggleStakeModal = useToggleModal(ApplicationModal.STAKE)
+  // const toggleSorModal = useToggleModal(ApplicationModal.SOR)
+  // const toggleWrapModal = useToggleModal(ApplicationModal.WRAP)
 
   return (
     <Container id="dashboard-page" className="py-4 space-y-4 md:py-8 max-w-min">
-      <LuxorBanner />
+      {/* <LuxorBanner /> */}
       <LuxorGlowShadow>
       <Head>
         <title>Dashboard | Luxor</title>
         <meta key="description" name="description" />
       </Head>
       <div className="flex mb-4 items-center justify-center">
-          <div className="grid grid-cols-4 items-center justify-between">
+          {/* <div className="grid grid-cols-4 items-center justify-between w-full">
     <div className="flex items-center md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
       onClick={() => toggleCalculatorModal()}>
         <div className="grid items-center text-center grid-flow-cols py-6 text-sm rounded-lg pointer-events-auto bg-dark-1000 text-primary border border-yellow">
@@ -381,33 +381,43 @@ export default function Dashboard() {
             </div>
             <SorModal />
       </div>
-  </div>
+  </div> */}
       </div>
+
+      <div className="grid grid-cols justify-center">
+      <div className="py-1 mb-1 mt-3 bg-yellow w-full" />
+        <div className="py-1 mb-1 bg-gold" />
+        <Typography variant="h1" className="text-center mt-4 mb-4 text-yellow" component="h1">
+          LUXOR MONEY
+        </Typography>
+        <div className="py-1 mt-1 bg-yellow" />
+        <div className="py-1 mt-1 mb-3 bg-gold" />
+
       <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
-        <Button variant="filled" color="yellow" size="lg">
+        <Button variant="filled" color="gold" size="lg">
           <NavLink href={'/luxor/stake'}>
-            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <a className="block text-lg md:text-xl text-black text-primary p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Stake </span>
             </a>
           </NavLink>
         </Button>
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/bonds'}>
-            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <a className="block text-lg md:text-xl text-black text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Bond </span>
             </a>
           </NavLink>
         </Button>
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/wrap'}>
-            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <a className="block text-lg md:text-xl text-black text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Wrap </span>
             </a>
           </NavLink>
         </Button>
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/sor'}>
-            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <a className="block text-lg md:text-xl text-black text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Stable </span>
             </a>
           </NavLink>
@@ -493,12 +503,11 @@ export default function Dashboard() {
             </AutoSizer>
               </div>
          </div>  */}
-        <div className="grid grid-cols justify-center">
+
         <div className="p-1 shadow-4 bg-[#F5D100] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
         <div className="bg-dark-1000 p-4">
           <Typography
             className="text-2xl flex gap-1 justify-center items-center"
-            // variant="md"
             weight={600}
             lineHeight={48}
             textColor="text-accent text-[#FFFFFF]"
