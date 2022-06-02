@@ -11,21 +11,9 @@ import NavLink from '../NavLink'
 
 const items = (i18n: I18n) => [
   {
-    name: i18n._(t`Luxor`),
-    description: i18n._(t`Luxor Bonds.`),
-    href: 'https://app.luxor.money',
-    external: true,
-  },
-  {
     name: i18n._(t`Documentation`),
     description: i18n._(t`Read the Documentation.`),
     href: 'https://docs.soulswap.finance',
-    external: true,
-  },
-  {
-    name: i18n._(t`Forum`),
-    description: i18n._(t`Summon an Empire.`),
-    href: 'https://forum.soulswap.finance',
     external: true,
   },
   {

@@ -39,7 +39,7 @@ const useMenu: UseBar = () => {
     // By default show just a swap button
     let tradeMenu: BarItem = {
       key: 'swap',
-      title: i18n._(t`Swap`),
+      title: i18n._(t`Our Exchange`),
       link: '/swap',
       icon: <SwitchVerticalIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
     }
@@ -136,15 +136,15 @@ const useMenu: UseBar = () => {
     if (poolMenu.length > 0)
       mainItems.push({
         key: 'pool',
-        title: i18n._(t`Pools`),
+        title: i18n._(t`User Positions`),
         items: poolMenu,
         icon: <PoolIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
       })
 
     if (featureEnabled(Feature.AMM, chainId)) {
       const farmItems = {
-        key: 'SoulSwap',
-        title: i18n._(t`Soul`),
+        key: 'soulswap',
+        title: i18n._(t`SoulSwap DeFi`),
         icon: <CurrencyDollarIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
           {
@@ -185,7 +185,7 @@ const useMenu: UseBar = () => {
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const learnItems = {
         key: 'Luxor',
-        title: i18n._(t`Luxor`),
+        title: i18n._(t`Luxor Money`),
         icon: <SunIcon width={20} className={classNames("rotate-90", isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
           {
@@ -232,7 +232,7 @@ const useMenu: UseBar = () => {
       {
        mainItems.push({
          key: 'lending',
-         title: i18n._(t`Lend`),
+         title: i18n._(t`Lend & Borrow`),
          icon: <SwitchVerticalIcon width={20} className={classNames("rotate-90", isLuxor ? "text-yellow" : "text-dark-600")} />,
          items: [
            {
@@ -270,43 +270,43 @@ const useMenu: UseBar = () => {
        
      }
 
-    if (featureEnabled(Feature.AMM, chainId))
-     {
-      mainItems.push({
-        key: 'analytics',
-        title: i18n._(t`Data`),
-        icon: <PresentationChartLineIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
-        items: [
-          {
-            key: 'wallet',
-            title: 'Wallet',
-            link: '/info/dashboard',
-          },
-          {
-            key: 'dashboard',
-            title: 'Overview',
-            link: '/analytics/dashboard',
-          },
-          {
-            key: 'tokens',
-            title: 'Tokens',
-            link: '/analytics/tokens',
-          },
-          {
-            key: 'pairs',
-            title: 'Pairs',
-            link: '/analytics/pairs',
-          },
-        ],
-      })
+    // if (featureEnabled(Feature.AMM, chainId))
+    //  {
+    //   mainItems.push({
+    //     key: 'analytics',
+    //     title: i18n._(t`Data`),
+    //     icon: <PresentationChartLineIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+    //     items: [
+    //       {
+    //         key: 'wallet',
+    //         title: 'Wallet',
+    //         link: '/info/dashboard',
+    //       },
+    //       {
+    //         key: 'dashboard',
+    //         title: 'Overview',
+    //         link: '/analytics/dashboard',
+    //       },
+    //       {
+    //         key: 'tokens',
+    //         title: 'Tokens',
+    //         link: '/analytics/tokens',
+    //       },
+    //       {
+    //         key: 'pairs',
+    //         title: 'Pairs',
+    //         link: '/analytics/pairs',
+    //       },
+    //     ],
+    //   })
       
-    }
+    // }
     
     if (featureEnabled(Feature.AMM, chainId))
      {
       mainItems.push({
         key: 'socials',
-        title: i18n._(t`Chat`),
+        title: i18n._(t`Social Media`),
         icon: <UserGroupIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
           {
@@ -325,12 +325,6 @@ const useMenu: UseBar = () => {
             link: `https://twitter.com/${ isLuxor ? 'LuxorMoney' : 'SoulSwapFinance' }`,
           },
           {
-            key: 'feedback',
-            title: 'Feedback',
-            link: '/board',
-            // link: 'https://soulswap.nolt.io',
-          },
-          {
             key: 'forum',
             title: 'Forum',
             link: 'https://forum.soulswap.finance',
@@ -339,6 +333,12 @@ const useMenu: UseBar = () => {
             key: 'medium',
             title: 'Medium',
             link: 'https://soulswapfinance.medium.com',
+          },
+          {
+            key: 'email',
+            title: 'Email',
+            // link: '/board',
+            link: 'mailto:soulswapfinance@gmail.com',
           },
         ],
       })
@@ -349,9 +349,14 @@ const useMenu: UseBar = () => {
      {
       mainItems.push({
         key: 'tools',
-        title: i18n._(t`Tools`),
+        title: i18n._(t`Data & Tools`),
         icon: <SparklesIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
+        {
+          key: 'data',
+          title: i18n._(t`Data`),
+          link: '/info',
+        },
         {
           key: 'bridge',
           title: i18n._(t`Bridge`),
@@ -359,16 +364,29 @@ const useMenu: UseBar = () => {
         },
         {
           key: 'stream',
-          title: i18n._(t`SoulPay`),
+          title: i18n._(t`Stream`),
           link: 'https://pay.soulswap.finance',
+        },
+        {
+          key: 'defi-llama',
+          title: i18n._(t`Request`),
+          link: 'https://soulswap.nolt.io',
         },
       ]
     })
     }
 
+    // Balances
+    mainItems.push({
+      key: 'balances',
+      title: i18n._(t`Account Details`),
+      link: '/balances',
+      icon: <WalletIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+    })
+
     let exploreMenu: BarItem = {
       key: 'explore',
-      title: i18n._(t`Explore`),
+      title: i18n._(t`Explore More`),
       link: '/explore',
       icon: <GlobeIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
     }
@@ -394,15 +412,6 @@ const useMenu: UseBar = () => {
     //     ],
     //   })
     // }
-
-    // Balances
-    mainItems.push({
-      key: 'balances',
-      title: i18n._(t`Portfolio`),
-      link: '/balances',
-      icon: <WalletIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
-    })
-    
 
     // if (featureEnabled(Feature.AMM, chainId)) {
     //   mainItems.push({
