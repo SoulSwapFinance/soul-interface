@@ -48,15 +48,7 @@ export default function Dashboard() {
   const treasuryLiquidityValue = Number(soulInfo.totalLiquidityValue)
   // const bondedValue = Number(bondsTvl)
   const bondedValue = Number(bondInfo.totalValue)
-  // : '21971.090220570382',
-  // : '33226.09911768204',
-  // : '34342.85',
-  // : '37595.70869506188',
-  // FantomBitcoinValue: '25834.553004332465',
-  // FantomDaiValue: '18916.06199394552',
-  // FantomBinanceValue: '12955.353761786479',
-  // SeanceFantomValue: '4700.715198538588',
-  // BitcoinEthereumValue: '10',
+
   const SoulFantomValue = Number(soulInfo.SoulFantomValue) + Number(bondInfo.SoulFantomValue)
   const SoulUsdcValue = Number(soulInfo.SoulUsdcValue) + Number(bondInfo.SoulUsdcValue)
   const FantomEthereumValue = Number(soulInfo.FantomEthereumValue) + Number(bondInfo.FantomEthereumValue)
@@ -201,69 +193,8 @@ export default function Dashboard() {
         <title>Dashboard | Soul</title>
         <meta key="description" name="description" />
       </Head>
-      <div className="flex mb-4 items-center justify-center">
-          <div className="grid grid-cols-4 items-center justify-between">
-    {/* {/* <div className="flex items-center md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
-      onClick={() => toggleCalculatorModal()}>
-        <div className="grid items-center text-center grid-flow-cols py-6 text-sm rounded-lg pointer-events-auto bg-dark-1000 text-primary border border-dark-600">
-          <Image
-              src="/images/calculator.png"
-              width="156px"
-              height="156px"
-              objectFit="contain"
-              className="rounded-md"
-              alt="calculator"
-              />
-        </div>
-        <CalculatorModal />
-    </div>
+      <div className="grid grid-cols justify-center">
 
-      <div className="flex items-center md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
-        onClick={() => toggleStakeModal()}>
-          <div className="grid items-center text-center grid-flow-cols py-6 text-sm rounded-lg pointer-events-auto bg-dark-1000 text-primary border border-dark-600">
-              <Image
-                  src="https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x4290b33158F429F40C0eDc8f9b9e5d8C5288800c/logo.png"
-                  width="156px"
-                  height="156px"
-                  objectFit="contain"
-                  className="rounded-md"
-                  alt="lum logo (orange/pink sun)"
-                  />
-            </div>
-            <StakeModal />
-      </div>
-
-      <div className="flex items-center md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
-        onClick={() => toggleWrapModal()}>
-          <div className="grid items-center text-center grid-flow-cols py-6 text-sm rounded-lg pointer-events-auto bg-dark-1000 text-primary border border-dark-600">
-              <Image
-                  src="https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208/logo.png"
-                  width="156px"
-                  height="156px"
-                  objectFit="contain"
-                  className="rounded-md"
-                  alt="wlum logo (purple)"
-                  />
-            </div>
-            <LuxorWrapModal />
-      </div>
-
-      <div className="flex items-center md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
-        onClick={() => toggleSorModal()}>
-          <div className="grid items-center text-center grid-flow-cols py-6 text-sm rounded-lg pointer-events-auto bg-dark-1000 text-primary border border-dark-600">
-              <Image
-                  src="https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A/logo.png"
-                  width="156px"
-                  height="156px"
-                  objectFit="contain"
-                  className="rounded-md"
-                  alt="sor logo (snake with infinity-shaped tail)"
-                  />
-            </div>
-            <SorModal />
-      </div> */}
-  </div>
-      </div>
       <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
         <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/seance'}>
@@ -381,8 +312,16 @@ export default function Dashboard() {
               {({ width }) => <DashboardLineGraph width={width} height={110} data={marketCapData} theme={'dark'} />}
             </AutoSizer>
               </div>
-         </div>  */}
-        <div className="grid grid-cols justify-center">
+            </div>  */}
+
+        <div className="py-1 mb-1 mt-3 bg-dark-600" />
+        <div className="py-1 mb-1 bg-purple" />
+        <Typography variant="h1" className="text-center mt-4 mb-4 text-dark-600" component="h1">
+          SOULSWAP FINANCE
+        </Typography>
+        <div className="py-1 mt-1 bg-dark-600" />
+        <div className="py-1 mt-1 mb-3 bg-purple" />
+
         <div className="p-1 shadow-4 bg-[#A654DD] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
         <div className="bg-dark-1000 p-4">
           <Typography
