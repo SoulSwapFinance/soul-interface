@@ -241,6 +241,9 @@ msgstr ""
 msgid "Borrowing allows you to obtain liquidity without selling. Your borrow limit depends on the amount of deposited collateral. You will be able to borrow up to 75% of your collateral and repay at any time with accrued interest."
 msgstr ""
 
+msgid "Bounty"
+msgstr ""
+
 msgid "Bridge"
 msgstr ""
 
@@ -462,6 +465,9 @@ msgstr ""
 msgid "Create pool"
 msgstr ""
 
+msgid "Cross"
+msgstr ""
+
 msgid "Current Percentage"
 msgstr ""
 
@@ -495,7 +501,7 @@ msgstr ""
 msgid "Deposit assets in equal amounts"
 msgstr ""
 
-msgid "Deposit liquidity or lent asset. Earn SOUL rewards."
+msgid "Deposit liquidity or lent assets. Earn SOUL."
 msgstr ""
 
 msgid "Deposit to CoffinBox"
@@ -549,10 +555,10 @@ msgstr ""
 msgid "Earn"
 msgstr ""
 
-msgid "Either return to the {link}, or change to an available network."
+msgid "Earned"
 msgstr ""
 
-msgid "Email"
+msgid "Either return to the {link}, or change to an available network."
 msgstr ""
 
 msgid "Enable Expert Mode"
@@ -650,6 +656,18 @@ msgstr ""
 msgid "Fee"
 msgstr ""
 
+msgid "Fee Amount"
+msgstr ""
+
+msgid "Fee Period"
+msgstr ""
+
+msgid "Fee Period Ends"
+msgstr ""
+
+msgid "Fee Period Remaining"
+msgstr ""
+
 msgid "Fees"
 msgstr ""
 
@@ -663,9 +681,6 @@ msgid "Fixed ratio"
 msgstr ""
 
 msgid "Forfeit"
-msgstr ""
-
-msgid "Forum"
 msgstr ""
 
 msgid "French"
@@ -935,9 +950,6 @@ msgstr ""
 msgid "Luxor Balance"
 msgstr ""
 
-msgid "Luxor Bonds."
-msgstr ""
-
 msgid "Luxor Money"
 msgstr ""
 
@@ -1159,9 +1171,6 @@ msgstr ""
 msgid "Pool Tokens"
 msgstr ""
 
-msgid "Pools"
-msgstr ""
-
 msgid "Portfolio"
 msgstr ""
 
@@ -1272,6 +1281,9 @@ msgstr ""
 msgid "Repay"
 msgstr ""
 
+msgid "Request"
+msgstr ""
+
 msgid "Resources"
 msgstr ""
 
@@ -1285,6 +1297,9 @@ msgid "Rewards"
 msgstr ""
 
 msgid "Rewards:"
+msgstr ""
+
+msgid "Ritual (Fee) Duration"
 msgstr ""
 
 msgid "Roll it back - this feature is not yet supported on {0}."
@@ -1307,6 +1322,9 @@ msgid ""
 "Use SEANCE to reclaim your SOUL when you want to withdraw.\n"
 "You may trade or farm your SEANCE and risk locking your SOUL for all eternity...\n"
 "Either way, while staked, you'll earn more SOUL over time."
+msgstr ""
+
+msgid "SELECT PATH"
 msgstr ""
 
 msgid "SELF"
@@ -1337,6 +1355,12 @@ msgid "STAKE"
 msgstr ""
 
 msgid "SWAP"
+msgstr ""
+
+msgid "Sacrifice"
+msgstr ""
+
+msgid "Salvation"
 msgstr ""
 
 msgid "Scarabs are a neat way to share your SOUL with anyone, so long as they're also willing to perform a ritual and make a small sacrfice..."
@@ -1393,6 +1417,9 @@ msgstr ""
 msgid "Slippage tolerance"
 msgstr ""
 
+msgid "Socials"
+msgstr ""
+
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click 'Approve CoffinBox' again for approving using the fallback method"
 msgstr ""
 
@@ -1405,6 +1432,9 @@ msgstr ""
 msgid "Soul Vault"
 msgstr ""
 
+msgid "SoulPay"
+msgstr ""
+
 msgid "SoulSwap"
 msgstr ""
 
@@ -1412,9 +1442,6 @@ msgid "SoulSwap Vault is a set of high incentivized pools. Long term supporters 
 msgstr ""
 
 msgid "SoulSwap utilizes a token vault called CoffinBox that has balances separate from your wallet."
-msgstr ""
-
-msgid "SoulSwapFinance@gmail.com"
 msgstr ""
 
 msgid "Spanish"
@@ -1449,6 +1476,9 @@ msgid ""
 "one click"
 msgstr ""
 
+msgid "Staked"
+msgstr ""
+
 msgid "Staking"
 msgstr ""
 
@@ -1462,6 +1492,9 @@ msgid "Step Three"
 msgstr ""
 
 msgid "Step Two"
+msgstr ""
+
+msgid "Stream"
 msgstr ""
 
 msgid "Submit"
@@ -1486,9 +1519,6 @@ msgid "Summon Scarabs"
 msgstr ""
 
 msgid "Summon Souls with Liquidity."
-msgstr ""
-
-msgid "Summon an Empire."
 msgstr ""
 
 msgid "Supplied"
@@ -1595,6 +1625,9 @@ msgid ""
 "click manage to activate more lists."
 msgstr ""
 
+msgid "Tools"
+msgstr ""
+
 msgid "Total"
 msgstr ""
 
@@ -1682,6 +1715,9 @@ msgstr ""
 msgid "Unsupported Asset"
 msgstr ""
 
+msgid "Until Salvation"
+msgstr ""
+
 msgid "Unwrap"
 msgstr ""
 
@@ -1701,6 +1737,9 @@ msgid "Use one of the buttons to set a percentage or enter a value manually usin
 msgstr ""
 
 msgid "Use the toggle to switch between balances when interacting with our platform."
+msgstr ""
+
+msgid "Utilities"
 msgstr ""
 
 msgid "Utilized"
