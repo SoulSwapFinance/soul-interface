@@ -28,7 +28,7 @@ import { CheckCircle } from "react-feather";
 import { formatNumber } from "functions";
 // import Image from "next/image";
 import { useActiveWeb3React } from 'services/web3';
-import { useUserInfo } from 'hooks/useAPI';
+// import { useUserInfo } from 'hooks/useAPI';
 // import { BigNumber } from "@ethersproject/bignumber";
 import { Wallet } from "@ethersproject/wallet";
 
@@ -177,9 +177,9 @@ export default function Exchange() {
       return EthersBigNumber.from(0);
     }
     if (from.isNative) {
-      const { userInfo } = useUserInfo()
-      const bal = userInfo.nativeBalance
-      return await (BigNumber.from(bal));
+      // const { userInfo } = useUserInfo()
+      // const bal = userInfo.nativeBalance
+      // return await (BigNumber.from(bal));
     }
     const ierc20 = new ethers.Contract(from.address, ierc20Abi.abi, provider);
     try {
