@@ -241,9 +241,6 @@ msgstr "Borrowed"
 msgid "Borrowing allows you to obtain liquidity without selling. Your borrow limit depends on the amount of deposited collateral. You will be able to borrow up to 75% of your collateral and repay at any time with accrued interest."
 msgstr "Borrowing allows you to obtain liquidity without selling. Your borrow limit depends on the amount of deposited collateral. You will be able to borrow up to 75% of your collateral and repay at any time with accrued interest."
 
-msgid "Bounty"
-msgstr "Bounty"
-
 msgid "Bridge"
 msgstr "Bridge"
 
@@ -470,9 +467,6 @@ msgstr "Create lock"
 msgid "Create pool"
 msgstr "Create pool"
 
-msgid "Cross"
-msgstr "Cross"
-
 msgid "Current Percentage"
 msgstr "Current Percentage"
 
@@ -506,8 +500,8 @@ msgstr "Deposit SOUL into CoffinBox"
 msgid "Deposit assets in equal amounts"
 msgstr "Deposit assets in equal amounts"
 
-msgid "Deposit liquidity or lent assets. Earn SOUL."
-msgstr "Deposit liquidity or lent assets. Earn SOUL."
+msgid "Deposit liquidity or lent asset. Earn SOUL rewards."
+msgstr "Deposit liquidity or lent asset. Earn SOUL rewards."
 
 msgid "Deposit to CoffinBox"
 msgstr "Deposit to CoffinBox"
@@ -560,11 +554,11 @@ msgstr "EXPLORE"
 msgid "Earn"
 msgstr "Earn"
 
-msgid "Earned"
-msgstr "Earned"
-
 msgid "Either return to the {link}, or change to an available network."
 msgstr "Either return to the {link}, or change to an available network."
+
+msgid "Email"
+msgstr "Email"
 
 msgid "Enable Expert Mode"
 msgstr "Enable Expert Mode"
@@ -663,18 +657,6 @@ msgstr "Farms"
 msgid "Fee"
 msgstr "Fee"
 
-msgid "Fee Amount"
-msgstr "Fee Amount"
-
-msgid "Fee Period"
-msgstr "Fee Period"
-
-msgid "Fee Period Ends"
-msgstr "Fee Period Ends"
-
-msgid "Fee Period Remaining"
-msgstr "Fee Period Remaining"
-
 msgid "Fees"
 msgstr "Fees"
 
@@ -689,6 +671,9 @@ msgstr "Fixed ratio"
 
 msgid "Forfeit"
 msgstr "Forfeit"
+
+msgid "Forum"
+msgstr "Forum"
 
 msgid "French"
 msgstr "French"
@@ -963,6 +948,9 @@ msgstr "Luxor"
 msgid "Luxor Balance"
 msgstr "Luxor Balance"
 
+msgid "Luxor Bonds."
+msgstr "Luxor Bonds."
+
 msgid "Luxor Money"
 msgstr "Luxor Money"
 
@@ -1186,6 +1174,9 @@ msgstr "Pool Found!"
 msgid "Pool Tokens"
 msgstr "Pool Tokens"
 
+msgid "Pools"
+msgstr "Pools"
+
 msgid "Portfolio"
 msgstr "Portfolio"
 
@@ -1298,9 +1289,6 @@ msgstr "Removing {0} {1} and {2} {3}"
 msgid "Repay"
 msgstr "Repay"
 
-msgid "Request"
-msgstr "Request"
-
 msgid "Resources"
 msgstr "Resources"
 
@@ -1315,9 +1303,6 @@ msgstr "Rewards"
 
 msgid "Rewards:"
 msgstr "Rewards:"
-
-msgid "Ritual (Fee) Duration"
-msgstr "Ritual (Fee) Duration"
 
 msgid "Roll it back - this feature is not yet supported on {0}."
 msgstr "Roll it back - this feature is not yet supported on {0}."
@@ -1344,9 +1329,6 @@ msgstr ""
 "Use SEANCE to reclaim your SOUL when you want to withdraw.\n"
 "You may trade or farm your SEANCE and risk locking your SOUL for all eternity...\n"
 "Either way, while staked, you'll earn more SOUL over time."
-
-msgid "SELECT PATH"
-msgstr "SELECT PATH"
 
 msgid "SELF"
 msgstr "SELF"
@@ -1377,12 +1359,6 @@ msgstr "STAKE"
 
 msgid "SWAP"
 msgstr "SWAP"
-
-msgid "Sacrifice"
-msgstr "Sacrifice"
-
-msgid "Salvation"
-msgstr "Salvation"
 
 msgid "Scarabs are a neat way to share your SOUL with anyone, so long as they're also willing to perform a ritual and make a small sacrfice..."
 msgstr "Scarabs are a neat way to share your SOUL with anyone, so long as they're also willing to perform a ritual and make a small sacrfice..."
@@ -1438,9 +1414,6 @@ msgstr "Slippage Tolerance"
 msgid "Slippage tolerance"
 msgstr "Slippage tolerance"
 
-msgid "Socials"
-msgstr "Socials"
-
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click 'Approve CoffinBox' again for approving using the fallback method"
 msgstr "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click 'Approve CoffinBox' again for approving using the fallback method"
 
@@ -1453,9 +1426,6 @@ msgstr "Soul"
 msgid "Soul Vault"
 msgstr "Soul Vault"
 
-msgid "SoulPay"
-msgstr "SoulPay"
-
 msgid "SoulSwap"
 msgstr "SoulSwap"
 
@@ -1464,6 +1434,9 @@ msgstr "SoulSwap Vault is a set of high incentivized pools. Long term supporters
 
 msgid "SoulSwap utilizes a token vault called CoffinBox that has balances separate from your wallet."
 msgstr "SoulSwap utilizes a token vault called CoffinBox that has balances separate from your wallet."
+
+msgid "SoulSwapFinance@gmail.com"
+msgstr "SoulSwapFinance@gmail.com"
 
 msgid "Spanish"
 msgstr "Spanish"
@@ -1499,9 +1472,6 @@ msgstr ""
 "Stake into SEANCE add collateral as aSEANCE on Aave all in\n"
 "one click"
 
-msgid "Staked"
-msgstr "Staked"
-
 msgid "Staking"
 msgstr "Staking"
 
@@ -1516,9 +1486,6 @@ msgstr "Step Three"
 
 msgid "Step Two"
 msgstr "Step Two"
-
-msgid "Stream"
-msgstr "Stream"
 
 msgid "Submit"
 msgstr "Submit"
@@ -1543,6 +1510,9 @@ msgstr "Summon Scarabs"
 
 msgid "Summon Souls with Liquidity."
 msgstr "Summon Souls with Liquidity."
+
+msgid "Summon an Empire."
+msgstr "Summon an Empire."
 
 msgid "Supplied"
 msgstr "Supplied"
@@ -1650,9 +1620,6 @@ msgstr ""
 "Tokens from inactive lists: import specific tokens below or\n"
 "click manage to activate more lists."
 
-msgid "Tools"
-msgstr "Tools"
-
 msgid "Total"
 msgstr "Total"
 
@@ -1740,9 +1707,6 @@ msgstr "Unsupported"
 msgid "Unsupported Asset"
 msgstr "Unsupported Asset"
 
-msgid "Until Salvation"
-msgstr "Until Salvation"
-
 msgid "Unwrap"
 msgstr "Unwrap"
 
@@ -1763,9 +1727,6 @@ msgstr "Use one of the buttons to set a percentage or enter a value manually usi
 
 msgid "Use the toggle to switch between balances when interacting with our platform."
 msgstr "Use the toggle to switch between balances when interacting with our platform."
-
-msgid "Utilities"
-msgstr "Utilities"
 
 msgid "Utilized"
 msgstr "Utilized"
