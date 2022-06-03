@@ -45,18 +45,6 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Swap`)}
           </Typography>
         </NavLink>
-       
-        <NavLink
-          activeClassName="text-dark-600"
-          href={{
-            pathname: 'https://cross.soulswap.finance',
-            query: getQuery(inputCurrency, outputCurrency),
-          }}
-        >
-          <Typography weight={700} className="text-secondary hover:text-purple">
-            {i18n._(t`Cross`)}
-          </Typography>
-        </NavLink>
         
         <NavLink
           activeClassName="text-dark-600"
@@ -68,6 +56,18 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`+/-`)}
           </Typography>
         </NavLink>
+
+        {/* <NavLink
+          activeClassName="text-dark-600"
+          href={{
+            pathname: 'https://cross.soulswap.finance',
+            query: getQuery(inputCurrency, outputCurrency),
+          }}
+        >
+          <Typography weight={700} className="text-secondary hover:text-purple">
+            {i18n._(t`Cross`)}
+          </Typography>
+        </NavLink> */}
 
         <NavLink
           activeClassName="text-dark-600"
