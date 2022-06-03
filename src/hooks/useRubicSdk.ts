@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 // import { makeObservable } from 'common/MakeObservable';
-import SDK, { Configuration } from 'rubic-sdk';
+import SDK, { Configuration } from 'rubik-sdk';
 
 const sdkStore = makeObservable<SDK | null>(null);
 
