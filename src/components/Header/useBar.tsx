@@ -153,6 +153,11 @@ const useMenu: UseBar = () => {
             link: '/soul/dashboard',
           },
           {
+            key: 'cross',
+            title: i18n._(t`Cross`),
+            link: 'https://cross.soulswap.finance',
+          },
+          {
             key: 'farm',
             title: i18n._(t`Farms`),
             link: '/summoner',
