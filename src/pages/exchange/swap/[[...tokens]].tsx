@@ -104,7 +104,7 @@ const Swap = () => {
 
   const isValid = !swapInputError
   const dependentField: Field = independentField === Field.INPUT ? Field.OUTPUT : Field.INPUT
-        const video = "www.shutterstock.com"
+  // const video = "www.shutterstock.com"
   const handleTypeInput = useCallback(
     (value: string) => {
       onUserInput(Field.INPUT, value)
@@ -119,9 +119,9 @@ const Swap = () => {
     [onUserInput]
   )
 
-  const DESIGN 
+  // const DESIGN 
     // = "https://media.giphy.com/media/YgVy0BfAmwaPn9fS3z/giphy.gif"
-    = "https://media.giphy.com/media/ZPJbKvfpD5qBPZDxMG/giphy-downsized-large.gif"
+    // = "https://media.giphy.com/media/ZPJbKvfpD5qBPZDxMG/giphy-downsized-large.gif"
 
   // modal and loading
   const [{ showConfirm, tradeToConfirm, swapErrorMessage, attemptingTxn, txHash }, setSwapState] = useState<{
