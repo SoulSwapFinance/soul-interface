@@ -373,7 +373,12 @@ const useMenu: UseBar = () => {
           link: 'https://pay.soulswap.finance',
         },
         {
-          key: 'defi-llama',
+          key: 'vote',
+          title: i18n._(t`Vote`),
+          link: 'https://enchant.soulswap.finance',
+        },
+        {
+          key: 'request',
           title: i18n._(t`Request`),
           link: 'https://soulswap.nolt.io',
         },
