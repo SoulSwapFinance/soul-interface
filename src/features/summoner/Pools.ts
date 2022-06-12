@@ -2,19 +2,6 @@ import { tokens } from './Tokens'
 
 export const InactivePools = [
   {
-    // 100
-    pid: 12,
-    token1: 'FTM',
-    token2: 'REAPER',
-    lpSymbol: 'FTM-REAPER',
-    lpAddresses: {
-      4002: '',
-      250: '0x7D776489372c8AFC0A1941a1335C9e9f90e0116a',
-    },
-    token1Address: tokens.FTM,
-    token2Address: tokens.REAPER,
-  },
-  {
     // 0
     pid: 16,
     token1: 'DAI',
@@ -40,20 +27,6 @@ export const InactivePools = [
     token1Address: tokens.SOUL,
     token2Address: tokens.WETH,
   },
-  {
-    // 0
-    pid: 37,
-    token1: 'SOUL',
-    token2: 'BTC',
-    lpSymbol: 'SOUL-BTC',
-    lpAddresses: {
-      4002: '',
-      250: '0xDA9D9CB5482EFD10839A676Fe99f05E41F57D885',
-    },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.WBTC,
-  },
-  
   {
     // 0
     pid: 6,
