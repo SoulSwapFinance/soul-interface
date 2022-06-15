@@ -195,7 +195,15 @@ export default function Dashboard() {
       </Head>
       <div className="grid grid-cols justify-center">
 
-      <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
+      <div className="py-1 mb-1 mt-3 bg-dark-600" />
+        <div className="py-1 mb-1 bg-purple" />
+        <Typography variant="h1" className="text-center mt-4 mb-4 text-dark-600" component="h1">
+          SOULSWAP FINANCE
+        </Typography>
+        <div className="py-1 mt-1 bg-dark-600" />
+        <div className="py-1 mt-1 mb-3 bg-purple" />
+
+      <div className="flex ml-4 mr-4 mb-4 gap-1 items-center justify-center">
         <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/seance'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
@@ -314,13 +322,6 @@ export default function Dashboard() {
               </div>
             </div>  */}
 
-        <div className="py-1 mb-1 mt-3 bg-dark-600" />
-        <div className="py-1 mb-1 bg-purple" />
-        <Typography variant="h1" className="text-center mt-4 mb-4 text-dark-600" component="h1">
-          SOULSWAP FINANCE
-        </Typography>
-        <div className="py-1 mt-1 bg-dark-600" />
-        <div className="py-1 mt-1 mb-3 bg-purple" />
 
         <div className="p-1 shadow-4 bg-[#A654DD] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
         <div className="bg-dark-1000 p-4">
