@@ -25,24 +25,30 @@ const SOUL = (i18n: I18n) => [
   },
   {
     id: 2,
+    name: 'BONDER',
+    description: i18n._(t`Deposit liquidity. Mint SOUL.`),
+    href: './bond',
+  },
+  {
+    id: 3,
     name: 'STAKER',
     description: 'Stake SOUL. Receive SEANCE. Everlasting SOUL.',
     href: './seance'
   },
   {
-    id: 3,
+    id: 4,
     name: 'ENCHANTER',
     description: 'Deposit SOUL. Auto-compound SOUL.',
     href: './soul/autostake'
   },
   {
-    id: 4,
+    id: 5,
     name: 'LENDER',
     description: 'Lend and Farm. Enter our Underworld Market.',
     href: './lend'
   },
   {
-    id: 5,
+    id: 6,
     name: 'BORROWER',
     description: 'Collateralize and Borrow. Leverage your Position.',
     href: './borrow'
