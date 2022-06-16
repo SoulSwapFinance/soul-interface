@@ -385,7 +385,7 @@ export default function Dashboard() {
       {/* </div> */}
 
       <div className="grid grid-cols justify-center">
-      <div className="py-1 mb-1 mt-3 ml-3 mr-3 bg-yellow w-full" />
+      <div className="py-1 mb-1 mt-3 ml-3 mr-3 bg-yellow" />
         <div className="py-1 mb-1 ml-3 mr-3 bg-gold" />
         <Typography variant="h1" className="text-center mt-4 mb-4 text-yellow" component="h1">
           LUXOR MONEY
