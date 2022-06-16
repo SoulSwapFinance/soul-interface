@@ -320,7 +320,7 @@ export default function Dashboard() {
         <title>Dashboard | Luxor</title>
         <meta key="description" name="description" />
       </Head>
-      <div className="flex mb-4 items-center justify-center">
+      {/* <div className="flex mb-4 items-center justify-center"> */}
           {/* <div className="grid grid-cols-4 items-center justify-between w-full">
     <div className="flex items-center md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
       onClick={() => toggleCalculatorModal()}>
@@ -382,18 +382,18 @@ export default function Dashboard() {
             <SorModal />
       </div>
   </div> */}
-      </div>
+      {/* </div> */}
 
       <div className="grid grid-cols justify-center">
-      <div className="py-1 mb-1 mt-3 bg-yellow w-full" />
-        <div className="py-1 mb-1 bg-gold" />
+      <div className="py-1 mb-1 mt-3 ml-2 mr-2 bg-yellow w-full" />
+        <div className="py-1 mb-1 ml-2 mr-2 bg-gold" />
         <Typography variant="h1" className="text-center mt-4 mb-4 text-yellow" component="h1">
           LUXOR MONEY
         </Typography>
-        <div className="py-1 mt-1 bg-yellow" />
-        <div className="py-1 mt-1 mb-3 bg-gold" />
+        <div className="py-1 mt-1 ml-2 mr-2 bg-yellow" />
+        <div className="py-1 mt-1 mb-3 ml-2 mr-2 bg-gold" />
 
-      <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
+      <div className="flex ml-4 mr-4 mb-4 gap-1 items-center justify-center">
         <Button variant="filled" color="gold" size="lg">
           <NavLink href={'/luxor/stake'}>
             <a className="block text-lg md:text-xl text-black text-primary p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
