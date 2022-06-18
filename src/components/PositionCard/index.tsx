@@ -191,7 +191,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
   //     )
   //   )
 
-  console.log('currency0.symbol:%s', currency0.symbol)
+  // console.log('currency0.symbol:%s', currency0.symbol)
   
   return (
     <div
@@ -214,7 +214,10 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
           </div>
         </div>
         <div className="flex items-center space-x-4">
-          Manage
+          {/* Manage  */}
+          {
+          pooledAmountFiatValueRaw < 0.1 ? '' : formatNumber(pooledAmountFiatValueRaw, true, true)
+          }
           {showMore ? (
             <ChevronUpIcon width="20px" height="20px" className="ml-0" />
           ) : (
