@@ -311,6 +311,13 @@ export default function Dashboard() {
   // const toggleStakeModal = useToggleModal(ApplicationModal.STAKE)
   // const toggleSorModal = useToggleModal(ApplicationModal.SOR)
   // const toggleWrapModal = useToggleModal(ApplicationModal.WRAP)
+  
+  const HideOnMobile = styled(ItemBox)`
+  @media screen and (max-width: 900px) {
+    display: none;
+   }
+ `;
+
 
   return (
     <Container id="dashboard-page" className="py-4 space-y-4 md:py-8 max-w-min">
@@ -383,7 +390,7 @@ export default function Dashboard() {
       </div>
   </div> */}
       {/* </div> */}
-
+<HideOnMobile>
       <div className="grid grid-cols ml-3 mr-3 justify-center">
       <div className="py-1 mb-1 mt-3 ml-3 mr-3 bg-yellow" />
         <div className="py-1 mb-1 ml-3 mr-3 bg-gold" />
@@ -392,7 +399,7 @@ export default function Dashboard() {
         </Typography>
         <div className="py-1 mt-1 ml-3 mr-3 bg-yellow" />
         <div className="py-1 mt-1 mb-3 ml-3 mr-3 bg-gold" />
-
+</HideOnMobile>
       <div className="flex ml-4 mr-4 mb-4 gap-1 items-center justify-center">
         <Button variant="filled" color="gold" size="lg">
           <NavLink href={'/luxor/stake'}>
