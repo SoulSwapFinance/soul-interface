@@ -313,7 +313,7 @@ export default function Dashboard() {
   // const toggleSorModal = useToggleModal(ApplicationModal.SOR)
   // const toggleWrapModal = useToggleModal(ApplicationModal.WRAP)
   
-  const HideOnMobile = styled(ItemBox)`
+const HideOnMobile = styled.div`
   @media screen and (max-width: 900px) {
     display: none;
    }
