@@ -565,7 +565,7 @@ export function useAutoStakeInfo(): { status: string; autoStakeInfo: T } {
       harvestRewards: '2.7874870645417755',
       soulTvl: '8407711.327837521',
       tvl: '63876.77321225582',
-      apy: '164.08453254750358',
+      apy: '42.08453254750358',
       pendingSoulRewards: '278.826990654351',
       pricePerShare: '1.054255884007467,',
       callFee: '100',
