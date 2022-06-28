@@ -1,47 +1,6 @@
 [
     {
-        "inputs": [
-            {
-                "internalType": "contract ISorToken",
-                "name": "_sor",
-                "type": "address"
-            },
-            {
-                "internalType": "contract IERC20",
-                "name": "_dai",
-                "type": "address"
-            },
-            {
-                "internalType": "contract IERC20",
-                "name": "_luxor",
-                "type": "address"
-            },
-            {
-                "internalType": "contract ILuxorRouter",
-                "name": "_luxorRouter",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "_treasury",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_maxStakeAmount",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_maxRedeemAmount",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_maxStakePerSecond",
-                "type": "uint256"
-            }
-        ],
+        "inputs": [],
         "stateMutability": "nonpayable",
         "type": "constructor"
     },
@@ -268,6 +227,25 @@
             }
         ],
         "name": "SwapPathChanged",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "tokenAddress",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "TokenWithdrawn",
         "type": "event"
     },
     {
@@ -891,6 +869,24 @@
             }
         ],
         "name": "withdrawLuxor",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "tokenAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "withdrawToken",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
