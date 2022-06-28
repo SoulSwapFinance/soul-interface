@@ -195,13 +195,15 @@ export default function Dashboard() {
       </Head>
       <div className="grid grid-cols justify-center">
 
-      <div className="py-1 mb-1 mt-3 ml-3 mr-3 bg-dark-600" />
+     {/* 
+        <div className="py-1 mb-1 mt-3 ml-3 mr-3 bg-dark-600" />
         <div className="py-1 mb-1 ml-3 mr-3  bg-purple" />
         <Typography variant="h1" className="text-center mt-4 mb-4 text-dark-600" component="h1">
           SOULSWAP FINANCE
         </Typography>
         <div className="py-1 mt-1 ml-3 mr-3 bg-dark-600" />
         <div className="py-1 mt-1 ml-3 mr-3 mb-3 bg-purple" />
+      */}
 
       <div className="flex ml-4 mr-4 mb-4 gap-1 items-center justify-center">
         <Button variant="bordered" color="purple" size="lg">
