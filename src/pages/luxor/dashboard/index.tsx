@@ -110,6 +110,7 @@ export default function Dashboard() {
   // const sorSorCollateral = Number(sorInfo.sorCollateral)
   // console.log('sorSorCollateral:%s', sorSorCollateral)
   const sorLuxCollateral = Number(sorInfo.luxorCollateralValue)
+  const sorWrappedLumensCollateral = Number(sorInfo.wlumCollateralValue)
   // console.log('sorLuxCollateral:%s', sorLuxCollateral)
   const sorDaiCollateral = Number(sorInfo.daiCollateral)
   // dampens the value of SOR collateral
@@ -117,7 +118,7 @@ export default function Dashboard() {
   const burnedSupply = Number(userTokenInfo.balance) / 1e18 // √ ~100
   const totalSorSupply = Number(sorInfo.supply) - burnedSupply
   // console.log('sorLuxCollateral:%s', sorLuxCollateral)
-  const totalSorCollateral = sorDaiCollateral + sorLuxCollateral
+  const totalSorCollateral = sorDaiCollateral + sorLuxCollateral + sorWrappedLumensCollateral
   // console.log('totalSorCollateral:%s', totalSorCollateral)
 
   // const result = useCurrencyBalance(LUX_TREASURY_ADDRESS, LUX_FTM)
@@ -151,7 +152,10 @@ export default function Dashboard() {
   const stakedLuxor = Number(luxorInfo.stakingBalance)
   // console.log('staked', stakedLuxor)
   const lockedLuxor = Number(luxorInfo.warmupBalance)
-  const storedLuxor = Number(sorInfo.luxorCollateral) / 1e9
+  const luxorCollateral = Number(sorInfo.luxorCollateral) 
+  const wrappedCollateral = Number(sorInfo.wlumCollateral) 
+  const storedCollateral = luxorCollateral + wrappedCollateral
+  const storedLuxor = storedCollateral
   // console.log('lockedLuxor', lockedLuxor)
   // console.log('SorValue', SorValue)
   const wrapIndex = Number(luxorInfo.index)
@@ -218,14 +222,20 @@ export default function Dashboard() {
       {
           "angle": sorDaiCollateral,
           "color": "#FFB300",
-          "label": "Dai Collateral",
+          "label": "DAI Collateral",
           "percent": (sorDaiCollateral / totalSorCollateral * 100).toFixed()
       },
       {
           "angle": sorLuxCollateral,
           "color": "#FFD300",
-          "label": "Luxor Collateral",
+          "label": "LUX Collateral",
           "percent": (sorLuxCollateral / totalSorCollateral * 100).toFixed()
+      },
+      {
+          "angle": sorWrappedLumensCollateral,
+          "color": "#FFD300",
+          "label": "WLUM Collateral",
+          "percent": (sorWrappedLumensCollateral / totalSorCollateral * 100).toFixed()
       },
       // {
       //     "angle": sorSorCollateral,
