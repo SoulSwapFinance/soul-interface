@@ -36,7 +36,7 @@ export const SOR_ADDRESS = {
 }
 
 export const SOR_MASTER_ADDRESS = {
-  ChainId.FANTOM]: 
+  [ChainId.FANTOM]: 
   // "0xfF1157CaCB174c012f68CDb0B7700597aae3D5A8" 
   "0x104b191008e56a0B79f25a828Ee18873AdD36C6c"
 }
