@@ -41,6 +41,19 @@ export const InactivePools = [
     token2Address: tokens.FUSD,
   },
   {
+    // 0
+    pid: 14,
+    token1: 'FTM',
+    token2: 'USDT',
+    lpSymbol: 'FTM-USDT',
+    lpAddresses: {
+      4002: '',
+      250: '0xdC24814AD654986928F8E4aec48D37fa30bBC5BB',
+    },
+    token1Address: tokens.FTM,
+    token2Address: tokens.USDT,
+  },
+  {
     // 400
     pid: 27,
     token1: 'SEANCE',
@@ -252,19 +265,6 @@ export const ActivePools = [
     },
     token1Address: tokens.FTM,
     token2Address: tokens.WBTC,
-  },
-  {
-    // 600
-    pid: 14,
-    token1: 'FTM',
-    token2: 'USDT',
-    lpSymbol: 'FTM-USDT',
-    lpAddresses: {
-      4002: '',
-      250: '0xdC24814AD654986928F8E4aec48D37fa30bBC5BB',
-    },
-    token1Address: tokens.FTM,
-    token2Address: tokens.USDT,
   },
   {
     // 300
