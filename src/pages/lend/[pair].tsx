@@ -121,7 +121,11 @@ if (!pair) return <div />
           <div className="text-right">
             <div>
               <div className="text-center text-md sm:text-lg text-secondary">{`APR`}</div>
-              <div className="text-center text-lg sm:text-2xl text-high-emphesis">{formatPercent(pair.supplyAPR.string)}</div>
+              <div className="text-center text-lg sm:text-2xl text-high-emphesis">
+                {/* {formatPercent(pair.supplyAPR.string)} */}
+                {formatPercent(pair.currentSupplyAPR.stringWithStrategy)}
+                </div>
+              {/* <div className="text-center text-lg sm:text-2xl text-high-emphesis">{formatPercent(pair.supplyAPR.string)}</div> */}
             </div>
           </div>
         </div>
