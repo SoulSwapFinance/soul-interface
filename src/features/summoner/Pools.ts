@@ -40,6 +40,19 @@ export const InactivePools = [
     token1Address: tokens.USDC,
     token2Address: tokens.FUSD,
   },
+  {
+    // 400
+    pid: 27,
+    token1: 'SEANCE',
+    token2: 'UNIDX',
+    lpSymbol: 'SEANCE-UNIDX',
+    lpAddresses: {
+      4002: '',
+      250: '0x578c7B9A45D9e55246d3036D48db262b9B3CA48e',
+    },
+    token1Address: tokens.SEANCE,
+    token2Address: tokens.UNIDX,
+  },
 
 ]
 
@@ -83,19 +96,7 @@ export const ActivePools = [
     token1Address: tokens.SOUL,
     token2Address: tokens.SEANCE,
   },
-  {
-    // 400
-    pid: 27,
-    token1: 'SEANCE',
-    token2: 'UNIDX',
-    lpSymbol: 'SEANCE-UNIDX',
-    lpAddresses: {
-      4002: '',
-      250: '0x578c7B9A45D9e55246d3036D48db262b9B3CA48e',
-    },
-    token1Address: tokens.SEANCE,
-    token2Address: tokens.UNIDX,
-  },
+
   {
     // 600
     pid: 10,
