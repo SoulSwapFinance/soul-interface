@@ -224,7 +224,8 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
             const tx = await SoulSummonerContract?.deposit(pid, Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx.wait()
         } catch (e) {
-            const tx = await SoulSummonerContract?.deposit(pid, Number(depositValue).toFixed().toBigNumber(assetDecimals))
+            const smallerValue = Number(depositValue) - 0.000001
+            const tx = await SoulSummonerContract?.deposit(pid, Number(smallerValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
             // alert(e.message)
             console.log(e)
         }
