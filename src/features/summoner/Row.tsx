@@ -42,7 +42,7 @@ const HideOnMobile = styled.div`
 export const ActiveRow = ({ pid, farm, lpToken }) => {
     const { account, chainId, library } = useActiveWeb3React()
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
-    const [depositing, setDepositing] = useState(false)
+    // const [depositing, setDepositing] = useState(false)
 
     const [approved, setApproved] = useState(false)
     const [withdrawValue, setWithdrawValue] = useState('0')
@@ -69,8 +69,8 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const token0Symbol = pairInfo.token0Symbol
     const token1Symbol = pairInfo.token1Symbol
     
-    const token0Address = pairInfo.token0Address
-    const token1Address = pairInfo.token1Address
+    // const token0Address = pairInfo.token0Address
+    // const token1Address = pairInfo.token1Address
 
     const [showOptions, setShowOptions] = useState(false)
     const [openDeposit, setOpenDeposit] = useState(false)
@@ -94,7 +94,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const parsedBalance = tryParseAmount(walletBalance, farm.lpToken)
     // const userBalance = useCurrencyBalance(account, lpToken)
     const hasBalance = Number(walletBalance) > 0
-    const isFarmer = Number(stakedBalance) > 0
+    // const isFarmer = Number(stakedBalance) > 0
     const isUnderworldPair = pairType == "underworld"
     const isSwapPair = pairType == "farm"
     const isActive = pairStatus == "active"
@@ -224,7 +224,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
             const tx = await SoulSummonerContract?.deposit(pid, Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx.wait()
         } catch (e) {
-            const tx = await SoulSummonerContract?.deposit(pid, Number(depositValue).toFixed(6).toBigNumber(assetDecimals))
+            const tx = await SoulSummonerContract?.deposit(pid, Number(depositValue).toFixed().toBigNumber(assetDecimals))
             // alert(e.message)
             console.log(e)
         }
@@ -707,7 +707,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         setShowConfirmation(true)
                     }
                 >
-                    WITHDRAW { token0Symbol }
+                    WITHDRAW { token0Symbol + '-' + token1Symbol }
                 </SubmitButton>
 
             </Wrap>
