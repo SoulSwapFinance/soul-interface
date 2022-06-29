@@ -24,8 +24,7 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx",
-    "src/features/bond/BondRowRender.tsx"
+    "**/*.tsx"  
   ],
   "exclude": [
     "node_modules"
