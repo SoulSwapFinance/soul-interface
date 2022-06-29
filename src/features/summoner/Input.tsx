@@ -68,20 +68,15 @@ export default function FarmInputPanel({
 
   return (
     <div id={id} className={classNames('p-1 rounded bg-dark-1000')}>
-      <div className="flex flex-row items-center">
-        <div className={classNames('w-5/5 sm:w-1/4 mx-4 sm:mx-12 sm:ml-6')}>
-
+      <div className="flex flex-row items-center ml-2">
             {/* CURRENCY LOGO */}
+        {/* <div className={classNames('w-5/5 sm:w-1/4 mx-4 sm:mx-12 sm:ml-6')}>
             <div className="hidden sm:flex sm:items-center">
                 <DoubleCurrencyLogo currency0={token0} currency1={token1} size={48} margin={true} />
             </div>
-
-        </div>
-          <div
-            className={classNames(
-              'flex items-center w-full rounded bg-dark-1200 p-2 sm:w-3/5'
-            )}
-          >
+        </div> */}
+          {/* <div className={classNames('flex items-center w-full rounded bg-dark-1200 p-2 sm:w-3/5')}> */}
+          <div className={classNames('flex items-center w-full rounded bg-dark-1200 p-1')}>
             <>
               <Input.Numeric
                 id="token-amount-input"
