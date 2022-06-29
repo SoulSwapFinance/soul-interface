@@ -579,7 +579,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         handleDeposit(pid)
                     }
                 >
-                    DEPOSIT { tokenSymbol }
+                    DEPOSIT { Number(allocPoint) == 420 ? token0Symbol : token0Symbol + '-' + token1Symbol}
                 </SubmitButton>
             )}
 
