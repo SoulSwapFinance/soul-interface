@@ -65,7 +65,7 @@ export const chainToNativeToken = {
           chainId: "0xfa", // A 0x-prefixed hexadecimal string
           chainName: "Fantom",
           nativeCurrency: chainToNativeToken[250],
-          rpcUrls: ["https://rpc.ftm.tools"],
+          rpcUrls: ["https://rpc.ankr.com/fantom"],
           blockExplorerUrls: ["https://ftmscan.com/"],
         };
       }

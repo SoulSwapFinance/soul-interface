@@ -15,8 +15,8 @@ const config = {
     // Opera chain id
     chainId: "0xfa",
     // JSON-RPC endpoint
-    rpc: "https://rpc.ftm.tools",
-    // rpc: "https://rpc.ankr.com/fantom",
+    // rpc: "https://rpc.ftm.tools",
+    rpc: "https://rpc.ankr.com/fantom",
     // used in links pointing to fantom explorer
     explorerUrl: "https://ftmscan.com/",
     // used in links pointing to fantom explorer's transaction detail
