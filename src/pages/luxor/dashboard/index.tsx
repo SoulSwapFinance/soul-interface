@@ -155,8 +155,10 @@ export default function Dashboard() {
   const lockedLuxor = Number(luxorInfo.warmupBalance)
     const luxorCollateral = Number(sorInfo.luxorCollateral) 
    const wrappedCollateral = Number(sorInfo.wlumCollateral) 
-   const storedCollateral = luxorCollateral + (wrappedCollateral * wrapIndex)
-   const storedLuxor = storedCollateral 
+   const stakedStored = wrappedCollateral * wrapIndex
+   const storedCollateral = luxorCollateral + stakedStored
+   const storedLuxor = storedCollateral
+   
    const stakedLuxor = Number(luxorInfo.stakingBalance) - stakedStored
   // console.log('lockedLuxor', lockedLuxor)
   // console.log('SorValue', SorValue)
