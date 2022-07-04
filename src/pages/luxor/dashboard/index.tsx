@@ -149,16 +149,17 @@ export default function Dashboard() {
   
   // GET LUXOR ECONOMY BALANCES //
   const { luxorInfo } = useLuxorInfo()
-  const stakedLuxor = Number(luxorInfo.stakingBalance)
+   const wrapIndex = Number(luxorInfo.index)
+  
   // console.log('staked', stakedLuxor)
   const lockedLuxor = Number(luxorInfo.warmupBalance)
     const luxorCollateral = Number(sorInfo.luxorCollateral) 
    const wrappedCollateral = Number(sorInfo.wlumCollateral) 
-   const storedCollateral = luxorCollateral + wrappedCollateral
-   const storedLuxor = storedCollateral
+   const storedCollateral = luxorCollateral + (wrappedCollateral * wrapIndex)
+   const storedLuxor = storedCollateral 
+   const stakedLuxor = Number(luxorInfo.stakingBalance) - stakedStored
   // console.log('lockedLuxor', lockedLuxor)
   // console.log('SorValue', SorValue)
-  const wrapIndex = Number(luxorInfo.index)
 
   const luxorCirculatingSupply = luxorSupply - stakedLuxor - lockedLuxor - storedLuxor
   // console.log('Ftm Bal:%s', FtmBalance)
