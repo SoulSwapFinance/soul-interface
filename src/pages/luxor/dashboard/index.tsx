@@ -229,10 +229,10 @@ export default function Dashboard() {
           "percent": (sorDaiCollateral / totalSorCollateral * 100).toFixed()
       },
       {
-          "angle": sorLuxCollateral,
+          "angle": sorLuxCollateral + sorWrappedLumensCollateral,
           "color": "#FFD300",
           "label": "LUX Collateral",
-          "percent": (sorLuxCollateral / totalSorCollateral * 100).toFixed()
+          "percent": ((sorLuxCollateral + sorWrappedLumensCollateral) / totalSorCollateral * 100).toFixed()
       },
       // {
       //     "angle": sorSorCollateral,
@@ -240,12 +240,12 @@ export default function Dashboard() {
       //     "label": "Sor Collateral",
       //     "percent": (sorSorCollateral / totalSorCollateral * 100).toFixed()
       // }
-      {
+      /* {
            "angle": sorWrappedLumensCollateral,
            "color": "#FFA300",
            "label": "WLUM Collateral",
            "percent": (sorWrappedLumensCollateral / totalSorCollateral * 100).toFixed()
-       }, 
+       }, */
   ]
 
   const treasuryBalanceData = [
