@@ -232,7 +232,7 @@ export default function Dashboard() {
           "angle": sorLuxCollateral + sorWrappedLumensCollateral,
           "color": "#FFD300",
           "label": "LUX Collateral",
-          "percent": (Number(sorLuxCollateral) + Number(sorWrappedLumensCollateral)) / (totalSorCollateral * 100).toFixed()
+          "percent": ((Number(sorLuxCollateral) + Number(sorWrappedLumensCollateral)) / (totalSorCollateral * 100)).toFixed()
       },
       // {
       //     "angle": sorSorCollateral,
