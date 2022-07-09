@@ -505,7 +505,7 @@ export default function Stake() {
                 </div> */}
               </div>
 
-              <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1">
+              <div className={classNames(warmupValue > 0 && "flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1")}>
               <div className="flex text-xl mb-2 font-bold text-gold"> Warmup Details </div>
 
               <div className={classNames(warmupValue > 0 && "flex justify-between")}>
