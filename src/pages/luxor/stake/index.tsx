@@ -434,9 +434,11 @@ export default function Stake() {
                     </div>
                 </div>
               </div> */}
-              <div className={lumBalance > 0 && classNames("flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1")}>
+
+              { lumBalance > 0 && 
+              <div className={classNames(lumBalance > 0 && "flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1")}>
               {/* <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1"> */}
-<div className="flex text-xl mb-2 font-bold text-yellow"> Deposit Details </div>
+<div className={classNames(lumBalance > 0 ? "flex text-xl mb-2 font-bold text-yellow" : 'hidden')}> Deposit Details </div>
               <div className={classNames(lumBalance > 0 ? 'flex justify-between' : 'hidden')}>
                   <Typography className="text-white" fontFamily={'medium'}>
                     {i18n._(t`Staked Balance`)}
@@ -445,7 +447,6 @@ export default function Stake() {
                     { formatNumber(lumBalance, false, true) } LUX
                   </Typography>
                 </div>
-               
               <div className={classNames(lumBalance > 0 && 'flex justify-between')}>
                   <Typography className="text-white" fontFamily={'medium'}>
                     {i18n._(t`Next Rebase`)}
@@ -454,6 +455,7 @@ export default function Stake() {
                     { formatNumber(nextStakedReward, false, true) } LUM
                   </Typography>
                 </div>
+        
 {/*               
               <div className={classNames(lumBalance > 0 && warmupValue > 0 ? 'flex justify-between' : 'hidden')}>
                   <Typography className="text-white" fontFamily={'medium'}>
@@ -504,9 +506,10 @@ export default function Stake() {
                   </Typography>
                 </div> */}
               </div>
-
-              <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1">
-              <div className="flex text-xl mb-2 font-bold text-gold"> Warmup Details </div>
+          }
+          { warmupValue > 0 && 
+            <div className={classNames(warmupValue > 0 && "flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1")}>
+              <div className={classNames(warmupValue > 0 && "flex text-xl mb-2 font-bold text-gold")}> Warmup Details </div>
 
               <div className={classNames(warmupValue > 0 && "flex justify-between")}>
                   <Typography className="text-white" fontFamily={'medium'}>
@@ -524,11 +527,10 @@ export default function Stake() {
                   { formatNumber(nextWarmupReward, false, true) } LUM
                 </Typography>
               </div>
-</div>
+            </div>
+          }
 
-
-
-              <div className="mt-6 flex items-center gap-2">
+            <div className="mt-6 flex items-center gap-2">
               <Button variant="outlined" color="yellow" onClick={handleApproveToken} 
                     className="text-black text-md font-bold"
                     >
