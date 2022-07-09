@@ -327,8 +327,14 @@ export function useLuxorUserInfo(userAddress): { status: string; luxorUserInfo: 
         address: '',
         epochLength: '0',
         nextRebase: '0',
+        nextReward: '0',
+        nextStakedReward: '0',
+        nextWarmupReward: '0',
+        userStaked: '0',
+        userShare: '0',
         distribute: '0',
         vestingTerm: '0',
+        warmupValue: '0',
         warmupExpiry: '0'
 
     })  
