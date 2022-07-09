@@ -149,16 +149,19 @@ export default function Dashboard() {
   
   // GET LUXOR ECONOMY BALANCES //
   const { luxorInfo } = useLuxorInfo()
-  const stakedLuxor = Number(luxorInfo.stakingBalance)
+   const wrapIndex = Number(luxorInfo.index)
+  
   // console.log('staked', stakedLuxor)
   const lockedLuxor = Number(luxorInfo.warmupBalance)
     const luxorCollateral = Number(sorInfo.luxorCollateral) 
    const wrappedCollateral = Number(sorInfo.wlumCollateral) 
-   const storedCollateral = luxorCollateral + wrappedCollateral
+   const stakedStored = wrappedCollateral * wrapIndex
+   const storedCollateral = luxorCollateral + stakedStored
    const storedLuxor = storedCollateral
+   
+   const stakedLuxor = Number(luxorInfo.stakingBalance) - stakedStored
   // console.log('lockedLuxor', lockedLuxor)
   // console.log('SorValue', SorValue)
-  const wrapIndex = Number(luxorInfo.index)
 
   const luxorCirculatingSupply = luxorSupply - stakedLuxor - lockedLuxor - storedLuxor
   // console.log('Ftm Bal:%s', FtmBalance)
@@ -226,10 +229,10 @@ export default function Dashboard() {
           "percent": (sorDaiCollateral / totalSorCollateral * 100).toFixed()
       },
       {
-          "angle": sorLuxCollateral,
+          "angle": sorLuxCollateral + sorWrappedLumensCollateral,
           "color": "#FFD300",
           "label": "LUX Collateral",
-          "percent": (sorLuxCollateral / totalSorCollateral * 100).toFixed()
+          "percent": ((sorLuxCollateral + sorWrappedLumensCollateral) / totalSorCollateral * 100).toFixed()
       },
       // {
       //     "angle": sorSorCollateral,
@@ -237,12 +240,12 @@ export default function Dashboard() {
       //     "label": "Sor Collateral",
       //     "percent": (sorSorCollateral / totalSorCollateral * 100).toFixed()
       // }
-      {
+      /* {
            "angle": sorWrappedLumensCollateral,
            "color": "#FFA300",
            "label": "WLUM Collateral",
            "percent": (sorWrappedLumensCollateral / totalSorCollateral * 100).toFixed()
-       }, 
+       }, */
   ]
 
   const treasuryBalanceData = [
