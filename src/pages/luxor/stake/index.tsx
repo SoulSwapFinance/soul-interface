@@ -436,7 +436,7 @@ export default function Stake() {
               </div> */}
               <div className={lumBalance > 0 && classNames("flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1")}>
               {/* <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1"> */}
-<div className="flex text-xl mb-2 font-bold text-yellow"> Deposit Details </div>
+<div className={classNames(lumBalance > 0 && "flex text-xl mb-2 font-bold text-yellow")}> Deposit Details </div>
               <div className={classNames(lumBalance > 0 ? 'flex justify-between' : 'hidden')}>
                   <Typography className="text-white" fontFamily={'medium'}>
                     {i18n._(t`Staked Balance`)}
