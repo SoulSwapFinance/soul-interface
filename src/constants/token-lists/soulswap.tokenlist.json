@@ -23,6 +23,14 @@
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x04068DA6C83AFCFA0e13ba15A6696662335D5B75/logo.png"
       },
       {
+        "name": "JoeToken",
+        "address": "0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd",
+        "symbol": "JOE",
+        "decimals": 18,
+        "chainId": 43114,
+        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/avalanche/assets/0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd/logo.png"
+      },
+      {
         "name": "Wrapped Ether",
         "address": "0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB",
         "symbol": "WETH",

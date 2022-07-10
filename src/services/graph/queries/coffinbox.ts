@@ -166,6 +166,29 @@ export const coffinBoxQuery = gql`
   }
 `
 
+export const coffinBoxQuery_AVAX = gql`
+  query coffinBoxQuery(
+    $id: String! = "0x51d7d0d03A9E38Ba550f24cea28B992AD2350fee"
+    $block: Block_height
+    $where: CoffinBox_filter
+  ) {
+    coffinBoxes(first: 1, block: $block, where: $where) {
+      id
+      totalUsers
+      totalTokens
+      totalUnderworldPairs
+      tokens(first: 1000) {
+        id
+        name
+        symbol
+        decimals
+        totalSupplyBase
+        totalSupplyElastic
+      }
+    }
+  }
+`
+
 export const coffinStrategiesQuery = gql`
   query coffinStrategies($first: Int = 1000, $firstHarvests: Int = 3, $block: Block_height, $where: Strategy_filter) {
     strategies(first: $first, block: $block, where: $where) {

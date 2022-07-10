@@ -24,7 +24,7 @@ const config = {
   };
   
   if (process.env.REACT_APP_USE === "testnet") {
-    console.warn("fWallet app is using TESTNET!");
+    console.warn("App is using TESTNET!");
     config.providers = [
       {
         // http: "https://xapi.testnet.fantom.network/api",
@@ -43,7 +43,7 @@ const config = {
   }
   
   if (process.env.USE_PROXY) {
-    console.warn("fWallet is using proxy");
+    console.warn("As using proxy");
   }
   
   export default config;

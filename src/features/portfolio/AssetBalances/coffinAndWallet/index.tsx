@@ -80,7 +80,7 @@ export const WalletBalances: FC<{ account: string }> = ({ account }) => {
       const { currency } = row.values.asset
       dispatch(
         setBalancesState({
-          currency: currency.isNative ? 'FTM' : row.values.asset.currency.address,
+          currency: currency.isNative ? 'ETH' : row.values.asset.currency.address,
           activeModal: ActiveModal.DEPOSIT,
         })
       )

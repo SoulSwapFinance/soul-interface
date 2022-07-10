@@ -99,6 +99,10 @@ const BAD_RECIPIENT_ADDRESSES: { [chainId: string]: { [address: string]: true } 
   [ChainId.FANTOM]: {
     '0x1120e150dA9def6Fe930f4fEDeD18ef57c0CA7eF': true, // v2 factory
     '0x6b3d631B87FE27aF29efeC61d2ab8CE4d621cCBF': true, // v2 router 02
+  },
+  [ChainId.AVALANCHE]: {
+    '0x5BB2a9984de4a69c05c996F7EF09597Ac8c9D63a': true, // v2 factory
+    '0xa4594460A9d3D41e8B85542D34E23AdAbc3c86Ef': true, // v2 router 02
   }
 }
 
