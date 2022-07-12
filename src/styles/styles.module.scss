@@ -1,0 +1,481 @@
+.container {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    padding-top: 80px;
+    box-sizing: border-box;
+  }
+  
+  .body {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding-top: 100px;
+    z-index: 1;
+    background-color: rgb(0, 0, 0);
+  }
+  
+  .main {
+    max-width: 1200px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 136px;
+    background-color: rgb(0, 0, 0);
+  }
+  
+  .mainLeft {
+    flex: 1;
+    margin-right: 120px;
+  }
+  
+  .card {
+    flex: 1;
+    background-color: rgb(0, 0, 0);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0px 20.5814px 82.3256px #353536;
+  }
+  
+  .title {
+    font-weight: 700;
+    font-size: 58px;
+    line-height: 71px;
+    letter-spacing: -0.2px;
+    color: #121223;
+  }
+  
+  .subtitle {
+    margin-top: 16px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+    color: #a2a2ad;
+  }
+  
+  .exploreButton {
+    width: 168px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: -0.2px;
+    color: #fff;
+    box-shadow: none;
+    border-radius: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 24px;
+    background-color: #1969ff;
+  
+    &:hover {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+  }
+  
+  .cardMedia {
+    position: relative;
+  
+    .player {
+      top: 0;
+      left: 0;
+      width: 100%!important;
+      height: 580px!important;
+    }
+  }
+  
+  .cardInfo {
+    padding: 6px 30px 24px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .cardCategory {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 23px;
+    letter-spacing: -0.01em;
+    color: #a2a2ad;
+  }
+  
+  .cardName {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -0.02em;
+    color: #fcfcfc;
+    margin-top: 4px;
+  }
+  
+  .about {
+    width: 100%;
+    // background: linear-gradient(180deg, #ffffff 0%, rgba(234, 234, 241, 0) 100%);
+    background-color: rgb(255, 255, 255);
+  }
+  
+  .aboutInner {
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+    padding-bottom: 80px;
+    box-sizing: border-box;
+  }
+  
+  .aboutTitle {
+    margin-top: 136px;
+    font-weight: 700;
+    font-size: 58px;
+    line-height: 71px;
+    letter-spacing: -1.2px;
+    color: #121223;
+    text-align: center;
+  }
+  
+  .aboutCards {
+    margin-top: 96px;
+    padding-bottom: 80px;
+    display: flex;
+  }
+  
+  .aboutCard {
+    flex: 1;
+    margin-right: 22px;
+    padding: 33px 20px;
+    box-sizing: border-box;
+    border-radius: 27px;
+    background-color: #fff;
+    box-shadow: 0px 18.6388px 74.5551px #f2f1fa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  
+  .aboutCardLink {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cardIconWrapper {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    box-shadow: 0px 22.9412px 91.7647px #f2f1fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    img {
+      width: 82px;
+      height: 82px;
+    }
+  }
+  
+  .cardTitle {
+    margin-top: 40px;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: -0.25px;
+    color: #121223;
+    text-align: center;
+  }
+  
+  .cardDesc {
+    margin-top: 12px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.25px;
+    color: #a2a2ad;
+    text-align: center;
+  }
+  
+  .categories {
+    margin-top: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .categoryCard {
+    flex: 0 0 calc(33.33% - 26.66px);
+    margin-right: 40px;
+    margin-bottom: 32px;
+    padding: 37px 24px 24px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    background: #ffffff;
+    box-shadow: 0px 22.9412px 91.7647px #f2f1fa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+  
+    &:nth-child(3n),
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  
+  .cardIconWrapper2 {
+    width: 129px;
+    height: 129px;
+    border-radius: 50%;
+    box-shadow: 0px 22.9412px 91.7647px #f2f1fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    img {
+      width: 66px;
+      height: 66px;
+    }
+  }
+  
+  .cardLabelWrapper {
+    margin-top: 66px;
+    width: 100%;
+    height: 64px;
+    border-radius: 33px;
+    background: #f6f7f9;
+    padding: 18px 10px 18px 26px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    &.extraCard {
+      background-color: #1969ff;
+  
+      .cardLabel {
+        color: #fff;
+      }
+  
+      .browseBtn {
+        background-color: #fff;
+      }
+  
+      .browseBtnIcon {
+        color: #1969ff;
+      }
+    }
+  }
+  
+  .cardLabel {
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.31px;
+    color: #121223;
+  }
+  
+  .browseBtn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #1969ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .browseBtnIcon {
+    color: #fff;
+  }
+  
+  .footer {
+    margin-top: 80px;
+    width: 100%;
+    height: 144px;
+    padding: 0 80px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1969ff;
+  }
+  
+  .logo {
+    height: 35px;
+  }
+  
+  @media only screen and (max-width: 1024px) {
+    .body {
+      padding-top: 70px;
+    }
+  
+    .exploreButton {
+      margin-right: 0;
+      margin-bottom: 30px;
+    }
+  
+    .cardTitle {
+      font-size: 18px;
+    }
+  
+    .cardDesc {
+      margin-top: 10px;
+      font-size: 12px;
+    }
+  
+    .cardIconWrapper {
+      width: 94px;
+      height: 94px;
+  
+      img {
+        width: 70px;
+        height: 70px;
+      }
+    }
+  
+    .cardIconWrapper2 {
+      width: 108px;
+      height: 108px;
+  
+      img {
+        width: 56px;
+        height: 56px;
+      }
+    }
+  
+    .cardLabelWrapper {
+      margin-top: 56px;
+      height: 54px;
+    }
+  
+    .cardLabel {
+      font-size: 18px;
+    }
+  
+    .browseBtn {
+      width: 40px;
+      height: 40px;
+    }
+  
+    .footer {
+      height: 128px;
+      padding: 0 32px;
+    }
+  }
+  
+  @media only screen and (max-width: 900px) {
+    .aboutCards {
+      flex-wrap: wrap;
+      padding-bottom: 58px;
+    }
+  
+    .aboutCard {
+      flex: 0 0 calc(50% - 11px);
+      margin-bottom: 22px;
+  
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+    }
+  
+    .categoryCard {
+      flex: 0 0 calc(50% - 11px);
+      margin-right: 22px;
+  
+      &:nth-child(3n) {
+        margin-right: 22px;
+      }
+  
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+    }
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .container {
+      padding-top: 155px;
+    }
+  
+    .main {
+      flex-direction: column-reverse;
+      margin-bottom: 40px;
+    }
+  
+    .card {
+      width: 100%;
+      max-width: 400px;
+    }
+  
+    .mainLeft {
+      margin-top: 32px;
+      margin-right: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .title {
+      text-align: center;
+    }
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .title {
+      font-size: 48px;
+      line-height: 58px;
+    }
+  
+    .subtitle {
+      font-size: 14px;
+      line-height: 17px;
+      text-align: center;
+    }
+  
+    .body {
+      padding-top: 30px;
+    }
+  
+    .exploreButton {
+      width: 168px;
+      height: 48px;
+      font-size: 16px;
+    }
+  
+    .aboutTitle {
+      margin-top: 72px;
+      font-size: 48px;
+      line-height: 58px;
+    }
+  
+    .aboutCards {
+      margin-top: 52px;
+      flex-direction: column;
+    }
+  
+    .aboutCard {
+      flex: 0 0 100%;
+      margin-right: 0;
+    }
+  
+    .categoryCard {
+      flex-basis: 100%;
+      margin-right: 0 !important;
+    }
+  
+    .footer {
+      margin-top: 0;
+    }
+  }

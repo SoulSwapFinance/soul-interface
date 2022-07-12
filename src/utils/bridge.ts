@@ -75,7 +75,7 @@ export const bridgeNetworks = {
     // rpc: "https://rpc.ankr.com/avalanche-c",
     name: "AVAX",
     symbol: "AVAX",
-    blockExp: "https://cchain.explorer.avax.network/",
+    blockExp: "https://snowtrace.io/",
     explorerTransactionPath: "tx/",
     decimals: 18,
   },
