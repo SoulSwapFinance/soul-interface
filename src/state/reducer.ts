@@ -17,6 +17,7 @@ import web3Context from './global/web3ContextSlice'
 import limitOrder from './limit-order/reducer'
 import lists from './lists/reducer'
 import mint from './mint/reducer'
+import nft from './nft/reducer'
 import multicall from './multicall/reducer'
 import slippage from './slippage/slippageSlice'
 import swap from './swap/reducer'
@@ -32,6 +33,7 @@ const reducer = combineReducers({
   swap,
   mint,
   burn,
+  nft,
   multicall,
   lists,
   limitOrder,

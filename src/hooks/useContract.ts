@@ -122,6 +122,11 @@ import SOR_MINTER_ABI from '../constants/abis/soulswap/sor-minter.json'
 import anyswapEthOperaBridge_ABI from '../constants/abis/soulswap/bridge/anyswapEthOperaBridge.json'
 import ROUTER_ACTION_ABI from '../constants/abis/soulswap/bridge/router-action.json'
 
+// NFT
+import NFT from '../constants/abis/nfts/NFT.json'
+import NFT721 from '../constants/abis/nfts/ERC721.json'
+import NFT1155 from '../constants/abis/nfts/ERC1155.json'
+
 // unused
 import MEOWSHI_ABI from '../constants/abis/meowshi.json'
 import MERKLE_DISTRIBUTOR_ABI from '../constants/abis/merkle-distributor.json'
@@ -602,12 +607,24 @@ export function useLimitOrderHelperContract(withSignerIfPossible?: boolean): Con
 }
 
 
-// ------- Bridge --------
+// ------- Bridges --------
 
 export function useAnyswapEthOperaBridge(withSignerIfPossible?: boolean): Contract | null {
   return useContract('0x5cbe98480a790554403694b98bff71a525907f5d', anyswapEthOperaBridge_ABI, withSignerIfPossible)
 }
 
+// ------- NFT --------
+export function useNFTContract(routerToken?:any, withSignerIfPossible?: boolean): Contract | null {
+  return useContract(routerToken ? routerToken : undefined, NFT, withSignerIfPossible)
+}
+
+export function useNFT721Contract(tokenAddress?:any, withSignerIfPossible?: boolean): Contract | null {
+  return useContract(tokenAddress ? tokenAddress : undefined, NFT721, withSignerIfPossible)
+}
+
+export function useNFT1155Contract(tokenAddress?:any, withSignerIfPossible?: boolean): Contract | null {
+  return useContract(tokenAddress ? tokenAddress : undefined, NFT1155, withSignerIfPossible)
+}
 
 // ------- Atomic Swap --------
 

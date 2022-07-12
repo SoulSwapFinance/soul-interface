@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 // import useWalletProvider from "./useWalletProvider";
 // import { useSoftwareWallet } from "./useSoftwareWallet";
-import { bridgeNetworks } from "../utils/bridge";
+import { bridgeNetworks } from "../utils/bridge/bridge";
 import config from "config/configurations";
 // import { switchToChain } from "utils/events";
 import { JsonRpcProvider } from "@ethersproject/providers";

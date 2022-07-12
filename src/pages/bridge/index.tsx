@@ -10,7 +10,7 @@ import {
   chainToNetworkInfoMap,
   supportedChainsForBridge,
   transactionStatusMapping,
-} from "../../utils/bridge";
+} from "../../utils/bridge/bridge";
 import DropDownButton from "../../components/DropDownButton";
 import useBridgeApi from "../../hooks/useBridgeApi";
 import useMultiChain from "../../hooks/useMultiChain";

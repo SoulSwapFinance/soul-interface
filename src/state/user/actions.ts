@@ -42,3 +42,4 @@ export const toggleURLWarning = createAction<void>('app/toggleURLWarning')
 export const updateUserUseOpenMev = createAction<{
   userUseOpenMev: boolean
 }>('user/updateUserUseOpenMev')
+export const selectNetworkId = createAction<{ chainId: string, label: string }>('user/selectNetworkId')
