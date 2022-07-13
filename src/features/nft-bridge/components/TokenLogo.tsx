@@ -3,10 +3,8 @@ import styled from 'styled-components'
 
 import { useActiveWeb3React } from 'hooks'
 
-// import initPath from '../../assets/images/question.svg'
+import initPath from '../../assets/images/question.svg'
 import { NATIVE, WNATIVE } from 'sdk'
-
-const initPath = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/unknown.png'
 
 const Image = styled.img<{ size?: any }>`
   width: ${({ size }) => size};
