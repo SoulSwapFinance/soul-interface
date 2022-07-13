@@ -367,7 +367,8 @@ export const USDC_ADDRESS: AddressMap = {
 }
 
 export const DAI_ADDRESS: AddressMap = {
-  [ChainId.FANTOM]: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E'
+  [ChainId.FANTOM]: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E',
+  [ChainId.AVALANCHE]: '0xd586E7F844cEa2F87f50152665BCbc2C279D8d70'
 }
 
 export const GRIMEVO_ADDRESS: AddressMap = {
