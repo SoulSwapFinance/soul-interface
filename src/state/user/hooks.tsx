@@ -19,18 +19,17 @@ import { BASES_TO_TRACK_LIQUIDITY_FOR } from 'config/routing'
 import { e10 } from 'functions'
 import { useAllTokens } from 'hooks/Tokens'
 import { useActiveWeb3React } from 'services/web3'
-import { AppDispatch, AppState } from 'state'
+import { AppState } from 'state'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
 import flatMap from 'lodash/flatMap'
 import { useCallback, useMemo } from 'react'
 import ReactGA from 'react-ga'
-import { shallowEqual, useDispatch, useSelector } from 'react-redux'
+import { shallowEqual, useSelector } from 'react-redux'
 
 import {
   addSerializedPair,
   addSerializedToken,
   removeSerializedToken,
-  selectNetworkId,
   SerializedPair,
   SerializedToken,
   toggleURLWarning,
@@ -460,22 +459,4 @@ export function useDarkModeManager(): [boolean, () => void] {
   }, [darkMode, dispatch])
 
   return [darkMode, toggleSetDarkMode]
-}
-
-export function useUserSelectChainId(): {selectNetworkInfo?:any, setUserSelectNetwork?: (selectChainInfo: any) => void} {
-  const dispatch = useDispatch<AppDispatch>()
-  const selectNetworkInfo:any = useSelector<AppState, AppState['user']['selectNetworkId']>(state => {
-    return state.user.selectNetworkId
-  })
-
-  const setUserSelectNetwork = useCallback(
-    (selectNetworkInfo: any) => {
-      dispatch(selectNetworkId(selectNetworkInfo))
-    },
-    [dispatch]
-  )
-
-  return {
-    selectNetworkInfo, setUserSelectNetwork
-  }
 }

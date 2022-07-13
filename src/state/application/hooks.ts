@@ -48,10 +48,6 @@ export function useCloseModals(): () => void {
   return useCallback(() => dispatch(setOpenModal(null)), [dispatch])
 }
 
-// export function useToggleNetworkModal(): () => void {
-//   return useToggleModal(ApplicationModal.NETWORK)
-// }
-
 export function useWalletModalToggle(): () => void {
   return useToggleModal(ApplicationModal.WALLET)
 }

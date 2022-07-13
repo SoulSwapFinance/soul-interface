@@ -7,7 +7,6 @@ import {
   addSerializedToken,
   removeSerializedPair,
   removeSerializedToken,
-  selectNetworkId,
   SerializedPair,
   SerializedToken,
   toggleURLWarning,
@@ -57,8 +56,6 @@ export interface UserState {
   matchesDarkMode: boolean // whether the dark mode media query matches
 
   URLWarningVisible: boolean
-  selectNetworkId: any
-
 }
 
 function pairKey(token0Address: string, token1Address: string) {
@@ -77,16 +74,10 @@ export const initialState: UserState = {
   matchesDarkMode: false,
   URLWarningVisible: true,
   userUseOpenMev: true,
-  selectNetworkId: {}
 }
 
 export default createReducer(initialState, (builder) =>
   builder
-    .addCase(selectNetworkId, (state, { payload: { chainId, label } }) => {
-      state.selectNetworkId = {
-        chainId, label
-      }
-    })  
     .addCase(updateVersion, (state) => {
       // slippage isnt being tracked in local storage, reset to default
       // noinspection SuspiciousTypeOfGuard
