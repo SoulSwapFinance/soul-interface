@@ -15,6 +15,14 @@
   "tokens": 
   [
       {
+        "name": "Fantom",
+        "address": "0x4E15361FD6b4BB609Fa63C81A2be19d873717870",
+        "symbol": "FTM",
+        "decimals": 18,
+        "chainId": 1,
+        "logoURI": "https://cryptologos.cc/logos/fantom-ftm-logo.svg?v=003"
+      },
+      {
         "name": "USD Coin",
         "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
         "symbol": "USDC",

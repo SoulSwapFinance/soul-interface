@@ -166,3 +166,6 @@ export const SPELL = new Token(
   'Spell Token'
 )
 export const ICE = new Token(ChainId.ETHEREUM, '0xf16e81dce15B08F326220742020379B855B87DF9', 18, 'ICE', 'IceToken')
+
+
+export const FTM = new Token(ChainId.ETHEREUM, '0x4E15361FD6b4BB609Fa63C81A2be19d873717870', 18, 'FTM', 'Fantom')

@@ -201,6 +201,7 @@ export const AllBonds = [
   },
   {
     pid: 23,
+    status: 'closed', // manual override
     bondAddress: '0x4b66619b1469b2198A52cA23b181813199a731E5',
     assetName: 'SOR-FTM',
     assetAddress: SOR_FTM,
@@ -233,6 +234,16 @@ export const AllBonds = [
   assetAddress: LUX_SOR,
   token1Address: LUX,
   token2Address: SOR,
+  term: '10D',
+  },
+  {
+  pid: 24,
+  status: 'closed', // manual override
+  bondAddress: '0xad586E71A6947c6624f3C58b24F7d8d9E2F04a4b',
+  assetName: 'SOR-FTM',
+  assetAddress: SOR_FTM,
+  token1Address: SOR,
+  token2Address: FTM,
   term: '10D',
   },
 ]
