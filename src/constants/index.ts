@@ -3,6 +3,7 @@ import { binance, clover, injected, walletconnect } from '../connectors'
 
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { BigNumber } from 'ethers'
+import { CurrencyAmount } from 'sdk'
 
 export const RPC = {
   [ChainId.ETHEREUM]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
@@ -32,6 +33,8 @@ export const POOL_DENY = []
 
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
 export const AVERAGE_BLOCK_TIME_IN_SECS = 1
+
+export const ZERO_USD = CurrencyAmount.usd('0')
 
 export const AVERAGE_BLOCK_TIME = {
   [ChainId.ETHEREUM]: 12,

@@ -2,12 +2,13 @@ import { BigintIsh } from '../types'
 import { Currency } from './Currency'
 import { Fraction } from './Fraction'
 import { JSBI } from 'sdk'
-import { MaxUint256 } from '../constants'
+import { MaxUint256, USD } from '../constants'
 import { Rounding } from '../enums'
 import { Token } from './Token'
 import _Big from 'big.js'
 import invariant from 'tiny-invariant'
 import toFormat from 'toformat'
+import { useActiveWeb3React } from 'services/web3'
 
 const Big = toFormat(_Big)
 
@@ -39,6 +40,16 @@ export class CurrencyAmount<T extends Currency> extends Fraction {
   ): CurrencyAmount<T> {
     return new CurrencyAmount(currency, numerator, denominator)
   }
+
+  /**
+   * Helper that calls the constructor with the USD currency
+   * @param amount amount of usd experessed in wei (with 18 decimals resolution)
+   */
+     public static usd(amount: BigintIsh): CurrencyAmount<Token> {
+       const { chainId } = useActiveWeb3React()
+      return new CurrencyAmount(USD[chainId], amount)
+    }
+  
 
   protected constructor(currency: T, numerator: BigintIsh, denominator?: BigintIsh) {
     super(numerator, denominator)
