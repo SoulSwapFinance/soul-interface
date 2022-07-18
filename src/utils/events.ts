@@ -120,7 +120,7 @@ export const chainToNativeToken = {
           chainName: "Avalanche",
           nativeCurrency: chainToNativeToken[43114],
           rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
-          blockExplorerUrls: ["https://cchain.explorer.avax.network/"],
+          blockExplorerUrls: ["https://snowtrace.io/"],
         };
       }
       if (chainId === 42161) {
@@ -160,7 +160,7 @@ export const chainToNativeToken = {
         // handle other "switch" errors
       }
   };
-  
+
   export const promptWeb3WalletUse = async () => {
     const { library } = useActiveWeb3React()
 

@@ -64,7 +64,7 @@ export const FACTORY_ADDRESS = {
   [ChainId.BSC]: '0xa9EC396a1b709689e98DaB9eAf4f18A913775d39',
   [ChainId.FANTOM]: '0x1120e150dA9def6Fe930f4fEDeD18ef57c0CA7eF',
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
+  [ChainId.AVALANCHE]: '0x5BB2a9984de4a69c05c996F7EF09597Ac8c9D63a',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
 }
@@ -75,7 +75,7 @@ export const ROUTER_ADDRESS = {
   [ChainId.BSC]: '0x1b4df4D7E63B125f3a01fd5598E8E8458e519255',
   [ChainId.FANTOM]: '0x6b3d631B87FE27aF29efeC61d2ab8CE4d621cCBF',
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
+  [ChainId.AVALANCHE]: '0xa4594460A9d3D41e8B85542D34E23AdAbc3c86Ef',
 }
 
 export const SOUL_VAULT_ADDRESS: AddressMap = {
@@ -598,7 +598,7 @@ export const COFFIN_BOX_ADDRESS: {
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xF539C37275e947F24480fAb9f7e302aE827570b2', // FEB22
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
+  [ChainId.AVALANCHE]: '0x51d7d0d03A9E38Ba550f24cea28B992AD2350fee', // JUL10
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
 }
@@ -611,7 +611,7 @@ export const UNDERWORLD_ADDRESS: {
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x94f2ae18250507506C77cefc14EE7B4b95d323B1', // FEB22
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
+  [ChainId.AVALANCHE]: '0xE80922adb47964D096ca6F61c0BbC38d5bC218e2', // JUL10
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
 }
@@ -677,6 +677,7 @@ export const CHAINLINK_ORACLE_ADDRESS = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xCDd5Df7146B278c90c572b6c6F933C6b7ce2b41e', // FEB22
+  [ChainId.AVALANCHE]: '0x04BcdA3c65B2f28ADE0A40e9f2691681f531D20E', // JUL10
 }
 
 export const SOUL_GUIDE_ADDRESS = {

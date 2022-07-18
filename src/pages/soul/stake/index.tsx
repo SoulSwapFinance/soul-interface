@@ -23,7 +23,7 @@ import NavLink from 'components/NavLink'
 import { useTokenContract } from 'hooks/useTokenContract'
 import { useLuxorPrice, useSoulPrice } from 'hooks/getPrices'
 import { useAutoStakeInfo, useLuxorInfo, useLuxorUserInfo, useUserAutoStakeInfo } from 'hooks/useAPI'
-import useSendTransaction from 'hooks/useSendTransaction'
+// import useSendTransaction from 'hooks/useSendTransaction'
 import { SubmitButton } from 'features/autostake/Styles'
 
 export default function Stake() {

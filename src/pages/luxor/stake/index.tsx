@@ -475,20 +475,7 @@ export default function Stake() {
                   {epoch}
                   </Typography>
                 </div> */}
-                { (Number(warmupExpiry) - Number(epoch)) * 8 > 0 &&
-                  <div className="flex justify-between">
-                  <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Warmup Remaining`)}
-                  </Typography>
-                  <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    {
-                      (Number(warmupExpiry) - Number(epoch)) * 8 < 0
-                      ? 0 : (Number(warmupExpiry) - Number(epoch)) * 8
-                      + ' hours'
-                    }
-                  </Typography>
-                </div>
-                }
+
                 {/* <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
                     {i18n._(t`Epoch Duration`)}
@@ -527,9 +514,21 @@ export default function Stake() {
                   { formatNumber(nextWarmupReward, false, true) } LUM
                 </Typography>
               </div>
+              <div className="flex justify-between mt-3">
+                      <Typography className="text-white" fontFamily={'medium'}>
+                        {i18n._(t`Time Remaining`)}
+                      </Typography>
+                      <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                        {
+                          (Number(warmupExpiry) - Number(epoch)) * 8 < 0
+                          ? 0 : (Number(warmupExpiry) - Number(epoch)) * 8
+                          + ' hours'
+                        }
+                      </Typography>
+                    </div>
             </div>
-          }
-
+            }
+ 
             <div className="mt-6 flex items-center gap-2">
               <Button variant="outlined" color="yellow" onClick={handleApproveToken} 
                     className="text-black text-md font-bold"

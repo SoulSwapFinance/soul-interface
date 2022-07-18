@@ -4,9 +4,11 @@ const DAI = '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E'
 const LUX = '0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'
 const SOR = '0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A'
 const FTM = '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'
-const FTM_SOR = '0xdfB2218b48627794711E6cFd72e26c541E456F6F'
+const WLUM = '0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208'
+const SOR_FTM = '0xdfB2218b48627794711E6cFd72e26c541E456F6F'
 const LUX_DAI = '0x46729c2AeeabE7774a0E710867df80a6E19Ef851'
 const LUX_FTM = '0x951BBB838e49F7081072895947735b0892cCcbCD'
+const WLUM_FTM = '0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99'
 const LUX_SOR = '0x622E69B6785311800B0d55D72fF27D91F5518212'
 
 export const AllBonds = [
@@ -195,6 +197,15 @@ export const AllBonds = [
     assetName: 'WFTM',
     assetAddress: FTM,
     token1Address: FTM,
+    term: '5D',
+  },
+  {
+    pid: 23,
+    bondAddress: '0x4b66619b1469b2198A52cA23b181813199a731E5',
+    assetName: 'SOR-FTM',
+    assetAddress: SOR_FTM,
+    token1Address: SOR,
+    token2Address: FTM,
     term: '5D',
   },
 

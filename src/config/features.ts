@@ -32,6 +32,8 @@ const features: FeatureMap = {
   [ChainId.AVALANCHE]: [
     Feature.AMM, 
     Feature.ANALYTICS,
+    Feature.COFFINBOX,
+    Feature.UNDERWORLD,
   ],
 
   [ChainId.FANTOM]: [

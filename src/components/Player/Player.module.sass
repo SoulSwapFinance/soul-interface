@@ -1,0 +1,62 @@
+@import ../../styles/helpers
+
+.player
+    position: relative
+    img
+        width: 100%
+        border-radius: 16px
+    
+.control
+    position: absolute
+    left: 8px
+    right: 8px
+    bottom: 8px
+    z-index: 3
+    display: flex
+    align-items: center
+    height: 40px
+    padding: 0 20px
+    border-radius: 20px
+    background: $neutrals8
+    +dark
+        background: $neutrals1
+
+.button
+    svg
+        fill: $neutrals4
+        transition: fill .2s
+    &:hover
+        svg
+            fill: $neutrals2
+            +dark
+                fill: $neutrals8
+    &:not(:last-child)
+        margin-right: 24px
+        +m
+            margin-right: 16px
+    
+.line
+    position: relative
+    flex-grow: 1
+    height: 8px
+    margin-right: 24px
+    background: $neutrals6
+    border-radius: 4px
+    +m
+        margin-right: 16px
+    +dark
+        background: $neutrals3
+
+.progress
+    position: absolute
+    top: 0
+    left: 0
+    bottom: 0
+    border-radius: 4px
+    background: $blue
+
+.time
+    margin-right: 24px
+    +body-bold-2
+    +m
+        margin-right: 16px
