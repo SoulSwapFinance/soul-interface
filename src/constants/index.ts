@@ -40,7 +40,7 @@ export const AVERAGE_BLOCK_TIME = {
   [ChainId.ETHEREUM]: 12,
   [ChainId.FANTOM]: 1,
   [ChainId.BSC]: 3,
-  [ChainId.BSC]: 2,
+  [ChainId.AVALANCHE]: 2,
 }
 
 export const ARCHER_RELAY_URI: { [chainId in ChainId]?: string } = {
@@ -256,6 +256,7 @@ export const ANALYTICS_URL: { [chainId in ChainId]?: string } = {
   [ChainId.ETHEREUM]: 'https://analytics.soulswap.finance',
   [ChainId.BSC]: 'https://analytics.soulswap.finance',
   [ChainId.FANTOM]: 'https://analytics.soulswap.finance',
+  [ChainId.AVALANCHE]: 'https://analytics.soulswap.finance',
   [ChainId.FANTOM_TESTNET]: 'https://analytics.soulswap.finance',
 }
 

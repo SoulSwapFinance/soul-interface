@@ -55,9 +55,13 @@ export function useSwapActionHandlers(): {
           currencyId: currency.isToken
             ? currency.address
             : currency.isNative 
+             && currency.chainId == ChainId.ETHEREUM
+             ? 'ETH' 
             // && currency.chainId !== ChainId.CELO
-            ? 'FTM'
-            : '',
+            : currency.isNative
+             && currency.chainId == ChainId.FANTOM
+             ? 'FTM'
+            : '' 
         })
       )
     },
@@ -255,12 +259,19 @@ function validatedRecipient(recipient: any): string | undefined {
 export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId = ChainId.ETHEREUM): SwapState {
   let inputCurrency = parseCurrencyFromURLParameter(parsedQs.inputCurrency)
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
-  const eth = 'FTM'
+  const eth 
+    = chainId === ChainId.FANTOM ? 'FTM' 
+    : chainId === ChainId.BSC ? 'BSC'
+    : chainId === ChainId.AVALANCHE ? 'AVAX'
+    : 'ETH'
   //chainId === ChainId.CELO ? WNATIVE_ADDRESS[chainId] : 
   const soul 
-    = chainId == ChainId.FANTOM 
-    ? SOUL[250].address
-    : USDC[chainId].address
+      = chainId == ChainId.FANTOM 
+         ? SOUL[250].address
+         : chainId == ChainId.ETHEREUM
+         ? '0x4E15361FD6b4BB609Fa63C81A2be19d873717870' // FTM
+         : DAI[chainId].address
+         
   if (inputCurrency === '' && outputCurrency === '') {
     inputCurrency = eth
     outputCurrency = soul
