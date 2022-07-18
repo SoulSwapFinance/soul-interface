@@ -8,7 +8,7 @@ import styled from 'styled-components'
 // import { useActiveWeb3React } from 'hooks'
 // import { useBestAPY } from 'hooks/useBestAPY'
 // import { usePairCampaignIndicatorAndLiquidityUSD } from 'hooks/usePairCampaignIndicatorAndLiquidityUSD'
-import { usePair24hVolumeUSD } from 'hooks/usePairVolume24hUSD'
+// import { usePair24hVolumeUSD } from 'hooks/usePairVolume24hUSD'
 import { useRouter } from 'hooks/useRouter'
 // import { useIsSwitchingToCorrectChain } from 'state/multi-chain-links/hooks'
 // import { formatCurrencyAmount } from 'utils'
@@ -37,7 +37,8 @@ export function PoolStats({ pair }: PairViewProps) {
   const { navigate } = useRouter()
   const { chainId } = useActiveWeb3React()
   const previousChainId = usePrevious(chainId)
-  const { volume24hUSD } = usePair24hVolumeUSD(pair?.liquidityToken.address)
+  // todo: fix below
+  // const { volume24hUSD } = usePair24hVolumeUSD(pair?.liquidityToken.address)
 //   const { liquidityUSD } = usePairCampaignIndicatorAndLiquidityUSD(pair)
   // const { bestAPY } = useBestAPY(pair)
 //   const switchingToCorrectChain = useIsSwitchingToCorrectChain()
@@ -68,7 +69,7 @@ export function PoolStats({ pair }: PairViewProps) {
       <Box marginTop={4}>
         <InfoGrid>
           {/* <ValueWithLabel title={t('TVL')} value={`$${formatCurrencyAmount(liquidityUSD, 4)}`} /> */}
-          <ValueWithLabel title={t('24hVolume')} value={`$${formatCurrencyAmount(volume24hUSD, 4)}`} />
+         {/* <ValueWithLabel title={t('24hVolume')} value={`$${formatCurrencyAmount(volume24hUSD, 4)}`} /> */}
           {/* <ValueWithLabel title={t('APY')} value={`${bestAPY?.toFixed(2) || 0}%`} big /> */}
         </InfoGrid>
       </Box>
