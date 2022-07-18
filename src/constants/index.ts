@@ -1,4 +1,4 @@
-import { ChainId, JSBI, Percent } from '../sdk'
+import { ChainId, JSBI, Percent, USD } from '../sdk'
 import { binance, clover, injected, walletconnect } from '../connectors'
 
 import { AbstractConnector } from '@web3-react/abstract-connector'
@@ -22,7 +22,7 @@ export const RPC = {
   // [ChainId.BSC_TESTNET]: 'https://data-seed-prebsc-2-s3.binance.org:8545',
   // [ChainId.MOONBEAM_TESTNET]: 'https://rpc.testnet.moonbeam.network',
   // [ChainId.MOONRIVER]: 'https://moonriver-api.bwarelabs.com/0e63ad82-4f98-46f9-8496-f75657e3a8e', //'https://moonriver.api.onfinality.io/public',
-  // [ChainId.AVALANCHE]: 'https://api.avax.network/ext/bc/C/rpc',
+  [ChainId.AVALANCHE]: 'https://api.avax.network/ext/bc/C/rpc',
   // [ChainId.AVALANCHE_TESTNET]: 'https://api.avax-test.network/ext/bc/C/rpc',
   // [ChainId.HARMONY]: 'https://api.harmony.one',
   // [ChainId.HARMONY_TESTNET]: 'https://api.s0.b.hmny.io',
@@ -34,12 +34,13 @@ export const POOL_DENY = []
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
 export const AVERAGE_BLOCK_TIME_IN_SECS = 1
 
-export const ZERO_USD = CurrencyAmount.usd('0')
+export const ZERO_USD = CurrencyAmount.fromRawAmount(USD[ChainId.FANTOM], '0')
 
 export const AVERAGE_BLOCK_TIME = {
   [ChainId.ETHEREUM]: 12,
   [ChainId.FANTOM]: 1,
-  [ChainId.BSC]: 3
+  [ChainId.BSC]: 3,
+  [ChainId.BSC]: 2,
 }
 
 export const ARCHER_RELAY_URI: { [chainId in ChainId]?: string } = {
