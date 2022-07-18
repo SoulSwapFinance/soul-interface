@@ -24,7 +24,7 @@ type AddressMap = {
 export const BONDS: AddressMap = {
   [ChainId.FANTOM]: {
     '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57': { // SOUL-FTM
-      id: 0, //
+      id: 0, // 2400
       token0: {
         id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
         name: 'Wrapped Fantom',
