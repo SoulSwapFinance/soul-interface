@@ -103,7 +103,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     = bond.assetAddress == SOR_FTM_ADDRESS ?  bondPriceNormal / luxPriceAdj : bondPriceNormal
     const deltaSorFtm = luxPrice - bondPrice //.78
     const discount 
-        = bond.assetAddress == SOR_FTM_ADDRESS ? deltaSorFtm / luxPrice * 100 : discountNormal
+        = (bond.assetAddress == SOR_FTM_ADDRESS && deltaSorFtm > 0) ? deltaSorFtm / luxPrice * 100 : discountNormal
     const status = luxorBondInfo.status
     const maxDebt = Number(luxorBondInfo.maximumDebt)
     const available 
