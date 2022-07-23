@@ -12,8 +12,6 @@ const features: FeatureMap = {
     // Feature.MIGRATE,
     Feature.ANALYTICS,
     // Feature.STAKING,
-    // Feature.MISO,
-    // Feature.INARI,
     // Feature.VESTING,
   ],
 
@@ -49,7 +47,9 @@ const features: FeatureMap = {
     Feature.UNDERWORLD
   ],
 
-  [ChainId.FANTOM_TESTNET]: [Feature.AMM],
+  [ChainId.FANTOM_TESTNET]: [
+    Feature.AMM
+  ],
 }
 
 export default features

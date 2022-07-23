@@ -273,7 +273,6 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId 
          ? '0x4E15361FD6b4BB609Fa63C81A2be19d873717870' // FTM
          : chainId == ChainId.BSC
          ? USDC[chainId].address
-         : DAI[chainId].address
          
   if (inputCurrency === '' && outputCurrency === '') {
     inputCurrency = eth
