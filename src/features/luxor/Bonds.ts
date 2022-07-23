@@ -201,7 +201,7 @@ export const AllBonds = [
   },
   {
     pid: 23,
-    status: 'closed', // manual override
+    // status: 'closed', // manual override
     bondAddress: '0x4b66619b1469b2198A52cA23b181813199a731E5',
     assetName: 'SOR-FTM',
     assetAddress: SOR_FTM,

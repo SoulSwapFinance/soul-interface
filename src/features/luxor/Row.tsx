@@ -63,18 +63,20 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     const LUX_DAI_ADDRESS = '0x46729c2AeeabE7774a0E710867df80a6E19Ef851'
     const LUX_FTM_ADDRESS = '0x951BBB838e49F7081072895947735b0892cCcbCD'
     const LUX_SOR_ADDRESS = '0x622E69B6785311800B0d55D72fF27D91F5518212'
+    const SOR_FTM_ADDRESS = '0xdfB2218b48627794711E6cFd72e26c541E456F6F'
 
     // const [discount, setDiscount] = useState(0)
     // const [bondPrice, setBondPrice] = useState(0)
     // const [available, setAvailabile] = useState(false)
     // const { deposit, withdraw } = useBondContract()
-    // const luxPrice = useLuxorPrice()
+    const luxPrice = useLuxorPrice()
     const assetToken = new Token(250, assetAddress, 18, assetName)
     const wftmPrice = useFantomPrice()
     const luxDaiPrice = usePairPrice(LUX_DAI_ADDRESS) // √
     // console.log('luxDaiPrice:%s', Number(luxDaiPrice))
     const luxFtmPrice = usePairPrice(LUX_FTM_ADDRESS) // √
     const luxSorPrice = usePairPrice(LUX_SOR_ADDRESS) // √
+    const sorFtmPrice = usePairPrice(SOR_FTM_ADDRESS) // √
     // console.log('luxSorPrice:%s', Number(luxSorPrice))
     
     let assetPrice = 0
@@ -83,6 +85,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
             : assetToken.address == LUX_DAI_ADDRESS ? luxDaiPrice
             : assetToken.address == LUX_FTM_ADDRESS ? luxFtmPrice
             : assetToken.address == LUX_SOR_ADDRESS ? luxSorPrice
+            : assetToken.address == SOR_FTM_ADDRESS ? sorFtmPrice
             : 1
     // const assetPrice = useTokenPrice(assetToken.address)
     // console.log('assetPrice:%s', assetPrice)
@@ -93,7 +96,10 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     const [showAvailabilityMsg, setShowAvailabilityMsg] = useState(false)
 
     const { luxorBondInfo } = useLuxorBondInfo(bondAddress)
-    const bondPrice = Number(luxorBondInfo.price) / 1e18
+    const bondPriceNormal = Number(luxorBondInfo.price) / 1e18
+    const bondPrice 
+        = bond.pid == 23 ?  bondPriceNormal / luxPrice : bondPriceNormal
+
     const discount = luxorBondInfo.discount
     const status = luxorBondInfo.status
     const maxDebt = Number(luxorBondInfo.maximumDebt)
