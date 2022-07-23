@@ -329,7 +329,7 @@ export default function Stake() {
                     {i18n._(t`Warmup Period`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    24 hours
+                    3 Days
                   </Typography>
                 </div>
               </div>
