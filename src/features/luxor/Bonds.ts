@@ -69,8 +69,7 @@ export const AllBonds = [
   },
   {
     pid: 6,
-    bondAddress: 
-    '0x5612d83dfED9B387c925Ac4D19ED3aeDd71004A8',
+    bondAddress: '0x5612d83dfED9B387c925Ac4D19ED3aeDd71004A8',
     assetName: 'LUX-DAI',
     assetAddress: LUX_DAI,
     token1Address: LUX,
@@ -189,13 +188,33 @@ export const AllBonds = [
     token1Address: FTM,
     term: '10D',
   },
+  {
+    pid: 20,
+    status: 'closed',
+    bondAddress: '0xf9a0fA495e0CfaFE40CAb1bDC307f6Fc24889d51',
+    assetName: 'LUX-SOR',
+    assetAddress: LUX_SOR,
+    token1Address: LUX,
+    token2Address: SOR,
+    term: '10D',
+  },
+  {
+    pid: 21,
+    status: 'closed',
+    bondAddress: '0xad586E71A6947c6624f3C58b24F7d8d9E2F04a4b',
+    assetName: 'SOR-FTM',
+    assetAddress: SOR_FTM,
+    token1Address: SOR,
+    token2Address: FTM,
+    term: '10D',
+    },
 
   /// LIVE BONDS ///
 
   // SOR & DAI BONDS //
 
   {
-    pid: 20,
+    pid: 22,
     bondAddress: '0x4Ac427a4DFF61023c2e84d8316180CF109c5e45C',
     assetName: 'SOR',
     assetAddress: SOR,
@@ -203,7 +222,7 @@ export const AllBonds = [
     term: '5D',
   },
   {
-    pid: 21,
+    pid: 23,
     bondAddress: '0x26155f6F5e5372dc063042A37C1391e04E71509e',
     assetName: 'DAI',
     assetAddress: DAI,
@@ -213,7 +232,7 @@ export const AllBonds = [
 
   // FTM BONDS //
   {
-    pid: 22,
+    pid: 24,
     bondAddress: '0x2b4ecB35Aa2a5C163675E1b66577E127C38eb911',
     assetName: 'WFTM',
     assetAddress: FTM,
@@ -221,10 +240,9 @@ export const AllBonds = [
     term: '5D',
   },
 
-
   // LUX-SOR BONDS //
   {
-    pid: 23,
+    pid: 25,
     bondAddress: '0xF584E92F891e2BCF78Eb7B49D929eae48c2d8B6A',
     assetName: 'LUX-SOR',
     assetAddress: LUX_SOR,
@@ -232,19 +250,10 @@ export const AllBonds = [
     token2Address: SOR,
     term: '5D',
   },
-  {
-    pid: 24,
-    bondAddress: '0xf9a0fA495e0CfaFE40CAb1bDC307f6Fc24889d51',
-    assetName: 'LUX-SOR',
-    assetAddress: LUX_SOR,
-    token1Address: LUX,
-    token2Address: SOR,
-    term: '10D',
-    },
   
   // SOR-FTM BONDS //
   {
-    pid: 25,
+    pid: 26,
     bondAddress: '0x4b66619b1469b2198A52cA23b181813199a731E5',
     assetName: 'SOR-FTM',
     assetAddress: SOR_FTM,
@@ -252,14 +261,5 @@ export const AllBonds = [
     token2Address: FTM,
     term: '5D',
   },
-  {
-    pid: 26,
-    bondAddress: '0xad586E71A6947c6624f3C58b24F7d8d9E2F04a4b',
-    assetName: 'SOR-FTM',
-    assetAddress: SOR_FTM,
-    token1Address: SOR,
-    token2Address: FTM,
-    term: '10D',
-    },
 
 ]
