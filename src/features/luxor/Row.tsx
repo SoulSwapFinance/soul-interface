@@ -97,10 +97,13 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
 
     const { luxorBondInfo } = useLuxorBondInfo(bondAddress)
     const bondPriceNormal = Number(luxorBondInfo.price) / 1e18
+    const discountNormal = Number(luxorBondInfo.discount)
+    const luxPriceAdj = luxPrice * 1.25//(delta23 * 100 / assetPrice )
     const bondPrice 
-        = bond.pid == 23 ?  bondPriceNormal / luxPrice : bondPriceNormal
-
-    const discount = luxorBondInfo.discount
+    = bond.pid == 23 ?  bondPriceNormal / luxPriceAdj : bondPriceNormal
+    const delta23 = luxPrice - bondPrice //.78
+    const discount 
+        = bond.pid == 23 ? delta23 / luxPrice * 100 : discountNormal
     const status = luxorBondInfo.status
     const maxDebt = Number(luxorBondInfo.maximumDebt)
     const available 
@@ -376,17 +379,17 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
 
                             <StakeItemBox className="flex">
                                 <StakeItem>
-                                    {Number(discount).toString() === '0.00' ? (
+                                    {discount.toString() === '0.00' ? (
                                         <Text padding="0" fontSize="1rem" color="#666">
                                             0
                                         </Text>
-                                    ) : Number(discount) > 0 ? (
+                                    ) : discount > 0 ? (
                                         <Text padding="0" fontSize="1rem" color="#4EFF4E">
-                                            {Number(discount).toFixed()}%
+                                            {Number(discount).toFixed(0)}%
                                         </Text>
                                     ) : (
                                         <Text padding="0" fontSize="1rem" color="#FF4E4E">
-                                            {Number(discount).toFixed()}%
+                                            {Number(discount).toFixed(0)}%
                                         </Text>
                                     )}
                                 </StakeItem>
