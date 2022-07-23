@@ -7,6 +7,7 @@ import {
   FACTORY_ADDRESS,
   Percent,
   ROUTER_ADDRESS,
+  DAI,
   SOUL,
   Trade as V2Trade,
   TradeType,
@@ -270,7 +271,8 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId 
          ? SOUL[250].address
          : chainId == ChainId.ETHEREUM
          ? '0x4E15361FD6b4BB609Fa63C81A2be19d873717870' // FTM
-         : DAI[chainId].address
+         : chainId == ChainId.BSC
+         ? USDC[chainId].address
          
   if (inputCurrency === '' && outputCurrency === '') {
     inputCurrency = eth

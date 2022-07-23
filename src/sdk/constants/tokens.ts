@@ -12,6 +12,14 @@ export const USDC: TokenMap = {
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, USDC_ADDRESS[ChainId.AVALANCHE], 18, 'USDC', 'USD Coin')
 }
 
+export const DAI: TokenMap = {
+  [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, DAI_ADDRESS[ChainId.ETHEREUM], 18, 'DAI', 'Dai Stablecoin'),
+  // [ChainId.TELOS]: new Token(ChainId.TELOS, DAI_ADDRESS[ChainId.TELOS], 18, 'DAI', 'Dai Stablecoin'),
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, DAI_ADDRESS[ChainId.FANTOM], 18, 'DAI', 'Dai Stablecoin'),
+  [ChainId.BSC]: new Token(ChainId.BSC, DAI_ADDRESS[ChainId.BSC], 18, 'DAI', 'Dai Stablecoin'),
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, DAI_ADDRESS[ChainId.AVALANCHE], 18, 'DAI', 'Dai Stablecoin')
+}
+
 export const USD: TokenMap = {
   ...USDC,
 }
