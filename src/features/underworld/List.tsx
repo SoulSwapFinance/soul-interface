@@ -1,13 +1,13 @@
 import Typography from 'components/Typography'
 import React, { useEffect, useState } from 'react'
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
+// import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
 import { Underworld } from './Key'
 import { Row } from './Row'
 import { UnderworldMarkets } from './Markets'
 import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
-import { ArrowLeftIcon, ArrowRightIcon, XIcon } from '@heroicons/react/outline'
+// import { ArrowLeftIcon, ArrowRightIcon, XIcon } from '@heroicons/react/outline'
 // import Header from 'components/Header'
 
 export const List = () => {
@@ -17,7 +17,7 @@ export const List = () => {
     key={market.id}
     lpToken={market.lpAddress}
     // assetAddress={market.assetAddress}
-    farm={market}
+    pair={market}
     />
     ))
     

@@ -66,12 +66,11 @@ export const InactivePools = [
     token1Address: tokens.SEANCE,
     token2Address: tokens.UNIDX,
   },
-
 ]
 
 export const ActivePools = [
   {
-    // 1600
+    // 7500
     pid: 1,
     token1: 'SOUL',
     token2: 'FTM',
@@ -109,7 +108,6 @@ export const ActivePools = [
     token1Address: tokens.SOUL,
     token2Address: tokens.SEANCE,
   },
-
   {
     // 600
     pid: 10,
@@ -137,7 +135,7 @@ export const ActivePools = [
     token2Address: tokens.USDC,
   },
   {
-    // 400
+    // 750
     pid: 54,
     token1: 'FTM',
     token2: 'SOR',
@@ -150,7 +148,7 @@ export const ActivePools = [
     token2Address: tokens.SOR,
   },
   {
-    // 500
+    // 1500
     pid: 47,
     token1: 'FTM',
     token2: 'wLUM',
@@ -163,7 +161,7 @@ export const ActivePools = [
     token2Address: tokens.WLUM,
   },
   {
-    // 500
+    // 1000
     pid: 44,
     token1: 'FTM',
     token2: 'LUX',
