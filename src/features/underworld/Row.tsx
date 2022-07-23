@@ -1,29 +1,18 @@
-import React, { useState, useEffect, useContext, createContext, ReactNode, FC } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useActiveWeb3React } from 'services/web3'
-// import QuestionHelper from '../../components/QuestionHelper'
 import { Token } from 'sdk'
 import { useSoulSummonerContract } from 'hooks/useContract'
-import useApprove from 'features/bond/hooks/useApprove'
 import { Tab } from '@headlessui/react'
-import Image from 'next/image'
 import { LendContentWrapper,
-    LendContainer, LendItem, LendItemBox, Text, FunctionBox, SubmitButton, Wrap
+    LendContainer, LendItem, LendItemBox, SubmitButton
 } from './Styles'
 import { classNames, formatNumber, tryParseAmount } from 'functions'
-import { usePairInfo, usePriceUSD, useSummonerPoolInfo, useSummonerUserInfo, useTokenInfo, useUnderworldPairInfo, useUnderworldUserInfo, useUserInfo, useUserPairInfo, useUserTokenInfo } from 'hooks/useAPI'
+import { useUnderworldPairInfo, useUnderworldUserInfo } from 'hooks/useAPI'
 import Modal from 'components/DefaultModal'
-// import { ArrowDownIcon, ArrowLeftIcon, PlusIcon, XIcon } from '@heroicons/react/solid'
-import { Button } from 'components/Button'
 import Typography from 'components/Typography'
-import ModalHeader from 'components/Modal/Header'
 import NavLink from 'components/NavLink'
-import FarmInputPanel from './Input'
-import { CurrencyLogo } from 'components/CurrencyLogo'
-import QuestionHelper from 'components/QuestionHelper'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
-import { cp } from 'fs'
-// import Lend from 'pages/lend'
 
 // const HideOnSmall = styled.div`
 // @media screen and (max-width: 900px) {
@@ -37,29 +26,21 @@ const HideOnMobile = styled.div`
 }
 `
 
-export const Row = ({ farm, lpToken }) => {
+export const Row = ({ pair, lpToken }) => {
     const { account, chainId, library } = useActiveWeb3React()
-    const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
-    const [depositing, setDepositing] = useState(false)
 
-    const [approved, setApproved] = useState(false)
-    const [withdrawValue, setWithdrawValue] = useState('0')
-    const [depositValue, setDepositValue] = useState('0')
-    
-    const SoulSummonerContract = useSoulSummonerContract()
-    const SoulSummonerAddress = SoulSummonerContract.address
+    // const SoulSummonerContract = useSoulSummonerContract()
 
     const [showOptions, setShowOptions] = useState(false)
     const [openLend, setOpenLend] = useState(false)
-    const [showConfirmation, setShowConfirmation] = useState(false)
     const [openBorrow, setOpenBorrow] = useState(false)
     
-    const { underworldPairInfo } = useUnderworldPairInfo(farm.lpAddress)
-    const lpDecimals = Number(underworldPairInfo.decimals)
-    const assetAddress = underworldPairInfo.assetAddress
+    const { underworldPairInfo } = useUnderworldPairInfo(pair.lpAddress)
+    // const lpDecimals = Number(underworldPairInfo.decimals)
+    // const assetAddress = underworldPairInfo.assetAddress
     const assetSymbol = underworldPairInfo.assetTicker
     const collateralSymbol = underworldPairInfo.collateralTicker
-    const collateralAddress = Number(underworldPairInfo.collateralAddress)
+    // const collateralAddress = Number(underworldPairInfo.collateralAddress)
     const assetDecimals = Number(underworldPairInfo.assetDecimals)
     const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
     const assetPrice = Number(underworldPairInfo.assetPrice)
@@ -67,7 +48,7 @@ export const Row = ({ farm, lpToken }) => {
     // const interestPerSecond = Number(underworldPairInfo.interestPerSecond) / 1e16
     // const secondsPerYear = 86_400 * 365
     // const apr = interestPerSecond * secondsPerYear
-    const { underworldUserInfo } = useUnderworldUserInfo(farm.lpAddress)
+    const { underworldUserInfo } = useUnderworldUserInfo(pair.lpAddress)
     const assetBalance = Number(underworldUserInfo.userAssetBalance) // 10**assetDecimals
     const borrowedAmount = Number(underworldUserInfo.userBorrowPart) / 10**assetDecimals
     const suppliedAmount = Number(underworldUserInfo.userBalance) // 10**lpDecimals
@@ -80,35 +61,13 @@ export const Row = ({ farm, lpToken }) => {
     const LTV = (1 - (collateralValue - borrowedValue) / collateralValue) * 100
     const leeway = (75 - LTV) / 100
 
-    // const parsedBalance = tryParseAmount(assetBalance, farm.lpToken)
+    // const parsedBalance = tryParseAmount(assetBalance, pair.lpToken)
     // const userBalance = useCurrencyBalance(account, lpToken)
     // ONLY USED FOR LOGO //
-    const asset = new Token(chainId, farm.assetAddress[chainId], 18)
-    const collateral = new Token(chainId, farm.collateralAddress[chainId], 18)
-    // const pair = new Token(chainId, farm.lpToken.address, 18)
+    const asset = new Token(chainId, pair.assetAddress[chainId] ? pair.assetAddress[chainId] : pair.assetAddress[250], 18)
+    const collateral = new Token(chainId, pair.collateralAddress[chainId] ? pair.collateralAddress[chainId] : pair.collateralAddress[250], 18)
+    // const pair = new Token(chainId, pair.lpToken.address, 18)
     // console.log('lpAddress:%s', lpAddress)
-
-    /**
-     * Runs only on initial render/mount
-     */
-    useEffect(() => {
-        fetchApproval()
-    }, [account])
-
-    /**
-     * Runs on initial render/mount and reruns
-     */
-    useEffect(() => {
-        if (account) {
-            const timer = setTimeout(() => {
-                // if (showing) {
-                    fetchApproval()
-                // }
-            }, 10000)
-            // Clear timeout if the component is unmounted
-            return () => clearTimeout(timer)
-        }
-    })
 
     /**
      * Opens the function panel dropdowns.
@@ -116,7 +75,6 @@ export const Row = ({ farm, lpToken }) => {
     const handleShowOptions = () => {
         setShowOptions(!showOptions)
         if (showOptions) {
-            fetchApproval()
             setOpenLend(false)
             setOpenBorrow(false)
         }
@@ -124,85 +82,11 @@ export const Row = ({ farm, lpToken }) => {
 
     const handleShowLend = () => {
         setOpenLend(!openLend)
-        if (openLend) {
-            fetchApproval()
-        }
     }
    
     const handleShowBorrow = () => {
         setOpenBorrow(!openBorrow)
     }
-
-    /**
-     * Checks if the user has approved SoulSummonerAddress to move lpTokens
-     */
-    const fetchApproval = async () => {
-        if (!account) {
-            // alert('Connect Wallet')
-        } else {
-            // Checks if SoulSummonerContract can move tokens
-            const amount = await erc20Allowance(account, SoulSummonerAddress)
-            if (amount > 0) setApproved(true)
-            return amount
-        }
-    }
-
-    /**
-     * Approves SoulSummonerAddress to move lpTokens
-     */
-    const handleApprove = async () => {
-        if (!account) {
-            // alert('Connect Wallet')
-        } else {
-            try {
-                const tx = await erc20Approve(SoulSummonerAddress)
-                await tx?.wait().then(await fetchApproval())
-            } catch (e) {
-                // alert(e.message)
-                console.log(e)
-                return
-            }
-        }
-    }
-
-    /**
-     * Withdraw Liquidity Asset
-     */
-    const handleWithdraw = async (pid) => {
-        try {
-            const tx = await SoulSummonerContract?.withdraw(pid, Number(withdrawValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
-            await tx?.wait()
-        } catch (e) {
-            // alert(e.message)
-            const tx = await SoulSummonerContract?.withdraw(pid, Number(withdrawValue).toFixed(6).toBigNumber(assetDecimals))
-            console.log(e)
-        }
-    }
-
-    /**
-     * Harvest Pending Rewards
-     */
-    const handleHarvest = async (pid) => {
-        try {
-            let tx
-            tx = await SoulSummonerContract?.deposit(pid, 0)
-            await tx?.wait()
-        } catch (e) {
-            // alert(e.message)
-            console.log(e)
-        }
-    }
-
-    // const handleDeposit = async (pid) => {
-    //     try {
-    //         const tx = await SoulSummonerContract?.deposit(pid, Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
-    //         await tx.wait()
-    //     } catch (e) {
-    //         const tx = await SoulSummonerContract?.deposit(pid, Number(depositValue).toFixed(6).toBigNumber(assetDecimals))
-    //         // alert(e.message)
-    //         console.log(e)
-    //     }
-    // }
 
     return (
         <>
@@ -472,7 +356,7 @@ export const Row = ({ farm, lpToken }) => {
 
                                 {/* DEPOSIT: ASSET PANEL */}
                                 {/* <FarmInputPanel
-                                    pid={farm.pid}
+                                    pid={pair.pid}
                                     onUserInput={(value) => setDepositValue(value)}
                                     onMax={() => setDepositValue(walletBalance)}
                                     value={depositValue}
@@ -483,7 +367,7 @@ export const Row = ({ farm, lpToken }) => {
 
                                 {/* LEND ASSET */}
                                 <NavLink
-                                    href={`/lend/${farm.lpAddress}`}
+                                    href={`/lend/${pair.lpAddress}`}
                                  >
                                      <SubmitButton
                                         height="2rem"
@@ -648,7 +532,7 @@ export const Row = ({ farm, lpToken }) => {
 
                                 {/* WITHDRAW: ASSET PANEL */}
                                 {/* <FarmInputPanel
-                                    pid={farm.pid}
+                                    pid={pair.pid}
                                     onUserInput={(value) => setWithdrawValue(value)}
                                     onMax={() => setWithdrawValue(stakedBalance)}
                                     value={withdrawValue}
@@ -679,7 +563,7 @@ export const Row = ({ farm, lpToken }) => {
                                     BORROW {assetSymbol}
                                 </SubmitButton> */}
                                  <NavLink
-                                    href={`/borrow/${farm.lpAddress}`}
+                                    href={`/borrow/${pair.lpAddress}`}
                                  >
                                      <SubmitButton
                                         height="2rem"
@@ -708,7 +592,7 @@ export const Row = ({ farm, lpToken }) => {
                 <iframe
                 frameBorder={"none"}
 				title={"Underworld"}
-				src={`https://soul.sh/lend/${farm.lpAddress}`}
+				src={`https://soul.sh/lend/${pair.lpAddress}`}
 				height={'500px'}
                 />
                 </Modal>
@@ -724,7 +608,7 @@ export const Row = ({ farm, lpToken }) => {
                 <iframe
                 frameBorder={"none"}
 				title={"Underworld"}
-				src={`https://soul.sh/borrow/${farm.lpAddress}`}
+				src={`https://soul.sh/borrow/${pair.lpAddress}`}
 				height={'500px'}
                 />
                 </Modal>
