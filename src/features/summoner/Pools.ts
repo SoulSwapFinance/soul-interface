@@ -54,7 +54,7 @@ export const InactivePools = [
     token2Address: tokens.USDT,
   },
   {
-    // 400
+    // 0
     pid: 27,
     token1: 'SEANCE',
     token2: 'UNIDX',
@@ -65,6 +65,19 @@ export const InactivePools = [
     },
     token1Address: tokens.SEANCE,
     token2Address: tokens.UNIDX,
+  },
+  {
+    // 0
+    pid: 21,
+    token1: 'USDC',
+    token2: 'DAI',
+    lpSymbol: 'USDC-DAI',
+    lpAddresses: {
+      4002: '',
+      250: '0x406de3a93f6b4179e3b21a3d81226b43e1918fd9',
+    },
+    token1Address: tokens.USDC,
+    token2Address: tokens.DAI,
   },
 ]
 
@@ -327,19 +340,6 @@ export const ActivePools = [
       250: '0xC1EdFbA9811B696bDFd07d31eD5FF702e031364E',
     },
     token1Address: tokens.BNB,
-    token2Address: tokens.DAI,
-  },
-  {
-    // 200
-    pid: 21,
-    token1: 'USDC',
-    token2: 'DAI',
-    lpSymbol: 'USDC-DAI',
-    lpAddresses: {
-      4002: '',
-      250: '0x406de3a93f6b4179e3b21a3d81226b43e1918fd9',
-    },
-    token1Address: tokens.USDC,
     token2Address: tokens.DAI,
   },
   {
