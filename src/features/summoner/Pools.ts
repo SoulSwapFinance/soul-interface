@@ -79,6 +79,45 @@ export const InactivePools = [
     token1Address: tokens.USDC,
     token2Address: tokens.DAI,
   },
+  {
+    // 0
+    pid: 17,
+    token1: 'BNB',
+    token2: 'DAI',
+    lpSymbol: 'BNB-DAI',
+    lpAddresses: {
+      4002: '',
+      250: '0xC1EdFbA9811B696bDFd07d31eD5FF702e031364E',
+    },
+    token1Address: tokens.BNB,
+    token2Address: tokens.DAI,
+  },
+  {
+    // 0
+    pid: 9,
+    token1: 'USDC',
+    token2: 'USDT',
+    lpSymbol: 'USDC-USDT',
+    lpAddresses: {
+      4002: '',
+      250: '0x298c12d6d9d6746dd0ef0a89421288f52d5566ef',
+    },
+    token1Address: tokens.USDC,
+    token2Address: tokens.USDT,
+  },
+  {
+    // 0
+    pid: 43,
+    token1: 'USDT',
+    token2: 'DAI',
+    lpSymbol: 'USDT-DAI',
+    lpAddresses: {
+      4002: '',
+      250: '0xB38508Ed92C4878daE7652d8d46cAE46eEa8aA9A',
+    },
+    token1Address: tokens.USDT,
+    token2Address: tokens.DAI,
+  },
 ]
 
 export const ActivePools = [
@@ -328,45 +367,6 @@ export const ActivePools = [
     },
     token1Address: tokens.WBTC,
     token2Address: tokens.USDC,
-  },
-  {
-    // 400
-    pid: 17,
-    token1: 'BNB',
-    token2: 'DAI',
-    lpSymbol: 'BNB-DAI',
-    lpAddresses: {
-      4002: '',
-      250: '0xC1EdFbA9811B696bDFd07d31eD5FF702e031364E',
-    },
-    token1Address: tokens.BNB,
-    token2Address: tokens.DAI,
-  },
-  {
-    // 200
-    pid: 9,
-    token1: 'USDC',
-    token2: 'USDT',
-    lpSymbol: 'USDC-USDT',
-    lpAddresses: {
-      4002: '',
-      250: '0x298c12d6d9d6746dd0ef0a89421288f52d5566ef',
-    },
-    token1Address: tokens.USDC,
-    token2Address: tokens.USDT,
-  },
-  {
-    // 200
-    pid: 43,
-    token1: 'USDT',
-    token2: 'DAI',
-    lpSymbol: 'USDT-DAI',
-    lpAddresses: {
-      4002: '',
-      250: '0xB38508Ed92C4878daE7652d8d46cAE46eEa8aA9A',
-    },
-    token1Address: tokens.USDT,
-    token2Address: tokens.DAI,
   },
   {
     // 200
