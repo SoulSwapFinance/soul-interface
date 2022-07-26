@@ -1,7 +1,7 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { COFFIN_BOX_ADDRESS, CurrencyAmount, WNATIVE } from 'sdk'
+import { COFFIN_BOX_ADDRESS, WNATIVE } from 'sdk'
 import AssetInput from 'components/AssetInput'
 import { Button } from 'components/Button'
 import { HeadlessUiModal } from 'components/Modal'

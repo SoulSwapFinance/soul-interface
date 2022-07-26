@@ -551,13 +551,13 @@ export function useDashboardContract(): Contract | null {
   return useContract(address, DASHBOARD_ABI, false)
 }
 
-export function useSoulSwapTWAP0Oracle(): Contract | null {
-  return useContract(SOULSWAP_TWAP_0_ORACLE_ADDRESS, SOULSWAP_TWAP_ORACLE_ABI)
-}
+// export function useSoulSwapTWAP0Oracle(): Contract | null {
+//   return useContract(SOULSWAP_TWAP_0_ORACLE_ADDRESS, SOULSWAP_TWAP_ORACLE_ABI)
+// }
 
-export function useSoulSwapTWAP1Oracle(): Contract | null {
-  return useContract(SOULSWAP_TWAP_1_ORACLE_ADDRESS, SOULSWAP_TWAP_ORACLE_ABI)
-}
+// export function useSoulSwapTWAP1Oracle(): Contract | null {
+//   return useContract(SOULSWAP_TWAP_1_ORACLE_ADDRESS, SOULSWAP_TWAP_ORACLE_ABI)
+// }
 
 export function useSoulSwapTWAPContract(address?: string): Contract | null {
   const TWAP_0 = useContract(SOULSWAP_TWAP_0_ORACLE_ADDRESS, SOULSWAP_TWAP_ORACLE_ABI)
