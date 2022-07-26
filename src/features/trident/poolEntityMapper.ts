@@ -1,4 +1,4 @@
-import { PoolType } from 'sdk'
+import { PoolType } from 'sdk/tines'
 import { ConstantProductPool, HybridPool, Pool } from 'sdk'
 
 export const poolEntityMapper = (poolClass: Pool): PoolType => {

@@ -6,7 +6,6 @@ import DashboardTabs from 'features/analytics/Dashboard/DashboardTabs'
 // import PoolList from 'features/analytics/Farms/FarmList'
 import PairList from 'features/analytics/Pairs/PairList'
 import TokenList from 'features/analytics/Tokens/TokenList'
-// import useFarmRewards from 'hooks/useFarmRewards'
 import useFuse from 'hooks/useFuse'
 import {
   useDayData,

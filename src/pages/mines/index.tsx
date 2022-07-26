@@ -9,9 +9,8 @@ import React, { useContext, useState } from 'react'
 import { POOLS } from 'constants/farms'
 import { getAddress } from '@ethersproject/address'
 import { useTVL } from 'hooks/useV2Pairs'
-import { useFarms, useSummonerInfo } from 'hooks'
+import { useSummonerInfo } from 'hooks'
 import { TridentBody, TridentHeader } from 'layouts/Trident'
-// import useFarmRewards from 'hooks/useFarmRewards'
 import { usePositions } from 'features/mines/hooks'
 import { Button } from 'components/Button'
 import { formatNumberScale } from 'functions'
@@ -20,6 +19,7 @@ import useSummoner from 'features/mines/hooks/useMasterChef'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
 import { useSoulPrice } from 'hooks/getPrices'
+import { useFarms } from 'services/graph/hooks'
 
 export default function Mines(): JSX.Element {
   const { chainId } = useActiveWeb3React()
