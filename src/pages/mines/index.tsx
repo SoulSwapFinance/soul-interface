@@ -9,7 +9,7 @@ import React, { useContext, useState } from 'react'
 import { POOLS } from 'constants/farms'
 import { getAddress } from '@ethersproject/address'
 import { useTVL } from 'hooks/useV2Pairs'
-import { usePrice, useFarms, useSummonerInfo } from 'hooks'
+import { useFarms, useSummonerInfo } from 'hooks'
 import { TridentBody, TridentHeader } from 'layouts/Trident'
 // import useFarmRewards from 'hooks/useFarmRewards'
 import { usePositions } from 'features/mines/hooks'
@@ -71,23 +71,6 @@ export default function Mines(): JSX.Element {
     }
 
     const rewards = getRewards()
-
-    // function getTvl(pool) {
-    //   // const pair = POOLS[chainId][pool.id]
-    //   let lpPrice = 0
-    //   let decimals = 18
-    //   if (pool.lpToken == SOUL_ADDRESS[chainId]) {
-    //     lpPrice = soulPrice
-    //     decimals = pair.token0?.decimals
-    //   } else if (pool.lpToken.toLowerCase() 
-    //     == WNATIVE[chainId].address.toLowerCase()) {
-    //     lpPrice = ftmPrice
-    //   } else {
-    //     lpPrice = 0
-    //   }
-      
-    //   return Number(pool.totalLp / 10 ** decimals) * lpPrice
-    // }
 
     // const tvl = getTvl(pool)
     const tvl = pool.pair?.token1

@@ -1,5 +1,6 @@
+import { useActiveWeb3React } from 'hooks';
 import React from 'react'
-import { useActiveWeb3React } from 'services/web3'
+// import { useActiveWeb3React } from 'services/web3'
 
 export const chainToNativeToken = {
     250: {

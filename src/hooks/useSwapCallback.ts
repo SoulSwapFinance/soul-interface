@@ -24,7 +24,7 @@ import {
   Trade as LegacyTrade,
   TradeType,
 } from 'sdk'
-import { getBigNumber, MultiRoute } from '@sushiswap/tines'
+import { getBigNumber, MultiRoute } from 'sdk/tines'
 import { EIP_1559_ACTIVATION_BLOCK } from '../constants'
 import { Feature } from 'enums'
 import { approveMasterContractAction, batchAction, unwrapWETHAction } from 'features/trident/actions'

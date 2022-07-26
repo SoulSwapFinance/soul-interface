@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { Pair } from 'sdk'
-import { ConstantProductRPool, RPool, RToken } from '@sushiswap/tines'
+import { ConstantProductRPool, RPool, RToken } from 'sdk/tines'
 import { Pool } from '../entities/Pool'
 import { ConstantProductPool } from '../entities/ConstantProductPool'
 import { Fee } from '../enums/Fee'

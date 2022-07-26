@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { Pair, Token } from 'sdk'
-import { MultiRoute, RToken, findMultiRouteExactIn as TinesFindMultiRouteExactIn } from '@sushiswap/tines'
+import { MultiRoute, RToken, findMultiRouteExactIn as TinesFindMultiRouteExactIn } from 'sdk/tines'
 import { Pool } from '../entities/Pool'
 import { convertPoolOrPairtoRPool } from './convertPoolOrPairtoRPool'
 
