@@ -572,8 +572,7 @@ export function useSoulSwapTWAPContract(address?: string): Contract | null {
 
 export function useZapperContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  const address = ZAPPER_ADDRESS[chainId]
-  return useContract(address, ZAPPER_ABI, withSignerIfPossible)
+  return useContract(chainId && ZAPPER_ADDRESS[chainId], ZAPPER_ABI, withSignerIfPossible)
 }
 
 export function useSwapUnderlyingContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {

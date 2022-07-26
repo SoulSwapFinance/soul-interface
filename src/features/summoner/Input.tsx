@@ -1,18 +1,18 @@
-import { ChevronDownIcon } from '@heroicons/react/outline'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
-import { Currency, CurrencyAmount, Pair, Percent, Token } from 'sdk'
-import selectCoinAnimation from 'animation/select-coin.json'
-import { classNames, formatNumber } from 'functions'
-import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
-import { useActiveWeb3React } from 'services/web3'
-import { useCurrencyBalance } from 'state/wallet/hooks'
-import Lottie from 'lottie-react'
 import React, { FC, ReactNode, useCallback, useState } from 'react'
+// import { ChevronDownIcon } from '@heroicons/react/outline'
+// import { t } from '@lingui/macro'
+import { useLingui } from '@lingui/react'
+import { Currency, Percent, Token } from 'sdk'
+// import selectCoinAnimation from 'animation/select-coin.json'
+import { classNames, formatNumber } from 'functions'
+// import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
+import { useActiveWeb3React } from 'services/web3'
+// import { useCurrencyBalance } from 'state/wallet/hooks'
+// import Lottie from 'lottie-react'
 
 import { Button } from 'components/Button'
-import { CurrencyLogo } from 'components/CurrencyLogo'
-import DoubleCurrencyLogo from 'components/DoubleLogo'
+// import { CurrencyLogo } from 'components/CurrencyLogo'
+// import DoubleCurrencyLogo from 'components/DoubleLogo'
 import Input from 'components/Input'
 // import Typography from 'components/Typography'
 // import { WalletIcon } from 'components/Icon'
@@ -24,6 +24,7 @@ interface FarmInputPanelProps {
   pid: string
   value?: string
   balance: string
+  isNative?: boolean
   onUserInput?: (value: string) => void
   onMax?: (max: string) => void
   label?: string
@@ -43,6 +44,7 @@ interface FarmInputPanelProps {
 export default function FarmInputPanel({
   pid,
   balance,
+  isNative,
   token0, 
   token1,
   value,
@@ -92,7 +94,10 @@ export default function FarmInputPanel({
                     {/* {pairSymbol} */}
                     MAX
                   <br/>
-                  ≈${formatNumber(Number(value) * Number(assetPrice), false)}
+                  ≈${isNative 
+                    ? formatNumber(Number(value) * Number(assetPrice), false)
+                    : formatNumber(Number(value) * Number(assetPrice), false)
+                  }
                   </div>
                 </div>
                 </Button>
