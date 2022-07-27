@@ -448,7 +448,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                       <div className="flex flex-col">
                         <p>
                         After creating liquidity or lending, navigate to the associated farm to deposit. 
-                        <br/><br/><b>Note:</b> there's a 14% Early Withdraw Fee, which decreases by 1% daily.
+                        <br/><br/><b>Note:</b> there is a 14% Early Withdraw Fee, which decreases by 1% daily.
                         </p>
                       </div>
                     </div>

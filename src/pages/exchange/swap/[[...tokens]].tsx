@@ -34,6 +34,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
 import Chart from 'components/Chart'
 import NavLink from 'components/NavLink'
+import ExternalLink from 'components/ExternalLink'
 import Toggle from 'components/Toggle'
 import Image from 'next/image'
 import styled from 'styled-components'
@@ -524,9 +525,9 @@ const Swap = () => {
                   </NavLink>
                 </Button>
                 <Button variant="filled" color="gradientBluePurple" size="lg">
-                  <NavLink href={'/board'}>
+                  <ExternalLink href={'https://cross.soulswap.finance'}>
                         <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                        <span>Give Feedback</span>
+                        <span>Swap Crosschain</span>
                         </a>
                   </NavLink>
                 </Button>

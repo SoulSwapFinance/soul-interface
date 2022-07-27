@@ -1,4 +1,4 @@
-import { LiquidityPositionsBalances } from 'features/portfolio/LiquidityPositions'
+// import { LiquidityPositionsBalances } from 'features/portfolio/LiquidityPositions'
 import { LiquidityPositionsBalancesSum } from 'features/portfolio/BalancesSum'
 import HeaderDropdown from 'features/portfolio/HeaderDropdown'
 import { useAccountInUrl } from 'features/portfolio/useAccountInUrl'
@@ -17,7 +17,7 @@ const LiquidityPosition = () => {
       </TridentHeader>
       <TridentBody>
         <div className="flex flex-col justify-between gap-8">
-          <LiquidityPositionsBalances />
+          {/* <LiquidityPositionsBalances /> */}
         </div>
       </TridentBody>
     </>

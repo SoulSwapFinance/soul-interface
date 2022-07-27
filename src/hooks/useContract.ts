@@ -551,13 +551,13 @@ export function useDashboardContract(): Contract | null {
   return useContract(address, DASHBOARD_ABI, false)
 }
 
-export function useSoulSwapTWAP0Oracle(): Contract | null {
-  return useContract(SOULSWAP_TWAP_0_ORACLE_ADDRESS, SOULSWAP_TWAP_ORACLE_ABI)
-}
+// export function useSoulSwapTWAP0Oracle(): Contract | null {
+//   return useContract(SOULSWAP_TWAP_0_ORACLE_ADDRESS, SOULSWAP_TWAP_ORACLE_ABI)
+// }
 
-export function useSoulSwapTWAP1Oracle(): Contract | null {
-  return useContract(SOULSWAP_TWAP_1_ORACLE_ADDRESS, SOULSWAP_TWAP_ORACLE_ABI)
-}
+// export function useSoulSwapTWAP1Oracle(): Contract | null {
+//   return useContract(SOULSWAP_TWAP_1_ORACLE_ADDRESS, SOULSWAP_TWAP_ORACLE_ABI)
+// }
 
 export function useSoulSwapTWAPContract(address?: string): Contract | null {
   const TWAP_0 = useContract(SOULSWAP_TWAP_0_ORACLE_ADDRESS, SOULSWAP_TWAP_ORACLE_ABI)
@@ -572,8 +572,7 @@ export function useSoulSwapTWAPContract(address?: string): Contract | null {
 
 export function useZapperContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  const address = ZAPPER_ADDRESS[chainId]
-  return useContract(address, ZAPPER_ABI, withSignerIfPossible)
+  return useContract(chainId && ZAPPER_ADDRESS[chainId], ZAPPER_ABI, withSignerIfPossible)
 }
 
 export function useSwapUnderlyingContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {

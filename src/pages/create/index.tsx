@@ -15,7 +15,7 @@ import { useCoffinBoxContract } from 'hooks/useContract'
 import Layout from 'layouts/Underworld'
 import { useActiveWeb3React } from 'services/web3'
 import { Field } from 'state/create/actions'
-import { useCreateActionHandlers, useCreateState, useDerivedCreateInfo } from 'state/create/hook'
+import { useCreateActionHandlers, useDerivedCreateInfo } from 'state/create/hook'
 import { useTransactionAdder } from 'state/transactions/hooks'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -38,7 +38,7 @@ export default function Create() {
 
   const router = useRouter()
 
-  const { independentField, typedValue } = useCreateState()
+  // const { independentField, typedValue } = useCreateState()
   const { onSwitchTokens, onCurrencySelection, onUserInput } = useCreateActionHandlers()
 
   const { currencies, inputError } = useDerivedCreateInfo()
@@ -191,7 +191,7 @@ export default function Create() {
               onCurrencySelect={handleCollateralSelect}
               otherCurrency={currencies[Field.ASSET]}
               showCommonBases={false}
-              // allowManageTokenList={false}
+              allowManageTokenList={false}
               // showSearch={false}
               id="underworld-currency-collateral"
             />
@@ -206,7 +206,7 @@ export default function Create() {
               otherCurrency={currencies[Field.COLLATERAL]}
               showCommonBases={false}
               // allowManageTokenList={false}
-              // showSearch={false}
+              showSearch={false}
               id="underworld-currency-asset"
             />
           </div>

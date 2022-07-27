@@ -113,7 +113,6 @@ export const formatSimpleValue = (value: number) => {
       const take = value.slice(-3);
       result = result ? `${take},${result}` : take;
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       return doFormat(value.substr(0, value.length - 3));
     }
     result = result

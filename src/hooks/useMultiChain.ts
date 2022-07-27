@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 // import { useSoftwareWallet } from "./useSoftwareWallet";
 import { bridgeNetworks } from "../utils/bridge";
 import config from "config/configurations";
-// import { switchToChain } from "utils/events";
 import { JsonRpcProvider } from "@ethersproject/providers";
 import { useActiveWeb3React } from "services/web3";
 // import { Wallet } from "@ethersproject/wallet";

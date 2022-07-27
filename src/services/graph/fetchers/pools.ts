@@ -1,5 +1,5 @@
 import { ChainId, Token } from 'sdk'
-import { PoolType } from '@sushiswap/tines'
+import { PoolType } from 'sdk/tines'
 import { Fee } from 'sdk'
 import { GRAPH_HOST } from 'services/graph/constants' // TRIDENT
 import {

@@ -246,10 +246,11 @@ export const TRIDENT: AddressMap = {
 }
 
 export const ZAPPER_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '0xcff6eF0B9916682B37D80c19cFF8949bc1886bC2',
+  // [ChainId.ETHEREUM]: '0xcff6eF0B9916682B37D80c19cFF8949bc1886bC2',
+  [ChainId.ETHEREUM]: undefined,
   // [ChainId.ROPSTEN]: '0xcff6eF0B9916682B37D80c19cFF8949bc1886bC2',
   [ChainId.TELOS]: '',
-  [ChainId.FANTOM]: '',
+  [ChainId.FANTOM]: '0x936bdb9218d7f6d7ef95fafe3f0ded0220229d74',
   [ChainId.AVALANCHE]: undefined,
   [ChainId.MATIC]: undefined,
   [ChainId.ARBITRUM]: undefined,

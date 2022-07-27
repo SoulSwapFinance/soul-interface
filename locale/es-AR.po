@@ -316,9 +316,6 @@ msgstr ""
 msgid "Claimable Amount"
 msgstr ""
 
-msgid "Claimable SOUL"
-msgstr ""
-
 msgid "Claimable: Fetching Claimable Amount"
 msgstr ""
 
@@ -1438,16 +1435,10 @@ msgstr ""
 msgid "Soul"
 msgstr ""
 
-msgid "Soul Vault"
-msgstr ""
-
 msgid "SoulPay"
 msgstr ""
 
 msgid "SoulSwap"
-msgstr ""
-
-msgid "SoulSwap Vault is a set of high incentivized pools. Long term supporters can choose to lock SOUL for a determined period for higher rewards."
 msgstr ""
 
 msgid "SoulSwap utilizes a token vault called CoffinBox that has balances separate from your wallet."
@@ -1594,9 +1585,6 @@ msgid "The minimum amount you’ll receive from your transaction, or else the tr
 msgstr ""
 
 msgid "The output token cannot be transferred. There may be an issue with the output token."
-msgstr ""
-
-msgid "The participants receive various benefits such as higher rewards according to lock duration, higher allocations in Soul Launchpad and more."
 msgstr ""
 
 msgid "The time remaining until the LUX bond fully matures and 100% of the vested LUX is claimable.  Vesting is linear, with a portion of vested tokens released every second."

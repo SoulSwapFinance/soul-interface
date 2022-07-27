@@ -31,12 +31,28 @@
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x04068DA6C83AFCFA0e13ba15A6696662335D5B75/logo.png"
       },
       {
+        "name": "Dai Stablecoin",
+        "address": "0xd586E7F844cEa2F87f50152665BCbc2C279D8d70",
+        "symbol": "DAI",
+        "decimals": 18,
+        "chainId": 43114,
+        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E/logo.png"
+      },
+      {
         "name": "JoeToken",
         "address": "0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd",
         "symbol": "JOE",
         "decimals": 18,
         "chainId": 43114,
-        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/avalanche/assets/0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd/logo.png"
+        "logoURI": "https://snowtrace.io/token/images/traderjoe_32.png"
+      },
+      {
+        "name": "Wrapped Avalanche",
+        "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+        "symbol": "WAVAX",
+        "decimals": 18,
+        "chainId": 43114,
+        "logoURI": "https://snowtrace.io/token/images/avax_32.png"
       },
       {
         "name": "Wrapped Ether",

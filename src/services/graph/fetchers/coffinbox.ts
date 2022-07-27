@@ -15,7 +15,8 @@ import {
 import { pager } from './pager'
 
 export const COFFINBOX = {
-  [ChainId.FANTOM]: 'soulswapfinance/coffinbox'
+  [ChainId.FANTOM]: 'soulswapfinance/coffinbox',
+  [ChainId.AVALANCHE]: 'soulswapfinance/coffinbox-avalanche'
 }
 const fetcher = async (chainId = ChainId.FANTOM, query, variables = undefined) =>
   pager(`${GRAPH_HOST[chainId]}/subgraphs/name/${COFFINBOX[chainId]}`, query, variables)
