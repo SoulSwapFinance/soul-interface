@@ -105,20 +105,23 @@ export default function Dashboard() {
     
   // GET SOR STATS
   const { sorInfo } = useSorInfo()
+    const sorMarketPrice = Number(useTokenInfo('0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A').tokenInfo.price)
   const { userTokenInfo } = useUserTokenInfo('0x000000000000000000000000000000000000dead', '0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A')
-  // console.log('burned:%s', burnedSupply)
-  // const sorSorCollateral = Number(sorInfo.sorCollateral)
+  // console.log('burnt:%s', burntSupply)
+   // const sorSorCollateralRaw = Number(sorInfo.sorCollateral)
   // console.log('sorSorCollateral:%s', sorSorCollateral)
   const sorLuxCollateral = Number(sorInfo.luxorCollateralValue)
   const sorWrappedLumensCollateral = Number(sorInfo.wlumCollateralValue)
   // console.log('sorLuxCollateral:%s', sorLuxCollateral)
   const sorDaiCollateral = Number(sorInfo.daiCollateral)
   // dampens the value of SOR collateral
-  // const sorSorCollateralAdjusted = Number(sorInfo.sorCollateral) * 0.1
-  const burnedSupply = Number(userTokenInfo.balance) / 1e18 // √ ~100
-  const totalSorSupply = Number(sorInfo.supply) - burnedSupply
+  const sorSorCollateral = Number(sorInfo.sorCollateral) * sorMarketPrice
+  const sorDaiCollateral = Number(sorInfo.daiCollateral)
+  const sorStableCollateral = sorSorCollateral + sorDaiCollateral
+  const burntSupply = Number(userTokenInfo.balance) / 1e18 // √ ~100
+  const totalSorSupply = Number(sorInfo.supply) - burntSupply
   // console.log('sorLuxCollateral:%s', sorLuxCollateral)
-  const totalSorCollateral = sorDaiCollateral + sorLuxCollateral + sorWrappedLumensCollateral
+  const totalSorCollateral = sorStableCollateral + sorLuxCollateral + sorWrappedLumensCollateral
   // console.log('totalSorCollateral:%s', totalSorCollateral)
 
   // const result = useCurrencyBalance(LUX_TREASURY_ADDRESS, LUX_FTM)
@@ -132,7 +135,6 @@ export default function Dashboard() {
   const ftmPrice = useFantomPrice()
   const wlumPrice = useWrappedLumPrice()
   const sorBackingPrice = totalSorCollateral / totalSorSupply
-  const sorMarketPrice = Number(useTokenInfo('0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A').tokenInfo.price)
   const sorMarketCap
     = sorMarketPrice >= sorBackingPrice
     ? sorMarketPrice * totalSorSupply
@@ -223,23 +225,23 @@ export default function Dashboard() {
 
     const sorCollateralData = [
       {
-          "angle": sorDaiCollateral,
+          "angle": sorStableCollateral,
           "color": "#FFB300",
-          "label": "DAI Collateral",
-          "percent": (sorDaiCollateral / totalSorCollateral * 100).toFixed()
+          "label": "Stable Collateral",
+          "percent": (sorStableCollateral / totalSorCollateral * 100).toFixed()
       },
       {
           "angle": sorLuxCollateral + sorWrappedLumensCollateral,
           "color": "#FFD300",
-          "label": "LUX Collateral",
+          "label": "Luxor Collateral",
           "percent": ((sorLuxCollateral + sorWrappedLumensCollateral) / totalSorCollateral * 100).toFixed()
       },
-      // {
-      //     "angle": sorSorCollateral,
-      //     "color": "#F5D100",
-      //     "label": "Sor Collateral",
-      //     "percent": (sorSorCollateral / totalSorCollateral * 100).toFixed()
-      // }
+      /* {
+           "angle": sorFtmCollateral,
+           "color": "#F5D100",
+           "label": "Sor Collateral",
+           "percent": (sorSorCollateral / totalSorCollateral * 100).toFixed()
+       }, */
       /* {
            "angle": sorWrappedLumensCollateral,
            "color": "#FFA300",
