@@ -116,7 +116,6 @@ export default function Dashboard() {
   const sorDaiCollateral = Number(sorInfo.daiCollateral)
   // dampens the value of SOR collateral
   const sorSorCollateral = Number(sorInfo.sorCollateral) * sorMarketPrice
-  const sorDaiCollateral = Number(sorInfo.daiCollateral)
   const sorStableCollateral = sorSorCollateral + sorDaiCollateral
   const burntSupply = Number(userTokenInfo.balance) / 1e18 // √ ~100
   const totalSorSupply = Number(sorInfo.supply) - burntSupply
