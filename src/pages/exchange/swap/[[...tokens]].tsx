@@ -529,7 +529,7 @@ const Swap = () => {
                         <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                         <span>Swap Crosschain</span>
                         </a>
-                  </NavLink>
+                  </ExternalLink>
                 </Button>
               </div>
             <div className="flex flex-row gap-3 text-dark-600 justify-end">
