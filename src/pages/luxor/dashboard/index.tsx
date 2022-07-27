@@ -112,6 +112,7 @@ export default function Dashboard() {
   // console.log('sorSorCollateral:%s', sorSorCollateral)
   const sorLuxCollateral = Number(sorInfo.luxorCollateralValue)
   const sorWrappedLumensCollateral = Number(sorInfo.wlumCollateralValue)
+  const sorFtmCollateral = Number(sorInfo.sorFtmCollateralValue)
   // console.log('sorLuxCollateral:%s', sorLuxCollateral)
   const sorDaiCollateral = Number(sorInfo.daiCollateral)
   // dampens the value of SOR collateral
@@ -120,7 +121,7 @@ export default function Dashboard() {
   const burntSupply = Number(userTokenInfo.balance) / 1e18 // √ ~100
   const totalSorSupply = Number(sorInfo.supply) - burntSupply
   // console.log('sorLuxCollateral:%s', sorLuxCollateral)
-  const totalSorCollateral = sorStableCollateral + sorLuxCollateral + sorWrappedLumensCollateral
+  const totalSorCollateral = sorStableCollateral + sorLuxCollateral + sorWrappedLumensCollateral + sorFtmCollateral
   // console.log('totalSorCollateral:%s', totalSorCollateral)
 
   // const result = useCurrencyBalance(LUX_TREASURY_ADDRESS, LUX_FTM)
@@ -225,22 +226,22 @@ export default function Dashboard() {
     const sorCollateralData = [
       {
           "angle": sorStableCollateral,
-          "color": "#FFB300",
+          "color": "#FFA300",
           "label": "Stable Collateral",
           "percent": (sorStableCollateral / totalSorCollateral * 100).toFixed()
       },
       {
           "angle": sorLuxCollateral + sorWrappedLumensCollateral,
-          "color": "#FFD300",
+          "color": "#FFC300",
           "label": "Luxor Collateral",
           "percent": ((sorLuxCollateral + sorWrappedLumensCollateral) / totalSorCollateral * 100).toFixed()
       },
-      /* {
+      {
            "angle": sorFtmCollateral,
-           "color": "#F5D100",
-           "label": "Sor Collateral",
-           "percent": (sorSorCollateral / totalSorCollateral * 100).toFixed()
-       }, */
+           "color": "#FFE300",
+           "label": "Fantom Collateral",
+           "percent": (sorFtmCollateral / totalSorCollateral * 100).toFixed()
+       },
       /* {
            "angle": sorWrappedLumensCollateral,
            "color": "#FFA300",
