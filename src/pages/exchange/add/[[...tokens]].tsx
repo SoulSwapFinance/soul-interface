@@ -47,6 +47,7 @@ import { LiquidityHeader } from 'features/liquidity'
 import { useActiveWeb3React } from 'services/web3'
 // import AssetInput from 'components/AssetInput'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
+import { ArrowDownIcon, PlusIcon } from '@heroicons/react/solid'
 // import SoulLogo from 'components/SoulLogo'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
@@ -392,7 +393,7 @@ export default function Add() {
             )}
             pendingText={pendingText}
           />
-          <div className="flex flex-col space-y-4">
+          <div className="flex flex-col gap-3 space-y-3">
             {/* {pair && pairState !== PairState.INVALID && (
                 <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
               )} */}
@@ -445,7 +446,7 @@ export default function Add() {
                     </button>
                   </AutoRow>
                 </AutoColumn> */}
-              <div className="flex justify-center -mt-6 -mb-6 z-0">
+              <div className="flex justify-center -mt-8 -mb-4 z-0">
                 <div
                   role="button"
                   className="p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-dark-600"
@@ -454,7 +455,8 @@ export default function Add() {
                     // onSwitchTokens()
                   }}
                 >
-                  <Plus width={14} className="text-high-emphesis hover:text-white" />
+                {/* <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" /> */}
+                  <PlusIcon width={14} className="text-high-emphesis hover:text-white" />
                 </div>
               </div>
               {/* <CurrencyInputPanel
