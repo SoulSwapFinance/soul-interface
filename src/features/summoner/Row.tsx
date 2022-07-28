@@ -840,6 +840,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         value={zapValue}
                         onChange={(value) => setZapValue(value)}
                         balance={parsedTokenBalance}
+                        showBalance={false}
                         showMax={false}
                     />
                     <Wrap padding="0" margin="0" display="flex">
@@ -887,7 +888,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                 handleZap(zapTokenAddress, lpAddress)
                             }
                         >
-                            ZAP {selectedTokenSymbol} INTO {token0Symbol + '-' + token1Symbol}
+                            ZAP INTO {token0Symbol + '-' + token1Symbol}
                         </SubmitButton>
                     </Wrap>
                     {/* } */}
