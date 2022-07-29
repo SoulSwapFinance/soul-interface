@@ -143,28 +143,12 @@
         "logoURI": "https://ftmscan.com/token/images/fUSD_32.png"
       },
       {
-        "name": "Frapped USDT",
-        "address": "0x049d68029688eAbF473097a2fC38ef61633A3C7A",
-        "symbol": "USDT",
-        "decimals": 6,
-        "chainId": 250,
-        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x049d68029688eAbF473097a2fC38ef61633A3C7A/logo.png"
-      },
-      {
         "name": "Luxor Money",
         "address": "0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b",
         "symbol": "LUX",
         "decimals": 9,
         "chainId": 250,
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b/logo.png"
-      },
-      {
-        "name": "ReaperToken",
-        "address": "0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb",
-        "symbol": "REAPER",
-        "decimals": 18,
-        "chainId": 250,
-        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb/logo.png"
       },
       {
         "name": "Seance Circle",
@@ -181,14 +165,6 @@
         "decimals": 18,
         "chainId": 250,
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png"
-      },
-      {
-        "name": "UniDex",
-        "address": "0x2130d2a1e51112D349cCF78D2a1EE65843ba36e0",
-        "symbol": "UNIDX",
-        "decimals": 18,
-        "chainId": 250,
-        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/prod/blockchains/fantom/assets/0x2130d2a1e51112D349cCF78D2a1EE65843ba36e0/logo.png"
       },
       {
         "name": "USD Coin",

@@ -39,46 +39,7 @@ export const InactivePools = [
     },
     token1Address: tokens.USDC,
     token2Address: tokens.FUSD,
-  },
-  {
-    // 0
-    pid: 14,
-    token1: 'FTM',
-    token2: 'USDT',
-    lpSymbol: 'FTM-USDT',
-    lpAddresses: {
-      4002: '',
-      250: '0xdC24814AD654986928F8E4aec48D37fa30bBC5BB',
-    },
-    token1Address: tokens.FTM,
-    token2Address: tokens.USDT,
-  },
-  {
-    // 0
-    pid: 27,
-    token1: 'SEANCE',
-    token2: 'UNIDX',
-    lpSymbol: 'SEANCE-UNIDX',
-    lpAddresses: {
-      4002: '',
-      250: '0x578c7B9A45D9e55246d3036D48db262b9B3CA48e',
-    },
-    token1Address: tokens.SEANCE,
-    token2Address: tokens.UNIDX,
-  },
-  {
-    // 0
-    pid: 21,
-    token1: 'USDC',
-    token2: 'DAI',
-    lpSymbol: 'USDC-DAI',
-    lpAddresses: {
-      4002: '',
-      250: '0x406de3a93f6b4179e3b21a3d81226b43e1918fd9',
-    },
-    token1Address: tokens.USDC,
-    token2Address: tokens.DAI,
-  },
+  }, 
   {
     // 0
     pid: 17,
