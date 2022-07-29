@@ -111,7 +111,7 @@ export default function AutoStake() {
   const remainingMinutes = max(remainingHours * 60, 0)
   
   const feeAmount = 
-    remainingMinutes == 0 ? 0 : withdrawFeeRate * stakedBal // * Number(withdrawValue)
+    remainingMinutes == 0 ? 0 : withdrawFeeRate * stakedBal / 100 // * Number(withdrawValue)
 
   const [stakeApprovalState, stakeApprove] = useApproveCallback(
     parsedStakeValue,
