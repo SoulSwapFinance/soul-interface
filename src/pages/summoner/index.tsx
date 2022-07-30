@@ -22,6 +22,8 @@ import { formatNumberScale } from 'functions'
 import { Button } from 'components/Button'
 import { addTransaction } from 'state/transactions/actions'
 import { useFarms } from 'services/graph/hooks'
+import { XIcon } from '@heroicons/react/solid'
+import Toggle from 'components/Toggle'
 // import { usePairPrice } from 'hooks/usePairData'
 // import { useActiveWeb3React } from 'services/web3/hooks/useActiveWeb3React'
 
@@ -29,6 +31,7 @@ const Summoner = () => {
   // const { chainId } = useActiveWeb3React()
   const router = useRouter()
   const [pendingTx, setPendingTx] = useState(false)
+  const [showBalances, openShowBalances] = useState(false)
 
   const soulPrice = useSoulPrice()
 
@@ -119,6 +122,22 @@ const Summoner = () => {
   
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">
+       <div className="flex flex-row gap-3 text-dark-600 justify-end">
+              <Toggle
+                id="toggle-button"
+                isActive={showBalances}
+                toggle={
+                  showBalances
+                    ? () => {
+                        openShowBalances(false)
+                      }
+                    : () => {
+                        openShowBalances(true)
+                      }
+                }
+              />
+            </div>
+        { showBalances &&
        <TridentHeader className="sm:!flex-row justify-center items-center" pattern="bg-bubble">
         <div>
         </div>
@@ -165,9 +184,10 @@ const Summoner = () => {
             {/* {'TOTAL: '} */}
             {formatNumberScale(summTvl, true)} {' '} TOTAL
           </Button>
-        </div> 
+        </div>
         </div>
       </TridentHeader>
+        }
 
       <DoubleGlowShadowV2 opacity="0.6">
       <Container id="farm-page">
