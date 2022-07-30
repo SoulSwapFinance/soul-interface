@@ -1,4 +1,4 @@
-import { USDC_ADDRESS, CHANT_ADDRESS, DAI_ADDRESS, USD_ADDRESS, WETH9_ADDRESS, WNATIVE_ADDRESS, SOUL_ADDRESS } from './addresses'
+import { USDC_ADDRESS, CHANT_ADDRESS, DAI_ADDRESS, WETH9_ADDRESS, WNATIVE_ADDRESS, SOUL_ADDRESS } from './addresses'
 
 import { ChainId } from '../enums'
 import { Token } from '../entities/Token'

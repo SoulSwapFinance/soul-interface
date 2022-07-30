@@ -2,7 +2,6 @@ import { ArrowDownIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Currency, JSBI, Token, Trade as V2Trade, TradeType } from 'sdk'
-// import { Global } from 'components/Banner'
 import { Button } from 'components/Button'
 import RecipientField from 'components/RecipientField'
 import Typography from 'components/Typography'
@@ -66,7 +65,6 @@ const Swap = () => {
   const [expertMode, openExpertMode] = useState(false)
   // const toggle = toggleExpertMode()
 
-
   // dismiss warning if all imported tokens are in active lists
   const importTokensNotInDefault =
     urlLoadedTokens &&
@@ -105,7 +103,6 @@ const Swap = () => {
 
   const isValid = !swapInputError
   const dependentField: Field = independentField === Field.INPUT ? Field.OUTPUT : Field.INPUT
-  // const video = "www.shutterstock.com"
   const handleTypeInput = useCallback(
     (value: string) => {
       onUserInput(Field.INPUT, value)

@@ -3,6 +3,7 @@ import {
   ChainId,
   Currency,
   CurrencyAmount,
+  DAI_ADDRESS,
   JSBI,
   MaxUint256,
   Percent,
@@ -64,7 +65,7 @@ const PERMITTABLE_TOKENS: {
     [SOUL_ADDRESS[4002]]: { type: PermitType.AMOUNT, name: 'Soul Power' },
   },
   [43114]: {
-    [USDC_ADDRESS[43114]]: { type: PermitType.AMOUNT, name: 'USD Coin' },
+    [DAI_ADDRESS[43114]]: { type: PermitType.AMOUNT, name: 'Dai Stablecoin' },
   },
   [137]: {
     // [USDC_ADDRESS[137]]: { type: PermitType.AMOUNT, name: 'USD Coin' },

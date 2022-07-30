@@ -182,8 +182,16 @@ export function useToken(tokenAddress?: string | null): Token | undefined | null
 
 export function useCurrency(currencyId: string | undefined): Currency | null | undefined {
   const { chainId } = useActiveWeb3React()
-
-  const isETH = currencyId?.toUpperCase() === 'FTM'
+  let isETH
+  chainId === ChainId.FANTOM
+  ? isETH = currencyId?.toUpperCase() === 'FTM'
+  : chainId === ChainId.ETHEREUM
+  ? isETH = currencyId?.toUpperCase() === 'ETH'
+  : chainId === ChainId.AVALANCHE
+  ? isETH = currencyId?.toUpperCase() === 'AVAX'
+  : chainId === ChainId.BSC
+  ? isETH = currencyId?.toUpperCase() === 'BNB'
+  : isETH = currencyId?.toUpperCase() === 'BNB'
 
   // const isDual = false
   // = [ChainId.CELO].includes(chainId)

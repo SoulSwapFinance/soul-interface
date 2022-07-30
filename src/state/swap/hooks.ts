@@ -36,6 +36,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { Field, replaceSwapState, selectCurrency, setRecipient, switchCurrencies, typeInput } from './actions'
 import { SwapState } from './reducer'
 import { useCurrencyBalances } from 'state/wallet/hooks'
+import { FTM } from 'config/tokens'
 
 export function useSwapState(): AppState['swap'] {
   return useAppSelector((state) => state.swap)
@@ -260,28 +261,30 @@ function validatedRecipient(recipient: any): string | undefined {
 export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId = ChainId.ETHEREUM): SwapState {
   let inputCurrency = parseCurrencyFromURLParameter(parsedQs.inputCurrency)
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
-  const eth 
+  const input 
     = chainId === ChainId.FANTOM ? 'FTM' 
     : chainId === ChainId.BSC ? 'BSC'
     : chainId === ChainId.AVALANCHE ? 'AVAX'
     : 'ETH'
   //chainId === ChainId.CELO ? WNATIVE_ADDRESS[chainId] : 
-  const soul 
+  const output 
       = chainId == ChainId.FANTOM 
-         ? SOUL[250].address
+         ? SOUL[ChainId.FANTOM].address
          : chainId == ChainId.ETHEREUM
-         ? '0x4E15361FD6b4BB609Fa63C81A2be19d873717870' // FTM
+         ? FTM[ChainId.ETHEREUM]
+         : chainId == ChainId.AVALANCHE
+         ? DAI[ChainId.AVALANCHE].address
          : chainId == ChainId.BSC
-         ? USDC[chainId].address
+         ? USDC[ChainId.BSC].address
          : DAI[chainId].address
          
   if (inputCurrency === '' && outputCurrency === '') {
-    inputCurrency = eth
-    outputCurrency = soul
+    inputCurrency = input
+    outputCurrency = output
   } else if (inputCurrency === '') {
-    inputCurrency = outputCurrency === eth ? soul : eth
+    inputCurrency = outputCurrency === input ? output : input
   } else if (outputCurrency === '' || inputCurrency === outputCurrency) {
-    outputCurrency = inputCurrency === eth ? soul : eth
+    outputCurrency = inputCurrency === input ? output : input
   }
 
   const recipient = validatedRecipient(parsedQs.recipient)
