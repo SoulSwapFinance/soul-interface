@@ -52,12 +52,12 @@ const ActionView: FC<ActionViewProps> = ({ onClose }) => {
         <>
           <ActionItem
             svg={<CoffinboxIcon width={20} height={20} />}
-            label={i18n._(t`Deposit ${currency?.symbol} to CoffinBox`)}
+            label={i18n._(t`Deposit ${currency?.wrapped.symbol} to CoffinBox`)}
             onClick={() => dispatch(setBalancesActiveModal(ActiveModal.DEPOSIT))}
           />
           <ActionItem
             svg={<WalletIcon width={20} height={20} />}
-            label={i18n._(t`Withdraw ${currency?.symbol} to Wallet`)}
+            label={i18n._(t`Withdraw ${currency?.wrapped.symbol} to Wallet`)}
             onClick={() => dispatch(setBalancesActiveModal(ActiveModal.WITHDRAW))}
           />
         </>
