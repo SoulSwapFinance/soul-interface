@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Currency } from 'sdk'
+import { Currency, NATIVE } from 'sdk'
 import NavLink from 'components/NavLink'
 import Settings from 'components/Settings'
 import Typography from 'components/Typography'
@@ -9,6 +9,7 @@ import MyOrders from 'features/limit-order/MyOrders'
 import { useRouter } from 'next/router'
 import { currencyId } from '../../functions'
 import ExternalLink from 'components/ExternalLink'
+import { useActiveWeb3React } from 'services/web3'
 
 const getQuery = (input?: Currency, output?: Currency) => {
   if (!input && !output) return
@@ -29,6 +30,7 @@ interface HeaderNewProps {
 const HeaderAddModal: FC<HeaderNewProps> = ({ isRemove, inputCurrency, outputCurrency }) => {
   const { i18n } = useLingui()
   const { asPath } = useRouter()
+  const { chainId } = useActiveWeb3React()
 
   // const isRemove = asPath.startsWith('/remove')
   // const isLimitOrder = asPath.startsWith('/limit-order')
@@ -51,7 +53,7 @@ const HeaderAddModal: FC<HeaderNewProps> = ({ isRemove, inputCurrency, outputCur
         <NavLink
           activeClassName="text-high-emphesis"
           href={
-            `/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : '/FTM'}${
+            `/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${
             outputCurrency ? `/${currencyId(outputCurrency)}` : '/0xe2fb177009ff39f52c0134e8007fa0e4baacbd07'
           }`}
         >

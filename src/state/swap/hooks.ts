@@ -260,28 +260,30 @@ function validatedRecipient(recipient: any): string | undefined {
 export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId = ChainId.ETHEREUM): SwapState {
   let inputCurrency = parseCurrencyFromURLParameter(parsedQs.inputCurrency)
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
-  const eth 
+  const input 
     = chainId === ChainId.FANTOM ? 'FTM' 
     : chainId === ChainId.BSC ? 'BSC'
     : chainId === ChainId.AVALANCHE ? 'AVAX'
     : 'ETH'
   //chainId === ChainId.CELO ? WNATIVE_ADDRESS[chainId] : 
-  const soul 
+  const output 
       = chainId == ChainId.FANTOM 
          ? SOUL[250].address
          : chainId == ChainId.ETHEREUM
          ? '0x4E15361FD6b4BB609Fa63C81A2be19d873717870' // FTM
+         : chainId == ChainId.AVALANCHE
+         ? DAI[chainId].address
          : chainId == ChainId.BSC
          ? USDC[chainId].address
          : DAI[chainId].address
          
   if (inputCurrency === '' && outputCurrency === '') {
-    inputCurrency = eth
-    outputCurrency = soul
+    inputCurrency = input
+    outputCurrency = output
   } else if (inputCurrency === '') {
-    inputCurrency = outputCurrency === eth ? soul : eth
+    inputCurrency = outputCurrency === input ? output : input
   } else if (outputCurrency === '' || inputCurrency === outputCurrency) {
-    outputCurrency = inputCurrency === eth ? soul : eth
+    outputCurrency = inputCurrency === input ? output : input
   }
 
   const recipient = validatedRecipient(parsedQs.recipient)
