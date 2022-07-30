@@ -9,6 +9,7 @@ import { sortByListPriority } from '../../functions/list'
 import { useAppSelector } from '../hooks'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
+import { ChainId } from 'sdk'
 
 export type TokenAddressMap = Readonly<{
   [chainId: number]: Readonly<{
@@ -52,14 +53,14 @@ export function useAllLists(): AppState['lists']['byUrl'] {
 
 function combineMaps(map1: TokenAddressMap, map2: TokenAddressMap): TokenAddressMap {
   return {
-    1: { ...map1[1], ...map2[1] }, // mainnet
-    40: { ...map1[40], ...map2[40] }, // telos
-    56: { ...map1[56], ...map2[56] }, // bsc
-    250: { ...map1[250], ...map2[250] }, // fantom
-    4002: { ...map1[4002], ...map2[4002] }, // fantom testnet
-    43114: { ...map1[43114], ...map2[43114] }, // avalanche
-    137: { ...map1[137], ...map2[137] }, // matic
-    42161: { ...map1[42161], ...map2[42161] } // arbitrum
+    1: { ...map1[ChainId.ETHEREUM], ...map2[ChainId.ETHEREUM] }, // mainnet
+    40: { ...map1[ChainId.TELOS], ...map2[ChainId.TELOS] }, // telos
+    56: { ...map1[ChainId.BSC], ...map2[ChainId.BSC] }, // bsc
+    250: { ...map1[ChainId.FANTOM], ...map2[ChainId.FANTOM] }, // fantom
+    4002: { ...map1[ChainId.FANTOM_TESTNET], ...map2[ChainId.FANTOM_TESTNET] }, // fantom testnet
+    43114: { ...map1[ChainId.AVALANCHE], ...map2[ChainId.AVALANCHE] }, // avalanche
+    137: { ...map1[ChainId.MATIC], ...map2[ChainId.FANTOM] }, // matic
+    42161: { ...map1[ChainId.ARBITRUM], ...map2[ChainId.ARBITRUM] } // arbitrum
   }
 }
 

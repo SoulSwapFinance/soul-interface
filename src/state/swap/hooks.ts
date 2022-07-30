@@ -36,6 +36,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { Field, replaceSwapState, selectCurrency, setRecipient, switchCurrencies, typeInput } from './actions'
 import { SwapState } from './reducer'
 import { useCurrencyBalances } from 'state/wallet/hooks'
+import { FTM } from 'config/tokens'
 
 export function useSwapState(): AppState['swap'] {
   return useAppSelector((state) => state.swap)
@@ -268,13 +269,13 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId 
   //chainId === ChainId.CELO ? WNATIVE_ADDRESS[chainId] : 
   const output 
       = chainId == ChainId.FANTOM 
-         ? SOUL[250].address
+         ? SOUL[ChainId.FANTOM].address
          : chainId == ChainId.ETHEREUM
-         ? '0x4E15361FD6b4BB609Fa63C81A2be19d873717870' // FTM
+         ? FTM[ChainId.ETHEREUM]
          : chainId == ChainId.AVALANCHE
-         ? DAI[chainId].address
+         ? DAI[ChainId.AVALANCHE].address
          : chainId == ChainId.BSC
-         ? USDC[chainId].address
+         ? USDC[ChainId.BSC].address
          : DAI[chainId].address
          
   if (inputCurrency === '' && outputCurrency === '') {
