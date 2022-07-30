@@ -165,3 +165,20 @@ export function safeAccess(object, path) {
       )
     : null
 }
+
+export function trimVerboseDecimals(number: string): string {
+  const decimalIndex = number.indexOf(".");
+  if (decimalIndex === -1) {
+    return number;
+  }
+}
+
+export function prettyDisplayNumber(number: BigNumber): string {
+  if (number.gte(1000)) {
+    return number.toFixed(0);
+  } else if (number.gt(1)) {
+    return number.toFixed(2);
+  } else {
+    return trimVerboseDecimals(number.toFixed(0));
+  }
+}
