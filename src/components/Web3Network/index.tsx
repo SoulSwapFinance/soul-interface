@@ -20,7 +20,7 @@ function Web3Network(): JSX.Element | null {
         <Image src={NETWORK_ICON[chainId]} alt="Switch Network" className="rounded-md" width="22px" height="22px" />
       </div>
       <NetworkModel />
-      { NETWORK_LABEL[chainId] }
+      {/* { NETWORK_LABEL[chainId] } */}
     </div>
   )
 }

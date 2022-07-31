@@ -108,7 +108,7 @@ const Desktop: FC = () => {
                 >
                   <div className="w-screen max-w-sm">
                     <div className={classNames("flex flex-col h-full py-1 overflow-x-hidden overflow-y-scroll shadow-xl",
-                    isLuxor ? "bg-yellow" : "bg-dark-600")}>
+                    "bg-dark-1100")}>
                       <nav className="flex-1 py-12 bg-dark-1000 pl-6" aria-label="Sidebar">
                         {bar.map((node) => {
                           return <SidebarItem node={node} key={node.key} />
