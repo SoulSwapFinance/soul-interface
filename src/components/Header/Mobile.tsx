@@ -80,14 +80,14 @@ const Mobile: FC = () => {
                       </nav>
 
                       <div className="flex flex-col mt-2 gap-4 px-6">
-                        {library && (library.provider.isMetaMask || isCoinbaseWallet) && (
+                        {/* {library && (library.provider.isMetaMask || isCoinbaseWallet) && (
                           <div className="hidden sm:flex">
                           <Web3Network />
                           </div>
-                        )}
+                        )} */}
 
-                        {/* <div className="flex items-center justify-start gap-2">
-                          <div className="flex items-center w-auto text-sm font-bold border-2 rounded shadow cursor-pointer pointer-events-auto select-none border-dark-800 hover:border-dark-700 bg-dark-900 whitespace-nowrap">
+                        <div className="flex items-center justify-start gap-2">
+                          {/* <div className="flex items-center w-auto text-sm font-bold border-2 rounded shadow cursor-pointer pointer-events-auto select-none border-dark-800 hover:border-dark-700 bg-dark-900 whitespace-nowrap">
                             {account && chainId && userEthBalance && (
                               <Link href={`/account/${account}`} passHref={true}>
                                 <a className="hidden px-3 text-high-emphesis text-bold md:block">
@@ -97,8 +97,11 @@ const Mobile: FC = () => {
                               </Link>
                             )}
                             <Web3Status />
-                          </div>
-                        </div> */}
+                          </div>, */}
+                        </div>
+                        <div className="cols flex-cols-2 inline-block">
+                  <Web3Network />
+                </div>
                       </div>
                     </div>
                   </div>
@@ -136,9 +139,9 @@ const Mobile: FC = () => {
                 </div>
               {/* )} */}
               {/* {library && library.provider.isMetaMask && ( */}
-                <div className="inline-block">
+                {/* <div className="inline-block">
                   <Web3Network />
-                </div>
+                </div> */}
               {/* )} */}
                 <div className="inline-block">
                   <More />
