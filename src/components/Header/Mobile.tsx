@@ -72,22 +72,21 @@ const Mobile: FC = () => {
                   unmount={false}
                 >
                   <div className="w-screen max-w-sm">
-                    <div className={classNames("flex flex-col h-full py-2 overflow-x-hidden overflow-y-scroll shadow-xl", isLuxor ? "bg-yellow" : "bg-dark-600")}>
+                    <div className={classNames("flex flex-col h-full py-2 overflow-x-hidden overflow-y-scroll shadow-xl", "bg-dark-1100")}>
                     <nav className="flex-1 bg-dark-1000 pl-6" aria-label="Sidebar">
                         {bar.map((node) => {
                           return <SidebarItem node={node} key={node.key} />
                         })}
                       </nav>
-
                       <div className="flex flex-col mt-2 gap-4 px-6">
-                        {library && (library.provider.isMetaMask || isCoinbaseWallet) && (
+                        {/* {library && (library.provider.isMetaMask || isCoinbaseWallet) && (
                           <div className="hidden sm:flex">
                           <Web3Network />
                           </div>
-                        )}
+                        )} */}
 
-                        {/* <div className="flex items-center justify-start gap-2">
-                          <div className="flex items-center w-auto text-sm font-bold border-2 rounded shadow cursor-pointer pointer-events-auto select-none border-dark-800 hover:border-dark-700 bg-dark-900 whitespace-nowrap">
+                        <div className="flex items-center justify-start gap-2">
+                          {/* <div className="flex items-center w-auto text-sm font-bold border-2 rounded shadow cursor-pointer pointer-events-auto select-none border-dark-800 hover:border-dark-700 bg-dark-900 whitespace-nowrap">
                             {account && chainId && userEthBalance && (
                               <Link href={`/account/${account}`} passHref={true}>
                                 <a className="hidden px-3 text-high-emphesis text-bold md:block">
@@ -97,8 +96,11 @@ const Mobile: FC = () => {
                               </Link>
                             )}
                             <Web3Status />
-                          </div>
-                        </div> */}
+                          </div>, */}
+                        </div>
+                        <div className="cols flex-cols-2 inline-block">
+                  <Web3Network />
+                </div>
                       </div>
                     </div>
                   </div>
@@ -136,9 +138,9 @@ const Mobile: FC = () => {
                 </div>
               {/* )} */}
               {/* {library && library.provider.isMetaMask && ( */}
-                <div className="inline-block">
+                {/* <div className="inline-block">
                   <Web3Network />
-                </div>
+                </div> */}
               {/* )} */}
                 <div className="inline-block">
                   <More />

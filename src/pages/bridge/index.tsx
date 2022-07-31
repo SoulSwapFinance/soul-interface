@@ -5,7 +5,7 @@ import {
 } from "components/index";
 import { Button as ButtonComponent } from 'components/Button'
 import Column, { AutoColumn } from "../../components/Column";
-import styled, { ThemeContext } from "styled-components";
+import styled from "styled-components";
 import {
   chainToNetworkInfoMap,
   supportedChainsForBridge,
@@ -43,6 +43,10 @@ import Typography from "components/Typography";
 import HeaderNew from "features/trade/HeaderNew";
 import Container from "components/Container";
 import NavLink from "components/NavLink";
+import { NETWORK_ICON, NETWORK_LABEL } from "config/networks";
+import NetworkModal from "modals/NetworkModal";
+import { useNetworkModalToggle } from "state/application/hooks";
+import Web3Network from "components/Web3Network";
 
 const ChainSelect: React.FC<any> = ({ selectChain, chains }) => {
   return (
@@ -219,19 +223,18 @@ const ChainSelection: React.FC<any> = ({
     setFromChain(chainId);
   };
 
-/* // TODO: RE-ENABLE // */
-const handleSetToChain = (chainId: number) => {
-  // if (chainId !== 250) {
-    setFromChain(250);
-  // }
-  // if (chainId === fromChain) {
-    // setFromChain(chainId === 250 ? 1 : 250);
-  // }
-  // setToChain(chainId);
-  // TODO: DELETE BELOW //
-  setToChain(chainId == 250 ? 1 : chainId);
-};
+  const handleSetToChain = (chainId: number) => {
+    if (chainId !== 250) {
+      setFromChain(250);
+    }
+    if (chainId === fromChain) {
+      setFromChain(chainId === 250 ? 1 : 250);
+    }
+    setToChain(chainId);
+    // V2 (BELOW)
+    // setToChain(chainId == 250 ? 1 : chainId);
 
+  };
   const handleSwap = () => {
     const fromChainOld = fromChain;
     const toChainOld = toChain;
@@ -239,18 +242,32 @@ const handleSetToChain = (chainId: number) => {
     setFromChain(toChainOld);
     setToChain(fromChainOld);
   };
+
   return (
     <Column>
   {/* // TODO: RE-ENABLE // */}
       <div className="flex">
-        <ChainSelector
-          selected={fromChain}
+        {/* <ChainSelector
+          selected={chainId}
           selectChain={handleSetFromChain}
           chains={supportedChainsForBridge.filter(
             (chainId) => chainId !== fromChain
           )}
+        /> */}
+         <NetworkSelector
+          chains={
+            supportedChainsForBridge.filter(
+            (chainId) => chainId !== fromChain
+          )}
+          selected={fromChain}
+          selectChain={handleSetFromChain}
         />
-        {chainId !== fromChain && (
+        {/* <div className="flex"> */}
+        { chainId != fromChain &&
+          <Web3Network />
+        }
+        {/* </div> */}
+        {/* {chainId !== fromChain && (
           <>
             <div className="ml-2" />
             <ButtonComponent
@@ -258,13 +275,12 @@ const handleSetToChain = (chainId: number) => {
               color="purple"
               onClick={() => forceSwap(fromChain)}
             >
-              <div className="ml-2 mr-2 text-white font-bold">
-                {`${fromChain}`}
+            <div className="ml-2 mr-2 text-white font-bold">
+                {`${chainId}`}
               </div>
-
             </ButtonComponent>
           </>
-        )}
+        )} */}
       </div>
       <div />
       <Row style={{ justifyContent: "center", alignItems: "center" }}>
@@ -284,14 +300,24 @@ const handleSetToChain = (chainId: number) => {
         <div style={{ height: "1px", width: "100%" }} />
       </Row>
       <div className="flex">
-      <ChainSelector
+      {/* <ChainSelector
         selected={toChain}
         selectChain={handleSetToChain}
         chains={supportedChainsForBridge.filter(
           (chainId) => chainId !== toChain
         )}
-      />
+      /> */}
+      <div className="w-full justify-center">
+      <NetworkSelector
+          chains={
+            supportedChainsForBridge.filter(
+            (chainId) => chainId !== toChain
+          )}
+          selected={toChain}
+          selectChain={handleSetToChain}
+        />
       </div>
+    </div>
     </Column>
   );
 };
@@ -341,6 +367,71 @@ const TokenSelector: React.FC<any> = ({ tokens, selected, selectToken }) => {
   );
 };
 
+const NetworkSelector: React.FC<any> = ({ chains, selected, selectChain }) => {
+  const [onPresentSelectNetworkModal] = useModal(
+    <BridgeNetworkSelectModal chains={chains} selectChain={selectChain} />,
+    "bridge-token-select-modal"
+  );
+
+  return (
+    <Column style={{ width: "100%", flex: 1 }}>
+      <OverlayButton
+        style={{ padding: 0 }}
+        disabled={!chains || !chains.length}
+        onClick={() => chains && chains.length && onPresentSelectNetworkModal()}
+      >
+        <ContentBox
+          style={{
+            boxSizing: "border-box",
+            width: "100%",
+            backgroundColor: "black",
+            padding: "1rem",
+            height: "64px",
+          }}
+        >
+          <Row style={{ gap: "1rem", alignItems: "center" }}>
+            {selected ? (
+              <>
+                <Image
+                  alt="token logo"
+                  height="30px"
+                  width="30px"
+                  src={chainToNetworkInfoMap[selected].image}
+                />
+                <Typo2 style={{ fontWeight: "bold" }}>{chainToNetworkInfoMap[selected].name}</Typo2>
+              </>
+            ) : chains && chains.length ? (
+              <Typo1>Select Network </Typo1>
+            ) : (
+              <Loader />
+            )}
+          </Row>
+        </ContentBox>
+      </OverlayButton>
+    </Column>
+  );
+};
+
+function SelectNetworkModal(): JSX.Element | null {
+  const { chainId } = useActiveWeb3React()
+  const toggleNetworkModal = useNetworkModalToggle()
+
+  if (!chainId) return null
+
+  return (
+    <div
+    className="flex items-center rounded border-2 border-dark-800 hover:border-dark-700 bg-dark-1000 hover:bg-dark-900 whitespace-nowrap text-md justify-center font-bold cursor-pointer select-none pointer-events-auto"
+    onClick={() => toggleNetworkModal()}
+    >
+      <div className="flex items-center grid-flow-col items-center justify-center bg-dark-1000 h-[36px] w-[36px] text-sm rounded pointer-events-auto auto-cols-max text-secondary">
+        <Image src={NETWORK_ICON[chainId]} alt="Switch Network" className="rounded-md" width="22px" height="22px" />
+      </div>
+      <NetworkModal />
+      { NETWORK_LABEL[chainId] }
+    </div>
+  )
+}
+
 const BridgeTokenSelectModal: React.FC<any> = ({
   tokens,
   selectToken,
@@ -355,31 +446,7 @@ const BridgeTokenSelectModal: React.FC<any> = ({
       <div />
       <ModalContent style={{ padding: "8px 0px" }}>
         <Column>
-          {/* <Row
-            style={{
-              justifyContent: "space-between",
-              padding: "0 1rem .5rem 1rem",
-            }}
-          >
-            <Typo3
-              style={{
-                textAlign: "center",
-                width: "8rem",
-                color: "white",
-              }}
-            >
-              TOKEN
-            </Typo3>
-            <Typo3
-              style={{
-                textAlign: "center",
-                width: "8rem",
-                color: "white",
-              }}
-            >
-              BALANCE
-            </Typo3>
-          </Row> */}
+         
           <Scrollbar style={{ height: "60vh" }}>
             <Column>
               {tokens &&
@@ -414,6 +481,63 @@ const BridgeTokenSelectModal: React.FC<any> = ({
                           promise={token.balance}
                           decimals={token.Decimals}
                         />
+                      </Row>
+                    </StyledOverlayButton>
+                  );
+                })}
+            </Column>
+          </Scrollbar>
+        </Column>
+      </ModalContent>
+    </Modal>
+  );
+};
+
+const BridgeNetworkSelectModal: React.FC<any> = ({
+  chains,
+  selectChain,
+  onDismiss,
+}) => {
+  return (
+    <Modal
+      style={{ padding: "2px 0.5px", maxHeight: "80vh" }}
+      onDismiss={onDismiss}
+    >
+      {/* <ModalTitle text="Select Token" /> */}
+      <div />
+      <ModalContent style={{ padding: "8px 0px" }}>
+        <Column>
+         
+          <Scrollbar style={{ height: "60vh" }}>
+            <Column>
+              {chains &&
+                chains.map((chains: any) => {
+                  return (
+                    <StyledOverlayButton
+                      key={"network-select-" + chainToNetworkInfoMap[chains].name}
+                      onClick={() => {
+                        selectChain(chains);
+                        onDismiss();
+                      }}
+                      style={{ padding: ".5rem" }}
+                    >
+                      <Row
+                        style={{
+                          width: "100%",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Row style={{ gap: "1rem", alignItems: "center" }}>
+                         <Image
+                            alt="network logo"
+                            height="30px"
+                            width="30px"
+                            src={chainToNetworkInfoMap[chains].image}
+                          />
+                          <Typo2 style={{ fontWeight: "bold" }}>
+                            {chainToNetworkInfoMap[chains].name}
+                          </Typo2>
+                        </Row>
                       </Row>
                     </StyledOverlayButton>
                   );

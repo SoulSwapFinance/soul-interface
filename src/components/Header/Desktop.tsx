@@ -3,7 +3,7 @@ import { MenuAlt1Icon } from '@heroicons/react/outline'
 import { NATIVE } from 'sdk'
 // import { InjectedConnector } from '@web3-react/injected-connector'
 // import { WalletLinkConnector } from '@web3-react/walletlink-connector'
-import Web3Network from 'components/Web3Network'
+// import Web3Network from 'components/Web3Network'
 import Web3Status from 'components/Web3Status'
 import { useActiveWeb3React } from 'services/web3'
 import { useETHBalances, useTokenBalance } from 'state/wallet/hooks'
@@ -25,6 +25,7 @@ import useBar from './useBar'
 import NavLink from 'components/NavLink'
 import { useRouter } from 'next/router'
 import { classNames } from 'functions'
+import Web3Network from 'components/Web3Network'
 // import useMobileMenu from './useMobileMenu'
 
 const HEADER_HEIGHT = 64
@@ -78,6 +79,7 @@ const Desktop: FC = () => {
                </div>
           </Container>
         </nav>
+        
         <Transition.Root show={open} as={Fragment}>
           <Dialog as="div" className="fixed inset-0 overflow-hidden z-20" onClose={setOpen}>
             <div className="absolute inset-0 overflow-hidden">
@@ -106,12 +108,28 @@ const Desktop: FC = () => {
                 >
                   <div className="w-screen max-w-sm">
                     <div className={classNames("flex flex-col h-full py-1 overflow-x-hidden overflow-y-scroll shadow-xl",
-                    isLuxor ? "bg-yellow" : "bg-dark-600")}>
+                    "bg-dark-1100")}>
                       <nav className="flex-1 py-12 bg-dark-1000 pl-6" aria-label="Sidebar">
                         {bar.map((node) => {
                           return <SidebarItem node={node} key={node.key} />
                         })}
                       </nav>
+                      <div className="flex items-center justify-start gap-2 mt-1">
+                          {/* <div className="flex items-center w-auto text-sm font-bold border-2 rounded shadow cursor-pointer pointer-events-auto select-none border-dark-800 hover:border-dark-700 bg-dark-900 whitespace-nowrap">
+                            {account && chainId && userEthBalance && (
+                              <Link href={`/account/${account}`} passHref={true}>
+                                <a className="hidden px-3 text-high-emphesis text-bold md:block">
+                                  @ts-ignore
+                                  {userEthBalance?.toSignificant(4)} {NATIVE[chainId || 250].symbol}
+                                </a>
+                              </Link>
+                            )}
+                            <Web3Status />
+                          </div>, */}
+                        </div>
+                        <div className="cols w-full flex-cols-2 inline-block">
+                  <Web3Network />
+                      </div>
                     </div>
                   </div>
                 </Transition.Child>
@@ -148,10 +166,10 @@ const Desktop: FC = () => {
                 </div>
               {/* )} */}
               {/* {library && library.provider.isMetaMask && ( */}
-                <div className="inline-block">
+                {/* <div className="inline-block">
                   <Web3Network />
-                </div>
-              {/* )} */}
+                </div> */}
+               {/* )} */}
             </div>
             <More />
           </div>
