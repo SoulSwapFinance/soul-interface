@@ -1,21 +1,4 @@
-// import Container from "components/Container";
-// import React from "react";
-
-// const Cross = () => {
-// 	return (
-//       <iframe 
-// 			frameBorder={"none"}
-//     		title={"Crosschain"}
-//     		src="https://cross.soulswap.finance"
-//     		height={"900px"}
-//     		width={"100%"}
-//     />
-// 	);
-// };
-// export default Cross;
-
-// import "./exchange.scss";
-import React, { useEffect, useMemo, useRef, useState, VFC } from "react";
+import React, { useEffect, useMemo, useRef, useState, FC, VFC } from "react";
 import Image from "next/image";
 import SDK, {
   BLOCKCHAIN_NAME,
@@ -35,6 +18,15 @@ import { ERC20_ABI } from "constants/abis/erc20";
 import { useActiveWeb3React } from "services/web3";
 import { useUserInfo } from "hooks/useAPI";
 import { Spinner } from "components/Spinner";
+import { Button } from "components/Button";
+import { useWalletModalToggle } from "state/application/hooks";
+import { i18n } from "@lingui/core";
+import { TokenSelectOverlay } from "features/cross/crossStyles";
+import Typography from "components/Typography";
+import { formatNumber } from "functions/format";
+import { classNames } from "functions/styling";
+import { t } from "@lingui/macro";
+import InputCurrencyBox from "pages/bridge/components/InputCurrencyBox";
 
 interface Exchange {
   from: { chain: Chain; token: Token };
@@ -114,6 +106,7 @@ export default function Exchange() {
   const [trade, setTrade] = useState<InstantTrade | CrossChainTrade | undefined>(undefined);
   const [canBuy, setCanBuy] = useState(true);
   const [loading, setLoading] = useState(false);
+  const toggleWalletModal = useWalletModalToggle()
 
   const [configuration, setConfiguration] = useState(rubicConfiguration);
   const [rubic, setRubic] = useState<SDK>(null);
@@ -124,6 +117,41 @@ export default function Exchange() {
   const {userInfo} = useUserInfo()
   const nativeBalance = (Number(userInfo.nativeBalance) * 1E18).toFixed(0)
   const [wallet, setWallet] = useState<WalletProvider>(null);
+
+/// IMPORTS FROM BRIDGE ///
+
+  // const handleSetFromChain = (chainId: number) => {
+  //   if (chainId !== 250) {
+  //     setToChain(lastExchange.to.chain[250]);
+  //   }
+  //   if (chainId === toChain.chainId) {
+  //     setToChain(chainId === 250 ? lastExchange.to.chain[1].chainId : lastExchange.to.chain[250].chainId);
+  //   }
+  //   setFromChain(fromChain);
+  // };
+
+  // const handleSetToChain = (chainId: number) => {
+  //   if (chainId !== 250) {
+  //     setFromChain(lastExchange.to.chain[250]);
+  //   }
+  //   if (chainId === fromChain.chainId) {
+  //     setFromChain(chainId === 250 ? lastExchange.from.chain[1].chainId : lastExchange.from.chain[250].chainId);
+  //   }
+  //   setToChain(toChain);
+  //   // V2 (BELOW)
+  //   // setToChain(chainId == 250 ? 1 : chainId);
+
+  // };
+  // const handleSwap = () => {
+  //   const fromChainOld = fromChain;
+  //   const toChainOld = toChain;
+
+  //   setFromChain(toChainOld);
+  //   setToChain(fromChainOld);
+  // };
+  
+  ////////////////////////////////////////////////////////////////
+
   useEffect(() => {
     if (!account) {
         return
@@ -150,11 +178,16 @@ export default function Exchange() {
     update();
   }, [rubic, wallet]);
 
-  useEffect(() => {
+  // useEffect(() => {
     // if (web3.connection === Web3Connection.ConnectedWrongChain) {
-    //   web3.switchChain();
+      // web3.switchChain();
     // }
-  }, []);
+  //   if (chainId !== fromChain.chainId)
+  //   <div
+  //   className="flex items-center justify-center px-4 py-2 font-semibold text-white border rounded bg-opacity-80 border-red bg-red hover:bg-opacity-100"
+  //   onClick={toggleWalletModal}
+  // ></div>
+  // }, []);
 
   const [decimals, setDecimals] = useState<number>(18);
 
@@ -167,9 +200,9 @@ export default function Exchange() {
     if (from.isNative) {
       return EthersBigNumber.from(nativeBalance);
     }
-    const ierc20 = new ethers.Contract(from.address, ERC20_ABI, provider);
+    const IER20 = new ethers.Contract(from.address, ERC20_ABI, provider);
     try {
-      return await ierc20.balanceOf(account);
+      return await IER20.balanceOf(account);
     } catch (e) {
       return EthersBigNumber.from(0);
     }
@@ -307,29 +340,27 @@ export default function Exchange() {
   const amountRef = useRef<HTMLInputElement>(null);
   return (
 	  <>
-      {/* <Confirmation
-        show={showConfirmation}
-        onClose={() => setShowConfirmation("hide")}
-        from={from}
-        to={to}
-        fromUsd={fromUsd}
-        toUsd={toUsd}
-        trade={trade}
-      />
+    {showSelectFrom &&
+    <div>
       <TokenSelect
-        show={showSelectFrom}
-        chain={fromChain}
-        onClose={f => {
-          setShowSelectFrom(false);
-          if (!f) {
-            return;
-          }
-          setFrom(f.token);
-          setFromChain(f.chain);
-          setAmount("");
-          amountRef.current?.select();
-        }}
+      show={showSelectFrom}
+      chain={fromChain}
+      onClose={f => {
+        setShowSelectFrom(false);
+        if (!f) {
+          return;
+        }
+        setFrom(f.token);
+        setFromChain(f.chain);
+        setAmount("");
+        amountRef.current?.select();
+      }}
       />
+    </div>
+    }
+    
+    {showSelectTo &&
+      <div>
       <TokenSelect
         show={showSelectTo}
         chain={toChain}
@@ -341,14 +372,17 @@ export default function Exchange() {
           setTo(t.token);
           setToChain(t.chain);
         }}
-      /> */}
+      />
+      </div>
+    }
       <div className="mt-[30px] ml-auto mr-auto max-w-[45ch] bg-dark-800 p-20">
-        <div className="input">
+        <div className="relative w-full">
           <button className="flex gap-[6px] p-[20px]" onClick={() => setShowSelectFrom(true)}>
             <div className="relative m-[-20px] mr-[5px]">
               <Image className="block mr-[5px] contain" src={from.logo} width="42" height="42" alt={from.name} />
               <Image
-                className="chain-logo"
+                className="flex align-center justify-center absolute m-[2px] p-[3px] h-[20px] w-[20px]"
+                width="42" height="42"
                 style={{ backgroundColor: fromChain.color }}
                 src={fromChain.logo}
                 alt={fromChain.name}
@@ -357,27 +391,25 @@ export default function Exchange() {
             {from.symbol}
             <ChevronDownIcon width="10" height="10" />
           </button>
-          <input
+          {/* <input
             ref={amountRef}
             placeholder="0.0"
             className="amount"
             type="number"
             value={amount}
             onChange={e => setAmount(e.currentTarget.value)}
+          /> */}
+          <InputCurrencyBox
+            // disabled={!token}
+            value={amount}
+            setValue={setAmount}
+            max={async () => setAmount(ethers.utils.formatUnits(await getBalance(), decimals))
+            }
+            variant="new"
           />
           <span className="usd">{fromUsd ? `$${fromUsd}` : "—"}</span>
-          <div className="controls">
-            <button onClick={async () => setAmount(ethers.utils.formatUnits(await getBalance(), decimals))}>MIN</button>
-            <div className="vr" />
-            <button
-              onClick={async () => setAmount(ethers.utils.formatUnits(await getBalance(), decimals))}
-              disabled={!account}
-            >
-              MAX
-            </button>
-          </div>
         </div>
-        <div className="swap">
+        <div className="relative mt-0 h-[5px]">
           <Spinner className="spinner" style={{ opacity: loading ? "1" : "0" }} />
           <button
             onClick={() => {
@@ -396,7 +428,8 @@ export default function Exchange() {
             <div className="token-and-chain-logo">
               <Image className="token-logo" src={to.logo} width="42" height="42" alt={to.name} />
               <Image
-                className="chain-logo"
+                className="flex align-center justify-center absolute m-[2px] p-[3px] h-[20px] w-[20px]"
+				        width="42" height="42"
                 style={{ backgroundColor: toChain.color }}
                 src={toChain.logo}
                 alt={toChain.name}
@@ -412,8 +445,10 @@ export default function Exchange() {
         </div>
         <TradeDetail trade={trade} />
         {account && (
-          <button
-            className="swap-button"
+          <Button
+            className="mt-8"
+			variant="filled"
+			color="gradient"
             onClick={async () => {
               setShowConfirmation("show");
               try {
@@ -433,13 +468,13 @@ export default function Exchange() {
             disabled={trade == undefined}
           >
             {fromChain.chainId === toChain.chainId ? "Swap" : "Bridge"}
-          </button>
+          </Button>
         )}
-        {/* {web3.connection === Web3Connection.ConnectedWrongChain && (
+        {/* {chainId !== fromChain.chainId && (
           <button
-            className="swap-button"
+            className="bg-dark-900"
             onClick={async () => {
-              await web3.switchChain();
+              handleSetFromChain(chainId);
             }}
           >
             Switch to {fromChain.name}
@@ -447,16 +482,16 @@ export default function Exchange() {
         )} */}
         {/* {!account && (
           <button
-            className="swap-button"
+            className="bg-dark-900"
             onClick={async () => {
               try {
-                await web3.connect();
+                await account;
               } catch (e) {
                 // Ignore "modal closed by user" exceptions.
               }
             }}
           >
-            Connect wallet
+            Connect Wallet
           </button>
         )} */}
       </div>
@@ -470,23 +505,45 @@ interface TradeDetailProps {
 function isCrossChainTrade(trade: InstantTrade | CrossChainTrade): trade is CrossChainTrade {
   return "transitFeeToken" in trade;
 }
-const TradeDetail: VFC<TradeDetailProps> = ({ trade }) => {
+const TradeDetail: FC<TradeDetailProps> = ({ trade }) => {
   let min: string;
   if (trade) {
     if (isCrossChainTrade(trade)) {
       min = `${(trade.toTokenAmountMin)} ${trade.to.symbol}`;
     } else {
-      min = `${prettyDisplayNumber(trade.toTokenAmountMin.tokenAmount)} ${trade.to.symbol}`;
+      min = `${formatNumber(trade.toTokenAmountMin.tokenAmount, false, true)} ${trade.to.symbol}`;
     }
   }
 
   return (
-    <div className="trade-detail">
-      <div className="detail">
-        <div>Minimum received:</div>
-        <div>{min || "—"}</div>
-      </div>
-      <div className="detail">
+    <div className="flex mt-[20px]">
+      {/* <div className="flex justify-between"> */}
+      <div className="h-px my-2 bg-dark-1100" />
+      <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-dark-600 w-full space-y-1">
+      <div className={classNames("flex justify-center text-xl mb-2 font-bold text-dark-600")}> Cross Swap Details </div>
+                <div className="flex justify-between">
+                  <Typography className="text-white" fontFamily={'medium'}>
+                    Received
+                  </Typography>
+                  <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                    {min
+                      ? `${min}`
+                      : "-"}
+                  </Typography>
+                </div>
+
+                {/* <div className="flex justify-between">
+                  <Typography className="text-white" fontFamily={'medium'}>
+                    Maximum Amount
+                  </Typography>
+                  <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                    {selectedToken
+                      ? `${formatSimpleValue(selectedToken.MaximumSwap)} ${selectedToken.symbol}`
+                      : "-"}
+                  </Typography>
+                </div> */}
+              </div>
+      {/* <div className="detail">
         <div>Price:</div>
         <div>
           {trade ? (
@@ -498,7 +555,7 @@ const TradeDetail: VFC<TradeDetailProps> = ({ trade }) => {
             <div>&mdash;</div>
           )}
         </div>
-      </div>
+      </div> */}
       {/* <div className="detail">
         <div>Slippage:</div>
         <div>{trade ? `${trade.slippageTolerance * 100}%` : "—"}</div>
@@ -512,7 +569,7 @@ interface TokenSelectProps {
   chain: Chain;
   onClose: (selection?: { token: Token; chain: Chain }) => void;
 }
-const TokenSelect: React.VFC<TokenSelectProps> = ({ show, onClose, chain }) => {
+const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
   const [filter, setFilter] = useState("");
   const [selectedChainId, setSelectedChainId] = useState(chain.chainId);
   const selectedChain = useMemo(() => CHAINS.find(c => c.chainId === selectedChainId), [selectedChainId, CHAINS]);
@@ -557,18 +614,20 @@ const TokenSelect: React.VFC<TokenSelectProps> = ({ show, onClose, chain }) => {
   }, [show]);
 
   return (
-    <div className="token-select-overlay" style={{ opacity: show ? 1 : 0, pointerEvents: show ? "unset" : "none" }}>
-      <div className="token-select-background" onClick={() => onClose()} />
-      <div className="token-select-modal" style={{ transform: `translate(-50%, calc(-50% + ${show ? 0 : 30}px))` }}>
+    <div className={TokenSelectOverlay} style={{ opacity: show ? 1 : 0, pointerEvents: show ? "unset" : "none" }}>
+      <div className="absolute top-0 left-0 w-[100%] h-[100%] bg-dark-1100" onClick={() => onClose()} />
+      <div className="absolute h-[95px] w-[100%] max-h-[768px] max-w-[28ch] bg-dark-1100" 
+        // style={{ transform: `translate(-50%, calc(-50% + ${show ? 0 : 30}px))` }}
+        >
         <div
-          className="chain-select"
+          className="w-full h-full bg-dark-900 top-0 left-0 z-10 bg-dark-1100"
           style={{
-            transform: isShowingChainSelect ? "translateX(0)" : "translateX(100%)",
+            transform: isShowingChainSelect ? "translateX(0)" : "hidden",
             pointerEvents: show && isShowingChainSelect ? "all" : "none",
           }}
         >
-          <div className="chains-title">Select a chain</div>
-          <div className="chains">
+          <div className="text-center font-bold mt-12 bg-dark-1100">Select Chain</div>
+          <div className="flex justify-center w-full">
             {CHAINS.map((chain, i) => (
               <button
                 key={chain.chainId}
@@ -581,7 +640,7 @@ const TokenSelect: React.VFC<TokenSelectProps> = ({ show, onClose, chain }) => {
                 className="chain"
                 style={{ backgroundColor: chain.color }}
               >
-                <Image src={chain.logo} width="24" height="24" alt={ chain.name + ' logo'}/>
+                <Image src={chain.logo} width="48" height="48" alt={ chain.name + ' logo'}/>
                 <div style={{ flexGrow: 1, textAlign: "left" }}>{chain.name}</div>
                 {chain.chainId === selectedChainId && <CheckIcon width="16" height="16" style={{ color: "white" }} />}
               </button>
@@ -598,7 +657,7 @@ const TokenSelect: React.VFC<TokenSelectProps> = ({ show, onClose, chain }) => {
         >
           <div className="token-select-head">
             <button
-              className="selected-chain"
+              className="flex p-[10px] w-[100%] gap-[8px] align-center items-center"
               style={{ backgroundColor: selectedChain.color }}
               onClick={() => showChainSelect(true)}
             >
@@ -615,98 +674,23 @@ const TokenSelect: React.VFC<TokenSelectProps> = ({ show, onClose, chain }) => {
             >
               <input
                 ref={input}
-                className="tokens-filter"
+                className="p-[10px] w-[100%] border border-unset border-radius-[4px]"
                 placeholder={`Search ${selectedChain.name} tokens`}
                 value={filter}
                 onChange={e => setFilter(e.currentTarget.value)}
               />
             </form>
           </div>
-          <div className="tokens-list" ref={tokensList}>
+          <div className="overflow:auto h-[100%]" ref={tokensList}>
             {filteredTokens.map(token => (
               <div key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
                 <Image src={token.logo} width="24" height="24" alt={token.name + ' logo'}/>
-                <div className="token-name">{token.name}</div>
+                <div className="flex-grow:1">{token.name}</div>
                 {token.favorite && <StarIcon width="16" height="16" className="token-favorite" />}
               </div>
             ))}
           </div>
         </div>
-      </div>
-    </div>
-  );
-};
-
-interface ConfirmationProps {
-  show: "hide" | "show" | "poor";
-  onClose: (selection?: Token) => void;
-  from: Token;
-  to: Token;
-  fromUsd: string | undefined;
-  toUsd: string | undefined;
-  trade?: InstantTrade | CrossChainTrade;
-}
-const Confirmation: React.VFC<ConfirmationProps> = ({ show, onClose, from, to, fromUsd, toUsd, trade }) => {
-  const input = useRef<HTMLInputElement>(null);
-  useEffect(() => {
-    if (!show) {
-      return;
-    }
-
-    input.current?.focus();
-
-    const escape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        onClose();
-      }
-    };
-    window.addEventListener("keydown", escape);
-    return () => {
-      window.removeEventListener("keydown", escape);
-    };
-  }, [show]);
-
-  return (
-    <div
-      className="confirmation-overlay"
-      style={{ opacity: show !== "hide" ? 1 : 0, pointerEvents: show !== "hide" ? "unset" : "none" }}
-    >
-      <div className="confirmation-background" onClick={() => onClose()} />
-      <div
-        className="confirmation"
-        style={{ transform: `translate(-50%, calc(-50% + ${show !== "hide" ? 0 : 30}px))` }}
-      >
-        <div className="transaction">
-          <div className="transaction-side">
-            <div className="transaction-token">
-              <Image src={from.logo} width="16" height="16" alt={from.name + ' logo'}/>
-              {from.symbol}
-              <span style={{ flexGrow: 1 }} />
-              <span className="usd">${fromUsd ?? "0"}</span>
-            </div>
-            <div className="transaction-amount" style={{ color: show === "poor" ? "#e80625" : undefined }}>
-              {trade ? prettyDisplayNumber(trade.from.tokenAmount) : "NA"}
-            </div>
-          </div>
-          <div className="transaction-direction">
-            <ArrowDownIcon width="42" height="42" />
-          </div>
-          <div className="transaction-side">
-            <div className="transaction-token">
-              <Image src={to.logo} width="16" height="16" alt={to.name + ' logo'} />
-              {to.symbol}
-              <span style={{ flexGrow: 1 }} />
-              <span className="usd">${toUsd ?? "0"}</span>
-            </div>
-            <div className="transaction-amount">{trade ? prettyDisplayNumber(trade.to.tokenAmount) : "NA"}</div>
-          </div>
-        </div>
-        {show === "poor" && <div className="poor-prompt">Your wallet does not have enough {from.symbol}</div>}
-        {show === "show" && (
-          <div className="confirmation-prompt">
-            Confirm this transaction in {window.ethereum.isMetaMask ? "MetaMask" : "your wallet"}
-          </div>
-        )}
       </div>
     </div>
   );

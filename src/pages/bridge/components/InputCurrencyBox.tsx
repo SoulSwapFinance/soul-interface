@@ -54,6 +54,7 @@ const InputCurrencyBox: React.FC<any> = ({
         handleError={setError}
         token={ FANTOM_NATIVE }
       />
+      { max && 
       <Row style={{ alignItems: "center" }}>
         <Button
           disabled={ disabled }
@@ -68,6 +69,7 @@ const InputCurrencyBox: React.FC<any> = ({
         </Button>
         <div className="mr-2" />
       </Row>
+      }
     </Row>
   );
 };
