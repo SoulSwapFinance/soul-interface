@@ -341,6 +341,9 @@ export default function Exchange() {
   const [showSelectFrom, setShowSelectFrom] = useState(false);
   const [showSelectTo, setShowSelectTo] = useState(false);
   const amountRef = useRef<HTMLInputElement>(null);
+  const deltaUsd = fromUsd > toUsd ? Number(fromUsd) - Number(toUsd) : 0
+  const deltaPercent = 100 * deltaUsd / Number(fromUsd)
+
   return (
 	  <>
     {showSelectFrom &&
@@ -380,18 +383,18 @@ export default function Exchange() {
     }
       <div className="mt-[30px] ml-auto mr-auto max-w-[45ch] bg-dark-800 p-20">
         <div className="relative w-full">
-          <button className="flex gap-[6px] p-[20px]" onClick={() => setShowSelectFrom(true)}>
-            <div className="relative m-[-20px] mr-[5px]">
-              <Image className="block mr-[5px] contain" src={from.logo} width="42" height="42" alt={from.name} />
+          <button className="flex align-center bg-transparent p-[20px]" onClick={() => setShowSelectFrom(true)}>
+            <div className="relative mr-[5px]">
+              <Image className="block object-fit:contain object-position:center items-center" src={from.logo} width="42" height="42" alt={from.name} />
               <Image
                 className="flex align-center justify-center absolute m-[2px] p-[3px] h-[20px] w-[20px]"
-                width="24" height="24"
+                width="16" height="16"
                 style={{ backgroundColor: fromChain.color }}
                 src={fromChain.logo}
                 alt={fromChain.name}
               />
             </div>
-            {from.symbol}
+            {/* {from.symbol} */}
             <ChevronDownIcon width="10" height="10" />
           </button>
           {/* <input
@@ -403,14 +406,17 @@ export default function Exchange() {
             onChange={e => setAmount(e.currentTarget.value)}
           /> */}
           <InputCurrencyBox
-            // disabled={!token}
             value={amount}
-            setValue={setAmount}
+            setValue={async (amount) => await setAmount(amount)}
+            // onChange={async () => setAmount(ethers.utils.formatUnits(await getBalance(), decimals))}
             max={async () => setAmount(ethers.utils.formatUnits(await getBalance(), decimals))
             }
             variant="new"
           />
-          <span className="usd">{fromUsd ? `$${fromUsd}` : "—"}</span>
+              <div className="flex mt-[20px]">
+      {/* <div className="flex justify-between"> */}
+      <div className="h-px my-2 bg-dark-1100" />
+    </div>
         </div>
         <div className="relative mt-0 h-[5px]">
           <Spinner className="spinner" style={{ opacity: loading ? "1" : "0" }} />
@@ -426,25 +432,57 @@ export default function Exchange() {
             <ArrowDownIcon height="15" width="15" />
           </button>
         </div>
-        <div className="input">
+        <div className="relative w-full">
           <button className="flex align-center bg-transparent p-[20px]" onClick={() => setShowSelectTo(true)}>
             <div className="relative mr-[5px]">
               <Image className="block object-fit:contain object-position:center items-center" src={to.logo} width="42" height="42" alt={to.name} />
               <Image
                 className="flex align-center justify-center absolute m-[2px] p-[3px] h-[20px] w-[20px]"
-                width="24" height="24"
+                width="16" height="16"
                 style={{ backgroundColor: toChain.color }}
                 src={toChain.logo}
                 alt={toChain.name}
               />
             </div>
-            {to.symbol}
+            {/* {to.symbol} */}
             <ChevronDownIcon width="10" height="10" />
           </button>
           <div className="amount">
-            {trade ? prettyDisplayNumber(trade.to.tokenAmount) : canBuy ? "—" : "No liquidity"}
+          <div className="flex flex-col gap-4 bg-dark-900 p-3 border border-1 border-dark-700 hover:border-dark-600 w-full space-y-1">
+      {/* <div className={classNames("flex justify-center text-xl mb-2 font-bold text-dark-600")}> Cross Swap Details </div> */}
+      <div className="flex justify-between">
+                  {/* <Typography className="text-white" fontFamily={'medium'}>
+                    Send
+                  </Typography> */}
+                  <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                    {amount
+                      ? `${formatNumber(amount, false, true)} ${from.symbol}`
+                      : "0"}
+                    {` (${formatNumber(fromUsd, true, true)})`}
+                  </Typography>
+                  <Typography 
+                    className={``} 
+                    style={{ backgroundColor: fromChain.color }}
+                    fontFamily={'medium'}>
+                    {fromChain.name}
+                  </Typography>
+                </div>
+                <div className="my-4 mx-6 border border-dark-600"/>
+                <div className="flex justify-between">
+                  <Typography className={classNames(deltaPercent > 20 ? 'text-red' : 'text-white')} weight={600} fontFamily={'semi-bold'}>
+                    {trade
+                      ? `${formatNumber(Number(trade?.to.tokenAmount), false, true)} ${to.symbol} (${formatNumber(toUsd, true, true)}) `
+                      : "0"}
+                  </Typography>
+                  <Typography 
+                    className={``} 
+                    style={{ backgroundColor: toChain.color }}
+                    fontFamily={'medium'}>                      
+                    {toChain.name}
+                  </Typography>
+                </div>
+        </div>
           </div>
-          <span className="usd">{toUsd ? `$${toUsd}` : "—"}</span>
         </div>
         <TradeDetail trade={trade} />
         {account && (
@@ -509,60 +547,19 @@ function isCrossChainTrade(trade: InstantTrade | CrossChainTrade): trade is Cros
   return "transitFeeToken" in trade;
 }
 const TradeDetail: FC<TradeDetailProps> = ({ trade }) => {
-  let min: string;
+  let receive: string;
   if (trade) {
     if (isCrossChainTrade(trade)) {
-      min = `${(trade.toTokenAmountMin)} ${trade.to.symbol}`;
+      receive = `${formatNumber(Number(trade.toTokenAmountMin), false, true)} ${trade.to.symbol}`;
     } else {
-      min = `${formatNumber(trade.toTokenAmountMin.tokenAmount, false, true)} ${trade.to.symbol}`;
+      receive = `${formatNumber(trade.toTokenAmountMin.tokenAmount, false, true)} ${trade.to.symbol}`;
     }
   }
 
   return (
     <div className="flex mt-[20px]">
       {/* <div className="flex justify-between"> */}
-      <div className="h-px my-2 bg-dark-1100" />
-      <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-dark-600 w-full space-y-1">
-      <div className={classNames("flex justify-center text-xl mb-2 font-bold text-dark-600")}> Cross Swap Details </div>
-                <div className="flex justify-between">
-                  <Typography className="text-white" fontFamily={'medium'}>
-                    Received
-                  </Typography>
-                  <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    {min
-                      ? `${min}`
-                      : "-"}
-                  </Typography>
-                </div>
-
-                {/* <div className="flex justify-between">
-                  <Typography className="text-white" fontFamily={'medium'}>
-                    Maximum Amount
-                  </Typography>
-                  <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    {selectedToken
-                      ? `${formatSimpleValue(selectedToken.MaximumSwap)} ${selectedToken.symbol}`
-                      : "-"}
-                  </Typography>
-                </div> */}
-              </div>
-      {/* <div className="detail">
-        <div>Price:</div>
-        <div>
-          {trade ? (
-            <div>
-              1 {trade.to.symbol} = {prettyDisplayNumber(trade.to.price.dividedBy(trade.from.price))}{" "}
-              {trade.from.symbol}
-            </div>
-          ) : (
-            <div>&mdash;</div>
-          )}
-        </div>
-      </div> */}
-      {/* <div className="detail">
-        <div>Slippage:</div>
-        <div>{trade ? `${trade.slippageTolerance * 100}%` : "—"}</div>
-      </div> */}
+      <div className="h-px my-2 bg-dark-1000" />
     </div>
   );
 };
@@ -618,19 +615,19 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
 
   return (
     <div className={TokenSelectOverlay} style={{ opacity: show ? 1 : 0, pointerEvents: show ? "unset" : "none" }}>
-      <div className="absolute top-0 left-0 w-[100%] h-[100%] bg-dark-1100" onClick={() => onClose()} />
-      <div className={classNames("grid h-[95px] w-[100%] max-h-[768px] max-w-[28ch] bg-dark-1100")}
-        // style={{ transform: `translate(-50%, calc(-50% + ${show ? 0 : 30}px))` }}
+      <div className="absolute top-0 left-0 w-[100%] h-[100%]" onClick={() => onClose()} />
+      <div className={classNames(show ? "grid h-[95px] w-[100%] max-h-[768px] max-w-[28ch]" : 'hidden')}
+        style={{ transform: `translate(-50%, calc(-50% + ${show ? 0 : 30}px))` }}
         >
         <div
-          className="w-full h-full bg-dark-900 top-0 left-0 z-10 bg-dark-1100"
+          className={classNames(isShowingChainSelect ? "w-full h-full bg-dark-900 top-0 left-0 z-10 bg-dark-1100" : "hidden")}
           style={{
-            // transform: isShowingChainSelect ? "translateX(0)" : "hidden",
-            // pointerEvents: show && isShowingChainSelect ? "all" : "none",
+            transform: isShowingChainSelect ? "translateX(0)" : "hidden",
+            pointerEvents: show && isShowingChainSelect ? "all" : "none",
           }}
         >
           {/* <div className="text-center font-bold mt-12 bg-dark-1100">Select Chain</div> */}
-          <div className="grid justify-center">
+          <div className="flex justify-center">
             {CHAINS.map((chain, i) => (
               <button
                 key={chain.chainId}
@@ -640,11 +637,11 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
                   showChainSelect(false);
                   setFilter("");
                 }}
-                className={classNames(chain.chainId === selectedChainId && `border border-4 border-white`, "flex border border-transparent hover:border-white border-radius-[4px] gap-[8px] align-center border:unset w-[100%]")}
+                className={classNames(chain.chainId === selectedChainId && `border border-2 border-white`, "flex border border-transparent hover:border-white border-radius-[4px] gap-[8px] align-center border:unset w-[100%]")}
                 style={{ backgroundColor: chain.color }}
               >
-                <div className={classNames('m-2 p-1', chain.chainId === selectedChainId && 'mt-4 mb-4')}>
-                <Image src={chain.logo} width={'420'} height="32" alt={ chain.name + ' logo'}/>
+                <div className={classNames('m-1 p-1')}>
+                <Image src={chain.logo} width={'200'} height="32" alt={ chain.name + ' logo'}/>
                 <div style={{ flexGrow: 1, textAlign: "center" }}>{chain.name}</div>
                 {/* {chain.chainId === selectedChainId && <CheckIcon width="16" height="16" style={{ color: "white" }} />} */}
                 </div>
@@ -660,7 +657,7 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
             pointerEvents: show ? "all" : "none",
           }}
         >
-          <div className="token-select-head">
+          <div className="bg-dark-900 padding-[10px]">
             <button
               className="flex p-[10px] w-[100%] gap-[8px] align-center items-center"
               style={{ backgroundColor: selectedChain.color }}
@@ -679,21 +676,21 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
             >
               <input
                 ref={input}
-                className="p-[10px] w-[100%] border border-unset border-radius-[4px]"
+                className="p-[10px] w-[100%] border border-unset border-radius-[4px] text-black"
                 placeholder={`Search ${selectedChain.name} tokens`}
                 value={filter}
                 onChange={e => setFilter(e.currentTarget.value)}
               />
             </form>
-          </div>
-          <div className="overflow:auto h-[100%]" ref={tokensList}>
+          <div className="bg-dark-1100 h-[100%] w-full justify-center h-[100%]" ref={tokensList}>
             {filteredTokens.map(token => (
-              <div key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
+              <div className="flex grid-cols-2 bg-dark-1100" key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
                 <Image src={token.logo} width="24" height="24" alt={token.name + ' logo'}/>
-                <div className="flex-grow:1">{token.name}</div>
+                <div className="flex-grow-1 p-1 text-center">{token.symbol}</div>
                 {token.favorite && <StarIcon width="16" height="16" className="token-favorite" />}
               </div>
             ))}
+            </div>
           </div>
         </div>
       </div>
