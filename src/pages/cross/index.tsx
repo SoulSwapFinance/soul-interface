@@ -31,7 +31,8 @@ import Container from "components/Container";
 import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
 import HeaderNew from "features/trade/HeaderNew";
 import { SwapLayoutCard } from "layouts/SwapLayout";
-
+import Modal from "components/DefaultModal";
+import ModalBody from "components/Modal/Body";
 interface Exchange {
   from: { chain: Chain; token: Token };
   to: { chain: Chain; token: Token };
@@ -599,19 +600,25 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
   }, [show]);
 
   return (
-    <div className={'grid w-[100vw] h-[100vh] z-[1000] opacity'
+    <div className={'absolute top-20 left-0 w-[100vw] h-[0vh] z-[1000] opacity'
       } style={{ opacity: show ? 1 : 0, pointerEvents: show ? "unset" : "none" }}>
       <div className="absolute top-0 left-0 w-[100%] h-[100%]" onClick={() => onClose()} />
-      <div className={classNames(show ? "grid h-[95px] w-[100%] max-h-[768px] max-w-[28ch]" : 'hidden')}
+      <div className={classNames(show ? "absolute left-[15%] bottom-[10%] top-[50%] max-w-[28ch]" : 'hidden')}
+      /* <div className={classNames(show ? "grid h-[95px] w-[100%] max-h-[768px] max-w-[28ch]" : 'hidden')} */
         style={{ transform: `translate(-50%, calc(-50% + ${show ? 0 : 30}px))` }}
+        /* // style={{ transform: `translate(0%, calc(0% + ${show ? 360 : 30}px))` }} */
         >
         <div
-          className={classNames(isShowingChainSelect ? "w-full h-full bg-dark-900 top-0 left-0 z-10 bg-dark-1100" : "hidden")}
+          className={classNames(isShowingChainSelect ? "w-full h-full top-0 left-0 z-10 bg-dark-1100" : "hidden")}
           style={{
-            transform: isShowingChainSelect ? "translateX(0)" : "hidden",
-            pointerEvents: show && isShowingChainSelect ? "all" : "none",
+            // transform: isShowingChainSelect ? "translateX(0)" : "hidden",
+            // pointerEvents: show && isShowingChainSelect ? "all" : "none",
           }}
         >
+          {/* CHAIN SELECTION */}
+          <Modal
+          isOpen={isShowingChainSelect} onDismiss={() => onClose()}
+          >
           <div className="flex justify-center">
             {CHAINS.map((chain, i) => (
               <button
@@ -622,31 +629,34 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
                   showChainSelect(false);
                   setFilter("");
                 }}
-                className={classNames(chain.chainId === selectedChainId && `border border-2 border-white`, "flex border border-transparent hover:border-white border-radius-[4px] gap-[8px] align-center border:unset w-[100%]")}
+                className={classNames(chain.chainId === selectedChainId && `border border-2 border-white`, "flex border border-transparent hover:border-white align-center w-[100%]")}
                 style={{ backgroundColor: chain.color }}
               >
                 <div className={classNames('m-1 p-1')}>
-                <Image src={chain.logo} width={'200'} height="32" alt={ chain.name + ' logo'}/>
-                <div style={{ flexGrow: 1, textAlign: "center" }}>{chain.name}</div>
+                <Image src={chain.logo} width={'64'} height="64" alt={ chain.name + ' logo'}/>
+                {/* <div style={{ flexGrow: 1, textAlign: "center" }}>{chain.name}</div> */}
                 </div>
               </button>
             ))}
           </div>
+          </Modal>
         </div>
+        {/* TOKEN + CHAIN MODAL */}
         <div
-          className="flex flex-cols border-radius-[8px] w-[100%] h-[100%] bg-dark-800"
+          className="flex flex-cols border-radius-[8px] w-[100%] h-[100%] bg-dark-1100"
           style={{
             transform: isShowingChainSelect ? "translateY(50px)" : "",
             opacity: isShowingChainSelect ? 0 : 1,
             pointerEvents: show ? "all" : "none",
           }}
-        >
+          >
+          <Modal isOpen={true} onDismiss={() => onClose()}>
           <div className="bg-dark-900 padding-[10px]">
             <button
               className="flex p-[10px] w-[100%] gap-[8px] align-center items-center"
               style={{ backgroundColor: selectedChain.color }}
               onClick={() => showChainSelect(true)}
-            >
+              >
               <Image src={selectedChain.logo} width="24" height="24" alt={selectedChain.name + ' logo'}/>
               <div style={{ flexGrow: 1, textAlign: "left" }}>{selectedChain.name}</div>
               {/* <ChevronDownIcon width="13" height="13" style={{ color: "white", marginTop: 2 }} /> */}
@@ -657,25 +667,29 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
                 e.preventDefault();
                 onClose({ token: filteredTokens[0], chain: selectedChain });
               }}
-            >
+              >
+              {/* SEARCH BAR */}
               <input
                 ref={input}
                 className="w-[100%] border border-unset border-radius-[4px] text-black mb-2"
                 placeholder={`Search ${selectedChain.name} tokens`}
                 value={filter}
                 onChange={e => setFilter(e.currentTarget.value)}
-              />
+                />
             </form>
-          <div className="bg-dark-1100 h-[100%] w-full justify-center h-[100%]" ref={tokensList}>
+          
+          {/* SELECT TOKEN LIST */}
+          <div className="grid grid-cols-8 bg-dark-1100 w-[100%] justify-center h-[100%]" ref={tokensList}>
             {filteredTokens.map(token => (
-              <div className="flex grid-cols-2 bg-dark-1100" key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
-                <Image src={token.logo} width="16" height="16" alt={token.name + ' logo'}/>
-                <div className="flex text-xs">{token.symbol}</div>
+              <div className="grid m-1 bg-dark-1100" key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
+                <Image src={token.logo} width="48" height="48" alt={token.name + ' logo'}/>
+                {/* <div className="flex text-xs">{token.symbol}</div> */}
                 {/* {token.favorite && <StarIcon width="16" height="16" className="token-favorite" />} */}
               </div>
             ))}
             </div>
           </div>
+            </Modal>
         </div>
       </div>
     </div>
