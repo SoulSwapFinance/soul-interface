@@ -30,6 +30,7 @@ import InputCurrencyBox from "pages/bridge/components/InputCurrencyBox";
 import Container from "components/Container";
 import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
 import HeaderNew from "features/trade/HeaderNew";
+import { SwapLayoutCard } from "layouts/SwapLayout";
 
 interface Exchange {
   from: { chain: Chain; token: Token };
@@ -381,30 +382,43 @@ export default function Exchange() {
       />
       </div>
     }
-      <div className="mt-[30px] ml-auto mr-auto max-w-[45ch] bg-dark-800 p-20">
-        <div className="relative w-full">
-          <button className="flex align-center bg-transparent p-[20px]" onClick={() => setShowSelectFrom(true)}>
+    {/* <Container> */}
+    <div className="flex flex-col justify-center mt-4 bg-dark-800">
+    <SwapLayoutCard>
+    <div className="px-2 bg-dark-800">
+  <HeaderNew />
+  </div>
+    <DoubleGlowShadowV2>
+      <div className="ml-auto mr-auto max-w-[45ch] bg-dark-800 p-12">
+        <div className="relative w-full bg-dark-900">
+          <button className="flex align-center bg-dark-1000 w-full justify-center p-[20px]" onClick={() => setShowSelectFrom(true)}>
             <div className="relative mr-[5px]">
               <Image className="block object-fit:contain object-position:center items-center" src={from.logo} width="42" height="42" alt={from.name} />
               <Image
-                className="flex align-center justify-center absolute m-[2px] p-[3px] h-[20px] w-[20px]"
+                className="flex align-center rounded justify-center absolute m-[2px] p-[3px] h-[20px] w-[20px]"
                 width="16" height="16"
                 style={{ backgroundColor: fromChain.color }}
                 src={fromChain.logo}
                 alt={fromChain.name}
               />
             </div>
-            {/* {from.symbol} */}
-            <ChevronDownIcon width="10" height="10" />
+          </button>        
+          <div className="relative w-full bg-dark-900">
+          <button className="flex align-center bg-dark-1000 w-full justify-center p-[20px]" onClick={() => setShowSelectTo(true)}>
+            <div className="relative mr-[5px]">
+              <Image className="block object-fit:contain object-position:center items-center" src={to.logo} width="42" height="42" alt={to.name} />
+              <Image
+                className="flex align-center rounded justify-center absolute m-[2px] p-[3px] h-[20px] w-[20px]"
+                width="16" height="16"
+                style={{ backgroundColor: toChain.color }}
+                src={toChain.logo}
+                alt={toChain.name}
+              />
+            </div>
+            {/* {to.symbol} */}
           </button>
-          {/* <input
-            ref={amountRef}
-            placeholder="0.0"
-            className="amount"
-            type="number"
-            value={amount}
-            onChange={e => setAmount(e.currentTarget.value)}
-          /> */}
+          
+          <div className="amount">
           <InputCurrencyBox
             value={amount}
             setValue={async (amount) => await setAmount(amount)}
@@ -413,42 +427,9 @@ export default function Exchange() {
             }
             variant="new"
           />
-              <div className="flex mt-[20px]">
       {/* <div className="flex justify-between"> */}
-      <div className="h-px my-2 bg-dark-1100" />
-    </div>
         </div>
-        <div className="relative mt-0 h-[5px]">
-          <Spinner className="spinner" style={{ opacity: loading ? "1" : "0" }} />
-          <button
-            onClick={() => {
-              setAmount(trade?.to.tokenAmount.toString() ?? "");
-              setFromChain(toChain);
-              setToChain(fromChain);
-              setFrom(to);
-              setTo(from);
-            }}
-          >
-            <ArrowDownIcon height="15" width="15" />
-          </button>
-        </div>
-        <div className="relative w-full">
-          <button className="flex align-center bg-transparent p-[20px]" onClick={() => setShowSelectTo(true)}>
-            <div className="relative mr-[5px]">
-              <Image className="block object-fit:contain object-position:center items-center" src={to.logo} width="42" height="42" alt={to.name} />
-              <Image
-                className="flex align-center justify-center absolute m-[2px] p-[3px] h-[20px] w-[20px]"
-                width="16" height="16"
-                style={{ backgroundColor: toChain.color }}
-                src={toChain.logo}
-                alt={toChain.name}
-              />
-            </div>
-            {/* {to.symbol} */}
-            <ChevronDownIcon width="10" height="10" />
-          </button>
-          <div className="amount">
-          <div className="flex flex-col gap-4 bg-dark-900 p-3 border border-1 border-dark-700 hover:border-dark-600 w-full space-y-1">
+          <div className="flex flex-col gap-4 bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-dark-600 w-full space-y-1">
       {/* <div className={classNames("flex justify-center text-xl mb-2 font-bold text-dark-600")}> Cross Swap Details </div> */}
       <div className="flex justify-between">
                   {/* <Typography className="text-white" fontFamily={'medium'}>
@@ -536,6 +517,10 @@ export default function Exchange() {
           </button>
         )} */}
       </div>
+      </DoubleGlowShadowV2>
+      </SwapLayoutCard>
+      </div>
+      {/* </Container> */}
     </>
   );
 }
@@ -614,7 +599,8 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
   }, [show]);
 
   return (
-    <div className={TokenSelectOverlay} style={{ opacity: show ? 1 : 0, pointerEvents: show ? "unset" : "none" }}>
+    <div className={'grid w-[100vw] h-[100vh] z-[1000] opacity'
+      } style={{ opacity: show ? 1 : 0, pointerEvents: show ? "unset" : "none" }}>
       <div className="absolute top-0 left-0 w-[100%] h-[100%]" onClick={() => onClose()} />
       <div className={classNames(show ? "grid h-[95px] w-[100%] max-h-[768px] max-w-[28ch]" : 'hidden')}
         style={{ transform: `translate(-50%, calc(-50% + ${show ? 0 : 30}px))` }}
@@ -626,7 +612,6 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
             pointerEvents: show && isShowingChainSelect ? "all" : "none",
           }}
         >
-          {/* <div className="text-center font-bold mt-12 bg-dark-1100">Select Chain</div> */}
           <div className="flex justify-center">
             {CHAINS.map((chain, i) => (
               <button
@@ -643,7 +628,6 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
                 <div className={classNames('m-1 p-1')}>
                 <Image src={chain.logo} width={'200'} height="32" alt={ chain.name + ' logo'}/>
                 <div style={{ flexGrow: 1, textAlign: "center" }}>{chain.name}</div>
-                {/* {chain.chainId === selectedChainId && <CheckIcon width="16" height="16" style={{ color: "white" }} />} */}
                 </div>
               </button>
             ))}
@@ -665,7 +649,7 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
             >
               <Image src={selectedChain.logo} width="24" height="24" alt={selectedChain.name + ' logo'}/>
               <div style={{ flexGrow: 1, textAlign: "left" }}>{selectedChain.name}</div>
-              <ChevronDownIcon width="13" height="13" style={{ color: "white", marginTop: 2 }} />
+              {/* <ChevronDownIcon width="13" height="13" style={{ color: "white", marginTop: 2 }} /> */}
             </button>
 
             <form
@@ -676,7 +660,7 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
             >
               <input
                 ref={input}
-                className="p-[10px] w-[100%] border border-unset border-radius-[4px] text-black"
+                className="w-[100%] border border-unset border-radius-[4px] text-black mb-2"
                 placeholder={`Search ${selectedChain.name} tokens`}
                 value={filter}
                 onChange={e => setFilter(e.currentTarget.value)}
@@ -685,9 +669,9 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
           <div className="bg-dark-1100 h-[100%] w-full justify-center h-[100%]" ref={tokensList}>
             {filteredTokens.map(token => (
               <div className="flex grid-cols-2 bg-dark-1100" key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
-                <Image src={token.logo} width="24" height="24" alt={token.name + ' logo'}/>
-                <div className="flex-grow-1 p-1 text-center">{token.symbol}</div>
-                {token.favorite && <StarIcon width="16" height="16" className="token-favorite" />}
+                <Image src={token.logo} width="16" height="16" alt={token.name + ' logo'}/>
+                <div className="flex text-xs">{token.symbol}</div>
+                {/* {token.favorite && <StarIcon width="16" height="16" className="token-favorite" />} */}
               </div>
             ))}
             </div>
