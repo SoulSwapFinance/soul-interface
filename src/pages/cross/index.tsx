@@ -471,7 +471,8 @@ export default function Exchange() {
                   </Typography>
                 </div>
               </div>
-                
+                </div>
+              
                 <div className="w-full bg-dark-1100">
                   <div className="relative w-full bg-dark-900">
                     <div className={`flex flex-col gap-4 bg-dark-1000 p-6 border border-1 w-full space-y-1`}
