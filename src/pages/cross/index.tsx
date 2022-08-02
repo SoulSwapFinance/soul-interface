@@ -135,46 +135,6 @@ export default function Exchange() {
   const nativeBalance = (Number(userInfo.nativeBalance) * 1E18).toFixed(0)
   const [wallet, setWallet] = useState<WalletProvider>(null);
 
-  /// IMPORTS FROM BRIDGE ///
-
-  // const handleSetFromChain = (chainId: number) => {
-  //   if (chainId !== 250) {
-  //     setToChain(lastExchange.to.chain[250]);
-  //   }
-  //   if (chainId === toChain.chainId) {
-  //     setToChain(chainId === 250 ? lastExchange.to.chain[1].chainId : lastExchange.to.chain[250].chainId);
-  //   }
-  //   setFromChain(fromChain);
-  // };
-
-  // const handleSetToChain = (chainId: number) => {
-  //   if (chainId !== 250) {
-  //     setFromChain(lastExchange.to.chain[250]);
-  //   }
-  //   if (chainId === fromChain.chainId) {
-  //     setFromChain(chainId === 250 ? lastExchange.from.chain[1].chainId : lastExchange.from.chain[250].chainId);
-  //   }
-  //   setToChain(toChain);
-  //   // V2 (BELOW)
-  //   // setToChain(chainId == 250 ? 1 : chainId);
-
-  // };
-  // const handleSwap = () => {
-  //   const fromChainOld = fromChain;
-  //   const toChainOld = toChain;
-  //   const fromOld = from;
-  //   const toOld = to;
-
-  //   setToToken(toOld);
-  //   setFromToken(fromOld);
-  //   setFrom(fromOld);
-  //   setTo(toOld);
-  //   setFromChain(toChainOld);
-  //   setToChain(fromChainOld);
-  // };
-
-  ////////////////////////////////////////////////////////////////
-
   useEffect(() => {
     if (!account) {
       return
@@ -367,18 +327,6 @@ export default function Exchange() {
   const [fromToken, setFromToken] = useState(null);
   const [toToken, setToToken] = useState(null);
 
-  const handleSetFromToken = (value: any) => {
-    // setFromTokenBalance(null);
-    // setToTokenBalance(null);
-    setFromToken(value);
-  };
-
-  const handleSetToToken = (value: any) => {
-    // setFromTokenBalance(null);
-    // setToTokenBalance(null);
-    setToToken(value);
-  };
-
   return (
     <>
       {showSelectFrom &&
@@ -444,15 +392,19 @@ export default function Exchange() {
                     src={from?.logo} width="42" height="42" alt={from?.name}
                   />
                 </Button>
+                
+            
+            }
                 <InputCurrencyBox
-                  disabled={!from}
+                  // disabled={!from}
                   value={amount}
                   setValue={async (amount) => await setAmount(amount)}
-                  max={async () =>
+                  /* max={async () =>
                     from && await getBalance()
                       ? weiToUnit(await getBalance(), from?.decimals)
                       : 0
-                  }
+                  } */
+                  max={async () => setAmount(ethers.utils.formatUnits(await getBalance(), decimals))}
                   variant="new"
                 />
               </div>
