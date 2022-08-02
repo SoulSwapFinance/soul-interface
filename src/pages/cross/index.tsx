@@ -318,7 +318,6 @@ export default function Exchange() {
   }, [from, fromChain, to, toChain]);
 
   const [showConfirmation, setShowConfirmation] = useState<"hide" | "show" | "poor">("hide");
-  const [showSelectFromChain, setShowSelectFromChain] = useState(false);
   const [showSelectFrom, setShowSelectFrom] = useState(false);
   const [showSelectTo, setShowSelectTo] = useState(false);
   const amountRef = useRef<HTMLInputElement>(null);
@@ -392,18 +391,11 @@ export default function Exchange() {
                     src={from?.logo} width="42" height="42" alt={from?.name}
                   />
                 </Button>
-                
-            
             }
                 <InputCurrencyBox
                   // disabled={!from}
                   value={amount}
                   setValue={async (amount) => await setAmount(amount)}
-                  /* max={async () =>
-                    from && await getBalance()
-                      ? weiToUnit(await getBalance(), from?.decimals)
-                      : 0
-                  } */
                   max={async () => setAmount(ethers.utils.formatUnits(await getBalance(), decimals))}
                   variant="new"
                 />
@@ -419,12 +411,6 @@ export default function Exchange() {
                       ? `${formatNumber(Number(trade?.from.tokenAmount), false, true)} ${from.symbol} (${formatNumber(fromUsd, true, true)}) `
                       : "0 ($0.00)"}
                   </Typography>
-                  {/* <Typography
-                            className={`text-xl font-bold text-white`}
-                            // style={{ backgroundColor: fromChain.color }}
-                            fontFamily={'medium'}>
-                            {fromChain.name}
-                          </Typography> */}
                 </div>
               </div>
 
@@ -592,7 +578,6 @@ interface TokenSelectProps {
 const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
   const [filter, setFilter] = useState("");
   const [selectedChainId, setSelectedChainId] = useState(chain.chainId);
-  const [showSelectFromChain, setShowSelectFromChain] = useState(false)
   const selectedChain = useMemo(() => CHAINS.find(c => c.chainId === selectedChainId), [selectedChainId, CHAINS]);
   const input = useRef<HTMLInputElement>(null);
   const tokensList = useRef<HTMLDivElement>(null);
