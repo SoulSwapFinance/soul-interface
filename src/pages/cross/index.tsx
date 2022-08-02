@@ -462,10 +462,6 @@ export default function Exchange() {
                   {` (${formatNumber(toUsd, true, true)})`}
                 </div>
               </div>
-
-
-              {/* <div className="flex flex-col justify-center mt-4 bg-dark-800"> */}
-              <Row style={{ width: "100%", justifyContent: "center" }}>
                 <div className="w-full bg-dark-1100">
                   <div className="relative w-full bg-dark-900">
                     <div className={`flex flex-col gap-4 bg-dark-1000 p-6 border border-1 w-full space-y-1`}
@@ -475,13 +471,7 @@ export default function Exchange() {
                             {trade
                               ? `${formatNumber(Number(trade?.to.tokenAmount), false, true)} ${to.symbol} (${formatNumber(toUsd, true, true)}) `
                               : "0 ($0.00)"}
-                          </Typography>
-                          {/* <Typography
-                            className={`text-xl font-bold text-white`}
-                            // style={{ backgroundColor: toChain.color }}
-                            fontFamily={'medium'}>
-                            {toChain.name}
-                          </Typography> */}
+                          </Typography> 
                         </div>
                       </div>
                     </div>
@@ -512,32 +502,7 @@ export default function Exchange() {
                       {fromChain.chainId === toChain.chainId ? "Swap" : "Swap Crosschain"}
                     </Button>
                   )}
-                  {/* {chainId !== fromChain.chainId && (
-          <button
-            className="bg-dark-900"
-            onClick={async () => {
-              handleSetFromChain(chainId);
-            }}
-          >
-            Switch to {fromChain.name}
-          </button>
-        )} */}
-                  {/* {!account && (
-          <button
-            className="bg-dark-900"
-            onClick={async () => {
-              try {
-                await account;
-              } catch (e) {
-                // Ignore "modal closed by user" exceptions.
-              }
-            }}
-          >
-            Connect Wallet
-          </button>
-        )} */}
-                </div>
-              </Row>
+                </div>         
             </SwapLayoutCard>
           </div>
         </DoubleGlowShadowV2>
