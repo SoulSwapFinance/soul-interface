@@ -414,7 +414,7 @@ export default function Exchange() {
                 </div>
               </div>
 
-/* <div className="p-1 bg-dark-1000">
+{/* <div className="p-1 bg-dark-1000">
             {/* ARROW DOWN ICON */}
                 <Row style={{ justifyContent: "center", alignItems: "center" }}>
         <div style={{ height: "1px", width: "100%" }} />
@@ -435,7 +435,7 @@ export default function Exchange() {
           </OverlayButton>
         <div style={{ height: "1px", width: "100%" }} />
       </Row>
-    </div> */
+    </div> */}
 
                 {/* [2] TO TOKEN SELECTOR */}
                {/* [T] NETWORK LOGO */}
