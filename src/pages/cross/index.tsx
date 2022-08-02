@@ -391,7 +391,7 @@ export default function Exchange() {
                     src={from?.logo} width="42" height="42" alt={from?.name}
                   />
                 </Button>
-            }
+  
                 <InputCurrencyBox
                   // disabled={!from}
                   value={amount}
