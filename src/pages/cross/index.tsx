@@ -522,6 +522,7 @@ export default function Exchange() {
                     </Typography>
                   </div>
                 </div>
+               </div>
 
               <div className="flex p-2 justify-center gap-6 text-lg text-center bg-dark-1000 font-bold">
                 {formatNumber(fromAmount, false, true)} {from.symbol} on {fromChain.name}
