@@ -433,13 +433,13 @@ export default function Exchange() {
                     <div className="flex justify-center">
                       <Typography className={classNames('text-lg font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
                         {trade
-                          ? `${formatNumber(Number(trade?.from.tokenAmount), false, true)} ${to.symbol} (${formatNumber(toUsd, true, true)}) `
+                          ? `${formatNumber(Number(trade?.from.tokenAmount), false, true)} ${from.symbol} (${formatNumber(fromUsd, true, true)}) `
                           : "0 ($0.00)"}
                       </Typography>
                     </div>
                   </div>
                     <InputCurrencyBox
-                      // disabled={!from}
+                      disabled={!from}
                       value={amount}
                       setValue={async (amount) => await setAmount(amount)}
                       // max={async () => setAmount(ethers.utils.formatUnits(await getBalance(), decimals))}
@@ -483,8 +483,6 @@ export default function Exchange() {
                       </div> *\}
 
               {/* [2] TO TOKEN SELECTOR */}
-              {/* [TO] NETWORK LOGO */}
-
               {/* [T] NETWORK LOGO */}
               <div 
                 className="grid grid-cols-1 bg-dark-1000 border border-4 w-full"
@@ -519,8 +517,7 @@ export default function Exchange() {
                   <div className="flex justify-center">
                     <Typography className={classNames('sm:text-lg text-md font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
                       {trade
-                        ? `${formatNumber(Number(trade?.to.tokenAmount), false, true)} 
-                        (${formatNumber(toUsd, true, true)}) `
+                        ? `${formatNumber(Number(trade?.to.tokenAmount), false, true)} ${to.symbol} (${formatNumber(toUsd, true, true)})`
                         : "0 ($0.00)"}
                     </Typography>
                   </div>
@@ -552,7 +549,7 @@ export default function Exchange() {
               <div className="py-2" />
 
               {/* <TradeDetail trade={trade} /> */}
-              <div className="border rounded ">
+              <div className="rounded ">
                 {account && (
                   <Button
                     // className="h-[100%]"
