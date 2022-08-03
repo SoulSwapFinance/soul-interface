@@ -459,8 +459,8 @@ export default function Exchange() {
                 </div>
               </div>
 
-              <div className="p-1 bg-dark-1000">
-            {/* ARROW DOWN ICON */}
+             {/* <div className="p-1 bg-dark-1000">
+            // ARROW DOWN ICON 
                 <Row style={{ justifyContent: "center", alignItems: "center" }}>
         <div style={{ height: "1px", width: "100%" }} />
           <OverlayButton 
@@ -480,7 +480,7 @@ export default function Exchange() {
           </OverlayButton>
         <div style={{ height: "1px", width: "100%" }} />
       </Row>
-                      </div>
+                      </div> *\}
 
               {/* [2] TO TOKEN SELECTOR */}
               {/* [TO] NETWORK LOGO */}
@@ -488,7 +488,7 @@ export default function Exchange() {
               {/* [T] NETWORK LOGO */}
               <div 
                 className="grid grid-cols-1 bg-dark-1000 border border-4 w-full"
-                style={{ borderColor: fromChain.color }}
+                style={{ borderColor: toChain.color }}
               >
               <Image
                 className="flex w-full align-center justify-center"
@@ -562,8 +562,9 @@ export default function Exchange() {
                 {account && (
                   <Button
                     // className="h-[100%]"
-                    variant="filled"
-                    color="pink"
+                    // variant="filled"
+                    fullWidth
+                    color="purple"
                     onClick={async () => {
                       setShowConfirmation("show");
                       try {
