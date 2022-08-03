@@ -10,18 +10,18 @@ import SDK, {
   InsufficientLiquidityError,
 } from "rubik-sdk";
 import { sleep } from "utils/sleep";
-import { ArrowDownIcon, CheckIcon, ChevronDownIcon, StarIcon } from '@heroicons/react/solid'
+import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, CheckIcon, ChevronDownIcon, StarIcon } from '@heroicons/react/solid'
 import { BigNumber as EthersBigNumber, ethers } from "ethers";
 import { FANTOM, AVALANCHE, BINANCE, Chain, CHAINS, ETHEREUM, MOONRIVER, POLYGON, Token } from "constants/cross/Chains";
 import { prettyDisplayNumber } from "utils";
 import { ERC20_ABI } from "constants/abis/erc20";
 import { useActiveWeb3React } from "services/web3";
-import { useUserInfo } from "hooks/useAPI";
+import { useUserInfo, useUserTokenInfo } from "hooks/useAPI";
 import { Spinner } from "components/Spinner";
 import { Button } from "components/Button";
 import { useWalletModalToggle } from "state/application/hooks";
 import { i18n } from "@lingui/core";
-import { ContentBox, OverlayButton, Typo1, Typo2, Typo3 } from "components/index";
+import { ContentBox, Input, OverlayButton, Typo1, Typo2, Typo3 } from "components/index";
 import { TokenSelectOverlay } from "features/cross/crossStyles";
 import Typography from "components/Typography";
 import { formatNumber } from "functions/format";
@@ -45,6 +45,11 @@ import ModalContent from "pages/bridge/components/ModalContent";
 import Scrollbar from "components/Scrollbar";
 import { styled } from "@material-ui/styles";
 import { StyledOverlayButton } from "pages/bridge";
+import AssetInput from "components/AssetInput";
+import CurrencyInputPanel from "components/CurrencyInputPanel";
+import { ChainId } from "sdk";
+import { useETHBalances } from "state/wallet/hooks";
+import { e10 } from "functions/math";
 interface Exchange {
   from: { chain: Chain; token: Token };
   to: { chain: Chain; token: Token };
@@ -120,6 +125,7 @@ export default function Exchange() {
   const [fromUsd, setFromUsd] = useState<string>();
   const [toUsd, setToUsd] = useState<string>();
   const [amount, setAmount] = useState("");
+  const [fromBalance, setBalance] = useState("");
   const [trade, setTrade] = useState<InstantTrade | CrossChainTrade | undefined>(undefined);
   const [canBuy, setCanBuy] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -132,7 +138,14 @@ export default function Exchange() {
   }, []);
   const { account, chainId } = useActiveWeb3React()
   const { userInfo } = useUserInfo()
-  const nativeBalance = (Number(userInfo.nativeBalance) * 1E18).toFixed(0)
+  const { userTokenInfo } = useUserTokenInfo(account, from.address)
+
+  const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
+
+  const nativeBalance =
+    chainId == ChainId.FANTOM ? (Number(userInfo.nativeBalance) * 1E18).toFixed(0)
+      : userEthBalance
+
   const [wallet, setWallet] = useState<WalletProvider>(null);
 
   useEffect(() => {
@@ -153,10 +166,16 @@ export default function Exchange() {
         ...configuration,
         walletProvider: wallet || undefined,
       };
+
+      const userBalance = await getBalance()
+      const balance = Number(userBalance) / 10 ** (from?.decimals ? from?.decimals : 18)
+
       setConfiguration(newConfiguration);
       if (rubic) {
         await rubic.updateConfiguration(newConfiguration);
       }
+
+      setBalance(formatNumber(balance, false, true).toString());
     }
     update();
   }, [rubic, wallet]);
@@ -321,6 +340,8 @@ export default function Exchange() {
   const [showSelectFrom, setShowSelectFrom] = useState(false);
   const [showSelectTo, setShowSelectTo] = useState(false);
   const amountRef = useRef<HTMLInputElement>(null);
+  const fromAmount = fromUsd ? Number(trade?.from.tokenAmount) : 0
+  const toAmount = toUsd ? Number(trade?.to.tokenAmount) : 0
   const deltaUsd = fromUsd > toUsd ? Number(fromUsd) - Number(toUsd) : 0
   const deltaPercent = 100 * deltaUsd / Number(fromUsd)
   const [fromToken, setFromToken] = useState(null);
@@ -341,6 +362,7 @@ export default function Exchange() {
               setFrom(f.token);
               setFromChain(f.chain);
               setAmount("");
+              setBalance("")
               amountRef.current?.select();
             }}
           />
@@ -365,7 +387,7 @@ export default function Exchange() {
       }
       <Container id="cross-page" maxWidth="2xl" className="space-y-4">
         <DoubleGlowShadowV2>
-          <div className="p-4 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
+          <div className="p-4 mt-4 space-y-4 rounded bg-dark-1000" style={{ zIndex: 1 }}>
             <div className="px-2">
               <HeaderNew />
             </div>
@@ -374,47 +396,70 @@ export default function Exchange() {
 
               {/* [1] FROM TOKEN SELECTOR */}
 
-              {/* NETWORK LOGO */}
+              {/* [F] NETWORK LOGO */}
+              <div 
+                className="grid grid-cols-1 bg-dark-1000 border border-4 w-full"
+                style={{ borderColor: fromChain.color }}
+              >
               <Image
-                className="flex align-center rounded justify-center absolute m-[2px] p-[3px] h-[20px] w-[20px]"
-                width="48" height="48"
+                className="flex align-center justify-center"
+                width="72" height="72"
                 style={{ backgroundColor: fromChain.color }}
                 src={fromChain.logo}
                 alt={fromChain.name}
-              />
-              <div className="grid grid-cols-2 gap-1 mt-2 mb-2 rounded p-0 border border-dark-1000 w-full">
-                <Button
-                  className="flex align-center bg-dark-1000 w-full justify-center p-[20px]"
-                  onClick={() => setShowSelectFrom(true)}
-                > 
-                  <Image className="block object-fit:contain object-position:center items-center"
-                    src={from?.logo} width="42" height="42" alt={from?.name}
-                  />
-                </Button>
-  
-                <InputCurrencyBox
-                  // disabled={!from}
-                  value={amount}
-                  setValue={async (amount) => await setAmount(amount)}
-                  max={async () => setAmount(ethers.utils.formatUnits(await getBalance(), decimals))}
-                  variant="new"
-                />
-              </div>
-
-              {/* FROM CHAIN DETAILS */}
-              <div className={`flex flex-col gap-4 bg-dark-1000 p-6 border border-1 w-full space-y-1`}
-              style={{ backgroundColor: fromChain.color}}
+                onClick={() => setShowSelectFrom(true)}
               >
-                <div className="flex justify-center">
-                  <Typography className={classNames('text-lg font-bold', deltaPercent > 20 ? 'text-red' : 'text-white')} weight={600} fontFamily={'semi-bold'}>
-                    {trade
-                      ? `${formatNumber(Number(trade?.from.tokenAmount), false, true)} ${from.symbol} (${formatNumber(fromUsd, true, true)}) `
-                      : "0 ($0.00)"}
-                  </Typography>
+              </Image>
+
+              {/* <div 
+                className="grid grid-cols-2 border border-12 w-full"
+                style={{ borderColor: fromChain.color}}
+              > */}
+              <Button
+                  className="grid grid-cols-2 bg-dark-800 w-full justify-between"
+                  onClick={() => setShowSelectFrom(true)}
+                >
+                  <div className="p-2">
+                  <Image className="block object-fit:contain object-position:center items-center"
+                    src={from?.logo} width="64" height="64" alt={from?.name}
+                  />
+                  </div>
+                  <div className="mt-6 font-bold text-3xl">
+                    {from.symbol}
+                  </div>
+                </Button>
+
+                <div className="grid grid-cols-1">
+
+                  <div className={`flex flex-col p-8 w-full space-y-1 bg-dark-1000`}
+                    // style={{ backgroundColor: fromChain.color }}
+                  >
+                    <div className="flex justify-center">
+                      <Typography className={classNames('text-lg font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
+                        {trade
+                          ? `${formatNumber(Number(trade?.from.tokenAmount), false, true)} ${to.symbol} (${formatNumber(toUsd, true, true)}) `
+                          : "0 ($0.00)"}
+                      </Typography>
+                    </div>
+                  </div>
+                    <InputCurrencyBox
+                      // disabled={!from}
+                      value={amount}
+                      setValue={async (amount) => await setAmount(amount)}
+                      // max={async () => setAmount(ethers.utils.formatUnits(await getBalance(), decimals))}
+                      variant="new"
+                    />
+                    <Button
+                      onClick={async () => (setAmount(fromBalance))}
+                    >
+                      <div className="flex w-full text-md justify-end font-bold">
+                        MAX: {fromBalance}
+                      </div>
+                    </Button>
                 </div>
               </div>
 
-<div className="p-1 bg-dark-1000">
+              <div className="p-1 bg-dark-1000">
             {/* ARROW DOWN ICON */}
                 <Row style={{ justifyContent: "center", alignItems: "center" }}>
         <div style={{ height: "1px", width: "100%" }} />
@@ -437,72 +482,111 @@ export default function Exchange() {
       </Row>
                       </div>
 
-                {/* [2] TO TOKEN SELECTOR */}
-               {/* [TO] NETWORK LOGO */}
+              {/* [2] TO TOKEN SELECTOR */}
+              {/* [TO] NETWORK LOGO */}
+
+              {/* [T] NETWORK LOGO */}
+              <div 
+                className="grid grid-cols-1 bg-dark-1000 border border-4 w-full"
+                style={{ borderColor: fromChain.color }}
+              >
               <Image
-                    className="flex align-center rounded justify-center absolute m-[2px] p-[3px] h-[20px] w-[20px]"
-                    width="48" height="48"
-                    style={{ backgroundColor: toChain.color }}
-                    src={toChain.logo}
-                    alt={toChain.name}
-                  />
-              <div className="grid grid-cols-2 gap-1 mt-2 mb-2 rounded p-0 w-full">
+                className="flex w-full align-center justify-center"
+                width="64" height="64"
+                style={{ backgroundColor: toChain.color }}
+                src={toChain.logo}
+                alt={toChain.name}
+                onClick={() => setShowSelectTo(true)}
+              >
+              </Image>
+              
+
+              <div 
+                className="grid grid-cols-1 gap-1 border border-4 w-full"
+                style={{ borderColor: toChain.color }}
+              >
                 <Button
-                  className="flex align-center bg-dark-1000 w-full justify-center p-[20px]"
+                  className="flex align-center bg-dark-800 w-full justify-center p-[20px]"
                   onClick={() => setShowSelectTo(true)}
                 >
                   <Image className="block object-fit:contain object-position:center items-center"
-                    src={to?.logo} width="42" height="42" alt={to?.name}
+                    src={to?.logo} width="56" height="56" alt={to?.name}
                   />
-                </Button> 
-                <div className="text-white text-center justify-center p-6 font-bold w-full h-full bg-dark-1000">
-                  {amount
-                    ? `${formatNumber(trade?.to.tokenAmount, false, true)} ${to.symbol}`
-                    : "0"}
-                  {` (${formatNumber(toUsd, true, true)})`}
+
+                  <div className="hidden sm:p-4 sm:p-2 sm:ml-2 sm:font-bold sm:text-lg">
+                    {to.name}
+                    {to.symbol}
+                  </div>
+                </Button>
+                <div className={`flex flex-col gap-4 bg-dark-1000 p-8 w-full space-y-1`}
+                  // style={{ backgroundColor: toChain.color }}
+                >
+                  <div className="flex justify-center">
+                    <Typography className={classNames('sm:text-lg text-md font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
+                      {trade
+                        ? `${formatNumber(Number(trade?.to.tokenAmount), false, true)} 
+                        (${formatNumber(toUsd, true, true)}) `
+                        : "0 ($0.00)"}
+                    </Typography>
+                  </div>
                 </div>
               </div>
-                <div className="w-full bg-dark-1100">
-                  <div className="relative w-full bg-dark-900">
-                    <div className={`flex flex-col gap-4 bg-dark-1000 p-6 border border-1 w-full space-y-1`}
-                    style={{ backgroundColor: toChain.color}}>
-                      <div className="flex justify-center">
-                          <Typography className={classNames('text-lg font-bold', deltaPercent > 20 ? 'text-red' : 'text-white')} weight={600} fontFamily={'semi-bold'}>
-                            {trade
-                              ? `${formatNumber(Number(trade?.to.tokenAmount), false, true)} ${to.symbol} (${formatNumber(toUsd, true, true)}) `
-                              : "0 ($0.00)"}
-                          </Typography> 
-                        </div>
-                      </div>
-                    </div>
-                  <TradeDetail trade={trade} />
-                  {account && (
-                    <Button
-                      className="mt-8"
-                      variant="filled"
-                      color="gradient"
-                      onClick={async () => {
-                        setShowConfirmation("show");
-                        try {
-                          await trade?.swap({
-                            onConfirm: (_hash: any) => setShowConfirmation("hide"),
-                          });
-                        } catch (e) {
-                          if (e instanceof InsufficientFundsError) {
-                            setShowConfirmation("poor");
-                          } else {
-                            console.error(e);
-                            setShowConfirmation("hide");
-                          }
+              </div>
+
+              <div className="flex p-2 justify-center gap-6 text-lg text-center bg-dark-1000 font-bold">
+                {formatNumber(fromAmount, false, true)} {from.symbol} on {fromChain.name}
+                <ArrowRightIcon className="m-1" height="26px" />
+                {formatNumber(toAmount, false, true)} {to.symbol} on {toChain.name}
+              </div>
+
+              {/* HIGH-SLIPPAGE WARNING */}
+              {trade &&
+                <div className={deltaPercent < 20 ? 'hidden' : `flex flex-col rounded gap-4 bg-dark-1000 p-2 font-bold w-full space-y-1`}
+                // style={{ backgroundColor: deltaPercent > 20 ? 'black' : toChain.color}}
+                >
+                  <div className="flex font-bold justify-center">
+                    <Typography className={classNames('text-xl font-bold', 'font-bold text-white')} weight={600} fontFamily={'semi-bold'}>
+                      {trade
+                        ? `Warning High-Slippage: ${formatNumber(Number(deltaPercent), false, true)}%`
+                        : ""}
+                    </Typography>
+                  </div>
+                </div>
+              }
+              {/* </div> */}
+
+              <div className="py-2" />
+
+              {/* <TradeDetail trade={trade} /> */}
+              <div className="border rounded ">
+                {account && (
+                  <Button
+                    // className="h-[100%]"
+                    variant="filled"
+                    color="pink"
+                    onClick={async () => {
+                      setShowConfirmation("show");
+                      try {
+                        await trade?.swap({
+                          onConfirm: (_hash: any) => setShowConfirmation("hide"),
+                        });
+                      } catch (e) {
+                        if (e instanceof InsufficientFundsError) {
+                          setShowConfirmation("poor");
+                        } else {
+                          console.error(e);
+                          setShowConfirmation("hide");
                         }
-                      }}
-                      style={{ opacity: trade ? 1 : 0.5, cursor: trade ? "pointer" : "not-allowed" }}
-                      disabled={trade == undefined}
-                    >
-                      {fromChain.chainId === toChain.chainId ? "Swap" : "Swap Crosschain"}
-                    </Button>
-                  )}
-                </div>         
+                      }
+                    }}
+                    style={{ opacity: trade ? 1 : 0.5, cursor: trade ? "pointer" : "not-allowed" }}
+                    disabled={trade == undefined}
+                  >
+                    {fromChain.chainId === toChain.chainId ? "Swap" : "Swap Crosschain"}
+                  </Button>
+                )}
+                {/* </div> */}
+              </div>
             </SwapLayoutCard>
           </div>
         </DoubleGlowShadowV2>
@@ -656,7 +740,7 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
                 }}
               >
                 {/* SEARCH BAR */}
-                <input
+                <Input
                   ref={input}
                   className="w-[100%] border border-unset border-radius-[4px] text-black mb-2"
                   placeholder={`Search ${selectedChain.name} tokens`}

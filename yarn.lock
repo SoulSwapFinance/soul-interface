@@ -13362,7 +13362,6 @@ ganache-core@^2.13.2:
     ethereumjs-tx "2.1.2"
     ethereumjs-util "6.2.1"
     ethereumjs-vm "4.2.0"
-    ethereumjs-wallet "0.6.5"
     heap "0.2.6"
     keccak "3.0.1"
     level-sublevel "6.6.4"
@@ -13374,7 +13373,6 @@ ganache-core@^2.13.2:
     seedrandom "3.0.1"
     source-map-support "0.5.12"
     tmp "0.1.0"
-    web3 "1.2.11"
     web3-provider-engine "14.2.1"
     websocket "1.0.32"
   optionalDependencies:
@@ -13799,9 +13797,9 @@ graph-results-pager@^1.0.3:
   dependencies:
     node-fetch "2.6.1"
 
-"graph-results-pager@git+https://github.com/LufyCZ/graph-results-pager.git":
+"graph-results-pager@https://github.com/LufyCZ/graph-results-pager":
   version "1.0.3"
-  resolved "git+https://github.com/LufyCZ/graph-results-pager.git#9b230f05b8d79aeedc9e167ac5a1fea33e04d51f"
+  resolved "https://github.com/LufyCZ/graph-results-pager#9b230f05b8d79aeedc9e167ac5a1fea33e04d51f"
   dependencies:
     node-fetch "2.6.1"
 
@@ -24752,6 +24750,9 @@ web3-providers-ipc@1.5.3:
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/web3-providers-ipc/-/web3-providers-ipc-1.5.3.tgz#4bd7f5e445c2f3c2595fce0929c72bb879320a3f"
   integrity sha512-JmeAptugVpmXI39LGxUSAymx0NOFdgpuI1hGQfIhbEAcd4sv7fhfd5D+ZU4oLHbRI8IFr4qfGU0uhR8BXhDzlg==
+  dependencies:
+    oboe "2.1.5"
+    web3-core-helpers "1.5.3"
 
 web3-providers-ipc@1.7.4:
   version "1.7.4"
