@@ -165,7 +165,7 @@ export default function Exchange() {
       const newConfiguration: Configuration = {
         ...configuration,
         walletProvider: wallet || undefined,
-      };
+      }; 
 
       const userBalance = await getBalance()
       const balance = Number(userBalance) / 10 ** (from?.decimals ? from?.decimals : 18)
@@ -175,7 +175,7 @@ export default function Exchange() {
         await rubic.updateConfiguration(newConfiguration);
       }
 
-      setBalance(formatNumber(balance, false, true).toString());
+      setBalance(balance.toString());
     }
     update();
   }, [rubic, wallet]);
@@ -362,7 +362,7 @@ export default function Exchange() {
               setFrom(f.token);
               setFromChain(f.chain);
               setAmount("");
-              setBalance("")
+              setBalance("");
               amountRef.current?.select();
             }}
           />
@@ -429,7 +429,6 @@ export default function Exchange() {
                 <div className="grid grid-cols-1">
 
                   <div className={`flex flex-col p-8 w-full space-y-1 bg-dark-1000`}
-                    // style={{ backgroundColor: fromChain.color }}
                   >
                     <div className="flex justify-center">
                       <Typography className={classNames('text-lg font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
@@ -447,10 +446,14 @@ export default function Exchange() {
                       variant="new"
                     />
                     <Button
-                      onClick={async () => (setAmount(fromBalance))}
+                      onClick={ async () => setAmount(ethers.utils.formatUnits(await
+ getBalance(), decimals))}
                     >
                       <div className="flex w-full text-md justify-end font-bold">
-                        MAX: {fromBalance}
+                        MAX: {
+                          fromBalance 
+                          ? formatNumber(fromBalance, false, true)
+                          : '0' }
                       </div>
                     </Button>
                 </div>
