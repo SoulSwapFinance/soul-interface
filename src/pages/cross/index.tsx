@@ -374,7 +374,7 @@ export default function Exchange() {
 
               {/* [1] FROM TOKEN SELECTOR */}
 
-              {/* [F] NETWORK LOGO */}
+              {/* NETWORK LOGO */}
               <Image
                 className="flex align-center rounded justify-center absolute m-[2px] p-[3px] h-[20px] w-[20px]"
                 width="48" height="48"
@@ -396,7 +396,7 @@ export default function Exchange() {
                   // disabled={!from}
                   value={amount}
                   setValue={async (amount) => await setAmount(amount)}
-                  // max={async () => setAmount(ethers.utils.formatUnits(await getBalance(), decimals))}
+                  max={async () => setAmount(ethers.utils.formatUnits(await getBalance(), decimals))}
                   variant="new"
                 />
               </div>
@@ -414,7 +414,7 @@ export default function Exchange() {
                 </div>
               </div>
 
-{/* <div className="p-1 bg-dark-1000">
+<div className="p-1 bg-dark-1000">
             {/* ARROW DOWN ICON */}
                 <Row style={{ justifyContent: "center", alignItems: "center" }}>
         <div style={{ height: "1px", width: "100%" }} />
@@ -435,10 +435,10 @@ export default function Exchange() {
           </OverlayButton>
         <div style={{ height: "1px", width: "100%" }} />
       </Row>
-    </div> */}
+                      </div>
 
                 {/* [2] TO TOKEN SELECTOR */}
-               {/* [T] NETWORK LOGO */}
+               {/* [TO] NETWORK LOGO */}
               <Image
                     className="flex align-center rounded justify-center absolute m-[2px] p-[3px] h-[20px] w-[20px]"
                     width="48" height="48"
@@ -446,33 +446,22 @@ export default function Exchange() {
                     src={toChain.logo}
                     alt={toChain.name}
                   />
-                
-              <div className="grid grid-cols-2 gap-1 mt-2 mb-2 rounded p-0 border border-dark-1000 w-full">
-            <Button 
-            className="flex align-center bg-dark-1000 w-full justify-center p-[20px]"
-            onClick={() => setShowSelectTo(true)}
-            >                          
+              <div className="grid grid-cols-2 gap-1 mt-2 mb-2 rounded p-0 w-full">
+                <Button
+                  className="flex align-center bg-dark-1000 w-full justify-center p-[20px]"
+                  onClick={() => setShowSelectTo(true)}
+                >
                   <Image className="block object-fit:contain object-position:center items-center"
                     src={to?.logo} width="42" height="42" alt={to?.name}
                   />
-                </Button>
-                
-
-              {/* TO CHAIN DETAILS */}
-              <div className={`flex flex-col gap-4 bg-dark-1000 p-6 border border-1 w-full space-y-1`}
-              style={{ backgroundColor: toChain.color}}
-              >
-                <div className="flex justify-center">
-                  <Typography className={classNames('text-lg font-bold', deltaPercent > 20 ? 'text-red' : 'text-white')} weight={600} fontFamily={'semi-bold'}>
-                    {amount
+                </Button> 
+                <div className="text-white text-center justify-center p-6 font-bold w-full h-full bg-dark-1000">
+                  {amount
                     ? `${formatNumber(trade?.to.tokenAmount, false, true)} ${to.symbol}`
                     : "0"}
                   {` (${formatNumber(toUsd, true, true)})`}
-                  </Typography>
                 </div>
               </div>
-                </div>
-              
                 <div className="w-full bg-dark-1100">
                   <div className="relative w-full bg-dark-900">
                     <div className={`flex flex-col gap-4 bg-dark-1000 p-6 border border-1 w-full space-y-1`}
