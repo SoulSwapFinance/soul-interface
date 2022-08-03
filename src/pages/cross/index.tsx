@@ -411,10 +411,7 @@ export default function Exchange() {
               >
               </Image>
 
-              {/* <div 
-                className="grid grid-cols-2 border border-12 w-full"
-                style={{ borderColor: fromChain.color}}
-              > */}
+
               <Button
                   className="grid grid-cols-2 bg-dark-800 w-full justify-between"
                   onClick={() => setShowSelectFrom(true)}
@@ -499,27 +496,22 @@ export default function Exchange() {
                 onClick={() => setShowSelectTo(true)}
               >
               </Image>
-              
 
-              <div 
-                className="grid grid-cols-1 gap-1 border border-4 w-full"
-                style={{ borderColor: toChain.color }}
-              >
-                <Button
-                  className="flex align-center bg-dark-800 w-full justify-center p-[20px]"
+              <Button
+                  className="grid grid-cols-2 bg-dark-800 w-full justify-between"
                   onClick={() => setShowSelectTo(true)}
                 >
+                  <div className="p-2">
                   <Image className="block object-fit:contain object-position:center items-center"
-                    src={to?.logo} width="56" height="56" alt={to?.name}
+                    src={to?.logo} width="64" height="64" alt={to?.name}
                   />
-
-                  <div className="hidden sm:p-4 sm:p-2 sm:ml-2 sm:font-bold sm:text-lg">
-                    {to.name}
+                  </div>
+                  <div className="mt-6 font-bold text-3xl">
                     {to.symbol}
                   </div>
                 </Button>
+
                 <div className={`flex flex-col gap-4 bg-dark-1000 p-8 w-full space-y-1`}
-                  // style={{ backgroundColor: toChain.color }}
                 >
                   <div className="flex justify-center">
                     <Typography className={classNames('sm:text-lg text-md font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
@@ -531,7 +523,7 @@ export default function Exchange() {
                   </div>
                 </div>
               </div>
-              </div>
+            </div> 
 
               <div className="flex p-2 justify-center gap-6 text-lg text-center bg-dark-1000 font-bold">
                 {formatNumber(fromAmount, false, true)} {from.symbol} on {fromChain.name}
