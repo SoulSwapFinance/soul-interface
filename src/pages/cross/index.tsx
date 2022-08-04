@@ -39,10 +39,14 @@ import { useETHBalances } from "state/wallet/hooks";
 import { NETWORK_ICON, NETWORK_LABEL } from "config/networks";
 import NetworkModal from "modals/NetworkModal";
 // import { e10 } from "functions/math";
+import { useCurrency } from 'hooks/Tokens'
+
+
 interface Exchange {
   from: { chain: Chain; token: Token };
   to: { chain: Chain; token: Token };
 }
+
 function getLastExchange(): Exchange {
   const lastExchange = JSON.parse(localStorage.getItem("exchange"));
   if (!lastExchange) {
@@ -136,6 +140,9 @@ export default function Exchange() {
       : userEthBalance
 
   const [wallet, setWallet] = useState<WalletProvider>(null);
+  
+  const fromCurrency = useCurrency(from.address)
+  const toCurrency = useCurrency(to.address)
 
   useEffect(() => {
     if (!account) {
@@ -445,8 +452,9 @@ export default function Exchange() {
                 >
                   <div className="">
                      <CurrencyLogo 
-                      currency={from} 
-                      size={'64px'} 
+                      currency={fromCurrency} 
+                      size={'64px'}
+                      className="block object-fit:contain object-position:center items-center"
                      />
                    {/* <Image className="block object-fit:contain object-position:center items-center"
                       src={from?.logo} width="64" height="64" alt={from?.name}
@@ -548,9 +556,15 @@ export default function Exchange() {
                   onClick={() => setShowSelectTo(true)}
                 >
                   <div className="">
-                    <Image className="block object-fit:contain object-position:center items-center"
-                      src={to?.logo} width="64" height="64" alt={to?.name}
+                    <CurrencyLogo 
+                      currency={toCurrency} 
+                      size={'64px'}
+                      className="block object-fit:contain object-position:center items-center"
                     />
+                    {/* <Image 
+                    className="block object-fit:contain object-position:center items-center"
+                      src={to?.logo} width="64" height="64" alt={to?.name}
+                    /> */}
                   </div>
 
                   <div className="m-4 font-bold text-2xl">
@@ -822,7 +836,7 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
               {/* {filter && */}
               <div className="grid grid-cols-5 bg-dark-1100 w-full" ref={tokensList}>
                 {filteredTokens.map(token => (
-                  <div className="flex border border-2 border-dark-1000 p-1 rounded rounded-3xl bg-black m-2 font-bold text-center justify-center" key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
+                  <div className="flex border border-2 border-dark-1000 p-1 rounded rounded-3xl bg-black trxm-2 font-bold text-center justify-center" key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
                     <Image src={token.logo} width="56" height="56" alt={token.name + ' logo'} />
                     {/* <div className="flex text-xl">{token.symbol}</div> */}
                     {token.favorite && <StarIcon width="16" height="16" className="token-favorite" />}
