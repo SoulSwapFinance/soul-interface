@@ -49,6 +49,7 @@ const FILLED = {
     'w-full text-high-emphesis bg-gradient-to-r from-blue to-purple opacity-80 hover:opacity-100 disabled:bg-opacity-80',
     gradientPurpleBlue:
     'w-full text-high-emphesis bg-gradient-to-r from-purple to-blue opacity-80 hover:opacity-100 disabled:bg-opacity-80',
+    black: 'bg-transparent opacity-95 hover:opacity-100',
 }
 
 const OUTLINED = {

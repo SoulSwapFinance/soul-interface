@@ -449,6 +449,8 @@ export default function Exchange() {
                 <Button
                   className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
                   onClick={() => setShowSelectFrom(true)}
+                  variant={'filled'}
+                  color={'black'}
                 >
                   <div className="">
                    <Image className="block object-fit:contain object-position:center items-center"
@@ -549,6 +551,8 @@ export default function Exchange() {
                 <Button
                   className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
                   onClick={() => setShowSelectTo(true)}
+                  variant={'outlined'}
+                  color={'black'}
                 >
                   <div className="">
                     <Image 
