@@ -1,3 +1,4 @@
+
 import React, { useEffect, useMemo, useRef, useState, FC, VFC } from "react";
 import Image from "next/image";
 import SDK, {
@@ -33,7 +34,6 @@ import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
 import HeaderNew from "features/trade/HeaderNew";
 import { SwapLayoutCard } from "layouts/SwapLayout";
 import Modal from "components/DefaultModal";
-import { CurrencyLogo } from "components/CurrencyLogo"
 import { ChainId } from "sdk";
 import { useETHBalances } from "state/wallet/hooks";
 import { NETWORK_ICON, NETWORK_LABEL } from "config/networks";
@@ -135,7 +135,10 @@ export default function Exchange() {
 
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
 
-  const nativeBalance = userEthBalance
+  const nativeBalance =
+    fromChain?.chainId == ChainId.FANTOM ? (Number(userInfo.nativeBalance) * 1E18).toFixed(0)
+      : userEthBalance
+
   const [wallet, setWallet] = useState<WalletProvider>(null);
   
   const fromCurrency = useCurrency(from.address)
@@ -446,8 +449,6 @@ export default function Exchange() {
                 <Button
                   className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
                   onClick={() => setShowSelectFrom(true)}
-                  variant="bordered"
-                  color="black"
                 >
                   <div className="">
                    <Image className="block object-fit:contain object-position:center items-center"
@@ -499,7 +500,29 @@ export default function Exchange() {
                   </Button>
                 </div>
               </div>
-  
+
+              {/* <div className="p-1 bg-dark-1000">
+            // ARROW DOWN ICON 
+                <Row style={{ justifyContent: "center", alignItems: "center" }}>
+        <div style={{ height: "1px", width: "100%" }} />
+          <OverlayButton 
+            style={{ padding: 0 }} 
+            // onClick={handleSwap}
+          >
+              <AutoColumn justify="space-between" className="py-2 -my-4 py-4">
+                  <div className="flex justify-center mt-2.5 mb-2.5 z-0">
+                    <div
+                      role="button"
+                      className="p-2.5 rounded-full bg-dark-1000 border shadow-md border-dark-700"
+                      >
+                      <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
+                    </div>
+                  </div>
+                </AutoColumn>
+          </OverlayButton>
+        <div style={{ height: "1px", width: "100%" }} />
+      </Row>
+                      </div> *\}
               {/* [2] TO TOKEN SELECTOR */}
               {/* [T] NETWORK LOGO */}
               <div
@@ -523,22 +546,9 @@ export default function Exchange() {
                   className={"flex w-full border border-4"}
                   style={{ borderColor: toChain.color }}
                 />
-                 
-            {/* TODO: REMOVE BELOW COMMENT */}
-              {/* height="2rem"
-              width="50%"
-              // primaryColor="#F4A703"
-              // primaryColor="yellow"
-              primaryColor="#E6BD02"
-              color="black"
-              margin=".5rem 0 .5rem 0"
-              * /}
-          
-                 <Button
+                <Button
                   className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
                   onClick={() => setShowSelectTo(true)}
-                  variant="bordered"
-                  color="black"
                 >
                   <div className="">
                     <Image 
@@ -618,6 +628,7 @@ export default function Exchange() {
                   <Button
                     className="h-[60px]"
                     variant="bordered"
+                    // fullWidth
                     color="black"
                     onClick={async () => {
                       setShowConfirmation("show");
