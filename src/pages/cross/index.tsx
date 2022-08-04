@@ -13,6 +13,7 @@ import { sleep } from "utils/sleep";
 import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, CheckIcon, ChevronDownIcon, StarIcon } from '@heroicons/react/solid'
 import { BigNumber as EthersBigNumber, ethers } from "ethers";
 import { FANTOM, AVALANCHE, BINANCE, Chain, CHAINS, ETHEREUM, MOONRIVER, POLYGON, Token } from "constants/cross/Chains";
+import { CurrencyLogo } from "components/CurrencyLogo"
 import { prettyDisplayNumber } from "utils";
 import { ERC20_ABI } from "constants/abis/erc20";
 import { useActiveWeb3React } from "services/web3";
@@ -503,9 +504,15 @@ export default function Exchange() {
                   onClick={() => setShowSelectTo(true)}
                 >
                   <div className="p-2">
-                  <Image className="block object-fit:contain object-position:center items-center"
-                    src={to?.logo} width="64" height="64" alt={to?.name}
+                  <CurrencyLogo 
+                    currency={to} 
+                    size={size === 'md' ? 48 : 40} 
+                    // className="!rounded-full"
+                    className="block object-fit:contain object-position:center items-center"
                   />
+                  {/* <Image className="block object-fit:contain object-position:center items-center"
+                    src={to?.logo} width="64" height="64" alt={to?.name}
+                  /> */}
                   </div>
                   <div className="mt-6 font-bold text-3xl">
                     {to.symbol}
@@ -549,7 +556,7 @@ export default function Exchange() {
               <div className="py-2" />
 
               {/* <TradeDetail trade={trade} /> */}
-              <div className="rounded ">
+              <div className="rounded">
                 {account && (
                   <Button
                     // className="h-[100%]"
