@@ -12,17 +12,17 @@ import SDK, {
 import { sleep } from "utils/sleep";
 import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, CheckIcon, ChevronDownIcon, StarIcon } from '@heroicons/react/solid'
 import { BigNumber as EthersBigNumber, ethers } from "ethers";
-import { FANTOM, AVALANCHE, BINANCE, Chain, CHAINS, ETHEREUM, MOONRIVER, POLYGON, Token } from "constants/cross/Chains";
-import { prettyDisplayNumber } from "utils";
+import { FANTOM, AVALANCHE, BINANCE, Chain, CHAINS, ETHEREUM, POLYGON, Token } from "constants/cross/Chains"; // MOONRIVER
+// import { prettyDisplayNumber } from "utils";
 import { ERC20_ABI } from "constants/abis/erc20";
 import { useActiveWeb3React } from "services/web3";
 import { useUserInfo, useUserTokenInfo } from "hooks/useAPI";
-import { Spinner } from "components/Spinner";
+// import { Spinner } from "components/Spinner";
 import { Button } from "components/Button";
-import { useWalletModalToggle } from "state/application/hooks";
-import { i18n } from "@lingui/core";
+import { useNetworkModalToggle, useWalletModalToggle } from "state/application/hooks";
+// import { i18n } from "@lingui/core";
 import { ContentBox, Input, OverlayButton, Typo1, Typo2, Typo3 } from "components/index";
-import { TokenSelectOverlay } from "features/cross/crossStyles";
+// import { TokenSelectOverlay } from "features/cross/crossStyles";
 import Typography from "components/Typography";
 import { formatNumber } from "functions/format";
 import { classNames } from "functions/styling";
@@ -35,21 +35,23 @@ import { SwapLayoutCard } from "layouts/SwapLayout";
 import Modal from "components/DefaultModal";
 // import Modal from "../bridge/components/Modal";
 
-import ModalBody from "components/Modal/Body";
-import Row from "components/Row";
-import useModal from "hooks/useModal";
-import Column, { AutoColumn } from "components/Column";
-import Loader from "components/Loader";
-import { weiToUnit } from "utils/conversion";
-import ModalContent from "pages/bridge/components/ModalContent";
-import Scrollbar from "components/Scrollbar";
-import { styled } from "@material-ui/styles";
-import { StyledOverlayButton } from "pages/bridge";
-import AssetInput from "components/AssetInput";
-import CurrencyInputPanel from "components/CurrencyInputPanel";
+// import ModalBody from "components/Modal/Body";
+// import Row from "components/Row";
+// import useModal from "hooks/useModal";
+// import Column, { AutoColumn } from "components/Column";
+// import Loader from "components/Loader";
+// import { weiToUnit } from "utils/conversion";
+// import ModalContent from "pages/bridge/components/ModalContent";
+// import Scrollbar from "components/Scrollbar";
+// import { styled } from "@material-ui/styles";
+// import { StyledOverlayButton } from "pages/bridge";
+// import AssetInput from "components/AssetInput";
+// import CurrencyInputPanel from "components/CurrencyInputPanel";
 import { ChainId } from "sdk";
 import { useETHBalances } from "state/wallet/hooks";
-import { e10 } from "functions/math";
+import { NETWORK_ICON, NETWORK_LABEL } from "config/networks";
+import NetworkModal from "modals/NetworkModal";
+// import { e10 } from "functions/math";
 interface Exchange {
   from: { chain: Chain; token: Token };
   to: { chain: Chain; token: Token };
@@ -72,7 +74,7 @@ function setLastExchange(from: { chain: Chain; token: Token }, to: { chain: Chai
     "exchange",
     JSON.stringify({
       from: { chain: from.chain.chainId, token: from.token.id },
-      to: { chain: to.chain.chainId, token: to.token.id },
+      to: { chain: to.chain.chainId, token: to.token?.id },
     }),
   );
 }
@@ -81,7 +83,7 @@ const NATIVE_ADDRESS = "0x0000000000000000000000000000000000000000";
 
 const RUBIC_CHAIN_BY_ID = new Map([
   [FANTOM.chainId, BLOCKCHAIN_NAME.FANTOM],
-  [MOONRIVER.chainId, BLOCKCHAIN_NAME.MOONRIVER],
+  // [MOONRIVER.chainId, BLOCKCHAIN_NAME.MOONRIVER],
   [POLYGON.chainId, BLOCKCHAIN_NAME.POLYGON],
   [AVALANCHE.chainId, BLOCKCHAIN_NAME.AVALANCHE],
   [ETHEREUM.chainId, BLOCKCHAIN_NAME.ETHEREUM],
@@ -93,9 +95,9 @@ const rubicConfiguration: Configuration = {
     [BLOCKCHAIN_NAME.BINANCE_SMART_CHAIN]: {
       mainRpc: BINANCE.rpc[0],
     },
-    [BLOCKCHAIN_NAME.MOONRIVER]: {
-      mainRpc: MOONRIVER.rpc[0],
-    },
+    // [BLOCKCHAIN_NAME.MOONRIVER]: {
+    //   mainRpc: MOONRIVER.rpc[0],
+    // },
     [BLOCKCHAIN_NAME.POLYGON]: {
       mainRpc: POLYGON.rpc[0],
     },
@@ -165,7 +167,7 @@ export default function Exchange() {
       const newConfiguration: Configuration = {
         ...configuration,
         walletProvider: wallet || undefined,
-      }; 
+      };
 
       const userBalance = await getBalance()
       const balance = Number(userBalance) / 10 ** (from?.decimals ? from?.decimals : 18)
@@ -344,8 +346,10 @@ export default function Exchange() {
   const toAmount = toUsd ? Number(trade?.to.tokenAmount) : 0
   const deltaUsd = fromUsd > toUsd ? Number(fromUsd) - Number(toUsd) : 0
   const deltaPercent = 100 * deltaUsd / Number(fromUsd)
-  const [fromToken, setFromToken] = useState(null);
-  const [toToken, setToToken] = useState(null);
+  // const [fromToken, setFromToken] = useState(null);
+  // const [toToken, setToToken] = useState(null);
+  const toggleNetworkModal = useNetworkModalToggle()
+  const wrongNetwork = fromChain.chainId != chainId ? true : false
 
   return (
     <>
@@ -354,6 +358,7 @@ export default function Exchange() {
           <TokenSelect
             show={showSelectFrom}
             chain={fromChain}
+            // chain={fromChain}
             onClose={f => {
               setShowSelectFrom(false);
               if (!f) {
@@ -397,29 +402,56 @@ export default function Exchange() {
               {/* [1] FROM TOKEN SELECTOR */}
 
               {/* [F] NETWORK LOGO */}
-              <div 
-                className="grid grid-cols-1 bg-dark-1000 border border-4 w-full"
+              <div
+                className="grid grid-cols-1 rounded bg-dark-1000 border border-4 w-full"
                 style={{ borderColor: fromChain.color }}
               >
-              <Image
-                className="flex align-center justify-center"
-                width="72" height="72"
-                style={{ backgroundColor: fromChain.color }}
-                src={fromChain.logo}
-                alt={fromChain.name}
-                onClick={() => setShowSelectFrom(true)}
-              >
-              </Image>
-
-
-              <Button
+              { wrongNetwork &&
+                <div
+                  className="grid grid-cols-2 items-center border-4 rounded border-dark-1000 bg-dark-1000 hover:bg-dark-900 whitespace-nowrap text-md justify-center font-bold cursor-pointer select-none pointer-events-auto"
+                  onClick={() => toggleNetworkModal()}
+                >
+                  <div 
+                    className="hidden lg:flex lg:rounded lg:rounded-2xl lg:m-4 lg:text-center lg:text-lg lg:justify-center lg:p-3 lg:border"
+                    style={{ borderColor: fromChain.color }}
+                  >
+                    Switch to { fromChain?.name } Network
+                  </div>
+                  <div 
+                    className="lg:hidden flex rounded rounded-2xl m-4 text-center text-lg justify-center p-2 border"
+                    style={{ borderColor: fromChain.color }}
+                  >
+                    Switch Network
+                  </div>
+                    <Image 
+                      src={fromChain.logo} 
+                      alt="Switch Network" 
+                      className="flex align-center justify-center"
+                      // style={{ backgroundColor: fromChain.color }}
+                      width="72" height="72"
+                      // width="22px" height="22px" 
+                    />
+                  <NetworkModal />
+                  {/* {NETWORK_LABEL[chainId]} */}
+                </div>
+                }
+                <Image
+                  className="flex align-center justify-center"
+                  width="36" height="36"
+                  style={{ backgroundColor: fromChain.color }}
+                  src={fromChain.logo}
+                  alt={fromChain.name}
+                  onClick={() => setShowSelectFrom(true)}
+                >
+                </Image>
+                <Button
                   className="grid grid-cols-2 bg-dark-800 w-full justify-between"
                   onClick={() => setShowSelectFrom(true)}
                 >
                   <div className="p-2">
-                  <Image className="block object-fit:contain object-position:center items-center"
-                    src={from?.logo} width="64" height="64" alt={from?.name}
-                  />
+                    <Image className="block object-fit:contain object-position:center items-center"
+                      src={from?.logo} width="64" height="64" alt={from?.name}
+                    />
                   </div>
                   <div className="mt-6 font-bold text-3xl">
                     {from.symbol}
@@ -438,28 +470,28 @@ export default function Exchange() {
                       </Typography>
                     </div>
                   </div>
-                    <InputCurrencyBox
-                      disabled={!from}
-                      value={amount}
-                      setValue={async (amount) => await setAmount(amount)}
-                      // max={async () => setAmount(ethers.utils.formatUnits(await getBalance(), decimals))}
-                      variant="new"
-                    />
-                    <Button
-                      onClick={ async () => setAmount(ethers.utils.formatUnits(await
- getBalance(), decimals))}
-                    >
-                      <div className="flex w-full text-md justify-end font-bold">
-                        MAX: {
-                          fromBalance 
+                  <InputCurrencyBox
+                    disabled={!from}
+                    value={amount}
+                    setValue={async (amount) => await setAmount(amount)}
+                    // max={async () => setAmount(ethers.utils.formatUnits(await getBalance(), decimals))}
+                    variant="new"
+                  />
+                  <Button
+                    onClick={async () => setAmount(ethers.utils.formatUnits(await
+                      getBalance(), decimals))}
+                  >
+                    <div className="flex w-full text-md justify-end font-bold">
+                      MAX: {
+                        fromBalance
                           ? formatNumber(fromBalance, false, true)
-                          : '0' }
-                      </div>
-                    </Button>
+                          : '0'}
+                    </div>
+                  </Button>
                 </div>
               </div>
 
-             {/* <div className="p-1 bg-dark-1000">
+              {/* <div className="p-1 bg-dark-1000">
             // ARROW DOWN ICON 
                 <Row style={{ justifyContent: "center", alignItems: "center" }}>
         <div style={{ height: "1px", width: "100%" }} />
@@ -484,31 +516,31 @@ export default function Exchange() {
 
               {/* [2] TO TOKEN SELECTOR */}
               {/* [T] NETWORK LOGO */}
-              <div 
-                className="grid grid-cols-1 bg-dark-1000 border border-4 w-full"
+              <div
+                className="grid grid-cols-1 rounded bg-dark-1000 border border-4 w-full"
                 style={{ borderColor: toChain.color }}
               >
-              <Image
-                className="flex w-full align-center justify-center"
-                width="64" height="64"
-                style={{ backgroundColor: toChain.color }}
-                src={toChain.logo}
-                alt={toChain.name}
-                onClick={() => setShowSelectTo(true)}
-              >
-              </Image>
+                <Image
+                  className="flex w-full align-center justify-center"
+                  width="36" height="36"
+                  style={{ backgroundColor: toChain.color }}
+                  src={toChain.logo}
+                  alt={toChain.name}
+                  onClick={() => setShowSelectTo(true)}
+                >
+                </Image>
 
-              <Button
+                <Button
                   className="grid grid-cols-2 bg-dark-800 w-full justify-between"
                   onClick={() => setShowSelectTo(true)}
                 >
                   <div className="p-2">
-                  <Image className="block object-fit:contain object-position:center items-center"
-                    src={to?.logo} width="64" height="64" alt={to?.name}
-                  />
+                    <Image className="block object-fit:contain object-position:center items-center"
+                      src={to?.logo} width="64" height="64" alt={to?.name}
+                    />
                   </div>
                   <div className="mt-6 font-bold text-3xl">
-                    {to.symbol}
+                    {to?.symbol}
                   </div>
                 </Button>
 
@@ -517,17 +549,17 @@ export default function Exchange() {
                   <div className="flex justify-center">
                     <Typography className={classNames('sm:text-lg text-md font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
                       {trade
-                        ? `${formatNumber(Number(trade?.to.tokenAmount), false, true)} ${to.symbol} (${formatNumber(toUsd, true, true)})`
+                        ? `${formatNumber(Number(trade?.to.tokenAmount), false, true)} ${to?.symbol} (${formatNumber(toUsd, true, true)})`
                         : "0 ($0.00)"}
                     </Typography>
                   </div>
                 </div>
-               </div>
+              </div>
 
               <div className="flex p-2 justify-center gap-6 text-lg text-center bg-dark-1000 font-bold">
                 {formatNumber(fromAmount, false, true)} {from.symbol} on {fromChain.name}
                 <ArrowRightIcon className="m-1" height="26px" />
-                {formatNumber(toAmount, false, true)} {to.symbol} on {toChain.name}
+                {formatNumber(toAmount, false, true)} {to?.symbol} on {toChain.name}
               </div>
 
               {/* HIGH-SLIPPAGE WARNING */}
@@ -679,7 +711,9 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
 
           {/* CHAIN SELECTION */}
           <Modal
-            isOpen={isShowingChainSelect} onDismiss={() => onClose()}
+            isOpen={isShowingChainSelect} 
+            onDismiss={() => onClose()}
+            isCustom={true}
           >
             <div className="flex justify-center">
               {CHAINS.map((chain, i) => (
@@ -713,7 +747,12 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
             pointerEvents: show ? "all" : "none",
           }}
         >
-          <Modal isOpen={true} onDismiss={() => onClose()}>
+          <Modal 
+            isOpen={true} 
+            isCustom={true}
+            onDismiss={() => onClose()}
+            borderColor={selectedChain?.color}
+          >
             <div className="bg-dark-900 padding-[10px]">
               <Button
                 className="flex p-[10px] w-[100%] gap-[8px] align-center items-center"
@@ -742,17 +781,17 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
               </form>
 
               {/* SELECT TOKEN LIST */}
-              {filter &&
-                <div className="grid grid-cols-8 bg-dark-1100 w-full" ref={tokensList}>
-                  {filteredTokens.map(token => (
-                    <div className="flex justify-center" key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
-                      <Image src={token.logo} width="48" height="48" alt={token.name + ' logo'} />
-                      {/* <div className="flex text-xl">{token.symbol}</div> */}
-                      {/* {token.favorite && <StarIcon width="16" height="16" className="token-favorite" />} */}
-                    </div>
-                  ))}
-                </div>
-              }
+              {/* {filter && */}
+              <div className="grid grid-cols-5 bg-dark-1100 w-full" ref={tokensList}>
+                {filteredTokens.map(token => (
+                  <div className="flex border border-2 border-dark-1000 p-1 rounded rounded-3xl bg-black m-2 font-bold text-center justify-center" key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
+                    <Image src={token.logo} width="56" height="56" alt={token.name + ' logo'} />
+                    {/* <div className="flex text-xl">{token.symbol}</div> */}
+                    {token.favorite && <StarIcon width="16" height="16" className="token-favorite" />}
+                  </div>
+                ))}
+              </div>
+              {/* } */}
             </div>
           </Modal>
         </div>
