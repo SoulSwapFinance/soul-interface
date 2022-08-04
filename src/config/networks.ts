@@ -1,12 +1,12 @@
 import { ChainId } from '../sdk'
 
-const Mainnet = '/images/networks/mainnet-network.jpg'
+const Mainnet = 'https://cryptologos.cc/logos/ethereum-eth-logo.svg'
 const Telos = '/images/networks/telos.png'
 const Avalanche = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/Avalanche.svg'
 const Polygon = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/polygon/Polygon.svg'
 const Arbitrum = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/arbitrum/Arbitrum.png'
-const Binance = '/images/networks/bsc.png'
-const Fantom = '/images/networks/fantom-network.jpg'
+const Binance = 'https://cryptologos.cc/logos/bnb-bnb-logo.svg'
+const Fantom = 'https://cryptologos.cc/logos/fantom-ftm-logo.svg'
 
 export const NETWORK_ICON = {
   [ChainId.ETHEREUM]: Mainnet,
