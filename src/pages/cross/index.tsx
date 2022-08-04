@@ -571,7 +571,7 @@ export default function Exchange() {
                   <div className="m-4 font-bold text-2xl">
                     {to.symbol}
                   </div>
-                </Button>
+                </SubmitButton>
                 <div
                   className={"flex w-full border border-2"}
                   style={{ borderColor: toChain.color }}
