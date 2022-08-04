@@ -19,7 +19,7 @@
             "rank": 47,
             "logo": "https://cryptologos.cc/logos/polygon-matic-logo.svg",
             "symbol": "MATIC",
-            "address": "0x0000000000000000000000000000000000001010",
+            "address": "0x0000000000000000000000000000000000000000",
             "isNative": true,
             "decimals": 18
         },

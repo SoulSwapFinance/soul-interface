@@ -816,13 +816,13 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
                 {/* <ChevronDownIcon width="13" height="13" style={{ color: "white", marginTop: 2 }} /> */}
               </Button>
 
-              <form
+          {/* SEARCH BAR */}
+            {/*  <form
                 onSubmit={e => {
                   e.preventDefault();
                   onClose({ token: filteredTokens[0], chain: selectedChain });
                 }}
               >
-                {/* SEARCH BAR */}
                 <Input
                   ref={input}
                   className="w-[100%] border border-unset border-radius-[4px] text-black mb-2"
@@ -831,6 +831,7 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
                   onChange={e => setFilter(e.currentTarget.value)}
                 />
               </form>
+              */}
 
               {/* SELECT TOKEN LIST */}
               {/* {filter && */}

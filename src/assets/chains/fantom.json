@@ -27,7 +27,7 @@
             "symbol": "FTM",
             "logo": "https://cryptologos.cc/logos/fantom-ftm-logo.svg",
             "rank": 26,
-            "address": "0x",
+            "address": "0x0000000000000000000000000000000000000000",
             "isNative": true,
             "decimals": 18
         },
