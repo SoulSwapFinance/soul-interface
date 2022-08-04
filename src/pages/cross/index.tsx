@@ -451,14 +451,9 @@ export default function Exchange() {
                   onClick={() => setShowSelectFrom(true)}
                 >
                   <div className="">
-                     <CurrencyLogo 
-                      currency={fromCurrency} 
-                      size={'64px'}
-                      className="block object-fit:contain object-position:center items-center"
-                     />
-                   {/* <Image className="block object-fit:contain object-position:center items-center"
+                   <Image className="block object-fit:contain object-position:center items-center"
                       src={from?.logo} width="64" height="64" alt={from?.name}
-                    /> */}
+                    />
                   </div>
 
                   <div className="m-4 font-bold text-2xl">
@@ -551,20 +546,26 @@ export default function Exchange() {
                   className={"flex w-full border border-4"}
                   style={{ borderColor: toChain.color }}
                 />
-                <Button
+                 
+            {/* TODO: REMOVE BELOW COMMENT */}
+              {/* height="2rem"
+              width="50%"
+              // primaryColor="#F4A703"
+              // primaryColor="yellow"
+              primaryColor="#E6BD02"
+              color="black"
+              margin=".5rem 0 .5rem 0"
+              * /}
+          
+                 <SubmitButton
                   className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
                   onClick={() => setShowSelectTo(true)}
                 >
                   <div className="">
-                    <CurrencyLogo 
-                      currency={toCurrency} 
-                      size={'64px'}
-                      className="block object-fit:contain object-position:center items-center"
-                    />
-                    {/* <Image 
+                    <Image 
                     className="block object-fit:contain object-position:center items-center"
                       src={to?.logo} width="64" height="64" alt={to?.name}
-                    /> */}
+                    />
                   </div>
 
                   <div className="m-4 font-bold text-2xl">
