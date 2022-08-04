@@ -529,7 +529,6 @@ export default function Exchange() {
         <div style={{ height: "1px", width: "100%" }} />
       </Row>
                       </div> *\}
-
               {/* [2] TO TOKEN SELECTOR */}
               {/* [T] NETWORK LOGO */}
               <div
@@ -632,33 +631,6 @@ export default function Exchange() {
               >
                 {account && (
                   <Button
-                    // className="h                  <div className="p-2">
-                  <CurrencyLogo 
-                    currency={to} 
-                    size={size === 'md' ? 48 : 40} 
-                    // className="!rounded-full"
-                    className="block object-fit:contain object-position:center items-center"
-                  />
-                  {/* <Image className="block object-fit:contain object-position:center items-center"
-                    src={to?.logo} width="64" height="64" alt={to?.name}
-                  /> */}
->>>>>>>-develop-v3
-or");
-                  </Image>
-                <div
-                  className={"flex w-full border border-4"}
-                  style={{ borderColor: toChain.color }}
-                />
-                <Button
-                  className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
-                  onClick={() => setShowSelectTo(true)}
-                >
-                  <div className="">
-                    <Image className="block object-fit:contain object-position:center items-center"
-                      src={to?.logo} width="64" height="64" alt={to?.name}
-                    />
->>>>>>>+origin/develop-
-
                     className="h-[60px]"
                     variant="bordered"
                     // fullWidth
@@ -771,16 +743,10 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
     <div className={'absolute top-20 left-0 w-[100vw] h-[0vh] z-[1000] opacity'
     } style={{ opacity: show ? 1 : 0, pointerEvents: show ? "unset" : "none" }}>
       <div className="absolute top-0 left-0 w-[100%] h-[100%]" onClick={() => onClose()} />
-      <div className={classNames(show ? "absolute               <div className="rounded">
->>>>>>>-develop-v3
-}
-                    <div
-                className="rounded border border-2"
-                style={{ borderColor: toChain.color, backgroundColor: toChain.color }}
-
-              >
->>>>>>>+origin/develop-
-style={{ transform: `translate(0%, calc(0% + ${show ? 360 : 30}px))` }} */
+      <div className={classNames(show ? "absolute left-[15%] bottom-[10%] top-[50%] max-w-[28ch]" : 'hidden')}
+        /* <div className={classNames(show ? "grid h-[95px] w-[100%] max-h-[768px] max-w-[28ch]" : 'hidden')} */
+        style={{ transform: `translate(-50%, calc(-50% + ${show ? 0 : 30}px))` }}
+      /* // style={{ transform: `translate(0%, calc(0% + ${show ? 360 : 30}px))` }} */
       >
         <div
           className={classNames(isShowingChainSelect ? "w-full h-full top-0 left-0 z-10 bg-dark-1100" : "hidden")}
@@ -880,4 +846,3 @@ style={{ transform: `translate(0%, calc(0% + ${show ? 360 : 30}px))` }} */
     </div>
   );
 };
-
