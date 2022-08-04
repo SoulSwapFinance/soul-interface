@@ -12,18 +12,17 @@ import SDK, {
 import { sleep } from "utils/sleep";
 import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, CheckIcon, ChevronDownIcon, StarIcon } from '@heroicons/react/solid'
 import { BigNumber as EthersBigNumber, ethers } from "ethers";
-import { FANTOM, AVALANCHE, BINANCE, Chain, CHAINS, ETHEREUM, MOONRIVER, POLYGON, Token } from "constants/cross/Chains";
-import { CurrencyLogo } from "components/CurrencyLogo"
-import { prettyDisplayNumber } from "utils";
+import { FANTOM, AVALANCHE, BINANCE, Chain, CHAINS, ETHEREUM, POLYGON, Token } from "constants/cross/Chains"; // MOONRIVER
+// import { prettyDisplayNumber } from "utils";
 import { ERC20_ABI } from "constants/abis/erc20";
 import { useActiveWeb3React } from "services/web3";
 import { useUserInfo, useUserTokenInfo } from "hooks/useAPI";
-import { Spinner } from "components/Spinner";
+// import { Spinner } from "components/Spinner";
 import { Button } from "components/Button";
-import { useWalletModalToggle } from "state/application/hooks";
-import { i18n } from "@lingui/core";
+import { useNetworkModalToggle, useWalletModalToggle } from "state/application/hooks";
+// import { i18n } from "@lingui/core";
 import { ContentBox, Input, OverlayButton, Typo1, Typo2, Typo3 } from "components/index";
-import { TokenSelectOverlay } from "features/cross/crossStyles";
+// import { TokenSelectOverlay } from "features/cross/crossStyles";
 import Typography from "components/Typography";
 import { formatNumber } from "functions/format";
 import { classNames } from "functions/styling";
@@ -36,21 +35,23 @@ import { SwapLayoutCard } from "layouts/SwapLayout";
 import Modal from "components/DefaultModal";
 // import Modal from "../bridge/components/Modal";
 
-import ModalBody from "components/Modal/Body";
-import Row from "components/Row";
-import useModal from "hooks/useModal";
-import Column, { AutoColumn } from "components/Column";
-import Loader from "components/Loader";
-import { weiToUnit } from "utils/conversion";
-import ModalContent from "pages/bridge/components/ModalContent";
-import Scrollbar from "components/Scrollbar";
-import { styled } from "@material-ui/styles";
-import { StyledOverlayButton } from "pages/bridge";
-import AssetInput from "components/AssetInput";
-import CurrencyInputPanel from "components/CurrencyInputPanel";
+// import ModalBody from "components/Modal/Body";
+// import Row from "components/Row";
+// import useModal from "hooks/useModal";
+// import Column, { AutoColumn } from "components/Column";
+// import Loader from "components/Loader";
+// import { weiToUnit } from "utils/conversion";
+// import ModalContent from "pages/bridge/components/ModalContent";
+// import Scrollbar from "components/Scrollbar";
+// import { styled } from "@material-ui/styles";
+// import { StyledOverlayButton } from "pages/bridge";
+// import AssetInput from "components/AssetInput";
+// import CurrencyInputPanel from "components/CurrencyInputPanel";
 import { ChainId } from "sdk";
 import { useETHBalances } from "state/wallet/hooks";
-import { e10 } from "functions/math";
+import { NETWORK_ICON, NETWORK_LABEL } from "config/networks";
+import NetworkModal from "modals/NetworkModal";
+// import { e10 } from "functions/math";
 interface Exchange {
   from: { chain: Chain; token: Token };
   to: { chain: Chain; token: Token };
@@ -73,7 +74,7 @@ function setLastExchange(from: { chain: Chain; token: Token }, to: { chain: Chai
     "exchange",
     JSON.stringify({
       from: { chain: from.chain.chainId, token: from.token.id },
-      to: { chain: to.chain.chainId, token: to.token.id },
+      to: { chain: to.chain.chainId, token: to.token?.id },
     }),
   );
 }
@@ -82,7 +83,7 @@ const NATIVE_ADDRESS = "0x0000000000000000000000000000000000000000";
 
 const RUBIC_CHAIN_BY_ID = new Map([
   [FANTOM.chainId, BLOCKCHAIN_NAME.FANTOM],
-  [MOONRIVER.chainId, BLOCKCHAIN_NAME.MOONRIVER],
+  // [MOONRIVER.chainId, BLOCKCHAIN_NAME.MOONRIVER],
   [POLYGON.chainId, BLOCKCHAIN_NAME.POLYGON],
   [AVALANCHE.chainId, BLOCKCHAIN_NAME.AVALANCHE],
   [ETHEREUM.chainId, BLOCKCHAIN_NAME.ETHEREUM],
@@ -94,9 +95,9 @@ const rubicConfiguration: Configuration = {
     [BLOCKCHAIN_NAME.BINANCE_SMART_CHAIN]: {
       mainRpc: BINANCE.rpc[0],
     },
-    [BLOCKCHAIN_NAME.MOONRIVER]: {
-      mainRpc: MOONRIVER.rpc[0],
-    },
+    // [BLOCKCHAIN_NAME.MOONRIVER]: {
+    //   mainRpc: MOONRIVER.rpc[0],
+    // },
     [BLOCKCHAIN_NAME.POLYGON]: {
       mainRpc: POLYGON.rpc[0],
     },
@@ -166,7 +167,7 @@ export default function Exchange() {
       const newConfiguration: Configuration = {
         ...configuration,
         walletProvider: wallet || undefined,
-      }; 
+      };
 
       const userBalance = await getBalance()
       const balance = Number(userBalance) / 10 ** (from?.decimals ? from?.decimals : 18)
@@ -345,8 +346,10 @@ export default function Exchange() {
   const toAmount = toUsd ? Number(trade?.to.tokenAmount) : 0
   const deltaUsd = fromUsd > toUsd ? Number(fromUsd) - Number(toUsd) : 0
   const deltaPercent = 100 * deltaUsd / Number(fromUsd)
-  const [fromToken, setFromToken] = useState(null);
-  const [toToken, setToToken] = useState(null);
+  // const [fromToken, setFromToken] = useState(null);
+  // const [toToken, setToToken] = useState(null);
+  const toggleNetworkModal = useNetworkModalToggle()
+  const wrongNetwork = fromChain.chainId != chainId ? true : false
 
   return (
     <>
@@ -355,6 +358,7 @@ export default function Exchange() {
           <TokenSelect
             show={showSelectFrom}
             chain={fromChain}
+            // chain={fromChain}
             onClose={f => {
               setShowSelectFrom(false);
               if (!f) {
@@ -398,38 +402,77 @@ export default function Exchange() {
               {/* [1] FROM TOKEN SELECTOR */}
 
               {/* [F] NETWORK LOGO */}
-              <div 
-                className="grid grid-cols-1 bg-dark-1000 border border-4 w-full"
+              <div
+                className="grid grid-cols-1 rounded bg-dark-1000 border border-4 w-full"
                 style={{ borderColor: fromChain.color }}
               >
-              <Image
-                className="flex align-center justify-center"
-                width="72" height="72"
-                style={{ backgroundColor: fromChain.color }}
-                src={fromChain.logo}
-                alt={fromChain.name}
-                onClick={() => setShowSelectFrom(true)}
-              >
-              </Image>
-
-
-              <Button
-                  className="grid grid-cols-2 bg-dark-800 w-full justify-between"
+                {wrongNetwork &&
+                  <div
+                    className="grid grid-cols-2 items-center border-4 rounded border-dark-1000 bg-dark-1000 hover:bg-dark-900 whitespace-nowrap text-md justify-center font-bold cursor-pointer select-none pointer-events-auto"
+                    onClick={() => toggleNetworkModal()}
+                  >
+                    <div
+                      className="hidden lg:flex lg:rounded lg:rounded-2xl lg:m-2 lg:text-center lg:text-lg lg:justify-center lg:p-3 lg:border"
+                      style={{ borderColor: fromChain.color }}
+                    >
+                      Switch to {fromChain?.name} Network
+                    </div>
+                    <div
+                      className="lg:hidden flex rounded rounded-2xl m-1 text-center text-lg justify-center p-2 border"
+                      style={{ borderColor: fromChain.color }}
+                    >
+                      Switch Network
+                    </div>
+                    <Image
+                      src={fromChain.logo}
+                      alt="Switch Network"
+                      className="flex align-center justify-center"
+                      // style={{ backgroundColor: fromChain.color }}
+                      width="42" height="42"
+                    // width="22px" height="22px" 
+                    />
+                    <NetworkModal />
+                    {/* {NETWORK_LABEL[chainId]} */}
+                  </div>
+                }
+                <div
+                  className={"flex w-full border border-4"}
+                  style={{ borderColor: fromChain.color }}
+                />
+                <Image
+                  className="flex align-center justify-center"
+                  width="36" height="36"
+                  style={{ backgroundColor: fromChain.color }}
+                  src={fromChain.logo}
+                  alt={fromChain.name}
                   onClick={() => setShowSelectFrom(true)}
                 >
-                  <div className="p-2">
-                  <Image className="block object-fit:contain object-position:center items-center"
-                    src={from?.logo} width="64" height="64" alt={from?.name}
-                  />
+                </Image>
+                <div
+                  className={"flex w-full border border-4"}
+                  style={{ borderColor: fromChain.color }}
+                />
+                <Button
+                  className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
+                  onClick={() => setShowSelectFrom(true)}
+                >
+                  <div className="">
+                    <Image className="block object-fit:contain object-position:center items-center"
+                      src={from?.logo} width="64" height="64" alt={from?.name}
+                    />
                   </div>
-                  <div className="mt-6 font-bold text-3xl">
+
+                  <div className="m-4 font-bold text-2xl">
                     {from.symbol}
                   </div>
                 </Button>
-
+                <div
+                  className={"flex w-full border border-2"}
+                  style={{ borderColor: fromChain.color }}
+                />
                 <div className="grid grid-cols-1">
 
-                  <div className={`flex flex-col p-8 w-full space-y-1 bg-dark-1000`}
+                  <div className={`flex flex-col p-3 w-full space-y-1 bg-dark-1000`}
                   >
                     <div className="flex justify-center">
                       <Typography className={classNames('text-lg font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
@@ -439,28 +482,32 @@ export default function Exchange() {
                       </Typography>
                     </div>
                   </div>
-                    <InputCurrencyBox
-                      disabled={!from}
-                      value={amount}
-                      setValue={async (amount) => await setAmount(amount)}
-                      // max={async () => setAmount(ethers.utils.formatUnits(await getBalance(), decimals))}
-                      variant="new"
-                    />
-                    <Button
-                      onClick={ async () => setAmount(ethers.utils.formatUnits(await
- getBalance(), decimals))}
-                    >
-                      <div className="flex w-full text-md justify-end font-bold">
-                        MAX: {
-                          fromBalance 
+                  <div
+                  className={"flex w-full border border-2"}
+                  style={{ borderColor: fromChain.color }}
+                />
+                  <InputCurrencyBox
+                    disabled={!from}
+                    value={amount}
+                    setValue={async (amount) => await setAmount(amount)}
+                    // max={async () => setAmount(ethers.utils.formatUnits(await getBalance(), decimals))}
+                    variant="new"
+                  />
+                  <Button
+                    onClick={async () => setAmount(ethers.utils.formatUnits(await
+                      getBalance(), decimals))}
+                  >
+                    <div className="flex w-full text-md justify-end font-bold">
+                      MAX: {
+                        fromBalance
                           ? formatNumber(fromBalance, false, true)
-                          : '0' }
-                      </div>
-                    </Button>
+                          : '0'}
+                    </div>
+                  </Button>
                 </div>
               </div>
 
-             {/* <div className="p-1 bg-dark-1000">
+              {/* <div className="p-1 bg-dark-1000">
             // ARROW DOWN ICON 
                 <Row style={{ justifyContent: "center", alignItems: "center" }}>
         <div style={{ height: "1px", width: "100%" }} />
@@ -485,64 +532,89 @@ export default function Exchange() {
 
               {/* [2] TO TOKEN SELECTOR */}
               {/* [T] NETWORK LOGO */}
-              <div 
-                className="grid grid-cols-1 bg-dark-1000 border border-4 w-full"
+              <div
+                className="grid grid-cols-1 rounded bg-dark-1000 border border-4 w-full"
                 style={{ borderColor: toChain.color }}
               >
-              <Image
-                className="flex w-full align-center justify-center"
-                width="64" height="64"
-                style={{ backgroundColor: toChain.color }}
-                src={toChain.logo}
-                alt={toChain.name}
-                onClick={() => setShowSelectTo(true)}
-              >
-              </Image>
-
-              <Button
-                  className="grid grid-cols-2 bg-dark-800 w-full justify-between"
+                <div
+                  className={"flex w-full border border-4"}
+                  style={{ borderColor: toChain.color }}
+                />
+                <Image
+                  className="flex align-center justify-center"
+                  width="36" height="36"
+                  style={{ backgroundColor: toChain.color }}
+                  src={toChain.logo}
+                  alt={toChain.name}
                   onClick={() => setShowSelectTo(true)}
                 >
-                  <div className="p-2">
-                  <CurrencyLogo 
-                    currency={to} 
-                    size={size === 'md' ? 48 : 40} 
-                    // className="!rounded-full"
-                    className="block object-fit:contain object-position:center items-center"
-                  />
-                  {/* <Image className="block object-fit:contain object-position:center items-center"
-                    src={to?.logo} width="64" height="64" alt={to?.name}
-                  /> */}
+                </Image>
+                <div
+                  className={"flex w-full border border-4"}
+                  style={{ borderColor: toChain.color }}
+                />
+                <Button
+                  className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
+                  onClick={() => setShowSelectTo(true)}
+                >
+                  <div className="">
+                    <Image className="block object-fit:contain object-position:center items-center"
+                      src={to?.logo} width="64" height="64" alt={to?.name}
+                    />
                   </div>
-                  <div className="mt-6 font-bold text-3xl">
+
+                  <div className="m-4 font-bold text-2xl">
                     {to.symbol}
                   </div>
                 </Button>
-
-                <div className={`flex flex-col gap-4 bg-dark-1000 p-8 w-full space-y-1`}
+                <div
+                  className={"flex w-full border border-2"}
+                  style={{ borderColor: toChain.color }}
+                />
+                <div className={`flex flex-col gap-4 bg-dark-1000 p-3 w-full space-y-1`}
                 >
                   <div className="flex justify-center">
                     <Typography className={classNames('sm:text-lg text-md font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
                       {trade
-                        ? `${formatNumber(Number(trade?.to.tokenAmount), false, true)} ${to.symbol} (${formatNumber(toUsd, true, true)})`
+                        ? `${formatNumber(Number(trade?.to.tokenAmount), false, true)} ${to?.symbol} (${formatNumber(toUsd, true, true)})`
                         : "0 ($0.00)"}
                     </Typography>
                   </div>
                 </div>
-               </div>
+              </div>
 
-              <div className="flex p-2 justify-center gap-6 text-lg text-center bg-dark-1000 font-bold">
-                {formatNumber(fromAmount, false, true)} {from.symbol} on {fromChain.name}
-                <ArrowRightIcon className="m-1" height="26px" />
-                {formatNumber(toAmount, false, true)} {to.symbol} on {toChain.name}
+              <div 
+                className="flex p-2 justify-center gap-6 text-lg text-center bg-dark-1000 font-bold"
+                  style={{ color: fromChain.color }}
+                >
+                  {formatNumber(fromAmount, false, true)} {from.symbol} ({formatNumber(fromUsd, true, true)})
+                  {/* on {fromChain.name} */}
+                <div
+                  className="flex"
+                  style={{ color: 'white' }}
+                >
+
+                <ArrowRightIcon className="m-2 border border-2 rounded" height="21px" />
+
+                </div>
+
+                <div 
+                  className="flex"
+                  style={{ color: toChain.color }}
+                >
+                  {formatNumber(toAmount, false, true)} {to?.symbol} ({formatNumber(toUsd, true, true)})
+                  {/* on {toChain.name} */}
+                </div>
               </div>
 
               {/* HIGH-SLIPPAGE WARNING */}
               {trade &&
-                <div className={deltaPercent < 20 ? 'hidden' : `flex flex-col rounded gap-4 bg-dark-1000 p-2 font-bold w-full space-y-1`}
+                <div 
+                  className={deltaPercent < 20 ? 'hidden' : `flex flex-col rounded gap-4 bg-dark-1000 p-3 font-bold w-full space-y-1`}
                 // style={{ backgroundColor: deltaPercent > 20 ? 'black' : toChain.color}}
                 >
-                  <div className="flex font-bold justify-center">
+                  <div 
+                    className="flex font-bold justify-center">
                     <Typography className={classNames('text-xl font-bold', 'font-bold text-white')} weight={600} fontFamily={'semi-bold'}>
                       {trade
                         ? `Warning High-Slippage: ${formatNumber(Number(deltaPercent), false, true)}%`
@@ -552,11 +624,12 @@ export default function Exchange() {
                 </div>
               }
               {/* </div> */}
-
-              <div className="py-2" />
-
               {/* <TradeDetail trade={trade} /> */}
-              <div className="rounded">
+              <div
+                className="rounded border border-2"
+                style={{ borderColor: toChain.color, backgroundColor: toChain.color }}
+
+              >
                 {account && (
                   <Button
                     // className="h                  <div className="p-2">
@@ -586,6 +659,36 @@ or");
                     />
 >>>>>>>+origin/develop-
 
+                    className="h-[60px]"
+                    variant="bordered"
+                    // fullWidth
+                    color="black"
+                    onClick={async () => {
+                      setShowConfirmation("show");
+                      try {
+                        await trade?.swap({
+                          onConfirm: (_hash: any) => setShowConfirmation("hide"),
+                        });
+                      } catch (e) {
+                        if (e instanceof InsufficientFundsError) {
+                          setShowConfirmation("poor");
+                        } else {
+                          console.error(e);
+                          setShowConfirmation("hide");
+                        }
+                      }
+                    }}
+                    style={{ opacity: trade ? 1 : 0.5, cursor: trade ? "pointer" : "not-allowed" }}
+                    disabled={trade == undefined}
+                  >
+                    {fromChain.chainId === toChain.chainId ? "Swap" : "Swap Crosschain"}
+                  </Button>
+                )}
+                {/* </div> */}
+              </div>
+            </SwapLayoutCard>
+          </div>
+        </DoubleGlowShadowV2>
       </Container>
     </>
   );
@@ -689,7 +792,9 @@ style={{ transform: `translate(0%, calc(0% + ${show ? 360 : 30}px))` }} */
 
           {/* CHAIN SELECTION */}
           <Modal
-            isOpen={isShowingChainSelect} onDismiss={() => onClose()}
+            isOpen={isShowingChainSelect}
+            onDismiss={() => onClose()}
+            isCustom={true}
           >
             <div className="flex justify-center">
               {CHAINS.map((chain, i) => (
@@ -705,7 +810,7 @@ style={{ transform: `translate(0%, calc(0% + ${show ? 360 : 30}px))` }} */
                   style={{ backgroundColor: chain.color }}
                 >
                   <div className={classNames('grid justify-center')}>
-                    <Image src={chain.logo} width={'48'} height="48" alt={chain.name + ' logo'} />
+                    <Image src={chain.logo} width={'42'} height="42" alt={chain.name + ' logo'} />
                     {/* <div style={{ flexGrow: 1, textAlign: "center" }}>{chain.name}</div> */}
                   </div>
                 </Button>
@@ -723,7 +828,12 @@ style={{ transform: `translate(0%, calc(0% + ${show ? 360 : 30}px))` }} */
             pointerEvents: show ? "all" : "none",
           }}
         >
-          <Modal isOpen={true} onDismiss={() => onClose()}>
+          <Modal
+            isOpen={true}
+            isCustom={true}
+            onDismiss={() => onClose()}
+            borderColor={selectedChain?.color}
+          >
             <div className="bg-dark-900 padding-[10px]">
               <Button
                 className="flex p-[10px] w-[100%] gap-[8px] align-center items-center"
@@ -752,17 +862,17 @@ style={{ transform: `translate(0%, calc(0% + ${show ? 360 : 30}px))` }} */
               </form>
 
               {/* SELECT TOKEN LIST */}
-              {filter &&
-                <div className="grid grid-cols-8 bg-dark-1100 w-full" ref={tokensList}>
-                  {filteredTokens.map(token => (
-                    <div className="flex justify-center" key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
-                      <Image src={token.logo} width="48" height="48" alt={token.name + ' logo'} />
-                      {/* <div className="flex text-xl">{token.symbol}</div> */}
-                      {/* {token.favorite && <StarIcon width="16" height="16" className="token-favorite" />} */}
-                    </div>
-                  ))}
-                </div>
-              }
+              {/* {filter && */}
+              <div className="grid grid-cols-5 bg-dark-1100 w-full" ref={tokensList}>
+                {filteredTokens.map(token => (
+                  <div className="flex border border-2 border-dark-1000 p-1 rounded rounded-3xl bg-black m-2 font-bold text-center justify-center" key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
+                    <Image src={token.logo} width="56" height="56" alt={token.name + ' logo'} />
+                    {/* <div className="flex text-xl">{token.symbol}</div> */}
+                    {token.favorite && <StarIcon width="16" height="16" className="token-favorite" />}
+                  </div>
+                ))}
+              </div>
+              {/* } */}
             </div>
           </Modal>
         </div>

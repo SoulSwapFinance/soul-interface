@@ -1,9 +1,9 @@
 import { ChainId, WNATIVE_ADDRESS } from '../sdk'
 
-const Fantom = '/images/networks/fantom-network.jpg'
-const Mainnet = '/images/networks/mainnet-network.jpg'
+const Fantom = 'https://cryptologos.cc/logos/fantom-ftm-logo.svg'
+const Mainnet = 'https://cryptologos.cc/logos/ethereum-eth-logo.svg'
 const Telos = '/images/networks/Telos.jpg'
-const Bsc = '/images/networks/bsc.png'
+const Bsc = 'https://cryptologos.cc/logos/bnb-bnb-logo.svg'
 
 // const Arbitrum = '/images/networks/arbitrum-network.jpg'
 const Avalanche = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/Avalanche.svg'

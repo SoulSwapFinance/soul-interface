@@ -27,7 +27,7 @@
             "id": "avalanche-2",
             "name": "Avalanche",
             "rank": 11,
-            "logo": "https://assets.coingecko.com/coins/images/12559/small/coin-round-red.png?1604021818",
+            "logo": "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/avalanche/Avalanche.svg",
             "symbol": "AVAX",
             "address": "0x14a0243c333a5b238143068dc3a7323ba4c30ecb"
         },
@@ -35,7 +35,7 @@
             "id": "fantom",
             "name": "Fantom",
             "rank": 25,
-            "logo": "https://assets.coingecko.com/coins/images/4001/small/Fantom.png?1558015016",
+            "logo": "https://cryptologos.cc/logos/fantom-ftm-logo.svg",
             "symbol": "FTM",
             "address": "0xad12dab5959f30b9ff3c2d6709f53c335dc39908"
         },
@@ -43,7 +43,7 @@
             "id": "matic-network",
             "name": "Polygon",
             "rank": 47,
-            "logo": "https://assets.coingecko.com/coins/images/4713/small/matic-token-icon.png?1624446912",
+            "logo": "https://cryptologos.cc/logos/polygon-matic-logo.svg",
             "symbol": "MATIC",
             "address": "0x682f81e57eaa716504090c3ecba8595fb54561d8"
         },
@@ -51,7 +51,7 @@
             "id": "usd-coin",
             "name": "USD Coin",
             "rank": 56,
-            "logo": "https://assets.coingecko.com/coins/images/6319/small/USD_Coin_icon.png?1547042389",
+            "logo": "https://cryptologos.cc/logos/usd-coin-usdc-logo.svg",
             "symbol": "USDC",
             "address": "0xe3f5a90f9cb311505cd691a46596599aa1a0ad7d"
         },
@@ -75,15 +75,15 @@
             "id": "tether",
             "name": "Tether",
             "rank": 146,
-            "logo": "https://assets.coingecko.com/coins/images/325/small/Tether-logo.png?1598003707",
+            "logo": "https://cryptologos.cc/logos/tether-usdt-logo.svg",
             "symbol": "USDT",
             "address": "0xb44a9b6905af7c801311e8f4e76932ee959c663c"
         },
         {
             "id": "dai",
-            "name": "Dai",
+            "name": "Dai Stablecoin",
             "rank": 169,
-            "logo": "https://assets.coingecko.com/coins/images/9956/small/4943.png?1636636734",
+            "logo": "https://cryptologos.cc/logos/multi-collateral-dai-dai-logo.svg",
             "symbol": "DAI",
             "address": "0x80a16016cc4a2e6a2caca8a4a498b1699ff0f844"
         },
@@ -91,7 +91,7 @@
             "id": "binance-usd",
             "name": "Binance USD",
             "rank": 222,
-            "logo": "https://assets.coingecko.com/coins/images/9576/small/BUSD.png?1568947766",
+            "logo": "https://cryptologos.cc/logos/binance-usd-busd-logo.svg",
             "symbol": "BUSD",
             "address": "0x5d9ab5522c64e1f6ef5e3627eccc093f56167818"
         },
@@ -99,7 +99,7 @@
             "id": "magic-internet-money",
             "name": "Magic Internet Money",
             "rank": 385,
-            "logo": "https://assets.coingecko.com/coins/images/16786/small/mimlogopng.png?1624979612",
+            "logo": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x82f0B8B456c1A451378467398982d4834b6829c1/logo.png",
             "symbol": "MIM",
             "address": "0x0cae51e1032e8461f4806e26332c030e34de3adb"
         },
@@ -107,7 +107,7 @@
             "id": "wrapped-bitcoin",
             "name": "Wrapped Bitcoin",
             "rank": 393,
-            "logo": "https://assets.coingecko.com/coins/images/7598/small/wrapped_bitcoin_wbtc.png?1548822744",
+            "logo": "https://cryptologos.cc/logos/wrapped-bitcoin-wbtc-logo.svg",
             "symbol": "WBTC",
             "address": "0x6ab6d61428fde76768d7b45d8bfeec19c6ef91a8"
         },

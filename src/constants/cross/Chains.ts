@@ -31,16 +31,16 @@ export interface Chain {
   import binanceLogo from "assets/chains/binance.svg";
   import polygonChain from "assets/chains/polygon.json";
   import polygonLogo from "assets/chains/polygon.svg";
-  import moonriverChain from "assets/chains/moonriver.json";
-  import moonriverLogo from "assets/chains/moonriver.svg";
+  // import moonriverChain from "assets/chains/moonriver.json";
+  // import moonriverLogo from "assets/chains/moonriver.svg";
   
   export const FANTOM: Chain = { ...fantomChain, logo: fantomLogo };
   export const AVALANCHE: Chain = { ...avalancheChain, logo: avalancheLogo };
   export const ETHEREUM: Chain = { ...ethereumChain, logo: ethereumLogo };
   export const BINANCE: Chain = { ...binanceChain, logo: binanceLogo };
   export const POLYGON: Chain = { ...polygonChain, logo: polygonLogo };
-  export const MOONRIVER: Chain = { ...moonriverChain, logo: moonriverLogo };
-  const chains: Chain[] = [FANTOM, AVALANCHE, ETHEREUM, BINANCE, POLYGON, MOONRIVER];
+  // export const MOONRIVER: Chain = { ...moonriverChain, logo: moonriverLogo };
+  const chains: Chain[] = [FANTOM, AVALANCHE, ETHEREUM, BINANCE, POLYGON]; // MOONRIVER
   
   // We're pre-sorting chains and their tokesn here because it only needs to be done once.
   {

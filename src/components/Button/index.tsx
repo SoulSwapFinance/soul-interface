@@ -67,6 +67,7 @@ const OUTLINED = {
 
 const BORDERED = {
   default: 'border w-full border-transparent hover:border-purple bg-purple bg-opacity-40 outline-purple rounded text-purple hover:bg-opacity-40 disabled:bg-opacity-20',
+  black: 'border w-full border-transparent hover:border-black bg-dark-1000 rounded text-white font-bold font-lg hover:bg-opacity-80 disabled:bg-opacity-60',
   blue: 'border w-full border-transparent hover:border-blue bg-blue bg-opacity-40 outline-blue rounded text-blue hover:bg-opacity-40 disabled:bg-opacity-20',
   deepPurple: 'border w-full border-transparent hover:border-deepPurple bg-deepPurple bg-opacity-40 outline-deepPurple rounded text-deepPurple hover:bg-opacity-40 disabled:bg-opacity-20',
   purple: 'border w-full border-transparent hover:border-purple bg-purple bg-opacity-40 outline-purple rounded text-purple hover:bg-opacity-40 disabled:bg-opacity-20',
