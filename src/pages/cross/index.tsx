@@ -406,35 +406,39 @@ export default function Exchange() {
                 className="grid grid-cols-1 rounded bg-dark-1000 border border-4 w-full"
                 style={{ borderColor: fromChain.color }}
               >
-              { wrongNetwork &&
-                <div
-                  className="grid grid-cols-2 items-center border-4 rounded border-dark-1000 bg-dark-1000 hover:bg-dark-900 whitespace-nowrap text-md justify-center font-bold cursor-pointer select-none pointer-events-auto"
-                  onClick={() => toggleNetworkModal()}
-                >
-                  <div 
-                    className="hidden lg:flex lg:rounded lg:rounded-2xl lg:m-4 lg:text-center lg:text-lg lg:justify-center lg:p-3 lg:border"
-                    style={{ borderColor: fromChain.color }}
+                {wrongNetwork &&
+                  <div
+                    className="grid grid-cols-2 items-center border-4 rounded border-dark-1000 bg-dark-1000 hover:bg-dark-900 whitespace-nowrap text-md justify-center font-bold cursor-pointer select-none pointer-events-auto"
+                    onClick={() => toggleNetworkModal()}
                   >
-                    Switch to { fromChain?.name } Network
-                  </div>
-                  <div 
-                    className="lg:hidden flex rounded rounded-2xl m-4 text-center text-lg justify-center p-2 border"
-                    style={{ borderColor: fromChain.color }}
-                  >
-                    Switch Network
-                  </div>
-                    <Image 
-                      src={fromChain.logo} 
-                      alt="Switch Network" 
+                    <div
+                      className="hidden lg:flex lg:rounded lg:rounded-2xl lg:m-2 lg:text-center lg:text-lg lg:justify-center lg:p-3 lg:border"
+                      style={{ borderColor: fromChain.color }}
+                    >
+                      Switch to {fromChain?.name} Network
+                    </div>
+                    <div
+                      className="lg:hidden flex rounded rounded-2xl m-1 text-center text-lg justify-center p-2 border"
+                      style={{ borderColor: fromChain.color }}
+                    >
+                      Switch Network
+                    </div>
+                    <Image
+                      src={fromChain.logo}
+                      alt="Switch Network"
                       className="flex align-center justify-center"
                       // style={{ backgroundColor: fromChain.color }}
-                      width="72" height="72"
-                      // width="22px" height="22px" 
+                      width="42" height="42"
+                    // width="22px" height="22px" 
                     />
-                  <NetworkModal />
-                  {/* {NETWORK_LABEL[chainId]} */}
-                </div>
+                    <NetworkModal />
+                    {/* {NETWORK_LABEL[chainId]} */}
+                  </div>
                 }
+                <div
+                  className={"flex w-full border border-4"}
+                  style={{ borderColor: fromChain.color }}
+                />
                 <Image
                   className="flex align-center justify-center"
                   width="36" height="36"
@@ -444,23 +448,31 @@ export default function Exchange() {
                   onClick={() => setShowSelectFrom(true)}
                 >
                 </Image>
+                <div
+                  className={"flex w-full border border-4"}
+                  style={{ borderColor: fromChain.color }}
+                />
                 <Button
-                  className="grid grid-cols-2 bg-dark-800 w-full justify-between"
+                  className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
                   onClick={() => setShowSelectFrom(true)}
                 >
-                  <div className="p-2">
+                  <div className="">
                     <Image className="block object-fit:contain object-position:center items-center"
                       src={from?.logo} width="64" height="64" alt={from?.name}
                     />
                   </div>
-                  <div className="mt-6 font-bold text-3xl">
+
+                  <div className="m-4 font-bold text-2xl">
                     {from.symbol}
                   </div>
                 </Button>
-
+                <div
+                  className={"flex w-full border border-2"}
+                  style={{ borderColor: fromChain.color }}
+                />
                 <div className="grid grid-cols-1">
 
-                  <div className={`flex flex-col p-8 w-full space-y-1 bg-dark-1000`}
+                  <div className={`flex flex-col p-3 w-full space-y-1 bg-dark-1000`}
                   >
                     <div className="flex justify-center">
                       <Typography className={classNames('text-lg font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
@@ -470,6 +482,10 @@ export default function Exchange() {
                       </Typography>
                     </div>
                   </div>
+                  <div
+                  className={"flex w-full border border-2"}
+                  style={{ borderColor: fromChain.color }}
+                />
                   <InputCurrencyBox
                     disabled={!from}
                     value={amount}
@@ -520,8 +536,12 @@ export default function Exchange() {
                 className="grid grid-cols-1 rounded bg-dark-1000 border border-4 w-full"
                 style={{ borderColor: toChain.color }}
               >
+                <div
+                  className={"flex w-full border border-4"}
+                  style={{ borderColor: toChain.color }}
+                />
                 <Image
-                  className="flex w-full align-center justify-center"
+                  className="flex align-center justify-center"
                   width="36" height="36"
                   style={{ backgroundColor: toChain.color }}
                   src={toChain.logo}
@@ -529,22 +549,29 @@ export default function Exchange() {
                   onClick={() => setShowSelectTo(true)}
                 >
                 </Image>
-
+                <div
+                  className={"flex w-full border border-4"}
+                  style={{ borderColor: toChain.color }}
+                />
                 <Button
-                  className="grid grid-cols-2 bg-dark-800 w-full justify-between"
+                  className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
                   onClick={() => setShowSelectTo(true)}
                 >
-                  <div className="p-2">
+                  <div className="">
                     <Image className="block object-fit:contain object-position:center items-center"
                       src={to?.logo} width="64" height="64" alt={to?.name}
                     />
                   </div>
-                  <div className="mt-6 font-bold text-3xl">
-                    {to?.symbol}
+
+                  <div className="m-4 font-bold text-2xl">
+                    {to.symbol}
                   </div>
                 </Button>
-
-                <div className={`flex flex-col gap-4 bg-dark-1000 p-8 w-full space-y-1`}
+                <div
+                  className={"flex w-full border border-2"}
+                  style={{ borderColor: toChain.color }}
+                />
+                <div className={`flex flex-col gap-4 bg-dark-1000 p-3 w-full space-y-1`}
                 >
                   <div className="flex justify-center">
                     <Typography className={classNames('sm:text-lg text-md font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
@@ -556,18 +583,38 @@ export default function Exchange() {
                 </div>
               </div>
 
-              <div className="flex p-2 justify-center gap-6 text-lg text-center bg-dark-1000 font-bold">
-                {formatNumber(fromAmount, false, true)} {from.symbol} on {fromChain.name}
-                <ArrowRightIcon className="m-1" height="26px" />
-                {formatNumber(toAmount, false, true)} {to?.symbol} on {toChain.name}
+              <div 
+                className="flex p-2 justify-center gap-6 text-lg text-center bg-dark-1000 font-bold"
+                  style={{ color: fromChain.color }}
+                >
+                  {formatNumber(fromAmount, false, true)} {from.symbol} ({formatNumber(fromUsd, true, true)})
+                  {/* on {fromChain.name} */}
+                <div
+                  className="flex"
+                  style={{ color: 'white' }}
+                >
+
+                <ArrowRightIcon className="m-2 border border-2 rounded" height="21px" />
+
+                </div>
+
+                <div 
+                  className="flex"
+                  style={{ color: toChain.color }}
+                >
+                  {formatNumber(toAmount, false, true)} {to?.symbol} ({formatNumber(toUsd, true, true)})
+                  {/* on {toChain.name} */}
+                </div>
               </div>
 
               {/* HIGH-SLIPPAGE WARNING */}
               {trade &&
-                <div className={deltaPercent < 20 ? 'hidden' : `flex flex-col rounded gap-4 bg-dark-1000 p-2 font-bold w-full space-y-1`}
+                <div 
+                  className={deltaPercent < 20 ? 'hidden' : `flex flex-col rounded gap-4 bg-dark-1000 p-3 font-bold w-full space-y-1`}
                 // style={{ backgroundColor: deltaPercent > 20 ? 'black' : toChain.color}}
                 >
-                  <div className="flex font-bold justify-center">
+                  <div 
+                    className="flex font-bold justify-center">
                     <Typography className={classNames('text-xl font-bold', 'font-bold text-white')} weight={600} fontFamily={'semi-bold'}>
                       {trade
                         ? `Warning High-Slippage: ${formatNumber(Number(deltaPercent), false, true)}%`
@@ -577,17 +624,18 @@ export default function Exchange() {
                 </div>
               }
               {/* </div> */}
-
-              <div className="py-2" />
-
               {/* <TradeDetail trade={trade} /> */}
-              <div className="rounded ">
+              <div
+                className="rounded border border-2"
+                style={{ borderColor: toChain.color, backgroundColor: toChain.color }}
+
+              >
                 {account && (
                   <Button
-                    // className="h-[100%]"
-                    // variant="filled"
-                    fullWidth
-                    color="purple"
+                    className="h-[60px]"
+                    variant="bordered"
+                    // fullWidth
+                    color="black"
                     onClick={async () => {
                       setShowConfirmation("show");
                       try {
@@ -711,7 +759,7 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
 
           {/* CHAIN SELECTION */}
           <Modal
-            isOpen={isShowingChainSelect} 
+            isOpen={isShowingChainSelect}
             onDismiss={() => onClose()}
             isCustom={true}
           >
@@ -729,7 +777,7 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
                   style={{ backgroundColor: chain.color }}
                 >
                   <div className={classNames('grid justify-center')}>
-                    <Image src={chain.logo} width={'48'} height="48" alt={chain.name + ' logo'} />
+                    <Image src={chain.logo} width={'42'} height="42" alt={chain.name + ' logo'} />
                     {/* <div style={{ flexGrow: 1, textAlign: "center" }}>{chain.name}</div> */}
                   </div>
                 </Button>
@@ -747,8 +795,8 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
             pointerEvents: show ? "all" : "none",
           }}
         >
-          <Modal 
-            isOpen={true} 
+          <Modal
+            isOpen={true}
             isCustom={true}
             onDismiss={() => onClose()}
             borderColor={selectedChain?.color}
