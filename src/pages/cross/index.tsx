@@ -33,20 +33,7 @@ import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
 import HeaderNew from "features/trade/HeaderNew";
 import { SwapLayoutCard } from "layouts/SwapLayout";
 import Modal from "components/DefaultModal";
-// import Modal from "../bridge/components/Modal";
-
-// import ModalBody from "components/Modal/Body";
-// import Row from "components/Row";
-// import useModal from "hooks/useModal";
-// import Column, { AutoColumn } from "components/Column";
-// import Loader from "components/Loader";
-// import { weiToUnit } from "utils/conversion";
-// import ModalContent from "pages/bridge/components/ModalContent";
-// import Scrollbar from "components/Scrollbar";
-// import { styled } from "@material-ui/styles";
-// import { StyledOverlayButton } from "pages/bridge";
-// import AssetInput from "components/AssetInput";
-// import CurrencyInputPanel from "components/CurrencyInputPanel";
+import { CurrencyLogo } from "components/CurrencyLogo"
 import { ChainId } from "sdk";
 import { useETHBalances } from "state/wallet/hooks";
 import { NETWORK_ICON, NETWORK_LABEL } from "config/networks";
@@ -451,15 +438,19 @@ export default function Exchange() {
                 <div
                   className={"flex w-full border border-4"}
                   style={{ borderColor: fromChain.color }}
-                />
+                /> 
                 <Button
                   className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
                   onClick={() => setShowSelectFrom(true)}
                 >
                   <div className="">
-                    <Image className="block object-fit:contain object-position:center items-center"
+                     <CurrencyLogo 
+                      currency={from} 
+                      size={'64px'} 
+                     />
+                   {/* <Image className="block object-fit:contain object-position:center items-center"
                       src={from?.logo} width="64" height="64" alt={from?.name}
-                    />
+                    /> */}
                   </div>
 
                   <div className="m-4 font-bold text-2xl">
