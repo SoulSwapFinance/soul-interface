@@ -135,10 +135,7 @@ export default function Exchange() {
 
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
 
-  const nativeBalance =
-    chainId == ChainId.FANTOM ? (Number(userInfo.nativeBalance) * 1E18).toFixed(0)
-      : userEthBalance
-
+  const nativeBalance = userEthBalance
   const [wallet, setWallet] = useState<WalletProvider>(null);
   
   const fromCurrency = useCurrency(from.address)
@@ -449,6 +446,8 @@ export default function Exchange() {
                 <Button
                   className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
                   onClick={() => setShowSelectFrom(true)}
+                  variant="bordered"
+                  color="black"
                 >
                   <div className="">
                    <Image className="block object-fit:contain object-position:center items-center"
@@ -557,9 +556,11 @@ export default function Exchange() {
               margin=".5rem 0 .5rem 0"
               * /}
           
-                 <SubmitButton
+                 <Button
                   className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
                   onClick={() => setShowSelectTo(true)}
+                  variant="bordered"
+                  color="black"
                 >
                   <div className="">
                     <Image 
@@ -571,7 +572,7 @@ export default function Exchange() {
                   <div className="m-4 font-bold text-2xl">
                     {to.symbol}
                   </div>
-                </SubmitButton>
+                </Button>
                 <div
                   className={"flex w-full border border-2"}
                   style={{ borderColor: toChain.color }}
@@ -639,7 +640,6 @@ export default function Exchange() {
                   <Button
                     className="h-[60px]"
                     variant="bordered"
-                    // fullWidth
                     color="black"
                     onClick={async () => {
                       setShowConfirmation("show");
