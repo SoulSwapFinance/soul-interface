@@ -499,29 +499,7 @@ export default function Exchange() {
                   </Button>
                 </div>
               </div>
-
-              {/* <div className="p-1 bg-dark-1000">
-            // ARROW DOWN ICON 
-                <Row style={{ justifyContent: "center", alignItems: "center" }}>
-        <div style={{ height: "1px", width: "100%" }} />
-          <OverlayButton 
-            style={{ padding: 0 }} 
-            // onClick={handleSwap}
-          >
-              <AutoColumn justify="space-between" className="py-2 -my-4 py-4">
-                  <div className="flex justify-center mt-2.5 mb-2.5 z-0">
-                    <div
-                      role="button"
-                      className="p-2.5 rounded-full bg-dark-1000 border shadow-md border-dark-700"
-                      >
-                      <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
-                    </div>
-                  </div>
-                </AutoColumn>
-          </OverlayButton>
-        <div style={{ height: "1px", width: "100%" }} />
-      </Row>
-                      </div> *\}
+  
               {/* [2] TO TOKEN SELECTOR */}
               {/* [T] NETWORK LOGO */}
               <div
