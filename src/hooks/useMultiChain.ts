@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from "react";
 // import useWalletProvider from "./useWalletProvider";
-// import { useSoftwareWallet } from "./useSoftwareWallet";
 import { bridgeNetworks } from "../utils/bridge";
 import config from "config/configurations";
 import { JsonRpcProvider } from "@ethersproject/providers";
@@ -24,7 +23,6 @@ const useMultiChain = () => {
   const { account, chainId, library } = useActiveWeb3React()
   const provider = library.provider
   // const signer = library.getSigner()
-  // const { changeWalletProvider } = useSoftwareWallet();
   const [toChain, setToChain] = useState(null);
 
   const swapToChain = (chainId: number) => {
