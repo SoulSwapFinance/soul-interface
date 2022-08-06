@@ -505,42 +505,42 @@ export default function Exchange() {
               </div>
 
               {/* <div className="p-1 rounded bg-dark-900"> */}
-                {/* // ARROW DOWN ICON  */}
+              {/* // ARROW DOWN ICON  */}
 
               {/* </div> */}
               {/* [2] TO TOKEN SELECTOR */}
               {/* [T] NETWORK LOGO */}
 
-              <Row style={{ justifyContent: "center", alignItems: "center"}}>
-                  <div style={{ height: "1px", width: "100%" }} />
-                  <OverlayButton
-                    style={{ padding: 0 }}
-                  // onClick={handleSwap}
-                  >
-                    <AutoColumn justify="space-between" className="py-0 -my-6 py-6">
-                      <div className="flex justify-center z-0">
-                        <div
-                          role="button"
-                          className="p-2.5 rounded-full bg-dark-1000 border border-2 shadow-md"
-                          style={{ borderColor: toChain.color }}
-                        >
-                          <ArrowDownIcon 
-                            width={24} 
-                            className="text-high-emphesis hover:text-white" 
-                            style={{ color: fromChain.color }}  
-                          />
-                        </div>
+              <Row style={{ justifyContent: "center", alignItems: "center" }}>
+                <div style={{ height: "1px", width: "100%" }} />
+                <OverlayButton
+                  style={{ padding: 0 }}
+                // onClick={handleSwap}
+                >
+                  <AutoColumn justify="space-between" className="py-0 -my-6 py-6">
+                    <div className="flex justify-center z-0">
+                      <div
+                        role="button"
+                        className="p-2.5 rounded-full bg-dark-1000 border border-2 shadow-md"
+                        style={{ borderColor: toChain.color }}
+                      >
+                        <ArrowDownIcon
+                          width={24}
+                          className="text-high-emphesis hover:text-white"
+                          style={{ color: fromChain.color }}
+                        />
                       </div>
-                    </AutoColumn>
-                  </OverlayButton>
-                  <div style={{ height: "1px", width: "1000%" }} />
-                </Row>
+                    </div>
+                  </AutoColumn>
+                </OverlayButton>
+                <div style={{ height: "1px", width: "1000%" }} />
+              </Row>
 
               <div
                 className="grid grid-cols-1 rounded bg-dark-1000 border border-4 w-full"
                 style={{ borderColor: toChain.color }}
               >
-            
+
                 <div
                   className={"flex w-full border border-4"}
                   style={{ borderColor: toChain.color }}
@@ -813,19 +813,26 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
             isOpen={true}
             isCustom={true}
             onDismiss={() => onClose()}
+            // className={"border border-2"}
             borderColor={selectedChain?.color}
           >
-            <div className="bg-dark-900 padding-[10px]">
+            <div className="bg-dark-900 rounded padding-[10px]">
               <Button
                 className="flex p-[10px] w-[100%] gap-[8px] align-center items-center"
-                                  variant="bordered"
-                  color="black"
-
+                variant="bordered"
+                color="black"
                 style={{ backgroundColor: selectedChain.color }}
                 onClick={() => showChainSelect(true)}
               >
-                <Image src={selectedChain.logo} width="24" height="24" alt={selectedChain.name + ' logo'} />
-                <div style={{ flexGrow: 1, textAlign: "left" }}>{selectedChain.name}</div>
+                <div className="grid grid-cols-1 w-[33%]">
+                <Image 
+                  src={selectedChain.logo} 
+                  width="36" height="36" 
+                  alt={selectedChain.name + ' logo'} 
+                  className={"w-full justify-center"}
+                />
+                </div>
+                <div style={{ flexGrow: 1, fontSize: "24px", textAlign: "center" }}>{selectedChain.name}</div>
                 {/* <ChevronDownIcon width="13" height="13" style={{ color: "white", marginTop: 2 }} /> */}
               </Button>
 
@@ -851,7 +858,7 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
               {/* {filter && */}
               <div className="grid grid-cols-5 bg-dark-1100 w-full" ref={tokensList}>
                 {filteredTokens.map(token => (
-                  <div className="flex border border-2 border-dark-1000 p-1 rounded rounded-3xl bg-black trxm-2 font-bold text-center justify-center" key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
+                  <div className="flex border border-2 m-0.5 border-dark-1000 p-1 rounded rounded-3xl bg-black trxm-2 font-bold text-center justify-center" key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
                     <Image src={token.logo} width="56" height="56" alt={token.name + ' logo'} />
                     {/* <div className="flex text-xl">{token.symbol}</div> */}
                     {token.favorite && <StarIcon width="16" height="16" className="token-favorite" />}
