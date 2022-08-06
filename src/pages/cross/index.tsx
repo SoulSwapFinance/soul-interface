@@ -451,7 +451,7 @@ export default function Exchange() {
                 <Button
                   className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
                   onClick={() => setShowSelectFrom(true)}
-                  variant={'filled'}
+                  variant={'outlined'}
                   color={'black'}
                 >
                   <div className="">
@@ -818,6 +818,9 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
             <div className="bg-dark-900 padding-[10px]">
               <Button
                 className="flex p-[10px] w-[100%] gap-[8px] align-center items-center"
+                                  variant="bordered"
+                  color="black"
+
                 style={{ backgroundColor: selectedChain.color }}
                 onClick={() => showChainSelect(true)}
               >
