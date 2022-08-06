@@ -490,9 +490,7 @@ export default function Exchange() {
                   />
                   <Button
                     onClick={async () => setAmount(ethers.utils.formatUnits(await
-                      getBalance(), decimals))
-setBalance(ethers.utils.formatUnits(await getBalance(), decimals))} 
-                  >
+                      getBalance(), decimals))}>
                     <div className="flex w-full text-md justify-end font-bold">
                       MAX: {
                         fromBalance
