@@ -352,7 +352,6 @@ export default function Exchange() {
           <TokenSelect
             show={showSelectFrom}
             chain={fromChain}
-            // chain={fromChain}
             onClose={f => {
               setShowSelectFrom(false);
               if (!f) {
@@ -393,9 +392,9 @@ export default function Exchange() {
             <SwapLayoutCard>
 
 
-              {/* [1] FROM TOKEN SELECTOR */}
-
-              {/* [F] NETWORK LOGO */}
+              {/*  [F] TOKEN SELECTOR */}
+              {/*    [F] CHAIN LOGO   */}
+  
               <div
                 className="grid grid-cols-1 rounded bg-dark-1000 border border-4 w-full"
                 style={{ borderColor: fromChain.color }}
@@ -491,7 +490,8 @@ export default function Exchange() {
                   />
                   <Button
                     onClick={async () => setAmount(ethers.utils.formatUnits(await
-                      getBalance(), decimals))}
+                      getBalance(), decimals))
+setBalance(ethers.utils.formatUnits(await getBalance(), decimals))} 
                   >
                     <div className="flex w-full text-md justify-end font-bold">
                       MAX: {
@@ -622,17 +622,15 @@ export default function Exchange() {
                 </div>
               }
               {/* </div> */}
-              {/* <TradeDetail trade={trade} /> */}
+              <TradeDetail trade={trade} />
               <div
                 className="rounded border border-2"
                 style={{ borderColor: toChain.color, backgroundColor: toChain.color }}
 
               >
-                {account && (
                   <Button
                     className="h-[60px]"
                     variant="bordered"
-                    // fullWidth
                     color="black"
                     onClick={async () => {
                       setShowConfirmation("show");
@@ -654,8 +652,6 @@ export default function Exchange() {
                   >
                     {fromChain.chainId === toChain.chainId ? "Swap" : "Swap Crosschain"}
                   </Button>
-                )}
-                {/* </div> */}
               </div>
             </SwapLayoutCard>
           </div>
