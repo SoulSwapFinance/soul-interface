@@ -40,6 +40,8 @@ import { NETWORK_ICON, NETWORK_LABEL } from "config/networks";
 import NetworkModal from "modals/NetworkModal";
 // import { e10 } from "functions/math";
 import { useCurrency } from 'hooks/Tokens'
+import { AutoColumn } from "components/Column";
+import Row from "components/Row";
 
 
 interface Exchange {
@@ -135,12 +137,13 @@ export default function Exchange() {
 
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
 
-  const nativeBalance =
+  const nativeBalance = //userEthBalance ?
     fromChain?.chainId == ChainId.FANTOM ? (Number(userInfo.nativeBalance) * 1E18).toFixed(0)
-      : userEthBalance
+      : 0
+  // Number(userEthBalance) 
 
   const [wallet, setWallet] = useState<WalletProvider>(null);
-  
+
   const fromCurrency = useCurrency(from.address)
   const toCurrency = useCurrency(to.address)
 
@@ -394,7 +397,7 @@ export default function Exchange() {
 
               {/*  [F] TOKEN SELECTOR */}
               {/*    [F] CHAIN LOGO   */}
-  
+
               <div
                 className="grid grid-cols-1 rounded bg-dark-1000 border border-4 w-full"
                 style={{ borderColor: fromChain.color }}
@@ -444,7 +447,7 @@ export default function Exchange() {
                 <div
                   className={"flex w-full border border-4"}
                   style={{ borderColor: fromChain.color }}
-                /> 
+                />
                 <Button
                   className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
                   onClick={() => setShowSelectFrom(true)}
@@ -452,7 +455,7 @@ export default function Exchange() {
                   color={'black'}
                 >
                   <div className="">
-                   <Image className="block object-fit:contain object-position:center items-center"
+                    <Image className="block object-fit:contain object-position:center items-center"
                       src={from?.logo} width="64" height="64" alt={from?.name}
                     />
                   </div>
@@ -478,9 +481,9 @@ export default function Exchange() {
                     </div>
                   </div>
                   <div
-                  className={"flex w-full border border-2"}
-                  style={{ borderColor: fromChain.color }}
-                />
+                    className={"flex w-full border border-2"}
+                    style={{ borderColor: fromChain.color }}
+                  />
                   <InputCurrencyBox
                     disabled={!from}
                     value={amount}
@@ -501,34 +504,43 @@ export default function Exchange() {
                 </div>
               </div>
 
-              {/* <div className="p-1 bg-dark-1000">
-            // ARROW DOWN ICON 
-                <Row style={{ justifyContent: "center", alignItems: "center" }}>
-        <div style={{ height: "1px", width: "100%" }} />
-          <OverlayButton 
-            style={{ padding: 0 }} 
-            // onClick={handleSwap}
-          >
-              <AutoColumn justify="space-between" className="py-2 -my-4 py-4">
-                  <div className="flex justify-center mt-2.5 mb-2.5 z-0">
-                    <div
-                      role="button"
-                      className="p-2.5 rounded-full bg-dark-1000 border shadow-md border-dark-700"
-                      >
-                      <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
-                    </div>
-                  </div>
-                </AutoColumn>
-          </OverlayButton>
-        <div style={{ height: "1px", width: "100%" }} />
-      </Row>
-                      </div> *\}
+              {/* <div className="p-1 rounded bg-dark-900"> */}
+                {/* // ARROW DOWN ICON  */}
+
+              {/* </div> */}
               {/* [2] TO TOKEN SELECTOR */}
               {/* [T] NETWORK LOGO */}
+
+              <Row style={{ justifyContent: "center", alignItems: "center"}}>
+                  <div style={{ height: "1px", width: "100%" }} />
+                  <OverlayButton
+                    style={{ padding: 0 }}
+                  // onClick={handleSwap}
+                  >
+                    <AutoColumn justify="space-between" className="py-0 -my-6 py-6">
+                      <div className="flex justify-center z-0">
+                        <div
+                          role="button"
+                          className="p-2.5 rounded-full bg-dark-1000 border border-2 shadow-md"
+                          style={{ borderColor: toChain.color }}
+                        >
+                          <ArrowDownIcon 
+                            width={24} 
+                            className="text-high-emphesis hover:text-white" 
+                            style={{ color: fromChain.color }}  
+                          />
+                        </div>
+                      </div>
+                    </AutoColumn>
+                  </OverlayButton>
+                  <div style={{ height: "1px", width: "1000%" }} />
+                </Row>
+
               <div
                 className="grid grid-cols-1 rounded bg-dark-1000 border border-4 w-full"
                 style={{ borderColor: toChain.color }}
               >
+            
                 <div
                   className={"flex w-full border border-4"}
                   style={{ borderColor: toChain.color }}
@@ -553,8 +565,8 @@ export default function Exchange() {
                   color={'black'}
                 >
                   <div className="">
-                    <Image 
-                    className="block object-fit:contain object-position:center items-center"
+                    <Image
+                      className="block object-fit:contain object-position:center items-center"
                       src={to?.logo} width="64" height="64" alt={to?.name}
                     />
                   </div>
@@ -579,22 +591,22 @@ export default function Exchange() {
                 </div>
               </div>
 
-              <div 
+              <div
                 className="flex p-2 justify-center gap-6 text-lg text-center bg-dark-1000 font-bold"
-                  style={{ color: fromChain.color }}
-                >
-                  {formatNumber(fromAmount, false, true)} {from.symbol} ({formatNumber(fromUsd, true, true)})
-                  {/* on {fromChain.name} */}
+                style={{ color: fromChain.color }}
+              >
+                {formatNumber(fromAmount, false, true)} {from.symbol} ({formatNumber(fromUsd, true, true)})
+                {/* on {fromChain.name} */}
                 <div
                   className="flex"
                   style={{ color: 'white' }}
                 >
 
-                <ArrowRightIcon className="m-2 border border-2 rounded" height="21px" />
+                  <ArrowRightIcon className="m-2 border border-2 rounded" height="21px" />
 
                 </div>
 
-                <div 
+                <div
                   className="flex"
                   style={{ color: toChain.color }}
                 >
@@ -605,11 +617,11 @@ export default function Exchange() {
 
               {/* HIGH-SLIPPAGE WARNING */}
               {trade &&
-                <div 
+                <div
                   className={deltaPercent < 20 ? 'hidden' : `flex flex-col rounded gap-4 bg-dark-1000 p-3 font-bold w-full space-y-1`}
                 // style={{ backgroundColor: deltaPercent > 20 ? 'black' : toChain.color}}
                 >
-                  <div 
+                  <div
                     className="flex font-bold justify-center">
                     <Typography className={classNames('text-xl font-bold', 'font-bold text-white')} weight={600} fontFamily={'semi-bold'}>
                       {trade
@@ -619,6 +631,16 @@ export default function Exchange() {
                   </div>
                 </div>
               }
+              <div
+                className={`flex flex-col rounded gap-4 bg-dark-1000 p-3 font-bold w-full space-y-1`}
+              >
+                <div
+                  className="flex font-bold justify-center">
+                  <Typography className={classNames('text-xl font-bold', 'font-bold text-white')} weight={600} fontFamily={'semi-bold'}>
+                    {`Slippage: ${formatNumber(Number(deltaPercent), false, true)}%`}
+                  </Typography>
+                </div>
+              </div>
               {/* </div> */}
               <TradeDetail trade={trade} />
               <div
@@ -626,30 +648,30 @@ export default function Exchange() {
                 style={{ borderColor: toChain.color, backgroundColor: toChain.color }}
 
               >
-                  <Button
-                    className="h-[60px]"
-                    variant="bordered"
-                    color="black"
-                    onClick={async () => {
-                      setShowConfirmation("show");
-                      try {
-                        await trade?.swap({
-                          onConfirm: (_hash: any) => setShowConfirmation("hide"),
-                        });
-                      } catch (e) {
-                        if (e instanceof InsufficientFundsError) {
-                          setShowConfirmation("poor");
-                        } else {
-                          console.error(e);
-                          setShowConfirmation("hide");
-                        }
+                <Button
+                  className="h-[60px]"
+                  variant="bordered"
+                  color="black"
+                  onClick={async () => {
+                    setShowConfirmation("show");
+                    try {
+                      await trade?.swap({
+                        onConfirm: (_hash: any) => setShowConfirmation("hide"),
+                      });
+                    } catch (e) {
+                      if (e instanceof InsufficientFundsError) {
+                        setShowConfirmation("poor");
+                      } else {
+                        console.error(e);
+                        setShowConfirmation("hide");
                       }
-                    }}
-                    style={{ opacity: trade ? 1 : 0.5, cursor: trade ? "pointer" : "not-allowed" }}
-                    disabled={trade == undefined}
-                  >
-                    {fromChain.chainId === toChain.chainId ? "Swap" : "Swap Crosschain"}
-                  </Button>
+                    }
+                  }}
+                  style={{ opacity: trade ? 1 : 0.5, cursor: trade ? "pointer" : "not-allowed" }}
+                  disabled={trade == undefined}
+                >
+                  {fromChain.chainId === toChain.chainId ? "Swap" : "Swap Crosschain"}
+                </Button>
               </div>
             </SwapLayoutCard>
           </div>
@@ -676,9 +698,9 @@ const TradeDetail: FC<TradeDetailProps> = ({ trade }) => {
   }
 
   return (
-    <div className="flex mt-[20px]">
+    <div className="flex">
       {/* <div className="flex justify-between"> */}
-      <div className="h-px my-2 bg-dark-1000" />
+      {/* <div className="h-px my-2 bg-dark-1000" /> */}
     </div>
   );
 };
@@ -804,8 +826,8 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
                 {/* <ChevronDownIcon width="13" height="13" style={{ color: "white", marginTop: 2 }} /> */}
               </Button>
 
-          {/* SEARCH BAR */}
-            {/*  <form
+              {/* SEARCH BAR */}
+              {/* <form
                 onSubmit={e => {
                   e.preventDefault();
                   onClose({ token: filteredTokens[0], chain: selectedChain });
@@ -818,8 +840,9 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
                   value={filter}
                   onChange={e => setFilter(e.currentTarget.value)}
                 />
-              </form>
-              */}
+              </form> */}
+              <div className="w-[100%] my-6" />
+
 
               {/* SELECT TOKEN LIST */}
               {/* {filter && */}
@@ -832,7 +855,6 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
                   </div>
                 ))}
               </div>
-              {/* } */}
             </div>
           </Modal>
         </div>
