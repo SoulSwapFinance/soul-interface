@@ -11,7 +11,7 @@
     "explorers": [
         "https://moonriver.moonscan.io/"
     ],
-    "isFavortite": false,
+    "isFavorite": false,
     "tokens": [
         {
             "id": "moonriver",

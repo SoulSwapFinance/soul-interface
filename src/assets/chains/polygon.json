@@ -11,7 +11,7 @@
     "explorers": [
         "https://polygonscan.com/"
     ],
-    "isFavortite": false,
+    "isFavorite": false,
     "tokens": [
         {
             "id": "matic-network",

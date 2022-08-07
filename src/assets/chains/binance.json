@@ -11,7 +11,7 @@
     "explorers": [
         "https://bscscan.com/"
     ],
-    "isFavortite": false,
+    "isFavorite": false,
     "tokens": [
         {
             "id": "binancecoin",
