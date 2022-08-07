@@ -1,7 +1,7 @@
 import { IS_IN_IFRAME } from 'constants/index'
 import { useEffect, useState } from 'react'
 import { isMobile } from 'react-device-detect'
-import { useWeb3React } from 'web3-react-core'
+import { useWeb3React } from '@web3-react/core'
 
 import { injected } from '../config/wallets'
 

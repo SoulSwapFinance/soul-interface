@@ -5,7 +5,7 @@
     "longName": "Fantom Opera",
     "color": "#1969FF",
     "rpc": [
-        "https://rpc.ankr.com/fantom"
+        "https://rpc.ftm.tools/"
     ],
     "explorers": [
         "https://ftmscan.com/"

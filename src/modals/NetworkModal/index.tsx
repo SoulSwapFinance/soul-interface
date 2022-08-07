@@ -55,7 +55,7 @@ export const SUPPORTED_NETWORKS: {
       symbol: 'FTM',
       decimals: 18,
     },
-    rpcUrls: ['https://rpc.ankr.com/fantom', 'https://rpcapi.fantom.network'],
+    rpcUrls: ['https://rpc.ankr.com/fantom', 'https://rpcapi.fantom.network', 'https://rpc.ftm.tools'],
     blockExplorerUrls: ['https://ftmscan.com'],
   },
   [ChainId.BSC]: {
