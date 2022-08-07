@@ -56,7 +56,6 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`+/-`)}
           </Typography>
         </NavLink>
-       {/*
         <NavLink
           activeClassName="text-dark-600"
           href={{
@@ -68,7 +67,6 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Cross`)}
           </Typography>
         </NavLink>
-        */}
         <NavLink
           activeClassName="text-dark-600"
           href={{
