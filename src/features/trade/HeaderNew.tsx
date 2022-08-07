@@ -56,19 +56,19 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`+/-`)}
           </Typography>
         </NavLink>
-       
+       {/*
         <NavLink
           activeClassName="text-dark-600"
           href={{
             pathname: '/cross',
-            query: getQuery(inputCurrency, outputCurrency),
+            // query: getQuery(inputCurrency, outputCurrency),
           }}
         >
           <Typography weight={700} className="text-secondary hover:text-purple">
             {i18n._(t`Cross`)}
           </Typography>
         </NavLink>
-
+        */}
         <NavLink
           activeClassName="text-dark-600"
           href={{

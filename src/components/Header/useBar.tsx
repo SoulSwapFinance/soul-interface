@@ -155,7 +155,8 @@ const useMenu: UseBar = () => {
           {
             key: 'cross',
             title: i18n._(t`Cross`),
-            link: '/cross',
+            link: 'https://cross.soulswap.finance',
+            // link: '/cross',
           },
           {
             key: 'farm',
