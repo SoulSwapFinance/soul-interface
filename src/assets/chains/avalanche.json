@@ -79,12 +79,12 @@
             "address": "0x50b7545627a5162f82a992c33b87adc75187b218"
         },
         {
-            "id": "joe",
-            "name": "JOE",
-            "rank": 619,
-            "logo": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/assets/0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd/logo.png",
-            "symbol": "JOE",
-            "address": "0x6e84a6216ea6dacc71ee8e6b0a5b7322eebc0fdd"
+            "id": "yearn-finance",
+            "name": "yearn.finance",
+            "rank": 95,
+            "logo": "https://cryptologos.cc/logos/yearn-finance-yfi-logo.svg",
+            "symbol": "YFI",
+            "address": "0x9eaac1b23d935365bd7b542fe22ceee2922f52dc"
         },
         {
             "id": "wrapped-avax",

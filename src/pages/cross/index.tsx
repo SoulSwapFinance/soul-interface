@@ -426,9 +426,9 @@ export default function Exchange() {
             We are committed to open source and we leverage the Rubic SDK (our partners).
           </Typography>
           <Typography variant="sm" className="font-medium">
-            Found A Bug?
-            <a href="https://discord/invite/soulswap">
-              {' '} Report Here
+            Found Bugs?
+            <a href="https://discord.com/invite/soulswap">
+              {' '} Click Here
             </a>
           </Typography>
           <Button
