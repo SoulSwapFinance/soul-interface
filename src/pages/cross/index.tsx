@@ -512,11 +512,13 @@ export default function Exchange() {
                 >
                   <div className="">
                     <Image className="block object-fit:contain object-position:center items-center"
-                      src={from?.logo} width="48" height="48" alt={from?.name}
+                      src={from?.logo} 
+                      width="48" height="48"           
+                      alt={from?.name}
                     />
                   </div>
 
-                  <div className="flex justify-center mt-2 font-bold text-2xl">
+                  <div className="flex justify-center mt-2 font-bold text-xl sm:text-2xl">
                     {from.name} ({from.symbol})
                   </div>
                 </Button>
@@ -627,7 +629,7 @@ export default function Exchange() {
                     />
                   </div>
 
-                  <div className="flex justify-center mt-2 font-bold text-lg sm:text-2xl">
+                  <div className="flex justify-center mt-2 font-bold text-xl sm:text-2xl">
                     {to?.name} ({to?.symbol})
                   </div>
                 </Button>
