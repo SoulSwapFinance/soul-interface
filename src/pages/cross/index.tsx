@@ -914,7 +914,7 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
                     rounded rounded-3xl bg-black font-bold 
                     text-center justify-center" 
                     key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
-                    <Image src={token.logo} width="56" height="56" alt={token.name + ' logo'} />
+                    <Image src={token.logo} width="36" height="36" alt={token.name + ' logo'} />
                     <div className="flex text-md">{token.name}
                      {/* ({token.symbol}) */}
                      </div>
