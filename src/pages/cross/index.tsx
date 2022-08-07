@@ -836,6 +836,8 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
                     showChainSelect(false);
                     setFilter("");
                   }}
+                  variant="bordered"
+                  color="black"
                   className={classNames(chain.chainId === selectedChainId && `border border-2 border-white`, "flex border border-transparent hover:border-white align-center w-[100%]")}
                   style={{ backgroundColor: chain.color }}
                 >
