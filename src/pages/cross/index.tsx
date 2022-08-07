@@ -423,7 +423,7 @@ export default function Exchange() {
           <Typography variant="lg">
             Crosschain Swaps are currently in beta, so use at your own risk.
             <br /><br />
-            We are committed to open source and we leverage our partner's SDK (Rubic).
+            We are committed to open source and we leverage the Rubic SDK (our partners).
           </Typography>
           <Typography variant="sm" className="font-medium">
             Found A Bug?
