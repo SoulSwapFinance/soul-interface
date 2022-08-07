@@ -627,7 +627,7 @@ export default function Exchange() {
                     />
                   </div>
 
-                  <div className="flex justify-center mt-2 font-bold text-2xl">
+                  <div className="flex justify-center mt-2 font-bold text-lg sm:text-2xl">
                     {to?.name} ({to?.symbol})
                   </div>
                 </Button>
@@ -915,27 +915,13 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
                     text-center justify-center" 
                     key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
                     <Image src={token.logo} width="36" height="36" alt={token.name + ' logo'} />
-                    <div className="flex text-md">{token.name}
+                    <div className="flex text-md justify-left">{token.name}
                      {/* ({token.symbol}) */}
                      </div>
                     </div>
                 ))}
               </div>
               {/* } */}
-        {/* TO CHAIN CURRENCY */}
-        {/* <CurrencySearchModal.Controlled
-          open={showSelectTo}
-          onDismiss={() => setShowSelectTo(false)}
-          onCurrencySelect={async () => await setTo(to) }
-          // onCurrencySelect={ setTo(selectedToken) }
-          selectedCurrency={tokensList[0]} // todo: fix
-          // otherSelectedCurrency={otherCurrency}
-          // showCommonBases={showCommonBases}
-          currencyList={tokensList[0]}
-          includeNativeCurrency={true}
-          allowManageTokenList={false}
-          showSearch={true}
-        /> */}
             </div>
           </Modal>
         </div>
