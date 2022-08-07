@@ -1,15 +1,15 @@
 import { ChainId } from '../sdk'
 
-const Mainnet = '/images/networks/mainnet-network.jpg'
+const Ethereum = '/images/networks/ethereum.svg'
 const Telos = '/images/networks/telos.png'
-const Avalanche = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/Avalanche.svg'
-const Polygon = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/polygon/Polygon.svg'
+const Avalanche = '/images/networks/avalanche.svg'
+const Polygon = '/images/networks/polygon.svg'
 const Arbitrum = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/arbitrum/Arbitrum.png'
-const Binance = '/images/networks/bsc.png'
-const Fantom = '/images/networks/fantom-network.jpg'
+const Binance = '/images/networks/binance.svg'
+const Fantom = '/images/networks/fantom-white.svg'
 
 export const NETWORK_ICON = {
-  [ChainId.ETHEREUM]: Mainnet,
+  [ChainId.ETHEREUM]: Ethereum,
   [ChainId.TELOS]: Telos,
   [ChainId.BSC]: Binance,
   [ChainId.FANTOM]: Fantom,

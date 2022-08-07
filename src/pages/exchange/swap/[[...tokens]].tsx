@@ -353,7 +353,6 @@ const Swap = () => {
       />
       <SwapLayoutCard>
         <div className="flex flex-col gap-3 justify-center">
-
           <HeaderNew inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
           <SwapAssetPanel
             spendFromWallet={true}

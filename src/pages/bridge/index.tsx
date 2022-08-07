@@ -865,11 +865,10 @@ const Bridge: React.FC<any> = () => {
   }, [bridgeTxHash]);
 
   return (
-    <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
+    <Container id="bridge-page" maxWidth="2xl" className="space-y-4">
       <DoubleGlowShadowV2>
       <div className="p-4 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>          
         <div className="px-2">
-
     <HeaderNew />
     </div>
     <FadeInOut>
@@ -1059,7 +1058,7 @@ const Bridge: React.FC<any> = () => {
 //   );
 // };
 
-const StyledOverlayButton = styled(OverlayButton)`
+export const StyledOverlayButton = styled(OverlayButton)`
   :hover {
     background-color: #b365ff;
   }

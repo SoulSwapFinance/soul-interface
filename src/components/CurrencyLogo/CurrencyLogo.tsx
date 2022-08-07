@@ -9,7 +9,9 @@ import Logo from '../Logo'
 const BLOCKCHAIN = {
   [ChainId.ETHEREUM]: 'ethereum',
   [ChainId.BSC]: 'binance',
-  [ChainId.FANTOM]: 'fantom'
+  [ChainId.FANTOM]: 'fantom',
+  [ChainId.AVALANCHE]: 'avalanche',
+  [ChainId.MATIC]: 'polygon',
 }
 
 // @ts-ignore TYPE NEEDS FIXING

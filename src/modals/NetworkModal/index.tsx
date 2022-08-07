@@ -55,7 +55,7 @@ export const SUPPORTED_NETWORKS: {
       symbol: 'FTM',
       decimals: 18,
     },
-    rpcUrls: ['https://rpc.ankr.com/fantom', 'https://rpcapi.fantom.network'],
+    rpcUrls: ['https://rpc.ankr.com/fantom', 'https://rpcapi.fantom.network', 'https://rpc.ftm.tools'],
     blockExplorerUrls: ['https://ftmscan.com'],
   },
   [ChainId.BSC]: {
@@ -219,8 +219,8 @@ const NetworkModal: FC = () => {
   return (
     <HeadlessUiModal.Controlled isOpen={networkModalOpen} onDismiss={toggleNetworkModal}>
       <div className="flex flex-col gap-4">
-        <HeadlessUiModal.Header header={i18n._(t`Select Network`)} onClose={toggleNetworkModal} />
-        <div className="grid grid-flow-row-dense grid-cols-1 gap-4 overflow-y-auto md:grid-cols-2">
+        {/* <HeadlessUiModal.Header header={i18n._(t`Select Network`)} onClose={toggleNetworkModal} /> */}
+        <div className="grid grid-flow-row-dense grid-cols-1 p-8 gap-3 overflow-y-auto w-full">
           {[
             ChainId.ETHEREUM,
             ChainId.FANTOM,
@@ -228,7 +228,7 @@ const NetworkModal: FC = () => {
             ChainId.BSC,
             ChainId.AVALANCHE,
             ChainId.MATIC,
-            ChainId.ARBITRUM,
+            // ChainId.ARBITRUM,
           ].map((key: ChainId, i: number) => {
             if (chainId === key) {
               return (
@@ -254,7 +254,7 @@ const NetworkModal: FC = () => {
                   <Image
                     src={NETWORK_ICON[key]}
                     alt="Switch Network"
-                    className="rounded-md"
+                    className="rounded-2xl"
                     width="32px"
                     height="32px"
                   />
