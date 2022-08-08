@@ -151,17 +151,17 @@ export const SUPPORTED_NETWORKS: {
   //   rpcUrls: ['https://exchainrpc.okex.org'],
   //   blockExplorerUrls: ['https://www.oklink.com/okexchain'],
   // },
-  [ChainId.ARBITRUM]: {
-    chainId: '0xA4B1',
-    chainName: 'Arbitrum',
-    nativeCurrency: {
-      name: 'Ethereum',
-      symbol: 'ETH',
-      decimals: 18,
-    },
-    rpcUrls: ['https://arb1.arbitrum.io/rpc'],
-    blockExplorerUrls: ['https://arbiscan.io'],
-  },
+  // [ChainId.ARBITRUM]: {
+  //   chainId: '0xA4B1',
+  //   chainName: 'Arbitrum',
+  //   nativeCurrency: {
+  //     name: 'Ethereum',
+  //     symbol: 'ETH',
+  //     decimals: 18,
+  //   },
+  //   rpcUrls: ['https://arb1.arbitrum.io/rpc'],
+  //   blockExplorerUrls: ['https://arbiscan.io'],
+  // },
   // [ChainId.CELO]: {
   //   chainId: '0xA4EC',
   //   chainName: 'Celo',
@@ -228,7 +228,7 @@ const NetworkModal: FC = () => {
             ChainId.BSC,
             ChainId.AVALANCHE,
             ChainId.MATIC,
-            ChainId.ARBITRUM,
+            // ChainId.ARBITRUM,
             ChainId.MOONRIVER,
           ].map((key: ChainId, i: number) => {
             if (chainId === key) {
@@ -247,8 +247,8 @@ const NetworkModal: FC = () => {
                             ? 'border-yellow'
                               : chainId == ChainId.AVALANCHE
                               ? 'border-red'
-                                : chainId == ChainId.ARBITRUM
-                                ? 'border-arbitrumBlue'
+                                // : chainId == ChainId.ARBITRUM
+                                // ? 'border-arbitrumBlue'
                                   : chainId == ChainId.MOONRIVER
                                   ? 'border-moonriverTeal'
                                     : 'border-purple'
@@ -303,8 +303,8 @@ const NetworkModal: FC = () => {
                       ? 'hover:border-yellow'
                         : key == ChainId.AVALANCHE
                         ? 'hover:border-red'
-                          : key == ChainId.ARBITRUM
-                          ? 'hover:border-arbitrumBlue'
+                          // : key == ChainId.ARBITRUM
+                          // ? 'hover:border-arbitrumBlue'
                             : key == ChainId.MOONRIVER
                             ? 'hover:border-moonriverTeal'
                               : 'hover:border-purple'

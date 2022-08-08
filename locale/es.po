@@ -426,9 +426,6 @@ msgstr ""
 msgid "Connect Wallet ↗"
 msgstr ""
 
-msgid "Connect to a wallet"
-msgstr ""
-
 msgid "Considerations"
 msgstr ""
 
