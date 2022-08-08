@@ -447,7 +447,25 @@ export default function Exchange() {
             variant="bordered"
             color="black"
             height="2.5rem"
-            onClick={ async () => await handleTrade() }
+            onClick={
+            async () => {
+      setShowConfirmation("show")
+      try {
+        await trade?.swap({
+          onConfirm: (_hash: any) => setShowConfirmation("hide"),
+        });
+      } catch (e) {
+        if (e instanceof InsufficientFundsError) {
+          setShowConfirmation("poor");
+        } else {
+          console.error(e);
+          setShowConfirmation("hide");
+        }
+      }
+    }
+            // async () => 
+            // await handleTrade() 
+            }
             style={{ borderColor: toChain?.color, backgroundColor: toChain?.color }}
 
           >
