@@ -142,7 +142,7 @@ export default function Exchange() {
 
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
 
-  const nativeBalance = //userEthBalance ?
+  let nativeBalance = //userEthBalance ?
     fromChain?.chainId == ChainId.FANTOM ? (Number(userInfo.nativeBalance) * 1E18).toFixed(0)
       : 0
   // Number(userEthBalance) 
@@ -173,7 +173,10 @@ export default function Exchange() {
 
       const userBalance = await getBalance()
       const balance = Number(userBalance) / 10 ** (from?.decimals ? from?.decimals : 18)
-
+      const nativeBalance = fromChain?.chainId == ChainId.FANTOM 
+        ? (Number(userInfo.nativeBalance) * 1E18).toFixed(0)
+        : balance
+        
       setConfiguration(newConfiguration);
       if (rubic) {
         await rubic.updateConfiguration(newConfiguration);
@@ -506,6 +509,7 @@ export default function Exchange() {
                 />
                 <Button
                   className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
+                  // style={{ borderColor: fromChain.color }}
                   onClick={() => setShowSelectFrom(true)}
                   variant={'outlined'}
                   color={'black'}
@@ -518,8 +522,9 @@ export default function Exchange() {
                     />
                   </div>
 
-                  <div className="flex justify-center mt-2 font-bold text-xl sm:text-2xl">
-                    {from.name} ({from.symbol})
+                  <div className="flex justify-center mt-2 font-bold text-2xl">
+                    {/* {from.name} */}
+                      {from.symbol}
                   </div>
                 </Button>
                 <div
@@ -552,11 +557,12 @@ export default function Exchange() {
                   <Button
                     onClick={async () => setAmount(ethers.utils.formatUnits(await
                       getBalance(), decimals))}>
-                    <div className="flex w-full text-md justify-end font-bold">
-                      MAX: {
+                    <div className="flex w-full text-sm justify-end font-bold">
+                      MAX
+                      {/* : {
                         fromBalance
                           ? formatNumber(fromBalance, false, true)
-                          : '0'}
+                          : '0'} */}
                     </div>
                   </Button>
                 </div>
@@ -618,6 +624,7 @@ export default function Exchange() {
                 />
                 <Button
                   className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
+                  // style={{ borderColor: toChain?.color }}
                   onClick={() => setShowSelectTo(true)}
                   variant={'outlined'}
                   color={'black'}
@@ -629,8 +636,9 @@ export default function Exchange() {
                     />
                   </div>
 
-                  <div className="flex justify-center mt-2 font-bold text-xl sm:text-2xl">
-                    {to?.name} ({to?.symbol})
+                  <div className="flex justify-center mt-2 font-bold text-2xl">
+                    {/* {to?.name}  */}
+                    {to?.symbol}
                   </div>
                 </Button>
                 <div
@@ -682,9 +690,7 @@ export default function Exchange() {
                   <div
                     className="flex font-bold justify-center">
                     <Typography className={classNames('text-xl font-bold', 'font-bold text-white')} weight={600} fontFamily={'semi-bold'}>
-                      {trade
-                        ? `Warning High-Slippage: ${formatNumber(Number(deltaPercent), false, true)}%`
-                        : ""}
+                        Warning High-Slippage
                     </Typography>
                   </div>
                 </div>
@@ -738,7 +744,7 @@ const TradeDetail: FC<TradeDetailProps> = ({ trade }) => {
     if (isCrossChainTrade(trade)) {
       receive = `${formatNumber(Number(trade.toTokenAmountMin), false, true)} ${trade.to?.symbol}`;
     } else {
-      receive = `${formatNumber(trade.toTokenAmountMin.tokenAmount, false, true)} ${trade.to?.symbol}`;
+      receive = `${formatNumber(Number(trade.toTokenAmountMin.tokenAmount), false, true)} ${trade.to?.symbol}`;
     }
   }
 
@@ -758,12 +764,6 @@ interface TokenSelectProps {
 const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
   const [filter, setFilter] = useState("");
   const [selectedChainId, setSelectedChainId] = useState(chain.chainId);
-  const [showSelectFrom, setShowSelectFrom] = useState(false);
-  const [showSelectTo, setShowSelectTo] = useState(false);
-  const [from, setFrom] = useState<Token>(DAI);
-  const [to, setTo] = useState<Token>(SOUL);
-  const [showConfirmation, setShowConfirmation] = useState(false);
-
   const selectedChain = useMemo(() => CHAINS.find(c => c.chainId === selectedChainId), [selectedChainId, CHAINS]);
   const input = useRef<HTMLInputElement>(null);
   const tokensList = useRef<HTMLDivElement>(null);
@@ -909,17 +909,17 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
 
               {/* SELECT TOKEN LIST */}
               {/* {filter && */}
-              <div className="grid grid-cols-1 bg-dark-1100 w-full" ref={tokensList}>
+              <div className="grid grid-cols-5 bg-dark-1100 w-full" ref={tokensList}>
                 {filteredTokens.map(token => (
-                  <div className="grid grid-cols-2 border border-2 m-0.5 
-                    border-dark-1000
+                  <div className="flex border border-2 m-0.5 
+                    border-dark-1000 p-1
                     rounded rounded-3xl bg-black font-bold 
-                    text-center justify-center" 
+                    text-center justify-center"
                     key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
-                    <Image src={token.logo} width="36" height="36" alt={token.name + ' logo'} />
-                    <div className="flex text-md justify-left">{token.name}
+                    <Image src={token.logo} width="56" height="56" alt={token.name + ' logo'} />
+                    {/* <div className="flex text-md justify-left">{token.name} */}
                      {/* ({token.symbol}) */}
-                     </div>
+                     {/* </div> */}
                     </div>
                 ))}
               </div>
