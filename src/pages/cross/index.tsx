@@ -24,6 +24,7 @@ import { useNetworkModalToggle, useWalletModalToggle } from "state/application/h
 // import { i18n } from "@lingui/core";
 import { ContentBox, Input, OverlayButton, Typo1, Typo2, Typo3 } from "components/index";
 // import { TokenSelectOverlay } from "features/cross/crossStyles";
+import useSendTransaction from "hooks/useSendTransaction"
 import Typography from "components/Typography";
 import { formatNumber } from "functions/format";
 import { classNames } from "functions/styling";
@@ -374,6 +375,16 @@ export default function Exchange() {
         }
       }
     }
+    
+  const {
+    sendTx: handleApproveToken,
+    isPending: isApprovePending,
+    isCompleted: isApproveCompleted,
+  } = useSendTransaction(() =>
+  approve(from.address, from.address)
+    // approve(from.address, RUBIC_ADDRESS[chainId])
+  );
+  
 
   return (
     <>
@@ -412,7 +423,7 @@ export default function Exchange() {
             }}
           />
         </div>
-      }
+      } 
     
     {setShowConfirmationModal &&
       <Modal isOpen={showConfirmationModal} onDismiss={
@@ -710,6 +721,21 @@ export default function Exchange() {
                 style={{ borderColor: toChain?.color, backgroundColor: toChain?.color }}
 
               >
+               <Button
+                 className="h-[60px]" 
+                 variant="bordered" 
+                 color="black" 
+                 onClick={ handleApproveToken } 
+               >
+                {
+                  isApprovePending
+                    ? "Approving"
+                    : isApproveCompleted
+                      ? "Approved"
+                      : "Approve"
+                } 
+              </Button>
+              
                 <Button
                   className="h-[60px]"
                   variant="bordered"
