@@ -360,8 +360,7 @@ export default function Exchange() {
   const wrongNetwork = fromChain.chainId != chainId ? true : false
 
   const handleTrade = async () => {
-    {async () => {
-      setShowConfirmation("show");
+      setShowConfirmation("show")
       try {
         await trade?.swap({
           onConfirm: (_hash: any) => setShowConfirmation("hide"),
@@ -374,8 +373,7 @@ export default function Exchange() {
           setShowConfirmation("hide");
         }
       }
-    }}
-  }
+    }
 
   return (
     <>
@@ -716,7 +714,13 @@ export default function Exchange() {
                   className="h-[60px]"
                   variant="bordered"
                   color="black"
-                  onClick={ async () => { await setShowConfirmationModal(true) } }
+                  onClick={ 
+                    async () => 
+                   {
+                      await 
+                      setShowConfirmationModal(true)
+                    } 
+                  }
                   style={{ opacity: trade ? 1 : 0.5, cursor: trade ? "pointer" : "not-allowed" }}
                   disabled={trade == undefined}
                 >
