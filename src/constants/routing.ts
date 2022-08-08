@@ -52,6 +52,7 @@ const WRAPPED_NATIVE_ONLY: ChainTokenList = {
   [ChainId.AVALANCHE]: [WNATIVE[ChainId.AVALANCHE]],
   [ChainId.MATIC]: [WNATIVE[ChainId.MATIC]],
   [ChainId.ARBITRUM]: [WNATIVE[ChainId.ARBITRUM]],
+  [ChainId.MOONRIVER]: [WNATIVE[ChainId.MOONRIVER]],
 }
 
 // used to construct intermediary pairs for trading
@@ -143,6 +144,9 @@ export const COMMON_BASES: ChainTokenList = {
   [ChainId.ETHEREUM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.ETHEREUM], 
   ],
+  [ChainId.MOONRIVER]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.MOONRIVER], 
+  ],
   [ChainId.MATIC]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.MATIC], 
   ],
@@ -173,6 +177,7 @@ export const COMMON_BASES: ChainTokenList = {
   ],
   [ChainId.BSC]: [...WRAPPED_NATIVE_ONLY[ChainId.BSC], BSC.DAI, BSC.USD, BSC.USDC, BSC.USDT, BSC.BTCB, BSC.WETH],
   [ChainId.AVALANCHE]: [...WRAPPED_NATIVE_ONLY[ChainId.AVALANCHE], AVALANCHE.USDC, AVALANCHE.WETH],
+  [ChainId.MOONRIVER]: [...WRAPPED_NATIVE_ONLY[ChainId.AVALANCHE], AVALANCHE.USDC, AVALANCHE.WETH],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend

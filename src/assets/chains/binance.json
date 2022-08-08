@@ -78,22 +78,6 @@
             "logo": "https://cryptologos.cc/logos/binance-usd-busd-logo.svg",
             "symbol": "BUSD",
             "address": "0xe9e7cea3dedca5984780bafc599bd69add087d56"
-        },
-        {
-            "id": "pancakeswap-token",
-            "name": "PancakeSwap",
-            "rank": 405,
-            "logo": "https://cryptologos.cc/logos/pancakeswap-cake-logo.svg",
-            "symbol": "CAKE",
-            "address": "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82"
-        },
-        {
-            "id": "sushi",
-            "name": "Sushi",
-            "rank": 424,
-            "logo": "https://cryptologos.cc/logos/sushiswap-sushi-logo.svg",
-            "symbol": "SUSHI",
-            "address": "0x947950bcc74888a40ffa2593c5798f11fc9124c4"
         }
     ]
 }

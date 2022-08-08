@@ -15,18 +15,18 @@ export const RPC = {
   // [ChainId.RINKEBY]: 'https://eth-rinkeby.alchemyapi.io/v2/XVLwDlhGP6ApBXFz_lfv0aZ6VmurWhYD',
   // [ChainId.GÖRLI]: 'https://eth-goerli.alchemyapi.io/v2/Dkk5d02QjttYEoGmhZnJG37rKt8Yl3Im',
   // [ChainId.KOVAN]: 'https://eth-kovan.alchemyapi.io/v2/6OVAa_B_rypWWl9HqtiYK26IRxXiYqER',
-  // [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com',
+  [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com',
   // [ChainId.MATIC]: 'https://apis.ankr.com/e22bfa5f5a124b9aa1f911b742f6adfe/c06bb163c3c2a10a4028959f4d82836d/polygon/full/main',
   // [ChainId.MATIC_TESTNET]: 'https://rpc-mumbai.matic.today',
   // [ChainId.XDAI]: 'https://rpc.xdaichain.com',
   // [ChainId.BSC_TESTNET]: 'https://data-seed-prebsc-2-s3.binance.org:8545',
   // [ChainId.MOONBEAM_TESTNET]: 'https://rpc.testnet.moonbeam.network',
-  // [ChainId.MOONRIVER]: 'https://moonriver-api.bwarelabs.com/0e63ad82-4f98-46f9-8496-f75657e3a8e', //'https://moonriver.api.onfinality.io/public',
+  [ChainId.MOONRIVER]: 'https://moonriver-api.bwarelabs.com/0e63ad82-4f98-46f9-8496-f75657e3a8e', //'https://moonriver.api.onfinality.io/public',
   [ChainId.AVALANCHE]: 'https://api.avax.network/ext/bc/C/rpc',
   // [ChainId.AVALANCHE_TESTNET]: 'https://api.avax-test.network/ext/bc/C/rpc',
   // [ChainId.HARMONY]: 'https://api.harmony.one',
   // [ChainId.HARMONY_TESTNET]: 'https://api.s0.b.hmny.io',
-  // [ChainId.ARBITRUM]: 'https://arb1.arbitrum.io/rpc',
+  [ChainId.ARBITRUM]: 'https://arb1.arbitrum.io/rpc',
 }
 
 export const POOL_DENY = []

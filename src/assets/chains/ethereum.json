@@ -24,14 +24,6 @@
             "decimals": 18
         },
         {
-            "id": "magic-internet-money",
-            "name": "Magic Internet Money",
-            "rank": 385,
-            "logo": "https://raw.githubusercontent.com/SoulSwapFinance/assets/9701a4f840e2866e8852322106a1eab3cf0f2e9a/blockchains/fantom/assets/0x82f0B8B456c1A451378467398982d4834b6829c1/logo.svg",
-            "symbol": "MIM",
-            "address": "0x99D8a9C45b2ecA8864373A26D1459e3Dff1e17F3"
-        },
-        {
             "id": "fantom",
             "name": "Fantom",
             "rank": 25,
@@ -62,14 +54,6 @@
             "logo": "https://cryptologos.cc/logos/aave-aave-logo.svg",
             "symbol": "AAVE",
             "address": "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9"
-        },
-        {
-            "id": "yearn-finance",
-            "name": "Yearn Finance",
-            "rank": 95,
-            "logo": "https://cryptologos.cc/logos/yearn-finance-yfi-logo.svg",
-            "symbol": "YFI",
-            "address": "0x0bc529c00c6401aef6d220be8c6ea1667f6ad93e"
         },
         {
             "id": "curve-dao-token",

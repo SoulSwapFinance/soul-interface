@@ -56,6 +56,13 @@ export const AVALANCHE: { [key: string]: Token } = {
   WETH: new Token(ChainId.AVALANCHE, '0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB', 18, 'WETH', 'Wrapped Ether'),
 }
 
+export const MOONRIVER: { [key: string]: Token } = {
+  DAI: new Token(ChainId.MOONRIVER, '0x80a16016cc4a2e6a2caca8a4a498b1699ff0f844', 18, 'DAI', 'Dai Stablecoin'),
+  WBTC: new Token(ChainId.MOONRIVER, '0x6ab6d61428fde76768d7b45d8bfeec19c6ef91a8', 8, 'WBTC', 'Wrapped Bitcoin'),
+  WETH: new Token(ChainId.MOONRIVER, '0x639a647fbe20b6c8ac19e48e2de44ea792c62c5c', 18, 'WETH', 'Wrapped Ether'),
+  MATIC: new Token(ChainId.MOONRIVER, '0x682f81e57eaa716504090c3ecba8595fb54561d8', 18, 'MATIC', 'Polygon (Matic)'),
+}
+
 // Default Ethereum chain tokens
 export const MEOW = new Token(ChainId.ETHEREUM, '0x650F44eD6F1FE0E1417cb4b3115d52494B4D9b6D', 18, 'MEOW', 'Meowshi')
 export const MIR = new Token(ChainId.ETHEREUM, '0x09a3EcAFa817268f77BE1283176B946C4ff2E608', 18, 'MIR', 'Wrapped MIR')

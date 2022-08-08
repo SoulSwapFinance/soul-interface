@@ -7,6 +7,7 @@ const Bsc = 'https://cryptologos.cc/logos/bnb-bnb-logo.svg'
 
 // const Arbitrum = '/images/networks/arbitrum-network.jpg'
 const Avalanche = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/Avalanche.svg'
+const Moonriver = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/moonriver/Moonriver.svg'
 // const Goerli = '/images/networks/goerli-network.jpg'
 // const Harmony = '/images/networks/harmonyone-network.jpg'
 // const Heco = '/images/networks/heco-network.jpg'
@@ -14,7 +15,7 @@ const Avalanche = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/mast
 // const Matic = '/images/networks/matic-network.jpg'
 // const Moonbeam = '/images/networks/moonbeam-network.jpg'
 // const OKEx = '/images/networks/okex-network.jpg'
-// const Polygon = '/images/networks/polygon-network.jpg'
+const Polygon = '/images/networks/polygon-network.jpg'
 // const Rinkeby = '/images/networks/rinkeby-network.jpg'
 // const Ropsten = '/images/networks/ropsten-network.jpg'
 // const xDai = '/images/networks/xdai-network.jpg'
@@ -26,12 +27,13 @@ export const NETWORK_ICON = {
   [ChainId.BSC]: Bsc,
   [ChainId.FANTOM]: Fantom,
   [ChainId.AVALANCHE]: Avalanche,
+  [ChainId.MOONRIVER]: Moonriver,
+  [ChainId.MATIC]: Polygon,
   // [ChainId.FANTOM_TESTNET]: Fantom,
   // [ChainId.ROPSTEN]: Ropsten,
   // [ChainId.RINKEBY]: Rinkeby,
   // [ChainId.GÖRLI]: Goerli,
   // [ChainId.KOVAN]: Kovan,
-  // [ChainId.MATIC]: Polygon,
   // [ChainId.MATIC_TESTNET]: Matic,
   // [ChainId.XDAI]: xDai,
   // [ChainId.ARBITRUM]: Arbitrum,
@@ -53,12 +55,13 @@ export const NETWORK_LABEL: { [chainId in ChainId]?: string } = {
   [ChainId.BSC]: 'Binance',
   [ChainId.FANTOM]: 'Fantom',
   [ChainId.AVALANCHE]: 'Avalanche',
+  [ChainId.MOONRIVER]: 'Moonriver',
+  [ChainId.MATIC]: 'Polygon',
   // [ChainId.FANTOM_TESTNET]: 'Fantom Testnet',
   // [ChainId.RINKEBY]: 'Rinkeby',
   // [ChainId.ROPSTEN]: 'Ropsten',
   // [ChainId.GÖRLI]: 'Görli',
   // [ChainId.KOVAN]: 'Kovan',
-  // [ChainId.MATIC]: 'Polygon (Matic)',
   // [ChainId.MATIC_TESTNET]: 'Matic Testnet',
   // [ChainId.XDAI]: 'xDai',
   // [ChainId.ARBITRUM]: 'Arbitrum',
@@ -80,6 +83,7 @@ export const NATIVE_TOKEN_TICKER = {
   [ChainId.BSC]: 'BNB',
   [ChainId.FANTOM]: 'FTM',
   [ChainId.AVALANCHE]: 'AVAX',
+  [ChainId.MOONRIVER]: 'MOVR',
 }
 
 export const NATIVE_WRAPPED_TOKEN_ADDRESS = {
@@ -88,4 +92,5 @@ export const NATIVE_WRAPPED_TOKEN_ADDRESS = {
   [ChainId.TELOS]: WNATIVE_ADDRESS[40],
   [ChainId.FANTOM]: WNATIVE_ADDRESS[250],
   [ChainId.AVALANCHE]: WNATIVE_ADDRESS[43114],
+  [ChainId.MOONRIVER]: WNATIVE_ADDRESS[1285],
 }

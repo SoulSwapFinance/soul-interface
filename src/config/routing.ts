@@ -41,6 +41,7 @@ const WRAPPED_NATIVE_ONLY: ChainTokenList = {
   [ChainId.AVALANCHE]: [WNATIVE[ChainId.AVALANCHE]],
   [ChainId.MATIC]: [WNATIVE[ChainId.MATIC]],
   [ChainId.ARBITRUM]: [WNATIVE[ChainId.ARBITRUM]],
+  [ChainId.MOONRIVER]: [WNATIVE[ChainId.MOONRIVER]],
 }
 
 // used to construct intermediary pairs for trading
@@ -174,7 +175,6 @@ export const COMMON_BASES: ChainTokenList = {
     FANTOM.DAI,
     FANTOM.USDT,
   ],
-
   [ChainId.BSC]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.BSC],
     BSC.WETH,
@@ -192,6 +192,9 @@ export const COMMON_BASES: ChainTokenList = {
   ],
   [ChainId.TELOS]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.TELOS]
+  ],
+  [ChainId.MOONRIVER]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.MOONRIVER]
   ],
   [ChainId.AVALANCHE]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.AVALANCHE], 
@@ -257,6 +260,9 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
     AVALANCHE.WBTC,
     AVALANCHE.DAI,
   ],
+  [ChainId.MOONRIVER]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.MOONRIVER]
+  ]
 }
 
 // export const PINNED_PAIRS: {

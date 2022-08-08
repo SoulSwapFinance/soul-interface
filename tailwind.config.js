@@ -46,6 +46,8 @@ module.exports = {
         blue: '#1D5AFF',
         ftmBlue: '#11B5EC',
         arbitrumBlue: '#4698FA',
+        moonriverGold: '#F2B706',
+        moonriverTeal: '#41A2A1',
         pink: '#f338c3',
         green: '#7cff6b',
         red: '#ff3838',

@@ -7,4 +7,5 @@ export enum ChainId {
   AVALANCHE = 43114,
   MATIC = 137,
   ARBITRUM = 42161,
+  MOONRIVER = 1285,
 }

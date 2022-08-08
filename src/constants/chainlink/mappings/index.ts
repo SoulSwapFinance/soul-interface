@@ -1,5 +1,6 @@
 import { ChainId } from '../../../sdk'
 import ETHEREUM from './ethereum'
+import MATIC from './matic'
 
 export type ChainlinkMappingList = {
   readonly [address: string]: {
@@ -19,6 +20,6 @@ export const CHAINLINK_MAPPING: {
   [ChainId.ETHEREUM]: ETHEREUM,
   // [ChainId.KOVAN]: KOVAN,
   // [ChainId.HECO]: HECO,
-  // [ChainId.MATIC]: MATIC,
+  [ChainId.MATIC]: MATIC,
   // [ChainId.XDAI]: XDAI,
 }

@@ -68,7 +68,7 @@ export function useUnderworldPairAddresses(): string[] {
   const { chainId } = useActiveWeb3React()
   // const useEvents = false
   const useEvents = chainId && chainId !== ChainId.BSC && chainId 
-  // !== ChainId.MATIC && chainId !== ChainId.ARBITRUM
+  !== ChainId.MATIC && chainId !== ChainId.ARBITRUM
   const allTokens = useUnderworldTokens()
   const events = useQueryFilter({
     chainId,
