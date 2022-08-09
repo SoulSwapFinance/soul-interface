@@ -614,12 +614,12 @@ export default function Exchange() {
                       <div
                         role="button"
                         className="p-2.5 rounded-full bg-dark-1000 border border-2 shadow-md"
-                        style={{ borderColor: toChain?.color }}
+                        style={{ borderColor: fromChain?.color }}
                       >
                         <ArrowDownIcon
                           width={24}
                           className="text-high-emphesis hover:text-white"
-                          style={{ color: fromChain.color }}
+                          style={{ color: toChain?.color }}
                         />
                       </div>
                     </div>
