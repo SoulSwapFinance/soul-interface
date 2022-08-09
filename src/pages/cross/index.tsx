@@ -114,11 +114,11 @@ const rubicConfiguration: Configuration = {
 };
 
 const DAI = FANTOM.tokens.find(t => t.id === "dai");
-const SOUL = FANTOM.tokens.find(t => t.id === "soul");
+const USDC = FANTOM.tokens.find(t => t.id === "usdc");
 
 export default function Exchange() {
   const lastExchange = useMemo(() => {
-    return getLastExchange() ?? { from: { chain: FANTOM, token: DAI }, to: { chain: FANTOM, token: SOUL } };
+    return getLastExchange() ?? { from: { chain: FANTOM, token: DAI }, to: { chain: FANTOM, token: USDC } };
   }, []);
   const [from, setFrom] = useState<Token>(lastExchange.from.token);
   const [to, setTo] = useState<Token>(lastExchange.to?.token);
@@ -740,7 +740,7 @@ export default function Exchange() {
                 style={{ borderColor: toChain?.color, backgroundColor: toChain?.color }}
 
               >
-               <Button
+               {/* <Button
                  className="h-[60px]" 
                  variant="bordered" 
                  color="black" 
@@ -754,6 +754,7 @@ export default function Exchange() {
                       : "Approve"
                 } 
               </Button>
+              */}
               
                 <Button
                   className="h-[60px]"
