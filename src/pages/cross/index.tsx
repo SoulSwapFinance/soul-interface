@@ -42,6 +42,7 @@ import NetworkModal from "modals/NetworkModal";
 // import { e10 } from "functions/math";
 import { useCurrency } from 'hooks/Tokens'
 import { AutoColumn } from "components/Column";
+import useFantomERC20 from "hooks/useFantomERC20"
 import Row from "components/Row";
 import CurrencySearchModal from "modals/SearchModal/CurrencySearchModal";
 import { last } from "lodash";
@@ -131,7 +132,7 @@ export default function Exchange() {
   const [canBuy, setCanBuy] = useState(true);
   const [loading, setLoading] = useState(false);
   const toggleWalletModal = useWalletModalToggle()
-
+  const { approve, getAllowance } = useFantomERC20()
   const [configuration, setConfiguration] = useState(rubicConfiguration);
   const [rubic, setRubic] = useState<SDK>(null);
   useEffect(() => {
