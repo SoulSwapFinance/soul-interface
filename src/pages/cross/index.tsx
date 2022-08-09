@@ -113,12 +113,12 @@ const rubicConfiguration: Configuration = {
   },
 };
 
+const FTM = FANTOM.tokens.find(t => t.id === "fantom");
 const DAI = FANTOM.tokens.find(t => t.id === "dai");
-const USDC = FANTOM.tokens.find(t => t.id === "usdc");
 
 export default function Exchange() {
   const lastExchange = useMemo(() => {
-    return getLastExchange() ?? { from: { chain: FANTOM, token: DAI }, to: { chain: FANTOM, token: USDC } };
+    return getLastExchange() ?? { from: { chain: FANTOM, token: FTM }, to: { chain: FANTOM, token: DAI } };
   }, []);
   const [from, setFrom] = useState<Token>(lastExchange.from.token);
   const [to, setTo] = useState<Token>(lastExchange.to?.token);
