@@ -263,17 +263,23 @@ export default function Exchange() {
                 to?.isNative ? NATIVE_ADDRESS : to?.address,
               )
               .then((trades: InstantTrade[]): InstantTrade => trades[0])
+              
             : rubic.crossChain.calculateTrade(
+            // (1) fromToken
               {
                 address: from.isNative ? NATIVE_ADDRESS : from.address,
                 blockchain: RUBIC_CHAIN_BY_ID.get(fromChain.chainId),
               },
+              // (2) fromAmount
               amount,
+              // (3) toToken
               {
                 address: to?.isNative ? NATIVE_ADDRESS : to?.address,
                 blockchain: RUBIC_CHAIN_BY_ID.get(toChain?.chainId),
               },
-            );
+              // (4) options (optional)
+            )
+            // .then((trades: CrossChainTrade[]): CrossChainTrade => trades[0])
 
         const newTrade = await tradeRequest;
         const [newFromUsd, newToUsd] = await Promise.all([
