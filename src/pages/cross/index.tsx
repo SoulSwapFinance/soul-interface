@@ -278,8 +278,7 @@ export default function Exchange() {
                 blockchain: RUBIC_CHAIN_BY_ID.get(toChain?.chainId),
               },
               // (4) options (optional)
-            )
-            // .then((trades: CrossChainTrade[]): CrossChainTrade => trades[0])
+            ).then((trades: CrossChainTrade[]): CrossChainTrade => trades[0])
 
         const newTrade = await tradeRequest;
         const [newFromUsd, newToUsd] = await Promise.all([
