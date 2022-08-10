@@ -731,13 +731,13 @@ function isCrossChainTrade(trade: InstantTrade | CrossChainTrade): trade is Cros
   return "transitFeeToken" in trade;
 }
 const TradeDetail: FC<TradeDetailProps> = ({ trade }) => {
-  let receive: string;
+  let min: string;
   if (trade) {
     if (isCrossChainTrade(trade)) {
-      receive = `${formatNumber(Number(trade.toTokenAmountMin), false, true)} ${trade.to?.symbol}`;
+      min = `${formatNumber(Number(trade.toTokenAmountMin), false, true)} ${trade.to?.symbol}`;
     } else {
       // @ts-ignore
-      receive = `${formatNumber(Number(trade.toTokenAmountMin.tokenAmount), false, true)} ${trade.to?.symbol}`;
+      min = `${formatNumber(Number(trade.toTokenAmountMin.tokenAmount), false, true)} ${trade.to?.symbol}`;
     }
   }
 
