@@ -243,7 +243,7 @@ export default function Exchange() {
 
     let disposed = false;
     async function run() {
-      // Debouncing to avoid hitting CoinGecko and RPCs on every keystroke.
+      // avoids pinging CG and RPCs on keystrokes.
       await sleep(300 / 1000);
 
       if (disposed) {
@@ -256,8 +256,8 @@ export default function Exchange() {
             ? rubic.instantTrades
               .calculateTrade(
                 {
-                  blockchain: RUBIC_CHAIN_BY_ID.get(fromChain.chainId),
                   address: from.isNative ? NATIVE_ADDRESS : from.address,
+                  blockchain: RUBIC_CHAIN_BY_ID.get(fromChain.chainId),
                 },
                 amount,
                 to?.isNative ? NATIVE_ADDRESS : to?.address,
@@ -267,15 +267,15 @@ export default function Exchange() {
             : rubic.crossChain.calculateTrade(
             // (1) fromToken
               {
-              blockchain: RUBIC_CHAIN_BY_ID.get(fromChain.chainId),
               address: from.isNative ? NATIVE_ADDRESS : from.address,
+              blockchain: RUBIC_CHAIN_BY_ID.get(fromChain.chainId),
               },
               // (2) fromAmount
               amount,
               // (3) toToken
               {
-              blockchain: RUBIC_CHAIN_BY_ID.get(toChain?.chainId),
               address: to?.isNative ? NATIVE_ADDRESS : to?.address,
+              blockchain: RUBIC_CHAIN_BY_ID.get(toChain?.chainId),
               },
               // (4) options (optional)
             )
@@ -283,7 +283,7 @@ export default function Exchange() {
 
         const newTrade = await tradeRequest;
         const [newFromUsd, newToUsd] = await Promise.all([
-          // Get the USD value of what's being _sold_.
+          // the USD value of (from) being _sold_.
           from.isNative
             ? rubic.cryptoPriceApi.getNativeCoinPrice(RUBIC_CHAIN_BY_ID.get(fromChain.chainId))
             : rubic.cryptoPriceApi.getErc20TokenPrice({
@@ -291,7 +291,7 @@ export default function Exchange() {
               blockchain: RUBIC_CHAIN_BY_ID.get(fromChain.chainId),
             }),
 
-          // Get the USD value of what's being _bought_.
+          // the USD value of (to) being _bought_.
           to?.isNative
             ? rubic.cryptoPriceApi.getNativeCoinPrice(RUBIC_CHAIN_BY_ID.get(toChain?.chainId))
             : rubic.cryptoPriceApi.getErc20TokenPrice({
@@ -441,7 +441,7 @@ export default function Exchange() {
         </div>
       </Modal>
       }
-          {/* <BetaFeature /> */}
+
       <Container id="cross-page" maxWidth="2xl" className="space-y-4">
         <DoubleGlowShadowV2>
           <div className="p-4 mt-4 space-y-4 rounded bg-dark-1000" style={{ zIndex: 1 }}>
@@ -503,7 +503,6 @@ export default function Exchange() {
                 />
                 <Button
                   className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
-                  // style={{ borderColor: fromChain.color }}
                   onClick={() => setShowSelectFrom(true)}
                   variant={'outlined'}
                   color={'black'}
@@ -517,7 +516,6 @@ export default function Exchange() {
                   </div>
 
                   <div className="flex justify-center mt-2 font-bold text-2xl">
-                    {/* {from.name} */}
                       {from.symbol}
                   </div>
                 </Button>
@@ -561,11 +559,9 @@ export default function Exchange() {
                   </Button>
                 </div>
               </div>
-
-              {/* <div className="p-1 rounded bg-dark-900"> */}
+ 
               {/* // ARROW DOWN ICON  */}
 
-              {/* </div> */}
               {/* [2] TO TOKEN SELECTOR */}
               {/* [T] NETWORK LOGO */}
 
@@ -618,7 +614,6 @@ export default function Exchange() {
                 />
                 <Button
                   className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
-                  // style={{ borderColor: toChain?.color }}
                   onClick={() => setShowSelectTo(true)}
                   variant={'outlined'}
                   color={'black'}
@@ -631,7 +626,6 @@ export default function Exchange() {
                   </div>
 
                   <div className="flex justify-center mt-2 font-bold text-2xl">
-                    {/* {to?.name}  */}
                     {to?.symbol}
                   </div>
                 </Button>
@@ -656,7 +650,6 @@ export default function Exchange() {
                 style={{ color: fromChain.color }}
               >
                 {formatNumber(fromAmount, false, true)} {from.symbol} ({formatNumber(fromUsd, true, true)})
-                {/* on {fromChain.name} */}
                 <div
                   className="flex"
                   style={{ color: 'white' }}
@@ -671,7 +664,6 @@ export default function Exchange() {
                   style={{ color: toChain?.color }}
                 >
                   {formatNumber(toAmount, false, true)} {to?.symbol} ({formatNumber(toUsd, true, true)})
-                  {/* on {toChain?.name} */}
                 </div>
               </div>
 
@@ -699,28 +691,12 @@ export default function Exchange() {
                   </Typography>
                 </div>
               </div>
-              {/* </div> */}
-              <TradeDetail trade={trade} />
+                <TradeDetail trade={trade} />
               <div
                 className="rounded border border-2"
                 style={{ borderColor: toChain?.color, backgroundColor: toChain?.color }}
 
               >
-               {/* <Button
-                 className="h-[60px]" 
-                 variant="bordered" 
-                 color="black" 
-                 onClick={ handleApproveToken } 
-               >
-                {
-                  isApprovePending
-                    ? "Approving"
-                    : isApproveCompleted
-                      ? "Approved"
-                      : "Approve"
-                } 
-              </Button>
-              */}
               
                 <Button
                   className="h-[60px]"
@@ -767,8 +743,6 @@ const TradeDetail: FC<TradeDetailProps> = ({ trade }) => {
 
   return (
     <div className="flex">
-      {/* <div className="flex justify-between"> */}
-      {/* <div className="h-px my-2 bg-dark-1000" /> */}
     </div>
   );
 };
@@ -827,16 +801,10 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
     } style={{ opacity: show ? 1 : 0, pointerEvents: show ? "unset" : "none" }}>
       <div className="absolute top-0 left-0 w-[100%] h-[100%]" onClick={() => onClose()} />
       <div className={classNames(show ? "absolute left-[15%] bottom-[10%] top-[50%] max-w-[28ch]" : 'hidden')}
-        /* <div className={classNames(show ? "grid h-[95px] w-[100%] max-h-[768px] max-w-[28ch]" : 'hidden')} */
         style={{ transform: `translate(-50%, calc(-50% + ${show ? 0 : 30}px))` }}
-      /* // style={{ transform: `translate(0%, calc(0% + ${show ? 360 : 30}px))` }} */
       >
         <div
           className={classNames(isShowingChainSelect ? "w-full h-full top-0 left-0 z-10 bg-dark-1100" : "hidden")}
-          style={{
-            // transform: isShowingChainSelect ? "translateX(0)" : "hidden",
-            // pointerEvents: show && isShowingChainSelect ? "all" : "none",
-          }}
         >
 
           {/* CHAIN SELECTION */}
@@ -862,7 +830,6 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
                 >
                   <div className={classNames('grid justify-center')}>
                     <Image src={chain.logo} width={'42'} height="42" alt={chain.name + ' logo'} />
-                    {/* <div style={{ flexGrow: 1, textAlign: "center" }}>{chain.name}</div> */}
                   </div>
                 </Button>
               ))}
@@ -883,7 +850,6 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
             isOpen={true}
             isCustom={true}
             onDismiss={() => onClose()}
-            // className={"border border-2"}
             borderColor={selectedChain?.color}
           >
             <div className="bg-dark-900 rounded padding-[10px]">
@@ -903,7 +869,6 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
                 />
                 </div>
                 <div style={{ flexGrow: 1, fontSize: "24px", textAlign: "center" }}>{selectedChain.name}</div>
-                {/* <ChevronDownIcon width="13" height="13" style={{ color: "white", marginTop: 2 }} /> */}
               </Button>
 
               {/* SEARCH BAR */}
@@ -933,10 +898,7 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
                     rounded rounded-3xl bg-black font-bold 
                     text-center justify-center"
                     key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
-                    <Image src={token.logo} width="56" height="56" alt={token.name + ' logo'} />
-                    {/* <div className="flex text-md justify-left">{token.name} */}
-                     {/* ({token.symbol}) */}
-                     {/* </div> */}
+                    <Image src={token.logo} width="56" height="56" alt={token.name + ' logo'} /> 
                     </div>
                 ))}
               </div>
