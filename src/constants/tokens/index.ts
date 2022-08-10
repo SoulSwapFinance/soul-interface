@@ -57,10 +57,10 @@ export const AVALANCHE: { [key: string]: Token } = {
 }
 
 export const MOONRIVER: { [key: string]: Token } = {
-  DAI: new Token(ChainId.MOONRIVER, '0x80a16016cc4a2e6a2caca8a4a498b1699ff0f844', 18, 'DAI', 'Dai Stablecoin'),
-  WBTC: new Token(ChainId.MOONRIVER, '0x6ab6d61428fde76768d7b45d8bfeec19c6ef91a8', 8, 'WBTC', 'Wrapped Bitcoin'),
-  WETH: new Token(ChainId.MOONRIVER, '0x639a647fbe20b6c8ac19e48e2de44ea792c62c5c', 18, 'WETH', 'Wrapped Ether'),
-  MATIC: new Token(ChainId.MOONRIVER, '0x682f81e57eaa716504090c3ecba8595fb54561d8', 18, 'MATIC', 'Polygon (Matic)'),
+  DAI: new Token(ChainId.MOONRIVER, '0x80A16016cC4A2E6a2CACA8a4a498b1699fF0f844', 18, 'DAI', 'Dai Stablecoin'),
+  WBTC: new Token(ChainId.MOONRIVER, '0x6aB6d61428fde76768D7b45D8BFeec19c6eF91A8', 8, 'WBTC', 'Wrapped Bitcoin'),
+  WETH: new Token(ChainId.MOONRIVER, '0x639A647fbe20b6c8ac19E48E2de44ea792c62c5C', 18, 'WETH', 'Wrapped Ether'),
+  MATIC: new Token(ChainId.MOONRIVER, '0x682F81e57EAa716504090C3ECBa8595fB54561D8', 18, 'MATIC', 'Polygon (Matic)'),
 }
 
 // Default Ethereum chain tokens

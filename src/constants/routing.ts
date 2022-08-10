@@ -10,8 +10,6 @@ import {
 // a list of tokens by chain
 import { ChainId, Currency, Token, WNATIVE } from '../sdk'
 
-// import { SupportedChainId } from './chains'
-
 // // a list of tokens by chain
 type ChainTokenList = {
     readonly [chainId in ChainId]: Token[]
