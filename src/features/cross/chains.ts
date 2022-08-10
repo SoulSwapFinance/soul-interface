@@ -40,7 +40,7 @@ export interface Chain {
   export const BINANCE: Chain = { ...binanceChain, logo: binanceLogo };
   export const POLYGON: Chain = { ...polygonChain, logo: polygonLogo };
   export const MOONRIVER: Chain = { ...moonriverChain, logo: moonriverLogo };
-  const chains: Chain[] = [FANTOM, AVALANCHE, ETHEREUM, BINANCE, POLYGON]; // MOONRIVER
+  const chains: Chain[] = [FANTOM, AVALANCHE, ETHEREUM, BINANCE, POLYGON, MOONRIVER];
   
   // We're pre-sorting chains and their tokesn here because it only needs to be done once.
   {
