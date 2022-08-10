@@ -1,5 +1,4 @@
-
-import React, { useEffect, useMemo, useRef, useState, FC, VFC } from "react";
+import React, { useEffect, useMemo, useRef, useState, FC } from "react";
 import Image from "next/image";
 import SDK, {
   BLOCKCHAIN_NAME,
@@ -9,26 +8,22 @@ import SDK, {
   InsufficientFundsError,
   CrossChainTrade,
   InsufficientLiquidityError,
+  RubicSdkError,
 } from "rubik-sdk";
 import { sleep } from "utils/sleep";
-import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, CheckIcon, ChevronDownIcon, StarIcon } from '@heroicons/react/solid'
+import { ArrowDownIcon, ArrowRightIcon } from '@heroicons/react/solid'
 import { BigNumber as EthersBigNumber, ethers } from "ethers";
-import { FANTOM, AVALANCHE, BINANCE, Chain, CHAINS, ETHEREUM, POLYGON, MOONRIVER, Token } from "constants/cross/Chains"; // MOONRIVER
-// import { prettyDisplayNumber } from "utils";
+import { FANTOM, AVALANCHE, BINANCE, Chain, CHAINS, ETHEREUM, POLYGON, MOONRIVER, Token } from "features/cross/chains";
 import { ERC20_ABI } from "constants/abis/erc20";
 import { useActiveWeb3React } from "services/web3";
 import { useUserInfo, useUserTokenInfo } from "hooks/useAPI";
-// import { Spinner } from "components/Spinner";
 import { Button } from "components/Button";
 import { useNetworkModalToggle, useWalletModalToggle } from "state/application/hooks";
-// import { i18n } from "@lingui/core";
-import { ContentBox, Input, OverlayButton, Typo1, Typo2, Typo3 } from "components/index";
-// import { TokenSelectOverlay } from "features/cross/crossStyles";
+import { OverlayButton } from "components/index";
 import useSendTransaction from "hooks/useSendTransaction"
 import Typography from "components/Typography";
 import { formatNumber } from "functions/format";
 import { classNames } from "functions/styling";
-import { t } from "@lingui/macro";
 import InputCurrencyBox from "pages/bridge/components/InputCurrencyBox";
 import Container from "components/Container";
 import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
@@ -37,19 +32,12 @@ import { SwapLayoutCard } from "layouts/SwapLayout";
 import Modal from "components/DefaultModal";
 import { ChainId } from "sdk";
 import { useETHBalances } from "state/wallet/hooks";
-import { NETWORK_ICON, NETWORK_LABEL } from "config/networks";
 import NetworkModal from "modals/NetworkModal";
-// import { e10 } from "functions/math";
 import { useCurrency } from 'hooks/Tokens'
 import { AutoColumn } from "components/Column";
 import useFantomERC20 from "hooks/useFantomERC20"
 import Row from "components/Row";
-import CurrencySearchModal from "modals/SearchModal/CurrencySearchModal";
-import { last } from "lodash";
-// import { BetaFeature } from "components/Banner";
 import ModalHeader from "components/Modal/Header";
-import { SubmitButton } from "features/summoner/Styles";
-
 
 interface Exchange {
   from: { chain: Chain; token: Token };
@@ -138,6 +126,7 @@ export default function Exchange() {
   useEffect(() => {
     SDK.createSDK(configuration).then(setRubic);
   }, []);
+
   const { account, chainId } = useActiveWeb3React()
   const { userInfo } = useUserInfo()
   const { userTokenInfo } = useUserTokenInfo(account, from.address)
@@ -361,32 +350,6 @@ export default function Exchange() {
   const toggleNetworkModal = useNetworkModalToggle()
   const wrongNetwork = fromChain.chainId != chainId ? true : false
 
-  const handleTrade = async () => {
-      setShowConfirmation("show")
-      try {
-        await trade?.swap({
-          onConfirm: (_hash: any) => setShowConfirmation("hide"),
-        });
-      } catch (e) {
-        if (e instanceof InsufficientFundsError) {
-          setShowConfirmation("poor");
-        } else {
-          console.error(e);
-          setShowConfirmation("hide");
-        }
-      }
-    }
-    
-  const {
-    sendTx: handleApproveToken,
-    isPending: isApprovePending,
-    isCompleted: isApproveCompleted,
-  } = useSendTransaction(() =>
-  approve(from.address, from.address)
-    // approve(from.address, RUBIC_ADDRESS[chainId])
-  );
-  
-
   return (
     <>
       {showSelectFrom &&
@@ -450,23 +413,20 @@ export default function Exchange() {
             height="2.5rem"
             onClick={
             async () => {
-      setShowConfirmation("show")
-      try {
-        await trade?.swap({
-          onConfirm: (_hash: any) => setShowConfirmation("hide"),
-        });
-      } catch (e) {
-        if (e instanceof InsufficientFundsError) {
-          setShowConfirmation("poor");
-        } else {
-          console.error(e);
-          setShowConfirmation("hide");
-        }
-      }
-    }
-            // async () => 
-            // await handleTrade() 
-            }
+              setShowConfirmation("show")
+              try {
+                await trade?.swap({
+                  onConfirm: (_hash: any) => setShowConfirmation("hide"),
+                });
+              } catch (e) {
+                if (e instanceof InsufficientFundsError) {
+                  setShowConfirmation("poor");
+                } else {
+                  console.error(e);
+                  setShowConfirmation("hide");
+                }
+              }
+            }}
             style={{ borderColor: toChain?.color, backgroundColor: toChain?.color }}
 
           >
@@ -794,6 +754,7 @@ const TradeDetail: FC<TradeDetailProps> = ({ trade }) => {
     if (isCrossChainTrade(trade)) {
       receive = `${formatNumber(Number(trade.toTokenAmountMin), false, true)} ${trade.to?.symbol}`;
     } else {
+      // @ts-ignore
       receive = `${formatNumber(Number(trade.toTokenAmountMin.tokenAmount), false, true)} ${trade.to?.symbol}`;
     }
   }
