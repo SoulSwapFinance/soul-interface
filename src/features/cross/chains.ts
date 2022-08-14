@@ -42,7 +42,7 @@ export interface Chain {
   export const MOONRIVER: Chain = { ...moonriverChain, logo: moonriverLogo };
   const chains: Chain[] = [FANTOM, AVALANCHE, ETHEREUM, BINANCE, POLYGON, MOONRIVER];
   
-  // We're pre-sorting chains and their tokesn here because it only needs to be done once.
+  // We're pre-sorting chains and their tokens here because it only needs to be done once.
   {
     // Sort chains by name first.
     chains.sort((a, b) => a.name.localeCompare(b.name));

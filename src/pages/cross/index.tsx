@@ -453,7 +453,7 @@ export default function Exchange() {
               {/*    [F] CHAIN LOGO   */}
               <div
                 className="grid grid-cols-1 rounded bg-dark-1000 border border-4 w-full"
-                style={{ borderColor: fromChain.color }}
+                style={{ borderColor: fromChain?.color }}
               >
                 {wrongNetwork &&
                   <div
