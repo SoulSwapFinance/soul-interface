@@ -19,7 +19,7 @@
             "symbol": "BNB",
             "logo": "https://cryptologos.cc/logos/bnb-bnb-logo.svg",
             "rank": 4,
-            "address": "0x0000000000000000000000000000000000000000",
+            "address": "BNB",
             "isNative": true,
             "decimals": 18
         },
