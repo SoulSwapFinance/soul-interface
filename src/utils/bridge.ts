@@ -4,15 +4,16 @@ const ethImage = "https://raw.githubusercontent.com/soulswapfinance/assets/prod/
 const bscImage = "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454/logo.png"
 const polyImage = "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/polygon/Polygon.svg"
 const avaxImage = "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/Avalanche.svg"
+// const movrImage = "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/moonriver/Moonriver.svg"
 
-export const supportedChainsForBridge = [250, 1, 56, 137, 43114] // 42161
+export const supportedChainsForBridge = [250, 1, 56, 137, 43114, 42161]
 export const chainToNetworkInfoMap = {
   250: { symbol: "ftm", name: "Fantom", image: ftmImage },
   1: { symbol: "eth", name: "Ethereum", image: ethImage },
   56: { symbol: "bsc", name: "Binance", image: bscImage },
   137: { symbol: "matic", name: "Polygon", image: polyImage },
   43114: { symbol: "avax", name: "Avalanche", image: avaxImage },
-  // 42161: { symbol: "arb", name: "Arbitrum", image: arbImage },
+  42161: { symbol: "arb", name: "Arbitrum", image: arbImage }
 } as any;
 export const transactionStatusMapping = {
   3: "Failed: exceeded limit",
@@ -90,6 +91,16 @@ export const bridgeNetworks = {
     explorerTransactionPath: "tx/",
     decimals: 18,
   },
+  // 1285: {
+  //   chainId: 1285,
+  //   network: "Moonriver",
+  //   hex: "505",
+  //   rpc: "",
+  //   name: "Moonriver",
+  //   symbol: "MOVR",
+  //   blockExp: "",
+  //   decimals: 18,
+  // },
   100: {
     chainId: 100,
     network: "xDai",

@@ -512,7 +512,7 @@ const Swap = () => {
           {isExpertMode && swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}
           {swapIsUnsupported ? <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} show={false} /> : null}
         </div>
-        <div className="flex border-dark-900 mt-3 mb-0 gap-1 items-center justify-center">
+       {/* <div className="flex border-dark-900 mt-3 mb-0 gap-1 items-center justify-center">
                 <Button variant="filled" color="gradientPurpleBlue" size="lg">
                   <NavLink href={"/portfolio"}>
                         <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
@@ -527,7 +527,7 @@ const Swap = () => {
                         </a>
                   </ExternalLink>
                 </Button>
-              </div>
+              </div> */}
             <div className="flex flex-row gap-3 text-dark-600 justify-end">
               Chart 
               <Toggle

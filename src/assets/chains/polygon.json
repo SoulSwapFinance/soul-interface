@@ -40,14 +40,6 @@
             "address": "0xd6df932a45c0f255f85145f286ea0b292b21c90b"
         },
         {
-            "id": "yearn-finance",
-            "name": "yearn.finance",
-            "rank": 95,
-            "logo": "https://cryptologos.cc/logos/yearn-finance-yfi-logo.svg",
-            "symbol": "YFI",
-            "address": "0xda537104d6a5edd53c6fbba9a898708e465260b6"
-        },
-        {
             "id": "curve-dao-token",
             "name": "Curve DAO Token",
             "rank": 99,
@@ -78,14 +70,6 @@
             "logo": "https://cryptologos.cc/logos/binance-usd-busd-logo.svg",
             "symbol": "BUSD",
             "address": "0x9fb83c0635de2e815fd1c21b3a292277540c2e8d"
-        },
-        {
-            "id": "magic-internet-money",
-            "name": "Magic Internet Money",
-            "rank": 385,
-            "logo": "https://raw.githubusercontent.com/SoulSwapFinance/assets/9701a4f840e2866e8852322106a1eab3cf0f2e9a/blockchains/fantom/assets/0x82f0B8B456c1A451378467398982d4834b6829c1/logo.svg",
-            "symbol": "MIM",
-            "address": "0x49a0400587a7f65072c87c4910449fdcc5c47242"
         },
         {
             "id": "wrapped-bitcoin",

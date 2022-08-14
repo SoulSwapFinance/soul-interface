@@ -151,17 +151,17 @@ export const SUPPORTED_NETWORKS: {
   //   rpcUrls: ['https://exchainrpc.okex.org'],
   //   blockExplorerUrls: ['https://www.oklink.com/okexchain'],
   // },
-  [ChainId.ARBITRUM]: {
-    chainId: '0xA4B1',
-    chainName: 'Arbitrum',
-    nativeCurrency: {
-      name: 'Ethereum',
-      symbol: 'ETH',
-      decimals: 18,
-    },
-    rpcUrls: ['https://arb1.arbitrum.io/rpc'],
-    blockExplorerUrls: ['https://arbiscan.io'],
-  },
+  // [ChainId.ARBITRUM]: {
+  //   chainId: '0xA4B1',
+  //   chainName: 'Arbitrum',
+  //   nativeCurrency: {
+  //     name: 'Ethereum',
+  //     symbol: 'ETH',
+  //     decimals: 18,
+  //   },
+  //   rpcUrls: ['https://arb1.arbitrum.io/rpc'],
+  //   blockExplorerUrls: ['https://arbiscan.io'],
+  // },
   // [ChainId.CELO]: {
   //   chainId: '0xA4EC',
   //   chainName: 'Celo',
@@ -173,17 +173,17 @@ export const SUPPORTED_NETWORKS: {
   //   rpcUrls: ['https://forno.celo.org'],
   //   blockExplorerUrls: ['https://explorer.celo.org'],
   // },
-  // [ChainId.MOONRIVER]: {
-  //   chainId: '0x505',
-  //   chainName: 'Moonriver',
-  //   nativeCurrency: {
-  //     name: 'Moonriver',
-  //     symbol: 'MOVR',
-  //     decimals: 18,
-  //   },
-  //   rpcUrls: ['https://rpc.moonriver.moonbeam.network'],
-  //   blockExplorerUrls: ['https://moonriver.moonscan.io'],
-  // },
+  [ChainId.MOONRIVER]: {
+    chainId: '0x505',
+    chainName: 'Moonriver',
+    nativeCurrency: {
+      name: 'Moonriver',
+      symbol: 'MOVR',
+      decimals: 18,
+    },
+    rpcUrls: ['https://rpc.moonriver.moonbeam.network'],
+    blockExplorerUrls: ['https://moonriver.moonscan.io'],
+  },
   // [ChainId.FUSE]: {
   //   chainId: '0x7A',
   //   chainName: 'Fuse',
@@ -229,6 +229,7 @@ const NetworkModal: FC = () => {
             ChainId.AVALANCHE,
             ChainId.MATIC,
             // ChainId.ARBITRUM,
+            ChainId.MOONRIVER,
           ].map((key: ChainId, i: number) => {
             if (chainId === key) {
               return (
@@ -246,9 +247,11 @@ const NetworkModal: FC = () => {
                             ? 'border-yellow'
                               : chainId == ChainId.AVALANCHE
                               ? 'border-red'
-                                : chainId == ChainId.ARBITRUM
-                                ? 'border-arbitrumBlue'
-                                  : 'border-purple'
+                                // : chainId == ChainId.ARBITRUM
+                                // ? 'border-arbitrumBlue'
+                                  : chainId == ChainId.MOONRIVER
+                                  ? 'border-moonriverTeal'
+                                    : 'border-purple'
                       )}
                 >
                   <Image
@@ -300,9 +303,11 @@ const NetworkModal: FC = () => {
                       ? 'hover:border-yellow'
                         : key == ChainId.AVALANCHE
                         ? 'hover:border-red'
-                          : key == ChainId.ARBITRUM
-                          ? 'hover:border-arbitrumBlue'
-                            : 'hover:border-purple'
+                          // : key == ChainId.ARBITRUM
+                          // ? 'hover:border-arbitrumBlue'
+                            : key == ChainId.MOONRIVER
+                            ? 'hover:border-moonriverTeal'
+                              : 'hover:border-purple'
                 )}
               >
                 <Image src={NETWORK_ICON[key]} alt="Switch Network" className="rounded-md" width="32px" height="32px" />

@@ -25,6 +25,7 @@ export const ARCHER_ROUTER_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const LOTTERY_ADDRESS = {
@@ -67,6 +68,7 @@ export const FACTORY_ADDRESS = {
   [ChainId.AVALANCHE]: '0x5BB2a9984de4a69c05c996F7EF09597Ac8c9D63a',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const ROUTER_ADDRESS = {
@@ -87,6 +89,7 @@ export const SOUL_VAULT_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const SCARAB_ADDRESS: AddressMap = {
@@ -100,6 +103,7 @@ export const SCARAB_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const SAFE_ADDRESS: AddressMap = {
@@ -111,6 +115,7 @@ export const SAFE_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const TEAM_WALLET_ADDRESS: AddressMap = {
@@ -122,6 +127,7 @@ export const TEAM_WALLET_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const LOCKER_ADDRESS: AddressMap = {
@@ -133,6 +139,7 @@ export const LOCKER_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const CLAIM_ADDRESS: AddressMap = {
@@ -144,6 +151,7 @@ export const CLAIM_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const SUMMONER_ASSISTANT_ADDRESS: AddressMap = {
@@ -155,6 +163,7 @@ export const SUMMONER_ASSISTANT_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const SUMMONER_HELPER_ADDRESS: AddressMap = {
@@ -166,6 +175,7 @@ export const SUMMONER_HELPER_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const FAUCET_ADDRESS: AddressMap = {
@@ -177,6 +187,7 @@ export const FAUCET_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const SOUL_SUMMONER_ADDRESS: AddressMap = {
@@ -188,6 +199,7 @@ export const SOUL_SUMMONER_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const SOUL_DAO_ADDRESS: AddressMap = {
@@ -199,6 +211,7 @@ export const SOUL_DAO_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const LUX_TREASURY_ADDRESS: AddressMap = {
@@ -210,6 +223,7 @@ export const LUX_TREASURY_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const LUXOR_WARMUP_ADDRESS: AddressMap = {
@@ -221,6 +235,7 @@ export const LUXOR_WARMUP_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const ATOMIC_SWAP_ADDRESS: AddressMap = {
@@ -232,6 +247,7 @@ export const ATOMIC_SWAP_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const TRIDENT: AddressMap = {
@@ -243,6 +259,7 @@ export const TRIDENT: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const ZAPPER_ADDRESS: AddressMap = {
@@ -254,6 +271,7 @@ export const ZAPPER_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: undefined,
   [ChainId.MATIC]: undefined,
   [ChainId.ARBITRUM]: undefined,
+  [ChainId.MOONRIVER]: undefined,
   56: undefined,
   4002: undefined
 }
@@ -266,6 +284,7 @@ export const MERKLE_DISTRIBUTOR_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: undefined,
   [ChainId.MATIC]: undefined,
   [ChainId.ARBITRUM]: undefined,
+  [ChainId.MOONRIVER]: undefined,
   56: undefined,
   4002: undefined
 }
@@ -279,6 +298,7 @@ export const MULTICALL2_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 // TOKENS
@@ -292,6 +312,7 @@ export const SOUL_SEANCE_PAIR: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const SOUL_FTM_PAIR: AddressMap = {
@@ -303,6 +324,7 @@ export const SOUL_FTM_PAIR: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const FTM_DAI_ADDRESS: AddressMap = {
@@ -314,6 +336,7 @@ export const FTM_DAI_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const SOUL_USDC_PAIR: AddressMap = {
@@ -325,6 +348,7 @@ export const SOUL_USDC_PAIR: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const SEANCE_USDC_PAIR: AddressMap = {
@@ -336,6 +360,7 @@ export const SEANCE_USDC_PAIR: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const FTM_USDC_PAIR: AddressMap = {
@@ -347,6 +372,7 @@ export const FTM_USDC_PAIR: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const ETH_USD_PAIR: AddressMap = {
@@ -358,6 +384,7 @@ export const ETH_USD_PAIR: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const WNATIVE: AddressMap = {
@@ -369,6 +396,7 @@ export const WNATIVE: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const SOUL_ADDRESS: AddressMap = {
@@ -380,6 +408,7 @@ export const SOUL_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const SEANCE_ADDRESS: AddressMap = {
@@ -391,6 +420,7 @@ export const SEANCE_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const ENCHANT_ADDRESS: AddressMap = {
@@ -402,6 +432,7 @@ export const ENCHANT_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const LUX_ADDRESS: AddressMap = {
@@ -413,6 +444,7 @@ export const LUX_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const WLUM_ADDRESS: AddressMap = {
@@ -424,6 +456,7 @@ export const WLUM_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const GRIMEVO_ADDRESS: AddressMap = {
@@ -435,6 +468,7 @@ export const GRIMEVO_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const AVAX_ADDRESS: AddressMap = {
@@ -446,6 +480,7 @@ export const AVAX_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const USDC_ADDRESS: AddressMap = {
@@ -457,6 +492,7 @@ export const USDC_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const FUSD_ADDRESS: AddressMap = {
@@ -468,6 +504,7 @@ export const FUSD_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const WETH_ADDRESS: AddressMap = {
@@ -479,6 +516,7 @@ export const WETH_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const WBTC_ADDRESS: AddressMap = {
@@ -490,6 +528,7 @@ export const WBTC_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const BNB_ADDRESS: AddressMap = {
@@ -501,6 +540,7 @@ export const BNB_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const WFTM_ADDRESS: AddressMap = {
@@ -512,6 +552,7 @@ export const WFTM_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const WNATIVE_ADDRESS: AddressMap = {
@@ -523,6 +564,7 @@ export const WNATIVE_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const ANY_ADDRESS: AddressMap = {
@@ -534,6 +576,7 @@ export const ANY_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const CRV_ADDRESS: AddressMap = {
@@ -545,6 +588,7 @@ export const CRV_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const UNIDX_ADDRESS: AddressMap = {
@@ -556,6 +600,7 @@ export const UNIDX_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const GRIM_ADDRESS: AddressMap = {
@@ -567,6 +612,7 @@ export const GRIM_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const REAPER_ADDRESS: AddressMap = {
@@ -578,6 +624,7 @@ export const REAPER_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const STOP_LIMIT_ORDER_ADDRESS: AddressMap = {
@@ -589,6 +636,7 @@ export const STOP_LIMIT_ORDER_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const COFFIN_BOX_ADDRESS: {
@@ -602,6 +650,7 @@ export const COFFIN_BOX_ADDRESS: {
   [ChainId.AVALANCHE]: '0x51d7d0d03A9E38Ba550f24cea28B992AD2350fee', // JUL10
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const UNDERWORLD_ADDRESS: {
@@ -615,6 +664,7 @@ export const UNDERWORLD_ADDRESS: {
   [ChainId.AVALANCHE]: '0xE80922adb47964D096ca6F61c0BbC38d5bC218e2', // JUL10
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const SOULSWAP_SWAPPER_ADDRESS: {
@@ -628,6 +678,7 @@ export const SOULSWAP_SWAPPER_ADDRESS: {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const SOR_STAKING_REWARDS_ADDRESS: {
@@ -641,6 +692,7 @@ export const SOR_STAKING_REWARDS_ADDRESS: {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const SOULSWAP_MULTISWAPPER_ADDRESS: {
@@ -654,6 +706,7 @@ export const SOULSWAP_MULTISWAPPER_ADDRESS: {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const SOULSWAP_MULTI_EXACT_SWAPPER_ADDRESS = {
@@ -665,6 +718,7 @@ export const SOULSWAP_MULTI_EXACT_SWAPPER_ADDRESS = {
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const PEGGED_ORACLE_ADDRESS = '0x287928938FC9c11c7D138778fB74c83223ca5CeA' // FEB22

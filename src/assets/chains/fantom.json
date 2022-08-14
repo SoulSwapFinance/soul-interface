@@ -13,15 +13,6 @@
     "isFavorite": true,
     "tokens": [
         {
-          "id": "soul",
-          "name": "Soul Power",
-          "address": "0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07",
-          "rank": 1,
-          "logo": "https://app.soulswap.finance/images/tokens/soul.svg",
-          "symbol": "SOUL",
-          "decimals": 18
-        },
-        {
             "id": "fantom",
             "name": "Fantom",
             "symbol": "FTM",
@@ -37,7 +28,7 @@
             "rank": 56,
             "logo": "https://cryptologos.cc/logos/usd-coin-usdc-logo.svg",
             "symbol": "USDC",
-            "address": "0x04068da6c83afcfa0e13ba15a6696662335d5b75"
+            "address": "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75"
         },
         {
             "id": "aave",
@@ -45,7 +36,7 @@
             "rank": 79,
             "logo": "https://cryptologos.cc/logos/aave-aave-logo.svg",
             "symbol": "AAVE",
-            "address": "0x6a07a792ab2965c72a5b8088d3a069a7ac3a993b"
+            "address": "0x6a07A792ab2965C72a5B8088d3a069A7aC3a993B"
         },
         {
             "id": "curve-dao-token",
@@ -53,7 +44,7 @@
             "rank": 99,
             "logo": "https://cryptologos.cc/logos/curve-dao-token-crv-logo.svg",
             "symbol": "CRV",
-            "address": "0x1e4f97b9f9f913c46f1632781732927b9019c68b"
+            "address": "0x1E4F97b9f9F913c46F1632781732927B9019C68b"
         },
         {
             "id": "tether",
@@ -61,7 +52,7 @@
             "rank": 146,
             "logo": "https://cryptologos.cc/logos/tether-usdt-logo.svg",
             "symbol": "USDT",
-            "address": "0x049d68029688eabf473097a2fc38ef61633a3c7a"
+            "address": "0x049d68029688eAbF473097a2fC38ef61633A3C7A"
         },
         {
             "id": "dai",
@@ -78,14 +69,6 @@
             "logo": "https://cryptologos.cc/logos/wrapped-bitcoin-wbtc-logo.svg",
             "symbol": "WBTC",
             "address": "0x321162cd933e2be498cd2267a90534a804051b11"
-        },
-        {
-            "id": "magic-internet-money",
-            "name": "Magic Internet Money",
-            "rank": 385,
-            "logo": "https://raw.githubusercontent.com/SoulSwapFinance/assets/9701a4f840e2866e8852322106a1eab3cf0f2e9a/blockchains/fantom/assets/0x82f0B8B456c1A451378467398982d4834b6829c1/logo.svg",
-            "symbol": "MIM",
-            "address": "0x82f0b8b456c1a451378467398982d4834b6829c1"
         },
         {
             "id": "wrapped-avax",

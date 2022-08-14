@@ -9,9 +9,9 @@ export const BLOCKS = {
   [ChainId.ETHEREUM]: 'blocklytics/ethereum-blocks',
   [ChainId.FANTOM]: 'matthewlilley/fantom-blocks',
   // [ChainId.XDAI]: 'matthewlilley/xdai-blocks',
-  // [ChainId.MATIC]: 'matthewlilley/polygon-blocks',
+  [ChainId.MATIC]: 'matthewlilley/polygon-blocks',
   // [ChainId.HARMONY]: 'sushiswap/harmony-blocks',
-  // [ChainId.AVALANCHE]: 'matthewlilley/avalanche-blocks',
+  [ChainId.AVALANCHE]: 'matthewlilley/avalanche-blocks',
   // [ChainId.CELO]: 'sushiswap/celo-blocks',
 }
 

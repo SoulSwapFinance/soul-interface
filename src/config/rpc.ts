@@ -7,6 +7,7 @@ const rpc = {
   [ChainId.FANTOM]: 'https://rpcapi.fantom.network',
   [ChainId.FANTOM_TESTNET]: 'https://rpc.testnet.fantom.network',
   [ChainId.AVALANCHE]: 'https://api.avax.network/ext/bc/C/rpc',
+  [ChainId.MOONRIVER]: 'https://moonriver.public.blastapi.io',
 }
 
 export default rpc

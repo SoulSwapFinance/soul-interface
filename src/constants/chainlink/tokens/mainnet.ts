@@ -499,7 +499,7 @@ const MAINNET_CHAINLINK_TOKENS = [
   },
   {
     symbol: 'YFI',
-    name: 'yearn.finance',
+    name: 'Yearn Finance',
     address: '0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e',
     decimals: 18,
   },
