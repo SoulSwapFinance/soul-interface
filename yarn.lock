@@ -3777,7 +3777,7 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@lifi/sdk@^1.0.2", "@lifi/sdk@^1.1.3":
+"@lifi/sdk@^1.1.3":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@lifi/sdk/-/sdk-1.1.3.tgz#e0c886e24124ed21f658866f796bc013005c7351"
   integrity sha512-hZh7ZDff12Cc03er5ecQqezIleHeDVpVbF+a39Pz2z9W0ClxmrcK/G0pxkzhlneCI6kbtAARsirzdoNor5Od+w==
@@ -3796,6 +3796,55 @@
   integrity sha512-g2icNuWbMbMT159OG4X1DRKW50zFz4nlUK5EWAWGvKzYQ1S5k/fS086wFI6iKq9l1TewQn1bsH925EBdDUEihg==
   dependencies:
     ethers "^5.6.9"
+
+"@lifi/wallet-management@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@lifi/wallet-management/-/wallet-management-1.1.3.tgz#837bd8ba1a9b1d3e19ad9e849d8b41539359dc85"
+  integrity sha512-WcME16QjsX5UtJbIieMPaAcXATkPTQZj4QZ0qH25KjOunrksRnLwWj9kG4X+BB+OM2mB67L3d5wrDQepUJPYYg==
+  dependencies:
+    "@ethersproject/experimental" "^5.6.3"
+    "@ethersproject/providers" "^5.6.8"
+    "@walletconnect/ethereum-provider" "^1.8.0"
+    "@web3-react/coinbase-wallet" "^8.0.34-beta.0"
+    "@web3-react/core" "^8.0.35-beta.0"
+    "@web3-react/eip1193" "^8.0.26-beta.0"
+    "@web3-react/empty" "^8.0.20-beta.0"
+    "@web3-react/metamask" "^8.0.28-beta.0"
+    "@web3-react/network" "^8.0.27-beta.0"
+    "@web3-react/types" "^8.0.20-beta.0"
+    "@web3-react/url" "^8.0.25-beta.0"
+    "@web3-react/walletconnect" "^8.0.35-beta.0"
+    react "^18.2.0"
+
+"@lifi/widget@^1.13.1":
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/@lifi/widget/-/widget-1.13.1.tgz#37be170768e6436aeb9ed9ec7b05f85956b142d4"
+  integrity sha512-NzBK2LPdq9dMft9Z0oCG53o/XktlQTDWefeQP3p90/V2tMnu2t1CkotA6+0hfzie3OH5pMHHCNVb/BXvJgQ3ZA==
+  dependencies:
+    "@emotion/react" "^11.10.0"
+    "@emotion/styled" "^11.10.0"
+    "@ethersproject/experimental" "^5.6.3"
+    "@ethersproject/providers" "^5.6.8"
+    "@lifi/sdk" "^1.1.3"
+    "@lifi/wallet-management" "^1.1.3"
+    "@mui/icons-material" "^5.8.4"
+    "@mui/lab" "^5.0.0-alpha.94"
+    "@mui/material" "^5.10.0"
+    "@sentry/integrations" "^7.10.0"
+    "@sentry/react" "^7.10.0"
+    "@sentry/tracing" "^7.10.0"
+    "@tanstack/react-query" "^4.0.10"
+    "@tanstack/react-virtual" "^3.0.0-beta.17"
+    big.js "^6.2.1"
+    i18next "^21.9.0"
+    immer "^9.0.15"
+    react "^18.2.0"
+    react-dom "^18.2.0"
+    react-hook-form "^7.34.0"
+    react-i18next "^11.18.3"
+    react-router-dom "^6.3.0"
+    react-timer-hook "^3.0.5"
+    zustand "^4.0.0"
 
 "@lingui/babel-plugin-extract-messages@^3.14.0":
   version "3.14.0"
@@ -25022,18 +25071,16 @@ rtl-css-js@^1.14.0:
   dependencies:
     "@babel/runtime" "^7.1.2"
 
-rubic-sdk@^2.9.9:
-  version "2.9.9"
-  resolved "https://registry.yarnpkg.com/rubic-sdk/-/rubic-sdk-2.9.9.tgz#b47354b8c8b32e6025f15594da581a9d18447731"
-  integrity sha512-szgUz0ACZt+WhrfpdoMHLKcr2Rvg3XBO2ACc+ZnyGRDJuiJbdC7+ZE3WUzFutrZvelcNX3d7qCkvN7HlIGFryw==
+rubic-sdk@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/rubic-sdk/-/rubic-sdk-2.1.0.tgz#5be2afbdf7a2c4fea904a47389ff4989e3b39fcb"
+  integrity sha512-PORR+KCswTHPy5jVrCqsamgvRZnv9q5KzjXhgSojTvk3TiLjzSUpQ0/ESjWHPnMZj87Wb2lpReyXRJbqoxkcVA==
   dependencies:
-    "@lifi/sdk" "^1.0.2"
     assert "^2.0.0"
     axios "^0.26.1"
     bignumber.js "^9.0.1"
     ethers "^5.6.8"
-    rxjs "^7.5.5"
-    symbiosis-js-sdk "^2.8.9"
+    symbiosis-js-sdk "^2.6.5"
     web3 "~1.7.3"
 
 rubik-sdk@^1.0.0:
@@ -25077,7 +25124,7 @@ rxjs@^6.5.3, rxjs@^6.6.0, rxjs@^6.6.3:
   dependencies:
     tslib "^1.9.0"
 
-rxjs@^7.0.0, rxjs@^7.5.1, rxjs@^7.5.5:
+rxjs@^7.0.0, rxjs@^7.5.1:
   version "7.5.6"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.5.6.tgz#0446577557862afd6903517ce7cae79ecb9662bc"
   integrity sha512-dnyv2/YsXhnm461G+R/Pe5bWP41Nm6LBXEYWI6eiFP4fiwx6WRI/CD0zbdVAudd9xwLEF2IDcKXLHit0FYjUzw==
@@ -25859,6 +25906,36 @@ soulswap-widget@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/soulswap-widget/-/soulswap-widget-1.0.4.tgz#f1adde7f1ef75e3e417f454a9cbca88af5d9e848"
   integrity sha512-lMUnXzw2LWUlH/SwnrZvDuqahi6dTaUW/p7+/pRlPj2TsTYZ7dE55gintjA5aZLyrQjPbXZYgqec07HnDxXEsg==
+  dependencies:
+    "@emotion/react" "^11.10.0"
+    "@emotion/styled" "^11.10.0"
+    "@ethersproject/experimental" "^5.6.3"
+    "@ethersproject/providers" "^5.6.8"
+    "@lifi/sdk" "^1.1.3"
+    "@mui/icons-material" "^5.8.4"
+    "@mui/lab" "^5.0.0-alpha.94"
+    "@mui/material" "^5.10.0"
+    "@sentry/integrations" "^7.10.0"
+    "@sentry/react" "^7.10.0"
+    "@sentry/tracing" "^7.10.0"
+    "@tanstack/react-query" "^4.0.10"
+    "@tanstack/react-virtual" "^3.0.0-beta.17"
+    big.js "^6.2.1"
+    i18next "^21.9.0"
+    immer "^9.0.15"
+    react "^18.2.0"
+    react-dom "^18.2.0"
+    react-hook-form "^7.34.0"
+    react-i18next "^11.18.3"
+    react-router-dom "^6.3.0"
+    react-timer-hook "^3.0.5"
+    soulswap-wallet-management "^1.0.1"
+    zustand "^4.0.0"
+
+soulswap-widget@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/soulswap-widget/-/soulswap-widget-1.0.5.tgz#2fcf1afce1c5af206147e6e185f6e452521a4ace"
+  integrity sha512-UdR278uy1EtoWL4Q8hDZjoa+Y07uGSyOM63o1rE6ZEyF2qM3NP6dyUucUmS5ZcTx1gBPLDabQmezEBeHI0oOqw==
   dependencies:
     "@emotion/react" "^11.10.0"
     "@emotion/styled" "^11.10.0"
@@ -26736,7 +26813,7 @@ swr@^1.1.2:
   resolved "https://registry.yarnpkg.com/swr/-/swr-1.3.0.tgz#c6531866a35b4db37b38b72c45a63171faf9f4e8"
   integrity sha512-dkghQrOl2ORX9HYrMDtPa7LTVHJjCTeZoB1dqTbnnEDlSvN8JEKpYIYurDfvbQFUUS8Cg8PceFVZNkW0KNNYPw==
 
-symbiosis-js-sdk@^2.8.9:
+symbiosis-js-sdk@^2.6.5:
   version "2.8.10"
   resolved "https://registry.yarnpkg.com/symbiosis-js-sdk/-/symbiosis-js-sdk-2.8.10.tgz#ae6df1561f3344d555fc70292766805a16bef9ed"
   integrity sha512-Y5ElmqvSlHt9r3mH0LtOXt6e2UKXTUHiwB03Dj48ZsJ+6gvQumhfHrR8FVKx/jitD3dBMxkokiGnx/3+Uv/U7w==
