@@ -3777,7 +3777,7 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@lifi/sdk@^1.1.3":
+"@lifi/sdk@^1.0.2", "@lifi/sdk@^1.1.3":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@lifi/sdk/-/sdk-1.1.3.tgz#e0c886e24124ed21f658866f796bc013005c7351"
   integrity sha512-hZh7ZDff12Cc03er5ecQqezIleHeDVpVbF+a39Pz2z9W0ClxmrcK/G0pxkzhlneCI6kbtAARsirzdoNor5Od+w==
@@ -9474,6 +9474,13 @@ axios@^0.22.0:
   version "0.22.0"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.22.0.tgz#bf702c41fb50fbca4539589d839a077117b79b25"
   integrity sha512-Z0U3uhqQeg1oNcihswf4ZD57O3NrR1+ZXhxaROaWpDmsDTx7T2HNBV2ulBtie2hwJptu8UvgnJoK+BIqdzh/1w==
+  dependencies:
+    follow-redirects "^1.14.4"
+
+axios@^0.24.0:
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.24.0.tgz#804e6fa1e4b9c5288501dd9dff56a7a0940d20d6"
+  integrity sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==
   dependencies:
     follow-redirects "^1.14.4"
 
@@ -23412,6 +23419,24 @@ range-parser@^1.2.1, range-parser@~1.2.1:
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
   integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
 
+rango-sdk-basic@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/rango-sdk-basic/-/rango-sdk-basic-0.0.6.tgz#0f33c5e2e1ccc8aac3c0716a39b2337c8942f742"
+  integrity sha512-WtwRuEOQqIjEt66YDimZZyFVDVgPH0mIPg78t29qAxz4U5IYExlfwGi/hspAUVyjf9jy37zaItd/FP3tB5hdQg==
+  dependencies:
+    axios "^0.24.0"
+    bignumber.js "^9.0.2"
+    uuid "^8.3.2"
+
+rango-sdk@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/rango-sdk/-/rango-sdk-0.0.6.tgz#501ce5330a5ce76d48af7d03596009d87877f022"
+  integrity sha512-8wh4l7b+B0RqkEnLBvgokk3tdJne65bdwLuxkvhecOkSGUkA9qy0S4jRmtiEIuEcWUpv9tFVxeC/BW5hHMcjsw==
+  dependencies:
+    axios "^0.24.0"
+    bignumber.js "^9.0.2"
+    uuid "^8.3.2"
+
 raw-body@2.5.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/raw-body/-/raw-body-2.5.1.tgz#fe1b1628b181b700215e5fd42389f98b71392857"
@@ -25071,16 +25096,18 @@ rtl-css-js@^1.14.0:
   dependencies:
     "@babel/runtime" "^7.1.2"
 
-rubic-sdk@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/rubic-sdk/-/rubic-sdk-2.1.0.tgz#5be2afbdf7a2c4fea904a47389ff4989e3b39fcb"
-  integrity sha512-PORR+KCswTHPy5jVrCqsamgvRZnv9q5KzjXhgSojTvk3TiLjzSUpQ0/ESjWHPnMZj87Wb2lpReyXRJbqoxkcVA==
+rubic-sdk@^2.9.9:
+  version "2.9.9"
+  resolved "https://registry.yarnpkg.com/rubic-sdk/-/rubic-sdk-2.9.9.tgz#b47354b8c8b32e6025f15594da581a9d18447731"
+  integrity sha512-szgUz0ACZt+WhrfpdoMHLKcr2Rvg3XBO2ACc+ZnyGRDJuiJbdC7+ZE3WUzFutrZvelcNX3d7qCkvN7HlIGFryw==
   dependencies:
+    "@lifi/sdk" "^1.0.2"
     assert "^2.0.0"
     axios "^0.26.1"
     bignumber.js "^9.0.1"
     ethers "^5.6.8"
-    symbiosis-js-sdk "^2.6.5"
+    rxjs "^7.5.5"
+    symbiosis-js-sdk "^2.8.9"
     web3 "~1.7.3"
 
 rubik-sdk@^1.0.0:
@@ -25124,7 +25151,7 @@ rxjs@^6.5.3, rxjs@^6.6.0, rxjs@^6.6.3:
   dependencies:
     tslib "^1.9.0"
 
-rxjs@^7.0.0, rxjs@^7.5.1:
+rxjs@^7.0.0, rxjs@^7.5.1, rxjs@^7.5.5:
   version "7.5.6"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.5.6.tgz#0446577557862afd6903517ce7cae79ecb9662bc"
   integrity sha512-dnyv2/YsXhnm461G+R/Pe5bWP41Nm6LBXEYWI6eiFP4fiwx6WRI/CD0zbdVAudd9xwLEF2IDcKXLHit0FYjUzw==
@@ -26813,7 +26840,7 @@ swr@^1.1.2:
   resolved "https://registry.yarnpkg.com/swr/-/swr-1.3.0.tgz#c6531866a35b4db37b38b72c45a63171faf9f4e8"
   integrity sha512-dkghQrOl2ORX9HYrMDtPa7LTVHJjCTeZoB1dqTbnnEDlSvN8JEKpYIYurDfvbQFUUS8Cg8PceFVZNkW0KNNYPw==
 
-symbiosis-js-sdk@^2.6.5:
+symbiosis-js-sdk@^2.8.9:
   version "2.8.10"
   resolved "https://registry.yarnpkg.com/symbiosis-js-sdk/-/symbiosis-js-sdk-2.8.10.tgz#ae6df1561f3344d555fc70292766805a16bef9ed"
   integrity sha512-Y5ElmqvSlHt9r3mH0LtOXt6e2UKXTUHiwB03Dj48ZsJ+6gvQumhfHrR8FVKx/jitD3dBMxkokiGnx/3+Uv/U7w==

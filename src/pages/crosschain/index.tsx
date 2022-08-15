@@ -11,7 +11,7 @@ import {
   Asset,
   SwapResponse
 } from "rango-sdk-basic"
-import { FANTOM, AVALANCHE, BINANCE, Chain, CHAINS, ETHEREUM, POLYGON, MOONRIVER, Token } from "features/cross/chains";
+import { FANTOM, AVALANCHE, BINANCE, Chain, CHAINS, ETHEREUM, POLYGON, Token } from "features/cross/chains";
 
 import { checkApprovalSync, prepareEvmTransaction, sleep } from "features/crosschain/utils";
 import BigNumber from "bignumber.js";
@@ -42,12 +42,13 @@ import Row from "components/Row";
 import { AutoColumn } from "components/Column";
 import { ArrowDownIcon, ArrowRightIcon } from "@heroicons/react/solid";
 import ModalHeader from "components/Modal/Header";
+import { NETWORK_LABEL } from "constants/networks";
 
 declare let window: any
 
 const CHAIN_BY_ID = new Map([
   [FANTOM.chainId, BLOCKCHAIN_NAME.FANTOM],
-  [MOONRIVER.chainId, BLOCKCHAIN_NAME.MOONRIVER],
+  // [MOONRIVER.chainId, BLOCKCHAIN_NAME.MOONRIVER],
   [POLYGON.chainId, BLOCKCHAIN_NAME.POLYGON],
   [AVALANCHE.chainId, BLOCKCHAIN_NAME.AVALANCHE],
   [ETHEREUM.chainId, BLOCKCHAIN_NAME.ETHEREUM],
@@ -69,7 +70,7 @@ export default function CrossChain() {
   const rangoClient = useMemo(() => new RangoClient(RANGO_API_KEY), [])
   const { account, chainId } = useActiveWeb3React()
   const [tokensMeta, setTokenMeta] = useState<MetaResponse | null>()
-  const [inputAmount, setInputAmount] = useState<string>("0.01")
+  const [inputAmount, setInputAmount] = useState<string>("")
   const [quote, setQuote] = useState<QuoteResponse | null>()
   const [txStatus, setTxStatus] = useState<StatusResponse | null>(null)
   const [loadingMeta, setLoadingMeta] = useState<boolean>(true)
@@ -85,7 +86,6 @@ export default function CrossChain() {
   const amountRef = useRef<HTMLInputElement>(null)
   const [showConfirmation, setShowConfirmation] = useState<"hide" | "show" | "poor">("hide")
   const [showConfirmationModal, setShowConfirmationModal] = useState(false)
-
   const toggleNetworkModal = useNetworkModalToggle()
 
   useEffect(() => {
@@ -128,12 +128,14 @@ export default function CrossChain() {
   // const destinationToken = tokensMeta?.tokens.find(t => t.blockchain === "BSC" && t.address === '0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d')
 
   // aggregator sample 4: BSC.BNB to FTM.FTM
-  let sourceChainId = 250
-  let sourceToken = tokensMeta?.tokens.find(t => t.blockchain === CHAIN_BY_ID.get(sourceChain.chainId) && t.address === (fromToken?.isNative ? null : fromToken?.address))
-  let destinationToken = tokensMeta?.tokens.find(t => t.blockchain === CHAIN_BY_ID.get(destinationChain.chainId) && t.address === (toToken?.isNative ? null : toToken?.address))
-  const wrongNetwork = sourceChain?.chainId != chainId ? true : false
+  const sourceChainId = chainId
+  const sourceToken = tokensMeta?.tokens.find(t => t.blockchain === CHAIN_BY_ID.get(sourceChain?.chainId) && t.address === (fromToken?.isNative ? null : fromToken?.address))
+  const destinationToken = tokensMeta?.tokens.find(t => t.blockchain === CHAIN_BY_ID.get(destinationChain.chainId) && t.address === (toToken?.isNative ? null : toToken?.address))
+  const wrongNetwork = sourceChain?.chainId != sourceChainId ? true : false
   const provider = new ethers.providers.Web3Provider(window.ethereum)
-  console.log('sTokenChain:%s', CHAIN_BY_ID.get(sourceChain.chainId))
+  console.log('sourceToken:%s', sourceToken?.symbol)
+  console.log('sourceChain:%s', CHAIN_BY_ID.get(sourceChain?.chainId))
+  console.log('destinationChain:%s', CHAIN_BY_ID.get(destinationChain.chainId))
   const getBalance = async (address: string, provider: any) => {
     if (address === AddressZero || !address) {
       let fromBalance = provider.getBalance(account)
@@ -156,28 +158,28 @@ export default function CrossChain() {
     let userAddress = ''
     try {
       userAddress = await getUserWallet()
-      console.log({ userAddress })
+      // console.log({ userAddress })
     } catch (err) {
-      setError('Error connecting to MetMask. Please check Metamask and try again.')
+      setError('Connection Error: Connect Wallet')
       return
     }
 
     if (!(window.ethereum).isConnected()) {
-      setError('Error connecting to MetMask. Please check Metamask and try again.')
+      setError('Connection Error: Retry Connection')
       return
     }
 
     if (window.ethereum.chainId && parseInt(window.ethereum.chainId) !== sourceChain?.chainId) {
-      setError(`Change meta mask network to '${sourceChain?.name}'.`)
+      setError(`Change Network to ${sourceChain?.name}.`)
       return
     }
 
-    if (!userAddress) {
-      setError(`Could not get wallet address.`)
+    if (!account) {
+      setError(`Connect Wallet`)
       return
     }
     if (!inputAmount) {
-      setError(`Set input amount`)
+      setError(`Enter Amount`)
       return
     }
     if (!sourceToken || !destinationToken)
@@ -187,8 +189,6 @@ export default function CrossChain() {
     const from: Asset = { blockchain: sourceToken?.blockchain, symbol: sourceToken?.symbol, address: sourceToken?.address }
     const to: Asset = { blockchain: destinationToken?.blockchain, symbol: destinationToken?.symbol, address: destinationToken?.address }
     const amount: string = (new BigNumber(inputAmount)).shiftedBy(sourceToken?.decimals).toString()
-
-    // const amount: string = (new BigNumber(inputAmount)).shiftedBy(fromToken?.decimals).toString()
 
     const quoteResponse = await rangoClient.quote({
       amount,
@@ -204,7 +204,7 @@ export default function CrossChain() {
     console.log({ quoteResponse })
 
     if (!quoteResponse || !quoteResponse?.route || quoteResponse.resultType !== "OK") {
-      setError(`Invalid quote response: ${quoteResponse.resultType}, please try again.`)
+      setError(`Invalid Quote Response: ${quoteResponse.resultType}. Retry your transaction.`)
       setLoadingSwap(false)
       return
     }
@@ -311,22 +311,11 @@ export default function CrossChain() {
     }
   }
 
-  interface FromComponentProps {
-    fromTokenLogo: string
-    fromTokenSymbol: string
-  }
-
-  interface ToComponentProps {
-    toTokenLogo: string
-    toTokenSymbol: string
-  }
-
-  const FromComponent: React.FC<FromComponentProps> = ({ fromTokenSymbol, fromTokenLogo }) => {
-    fromTokenSymbol = sourceToken ? sourceToken?.symbol : 'FTM'
+  const FromComponent: React.FC = () => {
     return (
       <div
         className="grid grid-cols-1 rounded bg-dark-1000 border border-4 w-full"
-        style={{ borderColor: getChainColor(sourceChain) }}
+        style={{ borderColor: sourceChain?.color }}
       >
         {wrongNetwork &&
           <div
@@ -335,35 +324,35 @@ export default function CrossChain() {
           >
             <div
               className="hidden lg:flex lg:rounded lg:rounded-2xl lg:m-2 lg:text-center lg:text-lg lg:justify-center lg:p-3 lg:border"
-              style={{ borderColor: getChainColor(sourceChain) }}
+              style={{ borderColor: sourceChain?.color }}
             >
               Switch to {(sourceChain?.name, true)} Network
             </div>
             <div
               className="lg:hidden flex rounded rounded-2xl m-1 text-center text-lg justify-center p-2 border"
-              style={{ borderColor: getChainColor(sourceChain) }}
+              style={{ borderColor: sourceChain?.color }}
             >
               Switch Network
             </div>
             <Image
-              src={sourceChain?.logo}
+              src={getChainLogo(sourceChain)}
               alt="Switch Network"
               className="flex align-center justify-center"
-              style={{ backgroundColor: getChainColor(sourceChain) }}
+              style={{ backgroundColor: sourceChain?.color }}
               width="42" height="42"
             />
             <NetworkModal />
-            {/* {NETWORK_LABEL[chainId]} */}
+            {NETWORK_LABEL[chainId]}
           </div>
         }
         <div
           className={"flex w-full border border-4"}
-          style={{ borderColor: getChainColor(sourceChain) }}
+          style={{ borderColor: sourceChain?.color }}
         />
         <Image
           className="flex align-center justify-center"
           width="36" height="36"
-          style={{ backgroundColor: getChainColor(sourceChain) }}
+          style={{ backgroundColor: sourceChain?.color }}
           src={getChainLogo(sourceChain)}
           alt={sourceChain?.name}
           onClick={() => setShowSelectFrom(true)}
@@ -371,7 +360,7 @@ export default function CrossChain() {
         </Image>
         <div
           className={"flex w-full border border-4"}
-          style={{ borderColor: getChainColor(sourceChain) }}
+          style={{ borderColor: sourceChain?.color }}
         />
         <Button
           className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
@@ -381,19 +370,18 @@ export default function CrossChain() {
         >
           <div className="">
             <Image className="block object-fit:contain object-position:center items-center"
-              src={fromTokenLogo}
+              src={sourceToken?.image}
               width="48" height="48"
-              alt={fromTokenSymbol}
+              alt={sourceToken?.symbol}
             />
           </div>
-          {/* {console.log('fromToken:%s', fromTokenLogo)} */}
           <div className="flex justify-center mt-2 font-bold text-2xl">
-            {fromTokenSymbol}
+            {sourceToken?.symbol}
           </div>
         </Button>
         <div
           className={"flex w-full border border-2"}
-          style={{ borderColor: getChainColor(sourceChain) }}
+          style={{ borderColor: sourceChain?.color }}
         />
         <div className="grid grid-cols-1">
 
@@ -402,7 +390,7 @@ export default function CrossChain() {
             <div className="flex justify-center">
               <Typography className={classNames('text-lg font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
                 {!loadingSwap
-                  ? `${formatNumber(Number(inputAmount), false, true)} ${fromTokenSymbol}`
+                  ? `${formatNumber(Number(inputAmount), false, true)} ${sourceToken?.symbol}`
                   : "0 ($0.00)"}
               </Typography>
               {/* (${formatNumber(inputAmount, true, true)})  */}
@@ -410,7 +398,7 @@ export default function CrossChain() {
           </div>
           <div
             className={"flex w-full border border-2"}
-            style={{ borderColor: getChainColor(sourceChain) }}
+            style={{ borderColor: sourceChain?.color }}
           />
         </div>
         {showSelectFrom &&
@@ -425,7 +413,7 @@ export default function CrossChain() {
                   return;
                 }
                 setFromToken(f.token)
-                setDestinationChain(f.chain)
+                setSourceChain(f.chain)
                 setInputAmount("")
                 setFromBalance("")
                 amountRef.current?.select()
@@ -437,21 +425,23 @@ export default function CrossChain() {
     )
   }
 
-  const ToComponent: React.FC<ToComponentProps> = ({ toTokenSymbol, toTokenLogo }) => {
+  const ToComponent: React.FC = () => {
+    let toTokenSymbol = toToken?.symbol
+    let toTokenImage = toToken?.logo
     return (
       <div
         className="grid grid-cols-1 rounded bg-dark-1000 border border-4 w-full"
-        style={{ borderColor: getChainColor(destinationChain) }}
+        style={{ borderColor: destinationChain?.color }}
       >
 
         <div
           className={"flex w-full border border-4"}
-          style={{ borderColor: getChainColor(destinationChain) }}
+          style={{ borderColor: destinationChain?.color }}
         />
         <Image
           className="flex align-center justify-center"
           width="36" height="36"
-          style={{ backgroundColor: getChainColor(destinationChain) }}
+          style={{ backgroundColor: destinationChain?.color }}
           src={getChainLogo(destinationChain)}
           alt={destinationChain?.name}
           onClick={() => setShowSelectTo(true)}
@@ -459,7 +449,7 @@ export default function CrossChain() {
         </Image>
         <div
           className={"flex w-full border border-4"}
-          style={{ borderColor: getChainColor(destinationChain) }}
+          style={{ borderColor: destinationChain?.color }}
         />
         <Button
           className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
@@ -469,19 +459,20 @@ export default function CrossChain() {
         >
           <div className="">
             <Image className="block object-fit:contain object-position:center items-center"
-              src={toTokenLogo}
+              src={toTokenImage}
               width="48" height="48"
-              alt={toTokenSymbol}
+              alt={toToken?.symbol}
             />
           </div>
-          {/* {console.log('fromToken:%s', toTokenLogo)} */}
+          {console.log('destinationToken:%s', toToken?.symbol)}
+          {console.log('toTokenSymbol:%s', toTokenSymbol)}
           <div className="flex justify-center mt-2 font-bold text-2xl">
             {toTokenSymbol}
           </div>
         </Button>
         <div
           className={"flex w-full border border-2"}
-          style={{ borderColor: getChainColor(destinationChain) }}
+          style={{ borderColor: destinationChain?.color }}
         />
         <div className="grid grid-cols-1">
 
@@ -490,7 +481,7 @@ export default function CrossChain() {
             <div className="flex justify-center">
               <Typography className={classNames('text-lg font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
                 {quote
-                  ? `${formatNumber(Number(quote?.route?.outputAmount), false, true)} ${toTokenSymbol}`
+                  ? `${formatNumber(Number(quote?.route?.outputAmount), false, true)} ${toToken?.symbol}`
                   : "0 ($0.00)"}
               </Typography>
               {/* (${formatNumber(inputAmount, true, true)})  */}
@@ -498,7 +489,7 @@ export default function CrossChain() {
           </div>
           <div
             className={"flex w-full border border-2"}
-            style={{ borderColor: getChainColor(destinationChain) }}
+            style={{ borderColor: destinationChain?.color }}
           />
         </div>
 
@@ -613,7 +604,7 @@ export default function CrossChain() {
             {/* {loadingMeta && (<div className="loading" />)} */}
             {/* {!loadingMeta && (<img src={sourceToken?.image} alt="USDT" height="50px" />)} */}
             <div>
-              <FromComponent fromTokenLogo={fromToken?.logo} fromTokenSymbol={fromToken?.symbol} />
+              <FromComponent />
               <InputCurrencyBox
                 // disabled={!fromTokenLogo}
                 value={inputAmount}
@@ -666,8 +657,7 @@ export default function CrossChain() {
               </OverlayButton>
               <div style={{ height: "1px", width: "1000%" }} />
             </Row>
-            <ToComponent toTokenLogo={destinationToken?.image} toTokenSymbol={destinationToken?.symbol} />
-
+            <ToComponent />
             <div
               className="flex p-2 justify-center gap-6 text-lg text-center bg-dark-1000 font-bold"
               style={{ color: sourceChain.color }}
@@ -761,7 +751,7 @@ export default function CrossChain() {
                 </div>
               </Modal>
             }
-            
+
             <div className="flex"
               style={{ flexDirection: "column", justifyContent: "space-around", alignItems: "center" }}
             >
@@ -769,7 +759,7 @@ export default function CrossChain() {
                 style={{ flexDirection: "column", justifyContent: "center", alignItems: "center" }}
               >
                 {quote && <div className='green-text'>
-                  {quote.route?.swapper && (<img src={quote.route?.swapper?.logo} alt="swapper logo" width={50} />)} <br />
+                  {/* {quote.route?.swapper && (<img src={quote.route?.swapper?.logo} alt="swapper logo" width={50} />)} <br /> */}
                   {quote.route?.swapper?.title}
                 </div>}
                 <br />
@@ -787,11 +777,9 @@ export default function CrossChain() {
             </div>
 
             {/* {loadingMeta && (<div className="loading" />)} */}
-            {/* {!loadingMeta && (<img src={destinationToken?.image} alt="Matic" height="50px" />)} */}
-            <div className="">from (chain-token): {sourceChain?.name}-{sourceToken?.symbol}</div>
-            <div className="">to (chain-token): {destinationChain?.name}-{destinationToken?.symbol}</div>
-            <div className="">fromAmount: {quote?.route?.outputAmount}</div>
-
+            {/* {!loadingMeta && (<img src={destinationToken?.image} alt="Fantom" height="50px" />)} */}
+            <div className="">from (chain[id]-token): {sourceChain?.name}({sourceChainId})-{fromToken?.symbol}</div>
+            <div className="">to (chain[id]-token): {destinationChain?.name}({destinationChain?.chainId})-{toToken?.symbol}</div>
           </SwapLayoutCard>
         </div>
       </DoubleGlowShadowV2>
@@ -808,10 +796,10 @@ interface TokenSelectProps {
 }
 const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain, token }) => {
   const [filter, setFilter] = useState("")
-  const [destinationChainId, setSelectedChainId] = useState(chain.chainId)
+  const [destinationChainId, setDestinationChainId] = useState<number>(250)
   const [sourceToken, setSourceToken] = useState<Asset>()
   const [destinationToken, setDestinationToken] = useState<Asset>()
-  const destinationChain = useMemo(() => CHAINS.find(c => c.chainId === destinationChainId), [destinationChainId, CHAINS])
+  const destinationChain = useMemo(() => CHAINS.find(c => c.chainId === Number(destinationChainId)), [destinationChainId, CHAINS])
   const input = useRef<HTMLInputElement>(null)
   const tokensList = useRef<HTMLDivElement>(null)
   const normalizedFilter = filter.trim().toLowerCase()
@@ -821,7 +809,7 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain, token }
     const isAddressMatch = address.startsWith(normalizedFilter) || address.startsWith("0x" + normalizedFilter)
     return isNameMatch || isSymbolMatch || isAddressMatch;
   })
-  const [isShowingChainSelect, showChainSelect] = useState(false)
+  const [showDestinationChains, showChainSelect] = useState(false)
 
   useEffect(() => {
     if (!show) {
@@ -845,7 +833,7 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain, token }
     if (!show) {
       setTimeout(() => {
         setFilter("")
-        setSelectedChainId(chain.chainId)
+        setDestinationChainId(destinationChainId)
         setSourceToken(sourceToken)
         setDestinationToken(destinationToken)
         showChainSelect(false)
@@ -862,12 +850,12 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain, token }
         style={{ transform: `translate(-50%, calc(-50% + ${show ? 0 : 30}px))` }}
       >
         <div
-          className={classNames(isShowingChainSelect ? "w-full h-full top-0 left-0 z-10 bg-dark-1100" : "hidden")}
+          className={classNames(showDestinationChains ? "w-full h-full top-0 left-0 z-10 bg-dark-1100" : "hidden")}
         >
 
           {/* CHAIN SELECTION */}
           <Modal
-            isOpen={isShowingChainSelect}
+            isOpen={showDestinationChains}
             onDismiss={() => onClose()}
             isCustom={true}
           >
@@ -876,7 +864,7 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain, token }
                 <Button
                   key={chain.chainId}
                   onClick={() => {
-                    setSelectedChainId(chain.chainId)
+                    setDestinationChainId(chain.chainId)
                     tokensList.current?.scrollTo({ top: 0 })
                     showChainSelect(false)
                     setFilter("")
@@ -899,8 +887,8 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain, token }
         <div
           className="flex flex-cols border-radius-[8px] w-[100%] h-[100%] bg-dark-1100"
           style={{
-            transform: isShowingChainSelect ? "translateY(50px)" : "",
-            opacity: isShowingChainSelect ? 0 : 1,
+            transform: showDestinationChains ? "translateY(50px)" : "",
+            opacity: showDestinationChains ? 0 : 1,
             pointerEvents: show ? "all" : "none",
           }}
         >

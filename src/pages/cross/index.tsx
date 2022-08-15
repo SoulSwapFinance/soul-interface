@@ -13,7 +13,7 @@ import SDK, {
 import { sleep } from "utils/sleep";
 import { ArrowDownIcon, ArrowRightIcon } from '@heroicons/react/solid'
 import { BigNumber as EthersBigNumber, ethers } from "ethers";
-import { FANTOM, AVALANCHE, BINANCE, Chain, CHAINS, ETHEREUM, POLYGON, MOONRIVER, Token } from "features/cross/chains";
+import { FANTOM, AVALANCHE, BINANCE, Chain, CHAINS, ETHEREUM, POLYGON, Token } from "features/cross/chains";
 import { ERC20_ABI } from "constants/abis/erc20";
 import { useActiveWeb3React } from "services/web3";
 import { useUserInfo, useUserTokenInfo } from "hooks/useAPI";
@@ -71,7 +71,7 @@ const NATIVE_ADDRESS = "0x0000000000000000000000000000000000000000";
 
 const RUBIC_CHAIN_BY_ID = new Map([
   [FANTOM.chainId, BLOCKCHAIN_NAME.FANTOM],
-  [MOONRIVER.chainId, BLOCKCHAIN_NAME.MOONRIVER],
+  // [MOONRIVER.chainId, BLOCKCHAIN_NAME.MOONRIVER],
   [POLYGON.chainId, BLOCKCHAIN_NAME.POLYGON],
   [AVALANCHE.chainId, BLOCKCHAIN_NAME.AVALANCHE],
   [ETHEREUM.chainId, BLOCKCHAIN_NAME.ETHEREUM],
@@ -83,9 +83,9 @@ const rubicConfiguration: Configuration = {
     [BLOCKCHAIN_NAME.BINANCE_SMART_CHAIN]: {
       mainRpc: BINANCE.rpc[0],
     },
-    [BLOCKCHAIN_NAME.MOONRIVER]: {
-      mainRpc: MOONRIVER.rpc[0],
-    },
+    // [BLOCKCHAIN_NAME.MOONRIVER]: {
+    //   mainRpc: MOONRIVER.rpc[0],
+    // },
     [BLOCKCHAIN_NAME.POLYGON]: {
       mainRpc: POLYGON.rpc[0],
     },
