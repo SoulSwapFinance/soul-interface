@@ -76,10 +76,11 @@ export default function CrossChain() {
   const [loadingMeta, setLoadingMeta] = useState<boolean>(true)
   const [loadingSwap, setLoadingSwap] = useState<boolean>(false)
   const [error, setError] = useState<string>("")
+  const [fromToken, setFromToken] = useState<Token>(FANTOM.tokens[2])
+  const [toToken, setToToken] = useState<Token>(AVALANCHE.tokens[6])
+
   const [showSelectFrom, setShowSelectFrom] = useState(false)
   const [showSelectTo, setShowSelectTo] = useState(false)
-  const [toToken, setToToken] = useState<Token>()
-  const [fromToken, setFromToken] = useState<Token>()
   const [sourceChain, setSourceChain] = useState<Chain>(FANTOM)
   const [destinationChain, setDestinationChain] = useState<Chain>(AVALANCHE)
   const [fromBalance, setFromBalance] = useState('')
@@ -133,6 +134,8 @@ export default function CrossChain() {
   const destinationToken = tokensMeta?.tokens.find(t => t.blockchain === CHAIN_BY_ID.get(destinationChain.chainId) && t.address === (toToken?.isNative ? null : toToken?.address))
   const wrongNetwork = sourceChain?.chainId != sourceChainId ? true : false
   const provider = new ethers.providers.Web3Provider(window.ethereum)
+
+  // console.log('FANTOM.tokens[2]:%s', FANTOM.tokens[2]?.symbol)
   console.log('sourceToken:%s', sourceToken?.symbol)
   console.log('sourceChain:%s', CHAIN_BY_ID.get(sourceChain?.chainId))
   console.log('destinationChain:%s', CHAIN_BY_ID.get(destinationChain.chainId))
@@ -204,7 +207,7 @@ export default function CrossChain() {
     console.log({ quoteResponse })
 
     if (!quoteResponse || !quoteResponse?.route || quoteResponse.resultType !== "OK") {
-      setError(`Invalid Quote Response: ${quoteResponse.resultType}. Retry your transaction.`)
+      setError(`Invalid Quote Response: ${quoteResponse.resultType}.`)
       setLoadingSwap(false)
       return
     }
@@ -274,7 +277,7 @@ export default function CrossChain() {
       const txHash = (await signer.sendTransaction(finalTx)).hash
       const txStatus = await checkTransactionStatusSync(swapResponse.requestId, txHash, rangoClient)
       console.log("transaction finished", { txStatus })
-      console.log("bridged data?", txStatus.bridgeData)
+      console.log("bridged data?", txStatus?.bridgeData)
       setLoadingSwap(false)
     } catch (e) {
       const rawMessage = JSON.stringify(e).substring(0, 90) + '...'
@@ -302,8 +305,8 @@ export default function CrossChain() {
       if (!!txStatus) {
         setTxStatus(txStatus)
         console.log({ txStatus })
-        console.log(txStatus.bridgeData?.destTokenPrice, txStatus.bridgeData?.srcTokenPrice)
-        if (!!txStatus.status && [TransactionStatus.FAILED, TransactionStatus.SUCCESS].includes(txStatus.status)) {
+        console.log(txStatus?.bridgeData?.destTokenPrice, txStatus?.bridgeData?.srcTokenPrice)
+        if (!!txStatus?.status && [TransactionStatus.FAILED, TransactionStatus.SUCCESS].includes(txStatus?.status)) {
           return txStatus
         }
       }
@@ -482,7 +485,7 @@ export default function CrossChain() {
               <Typography className={classNames('text-lg font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
                 {quote
                   ? `${formatNumber(Number(quote?.route?.outputAmount), false, true)} ${toToken?.symbol}`
-                  : "0 ($0.00)"}
+                  : "Pending..."}
               </Typography>
               {/* (${formatNumber(inputAmount, true, true)})  */}
             </div>
@@ -521,7 +524,7 @@ export default function CrossChain() {
           <React.Fragment>
             <tr>
               <td>expected output</td>
-              <td>{new BigNumber(quote?.route?.outputAmount || "0").shiftedBy(-(destinationToken?.decimals || 0)).toString()} {destinationToken?.symbol}</td>
+              <td>{new BigNumber(quote?.route?.outputAmount || "0").shiftedBy(-(destinationToken?.decimals || 0)).toString()} {toToken?.symbol}</td>
             </tr>
             <tr>
               <td>time estimate</td>
@@ -533,17 +536,17 @@ export default function CrossChain() {
           <React.Fragment>
             <tr>
               <td>status</td>
-              <td>{txStatus.status || TransactionStatus.RUNNING}</td>
+              <td>{txStatus?.status || TransactionStatus.RUNNING}</td>
             </tr>
             <tr>
               <td>output</td>
-              <td>{new BigNumber(txStatus.output?.amount || "0").shiftedBy(-(destinationToken?.decimals || 0)).toString() || '?'} {txStatus.output?.receivedToken?.symbol || ""}  {txStatus.output?.type || ""}</td>
+              <td>{new BigNumber(txStatus?.output?.amount || "0").shiftedBy(-(destinationToken?.decimals || 0)).toString() || '?'} {txStatus?.output?.receivedToken?.symbol || ""}  {txStatus?.output?.type || ""}</td>
             </tr>
             <tr>
               <td>error?</td>
-              <td>{txStatus.error || '-'}</td>
+              <td>{txStatus?.error || '-'}</td>
             </tr>
-            {txStatus.explorerUrl?.map((item, id) => (
+            {txStatus?.explorerUrl?.map((item, id) => (
               <tr key={id}>
                 <td>explorer url [{id}]</td>
                 <td>
@@ -551,39 +554,39 @@ export default function CrossChain() {
                 </td>
               </tr>
             ))}
-            {!!txStatus.bridgeData && (
+            {!!txStatus?.bridgeData && (
               <React.Fragment>
                 <tr>
                   <td>srcChainId</td>
-                  <td>{txStatus.bridgeData.srcChainId}</td>
+                  <td>{txStatus?.bridgeData.srcChainId}</td>
                 </tr>
                 <tr>
                   <td>destChainId</td>
-                  <td>{txStatus.bridgeData.destChainId}</td>
+                  <td>{txStatus?.bridgeData.destChainId}</td>
                 </tr>
                 <tr>
                   <td>srcToken</td>
-                  <td>{txStatus.bridgeData.srcToken}</td>
+                  <td>{txStatus?.bridgeData.srcToken}</td>
                 </tr>
                 <tr>
                   <td>destToken</td>
-                  <td>{txStatus.bridgeData.destToken}</td>
+                  <td>{txStatus?.bridgeData.destToken}</td>
                 </tr>
                 <tr>
                   <td>srcTokenAmt</td>
-                  <td>{txStatus.bridgeData.srcTokenAmt}</td>
+                  <td>{txStatus?.bridgeData.srcTokenAmt}</td>
                 </tr>
                 <tr>
                   <td>destTokenAmt</td>
-                  <td>{txStatus.bridgeData.destTokenAmt}</td>
+                  <td>{txStatus?.bridgeData.destTokenAmt}</td>
                 </tr>
                 <tr>
                   <td>srcTxHash</td>
-                  <td>{txStatus.bridgeData.srcTxHash}</td>
+                  <td>{txStatus?.bridgeData.srcTxHash}</td>
                 </tr>
                 <tr>
                   <td>destTxHash</td>
-                  <td>{txStatus.bridgeData.destTxHash}</td>
+                  <td>{txStatus?.bridgeData.destTxHash}</td>
                 </tr>
               </React.Fragment>
             )}
@@ -605,6 +608,7 @@ export default function CrossChain() {
             {/* {!loadingMeta && (<img src={sourceToken?.image} alt="USDT" height="50px" />)} */}
             <div>
               <FromComponent />
+              <div className="w-[100%] my-4" />
               <InputCurrencyBox
                 // disabled={!fromTokenLogo}
                 value={inputAmount}
@@ -662,13 +666,12 @@ export default function CrossChain() {
               className="flex p-2 justify-center gap-6 text-lg text-center bg-dark-1000 font-bold"
               style={{ color: sourceChain.color }}
             >
-              {formatNumber(inputAmount, false, true)} {destinationToken?.symbol}
+              {formatNumber(inputAmount, false, true)} {fromToken?.symbol}
               {/* ({formatNumber(fromUsd, true, true)}) */}
               <div
                 className="flex"
                 style={{ color: 'white' }}
               >
-
                 <ArrowRightIcon className="m-2 border border-2 rounded" height="21px" />
 
               </div>
@@ -677,15 +680,18 @@ export default function CrossChain() {
                 className="flex"
                 style={{ color: destinationChain?.color }}
               >
-                {new BigNumber(quote?.route?.outputAmount || 0).shiftedBy(-(destinationToken?.decimals || 0)).toString()} {destinationToken?.symbol}
+                { !quote ? '...' :
+                  new BigNumber(quote?.route?.outputAmount || 0).shiftedBy(-(destinationToken?.decimals || 0)).toString()
+                } {toToken?.symbol}
                 {/* ({formatNumber(toUsd, true, true)}) */}
               </div>
             </div>
 
+            <div className="w-[100%] my-1" />
+
             <div
               className="rounded border border-2"
               style={{ borderColor: destinationChain?.color, backgroundColor: destinationChain?.color }}
-
             >
 
               <Button
@@ -695,17 +701,18 @@ export default function CrossChain() {
                 onClick={
                   async () => {
                     await
-                      setShowConfirmationModal(true)
+                    setShowConfirmationModal(true)
                   }
                 }
                 style={{ opacity: quote ? 1 : 0.5, cursor: quote ? "pointer" : "not-allowed" }}
-                disabled={loadingMeta || loadingSwap}
+                // disabled={loadingMeta || loadingSwap}
               >
-                {"Confirm Swap"}
-                {/* {sourceChain.chainId === destinationChain?.chainId ? "Swap" : "Swap Crosschain"} */}
+                {/* {"Confirm Swap"} */}
+                {sourceChain.chainId === destinationChain?.chainId ? "Confirm Swap" : "Confirm Crosschain"}
               </Button>
             </div>
-            {/* <button id="swap" onClick={swap} disabled={loadingMeta || loadingSwap}>swap</button> */}
+     
+                <div className="w-[100%] my-1" />
 
             {setShowConfirmationModal &&
               <Modal isOpen={showConfirmationModal} onDismiss={
@@ -717,7 +724,7 @@ export default function CrossChain() {
                   <Typography variant="lg">
                     Crosschain Swaps are currently in beta, so use at your own risk.
                     <br /><br />
-                    We are committed to open source and we leverage the Rubic SDK (our partners).
+                    We are committed to open source and we leverage the Rango SDK (our partners).
                   </Typography>
                   <Typography variant="sm" className="font-medium">
                     Found Bugs?
@@ -729,20 +736,7 @@ export default function CrossChain() {
                     variant="bordered"
                     color="black"
                     height="2.5rem"
-                    onClick={
-                      async () => {
-                        setShowConfirmation("show")
-                        try {
-                          await swap
-                        } catch (e) {
-                          if (e) {
-                            setShowConfirmation("poor")
-                          } else {
-                            console.error(e)
-                            setShowConfirmation("hide")
-                          }
-                        }
-                      }}
+                    onClick={ swap }
                     style={{ borderColor: destinationChain?.color, backgroundColor: destinationChain?.color }}
 
                   >
@@ -776,10 +770,8 @@ export default function CrossChain() {
               <button id="swap" onClick={swap} disabled={loadingMeta || loadingSwap}>swap</button>
             </div>
 
-            {/* {loadingMeta && (<div className="loading" />)} */}
-            {/* {!loadingMeta && (<img src={destinationToken?.image} alt="Fantom" height="50px" />)} */}
-            <div className="">from (chain[id]-token): {sourceChain?.name}({sourceChainId})-{fromToken?.symbol}</div>
-            <div className="">to (chain[id]-token): {destinationChain?.name}({destinationChain?.chainId})-{toToken?.symbol}</div>
+            {/* <div className="">from (chain[id]-token): {sourceChain?.name}({sourceChainId})-{fromToken?.symbol}</div>
+            <div className="">to (chain[id]-token): {destinationChain?.name}({destinationChain?.chainId})-{toToken?.symbol}</div> */}
           </SwapLayoutCard>
         </div>
       </DoubleGlowShadowV2>
