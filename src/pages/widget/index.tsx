@@ -19,7 +19,7 @@ declare let window: any
 
 
 export const App = () => {
-  const RANGO_API_KEY = '' // put your RANGO-API-KEY here
+  const RANGO_API_KEY = 'c09ed7c9-4866-4f57-8e50-068418f8f95e' // put your RANGO-API-KEY here
 
   const rangoClient = useMemo(() => new RangoClient(RANGO_API_KEY), [])
 
