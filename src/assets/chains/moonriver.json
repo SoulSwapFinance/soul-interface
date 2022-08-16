@@ -1,4 +1,5 @@
 {
+    "id": "MOONRIVER",
     "filename": "moonriver",
     "chainId": 1285,
     "name": "Moonriver",

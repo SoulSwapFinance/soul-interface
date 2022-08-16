@@ -1,4 +1,5 @@
 {
+    "id": "AVALANCHE",
     "filename": "avalanche",
     "chainId": 43114,
     "name": "Avalanche",

@@ -1,4 +1,5 @@
 export interface Chain {
+    id: string;
     name: string;
     longName: string;
     chainId: number;
@@ -34,11 +35,26 @@ export interface Chain {
   // import moonriverChain from "assets/chains/moonriver.json";
   // import moonriverLogo from "assets/chains/moonriver.svg";
   
-  export const FANTOM: Chain = { ...fantomChain, logo: fantomLogo };
-  export const AVALANCHE: Chain = { ...avalancheChain, logo: avalancheLogo };
-  export const ETHEREUM: Chain = { ...ethereumChain, logo: ethereumLogo };
-  export const BINANCE: Chain = { ...binanceChain, logo: binanceLogo };
-  export const POLYGON: Chain = { ...polygonChain, logo: polygonLogo };
+  export const FANTOM: Chain = {
+    id: "FANTOM",
+    ...fantomChain, logo: fantomLogo,
+  };
+  export const AVALANCHE: Chain = {
+    id: "AVALANCHE",
+    ...avalancheChain, logo: avalancheLogo,
+  };
+  export const ETHEREUM: Chain = {
+    id: "ETHEREUM",
+    ...ethereumChain, logo: ethereumLogo,
+  };
+  export const BINANCE: Chain = {
+    id: "BINANCE",
+    ...binanceChain, logo: binanceLogo,
+  };
+  export const POLYGON: Chain = {
+    id: "POLYGON",
+    ...polygonChain, logo: polygonLogo,
+  };
   // export const MOONRIVER: Chain = { ...moonriverChain, logo: moonriverLogo };
   const chains: Chain[] = [FANTOM, AVALANCHE, ETHEREUM, BINANCE, POLYGON]; // MOONRIVER
   

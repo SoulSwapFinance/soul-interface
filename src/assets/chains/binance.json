@@ -1,4 +1,5 @@
 {
+    "id": "BINANCE",
     "filename": "binance",
     "chainId": 56,
     "name": "Binance",
