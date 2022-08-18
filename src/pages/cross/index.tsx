@@ -132,7 +132,6 @@ export default function Exchange() {
   const { account, chainId } = useActiveWeb3React()
   const { userInfo } = useUserInfo()
   const { userTokenInfo } = useUserTokenInfo(account, from.address)
-
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
 
   let nativeBalance = //userEthBalance ?
@@ -300,16 +299,29 @@ export default function Exchange() {
           return;
         }
 
-        const newToAmount
-          = toChain.chainId != chainId && isCrossChainTrade(trade)
-            ? trade.trade.to.tokenAmount
-            : toAmount
-        console.log('newToAmount:%s', newToAmount)
-        setTrade(newTrade);
-        setTradeType(fromChain.chainId === toChain?.chainId ? "Instant" : "CrossChain")
-        setLoading(false);
-        setFromUsd((Number(newFromUsd) * Number(amount)).toString())
-        setToUsd(Number(newToUsd).toString())
+        if (newTrade instanceof InstantTrade) {
+          setTrade(newTrade);
+          setFromUsd((Number(newFromUsd) * Number(newTrade.from.tokenAmount)).toString())
+          setToUsd((Number(newToUsd) * Number((newTrade.to?.tokenAmount))).toString())
+        } else {
+          const test = newTrade[0].trade
+          setTrade(test);
+          setFromUsd((Number(newFromUsd) * Number(test.from.tokenAmount)).toString())
+          setToUsd((Number(newToUsd) * Number((test.to?.tokenAmount))).toString())
+        }
+
+        setLoading(false)
+
+        // const newToAmount
+        //   = toChain.chainId != chainId && isCrossChainTrade(trade)
+        //     ? trade.trade.to.tokenAmount
+        //     : toAmount
+        // console.log('newToAmount:%s', newToAmount)
+        // setTrade(newTrade);
+        // setTradeType(fromChain.chainId === toChain?.chainId ? "Instant" : "CrossChain")
+        // setLoading(false);
+        // setFromUsd((Number(newFromUsd) * Number(amount)).toString())
+        // setToUsd(Number(newToUsd).toString())
           // newToAmount.toString())
         // console.log('newToUsd:%s', newToUsd)
         // console.log('toAmount:%s', toAmount)
@@ -363,8 +375,8 @@ export default function Exchange() {
         ? trade?.to.tokenAmount 
           : 0
   console.log('toAmount:%s', toAmount)
-  const deltaUsd = Number(fromUsd) > (Number(toUsd) * Number(toAmount)) 
-    ? Number(fromUsd) - (Number(toAmount) * Number(toUsd)) : 0
+  const deltaUsd = Number(fromUsd) > Number(toUsd) 
+    ? Number(fromUsd) - Number(toAmount) : 0
   console.log('deltaUsd:%s', deltaUsd)
   const deltaPercent = 100 * deltaUsd / Number(fromUsd)
   console.log('deltaPercent:%s', deltaPercent)
@@ -672,7 +684,7 @@ export default function Exchange() {
                   <div className="flex justify-center">
                     <Typography className={classNames('sm:text-lg text-md font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
                       {trade
-                        ? `${formatNumber(Number(toAmount), false, true)} ${to?.symbol} (${formatNumber(Number(toUsd) * Number(toAmount), true, true)})`
+                        ? `${formatNumber(Number(toAmount), false, true)} ${to?.symbol} (${formatNumber(Number(toUsd), true, true)})`
                         : "0 ($0.00)"}
                     </Typography>
                   </div>
@@ -697,7 +709,7 @@ export default function Exchange() {
                   className="flex"
                   style={{ color: toChain?.color }}
                 >
-                  {formatNumber(toAmount, false, true)} {to?.symbol} ({formatNumber(Number(toUsd) * Number(toAmount), true, true)})
+                  {formatNumber(toAmount, false, true)} {to?.symbol} ({formatNumber(Number(toUsd), true, true)})
                 </div>
               </div>
 
