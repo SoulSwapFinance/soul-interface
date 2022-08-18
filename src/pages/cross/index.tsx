@@ -368,15 +368,10 @@ export default function Exchange() {
   const amountRef = useRef<HTMLInputElement>(null);
   // const toAmount = toUsd ? Number(trade?.to?.tokenAmount) : 0
   const fromAmount = amount ? Number(amount) : 0
-  const toAmount
-    = toChain != fromChain && isCrossChainTrade(trade) 
-    ? trade?.trade.toTokenAmountMin
-      : toChain == fromChain && !isCrossChainTrade(trade) 
-        ? trade?.to.tokenAmount 
-          : 0
+  const toAmount = outputAmount ? Number(outputAmount) : 0
   console.log('toAmount:%s', toAmount)
   const deltaUsd = Number(fromUsd) > Number(toUsd) 
-    ? Number(fromUsd) - Number(toAmount) : 0
+    ? Number(fromUsd) - Number(toUsd) : 0
   console.log('deltaUsd:%s', deltaUsd)
   const deltaPercent = 100 * deltaUsd / Number(fromUsd)
   console.log('deltaPercent:%s', deltaPercent)
@@ -468,6 +463,10 @@ export default function Exchange() {
                   try {
                     await fromChain == toChain && !isCrossChainTrade(trade) && 
                     trade?.swap({
+                      onConfirm: (_hash: any) => setShowConfirmation("hide"),
+                    });
+                    await fromChain != toChain && isCrossChainTrade(trade) && 
+                    trade?.trade.swap({
                       onConfirm: (_hash: any) => setShowConfirmation("hide"),
                     });
                   } catch (e) {
