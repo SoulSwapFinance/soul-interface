@@ -151,7 +151,7 @@ export const POOLS: AddressMap = {
     '0x1FC954d3484bC21E0Ce53A6648a35BBfc03DC9D0': {  // BTC-ETH
       id: 8,
       address: '0x1fc954d3484bc21e0ce53a6648a35bbfc03dc9d0',
-      token0: { // BTC
+      token0: { // WBTC
         id: '0x321162Cd933E2Be498Cd2267a90534A804051b11', // WBTC
         name: 'Wrapped Bitcoin',
         symbol: 'WBTC',
