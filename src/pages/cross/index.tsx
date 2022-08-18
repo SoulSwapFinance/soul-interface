@@ -380,18 +380,17 @@ export default function Exchange() {
   const toggleNetworkModal = useNetworkModalToggle()
   const wrongNetwork = fromChain.chainId != chainId ? true : false
 
-  // const swap = async (trade: InstantTrade | WrappedCrossChainTrade) => {
-  //   toChain != fromChain && isCrossChainTrade(trade) &&
-  //     await trade?.trade.swap({
-  //       onConfirm: (_hash: any) => setShowConfirmation("hide"),
-  //     })
+  const swap = async (trade: InstantTrade | WrappedCrossChainTrade) => {
+    toChain != fromChain && isCrossChainTrade(trade) &&
+      await trade?.trade.swap({
+        onConfirm: (_hash: any) => setShowConfirmation("hide"),
+      })
       
-  //   toChain == fromChain && !isCrossChainTrade(trade) && 
-   
-  //     // .swap({
-  //     //   onConfirm: (_hash: any) => setShowConfirmation("hide"),
-  //     // })
-  //   }
+    toChain == fromChain && !isCrossChainTrade(trade) && 
+      trade.swap({
+        onConfirm: (_hash: any) => setShowConfirmation("hide"),
+      })
+    }
 
   return (
     <>
@@ -461,15 +460,14 @@ export default function Exchange() {
                 async () => {
                   setShowConfirmation("show")
                   try {
-                    await fromChain == toChain && !isCrossChainTrade(trade) && 
-                    trade?.swap({
-                      onConfirm: (_hash: any) => setShowConfirmation("hide"),
-                    });
-                    await fromChain != toChain && isCrossChainTrade(trade) && 
-                    trade?.trade.swap({
-                      onConfirm: (_hash: any) => setShowConfirmation("hide"),
-                    });
-                  } catch (e) {
+                  if (trade instanceof InstantTrade) {
+                    await trade.swap({
+                      onConfirm: (_hash: any) => setShowConfirmation("hide")})
+                  } else {
+                    await trade.trade.swap({
+                      onConfirm: (_hash: any) => setShowConfirmation("hide")})
+                  }
+                } catch (e) {
                     if (e instanceof InsufficientFundsError) {
                       setShowConfirmation("poor");
                     } else {
