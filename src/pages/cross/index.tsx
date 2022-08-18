@@ -357,27 +357,34 @@ export default function Exchange() {
   // const toAmount = toUsd ? Number(trade?.to?.tokenAmount) : 0
   const fromAmount = amount ? Number(amount) : 0
   const toAmount
-    = isCrossChainTrade(trade) ? Number(trade.trade?.toTokenAmountMin)
-      : trade?.to.tokenAmount
+    = toChain != fromChain && isCrossChainTrade(trade) 
+    ? trade?.trade.toTokenAmountMin
+      : toChain == fromChain && !isCrossChainTrade(trade) 
+        ? trade?.to.tokenAmount 
+          : 0
+  console.log('toAmount:%s', toAmount)
   const deltaUsd = Number(fromUsd) > (Number(toUsd) * Number(toAmount)) 
     ? Number(fromUsd) - (Number(toAmount) * Number(toUsd)) : 0
   console.log('deltaUsd:%s', deltaUsd)
   const deltaPercent = 100 * deltaUsd / Number(fromUsd)
-  console.log('deltaUsd:%s', deltaPercent)
+  console.log('deltaPercent:%s', deltaPercent)
   // const [fromToken, setFromToken] = useState(null);
   // const [toToken, setToToken] = useState(null);
   const toggleNetworkModal = useNetworkModalToggle()
   const wrongNetwork = fromChain.chainId != chainId ? true : false
 
-  const swap = async (trade: InstantTrade | WrappedCrossChainTrade) => {
-    isCrossChainTrade(trade) ?
-      await trade?.trade.swap({
-        onConfirm: (_hash: any) => setShowConfirmation("hide"),
-      })
-      : await trade?.swap({
-        onConfirm: (_hash: any) => setShowConfirmation("hide"),
-      })
-  }
+  // const swap = async (trade: InstantTrade | WrappedCrossChainTrade) => {
+  //   toChain != fromChain && isCrossChainTrade(trade) &&
+  //     await trade?.trade.swap({
+  //       onConfirm: (_hash: any) => setShowConfirmation("hide"),
+  //     })
+      
+  //   toChain == fromChain && !isCrossChainTrade(trade) && 
+   
+  //     // .swap({
+  //     //   onConfirm: (_hash: any) => setShowConfirmation("hide"),
+  //     // })
+  //   }
 
   return (
     <>
@@ -447,7 +454,10 @@ export default function Exchange() {
                 async () => {
                   setShowConfirmation("show")
                   try {
-                    await swap
+                    await fromChain == toChain && !isCrossChainTrade(trade) && 
+                    trade?.swap({
+                      onConfirm: (_hash: any) => setShowConfirmation("hide"),
+                    });
                   } catch (e) {
                     if (e instanceof InsufficientFundsError) {
                       setShowConfirmation("poor");
