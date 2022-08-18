@@ -58,7 +58,7 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
         {/* <NavLink
           activeClassName="text-dark-600 border border-dark-600 rounded bg-black"
           href={{
-            pathname: '/cross',
+            pathname: '/crosschain',
           }}
         >
           <Typography weight={700} className="text-secondary hover:text-purple p-1">

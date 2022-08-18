@@ -1,4 +1,5 @@
 {
+    "id": "ETHEREUM",
     "filename": "ethereum",
     "chainId": 1,
     "name": "Ethereum",

@@ -1,4 +1,5 @@
 {
+    "id": "AVALANCHE",
     "filename": "avalanche",
     "chainId": 43114,
     "name": "Avalanche",
@@ -18,7 +19,7 @@
             "rank": 11,
             "logo": "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/avalanche/Avalanche.svg",
             "symbol": "AVAX",
-            "address": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+            "address": "fvweahmxkfeig8snevq42hc6whryy3efyavebmqdndgcgxn5z",
             "isNative": true,
             "decimals": 18
         },

@@ -1,0 +1,950 @@
+// import './App.css';
+import { useEffect, useMemo, useRef, useState } from "react"
+import { ethers } from 'ethers'
+import {
+  EvmTransaction,
+  MetaResponse,
+  RangoClient,
+  TransactionStatus,
+  QuoteResponse,
+  StatusResponse,
+  Asset,
+  SwapResponse
+} from "rango-sdk-basic"
+import { FANTOM, AVALANCHE, BINANCE, Chain, CHAINS, ETHEREUM, POLYGON, Token } from "features/cross/chains";
+
+import { checkApprovalSync, prepareEvmTransaction, sleep } from "features/crosschain/utils";
+import BigNumber from "bignumber.js";
+import React from 'react';
+import Container from "components/Container";
+import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
+import HeaderNew from "features/trade/HeaderNew";
+import { SwapLayoutCard } from "layouts/SwapLayout";
+import Modal from "components/DefaultModal";
+import InputCurrencyBox from "pages/bridge/components/InputCurrencyBox";
+import Image from 'next/image'
+import NetworkModal from "modals/NetworkModal";
+import { useNetworkModalToggle } from "state/application/hooks";
+import { useActiveWeb3React } from "services/web3";
+import { Button } from "components/Button";
+import { classNames } from "functions/styling";
+import { formatNumber } from "functions/format";
+import Typography from "components/Typography";
+import CurrencyLogo, { getCurrencyLogoUrls } from "components/CurrencyLogo/CurrencyLogo";
+import Logo from "components/Logo";
+import { useCurrency } from "hooks/Tokens";
+import { BLOCKCHAIN_NAME } from "rubik-sdk";
+import { loadERC20Contract } from "utils/wallet";
+import { AddressZero } from "@ethersproject/constants";
+import { chain } from "lodash";
+import { OverlayButton } from "components";
+import Row from "components/Row";
+import { AutoColumn } from "components/Column";
+import { ArrowDownIcon, ArrowRightIcon } from "@heroicons/react/solid";
+import ModalHeader from "components/Modal/Header";
+import { NETWORK_LABEL } from "constants/networks";
+
+declare let window: any
+
+const CHAIN_BY_ID = new Map([
+  [FANTOM.chainId, BLOCKCHAIN_NAME.FANTOM],
+  // [MOONRIVER.chainId, BLOCKCHAIN_NAME.MOONRIVER],
+  [POLYGON.chainId, BLOCKCHAIN_NAME.POLYGON],
+  [AVALANCHE.chainId, BLOCKCHAIN_NAME.AVALANCHE],
+  [ETHEREUM.chainId, BLOCKCHAIN_NAME.ETHEREUM],
+  [BINANCE.chainId, BLOCKCHAIN_NAME.BINANCE_SMART_CHAIN],
+])
+
+function getChainColor(chain: Chain) {
+  // let name = CHAIN_BY_ID.get(chain.chainId)
+  // console.log('chainColor', chain?.color)
+  return chain?.color
+}
+
+function getChainLogo(chain: Chain) {
+  return chain?.logo
+}
+
+export default function CrossChain() {
+  const RANGO_API_KEY = 'c09ed7c9-4866-4f57-8e50-068418f8f95e' // put your RANGO-API-KEY here
+  const rangoClient = useMemo(() => new RangoClient(RANGO_API_KEY), [])
+  const { account, chainId } = useActiveWeb3React()
+  const [tokensMeta, setTokenMeta] = useState<MetaResponse | null>()
+  const [inputAmount, setInputAmount] = useState<string>("")
+  const [quote, setQuote] = useState<QuoteResponse | null>()
+  const [txStatus, setTxStatus] = useState<StatusResponse | null>(null)
+  const [loadingMeta, setLoadingMeta] = useState<boolean>(true)
+  const [loadingSwap, setLoadingSwap] = useState<boolean>(false)
+  const [error, setError] = useState<string>("")
+  const [fromToken, setFromToken] = useState<Token>(FANTOM.tokens[2])
+  const [toToken, setToToken] = useState<Token>(AVALANCHE.tokens[6])
+
+  const [showSelectFrom, setShowSelectFrom] = useState(false)
+  const [showSelectTo, setShowSelectTo] = useState(false)
+  const [sourceChain, setSourceChain] = useState<Chain>(FANTOM)
+  const [destinationChain, setDestinationChain] = useState<Chain>(AVALANCHE)
+  const [fromBalance, setFromBalance] = useState('')
+  const amountRef = useRef<HTMLInputElement>(null)
+  const [showConfirmation, setShowConfirmation] = useState<"hide" | "show" | "poor">("hide")
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false)
+  const toggleNetworkModal = useNetworkModalToggle()
+
+  useEffect(() => {
+    setLoadingMeta(true)
+    // Meta provides all blockchains, tokens and swappers information supported by Rango
+    rangoClient.meta().then((meta) => {
+      setTokenMeta(meta)
+      setLoadingMeta(false)
+    })
+  }, [rangoClient])
+
+  // 1inch sample: POLYGON.USDT -> POLYGON.MATIC
+  // const sourceChainId = 137
+  // const sourceToken = tokensMeta?.tokens.find(t => t.blockchain === "POLYGON" && t.address === '0xc2132d05d31c914a87c6611c10748aeb04b58e8f')
+  // const destinationToken = tokensMeta?.tokens.find(t => t.blockchain === "POLYGON" && t.address === null)
+
+  // 1inch sample: BSC.BAKE -> BSC.BNB
+  // const sourceChainId = 56
+  // const sourceToken = tokensMeta?.tokens.find(t => t.blockchain === "BSC" && t.address === "0xe02df9e3e622debdd69fb838bb799e3f168902c5")
+  // const destinationToken = tokensMeta?.tokens.find(t => t.blockchain === "BSC" && t.address === '0x55d398326f99059ff775485246999027b3197955')
+
+  // anyswap sample: POLYGON.USDT to BSC.USDT
+  // const sourceChainId = 137
+  // const sourceToken = tokensMeta?.tokens.find(t => t.blockchain === "POLYGON" && t.address === '0xc2132d05d31c914a87c6611c10748aeb04b58e8f')
+  // const destinationToken = tokensMeta?.tokens.find(t => t.blockchain === "BSC" && t.address === '0x55d398326f99059ff775485246999027b3197955')
+
+  // aggregator sample 1: BSC.BNB to FTM.USDT
+  // const sourceChainId = 56
+  // const sourceToken = tokensMeta?.tokens.find(t => t.blockchain === "BSC" && t.address === null)
+  // const destinationToken = tokensMeta?.tokens.find(t => t.blockchain === "FANTOM" && t.address === '0x049d68029688eabf473097a2fc38ef61633a3c7a')
+
+  // aggregator sample 2: BSC.BNB to FTM.FTM
+  // const sourceChainId = 56
+  // const sourceToken = tokensMeta?.tokens.find(t => t.blockchain === "BSC" && t.address === null)
+  // const destinationToken = tokensMeta?.tokens.find(t => t.blockchain === "FANTOM" && t.address === null)
+
+  // aggregator sample 3: POLYGON.USDC to BSC.USDC
+  // const sourceChainId = 137
+  // const sourceToken = tokensMeta?.tokens.find(t => t.blockchain === "POLYGON" && t.address === '0x2791bca1f2de4661ed88a30c99a7a9449aa84174')
+  // const destinationToken = tokensMeta?.tokens.find(t => t.blockchain === "BSC" && t.address === '0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d')
+
+  // aggregator sample 4: BSC.BNB to FTM.FTM
+  const sourceChainId = chainId
+  const sourceToken = tokensMeta?.tokens.find(t => t.blockchain === CHAIN_BY_ID.get(sourceChain?.chainId) && t.address === (fromToken?.isNative ? null : fromToken?.address))
+  const destinationToken = tokensMeta?.tokens.find(t => t.blockchain === CHAIN_BY_ID.get(destinationChain.chainId) && t.address === (toToken?.isNative ? null : toToken?.address))
+  const wrongNetwork = sourceChain?.chainId != sourceChainId ? true : false
+  const provider = new ethers.providers.Web3Provider(window.ethereum)
+
+  // console.log('FANTOM.tokens[2]:%s', FANTOM.tokens[2]?.symbol)
+  console.log('sourceToken:%s', sourceToken?.symbol)
+  console.log('sourceChain:%s', CHAIN_BY_ID.get(sourceChain?.chainId))
+  console.log('destinationChain:%s', CHAIN_BY_ID.get(destinationChain.chainId))
+  const getBalance = async (address: string, provider: any) => {
+    if (address === AddressZero || !address) {
+      let fromBalance = provider.getBalance(account)
+      return fromBalance
+    }
+    await setFromBalance(fromBalance)
+    const contract = await loadERC20Contract(address, provider)
+    return contract.balanceOf(account)
+  };
+
+  const getUserWallet = async () => {
+    await provider.send('eth_requestAccounts', [])
+    return await provider.getSigner().getAddress()
+  }
+
+  const swap = async () => {
+    setError("")
+    setQuote(null)
+    setTxStatus(null)
+    let userAddress = ''
+    try {
+      userAddress = await getUserWallet()
+      // console.log({ userAddress })
+    } catch (err) {
+      setError('Connection Error: Connect Wallet')
+      return
+    }
+
+    if (!(window.ethereum).isConnected()) {
+      setError('Connection Error: Retry Connection')
+      return
+    }
+
+    if (window.ethereum.chainId && parseInt(window.ethereum.chainId) !== sourceChain?.chainId) {
+      setError(`Change Network to ${sourceChain?.name}.`)
+      return
+    }
+
+    if (!account) {
+      setError(`Connect Wallet`)
+      return
+    }
+    if (!inputAmount) {
+      setError(`Enter Amount`)
+      return
+    }
+    if (!sourceToken || !destinationToken)
+      return
+
+    setLoadingSwap(true)
+    const from: Asset = { blockchain: sourceToken?.blockchain, symbol: sourceToken?.symbol, address: sourceToken?.address }
+    const to: Asset = { blockchain: destinationToken?.blockchain, symbol: destinationToken?.symbol, address: destinationToken?.address }
+    const amount: string = (new BigNumber(inputAmount)).shiftedBy(sourceToken?.decimals).toString()
+
+    const quoteResponse = await rangoClient.quote({
+      amount,
+      from,
+      to,
+      // swappers: ['cBridge v2.0', 'OneInchPolygon'],
+      messagingProtocols: ['axelar', 'cbridge'],
+      // sourceContract: "0x123...",
+      // destinationContract: "0x123...",
+      // imMessage: "0x"
+    })
+    setQuote(quoteResponse)
+    console.log({ quoteResponse })
+
+    if (!quoteResponse || !quoteResponse?.route || quoteResponse.resultType !== "OK") {
+      setError(`Invalid Quote Response: ${quoteResponse.resultType}.`)
+      setLoadingSwap(false)
+      return
+    }
+    else {
+      await executeRoute(from, to, userAddress, amount)
+    }
+  }
+
+  const executeRoute = async (from: Asset, to: Asset, fromAddress: string, inputAmount: string) => {
+    const provider = await new ethers.providers.Web3Provider(window.ethereum as any)
+    const signer = provider.getSigner()
+    if (!from || !to)
+      return
+
+    let swapResponse: SwapResponse | null = null
+    try {
+      console.log({
+        from,
+        to,
+        amount: inputAmount,
+        fromAddress: fromAddress,
+        toAddress: fromAddress,
+        disableEstimate: false,
+        referrerAddress: null,
+        referrerFee: null,
+        slippage: '1.0',
+        // swappers: ['cBridge v2.0', 'OneInchPolygon'],
+        messagingProtocols: ['axelar', 'cbridge'],
+      })
+      swapResponse = await rangoClient.swap({
+        from,
+        to,
+        amount: inputAmount,
+        fromAddress: fromAddress,
+        toAddress: fromAddress,
+        disableEstimate: false,
+        referrerAddress: null,
+        referrerFee: null,
+        slippage: '1.0',
+        // swappers: ['cBridge v2.0', 'OneInchPolygon'],
+        messagingProtocols: ['axelar', 'cbridge'],
+        // sourceContract: "0x123...",
+        // destinationContract: "0x123...",
+        // imMessage: "0x"
+      })
+      console.log({ swapResponse })
+
+      if (!!swapResponse.error || swapResponse.resultType === "NO_ROUTE" || swapResponse.resultType === "INPUT_LIMIT_ISSUE") {
+        setError(`Error swapping, error message: ${swapResponse.error}, result type: ${swapResponse.resultType}`)
+        setLoadingSwap(false)
+        return
+      }
+
+      const evmTransaction = swapResponse.tx as EvmTransaction
+      console.log({ evmTransaction })
+
+      // if approve data is not null, it means approve needed, otherwise it's already approved.
+      if (!!evmTransaction.approveData) {
+        // try to approve
+        const finalTx = prepareEvmTransaction(evmTransaction, true)
+        console.log("approve tx", { finalTx })
+        const txHash = (await signer.sendTransaction(finalTx)).hash
+        await checkApprovalSync(swapResponse.requestId, txHash, rangoClient)
+        console.log("transaction approved successfully")
+      }
+      const finalTx = prepareEvmTransaction(evmTransaction, false)
+      const txHash = (await signer.sendTransaction(finalTx)).hash
+      const txStatus = await checkTransactionStatusSync(swapResponse.requestId, txHash, rangoClient)
+      console.log("transaction finished", { txStatus })
+      console.log("bridged data?", txStatus?.bridgeData)
+      setLoadingSwap(false)
+    } catch (e) {
+      const rawMessage = JSON.stringify(e).substring(0, 90) + '...'
+      setLoadingSwap(false)
+      setError(rawMessage)
+      // report transaction failure to server if something went wrong in client for signing and sending the transaction
+      if (!!swapResponse) {
+        await rangoClient.reportFailure({
+          data: { message: rawMessage },
+          eventType: 'TX_FAIL',
+          requestId: swapResponse.requestId,
+        })
+      }
+    }
+  }
+
+  const checkTransactionStatusSync = async (requestId: string, txHash: string, rangoClient: RangoClient) => {
+    while (true) {
+      const txStatus = await rangoClient.status({
+        requestId: requestId,
+        txId: txHash,
+      }).catch((error: any) => {
+        console.log(error)
+      })
+      if (!!txStatus) {
+        setTxStatus(txStatus)
+        console.log({ txStatus })
+        console.log(txStatus?.bridgeData?.destTokenPrice, txStatus?.bridgeData?.srcTokenPrice)
+        if (!!txStatus?.status && [TransactionStatus.FAILED, TransactionStatus.SUCCESS].includes(txStatus?.status)) {
+          return txStatus
+        }
+      }
+      await sleep(3000)
+    }
+  }
+
+  const FromComponent: React.FC = () => {
+    return (
+      <div
+        className="grid grid-cols-1 rounded bg-dark-1000 border border-4 w-full"
+        style={{ borderColor: sourceChain?.color }}
+      >
+        {wrongNetwork &&
+          <div
+            className="grid grid-cols-2 items-center border-4 rounded border-dark-1000 bg-dark-1000 hover:bg-dark-900 whitespace-nowrap text-md justify-center font-bold cursor-pointer select-none pointer-events-auto"
+            onClick={() => toggleNetworkModal()}
+          >
+            <div
+              className="hidden lg:flex lg:rounded lg:rounded-2xl lg:m-2 lg:text-center lg:text-lg lg:justify-center lg:p-3 lg:border"
+              style={{ borderColor: sourceChain?.color }}
+            >
+              Switch to {(sourceChain?.name, true)} Network
+            </div>
+            <div
+              className="lg:hidden flex rounded rounded-2xl m-1 text-center text-lg justify-center p-2 border"
+              style={{ borderColor: sourceChain?.color }}
+            >
+              Switch Network
+            </div>
+            <Image
+              src={getChainLogo(sourceChain)}
+              alt="Switch Network"
+              className="flex align-center justify-center"
+              style={{ backgroundColor: sourceChain?.color }}
+              width="42" height="42"
+            />
+            <NetworkModal />
+            {NETWORK_LABEL[chainId]}
+          </div>
+        }
+        <div
+          className={"flex w-full border border-4"}
+          style={{ borderColor: sourceChain?.color }}
+        />
+        <Image
+          className="flex align-center justify-center"
+          width="36" height="36"
+          style={{ backgroundColor: sourceChain?.color }}
+          src={getChainLogo(sourceChain)}
+          alt={sourceChain?.name}
+          onClick={() => setShowSelectFrom(true)}
+        >
+        </Image>
+        <div
+          className={"flex w-full border border-4"}
+          style={{ borderColor: sourceChain?.color }}
+        />
+        <Button
+          className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
+          onClick={() => setShowSelectFrom(true)}
+          variant={'outlined'}
+          color={'black'}
+        >
+          <div className="">
+            <Image className="block object-fit:contain object-position:center items-center"
+              src={sourceToken?.image}
+              width="48" height="48"
+              alt={sourceToken?.symbol}
+            />
+          </div>
+          <div className="flex justify-center mt-2 font-bold text-2xl">
+            {sourceToken?.symbol}
+          </div>
+        </Button>
+        <div
+          className={"flex w-full border border-2"}
+          style={{ borderColor: sourceChain?.color }}
+        />
+        <div className="grid grid-cols-1">
+
+          <div className={`flex flex-col p-3 w-full space-y-1 bg-dark-1000`}
+          >
+            <div className="flex justify-center">
+              <Typography className={classNames('text-lg font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
+                {!loadingSwap
+                  ? `${formatNumber(Number(inputAmount), false, true)} ${sourceToken?.symbol}`
+                  : "0 ($0.00)"}
+              </Typography>
+              {/* (${formatNumber(inputAmount, true, true)})  */}
+            </div>
+          </div>
+          <div
+            className={"flex w-full border border-2"}
+            style={{ borderColor: sourceChain?.color }}
+          />
+        </div>
+        {showSelectFrom &&
+          <div>
+            <TokenSelect
+              show={showSelectFrom}
+              chain={sourceChain}
+              token={fromToken}
+              onClose={f => {
+                setShowSelectFrom(false)
+                if (!f) {
+                  return;
+                }
+                setFromToken(f.token)
+                setSourceChain(f.chain)
+                setInputAmount("")
+                setFromBalance("")
+                amountRef.current?.select()
+              }}
+            />
+          </div>}
+      </div>
+
+    )
+  }
+
+  const ToComponent: React.FC = () => {
+    let toTokenSymbol = toToken?.symbol
+    let toTokenImage = toToken?.logo
+    return (
+      <div
+        className="grid grid-cols-1 rounded bg-dark-1000 border border-4 w-full"
+        style={{ borderColor: destinationChain?.color }}
+      >
+
+        <div
+          className={"flex w-full border border-4"}
+          style={{ borderColor: destinationChain?.color }}
+        />
+        <Image
+          className="flex align-center justify-center"
+          width="36" height="36"
+          style={{ backgroundColor: destinationChain?.color }}
+          src={getChainLogo(destinationChain)}
+          alt={destinationChain?.name}
+          onClick={() => setShowSelectTo(true)}
+        >
+        </Image>
+        <div
+          className={"flex w-full border border-4"}
+          style={{ borderColor: destinationChain?.color }}
+        />
+        <Button
+          className="grid grid-cols-2 bg-dark-2000 max-h-[86px] w-full justify-between"
+          onClick={() => setShowSelectTo(true)}
+          variant={'outlined'}
+          color={'black'}
+        >
+          <div className="">
+            <Image className="block object-fit:contain object-position:center items-center"
+              src={toTokenImage}
+              width="48" height="48"
+              alt={toToken?.symbol}
+            />
+          </div>
+          {console.log('destinationToken:%s', toToken?.symbol)}
+          {console.log('toTokenSymbol:%s', toTokenSymbol)}
+          <div className="flex justify-center mt-2 font-bold text-2xl">
+            {toTokenSymbol}
+          </div>
+        </Button>
+        <div
+          className={"flex w-full border border-2"}
+          style={{ borderColor: destinationChain?.color }}
+        />
+        <div className="grid grid-cols-1">
+
+          <div className={`flex flex-col p-3 w-full space-y-1 bg-dark-1000`}
+          >
+            <div className="flex justify-center">
+              <Typography className={classNames('text-lg font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
+                {quote
+                  ? `${formatNumber(Number(quote?.route?.outputAmount), false, true)} ${toToken?.symbol}`
+                  : "Pending..."}
+              </Typography>
+              {/* (${formatNumber(inputAmount, true, true)})  */}
+            </div>
+          </div>
+          <div
+            className={"flex w-full border border-2"}
+            style={{ borderColor: destinationChain?.color }}
+          />
+        </div>
+
+        {showSelectTo &&
+          <div>
+            <TokenSelect
+              show={showSelectTo}
+              chain={destinationChain}
+              token={toToken}
+              onClose={t => {
+                setShowSelectTo(false)
+                if (!t) {
+                  return;
+                }
+                setDestinationChain(t.chain)
+                setToToken(t.token)
+              }}
+            />
+          </div>}
+
+      </div>
+    )
+  }
+
+  const Quote: React.FC = ({ }) => {
+    return (
+      <tbody>
+        {quote && (
+          <React.Fragment>
+            <tr>
+              <td>expected output</td>
+              <td>{new BigNumber(quote?.route?.outputAmount || "0").shiftedBy(-(destinationToken?.decimals || 0)).toString()} {toToken?.symbol}</td>
+            </tr>
+            <tr>
+              <td>time estimate</td>
+              <td>{quote.route?.estimatedTimeInSeconds}s</td>
+            </tr>
+          </React.Fragment>
+        )}
+        {txStatus && (
+          <React.Fragment>
+            <tr>
+              <td>status</td>
+              <td>{txStatus?.status || TransactionStatus.RUNNING}</td>
+            </tr>
+            <tr>
+              <td>output</td>
+              <td>{new BigNumber(txStatus?.output?.amount || "0").shiftedBy(-(destinationToken?.decimals || 0)).toString() || '?'} {txStatus?.output?.receivedToken?.symbol || ""}  {txStatus?.output?.type || ""}</td>
+            </tr>
+            <tr>
+              <td>error?</td>
+              <td>{txStatus?.error || '-'}</td>
+            </tr>
+            {txStatus?.explorerUrl?.map((item, id) => (
+              <tr key={id}>
+                <td>explorer url [{id}]</td>
+                <td>
+                  <a href={item.url}>{item.description || "Tx Hash"}</a>
+                </td>
+              </tr>
+            ))}
+            {!!txStatus?.bridgeData && (
+              <React.Fragment>
+                <tr>
+                  <td>srcChainId</td>
+                  <td>{txStatus?.bridgeData.srcChainId}</td>
+                </tr>
+                <tr>
+                  <td>destChainId</td>
+                  <td>{txStatus?.bridgeData.destChainId}</td>
+                </tr>
+                <tr>
+                  <td>srcToken</td>
+                  <td>{txStatus?.bridgeData.srcToken}</td>
+                </tr>
+                <tr>
+                  <td>destToken</td>
+                  <td>{txStatus?.bridgeData.destToken}</td>
+                </tr>
+                <tr>
+                  <td>srcTokenAmt</td>
+                  <td>{txStatus?.bridgeData.srcTokenAmt}</td>
+                </tr>
+                <tr>
+                  <td>destTokenAmt</td>
+                  <td>{txStatus?.bridgeData.destTokenAmt}</td>
+                </tr>
+                <tr>
+                  <td>srcTxHash</td>
+                  <td>{txStatus?.bridgeData.srcTxHash}</td>
+                </tr>
+                <tr>
+                  <td>destTxHash</td>
+                  <td>{txStatus?.bridgeData.destTxHash}</td>
+                </tr>
+              </React.Fragment>
+            )}
+          </React.Fragment>
+        )}
+      </tbody>
+    )
+  }
+
+  return (
+    <Container id="cross-page" maxWidth="2xl" className="space-y-4">
+      <DoubleGlowShadowV2>
+        <div className="p-4 mt-4 space-y-4 rounded bg-dark-1000" style={{ zIndex: 1 }}>
+          <div className="px-2">
+            <HeaderNew />
+          </div>
+          <SwapLayoutCard>
+            {/* {loadingMeta && (<div className="loading" />)} */}
+            {/* {!loadingMeta && (<img src={sourceToken?.image} alt="USDT" height="50px" />)} */}
+            <div>
+              <FromComponent />
+              <div className="w-[100%] my-4" />
+              <InputCurrencyBox
+                // disabled={!fromTokenLogo}
+                value={inputAmount}
+                setValue={async (inputAmount) => await setInputAmount(inputAmount)}
+                // max={async () => setAmount(ethers.utils.formatUnits(await getBalance(), decimals))}
+                variant="new"
+              />
+              <div className="flex w-full text-sm justify-end font-bold">
+                <Button
+                  onClick={
+                    async () =>
+                      setInputAmount(ethers.utils.formatUnits(
+                        await getBalance(
+                          // native || token
+                          fromToken?.isNative
+                            ? AddressZero
+                            : fromToken?.address, provider),
+                        // decimals
+                        fromToken?.decimals))
+                  }
+                >
+                  MAX
+                  {/* : {
+                    fromBalance
+                    ? formatNumber(Number(fromBalance), false, true)
+                  : '0'} */}
+                </Button>
+              </div>
+            </div>
+            <Row style={{ justifyContent: "center", alignItems: "center" }}>
+              {/* <div style={{ height: "1px", width: "100%" }} /> */}
+              <OverlayButton
+                style={{ padding: 0 }}
+              >
+                <AutoColumn justify="space-between" className="py-0 -my-12">
+                  <div className="flex justify-center z-0">
+                    <div
+                      role="button"
+                      className="p-2.5 rounded-full bg-dark-1000 border border-2 shadow-md"
+                      style={{ borderColor: sourceChain?.color }}
+                    >
+                      <ArrowDownIcon
+                        width={24}
+                        className="text-high-emphesis hover:text-white"
+                        style={{ color: destinationChain?.color }}
+                      />
+                    </div>
+                  </div>
+                </AutoColumn>
+              </OverlayButton>
+              <div style={{ height: "1px", width: "1000%" }} />
+            </Row>
+            <ToComponent />
+            <div
+              className="flex p-2 justify-center gap-6 text-lg text-center bg-dark-1000 font-bold"
+              style={{ color: sourceChain.color }}
+            >
+              {formatNumber(inputAmount, false, true)} {fromToken?.symbol}
+              {/* ({formatNumber(fromUsd, true, true)}) */}
+              <div
+                className="flex"
+                style={{ color: 'white' }}
+              >
+                <ArrowRightIcon className="m-2 border border-2 rounded" height="21px" />
+
+              </div>
+
+              <div
+                className="flex"
+                style={{ color: destinationChain?.color }}
+              >
+                { !quote ? '...' :
+                  new BigNumber(quote?.route?.outputAmount || 0).shiftedBy(-(destinationToken?.decimals || 0)).toString()
+                } {toToken?.symbol}
+                {/* ({formatNumber(toUsd, true, true)}) */}
+              </div>
+            </div>
+
+            <div className="w-[100%] my-1" />
+
+            <div
+              className="rounded border border-2"
+              style={{ borderColor: destinationChain?.color, backgroundColor: destinationChain?.color }}
+            >
+
+              <Button
+                className="h-[60px]"
+                variant="bordered"
+                color="black"
+                onClick={
+                  async () => {
+                    await
+                    setShowConfirmationModal(true)
+                  }
+                }
+                style={{ opacity: quote ? 1 : 0.5, cursor: quote ? "pointer" : "not-allowed" }}
+                // disabled={loadingMeta || loadingSwap}
+              >
+                {/* {"Confirm Swap"} */}
+                {sourceChain.chainId === destinationChain?.chainId ? "Confirm Swap" : "Confirm Crosschain"}
+              </Button>
+            </div>
+     
+                <div className="w-[100%] my-1" />
+
+            {setShowConfirmationModal &&
+              <Modal isOpen={showConfirmationModal} onDismiss={
+                () => setShowConfirmationModal(false)}>
+                <div className="space-y-4">
+                  <ModalHeader header={`Are you sure?`}
+                    onClose={() => setShowConfirmationModal(false)}
+                  />
+                  <Typography variant="lg">
+                    Crosschain Swaps are currently in beta, so use at your own risk.
+                    <br /><br />
+                    We are committed to open source and we leverage the Rango SDK (our partners).
+                  </Typography>
+                  <Typography variant="sm" className="font-medium">
+                    Found Bugs?
+                    <a href="https://discord.com/invite/soulswap">
+                      {' '} Click Here
+                    </a>
+                  </Typography>
+                  <Button
+                    variant="bordered"
+                    color="black"
+                    height="2.5rem"
+                    onClick={ swap }
+                    style={{ borderColor: destinationChain?.color, backgroundColor: destinationChain?.color }}
+
+                  >
+                    I UNDERSTAND THESE TERMS
+                  </Button>
+                </div>
+              </Modal>
+            }
+
+            <div className="flex"
+              style={{ flexDirection: "column", justifyContent: "space-around", alignItems: "center" }}
+            >
+              <div className="flex"
+                style={{ flexDirection: "column", justifyContent: "center", alignItems: "center" }}
+              >
+                {quote && <div className='green-text'>
+                  {/* {quote.route?.swapper && (<img src={quote.route?.swapper?.logo} alt="swapper logo" width={50} />)} <br /> */}
+                  {quote.route?.swapper?.title}
+                </div>}
+                <br />
+                {quote && (
+                  <div>
+                    <table className='border-collapse border'>
+                      <Quote />
+                    </table>
+                  </div>
+                )}
+                {!!error && (<div className="error-message">{error}</div>)}
+              </div>
+              <br />
+              <button id="swap" onClick={swap} disabled={loadingMeta || loadingSwap}>swap</button>
+            </div>
+
+            {/* <div className="">from (chain[id]-token): {sourceChain?.name}({sourceChainId})-{fromToken?.symbol}</div>
+            <div className="">to (chain[id]-token): {destinationChain?.name}({destinationChain?.chainId})-{toToken?.symbol}</div> */}
+          </SwapLayoutCard>
+        </div>
+      </DoubleGlowShadowV2>
+    </Container>
+  )
+}
+
+
+interface TokenSelectProps {
+  show: boolean;
+  chain: Chain;
+  token: Token
+  onClose: (selection?: { token: Token; chain: Chain }) => void;
+}
+const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain, token }) => {
+  const [filter, setFilter] = useState("")
+  const [destinationChainId, setDestinationChainId] = useState<number>(250)
+  const [sourceToken, setSourceToken] = useState<Asset>()
+  const [destinationToken, setDestinationToken] = useState<Asset>()
+  const destinationChain = useMemo(() => CHAINS.find(c => c.chainId === Number(destinationChainId)), [destinationChainId, CHAINS])
+  const input = useRef<HTMLInputElement>(null)
+  const tokensList = useRef<HTMLDivElement>(null)
+  const normalizedFilter = filter.trim().toLowerCase()
+  const filteredTokens = destinationChain.tokens.filter(({ name, symbol, address }) => {
+    const isNameMatch = name.toLowerCase().includes(normalizedFilter)
+    const isSymbolMatch = symbol.toLowerCase().includes(normalizedFilter)
+    const isAddressMatch = address.startsWith(normalizedFilter) || address.startsWith("0x" + normalizedFilter)
+    return isNameMatch || isSymbolMatch || isAddressMatch;
+  })
+  const [showDestinationChains, showChainSelect] = useState(false)
+
+  useEffect(() => {
+    if (!show) {
+      return;
+    }
+
+    input.current?.focus()
+
+    const escape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose()
+      }
+    };
+    window.addEventListener("keydown", escape)
+    return () => {
+      window.removeEventListener("keydown", escape)
+    };
+  }, [show])
+
+  useEffect(() => {
+    if (!show) {
+      setTimeout(() => {
+        setFilter("")
+        setDestinationChainId(destinationChainId)
+        setSourceToken(sourceToken)
+        setDestinationToken(destinationToken)
+        showChainSelect(false)
+        tokensList.current?.scrollTo({ top: 0 })
+      }, 100)
+    }
+  }, [show])
+
+  return (
+    <div className={'absolute top-20 left-0 w-[100vw] h-[0vh] z-[1000] opacity'
+    } style={{ opacity: show ? 1 : 0, pointerEvents: show ? "unset" : "none" }}>
+      <div className="absolute top-0 left-0 w-[100%] h-[100%]" onClick={() => onClose()} />
+      <div className={classNames(show ? "absolute left-[15%] bottom-[10%] top-[50%] max-w-[28ch]" : 'hidden')}
+        style={{ transform: `translate(-50%, calc(-50% + ${show ? 0 : 30}px))` }}
+      >
+        <div
+          className={classNames(showDestinationChains ? "w-full h-full top-0 left-0 z-10 bg-dark-1100" : "hidden")}
+        >
+
+          {/* CHAIN SELECTION */}
+          <Modal
+            isOpen={showDestinationChains}
+            onDismiss={() => onClose()}
+            isCustom={true}
+          >
+            <div className="flex justify-center">
+              {CHAINS.map((chain, i) => (
+                <Button
+                  key={chain.chainId}
+                  onClick={() => {
+                    setDestinationChainId(chain.chainId)
+                    tokensList.current?.scrollTo({ top: 0 })
+                    showChainSelect(false)
+                    setFilter("")
+                  }}
+                  variant="bordered"
+                  color="black"
+                  className={classNames(chain.chainId === destinationChainId && `border border-2 border-white`, "flex border border-transparent hover:border-white align-center w-[100%]")}
+                  style={{ backgroundColor: chain.color }}
+                >
+                  <div className={classNames('grid justify-center')}>
+                    <Image src={chain.logo} width={'42'} height="42" alt={chain.name + ' logo'} />
+                  </div>
+                </Button>
+              ))}
+            </div>
+          </Modal>
+        </div>
+
+        {/* TOKEN + CHAIN MODAL */}
+        <div
+          className="flex flex-cols border-radius-[8px] w-[100%] h-[100%] bg-dark-1100"
+          style={{
+            transform: showDestinationChains ? "translateY(50px)" : "",
+            opacity: showDestinationChains ? 0 : 1,
+            pointerEvents: show ? "all" : "none",
+          }}
+        >
+          <Modal
+            isOpen={true}
+            isCustom={true}
+            onDismiss={() => onClose()}
+            borderColor={destinationChain?.color}
+          >
+            <div className="bg-dark-900 rounded padding-[10px]">
+              <Button
+                className="flex p-[10px] w-[100%] gap-[8px] align-center items-center"
+                variant="bordered"
+                color="black"
+                style={{ backgroundColor: destinationChain?.color }}
+                onClick={() => showChainSelect(true)}
+              >
+                <div className="grid grid-cols-1 w-[33%]">
+                  <Image
+                    src={destinationChain?.logo}
+                    width="36" height="36"
+                    alt={destinationChain?.name + ' logo'}
+                    className={"w-full justify-center"}
+                  />
+                </div>
+                <div style={{ flexGrow: 1, fontSize: "24px", textAlign: "center" }}>{destinationChain?.name}</div>
+              </Button>
+
+              {/* SEARCH BAR */}
+              {/* <form
+                onSubmit={e => {
+                  e.preventDefault()
+                  onClose({ token: filteredTokens[0], chain: selectedChain })
+                }}
+              >
+                <Input
+                  ref={input}
+                  className="w-[100%] border border-unset border-radius-[4px] text-black mb-2"
+                  placeholder={`Search ${destinationChain?.name} tokens`}
+                  value={filter}
+                  onChange={e => setFilter(e.currentTarget.value)}
+                />
+              </form> */}
+              <div className="w-[100%] my-6" />
+
+
+              {/* SELECT TOKEN LIST */}
+              {/* {filter && */}
+              <div className="grid grid-cols-4 bg-dark-1100 w-full" ref={tokensList}>
+                {filteredTokens.map(token => (
+                  <div className="flex border border-2 m-0.5 
+                    border-dark-1000 p-1
+                    rounded rounded-3xl bg-black font-bold 
+                    text-center justify-center"
+                    key={token.address} onClick={() => onClose({ token, chain: destinationChain })}>
+                    <Image src={token.logo} width="56" height="56" alt={token.name + ' logo'} />
+                  </div>
+                ))}
+              </div>
+              {/* } */}
+            </div>
+          </Modal>
+        </div>
+      </div>
+    </div>
+  )
+}

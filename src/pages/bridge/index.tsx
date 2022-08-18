@@ -87,45 +87,45 @@ const ChainSelect: React.FC<any> = ({ selectChain, chains }) => {
   );
 };
 
-const ChainSelector: React.FC<any> = ({
-  text,
-  chains,
-  selected,
-  selectChain,
-}) => {
-  return (
-    <Column style={{ width: "100%" }}>
-      <Typo2 style={{ color: "#84888d" }}>{text}</Typo2>
-      <div />
-      <DropDownButton
-        width="100%"
-        DropDown={() => ChainSelect({ selectChain, chains })}
-        dropdownTop={65}
-      >
-        <ContentBox
-          style={{
-            boxSizing: "border-box",
-            width: "100%",
-            backgroundColor: "black",
-            padding: "1rem",
-          }}
-        >
-          <Row style={{ gap: "1rem", alignItems: "center" }}>
-            <Image
-              alt="chain logo"
-              height="30px"
-              width="30px"
-              src={chainToNetworkInfoMap[selected].image}
-            />
-            <Typo2 style={{ fontWeight: "bold" }}>
-              {chainToNetworkInfoMap[selected].name}
-            </Typo2>
-          </Row>
-        </ContentBox>
-      </DropDownButton>
-    </Column>
-  );
-};
+// const ChainSelector: React.FC<any> = ({
+//   text,
+//   chains,
+//   selected,
+//   selectChain,
+// }) => {
+//   return (
+//     <Column style={{ width: "100%" }}>
+//       <Typo2 style={{ color: "#84888d" }}>{text}</Typo2>
+//       <div />
+//       <DropDownButton
+//         width="100%"
+//         DropDown={() => ChainSelect({ selectChain, chains })}
+//         dropdownTop={65}
+//       >
+//         <ContentBox
+//           style={{
+//             boxSizing: "border-box",
+//             width: "100%",
+//             backgroundColor: "black",
+//             padding: "1rem",
+//           }}
+//         >
+//           <Row style={{ gap: "1rem", alignItems: "center" }}>
+//             <Image
+//               alt="chain logo"
+//               height="30px"
+//               width="30px"
+//               src={chainToNetworkInfoMap[selected].image}
+//             />
+//             <Typo2 style={{ fontWeight: "bold" }}>
+//               {chainToNetworkInfoMap[selected].name}
+//             </Typo2>
+//           </Row>
+//         </ContentBox>
+//       </DropDownButton>
+//     </Column>
+//   );
+// };
 
 const ChainSelection: React.FC<any> = ({
   setTokenList,

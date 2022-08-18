@@ -8,7 +8,8 @@ import SDK, {
   InsufficientFundsError,
   CrossChainTrade,
   InsufficientLiquidityError,
-} from "rubic-sdk";
+  RubicSdkError,
+} from "rubik-sdk";
 import { sleep } from "utils/sleep";
 import { ArrowDownIcon, ArrowRightIcon } from '@heroicons/react/solid'
 import { BigNumber as EthersBigNumber, ethers } from "ethers";
@@ -37,7 +38,6 @@ import { AutoColumn } from "components/Column";
 import useFantomERC20 from "hooks/useFantomERC20"
 import Row from "components/Row";
 import ModalHeader from "components/Modal/Header";
-import { WrappedCrossChainTrade } from "rubic-sdk/lib/features/cross-chain/providers/common/models/wrapped-cross-chain-trade";
 
 interface Exchange {
   from: { chain: Chain; token: Token };
@@ -116,15 +116,13 @@ export default function Exchange() {
   const [toUsd, setToUsd] = useState<string>();
   const [amount, setAmount] = useState("");
   const [fromBalance, setBalance] = useState("");
-  const [trade, setTrade] = useState<InstantTrade | WrappedCrossChainTrade>(undefined);
+  const [trade, setTrade] = useState<InstantTrade | CrossChainTrade | undefined>(undefined);
   const [canBuy, setCanBuy] = useState(true);
   const [loading, setLoading] = useState(false);
   const toggleWalletModal = useWalletModalToggle()
   const { approve, getAllowance } = useFantomERC20()
   const [configuration, setConfiguration] = useState(rubicConfiguration);
   const [rubic, setRubic] = useState<SDK>(null);
-  const [tradeType, setTradeType] = useState<string>("InstantTrade")
-
   useEffect(() => {
     SDK.createSDK(configuration).then(setRubic);
   }, []);
@@ -140,7 +138,10 @@ export default function Exchange() {
       : 0
   // Number(userEthBalance) 
 
-  const [wallet, setWallet] = useState<WalletProvider>(null)
+  const [wallet, setWallet] = useState<WalletProvider>(null);
+
+  const fromCurrency = useCurrency(from?.address)
+  const toCurrency = useCurrency(to?.address)
 
   useEffect(() => {
     if (!account) {
@@ -163,10 +164,10 @@ export default function Exchange() {
 
       const userBalance = await getBalance()
       const balance = Number(userBalance) / 10 ** (from?.decimals ? from?.decimals : 18)
-      const nativeBalance = fromChain?.chainId == ChainId.FANTOM
+      const nativeBalance = fromChain?.chainId == ChainId.FANTOM 
         ? (Number(userInfo.nativeBalance) * 1E18).toFixed(0)
         : balance
-
+        
       setConfiguration(newConfiguration);
       if (rubic) {
         await rubic.updateConfiguration(newConfiguration);
@@ -189,6 +190,7 @@ export default function Exchange() {
   // }, []);
 
   const [decimals, setDecimals] = useState<number>(18);
+
   const provider = useMemo(() => new ethers.providers.JsonRpcProvider(fromChain.rpc[0]), [fromChain]);
 
   async function getBalance(): Promise<EthersBigNumber> {
@@ -196,7 +198,7 @@ export default function Exchange() {
       return EthersBigNumber.from(0);
     }
     if (from.isNative) {
-      return EthersBigNumber.from((Number(nativeBalance)).toFixed(0))
+      return EthersBigNumber.from(nativeBalance);
     }
     const IER20 = new ethers.Contract(from.address, ERC20_ABI, provider);
     try {
@@ -251,32 +253,33 @@ export default function Exchange() {
       try {
         const tradeRequest =
           fromChain.chainId === toChain?.chainId
-            ? rubic.instantTrades.calculateTrade(
-              {
-                address: from.isNative ? NATIVE_ADDRESS : from.address,
-                blockchain: RUBIC_CHAIN_BY_ID.get(fromChain.chainId),
-              },
-              amount,
-              to?.isNative ? NATIVE_ADDRESS : to?.address,
-            )
+            ? rubic.instantTrades
+              .calculateTrade(
+                {
+                  address: from.isNative ? NATIVE_ADDRESS : from.address,
+                  blockchain: RUBIC_CHAIN_BY_ID.get(fromChain.chainId),
+                },
+                amount,
+                to?.isNative ? NATIVE_ADDRESS : to?.address,
+              )
               .then((trades: InstantTrade[]): InstantTrade => trades[0])
-
+              
             : rubic.crossChain.calculateTrade(
-              // (1) fromToken
+            // (1) fromToken
               {
-                address: from.isNative ? NATIVE_ADDRESS : from.address,
-                blockchain: RUBIC_CHAIN_BY_ID.get(fromChain.chainId),
+              address: from.isNative ? NATIVE_ADDRESS : from.address,
+              blockchain: RUBIC_CHAIN_BY_ID.get(fromChain.chainId),
               },
               // (2) fromAmount
               amount,
               // (3) toToken
               {
-                address: to?.isNative ? NATIVE_ADDRESS : to?.address,
-                blockchain: RUBIC_CHAIN_BY_ID.get(toChain.chainId),
+              address: to?.isNative ? NATIVE_ADDRESS : to?.address,
+              blockchain: RUBIC_CHAIN_BY_ID.get(toChain?.chainId),
               },
               // (4) options (optional)
             )
-              .then((trades: WrappedCrossChainTrade[]): WrappedCrossChainTrade => trades[0])
+            // .then((trades: CrossChainTrade[]): CrossChainTrade => trades[0])
 
         const newTrade = await tradeRequest;
         const [newFromUsd, newToUsd] = await Promise.all([
@@ -300,20 +303,10 @@ export default function Exchange() {
           return;
         }
 
-        const newToAmount
-          = toChain.chainId != chainId && isCrossChainTrade(trade)
-            ? trade.trade.to.tokenAmount
-            : toAmount
-        console.log('newToAmount:%s', newToAmount)
         setTrade(newTrade);
-        setTradeType(fromChain.chainId === toChain?.chainId ? "Instant" : "CrossChain")
         setLoading(false);
-        setFromUsd((Number(newFromUsd) * Number(amount)).toString())
-        setToUsd(Number(newToUsd).toString())
-          // newToAmount.toString())
-        // console.log('newToUsd:%s', newToUsd)
-        // console.log('toAmount:%s', toAmount)
-        // console.log('newToAmount:%s', newToAmount)
+        setFromUsd((Number(newFromUsd) * Number(newTrade.from.tokenAmount)).toString())
+        setToUsd((Number(newToUsd) * Number((newTrade.to?.tokenAmount))).toString())
       } catch (e) {
         if (disposed) {
           return;
@@ -348,36 +341,20 @@ export default function Exchange() {
   }, [from, fromChain, to, toChain]);
 
   const [showConfirmation, setShowConfirmation] = useState<"hide" | "show" | "poor">("hide");
-  // const [showFromChainSelect, setShowFromChainSelect] = useState(false);
-  // const [showToChainSelect, setShowToChainSelect] = useState(false);
+  const [showFromChainSelect, setShowFromChainSelect] = useState(false);
+  const [showToChainSelect, setShowToChainSelect] = useState(false);
   const [showSelectFrom, setShowSelectFrom] = useState(false);
   const [showSelectTo, setShowSelectTo] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const amountRef = useRef<HTMLInputElement>(null);
-  // const toAmount = toUsd ? Number(trade?.to?.tokenAmount) : 0
-  const fromAmount = amount ? Number(amount) : 0
-  const toAmount
-    = isCrossChainTrade(trade) ? Number(trade.trade?.toTokenAmountMin)
-      : trade?.to.tokenAmount
-  const deltaUsd = Number(fromUsd) > (Number(toUsd) * Number(toAmount)) 
-    ? Number(fromUsd) - (Number(toAmount) * Number(toUsd)) : 0
-  console.log('deltaUsd:%s', deltaUsd)
+  const fromAmount = fromUsd ? Number(trade?.from.tokenAmount) : 0
+  const toAmount = toUsd ? Number(trade?.to?.tokenAmount) : 0
+  const deltaUsd = fromUsd > toUsd ? Number(fromUsd) - Number(toUsd) : 0
   const deltaPercent = 100 * deltaUsd / Number(fromUsd)
-  console.log('deltaUsd:%s', deltaPercent)
   // const [fromToken, setFromToken] = useState(null);
   // const [toToken, setToToken] = useState(null);
   const toggleNetworkModal = useNetworkModalToggle()
   const wrongNetwork = fromChain.chainId != chainId ? true : false
-
-  const swap = async (trade: InstantTrade | WrappedCrossChainTrade) => {
-    isCrossChainTrade(trade) ?
-      await trade?.trade.swap({
-        onConfirm: (_hash: any) => setShowConfirmation("hide"),
-      })
-      : await trade?.swap({
-        onConfirm: (_hash: any) => setShowConfirmation("hide"),
-      })
-  }
 
   return (
     <>
@@ -416,54 +393,53 @@ export default function Exchange() {
             }}
           />
         </div>
-      }
+      } 
+    
+    {setShowConfirmationModal &&
+      <Modal isOpen={showConfirmationModal} onDismiss={
+        () => setShowConfirmationModal(false)}>
+        <div className="space-y-4">
+          <ModalHeader header={`Are you sure?`} 
+            onClose={() => setShowConfirmationModal(false)} 
+          />
+          <Typography variant="lg">
+            Crosschain Swaps are currently in beta, so use at your own risk.
+            <br /><br />
+            We are committed to open source and we leverage the Rubic SDK (our partners).
+          </Typography>
+          <Typography variant="sm" className="font-medium">
+            Found Bugs?
+            <a href="https://discord.com/invite/soulswap">
+              {' '} Click Here
+            </a>
+          </Typography>
+          <Button
+            variant="bordered"
+            color="black"
+            height="2.5rem"
+            onClick={
+            async () => {
+              setShowConfirmation("show")
+              try {
+                await trade?.swap({
+                  onConfirm: (_hash: any) => setShowConfirmation("hide"),
+                });
+              } catch (e) {
+                if (e instanceof InsufficientFundsError) {
+                  setShowConfirmation("poor");
+                } else {
+                  console.error(e);
+                  setShowConfirmation("hide");
+                }
+              }
+            }}
+            style={{ borderColor: toChain?.color, backgroundColor: toChain?.color }}
 
-      {setShowConfirmationModal &&
-        <Modal isOpen={showConfirmationModal} 
-        className={'border border-3 border-color-[#FFFFFF]'}
-        onDismiss={
-          () => setShowConfirmationModal(false)}>
-          <div className="space-y-4">
-            <ModalHeader header={`Are you sure?`}
-              onClose={() => setShowConfirmationModal(false)}
-            />
-            <Typography variant="lg">
-              Crosschain Swaps are currently in beta, so use at your own risk.
-              <br /><br />
-              We are committed to open source and we leverage the Rubic SDK (our partners).
-            </Typography>
-            <Typography variant="sm" className="font-medium">
-              Found Bugs?
-              <a href="https://discord.com/invite/soulswap">
-                {' '} Click Here
-              </a>
-            </Typography>
-            <Button
-              variant="bordered"
-              color="black"
-              height="2.5rem"
-              className={classNames(`border-color-${toChain.color}`)}
-              onClick={
-                async () => {
-                  setShowConfirmation("show")
-                  try {
-                    await swap
-                  } catch (e) {
-                    if (e instanceof InsufficientFundsError) {
-                      setShowConfirmation("poor");
-                    } else {
-                      console.error(e);
-                      setShowConfirmation("hide");
-                    }
-                  }
-                }}
-              style={{ backgroundColor: toChain?.color }}
-
-            >
-              I UNDERSTAND THESE TERMS
-            </Button>
-          </div>
-        </Modal>
+          >
+            I UNDERSTAND THESE TERMS
+          </Button>
+        </div>
+      </Modal>
       }
 
       <Container id="cross-page" maxWidth="2xl" className="space-y-4">
@@ -533,14 +509,14 @@ export default function Exchange() {
                 >
                   <div className="">
                     <Image className="block object-fit:contain object-position:center items-center"
-                      src={from?.logo}
-                      width="48" height="48"
+                      src={from?.logo} 
+                      width="48" height="48"           
                       alt={from?.name}
                     />
                   </div>
 
                   <div className="flex justify-center mt-2 font-bold text-2xl">
-                    {from.symbol}
+                      {from.symbol}
                   </div>
                 </Button>
                 <div
@@ -554,7 +530,7 @@ export default function Exchange() {
                     <div className="flex justify-center">
                       <Typography className={classNames('text-lg font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
                         {trade
-                          ? `${formatNumber(Number(fromAmount), false, true)} ${from.symbol} (${formatNumber(fromUsd, true, true)}) `
+                          ? `${formatNumber(Number(trade?.from.tokenAmount), false, true)} ${from.symbol} (${formatNumber(fromUsd, true, true)}) `
                           : "0 ($0.00)"}
                       </Typography>
                     </div>
@@ -583,7 +559,7 @@ export default function Exchange() {
                   </Button>
                 </div>
               </div>
-
+ 
               {/* // ARROW DOWN ICON  */}
 
               {/* [2] TO TOKEN SELECTOR */}
@@ -662,7 +638,7 @@ export default function Exchange() {
                   <div className="flex justify-center">
                     <Typography className={classNames('sm:text-lg text-md font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
                       {trade
-                        ? `${formatNumber(Number(toAmount), false, true)} ${to?.symbol} (${formatNumber(Number(toUsd) * Number(toAmount), true, true)})`
+                        ? `${formatNumber(Number(trade?.to?.tokenAmount), false, true)} ${to?.symbol} (${formatNumber(toUsd, true, true)})`
                         : "0 ($0.00)"}
                     </Typography>
                   </div>
@@ -687,7 +663,7 @@ export default function Exchange() {
                   className="flex"
                   style={{ color: toChain?.color }}
                 >
-                  {formatNumber(toAmount, false, true)} {to?.symbol} ({formatNumber(Number(toUsd) * Number(toAmount), true, true)})
+                  {formatNumber(toAmount, false, true)} {to?.symbol} ({formatNumber(toUsd, true, true)})
                 </div>
               </div>
 
@@ -700,7 +676,7 @@ export default function Exchange() {
                   <div
                     className="flex font-bold justify-center">
                     <Typography className={classNames('text-xl font-bold', 'font-bold text-white')} weight={600} fontFamily={'semi-bold'}>
-                      Warning High-Slippage
+                        Warning High-Slippage
                     </Typography>
                   </div>
                 </div>
@@ -715,27 +691,28 @@ export default function Exchange() {
                   </Typography>
                 </div>
               </div>
-              <TradeDetail trade={trade} />
+                <TradeDetail trade={trade} />
               <div
                 className="rounded border border-2"
                 style={{ borderColor: toChain?.color, backgroundColor: toChain?.color }}
 
               >
-
+              
                 <Button
                   className="h-[60px]"
                   variant="bordered"
                   color="black"
-                  onClick={
-                    async () => {
-                      await
-                        setShowConfirmationModal(true)
-                    }
+                  onClick={ 
+                    async () => 
+                   {
+                      await 
+                      setShowConfirmationModal(true)
+                    } 
                   }
                   style={{ opacity: trade ? 1 : 0.5, cursor: trade ? "pointer" : "not-allowed" }}
                   disabled={trade == undefined}
                 >
-                  {"Confirm Swap"}
+                  { "Confirm Swap" }
                   {/* {fromChain.chainId === toChain?.chainId ? "Swap" : "Swap Crosschain"} */}
                 </Button>
               </div>
@@ -748,18 +725,19 @@ export default function Exchange() {
 }
 
 interface TradeDetailProps {
-  trade?: InstantTrade | WrappedCrossChainTrade;
+  trade?: InstantTrade | CrossChainTrade;
 }
-function isCrossChainTrade(trade: InstantTrade | WrappedCrossChainTrade): trade is WrappedCrossChainTrade {
-  return // return "transitFeeToken" in trade;
+function isCrossChainTrade(trade: InstantTrade | CrossChainTrade): trade is CrossChainTrade {
+  return "transitFeeToken" in trade;
 }
 const TradeDetail: FC<TradeDetailProps> = ({ trade }) => {
   let min: string;
   if (trade) {
     if (isCrossChainTrade(trade)) {
-      min = `${formatNumber(Number(trade.trade?.toTokenAmountMin), false, true)} ${trade.trade?.to?.symbol}`;
+      min = `${formatNumber(Number(trade.toTokenAmountMin), false, true)} ${trade.to?.symbol}`;
     } else {
-      min = `${formatNumber(Number(trade.toTokenAmountMin?.tokenAmount), false, true)} ${trade.to?.symbol}`;
+      // @ts-ignore
+      min = `${formatNumber(Number(trade.toTokenAmountMin.tokenAmount), false, true)} ${trade.to?.symbol}`;
     }
   }
 
@@ -883,12 +861,12 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
                 onClick={() => showChainSelect(true)}
               >
                 <div className="grid grid-cols-1 w-[33%]">
-                  <Image
-                    src={selectedChain.logo}
-                    width="36" height="36"
-                    alt={selectedChain.name + ' logo'}
-                    className={"w-full justify-center"}
-                  />
+                <Image 
+                  src={selectedChain.logo} 
+                  width="36" height="36" 
+                  alt={selectedChain.name + ' logo'} 
+                  className={"w-full justify-center"}
+                />
                 </div>
                 <div style={{ flexGrow: 1, fontSize: "24px", textAlign: "center" }}>{selectedChain.name}</div>
               </Button>
@@ -920,8 +898,8 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
                     rounded rounded-3xl bg-black font-bold 
                     text-center justify-center"
                     key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
-                    <Image src={token.logo} width="56" height="56" alt={token.name + ' logo'} />
-                  </div>
+                    <Image src={token.logo} width="56" height="56" alt={token.name + ' logo'} /> 
+                    </div>
                 ))}
               </div>
               {/* } */}

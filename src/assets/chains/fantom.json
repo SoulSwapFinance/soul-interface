@@ -1,4 +1,5 @@
 {
+    "id": "FANTOM",
     "filename": "fantom",
     "chainId": 250,
     "name": "Fantom",
@@ -18,7 +19,7 @@
             "symbol": "FTM",
             "logo": "https://cryptologos.cc/logos/fantom-ftm-logo.svg",
             "rank": 26,
-            "address": "0x0000000000000000000000000000000000000000",
+            "address": "0x4e15361fd6b4bb609fa63c81a2be19d873717870",
             "isNative": true,
             "decimals": 18
         },
@@ -28,7 +29,7 @@
             "rank": 56,
             "logo": "https://cryptologos.cc/logos/usd-coin-usdc-logo.svg",
             "symbol": "USDC",
-            "address": "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75"
+            "address": "0x04068da6c83afcfa0e13ba15a6696662335d5b75"
         },
         {
             "id": "aave",
@@ -36,7 +37,7 @@
             "rank": 79,
             "logo": "https://cryptologos.cc/logos/aave-aave-logo.svg",
             "symbol": "AAVE",
-            "address": "0x6a07A792ab2965C72a5B8088d3a069A7aC3a993B"
+            "address": "0x6a07a792ab2965c72a5b8088d3a069a7ac3a993b"
         },
         {
             "id": "curve-dao-token",
@@ -44,7 +45,7 @@
             "rank": 99,
             "logo": "https://cryptologos.cc/logos/curve-dao-token-crv-logo.svg",
             "symbol": "CRV",
-            "address": "0x1E4F97b9f9F913c46F1632781732927B9019C68b"
+            "address": "0x1e4f97b9f9f913c46f1632781732927b9019c68b"
         },
         {
             "id": "tether",
@@ -52,7 +53,7 @@
             "rank": 146,
             "logo": "https://cryptologos.cc/logos/tether-usdt-logo.svg",
             "symbol": "USDT",
-            "address": "0x049d68029688eAbF473097a2fC38ef61633A3C7A"
+            "address": "0x049d68029688eabf473097a2fc38ef61633a3c7a"
         },
         {
             "id": "dai",

@@ -1,4 +1,5 @@
 {
+    "id": "POLYGON",
     "filename": "polygon",
     "chainId": 137,
     "name": "Polygon",
@@ -19,7 +20,7 @@
             "rank": 47,
             "logo": "https://cryptologos.cc/logos/polygon-matic-logo.svg",
             "symbol": "MATIC",
-            "address": "0x0000000000000000000000000000000000000000",
+            "address": "0x0000000000000000000000000000000000001010",
             "isNative": true,
             "decimals": 18
         },
