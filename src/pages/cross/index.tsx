@@ -309,10 +309,11 @@ export default function Exchange() {
         setTradeType(fromChain.chainId === toChain?.chainId ? "Instant" : "CrossChain")
         setLoading(false);
         setFromUsd((Number(newFromUsd) * Number(amount)).toString())
-        setToUsd(newToAmount.toString())
-        console.log('newToUsd:%s', newToUsd)
-        console.log('toAmount:%s', toAmount)
-        console.log('newToAmount:%s', newToAmount)
+        setToUsd(Number(newToUsd).toString())
+          // newToAmount.toString())
+        // console.log('newToUsd:%s', newToUsd)
+        // console.log('toAmount:%s', toAmount)
+        // console.log('newToAmount:%s', newToAmount)
       } catch (e) {
         if (disposed) {
           return;
@@ -358,8 +359,11 @@ export default function Exchange() {
   const toAmount
     = isCrossChainTrade(trade) ? Number(trade.trade?.toTokenAmountMin)
       : trade?.to.tokenAmount
-  const deltaUsd = fromUsd > toUsd ? Number(fromUsd) - Number(toUsd) : 0
+  const deltaUsd = Number(fromUsd) > (Number(toUsd) * Number(toAmount)) 
+    ? Number(fromUsd) - (Number(toAmount) * Number(toUsd)) : 0
+  console.log('deltaUsd:%s', deltaUsd)
   const deltaPercent = 100 * deltaUsd / Number(fromUsd)
+  console.log('deltaUsd:%s', deltaPercent)
   // const [fromToken, setFromToken] = useState(null);
   // const [toToken, setToToken] = useState(null);
   const toggleNetworkModal = useNetworkModalToggle()
@@ -415,7 +419,9 @@ export default function Exchange() {
       }
 
       {setShowConfirmationModal &&
-        <Modal isOpen={showConfirmationModal} onDismiss={
+        <Modal isOpen={showConfirmationModal} 
+        className={'border border-3 border-color-[#FFFFFF]'}
+        onDismiss={
           () => setShowConfirmationModal(false)}>
           <div className="space-y-4">
             <ModalHeader header={`Are you sure?`}
@@ -436,6 +442,7 @@ export default function Exchange() {
               variant="bordered"
               color="black"
               height="2.5rem"
+              className={classNames(`border-color-${toChain.color}`)}
               onClick={
                 async () => {
                   setShowConfirmation("show")
@@ -450,7 +457,7 @@ export default function Exchange() {
                     }
                   }
                 }}
-              style={{ borderColor: toChain?.color, backgroundColor: toChain?.color }}
+              style={{ backgroundColor: toChain?.color }}
 
             >
               I UNDERSTAND THESE TERMS
@@ -655,7 +662,7 @@ export default function Exchange() {
                   <div className="flex justify-center">
                     <Typography className={classNames('sm:text-lg text-md font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
                       {trade
-                        ? `${formatNumber(Number(toAmount), false, true)} ${to?.symbol} (${formatNumber(toUsd, true, true)})`
+                        ? `${formatNumber(Number(toAmount), false, true)} ${to?.symbol} (${formatNumber(Number(toUsd) * Number(toAmount), true, true)})`
                         : "0 ($0.00)"}
                     </Typography>
                   </div>
@@ -680,7 +687,7 @@ export default function Exchange() {
                   className="flex"
                   style={{ color: toChain?.color }}
                 >
-                  {formatNumber(toAmount, false, true)} {to?.symbol} ({formatNumber(toUsd, true, true)})
+                  {formatNumber(toAmount, false, true)} {to?.symbol} ({formatNumber(Number(toUsd) * Number(toAmount), true, true)})
                 </div>
               </div>
 
