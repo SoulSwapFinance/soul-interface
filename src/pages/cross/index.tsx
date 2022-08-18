@@ -6,7 +6,6 @@ import SDK, {
   InstantTrade,
   WalletProvider,
   InsufficientFundsError,
-  CrossChainTrade,
   InsufficientLiquidityError,
 } from "rubic-sdk";
 import { sleep } from "utils/sleep";
@@ -19,7 +18,6 @@ import { useUserInfo, useUserTokenInfo } from "hooks/useAPI";
 import { Button } from "components/Button";
 import { useNetworkModalToggle, useWalletModalToggle } from "state/application/hooks";
 import { OverlayButton } from "components/index";
-import useSendTransaction from "hooks/useSendTransaction"
 import Typography from "components/Typography";
 import { formatNumber } from "functions/format";
 import { classNames } from "functions/styling";
@@ -32,7 +30,6 @@ import Modal from "components/DefaultModal";
 import { ChainId } from "sdk";
 import { useETHBalances } from "state/wallet/hooks";
 import NetworkModal from "modals/NetworkModal";
-import { useCurrency } from 'hooks/Tokens'
 import { AutoColumn } from "components/Column";
 import useFantomERC20 from "hooks/useFantomERC20"
 import Row from "components/Row";
@@ -114,16 +111,17 @@ export default function Exchange() {
   const [toChain, setToChain] = useState<Chain>(lastExchange.to?.chain);
   const [fromUsd, setFromUsd] = useState<string>();
   const [toUsd, setToUsd] = useState<string>();
+  const [outputAmount, setOutputAmount] = useState<string>();
   const [amount, setAmount] = useState("");
   const [fromBalance, setBalance] = useState("");
   const [trade, setTrade] = useState<InstantTrade | WrappedCrossChainTrade>(undefined);
   const [canBuy, setCanBuy] = useState(true);
   const [loading, setLoading] = useState(false);
-  const toggleWalletModal = useWalletModalToggle()
-  const { approve, getAllowance } = useFantomERC20()
+  // const toggleWalletModal = useWalletModalToggle()
+  // const { approve, getAllowance } = useFantomERC20()
   const [configuration, setConfiguration] = useState(rubicConfiguration);
   const [rubic, setRubic] = useState<SDK>(null);
-  const [tradeType, setTradeType] = useState<string>("InstantTrade")
+  // const [tradeType, setTradeType] = useState<string>("InstantTrade")
 
   useEffect(() => {
     SDK.createSDK(configuration).then(setRubic);
@@ -304,10 +302,12 @@ export default function Exchange() {
           setFromUsd((Number(newFromUsd) * Number(newTrade.from.tokenAmount)).toString())
           setToUsd((Number(newToUsd) * Number((newTrade.to?.tokenAmount))).toString())
         } else {
-          const test = newTrade[0].trade
+          const test = newTrade
           setTrade(test);
-          setFromUsd((Number(newFromUsd) * Number(test.from.tokenAmount)).toString())
-          setToUsd((Number(newToUsd) * Number((test.to?.tokenAmount))).toString())
+          setFromUsd((Number(newFromUsd) * Number(test.trade.from?.tokenAmount)).toString())
+          setToUsd((Number(newToUsd) * Number((test.trade.to?.tokenAmount))).toString())
+          setOutputAmount(Number(test.trade.to?.tokenAmount).toString())
+          console.log('outputAmount:%s', outputAmount)
         }
 
         setLoading(false)
