@@ -458,7 +458,7 @@ export default function Exchange() {
                 // style={{ backgroundColor: deltaPercent > 20 ? 'black' : toChain?.color}}
                 >
                   <div
-                    className="flex font-bold justify-center bg-[#E84142]">
+                    className="flex font-bold justify-center text-[#E84142]">
                     <Typography className={classNames('text-xl font-bold', 'font-bold text-white')} weight={600} fontFamily={'semi-bold'}>
                       Too Low: Below Minimum Amount
                     </Typography>
@@ -722,7 +722,7 @@ export default function Exchange() {
                 // style={{ backgroundColor: deltaPercent > 20 ? 'black' : toChain?.color}}
                 >
                   <div
-                    className="flex font-bold justify-center bg-[#E84142]">
+                    className="flex font-bold justify-center text-[#E84142]">
                     <Typography className={classNames('text-xl font-bold', 'font-bold text-white')} weight={600} fontFamily={'semi-bold'}>
                       Warning: Below Minimum Input Amount
                     </Typography>
