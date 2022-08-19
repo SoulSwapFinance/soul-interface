@@ -6,8 +6,9 @@ import SDK, {
   InstantTrade,
   WalletProvider,
   InsufficientFundsError,
-  InsufficientLiquidityError,
+  InsufficientLiquidityError
 } from "rubic-sdk";
+import { CrossChainMinAmountError } from "rubic-sdk/lib/common/errors/cross-chain/cross-chain-min-amount.error";
 import { sleep } from "utils/sleep";
 import { ArrowDownIcon, ArrowRightIcon } from '@heroicons/react/solid'
 import { BigNumber as EthersBigNumber, ethers } from "ethers";
@@ -341,7 +342,7 @@ export default function Exchange() {
     setLastExchange({ chain: fromChain, token: from }, { chain: toChain, token: to });
   }, [from, fromChain, to, toChain]);
 
-  const [showConfirmation, setShowConfirmation] = useState<"hide" | "show" | "poor">("hide");
+  const [showConfirmation, setShowConfirmation] = useState<"hide" | "show" | "poor" | "min">("hide");
   const [showSelectFrom, setShowSelectFrom] = useState(false);
   const [showSelectTo, setShowSelectTo] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
@@ -438,6 +439,8 @@ export default function Exchange() {
                   } catch (e) {
                     if (e instanceof InsufficientFundsError) {
                       setShowConfirmation("poor");
+                    } else if (e.message === "execution reverted: less than min") {
+                      setShowConfirmation("min");
                     } else {
                       console.error(e);
                       setShowConfirmation("hide");
@@ -448,6 +451,20 @@ export default function Exchange() {
             >
               I UNDERSTAND THESE TERMS
             </Button>
+
+            {trade && showConfirmation == "min" &&
+                <div
+                  className={ `flex flex-col rounded gap-4 bg-dark-1000 p-3 font-bold w-full space-y-1` }
+                // style={{ backgroundColor: deltaPercent > 20 ? 'black' : toChain?.color}}
+                >
+                  <div
+                    className="flex font-bold justify-center bg-[#E84142]">
+                    <Typography className={classNames('text-xl font-bold', 'font-bold text-white')} weight={600} fontFamily={'semi-bold'}>
+                      Too Low: Below Minimum Amount
+                    </Typography>
+                  </div>
+                </div>
+              }
           </div>
         </Modal>
       }
@@ -699,6 +716,19 @@ export default function Exchange() {
                   </div>
                 </div>
               }
+              {trade && showConfirmation == "min" &&
+                <div
+                  className={ `flex flex-col rounded gap-4 bg-dark-1000 p-3 font-bold w-full space-y-1` }
+                // style={{ backgroundColor: deltaPercent > 20 ? 'black' : toChain?.color}}
+                >
+                  <div
+                    className="flex font-bold justify-center bg-[#E84142]">
+                    <Typography className={classNames('text-xl font-bold', 'font-bold text-white')} weight={600} fontFamily={'semi-bold'}>
+                      Warning: Below Minimum Input Amount
+                    </Typography>
+                  </div>
+                </div>
+              }
               <TradeDetail trade={trade} />
               <div
                 className="rounded border border-2"
@@ -860,18 +890,18 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
                 className="flex p-[10px] w-[100%] gap-[8px] align-center items-center"
                 variant="bordered"
                 color="black"
-                style={{ backgroundColor: selectedChain.color }}
+                style={{ backgroundColor: selectedChain?.color }}
                 onClick={() => showChainSelect(true)}
               >
                 <div className="grid grid-cols-1 w-[33%]">
                   <Image
-                    src={ selectedChain.logo }
+                    src={ selectedChain?.logo }
                     width="36" height="36"
-                    alt={ selectedChain.name + ' logo' }
+                    alt={ selectedChain?.name + ' logo' }
                     className={ "w-full justify-center" }
                   />
                 </div>
-                <div style={{ flexGrow: 1, fontSize: "24px", textAlign: "center" }}>{selectedChain.name}</div>
+                <div style={{ flexGrow: 1, fontSize: "24px", textAlign: "center" }}>{selectedChain?.name}</div>
               </Button>
 
               {/* SEARCH BAR */}
