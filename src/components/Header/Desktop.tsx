@@ -26,6 +26,7 @@ import NavLink from 'components/NavLink'
 import { useRouter } from 'next/router'
 import { classNames } from 'functions'
 import Web3Network from 'components/Web3Network'
+import Logo from 'components/Logo'
 // import useMobileMenu from './useMobileMenu'
 
 const HEADER_HEIGHT = 64
@@ -60,8 +61,6 @@ const Desktop: FC = () => {
                   </NavLink>
                 </div> */}
         </div>
-
-
            <nav className={classNames(
              `backdrop-blur-fallback w-full \
               h-full before:backdrop-saturate-[1.2] \
@@ -79,6 +78,15 @@ const Desktop: FC = () => {
                </div>
           </Container>
         </nav>
+        <NavLink
+          href="/landing"
+        >
+        <Logo 
+          srcs={['https://app.soulswap.finance/logo.png']} 
+          width={'50px'} 
+          height={'50px'}
+          />
+        </NavLink>
         
         <Transition.Root show={open} as={Fragment}>
           <Dialog as="div" className="fixed inset-0 overflow-hidden z-20" onClose={setOpen}>

@@ -32,11 +32,11 @@ import { useExpertModeManager, useUserOpenMev, useUserSingleHopOnly } from 'stat
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
 import Chart from 'components/Chart'
-import NavLink from 'components/NavLink'
-import ExternalLink from 'components/ExternalLink'
+// import NavLink from 'components/NavLink'
+// import ExternalLink from 'components/ExternalLink'
 import Toggle from 'components/Toggle'
-import Image from 'next/image'
-import styled from 'styled-components'
+// import Image from 'next/image'
+// import styled from 'styled-components'
 import SocialWidget from 'components/Social'
 
 const Swap = () => {

@@ -158,6 +158,11 @@ const useMenu: UseMenu = () => {
             link: '/explore'
           },
           {
+            key: 'farm',
+            title: i18n._(t`Summoner`),
+            link: '/farm'
+          },
+          {
             key: 'pool',
             title: i18n._(t`Liquidity`),
             link: '/pool',
