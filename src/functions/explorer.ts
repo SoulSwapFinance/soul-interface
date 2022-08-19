@@ -98,6 +98,18 @@ const builders = {
   //       return `${prefix}/${type}/${data}`
   //   }
   // },
+  moonriver: (chainName: string, data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
+    const prefix = 'https://blockscout.moonriver.moonbeam.network'
+    
+   switch (type) {
+     case 'transaction':
+       return `${prefix}/tx/${data}`
+        case 'address': 
+          return `${prefix}/address/${data}`
+       default:
+        return `${prefix}/${type}/${data}`
+   }
+  },
   // moonbase: (chainName: string, data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
   //   const prefix = 'https://moonbeam-explorer.netlify.app'
   //   switch (type) {
@@ -256,6 +268,10 @@ const chains: ChainObject = {
   //   chainName: '',
   //   builder: builders.moonbase,
   // },
+  [ChainId.MOONRIVER]: {
+  // chainName: '',
+    builder: builders.moonriver,
+  }, 
   [ChainId.AVALANCHE]: {
     // chainName: '',
     builder: builders.avalanche,

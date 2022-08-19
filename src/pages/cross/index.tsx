@@ -724,7 +724,7 @@ export default function Exchange() {
                   <div
                     className="flex font-bold justify-center text-[#E84142]">
                     <Typography className={classNames('text-xl font-bold', 'font-bold text-white')} weight={600} fontFamily={'semi-bold'}>
-                      Warning: Below Minimum Input Amount
+                      Warning: Below Minimum Amount
                     </Typography>
                   </div>
                 </div>
@@ -746,8 +746,7 @@ export default function Exchange() {
                   style={{ opacity: trade ? 1 : 0.5, cursor: trade ? "pointer" : "not-allowed" }}
                   disabled={trade == undefined}
                 >
-                  {"Confirm Swap"}
-                  {/* {fromChain?.chainId === toChain?.chainId ? "Swap" : "Swap Crosschain"} */}
+                  {fromChain?.chainId === toChain?.chainId ? "Confirm Swap" : "Confirm Crosschain"} 
                 </Button>
               </div>
             </SwapLayoutCard>
