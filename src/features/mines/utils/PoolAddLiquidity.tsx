@@ -46,8 +46,8 @@ const PoolDeposit = ({ currencyA, currencyB, header }) => {
 
   const oneCurrencyIsWETH = Boolean(
     chainId &&
-      ((currencyA && currencyEquals(currencyA, WNATIVE[chainId])) ||
-        (currencyB && currencyEquals(currencyB, WNATIVE[chainId])))
+    ((currencyA && currencyEquals(currencyA, WNATIVE[chainId])) ||
+      (currencyB && currencyEquals(currencyB, WNATIVE[chainId])))
   )
 
   // mint state
@@ -147,9 +147,8 @@ const PoolDeposit = ({ currencyA, currencyB, header }) => {
 
           addTransaction(response, {
             summary: i18n._(
-              t`Add ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${
-                currencies[Field.CURRENCY_A]?.symbol
-              } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencies[Field.CURRENCY_B]?.symbol}`
+              t`Add ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${currencies[Field.CURRENCY_A]?.symbol
+                } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencies[Field.CURRENCY_B]?.symbol}`
             ),
           })
 
@@ -196,12 +195,12 @@ const PoolDeposit = ({ currencyA, currencyB, header }) => {
           showMax={false}
         />
         {(oneCurrencyIsETH || oneCurrencyIsWETH) && (
-        /* {(oneCurrencyIsETH || oneCurrencyIsWETH) && chainId != ChainId.CELO && ( */
+          /* {(oneCurrencyIsETH || oneCurrencyIsWETH) && chainId != ChainId.CELO && ( */
           <div className="flex justify-center">
-            <Button size="xs" variant="filled" color="purple" className="rounded-none" onClick={() => 
+            <Button size="xs" variant="filled" color="purple" className="rounded-none" onClick={() =>
               setUseETH(!useETH)
             }
-              >
+            >
               {i18n._(t`Use`)} {useETH && 'W'}
               {NATIVE[chainId].symbol} instead of {!useETH && 'W'}
               {NATIVE[chainId].symbol}
@@ -211,7 +210,7 @@ const PoolDeposit = ({ currencyA, currencyB, header }) => {
       </HeadlessUiModal.BorderedContent>
       {!account ? (
         <Web3Connect />
-        // <Web3Connect fullWidth />
+        // <Web3Connect />
       ) : isValid &&
         (approvalA === ApprovalState.NOT_APPROVED ||
           approvalA === ApprovalState.PENDING ||
@@ -220,7 +219,7 @@ const PoolDeposit = ({ currencyA, currencyB, header }) => {
         <div className="flex gap-4">
           {approvalA !== ApprovalState.APPROVED && (
             <Button
-              fullWidth
+              className="w-full"
               loading={approvalA === ApprovalState.PENDING}
               onClick={approveACallback}
               disabled={approvalA === ApprovalState.PENDING}
@@ -233,7 +232,7 @@ const PoolDeposit = ({ currencyA, currencyB, header }) => {
           )}
           {approvalB !== ApprovalState.APPROVED && (
             <Button
-              fullWidth
+              className="w-full"
               loading={approvalB === ApprovalState.PENDING}
               onClick={approveBCallback}
               disabled={approvalB === ApprovalState.PENDING}
@@ -249,17 +248,17 @@ const PoolDeposit = ({ currencyA, currencyB, header }) => {
             isExpertMode
               ? onAdd()
               : setContent(
-                  <PoolAddLiquidityReviewContent
-                    noLiquidity={noLiquidity}
-                    liquidityMinted={minLiquidityCurrencyAmount}
-                    poolShare={poolTokenPercentage}
-                    parsedAmounts={parsedAmounts}
-                    execute={onAdd}
-                  />
-                )
+                <PoolAddLiquidityReviewContent
+                  noLiquidity={noLiquidity}
+                  liquidityMinted={minLiquidityCurrencyAmount}
+                  poolShare={poolTokenPercentage}
+                  parsedAmounts={parsedAmounts}
+                  execute={onAdd}
+                />
+              )
           }}
           disabled={!isValid || attemptingTxn}
-          fullWidth
+          className="w-full"
         >
           {error ?? i18n._(t`Confirm Adding Liquidity`)}
         </Button>

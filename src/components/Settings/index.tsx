@@ -2,7 +2,8 @@ import { ChainId, Percent } from '../../sdk'
 import React, { useCallback, useRef, useState } from 'react'
 import { CheckIcon, CogIcon } from '@heroicons/react/outline'
 import {
-  useExpertModeManager,
+  // useExpertModeManager,
+  useCrossChainModeManager,
   // useUserArcherUseRelay,
   useUserSingleHopOnly,
   useUserTransactionTTL,
@@ -15,7 +16,7 @@ import { ApplicationModal } from '../../state/application/actions'
 import { Button } from 'components/Button'
 import Modal from 'components/DefaultModal'
 import QuestionHelper from 'components/QuestionHelper'
-import Toggle from 'components/Toggle'
+import { Toggle } from 'components/Toggle'
 import Typography from 'components/Typography'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
@@ -33,7 +34,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
   const open = useModalOpen(ApplicationModal.SETTINGS)
   const toggle = useToggleSettingsMenu()
 
-  const [expertMode, toggleExpertMode] = useExpertModeManager()
+  const [expertMode, toggleExpertMode] = useCrossChainModeManager()
 
   const [singleHopOnly, setSingleHopOnly] = useUserSingleHopOnly()
 
@@ -49,13 +50,11 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
   return (
     <div className="relative flex" ref={node}>
       <div
-        className="flex items-center justify-center w-8 h-8 rounded cursor-pointer"
+        className="flex items-center justify-center w-6 h-6 rounded cursor-pointer"
         onClick={toggle}
         id="open-settings-dialog-button"
       >
-        {/* <AdjustmentsIcon className="w-[26px] h-[26px] transform rotate-90" /> */}
-        <CogIcon className="w-[26px] h-[26px] transform rotate-90 hover:text-white" />
-  {/* <Image src={ SETTINGS } height="40px" width="40px" alt="settings icon" /> */}
+        <CogIcon className="w-[36px] h-[46px] transform rotate-90 hover:text-white" />
       </div>
       {open && (
         <div className="absolute top-14 right-0 z-50 -mr-2.5 min-w-20 md:m-w-22 md:-mr-5 bg-dark-900 border-2 border-dark-800 rounded w-80 shadow-lg">

@@ -202,9 +202,6 @@ msgstr "Available Networks"
 msgid "Avg. APY"
 msgstr "Avg. APY"
 
-msgid "BOND"
-msgstr "BOND"
-
 msgid "Balance"
 msgstr "Balance"
 
@@ -267,9 +264,6 @@ msgstr ""
 
 msgid "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
 msgstr "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
-
-msgid "CLAIM"
-msgstr "CLAIM"
 
 msgid "COFFIN"
 msgstr "COFFIN"
@@ -470,9 +464,6 @@ msgstr "Current Percentage"
 msgid "Custom tokens are stored locally in your browser"
 msgstr "Custom tokens are stored locally in your browser"
 
-msgid "DATA"
-msgstr "DATA"
-
 msgid "DEPOSIT"
 msgstr "DEPOSIT"
 
@@ -624,17 +615,11 @@ msgstr "Expiration is the time at which the order will become invalid"
 msgid "Explore"
 msgstr "Explore"
 
-msgid "Explore More"
-msgstr "Explore More"
-
 msgid "Explore our Protocol."
 msgstr "Explore our Protocol."
 
 msgid "Explorer"
 msgstr "Explorer"
-
-msgid "FARM"
-msgstr "FARM"
 
 msgid "Failed"
 msgstr "Failed"
@@ -708,9 +693,6 @@ msgstr "Give me some FTM"
 
 msgid "Go Back"
 msgstr "Go Back"
-
-msgid "Governance"
-msgstr "Governance"
 
 msgid "Hardware Wallet"
 msgstr "Hardware Wallet"
@@ -852,15 +834,6 @@ msgstr "Japanese"
 msgid "Korean"
 msgstr "Korean"
 
-msgid "LAUNCH"
-msgstr "LAUNCH"
-
-msgid "LIQUIDITY"
-msgstr "LIQUIDITY"
-
-msgid "LUXOR"
-msgstr "LUXOR"
-
 msgid "LUXOR ECONOMY"
 msgstr "LUXOR ECONOMY"
 
@@ -953,9 +926,6 @@ msgstr "Luxor"
 
 msgid "Luxor Balance"
 msgstr "Luxor Balance"
-
-msgid "Luxor Money"
-msgstr "Luxor Money"
 
 msgid "MAX"
 msgstr "MAX"
@@ -1086,9 +1056,6 @@ msgstr "Oops!"
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 msgstr "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 
-msgid "Open Main Menu"
-msgstr "Open Main Menu"
-
 msgid "Open orders"
 msgstr "Open orders"
 
@@ -1213,6 +1180,9 @@ msgstr "Price Updated"
 
 msgid "Processing"
 msgstr "Processing"
+
+msgid "Provide"
+msgstr "Provide"
 
 msgid "Provide liquidity to the"
 msgstr "Provide liquidity to the"
@@ -1365,9 +1335,6 @@ msgstr "SOUL TREASURY"
 
 msgid "STAKE"
 msgstr "STAKE"
-
-msgid "SWAP"
-msgstr "SWAP"
 
 msgid "Sacrifice"
 msgstr "Sacrifice"
@@ -1766,9 +1733,6 @@ msgstr "Vesting is executed within the guidelines selected by the community in"
 
 msgid "Vietnamese"
 msgstr "Vietnamese"
-
-msgid "View Charts"
-msgstr "View Charts"
 
 msgid "View Liquidity Positions"
 msgstr "View Liquidity Positions"

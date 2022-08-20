@@ -99,9 +99,7 @@ const UnderworldDeposit = ({ pair, header }) => {
         </HeadlessUiModal.BorderedContent>
       )}
       {!account ? (
-        <Web3Connect 
-        // fullWidth 
-        />
+        <Web3Connect />
       ) : isValid &&
         !underworldPermit &&
         (underworldApprovalState === CoffinApprovalState.NOT_APPROVED ||

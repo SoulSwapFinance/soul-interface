@@ -104,12 +104,12 @@ const useMenu: UseBar = () => {
     const poolMenu = [
       {
         key: 'browse',
-        title: i18n._(t`Browse`),
+        title: i18n._(t`Positions`),
         link: '/pool',
       },
       {
         key: 'add-liquidity',
-        title: i18n._(t`Add`),
+        title: i18n._(t`Provide`),
         link: `/add/FTM/${SOUL_ADDRESS[chainId]}`,
       },
       {
@@ -137,7 +137,7 @@ const useMenu: UseBar = () => {
     if (poolMenu.length > 0)
       mainItems.push({
         key: 'pool',
-        title: i18n._(t`Positions`),
+        title: i18n._(t`Liquidity`),
         items: poolMenu,
         icon: <PoolIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
       })

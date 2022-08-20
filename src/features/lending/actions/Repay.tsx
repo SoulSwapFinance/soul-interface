@@ -397,7 +397,10 @@ export default function Repay({ pair }: RepayProps) {
         color="purple"
         content={(onCook: any) => (
           <TokenApproveButton value={displayRepayValue} token={assetToken} needed={!useCoffinRepay}>
-            <Button onClick={() => onCook(pair, onExecute)} disabled={actionDisabled} fullWidth={true}>
+            <Button 
+              onClick={() => onCook(pair, onExecute)} disabled={actionDisabled} 
+              className="w-full"
+            >
               {actionName}
             </Button>
           </TokenApproveButton>

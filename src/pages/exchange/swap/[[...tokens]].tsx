@@ -28,17 +28,20 @@ import TokenWarningModal from 'modals/TokenWarningModal'
 import { useActiveWeb3React } from 'services/web3'
 import { Field, setRecipient } from 'state/swap/actions'
 import { useDefaultsFromURLSearch, useDerivedSwapInfo, useSwapActionHandlers, useSwapState } from 'state/swap/hooks'
-import { useExpertModeManager, useUserOpenMev, useUserSingleHopOnly } from 'state/user/hooks'
+import { useExpertModeManager, useCrossChainModeManager, useUserOpenMev, useUserSingleHopOnly } from 'state/user/hooks'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
 import Chart from 'components/Chart'
+import Cross from 'pages/exchange/cross'
 // import NavLink from 'components/NavLink'
 // import ExternalLink from 'components/ExternalLink'
-import Toggle from 'components/Toggle'
+import { Toggle } from 'components/Toggle'
 // import Image from 'next/image'
 // import styled from 'styled-components'
 import SocialWidget from 'components/Social'
 import { getChainColor, getChainColorCode } from 'constants/chains'
+import { classNames } from 'functions/styling'
+import CrossChainMode from 'components/CrossChainMode'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -46,6 +49,7 @@ const Swap = () => {
   const { account, chainId } = useActiveWeb3React()
   const defaultTokens = useAllTokens()
   const [isExpertMode] = useExpertModeManager()
+  const [isCrossChainMode] = useCrossChainModeManager()
   const { independentField, typedValue, recipient } = useSwapState()
   const { v2Trade, parsedAmount, currencies, inputError: swapInputError, allowedSlippage, to } = useDerivedSwapInfo()
   const [loadedInputCurrency, loadedOutputCurrency] = [
@@ -61,8 +65,10 @@ const Swap = () => {
   const handleConfirmTokenWarning = useCallback(() => {
     setDismissTokenWarning(true)
   }, [])
-  
+
+  const [showChart, setShowChart] = useState(false)
   const [expertMode, openExpertMode] = useState(false)
+  const [showCrosschain, openCrossChainMode] = useState(false)
   // const toggle = toggleExpertMode()
 
   // dismiss warning if all imported tokens are in active lists
@@ -116,10 +122,6 @@ const Swap = () => {
     },
     [onUserInput]
   )
-
-  // const DESIGN 
-    // = "https://media.giphy.com/media/YgVy0BfAmwaPn9fS3z/giphy.gif"
-    // = "https://media.giphy.com/media/ZPJbKvfpD5qBPZDxMG/giphy-downsized-large.gif"
 
   // modal and loading
   const [{ showConfirm, tradeToConfirm, swapErrorMessage, attemptingTxn, txHash }, setSwapState] = useState<{
@@ -274,7 +276,7 @@ const Swap = () => {
     (approvalState === ApprovalState.NOT_APPROVED ||
       approvalState === ApprovalState.PENDING ||
       (approvalSubmitted && approvalState === ApprovalState.APPROVED)) &&
-    !(priceImpactSeverity > 3 && !isExpertMode)
+      !(priceImpactSeverity > 3 && !isExpertMode)
 
   const handleConfirmDismiss = useCallback(() => {
     setSwapState({
@@ -332,7 +334,6 @@ const Swap = () => {
   return (
     <>
       {/* <NewFeature /> */}
-      
       <ConfirmSwapModal
         isOpen={showConfirm}
         trade={trade}
@@ -351,9 +352,15 @@ const Swap = () => {
         tokens={importTokensNotInDefault}
         onConfirm={handleConfirmTokenWarning}
       />
+
       <SwapLayoutCard>
         <div className="flex flex-col gap-3 justify-center">
           <SwapHeader inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+        </div>
+        { isCrossChainMode &&
+          <Cross />
+        }
+        { !isCrossChainMode &&
           <SwapAssetPanel
             spendFromWallet={true}
             chainId={chainId}
@@ -370,18 +377,22 @@ const Swap = () => {
             onChange={handleTypeInput}
             onSelect={handleInputSelect}
           />
-          <div className="flex justify-center -mt-6 -mb-6 z-0">
-            <div
-              role="button"
-              className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}`}
-              onClick={() => {
-                setApprovalSubmitted(false) // reset 2 step UI for approvals
-                onSwitchTokens()
-              }}
-            >
-              <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
-            </div>
+        }
+        <div className={!isCrossChainMode && classNames("flex justify-center -mt-6 -mb-6 z-0")}>
+          <div
+            role="button"
+            className={classNames(!isCrossChainMode && `p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}`)}
+            onClick={() => {
+              setApprovalSubmitted(false) // reset 2 step UI for approvals
+              onSwitchTokens()
+            }}
+          >
+            {!isCrossChainMode && <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />}
           </div>
+        </div>
+
+        {/* TO ASSET PANEL */}
+        {!isCrossChainMode &&
           <SwapAssetPanel
             spendFromWallet={true}
             chainId={chainId}
@@ -398,124 +409,125 @@ const Swap = () => {
             priceImpact={priceImpact}
             priceImpactCss={priceImpactCss}
           />
-          {isExpertMode && <RecipientField recipient={recipient} action={setRecipient} />}
-          {Boolean(trade) && (
-            <SwapDetails
-              inputCurrency={currencies[Field.INPUT]}
-              outputCurrency={currencies[Field.OUTPUT]}
-              trade={trade}
-              recipient={recipient ?? undefined}
-            />
-          )}
+        }
+        {isExpertMode && <RecipientField recipient={recipient} action={setRecipient} />}
+        {Boolean(trade) && !isCrossChainMode && (
+          <SwapDetails
+            inputCurrency={currencies[Field.INPUT]}
+            outputCurrency={currencies[Field.OUTPUT]}
+            trade={trade}
+            recipient={recipient ?? undefined}
+          />
+        )}
 
-          {trade && routeNotFound && userHasSpecifiedInputOutput && (
-            <Typography variant="xs" className="text-center py-2">
-              {i18n._(t`Insufficient liquidity for this trade.`)}{' '}
-              {singleHopOnly && i18n._(t`Try enabling multi-hop trades`)}
-            </Typography>
-          )}
+        {trade && routeNotFound && userHasSpecifiedInputOutput && !isCrossChainMode && (
+          <Typography variant="xs" className="text-center py-2">
+            {i18n._(t`Insufficient liquidity for this trade.`)}{' '}
+            {singleHopOnly && i18n._(t`Try enabling multi-hop trades`)}
+          </Typography>
+        )}
 
-          {swapIsUnsupported ? (
-            <Button color="red" disabled fullWidth className="rounded-2xl md:rounded">
-              {i18n._(t`Unsupported Asset`)}
-            </Button>
-          ) : !account ? (
-            <Web3Connect color="purple" variant="filled" className="rounded-2xl md:rounded" />
-          ) : showWrap ? (
-            <Button
-              fullWidth
-              color={`${getChainColorCode(chainId)}`}
-              disabled={Boolean(wrapInputError)}
-              onClick={onWrap}
-              className="rounded-2xl md:rounded"
-            >
-              {wrapInputError ??
-                (wrapType === WrapType.WRAP
-                  ? i18n._(t`Wrap`)
-                  : wrapType === WrapType.UNWRAP
-                    ? i18n._(t`Unwrap`)
-                    : null)}
-            </Button>
-          ) : showApproveFlow ? (
-            <div>
-              {approvalState !== ApprovalState.APPROVED && (
-                <Button
-                  fullWidth
-                  color={`${getChainColorCode(chainId)}`}
-                  loading={approvalState === ApprovalState.PENDING}
-                  onClick={handleApprove}
-                  disabled={approvalState !== ApprovalState.NOT_APPROVED || approvalSubmitted}
-                  className="rounded-2xl md:rounded"
-                >
-                  {i18n._(t`Approve ${currencies[Field.INPUT]?.symbol}`)}
-                </Button>
-              )}
-              {approvalState === ApprovalState.APPROVED && (
-                <Button
-                  color={isValid && priceImpactSeverity > 2 ? 'red' : `${getChainColorCode(chainId)}`
+        {swapIsUnsupported ? (
+          <Button 
+          color="red" 
+          disabled 
+          className="rounded-2xl w-full md:rounded">
+            {i18n._(t`Unsupported Asset`)}
+          </Button>
+        ) : !account ? (
+          <Web3Connect color="purple" variant="filled" className="rounded-2xl md:rounded" />
+        ) : showWrap ? (
+          <Button
+            color={`${getChainColorCode(chainId)}`}
+            disabled={Boolean(wrapInputError)}
+            onClick={onWrap}
+            className="rounded-2xl w-full md:rounded"
+          >
+            {wrapInputError ??
+              (wrapType === WrapType.WRAP
+                ? i18n._(t`Wrap`)
+                : wrapType === WrapType.UNWRAP
+                  ? i18n._(t`Unwrap`)
+                  : null)}
+          </Button>
+        ) : showApproveFlow && !isCrossChainMode ? (
+          <div>
+            {approvalState !== ApprovalState.APPROVED && (
+              <Button
+                color={`${getChainColorCode(chainId)}`}
+                loading={approvalState === ApprovalState.PENDING}
+                onClick={handleApprove}
+                disabled={approvalState !== ApprovalState.NOT_APPROVED || approvalSubmitted}
+                className="rounded-2xl w-full md:rounded"
+              >
+                {i18n._(t`Approve ${currencies[Field.INPUT]?.symbol}`)}
+              </Button>
+            )}
+            {approvalState === ApprovalState.APPROVED && !isCrossChainMode && (
+              <Button
+                color={isValid && priceImpactSeverity > 2 ? 'red' : `${getChainColorCode(chainId)}`
                 }
-                  onClick={() => {
-                    if (isExpertMode) {
-                      handleSwap()
-                    } else {
-                      setSwapState({
-                        tradeToConfirm: trade,
-                        attemptingTxn: false,
-                        swapErrorMessage: undefined,
-                        showConfirm: true,
-                        txHash: undefined,
-                      })
+                onClick={() => {
+                  if (isExpertMode) {
+                    handleSwap()
+                  } else {
+                    setSwapState({
+                      tradeToConfirm: trade,
+                      attemptingTxn: false,
+                      swapErrorMessage: undefined,
+                      showConfirm: true,
+                      txHash: undefined,
+                    })
                     }
                   }}
-                  fullWidth
-                  id="swap-button"
-                  disabled={
-                    !isValid || approvalState !== ApprovalState.APPROVED || (priceImpactSeverity > 3 && !isExpertMode)
-                  }
-                  className="rounded-2xl md:rounded"
-                >
-                  {priceImpactSeverity > 3 && !isExpertMode
-                    ? i18n._(t`Price Impact High`)
-                    : priceImpactSeverity > 2
-                      ? i18n._(t`Swap Anyway`)
-                      : i18n._(t`Swap`)}
-                </Button>
-              )}
-            </div>
-          ) : (
-            <Button
-              color={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'red' : `${getChainColorCode(chainId)}`}
-              fullWidth
-              onClick={() => {
-                if (isExpertMode) {
-                  handleSwap()
-                } else {
-                  setSwapState({
-                    tradeToConfirm: trade,
-                    attemptingTxn: false,
-                    swapErrorMessage: undefined,
-                    showConfirm: true,
-                    txHash: undefined,
-                  })
+                id="swap-button"
+                disabled={
+                  !isValid || approvalState !== ApprovalState.APPROVED || (priceImpactSeverity > 3)
                 }
-              }}
-              id="swap-button"
-              disabled={!isValid || (priceImpactSeverity > 3 && !isExpertMode) || !!swapCallbackError}
-              className="rounded-2xl md:rounded"
-            >
-              {swapInputError
-                ? swapInputError
-                : priceImpactSeverity > 3 && !isExpertMode
-                  ? i18n._(t`Price Impact Too High`)
+                className="rounded-2xl w-full md:rounded"
+              >
+                  {priceImpactSeverity > 3 && !isExpertMode
+                  ? i18n._(t`Price Impact High`)
                   : priceImpactSeverity > 2
                     ? i18n._(t`Swap Anyway`)
                     : i18n._(t`Swap`)}
-            </Button>
-          )}
+              </Button>
+            )}
+          </div>
+        ) : (!isCrossChainMode &&
+          <Button
+            color={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'red' : `${getChainColorCode(chainId)}`}
+            onClick={() => {
+              if (isExpertMode) {
+                handleSwap()
+              } else {
+                setSwapState({
+                  tradeToConfirm: trade,
+                  attemptingTxn: false,
+                  swapErrorMessage: undefined,
+                  showConfirm: true,
+                  txHash: undefined,
+                })
+              }
+            }}
+            id="swap-button"
+            disabled={!isValid || (priceImpactSeverity > 3) || !!swapCallbackError}
+            className="rounded-2xl w-full md:rounded"
+          >
+            {swapInputError
+              ? swapInputError
+              : priceImpactSeverity > 3
+                ? i18n._(t`Price Impact Too High`)
+                : priceImpactSeverity > 2
+                  ? i18n._(t`Swap Anyway`)
+                  : i18n._(t`Swap`)}
+          </Button>
+        )}
           {isExpertMode && swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}
-          {swapIsUnsupported ? <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} show={false} /> : null}
-        </div>
-       {/* <div className="flex border-dark-900 mt-3 mb-0 gap-1 items-center justify-center">
+        {swapIsUnsupported ? <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} show={false} /> : null}
+        {/* </div> */}
+
+        {/* <div className="flex border-dark-900 mt-3 mb-0 gap-1 items-center justify-center">
                 <Button variant="filled" color="gradientPurpleBlue" size="lg">
                   <NavLink href={"/portfolio"}>
                         <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
@@ -531,41 +543,48 @@ const Swap = () => {
                   </ExternalLink>
                 </Button>
               </div> */}
-            <div className={`flex flex-row gap-3 text-white justify-end`}>
-              {/* Chart  */}
-              <Toggle
-                id="toggle-button"
-                isActive={expertMode}
-                toggle={
-                  expertMode
-                    ? () => {
-                        openExpertMode(false)
-                      }
-                    : () => {
-                        openExpertMode(true)
-                      }
+        {isCrossChainMode && chainId == 250 &&
+          <div className={'flex flex-cols-2 gap-8 justify-end rounded'}>
+            <CrossChainMode />
+          </div>
+        }
+        
+        { <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
+          <Toggle
+            id="toggle-button"
+            optionA="Chart"
+            optionB="Chart"
+            isActive={showChart}
+            toggle={
+              showChart
+                ? () => {
+                  setShowChart(false)
                 }
-              />
-            </div>
-         {  !expertMode && 
-                   <>
-          <div className="flex mt-3" /><SocialWidget />
-              {/* <div className="grid grid-cols-1"> */}
-                                        {/* <Image src='https://app.soulswap.finance/neon-bg.jpeg' height="400px" width="400px" /> */}
-                   {/* <Image src='https://app.soulswap.finance/neon-triangle-lights.jpeg' height="600px" width="600px" /> */}
-        {/*    <Image src={DESIGN} height="400px" width="480px" alt="logo" /> 
+                : () => {
+                  setShowChart(true)
+                }
+            }
+          />
+        </div>
+        }
+        {!showChart &&
+          <>
+            <div className="flex mt-3" /><SocialWidget />
+            {/* <div className="grid grid-cols-1"> */}
+            {/* <Image src='https://app.soulswap.finance/neon-bg.jpeg' height="400px" width="400px" /> */}
+            {/* <Image src='https://app.soulswap.finance/neon-triangle-lights.jpeg' height="600px" width="600px" /> */}
+            {/*    <Image src={DESIGN} height="400px" width="480px" alt="logo" /> 
           </div> */}
           </>
-          }
-          { expertMode &&
-            <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
-              <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
-                <Chart inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
-              </div>
+        }
+        {showChart &&
+          <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
+            <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
+              <Chart inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
             </div>
-          }
+          </div>
+        }
       </SwapLayoutCard>
-
     </>
   )
 }

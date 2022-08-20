@@ -13,7 +13,6 @@ export interface PopoverProps {
   placement?: Placement
   show?: boolean
   modifiers?: any[]
-  fullWidth?: boolean
 }
 
 export default function Popover({ content, children, placement = 'auto', show, modifiers }: PopoverProps) {

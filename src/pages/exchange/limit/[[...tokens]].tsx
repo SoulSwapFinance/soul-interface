@@ -5,7 +5,7 @@ import NetworkGuard from 'guards/Network'
 import { SwapLayout, SwapLayoutCard } from 'layouts/SwapLayout'
 import useLimitOrderDerivedCurrencies from 'state/limit-order/hooks'
 import { GelatoLimitOrderPanel, GelatoLimitOrdersHistoryPanel } from 'soulswap-limit-orders-react'
-import Toggle from 'components/Toggle'
+import { Toggle } from 'components/Toggle'
 // import Chart from 'components/Chart'
 import Image from 'next/image'
 

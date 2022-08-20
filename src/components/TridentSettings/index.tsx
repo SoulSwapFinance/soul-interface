@@ -13,7 +13,7 @@ import Typography from 'components/Typography'
 import { classNames } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
 import { useToggleSettingsMenu } from 'state/application/hooks'
-import { useExpertModeManager, useUserOpenMev, useUserSingleHopOnly } from 'state/user/hooks'
+import { useCrossChainModeManager, useUserOpenMev, useUserSingleHopOnly } from 'state/user/hooks'
 import React, { FC, useState } from 'react'
 
 // import { OPENMEV_ENABLED, OPENMEV_SUPPORTED_NETWORKS } from '../../config/openmev'
@@ -29,7 +29,7 @@ const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className, tri
   const { chainId } = useActiveWeb3React()
 
   const toggle = useToggleSettingsMenu()
-  const [expertMode, toggleExpertMode] = useExpertModeManager()
+  const [expertMode, toggleExpertMode] = useCrossChainModeManager()
   const [singleHopOnly, setSingleHopOnly] = useUserSingleHopOnly()
   const [showConfirmation, setShowConfirmation] = useState(false)
   const [userUseOpenMev, setUserUseOpenMev] = useUserOpenMev()

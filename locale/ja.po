@@ -202,9 +202,6 @@ msgstr ""
 msgid "Avg. APY"
 msgstr ""
 
-msgid "BOND"
-msgstr ""
-
 msgid "Balance"
 msgstr ""
 
@@ -263,9 +260,6 @@ msgid ""
 msgstr ""
 
 msgid "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
-msgstr ""
-
-msgid "CLAIM"
 msgstr ""
 
 msgid "COFFIN"
@@ -465,9 +459,6 @@ msgstr ""
 msgid "Custom tokens are stored locally in your browser"
 msgstr ""
 
-msgid "DATA"
-msgstr ""
-
 msgid "DEPOSIT"
 msgstr ""
 
@@ -617,16 +608,10 @@ msgstr ""
 msgid "Explore"
 msgstr ""
 
-msgid "Explore More"
-msgstr ""
-
 msgid "Explore our Protocol."
 msgstr ""
 
 msgid "Explorer"
-msgstr ""
-
-msgid "FARM"
 msgstr ""
 
 msgid "Failed"
@@ -698,9 +683,6 @@ msgid "Give me some FTM"
 msgstr ""
 
 msgid "Go Back"
-msgstr ""
-
-msgid "Governance"
 msgstr ""
 
 msgid "Hardware Wallet"
@@ -839,15 +821,6 @@ msgstr ""
 msgid "Korean"
 msgstr ""
 
-msgid "LAUNCH"
-msgstr ""
-
-msgid "LIQUIDITY"
-msgstr ""
-
-msgid "LUXOR"
-msgstr ""
-
 msgid "LUXOR ECONOMY"
 msgstr ""
 
@@ -939,9 +912,6 @@ msgid "Luxor"
 msgstr ""
 
 msgid "Luxor Balance"
-msgstr ""
-
-msgid "Luxor Money"
 msgstr ""
 
 msgid "MAX"
@@ -1073,9 +1043,6 @@ msgstr ""
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 msgstr ""
 
-msgid "Open Main Menu"
-msgstr ""
-
 msgid "Open orders"
 msgstr ""
 
@@ -1195,6 +1162,9 @@ msgid "Price Updated"
 msgstr ""
 
 msgid "Processing"
+msgstr ""
+
+msgid "Provide"
 msgstr ""
 
 msgid "Provide liquidity to the"
@@ -1343,9 +1313,6 @@ msgid "SOUL TREASURY"
 msgstr ""
 
 msgid "STAKE"
-msgstr ""
-
-msgid "SWAP"
 msgstr ""
 
 msgid "Sacrifice"
@@ -1740,9 +1707,6 @@ msgid "Vesting is executed within the guidelines selected by the community in"
 msgstr ""
 
 msgid "Vietnamese"
-msgstr ""
-
-msgid "View Charts"
 msgstr ""
 
 msgid "View Liquidity Positions"

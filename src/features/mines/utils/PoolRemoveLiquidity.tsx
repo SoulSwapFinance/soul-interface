@@ -70,7 +70,7 @@ const PoolWithdraw = ({ currencyA, currencyB, header }) => {
     if (!liquidityAmount) throw new Error('missing liquidity amount')
 
     if (gatherPermitSignature) {
-    // if (chainId !== ChainId.HARMONY && gatherPermitSignature) {
+      // if (chainId !== ChainId.HARMONY && gatherPermitSignature) {
       try {
         await gatherPermitSignature()
       } catch (error) {
@@ -102,27 +102,27 @@ const PoolWithdraw = ({ currencyA, currencyB, header }) => {
   const amountsMin =
     parsedAmountA && parsedAmountB
       ? {
-          [Field.CURRENCY_A]: calculateSlippageAmount(parsedAmountA, allowedSlippage)[0],
-          [Field.CURRENCY_B]: calculateSlippageAmount(parsedAmountB, allowedSlippage)[0],
-        }
+        [Field.CURRENCY_A]: calculateSlippageAmount(parsedAmountA, allowedSlippage)[0],
+        [Field.CURRENCY_B]: calculateSlippageAmount(parsedAmountB, allowedSlippage)[0],
+      }
       : undefined
 
   const amountsMinCurrencyAmount = {
     [Field.CURRENCY_A]:
       amountsMin?.[Field.CURRENCY_A] && parsedAmountA
         ? CurrencyAmount.fromRawAmount(
-            // @ts-ignore TYPE NEEDS FIXING
-            currencyA.isNative ? NATIVE[chainId || 1] : parsedAmountA.currency,
-            amountsMin[Field.CURRENCY_A]
-          )
+          // @ts-ignore TYPE NEEDS FIXING
+          currencyA.isNative ? NATIVE[chainId || 1] : parsedAmountA.currency,
+          amountsMin[Field.CURRENCY_A]
+        )
         : undefined,
     [Field.CURRENCY_B]:
       amountsMin?.[Field.CURRENCY_B] && parsedAmountB
         ? CurrencyAmount.fromRawAmount(
-            // @ts-ignore TYPE NEEDS FIXING
-            currencyB.isNative ? NATIVE[chainId || 1] : parsedAmountB.currency,
-            amountsMin[Field.CURRENCY_B]
-          )
+          // @ts-ignore TYPE NEEDS FIXING
+          currencyB.isNative ? NATIVE[chainId || 1] : parsedAmountB.currency,
+          amountsMin[Field.CURRENCY_B]
+        )
         : undefined,
   }
 
@@ -251,9 +251,8 @@ const PoolWithdraw = ({ currencyA, currencyB, header }) => {
           setAttemptingTxn(false)
 
           addTransaction(response, {
-            summary: t`Remove ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${
-              currencyA?.symbol
-            } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencyB?.symbol}`,
+            summary: t`Remove ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${currencyA?.symbol
+              } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencyB?.symbol}`,
           })
 
           setContent(
@@ -321,10 +320,10 @@ const PoolWithdraw = ({ currencyA, currencyB, header }) => {
       )}
       {!account ? (
         <Web3Connect />
-        // <Web3Connect fullWidth />
+        // <Web3Connect />
       ) : isValid && approval !== ApprovalState.APPROVED && signatureData === null ? (
         <Button
-          fullWidth
+          className="w-full"
           loading={approval === ApprovalState.PENDING}
           onClick={onAttemptToApprove}
           disabled={approval !== ApprovalState.NOT_APPROVED || signatureData !== null}
@@ -333,7 +332,7 @@ const PoolWithdraw = ({ currencyA, currencyB, header }) => {
         </Button>
       ) : (
         <Button
-          fullWidth
+          className="w-full"
           loading={attemptingTxn}
           color={!isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B] ? 'red' : 'blue'}
           onClick={() => {

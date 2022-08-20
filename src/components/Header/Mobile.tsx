@@ -31,7 +31,7 @@ const Mobile: FC = () => {
   const { account, chainId, library } = useActiveWeb3React()
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   const [open, setOpen] = useState(false)
-  const isCoinbaseWallet = useIsCoinbaseWallet()
+  // const isCoinbaseWallet = useIsCoinbaseWallet()
 
   return (
     <>

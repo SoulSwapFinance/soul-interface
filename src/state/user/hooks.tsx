@@ -35,6 +35,7 @@ import {
   toggleURLWarning,
   updateUserDeadline,
   updateUserExpertMode,
+  updateUserCrossChainMode,
   updateUserSingleHopOnly,
   updateUserSlippageTolerance,
   updateUserUseOpenMev,
@@ -59,6 +60,21 @@ function deserializeToken(serializedToken: SerializedToken): Token {
     serializedToken.symbol,
     serializedToken.name
   )
+}
+
+export function useIsCrossChainMode(): boolean {
+  return useAppSelector((state) => state.user.userCrossChainMode)
+}
+
+export function useCrossChainModeManager(): [boolean, () => void] {
+  const dispatch = useAppDispatch()
+  const crosschainMode = useIsCrossChainMode()
+
+  const toggleSetCrossChainMode = useCallback(() => {
+    dispatch(updateUserCrossChainMode({ userCrossChainMode: !crosschainMode }))
+  }, [crosschainMode, dispatch])
+
+  return [crosschainMode, toggleSetCrossChainMode]
 }
 
 export function useIsExpertMode(): boolean {

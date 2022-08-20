@@ -10,6 +10,8 @@ import { TradeUnion } from 'types'
 import React, { FC, useCallback } from 'react'
 
 import TridentApproveGate from '../TridentApproveGate'
+import { getChainColor } from 'constants/chains'
+import { useActiveWeb3React } from 'services/web3'
 
 interface SwapButton {
   onClick(x: TradeUnion): void
@@ -17,6 +19,7 @@ interface SwapButton {
 
 const SwapButton: FC<SwapButton> = ({ onClick }) => {
   const { i18n } = useLingui()
+  const { chainId } = useActiveWeb3React()
   const dispatch = useAppDispatch()
   const tridentSwapState = useAppSelector(selectTridentSwap)
   const { attemptingTxn } = tridentSwapState
@@ -50,10 +53,10 @@ const SwapButton: FC<SwapButton> = ({ onClick }) => {
         return (
           <div className="flex">
             <Button
-              fullWidth
+              className="w-full"
               id="swap-button"
               loading={loading}
-              color="deepPurple"
+              color={getChainColor(chainId)}
               disabled={disabled}
               onClick={handleClick}
             >
