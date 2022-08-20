@@ -8,6 +8,7 @@ import { Feature } from 'enums'
 import { classNames, featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
 import { useRouter } from 'next/router'
+import { getChainColor } from 'constants/chains'
 
 export interface BarItemLeaf {
   key: string
@@ -41,7 +42,7 @@ const useMenu: UseBar = () => {
       key: 'swap',
       title: i18n._(t`Exchange`),
       link: '/swap',
-      icon: <SwitchVerticalIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+      icon: <SwitchVerticalIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
     }
   
  // If AMM is enabled, replace swap button with a submenu under trade
@@ -69,7 +70,7 @@ const useMenu: UseBar = () => {
     //   tradeMenu = {
     //     key: 'trade',
     //     title: i18n._(t`Exchange`),
-    //     icon: <SwitchVerticalIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+    //     icon: <SwitchVerticalIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
     //     items: [
     //       {
     //         key: 'swap',
@@ -138,14 +139,14 @@ const useMenu: UseBar = () => {
         key: 'pool',
         title: i18n._(t`Positions`),
         items: poolMenu,
-        icon: <PoolIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+        icon: <PoolIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
       })
 
     if (featureEnabled(Feature.AMM, chainId)) {
       const farmItems = {
         key: 'soulswap',
         title: i18n._(t`SoulSwap`),
-        icon: <CurrencyDollarIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+        icon: <CurrencyDollarIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
         items: [
           {
             key: 'soul-dashboard',
@@ -191,7 +192,7 @@ const useMenu: UseBar = () => {
       const luxorItems = {
         key: 'luxor',
         title: i18n._(t`Luxor`),
-        icon: <SunIcon width={20} className={classNames("rotate-90", isLuxor ? "text-yellow" : "text-dark-600")} />,
+        icon: <SunIcon width={20} className={classNames("rotate-90", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
         items: [
           {
             key: 'luxor-dashboard',
@@ -238,7 +239,7 @@ const useMenu: UseBar = () => {
        mainItems.push({
          key: 'lending',
          title: i18n._(t`Borrow`),
-         icon: <SwitchVerticalIcon width={20} className={classNames("rotate-90", isLuxor ? "text-yellow" : "text-dark-600")} />,
+         icon: <SwitchVerticalIcon width={20} className={classNames("rotate-90", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
          items: [
            {
              key: 'markets',
@@ -280,7 +281,7 @@ const useMenu: UseBar = () => {
     //   mainItems.push({
     //     key: 'analytics',
     //     title: i18n._(t`Data`),
-    //     icon: <PresentationChartLineIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+    //     icon: <PresentationChartLineIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
     //     items: [
     //       {
     //         key: 'wallet',
@@ -312,7 +313,7 @@ const useMenu: UseBar = () => {
       mainItems.push({
         key: 'socials',
         title: i18n._(t`Socials`),
-        icon: <UserGroupIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+        icon: <UserGroupIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
         items: [
           {
             key: 'discord',
@@ -355,7 +356,7 @@ const useMenu: UseBar = () => {
       mainItems.push({
         key: 'tools',
         title: i18n._(t`Utilities`),
-        icon: <SparklesIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+        icon: <SparklesIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
         items: [
         {
           key: 'data',
@@ -391,14 +392,14 @@ const useMenu: UseBar = () => {
       key: 'balances',
       title: i18n._(t`Account`),
       link: '/balances',
-      icon: <WalletIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+      icon: <WalletIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
     })
 
     let exploreMenu: BarItem = {
       key: 'explore',
       title: i18n._(t`Explore`),
       link: '/explore',
-      icon: <GlobeIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+      icon: <GlobeIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
     }
       mainItems.push(exploreMenu)
 
@@ -427,7 +428,7 @@ const useMenu: UseBar = () => {
     //   mainItems.push({
     //     key: 'academy',
     //     title: i18n._(t`Academy`),
-    //     icon: <RocketIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+    //     icon: <RocketIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
     //     items: [
     //       {
     //         key: 'marketplace',

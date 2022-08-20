@@ -23,7 +23,7 @@ const LimitOrder = () => {
         <GelatoLimitOrderPanel />
         </div>
       </div>
-      <div className="flex flex-row gap-3 text-dark-600 justify-end">
+      <div className="flex flex-row gap-3 text-white justify-end">
          Orders 
               <Toggle
                 id="toggle-button"

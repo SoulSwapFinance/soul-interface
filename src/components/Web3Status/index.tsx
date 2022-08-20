@@ -18,6 +18,7 @@ import React, { useMemo } from 'react'
 import Loader from '../Loader'
 import Web3Connect from '../Web3Connect'
 import { WalletIcon } from 'components/Icon'
+import { getChainColor } from 'constants/chains'
 
 // we want the latest one to come first, so return negative if a is after b
 function newTransactionsFirst(a: TransactionDetails, b: TransactionDetails) {
@@ -95,10 +96,8 @@ function StatusIcon({ connector }: { connector: AbstractConnector; account: stri
 
 function Web3StatusInner() {
   const { i18n } = useLingui()
-  const { account, connector, library } = useWeb3React()
-
+  const { account, chainId, connector, library } = useWeb3React()
   const { ENSName } = useENSName(account ?? undefined)
-
   const allTransactions = useAllTransactions()
 
   const sortedRecentTransactions = useMemo(() => {
@@ -131,7 +130,7 @@ function Web3StatusInner() {
             /* <div>{ENSName || shortenAddress(account)}</div> */
             <div className="grid items-center grid-flow-col items-center justify-center bg-dark-900 h-[24px] w-[24px] text-sm rounded pointer-events-auto auto-cols-max text-secondary">
 
-            <WalletIcon width={25} className="text-dark-600"/>
+            <WalletIcon width={25} className={`text-[${getChainColor(chainId)}]`}/>
 
             {/* <Davatar
               size={20}

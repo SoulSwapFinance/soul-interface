@@ -93,7 +93,7 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
               <Popover.Panel className="z-10 w-full justify-center absolute w-24 sm:w-32 translate-y-[-10px] sm:translate-x-[-10px] translate-x-[-2px]">
                 <div
                   className={classNames(
-                    'shadow-md shadow-black/40 border', isLuxor ? 'border-yellow' : 'border-dark-600', 'rounded overflow-hidden',
+                    'shadow-md shadow-black/40 border', isLuxor ? 'border-yellow' : `border-${getChainColorCode(chainId)}`, 'rounded overflow-hidden',
                     !touchDevice
                       ? "backdrop-blur-fallback before:z-[-1] before:rounded before:absolute before:w-full before:h-full before:content-[''] before:backdrop-blur-[20px] bg-dark-900 bg-opacity-[0.02]"
                       : 'bg-dark-800 inset-0'

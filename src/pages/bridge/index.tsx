@@ -1036,7 +1036,7 @@ const Bridge: React.FC<any> = () => {
   </div>
   <div className="flex items-center justify-end px-4">
       <NavLink href="/bridge/faucet">
-        <a className="flex mt-2 text-dark-600 items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
+        <a className={`flex mt-2 text-[${getChainColor(chainId)}] items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
         &#x2937; &nbsp;<span> View Fantom Faucet </span> 
         </a>
       </NavLink>
