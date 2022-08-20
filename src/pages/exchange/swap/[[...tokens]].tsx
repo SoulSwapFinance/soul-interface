@@ -38,7 +38,7 @@ import Toggle from 'components/Toggle'
 // import Image from 'next/image'
 // import styled from 'styled-components'
 import SocialWidget from 'components/Social'
-import { getChainColorCode } from 'constants/chains'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -531,8 +531,8 @@ const Swap = () => {
                   </ExternalLink>
                 </Button>
               </div> */}
-            <div className="flex flex-row gap-3 text-dark-600 justify-end">
-              Chart 
+            <div className={`flex flex-row gap-3 text-white justify-end`}>
+              {/* Chart  */}
               <Toggle
                 id="toggle-button"
                 isActive={expertMode}

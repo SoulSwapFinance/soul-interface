@@ -296,7 +296,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
         <>
             <div className="flex justify-center w-full">
                 <FarmContainer>
-                    <div className={classNames("bg-dark-900 p-3 border", !hasBalance && "border-dark-1000",
+                    <div className={classNames("bg-dark-900 p-3 border border-blue", !hasBalance && "border-dark-1000",
                         isUnderworldPair ? "hover:border-blue" : !isActive ? "hover:border-pink"
                             : hasBalance && isUnderworldPair ? "hover:border-blue border-blue"
                                 : hasBalance && !isUnderworldPair ? "border-dark-600"

@@ -17,6 +17,7 @@ import React, { FC, useCallback, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 import MineListItem from './MineListItem'
+import { useActiveWeb3React } from 'services/web3'
 
 const SortIcon: FC<{ id?: string; direction?: 'ascending' | 'descending'; active: boolean }> = ({
   id,
@@ -33,6 +34,7 @@ const MineList = ({ farms, term }) => {
   const { items, requestSort, sortConfig } = useSortableData(farms, { key: 'tvl', direction: 'descending' })
   const positions = usePositions()
   const { i18n } = useLingui()
+  const { chainId } = useActiveWeb3React()
   const [numDisplayed, setNumDisplayed] = useInfiniteScroll(items)
   const [selectedFarm, setSelectedFarm] = useState<any>()
   const dispatch = useAppDispatch()
@@ -117,6 +119,7 @@ const MineList = ({ farms, term }) => {
       </div>
       <HeadlessUiModal.Controlled
         isOpen={open}
+        chainId={chainId}
         onDismiss={() => dispatch(setMinesModalOpen(false))}
         afterLeave={handleDismiss}
       >

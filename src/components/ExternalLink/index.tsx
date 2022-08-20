@@ -7,6 +7,9 @@ const COLOR = {
   default: 'text-primary hover:text-high-emphesis focus:text-high-emphesis',
   blue: 'text-blue opacity-80 hover:opacity-100 focus:opacity-100',
   purple: 'text-purple opacity-80 hover:opacity-100 focus:opacity-100',
+  ftmBlue: 'text-ftmBlue opacity-100 hover:opacity-100 focus:opacity-100',
+  ethBlue: 'text-ethBlue opacity-100 hover:opacity-100 focus:opacity-100',
+  avaxRed: 'text-avaxRed opacity-100 hover:opacity-100 focus:opacity-100',
 }
 
 interface ExternalLinkProps extends Omit<HTMLProps<HTMLAnchorElement>, 'as' | 'ref' | 'onClick'> {

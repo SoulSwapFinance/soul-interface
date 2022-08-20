@@ -5,6 +5,7 @@ import React from 'react'
 import { AlertCircle, CheckCircle } from 'react-feather'
 
 import ExternalLink from '../ExternalLink'
+import { getChainColor } from 'constants/chains'
 
 export default function TransactionPopup({
   hash,
@@ -28,7 +29,7 @@ export default function TransactionPopup({
         </div>
         {chainId && hash && (
           <ExternalLink
-            className="p-0 text-blue hover:underline md:p-0"
+            className={`p-0 text-[${getChainColor(chainId)}] hover:underline md:p-0`}
             href={getExplorerLink(chainId, hash, 'transaction')}
           >
             <div className="flex flex-row items-center gap-1">

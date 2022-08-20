@@ -9,6 +9,7 @@ import { CurrencySearch } from './CurrencySearch'
 import ImportList from './ImportList'
 import { ImportToken } from './ImportToken'
 import Manage from './Manage'
+import { useActiveWeb3React } from 'services/web3'
 
 interface CurrencyModalContext {
   view: CurrencyModalView
@@ -28,17 +29,17 @@ interface CurrencyModalContext {
 
 const CurrencyModalContext = createContext<CurrencyModalContext>({
   view: CurrencyModalView.search,
-  setView: () => {},
+  setView: () => { },
   importToken: undefined,
-  setImportToken: () => {},
-  onDismiss: () => {},
-  onSelect: () => {},
+  setImportToken: () => { },
+  onDismiss: () => { },
+  onSelect: () => { },
   currency: undefined,
   includeNative: true,
   importList: undefined,
-  setImportList: () => {},
+  setImportList: () => { },
   listUrl: undefined,
-  setListUrl: () => {},
+  setListUrl: () => { },
   showSearch: true,
 })
 
@@ -72,7 +73,7 @@ const Component: FC<ComponentProps> = ({
   const [importToken, setImportToken] = useState<Token | undefined>()
   const [importList, setImportList] = useState<TokenList | undefined>()
   const [listUrl, setListUrl] = useState<string | undefined>()
-
+  const { chainId } = useActiveWeb3React()
   const handleCurrencySelect = useCallback(
     (currency: Currency) => {
       onCurrencySelect(currency)
@@ -164,8 +165,12 @@ interface CurrencySearchModalControlledProps extends Omit<ComponentProps, 'onDis
 }
 
 const CurrencySearchModalControlled: FC<CurrencySearchModalControlledProps> = ({ open, onDismiss, ...props }) => {
+  const { chainId } = useActiveWeb3React()
+
   return (
-    <HeadlessUiModal.Controlled isOpen={open} onDismiss={onDismiss}>
+    <HeadlessUiModal.Controlled isOpen={open}
+      chainId={chainId}
+      onDismiss={onDismiss}>
       <Component {...props} onDismiss={onDismiss} />
     </HeadlessUiModal.Controlled>
   )

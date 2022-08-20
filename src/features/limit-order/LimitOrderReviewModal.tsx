@@ -13,6 +13,7 @@ import { useAppDispatch } from 'state/hooks'
 import { setLimitOrderShowReview } from 'state/limit-order/actions'
 import { useLimitOrderState } from 'state/limit-order/hooks'
 import React, { FC, useCallback, useMemo, useState } from 'react'
+import { useActiveWeb3React } from 'services/web3'
 
 interface LimitOrderReviewModal {
   trade?: Trade<Currency, Currency, TradeType>
@@ -25,6 +26,7 @@ interface LimitOrderReviewModal {
 
 const LimitOrderReviewModal: FC<LimitOrderReviewModal> = ({ parsedAmounts, trade, limitPrice }) => {
   const [inverted, setInverted] = useState(false)
+  const { chainId } = useActiveWeb3React()
   const { showReview, orderExpiration, recipient, attemptingTxn } = useLimitOrderState()
   const dispatch = useAppDispatch()
   const { i18n } = useLingui()
@@ -51,6 +53,7 @@ const LimitOrderReviewModal: FC<LimitOrderReviewModal> = ({ parsedAmounts, trade
   return (
     <HeadlessUiModal.Controlled
       isOpen={showReview}
+      chainId={chainId}
       onDismiss={() => dispatch(setLimitOrderShowReview(false))}
       maxWidth="sm"
     >

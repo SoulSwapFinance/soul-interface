@@ -205,9 +205,6 @@ msgstr "Avg. APY"
 msgid "BOND"
 msgstr "BOND"
 
-msgid "BORROW"
-msgstr "BORROW"
-
 msgid "Balance"
 msgstr "Balance"
 
@@ -551,9 +548,6 @@ msgstr "ENCHANT"
 msgid "EXIT"
 msgstr "EXIT"
 
-msgid "EXPLORE"
-msgstr "EXPLORE"
-
 msgid "Earn"
 msgstr "Earn"
 
@@ -861,14 +855,8 @@ msgstr "Korean"
 msgid "LAUNCH"
 msgstr "LAUNCH"
 
-msgid "LEND"
-msgstr "LEND"
-
 msgid "LIQUIDITY"
 msgstr "LIQUIDITY"
-
-msgid "LUX"
-msgstr "LUX"
 
 msgid "LUXOR"
 msgstr "LUXOR"
@@ -1360,9 +1348,6 @@ msgstr "SELF"
 msgid "SLP"
 msgstr "SLP"
 
-msgid "SOR"
-msgstr "SOR"
-
 msgid "SOR STABLECOIN"
 msgstr "SOR STABLECOIN"
 
@@ -1769,12 +1754,6 @@ msgstr "Utilities"
 
 msgid "Utilized"
 msgstr "Utilized"
-
-msgid "VAULT"
-msgstr "VAULT"
-
-msgid "VOTE"
-msgstr "VOTE"
 
 msgid "Vault"
 msgstr "Vault"

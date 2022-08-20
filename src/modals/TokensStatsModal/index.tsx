@@ -47,6 +47,7 @@ export default function TokenStatsModal(): JSX.Element | null {
   const stakedTvl  = Number(soulPrice) * totalSeance
     
   const soulInfo = useSoulTVL()
+  const { chainId } = useActiveWeb3React() 
 
   let bondsTvl = bondInfo?.reduce((previousValue, currentValue) => {
     return previousValue + currentValue?.tvl
@@ -78,7 +79,9 @@ export default function TokenStatsModal(): JSX.Element | null {
   // if (!chainId) return null
 
   return (
-    <HeadlessUiModal.Controlled isOpen={soulStatsModalOpen}
+    <HeadlessUiModal.Controlled 
+    isOpen={soulStatsModalOpen}
+    chainId={chainId}
       onDismiss={toggleSoulStatsModal}
       maxWidth={'md'}
     >

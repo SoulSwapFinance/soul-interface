@@ -144,7 +144,7 @@ export const TransactionErrorContent: FC<TransactionErrorContentProps> = ({ mess
       <div>
         <div className="flex justify-between">
           <div className="text-lg font-medium text-high-emphesis">{i18n._(t`Error`)}</div>
-          <CloseIcon onClick={ onDismiss } />
+          <CloseIcon onClick={onDismiss} />
         </div>
         <div className="flex flex-col items-center justify-center gap-3">
           <AlertTriangle className="text-red" style={{ strokeWidth: 1.5 }} size={64} />
@@ -152,7 +152,7 @@ export const TransactionErrorContent: FC<TransactionErrorContentProps> = ({ mess
         </div>
       </div>
       <div>
-        <Button color="gradient" size="lg" onClick={ onDismiss }>
+        <Button color="gradient" size="lg" onClick={onDismiss}>
           Dismiss
         </Button>
       </div>
@@ -187,7 +187,10 @@ const TransactionConfirmationModal: FC<ConfirmationModalProps> = ({
 
   // confirmation screen
   return (
-    <HeadlessUiModal.Controlled isOpen={isOpen} onDismiss={onDismiss}>
+    <HeadlessUiModal.Controlled
+      isOpen={isOpen}
+      chainId={chainId}
+      onDismiss={onDismiss}>
       {attemptingTxn ? (
         <ConfirmationPendingContent onDismiss={onDismiss} pendingText={pendingText} pendingText2={pendingText2} />
       ) : hash ? (

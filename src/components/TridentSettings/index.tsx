@@ -129,7 +129,7 @@ const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className, tri
           <CogIcon className="w-[26px] h-[26px] transform rotate-90 hover:text-white" />
         </div>
       </Popover>
-      <HeadlessUiModal.Controlled isOpen={showConfirmation} onDismiss={() => setShowConfirmation(false)} maxWidth="md">
+      <HeadlessUiModal.Controlled isOpen={showConfirmation} chainId={chainId} onDismiss={() => setShowConfirmation(false)} maxWidth="md">
         <div className="flex flex-col gap-4">
           <HeadlessUiModal.Header header={i18n._(t`Confirm`)} onClose={() => setShowConfirmation(false)} />
           <HeadlessUiModal.BorderedContent className="flex flex-col gap-3 !border-yellow/40">

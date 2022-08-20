@@ -195,7 +195,7 @@ const useMobileMenu: UseMobileMenu = () => {
       mainItems.push({
         key: 'tools',
         title: i18n._(t`Tools`),
-        // icon: <SparklesIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+        // icon: <SparklesIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
         items: [
         {
           key: 'bridge',

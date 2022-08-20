@@ -8,6 +8,7 @@ import { Feature } from 'enums'
 import { classNames, featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
 import { useRouter } from 'next/router'
+import { getChainColor } from 'constants/chains'
 
 export interface MenuItemLeaf {
   key: string
@@ -41,7 +42,7 @@ const useMenu: UseMenu = () => {
       key: 'swap',
       title: i18n._(t`Swap`),
       link: '/swap',
-      icon: <SwitchVerticalIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+      icon: <SwitchVerticalIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
     }
 
     // If AMM is enabled, replace swap button with a submenu under trade
@@ -110,7 +111,7 @@ const useMenu: UseMenu = () => {
       const farmItems = {
         key: 'farm',
         title: i18n._(t`Farm`),
-        icon: <CurrencyDollarIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : "text-dark-600")} />,
+        icon: <CurrencyDollarIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
         link: '/farm'
         // items: [
         //   {
@@ -147,7 +148,7 @@ const useMenu: UseMenu = () => {
       const mintItems = {
         key: 'mint',
         title: i18n._(t`Mint`),
-        icon: <CurrencyDollarIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : "text-dark-600")} />,
+        icon: <CurrencyDollarIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
         link: '/bonds'
       }
       mainItems.push(mintItems)
@@ -157,7 +158,7 @@ const useMenu: UseMenu = () => {
       const learnItems = {
         key: 'Luxor',
         title: i18n._(t`Bond`),
-        icon: <SunIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : "text-dark-600")} />,
+        icon: <SunIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
         link: '/luxor/bonds'
         // items: [
         //   {
@@ -190,7 +191,7 @@ const useMenu: UseMenu = () => {
       //   mainItems.push({
       //     key: 'lending',
       //     title: i18n._(t`Lend`),
-      //     icon: <SwitchVerticalIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : "text-dark-600")} />,
+      //     icon: <SwitchVerticalIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
       //     items: [
       //       {
       //         key: 'markets',
@@ -231,7 +232,7 @@ const useMenu: UseMenu = () => {
       let analyticsMenu: MenuItem = {
         key: 'analytics',
         title: i18n._(t`Analyze`),
-        icon: <TrendingUpIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+        icon: <TrendingUpIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
         link: '/info'
         // items: [
         //   {
@@ -263,7 +264,7 @@ const useMenu: UseMenu = () => {
       mainItems.push({
         key: 'socials',
         title: i18n._(t`Follow`),
-        icon: <UserGroupIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+        icon: <UserGroupIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
             link: `https://twitter.com/${isLuxor ? 'LuxorMoney' : 'SoulSwapFinance'}`,
         // items: [
         //   {

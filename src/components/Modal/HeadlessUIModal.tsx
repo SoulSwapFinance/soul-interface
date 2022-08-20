@@ -24,16 +24,19 @@ const MAX_WIDTH_CLASS_MAPPING = {
 }
 
 import useDesktopMediaQuery from '../../hooks/useDesktopMediaQuery'
+import { getChainColorCode } from 'constants/chains'
+import { useActiveWeb3React } from 'services/web3'
 
 interface TriggerProps {
   open: boolean
+  chainId: number
   setOpen: (x: boolean) => void
   onClick: () => void
 }
 
 interface Props {
   children?: any
-  trigger?: (({ open, onClick, setOpen }: TriggerProps) => ReactNode) | ReactNode
+  trigger?: (({ open, chainId, onClick, setOpen }: TriggerProps) => ReactNode) | ReactNode
 }
 
 type HeadlessUiModalType<P> = FC<P> & {
@@ -49,6 +52,7 @@ type HeadlessUiModalType<P> = FC<P> & {
 }
 const HeadlessUiModal: HeadlessUiModalType<Props> = ({ children: childrenProp, trigger: triggerProp }) => {
   const [open, setOpen] = useState(false)
+  const { chainId } = useActiveWeb3React()
 
   const onClick = useCallback(() => {
     setOpen(true)
@@ -59,7 +63,7 @@ const HeadlessUiModal: HeadlessUiModalType<Props> = ({ children: childrenProp, t
   const trigger = useMemo(
     () =>
       typeof triggerProp === 'function'
-        ? triggerProp({ onClick, open, setOpen })
+        ? triggerProp({ onClick, chainId, open, setOpen })
         : isValidElement(triggerProp)
         ? cloneElement(triggerProp, { onClick })
         : null,
@@ -77,7 +81,7 @@ const HeadlessUiModal: HeadlessUiModalType<Props> = ({ children: childrenProp, t
   return (
     <>
       {trigger && trigger}
-      <HeadlessUiModalControlled isOpen={open} onDismiss={() => setOpen(false)}>
+      <HeadlessUiModalControlled isOpen={open} chainId={chainId} onDismiss={() => setOpen(false)}>
         {children}
       </HeadlessUiModalControlled>
     </>
@@ -86,6 +90,7 @@ const HeadlessUiModal: HeadlessUiModalType<Props> = ({ children: childrenProp, t
 
 interface ControlledModalProps {
   isOpen: boolean
+  chainId: number
   onDismiss: () => void
   afterLeave?: () => void
   children?: React.ReactNode
@@ -96,6 +101,7 @@ interface ControlledModalProps {
 
 const HeadlessUiModalControlled: FC<ControlledModalProps> = ({
   isOpen,
+  chainId,
   onDismiss,
   afterLeave,
   children,
@@ -143,7 +149,7 @@ const HeadlessUiModalControlled: FC<ControlledModalProps> = ({
           >
             <div
               className={classNames(
-                transparent ? '' : 'bg-black border border-dark-800',
+                transparent ? '' : `bg-black border border-${getChainColorCode(chainId)}`,
                 isDesktop ? MAX_WIDTH_CLASS_MAPPING[maxWidth] : '',
                 isDesktop ? `w-full` : 'w-[85vw] max-w-[45vh]  max-h-[85vh] overflow-y-auto mx-auto',
                 // isDesktop ? `w-full` : 'w-[85vw] max-h-[85vh] overflow-y-auto mx-auto',
