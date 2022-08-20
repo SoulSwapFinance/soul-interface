@@ -360,11 +360,11 @@ export default function Add() {
           content="Add liquidity to the Soul AMM to enable gas optimised and low slippage trades across countless networks"
         />
       </Head>
-      <SwapHeader
+      {/* <SwapHeader
         inputCurrency={currencyA}
         outputCurrency={currencyB}
         allowedSlippage={allowedSlippage}
-      />
+      /> */}
       {/* <SoulLogo /> */}
       <div className="mb-4" />
       <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
@@ -374,7 +374,7 @@ export default function Add() {
           <SwapHeader
             inputCurrency={currencies[Field.CURRENCY_A]}
             outputCurrency={currencies[Field.CURRENCY_B]}
-          // allowedSlippage={allowedSlippage}
+            allowedSlippage={allowedSlippage}
           />
           <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
           <TransactionConfirmationModal

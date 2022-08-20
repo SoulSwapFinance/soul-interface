@@ -2,7 +2,7 @@ import { Popover, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/outline'
 import { MenuItem, MenuItemLeaf, MenuItemNode } from 'components/Header/useMenu'
 import Typography from 'components/Typography'
-import { getChainColor } from 'constants/chains'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 import { classNames } from 'functions'
 import useDesktopHeaderMediaQuery, { useTouchDeviceMediaQuery } from 'hooks/useDesktopHeaderMediaQuery'
 import Link from 'next/link'
@@ -45,7 +45,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
         weight={700}
         variant="sm"
         className={classNames(
-          router.asPath === link ? 'text-white' : '',
+          router.asPath === link ? `text-[${getChainColor(chainId)}]` : '',
           isLuxor ? 'hover:text-yellow' : `hover:text-[${getChainColor(chainId)}]`, 'font-bold py-5 px-2 rounded flex gap-3'
         )}
       >
@@ -88,7 +88,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
               <Popover.Panel className="z-10 w-full justify-center absolute w-24 sm:w-32 translate-y-[-10px] sm:translate-x-[-10px] translate-x-[-2px]">
                 <div
                   className={classNames(
-                    'shadow-md shadow-black/40 border', isLuxor ? 'border-yellow' : 'border-dark-600', 'rounded overflow-hidden',
+                    'shadow-md shadow-black/40 border', isLuxor ? 'border-yellow' : `border-${getChainColorCode(chainId)}`, 'rounded overflow-hidden',
                     !touchDevice
                       ? "backdrop-blur-fallback before:z-[-1] before:rounded before:absolute before:w-full before:h-full before:content-[''] before:backdrop-blur-[20px] bg-dark-900 bg-opacity-[0.02]"
                       : 'bg-dark-800 inset-0'
@@ -103,7 +103,9 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
                           onClick={() => {
                             router.push(leaf.link).then(() => buttonRef?.current?.click())
                           }}
-                          className="relative px-3 text-center py-2 m-1 rounded-lg hover:cursor-pointer hover:text-white hover:bg-white/10"
+                          className={classNames("border relative px-3 text-center py-2 m-1 rounded-lg hover:cursor-pointer hover:text-white hover:bg-white/10",
+                          `border-${getChainColorCode(chainId)}`
+                          )}
                         >
                           {leaf.title}
                         </Typography>

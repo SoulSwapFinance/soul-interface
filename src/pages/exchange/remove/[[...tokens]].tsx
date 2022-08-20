@@ -728,11 +728,11 @@ export default function Remove() {
         <title>{i18n._(t`Remove Liquidity`)} | Soul </title>
         <meta key="description" name="description" content={i18n._(t`Remove liquidity of Soul`)} />
       </Head>
-      <SwapHeader
+      {/* <SwapHeader
         inputCurrency={currencyA}
         outputCurrency={currencyB}
         allowedSlippage={allowedSlippage}
-      />
+      /> */}
       <div className="mb-4" />
 
       <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
@@ -742,7 +742,7 @@ export default function Remove() {
             <SwapHeader
               inputCurrency={currencyA}
               outputCurrency={currencyB}
-            // allowedSlippage={allowedSlippage}
+              allowedSlippage={allowedSlippage}
             />
             {/* <Header input={currencyA} output={currencyB} allowedSlippage={allowedSlippage} /> */}
             <div>

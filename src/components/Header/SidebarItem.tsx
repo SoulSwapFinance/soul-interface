@@ -2,11 +2,13 @@ import { Popover, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/outline'
 import { BarItem, BarItemLeaf, BarItemNode } from 'components/Header/useBar'
 import Typography from 'components/Typography'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 import { classNames } from 'functions'
 import useDesktopHeaderMediaQuery, { useTouchDeviceMediaQuery } from 'hooks/useDesktopHeaderMediaQuery'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { FC, Fragment, useCallback, useRef } from 'react'
+import { useActiveWeb3React } from 'services/web3'
 import styled from 'styled-components'
 
 // const HideOnMobile = styled.div`
@@ -21,10 +23,13 @@ interface SidebarItem {
 
 export const SidebarItem: FC<SidebarItem> = ({ node }) => {
   const router = useRouter()
+  const { chainId } = useActiveWeb3React()
   const buttonRef = useRef<HTMLButtonElement>(null)
   const isLuxor = router.asPath.startsWith('/luxor')
   const isDesktop = useDesktopHeaderMediaQuery()
   const touchDevice = useTouchDeviceMediaQuery()
+  const { link } = node as BarItemLeaf
+  const isOpen = router.asPath === link
 
   const handleToggle = useCallback((open, type) => {
     if (!open && type === 'enter') {
@@ -35,14 +40,15 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
   }, [])
 
   if (node && node.hasOwnProperty('link')) {
-    const { link } = node as BarItemLeaf
+    // const { link } = node as BarItemLeaf
+    // const isOpen = router.asPath === link
     return (
       <Typography
         onClick={() => router.push(link)}
         weight={700}
         variant="sm"
         className={classNames(
-          router.asPath === link ? 'text-white' : '',
+          // isOpen ? `border rounded rounded-3xl mr-18 border-${getChainColorCode(chainId)}` : '',
           'hover:text-white font-bold py-5 px-2 rounded flex gap-3'
         )}
       >
@@ -65,11 +71,13 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
             <Typography
               weight={700}
               variant="sm"
-              className={classNames(open && !isLuxor && 'text-dark-600', open && isLuxor && 'text-yellow', 'font-bold py-5 px-2 rounded flex gap-3 items-center')}
+              className={classNames(
+                // isLuxor && !isOpen ? 'text-yellow' : !isOpen && `text-[${getChainColor(chainId)}]`, 
+              'font-bold py-5 px-2 rounded flex gap-3 items-center')}
             >
               {node.icon}
               {node.title}
-              <ChevronDownIcon strokeWidth={5} width={12} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />
+              <ChevronDownIcon strokeWidth={5} width={12} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />
             </Typography>
           </Popover.Button>
           {node.hasOwnProperty('items') && (

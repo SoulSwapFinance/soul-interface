@@ -39,66 +39,31 @@ const useMenu: UseMenu = () => {
     // By default show just a swap button
     let tradeMenu: MenuItem = {
       key: 'swap',
-      title: i18n._(t`Exchange`),
+      title: i18n._(t`Swap`),
       link: '/swap',
       icon: <SwitchVerticalIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
     }
-  
- // If AMM is enabled, replace swap button with a submenu under trade
- /* if (featureEnabled(Feature.AMM, chainId)) {
-  tradeMenu = {
-    key: 'exchange',
-    title: i18n._(t`Exchange`),
-    icon: <SwitchVerticalIcon width={20} />,
-    items: [
-      {
-        key: 'swap',
-        title: i18n._(t`Swap`),
-        link: '/swap',
-      },
-      {
-        key: 'bridge',
-        title: i18n._(t`Bridge`),
-        link: '/bridge',
-      },
-    ],
-  }
-} */
-    // If limit orders is enabled, replace swap button with a submenu under trade
-    if (featureEnabled(Feature.TRIDENT, chainId)) {
-      tradeMenu = {
-        key: 'trade',
-        title: i18n._(t`Exchange`),
-        icon: <SwitchVerticalIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
-        items: [
-          {
-            key: 'swap',
-            title: i18n._(t`Swap`),
-            link: '/swap',
-          },
-          {
-            key: 'pool',
-            title: i18n._(t`Pool`),
-            link: '/pool',
-          },
-          {
-            key: 'bridge',
-            title: i18n._(t`Bridge`),
-            link: '/bridge',
-          },
-          {
-            key: 'limit',
-            title: i18n._(t`Limit`),
-            link: '/limit',
-          },
-          {
-            key: 'margin',
-            title: i18n._(t`Margin`),
-            link: '/margin',
-          },
-        ],
-      }
-    }
+
+    // If AMM is enabled, replace swap button with a submenu under trade
+    /* if (featureEnabled(Feature.AMM, chainId)) {
+     tradeMenu = {
+       key: 'exchange',
+       title: i18n._(t`Exchange`),
+       icon: <SwitchVerticalIcon width={20} />,
+       items: [
+         {
+           key: 'swap',
+           title: i18n._(t`Swap`),
+           link: '/swap',
+         },
+         {
+           key: 'bridge',
+           title: i18n._(t`Bridge`),
+           link: '/bridge',
+         },
+       ],
+     }
+   } */
 
     const poolMenu = [
       {
@@ -114,7 +79,7 @@ const useMenu: UseMenu = () => {
       {
         key: 'remove-liquidity',
         title: i18n._(t`Remove`),
-      link: `/remove/FTM/${SOUL_ADDRESS[chainId]}`,
+        link: `/remove/FTM/${SOUL_ADDRESS[chainId]}`,
       },
       {
         key: 'import',
@@ -143,189 +108,200 @@ const useMenu: UseMenu = () => {
 
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const farmItems = {
-        key: 'SoulSwap',
-        title: i18n._(t`Soul`),
+        key: 'farm',
+        title: i18n._(t`Farm`),
         icon: <CurrencyDollarIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : "text-dark-600")} />,
-        items: [
-          {
-            key: 'soul-dashboard',
-            title: i18n._(t`Overview`),
-            link: '/soul/dashboard',
-          },
-          {
-            key: 'earn',
-            title: i18n._(t`Rewards`),
-            link: '/explore'
-          },
-          {
-            key: 'farm',
-            title: i18n._(t`Summoner`),
-            link: '/farm'
-          },
-          {
-            key: 'pool',
-            title: i18n._(t`Liquidity`),
-            link: '/pool',
-          },
-          {
-            key: 'soul-docs',
-            title: i18n._(t`Tutorials`),
-            link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
-          },
-        ],
+        link: '/farm'
+        // items: [
+        //   {
+        //     key: 'soul-dashboard',
+        //     title: i18n._(t`Overview`),
+        //     link: '/soul/dashboard',
+        //   },
+        //   {
+        //     key: 'earn',
+        //     title: i18n._(t`Rewards`),
+        //     link: '/explore'
+        //   },
+        //   {
+        //     key: 'farm',
+        //     title: i18n._(t`Summoner`),
+        //     link: '/farm'
+        //   },
+        //   {
+        //     key: 'pool',
+        //     title: i18n._(t`Liquidity`),
+        //     link: '/pool',
+        //   },
+        //   {
+        //     key: 'soul-docs',
+        //     title: i18n._(t`Tutorials`),
+        //     link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
+        //   },
+        // ],
       }
       mainItems.push(farmItems)
     }
 
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
-      const learnItems = {
-        key: 'Luxor',
-        title: i18n._(t`Luxor`),
-        icon: <SunIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : "text-dark-600")} />,
-        items: [
-          {
-            key: 'luxor-dashboard',
-            title: i18n._(t`Overview`),
-            link: '/luxor/dashboard',
-          },
-          {
-            key: 'earn',
-            title: i18n._(t`Explore`),
-            link: '/explore',
-          },
-          {
-            key: 'sor',
-            title: i18n._(t`Stable`),
-            link: '/luxor/sor',
-          },
-          {
-            key: 'lux-docs',
-            title: i18n._(t`Tutorials`),
-            link: 'https://docs.luxor.money',
-          },
-        ],
+      const mintItems = {
+        key: 'mint',
+        title: i18n._(t`Mint`),
+        icon: <CurrencyDollarIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : "text-dark-600")} />,
+        link: '/bonds'
       }
-      mainItems.push(learnItems)
-      }
-      
-
-    if (featureEnabled(Feature.UNDERWORLD, chainId))
-     {
-      mainItems.push({
-        key: 'lending',
-        title: i18n._(t`Lend`),
-        icon: <SwitchVerticalIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : "text-dark-600")} />,
-        items: [
-          {
-            key: 'markets',
-            title: i18n._(t`Markets`),
-            link: '/underworld',
-           },
-          {
-            key: 'lend',
-            title: i18n._(t`Lend`),
-            link: '/lend',
-           },
-          {
-            key: 'borrow',
-            title: i18n._(t`Borrow`),
-            link: '/borrow',
-           },
-          {
-            key: 'underworld-farms',
-            title: i18n._(t`Farms`),
-            link: '/summoner',
-          },
-          {
-            key: 'balances',
-            title: 'Coffinbox',
-            link: '/balances',
-          },
-          {
-            key: 'borrow-docs',
-            title: i18n._(t`Tutorials`),
-            link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
-          },
-        ],
-      })
-      
+      mainItems.push(mintItems)
     }
 
-    let analyticsMenu: MenuItem = {
-      key: 'analytics',
-      title: i18n._(t`Data`),
-      icon: <TrendingUpIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
-      items: [
-        {
-          key: 'dashboard',
-          title: 'Overview',
-          link: '/analytics/dashboard',
-        },
-        {
-          key: 'wallet',
-          title: 'Wallet',
-          link: '/balances',
-        },
-        {
-          key: 'tokens',
-          title: 'Tokens',
-          link: '/analytics/tokens',
-        },
-        {
-          key: 'pairs',
-          title: 'Pairs',
-          link: '/analytics/pairs',
-        },
-      ],
+    if (featureEnabled(Feature.LUXOR, chainId)) {
+      const learnItems = {
+        key: 'Luxor',
+        title: i18n._(t`Bond`),
+        icon: <SunIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : "text-dark-600")} />,
+        link: '/luxor/bonds'
+        // items: [
+        //   {
+        //     key: 'luxor-dashboard',
+        //     title: i18n._(t`Overview`),
+        //     link: '/luxor/dashboard',
+        //   },
+        //   {
+        //     key: 'earn',
+        //     title: i18n._(t`Explore`),
+        //     link: '/explore',
+        //   },
+        //   {
+        //     key: 'sor',
+        //     title: i18n._(t`Stable`),
+        //     link: '/luxor/sor',
+        //   },
+        //   {
+        //     key: 'lux-docs',
+        //     title: i18n._(t`Tutorials`),
+        //     link: 'https://docs.luxor.money',
+        //   },
+        // ],
+      }
+      mainItems.push(learnItems)
+    }
+
+
+    if (featureEnabled(Feature.UNDERWORLD, chainId)) {
+      //   mainItems.push({
+      //     key: 'lending',
+      //     title: i18n._(t`Lend`),
+      //     icon: <SwitchVerticalIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : "text-dark-600")} />,
+      //     items: [
+      //       {
+      //         key: 'markets',
+      //         title: i18n._(t`Markets`),
+      //         link: '/underworld',
+      //        },
+      //       {
+      //         key: 'lend',
+      //         title: i18n._(t`Lend`),
+      //         link: '/lend',
+      //        },
+      //       {
+      //         key: 'borrow',
+      //         title: i18n._(t`Borrow`),
+      //         link: '/borrow',
+      //        },
+      //       {
+      //         key: 'underworld-farms',
+      //         title: i18n._(t`Farms`),
+      //         link: '/summoner',
+      //       },
+      //       {
+      //         key: 'balances',
+      //         title: 'Coffinbox',
+      //         link: '/balances',
+      //       },
+      //       {
+      //         key: 'borrow-docs',
+      //         title: i18n._(t`Tutorials`),
+      //         link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
+      //       },
+      //     ],
+      //   })
+
     }
 
     if (featureEnabled(Feature.ANALYTICS, chainId)) {
+      let analyticsMenu: MenuItem = {
+        key: 'analytics',
+        title: i18n._(t`Analyze`),
+        icon: <TrendingUpIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+        link: '/info'
+        // items: [
+        //   {
+        //     key: 'dashboard',
+        //     title: 'Overview',
+        //     link: '/analytics/dashboard',
+        //   },
+        //   {
+        //     key: 'wallet',
+        //     title: 'Wallet',
+        //     link: '/balances',
+        //   },
+        //   {
+        //     key: 'tokens',
+        //     title: 'Tokens',
+        //     link: '/analytics/tokens',
+        //   },
+        //   {
+        //     key: 'pairs',
+        //     title: 'Pairs',
+        //     link: '/analytics/pairs',
+        //   },
+        // ],
+      }
       mainItems.push(analyticsMenu)
     }
 
-    if (featureEnabled(Feature.AMM, chainId))
-    {
-     mainItems.push({
-       key: 'socials',
-       title: i18n._(t`Chat`),
-       icon: <UserGroupIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
-       items: [
-         {
-           key: 'discord',
-           title: 'Discord',
-           link: 'https://discord.com/invite/DQjChB6Wa6',
-         },
-         {
-           key: 'telegram',
-           title: 'Telegram',
-           link: 'https://t.me/SoulSwapDeFi',
-         },
-         {
-           key: 'twitter',
-           title: 'Twitter',
-           link: `https://twitter.com/${isLuxor ? 'LuxorMoney' : 'SoulSwapFinance' }`,
-         },
-         {
-          key: 'feedback',
-          title: 'Feedback',
-          link: '/board',
-          // link: 'https://soulswap.nolt.io',
-        },
-         {
-           key: 'forum',
-           title: 'Forum',
-           link: 'https://forum.soulswap.finance',
-         },
-         {
-           key: 'medium',
-           title: 'Medium',
-           link: 'https://soulswapfinance.medium.com',
-         },
-       ],
-     })
-     
-   }
-    
+    if (featureEnabled(Feature.AMM, chainId)) {
+      mainItems.push({
+        key: 'socials',
+        title: i18n._(t`Follow`),
+        icon: <UserGroupIcon width={20} className={classNames(isLuxor ? "text-yellow" : "text-dark-600")} />,
+            link: `https://twitter.com/${isLuxor ? 'LuxorMoney' : 'SoulSwapFinance'}`,
+        // items: [
+        //   {
+        //     key: 'discord',
+        //     title: 'Discord',
+        //     link: 'https://discord.com/invite/DQjChB6Wa6',
+        //   },
+        //   {
+        //     key: 'telegram',
+        //     title: 'Telegram',
+        //     link: 'https://t.me/SoulSwapDeFi',
+        //   },
+        //   {
+        //     key: 'twitter',
+        //     title: 'Twitter',
+        //     link: `https://twitter.com/${isLuxor ? 'LuxorMoney' : 'SoulSwapFinance'}`,
+        //   },
+        //   {
+        //     key: 'feedback',
+        //     title: 'Feedback',
+        //     link: '/board',
+        //     // link: 'https://soulswap.nolt.io',
+        //   },
+        //   {
+        //     key: 'forum',
+        //     title: 'Forum',
+        //     link: 'https://forum.soulswap.finance',
+        //   },
+        //   {
+        //     key: 'medium',
+        //     title: 'Medium',
+        //     link: 'https://soulswapfinance.medium.com',
+        //   },
+        // ],
+      })
+
+    }
+
     return mainItems.filter((el) => Object.keys(el).length > 0)
   }, [chainId, i18n])
 }
