@@ -2,7 +2,6 @@ import { Currency, Percent } from '../../sdk'
 import React, { FC, useState } from 'react'
 
 // import Gas from '../../components/Gas'
-// import MyOrders from '../limit-order/MyOrders'
 import NavLink from '../../components/NavLink'
 // import Settings from '../../components/Settings'
 // import { currencyId } from '../../functions'
@@ -33,7 +32,6 @@ const AnalyticsHeader: FC<AnalyticsHeaderProps> = ({ input, output, allowedSlipp
   // const router = useRouter()
   // const [animateWallet, setAnimateWallet] = useState(false)
   // const isRemove = router.asPath.startsWith('/remove')
-  // const isLimitOrder = router.asPath.startsWith('/limit-order')
 
   return (
     <div className="flex items-center justify-center mb-6 space-x-3">

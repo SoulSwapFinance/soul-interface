@@ -37,7 +37,7 @@ export default function CrossChainTab({ placeholderSlippage }: { placeholderSlip
 
   return (
     <div
-      className="items-center justify-end w-20 h-8 rounded cursor-pointer"
+      className="items-center justify-end sm:w-20 w-16 h-8 rounded cursor-pointer"
       onClick={toggle}
       id="open-settings-dialog-button"
     >

@@ -117,14 +117,15 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
       </div>
         {
           isSwap && chainId != 250 &&
-          <div className={'flex justify-end rounded'}>
+          <div className={'flex justify-end rounded mr-4'}>
             <CrossChainMode />
           </div>
         }
         
         {
           isSwap && chainId == 250 &&
-          <div className={'flex flex-cols-2 gap-8 justify-end rounded'}>
+          <div className={'flex flex-cols-2 sm:gap-8 gap-6 mr-4 justify-end rounded'}>
+            <CrossChainMode />
             <Settings />
           </div>
         }

@@ -55,18 +55,6 @@ msgstr "0.055% of each swap goes to burning SOUL."
 msgid "0.25% of each swap goes to liquidity providers."
 msgstr "0.25% of each swap goes to liquidity providers."
 
-msgid "1 Hour"
-msgstr "1 Hour"
-
-msgid "1 Week"
-msgstr "1 Week"
-
-msgid "24 Hours"
-msgstr "24 Hours"
-
-msgid "30 Days"
-msgstr "30 Days"
-
 msgid "50%"
 msgstr "50%"
 
@@ -156,9 +144,6 @@ msgstr "Approve"
 
 msgid "Approve CoffinBox"
 msgstr "Approve CoffinBox"
-
-msgid "Approve Master Contract"
-msgstr "Approve Master Contract"
 
 msgid "Approve Underworld"
 msgstr "Approve Underworld"
@@ -277,9 +262,6 @@ msgstr "Calculated based on current rates. Rates are estimates for your convenie
 msgid "Calculator"
 msgstr "Calculator"
 
-msgid "Cancel Order"
-msgstr "Cancel Order"
-
 msgid "Cancelled"
 msgstr "Cancelled"
 
@@ -374,12 +356,6 @@ msgstr "Confirm Deposit"
 msgid "Confirm Enchantment"
 msgstr "Confirm Enchantment"
 
-msgid "Confirm Limit Order"
-msgstr "Confirm Limit Order"
-
-msgid "Confirm Order"
-msgstr "Confirm Order"
-
 msgid "Confirm Removal"
 msgstr "Confirm Removal"
 
@@ -428,14 +404,8 @@ msgstr "Copied"
 msgid "Copy"
 msgstr "Copy"
 
-msgid "Create Limit Order"
-msgstr "Create Limit Order"
-
 msgid "Create Lock"
 msgstr "Create Lock"
-
-msgid "Create Order"
-msgstr "Create Order"
 
 msgid "Create Pair"
 msgstr "Create Pair"
@@ -527,9 +497,6 @@ msgstr "Disable multihops"
 msgid "Disconnect"
 msgstr "Disconnect"
 
-msgid "Do not show again"
-msgstr "Do not show again"
-
 msgid "Documentation"
 msgstr "Documentation"
 
@@ -605,12 +572,6 @@ msgid ""
 msgstr ""
 "Expert mode turns off the confirm transaction prompt and allows high slippage trades\n"
 "that often result in bad rates and lost funds."
-
-msgid "Expiration"
-msgstr "Expiration"
-
-msgid "Expiration is the time at which the order will become invalid"
-msgstr "Expiration is the time at which the order will become invalid"
 
 msgid "Explore"
 msgstr "Explore"
@@ -727,9 +688,6 @@ msgstr "Historical Total Locked: Fetching Total"
 msgid "Historical Total Locked: {0} SOUL"
 msgstr "Historical Total Locked: {0} SOUL"
 
-msgid "History"
-msgstr "History"
-
 msgid "How to Participate?"
 msgstr "How to Participate?"
 
@@ -763,14 +721,8 @@ msgstr "Import at your own risk"
 msgid "Import token"
 msgstr "Import token"
 
-msgid "In Coffin:"
-msgstr "In Coffin:"
-
 msgid "In Wallet"
 msgstr "In Wallet"
-
-msgid "In Wallet:"
-msgstr "In Wallet:"
 
 msgid "Inactive"
 msgstr "Inactive"
@@ -811,20 +763,6 @@ msgstr "Invalid pair"
 msgid "Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency."
 msgstr "Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency."
 
-msgid ""
-"It seems like you have open orders while the limit order master contract is not approved. Please make\n"
-"sure you approved the limit order master contract or the order will not execute"
-msgstr ""
-"It seems like you have open orders while the limit order master contract is not approved. Please make\n"
-"sure you approved the limit order master contract or the order will not execute"
-
-msgid ""
-"It seems like you have open orders while the limit order master contract is not yet approved. Please make\n"
-"sure you have approved the limit order master contract or the order will not execute"
-msgstr ""
-"It seems like you have open orders while the limit order master contract is not yet approved. Please make\n"
-"sure you have approved the limit order master contract or the order will not execute"
-
 msgid "Italian"
 msgstr "Italian"
 
@@ -863,12 +801,6 @@ msgstr "Lent"
 
 msgid "Limit"
 msgstr "Limit"
-
-msgid "Limit Orders"
-msgstr "Limit Orders"
-
-msgid "Limit orders use funds from CoffinBox, to create a limit order depositing into CoffinBox is required."
-msgstr "Limit orders use funds from CoffinBox, to create a limit order depositing into CoffinBox is required."
 
 msgid "Links"
 msgstr "Links"
@@ -1020,9 +952,6 @@ msgstr "No Route Found"
 msgid "No liquidity found to do swap"
 msgstr "No liquidity found to do swap"
 
-msgid "No open orders"
-msgstr "No open orders"
-
 msgid "No pool found"
 msgstr "No pool found"
 
@@ -1056,14 +985,8 @@ msgstr "Oops!"
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 msgstr "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 
-msgid "Open orders"
-msgstr "Open orders"
-
 msgid "Oracle"
 msgstr "Oracle"
-
-msgid "Orders"
-msgstr "Orders"
 
 msgid "Our Resources."
 msgstr "Our Resources."
@@ -1099,14 +1022,8 @@ msgstr "Pair your SOUL and add to Bonds for more SOUL at record-high returns."
 msgid "Pair your SOUL with FTM and add to Farms for more SOUL and an enhanced AURA."
 msgstr "Pair your SOUL with FTM and add to Farms for more SOUL and an enhanced AURA."
 
-msgid "Pay"
-msgstr "Pay"
-
 msgid "Pay from"
 msgstr "Pay from"
-
-msgid "Pay from:"
-msgstr "Pay from:"
 
 msgid "Pending"
 msgstr "Pending"
@@ -1114,17 +1031,11 @@ msgstr "Pending"
 msgid "Pending Treasury Transfer"
 msgstr "Pending Treasury Transfer"
 
-msgid "Place a limit order or check the status of your past orders"
-msgstr "Place a limit order or check the status of your past orders"
-
 msgid "Please connect to the appropriate network."
 msgstr "Please connect to the appropriate network."
 
 msgid "Please make sure your {0} balance is sufficient to withdraw and then try again."
 msgstr "Please make sure your {0} balance is sufficient to withdraw and then try again."
-
-msgid "Please note that after order execution, your tokens will be received in your CoffinBox"
-msgstr "Please note that after order execution, your tokens will be received in your CoffinBox"
 
 msgid "Please note the recipient address is different from the connected wallet address."
 msgstr "Please note the recipient address is different from the connected wallet address."
@@ -1271,9 +1182,6 @@ msgstr "Resources"
 msgid "Restricts swaps to direct pairs only."
 msgstr "Restricts swaps to direct pairs only."
 
-msgid "Review Limit Order"
-msgstr "Review Limit Order"
-
 msgid "Rewards"
 msgstr "Rewards"
 
@@ -1395,9 +1303,6 @@ msgstr "Slippage tolerance"
 
 msgid "Socials"
 msgstr "Socials"
-
-msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click 'Approve CoffinBox' again for approving using the fallback method"
-msgstr "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click 'Approve CoffinBox' again for approving using the fallback method"
 
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
@@ -1749,12 +1654,6 @@ msgstr "View your Dashboard."
 msgid "View your Trades."
 msgstr "View your Trades."
 
-msgid "View {0} Open Order"
-msgstr "View {0} Open Order"
-
-msgid "View {0} Open Orders"
-msgstr "View {0} Open Orders"
-
 msgid "Vote"
 msgstr "Vote"
 
@@ -1830,9 +1729,6 @@ msgstr "YOURS"
 msgid "Yield Details"
 msgstr "Yield Details"
 
-msgid "You Pay:"
-msgstr "You Pay:"
-
 msgid "You Receive"
 msgstr "You Receive"
 
@@ -1856,12 +1752,6 @@ msgstr "You must unstake first, if you want to remove from your staked position.
 
 msgid "You need to first approve LP tokens and then migrate it"
 msgstr "You need to first approve LP tokens and then migrate it"
-
-msgid "You pay"
-msgstr "You pay"
-
-msgid "You receive"
-msgstr "You receive"
 
 msgid "You'll receive (at least):"
 msgstr "You'll receive (at least):"

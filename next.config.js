@@ -149,14 +149,6 @@ module.exports = withBundleAnalyzer(
           destination: '/exchange/limit',
         },
         {
-          source: '/limit-order',
-          destination: '/exchange/limit',
-        },
-        {
-          source: '/limit-order/:token*',
-          destination: '/exchange/limit-order/:token*',
-        },
-        {
           source: '/open-order',
           destination: '/exchange/open-order',
         },
