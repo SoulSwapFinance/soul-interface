@@ -1,20 +1,20 @@
 import { ChainId, Currency, Percent } from '../../sdk'
 import React, { FC, useState } from 'react'
 
-import Gas from '../../components/Gas'
+// import Gas from '../../components/Gas'
 import MyOrders from '../limit-order/MyOrders'
 import NavLink from '../../components/NavLink'
 import Settings from '../../components/Settings'
 import { currencyId } from '../../functions'
-import { t } from '@lingui/macro'
+// import { t } from '@lingui/macro'
 import { useActiveWeb3React } from 'services/web3'
 import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
-import Image from '../../components/Image'
-import BRIDGE from 'assets/icons/bridge.svg'
-import SWAP from 'assets/icons/exchange.svg'
-import ADD from 'assets/icons/positive.svg'
-import CHART from 'assets/icons/profits.svg'
+// import Image from '../../components/Image'
+// import BRIDGE from 'assets/icons/bridge.svg'
+// import SWAP from 'assets/icons/exchange.svg'
+// import ADD from 'assets/icons/positive.svg'
+// import CHART from 'assets/icons/profits.svg'
 
 const getQuery = (input, output) => {
   if (!input && !output) return
@@ -58,7 +58,7 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
         </NavLink>
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
-          href={`/${!isRemove ? 'add' : 'remove'}${input ? `/${currencyId(input)}` : '/FTM'}${output ? `/${currencyId(output)}` : '/0xe2fb177009ff39f52c0134e8007fa0e4baacbd07'
+          href={`/${!isRemove ? 'add' : 'remove'}${input ? `/${currencyId(input)}` : '/FTM'}${output ? `/${currencyId(output)}` : '/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'
             }`}
         >
           <a className="flex px-4 py-6 items-center justify-center font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">

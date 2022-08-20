@@ -7,7 +7,7 @@ export const BRIDGE_ROUTER_ADDRESS =
 export const ZAPPER_ADDRESS = "0xF0ff07d19f310abab54724a8876Eee71E338c82F";
 export const GELATO_ADDRESS = "0x59e61b95f20e940ac777e88fa2dfa0a6a4c40fa0";
 export const ANYSWAP_ADDRESS = "0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454";
-export const WFTM_ADDRESS = "0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83";
+export const WFTM_ADDRESS = "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83";
 
 // API Anyswap
 export const FTM_ETH = [

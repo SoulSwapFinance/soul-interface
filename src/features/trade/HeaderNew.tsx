@@ -48,7 +48,7 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
         <NavLink
           activeClassName="text-dark-600 border border-dark-600 rounded bg-black"
           href={`/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : '/FTM'}${
-            outputCurrency ? `/${currencyId(outputCurrency)}` : '/0xe2fb177009ff39f52c0134e8007fa0e4baacbd07'
+            outputCurrency ? `/${currencyId(outputCurrency)}` : '/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'
           }`}
         >
           <Typography weight={700} className="text-secondary hover:text-purple p-1">

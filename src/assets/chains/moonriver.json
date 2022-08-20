@@ -6,9 +6,9 @@
     "longName": "Moonriver",
     "color": "#53CBC9",
     "rpc": [
+        "https://rpc.ankr.com/moonbeam",
         "https://rpc.moonriver.moonbeam.network",
-        "https://moonriver.api.onfinality.io/public",
-        "https://rpc.ankr.com/moonbeam"
+        "https://moonriver.api.onfinality.io/public"
     ],
     "explorers": [
         "https://moonriver.moonscan.io/"

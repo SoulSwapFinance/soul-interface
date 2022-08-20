@@ -54,7 +54,7 @@ const HeaderAddModal: FC<HeaderNewProps> = ({ isRemove, inputCurrency, outputCur
           activeClassName="text-high-emphesis"
           href={
             `/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${
-            outputCurrency ? `/${currencyId(outputCurrency)}` : '/0xe2fb177009ff39f52c0134e8007fa0e4baacbd07'
+            outputCurrency ? `/${currencyId(outputCurrency)}` : '/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'
           }`}
         >
           <Typography weight={700} className="text-secondary hover:text-white">

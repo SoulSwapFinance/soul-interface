@@ -27,7 +27,7 @@ export const POOLS: AddressMap = {
   [ChainId.FANTOM]: {
     '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07': {
       id: 0,
-      address: '0xe2fb177009ff39f52c0134e8007fa0e4baacbd07',
+      address: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07',
       token0: {
         id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
         name: 'Soul Power',
@@ -430,7 +430,7 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
       token1: {
-        id: '0xe2fb177009ff39f52c0134e8007fa0e4baacbd07', // SOUL
+        id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
         name: 'Soul Power',
         symbol: 'SOUL',
         decimals: 18,
@@ -790,7 +790,7 @@ export const POOLS: AddressMap = {
     },
     '0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd': {  // DAI-FTM [LEND]
       id: 48, // 420
-      address: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83',
+      address: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
       type: 'underworld',
       token0: {
         id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
@@ -807,7 +807,7 @@ export const POOLS: AddressMap = {
     },
     '0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61': {  // FTM-DAI [LEND]
       id: 49, // 420
-      address: '0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e', // 420
+      address: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // 420
       type: 'underworld',
       token0: {
         id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI

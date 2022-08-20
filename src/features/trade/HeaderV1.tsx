@@ -67,7 +67,7 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
           href={`/${!isRemove ? 'add' : 'remove'}${input ? `/${currencyId(input)}` : '/FTM'}${
-            output ? `/${currencyId(output)}` : '/0xe2fb177009ff39f52c0134e8007fa0e4baacbd07'
+            output ? `/${currencyId(output)}` : '/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'
           }`}
         >
           <a className="flex px-3 items-center justify-center text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
