@@ -94,6 +94,7 @@ const LimitOrder = () => {
         <div className="flex flex-col gap-3">
           <SwapAssetPanel
             error={false}
+            chainId={chainId}
             header={(props) => <SwapAssetPanel.Header {...props} label={i18n._(t`You pay`)} />}
             walletToggle={(props) => (
               <SwapAssetPanel.Switch

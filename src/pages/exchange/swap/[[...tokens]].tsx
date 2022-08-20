@@ -356,6 +356,7 @@ const Swap = () => {
           <SwapHeader inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
           <SwapAssetPanel
             spendFromWallet={true}
+            chainId={chainId}
             header={(props) => (
               <SwapAssetPanel.Header
                 {...props}
@@ -372,7 +373,7 @@ const Swap = () => {
           <div className="flex justify-center -mt-6 -mb-6 z-0">
             <div
               role="button"
-              className="p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-dark-600"
+              className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}`}
               onClick={() => {
                 setApprovalSubmitted(false) // reset 2 step UI for approvals
                 onSwitchTokens()
@@ -383,6 +384,7 @@ const Swap = () => {
           </div>
           <SwapAssetPanel
             spendFromWallet={true}
+            chainId={chainId}
             header={(props) => (
               <SwapAssetPanel.Header
                 {...props}

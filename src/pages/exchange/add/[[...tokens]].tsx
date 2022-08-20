@@ -47,6 +47,7 @@ import { useActiveWeb3React } from 'services/web3'
 // import AssetInput from 'components/AssetInput'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
 import { ArrowDownIcon, PlusIcon } from '@heroicons/react/solid'
+import { getChainColorCode } from 'constants/chains'
 // import SoulLogo from 'components/SoulLogo'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
@@ -398,6 +399,7 @@ export default function Add() {
               )} */}
             <SwapAssetPanel
               spendFromWallet={true}
+              chainId={chainId}
               header={(props) => (
                 <SwapAssetPanel.Header
                   {...props}
@@ -448,7 +450,7 @@ export default function Add() {
               <div className="flex justify-center -mt-8 -mb-4 z-0">
                 <div
                   role="button"
-                  className="p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-dark-600"
+                  className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}`}
                   onClick={() => {
                     // setApprovalSubmitted(false) // reset 2 step UI for approvals
                     // onSwitchTokens()
@@ -475,6 +477,7 @@ export default function Add() {
                 /> */}
               <SwapAssetPanel
                 spendFromWallet={true}
+                chainId={chainId}
                 header={(props) => (
                   <SwapAssetPanel.Header
                     {...props}

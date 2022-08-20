@@ -15,10 +15,12 @@ import { useActiveWeb3React } from 'services/web3'
 import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import CoffinBoxFundingSourceModal from '../add/CoffinBoxFundingSourceModal'
+import { getChainColorCode } from 'constants/chains'
 
 interface SwapAssetPanel {
   error?: boolean
   header: (x) => React.ReactNode
+  chainId: number
   walletToggle?: (x) => React.ReactNode
   currency?: Currency
   currencies?: string[]
@@ -45,10 +47,14 @@ const SwapAssetPanel = ({
   priceImpact,
   priceImpactCss,
   disabled,
+  chainId,
   currencies,
 }: SwapAssetPanel) => {
   return (
-    <div className="rounded-[14px] border border-dark-700 hover:border-dark-600 bg-dark-900 p-3 flex flex-col gap-4">
+    <div className={`rounded-[14px] border border-dark-700
+    hover:border-${getChainColorCode(chainId)}
+    bg-dark-900 
+    p-3 flex flex-col gap-4`}>
       {header({
         disabled,
         onChange,

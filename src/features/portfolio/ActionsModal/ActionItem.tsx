@@ -1,10 +1,16 @@
 import Typography from 'components/Typography'
+import { getChainColorCode } from 'constants/chains'
 import React, { FC, ReactNode } from 'react'
+import { useActiveWeb3React } from 'services/web3'
 
 const ActionItem: FC<{ svg: ReactNode; label: string; onClick?(): void }> = ({ svg, onClick, label }) => {
+  const { chainId } = useActiveWeb3React()
+
   return (
     <div
-      className="border border-dark-700 bg-dark-900 hover:border-dark-600 rounded px-3 py-2.5 w-full cursor-pointer"
+    className={`border border-dark-700 bg-dark-900 rounded px-3 py-2.5 w-full cursor-pointer
+    hover:border-${getChainColorCode(chainId)}
+      `}
       onClick={onClick}
     >
       <div className="flex gap-3 items-center">
