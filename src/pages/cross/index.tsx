@@ -453,28 +453,26 @@ export default function Exchange() {
             </Button>
 
             {trade && showConfirmation == "min" &&
+              <div
+                className={`flex flex-col rounded gap-4 bg-dark-1000 p-3 font-bold w-full space-y-1`}
+              // style={{ backgroundColor: deltaPercent > 20 ? 'black' : toChain?.color}}
+              >
                 <div
-                  className={ `flex flex-col rounded gap-4 bg-dark-1000 p-3 font-bold w-full space-y-1` }
-                // style={{ backgroundColor: deltaPercent > 20 ? 'black' : toChain?.color}}
-                >
-                  <div
-                    className="flex font-bold justify-center text-[#E84142]">
-                    <Typography className={classNames('text-xl font-bold', 'font-bold text-white')} weight={600} fontFamily={'semi-bold'}>
-                      Too Low: Below Minimum Amount
-                    </Typography>
-                  </div>
+                  className="flex font-bold justify-center text-[#E84142]">
+                  <Typography className={classNames('text-xl font-bold', 'font-bold text-white')} weight={600} fontFamily={'semi-bold'}>
+                    Too Low: Below Minimum Amount
+                  </Typography>
                 </div>
-              }
+              </div>
+            }
           </div>
         </Modal>
       }
 
       <Container id="cross-page" maxWidth="2xl" className="space-y-4">
         <DoubleGlowShadowV2>
-          <div className="p-4 mt-4 space-y-4 rounded bg-dark-1000" style={{ zIndex: 1 }}>
-            <div className="px-2">
+          <div className="p-4 px-2 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
               <SwapHeader />
-            </div>
             <SwapLayoutCard>
               {/*  [F] TOKEN SELECTOR */}
               {/*    [F] CHAIN LOGO   */}
@@ -489,11 +487,11 @@ export default function Exchange() {
                   >
                     <div
                       className
-                        = {classNames(
-                          "hidden lg:flex lg:rounded lg:rounded-2xl lg:m-2",
-                          "lg:text-center lg:text-lg lg:justify-center lg:p-3", 
-                          "lg:border"
-                          )}
+                      ={classNames(
+                        "hidden lg:flex lg:rounded lg:rounded-2xl lg:m-2",
+                        "lg:text-center lg:text-lg lg:justify-center lg:p-3",
+                        "lg:border"
+                      )}
                       style={{ borderColor: fromChain?.color }}
                     >
                       Switch to {fromChain?.name} Network
@@ -674,9 +672,9 @@ export default function Exchange() {
 
               <div
                 className=
-                  {classNames("flex p-2 justify-center gap-6 text-lg text-center", 
+                {classNames("flex p-2 justify-center gap-6 text-lg text-center",
                   "bg-dark-1000 font-bold", `text-[${fromChain?.color}]`
-                  )}
+                )}
               >
                 {formatNumber(fromAmount, false, true)} {from.symbol} ({formatNumber(fromUsd, true, true)})
                 <div
@@ -722,7 +720,7 @@ export default function Exchange() {
               }
               {trade && showConfirmation == "min" &&
                 <div
-                  className={ `flex flex-col rounded gap-4 bg-dark-1000 p-3 font-bold w-full space-y-1` }
+                  className={`flex flex-col rounded gap-4 bg-dark-1000 p-3 font-bold w-full space-y-1`}
                 // style={{ backgroundColor: deltaPercent > 20 ? 'black' : toChain?.color}}
                 >
                   <div
@@ -750,12 +748,12 @@ export default function Exchange() {
                   style={{ opacity: trade ? 1 : 0.5, cursor: trade ? "pointer" : "not-allowed" }}
                   disabled={trade == undefined}
                 >
-                  {fromChain?.chainId === toChain?.chainId ? "Confirm Swap" : "Confirm Crosschain"} 
+                  {fromChain?.chainId === toChain?.chainId ? "Confirm Swap" : "Confirm Crosschain"}
                 </Button>
               </div>
-            </SwapLayoutCard>
-          </div>
-        </DoubleGlowShadowV2>
+        </SwapLayoutCard>
+            </div>
+          </DoubleGlowShadowV2>
       </Container>
     </>
   );
@@ -883,10 +881,10 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
           }}
         >
           <Modal
-            isOpen={ true }
-            isCustom={ true }
+            isOpen={true}
+            isCustom={true}
             onDismiss={() => onClose()}
-            borderColor={ selectedChain?.color }
+            borderColor={selectedChain?.color}
           >
             <div className="bg-dark-900 rounded padding-[10px]">
               <Button
@@ -898,10 +896,10 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
               >
                 <div className="grid grid-cols-1 w-[33%]">
                   <Image
-                    src={ selectedChain?.logo }
+                    src={selectedChain?.logo}
                     width="36" height="36"
-                    alt={ selectedChain?.name + ' logo' }
-                    className={ "w-full justify-center" }
+                    alt={selectedChain?.name + ' logo'}
+                    className={"w-full justify-center"}
                   />
                 </div>
                 <div style={{ flexGrow: 1, fontSize: "24px", textAlign: "center" }}>{selectedChain?.name}</div>
