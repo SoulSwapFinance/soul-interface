@@ -29,7 +29,7 @@ const LimitOrderApprovalCheck: FC = () => {
   if (chainId && !featureEnabled(Feature.LIMIT_ORDERS, chainId)) return <></>
 
   return (
-    <HeadlessUIModal.Controlled isOpen={isOpen} onDismiss={() => setDismissed(true)} maxWidth="sm">
+    <HeadlessUIModal.Controlled isOpen={isOpen} chainId={chainId}  onDismiss={() => setDismissed(true)} maxWidth="sm">
       <div className="flex flex-col gap-4">
         <HeadlessUIModal.Header header={i18n._(t`Approve Master Contract`)} onClose={() => setDismissed(true)} />
         <HeadlessUIModal.BorderedContent className="bg-dark-1000/40">

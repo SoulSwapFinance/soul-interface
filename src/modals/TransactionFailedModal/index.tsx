@@ -3,6 +3,7 @@ import { useLingui } from '@lingui/react'
 import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
 import Typography from 'components/Typography'
 import React from 'react'
+import { useActiveWeb3React } from 'services/web3'
 
 interface TransactionFailedModalProps {
   isOpen: boolean
@@ -11,9 +12,13 @@ interface TransactionFailedModalProps {
 
 export default function TransactionFailedModal({ isOpen, onDismiss }: TransactionFailedModalProps) {
   const { i18n } = useLingui()
+  const { chainId } = useActiveWeb3React()
 
   return (
-    <HeadlessUiModal.Controlled isOpen={isOpen} onDismiss={onDismiss} maxWidth="md">
+    <HeadlessUiModal.Controlled
+      isOpen={isOpen}
+      chainId={chainId}
+      onDismiss={onDismiss} maxWidth="md">
       <div className="flex flex-col gap-4">
         <HeadlessUiModal.Header header={i18n._(t`Transaction Rejected`)} onClose={onDismiss} />
         <HeadlessUiModal.BorderedContent className="flex flex-col gap-1 text-center">

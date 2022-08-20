@@ -205,9 +205,6 @@ msgstr ""
 msgid "BOND"
 msgstr ""
 
-msgid "BORROW"
-msgstr ""
-
 msgid "Balance"
 msgstr ""
 
@@ -546,9 +543,6 @@ msgstr ""
 msgid "EXIT"
 msgstr ""
 
-msgid "EXPLORE"
-msgstr ""
-
 msgid "Earn"
 msgstr ""
 
@@ -848,13 +842,7 @@ msgstr ""
 msgid "LAUNCH"
 msgstr ""
 
-msgid "LEND"
-msgstr ""
-
 msgid "LIQUIDITY"
-msgstr ""
-
-msgid "LUX"
 msgstr ""
 
 msgid "LUXOR"
@@ -1339,9 +1327,6 @@ msgstr ""
 msgid "SLP"
 msgstr ""
 
-msgid "SOR"
-msgstr ""
-
 msgid "SOR STABLECOIN"
 msgstr ""
 
@@ -1743,12 +1728,6 @@ msgid "Utilities"
 msgstr ""
 
 msgid "Utilized"
-msgstr ""
-
-msgid "VAULT"
-msgstr ""
-
-msgid "VOTE"
 msgstr ""
 
 msgid "Vault"

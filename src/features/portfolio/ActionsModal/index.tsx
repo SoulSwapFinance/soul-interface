@@ -11,11 +11,12 @@ import {
 import { ActiveModal } from 'features/trident/types'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
 import React, { FC, useCallback } from 'react'
+import { useActiveWeb3React } from 'services/web3'
 
 const ActionsModal: FC = () => {
   const dispatch = useAppDispatch()
   const { activeModal, modalOpen } = useAppSelector(selectTridentBalances)
-
+  const { chainId } = useActiveWeb3React()
   const handleDismiss = useCallback(() => {
     setBalancesState({
       activeModal: undefined,
@@ -26,6 +27,7 @@ const ActionsModal: FC = () => {
   return (
     <HeadlessUiModal.Controlled
       isOpen={modalOpen}
+      chainId={chainId}
       onDismiss={() => dispatch(setBalancesModalOpen(false))}
       afterLeave={handleDismiss}
       maxWidth="md"

@@ -63,7 +63,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
 
   // console.log('Ftm Bal:%s', FtmBalance)
   // console.log('Dai Bal:%s', DaiBalance)
-  
+
   const LuxorFtmAddress = LuxFtmContract.address
   const LuxorDaiAddress = LuxDaiContract.address
   const LuxSorAddress = LuxSorContract.address
@@ -83,7 +83,8 @@ export default function LuxorStatsModal(): JSX.Element | null {
   const LuxSorValue = LuxSorBalance * luxSorPrice
 
   const treasuryLiquidityBalance = LuxFtmValue + LuxDaiValue + LuxSorValue
-  
+  const { chainId } = useActiveWeb3React()
+
   let bondsTvl = bondInfo?.reduce((previousValue, currentValue) => {
     return previousValue + currentValue?.tvl
   }, 0)
@@ -114,10 +115,11 @@ export default function LuxorStatsModal(): JSX.Element | null {
 
   return (
     <HeadlessUiModal.Controlled isOpen={luxorStatsModalOpen} onDismiss={toggleLuxorStatsModal}
+      chainId={chainId}
       maxWidth={'md'}
     // maxWidth={672}
     >
-    <ModalHeader header={''} onClose={toggleLuxorStatsModal} />
+      <ModalHeader header={''} onClose={toggleLuxorStatsModal} />
       <div className="mt-2 space-y-8">
         <div className="space-y-4">
           <div className="flex justify-between gap-2 flex-col-2 w-full">
@@ -308,7 +310,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
             {`wLumens Market Price`}
           </Typography>,
           formatNumber(
-           wLumPrice, true, true)
+            wLumPrice, true, true)
         )}
         <div className="flex mt-3" />
         {/* <div className="flex"> */}
@@ -331,7 +333,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
         >
           <NavLink href={'/luxor/bonds'}>
             <a className="flex justify-center text-black text-xl transition rounded-md hover:pink">
-            <span>MINT LUX</span>
+              <span>MINT LUX</span>
             </a>
           </NavLink>
         </Button>
@@ -343,7 +345,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
         >
           <NavLink href={'/luxor/stake'}>
             <a className="flex justify-center text-black text-xl transition rounded-md hover:pink">
-            <span>STAKE LUX</span>
+              <span>STAKE LUX</span>
             </a>
           </NavLink>
         </Button>

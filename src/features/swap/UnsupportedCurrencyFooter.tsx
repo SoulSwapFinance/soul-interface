@@ -52,7 +52,10 @@ export default function UnsupportedCurrencyFooter({
 
   return (
     <DetailsFooter show={show}>
-      <HeadlessUiModal.Controlled isOpen={showDetails} onDismiss={() => setShowDetails(false)}>
+      <HeadlessUiModal.Controlled 
+      isOpen={showDetails} 
+      chainId={chainId} 
+      onDismiss={() => setShowDetails(false)}>
         <div style={{ padding: '2rem' }}>
           <AutoColumn gap="lg">
             <RowBetween>

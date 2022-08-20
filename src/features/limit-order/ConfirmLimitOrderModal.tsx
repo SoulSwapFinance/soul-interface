@@ -14,15 +14,16 @@ import React, { FC, useCallback } from 'react'
 
 interface ConfirmLimitOrderModalProps {
   open: boolean
+  chainId: number
   onDismiss: () => void
   onConfirm: () => void
 }
-const ConfirmLimitOrderModal: FC<ConfirmLimitOrderModalProps> = ({ open, onDismiss, onConfirm }) => {
+const ConfirmLimitOrderModal: FC<ConfirmLimitOrderModalProps> = ({ open, chainId, onDismiss, onConfirm }) => {
   const topContent = useCallback(() => <ConfirmLimitOrderTopContent />, [])
   const bottomContent = useCallback(() => <ConfirmLimitOrderBottomContent onClick={onConfirm} />, [onConfirm])
 
   return (
-    <HeadlessUiModal.Controlled isOpen={open} onDismiss={onDismiss}>
+    <HeadlessUiModal.Controlled isOpen={open} chainId={chainId} onDismiss={onDismiss}>
       <ConfirmationModalContent
         title="Confirm Limit Order"
         onDismiss={onDismiss}

@@ -17,6 +17,8 @@ import ExternalLink from '../ExternalLink'
 import Typography from '../Typography'
 import Copy from './Copy'
 import Transaction from './Transaction'
+import { getChainColor, getChainColorCode } from 'constants/chains'
+import { GlobeIcon } from '@heroicons/react/outline'
 
 interface AccountDetailsProps {
   toggleWalletModal: () => void
@@ -63,11 +65,11 @@ const AccountDetails: FC<AccountDetailsProps> = ({
   return (
     <div className="space-y-3">
       <div className="space-y-3">
-        <HeadlessUiModal.Header header={i18n._(t`Account`)} onClose={toggleWalletModal} />
+        {/* <HeadlessUiModal.Header header={i18n._(t`Account`)} onClose={toggleWalletModal} /> */}
         <HeadlessUiModal.BorderedContent className="flex flex-col gap-3">
           <div className="flex items-center justify-between">
             {connectorName}
-            <Button variant="outlined" color="purple" size="xs" onClick={deactivate}>
+            <Button variant="outlined" color={getChainColorCode(chainId)} size="xs" onClick={deactivate}>
               {i18n._(t`Disconnect`)}
             </Button>
           </div>
@@ -88,16 +90,16 @@ const AccountDetails: FC<AccountDetailsProps> = ({
             </div>
             <div className="flex items-center gap-2 space-x-3">
               {account && (
-                <Copy className="text-purple" toCopy={account}>
-                  <Typography color="purple" variant="xs" weight={700}>
+                <Copy className={`text-[${getChainColor(chainId)}]`} toCopy={account}>
+                  <Typography variant="xs" weight={700}>
                     {i18n._(t`Copy`)}
                   </Typography>
                 </Copy>
               )}
               {chainId && account && (
                 <ExternalLink
-                  color="purple"
-                  startIcon={<LinkIcon size={16} />}
+                  color={getChainColorCode(chainId)}
+                  startIcon={<GlobeIcon width={16} />}
                   href={chainId && getExplorerLink(chainId, ENSName || account, 'address')}
                 >
                   <Typography variant="xs" weight={700}>
@@ -107,7 +109,7 @@ const AccountDetails: FC<AccountDetailsProps> = ({
               )}
               {chainId && account && (
                 <ExternalLink
-                  color="purple"
+                  color={`${getChainColorCode(chainId)}`}
                   startIcon={<LinkIcon size={16} />}
                   href={'/balances'}
                 >
@@ -124,7 +126,7 @@ const AccountDetails: FC<AccountDetailsProps> = ({
             <Typography variant="xs" weight={700} className="text-secondary">
               {i18n._(t`Recent Transactions`)}
             </Typography>
-            <Button variant="outlined" color="purple" size="xs" onClick={clearAllTransactionsCallback}>
+            <Button variant="outlined" color={`${getChainColorCode(chainId)}`} size="xs" onClick={clearAllTransactionsCallback}>
               {i18n._(t`Clear All`)}
             </Button>
           </div>

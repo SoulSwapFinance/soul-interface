@@ -15,6 +15,7 @@ import ModalHeader from 'components/Modal/Header'
 
 interface YieldDetailsProps {
   isOpen: boolean
+  // chainId: number
   onDismiss: () => void
   token0: Currency
   token1?: Currency
@@ -123,7 +124,7 @@ const YieldDetails: React.FC<YieldDetailsProps> = ({
   )
 
   return (
-    <HeadlessUiModal.Controlled isOpen={isOpen} onDismiss={onDismiss}>
+    <HeadlessUiModal.Controlled isOpen={isOpen} chainId={chainId} onDismiss={onDismiss}>
       {getModalContent()}
     </HeadlessUiModal.Controlled>
   )

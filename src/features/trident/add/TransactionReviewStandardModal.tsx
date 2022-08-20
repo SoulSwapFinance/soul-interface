@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from 'state/hooks'
 import { FC, useCallback } from 'react'
 
 import DepositSubmittedModalContent from './DepositSubmittedModalContent'
+import { useActiveWeb3React } from 'services/web3'
 
 const TransactionReviewStandardModal: FC = () => {
   const { i18n } = useLingui()
@@ -23,7 +24,7 @@ const TransactionReviewStandardModal: FC = () => {
   const { liquidityMinted, poolShareAfter, poolShareBefore } = useAddDetails()
   const execute = useAddLiquidityExecute()
   const _parsedAmounts = useAddLiquidityDerivedCurrencyAmounts()
-
+  const { chainId } = useActiveWeb3React()
   const _execute = useCallback(async () => {
     const tx = await execute({ parsedAmounts: _parsedAmounts, liquidityMinted, spendFromWallet, coffinPermit })
     if (tx?.hash) {
@@ -42,6 +43,7 @@ const TransactionReviewStandardModal: FC = () => {
   return (
     <HeadlessUIModal.Controlled
       isOpen={showReview}
+      chainId={chainId}
       onDismiss={() => dispatch(setAddShowReview(false))}
       afterLeave={() => dispatch(setAddTxHash(undefined))}
       maxWidth="md"

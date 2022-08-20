@@ -19,6 +19,7 @@ import ReactGA from 'react-ga'
 
 import Option from './Option'
 import PendingView from './PendingView'
+import { useActiveWeb3React } from 'services/web3'
 
 enum WALLET_VIEWS {
   OPTIONS,
@@ -43,6 +44,7 @@ const WalletModal: FC<WalletModal> = ({ pendingTransactions, confirmedTransactio
   const previousAccount = usePrevious(account)
   const activePrevious = usePrevious(active)
   const connectorPrevious = usePrevious(connector)
+  const { chainId } = useActiveWeb3React()
 
   // close on connection, when logged out before
   useEffect(() => {
@@ -135,7 +137,7 @@ const WalletModal: FC<WalletModal> = ({ pendingTransactions, confirmedTransactio
 
         if
           (
-          !window.web3 && !window.ethereum && 
+          !window.web3 && !window.ethereum &&
           option.mobile
         ) {
           return (
@@ -212,7 +214,9 @@ const WalletModal: FC<WalletModal> = ({ pendingTransactions, confirmedTransactio
   }, [connector, tryActivation])
 
   return (
-    <HeadlessUiModal.Controlled isOpen={walletModalOpen} onDismiss={toggleWalletModal} maxWidth="md">
+    <HeadlessUiModal.Controlled isOpen={walletModalOpen}
+      chainId={chainId}
+      onDismiss={toggleWalletModal} maxWidth="md">
       {error ? (
         <div className="flex flex-col gap-4">
           <HeadlessUiModal.Header
@@ -248,12 +252,12 @@ const WalletModal: FC<WalletModal> = ({ pendingTransactions, confirmedTransactio
           {walletView === WALLET_VIEWS.PENDING ? (
             <PendingView
               id={pendingWallet.id}
-              connector={pendingWallet.connector} 
-              header={''} 
-              subheader={''}              
-              // error={pendingError}
-              // setPendingError={setPendingError}
-              // tryActivation={tryActivation}
+              connector={pendingWallet.connector}
+              header={''}
+              subheader={''}
+            // error={pendingError}
+            // setPendingError={setPendingError}
+            // tryActivation={tryActivation}
             />
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 overflow-y-auto">{options}</div>
