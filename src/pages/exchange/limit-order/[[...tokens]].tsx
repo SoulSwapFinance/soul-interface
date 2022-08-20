@@ -12,7 +12,7 @@ import LimitOrderButton from 'features/limit-order/LimitOrderButton'
 import LimitOrderReviewModal from 'features/limit-order/LimitOrderReviewModal'
 import LimitPriceInputPanel from 'features/limit-order/LimitPriceInputPanel'
 import OrderExpirationDropdown from 'features/limit-order/components/OrderExpirationDropdown'
-import HeaderNew from 'features/trade/HeaderNew'
+import SwapHeader from 'features/swap/SwapHeader'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
 import NetworkGuard from 'guards/Network'
 import { SwapLayout, SwapLayoutCard } from 'layouts/SwapLayout'
@@ -89,7 +89,7 @@ const LimitOrder = () => {
       <SwapLayoutCard>
         <LimitOrderApprovalCheck />
         <div className="px-2">
-          <HeaderNew inputCurrency={inputCurrency} outputCurrency={outputCurrency} />
+          <SwapHeader inputCurrency={inputCurrency} outputCurrency={outputCurrency} />
         </div>
         <div className="flex flex-col gap-3">
           <SwapAssetPanel

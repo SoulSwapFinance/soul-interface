@@ -2,11 +2,13 @@ import { Popover, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/outline'
 import { MenuItem, MenuItemLeaf, MenuItemNode } from 'components/Header/useMenu'
 import Typography from 'components/Typography'
+import { getChainColor } from 'constants/chains'
 import { classNames } from 'functions'
 import useDesktopHeaderMediaQuery, { useTouchDeviceMediaQuery } from 'hooks/useDesktopHeaderMediaQuery'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { FC, Fragment, useCallback, useRef } from 'react'
+import { useActiveWeb3React } from 'services/web3'
 import styled from 'styled-components'
 
 const HideOnMobile = styled.div`
@@ -25,6 +27,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
   const buttonRef = useRef<HTMLButtonElement>(null)
   const isDesktop = useDesktopHeaderMediaQuery()
   const touchDevice = useTouchDeviceMediaQuery()
+  const { chainId } = useActiveWeb3React()
 
   const handleToggle = useCallback((open, type) => {
     if (!open && type === 'enter') {
@@ -43,7 +46,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
         variant="sm"
         className={classNames(
           router.asPath === link ? 'text-white' : '',
-          isLuxor ? 'hover:text-yellow' : 'hover:text-dark-600', 'font-bold py-5 px-2 rounded flex gap-3'
+          isLuxor ? 'hover:text-yellow' : `hover:text-[${getChainColor(chainId)}]`, 'font-bold py-5 px-2 rounded flex gap-3'
         )}
       >
         {!isDesktop && node.icon}
@@ -65,7 +68,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
             <Typography
               weight={700}
               variant="sm"
-              className={classNames(open && !isLuxor && 'text-dark-600', open && isLuxor && 'text-yellow', 'font-bold py-5 px-2 rounded flex gap-3 items-center')}
+              className={classNames(open && !isLuxor && `text-[${getChainColor(chainId)}]`, open && isLuxor && 'text-yellow', 'font-bold py-5 px-2 rounded flex gap-3 items-center')}
             >
               {!isDesktop && node.icon}
               {node.title}

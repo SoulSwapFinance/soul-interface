@@ -9,7 +9,6 @@ import { calculateGasMargin, calculateSlippageAmount } from 'functions/trade'
 import { currencyId, halfAmountSpend, maxAmountSpend } from 'functions/currency'
 import { useDerivedMintInfo, useMintActionHandlers, useMintState } from 'state/mint/hooks'
 import { useExpertModeManager, useUserSlippageToleranceWithDefault } from 'state/user/hooks'
-import MainHeader from 'features/swap/MainHeader'
 
 import { AutoColumn } from 'components/Column'
 import { BigNumber } from '@ethersproject/bignumber'
@@ -20,7 +19,7 @@ import Container from 'components/Container'
 import Dots from 'components/Dots'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 // import ExchangeHeader from 'components/ExchangeHeader'
-import SwapHeader from 'features/trade/HeaderNew'
+import SwapHeader from 'features/swap/SwapHeader'
 import { Field } from 'state/mint/actions'
 import Head from 'next/head'
 import LiquidityPrice from 'features/liquidity/LiquidityPrice'
@@ -361,9 +360,9 @@ export default function Add() {
           content="Add liquidity to the Soul AMM to enable gas optimised and low slippage trades across countless networks"
         />
       </Head>
-      <MainHeader
-        input={currencyA}
-        output={currencyB}
+      <SwapHeader
+        inputCurrency={currencyA}
+        outputCurrency={currencyB}
         allowedSlippage={allowedSlippage}
       />
       {/* <SoulLogo /> */}

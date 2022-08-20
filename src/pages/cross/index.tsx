@@ -25,7 +25,7 @@ import { classNames } from "functions/styling";
 import InputCurrencyBox from "pages/bridge/components/InputCurrencyBox";
 import Container from "components/Container";
 import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
-import HeaderNew from "features/trade/HeaderNew";
+import SwapHeader from "features/swap/SwapHeader";
 import { SwapLayoutCard } from "layouts/SwapLayout";
 import Modal from "components/DefaultModal";
 import { ChainId } from "sdk";
@@ -67,7 +67,7 @@ function setLastExchange(from: { chain: Chain; token: Token }, to: { chain: Chai
 
 const NATIVE_ADDRESS = "0x0000000000000000000000000000000000000000";
 
-const RUBIC_CHAIN_BY_ID = new Map([
+export const CHAIN_BY_ID = new Map([
   [FANTOM.chainId, BLOCKCHAIN_NAME.FANTOM],
   [MOONRIVER.chainId, BLOCKCHAIN_NAME.MOONRIVER],
   [POLYGON.chainId, BLOCKCHAIN_NAME.POLYGON],
@@ -249,7 +249,7 @@ export default function Exchange() {
             ? rubic.instantTrades.calculateTrade(
               {
                 address: from.isNative ? NATIVE_ADDRESS : from.address,
-                blockchain: RUBIC_CHAIN_BY_ID.get(fromChain?.chainId),
+                blockchain: CHAIN_BY_ID.get(fromChain?.chainId),
               },
               amount,
               to?.isNative ? NATIVE_ADDRESS : to?.address,
@@ -259,14 +259,14 @@ export default function Exchange() {
               // (1) fromToken
               {
                 address: from.isNative ? NATIVE_ADDRESS : from.address,
-                blockchain: RUBIC_CHAIN_BY_ID.get(fromChain?.chainId),
+                blockchain: CHAIN_BY_ID.get(fromChain?.chainId),
               },
               // (2) fromAmount
               amount,
               // (3) toToken
               {
                 address: to?.isNative ? NATIVE_ADDRESS : to?.address,
-                blockchain: RUBIC_CHAIN_BY_ID.get(toChain.chainId),
+                blockchain: CHAIN_BY_ID.get(toChain.chainId),
               },
               // (4) options (optional)
             )
@@ -276,18 +276,18 @@ export default function Exchange() {
         const [newFromUsd, newToUsd] = await Promise.all([
           // the USD value of (from) being _sold_.
           from.isNative
-            ? rubic.cryptoPriceApi.getNativeCoinPrice(RUBIC_CHAIN_BY_ID.get(fromChain?.chainId))
+            ? rubic.cryptoPriceApi.getNativeCoinPrice(CHAIN_BY_ID.get(fromChain?.chainId))
             : rubic.cryptoPriceApi.getErc20TokenPrice({
               address: from.address,
-              blockchain: RUBIC_CHAIN_BY_ID.get(fromChain?.chainId),
+              blockchain: CHAIN_BY_ID.get(fromChain?.chainId),
             }),
 
           // the USD value of (to) being _bought_.
           to?.isNative
-            ? rubic.cryptoPriceApi.getNativeCoinPrice(RUBIC_CHAIN_BY_ID.get(toChain?.chainId))
+            ? rubic.cryptoPriceApi.getNativeCoinPrice(CHAIN_BY_ID.get(toChain?.chainId))
             : rubic.cryptoPriceApi.getErc20TokenPrice({
               address: to?.address,
-              blockchain: RUBIC_CHAIN_BY_ID.get(toChain?.chainId),
+              blockchain: CHAIN_BY_ID.get(toChain?.chainId),
             }),
         ])
         if (disposed) {
@@ -473,7 +473,7 @@ export default function Exchange() {
         <DoubleGlowShadowV2>
           <div className="p-4 mt-4 space-y-4 rounded bg-dark-1000" style={{ zIndex: 1 }}>
             <div className="px-2">
-              <HeaderNew />
+              <SwapHeader />
             </div>
             <SwapLayoutCard>
               {/*  [F] TOKEN SELECTOR */}
@@ -488,7 +488,12 @@ export default function Exchange() {
                     onClick={() => toggleNetworkModal()}
                   >
                     <div
-                      className="hidden lg:flex lg:rounded lg:rounded-2xl lg:m-2 lg:text-center lg:text-lg lg:justify-center lg:p-3 lg:border"
+                      className
+                        = {classNames(
+                          "hidden lg:flex lg:rounded lg:rounded-2xl lg:m-2",
+                          "lg:text-center lg:text-lg lg:justify-center lg:p-3", 
+                          "lg:border"
+                          )}
                       style={{ borderColor: fromChain?.color }}
                     >
                       Switch to {fromChain?.name} Network
@@ -605,8 +610,7 @@ export default function Exchange() {
                       >
                         <ArrowDownIcon
                           width={24}
-                          className="text-high-emphesis hover:text-white"
-                          style={{ color: toChain?.color }}
+                          className={classNames("text-high-emphesis hover:text-white", `text-[${toChain?.color}]`)}
                         />
                       </div>
                     </div>
@@ -669,13 +673,14 @@ export default function Exchange() {
               </div>
 
               <div
-                className="flex p-2 justify-center gap-6 text-lg text-center bg-dark-1000 font-bold"
-                style={{ color: fromChain?.color }}
+                className=
+                  {classNames("flex p-2 justify-center gap-6 text-lg text-center", 
+                  "bg-dark-1000 font-bold", `text-[${fromChain?.color}]`
+                  )}
               >
                 {formatNumber(fromAmount, false, true)} {from.symbol} ({formatNumber(fromUsd, true, true)})
                 <div
-                  className="flex"
-                  style={{ color: 'white' }}
+                  className="flex text-white"
                 >
 
                   <ArrowRightIcon className="m-2 border border-2 rounded" height="21px" />
@@ -683,8 +688,7 @@ export default function Exchange() {
                 </div>
 
                 <div
-                  className="flex"
-                  style={{ color: toChain?.color }}
+                  className={classNames("flex", `text-[${toChain?.color}]`)}
                 >
                   {formatNumber(toAmount, false, true)} {to?.symbol} ({formatNumber(Number(toUsd), true, true)})
                 </div>

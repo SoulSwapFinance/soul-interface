@@ -24,13 +24,11 @@ import { useUnderworldBorrowPositions } from 'features/portfolio/AssetBalances/u
 import { usePrice, useUSDCPrice } from 'hooks'
 import { e10 } from 'functions/math'
 import router from 'next/router'
-import SwapHeader from '../../features/trade/HeaderNew'
-import MainHeader from 'features/swap/MainHeader'
+import SwapHeader from '../../features/swap/SwapHeader'
 import { i18n } from '@lingui/core'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 // import { formatNumber } from 'functions'
 
-// import MainHeader from 'features/swap/MainHeader'
 // import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 // import Container from '../../components/Container'
 // import { useIsSwapUnsupported } from '../../hooks/useIsSwapUnsupported'
@@ -58,7 +56,6 @@ const Margin = () => {
 
   return ( 
   <>
-  <MainHeader />
     <DoubleGlowShadowV2 opacity="0.6">
     <div id="margin-page" className="mt-4 w-full max-w-2xl p-4 space-y-4 rounded bg-dark-900 z-1">
       {/* <Container id="charts-page" maxWidth="2xl" className="space-y-4"> */}

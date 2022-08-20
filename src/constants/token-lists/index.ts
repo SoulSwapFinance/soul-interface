@@ -6,7 +6,6 @@ const BA_LIST = 'https://raw.githubusercontent.com/The-Blockchain-Association/se
  */
 export const UNSUPPORTED_LIST_URLS: string[] = [BA_LIST]
 const DEFAULT_TOKEN_LIST = 'https://raw.githubusercontent.com/soulswapfinance/default-token-list/master/soulswap.tokenlist.json'
-// const YEARN_LIST = 'https://yearn.science/static/tokenlist.json'
 // const NFTX_LIST_V1 = 'https://nftx.ethereumdb.com/v1/tokenlist/'
 // const NFTX_LIST_V2 = 'https://nftx.ethereumdb.com/v2/tokenlist/'
 // const SYNTHETIX_LIST = 'synths.snx.eth'

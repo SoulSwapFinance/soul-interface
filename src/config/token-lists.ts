@@ -8,7 +8,6 @@ export const UNSUPPORTED_LIST_URLS: string[] = [BA_LIST]
 // const DEFAULT_TOKEN_LIST = 'constants/token-lists/soulswap.tokenlist.json'
 const DEFAULT_TOKEN_LIST = 'https://raw.githubusercontent.com/soulswapfinance/default-token-list/master/soulswap.tokenlist.json'
 
-// const YEARN_LIST = 'https://yearn.science/static/tokenlist.json'
 const NFTX_LIST = 'https://nftx.ethereumdb.com/v2/tokenlist/'
 // const SYNTHETIX_LIST = 'synths.snx.eth'
 // const AAVE_LIST = 'tokenlist.aave.eth'
@@ -33,7 +32,6 @@ export const DEFAULT_LIST_OF_LISTS: string[] = [
   // CMC_ALL_LIST,
   // CMC_STABLECOIN,
   // UMA_LIST,
-  // YEARN_LIST,
   // SYNTHETIX_LIST,
   // WRAPPED_LIST,
   // SET_LIST,

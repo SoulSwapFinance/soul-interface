@@ -40,7 +40,7 @@ import { useActiveWeb3React } from "services/web3";
 import { ArrowDownIcon } from "@heroicons/react/solid";
 import Image from 'next/image'
 import Typography from "components/Typography";
-import HeaderNew from "features/trade/HeaderNew";
+import SwapHeader from "features/swap/SwapHeader";
 import Container from "components/Container";
 import NavLink from "components/NavLink";
 import { NETWORK_ICON, NETWORK_LABEL } from "config/networks";
@@ -869,7 +869,7 @@ const Bridge: React.FC<any> = () => {
       <DoubleGlowShadowV2>
       <div className="p-4 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>          
         <div className="px-2">
-    <HeaderNew />
+    <SwapHeader />
     </div>
     <FadeInOut>
       {bridgeTxHash && (

@@ -246,7 +246,7 @@ const NetworkModal: FC = () => {
                           : chainId == ChainId.BSC
                             ? 'border-yellow'
                               : chainId == ChainId.AVALANCHE
-                              ? 'border-red'
+                              ? 'border-avaxRed'
                                 // : chainId == ChainId.ARBITRUM
                                 // ? 'border-arbitrumBlue'
                                   : chainId == ChainId.MOONRIVER

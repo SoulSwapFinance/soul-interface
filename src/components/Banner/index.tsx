@@ -75,7 +75,7 @@ export const BetaFeature: FC = () => (
           <Button variant="filled" color="purple" size="sm">
             <NavLink href="/summoner">
           <span className="justify-center font-bold">
-              {`BETA FEATURE: Cross Chain Swaps are in beta, please use at your own risk and report any bugs to our ${<Link href="https://discord.com/invite/soulswap"> Discord </Link>} channel, thanks!`}
+              {`Cross Chain Swaps are in beta, please use at your own risk and report any bugs to our ${<Link href="https://discord.com/invite/soulswap"> Discord </Link>} channel, thanks!`}
           </span>
             </NavLink>
           </Button>
