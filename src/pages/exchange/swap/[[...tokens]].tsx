@@ -543,12 +543,6 @@ const Swap = () => {
                   </ExternalLink>
                 </Button>
               </div> */}
-        {chainId == 250 &&
-          <div className={'flex flex-cols-2 gap-8 justify-end rounded'}>
-            <CrossChainMode />
-          </div>
-        }
-        
         { <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
           <Toggle
             id="toggle-button"
