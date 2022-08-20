@@ -543,12 +543,6 @@ const Swap = () => {
                   </ExternalLink>
                 </Button>
               </div> */}
-        {chainId == 250 &&
-          <div className={'flex flex-cols-2 gap-8 justify-end rounded'}>
-            <CrossChainMode />
-          </div>
-        }
-        
         { <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
           <Toggle
             id="toggle-button"
@@ -572,7 +566,10 @@ const Swap = () => {
             <div className="flex mt-3" /><SocialWidget />
           </>
         }
-        {showChart && !isCrossChainMode && chainId==250
+        {
+        showChart && 
+          !isCrossChainMode &&
+            chainId==250 &&
           <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
             <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
               <Chart inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
