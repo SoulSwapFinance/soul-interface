@@ -243,6 +243,7 @@
     "rubik-sdk": "^1.0.0",
     "sass": "^1.53.0",
     "soul-data": "^2.5.0",
+    "soulswap-default-token-list": "^2.3.0",
     "soulswap-limit-orders-react": "^3.9.0",
     "soulswap-widget": "^1.0.5",
     "soulswap-widget-embedded": "^1.0.1",

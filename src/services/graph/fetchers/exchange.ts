@@ -162,7 +162,7 @@ export const getMphPrice = async (variables = {}) => {
 export const getSoulPrice = async (variables = {}) => {
   // console.log('getSoulPrice')
   return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
-    id: '0xe2fb177009ff39f52c0134e8007fa0e4baacbd07',
+    id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07',
     ...variables,
   })
 }

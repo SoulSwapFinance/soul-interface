@@ -10,7 +10,7 @@ import ConfirmSwapModal from 'features/swap/ConfirmSwapModal'
 import SwapCallbackError from 'features/swap/SwapCallbackError'
 import SwapDetails from 'features/swap/SwapDetails'
 import UnsupportedCurrencyFooter from 'features/swap/UnsupportedCurrencyFooter'
-import HeaderNew from 'features/trade/HeaderNew'
+import SwapHeader from 'features/swap/SwapHeader'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
 import confirmPriceImpactWithoutFee from 'functions/prices'
 import { warningSeverity } from 'functions/prices'
@@ -32,20 +32,20 @@ import { useExpertModeManager, useUserOpenMev, useUserSingleHopOnly } from 'stat
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
 import Chart from 'components/Chart'
-import NavLink from 'components/NavLink'
-import ExternalLink from 'components/ExternalLink'
+// import NavLink from 'components/NavLink'
+// import ExternalLink from 'components/ExternalLink'
 import Toggle from 'components/Toggle'
-import Image from 'next/image'
-import styled from 'styled-components'
+// import Image from 'next/image'
+// import styled from 'styled-components'
 import SocialWidget from 'components/Social'
+import { getChainColorCode } from 'constants/chains'
 
 const Swap = () => {
   const { i18n } = useLingui()
   const loadedUrlParams = useDefaultsFromURLSearch()
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const defaultTokens = useAllTokens()
   const [isExpertMode] = useExpertModeManager()
-
   const { independentField, typedValue, recipient } = useSwapState()
   const { v2Trade, parsedAmount, currencies, inputError: swapInputError, allowedSlippage, to } = useDerivedSwapInfo()
   const [loadedInputCurrency, loadedOutputCurrency] = [
@@ -353,9 +353,10 @@ const Swap = () => {
       />
       <SwapLayoutCard>
         <div className="flex flex-col gap-3 justify-center">
-          <HeaderNew inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+          <SwapHeader inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
           <SwapAssetPanel
             spendFromWallet={true}
+            chainId={chainId}
             header={(props) => (
               <SwapAssetPanel.Header
                 {...props}
@@ -372,7 +373,7 @@ const Swap = () => {
           <div className="flex justify-center -mt-6 -mb-6 z-0">
             <div
               role="button"
-              className="p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-dark-600"
+              className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}`}
               onClick={() => {
                 setApprovalSubmitted(false) // reset 2 step UI for approvals
                 onSwitchTokens()
@@ -383,6 +384,7 @@ const Swap = () => {
           </div>
           <SwapAssetPanel
             spendFromWallet={true}
+            chainId={chainId}
             header={(props) => (
               <SwapAssetPanel.Header
                 {...props}
@@ -422,7 +424,7 @@ const Swap = () => {
           ) : showWrap ? (
             <Button
               fullWidth
-              color="purple"
+              color={`${getChainColorCode(chainId)}`}
               disabled={Boolean(wrapInputError)}
               onClick={onWrap}
               className="rounded-2xl md:rounded"
@@ -439,7 +441,7 @@ const Swap = () => {
               {approvalState !== ApprovalState.APPROVED && (
                 <Button
                   fullWidth
-                  color="purple"
+                  color={`${getChainColorCode(chainId)}`}
                   loading={approvalState === ApprovalState.PENDING}
                   onClick={handleApprove}
                   disabled={approvalState !== ApprovalState.NOT_APPROVED || approvalSubmitted}
@@ -450,7 +452,8 @@ const Swap = () => {
               )}
               {approvalState === ApprovalState.APPROVED && (
                 <Button
-                  color={isValid && priceImpactSeverity > 2 ? 'red' : 'purple'}
+                  color={isValid && priceImpactSeverity > 2 ? 'red' : `${getChainColorCode(chainId)}`
+                }
                   onClick={() => {
                     if (isExpertMode) {
                       handleSwap()
@@ -481,7 +484,7 @@ const Swap = () => {
             </div>
           ) : (
             <Button
-              color={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'red' : 'purple'}
+              color={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'red' : `${getChainColorCode(chainId)}`}
               fullWidth
               onClick={() => {
                 if (isExpertMode) {

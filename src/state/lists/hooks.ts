@@ -1,6 +1,6 @@
 import { AppState } from '..'
 // import DEFAULT_TOKEN_LIST from '@soulswap/default-token-list'
-import DEFAULT_TOKEN_LIST from '../../constants/token-lists/soulswap.tokenlist.json'
+import DEFAULT_TOKEN_LIST from 'constants/token-lists/soulswap.tokenlist.json'
 import { TokenList } from '@uniswap/token-lists'
 import { UNSUPPORTED_LIST_URLS } from '../../constants/token-lists'
 import UNSUPPORTED_TOKEN_LIST from '../../constants/token-lists/sushiswap-v2-unsupported.tokenlist.json'

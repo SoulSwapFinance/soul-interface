@@ -28,7 +28,6 @@ import { useTokenBalancesWithLoadingIndicator } from '../../../state/wallet/hook
 import { useV2Pairs } from '../../../hooks/useV2Pairs'
 import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
 import { chain } from 'lodash'
-import MainHeader from 'features/swap/MainHeader'
 import NavLink from 'components/NavLink'
 import { useV2PairsWithLiquidity } from 'features/trident/migrate/context/useV2PairsWithLiquidity'
 // import SoulLogo from '../../../components/SoulLogo'
@@ -104,7 +103,6 @@ export default function Pool() {
         />
       </Head>
 
-      {/* <MainHeader /> */}
       {/* <SoulLogo /> */}
       {/* <br /> <br /> */}
       <DoubleGlowShadowV2 opacity="0.6">

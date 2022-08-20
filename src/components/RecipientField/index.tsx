@@ -8,6 +8,8 @@ import { classNames } from 'functions'
 import useENS from 'hooks/useENS'
 import { useAppDispatch } from 'state/hooks'
 import React, { FC, useCallback, useEffect, useMemo, useState } from 'react'
+import { getChainColorCode } from 'constants/chains'
+import { useActiveWeb3React } from 'services/web3'
 
 interface RecipientField {
   recipient?: string
@@ -16,6 +18,7 @@ interface RecipientField {
 
 const RecipientField: FC<RecipientField> = ({ recipient, action }) => {
   const { i18n } = useLingui()
+  const { chainId } = useActiveWeb3React()
   const { address, loading } = useENS(recipient)
   const dispatch = useAppDispatch()
   const [use, setUse] = useState(false)
@@ -57,7 +60,7 @@ const RecipientField: FC<RecipientField> = ({ recipient, action }) => {
       <div
         className={classNames(
           error ? 'ring ring-red' : '',
-          'flex justify-between items-baseline bg-dark-900 rounded px-4 py-3 border border-dark-700 hover:border-dark-600'
+          `flex justify-between items-baseline bg-dark-900 rounded px-4 py-3 border border-dark-700 hover:border-${getChainColorCode(chainId)}`
         )}
       >
         <Typography weight={700} variant="lg" className="flex gap-3 flex-grow items-baseline relative overflow-hidden">

@@ -40,13 +40,14 @@ import { useActiveWeb3React } from "services/web3";
 import { ArrowDownIcon } from "@heroicons/react/solid";
 import Image from 'next/image'
 import Typography from "components/Typography";
-import HeaderNew from "features/trade/HeaderNew";
+import SwapHeader from "features/swap/SwapHeader";
 import Container from "components/Container";
 import NavLink from "components/NavLink";
 import { NETWORK_ICON, NETWORK_LABEL } from "config/networks";
 import NetworkModal from "modals/NetworkModal";
 import { useNetworkModalToggle } from "state/application/hooks";
 import Web3Network from "components/Web3Network";
+import { getChainColor, getChainColorCode } from "constants/chains";
 
 const ChainSelect: React.FC<any> = ({ selectChain, chains }) => {
   return (
@@ -290,7 +291,7 @@ const ChainSelection: React.FC<any> = ({
                   <div className="flex justify-center mt-2.5 mb-2.5 z-0">
                     <div
                       role="button"
-                      className="p-1.5 rounded-full bg-dark-1000 border shadow-md border-dark-700 hover:border-dark-600"
+                      className={`p-1.5 rounded-full bg-dark-1000 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}`}
                     >
                       <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
                     </div>
@@ -632,7 +633,7 @@ const BridgeTokenList: React.FC<any> = ({
       </Row>
       <div />
       <div className="hidden sm:flex">
-      <div className="grid grid-cols-2 gap-1 mt-2 mb-2 rounded p-0 border border-dark-1000 hover:border-dark-600 w-full">
+      <div className={`grid grid-cols-2 gap-1 mt-2 mb-2 rounded p-0 border border-dark-1000 hover:border-${getChainColorCode(fromChain?.chainId)} w-full`}>
         <TokenSelector
           tokens={tokenList}
           selected={token}
@@ -654,7 +655,7 @@ const BridgeTokenList: React.FC<any> = ({
       </div>
       </div>
       <div className="flex sm:hidden">
-      <div className="grid grid-cols gap-1 mt-2 mb-2 rounded p-0 border border-dark-1000 hover:border-dark-600 w-full">
+      <div className={`grid grid-cols gap-1 mt-2 mb-2 rounded p-0 border border-dark-1000 hover:border-${getChainColorCode(fromChain?.chainId)} w-full`}>
         <TokenSelector
           tokens={tokenList}
           selected={token}
@@ -738,13 +739,13 @@ const Bridge: React.FC<any> = () => {
           resolvedBalance &&
           BigNumber.from(unitToWei(amount, Decimals)).gt(resolvedBalance)
         ) {
-          return setInputError("Insufficient funds");
+          return setInputError("Insufficient Funds");
         }
         if (parseFloat(amount) < parseFloat(MinimumSwap)) {
-          return setInputError("Below minimum amount");
+          return setInputError("Below Minimum");
         }
         if (parseFloat(amount) > parseFloat(MaximumSwap)) {
-          return setInputError("Above maximum amount");
+          return setInputError("Above Maximum");
         }
         return setInputError(null);
       });
@@ -869,7 +870,7 @@ const Bridge: React.FC<any> = () => {
       <DoubleGlowShadowV2>
       <div className="p-4 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>          
         <div className="px-2">
-    <HeaderNew />
+    <SwapHeader />
     </div>
     <FadeInOut>
       {bridgeTxHash && (
@@ -915,7 +916,7 @@ const Bridge: React.FC<any> = () => {
         </ContentBox>
       )}
       <Row style={{ width: "100%", justifyContent: "center" }}>
-        <div className="flex -4 border border-dark-900 hover:border-dark-600 bg-dark-900 p-2 rounded w-full">
+        <div className={`flex -4 border border-dark-900 hover:border-${getChainColorCode(chainId)} bg-dark-900 p-2 rounded w-full`}>
           <Column style={{ width: "100%" }}>
             <div />
             <>
@@ -937,7 +938,7 @@ const Bridge: React.FC<any> = () => {
               <div />
               <div />
               <div className="h-px my-6 bg-dark-1000"></div>
-              <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-dark-600 w-full space-y-1">
+              <div className={`flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-${getChainColorCode(chainId)} w-full space-y-1`}>
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
                     Bridgeable Range
@@ -1001,7 +1002,7 @@ const Bridge: React.FC<any> = () => {
 
               </div>
               <div className="mt-8" />
-              <ButtonComponent variant="outlined" color="purple" onClick={handleApproveToken} className="mb-2">
+              <ButtonComponent variant="outlined" color={getChainColorCode(chainId)} onClick={handleApproveToken} className="mb-2">
                 {isApprovePending
                   ? "Approving"
                   : isApproveCompleted

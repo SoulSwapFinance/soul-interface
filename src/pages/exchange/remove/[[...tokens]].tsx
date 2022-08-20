@@ -1,55 +1,54 @@
-import { ApprovalState, useApproveCallback } from '../../../hooks/useApproveCallback'
+import { ApprovalState, useApproveCallback } from 'hooks/useApproveCallback'
 import { ArrowDown, Plus } from 'react-feather'
-import { AutoRow, RowBetween } from '../../../components/Row'
-import { ButtonConfirmed, ButtonError } from '../../../components/Button'
-import { ChainId, Currency, NATIVE, Percent, WNATIVE } from '../../../sdk'
+import { AutoRow, RowBetween } from 'components/Row'
+import { ButtonConfirmed, ButtonError } from 'components/Button'
+import { ChainId, Currency, NATIVE, Percent, WNATIVE } from 'sdk'
 import React, { useCallback, useMemo, useState } from 'react'
-import TransactionConfirmationModal, { ConfirmationModalContent } from '../../../modals/TransactionConfirmationModal'
-import { calculateGasMargin, calculateSlippageAmount } from '../../../functions/trade'
-import { useBurnActionHandlers, useBurnState, useDerivedBurnInfo } from '../../../state/burn/hooks'
-import { usePairContract, useRouterContract } from '../../../hooks/useContract'
-import MainHeader from 'features/swap/MainHeader'
+import TransactionConfirmationModal, { ConfirmationModalContent } from 'modals/TransactionConfirmationModal'
+import { calculateGasMargin, calculateSlippageAmount } from 'functions/trade'
+import { useBurnActionHandlers, useBurnState, useDerivedBurnInfo } from 'state/burn/hooks'
+import { usePairContract, useRouterContract } from 'hooks/useContract'
 
-import { AddRemoveTabs } from '../../../components/NavigationTabs'
-import Alert from '../../../components/Alert'
+import { AddRemoveTabs } from 'components/NavigationTabs'
+import Alert from 'components/Alert'
 import { ArrowDownIcon } from '@heroicons/react/solid'
-import { AutoColumn } from '../../../components/Column'
+import { AutoColumn } from 'components/Column'
 import { BigNumber } from '@ethersproject/bignumber'
-import { Button } from '../../../components/Button'
-import Container from '../../../components/Container'
+import { Button } from 'components/Button'
+import Container from 'components/Container'
 import { Contract } from '@ethersproject/contracts'
-import { CurrencyLogo } from '../../../components/CurrencyLogo'
-import Dots from '../../../components/Dots'
-import { Field } from '../../../state/burn/actions'
+import { CurrencyLogo } from 'components/CurrencyLogo'
+import Dots from 'components/Dots'
+import { Field } from 'state/burn/actions'
 import Head from 'next/head'
-// import Header from '../../../components/ExchangeHeader'
+// import Header from 'components/ExchangeHeader'
 import Link from 'next/link'
-import SwapHeader from '../../../features/trade/HeaderNew'
-import LiquidityHeader from '../../../features/liquidity/LiquidityHeader'
-// import LiquidityPrice from '../../../features/liquidity/LiquidityPrice'
-import { MinimalPositionCard } from '../../../components/PositionCard'
-import NavLink from '../../../components/NavLink'
-import PercentInputPanel from '../../../components/PercentInputPanel'
+import SwapHeader from 'features/swap/SwapHeader'
+import LiquidityHeader from 'features/liquidity/LiquidityHeader'
+// import LiquidityPrice from 'features/liquidity/LiquidityPrice'
+import { MinimalPositionCard } from 'components/PositionCard'
+import NavLink from 'components/NavLink'
+import PercentInputPanel from 'components/PercentInputPanel'
 import ReactGA from 'react-ga'
-import RemoveLiquidityReceiveDetails from '../../../features/liquidity/RemoveLiquidityReceiveDetails'
+import RemoveLiquidityReceiveDetails from 'features/liquidity/RemoveLiquidityReceiveDetails'
 import { TransactionResponse } from '@ethersproject/providers'
-import Web3Connect from '../../../components/Web3Connect'
-import { currencyId } from '../../../functions/currency'
+import Web3Connect from 'components/Web3Connect'
+import { currencyId } from 'functions/currency'
 import { splitSignature } from '@ethersproject/bytes'
 import { t } from '@lingui/macro'
 import { useActiveWeb3React } from 'services/web3'
-import { useCurrency } from '../../../hooks/Tokens'
-import useDebouncedChangeHandler from '../../../hooks/useDebouncedChangeHandler'
-import { useDerivedMintInfo } from '../../../state/mint/hooks'
-import useIsArgentWallet from '../../../hooks/useIsArgentWallet'
+import { useCurrency } from 'hooks/Tokens'
+import useDebouncedChangeHandler from 'hooks/useDebouncedChangeHandler'
+import { useDerivedMintInfo } from 'state/mint/hooks'
+import useIsArgentWallet from 'hooks/useIsArgentWallet'
 import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
-import { useTransactionAdder } from '../../../state/transactions/hooks'
-import useTransactionDeadline from '../../../hooks/useTransactionDeadline'
-import { useUserSlippageToleranceWithDefault } from '../../../state/user/hooks'
-import { useV2LiquidityTokenPermit } from '../../../hooks/useERC20Permit'
-import { useWalletModalToggle } from '../../../state/application/hooks'
-// import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
+import { useTransactionAdder } from 'state/transactions/hooks'
+import useTransactionDeadline from 'hooks/useTransactionDeadline'
+import { useUserSlippageToleranceWithDefault } from 'state/user/hooks'
+import { useV2LiquidityTokenPermit } from 'hooks/useERC20Permit'
+import { useWalletModalToggle } from 'state/application/hooks'
+// import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import SwapBanner from 'components/SwapBanner'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 
@@ -91,8 +90,8 @@ export default function Remove() {
     [Field.LIQUIDITY_PERCENT]: parsedAmounts[Field.LIQUIDITY_PERCENT].equalTo('0')
       ? '0'
       : parsedAmounts[Field.LIQUIDITY_PERCENT].lessThan(new Percent('1', '100'))
-      ? '<1'
-      : parsedAmounts[Field.LIQUIDITY_PERCENT].toFixed(0),
+        ? '<1'
+        : parsedAmounts[Field.LIQUIDITY_PERCENT].toFixed(0),
     [Field.LIQUIDITY]:
       independentField === Field.LIQUIDITY ? typedValue : parsedAmounts[Field.LIQUIDITY]?.toSignificant(6) ?? '',
     [Field.CURRENCY_A]:
@@ -258,7 +257,7 @@ export default function Remove() {
           })
       )
     )
-    
+
     // const safeGasEstimates: (BigNumber | undefined)[] = await Promise.all(
     //   methodNames.map((methodName) =>
     //     routerContract.estimateGas[methodName](...args)
@@ -289,9 +288,8 @@ export default function Remove() {
           setAttemptingTxn(false)
 
           addTransaction(response, {
-            summary: t`Remove ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${
-              currencyA?.symbol
-            } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencyB?.symbol}`,
+            summary: t`Remove ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${currencyA?.symbol
+              } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencyB?.symbol}`,
           })
 
           setTxHash(response.hash)
@@ -531,16 +529,16 @@ export default function Remove() {
   //     );
   //   }
 
-    // const safeGasEstimates: (BigNumber | undefined)[] = await Promise.all(
-    //   methodNames.map((methodName) =>
-    //     router.estimateGas[methodName](...args)
-    //       .then(calculateGasMargin)
-    //       .catch((error) => {
-    //         console.error(`estimateGas failed`, methodName, args, error);
-    //         return undefined;
-    //       })
-    //   )
-    // );
+  // const safeGasEstimates: (BigNumber | undefined)[] = await Promise.all(
+  //   methodNames.map((methodName) =>
+  //     router.estimateGas[methodName](...args)
+  //       .then(calculateGasMargin)
+  //       .catch((error) => {
+  //         console.error(`estimateGas failed`, methodName, args, error);
+  //         return undefined;
+  //       })
+  //   )
+  // );
 
   //   const indexOfSuccessfulEstimation = safeGasEstimates.findIndex(
   //     (safeGasEstimate) => BigNumber.isBigNumber(safeGasEstimate)
@@ -594,8 +592,8 @@ export default function Remove() {
         <div className="grid gap-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start  gap-3">
-            {/* <div className="pb-4"> */}
-        {/* <div className="flex items-center gap-3">
+              {/* <div className="pb-4"> */}
+              {/* <div className="flex items-center gap-3">
           <div className="text-2xl font-bold text-high-emphesis"> */}
               <CurrencyLogo currency={currencyA} size={48} />
               <div className="text-2xl font-bold text-high-emphesis">
@@ -635,16 +633,14 @@ export default function Remove() {
               <div className="flex items-center justify-between">
                 <div className="text-sm text-high-emphesis">{i18n._(t`Rates`)}</div>
                 <div className="text-sm font-bold justify-center items-center flex right-align pl-1.5 text-high-emphesis">
-                  {`1 ${currencyA?.symbol} = ${tokenA ? pair.priceOf(tokenA).toSignificant(6) : '-'} ${
-                    currencyB?.symbol
-                  }`}
+                  {`1 ${currencyA?.symbol} = ${tokenA ? pair.priceOf(tokenA).toSignificant(6) : '-'} ${currencyB?.symbol
+                    }`}
                 </div>
               </div>
               <div className="flex items-center justify-end">
                 <div className="text-sm font-bold justify-center items-center flex right-align pl-1.5 text-high-emphesis">
-                  {`1 ${currencyB?.symbol} = ${tokenB ? pair.priceOf(tokenB).toSignificant(6) : '-'} ${
-                    currencyA?.symbol
-                  }`}
+                  {`1 ${currencyB?.symbol} = ${tokenB ? pair.priceOf(tokenB).toSignificant(6) : '-'} ${currencyA?.symbol
+                    }`}
                 </div>
               </div>
             </div>
@@ -684,7 +680,7 @@ export default function Remove() {
     [onUserInput]
   )
 
-  const oneCurrencyIsETH = currencyA == NATIVE[chainId]|| currencyB == NATIVE[chainId]
+  const oneCurrencyIsETH = currencyA == NATIVE[chainId] || currencyB == NATIVE[chainId]
 
   const oneCurrencyIsWETH = Boolean(
     chainId && WNATIVE[chainId] && (currencyA?.equals(WNATIVE[chainId]) || currencyB?.equals(WNATIVE[chainId]))
@@ -731,22 +727,22 @@ export default function Remove() {
       <Head>
         <title>{i18n._(t`Remove Liquidity`)} | Soul </title>
         <meta key="description" name="description" content={i18n._(t`Remove liquidity of Soul`)} />
-        </Head>
-          <MainHeader
-            input={currencyA}
-            output={currencyB}
-            allowedSlippage={allowedSlippage}
-          />
-                <div className="mb-4"/>
+      </Head>
+      {/* <SwapHeader
+        inputCurrency={currencyA}
+        outputCurrency={currencyB}
+        allowedSlippage={allowedSlippage}
+      /> */}
+      <div className="mb-4" />
 
       <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
         {/* <SwapBanner /> */}
         <DoubleGlowShadowV2>
-          <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>          
+          <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
             <SwapHeader
               inputCurrency={currencyA}
               outputCurrency={currencyB}
-              // allowedSlippage={allowedSlippage}
+              allowedSlippage={allowedSlippage}
             />
             {/* <Header input={currencyA} output={currencyB} allowedSlippage={allowedSlippage} /> */}
             <div>
@@ -793,9 +789,8 @@ export default function Remove() {
                             <RowBetween className="text-sm">
                               {oneCurrencyIsETH ? (
                                 <Link
-                                  href={`/exchange/remove/${currencyA == NATIVE[chainId] ? WNATIVE[chainId].address : currencyIdA}/${
-                                    currencyB == NATIVE[chainId] ? WNATIVE[chainId].address : currencyIdB
-                                  }`}
+                                  href={`/exchange/remove/${currencyA == NATIVE[chainId] ? WNATIVE[chainId].address : currencyIdA}/${currencyB == NATIVE[chainId] ? WNATIVE[chainId].address : currencyIdB
+                                    }`}
                                 >
                                   <a className="text-baseline text-purple opacity-80 hover:opacity-100 focus:opacity-100 whitespace-nowrap">
                                     Receive W{NATIVE[chainId].symbol}
@@ -803,9 +798,8 @@ export default function Remove() {
                                 </Link>
                               ) : oneCurrencyIsWETH ? (
                                 <Link
-                                  href={`/exchange/remove/${currencyA?.equals(WNATIVE[chainId]) ? 'FTM' : currencyIdA}/${
-                                    currencyB?.equals(WNATIVE[chainId]) ? 'FTM' : currencyIdB
-                                  }`}
+                                  href={`/exchange/remove/${currencyA?.equals(WNATIVE[chainId]) ? 'FTM' : currencyIdA}/${currencyB?.equals(WNATIVE[chainId]) ? 'FTM' : currencyIdB
+                                    }`}
                                 >
                                   <a className="text-baseline text-blue opacity-80 hover:opacity-100 whitespace-nowrap">
                                     Receive {NATIVE[chainId].symbol}
@@ -873,12 +867,12 @@ export default function Remove() {
             {pair ? <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} /> : null}
           </div>
           <div className="flex items-center px-4">
-          <NavLink href="/pool">
-            <a className="flex items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
-              <span>{i18n._(t`View Liquidity Positions`)}</span>
-            </a>
-          </NavLink>
-        </div>
+            <NavLink href="/pool">
+              <a className="flex items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
+                <span>{i18n._(t`View Liquidity Positions`)}</span>
+              </a>
+            </NavLink>
+          </div>
         </DoubleGlowShadowV2>
       </Container>
     </>

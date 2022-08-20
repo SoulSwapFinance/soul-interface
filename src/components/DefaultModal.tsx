@@ -8,6 +8,9 @@ import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { transparentize } from 'polished'
 import { useGesture } from 'react-use-gesture'
+import { classNames } from 'functions'
+import { getChainColorCode } from 'constants/chains'
+import { useActiveWeb3React } from 'services/web3'
 
 const AnimatedDialogOverlay = animated(DialogOverlay)
 
@@ -51,20 +54,20 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, maxWidth, mobile, is
     overflow-x: hidden;
 
     ${({ maxWidth }) =>
-      maxWidth &&
-      css`
+    maxWidth &&
+    css`
         max-width: ${maxWidth}px;
       `}
 
     ${({ maxHeight }) =>
-      maxHeight &&
-      css`
+    maxHeight &&
+    css`
         max-height: ${maxHeight}vh;
       `}
 
     ${({ minHeight }) =>
-      minHeight &&
-      css`
+    minHeight &&
+    css`
         min-height: ${minHeight}vh;
       `}
             
@@ -103,6 +106,7 @@ export default function Modal({
   isCustom,
   borderColor,
 }: ModalProps) {
+  const { chainId } = useActiveWeb3React()
   const fadeTransition = useTransition(isOpen, null, {
     config: { duration: 200 },
     from: { opacity: 0 },
@@ -134,11 +138,11 @@ export default function Modal({
               <StyledDialogContent
                 {...(isMobile
                   ? {
-                      ...bind(),
-                      style: {
-                        transform: y.interpolate((y) => `translateY(${y > 0 ? y : 0}px)`),
-                      },
-                    }
+                    ...bind(),
+                    style: {
+                      transform: y.interpolate((y) => `translateY(${y > 0 ? y : 0}px)`),
+                    },
+                  }
                   : {})}
                 aria-label="dialog content"
                 minHeight={minHeight}
@@ -158,17 +162,17 @@ export default function Modal({
                       </div>
                     </div>
                   )
-                  : 
-                  (
-                    <div className="w-full p-px rounded border border-dark-900 hover:border-dark-600">
-                    <div className={`flex flex-col h-full w-full bg-dark-900 rounded p-6 overflow-y-auto`}>
-                        {/* prevents the automatic focusing of inputs on mobile by the reach dialog */}
-                        {!initialFocusRef && isMobile ? <div tabIndex={1} /> : null}
-                        {children}
+                    :
+                    (
+                      <div className={classNames("w-full p-px rounded border", `border-${getChainColorCode(chainId || 250)}`, `hover:border-${getChainColorCode(chainId || 250)}`)}>
+                        <div className={`flex flex-col h-full w-full bg-dark-900 rounded p-6 overflow-y-auto`}>
+                          {/* prevents the automatic focusing of inputs on mobile by the reach dialog */}
+                          {!initialFocusRef && isMobile ? <div tabIndex={1} /> : null}
+                          {children}
+                        </div>
                       </div>
-                    </div>
-                  )
-                
+                    )
+
                 }
               </StyledDialogContent>
             </StyledDialogOverlay>

@@ -19,6 +19,8 @@ const FLEXED = {
   red: 'bg-red bg-opacity-80 flex rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   blue: 'bg-blue bg-opacity-80 flex rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   ftmBlue: 'bg-ftmBlue bg-opacity-80 flex rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
+  ethBlue: 'bg-ethBlue bg-opacity-80 flex rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
+  avaxRed: 'bg-avaxRed bg-opacity-80 flex rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   pink: 'bg-gradient-to-r from-pink to-opaque-pink flex rounded text-high-emphesis opacity-80 hover:opacity-100 disabled:bg-opacity-80',
   purple: 'bg-gradient-to-r from-purple to-opaque-purple flex rounded text-high-emphesis opacity-80 hover:opacity-100 disabled:bg-opacity-80',
   deepPurple: 'bg-gradient-to-r from-deepPurple to-opaque-purple flex rounded text-high-emphesis opacity-80 hover:opacity-100 disabled:bg-opacity-80',
@@ -36,6 +38,8 @@ const FILLED = {
   red: 'bg-red bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   blue: 'bg-blue bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   ftmBlue: 'bg-ftmBlue bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
+  ethBlue: 'bg-ethBlue bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
+  avaxRed: 'bg-avaxRed bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   pink: 'bg-pink bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   purple: 'bg-purple bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   deepPurple: 'bg-deepPurple bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
@@ -56,6 +60,9 @@ const OUTLINED = {
   default: 'bg-transparent opacity-80 hover:opacity-100',
   red: 'bg-red bg-opacity-20 outline-red rounded text-red hover:bg-opacity-40 disabled:bg-opacity-20',
   blue: 'bg-blue bg-opacity-20 outline-blue rounded text-blue hover:bg-opacity-40 disabled:bg-opacity-20',
+  ftmBlue: 'bg-ftmBlue bg-opacity-20 outline-ftmBlue rounded text-ftmBlue hover:bg-opacity-40 disabled:bg-opacity-20',
+  ethBlue: 'bg-ethBlue bg-opacity-20 outline-ethBlue rounded text-ethBlue hover:bg-opacity-40 disabled:bg-opacity-20',
+  avaxRed: 'bg-avaxRed bg-opacity-20 outline-avaxRed rounded text-avaxRed hover:bg-opacity-40 disabled:bg-opacity-20',
   pink: 'bg-pink bg-opacity-20 outline-pink rounded text-pink hover:bg-opacity-40 disabled:bg-opacity-20',
   purple: 'bg-purple bg-opacity-20 outline-purple rounded text-purple hover:bg-opacity-40 disabled:bg-opacity-20',
   deepPurple: 'bg-deepPurple bg-opacity-20 outline-purple rounded text-purple hover:bg-opacity-40 disabled:bg-opacity-20',
@@ -70,6 +77,9 @@ const BORDERED = {
   default: 'border w-full border-transparent hover:border-purple bg-purple bg-opacity-40 outline-purple rounded text-purple hover:bg-opacity-40 disabled:bg-opacity-20',
   black: 'border w-full border-transparent hover:border-black bg-dark-1000 rounded text-white font-bold font-lg hover:bg-opacity-80 disabled:bg-opacity-60',
   blue: 'border w-full border-transparent hover:border-blue bg-blue bg-opacity-40 outline-blue rounded text-blue hover:bg-opacity-40 disabled:bg-opacity-20',
+  ftmBlue: 'border w-full border-transparent hover:border-ftmBlue bg-ftmBlue bg-opacity-40 outline-ftmBlue rounded text-ftmBlue hover:bg-opacity-40 disabled:bg-opacity-20',
+  ethBlue: 'border w-full border-transparent hover:border-ethBlue bg-ethBlue bg-opacity-40 outline-ethBlue rounded text-ethBlue hover:bg-opacity-40 disabled:bg-opacity-20',
+  avaxRed: 'border w-full border-transparent hover:border-avaxRed bg-avaxRed bg-opacity-40 outline-avaxRed rounded text-avaxRed hover:bg-opacity-40 disabled:bg-opacity-20',
   deepPurple: 'border w-full border-transparent hover:border-deepPurple bg-deepPurple bg-opacity-40 outline-deepPurple rounded text-deepPurple hover:bg-opacity-40 disabled:bg-opacity-20',
   purple: 'border w-full border-transparent hover:border-purple bg-purple bg-opacity-40 outline-purple rounded text-purple hover:bg-opacity-40 disabled:bg-opacity-20',
   yellow: 'border w-full border-transparent hover:border-yellow bg-yellow bg-opacity-40 outline-yellow rounded text-yellow hover:bg-opacity-40 disabled:bg-opacity-20',
@@ -94,7 +104,7 @@ const VARIANT = {
   flexed: FLEXED,
 }
 
-export type ButtonColor = 'blue' | 'ftmBlue' | 'pink' | 'purple' | 'gradient' | 'gray' | 'default' | 'red' | 'green' | 'yellow'
+export type ButtonColor = 'blue' | 'ftmBlue' | 'avaxRed' | 'ethBlue' | 'pink' | 'purple' | 'gradient' | 'gray' | 'default' | 'red' | 'green' | 'yellow'
 
 export type ButtonSize = 'xs' | 'sm' | 'lg' | 'default' | 'none' | 'nobase'
 

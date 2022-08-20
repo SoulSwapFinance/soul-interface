@@ -155,7 +155,6 @@ const useMenu: UseBar = () => {
           {
             key: 'cross',
             title: i18n._(t`Cross`),
-            // link: 'https://cross.soulswap.finance',
             link: '/cross',
           },
           {
@@ -188,9 +187,9 @@ const useMenu: UseBar = () => {
       mainItems.push(farmItems)
     }
 
-    if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
-      const learnItems = {
-        key: 'Luxor',
+    if (featureEnabled(Feature.LUXOR, chainId)) {
+      const luxorItems = {
+        key: 'luxor',
         title: i18n._(t`Luxor`),
         icon: <SunIcon width={20} className={classNames("rotate-90", isLuxor ? "text-yellow" : "text-dark-600")} />,
         items: [
@@ -231,7 +230,7 @@ const useMenu: UseBar = () => {
           },
         ],
       }
-      mainItems.push(learnItems)
+      mainItems.push(luxorItems)
       }
     
       if (featureEnabled(Feature.UNDERWORLD, chainId))

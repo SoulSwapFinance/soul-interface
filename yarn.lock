@@ -26585,6 +26585,11 @@ soul-data@^2.5.0:
     subscriptions-transport-ws "^0.9.19"
     ws "^7.5.3"
 
+soulswap-default-token-list@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/soulswap-default-token-list/-/soulswap-default-token-list-2.1.0.tgz#a89b12a2ab29feffb2cc75b8362b34b49b61ce66"
+  integrity sha512-84XbvhRMJNickhzKdKY/ytyObQCphJfUI9+fLe+HwijoouF/1wNoR44TTgVYJO8RSE+DPboLfrznQxYGhl8gOQ==
+
 soulswap-limit-orders-lib@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/soulswap-limit-orders-lib/-/soulswap-limit-orders-lib-1.1.0.tgz#7cf6506b056ada1d259adcaf85bb5aaba6e22cb7"

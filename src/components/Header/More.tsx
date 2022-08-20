@@ -8,6 +8,8 @@ import { classNames } from '../../functions/styling'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import NavLink from '../NavLink'
+import { getChainColorCode } from 'constants/chains'
+import { useActiveWeb3React } from 'services/web3'
 
 const items = (i18n: I18n) => [
   {
@@ -33,6 +35,7 @@ const items = (i18n: I18n) => [
 export default function Menu() {
   const { i18n } = useLingui()
   const solutions = items(i18n)
+  const { chainId } = useActiveWeb3React()
 
   return (
     <Popover className="relative ml-auto lg:m-0">
@@ -90,7 +93,7 @@ export default function Menu() {
               static
               className="absolute z-50 w-screen max-w-xs px-2 mt-3 transform -translate-x-full bottom-12 lg:top-12 left-full sm:px-0"
             >
-              <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 border border-dark-600 border-3">
+              <div className={classNames("overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 border",`border-${getChainColorCode(chainId || 250)}`)}>
                 <div className="relative grid gap-6 px-5 py-6 bg-dark-900 sm:gap-8 sm:p-8">
                   {solutions.map((item) =>
                     item.external ? (

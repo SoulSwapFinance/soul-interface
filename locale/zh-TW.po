@@ -148,6 +148,9 @@ msgstr ""
 msgid "Analytics"
 msgstr ""
 
+msgid "Analyze"
+msgstr ""
+
 msgid "Approve"
 msgstr ""
 
@@ -284,12 +287,6 @@ msgid "Cancel Order"
 msgstr ""
 
 msgid "Cancelled"
-msgstr ""
-
-msgid "Chart"
-msgstr ""
-
-msgid "Chat"
 msgstr ""
 
 msgid "Chinese"
@@ -678,6 +675,9 @@ msgid "Find Pool"
 msgstr ""
 
 msgid "Fixed ratio"
+msgstr ""
+
+msgid "Follow"
 msgstr ""
 
 msgid "Forfeit"
@@ -1427,9 +1427,6 @@ msgid "Something went wrong during signing of the approval. This is expected for
 msgstr ""
 
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
-msgstr ""
-
-msgid "Soul"
 msgstr ""
 
 msgid "SoulPay"

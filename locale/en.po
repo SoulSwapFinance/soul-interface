@@ -148,6 +148,9 @@ msgstr "An error occurred when trying to execute this swap. You may need to incr
 msgid "Analytics"
 msgstr "Analytics"
 
+msgid "Analyze"
+msgstr "Analyze"
+
 msgid "Approve"
 msgstr "Approve"
 
@@ -288,12 +291,6 @@ msgstr "Cancel Order"
 
 msgid "Cancelled"
 msgstr "Cancelled"
-
-msgid "Chart"
-msgstr "Chart"
-
-msgid "Chat"
-msgstr "Chat"
 
 msgid "Chinese"
 msgstr "Chinese"
@@ -686,6 +683,9 @@ msgstr "Find Pool"
 
 msgid "Fixed ratio"
 msgstr "Fixed ratio"
+
+msgid "Follow"
+msgstr "Follow"
 
 msgid "Forfeit"
 msgstr "Forfeit"
@@ -1449,9 +1449,6 @@ msgstr "Something went wrong during signing of the approval. This is expected fo
 
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
-
-msgid "Soul"
-msgstr "Soul"
 
 msgid "SoulPay"
 msgstr "SoulPay"

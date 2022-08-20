@@ -43,7 +43,7 @@ export function useFetchListCallback(): (listUrl: string, sendDispatch?: boolean
           console.debug(`Failed to get list at url ${listUrl}`, error)
           sendDispatch &&
             dispatch(
-              fetchTokenList.rejected({
+              fetchTokenList?.rejected({
                 url: listUrl,
                 requestId,
                 errorMessage: error.message,

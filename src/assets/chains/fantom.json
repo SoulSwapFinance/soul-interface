@@ -29,7 +29,7 @@
             "rank": 56,
             "logo": "https://cryptologos.cc/logos/usd-coin-usdc-logo.svg",
             "symbol": "USDC",
-            "address": "0x04068da6c83afcfa0e13ba15a6696662335d5b75"
+            "address": "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75"
         },
         {
             "id": "aave",
@@ -45,7 +45,7 @@
             "rank": 99,
             "logo": "https://cryptologos.cc/logos/curve-dao-token-crv-logo.svg",
             "symbol": "CRV",
-            "address": "0x1e4f97b9f9f913c46f1632781732927b9019c68b"
+            "address": "0x1E4F97b9f9F913c46F1632781732927B9019C68b"
         },
         {
             "id": "tether",
@@ -61,7 +61,7 @@
             "rank": 169,
             "logo": "https://cryptologos.cc/logos/multi-collateral-dai-dai-logo.svg",
             "symbol": "DAI",
-            "address": "0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e"
+            "address": "0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E"
         },
         {
             "id": "wrapped-bitcoin",

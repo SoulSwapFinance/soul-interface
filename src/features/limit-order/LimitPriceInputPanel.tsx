@@ -7,6 +7,8 @@ import { useAppDispatch } from 'state/hooks'
 import { LimitPrice, setLimitOrderInvertState, setLimitPrice } from 'state/limit-order/actions'
 import useLimitOrderDerivedCurrencies, { useLimitOrderState } from 'state/limit-order/hooks'
 import React, { FC } from 'react'
+import { getChainColorCode } from 'constants/chains'
+import { useActiveWeb3React } from 'services/web3'
 
 interface LimitPriceInputPanel {
   trade?: Trade<Currency, Currency, TradeType.EXACT_INPUT | TradeType.EXACT_OUTPUT>
@@ -16,6 +18,7 @@ interface LimitPriceInputPanel {
 const LimitPriceInputPanel: FC<LimitPriceInputPanel> = ({ trade, limitPrice }) => {
   const { i18n } = useLingui()
   const dispatch = useAppDispatch()
+  const { chainId } = useActiveWeb3React()
   const { limitPrice: limitPriceString, invertRate } = useLimitOrderState()
   const { inputCurrency, outputCurrency } = useLimitOrderDerivedCurrencies()
   const disabled = !inputCurrency || !outputCurrency
@@ -25,7 +28,7 @@ const LimitPriceInputPanel: FC<LimitPriceInputPanel> = ({ trade, limitPrice }) =
       <Typography variant="sm" className="px-2">
         {i18n._(t`Rate`)}
       </Typography>
-      <div className="flex justify-between items-baseline bg-dark-900 rounded px-4 py-1.5 border border-dark-700 hover:border-dark-600">
+      <div className={`flex justify-between items-baseline bg-dark-900 rounded px-4 py-1.5 border border-dark-700 hover:border-${getChainColorCode(chainId)}`}>
         <Typography weight={700} variant="lg" className="flex gap-3 flex-grow items-baseline relative overflow-hidden">
           <NumericalInput
             disabled={disabled}

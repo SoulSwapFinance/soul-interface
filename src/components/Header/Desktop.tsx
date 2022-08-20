@@ -26,6 +26,8 @@ import NavLink from 'components/NavLink'
 import { useRouter } from 'next/router'
 import { classNames } from 'functions'
 import Web3Network from 'components/Web3Network'
+import Logo from 'components/Logo'
+import { getChainColorCode } from 'constants/chains'
 // import useMobileMenu from './useMobileMenu'
 
 const HEADER_HEIGHT = 64
@@ -36,7 +38,7 @@ const Desktop: FC = () => {
   // const mobile = useMobileMenu()
   const { account, chainId, library, connector } = useActiveWeb3React()
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
-  
+
   const [open, setOpen] = useState(false)
   const router = useRouter()
   const isLuxor = router.asPath.startsWith('/luxor')
@@ -47,39 +49,47 @@ const Desktop: FC = () => {
   //   window?.ethereum?.isCoinbaseWallet
 
   return (
-    <>      
-      <header className="w-full flex items-center text-white justify-center border border-dark-1000 hover:border-dark-700 min-h-[64px] h-[64px] px-4">
-      <div className="flex justify-between flex-grow">
-      <div className="p-1 bg-dark-900 rounded-full hover:bg-dark-800">
-        {/* <div className="flex p-2 justify-between"> */}
+    <>
+      <header className="w-full flex items-center text-white justify-center border border-dark-1000 min-h-[64px] h-[64px] px-4">
+        <div className="flex justify-between flex-grow">
+          <div className="p-1 bg-dark-900 rounded-full hover:bg-dark-800">
+            {/* <div className="flex p-2 justify-between"> */}
             <MenuAlt1Icon width={24} className="text-white cursor-pointer" onClick={() => setOpen(true)} />
-            </div>
-                {/* <div className="flex w-6 mr-4 items-center">
+          </div>
+          {/* <div className="flex w-6 mr-4 items-center">
                   <NavLink href="/landing">
                     <Image src="/logo.png" alt="Soul" width="48" height="48" />
                   </NavLink>
                 </div> */}
         </div>
-
-
-           <nav className={classNames(
-             `backdrop-blur-fallback w-full \
+        <nav
+          className={classNames(
+            `backdrop-blur-fallback w-full \
               h-full before:backdrop-saturate-[1.2] \
               before:backdrop-blur-[20px] before:z-[-1] \
               before:absolute before:w-full before:h-full \
-              border-b border-dark-900 mx-4`,  
-              isLuxor ? `hover:border-yellow` 
-              : `hover:border-dark-600`)}>
-          <Container maxWidth="xl" className="mx-auto">
-            <div className="flex gap-1 px-1 sm:gap-4 md:gap-18 justify-between justify-center items-center">
-                {menu.map((node) => {
-                  return <NavigationItem node={node} key={node.key} />
-                })}
-                   {/* <LanguageSwitch /> */}
-               </div>
-          </Container>
+              border-b border-${getChainColorCode(chainId)} mx-4`)
+              }>
+              <Container maxWidth="3xl" className="rounded rounded-4xl text-center items-center justify-center">
+            <div
+              className="flex gap-1 px-1 sm:gap-4 md:gap-18 justify-left items-center">
+              {menu.map((node) => {
+                return <NavigationItem node={node} key={node.key} /> 
+              })}
+              {/* <LanguageSwitch /> */}
+            </div>
+            </Container>
         </nav>
-        
+        <NavLink
+          href="/landing"
+        >
+          <Logo
+            srcs={['https://app.soulswap.finance/logo.png']}
+            width={'50px'}
+            height={'50px'}
+          />
+        </NavLink>
+
         <Transition.Root show={open} as={Fragment}>
           <Dialog as="div" className="fixed inset-0 overflow-hidden z-20" onClose={setOpen}>
             <div className="absolute inset-0 overflow-hidden">
@@ -108,14 +118,14 @@ const Desktop: FC = () => {
                 >
                   <div className="w-screen max-w-sm">
                     <div className={classNames("flex flex-col h-full py-1 overflow-x-hidden overflow-y-scroll shadow-xl",
-                    "bg-dark-1100")}>
+                      "bg-dark-1100")}>
                       <nav className="flex-1 py-12 bg-dark-1000 pl-6" aria-label="Sidebar">
                         {bar.map((node) => {
                           return <SidebarItem node={node} key={node.key} />
                         })}
                       </nav>
                       <div className="flex items-center justify-start gap-2 mt-1">
-                          {/* <div className="flex items-center w-auto text-sm font-bold border-2 rounded shadow cursor-pointer pointer-events-auto select-none border-dark-800 hover:border-dark-700 bg-dark-900 whitespace-nowrap">
+                        {/* <div className="flex items-center w-auto text-sm font-bold border-2 rounded shadow cursor-pointer pointer-events-auto select-none border-dark-800 hover:border-dark-700 bg-dark-900 whitespace-nowrap">
                             {account && chainId && userEthBalance && (
                               <Link href={`/account/${account}`} passHref={true}>
                                 <a className="hidden px-3 text-high-emphesis text-bold md:block">
@@ -126,9 +136,9 @@ const Desktop: FC = () => {
                             )}
                             <Web3Status />
                           </div>, */}
-                        </div>
-                        <div className="cols w-full flex-cols-2 inline-block">
-                  <Web3Network />
+                      </div>
+                      <div className="cols w-full flex-cols-2 inline-block">
+                        <Web3Network />
                       </div>
                     </div>
                   </div>
@@ -140,14 +150,14 @@ const Desktop: FC = () => {
         <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full xl:w-auto bg-dark-1000 hover:bg-dark-900 xl:relative xl:p-0 xl:bg-transparent">
           <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
             {/* {library && library.provider.isMetaMask && ( */}
-              <div className="sm:inline-block">
-                <LuxorStats />
-              </div>
+            <div className="sm:inline-block">
+              <LuxorStats />
+            </div>
             {/* )} */}
             {/* {library && library.provider.isMetaMask && ( */}
-              <div className="sm:inline-block">
-                <TokenStats />
-              </div>
+            <div className="sm:inline-block">
+              <TokenStats />
+            </div>
             {/* )} */}
             <div className="w-auto flex items-center rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto">
               {account && chainId && userEthBalance && (
@@ -161,15 +171,15 @@ const Desktop: FC = () => {
                 </>
               )}
               {/* {library && library.provider.isMetaMask && ( */}
-                <div className="inline-block">
+              <div className="inline-block">
                 <Web3Status />
-                </div>
+              </div>
               {/* )} */}
               {/* {library && library.provider.isMetaMask && ( */}
-                {/* <div className="inline-block">
+              {/* <div className="inline-block">
                   <Web3Network />
                 </div> */}
-               {/* )} */}
+              {/* )} */}
             </div>
             <More />
           </div>

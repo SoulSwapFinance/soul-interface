@@ -6,7 +6,6 @@ const BA_LIST = 'https://raw.githubusercontent.com/The-Blockchain-Association/se
  */
 export const UNSUPPORTED_LIST_URLS: string[] = [BA_LIST]
 const DEFAULT_TOKEN_LIST = 'https://raw.githubusercontent.com/soulswapfinance/default-token-list/master/soulswap.tokenlist.json'
-// const YEARN_LIST = 'https://yearn.science/static/tokenlist.json'
 // const NFTX_LIST_V1 = 'https://nftx.ethereumdb.com/v1/tokenlist/'
 // const NFTX_LIST_V2 = 'https://nftx.ethereumdb.com/v2/tokenlist/'
 // const SYNTHETIX_LIST = 'synths.snx.eth'
@@ -20,14 +19,16 @@ const DEFAULT_TOKEN_LIST = 'https://raw.githubusercontent.com/soulswapfinance/de
 // export const OPTIMISM_LIST = 'https://static.optimism.io/optimism.tokenlist.json'
 // const ROLL_LIST = 'https://app.tryroll.com/tokens.json'
 // const SET_LIST = 'https://raw.githubusercontent.com/SetProtocol/uniswap-tokenlist/main/set.tokenlist.json'
+const NFTX_LIST = 'https://nftx.ethereumdb.com/v2/tokenlist/'
 // const UMA_LIST = 'https://umaproject.org/uma.tokenlist.json'
 // const WRAPPED_LIST = 'wrapped.tokensoft.eth'
 
 // lower index == higher priority for token import
 export const DEFAULT_LIST_OF_LISTS: string[] = [
   DEFAULT_TOKEN_LIST,
+  NFTX_LIST,
   ...UNSUPPORTED_LIST_URLS, // need to load unsupported tokens as well
 ]
 
 // default lists to be 'active' aka searched across
-export const DEFAULT_ACTIVE_LIST_URLS: string[] = [DEFAULT_TOKEN_LIST]
+export const DEFAULT_ACTIVE_LIST_URLS: string[] = [DEFAULT_TOKEN_LIST, NFTX_LIST]

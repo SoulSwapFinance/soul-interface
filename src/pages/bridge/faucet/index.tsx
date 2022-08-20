@@ -22,6 +22,7 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import { FAUCET_ADDRESS } from '../../../constants'
 import NavLink from '../../../components/NavLink'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 
 export default function Faucet(): JSX.Element {
   const { chainId, account, library } = useActiveWeb3React()
@@ -146,7 +147,7 @@ export default function Faucet(): JSX.Element {
                     <Web3Connect size="lg" color="gradient" className="w-full" />
                   ) : (
                     <Button
-                      color="ftmBlue"
+                      color={getChainColorCode(chainId)}
                       variant="filled"
                       className="font-bold text-light"
                       // TODO: ENABLE REQUEST //
@@ -183,9 +184,9 @@ export default function Faucet(): JSX.Element {
               </div>
             </div>
           </div>
-          <div className="flex items-center px-4">
+          <div className={`flex items-center text-[${getChainColor(chainId)}] px-4`}>
           <NavLink href="/bridge">
-            <a className="flex mt-2 text-ftmBlue items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
+            <a className={`flex mt-2 text-[${getChainColor(chainId)}] items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
             &#x21BB; &nbsp;<span> Back to Bridge </span>
             </a>
           </NavLink>

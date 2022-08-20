@@ -125,6 +125,7 @@ const Swap = () => {
           <div className="flex flex-col px-2 lg:gap-3 ">
             <SwapAssetPanel
               error={typedField === TypedField.A && !!error && !!formattedAmounts[0]}
+              chainId={chainId}
               header={(props) => <SwapAssetPanel.Header {...props} id={`asset-select-trigger-${TypedField.A}`} />}
               walletToggle={(props) => (
                 <SwapAssetPanel.Switch
@@ -155,6 +156,7 @@ const Swap = () => {
             </div>
             <SwapAssetPanel
               error={typedField === TypedField.B && !!error && !!formattedAmounts[0]}
+              chainId={chainId}
               header={(props) => <SwapAssetPanel.Header {...props} id={`asset-select-trigger-${TypedField.B}`} />}
               walletToggle={(props) => (
                 <SwapAssetPanel.Switch

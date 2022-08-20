@@ -19,6 +19,7 @@ import More from './More'
 import useBar from './useBar'
 import { useRouter } from 'next/router'
 import { classNames } from 'functions/styling'
+import { getChainColor } from 'constants/chains'
 // const HEADER_HEIGHT=24
 
 const Mobile: FC = () => {
@@ -37,7 +38,7 @@ const Mobile: FC = () => {
       <header className="w-full flex mt-3 items-center justify-between min-h-[48px] h-[48px] px-4">
         <div className="flex justify-between flex-grow">
           <div className="p-2 rounded-full hover:bg-white/10">
-            <MenuAlt1Icon width={28} className={classNames(isLuxor ? "hover:text-yellow" : "hover:text-dark-600", "text-white cursor-pointer hover:text-white")} onClick={() => setOpen(true)} />
+            <MenuAlt1Icon width={28} className={classNames(isLuxor ? "hover:text-yellow" : `hover:text-[${getChainColor(chainId)}]`, "text-white cursor-pointer hover:text-white")} onClick={() => setOpen(true)} />
           </div>
           <div className="flex items-center w-12 mr-1">
             <Link href="/landing" passHref={true}>
