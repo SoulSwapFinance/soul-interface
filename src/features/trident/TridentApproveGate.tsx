@@ -9,6 +9,7 @@ import { StandardSignatureData, useTridentLiquidityTokenPermit } from 'hooks/use
 import { useActiveWeb3React } from 'services/web3'
 import { useWalletModalToggle } from 'state/application/hooks'
 import React, { FC, memo, ReactNode, useCallback, useEffect, useState } from 'react'
+import { getChainColor } from 'constants/chains'
 
 interface TokenApproveButtonProps {
   id: string
@@ -21,6 +22,7 @@ interface TokenApproveButtonProps {
 const TokenApproveButton: FC<TokenApproveButtonProps> = memo(
   ({ inputAmount, onStateChange, tokenApproveOn, id, onSLPPermit }) => {
     const { i18n } = useLingui()
+    const { chainId } = useActiveWeb3React()
     const [approveState, approveCallback] = useApproveCallback(inputAmount?.wrapped, tokenApproveOn)
     const { gatherPermitSignature, signatureData } = useTridentLiquidityTokenPermit(
       inputAmount?.currency.name === 'SoulSwap LP Token' ? inputAmount?.wrapped : undefined,
@@ -74,7 +76,12 @@ const TokenApproveButton: FC<TokenApproveButtonProps> = memo(
 
     if (!signatureData && [ApprovalState.NOT_APPROVED, ApprovalState.PENDING].includes(approveState)) {
       return (
-        <Button fullWidth id={id} loading={approveState === ApprovalState.PENDING} color="blue" onClick={handleApprove}>
+        <Button 
+          id={id} 
+          className="w-full"
+          loading={approveState === ApprovalState.PENDING} 
+          color={getChainColor(chainId)}
+          onClick={handleApprove}>
           {i18n._(t`Approve ${inputAmount?.currency.symbol}`)}
         </Button>
       )

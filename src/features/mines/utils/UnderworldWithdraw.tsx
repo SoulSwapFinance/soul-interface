@@ -106,8 +106,8 @@ const UnderworldWithdraw = ({ pair, header }) => {
         (underworldApprovalState === CoffinApprovalState.NOT_APPROVED ||
           underworldApprovalState === CoffinApprovalState.PENDING) ? (
         <Button
-          fullWidth
-          loading={underworldApprovalState === CoffinApprovalState.PENDING}
+        className="w-full"
+        loading={underworldApprovalState === CoffinApprovalState.PENDING}
           onClick={onApproveUnderworld}
           disabled={underworldApprovalState !== CoffinApprovalState.NOT_APPROVED}
         >
@@ -115,8 +115,8 @@ const UnderworldWithdraw = ({ pair, header }) => {
         </Button>
       ) : (
         <Button
-          fullWidth
-          color={!isValid && !!parsedWithdrawValue ? 'red' : 'blue'}
+        className="w-full"
+        color={!isValid && !!parsedWithdrawValue ? 'red' : 'blue'}
           onClick={() => onCook(pair, onWithdraw)}
           disabled={!isValid}
         >

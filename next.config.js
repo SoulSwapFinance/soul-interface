@@ -141,16 +141,12 @@ module.exports = withBundleAnalyzer(
           destination: '/exchange/swap/:token*',
         },
         {
+          source: '/cross',
+          destination: '/exchange/cross',
+        },
+        {
           source: '/limit',
           destination: '/exchange/limit',
-        },
-        {
-          source: '/limit-order',
-          destination: '/exchange/limit-order',
-        },
-        {
-          source: '/limit-order/:token*',
-          destination: '/exchange/limit-order/:token*',
         },
         {
           source: '/open-order',
@@ -226,16 +222,6 @@ module.exports = withBundleAnalyzer(
       // localeDetection: true,
       locales,
       defaultLocale: sourceLocale,
-    },
-    network: {
-      chainIds: [ChainId.FANTOM],
-      defaultChainId: ChainId.FANTOM,
-      domains: [
-        {
-          domain: 'soulswap.finance',
-          defaultChainId: ChainId.FANTOM,
-        },
-      ],
     },
     publicRuntimeConfig: {
       breakpoints: screens,

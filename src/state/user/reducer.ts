@@ -11,9 +11,10 @@ import {
   SerializedToken,
   toggleURLWarning,
   updateMatchesDarkMode,
+  updateUserCrossChainMode,
+  updateUserExpertMode,
   updateUserDarkMode,
   updateUserDeadline,
-  updateUserExpertMode,
   updateUserSingleHopOnly,
   updateUserSlippageTolerance,
   updateUserUseOpenMev,
@@ -26,6 +27,7 @@ export interface UserState {
   lastUpdateVersionTimestamp?: number
 
   userExpertMode: boolean
+  userCrossChainMode: boolean
 
   userSingleHopOnly: boolean // only allow swaps on direct pairs
 
@@ -63,6 +65,7 @@ function pairKey(token0Address: string, token1Address: string) {
 }
 
 export const initialState: UserState = {
+  userCrossChainMode: false,
   userExpertMode: false,
   userSingleHopOnly: false,
   userSlippageTolerance: INITIAL_ALLOWED_SLIPPAGE,
@@ -103,6 +106,10 @@ export default createReducer(initialState, (builder) =>
     })
     .addCase(updateUserExpertMode, (state, action) => {
       state.userExpertMode = action.payload.userExpertMode
+      state.timestamp = currentTimestamp()
+    })
+    .addCase(updateUserCrossChainMode, (state, action) => {
+      state.userCrossChainMode = action.payload.userCrossChainMode
       state.timestamp = currentTimestamp()
     })
     .addCase(updateUserSlippageTolerance, (state, action) => {

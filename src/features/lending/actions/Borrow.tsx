@@ -580,7 +580,7 @@ export default function Borrow({ pair }: BorrowProps) {
           <TokenApproveButton value={collateralValue} token={collateralToken} needed={!useCoffinCollateral}>
             <Button onClick={() => onCook(pair, onExecute)} 
             disabled={actionDisabled} 
-            fullWidth={true}
+            className="w-full"
             >
               {actionName}
             </Button>

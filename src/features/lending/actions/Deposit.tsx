@@ -159,7 +159,7 @@ export default function Deposit({ pair }: any): JSX.Element {
             <Button
               onClick={() => onCook(pair, onExecute)}
               disabled={Number(value) <= 0 || warnings.broken}
-              fullWidth={true}
+              className="w-full"
             >
               {i18n._(t`Deposit`)}
             </Button>

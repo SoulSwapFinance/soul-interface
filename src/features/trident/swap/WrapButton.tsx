@@ -37,13 +37,13 @@ const WrapButton: FC = () => {
       return addTransaction(txReceipt, {
         summary: parsedAmounts?.[0]?.currency.isNative
           ? i18n._(
-              // @ts-ignore TYPE NEEDS FIXING
-              t`Wrap ${parsedAmounts?.[0].toSignificant(6)} ${NATIVE[chainId].symbol} to ${WNATIVE[chainId].symbol}`
-            )
+            // @ts-ignore TYPE NEEDS FIXING
+            t`Wrap ${parsedAmounts?.[0].toSignificant(6)} ${NATIVE[chainId].symbol} to ${WNATIVE[chainId].symbol}`
+          )
           : i18n._(
-              // @ts-ignore TYPE NEEDS FIXING
-              t`Unwrap ${parsedAmounts?.[0].toSignificant(6)} ${WNATIVE[chainId].symbol} to ${NATIVE[chainId].symbol}`
-            ),
+            // @ts-ignore TYPE NEEDS FIXING
+            t`Unwrap ${parsedAmounts?.[0].toSignificant(6)} ${WNATIVE[chainId].symbol} to ${NATIVE[chainId].symbol}`
+          ),
       })
     }
 
@@ -81,7 +81,13 @@ const WrapButton: FC = () => {
 
         return (
           <div className="flex">
-            <Button fullWidth id="wrap-button" loading={loading} color="gradient" disabled={disabled} onClick={execute}>
+            <Button
+              className="w-full"
+              id="wrap-button" 
+              loading={loading} 
+              color="gradient" 
+              disabled={disabled} 
+              onClick={execute}>
               {buttonText}
             </Button>
           </div>

@@ -141,8 +141,8 @@ export default function Withdraw({ pair }: any): JSX.Element {
           <Button
             onClick={() => onCook(pair, onExecute)}
             disabled={displayValue.toBigNumber(pair.asset.tokenInfo.decimals).lte(0) || warnings.broken}
-            fullWidth={true}
-          >
+            className="w-full"
+            >
             {i18n._(t`Withdraw`)}
           </Button>
         )}

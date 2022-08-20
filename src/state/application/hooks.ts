@@ -68,6 +68,10 @@ export function useToggleSettingsMenu(): () => void {
   return useToggleModal(ApplicationModal.SETTINGS)
 }
 
+export function useToggleCrossChainMode(): () => void {
+  return useToggleModal(ApplicationModal.CROSSCHAIN)
+}
+
 export function useShowClaimPopup(): boolean {
   return useModalOpen(ApplicationModal.CLAIM_POPUP)
 }

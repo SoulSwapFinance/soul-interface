@@ -6,7 +6,8 @@ import { Currency, ROUTER_ADDRESS, SOUL, SOUL_ADDRESS, Token, WNATIVE_ADDRESS } 
 import { useTokenContract, useSoulSummonerContract, useZapperContract } from 'hooks/useContract'
 import useApprove from 'features/bond/hooks/useApprove'
 import { Tab } from '@headlessui/react'
-import { FarmContentWrapper, FarmContainer, FarmItem, FarmItemBox, Text, FunctionBox, SubmitButton, Wrap
+import {
+    FarmContentWrapper, FarmContainer, FarmItem, FarmItemBox, Text, FunctionBox, SubmitButton, Wrap
 } from './Styles'
 import { classNames, formatNumber, tryParseAmount } from 'functions'
 import { usePairInfo, useSummonerPoolInfo, useSummonerUserInfo, useTokenInfo, useUserTokenInfo } from 'hooks/useAPI'
@@ -595,19 +596,23 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
 
                                 {/* LEND ASSET */}
                                 {isUnderworldPair && (
-                                    <SubmitButton
-                                        height="2rem"
-                                        primaryColor={buttonColor}
-                                        color={buttonTextColor}
-                                        margin=".5rem 0 .5rem 0"
+                                    <NavLink
+                                        href=
+                                        {`/lend/${lpAddress}`}
                                     >
-                                        <NavLink
-                                            href=
-                                            {`/lend/${lpAddress}`}
+                                        <SubmitButton
+                                            height="2rem"
+                                            primaryColor={buttonColor}
+                                            color={buttonTextColor}
+                                            margin=".5rem 0 .5rem 0"
                                         >
-                                            <a>LEND {token0Symbol}</a>
-                                        </NavLink>
-                                    </SubmitButton>
+                                            <a className="font-bold">
+                                                <span>
+                                                    LEND { token0Symbol }
+                                                </span>
+                                            </a>
+                                        </SubmitButton>
+                                    </NavLink>
                                 )}
                                 {/* UN-APPROVED */}
                                 {!approved && (
@@ -615,6 +620,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                         <Wrap padding="0" margin="0" display="flex">
                                             <SubmitButton
                                                 height="2rem"
+                                                className="font-bold"
                                                 primaryColor={buttonColor}
                                                 color={buttonTextColor}
                                                 margin=".5rem 0 .5rem 0"

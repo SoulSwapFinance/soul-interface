@@ -193,7 +193,10 @@ const MigrateButtons = ({ state, exchange }: { state: MigrateState; exchange: st
 
   if (!state.mode || state.lpTokens.length === 0 || !state.selectedLPToken || !state.amount) {
     return (
-      <Button fullWidth disabled={true}>
+      <Button
+        className="w-full"
+        disabled={true}
+      >
         Migrate
       </Button>
     )
@@ -231,7 +234,7 @@ const MigrateButtons = ({ state, exchange }: { state: MigrateState; exchange: st
           </div>
           {state.mode === 'approve' && (
             <Button
-              fullWidth
+              className="w-full"
               loading={approval === ApprovalState.PENDING}
               onClick={approve}
               disabled={approval !== ApprovalState.NOT_APPROVED || isButtonDisabled}
@@ -241,7 +244,7 @@ const MigrateButtons = ({ state, exchange }: { state: MigrateState; exchange: st
           )}
           {((state.mode === 'approve' && approval === ApprovalState.APPROVED) || state.mode === 'permit') && (
             <Button
-              fullWidth
+              className="w-full"
               loading={state.isMigrationPending}
               disabled={noLiquidityTokens || state.isMigrationPending || isButtonDisabled}
               onClick={onPress}

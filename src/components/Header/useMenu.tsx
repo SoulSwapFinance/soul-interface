@@ -155,7 +155,7 @@ const useMenu: UseMenu = () => {
     }
 
     if (featureEnabled(Feature.LUXOR, chainId)) {
-      const learnItems = {
+      const luxorItems = {
         key: 'Luxor',
         title: i18n._(t`Bond`),
         icon: <SunIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
@@ -183,7 +183,7 @@ const useMenu: UseMenu = () => {
         //   },
         // ],
       }
-      mainItems.push(learnItems)
+      mainItems.push(luxorItems)
     }
 
 

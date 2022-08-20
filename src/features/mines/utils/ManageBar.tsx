@@ -156,8 +156,8 @@ const ManageBar = ({ farm }) => {
         ) : isDepositValid &&
           (approvalState === ApprovalState.NOT_APPROVED || approvalState === ApprovalState.PENDING) ? (
           <Button
-            fullWidth
-            loading={approvalState === ApprovalState.PENDING}
+          className="w-full"
+          loading={approvalState === ApprovalState.PENDING}
             color="gradient"
             onClick={approve}
             disabled={approvalState !== ApprovalState.NOT_APPROVED}
@@ -167,8 +167,8 @@ const ManageBar = ({ farm }) => {
         ) : 
         ( farm.pair.token1 ? (
           <Button
-            fullWidth
-            color={!isDepositValid && !!parsedDepositValue ? 'red' : 'blue'}
+          className="w-full"
+          color={!isDepositValid && !!parsedDepositValue ? 'red' : 'blue'}
             onClick={async () => {
               try {
                 // UMP decimals depend on asset, SLP is always 18
@@ -196,8 +196,8 @@ const ManageBar = ({ farm }) => {
           </Button>
           ) : (
           <Button
-            fullWidth
-            color={!isDepositValid && !!parsedDepositValue ? 'red' : 'blue'}
+          className="w-full"
+          color={!isDepositValid && !!parsedDepositValue ? 'red' : 'blue'}
             onClick={async () => {
               try {
                 // UMP decimals depend on asset, SLP is always 18
@@ -230,8 +230,8 @@ const ManageBar = ({ farm }) => {
       ) : (
         farm.pair.token1 ?
         <Button
-          fullWidth
-          color={!isWithdrawValid && !!parsedWithdrawValue ? 'red' : 'blue'}
+        className="w-full"
+        color={!isWithdrawValid && !!parsedWithdrawValue ? 'red' : 'blue'}
           onClick={async () => {
             try {
               // UMP decimals depend on asset, SLP is always 18
@@ -259,7 +259,7 @@ const ManageBar = ({ farm }) => {
         </Button>
       : 
       <Button
-      fullWidth
+      className="w-full"
       color={!isWithdrawValid && !!parsedWithdrawValue ? 'red' : 'blue'}
       onClick={async () => {
         try {
