@@ -543,7 +543,7 @@ const Swap = () => {
                   </ExternalLink>
                 </Button>
               </div> */}
-        {isCrossChainMode && chainId == 250 &&
+        {chainId == 250 &&
           <div className={'flex flex-cols-2 gap-8 justify-end rounded'}>
             <CrossChainMode />
           </div>
@@ -570,14 +570,9 @@ const Swap = () => {
         {!showChart &&
           <>
             <div className="flex mt-3" /><SocialWidget />
-            {/* <div className="grid grid-cols-1"> */}
-            {/* <Image src='https://app.soulswap.finance/neon-bg.jpeg' height="400px" width="400px" /> */}
-            {/* <Image src='https://app.soulswap.finance/neon-triangle-lights.jpeg' height="600px" width="600px" /> */}
-            {/*    <Image src={DESIGN} height="400px" width="480px" alt="logo" /> 
-          </div> */}
           </>
         }
-        {showChart &&
+        {showChart && !isCrossChainMode && chainId==250
           <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
             <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
               <Chart inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
