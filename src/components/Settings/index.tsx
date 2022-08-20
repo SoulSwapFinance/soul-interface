@@ -2,8 +2,8 @@ import { ChainId, Percent } from '../../sdk'
 import React, { useCallback, useRef, useState } from 'react'
 import { CheckIcon, CogIcon } from '@heroicons/react/outline'
 import {
-  // useExpertModeManager,
-  useCrossChainModeManager,
+  useExpertModeManager,
+  // useCrossChainModeManager,
   // useUserArcherUseRelay,
   useUserSingleHopOnly,
   useUserTransactionTTL,
@@ -34,7 +34,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
   const open = useModalOpen(ApplicationModal.SETTINGS)
   const toggle = useToggleSettingsMenu()
 
-  const [expertMode, toggleExpertMode] = useCrossChainModeManager()
+  const [expertMode, toggleExpertMode] = useExpertModeManager()
 
   const [singleHopOnly, setSingleHopOnly] = useUserSingleHopOnly()
 
