@@ -128,6 +128,7 @@ const LimitOrder = () => {
           <SwapAssetPanel
             error={false}
             header={(props) => <SwapAssetPanel.Header {...props} label={i18n._(t`You receive`)} />}
+            chainId={chainId}
             selected={true}
             currency={outputCurrency}
             value={(typedField === Field.OUTPUT ? typedValue : parsedAmounts?.outputAmount?.toSignificant(6)) || ''}
