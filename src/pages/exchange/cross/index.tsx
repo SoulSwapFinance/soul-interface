@@ -701,7 +701,7 @@ export default function Exchange() {
                   <div
                     className="flex font-bold justify-center">
                     <Typography className={classNames('text-xl font-bold', 'font-bold text-white')} weight={600} fontFamily={'semi-bold'}>
-                      Warning High-Slippage
+                      Warning: High-Slippage
                     </Typography>
                   </div>
                 </div>
