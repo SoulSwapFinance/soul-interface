@@ -21,6 +21,9 @@ const FLEXED = {
   ftmBlue: 'bg-ftmBlue bg-opacity-80 flex rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   ethBlue: 'bg-ethBlue bg-opacity-80 flex rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   avaxRed: 'bg-avaxRed bg-opacity-80 flex rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
+  binanceGold: 'bg-binanceGold bg-opacity-80 flex rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
+  moonriverTeal: 'bg-moonriverTeal bg-opacity-80 flex rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
+  maticPurple: 'bg-maticPurple bg-opacity-80 flex rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   pink: 'bg-gradient-to-r from-pink to-opaque-pink flex rounded text-high-emphesis opacity-80 hover:opacity-100 disabled:bg-opacity-80',
   purple: 'bg-gradient-to-r from-purple to-opaque-purple flex rounded text-high-emphesis opacity-80 hover:opacity-100 disabled:bg-opacity-80',
   deepPurple: 'bg-gradient-to-r from-deepPurple to-opaque-purple flex rounded text-high-emphesis opacity-80 hover:opacity-100 disabled:bg-opacity-80',
@@ -40,6 +43,9 @@ const FILLED = {
   ftmBlue: 'bg-ftmBlue bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   ethBlue: 'bg-ethBlue bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   avaxRed: 'bg-avaxRed bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
+  binanceGold: 'bg-binanceGold bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
+  moonriverTeal: 'bg-moonriverTeal bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
+  maticPurple: 'bg-maticPurple bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   pink: 'bg-pink bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   purple: 'bg-purple bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   deepPurple: 'bg-deepPurple bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
@@ -63,6 +69,9 @@ const OUTLINED = {
   ftmBlue: 'bg-ftmBlue bg-opacity-20 outline-ftmBlue rounded text-ftmBlue hover:bg-opacity-40 disabled:bg-opacity-20',
   ethBlue: 'bg-ethBlue bg-opacity-20 outline-ethBlue rounded text-ethBlue hover:bg-opacity-40 disabled:bg-opacity-20',
   avaxRed: 'bg-avaxRed bg-opacity-20 outline-avaxRed rounded text-avaxRed hover:bg-opacity-40 disabled:bg-opacity-20',
+  binanceGold: 'bg-binanceGold bg-opacity-20 outline-binanceGold rounded text-binanceGold hover:bg-opacity-40 disabled:bg-opacity-20',
+  moonriverTeal: 'bg-moonriverTeal bg-opacity-20 outline-moonriverTeal rounded text-moonriverTeal hover:bg-opacity-40 disabled:bg-opacity-20',
+  maticPurple: 'bg-maticPurple bg-opacity-20 outline-maticPurple rounded text-maticPurple hover:bg-opacity-40 disabled:bg-opacity-20',
   pink: 'bg-pink bg-opacity-20 outline-pink rounded text-pink hover:bg-opacity-40 disabled:bg-opacity-20',
   purple: 'bg-purple bg-opacity-20 outline-purple rounded text-purple hover:bg-opacity-40 disabled:bg-opacity-20',
   deepPurple: 'bg-deepPurple bg-opacity-20 outline-purple rounded text-purple hover:bg-opacity-40 disabled:bg-opacity-20',
@@ -80,6 +89,9 @@ const BORDERED = {
   ftmBlue: 'border w-full border-transparent hover:border-ftmBlue bg-ftmBlue bg-opacity-40 outline-ftmBlue rounded text-ftmBlue hover:bg-opacity-40 disabled:bg-opacity-20',
   ethBlue: 'border w-full border-transparent hover:border-ethBlue bg-ethBlue bg-opacity-40 outline-ethBlue rounded text-ethBlue hover:bg-opacity-40 disabled:bg-opacity-20',
   avaxRed: 'border w-full border-transparent hover:border-avaxRed bg-avaxRed bg-opacity-40 outline-avaxRed rounded text-avaxRed hover:bg-opacity-40 disabled:bg-opacity-20',
+  binanceGold: 'border w-full border-transparent hover:border-binanceGold bg-avaxRed bg-opacity-40 outline-binanceGold rounded text-binanceGold hover:bg-opacity-40 disabled:bg-opacity-20',
+  moonriverTeal: 'border w-full border-transparent hover:border-moonriverTeal bg-moonriverTeal bg-opacity-40 outline-moonriverTeal rounded text-moonriverTeal hover:bg-opacity-40 disabled:bg-opacity-20',
+  maticPurple: 'border w-full border-transparent hover:border-maticPurple bg-maticPurple bg-opacity-40 outline-maticPurple rounded text-maticPurple hover:bg-opacity-40 disabled:bg-opacity-20',
   deepPurple: 'border w-full border-transparent hover:border-deepPurple bg-deepPurple bg-opacity-40 outline-deepPurple rounded text-deepPurple hover:bg-opacity-40 disabled:bg-opacity-20',
   purple: 'border w-full border-transparent hover:border-purple bg-purple bg-opacity-40 outline-purple rounded text-purple hover:bg-opacity-40 disabled:bg-opacity-20',
   yellow: 'border w-full border-transparent hover:border-yellow bg-yellow bg-opacity-40 outline-yellow rounded text-yellow hover:bg-opacity-40 disabled:bg-opacity-20',
@@ -93,6 +105,11 @@ const EMPTY = {
 const LINK = {
   default: 'text-primary hover:text-high-emphesis focus:text-high-emphesis whitespace-nowrap focus:ring-0',
   blue: 'text-blue text-opacity-80 hover:text-opacity-100 focus:text-opacity-100 whitespace-nowrap focus:ring-0',
+  ethBlue: 'text-ethBlue text-opacity-80 hover:text-opacity-100 focus:text-opacity-100 whitespace-nowrap focus:ring-0',
+  ftmBlue: 'text-ftmBlue text-opacity-80 hover:text-opacity-100 focus:text-opacity-100 whitespace-nowrap focus:ring-0',
+  avaxRed: 'text-avaxRed text-opacity-80 hover:text-opacity-100 focus:text-opacity-100 whitespace-nowrap focus:ring-0',
+  binanceGold: 'text-binanceGold text-opacity-80 hover:text-opacity-100 focus:text-opacity-100 whitespace-nowrap focus:ring-0',
+  maticPurple: 'text-maticPurple text-opacity-80 hover:text-opacity-100 focus:text-opacity-100 whitespace-nowrap focus:ring-0',
 }
 
 const VARIANT = {
@@ -104,7 +121,7 @@ const VARIANT = {
   flexed: FLEXED,
 }
 
-export type ButtonColor = 'blue' | 'ftmBlue' | 'avaxRed' | 'ethBlue' | 'pink' | 'purple' | 'gradient' | 'gray' | 'default' | 'red' | 'green' | 'yellow'
+export type ButtonColor = 'blue' | 'ftmBlue' | 'avaxRed' | 'ethBlue' | 'binanceGold' | 'moonriverTeal' | 'maticPurple' | 'pink' | 'purple' | 'gradient' | 'gray' | 'default' | 'red' | 'green' | 'yellow'
 
 export type ButtonSize = 'xs' | 'sm' | 'lg' | 'default' | 'none' | 'nobase'
 

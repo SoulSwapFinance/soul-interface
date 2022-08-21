@@ -10,6 +10,9 @@ const COLOR = {
   ftmBlue: 'text-ftmBlue opacity-100 hover:opacity-100 focus:opacity-100',
   ethBlue: 'text-ethBlue opacity-100 hover:opacity-100 focus:opacity-100',
   avaxRed: 'text-avaxRed opacity-100 hover:opacity-100 focus:opacity-100',
+  binanceGold: 'text-binanceGold opacity-100 hover:opacity-100 focus:opacity-100',
+  moonriverTeal: 'text-moonriverTeal opacity-100 hover:opacity-100 focus:opacity-100',
+  maticPurple: 'text-maticPurple opacity-100 hover:opacity-100 focus:opacity-100',
 }
 
 interface ExternalLinkProps extends Omit<HTMLProps<HTMLAnchorElement>, 'as' | 'ref' | 'onClick'> {

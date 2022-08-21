@@ -29,9 +29,9 @@ export function getChainColorCode(chainId: number) {
   chainId == 250 ? colorCode = `ftmBlue`
     : chainId == 43114 ? colorCode = `avaxRed`
       : chainId == 1 ? colorCode = `ethBlue`
-        : chainId == 56 ? colorCode = `#F0B90B`
-        : chainId == 137 ? colorCode = `#8247E5`
-          : chainId == 1285 ? colorCode = `#53CBC9`
+        : chainId == 56 ? colorCode = `binanceGold`
+        : chainId == 137 ? colorCode = `maticPurple`
+          : chainId == 1285 ? colorCode = `moonriverTeal`
             : `ftmBlue`
 
   return colorCode
