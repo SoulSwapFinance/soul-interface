@@ -54,7 +54,7 @@ const Desktop: FC = () => {
         <div className="flex justify-between flex-grow">
           <div className="p-1 bg-dark-900 rounded-full hover:bg-dark-800">
             {/* <div className="flex p-2 justify-between"> */}
-            <MenuAlt1Icon width={24} className="text-white cursor-pointer" onClick={() => setOpen(true)} />
+            <MenuAlt1Icon width={24} className={classNames(chainId != 250 ? 'hidden' : "text-white cursor-pointer")} onClick={() => setOpen(true)} />
           </div>
           {/* <div className="flex w-6 mr-4 items-center">
                   <NavLink href="/landing">
@@ -80,7 +80,7 @@ const Desktop: FC = () => {
             </div>
             </Container>
         </nav>
-        <NavLink
+        {/* <NavLink
           href="/landing"
         >
           <Logo
@@ -88,10 +88,12 @@ const Desktop: FC = () => {
             width={'50px'}
             height={'50px'}
           />
-        </NavLink>
+        </NavLink> */}
 
-        <Transition.Root show={open} as={Fragment}>
-          <Dialog as="div" className="fixed inset-0 overflow-hidden z-20" onClose={setOpen}>
+        <Transition.Root 
+          show={open} 
+            as={Fragment}>
+          <Dialog as="div" className={classNames("fixed inset-0 overflow-hidden z-20")} onClose={setOpen}>
             <div className="absolute inset-0 overflow-hidden">
               <Transition.Child
                 as={Fragment}
@@ -119,7 +121,8 @@ const Desktop: FC = () => {
                   <div className="w-screen max-w-sm">
                     <div className={classNames("flex flex-col h-full py-1 overflow-x-hidden overflow-y-scroll shadow-xl",
                       "bg-dark-1100")}>
-                      <nav className="flex-1 py-12 bg-dark-1000 pl-6" aria-label="Sidebar">
+                      <nav className 
+                        = {classNames( "flex-1 py-12 bg-dark-1000 pl-6" )} aria-label="Sidebar">
                         {bar.map((node) => {
                           return <SidebarItem node={node} key={node.key} />
                         })}

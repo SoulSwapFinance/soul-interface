@@ -273,7 +273,7 @@ const ChainSelection: React.FC<any> = ({
             <div className="ml-2" />
             <ButtonComponent
               variant="outlined"
-              color="purple"
+              color={getChainColorCode(chainId)}
               onClick={() => forceSwap(fromChain)}
             >
             <div className="ml-2 mr-2 text-white font-bold">
@@ -1017,7 +1017,7 @@ const Bridge: React.FC<any> = () => {
                     !amount ||
                     chainId !== fromChain}
                   variant="filled"
-                  color="purple"
+                  color={getChainColorCode(chainId)}
                   onClick={handleBridgeAction}
                 >
                   {isBridgeTxPending
