@@ -33,6 +33,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const { asPath } = useRouter()
   const { chainId } = useActiveWeb3React()
   const isRemove = asPath.startsWith('/remove')
+  const isCrossChain = asPath.startsWith('/swap')
   const isSwap = asPath.startsWith('/swap') || asPath.startsWith('/add') || asPath.startsWith('/remove')
   const chainColor
     = chainId == ChainId.FANTOM ? `border-[#1969FF] text-[#1969FF]`
@@ -55,37 +56,27 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             pathname: '/swap',
             query: getQuery(inputCurrency, outputCurrency),
           }}
-        >
+          >
           <Typography weight={700} className={`text-secondary ml-3 hover:${hoverColor} p-1`}>
             {i18n._(t`Swap`)}
           </Typography>
         </NavLink>
-
+      { chainId == 250 &&
         <NavLink
-          activeClassName={classNames(
-            "border rounded bg-black",
-            chainColor
+        activeClassName={classNames(
+          "border rounded bg-black",
+          chainColor
           )}
           href={`/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : (chainId == 250 ? '/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07' : `/${DAI_ADDRESS[chainId]}`)
-            }`}
+        }`} 
         >
           <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
             {i18n._(t`+/-`)}
           </Typography>
         </NavLink>
-        {/* <NavLink
-          activeClassName={classNames(
-            "border rounded bg-black",
-            chainColor
-          )}
-          href={{
-            pathname: '/cross',
-          }}
-        >
-          <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
-            {i18n._(t`Cross`)}
-          </Typography>
-        </NavLink> */}
+        }
+
+        { chainId == 250 &&
         <NavLink
           activeClassName={classNames(
             "border rounded bg-black",
@@ -100,7 +91,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Limit`)}
           </Typography>
         </NavLink>
-
+          }
         <NavLink
           activeClassName={classNames(
             "border rounded bg-black",
@@ -116,20 +107,19 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
         </NavLink>
       </div>
         {
-          isSwap && chainId != 250 &&
+          isCrossChain && chainId != 250 &&
           <div className={'flex justify-end rounded mr-4'}>
             <CrossChainMode />
           </div>
         }
-        
         {
-          isSwap && chainId == 250 &&
+          isCrossChain && chainId == 250 &&
           <div className={'flex flex-cols-2 sm:gap-8 gap-6 mr-4 justify-end rounded'}>
             <CrossChainMode />
-            <Settings />
+            { isSwap && <Settings /> }
           </div>
         }
-      
+
     </div>
   )
 }

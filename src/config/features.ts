@@ -22,7 +22,7 @@ const features: FeatureMap = {
   ],
 
   [ChainId.MOONRIVER]: [
-    Feature.AMM, 
+    Feature.AMM,
     // Feature.ANALYTICS,
     // Feature.UNDERWORLD
   ],
@@ -48,8 +48,8 @@ const features: FeatureMap = {
   [ChainId.AVALANCHE]: [
     Feature.AMM, 
     Feature.ANALYTICS,
-    Feature.COFFINBOX,
-    Feature.UNDERWORLD,
+    // Feature.COFFINBOX,
+    // Feature.UNDERWORLD,
   ],
 
   [ChainId.FANTOM]: [
@@ -62,8 +62,8 @@ const features: FeatureMap = {
     Feature.LIMIT,
     Feature.EXPLORE,
     Feature.LUXOR,
-    // Feature.LIMIT_ORDERS,
     Feature.UNDERWORLD
+    // Feature.LIMIT_ORDERS,
   ],
 
   [ChainId.FANTOM_TESTNET]: [

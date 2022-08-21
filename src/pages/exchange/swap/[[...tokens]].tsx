@@ -68,6 +68,7 @@ const Swap = () => {
 
   const [showChart, setShowChart] = useState(false)
   const [expertMode, openExpertMode] = useState(false)
+  // const [showCrossChain, setShowCrossChain] = useState(false)
   const [showCrosschain, openCrossChainMode] = useState(false)
   // const toggle = toggleExpertMode()
 
@@ -352,7 +353,7 @@ const Swap = () => {
         tokens={importTokensNotInDefault}
         onConfirm={handleConfirmTokenWarning}
       />
-
+  
       <SwapLayoutCard>
         <div className="flex flex-col gap-3 justify-center">
           <SwapHeader inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
