@@ -247,9 +247,10 @@ const NetworkModal: FC = () => {
                         : chainId == ChainId.ETHEREUM
                           ? 'border-blue'
                           : chainId == ChainId.BSC
-                            ? 'border-yellow'
+                            ? 'border-binanceGold'
                               : chainId == ChainId.AVALANCHE
                               ? 'border-avaxRed'
+                              : chainId == ChainId.MATIC ? 'border-maticPurple'
                                 // : chainId == ChainId.ARBITRUM
                                 // ? 'border-arbitrumBlue'
                                   : chainId == ChainId.MOONRIVER

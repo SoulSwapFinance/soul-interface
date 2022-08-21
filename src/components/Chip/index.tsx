@@ -15,7 +15,10 @@ const FILLED = {
   purple: 'bg-purple bg-opacity-25 text-purple',
   ftmBlue: 'bg-ftmBlue bg-opacity-25 text-ftmBlue',
   ethBlue: 'bg-ethBlue bg-opacity-25 text-ethBlue',
-  avaxRed: 'bg-avaxRed bg-opacity-25 text-avaxRed',
+  avaxRed: 'bg-avaxRed bg-opacity-25 text-avaxRed', 
+  binanceGold: 'bg-binanceGold bg-opacity-25 text-binanceGold',
+  moonriverTeal: 'bg-moonriverTeal bg-opacity-25 text-moonriverTeal',
+  maticPurple: 'bg-maticPurple bg-opacity-25 text-maticPurple',
   yellow: 'bg-yellow bg-opacity-[0.35] text-yellow',
   blue: 'bg-blue bg-opacity-[0.35] text-blue',
   green: 'bg-green bg-opacity-25 text-green',
@@ -27,7 +30,8 @@ const VARIANT = {
   filled: FILLED,
 }
 
-export type ChipColor = 'default' | 'purple' | 'yellow' | 'blue' | 'green' | 'white' | 'pink' | 'red'
+export type ChipColor = 'default' | 'purple' | 'yellow' | 'blue' | 'green' | 'white' | 'pink' | 'red' | 'moonriverTeal' | 'binanceGold' | 'ethBlue' | 'ftmBlue' | 'avaxRed' | 'maticPurple'
+
 export type ChipSize = 'default' | 'sm'
 export type ChipVariant = 'filled'
 
