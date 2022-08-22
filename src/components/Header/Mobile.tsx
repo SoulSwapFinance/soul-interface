@@ -39,9 +39,11 @@ const Mobile: FC = () => {
     <>
       <header className="w-full flex mt-3 items-center justify-between min-h-[48px] h-[48px] px-4">
         <div className="flex justify-between flex-grow">
-          <div className="mt-5 rounded-full">
+          { chainId == 250 &&
+            <div className="mt-5 rounded-full">
             <MenuAlt1Icon width={24} className={classNames(isLuxor ? "hover:text-yellow" : `hover:text-[${getChainColor(chainId)}]`, `text-[${getChainColor(chainId)}]`, "cursor-pointer hover:text-white")} onClick={() => setOpen(true)} />
           </div>
+          }
           <div
               className="flex gap-3 px-1 sm:gap-4 md:gap-18 justify-between items-center">
               {menu.map((node) => {
