@@ -100,7 +100,11 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     const discountNormal = Number(luxorBondInfo.discount)
     const luxPriceAdj = luxPrice * 1.25//(delta23 * 100 / assetPrice )
     const bondPrice 
-    = bond.assetAddress == SOR_FTM_ADDRESS ?  bondPriceNormal / luxPriceAdj : bondPriceNormal
+        = bond.assetAddress == SOR_FTM_ADDRESS 
+            ?  bondPriceNormal / luxPriceAdj 
+            : bond.assetAddress == LUX_FTM_ADDRESS
+            ?  bondPriceNormal / 3.5
+            : bondPriceNormal
     const deltaSorFtm = luxPrice - bondPrice //.78
     const discount 
         = (bond.assetAddress == SOR_FTM_ADDRESS && deltaSorFtm > 0) ? deltaSorFtm / luxPrice * 100 : discountNormal
@@ -371,7 +375,9 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                         </Text>
                                     ) : (
                                         <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                            ${Number(bondPrice).toFixed(2)}
+                                            ${                                             
+                                                Number(bondPrice).toFixed(2)
+                                            }
                                         </Text>
                                     )}
                                 </StakeItem>
