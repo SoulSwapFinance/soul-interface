@@ -16,19 +16,6 @@ export const InactivePools = [
   },
   {
     // 0
-    pid: 36,
-    token1: 'SOUL',
-    token2: 'WETH',
-    lpSymbol: 'SOUL-ETH',
-    lpAddresses: {
-      4002: '',
-      250: '0x778F0d5515A3E78D1DD191f30835420c0275bde1',
-    },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.WETH,
-  },
-  {
-    // 0
     pid: 6,
     token1: 'USDC',
     token2: 'FUSD',
