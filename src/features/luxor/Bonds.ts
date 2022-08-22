@@ -262,4 +262,15 @@ export const AllBonds = [
     term: '5D',
   },
 
+  // LUX-FTM BONDS //
+  {
+    pid: 27,
+    bondAddress: '0x6d9b32219455f42E24159E089aFc8D744819cd23',
+    assetName: 'LUX-FTM',
+    assetAddress: LUX_FTM,
+    token1Address: LUX,
+    token2Address: FTM,
+    term: '5D',
+  },
+
 ]
