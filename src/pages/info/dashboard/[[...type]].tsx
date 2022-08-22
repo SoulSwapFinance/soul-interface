@@ -18,7 +18,7 @@ export default function Dashboard() {
       <iframe 
   			frameBorder={"none"}
     		title={"INFO"}
-    		src={"https://info.soulswap.finance/account/" + `${account}`}
+    		src={"https://charts.soul.sh/account/" + `${account}`}
     		height={"800px"}
     		width={"100%"}
       />

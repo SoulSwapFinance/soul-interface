@@ -334,7 +334,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
       <CurrencyLogo currency={inputCurrency} size={'30px'} className={'shadow'} />
       </div>
       <a
-        href={`https://info.soulswap.finance/pair/${pairAddress}`}
+        href={`https://charts.soul.sh/pair/${pairAddress}`}
         target="_blank"
         rel="noreferrer"
         className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2"

@@ -15,7 +15,7 @@ export default function Home() {
       <iframe 
   			frameBorder={"none"}
     		title={"INFO"}
-    		src="https://info.soulswap.finance/home"
+    		src="https://charts.soul.sh/home"
     		height={"800px"}
     		width={"100%"}
       />

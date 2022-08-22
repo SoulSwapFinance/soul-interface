@@ -18,7 +18,7 @@ export default function Pairs() {
       <iframe 
   			frameBorder={"none"}
     		title={"INFO"}
-    		src={"https://info.soulswap.finance/pairs"}
+    		src={"https://charts.soul.sh/pairs"}
     		height={"800px"}
     		width={"100%"}
       />
