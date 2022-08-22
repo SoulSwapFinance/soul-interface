@@ -527,7 +527,6 @@ const Swap = () => {
           {isExpertMode && swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}
         {swapIsUnsupported ? <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} show={false} /> : null}
         {/* </div> */}
-
         {/* <div className="flex border-dark-900 mt-3 mb-0 gap-1 items-center justify-center">
                 <Button variant="filled" color="gradientPurpleBlue" size="lg">
                   <NavLink href={"/portfolio"}>

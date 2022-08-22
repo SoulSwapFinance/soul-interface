@@ -1,5 +1,5 @@
 import React, { ReactNode, useMemo } from 'react'
-import { GlobeIcon, SwitchVerticalIcon, TrendingUpIcon, SunIcon, CurrencyDollarIcon, UserGroupIcon } from '@heroicons/react/outline'
+import { GlobeIcon, SwitchVerticalIcon, TrendingUpIcon, SunIcon, CurrencyDollarIcon, UserGroupIcon, PlusIcon, MoonIcon } from '@heroicons/react/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { SOUL_ADDRESS } from 'sdk'
@@ -9,10 +9,10 @@ import { classNames, featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
 import { useRouter } from 'next/router'
 import { getChainColor } from 'constants/chains'
-
+import Twitter from 'assets/icons/twitter.png'
 export interface MenuItemLeaf {
   key: string
-  title: string
+  title?: string
   link: string
   icon?: ReactNode
 }
@@ -148,7 +148,7 @@ const useMenu: UseMenu = () => {
       const mintItems = {
         key: 'mint',
         title: i18n._(t`Mint`),
-        icon: <CurrencyDollarIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+        icon: <MoonIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
         link: '/bonds'
       }
       mainItems.push(mintItems)
@@ -184,6 +184,38 @@ const useMenu: UseMenu = () => {
         // ],
       }
       mainItems.push(luxorItems)
+    }
+
+    if (chainId != 250) {
+      const bridgeItem = {
+        key: 'bridge',
+        title: i18n._(t`Bridge`),
+        icon: <GlobeIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+        link: '/bridge'
+        // items: [
+        //   {
+        //     key: 'luxor-dashboard',
+        //     title: i18n._(t`Overview`),
+        //     link: '/luxor/dashboard',
+        //   },
+        //   {
+        //     key: 'earn',
+        //     title: i18n._(t`Explore`),
+        //     link: '/explore',
+        //   },
+        //   {
+        //     key: 'sor',
+        //     title: i18n._(t`Stable`),
+        //     link: '/luxor/sor',
+        //   },
+        //   {
+        //     key: 'lux-docs',
+        //     title: i18n._(t`Tutorials`),
+        //     link: 'https://docs.luxor.money',
+        //   },
+        // ],
+      }
+      mainItems.push(bridgeItem)
     }
 
 
@@ -231,7 +263,7 @@ const useMenu: UseMenu = () => {
     if (featureEnabled(Feature.ANALYTICS, chainId)) {
       let analyticsMenu: MenuItem = {
         key: 'analytics',
-        title: i18n._(t`Analyze`),
+        title: i18n._(t`Data`),
         icon: <TrendingUpIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
         link: '/info'
         // items: [
@@ -265,7 +297,7 @@ const useMenu: UseMenu = () => {
         key: 'socials',
         title: i18n._(t`Follow`),
         icon: <UserGroupIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
-            link: `https://twitter.com/${isLuxor ? 'LuxorMoney' : 'SoulSwapFinance'}`,
+        link: `https://twitter.com/${isLuxor ? 'LuxorMoney' : 'SoulSwapFinance'}`,
         // items: [
         //   {
         //     key: 'discord',
