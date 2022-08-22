@@ -63,7 +63,7 @@ const AnalyticsHeaderNew: FC<AnalyticsHeaderProps> = ({ input, output, allowedSl
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple"
           href={"/analytics/tokens"}
-          // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
+          // href={`${output ? `https://charts.soul.sh/token/${currencyId(output)}` : ''}`}
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
             {i18n._(t`TOKENS`)}
@@ -72,7 +72,7 @@ const AnalyticsHeaderNew: FC<AnalyticsHeaderProps> = ({ input, output, allowedSl
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple"
           href={"/analytics/pairs"}
-          // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
+          // href={`${output ? `https://charts.soul.sh/token/${currencyId(output)}` : ''}`}
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
             {i18n._(t`PAIRS`)}
@@ -81,7 +81,7 @@ const AnalyticsHeaderNew: FC<AnalyticsHeaderProps> = ({ input, output, allowedSl
         {/* <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
           href={"/farms"}
-          // href={`${output ? `https://info.soulswap.finance/token/${currencyId(output)}` : ''}`}
+          // href={`${output ? `https://charts.soul.sh/token/${currencyId(output)}` : ''}`}
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
             {i18n._(t`Farm`)}

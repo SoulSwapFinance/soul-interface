@@ -7,7 +7,7 @@ const Charts = () => {
 				<iframe
 					frameBorder={"none"}
 					title={"CHARTS"}
-					src="https://info.soulswap.finance"
+					src="https://charts.soul.sh"
 					height={"720"}
 					width={"100%"} />
 			</div>
