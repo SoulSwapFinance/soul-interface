@@ -620,7 +620,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                         <Wrap padding="0" margin="0" display="flex">
                                             <SubmitButton
                                                 height="2rem"
-                                                className="font-bold"
+                                                className="font-bold text-white"
                                                 primaryColor={buttonColor}
                                                 color={buttonTextColor}
                                                 margin=".5rem 0 .5rem 0"
