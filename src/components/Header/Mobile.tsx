@@ -1,7 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { MenuAlt1Icon } from '@heroicons/react/outline'
 import { NATIVE } from 'sdk'
-// import useMenu from 'components/Header/useMenu'
+import useMenu from 'components/Header/useMenu'
 import Web3Network from 'components/Web3Network'
 import Web3Status from 'components/Web3Status'
 import useIsCoinbaseWallet from 'hooks/useIsCoinbaseWallet'
@@ -20,10 +20,12 @@ import useBar from './useBar'
 import { useRouter } from 'next/router'
 import { classNames } from 'functions/styling'
 import { getChainColor } from 'constants/chains'
+import { NavigationItem } from './NavigationItem'
+import LanguageSwitch from 'components/LanguageSwitch'
 // const HEADER_HEIGHT=24
 
 const Mobile: FC = () => {
-  // const menu = useMenu()
+  const menu = useMenu()
   const bar = useBar()
   const router = useRouter()
   const isLuxor = router.asPath.startsWith('/luxor')
@@ -37,12 +39,18 @@ const Mobile: FC = () => {
     <>
       <header className="w-full flex mt-3 items-center justify-between min-h-[48px] h-[48px] px-4">
         <div className="flex justify-between flex-grow">
-          <div className="p-2 rounded-full hover:bg-white/10">
-            <MenuAlt1Icon width={28} className={classNames(isLuxor ? "hover:text-yellow" : `hover:text-[${getChainColor(chainId)}]`, "text-white cursor-pointer hover:text-white")} onClick={() => setOpen(true)} />
+          <div className="mt-5 rounded-full">
+            <MenuAlt1Icon width={24} className={classNames(isLuxor ? "hover:text-yellow" : `hover:text-[${getChainColor(chainId)}]`, `text-[${getChainColor(chainId)}]`, "cursor-pointer hover:text-white")} onClick={() => setOpen(true)} />
           </div>
+          <div
+              className="flex gap-3 px-1 sm:gap-4 md:gap-18 justify-between items-center">
+              {menu.map((node) => {
+                return <NavigationItem node={node} key={node.key} /> 
+              })}
+            </div>
           <div className="flex items-center w-12 mr-1">
             <Link href="/landing" passHref={true}>
-              <Image src="/logo.png" alt="logo" width="44px" height="44px" />
+              <Image src="/logo.png" alt="logo" width="32px" height="32px" />
             </Link>
           </div>
         </div>
@@ -91,13 +99,12 @@ const Mobile: FC = () => {
                             {account && chainId && userEthBalance && (
                               <Link href={`/account/${account}`} passHref={true}>
                                 <a className="hidden px-3 text-high-emphesis text-bold md:block">
-                                  @ts-ignore
                                   {userEthBalance?.toSignificant(4)} {NATIVE[chainId || 250].symbol}
                                 </a>
                               </Link>
                             )}
                             <Web3Status />
-                          </div>, */}
+                          </div> */}
                         </div>
                         <div className="cols flex-cols-2 inline-block">
                   <Web3Network />

@@ -50,7 +50,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
         )}
       >
         {!isDesktop && node.icon}
-        {node.title}
+        {isDesktop && node.title}
       </Typography>
     )
   }
