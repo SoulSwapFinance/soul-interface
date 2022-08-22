@@ -186,6 +186,38 @@ const useMenu: UseMenu = () => {
       mainItems.push(luxorItems)
     }
 
+    if (chainId != 250) {
+      const bridgeItem = {
+        key: 'bridge',
+        title: i18n._(t`Bridge`),
+        icon: <GlobeIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+        link: '/bridge'
+        // items: [
+        //   {
+        //     key: 'luxor-dashboard',
+        //     title: i18n._(t`Overview`),
+        //     link: '/luxor/dashboard',
+        //   },
+        //   {
+        //     key: 'earn',
+        //     title: i18n._(t`Explore`),
+        //     link: '/explore',
+        //   },
+        //   {
+        //     key: 'sor',
+        //     title: i18n._(t`Stable`),
+        //     link: '/luxor/sor',
+        //   },
+        //   {
+        //     key: 'lux-docs',
+        //     title: i18n._(t`Tutorials`),
+        //     link: 'https://docs.luxor.money',
+        //   },
+        // ],
+      }
+      mainItems.push(bridgeItem)
+    }
+
 
     if (featureEnabled(Feature.UNDERWORLD, chainId)) {
       //   mainItems.push({

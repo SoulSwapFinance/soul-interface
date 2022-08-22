@@ -13,7 +13,7 @@ import { useActiveWeb3React } from 'services/web3'
 import { AVALANCHE, Chain, POLYGON, ETHEREUM, FANTOM, MOONRIVER } from 'features/cross/chains'
 
 const getQuery = (input?: Currency, output?: Currency) => {
-  const  { chainId } = useActiveWeb3React()
+  const { chainId } = useActiveWeb3React()
   if (!input && !output) return
   if (input && !output) {
     return { inputCurrency: input || NATIVE[chainId].symbol }
@@ -47,66 +47,67 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   return (
     <div className="flex items-center justify-between gap-2">
       <div className="flex gap-4 mx-2">
-        <NavLink
-          activeClassName={classNames(
-            "border rounded bg-black",
-            chainColor
-          )}
-          href={{
-            pathname: '/swap',
-            query: getQuery(inputCurrency, outputCurrency),
-          }}
+        {chainId == 250 &&
+          <NavLink
+            activeClassName={classNames(
+              "border rounded bg-black",
+              chainColor
+            )}
+            href={{
+              pathname: '/swap',
+              query: getQuery(inputCurrency, outputCurrency),
+            }}
           >
-          <Typography weight={700} className={`text-secondary ml-3 hover:${hoverColor} p-1`}>
-            {i18n._(t`Swap`)}
-          </Typography>
-        </NavLink>
-
-      { chainId == 250 &&
-        <NavLink
-        activeClassName={classNames(
-          "border rounded bg-black",
-          chainColor
-          )}
-          href={`/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : (chainId == 250 ? '/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07' : `/${DAI_ADDRESS[chainId]}`)
-        }`} 
-        >
-          <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
-            {i18n._(t`+/-`)}
-          </Typography>
-        </NavLink>
+            <Typography weight={700} className={`text-secondary ml-3 hover:${hoverColor} p-1`}>
+              {i18n._(t`Swap`)}
+            </Typography>
+          </NavLink>
+        }
+        {chainId == 250 &&
+          <NavLink
+            activeClassName={classNames(
+              "border rounded bg-black",
+              chainColor
+            )}
+            href={`/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : (chainId == 250 ? '/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07' : `/${DAI_ADDRESS[chainId]}`)
+              }`}
+          >
+            <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
+              {i18n._(t`+/-`)}
+            </Typography>
+          </NavLink>
         }
 
-      { chainId != 250 &&
-        <NavLink
-        activeClassName={classNames(
-          "border rounded bg-black",
-          chainColor
-          )}
-          href={`/cross`}
-        >
-          <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
-            {i18n._(t`Cross`)}
-          </Typography>
-        </NavLink>
-      }
+        {chainId != 250 &&
+          <NavLink
+            activeClassName={classNames(
+              "border rounded bg-black",
+              chainColor
+            )}
+            href={`/cross`}
+          >
+            <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
+              {i18n._(t`Cross`)}
+            </Typography>
+          </NavLink>
+        }
 
-        { chainId == 250 &&
-        <NavLink
-          activeClassName={classNames(
-            "border rounded bg-black",
-            chainColor
-          )}
-          href={{
-            pathname: '/exchange/limit',
-            query: getQuery(inputCurrency, outputCurrency),
-          }}
-        >
-          <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
-            {i18n._(t`Limit`)}
-          </Typography>
-        </NavLink>
-          }
+        {chainId == 250 &&
+          <NavLink
+            activeClassName={classNames(
+              "border rounded bg-black",
+              chainColor
+            )}
+            href={{
+              pathname: '/exchange/limit',
+              query: getQuery(inputCurrency, outputCurrency),
+            }}
+          >
+            <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
+              {i18n._(t`Limit`)}
+            </Typography>
+          </NavLink>
+        }
         <NavLink
           activeClassName={classNames(
             "border rounded bg-black",
@@ -121,19 +122,19 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           </Typography>
         </NavLink>
       </div>
-        {
-          isCrossChain && chainId != 250 &&
-          <div className={'flex justify-end rounded mr-4'}>
-            <CrossChainMode />
-          </div>
-        }
-        {
-          isCrossChain && chainId == 250 &&
-          <div className={'flex flex-cols-2 sm:gap-8 gap-6 mr-4 justify-end rounded'}>
-            <CrossChainMode />
-            { isSwap && <Settings /> }
-          </div>
-        }
+      {/* {
+        isCrossChain && chainId != 250 &&
+        <div className={'flex justify-end rounded mr-4'}>
+          <CrossChainMode />
+        </div>
+      } */}
+      {
+        isCrossChain && chainId == 250 &&
+        <div className={'flex flex-cols-2 sm:gap-8 gap-6 mr-4 justify-end rounded'}>
+          <CrossChainMode />
+          {isSwap && <Settings />}
+        </div>
+      }
 
     </div>
   )
