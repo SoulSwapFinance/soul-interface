@@ -13,6 +13,7 @@ import {
   Pair,
   Percent,
   Token,
+  ChainId,
 } from 'sdk'
 import { CHAINLINK_PRICE_FEED_MAP } from 'config/oracles/chainlink'
 import { BASES_TO_TRACK_LIQUIDITY_FOR } from 'config/routing'
@@ -42,6 +43,7 @@ import {
   updateUserUseOpenMev,
   updateUserDarkMode,
 } from './actions'
+import { PairState, usePairs } from 'data/Reserves'
 
 function serializeToken(token: Token): SerializedToken {
   return {
@@ -195,11 +197,39 @@ export function useUserAddedTokens(): Token[] {
   }, [serializedTokensMap, chainId])
 }
 
+export function useUserAddedPairs(): Pair[] {
+  const { chainId } = useActiveWeb3React()
+  const serializedPairsMap = useSelector<AppState, AppState['user']['pairs']>(({ user: { pairs } }) => pairs)
+  const simplifiedPairs = Object.values(serializedPairsMap[chainId as ChainId] ?? {}).map(deserializeSimplifiedPair)
+  const pairs = usePairs(simplifiedPairs)
+
+  return useMemo(() => {
+    return pairs.reduce((userAddedPairs: Pair[], pair) => {
+      if (pair[0] === PairState.EXISTS && pair[1] !== null) {
+        userAddedPairs.push(pair[1])
+      }
+      return userAddedPairs
+    }, [])
+  }, [pairs])
+}
+
+
 function serializePair(pair: Pair): SerializedPair {
   return {
     token0: serializeToken(pair.token0),
     token1: serializeToken(pair.token1),
   }
+}
+
+function serializeSimplifiedPair(pair: Pair): SerializedPair {
+  return {
+    token0: serializeToken(pair.token0),
+    token1: serializeToken(pair.token1),
+  }
+}
+
+function deserializeSimplifiedPair(serializedPair: SerializedPair): [Token, Token] {
+  return [deserializeToken(serializedPair.token0), deserializeToken(serializedPair.token1)]
 }
 
 export function usePairAdder(): (pair: Pair) => void {
