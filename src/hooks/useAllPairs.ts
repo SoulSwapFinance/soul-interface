@@ -1,4 +1,3 @@
-import {  } from '@swapr/sdk'
 import { Pair, Token } from 'sdk'
 
 import { getAddress, parseUnits } from 'ethers/lib/utils'
