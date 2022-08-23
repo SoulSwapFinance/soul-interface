@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { LiquidityMiningCampaign, SingleSidedLiquidityMiningCampaign } from '@swapr/sdk'
+import { LiquidityMiningCampaign, SingleSidedLiquidityMiningCampaign } from 'sdk'
 
 import { Box, Flex, Text } from 'rebass'
 import styled from 'styled-components'

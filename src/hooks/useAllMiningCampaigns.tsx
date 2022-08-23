@@ -7,7 +7,7 @@ import { PairsFilterType } from 'components/Pool/ListFilter'
 // import { useGetLiquidityMiningCampaignsQuery, useGetStakingCampaignsQuery } from ''
 // import { useAllTokensFromActiveListsOnCurrentChain } from 'state/lists/hooks'
 import {
-  getLowerTimeLimit,
+  // getLowerTimeLimit,
 //   getLowerTimeLimit,
 //   getTokenAmount,
 //   MiningCampaign,
@@ -36,7 +36,7 @@ export function useAllMiningCampaigns(pair?: Pair, dataFilter?: PairsFilterType)
   const timestamp = useMemo(() => Math.floor(Date.now() / 1000), [])
 //   const isUpcoming = useCallback((startTime: BigintIsh) => timestamp < parseInt(startTime.toString()), [timestamp])
 
-  const memoizedLowerTimeLimit = useMemo(() => getLowerTimeLimit(), [])
+  // const memoizedLowerTimeLimit = useMemo(() => getLowerTimeLimit(), [])
   const tokensInCurrentChain = getTokenList(DEFAULT_TOKEN_LIST)
     // = useAllTokensFromActiveListsOnCurrentChain()
 
@@ -133,8 +133,9 @@ export function useAllMiningCampaigns(pair?: Pair, dataFilter?: PairsFilterType)
       // )
 
       const hasStake = campaign.liquidityMiningPositions.length > 0
-      const isExpired = parseInt(campaign.endsAt) < timestamp || parseInt(campaign.endsAt) 
-        > memoizedLowerTimeLimit
+      const isExpired = false
+      // parseInt(campaign.endsAt) < timestamp || parseInt(campaign.endsAt) 
+      //   > memoizedLowerTimeLimit
       const isActive = hasStake 
         // TODO: UPDATE BELOW //
         // || liquidityCampaign.currentlyActive 
@@ -211,7 +212,8 @@ export function useAllMiningCampaigns(pair?: Pair, dataFilter?: PairsFilterType)
       }
 
       const hasStake = campaign.singleStakingPositions.length > 0
-      const isExpired = parseInt(campaign.endsAt) < timestamp || parseInt(campaign.endsAt) > memoizedLowerTimeLimit
+      const isExpired = false
+      // parseInt(campaign.endsAt) < timestamp || parseInt(campaign.endsAt) > memoizedLowerTimeLimit
 
       if (dataFilter !== PairsFilterType.SOULSWAP || SOUL[chainId].equals(stakeToken)) {
         if (hasStake || singleSidedStakeCampaign.currentlyActive 

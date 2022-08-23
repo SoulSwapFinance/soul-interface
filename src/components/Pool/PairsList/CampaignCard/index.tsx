@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { LiquidityMiningCampaign, Percent, SingleSidedLiquidityMiningCampaign } from '@swapr/sdk'
+import { LiquidityMiningCampaign, Percent, SingleSidedLiquidityMiningCampaign } from 'sdk'
 import { CurrencyAmount, Token } from 'sdk'
 import { Card, Flex } from 'rebass'
 import styled from 'styled-components'
@@ -114,9 +114,9 @@ export function CampaignCard({
   ...rest
 }: PairProps) {
   const [status, setStatus] = useState<StatusKeys | undefined>(undefined)
-  const isLimitedCampaign = !campaign.stakingCap.equalTo('0')
+  const isLimitedCampaign = campaign.stakingCap != 0
   const percentage = useCallback(() => {
-    return campaign.staked.multiply('100').divide(campaign.stakingCap).toFixed(0)
+    return (campaign.staked * 100 / campaign.stakingCap).toFixed(0)
   }, [campaign])
 
   useEffect(() => {

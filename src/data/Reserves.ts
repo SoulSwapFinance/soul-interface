@@ -1,20 +1,16 @@
 import React, { useMemo } from 'react'
 import { Interface } from '@ethersproject/abi'
-import IDXswapPair from '@swapr/core/build/IDXswapPair.json'
-import { Currency, TokenAmount, UniswapV2RoutablePlatform } from '@swapr/sdk'
-import { Pair } from 'sdk'
-
+import { Currency, Pair } from 'sdk'
+import PAIR_ABI from 'constants/abis/soulswap/ISoulSwapPair.json'
 import { BigNumber } from 'ethers'
 
 import { useToken } from 'hooks/Tokens'
 import { usePairContract, useTokenContract } from 'hooks/useContract'
 import { useFeesState } from 'state/fees/hooks'
 import { useMultipleContractSingleData, useSingleCallResult } from 'state/multicall/hooks'
-import { wrappedCurrency } from 'utils/wrappedCurrency'
 import { useActiveWeb3React } from 'services/web3'
 
-const PAIR_INTERFACE = new Interface(IDXswapPair.abi)
-
+const PAIR_INTERFACE = new Interface(PAIR_ABI)
 export enum PairState {
   LOADING,
   NOT_EXISTS,
@@ -24,15 +20,15 @@ export enum PairState {
 
 export function usePairs(
   currencies: [Currency | undefined, Currency | undefined][],
-  platform: UniswapV2RoutablePlatform = UniswapV2RoutablePlatform.SWAPR
+  // platform: UniswapV2RoutablePlatform = UniswapV2RoutablePlatform.SOULSWAP
 ): [PairState, Pair | null][] {
   const { chainId } = useActiveWeb3React()
 
   const tokens = useMemo(
     () =>
       currencies.map(([currencyA, currencyB]) => [
-        wrappedCurrency(currencyA[chainId], chainId),
-        wrappedCurrency(currencyB[chainId], chainId),
+        currencyA[chainId], chainId,
+        currencyB[chainId], chainId,
       ]),
     [chainId, currencies]
   )
@@ -44,19 +40,20 @@ export function usePairs(
           tokenB &&
           !tokenA.equals(tokenB) &&
           chainId &&
-          platform.supportsChain(this.chainId) 
+          // platform.supportsChain(this.chainId) 
         //   platform.supportsChain(chainId) 
-          &&
-          platform.supportsChain(tokenA.chainId) &&
-          platform.supportsChain(tokenB.chainId)
-          ? Pair.getAddress(
+          // &&
+          // platform.supportsChain(tokenA.chainId) &&
+          // platform.supportsChain(tokenB.chainId)
+          // ? 
+          Pair.getAddress(
               tokenA[chainId], 
               tokenB[chainId], 
             //   platform
             )
-          : undefined
+          // : undefined
       }),
-    [tokens, chainId, platform]
+    [tokens, chainId] // platform
   )
 
   const { swapFees, protocolFeeDenominator } = useFeesState()
@@ -80,7 +77,8 @@ export function usePairs(
         // , platform
         )
     ]?.fee
-      if (!swapFee && platform === UniswapV2RoutablePlatform.SWAPR) return [PairState.LOADING, null]
+      if (!swapFee) // && platform === UniswapV2RoutablePlatform.SOULSWAP) 
+      return [PairState.LOADING, null]
       return [
         PairState.EXISTS,
         new Pair(
@@ -93,18 +91,18 @@ export function usePairs(
         ),
       ]
     })
-  }, [protocolFeeDenominator, results, swapFees, tokens, platform])
+  }, [protocolFeeDenominator, results, swapFees, tokens]) // platform
 }
 
 export function usePair(
   tokenA?: Currency,
   tokenB?: Currency,
-  platform?: UniswapV2RoutablePlatform
+  // platform?: UniswapV2RoutablePlatform
 ): [PairState, Pair | null] {
-  return usePairs([[tokenA, tokenB]], platform)[0]
+  return usePairs([[tokenA, tokenB]], )[0] // platform
 }
 
-export function usePairLiquidityTokenTotalSupply(pair?: Pair): TokenAmount | null {
+export function usePairLiquidityTokenTotalSupply(pair?: Pair): BigNumber | null { // TokenAmount
   const lpTokenContract = useTokenContract(pair?.liquidityToken.address)
   const totalSupplyResult = useSingleCallResult(lpTokenContract, 'totalSupply')
   const { chainId } = useActiveWeb3React()
@@ -112,10 +110,11 @@ export function usePairLiquidityTokenTotalSupply(pair?: Pair): TokenAmount | nul
   return useMemo(() => {
     if (!pair || !totalSupplyResult.result || totalSupplyResult.result.length === 0) return null
     const supply = totalSupplyResult.result[0] as BigNumber
-    return new TokenAmount(
-        pair.liquidityToken[chainId], 
-        supply.toString()
-        )
+    return supply
+    // CurrencyAmount(
+    //     pair.liquidityToken[chainId], 
+    //     supply.toString()
+    //     )
   }, [pair, totalSupplyResult.result])
 }
 

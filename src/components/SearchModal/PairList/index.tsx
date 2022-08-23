@@ -11,7 +11,6 @@ import { useIsUserAddedPair } from 'hooks/Tokens'
 import { useAllPairs } from 'hooks/useAllPairs'
 import { usePairAdder, usePairRemover } from 'state/user/hooks'
 import { isPairOnList } from 'utils'
-import { unwrappedToken } from 'utils/wrappedCurrency'
 // import { Badge } from '../../Badge'
 import DoubleCurrencyLogo from '../../DoubleLogo'
 import { TokenPickerItem } from '../shared'
@@ -43,7 +42,7 @@ const PairRow = ({ pair, onSelect, isSelected, style }: PairRowProps) => {
   const removePair = usePairRemover()
   const addPair = usePairAdder()
 
-  const pairText = `${unwrappedToken(pair.token0[chainId])?.symbol || ''}/${unwrappedToken(pair.token1[chainId])?.symbol || ''}`
+  const pairText = `${pair.token0[chainId]?.symbol || ''}/${pair.token1[chainId]?.symbol || ''}`
 
   // only show add or remove buttons if not on selected list
   return (

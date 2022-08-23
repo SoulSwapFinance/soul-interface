@@ -6656,38 +6656,6 @@
   dependencies:
     "@swapr/core" "^0.3.17"
 
-"@swapr/sdk@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@swapr/sdk/-/sdk-1.6.0.tgz#d85991276a8a68dd54151490b05785a2710cccae"
-  integrity sha512-KbXnRcnQmhBCx8HkAgrMyo4vI07OSRZ6GnroZp6GiFk1dhr0OHHXLYBeUFAyqA7eYiP97Tqaf4vMQMqXb+Jl8g==
-  dependencies:
-    "@cowprotocol/cow-sdk" "^0.0.15"
-    "@ethersproject/abi" "^5.6.4"
-    "@ethersproject/address" "^5.4.0"
-    "@ethersproject/bignumber" "^5.4.0"
-    "@ethersproject/constants" "^5.4.0"
-    "@ethersproject/contracts" "^5.4.0"
-    "@ethersproject/networks" "^5.6.4"
-    "@ethersproject/providers" "^5.4.0"
-    "@ethersproject/solidity" "^5.4.0"
-    "@ethersproject/transactions" "^5.4.0"
-    "@ethersproject/units" "^5.4.0"
-    "@swapr/core" "^0.3.19"
-    "@swapr/periphery" "^0.3.22"
-    "@uniswap/smart-order-router" "^2.8.2"
-    big.js "^5.2.2"
-    dayjs "^1.11.0"
-    debug "^4.3.4"
-    decimal.js-light "^2.5.1"
-    graphql-request "^4.3.0"
-    jsbi "^3.1.1"
-    lodash.flatmap "^4.5.0"
-    node-fetch "2"
-    tiny-invariant "^1.2.0"
-    tiny-warning "^1.0.3"
-    toformat "^2.0.0"
-    tslib "^2.3.1"
-
 "@swc/helpers@0.4.3":
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/@swc/helpers/-/helpers-0.4.3.tgz#16593dfc248c53b699d4b5026040f88ddb497012"
@@ -8130,7 +8098,7 @@
     tiny-invariant "^1.1.0"
     toformat "^2.0.0"
 
-"@uniswap/smart-order-router@^2.8.2":
+"@uniswap/smart-order-router@^2.6.0":
   version "2.9.3"
   resolved "https://registry.yarnpkg.com/@uniswap/smart-order-router/-/smart-order-router-2.9.3.tgz#034fac3728ad9eeabd1de95dbc0e4e1fcf898b12"
   integrity sha512-2FVDwwmaLl9hcL48cbou3/v0cEqiscU59XmebXpFbpjEaDFTOTrIMF8Vs3jrB6FdPhkeYGiZISNz6VgdbEkrRA==

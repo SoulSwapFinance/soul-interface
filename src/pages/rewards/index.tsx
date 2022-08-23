@@ -19,7 +19,7 @@ import { useToken } from 'hooks/Tokens'
 // import { useLiquidityMiningFeatureFlag } from 'hooks/useLiquidityMiningFeatureFlag'
 import { useRouter } from 'hooks/useRouter'
 import { TYPE } from 'theme'
-import { unwrappedToken } from 'utils/wrappedCurrency'
+// import { unwrappedToken } from 'utils/wrappedCurrency'
 import { useActiveWeb3React } from 'services/web3'
 import { RewardsList } from 'components/MiningCampaigns/RewardsList'
 // import { PageWrapper } from '../PageWrapper'
@@ -164,14 +164,15 @@ export default function Rewards() {
                   <Box mr="4px">
                     <Text fontWeight="600" fontSize="16px" lineHeight="20px" data-testid="all-pairs">
                       {filterPair
-                        ? `${unwrappedToken(filterPair.token0[chainId])?.symbol}/${unwrappedToken(filterPair.token1[chainId])?.symbol}`
+                        ? `${filterPair.token0[chainId].symbol}/${(filterPair.token1[chainId])?.symbol}`
                         : wrappedPair[0] === PairState.LOADING
                         ? 'LOADING'
                         : aggregatedDataFilter === PairsFilterType.MY
                         ? 'ALL'
                         : aggregatedDataFilter === PairsFilterType.SOULSWAP
-                        ? 'SWAPR'
-                        : 'ALL'}
+                        ? 'SOUL'
+                        : 'ALL'
+                      }
                     </Text>
                   </Box>
 
