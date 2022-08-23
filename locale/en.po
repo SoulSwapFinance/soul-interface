@@ -136,9 +136,6 @@ msgstr "An error occurred when trying to execute this swap. You may need to incr
 msgid "Analytics"
 msgstr "Analytics"
 
-msgid "Analyze"
-msgstr "Analyze"
-
 msgid "Approve"
 msgstr "Approve"
 
