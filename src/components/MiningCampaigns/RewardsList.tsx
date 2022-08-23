@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Flex } from 'rebass'
 import styled from 'styled-components'
 
-import { useAllMiningCampaigns } from 'hooks/useAllMiningCampaigns'
+// import { useAllMiningCampaigns } from 'hooks/useAllMiningCampaigns'
 import { AutoColumn } from 'components/Column'
 import { PairsFilterType } from 'components/Pool/ListFilter'
 // import { Switch } from 'components/Switch'
