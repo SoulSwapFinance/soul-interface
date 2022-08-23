@@ -67,9 +67,9 @@ const Swap = () => {
   }, [])
 
   const [showChart, setShowChart] = useState(false)
-  const [expertMode, openExpertMode] = useState(false)
+  // const [expertMode, openExpertMode] = useState(false)
   // const [showCrossChain, setShowCrossChain] = useState(false)
-  const [showCrosschain, openCrossChainMode] = useState(false)
+  // const [showCrosschain, openCrossChainMode] = useState(false)
   // const toggle = toggleExpertMode()
 
   // dismiss warning if all imported tokens are in active lists

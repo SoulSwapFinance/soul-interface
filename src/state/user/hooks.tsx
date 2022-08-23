@@ -19,16 +19,17 @@ import { BASES_TO_TRACK_LIQUIDITY_FOR } from 'config/routing'
 import { e10 } from 'functions'
 import { useAllTokens } from 'hooks/Tokens'
 import { useActiveWeb3React } from 'services/web3'
-import { AppState } from 'state'
+import { AppDispatch, AppState } from 'state'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
 import flatMap from 'lodash/flatMap'
 import { useCallback, useMemo } from 'react'
 import ReactGA from 'react-ga'
-import { shallowEqual, useSelector } from 'react-redux'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 
 import {
   addSerializedPair,
   addSerializedToken,
+  removeSerializedPair,
   removeSerializedToken,
   SerializedPair,
   SerializedToken,
@@ -207,6 +208,17 @@ export function usePairAdder(): (pair: Pair) => void {
   return useCallback(
     (pair: Pair) => {
       dispatch(addSerializedPair({ serializedPair: serializePair(pair) }))
+    },
+    [dispatch]
+  )
+}
+
+export function usePairRemover(): (pair: Pair) => void {
+  const dispatch = useDispatch<AppDispatch>()
+
+  return useCallback(
+    (pair: Pair) => {
+      dispatch(removeSerializedPair({ serializedPair: serializePair(pair) }))
     },
     [dispatch]
   )

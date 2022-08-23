@@ -173,6 +173,7 @@
     "@sushiswap/limit-order-sdk": "^1.0.0-canary.20",
     "@sushiswap/sdk": "^5.0.0-canary.116",
     "@sushiswap/trident": "^1.0.0-canary.5",
+    "@swapr/sdk": "^1.6.0",
     "@tanstack/react-query": "^4.0.10",
     "@tanstack/react-virtual": "^3.0.0-beta.17",
     "@terra-money/terra.js": "^3.0.4",

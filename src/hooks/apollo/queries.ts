@@ -17,3 +17,26 @@ export const dexCandlesQuery = gql`
     }
   }
 `
+
+export const getLiquidityMiningCampaign = (ID: string) => gql`
+query getLiquidityMiningCampaign($liquidityMiningCampaignId: ${ID}!) {
+  liquidityMiningCampaign(id: $liquidityMiningCampaignId) {
+    ...LiquidityMiningCampaignFragment
+    rewards {
+      ...LiquidityMiningCampaignRewardFragment
+    }
+  }
+}`
+
+export const getSingleSidedStakingCampaign = (ID: string) => gql`
+query getSingleSidedStakingCampaign($campaignId: ${ID}!) {
+  singleSidedStakingCampaign(id: $campaignId) {
+    ...SingleSidedStakingCampaignFragment
+    stakeToken {
+      ...StakeTokenFragment
+    }
+    rewards {
+      ...SingleSidedStakingCampaignRewardFragment
+    }
+  }
+}`
