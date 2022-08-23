@@ -1,6 +1,9 @@
 import { BigNumber } from "@ethersproject/bignumber";
+import { Currency } from "@swapr/sdk";
 import Notify from 'bnc-notify'
 import { ethers } from 'ethers'
+import { Pair, Token } from "sdk";
+import { TokenAddressMap } from "state/lists/hooks";
 export * from './tools/axios'
 export * from './tools/getPrice'
 export * from './tools/rate'
@@ -181,4 +184,18 @@ export function prettyDisplayNumber(number: BigNumber): string {
   } else {
     return trimVerboseDecimals(number.toFixed(0));
   }
+}
+
+export function isTokenOnList(defaultTokens: TokenAddressMap, currency: Currency): boolean {
+  if (Currency.isNative(currency)) return true
+  return Boolean(currency instanceof Token && defaultTokens[currency.chainId]?.[currency.address])
+}
+
+export function isPairOnList(pairs: Pair[], pair?: Pair): boolean {
+  if (!pair) return false
+  return !!pairs.find(loopedPair => loopedPair
+    // .equals(
+      = pair
+      // )
+    )
 }
