@@ -246,16 +246,6 @@ const useMenu: UseBar = () => {
              title: i18n._(t`Markets`),
              link: '/underworld',
             },
-           {
-             key: 'lend',
-             title: i18n._(t`Lend`),
-             link: '/lend',
-            },
-           {
-             key: 'borrow',
-             title: i18n._(t`Borrow`),
-             link: '/borrow',
-            },
             {
               key: 'underworld-farms',
               title: i18n._(t`Farms`),
@@ -343,7 +333,6 @@ const useMenu: UseBar = () => {
           {
             key: 'email',
             title: 'Email',
-            // link: '/board',
             link: 'mailto:soulswapfinance@gmail.com',
           },
         ],
