@@ -13,6 +13,7 @@ import Modal from 'components/DefaultModal'
 import Typography from 'components/Typography'
 import NavLink from 'components/NavLink'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
+import { CurrencyLogo } from 'components/CurrencyLogo'
 
 // const HideOnSmall = styled.div`
 // @media screen and (max-width: 900px) {
@@ -101,7 +102,11 @@ export const Row = ({ pair, lpToken }) => {
                     <LendContentWrapper>
                             <div className="items-center">
                                 <LendItemBox>
-                               <DoubleCurrencyLogo currency0={asset} currency1={collateral} size={40} />
+                               {/* <DoubleCurrencyLogo currency0={asset} currency1={collateral} size={40} /> */}
+                               <div className="flex space-x-1">
+                                <CurrencyLogo currency={asset} size={'40px'} />
+                                <CurrencyLogo currency={collateral} size={'18px'} />
+                                </div>
                                 </LendItemBox>
                             </div>
                           
