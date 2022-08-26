@@ -1,6 +1,6 @@
 import { arrayify } from '@ethersproject/bytes'
 import { parseBytes32String } from '@ethersproject/strings'
-import { ChainId, Currency, NATIVE, Token, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
+import { ChainId, Currency, NATIVE, Pair, Token, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
 import { createTokenFilterFunction } from 'functions/filtering'
 import { isAddress } from 'functions/validate'
 import { useActiveWeb3React } from 'services/web3'
@@ -8,9 +8,8 @@ import { useCombinedActiveList } from 'state/lists/hooks'
 import { TokenAddressMap, useAllLists, useInactiveListUrls, useUnsupportedTokenList } from 'state/lists/hooks'
 import { WrappedTokenInfo } from 'state/lists/wrappedTokenInfo'
 import { NEVER_RELOAD, useSingleCallResult } from 'state/multicall/hooks'
-import { useUserAddedTokens } from 'state/user/hooks'
+import { useUserAddedPairs, useUserAddedTokens } from 'state/user/hooks'
 import { useMemo } from 'react'
-
 import { useBytes32TokenContract, useTokenContract } from './useContract'
 
 // reduce token map into standard address <-> Token mapping, optionally include user added tokens
@@ -215,4 +214,13 @@ export function useCurrency(currencyId: string | undefined): Currency | null | u
   if (wnative?.address?.toLowerCase() === currencyId?.toLowerCase()) return wnative
 
   return useNative ? native : token
+}
+
+export function useIsUserAddedPair(pair: Pair): boolean {
+  const userAddedPairs = useUserAddedPairs()
+  return !!userAddedPairs.find(loopedPair => loopedPair =
+      // .equals(
+        pair
+        // )
+      )
 }

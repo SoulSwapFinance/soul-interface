@@ -136,9 +136,6 @@ msgstr ""
 msgid "Analytics"
 msgstr ""
 
-msgid "Analyze"
-msgstr ""
-
 msgid "Approve"
 msgstr ""
 

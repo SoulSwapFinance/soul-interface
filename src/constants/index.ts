@@ -35,7 +35,7 @@ export const POOL_DENY = []
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
 export const AVERAGE_BLOCK_TIME_IN_SECS = 1
 
-export const ZERO_USD = CurrencyAmount.fromRawAmount(USD[ChainId.FANTOM], '0')
+export const ZERO_USD = CurrencyAmount.fromRawAmount(USD[250], 0)
 
 export const AVERAGE_BLOCK_TIME = {
   [ChainId.ETHEREUM]: 12,
@@ -228,6 +228,16 @@ export const ALLOWED_PRICE_IMPACT_HIGH: Percent = new Percent(JSBI.BigInt(500), 
 export const PRICE_IMPACT_WITHOUT_FEE_CONFIRM_MIN: Percent = new Percent(JSBI.BigInt(1000), BIPS_BASE) // 10%
 // for non expert mode disable swaps above this
 export const BLOCKED_PRICE_IMPACT_NON_EXPERT: Percent = new Percent(JSBI.BigInt(1500), BIPS_BASE) // 15%
+
+// price impact numeric values
+export const PRICE_IMPACT_NON_EXPERT = 4
+export const PRICE_IMPACT_HIGH = 3
+export const PRICE_IMPACT_MEDIUM = 2
+export const PRICE_IMPACT_LOW = 1
+export const NO_PRICE_IMPACT = 0
+
+// used for fiat warning states
+export const ALLOWED_FIAT_PRICE_IMPACT_HIGH: Percent = new Percent(JSBI.BigInt(200), BIPS_BASE) // 2%
 
 // used to ensure the user doesn't send so much FTM so they end up with <.01
 export const MIN_ETH: JSBI = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(16)) // .01 ETH

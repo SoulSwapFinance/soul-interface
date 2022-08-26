@@ -33,11 +33,7 @@ export const removeSerializedToken = createAction<{
 export const addSerializedPair = createAction<{
   serializedPair: SerializedPair
 }>('user/addSerializedPair')
-export const removeSerializedPair = createAction<{
-  chainId: number
-  tokenAAddress: string
-  tokenBAddress: string
-}>('user/removeSerializedPair')
+export const removeSerializedPair = createAction<{ serializedPair: SerializedPair }>('user/removeSerializedPair')
 export const toggleURLWarning = createAction<void>('app/toggleURLWarning')
 export const updateUserUseOpenMev = createAction<{
   userUseOpenMev: boolean

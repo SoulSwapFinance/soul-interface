@@ -13,22 +13,24 @@ import {
   Pair,
   Percent,
   Token,
+  ChainId,
 } from 'sdk'
 import { CHAINLINK_PRICE_FEED_MAP } from 'config/oracles/chainlink'
 import { BASES_TO_TRACK_LIQUIDITY_FOR } from 'config/routing'
 import { e10 } from 'functions'
 import { useAllTokens } from 'hooks/Tokens'
 import { useActiveWeb3React } from 'services/web3'
-import { AppState } from 'state'
+import { AppDispatch, AppState } from 'state'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
 import flatMap from 'lodash/flatMap'
 import { useCallback, useMemo } from 'react'
 import ReactGA from 'react-ga'
-import { shallowEqual, useSelector } from 'react-redux'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 
 import {
   addSerializedPair,
   addSerializedToken,
+  removeSerializedPair,
   removeSerializedToken,
   SerializedPair,
   SerializedToken,
@@ -41,6 +43,7 @@ import {
   updateUserUseOpenMev,
   updateUserDarkMode,
 } from './actions'
+import { PairState, usePairs } from 'data/Reserves'
 
 function serializeToken(token: Token): SerializedToken {
   return {
@@ -194,11 +197,39 @@ export function useUserAddedTokens(): Token[] {
   }, [serializedTokensMap, chainId])
 }
 
+export function useUserAddedPairs(): Pair[] {
+  const { chainId } = useActiveWeb3React()
+  const serializedPairsMap = useSelector<AppState, AppState['user']['pairs']>(({ user: { pairs } }) => pairs)
+  const simplifiedPairs = Object.values(serializedPairsMap[chainId as ChainId] ?? {}).map(deserializeSimplifiedPair)
+  const pairs = usePairs(simplifiedPairs)
+
+  return useMemo(() => {
+    return pairs.reduce((userAddedPairs: Pair[], pair) => {
+      if (pair[0] === PairState.EXISTS && pair[1] !== null) {
+        userAddedPairs.push(pair[1])
+      }
+      return userAddedPairs
+    }, [])
+  }, [pairs])
+}
+
+
 function serializePair(pair: Pair): SerializedPair {
   return {
     token0: serializeToken(pair.token0),
     token1: serializeToken(pair.token1),
   }
+}
+
+function serializeSimplifiedPair(pair: Pair): SerializedPair {
+  return {
+    token0: serializeToken(pair.token0),
+    token1: serializeToken(pair.token1),
+  }
+}
+
+function deserializeSimplifiedPair(serializedPair: SerializedPair): [Token, Token] {
+  return [deserializeToken(serializedPair.token0), deserializeToken(serializedPair.token1)]
 }
 
 export function usePairAdder(): (pair: Pair) => void {
@@ -207,6 +238,17 @@ export function usePairAdder(): (pair: Pair) => void {
   return useCallback(
     (pair: Pair) => {
       dispatch(addSerializedPair({ serializedPair: serializePair(pair) }))
+    },
+    [dispatch]
+  )
+}
+
+export function usePairRemover(): (pair: Pair) => void {
+  const dispatch = useDispatch<AppDispatch>()
+
+  return useCallback(
+    (pair: Pair) => {
+      dispatch(removeSerializedPair({ serializedPair: serializePair(pair) }))
     },
     [dispatch]
   )

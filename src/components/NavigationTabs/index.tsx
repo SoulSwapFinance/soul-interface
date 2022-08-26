@@ -9,6 +9,8 @@ import styled from 'styled-components'
 import { t } from '@lingui/macro'
 import { useAppDispatch } from '../../state/hooks'
 import { useLingui } from '@lingui/react'
+import { useTranslation } from 'react-i18next'
+import NavLink from 'components/NavLink'
 
 const Tabs = styled.div`
   display: flex;
@@ -70,6 +72,24 @@ export function AddRemoveTabs({
         </div>
         <SettingsTab placeholderSlippage={defaultSlippage} />
       </RowBetween>
+    </Tabs>
+  )
+}
+
+export function SwapPoolTabs({ active }: { active: 'swap' | 'pool' | 'bridge' }) {
+  const { t } = useTranslation('common')
+
+  return (
+    <Tabs style={{ marginBottom: '20px', display: 'none' }}>
+      <NavLink id="swap-nav-link" to="/swap" isActive={active === 'swap'}>
+        {t('swap')}
+      </NavLink>
+      <NavLink id="bridge-nav-link" to="/bridge" isActive={active === 'bridge'}>
+        {t('bridge')}
+      </NavLink>
+      <NavLink id="pool-nav-link" to="/pools" isActive={active === 'pool'}>
+        {t('pool')}
+      </NavLink>
     </Tabs>
   )
 }

@@ -18,6 +18,7 @@ import limitOrder from './limit-order/reducer'
 import lists from './lists/reducer'
 import mint from './mint/reducer'
 import multicall from './multicall/reducer'
+import fees from './fees/reducer'
 import slippage from './slippage/slippageSlice'
 import swap from './swap/reducer'
 import transactions from './transactions/reducer'
@@ -29,6 +30,7 @@ const reducer = combineReducers({
   application,
   user,
   transactions,
+  fees,
   swap,
   mint,
   burn,
