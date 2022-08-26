@@ -36,7 +36,6 @@ export default function Stake() {
   // const [epoch, setEpoch] = useState('0')
   const [warmupValue, setWarmupValue] = useState(0)
   const [warmupExpiry, setWarmupExpiry] = useState('0')
-  // const [warmupPeriod, setWarmupPeriod] = useState(0)
   // const [nextRebase, setNextRebase] = useState(0)
   const luxorPrice = useLuxorPrice()
   const { account, chainId } = useActiveWeb3React()
@@ -60,6 +59,9 @@ export default function Stake() {
   const parsedRedeemValue = tryParseAmount(redeemValue, luxorToken)
   const { luxorInfo } = useLuxorInfo()
   const epoch = Number(luxorInfo.epoch)
+  const hoursPerEpoch = 8
+  const warmupEpochs = Number(luxorInfo.warmup)
+  const warmupHours = warmupEpochs * hoursPerEpoch
   // console.log('epoch:%s', epoch)
   // CONTRACTS //
   // tokens
@@ -329,7 +331,7 @@ export default function Stake() {
                     {i18n._(t`Warmup Period`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    32 hours
+                    { warmupHours } hours
                   </Typography>
                 </div>
               </div>
@@ -481,7 +483,7 @@ export default function Stake() {
                     {i18n._(t`Epoch Duration`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    {'8hrs'}
+                    { hoursPerEpoch } hours
                   </Typography>
                 </div> */}
                 {/* <div className="flex justify-between">
@@ -489,7 +491,7 @@ export default function Stake() {
                     {i18n._(t`Warmup Balance`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    {warmupAmount}
+                    { warmupAmount }
                   </Typography>
                 </div> */}
               </div>
