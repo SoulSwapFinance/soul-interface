@@ -6,7 +6,7 @@ const Landing = () => {
       <iframe 
 			frameBorder={"none"}
     		title={"LANDING"}
-    		src="https://soulswap.finance"
+    		src="https://home.soulswap.finance"
     		height={"900px"}
     		width={"100%"}
     />
