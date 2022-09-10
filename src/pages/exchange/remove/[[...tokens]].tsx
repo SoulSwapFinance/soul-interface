@@ -51,6 +51,8 @@ import { useWalletModalToggle } from 'state/application/hooks'
 // import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import SwapBanner from 'components/SwapBanner'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
+import { classNames } from 'functions'
+import { getChainColorCode } from 'constants/chains'
 
 const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(10, 1000) // 1%
 
@@ -792,13 +794,13 @@ export default function Remove() {
                                   href={`/exchange/remove/${currencyA == NATIVE[chainId] ? WNATIVE[chainId].address : currencyIdA}/${currencyB == NATIVE[chainId] ? WNATIVE[chainId].address : currencyIdB
                                     }`}
                                 >
-                                  <a className="text-baseline text-purple opacity-80 hover:opacity-100 focus:opacity-100 whitespace-nowrap">
+                                  <a className={classNames("font-bold text-baseline opacity-80 hover:opacity-100 focus:opacity-100 whitespace-nowrap", `text-${getChainColorCode(chainId)}`)}>
                                     Receive W{NATIVE[chainId].symbol}
                                   </a>
                                 </Link>
                               ) : oneCurrencyIsWETH ? (
                                 <Link
-                                  href={`/exchange/remove/${currencyA?.equals(WNATIVE[chainId]) ? 'FTM' : currencyIdA}/${currencyB?.equals(WNATIVE[chainId]) ? 'FTM' : currencyIdB
+                                  href={`/exchange/remove/${currencyA?.equals(WNATIVE[chainId]) ? NATIVE[chainId].symbol : currencyIdA}/${currencyB?.equals(WNATIVE[chainId]) ? 'FTM' : currencyIdB
                                     }`}
                                 >
                                   <a className="text-baseline text-blue opacity-80 hover:opacity-100 whitespace-nowrap">
