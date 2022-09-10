@@ -8,6 +8,7 @@ import {
   Percent,
   ROUTER_ADDRESS,
   DAI,
+  FTM,
   SOUL,
   Trade as V2Trade,
   TradeType,
@@ -36,7 +37,6 @@ import { useCallback, useEffect, useState } from 'react'
 import { Field, replaceSwapState, selectCurrency, setRecipient, switchCurrencies, typeInput } from './actions'
 import { SwapState } from './reducer'
 import { useCurrencyBalances } from 'state/wallet/hooks'
-import { FTM } from 'config/tokens'
 
 export function useSwapState(): AppState['swap'] {
   return useAppSelector((state) => state.swap)
@@ -271,7 +271,7 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId 
       = chainId == ChainId.FANTOM 
          ? SOUL[ChainId.FANTOM].address
          : chainId == ChainId.ETHEREUM
-         ? FTM[ChainId.ETHEREUM]
+         ? FTM[ChainId.ETHEREUM].address
          : chainId == ChainId.AVALANCHE
          ? DAI[ChainId.AVALANCHE].address
          : chainId == ChainId.BSC
