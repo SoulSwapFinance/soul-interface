@@ -1,16 +1,16 @@
 import { ApprovalState, useApproveCallback } from 'hooks/useApproveCallback'
-import { ArrowDown, Plus } from 'react-feather'
+import { Plus } from 'react-feather'
 import { AutoRow, RowBetween } from 'components/Row'
 import { ButtonConfirmed, ButtonError } from 'components/Button'
-import { ChainId, Currency, NATIVE, Percent, WNATIVE } from 'sdk'
+import { Currency, NATIVE, Percent, WNATIVE } from 'sdk'
 import React, { useCallback, useMemo, useState } from 'react'
 import TransactionConfirmationModal, { ConfirmationModalContent } from 'modals/TransactionConfirmationModal'
 import { calculateGasMargin, calculateSlippageAmount } from 'functions/trade'
 import { useBurnActionHandlers, useBurnState, useDerivedBurnInfo } from 'state/burn/hooks'
 import { usePairContract, useRouterContract } from 'hooks/useContract'
 
-import { AddRemoveTabs } from 'components/NavigationTabs'
-import Alert from 'components/Alert'
+// import { AddRemoveTabs } from 'components/NavigationTabs'
+// import Alert from 'components/Alert'
 import { ArrowDownIcon } from '@heroicons/react/solid'
 import { AutoColumn } from 'components/Column'
 import { BigNumber } from '@ethersproject/bignumber'
@@ -30,17 +30,14 @@ import { MinimalPositionCard } from 'components/PositionCard'
 import NavLink from 'components/NavLink'
 import PercentInputPanel from 'components/PercentInputPanel'
 import ReactGA from 'react-ga'
-import RemoveLiquidityReceiveDetails from 'features/liquidity/RemoveLiquidityReceiveDetails'
 import { TransactionResponse } from '@ethersproject/providers'
 import Web3Connect from 'components/Web3Connect'
 import { currencyId } from 'functions/currency'
-import { splitSignature } from '@ethersproject/bytes'
 import { t } from '@lingui/macro'
 import { useActiveWeb3React } from 'services/web3'
 import { useCurrency } from 'hooks/Tokens'
 import useDebouncedChangeHandler from 'hooks/useDebouncedChangeHandler'
 import { useDerivedMintInfo } from 'state/mint/hooks'
-import useIsArgentWallet from 'hooks/useIsArgentWallet'
 import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
 import { useTransactionAdder } from 'state/transactions/hooks'
@@ -48,13 +45,14 @@ import useTransactionDeadline from 'hooks/useTransactionDeadline'
 import { useUserSlippageToleranceWithDefault } from 'state/user/hooks'
 import { useV2LiquidityTokenPermit } from 'hooks/useERC20Permit'
 import { useWalletModalToggle } from 'state/application/hooks'
-// import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
-import SwapBanner from 'components/SwapBanner'
+// import SwapBanner from 'components/SwapBanner'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
+import { classNames } from 'functions'
+import { getChainColorCode } from 'constants/chains'
 
 const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(10, 1000) // 1%
 
-const REMOVE_TIPS = {}
+// const REMOVE_TIPS = {}
 
 export default function Remove() {
   const { i18n } = useLingui()
@@ -120,7 +118,8 @@ export default function Remove() {
     const liquidityAmount = parsedAmounts[Field.LIQUIDITY]
     if (!liquidityAmount) throw new Error('missing liquidity amount')
 
-    if (false && gatherPermitSignature) {
+    // if (false && gatherPermitSignature) {
+    if (gatherPermitSignature) {
       try {
         await gatherPermitSignature()
       } catch (error) {
@@ -792,13 +791,13 @@ export default function Remove() {
                                   href={`/exchange/remove/${currencyA == NATIVE[chainId] ? WNATIVE[chainId].address : currencyIdA}/${currencyB == NATIVE[chainId] ? WNATIVE[chainId].address : currencyIdB
                                     }`}
                                 >
-                                  <a className="text-baseline text-purple opacity-80 hover:opacity-100 focus:opacity-100 whitespace-nowrap">
+                                  <a className={classNames("font-bold text-baseline opacity-80 hover:opacity-100 focus:opacity-100 whitespace-nowrap", `text-${getChainColorCode(chainId)}`)}>
                                     Receive W{NATIVE[chainId].symbol}
                                   </a>
                                 </Link>
                               ) : oneCurrencyIsWETH ? (
                                 <Link
-                                  href={`/exchange/remove/${currencyA?.equals(WNATIVE[chainId]) ? 'FTM' : currencyIdA}/${currencyB?.equals(WNATIVE[chainId]) ? 'FTM' : currencyIdB
+                                  href={`/exchange/remove/${currencyA?.equals(WNATIVE[chainId]) ? NATIVE[chainId].symbol : currencyIdA}/${currencyB?.equals(WNATIVE[chainId]) ? 'FTM' : currencyIdB
                                     }`}
                                 >
                                   <a className="text-baseline text-blue opacity-80 hover:opacity-100 whitespace-nowrap">

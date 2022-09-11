@@ -7,10 +7,11 @@ import Settings from 'components/Settings'
 import CrossChainMode from 'components/CrossChainMode'
 import Typography from 'components/Typography'
 import { useRouter } from 'next/router'
-import { classNames, currencyId } from '../../functions'
+import { classNames, currencyId, featureEnabled } from '../../functions'
 import ExternalLink from 'components/ExternalLink'
 import { useActiveWeb3React } from 'services/web3'
 import { AVALANCHE, Chain, POLYGON, ETHEREUM, FANTOM, MOONRIVER } from 'features/cross/chains'
+import { Feature } from 'enums'
 
 const getQuery = (input?: Currency, output?: Currency) => {
   const { chainId } = useActiveWeb3React()
@@ -47,7 +48,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   return (
     <div className="flex items-center justify-between gap-2">
       <div className="flex gap-4 mx-2">
-        {chainId == 250 &&
+      {featureEnabled(Feature.SWAP, chainId) &&
           <NavLink
             activeClassName={classNames(
               "border rounded bg-black",
@@ -63,7 +64,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             </Typography>
           </NavLink>
         }
-        {chainId == 250 &&
+        {featureEnabled(Feature.LIQUIDITY, chainId) &&
           <NavLink
             activeClassName={classNames(
               "border rounded bg-black",

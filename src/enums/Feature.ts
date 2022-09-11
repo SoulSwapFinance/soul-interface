@@ -1,7 +1,9 @@
 export enum Feature {
   AMM = 'AMM',
+  SWAP = 'Exchange',
   AMM_V2 = 'AMM V2',
   EXPLORE = 'Explore',
+  LIQUIDITY = 'Liquidity',
   LIQUIDITY_MINING = 'Liquidity Mining',
   BONDS = 'Bonds',
   COFFINBOX = 'CoffinBox',

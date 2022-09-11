@@ -5,6 +5,8 @@ import { darken, lighten } from 'polished'
 
 import { classNames } from '../../functions'
 import { Button as RebassButton, ButtonProps } from 'rebass/styled-components'
+import { getChainColorCode } from 'constants/chains'
+import { useActiveWeb3React } from 'services/web3'
 
 const SIZE = {
   xs: 'px-2 py-1 text-xs',
@@ -247,6 +249,8 @@ export function ButtonConfirmed({
   disabled,
   ...rest
 }: { confirmed?: boolean; disabled?: boolean } & ButtonProps) {
+  const {chainId} = useActiveWeb3React()
+
   if (confirmed) {
     return (
       <Button
@@ -259,7 +263,7 @@ export function ButtonConfirmed({
       />
     )
   } else {
-    return <Button color={disabled ? 'gray' : 'purple'} size="lg" disabled={disabled} {...rest} />
+    return <Button color={disabled ? 'gray' : getChainColorCode(chainId)} size="lg" disabled={disabled} {...rest} />
   }
 }
 
@@ -272,9 +276,10 @@ export function ButtonError({
   error?: boolean
   disabled?: boolean
 } & ButtonProps) {
+  const {chainId} = useActiveWeb3React()
   if (error) {
     return <Button disabled={disabled} color="red" {...rest} />
   } else {
-    return <Button color={disabled ? 'gray' : 'purple'} disabled={disabled} {...rest} />
+    return <Button color={disabled ? 'gray' : getChainColorCode(chainId)} disabled={disabled} {...rest} />
   }
 }

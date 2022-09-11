@@ -15,7 +15,7 @@ import { useActiveWeb3React } from 'services/web3'
 import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import CoffinBoxFundingSourceModal from '../add/CoffinBoxFundingSourceModal'
-import { getChainColorCode } from 'constants/chains'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 
 interface SwapAssetPanel {
   error?: boolean
@@ -226,6 +226,7 @@ const SwapAssetPanelHeader: FC<
   > & { label: string; id?: string }
 > = ({ walletToggle, currency, onSelect, spendFromWallet, id, currencies }) => {
   const { i18n } = useLingui()
+  const { chainId } = useActiveWeb3React()
   const trigger = currency ? (
     <div
       id={id}
@@ -238,9 +239,11 @@ const SwapAssetPanelHeader: FC<
       <ChevronDownIcon width={18} />
     </div>
   ) : (
-    <Button color="purple" variant="flexed" size="sm" id={id} className="!rounded-full !px-2 !py-0 !h-[32px] !pl-3">
+    <Button color={getChainColorCode(chainId)} variant="flexed" size="sm" id={id} className="!rounded-full !px-2 !py-0 !h-[32px] !pl-3">
+      <div className="flex items-center mt-1">
       {i18n._(t`Select Token`)}
       <ChevronDownIcon width={18} />
+    </div>
     </Button>
   )
 

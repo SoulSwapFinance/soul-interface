@@ -4,15 +4,14 @@ import {
   ChainId,
   Currency,
   CurrencyAmount,
-  FACTORY_ADDRESS,
   Percent,
-  ROUTER_ADDRESS,
   DAI,
+  FTM,
   SOUL,
   Trade as V2Trade,
   TradeType,
   USDC,
-  WNATIVE_ADDRESS,
+  NATIVE,
 } from 'sdk'
 import { tryParseAmount } from 'functions/parse'
 import { isAddress } from 'functions/validate'
@@ -36,7 +35,6 @@ import { useCallback, useEffect, useState } from 'react'
 import { Field, replaceSwapState, selectCurrency, setRecipient, switchCurrencies, typeInput } from './actions'
 import { SwapState } from './reducer'
 import { useCurrencyBalances } from 'state/wallet/hooks'
-import { FTM } from 'config/tokens'
 
 export function useSwapState(): AppState['swap'] {
   return useAppSelector((state) => state.swap)
@@ -56,13 +54,13 @@ export function useSwapActionHandlers(): {
           field,
           currencyId: currency.isToken
             ? currency.address
-            : currency.isNative 
-             && currency.chainId == ChainId.ETHEREUM
-             ? 'ETH' 
+            : currency.isNative ? NATIVE[currency.chainId].symbol
+            //  && currency.chainId == ChainId.ETHEREUM
+            //  ? 'ETH' 
             // && currency.chainId !== ChainId.CELO
-            : currency.isNative
-             && currency.chainId == ChainId.FANTOM
-             ? 'FTM'
+            // : currency.isNative
+            //  && currency.chainId == ChainId.FANTOM
+            //  ? 'FTM'
             : '' 
         })
       )
@@ -99,8 +97,8 @@ export function useSwapActionHandlers(): {
 // TODO: Switch for ours...
 const BAD_RECIPIENT_ADDRESSES: { [chainId: string]: { [address: string]: true } } = {
   [ChainId.ETHEREUM]: {
-    '0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac': true, // v2 factory
-    '0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F': true, // v2 router 02
+    '0x794d858b0b152fb68a5CE465451D729EFfA67f08': true, // v2 factory
+    '0x2a8B48a8B8a8a8E4a184280333c418BcdcE72dE9': true, // v2 router 02
   },
   [ChainId.FANTOM]: {
     '0x1120e150dA9def6Fe930f4fEDeD18ef57c0CA7eF': true, // v2 factory
@@ -271,7 +269,7 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId 
       = chainId == ChainId.FANTOM 
          ? SOUL[ChainId.FANTOM].address
          : chainId == ChainId.ETHEREUM
-         ? FTM[ChainId.ETHEREUM]
+         ? FTM[ChainId.ETHEREUM].address
          : chainId == ChainId.AVALANCHE
          ? DAI[ChainId.AVALANCHE].address
          : chainId == ChainId.BSC
