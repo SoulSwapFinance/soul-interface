@@ -10,7 +10,7 @@ import {
     FarmContentWrapper, FarmContainer, FarmItem, FarmItemBox, Text, FunctionBox, SubmitButton, Wrap
 } from './Styles'
 import { classNames, formatNumber, tryParseAmount } from 'functions'
-import { usePairInfo, useSummonerPoolInfo, useSummonerUserInfo, useTokenInfo, useUserTokenInfo } from 'hooks/useAPI'
+import { usePairInfo, useSummonerInfo, useSummonerPoolInfo, useSummonerUserInfo, useTokenInfo, useUserTokenInfo } from 'hooks/useAPI'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 import Modal from 'components/DefaultModal'
 import { Button } from 'components/Button'
@@ -52,6 +52,11 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const ZapContract = useZapperContract()
     const ZapContractAddress = ZapContract.address
     const SoulSummonerAddress = SoulSummonerContract.address
+    
+    const nowTime = new Date().getTime()
+
+    const { summonerInfo } = useSummonerInfo()
+    const startRate = Number(summonerInfo.startRate)
 
     const { summonerPoolInfo } = useSummonerPoolInfo(pid)
     const liquidity = summonerPoolInfo.tvl
@@ -62,7 +67,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const pairStatus = summonerPoolInfo.status
 
     const { userInfo } = useUserInfo()
-    const { pairInfo } = usePairInfo(farm.lpAddresses[250])
+    const { pairInfo } = usePairInfo(farm.lpAddresses[chainId | 250])
     // assumes 18, since only SOUL-LP farms are eligible for Zap
     // const lpSymbol = pairInfo.lpSymbol
     // const assetAddress = pairInfo.address
@@ -84,19 +89,30 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     // const [openTokens, setShowTokens] = useState(false)
 
     const { summonerUserInfo } = useSummonerUserInfo(pid)
-    const stakedBalance = summonerUserInfo.stakedBalance
+    const stakedBalance = Number(summonerUserInfo.stakedBalance)
     const stakedValue = Number(summonerUserInfo.stakedValue)
     const earnedAmount = summonerUserInfo.pendingSoul
     const earnedValue = summonerUserInfo.pendingValue
     const lpPrice = Number(summonerUserInfo.lpPrice)
     // const timeDelta = summonerUserInfo.timeDelta
     // const secondsRemaining = summonerUserInfo.secondsRemaining
-    const withdrawFee = summonerUserInfo.currentRate
-    const feeAmount = Number(withdrawFee) * Number(stakedBalance) / 100
-    const withdrawable = Number(stakedBalance) - feeAmount
+    // const withdrawFee = summonerUserInfo.currentRate
+    const firstDepositTime = Number(summonerUserInfo.firstDepositTime)
+    const currentTime = nowTime / 1_000
+    const timeDelta = currentTime - firstDepositTime
+    const daysElapsed = timeDelta / 86_400
+    const withdrawFee 
+        = daysElapsed <= 14 ? startRate - daysElapsed 
+            // staked, but beyond 14 days
+        : stakedBalance > 0 ? 0 
+            // not staked (to forewarn)
+        : 14
+    const feeAmount 
+        = withdrawFee * stakedBalance / 100
+    const withdrawable = stakedBalance - feeAmount
     const feeValue = feeAmount * lpPrice
     const walletBalance = summonerUserInfo.walletBalance
-    const walletValue = Number(walletBalance) * Number(lpPrice)
+    const walletValue = Number(walletBalance) * lpPrice
     const parsedBalance = tryParseAmount(walletBalance, farm.lpToken)
     // const userBalance = useCurrencyBalance(account, lpToken)
     const hasBalance = Number(walletBalance) > 0
@@ -769,9 +785,9 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                 <FarmInputPanel
                                     pid={farm.pid}
                                     onUserInput={(value) => setWithdrawValue(value)}
-                                    onMax={() => setWithdrawValue(stakedBalance)}
+                                    onMax={() => setWithdrawValue(stakedBalance.toString())}
                                     value={withdrawValue}
-                                    balance={stakedBalance}
+                                    balance={stakedBalance.toString()}
                                     id={pid}
                                     token0={token0}
                                     token1={token1}
