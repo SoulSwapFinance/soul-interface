@@ -28,20 +28,20 @@ import TokenWarningModal from 'modals/TokenWarningModal'
 import { useActiveWeb3React } from 'services/web3'
 import { Field, setRecipient } from 'state/swap/actions'
 import { useDefaultsFromURLSearch, useDerivedSwapInfo, useSwapActionHandlers, useSwapState } from 'state/swap/hooks'
-import { useExpertModeManager, useCrossChainModeManager, useUserOpenMev, useUserSingleHopOnly } from 'state/user/hooks'
+import { useExpertModeManager, useUserOpenMev, useUserSingleHopOnly } from 'state/user/hooks' // useCrossChainModeManager
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
 import Chart from 'components/Chart'
-import Cross from 'pages/exchange/cross'
+// import Cross from 'pages/exchange/cross'
 // import NavLink from 'components/NavLink'
 // import ExternalLink from 'components/ExternalLink'
 import { Toggle } from 'components/Toggle'
 // import Image from 'next/image'
 // import styled from 'styled-components'
 import SocialWidget from 'components/Social'
-import { getChainColor, getChainColorCode } from 'constants/chains'
+import { getChainColorCode } from 'constants/chains'
 import { classNames } from 'functions/styling'
-import CrossChainMode from 'components/CrossChainMode'
+// import CrossChainMode from 'components/CrossChainMode'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -49,7 +49,7 @@ const Swap = () => {
   const { account, chainId } = useActiveWeb3React()
   const defaultTokens = useAllTokens()
   const [isExpertMode] = useExpertModeManager()
-  const [isCrossChainMode] = useCrossChainModeManager()
+  // const [isCrossChainMode] = useCrossChainModeManager()
   const { independentField, typedValue, recipient } = useSwapState()
   const { v2Trade, parsedAmount, currencies, inputError: swapInputError, allowedSlippage, to } = useDerivedSwapInfo()
   const [loadedInputCurrency, loadedOutputCurrency] = [
@@ -358,10 +358,6 @@ const Swap = () => {
         <div className="flex flex-col gap-3 justify-center">
           <SwapHeader inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
         </div>
-        { isCrossChainMode &&
-          <Cross />
-        }
-        { !isCrossChainMode &&
           <SwapAssetPanel
             spendFromWallet={true}
             chainId={chainId}
@@ -378,22 +374,20 @@ const Swap = () => {
             onChange={handleTypeInput}
             onSelect={handleInputSelect}
           />
-        }
-        <div className={!isCrossChainMode && classNames("flex justify-center -mt-6 -mb-6 z-0")}>
+        <div className={ classNames("flex justify-center -mt-6 -mb-6 z-0") }>
           <div
             role="button"
-            className={classNames(!isCrossChainMode && `p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}`)}
+            className={classNames( `p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}` )}
             onClick={() => {
               setApprovalSubmitted(false) // reset 2 step UI for approvals
               onSwitchTokens()
             }}
           >
-            {!isCrossChainMode && <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />}
+            { <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" /> }
           </div>
         </div>
 
         {/* TO ASSET PANEL */}
-        {!isCrossChainMode &&
           <SwapAssetPanel
             spendFromWallet={true}
             chainId={chainId}
@@ -410,9 +404,8 @@ const Swap = () => {
             priceImpact={priceImpact}
             priceImpactCss={priceImpactCss}
           />
-        }
         {isExpertMode && <RecipientField recipient={recipient} action={setRecipient} />}
-        {Boolean(trade) && !isCrossChainMode && (
+        {Boolean(trade) && (
           <SwapDetails
             inputCurrency={currencies[Field.INPUT]}
             outputCurrency={currencies[Field.OUTPUT]}
@@ -420,8 +413,7 @@ const Swap = () => {
             recipient={recipient ?? undefined}
           />
         )}
-
-        {trade && routeNotFound && userHasSpecifiedInputOutput && !isCrossChainMode && (
+        {trade && routeNotFound && userHasSpecifiedInputOutput && (
           <Typography variant="xs" className="text-center py-2">
             {i18n._(t`Insufficient liquidity for this trade.`)}{' '}
             {singleHopOnly && i18n._(t`Try enabling multi-hop trades`)}
@@ -451,7 +443,7 @@ const Swap = () => {
                   ? i18n._(t`Unwrap`)
                   : null)}
           </Button>
-        ) : showApproveFlow && !isCrossChainMode ? (
+        ) : showApproveFlow ? (
           <div>
             {approvalState !== ApprovalState.APPROVED && (
               <Button
@@ -464,7 +456,7 @@ const Swap = () => {
                 {i18n._(t`Approve ${currencies[Field.INPUT]?.symbol}`)}
               </Button>
             )}
-            {approvalState === ApprovalState.APPROVED && !isCrossChainMode && (
+            {approvalState === ApprovalState.APPROVED && (
               <Button
                 color={isValid && priceImpactSeverity > 2 ? 'red' : `${getChainColorCode(chainId)}`
                 }
@@ -495,7 +487,7 @@ const Swap = () => {
               </Button>
             )}
           </div>
-        ) : (!isCrossChainMode &&
+        ) : (
           <Button
             color={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'red' : `${getChainColorCode(chainId)}`}
             onClick={() => {
@@ -567,8 +559,7 @@ const Swap = () => {
           </>
         }
         {
-        showChart && 
-          !isCrossChainMode &&
+        showChart &&
             chainId==250 &&
           <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
             <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>

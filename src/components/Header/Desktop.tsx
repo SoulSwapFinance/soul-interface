@@ -54,7 +54,7 @@ const Desktop: FC = () => {
         <div className="flex justify-between flex-grow">
           <div className="p-1 bg-dark-900 rounded-full hover:bg-dark-800">
             {/* <div className="flex p-2 justify-between"> */}
-            <MenuAlt1Icon width={24} className={classNames(chainId != 250 ? 'hidden' : "text-white cursor-pointer")} onClick={() => setOpen(true)} />
+            <MenuAlt1Icon width={24} className={classNames( [1, 250, 43114].includes(chainId) ? 'text-white cursor-pointer' : 'hidden' )} onClick={() => setOpen(true)} />
           </div>
           {/* <div className="flex w-6 mr-4 items-center">
                   <NavLink href="/landing">

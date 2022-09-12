@@ -126,7 +126,7 @@ const useMobileMenu: UseMobileMenu = () => {
     //     items: poolMenu,
     //   })
 
-    if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
+    if (featureEnabled(Feature.SOULSWAP, chainId)) {
       const farmItems = {
         key: 'Rewards',
         title: i18n._(t`Rewards`),
