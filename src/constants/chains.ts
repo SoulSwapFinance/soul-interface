@@ -36,3 +36,26 @@ export function getChainColorCode(chainId: number) {
 
   return colorCode
 }
+
+export function getChainInfo(chainId: number, option: string) {
+let output: string
+
+  chainId == ChainId.FANTOM ? (
+    option == 'NETWORK' ? output = 'Fantom Opera'
+      : option == 'NAME' ? output = 'Fantom'
+        : option == 'SYMBOL' ? output = 'FTM'
+          : output =  ''
+    ) : chainId == ChainId.AVALANCHE ? (
+      option == 'NETWORK' ? output = 'Avalanche'
+        : option == 'NAME' ? output = 'Avalanche'
+          : option == 'SYMBOL' ? output = 'AVAX'
+            : output =  ''
+      ) : chainId == ChainId.ETHEREUM ? (
+        option == 'NETWORK' ? output = 'Ethereum'
+          : option == 'NAME' ? output = 'Avalanche'
+            : option == 'SYMBOL' ? output = 'AVAX'
+              : output =  ''
+        ) : output = ''
+  
+  return output
+}
