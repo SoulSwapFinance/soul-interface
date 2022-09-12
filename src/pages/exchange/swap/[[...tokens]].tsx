@@ -41,6 +41,7 @@ import { Toggle } from 'components/Toggle'
 import SocialWidget from 'components/Social'
 import { getChainColorCode } from 'constants/chains'
 import { classNames } from 'functions/styling'
+import { NewFeature } from 'components/Banner'
 // import CrossChainMode from 'components/CrossChainMode'
 
 const Swap = () => {
@@ -334,7 +335,7 @@ const Swap = () => {
 
   return (
     <>
-      {/* <NewFeature /> */}
+      <NewFeature chainId={chainId} />
       <ConfirmSwapModal
         isOpen={showConfirm}
         trade={trade}

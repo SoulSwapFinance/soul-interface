@@ -3,6 +3,9 @@ import { XIcon } from '@heroicons/react/outline'
 import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import Link from 'next/link'
+import { getChainColorCode, getChainInfo } from 'constants/chains'
+import { useActiveWeb3React } from 'services/web3'
+import { ChainId } from 'sdk'
 
 export const Global: FC = () => (
   <div className="relative items-center w-full">
@@ -36,19 +39,27 @@ export const Global: FC = () => (
   </div>
 )
 
-export const NewFeature: FC = () => (
+interface IFeature {
+  chainId: number
+}
+
+export const NewFeature: FC<IFeature> = ({ chainId }) => (
   <div className="relative items-center w-full">
     <div className="w-full">
       <div className="text-center">
         <p className="font-medium mb-2 mt-2 text-center text-white">
           {/* <span className="centered md:hidden"><b>Voting Ends Soon!</b> <b>&rarr;</b></span> */}
           {/* <span className="hidden md:inline"> Voting Has Begun <b> &rarr;</b></span> */}
-          <Button variant="filled" color="purple" size="sm">
-            <NavLink href="/summoner">
+          <Button variant="filled" color={getChainColorCode(chainId)} size="sm">
+            {/* <NavLink href="/summoner"> */}
           <span className="justify-center font-bold">
-              {'FARM FTM-AVAX TODAY'}
+              {[ChainId.AVALANCHE, ChainId.ETHEREUM].includes(chainId) 
+              ? `Swapping now available on ${getChainInfo(chainId, 'NETWORK')}`
+                : chainId == ChainId.FANTOM ? `Swap now on Avalanche & Ethereum`
+                    : `Swap on Fantom, Avalanche & Ethereum`
+              }
           </span>
-            </NavLink>
+            {/* </NavLink> */}
           </Button>
         </p>
       </div>
