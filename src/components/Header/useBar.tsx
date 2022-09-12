@@ -142,7 +142,7 @@ const useMenu: UseBar = () => {
         icon: <PoolIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
       })
 
-    if (featureEnabled(Feature.AMM, chainId)) {
+    if (featureEnabled(Feature.SOULSWAP, chainId)) {
       const farmItems = {
         key: 'soulswap',
         title: i18n._(t`SoulSwap`),

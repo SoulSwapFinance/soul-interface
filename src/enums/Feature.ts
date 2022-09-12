@@ -15,6 +15,7 @@ export enum Feature {
   TRIDENT = 'Trident',
   LIMIT_ORDERS = 'LimitOrders',
   LIMIT = 'Limit',
+  SOULSWAP = 'SoulSwap',
   LUXOR = 'Luxor',
   INARI = 'Inari',
   VESTING = 'Vesting'

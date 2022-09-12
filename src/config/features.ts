@@ -69,6 +69,7 @@ const features: FeatureMap = {
     Feature.LIMIT,
     Feature.EXPLORE,
     Feature.LUXOR,
+    Feature.SOULSWAP,
     Feature.UNDERWORLD
     // Feature.LIMIT_ORDERS,
   ],

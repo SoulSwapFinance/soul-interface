@@ -39,7 +39,7 @@ const Mobile: FC = () => {
     <>
       <header className="w-full flex mt-3 items-center justify-between min-h-[48px] h-[48px] px-4">
         <div className="flex justify-between flex-grow">
-          { chainId == 250 &&
+          { [1, 250, 43114].includes(chainId) &&
             <div className="mt-5 rounded-full">
             <MenuAlt1Icon width={24} className={classNames(isLuxor ? "hover:text-yellow" : `hover:text-[${getChainColor(chainId)}]`, `text-[${getChainColor(chainId)}]`, "cursor-pointer hover:text-white")} onClick={() => setOpen(true)} />
           </div>
