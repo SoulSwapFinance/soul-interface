@@ -1,7 +1,7 @@
 import { ApprovalState, useApproveCallback } from 'hooks/useApproveCallback'
 import { AutoRow, RowBetween } from 'components/Row'
 import { Button, ButtonError } from 'components/Button'
-import { Currency, CurrencyAmount, Percent, WNATIVE, currencyEquals } from 'sdk'
+import { Currency, CurrencyAmount, Percent, WNATIVE, NATIVE, currencyEquals } from 'sdk'
 import { ZERO_PERCENT } from '../../../constants'
 import React, { useCallback, useState } from 'react'
 import TransactionConfirmationModal, { ConfirmationModalContent } from 'modals/TransactionConfirmationModal'
@@ -334,7 +334,7 @@ export default function Add() {
           router.push(`/exchange/add/${newCurrencyIdB}`)
         }
       } else {
-        router.push(`/exchange/add/${currencyIdA ? currencyIdA : 'FTM'}/${newCurrencyIdB}`)
+        router.push(`/exchange/add/${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}/${newCurrencyIdB}`)
       }
     },
     [currencyIdA, router, currencyIdB]
