@@ -46,15 +46,7 @@
             "logo": "https://cryptologos.cc/logos/curve-dao-token-crv-logo.svg",
             "symbol": "CRV",
             "address": "0x1E4F97b9f9F913c46F1632781732927B9019C68b"
-        },
-        {
-            "id": "tether",
-            "name": "Tether",
-            "rank": 146,
-            "logo": "https://cryptologos.cc/logos/tether-usdt-logo.svg",
-            "symbol": "USDT",
-            "address": "0x049d68029688eabf473097a2fc38ef61633a3c7a"
-        },
+        }, 
         {
             "id": "dai",
             "name": "Dai Stablecoin",
@@ -64,12 +56,13 @@
             "address": "0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E"
         },
         {
-            "id": "wrapped-bitcoin",
-            "name": "Wrapped Bitcoin",
-            "rank": 393,
-            "logo": "https://cryptologos.cc/logos/wrapped-bitcoin-wbtc-logo.svg",
-            "symbol": "WBTC",
-            "address": "0x321162cd933e2be498cd2267a90534a804051b11"
+            "id": "ethereum",
+            "name": "Ethereum",
+            "symbol": "ETH",
+            "logo": "https://cryptologos.cc/logos/ethereum-eth-logo.svg",
+            "rank": 2,
+            "address": "0x74b23882a30290451A17c44f4F05243b6b58C76d",
+            "decimals": 18
         },
         {
             "id": "wrapped-avax",
@@ -78,6 +71,14 @@
             "logo": "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/avalanche/Avalanche.svg",
             "symbol": "WAVAX",
             "address": "0x511d35c52a3c244e7b8bd92c0c297755fbd89212"
+        },
+        {
+            "id": "wrapped-bitcoin",
+            "name": "Wrapped Bitcoin",
+            "rank": 393,
+            "logo": "https://cryptologos.cc/logos/wrapped-bitcoin-wbtc-logo.svg",
+            "symbol": "WBTC",
+            "address": "0x321162cd933e2be498cd2267a90534a804051b11"
         }
     ]
 }
