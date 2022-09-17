@@ -1,4 +1,4 @@
-import { ChainId } from 'sdk'
+import { ChainId, SOUL_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
 import { GRAPH_HOST } from 'services/graph/constants'
 import {
   dayDatasQuery,
@@ -162,14 +162,14 @@ export const getMphPrice = async (variables = {}) => {
 export const getSoulPrice = async (variables = {}) => {
   // console.log('getSoulPrice')
   return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
-    id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07',
+    id: SOUL_ADDRESS[ChainId.FANTOM],
     ...variables,
   })
 }
 
 export const getFantomPrice = async () => {
   return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
-    id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
+    id: WNATIVE_ADDRESS[ChainId.FANTOM],
   })
 }
 

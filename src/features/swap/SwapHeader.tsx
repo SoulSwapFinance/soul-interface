@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, Currency, DAI_ADDRESS, NATIVE, Percent } from 'sdk'
+import { ChainId, Currency, DAI_ADDRESS, NATIVE, Percent, SOUL_ADDRESS, USDC_ADDRESS } from 'sdk'
 import NavLink from 'components/NavLink'
 import Settings from 'components/Settings'
 // import CrossChainMode from 'components/CrossChainMode'
@@ -70,7 +70,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               "border rounded bg-black",
               chainColor
             )}
-            href={`/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : (chainId == 250 ? '/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07' : `/${DAI_ADDRESS[chainId]}`)
+            href={`/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([1, 250, 43114].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
               }`}
           >
             <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>

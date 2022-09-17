@@ -30,7 +30,7 @@ export function useAllMiningCampaigns(pair?: Pair, dataFilter?: PairsFilterType)
 
   const { chainId, account } = useActiveWeb3React()
 
-  const subgraphAccountId = account?.toLowerCase() ?? ''
+  // const subgraphAccountId = account?.toLowerCase() ?? ''
 
   const nativeCurrency = useNativeCurrency()
   const timestamp = useMemo(() => Math.floor(Date.now() / 1000), [])

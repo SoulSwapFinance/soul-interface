@@ -1,4 +1,4 @@
-import { ChainId } from '../sdk'
+import { ChainId, SOUL_ADDRESS } from '../sdk'
 
 export type TokenInfo = {
   id: string
@@ -26,9 +26,9 @@ export const VAULTS: AddressMap = {
   [ChainId.FANTOM]: {
     '0': {
       id: 0,
-      lpToken: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
+      lpToken: SOUL_ADDRESS[ChainId.FANTOM], // SOUL
       token0: {
-        id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
+        id: SOUL_ADDRESS[ChainId.FANTOM], // SOUL
         name: 'Soul Power',
         symbol: 'SOUL',
         decimals: 18,

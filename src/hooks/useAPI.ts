@@ -1,4 +1,4 @@
-import { ChainId } from '../sdk'
+import { ChainId, SOUL_ADDRESS } from '../sdk'
 import { useEffect, useState } from 'react'
 import { ARCHER_GAS_URI, SOULSWAP_URI } from '../constants'
 import { useActiveWeb3React } from 'services/web3'
@@ -144,7 +144,7 @@ export function useSoulInfo(): { status: string; soulInfo: T } {
     const { account, chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
     const [soulInfo, setInfo] = useState<T>({
-        address: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07',
+        address: SOUL_ADDRESS[ChainId.FANTOM],
         name: 'Soul Power',
         mcap: '1064575.257167817',
         symbol: 'SOUL',
@@ -174,7 +174,7 @@ export function useSoulInfo(): { status: string; soulInfo: T } {
         BitcoinEthereumValue: '0',
 
         api: "https://api.soulswap.finance/soulswap",
-        ftmscan: 'https://ftmscan.com/address/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07#code',
+        ftmscan: `https://ftmscan.com/address/${SOUL_ADDRESS[chainId]}#code`,
         image: 'https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png'
       })  
     useEffect(() => {

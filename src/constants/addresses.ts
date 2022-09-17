@@ -388,24 +388,24 @@ export const ETH_USD_PAIR: AddressMap = {
 }
 
 export const WNATIVE: AddressMap = {
-  [ChainId.ETHEREUM]: '',
+  [ChainId.ETHEREUM]: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', // WETH
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
   [ChainId.FANTOM]: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
+  [ChainId.AVALANCHE]: '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7', // WAVAX
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
   [ChainId.MOONRIVER]: '',
 }
 
 export const SOUL_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
+  [ChainId.ETHEREUM]: '0x34862060EFF6DA2AF04D382C209a433279377d16', // SEP22
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
+  [ChainId.AVALANCHE]: '0x11d6DD25c1695764e64F439E32cc7746f3945543', // SEP22
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
   [ChainId.MOONRIVER]: '',
@@ -507,61 +507,61 @@ export const FUSD_ADDRESS: AddressMap = {
   [ChainId.MOONRIVER]: '',
 }
 
-export const WETH_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // USDC
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.ARBITRUM]: '',
-  [ChainId.MOONRIVER]: '',
-}
-
-export const WBTC_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x321162Cd933E2Be498Cd2267a90534A804051b11', // WBTC
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.ARBITRUM]: '',
-  [ChainId.MOONRIVER]: '',
-}
-
-export const BNB_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454', // BNB
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.ARBITRUM]: '',
-  [ChainId.MOONRIVER]: '',
-}
-
-export const WFTM_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.ARBITRUM]: '',
-  [ChainId.MOONRIVER]: '',
-}
-
 export const WNATIVE_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
+  [ChainId.AVALANCHE]: '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
+  [ChainId.MATIC]: '',
+  [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
+}
+
+export const WETH_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: WNATIVE_ADDRESS[ChainId.ETHEREUM],
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // WETH
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB',
+  [ChainId.MATIC]: '',
+  [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
+}
+
+export const WBTC_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x321162Cd933E2Be498Cd2267a90534A804051b11', // WBTC
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '0x50b7545627a5162F82A992c33b87aDc75187B218',
+  [ChainId.MATIC]: '',
+  [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
+}
+
+export const BNB_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '0xB8c77482e45F1F44dE1745F52C74426C631bDD52',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454', // BNB
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '0x264c1383EA520f73dd837F915ef3a732e204a493',
+  [ChainId.MATIC]: '',
+  [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
+}
+
+export const WFTM_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '0x4E15361FD6b4BB609Fa63C81A2be19d873717870',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: undefined,
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
   [ChainId.MOONRIVER]: '',
@@ -592,7 +592,7 @@ export const CRV_ADDRESS: AddressMap = {
 }
 
 export const UNIDX_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
+  [ChainId.ETHEREUM]: '0x95b3497bBcCcc46a8F45F5Cf54b0878b39f8D96C',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x2130d2a1e51112D349cCF78D2a1EE65843ba36e0', // UNIDX
@@ -604,27 +604,27 @@ export const UNIDX_ADDRESS: AddressMap = {
 }
 
 export const GRIM_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
+  [ChainId.ETHEREUM]: undefined,
+  [ChainId.TELOS]: undefined,
+  [ChainId.BSC]: undefined,
   [ChainId.FANTOM]: '0x7eC94C4327dC757601B4273cD67014d7760Be97E', // GRIM
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.ARBITRUM]: '',
-  [ChainId.MOONRIVER]: '',
+  [ChainId.FANTOM_TESTNET]: undefined,
+  [ChainId.AVALANCHE]: undefined,
+  [ChainId.MATIC]: undefined,
+  [ChainId.ARBITRUM]: undefined,
+  [ChainId.MOONRIVER]: undefined,
 }
 
 export const REAPER_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
+  [ChainId.ETHEREUM]: undefined,
+  [ChainId.TELOS]: undefined,
+  [ChainId.BSC]: undefined,
   [ChainId.FANTOM]: '0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb', // REAPER
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.ARBITRUM]: '',
-  [ChainId.MOONRIVER]: '',
+  [ChainId.FANTOM_TESTNET]: undefined,
+  [ChainId.AVALANCHE]: undefined,
+  [ChainId.MATIC]: undefined,
+  [ChainId.ARBITRUM]: undefined,
+  [ChainId.MOONRIVER]: undefined,
 }
 
 export const STOP_LIMIT_ORDER_ADDRESS: AddressMap = {

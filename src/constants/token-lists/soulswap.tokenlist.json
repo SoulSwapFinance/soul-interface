@@ -20,7 +20,15 @@
         "symbol": "FTM",
         "decimals": 18,
         "chainId": 1,
-        "logoURI": "https://cryptologos.cc/logos/fantom-ftm-logo.svg?v=003"
+        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/ethereum/assets/0x4E15361FD6b4BB609Fa63C81A2be19d873717870/logo.png"
+      },
+      {
+        "name": "Soul Power",
+        "address": "0x34862060EFF6DA2AF04D382C209a433279377d16",
+        "symbol": "SOUL",
+        "decimals": 18,
+        "chainId": 1,
+        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/ethereum/assets/0x34862060EFF6DA2AF04D382C209a433279377d16/logo.png"
       },
       {
         "name": "USD Coin",
@@ -45,6 +53,14 @@
         "decimals": 18,
         "chainId": 43114,
         "logoURI": "https://snowtrace.io/token/images/traderjoe_32.png"
+      },
+      {
+        "name": "Soul Power",
+        "address": "0x11d6DD25c1695764e64F439E32cc7746f3945543",
+        "symbol": "SOUL",
+        "decimals": 18,
+        "chainId": 43114,
+        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/avalanche/assets/0x11d6DD25c1695764e64F439E32cc7746f3945543/logo.png"
       },
       {
         "name": "Wrapped Avalanche",

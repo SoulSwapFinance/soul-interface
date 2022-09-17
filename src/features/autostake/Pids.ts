@@ -1,4 +1,5 @@
 import { tokens } from 'features/bond/constants/tokens'
+import { SOUL_ADDRESS } from 'sdk'
 
 export const AllPids = [
   {
@@ -9,7 +10,7 @@ export const AllPids = [
     token2: 'SOUL',
     lpSymbol: 'SOUL',
     lpAddresses: {
-      250: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07',
+      250: SOUL_ADDRESS[250],
     },
     token1Address: tokens.SOUL,
     token2Address: tokens.SOUL,

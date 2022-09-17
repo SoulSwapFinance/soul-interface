@@ -1,4 +1,5 @@
-import { ChainId, Ether, Token, WETH9, WNATIVE } from '../../sdk'
+import { WETH_ADDRESS } from 'constants/addresses'
+import { ChainId, Ether, SOUL_ADDRESS, Token, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
 
 import { SupportedChainId } from '../chains'
 
@@ -49,6 +50,7 @@ export const FANTOM_TESTNET: { [key: string]: Token } = {
 }
 
 export const AVALANCHE: { [key: string]: Token } = {
+  SOUL: new Token(ChainId.AVALANCHE, '0x11d6DD25c1695764e64F439E32cc7746f3945543', 18, 'SOUL', 'SoulPower'),
   USDC: new Token(ChainId.AVALANCHE, '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E', 6, 'USDC', 'USD Coin'),
   DAI: new Token(ChainId.AVALANCHE, '0xd586E7F844cEa2F87f50152665BCbc2C279D8d70', 18, 'DAI', 'Dai Stablecoin'),
   WBTC: new Token(ChainId.AVALANCHE, '0x50b7545627a5162F82A992c33b87aDc75187B218', 8, 'WBTC', 'Wrapped Bitcoin'),
@@ -101,9 +103,10 @@ type ChainTokenMap = {
 
 // SOUL
 export const SOUL: ChainTokenMap = {
-  // [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, SOUL_ADDRESS[ChainId.ETHEREUM], 18, 'SOUL', 'Soul Power'),
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', 18, 'SOUL', 'Soul Power'), // 27 AUG
-  [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5', 18, 'SOUL', 'Soul Power'), // 31 JUL
+  [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, SOUL_ADDRESS[ChainId.ETHEREUM], 18, 'SOUL', 'Soul Power'), // SEP22
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, SOUL_ADDRESS[ChainId.FANTOM], 18, 'SOUL', 'Soul Power'), // AUG21
+  [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5', 18, 'SOUL', 'Soul Power'), // JUL21
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, SOUL_ADDRESS[ChainId.AVALANCHE], 18, 'SOUL', 'Soul Power'), // SEP22
 }
 
 // LUXOR
@@ -126,10 +129,10 @@ export const WLUM: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208', 9, 'WLUM', 'Wrapped Lumens'),
 }
 
+// LUM
 export const LUM: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x4290b33158F429F40C0eDc8f9b9e5d8C5288800c', 9, 'LUM', 'Lumens'),
 }
-
 
 // SOR
 export const SOR: ChainTokenMap = {
@@ -138,7 +141,9 @@ export const SOR: ChainTokenMap = {
 
 // WETH
 export const WETH: ChainTokenMap = {
+  [ChainId.ETHEREUM]: new Token(ChainId.FANTOM, WNATIVE_ADDRESS[ChainId.ETHEREUM], 18, 'WETH', 'Wrapped ETH'),
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x74b23882a30290451A17c44f4F05243b6b58C76d', 18, 'WETH', 'Wrapped ETH'),
+  [ChainId.AVALANCHE]: new Token(ChainId.FANTOM, WETH_ADDRESS[ChainId.AVALANCHE], 18, 'WETH', 'Wrapped ETH'),
 }
 
 // WBTC

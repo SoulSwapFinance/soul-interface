@@ -1,5 +1,6 @@
 import { AddressMap } from '../types'
 import { ChainId } from '../enums/ChainId'
+import { WNATIVE } from 'sdk'
 
 export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '0x794d858b0b152fb68a5CE465451D729EFfA67f08', // FEB22
@@ -51,12 +52,12 @@ export const STOP_LIMIT_ORDER_ADDRESS: AddressMap = {
 }
 
 export const SOUL_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.ETHEREUM]: '',
+  [ChainId.ETHEREUM]: '0x34862060EFF6DA2AF04D382C209a433279377d16', // SEP22
   [ChainId.TELOS]: '0xef9777827a3581b64f5c7CB8954ccaE3cc2c46C0',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07',
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
+  [ChainId.AVALANCHE]: '0x11d6DD25c1695764e64F439E32cc7746f3945543', // SEP22
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
@@ -396,10 +397,6 @@ export const USDC_ADDRESS: AddressMap = {
   [ChainId.MOONRIVER]: '0xE3F5a90F9cb311505cd691a46596599aA1A0AD7D',
 }
 
-export const FTM_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '0x4E15361FD6b4BB609Fa63C81A2be19d873717870'
-}
-
 export const DAI_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
   [ChainId.FANTOM]: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E',
@@ -446,6 +443,11 @@ export const WNATIVE_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
   [ChainId.MOONRIVER]: '0x98878B06940aE243284CA214f92Bb71a2b032B8A',
   [ChainId.MATIC]: '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
+}
+
+export const FTM_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '0x4E15361FD6b4BB609Fa63C81A2be19d873717870',
+  [ChainId.FANTOM]: WNATIVE_ADDRESS[ChainId.FANTOM]
 }
 
 export const ZAPPER_ADDRESS: AddressMap = {

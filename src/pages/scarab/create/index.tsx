@@ -33,12 +33,13 @@ import { useAddPopup } from '../../../state/application/hooks'
 import { result } from 'lodash'
 import { BigNumber } from '@ethersproject/bignumber'
 import { useActiveWeb3React } from 'services/web3'
+import { ChainId, SOUL_ADDRESS } from 'sdk'
 
 export default function CreateScarab(): JSX.Element {
   const { i18n } = useLingui()
   const router = useRouter()
   const { chainId, account, library } = useActiveWeb3React()
-  const [tokenAddress, setTokenAddress] = useState('0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07')
+  const [tokenAddress, setTokenAddress] = useState(SOUL_ADDRESS[ChainId.FANTOM])
   const [recipient, setRecipient] = useState('')
   const [value, setValue] = useState('')
   const [unlockDate, setUnlockDate] = useState(moment.default())
