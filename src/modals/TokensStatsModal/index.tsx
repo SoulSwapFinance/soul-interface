@@ -14,7 +14,7 @@ import { useActiveWeb3React } from 'services/web3'
 import ModalHeader from 'components/Modal/Header'
 import { HeadlessUiModal } from 'components/Modal'
 import { concat } from 'lodash'
-import { SOUL } from 'sdk'
+import { ChainId, SOUL } from 'sdk'
 import { useUserInfo } from 'hooks/useAPI'
 
 export default function TokenStatsModal(): JSX.Element | null {
@@ -97,10 +97,10 @@ export default function TokenStatsModal(): JSX.Element | null {
                 const params: any = {
                   type: 'ERC20',
                   options: {
-                    address: SOUL[250].address,
+                    address: SOUL_ADDRESS[ChainId.FANTOM],
                     symbol: 'SOUL',
                     decimals: 18,
-                    image: 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png',
+                    image: `https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/${SOUL_ADDRESS[ChainId.FANTOM]}/logo.png`,
                   },
                 }
                 if (library && library.provider.isMetaMask && library.provider.request) {
@@ -121,7 +121,7 @@ export default function TokenStatsModal(): JSX.Element | null {
               }}
             >
               <Image
-                src="https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png"
+                src={`https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/${SOUL_ADDRESS[ChainId.FANTOM]}/logo.png`}
                 alt="SOUL"
                 width="1600px"
                 height="1600px"

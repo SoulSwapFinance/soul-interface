@@ -30,7 +30,7 @@ const VaultListItem = ({ farm, ...rest }) => {
   let token1 = useCurrency(farm.pair.token1?.id)
 
   const priceHelperContract = usePriceHelperContract()
-  const totalLp = 11; // todo: update + make dynamic
+  // const totalLp = 11; // todo: update + make dynamic
 
   const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
   console.log(Number(rawSoulPrice))

@@ -21,24 +21,24 @@ import useScarab from '../../features/scarab/useScarab'
 import { Disclosure } from '@headlessui/react'
 import moment from 'moment'
 import { useCurrency, useToken } from '../../hooks/Tokens'
-import { CurrencyAmount } from '../../sdk'
+import { CurrencyAmount, SEANCE_ADDRESS, SOUL_ADDRESS } from '../../sdk'
 import { Button, ButtonConfirmed } from '../../components/Button'
 import { getAddress } from '@ethersproject/address'
 import { AutoRow } from '../../components/Row'
 import Loader from '../../components/Loader'
 import { useActiveWeb3React } from 'services/web3'
+import { ChainId } from '@sushiswap/sdk'
 
 export default function Scarab(): JSX.Element {
   const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
-  const [tokenAddress, setTokenAddress] = useState('0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07')
+  const [tokenAddress, setTokenAddress] = useState(SOUL_ADDRESS[ChainId.FANTOM])
   const token = useToken(isAddress(tokenAddress) ? tokenAddress : undefined)
   const [pendingTx, setPendingTx] = useState(false)
   const addTransaction = useTransactionAdder()
   const [scarabs, setScarabs] = useState([])
-  // const [value, setValue] = useState('')
 
-  const seance = useCurrency('0x124B06C5ce47De7A6e9EFDA71a946717130079E6') || undefined
+  const seance = useCurrency(SEANCE_ADDRESS[ChainId.FANTOM]) || undefined
   const value = CurrencyAmount.fromRawAmount(seance, 1^28)
   const typedDepositValue = value
 

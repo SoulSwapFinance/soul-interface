@@ -52,7 +52,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const ZapContract = useZapperContract()
     const ZapContractAddress = ZapContract.address
     const SoulSummonerAddress = SoulSummonerContract.address
-    
+
     const nowTime = new Date().getTime()
 
     const { summonerInfo } = useSummonerInfo()
@@ -101,13 +101,13 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const currentTime = nowTime / 1_000
     const timeDelta = currentTime - firstDepositTime
     const daysElapsed = timeDelta / 86_400
-    const withdrawFee 
-        = daysElapsed <= 14 ? startRate - daysElapsed 
+    const withdrawFee
+        = daysElapsed <= 14 ? startRate - daysElapsed
             // staked, but beyond 14 days
-        : stakedBalance > 0 ? 0 
-            // not staked (to forewarn)
-        : 14
-    const feeAmount 
+            : stakedBalance > 0 ? 0
+                // not staked (to forewarn)
+                : 14
+    const feeAmount
         = withdrawFee * stakedBalance / 100
     const withdrawable = stakedBalance - feeAmount
     const feeValue = feeAmount * lpPrice
@@ -152,9 +152,9 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
 
     // USER INFO //
     const { userTokenInfo } = useUserTokenInfo(account, zapTokenAddress)
-    const nativeBalance = userInfo.nativeBalance
+    // const nativeBalance = userInfo.nativeBalance
     const selectedTokenDecimals = tokenDecimals ? tokenDecimals : 18
-    const selectedTokenBalance = Number(userTokenInfo.balance) / selectedTokenDecimals
+    const selectedTokenBalance = Number(userTokenInfo.balance) / selectedTokenDecimals // TODO: try erc20BalanceOf(zapTokenAddress)
     const parsedTokenBalance = tryParseAmount(selectedTokenBalance.toString(), token)
     // const parsedZapValue = tryParseAmount(zapValue, token)
 
@@ -183,16 +183,16 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
         }
     }
 
-    const handleShowDeposit = () => {
-        setOpenDeposit(!openDeposit)
-        if (openDeposit) {
-            fetchApproval()
-        }
-    }
+    // const handleShowDeposit = () => {
+    //     setOpenDeposit(!openDeposit)
+    //     if (openDeposit) {
+    //         fetchApproval()
+    //     }
+    // }
 
-    const handleShowWithdraw = () => {
-        setOpenWithdraw(!openWithdraw)
-    }
+    // const handleShowWithdraw = () => {
+    //     setOpenWithdraw(!openWithdraw)
+    // }
 
     const handleShowZap = (pid) => {
         setOpenZap(!openZap)
@@ -332,7 +332,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                 </FarmItemBox>
                             </div>
 
-                            {/* <HideOnMobile>
+                        {/* <HideOnMobile>
                             <FarmItemBox>
                                 <FarmItem>
                                     {Number(apr).toString() === '0.00' ? (
@@ -624,7 +624,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                         >
                                             <a className="font-bold">
                                                 <span>
-                                                    LEND { token0Symbol }
+                                                    LEND {token0Symbol}
                                                 </span>
                                             </a>
                                         </SubmitButton>

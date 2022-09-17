@@ -1,11 +1,15 @@
+import { ChainId } from "@sushiswap/core-sdk";
+import { BNB_ADDRESS } from "constants/addresses";
+import { DAI_ADDRESS, ENCHANT_ADDRESS, SEANCE_ADDRESS, SOUL_ADDRESS, USDC_ADDRESS } from "sdk";
+
 export const tokens = {
     SOUL: {
       4002: "0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5",
-      250: "0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07",
+      250: SOUL_ADDRESS[ChainId.FANTOM],
     },
     SEANCE: {
       4002: "0xD54Cf31D5653F4a062f5DA4C83170A5867d04442",
-      250: "0x124B06C5ce47De7A6e9EFDA71a946717130079E6",
+      250: SEANCE_ADDRESS[ChainId.FANTOM],
     },
     FTM: {
       4002: "0xf1277d1ed8ad466beddf92ef448a132661956621",
@@ -21,7 +25,7 @@ export const tokens = {
     },
     ENCHANT: {
       4002: "",
-      250: "0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a",
+      250: ENCHANT_ADDRESS[ChainId.FANTOM],
     },
     FUSD: {
       4002: "0x306557358e20aea124b16a548597897858d13cb2",
@@ -33,11 +37,11 @@ export const tokens = {
     },
     BNB: {
       4002: "",
-      250: "0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454",
+      250: BNB_ADDRESS[ChainId.FANTOM],
     },
     DAI: {
       4002: '',
-      250: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E',
+      250: DAI_ADDRESS[ChainId.FANTOM],
     },
     ICE: {
       4002: '',
@@ -61,7 +65,7 @@ export const tokens = {
     },
     USDC: {
       4002: "",
-      250: "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75",
+      250: USDC_ADDRESS[ChainId.FANTOM],
     },
     WETH: {
       4002: "0x442993b05D170AE47af948FBF507B9972f26cA86",

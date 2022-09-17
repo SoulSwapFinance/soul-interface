@@ -1,16 +1,17 @@
 import dynamic from 'next/dynamic'
-import { ChainId, Currency, FACTORY_ADDRESS, Token, WNATIVE } from '../../sdk'
+import { Currency, FACTORY_ADDRESS, Token, USDC_ADDRESS, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
 // import useDexCandles from '../../hooks/useDexCandles'
 import { CandlePeriod, NumericalCandlestickDatum } from './types/Candle'
 import React, { useEffect, useState } from 'react'
-import { RowFixed } from '../Row'
+// import { RowFixed } from '../Row'
 // import { CurrencyLogo } from '../CurrencyLogo'
-import NavLink from '../NavLink'
+// import NavLink from '../NavLink'
 import { classNames } from '../../functions'
-import Lottie from 'lottie-react'
+// import Lottie from 'lottie-react'
 // import soulLoading from '../../animation/solarbeam-loading.json'
 import { computePairAddress } from '../../sdk'
-import { AutoColumn } from '../Column'
+// import { AutoColumn } from '../Column'
+import { useActiveWeb3React } from 'services/web3'
 const KChart = dynamic(() => import('kaktana-react-lightweight-charts'), { ssr: false })
 
 interface PeriodChooserProps {
@@ -103,12 +104,13 @@ interface ChartProps {
 }
 
 export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
-  const [candlePeriod, setCandlePeriod] = useState(CandlePeriod.OneHour)
+  // const [candlePeriod, setCandlePeriod] = useState(CandlePeriod.OneHour)
+  const { chainId } = useActiveWeb3React()
   const [candlestickSeries, setCandlestickSeries] = useState<{ data: NumericalCandlestickDatum[] }[]>([{ data: [] }])
 
   const MAJOR_HIERARCHY = [
-    '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'.toLowerCase(), // WFTM
-    '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75'.toLowerCase(), // USDC
+    WNATIVE_ADDRESS[chainId].toLowerCase(), // WFTM
+    USDC_ADDRESS[chainId].toLowerCase(), // USDC
   ]
 
   const inputAddress = inputCurrency?.isToken
@@ -126,8 +128,8 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
   const token0Index = MAJOR_HIERARCHY.indexOf(inputAddress.toLowerCase())
   const token1Index = MAJOR_HIERARCHY.indexOf(outputAddress.toLowerCase())
 
-  const altCurrency = token0Index < token1Index ? inputCurrency : outputCurrency
-  const majorCurrency = token0Index < token1Index ? outputCurrency : inputCurrency
+  // const altCurrency = token0Index < token1Index ? inputCurrency : outputCurrency
+  // const majorCurrency = token0Index < token1Index ? outputCurrency : inputCurrency
 
   // A greater index denotes a greater major. -1 denotes altcoin.
   const token0LCase = token0Index < token1Index ? inputAddress.toLowerCase() : outputAddress.toLowerCase()
@@ -266,7 +268,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
   const lastClose = hasData ? candlestickSeries[0].data[candlestickSeries[0].data.length - 1].close : undefined
   // const fmtLastClose = lastClose ? formattedNum(lastClose) : 'N/A'
 
-  const weth = WNATIVE[ChainId.FANTOM]
+  const weth = WNATIVE[chainId]
   const isWrapped = (inputCurrency?.isNative && weth.equals(outputCurrency)) || (outputCurrency?.isNative && weth.equals(inputCurrency))
   const inputWrapped = inputCurrency?.isNative
 
@@ -275,7 +277,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
     outputCurrency &&
     !isWrapped &&
     computePairAddress({
-      factoryAddress: FACTORY_ADDRESS[ChainId.FANTOM],
+      factoryAddress: FACTORY_ADDRESS[chainId],
       tokenA: inputCurrency?.isToken ? inputCurrency : inputCurrency?.wrapped,
       tokenB: outputCurrency?.isToken ? outputCurrency : outputCurrency?.wrapped,
     })
@@ -379,7 +381,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
             <div className="text-lg font-medium text-h">CREATE PAIR</div>
             </div>
           </a>
-        :   'https://app.soulswap.finance/add/FTM/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'
+        :   'https://app.soulswap.finance/add/NATIVE[chainId]/SOUL_ADDRESS[chainId]'
     } */}
       {/* </div> */}
     </>
