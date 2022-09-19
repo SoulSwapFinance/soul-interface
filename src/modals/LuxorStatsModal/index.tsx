@@ -230,7 +230,8 @@ export default function LuxorStatsModal(): JSX.Element | null {
         {getSummaryLine(
           <div className="flex items-center">
             <Typography variant="sm" className="flex items-center py-0.5">
-              {`Circulating Supply`}
+              { `Total Supply` }
+              {/* `Circulating Supply`*/}
             </Typography>
             {/* <QuestionHelper
               text={
@@ -278,8 +279,9 @@ export default function LuxorStatsModal(): JSX.Element | null {
           </div>,
           formatNumberScale(
             Number(luxorInfo?.supply)
-            - Number(luxorInfo?.circulatingLumens)
-            - (Number(luxorInfo?.supply) * 0.19) // TODO: make exact
+            // -  Number(luxorInfo?.circulatingLumens)
+            // - (Number(luxorInfo?.supply) * 0.19) 
+            // TODO: make exact
             , false)
         )}
         {getSummaryLine(
