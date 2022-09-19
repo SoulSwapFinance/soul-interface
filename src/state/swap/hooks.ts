@@ -271,7 +271,7 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId 
          : chainId == ChainId.ETHEREUM
          ? FTM[ChainId.ETHEREUM].address
          : chainId == ChainId.AVALANCHE
-         ? USDC[ChainId.AVALANCHE].address
+         ? SOUL[ChainId.AVALANCHE].address
          : chainId == ChainId.BSC
          ? USDC[ChainId.BSC].address
          : DAI[chainId].address
