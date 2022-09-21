@@ -429,8 +429,7 @@ export default function Exchange() {
                   setShowConfirmation("show")
                   try {
                     if (trade instanceof InstantTrade) {
-                      await trade.swap(
-                        {
+                      await trade.swap({
                         onConfirm: (_hash: any) => setShowConfirmation("hide")
                       })
                     } else {
@@ -744,9 +743,28 @@ export default function Exchange() {
                   color="black"
                   onClick={
                     async () => {
-                      await setShowConfirmationModal(true)
-                    }
-                  }
+                      setShowConfirmation("show")
+                      try {
+                        if (trade instanceof InstantTrade) {
+                          await trade.swap({
+                            onConfirm: (_hash: any) => setShowConfirmation("hide")
+                          })
+                        } else {
+                          await trade.trade.swap({
+                            onConfirm: (_hash: any) => setShowConfirmation("hide")
+                          })
+                        }
+                      } catch (e) {
+                        if (e instanceof InsufficientFundsError) {
+                          setShowConfirmation("poor");
+                        } else if (e.message === "execution reverted: less than min") {
+                          setShowConfirmation("min");
+                        } else {
+                          console.error(e);
+                          setShowConfirmation("hide");
+                        }
+                      }
+                    }}
                   style={{ opacity: trade ? 1 : 0.5, cursor: trade ? "pointer" : "not-allowed" }}
                   disabled={trade == undefined}
                 >

@@ -60,7 +60,7 @@ const useMenu: UseBar = () => {
       {
         key: 'bridge',
         title: i18n._(t`Bridge`),
-        link: '/bridge',
+        link: '/cross',
       },
     ],
   }
@@ -85,7 +85,7 @@ const useMenu: UseBar = () => {
     //       {
     //         key: 'bridge',
     //         title: i18n._(t`Bridge`),
-    //         link: '/bridge',
+    //         link: '/cross',
     //       },
     //       {
     //         key: 'limit',
@@ -355,7 +355,7 @@ const useMenu: UseBar = () => {
         {
           key: 'bridge',
           title: i18n._(t`Bridge`),
-          link: '/bridge',
+          link: '/cross',
         },
         {
           key: 'stream',
