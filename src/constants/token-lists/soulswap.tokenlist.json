@@ -63,14 +63,6 @@
         "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/assets/0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E/logo.png"
       },
       {
-        "name": "JoeToken",
-        "address": "0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd",
-        "symbol": "JOE",
-        "decimals": 18,
-        "chainId": 43114,
-        "logoURI": "https://snowtrace.io/token/images/traderjoe_32.png"
-      },
-      {
         "name": "Soul Power",
         "address": "0x11d6DD25c1695764e64F439E32cc7746f3945543",
         "symbol": "SOUL",
