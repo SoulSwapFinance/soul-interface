@@ -23,27 +23,15 @@ const TOOLS = (i18n: I18n) => [
   },
   {
     id: 3,
-    name: 'SEANCE CIRCLES',
-    description: 'Deposit $SEANCE to earn $WFTM and $UNIDX.',
-    href: './circles'
-  },
-  {
-    id: 4,
     name: 'ENCHANTED BUYBACKS',
     description: 'Deposit $SEANCE and earn protocol fee-shares.',
     href: './enchant'
   },
   {
-    id: 5,
-    name: 'SHARE YOUR SOUL',
-    description: 'Send $SOUL for a small sacrifice of $SEANCE.',
-    href: './scarab/create'
-  },
-  {
-    id: 6,
+    id: 4,
     name: 'BRIDGE ASSETS',
     description: 'Bridge from Binance, Ethereum, Huobi, and more.',
-    href: 'https://bridge.soul.sh'
+    href: './cross'
   },
 ]
 

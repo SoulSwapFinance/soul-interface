@@ -60,7 +60,7 @@ const useMenu: UseMenu = () => {
          {
            key: 'bridge',
            title: i18n._(t`Bridge`),
-           link: '/bridge',
+           link: '/cross',
          },
        ],
      }
@@ -186,12 +186,12 @@ const useMenu: UseMenu = () => {
       mainItems.push(luxorItems)
     }
 
-    if (chainId != 250) {
+    if ([1, 250, 43114].includes(chainId)) {
       const bridgeItem = {
         key: 'bridge',
         title: i18n._(t`Bridge`),
         icon: <GlobeIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
-        link: '/bridge'
+        link: '/cross'
         // items: [
         //   {
         //     key: 'luxor-dashboard',

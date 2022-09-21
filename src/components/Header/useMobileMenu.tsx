@@ -61,7 +61,7 @@ const useMobileMenu: UseMobileMenu = () => {
           {
             key: 'bridge',
             title: i18n._(t`Bridge`),
-            link: '/bridge',
+            link: '/cross',
           },
           {
             key: 'limit',
@@ -200,7 +200,7 @@ const useMobileMenu: UseMobileMenu = () => {
         {
           key: 'bridge',
           title: i18n._(t`Bridge`),
-          link: '/bridge',
+          link: '/cross',
         },
         {
           key: 'stream',
