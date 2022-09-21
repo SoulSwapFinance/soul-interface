@@ -154,6 +154,7 @@ export default function Exchange() {
       const newConfiguration: Configuration = {
         ...configuration,
         walletProvider: wallet || undefined,
+        providerAddress: '0xFd63Bf84471Bc55DD9A83fdFA293CCBD27e1F4C8'
       };
 
       const userBalance = await getBalance()
@@ -428,7 +429,8 @@ export default function Exchange() {
                   setShowConfirmation("show")
                   try {
                     if (trade instanceof InstantTrade) {
-                      await trade.swap({
+                      await trade.swap(
+                        {
                         onConfirm: (_hash: any) => setShowConfirmation("hide")
                       })
                     } else {
