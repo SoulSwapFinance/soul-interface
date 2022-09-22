@@ -138,7 +138,7 @@ export default function Exchange() {
 
   const [wallet, setWallet] = useState<WalletProvider>(null)
   
-  const [provider, setProvider] = useState('')
+  const [providerAddress, setProvider] = useState('')
 
   useEffect(() => {
     if (!account) {
@@ -175,7 +175,7 @@ export default function Exchange() {
       setBalance(balance.toString());
     }
     update();
-  }, [rubic, wallet, provider]);
+  }, [rubic, wallet, providerAddress]);
 
   // useEffect(() => {
   // if (web3.connection === Web3Connection.ConnectedWrongChain) {
