@@ -27,7 +27,7 @@ const initialState: SwapState = {
     currencyId: '',
   },
   recipient: null,
-  destination: null,
+  destination: 250,
 }
 
 export default createReducer<SwapState>(initialState, (builder) =>

@@ -1,13 +1,13 @@
+import React, { useEffect, useState } from 'react'
 import { ExclamationCircleIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import Input from 'components/Input'
 import Typography from 'components/Typography'
-import { selectTridentSwap, setRecipient } from 'features/trident/swap/swapSlice'
+import { selectTridentSwap, setRecipient, setDestination } from 'features/trident/swap/swapSlice'
 import { classNames } from 'functions/styling'
 import { useActiveWeb3React } from 'services/web3'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
-import React, { useEffect, useState } from 'react'
 
 const DestinationPanel = () => {
   const { account, chainId } = useActiveWeb3React()
