@@ -21,6 +21,7 @@ interface SwapAssetPanel {
   error?: boolean
   header: (x) => React.ReactNode
   chainId: number
+  destination?: number
   walletToggle?: (x) => React.ReactNode
   currency?: Currency
   currencies?: string[]
@@ -103,9 +104,9 @@ const WalletSwitch: FC<
       component="span"
       className={classNames(disabled ? 'pointer-events-none opacity-40' : '', 'flex items-center gap-2')}
     >
-      {label}
+      { label }
       <Typography
-        id={id}
+        id={ id }
         role="button"
         onClick={() => onChange(!spendFromWallet)}
         variant="sm"
@@ -180,7 +181,8 @@ const InputPanel: FC<
   )
 }
 
-const BalancePanel: FC<Pick<SwapAssetPanel, 'disabled' | 'currency' | 'onChange' | 'spendFromWallet'>> = ({
+const BalancePanel: FC<Pick<SwapAssetPanel, 'disabled' | 'currency
+' | 'onChange' | 'spendFromWallet'>> = ({
   disabled,
   currency,
   onChange,
@@ -202,16 +204,10 @@ const BalancePanel: FC<Pick<SwapAssetPanel, 'disabled' | 'currency' | 'onChange'
 
   return (
     <>
-    {/* <Typography role="button" onClick={handleMaxClick} variant="sm" className="flex text-primary whitespace-nowrap">
-      {/* {i18n._(t`Balance: `)}  */}
-      {/* {balance ? balance.toSignificant(6) : '0.00'} */}
-    {/* </Typography> */}
     <Typography role="button" onClick={handleHalfClick} variant="sm" className="flex text-secondary whitespace-nowrap">
         { balance ? '50%' : '0' }
-        {/* (balance.divide(2)).toSignificant(2) : '0.00'} */}
       </Typography>
     <Typography role="button" onClick={handleMaxClick} variant="sm" className="flex text-primary whitespace-nowrap">
-       {/* {i18n._(t`Balance:`)}  */}
       {balance ? balance.toSignificant(6) : '0.00'
        }
      </Typography>
