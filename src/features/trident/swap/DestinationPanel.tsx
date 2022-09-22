@@ -18,9 +18,8 @@ const DestinationPanel = () => {
   const dispatch = useAppDispatch()
   const valid = [1, 250, 43114].includes(chainId)
   const error = !valid
-
-  useEffect(() => {
-   if (destination === undefined) {
+  
+  if (destination === undefined) {
     return (
       <div className="flex justify-center">
         <Typography
