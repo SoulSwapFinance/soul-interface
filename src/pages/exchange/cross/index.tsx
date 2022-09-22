@@ -77,6 +77,7 @@ export const CHAIN_BY_ID = new Map([
 ]);
 
 const rubicConfiguration: Configuration = {
+  providerAddress: '0xFd63Bf84471Bc55DD9A83fdFA293CCBD27e1F4C8',
   rpcProviders: {
     [BLOCKCHAIN_NAME.BINANCE_SMART_CHAIN]: {
       mainRpc: BINANCE.rpc[0],
@@ -159,9 +160,9 @@ export default function Exchange() {
 
       const userBalance = await getBalance()
       const balance = Number(userBalance) / 10 ** (from?.decimals ? from?.decimals : 18)
-      const nativeBalance = fromChain?.chainId == ChainId.FANTOM
-        ? (Number(userInfo.nativeBalance) * 1E18).toFixed(0)
-        : balance
+      // const nativeBalance = fromChain?.chainId == ChainId.FANTOM
+      //   ? (Number(userInfo.nativeBalance) * 1E18).toFixed(0)
+      //   : balance
 
       setConfiguration(newConfiguration);
       if (rubic) {
