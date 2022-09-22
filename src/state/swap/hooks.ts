@@ -32,7 +32,7 @@ import { useCallback, useEffect, useState } from 'react'
 //   SuccessfulCall,
 //   useSwapCallArguments,
 // } from "../../hooks/useSwapCallback";
-import { Field, replaceSwapState, selectCurrency, setRecipient, setDestination, switchCurrencies, typeInput } from './actions'
+import { Field, replaceSwapState, selectCurrency, setRecipient, switchCurrencies, typeInput } from './actions'
 import { SwapState } from './reducer'
 import { useCurrencyBalances } from 'state/wallet/hooks'
 
@@ -45,7 +45,6 @@ export function useSwapActionHandlers(): {
   onSwitchTokens: () => void
   onUserInput: (field: Field, typedValue: string) => void
   onChangeRecipient: (recipient?: string | null) => void
-  onChangeDestination: (destination?: string | null) => void
 } {
   const dispatch = useAppDispatch()
   const onCurrencySelection = useCallback(
@@ -87,20 +86,11 @@ export function useSwapActionHandlers(): {
     [dispatch]
   )
   
-  const onChangeDestination = useCallback(
-    (destination?: number) => {
-      dispatch(setDestination({destination}))
-    },
-    [dispatch]
-  ) 
-  
-
   return {
     onSwitchTokens,
     onCurrencySelection,
     onUserInput,
     onChangeRecipient,
-    onChangeDestination,
   }
 }
 
@@ -297,8 +287,6 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId 
 
   const recipient = validatedRecipient(parsedQs.recipient)
   
-  const destination = number(destination)
-
   return {
     [Field.INPUT]: {
       currencyId: inputCurrency,
@@ -309,7 +297,6 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId 
     typedValue: parseTokenAmountURLParameter(parsedQs.exactAmount),
     independentField: parseIndependentFieldURLParameter(parsedQs.exactField),
     recipient,
-    destination,
   }
 }
 
@@ -343,7 +330,6 @@ export function useDefaultsFromURLSearch():
         inputCurrencyId: parsed[Field.INPUT].currencyId,
         outputCurrencyId: parsed[Field.OUTPUT].currencyId,
         recipient: expertMode ? parsed.recipient : null,
-        destination: destination ? destination : chainId,
       })
     )
 

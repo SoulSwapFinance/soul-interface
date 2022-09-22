@@ -15,13 +15,12 @@ import { useActiveWeb3React } from 'services/web3'
 import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import CoffinBoxFundingSourceModal from '../add/CoffinBoxFundingSourceModal'
-import { getChainColor, getChainColorCode } from 'constants/chains'
+import { getChainColorCode } from 'constants/chains'
 
 interface SwapAssetPanel {
   error?: boolean
   header: (x) => React.ReactNode
   chainId: number
-  // destination?: number
   walletToggle?: (x) => React.ReactNode
   currency?: Currency
   currencies?: string[]
