@@ -21,7 +21,7 @@ interface SwapAssetPanel {
   error?: boolean
   header: (x) => React.ReactNode
   chainId: number
-  destination?: number
+  // destination?: number
   walletToggle?: (x) => React.ReactNode
   currency?: Currency
   currencies?: string[]
@@ -181,8 +181,7 @@ const InputPanel: FC<
   )
 }
 
-const BalancePanel: FC<Pick<SwapAssetPanel, 'disabled' | 'currency
-' | 'onChange' | 'spendFromWallet'>> = ({
+const BalancePanel: FC<Pick<SwapAssetPanel, 'disabled' | 'currency' | 'onChange' | 'spendFromWallet'>> = ({
   disabled,
   currency,
   onChange,
