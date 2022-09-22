@@ -45,6 +45,7 @@ export function useSwapActionHandlers(): {
   onSwitchTokens: () => void
   onUserInput: (field: Field, typedValue: string) => void
   onChangeRecipient: (recipient?: string | null) => void
+  onChangeDestination: (destination?: string | null) => void
 } {
   const dispatch = useAppDispatch()
   const onCurrencySelection = useCallback(
@@ -85,12 +86,20 @@ export function useSwapActionHandlers(): {
     },
     [dispatch]
   )
+  
+  const onChangeDestination = useCallback(
+    (destination?: number) => {
+      dispatch(setDestination({destination}))
+    },
+    [dispatch]
+  
 
   return {
     onSwitchTokens,
     onCurrencySelection,
     onUserInput,
     onChangeRecipient,
+    onChangeDestination,
   }
 }
 

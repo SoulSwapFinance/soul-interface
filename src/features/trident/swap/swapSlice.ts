@@ -12,6 +12,7 @@ export interface SwapState {
   spendFromWallet: boolean
   receiveToWallet: boolean
   recipient?: string
+  destination?: number
   attemptingTxn: boolean
   showReview: boolean
   error?: string
@@ -23,6 +24,7 @@ const initialState: SwapState = {
   spendFromWallet: true,
   receiveToWallet: true,
   recipient: undefined,
+  destination: undefined,
   attemptingTxn: false,
   showReview: false,
   error: undefined,
@@ -48,6 +50,9 @@ export const swapSlice = createSlice({
     setRecipient: (state, action: PayloadAction<string | undefined>) => {
       state.recipient = action.payload
     },
+    setDestination: (state, action: PayloadAction <number | undefined>) => {
+      state.destination = action.payload
+    },
     setAttemptingTxn: (state, action: PayloadAction<boolean>) => {
       state.attemptingTxn = action.payload
     },
@@ -64,6 +69,7 @@ export const {
   setShowReview,
   setAttemptingTxn,
   setRecipient,
+  setDestination,
   setSpendFromWallet,
   setReceiveToWallet,
   setTridentSwapState,

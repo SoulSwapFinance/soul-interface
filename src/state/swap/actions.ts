@@ -19,4 +19,5 @@ export const replaceSwapState = createAction<{
   recipient?: string | null
 }>('swap/replaceSwapState')
 export const setRecipient = createAction<{ recipient: string | null}>('swap/setRecipient')
+export const setDestination = createAction<boolean>('swap/setDestination')
 export const setFromCoffinBalance = createAction<boolean>('swap/setFromCoffinBalance')
