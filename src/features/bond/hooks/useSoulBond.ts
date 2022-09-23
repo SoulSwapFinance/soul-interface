@@ -3,13 +3,14 @@ import { ethers, BigNumber } from 'ethers'
 // import { formatNumber } from '../../functions'
 
 import {
+  useHelperContract,
   useBondHelperContract,
   useSoulBondContract,
   usePairContract,
   useTokenContract,
 } from './useContract'
 
-import { SOUL_BOND_ADDRESS } from '../constants'
+import { SOUL_BOND_ADDRESS, BOND_HELPER_ADDRESS as BondHelperAddress } from '../constants'
 
 import { AllPids } from '../Pids'
 import { useActiveWeb3React } from 'services/web3'
@@ -21,6 +22,7 @@ import { usePriceHelperContract } from 'hooks/useContract'
 function useSoulBond(pid, lpToken, token1Address, token2Address) {
   const { account, chainId } = useActiveWeb3React()
   
+  const farmHelperContract = useHelperContract()
   const helperContract = useBondHelperContract()
   const priceHelperContract = usePriceHelperContract()
   const bondContract = useSoulBondContract()
@@ -28,7 +30,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   const token1Contract = useTokenContract(token1Address[chainId])
   const token2Contract = useTokenContract(token2Address[chainId])
   const soulContract = useTokenContract(AllPids[1].token1Address[chainId])
-  const usdcContract = useTokenContract(AllPids[1].token2Address[chainId])
+  const fusdContract = useTokenContract(AllPids[1].token2Address[chainId])
 
   const soulPrice = useSoulPrice()
   const seancePrice = useSeancePrice()
@@ -146,7 +148,9 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
         token1Name === 'USDC' ||
         token2Name === 'USDC' ||
         token1Name === 'USDT' ||
-        token2Name === 'USDT'
+        token2Name === 'USDT' ||
+        token1Name === 'gFUSDT' ||
+        token2Name === 'gFUSDT'
       ) {
         if (token1Name !== 'DAI') {
           lpValue = (userPercOfSupply * result?.[5]) / 10 ** 6
@@ -493,14 +497,14 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   /**
    * Value of SOUL in FUSD
    */
-  const usdPerSoul = async () => {
+  const fusdPerSoul = async () => {
     try {
       const totalSoul = await soulContract.balanceOf(AllPids[1].lpAddresses[chainId])
-      const totalFusd = await usdcContract.balanceOf(AllPids[1].lpAddresses[chainId])
+      const totalFusd = await fusdContract.balanceOf(AllPids[1].lpAddresses[chainId])
 
-      const usdPerSoul = totalFusd / totalSoul
+      const fusdPerSoul = totalFusd / totalSoul
 
-      return usdPerSoul
+      return fusdPerSoul
     } catch (e) {
       console.log(e)
       // alert(e.message)
@@ -527,7 +531,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
         totalLpValue =
           token1Name === 'FTM' ? ethers.utils.formatUnits(token1Bal) : ethers.utils.formatUnits(token2Bal.mul(2))
       } else if (token1Name === 'SOUL' || token2Name === 'SOUL') {
-        const soulPrice = await usdPerSoul()
+        const soulPrice = await fusdPerSoul()
         totalLpValue =
           token1Name === 'SOUL'
             ? ethers.utils.formatUnits(token1Bal)

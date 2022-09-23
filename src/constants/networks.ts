@@ -4,12 +4,22 @@ const Fantom = 'https://cryptologos.cc/logos/fantom-ftm-logo.svg'
 const Mainnet = 'https://cryptologos.cc/logos/ethereum-eth-logo.svg'
 const Telos = '/images/networks/Telos.jpg'
 const Bsc = 'https://cryptologos.cc/logos/bnb-bnb-logo.svg'
+
 // const Arbitrum = '/images/networks/arbitrum-network.jpg'
 const Avalanche = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/Avalanche.svg'
 const Moonriver = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/moonriver/Moonriver.svg'
+// const Goerli = '/images/networks/goerli-network.jpg'
+// const Harmony = '/images/networks/harmonyone-network.jpg'
+// const Heco = '/images/networks/heco-network.jpg'
+// const Kovan = '/images/networks/kovan-network.jpg'
 // const Matic = '/images/networks/matic-network.jpg'
 // const Moonbeam = '/images/networks/moonbeam-network.jpg'
+// const OKEx = '/images/networks/okex-network.jpg'
 const Polygon = '/images/networks/polygon-network.jpg'
+// const Rinkeby = '/images/networks/rinkeby-network.jpg'
+// const Ropsten = '/images/networks/ropsten-network.jpg'
+// const xDai = '/images/networks/xdai-network.jpg'
+// const Celo = '/images/networks/celo-network.jpg'
 
 export const NETWORK_ICON = {
   [ChainId.ETHEREUM]: Mainnet,
@@ -25,10 +35,18 @@ export const NETWORK_ICON = {
   // [ChainId.GÖRLI]: Goerli,
   // [ChainId.KOVAN]: Kovan,
   // [ChainId.MATIC_TESTNET]: Matic,
+  // [ChainId.XDAI]: xDai,
   // [ChainId.ARBITRUM]: Arbitrum,
   // [ChainId.ARBITRUM_TESTNET]: Arbitrum,
   // [ChainId.MOONBEAM_TESTNET]: Moonbeam,
   // [ChainId.AVALANCHE_TESTNET]: Avalanche,
+  // [ChainId.HECO]: Heco,
+  // [ChainId.HECO_TESTNET]: Heco,
+  // [ChainId.HARMONY]: Harmony,
+  // [ChainId.HARMONY_TESTNET]: Harmony,
+  // [ChainId.OKEX]: OKEx,
+  // [ChainId.OKEX_TESTNET]: OKEx,
+  // [ChainId.CELO]: Celo,
 }
 
 export const NETWORK_LABEL: { [chainId in ChainId]?: string } = {
@@ -40,10 +58,23 @@ export const NETWORK_LABEL: { [chainId in ChainId]?: string } = {
   [ChainId.MOONRIVER]: 'Moonriver',
   [ChainId.MATIC]: 'Polygon',
   // [ChainId.FANTOM_TESTNET]: 'Fantom Testnet',
+  // [ChainId.RINKEBY]: 'Rinkeby',
+  // [ChainId.ROPSTEN]: 'Ropsten',
+  // [ChainId.GÖRLI]: 'Görli',
+  // [ChainId.KOVAN]: 'Kovan',
   // [ChainId.MATIC_TESTNET]: 'Matic Testnet',
+  // [ChainId.XDAI]: 'xDai',
+  // [ChainId.ARBITRUM]: 'Arbitrum',
   // [ChainId.ARBITRUM_TESTNET]: 'Arbitrum Testnet',
   // [ChainId.MOONBEAM_TESTNET]: 'Moonbase',
   // [ChainId.AVALANCHE_TESTNET]: 'Fuji',
+  // [ChainId.HECO]: 'HECO',
+  // [ChainId.HECO_TESTNET]: 'HECO Testnet',
+  // [ChainId.HARMONY]: 'Harmony',
+  // [ChainId.HARMONY_TESTNET]: 'Harmony Testnet',
+  // [ChainId.OKEX]: 'OKEx',
+  // [ChainId.OKEX_TESTNET]: 'OKEx',
+  // [ChainId.CELO]: 'Celo',
 }
 
 export const NATIVE_TOKEN_TICKER = {

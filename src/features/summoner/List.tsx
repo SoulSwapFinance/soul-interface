@@ -6,6 +6,7 @@ import { ActiveRow } from './Row'
 import { ActivePools, LendingPools, InactivePools } from './Pools'
 import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
+import { ArrowRightIcon } from '@heroicons/react/outline'
 
 export const FarmList = () => {
   // const { chainId } = useActiveWeb3React()
