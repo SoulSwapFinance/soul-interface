@@ -12,7 +12,7 @@ import {
   useSoulSummonerContract,
 } from 'hooks/useContract'
 
-import { SOUL_SUMMONER_ADDRESS as SoulSummonerAddress, SUMMONER_HELPER_ADDRESS as SummonerHelperAddress } from '../../../constants/addresses'
+import { SOUL_SUMMONER_ADDRESS as SoulSummonerAddress } from '../../../constants/addresses'
 
 import { useFantomPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice } from 'hooks/getPrices'
 

@@ -15,7 +15,7 @@ import { useActiveWeb3React } from 'services/web3'
 import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import CoffinBoxFundingSourceModal from '../add/CoffinBoxFundingSourceModal'
-import { getChainColor, getChainColorCode } from 'constants/chains'
+import { getChainColorCode } from 'constants/chains'
 
 interface SwapAssetPanel {
   error?: boolean
@@ -103,9 +103,9 @@ const WalletSwitch: FC<
       component="span"
       className={classNames(disabled ? 'pointer-events-none opacity-40' : '', 'flex items-center gap-2')}
     >
-      {label}
+      { label }
       <Typography
-        id={id}
+        id={ id }
         role="button"
         onClick={() => onChange(!spendFromWallet)}
         variant="sm"
@@ -202,16 +202,10 @@ const BalancePanel: FC<Pick<SwapAssetPanel, 'disabled' | 'currency' | 'onChange'
 
   return (
     <>
-    {/* <Typography role="button" onClick={handleMaxClick} variant="sm" className="flex text-primary whitespace-nowrap">
-      {/* {i18n._(t`Balance: `)}  */}
-      {/* {balance ? balance.toSignificant(6) : '0.00'} */}
-    {/* </Typography> */}
     <Typography role="button" onClick={handleHalfClick} variant="sm" className="flex text-secondary whitespace-nowrap">
         { balance ? '50%' : '0' }
-        {/* (balance.divide(2)).toSignificant(2) : '0.00'} */}
       </Typography>
     <Typography role="button" onClick={handleMaxClick} variant="sm" className="flex text-primary whitespace-nowrap">
-       {/* {i18n._(t`Balance:`)}  */}
       {balance ? balance.toSignificant(6) : '0.00'
        }
      </Typography>

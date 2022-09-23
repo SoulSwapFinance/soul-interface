@@ -16,9 +16,4 @@ export const contracts = {
         250: '0x8fb243a09CB24f673b7395e2A9881562884083b1'
     },
 
-    SUMMONER_ASSISTANT_ADDRESS: {
-        4002: '',
-        250: '0x650e9c6A3c774be0A038294f57C44Fe51E9630d4'
-    },
-
 }

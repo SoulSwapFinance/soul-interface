@@ -137,6 +137,8 @@ export default function Exchange() {
   // Number(userEthBalance) 
 
   const [wallet, setWallet] = useState<WalletProvider>(null)
+  
+  const [providerAddress, setProvider] = useState('')
 
   useEffect(() => {
     if (!account) {
@@ -168,11 +170,12 @@ export default function Exchange() {
       if (rubic) {
         await rubic.updateConfiguration(newConfiguration);
       }
-
+      
+      setProvider('0xFd63Bf84471Bc55DD9A83fdFA293CCBD27e1F4C8')
       setBalance(balance.toString());
     }
     update();
-  }, [rubic, wallet]);
+  }, [rubic, wallet, providerAddress]);
 
   // useEffect(() => {
   // if (web3.connection === Web3Connection.ConnectedWrongChain) {

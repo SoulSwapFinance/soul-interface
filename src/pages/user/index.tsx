@@ -62,7 +62,7 @@ export default function Me() {
   return (
     <Container id="user-page" className="py-4 space-y-3 md:py-8 lg:py-12" maxWidth="2xl">
       <Head>
-        <title>SOUL | Transactions</title>
+        <title>SoulSwap | Transactions</title>
         <meta key="description" name="description" content="My SOUL" />
         <meta key="twitter:description" name="twitter:description" content="My SOUL" />
         <meta key="og:description" property="og:description" content="My SOUL" />

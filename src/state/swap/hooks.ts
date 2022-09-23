@@ -85,7 +85,7 @@ export function useSwapActionHandlers(): {
     },
     [dispatch]
   )
-
+  
   return {
     onSwitchTokens,
     onCurrencySelection,
@@ -286,7 +286,7 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId 
   }
 
   const recipient = validatedRecipient(parsedQs.recipient)
-
+  
   return {
     [Field.INPUT]: {
       currencyId: inputCurrency,
