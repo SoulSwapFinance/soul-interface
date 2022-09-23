@@ -72,7 +72,7 @@ export const FantomPids = [
     token1: 'SOUL',
     token2: 'FTM',
     lpSymbol: 'SOUL-FTM',
-    lpAddress: '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57'
+    lpAddress: '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57',
     token1Address: tokens.SOUL,
     token2Address: tokens.FTM,
   },
