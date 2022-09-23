@@ -1,8 +1,8 @@
+import React, { useCallback, useMemo } from 'react'
 import { Currency, Fee, NATIVE } from 'sdk'
 import { useCurrency } from 'hooks/Tokens'
 import { useActiveWeb3React } from 'services/web3'
 import { useRouter } from 'next/router'
-import { useCallback, useMemo } from 'react'
 import { SOUL } from 'constants/tokens'
 
 const useCurrenciesFromURL = (): {

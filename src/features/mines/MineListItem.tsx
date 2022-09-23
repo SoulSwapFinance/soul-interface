@@ -151,7 +151,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
             component="span"
           >
             {formatNumber(reward.rewardPerDay)}
-            <CurrencyLogo currency={SOUL[250]} size={isMobile ? 32 : 50} />
+            <CurrencyLogo currency={SOUL[chainId || 250]} size={isMobile ? 32 : 50} />
           </Typography>
         ))}
       </div>

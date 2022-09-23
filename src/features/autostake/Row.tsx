@@ -254,20 +254,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
         }
     }
 
-    // /**
-    //  * Withdraw Shares
-    //  */
-    // const handleWithdraw = async (amount) => {
-    //     try {
-    //         const tx = await AutoStakeContract?.withdraw(account, parsedWithdrawValue?.quotient.toString())
-    //         // await tx?.wait().then(await setPending(pid))
-    //         await tx?.wait()
-    //     } catch (e) {
-    //         // alert(e.message)
-    //         console.log(e)
-    //     }
-    // }
-
     const handleWithdrawAll = async () => {
         try {
             let tx
@@ -280,9 +266,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
         }
     }
 
-    // /**
-    //  * Harvest Shares
-    //  */
+    // harvest
     const handleHarvest = async () => {
         try {
             let tx
@@ -294,9 +278,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
         }
     }
 
-    /**
-     * Deposits Soul
-     */
+    // deposit
     const handleDeposit = async (amount) => {
         try {
             const tx = await AutoStakeContract?.deposit(account, parsedDepositValue?.quotient.toString())
@@ -525,29 +507,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                             {/* {earnedAmount !== 0 ? `($${(earnedAmount * soulPrice).toFixed(2)})` : ''} */}
                                         </SubmitButton>
                                     </Wrap>
-                                    {/* <AssetInput
-                                        currencyLogo={true}
-                                        currency={SOUL[250]}
-                                        currencyAddress={SOUL[250].address}
-                                        value={withdrawValue}
-                                        onChange={setWithdrawValue}
-                                        showMax={false}
-                                        showBalance={false}
-                                    /> */}
-                                    
-                                    {/* <Wrap padding="0" margin="0" display="flex">
-                                        <SubmitButton
-                                            height="2rem"
-                                            primaryColor="#B485FF"
-                                            color="black"
-                                            margin=".5rem 0 .5rem 0"
-                                            onClick={() =>
-                                                handleWithdraw(withdrawValue)
-                                            }
-                                        >
-                                            WITHDRAW
-                                        </SubmitButton>
-                                    </Wrap> */}
                                 <Wrap padding="0" margin="0" display="flex">
                                     <SubmitButton
                                         height="2rem"
