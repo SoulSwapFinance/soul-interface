@@ -405,7 +405,7 @@ export const SEANCE_ADDRESS: AddressMap = {
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', // SEANCE
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '0xB641880C65A33605fc5a4F8b955a868a98D4a58e', // SEP22
+  [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
   [ChainId.MOONRIVER]: '',

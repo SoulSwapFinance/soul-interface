@@ -10,9 +10,9 @@ import React, { useEffect, useState } from 'react'
 
 import Loader from '../Loader'
 
-// const GnosisManagerNoSSR = dynamic(() => import('./GnosisManager'), {
-//   ssr: false,
-// })
+const GnosisManagerNoSSR = dynamic(() => import('./GnosisManager'), {
+  ssr: false,
+})
 
 export default function Web3ReactManager({ children }: { children: JSX.Element }) {
   const { i18n } = useLingui()
