@@ -39,7 +39,7 @@ export const AvalanchePids = [
     lpSymbol: 'AVAX-BTC',
     lpAddress: '0x5796Bf89f6C7C47811E4E59Ecd7aCACC8A5B9dEF',
     token1Address: tokens.AVAX,
-    token2Address: tokens.BTC,
+    token2Address: tokens.WBTC,
   }, 
   {
     pid: 4,
@@ -49,7 +49,7 @@ export const AvalanchePids = [
     lpSymbol: 'AVAX-ETH',
     lpAddress: '0x864384a54ea644852603778c0C200eF2D6F2Ac2f',
     token1Address: tokens.AVAX,
-    token2Address: tokens.ETH,
+    token2Address: tokens.WETH,
   },
   {
     pid: 5,
