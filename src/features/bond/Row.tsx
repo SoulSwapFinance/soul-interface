@@ -33,7 +33,7 @@ import { useBondUserInfo, useSoulBondInfo } from 'hooks/useAPI'
 import { formatNumber, formatPercent, tryParseAmount } from 'functions'
 import { useSoulPrice } from 'hooks/getPrices'
 import AssetInput from 'components/AssetInput'
-import { Token } from 'sdk'
+import { Token, NATIVE } from 'sdk'
 
 // params to render bond with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)
@@ -87,6 +87,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const assetAddress = lpToken
   // console.log('asset:%s', assetAddress)
   const soulPrice = useSoulPrice()
+  const chain = chainId == 43114 ? 'avalanche' : 'fantom'
 
   // API DATA
   const { soulBondInfo } = useSoulBondInfo(pid)
@@ -215,9 +216,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                 {bond.token2Address[chainId] && <Wrap className="flex-cols-2">
                   <TokenLogo
                     src={
-                      'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
-                      bond.token1Address[chainId] +
-                      '/logo.png'
+                      'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/' + chain + '/assets/' + bond.token1Address[chainId] + '/logo.png'
                     }
                     alt="LOGO"
                     width="38px"
@@ -227,9 +226,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   />
                   <TokenLogo
                     src={
-                      'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
-                      bond.token2Address[chainId] +
-                      '/logo.png'
+                      'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/' + chain + '/assets/'  + bond.token2Address[chainId] + '/logo.png'
                     }
                     alt="LOGO"
                     width="38px"
@@ -309,14 +306,14 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   <Wrap padding="0" margin="0" display="flex">
                     {(approved && Number(unstakedBal) == 0) ?
                       (
-                        (bond.token1 == 'FTM' || bond.token2 == 'FTM') ? (
+                        ( bond.token1 == NATIVE[chainId].symbol || bond.token2 == NATIVE[chainId].symbol ) ? (
                           <TokenPairLink
                             target="_blank"
                             rel="noopener"
                             color="#F36FFE" // neon purple
                             href=
                             {bond.token1 == 'FTM' ?
-                              `https://exchange.soulswap.finance/add/FTM/${bond.token2Address[chainId]}`
+                              `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token2Address[chainId]}`
                               : `https://exchange.soulswap.finance/add/FTM/${bond.token1Address[chainId]}`
                             }
                           >
@@ -404,7 +401,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
           <Typography variant="lg">
             Minting claims your pending rewards and sends your LP tokens to the Treasury.
             <br /><br />
-            You may only mint once and you may not add more to an open bond.
+            You may only mint once and (on Fantom) you may not add more to an open bond.
           </Typography>
           <Typography variant="sm" className="font-medium">
             QUESTIONS OR CONCERNS?
