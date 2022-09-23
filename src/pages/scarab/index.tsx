@@ -27,7 +27,7 @@ import { getAddress } from '@ethersproject/address'
 import { AutoRow } from '../../components/Row'
 import Loader from '../../components/Loader'
 import { useActiveWeb3React } from 'services/web3'
-import { ChainId } from '@sushiswap/sdk'
+import { ChainId } from 'sdk'
 
 export default function Scarab(): JSX.Element {
   const { i18n } = useLingui()

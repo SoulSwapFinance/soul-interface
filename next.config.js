@@ -1,6 +1,5 @@
 const withPWA = require('next-pwa')
 const runtimeCaching = require('next-pwa/cache')
-const { ChainId } = require('@soulswap/sdk')
 
 const linguiConfig = require('./lingui.config.js')
 const defaultTheme = require('tailwindcss/defaultTheme')
@@ -47,11 +46,6 @@ module.exports = withBundleAnalyzer(
           destination: '/swap',
           permanent: true,
         },
-        // {
-        //   source: '/zap',
-        //   destination: '/',
-        //   permanent: true,
-        // },
         {
           source: '/yield',
           destination: '/summoner',
@@ -107,11 +101,6 @@ module.exports = withBundleAnalyzer(
           destination: '/soul/dashboard',
           permanent: true,
         },
-        // {
-        //   source: '/coffin/underworld',
-        //   destination: '/lend',
-        //   permanent: true,
-        // },
       ]
     },
     async rewrites() {

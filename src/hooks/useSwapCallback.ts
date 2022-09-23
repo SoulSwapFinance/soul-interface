@@ -700,7 +700,6 @@ export function useSwapCallback(
                 data: data?.toString(),
               })
 
-              // @ts-ignore TYPE NEEDS FIXING
               return library.provider
                 .request({ method: 'eth_sign', params: [account, hexlify(txToSign.getMessageToSign())] })
                 .then((signature) => {

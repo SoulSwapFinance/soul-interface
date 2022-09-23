@@ -128,8 +128,8 @@ export default function Exchange() {
 
   const { account, chainId } = useActiveWeb3React()
   const { userInfo } = useUserInfo()
-  const { userTokenInfo } = useUserTokenInfo(account, from.address)
-  const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
+  // const { userTokenInfo } = useUserTokenInfo(account, from.address)
+  // const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
 
   let nativeBalance = //userEthBalance ?
     fromChain?.chainId == ChainId.FANTOM ? (Number(userInfo.nativeBalance) * 1E18).toFixed(0)

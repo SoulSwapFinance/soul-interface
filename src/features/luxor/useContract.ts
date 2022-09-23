@@ -97,7 +97,7 @@ export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contrac
 
 export function usePriceHelperContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && PRICE_HELPER_ADDRESS, PRICE_HELPER_ABI, withSignerIfPossible)
+  return useContract(chainId && PRICE_HELPER_ADDRESS[chainId], PRICE_HELPER_ABI, withSignerIfPossible)
 }
 
 export function useFactoryContract(): Contract | null {
