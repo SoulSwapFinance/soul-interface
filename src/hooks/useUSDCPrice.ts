@@ -1,13 +1,13 @@
-import { ChainId, Currency, CurrencyAmount, JSBI, Price, Token } from 'sdk'
+import { ChainId, Currency, CurrencyAmount, Price, Token } from 'sdk'
 
 import { useActiveWeb3React } from 'services/web3'
 import { useMemo } from 'react'
 import { useV2TradeExactOut } from './useV2Trades'
 
 import { tryParseAmount } from 'functions'
-import { ANY, BNB, CRV, LUXOR, MIM, AVAX, SEANCE, SOUL, FUSD, USDT, UNIDX, WBTC, WETH, WFTM, WLUM, REAPER, GRIM, GRIMEVO, DAI, SOR } from 'constants/tokens'
+import { ANY, BNB, CRV, LUXOR, AVAX, SEANCE, SOUL, FUSD, USDT, UNIDX, WBTC, WETH, WFTM, WLUM, REAPER, GRIM, GRIMEVO, DAI, SOR } from 'constants/tokens'
 import { ANY_ADDRESS, BNB_ADDRESS, CRV_ADDRESS, FUSD_ADDRESS, GRIM_ADDRESS, 
-  GRIMEVO_ADDRESS, LUX_ADDRESS, REAPER_ADDRESS, SEANCE_ADDRESS, 
+  GRIMEVO_ADDRESS, LUX_ADDRESS, SEANCE_ADDRESS, 
   WFTM_ADDRESS, SOR_ADDRESS, SOUL_ADDRESS, UNIDX_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS, AVAX_ADDRESS } 
   from 'constants/addresses'
 import { usePrice } from 'hooks/usePrice'
@@ -120,9 +120,6 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   const anyPrice = usePrice(ANY_ADDRESS[chainId | 250])
   const crvPrice = usePrice(CRV_ADDRESS[chainId | 250])
   const fusdPrice = usePrice(FUSD_ADDRESS[chainId | 250])
-  const unidxPrice = usePrice(UNIDX_ADDRESS[chainId | 250])
-  const reaperPrice = usePrice(REAPER_ADDRESS[chainId | 250])
-  const grimPrice = usePrice(GRIM_ADDRESS[chainId | 250])
   const grimEvoPrice = usePrice(GRIMEVO_ADDRESS[chainId | 250])
   const avaxPrice = usePrice(AVAX_ADDRESS[chainId | 250])
   

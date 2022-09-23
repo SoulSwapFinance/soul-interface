@@ -15,18 +15,6 @@ const EXPLORE = (i18n: I18n) => [
     description: i18n._(t`Public good blockchain development guide.`),
     href: './academy/guide'
   },
-  {
-    id: 2,
-    name: 'FLASH BOTS',
-    description: 'Fair ecosystem for MEV extraction.',
-    href: './academy/mev'
-  },
-  {
-    id: 3,
-    name: 'COINTELEGRAPH',
-    description: 'Digital media resource covering blockchain tech.',
-    href: './academy/telegraph'
-  },
 ]
 
 export default function Academy() {
