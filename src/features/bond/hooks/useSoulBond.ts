@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { ethers, BigNumber } from 'ethers'
 // import { formatNumber } from '../../functions'
-
+ import   { SOUL_ADDRESS, USDC_ADDRESS } from 'sdk'
 import {
   useHelperContract,
   usePriceHelperContract,
@@ -13,7 +13,7 @@ import {
 
 import { SoulBondAddress, BOND_HELPER_ADDRESS as BondHelperAddress } from '../constants'
 
-import { AllPids } from '../Pids'
+import { AvalanchePids, FantomPids } from '../Pids'
 import { useActiveWeb3React } from 'services/web3'
 import { useFantomPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice } from 'hooks/getPrices'
 
@@ -29,8 +29,8 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   const lpTokenContract = usePairContract(lpToken)
   const token1Contract = useTokenContract(token1Address[chainId])
   const token2Contract = useTokenContract(token2Address[chainId])
-  const soulContract = useTokenContract(AllPids[1].token1Address[chainId])
-  const fusdContract = useTokenContract(AllPids[1].token2Address[chainId])
+  const soulContract = useTokenContract(SOUL_ADDRESS[chainId])
+  const fusdContract = useTokenContract(USDC_ADDRESS[chainId])
 
   const soulPrice = useSoulPrice()
   const seancePrice = useSeancePrice()
@@ -499,8 +499,17 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
    */
   const fusdPerSoul = async () => {
     try {
-      const totalSoul = await soulContract.balanceOf(AllPids[1].lpAddresses[chainId])
-      const totalFusd = await fusdContract.balanceOf(AllPids[1].lpAddresses[chainId])
+      const totalSoul = 
+      await soulContract.balanceOf( 
+      chainId == 250
+         ? FantomPids[1].lpAddress 
+         : AvalanchePids[1].lpAddress
+      )
+      const totalFusd = await fusdContract.balanceOf(
+      chainId == 250
+         ? FantomPids[1].lpAddress 
+         : AvalanchePids[1].lpAddress
+      )
 
       const fusdPerSoul = totalFusd / totalSoul
 

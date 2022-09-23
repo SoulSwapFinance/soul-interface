@@ -3,18 +3,30 @@
 
 import { BondKey } from './Key'
 import BondRowRender from './Row'
-import { AllPids } from './Pids'
+import { AvalanchePids, FantomPids } from './Pids'
 import { useActiveWeb3React } from 'services/web3'
 
 const BondList = () => {
   const { chainId } = useActiveWeb3React() // account
 
-  const bondList = AllPids.map((bond) => (
+  const ftmList = FantomPids.map((bond) => (
     <BondRowRender
-      key={bond.pid}
+      key={bond.pid} 
       pid={bond.pid}
       lpSymbol={bond.lpSymbol}
-      lpToken={bond.lpAddresses[chainId]}
+      lpToken={bond.lpAddress}
+      token1={bond.token1}
+      token2={bond.token2}
+      bond={bond}
+    />
+  ))
+  
+  const avaxList = AvalanchePids.map((bond) => (
+    <BondRowRender
+      key={bond.pid} 
+      pid={bond.pid}
+      lpSymbol={bond.lpSymbol}
+      lpToken={bond.lpAddress}
       token1={bond.token1}
       token2={bond.token2}
       bond={bond}
@@ -25,7 +37,7 @@ const BondList = () => {
     <>
       {/* <BondHeader/> */}
       <BondKey />
-      <>{bondList}</>
+      <>{ chainId == 43114 ? avaxList : ftmList }</>
     </>
   )
 }
