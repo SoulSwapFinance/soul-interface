@@ -32,18 +32,16 @@ const STABLECOIN_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
 
 const USDT_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(USDT[ChainId.FANTOM], 100_000e6),
+  [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(USDT[ChainId.AVALANCHE], 100_000e6),
 }
 
 const DAI_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(DAI[ChainId.FANTOM], 100_000e6),
+  [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(DAI[ChainId.AVALANCHE], 100_000e6),
 }
 
 const SOR_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(SOR[ChainId.FANTOM], 100_000e6),
-}
-
-const MIM_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(MIM[ChainId.FANTOM], 100_000e6),
 }
 
 const FUSD_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
@@ -51,11 +49,13 @@ const FUSD_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
 }
 
 const SOUL_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(SOUL[ChainId.FANTOM], 100_000e6)
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(SOUL[ChainId.FANTOM], 100_000e6),
+  [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(SOUL[ChainId.AVALANCHE], 100_000e6)
 }
 
 const SEANCE_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(SEANCE[ChainId.FANTOM], 100_000e6)
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(SEANCE[ChainId.FANTOM], 100_000e6),
+  [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(SEANCE[ChainId.AVALANCHE], 100_000e6)
 }
 
 const LUXOR_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
@@ -67,11 +67,13 @@ const WLUM_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
 }
 
 const WETH_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WETH[ChainId.FANTOM], 100_000e6)
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WETH[ChainId.FANTOM], 100_000e6),
+  [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(WETH[ChainId.AVALANCHE], 100_000e6)
 }
 
 const WBTC_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WBTC[ChainId.FANTOM], 100_000e6)
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WBTC[ChainId.FANTOM], 100_000e6),
+  [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(WBTC[ChainId.AVALANCHE], 100_000e6)
 }
 
 const WFTM_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
@@ -88,18 +90,6 @@ const ANY_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
 
 const CRV_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(CRV[ChainId.FANTOM], 100_000e6)
-}
-
-const UNIDX_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(UNIDX[ChainId.FANTOM], 100_000e6)
-}
-
-const REAPER_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(REAPER[ChainId.FANTOM], 100_000e6)
-}
-
-const GRIM_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(GRIM[ChainId.FANTOM], 100_000e6)
 }
 
 const GRIMEVO_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
@@ -141,7 +131,6 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   const sorAmountOut = chainId ? SOR_AMOUNT_OUT[chainId | 250] : undefined
   const daiAmountOut = chainId ? DAI_AMOUNT_OUT[chainId | 250] : undefined
   const fusdAmountOut = chainId ? FUSD_AMOUNT_OUT[chainId | 250] : undefined
-  const mimAmountOut = chainId ? MIM_AMOUNT_OUT[chainId | 250] : undefined
   
   const soulAmountOut = chainId ? SOUL_AMOUNT_OUT[chainId | 250] : undefined
   const seanceAmountOut = chainId ? SEANCE_AMOUNT_OUT[chainId | 250] : undefined
@@ -155,10 +144,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   const bnbAmountOut = chainId ? BNB_AMOUNT_OUT[chainId | 250] : undefined
   const anyAmountOut = chainId ? ANY_AMOUNT_OUT[chainId | 250] : undefined
   const crvAmountOut = chainId ? CRV_AMOUNT_OUT[chainId | 250] : undefined
-  const unidxAmountOut = chainId ? UNIDX_AMOUNT_OUT[chainId | 250] : undefined
-  const grimAmountOut = chainId ? GRIM_AMOUNT_OUT[chainId | 250] : undefined
   const grimEVOAmountOut = chainId ? GRIMEVO_AMOUNT_OUT[chainId | 250] : undefined
-  const reaperAmountOut = chainId ? REAPER_AMOUNT_OUT[chainId | 250] : undefined
   const avaxAmountOut = chainId ? AVAX_AMOUNT_OUT[chainId | 250] : undefined
 
   // TOKENS
@@ -167,7 +153,6 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   const sor = sorAmountOut?.currency
   const dai = daiAmountOut?.currency
   const fusd = fusdAmountOut?.currency
-  const mim = mimAmountOut?.currency
   const soul = soulAmountOut?.currency
   const seance = seanceAmountOut?.currency
   const luxor = luxorAmountOut?.currency
@@ -178,10 +163,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   const bnb = bnbAmountOut?.currency
   const any = anyAmountOut?.currency
   const crv = crvAmountOut?.currency
-  const unidx = unidxAmountOut?.currency
-  const grim = grimAmountOut?.currency
   const grimEVO = grimEVOAmountOut?.currency
-  const reaper = reaperAmountOut?.currency
   const avax = avaxAmountOut?.currency
 
   // TODO(#2808): remove dependency on useBestV2Trade
@@ -216,11 +198,6 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
     // handle sor
     if (currency?.wrapped.equals(sor)) {
       return new Price(sor, sor, '1', '1')
-    }
-
-    // handle mim
-    if (currency?.wrapped.equals(mim)) {
-      return new Price(mim, mim, '1', '1')
     }
 
     // handle fusd
@@ -278,29 +255,14 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
       return new Price(crv, crv, '10', Number(crvPrice * 10).toFixed())
     }
 
-    // handle unidx
-    if (currency?.wrapped.equals(unidx)) {
-      return new Price(unidx, unidx, '10', Number(unidxPrice * 10).toFixed())
-    }
-
-    // handle grim
-    if (currency?.wrapped.equals(grim)) {
-      return new Price(grim, grim, '10', Number(grimPrice * 10).toFixed())
-    }
-
     // handle grimEVO
     if (currency?.wrapped.equals(grimEVO)) {
       return new Price(grimEVO, grimEVO, '10', Number(grimEvoPrice * 10).toFixed())
     }
     
-    // handle AVAX
+    // handle avax
     if (currency?.wrapped.equals(avax)) {
       return new Price(avax, avax, '10', Number(avaxPrice * 10).toFixed())
-    }
-
-    // handle reaper
-    if (currency?.wrapped.equals(reaper)) {
-      return new Price(reaper, reaper, '100', Number(reaperPrice * 100).toFixed())
     }
 
     // use v2 price if available

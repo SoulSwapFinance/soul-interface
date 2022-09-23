@@ -1,17 +1,17 @@
-import { ChainId, computePairAddress, Currency, CurrencyAmount, Pair, SOUL, Token } from '../sdk'
+import { ChainId, computePairAddress, Currency, CurrencyAmount, Pair, SOUL, SOUL_VAULT_ADDRESS, Token } from '../sdk'
 
 import ISoulSwapPair from '../constants/abis/soulswap/ISoulSwapPair.json'
 import { Interface } from '@ethersproject/abi'
 import { useMemo } from 'react'
 import { useMultipleContractSingleData, useSingleCallResult } from '../state/multicall/hooks'
-import { FACTORY_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS, SOUL_DAO_ADDRESS, LUX_TREASURY_ADDRESS } from '../constants'
+import { FACTORY_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL_DAO_ADDRESS, LUX_TREASURY_ADDRESS } from '../constants'
 import { POOLS, TokenInfo } from '../constants/farms'
 import { concat } from 'lodash'
 import { VAULTS } from '../constants/vaults'
 import { useActiveWeb3React } from 'services/web3'
 import { SOUL_BOND_ADDRESS } from 'features/bond/constants'
 import { BONDS } from 'constants/bonds'
-import { useFantomPrice, useLuxorPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice, useWrappedLumPrice } from './getPrices'
+import { useFantomPrice, useLuxorPrice, useSeancePrice, useSoulPrice, useWrappedBtcPrice, useWrappedEthPrice, useWrappedLumPrice } from './getPrices'
 
 const PAIR_INTERFACE = new Interface(ISoulSwapPair)
 
@@ -83,8 +83,8 @@ export function useVaultTVL(): TVLInfo[] {
   const soulPrice = useSoulPrice()
   const seancePrice = useSeancePrice()
 
-  const farmingPools = Object.keys(VAULTS[ChainId.FANTOM]).map((key) => {
-    return { ...VAULTS[ChainId.FANTOM][key] }
+  const farmingPools = Object.keys(VAULTS[chainId || 250]).map((key) => {
+    return { ...VAULTS[chainId || 250][key] }
   })
 
   const singlePools = farmingPools.filter((r) => !r.token1)
@@ -94,11 +94,11 @@ export function useVaultTVL(): TVLInfo[] {
 
   const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
   const totalSupply = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'totalSupply')
-  const summonerBalance = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'balanceOf', [
-    SOUL_VAULT_ADDRESS[ChainId.FANTOM],
+  const vaultBalance = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'balanceOf', [
+    SOUL_VAULT_ADDRESS[chainId || 250],
   ])
-  const summonerBalanceSingle = useMultipleContractSingleData(singleAddresses, PAIR_INTERFACE, 'balanceOf', [
-    SOUL_VAULT_ADDRESS[ChainId.FANTOM],
+  const vaultBalanceSingle = useMultipleContractSingleData(singleAddresses, PAIR_INTERFACE, 'balanceOf', [
+    SOUL_VAULT_ADDRESS[chainId || 250],
   ])
 
   return useMemo(() => {
@@ -108,7 +108,7 @@ export function useVaultTVL(): TVLInfo[] {
         token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' || token.symbol == 'FTM' ||
         token.symbol == 'SEANCE' ||
-        token.symbol == 'USDC' || token.symbol == 'USDT'
+        token.symbol == 'USDC' || token.symbol == 'DAI'
       )
     }
 
@@ -122,7 +122,7 @@ export function useVaultTVL(): TVLInfo[] {
       if (token.symbol == 'SEANCE') {
         return seancePrice
       }
-      if (token.symbol == 'USDC' || token.symbol == 'USDT') {
+      if (token.symbol == 'USDC' || token.symbol == 'DAI') {
         return 1
       }
       return 0
@@ -143,7 +143,7 @@ export function useVaultTVL(): TVLInfo[] {
 
       const lpTotalSupply = totalSupply[i]?.result?.[0]
 
-      const summonerRatio = summonerBalance[i]?.result?.[0] / lpTotalSupply
+      const summonerRatio = vaultBalance[i]?.result?.[0] / lpTotalSupply
 
       const token0price = getPrice(token0)
       const token1price = getPrice(token1)
@@ -170,7 +170,7 @@ export function useVaultTVL(): TVLInfo[] {
       }
     })
 
-    const singleTVL = summonerBalanceSingle.map((result, i) => {
+    const singleTVL = vaultBalanceSingle.map((result, i) => {
       const { result: balance, loading } = result
 
       const { token0, lpToken } = singlePools[i]
@@ -196,13 +196,13 @@ export function useVaultTVL(): TVLInfo[] {
     return concat(singleTVL, lpTVL)
   }, [
     results,
-    summonerBalanceSingle,
+    vaultBalanceSingle,
     chainId,
     soulPrice,
     ftmPrice,
     seancePrice,
     totalSupply,
-    summonerBalance,
+    vaultBalance,
     lpPools,
     singlePools,
   ])
@@ -216,8 +216,8 @@ export function useTVL(): TVLInfo[] {
   const luxPrice = useLuxorPrice()
   const wethPrice = useWrappedEthPrice()
 
-  const farmingPools = Object.keys(POOLS[ChainId.FANTOM]).map((key) => {
-    return { ...POOLS[ChainId.FANTOM][key], lpToken: key }
+  const farmingPools = Object.keys(POOLS[chainId || 250]).map((key) => {
+    return { ...POOLS[chainId || 250][key], lpToken: key }
   })
 
   const singlePools = farmingPools.filter((r) => !r.token1)
@@ -228,26 +228,27 @@ export function useTVL(): TVLInfo[] {
   const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
   const totalSupply = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'totalSupply')
   const summonerBalance = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'balanceOf', [
-    SOUL_SUMMONER_ADDRESS[ChainId.FANTOM],
+    SOUL_SUMMONER_ADDRESS[chainId || 250],
   ])
   const summonerBalanceSingle = useMultipleContractSingleData(singleAddresses, PAIR_INTERFACE, 'balanceOf', [
-    SOUL_SUMMONER_ADDRESS[ChainId.FANTOM],
+    SOUL_SUMMONER_ADDRESS[chainId || 250],
   ])
 
   return useMemo(() => {
     function isKnownToken(token: TokenInfo) {
       return (
         token.symbol == 'SOUL' ||
-        token.symbol == 'WFTM' ||
-        token.symbol == 'LUX' ||
         token.symbol == 'FTM' ||
+        token.symbol == 'WFTM' ||
+        token.symbol == 'AVAX' ||
+        token.symbol == 'WAVAX' ||
+        token.symbol == 'WETH' ||
+        token.symbol == 'WBTC' ||
+        token.symbol == 'LUX' ||
         token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
         token.symbol == 'USDT' ||
-        token.symbol == 'FUSDT' ||
-        token.symbol == 'MIM' ||
-        token.symbol == 'DAI' ||
-        token.symbol == 'WETH'
+        token.symbol == 'DAI'
       )
     }
 
@@ -268,8 +269,7 @@ export function useTVL(): TVLInfo[] {
         return wethPrice
       }
       if (
-        token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI' ||
-        token.symbol == 'FUSDT' || token.symbol == 'USDT' || token.symbol == 'MIM'
+        token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI'
       ) {
         return 1
       }
@@ -361,8 +361,8 @@ export function useBondTVL(): TVLInfo[] {
   const luxPrice = useLuxorPrice()
   const wethPrice = useWrappedEthPrice()
 
-  const bondingPools = Object.keys(BONDS[ChainId.FANTOM]).map((key) => {
-    return { ...BONDS[ChainId.FANTOM][key], lpToken: key }
+  const bondingPools = Object.keys(BONDS[chainId || 250]).map((key) => {
+    return { ...BONDS[chainId || 250][key], lpToken: key }
   })
 
   const singlePools = bondingPools.filter((r) => !r.token1)
@@ -373,10 +373,10 @@ export function useBondTVL(): TVLInfo[] {
   const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
   const totalSupply = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'totalSupply')
   const summonerBalance = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'balanceOf', [
-    SOUL_BOND_ADDRESS,
+    SOUL_BOND_ADDRESS[chainId],
   ])
   const summonerBalanceSingle = useMultipleContractSingleData(singleAddresses, PAIR_INTERFACE, 'balanceOf', [
-    SOUL_BOND_ADDRESS,
+    SOUL_BOND_ADDRESS[chainId],
   ])
 
   return useMemo(() => {
@@ -390,8 +390,6 @@ export function useBondTVL(): TVLInfo[] {
         token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
         token.symbol == 'USDT' ||
-        token.symbol == 'FUSDT' ||
-        token.symbol == 'MIM' ||
         token.symbol == 'DAI' ||
         token.symbol == 'WETH'
       )
@@ -414,8 +412,7 @@ export function useBondTVL(): TVLInfo[] {
         return wethPrice
       }
       if (
-        token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI' ||
-        token.symbol == 'FUSDT' || token.symbol == 'USDT' || token.symbol == 'MIM'
+        token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI'
       ) {
         return 1
       }
@@ -486,8 +483,8 @@ export function useSoulTVL(): TVLInfo[] {
   const wethPrice = useWrappedEthPrice()
   const wlumPrice = useWrappedLumPrice()
 
-  const liquidityPools = Object.keys(POOLS[ChainId.FANTOM]).map((key) => {
-    return { ...POOLS[ChainId.FANTOM][key], lpToken: key }
+  const liquidityPools = Object.keys(POOLS[chainId || 250]).map((key) => {
+    return { ...POOLS[chainId || 250][key], lpToken: key }
   })
 
   const singlePools = liquidityPools.filter((r) => !r.token1)
@@ -498,10 +495,10 @@ export function useSoulTVL(): TVLInfo[] {
   const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
   const totalSupply = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'totalSupply')
   const daoBalance = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'balanceOf', [
-    SOUL_DAO_ADDRESS[ChainId.FANTOM],
+    SOUL_DAO_ADDRESS[chainId || 250],
   ])
   const daoBalanceSingle = useMultipleContractSingleData(singleAddresses, PAIR_INTERFACE, 'balanceOf', [
-    SOUL_DAO_ADDRESS[ChainId.FANTOM],
+    SOUL_DAO_ADDRESS[chainId || 250],
   ])
 
   return useMemo(() => {
@@ -516,8 +513,6 @@ export function useSoulTVL(): TVLInfo[] {
         token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
         token.symbol == 'USDT' ||
-        token.symbol == 'FUSDT' ||
-        token.symbol == 'MIM' ||
         token.symbol == 'DAI' ||
         token.symbol == 'WETH'
       )
@@ -544,8 +539,7 @@ export function useSoulTVL(): TVLInfo[] {
         return wethPrice
       }
       if (
-        token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI' ||
-        token.symbol == 'FUSDT' || token.symbol == 'USDT' || token.symbol == 'MIM'
+        token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI'
       ) {
         return 1
       }
@@ -617,9 +611,10 @@ export function useLuxTVL(): TVLInfo[] {
   const seancePrice = useSeancePrice()
   const luxPrice = useLuxorPrice()
   const wethPrice = useWrappedEthPrice()
+  const wbtcPrice = useWrappedBtcPrice()
 
-  const liquidityPools = Object.keys(POOLS[ChainId.FANTOM]).map((key) => {
-    return { ...POOLS[ChainId.FANTOM][key], lpToken: key }
+  const liquidityPools = Object.keys(POOLS[chainId || 250]).map((key) => {
+    return { ...POOLS[chainId || 250][key], lpToken: key }
   })
 
   const singlePools = liquidityPools.filter((r) => !r.token1)
@@ -630,10 +625,10 @@ export function useLuxTVL(): TVLInfo[] {
   const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
   const totalSupply = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'totalSupply')
   const daoBalance = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'balanceOf', [
-    LUX_TREASURY_ADDRESS[ChainId.FANTOM],
+    LUX_TREASURY_ADDRESS[chainId || 250],
   ])
   const daoBalanceSingle = useMultipleContractSingleData(singleAddresses, PAIR_INTERFACE, 'balanceOf', [
-    LUX_TREASURY_ADDRESS[ChainId.FANTOM],
+    LUX_TREASURY_ADDRESS[chainId || 250],
   ])
 
   return useMemo(() => {
@@ -647,10 +642,9 @@ export function useLuxTVL(): TVLInfo[] {
         token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
         token.symbol == 'USDT' ||
-        token.symbol == 'FUSDT' ||
-        token.symbol == 'MIM' ||
         token.symbol == 'DAI' ||
-        token.symbol == 'WETH' 
+        token.symbol == 'WETH' ||
+        token.symbol == 'WBTC'
       )
     }
 
@@ -670,9 +664,11 @@ export function useLuxTVL(): TVLInfo[] {
       if (token.symbol == 'WETH') {
         return wethPrice
       }
+      if (token.symbol == 'WBTC') {
+        return wbtcPrice
+      }
       if (
-        token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI' ||
-        token.symbol == 'FUSDT' || token.symbol == 'USDT' || token.symbol == 'MIM'
+        token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI' || token.symbol == 'MIM'
       ) {
         return 1
       }
@@ -730,6 +726,7 @@ export function useLuxTVL(): TVLInfo[] {
     seancePrice,
     luxPrice,
     wethPrice,
+    wbtcPrice,
     totalSupply,
     daoBalanceSingle,
     lpPools,
@@ -746,6 +743,7 @@ export function useV2PairsWithPrice(
   const seancePrice = useSeancePrice()
   const luxPrice = useLuxorPrice()
   const wethPrice = useWrappedEthPrice()
+  const wbtcPrice = useWrappedBtcPrice()
 
   const tokens = useMemo(
     () => currencies.map(([currencyA, currencyB]) => [currencyA?.wrapped, currencyB?.wrapped]),
@@ -794,6 +792,9 @@ export function useV2PairsWithPrice(
       }
       if (token.symbol == 'WETH' || token.symbol == 'ETH') {
         return wethPrice
+      }
+      if (token.symbol == 'WBTC' || token.symbol == 'BTC') {
+        return wbtcPrice
       }
       if (token.symbol == 'SEANCE') {
         return seancePrice
@@ -845,7 +846,7 @@ export function useV2PairsWithPrice(
         lpPrice,
       ]
     })
-  }, [results, chainId, soulPrice, ftmPrice, luxPrice, seancePrice, tokens, totalSupply, wethPrice])
+  }, [results, chainId, soulPrice, ftmPrice, luxPrice, seancePrice, tokens, totalSupply, wethPrice, wbtcPrice])
 }
 
 export function useV2Pair(tokenA?: Currency, tokenB?: Currency): [PairState, Pair | null] {

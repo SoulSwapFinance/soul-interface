@@ -1,19 +1,18 @@
-import { useCallback } from 'react'
+import React from 'react'
 import { ethers, BigNumber } from 'ethers'
 // import { formatNumber } from '../../functions'
 
 import {
-  usePriceHelperContract,
   useBondHelperContract,
   useSoulBondContract,
   usePairContract,
 } from 'features/bond/hooks/useContract'
 
-import { SoulBondAddress, BOND_HELPER_ADDRESS as BondHelperAddress } from 'features/bond/constants'
+import { SOUL_BOND_ADDRESS } from 'features/bond/constants'
 
 import { useActiveWeb3React } from 'services/web3'
-import { useFantomPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice } from 'hooks/getPrices'
-import { useAutoStakeContract } from 'hooks/useContract'
+import { useSoulPrice } from 'hooks/getPrices'
+import { useAutoStakeContract, usePriceHelperContract } from 'hooks/useContract'
 
 // const helperContract = useHelperContract()
 
@@ -25,16 +24,7 @@ function useAutoStake(pid, stakeToken) {
   const bondContract = useSoulBondContract()
   const stakeContract = useAutoStakeContract()
   const lpTokenContract = usePairContract(stakeToken)
-
   const soulPrice = useSoulPrice()
-  const seancePrice = useSeancePrice()
-  const ftmPrice = useFantomPrice()
-  const ethPrice = useWrappedEthPrice()
-
-  function soulFromShares(shares: BigNumber, sharePrice: BigNumber) {
-    const DECIMALS = BigNumber.from(10).pow(18)
-    return shares.mul(sharePrice).div(DECIMALS)
-  }
   
   function sharesFromSoul(amount: BigNumber, sharePrice: BigNumber) {
     const DECIMALS = BigNumber.from(10).pow(18)
@@ -227,12 +217,13 @@ const withdraw =
    * Note : need to make func to calculate how many staked compared to pool
    */
   const fetchUserLpTokenAllocInBond = async (pid, account) => {
+    const { chainId } = useActiveWeb3React()
     try {
       // get how many lpTokens in contract
       const totalSupply = await lpTokenContract?.totalSupply()
 
       // get how many lpTokens held by Summoner
-      const heldBySummoner = await lpTokenContract?.balanceOf(SoulBondAddress)
+      const heldBySummoner = await lpTokenContract?.balanceOf(SOUL_BOND_ADDRESS[chainId])
 
       // get how many lpTokens held by user
       const heldByUser = await lpTokenContract?.balanceOf(account)
@@ -302,17 +293,14 @@ const withdraw =
 
   // ------- BONDS -------
 
-
-
-  // ------- STAKING -------
-
   /**
    * Value of liqudity of lpToken
    */
   const fetchPid0LiquidityValue = async (lpToken) => {
+    const { chainId } = useActiveWeb3React()
     try {
       // SOUL held by summoner
-      const rawSummonerBal = await lpTokenContract?.balanceOf(SoulBondAddress)
+      const rawSummonerBal = await lpTokenContract?.balanceOf(SOUL_BOND_ADDRESS[chainId])
       const summonerBalance = BigNumber.from(ethers.utils.formatUnits(rawSummonerBal))
       // console.log('summonerBalance', ethers.utils.formatUnits(summonerBalance))
 

@@ -114,7 +114,6 @@ import PRICE_HELPER_ABI from '../constants/abis/soulswap/pricehelper.json'
 import BORING_HELPER_ABI from '../constants/abis/soulswap/boring-helper.json'
 import HARVEST_HELPER_ABI from '../constants/abis/soulswap/harvest-helper.json'
 import COFFIN_BOX_ABI from '../constants/abis/soulswap/coffinbox.json'
-import LUXOR_BOND_CONTRACT_ABI from '../constants/abis/soulswap/bond.json'
 import SOR_MASTER_ABI from '../constants/abis/soulswap/sor-master.json'
 import SOR_MINTER_ABI from '../constants/abis/soulswap/sor-minter.json'
 
