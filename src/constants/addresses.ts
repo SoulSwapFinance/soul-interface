@@ -644,7 +644,7 @@ export const USDC_NATIVE_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: undefined,
   [ChainId.TELOS]: undefined,
   [ChainId.BSC]: undefined,
-  [ChainId.FANTOM]: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556'
+  [ChainId.FANTOM]: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556',
   [ChainId.FANTOM_TESTNET]: undefined,
   [ChainId.AVALANCHE]: '0x864384a54ea644852603778c0C200eF2D6F2Ac2f',
   [ChainId.MATIC]: undefined,
