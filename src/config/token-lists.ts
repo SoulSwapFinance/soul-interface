@@ -8,7 +8,7 @@ export const UNSUPPORTED_LIST_URLS: string[] = [BA_LIST]
 // const DEFAULT_TOKEN_LIST = 'constants/token-lists/soulswap.tokenlist.json'
 const DEFAULT_TOKEN_LIST = 'https://raw.githubusercontent.com/soulswapfinance/default-token-list/master/soulswap.tokenlist.json'
 
-const NFTX_LIST = 'https://nftx.ethereumdb.com/v2/tokenlist/'
+// const NFTX_LIST = 'https://nftx.ethereumdb.com/v2/tokenlist/'
 // const SYNTHETIX_LIST = 'synths.snx.eth'
 // const AAVE_LIST = 'tokenlist.aave.eth'
 // const CMC_ALL_LIST = 'defi.cmc.eth'
@@ -27,23 +27,8 @@ const NFTX_LIST = 'https://nftx.ethereumdb.com/v2/tokenlist/'
 // lower index == higher priority for token import
 export const DEFAULT_LIST_OF_LISTS: string[] = [
   DEFAULT_TOKEN_LIST,
-  // COMPOUND_LIST,
-  // AAVE_LIST,
-  // CMC_ALL_LIST,
-  // CMC_STABLECOIN,
-  // UMA_LIST,
-  // SYNTHETIX_LIST,
-  // WRAPPED_LIST,
-  // SET_LIST,
-  // ROLL_LIST,
-  // COINGECKO_LIST,
-  // KLEROS_LIST,
-  NFTX_LIST,
-  // OPTIMISM_LIST,
-  // GEMINI_LIST,
-  // DHEDGE_LIST,
   ...UNSUPPORTED_LIST_URLS, // need to load unsupported tokens as well
 ]
 
 // default lists to be 'active' aka searched across
-export const DEFAULT_ACTIVE_LIST_URLS: string[] = [DEFAULT_TOKEN_LIST, NFTX_LIST]
+export const DEFAULT_ACTIVE_LIST_URLS: string[] = [DEFAULT_TOKEN_LIST]

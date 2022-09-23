@@ -17,6 +17,7 @@ import useAddTokenToMetaMask from 'hooks/useAddTokenToMetaMask'
 import { useLingui } from '@lingui/react'
 import { HeadlessUiModal } from 'components/Modal'
 import ModalHeader from 'components/Modal/Header'
+import { getChainColorCode } from 'constants/chains'
 
 interface ConfirmationPendingContentProps {
   onDismiss: () => void
@@ -71,13 +72,13 @@ export const TransactionSubmittedContent: FC<TransactionSubmittedContentProps> =
         <CloseIcon onClick={onDismiss} />
       </div>
       <div className="w-24 pb-4 m-auto">
-        <ArrowUpCircle strokeWidth={0.5} size={90} className="text-dark-600" />
+        <ArrowUpCircle strokeWidth={0.5} size={90} className={`text-${getChainColorCode(chainId)}`} />
       </div>
       <div className="flex flex-col items-center justify-center gap-1">
         <div className="text-xl font-bold">{i18n._(t`Transaction Submitted`)}</div>
         {chainId && hash && (
           <ExternalLink href={getExplorerLink(chainId, hash, 'transaction')}>
-            <div className="font-bold text-dark-600">View on Explorer</div>
+            <div className={`font-bold text-${getChainColorCode(chainId)}`}>View on Explorer</div>
           </ExternalLink>
         )}
         {currencyToAdd && library?.provider?.isMetaMask && (

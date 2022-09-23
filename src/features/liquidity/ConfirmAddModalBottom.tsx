@@ -4,6 +4,8 @@ import { Currency, CurrencyAmount, Fraction, Percent } from 'sdk'
 import { Button } from 'components/Button'
 import { Field } from 'state/mint/actions'
 import React from 'react'
+import { getChainColorCode } from 'constants/chains'
+import { useActiveWeb3React } from 'services/web3'
 
 export function ConfirmAddModalBottom({
   noLiquidity,
@@ -21,6 +23,7 @@ export function ConfirmAddModalBottom({
   onAdd: () => void
 }) {
   const { i18n } = useLingui()
+  const { chainId } = useActiveWeb3React()
   return (
     <div className="p-6 mt-0 -m-6 rounded bg-dark-800">
       <div className="grid gap-1">
@@ -64,7 +67,7 @@ export function ConfirmAddModalBottom({
         </div>
       </div>
 
-      <Button color="deepPurple" size="lg" onClick={onAdd}>
+      <Button color={getChainColorCode(chainId)} size="lg" onClick={onAdd}>
         {noLiquidity ? i18n._(t`Create Pool & Supply`) : i18n._(t`Confirm Supply`)}
       </Button>
     </div>
