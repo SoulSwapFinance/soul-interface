@@ -87,7 +87,7 @@ export function useSoulContract(withSignerIfPossible = true): Contract | null {
 
 export function useSoulBondContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_BOND_ADDRESS, SOUL_BOND_ABI, withSignerIfPossible)
+  return useContract(chainId && SOUL_BOND_ADDRESS[chainId], SOUL_BOND_ABI, withSignerIfPossible)
 }
 
 export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
