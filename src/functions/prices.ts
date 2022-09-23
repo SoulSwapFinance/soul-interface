@@ -110,7 +110,7 @@ export default function confirmPriceImpactWithoutFee(priceImpactWithoutFee: Perc
   return true
 }
 
-// import { Percent, JSBI } from '@sushiswap/core-sdk'
+// import { Percent, JSBI } from 'sdk'
 
 export const PERCENT_DENOMINATOR = 100
 export const PERCENT_SCALE = 10000
