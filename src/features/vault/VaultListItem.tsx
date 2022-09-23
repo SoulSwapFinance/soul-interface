@@ -1,10 +1,11 @@
 
-import React, { useState } from 'react'
 import { classNames, formatNumber, formatNumberScale, formatPercent } from '../../functions'
+
 import { Disclosure } from '@headlessui/react'
 import DoubleLogo from '../../components/DoubleLogo'
 import VaultListItemDetails from './VaultListItemDetails'
 import Image from '../../components/Image'
+import React, { useContext, useState } from 'react'
 import { useCurrency } from '../../hooks/Tokens'
 import { useV2PairsWithPrice } from '../../hooks/useV2Pairs'
 import { SOUL } from '../../constants/tokens'
@@ -16,9 +17,11 @@ import { isMobile } from 'react-device-detect'
 import YieldDetails from '../../components/YieldDetails'
 import IconWrapper from '../../components/IconWrapper'
 import { WNATIVE } from '../../constants'
+import { PriceContext } from '../../contexts/priceContext'
 import { Info } from 'react-feather'
+import moment from 'moment'
+import { usePriceHelperContract } from '../bond/hooks/useContract'
 import { useSingleCallResult } from '../../state/multicall/hooks'
-import { usePriceHelperContract } from 'hooks/useContract'
 
 const VaultListItem = ({ farm, ...rest }) => {
   const { chainId } = useActiveWeb3React()
@@ -27,6 +30,7 @@ const VaultListItem = ({ farm, ...rest }) => {
   let token1 = useCurrency(farm.pair.token1?.id)
 
   const priceHelperContract = usePriceHelperContract()
+  // const totalLp = 11; // todo: update + make dynamic
 
   const rawSoulPrice = useSingleCallResult(priceHelperContract, 'currentTokenUsdcPrice', ['0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07'])?.result
   console.log(Number(rawSoulPrice))

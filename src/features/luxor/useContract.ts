@@ -1,6 +1,11 @@
 import {
+  ChainId,
+  // MULTICALL_ADDRESS,
+  FACTORY_ADDRESS,
+
   SOUL_ADDRESS,
   SOUL_SUMMONER_ADDRESS,
+  AUTO_STAKE_ADDRESS,
   SOUL_GUIDE_ADDRESS,
   WNATIVE,
 } from 'sdk'
@@ -10,11 +15,13 @@ import ERC20_ABI from 'constants/abis/erc20.json'
 import ERC20_BYTES32_ABI from 'constants/abis/erc20_bytes32.json'
 import PAIR_ABI from 'constants/abis/pair.json'
 import MULTICALL_ABI from 'constants/abis/multicall.json'
+import FACTORY_ABI from 'constants/abis/factory.json'
 
 // soul
 import SOUL_GUIDE_ABI from 'constants/abis/multicall.json'
 import SOUL_SUMMONER_ABI from 'constants/abis/soulswap/soulsummoner.json' 
 import SOUL_BOND_ABI from 'features/bond/constants/abis/soulbond.json' 
+import PRICE_HELPER_ABI from 'features/bond/constants/abis/pricehelper.json' 
 import SOUL_ABI from 'constants/abis/soulswap/soulpower.json' 
 
 // import PENDING_ABI from 'constants/abis/pending.json'
@@ -25,7 +32,7 @@ import WETH9_ABI from 'constants/abis/weth.json'
 import { getContract } from 'functions/contract'
 import { useMemo } from 'react'
 import { useActiveWeb3React } from 'services/web3'
-import { MULTICALL_ADDRESS, SOUL_BOND_ADDRESS } from 'features/bond/constants'
+import { MULTICALL_ADDRESS, PRICE_HELPER_ADDRESS, SOUL_BOND_ADDRESS } from 'features/bond/constants'
 
 // returns null on errors
 export function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
@@ -80,12 +87,22 @@ export function useSoulContract(withSignerIfPossible = true): Contract | null {
 
 export function useSoulBondContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_BOND_ADDRESS[chainId], SOUL_BOND_ABI, withSignerIfPossible)
+  return useContract(chainId && SOUL_BOND_ADDRESS, SOUL_BOND_ABI, withSignerIfPossible)
 }
 
 export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible)
+}
+
+export function usePriceHelperContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && PRICE_HELPER_ADDRESS, PRICE_HELPER_ABI, withSignerIfPossible)
+}
+
+export function useFactoryContract(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && FACTORY_ADDRESS[chainId], FACTORY_ABI, false)
 }
 
 // export function useRouterContract(useArcher = false, withSignerIfPossible?: boolean): Contract | null {

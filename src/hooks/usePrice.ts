@@ -2,6 +2,8 @@ import { usePriceHelperContract } from "hooks"
 import { useMemo } from "react"
 import { NEVER_RELOAD, useSingleCallResult } from "state/multicall/hooks"
 import { Contract } from '@ethersproject/contracts'
+import { useActiveWeb3React } from "services/web3"
+import { Currency } from "sdk"
 
 export function usePrice(tokenAddress: string | undefined | null) {
     const priceHelperContract = usePriceHelperContract()
@@ -25,6 +27,7 @@ export function usePrice(tokenAddress: string | undefined | null) {
 
 
   export function usePairPrice(pairContract?: Contract | null, pairDecimals?: number | null, invert: boolean = false) {
+    // const { account, chainId } = useActiveWeb3React()
   
     const result = useSingleCallResult(pairContract ? pairContract : null, 'getReserves', undefined, NEVER_RELOAD)?.result
   

@@ -1,7 +1,11 @@
 import {
+  ChainId,
+  // MULTICALL_ADDRESS,
   FACTORY_ADDRESS,
+
   SOUL_ADDRESS,
   SOUL_SUMMONER_ADDRESS,
+  AUTO_STAKE_ADDRESS,
   SOUL_GUIDE_ADDRESS,
   WNATIVE,
 } from 'sdk'
@@ -20,6 +24,9 @@ import SOUL_BOND_ABI from 'features/bond/constants/abis/soulbond.json'
 import PRICE_HELPER_ABI from 'features/bond/constants/abis/pricehelper.json' 
 import SOUL_ABI from 'constants/abis/soulswap/soulpower.json' 
 
+// import PENDING_ABI from 'constants/abis/pending.json'
+// import ROUTER_ABI from 'constants/abis/router.json'
+// import TIMELOCK_ABI from 'constants/abis/timelock.json'
 import WETH9_ABI from 'constants/abis/weth.json'
 
 import { getContract } from 'functions/contract'
@@ -77,3 +84,35 @@ export function useSoulContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SOUL_ADDRESS[chainId], SOUL_ABI, withSignerIfPossible)
 }
+
+export function useSoulBondContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOUL_BOND_ADDRESS, SOUL_BOND_ABI, withSignerIfPossible)
+}
+
+export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible)
+}
+
+export function usePriceHelperContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && PRICE_HELPER_ADDRESS, PRICE_HELPER_ABI, withSignerIfPossible)
+}
+
+export function useFactoryContract(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && FACTORY_ADDRESS[chainId], FACTORY_ABI, false)
+}
+
+// export function useRouterContract(useArcher = false, withSignerIfPossible?: boolean): Contract | null {
+//   const { chainId } = useActiveWeb3React()
+//   const address = ROUTER_ADDRESS[chainId]
+//   const abi = ROUTER_ABI
+//   return useContract(address, abi, withSignerIfPossible)
+// }
+
+// export function useTimelockContract(): Contract | null {
+//   const { chainId } = useActiveWeb3React()
+//   return useContract(chainId && TIMELOCK_ADDRESS[chainId], TIMELOCK_ABI, false)
+// }

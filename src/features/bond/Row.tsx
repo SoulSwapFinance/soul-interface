@@ -1,25 +1,33 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
+import { ethers } from 'ethers'
+
 import { useActiveWeb3React } from 'services/web3'
 
 import useSoulBond from './hooks/useSoulBond'
 import useApprove from './hooks/useApprove'
-import { SOUL_BOND_ADDRESS } from './constants'
+import { SoulBondAddress } from './constants'
 import {
   BondContainer,
   Row,
   BondContentWrapper,
   TokenPairBox,
   BondItemBox,
+  BondItem,
   DetailsContainer,
   DetailsWrapper,
   FunctionBox,
+  Input,
   SubmitButton,
 } from './Styles'
-import { Wrap, Text, ExternalLink } from '../../components/ReusableStyles'
+// import { formatNumber } from 'functions/format'
+import NavLink from 'components/NavLink'
+import { Wrap, ClickableText, Heading, Text, ExternalLink } from '../../components/ReusableStyles'
 import Modal from '../../components/DefaultModal'
 import Typography from '../../components/Typography'
+// import { Button } from '../../components/Button'
 import ModalHeader from 'components/Modal/Header'
 import { useBondUserInfo, useSoulBondInfo } from 'hooks/useAPI'
 import { formatNumber, formatPercent, tryParseAmount } from 'functions'
@@ -93,14 +101,14 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const unstakedBal = Number(soulBondUserInfo.userBalance)
   const pending = Number(soulBondUserInfo.pendingSoul) / 1e18
   
-  const assetToken = new Token(chainId, assetAddress, 18, assetName)
+  const assetToken = new Token(250, assetAddress, 18, assetName)
   const parsedDepositValue = tryParseAmount(depositValue, assetToken)
   
   // CALCULATIONS
   const stakedLpValue = stakedBal * lpPrice
   // const availableValue = unstakedBal * lpPrice
   const pendingValue = pending * soulPrice
-  // const percOfBond = 100 * stakedBal / liquidity
+  const percOfBond = 100 * stakedBal / liquidity
 
   /**
    * Runs on initial render/mount and reruns every 2 seconds
@@ -119,12 +127,15 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
 
   // const isWFTM = bond.token1Address == '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'
 
-  const dailyRoi = (apr / 365)
+  const dailyRoi
+    = (apr / 365)
 
   const reached
     = formatNumber((100 * pendingValue / stakedLpValue), false, true)
 
-  // opens the function panel dropdown
+  /**
+   * Opens the function panel dropdown
+   */
   const handleShow = () => {
     setShowing(!showing)
     if (!showing) {
@@ -132,32 +143,41 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
     }
   }
 
-  // checks if the user has approved bond to move lpTokens
+  /**
+   * Checks if the user has approved SoulSummoner to move lpTokens
+   */
   const fetchApproval = async () => {
     if (!account) {
+      // alert('Connect Wallet')
     } else {
-      // Checks if bond can move tokens
-      const amount = await erc20Allowance(account, SOUL_BOND_ADDRESS[chainId])
+      // Checks if SoulSummoner can move tokens
+      const amount = await erc20Allowance(account, SoulBondAddress)
       if (amount > 0) setApproved(true)
       return amount
     }
   }
 
-  // approves bond to move lpTokens.
+  /**
+   * Approves SoulSummoner to move lpTokens
+   */
   const handleApprove = async () => {
     if (!account) {
+      // alert('Connect Wallet')
     } else {
       try {
-        const tx = await erc20Approve(SOUL_BOND_ADDRESS[chainId])
+        const tx = await erc20Approve(SoulBondAddress)
         await tx?.wait().then(await fetchApproval())
       } catch (e) {
+        // alert(e.message)
         console.log(e)
         return
       }
     }
   }
 
-  // mints bond.
+  /**
+   * Mints SOUL Bond
+   */
   const handleMint = async () => {
     try {
       // console.log('minting', amount.toString())
