@@ -9,7 +9,7 @@ import {
   usePairContract,
 } from 'features/bond/hooks/useContract'
 
-import { SoulBondAddress, BOND_HELPER_ADDRESS as BondHelperAddress } from 'features/bond/constants'
+import { BOND_HELPER_ADDRESS as BondHelperAddress, SOUL_BOND_ADDRESS } from 'features/bond/constants'
 
 import { useActiveWeb3React } from 'services/web3'
 import { useFantomPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice } from 'hooks/getPrices'
@@ -227,12 +227,13 @@ const withdraw =
    * Note : need to make func to calculate how many staked compared to pool
    */
   const fetchUserLpTokenAllocInBond = async (pid, account) => {
+    const { chainId } = useActiveWeb3React()
     try {
       // get how many lpTokens in contract
       const totalSupply = await lpTokenContract?.totalSupply()
 
       // get how many lpTokens held by Summoner
-      const heldBySummoner = await lpTokenContract?.balanceOf(SoulBondAddress)
+      const heldBySummoner = await lpTokenContract?.balanceOf(SOUL_BOND_ADDRESS[chainId])
 
       // get how many lpTokens held by user
       const heldByUser = await lpTokenContract?.balanceOf(account)
@@ -310,9 +311,11 @@ const withdraw =
    * Value of liqudity of lpToken
    */
   const fetchPid0LiquidityValue = async (lpToken) => {
+    const { chainId } = useActiveWeb3React()
+
     try {
       // SOUL held by summoner
-      const rawSummonerBal = await lpTokenContract?.balanceOf(SoulBondAddress)
+      const rawSummonerBal = await lpTokenContract?.balanceOf(SOUL_BOND_ADDRESS[chainId])
       const summonerBalance = BigNumber.from(ethers.utils.formatUnits(rawSummonerBal))
       // console.log('summonerBalance', ethers.utils.formatUnits(summonerBalance))
 
@@ -329,23 +332,6 @@ const withdraw =
       return e
     }
   }
-
-  /**
-   * Soul Price
-   */
-  // const fetchSoulPrice = async () => {
-  //   try {
-  //     // summonerBal * soulPrice = TVL
-  //     const soulPrice = await fusdPerSoul()
-  //     console.log('soulPrice', soulPrice)
-
-  //     return soulPrice
-  //   } catch (e) {
-  //     // console.log(e)
-  //     // alert(e.message);
-  //     return e
-  //   }
-  // }
 
   /**
    * Fetches the APR percentage for the `pid`

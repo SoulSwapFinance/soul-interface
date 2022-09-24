@@ -1,5 +1,5 @@
-import { BNB_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS } from 'constants/addresses'
-import { ChainId, DAI_ADDRESS, SEANCE_ADDRESS, SOUL_ADDRESS, USDC_ADDRESS, WNATIVE_ADDRESS } from '../sdk'
+import { BNB_ADDRESS, SOUL_ADDRESS, SOUL_NATIVE_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from 'constants/addresses'
+import { ChainId, DAI_ADDRESS, SEANCE_ADDRESS, USDC_ADDRESS } from '../sdk'
 
 export type TokenInfo = {
   id: string
@@ -23,8 +23,104 @@ type AddressMap = {
 }
 
 export const BONDS: AddressMap = {
+
+// AVALANCHE BONDS //
+  [ChainId.AVALANCHE]: {
+  '0x6Da1AD717C7577AAB46C19aB6d3d9C31aff32A00': { // SOUL-AVAX
+      id: 0, // 250
+      token0: {
+        id: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+        name: 'Wrapped Avalanche',
+        symbol: 'WAVAX',
+        decimals: 18,
+      },
+      token1: {
+        id: SOUL_ADDRESS[ChainId.AVALANCHE],
+        name: 'Soul Power',
+        symbol: 'SOUL',
+        decimals: 18,
+      },
+    },
+    '0x922fcADa825Dc669798206A35D2D2B455f9A64E7': { // SOUL-USDC
+      id: 1, // 150
+      token0: {
+        id: SOUL_ADDRESS[ChainId.AVALANCHE],
+        name: 'Soul Power',
+        symbol: 'SOUL',
+        decimals: 18,
+      },
+      token1: {
+        id: USDC_ADDRESS[ChainId.AVALANCHE],
+        name: 'USD Coin',
+        symbol: 'USDC',
+        decimals: 6,
+      },
+    },
+    '0x864384a54ea644852603778c0C200eF2D6F2Ac2f': { // USDC-AVAX
+      id: 2, // 150
+      token0: {
+        id: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+        name: 'Wrapped Avalanche',
+        symbol: 'WAVAX',
+        decimals: 18,
+      },
+      token1: {
+        id: USDC_ADDRESS[ChainId.AVALANCHE],
+        name: 'USD Coin',
+        symbol: 'USDC',
+        decimals: 6,
+      },
+    },
+    '0x8C162C3Bdd7354b5Cb1A0b18eDBB5725CFE762A3': { // BTC-AVAX √
+      id: 3, // 150
+      token0: {
+        id: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+        name: 'Wrapped Avalanche',
+        symbol: 'WAVAX',
+        decimals: 18,
+      },
+      token1: {
+        id: WBTC_ADDRESS[ChainId.AVALANCHE],
+        name: 'Wrapped Bitcoin',
+        symbol: 'WBTC',
+        decimals: 8,
+      },
+    },
+    '0x5796Bf89f6C7C47811E4E59Ecd7aCACC8A5B9dEF': { // ETH-AVAX √
+      id: 4, // 150
+      token0: {
+        id: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+        name: 'Wrapped Avalanche',
+        symbol: 'WAVAX',
+        decimals: 18,
+      },
+      token1: {
+        id: WETH_ADDRESS[ChainId.AVALANCHE],
+        name: 'Wrapped ETH',
+        symbol: 'WETH',
+        decimals: 18,
+      }, 
+    },
+    '0xE9807645aDA66F2f3d4f2d2A79223701F3cC0903': { // USDC-DAI √
+      id: 5, // 150
+      token0: {
+        id: DAI_ADDRESS[ChainId.AVALANCHE],
+        name: 'Dai Stablecoin',
+        symbol: 'DAI',
+        decimals: 18,
+      },
+      token1: {
+        id: USDC_ADDRESS[ChainId.AVALANCHE],
+        name: 'USD Coin',
+        symbol: 'USDC',
+        decimals: 6,
+      },
+    },
+  },
+
+// FANTOM BONDS //
   [ChainId.FANTOM]: {
-    '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57': { // SOUL-FTM
+  '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57': { // SOUL-FTM
       id: 0, // 2400
       token0: {
         id: WNATIVE_ADDRESS[ChainId.FANTOM],
@@ -159,6 +255,5 @@ export const BONDS: AddressMap = {
         decimals: 6,
       },
     },
-
   }
 }

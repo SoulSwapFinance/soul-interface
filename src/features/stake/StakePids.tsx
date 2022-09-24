@@ -1,4 +1,4 @@
-import { ChainId } from "@sushiswap/core-sdk";
+import { ChainId } from "sdk";
 import { UNIDX_ADDRESS } from "constants/addresses";
 import { SEANCE_ADDRESS, SOUL_ADDRESS } from "sdk";
 import { tokens } from "./tokens";

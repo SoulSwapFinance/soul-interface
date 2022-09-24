@@ -140,9 +140,9 @@ export const SOR: ChainTokenMap = {
 
 // WETH
 export const WETH: ChainTokenMap = {
-  [ChainId.ETHEREUM]: new Token(ChainId.FANTOM, WNATIVE_ADDRESS[ChainId.ETHEREUM], 18, 'WETH', 'Wrapped ETH'),
+  [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, WNATIVE_ADDRESS[ChainId.ETHEREUM], 18, 'WETH', 'Wrapped ETH'),
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x74b23882a30290451A17c44f4F05243b6b58C76d', 18, 'WETH', 'Wrapped ETH'),
-  [ChainId.AVALANCHE]: new Token(ChainId.FANTOM, WETH_ADDRESS[ChainId.AVALANCHE], 18, 'WETH', 'Wrapped ETH'),
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, WETH_ADDRESS[ChainId.AVALANCHE], 18, 'WETH', 'Wrapped ETH'),
 }
 
 // WBTC
@@ -218,7 +218,6 @@ export const AURA: ChainTokenMap = {
 // ENCHANT
 export const ENCHANT: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a', 18, 'ENCHANT', 'Enchantment'),  // 30 OCT
-  // [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '', 18, 'ENCHANT', 'Enchantment'), // 30 OCT
 }
 
 export const WETH9_EXTENDED: { [chainId: number]: Token } = {

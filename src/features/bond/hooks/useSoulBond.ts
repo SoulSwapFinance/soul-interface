@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { ethers, BigNumber } from 'ethers'
 // import { formatNumber } from '../../functions'
-
+ import   { SOUL_ADDRESS, USDC_ADDRESS } from 'sdk'
 import {
   useHelperContract,
   usePriceHelperContract,
@@ -11,9 +11,9 @@ import {
   useTokenContract,
 } from './useContract'
 
-import { SoulBondAddress, BOND_HELPER_ADDRESS as BondHelperAddress } from '../constants'
+import { SOUL_BOND_ADDRESS, BOND_HELPER_ADDRESS as BondHelperAddress } from '../constants'
 
-import { AllPids } from '../Pids'
+import { AvalanchePids, FantomPids } from '../Pids'
 import { useActiveWeb3React } from 'services/web3'
 import { useFantomPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice } from 'hooks/getPrices'
 
@@ -22,15 +22,14 @@ import { useFantomPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice } from
 function useSoulBond(pid, lpToken, token1Address, token2Address) {
   const { account, chainId } = useActiveWeb3React()
   
-  const farmHelperContract = useHelperContract()
   const helperContract = useBondHelperContract()
   const priceHelperContract = usePriceHelperContract()
   const bondContract = useSoulBondContract()
   const lpTokenContract = usePairContract(lpToken)
   const token1Contract = useTokenContract(token1Address[chainId])
   const token2Contract = useTokenContract(token2Address[chainId])
-  const soulContract = useTokenContract(AllPids[1].token1Address[chainId])
-  const fusdContract = useTokenContract(AllPids[1].token2Address[chainId])
+  const soulContract = useTokenContract(SOUL_ADDRESS[chainId])
+  const fusdContract = useTokenContract(USDC_ADDRESS[chainId])
 
   const soulPrice = useSoulPrice()
   const seancePrice = useSeancePrice()
@@ -145,17 +144,13 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
       let lpValue = rawPidValue
 
       if (
-        token1Name === 'USDC' ||
-        token2Name === 'USDC' ||
-        token1Name === 'USDT' ||
-        token2Name === 'USDT' ||
-        token1Name === 'gFUSDT' ||
-        token2Name === 'gFUSDT'
+        token1Name === 'USDC' || token2Name === 'USDC' ||
+        token1Name === 'USDT' || token2Name === 'USDT'
       ) {
         if (token1Name !== 'DAI') {
           lpValue = (userPercOfSupply * result?.[5]) / 10 ** 6
         } else {}
-      } else if (token1Name === 'FUSD' || token2Name === 'FUSD' || token1Name === 'DAI' || token2Name === 'DAI') {
+      } else if (token1Name === 'DAI' || token2Name === 'DAI') {
       } else if (token1Name === 'FTM' || token2Name === 'FTM') {
         lpValue = rawPidValue * ftmPrice
       } else if (token1Name === 'SOUL' || token2Name === 'SOUL') {
@@ -187,8 +182,6 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
     try {
       const result = await helperContract?.fetchPidDetails(pid)
 
-      // console.log(token1Name, '/', token2Name, '- result', result)
-
       // ------ TVL ------
 
       const summonerPidPercOfSupply = result?.[0] / result?.[1] // i.e. 1/10 = 0.1
@@ -200,14 +193,12 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
         token1Name === 'USDC' ||
         token2Name === 'USDC' ||
         token1Name === 'USDT' ||
-        token2Name === 'USDT' ||
-        token1Name === 'gFUSDT' ||
-        token2Name === 'gFUSDT'
+        token2Name === 'USDT'
       ) {
         if (token1Name !== 'DAI') {
           pidTvl = (summonerPidPercOfSupply * result?.[5]) / 10 ** 6
         } else {}
-      } else if (token1Name === 'FUSD' || token2Name === 'FUSD' || token1Name === 'DAI' || token2Name === 'DAI') {
+      } else if (token1Name === 'DAI' || token2Name === 'DAI') {
       } else if (token1Name === 'FTM' || token2Name === 'FTM') {
         pidTvl = rawPidValue * ftmPrice
       } else if (token1Name === 'SOUL' || token2Name === 'SOUL') {
@@ -227,14 +218,6 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
 
       const fixedPidTvl = Number(pidTvl).toFixed(0)
       const fixedApr = Number(apr).toFixed(0)
-
-      // console.log(token1Name, '/', token2Name, '- summonerPidPercOfSupply', summonerPidPercOfSupply)
-      // console.log(token1Name, '/', token2Name, '- tokenBal', Number(result?.[5]) / 10 ** 18)
-      // console.log(token1Name, '/', token2Name, '- rawPidValue', rawPidValue)
-
-      // console.log(token1Name, '/', token2Name, '- pidTvl', pidTvl)
-      // console.log(token1Name, '/', token2Name, '- fixedPidTvl', fixedPidTvl)
-      // console.log(token1Name, '/', token2Name, '- fixedApr', fixedApr)
 
       return [fixedPidTvl, fixedApr]
     } catch (e) {
@@ -391,8 +374,11 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
    */
   const fetchUserLpTokenAlloc = async (account) => {
     try {
-      const contractBal = await lpTokenContract?.balanceOf(SoulBondAddress)
-      const userBal = await lpTokenContract?.balanceOf(account)
+      const contractBal =   
+        chainId == 250 ? await lpTokenContract?.balanceOf(SOUL_BOND_ADDRESS)
+        : await bondContract.poolInfo(pid).lpSupply
+      
+        const userBal = await lpTokenContract?.balanceOf(account)
 
       const alloc = userBal / contractBal
       const allocPerc = alloc * 100
@@ -415,34 +401,34 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
       const totalSupply = await lpTokenContract?.totalSupply()
 
       // get how many lpTokens held by Summoner
-      const heldBySummoner = await lpTokenContract?.balanceOf(SoulBondAddress)
+      const poolSupply = await lpTokenContract?.balanceOf(SOUL_BOND_ADDRESS)
 
       // get how many lpTokens held by user
       const heldByUser = await lpTokenContract?.balanceOf(account)
 
       // summoner % of total supply
-      const summonerPercOfSupply = (heldBySummoner / totalSupply) * 100
+      const bondedPercentSupply = (poolSupply / totalSupply) * 100
 
       // user unstaked only %s
       const userUnstakedPercOfSupply = (heldByUser / totalSupply) * 100
-      const userUnstakedPercOfSummoner = (heldByUser / heldBySummoner) * 100
+      const userUnstakedPercOfSummoner = (heldByUser / poolSupply) * 100
 
       // user staked only %s
       const userStakedBal = (await userInfo(pid, account))?.[0]
-      const userStakedPercOfSupply = (userStakedBal / summonerPercOfSupply) * 100
-      const userStakedPercOfSummoner = (userStakedBal / heldBySummoner) * 100
+      const userStakedPercOfSupply = (userStakedBal / bondedPercentSupply) * 100
+      const userStakedPercOfSummoner = (userStakedBal / poolSupply) * 100
 
       // user staked + unstaked %s
       const netUserLpTokens = userStakedBal + heldByUser
       const netUserPercOfSupply = (netUserLpTokens / totalSupply) * 100
-      const netUserPercOfSummoner = (netUserLpTokens / heldBySummoner) * 100
+      const netUserPercOfSummoner = (netUserLpTokens / poolSupply) * 100
 
       // console.log('userStakedBal', userStakedBal.toString())
-      // console.log('heldBySummoner', heldBySummoner.toString())
+      // console.log('poolSupply', poolSupply.toString())
       // console.log('userStakedPercOfSummoner', userStakedPercOfSummoner.toString())
 
       return [
-        summonerPercOfSupply,
+        bondedPercentSupply,
         userUnstakedPercOfSupply,
         userUnstakedPercOfSummoner,
         userStakedPercOfSupply,
@@ -499,8 +485,17 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
    */
   const fusdPerSoul = async () => {
     try {
-      const totalSoul = await soulContract.balanceOf(AllPids[1].lpAddresses[chainId])
-      const totalFusd = await fusdContract.balanceOf(AllPids[1].lpAddresses[chainId])
+      const totalSoul = 
+      await soulContract.balanceOf( 
+      chainId == 250
+         ? FantomPids[1].lpAddress 
+         : AvalanchePids[1].lpAddress
+      )
+      const totalFusd = await fusdContract.balanceOf(
+      chainId == 250
+         ? FantomPids[1].lpAddress 
+         : AvalanchePids[1].lpAddress
+      )
 
       const fusdPerSoul = totalFusd / totalSoul
 
@@ -521,6 +516,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
     try {
       const token1Bal = await token1Contract.balanceOf(lpToken)
       const token2Bal = await token2Contract.balanceOf(lpToken)
+      const soulPrice = useSoulPrice()
 
       let totalLpValue
 
@@ -531,7 +527,6 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
         totalLpValue =
           token1Name === 'FTM' ? ethers.utils.formatUnits(token1Bal) : ethers.utils.formatUnits(token2Bal.mul(2))
       } else if (token1Name === 'SOUL' || token2Name === 'SOUL') {
-        const soulPrice = await fusdPerSoul()
         totalLpValue =
           token1Name === 'SOUL'
             ? ethers.utils.formatUnits(token1Bal)
@@ -540,7 +535,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
 
       // lp tokens held by summoner
       const totalLpTokens = await lpTokenContract?.totalSupply()
-      const summonerLpTokens = await lpTokenContract?.balanceOf(SoulBondAddress)
+      const summonerLpTokens = await lpTokenContract?.balanceOf(SOUL_BOND_ADDRESS)
       const supplyHeldBySummoner = summonerLpTokens / totalLpTokens
 
       // value of lp tokens held by summoner
@@ -602,7 +597,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   const fetchPid0LiquidityValue = async (lpToken) => {
     try {
       // SOUL held by summoner
-      const rawSummonerBal = await lpTokenContract?.balanceOf(SoulBondAddress)
+      const rawSummonerBal = await lpTokenContract?.balanceOf(SOUL_BOND_ADDRESS)
       const summonerBalance = BigNumber.from(ethers.utils.formatUnits(rawSummonerBal))
       // console.log('summonerBalance', ethers.utils.formatUnits(summonerBalance))
 
@@ -619,23 +614,6 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
       return e
     }
   }
-
-  /**
-   * Soul Price
-   */
-  // const fetchSoulPrice = async () => {
-  //   try {
-  //     // summonerBal * soulPrice = TVL
-  //     const soulPrice = await fusdPerSoul()
-  //     console.log('soulPrice', soulPrice)
-
-  //     return soulPrice
-  //   } catch (e) {
-  //     // console.log(e)
-  //     // alert(e.message);
-  //     return e
-  //   }
-  // }
 
   /**
    * Fetches the APR percentage for the `pid`

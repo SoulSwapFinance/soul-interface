@@ -144,9 +144,6 @@ import LIMIT_ORDER_HELPER_ABI from '../constants/abis/limit-order-helper.json'
 import { getContract } from '../functions/contract'
 import { useActiveWeb3React } from 'services/web3'
 import { useMemo } from 'react'
-import { getVerifyingContract } from 'limitorderv2-sdk'
-
-const UNI_FACTORY_ADDRESS = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f'
 
 export function useEIP2612Contract(tokenAddress?: string): Contract | null {
   return useContract(tokenAddress, EIP_2612_ABI, false)

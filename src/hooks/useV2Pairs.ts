@@ -373,10 +373,10 @@ export function useBondTVL(): TVLInfo[] {
   const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
   const totalSupply = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'totalSupply')
   const summonerBalance = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'balanceOf', [
-    SOUL_BOND_ADDRESS,
+    SOUL_BOND_ADDRESS[chainId],
   ])
   const summonerBalanceSingle = useMultipleContractSingleData(singleAddresses, PAIR_INTERFACE, 'balanceOf', [
-    SOUL_BOND_ADDRESS,
+    SOUL_BOND_ADDRESS[chainId],
   ])
 
   return useMemo(() => {

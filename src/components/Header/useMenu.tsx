@@ -144,7 +144,7 @@ const useMenu: UseMenu = () => {
       mainItems.push(farmItems)
     }
 
-    if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
+    if (featureEnabled(Feature.LUXOR, chainId)) {
       const mintItems = {
         key: 'mint',
         title: i18n._(t`Mint`),

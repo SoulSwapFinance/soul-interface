@@ -6,6 +6,7 @@ import {
   // ENCHANT_ADDRESS,
   SOUL_ADDRESS,
   SOUL_SUMMONER_ADDRESS,
+  SUMMONER_HELPER_ADDRESS, 
   SOUL_CIRCLE_ADDRESS,
   SOUL_VAULT_ADDRESS,
   SOUL_GUIDE_ADDRESS,
@@ -24,6 +25,7 @@ import FACTORY_ABI from '../constants/abis/factory.json'
 import SOUL_GUIDE_ABI from '../constants/abis/multicall.json'
 import SOUL_SUMMONER_ABI from '../constants/abis/soulsummoner.json' 
 import SOUL_BOND_ABI from '../constants/abis/soulbond.json' 
+import SOUL_BOND_V2_ABI from 'constants/abis/soulswap/soulbondv2.json' 
 import BOND_HELPER_ABI from '../constants/abis/bondhelper.json' 
 import PRICE_HELPER_ABI from '../constants/abis/pricehelper.json' 
 import SOUL_CIRCLE_ABI from '../constants/abis/soulcircle.json' 
@@ -34,7 +36,6 @@ import SOUL_ABI from '../constants/abis/soulpower.json'
 // unused
 import { MULTICALL_ADDRESS, 
   SOUL_BOND_ADDRESS, 
-  SUMMONER_HELPER_ADDRESS, 
   BOND_HELPER_ADDRESS,
   PRICE_HELPER_ADDRESS 
 } from '../constants/index'
@@ -105,7 +106,8 @@ export function useSoulVaultContract(withSignerIfPossible = true): Contract | nu
 
 export function useSoulBondContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_BOND_ADDRESS, SOUL_BOND_ABI, withSignerIfPossible)
+  return useContract(chainId && SOUL_BOND_ADDRESS[chainId], 
+    chainId == 250 ? SOUL_BOND_ABI : SOUL_BOND_V2_ABI, withSignerIfPossible)
 }
 
 export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
@@ -120,7 +122,7 @@ export function useCircleStakingContract(withSignerIfPossible?: boolean): Contra
 
 export function useHelperContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SUMMONER_HELPER_ADDRESS, SUMMONER_HELPER_ABI, withSignerIfPossible)
+  return useContract(chainId && SUMMONER_HELPER_ADDRESS[chainId], SUMMONER_HELPER_ABI, withSignerIfPossible)
 }
 
 export function useBondHelperContract(withSignerIfPossible?: boolean): Contract | null {
@@ -130,7 +132,7 @@ export function useBondHelperContract(withSignerIfPossible?: boolean): Contract 
 
 export function usePriceHelperContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && PRICE_HELPER_ADDRESS, PRICE_HELPER_ABI, withSignerIfPossible)
+  return useContract(chainId && PRICE_HELPER_ADDRESS[chainId], PRICE_HELPER_ABI, withSignerIfPossible)
 }
 
 export function useFactoryContract(): Contract | null {

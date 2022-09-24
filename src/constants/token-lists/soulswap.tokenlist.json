@@ -47,22 +47,6 @@
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/avalanche/assets/0x50b7545627a5162F82A992c33b87aDc75187B218/logo.png"
       },
       {
-        "name": "Dai Stablecoin",
-        "address": "0xd586E7F844cEa2F87f50152665BCbc2C279D8d70",
-        "symbol": "DAI",
-        "decimals": 18,
-        "chainId": 43114,
-        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/assets/0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E/logo.png"
-      },
-      {
-        "name": "Wrapped Ethereum",
-        "address": "0xd586E7F844cEa2F87f50152665BCbc2C279D8d70",
-        "symbol": "DAI",
-        "decimals": 18,
-        "chainId": 43114,
-        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/assets/0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E/logo.png"
-      },
-      {
         "name": "Soul Power",
         "address": "0x11d6DD25c1695764e64F439E32cc7746f3945543",
         "symbol": "SOUL",

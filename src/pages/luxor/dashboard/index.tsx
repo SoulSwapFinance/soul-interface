@@ -29,20 +29,7 @@ import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
 // import ExternalLink from 'components/ExternalLink'
 import LuxorGlowShadow from 'components/LuxorGlowShadow'
-import { useTokenInfo, useUserInfo, usePairInfo, useSorInfo, useLuxorInfo, useUserTokenInfo, usePriceUSD } from 'hooks/useAPI'
-// import { ArrowRightIcon } from '@heroicons/react/outline'
-import { I18n } from '@lingui/core'
-// import Link from 'next/link'
-import Image from 'next/image'
-// import { t } from '@lingui/macro'
-// import Calculator from 'components/Calculator'
-import { useToggleCalculatorModal, useToggleModal } from 'state/application/hooks'
-import CalculatorModal from 'modals/CalculatorModal'
-import { ApplicationModal } from 'state/application/actions'
-import StakeModal from 'modals/StakeModal'
-import SorModal from 'modals/SorModal'
-import LuxorBondsModal from 'modals/LuxorBondsModal'
-import LuxorWrapModal from 'modals/LuxorWrapModal'
+import { useTokenInfo, usePairInfo, useSorInfo, useLuxorInfo, useUserTokenInfo } from 'hooks/useAPI'
 
 export default function Dashboard() {
   const { i18n } = useLingui()
@@ -323,11 +310,6 @@ export default function Dashboard() {
     },
   ]
 
-  // const toggleCalculatorModal = useToggleCalculatorModal()
-  // const toggleStakeModal = useToggleModal(ApplicationModal.STAKE)
-  // const toggleSorModal = useToggleModal(ApplicationModal.SOR)
-  // const toggleWrapModal = useToggleModal(ApplicationModal.WRAP)
-  
 const HideOnMobile = styled.div`
   @media screen and (max-width: 900px) {
     display: none;
@@ -343,69 +325,6 @@ const HideOnMobile = styled.div`
         <title>Dashboard | Luxor</title>
         <meta key="description" name="description" />
       </Head>
-      {/* <div className="flex mb-4 items-center justify-center"> */}
-          {/* <div className="grid grid-cols-4 items-center justify-between w-full">
-    <div className="flex items-center md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
-      onClick={() => toggleCalculatorModal()}>
-        <div className="grid items-center text-center grid-flow-cols py-6 text-sm rounded-lg pointer-events-auto bg-dark-1000 text-primary border border-yellow">
-          <Image
-              src="/images/calculator.png"
-              width="156px"
-              height="156px"
-              objectFit="contain"
-              className="rounded-md"
-              alt="calculator"
-              />
-        </div>
-        <CalculatorModal />
-    </div>
-
-      <div className="flex items-center md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
-        onClick={() => toggleStakeModal()}>
-          <div className="grid items-center text-center grid-flow-cols py-6 text-sm rounded-lg pointer-events-auto bg-dark-1000 text-primary border border-yellow">
-              <Image
-                  src="https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x4290b33158F429F40C0eDc8f9b9e5d8C5288800c/logo.png"
-                  width="156px"
-                  height="156px"
-                  objectFit="contain"
-                  className="rounded-md"
-                  alt="lum logo (orange/pink sun)"
-                  />
-            </div>
-            <StakeModal />
-      </div>
-
-      <div className="flex items-center md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
-        onClick={() => toggleWrapModal()}>
-          <div className="grid items-center text-center grid-flow-cols py-6 text-sm rounded-lg pointer-events-auto bg-dark-1000 text-primary border border-yellow">
-              <Image
-                  src="https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208/logo.png"
-                  width="156px"
-                  height="156px"
-                  objectFit="contain"
-                  className="rounded-md"
-                  alt="wlum logo (purple)"
-                  />
-            </div>
-            <LuxorWrapModal />
-      </div>
-
-      <div className="flex items-center md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
-        onClick={() => toggleSorModal()}>
-          <div className="grid items-center text-center grid-flow-cols py-6 text-sm rounded-lg pointer-events-auto bg-dark-1000 text-primary border border-yellow">
-              <Image
-                  src="https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A/logo.png"
-                  width="156px"
-                  height="156px"
-                  objectFit="contain"
-                  className="rounded-md"
-                  alt="sor logo (snake with infinity-shaped tail)"
-                  />
-            </div>
-            <SorModal />
-      </div>
-  </div> */}
-      {/* </div> */}
 
       <div className="grid grid-cols ml-3 mr-3 justify-center">
     <HideOnMobile>

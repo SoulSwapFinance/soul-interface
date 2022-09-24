@@ -100,11 +100,6 @@ export function useToggleLuxorStatsModal(): () => void {
   return useToggleModal(ApplicationModal.LUXOR_STATS) 
 }
 
-export function useToggleCalculatorModal(): () => void {
-  return useToggleModal(ApplicationModal.CALCULATOR) 
-}
-
-
 // returns a function that allows adding a popup
 export function useAddPopup(): (content: PopupContent, key?: string) => void {
   const dispatch = useDispatch()

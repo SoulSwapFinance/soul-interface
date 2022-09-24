@@ -25,7 +25,6 @@ function newTransactionsFirst(a: TransactionDetails, b: TransactionDetails) {
   return b.addedTime - a.addedTime
 }
 
-// eslint-disable-next-line react/prop-types
 function StatusIcon({ connector }: { connector: AbstractConnector; account: string; provider: Web3Provider }) {
   if (connector === injected) {
     return (

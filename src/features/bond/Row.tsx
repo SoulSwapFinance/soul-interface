@@ -8,7 +8,7 @@ import { useActiveWeb3React } from 'services/web3'
 
 import useSoulBond from './hooks/useSoulBond'
 import useApprove from './hooks/useApprove'
-import { SoulBondAddress } from './constants'
+import { SOUL_BOND_ADDRESS } from './constants'
 import {
   BondContainer,
   Row,
@@ -33,7 +33,8 @@ import { useBondUserInfo, useSoulBondInfo } from 'hooks/useAPI'
 import { formatNumber, formatPercent, tryParseAmount } from 'functions'
 import { useSoulPrice } from 'hooks/getPrices'
 import AssetInput from 'components/AssetInput'
-import { Token } from 'sdk'
+import { Token, NATIVE } from 'sdk'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 
 // params to render bond with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)
@@ -87,6 +88,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const assetAddress = lpToken
   // console.log('asset:%s', assetAddress)
   const soulPrice = useSoulPrice()
+  const chain = chainId == 43114 ? 'avalanche' : 'fantom'
 
   // API DATA
   const { soulBondInfo } = useSoulBondInfo(pid)
@@ -104,15 +106,17 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const assetToken = new Token(250, assetAddress, 18, assetName)
   const parsedDepositValue = tryParseAmount(depositValue, assetToken)
   
+  // stakeble if either not yet staked and on Fantom Opera or not on Fantom Opera.
+  const isStakeable =
+    chainId == 250 && stakedBal == 0 || chainId != 250
+  
   // CALCULATIONS
   const stakedLpValue = stakedBal * lpPrice
   // const availableValue = unstakedBal * lpPrice
   const pendingValue = pending * soulPrice
-  const percOfBond = 100 * stakedBal / liquidity
+  // const percOfBond = 100 * stakedBal / liquidity
 
-  /**
-   * Runs on initial render/mount and reruns every 2 seconds
-   */
+  // initial render/mount & reruns every 2 seconds
   useEffect(() => {
     if (account) {
       const timer = setTimeout(() => {
@@ -120,22 +124,16 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
           fetchApproval()
         }
       }, 10_000)
-      // Clear timeout if the component is unmounted
+      // clear timeout if the component is unmounted
       return () => clearTimeout(timer)
     }
   })
 
-  // const isWFTM = bond.token1Address == '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83'
+  const dailyRoi = (apr / 365)
 
-  const dailyRoi
-    = (apr / 365)
+  const reached = formatNumber((100 * pendingValue / stakedLpValue), false, true)
 
-  const reached
-    = formatNumber((100 * pendingValue / stakedLpValue), false, true)
-
-  /**
-   * Opens the function panel dropdown
-   */
+  // opens dropdown panel
   const handleShow = () => {
     setShowing(!showing)
     if (!showing) {
@@ -143,29 +141,25 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
     }
   }
 
-  /**
-   * Checks if the user has approved SoulSummoner to move lpTokens
-   */
+  // checks approval on LP for SoulBond
   const fetchApproval = async () => {
     if (!account) {
       // alert('Connect Wallet')
     } else {
-      // Checks if SoulSummoner can move tokens
-      const amount = await erc20Allowance(account, SoulBondAddress)
+      // Checks if SoulBond can move tokens
+      const amount = await erc20Allowance(account, SOUL_BOND_ADDRESS[chainId])
       if (amount > 0) setApproved(true)
       return amount
     }
   }
 
-  /**
-   * Approves SoulSummoner to move lpTokens
-   */
+  // approves bond to handle LP
   const handleApprove = async () => {
     if (!account) {
       // alert('Connect Wallet')
     } else {
       try {
-        const tx = await erc20Approve(SoulBondAddress)
+        const tx = await erc20Approve(SOUL_BOND_ADDRESS[chainId])
         await tx?.wait().then(await fetchApproval())
       } catch (e) {
         // alert(e.message)
@@ -175,12 +169,9 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
     }
   }
 
-  /**
-   * Mints SOUL Bond
-   */
+  // mints SOUL from bond.
   const handleMint = async () => {
     try {
-      // console.log('minting', amount.toString())
       const tx = await mint(pid)
       // await tx.wait()
       // await fetchBals(pid)
@@ -190,9 +181,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
     }
   }
 
-  /**
-   * Deposits/stakes lpTokens into bond
-   */
+  // deposits to bond
    const handleDeposit = async (amount) => {
     try {
       // console.log('depositing', amount.toString())
@@ -215,9 +204,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                 {bond.token2Address[chainId] && <Wrap className="flex-cols-2">
                   <TokenLogo
                     src={
-                      'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
-                      bond.token1Address[chainId] +
-                      '/logo.png'
+                      'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/' + chain + '/assets/' + bond.token1Address[chainId] + '/logo.png'
                     }
                     alt="LOGO"
                     width="38px"
@@ -227,9 +214,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   />
                   <TokenLogo
                     src={
-                      'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
-                      bond.token2Address[chainId] +
-                      '/logo.png'
+                      'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/' + chain + '/assets/'  + bond.token2Address[chainId] + '/logo.png'
                     }
                     alt="LOGO"
                     width="38px"
@@ -258,12 +243,6 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                 </Text>
               </BondItemBox>
 
-              {/* <BondItemBox>
-                <Text fontSize="1rem" color="#FFFFFF">
-                  {formatPercent(percOfBond)}
-                </Text>
-              </BondItemBox> */}
-
               <BondItemBox>
                 <Text fontSize="1rem">
                   {formatNumber(liquidity, true, true)}
@@ -279,22 +258,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
         <Wrap padding="0" display="flex" justifyContent="center">
           <DetailsContainer>
             <DetailsWrapper>
-              {stakedBal == 0 ? (
+              {isStakeable && (
                 <FunctionBox>
-                    {/* <Text padding="0" fontSize=".9rem" color="#bbb">
-                      Available:&nbsp;
-                      { formatNumber(unstakedBal, false, true) }
-                      &nbsp;LP &nbsp; { Number(availableValue) !== 0 ? `($${availableValue})` : '' }
-                    </Text> */}
-                    {/* <ClickableText
-                      padding="0"
-                      fontSize=".9rem"
-                      color="#aaa"
-                      // TODO FIX MAX //
-                      onClick={() => ( setValue(unstakedBal) )}
-                    >
-                      MAX
-                    </ClickableText> */}
                     <AssetInput
                       currencyLogo={false}
                       currency={assetToken}
@@ -309,24 +274,24 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   <Wrap padding="0" margin="0" display="flex">
                     {(approved && Number(unstakedBal) == 0) ?
                       (
-                        (bond.token1 == 'FTM' || bond.token2 == 'FTM') ? (
+                        ( bond.token1 == NATIVE[chainId].symbol || bond.token2 == NATIVE[chainId].symbol ) ? (
                           <TokenPairLink
                             target="_blank"
                             rel="noopener"
-                            color="#F36FFE" // neon purple
+                            color={getChainColor(chainId)}
                             href=
-                            {bond.token1 == 'FTM' ?
-                              `https://exchange.soulswap.finance/add/FTM/${bond.token2Address[chainId]}`
-                              : `https://exchange.soulswap.finance/add/FTM/${bond.token1Address[chainId]}`
+                            {bond.token1 == NATIVE[chainId].symbol ?
+                              `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token2Address[chainId]}`
+                              : `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token1Address[chainId]}`
                             }
                           >
-                            CLICK HERE TO CREATE {bond.token1}-{bond.token2} PAIR
+                            CREATE {bond.token1}-{bond.token2} PAIR
                           </TokenPairLink>
                         ) :
                           <TokenPairLink
                             target="_blank"
                             rel="noopener"
-                            text-color="#F36FFE" // neon purple
+                            color={getChainColor(chainId)}
                             href=
                             {`https://exchange.soulswap.finance/add/${bond.token1Address[chainId]}/${bond.token2Address[chainId]}`}
                           >
@@ -337,7 +302,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                         (
                           <SubmitButton
                             height="2.5rem"
-                          onClick={() =>
+                            primaryColor={getChainColor(chainId)}
+                            onClick={() =>
                             handleDeposit(depositValue)
                           }
                           >
@@ -345,7 +311,9 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                           </SubmitButton>
                         ) :
                         (
-                          <SubmitButton height="2.5rem" onClick={() => handleApprove()}>
+                          <SubmitButton 
+                          primaryColor={getChainColor(chainId)}
+                          height="2.5rem" onClick={() => handleApprove()}>
                             APPROVE LP
                           </SubmitButton>
                         )
@@ -353,21 +321,22 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     }
                   </Wrap>
                 </FunctionBox>
-              ) : (
+              )}
+              
                 <FunctionBox>
                   <Wrap padding="0" margin="0" display="flex" justifyContent="space-between">
                     <Text fontSize=".9rem" padding="0" textAlign="left" color="#aaa">
                       BONDED:&nbsp;
-                      {Number(stakedBal) === 0
+                      {stakedBal === 0
                         ? '0.000'
-                        : Number(stakedBal) < 0.001
+                        : stakedBal < 0.001
                           ? '<0.001'
                           : formatNumber(stakedBal, false, true)
                       }&nbsp;LP
                       <br />
                       VALUE:&nbsp;{Number(stakedLpValue) !== 0 ? `${formatNumber(stakedLpValue, true, true)}` : '0'}
                     </Text>
-                    <Text fontSize=".9rem" padding="0" color="#F36FFE" textAlign="right">
+                    <Text fontSize=".9rem" padding="0" color={getChainColorCode(chainId)} textAlign="right">
 
                       YTD:&nbsp;{Number(reached) > 0 ? `${formatPercent(reached)}` : '<0.0%'}
 
@@ -377,6 +346,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
 
                     </Text>
                   </Wrap>
+                  { stakedBal > 0 &&
                   <Wrap padding="0" margin="0" display="flex">
                     <SubmitButton
                       height="2.5rem"
@@ -391,8 +361,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                       MINT SOUL { pendingValue !== 0 ? `(${formatNumber(pendingValue, true, false) })` : '' }
                     </SubmitButton>
                   </Wrap>
+                  }
                 </FunctionBox>
-              )}
             </DetailsWrapper>
           </DetailsContainer>
         </Wrap>
@@ -402,17 +372,17 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
         <div className="space-y-4">
           <ModalHeader header={`Are you sure?`} onClose={() => setShowConfirmation(false)} />
           <Typography variant="lg">
-            Minting claims your pending rewards and sends your LP tokens to the Treasury.
-            <br /><br />
-            You may only mint once and you may not add more to an open bond.
+          { `Minting claims your pending rewards and cannot be undone. You may only mint ONCE ${chainId == 250 ? 'and cannot deposit more until you mint.' : '.'}`
+            }
           </Typography>
           <Typography variant="sm" className="font-medium">
             QUESTIONS OR CONCERNS?
             <a href="mailto:soulswapfinance@gmail.com">
-              {' '} CONTACT US
+              {' '} SEND EMAIL.
             </a>
           </Typography>
           <SubmitButton
+            primaryColor={getChainColor(chainId)}
             height="2.5rem"
             onClick={ () => handleMint() }
           >

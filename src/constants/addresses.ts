@@ -625,8 +625,34 @@ export const REAPER_ADDRESS: AddressMap = {
   [ChainId.MATIC]: undefined,
   [ChainId.ARBITRUM]: undefined,
   [ChainId.MOONRIVER]: undefined,
+} 
+
+// LP POOL ADDRESSES //
+export const SOUL_NATIVE_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: undefined,
+  [ChainId.TELOS]: undefined,
+  [ChainId.BSC]: undefined,
+  [ChainId.FANTOM]: '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57', // SOUL-FTM
+  [ChainId.FANTOM_TESTNET]: undefined,
+  [ChainId.AVALANCHE]: '0x6Da1AD717C7577AAB46C19aB6d3d9C31aff32A00', // SOUL-AVAX
+  [ChainId.MATIC]: undefined,
+  [ChainId.ARBITRUM]: undefined,
+  [ChainId.MOONRIVER]: undefined,
 }
 
+export const USDC_NATIVE_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: undefined,
+  [ChainId.TELOS]: undefined,
+  [ChainId.BSC]: undefined,
+  [ChainId.FANTOM]: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556',
+  [ChainId.FANTOM_TESTNET]: undefined,
+  [ChainId.AVALANCHE]: '0x864384a54ea644852603778c0C200eF2D6F2Ac2f',
+  [ChainId.MATIC]: undefined,
+  [ChainId.ARBITRUM]: undefined,
+  [ChainId.MOONRIVER]: undefined,
+}
+
+// UNDERWORLD ADDRESSES //
 export const STOP_LIMIT_ORDER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
