@@ -277,9 +277,6 @@ msgstr ""
 msgid "Claim and Autostake"
 msgstr ""
 
-msgid "Claimable"
-msgstr ""
-
 msgid "Claimable Amount"
 msgstr ""
 
@@ -585,9 +582,6 @@ msgid "Farm with SOUL-FTM"
 msgstr ""
 
 msgid "Farms"
-msgstr ""
-
-msgid "Fee"
 msgstr ""
 
 msgid "Fee Amount"
@@ -1127,9 +1121,6 @@ msgstr ""
 msgid "Redemption Fee"
 msgstr ""
 
-msgid "Remaining"
-msgstr ""
-
 msgid "Remove"
 msgstr ""
 
@@ -1306,9 +1297,6 @@ msgid "Stack Yields with SAAVE"
 msgstr ""
 
 msgid "Stake"
-msgstr ""
-
-msgid "Stake Auto Reinvesting SOUL"
 msgstr ""
 
 msgid "Stake Luxor"
@@ -1564,9 +1552,6 @@ msgstr ""
 msgid "Unstake"
 msgstr ""
 
-msgid "Unstake Auto Reinvesting SOUL"
-msgstr ""
-
 msgid "Unsupported"
 msgstr ""
 
@@ -1658,9 +1643,6 @@ msgid "Wallet Balances"
 msgstr ""
 
 msgid "Wallet address or ENS name"
-msgstr ""
-
-msgid "Warmup"
 msgstr ""
 
 msgid "Warmup Period"

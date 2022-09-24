@@ -179,10 +179,6 @@ export default function Dashboard() {
     },
   ]
 
-  // const toggleCalculatorModal = useToggleCalculatorModal()
-  // const toggleStakeModal = useToggleModal(ApplicationModal.STAKE)
-  // const toggleSorModal = useToggleModal(ApplicationModal.SOR)
-  // const toggleWrapModal = useToggleModal(ApplicationModal.WRAP)
 
 const HideOnMobile = styled.div`
   @media screen and (max-width: 900px) {
