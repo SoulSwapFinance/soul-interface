@@ -10,12 +10,11 @@ import {
   useTokenContract,
 } from 'hooks/useContract'
 
-import SUMMONER_HELPER_ADDRESS from 'constants'
 
 import { useCircleStakingContract } from 'hooks/useContract'
 import { useHelperContract } from 'features/bond/hooks/useContract'
 import { useEnchantPrice, useFantomPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice } from 'hooks/getPrices'
-import { SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS } from 'sdk'
+import { SOUL_SUMMONER_ADDRESS } from 'sdk'
 
 // const helperContract = useHelperContract()
 
