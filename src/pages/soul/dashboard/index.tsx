@@ -8,14 +8,11 @@ import styled from 'styled-components'
 import { formatNumber } from 'functions'
 import DashboardDonutChart from 'components/Dashboard/DonutChart'
 import DashboardChartLegend from 'components/Dashboard/ChartLegend'
-import { useFantomPrice, useSeancePrice, useSoulPrice } from 'hooks/getPrices'
-import { DAI_ADDRESS } from 'sdk'
-import { WFTM_ADDRESS } from 'constants/addresses'
+import { useSeancePrice, useSoulPrice } from 'hooks/getPrices'
 import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
-import { useTokenInfo, useSoulInfo, useBondInfo } from 'hooks/useAPI'
-import { useBondTVL } from 'hooks/useV2Pairs'
+import { useSoulInfo, useBondInfo } from 'hooks/useAPI'
 
 export default function Dashboard() {
   const { i18n } = useLingui()
@@ -50,25 +47,25 @@ export default function Dashboard() {
   // const bondedValue = Number(bondsTvl)
   const bondedValue = Number(bondInfo.totalValue)
 
-  const SoulFantomValue = Number(soulInfo.SoulFantomValue) + Number(bondInfo.SoulFantomValue)
+  const NativeSoulValue = Number(soulInfo.NativeSoulValue) + Number(bondInfo.NativeSoulValue)
   const SoulUsdcValue = Number(soulInfo.SoulUsdcValue) + Number(bondInfo.SoulUsdcValue)
-  const FantomEthereumValue = Number(soulInfo.FantomEthereumValue) + Number(bondInfo.FantomEthereumValue)
+  const NativeEthereumValue = Number(soulInfo.NativeEthereumValue) + Number(bondInfo.NativeEthereumValue)
   const UsdcDaiValue = Number(soulInfo.UsdcDaiValue) + Number(bondInfo.UsdcDaiValue)
-  const FantomUsdcValue = Number(soulInfo.FantomUsdcValue) + Number(bondInfo.FantomUsdcValue)
-  const FantomBitcoinValue = Number(soulInfo.FantomBitcoinValue) + Number(bondInfo.FantomBitcoinValue)
-  const FantomDaiValue = Number(soulInfo.FantomDaiValue) + Number(bondInfo.FantomDaiValue)
-  const FantomBinanceValue = Number(soulInfo.FantomBinanceValue) + Number(bondInfo.FantomBinanceValue)
-  const SeanceFantomValue = Number(soulInfo.SeanceFantomValue) + Number(bondInfo.SeanceFantomValue)
+  const NativeUsdcValue = Number(soulInfo.NativeUsdcValue) + Number(bondInfo.NativeUsdcValue)
+  const NativeBitcoinValueValue = Number(soulInfo.NativeBitcoinValueValue) + Number(bondInfo.NativeBitcoinValueValue)
+  const NativeDaiValue = Number(soulInfo.NativeDaiValue) + Number(bondInfo.NativeDaiValue)
+  const NativeBinanceValue = Number(soulInfo.NativeBinanceValue) + Number(bondInfo.NativeBinanceValue)
+  const NativeSeanceValue = Number(soulInfo.NativeSeanceValue) + Number(bondInfo.NativeSeanceValue)
 
-  // const OtherValue = SeanceFantomValue + FantomBinanceValue + SoulUsdcValue + FantomDaiValue
-  const FantomPairsValue = SoulFantomValue + FantomBitcoinValue + FantomDaiValue + FantomBinanceValue + SeanceFantomValue + FantomEthereumValue
-  const SoulPairsValue = SoulFantomValue + SoulUsdcValue
-  const SeancePairsValue = SeanceFantomValue
-  const UsdcPairsValue = UsdcDaiValue + FantomUsdcValue + SoulUsdcValue
-  const DaiPairsValue = UsdcDaiValue + FantomDaiValue
-  const BitcoinPairsValue = FantomBitcoinValue
-  const BinancePairsValue = FantomBinanceValue
-  const EthereumPairsValue = FantomEthereumValue
+  // const OtherValue = NativeSeanceValue + NativeBinanceValue + SoulUsdcValue + NativeDaiValue
+  const FantomPairsValue = NativeSoulValue + NativeBitcoinValueValue + NativeDaiValue + NativeBinanceValue + NativeSeanceValue + NativeEthereumValue
+  const SoulPairsValue = NativeSoulValue + SoulUsdcValue
+  const SeancePairsValue = NativeSeanceValue
+  const UsdcPairsValue = UsdcDaiValue + NativeUsdcValue + SoulUsdcValue
+  const DaiPairsValue = UsdcDaiValue + NativeDaiValue
+  const BitcoinPairsValue = NativeBitcoinValueValue
+  const BinancePairsValue = NativeBinanceValue
+  const EthereumPairsValue = NativeEthereumValue
 
   const SoulComposition = SoulPairsValue / 2
   const FantomComposition = FantomPairsValue / 2
@@ -79,7 +76,7 @@ export default function Dashboard() {
   const EthereumComposition = EthereumPairsValue / 2
   const BinanceComposition = BinancePairsValue / 2
   const SeanceComposition = SeancePairsValue / 2
-  const OtherComposition = BinanceComposition + SeanceComposition
+  // const OtherComposition = BinanceComposition + SeanceComposition
 
   // calculate Treasury Balances
   // const treasuryValue = treasuryLiquidityValue + treasuryReserveValue
