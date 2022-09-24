@@ -34,6 +34,7 @@ import { formatNumber, formatPercent, tryParseAmount } from 'functions'
 import { useSoulPrice } from 'hooks/getPrices'
 import AssetInput from 'components/AssetInput'
 import { Token, NATIVE } from 'sdk'
+import { getChainColorCode } from 'constants/chains'
 
 // params to render bond with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)
@@ -310,7 +311,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                           <TokenPairLink
                             target="_blank"
                             rel="noopener"
-                            color="#F36FFE" // neon purple
+                            color={getChainColorCode(chainId)}
                             href=
                             {bond.token1 == 'FTM' ?
                               `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token2Address[chainId]}`
@@ -323,7 +324,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                           <TokenPairLink
                             target="_blank"
                             rel="noopener"
-                            text-color="#F36FFE" // neon purple
+                            text-color={getChainColorCode(chainId)}
                             href=
                             {`https://exchange.soulswap.finance/add/${bond.token1Address[chainId]}/${bond.token2Address[chainId]}`}
                           >
@@ -342,7 +343,9 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                           </SubmitButton>
                         ) :
                         (
-                          <SubmitButton height="2.5rem" onClick={() => handleApprove()}>
+                          <SubmitButton 
+                            color={getChainColorCode(chainId)}
+                            height="2.5rem" onClick={() => handleApprove()}>
                             APPROVE LP
                           </SubmitButton>
                         )
@@ -364,7 +367,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                       <br />
                       VALUE:&nbsp;{Number(stakedLpValue) !== 0 ? `${formatNumber(stakedLpValue, true, true)}` : '0'}
                     </Text>
-                    <Text fontSize=".9rem" padding="0" color="#F36FFE" textAlign="right">
+                    <Text fontSize=".9rem" padding="0" color={getChainColorCode(chainId)} textAlign="right">
 
                       YTD:&nbsp;{Number(reached) > 0 ? `${formatPercent(reached)}` : '<0.0%'}
 
