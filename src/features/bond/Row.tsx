@@ -2,29 +2,23 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
-import { ethers } from 'ethers'
 
 import { useActiveWeb3React } from 'services/web3'
-
 import useSoulBond from './hooks/useSoulBond'
 import useApprove from './hooks/useApprove'
-import { SOUL_BOND_ADDRESS } from './constants'
+import { SOUL_BOND_ADDRESS } from 'sdk'
 import {
   BondContainer,
   Row,
   BondContentWrapper,
   TokenPairBox,
   BondItemBox,
-  BondItem,
   DetailsContainer,
   DetailsWrapper,
   FunctionBox,
-  Input,
   SubmitButton,
 } from './Styles'
-// import { formatNumber } from 'functions/format'
-import NavLink from 'components/NavLink'
-import { Wrap, ClickableText, Heading, Text, ExternalLink } from '../../components/ReusableStyles'
+import { Wrap, Text, ExternalLink } from '../../components/ReusableStyles'
 import Modal from '../../components/DefaultModal'
 import Typography from '../../components/Typography'
 // import { Button } from '../../components/Button'
@@ -103,12 +97,11 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const unstakedBal = Number(soulBondUserInfo.userBalance)
   const pending = Number(soulBondUserInfo.pendingSoul) / 1e18
   
-  const assetToken = new Token(250, assetAddress, 18, assetName)
+  const assetToken = new Token(chainId, assetAddress, 18, assetName)
   const parsedDepositValue = tryParseAmount(depositValue, assetToken)
   
   // stakeble if either not yet staked and on Fantom Opera or not on Fantom Opera.
-  const isStakeable =
-    chainId == 250 && stakedBal == 0 || chainId != 250
+  const isStakeable = chainId == 250 && stakedBal == 0 || chainId != 250
   
   // CALCULATIONS
   const stakedLpValue = stakedBal * lpPrice
