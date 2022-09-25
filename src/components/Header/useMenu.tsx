@@ -99,52 +99,17 @@ const useMenu: UseMenu = () => {
 
     const mainItems: Menu = [tradeMenu]
 
-    // if (poolMenu.length > 0)
-    //   mainItems.push({
-    //     key: 'pool',
-    //     title: i18n._(t`Liquidity`),
-    //     items: poolMenu,
-    //     icon: <PoolIcon width={20} />,
-    //   })
-
     if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       const farmItems = {
         key: 'farm',
         title: i18n._(t`Farm`),
         icon: <CurrencyDollarIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
         link: '/farm'
-        // items: [
-        //   {
-        //     key: 'soul-dashboard',
-        //     title: i18n._(t`Overview`),
-        //     link: '/soul/dashboard',
-        //   },
-        //   {
-        //     key: 'earn',
-        //     title: i18n._(t`Rewards`),
-        //     link: '/explore'
-        //   },
-        //   {
-        //     key: 'farm',
-        //     title: i18n._(t`Summoner`),
-        //     link: '/farm'
-        //   },
-        //   {
-        //     key: 'pool',
-        //     title: i18n._(t`Liquidity`),
-        //     link: '/pool',
-        //   },
-        //   {
-        //     key: 'soul-docs',
-        //     title: i18n._(t`Tutorials`),
-        //     link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
-        //   },
-        // ],
       }
       mainItems.push(farmItems)
     }
 
-    if (featureEnabled(Feature.LUXOR, chainId)) {
+    if ([250, 43114].includes(chainId)) {
       const mintItems = {
         key: 'mint',
         title: i18n._(t`Mint`),
@@ -154,34 +119,12 @@ const useMenu: UseMenu = () => {
       mainItems.push(mintItems)
     }
 
-    if (featureEnabled(Feature.LUXOR, chainId)) {
+    if ([250].includes(chainId)) {
       const luxorItems = {
         key: 'Luxor',
         title: i18n._(t`Bond`),
         icon: <SunIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
         link: '/luxor/bonds'
-        // items: [
-        //   {
-        //     key: 'luxor-dashboard',
-        //     title: i18n._(t`Overview`),
-        //     link: '/luxor/dashboard',
-        //   },
-        //   {
-        //     key: 'earn',
-        //     title: i18n._(t`Explore`),
-        //     link: '/explore',
-        //   },
-        //   {
-        //     key: 'sor',
-        //     title: i18n._(t`Stable`),
-        //     link: '/luxor/sor',
-        //   },
-        //   {
-        //     key: 'lux-docs',
-        //     title: i18n._(t`Tutorials`),
-        //     link: 'https://docs.luxor.money',
-        //   },
-        // ],
       }
       mainItems.push(luxorItems)
     }
@@ -192,28 +135,6 @@ const useMenu: UseMenu = () => {
         title: i18n._(t`Bridge`),
         icon: <GlobeIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
         link: '/cross'
-        // items: [
-        //   {
-        //     key: 'luxor-dashboard',
-        //     title: i18n._(t`Overview`),
-        //     link: '/luxor/dashboard',
-        //   },
-        //   {
-        //     key: 'earn',
-        //     title: i18n._(t`Explore`),
-        //     link: '/explore',
-        //   },
-        //   {
-        //     key: 'sor',
-        //     title: i18n._(t`Stable`),
-        //     link: '/luxor/sor',
-        //   },
-        //   {
-        //     key: 'lux-docs',
-        //     title: i18n._(t`Tutorials`),
-        //     link: 'https://docs.luxor.money',
-        //   },
-        // ],
       }
       mainItems.push(bridgeItem)
     }

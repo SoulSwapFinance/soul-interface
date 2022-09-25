@@ -32,7 +32,7 @@ import WETH9_ABI from 'constants/abis/weth.json'
 import { getContract } from 'functions/contract'
 import { useMemo } from 'react'
 import { useActiveWeb3React } from 'services/web3'
-import { MULTICALL_ADDRESS, PRICE_HELPER_ADDRESS, SOUL_BOND_ADDRESS } from 'features/bond/constants'
+import { MULTICALL_ADDRESS, PRICE_HELPER_ADDRESS, SOUL_BOND_ADDRESS } from 'sdk'
 
 // returns null on errors
 export function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
@@ -97,22 +97,10 @@ export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contrac
 
 export function usePriceHelperContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && PRICE_HELPER_ADDRESS, PRICE_HELPER_ABI, withSignerIfPossible)
+  return useContract(chainId && PRICE_HELPER_ADDRESS[chainId], PRICE_HELPER_ABI, withSignerIfPossible)
 }
 
 export function useFactoryContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && FACTORY_ADDRESS[chainId], FACTORY_ABI, false)
 }
-
-// export function useRouterContract(useArcher = false, withSignerIfPossible?: boolean): Contract | null {
-//   const { chainId } = useActiveWeb3React()
-//   const address = ROUTER_ADDRESS[chainId]
-//   const abi = ROUTER_ABI
-//   return useContract(address, abi, withSignerIfPossible)
-// }
-
-// export function useTimelockContract(): Contract | null {
-//   const { chainId } = useActiveWeb3React()
-//   return useContract(chainId && TIMELOCK_ADDRESS[chainId], TIMELOCK_ABI, false)
-// }

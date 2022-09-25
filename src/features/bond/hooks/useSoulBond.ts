@@ -11,13 +11,11 @@ import {
   useTokenContract,
 } from './useContract'
 
-import { SOUL_BOND_ADDRESS, BOND_HELPER_ADDRESS as BondHelperAddress } from '../constants'
+import { SOUL_BOND_ADDRESS } from 'sdk'
 
 import { AvalanchePids, FantomPids } from '../Pids'
 import { useActiveWeb3React } from 'services/web3'
 import { useFantomPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice } from 'hooks/getPrices'
-
-// const helperContract = useHelperContract()
 
 function useSoulBond(pid, lpToken, token1Address, token2Address) {
   const { account, chainId } = useActiveWeb3React()
@@ -375,7 +373,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   const fetchUserLpTokenAlloc = async (account) => {
     try {
       const contractBal =   
-        chainId == 250 ? await lpTokenContract?.balanceOf(SOUL_BOND_ADDRESS)
+        chainId == 250 ? await lpTokenContract?.balanceOf(SOUL_BOND_ADDRESS[chainId])
         : await bondContract.poolInfo(pid).lpSupply
       
         const userBal = await lpTokenContract?.balanceOf(account)

@@ -1,4 +1,4 @@
-import { ChainId, computePairAddress, Currency, CurrencyAmount, Pair, SOUL, Token } from '../sdk'
+import { AVAX_ADDRESS, ChainId, computePairAddress, Currency, CurrencyAmount, Pair, SOUL, Token } from '../sdk'
 
 import ISoulSwapPair from '../constants/abis/soulswap/ISoulSwapPair.json'
 import { Interface } from '@ethersproject/abi'
@@ -9,9 +9,10 @@ import { POOLS, TokenInfo } from '../constants/farms'
 import { concat } from 'lodash'
 import { VAULTS } from '../constants/vaults'
 import { useActiveWeb3React } from 'services/web3'
-import { SOUL_BOND_ADDRESS } from 'features/bond/constants'
+import { SOUL_BOND_ADDRESS } from 'sdk'
 import { BONDS } from 'constants/bonds'
 import { useFantomPrice, useLuxorPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice, useWrappedLumPrice } from './getPrices'
+import { usePriceUSD } from './useAPI'
 
 const PAIR_INTERFACE = new Interface(ISoulSwapPair)
 
@@ -360,22 +361,19 @@ export function useBondTVL(): TVLInfo[] {
   const seancePrice = useSeancePrice()
   const luxPrice = useLuxorPrice()
   const wethPrice = useWrappedEthPrice()
+  const avaxPrice = usePriceUSD(AVAX_ADDRESS[chainId])
 
   const bondingPools = Object.keys(BONDS[ChainId.FANTOM]).map((key) => {
     return { ...BONDS[ChainId.FANTOM][key], lpToken: key }
   })
 
   const singlePools = bondingPools.filter((r) => !r.token1)
-  const singleAddresses = singlePools.map((r) => r.lpToken)
   const lpPools = bondingPools.filter((r) => !!r.token1)
   const pairAddresses = lpPools.map((r) => r.lpToken)
 
   const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
   const totalSupply = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'totalSupply')
-  const summonerBalance = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'balanceOf', [
-    SOUL_BOND_ADDRESS[chainId],
-  ])
-  const summonerBalanceSingle = useMultipleContractSingleData(singleAddresses, PAIR_INTERFACE, 'balanceOf', [
+  const bondBalance = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'balanceOf', [
     SOUL_BOND_ADDRESS[chainId],
   ])
 
@@ -385,8 +383,10 @@ export function useBondTVL(): TVLInfo[] {
         token.id.toLowerCase() == SOUL[chainId].address.toLowerCase() ||
         token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' ||
-        token.symbol == 'LUX' ||
         token.symbol == 'FTM' ||
+        token.symbol == 'AVAX' ||
+        token.symbol == 'WAVAX' ||
+        token.symbol == 'LUX' ||
         token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
         token.symbol == 'USDT' ||
@@ -403,6 +403,9 @@ export function useBondTVL(): TVLInfo[] {
       }
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {
         return ftmPrice
+      }
+      if (token.symbol == 'WAVAX' || token.symbol == 'AVAX') {
+        return avaxPrice
       }
       if (token.symbol == 'SEANCE') {
         return seancePrice
@@ -437,7 +440,7 @@ export function useBondTVL(): TVLInfo[] {
 
       const lpTotalSupply = totalSupply[i]?.result?.[0]
 
-      const summonerRatio = summonerBalance[i]?.result?.[0] / lpTotalSupply
+      const summonerRatio = bondBalance[i]?.result?.[0] / lpTotalSupply
 
       const token0price = getPrice(token0)
       const token1price = getPrice(token1)
@@ -471,7 +474,7 @@ export function useBondTVL(): TVLInfo[] {
     ftmPrice,
     seancePrice,
     totalSupply,
-    summonerBalance,
+    bondBalance,
     lpPools,
     singlePools,
   ])
@@ -485,6 +488,7 @@ export function useSoulTVL(): TVLInfo[] {
   const luxPrice = useLuxorPrice()
   const wethPrice = useWrappedEthPrice()
   const wlumPrice = useWrappedLumPrice()
+  const avaxPrice = usePriceUSD(AVAX_ADDRESS[chainId])
 
   const liquidityPools = Object.keys(POOLS[ChainId.FANTOM]).map((key) => {
     return { ...POOLS[ChainId.FANTOM][key], lpToken: key }
@@ -510,9 +514,10 @@ export function useSoulTVL(): TVLInfo[] {
         token.id.toLowerCase() == SOUL[chainId].address.toLowerCase() ||
         token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' ||
-        token.symbol == 'LUX' ||
         token.symbol == 'FTM' ||
-        token.symbol == 'WFTM' ||
+        token.symbol == 'AVAX' ||
+        token.symbol == 'WAVAX' ||
+        token.symbol == 'LUX' ||
         token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
         token.symbol == 'USDT' ||
@@ -530,6 +535,9 @@ export function useSoulTVL(): TVLInfo[] {
       }
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {
         return ftmPrice
+      }
+      if (token.symbol == 'WAVAX' || token.symbol == 'AVAX') {
+        return avaxPrice
       }
       if (token.symbol == 'SEANCE') {
         return seancePrice

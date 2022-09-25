@@ -127,9 +127,9 @@ export const SOUL_SUMMONER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B', // Summoner
+  [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B',
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
+  [ChainId.AVALANCHE]: '0x9961c13913bC8Aa6e0D9c32765dC7886550603af',
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
@@ -212,6 +212,30 @@ export const SOUL_VAULT_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B', // Summoner
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+  [ChainId.MATIC]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.ARBITRUM]: '',
+}
+
+export const SOUL_BOND_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xEdaECfc744F3BDeAF6556AEEbfcDedd79437a01F',
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '0x4161A44D71F68852d6b013a9C6BF968d3b08D9b7',
+  [ChainId.MATIC]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.ARBITRUM]: '',
+}
+
+export const MULTICALL_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xf682Cc4468608fC4eFbaD6a06D9BC72e7790075a',
   [ChainId.FANTOM_TESTNET]: '',
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
@@ -351,13 +375,25 @@ export const SOULSWAP_MULTI_EXACT_SWAPPER_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0xb988D44aF0065649E05e61B7d35b6121ff2b537E', // FEB22
 }
 
+export const BOND_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x8226D02356eC72Bcb61A19c3c67f3e053Ae5758e',
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '',
+  [ChainId.MATIC]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.ARBITRUM]: '',
+}
+
 export const PRICE_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x51445B73852952128bFCAE65fdd889881D8d87Bd',
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
+  [ChainId.AVALANCHE]: '0xbc83454171005a8eFd6aad89b637dDeB18473497',
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',

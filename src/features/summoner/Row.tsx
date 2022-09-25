@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, createContext, ReactNode, FC, u
 import styled from 'styled-components'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
-import { Currency, ROUTER_ADDRESS, SOUL, SOUL_ADDRESS, Token, WNATIVE_ADDRESS } from 'sdk'
+import { Currency, ROUTER_ADDRESS, SOUL, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, Token, WNATIVE_ADDRESS } from 'sdk'
 import { useTokenContract, useSoulSummonerContract, useZapperContract } from 'hooks/useContract'
 import useApprove from 'features/bond/hooks/useApprove'
 import { Tab } from '@headlessui/react'
@@ -51,7 +51,6 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const SoulSummonerContract = useSoulSummonerContract()
     const ZapContract = useZapperContract()
     const ZapContractAddress = ZapContract.address
-    const SoulSummonerAddress = SoulSummonerContract.address
 
     const nowTime = new Date().getTime()
 
@@ -206,7 +205,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
             // alert('Connect Wallet')
         } else {
             // Checks if SoulSummonerContract can move tokens
-            const amount = await erc20Allowance(account, SoulSummonerAddress)
+            const amount = await erc20Allowance(account, SOUL_SUMMONER_ADDRESS[chainId])
             if (amount > 0) setApproved(true)
             return amount
         }
@@ -227,15 +226,13 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
         }
     }
 
-    /**
-     * Approves SoulSummonerAddress to move lpTokens
-     */
+    // enables: summoner tranfers approval
     const handleApprove = async () => {
         if (!account) {
             // alert('Connect Wallet')
         } else {
             try {
-                const tx = await erc20Approve(SoulSummonerAddress)
+                const tx = await erc20Approve(SOUL_SUMMONER_ADDRESS[chainId])
                 await tx?.wait().then(await fetchApproval())
             } catch (e) {
                 // alert(e.message)

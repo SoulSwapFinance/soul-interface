@@ -222,12 +222,12 @@ const useMobileMenu: UseMobileMenu = () => {
     //       {
     //         key: 'marketplace',
     //         title: i18n._(t`Marketplace`),
-    //         link: '/miso',
+    //         link: '/market',
     //       },
     //       {
     //         key: 'factory',
     //         title: i18n._(t`Factory`),
-    //         link: '/miso/auction',
+    //         link: '/market/auction',
     //       },
     //     ],
     //   })
@@ -271,26 +271,11 @@ const useMobileMenu: UseMobileMenu = () => {
       ],
     }
 
-    // if (featureEnabled(Feature.COFFINBOX, chainId)) {
-    //   analyticsMenu.items.push({
-    //     key: 'coffinbox',
-    //     title: 'CoffinBox',
-    //     link: '/analytics/coffinbox',
-    //   })
-    // }
-
     if (featureEnabled(Feature.ANALYTICS, chainId)) {
       mainItems.push(analyticsMenu)
     }
 
-    // mainItems.push({
-    //   key: 'balances',
-    //   title: i18n._(t`Portfolio`),
-    //   link: '/balances',
-    //   // icon: <WalletIcon width={16} />,
-    // })
-
-    if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
+    if ([250].includes(chainId)) {
       const learnItems = {
         key: 'Learn',
         title: i18n._(t`Learn`),

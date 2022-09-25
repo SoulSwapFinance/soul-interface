@@ -145,11 +145,6 @@ export default function CurrencyInputPanel({
             )}
           >
             <>
-              {/* {showMaxButton && selectedCurrencyBalance && (
-                <Button variant="flexed" color="purple" onClick={onHalf} size="xs">
-                  {i18n._(t`50%`)}
-                </Button>
-              )} */}
               <Input.Numeric
                 id="token-amount-input"
                 value={value}
