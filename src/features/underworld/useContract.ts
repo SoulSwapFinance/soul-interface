@@ -66,15 +66,6 @@ export function usePairContract(pairAddress?: string, withSignerIfPossible?: boo
   return useContract(pairAddress, PAIR_ABI, withSignerIfPossible)
 }
 
-export function useSoulGuideContract(): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_GUIDE_ADDRESS[chainId], SOUL_GUIDE_ABI, false)
-}
-
-// export function usePendingContract(): Contract | null {
-//   return useContract('0x9aeadfE6cd03A2b5730474bF6dd79802d5bCD029', PENDING_ABI, false)
-// }
-
 export function useMulticallContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && MULTICALL_ADDRESS[chainId], MULTICALL_ABI, false)
@@ -104,15 +95,3 @@ export function useFactoryContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && FACTORY_ADDRESS[chainId], FACTORY_ABI, false)
 }
-
-// export function useRouterContract(useArcher = false, withSignerIfPossible?: boolean): Contract | null {
-//   const { chainId } = useActiveWeb3React()
-//   const address = ROUTER_ADDRESS[chainId]
-//   const abi = ROUTER_ABI
-//   return useContract(address, abi, withSignerIfPossible)
-// }
-
-// export function useTimelockContract(): Contract | null {
-//   const { chainId } = useActiveWeb3React()
-//   return useContract(chainId && TIMELOCK_ADDRESS[chainId], TIMELOCK_ABI, false)
-// }

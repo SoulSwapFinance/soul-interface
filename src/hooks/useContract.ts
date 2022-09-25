@@ -31,7 +31,6 @@ import {
 } from '../constants/abis/argent-wallet-detector'
 import {
   ChainId,
-  REAPER_ADDRESS,
   FACTORY_ADDRESS,
   BORING_HELPER_ADDRESS,
   ENCHANT_ADDRESS,
@@ -114,7 +113,6 @@ import PRICE_HELPER_ABI from '../constants/abis/soulswap/pricehelper.json'
 import BORING_HELPER_ABI from '../constants/abis/soulswap/boring-helper.json'
 import HARVEST_HELPER_ABI from '../constants/abis/soulswap/harvest-helper.json'
 import COFFIN_BOX_ABI from '../constants/abis/soulswap/coffinbox.json'
-import LUXOR_BOND_CONTRACT_ABI from '../constants/abis/soulswap/bond.json'
 import SOR_MASTER_ABI from '../constants/abis/soulswap/sor-master.json'
 import SOR_MINTER_ABI from '../constants/abis/soulswap/sor-minter.json'
 
@@ -123,14 +121,12 @@ import anyswapEthOperaBridge_ABI from '../constants/abis/soulswap/bridge/anyswap
 import ROUTER_ACTION_ABI from '../constants/abis/soulswap/bridge/router-action.json'
 
 // unused
-// import MEOWSHI_ABI from '../constants/abis/meowshi.json'
 import MERKLE_DISTRIBUTOR_ABI from '../constants/abis/merkle-distributor.json'
 import MULTICALL2_ABI from '../constants/abis/multicall2.json'
 import PENDING_ABI from '../constants/abis/pending.json'
 import ROUTER_ABI from '../constants/abis/router.json'
 import SAAVE_ABI from '../constants/abis/saave.json'
 import SUSHIROLL_ABI from '@sushiswap/core/abi/SushiRoll.json'
-// import SOULSWAP_MULTISWAPPER_ABI from '../constants/abis/sushiswapmultiswapper.json'
 import SOULSWAP_TWAP_ORACLE_ABI from '../constants/abis/sushiswap-slp-oracle.json'
 import TIMELOCK_ABI from '../constants/abis/timelock.json'
 
