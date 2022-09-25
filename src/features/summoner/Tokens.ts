@@ -83,10 +83,6 @@ export const tokens = {
       4002: "",
       250: "0xdDcb3fFD12750B45d32E084887fdf1aABAb34239",
     },
-    GRIM: {
-      4002: "",
-      250: "0x7eC94C4327dC757601B4273cD67014d7760Be97E",
-    },
     EVO: {
       4002: "",
       250: "0x0a77866C01429941BFC7854c0c0675dB1015218b",
@@ -94,10 +90,6 @@ export const tokens = {
     AVAX: {
       4002: "",
       250: "0x511D35c52a3C244E7b8bd92c0C297755FbD89212",
-    },
-    REAPER: {
-      4002: "",
-      250: "0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb",
     },
     SPELL: {
       4002: "",

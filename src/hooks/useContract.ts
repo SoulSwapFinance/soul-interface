@@ -473,19 +473,9 @@ export function useEnchantmentContract(withSignerIfPossible?: boolean): Contract
   return useContract(chainId && ENCHANT_ADDRESS[chainId], ENCHANT_ABI, withSignerIfPossible)
 }
 
-export function useMakerContract(): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && REAPER_ADDRESS[chainId], MAKER_ABI, false)
-}
-
 export function useSorStakingContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SOR_STAKING_REWARDS_ADDRESS[chainId], SOR_STAKING_ABI, false)
-}
-
-export function useReaperContract(): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && REAPER_ADDRESS[chainId], MAKER_ABI, false)
 }
 
 export function useTimelockContract(): Contract | null {

@@ -268,7 +268,7 @@ export const ZAPPER_ADDRESS: AddressMap = {
   // [ChainId.ROPSTEN]: '0xcff6eF0B9916682B37D80c19cFF8949bc1886bC2',
   [ChainId.TELOS]: '',
   [ChainId.FANTOM]: '0x936bdb9218d7f6d7ef95fafe3f0ded0220229d74',
-  [ChainId.AVALANCHE]: undefined,
+  [ChainId.AVALANCHE]: '0x594C7137Ac541C9F3954169bB018548761986E8B',
   [ChainId.MATIC]: undefined,
   [ChainId.ARBITRUM]: undefined,
   [ChainId.MOONRIVER]: undefined,
@@ -602,30 +602,6 @@ export const UNIDX_ADDRESS: AddressMap = {
   [ChainId.ARBITRUM]: '',
   [ChainId.MOONRIVER]: '',
 }
-
-export const GRIM_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: undefined,
-  [ChainId.TELOS]: undefined,
-  [ChainId.BSC]: undefined,
-  [ChainId.FANTOM]: '0x7eC94C4327dC757601B4273cD67014d7760Be97E', // GRIM
-  [ChainId.FANTOM_TESTNET]: undefined,
-  [ChainId.AVALANCHE]: undefined,
-  [ChainId.MATIC]: undefined,
-  [ChainId.ARBITRUM]: undefined,
-  [ChainId.MOONRIVER]: undefined,
-}
-
-export const REAPER_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: undefined,
-  [ChainId.TELOS]: undefined,
-  [ChainId.BSC]: undefined,
-  [ChainId.FANTOM]: '0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb', // REAPER
-  [ChainId.FANTOM_TESTNET]: undefined,
-  [ChainId.AVALANCHE]: undefined,
-  [ChainId.MATIC]: undefined,
-  [ChainId.ARBITRUM]: undefined,
-  [ChainId.MOONRIVER]: undefined,
-} 
 
 // LP POOL ADDRESSES //
 export const SOUL_NATIVE_ADDRESS: AddressMap = {

@@ -1,6 +1,3 @@
-// import { useEffect, useState } from 'react'
-// import { ethers } from 'ethers'
-
 import { BondKey } from './Key'
 import BondRowRender from './Row'
 import { AvalanchePids, FantomPids } from './Pids'

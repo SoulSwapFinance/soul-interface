@@ -78,7 +78,7 @@ export function useSoulInfo(): { status: string; soulInfo: T } {
     const { account, chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
     const [soulInfo, setInfo] = useState<T>({
-        address: SOUL_ADDRESS[ChainId.FANTOM],
+        address: SOUL_ADDRESS[chainId],
         name: 'Soul Power',
         mcap: '1064575.257167817',
         symbol: 'SOUL',
