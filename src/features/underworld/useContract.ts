@@ -32,7 +32,7 @@ import WETH9_ABI from 'constants/abis/weth.json'
 import { getContract } from 'functions/contract'
 import { useMemo } from 'react'
 import { useActiveWeb3React } from 'services/web3'
-import { MULTICALL_ADDRESS, PRICE_HELPER_ADDRESS, SOUL_BOND_ADDRESS } from 'features/bond/constants'
+import { MULTICALL_ADDRESS, PRICE_HELPER_ADDRESS, SOUL_BOND_ADDRESS } from 'sdk'
 
 // returns null on errors
 export function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
