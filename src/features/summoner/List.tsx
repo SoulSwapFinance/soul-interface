@@ -3,19 +3,29 @@ import Typography from 'components/Typography'
 
 import { Active, Inactive, Underworld } from './Key'
 import { ActiveRow } from './Row'
-import { ActivePools, LendingPools, InactivePools } from './Pools'
+import { AvalanchePools, FantomPools, LendingPools, InactivePools } from './Pools'
 import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
-import { ArrowRightIcon } from '@heroicons/react/outline'
+import { useActiveWeb3React } from 'services/web3'
+import { ChainId } from 'sdk'
 
 export const FarmList = () => {
-  // const { chainId } = useActiveWeb3React()
+  const { chainId } = useActiveWeb3React()
 
-  const activeList = ActivePools.map((farm) => (
+  const ftmList = FantomPools.map((farm) => (
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
-      lpToken={farm.lpAddresses[250]}
+      lpToken={farm.lpAddress}
+      farm={farm}
+    />
+  ))
+
+  const avaxList = AvalanchePools.map((farm) => (
+    <ActiveRow
+      key={farm.pid}
+      pid={farm.pid}
+      lpToken={farm.lpAddress}
       farm={farm}
     />
   ))
@@ -24,7 +34,7 @@ export const FarmList = () => {
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
-      lpToken={farm.lpAddresses[250]}
+      lpToken={farm.lpAddress}
       farm={farm}
     />
   ))
@@ -33,7 +43,7 @@ export const FarmList = () => {
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
-      lpToken={farm.lpAddresses[250]}
+      lpToken={farm.lpAddress}
       farm={farm}
     />
   ))
@@ -79,13 +89,13 @@ export const FarmList = () => {
       </div>
      <Typography className="text-2xl bg-dark-1000 mb-3 mt-6 border border-dark-600 p-3 font-bold text-center">SoulSwap Pools</Typography>
         <Active />
-        <>{activeList}</>
+        <>{ chainId == ChainId.FANTOM ? ftmList : avaxList }</>
       <Typography className="text-2xl bg-dark-1000 mb-3 mt-6 border border-blue p-3 font-bold text-center">Lending Pools</Typography>
         <Underworld />
         <>{lendingList}</>
       <Typography className="text-2xl bg-dark-1000 mb-3 mt-6 border border-pink p-3 font-bold text-center">Retired Pools</Typography>
         <Inactive />
-        <>{inactiveList}</>
+        <>{ chainId == ChainId.FANTOM ? inactiveList : null }</>
     </>
   )
 }

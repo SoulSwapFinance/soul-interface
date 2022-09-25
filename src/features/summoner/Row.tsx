@@ -39,7 +39,6 @@ const HideOnMobile = styled.div`
 export const ActiveRow = ({ pid, farm, lpToken }) => {
     const { account, chainId, library } = useActiveWeb3React()
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
-    // const [depositing, setDepositing] = useState(false)
 
     const [approved, setApproved] = useState(false)
     const [approvedZap, setZapApproved] = useState(false)
@@ -66,19 +65,15 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const pairStatus = summonerPoolInfo.status
 
     const { userInfo } = useUserInfo()
-    const { pairInfo } = usePairInfo(farm.lpAddresses[chainId | 250])
+    const { pairInfo } = usePairInfo(farm.lpAddress)
     // assumes 18, since only SOUL-LP farms are eligible for Zap
     // const lpSymbol = pairInfo.lpSymbol
     // const assetAddress = pairInfo.address
     // console.log(assetAddress)
     const assetDecimals = Number(pairInfo.pairDecimals)
     // const assetSymbol = pairInfo.symbol
-
     const token0Symbol = pairInfo.token0Symbol
     const token1Symbol = pairInfo.token1Symbol
-
-    // const token0Address = pairInfo.token0Address
-    // const token1Address = pairInfo.token1Address
 
     const [showOptions, setShowOptions] = useState(false)
     const [openDeposit, setOpenDeposit] = useState(false)
@@ -127,8 +122,8 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const tokenSymbol = isUnderworldPair ? token0Symbol : "LP"
 
     // ONLY USED FOR LOGO //
-    const token0 = new Token(chainId, farm.token1Address[chainId], 18)
-    const token1 = new Token(chainId, farm.token2Address[chainId], 18)
+    const token0 = new Token(chainId, farm.token1Address, 18)
+    const token1 = new Token(chainId, farm.token2Address, 18)
 
     // Zap Add-Ons //
     const tokenContract = useTokenContract(zapTokenAddress)
@@ -323,8 +318,10 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                             <div className="items-center">
                                 <FarmItemBox>
                                     {Number(allocPoint) != 420 ? <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
-                                        : <CurrencyLogo currency={token0}
-                                            size={40} />
+                                        : <CurrencyLogo 
+                                            currency={token0}
+                                            size={40} 
+                                            />
                                     }
                                 </FarmItemBox>
                             </div>

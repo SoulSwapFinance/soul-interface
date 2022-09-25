@@ -5,21 +5,15 @@ import { useMemo } from 'react'
 import { useV2TradeExactOut } from './useV2Trades'
 
 import { tryParseAmount } from 'functions'
-import { ANY, BNB, CRV, LUXOR, MIM, AVAX, SEANCE, SOUL, FUSD, USDT, UNIDX, WBTC, WETH, WFTM, WLUM, GRIMEVO, DAI, SOR } from 'constants/tokens'
-import { ANY_ADDRESS, BNB_ADDRESS, CRV_ADDRESS, FUSD_ADDRESS, 
-  GRIMEVO_ADDRESS, LUX_ADDRESS, SEANCE_ADDRESS, 
-  WFTM_ADDRESS, SOR_ADDRESS, SOUL_ADDRESS, UNIDX_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS, AVAX_ADDRESS } 
+import { ANY, BNB, CRV, LUXOR, MIM, AVAX, SEANCE, SOUL, FUSD, USDC, USDT, UNIDX, WBTC, WETH, WFTM, WLUM, GRIMEVO, DAI, SOR } from 'constants/tokens'
+import { ANY_ADDRESS, AVAX_ADDRESS, BNB_ADDRESS, CRV_ADDRESS, FUSD_ADDRESS, 
+  GRIMEVO_ADDRESS, LUX_ADDRESS, SEANCE_ADDRESS, WFTM_ADDRESS, 
+  SOUL_ADDRESS, UNIDX_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS } 
   from 'constants/addresses'
 import { usePrice } from 'hooks/usePrice'
 // import { SupportedChainId } from '../constants/chains'
 // import { useBestV2Trade } from './useBestV2Trade'
 
-const USDC = {
-  [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD Coin'),
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6, 'USDC', 'USD Coin'),
-  [ChainId.BSC]: new Token(ChainId.BSC, '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d', 6, 'USDC', 'USD Coin'),
-  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E', 6, 'USDC', 'USD Coin'),
-}
 
 // AMOUNT_OUT = amounts used when calculating spot price for a given currency.
 // The amount is large enough to filter low liquidity pairs.
@@ -36,7 +30,7 @@ const USDT_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
 
 const DAI_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(DAI[ChainId.FANTOM], 100_000e6),
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(DAI[ChainId.FANTOM], 100_000e6),
+  [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(DAI[ChainId.AVALANCHE], 100_000e6),
 }
 
 const SOR_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
@@ -52,11 +46,13 @@ const FUSD_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
 }
 
 const SOUL_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(SOUL[ChainId.FANTOM], 100_000e6)
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(SOUL[ChainId.FANTOM], 100_000e6),
+  [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(SOUL[ChainId.AVALANCHE], 100_000e6)
 }
 
 const SEANCE_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(SEANCE[ChainId.FANTOM], 100_000e6)
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(SEANCE[ChainId.FANTOM], 100_000e6),
+  [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(SEANCE[ChainId.AVALANCHE], 100_000e6)
 }
 
 const LUXOR_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
@@ -73,7 +69,8 @@ const WETH_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
 }
 
 const WBTC_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WBTC[ChainId.FANTOM], 100_000e6)
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WBTC[ChainId.FANTOM], 100_000e6),
+  [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(WBTC[ChainId.AVALANCHE], 100_000e6)
 }
 
 const WFTM_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
@@ -81,7 +78,8 @@ const WFTM_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
 }
 
 const BNB_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(BNB[ChainId.FANTOM], 100_000e6)
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(BNB[ChainId.FANTOM], 100_000e6),
+  [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(BNB[ChainId.AVALANCHE], 100_000e6)
 }
 
 const ANY_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
@@ -124,16 +122,16 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   const bnbPrice = usePrice(BNB_ADDRESS[chainId])
   const anyPrice = usePrice(ANY_ADDRESS[chainId])
   const crvPrice = usePrice(CRV_ADDRESS[chainId])
-  const fusdPrice = usePrice(FUSD_ADDRESS[chainId])
-  const unidxPrice = usePrice(UNIDX_ADDRESS[chainId])
-  const grimEvoPrice = usePrice(GRIMEVO_ADDRESS[chainId])
+  const fusdPrice = usePrice(FUSD_ADDRESS[250])
+  const unidxPrice = usePrice(UNIDX_ADDRESS[250])
+  const grimEvoPrice = usePrice(GRIMEVO_ADDRESS[250])
   const avaxPrice = usePrice(AVAX_ADDRESS[chainId | 250])
   
   const amountOut = chainId ? STABLECOIN_AMOUNT_OUT[chainId | 250] : undefined
   const usdtAmountOut = chainId ? USDT_AMOUNT_OUT[chainId | 250] : undefined
-  const sorAmountOut = chainId ? SOR_AMOUNT_OUT[chainId | 250] : undefined
+  const sorAmountOut = chainId ? SOR_AMOUNT_OUT[250] : undefined
   const daiAmountOut = chainId ? DAI_AMOUNT_OUT[chainId | 250] : undefined
-  const fusdAmountOut = chainId ? FUSD_AMOUNT_OUT[chainId | 250] : undefined
+  const fusdAmountOut = chainId ? FUSD_AMOUNT_OUT[250] : undefined
   const mimAmountOut = chainId ? MIM_AMOUNT_OUT[chainId | 250] : undefined
   
   const soulAmountOut = chainId ? SOUL_AMOUNT_OUT[chainId | 250] : undefined

@@ -56,27 +56,17 @@ export function Active() {
         <FarmContainer>
           <div className = "grid grid-cols-1 bg-purple font-bold border border-dark-1000 hover:border-dark-600" >
             <FarmContentWrapper>
-              
-            {/* <HideOnMobile> */}
-              <FarmItemBox>
-                  <Text fontSize=".8" color="#FFFFFF">
-                  ASSET
-                  </Text>
-              </FarmItemBox>
-            {/* </HideOnMobile> */}
 
-            {/* <HideOnMobile>
               <FarmItemBox>
-                <Text padding="0" fontSize=".8" color="#FFFFFF">
-                STAKE
+                <Text fontSize=".8" color="#FFFFFF">
+                  ASSET
                 </Text>
               </FarmItemBox>
-            </HideOnMobile> */}
 
             <HideOnMobile>
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                STAKED
+                  STAKED
                 </Text>
               </FarmItemBox>
             </HideOnMobile>
@@ -84,26 +74,26 @@ export function Active() {
             <HideOnSmall>
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                SHARE
+                  SHARE
                 </Text>
               </FarmItemBox>
             </HideOnSmall>
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                % APR
+                  % APR
                 </Text>
               </FarmItemBox>
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                YIELD
+                  YIELD
                 </Text>
               </FarmItemBox>
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                LIQUIDITY
+                  LIQUIDITY
                 </Text>
               </FarmItemBox>
 
@@ -121,21 +111,11 @@ export function Inactive() {
           <div className = "grid grid-cols-1 bg-pink font-bold border border-dark-1000 hover:border-dark-600" >
             <FarmContentWrapper>
               
-            {/* <HideOnMobile> */}
               <FarmItemBox>
                   <Text fontSize=".8" color="#FFFFFF">
                   ASSET
                   </Text>
               </FarmItemBox>
-            {/* </HideOnMobile> */}
-
-            {/* <HideOnMobile>
-              <FarmItemBox>
-                <Text padding="0" fontSize=".8" color="#FFFFFF">
-                STAKE
-                </Text>
-              </FarmItemBox>
-            </HideOnMobile> */}
 
             <HideOnMobile>
               <FarmItemBox>
@@ -182,25 +162,14 @@ export function Underworld() {
   return (
     <div className="justify-center">
         <FarmContainer>
-          {/* <div className="grid grid-cols-5 ml-24 mr-6 sm:ml-0 bg-dark-1000"> */}
           <div className="grid grid-cols-1 bg-blue font-bold border border-dark-1000 hover:border-dark-600">
             <FarmContentWrapper>
-              
-            {/* <HideOnMobile> */}
+
               <FarmItemBox>
                   <Text fontSize=".8" color="#FFFFFF">
                   SUPPLY
                   </Text>
               </FarmItemBox>
-            {/* </HideOnMobile> */}
-
-            {/* <HideOnMobile>
-              <FarmItemBox>
-                <Text padding="0" fontSize=".8" color="#FFFFFF">
-                STAKE
-                </Text>
-              </FarmItemBox>
-            </HideOnMobile> */}
 
             <HideOnMobile>
               <FarmItemBox>
