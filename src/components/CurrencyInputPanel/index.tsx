@@ -165,9 +165,7 @@ export default function CurrencyInputPanel({
                     ) : (           
 
                       <>
-                        {/* {i18n._(t`Balance:`)}  */}
                         {i18n._(t`50%`)} 
-                        {/* {selectedCurrencyBalance?.toSignificant(6, { groupSeparator: ',' }) || '0'} {currency?.symbol} */}
                       </>
                     )}
                   </div>
@@ -178,7 +176,6 @@ export default function CurrencyInputPanel({
                     ) : (           
 
                       <>
-                        {/* {i18n._(t`Balance:`)}  */}
                         {selectedCurrencyBalance?.toSignificant(6, { groupSeparator: ',' }) || '0'} {currency?.symbol}
                       </>
                     )}

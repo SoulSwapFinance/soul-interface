@@ -1,9 +1,4 @@
 /**
- * @file apyApr
- * @note original implementation: https://gist.github.com/sterlu/4b44f59ea665819974ae684d7f564d9b
- */
-
-/**
  * @const SECONDS_PER_YEAR
  * @summary
  *  A four-century period will be missing 3 of its 100 Julian leap years, leaving 97.

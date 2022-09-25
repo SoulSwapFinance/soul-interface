@@ -69,7 +69,7 @@ export default function Dashboard() {
   const LuxorAddress = LuxorContract.address
   const LuxSorAddress = LuxSorContract.address
   const luxorSupply = Number(useTokenInfo(LuxorAddress).tokenInfo.supply) / 1e9
-  const wlumSupply = Number(useTokenInfo(WrappedLumensAddress).tokenInfo.supply) / 1e9
+  // const wlumSupply = Number(useTokenInfo(WrappedLumensAddress).tokenInfo.supply) / 1e9
   // const { userInfo } = useUserInfo(LuxorTreasuryAddress, WrappedLumFantomAddress)
   // const ftmWlumBalance = Number(userInfo.value)
   // console.log('lumensSupply:%s', wlumSupply)
