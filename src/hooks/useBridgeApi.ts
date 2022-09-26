@@ -18,6 +18,7 @@ export const FTM_ETH = [
   "ICE",
   "BAND",
   "WOOFY",
+  "SOUL",
   "YFI",
   "YEL",
   "SNX",
