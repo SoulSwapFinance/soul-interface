@@ -13,9 +13,12 @@ import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { useSoulInfo, useBondInfo } from 'hooks/useAPI'
+import { ChainId } from 'sdk'
+import { useActiveWeb3React } from 'services/web3'
 
 export default function Dashboard() {
   const { i18n } = useLingui()
+  const seancePrice = useSeancePrice()
   // const bondInfo = useBondTVL()
 
   // let bondsTvl = bondInfo?.reduce((previousValue, currentValue) => {
@@ -23,7 +26,7 @@ export default function Dashboard() {
   // }, 0)
   // Prices //
   const soulPrice = useSoulPrice()
-  const seancePrice = useSeancePrice()
+  const { chainId } = useActiveWeb3React()
 
   // GET SOUL ECONOMY BALANCES //
   const { soulInfo } = useSoulInfo()
@@ -226,7 +229,7 @@ const HideOnMobile = styled.div`
             </a>
           </NavLink>
         </Button>
-        <Button variant="bordered" color="purple" size="lg">
+        <Button variant="bordered" color="purple" size="lg" className={chainId == ChainId.FANTOM ? '' : 'hidden'}>
           <NavLink href={'/underworld'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Lend </span>

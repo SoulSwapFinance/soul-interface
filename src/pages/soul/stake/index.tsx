@@ -35,13 +35,13 @@ export default function Stake() {
   const { account, chainId } = useActiveWeb3React()
   const [depositValue, setDepositValue] = useState('')
   const [withdrawValue, setWithdrawValue] = useState('')
-  const parsedDepositValue = tryParseAmount(depositValue, SOUL[250])
-  const parsedWithdrawValue = tryParseAmount(withdrawValue, SOUL[250])
+  const parsedDepositValue = tryParseAmount(depositValue, SOUL[chainId])
+  const parsedWithdrawValue = tryParseAmount(withdrawValue, SOUL[chainId])
 
   const soulPrice = useSoulPrice()
   const AutoStakeContract = useAutoStakeContract()
 
-  const soulToken = new Token(250, getAddress(SOUL_ADDRESS[250]), 18, 'SOUL')
+  const soulToken = new Token(chainId, getAddress(SOUL_ADDRESS[chainId]), 18, 'SOUL')
   const soulBal = useCurrencyBalance(account, soulToken)
   const [seanceBal, setSeanceBalance] = useState(0)
   const [soulBalance, setLuxBalance] = useState(0)
@@ -92,7 +92,7 @@ export default function Stake() {
 
   const [stakeApprovalState, stakeApprove] = useApproveCallback(
     parsedStakeValue,
-    AUTO_STAKE_ADDRESS[250]
+    AUTO_STAKE_ADDRESS[chainId]
   )
 
   const stakeError = !parsedStakeValue
@@ -144,7 +144,7 @@ export default function Stake() {
       </Head>
       <div className="mt-2 mb-2">
         <Button variant="filled" color="purple" size="lg">
-          <NavLink href={`/swap?inputCurrency=&outputCurrency=${SOUL_ADDRESS[chainId | 250]}`}>
+          <NavLink href={`/swap?inputCurrency=&outputCurrency=${SOUL_ADDRESS[chainId]}`}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span>Market Price: ${Number(soulPrice).toFixed(2)}</span>
             </a>
@@ -353,8 +353,8 @@ export default function Stake() {
               <div className="mt-6 flex items-center gap-2">
                                                      {/* <AssetInput
                                         currencyLogo={true}
-                                        currency={SOUL[250]}
-                                        currencyAddress={SOUL[250].address}
+                                        currency={SOUL[chainId]}
+                                        currencyAddress={SOUL[chainId].address}
                                         value={withdrawValue}
                                         onChange={setWithdrawValue}
                                         showMax={false}

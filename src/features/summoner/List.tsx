@@ -70,7 +70,7 @@ export const FarmList = () => {
   return (
     <>
 <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
-        <Button variant="bordered" color="purple" size="lg">
+        <Button variant="bordered" color="purple" size="lg" className={chainId == ChainId.FANTOM ? '' : 'hidden'}>
           <NavLink href={'/seance'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Stake </span>
@@ -91,14 +91,14 @@ export const FarmList = () => {
             </a>
           </NavLink>
         </Button>
-        <Button variant="bordered" color="purple" size="lg">
+        <Button variant="bordered" color="purple" size="lg" className={chainId == ChainId.FANTOM ? '' : 'hidden'}>
           <NavLink href={'/underworld'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Lend </span>
             </a>
           </NavLink>
         </Button>
-        <Button variant="bordered" color="purple" size="lg">
+        <Button variant="bordered" color="purple" size="lg" className={[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? '' : 'hidden'}>
           <NavLink href={'/autostake'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Vault </span>

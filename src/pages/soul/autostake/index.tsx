@@ -23,19 +23,17 @@ import { useAutoStakeInfo, useUserAutoStakeInfo } from 'hooks/useAPI'
 import { SubmitButton } from 'features/autostake/Styles'
 
 export default function AutoStake() {
-  const addTransaction = useTransactionAdder()
   const { i18n } = useLingui()
   const [stakeValue, setStakeValue] = useState('0')
   const { account, chainId } = useActiveWeb3React()
   const [withdrawValue, setWithdrawValue] = useState('0')
-  const parsedDepositValue = tryParseAmount(stakeValue, SOUL[250])
-  const parsedWithdrawValue = tryParseAmount(withdrawValue, SOUL[250])
+  const parsedDepositValue = tryParseAmount(stakeValue, SOUL[chainId])
+  const parsedWithdrawValue = tryParseAmount(withdrawValue, SOUL[chainId])
 
   const soulPrice = useSoulPrice()
   const AutoStakeContract = useAutoStakeContract()
 
-  const soulToken = new Token(250, getAddress(SOUL_ADDRESS[250]), 18, 'SOUL')
-  const enchantedToken = new Token(250, '0x083423C61B9373050e62E2A6Ec170e663F9c7BFa', 18, 'CHANT')
+  const soulToken = new Token(chainId, getAddress(SOUL_ADDRESS[chainId]), 18, 'SOUL')
   const soulBal = useCurrencyBalance(account, soulToken)
   // const enchantedBal = useCurrencyBalance(account, enchantedToken)
 
@@ -115,7 +113,7 @@ export default function AutoStake() {
 
   const [stakeApprovalState, stakeApprove] = useApproveCallback(
     parsedStakeValue,
-    AUTO_STAKE_ADDRESS[250]
+    AUTO_STAKE_ADDRESS[chainId]
   )
 
   const stakeError = !parsedStakeValue
@@ -179,7 +177,7 @@ export default function AutoStake() {
       </Head>
       <div className="mt-2 mb-2">
         <Button variant="filled" color="purple" size="lg">
-          <NavLink href={`/swap?inputCurrency=&outputCurrency=${SOUL_ADDRESS[chainId | 250]}`}>
+          <NavLink href={`/swap?inputCurrency=&outputCurrency=${SOUL_ADDRESS[chainId]}`}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span>Market Price: ${Number(soulPrice).toFixed(2)}</span>
             </a>
@@ -305,20 +303,21 @@ export default function AutoStake() {
                 {isStakeValid &&
                   (stakeApprovalState === ApprovalState.NOT_APPROVED ||
                     stakeApprovalState === ApprovalState.PENDING) ? (
-                  <Button
-                    type="filled"
-                    color="purple"
-                    className="text-black"
+                  <SubmitButton
+                    height="2rem"
+                    color="white"
+                    primaryColor="#821FFF"
                     onClick={stakeApprove}
                     disabled={stakeApprovalState !== ApprovalState.NOT_APPROVED}
-                    style={{ width: '100%' }}
+                    margin=".5rem 0 .5rem 0"
+                    // style={{ width: '100%' }}
                   >
                     {stakeApprovalState === ApprovalState.PENDING ? (
                       <Dots>{i18n._(t`Approving`)}</Dots>
                     ) : (
-                      i18n._(t`Approve`)
+                      i18n._(t`APPROVE`)
                     )}
-                  </Button>
+                  </SubmitButton>
                 ) : (
                   <SubmitButton
                   height="2rem"

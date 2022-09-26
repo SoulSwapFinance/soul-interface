@@ -2,7 +2,7 @@ import React, { ReactNode, useMemo } from 'react'
 import { GlobeIcon, SwitchVerticalIcon, SparklesIcon, TrendingUpIcon, PresentationChartLineIcon, SunIcon, CurrencyDollarIcon, UserGroupIcon } from '@heroicons/react/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { SOUL_ADDRESS } from 'sdk'
+import { ChainId, SOUL_ADDRESS } from 'sdk'
 import { PoolIcon, WalletIcon } from 'components/Icon'
 import { Feature } from 'enums'
 import { classNames, featureEnabled } from 'functions'
@@ -143,6 +143,52 @@ const useMenu: UseBar = () => {
       })
 
     if (featureEnabled(Feature.SOULSWAP, chainId)) {
+      const farmItems = {
+        key: 'soulswap',
+        title: i18n._(t`SoulSwap`),
+        icon: <CurrencyDollarIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+        items: [
+          {
+            key: 'soul-dashboard',
+            title: i18n._(t`Overview`),
+            link: '/soul/dashboard',
+          },
+          {
+            key: 'cross',
+            title: i18n._(t`Cross`),
+            link: '/cross',
+          },
+          {
+            key: 'farm',
+            title: i18n._(t`Farms`),
+            link: '/summoner',
+          },
+          {
+            key: 'vault',
+            title: i18n._(t`Vault`),
+            link: '/autostake',
+          },
+          {
+            key: 'staking',
+            title: i18n._(t`Stake`),
+            link: '/seance',
+          },
+          {
+            key: 'bonds',
+            title: i18n._(t`Bonds`),
+            link: '/bonds',
+          },
+          {
+            key: 'soul-docs',
+            title: i18n._(t`Tutorial`),
+            link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
+          },
+        ],
+      }
+      mainItems.push(farmItems)
+    }
+
+    if ([ChainId.AVALANCHE].includes(chainId)) {
       const farmItems = {
         key: 'soulswap',
         title: i18n._(t`SoulSwap`),

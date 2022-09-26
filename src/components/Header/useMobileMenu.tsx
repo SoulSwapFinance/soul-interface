@@ -166,6 +166,36 @@ const useMobileMenu: UseMobileMenu = () => {
       mainItems.push(farmItems)
     }
 
+    if ([43114].includes(chainId)) {
+      const farmItems = {
+        key: 'Rewards',
+        title: i18n._(t`Rewards`),
+        items: [
+          {
+            key: 'farm',
+            title: i18n._(t`Farm`),
+            link: '/summoner',
+          },
+          {
+            key: 'vault',
+            title: i18n._(t`Vault`),
+            link: '/autostake',
+          },
+          {
+            key: 'staking',
+            title: i18n._(t`Stake`),
+            link: '/seance',
+          },
+          {
+            key: 'bonds',
+            title: i18n._(t`Bond`),
+            link: '/bonds',
+          },
+        ],
+      }
+      mainItems.push(farmItems)
+    }
+
     if (featureEnabled(Feature.UNDERWORLD, chainId)) {
       mainItems.push({
         key: 'lending',
