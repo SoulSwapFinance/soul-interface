@@ -77,6 +77,8 @@ export function usePriceUSD(tokenAddress): { status: string; price: T } {
 export function useSoulInfo(): { status: string; soulInfo: T } {
     const { account, chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
+    const URL = chainId == 250 ? BASE_URL : `https://avax-api.soulswap.finance`
+    
     const [soulInfo, setInfo] = useState<T>({
         address: SOUL_ADDRESS[chainId],
         name: 'Soul Power',
@@ -114,7 +116,7 @@ export function useSoulInfo(): { status: string; soulInfo: T } {
     useEffect(() => {
       const fetchData = async () => {
         setStatus('fetching')
-        const response = await fetch(`${BASE_URL}/soulswap`,
+        const response = await fetch(`${URL}/soulswap`,
          {
           method: 'GET',
           headers: {
@@ -126,7 +128,7 @@ export function useSoulInfo(): { status: string; soulInfo: T } {
         setInfo(json as T)
         setStatus('fetched')
       }
-      if (chainId == ChainId.FANTOM) 
+           if ([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId)) 
       fetchData()
     }, [])
   
