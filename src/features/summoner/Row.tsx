@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, createContext, ReactNode, FC, u
 import styled from 'styled-components'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
-import { Currency, FTM, ROUTER_ADDRESS, SOUL, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, Token, WNATIVE_ADDRESS } from 'sdk'
+import { ChainId, Currency, FTM, ROUTER_ADDRESS, SOUL, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, Token, WNATIVE_ADDRESS } from 'sdk'
 import { useTokenContract, useSoulSummonerContract, useZapperContract } from 'hooks/useContract'
 import useApprove from 'features/bond/hooks/useApprove'
 import { Tab } from '@headlessui/react'
@@ -23,6 +23,7 @@ import QuestionHelper from 'components/QuestionHelper'
 import { useUserInfo } from 'hooks/useAPI'
 import AssetInput from 'components/AssetInput'
 import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
+import { getChainColor } from 'constants/chains'
 
 const HideOnSmall = styled.div`
 @media screen and (max-width: 900px) {
@@ -65,7 +66,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
     const pairStatus = summonerPoolInfo.status
 
     const { userInfo } = useUserInfo()
-    const { pairInfo } = usePairInfo(lpAddress)
+    const { pairInfo } = usePairInfo(lpToken)
     // assumes 18, since only SOUL-LP farms are eligible for Zap
     // const lpSymbol = pairInfo.lpSymbol
     // const assetAddress = pairInfo.address
@@ -94,15 +95,18 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
     // const secondsRemaining = summonerUserInfo.secondsRemaining
     // const withdrawFee = summonerUserInfo.currentRate
     const firstDepositTime = Number(summonerUserInfo.firstDepositTime)
+    const currentRate = Number(summonerUserInfo.currentRate)
     const currentTime = nowTime / 1_000
     const timeDelta = currentTime - firstDepositTime
     const daysElapsed = timeDelta / 86_400
     const withdrawFee
-        = daysElapsed <= 14 ? startRate - daysElapsed
+        = chainId == ChainId.FANTOM 
+            ? (daysElapsed <= 14 ? startRate - daysElapsed
             // staked, but beyond 14 days
             : stakedBalance > 0 ? 0
                 // not staked (to forewarn)
-                : 14
+                : 14)
+            : currentRate
     const feeAmount
         = withdrawFee * stakedBalance / 100
     const withdrawable = stakedBalance - feeAmount
@@ -658,7 +662,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                             handleDeposit(pid)
                                         }
                                     >
-                                        DEPOSIT {Number(allocPoint) == 420 ? token0Symbol : token0Symbol + '-' + token1Symbol}
+                                        DEPOSIT {Number(allocPoint) == 420 ? token0Symbol : tokenSymbol}
                                     </SubmitButton>
                                 )}
 
@@ -684,7 +688,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                     <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
-                                            primaryColor={'#f158f9'}
+                                            primaryColor={getChainColor[chainId]}
                                             color={'#FFFFFF'}
                                             className={'font-bold'}
                                             margin=".5rem 0 .5rem 0"
@@ -802,7 +806,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                             setShowConfirmation(true)
                                         }
                                     >
-                                        WITHDRAW {token0Symbol + '-' + token1Symbol}
+                                        WITHDRAW {tokenSymbol}
                                     </SubmitButton>
 
                                 </Wrap>
