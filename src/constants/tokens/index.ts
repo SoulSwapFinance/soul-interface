@@ -184,7 +184,7 @@ export const AVAX: ChainTokenMap = {
 export const SEANCE: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', 18, 'SEANCE', 'Seance Circle'),  // JUL21
   [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '0xD54Cf31D5653F4a062f5DA4C83170A5867d04442', 18, 'SEANCE', 'Seance Circle'),  // JUL21
-  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0xB641880C65A33605fc5a4F8b955a868a98D4a58e', 18, 'SEANCE', 'Seance Circle'),  // SEP22
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0x97Ee3C9Cf4E5DE384f95e595a8F327e65265cC4E', 18, 'SEANCE', 'Seance Circle'),  // SEP22
 }
 
 // AURA

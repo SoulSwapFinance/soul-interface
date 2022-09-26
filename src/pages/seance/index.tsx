@@ -71,8 +71,6 @@ export default function SoulStake() {
   const { withdraw } = useSoulVault()
   const { enter, leave, harvest } = useSoulStakeManual()
 
-  // const { userInfo, fetchStakeStats } = useSoulMine(0, '', '', '')
-
   const soulBalance = useTokenBalance(account ?? undefined, SOUL[chainId])
   const seanceBalance = useTokenBalance(account ?? undefined, SEANCE[chainId])
 

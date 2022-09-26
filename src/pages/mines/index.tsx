@@ -1,4 +1,4 @@
-import { SOUL_ADDRESS, WNATIVE } from 'sdk'
+import { ChainId, SOUL_ADDRESS, WNATIVE } from 'sdk'
 import Search from 'components/Search'
 import MineList from 'features/mines/MineList'
 import Menu from 'features/mines/components/MineMenu'
@@ -20,21 +20,20 @@ import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
 import { useSoulPrice } from 'hooks/getPrices'
 import { useFarms } from 'services/graph/hooks'
+import { usePriceUSD } from 'hooks/useAPI'
 
 export default function Mines(): JSX.Element {
   const { chainId } = useActiveWeb3React()
   const router = useRouter()
   const [pendingTx, setPendingTx] = useState(false)
 
-  const soulPrice = useSoulPrice()
-  // const ftmPrice = useFantomPrice()
+  const soulPrice = Number(usePriceUSD(SOUL_ADDRESS[chainId]))
 
   const type = router.query?.filter === null ? 'active' : (router.query?.filter as string)
-  // const rewards = useFarmRewards()
 
   const farms = useFarms()
 
-  const { harvest } = useSummoner()
+  const { harvest, harvestAll } = useSummoner()
 
   const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
     return { ...POOLS[chainId][key], lpToken: key }
@@ -135,6 +134,8 @@ export default function Mines(): JSX.Element {
     stables: (farm) => farm.allocPoint == 200 // since all [active] stables have 200 AP <3
   }
 
+  let pids:any[] = [0]
+
   // const rewards = useFarmRewards()
 
   // const farmRewards = rewards.filter((farm) => {
@@ -190,7 +191,7 @@ export default function Mines(): JSX.Element {
             {/* {'YOURS '} */}
             {formatNumberScale(valueStaked, true)} {' STAKED'}             
             </Button>
-          {positions.length > 0 && (
+          {positions.length > 0 && chainId == ChainId.FANTOM && (
             <Button
               color="greydient"
               className="text-emphasis"
@@ -207,6 +208,38 @@ export default function Mines(): JSX.Element {
                     console.error(error)
                   }
                 }
+                setPendingTx(false)
+              }}
+            >
+              CLAIM ALL {formatNumberScale(allStaked, true)}
+            </Button>
+          )}
+          {
+            chainId != ChainId.FANTOM && (
+
+              
+              <Button
+              color="greydient"
+              className="text-emphasis"
+              variant="flexed"
+              size={"sm"}
+              disabled={pendingTx}
+              onClick={async () => {
+                setPendingTx(true)
+                for (const pos of positions) {
+                  try {
+                    pids.push(Number([pos.id]))
+                  } catch (error) {
+                    console.log('pids:%s', pids)
+                    console.error(error)
+                  }
+                }
+                  try {
+                    const tx = await harvestAll(chainId, pids)
+                    addTransaction(tx)
+                  } catch (error) {
+                    console.error(error)
+                  }
                 setPendingTx(false)
               }}
             >

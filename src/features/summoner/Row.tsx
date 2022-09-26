@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext, createContext, ReactNode, FC, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
-import { ChainId, Currency, FTM, ROUTER_ADDRESS, SOUL, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, Token, WNATIVE_ADDRESS } from 'sdk'
+import { ChainId, ROUTER_ADDRESS, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, Token } from 'sdk'
 import { useTokenContract, useSoulSummonerContract, useZapperContract } from 'hooks/useContract'
 import useApprove from 'features/bond/hooks/useApprove'
 import { Tab } from '@headlessui/react'
@@ -65,7 +65,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
     const pairType = summonerPoolInfo.pairType
     const pairStatus = summonerPoolInfo.status
 
-    const { userInfo } = useUserInfo()
+    // const { userInfo } = useUserInfo()
     const { pairInfo } = usePairInfo(lpToken)
     // assumes 18, since only SOUL-LP farms are eligible for Zap
     // const lpSymbol = pairInfo.lpSymbol

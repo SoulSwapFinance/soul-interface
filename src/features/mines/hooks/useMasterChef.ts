@@ -6,6 +6,7 @@ import { useCallback } from 'react'
 
 import { Chef } from '../enum'
 import { useSummonerContract } from 'hooks'
+import { ChainId } from 'sdk'
 
 export default function useMasterChef() {
   const { account } = useActiveWeb3React()
@@ -55,6 +56,19 @@ export default function useMasterChef() {
     },
     [account, , contract, soul]
   )
+ 
+  const harvestAll = useCallback(
+    async (chainId, pids) => {
+      try {
+        let tx
+          tx = chainId == ChainId.FANTOM ? null : await contract?.harvestAll([pids])
+      } catch (e) {
+        console.error(e)
+        return e
+      }
+    },
+    [account, , contract, soul]
+  )
 
   // -----------------------
   //  Staking Funcs
@@ -97,6 +111,6 @@ export default function useMasterChef() {
     [contract]
   )
 
-  return { claimStake, deposit, withdraw, harvest, enterStaking, leaveStaking }
+  return { claimStake, deposit, withdraw, harvest, harvestAll, enterStaking, leaveStaking }
 
 } 

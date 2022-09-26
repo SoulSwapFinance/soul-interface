@@ -589,19 +589,6 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                         </SubmitButton>
                                     </Wrap>
                                     }
-                                {/* <Wrap padding="0" margin="0" display="flex">
-                                    <SubmitButton
-                                        height="2rem"
-                                        primaryColor="#F4A703"
-                                        color="black"
-                                        margin=".5rem 0 .5rem 0"
-                                        onClick={() =>
-                                            handleHarvestAll()
-                                        }
-                                    >
-                                        HARVEST ALL
-                                    </SubmitButton>
-                                </Wrap> */}
                                 </FunctionBox>
                             )}
                         </DetailsWrapper>
