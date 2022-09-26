@@ -503,7 +503,7 @@ export const WBTC_ADDRESS: AddressMap = {
   [ChainId.FANTOM_TESTNET]: '',
   [ChainId.BSC]: '',
   [ChainId.MATIC]: '',
-  [ChainId.AVALANCHE]: '',
+  [ChainId.AVALANCHE]: '0x50b7545627a5162F82A992c33b87aDc75187B218',
   [ChainId.MOONRIVER]: '',
 }
 
@@ -568,8 +568,4 @@ export const WNATIVE_ADDRESS: AddressMap = {
 export const FTM_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x4E15361FD6b4BB609Fa63C81A2be19d873717870',
   [ChainId.FANTOM]: WNATIVE_ADDRESS[ChainId.FANTOM]
-}
-
-export const ZAPPER_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '0xcff6eF0B9916682B37D80c19cFF8949bc1886bC2',
 }

@@ -5,10 +5,10 @@ import { useMemo } from 'react'
 import { useV2TradeExactOut } from './useV2Trades'
 
 import { tryParseAmount } from 'functions'
-import { ANY, BNB, CRV, LUXOR, MIM, AVAX, SEANCE, SOUL, FUSD, USDC, USDT, UNIDX, WBTC, WETH, WFTM, WLUM, GRIMEVO, DAI, SOR } from 'constants/tokens'
-import { ANY_ADDRESS, AVAX_ADDRESS, BNB_ADDRESS, CRV_ADDRESS, FUSD_ADDRESS, 
+import { BNB, CRV, LUXOR, MIM, AVAX, SEANCE, SOUL, FUSD, USDC, USDT, UNIDX, WBTC, WETH, WFTM, WLUM, GRIMEVO, DAI, SOR } from 'constants/tokens'
+import { AVAX_ADDRESS, BNB_ADDRESS, CRV_ADDRESS, FUSD_ADDRESS, 
   GRIMEVO_ADDRESS, LUX_ADDRESS, SEANCE_ADDRESS, WFTM_ADDRESS, 
-  SOUL_ADDRESS, UNIDX_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS } 
+  SOUL_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS } 
   from 'constants/addresses'
 import { usePrice } from 'hooks/usePrice'
 // import { SupportedChainId } from '../constants/chains'
@@ -82,16 +82,8 @@ const BNB_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(BNB[ChainId.AVALANCHE], 100_000e6)
 }
 
-const ANY_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(ANY[ChainId.FANTOM], 100_000e6)
-}
-
 const CRV_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(CRV[ChainId.FANTOM], 100_000e6)
-}
-
-const UNIDX_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(UNIDX[ChainId.FANTOM], 100_000e6)
 }
 
 const GRIMEVO_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
@@ -115,44 +107,36 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
 
   const luxorPrice = usePrice(LUX_ADDRESS[250])
   const wLumensPrice = usePrice(WLUM_ADDRESS[250])
+  const wftmPrice = usePrice(WFTM_ADDRESS[250])
+  const fusdPrice = usePrice(FUSD_ADDRESS[250])
+  const crvPrice = usePrice(CRV_ADDRESS[250])
+  const grimEvoPrice = usePrice(GRIMEVO_ADDRESS[250])
  
   const wethPrice = usePrice(WETH_ADDRESS[chainId])
   const wbtcPrice = usePrice(WBTC_ADDRESS[chainId])
-  const wftmPrice = usePrice(WFTM_ADDRESS[chainId])
   const bnbPrice = usePrice(BNB_ADDRESS[chainId])
-  const anyPrice = usePrice(ANY_ADDRESS[chainId])
-  const crvPrice = usePrice(CRV_ADDRESS[chainId])
-  const fusdPrice = usePrice(FUSD_ADDRESS[250])
-  const unidxPrice = usePrice(UNIDX_ADDRESS[250])
-  const grimEvoPrice = usePrice(GRIMEVO_ADDRESS[250])
-  const avaxPrice = usePrice(AVAX_ADDRESS[chainId | 250])
+  const avaxPrice = usePrice(AVAX_ADDRESS[chainId])
   
-  const amountOut = chainId ? STABLECOIN_AMOUNT_OUT[chainId | 250] : undefined
-  const usdtAmountOut = chainId ? USDT_AMOUNT_OUT[chainId | 250] : undefined
   const sorAmountOut = chainId ? SOR_AMOUNT_OUT[250] : undefined
-  const daiAmountOut = chainId ? DAI_AMOUNT_OUT[chainId | 250] : undefined
   const fusdAmountOut = chainId ? FUSD_AMOUNT_OUT[250] : undefined
-  const mimAmountOut = chainId ? MIM_AMOUNT_OUT[chainId | 250] : undefined
+  const mimAmountOut = chainId ? MIM_AMOUNT_OUT[250] : undefined
+  const luxorAmountOut = chainId ? LUXOR_AMOUNT_OUT[250] : undefined
+  const wlumAmountOut = chainId ? WLUM_AMOUNT_OUT[250] : undefined
+  const wftmAmountOut = chainId ? WFTM_AMOUNT_OUT[250] : undefined
+  const crvAmountOut = chainId ? CRV_AMOUNT_OUT[250] : undefined
+  const grimEVOAmountOut = chainId ? GRIMEVO_AMOUNT_OUT[250] : undefined
   
-  const soulAmountOut = chainId ? SOUL_AMOUNT_OUT[chainId | 250] : undefined
-  const seanceAmountOut = chainId ? SEANCE_AMOUNT_OUT[chainId | 250] : undefined
-  
-  const luxorAmountOut = chainId ? LUXOR_AMOUNT_OUT[chainId | 250] : undefined
-  const wlumAmountOut = chainId ? WLUM_AMOUNT_OUT[chainId | 250] : undefined
-  const wftmAmountOut = chainId ? WFTM_AMOUNT_OUT[chainId | 250] : undefined
-
-  const wethAmountOut = chainId ? WETH_AMOUNT_OUT[chainId | 250] : undefined
-  const wbtcAmountOut = chainId ? WBTC_AMOUNT_OUT[chainId | 250] : undefined
-  const bnbAmountOut = chainId ? BNB_AMOUNT_OUT[chainId | 250] : undefined
-  const anyAmountOut = chainId ? ANY_AMOUNT_OUT[chainId | 250] : undefined
-  const crvAmountOut = chainId ? CRV_AMOUNT_OUT[chainId | 250] : undefined
-  const unidxAmountOut = chainId ? UNIDX_AMOUNT_OUT[chainId | 250] : undefined
-  const grimEVOAmountOut = chainId ? GRIMEVO_AMOUNT_OUT[chainId | 250] : undefined
-  const avaxAmountOut = chainId ? AVAX_AMOUNT_OUT[chainId | 250] : undefined
+  const amountOut = chainId ? STABLECOIN_AMOUNT_OUT[chainId] : undefined
+  const daiAmountOut = chainId ? DAI_AMOUNT_OUT[chainId] : undefined
+  const soulAmountOut = chainId ? SOUL_AMOUNT_OUT[chainId] : undefined
+  const seanceAmountOut = chainId ? SEANCE_AMOUNT_OUT[chainId] : undefined
+  const wethAmountOut = chainId ? WETH_AMOUNT_OUT[chainId] : undefined
+  const wbtcAmountOut = chainId ? WBTC_AMOUNT_OUT[chainId] : undefined
+  const bnbAmountOut = chainId ? BNB_AMOUNT_OUT[chainId] : undefined
+  const avaxAmountOut = chainId ? AVAX_AMOUNT_OUT[chainId] : undefined
 
   // TOKENS
   const stablecoin = amountOut?.currency
-  const usdt = usdtAmountOut?.currency
   const sor = sorAmountOut?.currency
   const dai = daiAmountOut?.currency
   const fusd = fusdAmountOut?.currency
@@ -165,9 +149,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
   const wftm = wftmAmountOut?.currency
   const wbtc = wbtcAmountOut?.currency
   const bnb = bnbAmountOut?.currency
-  const any = anyAmountOut?.currency
   const crv = crvAmountOut?.currency
-  const unidx = unidxAmountOut?.currency
   const grimEVO = grimEVOAmountOut?.currency
   const avax = avaxAmountOut?.currency
 
@@ -188,11 +170,6 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
     // handle usdc
     if (currency?.wrapped.equals(stablecoin)) {
       return new Price(stablecoin, stablecoin, '1', '1')
-    }
-   
-    // handle usdt
-    if (currency?.wrapped.equals(usdt)) {
-      return new Price(usdt, usdt, '1', '1')
     }
 
     // handle dai
@@ -255,19 +232,9 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
       return new Price(bnb, bnb, '10', Number(bnbPrice * 10).toFixed())
     }
 
-    // handle any
-    if (currency?.wrapped.equals(any)) {
-      return new Price(any, any, '10', Number(anyPrice * 10).toFixed())
-    }
-
     // handle crv
     if (currency?.wrapped.equals(crv)) {
       return new Price(crv, crv, '10', Number(crvPrice * 10).toFixed())
-    }
-
-    // handle unidx
-    if (currency?.wrapped.equals(unidx)) {
-      return new Price(unidx, unidx, '10', Number(unidxPrice * 10).toFixed())
     }
   
     // handle grimEVO

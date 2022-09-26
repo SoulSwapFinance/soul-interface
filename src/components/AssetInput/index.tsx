@@ -2,7 +2,7 @@ import { ExclamationCircleIcon } from '@heroicons/react/outline'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Currency, CurrencyAmount, SOUL_ADDRESS, Token } from 'sdk'
+import { AVAX_ADDRESS, Currency, CurrencyAmount, Token, WNATIVE_ADDRESS } from 'sdk'
 import selectCoinAnimation from 'animation/select-coin.json'
 import { Button } from 'components/Button'
 import Chip from 'components/Chip'
@@ -21,11 +21,9 @@ import { useActiveWeb3React } from 'services/web3'
 import Lottie from 'lottie-react'
 
 import React, { createContext, FC, ReactNode, useContext, useEffect, useMemo, useRef, useState } from 'react'
-// import { FiatValue } from './FiatValue'
-// import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
-// import { useCurrency } from 'hooks/Tokens'
 import { useBinancePrice, useFantomPrice, useTokenPrice, useWrappedBtcPrice } from 'hooks/getPrices'
 import { usePairPrice } from 'hooks/usePairData'
+import { usePairInfo, usePriceUSD, useTokenInfo } from 'hooks/useAPI'
 
 interface AssetInputProps {
   value?: string
@@ -192,6 +190,7 @@ const AssetInputPanel = ({
   currencyLogo,
   size,
 }: AssetInputPanelProps) => {
+  const { chainId } = useActiveWeb3React()
   const error = useAssetInputContextError()
   const isDesktop = useDesktopMediaQuery()
   const { i18n } = useLingui()
@@ -200,14 +199,16 @@ const AssetInputPanel = ({
   // let tokenB = useCurrency(token1)
 
   // console.log('token0: ', token0)
-  
+  // const { pairInfo } = usePairInfo(currencyAddress)
+  // const pairPrice = Number(pairInfo.pairPrice)
   const pairPrice = usePairPrice(currencyAddress)
+  // const pairPrice = usePairPrice(currencyAddress)
   const usdcValue = useUSDCValue(tryParseAmount(Number(value) === 0 ? '1' : value, currency))
   const tokenPrice = useTokenPrice(token0)
   const ftmPrice = useFantomPrice()
+  // const nativePrice = Number(usePriceUSD(WNATIVE_ADDRESS[chainId]).price)
   const btcPrice = useWrappedBtcPrice()
   const bnbPrice = useBinancePrice()
-  // const ftmPrice = useBinancePrice()
  
   // const usdValue = usePrice(currency.toString())
   const span = useRef<HTMLSpanElement | null>(null)
@@ -291,7 +292,9 @@ const AssetInputPanel = ({
               currency.symbol == 'WETH' ? formatNumber(tokenPrice * Number(value), true, true) :
               currency.symbol == 'DAI' ? formatNumber(1 * Number(value), true, true) :
               currency.symbol == 'BNB' ? formatNumber(bnbPrice * Number(value), true, true) :
+              // TODO: FIX BELOW
               currency.isNative ? formatNumber(ftmPrice * Number(value), true, true) :
+              // currency.isNative ? formatNumber(nativePrice * Number(value), true, true) :
               currency.symbol == 'FTM' ? formatNumber(ftmPrice * Number(value), true, true) :
               currency.symbol == 'WFTM' ? formatNumber(ftmPrice * Number(value), true, true) :
               currency.symbol == 'WBTC' ? formatNumber(btcPrice * Number(value), true, true) :

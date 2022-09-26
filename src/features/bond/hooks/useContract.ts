@@ -17,7 +17,6 @@ import MULTICALL_ABI from '../constants/abis/multicall.json'
 import FACTORY_ABI from '../constants/abis/factory.json'
 
 // soul
-import SOUL_GUIDE_ABI from '../constants/abis/multicall.json'
 import SOUL_SUMMONER_ABI from '../constants/abis/soulsummoner.json' 
 import SOUL_BOND_ABI from '../constants/abis/soulbond.json' 
 import SOUL_BOND_V2_ABI from 'constants/abis/soulswap/soulbondv2.json' 
