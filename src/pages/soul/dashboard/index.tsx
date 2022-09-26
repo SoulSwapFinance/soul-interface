@@ -35,7 +35,9 @@ export default function Dashboard() {
   const totalSupply = Number(soulInfo.supply)
   const totalSupplyString = Number(soulInfo.supply).toFixed(0).toString().substring(0,2) + 'M'
   // console.log('totalSupplyString:%s', totalSupplyString)
-  const circulatingSupply = totalSupply - soulBalance - stakedSoul
+  const circulatingSupply = Number(totalSupply - soulBalance - stakedSoul)
+   const circulatingSupplyString = Number(totalSupply - soulBalance - stakedSoul).toFixed(0).toString().substring(0,2) + 'M'
+  
   // console.log('totalSupply:%s', totalSupply)
   const daoLiquidityValue = Number(soulInfo.totalLiquidityValue)
 
