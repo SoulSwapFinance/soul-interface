@@ -21,7 +21,7 @@ import { useNativeCurrency } from './useNativeCurrency'
 import { useActiveWeb3React } from './index'
 import { getTokenList } from 'functions/list'
 
-const DEFAULT_TOKEN_LIST = 'https://raw.githubusercontent.com/soulswapfinance/default-token-list/master/soulswap.tokenlist.json'
+const DEFAULT_TOKEN_LIST = 'https://raw.githubusercontent.com/soulswapfinance/default-token-list/prod/soulswap.tokenlist.json'
 
 export function useAllMiningCampaigns(pair?: Pair, dataFilter?: PairsFilterType) {
   const token0Address = pair?.token0?.address.toLowerCase()

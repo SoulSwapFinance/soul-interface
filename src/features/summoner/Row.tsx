@@ -630,9 +630,9 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                         <Wrap padding="0" margin="0" display="flex">
                                             <SubmitButton
                                                 height="2rem"
-                                                className="font-bold text-white"
+                                                className="font-bold"
                                                 primaryColor={buttonColor}
-                                                color={buttonTextColor}
+                                                color={'#FFFFFF'}
                                                 margin=".5rem 0 .5rem 0"
                                                 onClick={() => handleApprove()}>
                                                 APPROVE {tokenSymbol}
