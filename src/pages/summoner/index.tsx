@@ -10,7 +10,7 @@ import useSummoner from 'features/mines/hooks/useMasterChef'
 import { useTVL } from 'hooks/useV2Pairs'
 import { usePositions } from 'features/mines/hooks'
 
-import { useFuse } from 'hooks'
+import { useFuse, useSummonerContract } from 'hooks'
 import { useRouter } from 'next/router'
 import { useSoulPrice } from 'hooks/getPrices'
 import { getAddress } from '@ethersproject/address'
@@ -22,11 +22,13 @@ import { useFarms } from 'services/graph/hooks'
 // import { XIcon } from '@heroicons/react/solid'
 import { Toggle } from 'components/Toggle'
 import { XIcon } from '@heroicons/react/solid'
+import { ChainId } from 'sdk'
+import { useActiveWeb3React } from 'services/web3'
 // import { usePairPrice } from 'hooks/usePairData'
 // import { useActiveWeb3React } from 'services/web3/hooks/useActiveWeb3React'
 
 const Summoner = () => {
-  // const { chainId } = useActiveWeb3React()
+  const { chainId } = useActiveWeb3React()
   const router = useRouter()
   const [pendingTx, setPendingTx] = useState(false)
   const [showBalances, openShowBalances] = useState(true)
@@ -36,6 +38,7 @@ const Summoner = () => {
   const type = router.query?.filter === null ? 'active' : (router.query?.filter as string)
   const farms = useFarms()
   const { harvest } = useSummoner()
+  const SummonerContract = useSummonerContract()
 
   const positions = usePositions()
   const tvl = useTVL()
@@ -118,6 +121,18 @@ const Summoner = () => {
     return !poolTvl ? previousValue + 0 : previousValue + ((currentValue.amount / 1e18) * poolTvl?.lpPrice)
   }, 0)
 
+    // harvests: all staked pools (for user)
+    const handleHarvestAll = async () => {
+      try {
+        let tx
+        tx = SummonerContract?.harvestAll()
+        await tx?.wait()
+    } catch (e) {
+        console.log(e)
+        return
+    }
+  }
+
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">
       {showBalances &&
@@ -126,16 +141,6 @@ const Summoner = () => {
           height="24px"
           id="toggle-button"
           onClick={() => openShowBalances(false)}
-          // isActive={showBalances}
-          // toggle={
-          //   showBalances
-          //     ? () => {
-          //       openShowBalances(false)
-          //     }
-          //     : () => {
-          //       openShowBalances(true)
-          //     }
-          // }
         />
       </div>
       }
@@ -151,10 +156,9 @@ const Summoner = () => {
                 variant="outlined"
                 size={"sm"}
               >
-                {/* {'YOURS '} */}
                 {formatNumberScale(allStaked, true)} {' STAKED'}
               </Button>
-              {positions.length > 0 && (
+              {positions.length > 0 && [ChainId.FANTOM].includes(chainId) && (
                 <Button
                   color="greydient"
                   className="text-emphasis"
@@ -171,6 +175,26 @@ const Summoner = () => {
                         console.error(error)
                       }
                     }
+                    setPendingTx(false)
+                  }}
+                >
+                  CLAIM ALL {formatNumberScale(pendingValue, true)}
+                </Button>
+              )}
+              {positions.length > 0 && [ChainId.AVALANCHE].includes(chainId) && (
+                <Button
+                  color="greydient"
+                  className="text-emphasis"
+                  variant="flexed"
+                  size={"sm"}
+                  disabled={pendingTx}
+                  onClick={async () => {
+                    setPendingTx(true)
+                      try { 
+                        await handleHarvestAll()
+                        } catch (error) {
+                          console.error(error)
+                        }
                     setPendingTx(false)
                   }}
                 >

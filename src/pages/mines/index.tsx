@@ -9,7 +9,7 @@ import React, { useContext, useState } from 'react'
 import { POOLS } from 'constants/farms'
 import { getAddress } from '@ethersproject/address'
 import { useTVL } from 'hooks/useV2Pairs'
-import { useSummonerInfo } from 'hooks'
+import { useSummonerContract, useSummonerInfo } from 'hooks'
 import { TridentBody, TridentHeader } from 'layouts/Trident'
 import { usePositions } from 'features/mines/hooks'
 import { Button } from 'components/Button'
@@ -21,9 +21,10 @@ import { Feature } from 'enums/Feature'
 import { useSoulPrice } from 'hooks/getPrices'
 import { useFarms } from 'services/graph/hooks'
 import { usePriceUSD } from 'hooks/useAPI'
+import { getChainColor } from 'constants/chains'
 
 export default function Mines(): JSX.Element {
-  const { chainId } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const router = useRouter()
   const [pendingTx, setPendingTx] = useState(false)
 
@@ -33,12 +34,13 @@ export default function Mines(): JSX.Element {
 
   const farms = useFarms()
 
-  const { harvest, harvestAll } = useSummoner()
+  const { harvest } = useSummoner()
+
+  const SummonerContract = useSummonerContract()
 
   const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
     return { ...POOLS[chainId][key], lpToken: key }
   })
-
   
   const summonerInfo = useSummonerInfo()
   const positions = usePositions()
@@ -174,6 +176,18 @@ export default function Mines(): JSX.Element {
     const poolTvl = tvl.find((r) => getAddress(r.lpToken) == getAddress(pool?.lpToken))
     return previousValue + (currentValue.amount / 1e18) * poolTvl?.lpPrice
   }, 0)
+
+  // harvests: all staked pools (for user)
+  const handleHarvestAll = async () => {
+    try {
+      let tx
+      tx = SummonerContract?.harvestAll()
+      await tx?.wait()
+  } catch (e) {
+      console.log(e)
+      return
+  }
+}
   
   return (
     <>
@@ -214,34 +228,14 @@ export default function Mines(): JSX.Element {
               CLAIM ALL {formatNumberScale(allStaked, true)}
             </Button>
           )}
-          {
-            chainId != ChainId.FANTOM && (
-
-              
+          { chainId != ChainId.FANTOM && (
               <Button
               color="greydient"
               className="text-emphasis"
               variant="flexed"
               size={"sm"}
               disabled={pendingTx}
-              onClick={async () => {
-                setPendingTx(true)
-                for (const pos of positions) {
-                  try {
-                    pids.push(Number([pos.id]))
-                  } catch (error) {
-                    console.log('pids:%s', pids)
-                    console.error(error)
-                  }
-                }
-                  try {
-                    const tx = await harvestAll(chainId, pids)
-                    addTransaction(tx)
-                  } catch (error) {
-                    console.error(error)
-                  }
-                setPendingTx(false)
-              }}
+              onClick={() => handleHarvestAll()}
             >
               CLAIM ALL {formatNumberScale(allStaked, true)}
             </Button>
@@ -252,7 +246,6 @@ export default function Mines(): JSX.Element {
             variant={'outlined'}
             size={"sm"}
           >
-            {/* {'TOTAL: '} */}
             {formatNumberScale(summTvl, true)} {' '} TOTAL
           </Button>
         </div> 

@@ -122,7 +122,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
     const isActive = pairStatus == "active"
 
     // COLOR //
-    const buttonColor = isUnderworldPair ? "#0993EC" : !isActive ? "#F338C3" : "#B485FF"
+    const buttonColor = getChainColor(chainId)
     const buttonTextColor = isSwapPair && isActive ? "black" : "white"
     const textColor = isUnderworldPair ? "text-blue" : !isActive ? "text-pink" : "text-dark-600"
     const tokenSymbol = isUnderworldPair ? token0Symbol : "LP"
@@ -688,7 +688,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                     <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
-                                            primaryColor={getChainColor[chainId]}
+                                            primaryColor={buttonColor}
                                             color={'#FFFFFF'}
                                             className={'font-bold'}
                                             margin=".5rem 0 .5rem 0"
@@ -870,7 +870,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                     <Wrap padding="0" margin="0" display="flex">
                         <SubmitButton
                             height="2rem"
-                            primaryColor={"#515151"}
+                            primaryColor={buttonColor}
                             color={"#FFFFFF"}
                             className={'font-bold'}
                             margin=".5rem 0 0rem 0"
@@ -886,7 +886,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                     <Wrap padding="0" margin="0" display="flex">
                         <SubmitButton
                             height="2rem"
-                            primaryColor={'#B383FF'}
+                            primaryColor={buttonColor}
                             color={'#FFFFFF'}
                             className={'font-bold'}
                             margin=".5rem 0 0rem 0"
@@ -904,7 +904,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                     <Wrap padding="0" margin="0" display="flex">
                         <SubmitButton
                             height="2rem"
-                            primaryColor={'#6c42c0'}
+                            primaryColor={buttonColor}
                             color={"#FFFFFF"}
                             className={'font-bold'}
                             margin=".5rem 0 0rem 0"
@@ -912,7 +912,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                 handleZap(zapTokenAddress, lpAddress)
                             }
                         >
-                            ZAP INTO {token0Symbol + '-' + token1Symbol}
+                            ZAP INTO {farm.lpSymbol}
                         </SubmitButton>
                     </Wrap>
                     {/* } */}
