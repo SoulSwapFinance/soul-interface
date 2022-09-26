@@ -15,6 +15,7 @@ import { useActiveWeb3React } from 'services/web3'
 import { useCoffinBalanceV2 } from 'state/coffinbox/hooks'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import React, { FC, useCallback, useState } from 'react'
+import { getChainColorCode } from 'constants/chains'
 
 interface DepositViewProps {
   onBack(): void
@@ -22,7 +23,7 @@ interface DepositViewProps {
 }
 
 const DepositView: FC<DepositViewProps> = ({ onClose, onBack }) => {
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const currency = useBalancesSelectedCurrency()
   const [attemptingTxn, setAttemptingTxn] = useState<boolean>(false)
   const walletBalance = useCurrencyBalance(account ?? undefined, currency)
@@ -67,6 +68,7 @@ const DepositView: FC<DepositViewProps> = ({ onClose, onBack }) => {
         onChange={(val) => setValue(val)}
         value={value}
         spendFromWallet={true}
+        showMax={false}
       />
       <div className="flex justify-center -mt-6 -mb-6 z-10">
         <div className="p-1.5 rounded-full bg-dark-800 border border-dark-800 shadow-md border-dark-700">
@@ -92,7 +94,7 @@ const DepositView: FC<DepositViewProps> = ({ onClose, onBack }) => {
           const buttonText = error ? error : i18n._(t`Confirm Deposit`)
 
           return (
-            <Button loading={attemptingTxn || loading} color="blue" disabled={disabled} onClick={execute}>
+            <Button loading={attemptingTxn || loading} color={getChainColorCode(chainId)} disabled={disabled} onClick={execute}>
               <Typography variant="sm" weight={700} className={!error ? 'text-high-emphesis' : 'text-low-emphasis'}>
                 {buttonText}
               </Typography>

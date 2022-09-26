@@ -1,12 +1,7 @@
 import {
-  ChainId,
-  // MULTICALL_ADDRESS,
   FACTORY_ADDRESS,
-
   SOUL_ADDRESS,
   SOUL_SUMMONER_ADDRESS,
-  AUTO_STAKE_ADDRESS,
-  SOUL_GUIDE_ADDRESS,
   WNATIVE,
 } from 'sdk'
 
@@ -18,7 +13,6 @@ import MULTICALL_ABI from 'constants/abis/multicall.json'
 import FACTORY_ABI from 'constants/abis/factory.json'
 
 // soul
-import SOUL_GUIDE_ABI from 'constants/abis/multicall.json'
 import SOUL_SUMMONER_ABI from 'constants/abis/soulswap/soulsummoner.json' 
 import SOUL_BOND_ABI from 'features/bond/constants/abis/soulbond.json' 
 import PRICE_HELPER_ABI from 'features/bond/constants/abis/pricehelper.json' 

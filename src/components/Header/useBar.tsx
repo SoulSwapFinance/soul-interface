@@ -142,7 +142,7 @@ const useMenu: UseBar = () => {
         icon: <PoolIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
       })
 
-    if (featureEnabled(Feature.SOULSWAP, chainId)) {
+    if (featureEnabled(Feature.SEANCE, chainId)) {
       const farmItems = {
         key: 'soulswap',
         title: i18n._(t`SoulSwap`),
@@ -213,11 +213,6 @@ const useMenu: UseBar = () => {
             key: 'vault',
             title: i18n._(t`Vault`),
             link: '/autostake',
-          },
-          {
-            key: 'staking',
-            title: i18n._(t`Stake`),
-            link: '/seance',
           },
           {
             key: 'bonds',

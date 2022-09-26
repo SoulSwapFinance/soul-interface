@@ -15,8 +15,8 @@ const items = (i18n: I18n) => [
   },
   {
     name: i18n._(t`Stake`),
-    description: i18n._(t`Stake Soul for Soul.`),
-    href: '/seance',
+    description: i18n._(t`Autocompound your Soul Rewards.`),
+    href: '/autostake',
   },
   {
     name: i18n._(t`Earn`),

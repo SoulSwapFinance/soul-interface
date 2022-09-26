@@ -12,6 +12,7 @@ import { useActiveWeb3React } from 'services/web3'
 import cookie from 'cookie-cutter'
 import Image from 'next/image'
 import React, { FC, Fragment } from 'react'
+import { getChainColorCode } from 'constants/chains'
 
 interface NetworkGuardProps {
   children?: React.ReactChild
@@ -24,7 +25,7 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
 
   const link = (
     <NavLink href="/swap">
-      <a className="text-blue focus:outline-none">{i18n._(t`home page`)}</a>
+      <a className={`text-${getChainColorCode(chainId)} focus:outline-none`}>{i18n._(t`Return`)}</a>
     </NavLink>
   )
 
@@ -44,18 +45,19 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
         onDismiss={() => null}
         transparent={true}
       >
-        <div className="flex flex-col gap-7 justify-center p-4 mt-10 lg:mt-0">
-          <Typography variant="h1" className="max-w-2xl text-white text-center" weight={700}>            {i18n._(t`Roll it back - this feature is not yet supported on ${NETWORK_LABEL[chainId]}.`)}
+        <div className="flex flex-col gap-2 justify-center p-4 mt-10 lg:mt-0">
+          <Typography className="max-w-2xl text-lg sm:text-2xl text-white text-center" weight={700}>            {
+          i18n._(t`Unavailable on ${NETWORK_LABEL[chainId]}.`)}
           </Typography>
           <Typography className="text-center">
             <Trans
-              id="Either return to the {link}, or change to an available network."
+              id="{link} or change network."
               values={{ link }}
               components={Fragment}
             />
           </Typography>
           <Typography className="uppercase text-white text-center text-lg tracking-[.2rem]" weight={700}>
-            {i18n._(t`Available Networks`)}
+            {i18n._(t`Supported On`)}
           </Typography>
           <div className="flex gap-5 md:gap-10 justify-center">
             {supportedNetworks.map((key: string, idx: number) => (

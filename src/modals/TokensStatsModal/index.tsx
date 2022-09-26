@@ -396,7 +396,7 @@ export default function TokenStatsModal(): JSX.Element | null {
           type='flexed'
           size='xs'
         >
-          <NavLink href={'/seance'}>
+          <NavLink href={'/autostake'}>
             <a className="flex justify-center text-white text-xl transition rounded-md hover:pink">
              <span>STAKE SOUL</span>
             </a>

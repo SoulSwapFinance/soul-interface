@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext, createContext, ReactNode, FC, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
-import { ChainId, Currency, FTM, ROUTER_ADDRESS, SOUL, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, Token, WNATIVE_ADDRESS } from 'sdk'
+import { ChainId, ROUTER_ADDRESS, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, Token } from 'sdk'
 import { useTokenContract, useSoulSummonerContract, useZapperContract } from 'hooks/useContract'
 import useApprove from 'features/bond/hooks/useApprove'
 import { Tab } from '@headlessui/react'
@@ -65,7 +65,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
     const pairType = summonerPoolInfo.pairType
     const pairStatus = summonerPoolInfo.status
 
-    const { userInfo } = useUserInfo()
+    // const { userInfo } = useUserInfo()
     const { pairInfo } = usePairInfo(lpToken)
     // assumes 18, since only SOUL-LP farms are eligible for Zap
     // const lpSymbol = pairInfo.lpSymbol
@@ -122,7 +122,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
     const isActive = pairStatus == "active"
 
     // COLOR //
-    const buttonColor = isUnderworldPair ? "#0993EC" : !isActive ? "#F338C3" : "#B485FF"
+    const buttonColor = getChainColor(chainId)
     const buttonTextColor = isSwapPair && isActive ? "black" : "white"
     const textColor = isUnderworldPair ? "text-blue" : !isActive ? "text-pink" : "text-dark-600"
     const tokenSymbol = isUnderworldPair ? token0Symbol : "LP"
@@ -134,22 +134,15 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
 
     // Zap Add-Ons //
     const tokenContract = useTokenContract(zapTokenAddress)
-
-    // console.log('tokenAddress:%s', tokenContract?.address)
     const { tokenInfo } = useTokenInfo(zapTokenAddress)
-
     const tokenDecimals = Number(tokenInfo.decimals)
     const tokenAddress = zapTokenAddress
-    // console.log('tokenAddress:%s', tokenContract?.address)
     const selectedTokenSymbol = tokenInfo.symbol
     const tokenName = tokenInfo.name
-    // console.log('tokenDecimals:%s', tokenDecimals)
 
     const token = new Token(chainId, tokenAddress, tokenDecimals, selectedTokenSymbol, tokenName)
 
     const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
-    // const pair = new Token(chainId, farm.lpToken.address, 18)
-    // console.log('lpAddress:%s', lpAddress)
 
     // USER INFO //
     const { userTokenInfo } = useUserTokenInfo(account, zapTokenAddress)
@@ -160,7 +153,6 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
     // const parsedZapValue = tryParseAmount(zapValue, token)
 
     const [modalOpen, setModalOpen] = useState(true)
-    // const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined)
 
     const handleDismissSearch = useCallback(() => {
         setModalOpen(false)
@@ -184,24 +176,11 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
         }
     }
 
-    // const handleShowDeposit = () => {
-    //     setOpenDeposit(!openDeposit)
-    //     if (openDeposit) {
-    //         fetchApproval()
-    //     }
-    // }
-
-    // const handleShowWithdraw = () => {
-    //     setOpenWithdraw(!openWithdraw)
-    // }
-
     const handleShowZap = (pid) => {
         setOpenZap(!openZap)
     }
 
-    /**
-     * Checks if the user has approved SoulSummonerAddress to move lpTokens
-     */
+    // checks: approval for summoner to move tokens.
     const fetchApproval = async () => {
         if (!account) {
             // alert('Connect Wallet')
@@ -213,9 +192,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
         }
     }
 
-    /**
-     * Checks if the user has approved ZapContractAddress to move lpTokens
-     */
+    // checks: user's approval for ZapContractAddress to move tokens.
     const fetchZapApproval = async () => {
         if (!account) {
             // alert('Connect Wallet')
@@ -228,7 +205,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
         }
     }
 
-    // enables: summoner tranfers approval
+    // enables: summoner tranfers approval.
     const handleApprove = async () => {
         if (!account) {
             // alert('Connect Wallet')
@@ -244,9 +221,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
         }
     }
 
-    /**
-     * Approves ZapContractAddress to move selectedToken
-     */
+    // approves ZapContractAddress to move selectedToken
     const handleZapApprove = async (tokenContract) => {
         try {
             let tx
@@ -258,9 +233,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
         }
     }
 
-    /**
-     * Withdraw Liquidity Asset
-     */
+    // withdraws: lp from summoner
     const handleWithdraw = async (pid) => {
         try {
             const tx = await SoulSummonerContract?.withdraw(pid, Number(withdrawValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
@@ -272,27 +245,27 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
         }
     }
 
-    // HANDLE HARVEST //
+    // handles: harvest for given pid
     const handleHarvest = async (pid) => {
         try {
             let tx
             tx = await SoulSummonerContract?.deposit(pid, 0)
             await tx?.wait()
         } catch (e) {
-            // alert(e.message)
             console.log(e)
         }
     }
 
-    // HANDLE DEPOSIT //
+    // deposits: selected amount into the summoner
     const handleDeposit = async (pid) => {
+        let tx
         try {
-            const tx = await SoulSummonerContract?.deposit(pid, Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
+            tx = await SoulSummonerContract?.deposit(pid, Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx.wait()
         } catch (e) {
             const smallerValue = Number(depositValue) - 0.000001
-            const tx = await SoulSummonerContract?.deposit(pid, Number(smallerValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
-            // alert(e.message)
+            tx = await SoulSummonerContract?.deposit(pid, Number(smallerValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
+            await tx.wait()
             console.log(e)
         }
     }
@@ -335,28 +308,6 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                 </FarmItemBox>
                             </div>
 
-                        {/* <HideOnMobile>
-                            <FarmItemBox>
-                                <FarmItem>
-                                    {Number(apr).toString() === '0.00' ? (
-                                        <Text padding="0" fontSize="1rem" color="#666">
-                                            0
-                                        </Text>
-                                    ) : (
-                                        <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                        {Number(stakedBalance) == 0 ? '0' 
-                                            : Number(stakedBalance).toFixed(0).toString() == '0' ? Number(stakedBalance).toFixed(6)
-                                                : Number(stakedBalance)
-                                                    .toFixed(0)
-                                                    .toString()
-                                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                                        }
-                                        </Text>
-                                    )}
-                                </FarmItem>
-                            </FarmItemBox>
-                        </HideOnMobile> */}
-
                             {/* STAKED VALUE */}
                             <HideOnMobile>
                                 <FarmItemBox>
@@ -366,17 +317,14 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                                 0
                                             </Text>
                                         ) : (
-                                            <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                                ${Number(stakedValue) == 0 ? '0'
-                                                    : Number(stakedValue).toString(4) == '0.0000' ? '<0.0000'
-                                                        : Number(stakedValue) < 1 && Number(stakedValue).toString(4)
-                                                            ? Number(stakedValue).toFixed(4)
-                                                            : Number(stakedValue) > 0
-                                                                ? Number(stakedValue).toFixed(0)
-                                                                    .toString()
-                                                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                                                                : 0
-                                                }
+                                        <Text padding="0" fontSize="1rem" color="#FFFFFF">
+                                            ${
+                                                stakedValue == 0 ? 0
+                                                    : stakedValue.toString(4) == '0.0000' ? '<0.0000'
+                                                    : stakedValue < 1 && stakedValue.toString(4) ? stakedValue.toFixed(4)
+                                                    : stakedValue > 0 ? stakedValue.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                                                : 0
+                                            }
                                             </Text>
                                         )}
                                     </FarmItem>
@@ -387,13 +335,13 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                             <HideOnSmall>
                                 <FarmItemBox>
                                     <FarmItem>
-                                        {Number(stakedValue).toFixed(0).toString() === '0' ? (
+                                        {stakedValue.toFixed(0).toString() === '0' ? (
                                             <Text padding="0" fontSize="1rem" color="#666">
                                                 0%
                                             </Text>
                                         ) : (
                                             <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                                {(Number(stakedValue) / Number(liquidity) * 100).toFixed(0)}%
+                                                {(stakedValue / Number(liquidity) * 100).toFixed(0)}%
                                             </Text>
                                         )}
                                     </FarmItem>
@@ -644,7 +592,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                                 color={'#FFFFFF'}
                                                 margin=".5rem 0 .5rem 0"
                                                 onClick={() => handleApprove()}>
-                                                APPROVE {tokenSymbol}
+                                                APPROVE {farm.lpSymbol}
                                             </SubmitButton>
                                         </Wrap>
                                     </FunctionBox>
@@ -662,7 +610,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                             handleDeposit(pid)
                                         }
                                     >
-                                        DEPOSIT {Number(allocPoint) == 420 ? token0Symbol : tokenSymbol}
+                                        DEPOSIT {Number(allocPoint) == 420 ? token0Symbol : farm.lpSymbol}
                                     </SubmitButton>
                                 )}
 
@@ -688,7 +636,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                     <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
-                                            primaryColor={getChainColor[chainId]}
+                                            primaryColor={buttonColor}
                                             color={'#FFFFFF'}
                                             className={'font-bold'}
                                             margin=".5rem 0 .5rem 0"
@@ -718,12 +666,12 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                                 Staked Balance
                                             </Typography>
                                             <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(stakedBalance, false, true)} {tokenSymbol}
+                                                {formatNumber(stakedBalance, false, true)} {farm.lpSymbol}
                                             </Typography>
                                         </div>
                                     )}
 
-                                    {Number(stakedValue) > 0 && (
+                                    {stakedValue > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
                                                 Balance (USD)
@@ -742,7 +690,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                             Maximum Fee
                                         </Typography>
                                         <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                            {formatNumber(Number(stakedBalance) - withdrawable, false, true)} {tokenSymbol}
+                                            {formatNumber(Number(stakedBalance) - withdrawable, false, true)} {farm.lpSymbol}
                                         </Typography>
                                     </div>
 
@@ -806,7 +754,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                             setShowConfirmation(true)
                                         }
                                     >
-                                        WITHDRAW {tokenSymbol}
+                                        WITHDRAW {farm.lpSymbol}
                                     </SubmitButton>
 
                                 </Wrap>
@@ -870,7 +818,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                     <Wrap padding="0" margin="0" display="flex">
                         <SubmitButton
                             height="2rem"
-                            primaryColor={"#515151"}
+                            primaryColor={buttonColor}
                             color={"#FFFFFF"}
                             className={'font-bold'}
                             margin=".5rem 0 0rem 0"
@@ -886,7 +834,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                     <Wrap padding="0" margin="0" display="flex">
                         <SubmitButton
                             height="2rem"
-                            primaryColor={'#B383FF'}
+                            primaryColor={buttonColor}
                             color={'#FFFFFF'}
                             className={'font-bold'}
                             margin=".5rem 0 0rem 0"
@@ -904,7 +852,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                     <Wrap padding="0" margin="0" display="flex">
                         <SubmitButton
                             height="2rem"
-                            primaryColor={'#6c42c0'}
+                            primaryColor={buttonColor}
                             color={"#FFFFFF"}
                             className={'font-bold'}
                             margin=".5rem 0 0rem 0"
@@ -912,7 +860,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                 handleZap(zapTokenAddress, lpAddress)
                             }
                         >
-                            ZAP INTO {token0Symbol + '-' + token1Symbol}
+                            ZAP INTO {farm.lpSymbol}
                         </SubmitButton>
                     </Wrap>
                     {/* } */}
@@ -934,7 +882,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                 Estimated Fee Outcomes
                             </div>
                             • <b>Current Rate</b>: {Number(withdrawFee).toFixed(0)}% <br />
-                            • <b>Fee Amount</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) / 100, false, true)} {tokenSymbol}<br />
+                            • <b>Fee Amount</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) / 100, false, true)} {farm.lpSymbol}<br />
                             • <b>Fee Value</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) * Number(lpPrice) / 100, true, true)}
 
                             <div className="mt-6 text-center">

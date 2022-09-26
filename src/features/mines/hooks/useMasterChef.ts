@@ -6,6 +6,7 @@ import { useCallback } from 'react'
 
 import { Chef } from '../enum'
 import { useSummonerContract } from 'hooks'
+import { ChainId } from 'sdk'
 
 export default function useMasterChef() {
   const { account } = useActiveWeb3React()

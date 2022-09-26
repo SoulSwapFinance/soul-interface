@@ -8,16 +8,15 @@ import SDK, {
   InsufficientFundsError,
   InsufficientLiquidityError
 } from "rubic-sdk";
-import { CrossChainMinAmountError } from "rubic-sdk/lib/common/errors/cross-chain/cross-chain-min-amount.error";
 import { sleep } from "utils/sleep";
 import { ArrowDownIcon, ArrowRightIcon } from '@heroicons/react/solid'
 import { BigNumber as EthersBigNumber, ethers } from "ethers";
 import { FANTOM, AVALANCHE, BINANCE, Chain, CHAINS, ETHEREUM, POLYGON, MOONRIVER, Token } from "features/cross/chains";
 import { ERC20_ABI } from "constants/abis/erc20";
 import { useActiveWeb3React } from "services/web3";
-import { useUserInfo, useUserTokenInfo } from "hooks/useAPI";
+import { useUserInfo } from "hooks/useAPI";
 import { Button } from "components/Button";
-import { useNetworkModalToggle, useWalletModalToggle } from "state/application/hooks";
+import { useNetworkModalToggle } from "state/application/hooks";
 import { OverlayButton } from "components/index";
 import Typography from "components/Typography";
 import { formatNumber, formatPercent } from "functions/format";
@@ -28,14 +27,13 @@ import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
 import SwapHeader from "features/swap/SwapHeader";
 import { SwapLayoutCard } from "layouts/SwapLayout";
 import Modal from "components/DefaultModal";
-import { ChainId } from "sdk";
 import { useETHBalances } from "state/wallet/hooks";
 import NetworkModal from "modals/NetworkModal";
 import { AutoColumn } from "components/Column";
-import useFantomERC20 from "hooks/useFantomERC20"
 import Row from "components/Row";
 import ModalHeader from "components/Modal/Header";
 import { WrappedCrossChainTrade } from "rubic-sdk/lib/features/cross-chain/providers/common/models/wrapped-cross-chain-trade";
+import { useMulticallContract } from "hooks/useContract";
 
 interface Exchange {
   from: { chain: Chain; token: Token };
@@ -127,13 +125,13 @@ export default function Exchange() {
   }, []);
 
   const { account, chainId } = useActiveWeb3React()
-  const { userInfo } = useUserInfo()
+  // const { userInfo } = useUserInfo()
   // const { userTokenInfo } = useUserTokenInfo(account, from.address)
   // const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
 
-  let nativeBalance = //userEthBalance ?
-    fromChain?.chainId == ChainId.FANTOM ? (Number(userInfo.nativeBalance) * 1E18).toFixed(0)
-      : 0
+  // let nativeBalance = //userEthBalance ?
+  // [ChainId.AVALANCHE, ChainId.FANTOM].includes(fromChain?.chainId) ? (Number(userInfo.nativeBalance) * 1E18).toFixed(0)
+  //     : 0
   // Number(userEthBalance) 
 
   const [wallet, setWallet] = useState<WalletProvider>(null)
@@ -177,30 +175,22 @@ export default function Exchange() {
     update();
   }, [rubic, wallet, providerAddress]);
 
-  // useEffect(() => {
-  // if (web3.connection === Web3Connection.ConnectedWrongChain) {
-  // web3.switchChain();
-  // }
-  //   if (chainId !== fromChain?.chainId)
-  //   <div
-  //   className="flex items-center justify-center px-4 py-2 font-semibold text-white border rounded bg-opacity-80 border-red bg-red hover:bg-opacity-100"
-  //   onClick={toggleWalletModal}
-  // ></div>
-  // }, [])
-
   const [decimals, setDecimals] = useState<number>(18);
   const provider = useMemo(() => new ethers.providers.JsonRpcProvider(fromChain?.rpc[0]), [fromChain]);
+  
+  const MulticallContract = useMulticallContract()
+  const nativeBalance = MulticallContract.getEthBalance(account)
 
   async function getBalance(): Promise<EthersBigNumber> {
     if (!account) {
       return EthersBigNumber.from(0);
     }
     if (from.isNative) {
-      return EthersBigNumber.from((Number(nativeBalance)).toFixed(0))
+      return nativeBalance
     }
-    const IER20 = new ethers.Contract(from.address, ERC20_ABI, provider);
+    const IERC20 = new ethers.Contract(from.address, ERC20_ABI, provider);
     try {
-      return await IER20.balanceOf(account);
+      return await IERC20.balanceOf(account);
     } catch (e) {
       return EthersBigNumber.from(0);
     }
@@ -669,7 +659,8 @@ export default function Exchange() {
                     <Typography className={classNames('sm:text-lg text-md font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
                       {trade
                         ? `${formatNumber(Number(toAmount), false, true)} ${to?.symbol} (${formatNumber(Number(toUsd), true, true)})`
-                        : "0 ($0.00)"}
+                        :  "0 ($0.00)"
+                      }
                     </Typography>
                   </div>
                 </div>
@@ -736,7 +727,9 @@ export default function Exchange() {
                   </div>
                 </div>
               }
-              <TradeDetail trade={trade} />
+              <TradeDetail 
+                trade={trade}
+              />
               <div
                 className="rounded border border-2"
                 style={{ borderColor: toChain?.color, backgroundColor: toChain?.color }}
@@ -786,9 +779,11 @@ export default function Exchange() {
 interface TradeDetailProps {
   trade?: InstantTrade | WrappedCrossChainTrade;
 }
+
 function isCrossChainTrade(trade: InstantTrade | WrappedCrossChainTrade): trade is WrappedCrossChainTrade {
-  return // return "transitFeeToken" in trade;
+  return;
 }
+
 const TradeDetail: FC<TradeDetailProps> = ({ trade }) => {
   let min: string;
   if (trade) {

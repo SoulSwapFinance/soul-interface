@@ -12,7 +12,7 @@ import { ApprovalState, useApproveCallback, useAutoStakeContract, useLuxorStakeH
 import { getAddress } from '@ethersproject/address'
 import { SEANCE_ADDRESS, AUTO_STAKE_ADDRESS, max, Token, SOUL } from 'sdk'
 import { SOUL_ADDRESS } from 'constants/addresses'
-import { tryParseAmount, formatNumber } from 'functions'
+import { tryParseAmount, formatNumber, classNames } from 'functions'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import { useTransactionAdder } from 'state/transactions/hooks'
 import Dots from 'components/Dots'
@@ -25,6 +25,8 @@ import { useLuxorPrice, useSoulPrice } from 'hooks/getPrices'
 import { useAutoStakeInfo, useLuxorInfo, useLuxorUserInfo, useUserAutoStakeInfo } from 'hooks/useAPI'
 // import useSendTransaction from 'hooks/useSendTransaction'
 import { SubmitButton } from 'features/autostake/Styles'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums/Feature'
 
 export default function Stake() {
   const addTransaction = useTransactionAdder()
@@ -173,7 +175,7 @@ export default function Stake() {
             </a>
           </NavLink>
         </Button>
-        <Button variant="filled" color="purple" size="lg">
+        <Button variant="filled" color="purple" size="lg" className={classNames([250].includes(chainId) ? '' : 'hidden')}>
           <NavLink href={'/seance'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Stake </span>
@@ -380,3 +382,5 @@ export default function Stake() {
     </Container>
   )
 }
+
+Stake.Guard = NetworkGuard(Feature.SEANCE)

@@ -1,4 +1,4 @@
-import { ChainId, SEANCE_ADDRESS, SOUL_ADDRESS, USDC_ADDRESS, LUX_ADDRESS, WLUM_ADDRESS, WNATIVE_ADDRESS, AVAX_ADDRESS, SOUL_NATIVE_ADDRESS, DAI_ADDRESS, BNB_ADDRESS, SOR_ADDRESS, WETH_ADDRESS, WBTC_ADDRESS, CRV_ADDRESS, GRIMEVO_ADDRESS, FUSD_ADDRESS, USDT_ADDRESS } from 'sdk'
+import { ChainId, SEANCE_ADDRESS, SOUL_ADDRESS, USDC_ADDRESS, LUX_ADDRESS, WLUM_ADDRESS, WNATIVE_ADDRESS, AVAX_ADDRESS, SOUL_NATIVE_ADDRESS, DAI_ADDRESS, BNB_ADDRESS, SOR_ADDRESS, WETH_ADDRESS, WBTC_ADDRESS, CRV_ADDRESS, GRIMEVO_ADDRESS, FUSD_ADDRESS, USDT_ADDRESS, SOUL_USDC_ADDRESS, USDC_NATIVE_ADDRESS, BTC_NATIVE_ADDRESS, ETH_NATIVE_ADDRESS, USDC_DAI_ADDRESS } from 'sdk'
 
 export const InactiveAvalanchePools = [
   // { 
@@ -53,7 +53,52 @@ export const AvalanchePools = [
     lpSymbol: 'SOUL-AVAX',
     lpAddress: SOUL_NATIVE_ADDRESS[ChainId.AVALANCHE],
     token0Address: SOUL_ADDRESS[ChainId.AVALANCHE],
-    token1Address: AVAX_ADDRESS[ChainId.AVALANCHE],
+    token1Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+  },
+  {
+    pid: 2,
+    token1: 'SOUL',
+    token2: 'USDC',
+    lpSymbol: 'SOUL-USDC',
+    lpAddress: SOUL_USDC_ADDRESS[ChainId.AVALANCHE],
+    token0Address: SOUL_ADDRESS[ChainId.AVALANCHE],
+    token1Address: USDC_ADDRESS[ChainId.AVALANCHE],
+  },
+  {
+    pid: 3,
+    token1: 'AVAX',
+    token2: 'USDC',
+    lpSymbol: 'AVAX-USDC',
+    lpAddress: USDC_NATIVE_ADDRESS[ChainId.AVALANCHE],
+    token0Address: USDC_ADDRESS[ChainId.AVALANCHE],
+    token1Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+  },
+  {
+    pid: 4,
+    token1: 'AVAX',
+    token2: 'BTC',
+    lpSymbol: 'AVAX-BTC',
+    lpAddress: BTC_NATIVE_ADDRESS[ChainId.AVALANCHE],
+    token0Address: WBTC_ADDRESS[ChainId.AVALANCHE],
+    token1Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+  },
+  {
+    pid: 5,
+    token1: 'AVAX',
+    token2: 'ETH',
+    lpSymbol: 'AVAX-ETH',
+    lpAddress: ETH_NATIVE_ADDRESS[ChainId.AVALANCHE],
+    token0Address: WETH_ADDRESS[ChainId.AVALANCHE],
+    token1Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+  },
+  {
+    pid: 6,
+    token1: 'USDC',
+    token2: 'DAI',
+    lpSymbol: 'USDC-DAI',
+    lpAddress: USDC_DAI_ADDRESS[ChainId.AVALANCHE],
+    token0Address: USDC_ADDRESS[ChainId.AVALANCHE],
+    token1Address: DAI_ADDRESS[ChainId.AVALANCHE],
   },
 ]
 

@@ -9,7 +9,7 @@ import { StandardSignatureData, useTridentLiquidityTokenPermit } from 'hooks/use
 import { useActiveWeb3React } from 'services/web3'
 import { useWalletModalToggle } from 'state/application/hooks'
 import React, { FC, memo, ReactNode, useCallback, useEffect, useState } from 'react'
-import { getChainColor } from 'constants/chains'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 
 interface TokenApproveButtonProps {
   id: string
@@ -79,8 +79,8 @@ const TokenApproveButton: FC<TokenApproveButtonProps> = memo(
         <Button 
           id={id} 
           className="w-full"
+          color={getChainColorCode(chainId)}
           loading={approveState === ApprovalState.PENDING} 
-          color={getChainColor(chainId)}
           onClick={handleApprove}>
           {i18n._(t`Approve ${inputAmount?.currency.symbol}`)}
         </Button>

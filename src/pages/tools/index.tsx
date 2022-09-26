@@ -17,9 +17,9 @@ const TOOLS = (i18n: I18n) => [
   },
   {
     id: 2,
-    name: 'BORROW & EARN',
-    description: 'Borrow $SEANCE with $SOUL and earn rewards.',
-    href: './seance'
+    name: 'LEND & EARN',
+    description: 'Lend assets, then farm to earn $SOUL rewards.',
+    href: './underworld'
   },
   {
     id: 3,

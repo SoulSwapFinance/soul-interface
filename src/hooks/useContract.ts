@@ -42,6 +42,7 @@ import {
   AUTO_STAKE_ADDRESS,
   SOUL_VAULT_ADDRESS,
   SOUL_GUIDE_ADDRESS,
+  BALANCES_FETCHER_ADDRESS,
   PRICE_HELPER_ADDRESS,
   HARVEST_HELPER_ADDRESS,
   TIMELOCK_ADDRESS,
@@ -68,7 +69,6 @@ import ARCHER_ROUTER_ABI from '../constants/abis/archer-router.json'
 import BASE_SWAPPER_ABI from '../constants/abis/swapper.json'
 import ANYSWAP_ERC20_ABI from '../constants/abis/anyswap_erc20.json'
 import SPOOKY_FACTORY_ABI from '../constants/abis/spookyswap-factory.json'
-import COFFINBOX_ABI from '../constants/abis/coffinbox.json'
 import SOUL_CIRCLE_ABI from 'constants/abis/soulswap/soulcircle.json' 
 import LUX_HELPER_ABI from 'constants/abis/lux-bond-helper.json' 
 import CHAINLINK_ORACLE_ABI from '../constants/abis/chainlink-oracle.json'
@@ -84,13 +84,14 @@ import FACTORY_ABI from '../constants/abis/factory.json'
 import ISoulSwapPairABI from '../constants/abis/soulswap/ISoulSwapPair.json'
 import AUTO_STAKE_ABI from '../constants/abis/soulswap/autostake.json'
 import UNDERWORLD_ABI from '../constants/abis/underworldpair.json'
-import MAKER_ABI from '../constants/abis/maker.json'
+import BALANCES_FETCHER_ABI from '../constants/abis/balancesfetcher.json'
 
 // soul
 import SOUL_SCARAB_ABI from '../constants/abis/soulswap/scarab.json'
 import SOUL_SAFE_ABI from '../constants/abis/soulswap/safe.json'
 import SOUL_GUIDE_ABI from '../constants/abis/soul-guide.json' // TODO: update abi
 import SOUL_SUMMONER_ABI from '../constants/abis/soulswap/soulsummoner.json' // 28 JUL
+import SOUL_MANIFESTER_ABI from '../constants/abis/soulswap/soulmanifester.json' // 28 JUL
 import LOTTERY_ABI from '../constants/abis/soulswap/lottery.json' // 28 JUL
 import SOULVAULT_ABI from '../constants/abis/soulswap/soulvault.json' // 31 JUL
 import LUXOR_ABI from '../constants/abis/soulswap/luxor.json'
@@ -245,6 +246,11 @@ export function useMulticallContract(): Contract | null {
   return useContract(chainId && MULTICALL_NETWORKS[chainId], MULTICALL_ABI, false)
 }
 
+export function useBalancesFetcherContract(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && BALANCES_FETCHER_ADDRESS[chainId], BALANCES_FETCHER_ABI, false)
+}
+
 export function useMulticall2Contract() {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && MULTICALL2_ADDRESS[chainId], MULTICALL2_ABI, false)
@@ -373,7 +379,9 @@ export function useTridentRouterContract(withSignerIfPossible?: boolean): Contra
 
 export function useMasterChefContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible) // 31 JUL (SOUL SUMMONER)
+  return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], 
+    chainId == ChainId.FANTOM ? SOUL_SUMMONER_ABI : SOUL_MANIFESTER_ABI,
+    withSignerIfPossible)
 }
 
 export function useCircleStakingContract(withSignerIfPossible?: boolean): Contract | null {
@@ -397,8 +405,11 @@ export function useStablePoolFactory(withSignerIfPossible?: boolean): Contract |
 
 export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible)
+  return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], 
+    chainId == ChainId.FANTOM ? SOUL_SUMMONER_ABI : SOUL_MANIFESTER_ABI,
+    withSignerIfPossible)
 }
+
 
 export function useLotteryContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
@@ -407,7 +418,9 @@ export function useLotteryContract(withSignerIfPossible?: boolean): Contract | n
 
 export function useSummonerContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible)
+  return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], 
+    chainId == ChainId.FANTOM ? SOUL_SUMMONER_ABI : SOUL_MANIFESTER_ABI,
+    withSignerIfPossible)
 }
 
 export function useAutoStakeContract(withSignerIfPossible?: boolean): Contract | null {
