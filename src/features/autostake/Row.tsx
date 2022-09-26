@@ -35,6 +35,7 @@ import Modal from 'components/Modal/DefaultModal'
 import ModalHeader from 'components/Modal/Header'
 import Typography from 'components/Typography'
 import { useAutoStakeInfo } from 'hooks/useAPI'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -636,7 +637,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
           </Typography>
           <SubmitButton
             height="2.5rem"
-            primaryColor="#EE82EE"
+            primaryColor={getChainColor(chainId)}
             color="black"
             onClick={() =>
               // setShowConfirmation(true)
