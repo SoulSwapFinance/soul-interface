@@ -462,6 +462,18 @@ export const SOUL_GUIDE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
 }
+
+export const BALANCES_FETCHER_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.ETHEREUM]: '0x386a4B75578C7843A6082EFe181D5d629236C047', // todo
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '0x9d6c13Bc5269E553C4697767b4c267FB33Dd8d1A', // todo
+  [ChainId.FANTOM]: '',
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '0xF0c5eCe120dbbe540121eAa65Ba206e511cdE021', // SEP22
+  [ChainId.MATIC]: '0x06a846BA430Ed005bE60f8598B4C563dbaa6feF0', // todo
+  [ChainId.MOONRIVER]: '',
+  [ChainId.ARBITRUM]: '',
+}
   
 export const DEFAULT_RECEIVER_ADDRESS: AddressMap = {
   //   [ChainId.AVALANCHE]: '0x042c99C84b00f11A08a07AA9752E083261083A57',

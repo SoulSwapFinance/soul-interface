@@ -7,6 +7,8 @@ import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import { useLuxorPrice } from 'hooks/getPrices'
 import { LuxorBanner } from 'components/Banner'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums/Feature'
 
 const Luxor = () => {
   const luxorPrice = useLuxorPrice()
@@ -66,4 +68,4 @@ const Luxor = () => {
 
 export default Luxor
 
-// Lux.Guard = NetworkGuard(Feature.BONDS)
+Luxor.Guard = NetworkGuard(Feature.LUXOR)

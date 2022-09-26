@@ -56,13 +56,15 @@ const features: FeatureMap = {
     Feature.LIQUIDITY_MINING,
     Feature.BONDS,
     Feature.VAULT,
-    // Feature.COFFINBOX,
+    Feature.COFFINBOX,
+    Feature.EXPLORE,
     // Feature.UNDERWORLD,
   ],
 
   [ChainId.FANTOM]: [
     Feature.AMM,
     Feature.SWAP,
+    Feature.SEANCE,
     Feature.VAULT,
     Feature.STAKING,
     Feature.LIQUIDITY,
@@ -75,7 +77,6 @@ const features: FeatureMap = {
     Feature.LUXOR,
     Feature.SOULSWAP,
     Feature.UNDERWORLD
-    // Feature.LIMIT_ORDERS,
   ],
 
   [ChainId.FANTOM_TESTNET]: [

@@ -20,7 +20,7 @@ import { LuxorBanner } from 'components/Banner'
 // import { useLuxTVL } from 'hooks/useV2Pairs'
 import { useSorContract, useLuxorContract, useWrappedLumensContract,  useLuxorStakingContract, useLuxorTreasuryContract, useSorMasterContract } from 'hooks/useContract'
 // import { LUX_TREASURY_ADDRESS, WFTM_ADDRESS } from 'constants/addresses'
-import { DAI_ADDRESS, SOR_ADDRESS, LUM_ADDRESS } from 'sdk'
+import { DAI_ADDRESS, SOR_ADDRESS, LUM_ADDRESS, LUX_ADDRESS } from 'sdk'
 // import useApprove from 'hooks/useApprove'
 // import { LUX_ADDRESS } from 'constants/addresses'
 import { usePairContract, useTokenContract } from 'hooks/useTokenContract'
@@ -30,6 +30,8 @@ import { Button } from 'components/Button'
 // import ExternalLink from 'components/ExternalLink'
 import LuxorGlowShadow from 'components/LuxorGlowShadow'
 import { useTokenInfo, usePairInfo, useSorInfo, useLuxorInfo, useUserTokenInfo } from 'hooks/useAPI'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums/Feature'
 
 export default function Dashboard() {
   const { i18n } = useLingui()
@@ -66,7 +68,7 @@ export default function Dashboard() {
   const LuxorDaiAddress = LuxDaiContract.address
   const FtmDaiAddress = FtmDaiContract.address
   const WrappedLumFantomAddress = WlumFtmContract.address
-  const LuxorAddress = LuxorContract.address
+  const LuxorAddress = LUX_ADDRESS[250]
   const LuxSorAddress = LuxSorContract.address
   const luxorSupply = Number(useTokenInfo(LuxorAddress).tokenInfo.supply) / 1e9
   // const wlumSupply = Number(useTokenInfo(WrappedLumensAddress).tokenInfo.supply) / 1e9
@@ -987,3 +989,5 @@ const HideOnMobile = styled.div`
   </Container>
   )
 }
+
+Dashboard.Guard = NetworkGuard(Feature.LUXOR)

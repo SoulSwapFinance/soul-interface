@@ -188,7 +188,7 @@ const BalancePanel: FC<Pick<SwapAssetPanel, 'disabled' | 'currency' | 'onChange'
   onChange,
   spendFromWallet,
 }) => {
-  const { i18n } = useLingui()
+  // const { i18n } = useLingui()
   const { account } = useActiveWeb3React()
   const balance = useCoffinOrWalletBalance(account ? account : undefined, currency, spendFromWallet)
 

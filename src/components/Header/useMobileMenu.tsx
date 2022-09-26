@@ -126,7 +126,7 @@ const useMobileMenu: UseMobileMenu = () => {
     //     items: poolMenu,
     //   })
 
-    if (featureEnabled(Feature.SOULSWAP, chainId)) {
+    if (featureEnabled(Feature.SEANCE, chainId)) {
       const farmItems = {
         key: 'Rewards',
         title: i18n._(t`Rewards`),
@@ -180,11 +180,6 @@ const useMobileMenu: UseMobileMenu = () => {
             key: 'vault',
             title: i18n._(t`Vault`),
             link: '/autostake',
-          },
-          {
-            key: 'staking',
-            title: i18n._(t`Stake`),
-            link: '/seance',
           },
           {
             key: 'bonds',

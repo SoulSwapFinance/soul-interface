@@ -134,22 +134,15 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
 
     // Zap Add-Ons //
     const tokenContract = useTokenContract(zapTokenAddress)
-
-    // console.log('tokenAddress:%s', tokenContract?.address)
     const { tokenInfo } = useTokenInfo(zapTokenAddress)
-
     const tokenDecimals = Number(tokenInfo.decimals)
     const tokenAddress = zapTokenAddress
-    // console.log('tokenAddress:%s', tokenContract?.address)
     const selectedTokenSymbol = tokenInfo.symbol
     const tokenName = tokenInfo.name
-    // console.log('tokenDecimals:%s', tokenDecimals)
 
     const token = new Token(chainId, tokenAddress, tokenDecimals, selectedTokenSymbol, tokenName)
 
     const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
-    // const pair = new Token(chainId, farm.lpToken.address, 18)
-    // console.log('lpAddress:%s', lpAddress)
 
     // USER INFO //
     const { userTokenInfo } = useUserTokenInfo(account, zapTokenAddress)
@@ -160,7 +153,6 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
     // const parsedZapValue = tryParseAmount(zapValue, token)
 
     const [modalOpen, setModalOpen] = useState(true)
-    // const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined)
 
     const handleDismissSearch = useCallback(() => {
         setModalOpen(false)
@@ -184,24 +176,11 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
         }
     }
 
-    // const handleShowDeposit = () => {
-    //     setOpenDeposit(!openDeposit)
-    //     if (openDeposit) {
-    //         fetchApproval()
-    //     }
-    // }
-
-    // const handleShowWithdraw = () => {
-    //     setOpenWithdraw(!openWithdraw)
-    // }
-
     const handleShowZap = (pid) => {
         setOpenZap(!openZap)
     }
 
-    /**
-     * Checks if the user has approved SoulSummonerAddress to move lpTokens
-     */
+    // checks: approval for summoner to move tokens.
     const fetchApproval = async () => {
         if (!account) {
             // alert('Connect Wallet')
@@ -213,9 +192,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
         }
     }
 
-    /**
-     * Checks if the user has approved ZapContractAddress to move lpTokens
-     */
+    // checks: user's approval for ZapContractAddress to move tokens.
     const fetchZapApproval = async () => {
         if (!account) {
             // alert('Connect Wallet')
@@ -228,7 +205,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
         }
     }
 
-    // enables: summoner tranfers approval
+    // enables: summoner tranfers approval.
     const handleApprove = async () => {
         if (!account) {
             // alert('Connect Wallet')
@@ -244,9 +221,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
         }
     }
 
-    /**
-     * Approves ZapContractAddress to move selectedToken
-     */
+    // approves ZapContractAddress to move selectedToken
     const handleZapApprove = async (tokenContract) => {
         try {
             let tx
@@ -258,9 +233,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
         }
     }
 
-    /**
-     * Withdraw Liquidity Asset
-     */
+    // withdraws: lp from summoner
     const handleWithdraw = async (pid) => {
         try {
             const tx = await SoulSummonerContract?.withdraw(pid, Number(withdrawValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
@@ -272,27 +245,27 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
         }
     }
 
-    // HANDLE HARVEST //
+    // handles: harvest for given pid
     const handleHarvest = async (pid) => {
         try {
             let tx
             tx = await SoulSummonerContract?.deposit(pid, 0)
             await tx?.wait()
         } catch (e) {
-            // alert(e.message)
             console.log(e)
         }
     }
 
-    // HANDLE DEPOSIT //
+    // deposits: selected amount into the summoner
     const handleDeposit = async (pid) => {
+        let tx
         try {
-            const tx = await SoulSummonerContract?.deposit(pid, Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
+            tx = await SoulSummonerContract?.deposit(pid, Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx.wait()
         } catch (e) {
             const smallerValue = Number(depositValue) - 0.000001
-            const tx = await SoulSummonerContract?.deposit(pid, Number(smallerValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
-            // alert(e.message)
+            tx = await SoulSummonerContract?.deposit(pid, Number(smallerValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
+            await tx.wait()
             console.log(e)
         }
     }
@@ -335,28 +308,6 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                 </FarmItemBox>
                             </div>
 
-                        {/* <HideOnMobile>
-                            <FarmItemBox>
-                                <FarmItem>
-                                    {Number(apr).toString() === '0.00' ? (
-                                        <Text padding="0" fontSize="1rem" color="#666">
-                                            0
-                                        </Text>
-                                    ) : (
-                                        <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                        {Number(stakedBalance) == 0 ? '0' 
-                                            : Number(stakedBalance).toFixed(0).toString() == '0' ? Number(stakedBalance).toFixed(6)
-                                                : Number(stakedBalance)
-                                                    .toFixed(0)
-                                                    .toString()
-                                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                                        }
-                                        </Text>
-                                    )}
-                                </FarmItem>
-                            </FarmItemBox>
-                        </HideOnMobile> */}
-
                             {/* STAKED VALUE */}
                             <HideOnMobile>
                                 <FarmItemBox>
@@ -366,17 +317,14 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                                 0
                                             </Text>
                                         ) : (
-                                            <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                                ${Number(stakedValue) == 0 ? '0'
-                                                    : Number(stakedValue).toString(4) == '0.0000' ? '<0.0000'
-                                                        : Number(stakedValue) < 1 && Number(stakedValue).toString(4)
-                                                            ? Number(stakedValue).toFixed(4)
-                                                            : Number(stakedValue) > 0
-                                                                ? Number(stakedValue).toFixed(0)
-                                                                    .toString()
-                                                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                                                                : 0
-                                                }
+                                        <Text padding="0" fontSize="1rem" color="#FFFFFF">
+                                            ${
+                                                stakedValue == 0 ? 0
+                                                    : stakedValue.toString(4) == '0.0000' ? '<0.0000'
+                                                    : stakedValue < 1 && stakedValue.toString(4) ? stakedValue.toFixed(4)
+                                                    : stakedValue > 0 ? stakedValue.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                                                : 0
+                                            }
                                             </Text>
                                         )}
                                     </FarmItem>
@@ -387,13 +335,13 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                             <HideOnSmall>
                                 <FarmItemBox>
                                     <FarmItem>
-                                        {Number(stakedValue).toFixed(0).toString() === '0' ? (
+                                        {stakedValue.toFixed(0).toString() === '0' ? (
                                             <Text padding="0" fontSize="1rem" color="#666">
                                                 0%
                                             </Text>
                                         ) : (
                                             <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                                {(Number(stakedValue) / Number(liquidity) * 100).toFixed(0)}%
+                                                {(stakedValue / Number(liquidity) * 100).toFixed(0)}%
                                             </Text>
                                         )}
                                     </FarmItem>
@@ -723,7 +671,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                         </div>
                                     )}
 
-                                    {Number(stakedValue) > 0 && (
+                                    {stakedValue > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
                                                 Balance (USD)

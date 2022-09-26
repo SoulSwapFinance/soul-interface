@@ -30,6 +30,8 @@ import useSoulMine from 'features/mines/hooks/useSoulMine'
 import { useUserTokenInfo, useStakeInfo } from 'hooks/useAPI'
 import { useSoulPrice } from 'hooks/getPrices'
 import { formatNumber } from 'functions/format'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums/Feature'
 // import { ArrowLeftIcon } from '@heroicons/react/solid'
 
 const INPUT_CHAR_LIMIT = 18
@@ -189,13 +191,6 @@ export default function SoulStake() {
       <div className="mb-1 md:mb-2" />
         {/* <Header /> */}
         <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
-        <Button variant="bordered" color="purple" size="lg">
-          <NavLink href={'/seance'}>
-            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Stake </span>
-            </a>
-          </NavLink>
-        </Button>
         <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/soul/dashboard'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
@@ -512,3 +507,5 @@ export default function SoulStake() {
     </div>
   )
 }
+
+SoulStake.Guard = NetworkGuard(Feature.SEANCE)

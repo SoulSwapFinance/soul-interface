@@ -5,7 +5,7 @@ import Typography from 'components/Typography'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import styled from 'styled-components'
-import { formatNumber } from 'functions'
+import { classNames, formatNumber } from 'functions'
 import DashboardDonutChart from 'components/Dashboard/DonutChart'
 import DashboardChartLegend from 'components/Dashboard/ChartLegend'
 import { useSeancePrice, useSoulPrice } from 'hooks/getPrices'
@@ -210,7 +210,7 @@ const HideOnMobile = styled.div`
         </HideOnMobile>
 
       <div className="flex ml-4 mr-4 mb-4 gap-1 items-center justify-center">
-        <Button variant="bordered" color="purple" size="lg">
+        <Button variant="bordered" color="purple" size="lg" className={classNames([ChainId.FANTOM].includes(chainId) ? '' : 'hidden')}>
           <NavLink href={'/seance'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Stake </span>

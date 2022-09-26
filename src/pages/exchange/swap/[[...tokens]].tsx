@@ -1,7 +1,7 @@
 import { ArrowDownIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Currency, JSBI, Token, Trade as V2Trade, TradeType } from 'sdk'
+import { ChainId, Currency, JSBI, Token, Trade as V2Trade, TradeType } from 'sdk'
 import { Button } from 'components/Button'
 import RecipientField from 'components/RecipientField'
 import Typography from 'components/Typography'
@@ -42,6 +42,7 @@ import SocialWidget from 'components/Social'
 import { getChainColorCode } from 'constants/chains'
 import { classNames } from 'functions/styling'
 import { NewFeature } from 'components/Banner'
+import NavLink from 'components/NavLink'
 // import CrossChainMode from 'components/CrossChainMode'
 
 const Swap = () => {
@@ -520,7 +521,7 @@ const Swap = () => {
           {isExpertMode && swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}
         {swapIsUnsupported ? <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} show={false} /> : null}
         {/* </div> */}
-        {/* <div className="flex border-dark-900 mt-3 mb-0 gap-1 items-center justify-center">
+        <div className="flex border-dark-900 mt-3 mb-0 gap-1 items-center justify-center">
                 <Button variant="filled" color="gradientPurpleBlue" size="lg">
                   <NavLink href={"/portfolio"}>
                         <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
@@ -529,14 +530,15 @@ const Swap = () => {
                   </NavLink>
                 </Button>
                 <Button variant="filled" color="gradientBluePurple" size="lg">
-                  <ExternalLink href={'https://cross.soulswap.finance'}>
+                <NavLink href={"/cross"}>
                         <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                         <span>Swap Crosschain</span>
                         </a>
-                  </ExternalLink>
+                  </NavLink>
                 </Button>
-              </div> */}
-        { <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
+              </div>
+        { [ChainId.FANTOM].includes(chainId) &&
+        <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
           <Toggle
             id="toggle-button"
             optionA="Chart"
