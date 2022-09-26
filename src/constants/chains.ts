@@ -27,14 +27,27 @@ export function getChainColor(chainId: number) {
 export function getChainColorCode(chainId: number) {
   let colorCode = 'ftmBlue'
   chainId == 250 ? colorCode = `ftmBlue`
-    : chainId == 43114 ? colorCode = `avaxRed`
-      : chainId == 1 ? colorCode = `ethBlue`
-        : chainId == 56 ? colorCode = `binanceGold`
-        : chainId == 137 ? colorCode = `maticPurple`
-          : chainId == 1285 ? colorCode = `moonriverTeal`
-            : `ftmBlue`
-
+  : chainId == 43114 ? colorCode = `avaxRed`
+  : chainId == 1 ? colorCode = `ethBlue`
+  : chainId == 56 ? colorCode = `binanceGold`
+  : chainId == 137 ? colorCode = `maticPurple`
+  : chainId == 1285 ? colorCode = `moonriverTeal`
+  : `ftmBlue`
+  
   return colorCode
+}
+
+export function getChainLogoURL(chainId: number) {
+  let logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/'
+  chainId== 250 ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/'
+    : chainId == 43114 ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/avalanche/assets/'
+      : chainId == 1 ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/ethereum/assets/'
+        : chainId == 56 ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/'
+        : chainId == 137 ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/'
+          : chainId == 1285 ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/'
+            : 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/'
+
+  return logoURL
 }
 
 export function getChainInfo(chainId: number, option: string) {

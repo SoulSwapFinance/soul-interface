@@ -485,6 +485,16 @@ export const USDC_ADDRESS: AddressMap = {
   [ChainId.MOONRIVER]: '0xE3F5a90F9cb311505cd691a46596599aA1A0AD7D',
 }
 
+export const USDT_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.FANTOM]: '0x049d68029688eAbF473097a2fC38ef61633A3C7A',
+  [ChainId.BSC]: '',
+  [ChainId.MATIC]: '',
+  [ChainId.AVALANCHE]: '',
+  [ChainId.MOONRIVER]: '',
+}
+
 export const WETH_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',

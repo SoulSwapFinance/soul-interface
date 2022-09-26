@@ -35,7 +35,7 @@ import Modal from 'components/Modal/DefaultModal'
 import ModalHeader from 'components/Modal/Header'
 import Typography from 'components/Typography'
 import { useAutoStakeInfo } from 'hooks/useAPI'
-import { getChainColor, getChainColorCode } from 'constants/chains'
+import { getChainColor, getChainColorCode, getChainLogoURL } from 'constants/chains'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -319,9 +319,9 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                             <Wrap>
                             <TokenLogo
                                 src={
-                                    'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
-                                    pool.token1Address[chainId] +
-                                    '/logo.png'
+                                    `${getChainLogoURL(chainId)} +
+                                    ${pool.token1Address[chainId]} +
+                                    '/logo.png`
                                 }
                                 alt="LOGO"
                                 width="44px"
@@ -461,38 +461,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                         showMax={false}
                                         showBalance={true}
                                     />
-                                    {/* <Wrap padding="0" margin="0" display="flex" justifyContent="space-between">
-                                        <Text fontSize=".9rem" padding="0" textAlign="left" color="#FFFFFF">
-                                                &nbsp;
-                                                {Number(stakedBal) === 0
-                                                    ? '0'
-                                                    : Number(stakedBal) < 0
-                                                        ? '<0'
-                                                        : Number(stakedBal)
-                                                            .toFixed(0)
-                                                            .toString()
-                                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
-                                                ({(Number(stakedBal * soulPrice) !== 0
-                                                    ? `$${Number(stakedBal * soulPrice)
-                                                        .toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}` : '0')})
-                                            </Text>
 
-                                            <Text fontSize=".9rem" padding="0" textAlign="left" color="#FFFFFF">
-                                                MAX:&nbsp;
-                                                {Number(unstakedBal) === 0
-                                                    ? '0'
-                                                    : Number(unstakedBal) < 0
-                                                        ? '<0'
-                                                        : Number(unstakedBal)
-                                                            .toFixed(0)
-                                                            .toString()
-                                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
-                                                ({(Number(unstakedBal * soulPrice) !== 0
-                                                    ? `$${Number(unstakedBal * soulPrice)
-                                                        .toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}` : '0')})
-                                                <br />
-                                            </Text>
-                                        </Wrap> */}
                                     <Wrap padding="0" margin="0" display="flex flex-cols">
                                         <SubmitButton
                                             height="2rem"
@@ -526,29 +495,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                             {/* {earnedAmount !== 0 ? `($${(earnedAmount * soulPrice).toFixed(2)})` : ''} */}
                                         </SubmitButton>
                                     </Wrap>
-                                    {/* <AssetInput
-                                        currencyLogo={true}
-                                        currency={SOUL[250]}
-                                        currencyAddress={SOUL[250].address}
-                                        value={withdrawValue}
-                                        onChange={setWithdrawValue}
-                                        showMax={false}
-                                        showBalance={false}
-                                    /> */}
-                                    
-                                    {/* <Wrap padding="0" margin="0" display="flex">
-                                        <SubmitButton
-                                            height="2rem"
-                                            primaryColor="#B485FF"
-                                            color="black"
-                                            margin=".5rem 0 .5rem 0"
-                                            onClick={() =>
-                                                handleWithdraw(withdrawValue)
-                                            }
-                                        >
-                                            WITHDRAW
-                                        </SubmitButton>
-                                    </Wrap> */}
                                 <Wrap padding="0" margin="0" display="flex">
                                     <SubmitButton
                                         height="2rem"

@@ -607,8 +607,6 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                     id={pid}
                                     token0={token0}
                                     token1={token1}
-                                    // token0={token0}
-                                    // token1={token1}
                                 />
 
                                 {/* LEND ASSET */}
