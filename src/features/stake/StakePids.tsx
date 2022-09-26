@@ -16,8 +16,8 @@ export const SummonerPid0 = [
       4002: '0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5',
       250: SOUL_ADDRESS[ChainId.FANTOM],
     },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.SOUL,
+    token1Address: SOUL_ADDRESS[ChainId.FANTOM],
+    token2Address: SOUL_ADDRESS[ChainId.FANTOM],
   },
 ]
 
@@ -31,7 +31,7 @@ export const CirclePids = [
       4002: '0xD54Cf31D5653F4a062f5DA4C83170A5867d04442',
       250: SEANCE_ADDRESS[ChainId.FANTOM],
     },
-    token1Address: tokens.SEANCE,
+    token1Address: SEANCE_ADDRESS[ChainId.FANTOM],
     token2Address: tokens.FTM,
     startTime: 1636518600,
     endTime: 1636691400
@@ -45,8 +45,8 @@ export const CirclePids = [
       4002: '0xD54Cf31D5653F4a062f5DA4C83170A5867d04442',
       250: UNIDX_ADDRESS[ChainId.FANTOM],
     },
-    token1Address: tokens.SEANCE,
-    token2Address: tokens.UNIDX,
+    token1Address: SEANCE_ADDRESS[ChainId.FANTOM],
+    token2Address: UNIDX_ADDRESS[ChainId.FANTOM],
     startTime: 1636518600,
     endTime: 1636691400
   },

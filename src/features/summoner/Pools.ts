@@ -1,6 +1,18 @@
 import { ChainId, SEANCE_ADDRESS, SOUL_ADDRESS, USDC_ADDRESS, LUX_ADDRESS, WLUM_ADDRESS, WNATIVE_ADDRESS, AVAX_ADDRESS, SOUL_NATIVE_ADDRESS, DAI_ADDRESS, BNB_ADDRESS, SOR_ADDRESS, WETH_ADDRESS, WBTC_ADDRESS, CRV_ADDRESS, GRIMEVO_ADDRESS } from 'sdk'
 
-export const InactivePools = [
+export const InactiveAvalanchePools = [
+  // { 
+  //   pid: undefined,
+  //   token1: undefined,
+  //   token2: undefined,
+  //   lpSymbol: undefined,
+  //   lpAddress: '',
+  //   token1Address: '', 
+  //   token2Address: '', 
+  // }
+]
+
+export const InactiveFantomPools = [
   {
     // 0
     pid: 16,
@@ -247,7 +259,20 @@ export const FantomPools = [
   },
 ]
 
-export const LendingPools = [
+
+export const AvalancheLendingPools = [
+  // { 
+  //   pid: undefined,
+  //   token1: undefined,
+  //   token2: undefined,
+  //   lpSymbol: undefined,
+  //   lpAddress: '',
+  //   token1Address: '', 
+  //   token2Address: '', 
+  // }
+]
+
+export const FantomLendingPools = [
   {
     // LENDING
     pid: 48,

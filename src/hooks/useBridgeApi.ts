@@ -31,7 +31,6 @@ export const GLOBAL_STABLE = ["anyUSDC", "anyDAI", "anyUSDT", "MIM"]; // For Fan
 export const FTM_ETH_STABLE = [
   ...GLOBAL_STABLE,
   "anyFTM",
-  "anyTOMB",
   "anyETH",
   "anyWBTC",
 ];

@@ -510,7 +510,7 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
       token1: {
-        id: '0x5cc61a78f164885776aa610fb0fe1257df78e59b', // SPIRIT
+        id: '0x5Cc61A78F164885776AA610fb0FE1257df78E59B', // SPIRIT
         name: 'SpiritSwap Token',
         symbol: 'SPIRIT',
         decimals: 18,

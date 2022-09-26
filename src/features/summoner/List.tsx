@@ -3,11 +3,12 @@ import Typography from 'components/Typography'
 
 import { Active, Inactive, Underworld } from './Key'
 import { ActiveRow } from './Row'
-import { AvalanchePools, FantomPools, LendingPools, InactivePools } from './Pools'
+import { AvalanchePools, FantomPools, AvalancheLendingPools, FantomLendingPools, InactiveFantomPools, InactiveAvalanchePools } from './Pools'
 import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from 'sdk'
+import { classNames } from 'functions'
 
 export const FarmList = () => {
   const { chainId } = useActiveWeb3React()
@@ -30,7 +31,7 @@ export const FarmList = () => {
     />
   ))
 
-  const lendingList = LendingPools.map((farm) => (
+  const ftmLendList = FantomLendingPools.map((farm) => (
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
@@ -39,7 +40,25 @@ export const FarmList = () => {
     />
   ))
 
-  const inactiveList = InactivePools.map((farm) => (
+  const avaxLendList = AvalancheLendingPools.map((farm) => (
+    <ActiveRow
+      key={farm.pid}
+      pid={farm.pid}
+      lpToken={farm.lpAddress}
+      farm={farm}
+    />
+  ))
+
+  const inactiveFtmList = InactiveFantomPools.map((farm) => (
+    <ActiveRow
+      key={farm.pid}
+      pid={farm.pid}
+      lpToken={farm.lpAddress}
+      farm={farm}
+    />
+  ))
+
+  const inactiveAvaxList = InactiveAvalanchePools.map((farm) => (
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
@@ -90,12 +109,20 @@ export const FarmList = () => {
      <Typography className="text-2xl bg-dark-1000 mb-3 mt-6 border border-dark-600 p-3 font-bold text-center">SoulSwap Pools</Typography>
         <Active />
         <>{ chainId == ChainId.FANTOM ? ftmList : avaxList }</>
+      { chainId == ChainId.FANTOM &&
+        <div>
       <Typography className="text-2xl bg-dark-1000 mb-3 mt-6 border border-blue p-3 font-bold text-center">Lending Pools</Typography>
+        { chainId == ChainId.FANTOM && 
         <Underworld />
-        <>{lendingList}</>
+        }
+        { chainId == ChainId.FANTOM ? ftmLendList : avaxLendList }
       <Typography className="text-2xl bg-dark-1000 mb-3 mt-6 border border-pink p-3 font-bold text-center">Retired Pools</Typography>
-        <Inactive />
-        <>{ chainId == ChainId.FANTOM ? inactiveList : null }</>
+        <>
+        <Inactive /> 
+        { chainId == ChainId.FANTOM ? inactiveFtmList : inactiveAvaxList }
+        </>
+      </div>
+      }
     </>
   )
 }
