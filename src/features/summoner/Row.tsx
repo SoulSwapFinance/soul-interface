@@ -644,7 +644,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                                 color={'#FFFFFF'}
                                                 margin=".5rem 0 .5rem 0"
                                                 onClick={() => handleApprove()}>
-                                                APPROVE {tokenSymbol}
+                                                APPROVE {farm.lpSymbol}
                                             </SubmitButton>
                                         </Wrap>
                                     </FunctionBox>
@@ -662,7 +662,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                             handleDeposit(pid)
                                         }
                                     >
-                                        DEPOSIT {Number(allocPoint) == 420 ? token0Symbol : tokenSymbol}
+                                        DEPOSIT {Number(allocPoint) == 420 ? token0Symbol : farm.lpSymbol}
                                     </SubmitButton>
                                 )}
 
@@ -718,7 +718,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                                 Staked Balance
                                             </Typography>
                                             <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(stakedBalance, false, true)} {tokenSymbol}
+                                                {formatNumber(stakedBalance, false, true)} {farm.lpSymbol}
                                             </Typography>
                                         </div>
                                     )}
@@ -742,7 +742,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                             Maximum Fee
                                         </Typography>
                                         <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                            {formatNumber(Number(stakedBalance) - withdrawable, false, true)} {tokenSymbol}
+                                            {formatNumber(Number(stakedBalance) - withdrawable, false, true)} {farm.lpSymbol}
                                         </Typography>
                                     </div>
 
@@ -806,7 +806,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                             setShowConfirmation(true)
                                         }
                                     >
-                                        WITHDRAW {tokenSymbol}
+                                        WITHDRAW {farm.lpSymbol}
                                     </SubmitButton>
 
                                 </Wrap>
@@ -934,7 +934,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                 Estimated Fee Outcomes
                             </div>
                             • <b>Current Rate</b>: {Number(withdrawFee).toFixed(0)}% <br />
-                            • <b>Fee Amount</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) / 100, false, true)} {tokenSymbol}<br />
+                            • <b>Fee Amount</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) / 100, false, true)} {farm.lpSymbol}<br />
                             • <b>Fee Value</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) * Number(lpPrice) / 100, true, true)}
 
                             <div className="mt-6 text-center">
