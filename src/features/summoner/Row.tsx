@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, createContext, ReactNode, FC, u
 import styled from 'styled-components'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
-import { Currency, ROUTER_ADDRESS, SOUL, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, Token, WNATIVE_ADDRESS } from 'sdk'
+import { Currency, FTM, ROUTER_ADDRESS, SOUL, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, Token, WNATIVE_ADDRESS } from 'sdk'
 import { useTokenContract, useSoulSummonerContract, useZapperContract } from 'hooks/useContract'
 import useApprove from 'features/bond/hooks/useApprove'
 import { Tab } from '@headlessui/react'
@@ -36,7 +36,7 @@ const HideOnMobile = styled.div`
 }
 `
 
-export const ActiveRow = ({ pid, farm, lpToken }) => {
+export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) => {
     const { account, chainId, library } = useActiveWeb3React()
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
 
@@ -65,13 +65,15 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const pairStatus = summonerPoolInfo.status
 
     const { userInfo } = useUserInfo()
-    const { pairInfo } = usePairInfo(farm.lpAddress)
+    const { pairInfo } = usePairInfo(lpAddress)
     // assumes 18, since only SOUL-LP farms are eligible for Zap
     // const lpSymbol = pairInfo.lpSymbol
     // const assetAddress = pairInfo.address
     // console.log(assetAddress)
     const assetDecimals = Number(pairInfo.pairDecimals)
     // const assetSymbol = pairInfo.symbol
+    // const token0Address = pairInfo.token0Address
+    // const token1Address = pairInfo.token1Address
     const token0Symbol = pairInfo.token0Symbol
     const token1Symbol = pairInfo.token1Symbol
 
@@ -122,8 +124,9 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
     const tokenSymbol = isUnderworldPair ? token0Symbol : "LP"
 
     // ONLY USED FOR LOGO //
-    const token0 = new Token(chainId, farm.token1Address, 18)
-    const token1 = new Token(chainId, farm.token2Address, 18)
+    const token0 = new Token(chainId, token0Address, 18)
+    // console.log('token0:%s', token0Address)
+    const token1 = new Token(chainId, token1Address, 18)
 
     // Zap Add-Ons //
     const tokenContract = useTokenContract(zapTokenAddress)
@@ -317,9 +320,11 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                         <FarmContentWrapper>
                             <div className="items-center">
                                 <FarmItemBox>
-                                    {Number(allocPoint) != 420 ? <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
-                                        : <CurrencyLogo 
-                                            currency={token0}
+                                    {Number(allocPoint) != 420 ? 
+                                    <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
+                                        :
+                                        <CurrencyLogo 
+                                            currency={token0} // TOKEN0
                                             size={40} 
                                             />
                                     }
@@ -602,6 +607,8 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                     id={pid}
                                     token0={token0}
                                     token1={token1}
+                                    // token0={token0}
+                                    // token1={token1}
                                 />
 
                                 {/* LEND ASSET */}
@@ -784,8 +791,7 @@ export const ActiveRow = ({ pid, farm, lpToken }) => {
                                     balance={stakedBalance.toString()}
                                     id={pid}
                                     token0={token0}
-                                    token1={token1}
-                                />
+                                    token1={token1}                                />
                                 <Wrap padding="0" margin="0" display="flex">
 
                                     <SubmitButton

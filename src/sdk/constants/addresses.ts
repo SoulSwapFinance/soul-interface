@@ -109,19 +109,7 @@ export const SEANCE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', // SEANCE
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.MOONRIVER]: '',
-  [ChainId.ARBITRUM]: '',
-}
-
-export const MASTERCHEF_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B', // Summoner
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
+  [ChainId.AVALANCHE]: '0xB641880C65A33605fc5a4F8b955a868a98D4a58e',
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
@@ -145,7 +133,19 @@ export const SUMMONER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B', // Summoner
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
+  [ChainId.AVALANCHE]: '0x9961c13913bC8Aa6e0D9c32765dC7886550603af',
+  [ChainId.MATIC]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.ARBITRUM]: '',
+}
+
+export const MASTERCHEF_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B', // Summoner
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: SUMMONER_ADDRESS[ChainId.AVALANCHE],
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
