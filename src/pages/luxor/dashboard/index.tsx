@@ -71,10 +71,6 @@ export default function Dashboard() {
   const LuxorAddress = LUX_ADDRESS[250]
   const LuxSorAddress = LuxSorContract.address
   const luxorSupply = Number(useTokenInfo(LuxorAddress).tokenInfo.supply) / 1e9
-  // const wlumSupply = Number(useTokenInfo(WrappedLumensAddress).tokenInfo.supply) / 1e9
-  // const { userInfo } = useUserInfo(LuxorTreasuryAddress, WrappedLumFantomAddress)
-  // const ftmWlumBalance = Number(userInfo.value)
-  // console.log('lumensSupply:%s', wlumSupply)
 
   // Calculate Minting Rate
   const startTime = 1638424800000

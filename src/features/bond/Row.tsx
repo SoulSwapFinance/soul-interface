@@ -24,7 +24,7 @@ import Typography from '../../components/Typography'
 // import { Button } from '../../components/Button'
 import ModalHeader from 'components/Modal/Header'
 import { useBondUserInfo, useSoulBondInfo } from 'hooks/useAPI'
-import { formatNumber, formatPercent, tryParseAmount } from 'functions'
+import { formatDate, formatNumber, formatPercent, formatUnixTimestampToDay, tryParseAmount } from 'functions'
 import { useSoulPrice } from 'hooks/getPrices'
 import AssetInput from 'components/AssetInput'
 import { Token, NATIVE } from 'sdk'
@@ -92,17 +92,15 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const assetName = soulBondUserInfo.symbol
   const liquidity = Number(soulBondUserInfo.tvl)
   const lpPrice = Number(soulBondUserInfo.pairPrice)
-
   const stakedBal = Number(soulBondUserInfo.stakedBalance)
   const unstakedBal = Number(soulBondUserInfo.userBalance)
   const pending = Number(soulBondUserInfo.pendingSoul) / 1e18
-  
   const assetToken = new Token(chainId, assetAddress, 18, assetName)
   const parsedDepositValue = tryParseAmount(depositValue, assetToken)
-  
+
   // stakeble if either not yet staked and on Fantom Opera or not on Fantom Opera.
   const isStakeable = chainId == 250 && stakedBal == 0 || chainId != 250
-  
+
   // CALCULATIONS
   const stakedLpValue = stakedBal * lpPrice
   // const availableValue = unstakedBal * lpPrice
@@ -123,8 +121,17 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   })
 
   const dailyRoi = (apr / 365)
-
+  // const nowTime = new Date().toTimeString()
+  // const rawMaturity = new Date(nowTime + msTilMaturity)// formatUnixTimestampToDay(nowTime + msTilMaturity)
   const reached = formatNumber((100 * pendingValue / stakedLpValue), false, true)
+
+  const percRemaining = 100 - Number(reached)
+  const daysTilMaturity = percRemaining / dailyRoi
+
+  const msTilMaturity = daysTilMaturity * 86_400_000 // ms
+  const nowTime = new Date().getTime()
+  const maturityTimestamp = nowTime + msTilMaturity
+  const maturityDate = formatDate(new Date(maturityTimestamp))
 
   // opens dropdown panel
   const handleShow = () => {
@@ -175,7 +182,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   }
 
   // deposits to bond
-   const handleDeposit = async (amount) => {
+  const handleDeposit = async (amount) => {
     try {
       // console.log('depositing', amount.toString())
       const tx = await deposit(pid, parsedDepositValue.quotient.toString())
@@ -207,7 +214,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   />
                   <TokenLogo
                     src={
-                      'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/' + chain + '/assets/'  + bond.token2Address[chainId] + '/logo.png'
+                      'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/' + chain + '/assets/' + bond.token2Address[chainId] + '/logo.png'
                     }
                     alt="LOGO"
                     width="38px"
@@ -253,21 +260,21 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
             <DetailsWrapper>
               {isStakeable && (
                 <FunctionBox>
-                    <AssetInput
-                      currencyLogo={false}
-                      currency={assetToken}
-                      currencyAddress={assetAddress}
-                      value={depositValue}
-                      // balance={tryParseAmount(account, assetToken)}
-                      showBalance={true}
-                      onChange={setDepositValue}
-                      showMax={false}
-                    />
+                  <AssetInput
+                    currencyLogo={false}
+                    currency={assetToken}
+                    currencyAddress={assetAddress}
+                    value={depositValue}
+                    // balance={tryParseAmount(account, assetToken)}
+                    showBalance={true}
+                    onChange={setDepositValue}
+                    showMax={false}
+                  />
                   {/* <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" /> */}
                   <Wrap padding="0" margin="0" display="flex">
                     {(approved && Number(unstakedBal) == 0) ?
                       (
-                        ( bond.token1 == NATIVE[chainId].symbol || bond.token2 == NATIVE[chainId].symbol ) ? (
+                        (bond.token1 == NATIVE[chainId].symbol || bond.token2 == NATIVE[chainId].symbol) ? (
                           <TokenPairLink
                             target="_blank"
                             rel="noopener"
@@ -297,16 +304,16 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                             height="2.5rem"
                             primaryColor={getChainColor(chainId)}
                             onClick={() =>
-                            handleDeposit(depositValue)
-                          }
+                              handleDeposit(depositValue)
+                            }
                           >
                             DEPOSIT {bond.token1}-{bond.token2} LP
                           </SubmitButton>
                         ) :
                         (
-                          <SubmitButton 
-                          primaryColor={getChainColor(chainId)}
-                          height="2.5rem" onClick={() => handleApprove()}>
+                          <SubmitButton
+                            primaryColor={getChainColor(chainId)}
+                            height="2.5rem" onClick={() => handleApprove()}>
                             APPROVE LP
                           </SubmitButton>
                         )
@@ -315,31 +322,30 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   </Wrap>
                 </FunctionBox>
               )}
-              
-                <FunctionBox>
-                  <Wrap padding="0" margin="0" display="flex" justifyContent="space-between">
-                    <Text fontSize=".9rem" padding="0" textAlign="left" color="#aaa">
-                      BONDED:&nbsp;
-                      {stakedBal === 0
-                        ? '0.000'
-                        : stakedBal < 0.001
-                          ? '<0.001'
-                          : formatNumber(stakedBal, false, true)
-                      }&nbsp;LP
-                      <br />
-                      VALUE:&nbsp;{Number(stakedLpValue) !== 0 ? `${formatNumber(stakedLpValue, true, true)}` : '0'}
-                    </Text>
-                    <Text fontSize=".9rem" padding="0" color={getChainColorCode(chainId)} textAlign="right">
 
-                      YTD:&nbsp;{Number(reached) > 0 ? `${formatPercent(reached)}` : '<0.0%'}
-
-                      <br />
-                      {dailyRoi > 0
-                        ? 'DAILY: ' + dailyRoi.toFixed(2) : 0}%
-
-                    </Text>
-                  </Wrap>
-                  { stakedBal > 0 &&
+              <FunctionBox>
+                <Wrap padding="0" margin="0" display="flex" justifyContent="space-between">
+                  <Text fontSize=".9rem" padding="0" textAlign="left">
+                    BONDED:&nbsp;
+                    {stakedBal === 0
+                      ? '0.000'
+                      : stakedBal < 0.001
+                        ? '<0.001'
+                        : formatNumber(stakedBal, false, true)
+                    }&nbsp;LP
+                    <br />
+                    VALUE:&nbsp;{Number(stakedLpValue) !== 0 ? `${formatNumber(stakedLpValue, true, true)}` : '0'}
+                  </Text>
+                  <Text fontSize=".9rem" padding="0" color={getChainColorCode(chainId)} textAlign="right">
+                    {stakedBal > 0
+                      ? `YTD: ${formatPercent(reached)} (${maturityDate})`
+                      : `MATURITY: ${(maturityDate)}D`
+                    }
+                    <br />
+                    {dailyRoi > 0 ? 'DAILY: ' + dailyRoi.toFixed(2) : 0}%
+                  </Text>
+                </Wrap>
+                {stakedBal > 0 &&
                   <Wrap padding="0" margin="0" display="flex">
                     <SubmitButton
                       height="2.5rem"
@@ -348,14 +354,13 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                       margin=".5rem 0 .5rem 0"
                       onClick={() =>
                         setShowConfirmation(true)
-                        // handleMint()
                       }
                     >
-                      MINT SOUL { pendingValue !== 0 ? `(${formatNumber(pendingValue, true, false) })` : '' }
+                      MINT SOUL {pendingValue !== 0 ? `(${formatNumber(pendingValue, true, false)})` : ''}
                     </SubmitButton>
                   </Wrap>
-                  }
-                </FunctionBox>
+                }
+              </FunctionBox>
             </DetailsWrapper>
           </DetailsContainer>
         </Wrap>
@@ -365,7 +370,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
         <div className="space-y-4">
           <ModalHeader header={`Are you sure?`} onClose={() => setShowConfirmation(false)} />
           <Typography variant="lg">
-          { `Minting claims your pending rewards and cannot be undone. You may only mint ONCE ${chainId == 250 ? 'and cannot deposit more until you mint.' : '.'}`
+            {`Minting claims your pending rewards and cannot be undone. You may only mint ONCE ${chainId == 250 ? 'and cannot deposit more until you mint.' : '.'}`
             }
           </Typography>
           <Typography variant="sm" className="font-medium">
@@ -377,7 +382,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
           <SubmitButton
             primaryColor={getChainColor(chainId)}
             height="2.5rem"
-            onClick={ () => handleMint() }
+            onClick={() => handleMint()}
           >
             I UNDERSTAND THESE TERMS
           </SubmitButton>

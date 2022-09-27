@@ -50,7 +50,7 @@ export function usePriceUSD(tokenAddress): { status: string; price: T } {
     const { chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
     const [price, setPrice] = useState<T>()
-    const URL = chainId == 250 ? BASE_URL : `https://avax-api.soulswap.finance`
+    const URL = chainId == ChainId.FANTOM ? BASE_URL : `https://avax-api.soulswap.finance`
   
     useEffect(() => {
       const fetchData = async () => {
@@ -75,9 +75,9 @@ export function usePriceUSD(tokenAddress): { status: string; price: T } {
 }
 
 export function useSoulInfo(): { status: string; soulInfo: T } {
-    const { account, chainId } = useActiveWeb3React()
+    const { chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
-    const URL = chainId == 250 ? BASE_URL : `https://avax-api.soulswap.finance`
+    const URL = chainId == ChainId.FANTOM ? BASE_URL : `https://avax-api.soulswap.finance`
     
     const [soulInfo, setInfo] = useState<T>({
         address: SOUL_ADDRESS[chainId],
@@ -138,20 +138,20 @@ export function useSoulInfo(): { status: string; soulInfo: T } {
 export function useBondInfo(): { status: string; bondInfo: T } {
     const { chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
-    const URL = chainId == 250 ? BASE_URL : `https://avax-api.soulswap.finance`
+    const URL = chainId == ChainId.FANTOM ? BASE_URL : `https://avax-api.soulswap.finance`
 
     const [bondInfo, setInfo] = useState<T>({
-        NativeSoulValue: '63800.05964972323',
-        SoulUsdcValue: '46383.88976770467',
-        NativeEthereumValue: '70575.55193664419',
-        UsdcDaiValue: '167461.74443822587',
-        NativeUsdcValue: '58807.66686062403',
-        NativeBitcoinValueValue: '85187.16125864044',
-        NativeDaiValue: '74995.03629181904',
-        NativeBinanceValue: '62984.619936168485',
-        NativeSeanceValue: '35920.55519306462',
-        totalLiquidityValue: '666116.2853326146',
-        totalValue: '666116.2853326146',
+        NativeSoulValue: '19800',
+        SoulUsdcValue: '24383',
+        NativeEthereumValue: '70575',
+        UsdcDaiValue: '167461',
+        NativeUsdcValue: '2446',
+        NativeBitcoinValueValue: '23295',
+        NativeDaiValue: '74995',
+        NativeBinanceValue: '62984',
+        NativeSeanceValue: '35920',
+        totalLiquidityValue: '308017',
+        totalValue: '308017',
         api: 'https://api.soulswap.finance/bonds'
       })  
     useEffect(() => {
@@ -179,7 +179,7 @@ export function useBondInfo(): { status: string; bondInfo: T } {
 export function useSoulBondInfo(pid): { status: string; soulBondInfo: T } {
     const { account, chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
-    const URL = chainId == 250 ? BASE_URL : `https://avax-api.soulswap.finance`
+    const URL = chainId == ChainId.FANTOM ? BASE_URL : `https://avax-api.soulswap.finance`
 
     const [soulBondInfo, setInfo] = useState<T>({
       address: '',
@@ -221,7 +221,7 @@ export function useSoulBondInfo(pid): { status: string; soulBondInfo: T } {
 export function useBondUserInfo(pid, userAddress): { status: string; soulBondUserInfo: T } {
     const { chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
-    const URL = chainId == 250 ? BASE_URL : `https://avax-api.soulswap.finance`
+    const URL = chainId == ChainId.FANTOM ? BASE_URL : `https://avax-api.soulswap.finance`
 
     const [soulBondUserInfo, setInfo] = useState<T>({
       address: '',
@@ -293,7 +293,7 @@ export function useTotalSupply(tokenAddress): { status: string; supply: T } {
 export function useTokenInfo(tokenAddress): { status: string; tokenInfo: T } {
     const { chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
-        const URL = chainId == 250 ? BASE_URL : `https://avax-api.soulswap.finance`
+        const URL = chainId == ChainId.FANTOM ? BASE_URL : `https://avax-api.soulswap.finance`
 
     const [tokenInfo, setTokenInfo] = useState<T>({
         name: '',
@@ -329,7 +329,7 @@ export function useTokenInfo(tokenAddress): { status: string; tokenInfo: T } {
 export function useUserInfo(): { status: string; userInfo: T } {
     const { account, chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
-    const URL = chainId == 250 ? BASE_URL : `https://avax-api.soulswap.finance`
+    const URL = chainId == ChainId.FANTOM ? BASE_URL : `https://avax-api.soulswap.finance`
  
     const [userInfo, setInfo] = useState<T>({
         address: '',
@@ -362,7 +362,8 @@ export function useUserInfo(): { status: string; userInfo: T } {
 export function useUserTokenInfo(userAddress, tokenAddress): { status: string; userTokenInfo: T } {
     const { chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
-    const URL = chainId == 250 ? BASE_URL : `https://avax-api.soulswap.finance`
+    const URL = chainId == ChainId.FANTOM ? BASE_URL : `https://avax-api.soulswap.finance`
+
     const [userTokenInfo, setInfo] = useState<T>({
         name: '',
         price: '0',
@@ -395,9 +396,9 @@ export function useUserTokenInfo(userAddress, tokenAddress): { status: string; u
 }
 
 export function useUserPairInfo(userAddress, pairAddress): { status: string; pairUserInfo: T } {
-    const { account, chainId } = useActiveWeb3React()
+    const { chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
-    const URL = chainId == 250 ? BASE_URL : `https://avax-api.soulswap.finance`
+    const URL = chainId == ChainId.FANTOM ? BASE_URL : `https://avax-api.soulswap.finance`
 
     const [pairUserInfo, setInfo] = useState<T>({
         name: '',
@@ -439,7 +440,7 @@ export function useUserPairInfo(userAddress, pairAddress): { status: string; pai
 export function useAutoStakeInfo(): { status: string; autoStakeInfo: T } {
     const { chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
-    const URL = chainId == 250 ? BASE_URL : `https://avax-api.soulswap.finance`
+    const URL = chainId == ChainId.FANTOM ? BASE_URL : `https://avax-api.soulswap.finance`
 
     const [autoStakeInfo, setInfo] = useState<T>({
       totalSupply: '7975019.590004936',
@@ -482,7 +483,7 @@ export function useAutoStakeInfo(): { status: string; autoStakeInfo: T } {
 export function useUserAutoStakeInfo(userAddress): { status: string; userAutoStakeInfo: T } {
     const { chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
-    const URL = chainId == 250 ? BASE_URL : `https://avax-api.soulswap.finance`
+    const URL = chainId == ChainId.FANTOM ? BASE_URL : `https://avax-api.soulswap.finance`
 
     const [userAutoStakeInfo, setInfo] = useState<T>({
       userBalance: '0',
@@ -526,7 +527,7 @@ export function useUserAutoStakeInfo(userAddress): { status: string; userAutoSta
 export function usePairInfo(pairAddress): { status: string; pairInfo: T } {
     const [status, setStatus] = useState<string>('idle')
     const { chainId } = useActiveWeb3React()
-    const URL = chainId == 250 ? BASE_URL : `https://avax-api.soulswap.finance`
+    const URL = chainId == ChainId.FANTOM ? BASE_URL : `https://avax-api.soulswap.finance`
 
     const [pairInfo, setInfo] = useState<T>({
         address: '',
