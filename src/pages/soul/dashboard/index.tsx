@@ -15,7 +15,7 @@ import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { useSoulInfo, useBondInfo, usePriceUSD, useTokenInfo } from 'hooks/useAPI'
 import { ChainId, NATIVE, SOUL_ADDRESS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
-import { getChainInfo } from 'constants/chains'
+import { getChainInfo, getChainColorCode } from 'constants/chains'
 
 export default function Dashboard() {
   const { i18n } = useLingui()
@@ -230,35 +230,35 @@ const HideOnMobile = styled.div`
         </HideOnMobile>
 
       <div className="flex ml-4 mr-4 mb-4 gap-1 items-center justify-center">
-        <Button variant="bordered" color="purple" size="lg" className={classNames([ChainId.FANTOM].includes(chainId) ? '' : 'hidden')}>
+        <Button variant="bordered" color={getChainColorCode(chainId)} size="lg" className={classNames([ChainId.FANTOM].includes(chainId) ? '' : 'hidden')}>
           <NavLink href={'/seance'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Stake </span>
             </a>
           </NavLink>
         </Button>
-        <Button variant="bordered" color="purple" size="lg">
+        <Button variant="bordered" color={getChainColorCode(chainId)} size="lg">
           <NavLink href={'/summoner'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Farm </span>
             </a>
           </NavLink>
         </Button>
-        <Button variant="bordered" color="purple" size="lg">
+        <Button variant="bordered" color={getChainColorCode(chainId)} size="lg">
           <NavLink href={'/bonds'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Bond </span>
             </a>
           </NavLink>
         </Button>
-        <Button variant="bordered" color="purple" size="lg" className={chainId == ChainId.FANTOM ? '' : 'hidden'}>
+        <Button variant="bordered" color={getChainColorCode(chainId)} size="lg" className={chainId == ChainId.FANTOM ? '' : 'hidden'}>
           <NavLink href={'/underworld'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Lend </span>
             </a>
           </NavLink>
         </Button>
-        <Button variant="bordered" color="purple" size="lg">
+        <Button variant="bordered" color={getChainColorCode(chainId)} size="lg">
           <NavLink href={'/autostake'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Vault </span>
@@ -285,7 +285,7 @@ const HideOnMobile = styled.div`
             <Typography 
               className={'flex text-xl justify-center items-baseline'}
               fontFamily={'medium'} textColor={'text-white'}>
-              Market Capitalization
+              {getChainInfo(chainId, 'NAME')} Market
             </Typography>
             <div className="h-px my-1 mb-3 bg-dark-1000" />
             <Typography
@@ -305,7 +305,7 @@ const HideOnMobile = styled.div`
                 <Typography
                   className="flex gap-1 text-lg justify-center items-center mb-3"
                   lineHeight={48} fontFamily={'medium'}>
-                  Supply ({getChainInfo(chainId, 'NAME')})
+                  {getChainInfo(chainId, 'NAME')} Supply
                 </Typography>
               </div>
               <div className="lg:hidden grid grid-cols-2 space-between-3">
