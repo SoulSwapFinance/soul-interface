@@ -119,14 +119,15 @@ const Mobile: FC = () => {
             </div>
           </Dialog>
         </Transition.Root>
-        {/* <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-4 xl:w-auto bg-dark-1000 hover-bg-dark-900 xl:relative xl:p-0 xl:bg-transparent">
+         <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-4 xl:w-auto bg-dark-1000 hover-bg-dark-900 xl:relative xl:p-0 xl:bg-transparent">
           <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
-            <div className="sm:inline-block">
+          {/*  <div className="sm:inline-block">
               <LuxorStats />
             </div>
             <div className="sm:inline-block">
               <TokenStats />
-            </div>
+            </div> 
+           */}
             <div className="w-auto flex items-center rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto">
               {account && chainId && userEthBalance && (
                 <>
@@ -146,7 +147,7 @@ const Mobile: FC = () => {
                 </div>
             </div>
           </div>
-        </div> */}
+        </div>
       </header>
     </>
   )
