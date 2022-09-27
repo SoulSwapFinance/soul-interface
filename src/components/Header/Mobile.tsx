@@ -50,11 +50,11 @@ const Mobile: FC = () => {
                 return <NavigationItem node={node} key={node.key} /> 
               })}
             </div>
-          <div className="flex items-center w-12 mr-1">
+         {/* <div className="flex items-center w-12 mr-1">
             <Link href="/landing" passHref={true}>
               <Image src="/logo.png" alt="logo" width="32px" height="32px" />
             </Link>
-          </div>
+          </div> */}
         </div>
         <Transition.Root show={open} as={Fragment}>
           <Dialog as="div" className="fixed inset-0 z-20 overflow-hidden" onClose={setOpen} unmount={false}>
