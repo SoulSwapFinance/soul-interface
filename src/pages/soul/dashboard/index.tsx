@@ -15,6 +15,7 @@ import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { useSoulInfo, useBondInfo, usePriceUSD, useTokenInfo } from 'hooks/useAPI'
 import { ChainId, NATIVE, SOUL_ADDRESS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
+import { getChainInfo } from 'constants/chains'
 
 export default function Dashboard() {
   const { i18n } = useLingui()
@@ -48,7 +49,7 @@ export default function Dashboard() {
   const { bondInfo } = useBondInfo()
   const treasuryLiquidityValue = Number(soulInfo.totalLiquidityValue)
   // const bondedValue = Number(bondsTvl)
-  const bondedValue = Number(bondInfo.totalValue) / 1E18
+  const bondedValue = [ChainId.FANTOM].includes(chainId) ? Number(bondInfo.totalValue) : 0
 
   const NativeSoulValue = Number(soulInfo.NativeSoulValue) + Number(bondInfo.NativeSoulValue)
   const SoulUsdcValue = Number(soulInfo.SoulUsdcValue) + Number(bondInfo.SoulUsdcValue)
@@ -130,14 +131,35 @@ export default function Dashboard() {
     //     "percent": ((BinanceComposition / liquidityValue) * 100).toFixed()
     // },
   ]
-
-  const treasuryValueData = [
+  let treasuryValueData
+chainId == ChainId.FANTOM ?
+   treasuryValueData = [
     {
         "label": "BONDED (USD)",
         "angle": bondedValue,
         "color": "#B485FF",
         "percent": ((bondedValue / treasuryValue) * 100).toFixed()
     },
+    {
+        "label": "LIQUIDITY (USD)",
+        "angle": treasuryLiquidityValue,
+        "color": "#B465FF",
+        "percent": ((treasuryLiquidityValue / treasuryValue) * 100).toFixed()
+    },
+    {
+        "label": "SOUL (USD)",
+        "angle": treasurySoulValue,
+        "color": "#B445FF",
+        "percent": ((treasurySoulValue / treasuryValue) * 100).toFixed()
+    },
+    {
+        "label": `${NATIVE[chainId].symbol.toUpperCase()} (USD)`,
+        "angle": treasuryNativeValue,
+        "color": "#B425FF",
+        "percent": ((treasuryNativeValue / treasuryValue) * 100).toFixed()
+    },
+  ]
+  : treasuryValueData = [
     {
         "label": "LIQUIDITY (USD)",
         "angle": treasuryLiquidityValue,
@@ -272,21 +294,20 @@ const HideOnMobile = styled.div`
                { formatNumber(soulPrice * totalSupply, true, false, 0) }
             </Typography>
           </div>
-            <div className="lg:hidden h-px my-4 mb-3 bg-dark-1000" />
+          <div className="lg:hidden h-px my-4 mb-3 bg-dark-1000" />
             <div>
               <div className="lg:hidden grid grid-cols-2 space-between-3">
                 <Typography
-                  className="flex gap-1 text-xl justify-center items-center mb-3"
+                  className="flex gap-1 text-lg justify-center items-center mb-3"
                   lineHeight={48} fontFamily={'medium'}>
-                  Soul Price
+                  Market Price
                 </Typography>
                 <Typography
-                  className="flex gap-1 text-xl justify-center items-center mb-3"
+                  className="flex gap-1 text-lg justify-center items-center mb-3"
                   lineHeight={48} fontFamily={'medium'}>
-                  Seance Price
+                  Supply ({getChainInfo(chainId, 'NAME')})
                 </Typography>
               </div>
-
               <div className="lg:hidden grid grid-cols-2 space-between-3">
                 <Typography
                   className={'flex justify-center items-baseline'}
@@ -296,74 +317,38 @@ const HideOnMobile = styled.div`
                 <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                  { formatNumber(seancePrice, true, false, 0) }
+               { formatNumber(totalSupply, false, true) }
                 </Typography>
               </div>
             </div>
           <div>
-          <div className="lg:hidden h-px my-4 bg-dark-1000" />
-            <div className="lg:hidden grid grid-cols-1 space-between-3">
-            <Typography 
-              className="flex gap-1 text-lg justify-center items-center mb-3"
-              lineHeight={48} fontFamily={'medium'}>
-              Circulating Supply
-            </Typography>
-            </div>
-            <div className="lg:hidden grid grid-cols-1 space-between-3">
-            <Typography 
-            className={'flex justify-center items-baseline'}
-            variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               { formatNumber(totalSupply, false, true) }
-            </Typography>
-            </div>
-          </div>
-
+        </div>
             <div className="h-px my-4 bg-dark-1000" />
             <div>
-              <div className="hidden lg:grid lg:grid-cols-4 space-between-3">
+              <div className="hidden lg:grid lg:grid-cols-2 space-between-3">
                 <Typography
                   className="flex gap-1 text-xl justify-center items-center mb-3"
                   lineHeight={48} fontFamily={'medium'}>
-                  Soul Price
-                </Typography>
-                <Typography
-                  className="flex gap-1 text-xl justify-center items-center mb-3"
-                  lineHeight={48} fontFamily={'medium'}>
-                  Seance Price
+                  Market Price
                 </Typography>
                 <Typography
                   className="flex gap-1 text-lg justify-center items-center mb-3"
                   lineHeight={48} fontFamily={'medium'}>
                   Total Supply
                 </Typography>
-                <Typography
-                  className="flex gap-1 text-lg justify-center items-center mb-3"
-                  lineHeight={48} fontFamily={'medium'}>
-                  Max Supply
-                </Typography>
               </div>
             </div>
             <div>
-              <div className="hidden lg:grid lg:grid-cols-4 space-between-3">
+            <div className="hidden lg:grid lg:grid-cols-2 space-between-3">
               <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
                   { formatNumber(soulPrice, true, false, 0) }
                 </Typography>
-              <Typography
-                  className={'flex justify-center items-baseline'}
-                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                  { formatNumber(seancePrice, true, false, 0) }
-                </Typography>
                 <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
                   { formatNumber(totalSupply, false, true) }
-                </Typography>
-                <Typography
-                  className={'flex justify-center items-baseline'}
-                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                  { '250M' }
                 </Typography>
               </div>
               <div className="h-px my-4 bg-dark-1000" />
@@ -376,7 +361,7 @@ const HideOnMobile = styled.div`
                   {i18n._(t`Supply Distribution`)}
                 </Typography>
                 <div className="h-px my-4 bg-dark-1000" />
-              </div>
+            </div>
 
           {/* SOUL DISTRIBUTION CHART */}
 
@@ -453,7 +438,7 @@ const HideOnMobile = styled.div`
             />
               </div>
             </div>
-          <div>
+          {/* <div>
             <Typography
               className="flex mt-8 text-2xl justify-center gap-1 items-center"
               fontFamily={'medium'}
@@ -462,8 +447,8 @@ const HideOnMobile = styled.div`
               {i18n._(t`Liquidity Composition`)}
             </Typography>
             <div className="h-px my-4 bg-dark-1000" />
-          </div>
-          <div className="flex justify-center flex-col gap-3 sm:flex-row">
+          </div> */}
+          {/* <div className="flex justify-center flex-col gap-3 sm:flex-row">
             <DashboardDonutChart width={200} data={liquidityValueData} />
             <div className="flex justify-center flex-col gap-3 sm:flex-row">
             <DashboardChartLegend
@@ -474,7 +459,7 @@ const HideOnMobile = styled.div`
               theme={'dark'}
             />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
