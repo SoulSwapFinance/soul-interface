@@ -86,6 +86,7 @@ const WithdrawView: FC<WithdrawViewProps> = ({ onClose, onBack }) => {
         onChange={(val, isMax) => setInputState({ value: val, isMax: isMax || false })}
         value={inputState.value}
         spendFromWallet={false}
+        showMax={false}
       />
       <div className="z-10 flex justify-center -mt-6 -mb-6">
         <div className="p-1.5 rounded-full bg-dark-800 border border-dark-800 shadow-md border-dark-700">
