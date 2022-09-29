@@ -21,21 +21,20 @@ import {
 import { Wrap, Text, ExternalLink } from '../../components/ReusableStyles'
 import Modal from '../../components/DefaultModal'
 import Typography from '../../components/Typography'
-// import { Button } from '../../components/Button'
 import ModalHeader from 'components/Modal/Header'
 import { useBondUserInfo, useSoulBondInfo } from 'hooks/useAPI'
 import { formatDate, formatNumber, formatPercent, formatUnixTimestampToDay, tryParseAmount } from 'functions'
 import { useSoulPrice } from 'hooks/getPrices'
-import AssetInput from 'components/AssetInput'
+// import AssetInput from 'components/AssetInput'
 import { Token, NATIVE } from 'sdk'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 
 // params to render bond with:
-// 1. LpToken + the 2 token addresses (fetch icon from folder in)
+// 1. lp + token addresses (fetch icon from folder)
 // 2. totalAlloc / poolAlloc
 // 3. userInfo:
-//    - amount (in pool)
-//    - rewardDebt (owed)
+//    - amount (deposited)
+//    - rewardDebt
 
 // const HideOnMobile = styled(BondItemBox)`
 //   @media screen and (max-width: 900px) {
@@ -88,7 +87,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const { soulBondInfo } = useSoulBondInfo(pid)
   const apr = Number(soulBondInfo.apr)
   const { soulBondUserInfo } = useBondUserInfo(pid, account)
-
+  const { userPairInfo } = useUserPairInfo(account, assetAddress)
   const assetName = soulBondUserInfo.symbol
   const liquidity = Number(soulBondUserInfo.tvl)
   const lpPrice = Number(soulBondUserInfo.pairPrice)
@@ -97,7 +96,16 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   const pending = Number(soulBondUserInfo.pendingSoul) / 1e18
   const assetToken = new Token(chainId, assetAddress, 18, assetName)
   const parsedDepositValue = tryParseAmount(depositValue, assetToken)
+  const walletBalance = Number(userPairInfo.userBalance)
+  const walletValue = walletBalance * lpPrice
 
+  const { pairInfo } = usePairInfo(assetAddress)
+  const assetDecimals = Number(pairInfo.pairDecimals)
+  const token0Symbol = pairInfo.token0Symbol
+  const token1Symbol = pairInfo.token1Symbol
+  const token0Decimals = Number(pairInfo.token0Decimals)
+  const token1Decimals = Number(pairInfo.token1Decimals)
+    
   // stakeble if either not yet staked and on Fantom Opera or not on Fantom Opera.
   const isStakeable = chainId == 250 && stakedBal == 0 || chainId != 250
 
@@ -260,7 +268,18 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
             <DetailsWrapper>
               {isStakeable && (
                 <FunctionBox>
-                  <AssetInput
+                {/* DEPOSIT: ASSET PANEL */}
+                    <FarmInputPanel
+                      pid={bond.pid}
+                      onUserInput={(value) => setDepositValue(value)}
+                      onMax={() => setDepositValue(walletBalance)}
+                      value={depositValue}
+                      balance={walletBalance}
+                      id={pid}
+                      token0={token0}
+                      token1={token1}
+                      />
+                  {*/ <AssetInput
                     currencyLogo={false}
                     currency={assetToken}
                     currencyAddress={assetAddress}
@@ -270,6 +289,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     onChange={setDepositValue}
                     showMax={false}
                   />
+                  */}
                   {/* <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" /> */}
                   <Wrap padding="0" margin="0" display="flex">
                     {(approved && Number(unstakedBal) == 0) ?
