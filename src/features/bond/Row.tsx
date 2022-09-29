@@ -18,7 +18,7 @@ import {
   FunctionBox,
   SubmitButton,
 } from './Styles'
-import { Wrap, Text, ExternalLink } from '../../components/ReusableStyles'
+import { Wrap, Text, ExternalLink } from 'components/ReusableStyles'
 import Modal from '../../components/DefaultModal'
 import Typography from '../../components/Typography'
 import ModalHeader from 'components/Modal/Header'

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
-import { ChainId, ROUTER_ADDRESS, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, Token } from 'sdk'
+import { ChainId, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, Token } from 'sdk'
 import { useTokenContract, useSoulSummonerContract, useZapperContract } from 'hooks/useContract'
 import useApprove from 'features/bond/hooks/useApprove'
 import { Tab } from '@headlessui/react'
@@ -20,10 +20,11 @@ import NavLink from 'components/NavLink'
 import FarmInputPanel from './Input'
 import { CurrencyLogo } from 'components/CurrencyLogo'
 import QuestionHelper from 'components/QuestionHelper'
-import { useUserInfo } from 'hooks/useAPI'
+// import { useUserInfo } from 'hooks/useAPI'
 import AssetInput from 'components/AssetInput'
 import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
 import { getChainColor } from 'constants/chains'
+import { ExternalLink } from 'components/ReusableStyles'
 
 const HideOnSmall = styled.div`
 @media screen and (max-width: 900px) {
@@ -35,6 +36,11 @@ const HideOnMobile = styled.div`
 @media screen and (max-width: 600px) {
   display: none;
 }
+`
+
+const TokenPairLink = styled(ExternalLink)`
+  font-size: .9rem;
+  padding-left: 10;
 `
 
 export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) => {
@@ -53,7 +59,6 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
     const ZapContractAddress = ZapContract.address
 
     const nowTime = new Date().getTime()
-
     const { summonerInfo } = useSummonerInfo()
     const startRate = Number(summonerInfo.startRate)
 
@@ -543,7 +548,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
 
                                 {/* DEPOSIT: ASSET PANEL */}
                                 
-                  { (Number(walletBalance) == 0) &&
+                  { Number(walletBalance) == 0 &&
                                 <FarmInputPanel
                                     pid={farm.pid}
                                     onUserInput={(value) => setDepositValue(value)}
@@ -554,11 +559,10 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                     token0={token0}
                                     token1={token1}
                                 />
-                  )} 
+                  } 
 
-                         {/* CREATE ASSET PAIR */}                         {(Number(walletBalance) == 0) ?
-                      (
-                        (token0Symbol == NATIVE[chainId].symbol || token1Symbol == NATIVE[chainId].symbol) ? (
+                         {/* CREATE ASSET PAIR */}                         
+                    {(token0Symbol == NATIVE[chainId].symbol || token1Symbol == NATIVE[chainId].symbol) ? (
                           <SubmitButton
                           primaryColor={getChainColor(chainId)}
                           >
@@ -575,7 +579,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                             CREATE {token0Symbol}-{token1Symbol} PAIR
                           </TokenPairLink>
                           </SubmitButton>
-                        ) :
+                        ) : (
                         <SubmitButton
                         primaryColor={getChainColor(chainId)}
                         >
@@ -589,8 +593,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                             CREATE {token0Symbol}-{token1Symbol} PAIR
                           </TokenPairLink>
                       </SubmitButton>
-                      )}
-                                
+                        )}    
                                 {/* LEND ASSET */}
                                 {isUnderworldPair && (
                                     <NavLink
