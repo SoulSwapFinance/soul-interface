@@ -568,9 +568,10 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                     <ExternalLink
                                     href=
                                         {token0Symbol == NATIVE[chainId].symbol || token0Symbol == WNATIVE[chainId].symbol ?
-                                            `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${farm.token0Address}`
-                                            : `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${farm.token1Address}`
-                                        }                                    >
+                                            `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${farm.token1Address}`
+                                            : `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${farm.token0Address}`
+                                        }                                    
+                                    >
                                     <a>
                                     <SubmitButton 
                                         primaryColor={buttonColor}
