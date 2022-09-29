@@ -67,23 +67,19 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
 
     // const { userInfo } = useUserInfo()
     const { pairInfo } = usePairInfo(lpToken)
-    // assumes 18, since only SOUL-LP farms are eligible for Zap
-    // const lpSymbol = pairInfo.lpSymbol
-    // const assetAddress = pairInfo.address
-    // console.log(assetAddress)
+    // assumes 18, since only SOUL-LP farms are eligible for Zap   
     const assetDecimals = Number(pairInfo.pairDecimals)
-    // const assetSymbol = pairInfo.symbol
-    // const token0Address = pairInfo.token0Address
-    // const token1Address = pairInfo.token1Address
     const token0Symbol = pairInfo.token0Symbol
     const token1Symbol = pairInfo.token1Symbol
+    
+    const token0Decimals = Number(pairInfo.token0Decimals)
+    const token1Decimals = Number(pairInfo.token1Decimals)
 
     const [showOptions, setShowOptions] = useState(false)
     const [openDeposit, setOpenDeposit] = useState(false)
     const [showConfirmation, setShowConfirmation] = useState(false)
     const [openWithdraw, setOpenWithdraw] = useState(false)
     const [openZap, setOpenZap] = useState(false)
-    // const [openTokens, setShowTokens] = useState(false)
 
     const { summonerUserInfo } = useSummonerUserInfo(pid)
     const stakedBalance = Number(summonerUserInfo.stakedBalance)
@@ -91,9 +87,6 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
     const earnedAmount = summonerUserInfo.pendingSoul
     const earnedValue = summonerUserInfo.pendingValue
     const lpPrice = Number(summonerUserInfo.lpPrice)
-    // const timeDelta = summonerUserInfo.timeDelta
-    // const secondsRemaining = summonerUserInfo.secondsRemaining
-    // const withdrawFee = summonerUserInfo.currentRate
     const firstDepositTime = Number(summonerUserInfo.firstDepositTime)
     const currentRate = Number(summonerUserInfo.currentRate)
     const currentTime = nowTime / 1_000
@@ -116,7 +109,6 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
     const parsedBalance = tryParseAmount(walletBalance, farm.lpToken)
     // const userBalance = useCurrencyBalance(account, lpToken)
     const hasBalance = Number(walletBalance) > 0
-    // const isFarmer = Number(stakedBalance) > 0
     const isUnderworldPair = pairType == "underworld"
     const isSwapPair = pairType == "farm"
     const isActive = pairStatus == "active"
@@ -127,10 +119,10 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
     const textColor = isUnderworldPair ? "text-blue" : !isActive ? "text-pink" : "text-dark-600"
     const tokenSymbol = isUnderworldPair ? token0Symbol : "LP"
 
-    // ONLY USED FOR LOGO //
-    const token0 = new Token(chainId, token0Address, 18)
+    // (de)Constructs Tokens //
+    const token0 = new Token(chainId, token0Address, token0Decimals)
     // console.log('token0:%s', token0Address)
-    const token1 = new Token(chainId, token1Address, 18)
+    const token1 = new Token(chainId, token1Address, token1Decimals)
 
     // Zap Add-Ons //
     const tokenContract = useTokenContract(zapTokenAddress)
