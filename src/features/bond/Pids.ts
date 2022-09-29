@@ -3,7 +3,7 @@ import { AVAX_ADDRESS, BNB_ADDRESS, ChainId, DAI_ADDRESS, SEANCE_ADDRESS, SOUL_A
 export const AvalanchePools = [
   {
     pid: 0,
-    summonerPid: 1,
+    // summonerPid: 1,
     token1: 'SOUL',
     token2: 'AVAX',
     lpSymbol: 'SOUL-AVAX',
@@ -13,7 +13,7 @@ export const AvalanchePools = [
   },
   {
     pid: 1,
-    summonerPid: 2,
+    // summonerPid: 2,
     token1: 'SOUL',
     token2: 'USDC',
     lpSymbol: 'SOUL-USDC',
@@ -23,7 +23,7 @@ export const AvalanchePools = [
   },
   {
     pid: 2,
-    summonerPid: 3,
+    // summonerPid: 3,
     token1: 'AVAX',
     token2: 'USDC',
     lpSymbol: 'AVAX-USDC',
@@ -33,7 +33,7 @@ export const AvalanchePools = [
   }, 
   {
     pid: 3,
-    summonerPid: 4,
+    // summonerPid: 4,
     token1: 'AVAX',
     token2: 'BTC',
     lpSymbol: 'AVAX-BTC',
@@ -43,7 +43,7 @@ export const AvalanchePools = [
   }, 
   {
     pid: 4,
-    summonerPid: 5,
+    // summonerPid: 5,
     token1: 'AVAX',
     token2: 'ETH',
     lpSymbol: 'AVAX-ETH',
@@ -53,7 +53,7 @@ export const AvalanchePools = [
   },
   {
     pid: 5,
-    summonerPid: 6,
+    // summonerPid: 6,
     token1: 'USDC',
     token2: 'DAI',
     lpSymbol: 'USDC-DAI',
@@ -68,7 +68,7 @@ export const FantomPools = [
   {
     // 1000
     pid: 0,
-    summonerPid: 1,
+    // summonerPid: 1,
     token1: 'SOUL',
     token2: 'FTM',
     lpSymbol: 'SOUL-FTM',
@@ -79,7 +79,7 @@ export const FantomPools = [
   {
     // 600
     pid: 1,
-    summonerPid: 22,
+    // summonerPid: 22,
     token1: 'SOUL',
     token2: 'USDC',
     lpSymbol: 'SOUL-USDC',
@@ -90,7 +90,7 @@ export const FantomPools = [
   {
     // 600
     pid: 2,
-    summonerPid: 10,
+    // summonerPid: 10,
     token1: 'SEANCE',
     token2: 'FTM',
     lpSymbol: 'SEANCE-FTM',
@@ -101,7 +101,7 @@ export const FantomPools = [
   {
     // 600
     pid: 3,
-    summonerPid: 2,
+    // summonerPid: 2,
     token1: 'FTM',
     token2: 'USDC',
     lpSymbol: 'FTM-USDC',
@@ -113,7 +113,7 @@ export const FantomPools = [
   {
     // 600
     pid: 4,
-    summonerPid: 23,
+    // summonerPid: 23,
     token1: 'FTM',
     token2: 'DAI',
     lpSymbol: 'FTM-DAI',
@@ -124,7 +124,7 @@ export const FantomPools = [
   {
       // 600
       pid: 5,
-      summonerPid: 18,
+      // summonerPid: 18,
       token1: 'FTM',
       token2: 'BNB',
       lpSymbol: 'FTM-BNB',
@@ -135,7 +135,7 @@ export const FantomPools = [
     {
       // 600
       pid: 6,
-      summonerPid: 4,
+      // summonerPid: 4,
       token1: 'FTM',
       token2: 'WETH',
       lpSymbol: 'FTM-ETH',
@@ -147,7 +147,7 @@ export const FantomPools = [
     {
       // 600
       pid: 7,
-      summonerPid: 13,
+      // summonerPid: 13,
       token1: 'FTM',
       token2: 'BTC',
       lpSymbol: 'FTM-BTC',
@@ -170,7 +170,7 @@ export const FantomPools = [
   {
     // 600
     pid: 9,
-    summonerPid: 21,
+    // summonerPid: 21,
     token1: 'USDC',
     token2: 'DAI',
     lpSymbol: 'USDC-DAI',
