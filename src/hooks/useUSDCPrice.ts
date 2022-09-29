@@ -11,9 +11,6 @@ import { AVAX_ADDRESS, BNB_ADDRESS, CRV_ADDRESS, FUSD_ADDRESS,
   SOUL_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS } 
   from 'constants/addresses'
 import { usePrice } from 'hooks/usePrice'
-// import { SupportedChainId } from '../constants/chains'
-// import { useBestV2Trade } from './useBestV2Trade'
-
 
 // AMOUNT_OUT = amounts used when calculating spot price for a given currency.
 // The amount is large enough to filter low liquidity pairs.
@@ -224,7 +221,7 @@ export default function useUSDCPrice(currency?: Currency): Price<Currency, Token
 
     // handle wbtc
     if (currency?.wrapped.equals(wbtc)) {
-      return new Price(wbtc, wbtc, '1', Number(wbtcPrice * 10).toFixed())
+      return new Price(wbtc, wbtc, '1', Number(wbtcPrice * 5).toFixed())
     }
     
     // handle bnb

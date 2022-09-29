@@ -23,34 +23,10 @@ import Modal from '../../components/DefaultModal'
 import Typography from '../../components/Typography'
 import ModalHeader from 'components/Modal/Header'
 import { useBondUserInfo, usePairInfo, useUserPairInfo, useSoulBondInfo } from 'hooks/useAPI'
-import { formatDate, formatNumber, formatPercent, formatUnixTimestampToDay, tryParseAmount } from 'functions'
+import { formatDate, formatNumber, formatPercent, tryParseAmount } from 'functions'
 import { useSoulPrice } from 'hooks/getPrices'
-// import AssetInput from 'components/AssetInput'
 import { Token, NATIVE } from 'sdk'
 import { getChainColor, getChainColorCode } from 'constants/chains'
-
-// params to render bond with:
-// 1. lp + token addresses (fetch icon from folder)
-// 2. totalAlloc / poolAlloc
-// 3. userInfo:
-//    - amount (deposited)
-//    - rewardDebt
-
-// const HideOnMobile = styled(BondItemBox)`
-//   @media screen and (max-width: 900px) {
-//     display: none;
-//   }
-// `
-
-// const TokenPair = styled(ExternalLink)`
-//   font-size: 1.15rem;
-//   padding: 0;
-
-//   @media screen and (max-width: 400px) {
-//     font-size: 1rem;
-//     padding-right: 10px;
-//   }
-// `
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -64,7 +40,7 @@ const TokenLogo = styled(Image)`
   }
 `
 
-const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
+const BondRowRender = ({ pid, lpSymbol, lpToken, token1Address, token2Address, bond }) => {
   const { account, chainId } = useActiveWeb3React()
 
   const { deposit, mint } = useSoulBond(pid, lpToken, bond.token1Address, bond.token2Address)
@@ -72,14 +48,12 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
 
   const [showing, setShowing] = useState(false)
   const [approved, setApproved] = useState(false)
-  // const [availableValue, setAvailableValue] = useState(0)
   const [depositValue, setDepositValue] = useState('0')
 
   // show confirmation view before minting SOUL
   const [showConfirmation, setShowConfirmation] = useState(false)
 
   const assetAddress = lpToken
-  // console.log('asset:%s', assetAddress)
   const soulPrice = useSoulPrice()
   const chain = chainId == 43114 ? 'avalanche' : 'fantom'
 
@@ -101,11 +75,16 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
 
   const { pairInfo } = usePairInfo(assetAddress)
   const assetDecimals = Number(pairInfo.pairDecimals)
+
   const token0Symbol = pairInfo.token0Symbol
+  const token0Name = pairInfo.token0Name
+  
   const token1Symbol = pairInfo.token1Symbol
+  const token1Name = pairInfo.token1Name
   const token0Decimals = Number(pairInfo.token0Decimals)
   const token1Decimals = Number(pairInfo.token1Decimals)
-    
+  const token0 = new Token(chainId, bond.token1Address, token0Decimals, token0Symbol, token0Name)
+  const token1 = new Token(chainId, bond.token2Address, token1Decimals, token1Symbol, token1Name)
   // stakeble if either not yet staked and on Fantom Opera or not on Fantom Opera.
   const isStakeable = chainId == 250 && stakedBal == 0 || chainId != 250
 
@@ -152,7 +131,6 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
   // checks approval on LP for SoulBond
   const fetchApproval = async () => {
     if (!account) {
-      // alert('Connect Wallet')
     } else {
       // Checks if SoulBond can move tokens
       const amount = await erc20Allowance(account, SOUL_BOND_ADDRESS[chainId])
@@ -209,10 +187,10 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
           <Row onClick={() => handleShow()}>
             <BondContentWrapper>
               <TokenPairBox>
-                {bond.token2Address[chainId] && <Wrap className="flex-cols-2">
+                {bond.token2Address && <Wrap className="flex-cols-2">
                   <TokenLogo
                     src={
-                      'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/' + chain + '/assets/' + bond.token1Address[chainId] + '/logo.png'
+                      'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/' + chain + '/assets/' + bond.token1Address + '/logo.png'
                     }
                     alt="LOGO"
                     width="38px"
@@ -222,7 +200,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   />
                   <TokenLogo
                     src={
-                      'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/' + chain + '/assets/' + bond.token2Address[chainId] + '/logo.png'
+                      'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/' + chain + '/assets/' + bond.token2Address + '/logo.png'
                     }
                     alt="LOGO"
                     width="38px"
@@ -274,7 +252,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                       onUserInput={(value) => setDepositValue(value)}
                       onMax={() => setDepositValue(walletBalance.toString())}
                       value={depositValue}
-                      balance={walletBalance}
+                      balance={walletBalance.toString()}
                       id={pid}
                       token0={token0}
                       token1={token1}
@@ -284,10 +262,13 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     {(approved && Number(unstakedBal) == 0) ?
                       (
                         (bond.token1 == NATIVE[chainId].symbol || bond.token2 == NATIVE[chainId].symbol) ? (
+                          <SubmitButton
+                          primaryColor={getChainColor(chainId)}
+                          >
                           <TokenPairLink
                             target="_blank"
                             rel="noopener"
-                            color={getChainColor(chainId)}
+                            color={'white'}
                             href=
                             {bond.token1 == NATIVE[chainId].symbol ?
                               `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token2Address[chainId]}`
@@ -296,16 +277,21 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                           >
                             CREATE {bond.token1}-{bond.token2} PAIR
                           </TokenPairLink>
+                          </SubmitButton>
                         ) :
+                        <SubmitButton
+                        primaryColor={getChainColor(chainId)}
+                        >
                           <TokenPairLink
                             target="_blank"
                             rel="noopener"
-                            color={getChainColor(chainId)}
+                            color={"white"}
                             href=
                             {`https://exchange.soulswap.finance/add/${bond.token1Address[chainId]}/${bond.token2Address[chainId]}`}
                           >
                             CREATE {bond.token1}-{bond.token2} PAIR
                           </TokenPairLink>
+                      </SubmitButton>
                       ) :
                       approved ?
                         (
@@ -347,8 +333,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                   </Text>
                   <Text fontSize=".9rem" padding="0" color={getChainColorCode(chainId)} textAlign="right">
                     {stakedBal > 0
-                      ? `YTD: ${formatPercent(reached)} (${maturityDate})`
-                      : `MATURITY: ${(maturityDate)}D`
+                      ? `YTD: ${formatPercent(reached)}`
+                      : `MATURITY: ${(maturityDate)}`
                     }
                     <br />
                     {dailyRoi > 0 ? 'DAILY: ' + dailyRoi.toFixed(2) : 0}%
@@ -374,6 +360,12 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
           </DetailsContainer>
         </Wrap>
       ) : null}
+
+
+
+
+      {/* CONFIRMATION MODAL */}
+
       <Modal isOpen={showConfirmation} onDismiss={
         () => setShowConfirmation(false)}>
         <div className="space-y-4">
