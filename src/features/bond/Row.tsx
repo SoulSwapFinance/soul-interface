@@ -40,12 +40,11 @@ const TokenLogo = styled(Image)`
   }
 `
 
-const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, token1Address, token2Address, bond }) => {
+const BondRowRender = ({ pid, lpSymbol, lpToken, token1Address, token2Address, bond }) => {
   const { account, chainId } = useActiveWeb3React()
 
   const { deposit, mint } = useSoulBond(pid, lpToken, bond.token1Address, bond.token2Address)
   const { erc20Allowance, erc20Approve } = useApprove(lpToken)
-
   const [showing, setShowing] = useState(false)
   const [approved, setApproved] = useState(false)
   const [depositValue, setDepositValue] = useState('0')
@@ -57,7 +56,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, token1Address, 
   const soulPrice = useSoulPrice()
   const chain = chainId == 43114 ? 'avalanche' : 'fantom'
 
-  // API DATA
+  // API DATA //
   const { soulBondInfo } = useSoulBondInfo(pid)
   const apr = Number(soulBondInfo.apr)
   const { soulBondUserInfo } = useBondUserInfo(pid, account)
