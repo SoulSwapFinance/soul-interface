@@ -11,7 +11,7 @@ import LPToken from './LPToken'
 
 const useSoulSwap = (version: 'v1' | 'v2' = 'v2') => {
   const { chainId, library, account } = useActiveWeb3React()
-  const sushiRoll = useSoulSwapContract(version)
+  const soulSwap = useSoulSwapContract(version)
   const ttl = 60 * 20
 
   let from = ''
@@ -24,7 +24,7 @@ const useSoulSwap = (version: 'v1' | 'v2' = 'v2') => {
 
   const migrate = useCallback(
     async (lpToken: LPToken, amount: BigNumber) => {
-      if (sushiRoll) {
+      if (soulSwap) {
         const deadline = Math.floor(new Date().getTime() / 1000) + ttl
         const args = [lpToken.tokenA.address, lpToken.tokenB.address, amount, Zero, Zero, deadline]
 
@@ -42,7 +42,7 @@ const useSoulSwap = (version: 'v1' | 'v2' = 'v2') => {
         return tx
       }
     },
-    [sushiRoll, ttl, from]
+    [soulSwap, ttl, from]
   )
 
   const migrateWithPermit = useCallback(

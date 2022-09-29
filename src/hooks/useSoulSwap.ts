@@ -31,8 +31,8 @@ const useSoulSwap = (version: 'v1' | 'v2' = 'v2') => {
           deadline,
         ]
 
-        const gasLimit = await sushiRoll.estimateGas.migrate(...args)
-        const tx = sushiRoll.migrate(...args, {
+        const gasLimit = await soulSwap.estimateGas.migrate(...args)
+        const tx = soulSwap.migrate(...args, {
           gasLimit: gasLimit.mul(120).div(100),
         })
 
@@ -45,7 +45,7 @@ const useSoulSwap = (version: 'v1' | 'v2' = 'v2') => {
         return tx
       }
     },
-    [sushiRoll, ttl, from]
+    [soulSwap, ttl, from]
   )
 
   const migrateWithPermit = useCallback(
@@ -56,7 +56,7 @@ const useSoulSwap = (version: 'v1' | 'v2' = 'v2') => {
           library,
           lpToken.address,
           account,
-          sushiRoll.address,
+          soulSwap.address,
           amount.toString(),
           deadline
         )

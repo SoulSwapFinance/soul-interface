@@ -22,7 +22,7 @@ export interface MigrateState extends LPTokensState {
 const useMigrateState: () => MigrateState = () => {
   const { library, account, chainId } = useActiveWeb3React()
   const state = useLPTokensState()
-  const { migrate, migrateWithPermit } = useSushiRoll(state?.selectedLPToken?.version)
+  const { migrate, migrateWithPermit } = useSoulSwap(state?.selectedLPToken?.version)
   const [mode, setMode] = useState<MigrateMode>()
   const [amount, setAmount] = useState('')
   const addTransaction = useTransactionAdder()
