@@ -1,6 +1,6 @@
 import { AVAX_ADDRESS, BNB_ADDRESS, ChainId, DAI_ADDRESS, SEANCE_ADDRESS, SOUL_ADDRESS, USDC_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
 
-export const AvalanchePids = [
+export const AvalanchePools = [
   {
     pid: 0,
     // summonerPid: 1,
@@ -64,7 +64,7 @@ export const AvalanchePids = [
 ]
 
 
-export const FantomPids = [
+export const FantomPools = [
   {
     // 1000
     pid: 0,
