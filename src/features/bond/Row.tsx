@@ -334,7 +334,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token1Symbol, token0Address
                   <Text fontSize=".9rem" padding="0" color={getChainColorCode(chainId)} textAlign="right">
                     {stakedBal > 0
                       ? `YTD: ${formatPercent(reached)}`
-                      : `MATURITY: ${(maturityDate)}`
+                      : `EMT: ${(maturityDate)}`
                     }
                     <br />
                     {dailyRoi > 0 ? 'DAILY: ' + dailyRoi.toFixed(2) : 0}%
