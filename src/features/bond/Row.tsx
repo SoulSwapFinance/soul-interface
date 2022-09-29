@@ -269,7 +269,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
               {isStakeable && (
                 <FunctionBox>
                 {/* DEPOSIT: ASSET PANEL */}
-                    <FarmInputPanel
+                    <BondInputPanel
                       pid={bond.pid}
                       onUserInput={(value) => setDepositValue(value)}
                       onMax={() => setDepositValue(walletBalance)}
@@ -279,18 +279,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                       token0={token0}
                       token1={token1}
                       />
-                  {*/ <AssetInput
-                    currencyLogo={false}
-                    currency={assetToken}
-                    currencyAddress={assetAddress}
-                    value={depositValue}
-                    // balance={tryParseAmount(account, assetToken)}
-                    showBalance={true}
-                    onChange={setDepositValue}
-                    showMax={false}
-                  />
-                  */}
-                  {/* <Input name="stake" id="stake" type="number" placeholder="0.0" min="0" /> */}
+   
                   <Wrap padding="0" margin="0" display="flex">
                     {(approved && Number(unstakedBal) == 0) ?
                       (
