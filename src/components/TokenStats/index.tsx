@@ -5,7 +5,7 @@ import { useModalOpen, useToggleTokenStatsModal } from 'state/application/hooks'
 import { ApplicationModal } from 'state/application/actions'
 import styled from 'styled-components'
 import { useActiveWeb3React } from 'services/web3'
-import { useSeancePrice, useSoulPrice } from 'hooks/getPrices'
+import { useSoulPrice } from 'hooks/getPrices'
 import { formatNumber } from 'functions/format'
 
 const HideOnMobile = styled.div`
@@ -19,7 +19,7 @@ function TokenStats(): JSX.Element | null {
   const toggleTokenStatsModal = useToggleTokenStatsModal()
   const open = useModalOpen(ApplicationModal.SOUL_STATS)
   const soulPrice = useSoulPrice()
-  const seancePrice = useSeancePrice()
+  // const seancePrice = useSeancePrice()
 
   if (!chainId) return null
 
@@ -29,7 +29,7 @@ function TokenStats(): JSX.Element | null {
       onClick={() => toggleTokenStatsModal()}
     >
 
-      <div className="grid items-center grid-flow-col px-1.5 py-1 space-x-2 text-sm rounded-lg pointer-events-auto auto-cols-max bg-dark-1000 text-secondary">
+     {/* <div className="grid items-center grid-flow-col px-1.5 py-1 space-x-2 text-sm rounded-lg pointer-events-auto auto-cols-max bg-dark-1000 text-secondary">
         <Image
           src="/images/tokens/seance.png"
           alt="SEANCE"
@@ -42,7 +42,7 @@ function TokenStats(): JSX.Element | null {
           <div className="text-primary">{ formatNumber(seancePrice, true, true) }</div>
         </HideOnMobile>
       </div>
-
+      */}
       <div className="grid items-center grid-flow-col px-1.5 py-1 space-x-2 text-sm rounded-lg pointer-events-auto auto-cols-max bg-dark-1000 text-secondary">
         <Image
           src="/images/tokens/soul.png"
