@@ -5,9 +5,9 @@ import { classNames, formatNumber } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
 import { Button } from 'components/Button'
 import Input from 'components/Input'
-import { usePairInfo, useSummonerPoolInfo } from 'hooks/useAPI'
+import { usePairInfo, useBondUserInfo } from 'hooks/useAPI'
 
-interface FarmInputPanelProps {
+interface BondInputPanelProps {
   pid: string
   value?: string
   balance: string
@@ -28,7 +28,7 @@ interface FarmInputPanelProps {
   showSearch?: boolean
 }
 
-export default function FarmInputPanel({
+export default function BondInputPanel({
   pid,
   balance,
   isNative,
@@ -38,12 +38,12 @@ export default function FarmInputPanel({
   onUserInput,
   onMax,
   id,
-}: FarmInputPanelProps) {
+}: BondInputPanelProps) {
   const { i18n } = useLingui()
   const [modalOpen, setModalOpen] = useState(false)
   const { account } = useActiveWeb3React()
-  const { summonerPoolInfo } = useSummonerPoolInfo(pid)
-  const assetPrice = summonerPoolInfo.lpPrice
+  const { bondUserInfo } = useBondUserInfo(pid, account)
+  const assetPrice = Number(bondUserInfo.pairPrice)
 
   const handleDismissSearch = useCallback(() => {
     setModalOpen(false)
@@ -68,8 +68,8 @@ export default function FarmInputPanel({
                     {formatNumber(balance, false, true) || 0} {' '} MAX
                   <br/>
                   ≈${isNative 
-                    ? formatNumber(Number(value) * Number(assetPrice), false)
-                    : formatNumber(Number(value) * Number(assetPrice), false)
+                    ? formatNumber(Number(value) * assetPrice, false)
+                    : formatNumber(Number(value) * assetPrice, false)
                   }
                   </div>
                 </div>

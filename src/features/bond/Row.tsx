@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
-
+import BondInputPanel from './Input'
 import { useActiveWeb3React } from 'services/web3'
 import useSoulBond from './hooks/useSoulBond'
 import useApprove from './hooks/useApprove'
