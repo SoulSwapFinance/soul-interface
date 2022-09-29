@@ -3,7 +3,7 @@ import { AVAX_ADDRESS, BNB_ADDRESS, ChainId, DAI_ADDRESS, SEANCE_ADDRESS, SOUL_A
 export const AvalanchePools = [
   {
     pid: 0,
-    // summonerPid: 1,
+    summonerPid: 1,
     token1: 'SOUL',
     token2: 'AVAX',
     lpSymbol: 'SOUL-AVAX',
@@ -13,7 +13,7 @@ export const AvalanchePools = [
   },
   {
     pid: 1,
-    // summonerPid: 2,
+    summonerPid: 2,
     token1: 'SOUL',
     token2: 'USDC',
     lpSymbol: 'SOUL-USDC',
@@ -23,7 +23,7 @@ export const AvalanchePools = [
   },
   {
     pid: 2,
-    // summonerPid: 3,
+    summonerPid: 3,
     token1: 'AVAX',
     token2: 'USDC',
     lpSymbol: 'AVAX-USDC',
@@ -33,7 +33,7 @@ export const AvalanchePools = [
   }, 
   {
     pid: 3,
-    // summonerPid: 4,
+    summonerPid: 4,
     token1: 'AVAX',
     token2: 'BTC',
     lpSymbol: 'AVAX-BTC',
@@ -43,7 +43,7 @@ export const AvalanchePools = [
   }, 
   {
     pid: 4,
-    // summonerPid: 5,
+    summonerPid: 5,
     token1: 'AVAX',
     token2: 'ETH',
     lpSymbol: 'AVAX-ETH',
@@ -53,7 +53,7 @@ export const AvalanchePools = [
   },
   {
     pid: 5,
-    // summonerPid: 6,
+    summonerPid: 6,
     token1: 'USDC',
     token2: 'DAI',
     lpSymbol: 'USDC-DAI',
