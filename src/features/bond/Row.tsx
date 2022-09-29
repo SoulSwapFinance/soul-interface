@@ -272,7 +272,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, bond }) => {
                     <BondInputPanel
                       pid={bond.pid}
                       onUserInput={(value) => setDepositValue(value)}
-                      onMax={() => setDepositValue(walletBalance)}
+                      onMax={() => setDepositValue(walletBalance.toString())}
                       value={depositValue}
                       balance={walletBalance}
                       id={pid}
