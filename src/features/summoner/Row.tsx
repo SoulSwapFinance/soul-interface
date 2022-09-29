@@ -553,6 +553,41 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                     token1={token1}
                                 />
 
+                         {/* CREATE ASSET PAIR */}                         {(Number(walletBalance) == 0) ?
+                      (
+                        (token0Symbol == NATIVE[chainId].symbol || token1Symbol == NATIVE[chainId].symbol) ? (
+                          <SubmitButton
+                          primaryColor={getChainColor(chainId)}
+                          >
+                          <TokenPairLink
+                            target="_blank"
+                            rel="noopener"
+                            color={'white'}
+                            href=
+                            {token1Symbol == NATIVE[chainId].symbol ?
+                              `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${token1Address}`
+                              : `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${token0Address}`
+                            }
+                          >
+                            CREATE {token0Symbol}-{token1Symbol} PAIR
+                          </TokenPairLink>
+                          </SubmitButton>
+                        ) :
+                        <SubmitButton
+                        primaryColor={getChainColor(chainId)}
+                        >
+                          <TokenPairLink
+                            target="_blank"
+                            rel="noopener"
+                            color={"white"}
+                            href=
+                            {`https://exchange.soulswap.finance/add/${token0Address}/${token1Address}`}
+                          >
+                            CREATE {token0Symbol}-{token1Symbol} PAIR
+                          </TokenPairLink>
+                      </SubmitButton>
+                      )}
+                                
                                 {/* LEND ASSET */}
                                 {isUnderworldPair && (
                                     <NavLink
