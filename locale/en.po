@@ -64,6 +64,9 @@ msgstr "A portion of each trade (0.25%) goes to liquidity providers as a protoco
 msgid "ALL"
 msgstr "ALL"
 
+msgid "APPROVE"
+msgstr "APPROVE"
+
 msgid "APR"
 msgstr "APR"
 
@@ -172,14 +175,14 @@ msgstr "Assets"
 msgid "Auto"
 msgstr "Auto"
 
+msgid "Autocompound your Soul Rewards."
+msgstr "Autocompound your Soul Rewards."
+
 msgid "Available"
 msgstr "Available"
 
 msgid "Available Actions"
 msgstr "Available Actions"
-
-msgid "Available Networks"
-msgstr "Available Networks"
 
 msgid "Avg. APY"
 msgstr "Avg. APY"
@@ -506,9 +509,6 @@ msgstr "Earn"
 msgid "Earned"
 msgstr "Earned"
 
-msgid "Either return to the {link}, or change to an available network."
-msgstr "Either return to the {link}, or change to an available network."
-
 msgid "Enable Expert Mode"
 msgstr "Enable Expert Mode"
 
@@ -798,9 +798,6 @@ msgstr "Links"
 
 msgid "Liquidity"
 msgstr "Liquidity"
-
-msgid "Liquidity Composition"
-msgstr "Liquidity Composition"
 
 msgid "Liquidity Positions"
 msgstr "Liquidity Positions"
@@ -1170,6 +1167,9 @@ msgstr "Resources"
 msgid "Restricts swaps to direct pairs only."
 msgstr "Restricts swaps to direct pairs only."
 
+msgid "Return"
+msgstr "Return"
+
 msgid "Rewards"
 msgstr "Rewards"
 
@@ -1178,9 +1178,6 @@ msgstr "Rewards:"
 
 msgid "Ritual (Fee) Duration"
 msgstr "Ritual (Fee) Duration"
-
-msgid "Roll it back - this feature is not yet supported on {0}."
-msgstr "Roll it back - this feature is not yet supported on {0}."
 
 msgid "Romanian"
 msgstr "Romanian"
@@ -1228,9 +1225,6 @@ msgstr "SOUL ECONOMY"
 
 msgid "SOUL TREASURY"
 msgstr "SOUL TREASURY"
-
-msgid "STAKE"
-msgstr "STAKE"
 
 msgid "Sacrifice"
 msgstr "Sacrifice"
@@ -1325,9 +1319,6 @@ msgstr "Stake SOUL for SEANCE"
 msgid "Stake SOUL to borrow SEANCE"
 msgstr "Stake SOUL to borrow SEANCE"
 
-msgid "Stake Soul for Soul."
-msgstr "Stake Soul for Soul."
-
 msgid "Stake for Seance"
 msgstr "Stake for Seance"
 
@@ -1394,6 +1385,9 @@ msgstr "Supply Distribution"
 
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "Supplying {0} {1} and {2} {3}"
+
+msgid "Supported On"
+msgstr "Supported On"
 
 msgid "Swap"
 msgstr "Swap"
@@ -1551,6 +1545,9 @@ msgstr "Tutorials"
 
 msgid "UNWRAP"
 msgstr "UNWRAP"
+
+msgid "Unavailable on {0}."
+msgstr "Unavailable on {0}."
 
 msgid "Underworld Assets"
 msgstr "Underworld Assets"
@@ -1807,9 +1804,6 @@ msgstr "for deliberations on additional points."
 msgid "forum discussion"
 msgstr "forum discussion"
 
-msgid "home page"
-msgstr "home page"
-
 msgid "into your wallet or CoffinBox."
 msgstr "into your wallet or CoffinBox."
 
@@ -1845,6 +1839,9 @@ msgstr "{0} tokens"
 
 msgid "{0}/{1} Burned"
 msgstr "{0}/{1} Burned"
+
+msgid "{link} or change network."
+msgstr "{link} or change network."
 
 msgid "{text}"
 msgstr "{text}"

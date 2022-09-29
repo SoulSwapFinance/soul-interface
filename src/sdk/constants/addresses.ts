@@ -651,3 +651,33 @@ export const FTM_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x4E15361FD6b4BB609Fa63C81A2be19d873717870',
   [ChainId.FANTOM]: WNATIVE_ADDRESS[ChainId.FANTOM]
 }
+
+// LP TOKEN ADDRESS //
+
+export const LUX_NATIVE: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0x951BBB838e49F7081072895947735b0892cCcbCD',
+}
+
+export const LUX_DAI: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0x46729c2AeeabE7774a0E710867df80a6E19Ef851',
+}
+
+export const LUX_SOR: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0x622E69B6785311800B0d55D72fF27D91F5518212',
+}
+
+export const WLUM_NATIVE: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99',
+}
+export const SOR_FTM: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0xdfB2218b48627794711E6cFd72e26c541E456F6F',
+}
+export const SOR_NATIVE: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A',
+}
