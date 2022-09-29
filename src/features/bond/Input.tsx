@@ -42,8 +42,8 @@ export default function BondInputPanel({
   const { i18n } = useLingui()
   const [modalOpen, setModalOpen] = useState(false)
   const { account } = useActiveWeb3React()
-  const { bondUserInfo } = useBondUserInfo(pid, account)
-  const assetPrice = Number(bondUserInfo.pairPrice)
+  const { soulBondUserInfo } = useBondUserInfo(pid, account)
+  const assetPrice = Number(soulBondUserInfo.pairPrice)
 
   const handleDismissSearch = useCallback(() => {
     setModalOpen(false)
