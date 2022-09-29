@@ -69,7 +69,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token1Symbol, token0Address
   const pending = Number(soulBondUserInfo.pendingSoul) / 1e18
   const assetToken = new Token(chainId, assetAddress, 18, assetName)
   const parsedDepositValue = tryParseAmount(depositValue, assetToken)
-  const walletBalance = Number(pairUserInfo.userBalance)
+  const walletBalance = Number(pairUserInfo.userBalance) / 1e18
   const walletValue = walletBalance * lpPrice
 
   const { pairInfo } = usePairInfo(assetAddress)
