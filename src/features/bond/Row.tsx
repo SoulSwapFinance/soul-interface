@@ -371,7 +371,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token1Symbol, token0Address
         <div className="space-y-4">
           <ModalHeader header={`Are you sure?`} onClose={() => setShowConfirmation(false)} />
           <Typography variant="lg">
-            {`Minting claims your pending rewards and cannot be undone. You may only mint ONCE ${chainId == 250 ? 'and cannot deposit more until you mint.' : '.'}`
+            {`Minting exits your position and claims your rewards. You are responsible for your decision to mint and agree that you understand these terms. ${chainId == ChainId.FANTOM ? 'You must mint prior to depositing more.' : ''}`
             }
           </Typography>
           <Typography variant="sm" className="font-medium">
@@ -385,7 +385,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token1Symbol, token0Address
             height="2.5rem"
             onClick={() => handleMint()}
           >
-            I UNDERSTAND THESE TERMS
+            I UNDERSTAND & AGREE
           </SubmitButton>
         </div>
       </Modal>
