@@ -70,8 +70,8 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     const [depositValue, setDepositValue] = useState('')
     //   const [confirmed, setConfirmed] = useState(false)
     //   const [receiving, setReceiving] = useState(0)
-    const parsedDepositValue = tryParseAmount(depositValue, SOUL[250])
-    const parsedWithdrawValue = tryParseAmount(withdrawValue, SOUL[250])
+    const parsedDepositValue = tryParseAmount(depositValue, SOUL[chainId])
+    const parsedWithdrawValue = tryParseAmount(withdrawValue, SOUL[chainId])
 
     const [stakedBal, setStakedBal] = useState(0)
     const [earnedAmount, setEarnedAmount] = useState(0)
@@ -92,7 +92,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     // show confirmation view before minting SOUL
     const [apy, setApy] = useState(0)
     // const { deposit, withdraw } = useStakeContract()
-    // const balance = useCurrencyBalance(account, SOUL[250])
+    // const balance = useCurrencyBalance(account, SOUL[chainId])
     // const stakedBalance = AutoStakeContract?.balanceOf(account)
 
     /**
@@ -255,20 +255,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
         }
     }
 
-    // /**
-    //  * Withdraw Shares
-    //  */
-    // const handleWithdraw = async (amount) => {
-    //     try {
-    //         const tx = await AutoStakeContract?.withdraw(account, parsedWithdrawValue?.quotient.toString())
-    //         // await tx?.wait().then(await setPending(pid))
-    //         await tx?.wait()
-    //     } catch (e) {
-    //         // alert(e.message)
-    //         console.log(e)
-    //     }
-    // }
-
     const handleWithdrawAll = async () => {
         try {
             let tx
@@ -281,9 +267,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
         }
     }
 
-    // /**
-    //  * Harvest Shares
-    //  */
+    // handles: reward harvest
     const handleHarvest = async () => {
         try {
             let tx
@@ -320,7 +304,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                             <TokenLogo
                                 src={
                                     `${getChainLogoURL(chainId)} +
-                                    ${pool.token1Address[chainId]} +
+                                    ${pool.token1Address} +
                                     '/logo.png`
                                 }
                                 alt="LOGO"
@@ -409,8 +393,8 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                             </Wrap>
                             <AssetInput
                             currencyLogo={true}
-                                currency={SOUL[250]}
-                                currencyAddress={SOUL[250].address}
+                                currency={SOUL[chainId]}
+                                currencyAddress={SOUL[chainId].address}
                                 value={depositValue}
                                 onChange={setDepositValue}
                                 showMax={false}
@@ -454,8 +438,8 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                 <FunctionBox>
                                     <AssetInput
                                         currencyLogo={false}
-                                        currency={SOUL[250]}
-                                        currencyAddress={SOUL[250].address}
+                                        currency={SOUL[chainId]}
+                                        currencyAddress={SOUL[chainId].address}
                                         value={depositValue}
                                         onChange={setDepositValue}
                                         showMax={false}
@@ -474,12 +458,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                         >
                                             DEPOSIT SOUL
                                         </SubmitButton>
-                                        {/* <SubmitButton height="2rem" 
-                                        primaryColor="#3Eff3E"
-                                        color="black"
-                                        onClick={() => handleApprove()}>
-                                        APPROVE MORE
-                                        </SubmitButton> */}
                                     </Wrap>
                                     <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
@@ -492,7 +470,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                             }
                                         >
                                             COMPOUND REWARDS
-                                            {/* {earnedAmount !== 0 ? `($${(earnedAmount * soulPrice).toFixed(2)})` : ''} */}
                                         </SubmitButton>
                                     </Wrap>
                                 <Wrap padding="0" margin="0" display="flex">
@@ -551,21 +528,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
           >
             CLOSE MESSAGE
           </SubmitButton>
-          {/* <Button
-            color="red"
-            size="lg"
-            onClick={() => {
-              if (window.prompt(`Please type the word "confirm" to enable expert mode.`) === 'confirm') {
-                setShowConfirmation(false)
-              }
-              setShowConfirmation(false)
-            }}
-          >
-            <Typography variant="lg" id="confirm-expert-mode">
-              { `I UNDERSTAND THESE TERMS` }
-            </Typography> */}
-
-          {/* </Button> */}
         </div>
       </Modal>
             <Modal isOpen={showWithdrawConfirmation} onDismiss={
@@ -602,21 +564,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
           >
             CLOSE MESSAGE
           </SubmitButton>
-          {/* <Button
-            color="red"
-            size="lg"
-            onClick={() => {
-              if (window.prompt(`Please type the word "confirm" to enable expert mode.`) === 'confirm') {
-                setShowConfirmation(false)
-              }
-              setShowConfirmation(false)
-            }}
-          >
-            <Typography variant="lg" id="confirm-expert-mode">
-              { `I UNDERSTAND THESE TERMS` }
-            </Typography> */}
-
-          {/* </Button> */}
         </div>
       </Modal>
         </>

@@ -1,7 +1,6 @@
-import { tokens } from 'features/bond/constants/tokens'
-import { SOUL_ADDRESS } from 'sdk'
+import { ChainId, SOUL_ADDRESS } from 'sdk'
 
-export const AllPids = [
+export const AvalanchePools = [
   {
     // 1000
     pid: 0,
@@ -9,10 +8,23 @@ export const AllPids = [
     token1: 'SOUL',
     token2: 'SOUL',
     lpSymbol: 'SOUL',
-    lpAddresses: {
-      250: SOUL_ADDRESS[250],
-    },
-    token1Address: tokens.SOUL,
-    token2Address: tokens.SOUL,
+    lpAddress: SOUL_ADDRESS[ChainId.AVALANCHE],
+    token1Address: SOUL_ADDRESS[ChainId.AVALANCHE]
+    token2Address: SOUL_ADDRESS[ChainId.AVALANCHE]
+  },
+]
+
+
+export const FantomPools = [
+  {
+    // 1000
+    pid: 0,
+    summonerPid: 0,
+    token1: 'SOUL',
+    token2: 'SOUL',
+    lpSymbol: 'SOUL',
+    lpAddress:  SOUL_ADDRESS[ChainId.FANTOM],
+    token1Address: SOUL_ADDRESS[ChainId.FANTOM]
+    token2Address: SOUL_ADDRESS[ChainId.FANTOM]
   },
 ]
