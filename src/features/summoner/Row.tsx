@@ -542,6 +542,8 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                 <div className="h-px my-1 bg-dark-1000" />
 
                                 {/* DEPOSIT: ASSET PANEL */}
+                                
+                  { (Number(walletBalance) == 0) &&
                                 <FarmInputPanel
                                     pid={farm.pid}
                                     onUserInput={(value) => setDepositValue(value)}
@@ -552,6 +554,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                     token0={token0}
                                     token1={token1}
                                 />
+                  )} 
 
                          {/* CREATE ASSET PAIR */}                         {(Number(walletBalance) == 0) ?
                       (
