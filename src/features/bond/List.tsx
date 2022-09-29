@@ -10,12 +10,12 @@ const BondList = () => {
     <BondRowRender
       key={bond.pid} 
       pid={bond.pid}
-      lpSymbol={bond.lpSymbol}
+      // lpSymbol={bond.lpSymbol}
       lpToken={bond.lpAddress}
+      token0Symbol={bond.token0Symbol}
       token1Symbol={bond.token1Symbol}
-      token2Symbol={bond.token2Symbol}
+      token0Address={bond.token0Address}
       token1Address={bond.token1Address}
-      token2Address={bond.token2Address}
       bond={bond}
     />
   ))
@@ -24,12 +24,12 @@ const BondList = () => {
     <BondRowRender
       key={bond.pid} 
       pid={bond.pid}
-      lpSymbol={bond.lpSymbol}
+      // lpSymbol={bond.lpSymbol}
       lpToken={bond.lpAddress}
+      token0Symbol={bond.token0Symbol}
       token1Symbol={bond.token1Symbol}
-      token2Symbol={bond.token2Symbol}
+      token0Address={bond.token0Address}
       token1Address={bond.token1Address}
-      token2Address={bond.token2Address}
       bond={bond}
     />
   ))

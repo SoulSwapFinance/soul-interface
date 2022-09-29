@@ -40,10 +40,10 @@ const TokenLogo = styled(Image)`
   }
 `
 
-const BondRowRender = ({ pid, lpSymbol, lpToken, token1Symbol, token2Symbol, token1Address, token2Address, bond }) => {
+const BondRowRender = ({ pid, lpToken, token0Symbol, token1Symbol, token0Address, token1Address, bond }) => {
   const { account, chainId } = useActiveWeb3React()
 
-  const { deposit, mint } = useSoulBond(pid, lpToken, bond.token1Address, bond.token2Address)
+  const { deposit, mint } = useSoulBond(pid, lpToken, bond.token0Address, bond.token1Address)
   const { erc20Allowance, erc20Approve } = useApprove(lpToken)
   const [showing, setShowing] = useState(false)
   const [approved, setApproved] = useState(false)
@@ -73,17 +73,17 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1Symbol, token2Symbol, tok
   const walletValue = walletBalance * lpPrice
 
   const { pairInfo } = usePairInfo(assetAddress)
-  const assetDecimals = Number(pairInfo.pairDecimals)
+  // const assetDecimals = Number(pairInfo.pairDecimals)
 
-  const token0Symbol = pairInfo.token0Symbol
+  // const token0Symbol = pairInfo.token0Symbol
   const token0Name = pairInfo.token0Name
   
   // const token1Symbol = pairInfo.token1Symbol
   const token1Name = pairInfo.token1Name
   const token0Decimals = Number(pairInfo.token0Decimals)
   const token1Decimals = Number(pairInfo.token1Decimals)
-  const token0 = new Token(chainId, bond.token1Address, token0Decimals, token0Symbol, token0Name)
-  const token1 = new Token(chainId, bond.token2Address, token1Decimals, token1Symbol, token1Name)
+  const token0 = new Token(chainId, bond.token0Address, token0Decimals, token0Symbol, token0Name)
+  const token1 = new Token(chainId, bond.token1Address, token1Decimals, token1Symbol, token1Name)
   
   // stakeble if either not yet staked and on Fantom Opera or not on Fantom Opera.
   const isStakeable = chainId == ChainId.FANTOM && stakedBal == 0 || chainId != ChainId.FANTOM
@@ -187,10 +187,10 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1Symbol, token2Symbol, tok
           <Row onClick={() => handleShow()}>
             <BondContentWrapper>
               <TokenPairBox>
-                {bond.token2Address && <Wrap className="flex-cols-2">
+                {bond.token1Address && <Wrap className="flex-cols-2">
                   <TokenLogo
                     src={
-                      'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/' + chain + '/assets/' + bond.token1Address + '/logo.png'
+                      'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/' + chain + '/assets/' + bond.token0Address + '/logo.png'
                     }
                     alt="LOGO"
                     width="38px"
@@ -200,7 +200,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1Symbol, token2Symbol, tok
                   />
                   <TokenLogo
                     src={
-                      'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/' + chain + '/assets/' + bond.token2Address + '/logo.png'
+                      'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/' + chain + '/assets/' + bond.token1Address + '/logo.png'
                     }
                     alt="LOGO"
                     width="38px"
@@ -271,8 +271,8 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1Symbol, token2Symbol, tok
                             color={'white'}
                             href=
                             {bond.token1Symbol == NATIVE[chainId].symbol ?
-                              `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token2Address[chainId]}`
-                              : `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token1Address[chainId]}`
+                              `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token1Address[chainId]}`
+                              : `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token0Address[chainId]}`
                             }
                           >
                             CREATE {bond.token1Symbol}-{bond.token2Symbol} PAIR
@@ -287,7 +287,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1Symbol, token2Symbol, tok
                             rel="noopener"
                             color={"white"}
                             href=
-                            {`https://exchange.soulswap.finance/add/${bond.token1Address[chainId]}/${bond.token2Address[chainId]}`}
+                            {`https://exchange.soulswap.finance/add/${bond.token0Address[chainId]}/${bond.token1Address[chainId]}`}
                           >
                             CREATE {bond.token1Symbol}-{bond.token2Symbol} PAIR
                           </TokenPairLink>
