@@ -78,7 +78,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1Symbol, token2Symbol, tok
   const token0Symbol = pairInfo.token0Symbol
   const token0Name = pairInfo.token0Name
   
-  const token1Symbol = pairInfo.token1Symbol
+  // const token1Symbol = pairInfo.token1Symbol
   const token1Name = pairInfo.token1Name
   const token0Decimals = Number(pairInfo.token0Decimals)
   const token1Decimals = Number(pairInfo.token1Decimals)
