@@ -6,7 +6,7 @@ import BondInputPanel from './Input'
 import { useActiveWeb3React } from 'services/web3'
 import useSoulBond from './hooks/useSoulBond'
 import useApprove from './hooks/useApprove'
-import { SOUL_BOND_ADDRESS } from 'sdk'
+import { ChainId, SOUL_BOND_ADDRESS } from 'sdk'
 import {
   BondContainer,
   Row,
@@ -40,7 +40,7 @@ const TokenLogo = styled(Image)`
   }
 `
 
-const BondRowRender = ({ pid, lpSymbol, lpToken, token1Address, token2Address, bond }) => {
+const BondRowRender = ({ pid, lpSymbol, lpToken, token1Symbol, token2Symbol, token1Address, token2Address, bond }) => {
   const { account, chainId } = useActiveWeb3React()
 
   const { deposit, mint } = useSoulBond(pid, lpToken, bond.token1Address, bond.token2Address)
@@ -54,7 +54,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1Address, token2Address, b
 
   const assetAddress = lpToken
   const soulPrice = useSoulPrice()
-  const chain = chainId == 43114 ? 'avalanche' : 'fantom'
+  const chain = chainId == ChainId.AVALANCHE ? 'avalanche' : 'fantom'
 
   // API DATA //
   const { soulBondInfo } = useSoulBondInfo(pid)
@@ -84,8 +84,9 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1Address, token2Address, b
   const token1Decimals = Number(pairInfo.token1Decimals)
   const token0 = new Token(chainId, bond.token1Address, token0Decimals, token0Symbol, token0Name)
   const token1 = new Token(chainId, bond.token2Address, token1Decimals, token1Symbol, token1Name)
+  
   // stakeble if either not yet staked and on Fantom Opera or not on Fantom Opera.
-  const isStakeable = chainId == 250 && stakedBal == 0 || chainId != 250
+  const isStakeable = chainId == ChainId.FANTOM && stakedBal == 0 || chainId != ChainId.FANTOM
 
   // CALCULATIONS
   const stakedLpValue = stakedBal * lpPrice
@@ -260,7 +261,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1Address, token2Address, b
                   <Wrap padding="0" margin="0" display="flex">
                     {(approved && Number(unstakedBal) == 0) ?
                       (
-                        (bond.token1 == NATIVE[chainId].symbol || bond.token2 == NATIVE[chainId].symbol) ? (
+                        (bond.token1Symbol == NATIVE[chainId].symbol || bond.token2Symbol == NATIVE[chainId].symbol) ? (
                           <SubmitButton
                           primaryColor={getChainColor(chainId)}
                           >
@@ -269,12 +270,12 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1Address, token2Address, b
                             rel="noopener"
                             color={'white'}
                             href=
-                            {bond.token1 == NATIVE[chainId].symbol ?
+                            {bond.token1Symbol == NATIVE[chainId].symbol ?
                               `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token2Address[chainId]}`
                               : `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token1Address[chainId]}`
                             }
                           >
-                            CREATE {bond.token1}-{bond.token2} PAIR
+                            CREATE {bond.token1Symbol}-{bond.token2Symbol} PAIR
                           </TokenPairLink>
                           </SubmitButton>
                         ) :
@@ -288,7 +289,7 @@ const BondRowRender = ({ pid, lpSymbol, lpToken, token1Address, token2Address, b
                             href=
                             {`https://exchange.soulswap.finance/add/${bond.token1Address[chainId]}/${bond.token2Address[chainId]}`}
                           >
-                            CREATE {bond.token1}-{bond.token2} PAIR
+                            CREATE {bond.token1Symbol}-{bond.token2Symbol} PAIR
                           </TokenPairLink>
                       </SubmitButton>
                       ) :

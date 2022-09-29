@@ -12,6 +12,8 @@ const BondList = () => {
       pid={bond.pid}
       lpSymbol={bond.lpSymbol}
       lpToken={bond.lpAddress}
+      token1Symbol={bond.token1Symbol}
+      token2Symbol={bond.token2Symbol}
       token1Address={bond.token1Address}
       token2Address={bond.token2Address}
       bond={bond}
@@ -24,6 +26,8 @@ const BondList = () => {
       pid={bond.pid}
       lpSymbol={bond.lpSymbol}
       lpToken={bond.lpAddress}
+      token1Symbol={bond.token1Symbol}
+      token2Symbol={bond.token2Symbol}
       token1Address={bond.token1Address}
       token2Address={bond.token2Address}
       bond={bond}
