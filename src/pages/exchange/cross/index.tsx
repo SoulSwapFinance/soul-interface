@@ -34,77 +34,17 @@ import Row from "components/Row";
 import ModalHeader from "components/Modal/Header";
 import { WrappedCrossChainTrade } from "rubic-sdk/lib/features/cross-chain/providers/common/models/wrapped-cross-chain-trade";
 import { useMulticallContract } from "hooks/useContract";
-
-interface Exchange {
-  from: { chain: Chain; token: Token };
-  to: { chain: Chain; token: Token };
-}
-
-export function getLastExchange(): Exchange {
-  const lastExchange = JSON.parse(localStorage.getItem("exchange"));
-  if (!lastExchange) {
-    return undefined;
-  }
-
-  const fromChain = CHAINS.find(c => c.chainId === lastExchange.from.chain);
-  const fromToken = fromChain?.tokens.find(t => t.id === lastExchange.from.token);
-  const toChain = CHAINS.find(c => c.chainId === lastExchange.to?.chain);
-  const toToken = toChain?.tokens.find(t => t.id === lastExchange.to?.token);
-  return { from: { chain: fromChain, token: fromToken }, to: { chain: toChain, token: toToken } };
-}
-
-function setLastExchange(from: { chain: Chain; token: Token }, to: { chain: Chain; token: Token }) {
-  localStorage.setItem(
-    "exchange",
-    JSON.stringify({
-      from: { chain: from.chain.chainId, token: from.token.id },
-      to: { chain: to?.chain.chainId, token: to?.token?.id },
-    }),
-  );
-}
-
-const NATIVE_ADDRESS = "0x0000000000000000000000000000000000000000";
-
-export const CHAIN_BY_ID = new Map([
-  [FANTOM.chainId, BLOCKCHAIN_NAME.FANTOM],
-  [MOONRIVER.chainId, BLOCKCHAIN_NAME.MOONRIVER],
-  [POLYGON.chainId, BLOCKCHAIN_NAME.POLYGON],
-  [AVALANCHE.chainId, BLOCKCHAIN_NAME.AVALANCHE],
-  [ETHEREUM.chainId, BLOCKCHAIN_NAME.ETHEREUM],
-  [BINANCE.chainId, BLOCKCHAIN_NAME.BINANCE_SMART_CHAIN],
-]);
-
-const rubicConfiguration: Configuration = {
-  providerAddress: '0xFd63Bf84471Bc55DD9A83fdFA293CCBD27e1F4C8',
-  rpcProviders: {
-    [BLOCKCHAIN_NAME.BINANCE_SMART_CHAIN]: {
-      mainRpc: BINANCE.rpc[0],
-    },
-    [BLOCKCHAIN_NAME.MOONRIVER]: {
-      mainRpc: MOONRIVER.rpc[0],
-    },
-    [BLOCKCHAIN_NAME.POLYGON]: {
-      mainRpc: POLYGON.rpc[0],
-    },
-    [BLOCKCHAIN_NAME.AVALANCHE]: {
-      mainRpc: AVALANCHE.rpc[0],
-    },
-    [BLOCKCHAIN_NAME.ETHEREUM]: {
-      mainRpc: ETHEREUM.rpc[0],
-    },
-    [BLOCKCHAIN_NAME.FANTOM]: {
-      mainRpc: FANTOM.rpc[0],
-    },
-  },
-};
-
-const FTM = FANTOM.tokens.find(t => t.id === "fantom");
-const AVAX = AVALANCHE.tokens.find(t => t.id === "avalanche-2");
+import { getLastExchange, setLastExchange } from "utils/rubic/hooks";
+import { AVAX, CHAIN_BY_ID, FTM, NATIVE_ADDRESS, rubicConfiguration } from "utils/rubic/configuration";
 
 export default function Exchange() {
   const lastExchange = useMemo(() => {
     return getLastExchange() ?? { from: { chain: FANTOM, token: FTM }, to: { chain: AVALANCHE, token: AVAX } };
   }, []);
+  const { account, chainId } = useActiveWeb3React()
+  const [providerAddress, setProvider] = useState('')
+  const [wallet, setWallet] = useState<WalletProvider>(null)
+
   const [from, setFrom] = useState<Token>(lastExchange.from.token);
   const [to, setTo] = useState<Token>(lastExchange.to?.token);
   const [fromChain, setFromChain] = useState<Chain>(lastExchange.from.chain);
@@ -123,20 +63,6 @@ export default function Exchange() {
   useEffect(() => {
     SDK.createSDK(configuration).then(setRubic);
   }, []);
-
-  const { account, chainId } = useActiveWeb3React()
-  // const { userInfo } = useUserInfo()
-  // const { userTokenInfo } = useUserTokenInfo(account, from.address)
-  // const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
-
-  // let nativeBalance = //userEthBalance ?
-  // [ChainId.AVALANCHE, ChainId.FANTOM].includes(fromChain?.chainId) ? (Number(userInfo.nativeBalance) * 1E18).toFixed(0)
-  //     : 0
-  // Number(userEthBalance) 
-
-  const [wallet, setWallet] = useState<WalletProvider>(null)
-  
-  const [providerAddress, setProvider] = useState('')
 
   useEffect(() => {
     if (!account) {
@@ -160,9 +86,6 @@ export default function Exchange() {
 
       const userBalance = await getBalance()
       const balance = Number(userBalance) / 10 ** (from?.decimals ? from?.decimals : 18)
-      // const nativeBalance = fromChain?.chainId == ChainId.FANTOM
-      //   ? (Number(userInfo.nativeBalance) * 1E18).toFixed(0)
-      //   : balance
 
       setConfiguration(newConfiguration);
       if (rubic) {
@@ -349,10 +272,6 @@ export default function Exchange() {
   const deltaPercent = 100 * deltaUsd / Number(fromUsd)
   const toggleNetworkModal = useNetworkModalToggle()
   const wrongNetwork = fromChain?.chainId != chainId ? true : false
-
-  // console.log('toAmount:%s', toAmount)
-  // console.log('deltaUsd:%s', deltaUsd)
-  // console.log('deltaPercent:%s', deltaPercent)
 
   return (
     <>

@@ -27,23 +27,30 @@ import { SwapLayout, SwapLayoutCard } from 'layouts/SwapLayout'
 import TokenWarningModal from 'modals/TokenWarningModal'
 import { useActiveWeb3React } from 'services/web3'
 import { Field, setRecipient } from 'state/swap/actions'
+import { AVAX, CHAIN_BY_ID, FTM, NATIVE_ADDRESS, rubicConfiguration } from 'utils/rubic/configuration'
 import { useDefaultsFromURLSearch, useDerivedSwapInfo, useSwapActionHandlers, useSwapState } from 'state/swap/hooks'
 import { useExpertModeManager, useUserOpenMev, useUserSingleHopOnly } from 'state/user/hooks' // useCrossChainModeManager
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
 import Chart from 'components/Chart'
-// import Cross from 'pages/exchange/cross'
-// import NavLink from 'components/NavLink'
-// import ExternalLink from 'components/ExternalLink'
+import { FANTOM, AVALANCHE, BINANCE, Chain, CHAINS, ETHEREUM, POLYGON, MOONRIVER, Token as CrossToken } from "features/cross/chains";
+import SDK, {
+  BLOCKCHAIN_NAME,
+  Configuration,
+  InstantTrade,
+  WalletProvider,
+  InsufficientFundsError,
+  InsufficientLiquidityError
+} from "rubic-sdk";
 import { Toggle } from 'components/Toggle'
-// import Image from 'next/image'
-// import styled from 'styled-components'
 import SocialWidget from 'components/Social'
 import { getChainColorCode } from 'constants/chains'
 import { classNames } from 'functions/styling'
 import { NewFeature } from 'components/Banner'
 import NavLink from 'components/NavLink'
-// import CrossChainMode from 'components/CrossChainMode'
+import { WrappedCrossChainTrade } from 'rubic-sdk/lib/features/cross-chain/providers/common/models/wrapped-cross-chain-trade'
+import { sleep } from 'features/crosschain/utils'
+import { getLastExchange } from 'utils/rubic/hooks'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -51,7 +58,6 @@ const Swap = () => {
   const { account, chainId } = useActiveWeb3React()
   const defaultTokens = useAllTokens()
   const [isExpertMode] = useExpertModeManager()
-  // const [isCrossChainMode] = useCrossChainModeManager()
   const { independentField, typedValue, recipient } = useSwapState()
   const { v2Trade, parsedAmount, currencies, inputError: swapInputError, allowedSlippage, to } = useDerivedSwapInfo()
   const [loadedInputCurrency, loadedOutputCurrency] = [
@@ -69,10 +75,6 @@ const Swap = () => {
   }, [])
 
   const [showChart, setShowChart] = useState(false)
-  // const [expertMode, openExpertMode] = useState(false)
-  // const [showCrossChain, setShowCrossChain] = useState(false)
-  // const [showCrosschain, openCrossChainMode] = useState(false)
-  // const toggle = toggleExpertMode()
 
   // dismiss warning if all imported tokens are in active lists
   const importTokensNotInDefault =
@@ -183,7 +185,6 @@ const Swap = () => {
     allowedSlippage,
     to,
     signatureData,
-    /* @ts-ignore TYPE NEEDS FIXING */
     null,
     useOpenMev
   )
@@ -333,6 +334,136 @@ const Swap = () => {
         return 'text-red'
     }
   }, [priceImpactSeverity])
+
+  /// CROSSCHAIN FUNCTIONALITY ///
+
+  const lastExchange = useMemo(() => {
+    return getLastExchange() ?? { from: { chain: FANTOM, token: FTM }, to: { chain: AVALANCHE, token: AVAX } };
+  }, []);
+  
+  const [crossFrom, setCrossFrom] = useState<CrossToken>(lastExchange.from.token);
+  const [crossTo, setCrossTo] = useState<CrossToken>(lastExchange.to?.token);
+  const [fromChain, setFromChain] = useState<Chain>(lastExchange.from.chain);
+  const [toChain, setToChain] = useState<Chain>(lastExchange.to?.chain);
+  const [fromUsd, setFromUsd] = useState<string>('0');
+  const [toUsd, setToUsd] = useState<string>('0');
+  const [outputAmount, setOutputAmount] = useState<string>();
+  const [amount, setAmount] = useState("");
+  const [fromBalance, setBalance] = useState("");
+  const [crossTrade, setCrossTrade] = useState<InstantTrade | WrappedCrossChainTrade>(undefined);
+  const [canBuy, setCanBuy] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [configuration, setConfiguration] = useState(rubicConfiguration);
+  const [rubic, setRubic] = useState<SDK>(null);
+
+  useEffect(() => {
+    if (!rubic) {
+      return;
+    }
+
+    let disposed = false;
+    async function run() {
+      // avoids pinging CG and RPCs on keystrokes.
+      await sleep(300 / 1000);
+
+      if (disposed) {
+        return;
+      }
+
+      try {
+        const tradeRequest =
+          fromChain?.chainId === toChain?.chainId
+            ? rubic.instantTrades.calculateTrade(
+              {
+                address: crossFrom.isNative ? NATIVE_ADDRESS : crossFrom.address,
+                blockchain: CHAIN_BY_ID.get(fromChain?.chainId),
+              },
+              amount,
+              crossTo?.isNative ? NATIVE_ADDRESS : crossTo?.address,
+            )
+              .then((trades: InstantTrade[]): InstantTrade => trades[0])
+            : rubic.crossChain.calculateTrade(
+              // (1) fromToken
+              {
+                address: crossFrom.isNative ? NATIVE_ADDRESS : crossFrom.address,
+                blockchain: CHAIN_BY_ID.get(fromChain?.chainId),
+              },
+              // (2) fromAmount
+              amount,
+              // (3) toToken
+              {
+                address: crossTo?.isNative ? NATIVE_ADDRESS : crossTo?.address,
+                blockchain: CHAIN_BY_ID.get(toChain.chainId),
+              },
+              // (4) options (optional)
+            )
+              .then((trades: WrappedCrossChainTrade[]): WrappedCrossChainTrade => trades[0])
+
+        const newTrade = await tradeRequest;
+        const [newFromUsd, newToUsd] = await Promise.all([
+          // the USD value of (from) being _sold_.
+          crossFrom.isNative
+            ? rubic.cryptoPriceApi.getNativeCoinPrice(CHAIN_BY_ID.get(fromChain?.chainId))
+            : rubic.cryptoPriceApi.getErc20TokenPrice({
+              address: crossFrom.address,
+              blockchain: CHAIN_BY_ID.get(fromChain?.chainId),
+            }),
+
+          // the USD value of (to) being _bought_.
+          crossTo?.isNative
+            ? rubic.cryptoPriceApi.getNativeCoinPrice(CHAIN_BY_ID.get(toChain?.chainId))
+            : rubic.cryptoPriceApi.getErc20TokenPrice({
+              address: crossTo?.address,
+              blockchain: CHAIN_BY_ID.get(toChain?.chainId),
+            }),
+        ])
+        if (disposed) {
+          return;
+        }
+
+        if (newTrade instanceof InstantTrade) {
+          setCrossTrade(newTrade);
+          setFromUsd((Number(newFromUsd) * Number(newTrade.from.tokenAmount)).toString())
+          setToUsd((Number(newToUsd) * Number((newTrade.to?.tokenAmount))).toString())
+        } else {
+          const test = newTrade
+          setCrossTrade(test);
+          setFromUsd((Number(newFromUsd) * Number(test.trade.from?.tokenAmount)).toString())
+          setToUsd((Number(newToUsd) * Number((test.trade.to?.tokenAmount))).toString())
+          setOutputAmount(Number(test.trade.to?.tokenAmount).toString())
+          console.log('outputAmount:%s', outputAmount)
+        }
+
+        setLoading(false)
+
+      } catch (e) {
+        if (disposed) {
+          return;
+        }
+        setLoading(false);
+        if (e instanceof InsufficientLiquidityError) {
+          setCanBuy(false);
+        } else {
+          console.warn(e);
+        }
+      }
+    }
+    setCrossTrade(undefined);
+    setFromUsd(undefined);
+    setToUsd(undefined);
+    setCanBuy(true);
+
+    const isTradingSameToken = fromChain?.chainId === toChain?.chainId && crossFrom.id === crossTo?.id;
+    if (amount && parseFloat(amount) > 0 && !isTradingSameToken) {
+      setLoading(true);
+      run();
+      return () => {
+        disposed = true;
+      };
+    } else {
+      setLoading(false);
+    }
+  }, [crossFrom, fromChain, to, toChain, amount, rubic]);
 
   return (
     <>
