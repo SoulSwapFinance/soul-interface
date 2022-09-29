@@ -261,7 +261,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token1Symbol, token0Address
                   <Wrap padding="0" margin="0" display="flex">
                     {(approved && Number(unstakedBal) == 0) ?
                       (
-                        (bond.token1Symbol == NATIVE[chainId].symbol || bond.token2Symbol == NATIVE[chainId].symbol) ? (
+                        (bond.token0Symbol == NATIVE[chainId].symbol || bond.token1Symbol == NATIVE[chainId].symbol) ? (
                           <SubmitButton
                           primaryColor={getChainColor(chainId)}
                           >
@@ -275,7 +275,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token1Symbol, token0Address
                               : `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token0Address[chainId]}`
                             }
                           >
-                            CREATE {bond.token1Symbol}-{bond.token2Symbol} PAIR
+                            CREATE {bond.token0Symbol}-{bond.token1Symbol} PAIR
                           </TokenPairLink>
                           </SubmitButton>
                         ) :
@@ -289,7 +289,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token1Symbol, token0Address
                             href=
                             {`https://exchange.soulswap.finance/add/${bond.token0Address[chainId]}/${bond.token1Address[chainId]}`}
                           >
-                            CREATE {bond.token1Symbol}-{bond.token2Symbol} PAIR
+                            CREATE {bond.token0Symbol}-{bond.token1Symbol} PAIR
                           </TokenPairLink>
                       </SubmitButton>
                       ) :
@@ -302,7 +302,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token1Symbol, token0Address
                               handleDeposit(depositValue)
                             }
                           >
-                            DEPOSIT {bond.token1}-{bond.token2} LP
+                            DEPOSIT {bond.token0Symbol}-{bond.token1Symbol} LP
                           </SubmitButton>
                         ) :
                         (
