@@ -40,7 +40,7 @@ const TokenLogo = styled(Image)`
   }
 `
 
-const BondRowRender = ({ pid, lpSymbol, lpToken, token1Address, token2Address, bond }) => {
+const BondRowRender = ({ pid, lpSymbol, lpToken, token1, token2, token1Address, token2Address, bond }) => {
   const { account, chainId } = useActiveWeb3React()
 
   const { deposit, mint } = useSoulBond(pid, lpToken, bond.token1Address, bond.token2Address)
