@@ -40,7 +40,7 @@ export default function TokenStatsModal(): JSX.Element | null {
   const totalSoul = Number(useTokenInfo(SOUL_ADDRESS[250]).tokenInfo.supply) / 1e18
 
   const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[250]).tokenInfo.price)
-  const seancePrice = Number(useTokenInfo(SEANCE_ADDRESS[250]).tokenInfo.price)
+  // const seancePrice = Number(useTokenInfo(SEANCE_ADDRESS[250]).tokenInfo.price)
 
   const tvlInfo = useTVL()
   const bondInfo = useBondTVL()
@@ -129,7 +129,7 @@ export default function TokenStatsModal(): JSX.Element | null {
                 className="rounded-md"
               />
             </div>
-            <div
+           {/* <div
               className="rounded-md border border-purple cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
               onClick={() => {
                 const params: any = {
@@ -167,6 +167,7 @@ export default function TokenStatsModal(): JSX.Element | null {
                 className="rounded-md"
               />
             </div>
+            */}
           </div>
         </div>
       </div>
@@ -372,13 +373,13 @@ export default function TokenStatsModal(): JSX.Element | null {
           formatCurrency(
             Number(soulPrice), 3)
         )}
-        {getSummaryLine(
+        {/* getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Seance Market Price`}
           </Typography>,
           formatCurrency(
             Number(seancePrice), 3)
-        )}
+        ) */}
         <div className="flex mt-3" />
         <Button
           color='purple'

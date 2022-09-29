@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import { classNames, formatNumber } from 'functions'
 import DashboardDonutChart from 'components/Dashboard/DonutChart'
 import DashboardChartLegend from 'components/Dashboard/ChartLegend'
-import { useSeancePrice, useSoulPrice } from 'hooks/getPrices'
+import { useSoulPrice } from 'hooks/getPrices'
 import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
@@ -19,7 +19,7 @@ import { getChainInfo, getChainColorCode } from 'constants/chains'
 
 export default function Dashboard() {
   const { i18n } = useLingui()
-  const seancePrice = useSeancePrice()
+  // const seancePrice = useSeancePrice()
   const { chainId } = useActiveWeb3React()
   const { tokenInfo } = useTokenInfo(SOUL_ADDRESS[chainId])
   // const bondInfo = useBondTVL()
