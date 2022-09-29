@@ -77,7 +77,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     const [earnedAmount, setEarnedAmount] = useState(0)
     const [unstakedBal, setUnstakedBal] = useState(0)
     // const [pending, setPending] = useState(0)
-
     const { autoStakeInfo } = useAutoStakeInfo()
     // const performanceFee = autoStakeInfo.performanceFee
     // const available = autoStakeInfo.available
@@ -95,18 +94,14 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     // const balance = useCurrencyBalance(account, SOUL[chainId])
     // const stakedBalance = AutoStakeContract?.balanceOf(account)
 
-    /**
-     * Runs only on initial render/mount
-     */
+    // runs: on initial render/mount
     useEffect(() => {
         getApyAndLiquidity()
         fetchBals()
         fetchApproval()
     }, [account])
 
-    /**
-     * Runs on initial render/mount and reruns every 2 seconds
-     */
+    // runs: on initial render/mount & reruns every 2 seconds
     useEffect(() => {
         if (account) {
             const timer = setTimeout(() => {
@@ -122,9 +117,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
         }
     })
 
-    /**
-     * Opens the function panel dropdown
-     */
+    // opens: function panel dropdown
     const handleShow = () => {
         setShowing(!showing)
         if (!showing) {
@@ -465,7 +458,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                             primaryColor="#A654DC"
                                             color="white"
                                             margin=".5rem 0 .5rem 0"
-                                            // onClick={() => handleHarvest()
                                             onClick={() => setShowHarvestConfirmation(true)
                                             }
                                         >
@@ -479,7 +471,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                         color="black"
                                         margin=".5rem 0 .5rem 0"
                                         onClick={() =>
-                                            setShowWithdrawConfirmation(true)
+                            setShowWithdrawConfirmation(true)
                                         }
                                     >
                                         WITHDRAW ALL

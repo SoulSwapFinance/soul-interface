@@ -9,7 +9,7 @@ export const AvalanchePools = [
     token2: 'SOUL',
     lpSymbol: 'SOUL',
     lpAddress: SOUL_ADDRESS[ChainId.AVALANCHE],
-    token1Address: SOUL_ADDRESS[ChainId.AVALANCHE]
+    token1Address: SOUL_ADDRESS[ChainId.AVALANCHE],
     token2Address: SOUL_ADDRESS[ChainId.AVALANCHE]
   },
 ]
@@ -24,7 +24,7 @@ export const FantomPools = [
     token2: 'SOUL',
     lpSymbol: 'SOUL',
     lpAddress:  SOUL_ADDRESS[ChainId.FANTOM],
-    token1Address: SOUL_ADDRESS[ChainId.FANTOM]
+    token1Address: SOUL_ADDRESS[ChainId.FANTOM],
     token2Address: SOUL_ADDRESS[ChainId.FANTOM]
   },
 ]
