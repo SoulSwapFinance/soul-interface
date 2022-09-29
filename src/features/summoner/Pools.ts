@@ -3,8 +3,8 @@ import { ChainId, SEANCE_ADDRESS, SOUL_ADDRESS, USDC_ADDRESS, LUX_ADDRESS, WLUM_
 export const InactiveAvalanchePools = [
   // { 
   //   pid: undefined,
-  //   token1: undefined,
-  //   token2: undefined,
+  //   token0Symbol: undefined,
+  //   token1Symbol: undefined,
   //   lpSymbol: undefined,
   //   lpAddress: '',
   //   token0Address: '', 
@@ -16,8 +16,8 @@ export const InactiveFantomPools = [
   {
     // 0
     pid: 16,
-    token1: 'DAI',
-    token2: 'gFUSDT',
+    token0Symbol: 'DAI',
+    token1Symbol: 'gFUSDT',
     lpSymbol: 'DAI-gFUSDT',
     lpAddress: '0xe637D90A993EDBD75AC09E9fcB16313D193B9451',
     token0Address: DAI_ADDRESS[ChainId.FANTOM], 
@@ -26,8 +26,8 @@ export const InactiveFantomPools = [
   {
     // 0
     pid: 6,
-    token1: 'USDC',
-    token2: 'FUSD',
+    token0Symbol: 'USDC',
+    token1Symbol: 'FUSD',
     lpSymbol: 'USDC-FUSD',
     lpAddress: '0xD5F5E2638d636A98eD4aAEBfd2045441316e0c08',
     token0Address: USDC_ADDRESS[ChainId.FANTOM],
@@ -36,8 +36,8 @@ export const InactiveFantomPools = [
   {
     // 0
     pid: 9,
-    token1: 'USDC',
-    token2: 'USDT',
+    token0Symbol: 'USDC',
+    token1Symbol: 'USDT',
     lpSymbol: 'USDC-USDT',
     lpAddress: '0x298c12d6d9d6746dd0ef0a89421288f52d5566ef',
     token0Address: USDC_ADDRESS[ChainId.FANTOM],
@@ -48,8 +48,8 @@ export const InactiveFantomPools = [
 export const AvalanchePools = [
   {
     pid: 1,
-    token1: 'SOUL',
-    token2: 'AVAX',
+    token0Symbol: 'SOUL',
+    token1Symbol: 'AVAX',
     lpSymbol: 'SOUL-AVAX',
     lpAddress: SOUL_NATIVE_ADDRESS[ChainId.AVALANCHE],
     token0Address: SOUL_ADDRESS[ChainId.AVALANCHE],
@@ -57,8 +57,8 @@ export const AvalanchePools = [
   },
   {
     pid: 2,
-    token1: 'SOUL',
-    token2: 'USDC',
+    token0Symbol: 'SOUL',
+    token1Symbol: 'USDC',
     lpSymbol: 'SOUL-USDC',
     lpAddress: SOUL_USDC_ADDRESS[ChainId.AVALANCHE],
     token0Address: SOUL_ADDRESS[ChainId.AVALANCHE],
@@ -66,8 +66,8 @@ export const AvalanchePools = [
   },
   {
     pid: 3,
-    token1: 'AVAX',
-    token2: 'USDC',
+    token0Symbol: 'AVAX',
+    token1Symbol: 'USDC',
     lpSymbol: 'AVAX-USDC',
     lpAddress: USDC_NATIVE_ADDRESS[ChainId.AVALANCHE],
     token0Address: USDC_ADDRESS[ChainId.AVALANCHE],
@@ -75,8 +75,8 @@ export const AvalanchePools = [
   },
   {
     pid: 4,
-    token1: 'AVAX',
-    token2: 'BTC',
+    token0Symbol: 'AVAX',
+    token1Symbol: 'BTC',
     lpSymbol: 'AVAX-BTC',
     lpAddress: BTC_NATIVE_ADDRESS[ChainId.AVALANCHE],
     token0Address: WBTC_ADDRESS[ChainId.AVALANCHE],
@@ -84,8 +84,8 @@ export const AvalanchePools = [
   },
   {
     pid: 5,
-    token1: 'AVAX',
-    token2: 'ETH',
+    token0Symbol: 'AVAX',
+    token1Symbol: 'ETH',
     lpSymbol: 'AVAX-ETH',
     lpAddress: ETH_NATIVE_ADDRESS[ChainId.AVALANCHE],
     token0Address: WETH_ADDRESS[ChainId.AVALANCHE],
@@ -93,8 +93,8 @@ export const AvalanchePools = [
   },
   {
     pid: 6,
-    token1: 'USDC',
-    token2: 'DAI',
+    token0Symbol: 'USDC',
+    token1Symbol: 'DAI',
     lpSymbol: 'USDC-DAI',
     lpAddress: USDC_DAI_ADDRESS[ChainId.AVALANCHE],
     token0Address: USDC_ADDRESS[ChainId.AVALANCHE],
@@ -106,8 +106,8 @@ export const FantomPools = [
   {
     // 7500
     pid: 1,
-    token1: 'SOUL',
-    token2: 'FTM',
+    token0Symbol: 'SOUL',
+    token1Symbol: 'FTM',
     lpSymbol: 'SOUL-FTM',
     lpAddress: '0x6Da1AD717C7577AAB46C19aB6d3d9C31aff32A00',
     token0Address: SOUL_ADDRESS[ChainId.FANTOM],
@@ -116,8 +116,8 @@ export const FantomPools = [
   {
     // 600
     pid: 22,
-    token1: 'SOUL',
-    token2: 'USDC',
+    token0Symbol: 'SOUL',
+    token1Symbol: 'USDC',
     lpSymbol: 'SOUL-USDC',
     lpAddress: '0xC0A301f1E5E0Fe37a31657e8F60a41b14d01B0Ef',
     token0Address: SOUL_ADDRESS[ChainId.FANTOM],
@@ -126,8 +126,8 @@ export const FantomPools = [
   {
     // 600
     pid: 5,
-    token1: 'SOUL',
-    token2: 'SEANCE',
+    token0Symbol: 'SOUL',
+    token1Symbol: 'SEANCE',
     lpSymbol: 'SOUL-SEANCE',
     lpAddress: '0x8f1E15cD3d5a0bb85B8189d5c6B61BB64398E19b',
     token0Address: SOUL_ADDRESS[ChainId.FANTOM],
@@ -136,8 +136,8 @@ export const FantomPools = [
   {
     // 600
     pid: 10,
-    token1: 'SEANCE',
-    token2: 'FTM',
+    token0Symbol: 'SEANCE',
+    token1Symbol: 'FTM',
     lpSymbol: 'SEANCE-FTM',
     lpAddress: '0x8542bEAC34282aFe5Bb6951Eb6DCE0B3783b7faB',
     token0Address: SEANCE_ADDRESS[ChainId.FANTOM],
@@ -146,8 +146,8 @@ export const FantomPools = [
   {
     // 400
     pid: 7,
-    token1: 'SEANCE',
-    token2: 'USDC',
+    token0Symbol: 'SEANCE',
+    token1Symbol: 'USDC',
     lpSymbol: 'SEANCE-USDC',
     lpAddress: '0x98C678d3C7ebeD4a36B84666700d8b5b5Ddc1f79',
     token0Address: SEANCE_ADDRESS[ChainId.FANTOM],
@@ -156,8 +156,8 @@ export const FantomPools = [
   {
     // 750
     pid: 54,
-    token1: 'FTM',
-    token2: 'SOR',
+    token0Symbol: 'FTM',
+    token1Symbol: 'SOR',
     lpSymbol: 'FTM-SOR',
     lpAddress: '0xdfB2218b48627794711E6cFd72e26c541E456F6F',
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
@@ -166,8 +166,8 @@ export const FantomPools = [
   {
     // 1500
     pid: 47,
-    token1: 'FTM',
-    token2: 'wLUM',
+    token0Symbol: 'FTM',
+    token1Symbol: 'wLUM',
     lpSymbol: 'FTM-wLUM',
     lpAddress: '0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99',
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
@@ -176,8 +176,8 @@ export const FantomPools = [
   {
     // 1000
     pid: 44,
-    token1: 'FTM',
-    token2: 'LUX',
+    token0Symbol: 'FTM',
+    token1Symbol: 'LUX',
     lpSymbol: 'FTM-LUX',
     lpAddress: '0x951BBB838e49F7081072895947735b0892cCcbCD',
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
@@ -186,8 +186,8 @@ export const FantomPools = [
   {
     // 300
     pid: 38,
-    token1: 'FTM',
-    token2: 'FUSD',
+    token0Symbol: 'FTM',
+    token1Symbol: 'FUSD',
     lpSymbol: 'FTM-FUSD',
     lpAddress: '0x1AE16105a7d4bE7DFD9737FD13D9A50AEFed1437',
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
@@ -196,8 +196,8 @@ export const FantomPools = [
   {
     // 600
     pid: 23,
-    token1: 'FTM',
-    token2: 'DAI',
+    token0Symbol: 'FTM',
+    token1Symbol: 'DAI',
     lpSymbol: 'FTM-DAI',
     lpAddress: '0xF3d6E8Ecece8647B456d57375Ce0B51B8F0cD40b',
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
@@ -206,8 +206,8 @@ export const FantomPools = [
   {
     // 600
     pid: 2,
-    token1: 'FTM',
-    token2: 'USDC',
+    token0Symbol: 'FTM',
+    token1Symbol: 'USDC',
     lpSymbol: 'FTM-USDC',
     lpAddress: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556',
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
@@ -216,8 +216,8 @@ export const FantomPools = [
   {
     // 600
     pid: 55,
-    token1: 'FTM',
-    token2: 'AVAX',
+    token0Symbol: 'FTM',
+    token1Symbol: 'AVAX',
     lpSymbol: 'FTM-AVAX',
     lpAddress: '0x5159Ba92FDC80b3a4B19De279711b1822de06c86',
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
@@ -226,8 +226,8 @@ export const FantomPools = [
   {
     // 600
     pid: 18,
-    token1: 'FTM',
-    token2: 'BNB',
+    token0Symbol: 'FTM',
+    token1Symbol: 'BNB',
     lpSymbol: 'FTM-BNB',
     lpAddress: '0x52966a12e3211c92909C28603ca3df8465c06c82',
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
@@ -236,8 +236,8 @@ export const FantomPools = [
   {
     // 600
     pid: 4,
-    token1: 'FTM',
-    token2: 'WETH',
+    token0Symbol: 'FTM',
+    token1Symbol: 'WETH',
     lpSymbol: 'FTM-ETH',
     lpAddress: '0xC615a5fd68265D9Ec6eF60805998fa5Bb71972Cb',
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
@@ -246,8 +246,8 @@ export const FantomPools = [
   {
     // 600
     pid: 13,
-    token1: 'FTM',
-    token2: 'BTC',
+    token0Symbol: 'FTM',
+    token1Symbol: 'BTC',
     lpSymbol: 'FTM-BTC',
     lpAddress: '0xecB41D6B5885E75a149EDA173e92267aa271D895',
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
@@ -256,8 +256,8 @@ export const FantomPools = [
   {
     // 300
     pid: 41,
-    token1: 'FTM',
-    token2: 'CRV',
+    token0Symbol: 'FTM',
+    token1Symbol: 'CRV',
     lpSymbol: 'FTM-CRV',
     lpAddress: '0x1C9A342A615E8CAB4d21A2ACA7E40a48b2F8747F',
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
@@ -266,8 +266,8 @@ export const FantomPools = [
   {
     // 400
     pid: 15,
-    token1: 'WETH',
-    token2: 'USDC',
+    token0Symbol: 'WETH',
+    token1Symbol: 'USDC',
     lpSymbol: 'ETH-USDC',
     lpAddress: '0x5b181BBc3Cc18C66B6f36f584866a1ff09865630',
     token0Address: WETH_ADDRESS[ChainId.FANTOM],
@@ -276,8 +276,8 @@ export const FantomPools = [
   {
     // 600
     pid: 8,
-    token1: 'WETH',
-    token2: 'BTC',
+    token0Symbol: 'WETH',
+    token1Symbol: 'BTC',
     lpSymbol: 'ETH-BTC',
     lpAddress: '0x1fc954d3484bc21e0ce53a6648a35bbfc03dc9d0',
     token0Address: WETH_ADDRESS[ChainId.FANTOM],
@@ -286,8 +286,8 @@ export const FantomPools = [
   {
     // 600
     pid: 20,
-    token1: 'BTC',
-    token2: 'USDC',
+    token0Symbol: 'BTC',
+    token1Symbol: 'USDC',
     lpSymbol: 'BTC-USDC',
     lpAddress: '0xE2d39F7f0c8517Ca2058Fa97eB3D8d4928F7C6D6',
     token0Address: WBTC_ADDRESS[ChainId.FANTOM],
@@ -296,8 +296,8 @@ export const FantomPools = [
   {
     // 200
     pid: 50,
-    token1: 'FTM',
-    token2: 'EVO',
+    token0Symbol: 'FTM',
+    token1Symbol: 'EVO',
     lpSymbol: 'FTM-EVO',
     lpAddress: '0x857107e8F42023F7623C7ca413811DB1853F7f4b',
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
@@ -309,8 +309,8 @@ export const FantomPools = [
 export const AvalancheLendingPools = [
   // { 
   //   pid: undefined,
-  //   token1: undefined,
-  //   token2: undefined,
+  //   token0Symbol: undefined,
+  //   token1Symbol: undefined,
   //   lpSymbol: undefined,
   //   lpAddress: '',
   //   token0Address: '', 
@@ -322,8 +322,8 @@ export const FantomLendingPools = [
   {
     // LENDING
     pid: 48,
-    token1: 'FTM',
-    token2: 'DAI',
+    token0Symbol: 'FTM',
+    token1Symbol: 'DAI',
     lpSymbol: 'DAI-FTM',
     lpAddress: '0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd',
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
@@ -332,8 +332,8 @@ export const FantomLendingPools = [
   {
     // LENDING
     pid: 49,
-    token1: 'DAI',
-    token2: 'FTM',
+    token0Symbol: 'DAI',
+    token1Symbol: 'FTM',
     lpSymbol: 'FTM-DAI',
     lpAddress: '0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61',
     token0Address: DAI_ADDRESS[ChainId.FANTOM],
@@ -342,8 +342,8 @@ export const FantomLendingPools = [
   {
     // LENDING
     pid: 51,
-    token1: 'WETH',
-    token2: 'DAI',
+    token0Symbol: 'WETH',
+    token1Symbol: 'DAI',
     lpSymbol: 'DAI-ETH',
     lpAddress: '0x9fA5de19495331E13b443F787B90CdD22B32263d',
     token0Address: WETH_ADDRESS[ChainId.FANTOM],
@@ -352,8 +352,8 @@ export const FantomLendingPools = [
   {
     // LENDING
     pid: 53,
-    token1: 'BNB',
-    token2: 'DAI',
+    token0Symbol: 'BNB',
+    token1Symbol: 'DAI',
     lpSymbol: 'DAI-BNB',
     lpAddress: '0xbDa9204e6D596feCf9bd48108723F9BDAa2019f6',
     token0Address: BNB_ADDRESS[ChainId.FANTOM],
@@ -362,8 +362,8 @@ export const FantomLendingPools = [
   {
     // LENDING
     pid: 56,
-    token1: 'BTC',
-    token2: 'DAI',
+    token0Symbol: 'BTC',
+    token1Symbol: 'DAI',
     lpSymbol: 'DAI-BTC',
     lpAddress: '0xaf28730165634A56434ca7f0B302CC54F862046F',
     token0Address: WBTC_ADDRESS[ChainId.FANTOM],

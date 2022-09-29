@@ -115,10 +115,10 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token1Symbol, token0Address
   const percRemaining = 100 - Number(reached)
   const daysTilMaturity = percRemaining / dailyRoi
 
-  const msTilMaturity = daysTilMaturity * 86_400_000 // ms
-  const nowTime = new Date().getTime()
-  const maturityTimestamp = nowTime + msTilMaturity
-  const maturityDate = formatDate(new Date(maturityTimestamp))
+  // const msTilMaturity = daysTilMaturity * 86_400_000 // ms
+  // const nowTime = new Date().getTime()
+  // const maturityTimestamp = nowTime + msTilMaturity
+  // const maturityDate = formatDate(new Date(maturityTimestamp))
 
   // opens dropdown panel
   const handleShow = () => {
@@ -334,7 +334,8 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token1Symbol, token0Address
                   <Text fontSize=".9rem" padding="0" color={getChainColorCode(chainId)} textAlign="right">
                     {stakedBal > 0
                       ? `YTD: ${formatPercent(reached)}`
-                      : `EMT: ${(maturityDate)}`
+                      : `~${daysTilMaturity.toFixed(0)} Days`
+                      // : `MATURITY: ${(maturityDate)}`
                     }
                     <br />
                     {dailyRoi > 0 ? 'DAILY: ' + dailyRoi.toFixed(2) : 0}%

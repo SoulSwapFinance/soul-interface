@@ -19,6 +19,8 @@ export const FarmList = () => {
       key={farm.pid}
       pid={farm.pid}
       lpToken={farm.lpAddress}
+      token0Symbol={farm.token0Symbol}
+      token1Symbol={farm.token1Symbol}
       token0Address={farm.token0Address}
       token1Address={farm.token1Address}
       farm={farm}
@@ -30,6 +32,8 @@ export const FarmList = () => {
       key={farm.pid}
       pid={farm.pid}
       lpToken={farm.lpAddress}
+      token0Symbol={farm.token0Symbol}
+      token1Symbol={farm.token1Symbol}
       token0Address={farm.token0Address}
       token1Address={farm.token1Address}
       farm={farm}
@@ -41,6 +45,8 @@ export const FarmList = () => {
       key={farm.pid}
       pid={farm.pid}
       lpToken={farm.lpAddress}
+      token0Symbol={farm.token0Symbol}
+      token1Symbol={farm.token1Symbol}
       token0Address={farm.token0Address}
       token1Address={farm.token1Address}
       farm={farm}
@@ -52,6 +58,8 @@ export const FarmList = () => {
       key={farm.pid}
       pid={farm.pid}
       lpToken={farm.lpAddress}
+      token0Symbol={farm.token0Symbol}
+      token1Symbol={farm.token1Symbol}
       token0Address={farm.token0Address}
       token1Address={farm.token1Address}
       farm={farm}
@@ -63,6 +71,8 @@ export const FarmList = () => {
       key={farm.pid}
       pid={farm.pid}
       lpToken={farm.lpAddress}
+      token0Symbol={farm.token0Symbol}
+      token1Symbol={farm.token1Symbol}
       token0Address={farm.token0Address}
       token1Address={farm.token1Address}
       farm={farm}
@@ -74,6 +84,8 @@ export const FarmList = () => {
       key={farm.pid}
       pid={farm.pid}
       lpToken={farm.lpAddress}
+      token0Symbol={farm.token0Symbol}
+      token1Symbol={farm.token1Symbol}
       token0Address={farm.token0Address}
       token1Address={farm.token1Address}
       farm={farm}

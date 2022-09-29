@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
-import { ChainId, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, Token } from 'sdk'
+import { ChainId, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, Token, WNATIVE } from 'sdk'
 import { useTokenContract, useSoulSummonerContract, useZapperContract } from 'hooks/useContract'
 import useApprove from 'features/bond/hooks/useApprove'
 import { Tab } from '@headlessui/react'
@@ -43,7 +43,7 @@ const TokenPairLink = styled(ExternalLink)`
   padding-left: 10;
 `
 
-export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) => {
+export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, token0Address, token1Address }) => {
     const { account, chainId, library } = useActiveWeb3React()
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
 
@@ -71,12 +71,9 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
     const pairStatus = summonerPoolInfo.status
 
     // const { userInfo } = useUserInfo()
-    const { pairInfo } = usePairInfo(lpToken)
+    const { pairInfo } = usePairInfo(lpAddress)
     // assumes 18, since only SOUL-LP farms are eligible for Zap   
     const assetDecimals = Number(pairInfo.pairDecimals)
-    const token0Symbol = pairInfo.token0Symbol
-    const token1Symbol = pairInfo.token1Symbol
-    
     const token0Decimals = Number(pairInfo.token0Decimals)
     const token1Decimals = Number(pairInfo.token1Decimals)
 
@@ -98,20 +95,20 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
     const timeDelta = currentTime - firstDepositTime
     const daysElapsed = timeDelta / 86_400
     const withdrawFee
-        = chainId == ChainId.FANTOM 
+        = chainId == ChainId.FANTOM
             ? (daysElapsed <= 14 ? startRate - daysElapsed
-            // staked, but beyond 14 days
-            : stakedBalance > 0 ? 0
-                // not staked (to forewarn)
-                : 14)
+                // staked, but beyond 14 days
+                : stakedBalance > 0 ? 0
+                    // not staked (to forewarn)
+                    : 14)
             : currentRate
     const feeAmount
         = withdrawFee * stakedBalance / 100
     const withdrawable = stakedBalance - feeAmount
     const feeValue = feeAmount * lpPrice
-    const walletBalance = summonerUserInfo.walletBalance
+    const walletBalance = Number(summonerUserInfo.walletBalance)
     const walletValue = Number(walletBalance) * lpPrice
-    const parsedBalance = tryParseAmount(walletBalance, farm.lpToken)
+    const parsedBalance = tryParseAmount(walletBalance.toString(), farm.lpToken)
     // const userBalance = useCurrencyBalance(account, lpToken)
     const hasBalance = Number(walletBalance) > 0
     const isUnderworldPair = pairType == "underworld"
@@ -120,14 +117,20 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
 
     // COLOR //
     const buttonColor = getChainColor(chainId)
-    const buttonTextColor = isSwapPair && isActive ? "black" : "white"
+    const buttonTextColor = isSwapPair && isActive ? "white" : "white"
     const textColor = isUnderworldPair ? "text-blue" : !isActive ? "text-pink" : "text-dark-600"
     const tokenSymbol = isUnderworldPair ? token0Symbol : "LP"
 
     // (de)Constructs Tokens //
     const token0 = new Token(chainId, token0Address, token0Decimals)
-    // console.log('token0:%s', token0Address)
     const token1 = new Token(chainId, token1Address, token1Decimals)
+
+    // Native Keys //
+    const nativePair 
+        =  farm.token0Symbol == WNATIVE[chainId].symbol 
+                || farm.token0Symbol == NATIVE[chainId].symbol
+            || farm.token1Symbol == WNATIVE[chainId].symbol 
+                || farm.token1Symbol == NATIVE[chainId].symbol
 
     // Zap Add-Ons //
     const tokenContract = useTokenContract(zapTokenAddress)
@@ -294,13 +297,13 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                         <FarmContentWrapper>
                             <div className="items-center">
                                 <FarmItemBox>
-                                    {Number(allocPoint) != 420 ? 
-                                    <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
+                                    {Number(allocPoint) != 420 ?
+                                        <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
                                         :
-                                        <CurrencyLogo 
+                                        <CurrencyLogo
                                             currency={token0} // TOKEN0
-                                            size={40} 
-                                            />
+                                            size={40}
+                                        />
                                     }
                                 </FarmItemBox>
                             </div>
@@ -314,14 +317,14 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                                 0
                                             </Text>
                                         ) : (
-                                        <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                            ${
-                                                stakedValue == 0 ? 0
-                                                    : stakedValue.toString(4) == '0.0000' ? '<0.0000'
-                                                    : stakedValue < 1 && stakedValue.toString(4) ? stakedValue.toFixed(4)
-                                                    : stakedValue > 0 ? stakedValue.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                                                : 0
-                                            }
+                                            <Text padding="0" fontSize="1rem" color="#FFFFFF">
+                                                ${
+                                                    stakedValue == 0 ? 0
+                                                        : stakedValue.toString(2) == '0.00' ? '<0.00'
+                                                            : stakedValue < 1 && stakedValue.toString(4) ? stakedValue.toFixed(4)
+                                                                : stakedValue > 0 ? stakedValue.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                                                                    : 0
+                                                }
                                             </Text>
                                         )}
                                     </FarmItem>
@@ -463,10 +466,10 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                             {/*------ DEPOSIT TAB PANEL ------*/}
                             <Tab.Panel className={'outline-none'}>
 
-                                <Button variant={'link'} color={'purple'} className="absolute top-0 right-0 flex">
+                                <Button variant={'link'} className="absolute top-0 right-0 flex justify-center max-h-[30px] max-w-[30px]">
                                     <QuestionHelper
                                         text={
-                                            <div className="flex flex-col space-y-2">
+                                            <div className="flex flex-col space-y-1">
                                                 <div className="flex flex-col">
                                                     <p>
                                                         After creating liquidity or lending, navigate to the associated farm to deposit.
@@ -487,8 +490,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
 
                                         "w-full space-y-1")
 
-                                    }>
-
+                                }>
                                     {Number(walletBalance) > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white font-bold" fontFamily={'medium'}>
@@ -547,55 +549,74 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                 <div className="h-px my-1 bg-dark-1000" />
 
                                 {/* DEPOSIT: ASSET PANEL */}
-                                
-                  { Number(walletBalance) == 0 &&
-                                <FarmInputPanel
-                                    pid={farm.pid}
-                                    onUserInput={(value) => setDepositValue(value)}
-                                    onMax={() => setDepositValue(walletBalance)}
-                                    value={depositValue}
-                                    balance={walletBalance}
-                                    id={pid}
-                                    token0={token0}
-                                    token1={token1}
-                                />
-                  } 
 
-                         {/* CREATE ASSET PAIR */}                         
-                    {(token0Symbol == NATIVE[chainId].symbol || token1Symbol == NATIVE[chainId].symbol) ? (
-                          <SubmitButton
-                          primaryColor={getChainColor(chainId)}
-                          >
-                          <TokenPairLink
-                            target="_blank"
-                            rel="noopener"
-                            color={'white'}
-                            href=
-                            {token1Symbol == NATIVE[chainId].symbol ?
-                              `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${token1Address}`
-                              : `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${token0Address}`
-                            }
-                          >
-                            CREATE {token0Symbol}-{token1Symbol} PAIR
-                          </TokenPairLink>
-                          </SubmitButton>
-                        ) : (
-                        <SubmitButton
-                        primaryColor={getChainColor(chainId)}
-                        >
-                          <TokenPairLink
-                            target="_blank"
-                            rel="noopener"
-                            color={"white"}
-                            href=
-                            {`https://exchange.soulswap.finance/add/${token0Address}/${token1Address}`}
-                          >
-                            CREATE {token0Symbol}-{token1Symbol} PAIR
-                          </TokenPairLink>
-                      </SubmitButton>
-                        )}    
+                                {Number(walletBalance) != 0 &&
+                                    <FarmInputPanel
+                                        pid={farm.pid}
+                                        onUserInput={(value) => setDepositValue(value)}
+                                        onMax={() => setDepositValue(walletBalance.toString())}
+                                        value={depositValue}
+                                        balance={walletBalance.toString()}
+                                        id={pid}
+                                        token0={token0}
+                                        token1={token1}
+                                    />
+                                }
+
+                                {/* CREATE ASSET PAIR */}
+                                { (nativePair && !isUnderworldPair && isActive && walletBalance == 0) ? (
+                                    <ExternalLink
+                                    href=
+                                        {token0Symbol == NATIVE[chainId].symbol || token0Symbol == WNATIVE[chainId].symbol ?
+                                            `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${farm.token0Address}`
+                                            : `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${farm.token1Address}`
+                                        }                                    >
+                                    <a>
+                                    <SubmitButton 
+                                        primaryColor={buttonColor}
+                                        color={buttonTextColor}                                    
+                                    >
+                                        <TokenPairLink
+                                            target="_blank"
+                                            rel="noopener"
+                                            primaryColor={buttonColor}
+                                            color={buttonTextColor}    
+                                            // className={"font-bold"}
+                                            href=
+                                            // [if] token0 is the native token, then only use the address of token1 [else] token0 address
+                                            {token0Symbol == NATIVE[chainId].symbol || token0Symbol == WNATIVE[chainId].symbol ?
+                                                `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${farm.token1Address}`
+                                                : `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${farm.token0Address}`
+                                            }
+                                        >
+                                            CREATE {farm.lpSymbol} PAIR
+                                        </TokenPairLink>
+                                    </SubmitButton>
+                                    </a>
+                                    </ExternalLink>
+                                ) : ( !hasBalance &&
+                                    <ExternalLink
+                                    href={`https://exchange.soulswap.finance/add/${farm.token0Address}/${farm.token1Address}`}
+                                    >
+                                    <a>
+                                        <SubmitButton
+                                            primaryColor={getChainColor(chainId)}
+                                            >
+                                            <TokenPairLink
+                                                target="_blank"
+                                                rel="noopener"
+                                                // className={"font-bold"}
+                                                href=
+                                                {`https://exchange.soulswap.finance/add/${farm.token0Address}/${farm.token1Address}`}
+                                                >
+                                                CREATE {farm.lpSymbol} PAIR
+                                            </TokenPairLink>
+                                        </SubmitButton>
+                                    </a>
+                                    </ExternalLink>
+                                )}
                                 {/* LEND ASSET */}
-                                {isUnderworldPair && (
+                                {isUnderworldPair && hasBalance && (
                                     <NavLink
                                         href=
                                         {`/lend/${lpAddress}`}
@@ -603,7 +624,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                         <SubmitButton
                                             height="2rem"
                                             primaryColor={buttonColor}
-                                            color={buttonTextColor}
+                                            color={buttonTextColor}    
                                             margin=".5rem 0 .5rem 0"
                                         >
                                             <a className="font-bold">
@@ -615,14 +636,14 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                     </NavLink>
                                 )}
                                 {/* UN-APPROVED */}
-                                {!approved && (
+                                {!approved && hasBalance && (
                                     <FunctionBox>
                                         <Wrap padding="0" margin="0" display="flex">
                                             <SubmitButton
                                                 height="2rem"
-                                                className="font-bold"
+                                                // className="font-bold"
                                                 primaryColor={buttonColor}
-                                                color={'#FFFFFF'}
+                                                color={buttonTextColor}        
                                                 margin=".5rem 0 .5rem 0"
                                                 onClick={() => handleApprove()}>
                                                 APPROVE {farm.lpSymbol}
@@ -632,12 +653,12 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                 )}
 
                                 {/* APPROVED */}
-                                {approved && (
+                                {approved && hasBalance && (
                                     <SubmitButton
                                         height="2rem"
                                         primaryColor={buttonColor}
-                                        color={'#FFFFFF'}
-                                        className={'font-bold'}
+                                        color={buttonTextColor}
+                                        // className={'font-bold'}
                                         margin=".5rem 0 0rem 0"
                                         onClick={() =>
                                             handleDeposit(pid)
@@ -653,8 +674,8 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                         <SubmitButton
                                             height="2rem"
                                             primaryColor={buttonColor}
-                                            color={'#FFFFFF'}
-                                            className={'font-bold'}
+                                            color={buttonTextColor}    
+                                            // className={'font-bold'}
                                             margin=".5rem 0 .5rem 0"
                                             onClick={() =>
                                                 handleHarvest(pid)
@@ -670,8 +691,8 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                         <SubmitButton
                                             height="2rem"
                                             primaryColor={buttonColor}
-                                            color={'#FFFFFF'}
-                                            className={'font-bold'}
+                                            color={buttonTextColor}    
+                                            // className={'font-bold'}
                                             margin=".5rem 0 .5rem 0"
                                             onClick={() =>
                                                 handleShowZap(pid)
@@ -774,7 +795,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Address, token1Address }) 
                                     balance={stakedBalance.toString()}
                                     id={pid}
                                     token0={token0}
-                                    token1={token1}                                />
+                                    token1={token1} />
                                 <Wrap padding="0" margin="0" display="flex">
 
                                     <SubmitButton
