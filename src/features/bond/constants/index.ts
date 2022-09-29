@@ -10,8 +10,6 @@ export const ContractScan = {
     4002: 'https://testnet.ftmscan.com/address/',
 }
 
-// old: 0x27FCdd0DA2F9328Bd8Eede0e7F74e2E5a50a2e7D
-// new: 0x0d36535b2666959a52c0c73CB940A59b1EbE9FD6
 export const SoulCircleAddress = "0x5063Fc9D759B5b03DD5fBC0B882b5F68CF881C32"
 
 // connected chain -> targeted chain -> address

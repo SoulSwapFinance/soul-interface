@@ -82,7 +82,6 @@ export const Text = styled.p`
   text-align: ${({ textAlign }) => (textAlign ? `${textAlign}` : `center`)};
 `;
 
-
 export const ClickableText = styled(Text)`
   &:hover {
     opacity: 50%;
@@ -188,10 +187,7 @@ export const FlexSocialText = styled.div`
 `
 
 
-// ---------------------
-//  Row Section
-// ---------------------
-
+// Row Section
 export const BondContainer = styled.div`
   display: grid;
   grid-template-rows: 1fr;
