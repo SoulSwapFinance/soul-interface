@@ -5,11 +5,11 @@ import { ethers } from 'ethers'
 import { signERC2612Permit } from 'eth-permit'
 import { useActiveWeb3React } from 'services/web3'
 import { useCallback } from 'react'
-import { useSushiRollContract } from '../hooks/useContract'
+import { useSoulSwapContract } from '../hooks/useContract'
 
-const useSushiRoll = (version: 'v1' | 'v2' = 'v2') => {
+const useSoulSwap = (version: 'v1' | 'v2' = 'v2') => {
   const { chainId, library, account } = useActiveWeb3React()
-  const sushiRoll = useSushiRollContract(version)
+  const soulSwap = useSoulSwapContract(version)
   const ttl = 60 * 20
 
   let from = ''
@@ -20,7 +20,7 @@ const useSushiRoll = (version: 'v1' | 'v2' = 'v2') => {
 
   const migrate = useCallback(
     async (lpToken: LPToken, amount: ethers.BigNumber) => {
-      if (sushiRoll) {
+      if (soulSwap) {
         const deadline = Math.floor(new Date().getTime() / 1000) + ttl
         const args = [
           lpToken.tokenA.address,
@@ -50,7 +50,7 @@ const useSushiRoll = (version: 'v1' | 'v2' = 'v2') => {
 
   const migrateWithPermit = useCallback(
     async (lpToken: LPToken, amount: ethers.BigNumber) => {
-      if (account && sushiRoll) {
+      if (account && soulSwap) {
         const deadline = Math.floor(new Date().getTime() / 1000) + ttl
         const permit = await signERC2612Permit(
           library,
@@ -72,8 +72,8 @@ const useSushiRoll = (version: 'v1' | 'v2' = 'v2') => {
           permit.s,
         ]
 
-        const gasLimit = await sushiRoll.estimateGas.migrateWithPermit(...args)
-        const tx = await sushiRoll.migrateWithPermit(...args, {
+        const gasLimit = await soulSwap.estimateGas.migrateWithPermit(...args)
+        const tx = await soulSwap.migrateWithPermit(...args, {
           gasLimit: gasLimit.mul(120).div(100),
         })
 
@@ -86,7 +86,7 @@ const useSushiRoll = (version: 'v1' | 'v2' = 'v2') => {
         return tx
       }
     },
-    [account, library, sushiRoll, ttl, from]
+    [account, library, soulSwap, ttl, from]
   )
 
   return {
@@ -95,4 +95,4 @@ const useSushiRoll = (version: 'v1' | 'v2' = 'v2') => {
   }
 }
 
-export default useSushiRoll
+export default useSoulSwap

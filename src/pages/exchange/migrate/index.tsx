@@ -22,7 +22,7 @@ import LPToken from '../../../features/migration/LPToken'
 // import MetamaskError from '../../../features/migration/MetamaskError'
 import useMigrateState, { MigrateState } from '../../../features/migration/useMigrateState'
 import { ApprovalState, useApproveCallback } from '../../../hooks/useApproveCallback'
-import { useSushiRollContract } from 'hooks/useContract'
+import { useSoulSwapContract } from 'hooks/useContract'
 import { useActiveWeb3React } from '../../../services/web3'
 
 const ZERO = JSBI.BigInt(0)

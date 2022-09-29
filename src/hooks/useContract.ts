@@ -127,7 +127,7 @@ import MULTICALL2_ABI from '../constants/abis/multicall2.json'
 import PENDING_ABI from '../constants/abis/pending.json'
 import ROUTER_ABI from '../constants/abis/router.json'
 import SAAVE_ABI from '../constants/abis/saave.json'
-import SUSHIROLL_ABI from '@sushiswap/core/abi/SushiRoll.json'
+import SOULSWAP_ABI from '@sushiswap/core/abi/SushiRoll.json'
 import SOULSWAP_TWAP_ORACLE_ABI from '../constants/abis/sushiswap-slp-oracle.json'
 import TIMELOCK_ABI from '../constants/abis/timelock.json'
 
@@ -521,7 +521,7 @@ export function useSwaave(withSignerIfPossible?: boolean): Contract | null {
   return useContract('0xA70e346Ca3825b46EB4c8d0d94Ff204DB76BC289', SAAVE_ABI, withSignerIfPossible)
 }
 
-export function useSushiRollContract(version: 'v1' | 'v2' = 'v2'): Contract | null {
+export function useSoulSwapContract(version: 'v1' | 'v2' = 'v2'): Contract | null {
   const { chainId } = useActiveWeb3React()
   let address: string | undefined
   if (chainId) {
@@ -531,7 +531,7 @@ export function useSushiRollContract(version: 'v1' | 'v2' = 'v2'): Contract | nu
         break
     }
   }
-  return useContract(address, SUSHIROLL_ABI, true)
+  return useContract(address, SOULSWAP_ABI, true)
 }
 
 export function useDashboardContract(): Contract | null {
