@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Percent, TradeType, ZERO } from 'sdk'
+import { ChainId, Percent, TradeType, ZERO } from 'sdk'
 import { Button } from 'components/Button'
 import { CurrencyLogo } from 'components/CurrencyLogo'
 import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
@@ -15,6 +15,7 @@ interface SwapModalHeader {
   trade?: TradeUnion
   allowedSlippage: Percent
   recipient?: string
+  toChain?: ChainId
   showAcceptChanges: boolean
   onAcceptChanges: () => void
 }
@@ -23,6 +24,7 @@ const SwapModalHeader: FC<SwapModalHeader> = ({
   trade,
   allowedSlippage,
   recipient,
+  toChain,
   showAcceptChanges,
   onAcceptChanges,
 }) => {
@@ -98,6 +100,7 @@ const SwapModalHeader: FC<SwapModalHeader> = ({
       <SwapDetails
         trade={trade}
         recipient={recipient}
+        toChain={toChain}
         inputCurrency={trade?.inputAmount.currency}
         outputCurrency={trade?.outputAmount.currency}
         className="!border-dark-800"

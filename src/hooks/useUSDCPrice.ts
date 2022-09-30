@@ -96,7 +96,7 @@ const AVAX_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
  * Returns the price in USDC of the input currency
  * @param currency currency to compute the USDC price of
  */
-export default function useUSDCPrice(currency?: Currency): Price<Currency, Token> | undefined {
+export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Price<Currency, Token> | undefined {
   const chainId = currency?.chainId
 
   const soulPrice = usePrice(SOUL_ADDRESS[chainId])
