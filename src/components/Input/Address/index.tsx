@@ -33,7 +33,6 @@ export const AddressInput = React.memo(
           spellCheck="false"
           placeholder="Wallet Address or ENS name"
           pattern="^(0x[a-fA-F0-9]{40})$"
-          // text-specific options
           type="text"
           className={classNames(
             align === 'right' && 'text-right',

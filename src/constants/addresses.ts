@@ -301,8 +301,31 @@ export const MULTICALL2_ADDRESS: AddressMap = {
   [ChainId.MOONRIVER]: '',
 }
 
-// TOKENS
+export const ONCHAIN_AGGREGATOR_ORACLE: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '', //
+  [ChainId.FANTOM_TESTNET]: '', //
+  [ChainId.AVALANCHE]: '0x9632e2b35F901E372939d59C3509747C641F7693', // SEP22
+  [ChainId.MATIC]: '',
+  [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
+}
 
+export const OFFCHAIN_AGGREGATOR_ORACLE: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '', //
+  [ChainId.FANTOM_TESTNET]: '', //
+  [ChainId.AVALANCHE]: '0xBd0c7AaF0bF082712EbE919a9dD94b2d978f79A9', // SEP22
+  [ChainId.MATIC]: '',
+  [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
+}
+
+// TOKENS //
 export const SOUL_SEANCE_PAIR: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',

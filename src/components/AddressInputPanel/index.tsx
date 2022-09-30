@@ -1,7 +1,9 @@
 import React, { FC, useCallback } from 'react'
-import useENS from '../../hooks/useENS'
+import useENS from 'hooks/useENS'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
+import { getChainColorCode } from 'constants/chains'
+import { useActiveWeb3React } from 'services/web3'
 
 interface AddressInputPanelProps {
   id?: string
@@ -12,6 +14,7 @@ interface AddressInputPanelProps {
 
 const AddressInputPanel: FC<AddressInputPanelProps> = ({ id, value, onChange }) => {
   const { i18n } = useLingui()
+  const { chainId } = useActiveWeb3React()
   const { address, loading } = useENS(value)
 
   const handleInput = useCallback(
@@ -34,7 +37,9 @@ const AddressInputPanel: FC<AddressInputPanelProps> = ({ id, value, onChange }) 
     >
       <div className="flex justify-between w-full sm:w-2/5 px-5">
         <span className="text-[18px] text-primary">{i18n._(t`Send to:`)}</span>
-        <span className="text-blue text-sm underline cursor-pointer" onClick={() => onChange(null)}>
+        <span 
+          className={`text-${getChainColorCode(chainId)} text-sm underline cursor-pointer`}
+          onClick={() => onChange(null)}>
           {i18n._(t`Remove`)}
         </span>
       </div>

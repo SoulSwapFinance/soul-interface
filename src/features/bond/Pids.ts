@@ -35,21 +35,21 @@ export const AvalanchePools = [
     pid: 3,
     // summonerPid: 4,
     token0Symbol: 'AVAX',
-    token1Symbol: 'BTC',
-    lpSymbol: 'AVAX-BTC',
+    token1Symbol: 'ETH',
+    lpSymbol: 'AVAX-ETH',
     lpAddress: '0x5796Bf89f6C7C47811E4E59Ecd7aCACC8A5B9dEF',
     token0Address: AVAX_ADDRESS[ChainId.AVALANCHE],
-    token1Address: WBTC_ADDRESS[ChainId.AVALANCHE]
+    token1Address: WETH_ADDRESS[ChainId.AVALANCHE]
   }, 
   {
     pid: 4,
     // summonerPid: 5,
     token0Symbol: 'AVAX',
-    token1Symbol: 'ETH',
-    lpSymbol: 'AVAX-ETH',
-    lpAddress: '0x864384a54ea644852603778c0C200eF2D6F2Ac2f',
+    token1Symbol: 'BTC',
+    lpSymbol: 'AVAX-BTC',
+    lpAddress: '0x8C162C3Bdd7354b5Cb1A0b18eDBB5725CFE762A3',
     token0Address: AVAX_ADDRESS[ChainId.AVALANCHE],
-    token1Address: WETH_ADDRESS[ChainId.AVALANCHE],
+    token1Address: WBTC_ADDRESS[ChainId.AVALANCHE],
   },
   {
     pid: 5,
