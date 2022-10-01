@@ -1,4 +1,4 @@
-import { AVAX_ADDRESS, BNB_ADDRESS, ChainId, DAI_ADDRESS, SEANCE_ADDRESS, SOUL_ADDRESS, USDC_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
+import { AVAX_ADDRESS, BNB_ADDRESS, ChainId, DAI_ADDRESS, SEANCE_ADDRESS, SOUL_ADDRESS, SOUL_USDC, USDC_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
 
 export const AvalanchePools = [
   {
@@ -6,7 +6,7 @@ export const AvalanchePools = [
     // summonerPid: 1,
     token0Symbol: 'SOUL',
     token1Symbol: 'AVAX',
-    // lpSymbol: 'SOUL-AVAX',
+    lpSymbol: 'SOUL-AVAX',
     lpAddress: '0x6Da1AD717C7577AAB46C19aB6d3d9C31aff32A00',
     token0Address: SOUL_ADDRESS[ChainId.AVALANCHE],
     token1Address: AVAX_ADDRESS[ChainId.AVALANCHE],
@@ -16,8 +16,8 @@ export const AvalanchePools = [
     // summonerPid: 2,
     token0Symbol: 'SOUL',
     token1Symbol: 'USDC',
-    // lpSymbol: 'SOUL-USDC',
-    lpAddress: '0x922fcADa825Dc669798206A35D2D2B455f9A64E7',
+    lpSymbol: 'SOUL-USDC',
+    lpAddress: SOUL_USDC[ChainId.AVALANCHE],
     token0Address: SOUL_ADDRESS[ChainId.AVALANCHE],
     token1Address: USDC_ADDRESS[ChainId.AVALANCHE],
   },
@@ -26,7 +26,7 @@ export const AvalanchePools = [
     // summonerPid: 3,
     token0Symbol: 'AVAX',
     token1Symbol: 'USDC',
-    // lpSymbol: 'AVAX-USDC',
+    lpSymbol: 'AVAX-USDC',
     lpAddress: '0x864384a54ea644852603778c0C200eF2D6F2Ac2f',
     token0Address: AVAX_ADDRESS[ChainId.AVALANCHE],
     token1Address: USDC_ADDRESS[ChainId.AVALANCHE],

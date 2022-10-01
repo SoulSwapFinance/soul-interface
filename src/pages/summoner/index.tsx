@@ -19,13 +19,9 @@ import { formatNumberScale } from 'functions'
 import { Button } from 'components/Button'
 import { addTransaction } from 'state/transactions/actions'
 import { useFarms } from 'services/graph/hooks'
-// import { XIcon } from '@heroicons/react/solid'
-import { Toggle } from 'components/Toggle'
 import { XIcon } from '@heroicons/react/solid'
 import { ChainId } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
-// import { usePairPrice } from 'hooks/usePairData'
-// import { useActiveWeb3React } from 'services/web3/hooks/useActiveWeb3React'
 
 const Summoner = () => {
   const { chainId } = useActiveWeb3React()

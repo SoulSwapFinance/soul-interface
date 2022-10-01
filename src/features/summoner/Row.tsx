@@ -126,11 +126,10 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const token1 = new Token(chainId, token1Address, token1Decimals)
 
     // Native Keys //
-    const nativePair 
-        =  farm.token0Symbol == WNATIVE[chainId].symbol 
-                || farm.token0Symbol == NATIVE[chainId].symbol
-            || farm.token1Symbol == WNATIVE[chainId].symbol 
-                || farm.token1Symbol == NATIVE[chainId].symbol
+    // const nativeToken0 = farm.token0Symbol == WNATIVE[chainId].symbol
+    // const nativeToken1 = farm.token1Symbol == WNATIVE[chainId].symbol 
+    
+    const nativeToken0 =  farm.token0Symbol == WNATIVE[chainId].symbol
 
     // Zap Add-Ons //
     const tokenContract = useTokenContract(zapTokenAddress)
@@ -151,15 +150,12 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const selectedTokenBalance = Number(userTokenInfo.balance) / selectedTokenDecimals // TODO: try erc20BalanceOf(zapTokenAddress)
     const parsedTokenBalance = tryParseAmount(selectedTokenBalance.toString(), token)
     // const parsedZapValue = tryParseAmount(zapValue, token)
-
     const [modalOpen, setModalOpen] = useState(true)
 
     const handleDismissSearch = useCallback(() => {
         setModalOpen(false)
     }, [setModalOpen])
-    /**
-     * Runs only on initial render/mount
-     */
+    // runs only on initial render/mount
     useEffect(() => {
         fetchApproval()
     }, [account])
@@ -564,13 +560,9 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                 }
 
                                 {/* CREATE ASSET PAIR */}
-                                { (nativePair && !isUnderworldPair && isActive && walletBalance == 0) ? (
+                                { (nativeToken0 && !isUnderworldPair && isActive && !hasBalance) ? (
                                     <ExternalLink
-                                    href=
-                                        {token0Symbol == NATIVE[chainId].symbol || token0Symbol == WNATIVE[chainId].symbol ?
-                                            `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${farm.token1Address}`
-                                            : `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${farm.token0Address}`
-                                        }                                    
+                                    href= {`https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
                                     >
                                     <a>
                                     <SubmitButton 
@@ -585,10 +577,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                             // className={"font-bold"}
                                             href=
                                             // [if] token0 is the native token, then only use the address of token1 [else] token0 address
-                                            {token0Symbol == NATIVE[chainId].symbol || token0Symbol == WNATIVE[chainId].symbol ?
-                                                `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${farm.token1Address}`
-                                                : `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${farm.token0Address}`
-                                            }
+                                            {`https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
                                         >
                                             CREATE {farm.lpSymbol} PAIR
                                         </TokenPairLink>
@@ -597,7 +586,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                     </ExternalLink>
                                 ) : ( !hasBalance &&
                                     <ExternalLink
-                                    href={`https://exchange.soulswap.finance/add/${farm.token0Address}/${farm.token1Address}`}
+                                    href={`https://exchange.soulswap.finance/add/${farm.token1Address}/${farm.token0Address}`}
                                     >
                                     <a>
                                         <SubmitButton
