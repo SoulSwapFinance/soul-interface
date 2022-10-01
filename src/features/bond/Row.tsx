@@ -6,7 +6,7 @@ import BondInputPanel from './Input'
 import { useActiveWeb3React } from 'services/web3'
 import useSoulBond from './hooks/useSoulBond'
 import useApprove from './hooks/useApprove'
-import { ChainId, SOUL_BOND_ADDRESS } from 'sdk'
+import { ChainId, SOUL_BOND_ADDRESS, WNATIVE } from 'sdk'
 import {
   BondContainer,
   Row,
