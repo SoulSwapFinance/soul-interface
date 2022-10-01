@@ -18,24 +18,25 @@ export enum ApprovalState {
   APPROVED = 'APPROVED',
 }
 
-// returns a variable indicating the state of the approval and a function which approves if necessary or early returns
+// returns: approval state. 
 export function useApproveCallback(
   amountToApprove?: CurrencyAmount<Currency>,
   spender?: string
 ): [ApprovalState, () => Promise<void>] {
   const { account } = useActiveWeb3React()
+  // approves: [if] needed [else] terminates.
   const token = amountToApprove?.currency?.isToken ? amountToApprove.currency : undefined
   const currentAllowance = useTokenAllowance(token, account ?? undefined, spender)
   const pendingApproval = useHasPendingApproval(token?.address, spender)
 
-  // check the current approval status
+  // checks: approval status.
   const approvalState: ApprovalState = useMemo(() => {
     if (!amountToApprove || !spender) return ApprovalState.UNKNOWN
     if (amountToApprove.currency.isNative) return ApprovalState.APPROVED
-    // we might not have enough data to know whether or not we need to approve
+    // sets: `UNKNOWN` when state unknown
     if (!currentAllowance) return ApprovalState.UNKNOWN
 
-    // amountToApprove will be defined if currentAllowance is
+    // `amountToApprove’: [iff] `currentAllowance` < `amountToApprove`
     return currentAllowance.lessThan(amountToApprove)
       ? pendingApproval
         ? ApprovalState.PENDING
@@ -73,7 +74,7 @@ export function useApproveCallback(
 
     let useExact = false
     const estimatedGas = await tokenContract.estimateGas.approve(spender, MaxUint256).catch(() => {
-      // general fallback for tokens who restrict approval amounts
+// fallbacks: tokens w/restricted approval amounts
       useExact = true
       return tokenContract.estimateGas.approve(spender, amountToApprove.quotient.toString())
     })
@@ -102,6 +103,7 @@ export function useApproveCallbackFromTrade(
   trade: V2Trade<Currency, Currency, TradeType> | undefined,
   allowedSlippage: Percent,
   doArcher: boolean = false
+  // doJoe: boolean = false
 ) {
   const { chainId } = useActiveWeb3React()
   const amountToApprove = useMemo(
@@ -115,6 +117,8 @@ export function useApproveCallbackFromTrade(
         ? !doArcher
           ? ROUTER_ADDRESS[chainId]
           : ARCHER_ROUTER_ADDRESS[chainId]
+          // : doJoe
+          // ? JOE_ROUTER_ADDRESS[ChainId.AVALANCHE]
         : undefined
       : undefined
   )

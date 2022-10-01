@@ -1,6 +1,6 @@
 import Container from 'components/Container'
 import Typography from 'components/Typography'
-import { useArcherMinerTips, useTokenInfo, useTotalSupply, } from 'hooks/useAPI'
+import { useTokenInfo, useTotalSupply, } from 'hooks/useAPI'
 import usePriceApi from 'hooks/usePriceApi'
 import React from 'react'
 import { useWeb3React } from '@web3-react/core'
@@ -13,7 +13,6 @@ import { ChainId, SOUL_ADDRESS } from 'sdk'
 export default function Data() {
   // const { chainId, account } = useWeb3React()
   // const soulPrice = usePriceApi(SOUL_ADDRESS[ChainId.FANTOM])
-  // const { data } = useArcherMinerTips()
   const { tokenInfo } = useTokenInfo(SOUL_ADDRESS[ChainId.FANTOM])
   // const { price }= usePriceUSD(SOUL_ADDRESS[ChainId.FANTOM])
   // const { supply }= useTotalSupply(SOUL_ADDRESS[ChainId.FANTOM])
