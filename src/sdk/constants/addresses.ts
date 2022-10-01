@@ -636,14 +636,6 @@ export const LUX_NATIVE: AddressMap = {
   [ChainId.FANTOM]: '0x951BBB838e49F7081072895947735b0892cCcbCD',
 }
 
-420
-180
-
-280
-120
-
-18 * (1)
-
 export const SOUL_USDC: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.FANTOM]: '',
