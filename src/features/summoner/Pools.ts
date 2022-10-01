@@ -85,7 +85,7 @@ export const AvalanchePools = [
     token0Symbol: 'WAVAX',
     token1Symbol: 'BTC',
     lpSymbol: 'AVAX-BTC',
-    lpAddress: BTC_NATIVE_ADDRESS[ChainId.AVALANCHE],
+    lpAddress: BTC_NATIVE[ChainId.AVALANCHE],
     token0Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
     token1Address: WBTC_ADDRESS[ChainId.AVALANCHE],
   },
