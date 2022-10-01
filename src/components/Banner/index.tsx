@@ -41,15 +41,15 @@ export const NewFeature: FC<IFeature> = ({ chainId }) => (
           {/* <span className="centered md:hidden"><b>Voting Ends Soon!</b> <b>&rarr;</b></span> */}
           {/* <span className="hidden md:inline"> Voting Has Begun <b> &rarr;</b></span> */}
           <Button variant="filled" color={getChainColorCode(chainId)} size="sm">
-            {/* <NavLink href="/summoner"> */}
+            <NavLink href="/summoner">
           <span className="justify-center font-bold">
-              {[ChainId.AVALANCHE, ChainId.ETHEREUM].includes(chainId) 
-              ? `Swapping now available on ${getChainInfo(chainId, 'NETWORK')}`
-                : chainId == ChainId.FANTOM ? `Swap now on Avalanche & Ethereum`
-                    : `Swap on Fantom, Avalanche & Ethereum`
+              {[ChainId.AVALANCHE].includes(chainId) 
+              ? `Click Here to Farm on ${getChainInfo(chainId, 'NETWORK')}`
+                : [ChainId.ETHEREUM, ChainId.FANTOM].includes(chainId) ? `Swap now on Avalanche & Ethereum`
+                    : `Farm and Bond on Avalanche`
               }
           </span>
-            {/* </NavLink> */}
+            </NavLink>
           </Button>
         </p>
       </div>

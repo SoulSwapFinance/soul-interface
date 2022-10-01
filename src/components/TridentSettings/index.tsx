@@ -48,12 +48,12 @@ const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className, tri
             </div>
             <div className="flex flex-col gap-3 p-3 border rounded border-dark-800/60">
               <Typography variant="xxs" weight={700} className="text-secondary">
-                {i18n._(t`Interface Settings`)}
+                {i18n._(t`Settings`)}
               </Typography>
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   <Typography variant="xs" className="text-high-emphesis" weight={700}>
-                    {i18n._(t`Toggle expert mode`)}
+                    {i18n._(t`Expert Mode`)}
                   </Typography>
                   <QuestionHelper
                     text={i18n._(

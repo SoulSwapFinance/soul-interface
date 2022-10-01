@@ -1,6 +1,6 @@
 import { ChainId, DAI_ADDRESS, LUX_ADDRESS, LUX_DAI, LUX_NATIVE, LUX_SOR, SOR_ADDRESS, SOR_FTM, WNATIVE_ADDRESS } from "sdk"
 
-export const AllBonds = [
+export const FantomBonds = [
   // 5 DAYS
   {
     pid: 0,

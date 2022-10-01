@@ -11,7 +11,7 @@ import { SUPPORTED_NETWORKS } from 'modals/NetworkModal'
 import { useActiveWeb3React } from 'services/web3'
 import cookie from 'cookie-cutter'
 import Image from 'next/image'
-import React, { FC, Fragment } from 'react'
+import React, { FC } from 'react'
 import { getChainColorCode } from 'constants/chains'
 
 interface NetworkGuardProps {
@@ -46,7 +46,7 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
         transparent={true}
       >
         <div className="flex flex-col gap-2 justify-center p-4 mt-10 lg:mt-0">
-          <Typography className="max-w-2xl text-lg sm:text-2xl text-white text-center" weight={700}>            {
+          {/* <Typography className="max-w-2xl text-lg sm:text-2xl text-white text-center" weight={700}>            {
           i18n._(t`Unavailable on ${NETWORK_LABEL[chainId]}.`)}
           </Typography>
           <Typography className="text-center">
@@ -55,14 +55,14 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
               values={{ link }}
               components={Fragment}
             />
-          </Typography>
-          <Typography className="uppercase text-white text-center text-lg tracking-[.2rem]" weight={700}>
-            {i18n._(t`Supported On`)}
+          </Typography> */}
+          <Typography className="uppercase text-white text-center text-lg mb-4 tracking-[.2rem]" weight={700}>
+            {i18n._(t`SWITCH CHAIN`)}
           </Typography>
           <div className="flex gap-5 md:gap-10 justify-center">
             {supportedNetworks.map((key: string, idx: number) => (
               <button
-                className="text-primary hover:text-white flex items-center flex-col gap-2 justify-start"
+                className={`text-primary hover:text-white flex items-center flex-col gap-2 justify-start`}
                 key={idx}
                 onClick={() => {
                   const params = SUPPORTED_NETWORKS[key]
@@ -80,20 +80,27 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
                   }
                 }}
               >
-                <div className="w-[40px] h-[40px]">
+                <div className="w-[70px] h-[70px]">
                   <Image
                     src={NETWORK_ICON[key]}
                     alt="Switch Network"
-                    className="rounded-md filter drop-shadow-currencyLogo"
-                    width="40px"
-                    height="40px"
+                    className={`rounded-sm filter drop-shadow-currencyLogo bg-${getChainColorCode(Number(key))}`}
+                    width="60px"
+                    height="60px"
                   />
                 </div>
-                <Typography className="text-sm">{NETWORK_LABEL[key]}</Typography>
+                <NavLink
+                  href='/swap'
+                >
+                  <div className={`flex mt-1 text-sm font-bold text-${getChainColorCode(Number(key))} justify-center`}>
+                    {`Return to Exchange`}
+                  </div>
+                </NavLink>
               </button>
             ))}
           </div>
         </div>
+        {/* <Typography className="text-xl">{NETWORK_LABEL[key]}</Typography> */}
       </HeadlessUIModal.Controlled>
       {children}
     </>

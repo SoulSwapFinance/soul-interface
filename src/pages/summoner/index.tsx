@@ -22,6 +22,7 @@ import { useFarms } from 'services/graph/hooks'
 import { XIcon } from '@heroicons/react/solid'
 import { ChainId } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
+import { getChainColorCode } from 'constants/chains'
 
 const Summoner = () => {
   const { chainId } = useActiveWeb3React()
@@ -31,89 +32,53 @@ const Summoner = () => {
 
   const soulPrice = useSoulPrice()
 
-  const type = router.query?.filter === null ? 'active' : (router.query?.filter as string)
-  const farms = useFarms()
+  // const type = router.query?.filter === null ? 'active' : (router.query?.filter as string)
+  // const farms = useFarms()
   const { harvest } = useSummoner()
   const SummonerContract = useSummonerContract()
 
   const positions = usePositions()
   const tvl = useTVL()
 
-  const map = (pool) => {
-    pool.owner = 'SoulSwap'
-    pool.balance = 0
+  // const map = (pool) => {
+  //   pool.owner = 'SoulSwap'
+  //   pool.balance = 0
 
-    const pair = POOLS[250][pool.lpToken]
+  //   const pair = POOLS[chainId][pool.lpToken]
 
-    const tvl = pool.pair?.token1
-      ? Number(pool?.pairPrice) * Number(pool.lpBalance) / 1e18
-      : Number(soulPrice) * Number(pool.lpBalance) / 1e18
+  //   const tvl = pool.pair?.token1
+  //     ? Number(pool?.pairPrice) * Number(pool.lpBalance) / 1e18
+  //     : Number(soulPrice) * Number(pool.lpBalance) / 1e18
 
-    const position = positions.find((position) => position.id === pool.id)
+  //   const position = positions.find((position) => position.id === pool.id)
 
-    return {
-      ...pool,
-      ...position,
-      pair: {
-        ...pair,
-        decimals: 18,
-      },
-      tvl,
-    }
-  }
-
-  const FILTER = {
-    deposited: (farm) => farm.amount,
-    active: (farm) => farm.allocPoint > 0,
-    inactive: (farm) => farm?.allocPoint == 0,
-    soulswap: (farm) => farm.allocPoint > 0
-      && (
-        farm.pair.token0?.symbol == 'SOUL'
-        || farm.pair.token0?.symbol == 'SEANCE'
-        || farm.pair.token0?.symbol == 'LUX'
-        || farm.pair.token0?.symbol == 'wLUM'
-
-        || farm.pair.token1?.symbol == 'SOUL'
-        || farm.pair.token1?.symbol == 'SEANCE'
-        || farm.pair.token1?.symbol == 'LUX'
-        || farm.pair.token1?.symbol == 'wLUM'
-      ),
-    single: (farm) => farm.pair.token0 && !farm.pair.token1,
-    lending: (farm) => farm.allocPoint > 0 && farm.pair.type == 'underworld',
-    fantom: (farm) => farm.allocPoint > 0 && (farm.pair.token0?.symbol == 'FTM' || farm.pair.token1?.symbol == 'FTM'),
-    stables: (farm) => farm.allocPoint == 200 // since all [active] stables have 200 AP <3
-  }
+  //   return {
+  //     ...pool,
+  //     ...position,
+  //     pair: {
+  //       ...pair,
+  //       decimals: 18,
+  //     },
+  //     tvl,
+  //   }
+  // }
 
   let summTvl = tvl.reduce((previousValue, currentValue) => {
     return previousValue + currentValue.tvl
   }, 0)
 
-  const data = farms.map(map).filter((farm) => {
-    return type in FILTER ? FILTER[type](farm) : true
-  })
-
-  const options = {
-    keys: ['pair.id', 'pair.token0.symbol', 'pair.token1.symbol'],
-    threshold: 0.4,
-  }
-
-  const { result, term, search } = useFuse({
-    data,
-    options,
-  })
-
   const pendingValue = positions.reduce((previousValue, currentValue) => {
     return previousValue + (currentValue.pendingSoul / 1e18) * soulPrice
   }, 0)
 
-  const farmingPools = Object.keys(POOLS[250]).map((key) => {
-    return { ...POOLS[250][key], lpToken: key }
+  const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
+    return { ...POOLS[chainId][key], lpToken: key }
   })
 
   const allStaked = positions.reduce((previousValue, currentValue) => {
     const pool = farmingPools.find((r) => parseInt(r.id.toString()) == parseInt(currentValue.id))
     const poolTvl = tvl.find((r) => getAddress(r.lpToken) == pool?.lpToken)
-    console.log('lpToken:%s', poolTvl?.lpPrice)
+    // console.log('lpToken:%s', poolTvl?.lpPrice)
     return !poolTvl ? previousValue + 0 : previousValue + ((currentValue.amount / 1e18) * poolTvl?.lpPrice)
   }, 0)
 
@@ -131,8 +96,8 @@ const Summoner = () => {
 
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">
-      {showBalances &&
-      <div className="flex flex-row text-dark-600 justify-end">
+      {showBalances && [ChainId.FANTOM].includes(chainId) &&
+      <div className={`flex flex-row text-${getChainColorCode(chainId)} justify-end`}>
         <XIcon
           height="24px"
           id="toggle-button"
@@ -140,14 +105,14 @@ const Summoner = () => {
         />
       </div>
       }
-      {showBalances &&
+      {showBalances && [ChainId.FANTOM].includes(chainId) &&
         <TridentHeader className="sm:!flex-row justify-center items-center" pattern="bg-bubble">
           <div>
           </div>
           <div className={`flex items-center justify-between px-2 py-2`}>
             <div className="flex gap-0">
               <Button
-                color="purple"
+                color={getChainColorCode(chainId)}
                 className="text-emphasis"
                 variant="outlined"
                 size={"sm"}
@@ -208,8 +173,8 @@ const Summoner = () => {
               </Button>
             </div>
           </div>
-        </TridentHeader>
-      }
+          </TridentHeader>
+        }
 
       <DoubleGlowShadowV2 opacity="0.6">
         <Container id="farm-page">

@@ -10,10 +10,11 @@ import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from 'sdk'
 import { classNames } from 'functions'
 import { getChainColorCode } from 'constants/chains'
+import { useSummonerContract } from 'hooks/useContract'
 
 export const FarmList = () => {
   const { chainId } = useActiveWeb3React()
-
+  const SummonerContract = useSummonerContract()
   const ftmList = FantomPools.map((farm) => (
     <ActiveRow
       key={farm.pid}
@@ -92,6 +93,18 @@ export const FarmList = () => {
     />
   ))
 
+      // harvests: all staked pools (for user)
+      const handleHarvestAll = async () => {
+        try {
+          let tx
+          tx = SummonerContract?.harvestAll()
+          await tx?.wait()
+      } catch (e) {
+          console.log(e)
+          return
+      }
+    }
+
   return (
     <>
 <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
@@ -115,6 +128,15 @@ export const FarmList = () => {
             <span> Bond </span>
             </a>
           </NavLink>
+        </Button>
+        <Button variant="bordered" color={getChainColorCode(chainId)} size="lg" 
+        className={chainId == ChainId.AVALANCHE ? '' : 'hidden'}
+        onClick={async () => await handleHarvestAll()}>
+          {/* <NavLink href={'/underworld'}> */}
+            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Harvest </span>
+            </a>
+          {/* </NavLink> */}
         </Button>
         <Button variant="bordered" color={getChainColorCode(chainId)} size="lg" className={chainId == ChainId.FANTOM ? '' : 'hidden'}>
           <NavLink href={'/underworld'}>

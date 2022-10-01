@@ -21,7 +21,6 @@ import Typography from 'components/Typography'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
-// import SETTINGS from 'assets/icons/controls.svg'
 import { useActiveWeb3React } from 'services/web3'
 import TransactionSettings from 'components/TransactionSettings'
 import ModalHeader from 'components/Modal/Header'
@@ -59,15 +58,15 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
       {open && (
         <div className="absolute top-14 right-0 z-50 -mr-2.5 min-w-20 md:m-w-22 md:-mr-5 bg-dark-900 border-2 border-dark-800 rounded w-80 shadow-lg">
           <div className="p-4 space-y-4">
-            <Typography weight={700} className="text-high-emphesis">
+            {/* <Typography weight={700} className="text-high-emphesis">
               {i18n._(t`Transaction Settings`)}
-            </Typography>
+            </Typography> */}
 
             <TransactionSettings placeholderSlippage={placeholderSlippage} />
 
-            <Typography className="text-high-emphesis" weight={700}>
-              {i18n._(t`Interface Settings`)}
-            </Typography>
+            {/* <Typography className="text-high-emphesis" weight={700}>
+              {i18n._(t`Settings`)}
+            </Typography> */}
 
             {/* <div className="flex items-center justify-between">
               <div className="flex items-center">

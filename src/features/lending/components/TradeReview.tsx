@@ -37,7 +37,7 @@ function TradeReview({
               {i18n._(t`Minimum Received`)}
               <QuestionHelper
                 text={i18n._(
-                  t`Your transaction will revert if there is a large, unfavorable price movement before it is confirmed.`
+                  t`Transactions revert if there is a large, unfavorable price movement before it is confirmed.`
                 )}
               />
             </div>
