@@ -10,56 +10,29 @@ import useSummoner from 'features/mines/hooks/useMasterChef'
 import { useTVL } from 'hooks/useV2Pairs'
 import { usePositions } from 'features/mines/hooks'
 
-import { useFuse, useSummonerContract } from 'hooks'
+import { useSummonerContract } from 'hooks'
 import { useRouter } from 'next/router'
-import { useSoulPrice } from 'hooks/getPrices'
 import { getAddress } from '@ethersproject/address'
 import { TridentHeader } from 'layouts/Trident'
-import { formatNumberScale } from 'functions'
+import {  formatNumberScale } from 'functions'
 import { Button } from 'components/Button'
 import { addTransaction } from 'state/transactions/actions'
-import { useFarms } from 'services/graph/hooks'
 import { XIcon } from '@heroicons/react/solid'
-import { ChainId } from 'sdk'
+import { ChainId, SOUL_ADDRESS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 import { getChainColorCode } from 'constants/chains'
+import { useTokenInfo } from 'hooks/useAPI'
 
 const Summoner = () => {
   const { chainId } = useActiveWeb3React()
-  const router = useRouter()
   const [pendingTx, setPendingTx] = useState(false)
   const [showBalances, openShowBalances] = useState(true)
-  const soulPrice = useSoulPrice()
-
-  // const type = router.query?.filter === null ? 'active' : (router.query?.filter as string)
-  // const farms = useFarms()
+  const { tokenInfo } = useTokenInfo(SOUL_ADDRESS[chainId])
+  const soulPrice = Number(tokenInfo.price)
   const { harvest } = useSummoner()
   const SummonerContract = useSummonerContract()
   const positions = usePositions()
   const tvl = useTVL()
-
-  // const map = (pool) => {
-  //   pool.owner = 'SoulSwap'
-  //   pool.balance = 0
-
-  //   const pair = POOLS[chainId][pool.lpToken]
-
-  //   const tvl = pool.pair?.token1
-  //     ? Number(pool?.pairPrice) * Number(pool.lpBalance) / 1e18
-  //     : Number(soulPrice) * Number(pool.lpBalance) / 1e18
-
-  //   const position = positions.find((position) => position.id === pool.id)
-
-  //   return {
-  //     ...pool,
-  //     ...position,
-  //     pair: {
-  //       ...pair,
-  //       decimals: 18,
-  //     },
-  //     tvl,
-  //   }
-  // }
 
   let summTvl = tvl.reduce((previousValue, currentValue) => {
     return previousValue + currentValue.tvl
@@ -68,10 +41,12 @@ const Summoner = () => {
   const pendingValue = positions.reduce((previousValue, currentValue) => {
     return previousValue + (currentValue.pendingSoul / 1e18) * soulPrice
   }, 0)
-
+  
   const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
     return { ...POOLS[chainId][key], lpToken: key }
   })
+  
+  // const pendingRewards = (pendingValue / soulPrice).toFixed(0)
 
   const allStaked = positions.reduce((previousValue, currentValue) => {
     const pool = farmingPools.find((r) => parseInt(r.id.toString()) == parseInt(currentValue.id))
@@ -92,9 +67,10 @@ const Summoner = () => {
     }
   }
 
+
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">
-      {showBalances && [ChainId.FANTOM].includes(chainId) &&
+      {showBalances && [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
       <div className={`flex flex-row text-${getChainColorCode(chainId)} justify-end`}>
         <XIcon
           height="24px"
@@ -103,7 +79,7 @@ const Summoner = () => {
         />
       </div>
       }
-      {showBalances && [ChainId.FANTOM].includes(chainId) &&
+      {showBalances && [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <TridentHeader className="sm:!flex-row justify-center items-center" pattern="bg-bubble">
           <div>
           </div>
@@ -173,14 +149,14 @@ const Summoner = () => {
           </div>
           </TridentHeader>
         }
-
       <DoubleGlowShadowV2 opacity="0.6">
         <Container id="farm-page">
             <TwitterBanner chainId={chainId} />
+            {/* {<HarvestAll/>} */}
           <br />
           <Head>
-            <title>Farm | All</title>
-            <meta key="description" name="description" content="Farm SOUL" />
+            <title>Farm | Soul</title>
+            <meta key="description" name="description" content="Farm" />
           </Head>
           <FarmList />
         </Container>

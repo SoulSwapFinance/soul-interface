@@ -234,7 +234,7 @@ export const FantomPools = [
     pid: 55,
     token0Symbol: 'WFTM',
     token1Symbol: 'AVAX',
-    lpSymbol: 'FTM-WAVAX',
+    lpSymbol: 'FTM-AVAX',
     lpAddress: '0x5159Ba92FDC80b3a4B19De279711b1822de06c86',
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: AVAX_ADDRESS[ChainId.FANTOM],

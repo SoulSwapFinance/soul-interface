@@ -1,4 +1,4 @@
-import { ChainId, SOUL_ADDRESS, SOUL_NATIVE, WNATIVE_ADDRESS } from '../sdk'
+import { ChainId, SOUL_ADDRESS, SOUL_NATIVE, SOUL_USDC, USDC_ADDRESS, WNATIVE_ADDRESS } from '../sdk'
 
 export type TokenInfo = {
   id: string
@@ -39,7 +39,7 @@ export const POOLS: AddressMap = {
       id: 1,
       address: SOUL_NATIVE[ChainId.AVALANCHE],
       token0: {
-        id: WNATIVE_ADDRESS[ChainId.AVALANCHE], // SOUL
+        id: WNATIVE_ADDRESS[ChainId.AVALANCHE],
         name: 'Wrapped Avalanche',
         symbol: 'WAVAX',
         decimals: 18,
@@ -49,6 +49,22 @@ export const POOLS: AddressMap = {
         name: 'Soul Power',
         symbol: 'SOUL',
         decimals: 18,
+      },
+    },
+    '0x922fcADa825Dc669798206A35D2D2B455f9A64E7': {
+      id: 2,
+      address: SOUL_USDC[ChainId.AVALANCHE],
+      token0: {
+        id: SOUL_ADDRESS[ChainId.AVALANCHE],
+        name: 'Soul Power',
+        symbol: 'SOUL',
+        decimals: 18
+      },
+      token1: {
+        id: USDC_ADDRESS[ChainId.AVALANCHE],
+        name: 'USD Coin',
+        symbol: 'USDC',
+        decimals: 6,
       },
     },
   },

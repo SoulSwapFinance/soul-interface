@@ -25,6 +25,8 @@ import AssetInput from 'components/AssetInput'
 import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
 import { getChainColor } from 'constants/chains'
 import { ExternalLink } from 'components/ReusableStyles'
+import { Zap } from 'react-feather'
+import { BriefcaseIcon, CollectionIcon, CurrencyDollarIcon, DatabaseIcon, PlusIcon, SparklesIcon } from '@heroicons/react/outline'
 
 const HideOnSmall = styled.div`
 @media screen and (max-width: 900px) {
@@ -128,8 +130,8 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     // Native Keys //
     // const nativeToken0 = farm.token0Symbol == WNATIVE[chainId].symbol
     // const nativeToken1 = farm.token1Symbol == WNATIVE[chainId].symbol 
-    
-    const nativeToken0 =  farm.token0Symbol == WNATIVE[chainId].symbol
+
+    const nativeToken0 = farm.token0Symbol == WNATIVE[chainId].symbol
 
     // Zap Add-Ons //
     const tokenContract = useTokenContract(zapTokenAddress)
@@ -467,10 +469,17 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                         text={
                                             <div className="flex flex-col space-y-1">
                                                 <div className="flex flex-col">
-                                                    <p>
-                                                        After creating liquidity or lending, navigate to the associated farm to deposit.
-                                                        <br /><br /><b>Note:</b> there is a 14% Early Withdraw Fee, which decreases by 1% daily.
-                                                    </p>
+                                                    {withdrawFee == 0 ? (
+                                                        <p>
+                                                            {`After creating liquidity or lending, navigate to the associated farm to deposit.`}
+                                                        </p>
+                                                    ) : (
+                                                        <p>
+                                                            {`After creating liquidity or lending, navigate to the associated farm to deposit.`}
+                                                            <br /> <br />
+                                                            {`The fee decreases by 1% each day and is NOT affected by depositing more.`}
+                                                        </p>
+                                                    )}
                                                 </div>
                                             </div>
                                         }
@@ -486,7 +495,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
 
                                         "w-full space-y-1")
 
-                                }>
+                                    }>
                                     {Number(walletBalance) > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white font-bold" fontFamily={'medium'}>
@@ -540,6 +549,20 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                             </div>
                                         </div>
                                     </div>
+
+                                    {/* WITHDRAWAL FREE */}
+                                    {Number(withdrawFee) > 0 && (
+                                        <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
+                                            <div className="text-white">
+                                                <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                                                    <span>
+                                                        {/* {(Number(withdrawFee)).toFixed(0)}% FEE */}
+                                                        {`UNLOCKS IN ${withdrawFee} DAYS`}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
 
                                 <div className="h-px my-1 bg-dark-1000" />
@@ -560,88 +583,92 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                 }
 
                                 {/* CREATE ASSET PAIR */}
-                                { (nativeToken0 && !isUnderworldPair && isActive && !hasBalance) ? (
-                                    <ExternalLink
-                                    href= {`https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
+                                {(nativeToken0 && !isUnderworldPair && isActive && !hasBalance) ? (
+                                    <NavLink
+                                        href={`/exchange/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
                                     >
-                                    <a>
-                                    <SubmitButton 
-                                        primaryColor={buttonColor}
-                                        color={buttonTextColor}                                    
-                                    >
-                                        <TokenPairLink
-                                            target="_blank"
-                                            rel="noopener"
-                                            primaryColor={buttonColor}
-                                            color={buttonTextColor}    
-                                            // className={"font-bold"}
-                                            href=
-                                            // [if] token0 is the native token, then only use the address of token1 [else] token0 address
-                                            {`https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
-                                        >
-                                            CREATE {farm.lpSymbol} PAIR
-                                        </TokenPairLink>
-                                    </SubmitButton>
-                                    </a>
-                                    </ExternalLink>
-                                ) : ( !hasBalance &&
-                                    <ExternalLink
-                                    href={`https://exchange.soulswap.finance/add/${farm.token1Address}/${farm.token0Address}`}
-                                    >
-                                    <a>
-                                        <SubmitButton
-                                            primaryColor={getChainColor(chainId)}
+                                        <a>
+                                            <SubmitButton
+                                                height="2rem"
+                                                primaryColor={buttonColor}
+                                                color={buttonTextColor}
+                                                margin=".5rem 0 0rem 0"
                                             >
-                                            <TokenPairLink
-                                                target="_blank"
-                                                rel="noopener"
-                                                // className={"font-bold"}
-                                                href=
-                                                {`https://exchange.soulswap.finance/add/${farm.token0Address}/${farm.token1Address}`}
+                                                <TokenPairLink
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    primaryColor={buttonColor}
+                                                    color={buttonTextColor}
+                                                    href=
+                                                    // [if] token0 is the native token, then only use the address of token1 [else] token0 address
+                                                    {`/exchange/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
                                                 >
-                                                CREATE {farm.lpSymbol} PAIR
-                                            </TokenPairLink>
-                                        </SubmitButton>
-                                    </a>
-                                    </ExternalLink>
+                                                    <div className="flex text-lg gap-2">
+                                                        <CollectionIcon width={26} className={classNames(`text-white`)} />
+                                                        {/* {farm.lpSymbol} */}
+                                                        ADD LIQUIDITY
+                                                    </div>
+                                                </TokenPairLink>
+                                            </SubmitButton>
+                                        </a>
+                                    </NavLink>
+                                ) : (!hasBalance && !isUnderworldPair &&
+                                    <NavLink
+                                        href={`/exchange/add/${farm.token1Address}/${farm.token0Address}`}
+                                    >
+                                        <a>
+                                            <SubmitButton
+                                                height="2rem"
+                                                primaryColor={getChainColor(chainId)}
+                                                margin=".5rem 0 0rem 0"
+                                            >
+                                                <TokenPairLink
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    href=
+                                                    {`/exchange/add/${farm.token0Address}/${farm.token1Address}`}
+                                                >
+                                                    <div className="flex text-lg gap-2">
+                                                        <PlusIcon width={26} className={classNames(`text-white`)} />
+                                                        LIQUIDITY {/* {farm.lpSymbol} */}
+                                                    </div>                                            </TokenPairLink>
+                                            </SubmitButton>
+                                        </a>
+                                    </NavLink>
                                 )}
                                 {/* LEND ASSET */}
-                                {isUnderworldPair && hasBalance && (
+                                {isUnderworldPair && (
                                     <NavLink
                                         href=
                                         {`/lend/${lpAddress}`}
                                     >
                                         <SubmitButton
+                                            margin=".5rem 0 0rem 0"
                                             height="2rem"
                                             primaryColor={buttonColor}
-                                            color={buttonTextColor}    
-                                            margin=".5rem 0 .5rem 0"
+                                            color={buttonTextColor}
                                         >
-                                            <a className="font-bold">
-                                                <span>
-                                                    LEND {token0Symbol}
-                                                </span>
-                                            </a>
+                                            <div className="flex text-lg gap-2">
+                                                <BriefcaseIcon width={26} className={classNames(`text-white`)} />
+                                                {`LEND ${token0Symbol}`}
+                                            </div>
                                         </SubmitButton>
                                     </NavLink>
                                 )}
                                 {/* UN-APPROVED */}
                                 {!approved && hasBalance && (
-                                    <FunctionBox>
-                                        <Wrap padding="0" margin="0" display="flex">
-                                            <SubmitButton
-                                                height="2rem"
-                                                // className="font-bold"
-                                                primaryColor={buttonColor}
-                                                color={buttonTextColor}        
-                                                margin=".5rem 0 .5rem 0"
-                                                onClick={() => handleApprove()}>
-                                                APPROVE {farm.lpSymbol}
-                                            </SubmitButton>
-                                        </Wrap>
-                                    </FunctionBox>
+                                    <SubmitButton
+                                        height="2rem"
+                                        // className="font-bold"
+                                        primaryColor={buttonColor}
+                                        color={buttonTextColor}
+                                        margin=".5rem 0 0rem 0"
+                                        onClick={() => handleApprove()}>
+                                        <div className="flex text-lg gap-2">
+                                            {`APPROVE ASSET`}
+                                        </div>
+                                    </SubmitButton>
                                 )}
-
                                 {/* APPROVED */}
                                 {approved && hasBalance && (
                                     <SubmitButton
@@ -654,7 +681,10 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                             handleDeposit(pid)
                                         }
                                     >
-                                        DEPOSIT {Number(allocPoint) == 420 ? token0Symbol : farm.lpSymbol}
+                                        <div className="flex text-lg gap-2">
+                                        <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
+                                            DEPOSIT {Number(allocPoint) == 420 ? token0Symbol : farm.lpSymbol}
+                                        </div>
                                     </SubmitButton>
                                 )}
 
@@ -664,14 +694,17 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                         <SubmitButton
                                             height="2rem"
                                             primaryColor={buttonColor}
-                                            color={buttonTextColor}    
+                                            color={buttonTextColor}
                                             // className={'font-bold'}
-                                            margin=".5rem 0 .5rem 0"
+                                            margin=".5rem 0 0rem 0"
                                             onClick={() =>
                                                 handleHarvest(pid)
                                             }
                                         >
-                                            HARVEST SOUL
+                                            <div className="flex text-lg gap-2">
+                                                <DatabaseIcon width={26} className={classNames(`text-white`)} />
+                                                HARVEST SOUL
+                                            </div>
                                         </SubmitButton>
                                     </Wrap>
                                 )}
@@ -681,21 +714,39 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                         <SubmitButton
                                             height="2rem"
                                             primaryColor={buttonColor}
-                                            color={buttonTextColor}    
+                                            color={buttonTextColor}
                                             // className={'font-bold'}
-                                            margin=".5rem 0 .5rem 0"
+                                            margin=".5rem 0 0rem 0"
                                             onClick={() =>
                                                 handleShowZap(pid)
                                             }
                                         >
-                                            {`ZAP INTO LP`}
+                                            <div className="flex text-lg gap-1">
+                                            {/* <Zap width={26} className={classNames(`text-white`)} /> */}
+                                                ZAP 
+                                                <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
+                                                &rarr; {`${farm.lpSymbol}`}
+                                            </div>
                                         </SubmitButton>
                                     </Wrap>
                                 }
                             </Tab.Panel>
                             {/*------ WITHDRAW TAB PANEL ------*/}
                             <Tab.Panel className={'outline-none'}>
-
+                                <Button variant={'link'} className="absolute top-0 right-0 flex justify-center max-h-[30px] max-w-[30px]">
+                                    <QuestionHelper
+                                        text={
+                                            <div className="flex flex-col space-y-1">
+                                                <div className="flex flex-col">
+                                                    <p>
+                                                        Fees decrease by 1% daily, and only increase upon withdrawals.
+                                                        <br /><br />Depositing more is free and does not change your fee.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        }
+                                    />
+                                </Button>
                                 <div className={
                                     classNames(
                                         "flex flex-col mb-3 bg-dark-1000 p-3 border border-2 border-dark-1000",
@@ -763,7 +814,8 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                         </div>
                                     )}
 
-                                    {Number(withdrawFee) == 0 && (
+                                    {/* WITHDRAWAL FREE */}
+                                    {Number(withdrawFee) > 0 && (
                                         <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
                                             <div className="text-white">
                                                 <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
@@ -856,7 +908,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                         value={zapValue}
                         onChange={(value) => setZapValue(value)}
                         balance={parsedTokenBalance}
-                        showBalance={false}
+                        showBalance={true}
                         showMax={false}
                     />
                     <Wrap padding="0" margin="0" display="flex">
