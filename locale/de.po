@@ -480,6 +480,9 @@ msgstr ""
 msgid "Deposits"
 msgstr ""
 
+msgid "Destination Chain"
+msgstr ""
+
 msgid "Disable Multihops"
 msgstr ""
 

@@ -485,6 +485,9 @@ msgstr "Depositing:"
 msgid "Deposits"
 msgstr "Deposits"
 
+msgid "Destination Chain"
+msgstr "Destination Chain"
+
 msgid "Disable Multihops"
 msgstr "Disable Multihops"
 
