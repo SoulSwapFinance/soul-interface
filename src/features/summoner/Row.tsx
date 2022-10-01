@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
 import { ChainId, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, Token, WNATIVE } from 'sdk'
-import { useTokenContract, useSoulSummonerContract, useZapperContract } from 'hooks/useContract'
+import { useTokenContract, useSummonerContract, useZapperContract } from 'hooks/useContract'
 import useApprove from 'features/bond/hooks/useApprove'
 import { Tab } from '@headlessui/react'
 import {
@@ -54,7 +54,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const [zapValue, setZapValue] = useState('0')
     const [zapTokenAddress, setZapTokenAddress] = useState(SOUL_ADDRESS[chainId])
 
-    const SoulSummonerContract = useSoulSummonerContract()
+    const SoulSummonerContract = useSummonerContract()
     const ZapContract = useZapperContract()
     const ZapContractAddress = ZapContract.address
 
