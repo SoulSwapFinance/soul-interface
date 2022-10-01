@@ -22,7 +22,20 @@ export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.AVALANCHE]: '0xa4594460A9d3D41e8B85542D34E23AdAbc3c86Ef',
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
-  [ChainId.ARBITRUM]: '',}
+  [ChainId.ARBITRUM]: '',
+}
+
+export const JOE_ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '',
+  [ChainId.FANTOM_TESTNET]: '',
+  [ChainId.AVALANCHE]: '0x60aE616a2155Ee3d9A68541Ba4544862310933d4',
+  [ChainId.MATIC]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.ARBITRUM]: '',
+}
 
 export const BORING_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',

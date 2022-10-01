@@ -55,12 +55,6 @@ export function useSwapActionHandlers(): {
           currencyId: currency.isToken
             ? currency.address
             : currency.isNative ? NATIVE[currency.chainId].symbol
-            //  && currency.chainId == ChainId.ETHEREUM
-            //  ? 'ETH' 
-            // && currency.chainId !== ChainId.CELO
-            // : currency.isNative
-            //  && currency.chainId == ChainId.FANTOM
-            //  ? 'FTM'
             : '' 
         })
       )
@@ -229,11 +223,11 @@ export function useDerivedSwapInfo(): {
   }
 }
 
-function parseCurrencyFromURLParameter(urlParam: any): string {
+export function parseCurrencyFromURLParameter(urlParam: any, chainId: ChainId): string {
   if (typeof urlParam === 'string') {
     const valid = isAddress(urlParam)
     if (valid) return valid
-    if (urlParam.toUpperCase() === 'FTM') return 'FTM'
+    if (urlParam.toUpperCase() === NATIVE[chainId].symbol) return NATIVE[chainId].symbol
   }
   return ''
 }
@@ -256,26 +250,27 @@ function validatedRecipient(recipient: any): string | undefined {
   if (ADDRESS_REGEX.test(recipient)) return recipient
   return undefined
 }
-export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId = ChainId.ETHEREUM): SwapState {
-  let inputCurrency = parseCurrencyFromURLParameter(parsedQs.inputCurrency)
-  let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
+export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId): SwapState {
+  let inputCurrency = parseCurrencyFromURLParameter(parsedQs.inputCurrency, chainId)
+  let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency, chainId)
+  // let recipient = validatedRecipient(parsedQs.recipient)
+  let toChain = chainId
+
   const input 
     = chainId === ChainId.FANTOM ? 'FTM' 
     : chainId === ChainId.BSC ? 'BSC'
     : chainId === ChainId.AVALANCHE ? 'AVAX'
     : 'ETH'
-  //chainId === ChainId.CELO ? WNATIVE_ADDRESS[chainId] : 
-  const output 
-      = chainId == ChainId.FANTOM 
-         ? SOUL[ChainId.FANTOM].address
+  const output = chainId == ChainId.FANTOM 
+          ? SOUL[ChainId.FANTOM].address
          : chainId == ChainId.ETHEREUM
-         ? FTM[ChainId.ETHEREUM].address
+          ? FTM[ChainId.ETHEREUM].address
          : chainId == ChainId.AVALANCHE
-         ? SOUL[ChainId.AVALANCHE].address
+          ? SOUL[ChainId.AVALANCHE].address
          : chainId == ChainId.BSC
-         ? USDC[ChainId.BSC].address
+          ? USDC[ChainId.BSC].address
          : DAI[chainId].address
-         
+  // if(recipient == '') { recipient = recipientAddress}      
   if (inputCurrency === '' && outputCurrency === '') {
     inputCurrency = input
     outputCurrency = output
@@ -286,6 +281,7 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId 
   }
 
   const recipient = validatedRecipient(parsedQs.recipient)
+
   
   return {
     [Field.INPUT]: {
@@ -297,6 +293,7 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId 
     typedValue: parseTokenAmountURLParameter(parsedQs.exactAmount),
     independentField: parseIndependentFieldURLParameter(parsedQs.exactField),
     recipient,
+    toChain: toChain
   }
 }
 
@@ -315,6 +312,8 @@ export function useDefaultsFromURLSearch():
     | {
         inputCurrencyId: string | undefined
         outputCurrencyId: string | undefined
+        // recipient: string | undefined
+        // toChain: ChainId
       }
     | undefined
   >()
@@ -330,12 +329,15 @@ export function useDefaultsFromURLSearch():
         inputCurrencyId: parsed[Field.INPUT].currencyId,
         outputCurrencyId: parsed[Field.OUTPUT].currencyId,
         recipient: expertMode ? parsed.recipient : null,
+        toChain: parsed.toChain
       })
     )
 
     setResult({
       inputCurrencyId: parsed[Field.INPUT].currencyId,
       outputCurrencyId: parsed[Field.OUTPUT].currencyId,
+      // recipient: expertMode ? parsed.recipient : null,
+      // toChain: expertMode ? parsed.toChain : ChainId.FANTOM
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, chainId])

@@ -84,9 +84,9 @@ const SwapDetailsContent: FC<SwapDetails> = ({ trade, recipient }) => {
 
   let path
   if (trade) {
-  if (trade && getTradeVersion(trade) === TradeVersion.INSTANT) {
+  // if (trade && getTradeVersion(trade) === TradeVersion.INSTANT) {
     path = (trade.route as Route<Currency, Currency>).path
-  }}
+  }
 
   return (
     <div className="flex flex-col divide-y divide-dark-850">

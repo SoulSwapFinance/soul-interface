@@ -55,7 +55,7 @@ export default function ConfirmSwapModal({
   recipient: string | null
   toChain: ChainId
   allowedSlippage: Percent
-  minerBribe?: string
+  // minerBribe?: string
   onAcceptChanges: () => void
   onConfirm: () => void
   swapErrorMessage: string | undefined

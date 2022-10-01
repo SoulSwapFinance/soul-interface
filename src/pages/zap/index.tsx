@@ -232,10 +232,10 @@ export default function Zap() {
       poolAddress,
       parsedAmount,
       currency === NATIVE[chainId] && isTradingUnderlying
-        ? WNATIVE[chainId || 1].address
+        ? WNATIVE[chainId || 250].address
         : isTradingUnderlying
         ? poolAddress
-        : ROUTER_ADDRESS[chainId || 1],
+        : ROUTER_ADDRESS[chainId || 250],
       minTokensReceived.toString(),
       swapData
     ).then(

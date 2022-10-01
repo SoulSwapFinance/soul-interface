@@ -41,7 +41,7 @@ const Swap = () => {
   const { formattedAmounts, trade, priceImpact, isWrap, parsedAmounts, error } = _useSwapPage()
   const tradeVersion = getTradeVersion(trade)
   const { i18n } = useLingui()
-  const { chainId } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const { currencies, setURLCurrency, switchCurrencies } = useCurrenciesFromURL()
   const [expertMode] = useExpertModeManager()
   const dispatch = useAppDispatch()
@@ -56,7 +56,7 @@ const Swap = () => {
     showReview,
     error: swapStateError,
   } = tridentSwapState
-  const { address } = useENS(recipient)
+  const { address } = useENS(recipient ? recipient : account)
   const [txHash, setTxHash] = useState<string>()
   const [confirmTrade, setConfirmTrade] = useState<TradeUnion>()
 

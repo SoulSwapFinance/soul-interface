@@ -35,11 +35,11 @@ import ReactGA from 'react-ga'
 import Chart from 'components/Chart'
 import { FANTOM, AVALANCHE, BINANCE, Chain, CHAINS, ETHEREUM, POLYGON, MOONRIVER, Token as CrossToken } from "features/cross/chains";
 import SDK, {
-  BLOCKCHAIN_NAME,
-  Configuration,
+  // BLOCKCHAIN_NAME,
+  // Configuration,
   InstantTrade,
-  WalletProvider,
-  InsufficientFundsError,
+  // WalletProvider,
+  // InsufficientFundsError,
   InsufficientLiquidityError
 } from "rubic-sdk";
 import { Toggle } from 'components/Toggle'
@@ -89,7 +89,7 @@ const Swap = () => {
     inputError: wrapInputError,
   } = useWrapCallback(currencies[Field.INPUT], currencies[Field.OUTPUT], typedValue)
   const showWrap: boolean = wrapType !== WrapType.NOT_APPLICABLE
-  const { address: recipientAddress } = useENSAddress(recipient)
+  const { address: recipientAddress } = useENSAddress(recipient ? recipient : account)
 
   const trade = showWrap ? undefined : v2Trade
 
@@ -146,8 +146,7 @@ const Swap = () => {
   const formattedAmounts = {
     [independentField]: typedValue,
     [dependentField]: showWrap
-      ? /* @ts-ignore TYPE NEEDS FIXING */
-      parsedAmounts[independentField]?.toExact() ?? ''
+      ? parsedAmounts[independentField]?.toExact() ?? ''
       : parsedAmounts[dependentField]?.toSignificant(6) ?? '',
   }
 
@@ -221,6 +220,7 @@ const Swap = () => {
             recipient === null
               ? 'Swap w/o Send'
               : (recipientAddress ?? recipient) === account
+              // : account
                 ? 'Swap w/o Send + recipient'
                 : 'Swap w/ Send',
           label: [
@@ -250,7 +250,7 @@ const Swap = () => {
     tradeToConfirm,
     showConfirm,
     recipient,
-    recipientAddress,
+    // recipientAddress,
     account,
     trade?.inputAmount?.currency?.symbol,
     trade?.outputAmount?.currency?.symbol,

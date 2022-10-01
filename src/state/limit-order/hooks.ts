@@ -5,6 +5,7 @@ import {
   Currency,
   CurrencyAmount,
   JSBI,
+  NATIVE,
   Price,
   SOUL,
   Trade,
@@ -124,7 +125,7 @@ function validatedRecipient(recipient: any): string | undefined {
 export function queryParametersToSwapState(chainId: ChainId, parsedQs: ParsedQs) {
   let inputCurrency = parseCurrencyFromURLParameter(parsedQs.inputCurrency)
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
-  const eth = 'FTM'
+  const eth = NATIVE[chainId].symbol
   // chainId === ChainId.CELO ? WNATIVE_ADDRESS[chainId] : 'FTM'
   const soul = SOUL[chainId | 250].address
   if (inputCurrency === '' && outputCurrency === '') {

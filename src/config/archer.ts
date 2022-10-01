@@ -1,10 +1,5 @@
-import { ChainId, JSBI } from 'sdk'
-
+import { JSBI } from 'sdk'
 import { BigNumber } from '@ethersproject/bignumber'
-
-export const ARCHER_RELAY_URI: { [chainId in ChainId]?: string } = {
-  [ChainId.ETHEREUM]: 'https://api.archerdao.io/v1/transaction',
-}
 
 // default archer gas estimate, 250k wei
 export const DEFAULT_ARCHER_GAS_ESTIMATE: BigNumber = BigNumber.from(325000) // TODO: manual gas controls
