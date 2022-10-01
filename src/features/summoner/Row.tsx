@@ -556,8 +556,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                             <div className="text-white">
                                                 <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                                                     <span>
-                                                        {/* {(Number(withdrawFee)).toFixed(0)}% FEE */}
-                                                        {`UNLOCKS IN ${withdrawFee} DAYS`}
+                                                        {`FREE EXIT AFTER ${Number(withdrawFee).toFixed(0)} DAYS`}
                                                     </span>
                                                 </div>
                                             </div>
@@ -815,7 +814,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                     )}
 
                                     {/* WITHDRAWAL FREE */}
-                                    {Number(withdrawFee) > 0 && (
+                                    {Number(withdrawFee) == 0 && (
                                         <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
                                             <div className="text-white">
                                                 <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
