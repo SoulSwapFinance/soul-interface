@@ -476,6 +476,7 @@ const Swap = () => {
         attemptingTxn={attemptingTxn}
         txHash={txHash}
         recipient={recipient}
+        toChain={toChain.chainId}
         allowedSlippage={allowedSlippage}
         onConfirm={handleSwap}
         swapErrorMessage={swapErrorMessage}

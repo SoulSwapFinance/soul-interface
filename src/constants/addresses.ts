@@ -11,9 +11,9 @@ export const CONTRACT_SCAN = {
   [ChainId.ETHEREUM]: 'https://etherscan.io/address/',
   [ChainId.FANTOM]: 'https://ftmscan.com/address/',
   [ChainId.FANTOM_TESTNET]: 'https://testnet.ftmscan.com/address/',
+  [ChainId.AVALANCHE]: 'https://snowtrace.io/address/',
 }
 export const ETH_ADDRESS = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
-
 export const TIMELOCK_ADDRESS = '0x1a9C8182C09F50C8318d769245beA52c32BE35BC'
 
 export const ARCHER_ROUTER_ADDRESS: AddressMap = {

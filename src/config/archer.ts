@@ -6,10 +6,6 @@ export const ARCHER_RELAY_URI: { [chainId in ChainId]?: string } = {
   [ChainId.ETHEREUM]: 'https://api.archerdao.io/v1/transaction',
 }
 
-export const ARCHER_GAS_URI: { [chainId in ChainId]?: string } = {
-  [ChainId.ETHEREUM]: 'https://api.archerdao.io/v1/gas',
-}
-
 // default archer gas estimate, 250k wei
 export const DEFAULT_ARCHER_GAS_ESTIMATE: BigNumber = BigNumber.from(325000) // TODO: manual gas controls
 // default gas prices to use if all other sources unavailable

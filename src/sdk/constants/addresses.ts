@@ -659,9 +659,59 @@ export const LUX_NATIVE: AddressMap = {
   [ChainId.FANTOM]: '0x951BBB838e49F7081072895947735b0892cCcbCD',
 }
 
+420
+180
+
+280
+120
+
+18 * (1)
+
+export const SOUL_USDC: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '',
+  [ChainId.AVALANCHE]: '0x922fcADa825Dc669798206A35D2D2B455f9A64E7' // SEP22
+}
+
+export const SOUL_NATIVE: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '',
+  [ChainId.AVALANCHE]: '0x6Da1AD717C7577AAB46C19aB6d3d9C31aff32A00' // SEP22
+}
+
+export const DAI_USDC: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '',
+  [ChainId.AVALANCHE]: '0xE9807645aDA66F2f3d4f2d2A79223701F3cC0903' // SEP22
+}
+
+export const ETH_NATIVE: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '',
+  [ChainId.AVALANCHE]: '0x5796Bf89f6C7C47811E4E59Ecd7aCACC8A5B9dEF' // SEP22
+}
+
+export const USDC_NATIVE: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '',
+  [ChainId.AVALANCHE]: '0x864384a54ea644852603778c0C200eF2D6F2Ac2f' // SEP22
+}
+
+export const BTC_NATIVE: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '',
+  [ChainId.AVALANCHE]: '0x8C162C3Bdd7354b5Cb1A0b18eDBB5725CFE762A3' // SEP22
+}
+
 export const LUX_DAI: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.FANTOM]: '0x46729c2AeeabE7774a0E710867df80a6E19Ef851',
+}
+
+export const BNB_NATIVE: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '',
+  [ChainId.AVALANCHE]: '0xB3074D8b7f22439F337E2E2830864be9c8236866', // SEP22
 }
 
 export const LUX_SOR: AddressMap = {
