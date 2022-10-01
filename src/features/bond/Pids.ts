@@ -5,7 +5,7 @@ export const AvalanchePools = [
     pid: 0,
     // summonerPid: 1,
     token0Symbol: 'WAVAX',
-    token1Symbol: 'SOUL'
+    token1Symbol: 'SOUL',
     lpSymbol: 'AVAX-SOUL',
     lpAddress: '0x6Da1AD717C7577AAB46C19aB6d3d9C31aff32A00',
     token0Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
