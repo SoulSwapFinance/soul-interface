@@ -70,7 +70,7 @@ const Summoner = () => {
 
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">
-      {showBalances && [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+      {showBalances && [ChainId.FANTOM].includes(chainId) &&
       <div className={`flex flex-row text-${getChainColorCode(chainId)} justify-end`}>
         <XIcon
           height="24px"
@@ -79,12 +79,12 @@ const Summoner = () => {
         />
       </div>
       }
-      {showBalances && [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
-        <TridentHeader className="sm:!flex-row justify-center items-center" pattern="bg-bubble">
+      {showBalances && [ChainId.FANTOM].includes(chainId) &&
+        <TridentHeader className="sm:!flex-row justify-center items-center bg-transparent" pattern="bg-bubble">
           <div>
           </div>
           <div className={`flex items-center justify-between px-2 py-2`}>
-            <div className="flex gap-0">
+            <div className="flex gap-2">
               <Button
                 color={getChainColorCode(chainId)}
                 className="text-emphasis"
@@ -95,7 +95,7 @@ const Summoner = () => {
               </Button>
               {positions.length > 0 && [ChainId.FANTOM].includes(chainId) && (
                 <Button
-                  color="greydient"
+                  color={getChainColorCode(chainId)}
                   className="text-emphasis"
                   variant="flexed"
                   size={"sm"}
@@ -118,7 +118,7 @@ const Summoner = () => {
               )}
               {positions.length > 0 && [ChainId.AVALANCHE].includes(chainId) && (
                 <Button
-                  color="greydient"
+                  color={getChainColorCode(chainId)}
                   className="text-emphasis"
                   variant="flexed"
                   size={"sm"}
@@ -137,7 +137,7 @@ const Summoner = () => {
                 </Button>
               )}
               <Button
-                color="purple"
+                color={getChainColorCode(chainId)}
                 className="text-emphasis"
                 variant={'outlined'}
                 size={"sm"}

@@ -197,7 +197,7 @@ export default function Mines(): JSX.Element {
        <div className={`flex items-center justify-between px-2 py-2`}>
         <div className="flex gap-0">
           <Button
-            color="purple"
+            color={getChainColor(chainId)}
             className="text-emphasis"
             variant="outlined"
             size={"sm"}
@@ -241,7 +241,7 @@ export default function Mines(): JSX.Element {
             </Button>
           )}
          <Button
-            color="purple"
+            color={getChainColor(chainId)}
             className="text-emphasis"
             variant={'outlined'}
             size={"sm"}

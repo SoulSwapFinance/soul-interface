@@ -67,12 +67,12 @@ export const TwitterBanner: FC<IFeature> = ({ chainId }) => (
           <Button 
             variant="filled" 
             color={getChainColorCode(chainId)} 
-            size="sm"
+            size="md"
           >
           <span className="justify-center">
             <a href="https://twitter.com/soulswapfinance/status/1575216568933355520?s=46&t=HRYmpkdoWRL2R-Dlt5KhAA" target = "_blank" rel="noreferrer"
               className="font-bold text-white text-lg">
-              {'Notice: Launch (and Giveaway) Today!'}
+              {'Launch (and Giveaway) Today on Twitter!'}
             </a>
           </span>
           </Button>
