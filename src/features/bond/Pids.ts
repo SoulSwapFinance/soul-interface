@@ -4,12 +4,12 @@ export const AvalanchePools = [
   {
     pid: 0,
     // summonerPid: 1,
-    token0Symbol: 'SOUL',
-    token1Symbol: 'AVAX',
-    lpSymbol: 'SOUL-AVAX',
+    token0Symbol: 'WAVAX',
+    token1Symbol: 'SOUL'
+    lpSymbol: 'AVAX-SOUL',
     lpAddress: '0x6Da1AD717C7577AAB46C19aB6d3d9C31aff32A00',
-    token0Address: SOUL_ADDRESS[ChainId.AVALANCHE],
-    token1Address: AVAX_ADDRESS[ChainId.AVALANCHE],
+    token0Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+    token1Address: SOUL_ADDRESS[ChainId.AVALANCHE],
   },
   {
     pid: 1,
@@ -24,31 +24,31 @@ export const AvalanchePools = [
   {
     pid: 2,
     // summonerPid: 3,
-    token0Symbol: 'AVAX',
+    token0Symbol: 'WAVAX',
     token1Symbol: 'USDC',
     lpSymbol: 'AVAX-USDC',
     lpAddress: '0x864384a54ea644852603778c0C200eF2D6F2Ac2f',
-    token0Address: AVAX_ADDRESS[ChainId.AVALANCHE],
+    token0Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
     token1Address: USDC_ADDRESS[ChainId.AVALANCHE],
   }, 
   {
     pid: 3,
     // summonerPid: 4,
-    token0Symbol: 'AVAX',
+    token0Symbol: 'WAVAX',
     token1Symbol: 'ETH',
     lpSymbol: 'AVAX-ETH',
     lpAddress: '0x5796Bf89f6C7C47811E4E59Ecd7aCACC8A5B9dEF',
-    token0Address: AVAX_ADDRESS[ChainId.AVALANCHE],
+    token0Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
     token1Address: WETH_ADDRESS[ChainId.AVALANCHE]
   }, 
   {
     pid: 4,
     // summonerPid: 5,
-    token0Symbol: 'AVAX',
+    token0Symbol: 'WAVAX',
     token1Symbol: 'BTC',
     lpSymbol: 'AVAX-BTC',
     lpAddress: '0x8C162C3Bdd7354b5Cb1A0b18eDBB5725CFE762A3',
-    token0Address: AVAX_ADDRESS[ChainId.AVALANCHE],
+    token0Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
     token1Address: WBTC_ADDRESS[ChainId.AVALANCHE],
   },
   {
@@ -63,18 +63,17 @@ export const AvalanchePools = [
   },
 ]
 
-
 export const FantomPools = [
   {
     // 1000
     pid: 0,
     // summonerPid: 1,
-    token0Symbol: 'SOUL',
-    token1Symbol: 'FTM',
-    lpSymbol: 'SOUL-FTM',
+    token0Symbol: 'WFTM',
+    token1Symbol: 'SOUL',
+    lpSymbol: 'FTM-SOUL',
     lpAddress: '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57',
-    token0Address: SOUL_ADDRESS[ChainId.FANTOM],
-    token1Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+    token1Address: SOUL_ADDRESS[ChainId.FANTOM],
   },
   {
     // 600
@@ -91,18 +90,18 @@ export const FantomPools = [
     // 600
     pid: 2,
     // summonerPid: 10,
-    token0Symbol: 'SEANCE',
-    token1Symbol: 'FTM',
-    lpSymbol: 'SEANCE-FTM',
+    token0Symbol: 'WFTM',
+    token1Symbol: 'SEANCE',
+    lpSymbol: 'FTM-SEANCE',
     lpAddress: '0x8542bEAC34282aFe5Bb6951Eb6DCE0B3783b7faB',
-    token0Address: SEANCE_ADDRESS[ChainId.FANTOM],
-    token1Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+    token1Address: SEANCE_ADDRESS[ChainId.FANTOM],
   },
   {
     // 600
     pid: 3,
     // summonerPid: 2,
-    token0Symbol: 'FTM',
+    token0Symbol: 'WFTM',
     token1Symbol: 'USDC',
     lpSymbol: 'FTM-USDC',
     lpAddress: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556',
@@ -114,7 +113,7 @@ export const FantomPools = [
     // 600
     pid: 4,
     // summonerPid: 23,
-    token0Symbol: 'FTM',
+    token0Symbol: 'WFTM',
     token1Symbol: 'DAI',
     lpSymbol: 'FTM-DAI',
     lpAddress: '0xF3d6E8Ecece8647B456d57375Ce0B51B8F0cD40b',
@@ -125,7 +124,7 @@ export const FantomPools = [
       // 600
       pid: 5,
       // summonerPid: 18,
-      token0Symbol: 'FTM',
+      token0Symbol: 'WFTM',
       token1Symbol: 'BNB',
       lpSymbol: 'FTM-BNB',
       lpAddress: '0x52966a12e3211c92909C28603ca3df8465c06c82',
@@ -136,8 +135,8 @@ export const FantomPools = [
       // 600
       pid: 6,
       // summonerPid: 4,
-      token0Symbol: 'FTM',
-      token1Symbol: 'WETH',
+      token0Symbol: 'WFTM',
+      token1Symbol: 'ETH',
       lpSymbol: 'FTM-ETH',
       lpAddress: '0xC615a5fd68265D9Ec6eF60805998fa5Bb71972Cb',
       token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
@@ -148,7 +147,7 @@ export const FantomPools = [
       // 600
       pid: 7,
       // summonerPid: 13,
-      token0Symbol: 'FTM',
+      token0Symbol: 'WFTM',
       token1Symbol: 'BTC',
       lpSymbol: 'FTM-BTC',
       lpAddress: '0xecB41D6B5885E75a149EDA173e92267aa271D895',
