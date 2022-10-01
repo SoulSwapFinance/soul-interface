@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { Wrap } from '../../components/ReusableStyles'
-import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
-// import FarmBanner from '../../components/FarmBanner'
-import Container from '../../components/Container'
+import { Wrap } from 'components/ReusableStyles'
+import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
+import { TwitterBanner } from 'components/Banner'
+import Container from 'components/Container'
 import Head from 'next/head'
-import FarmList from '../../features/summoner/List'
+import FarmList from 'features/summoner/List'
 import { POOLS } from 'constants/farms'
 import useSummoner from 'features/mines/hooks/useMasterChef'
 import { useTVL } from 'hooks/useV2Pairs'
@@ -29,14 +29,12 @@ const Summoner = () => {
   const router = useRouter()
   const [pendingTx, setPendingTx] = useState(false)
   const [showBalances, openShowBalances] = useState(true)
-
   const soulPrice = useSoulPrice()
 
   // const type = router.query?.filter === null ? 'active' : (router.query?.filter as string)
   // const farms = useFarms()
   const { harvest } = useSummoner()
   const SummonerContract = useSummonerContract()
-
   const positions = usePositions()
   const tvl = useTVL()
 
@@ -178,7 +176,7 @@ const Summoner = () => {
 
       <DoubleGlowShadowV2 opacity="0.6">
         <Container id="farm-page">
-          {/* <NewFeature /> */}
+            <TwitterBanner chainId={chainId} />
           <br />
           <Head>
             <title>Farm | All</title>

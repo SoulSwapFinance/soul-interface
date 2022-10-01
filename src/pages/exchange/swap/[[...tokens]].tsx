@@ -46,7 +46,7 @@ import { Toggle } from 'components/Toggle'
 import SocialWidget from 'components/Social'
 import { getChainColorCode } from 'constants/chains'
 import { classNames } from 'functions/styling'
-import { NewFeature } from 'components/Banner'
+import { TwitterBanner } from 'components/Banner'
 import NavLink from 'components/NavLink'
 import { WrappedCrossChainTrade } from 'rubic-sdk/lib/features/cross-chain/providers/common/models/wrapped-cross-chain-trade'
 import { sleep } from 'features/crosschain/utils'
@@ -467,7 +467,7 @@ const Swap = () => {
 
   return (
     <>
-      <NewFeature chainId={chainId} />
+      <TwitterBanner chainId={chainId} />
       <ConfirmSwapModal
         isOpen={showConfirm}
         trade={trade}

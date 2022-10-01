@@ -59,17 +59,40 @@ export const NewFeature: FC<IFeature> = ({ chainId }) => (
   </div>
 )
 
+export const TwitterBanner: FC<IFeature> = ({ chainId }) => (
+  <div className="relative items-center w-full">
+    <div className="w-full">
+      <div className="text-center">
+        <p className="font-medium text-center text-white">
+          <Button 
+            variant="filled" 
+            color={getChainColorCode(chainId)} 
+            size="sm"
+          >
+          <span className="justify-center">
+            <a href="https://twitter.com/soulswapfinance/status/1575216568933355520?s=46&t=HRYmpkdoWRL2R-Dlt5KhAA" target = "_blank" rel="noreferrer"
+              className="font-bold text-white text-lg">
+              {'Notice: Launch (and Giveaway) Today!'}
+            </a>
+          </span>
+          </Button>
+        </p>
+      </div>
+      <div className="absolute inset-y-0 right-0 flex items-start pt-1 pr-1 sm:pt-1 sm:pr-2 sm:items-start">
+      </div>
+    </div>
+  </div>
+)
+
 export const BetaFeature: FC = () => (
   <div className="relative items-center w-full">
     <div className="w-full">
       <div className="text-center">
         <p className="font-medium mb-2 mt-2 text-center text-white">
-          {/* <span className="centered md:hidden"><b>Voting Ends Soon!</b> <b>&rarr;</b></span> */}
-          {/* <span className="hidden md:inline"> Voting Has Begun <b> &rarr;</b></span> */}
           <Button variant="filled" color="purple" size="sm">
             <NavLink href="/summoner">
           <span className="justify-center font-bold">
-              {`Cross Chain Swaps are in beta, please use at your own risk and report any bugs to our ${<Link href="https://discord.com/invite/soulswap"> Discord </Link>} channel, thanks!`}
+              {`Cross Chain Swaps are in beta, please use at your own risk. Report bugs 🐛 on ${<Link href="https://discord.com/invite/soulswap"> Discord </Link>}, thanks!`}
           </span>
             </NavLink>
           </Button>
@@ -123,8 +146,6 @@ export const LuxorBanner: FC = () => (
     <div className="w-full">
       <div className="text-center">
         <p className="font-medium text-center text-white">
-          {/* <span className="centered md:hidden"><b>Voting Ends Soon!</b> <b>&rarr;</b></span> */}
-          {/* <span className="hidden md:inline"> Voting Has Begun <b> &rarr;</b></span> */}
           <Button variant="filled" color="yellow" size="sm">
           <span className="justify-center">
             <a href="https://twitter.com/LuxorMoney/status/1515653849490538500?s=20&t=2JuPf_55Fr5zwC27UchGww" target = "_blank" rel="noreferrer"
