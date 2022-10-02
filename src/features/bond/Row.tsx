@@ -213,7 +213,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
 
               <BondItemBox>
                 <Text fontSize="1rem" color="#FFFFFF">
-                  {formatNumber(stakedBal, false, true)}
+                  {formatNumber(stakedLpValue, true, true)}
                 </Text>
               </BondItemBox>
 
@@ -225,7 +225,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
 
               <BondItemBox>
                 <Text fontSize="1rem" color="#FFFFFF">
-                  {formatNumber(pending, false, true)}
+                  {formatPercent(reached)}
                 </Text>
               </BondItemBox>
 
